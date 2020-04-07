@@ -137,6 +137,12 @@ Log
 * Log messages can now contain ``{foo}`` style placeholders. These placeholders
   will be replaced by values from the ``$context`` parameter if available.
 
+ORM
+---
+
+* The ORM now triggers an ``Model.afterMarshal`` event which is triggered after
+  each entity is marshaled from request data.
+
 TestSuite
 ---------
 

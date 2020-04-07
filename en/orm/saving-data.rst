@@ -636,6 +636,34 @@ Moreover, the data in ``beforeMarshal`` is a copy of the passed data. This is
 because it is important to preserve the original user input, as it may be used
 elsewhere.
 
+Modifying Entities After Updating From Request Data
+---------------------------------------------------
+
+The ``Model.afterMarshal`` event allows you to modify entities after they have
+been created or updated from request data. It can be useful to apply additional
+validation logic that you cannot easily express through Validator methods::
+
+    // Include use statements at the top of your file.
+    use Cake\Event\EventInterface;
+    use Cake\ORM\EntityInterface;
+    use ArrayObject;
+
+    // In a table or behavior class
+    public function afterMarshal(
+        EventInterface $event,
+        EntityInterface $entity,
+        ArrayObject $data,
+        ArrayObject $options
+    ) {
+        // Don't accept people who have a name starting with J on the 20th
+        // of each month.
+        if (substr($entity->name, 1) == 'J' && date('d') === 20) {
+            $entity->setError('name', 'No J people today sorry.');
+        }
+    }
+
+.. versionadded:: 4.1.0
+
 Validating Data Before Building Entities
 ----------------------------------------
 

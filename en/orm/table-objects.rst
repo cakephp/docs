@@ -139,6 +139,7 @@ Event List
 
 * ``Model.initialize``
 * ``Model.beforeMarshal``
+* ``Model.afterMarshal``
 * ``Model.beforeFind``
 * ``Model.buildValidator``
 * ``Model.buildRules``
@@ -195,6 +196,17 @@ beforeMarshal
 
 The ``Model.beforeMarshal`` event is fired before request data is converted
 into entities. See the :ref:`before-marshal` documentation for more information.
+
+afterMarshal
+-------------
+
+.. php:method:: afterMarshal(EventInterface $event, EntityInterface $entity, ArrayObject $data, ArrayObject $options)
+
+The ``Model.afterMarshal`` event is fired after request data is converted
+into entities. Event handlers will get the converted entities, original request
+data and the options provided to the ``patchEntity()`` or ``newEntity()`` call.
+
+.. versionadded:: 4.1.0
 
 beforeFind
 ----------
