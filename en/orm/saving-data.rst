@@ -657,7 +657,7 @@ validation logic that you cannot easily express through Validator methods::
     ) {
         // Don't accept people who have a name starting with J on the 20th
         // of each month.
-        if (mb_substr($entity->name, 1) === 'J' && date('d') === 20) {
+        if (mb_substr($entity->name, 1) === 'J' && (int)date('d') === 20) {
             $entity->setError('name', 'No J people today sorry.');
         }
     }
