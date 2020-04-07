@@ -241,7 +241,7 @@ look like::
         'tags' => [
             ['name' => 'CakePHP'],
             ['name' => 'Internet'],
-        ]
+        ],
     ];
 
 The above will create 2 new tags. If you want to link an article with existing
@@ -252,8 +252,8 @@ tags you can use a list of ids. Your request data should look like::
         'body' => 'The text',
         'user_id' => 1,
         'tags' => [
-            '_ids' => [1, 2, 3, 4]
-        ]
+            '_ids' => [1, 2, 3, 4],
+        ],
     ];
 
 If you need to link against some existing belongsToMany records, and create new
@@ -267,8 +267,8 @@ ones at the same time you can use an expanded format::
             ['name' => 'A new tag'],
             ['name' => 'Another new tag'],
             ['id' => 5],
-            ['id' => 21]
-        ]
+            ['id' => 21],
+        ],
     ];
 
 When the above data is converted into entities, you will have 4 tags. The first
@@ -299,7 +299,7 @@ association populated. You can then use request data similar to::
             ['id' => 1, 'comment' => 'Update the first comment'],
             ['id' => 2, 'comment' => 'Update the second comment'],
             ['comment' => 'Create a new comment'],
-        ]
+        ],
     ];
 
 If you are saving hasMany associations and want to link existing records to a
@@ -310,8 +310,8 @@ new parent record you can use the ``_ids`` format::
         'body' => 'The text',
         'user_id' => 1,
         'comments' => [
-            '_ids' => [1, 2, 3, 4]
-        ]
+            '_ids' => [1, 2, 3, 4],
+        ],
     ];
 
 When converting hasMany data, you can disable the new entity creation, by using
@@ -334,11 +334,11 @@ In this situation, the request data for multiple articles should look like::
     $data = [
         [
             'title' => 'First post',
-            'published' => 1
+            'published' => 1,
         ],
         [
             'title' => 'Second post',
-            'published' => 1
+            'published' => 1,
         ],
     ];
 
@@ -378,11 +378,11 @@ keep ids of associated entities::
             'Tags', 'Comments' => [
                 'associated' => [
                     'Users' => [
-                        'accessibleFields' => ['id' => true]
-                    ]
-                ]
-            ]
-        ]
+                        'accessibleFields' => ['id' => true],
+                    ],
+                ],
+            ],
+        ],
     ]);
 
 The above will keep the association unchanged between Comments and Users for the
@@ -446,7 +446,7 @@ merge deeper to deeper levels, you can use the third parameter of the method::
     $associated = ['Tags', 'Comments.Users'];
     $article = $articles->get(1, ['contain' => $associated]);
     $articles->patchEntity($article, $this->request->getData(), [
-        'associated' => $associated
+        'associated' => $associated,
     ]);
     $articles->save($article);
 
@@ -459,8 +459,8 @@ For example give some request data like the following::
     $data = [
         'title' => 'My title',
         'user' => [
-            'username' => 'mark'
-        ]
+            'username' => 'mark',
+        ],
     ];
 
 Trying to patch an entity without an entity in the user property will create
@@ -504,7 +504,7 @@ For example, consider the following case::
         'comments' => [
             ['body' => 'First comment', 'id' => 1],
             ['body' => 'Second comment', 'id' => 2],
-        ]
+        ],
     ];
     $entity = $articles->newEntity($data);
     $articles->save($entity);
@@ -513,7 +513,7 @@ For example, consider the following case::
         'comments' => [
             ['body' => 'Changed comment', 'id' => 1],
             ['body' => 'A new comment'],
-        ]
+        ],
     ];
     $articles->patchEntity($entity, $newData);
     $articles->save($entity);
@@ -527,7 +527,7 @@ following result::
         'comments' => [
             ['body' => 'Changed comment', 'id' => 1],
             ['body' => 'A new comment'],
-        ]
+        ],
     ];
 
 As you can see, the comment with id 2 is no longer there, as it could not be
@@ -548,7 +548,7 @@ delete for those not in the list::
     $present = (new Collection($entity->comments))->extract('id')->filter()->toList();
     $comments->deleteAll([
         'article_id' => $article->id,
-        'id NOT IN' => $present
+        'id NOT IN' => $present,
     ]);
 
 As you can see, this also helps creating solutions where an association needs to
@@ -657,7 +657,7 @@ validation logic that you cannot easily express through Validator methods::
     ) {
         // Don't accept people who have a name starting with J on the 20th
         // of each month.
-        if (substr($entity->name, 1) == 'J' && date('d') === 20) {
+        if (mb_substr($entity->name, 1) === 'J' && date('d') === 20) {
             $entity->setError('name', 'No J people today sorry.');
         }
     }
