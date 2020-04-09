@@ -5,40 +5,38 @@ Caching
 
 .. php:class:: Cache
 
-Caching can be used to make reading from expensive or slow resources faster, by
-maintaining a second copy of the required data in a faster or closer storage
-system. For example, you can store the results of expensive queries, or remote
-webservice access that doesn't frequently change in a cache. Once in the cache,
-reading data from the cache is much cheaper than accessing the remote resource.
+O cache pode ser usado para acelerar a leitura de recursos caros ou lentos, 
+mantendo uma segunda cópia dos dados necessários em um sistema de armazenamento 
+mais rápido ou mais próximo. Por exemplo, você pode armazenar os resultados de 
+consultas caras ou acesso remoto ao serviço da Web que não muda com freqüência 
+em um cache. Uma vez no cache, é muito mais barato do que acessar o recurso remoto.
 
-Caching in CakePHP is facilitated by the ``Cache`` class.
-This class provides a static interface and uniform API to
-interact with various Caching implementations. CakePHP
-provides several cache engines, and provides a simple interface if you need to
-build your own backend. The built-in caching engines are:
+O armazenamento em cache no CakePHP é facilitado pela classe ``Cache``. Esta 
+classe fornece uma interface estática e uma API uniforme para interagir com 
+várias implementações de armazenamento em cache. O CakePHP fornece vários 
+mecanismos de cache e fornece uma interface simples se você precisar criar 
+seu próprio back-end. Os mecanismos de armazenamento em cache integrados são:
 
-* ``File`` File cache is a simple cache that uses local files. It
-  is the slowest cache engine, and doesn't provide as many features for
-  atomic operations. However, since disk storage is often quite cheap,
-  storing large objects, or elements that are infrequently written
-  work well in files.
-* ``Memcached`` Uses the `Memcached <http://php.net/memcached>`_
-  extension.
-* ``Redis`` Uses the `phpredis <https://github.com/nicolasff/phpredis>`_
-  extension. Redis provides a fast and persistent cache system similar to
-  Memcached, also provides atomic operations.
-* ``Apcu`` APCu cache uses the PHP `APCu <http://php.net/apcu>`_ extension.
-  This extension uses shared memory on the webserver to store objects.
-  This makes it very fast, and able to provide atomic read/write features.
-* ``Wincache`` Wincache uses the `Wincache <http://php.net/wincache>`_
-  extension. Wincache is similar to APC in features and performance, but
-  optimized for Windows and IIS.
-* ``Array`` Stores all data in an array. This engine does not provide
-  persistent storage and is intended for use in application test suites.
-* ``Null`` The null engine doesn't actually store anything and fails all read
-  operations. 
+* ``File`` O cache de arquivo é um cache simples que usa arquivos locais. 
+  É o mecanismo de cache mais lento e não fornece tantos recursos para operações 
+  atômicas. No entanto, como o armazenamento em disco geralmente é bastante barato, 
+  o armazenamento de objetos grandes ou elementos que raramente são gravados 
+  funciona bem em arquivos.
+* ``Memcached`` Usa a extensão `Memcached <http://php.net/memcached>`_.
+* ``Redis`` Usa a extensão `phpredis <https://github.com/nicolasff/phpredis>`_. O 
+  Redis fornece um sistema de cache rápido e persistente semelhante ao Memcached, 
+  também fornece operações atômicas.
+* ``Apcu`` O cache do APCu usa a extensão PHP `APCu <http://php.net/apcu>`_. Essa 
+  extensão usa memória compartilhada no servidor da web para armazenar objetos. 
+  Isso o torna muito rápido e capaz de fornecer recursos atômicos de leitura/gravação.
+* ``Wincache`` O Wincache usa a extensão `Wincache <http://php.net/wincache>`_. 
+  O Wincache é semelhante ao APC em recursos e desempenho, mas otimizado para 
+  Windows e IIS.
+* ``Array`` Armazena todos os dados em uma matriz. Esse mecanismo não fornece 
+  armazenamento persistente e deve ser usado em conjuntos de testes de aplicativos.
+* ``Null`` O mecanismo nulo não armazena nada e falha em todas as operações de leitura. 
 
-Regardless of the CacheEngine you choose to use, your application interacts with
+Independentemente do CacheEngine que você escolher, seu aplicativo interage com
 :php:class:`Cake\\Cache\\Cache`.
 
 .. _cache-configuration:
