@@ -230,7 +230,9 @@ Example::
         ['format' => '<span class="highlight">\1</span>']
     );
 
-Output::
+Output:
+
+.. code-block: html
 
     Highlights $needle in $haystack <span class="highlight">using</span> the
     $options['format'] string specified  or a default string.
