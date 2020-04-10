@@ -187,10 +187,10 @@ helpers by prefixing the name of the plugin.
 
 For example, say you wanted to use the ContactManager plugin's
 ContactInfoHelper to output formatted contact information in
-one of your views. In your controller, ``setHelpers()``
+one of your views. In your controller, using ``addHelper()``
 could look like this::
 
-    $this->viewBuilder()->setHelpers(['ContactManager.ContactInfo']);
+    $this->viewBuilder()->addHelper('ContactManager.ContactInfo');
 
 .. note::
     This dot separated class name is referred to as :term:`plugin syntax`.
