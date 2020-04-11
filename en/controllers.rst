@@ -199,7 +199,7 @@ theme that will be used when rendering the view, you can use the
 properties of the view before it is created::
 
     $this->viewBuilder()
-        ->setHelpers(['MyCustom'])
+        ->addHelper('MyCustom')
         ->setTheme('Modern')
         ->setClassName('Modern.Admin');
 

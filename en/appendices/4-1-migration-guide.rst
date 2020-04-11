@@ -51,7 +51,7 @@ Routing
 View
 ----
 
-* ``Form/ContextInteface::primaryKey()`` was deprecated. Use ``getPrimaryKey()``
+* ``Form/ContextInterface::primaryKey()`` was deprecated. Use ``getPrimaryKey()``
   instead.
 
 Behavior Changes
@@ -156,6 +156,7 @@ View
 
 * Added ``TextHelper::slug()``. This method delegates to
   ``Cake\Utility\Text::slug()``.
+* Added ``ViewBuilder::addHelper()`` as chainable wrapper method to add helpers.
 
 Utility
 -------
