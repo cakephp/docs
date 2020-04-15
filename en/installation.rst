@@ -14,7 +14,7 @@ CakePHP has a few system requirements:
 .. note::
 
     In XAMPP, intl extension is included but you have to uncomment
-    ``extension=php_intl.dll`` in **php.ini** and restart the server through
+    ``extension=php_intl.dll`` (or ``extension=intl``) in **php.ini** and restart the server through
     the XAMPP Control Panel.
 
     In WAMP, the intl extension is "activated" by default but not working.
