@@ -34,7 +34,7 @@ and validating any user data::
 
     class UsersTable extends Table
     {
-        public function validationDefault(Validator $validator)
+        public function validationDefault(Validator $validator): Validator
         {
             return $validator
                 ->notEmpty('username', 'A username is required')

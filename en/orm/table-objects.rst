@@ -324,7 +324,7 @@ Stopping Table Events
 ---------------------
 To prevent the save from continuing, simply stop event propagation in your callback::
 
-    public function beforeSave(Event $event, EntityInterface $entity, ArrayObject $options)
+    public function beforeSave(EventInterface $event, EntityInterface $entity, ArrayObject $options)
     {
         if (...) {
             $event->stopPropagation();
