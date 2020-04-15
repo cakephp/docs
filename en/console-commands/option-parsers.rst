@@ -13,7 +13,7 @@ Defining an OptionParser
 Commands and Shells provide a ``buildOptionParser($parser)`` hook method that
 you can use to define the options and arguments for your commands::
 
-    protected function buildOptionParser($parser)
+    protected function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
     {
         // Define your options and arguments.
 

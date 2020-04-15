@@ -662,7 +662,7 @@ you define the ``$fixtures`` property in your model::
 
     class ArticlesTest extends TestCase
     {
-        public $fixtures = ['app.Articles', 'app.Comments'];
+        protected $fixtures = ['app.Articles', 'app.Comments'];
     }
 
 .. note::
@@ -679,7 +679,7 @@ Fixture directory. You can also load fixtures from CakePHP core, or plugins::
 
     class ArticlesTest extends TestCase
     {
-        public $fixtures = [
+        protected $fixtures = [
             'plugin.DebugKit.Articles',
             'plugin.MyVendorName/MyPlugin.Messages',
             'core.Comments'
@@ -695,8 +695,9 @@ them using :php:meth:`Cake\\TestSuite\\TestCase::loadFixtures()`::
 
     class ArticlesTest extends TestCase
     {
-        public $fixtures = ['app.Articles', 'app.Comments'];
         public $autoFixtures = false;
+
+        protected $fixtures = ['app.Articles', 'app.Comments'];
 
         public function testMyFunction(): void
         {
@@ -711,7 +712,7 @@ name::
 
     class ArticlesTest extends CakeTestCase
     {
-        public $fixtures = ['app.Blog/Articles', 'app.Blog/Comments'];
+        protected $fixtures = ['app.Blog/Articles', 'app.Blog/Comments'];
     }
 
 In the above example, both fixtures would be loaded from
@@ -751,7 +752,7 @@ with the following contents::
 
     class ArticlesTableTest extends TestCase
     {
-        public $fixtures = ['app.Articles'];
+        protected $fixtures = ['app.Articles'];
     }
 
 In our test cases' variable ``$fixtures`` we define the set of fixtures that
@@ -773,7 +774,7 @@ now looks like this::
 
     class ArticlesTableTest extends TestCase
     {
-        public $fixtures = ['app.Articles'];
+        protected $fixtures = ['app.Articles'];
 
         public function setUp(): void
         {
@@ -890,7 +891,7 @@ Create a file named **ArticlesControllerTest.php** in your
     {
         use IntegrationTestTrait;
 
-        public $fixtures = ['app.Articles'];
+        protected $fixtures = ['app.Articles'];
 
         public function testIndex(): void
         {
@@ -1619,7 +1620,7 @@ the event data::
 
     class OrdersTableTest extends TestCase
     {
-        public $fixtures = ['app.Orders'];
+        protected $fixtures = ['app.Orders'];
 
         public function setUp(): void
         {
@@ -1700,7 +1701,7 @@ also need to prefix your plugin fixtures with ``plugin.Blog.BlogPosts``::
     class BlogPostsTableTest extends TestCase
     {
         // Plugin fixtures located in /plugins/Blog/tests/Fixture/
-        public $fixtures = ['plugin.Blog.BlogPosts'];
+        protected $fixtures = ['plugin.Blog.BlogPosts'];
 
         public function testSomething(): void
         {

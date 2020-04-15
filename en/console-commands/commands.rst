@@ -154,7 +154,7 @@ commands::
     class UserCommand extends Command
     {
         // Base Command will load the Users model with this property defined.
-        public $modelClass = 'Users';
+        protected $modelClass = 'Users';
 
         protected function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
         {
@@ -166,12 +166,14 @@ commands::
             return $parser;
         }
 
-        public function execute(Arguments $args, ConsoleIo $io)
+        public function execute(Arguments $args, ConsoleIo $io): ?int
         {
             $name = $args->getArgument('name');
             $user = $this->Users->findByUsername($name)->first();
 
             $io->out(print_r($user, true));
+
+            return null;
         }
     }
 
@@ -346,7 +348,7 @@ Modify your test case to the following snippet of code::
     {
         use ConsoleIntegrationTestTrait;
 
-        public $fixtures = [
+        protected $fixtures = [
             // assumes you have a UsersFixture
             'app.Users'
         ];

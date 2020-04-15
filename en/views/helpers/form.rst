@@ -467,7 +467,7 @@ create appropriate controls for all of these form fields::
 
 A more extensive example showing some options for a date field::
 
-    echo $this->Form->control('birth_dt', [
+    echo $this->Form->control('birth_date', [
         'label' => 'Date of birth',
         'min' => date('Y') - 70,
         'max' => date('Y') - 18,
@@ -1552,9 +1552,9 @@ To prevent the ``submittedfile`` from being over-written as blank, remove it
 from ``$_accessible``.  Alternatively, you can unset the index by using
 ``beforeMarshal``::
 
-    public function beforeMarshal(\Cake\Event\Event $event, \ArrayObject $data, \ArrayObject $options)
+    public function beforeMarshal(\Cake\Event\EventInterface $event, \ArrayObject $data, \ArrayObject $options)
     {
-       if($data['submittedfile'] == '') {
+       if ($data['submittedfile'] === '') {
           unset($data['submittedfile']);
        }
     }
@@ -1801,7 +1801,7 @@ error messages per field.
 Example::
 
     // If in TicketsTable you have a 'notEmpty' validation rule:
-    public function validationDefault(Validator $validator)
+    public function validationDefault(Validator $validator): Validator
     {
         $validator
             ->requirePresence('ticket', 'create')

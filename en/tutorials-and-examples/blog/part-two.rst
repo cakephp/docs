@@ -415,7 +415,7 @@ back at our Articles model and make a few adjustments::
             $this->addBehavior('Timestamp');
         }
 
-        public function validationDefault(Validator $validator)
+        public function validationDefault(Validator $validator): Validator
         {
             $validator
                 ->notEmpty('title')
