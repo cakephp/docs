@@ -60,10 +60,6 @@ when provided a multi-word argument:
 +                   +---------------+---------------+
 |                   | big apples    | bigApples     |
 +-------------------+---------------+---------------+
-| ``slug()``        | Big Apple     | big-apple     |
-+                   +---------------+---------------+
-|                   | BigApples     | BigApples     |
-+-------------------+---------------+---------------+
 
 Creating Plural & Singular Forms
 ================================
