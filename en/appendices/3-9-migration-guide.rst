@@ -19,6 +19,9 @@ Deprecations
   Instead use an array, or implement the new ``getFixtures()`` method on your
   test case classes.
 * ``Validator::errors()`` was renamed to ``Validator::validate()``.
+* ``FormHelper::create()`` now emits deprecation warnings when the ``$context``
+  parameter is a boolean or string. These values trigger fatal errors in 4.0 and
+  will need to be updated before upgrading.
 
 New Features
 ============
