@@ -79,6 +79,7 @@ TestSuite
 
 * ``TestCase::getFixtures()`` was added. This method lets you generate your
   fixture list using application specific logic if necessary.
+* ``TestSuite\EmailTrait::assertMailContainsAttachment()`` was added.
 
 Utility
 -------
