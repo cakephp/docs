@@ -1,8 +1,8 @@
 Standalone Packages
 ###################
 
-The CakePHP core is split into various standalone packages which once can
-use individually.
+The CakePHP core is split into various standalone packages which can
+used independently.
 
 `ORM <https://github.com/cakephp/orm>`_
 ---------------------------------------

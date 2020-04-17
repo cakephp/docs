@@ -410,10 +410,10 @@ model fields, depending on a country, ie::
 
     class PostsTable extends Table
     {
-        public function validationDefault(Validator $validator)
+        public function validationDefault(Validator $validator): Validator
         {
             // add the provider to the validator
-            $validator->setProvider('fr', 'Localized\Validation\FrValidation');
+            $validator->setProvider('fr', 'Cake\Localized\Validation\FrValidation');
             // use the provider in a field validation rule
             $validator->add('phoneField', 'myCustomRuleNameForPhone', [
                 'rule' => 'phone',

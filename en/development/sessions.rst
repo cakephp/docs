@@ -253,7 +253,7 @@ something like::
 
     class ComboSession extends DatabaseSession
     {
-        public $cacheKey;
+        protected $cacheKey;
 
         public function __construct()
         {

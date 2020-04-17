@@ -317,8 +317,8 @@ View
 * Templates have been moved from ``src/Template/`` to ``templates/`` folder on
   app and plugin root. With this change the ``src`` folder now only contains files
   with classes that are autoloaded via composer's autoloader.
-* Special templates folders like ``Cell``, ``Element``, ``Email`` and ``Plugin``
-  have be renamed to lower case ``cell``, ``element``, ``email`` and ``plugin``
+* Special templates folders like ``Cell``, ``Element``, ``Email``, ``Layout`` and ``Plugin``
+  have be renamed to lower case ``cell``, ``element``, ``email``, ``layout`` and ``plugin``
   respectively. This provides better visual distinction between special folders
   and the folders corresponding to your app's controller names which are in
   ``CamelCase`` form.

@@ -139,7 +139,7 @@ this count query can be very expensive. In situations where you only want to
 show 'Next' and 'Previous' links you can use the 'simple' paginator which does
 not do a count query::
 
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
 

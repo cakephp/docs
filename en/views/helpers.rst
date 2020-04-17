@@ -319,7 +319,7 @@ If you would like to access a View variable inside a helper, you can use
         public function someMethod()
         {
             // set meta description
-            echo $this->Html->meta(
+            return $this->Html->meta(
                 'description', $this->_View->get('metaDescription'), ['block' => 'meta']
             );
         }
@@ -335,13 +335,6 @@ If you would like to render an Element inside your Helper you can use
     {
         public function someFunction()
         {
-            // output directly in your helper
-            echo $this->_View->element(
-                '/path/to/element',
-                ['foo'=>'bar','bar'=>'foo']
-            );
-
-            // or return it to your view
             return $this->_View->element(
                 '/path/to/element',
                 ['foo'=>'bar','bar'=>'foo']

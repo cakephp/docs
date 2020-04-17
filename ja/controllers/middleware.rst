@@ -38,12 +38,17 @@ CakePHP はウェブアプリケーションの一般的なタスクを処理す
   リクエストにルーティングパラメーターを割り当てるために ``Router`` を使用します。
 * ``Cake\I18n\Middleware\LocaleSelectorMiddleware`` はブラウザーによって送られる
   ``Accept-Language`` ヘッダーによって自動で言語を切り替えられるようにします。
+* ``Cake\Http\Middleware\HttpsEnforcerMiddleware`` の利用はHTTPSを要求します。
 * ``Cake\Http\Middleware\SecurityHeadersMiddleware`` は、 ``X-Frame-Options``
   のようなセキュリティに関連するヘッダーをレスポンスに簡単に追加することができます。
 * ``Cake\Http\Middleware\EncryptedCookieMiddleware`` は、難読化されたデータで
   Cookie を操作する必要がある場合に備えて、暗号化された Cookie を操作する機能を提供します。
 * ``Cake\Http\Middleware\CsrfProtectionMiddleware`` は、アプリケーションに CSRF
   保護を追加します。
+* ``Cake\Http\Middleware\BodyParserMiddleware`` は ``Content-Type`` ヘッダーに基づいて
+  JSON, XML, その他のエンコードされたリクエストボディーをデコードすることができます。
+* ``Cake\Http\Middleware\CspMiddleware`` を使用すると、
+  アプリケーションに Content-Security-Policy ヘッダを追加するのがより簡単になります。
 
 .. _using-middleware:
 
@@ -54,18 +59,18 @@ CakePHP はウェブアプリケーションの一般的なタスクを処理す
 
 全てのリクエストにミドルウェアを適用するには、 ``App\Application`` クラスの
 ``middleware`` メソッドを使用してください。
-もし ``App\Application`` クラスを持っていない場合、詳しくは :ref:`adding-http-stack`
-の当該のセクションを参照してください。アプリケーションの ``middleware`` フックメソッドは
-リクエスト処理の開始時に呼ばれて、 ``MiddlewareQueue`` オブジェクトを加えることができます。 ::
+アプリケーションの ``middleware`` フックメソッドはリクエスト処理の開始時に呼ばれて、
+``MiddlewareQueue`` オブジェクトを加えることができます。 ::
 
     namespace App;
 
     use Cake\Http\BaseApplication;
+    use Cake\Http\MiddlewareQueue;
     use Cake\Error\Middleware\ErrorHandlerMiddleware;
 
     class Application extends BaseApplication
     {
-        public function middleware($middlewareQueue)
+        public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue
         {
             // ミドルウェアのキューにエラーハンドラーを結びつけます。
             $middlewareQueue->add(new ErrorHandlerMiddleware());
@@ -109,113 +114,31 @@ CakePHP はウェブアプリケーションの一般的なタスクを処理す
 プラグインからのミドルウェア追加
 --------------------------------
 
-アプリケーションによってミドルウェアのキューが準備された後に、 ``Server.buildMiddleware``
-イベントが引き起こされます。このイベントはプラグインからミドルウェアを追加するのに便利です。
-プラグインは、それらのブートストラップスクリプトの中でリスナーを登録することができて、
-それらがミドルウェアを追加します。 ::
+プラグインは ``middleware`` フックメソッドを使って、
+ミドルウェアをアプリケーションのミドルウェアキューに適用することができます。 ::
 
     // ContactManager プラグインの bootstrap.php の中で
-    use Cake\Event\EventManager;
+    namespace ContactManager;
 
-    EventManager::instance()->on(
-        'Server.buildMiddleware',
-        function ($event, $middlewareQueue) {
-            $middlewareQueue->add(new ContactPluginMiddleware());
-        });
+    use Cake\Core\BasePlugin;
+    use Cake\Http\MiddlewareQueue;
+    use ContactManager\Middleware\ContactManagerContextMiddleware;
 
-PSR-7 リクエストとレスポンス
-============================
+    class Plugin extends BasePlugin
+    {
+        public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue
+        {
+            $middlewareQueue->add(new ContactManagerContextMiddleware());
 
-`PSR-7 リクエストとレスポンスインターフェイス <http://www.php-fig.org/psr/psr-7/>`__
-の先頭でミドルウェアと新しい HTTP スタックは構築されます。すべてのミドルウェアは
-これらのインターフェイスに触れることになりますが、コントローラー、コンポーネント
-およびビューは *そうではありません* 。
-
-リクエストとの対話
-------------------
-
-``RequestInterface`` は、リクエストのヘッダー、メソッド、 URI 、およびボディーと対話するための
-メソッドを提供します。ヘッダーと対話するには、このようにします。 ::
-
-    // ヘッダーをテキストとして読みます
-    $value = $request->getHeaderLine('Content-Type');
-
-    // ヘッダーを配列として読みます
-    $value = $request->getHeader('Content-Type');
-
-    // すべてのヘッダーを連想配列として読みます
-    $headers = $request->getHeaders();
-
-リクエストは、それらが持つクッキーやアップロードされたファイルへのアクセスも提供します。 ::
-
-    // クッキーの値の配列を得ます。
-    $cookies = $request->getCookieParams();
-
-    // UploadedFile オブジェクトの配列を得ます
-    $files = $request->getUploadedFiles();
-
-    // ファイルデータを読みます。
-    $files[0]->getStream();
-    $files[0]->getSize();
-    $files[0]->getClientFileName();
-
-    // ファイルを移動します。
-    $files[0]->moveTo($targetPath);
-
-リクエストは URI オブジェクトを持っており、それがリクエストされた URI と対話するための
-メソッドを持っています。 ::
-
-    // URI を得ます
-    $uri = $request->getUri();
-
-    // URI の中からデータを読み取ります。
-    $path = $uri->getPath();
-    $query = $uri->getQuery();
-    $host = $uri->getHost();
-
-最後に、リクエストの‘属性’と対話することができます。 CakePHP はフレームワーク固有の
-リクエストパラメーターを用いるためにこの属性を利用します。 CakePHP によって処理される
-どのリクエストにおいても重要ないくつかの属性があります。
-
-* ``base`` は、もしあればアプリケーションのベースディレクトリーを持っています。
-* ``webroot`` は、アプリケーションの webroot ディレクトリーを持っています。
-* ``params`` は、ルーティング規則が処理された後で、ルートマッチングの結果を持ちます。
-* ``session`` は、 CakePHP の ``Session`` オブジェクトのインスタンスを持っています。
-  セッションオブジェクトをどう使うかについての詳しい情報は :ref:`accessing-session-object`
-  を参照してください。
-
-レスポンスとの対話
-------------------
-
-サーバーレスポンスを作成するために利用できるメソッドは、 :ref:`httpclient-response-objects`
-と対話する時に利用できるものと同じです。インターフェイスは同じですが、利用シナリオは
-異なっています。
-
-レスポンスを変更する時には、レスポンスが **不変** であることを覚えておくことが重要です。
-すべてのセッターメソッドの結果を格納することをいつでも覚えていてください。例えばこのように。 ::
-
-    // これは $response を変更 *しません* 。新しいオブジェクトが
-    // 変数に代入されませんでした。
-    $response->withHeader('Content-Type', 'application/json');
-
-    // これは動きます！
-    $newResponse = $response->withHeader('Content-Type', 'application/json');
-
-多くの場合、リクエスト上でヘッダーとレスポンスのボディーを設定することになるでしょう。 ::
-
-    // ヘッダーとステータスコードを割り当てます
-    $response = $response->withHeader('Content-Type', 'application/json')
-        ->withHeader('Pragma', 'no-cache')
-        ->withStatus(422);
-
-    // ボディーに書き込みます
-    $body = $response->getBody();
-    $body->write(json_encode(['errno' => $errorCode]));
+            return $middlewareQueue;
+        }
+    }
 
 ミドルウェアの作成
 ==================
 
 ミドルウェアは無名関数（クロージャ）として、あるいは呼び出し可能なクラスとしても実装できます。
+また、 ``Psr\Http\\ServerMiddlewareInterface`` を拡張するクラスとして実装することもできます。
 クロージャは小さな課題に適している一方で、テストを行うのを難しくしますし、複雑な ``Application``
 クラスを作ってしまいます。 CakePHP のミドルウェアクラスは、いくつかの規約を持っています。
 
@@ -223,38 +146,41 @@ PSR-7 リクエストとレスポンス
   **src/Middleware/CorsMiddleware.php** です。
 * ミドルウェアクラスには ``Middleware`` と接尾語が付けられるべきです。例えば
   ``LinkMiddleware`` です。
-* ミドルウェアはミドルウェアのプロトコルを実装することを期待されています。
+* ミドルウェアは、 ``Psr\Http\ServerMiddlewareInterface``` を実装しなければなりません。
 
-（まだ）正式のインターフェイスではありませんが、ミドルウェアは緩やかなインターフェイス
-あるいは‘プロトコル’を持っています。そのプロトコルとは下記のようなものです。
-
-#. ミドルウェアは ``__invoke($request, $response, $next)`` を実装しなければなりません。
-#. ミドルウェアは PSR-7 ``ResponseInterface`` を実装したオブジェクトを返さなければなりません。
-
-ミドルウェアは ``$next`` を呼ぶか、独自のレスポンスを作成することによって、レスポンスを
+ミドルウェアは ``$handler->handle()`` を呼ぶか、独自のレスポンスを作成することによって、レスポンスを
 返すことができます。我々の単純なミドルウェアで、両方のオプションを見ることができます。 ::
 
     // src/Middleware/TrackingCookieMiddleware.php の中で
     namespace App\Middleware;
+
+    use Cake\Http\Cookie\Cookie;
     use Cake\I18n\Time;
+    use Psr\Http\Message\ResponseInterface;
+    use Psr\Http\Message\ServerRequestInterface;
+    use Psr\Http\Server\RequestHandlerInterface;
+    use Psr\Http\Server\MiddlewareInterface;
 
-    class TrackingCookieMiddleware
+    class TrackingCookieMiddleware implements MiddlewareInterface
     {
-        public function __invoke($request, $response, $next)
+        public function process(
+            ServerRequestInterface $request,
+            RequestHandlerInterface $handler
+        ): ResponseInterface
         {
-            // $next() を呼ぶことで、アプリケーションのキューの中で
+            // Calling $handler->handle()  を呼ぶことで、アプリケーションのキューの中で
             // *次の* ミドルウェアにコントロールを任せます。
-            $response = $next($request, $response);
+            $response = $handler->handle($request);
 
-            // レスポンスを変更する時には、 next を呼んだ *後に*
-            // それを行うべきです。
             if (!$request->getCookie('landing_page')) {
                 $expiry = new Time('+ 1 year');
-                $response = $response->withCookie('landing_page' ,[
-                    'value' => $request->here(),
-                    'expire' => $expiry->format('U'),
-                ]);
+                $response = $response->withCookie(new Cookie(
+                    'landing_page',
+                    $request->getRequestTarget(),
+                    $expiry
+                ));
             }
+
             return $response;
         }
     }
@@ -266,10 +192,11 @@ PSR-7 リクエストとレスポンス
     namespace App;
 
     use App\Middleware\TrackingCookieMiddleware;
+    use Cake\Http\MiddlewareQueue;
 
     class Application
     {
-        public function middleware($middlewareQueue)
+        public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue
         {
             // 単純なミドルウェアをキューに追加します
             $middlewareQueue->add(new TrackingCookieMiddleware());
@@ -292,16 +219,13 @@ PSR-7 リクエストとレスポンス
 をパラメーターとして指定します。 ::
 
     // Application.php の中で
-    public function middleware($middlewareQueue)
+    public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue
     {
         // ...
         $middlewareQueue->add(new RoutingMiddleware($this, 'routing'));
     }
 
 上記は、生成されたルートコレクションを格納するために ``routing`` キャッシュエンジンを使用します。
-
-.. versionadded:: 3.6.0
-    ルートのキャッシュは 3.6.0 で追加されました。
 
 .. _security-header-middleware:
 
@@ -334,8 +258,33 @@ PSR-7 リクエストとレスポンス
 
     $middlewareQueue->add($securityHeaders);
 
-.. versionadded:: 3.5.0
-    ``SecurityHeadersMiddleware`` は 3.5.0 で追加されました。
+コンテンツセキュリティポリシーヘッダーミドルウェア
+==================================================
+
+``CspMiddleware``を使うと、アプリケーションに Content-Security-Policy ヘッダを追加するのがより簡単になります。
+これを使う前に ``paragonie/csp-Builder``` をインストールする必要があります。
+
+.. code-block::bash
+
+    composer require paragonie/csp-builder
+
+配列を使用するか、ビルドされた ``CSPBuilder`` オブジェクトを渡すことで、
+ミドルウェアを設定することができます。 ::
+
+    use Cake\Http\Middleware\CspMiddleware;
+
+    $csp = new CspMiddleware([
+        'script-src' => [
+            'allow' => [
+                'https://www.google-analytics.com',
+            ],
+            'self' => true,
+            'unsafe-inline' => false,
+            'unsafe-eval' => false,
+        ],
+    ]);
+
+    $middlewareQueue->add($csp);
 
 .. _encrypted-cookie-middleware:
 
@@ -364,16 +313,12 @@ CakePHP のクッキー暗号化ミドルウェアを使用して、ミドルウ
 このミドルウェアが使用する暗号化アルゴリズムとパディングスタイルは、
 CakePHP の以前のバージョンの ``CookieComponent`` と後方互換性があります。
 
-.. versionadded:: 3.5.0
-    ``EncryptedCookieMiddleware`` は 3.5.0 で追加されました。
-
 .. _csrf-middleware:
 
 クロスサイトリクエストフォージェリー (CSRF) ミドルウェア
 ========================================================
 
-CSRF 保護は、ミドルウェアスタックに ``CsrfProtectionMiddleware`` を適用することにより、
-アプリケーション全体または特定のスコープに適用できます。
+CSRF 保護は、アプリケーション全体または特定のルーティングスコープに適用することができます。
 
 .. note::
 
@@ -383,26 +328,28 @@ CSRF 保護は、ミドルウェアスタックに ``CsrfProtectionMiddleware`` 
 ``CsrfProtectionMiddleware`` をアプリケーションミドルウェアスタックに適用することにより、
 アプリケーションのすべてのアクションを保護します。 ::
 
-    // in src/Application.php
+    // Application.php の中で
     use Cake\Http\Middleware\CsrfProtectionMiddleware;
 
-    public function middleware($middlwareQueue) {
+    public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue
+    {
         $options = [
             // ...
         ];
         $csrf = new CsrfProtectionMiddleware($options);
 
-        $middlwareQueue->add($csrf);
-        return $middlwareQueue;
+        $middlewareQueue->add($csrf);
+        return $middlewareQueue;
     }
 
 ``CsrfProtectionMiddleware`` をルーティングスコープに適用することにより、
 特定のルートグループを含めたり除外したりできます。 ::
 
-    // in src/Application.php
+    // Application.php の中で
     use Cake\Http\Middleware\CsrfProtectionMiddleware;
 
-    public function routes($routes) {
+    public function routes(RouteBuilder $routes) : void
+    {
         $options = [
             // ...
         ];
@@ -410,7 +357,7 @@ CSRF 保護は、ミドルウェアスタックに ``CsrfProtectionMiddleware`` 
         parent::routes($routes);
     }
 
-    // in config/routes.php
+    // config/routes.php の中で
     Router::scope('/', function (RouteBuilder $routes) {
         $routes->applyMiddleware('csrf');
     });
@@ -434,10 +381,11 @@ CSRF 保護は、ミドルウェアスタックに ``CsrfProtectionMiddleware`` 
 ホワイトリストコールバック機能を使用して、
 CSRF トークンチェックを実行する URL をより詳細に制御できます。 ::
 
-    // in src/Application.php
+    // config/routes.php の中で
     use Cake\Http\Middleware\CsrfProtectionMiddleware;
 
-    public function middleware($middlewareQueue) {
+    public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue
+    {
         $csrf = new CsrfProtectionMiddleware();
 
         // コールバックが `true` を返す場合、トークンのチェックはスキップされます。
@@ -448,7 +396,7 @@ CSRF トークンチェックを実行する URL をより詳細に制御でき�
             }
         });
 
-        // ルーティングミドルウェアが CSRF 保護ミドルウェアより先にキューに追加されていることを確認してください。
+         // ルーティングミドルウェアが CSRF 保護ミドルウェアより先にキューに追加されていることを確認してください。
         $middlewareQueue->add($csrf);
 
         return $middlewareQueue;
@@ -502,7 +450,7 @@ JavaScript ファイルが別のファイルにあるものの、Cookie の処�
     echo $this->Html->meta('csrfToken', $this->request->getAttribute('csrfToken'));
 
 次に、 ``csrfToken`` という名前の ``meta`` 要素を探すことで、
-jQuery を使用した場合と同じくらい簡単にスクリプト内でアクセスできます。
+jQuery を使用した場合と同じくらい簡単にスクリプト内でアクセスできます。 ::
 
     var csrfToken = $('meta[name="csrfToken"]').attr('content');
 
@@ -538,7 +486,7 @@ jQuery を使用した場合と同じくらい簡単にスクリプト内でア�
 
 .. _https-enforcer-middleware:
 
-HTTPS Enforcer Middleware
+HTTPS 実施ミドルウェア
 =========================
 
 HTTPS接続経由の場合にのみアプリケーションを使用できるようにしたい場合、
