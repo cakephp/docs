@@ -22,6 +22,8 @@ Deprecations
 * ``FormHelper::create()`` now emits deprecation warnings when the ``$context``
   parameter is a boolean or string. These values trigger fatal errors in 4.0 and
   will need to be updated before upgrading.
+* The magic method signature for ``FunctionBuilder::cast([...])`` is deprecated.
+  Use ``FunctionBuilder::cast('field', 'type')`` instead.
 
 New Features
 ============
@@ -42,6 +44,7 @@ Database
 
 * ``Driver::newTableSchema()`` was added. This hook method lets you customize
   which the class used for schema metadata.
+* ``FunctionBuilder::cast()`` was added.
 
 Datasource
 ----------
