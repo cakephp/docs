@@ -22,6 +22,8 @@ Database
 * ``Cake\Database\Schema\PostgresSchema`` was renamed to
   ``Cake\Database\Schema\PostgresSchemaDialect`` and marked as internal.
 * ``DateTimeType::setTimezone()`` was deprecated. use ``setDatabaseTimezone()`` instead.
+* The magic method signature for ``FunctionBuilder::cast([...])`` is deprecated.
+  Use ``FunctionBuilder::cast('field', 'type')`` instead.
 
 Form
 ----
@@ -106,6 +108,7 @@ Database
   expression making it easy to extend any instance with call chaining.
 * Postgres and SQLServer now support ``HAVING`` conditions on aggregate
   functions with aliases.
+* ``FunctionsBuilder::cast()`` was added.
 
 Error
 -----
