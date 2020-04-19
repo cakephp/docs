@@ -68,6 +68,9 @@ I18n
 * ``Number::getDefaultCurrencyFormat()`` and
   ``Number::setDefaultCurrencyFormat()`` were added. These methods let you
   define the formatting style for currency values.
+* The ``setJsonEncodeFormat`` method on  ``Time``, ``FrozenTime``, ``Date`` and
+  ``FrozenDate`` now accepts a callable that can be used to return a custom
+  string.
 
 ORM
 ---
