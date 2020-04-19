@@ -131,6 +131,13 @@ Http
   your application to signal to the error handling middleware to create
   a redirect response.
 
+I18n
+----
+
+* The ``setJsonEncodeFormat`` method on  ``Time``, ``FrozenTime``, ``Date`` and
+  ``FrozenDate`` now accepts a callable that can be used to return a custom
+  string.
+
 Log
 ---
 
