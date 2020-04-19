@@ -164,6 +164,8 @@ View
 * Added ``TextHelper::slug()``. This method delegates to
   ``Cake\Utility\Text::slug()``.
 * Added ``ViewBuilder::addHelper()`` as chainable wrapper method to add helpers.
+* Added ``HtmlHelper::linkFromPath()`` and ``UrlHelper::urlFromPath()`` to build
+  links and URLs from route paths more easily and with IDE support in the View layer.
 
 Utility
 -------
