@@ -530,7 +530,7 @@ CakePHP's links, CSS, JavaScript, and rerouting should work correctly.
 
 Lighttpd
 --------
-Lighttpd does not make use of .htaccess files like Apache, so it is necessary to add a url.rewrite-once configuration in **conf/lighttpd.conf**. This is a complete example of adding a cake php application to lighttpd configuration:
+Lighttpd does not make use of **.htaccess** files like Apache, so it is necessary to add a url.rewrite-once configuration in **conf/lighttpd.conf**. This is a complete example of adding a CakePHP application to lighttpd configuration:
 
 .. code-block:: php
     
