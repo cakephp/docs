@@ -546,13 +546,13 @@ Lighttpd does not make use of **.htaccess** files like Apache, so it is necessar
     # CGI Php
     cgi.assign      = ( ".php" => "c:/php/php-cgi.exe" )
     
-    # Rewrite Cake Php (with /TestCake subdomain)
+    # Rewrite Cake Php (on /TestCake path)
     url.rewrite-once = (
         "^/TestCake/(css|files|img|js|stats)/(.*)$" => "/TestCake/webroot/$1/$2",
         "^/TestCake/(.*)$" => "/TestCake/webroot/index.php/$1"
     )
 
-The above lines include also the php configuration and an alias configuration for an example application to publish on the subdomain /TestCake.
+The above lines include also the php configuration and an alias configuration for an example application to publish on the path /TestCake.
 
 I Can't Use URL Rewriting
 -------------------------
