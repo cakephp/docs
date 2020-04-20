@@ -505,6 +505,7 @@ like below and CakePHP will know how to form the URL as defined in the routes::
 .. _named-routes:
 
 Using Path Routing
+------------------
 
 We talked about string targets above. The same also works for URL generation using
 ``Router::pathUrl()``::
