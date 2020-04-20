@@ -38,6 +38,8 @@ Console
 -------
 
 * ``ConsoleIo::abort()`` was added.
+* Command classes can implement the ``defaultName()`` method to overwrite the
+  conventions based CLI name.
 
 Database
 --------
