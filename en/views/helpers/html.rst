@@ -284,7 +284,7 @@ Will output:
 Creating Links
 --------------
 
-.. php:method:: link(string $title, mixed $url = null, array $options = [])
+.. php:method:: link($title, $url = null, array $options = [])
 
 General purpose method for creating HTML links. Use ``$options`` to
 specify attributes for the element and whether or not the
@@ -388,6 +388,19 @@ Will output:
 
 Also check :php:meth:`Cake\\View\\Helper\\UrlHelper::build()` method
 for more examples of different types of URLs.
+
+.. php:method:: linkFromPath(string $title, string $path, array $params = [], array $options = [])
+
+If you want to use route path strings, you can do that using this method:
+
+    echo $this->Html->linkFromPath('Index', 'Articles::index');
+    // results in: <a href="/articles">Index</a>
+
+    echo $this->Html->linkFromPath('View', 'MyBackend.Admin/Articles::view', [3]);
+    // results in e.g.: <a href="/admin/my-backend/articles/view/3">View</a>
+
+.. versionadded:: 4.1.0
+    ``linkFromPath()`` was added.
 
 Linking to Videos and Audio Files
 ---------------------------------
