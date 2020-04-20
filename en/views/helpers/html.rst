@@ -391,7 +391,7 @@ for more examples of different types of URLs.
 
 .. php:method:: linkFromPath(string $title, string $path, array $params = [], array $options = [])
 
-If you want to use route path strings, you can do that using this method:
+If you want to use route path strings, you can do that using this method::
 
     echo $this->Html->linkFromPath('Index', 'Articles::index');
     // results in: <a href="/articles">Index</a>

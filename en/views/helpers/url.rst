@@ -92,7 +92,7 @@ whether or not the base path should be added::
 
 .. php:method:: buildFromPath(string $path, array $params = [], array $options = [])
 
-If you want to use route path strings, you can do that using this method:
+If you want to use route path strings, you can do that using this method::
 
     echo $this->Url->buildFromPath('Articles::index');
     // results in: /articles
