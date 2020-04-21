@@ -502,7 +502,7 @@ like below and CakePHP will know how to form the URL as defined in the routes::
         'CakePHP_Rocks'
     ]);
 
-.. _named-routes:
+.. _path-routing:
 
 Using Path Routing
 ------------------
@@ -511,7 +511,7 @@ We talked about string targets above. The same also works for URL generation usi
 ``Router::pathUrl()``::
 
     echo Router::pathUrl('Articles::index');
-    // results in: /articles
+    // results in e.g.: /articles
 
     echo Router::pathUrl('MyBackend.Admin/Articles::view', [3]);
     // results in e.g.: /admin/my-backend/articles/view/3
@@ -519,6 +519,8 @@ We talked about string targets above. The same also works for URL generation usi
 .. tip::
 
     IDE support for Path Routing autocomplete can be enabled with `CakePHP IdeHelper Plugin <https://github.com/dereuromark/cakephp-ide-helper>`_.
+
+.. _named-routes:
 
 Using Named Routes
 ------------------
