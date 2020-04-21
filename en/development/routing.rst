@@ -502,6 +502,24 @@ like below and CakePHP will know how to form the URL as defined in the routes::
         'CakePHP_Rocks'
     ]);
 
+.. _path-routing:
+
+Using Path Routing
+------------------
+
+We talked about string targets above. The same also works for URL generation using
+``Router::pathUrl()``::
+
+    echo Router::pathUrl('Articles::index');
+    // results in e.g.: /articles
+
+    echo Router::pathUrl('MyBackend.Admin/Articles::view', [3]);
+    // results in e.g.: /admin/my-backend/articles/view/3
+
+.. tip::
+
+    IDE support for Path Routing autocomplete can be enabled with `CakePHP IdeHelper Plugin <https://github.com/dereuromark/cakephp-ide-helper>`_.
+
 .. _named-routes:
 
 Using Named Routes
@@ -1036,10 +1054,10 @@ DELETE      /recipes/123.format   RecipesController::delete(123)
 
 .. note::
 
-    The default for pattern for resource IDs only matches integers or UUIDs. 
-    If your IDs are different you will have to supply a regular expression pattern 
-    via the  ``id`` option. E.g. ``$builder->resources('Recipes', ['id' => '.*'])``. 
-     
+    The default for pattern for resource IDs only matches integers or UUIDs.
+    If your IDs are different you will have to supply a regular expression pattern
+    via the  ``id`` option. E.g. ``$builder->resources('Recipes', ['id' => '.*'])``.
+
 The HTTP method being used is detected from a few different sources.
 The sources in order of preference are:
 
