@@ -480,6 +480,70 @@ A sample of the server directive is as follows:
     use the unix socket path (eg: fastcgi_pass
     unix:/var/run/php/php7.1-fpm.sock;) instead of the TCP port.
 
+NGINX Unit
+----------
+
+`NGINX Unit <https://unit.nginx.org>`_ is dynamically configurable in runtime;
+the following configuration relies on ``webroot/index.php``, also serving other
+``.php`` scripts if present via ``cakephp_direct``:
+
+.. code-block:: json
+
+   {
+       "listeners": {
+           "*:80": {
+               "pass": "routes/cakephp"
+           }
+       },
+
+       "routes": {
+           "cakephp": [
+               {
+                   "match": {
+                       "uri": [
+                           "*.php",
+                           "*.php/*"
+                       ]
+                   },
+
+                   "action": {
+                       "pass": "applications/cakephp_direct"
+                   }
+               },
+               {
+                   "action": {
+                       "share": "/path/to/cakephp/webroot/",
+                       "fallback": {
+                           "pass": "applications/cakephp_index"
+                       }
+                   }
+               }
+           ]
+       },
+
+       "applications": {
+           "cakephp_direct": {
+               "type": "php",
+               "root": "/path/to/cakephp/webroot/",
+               "user": "www-data"
+           },
+
+           "cakephp_index": {
+               "type": "php",
+               "root": "/path/to/cakephp/webroot/",
+               "user": "www-data",
+               "script": "index.php"
+           }
+       }
+   }
+   
+To enable this config (assuming it's saved as ``cakephp.json``):
+
+.. code-block:: console
+
+   # curl -X PUT --data-binary @cakephp.json --unix-socket \
+          /path/to/control.unit.sock http://localhost/config
+       
 IIS7 (Windows hosts)
 --------------------
 
