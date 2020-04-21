@@ -516,6 +516,10 @@ We talked about string targets above. The same also works for URL generation usi
     echo Router::pathUrl('MyBackend.Admin/Articles::view', [3]);
     // results in e.g.: /admin/my-backend/articles/view/3
 
+.. tip::
+
+    IDE support for Path Routing autocomplete can be enabled with `CakePHP IdeHelper Plugin <https://github.com/dereuromark/cakephp-ide-helper>`_.
+
 Using Named Routes
 ------------------
 
