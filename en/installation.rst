@@ -530,29 +530,32 @@ CakePHP's links, CSS, JavaScript, and rerouting should work correctly.
 
 Lighttpd
 --------
-Lighttpd does not make use of **.htaccess** files like Apache, so it is necessary to add a url.rewrite-once configuration in **conf/lighttpd.conf**. This is a complete example of adding a CakePHP application to lighttpd configuration:
+Lighttpd does not make use of **.htaccess** files like Apache, so it is
+necessary to add a ``url.rewrite-once`` configuration in **conf/lighttpd.conf**.
+Ensure the following is present in your lighthttpd configuration:
 
 .. code-block:: php
-    
+
     server.modules += (
         "mod_alias",
         "mod_cgi",
         "mod_rewrite"
     )
-    
+
     # Directory Alias
     alias.url       = ( "/TestCake" => "C:/Users/Nicola/Documents/TestCake" )
-    
+
     # CGI Php
     cgi.assign      = ( ".php" => "c:/php/php-cgi.exe" )
-    
+
     # Rewrite Cake Php (on /TestCake path)
     url.rewrite-once = (
         "^/TestCake/(css|files|img|js|stats)/(.*)$" => "/TestCake/webroot/$1/$2",
         "^/TestCake/(.*)$" => "/TestCake/webroot/index.php/$1"
     )
 
-The above lines include also the php configuration and an alias configuration for an example application to publish on the path /TestCake.
+The above lines include PHP CGI configuration and example application
+configuration for an application on the ``/TestCake`` path.
 
 I Can't Use URL Rewriting
 -------------------------
