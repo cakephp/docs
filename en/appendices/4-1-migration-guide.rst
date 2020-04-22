@@ -129,6 +129,9 @@ Error
 Http
 ----
 
+* ``BaseApplication::addOptionalPlugin()`` was added. This method handles
+  loading plugins, and handling errors for plugins that may not exist because
+  they are dev dependencies.
 * ``Cake\Http\Exception\RedirectException`` was added. This exception replaces
   the ``RedirectException`` in the Routing package and can be raised anywhere in
   your application to signal to the error handling middleware to create
