@@ -61,6 +61,9 @@ Http
 
 * ``Cake\Http\Client\Response::isSuccess()`` was backported from 4.0
 * ``Cake\Http\Middleware\CspMiddleware`` was backported from 4.0
+* ``BaseApplication::addOptionalPlugin()`` was added. This method handles
+  loading plugins, and handling errors for plugins that may not exist because
+  they are dev dependencies.
 
 I18n
 ----
