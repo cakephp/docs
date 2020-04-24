@@ -43,7 +43,7 @@ Once loaded we can paginate an ORM table class or ``Query`` object::
 
         // Paginate a partially completed query
         $query = $this->Articles->find('published');
-        $this->('articles', $this->paginate($query));
+        $this->set('articles', $this->paginate($query));
     }
 
 Advanced Usage
@@ -51,7 +51,7 @@ Advanced Usage
 
 ``PaginatorComponent`` supports more complex use cases by configuring the ``$paginate``
 controller property or as the ``$settings`` argument to ``paginate()``. These
-conditions service as the basis for you pagination queries. They are augmented
+conditions serve as the basis for you pagination queries. They are augmented
 by the ``sort``, ``direction``, ``limit``, and ``page`` parameters passed in
 from the URL::
 
