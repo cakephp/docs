@@ -473,8 +473,10 @@ functions::
             ['controller' => 'Blogs', 'action' => 'view']
         )
         // Define the route elements in the route template
-        // to pass as function arguments. Order matters since this
-        // will simply map "{id}" to $articleId in your action
+        // to prependl as function arguments. Order matters as this
+        // will pass the `$id` and `$slug` elements as the first and
+        // second parameters. Any additional passed parameters in your
+        // route will be added after the setPass() arguments.
         ->setPass(['id', 'slug'])
         // Define a pattern that `id` must match.
         ->setPatterns([
