@@ -2008,11 +2008,11 @@ Affichera :
     <label for="user-name">Name</label>
     <label for="user-name">Your username</label>
 
-``$options`` peut soit être un tableau d'attributs HTML, ou une chaîne qui
-sera utilisée comme nom de classe::
+Avec le troisième paramètre ``$options``, vous pouvez définir un
+id ou une classe::
 
     echo $this->Form->label('User.name', null, ['id' => 'user-label']);
-    echo $this->Form->label('User.name', 'Your username', 'highlight');
+    echo $this->Form->label('User.name', 'Your username', ['class' => 'highlight']);
 
 Affichera:
 
