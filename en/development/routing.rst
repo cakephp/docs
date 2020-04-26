@@ -473,7 +473,7 @@ functions::
             ['controller' => 'Blogs', 'action' => 'view']
         )
         // Define the route elements in the route template
-        // to prependl as function arguments. Order matters as this
+        // to prepend as function arguments. Order matters as this
         // will pass the `$id` and `$slug` elements as the first and
         // second parameters. Any additional passed parameters in your
         // route will be added after the setPass() arguments.
