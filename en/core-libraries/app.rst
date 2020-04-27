@@ -51,7 +51,7 @@ Finding Paths to Namespaces
 Used to get locations for paths based on conventions::
 
     // Get the path to Controller/ in your application
-    App::path('Controller');
+    App::classPath('Controller');
 
 This can be done for all namespaces that are part of your application.
 
@@ -65,16 +65,6 @@ Used for finding the path to a package inside CakePHP::
 
     // Get the path to Cache engines.
     App::core('Cache/Engine');
-
-Locating Plugins
-================
-
-.. php:staticmethod:: path(string $plugin)
-
-Plugins can be located with Plugin. Using ``Plugin::path('DebugKit');``
-for example, will give you the full path to the DebugKit plugin::
-
-    $path = Plugin::path('DebugKit');
 
 Locating Themes
 ===============
