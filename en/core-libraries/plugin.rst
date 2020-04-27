@@ -1,5 +1,5 @@
-App Class
-#########
+Plugin Class
+############
 
 .. php:namespace:: Cake\Core
 
