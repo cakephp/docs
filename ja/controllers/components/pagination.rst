@@ -20,14 +20,40 @@ CakePHP におけるページネーションは、コントローラーにおけ
 :php:class:`~Cake\\View\\Helper\\PaginatorHelper` は、ページネーションのリンクや
 ボタンを作り出すことを容易にすることに使われます。
 
-Controller::paginate() の使用
-=============================
+基本的な使用方法
+==============
 
-コントローラーでは、ページネーションで使用する ``$paginate`` コントローラー変数に
-デフォルトの検索条件を定義することから始めます。これらの条件は、
-ページネーション検索の基礎となります。これらに対して、URL から指定された ``sort`` 、
-``direction`` 、 ``limit`` 、 ``page`` パラメーターが加えられます。
-``order`` キーは、以下のような配列構造で定義しなければならないことに注意してください。 ::
+クエリをページ分割するには、まず ``PaginatorComponent`` をロードする必要があります。 ::
+
+    class ArticlesController extends AppController
+    {
+        public function initialize(): void
+        {
+            parent::initialize();
+            $this->loadComponent('Paginator');
+        }
+    }
+
+一度ロードされれば、ORMテーブルクラスや ``Query`` オブジェクトをページ分割することができます。 ::
+
+    public function index()
+    {
+        // ORM テーブルのページ分割
+        $this->set('articles', $this->paginate($this->Articles));
+
+        // 部分的に完了したクエリをページ分割する
+        $query = $this->Articles->find('published');
+        $this->set('articles', $this->paginate($query));
+    }
+
+高度な使用方法
+==============
+
+``PaginatorComponent`` は、 ``$paginate`` のコントローラプロパティや ``paginate()`` の引数
+``$settings`` として設定することで、より複雑なユースケースをサポートしています。
+これらの条件はページ分割クエリの基礎となります。
+これらの条件は URLから渡される ``sort``, ``direction``, ``limit``, ``page``
+のパラメータによって拡張されます。　::
 
     class ArticlesController extends AppController
     {
@@ -37,38 +63,16 @@ Controller::paginate() の使用
                 'Articles.title' => 'asc'
             ]
         ];
-
-        public function initialize()
-        {
-            parent::initialize();
-            $this->loadComponent('Paginator');
-        }
     }
 
-また ``fields`` のように、 :php:meth:`~Cake\\ORM\\Table::find()`
-によってサポートされたオプションのいずれも含めることができます。 ::
+.. tip::
+    デフォルトの ``order`` オプションは配列として定義されていなければなりません。
 
-    class ArticlesController extends AppController
-    {
-        public $paginate = [
-            'fields' => ['Articles.id', 'Articles.created'],
-            'limit' => 25,
-            'order' => [
-                'Articles.title' => 'asc'
-            ]
-        ];
-
-        public function initialize()
-        {
-            parent::initialize();
-            $this->loadComponent('Paginator');
-        }
-    }
-
-Paginate プロパティーからほとんどの検索オプションを指定することができるものの、
-:ref:`custom-find-methods` に含めた方が、綺麗でかつ単純に指定することが可能となります。
-``finder`` オプションを設定することで、 ファインダーを使ったページネーションを
-定義することができます。 ::
+:php:meth:`~Cake\\ORM\\\Table::find()` でサポートされているオプションのいずれかを
+ページ分割の設定に含めることができます。
+ページネーションオプションを :ref:`custom-find-methods` にバンドルする方が
+すっきりしていてシンプルです。
+``finder`` オプションを使用することで、ページ分割の際にファインダーを使用することができます。 ::
 
     class ArticlesController extends AppController
     {
@@ -77,9 +81,7 @@ Paginate プロパティーからほとんどの検索オプションを指定�
         ];
     }
 
-「カスタム Finder メソッド」もオプションを指定することができるため、以下のように、
-ページネーションのプロパティーの中のカスタム Finder メソッドにオプションを
-受け渡すことができます。 ::
+ファインダーメソッドに追加のオプションが必要な場合は、これらの値を finder: に渡すことができます。 ::
 
     class ArticlesController extends AppController
     {
@@ -118,108 +120,139 @@ Paginate プロパティーからほとんどの検索オプションを指定�
         ];
     }
 
-``Articles`` や ``Authors`` のキーの値は、モデル/キーが有する全てのプロパティーから、
-``$paginate`` 配列を差し引いた分だけ、含めることができます。
+``Articles`` や ``Authors`` のキーの値は、基本的な ``$paginate`` 配列に含まれる
+すべてのプロパティを含めることができます。
 
-``$paginate`` プロパティーが定義された後、ページネーションデータを作成するためには、
-:php:meth:`~Cake\\Controller\\Controller::paginate()` メソッドを使用し、
-``PaginatorHelper`` がまだ加えられていない場合は PaginatorHelper を加えます。
-Controller の paginate メソッドは、ページ分けされた検索結果を返し、
-ページネーションのメタデータを request にセットします。ページネーションのメタデータは、
-``$this->request->getParam('paging')`` でアクセスできます。
-``paginate()`` を使用するもっとまとまった例としては、 ::
+一度 ``paginate()`` を使って結果を作成した後は コントローラのリクエストは
+ページングパラメータで更新されます。
+ページングのメタデータは ``$this->request->getParam('paging')`` で取得できます。
 
-    class ArticlesController extends AppController
+シンプルなページネーション
+==========================
+
+デフォルトではページネーションは ``count()`` クエリを使って結果セットのサイズを計算し、
+ページ番号のリンクを表示できるようにしています。
+非常に大きなデータセットでは、このcountクエリは非常に高価になります。
+'Next' と 'Previous' リンクだけを表示したい場合は、カウントクエリを行わない
+'simple' paginator を使うことができます。 ::
+
+    public function initialize(): void
     {
-        public function index()
-        {
-            $this->set('articles', $this->paginate());
-        }
+        parent::initialize();
+
+        // Load the paginator component with the simple paginator strategy.
+        $this->loadComponent('Paginator', [
+            'paginator' => new \Cake\Datasource\SimplePaginator(),
+        ]);
     }
 
-デフォルトの ``paginate()`` メソッドは、デフォルトのモデルをコントローラーとして使います。
-また、find メソッドの検索結果を渡すこともできます。 ::
+``SimplePaginator`` を使っている場合、ページ番号やカウンターデータ、最後のページへのリンク、
+総レコード数のコントロールを生成することはできません。
 
-     public function index()
-     {
-        $query = $this->Articles->find('popular')->where(['author_id' => 1]);
-        $this->set('articles', $this->paginate($query));
-     }
+PaginatorComponent を直接使用する
+=================================
 
-異なるモデルを paginate したい場合は、そのための検索結果を渡すか、
-テーブルオブジェクトそのものを渡すか、モデルの名称を渡すか、いずれかをすればいいです。 ::
-
-    // クエリー（検索結果）を用いる場合
-    $comments = $this->paginate($commentsTable->find());
-
-    // モデル名を用いる場合
-    $comments = $this->paginate('Comments');
-
-    // テーブルオブジェクトを用いる場合
-    $comments = $this->paginate($commentTable);
-
-Paginator を直接使用する場合
-============================
-
-他のコンポーネントからデータを paginate する必要がある場合は、
-PaginatorComponent を直接使用するのがよいです。こちらは、
-コントローラーメソッドと類似した API となっております。 ::
+他のコンポーネントからデータをページ分割する必要がある場合は
+``PaginatorComponent`` を直接使うと良いでしょう。
+``PaginatorComponent`` はコントローラメソッドと似たようなAPIを持っています。　::
 
     $articles = $this->Paginator->paginate($articleTable->find(), $config);
 
-    // または、
+    // または
     $articles = $this->Paginator->paginate($articleTable, $config);
 
-最初のパラメーターは、ページネーションしたい対象のテーブルオブジェクトにおける検索結果の
-オブジェクトでなければいけません。この代替として、テーブルオブジェクトそのものを引き渡し、
-クエリーを構築するという方法もあります。２番目のパラメーターは、ページネーションを
-するにあたっての設定を示した配列でなければなりません。この配列は、コントローラーにおける
-``$paginate`` プロパティーと同一の構造を有する必要があります。 ``Query`` オブジェクトで
-ページネーションする時、 ``finder`` オプションは無視されます。
-それは、あなたがページネーションしたいクエリーが渡されたとみなします。
+最初のパラメータは、ページ分割したいテーブルオブジェクトの検索結果からの
+クエリオブジェクトでなければなりません。
+オプションで、テーブルオブジェクトを渡してクエリを作成することもできます。
+2番目のパラメータは、ページ分割に使用する設定の配列です。
+この配列はコントローラの ``$paginate`` プロパティと同じ構造でなければなりません。
+``Query`` オブジェクトをページ分割する際には、 ``finder`` オプションは無視されます。
+これは、ページ分割したいクエリを渡していることを前提としています。
 
 .. _paginating-multiple-queries:
 
-複数クエリーのページネーション
-==============================
+複数のクエリのページ分割
+========================
 
-コントローラーの ``$paginate`` プロパティーの中や ``paginate()`` メソッドを呼ぶ際に
-``scope`` オプションを使うことで、単一のコントローラーアクションに複数モデルで
-paginate できます。 ::
+コントローラの ``$paginate`` プロパティと ``paginate()`` メソッドを呼び出す際に
+``scope`` オプションを使うことで、1つのコントローラのアクションの中で複数のモデルを
+ページ分割することができます。 ::
 
-    // paginate プロパティー
+    // ページ分割するプロパティ
     public $paginate = [
         'Articles' => ['scope' => 'article'],
         'Tags' => ['scope' => 'tag']
     ];
 
-    // コントローラーのアクションの中で
+    // コントローラーアクションにおいて
     $articles = $this->paginate($this->Articles, ['scope' => 'article']);
     $tags = $this->paginate($this->Tags, ['scope' => 'tag']);
     $this->set(compact('articles', 'tags'));
 
-``scope`` オプションは、 ``PaginatorComponent`` の中でスコープ指定のクエリー文字列パラメーターを
-見て結果を返します。例えば、以下の URL は、tags と articles の両方同時に paginate するために
-使用できます。 ::
+``scope`` オプションを指定すると、 ``PaginatorComponent`` がスコープされた
+クエリ文字列パラメータを検索するようになります。
+例えば、以下のURLはタグと記事を同時にページ分割するのに使えます。 ::
 
     /dashboard?article[page]=1&tag[page]=3
 
-ページネーションのためのスコープ指定の HTML 要素や URL の生成方法に関しては
-:ref:`paginator-helper-multiple` セクションをご覧ください。
+スコープされたHTML要素やページネーション用のURLを生成する方法については
+:ref:`paginator-helper-multiple` のセクションを参照してください。
 
-.. versionadded:: 3.3.0
-    マルチページネーションは、3.3.0 で追加されました。
+同じモデルを複数回ページ分割する
+==================================
+
+1つのコントローラアクション内で同じモデルを複数回ページ分割するには、
+モデルのエイリアスを定義する必要があります。
+テーブルレジストリの使用方法の詳細については、 :ref:`table-registry-usage` を参照してください。 ::
+
+    // コントローラーアクションにおいて
+    $this->paginate = [
+        'ArticlesTable' => [
+            'scope' => 'published_articles',
+            'limit' => 10,
+            'order' => [
+                'id' => 'desc',
+            ],
+        ],
+        'UnpublishedArticlesTable' => [
+            'scope' => 'unpublished_articles',
+            'limit' => 10,
+            'order' => [
+                'id' => 'desc',
+            ],
+        ],
+    ];
+
+    // ページ分割コンポーネントで差別化できるようにテーブルオブジェクトを追加登録します。
+    TableRegistry::getTableLocator()->setConfig('UnpublishedArticles', [
+        'className' => 'App\Model\Table\ArticlesTable',
+        'table' => 'articles',
+        'entityClass' => 'App\Model\Entity\Article',
+    ]);
+
+    $publishedArticles = $this->paginate(
+        $this->Articles->find('all', [
+            'scope' => 'published_articles'
+        ])->where(['published' => true])
+    );
+
+    $unpublishedArticles = $this->paginate(
+        TableRegistry::getTableLocator()->get('UnpublishedArticles')->find('all', [
+            'scope' => 'unpublished_articles'
+        ])->where(['published' => false])
+    );
+
 
 .. _control-which-fields-used-for-ordering:
 
-並び替えに使用するフィールドをコントロール
-==========================================
+ソート時に使用するフィールドの制御
+==================================
 
-テーブルが有する non-virtual な列であれば、デフォルトではいずれのに対しても並び替えが可能です。
-しかし、インデックスされていない列でも並び替えが可能となってしまい、負荷がかかってしまいます。
-これを防ぐため、 ``sortWhitelist`` オプションを使用することで、並び替えが可能となるフィールドの
-ホワイトリストを設定することができます。ページネーションの検索結果の一部となりうる関係データや、
-計算されたフィールドを並び替えしたい場合は、このオプションが必要となります。 ::
+デフォルトでは、テーブルが持つ非仮想カラムに対してソートを行うことができます。
+これはインデックス化されていないカラムをソートしてしまうことになり、
+ソートするのにコストがかかるため、望ましくないこともあります。
+ソートできるフィールドのホワイトリストを ``sortWhitelist`` オプションを使って設定することができます。
+このオプションは関連するデータやページ分割クエリの一部である計算フィールドをソートしたい場合に必要です。 ::
 
     public $paginate = [
         'sortWhitelist' => [
@@ -227,30 +260,29 @@ paginate できます。 ::
         ]
     ];
 
-ホワイトリストに記載されていないフィールドを並び替えしようとしても、これらは無視されます。
+ホワイトリストにないフィールドでソートしようとするリクエストは無視されます。
 
-ページごとに行数の最大値を制限
-==============================
+1ページあたりの最大行数を制限する
+=================================
 
-ページごとに取得できる行数については、 ``limit`` パラメーターによってユーザーが確認できます。
-一般的には、ページネーションされたセットを取得するときは、すべての行を取得するべきではありません。
-``maxLimit`` オプションは、外部からこの制限を超えた設定をすることができないこと表明します。
-CakePHP は、デフォルトでは取得できる行数の上限は 100 に設定されています。もしこれが
-アプリケーションにとって適切でなければ、ページネーションのオプションとして調整できます。
-例えば ``10`` に減らすなどです。 ::
+ページごとに取得される結果の数は ``limit`` パラメータとしてユーザに公開されます。
+一般的に、ユーザがページ分割されたセットのすべての行を取得できるようにすることは望ましくありません。
+オプションの ``maxLimit`` は、外部からこの制限値を高く設定することはできないことを保証します。
+デフォルトでは、CakePHPはフェッチできる行の最大数を100に制限しています。
+もしこのデフォルト値がアプリケーションにとって適切でない場合は、
+ページ分割オプションの一部として調整することができます。 ::
 
     public $paginate = [
-        // その他のキーはこちら
+        // 他のキーはこちら
         'maxLimit' => 10
     ];
 
-リクエストの制限パラメーターがこの値よりも大きかった場合、この ``maxLimit`` の値に削減されます。
+リクエストのリミットパラメータがこの値よりも大きければ、 ``maxLimit`` の値まで減らされます。
 
-追加のアソシエーションを Join させる
-====================================
+追加の関連付けへのジョイン
+===============================
 
-``contain`` パラメーターを使用することで、ページネーションされたテーブルに
-追加のアソシエーションをロードすることができます。 ::
+追加の関連付けをページ分割されたテーブルにロードするには、 ``contain`` パラメータを使用します。 ::
 
     public function index()
     {
@@ -261,16 +293,14 @@ CakePHP は、デフォルトでは取得できる行数の上限は 100 に設�
         $this->set('articles', $this->paginate($this->Articles));
     }
 
-範囲外のページリクエスト
-=========================
+範囲外のページ要求
+=================
 
-存在しないページに対してアクセスを試みたり、リクエストされたページ数がトータルのページ数よりも
-大きかった場合に、Paginator コンポーネントは、 ``NotFoundException`` を返します。
+PaginatorComponent は、存在しないページにアクセスしようとすると ``NotFoundException``` をスローします。
 
-従って、 ``NotFoundException`` が返されたときは、通常のエラーページが表示されるようにしたり、
-try-catch 構文を活用して、適切な処理をすればよいです。 ::
+そのため、通常のエラーページをレンダリングさせるか、 try catch ブロックを使用して
+``NotFoundException`` が発生した場合に適切な処理を行うことができます。 ::
 
-    // 3.6 より前は Cake\Network\Exception\NotFoundException を使用
     use Cake\Http\Exception\NotFoundException;
 
     public function index()
@@ -278,17 +308,16 @@ try-catch 構文を活用して、適切な処理をすればよいです。 ::
         try {
             $this->paginate();
         } catch (NotFoundException $e) {
-            // こちらで最初や最後のページにリダイレクトするような何かをします。
-            // $this->request->getParam('paging') に要求された情報が入ります。
+            // 最初のページや最後のページにリダイレクトするようにします。
+            // $this->request->getAttribute('page')を指定すると、必要な情報が得られます。
         }
     }
 
-ビューにおけるページネーション
-==============================
+ビューのページネーション
+========================
 
-ページネーションのナビゲーションのためのリンクを生成する方法については、
-:php:class:`~Cake\\View\\Helper\\PaginatorHelper` ドキュメンテーションを
-参照してください。
+ページネーションナビゲーションのリンクの作り方は、 :php:class:`~Cake\\View\\\Helper\PaginatorHelper`
+のドキュメントを確認してください。
 
 ..
     meta::
