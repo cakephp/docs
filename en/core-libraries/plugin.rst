@@ -20,7 +20,7 @@ for example, will give you the full path to the DebugKit plugin::
 Check if a Plugin is Loaded
 ===========================
 
-You can check dynamically inside your code if a specific plugin has been loaded:
+You can check dynamically inside your code if a specific plugin has been loaded::
 
     $isLoaded = Plugin::isLoaded('DebugKit');
 
