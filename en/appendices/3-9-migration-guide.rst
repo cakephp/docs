@@ -24,6 +24,8 @@ Deprecations
   will need to be updated before upgrading.
 * The magic method signature for ``FunctionBuilder::cast([...])`` is deprecated.
   Use ``FunctionBuilder::cast('field', 'type')`` instead.
+* Abandoned ``zendframework`` package has been replaced with `laminas <https://github.com/laminas/laminas-diactoros>`_
+  which provides backwards-compatible classes.
 
 New Features
 ============
