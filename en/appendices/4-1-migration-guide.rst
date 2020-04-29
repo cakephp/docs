@@ -137,6 +137,11 @@ Http
   your application to signal to the error handling middleware to create
   a redirect response.
 
+Routing
+-------
+* A convenience function ``urlArray()`` has been introduced to quickly generate URL arrays
+from a route path string.
+
 I18n
 ----
 
