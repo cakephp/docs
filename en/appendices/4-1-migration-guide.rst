@@ -168,6 +168,8 @@ TestSuite
   whilst fixtures are unloaded. Tables will still be truncated during fixture
   setup. You should see faster test suite runs as fewer truncation operations
   are being done.
+* Email body assertions now include the email contents in their failure messages
+  making tests easier to debug.
 
 View
 ----
