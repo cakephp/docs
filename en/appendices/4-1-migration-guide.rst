@@ -138,6 +138,10 @@ Error
 * ``ErrorHandlerMiddleware`` now handles
   ``Http\Exception\RedirectException`` and converts those exceptions into HTTP
   redirect responses.
+* ``BaseErrorHandler`` now uses the configured error logger to log PHP warnings
+  and errors.
+* ``ErrorLoggerInterface`` was added to formalize the interface required for
+  custom error loggers.
 
 Http
 ----
