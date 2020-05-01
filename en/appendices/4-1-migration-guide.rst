@@ -148,6 +148,8 @@ I18n
 * The ``setJsonEncodeFormat`` method on  ``Time``, ``FrozenTime``, ``Date`` and
   ``FrozenDate`` now accepts a callable that can be used to return a custom
   string.
+* Lenient parsing can be disabled for ``parseDateTime()`` and ``parseDate()`` using
+  ``disableLenientParsing()``. The default is enabled - the same as IntlDateFormatter.
 
 Log
 ---
