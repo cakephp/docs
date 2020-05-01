@@ -328,14 +328,14 @@ While the built-in context classes are intended to cover the basic cases you'll
 encounter you may need to build a new context class if you are using a different
 ORM. In these situations you need to implement the
 `Cake\\View\\Form\\ContextInterface
-<https://api.cakephp.org/3.x/class-Cake.View.Form.ContextInterface.html>`_ . Once
+<https://github.com/cakephp/cakephp/tree/master/src/View/Form/ContextInterface.php>`_ . Once
 you have implemented this interface you can wire your new context into the
 FormHelper. It is often best to do this in a ``View.beforeRender`` event
 listener, or in an application view class::
 
     $this->Form->addContextProvider('myprovider', function ($request, $data) {
         if ($data['entity'] instanceof MyOrmClass) {
-            return new MyProvider($request, $data);
+            return new MyProvider($data);
         }
     });
 
