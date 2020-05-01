@@ -220,7 +220,7 @@ uncaptured content from the extending view. Assuming our view file has a
     <?php
     echo $this->Html->link('edit', [
         'action' => 'edit',
-        $post->id
+        $post->id,
     ]);
     ?>
     </li>

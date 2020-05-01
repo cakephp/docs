@@ -644,8 +644,8 @@ defaults provided in the ``$thOptions``::
 
     echo $this->Html->tableHeaders([
         'id',
-        ['Name', ['class' => 'highlight']],
-        ['Date', ['class' => 'sortable']]
+        ['Name' => ['class' => 'highlight']],
+        ['Date' => ['class' => 'sortable']]
     ]);
 
 Output:

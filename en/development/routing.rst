@@ -473,8 +473,10 @@ functions::
             ['controller' => 'Blogs', 'action' => 'view']
         )
         // Define the route elements in the route template
-        // to pass as function arguments. Order matters since this
-        // will simply map "{id}" to $articleId in your action
+        // to prepend as function arguments. Order matters as this
+        // will pass the `$id` and `$slug` elements as the first and
+        // second parameters. Any additional passed parameters in your
+        // route will be added after the setPass() arguments.
         ->setPass(['id', 'slug'])
         // Define a pattern that `id` must match.
         ->setPatterns([
@@ -501,6 +503,24 @@ like below and CakePHP will know how to form the URL as defined in the routes::
         3,
         'CakePHP_Rocks'
     ]);
+
+.. _path-routing:
+
+Using Path Routing
+------------------
+
+We talked about string targets above. The same also works for URL generation using
+``Router::pathUrl()``::
+
+    echo Router::pathUrl('Articles::index');
+    // results in e.g.: /articles
+
+    echo Router::pathUrl('MyBackend.Admin/Articles::view', [3]);
+    // results in e.g.: /admin/my-backend/articles/view/3
+
+.. tip::
+
+    IDE support for Path Routing autocomplete can be enabled with `CakePHP IdeHelper Plugin <https://github.com/dereuromark/cakephp-ide-helper>`_.
 
 .. _named-routes:
 
@@ -1036,10 +1056,10 @@ DELETE      /recipes/123.format   RecipesController::delete(123)
 
 .. note::
 
-    The default for pattern for resource IDs only matches integers or UUIDs. 
-    If your IDs are different you will have to supply a regular expression pattern 
-    via the  ``id`` option. E.g. ``$builder->resources('Recipes', ['id' => '.*'])``. 
-     
+    The default for pattern for resource IDs only matches integers or UUIDs.
+    If your IDs are different you will have to supply a regular expression pattern
+    via the  ``id`` option. E.g. ``$builder->resources('Recipes', ['id' => '.*'])``.
+
 The HTTP method being used is detected from a few different sources.
 The sources in order of preference are:
 
