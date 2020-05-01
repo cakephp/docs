@@ -59,6 +59,9 @@ View
 Behavior Changes
 ================
 
+While the following changes do not change the signature of any methods they do
+change the semantics or behavior of methods.
+
 Database
 --------
 
@@ -83,6 +86,16 @@ TestSuite
 ---------
 
 * ``TestCase::setAppNamespace()`` now returns the previous app namespace for easier save and restore.
+
+View
+----
+
+* ``FormHelper`` now has its default value sources set to ``data, context``
+  instead of ``context``. If you use ``setValueSources()`` to changes the value
+  sources you may need to update your code.
+* The ``FormHelper`` Context classes provided by CakePHP no longer take
+  a ``$request`` object in their constructor anymore.
+
 
 New Features
 ============
