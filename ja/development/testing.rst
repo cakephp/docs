@@ -21,10 +21,7 @@ Composer で PHPUnit をインストールするには:
 
 .. code-block:: bash
 
-    $ php composer.phar require --dev phpunit/phpunit:"^5.7|^6.0"
-
-    // CakePHP 3.4.1 より前
-    $ php composer.phar require --dev phpunit/phpunit:"<6.0"
+    $ php composer.phar require --dev phpunit/phpunit:"^8.5"
 
 これで ``composer.json`` の ``require-dev`` セクションに依存関係を追加し、すべての依存関係と
 一緒に PHPUnit をインストールします。
@@ -126,11 +123,6 @@ CakePHP におけるほとんどのことがそうであるように、テスト
    のように ``test`` で始める必要があります。 ``@test`` というアノテーションをメソッドに
    マークすることでテストメソッドとすることもできます。
 
-.. versionadded:: 3.4.1
-    PHPUnit 6 のサポートが追加されました。5.7.0 より低いバージョンの PHPUnit を
-    使用する場合、テストケースは CakePHP のクラスまたは ``PHPUnit_Framework_TestCase`` を
-    継承してください。
-
 最初のテストケース作成
 ======================
 
@@ -166,14 +158,12 @@ CakePHP におけるほとんどのことがそうであるように、テスト
 
     class ProgressHelperTest extends TestCase
     {
-        public function setUp()
+        public function setUp(): void
         {
-
         }
 
-        public function testBar()
+        public function testBar(): void
         {
-
         }
     }
 
@@ -182,7 +172,7 @@ CakePHP におけるほとんどのことがそうであるように、テスト
 セットアップメソッドはテストに必要なオブジェクトの初期化や設定を行います。
 今回のセットアップメソッドには次のように書き加えます。 ::
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $View = new View();
@@ -196,7 +186,7 @@ CakePHP におけるほとんどのことがそうであるように、テスト
 次に、テストメソッドの内容を充実させていきます。あなたの書いたコードが期待した結果を
 出力するかどうか保証するため、アサーションを使います。 ::
 
-    public function testBar()
+    public function testBar(): void
     {
         $result = $this->Progress->bar(90);
         $this->assertContains('width: 90%', $result);
@@ -303,7 +293,7 @@ PHPUnit のインストール方法に合わせて ``phpunit`` コマンドを�
 これで、アプリケーションの webroot ディレクトリー内のカバレッジ結果を配置します。
 ``http://localhost/your_app/coverage`` にアクセスすると、結果を表示することができるはずです。
 
-PHP 5.6.0 以上を利用している場合、カバレッジを生成するために xdebug の代わりに
+また、カバレッジを生成するために xdebug の代わりに
 ``phpdbg`` を使用できます。一般的にカバレッジの生成は ``phpdbg`` の方が速いです。
 
 .. code-block:: bash
@@ -394,6 +384,30 @@ CakePHP はフィクスチャーに基づいたテストケースを実行する
 代わりに、テストケースで ``test`` コネクションを取得します。あなたが 'replica' コネクションを
 使用する場合、テストスイートは 'test_replica' を使用しようとします。
 
+.. _fixture-phpunit-configuration:
+
+PHPUnitの設定
+-------------
+
+フィクスチャーを使う前に、``phpunit.xml`` にフィクスチャーリスナーが含まれていることを
+ダブルチェックする必要があります。
+
+.. code-block:: xml
+
+    <!-- in phpunit.xml -->
+    <!-- Setup a listener for fixtures -->
+    <listeners>
+        <listener
+        class="\Cake\TestSuite\Fixture\FixtureInjector">
+            <arguments>
+                <object class="\Cake\TestSuite\Fixture\FixtureManager" />
+            </arguments>
+        </listener>
+    </listeners>
+
+リスナーは ``bake`` によって生成されるアプリケーションやプラグインに
+デフォルトで含まれています。
+
 フィクスチャーの作成
 --------------------
 
@@ -468,7 +482,8 @@ CakePHP はフィクスチャーに基づいたテストケースを実行する
 type
     CakePHP の内部データ型。現在サポートしているのは、以下の型です。
 
-    - ``string``: ``VARCHAR`` または ``CHAR`` にマップ
+    - ``string``: ``VARCHAR``  にマップ
+    - ``char``: ``CHAR`` にマップ
     - ``uuid``: ``UUID`` にマップ
     - ``text``: ``TEXT`` にマップ
     - ``integer``: ``INT`` にマップ
@@ -476,12 +491,12 @@ type
     - ``decimal``: ``DECIMAL`` にマップ
     - ``float``: ``FLOAT`` にマップ
     - ``datetime``: ``DATETIME`` にマップ
+    - ``datetimefractional``: ``DATETIME(6)`` または ``TIMESTAMP`` にマップ
     - ``timestamp``: ``TIMESTAMP`` にマップ
+    - ``timestampfractional``: ``TIMESTAMP(6)`` または ``TIMESTAMP`` にマップ
     - ``time``: ``TIME`` にマップ
     - ``date``: ``DATE`` にマップ
     - ``binary``: ``BLOB`` にマップ
-fixed
-    CHAR 型の文字列をサポートするプラットホームで CHAR 型のカラムを作成するために使用します。
 length
     フィールドが許容するサイズを設定します。
 precision
@@ -523,7 +538,7 @@ modified のタイムスタンプに今日の日付を反映させたいので�
             ]
         ];
 
-        public function init()
+        public function init(): void
         {
             $this->records = [
                 [
@@ -566,8 +581,6 @@ modified のタイムスタンプに今日の日付を反映させたいので�
         public $import = ['table' => 'articles', 'connection' => 'other'];
     }
 
-.. versionadded:: 3.1.7
-
 通常、フィクスチャーと共に Table クラスも持っています。
 テーブル名を取得するためにそれを使用することができます。 ::
 
@@ -579,7 +592,7 @@ modified のタイムスタンプに今日の日付を反映させたいので�
 ``TableRegistry::getTableLocator()->get()`` を使用するので、プラグイン記法をサポートしています。
 
 あなたは自然に既存のモデルやテーブルからテーブル定義をインポートしますが、それは前のセクションに
-示されたように、フィクスチャーで直接定義されたレコードを設定することができます。例えば::
+示されたように、フィクスチャーで直接定義されたレコードを設定することができます。例えば ::
 
     class ArticlesFixture extends TestFixture
     {
@@ -624,15 +637,29 @@ modified のタイムスタンプに今日の日付を反映させたいので�
 
     class ArticlesTest extends TestCase
     {
-        public $fixtures = ['app.Articles', 'app.Comments'];
+        protected $fixtures = ['app.Articles', 'app.Comments'];
     }
+
+
+.. note::
+    また、　``$fixtures`` プロパティを定義する代わりに
+    ``TestCase::getFixtures()`` をオーバーライドすることもできます。 ::
+
+        public function getFixtures(): array
+        {
+            return ['app.Articles', 'app.Comments'];
+        }
 
 上記の例では、「Article」と「Comment」フィクスチャーをアプリケーションの 「Fixture」ディレクトリーから
 ロードします。同じように CakePHP のコアや プラグインからもロードすることができます。 ::
 
     class ArticlesTest extends TestCase
     {
-        public $fixtures = ['plugin.DebugKit.Articles', 'plugin.MyVendorName/MyPlugin.Messages', 'core.Comments'];
+        protected $fixtures = [
+            'plugin.DebugKit.Articles',
+            'plugin.MyVendorName/MyPlugin.Messages',
+            'core.Comments'
+        ];
     }
 
 ``core`` のプレフィックスを使えば CakePHP からフィクスチャーをロードし、プラグイン名を
@@ -644,10 +671,11 @@ modified のタイムスタンプに今日の日付を反映させたいので�
 
     class ArticlesTest extends TestCase
     {
-        public $fixtures = ['app.Articles', 'app.Comments'];
         public $autoFixtures = false;
 
-        public function testMyFunction()
+        protected $fixtures = ['app.Articles', 'app.Comments'];
+
+        public function testMyFunction(): void
         {
             $this->loadFixtures('Articles', 'Comments');
         }
@@ -659,7 +687,7 @@ modified のタイムスタンプに今日の日付を反映させたいので�
 
     class ArticlesTest extends CakeTestCase
     {
-        public $fixtures = ['app.Blog/Articles', 'app.Blog/Comments'];
+        protected $fixtures = ['app.Blog/Articles', 'app.Blog/Comments'];
     }
 
 上記の例では、両方のフィクスチャーは ``tests/Fixture/Blog`` からロードされることになります。
@@ -677,7 +705,7 @@ modified のタイムスタンプに今日の日付を反映させたいので�
 
     class ArticlesTable extends Table
     {
-        public function findPublished(Query $query, array $options)
+        public function findPublished(Query $query, array $options): Query
         {
             $query->where([
                 $this->alias() . '.published' => 1
@@ -698,7 +726,7 @@ modified のタイムスタンプに今日の日付を反映させたいので�
 
     class ArticlesTableTest extends TestCase
     {
-        public $fixtures = ['app.Articles'];
+        protected $fixtures = ['app.Articles'];
     }
 
 このテストケースの ``$fixtures`` 変数に使用する予定のフィクスチャーを設定します。
@@ -718,15 +746,15 @@ modified のタイムスタンプに今日の日付を反映させたいので�
 
     class ArticlesTableTest extends TestCase
     {
-        public $fixtures = ['app.Articles'];
+        protected $fixtures = ['app.Articles'];
 
-        public function setUp()
+        public function setUp(): void
         {
             parent::setUp();
             $this->Articles = TableRegistry::getTableLocator()->get('Articles');
         }
 
-        public function testFindPublished()
+        public function testFindPublished(): void
         {
             $query = $this->Articles->find('published');
             $this->assertInstanceOf('Cake\ORM\Query', $query);
@@ -755,7 +783,7 @@ modified のタイムスタンプに今日の日付を反映させたいので�
 テーブルクラスのテストモックを作成するために ``getMockForModel`` を使用する必要があります。
 通常のモックを持った反映されたプロパティーの問題を回避します。 ::
 
-    public function testSendingEmails()
+    public function testSendingEmails(): void
     {
         $model = $this->getMockForModel('EmailVerification', ['send']);
         $model->expects($this->once())
@@ -777,10 +805,6 @@ modified のタイムスタンプに今日の日付を反映させたいので�
 ヘルパー、モデル、およびコンポーネントと同様にコントローラークラスをテストすることができますが、
 CakePHP は特殊な ``IntegrationTestTrait`` トレイトを提供しています。コントローラーのテストケースに
 このトレイトを使用すると、高いレベルからコントローラーをテストすることができます。
-
-.. versionadded:: 3.7.0
-
-    ``IntegrationTestCase`` クラスは ``IntegrationTestTrait`` トレイトへ移動しました。
 
 あなたが統合テストに慣れていない場合、一斉に複数のユニットをテストすることが容易になるテストの
 アプローチがあります。CakePHP の統合テスト機能は、アプリケーションによって処理される HTTP
@@ -836,34 +860,34 @@ CakePHP は特殊な ``IntegrationTestTrait`` トレイトを提供していま�
     {
         use IntegrationTestTrait;
 
-        public $fixtures = ['app.Articles'];
+        protected $fixtures = ['app.Articles'];
 
-        public function testIndex()
+        public function testIndex(): void
         {
             $this->get('/articles');
 
             $this->assertResponseOk();
-            // 他のアサート
+            // さらにアサート
         }
 
-        public function testIndexQueryData()
+        public function testIndexQueryData(): void
         {
             $this->get('/articles?page=1');
 
             $this->assertResponseOk();
-            // 他のアサート
+            // さらにアサート
         }
 
-        public function testIndexShort()
+        public function testIndexShort(): void
         {
             $this->get('/articles/index/short');
 
             $this->assertResponseOk();
             $this->assertResponseContains('Articles');
-            // 他のアサート
+            // さらにアサート
         }
 
-        public function testIndexPostData()
+        public function testIndexPostData(): void
         {
             $data = [
                 'user_id' => 1,
@@ -898,9 +922,6 @@ CakePHP は特殊な ``IntegrationTestTrait`` トレイトを提供していま�
 正しく動作したことを確実にするために ``IntegrationTestTrait`` や、PHPUnit が提供するさまざまな
 アサーションを使用することができます。
 
-.. versionadded:: 3.5.0
-    ``options()`` と ``head()`` は 3.5.0 で追加されました。
-
 リクエストの設定
 ----------------
 
@@ -930,7 +951,7 @@ CakePHP は特殊な ``IntegrationTestTrait`` トレイトを提供していま�
 のヘルパーメソッドを使用します。 ``ArticlesController`` が add メソッドを含み、
 その add メソッドに必要な認証を行っていたと仮定すると、次のテストを書くことができます。 ::
 
-    public function testAddUnauthenticatedFails()
+    public function testAddUnauthenticatedFails(): void
     {
         // セッションデータの未設定
         $this->get('/articles/add');
@@ -938,7 +959,7 @@ CakePHP は特殊な ``IntegrationTestTrait`` トレイトを提供していま�
         $this->assertRedirect(['controller' => 'Users', 'action' => 'login']);
     }
 
-    public function testAddAuthenticated()
+    public function testAddAuthenticated(): void
     {
         // セッションデータのセット
         $this->session([
@@ -967,7 +988,7 @@ Basic または Digest 認証をテストする際、自動的に
 環境変数を追加できます。これらの環境変数は、 :ref:`basic-authentication` に概説されている
 認証アダプター内で使用されます。 ::
 
-    public function testBasicAuthentication()
+    public function testBasicAuthentication(): void
     {
         $this->configRequest([
             'environment' => [
@@ -983,7 +1004,7 @@ Basic または Digest 認証をテストする際、自動的に
 OAuth2 のようなその他の認証方法をテストしている場合、Authorization ヘッダーを
 直接セットできます。 ::
 
-    public function testOauthToken()
+    public function testOauthToken(): void
     {
         $this->configRequest([
             'headers' => [
@@ -1004,7 +1025,7 @@ CsrfComponent や SecurityComponent で保護されたアクションのテス�
 SecurityComponent または CsrfComponent のいずれかで保護されたアクションをテストする場合、
 テストがトークンのミスマッチで失敗しないように自動トークン生成を有効にすることができます。 ::
 
-    public function testAdd()
+    public function testAdd(): void
     {
         $this->enableCsrfToken();
         $this->enableSecurityToken();
@@ -1021,8 +1042,10 @@ SecurityComponent または CsrfComponent のいずれかで保護されたア�
         'environment' => ['HTTPS' => 'on']
     ]);
 
-.. versionadded:: 3.1.2
-    ``enableCsrfToken()`` と ``enableSecurityToken()`` メソッドは 3.1.2 で追加されました。
+アクションでアンロックされたフィールドが必要な場合は、
+``setUnlockedFields()``で宣言することができます。 ::
+
+    $this->setUnlockedFields(['dynamic_field']);
 
 PSR-7 ミドルウェアの統合テスト
 ------------------------------
@@ -1032,7 +1055,7 @@ PSR-7 ミドルウェアの統合テスト
 ``App\Application`` クラスの存在を自動検知し、あなたのアプリケーションの統合テストを
 自動的に有効にします。 ``useHttpServer()`` メソッドでこの振舞いを切り替えられます。 ::
 
-    public function setUp()
+    public function setUp(): void
     {
         // PSR-7 統合テストの有効化
         $this->useHttpServer(true);
@@ -1044,7 +1067,7 @@ PSR-7 ミドルウェアの統合テスト
 ``configApplication()`` メソッドを使うことによって、使用するアプリケーションクラス名と
 コンストラクターの引数をカスタマイズすることができます。 ::
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->configApplication('App\App', [CONFIG]);
     }
@@ -1053,17 +1076,14 @@ PSR-7 モードを有効にして、アプリケーションクラスの設定�
 ``IntegrationTestTrait`` に存在する機能は、通常と同様に利用できます。
 
 イベントやルートを含むプラグインを読み込むために :ref:`application-bootstrap` を
-試してみてください。そうすることで、各テストケースごとにイベントやルートが確実に接続されます。
-
-.. versionadded:: 3.3.0
-    PSR-7 ミドルウェアと ``useHttpServer()`` メソッドは、3.3.0 で追加されました。
+試してみてください。そうすることで、各テストケースごとにイベントやルートが接続されます。
+テスト中に手動でプラグインをロードしたい場合は ``loadPlugins()`` メソッドを使うことができます。
 
 暗号化されたクッキーを使用したテスト
 -------------------------------------
 
-コントローラーで :php:class:`Cake\\Controller\\Component\\CookieComponent` を使用している場合、
-あなたのクッキーは、おそらく暗号化されます。3.1.7 では、CakePHP はテストケース内の暗号化された
-クッキーと対話するためのヘルパーメソッドを提供します。 ::
+アプリケーションで :ref:`encrypted-cookie-middleware` を使用している場合、
+テストケースで暗号化クッキーを設定するためのヘルパーメソッドがあります。 ::
 
     // AES とデフォルトキーを使ってクッキーをセット
     $this->cookieEncrypted('my_cookie', '何か秘密の値');
@@ -1073,9 +1093,6 @@ PSR-7 モードを有効にして、アプリケーションクラスの設定�
 
     $this->assertCookieEncrypted('更新された値', 'my_cookie');
 
-.. versionadded:: 3.1.7
-    ``assertCookieEncrypted`` とは ``cookieEncrypted`` は 3.1.7 で追加されました。
-
 フラッシュメッセージのテスト
 ----------------------------
 
@@ -1083,33 +1100,26 @@ PSR-7 モードを有効にして、アプリケーションクラスの設定�
 テスト内で ``enableRetainFlashMessages()`` を使ってセッション内のフラッシュメッセージを保持し、
 アサーションを書くことができます。 ::
 
+    // Enable retention of flash messages instead of consuming them.
     $this->enableRetainFlashMessages();
     $this->get('/bookmarks/delete/9999');
 
     $this->assertSession('ブックマークは存在しません', 'Flash.flash.0.message');
 
-3.7.0 では、フラッシュメッセージ用の追加のテストヘルパーがあります。 ::
-
-    $this->enableRetainFlashMessages();
-    $this->get('/bookmarks/delete/9999');
-
     // 'flash' キー内のフラッシュメッセージをアサート
-    $this->assertFlashMessage('Bookmark deleted');
+    $this->assertFlashMessage('Bookmark deleted', 'flash');
 
     // ２つ目のフラッシュメッセージをアサート
     $this->assertFlashMessageAt(1, 'Bookmark really deleted');
+
+    // 最初の位置の 'auth' キーにフラッシュメッセージをアサート
+    $this->assertFlashMessageAt(0, 'You are not allowed to enter this dungeon!', 'auth');
 
     // フラッシュメッセージがエラーエレメントを使用していることをアサート
     $this->assertFlashElement('Flash/error');
 
     // ２つ目のフラッシュメッセージのエレメントをアサート
     $this->assertFlashElementAt(1, 'Flash/error');
-
-.. versionadded:: 3.4.7
-    ``enableRetainFlashMessages()`` は 3.4.7 で追加されました。
-
-.. versionadded:: 3.7.0
-    フラッシュメッセージアサーションが追加されました。
 
 JSON を返すコントローラーのテスト
 ---------------------------------
@@ -1120,7 +1130,7 @@ JSON を返すコントローラーの簡単な例を示します。 ::
 
     class MarkersController extends AppController
     {
-        public function initialize()
+        public function initialize(): void
         {
             parent::initialize();
             $this->loadComponent('RequestHandler');
@@ -1129,10 +1139,8 @@ JSON を返すコントローラーの簡単な例を示します。 ::
         public function view($id)
         {
             $marker = $this->Markers->get($id);
-            $this->set([
-                '_serialize' => ['marker'],
-                'marker' => $marker,
-            ]);
+            $this->set('marker', $marker);
+            $this->viewBuilder()->setOption('serialize', ['marker']);
         }
     }
 
@@ -1169,7 +1177,7 @@ CakePHP の組込み JsonView で、 ``debug`` が有効になっている場合
 エラー処理ミドルウェアを一時的に無効にして、根本的なエラーを目立たせることができます。
 これをするために ``disableErrorHandlerMiddleware()`` が使用できます。 ::
 
-    public function testGetMissing()
+    public function testGetMissing(): void
     {
         $this->disableErrorHandlerMiddleware();
         $this->get('/markers/not-there');
@@ -1178,8 +1186,6 @@ CakePHP の組込み JsonView で、 ``debug`` が有効になっている場合
 
 上の例では、テストは失敗し、描画されたエラーページがチェックされる代わりに、
 基本的な例外メッセージとスタックトレースが表示されます。
-
-.. versionadded:: 3.5.0
 
 アサーションメソッド
 --------------------
@@ -1211,7 +1217,7 @@ CakePHP の組込み JsonView で、 ``debug`` が有効になっている場合
     // Location ヘッダーの一部をチェック
     $this->assertRedirectContains('/articles/edit/');
 
-    // 3.7.0 で追加
+    // Location ヘッダーが含まれていないことをチェック
     $this->assertRedirectNotContains('/articles/edit/');
 
     // レスポンスが空ではないことをアサート
@@ -1244,8 +1250,9 @@ CakePHP の組込み JsonView で、 ``debug`` が有効になっている場合
 
     // レスポンスヘッダーをアサート
     $this->assertHeader('Content-Type', 'application/json');
+    $this->assertHeaderContains('Content-Type', 'html');
 
-    // 3.7.0 で追加
+    // content-typeのヘッダーにxmlが含まれていないことをアサート
     $this->assertHeaderNotContains('Content-Type', 'xml');
 
     // ビュー変数をアサート
@@ -1279,13 +1286,13 @@ CakePHP の組込み JsonView で、 ``debug`` が有効になっている場合
     {
         use StringCompareTrait;
 
-        public function setUp()
+        public function setUp(): void
         {
             $this->_compareBasePath = APP . 'tests' . DS . 'comparisons' . DS;
             parent::setUp();
         }
 
-        public function testExample()
+        public function testExample(): void
         {
             $result = ...;
             $this->assertSameAsFile('example.php', $result);
@@ -1331,7 +1338,7 @@ CakePHP の組込み JsonView で、 ``debug`` が有効になっている場合
 一般的に、ほとんどのアプリケーションは、直接 HTML コードをテストしません。そのため、多くの場合、
 テストは壊れやすく、メンテナンスが困難になっています。 :php:class:`IntegrationTestTrait` を
 使用して機能テストを書くときに ‘view’ に ``return`` オプションを設定することで、
-レンダリングされたビューの内容を調べることができます。 IntegrationTestTrait を使用して
+レンダリングされたビューの内容を調べることができます。 ``IntegrationTestTrait`` を使用して
 ビューのコンテンツをテストすることは可能ですが、より堅牢でメンテナンスしやすい統合/ビューテストは、
 `Selenium webdriver <http://seleniumhq.org>`_ のようなツールを使うことで実現できます
 
@@ -1357,12 +1364,12 @@ PagematronComponent というコンポーネントがアプリケーションに
             }
         }
 
-        public function startup(Event $event)
+        public function startup(EventInterface $event)
         {
             $this->setController($event->getSubject());
         }
 
-        public function adjust($length = 'short')
+        public function adjust($length = 'short'): void
         {
             switch ($length) {
                 case 'long':
@@ -1395,11 +1402,10 @@ PagematronComponent というコンポーネントがアプリケーションに
 
     class PagematronComponentTest extends TestCase
     {
+        protected $component;
+        protected $controller;
 
-        public $component = null;
-        public $controller = null;
-
-        public function setUp()
+        public function setUp(): void
         {
             parent::setUp();
             // コンポーネントと偽のテストコントローラーのセットアップ
@@ -1415,7 +1421,7 @@ PagematronComponent というコンポーネントがアプリケーションに
             $this->component->startup($event);
         }
 
-        public function testAdjust()
+        public function testAdjust(): void
         {
             // 異なるパラメーター設定で、adjust メソッドをテスト
             $this->component->adjust();
@@ -1428,7 +1434,7 @@ PagematronComponent というコンポーネントがアプリケーションに
             $this->assertEquals(100, $this->controller->paginate['limit']);
         }
 
-        public function tearDown()
+        public function tearDown(): void
         {
             parent::tearDown();
             // 完了後のクリーンアップ
@@ -1476,7 +1482,7 @@ PagematronComponent というコンポーネントがアプリケーションに
         public $helper = null;
 
         // ここでヘルパーをインスタンス化
-        public function setUp()
+        public function setUp(): void
         {
             parent::setUp();
             $View = new View();
@@ -1484,7 +1490,7 @@ PagematronComponent というコンポーネントがアプリケーションに
         }
 
         // usd() 関数をテスト
-        public function testUsd()
+        public function testUsd(): void
         {
             $this->assertEquals('USD 5.30', $this->helper->usd(5.30));
 
@@ -1523,7 +1529,7 @@ Orders を例に詳しく説明します。以下のテーブルを持ってい�
 
     class OrdersTable extends Table
     {
-        public function place($order)
+        public function place($order): bool
         {
             if ($this->save($order)) {
                 // CartsTable へ移されたカートの移動
@@ -1539,14 +1545,14 @@ Orders を例に詳しく説明します。以下のテーブルを持ってい�
 
     class CartsTable extends Table
     {
-        public function implementedEvents()
+        public function implementedEvents(): array
         {
             return [
                 'Model.Order.afterPlace' => 'removeFromCart'
             ];
         }
 
-        public function removeFromCart(Event $event)
+        public function removeFromCart(EventInterface $event): void
         {
             $order = $event->getData('order');
             $this->delete($order->cart_id);
@@ -1570,9 +1576,9 @@ Orders を例に詳しく説明します。以下のテーブルを持ってい�
 
     class OrdersTableTest extends TestCase
     {
-        public $fixtures = ['app.Orders'];
+        protected $fixtures = ['app.Orders'];
 
-        public function setUp()
+        public function setUp(): void
         {
             parent::setUp();
             $this->Orders = TableRegistry::getTableLocator()->get('Orders');
@@ -1580,7 +1586,7 @@ Orders を例に詳しく説明します。以下のテーブルを持ってい�
             $this->Orders->getEventManager()->setEventList(new EventList());
         }
 
-        public function testPlace()
+        public function testPlace(): void
         {
             $order = new Order([
                 'user_id' => 1,
@@ -1600,11 +1606,6 @@ Orders を例に詳しく説明します。以下のテーブルを持ってい�
 
     $this->assertEventFired('My.Global.Event');
     $this->assertEventFiredWith('My.Global.Event', 'user', 1);
-
-.. versionadded:: 3.2.11
-
-    イベントトラッキングと ``assertEventFired()`` と ``assertEventFiredWith`` は
-    追加されました。
 
 メールのテスト
 ==============
@@ -1654,9 +1655,9 @@ Orders を例に詳しく説明します。以下のテーブルを持ってい�
     class BlogPostsTableTest extends TestCase
     {
         // /plugins/Blog/tests/Fixture/ 内のプラグインのフィクスチャーをロード
-        public $fixtures = ['plugin.Blog.BlogPosts'];
+        protected $fixtures = ['plugin.Blog.BlogPosts'];
 
-        public function testSomething()
+        public function testSomething(): void
         {
             // 何らかのテスト
         }
@@ -1664,21 +1665,12 @@ Orders を例に詳しく説明します。以下のテーブルを持ってい�
 
 アプリのテストにおいてプラグインのフィクスチャーを使用したい場合は、 ``$fixtures`` 配列に
 ``plugin.pluginName.fixtureName`` 構文を使用して参照することができます。
-さらに、ベンダーのプラグイン名またはフィクスチャーのディレクトリーを使用する場合は、以下を使用できます:
-``plugin.vendorName/pluginName.folderName/fixtureName`` 。
+さらに、ベンダーのプラグイン名またはフィクスチャーのディレクトリーを使用する場合は、
+``plugin.vendorName/pluginName.folderName/fixtureName`` を使用できます:
 
-フィクスチャーを使用する前に、あなたの ``phpunit.xml`` に、フィクスチャーのリスナーが含まれていることを
-ダブルチェックする必要があります。 ::
-
-    <!-- フィクスチャーのためのリスナーのセットアップ -->
-    <listeners>
-        <listener
-        class="\Cake\TestSuite\Fixture\FixtureInjector">
-            <arguments>
-                <object class="\Cake\TestSuite\Fixture\FixtureManager" />
-            </arguments>
-        </listener>
-    </listeners>
+フィクスチャーを使用する前に、 ``phpunit.xml`` に
+:ref:`fixture listener <fixture-phpunit-configuration>`
+が設定されていることを確認してください。
 
 また、フィクスチャーがロード可能であることを確認する必要があります。次のように **composer.json**
 ファイル内に存在することを確認してください。 ::
@@ -1705,7 +1697,7 @@ Bake でのテストの生成
 
     bin/cake bake test <type> <name>
 
-``<type>`` のいずれかである必要があります。
+``<type>`` は以下のいずれかである必要があります。
 
 #. Entity
 #. Table
@@ -1714,9 +1706,14 @@ Bake でのテストの生成
 #. Behavior
 #. Helper
 #. Shell
+#. Task
+#. ShellHelper
 #. Cell
+#. Form
+#. Mailer
+#. Command
 
-一方、 ``<name>`` は、テストの雛形を作成したいオブジェクトの名前です。
+``<name>`` は作成したいテストの雛形のオブジェクトの名前です。
 
 Jenkins によるインテグレーション
 ================================
