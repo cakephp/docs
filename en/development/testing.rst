@@ -514,7 +514,6 @@ type
     - ``datetimefractional``: maps to ``DATETIME(6)`` or ``TIMESTAMP``
     - ``timestamp``: maps to ``TIMESTAMP``
     - ``timestampfractional``: maps to ``TIMESTAMP(6)`` or ``TIMESTAMP``
-    - ``timestamp``: maps to ``TIMESTAMP``
     - ``time``: maps to ``TIME``
     - ``date``: maps to ``DATE``
     - ``binary``: maps to ``BLOB``
