@@ -260,7 +260,7 @@ configuration in AppController::
 .. note::
 
     If you don't have a user with a hashed password yet, comment the
-    ``loadComponent('Authentication.Authentication')`` line in your AppController
+    ``$this->loadComponent('Authentication.Authentication')`` line in your AppController and all other lines where         Authentication is used.
     and go to ``/users/add`` to create a new user picking email and password.
     Make sure to uncomment the lines we just temporarily commented!
 
