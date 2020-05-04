@@ -48,7 +48,7 @@ a following section. The built-in providers map to the following values of
   `ArrayContext <https://api.cakephp.org/3.x/class-Cake.View.Form.ArrayContext.html>`_
   which allows you to create simple data structures to build forms against.
 
-* ``null`` and ``false`` will map to
+* ``null`` will map to
   `NullContext <https://api.cakephp.org/3.x/class-Cake.View.Form.NullContext.html>`_;
   this context class
   simply satisfies the interface FormHelper requires. This context is useful if
