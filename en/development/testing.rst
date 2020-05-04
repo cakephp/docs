@@ -23,7 +23,7 @@ To install PHPUnit with Composer:
 
 .. code-block:: bash
 
-    $ php composer.phar require --dev phpunit/phpunit:"^7.0"
+    $ php composer.phar require --dev phpunit/phpunit:"^8.5"
 
 This will add the dependency to the ``require-dev`` section of your
 ``composer.json``, and then install PHPUnit along with any dependencies.
