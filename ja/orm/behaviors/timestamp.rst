@@ -16,7 +16,7 @@ Timestamp ビヘイビアーは、モデルのイベントのたびにテーブ�
 
     class ArticlesTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->addBehavior('Timestamp');
         }
@@ -34,7 +34,7 @@ Timestamp ビヘイビアーは、モデルのイベントのたびにテーブ�
 
     class OrdersTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->addBehavior('Timestamp', [
                 'events' => [
@@ -76,7 +76,4 @@ Entity を保存後、フィールドが更新されます。
 
     // modified カラムを dirty としてマークして、更新時に現在の値がセットされるようにします。
     $order->setDirty('modified', true);
-
-    // 3.4.0 より前
-    $order->dirty('modified', true);
 
