@@ -552,8 +552,8 @@ following::
     :php:meth:`~Cake\\ORM\\Table::newEntity()`,
     :php:meth:`~Cake\\ORM\\Table::newEntities()`,
     :php:meth:`~Cake\\ORM\\Table::patchEntity()`,
-    :php:meth:`~Cake\\ORM\\Table::patchEntities()` or
-    :php:meth:`~Cake\\ORM\\Table::save()` as they are designed for that.
+    :php:meth:`~Cake\\ORM\\Table::patchEntities()`
+    as they are designed for that.
 
 Validating Entities
 ===================
