@@ -592,7 +592,7 @@ Vous pouvez passer des données dans un element grâce au deuxième argument::
         "helptext" => "Oh, this text is very helpful."
     ]);
 
-Dans le fichier element, toutes les variables passés sont disponibles comme
+Dans le fichier element, toutes les variables passées sont disponibles comme
 des membres du paramètre du tableau (de la même manière que
 :php:meth:`Controller::set()` fonctionne dans le controller avec les fichiers
 de template). Dans l'exemple ci-dessus, le fichier
