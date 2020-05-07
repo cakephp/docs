@@ -193,7 +193,7 @@ change where ``FormHelper`` reads input data from::
         ->setValueSources(['query', 'context'])
         ->create($articles, ['type' => 'get']);
 
-When input data have to be processed by the entity, i.e. marshal transformations, table
+When input data has to be processed by the entity, i.e. marshal transformations, table
 query result or entity computations, and displayed after one or multiple form submissions
 where request data is retained, you need to put ``context`` first::
 
