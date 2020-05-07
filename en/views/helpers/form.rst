@@ -190,8 +190,8 @@ change where ``FormHelper`` reads input data from::
 
     // Same effect:
     echo $this->Form
-        ->create($articles, ['type' => 'get'])
-        ->setValueSources(['query', 'context']);
+        ->setValueSources(['query', 'context'])
+        ->create($articles, ['type' => 'get']);
 
 When input data have to be processed by the entity, i.e. marshal transformations, table
 query result or entity computations, and displayed after one or multiple form submissions
