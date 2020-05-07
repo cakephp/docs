@@ -81,6 +81,11 @@ ORM
 
 * BelongsToMany associations now respect the bindingKey set in the junction table's BelongsTo association.
   Previously, the target table's primary key was always used instead.
+* ``Cake\ORM\AssociationCollection`` no longer lower cases association names
+  to generate keys for the object map it maintains internally. One should
+  use the association name with same casing in calls to methods like
+  ``AssociationCollection::get()``, ``Query::contain()`` etc. as they have used 
+  when declaring the association.
 
 TestSuite
 ---------
