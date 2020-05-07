@@ -165,7 +165,7 @@ Valid values:
 .. _form-values-from-query-string:
 
 Getting form values from other values sources
------------------------------------------
+-----------------------------------------------
 
 A FormHelper's values sources define where its rendered elements, such as
 input-tags, receive their values from.
