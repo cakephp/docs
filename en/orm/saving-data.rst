@@ -543,6 +543,7 @@ present in the entity, you can collect the primary keys and execute a batch
 delete for those not in the list::
 
     // In a controller.
+    use Cake\Collection\Collection;
 
     $comments = TableRegistry::getTableLocator()->get('Comments');
     $present = (new Collection($entity->comments))->extract('id')->filter()->toList();
