@@ -508,6 +508,9 @@ in your configuration::
 
 .. note::
     `Gmail SMTP settings <https://support.google.com/a/answer/176600?hl=en>`__.
+        
+.. note::
+    Virus-scanners can disrupt sending mails through Gmail (for instance, you have to disable scanning outbound mail in 'AntiVirus free' (Windows10) in order to get this to work).    
 
 .. note::
     To use SSL + SMTP, you will need to have the SSL configured in your PHP
