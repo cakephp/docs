@@ -127,6 +127,8 @@ Database
 * Postgres and SQLServer now support ``HAVING`` conditions on aggregate
   functions with aliases.
 * ``FunctionsBuilder::cast()`` was added.
+* Common Table Expression (CTE) support was added. CTEs can be attached to a query
+  using `Query::with()`.
 
 Error
 -----
