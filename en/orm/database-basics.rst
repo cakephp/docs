@@ -496,11 +496,11 @@ CakePHP's database layer will automatically convert our JSON data when creating
 queries. You can use the custom types you've created by mapping the types in
 your Table's :ref:`_initializeSchema() method <saving-complex-types>`::
 
-    use Cake\Database\Schema\TableSchema;
+    use Cake\Database\Schema\TableSchemaInterface;
 
     class WidgetsTable extends Table
     {
-        protected function _initializeSchema(TableSchema $schema)
+        protected function _initializeSchema(TableSchemaInterface $schema): TableSchemaInterface
         {
             $schema->setColumnType('widget_prefs', 'json');
             return $schema;
