@@ -117,7 +117,7 @@ BreadcrumbsHelper は内部で ``StringTemplateTrait`` を使用しています�
         'separator' => '<li{{attrs}}><span{{innerAttrs}}>{{separator}}</span></li>'
     ]
 
-``StringTemplateTrait`` の ``template()`` メソッドを使用すると簡単にカスタマイズすることができます。 ::
+``StringTemplateTrait`` の ``setTemplates()`` メソッドを使用すると簡単にカスタマイズすることができます。 ::
 
     $this->Breadcrumbs->setTemplates([
         'wrapper' => '<nav class="breadcrumbs"><ul{{attrs}}>{{content}}</ul></nav>',
