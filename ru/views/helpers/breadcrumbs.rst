@@ -127,7 +127,7 @@
         'separator' => '<li{{attrs}}><span{{innerAttrs}}>{{separator}}</span></li>'
     ]
 
-Вы можете с легкостью изменять их, используя метод ``templates()``, из
+Вы можете с легкостью изменять их, используя метод ``setTemplates()``, из
 ``StringTemplateTrait``::
 
     $this->Breadcrumbs->setTemplates([

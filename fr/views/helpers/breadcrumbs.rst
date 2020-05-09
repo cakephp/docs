@@ -131,7 +131,7 @@ Quatre templates sont inclus. Voici leur déclaration par défaut::
         'separator' => '<li{{attrs}}><span{{innerAttrs}}>{{separator}}</span></li>'
     ]
 
-Vous pouvez facilement personnaliser ces templates via la méthode ``templates()``
+Vous pouvez facilement personnaliser ces templates via la méthode ``setTemplates()``
 du ``StringTemplateTrait``::
 
     $this->Breadcrumbs->setTemplates([
