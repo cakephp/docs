@@ -4,6 +4,7 @@
 CakePHP 4.1 is an API compatible upgrade from 4.0. This page outlines the
 deprecations and features added in 4.1.
 
+
 Deprecations
 ============
 
@@ -56,6 +57,7 @@ View
 * ``Form/ContextInterface::primaryKey()`` was deprecated. Use ``getPrimaryKey()``
   instead.
 
+
 Behavior Changes
 ================
 
@@ -84,7 +86,7 @@ ORM
 * ``Cake\ORM\AssociationCollection`` no longer lower cases association names
   to generate keys for the object map it maintains internally. One should
   use the association name with same casing in calls to methods like
-  ``AssociationCollection::get()``, ``Query::contain()`` etc. as they have used 
+  ``AssociationCollection::get()``, ``Query::contain()`` etc. as they have used
   when declaring the association.
 
 TestSuite
@@ -116,6 +118,10 @@ Console
 * When the ``NO_COLOR`` environment variable is set all output will not include
   ANSI escape codes for colours. See `no-color.org <https://no-color.org/>`__
   for more information.
+* Commands now have the same possibility to disable interactive mode Shells had using
+  ``$io->setInteractivate(false)``.
+  Here prompting will be avoided where applicable and the defaults used.
+  Using `--quiet`/`-q` can now also invoke this directly for all existing commands.
 
 Database
 --------
