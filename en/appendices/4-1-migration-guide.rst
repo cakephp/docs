@@ -121,7 +121,7 @@ Console
 * Commands now have the same possibility to disable interactive mode Shells had using
   ``$io->setInteractivate(false)``.
   Here prompting will be avoided where applicable and the defaults used.
-  Using `--quiet`/`-q` can now also invoke this directly for all existing commands.
+  Using ``--quiet``/``-q`` can now also invoke this directly for all existing commands.
 
 Database
 --------
