@@ -156,7 +156,7 @@ Valid values:
   ``formStart`` template.
 
 * ``autoSetCustomValidity`` - Set to ``true`` to use custom required and notBlank
-  validation messages in the control's HTML5 validity message. Default is ``false``.
+  validation messages in the control's HTML5 validity message. Default is ``true``.
 
 .. tip::
 
