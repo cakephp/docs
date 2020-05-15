@@ -558,7 +558,22 @@ to ``PaginatorHelper``, or use ``options()`` to set the default model::
     echo $this->Paginator->sort('title');
 
 By using the ``model`` option, ``PaginatorHelper`` will automatically use the
-``scope`` defined in when the query was paginated.
+``scope`` defined in when the query was paginated. To set additional URL
+parameters for multiple pagination you can include the scope names in
+``options()``::
+
+    $this->Paginator->options([
+        'url' => [
+            // Additional URL parameters for the 'articles' scope
+            'articles' => [
+                '?' => ['articles' => 'yes']
+            ],
+            // Additional URL parameters for the 'comments' scope
+            'comments' => [
+                'articleId' => 1234,
+            ]
+        ]
+    ]);
 
 .. meta::
     :title lang=en: PaginatorHelper
