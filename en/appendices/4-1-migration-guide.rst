@@ -38,6 +38,8 @@ Http
 * ``ServerRequest::input()`` is deprecated. Use ``(string)$request->getBody()``
    to get the raw PHP input as string; use ``BodyParserMiddleware`` to parse the
    request body so that it's available as array/object through ``$request->getParsedBody()``
+* The ``httpOnly`` option for ``CsrfProtectionMiddleware`` is now ``httponly``
+  to improve consistency with cookie creation elsewhere in the framework.
 
 ORM
 ---
@@ -166,6 +168,7 @@ Http
   the ``RedirectException`` in the Routing package and can be raised anywhere in
   your application to signal to the error handling middleware to create
   a redirect response.
+* ``CsrfProtectionMiddleware`` can now create cookies with the ``samesite`` attribute set.
 
 Routing
 -------
