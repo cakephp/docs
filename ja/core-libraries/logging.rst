@@ -26,7 +26,7 @@ View 等) であれば、あなたはデータを記録することができま�
     use Cake\Log\Log;
 
     // 短いクラス名
-    Log::config('debug', [
+    Log::setConfig('debug', [
         'className' => 'File',
         'path' => LOGS,
         'levels' => ['notice', 'info', 'debug'],
@@ -34,7 +34,7 @@ View 等) であれば、あなたはデータを記録することができま�
     ]);
 
     // 完全な名前空間の名前
-    Log::config('error', [
+    Log::setConfig('error', [
         'className' => 'Cake\Log\Engine\FileLog',
         'path' => LOGS,
         'levels' => ['warning', 'error', 'critical', 'alert', 'emergency'],
@@ -49,20 +49,20 @@ debug/notice/info のログをより深刻なエラーから分離するのが�
 色々なレベルに応じた情報と意味の一覧は :ref:`logging-levels` を参照してください。
 
 一度設定を作成した後、それを変更することはできません。 :php:meth:`Cake\\Log\\Log::drop()` と
-:php:meth:`Cake\\Log\\Log::config()` を使って、設定を削除、再作成すべきです。
+:php:meth:`Cake\\Log\\Log::setConfig()` を使って、設定を削除、再作成すべきです。
 
 それらもまた、クロージャーを与えることによりロガーを作成することが可能です。
 クロージャーこれはロガーオブジェクトがどのように構築されるかを完全に制御する必要がある時に役立ちます。
 クロージャーは構築されたロガーのインスタンスを返さなければなりません。例えば::
 
-    Log::config('special', function () {
+    Log::setConfig('special', function () {
         return new \Cake\Log\Engine\FileLog(['path' => LOGS, 'file' => 'log']);
     });
 
 設定オプションは :term:`DSN` の文字列で渡すことも可能です。これは環境変数や :term:`PaaS`
 プロバイダーを扱っている時に役立ちます。 ::
 
-    Log::config('error', [
+    Log::setConfig('error', [
         'url' => 'file:///?levels[]=warning&levels[]=error&file=error',
     ]);
 
@@ -77,18 +77,18 @@ debug/notice/info のログをより深刻なエラーから分離するのが�
 例えば ``DatabaseLog`` という名前のデータベースロガーがあったとします。
 アプリケーションの一部として **src/Log/Engine/DatabaseLog.php** に置かれます。
 プラグインの一部として **plugins/LoggingPack/src/Log/Engine/DatabaseLog.php** に置かれます。
-また、ログアダプターの設定は :php:meth:`Cake\\Log\\Log::config()` を使う必要があります。
+また、ログアダプターの設定は :php:meth:`Cake\\Log\\Log::setConfig()` を使う必要があります。
 例えば DatabaseLog の設定はこのようになります。 ::
 
     // src/Log 用
-    Log::config('otherFile', [
+    Log::setConfig('otherFile', [
         'className' => 'Database',
         'model' => 'LogEntry',
         // ...
     ]);
 
     // LoggingPack というプラグイン用
-    Log::config('otherFile', [
+    Log::setConfig('otherFile', [
         'className' => 'LoggingPack.Database',
         'model' => 'LogEntry',
         // ...
@@ -179,7 +179,7 @@ FileLog アダプターの利用
 ロガーの設定により、追加/代替の FileLog の場所を設定できます。FileLog は、独自のパスを使用するために
 ``path`` を設定できます。 ::
 
-    Log::config('custom_path', [
+    Log::setConfig('custom_path', [
         'className' => 'File',
         'path' => '/path/to/custom/place/'
     ]);
@@ -201,7 +201,7 @@ syslog を使うためには、デフォルトの FileLog エンジンを使う�
 ロギングに使用するエンジンとして Syslog を指定する必要があります。下記の設定は、デフォルトのロガーを
 ``Syslog`` に置き換えるものです。これは、 **bootstrap.php** ファイルで設定します。 ::
 
-    Log::config('default', [
+    Log::setConfig('default', [
         'engine' => 'Syslog'
     ]);
 
@@ -277,7 +277,7 @@ CakePHP は、このコンセプトをロギングスコープで実現します
 
     // すべてのレベルを受け取るように、 logs/shops.log を設定。
     // スコープは `orders` と `payments` のみ
-    Log::config('shops', [
+    Log::setConfig('shops', [
         'className' => 'File',
         'path' => LOGS,
         'levels' => [],
@@ -287,7 +287,7 @@ CakePHP は、このコンセプトをロギングスコープで実現します
 
     // すべてのレベルを受け取るように、 logs/payments.log を設定。
     // スコープは `payments` のみ
-    Log::config('payments', [
+    Log::setConfig('payments', [
         'className' => 'File',
         'path' => LOGS,
         'levels' => [],
@@ -318,7 +318,7 @@ Log API
 
     ログを書き込むためのシンプルなクラス。
 
-.. php:staticmethod:: config($key, $config)
+.. php:staticmethod:: setConfig($key, $config)
 
     :param string $name: 接続されるロガーの名前で、後でロガーを削除するために使用されます。
     :param array $config: ロガーの設定情報とコンストラクター引数の配列です。
@@ -369,8 +369,7 @@ Log API
 
 .. php:method:: log($msg, $level = LOG_ERR)
 
-    ログにメッセージを記録します。デフォルトメッセージは、記録されたエラーメッセージです。
-    もし、 ``$msg`` が文字列でないとき、記録される前に ``print_r`` で変換されます。
+    ログにメッセージを記録します。デフォルトではエラーメッセージを記録します。
 
 Monolog を使用する
 ==================
@@ -379,14 +378,14 @@ Monolog は、PHP で人気のロガーです。CakePHP のロガーと同じイ
 なので、アプリケーションでデフォルトのロガーとして使うことが簡単です。
 
 Composer を使って Monolog をインストールしたら、
-``Log::config()`` メソッドを使ってロガーを設定してください。 ::
+``Log::setConfig()`` メソッドを使ってロガーを設定してください。 ::
 
     // config/bootstrap.php
 
     use Monolog\Logger;
     use Monolog\Handler\StreamHandler;
 
-    Log::config('default', function () {
+    Log::setConfig('default', function () {
         $log = new Logger('app');
         $log->pushHandler(new StreamHandler('path/to/your/combined.log'));
         return $log;
@@ -403,7 +402,7 @@ Composer を使って Monolog をインストールしたら、
     use Monolog\Logger;
     use Monolog\Handler\StreamHandler;
 
-    Log::config('default', function () {
+    Log::setConfig('default', function () {
         $log = new Logger('cli');
         $log->pushHandler(new StreamHandler('path/to/your/combined-cli.log'));
         return $log;

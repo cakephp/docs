@@ -49,7 +49,7 @@ a following section. The built-in providers map to the following values of
   `ArrayContext <https://github.com/cakephp/cakephp/tree/master/src/View/Form/ArrayContext.php>`_
   which allows you to create simple data structures to build forms against.
 
-* ``null`` and ``false`` will map to
+* ``null`` will map to
   `NullContext <https://github.com/cakephp/cakephp/tree/master/src/View/Form/NullContext.php>`_;
   this context class
   simply satisfies the interface FormHelper requires. This context is useful if
@@ -154,7 +154,7 @@ Valid values:
   ``formStart`` template.
 
 * ``autoSetCustomValidity`` - Set to ``true`` to use custom required and notBlank
-  validation messages in the control's HTML5 validity message. Default is ``false``.
+  validation messages in the control's HTML5 validity message. Default is ``true``.
 
 .. tip::
 

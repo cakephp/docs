@@ -201,7 +201,7 @@ containing data related to the validation process:
 If you need to pass additional data to your validation methods such as the
 current user's id, you can use a custom dynamic provider from your controller. ::
 
-    $this->Examples->validator('default')->provider('passed', [
+    $this->Examples->getValidator('default')->provider('passed', [
         'count' => $countFromController,
         'userid' => $this->Auth->user('id')
     ]);
@@ -552,16 +552,17 @@ following::
     :php:meth:`~Cake\\ORM\\Table::newEntity()`,
     :php:meth:`~Cake\\ORM\\Table::newEntities()`,
     :php:meth:`~Cake\\ORM\\Table::patchEntity()`,
-    :php:meth:`~Cake\\ORM\\Table::patchEntities()` or
-    :php:meth:`~Cake\\ORM\\Table::save()` as they are designed for that.
+    :php:meth:`~Cake\\ORM\\Table::patchEntities()`
+    as they are designed for that.
 
-Validating Entities
-===================
+Validating Entity Data
+======================
 
-While entities are validated as they are saved, you may also want to validate
-entities before attempting to do any saving. Validating entities before
-saving is done automatically when using the ``newEntity()``, ``newEntities()``,
-``patchEntity()`` or ``patchEntities()``::
+Validation is meant for checking request data coming from forms or other user 
+interfaces used to populate the entities.
+
+The request data is validated automatically when using the ``newEntity()``, 
+``newEntities()``, ``patchEntity()`` or ``patchEntities()`` methods of ``Table`` class::
 
     // In the ArticlesController class
     $article = $this->Articles->newEntity($this->request->getData());
@@ -569,7 +570,7 @@ saving is done automatically when using the ``newEntity()``, ``newEntities()``,
         // Do work to show error messages.
     }
 
-Similarly, when you need to pre-validate multiple entities at a time, you can
+Similarly, when you need to validate multiple entities at a time, you can
 use the ``newEntities()`` method::
 
     // In the ArticlesController class
@@ -593,12 +594,10 @@ validation sets to apply using the ``options`` parameter::
       ]
     ]);
 
-Validation is commonly used for user-facing forms or interfaces, and thus it is
-not limited to only validating columns in the table schema. However,
-maintaining integrity of data regardless where it came from is important. To
-solve this problem CakePHP offers a second level of validation which is called
-"application rules". You can read more about them in the
-:ref:`Applying Application Rules <application-rules>` section.
+Apart from validating user provided data maintaining integrity of data regardless 
+where it came from is important. To solve this problem CakePHP offers a second 
+level of validation which is called "application rules". You can read more about 
+them in the :ref:`Applying Application Rules <application-rules>` section.
 
 Core Validation Rules
 =====================

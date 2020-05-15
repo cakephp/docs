@@ -554,7 +554,7 @@ You must implement the method ``send(Mailer $mailer)`` with your custom logic.
 Sending emails without using Mailer
 ===================================
 
-The ``Mailer`` is a higer level abstraction class which acts as a bridge between
+The ``Mailer`` is a higher level abstraction class which acts as a bridge between
 the ``Cake\Mailer\Message``, ``Cake\Mailer\Renderer`` and ``Cake\Mailer\\AbstractTransport``
 classes to make email configuration and delivery easy.
 

@@ -446,11 +446,11 @@ using :ref:`a validator <validating-request-data>`::
     public function validationDefault(Validator $validator): Validator
     {
         $validator
-            ->allowEmptyString('title', false)
+            ->notEmptyString('title')
             ->minLength('title', 10)
             ->maxLength('title', 255)
 
-            ->allowEmptyString('body', false)
+            ->notEmptyString('body')
             ->minLength('body', 10);
 
         return $validator;
