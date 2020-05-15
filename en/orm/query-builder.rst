@@ -363,6 +363,21 @@ A number of commonly used functions can be created with the ``func()`` method:
 ``dayOfWeek()``
     Returns a FunctionExpression representing a call to SQL WEEKDAY function.
 
+Window Functions
+----------------
+
+``rowNumber()``
+    Return an Aggregate expression for the ``ROW_NUMBER()`` SQL function.
+``lag()``
+    Return an Aggregate expression for the ``LAG()`` SQL function.
+``lead()``
+    Return an Aggregate expression for the ``LEAD()`` SQL function.
+``lead()``
+    Return an Aggregate expression for the ``LEAD()`` SQL function.
+
+.. versionadded:: 4.1.0
+    Window functions were added in 4.1.0
+
 When providing arguments for SQL functions, there are two kinds of parameters
 you can use, literal arguments and bound parameters. Identifier/Literal parameters allow
 you to reference columns or other SQL literals. Bound parameters can be used to
@@ -1477,6 +1492,93 @@ operations. You can use the ``epilog()`` method for this::
 
 The ``epilog()`` method allows you to append raw SQL to the end of queries. You
 should never put raw user data into ``epilog()``.
+
+Window Functions
+----------------
+
+Window functions allow you to perform calculations using rows related to the
+current row. Often these rows are adjacent to the current row. A common use case
+is to calculate running totals or include aggregations on slices of the results. 
+For example if we wanted to find the date of the earliest and latest comment on
+each article we could use window functions::
+
+    $query = $articles->find();
+    $query->select([
+        'Articles.id',
+        'Articles.title',
+        'Articles.user_id'
+        'oldest_comment' => $query->func()
+            ->min('Comments.created')
+            ->partition('Comments.article_id'),
+        'latest_comment' => $query->func()
+            ->max('Comments.created')
+            ->partition('Comments.article_id'),
+    ])
+    ->innerJoinWith('Comments');
+
+The above would generate SQL similar to:
+
+.. code-block:: sql
+
+    SELECT
+    Articles.id,
+    Articles.title,
+    Articles.user_id
+    MIN(Comments.created) OVER(PARTITION BY Comments.article_id) AS oldest_comment,
+    MAX(Comments.created) OVER(PARTITION BY Comments.article_id) AS latest_comment,
+    FROM articles AS Articles
+    INNER JOIN comments AS Comments
+
+Windows can be applied to the following aggregate functions:
+
+- ``count()``
+- ``min()``
+- ``avg()``
+- ``max()``
+- ``lead()``
+- ``lag()``
+- ``rowNumber()``
+
+After creating one of the above expressions you can define the window shape in
+one of several ways:
+
+- ``order($fields)`` The fields to order the window by.
+- ``partition($expressions)`` Add one or more partitions to the window based on column
+  names.
+- ``rows($start, $end)`` Define a range of rows that precede and/or follow the
+  current row that should be included in the aggregate function.
+- ``groups($start, $end)`` Define a range of 'peer rows' that precede and/or follow
+  the current group that should be included in the aggregate function. Peer
+  rows are those that contain the same value for a window's ``ORDER BY`` clause.
+- ``excludeCurrent()`` Exclude the current row from the aggregate.
+- ``excludeGroup()`` Exclude the current row and its peers from the aggregate.
+
+If you need to re-use the same window expression multiple times you can create
+named windows using the ``window()`` method::
+
+    $query = $articles->find();
+
+    // Define a named window
+    $query->window('related_article', function ($window, $query) {
+        $window->partition('Comments.article_id');
+
+        return $window;
+    });
+
+    $query->select([
+        'Articles.id',
+        'Articles.title',
+        'Articles.user_id'
+        'oldest_comment' => $query->func()
+            ->min('Comments.created')
+            ->over('related_article'),
+        'latest_comment' => $query->func()
+            ->max('Comments.created')
+            ->over('related_article'),
+    ]);
+
+.. versionadded:: 4.1.0
+    Window function support was added in 4.1.0
 
 Executing Complex Queries
 -------------------------
