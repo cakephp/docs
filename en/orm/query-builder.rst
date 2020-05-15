@@ -1535,10 +1535,10 @@ that cake abstracts with a wrapper in ``FunctionsBuilder`` will return an ``Aggr
 which lets you attach window expressions. You can create custom aggregate functions
 through ``FunctionsBuilder::aggregate()``.
 
-After creating an ``AggregateExpression``, you can configure the window expression with common
-helpers like:
+These are the most commonly supported window features. Most features are provided
+by ``AggregateExpresion``, but make sure you follow your database documentation on use and restrictions.
 
-- ``order($fields)`` This orders the aggregate group the same as a query ORDER BY.
+- ``order($fields)`` Order the aggregate group the same as a query ORDER BY.
 - ``partition($expressions)`` Add one or more partitions to the window based on column
   names.
 - ``rows($start, $end)`` Define a offset of rows that precede and/or follow the
