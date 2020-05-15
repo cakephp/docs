@@ -333,7 +333,7 @@ portable::
     $query = $articles->find();
     $query->select(['count' => $query->func()->count('*')]);
 
-A number of commonly used functions can be created with the ``func()`` method:
+You can access existing wrappers for several SQL functions through ``Query::func()``:
 
 ``rand()``
     Generate a random value between 0 and 1 via SQL.
@@ -366,14 +366,16 @@ A number of commonly used functions can be created with the ``func()`` method:
 Window Functions
 ----------------
 
+These window-only functions contain a window expression by default:
+
 ``rowNumber()``
-    Return an Aggregate expression for the ``ROW_NUMBER()`` SQL function.
+    Returns an Aggregate expression for the ``ROW_NUMBER()`` SQL function.
 ``lag()``
-    Return an Aggregate expression for the ``LAG()`` SQL function.
+    Returns an Aggregate expression for the ``LAG()`` SQL function.
 ``lead()``
-    Return an Aggregate expression for the ``LEAD()`` SQL function.
+    Returns an Aggregate expression for the ``LEAD()`` SQL function.
 ``lead()``
-    Return an Aggregate expression for the ``LEAD()`` SQL function.
+    Returns an Aggregate expression for the ``LEAD()`` SQL function.
 
 .. versionadded:: 4.1.0
     Window functions were added in 4.1.0
@@ -1497,9 +1499,8 @@ Window Functions
 ----------------
 
 Window functions allow you to perform calculations using rows related to the
-current row. Often these rows are adjacent to the current row. A common use case
-is to calculate running totals or include aggregations on slices of the results. 
-For example if we wanted to find the date of the earliest and latest comment on
+current row. They are commonly used to calculate totals or offsets on partial sets of rows
+in the query. For example if we wanted to find the date of the earliest and latest comment on
 each article we could use window functions::
 
     $query = $articles->find();
@@ -1521,37 +1522,30 @@ The above would generate SQL similar to:
 .. code-block:: sql
 
     SELECT
-    Articles.id,
-    Articles.title,
-    Articles.user_id
-    MIN(Comments.created) OVER(PARTITION BY Comments.article_id) AS oldest_comment,
-    MAX(Comments.created) OVER(PARTITION BY Comments.article_id) AS latest_comment,
+        Articles.id,
+        Articles.title,
+        Articles.user_id
+        MIN(Comments.created) OVER (PARTITION BY Comments.article_id) AS oldest_comment,
+        MAX(Comments.created) OVER (PARTITION BY Comments.article_id) AS latest_comment,
     FROM articles AS Articles
     INNER JOIN comments AS Comments
 
-Windows can be applied to the following aggregate functions:
+Window expressions can be applied to most aggregate functions. Any aggregate function
+that cake abstracts with a wrapper in ``FunctionsBuilder`` will return an ``AggregateExpression``
+which lets you attach window expressions. You can create custom aggregate functions
+through ``FunctionsBuilder::aggregate()``.
 
-- ``count()``
-- ``min()``
-- ``avg()``
-- ``max()``
-- ``lead()``
-- ``lag()``
-- ``rowNumber()``
+After creating an ``AggregateExpression``, you can configure the window expression with common
+helpers like:
 
-After creating one of the above expressions you can define the window shape in
-one of several ways:
-
-- ``order($fields)`` The fields to order the window by.
+- ``order($fields)`` This orders the aggregate group the same as a query ORDER BY.
 - ``partition($expressions)`` Add one or more partitions to the window based on column
   names.
-- ``rows($start, $end)`` Define a range of rows that precede and/or follow the
+- ``rows($start, $end)`` Define a offset of rows that precede and/or follow the
   current row that should be included in the aggregate function.
-- ``groups($start, $end)`` Define a range of 'peer rows' that precede and/or follow
-  the current group that should be included in the aggregate function. Peer
-  rows are those that contain the same value for a window's ``ORDER BY`` clause.
-- ``excludeCurrent()`` Exclude the current row from the aggregate.
-- ``excludeGroup()`` Exclude the current row and its peers from the aggregate.
+- ``range($start, $end)`` Define a range of row values that precede and/or follow
+  the current row that should be included in the aggregate function. This
+  evaluates values based on the ``order()`` field.
 
 If you need to re-use the same window expression multiple times you can create
 named windows using the ``window()`` method::
