@@ -158,6 +158,12 @@ Error
 * ``ErrorLoggerInterface`` was added to formalize the interface required for
   custom error loggers.
 
+Form
+----
+
+* ``Form::set()`` was added. This method lets you add additional data to the
+  form object similar to how ``View::set()`` or ``Controller::set()`` works.
+
 Http
 ----
 
