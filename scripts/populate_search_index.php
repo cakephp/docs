@@ -8,7 +8,7 @@
 
 // Elastic search config
 define('ES_DEFAULT_HOST', 'https://ci.cakephp.org:9200');
-define('ES_INDEX', 'cake-docs-40');
+define('ES_INDEX', 'cake-docs-4next');
 
 // file exclusion patterns
 const FILE_EXCLUSIONS = [
