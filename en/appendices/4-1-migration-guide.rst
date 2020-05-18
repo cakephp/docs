@@ -201,6 +201,8 @@ ORM
 
 * The ORM now triggers an ``Model.afterMarshal`` event which is triggered after
   each entity is marshaled from request data.
+* You can use the ``locale`` finder option to modify the locale of a single find
+  call when using the ``TranslateBehavior``.
 
 TestSuite
 ---------

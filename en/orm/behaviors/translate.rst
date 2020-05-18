@@ -21,7 +21,6 @@ The behavior offers two strategies for how the translations are stored.
 1. Eav Strategy: This strategy uses a ``i18n`` table where it stores the
    translation for each of the fields of any given Table object that it's bound to.
    This is currently the default strategy used by the behavior.
-
 2. Shadow table Strategy: This strategy use a separate "shadow table" for each
    Table object to store translation of all translated fields of that table.
 
@@ -137,7 +136,7 @@ config of the behavior::
             ]);
         }
     }
-    
+
 
 Quick tour
 ==========
@@ -242,6 +241,12 @@ use TranslateBehavior with ``find('list')``::
 
     // Data will contain
     [1 => 'Mi primer artículo', 2 => 'El segundo artículo', 15 => 'Otro articulo' ...]
+
+    // Change the locale to french for a single find call
+    $data = $this->Articles->find('list', ['locale' => 'fr'])->toArray();
+
+.. versionadded:: 4.1.0
+    The ``locale`` option was added in 4.1.0
 
 Retrieve All Translations For An Entity
 ---------------------------------------
