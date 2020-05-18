@@ -33,6 +33,6 @@ Introduction à toutes les parties clés de CakePHP:
 * :doc:`/core-libraries/validation`
 * :doc:`/development/testing`
 * :doc:`/deployment`
-* :doc:`/console-and-shells`
+* :doc:`/console-commands`
 * :doc:`/contributing`
 * :doc:`/tutorials-and-examples`

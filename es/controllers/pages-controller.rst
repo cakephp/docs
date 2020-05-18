@@ -1,5 +1,5 @@
 El controlador de Páginas
-####################
+#########################
 
 El esqueleto oficial de CakePHP incluye un controlador por defecto **PagesController.php**.
 Este es un controlador simple y opcional que se usa para servir contenido estático.

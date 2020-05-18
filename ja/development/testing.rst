@@ -1043,7 +1043,7 @@ SecurityComponent または CsrfComponent のいずれかで保護されたア�
     ]);
 
 アクションでアンロックされたフィールドが必要な場合は、
-``setUnlockedFields()``で宣言することができます。 ::
+``setUnlockedFields()`` で宣言することができます。 ::
 
     $this->setUnlockedFields(['dynamic_field']);
 

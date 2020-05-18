@@ -45,8 +45,6 @@ Se você precisar manter um contador em cache por menos que todos os registros
 relacionados, poderá fornecer condições adicionais ou métodos localizadores 
 para gerar um valor de contador::
 
-    // Use um método específico de localização.
-    // Nesse caso, usando o finder (published)
     $this->addBehavior('CounterCache', [
         'Articles' => [
             'comment_count' => [

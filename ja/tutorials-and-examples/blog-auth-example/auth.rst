@@ -177,7 +177,7 @@ composerを使ってAuthenticationプラグインをインストールします�
 最初の認証は、ユーザーが認証されているかどうかをチェックし (あなたが提供した設定に基づいて)、
 ユーザーと認証結果をさらに参照するためのリクエストに注入します。
 
-**src/Application.php**で、以下のインポートを追加します。 ::
+**src/Application.php** で、以下のインポートを追加します。 ::
 
     // src/Application.phpで以下のインポートを追加します
     use Authentication\AuthenticationService;

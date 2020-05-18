@@ -72,6 +72,7 @@ Mailer
 
     // Or in constructor
     $mailer = new Mailer('default');
+
 設定名の文字列を渡す代わりに、オプションの配列をロードすることもできます。 ::
 
     $mailer = new Mailer();
@@ -469,7 +470,7 @@ Gmail のように、SSL SMTP サーバーを設定することができます�
 上記の設定では、メールメッセージの TLS 通信を可能にします。
 
 特定のトランスポートを使用するようにメーラーを構成するには、
-``Cake\Mailer\Mailer::setTransport()``メソッドを使用するか、
+``Cake\Mailer\Mailer::setTransport()`` メソッドを使用するか、
 設定にトランスポートを含めることができます。 ::
 
     // TransportFactory::setConfig() を使用して設定済の名前付きトランスポートを使用します。

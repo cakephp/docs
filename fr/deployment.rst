@@ -128,7 +128,7 @@ Déployer une Mise à Jour
 ========================
 
 Après un déploiement ou une mise à jour, vous pouvez aussi lancer ``bin/cake
-schema_cache clear``, qui fait parti du shell :doc:`/console-and-shells/schema-cache`.
+schema_cache clear``, qui fait parti du shell :doc:`/console-commands/schema-cache`.
 
 .. meta::
     :title lang=fr: Déploiement
