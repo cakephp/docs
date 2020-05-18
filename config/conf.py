@@ -51,8 +51,6 @@ html_sidebars = {
     '**': ['globaltoc.html', 'localtoc.html']
 }
 
-is_prerelease = True
-
 # -- Options for LaTeX output ------------------------------------------------
 
 # Grouping the document tree into LaTeX files. List of tuples
