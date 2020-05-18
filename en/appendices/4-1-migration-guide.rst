@@ -203,6 +203,8 @@ ORM
   each entity is marshaled from request data.
 * You can use the ``locale`` finder option to modify the locale of a single find
   call when using the ``TranslateBehavior``.
+* ``Query::clearResult()`` was added. This method lets you remove the result
+  from a query so you can re-execute it.
 
 TestSuite
 ---------
