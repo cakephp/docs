@@ -89,6 +89,8 @@ ORM
 * ``TableLocator::clear()`` now resets the internal ``options`` array.
 * BelongsToMany associations now respect the bindingKey set in the junction table's BelongsTo association.
   Previously, the target table's primary key was always used instead.
+* ``Query::clearResult()`` was added. This method lets you remove the result
+  from a query so you can re-execute it.
 
 TestSuite
 ---------
