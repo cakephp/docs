@@ -150,7 +150,7 @@ App.uploadedFilesAsObjects
     Response Objects chapter for more information.
 Security.salt
     A random string used in hashing. This value is also used as the
-    HMAC salt when doing symetric encryption.
+    HMAC salt when doing symmetric encryption.
 Asset.timestamp
     Appends a timestamp which is last modified time of the particular
     file at the end of asset files URLs (CSS, JavaScript, Image) when
