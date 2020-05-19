@@ -78,6 +78,9 @@ I18n
 * The ``setJsonEncodeFormat`` method on  ``Time``, ``FrozenTime``, ``Date`` and
   ``FrozenDate`` now accepts a callable that can be used to return a custom
   string.
+* The i18n global functions now only return strings. The changes made to 4.0 to
+  remove the null return value when no translation string is provide have been
+  backported to 3.9.
 
 ORM
 ---
