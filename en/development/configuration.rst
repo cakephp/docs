@@ -83,6 +83,8 @@ data from the environment::
 The second value passed to the env function is the default value. This value
 will be used if no environment variable exists for the given key.
 
+.. _general-configuration:
+
 General Configuration
 ---------------------
 
