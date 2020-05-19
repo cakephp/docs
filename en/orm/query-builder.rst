@@ -333,7 +333,7 @@ portable::
     $query = $articles->find();
     $query->select(['count' => $query->func()->count('*')]);
 
-A number of commonly used functions can be created with the ``func()`` method:
+You can access existing wrappers for several SQL functions through ``Query::func()``:
 
 ``rand()``
     Generate a random value between 0 and 1 via SQL.
@@ -362,6 +362,23 @@ A number of commonly used functions can be created with the ``func()`` method:
     Add the time unit to the date expression.
 ``dayOfWeek()``
     Returns a FunctionExpression representing a call to SQL WEEKDAY function.
+
+Window Functions
+----------------
+
+These window-only functions contain a window expression by default:
+
+``rowNumber()``
+    Returns an Aggregate expression for the ``ROW_NUMBER()`` SQL function.
+``lag()``
+    Returns an Aggregate expression for the ``LAG()`` SQL function.
+``lead()``
+    Returns an Aggregate expression for the ``LEAD()`` SQL function.
+``lead()``
+    Returns an Aggregate expression for the ``LEAD()`` SQL function.
+
+.. versionadded:: 4.1.0
+    Window functions were added in 4.1.0
 
 When providing arguments for SQL functions, there are two kinds of parameters
 you can use, literal arguments and bound parameters. Identifier/Literal parameters allow
@@ -1477,6 +1494,85 @@ operations. You can use the ``epilog()`` method for this::
 
 The ``epilog()`` method allows you to append raw SQL to the end of queries. You
 should never put raw user data into ``epilog()``.
+
+Window Functions
+----------------
+
+Window functions allow you to perform calculations using rows related to the
+current row. They are commonly used to calculate totals or offsets on partial sets of rows
+in the query. For example if we wanted to find the date of the earliest and latest comment on
+each article we could use window functions::
+
+    $query = $articles->find();
+    $query->select([
+        'Articles.id',
+        'Articles.title',
+        'Articles.user_id'
+        'oldest_comment' => $query->func()
+            ->min('Comments.created')
+            ->partition('Comments.article_id'),
+        'latest_comment' => $query->func()
+            ->max('Comments.created')
+            ->partition('Comments.article_id'),
+    ])
+    ->innerJoinWith('Comments');
+
+The above would generate SQL similar to:
+
+.. code-block:: sql
+
+    SELECT
+        Articles.id,
+        Articles.title,
+        Articles.user_id
+        MIN(Comments.created) OVER (PARTITION BY Comments.article_id) AS oldest_comment,
+        MAX(Comments.created) OVER (PARTITION BY Comments.article_id) AS latest_comment,
+    FROM articles AS Articles
+    INNER JOIN comments AS Comments
+
+Window expressions can be applied to most aggregate functions. Any aggregate function
+that cake abstracts with a wrapper in ``FunctionsBuilder`` will return an ``AggregateExpression``
+which lets you attach window expressions. You can create custom aggregate functions
+through ``FunctionsBuilder::aggregate()``.
+
+These are the most commonly supported window features. Most features are provided
+by ``AggregateExpresion``, but make sure you follow your database documentation on use and restrictions.
+
+- ``order($fields)`` Order the aggregate group the same as a query ORDER BY.
+- ``partition($expressions)`` Add one or more partitions to the window based on column
+  names.
+- ``rows($start, $end)`` Define a offset of rows that precede and/or follow the
+  current row that should be included in the aggregate function.
+- ``range($start, $end)`` Define a range of row values that precede and/or follow
+  the current row that should be included in the aggregate function. This
+  evaluates values based on the ``order()`` field.
+
+If you need to re-use the same window expression multiple times you can create
+named windows using the ``window()`` method::
+
+    $query = $articles->find();
+
+    // Define a named window
+    $query->window('related_article', function ($window, $query) {
+        $window->partition('Comments.article_id');
+
+        return $window;
+    });
+
+    $query->select([
+        'Articles.id',
+        'Articles.title',
+        'Articles.user_id'
+        'oldest_comment' => $query->func()
+            ->min('Comments.created')
+            ->over('related_article'),
+        'latest_comment' => $query->func()
+            ->max('Comments.created')
+            ->over('related_article'),
+    ]);
+
+.. versionadded:: 4.1.0
+    Window function support was added in 4.1.0
 
 Executing Complex Queries
 -------------------------
