@@ -407,8 +407,8 @@ CakePHP, and should not be used unless you want the special meaning
   Defaults to the current scheme.
 * ``_host`` Set the host to use for the link.  Defaults to the current host.
 * ``_port`` Set the port if you need to create links on non-standard ports.
-* ``_full``  If ``true`` the `FULL_BASE_URL` constant will be prepended to
-  generated URLs.
+* ``_full``  If ``true`` the value of ``App.fullBaseUrl`` mentioned in
+  :ref:`general-configuration` will be prepended to generated URLs.
 * ``#`` Allows you to set URL hash fragments.
 * ``_ssl`` Set to ``true`` to convert the generated URL to https or ``false``
   to force http.
