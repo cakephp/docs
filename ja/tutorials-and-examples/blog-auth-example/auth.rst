@@ -13,7 +13,7 @@ URL に対してセキュアなアクセスをしたい、という状況を想�
 
     CREATE TABLE users (
         id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-        username VARCHAR(50),
+        email VARCHAR(255),
         password VARCHAR(255),
         role VARCHAR(20),
         created DATETIME DEFAULT NULL,
@@ -21,7 +21,7 @@ URL に対してセキュアなアクセスをしたい、という状況を想�
     );
 
 テーブルの命名には CakePHP の規則がありますが、別の規則も活用できます。
-username と password のカラムをユーザーテーブルに使用すると、
+email と password のカラムをユーザーテーブルに使用すると、
 CakePHP はユーザーログインの実装のときにほとんどのことを自動で定義します。
 
 続いてのステップは、ユーザーデータを検索、保存、検証する ``UsersTable``  クラスを作成することです。 ::
@@ -38,7 +38,8 @@ CakePHP はユーザーログインの実装のときにほとんどのことを
         public function validationDefault(Validator $validator)
         {
             return $validator
-                ->notEmpty('username', 'A username is required')
+                ->notEmpty('email', 'A email is required')
+                ->email('email')
                 ->notEmpty('password', 'A password is required')
                 ->notEmpty('role', 'A role is required')
                 ->add('role', 'inList', [
@@ -99,7 +100,7 @@ CakePHP にバンドルされているコード生成ユーティリティを利
     <?= $this->Form->create($user) ?>
         <fieldset>
             <legend><?= __('Add User') ?></legend>
-            <?= $this->Form->control('username') ?>
+            <?= $this->Form->control('email') ?>
             <?= $this->Form->control('password') ?>
             <?= $this->Form->control('role', [
                 'options' => ['admin' => 'Admin', 'author' => 'Author']
@@ -251,7 +252,7 @@ composerを使ってAuthenticationプラグインをインストールします�
 これで、すべてのリクエストに対して ``AuthenticationMiddleware`` はリクエストセッションを検査して
 認証済みのユーザーを探すようになります。``/users/login`` ページをロードしている場合は、
 投稿されたフォームデータ(もしあれば)も検査して資格情報を抽出します。
-デフォルトでは、認証情報はリクエストデータの ``username`` と ``password`` フィールドから
+デフォルトでは、認証情報はリクエストデータの ``email`` と ``password`` フィールドから
 抽出されます。認証結果は ``authentication`` という名前のリクエスト属性に注入されます。
 この結果はいつでもコントローラのアクションから
 ``$this->request->getAttribute('authentication')``を使って調べることができます。
@@ -288,7 +289,7 @@ composerを使ってAuthenticationプラグインをインストールします�
         }
         // ユーザーの送信と認証に失敗した場合にエラーを表示します
         if ($this->request->is('post') && !$result->isValid()) {
-            $this->Flash->error(__('Invalid username or password'));
+            $this->Flash->error(__('Invalid email or password'));
         }
     }
 

@@ -16,7 +16,7 @@ enregistrer les données de notre utilisateur::
 
     CREATE TABLE users (
         id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-        username VARCHAR(50),
+        email VARCHAR(50),
         password VARCHAR(255),
         role VARCHAR(20),
         created DATETIME DEFAULT NULL,
@@ -44,7 +44,8 @@ responsabilité de trouver, sauvegarder et valider toute donnée d'utilisateur::
         public function validationDefault(Validator $validator)
         {
             return $validator
-                ->notEmpty('username', "Un nom d'utilisateur est nécessaire")
+                ->notEmpty('email', "Un email est nécessaire")
+                ->email('email')
                 ->notEmpty('password', 'Un mot de passe est nécessaire')
                 ->notEmpty('role', 'Un role est nécessaire')
                 ->add('role', 'inList', [
@@ -114,7 +115,7 @@ le cadre de ce tutoriel, nous allons juste montrer le add.php:
     <?= $this->Form->create($user) ?>
         <fieldset>
             <legend><?= __('Ajouter un utilisateur') ?></legend>
-            <?= $this->Form->control('username') ?>
+            <?= $this->Form->control('email') ?>
             <?= $this->Form->control('password') ?>
             <?= $this->Form->control('role', [
                 'options' => ['admin' => 'Admin', 'author' => 'Author']
@@ -214,7 +215,7 @@ utilisateurs et de réaliser l'action connexion et déconnexion::
                     $this->Auth->setUser($user);
                     return $this->redirect($this->Auth->redirectUrl());
                 }
-                $this->Flash->error(__('Invalid username or password, try again'));
+                $this->Flash->error(__('Invalid email or password, try again'));
             }
         }
 
@@ -269,7 +270,7 @@ votre fichier **templates/Users/login.php** et ajoutez les lignes suivantes:
     <?= $this->Form->create() ?>
         <fieldset>
             <legend><?= __("Merci de rentrer vos nom d'utilisateur et mot de passe") ?></legend>
-            <?= $this->Form->control('username') ?>
+            <?= $this->Form->control('email') ?>
             <?= $this->Form->control('password') ?>
         </fieldset>
     <?= $this->Form->button(__('Se Connecter')); ?>
@@ -291,7 +292,7 @@ la fonction ``beforeFilter()`` de l'AppController.
 L'action ``login()`` appelle la fonction ``$this->Auth->identify()`` dans
 AuthComponent, et cela fonctionne sans autre config car nous suivons les
 conventions comme mentionnées plus tôt. C'est-à-dire, avoir un model
-User avec les colonnes username et password, et
+User avec les colonnes email et password, et
 utiliser un formulaire posté à un controller avec les données d'utilisateur.
 Cette fonction retourne si la connexion a réussi ou non, et en cas de succès,
 alors nous redirigeons l'utilisateur vers l'URL de redirection configurée que
