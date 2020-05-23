@@ -670,7 +670,11 @@ you define the ``$fixtures`` property in your model::
 
         public function getFixtures(): array
         {
-            return ['app.Articles', 'app.Comments'];
+            $this->addFixture('app.Articles')
+                ->addFixture('app.Comments')
+                ->...;
+
+            return parent::getFixtures();
         }
 
 The above will load the Article and Comment fixtures from the application's
