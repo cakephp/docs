@@ -215,6 +215,8 @@ TestSuite
   are being done.
 * Email body assertions now include the email contents in their failure messages
   making tests easier to debug.
+* ``TestCase::addFixture()`` has been added to allow chainable fixture setup, that is also
+auto-completable in IDEs.
 
 View
 ----
