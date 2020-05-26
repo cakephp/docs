@@ -228,7 +228,7 @@ the view file in **templates/Recipes/search.php** will be rendered::
         public function search()
         {
             // Render the view in templates/Recipes/search.php
-            $this->render();
+            return $this->render();
         }
     // ...
     }
