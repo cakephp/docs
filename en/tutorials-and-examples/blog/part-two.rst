@@ -419,9 +419,9 @@ back at our Articles model and make a few adjustments::
         {
             $validator
                 ->notEmptyString('title')
-                ->requirePresence('title')
+                ->requirePresence('title', 'create')
                 ->notEmptyString('body')
-                ->requirePresence('body');
+                ->requirePresence('body', 'create');
 
             return $validator;
         }
