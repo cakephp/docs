@@ -664,18 +664,17 @@ you define the ``$fixtures`` property in your model::
         protected $fixtures = ['app.Articles', 'app.Comments'];
     }
 
-.. note::
-    You can also override ``TestCase::getFixtures()`` instead of defining
-    the ``$fixtures`` property::
 
-        public function getFixtures(): array
-        {
-            $this->addFixture('app.Articles')
-                ->addFixture('app.Comments')
-                ->...;
+As of 4.1.0 you can use the ``getFixtures()`` and ``addFixture()`` methods to
+define your fixture array using a fluent interface::
 
-            return parent::getFixtures();
-        }
+    public function getFixtures(): array
+    {
+        $this->addFixture('app.Articles')
+            ->addFixture('app.Comments');
+
+        return parent::getFixtures();
+    }
 
 The above will load the Article and Comment fixtures from the application's
 Fixture directory. You can also load fixtures from CakePHP core, or plugins::
