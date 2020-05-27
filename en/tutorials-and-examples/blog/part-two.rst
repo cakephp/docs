@@ -418,10 +418,10 @@ back at our Articles model and make a few adjustments::
         public function validationDefault(Validator $validator): Validator
         {
             $validator
-                ->notEmpty('title')
-                ->requirePresence('title')
-                ->notEmpty('body')
-                ->requirePresence('body');
+                ->notEmptyString('title')
+                ->requirePresence('title', 'create')
+                ->notEmptyString('body')
+                ->requirePresence('body', 'create');
 
             return $validator;
         }
