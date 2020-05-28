@@ -66,11 +66,12 @@ rename commands that are exposed::
 
     use App\Command\UserCommand;
     use App\Command\VersionCommand;
+    use Cake\Console\CommandCollection;
     use Cake\Http\BaseApplication;
 
     class Application extends BaseApplication
     {
-        public function console($commands)
+        public function console(CommandCollection $commands): CommandCollection
         {
             // Add by classname
             $commands->add('user', UserCommand::class);
@@ -103,7 +104,7 @@ do this, you can register your commands to create any desired naming.
 
 You can customize the command names by defining each command in your plugin::
 
-    public function console($commands)
+    public function console(CommandCollection $commands): CommandCollection
     {
         // Add commands with nested naming
         $commands->add('user dump', UserDumpCommand::class)
