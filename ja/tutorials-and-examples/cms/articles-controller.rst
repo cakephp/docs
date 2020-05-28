@@ -179,7 +179,7 @@ view テンプレートの作成
     class ArticlesController extends AppController
     {
 
-        public function initialize()
+        public function initialize(): void
         {
             parent::initialize();
 
@@ -302,16 +302,19 @@ URL オプションなしで ``create()`` を呼び出したので、 ``FormHelp
 スラグの値は、通常、URL セーフなバージョンの記事タイトルです。スラグを作成するために ORM の
 :ref:`beforeSave() コールバック <table-callbacks>` が使用できます。 ::
 
+    <?php
     // src/Model/Table/ArticlesTable.php の中で
     namespace App\Model\Table;
 
     use Cake\ORM\Table;
     // Text クラス
     use Cake\Utility\Text;
+    // EventInterface クラス
+    use Cake\Event\EventInterface;
 
     // 次のメソッドを追加してください。
 
-    public function beforeSave($event, $entity, $options)
+    public function beforeSave(EventInterface $event, $entity, $options)
     {
         if ($entity->isNew() && !$entity->slug) {
             $sluggedTitle = Text::slug($entity->title);
@@ -425,14 +428,14 @@ Articles の検証ルールの更新
     use Cake\Validation\Validator;
 
     // 次のメソッドを追加してください。
-    public function validationDefault(Validator $validator)
+    public function validationDefault(Validator $validator): Validator
     {
         $validator
-            ->allowEmptyString('title', false)
+            ->notEmptyString('title')
             ->minLength('title', 10)
             ->maxLength('title', 255)
 
-            ->allowEmptyString('body', false)
+            ->notEmptyString('body')
             ->minLength('body', 10);
 
         return $validator;
@@ -458,6 +461,8 @@ delete アクションの追加
 ``ArticlesController`` の中の ``delete()`` アクションから始めましょう。 ::
 
     // src/Controller/ArticlesController.php
+    
+    // 次のメソッドを追加してください。
 
     public function delete($slug)
     {
