@@ -137,6 +137,9 @@ Database
 * ``FunctionsBuilder::cast()`` was added.
 * Common Table Expression (CTE) support was added. CTEs can be attached to a query
   using `Query::with()`.
+* ``Query::orderAsc()`` and ``Query::orderDesc()`` now accept Closure's as their
+  field enabling you to use build complex order expressions with the provided
+  ``QueryExpression`` object.
 
 Error
 -----
