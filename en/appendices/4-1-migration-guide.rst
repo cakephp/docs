@@ -176,11 +176,6 @@ Http
   a redirect response.
 * ``CsrfProtectionMiddleware`` can now create cookies with the ``samesite`` attribute set.
 
-Routing
--------
-* A convenience function ``urlArray()`` has been introduced to quickly generate URL arrays
-from a route path string.
-
 I18n
 ----
 
@@ -205,6 +200,13 @@ ORM
   call when using the ``TranslateBehavior``.
 * ``Query::clearResult()`` was added. This method lets you remove the result
   from a query so you can re-execute it.
+* ``Table::delete()`` will now abort a delete operation and return false if a
+  dependent association fails to delete during cascadeCallback operations.
+
+Routing
+-------
+* A convenience function ``urlArray()`` has been introduced to quickly generate URL arrays
+from a route path string.
 
 TestSuite
 ---------
