@@ -345,12 +345,21 @@ your views. A basic example of session usage would be::
 Reading & Writing Session Data
 ==============================
 
-.. php:method:: read($key)
+.. php:method:: read($key, $default = null)
 
 You can read values from the session using :php:meth:`Hash::extract()`
 compatible syntax::
 
     $session->read('Config.language');
+
+.. php:method:: readOrFail($key)
+
+The same as convenience wrapper around non-nullable return value::
+
+    $session->readOrFail('Config.language');
+
+This is useful, when you know this key has to be set and you don't want to have to check
+for the existence in code itself.
 
 .. php:method:: write($key, $value)
 
