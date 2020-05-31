@@ -49,6 +49,9 @@ Database
 * ``Driver::newTableSchema()`` was added. This hook method lets you customize
   which the class used for schema metadata.
 * ``FunctionBuilder::cast()`` was added.
+* ``Query::orderAsc()`` and ``Query::orderDesc()`` now accept Closure's as their
+  field enabling you to use build complex order expressions with the provided
+  ``QueryExpression`` object.
 
 Datasource
 ----------
