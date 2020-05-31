@@ -178,8 +178,11 @@ Http
   your application to signal to the error handling middleware to create
   a redirect response.
 * ``CsrfProtectionMiddleware`` can now create cookies with the ``samesite`` attribute set.
-* ``Session::read()`` has got a default parameter added.
-* ``Session::readOrFail()`` has been added as convenience wrapper around non-nullable ``read()``.
+* ``Session::read()`` now allows default values to be set with the second
+  parameter.
+* ``Session::readOrFail()`` has been added as convenience wrapper
+  around ``read()`` operations where you want an exception when the key is
+  missing.
 
 I18n
 ----

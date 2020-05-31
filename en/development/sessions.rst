@@ -350,7 +350,10 @@ Reading & Writing Session Data
 You can read values from the session using :php:meth:`Hash::extract()`
 compatible syntax::
 
-    $session->read('Config.language');
+    $session->read('Config.language', 'en');
+
+.. versionchanged:: 4.1.0
+    The ``default`` parameter was added.
 
 .. php:method:: readOrFail($key)
 
@@ -360,6 +363,9 @@ The same as convenience wrapper around non-nullable return value::
 
 This is useful, when you know this key has to be set and you don't want to have to check
 for the existence in code itself.
+
+.. versionadded:: 4.1.0
+    The ``readOrFail()`` was added.
 
 .. php:method:: write($key, $value)
 
