@@ -35,6 +35,8 @@ passing it to the ``save()`` method in the ``Table`` class::
         // The $article entity contains the id now
         $id = $article->id;
     }
+    
+The save method returns the successfully saved entity or false on failure.
 
 Updating Data
 -------------
