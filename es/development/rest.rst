@@ -17,7 +17,7 @@ La Configuración Simple
 =======================
 
 La forma más rapida para empezar a utilizar REST es agregar unas lineas para
-configurar la :ref:`resource routes <resource-routes>` en su archivo config/routes.php .
+configurar la :ref:`resource routes <resource-routes>` en su archivo **config/routes.php** .
 
 Una vez que la ruta se ha configurado para mapear las solicitudes REST a 
 cierto controlador de acciones, se puede proceder a crear la lógica de nuestro
