@@ -103,7 +103,7 @@ Si se quiere modificar los datos antes de convertirlos en XML, no se debería de
 opción ``serialize``, y en lugar de eso, se debería usar archivos plantilla. Colocaremos
 las vistas REST de nuestro RecipesController dentro de **templates/Recipes/xml**. también
 podemos utilizar el :php:class:`Xml` para una salida XML rápida y fácil en esas vistas.
-De esta forma, así podría verse nuestra vista de índice:
+De esta forma, así podría verse nuestra vista de índice::
 
     // templates/Recipes/xml/index.php
     // Realizar un formateo y manipulacion en 
