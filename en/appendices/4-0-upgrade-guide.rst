@@ -1,22 +1,29 @@
 4.0 Upgrade Guide
 #################
 
-Before attempting to upgrade to 4.0 first ensure you have upgraded to 3.8. Then
-enable deprecation warnings::
+First, check that your application is running on latest CakePHP 3.x version.
 
-    // in config/app.php
+.. note::
+    The upgrade tool only works on applications running on latest CakePHP 3.x. You cannot run the upgrade tool after updating to CakePHP 4.0.
+
+Fix Deprecation Warnings
+========================
+
+Once your application is running on latest CakePHP 3.x, enable deprecation warnings in **config/app.php**::
+
     'Error' => [
         'errorLevel' => E_ALL,
     ]
 
-Then, incrementally fix the deprecation warnings your application and its
-plugins emit.
+Now that you can see all the warnings, make sure these are fixed before proceding with the upgrade.
 
 Upgrade to PHP 7.2
 ==================
 
-CakePHP 4.0 will require **PHP 7.2**. Upgrading PHP before updating CakePHP is
-recommended to reduce risk.
+If you are not running on **PHP 7.2 or higher**, you will need to upgrade PHP before updating CakePHP.
+
+.. note::
+    CakePHP 4.0 requires **a minimum of PHP 7.2**.
 
 Use the Upgrade Tool
 ====================
@@ -24,7 +31,6 @@ Use the Upgrade Tool
 Because CakePHP 4 adopts strict mode and uses more typehinting, there are many
 backwards incompatible changes concerning method signatures and file renames.
 To help expedite fixing these tedious changes there is an upgrade CLI tool:
-
 
 .. warning::
     The upgrade tool is intended to be run **before** you update your
@@ -37,7 +43,7 @@ To help expedite fixing these tedious changes there is an upgrade CLI tool:
     # Install the upgrade tool
     git clone git://github.com/cakephp/upgrade
     cd upgrade
-    git checkout 4.x
+    git checkout master
     composer install --no-dev
 
 With the upgrade tool installed you can now run it on your application or
