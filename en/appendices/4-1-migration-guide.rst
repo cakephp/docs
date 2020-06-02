@@ -210,6 +210,8 @@ ORM
   from a query so you can re-execute it.
 * ``Table::delete()`` will now abort a delete operation and return false if a
   dependent association fails to delete during cascadeCallback operations.
+* ``Table::saveMany()`` will now trigger the ``Model.afterSaveCommit`` event on
+  entities that are saved.
 
 Routing
 -------
