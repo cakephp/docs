@@ -11,7 +11,8 @@ statically. Example:
 ``Inflector::pluralize('example')`` returns "examples".
 
 You can try out the inflections online at `inflector.cakephp.org
-<https://inflector.cakephp.org/>`_.
+<https://inflector.cakephp.org/>`_ or `sandbox.dereuromark.de
+<https://sandbox.dereuromark.de/sandbox/inflector>`_.
 
 .. _inflector-methods-summary:
 
@@ -24,13 +25,9 @@ when provided a multi-word argument:
 +-------------------+---------------+---------------+
 | Method            | Argument      | Output        |
 +===================+===============+===============+
-| ``pluralize()``   | BigApple      | BigApples     |
-+                   +---------------+---------------+
-|                   | big_apple     | big_apples    |
+| ``pluralize()``   | big_apple     | big_apples    |
 +-------------------+---------------+---------------+
-| ``singularize()`` | BigApples     | BigApple      |
-+                   +---------------+---------------+
-|                   | big_apples    | big_apple     |
+| ``singularize()`` | big_apples    | big_apple     |
 +-------------------+---------------+---------------+
 | ``camelize()``    | big_apples    | BigApples     |
 +                   +---------------+---------------+
@@ -72,20 +69,24 @@ to support other languages, you can use :ref:`inflection-configuration` to
 customize the rules used::
 
     // Apples
-    echo Inflector::pluralize('Apple');
+    echo Inflector::pluralize('apple');
 
 .. note::
 
-    ``pluralize()`` may not always correctly convert a noun that is already in its plural form.
+    ``pluralize()`` should not be used on a noun that is already in its plural form.
+    For correct results with multi-words you should not use CamelCase versions. Transform
+    them to under\_scored first.
 
 .. code-block:: php
 
     // Person
-    echo Inflector::singularize('People');
+    echo Inflector::singularize('people');
 
 .. note::
 
-    ``singularize()`` may not always correctly convert a noun that is already in its singular form.
+    ``singularize()`` should not be used on a noun that is already in its singular form.
+    For correct results with multi-words you should not use CamelCase versions. Transform
+    them to under\_scored first.
 
 Creating CamelCase and under_scored Forms
 =========================================
