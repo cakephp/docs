@@ -505,12 +505,12 @@ prefix on them, use the alternative syntax::
         }
     }
 
-You can use ``TableRegistry`` to load your plugin tables using the familiar
+You can use ``Cake\ORM\TableLocator`` to load your plugin tables using the familiar
 :term:`plugin syntax`::
 
-    use Cake\ORM\TableRegistry;
+    use Cake\ORM\Locator\LocatorAwareTrait;
 
-    $contacts = TableRegistry::getTableLocator()->get('ContactManager.Contacts');
+    $contacts = $this->getTableLocator()->get('ContactManager.Contacts');
 
 Alternatively, from a controller context, you can use::
 

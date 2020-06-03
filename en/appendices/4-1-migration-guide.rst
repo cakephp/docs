@@ -83,6 +83,8 @@ Http
 ORM
 ---
 
+* ``Cake\ORM\TableRegistry`` has been deprecated. Use ``Cake\ORM\Locator\LocatorAwareTrait::getTableLocator()``
+  or ``Cake\Datasource\FactoryLocator::get('Table')`` to get the table locator instance instead.
 * BelongsToMany associations now respect the bindingKey set in the junction table's BelongsTo association.
   Previously, the target table's primary key was always used instead.
 * ``Cake\ORM\AssociationCollection`` no longer lower cases association names

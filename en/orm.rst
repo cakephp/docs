@@ -27,18 +27,26 @@ Quick Example
 
 To get started you don't have to write any code. If you've followed the :ref:`CakePHP
 conventions for your database tables <model-and-database-conventions>`
-you can just start using the ORM. For example if we wanted to load some data from our ``articles``
-table we could do::
+you can just start using the ORM. For example if we wanted to load some data 
+from our ``articles`` table we could do::
 
-    use Cake\ORM\TableRegistry;
+    use Cake\ORM\Locator\LocatorAwareTrait;
 
-    $articles = TableRegistry::getTableLocator()->get('Articles');
+    public function someMethod()
+    {
+        $articles = $this->getTableLocator->get('Articles');
 
-    $query = $articles->find();
+        $query = $articles->find();
 
-    foreach ($query as $row) {
-        echo $row->title;
+        foreach ($query as $row) {
+            echo $row->title;
+        }
     }
+    
+Within a static method you can use the :php:class:`~Cake\\Datasource\\FactoryLocator` 
+to get the table locator::
+
+    $articles = FactoryLocator::get('Table')->get('Articles');
 
 Note that we didn't have to create any code or wire any configuration up.
 The conventions in CakePHP allow us to skip some boilerplate code and allow the
@@ -57,12 +65,11 @@ associations or defining some additional methods we would add the following to
 
 Table classes use the CamelCased version of the table name with the ``Table``
 suffix as the class name. Once your class has been created you get a reference
-to it using the :php:class:`~Cake\\ORM\\Locator\\TableLocator` through :php:class:`~Cake\\ORM\\TableRegistry` as before::
+to it using the :php:class:`~Cake\\ORM\\Locator\\TableLocator` as before::
 
-    use Cake\ORM\TableRegistry;
+    use Cake\ORM\Locator\LocatorAwareTrait;
 
-    // $articles is an instance of our ArticlesTable class.
-    $articles = TableRegistry::getTableLocator()->get('Articles');
+    $articles = $this->getTableLocator()->get('Articles');
 
 Now that we have a concrete table class, we'll probably want to use a concrete
 entity class. Entity classes let you define accessor and mutator methods, define
@@ -81,10 +88,9 @@ Entities use the singular CamelCase version of the table name as their class
 name by default. Now that we have created our entity class, when we
 load entities from the database we'll get instances of our new Article class::
 
-    use Cake\ORM\TableRegistry;
+    use Cake\ORM\Locator\LocatorAwareTrait;
 
-    // $articles is an instance of ArticlesTable.
-    $articles = TableRegistry::getTableLocator()->get('Articles');
+    $articles = $this->getTableLocator()->get('Articles');
     $query = $articles->find();
 
     foreach ($query as $row) {
