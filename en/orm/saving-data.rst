@@ -36,7 +36,7 @@ passing it to the ``save()`` method in the ``Table`` class::
         $id = $article->id;
     }
     
-The save method returns the successfully saved entity or false on failure.
+The ``save()`` method returns the successfully saved entity or ``false`` on failure.
 
 Updating Data
 -------------
