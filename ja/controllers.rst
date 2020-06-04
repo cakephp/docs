@@ -81,7 +81,7 @@ AppController
 CakePHP アプリケーションへのリクエストが生じると、 CakePHP の :php:class:`Cake\\Routing\\Router`
 と :php:class:`Cake\\Routing\\Dispatcher` クラスは正しいコントローラーを見つけて、
 インスタンスを作成するために :ref:`routes-configuration` を使用します。
-リクエストデータはリクエストオブジェトに中にカプセル化されています。
+リクエストデータはリクエストオブジェトの中にカプセル化されています。
 CakePHP はすべての重要なリクエスト情報を ``$this->request`` プロパティーの中に格納します。
 CakePHP のリクエストオブジェクトについてのより詳しい情報は :ref:`cake-request` の章を参照してください。
 
