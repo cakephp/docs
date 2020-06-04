@@ -68,7 +68,7 @@ Both ``pluralize`` and ``singularize()`` work on most English nouns. If you need
 to support other languages, you can use :ref:`inflection-configuration` to
 customize the rules used::
 
-    // Apples
+    // results in: apples
     echo Inflector::pluralize('apple');
 
 .. note::
@@ -79,7 +79,7 @@ customize the rules used::
 
 .. code-block:: php
 
-    // Person
+    // results in: person
     echo Inflector::singularize('people');
 
 .. note::
