@@ -43,8 +43,9 @@ add more recipients to their respective field::
     // The email's To recipient is: test@example.com
 
 .. deprecated:: 3.4.0
-    Use ``setFrom()``, ``setTo()``, ``setCc()`` , ``setBcc()``  and ``setSubject()`` instead of ``from()``, ``to()``, ``cc()``,
-``bcc()`` and ``subject()``
+    Use ``setFrom()``, ``setTo()``, ``setCc()`` , ``setBcc()``  and
+    ``setSubject()`` instead of ``from()``, ``to()``, ``cc()``, ``bcc()`` and
+    ``subject()``
 
 Choosing the Sender
 -------------------
