@@ -31,7 +31,7 @@ in quotes:
 Testing URL Generation
 ----------------------
 
-You can see how which URL a :term:`routing array` will generate using the
+You can see the URL a :term:`routing array` will generate using the
 ``generate`` method:
 
 .. code-block:: bash
