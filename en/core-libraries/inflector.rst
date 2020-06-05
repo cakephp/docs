@@ -11,7 +11,8 @@ statically. Example:
 ``Inflector::pluralize('example')`` returns "examples".
 
 You can try out the inflections online at `inflector.cakephp.org
-<https://inflector.cakephp.org/>`_.
+<https://inflector.cakephp.org/>`_ or `sandbox.dereuromark.de
+<https://sandbox.dereuromark.de/sandbox/inflector>`_.
 
 .. _inflector-methods-summary:
 
@@ -76,7 +77,7 @@ customize the rules used::
 
 .. note::
 
-    ``pluralize()`` may not always correctly convert a noun that is already in its plural form.
+    ``pluralize()`` should not be used on a noun that is already in its plural form.
 
 .. code-block:: php
 
@@ -85,7 +86,7 @@ customize the rules used::
 
 .. note::
 
-    ``singularize()`` may not always correctly convert a noun that is already in its singular form.
+    ``singularize()`` should not be used on a noun that is already in its singular form.
 
 Creating CamelCase and under_scored Forms
 =========================================
