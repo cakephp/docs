@@ -52,8 +52,10 @@ hierarchical data in::
 
 Once added, you can let CakePHP build the internal structure if the table is
 already holding some rows::
-
-    $categories = TableRegistry::getTableLocator()->get('Categories');
+    
+    // In a controller
+    
+    $categories = $this->getTableLocator()->get('Categories');
     $categories->recover();
 
 You can verify it works by getting any row from the table and asking for the

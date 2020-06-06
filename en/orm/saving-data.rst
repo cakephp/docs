@@ -22,9 +22,9 @@ Inserting Data
 The easiest way to insert data in the database is by creating a new entity and
 passing it to the ``save()`` method in the ``Table`` class::
 
-    use Cake\ORM\TableRegistry;
+    use Cake\ORM\Locator\LocatorAwareTrait;
 
-    $articlesTable = TableRegistry::getTableLocator()->get('Articles');
+    $articlesTable = $this->getTableLocator()->get('Articles');
     $article = $articlesTable->newEmptyEntity();
 
     $article->title = 'A New Article';
@@ -41,9 +41,9 @@ Updating Data
 Updating your data is equally easy, and the ``save()`` method is also used for
 that purpose::
 
-    use Cake\ORM\TableRegistry;
+    use Cake\ORM\Locator\LocatorAwareTrait;
 
-    $articlesTable = TableRegistry::getTableLocator()->get('Articles');
+    $articlesTable = $this->getTableLocator()->get('Articles');
     $article = $articlesTable->get(12); // Return article with id 12
 
     $article->title = 'CakePHP is THE best PHP framework!';
@@ -58,7 +58,7 @@ Saving With Associations
 
 By default the ``save()`` method will also save one level of associations::
 
-    $articlesTable = TableRegistry::getTableLocator()->get('Articles');
+    $articlesTable = $this->getTableLocator()->get('Articles');
     $author = $articlesTable->Authors->findByUserName('mark')->first();
 
     $article = $articlesTable->newEmptyEntity();
@@ -131,7 +131,7 @@ one or many entities from request data. You can convert a single entity using::
 
     // In a controller
 
-    $articles = TableRegistry::getTableLocator()->get('Articles');
+    $articles = $this->getTableLocator()->get('Articles');
 
     // Validate and convert to an Entity object
     $entity = $articles->newEntity($this->request->getData());
@@ -170,7 +170,7 @@ associations should be marshalled::
 
     // In a controller
 
-    $articles = TableRegistry::getTableLocator()->get('Articles');
+    $articles = $this->getTableLocator()->get('Articles');
 
     // New entity with nested associations
     $entity = $articles->newEntity($this->request->getData(), [
@@ -184,7 +184,7 @@ should be marshalled. Alternatively, you can use dot notation for brevity::
 
     // In a controller
 
-    $articles = TableRegistry::getTableLocator()->get('Articles');
+    $articles = $this->getTableLocator()->get('Articles');
 
     // New entity with nested associations using dot notation
     $entity = $articles->newEntity($this->request->getData(), [
@@ -202,7 +202,7 @@ change the validation set to be used per association::
 
     // In a controller
 
-    $articles = TableRegistry::getTableLocator()->get('Articles');
+    $articles = $this->getTableLocator()->get('Articles');
 
     // Bypass validation on Tags association and
     // Designate 'signup' validation set for Comments.Users
@@ -326,7 +326,7 @@ When creating forms that create/update multiple records at once you can use
 
     // In a controller.
 
-    $articles = TableRegistry::getTableLocator()->get('Articles');
+    $articles = $this->getTableLocator()->get('Articles');
     $entities = $articles->newEntities($this->request->getData());
 
 In this situation, the request data for multiple articles should look like::
@@ -372,7 +372,7 @@ keep ids of associated entities::
 
     // In a controller
 
-    $articles = TableRegistry::getTableLocator()->get('Articles');
+    $articles = $this->getTableLocator()->get('Articles');
     $entity = $articles->newEntity($this->request->getData(), [
         'associated' => [
             'Tags', 'Comments' => [
@@ -406,7 +406,7 @@ persisted. You can merge an array of raw data into an existing entity using the
 
     // In a controller.
 
-    $articles = TableRegistry::getTableLocator()->get('Articles');
+    $articles = $this->getTableLocator()->get('Articles');
     $article = $articles->get(1);
     $articles->patchEntity($article, $this->request->getData());
     $articles->save($article);
@@ -421,7 +421,7 @@ patching an entity, pass the ``validate`` option as follows::
 
     // In a controller.
 
-    $articles = TableRegistry::getTableLocator()->get('Articles');
+    $articles = $this->getTableLocator()->get('Articles');
     $article = $articles->get(1);
     $articles->patchEntity($article, $data, ['validate' => false]);
 
@@ -545,7 +545,7 @@ delete for those not in the list::
     // In a controller.
     use Cake\Collection\Collection;
 
-    $comments = TableRegistry::getTableLocator()->get('Comments');
+    $comments = $this->getTableLocator()->get('Comments');
     $present = (new Collection($entity->comments))->extract('id')->filter()->toList();
     $comments->deleteAll([
         'article_id' => $article->id,
@@ -562,7 +562,7 @@ the original entities array will be removed and not present in the result::
 
     // In a controller.
 
-    $articles = TableRegistry::getTableLocator()->get('Articles');
+    $articles = $this->getTableLocator()->get('Articles');
     $list = $articles->find('popular')->toList();
     $patched = $articles->patchEntities($list, $this->request->getData());
     foreach ($patched as $entity) {
@@ -726,7 +726,7 @@ using ``newEntity()`` for passing into ``save()``. For example::
 
     // In a controller
 
-    $articles = TableRegistry::getTableLocator()->get('Articles');
+    $articles = $this->getTableLocator()->get('Articles');
     $article = $articles->newEntity($this->request->getData());
     if ($articles->save($article)) {
         // ...
@@ -743,7 +743,7 @@ and the entity has a primary key value, an 'exists' query will be issued. The
 Once you've loaded some entities you'll probably want to modify them and update
 your database. This is a pretty simple exercise in CakePHP::
 
-    $articles = TableRegistry::getTableLocator()->get('Articles');
+    $articles = $this->getTableLocator()->get('Articles');
     $article = $articles->find('all')->where(['id' => 2])->first();
 
     $article->title = 'My new title';
@@ -860,7 +860,7 @@ the singular, :ref:`underscored <inflector-methods-summary>` version of the asso
         ]
     ];
 
-    $articles = TableRegistry::getTableLocator()->get('Articles');
+    $articles = $this->getTableLocator()->get('Articles');
     $article = $articles->newEntity($data, [
         'associated' => ['Users']
     ]);
@@ -882,7 +882,7 @@ singular, :ref:`underscored <inflector-methods-summary>` version of the associat
         ]
     ];
 
-    $users = TableRegistry::getTableLocator()->get('Users');
+    $users = $this->getTableLocator()->get('Users');
     $user = $users->newEntity($data, [
         'associated' => ['Profiles']
     ]);
@@ -903,7 +903,7 @@ plural, :ref:`underscored <inflector-methods-summary>` version of the associatio
         ]
     ];
 
-    $articles = TableRegistry::getTableLocator()->get('Articles');
+    $articles = $this->getTableLocator()->get('Articles');
     $article = $articles->newEntity($data, [
         'associated' => ['Comments']
     ]);
@@ -955,7 +955,7 @@ the plural, :ref:`underscored <inflector-methods-summary>` version of the associ
         ]
     ];
 
-    $articles = TableRegistry::getTableLocator()->get('Articles');
+    $articles = $this->getTableLocator()->get('Articles');
     $article = $articles->newEntity($data, [
         'associated' => ['Tags']
     ]);
@@ -1192,7 +1192,7 @@ be an array of entities created using ``newEntities()`` / ``patchEntities()``.
         ],
     ];
 
-    $articles = TableRegistry::getTableLocator()->get('Articles');
+    $articles = $this->getTableLocator()->get('Articles');
     $entities = $articles->newEntities($data);
     $result = $articles->saveMany($entities);
 

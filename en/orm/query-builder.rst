@@ -21,9 +21,9 @@ modified. You can also use a table's connection object to access the lower level
 Query builder that does not include ORM features, if necessary. See the
 :ref:`database-queries` section for more information::
 
-    use Cake\ORM\TableRegistry;
+    use Cake\ORM\Locator\LocatorAwareTrait;
 
-    $articles = TableRegistry::getTableLocator()->get('Articles');
+    $articles = $this->getTableLocator()->get('Articles');
 
     // Start a new query.
     $query = $articles->find();
@@ -40,9 +40,9 @@ Selecting Rows From A Table
 
 ::
 
-    use Cake\ORM\TableRegistry;
+    use Cake\ORM\Locator\LocatorAwareTrait;
 
-    $query = TableRegistry::getTableLocator()->get('Articles')->find();
+    $query = $this->getTableLocator()->get('Articles')->find();
 
     foreach ($query as $article) {
         debug($article->title);

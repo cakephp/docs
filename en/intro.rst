@@ -35,9 +35,9 @@ and retrieving user photos, finding suggestions for new friends, etc.
 The model objects can be thought of as "Friend", "User", "Comment", or
 "Photo". If we wanted to load some data from our ``users`` table we could do::
 
-    use Cake\ORM\TableRegistry;
+    use Cake\ORM\Locator\LocatorAwareTrait;
 
-    $users = TableRegistry::getTableLocator()->get('Users');
+    $users = $this->getTableLocator()->get('Users');
     $query = $users->find();
     foreach ($query as $row) {
         echo $row->username;
@@ -50,9 +50,9 @@ for table and entity classes that have not yet been defined.
 If we wanted to make a new user and save it (with validation) we would do
 something like::
 
-    use Cake\ORM\TableRegistry;
+    use Cake\ORM\Locator\LocatorAwareTrait;
 
-    $users = TableRegistry::getTableLocator()->get('Users');
+    $users = $this->getTableLocator()->get('Users');
     $user = $users->newEntity(['email' => 'mark@example.com']);
     $users->save($user);
 

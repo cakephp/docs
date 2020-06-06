@@ -229,11 +229,11 @@ a more direct approach and only listen to the event you really need::
 
     // You can create the following before the
     // save operation, ie. config/bootstrap.php
-    use Cake\ORM\TableRegistry;
+    use Cake\Datasource\FactoryLocator;
     // If sending emails
     use Cake\Mailer\Email;
 
-    TableRegistry::getTableLocator()->get('ThirdPartyPlugin.Feedbacks')
+    FactoryLocator::get('Table')->get('ThirdPartyPlugin.Feedbacks')
         ->getEventManager()
         ->on('Model.afterSave', function($event, $entity)
         {

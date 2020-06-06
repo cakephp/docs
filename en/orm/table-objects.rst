@@ -94,10 +94,9 @@ Getting Instances of a Table Class
 Before you can query a table, you'll need to get an instance of the table. You
 can do this by using the ``TableLocator`` class::
 
-    // In a controller or table method.
-    use Cake\ORM\TableRegistry;
+    // In a controller
 
-    $articles = TableRegistry::getTableLocator()->get('Articles');
+    $articles = $this->getTableLocator()->get('Articles');
 
 ``TableLocator`` provides the various dependencies for constructing
 a table, and maintains a registry of all the constructed table instances making
@@ -110,10 +109,10 @@ being triggered as a default class is used instead of your actual class. To
 correctly load plugin table classes use the following::
 
     // Plugin table
-    $articlesTable = TableRegistry::getTableLocator()->get('PluginName.Articles');
+    $articlesTable = $this->getTableLocator()->get('PluginName.Articles');
 
     // Vendor prefixed plugin table
-    $articlesTable = TableRegistry::getTableLocator()->get('VendorName/PluginName.Articles');
+    $articlesTable = $this->getTableLocator()->get('VendorName/PluginName.Articles');
 
 .. _table-callbacks:
 
@@ -476,7 +475,7 @@ Using the TableLocator
 
 .. php:class:: TableLocator
 
-As we've seen earlier, the TableRegistry class provides an easy way to use
+As we've seen earlier, the TableLocator class provides an easy way to use
 factory/registry for accessing your applications table instances. It provides a
 few other useful features as well.
 
@@ -488,7 +487,7 @@ Configuring Table Objects
 When loading tables from the registry you can customize their dependencies, or
 use mock objects by providing an ``$options`` array::
 
-    $articles = TableRegistry::getTableLocator()->get('Articles', [
+    $articles = FactoryLocator::get('Table')->get('Articles', [
         'className' => 'App\Custom\ArticlesTable',
         'table' => 'my_articles',
         'connection' => $connectionObject,
@@ -511,7 +510,7 @@ You can also pre-configure the registry using the ``setConfig()`` method.
 Configuration data is stored *per alias*, and can be overridden by an object's
 ``initialize()`` method::
 
-    TableRegistry::getTableLocator()->setConfig('Users', ['table' => 'my_users']);
+    FactoryLocator::get('Table')->setConfig('Users', ['table' => 'my_users']);
 
 .. note::
 
@@ -527,7 +526,7 @@ Flushing the Registry
 During test cases you may want to flush the registry. Doing so is often useful
 when you are using mock objects, or modifying a table's dependencies::
 
-    TableRegistry::getTableLocator()->clear();
+    FactoryLocator::get('Table')->clear();
 
 Configuring the Namespace to Locate ORM classes
 -----------------------------------------------
