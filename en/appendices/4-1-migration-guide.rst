@@ -85,6 +85,8 @@ ORM
 
 * ``Cake\ORM\TableRegistry`` has been deprecated. Use ``Cake\ORM\Locator\LocatorAwareTrait::getTableLocator()``
   or ``Cake\Datasource\FactoryLocator::get('Table')`` to get the table locator instance instead.
+  Classes like ``Controller``, ``Command``, ``TestCase`` already use ``Cake\ORM\Locator\LocatorAwareTrait``
+  so in those classes you can simply use ``$this->getTableLocator()->get('ModelName')``.
 * BelongsToMany associations now respect the bindingKey set in the junction table's BelongsTo association.
   Previously, the target table's primary key was always used instead.
 * ``Cake\ORM\AssociationCollection`` no longer lower cases association names
