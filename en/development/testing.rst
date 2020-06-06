@@ -749,7 +749,6 @@ with the following contents::
     namespace App\Test\TestCase\Model\Table;
 
     use App\Model\Table\ArticlesTable;
-    use Cake\Datasource\FactoryLocator;
     use Cake\TestSuite\TestCase;
 
     class ArticlesTableTest extends TestCase
