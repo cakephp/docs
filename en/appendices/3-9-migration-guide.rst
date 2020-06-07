@@ -120,6 +120,12 @@ Validation
 * The 'empty' field detection in ``Validator`` now considers
   ``UploadedFileInterface`` objects that have ``UPLOAD_ERR_NO_FILE`` as their
   error code to be empty.
+* ``Validation::notAlphaNumeric()`` and ``Validator::notAlphaNumeric()`` were
+  backported from 4.x.
+* ``Validation::asciiAlphaNumeric()`` and ``Validator::asciiAlphaNumeric()``
+  were backported from 4.x.
+* ``Validation::notAsciiAlphaNumeric()`` and
+  ``Validator::notAsciiAlphaNumeric()`` were backported from 4.x.
 
 View
 ----
