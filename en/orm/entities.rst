@@ -99,7 +99,7 @@ When using ``set()`` you can update multiple fields at once using an array::
 
 .. warning::
 
-    When updating entities with request data you should whitelist which fields
+    When updating entities with request data you should indicate which fields
     can be set with mass assignment.
 
 You can check if fields are defined in your entities with ``has()``::

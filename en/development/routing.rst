@@ -456,7 +456,7 @@ Passing Parameters to Action
 ----------------------------
 
 When connecting routes using :ref:`route-elements` you may want to have routed
-elements be passed arguments instead. The ``pass`` option whitelists which route
+elements be passed arguments instead. The ``pass`` option indicates which route
 elements should also be made available as arguments passed into the controller
 functions::
 

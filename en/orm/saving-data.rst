@@ -610,7 +610,7 @@ data needs to be restructured so it can be put into the right fields.
 
 The ``Model.beforeMarshal`` event is triggered just at the start of the
 validation process, one of the reasons is that ``beforeMarshal`` is allowed to
-change the validation rules and the saving options, such as the field whitelist.
+change the validation rules and the saving options, such as the field list.
 Validation is triggered just after this event is finished. A common example of
 changing the data before it is validated is trimming all fields before saving::
 
