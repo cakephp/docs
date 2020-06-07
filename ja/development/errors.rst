@@ -105,6 +105,42 @@ ErrorController のカスタマイズ
 描画するために使われ、すべての標準リクエストライフサイクルイベントを受け取ります。
 このクラスを変更することで、どのコンポーネントが使用され、どのテンプレートが描画されるかを制御できます。
 
+アプリケーション内で :ref:`プレフィックスルーティング` を利用している場合は、
+それぞれのルーティングプレフィックスに対してカスタムエラーコントローラーを作成できます。
+例えば、 ``Admin`` プレフィックスの場合は以下のクラスを作成することができます。 ::
+
+    namespace App\Controller\Admin;
+
+    use App\Controller\AppController;
+    use Cake\Event\EventInterface;
+
+    class ErrorController extends AppController
+    {
+        /**
+         * Initialization hook method.
+         *
+         * @return void
+         */
+        public function initialize(): void
+        {
+            $this->loadComponent('RequestHandler');
+        }
+
+        /**
+         * beforeRender callback.
+         *
+         * @param \Cake\Event\EventInterface $event Event.
+         * @return void
+         */
+        public function beforeRender(EventInterface $event)
+        {
+            $this->viewBuilder()->setTemplatePath('Error');
+        }
+    }
+
+このコントローラーは、プレフィックス付きのコントローラーでエラーが発生したときにのみ利用できます。
+そして、必要に応じてプレフィックス固有のロジック/テンプレートを定義できます。
+
 ExceptionRenderer の変更
 ========================
 

@@ -406,9 +406,9 @@ connection defined in your application's bootstrap that does not start with
 ``test_`` will have a ``test_`` prefixed alias created. Aliasing connections
 ensures, you don't accidentally use the wrong connection in test cases.
 Connection aliasing is transparent to the rest of your application. For example
-if you use the 'default' connection, instead you will get the ``test``
-connection in test cases. If you use the 'replica' connection, the test suite
-will attempt to use 'test_replica'.
+if you use the ``default`` connection, instead you will get the ``test``
+connection in test cases. If you use the ``replica`` connection, the test suite
+will attempt to use ``test_replica``.
 
 .. _fixture-phpunit-configuration:
 

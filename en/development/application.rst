@@ -31,17 +31,17 @@ Using the Application class and HTTP Middleware in an existing application
 requires a few changes to your code.
 
 #. First update your **webroot/index.php**. Copy the file contents from the `app
-   skeleton <https://github.com/cakephp/app/tree/master/webroot/index.php>`__.
+   skeleton <https://github.com/cakephp/app/tree/3.x/webroot/index.php>`__.
 #. Create an ``Application`` class. See the :ref:`using-middleware` section
    above for how to do that. Or copy the example in the `app skeleton
-   <https://github.com/cakephp/app/tree/master/src/Application.php>`__.
+   <https://github.com/cakephp/app/tree/3.x/src/Application.php>`__.
 #. Create **config/requirements.php** if it doesn't exist and add the contents
-   from the `app skeleton <https://github.com/cakephp/app/blob/master/config/requirements.php>`__.
+   from the `app skeleton <https://github.com/cakephp/app/blob/3.x/config/requirements.php>`__.
 #. Add the ``_cake_routes_`` cache definition to **config/app.php**, if it is
    not already there.
 #. Update **config/bootstrap.php** and **config/bootstrap_cli.php**
    as per the `app_skeleton
-   <https://github.com/cakephp/app/tree/master/config/bootstrap.php>`__,
+   <https://github.com/cakephp/app/tree/3.x/config/bootstrap.php>`__,
    being careful to preserve whatever additions and changes are specific to
    your application.  The bootstrap.php updates include
 
@@ -52,7 +52,7 @@ requires a few changes to your code.
    * Removing ``DispatcherFactory`` references
 #. Update the contents of the files in **bin**. Replace the files with the
    versions from the `app skeleton
-   <https://github.com/cakephp/app/tree/master/bin>`__.
+   <https://github.com/cakephp/app/tree/3.x/bin>`__.
 #. If you are using the ``CsrfProtectionMiddleware`` make sure you remove the
    ``CsrfComponent`` from your controllers.
 
@@ -61,7 +61,7 @@ application/plugin dispatch filters as HTTP middleware.
 
 If you are running tests you will also need to update your
 **tests/bootstrap.php** by copying the file contents from the `app skeleton
-<https://github.com/cakephp/app/tree/master/tests/bootstrap.php>`_.
+<https://github.com/cakephp/app/tree/3.x/tests/bootstrap.php>`_.
 
 .. meta::
     :title lang=en: CakePHP Application

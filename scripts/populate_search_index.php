@@ -8,8 +8,7 @@
 
 // Elastic search config
 define('ES_DEFAULT_HOST', 'https://ci.cakephp.org:9200');
-define('ES_INDEX', 'documentation');
-define('CAKEPHP_VERSION', '3-0');
+define('ES_INDEX', 'cake-docs-30');
 
 // file exclusion patterns
 const FILE_EXCLUSIONS = [
@@ -24,16 +23,17 @@ const FILE_EXCLUSIONS = [
  * @param array $argv The array of CLI arguments, 1: language, 2. Elastic search host.
  * @return void
  */
-function main($argv)
+function main()
 {
-    if (empty($argv[1])) {
+    $options = getopt('', ['host::', 'lang:']);
+    if (empty($options['lang'])) {
         echo "A language to scan is required.\n";
         exit(1);
     }
+    $lang = $options['lang'];
 
-    $lang = $argv[1];
-    if (!empty($argv[2])) {
-        define('ES_HOST', $argv[2]);
+    if (!empty($options['host'])) {
+        define('ES_HOST', $options['host']);
     } else {
         define('ES_HOST', ES_DEFAULT_HOST);
     }
@@ -41,6 +41,8 @@ function main($argv)
     $directory = new RecursiveDirectoryIterator($lang);
     $recurser = new RecursiveIteratorIterator($directory);
     $matcher = new RegexIterator($recurser, '/\.rst/');
+
+    setMapping($lang);
 
     foreach ($matcher as $file) {
         $skip = false;
@@ -58,6 +60,28 @@ function main($argv)
     }
 
     echo "\nIndex update complete\n";
+}
+
+function setMapping($lang)
+{
+    echo "Creating index.\n";
+    $url = implode('/', array(ES_HOST, ES_INDEX . '-' . $lang));
+    doRequest($url, CURLOPT_PUT);
+
+    $mapping = [
+      "properties" => [
+        "contents" => ["type" => "text"],
+        "title" => ["type" => "keyword"],
+        "url" => [
+            "type" => "keyword",
+            "index" => false,
+        ],
+      ],
+    ];
+    $data = json_encode(['mappings' => ['_doc' => $mapping]]);
+    echo "Updating mapping.\n";
+    $url = implode('/', array(ES_HOST, ES_INDEX . '-' . $lang, '_mapping', '_doc'));
+    doRequest($url, CURLOPT_PUT, $data);
 }
 
 /**
@@ -78,40 +102,15 @@ function updateIndex($lang, $file)
     $id = str_replace('/', '-', $id);
     $id = trim($id, '-');
 
-    $url = implode('/', array(ES_HOST, ES_INDEX, CAKEPHP_VERSION . '-' . $lang, $id));
+    $url = implode('/', array(ES_HOST, ES_INDEX . '-' . $lang, '_doc', $id));
 
-    $data = array(
+    $data = json_encode([
         'contents' => $fileData['contents'],
         'title' => $fileData['title'],
         'url' => $path,
-    );
-
-    $data = json_encode($data);
-    $size = strlen($data);
-
-    $fh = fopen('php://memory', 'rw');
-    fwrite($fh, $data);
-    rewind($fh);
-
+    ]);
     echo "Sending request:\n\tfile: $file\n\turl: $url\n";
-
-    $ch = curl_init($url);
-    curl_setopt($ch, CURLOPT_PUT, true);
-    curl_setopt($ch, CURLOPT_INFILE, $fh);
-    curl_setopt($ch, CURLOPT_INFILESIZE, $size);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-    $response = curl_exec($ch);
-    $metadata = curl_getinfo($ch);
-
-    if ($metadata['http_code'] > 400 || !$metadata['http_code']) {
-        echo "[ERROR] Failed to complete request.\n";
-        var_dump($response);
-        exit(2);
-    }
-
-    curl_close($ch);
-    fclose($fh);
+    doRequest($url, CURLOPT_PUT, $data);
 
     echo "Sent $file\n";
 }
@@ -140,4 +139,46 @@ function readFileData($file)
     return compact('contents', 'title');
 }
 
-main($argv);
+/**
+ * Send a request with curl. If the request fails the process will die.
+ *
+ * @param string $url
+ * @param int $method curl opt value for the method.
+ * @param string | null $body The body to send if necessary.
+ */
+function doRequest($url, $method, $body = null)
+{
+    $ch = curl_init($url);
+    curl_setopt($ch, $method, true);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, [
+        'Content-Type: application/json',
+    ]);
+
+    $fh = null;
+    if ($body) {
+        $size = strlen($body);
+
+        $fh = fopen('php://memory', 'rw');
+        fwrite($fh, $body);
+        rewind($fh);
+
+        curl_setopt($ch, CURLOPT_INFILE, $fh);
+        curl_setopt($ch, CURLOPT_INFILESIZE, $size);
+    }
+
+    $response = curl_exec($ch);
+    $metadata = curl_getinfo($ch);
+
+    if ($metadata['http_code'] > 400 || !$metadata['http_code']) {
+        echo "[ERROR] Failed to complete request.\n";
+        var_dump($response);
+        exit(2);
+    }
+    curl_close($ch);
+    if ($fh !== null) {
+        fclose($fh);
+    }
+}
+
+main();
