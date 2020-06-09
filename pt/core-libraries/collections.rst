@@ -5,50 +5,48 @@ Collections
 
 .. php:class:: Collection
 
-The collection classes provide a set of tools to manipulate arrays or
-``Traversable`` objects. If you have ever used underscore.js,
-you have an idea of what you can expect from the collection classes.
+As classes de coleção fornecem um conjunto de ferramentas para manipular matrizes 
+ou objetos ``Traversable``. Se você já usou underscore.js, tem uma idéia do que 
+pode esperar das classes de coleção.
 
-Collection instances are immutable; modifying a collection will instead generate
-a new collection. This makes working with collection objects more predictable as
-operations are side-effect free.
+Instâncias de coleção são imutáveis; modificar uma coleção irá gerar uma nova coleção. 
+Isso torna o trabalho com objetos de coleção mais previsível, pois as operações são 
+livres de efeitos colaterais.
 
-Quick Example
-=============
 
-Collections can be created using an array or ``Traversable`` object. You'll also
-interact with collections every time you interact with the ORM in CakePHP.
-A simple use of a Collection would be::
+Exemplo Rápido
+==============
+
+Coleções podem ser criadas usando uma matriz ou um objeto ``Traversable``. Você 
+também interagirá com as coleções sempre que interagir com o ORM no CakePHP. Um 
+simples uso de uma coleção seria::
 
     use Cake\Collection\Collection;
 
     $items = ['a' => 1, 'b' => 2, 'c' => 3];
     $collection = new Collection($items);
 
-    // Create a new collection containing elements
-    // with a value greater than one.
+    // Crie uma nova coleção contendo elementos
+    // com um valor maior que um.
     $overOne = $collection->filter(function ($value, $key, $iterator) {
         return $value > 1;
     });
 
-You can also use the ``collection()`` helper function instead of ``new
-Collection()``::
+Você também pode usar a função auxiliar ``collection()`` em vez de ``new Collection()``::
 
     $items = ['a' => 1, 'b' => 2, 'c' => 3];
 
-    // These both make a Collection instance.
+    // Ambos formam uma instância de coleção.
     $collectionA = new Collection($items);
     $collectionB = collection($items);
 
-The benefit of the helper method is that it is easier to chain off of than
-``(new Collection($items))``.
+O benefício do método auxiliar é que é mais fácil encadear do que ``(new Collection($items))``.
 
-The :php:trait:`~Cake\\Collection\\CollectionTrait` allows you to integrate
-collection-like features into any ``Traversable`` object you have in your
-application as well.
+O :php:trait:`~Cake\\Collection\\CollectionTrait` permite integrar recursos semelhantes a 
+coleções em qualquer objeto ``Traversable`` que você possui no seu aplicativo.
 
-List of Methods
-===============
+Lista de Métodos
+================
 
 .. csv-table::
     :class: docutils internal-toc
@@ -69,27 +67,28 @@ List of Methods
     :php:meth:`take`, :php:meth:`through`, :php:meth:`transpose`
     :php:meth:`unfold`, :php:meth:`zip`
 
-Iterating
-=========
+Iterando
+========
 
 .. php:method:: each(callable $c)
 
-Collections can be iterated and/or transformed into new collections with the
-``each()`` and ``map()`` methods. The ``each()`` method will not create a new
-collection, but will allow you to modify any objects within the collection::
+As coleções podem ser iteradas e/ou transformadas em novas coleções com os 
+métodos ``each()`` e ``map()``. O método ``each()`` não criará uma 
+nova coleção, mas permitirá que você modifique quaisquer objetos dentro da 
+coleção::
 
     $collection = new Collection($items);
     $collection = $collection->each(function ($value, $key) {
         echo "Element $key: $value";
     });
 
-The return of ``each()`` will be the collection object. Each will iterate the
-collection immediately applying the callback to each value in the collection.
+O retorno de ``each()`` será o objeto de coleção. Cada um iterará a coleção 
+imediatamente aplicando o retorno de chamada a cada valor na coleção.
 
 .. php:method:: map(callable $c)
 
-The ``map()`` method will create a new collection based on the output of the
-callback being applied to each object in the original collection::
+O método ``map()`` criará uma nova coleção com base na saída do retorno 
+de chamada que está sendo aplicada a cada objeto na coleção original::
 
     $items = ['a' => 1, 'b' => 2, 'c' => 3];
     $collection = new Collection($items);
@@ -98,50 +97,49 @@ callback being applied to each object in the original collection::
         return $value * 2;
     });
     
-    // $result contains [2, 4, 6];
+    // $result contém [2, 4, 6];
     $result = $new->toList();
 
-    // $result contains ['a' => 2, 'b' => 4, 'c' => 6];
+    // $result contém ['a' => 2, 'b' => 4, 'c' => 6];
     $result = $new->toArray();
 
-The ``map()`` method will create a new iterator which lazily creates
-the resulting items when iterated.
+O método ``map()`` criará um novo iterador que cria preguiçosamente os 
+itens resultantes quando iterado.
 
 .. php:method:: extract($matcher)
 
-One of the most common uses for a ``map()`` function is to extract a single
-column from a collection. If you are looking to build a list of elements
-containing the values for a particular property, you can use the ``extract()``
-method::
+Um dos usos mais comuns de uma função ``map()`` é extrair uma única coluna 
+de uma coleção. Se você deseja criar uma lista de elementos contendo os valores 
+de uma propriedade específica, pode usar o método ``extract()``::
 
     $collection = new Collection($people);
     $names = $collection->extract('name');
 
-    // $result contains ['mark', 'jose', 'barbara'];
+    // $result contém ['mark', 'jose', 'barbara'];
     $result = $names->toList();
 
-As with many other functions in the collection class, you are allowed to specify
-a dot-separated path for extracting columns. This example will return
-a collection containing the author names from a list of articles::
+Como em muitas outras funções da classe de coleção, você pode especificar um caminho 
+separado por pontos para extrair colunas. Este exemplo retornará uma coleção que 
+contém os nomes dos autores de uma lista de artigos::
 
     $collection = new Collection($articles);
     $names = $collection->extract('author.name');
 
-    // $result contains ['Maria', 'Stacy', 'Larry'];
+    // $result contém ['Maria', 'Stacy', 'Larry'];
     $result = $names->toList();
 
-Finally, if the property you are looking after cannot be expressed as a path,
-you can use a callback function to return it::
+Por fim, se a propriedade que você está procurando não pode ser expressa como um caminho, 
+você pode usar uma função de retorno de chamada para retorná-la::
 
     $collection = new Collection($articles);
     $names = $collection->extract(function ($article) {
         return $article->author->name . ', ' . $article->author->last_name;
     });
 
-Often, the properties you need to extract a common key present in multiple
-arrays or objects that are deeply nested inside other structures. For those
-cases you can use the ``{*}`` matcher in the path key. This matcher is often
-helpful when matching HasMany and BelongsToMany association data::
+Freqüentemente, as propriedades necessárias para extrair uma chave comum 
+presente em várias matrizes ou objetos profundamente aninhados em outras estruturas. 
+Para esses casos, você pode usar o combinador ``{*}`` na chave do caminho. 
+Esse correspondente geralmente é útil ao combinar dados da associação HasMany e BelongsToMany::
 
     $data = [
         [
@@ -163,14 +161,16 @@ helpful when matching HasMany and BelongsToMany association data::
 
     $numbers = (new Collection($data))->extract('phone_numbers.{*}.number');
     $numbers->toList();
-    // Returns ['number-1', 'number-2', 'number-3', 'number-4', 'number-5']
+    // Retorna ['number-1', 'number-2', 'number-3', 'number-4', 'number-5']
 
-This last example uses ``toList()`` unlike other examples, which is important
-when we're getting results with possibly duplicate keys. By using ``toList()``
-we'll be guaranteed to get all values even if there are duplicate keys.
+Este último exemplo usa ``toList()`` diferente de outros exemplos, o que é 
+importante quando estamos obtendo resultados com chaves possivelmente duplicadas. 
+Ao usar ``toList()``, garantimos a obtenção de todos os valores, mesmo que haja 
+chaves duplicadas.
 
-Unlike :php:meth:`Cake\\Utility\\Hash::extract()` this method only supports the
-``{*}`` wildcard. All other wildcard and attributes matchers are not supported.
+Ao contrário de :php:meth:`Cake\\Utility\\Hash::extract()` este método suporta 
+apenas o curinga ``{*}``. Todos os outros correspondentes de curinga e atributos 
+não são suportados.
 
 .. php:method:: combine($keyPath, $valuePath, $groupPath = null)
 
