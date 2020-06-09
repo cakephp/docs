@@ -84,6 +84,9 @@ I18n
 * The i18n global functions now only return strings. The changes made to 4.0 to
   remove the null return value when no translation string is provide have been
   backported to 3.9.
+* Lenient parsing can be disabled for ``parseDateTime()`` and ``parseDate()`` using
+  ``disableLenientParsing()``. The default is enabled - the same as IntlDateFormatter.
+
 
 ORM
 ---
