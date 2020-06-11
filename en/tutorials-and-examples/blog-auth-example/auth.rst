@@ -11,7 +11,7 @@ First, let's create a new table in our blog database to hold our users' data::
 
     CREATE TABLE users (
         id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-        username VARCHAR(50),
+        email VARCHAR(255),
         password VARCHAR(255),
         role VARCHAR(20),
         created DATETIME DEFAULT NULL,
@@ -19,7 +19,7 @@ First, let's create a new table in our blog database to hold our users' data::
     );
 
 We have adhered to the CakePHP conventions in naming tables, but we're also
-taking advantage of another convention: By using the username and password
+taking advantage of another convention: By using the email and password
 columns in a users table, CakePHP will be able to auto-configure most things for
 us when implementing the user login.
 
@@ -37,7 +37,8 @@ and validating any user data::
         public function validationDefault(Validator $validator): Validator
         {
             return $validator
-                ->notEmpty('username', 'A username is required')
+                ->notEmpty('email', 'An email is required')
+                ->email('email')
                 ->notEmpty('password', 'A password is required')
                 ->notEmpty('role', 'A role is required')
                 ->add('role', 'inList', [
@@ -99,7 +100,7 @@ tutorial, we will show just the **add.php**:
     <?= $this->Form->create($user) ?>
         <fieldset>
             <legend><?= __('Add User') ?></legend>
-            <?= $this->Form->control('username') ?>
+            <?= $this->Form->control('email') ?>
             <?= $this->Form->control('password') ?>
             <?= $this->Form->control('role', [
                 'options' => ['admin' => 'Admin', 'author' => 'Author']
@@ -250,7 +251,7 @@ Now, on every request, the ``AuthenticationMiddleware`` will inspect the request
 session to look for an authenticated user. If we are loading the
 ``/users/login`` page, it'll inspect also the posted form data (if any) to
 extract the credentials.  By default the credentials will be extracted from the
-``username`` and ``password`` fields in the request data.  The authentication
+``email`` and ``password`` fields in the request data.  The authentication
 result will be injected in a request attribute named ``authentication``. You can
 inspect the result at any time using
 ``$this->request->getAttribute('authentication')`` from your controller actions.
@@ -286,7 +287,7 @@ In your ``UsersController``, add the following code::
         }
         // display error if user submitted and authentication failed
         if ($this->request->is('post') && !$result->isValid()) {
-            $this->Flash->error(__('Invalid username or password'));
+            $this->Flash->error(__('Invalid email or password'));
         }
     }
 
@@ -298,7 +299,7 @@ Add the template logic for your login action::
         <h3>Login</h3>
         <?= $this->Form->create() ?>
         <fieldset>
-            <legend><?= __('Please enter your username and password') ?></legend>
+            <legend><?= __('Please enter your email and password') ?></legend>
             <?= $this->Form->control('email', ['required' => true]) ?>
             <?= $this->Form->control('password', ['required' => true]) ?>
         </fieldset>

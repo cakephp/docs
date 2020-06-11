@@ -19,34 +19,12 @@ methodes de hook suivantes:
   Par défaut, cela inclura **config/routes.php**.
 * ``middleware`` Utilisé pour ajouter des :doc:`middleware </controllers/middleware>`
   dans votre application.
-* ``console`` Utilisé pour ajouter des :doc:`commandes de console </console-and-shells>`
+* ``console`` Utilisé pour ajouter des :doc:`commandes de console
+  </console-commands>`
   à votre application. Par défaut, cela découvrira automatiquement les shells
   et les commandes dans votre application et dans tous les plugins.
 * ``events`` Utilisé pour ajouter des :doc:`écouteurs (listener) d'événement </core-libraries/events>`
   au gestionnaire d'événements de l'application.
-
-.. _adding-http-stack:
-
-Ajout de la nouvelle pile HTTP à une application existante
-==========================================================
-
-L'utilisation de la classe Application et du middleware HTTP dans une
-application existante nécessite quelques modifications de votre code.
-
-#. Premièrement mettez à jour **webroot/index.php**. Copiez le contenu du
-   fichier depuis le `squelette de l'application <https://github.com/cakephp/app/tree/master/webroot/index.php>`__.
-#. Créez une classe ``Application``. Référez-vous à la section
-   :ref:`using-middleware` pour savoir comment. Ou copiez l'exemple
-   dans le `squelette de l'application <https://github.com/cakephp/app/tree/master/src/Application.php>`__.
-#. Créez **config/requirements.php** si il n'existe pas et ajoutez le contenu
-   du `squelette de l'application <https://github.com/cakephp/app/blob/master/config/requirements.php>`__.
-
-Une fois ces trois étapes terminées, vous êtes prêt à réimplémenter n'importe
-quel filtre du dispatcher d'application/plugin comme middleware HTTP.
-
-Si vous effectuez des tests, vous devrez également mettre à jour votre fichier
-**tests/bootstrap.php** en copiant le contenu du fichier à partir du
-`squelette de l'application <https://github.com/cakephp/app/tree/master/tests/bootstrap.php>`_.
 
 .. meta::
     :title lang=fr: Application CakePHP

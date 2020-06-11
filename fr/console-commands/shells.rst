@@ -207,7 +207,7 @@ Shell Helpers
 =============
 
 If you have complex output generation logic, you can use
-:doc:`/console-and-shells/helpers` to encapsulate this logic in a re-usable way.
+:doc:`/console-commands/helpers` to encapsulate this logic in a re-usable way.
 
 .. _invoking-other-shells-from-your-shell:
 
@@ -265,14 +265,14 @@ the CakePHP console welcome message from being displayed on dispatched shells.
 Parsing CLI Options
 ===================
 
-Shells use :doc:`/console-and-shells/option-parsers` to define their options,
+Shells use :doc:`/console-commands/option-parsers` to define their options,
 arguments and automate help generation.
 
 Interacting with Input/Output
 =============================
 
 Shells allow you to access a ``ConsoleIo`` instance via the ``getIo()`` method.
-See the :doc:`/console-and-shells/input-output` section for more information.
+See the :doc:`/console-commands/input-output` section for more information.
 
 In addition to the ``ConsoleIo`` object, Shell classes offer a suite of shortcut
 methods. These methods are shortcuts and aliases to those found on ``ConsoleIo``::

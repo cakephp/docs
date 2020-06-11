@@ -92,6 +92,29 @@ job('Book - Deploy 4.0') {
   }
 }
 
+job('Book - Deploy 4.next') {
+  description('Deploy the 4.next book when changes are pushed.')
+  scm {
+    github(REPO_NAME, '4.next')
+  }
+  triggers {
+    scm('H/5 * * * *')
+  }
+  logRotator {
+    daysToKeep(30)
+  }
+  steps {
+    shell(BUILD_STEPS.replaceAll('VERSION', '4next'))
+  }
+  publishers {
+    slackNotifier {
+      room('#dev')
+      notifyFailure(true)
+      notifyRepeatedFailure(true)
+    }
+  }
+}
+
 job('Book - Deploy 2.x') {
   description('Deploy the 2.x book when changes are pushed.')
   scm {

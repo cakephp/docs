@@ -43,7 +43,7 @@ segundo parâmetro, uma matriz de opções:
 
 * ``key`` O padrão é 'flash'. A chave da matriz encontrada sob a chave ``Flash`` na sessão.
 * ``element`` O padrão é ``null``, mas será automaticamente definido ao usar o método mágico 
-``__call()``. O nome do elemento a ser usado para renderização.
+  ``__call()``. O nome do elemento a ser usado para renderização.
 * ``params`` Uma matriz opcional de chaves/valores para disponibilizar como variáveis dentro de um elemento.
 * ``clear`` espera um ``bool`` e permite excluir todas as mensagens da pilha atual e iniciar uma nova.
 

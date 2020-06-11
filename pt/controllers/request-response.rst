@@ -268,11 +268,11 @@ Existem vários detectores embutidos que você pode usar:
 * ``is('ssl')`` Verifique se a solicitação é via SSL.
 * ``is('flash')`` Verifique se a solicitação possui um User-Agent de Flash.
 * ``is('requested')`` Verifique se a solicitação possui um parâmetro de consulta
-   'solicitado' com o valor 1.
+  'solicitado' com o valor 1.
 * ``is('json')`` Verifique se a solicitação possui extensão 'json' e
-   aceite mimetype 'application/json'.
+  aceite mimetype 'application/json'.
 * ``is('xml')`` Verifique se a solicitação possui extensão 'xml' e aceite
-   mimetype 'application/xml' ou 'text/xml'.
+  mimetype 'application/xml' ou 'text/xml'.
 
 Dados da Sessão
 ---------------

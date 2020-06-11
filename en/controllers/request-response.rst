@@ -1068,7 +1068,7 @@ See the :ref:`creating-cookies` section for how to use the cookie object. You
 can use ``withExpiredCookie()`` to send an expired cookie in the response. This
 will make the browser remove its local cookie::
 
-    $this->response = $this->response->withExpiredCookie('remember_me');
+    $this->response = $this->response->withExpiredCookie(new Cookie('remember_me'));
 
 .. _cors-headers:
 

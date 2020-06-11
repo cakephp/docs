@@ -252,7 +252,7 @@ Control which Fields Used for Ordering
 
 By default sorting can be done on any non-virtual column a table has. This is
 sometimes undesirable as it allows users to sort on un-indexed columns that can
-be expensive to order by. You can set the whitelist of fields that can be sorted
+be expensive to order by. You can set the allowed list of fields that can be sorted
 using the ``sortWhitelist`` option. This option is required when you want to
 sort on any associated data, or computed fields that may be part of your
 pagination query::
@@ -263,7 +263,7 @@ pagination query::
         ]
     ];
 
-Any requests that attempt to sort on fields not in the whitelist will be
+Any requests that attempt to sort on fields not in the allowed list will be
 ignored.
 
 Limit the Maximum Number of Rows per Page

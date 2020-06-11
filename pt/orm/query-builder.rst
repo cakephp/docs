@@ -1372,11 +1372,11 @@ não devem conter dados do usuário::
 
     $query->where([
         // Os dados no lado esquerdo/chave não são seguros, pois serão
-        // inserido na consulta gerada como está
+        // inserido na consulta gerada como está
         $userData => $value,
 
         // O mesmo se aplica às entradas de valor único, elas não são
-        // seguras para usar com os dados do usuário de qualquer forma
+            // seguras para usar com os dados do usuário de qualquer forma
         $userData,
         "MATCH (comment) AGAINST ($userData)",
         'created < NOW() - ' . $userData
@@ -1396,7 +1396,7 @@ Ao criar expressões de função, os nomes de funções nunca devem conter dados
     $query->func()->{$userData}($arg1);
 
     // Também não é seguro usar uma matriz de
-    // dados do usuário em uma expressão de função
+    // dados do usuário em uma expressão de função
     $query->func()->coalesce($userData);
 
 Expressões brutas nunca são seguras::

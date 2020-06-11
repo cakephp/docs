@@ -21,7 +21,7 @@ project directory.
         $ phinx init .
 
 Open this file in your text editor to setup your project configuration. Please
-see the :doc:`Configuration <configuration>` chapter for more information.
+see the :doc:`Configuration <./configuration>` chapter for more information.
 
 The Create Command
 ------------------
@@ -36,7 +36,7 @@ CamelCase format.
 
 Open the new migration file in your text editor to add your database
 transformations. Phinx creates migration files using the path specified in your
-``phinx.yml`` file. Please see the :doc:`Configuration <configuration>` chapter
+``phinx.yml`` file. Please see the :doc:`Configuration <./configuration>` chapter
 for more information.
 
 You are able to override the template file used by Phinx by supplying an
@@ -198,7 +198,7 @@ in CamelCase format.
 
 Open the new seed file in your text editor to add your database seed commands.
 Phinx creates seed files using the path specified in your ``phinx.yml`` file.
-Please see the :doc:`Configuration <configuration>` chapter for more information.
+Please see the :doc:`Configuration <./configuration>` chapter for more information.
 
 The Seed Run Command
 --------------------
