@@ -331,16 +331,17 @@ This means the session is accessible from:
 * Cells
 * Components
 
-In addition to the basic session object, you can also use the
-:php:class:`Cake\\View\\Helper\\SessionHelper` to interact with the session in
-your views. A basic example of session usage would be::
+A basic example of session usage in controllers, views and cells would be::
 
-    $name = $this->getRequest()->getSession()->read('User.name');
+    $name = $this->request->getSession()->read('User.name');
 
     // If you are accessing the session multiple times,
     // you will probably want a local variable.
-    $session = $this->getRequest()->getSession();
+    $session = $this->request->getSession();
     $name = $session->read('User.name');
+    
+In helpers you can use ``$this->_View->getRequest()`` to get the request object
+and in component you can use ``$this->getController->getRequest()`.
 
 Reading & Writing Session Data
 ==============================
