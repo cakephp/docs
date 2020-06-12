@@ -499,19 +499,19 @@ It is also possible to sort a column based on associations:
 
     Sorting by columns in associated models requires setting these in the
     ``PaginationComponent::paginate`` property. Using the example above, the
-    controller handling the pagination would need to set its ``sortWhitelist``
+    controller handling the pagination would need to set its ``sortableFields``
     key as follows:
     
     .. code-block:: php
     
         $this->paginate = [
-            'sortWhitelist' => [
+            'sortableFields' => [
                 'Posts.title',
                 'Authors.name',
             ],
         ];
         
-    For more information on using the ``sortWhitelist`` option, please see
+    For more information on using the ``sortableFields`` option, please see
     :ref:`control-which-fields-used-for-ordering`.
 
 The final ingredient to pagination display in views is the addition of page

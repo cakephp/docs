@@ -8,6 +8,14 @@ deprecations and features added in 4.1.
 Deprecations
 ============
 
+Controller
+----------
+
+* The ``sortWhitelist`` option of  ``PaginatorComponent`` has been deprecated.
+  Use ``sortableFields`` instead.
+* The ``whitelist`` option of  ``PaginatorComponent`` has been deprecated.
+  Use ``allowedParameters`` instead.
+
 Database
 --------
 
@@ -25,6 +33,15 @@ Database
 * ``DateTimeType::setTimezone()`` was deprecated. use ``setDatabaseTimezone()`` instead.
 * The magic method signature for ``FunctionBuilder::cast([...])`` is deprecated.
   Use ``FunctionBuilder::cast('field', 'type')`` instead.
+
+Datasource
+----------
+
+* The ``sortWhitelist`` option of  ``Paginator`` has been deprecated.
+  Use ``sortableFields`` instead.
+* The ``whitelist`` option of  ``Paginator`` has been deprecated.
+  Use ``allowedParameters`` instead.
+
 
 Form
 ----
