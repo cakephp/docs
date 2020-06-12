@@ -121,6 +121,11 @@ install the Authentication Plugin:
 
     composer require cakephp/authentication:^2.0
 
+Then add the following to your application's ``bootstrap()`` method::
+
+    // in src/Application.php in the bootstrap() method.
+    $this->addPlugin('Authentication');
+
 Adding Password Hashing
 =======================
 
