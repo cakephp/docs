@@ -174,9 +174,9 @@ não são suportados.
 
 .. php:method:: combine($keyPath, $valuePath, $groupPath = null)
 
-Collections allow you to create a new collection made from keys and values in
-an existing collection. Both the key and value paths can be specified with
-dot notation paths::
+Coleções permitem que você crie uma nova coleção feita de chaves e valores em 
+uma coleção existente. Os caminhos de chave e valor podem ser especificados com 
+notação de caminhos com ponto::
 
     $items = [
         ['id' => 1, 'name' => 'foo', 'parent' => 'a'],
@@ -185,26 +185,26 @@ dot notation paths::
     ];
     $combined = (new Collection($items))->combine('id', 'name');
 
-    // Result will look like this when converted to array
+    // O resultado ficará assim quando convertido em array
     [
         1 => 'foo',
         2 => 'bar',
         3 => 'baz',
     ];
 
-You can also optionally use a ``groupPath`` to group results based on a path::
+Opcionalmente, você também pode usar um ``groupPath`` para agrupar resultados com base em um caminho::
 
     $combined = (new Collection($items))->combine('id', 'name', 'parent');
 
-    // Result will look like this when converted to array
+    // O resultado ficará assim quando convertido em array
     [
         'a' => [1 => 'foo', 3 => 'baz'],
         'b' => [2 => 'bar']
     ];
 
-Finally you can use *closures* to build keys/values/groups paths dynamically,
-for example when working with entities and dates (converted to ``Cake/Time``
-instances by the ORM) you may want to group results by date::
+E por fim, você pode usar *closures* para criar caminhos de chaves/valores/grupos dinamicamente, 
+por exemplo, ao trabalhar com entidades e datas (convertidas em instâncias ``Cake/Time`` pelo ORM), 
+você pode querer agrupar os resultados por data::
 
     $combined = (new Collection($entities))->combine(
         'id',
@@ -212,7 +212,7 @@ instances by the ORM) you may want to group results by date::
         function ($entity) { return $entity->date->toDateString(); }
     );
 
-    // Result will look like this when converted to array
+    // O resultado ficará assim quando convertido em array
     [
         'date string like 2015-05-01' => ['entity1->id' => entity1, 'entity2->id' => entity2, ..., 'entityN->id' => entityN]
         'date string like 2015-06-01' => ['entity1->id' => entity1, 'entity2->id' => entity2, ..., 'entityN->id' => entityN]
@@ -220,50 +220,50 @@ instances by the ORM) you may want to group results by date::
 
 .. php:method:: stopWhen(callable $c)
 
-You can stop the iteration at any point using the ``stopWhen()`` method. Calling
-it in a collection will create a new one that will stop yielding results if the
-passed callable returns true for one of the elements::
+Você pode parar a iteração a qualquer momento usando o método ``stopWhen()``. 
+A chamada em uma coleção criará uma nova e irá interromper a execução de novos resultados 
+se a chamada passada retornar verdadeira para um dos elementos::
 
     $items = [10, 20, 50, 1, 2];
     $collection = new Collection($items);
 
     $new = $collection->stopWhen(function ($value, $key) {
-        // Stop on the first value bigger than 30
+        // Pare no primeiro valor maior que 30
         return $value > 30;
     });
 
-    // $result contains [10, 20];
+    // $result contém [10, 20];
     $result = $new->toList();
 
 .. php:method:: unfold(callable $c)
 
-Sometimes the internal items of a collection will contain arrays or iterators
-with more items. If you wish to flatten the internal structure to iterate once
-over all elements you can use the ``unfold()`` method. It will create a new
-collection that will yield every single element nested in the collection::
+Às vezes, os itens internos de uma coleção contêm matrizes ou iteradores com mais 
+itens. Se você deseja nivelar a estrutura interna para iterar uma vez todos os 
+elementos, pode usar o método ``unfold()``. Ele criará uma nova coleção que 
+produzirá todos os elementos aninhados na coleção::
 
     $items = [[1, 2, 3], [4, 5]];
     $collection = new Collection($items);
     $new = $collection->unfold();
 
-    // $result contains [1, 2, 3, 4, 5];
+    // $result contém [1, 2, 3, 4, 5];
     $result = $new->toList();
 
-When passing a callable to ``unfold()`` you can control what elements will be
-unfolded from each item in the original collection. This is useful for returning
-data from paginated services::
+Ao passar uma chamada para ``unfold()``, você pode controlar quais elementos 
+serão desdobrados de cada item da coleção original. Isso é útil para retornar 
+dados de serviços paginados::
 
     $pages = [1, 2, 3, 4];
     $collection = new Collection($pages);
     $items = $collection->unfold(function ($page, $key) {
-        // An imaginary web service that returns a page of results
+        // Um serviço da web imaginário que retorna uma página de resultados
         return MyService::fetchPage($page)->toList();
     });
 
     $allPagesItems = $items->toList();
 
-If you are using PHP 5.5+, you can use the ``yield`` keyword inside ``unfold()``
-to return as many elements for each item in the collection as you may need::
+Se você estiver usando o PHP 5.5+, você pode usar a palavra-chave ``yield`` dentro de 
+``unfold()`` para retornar quantos elementos de cada item da coleção você precisará::
 
     $oddNumbers = [1, 3, 5, 7];
     $collection = new Collection($oddNumbers);
@@ -272,15 +272,14 @@ to return as many elements for each item in the collection as you may need::
         yield $oddNumber + 1;
     });
 
-    // $result contains [1, 2, 3, 4, 5, 6, 7, 8];
+    // $result contém [1, 2, 3, 4, 5, 6, 7, 8];
     $result = $new->toList();
 
 .. php:method:: chunk($chunkSize)
 
-When dealing with large amounts of items in a collection, it may make sense to
-process the elements in batches instead of one by one. For splitting
-a collection into multiple arrays of a certain size, you can use the ``chunk()``
-function::
+Ao lidar com grandes quantidades de itens em uma coleção, pode fazer sentido 
+processar os elementos em lotes, em vez de um por um. Para dividir uma coleção 
+em várias matrizes de um determinado tamanho, você pode usar a função ``chunk()``::
 
     $items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
     $collection = new Collection($items);
