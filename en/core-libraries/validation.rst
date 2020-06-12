@@ -607,7 +607,7 @@ class. The Validation class contains a variety of static methods that provide
 validators for several common validation situations.
 
 The `API documentation
-<https://api.cakephp.org/3.x/class-Cake.Validation.Validation.html>`_ for the
+<https://api.cakephp.org/4.x/class-Cake.Validation.Validation.html>`_ for the
 ``Validation`` class provides a good list of the validation rules that are
 available, and their basic usage.
 
