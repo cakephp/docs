@@ -390,7 +390,7 @@ When enabled, you can access the current CSRF token on the request object::
 
     $token = $this->request->getAttribute('csrfToken');
 
-You can use the whitelisting callback feature for more fine grained control over
+You can use the skip check callback feature for more fine grained control over
 URLs for which CSRF token check should be done::
 
     // in src/Application.php
@@ -401,7 +401,7 @@ URLs for which CSRF token check should be done::
         $csrf = new CsrfProtectionMiddleware();
 
         // Token check will be skipped when callback returns `true`.
-        $csrf->whitelistCallback(function ($request) {
+        $csrf->skipCheckCallback(function ($request) {
             // Skip token check for API URLs.
             if ($request->getParam('prefix') === 'Api') {
                 return true;
