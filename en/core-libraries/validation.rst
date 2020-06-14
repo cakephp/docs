@@ -201,7 +201,7 @@ containing data related to the validation process:
 If you need to pass additional data to your validation methods such as the
 current user's id, you can use a custom dynamic provider from your controller. ::
 
-    $this->Examples->getValidator('default')->provider('passed', [
+    $this->Examples->getValidator('default')->setProvider('passed', [
         'count' => $countFromController,
         'userid' => $this->Auth->user('id')
     ]);
