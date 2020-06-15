@@ -137,7 +137,7 @@ Por defecto, la paginación utiliza una consulta ``count()`` para calcular el ta
 del conjunto de resultados para que puedan ser renderizados los enlaces de número de 
 página. En conjuntos de datos muy grandes, esta consulta de conteo puede ser muy costosa.
 En situaciones donde solo quieres mostrar los enlaces "Siguiente" y "Anterior" puedes 
-utilizar el paginador 'simple' que realiza una consulta de conteo.
+utilizar el paginador 'simple' que realiza una consulta de conteo::
 
     public function initialize(): void
     {
