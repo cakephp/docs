@@ -447,7 +447,7 @@ tables use which connections. This is the ``defaultConnectionName()`` method::
 
     class ArticlesTable extends Table
     {
-        public static function defaultConnectionName() {
+        public static function defaultConnectionName(): string {
             return 'replica_db';
         }
     }
