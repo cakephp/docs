@@ -202,7 +202,7 @@ Paginar el Mismo Modelo Varias Veces
 ------------------------------------
 
 Para paginar el mismo modelo multiples veces dentro de una sola acción del controlador necesitas definir 
-un alias para el modelo. Consulte ref:`table-registry-usage` para detalles adicionales sobre como 
+un alias para el modelo. Consulte :ref:`table-registry-usage` para detalles adicionales sobre como 
 utilizar la tabla de registros:: 
 
     // En una acción del controlador
