@@ -281,7 +281,7 @@ moment, but let's just test that our shell's description is displayed in ``stdou
     {
         use ConsoleIntegrationTestTrait;
 
-        public function setUp()
+        public function setUp(): void
         {
             parent::setUp();
             $this->useCommandRunner();
