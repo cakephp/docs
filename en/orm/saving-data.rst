@@ -1053,10 +1053,11 @@ column Types::
 
     // In src/Model/Table/UsersTable.php
     use Cake\Database\Schema\TableSchema;
+    use Cake\Database\Schema\TableSchemaInterface;
 
     class UsersTable extends Table
     {
-        protected function _initializeSchema(TableSchema $schema)
+        protected function _initializeSchema(TableSchema $schema): TableSchemaInterface
         {
             $schema->setColumnType('preferences', 'json');
 
