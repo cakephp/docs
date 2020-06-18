@@ -8,6 +8,13 @@ deprecations and features added in 4.1.
 Deprecations
 ============
 
+4.1 introduces a few deprecations. All of these features will continue for the
+duration of 4.x but will be removed in 5.0. You can use the
+:ref:`upgrade tool <upgrade-tool-use>` to automate updating usage of deprecated
+features::
+
+    bin/cake upgrade rector --rules cakephp41 <path/to/app/src>
+
 Controller
 ----------
 
