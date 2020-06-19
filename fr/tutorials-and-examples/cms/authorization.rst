@@ -1,30 +1,30 @@
-CMS Tutorial - Authorization
+Tutoriel CMS - Autorisation
 ############################
 
-With users now able to login to our CMS, we want to apply authorization rules
-to ensure that each user only edits the posts they own. We'll use the
-`authorization plugin <https://book.cakephp.org/authorization/2>`__ to do this.
+Maintenant que nos utilisateurs peuvent se connecter à notre CMS, nous voulons appliquer des règles d'autorisation
+pour nous assurer que chaque utilisateur ne puisse éditer que les messages dont ils sont l'auteur. Nous allons
+utiliser le `plugin authorization <https://book.cakephp.org/authorization/2>`__ pour nous en assurer.
 
-Installing Authorization Plugin
-================================
+Installer le plugin Authorization
+=================================
 
-Use composer to install the Auhorization Plugin:
+Utilisez composer pour installer le plugin Authorization:
 
 .. code-block:: bash
 
     composer require cakephp/authorization:^2.0
 
-Load the plugin by adding the following statement to the ``bootstrap()`` method in **src/Application.php**::
+Chargez le plugin en ajoutant le code suivant à la méthode ``bootstrap()`` dans le fichier **src/Application.php**::
 
     $this->addPlugin('Authorization');
 
-Enabling the Authorization Plugin
-=================================
+Activer le plugin Authorization
+===============================
 
-The Authorization plugin integrates into your application as a middleware layer
-and optionally a component to make checking authorization easier. First, lets
-apply the middleware. In **src/Application.php** add the following to the class
-imports::
+Le plugin Authorization s'intègre dans votre application grâce à la couche middleware et
+optionnellement par un composant pour faciliter les vérifications des doits.
+Premièrement, appliquons le middleware. Dans **src/Application.php** ajouter le code suivant
+dans les import de la classe::
 
     use Authorization\AuthorizationService;
     use Authorization\AuthorizationServiceInterface;
@@ -33,21 +33,20 @@ imports::
     use Authorization\Policy\OrmResolver;
     use Psr\Http\Message\ResponseInterface;
 
-Add the ``AuthorizationProviderInterface`` to the implemented interfaces on your application::
+Ajoutez ``AuthorizationProviderInterface`` aux interfaces déjà importées par votre application::
 
     class Application extends BaseApplication
         implements AuthenticationServiceProviderInterface,
         AuthorizationServiceProviderInterface
 
-Then add the following to your ``middleware()`` method::
+Enfin, ajoutez le code suivant à votre méthode ``middleware()``::
 
-    // Add authorization **after** authentication
+    // Attention: Ajoutez Authorization **après** Authentication
     $middlewareQueue->add(new AuthorizationMiddleware($this));
 
-The ``AuthorizationMiddleware`` will call a hook method on your application when
-it starts handling the request. This hook method allows your application to
-define the ``AuthorizationService`` it wants to use. Add the following method your
-**src/Application.php**::
+``AuthorizationMiddleware`` va appeler une méthode hook sur votre application qui va permettre
+de définir le ``AuthorizationService`` à utiliser. Ajoutez la méthode suivante au
+fichier **src/Application.php**::
 
     public function getAuthorizationService(ServerRequestInterface $request): AuthorizationServiceInterface
     {
@@ -56,42 +55,40 @@ define the ``AuthorizationService`` it wants to use. Add the following method yo
         return new AuthorizationService($resolver);
     }
 
-The OrmResolver lets the authorization plugin find policy classes for ORM
-entities and queries. Other resolvers can be used to find policies for other
-resources types.
+L'OrmResolver permet au plugin Authorization de trouver les classes de polices pour les
+entités et les requêtes de l'ORM. Des resolvers supplémentaires peuvent être utilisés pour
+trouver des polices pour d'autres types de ressource.
 
-Next, lets add the ``AuthorizationComponent`` to ``AppController``. In
-**src/Controller/AppController.php** add the following to the ``initialize()``
-method::
+Maintenant, ajoutons ``AuthorizationComponent`` to ``AppController``. Dans
+**src/Controller/AppController.php** ajoutez le code suivant à la méthode ``initialize()``::
 
     $this->loadComponent('Authorization.Authorization');
 
-Lastly we'll mark the add, login, and logout actions as not requiring
-authorization by adding the following to
-**src/Controller/UsersController.php**::
+Enfin, nous allons définir les actions add, login et logout comme étant détachées
+de Authorization en ajoutant le code suivante à **src/Controller/UsersController.php**::
 
-    // In the add, login, and logout methods
+    // Dans les méthodes add, login, et logout
     $this->Authorization->skipAuthorization();
 
-The ``skipAuthorization()`` method should be called in any controller action
-that should be accessible to all users even those who have not logged in yet.
+La méthode ``skipAuthorization()`` doit être appelé dans chaque controller ayant des
+actions accessibles à tous les utilisateurs, même ceux qui ne sont pas identifiés.
 
-Creating our First Policy
-=========================
+Création de Police
+==================
 
-The Authorization plugin models authorization and permissions as Policy classes.
-These classes implement the logic to check whether or not a **identity** is
-allowed to **perform an action** on a given **resource**. Our **identity** is
-going to be our logged in user, and our **resources** are our ORM entities and
-queries. Lets use bake to generate a basic policy:
+Le plugin Authorization défini les autorisation et les permissions par des classes de Police.
+Ces classes contiennent la logique pour vérifier qu'un **identifié** a la permission
+de **faire une action** sur une **ressource**. Notre **identifié** sera un utilisateur authentifié,
+et nos **ressource** sont des entités de l'ORM ainsi que des requêtes.
+Utilisons **bake** pour créer la base de notre première police.
 
 .. code-block:: bash
 
     bin/cake bake policy --type entity Article
 
-This will generate an empty policy class for our ``Article`` entity. You can
-find the generated policy in **src/Policy/ArticlePolicy.php**. Next update the
-policy to look like the following::
+Cette commande va générer une classe de Police vide pour notre entity ``Article``.
+Vous retrouverez le fichier généré dans **src/Policy/ArticlePolicy.php**. Maintenant,
+modifiez la police pour qu'elle ressemble à cela::
 
     <?php
     namespace App\Policy;
@@ -103,19 +100,19 @@ policy to look like the following::
     {
         public function canAdd(IdentityInterface $user, Article $article)
         {
-            // All logged in users can create articles.
+            //Tous les utilisateurs authentifiés peuvent créer des articles.
             return true;
         }
 
         public function canEdit(IdentityInterface $user, Article $article)
         {
-            // logged in users can edit their own articles.
+            // Les utilisateurs authentifiés ne peuvent modifier que leurs articles.
             return $this->isAuthor($user, $article);
         }
 
         public function canDelete(IdentityInterface $user, Article $article)
         {
-            // logged in users can delete their own articles.
+            // Les utilisateurs authentfiés ne peuvent supprimer que leurs articles.
             return $this->isAuthor($user, $article);
         }
 
@@ -125,23 +122,23 @@ policy to look like the following::
         }
     }
 
-While we've defined some very simple rules, you can use as complex logic as your
-application requires in your policies.
+Ici nous n'avons défini que quelques règles basiques, libre à vous d'utiliser des logiques plus
+complexes.
 
-Checking Authorization in the ArticlesController
-================================================
+Utiliser Authorization dans ArticlesController
+==============================================
 
-With our policy created we can start checking authorization in each controller
-action. If we forget to check or skip authorization in an controller action the
-Authorization plugin will raise an exception letting us know we forgot to apply
-authorization. In **src/Controller/ArticlesController.php** add the following to
-the ``add``, ``edit`` and ``delete`` methods::
+Maintenant que nos polices sont créées nous pouvons vérifier les autorisations
+dans chaque action de notre controller. Si nous oublions de vérifier les autorisations
+dans une action du controller, le plugin Authorization lèvera une exception.
+Dans **src/Controller/ArticlesController.php**, ajoutez le code suivant aux méthodes
+``add``, ``edit`` et ``delete``::
 
     public function add()
     {
         $article = $this->Articles->newEmptyEntity();
         $this->Authorization->authorize($article);
-        // Rest of the method
+        // Le reste de la méthode..
     }
 
     public function edit($slug)
@@ -151,7 +148,7 @@ the ``add``, ``edit`` and ``delete`` methods::
             ->contain('Tags') // load associated Tags
             ->firstOrFail();
         $this->Authorization->authorize($article);
-        // Rest of the method.
+        // Le reste de la méthode..
     }
 
     public function delete($slug)
@@ -160,34 +157,33 @@ the ``add``, ``edit`` and ``delete`` methods::
 
         $article = $this->Articles->findBySlug($slug)->firstOrFail();
         $this->Authorization->authorize($article);
-        // Rest of the method.
+        // Le reste de la méthode..
     }
 
-The ``AuthorizationComponent::authorize()`` method will use the current
-controller action name to generate the policy method to call. If you'd like to
-call a different policy method you can call ``authorize`` with the operation
-name::
+La méthode ``AuthorizationComponent::authorize()`` va utiliser le nom de l'action pour
+retrouver la méthode de la police à appeler. Si vous préférez définir vous-même la méthode
+de la police à utiliser vous devrez passer le nom de l'opération à ``authorize`::
 
     $this->Authorization->authorize($article, 'update');
 
-Lastly add the following to the ``tags``, ``view``, and ``index`` methods on the
+Maintenant, ajoutez le code suivant aux méthodes ``tags``, ``view``, et ``index`` de votre
 ``ArticlesController``::
 
-    // View, index and tags actions are public methods 
-    // and don't require authorization checks.
+    // Les actions view, index et tags sont des méthodes accessibles
+    // à tous et ne nécessitent pas de vérifications.
     $this->Authorization->skipAuthorization();
 
-Fixing the Add & Edit Actions
-=============================
+Amélioration des actions Add & Edit
+===================================
 
-While we've blocked access to the edit action, we're still open to users
-changing the ``user_id`` attribute of articles during edit. We
-will solve these problems next. First up is the ``add`` action.
+Bien que nous ayons bloqué l'accès à l'édition, nous sommes toujours vulnérable
+au changement de l'attribut ``user_id`` de l'article par l'utilisateur durant l'édition.
+Nous allons remédier à cela. Commençons avec l'action ``add``.
 
-When creating articles, we want to fix the ``user_id`` to be the currently
-logged in user. Replace your add action with the following::
+Lorsque nous créons des articles, nous voulons fixer le ``user_id`` comme étant
+l'utilisateur actuellement authentifié. Remplacez l'action ``add`` par le code suivant::
 
-    // in src/Controller/ArticlesController.php
+    // Dans src/Controller/ArticlesController.php
 
     public function add()
     {
@@ -197,7 +193,7 @@ logged in user. Replace your add action with the following::
         if ($this->request->is('post')) {
             $article = $this->Articles->patchEntity($article, $this->request->getData());
 
-            // Changed: Set the user_id from the current user.
+            // Changement: Chercher le user_id sur l'utilisateur authentifié.
             $article->user_id = $this->request->getAttribute('identity')->getIdentifier();
 
             if ($this->Articles->save($article)) {
@@ -210,9 +206,9 @@ logged in user. Replace your add action with the following::
         $this->set(compact('article', 'tags'));
     }
 
-Next we'll update the ``edit`` action. Replace the edit method with the following::
+Ensuite nous allons modifier l'action ``edit``::
 
-    // in src/Controller/ArticlesController.php
+    // Dans src/Controller/ArticlesController.php
 
     public function edit($slug)
     {
@@ -224,7 +220,7 @@ Next we'll update the ``edit`` action. Replace the edit method with the followin
 
         if ($this->request->is(['post', 'put'])) {
             $this->Articles->patchEntity($article, $this->request->getData(), [
-                // Added: Disable modification of user_id.
+                // Ajout: Empêcher la modification de user_id.
                 'accessibleFields' => ['user_id' => false]
             ]);
             if ($this->Articles->save($article)) {
@@ -237,18 +233,19 @@ Next we'll update the ``edit`` action. Replace the edit method with the followin
         $this->set(compact('article', 'tags'));
     }
 
-Here we're modifying which properties can be mass-assigned, via the options
-for ``patchEntity()``. See the :ref:`changing-accessible-fields` section for
-more information. Remember to remove the ``user_id`` control from
-**templates/Articles/edit.php** as we no longer need it.
+Ici nous modifions les propriétés qui peuvent être assignées en masse en
+utilisant ``patchEntity()``. Voir la section :ref:`changing-accessible-fields`
+pour plus d'informations. N'oubliez pas d'enlever le contrôle du ``user_id``
+dans **templates/Articles/edit.php**, nous n'en avons plus besoin.
 
-Wrapping Up
-===========
+Conclusion
+==========
 
-We've built a simple CMS application that allows users to login, post articles,
-tag them, explore posted articles by tag, and applied basic access control to
-articles. We've also added some nice UX improvements by leveraging the
-FormHelper and ORM capabilities.
+Nous avons construit une application CMS basique qui permet à des utilisateurs de
+s'authentifier, d'écrire des articles, d'y ajouter des tags, de parcourir les
+articles rédigés, et avons mis en place des contrôles pour nos articles.
+Nous avons même ajouter des améliorations à l'interface en exploitant le
+FormHelper et les capacités de l'ORM
 
-Thank you for taking the time to explore CakePHP. Next, you should learn more about
-the :doc:`/orm`, or you peruse the :doc:`/topics`.
+Merci d'avoir pris le temps d'explorer CakePHP. Nous vous proposons de continuer
+votre apprentissage avec :doc:`/orm` ou de lire attentivement :doc:`/topics`.
