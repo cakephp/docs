@@ -50,6 +50,8 @@ CakePHP provides several middleware to handle common tasks in web applications:
   application.
 * ``Cake\Http\Middleware\BodyParserMiddleware`` allows you to decode JSON, XML
   and other encoded request bodies based on ``Content-Type`` header.
+* ``Cake\Http\Middleware\CspMiddleware`` makes it simpler to add
+  Content-Security-Policy headers to your application.
 
 .. _using-middleware:
 
@@ -319,6 +321,37 @@ collection.
 
 .. versionadded:: 3.6.0
     Route caching was added in 3.6.0
+
+Content Security Policy Header Middleware
+=========================================
+
+The ``CspMiddleware`` makes it simpler to add Content-Security-Policy headers in
+your application. Before using it you should install ``paragonie/csp-builder``:
+
+.. code-block::bash
+
+    composer require paragonie/csp-builder
+
+You can then configure the middleware using an array, or passing in a built
+``CSPBuilder`` object::
+
+    use Cake\Http\Middleware\CspMiddleware;
+
+    $csp = new CspMiddleware([
+        'script-src' => [
+            'allow' => [
+                'https://www.google-analytics.com',
+            ],
+            'self' => true,
+            'unsafe-inline' => false,
+            'unsafe-eval' => false,
+        ],
+    ]);
+
+    $middlewareQueue->add($csp);
+
+.. versionadded:: 3.9.0
+    CspMiddleware was added.
 
 .. _security-header-middleware:
 

@@ -250,46 +250,7 @@ anonymous function will receive an instance of
     });
 
 See the :ref:`advanced-query-conditions` section to find out how to construct
-more complex ``WHERE`` conditions. To apply ordering, you can use the ``order``
-method::
-
-    $query = $articles->find()
-        ->order(['title' => 'ASC', 'id' => 'ASC']);
-
-When calling ``order()`` multiple times on a query, multiple clauses will be appended.
-However, when using finders you may sometimes need to overwrite the ``ORDER BY``.
-Set the second parameter of ``order()`` (as well as ``orderAsc()`` or ``orderDesc()``) to
-``Query::OVERWRITE`` or to ``true``::
-
-    $query = $articles->find()
-        ->order(['title' => 'ASC']);
-    // Later, overwrite the ORDER BY clause instead of appending to it.
-    $query = $articles->find()
-        ->order(['created' => 'DESC'], Query::OVERWRITE);
-
-.. versionadded:: 3.0.12
-
-    In addition to ``order``, the ``orderAsc`` and ``orderDesc`` methods can be
-    used when you need to sort on complex expressions::
-
-        $query = $articles->find();
-        $concat = $query->func()->concat([
-            'title' => 'identifier',
-            'synopsis' => 'identifier'
-        ]);
-        $query->orderAsc($concat);
-
-To limit the number of rows or set the row offset you can use the ``limit()``
-and ``page()`` methods::
-
-    // Fetch rows 50 to 100
-    $query = $articles->find()
-        ->limit(50)
-        ->page(2);
-
-As you can see from the examples above, all the methods that modify the query
-provide a fluent interface, allowing you to build a query through chained method
-calls.
+more complex ``WHERE`` conditions.
 
 Selecting Specific Fields
 -------------------------
@@ -452,6 +413,61 @@ These custom function would generate something like this in MYSQL:
 .. note::
     Use ``func()`` to pass untrusted user data to any SQL function.
 
+Ordering Results
+----------------
+
+To apply ordering, you can use the ``order`` method::
+
+    $query = $articles->find()
+        ->order(['title' => 'ASC', 'id' => 'ASC']);
+
+When calling ``order()`` multiple times on a query, multiple clauses will be
+appended.  However, when using finders you may sometimes need to overwrite the
+``ORDER BY``.  Set the second parameter of ``order()`` (as well as
+``orderAsc()`` or ``orderDesc()``) to ``Query::OVERWRITE`` or to ``true``::
+
+    $query = $articles->find()
+        ->order(['title' => 'ASC']);
+    // Later, overwrite the ORDER BY clause instead of appending to it.
+    $query = $articles->find()
+        ->order(['created' => 'DESC'], Query::OVERWRITE);
+
+The ``orderAsc`` and ``orderDesc`` methods can be used when you need to sort on
+complex expressions::
+
+    $query = $articles->find();
+    $concat = $query->func()->concat([
+        'title' => 'identifier',
+        'synopsis' => 'identifier'
+    ]);
+    $query->orderAsc($concat);
+
+To build complex order clauses, use a Closure to build order expressions::
+
+    $query->orderAsc(function (QueryExpression $exp, Query $query) {
+        return $exp->addCase(...);
+    });
+
+.. versionadded:: 3.9.0
+    Using a closure with ``orderDesc`` and ``orderAsc`` was added in 3.9.0.
+
+
+Limiting Results
+----------------
+
+To limit the number of rows or set the row offset you can use the ``limit()``
+and ``page()`` methods::
+
+    // Fetch rows 50 to 100
+    $query = $articles->find()
+        ->limit(50)
+        ->page(2);
+
+As you can see from the examples above, all the methods that modify the query
+provide a fluent interface, allowing you to build a query through chained method
+calls.
+
+
 Aggregates - Group and Having
 -----------------------------
 
@@ -466,7 +482,7 @@ When using aggregate functions like ``count`` and ``sum`` you may want to use
     ->group('published_date')
     ->having(['count >' => 3]);
 
-Case statements
+Case Statements
 ---------------
 
 The ORM also offers the SQL ``case`` expression. The ``case`` expression allows
@@ -544,7 +560,7 @@ automatically produce an ``if .. then .. else`` statement::
     # WHERE CASE
     #   WHEN population = 0 THEN 'DESERTED' ELSE 'INHABITED' END
 
-Getting Arrays Instead of Entities
+Fetching Arrays Instead of Entities
 ----------------------------------
 
 While ORMs and object result sets are powerful, creating entities is sometimes

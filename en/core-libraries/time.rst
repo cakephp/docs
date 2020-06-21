@@ -130,8 +130,17 @@ This method sets the default format used when converting an object to json::
     Date::setJsonEncodeFormat('yyyy-MM-dd HH:mm:ss');  // For any mutable Date
     FrozenDate::setJsonEncodeFormat('yyyy-MM-dd HH:mm:ss');  // For any immutable Date
 
+    // Added in 3.9.0
+    FrozenDate::setJsonEncodeFormat(static function($time) {
+        return $time->format(DATE_ATOM);
+    });
+
 .. note::
     This method must be called statically.
+
+
+.. versionchanged:: 3.9.0
+    The ``callable`` parameter type was added.
 
 .. php:method:: i18nFormat($format = null, $timezone = null, $locale = null)
 

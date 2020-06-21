@@ -83,6 +83,21 @@ After saving this file, you should be able to run the following command:
     # Outputs
     Hello jillian
 
+Changing the Default Command Name
+=================================
+
+CakePHP will use conventions to generate the name your commands use on the
+command line. If you want to overwrite the generated name implement the
+``defaultName()`` method in your command::
+
+    public static function defaultName(): string
+    {
+        return 'oh_hi';
+    }
+
+The above would make our ``HelloCommand`` accessible by ``cake oh_hi`` instead
+of ``cake hello``.
+
 Defining Arguments and Options
 ==============================
 
@@ -186,6 +201,17 @@ to terminate execution::
         }
     }
 
+You can also use ``abort()`` on the ``$io`` object to emit a message and code::
+
+    public function execute(Arguments $args, ConsoleIo $io)
+    {
+        $name = $args->getArgument('name');
+        if (strlen($name) < 5) {
+            // Halt execution, output to stderr, and set exit code to 99
+            $io->abort('Name must be at least 4 characters long.', 99);
+        }
+    }
+
 You can pass any desired exit code into ``abort()``.
 
 .. tip::
@@ -197,6 +223,9 @@ You can pass any desired exit code into ``abort()``.
     You can read more about conventional exit codes in the sysexit manual page
     on most Unix systems (``man sysexits``), or the ``System Error Codes`` help
     page in Windows.
+
+.. versionadded:: 3.9.0
+    ``ConsoleIo::abort()`` was added.
 
 Calling other Commands
 ======================
@@ -486,6 +515,12 @@ Assertion methods
 
 The ``Cake\TestSuite\ConsoleIntegrationTestTrait`` trait provides a number of
 assertion methods that make it easy to assert against console output::
+
+    // assert that the shell exited as success
+    $this->assertExitSuccess();
+
+    // assert that the shell exited as an error
+    $this->assertExitError();
 
     // assert that the shell exited with the expected code
     $this->assertExitCode($expected);

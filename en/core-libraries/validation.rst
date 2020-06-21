@@ -477,8 +477,9 @@ To validate the comments you would use a nested validator::
     // Connect the nested validators.
     $validator->addNestedMany('comments', $commentValidator);
 
+    // Prior to 3.9 use $validator->errors()
     // Get all errors including those from nested validators.
-    $validator->errors($data);
+    $validator->validate($data);
 
 You can create 1:1 'relationships' with ``addNested()`` and 1:N 'relationships'
 with ``addNestedMany()``. With both methods, the nested validator's errors will
@@ -543,7 +544,8 @@ sending an email you could do the following::
         ->requirePresence('comment')
         ->notEmpty('comment', 'You need to give a comment.');
 
-    $errors = $validator->errors($this->request->getData());
+    // Prior to 3.9 use $validator->errors()
+    $errors = $validator->validate($this->request->getData());
     if (empty($errors)) {
         // Send an email.
     }
@@ -560,7 +562,8 @@ be returned per field. By default the ``errors()`` method applies rules for
 the 'create' mode. If you'd like to apply 'update' rules you can do the
 following::
 
-    $errors = $validator->errors($this->request->getData(), false);
+    // Prior to 3.9 use $validator->errors()
+    $errors = $validator->validate($this->request->getData(), false);
     if (empty($errors)) {
         // Send an email.
     }

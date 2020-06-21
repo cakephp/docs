@@ -122,6 +122,9 @@ application's ``bootstrap()`` function::
 
             // Load a plugin with a vendor namespace by 'short name'
             $this->addPlugin('AcmeCorp/ContactManager');
+
+            // Load a dev dependency that will not exist in production builds.
+            $this->addOptionalPlugin('AcmeCorp/ContactManager');
         }
     }
 
@@ -151,6 +154,9 @@ This would update your application's bootstrap method, or put the
 
 .. versionadded:: 3.6.0
     ``addPlugin()`` was added.
+
+.. versionadded:: 3.9.0
+    The ``addOptionalPlugin()`` method was added.
 
 .. _plugin-configuration:
 
