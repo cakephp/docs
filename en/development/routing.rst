@@ -685,7 +685,7 @@ The current prefix will be available from the controller methods through
 ``$this->request->getParam('prefix')``
 
 When using prefix routes it's important to set the ``prefix`` option, and to
-use the same camel cased format that is used in the ``prefix()`` method. Here's
+use the same camel-cased format that is used in the ``prefix()`` method. Here's
 how to build this link using the HTML helper::
 
     // Go into a prefixed route.
@@ -729,7 +729,7 @@ This would link to a controller with the namespace ``App\\Controller\\Admin\\MyP
 
 .. note::
 
-    The prefix is always camel cased here, even if the routing result is dashed.
+    The prefix is always camel-cased here, even if the routing result is dashed.
     The route itself will do the inflection if necessary.
 
 Plugin Routing
