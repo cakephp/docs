@@ -189,7 +189,7 @@ by creating classes and files that you'd need to create anyway.
 +------------+-----------------------------+----------------------------------+------------------------------------------------------+
 | Class      | ArticlesController          | ArticlesCategoriesController     |                                                      |
 +------------+-----------------------------+----------------------------------+------------------------------------------------------+
-| Controller | ArticlesController          | ArticlesCategoriesController     | Plural, CamelCased, end in Controller               |
+| Controller | ArticlesController          | ArticlesCategoriesController     | Plural, CamelCased, end in Controller                |
 +------------+-----------------------------+----------------------------------+------------------------------------------------------+
 | Behavior   | ArticlesBehavior.php        | ArticlesCategoriesBehavior.php   |                                                      |
 +------------+-----------------------------+----------------------------------+------------------------------------------------------+
