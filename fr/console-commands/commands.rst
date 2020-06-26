@@ -17,8 +17,8 @@ Hello world toute simple. Dans le répertoire **src/Command** de votre applicati
 
     namespace App\Command;
 
+    use Cake\Command\Command;
     use Cake\Console\Arguments;
-    use Cake\Console\Command;
     use Cake\Console\ConsoleIo;
 
     class HelloCommand extends Command
@@ -45,8 +45,8 @@ Notre méthode ``execute()`` n'est pas très intéressente, ajoutons des entrée
 
     namespace App\Command;
 
+    use Cake\Command\Command;
     use Cake\Console\Arguments;
-    use Cake\Console\Command;
     use Cake\Console\ConsoleIo;
     use Cake\Console\ConsoleOptionParser;
 
@@ -126,8 +126,8 @@ propriétés attachés à vos commandes::
 
     namespace App\Command;
 
+    use Cake\Command\Command;
     use Cake\Console\Arguments;
-    use Cake\Console\Command;
     use Cake\Console\ConsoleIo;
     use Cake\Console\ConsoleOptionParser;
 
@@ -212,8 +212,8 @@ Commençons avec une commande très simple qui se trouve dans
 
     namespace App\Command;
 
+    use Cake\Command\Command;
     use Cake\Console\Arguments;
-    use Cake\Console\Command;
     use Cake\Console\ConsoleIo;
     use Cake\Console\ConsoleOptionParser;
 
@@ -256,8 +256,8 @@ nos applications de console est assez facile. Continuons par ajouter plus de log
 
     namespace App\Command;
 
+    use Cake\Command\Command;
     use Cake\Console\Arguments;
-    use Cake\Console\Command;
     use Cake\Console\ConsoleIo;
     use Cake\Console\ConsoleOptionParser;
     use Cake\I18n\FrozenTime;
@@ -294,7 +294,7 @@ Modifions notre cas de test pour avoir le bout de code suivant::
 
     namespace Cake\Test\TestCase\Command;
 
-    use Cake\Console\Command;
+    use Cake\Command\Command;
     use Cake\I18n\FrozenTime;
     use Cake\ORM\TableRegistry;
     use Cake\TestSuite\ConsoleIntegrationTestCase;
@@ -349,8 +349,8 @@ Mettez à jour la classe command avec ce qui suit::
 
     namespace App\Command;
 
+    use Cake\Command\Command;
     use Cake\Console\Arguments;
-    use Cake\Console\Command;
     use Cake\Console\ConsoleIo;
     use Cake\Console\ConsoleOptionParser;
     use Cake\I18n\FrozenTime;

@@ -18,8 +18,8 @@ simple Hello world command. In your application's **src/Command** directory crea
     <?php
     namespace App\Command;
 
+    use Cake\Command\Command;
     use Cake\Console\Arguments;
-    use Cake\Console\Command;
     use Cake\Console\ConsoleIo;
 
     class HelloCommand extends Command
@@ -48,8 +48,8 @@ command line::
     <?php
     namespace App\Command;
 
+    use Cake\Command\Command;
     use Cake\Console\Arguments;
-    use Cake\Console\Command;
     use Cake\Console\ConsoleIo;
     use Cake\Console\ConsoleOptionParser;
 
@@ -146,8 +146,8 @@ commands::
     <?php
     namespace App\Command;
 
+    use Cake\Command\Command;
     use Cake\Console\Arguments;
-    use Cake\Console\Command;
     use Cake\Console\ConsoleIo;
     use Cake\Console\ConsoleOptionParser;
 
@@ -252,8 +252,8 @@ Let's start with a very simple command, located in
 
     namespace App\Command;
 
+    use Cake\Command\Command;
     use Cake\Console\Arguments;
-    use Cake\Console\Command;
     use Cake\Console\ConsoleIo;
     use Cake\Console\ConsoleOptionParser;
 
@@ -300,8 +300,8 @@ adding more logic to our command::
 
     namespace App\Command;
 
+    use Cake\Command\Command;
     use Cake\Console\Arguments;
-    use Cake\Console\Command;
     use Cake\Console\ConsoleIo;
     use Cake\Console\ConsoleOptionParser;
     use Cake\I18n\FrozenTime;
@@ -338,7 +338,7 @@ Modify your test case to the following snippet of code::
 
     namespace Cake\Test\TestCase\Command;
 
-    use Cake\Console\Command;
+    use Cake\Command\Command;
     use Cake\I18n\FrozenTime;
     use Cake\ORM\TableRegistry;
     use Cake\TestSuite\ConsoleIntegrationTestTrait;
@@ -398,8 +398,8 @@ Update the command class to the following::
 
     namespace App\Command;
 
+    use Cake\Command\Command;
     use Cake\Console\Arguments;
-    use Cake\Console\Command;
     use Cake\Console\ConsoleIo;
     use Cake\Console\ConsoleOptionParser;
     use Cake\I18n\FrozenTime;

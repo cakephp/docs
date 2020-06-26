@@ -17,8 +17,8 @@ CakePHP には、開発のスピードアップと日常的なタスクの自動
 
     namespace App\Command;
 
+    use Cake\Command\Command;
     use Cake\Console\Arguments;
-    use Cake\Console\Command;
     use Cake\Console\ConsoleIo;
 
     class HelloCommand extends Command
@@ -46,8 +46,8 @@ Commabd クラスは、大部分の作業を行う ``execute()`` メソッドを
 
     namespace App\Command;
 
+    use Cake\Command\Command;
     use Cake\Console\Arguments;
-    use Cake\Console\Command;
     use Cake\Console\ConsoleIo;
     use Cake\Console\ConsoleOptionParser;
 
@@ -127,8 +127,8 @@ Commabd クラスは、大部分の作業を行う ``execute()`` メソッドを
 
     namespace App\Command;
 
+    use Cake\Command\Command;
     use Cake\Console\Arguments;
-    use Cake\Console\Command;
     use Cake\Console\ConsoleIo;
     use Cake\Console\ConsoleOptionParser;
 
@@ -214,8 +214,8 @@ Commabd クラスは、大部分の作業を行う ``execute()`` メソッドを
 
     namespace App\Command;
 
+    use Cake\Command\Command;
     use Cake\Console\Arguments;
-    use Cake\Console\Command;
     use Cake\Console\ConsoleIo;
     use Cake\Console\ConsoleOptionParser;
 
@@ -262,8 +262,8 @@ Commabd クラスは、大部分の作業を行う ``execute()`` メソッドを
 
     namespace App\Command;
 
+    use Cake\Command\Command;
     use Cake\Console\Arguments;
-    use Cake\Console\Command;
     use Cake\Console\ConsoleIo;
     use Cake\Console\ConsoleOptionParser;
     use Cake\I18n\FrozenTime;
@@ -300,7 +300,7 @@ Commabd クラスは、大部分の作業を行う ``execute()`` メソッドを
 
     namespace Cake\Test\TestCase\Command;
 
-    use Cake\Console\Command;
+    use Cake\Command\Command;
     use Cake\I18n\FrozenTime;
     use Cake\ORM\TableRegistry;
     use Cake\TestSuite\ConsoleIntegrationTestTrait;
@@ -360,8 +360,8 @@ Commabd クラスは、大部分の作業を行う ``execute()`` メソッドを
 
     namespace App\Command;
 
+    use Cake\Command\Command;
     use Cake\Console\Arguments;
-    use Cake\Console\Command;
     use Cake\Console\ConsoleIo;
     use Cake\Console\ConsoleOptionParser;
     use Cake\I18n\FrozenTime;
