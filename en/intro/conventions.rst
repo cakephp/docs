@@ -185,7 +185,7 @@ by creating classes and files that you'd need to create anyway.
 |            |                             |                                  | CamelCased and end in Table                         |
 +------------+-----------------------------+----------------------------------+------------------------------------------------------+
 | Entity     | Articles.php                | ArticlesCategories.php           | Entity class names are singular,                     |
-|            |                             |                                  | CamelCased: Article and ArticleCategory             |
+|            |                             |                                  | CamelCased: Article and ArticleCategory              |
 +------------+-----------------------------+----------------------------------+------------------------------------------------------+
 | Class      | ArticlesController          | ArticlesCategoriesController     |                                                      |
 +------------+-----------------------------+----------------------------------+------------------------------------------------------+
