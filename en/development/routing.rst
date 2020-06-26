@@ -685,7 +685,7 @@ The current prefix will be available from the controller methods through
 ``$this->request->getParam('prefix')``
 
 When using prefix routes it's important to set the ``prefix`` option, and to
-use the same camel-cased format that is used in the ``prefix()`` method. Here's
+use the same CamelCased format that is used in the ``prefix()`` method. Here's
 how to build this link using the HTML helper::
 
     // Go into a prefixed route.
