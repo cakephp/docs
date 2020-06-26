@@ -729,7 +729,7 @@ This would link to a controller with the namespace ``App\\Controller\\Admin\\MyP
 
 .. note::
 
-    The prefix is always camel-cased here, even if the routing result is dashed.
+    The prefix is always CamelCased here, even if the routing result is dashed.
     The route itself will do the inflection if necessary.
 
 Plugin Routing
