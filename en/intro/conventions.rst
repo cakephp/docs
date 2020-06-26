@@ -10,14 +10,14 @@ uniform development experience, allowing other developers to jump in and help.
 Controller Conventions
 ======================
 
-Controller class names are plural, PascalCased, and end in ``Controller``.
+Controller class names are plural, CamelCased, and end in ``Controller``.
 ``UsersController`` and ``ArticleCategoriesController`` are both examples of
 conventional controller names.
 
 Public methods on Controllers are often exposed as 'actions' accessible through
-a web browser. For example the ``/users/view`` maps to the ``view()`` method
-of the ``UsersController`` out of the box. Protected or private methods
-cannot be accessed with routing.
+a web browser. They are camelBacked. For example the ``/users/view-me`` maps to the ``viewMe()`` method
+of the ``UsersController`` out of the box (if one uses default dashed inflection in routing).
+Protected or private methods cannot be accessed with routing.
 
 URL Considerations for Controller Names
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -35,9 +35,9 @@ When you create links using ``this->Html->link()``, you can use the following
 conventions for the url array::
 
     $this->Html->link('link-title', [
-        'prefix' => 'MyPrefix' // PascalCased
-        'plugin' => 'MyPlugin', // PascalCased
-        'controller' => 'ControllerName', // PascalCased
+        'prefix' => 'MyPrefix' // CamelCased
+        'plugin' => 'MyPlugin', // CamelCased
+        'controller' => 'ControllerName', // CamelCased
         'action' => 'actionName' // camelBacked
     ]
 
@@ -103,12 +103,12 @@ the ``Table::save()`` method.
 Model Conventions
 =================
 
-Table class names are plural, PascalCased and end in ``Table``. ``UsersTable``,
+Table class names are plural, CamelCased and end in ``Table``. ``UsersTable``,
 ``ArticleCategoriesTable``, and ``UserFavoritePagesTable`` are all examples of
 table class names matching the ``users``, ``article_categories`` and
 ``user_favorite_pages`` tables respectively.
 
-Entity class names are singular PascalCased and have no suffix. ``User``,
+Entity class names are singular CamelCased and have no suffix. ``User``,
 ``ArticleCategory``, and ``UserFavoritePage`` are all examples of entity names
 matching the ``users``, ``article_categories`` and ``user_favorite_pages``
 tables respectively.
@@ -182,14 +182,14 @@ by creating classes and files that you'd need to create anyway.
 | File       | ArticlesController.php      | ArticlesCategoriesController.php |                                                      |
 +------------+-----------------------------+----------------------------------+------------------------------------------------------+
 | Table      | ArticlesTable.php           | ArticlesCategoriesTable.php      | Table class names are plural,                        |
-|            |                             |                                  | PascalCased and end in Table                         |
+|            |                             |                                  | CamelCased and end in Table                          |
 +------------+-----------------------------+----------------------------------+------------------------------------------------------+
 | Entity     | Articles.php                | ArticlesCategories.php           | Entity class names are singular,                     |
-|            |                             |                                  | PascalCased: Article and ArticleCategory             |
+|            |                             |                                  | CamelCased: Article and ArticleCategory              |
 +------------+-----------------------------+----------------------------------+------------------------------------------------------+
 | Class      | ArticlesController          | ArticlesCategoriesController     |                                                      |
 +------------+-----------------------------+----------------------------------+------------------------------------------------------+
-| Controller | ArticlesController          | ArticlesCategoriesController     | Plural, PascalCased, end in Controller               |
+| Controller | ArticlesController          | ArticlesCategoriesController     | Plural, CamelCased, end in Controller                |
 +------------+-----------------------------+----------------------------------+------------------------------------------------------+
 | Behavior   | ArticlesBehavior.php        | ArticlesCategoriesBehavior.php   |                                                      |
 +------------+-----------------------------+----------------------------------+------------------------------------------------------+
