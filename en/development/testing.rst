@@ -1087,17 +1087,7 @@ Integration Testing PSR-7 Middleware
 Integration testing can also be used to test your entire PSR-7 application and
 :doc:`/controllers/middleware`. By default ``IntegrationTestTrait`` will
 auto-detect the presence of an ``App\Application`` class and automatically
-enable integration testing of your Application. You can toggle this behavior
-with the ``useHttpServer()`` method::
-
-    public function setUp(): void
-    {
-        // Enable PSR-7 integration testing.
-        $this->useHttpServer(true);
-
-        // Disable PSR-7 integration testing.
-        $this->useHttpServer(false);
-    }
+enable integration testing of your Application.
 
 You can customize the application class name used, and the constructor
 arguments, by using the ``configApplication()`` method::
@@ -1106,9 +1096,6 @@ arguments, by using the ``configApplication()`` method::
     {
         $this->configApplication('App\App', [CONFIG]);
     }
-
-After enabling the PSR-7 mode, and possibly configuring your application class,
-you can use the remaining ``IntegrationTestTrait`` features as normal.
 
 You should also take care to try and use :ref:`application-bootstrap` to load
 any plugins containing events/routes. Doing so will ensure that your
