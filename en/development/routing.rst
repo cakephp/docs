@@ -1195,7 +1195,7 @@ You can provide ``connectOptions`` key in the ``$options`` array for
 URL Inflection for Resource Routes
 ----------------------------------
 
-By default, multi-worded controllers' URL fragments are the underscored
+By default, multi-worded controllers' URL fragments are the dashed
 form of the controller's name. E.g., ``BlogPostsController``'s URL fragment
 would be **/blog-posts**.
 
@@ -1207,7 +1207,7 @@ You can specify an alternative inflection type using the ``inflect`` option::
         ]);
     });
 
-The above will generate URLs styled like: **/blog-posts**.
+The above will generate URLs styled like: **/blog_posts**.
 
 Changing the Path Element
 -------------------------
