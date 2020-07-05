@@ -90,6 +90,19 @@ whether or not the base path should be added::
         'fullBase' => true,
     ]);
 
+.. php:method:: buildFromPath(string $path, array $params = [], array $options = [])
+
+If you want to use route path strings, you can do that using this method::
+
+    echo $this->Url->buildFromPath('Articles::index');
+    // results in: /articles
+
+    echo $this->Url->buildFromPath('MyBackend.Admin/Articles::view', [3]);
+    // results in e.g.: /admin/my-backend/articles/view/3
+
+.. versionadded:: 4.1.0
+    ``buildFromPath()`` was added.
+
 URL with asset timestamp wrapped by a ``<link rel="preload"/>``, here pre-loading
 a font. Note: The file must exist and ``Configure::read('Asset.timestamp')``
 must return ``true`` or ``'force'`` for the timestamp to be appended::

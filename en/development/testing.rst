@@ -612,7 +612,7 @@ use that to retrieve the table name::
         public $import = ['model' => 'Articles'];
     }
 
-Since this uses ``TableRegistry::getTableLocator()->get()``, it also supports plugin syntax.
+It also supports plugin syntax.
 
 You can naturally import your table definition from an existing model/table, but
 have your records defined directly on the fixture as it was shown on previous
@@ -664,14 +664,17 @@ you define the ``$fixtures`` property in your model::
         protected $fixtures = ['app.Articles', 'app.Comments'];
     }
 
-.. note::
-    You can also override ``TestCase::getFixtures()`` instead of defining
-    the ``$fixtures`` property::
 
-        public function getFixtures(): array
-        {
-            return ['app.Articles', 'app.Comments'];
-        }
+As of 4.1.0 you can use the ``getFixtures()`` and ``addFixture()`` methods to
+define your fixture array using a fluent interface::
+
+    public function getFixtures(): array
+    {
+        $this->addFixture('app.Articles')
+            ->addFixture('app.Comments');
+
+        return parent::getFixtures();
+    }
 
 The above will load the Article and Comment fixtures from the application's
 Fixture directory. You can also load fixtures from CakePHP core, or plugins::
@@ -746,7 +749,6 @@ with the following contents::
     namespace App\Test\TestCase\Model\Table;
 
     use App\Model\Table\ArticlesTable;
-    use Cake\ORM\TableRegistry;
     use Cake\TestSuite\TestCase;
 
     class ArticlesTableTest extends TestCase
@@ -768,7 +770,6 @@ now looks like this::
     namespace App\Test\TestCase\Model\Table;
 
     use App\Model\Table\ArticlesTable;
-    use Cake\ORM\TableRegistry;
     use Cake\TestSuite\TestCase;
 
     class ArticlesTableTest extends TestCase
@@ -778,7 +779,7 @@ now looks like this::
         public function setUp(): void
         {
             parent::setUp();
-            $this->Articles = TableRegistry::getTableLocator()->get('Articles');
+            $this->Articles = $this->getTableLocator()->get('Articles');
         }
 
         public function testFindPublished(): void
@@ -823,7 +824,7 @@ avoids issues with reflected properties that normal mocks have::
 
 In your ``tearDown()`` method be sure to remove the mock with::
 
-    TableRegistry::clear();
+    $this->getTableLocator()->clear();
 
 .. _integration-testing:
 
@@ -882,7 +883,6 @@ Create a file named **ArticlesControllerTest.php** in your
 
     namespace App\Test\TestCase\Controller;
 
-    use Cake\ORM\TableRegistry;
     use Cake\TestSuite\IntegrationTestTrait;
     use Cake\TestSuite\TestCase;
 
@@ -929,7 +929,7 @@ Create a file named **ArticlesControllerTest.php** in your
             $this->post('/articles', $data);
 
             $this->assertResponseSuccess();
-            $articles = TableRegistry::getTableLocator()->get('Articles');
+            $articles = $this->getTableLocator()->get('Articles');
             $query = $articles->find()->where(['title' => $data['title']]);
             $this->assertEquals(1, $query->count());
         }
@@ -1601,7 +1601,6 @@ the event data::
 
     use App\Model\Table\OrdersTable;
     use Cake\Event\EventList;
-    use Cake\ORM\TableRegistry;
     use Cake\TestSuite\TestCase;
 
     class OrdersTableTest extends TestCase
@@ -1611,7 +1610,7 @@ the event data::
         public function setUp(): void
         {
             parent::setUp();
-            $this->Orders = TableRegistry::getTableLocator()->get('Orders');
+            $this->Orders = $this->getTableLocator()->get('Orders');
             // enable event tracking
             $this->Orders->getEventManager()->setEventList(new EventList());
         }

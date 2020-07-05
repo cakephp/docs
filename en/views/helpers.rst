@@ -83,7 +83,7 @@ You can also use your controller's ``beforeRender`` method to load helpers::
         public function beforeRender(EventInterface $event)
         {
             parent::beforeRender($event);
-            $this->viewBuilder()->setHelpers(['MyHelper']);
+            $this->viewBuilder()->addHelper('MyHelper');
         }
     }
 

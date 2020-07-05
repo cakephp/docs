@@ -280,6 +280,15 @@ Attribute Matching Types
             ]
         */
 
+        // As of 3.9.0 $keyPath can be null
+        $result = Hash::combine($a, null, '{n}.User.Data.name');
+        /* $result now looks like:
+            [
+                [0] => Mariano Iglesias
+                [1] => Larry E. Masters
+            ]
+        */
+
     You can provide arrays for both ``$keyPath`` and ``$valuePath``. If you do this,
     the first value will be used as a format string, for values extracted by the
     other paths::

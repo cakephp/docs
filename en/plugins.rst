@@ -110,6 +110,9 @@ application's ``bootstrap()`` function::
 
             // Load a plugin with a vendor namespace by 'short name'
             $this->addPlugin('AcmeCorp/ContactManager');
+
+            // Load a dev dependency that will not exist in production builds.
+            $this->addOptionalPlugin('AcmeCorp/ContactManager');
         }
     }
 
@@ -125,6 +128,9 @@ line:
 
 This would update your application's bootstrap method, or put the
 ``$this->addPlugin('ContactManager');`` snippet in the bootstrap for you.
+
+.. versionadded:: 4.1.0
+    The ``addOptionalPlugin()`` method was added.
 
 .. _plugin-configuration:
 
@@ -187,10 +193,10 @@ helpers by prefixing the name of the plugin.
 
 For example, say you wanted to use the ContactManager plugin's
 ContactInfoHelper to output formatted contact information in
-one of your views. In your controller, ``setHelpers()``
+one of your views. In your controller, using ``addHelper()``
 could look like this::
 
-    $this->viewBuilder()->setHelpers(['ContactManager.ContactInfo']);
+    $this->viewBuilder()->addHelper('ContactManager.ContactInfo');
 
 .. note::
     This dot separated class name is referred to as :term:`plugin syntax`.
@@ -499,12 +505,12 @@ prefix on them, use the alternative syntax::
         }
     }
 
-You can use ``TableRegistry`` to load your plugin tables using the familiar
+You can use ``Cake\ORM\TableLocator`` to load your plugin tables using the familiar
 :term:`plugin syntax`::
 
-    use Cake\ORM\TableRegistry;
+    use Cake\ORM\Locator\LocatorAwareTrait;
 
-    $contacts = TableRegistry::getTableLocator()->get('ContactManager.Contacts');
+    $contacts = $this->getTableLocator()->get('ContactManager.Contacts');
 
 Alternatively, from a controller context, you can use::
 

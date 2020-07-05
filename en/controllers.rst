@@ -199,7 +199,7 @@ theme that will be used when rendering the view, you can use the
 properties of the view before it is created::
 
     $this->viewBuilder()
-        ->setHelpers(['MyCustom'])
+        ->addHelper('MyCustom')
         ->setTheme('Modern')
         ->setClassName('Modern.Admin');
 
@@ -366,16 +366,13 @@ factory method::
         ['ElasticIndexes', 'factory']
     );
 
+The factory can be a callable or instance of ``\Cake\Datasource\Locator\LocatorInterface``.
+
 After registering a table factory, you can use ``loadModel`` to load
 instances::
 
     // In a controller method.
     $this->loadModel('Locations', 'ElasticIndex');
-
-.. note::
-
-    The built-in ORM's TableRegistry is connected by default as the 'Table'
-    provider.
 
 Paginating a Model
 ==================

@@ -17,7 +17,7 @@ application's models:
 
     bin/cake console
 
-    >>> $articles = Cake\ORM\TableRegistry::getTableLocator()->get('Articles');
+    >>> $articles = Cake\Datasource\FactoryLocator::get('Table')->get('Articles');
     // object(Cake\ORM\Table)(
     //
     // )

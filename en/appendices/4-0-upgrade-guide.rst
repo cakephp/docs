@@ -25,6 +25,8 @@ If you are not running on **PHP 7.2 or higher**, you will need to upgrade PHP be
 .. note::
     CakePHP 4.0 requires **a minimum of PHP 7.2**.
 
+.. upgrade-tool-use::
+
 Use the Upgrade Tool
 ====================
 
@@ -33,10 +35,10 @@ backwards incompatible changes concerning method signatures and file renames.
 To help expedite fixing these tedious changes there is an upgrade CLI tool:
 
 .. warning::
-    The upgrade tool is intended to be run **before** you update your
-    application's dependencies to 4.0. The rector based tasks will not run
-    correctly if your application already has its dependencies updated to 4.x or
-    PHPUnit8.
+    The ``file_rename`` command and rector rules for cakephp40, and phpunit80
+    are intended to be run **before** you update your application's dependencies
+    to 4.0. The ``cakephp40`` rector rules will not run correctly if your
+    application already has its dependencies updated to 4.x or PHPUnit8.
 
 .. code-block:: bash
 
@@ -69,6 +71,12 @@ your dependencies::
 
     bin/cake upgrade rector --rules phpunit80 <path/to/app/tests>
     bin/cake upgrade rector --rules cakephp40 <path/to/app/src>
+
+You can also use the upgrade tool to apply new rector rules for each minor
+version of CakePHP::
+
+    # Run the rector rules for the 4.0 -> 4.1 upgrade.
+    bin/cake upgrade rector --rules cakephp41 <path/to/app/src>
 
 Update CakePHP Dependency
 =========================

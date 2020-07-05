@@ -226,8 +226,8 @@ additional details on how to use the table registry::
         ],
     ];
 
-    // Register an additional table object to allow differentiating in pagination component
-    TableRegistry::getTableLocator()->setConfig('UnpublishedArticles', [
+    // Load an additional table object to allow differentiating in pagination component
+    $this->loadModel('UnpublishedArticles', [
         'className' => 'App\Model\Table\ArticlesTable',
         'table' => 'articles',
         'entityClass' => 'App\Model\Entity\Article',
@@ -240,7 +240,7 @@ additional details on how to use the table registry::
     );
 
     $unpublishedArticles = $this->paginate(
-        TableRegistry::getTableLocator()->get('UnpublishedArticles')->find('all', [
+        $this->UnpublishedArticles->find('all', [
             'scope' => 'unpublished_articles'
         ])->where(['published' => false])
     );
@@ -253,12 +253,12 @@ Control which Fields Used for Ordering
 By default sorting can be done on any non-virtual column a table has. This is
 sometimes undesirable as it allows users to sort on un-indexed columns that can
 be expensive to order by. You can set the allowed list of fields that can be sorted
-using the ``sortWhitelist`` option. This option is required when you want to
+using the ``sortableFields`` option. This option is required when you want to
 sort on any associated data, or computed fields that may be part of your
 pagination query::
 
     public $paginate = [
-        'sortWhitelist' => [
+        'sortableFields' => [
             'id', 'title', 'Users.username', 'created'
         ]
     ];

@@ -389,7 +389,7 @@ CSRF トークンチェックを実行する URL をより詳細に制御でき�
         $csrf = new CsrfProtectionMiddleware();
 
         // コールバックが `true` を返す場合、トークンのチェックはスキップされます。
-        $csrf->whitelistCallback(function ($request) {
+        $csrf->skipCheckCallback(function ($request) {
             // Skip token check for API URLs.
             if ($request->getParam('prefix') === 'Api') {
                 return true;

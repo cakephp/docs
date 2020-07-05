@@ -133,7 +133,20 @@ Values set with this method will overwrite existing data in the form object::
 
 Values should only be defined if the request method is GET, otherwise
 you will overwrite your previous POST Data which might have validation errors
-that need corrections.
+that need corrections. You can use ``set()`` to add or replace individual fields
+or a subset of fields::
+
+    // Set one field.
+    $contact->set('name', 'John Doe');
+
+    // Set multiple fields;
+    $contact->set([
+        'name' => 'John Doe',
+        'email' => 'john.doe@example.com',
+    ]);
+
+.. versionadded:: 4.1.0
+    The ``set()`` method was added.
 
 Getting Form Errors
 ===================

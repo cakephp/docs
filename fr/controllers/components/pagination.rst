@@ -231,12 +231,12 @@ Par défaut le tri peut être fait sur n'importe quelle colonne d'une table.
 Ceci n'est parfois pas souhaité puisque cela permet aux utilisateurs de trier sur
 des colonnes non indexées qui peuvent être compliquées à trier. Vous pouvez
 définir la liste blanche des champs qui peut être triée en utilisant
-l'option ``sortWhitelist``. Cette option est nécessaire quand vous voulez trier
+l'option ``sortableFields``. Cette option est nécessaire quand vous voulez trier
 sur des données associées, ou des champs calculés qui peuvent faire parti de
 la requête de pagination::
 
     public $paginate = [
-        'sortWhitelist' => [
+        'sortableFields' => [
             'id', 'title', 'Users.username', 'created'
         ]
     ];

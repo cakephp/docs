@@ -59,12 +59,12 @@ to store in them::
 
 The preferred way of getting new entities is using the ``newEmptyEntity()`` method from the
 ``Table`` objects::
+    
+    use \Cake\ORM\Locator\LocatorAwareTrait;
 
-    use Cake\ORM\TableRegistry;
+    $article = $this->getTableLocator()->newEmptyEntity();
 
-    $article = TableRegistry::getTableLocator()->get('Articles')->newEmptyEntity();
-
-    $article = TableRegistry::getTableLocator()->get('Articles')->newEntity([
+    $article = $this->getTableLocator()->newEntity([
         'id' => 1,
         'title' => 'New Article',
         'created' => new DateTime('now')

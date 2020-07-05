@@ -381,7 +381,8 @@ The available configuration options are:
 - ``secure`` Whether or not the cookie will be set with the Secure flag. That is,
   the cookie will only be set on a HTTPS connection and any attempt over normal HTTP
   will fail. Defaults to ``false``.
-- ``httpOnly`` Whether or not the cookie will be set with the HttpOnly flag. Defaults to ``false``.
+- ``httponly`` Whether or not the cookie will be set with the HttpOnly flag.
+  Defaults to ``false``. Prior to 4.1.0 use the ``httpOnly`` option.
 - ``field`` The form field to check. Defaults to ``_csrfToken``. Changing this
   will also require configuring FormHelper.
 
@@ -389,7 +390,7 @@ When enabled, you can access the current CSRF token on the request object::
 
     $token = $this->request->getAttribute('csrfToken');
 
-You can use the whitelisting callback feature for more fine grained control over
+You can use the skip check callback feature for more fine grained control over
 URLs for which CSRF token check should be done::
 
     // in src/Application.php
@@ -400,7 +401,7 @@ URLs for which CSRF token check should be done::
         $csrf = new CsrfProtectionMiddleware();
 
         // Token check will be skipped when callback returns `true`.
-        $csrf->whitelistCallback(function ($request) {
+        $csrf->skipCheckCallback(function ($request) {
             // Skip token check for API URLs.
             if ($request->getParam('prefix') === 'Api') {
                 return true;
