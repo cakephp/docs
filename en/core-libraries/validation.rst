@@ -198,21 +198,6 @@ containing data related to the validation process:
 - **newRecord**: Whether the validation call is for a new record or
   a preexisting one.
 
-If you need to pass additional data to your validation methods such as the
-current user's id, you can use a custom dynamic provider from your controller. ::
-
-    $this->Examples->getValidator('default')->setProvider('passed', [
-        'count' => $countFromController,
-        'userid' => $this->Auth->user('id')
-    ]);
-
-Then ensure that your validation method has the second context parameter. ::
-
-    public function customValidationMethod($check, array $context)
-    {
-        $userid = $context['providers']['passed']['userid'];
-    }
-
 Closures should return boolean true if the validation passes. If it fails,
 return boolean false or for a custom error message return a string, see the
 :ref:`Conditional/Dynamic Error Messages <dynamic_validation_error_messages>`
