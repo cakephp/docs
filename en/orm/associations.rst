@@ -736,7 +736,7 @@ Here the ORM also produces such a field on the entity:
     // A single entity (or null if not available)
     $role = $user->role;
 
-Whereas for the other direction "Roles hasMany Users" it would be:
+Whereas for the other direction "Roles hasMany Users" it would be::
 
     // Collection of user entities (or null if not available)
     $users = $role->users;
