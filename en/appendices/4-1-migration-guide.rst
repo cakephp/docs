@@ -115,11 +115,10 @@ ORM
   so in those classes you can simply use ``$this->getTableLocator()->get('ModelName')``.
 * BelongsToMany associations now respect the bindingKey set in the junction table's BelongsTo association.
   Previously, the target table's primary key was always used instead.
+* Association names are now properly case-sensitive and must match when referenced in functions like ``Query::contain()``
+  and ``Table::hasMany()``.
 * ``Cake\ORM\AssociationCollection`` no longer lower cases association names
-  to generate keys for the object map it maintains internally. One should
-  use the association name with same casing in calls to methods like
-  ``AssociationCollection::get()``, ``Query::contain()`` etc. as they have used
-  when declaring the association.
+  to generate keys for the object map it maintains internally.
 
 TestSuite
 ---------
