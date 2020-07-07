@@ -721,6 +721,24 @@ and other sub-statements, will not be applied to the root query. Associations
 that are *not* loaded through joins (hasMany/belongsToMany), do not have the
 above restrictions and can also use result formatters or map/reduce functions.
 
+Association Conventions
+=======================
+
+By default, associations are should be configured and referenced using the CamelCase style.
+This enables property chains to related tables in the following way::
+
+    $this->MyTableOne->MyTableTwo->find()->...;
+
+Association properties on entities do not use CamelCase conventions though. Instead for a hasOne/belongsTo relation like "User belongsTo Roles", you would get a `role` property instead of `Role` or `Roles`::
+
+    // A single entity (or null if not available)
+    $role = $user->role;
+
+Whereas for the other direction "Roles hasMany Users" it would be::
+
+    // Collection of user entities (or null if not available)
+    $users = $role->users;
+
 Loading Associations
 ====================
 
