@@ -196,6 +196,10 @@ Most of the following constants refer to paths in your application.
 
     Path to the logs directory.
 
+.. php:const:: RESOURCES
+
+   Path to the resources directory.
+
 .. php:const:: ROOT
 
     Path to the root directory.
