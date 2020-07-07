@@ -729,9 +729,7 @@ This enables property chains to related tables in the following way::
 
     $this->MyTableOne->MyTableTwo->find()->...;
 
-They do not end up in this casing for the resulting entity properties, though.
-So for a hasOne/belongsTo relation like "User belongsTo Roles", intuitively one would expect a single entity as result.
-Here the ORM also produces such a field on the entity:
+Association properties on entities do not use CamelCase conventions though. Instead for a hasOne/belongsTo relation like "User belongsTo Roles", you would get a `role` property instead of `Role` or `Roles`::
 
     // A single entity (or null if not available)
     $role = $user->role;
