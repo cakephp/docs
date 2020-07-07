@@ -548,10 +548,10 @@ to ``true``::
     
 .. note::
 
-    You are supposed to use the association alias with proper casing in ``contain()`` calls,
-    not the property named used to hold the associated record(s). So for e.g. if you have
-    declared an assocation as ``belongsTo('Users')`` then you must use ``contain('Users')``
-    and not ``contain('users')`` or ``contain('user')``.
+    Association names in ``contain()`` calls should use the same association casing as
+    in your association definitions,  not the property name used to hold the association record(s).
+    For example, if you have declared an assocation as ``belongsTo('Users')`` then you must 
+    use ``contain('Users')`` and not ``contain('users')`` or ``contain('user')``.
 
 Passing Conditions to Contain
 -----------------------------
