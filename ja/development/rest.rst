@@ -104,8 +104,8 @@ XML データに変換する前にデータを修正したい場合は、 ``_ser
 下記に index ビューの例を載せます。 ::
 
     // templates/Recipes/xml/index.php
-    // Do some formatting and manipulation on
-    // the $recipes array.
+    // $recipes 配列に対して 
+    // いくつかのフォーマットと操作を行う。
     $xml = Xml::fromArray(['response' => $recipes]);
     echo $xml->asXML();
 
