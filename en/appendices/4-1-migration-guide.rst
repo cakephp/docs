@@ -246,7 +246,7 @@ ORM
 Routing
 -------
 * A convenience function ``urlArray()`` has been introduced to quickly generate URL arrays
-from a route path string.
+  from a route path string.
 
 TestSuite
 ---------
@@ -258,7 +258,7 @@ TestSuite
 * Email body assertions now include the email contents in their failure messages
   making tests easier to debug.
 * ``TestCase::addFixture()`` has been added to allow chainable fixture setup, that is also
-auto-completable in IDEs.
+  auto-completable in IDEs.
 
 View
 ----
