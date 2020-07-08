@@ -102,19 +102,24 @@ accounting format you should set the currency format::
 
     Number::setDefaultCurrencyFormat(Number::FORMAT_CURRENCY_ACCOUNTING);
 
-.. versionadded:: 3.9.0
-    Formatting currency as accounting values was added.
+Setting the Default Currency
+============================
+
+.. php:method:: setDefaultCurrency($currency)
+
+Setter for the default currency. This removes the need to always pass the
+currency to :php:meth:`Cake\\I18n\\Number::currency()` and change all
+currency outputs by setting other default. If ``$currency`` is set to ``null``,
+it will clear the currently stored value.
 
 Setting the Default Currency
 ============================
 
-.. php:method:: defaultCurrency($currency)
+.. php:method:: getDefaultCurrency()
 
-Setter/getter for the default currency. This removes the need to always pass the
-currency to :php:meth:`Cake\\I18n\\Number::currency()` and change all
-currency outputs by setting other default. If ``$currency`` is set to ``false``,
-it will clear the currently stored value. By default, it will retrieve the
-``intl.default_locale`` if set and 'en_US' if not.
+Getter for the default currency. If default currency was set earlier using
+``setDefaultCurrency()``, then that value will be returned. By default, it will 
+retrieve the ``intl.default_locale`` ini value if set and 'en_US' if not.
 
 Formatting Floating Point Numbers
 =================================
