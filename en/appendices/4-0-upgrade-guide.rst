@@ -25,7 +25,7 @@ If you are not running on **PHP 7.2 or higher**, you will need to upgrade PHP be
 .. note::
     CakePHP 4.0 requires **a minimum of PHP 7.2**.
 
-.. upgrade-tool-use::
+.. _upgrade-tool-use::
 
 Use the Upgrade Tool
 ====================
