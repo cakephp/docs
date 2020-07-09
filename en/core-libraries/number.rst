@@ -119,7 +119,7 @@ Setting the Default Currency
 
 Getter for the default currency. If default currency was set earlier using
 ``setDefaultCurrency()``, then that value will be returned. By default, it will 
-retrieve the ``intl.default_locale`` ini value if set and 'en_US' if not.
+retrieve the ``intl.default_locale`` ini value if set and ``'en_US'`` if not.
 
 Formatting Floating Point Numbers
 =================================
