@@ -40,6 +40,7 @@ Database
 * ``DateTimeType::setTimezone()`` was deprecated. use ``setDatabaseTimezone()`` instead.
 * The magic method signature for ``FunctionBuilder::cast([...])`` is deprecated.
   Use ``FunctionBuilder::cast('field', 'type')`` instead.
+* ``Cake\Database\Expression\Comparison`` was renamed to ``Cake\Database\Expression\ComparisonExpression``.
 
 Datasource
 ----------
