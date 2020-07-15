@@ -286,24 +286,23 @@ em várias matrizes de um determinado tamanho, você pode usar a função ``chun
     $chunked = $collection->chunk(2);
     $chunked->toList(); // [[1, 2], [3, 4], [5, 6], [7, 8], [9, 10], [11]]
 
-The ``chunk`` function is particularly useful when doing batch processing, for
-example with a database result::
+A função ``chunk`` é particularmente útil ao realizar o processamento em lote, por 
+exemplo, com um resultado no banco de dados::
 
     $collection = new Collection($articles);
     $collection->map(function ($article) {
-            // Change a property in the article
+            // Alterar uma propriedade no artigo
             $article->property = 'changed';
         })
         ->chunk(20)
         ->each(function ($batch) {
-            myBulkSave($batch); // This function will be called for each batch
+            myBulkSave($batch); // Esta função será chamada para cada lote
         });
 
 .. php:method:: chunkWithKeys($chunkSize)
 
-Much like :php:meth:`chunk()`, ``chunkWithKeys()`` allows you to slice up
-a collection into smaller batches but with keys preserved. This is useful when
-chunking associative arrays::
+Bem como :php:meth:`chunk()`, ``chunkWithKeys()`` permite dividir uma coleção 
+em lotes menores, mas com as chaves preservadas. Isso é útil ao agrupar matrizes associativas::
 
     $collection = new Collection([
         'a' => 1,
@@ -312,20 +311,20 @@ chunking associative arrays::
         'd' => [4, 5]
     ]);
     $chunked = $collection->chunkWithKeys(2)->toList();
-    // Creates
+    // Cria
     [
         ['a' => 1, 'b' => 2],
         ['c' => 3, 'd' => [4, 5]]
     ]
 
-Filtering
+Filtragem
 =========
 
 .. php:method:: filter(callable $c)
 
-Collections make it easy to filter and create new collections based on
-the result of callback functions. You can use ``filter()`` to create a new
-collection of elements matching a criteria callback::
+As coleções facilitam a filtragem e a criação de novas coleções com base no resultado 
+das funções de retorno de chamada. Você pode usar ``filter()`` para criar uma nova 
+coleção de elementos que correspondem a um retorno de chamada de critério::
 
     $collection = new Collection($people);
     $ladies = $collection->filter(function ($person, $key) {
@@ -337,8 +336,8 @@ collection of elements matching a criteria callback::
 
 .. php:method:: reject(callable $c)
 
-The inverse of ``filter()`` is ``reject()``. This method does a negative filter,
-removing elements that match the filter function::
+O inverso de ``filter()`` é ``reject()``. Este método cria um filtro negativo, 
+removendo elementos que correspondem à função de filtro::
 
     $collection = new Collection($people);
     $ladies = $collection->reject(function ($person, $key) {
@@ -347,8 +346,8 @@ removing elements that match the filter function::
 
 .. php:method:: every(callable $c)
 
-You can do truth tests with filter functions. To see if every element in
-a collection matches a test you can use ``every()``::
+Você pode fazer testes de verificação com funções de filtro. Para ver se todos 
+os elementos de uma coleção correspondem a um teste, você pode usar ``every()``::
 
     $collection = new Collection($people);
     $allYoungPeople = $collection->every(function ($person) {
@@ -357,8 +356,8 @@ a collection matches a test you can use ``every()``::
 
 .. php:method:: some(callable $c)
 
-You can see if the collection contains at least one element matching a filter
-function using the ``some()`` method::
+Você pode ver se a coleção contém pelo menos um elemento que corresponde a 
+uma função de filtro usando o método ``some()``::
 
     $collection = new Collection($people);
     $hasYoungPeople = $collection->some(function ($person) {
@@ -367,17 +366,18 @@ function using the ``some()`` method::
 
 .. php:method:: match(array $conditions)
 
-If you need to extract a new collection containing only the elements that
-contain a given set of properties, you should use the ``match()`` method::
+Se você precisar extrair uma nova coleção contendo apenas os elementos que 
+contêm um determinado conjunto de propriedades, use o método ``match()``::
 
     $collection = new Collection($comments);
     $commentsFromMark = $collection->match(['user.name' => 'Mark']);
 
 .. php:method:: firstMatch(array $conditions)
 
-The property name can be a dot-separated path. You can traverse into nested
-entities and match the values they contain. When you only need the first
-matching element from a collection, you can use ``firstMatch()``::
+O nome da propriedade pode ser um caminho separado por pontos. Você pode 
+atravessar para entidades aninhadas e corresponder aos valores que elas contêm. 
+Quando você só precisa do primeiro elemento correspondente de uma coleção, 
+pode usar ``firstMatch()``::
 
     $collection = new Collection($comments);
     $comment = $collection->firstMatch([
@@ -385,28 +385,27 @@ matching element from a collection, you can use ``firstMatch()``::
         'active' => true
     ]);
 
-As you can see from the above, both ``match()`` and ``firstMatch()`` allow you
-to provide multiple conditions to match on. In addition, the conditions can be
-for different paths, allowing you to express complex conditions to match
-against.
+Como você pode ver acima, ambos ``match()`` e ``firstMatch()`` permitem 
+fornecer várias condições para a correspondência. Além disso, as condições 
+podem ser para caminhos diferentes, permitindo expressar condições complexas 
+para comparação.
 
-Aggregation
-===========
+Agregação
+=========
 
 .. php:method:: reduce(callable $c)
 
-The counterpart of a ``map()`` operation is usually a ``reduce``. This
-function will help you build a single result out of all the elements in a
-collection::
+A contraparte de uma operação ``map()`` geralmente é uma ``reduce``. 
+Esta função ajudará você a criar um único resultado de todos os elementos 
+em uma coleção::
 
     $totalPrice = $collection->reduce(function ($accumulated, $orderLine) {
         return $accumulated + $orderLine->price;
     }, 0);
 
-In the above example, ``$totalPrice`` will be the sum of all single prices
-contained in the collection. Note the second argument for the ``reduce()``
-function takes the initial value for the reduce operation you are
-performing::
+No exemplo acima, ``$totalPrice`` será a soma de todos os preços únicos contidos na 
+coleção. Observe o segundo argumento para a função ``reduce()`` assume o valor 
+inicial da operação de redução que você está executando::
 
     $allTags = $collection->reduce(function ($accumulated, $article) {
         return array_merge($accumulated, $article->tags);
@@ -414,17 +413,17 @@ performing::
 
 .. php:method:: min(string|callable $callback, $type = SORT_NUMERIC)
 
-To extract the minimum value for a collection based on a property, just use the
-``min()`` function. This will return the full element from the collection and
-not just the smallest value found::
+Para extrair o valor mínimo de uma coleção com base em uma propriedade, 
+basta usar a função ``min()``. Isso retornará o elemento completo da coleção 
+e não apenas o menor valor encontrado::
 
     $collection = new Collection($people);
     $youngest = $collection->min('age');
 
     echo $youngest->name;
 
-You are also able to express the property to compare by providing a path or a
-callback function::
+Você também pode expressar a propriedade para comparar, fornecendo um caminho ou uma 
+função de retorno de chamada::
 
     $collection = new Collection($people);
     $personYoungestChild = $collection->min(function ($person) {
@@ -435,8 +434,8 @@ callback function::
 
 .. php:method:: max(string|callable $callback, $type = SORT_NUMERIC)
 
-The same can be applied to the ``max()`` function, which will return a single
-element from the collection having the highest property value::
+O mesmo pode ser aplicado à função ``max()``, que retornará um único elemento 
+da coleção com o maior valor de propriedade::
 
     $collection = new Collection($people);
     $oldest = $collection->max('age');
@@ -449,8 +448,7 @@ element from the collection having the highest property value::
 
 .. php:method:: sumOf(string|callable $callback)
 
-Finally, the ``sumOf()`` method will return the sum of a property of all
-elements::
+Finalmente, o método ``sumOf()`` retornará a soma de uma propriedade de todos os elementos::
 
     $collection = new Collection($people);
     $sumOfAges =  $collection->sumOf('age');
