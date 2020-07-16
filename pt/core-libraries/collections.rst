@@ -461,22 +461,21 @@ Finalmente, o método ``sumOf()`` retornará a soma de uma propriedade de todos 
 
 .. php:method:: avg($matcher = null)
 
-Calculate the average value of the elements in the collection. Optionally
-provide a matcher path, or function to extract values to generate the average
-for::
+Calcule o valor médio dos elementos na coleção. Opcionalmente, forneça um 
+caminho correspondente ou função para extrair valores e gerar a média::
 
     $items = [
        ['invoice' => ['total' => 100]],
        ['invoice' => ['total' => 200]],
     ];
 
-    // Average: 150
+    // Média: 150
     $average = (new Collection($items))->avg('invoice.total');
 
 .. php:method:: median($matcher = null)
 
-Calculate the median value of a set of elements. Optionally provide a matcher
-path, or function to extract values to generate the median for::
+Calcule o valor mediano de um conjunto de elementos. Opcionalmente, poderá fornecer
+um caminho correspondente ou função para extrair valores para gerar a mediana::
 
     $items = [
       ['invoice' => ['total' => 400]],
@@ -486,17 +485,17 @@ path, or function to extract values to generate the median for::
       ['invoice' => ['total' => 200]],
     ];
 
-    // Median: 333
+    // Média: 333
     $median = (new Collection($items))->median('invoice.total');
 
 
-Grouping and Counting
----------------------
+Agrupamento e Contagem
+----------------------
 
 .. php:method:: groupBy($callback)
 
-Collection values can be grouped by different keys in a new collection when they
-share the same value for a property::
+Os valores da coleção podem ser agrupados por chaves diferentes em uma nova 
+coleção quando eles compartilham o mesmo valor para uma propriedade::
 
     $students = [
         ['name' => 'Mark', 'grade' => 9],
@@ -507,7 +506,7 @@ share the same value for a property::
     $collection = new Collection($students);
     $studentsByGrade = $collection->groupBy('grade');
 
-    // Result will look like this when converted to array:
+    // O resultado ficará assim quando convertido em array:
     [
       10 => [
         ['name' => 'Andrew', 'grade' => 10],
@@ -519,8 +518,8 @@ share the same value for a property::
       ]
     ]
 
-As usual, it is possible to provide either a dot-separated path for nested
-properties or your own callback function to generate the groups dynamically::
+Como de costume, é possível fornecer um caminho separado por pontos para propriedades 
+aninhadas ou sua própria função de retorno de chamada para gerar os grupos dinamicamente::
 
     $commentsByUserId = $comments->groupBy('user.id');
 
@@ -530,34 +529,33 @@ properties or your own callback function to generate the groups dynamically::
 
 .. php:method:: countBy($callback)
 
-If you only wish to know the number of occurrences per group, you can do so by
-using the ``countBy()`` method. It takes the same arguments as ``groupBy`` so it
-should be already familiar to you::
+Se você deseja apenas saber o número de ocorrências por grupo, pode fazê-lo usando o 
+método ``countBy()``. Ele usa os mesmos argumentos de ``groupBy``, portanto já 
+deve ser familiar para você::
 
     $classResults = $students->countBy(function ($student) {
         return $student->grade > 6 ? 'approved' : 'denied';
     });
 
-    // Result could look like this when converted to array:
+    // O resultado ficará assim quando convertido em array:
     ['approved' => 70, 'denied' => 20]
 
 .. php:method:: indexBy($callback)
 
-There will be certain cases where you know an element is unique for the property
-you want to group by. If you wish a single result per group, you can use the
-function ``indexBy()``::
+Em certos casos, você sabe que um elemento é exclusivo para a propriedade que 
+você deseja agrupar. Se você deseja um único resultado por grupo, pode usar a 
+função ``indexBy()``::
 
     $usersById = $users->indexBy('id');
 
-    // When converted to array result could look like
+    // Quando convertido em resultado da matriz, pode parecer
     [
         1 => 'markstory',
         3 => 'jose_zap',
         4 => 'jrbasso'
     ]
 
-As with the ``groupBy()`` function you can also use a property path or
-a callback::
+Assim como na função ``groupBy()``, você também pode usar um caminho de propriedade ou um retorno de chamada::
 
     $articlesByAuthorId = $articles->indexBy('author.id');
 
@@ -567,9 +565,9 @@ a callback::
 
 .. php:method:: zip($elements)
 
-The elements of different collections can be grouped together using the
-``zip()`` method. It will return a new collection containing an array grouping
-the elements from each collection that are placed at the same position::
+Os elementos de diferentes coleções podem ser agrupados usando o método ``zip()``. 
+Ele retornará uma nova coleção contendo uma matriz que agrupa os elementos de cada 
+coleção que são colocados na mesma posição::
 
     $odds = new Collection([1, 3, 5]);
     $pairs = new Collection([2, 4, 6]);
