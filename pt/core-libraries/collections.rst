@@ -573,14 +573,14 @@ coleção que são colocados na mesma posição::
     $pairs = new Collection([2, 4, 6]);
     $combined = $odds->zip($pairs)->toList(); // [[1, 2], [3, 4], [5, 6]]
 
-You can also zip multiple collections at once::
+Você também pode compactar várias coleções de uma só vez::
 
     $years = new Collection([2013, 2014, 2015, 2016]);
     $salaries = [1000, 1500, 2000, 2300];
     $increments = [0, 500, 500, 300];
 
     $rows = $years->zip($salaries, $increments)->toList();
-    // Returns:
+    // Retorna:
     [
         [2013, 1000, 0],
         [2014, 1500, 500],
@@ -588,8 +588,8 @@ You can also zip multiple collections at once::
         [2016, 2300, 300]
     ]
 
-As you can already see, the ``zip()`` method is very useful for transposing
-multidimensional arrays::
+Como você já pode ver, o método ``zip()`` é muito útil para transpor 
+matrizes multidimensionais::
 
     $data = [
         2014 => ['jan' => 100, 'feb' => 200],
@@ -597,27 +597,27 @@ multidimensional arrays::
         2016 => ['jan' => 400, 'feb' => 600],
     ]
 
-    // Getting jan and feb data together
+    // Reunindo dados de janeiro e fevereiro
 
     $firstYear = new Collection(array_shift($data));
     $firstYear->zip($data[0], $data[1])->toList();
 
-    // Or $firstYear->zip(...$data) in PHP >= 5.6
+    // Ou $firstYear->zip(...$data) em PHP >= 5.6
 
-    // Returns
+    // Retorna
     [
         [100, 300, 400],
         [200, 500, 600]
     ]
 
-Sorting
-=======
+Ordenação
+=========
 
 .. php:method:: sortBy($callback)
 
-Collection values can be sorted in ascending or descending order based on
-a column or custom function. To create a new sorted collection out of the values
-of another one, you can use ``sortBy``::
+Os valores da coleção podem ser classificados em ordem crescente ou decrescente 
+com base em uma coluna ou função personalizada. Para criar uma nova coleção 
+classificada com os valores de outra, você pode usar ``sortBy``::
 
     $collection = new Collection($people);
     $sorted = $collection->sortBy('age');
