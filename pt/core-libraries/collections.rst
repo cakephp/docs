@@ -622,65 +622,64 @@ classificada com os valores de outra, você pode usar ``sortBy``::
     $collection = new Collection($people);
     $sorted = $collection->sortBy('age');
 
-As seen above, you can sort by passing the name of a column or property that
-is present in the collection values. You are also able to specify a property
-path instead using the dot notation. The next example will sort articles by
-their author's name::
+Como visto acima, você pode classificar passando o nome de uma coluna ou 
+propriedade presente nos valores da coleção. Você também pode especificar 
+um caminho de propriedade usando a notação de ponto. O próximo exemplo 
+classificará os artigos pelo nome do autor::
 
     $collection = new Collection($articles);
     $sorted = $collection->sortBy('author.name');
 
-The ``sortBy()`` method is flexible enough to let you specify an extractor
-function that will let you dynamically select the value to use for comparing two
-different values in the collection::
+O método ``sortBy()`` é flexível o suficiente para permitir que você 
+especifique uma função extratora que permitirá selecionar dinamicamente o 
+valor a ser usado para comparar dois valores diferentes na coleção::
 
     $collection = new Collection($articles);
     $sorted = $collection->sortBy(function ($article) {
         return $article->author->name . '-' . $article->title;
     });
 
-In order to specify in which direction the collection should be sorted, you need
-to provide either ``SORT_ASC`` or ``SORT_DESC`` as the second parameter for
-sorting in ascending or descending direction respectively. By default,
-collections are sorted in descending direction::
+Para especificar em qual direção a coleção deve ser classificada, é 
+necessário fornecer ``SORT_ASC`` ou ``SORT_DESC`` como o segundo 
+parâmetro para classificar na direção ascendente ou descendente, 
+respectivamente. Por padrão, as coleções são classificadas em direção descendente::
 
     $collection = new Collection($people);
     $sorted = $collection->sortBy('age', SORT_ASC);
 
-Sometimes you will need to specify which type of data you are trying to compare
-so that you get consistent results. For this purpose, you should supply a third
-argument in the ``sortBy()`` function with one of the following constants:
+Às vezes, você precisará especificar que tipo de dados você está tentando 
+comparar para obter resultados consistentes. Para esse fim, você deve fornecer 
+um terceiro argumento na função ``sortBy()`` com uma das seguintes constantes:
 
-- **SORT_NUMERIC**: For comparing numbers
-- **SORT_STRING**: For comparing string values
-- **SORT_NATURAL**: For sorting string containing numbers and you'd like those
-  numbers to be order in a natural way. For example: showing "10" after "2".
-- **SORT_LOCALE_STRING**: For comparing strings based on the current locale.
+- **SORT_NUMERIC**: Para comparar números
+- **SORT_STRING**: Para comparar valores de sequência
+- **SORT_NATURAL**: Para classificar sequência contendo números e se você desejar que esses números 
+  sejam ordenados de maneira natural. Por exemplo: mostrando "10" depois de "2".
+- **SORT_LOCALE_STRING**: Para comparar seqüências de caracteres com base na localidade atual.
 
-By default, ``SORT_NUMERIC`` is used::
+Por padrão, ``SORT_NUMERIC`` é usado::
 
     $collection = new Collection($articles);
     $sorted = $collection->sortBy('title', SORT_ASC, SORT_NATURAL);
 
 .. warning::
 
-    It is often expensive to iterate sorted collections more than once. If you
-    plan to do so, consider converting the collection to an array or simply use
-    the ``compile()`` method on it.
+    Muitas vezes, é caro iterar coleções classificadas mais de uma vez. Se você planeja fazer isso, 
+    considere converter a coleção em uma matriz ou simplesmente use o método ``compile()`` nela.
 
-Working with Tree Data
-======================
+Trabalhando com dados de Árvore
+===============================
 
 .. php:method:: nest($idPath, $parentPath)
 
-Not all data is meant to be represented in a linear way. Collections make it
-easier to construct and flatten hierarchical or nested structures. Creating
-a nested structure where children are grouped by a parent identifier property is
-easy with the ``nest()`` method.
+Nem todos os dados devem ser representados de maneira linear. As coleções facilitam 
+a construção e o nivelamento de estruturas hierárquicas ou aninhadas. Criar uma estrutura 
+aninhada em que os filhos são agrupados por uma propriedade de identificador pai é fácil 
+com o método ``nest()``.
 
-Two parameters are required for this function. The first one is the property
-representing the item identifier. The second parameter is the name of the
-property representing the identifier for the parent item::
+Dois parâmetros são necessários para esta função. O primeiro é a propriedade que representa o 
+identificador do item. O segundo parâmetro é o nome da propriedade que representa o identificador 
+para o item pai::
 
     $collection = new Collection([
         ['id' => 1, 'parent_id' => null, 'name' => 'Birds'],
@@ -692,7 +691,7 @@ property representing the identifier for the parent item::
     ]);
 
     $collection->nest('id', 'parent_id')->toList();
-    // Returns
+    // Retorna
     [
         [
             'id' => 1,
@@ -714,24 +713,22 @@ property representing the identifier for the parent item::
         ]
     ];
 
-Children elements are nested inside the ``children`` property inside each of the
-items in the collection. This type of data representation is helpful for
-rendering menus or traversing elements up to certain level in the tree.
+Os elementos filhos são aninhados dentro da propriedade ``children`` dentro de 
+cada um dos itens da coleção. Esse tipo de representação de dados é útil para 
+renderizar menus ou percorrer elementos até um determinado nível na árvore.
 
 .. php:method:: listNested($dir = 'desc', $nestingKey = 'children')
 
-The inverse of ``nest()`` is ``listNested()``. This method allows you to flatten
-a tree structure back into a linear structure. It takes two parameters; the
-first one is the traversing mode (asc, desc or leaves), and the second one is
-the name of the property containing the children for each element in the
-collection.
+O inverso de ``nest()`` é ``listNested()``. Este método permite nivelar 
+uma estrutura de árvore novamente em uma estrutura linear. São necessários dois 
+parâmetros; o primeiro é o modo de deslocamento (asc, desc ou leaves) e o segundo 
+é o nome da propriedade que contém os filhos de cada elemento da coleção.
 
-Taking the input the nested collection built in the previous example, we can
-flatten it::
+Tomando a entrada da coleção aninhada criada no exemplo anterior, podemos deixar nivelado::
 
     $nested->listNested()->toList();
 
-    // Returns
+    // Retorna
     [
         ['id' => 1, 'parent_id' => null, 'name' => 'Birds', 'children' => [...]],
         ['id' => 2, 'parent_id' => 1, 'name' => 'Land Birds'],
@@ -741,32 +738,32 @@ flatten it::
         ['id' => 5, 'parent_id' => 6, 'name' => 'Clown Fish']
     ]
 
-By default, the tree is traversed from the root to the leaves. You can also
-instruct it to only return the leaf elements in the tree::
+Por padrão, a árvore é atravessada da raiz para as extremidades. Você também pode 
+instruí-lo a retornar apenas os elementos filhos da árvore::
 
     $nested->listNested()->toList();
 
-    // Returns
+    // Retorna
     [
         ['id' => 3, 'parent_id' => 1, 'name' => 'Eagle'],
         ['id' => 4, 'parent_id' => 1, 'name' => 'Seagull'],
         ['id' => 5, 'parent_id' => 6, 'name' => 'Clown Fish']
     ]
 
-Once you have converted a tree into a nested list, you can use the ``printer()``
-method to configure how the list output should be formatted::
+Depois de converter uma árvore em uma lista aninhada, você pode usar o método 
+``printer()`` para configurar como a saída da lista deve ser formatada::
 
     $nested->listNested()->printer('name', 'id', '--')->toArray();
 
-    // Returns
+    // Retorna
     [
         3 => 'Eagle',
         4 => 'Seagull',
         5 -> '--Clown Fish',
     ]
 
-The ``printer()`` method also lets you use a callback to generate the keys and
-or values::
+O método ``printer()`` também permite usar um retorno de chamada para gerar as 
+chaves e/ou valores::
 
     $nested->listNested()->printer(
         function ($el) {
@@ -777,42 +774,42 @@ or values::
         }
     );
 
-Other Methods
-=============
+Outros Métodos
+==============
 
 .. php:method:: isEmpty()
 
-Allows you to see if a collection contains any elements::
+Permite que você veja se uma coleção contém algum elemento::
 
     $collection = new Collection([]);
-    // Returns true
+    // Retorna true
     $collection->isEmpty();
 
     $collection = new Collection([1]);
-    // Returns false
+    // Retorna false
     $collection->isEmpty();
 
 .. php:method:: contains($value)
 
-Collections allow you to quickly check if they contain one particular
-value: by using the ``contains()`` method::
+As coleções permitem que você verifique rapidamente se elas contêm um 
+valor específico: usando o método ``contains()``::
 
     $items = ['a' => 1, 'b' => 2, 'c' => 3];
     $collection = new Collection($items);
     $hasThree = $collection->contains(3);
 
-Comparisons are performed using the ``===`` operator. If you wish to do looser
-comparison types you can use the ``some()`` method.
+As comparações são realizadas usando o operador ``===``. Se você 
+deseja fazer tipos de comparação mais flexíveis, pode usar o método ``some()``.
 
 .. php:method:: shuffle()
 
-Sometimes you may wish to show a collection of values in a random order. In
-order to create a new collection that will return each value in a randomized
-position, use the ``shuffle``::
+Às vezes, você pode querer mostrar uma coleção de valores em uma ordem aleatória. 
+Para criar uma nova coleção que retornará cada valor em uma posição aleatória, 
+use o ``shuffle``::
 
     $collection = new Collection(['a' => 1, 'b' => 2, 'c' => 3]);
 
-    // This could return [2, 3, 1]
+    // Isso poderia retornar [2, 3, 1]
     $collection->shuffle()->toList();
 
 .. php:method:: transpose()
