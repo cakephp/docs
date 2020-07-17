@@ -159,16 +159,16 @@ icon     image/x-icon
     // icon is downloaded by both newer and older browsers
     // which require different rel attribute values.
     <link
-        href="/subdir/favicon.ico" 
-        type="image/x-icon" 
+        href="/subdir/favicon.ico"
+        type="image/x-icon"
         rel="icon"
     />
     <link
-        href="/subdir/favicon.ico" 
-        type="image/x-icon" 
+        href="/subdir/favicon.ico"
+        type="image/x-icon"
         rel="shortcut icon"
     />
-    
+
     <?= $this->Html->meta(
         'Comments',
         '/comments/index.rss',
@@ -214,44 +214,6 @@ In addition to making predefined meta tags, you can create link elements::
 
 Any attributes provided to meta() when called this way will be added to the
 generated link tag.
-
-Creating DOCTYPE
-----------------
-
-.. php:method:: docType(string $type = 'html5')
-
-Returns a (X)HTML DOCTYPE (document type declaration). Supply the document
-type according to the following table:
-
-+--------------------------+----------------------------------+
-| type                     | translated value                 |
-+==========================+==================================+
-| html4-strict             | HTML 4.01 Strict                 |
-+--------------------------+----------------------------------+
-| html4-trans              | HTML 4.01 Transitional           |
-+--------------------------+----------------------------------+
-| html4-frame              | HTML 4.01 Frameset               |
-+--------------------------+----------------------------------+
-| html5 (default)          | HTML5                            |
-+--------------------------+----------------------------------+
-| xhtml-strict             | XHTML 1.0 Strict                 |
-+--------------------------+----------------------------------+
-| xhtml-trans              | XHTML 1.0 Transitional           |
-+--------------------------+----------------------------------+
-| xhtml-frame              | XHTML 1.0 Frameset               |
-+--------------------------+----------------------------------+
-| xhtml11                  | XHTML 1.1                        |
-+--------------------------+----------------------------------+
-
-::
-
-    echo $this->Html->docType();
-    // Outputs: <!DOCTYPE html>
-
-    echo $this->Html->docType('html4-trans');
-    // Outputs:
-    // <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-    //    "http://www.w3.org/TR/html4/loose.dtd">
 
 Linking to Images
 -----------------
@@ -308,10 +270,21 @@ and also wanted to include **webroot/img/Blog.icon.png**, you would::
 
     echo $this->Html->image('Blog.icon.png', ['plugin' => false]);
 
+If you would like the prefix of the URL to not be ``/img``, you can override this setting by specifying the prefix in the ``$options`` array ::
+
+    echo $this->Html->image("logo.png", ['pathPrefix' => '']);
+
+Will output:
+
+.. code-block:: html
+
+    <img src="logo.jpg" alt="" />
+
+
 Creating Links
 --------------
 
-.. php:method:: link(string $title, mixed $url = null, array $options = [])
+.. php:method:: link($title, $url = null, array $options = [])
 
 General purpose method for creating HTML links. Use ``$options`` to
 specify attributes for the element and whether or not the
@@ -415,6 +388,19 @@ Will output:
 
 Also check :php:meth:`Cake\\View\\Helper\\UrlHelper::build()` method
 for more examples of different types of URLs.
+
+.. php:method:: linkFromPath(string $title, string $path, array $params = [], array $options = [])
+
+If you want to use route path strings, you can do that using this method::
+
+    echo $this->Html->linkFromPath('Index', 'Articles::index');
+    // results in: <a href="/articles">Index</a>
+
+    echo $this->Html->linkFromPath('View', 'MyBackend.Admin/Articles::view', [3]);
+    // results in e.g.: <a href="/admin/my-backend/articles/view/3">View</a>
+
+.. versionadded:: 4.1.0
+    ``linkFromPath()`` was added.
 
 Linking to Videos and Audio Files
 ---------------------------------

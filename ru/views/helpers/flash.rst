@@ -1,17 +1,77 @@
-Flash
-#####
+Мгновенные сообщения
+####################
 
 .. php:namespace:: Cake\View\Helper
 
 .. php:class:: FlashHelper(View $view, array $config = [])
 
+FlashHelper предоставляет способ визуализации мгновенных сообщений, которые сохраняются в
+``$_SESSION`` с использованием :doc:`FlashComponent </controllers/components/flash>`.
+:doc:`FlashComponent </controllers/components/flash>` и FlashHelper
+в основном используют элементы для отображения мгновенных сообщений.
+Элементы мгновенных сообщений находятся в папке **templates/element/flash**.
+Заметьте, что шаблон приложения CakePHP предоставляется с тремя готовыми
+элементами мгновенных сообщений: **success.php**, **default.php**, и
+**error.php**.
+
+Отображение мгновенных сообщений
+================================
+
+Для отображения мгновенного сообщения используется метод ``render()`` из FlashHelper
+в файле шаблона::
+
+    <?= $this->Flash->render() ?>
+
+По умолчанию CakePHP использует ключ "flash" для мгновенных сообщений в сессии.
+Но, если был указан ключ при установке мгновенного сообщения в
+:doc:`FlashComponent </controllers/components/flash>`, можно указать какой из
+ключей мгновенного сообщения отображать::
+
+    <?= $this->Flash->render('other') ?>
+
+Также можно переопределить любой из параметров, которые были установлены во FlashComponent::
+
+    // в Контроллере
+    $this->Flash->set('The user has been saved.', [
+        'element' => 'success'
+    ]);
+
+    // В файле шаблона: будет использован great_success.php вместо succcess.php
+    <?= $this->Flash->render('flash', [
+        'element' => 'great_success'
+    ]);
+
 .. note::
-    The documentation is not currently supported in Russian language for this
-    page.
 
-    Please feel free to send us a pull request on
-    `Github <https://github.com/cakephp/docs>`_ or use the **Improve This Doc**
-    button to directly propose your changes.
+    При создании пользовательских шаблонов мгновенных сообщений, необходимо убедиться,
+    что HTML-код правильно обрабатывает пользовательские данные.
+    CakePHP не экранирует параметры мгновенных сообщений за вас.
 
-    You can refer to the english version in the select top menu to have
-    information about this page's topic.
+.. versionadded:: 3.1
+
+    :doc:`FlashComponent </controllers/components/flash>` теперь ставит
+    сообщения в очередь. Если установлены несколько мгновенных сообщений,
+    при вызове ``render()`` каждое сообщение будет отображать свои собственные
+    элементы в том порядке, в каком они были установлены.
+
+Для дополнительной информации о доступных параметрах массива, обратитесь в раздел
+:doc:`FlashComponent </controllers/components/flash>`.
+
+Префикс маршрутизации и мгновенные сообщения
+============================================
+
+.. versionadded:: 3.0.1
+
+Если у вас сконфигурирован префикс маршрутизации, Flash элементы могут храниться в
+**templates/{Prefix}/element/flash**. Таким образом, вы можете хранить
+конкретные шаблоны сообщений для каждой части вашего приложения.
+Например, используя различные щаблоны для пользовательского интерфейса и интерфейса
+администратора.
+
+Мгновенные сообщения и темы
+===========================
+
+FlashHelper использует обычные элементы для отображения сообщений и таким образом
+будет соответствовать любой теме, которая будет указана. Таким образом,
+когда у темы есть файл **templates/element/flash/error.php**, он будет
+использоваться так же, как и другие Элементы и Представления.

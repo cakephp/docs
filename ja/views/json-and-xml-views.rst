@@ -115,7 +115,7 @@ JSON レスポンスからそれを取り除きたいとします。こういっ
         }
     }
 
-    // ビューのコード - src/Template/Articles/json/index.ctp
+    // ビューのコード - templates/Articles/json/index.php
     foreach ($articles as &$article) {
         unset($article->generated_html);
     }
@@ -230,7 +230,7 @@ JSONP レスポンスの返すことが出来ます。これに ``true`` を設�
             }
 
             // ビューに出力形式をセット
-            $this->viewBuilder()->className($formats[$format]);
+            $this->viewBuilder()->setClassName($formats[$format]);
 
             // データを取得
             $videos = $this->Videos->find('latest');

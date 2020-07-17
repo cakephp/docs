@@ -24,7 +24,8 @@ passing it to the ``save()`` method in the ``Table`` class::
 
     use Cake\ORM\TableRegistry;
 
-    $articlesTable = TableRegistry::get('Articles');
+    // Prior to 3.6 use TableRegistry::get('Articles')
+    $articlesTable = TableRegistry::getTableLocator()->get('Articles');
     $article = $articlesTable->newEntity();
 
     $article->title = 'A New Article';
@@ -43,7 +44,8 @@ that purpose::
 
     use Cake\ORM\TableRegistry;
 
-    $articlesTable = TableRegistry::get('Articles');
+    // Prior to 3.6 use TableRegistry::get('Articles')
+    $articlesTable = TableRegistry::getTableLocator()->get('Articles');
     $article = $articlesTable->get(12); // Return article with id 12
 
     $article->title = 'CakePHP is THE best PHP framework!';
@@ -58,7 +60,8 @@ Saving With Associations
 
 By default the ``save()`` method will also save one level of associations::
 
-    $articlesTable = TableRegistry::get('Articles');
+    // Prior to 3.6 use TableRegistry::get('Articles')
+    $articlesTable = TableRegistry::getTableLocator()->get('Articles');
     $author = $articlesTable->Authors->findByUserName('mark')->first();
 
     $article = $articlesTable->newEntity();
@@ -130,7 +133,9 @@ that the ORM uses. The Table class provides an easy and efficient way to convert
 one or many entities from request data. You can convert a single entity using::
 
     // In a controller
-    $articles = TableRegistry::get('Articles');
+
+    // Prior to 3.6 use TableRegistry::get('Articles')
+    $articles = TableRegistry::getTableLocator()->get('Articles');
 
     // Validate and convert to an Entity object
     $entity = $articles->newEntity($this->request->getData());
@@ -168,7 +173,9 @@ When building forms that save nested associations, you need to define which
 associations should be marshalled::
 
     // In a controller
-    $articles = TableRegistry::get('Articles');
+
+    // Prior to 3.6 use TableRegistry::get('Articles')
+    $articles = TableRegistry::getTableLocator()->get('Articles');
 
     // New entity with nested associations
     $entity = $articles->newEntity($this->request->getData(), [
@@ -181,7 +188,9 @@ The above indicates that the 'Tags', 'Comments' and 'Users' for the Comments
 should be marshalled. Alternatively, you can use dot notation for brevity::
 
     // In a controller
-    $articles = TableRegistry::get('Articles');
+
+    // Prior to 3.6 use TableRegistry::get('Articles')
+    $articles = TableRegistry::getTableLocator()->get('Articles');
 
     // New entity with nested associations using dot notation
     $entity = $articles->newEntity($this->request->getData(), [
@@ -198,7 +207,9 @@ Associated data is also validated by default unless told otherwise. You may also
 change the validation set to be used per association::
 
     // In a controller
-    $articles = TableRegistry::get('Articles');
+
+    // Prior to 3.6 use TableRegistry::get('Articles')
+    $articles = TableRegistry::getTableLocator()->get('Articles');
 
     // Bypass validation on Tags association and
     // Designate 'signup' validation set for Comments.Users
@@ -321,7 +332,9 @@ When creating forms that create/update multiple records at once you can use
 ``newEntities()``::
 
     // In a controller.
-    $articles = TableRegistry::get('Articles');
+
+    // Prior to 3.6 use TableRegistry::get('Articles')
+    $articles = TableRegistry::getTableLocator()->get('Articles');
     $entities = $articles->newEntities($this->request->getData());
 
 In this situation, the request data for multiple articles should look like::
@@ -371,7 +384,9 @@ such case, you can use the ``accessibleFields`` option. It could be useful to
 keep ids of associated entities::
 
     // In a controller
-    $articles = TableRegistry::get('Articles');
+
+    // Prior to 3.6 use TableRegistry::get('Articles')
+    $articles = TableRegistry::getTableLocator()->get('Articles');
     $entity = $articles->newEntity($this->request->getData(), [
         'associated' => [
             'Tags', 'Comments' => [
@@ -404,7 +419,9 @@ persisted. You can merge an array of raw data into an existing entity using the
 ``patchEntity()`` method::
 
     // In a controller.
-    $articles = TableRegistry::get('Articles');
+
+    // Prior to 3.6 use TableRegistry::get('Articles')
+    $articles = TableRegistry::getTableLocator()->get('Articles');
     $article = $articles->get(1);
     $articles->patchEntity($article, $this->request->getData());
     $articles->save($article);
@@ -418,7 +435,9 @@ before it is copied to the entity. The mechanism is explained in the
 patching an entity, pass the ``validate`` option as follows::
 
     // In a controller.
-    $articles = TableRegistry::get('Articles');
+
+    // Prior to 3.6 use TableRegistry::get('Articles')
+    $articles = TableRegistry::getTableLocator()->get('Articles');
     $article = $articles->get(1);
     $articles->patchEntity($article, $data, ['validate' => false]);
 
@@ -540,7 +559,9 @@ present in the entity, you can collect the primary keys and execute a batch
 delete for those not in the list::
 
     // In a controller.
-    $comments = TableRegistry::get('Comments');
+
+    // Prior to 3.6 use TableRegistry::get('Comments')
+    $comments = TableRegistry::getTableLocator()->get('Comments');
     $present = (new Collection($entity->comments))->extract('id')->filter()->toArray();
     $comments->deleteAll([
         'article_id' => $article->id,
@@ -556,7 +577,9 @@ entities: Matches are done by the primary key field value and missing matches in
 the original entities array will be removed and not present in the result::
 
     // In a controller.
-    $articles = TableRegistry::get('Articles');
+
+    // Prior to 3.6 use TableRegistry::get('Articles')
+    $articles = TableRegistry::getTableLocator()->get('Articles');
     $list = $articles->find('popular')->toArray();
     $patched = $articles->patchEntities($list, $this->request->getData());
     foreach ($patched as $entity) {
@@ -693,12 +716,14 @@ Saving Entities
 When saving request data to your database you need to first hydrate a new entity
 using ``newEntity()`` for passing into ``save()``. For example::
 
-  // In a controller
-  $articles = TableRegistry::get('Articles');
-  $article = $articles->newEntity($this->request->getData());
-  if ($articles->save($article)) {
-      // ...
-  }
+    // In a controller
+
+    // Prior to 3.6 use TableRegistry::get('Articles')
+    $articles = TableRegistry::getTableLocator()->get('Articles');
+    $article = $articles->newEntity($this->request->getData());
+    if ($articles->save($article)) {
+        // ...
+    }
 
 The ORM uses the ``isNew()`` method on an entity to determine whether or not an
 insert or update should be performed. If the ``isNew()`` method returns ``true``
@@ -711,7 +736,8 @@ and the entity has a primary key value, an 'exists' query will be issued. The
 Once you've loaded some entities you'll probably want to modify them and update
 your database. This is a pretty simple exercise in CakePHP::
 
-    $articles = TableRegistry::get('Articles');
+    // Prior to 3.6 use TableRegistry::get('Articles')
+    $articles = TableRegistry::getTableLocator()->get('Articles');
     $article = $articles->find('all')->where(['id' => 2])->first();
 
     $article->title = 'My new title';
@@ -720,11 +746,15 @@ your database. This is a pretty simple exercise in CakePHP::
 When saving, CakePHP will :ref:`apply your rules <application-rules>`, and wrap
 the save operation in a database transaction. It will also only update
 properties that have changed. The above ``save()`` call would generate SQL
-like::
+like:
+
+.. code-block:: sql
 
     UPDATE articles SET title = 'My new title' WHERE id = 2;
 
-If you had a new entity, the following SQL would be generated::
+If you had a new entity, the following SQL would be generated:
+
+.. code-block:: sql
 
     INSERT INTO articles (title) VALUES ('My new title');
 
@@ -823,7 +853,9 @@ the singular, :ref:`underscored <inflector-methods-summary>` version of the asso
             'username' => 'mark'
         ]
     ];
-    $articles = TableRegistry::get('Articles');
+
+    // Prior to 3.6 use TableRegistry::get('Articles')
+    $articles = TableRegistry::getTableLocator()->get('Articles');
     $article = $articles->newEntity($data, [
         'associated' => ['Users']
     ]);
@@ -844,7 +876,9 @@ singular, :ref:`underscored <inflector-methods-summary>` version of the associat
             'twitter' => '@cakephp'
         ]
     ];
-    $users = TableRegistry::get('Users');
+
+    // Prior to 3.6 use TableRegistry::get('Users')
+    $users = TableRegistry::getTableLocator()->get('Users');
     $user = $users->newEntity($data, [
         'associated' => ['Profiles']
     ]);
@@ -864,7 +898,9 @@ plural, :ref:`underscored <inflector-methods-summary>` version of the associatio
             ['body' => 'I really like this.']
         ]
     ];
-    $articles = TableRegistry::get('Articles');
+
+    // Prior to 3.6 use TableRegistry::get('Articles')
+    $articles = TableRegistry::getTableLocator()->get('Articles');
     $article = $articles->newEntity($data, [
         'associated' => ['Comments']
     ]);
@@ -914,7 +950,9 @@ the plural, :ref:`underscored <inflector-methods-summary>` version of the associ
             ['tag' => 'Framework']
         ]
     ];
-    $articles = TableRegistry::get('Articles');
+
+    // Prior to 3.6 use TableRegistry::get('Articles')
+    $articles = TableRegistry::getTableLocator()->get('Articles');
     $article = $articles->newEntity($data, [
         'associated' => ['Tags']
     ]);
@@ -1123,7 +1161,9 @@ be an array of entities created using ``newEntities()`` / ``patchEntities()``.
             'published' => 1
         ],
     ];
-    $articles = TableRegistry::get('Articles');
+
+    // Prior to 3.6 use TableRegistry::get('Articles')
+    $articles = TableRegistry::getTableLocator()->get('Articles');
     $entities = $articles->newEntities($data);
     $result = $articles->saveMany($entities);
 

@@ -24,7 +24,9 @@ fonctionnalités de l'ORM, si nécessaire. Consultez la section
 :ref:`database-queries` pour plus d'informations::
 
     use Cake\ORM\TableRegistry;
-    $articles = TableRegistry::get('Articles');
+
+    // Prior to 3.6 use TableRegistry::get('Articles')
+    $articles = TableRegistry::getTableLocator()->get('Articles');
 
     // Commence une nouvelle requête.
     $query = $articles->find();
@@ -43,7 +45,8 @@ Récupérer les Lignes d'une Table
 
     use Cake\ORM\TableRegistry;
 
-    $query = TableRegistry::get('Articles')->find();
+    // Prior to 3.6 use TableRegistry::get('Articles')
+    $query = TableRegistry::getTableLocator()->get('Articles')->find();
 
     foreach ($query as $article) {
         debug($article->title);
@@ -387,7 +390,9 @@ En modifiant les arguments avec une valeur de ``literal``, l'ORM va savoir que
 la clé doit être traitée comme une valeur SQL littérale. En modifiant les
 arguments avec une valeur d'``identifier``, l'ORM va savoir que la clé doit être
 traitée comme un identifieur de champ. Le code ci-dessus va générer le SQL
-suivant sur MySQL::
+suivant sur MySQL:
+
+.. code-block:: mysql
 
     SELECT CONCAT(Articles.title, :c0, Categories.name, :c1, (DATEDIFF(NOW(), Articles.created))) FROM articles;
 
@@ -410,7 +415,9 @@ créer toute fonction générique SQL comme ``year``, ``date_format``,
         'timeCreated' => $time
     ]);
 
-Entraînera::
+Entraînera:
+
+.. code-block:: mysql
 
     SELECT YEAR(created) as yearCreated, DATE_FORMAT(created, '%H:%i') as timeCreated FROM articles;
 
@@ -452,7 +459,9 @@ d'additionner ou de compter conditionnellement, ou si vous avez besoin de
 données spécifiques basées sur une condition.
 
 Si vous vouliez savoir combien d'articles sont publiés dans notre base de
-données, nous pourrions utiliser le SQL suivant::
+données, nous pourrions utiliser le SQL suivant:
+
+.. code-block:: sql
 
     SELECT
     COUNT(CASE WHEN published = 'Y' THEN 1 END) AS number_published,
@@ -631,7 +640,9 @@ les conditions courante et précédente. Par exemple::
         ->where(['author_id' => 2])
         ->orWhere(['author_id' => 3]);
 
-Ce qui précède générerait le code SQL::
+Ce qui précède générerait le code SQL:
+
+.. code-block:: sql
 
     SELECT * FROM articles WHERE (author_id = 2 OR author_id = 3)
 
@@ -647,7 +658,9 @@ conditions complexes qui utilisent un mix d'opérateurs::
         ])
         ->orWhere(['promoted' => true]);
 
-Ce qui précède générerait le code SQL::
+Ce qui précède générerait le code SQL:
+
+.. code-block:: sql
 
     SELECT *
     FROM articles
@@ -666,13 +679,15 @@ vous pouvez organiser ensemble les conditions avec les objets expression::
     $query = $articles->find()
         ->where(['title LIKE' => '%First%'])
         ->andWhere(function ($exp) {
-            return $exp->or_([
+            return $exp->or([
                 'author_id' => 2,
                 'is_highlighted' => true
             ]);
         });
 
-Ce qui précède générerait le code SQL::
+Ce qui précède générerait le code SQL:
+
+.. code-block:: sql
 
     SELECT *
     FROM articles
@@ -684,14 +699,14 @@ Ce qui précède générerait le code SQL::
 
 Les objets expression qui sont passés dans les fonctions ``where()`` ont deux
 types de méthodes. Les premiers types de méthode sont des **combinateurs**.
-Les méthodes ``and_()`` et ``or_()`` créent de nouveaux objets expression qui
+Les méthodes ``and()`` et ``or()`` créent de nouveaux objets expression qui
 changent **la façon dont** les conditions sont combinées. Les seconds types de
 méthode sont les **conditions**. Les conditions sont ajoutées dans une
 expression où elles sont combinées avec le combinateur courant.
 
-Par exemple, appeler ``$exp->and_(...)`` va créer un nouvel objet ``Expression``
+Par exemple, appeler ``$exp->and(...)`` va créer un nouvel objet ``Expression``
 qui combine toutes les conditions qu'il contient avec ``AND``. Alors que
-``$exp->or_()`` va créer un nouvel objet ``Expression`` qui combine toutes les
+``$exp->or()`` va créer un nouvel objet ``Expression`` qui combine toutes les
 conditions qui lui sont ajoutées avec ``OR``. Un exemple d'ajout de conditions
 avec une objet ``Expression`` serait::
 
@@ -705,9 +720,11 @@ avec une objet ``Expression`` serait::
         });
 
 Puisque nous avons commencé à utiliser ``where()``, nous n'avons pas besoin
-d'appeler ``and_()``, puisqu'elle est appelée implicitement. Le code ci-dessus
+d'appeler ``and()``, puisqu'elle est appelée implicitement. Le code ci-dessus
 montre quelques nouvelles méthodes de conditions combinées avec ``AND``. Le code
-SQL résultant serait::
+SQL résultant serait:
+
+.. code-block:: sql
 
     SELECT *
     FROM articles
@@ -728,7 +745,7 @@ nous pourrions faire ce qui suit::
 
     $query = $articles->find()
         ->where(function ($exp) {
-            $orConditions = $exp->or_(['author_id' => 2])
+            $orConditions = $exp->or(['author_id' => 2])
                 ->eq('author_id', 5);
             return $exp
                 ->add($orConditions)
@@ -736,7 +753,9 @@ nous pourrions faire ce qui suit::
                 ->gte('view_count', 10);
         });
 
-Ce qui générerait le code SQL suivant::
+Ce qui générerait le code SQL suivant:
+
+.. code-block:: sql
 
     SELECT *
     FROM articles
@@ -745,13 +764,13 @@ Ce qui générerait le code SQL suivant::
     AND published = 1
     AND view_count > 10)
 
-Les méthodes ``or_()`` et ``and_()`` vous permettent aussi d'utiliser les
+Les méthodes ``or()`` et ``and()`` vous permettent aussi d'utiliser les
 fonctions en paramètres. C'est souvent plus facile à lire que les méthodes
 chaînées::
 
     $query = $articles->find()
         ->where(function ($exp) {
-            $orConditions = $exp->or_(function ($or) {
+            $orConditions = $exp->or(function ($or) {
                 return $or->eq('author_id', 2)
                     ->eq('author_id', 5);
             });
@@ -764,14 +783,16 @@ Vous pouvez faire une négation des sous-expressions en utilisant ``not()``::
 
     $query = $articles->find()
         ->where(function ($exp) {
-            $orConditions = $exp->or_(['author_id' => 2])
+            $orConditions = $exp->or(['author_id' => 2])
                 ->eq('author_id', 5);
             return $exp
                 ->not($orConditions)
                 ->lte('view_count', 10);
         });
 
-Ce qui générerait le code SQL suivant::
+Ce qui générerait le code SQL suivant:
+
+.. code-block:: sql
 
     SELECT *
     FROM articles
@@ -792,7 +813,9 @@ SQL::
                 ->eq('published', true);
         });
 
-Ce qui générerait le code SQL suivant::
+Ce qui générerait le code SQL suivant:
+
+.. code-block:: sql
 
     SELECT *
     FROM articles
@@ -1157,13 +1180,12 @@ personnalisés ou à travers des écouteurs d'évènement.
 Quand les résultats pour une requête mise en cache sont récupérés, ce qui suit
 va arriver:
 
-1. L'évènement ``Model.beforeFind`` est déclenché.
-2. Si la requête a des ensembles de résultats, ceux-ci vont être retournés.
-3. La clé du cache va être déterminée et les données du cache vont être lues.
+1. Si la requête a des ensembles de résultats, ceux-ci vont être retournés.
+2. La clé du cache va être déterminée et les données du cache vont être lues.
    Si les données du cache sont vides, ces résultats vont être retournés.
-4. Si le cache n'est pas présent, la requête sera exécutée et un nouveau
-   ``ResultSet`` sera créé. Ce ``ResultSet`` sera écrit dans le cache et sera
-   retourné.
+3. Si le cache manque, la requête sera exécutée, l'événement ``Model.beforeFind``
+   sera déclenché, et un nouveau ``ResultSet`` sera créé. Ce ``ResultSet``
+   sera écrit dans le cache et retourné.
 
 .. note::
 

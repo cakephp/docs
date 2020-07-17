@@ -172,15 +172,14 @@ With the basic read views created, we need to make it possible for new articles
 to be created. Start by creating an ``add()`` action in the
 ``ArticlesController``. Our controller should now look like::
 
+    <?php
     // src/Controller/ArticlesController.php
-
     namespace App\Controller;
 
     use App\Controller\AppController;
 
     class ArticlesController extends AppController
     {
-
         public function initialize(): void
         {
             parent::initialize();
@@ -203,7 +202,7 @@ to be created. Start by creating an ``add()`` action in the
 
         public function add()
         {
-            $article = $this->Articles->newEntity();
+            $article = $this->Articles->newEmptyEntity();
             if ($this->request->is('post')) {
                 $article = $this->Articles->patchEntity($article, $this->request->getData());
 
@@ -313,16 +312,19 @@ creating a slug attribute, and the column is ``NOT NULL``. Slug values are
 typically a URL-safe version of an article's title. We can use the
 :ref:`beforeSave() callback <table-callbacks>` of the ORM to populate our slug::
 
+    <?php
     // in src/Model/Table/ArticlesTable.php
     namespace App\Model\Table;
 
     use Cake\ORM\Table;
     // the Text class
     use Cake\Utility\Text;
+    // the EventInterface class
+    use Cake\Event\EventInterface;
 
     // Add the following method.
 
-    public function beforeSave($event, $entity, $options)
+    public function beforeSave(EventInterface $event, $entity, $options)
     {
         if ($entity->isNew() && !$entity->slug) {
             $sluggedTitle = Text::slug($entity->title);
@@ -346,7 +348,10 @@ now. Add the following action to your ``ArticlesController``::
 
     public function edit($slug)
     {
-        $article = $this->Articles->findBySlug($slug)->firstOrFail();
+        $article = $this->Articles
+            ->findBySlug($slug)
+            ->firstOrFail();
+
         if ($this->request->is(['post', 'put'])) {
             $this->Articles->patchEntity($article, $this->request->getData());
             if ($this->Articles->save($article)) {
@@ -438,14 +443,14 @@ using :ref:`a validator <validating-request-data>`::
     use Cake\Validation\Validator;
 
     // Add the following method.
-    public function validationDefault(Validator $validator)
+    public function validationDefault(Validator $validator): Validator
     {
         $validator
-            ->allowEmptyString('title', false)
+            ->notEmptyString('title')
             ->minLength('title', 10)
             ->maxLength('title', 255)
 
-            ->allowEmptyString('body', false)
+            ->notEmptyString('body')
             ->minLength('body', 10);
 
         return $validator;
@@ -473,6 +478,8 @@ Next, let's make a way for users to delete articles. Start with a
 ``delete()`` action in the ``ArticlesController``::
 
     // src/Controller/ArticlesController.php
+
+    // Add the following method.
 
     public function delete($slug)
     {

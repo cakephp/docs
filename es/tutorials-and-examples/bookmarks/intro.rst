@@ -33,11 +33,11 @@ O puedes descargar ``composer.phar`` desde la `Página web de Composer <https://
 
 Después sencillamente escribe la siguiente línea en tu terminal desde tu directorio de instalación para instalar el esqueleto de la aplicación CakePHP en el directorio **bookmarker**::
 
-    php composer.phar create-project --prefer-dist cakephp/app bookmarker
+    php composer.phar create-project --prefer-dist cakephp/app:4.* bookmarker
 
 Si descargaste y ejecutaste el `Instalador Windows de Composer <https://getcomposer.org/Composer-Setup.exe>`_, entonces escribe la siguiente línea en tu terminal desde tu directorio de instalación (ie. C:\\wamp\\www\\dev\\cakephp3)::
 
-    composer self-update && composer create-project --prefer-dist cakephp/app bookmarker
+    composer self-update && composer create-project --prefer-dist cakephp/app:4.* bookmarker
 
 La ventaja de utilizar Composer es que automáticamente realizará algunas tareas importantes como configurar correctamente el archivo de permisos y crear tu archivo **config/app.php**.
 
@@ -88,7 +88,9 @@ Continuamos, creemos ahora la base de datos para nuestra aplicación de favorito
 
 Si aún no lo has hecho, crea una base de datos vacía para usar en este tutorial con el nombre que tu quieras, e.g. ``cake_bookmarks``.
 
-Puedes ejecutar la siguiente sentencia SQL para crear las tablas necesarias::
+Puedes ejecutar la siguiente sentencia SQL para crear las tablas necesarias:
+
+.. code-block:: mysql
 
     CREATE TABLE users (
         id INT AUTO_INCREMENT PRIMARY KEY,
@@ -351,7 +353,7 @@ Ahora si visitas la URL **/bookmarks/tagged**, CakePHP mostrará un error advirt
 
 Siguiente paso, creemos un archivo de vista para nuestro método ``tags()``.
 
-En **src/Template/Bookmarks/tags.ctp** añade el siguiente código::
+En **templates/Bookmarks/tags.php** añade el siguiente código::
 
     <h1>
         Bookmarks tagged with
@@ -375,7 +377,7 @@ En el código de arriba utilizamos los helpers :doc:`/views/helpers/html` y :doc
 
 También utilizamos la función de atajo ``h()`` para salidas de código HTML. Deberías acordarte siempre de utilizar ``h()`` cuando muestres datos del usuario para evitar problemas de inyección HTML.
 
-El archivo **tags.ctp** que acabamos de crear sigue las convenciones de CakePHP para archivos de vistas. La convención es que el nombre del archivo sea una versión en minúsculas y subrayados del nombre de la acción del controlador.
+El archivo **tags.php** que acabamos de crear sigue las convenciones de CakePHP para archivos de vistas. La convención es que el nombre del archivo sea una versión en minúsculas y subrayados del nombre de la acción del controlador.
 
 Puedes observar que hemos podido usar las variables ``$tags`` y ``$bookmarks`` en nuestra vista.
 

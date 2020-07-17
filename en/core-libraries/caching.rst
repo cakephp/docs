@@ -139,8 +139,8 @@ Engine Options
 
 Each engine accepts the following options:
 
-* ``duration`` Specify a default duration for how long items are valid.
-  Specified as a ``strototime()`` compatible expression.
+* ``duration`` Specify how long items in this cache configuration last.
+  Specified as a ``strtotime()`` compatible expression.
 * ``groups`` List of groups or 'tags' associated to every key stored in this
   config. Useful when you need to delete a subset of data from a cache.
 * ``prefix`` Prepended to all entries. Good for when you need to share
@@ -251,7 +251,8 @@ no ``$config`` is specified, default will be used. ``Cache::write()``
 can store any type of object and is ideal for storing results of
 model finds::
 
-    if (($posts = Cache::read('posts')) === false) {
+    $posts = Cache::read('posts');
+    if ($posts === null) {
         $posts = $someService->getAllPosts();
         Cache::write('posts', $posts);
     }
@@ -313,15 +314,14 @@ Reading From a Cache
 ``Cache::read()`` is used to read the cached value stored under
 ``$key`` from the ``$config``. If ``$config`` is null the default
 config will be used. ``Cache::read()`` will return the cached value
-if it is a valid cache or ``false`` if the cache has expired or
-doesn't exist. The contents of the cache might evaluate false, so
-make sure you use the strict comparison operators: ``===`` or
-``!==``.
+if it is a valid cache or ``null`` if the cache has expired or
+doesn't exist. Use strict comparison operators ``===`` or ``!==``
+to check the success of the ``Cache::read()`` operation.
 
 For example::
 
     $cloud = Cache::read('cloud');
-    if ($cloud !== false) {
+    if ($cloud !== null) {
         return $cloud;
     }
 
@@ -338,15 +338,13 @@ specify it in ``Cache::read()`` and ``Cache::write()`` calls as below::
 
     // Read key "cloud", but from short configuration instead of default
     $cloud = Cache::read('cloud', 'short');
-    if ($cloud !== false) {
-        return $cloud;
+    if ($cloud === null) {
+        // Generate cloud data
+        // ...
+
+        // Store data in cache, using short cache configuration instead of default
+        Cache::write('cloud', $cloud, 'short');
     }
-
-    // Generate cloud data
-    // ...
-
-    // Store data in cache, using short cache configuration instead of default
-    Cache::write('cloud', $cloud, 'short');
 
     return $cloud;
 
@@ -398,18 +396,15 @@ save multiple network connections when using Memcached::
 Clearing Cached Data
 ====================
 
-.. php:staticmethod:: clear($check, $config = 'default')
+.. php:staticmethod:: clear($config = 'default')
 
 Destroy all cached values for a cache configuration. In engines like: Apcu,
 Memcached, and Wincache, the cache configuration's prefix is used to remove
 cache entries. Make sure that different cache configurations have different
 prefixes::
 
-    // Will only clear expired keys.
-    Cache::clear(true);
-
     // Will clear all keys.
-    Cache::clear(false);
+    Cache::clear();
 
 .. note::
 
@@ -574,9 +569,9 @@ The required API for a CacheEngine is
 
 .. php:method:: read($key)
 
-    :return: The cached value or ``false`` for failure.
+    :return: The cached value or ``null`` for failure.
 
-    Read a key from the cache. Return ``false`` to indicate
+    Read a key from the cache. Return ``null`` to indicate
     the entry has expired or does not exist.
 
 .. php:method:: delete($key)

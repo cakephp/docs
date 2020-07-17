@@ -41,6 +41,7 @@ CakePHP provides several middleware to handle common tasks in web applications:
   incoming URL and assign routing parameters to the request.
 * ``Cake\I18n\Middleware\LocaleSelectorMiddleware`` enables automatic language
   switching from the ``Accept-Language`` header sent by the browser.
+* ``Cake\Http\Middleware\HttpsEnforcerMiddleware`` requires HTTPS to be used.
 * ``Cake\Http\Middleware\SecurityHeadersMiddleware`` makes it easy to add
   security related headers like ``X-Frame-Options`` to responses.
 * ``Cake\Http\Middleware\EncryptedCookieMiddleware`` gives you the ability to
@@ -74,11 +75,11 @@ called at the beginning of the request process, you can use the
 
     class Application extends BaseApplication
     {
-        public function middleware(MiddlewareQueue $middlwareQueue): MiddlewareQueue
+        public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue
         {
             // Bind the error handler into the middleware queue.
-            $middlwareQueue->add(new ErrorHandlerMiddleware());
-            return $middlwareQueue;
+            $middlewareQueue->add(new ErrorHandlerMiddleware());
+            return $middlewareQueue;
         }
     }
 
@@ -88,19 +89,19 @@ a variety of operations::
         $layer = new \App\Middleware\CustomMiddleware;
 
         // Added middleware will be last in line.
-        $middlwareQueue->add($layer);
+        $middlewareQueue->add($layer);
 
         // Prepended middleware will be first in line.
-        $middlwareQueue->prepend($layer);
+        $middlewareQueue->prepend($layer);
 
         // Insert in a specific slot. If the slot is out of
         // bounds, it will be added to the end.
-        $middlwareQueue->insertAt(2, $layer);
+        $middlewareQueue->insertAt(2, $layer);
 
         // Insert before another middleware.
         // If the named class cannot be found,
         // an exception will be raised.
-        $middlwareQueue->insertBefore(
+        $middlewareQueue->insertBefore(
             'Cake\Error\Middleware\ErrorHandlerMiddleware',
             $layer
         );
@@ -108,7 +109,7 @@ a variety of operations::
         // Insert after another middleware.
         // If the named class cannot be found, the
         // middleware will added to the end.
-        $middlwareQueue->insertAfter(
+        $middlewareQueue->insertAfter(
             'Cake\Error\Middleware\ErrorHandlerMiddleware',
             $layer
         );
@@ -132,11 +133,11 @@ have to the application's middleware queue::
 
     class Plugin extends BasePlugin
     {
-        public function middleware(MiddlewareQueue $middlwareQueue): MiddlewareQueue
+        public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue
         {
-            $middlwareQueue->add(new ContactManagerContextMiddleware());
+            $middlewareQueue->add(new ContactManagerContextMiddleware());
 
-            return $middlwareQueue;
+            return $middlewareQueue;
         }
     }
 
@@ -172,7 +173,7 @@ creating their own response. We can see both options in our simple middleware::
         public function process(
             ServerRequestInterface $request,
             RequestHandlerInterface $handler
-        ): ResponseInterface 
+        ): ResponseInterface
         {
             // Calling $handler->handle() delegates control to the *next* middleware
             // In your application's queue.
@@ -202,14 +203,14 @@ application::
 
     class Application
     {
-        public function middleware(MiddlewareQueue $middlwareQueue): MiddlewareQueue
+        public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue
         {
             // Add your simple middleware onto the queue
-            $middlwareQueue->add(new TrackingCookieMiddleware());
+            $middlewareQueue->add(new TrackingCookieMiddleware());
 
             // Add some more middleware onto the queue
 
-            return $middlwareQueue;
+            return $middlewareQueue;
         }
     }
 
@@ -226,10 +227,10 @@ enable cached routes, provide the desired :ref:`cache configuration
 <cache-configuration>` as a parameter::
 
     // In Application.php
-    public function middleware(MiddlewareQueue $middlwareQueue): MiddlewareQueue
+    public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue
     {
         // ...
-        $middlwareQueue->add(new RoutingMiddleware($this, 'routing'));
+        $middlewareQueue->add(new RoutingMiddleware($this, 'routing'));
     }
 
 The above would use the ``routing`` cache engine to store the generated route
@@ -264,7 +265,7 @@ your application's middleware stack::
         ->noOpen()
         ->noSniff();
 
-    $middlwareQueue->add($securityHeaders);
+    $middlewareQueue->add($securityHeaders);
 
 Content Security Policy Header Middleware
 =========================================
@@ -312,7 +313,7 @@ Cookie data is encrypted with via OpenSSL using AES::
         Configure::read('Security.cookieKey')
     );
 
-    $middlwareQueue->add($cookies);
+    $middlewareQueue->add($cookies);
 
 .. note::
     It is recommended that the encryption key you use for cookie data, is used
@@ -340,14 +341,15 @@ stack you protect all the actions in application::
     // in src/Application.php
     use Cake\Http\Middleware\CsrfProtectionMiddleware;
 
-    public function middleware($middlwareQueue) {
+    public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue
+    {
         $options = [
             // ...
         ];
         $csrf = new CsrfProtectionMiddleware($options);
 
-        $middlwareQueue->add($csrf);
-        return $middlwareQueue;
+        $middlewareQueue->add($csrf);
+        return $middlewareQueue;
     }
 
 By applying the ``CsrfProtectionMiddleware`` to routing scopes, you can include
@@ -356,7 +358,8 @@ or exclude specific route groups::
     // in src/Application.php
     use Cake\Http\Middleware\CsrfProtectionMiddleware;
 
-    public function routes($routes) {
+    public function routes(RouteBuilder $routes) : void
+    {
         $options = [
             // ...
         ];
@@ -378,13 +381,38 @@ The available configuration options are:
 - ``secure`` Whether or not the cookie will be set with the Secure flag. That is,
   the cookie will only be set on a HTTPS connection and any attempt over normal HTTP
   will fail. Defaults to ``false``.
-- ``httpOnly`` Whether or not the cookie will be set with the HttpOnly flag. Defaults to ``false``.
+- ``httponly`` Whether or not the cookie will be set with the HttpOnly flag.
+  Defaults to ``false``. Prior to 4.1.0 use the ``httpOnly`` option.
 - ``field`` The form field to check. Defaults to ``_csrfToken``. Changing this
   will also require configuring FormHelper.
 
 When enabled, you can access the current CSRF token on the request object::
 
-    $token = $this->request->getParam('_csrfToken');
+    $token = $this->request->getAttribute('csrfToken');
+
+You can use the skip check callback feature for more fine grained control over
+URLs for which CSRF token check should be done::
+
+    // in src/Application.php
+    use Cake\Http\Middleware\CsrfProtectionMiddleware;
+
+    public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue
+    {
+        $csrf = new CsrfProtectionMiddleware();
+
+        // Token check will be skipped when callback returns `true`.
+        $csrf->skipCheckCallback(function ($request) {
+            // Skip token check for API URLs.
+            if ($request->getParam('prefix') === 'Api') {
+                return true;
+            }
+        });
+
+        // Ensure routing middleware is added to the queue before CSRF protection middleware.
+        $middlewareQueue->add($csrf);
+
+        return $middlewareQueue;
+    }
 
 .. note::
 
@@ -413,7 +441,31 @@ a special ``X-CSRF-Token`` header. Using a header often makes it easier to
 integrate a CSRF token with JavaScript heavy applications, or XML/JSON based API
 endpoints.
 
-The CSRF Token can be obtained via the Cookie ``csrfToken``.
+The CSRF Token can be obtained in JavaScript via the Cookie ``csrfToken``, or in PHP
+via the request object attribute named ``csrfToken``. Using the cookie might be easier
+when your JavaScript code resides in files separate from the CakePHP view templates,
+and when you already have functionality for parsing cookies via JavaScript.
+
+If you have separate JavaScript files but don't want to deal with handling cookies,
+you could for example set the token in a global JavaScript variable in your layout, by
+defining a script block like this::
+
+    echo $this->Html->scriptBlock(sprintf(
+        'var csrfToken = %s;',
+        json_encode($this->request->getAttribute('csrfToken'))
+    ));
+
+You can then access the token as ``csrfToken`` or ``window.csrfToken`` in any script
+file that is loaded after this script block.
+
+Another alternative would be to put the token in a custom meta tag like this::
+
+    echo $this->Html->meta('csrfToken', $this->request->getAttribute('csrfToken'));
+
+which could then be accessed in your scripts by looking for the ``meta`` element with
+the name ``csrfToken``, which could be as simple as this when using jQuery::
+
+    var csrfToken = $('meta[name="csrfToken"]').attr('content');
 
 
 .. _body-parser-middleware:
@@ -446,6 +498,40 @@ an option. You can also define your own parsers::
         return Csv::parse($body);
     });
 
+.. _https-enforcer-middleware:
+
+HTTPS Enforcer Middleware
+=========================
+
+If you want your application to only be available via HTTPS connections you can
+use the ``HttpsEnforcerMiddleware``::
+
+    use Cake\Http\Middleware\HttpsEnforcerMiddleware;
+
+    // Always raise an exception and never redirect.
+    $https = new HttpsEnforcerMiddleware([
+        'redirect' => false,
+    ]);
+
+    // Send a 302 status code when redirecting
+    $https = new HttpsEnforcerMiddleware([
+        'redirect' => true,
+        'statusCode' => 302,
+    ]);
+
+    // Send additional headers in the redirect response.
+    $https = new HttpsEnforcerMiddleware([
+        'headers' => ['X-Https-Upgrade' => 1],
+    ]);
+
+    // Disable HTTPs enforcement when ``debug`` is on.
+    $https = new HttpsEnforcerMiddleware([
+        'disableOnDebug' => true,
+    ]);
+
+If a non-HTTPs request is received that doesn't use GET
+a ``BadRequestException`` will be raised.
+
 .. meta::
     :title lang=en: Http Middleware
-    :keywords lang=en: http, middleware, psr-7, request, response, wsgi, application, baseapplication
+    :keywords lang=en: http, middleware, psr-7, request, response, wsgi, application, baseapplication, https

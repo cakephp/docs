@@ -2,10 +2,16 @@
 ##########
 
 .. toctree::
-   :hidden:
+    :hidden:
 
-   index
-   topics
+    index
+    topics
+    bake
+    bake/usage
+    bake/development
+    chronos
+    debug-kit
+    migrations
 
 .. toctree::
     :maxdepth: 3
@@ -13,7 +19,7 @@
 
     intro
     quickstart
-    appendices/3-x-migration-guide
+    appendices/4-0-migration-guide
     tutorials-and-examples
     contributing
 
@@ -35,7 +41,6 @@
     :caption: Использование CakePHP
 
     controllers/components/authentication
-    bake
     core-libraries/caching
     console-and-shells
     development/debugging
@@ -74,11 +79,11 @@
     :maxdepth: 3
     :caption: Плагины
 
-    chronos
-    debug-kit
-    migrations
+    Bake <https://book.cakephp.org/bake/2/ru/>
+    Chronos <https://book.cakephp.org/chronos/2/>
+    Debug kit <https://book.cakephp.org/debugkit/4>
+    Migrations <https://book.cakephp.org/migrations/3/ru/>
     elasticsearch
-    upgrade-tool
 
 .. toctree::
     :maxdepth: 3

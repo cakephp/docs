@@ -8,7 +8,9 @@ write/append to files; list files within a folder and other common directory
 related tasks.
 
 .. deprecated:: 4.0
-    The ``File`` and ``Folder`` classes will be removed in 5.0
+    The ``File`` and ``Folder`` classes will be removed in 5.0.
+    Use SPL classes like ``SplFileInfo`` or ``SplFileObject`` and iterator 
+    classes like ``RecursiveDirectoryIterator``, ``RecursiveRegexIterator`` etc. instead.
 
 Basic Usage
 ===========

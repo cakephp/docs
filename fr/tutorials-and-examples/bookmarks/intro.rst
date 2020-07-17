@@ -46,14 +46,14 @@ Ensuite tapez simplement la ligne suivante dans votre terminal à partir
 du répertoire d'installation pour installer le squelette d'application
 CakePHP dans le répertoire **bookmarker**::
 
-    php composer.phar create-project --prefer-dist cakephp/app bookmarker
+    php composer.phar create-project --prefer-dist cakephp/app:4.* bookmarker
 
 Si vous avez téléchargé et exécuté l'`installeur Windows de Composer
 <https://getcomposer.org/Composer-Setup.exe>`_, tapez la ligne suivante dans
 votre terminal à partir de votre répertoire d'installation. (par exemple
 C:\\wamp\\www\\dev\\cakephp3)::
 
-    composer self-update && composer create-project --prefer-dist cakephp/app bookmarker
+    composer self-update && composer create-project --prefer-dist cakephp/app:4.* bookmarker
 
 L'avantage d'utiliser Composer est qu'il va automatiquement faire des tâches
 de configuration importantes, comme de définir les bonnes permissions de
@@ -116,7 +116,9 @@ Ensuite, configurons la base de données pour notre application de bookmarking.
 Si vous ne l'avez pas déjà fait, créez une base de données vide que nous
 allons utiliser dans ce tutoriel, avec un nom de votre choix, par exemple
 ``cake_bookmarks``. Vous pouvez exécuter le SQL suivant pour créer les
-tables nécessaires::
+tables nécessaires:
+
+.. code-block:: mysql
 
     CREATE TABLE users (
         id INT AUTO_INCREMENT PRIMARY KEY,
@@ -413,7 +415,7 @@ Créer la Vue
 Maintenant si vous vous rendez à l'url **/bookmarks/tagged**, CakePHP va
 afficher une erreur vous disant que vous n'avez pas de fichier de vue.
 Construisons donc le fichier de vue pour notre action ``tags()``. Dans
-**src/Template/Bookmarks/tags.ctp** mettez le contenu suivant::
+**templates/Bookmarks/tags.php** mettez le contenu suivant::
 
     <h1>
         Bookmarks tagged with
@@ -440,7 +442,7 @@ pour encoder la sortie en HTML. Vous devez vous rappeler de toujours utiliser
 ``h()`` lorsque vous affichez des données provenant des utilisateurs pour éviter
 les problèmes d'injection HTML.
 
-Le fichier **tags.ctp** que nous venons de créer suit la convention de nommage
+Le fichier **tags.php** que nous venons de créer suit la convention de nommage
 de CakePHP pour un ficher de template de vue. La convention d'avoir le nom
 de template en minuscule et en underscore du nom de l'action du controller.
 

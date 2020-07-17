@@ -419,8 +419,9 @@ Pour valider les commentaires, vous utiliseriez un validator imbriqué::
     // Connecte les validators imbriqués.
     $validator->addNestedMany('comments', $commentValidator);
 
+    // Prior to 3.9 use $validator->errors()
     // Récupère toutes erreurs y compris celles des validators imbriqués.
-    $validator->errors($data);
+    $validator->validate($data);
 
 Vous pouvez créer des 'relations' 1:1 avec ``addNested()`` et  des 'relations'
 1:N avec ``addNestedMany()``. Avec ces deux méthodes, les erreurs des
@@ -474,7 +475,8 @@ d'envoyer un email, vous pouvez faire ce qui suit::
         ->requirePresence('comment')
         ->allowEmpty('comment', false, 'You need to give a comment.');
 
-    $errors = $validator->errors($this->request->getData());
+    // Prior to 3.9 use $validator->errors()
+    $errors = $validator->validate($this->request->getData());
     if (empty($errors)) {
         // Envoi d'un email.
     }
@@ -491,7 +493,8 @@ d'erreur va être retourné par champ. Par défaut la méthode ``errors()`` appl
 les règles pour le mode 'create' mode. Si vous voulez appliquer les règles
 'update' vous pouvez faire ce qui suit::
 
-    $errors = $validator->errors($this->request->getData(), false);
+    // Prior to 3.9 use $validator->errors()
+    $errors = $validator->validate($this->request->getData(), false);
     if (empty($errors)) {
         // Envoi d'un email.
     }

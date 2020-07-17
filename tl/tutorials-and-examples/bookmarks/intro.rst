@@ -44,14 +44,14 @@ Then simply type the following line in your terminal from your
 installation directory to install the CakePHP application skeleton
 in the **bookmarker** directory::
 
-    php composer.phar create-project --prefer-dist cakephp/app bookmarker
+    php composer.phar create-project --prefer-dist cakephp/app:4.* bookmarker
 
 If you downloaded and ran the `Composer Windows Installer
 <https://getcomposer.org/Composer-Setup.exe>`_, then type the following line in
 your terminal from your installation directory (ie.
 C:\\wamp\\www\\dev\\cakephp3)::
 
-    composer self-update && composer create-project --prefer-dist cakephp/app bookmarker
+    composer self-update && composer create-project --prefer-dist cakephp/app:4.* bookmarker
 
 The advantage to using Composer is that it will automatically complete some
 important set up tasks, such as setting the correct file permissions and
@@ -385,7 +385,7 @@ Creating the View
 
 Now if you visit the **/bookmarks/tagged** URL, CakePHP will show an error
 letting you know that you have not made a view file. Next, let's build the
-view file for our ``tags()`` action. In **src/Template/Bookmarks/tags.ctp**
+view file for our ``tags()`` action. In **templates/Bookmarks/tags.php**
 put the following content::
 
     <h1>
@@ -412,7 +412,7 @@ also use the :php:func:`h` shortcut function to HTML encode output. You should
 remember to always use ``h()`` when outputting user data to prevent HTML
 injection issues.
 
-The **tags.ctp** file we just created follows the CakePHP conventions for view
+The **tags.php** file we just created follows the CakePHP conventions for view
 template files. The convention is to have the template use the lower case and
 underscored version of the controller action name.
 

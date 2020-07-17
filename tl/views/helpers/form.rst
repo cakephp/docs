@@ -94,7 +94,7 @@ do the following::
         $this->set('article', $article);
     }
 
-    // View/Articles/edit.ctp:
+    // View/Articles/edit.php:
     // Since $article->isNew() is false, we will get an edit form
     <?= $this->Form->create($article) ?>
 
@@ -2071,7 +2071,7 @@ Example::
             ->notEmpty('ticket');
     }
 
-    // And inside Templates/Tickets/add.ctp you have:
+    // And inside templates/Tickets/add.php you have:
     echo $this->Form->text('ticket');
 
     if ($this->Form->isFieldError('ticket')) {
@@ -2193,7 +2193,7 @@ of ``'button'``.
 
 **Options for Button**
 
-* ``$options['type']`` - You can set this to one of the following three
+* ``'type'`` - You can set this to one of the following three
   possible values:
 
   #. ``'submit'`` - Similarly to the ``$this->Form->submit()`` method it will
@@ -2202,8 +2202,14 @@ of ``'button'``.
   #. ``'reset'`` - Creates a form reset button.
   #. ``'button'`` - Creates a standard push button.
 
-* ``$options['escape']`` - Boolean. If set to ``true`` it will HTML encode
-  the value provided inside ``$title``. Defaults to ``false``.
+* ``'escapeTitle'`` - Boolean. If set to ``true`` it will HTML encode
+  the value provided inside ``$title``. Defaults to ``true``.
+
+* ``'escape'`` - Boolean. If set to ``true`` it will HTML encode
+  all the HTML attributes generated for the button. Defaults to ``true``.
+
+* ``'confirm'`` - The confirmation message to display on click. Defaults to
+  ``null``.
 
 For example::
 
@@ -2221,12 +2227,12 @@ Will output:
     <button type="reset">Reset the Form</button>
     <button type="submit">Submit Form</button>
 
-Example of use of the ``'escape'`` option::
+Example of use of the ``'escapeTitle'`` option::
 
-    // Will render escaped HTML.
+    // Will render unescaped HTML.
     echo $this->Form->button('<em>Submit Form</em>', [
         'type' => 'submit',
-        'escape' => true
+        'escapeTitle' => false,
     ]);
 
 Closing the Form
@@ -2308,7 +2314,7 @@ SecurityComponent.
 
 For example::
 
-    // In Templates/Tickets/index.ctp
+    // In templates/Tickets/index.php
     <?= $this->Form->postButton('Delete Record', ['controller' => 'Tickets', 'action' => 'delete', 5]) ?>
 
 Will output HTML similar to:

@@ -4,13 +4,13 @@ Annexes
 Les annexes contiennent des informations sur les nouvelles fonctionnalités
 introduites dans chaque version et le chemin de migration entre les versions.
 
-3.x Guide de Migration
+4.x Guide de Migration
 ======================
 
 .. toctree::
     :maxdepth: 1
 
-    appendices/3-x-migration-guide
+    appendices/4-0-migration-guide
 
 Informations générales
 ======================

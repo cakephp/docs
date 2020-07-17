@@ -121,7 +121,9 @@ plataforma de banco de dados::
         'columns' => ['id']
     ]);
 
-No exemplo abaixo a coluna ``id`` geraria o seguinte SQL em MySQL::
+No exemplo abaixo a coluna ``id`` geraria o seguinte SQL em MySQL:
+
+.. code-block:: mysql
 
     CREATE TABLE `posts` (
         `id` INTEGER AUTO_INCREMENT,
@@ -221,7 +223,8 @@ objetos :php:class:`TableSchema`. O uso básico da classe parece com::
     $db = ConnectionManager::get('default');
 
     // Criar uma coleção de schema.
-    $collection = $db->schemaCollection();
+    // Prior to 3.4 use $db->schemaCollection()
+    $collection = $db->getSchemaCollection();
 
     // Obtem os nomes das tabelas.
     $tables = $collection->listTables();

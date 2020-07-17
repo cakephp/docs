@@ -39,9 +39,6 @@ CakePHP のリクエストオブジェクトは、入ってきたリクエスト
 
     $controllerName = $this->request->getParam('controller');
 
-    // 3.4.0 より前
-    $controllerName = $this->request->param('controller');
-
 全てのルーティングパラメーターを配列として取得するためには ``getAttribute()`` を使用します。 ::
 
     $params = $this->request->getAttribute('params');
@@ -72,9 +69,6 @@ CakePHP のリクエストオブジェクトは、入ってきたリクエスト
     // URL は /posts/index?page=1&sort=title
     $page = $this->request->getQuery('page');
 
-    // 3.4.0 より前
-    $this->request->query('page');
-
 query プロパティーに直接アクセスするか、エラーが発生しない方法で URL クエリー配列を読むために
 ``getQuery()`` メソッドを使用することができます。キーが存在しない場合、 ``null`` が返ります。 ::
 
@@ -88,24 +82,160 @@ query プロパティーに直接アクセスするか、エラーが発生し�
 
     $query = $this->request->getQueryParams();
 
-.. versionadded:: 3.4.0
-    ``getQueryParams()`` と ``getQuery()`` は 3.4.0 で追加されました。
-
 リクエストのボディーデータ
 --------------------------
 
 .. php:method:: getData($name, $default = null)
 
 すべての POST データは :php:meth:`Cake\\Http\\ServerRequest::getData()` を使ってアクセスされます。
-フォームデータが ``data`` 接頭辞を含んでいる場合、接頭辞は取り除かれるでしょう。例えば::
+フォームデータが ``data`` 接頭辞を含んでいる場合、接頭辞は取り除かれるでしょう。例えば ::
 
     // name 属性が 'MyModel[title]' の入力は次のようにアクセスします。
-    $title = $this->request->getData('MyModel.title');
+    $title = $this->request->getData('title');
 
-キーが存在しない場合、 ``null`` が返ります。 ::
+ドット区切りの名前を使用して、ネストされたデータにアクセスできます。 例えば ::
+
+    $value = $this->request->getData('address.street_name');
+
+存在しない名前の場合は ``$default`` の値が返されます。 ::
 
     $foo = $this->request->getData('Value.that.does.not.exist');
     // $foo == null
+
+また、異なるリクエストのボディをパースするために :ref:`ボディパーサミドルウェア` を使うこともできます。
+これは ``ServerRequest::getData()`` でアクセスできるようにするための配列です。
+
+すべてのデータパラメータにアクセスしたい場合は ``getParsedBody()`` を使うことができます。 ::
+
+    $data = $this->request->getParsedBody();
+
+ファイルのアップロード
+----------------------
+
+アップロードしたファイルは、上で説明した :php:meth:`Cake\\Http\\ServerRequest::getData()`
+メソッドを使用して、リクエスト内容のデータからアクセスすることができます。
+例えば、name属性が ``attachment`` であるinput要素のファイルは、以下のようにアクセスできます。 ::
+
+    $attachment = $this->request->getData('attachment');
+
+デフォルトでは、ファイルのアップロードは、リクエストデータの中で、
+`\\Psr\\Http\\Message\\UploadedFileInterface <https://www.php-fig.org/psr/psr-7/#16-uploaded-files>`__
+を実装したオブジェクトとして表現されます。
+上記の例では、 ``$attachment`` がオブジェクトを保持していますが、
+現在の実装では、上記の例の  ``$attachment`` 変数は、
+デフォルトでは ``\LaminasDiactorosUploadedFile`` のインスタンスとなります。
+
+アップロードしたファイルへのアクセスは非常に簡単です。
+ここでは、古い形式のファイルアップロード配列で提供されていたことと同じようにデータを取得する方法を説明します。 ::
+
+    $name = $attachment->getClientFilename();
+    $type = $attachment->getClientMediaType();
+    $size = $attachment->getSize();
+    $tmpName = $attachment->getStream()->getMetadata('uri');
+    $error = $attachment->getError();
+
+アップロードされたファイルを一時的な場所から目的の場所に移動させるのに
+手動で一時的なファイルにアクセスする必要はありません。
+代わりに ``moveTo()`` メソッドを使用することで簡単に行うことができます。 ::
+
+    $attachment->moveTo($targetPath);
+
+HTTP環境では、 ``moveTo()`` メソッドはファイルが実際にアップロードされたファイルであるかどうかを
+自動的に検証し、必要に応じて例外をスローします。
+アップロードされたファイルという概念自体がないCLI環境では、
+それに関係なくファイルを移動できるので、ファイルアップロードのテストが非常に簡単になります。
+
+ファイルアップロード配列を使用するように戻すには、
+設定値 ``App.uploadedFilesAsObjects`` を ``false`` に設定してください。
+例えば、 ``config/app.php`` で以下のように設定します。 ::
+
+    return [
+        // ...
+        'App' => [
+            // ...
+            'uploadedFilesAsObjects' => false,
+        ],
+        // ...
+    ];
+
+このオプションを無効にすると、ファイルのアップロードはリクエストデータの中で配列として表現されます。
+それは、ネストされた入力/名前があっても変わらない正規化された構造を持っています。
+これは PHP のスーパーグローバル変数 ``$_FILES`` で表現する方法とは異なります。
+(詳細は `PHPマニュアル <https://www.php.net/manual/en/features.file-upload.php>`__ を参照してください)。
+つまり、 ``$attachment`` の値は次のようになります。 ::
+
+    [
+        'name' => 'attachment.txt',
+        'type' => 'text/plain',
+        'size' => 123,
+        'tmp_name' => '/tmp/hfz6dbn.tmp'
+        'error' => 0
+    ]
+
+.. tip::
+
+    アップロードされたファイルは、リクエストデータとは別のオブジェクトとして
+    :php:meth:`Cake\\Http\\ServerRequest::getUploadedFile()` と
+    :php:meth:`Cake\\Http\\ServerRequest::getUploadedFiles()` メソッドを使用しています。
+    これらのメソッドは ``App.uploadedFilesAsObjects`` の設定に関係なく、常にオブジェクトを返します。
+
+
+.. php:method:: getUploadedFile($path)
+
+アップロードされたファイルの特定のパスで返します。
+パスは :php:meth:`Cake\\Http\\\ServerRequest::getData()` メソッドと同じドット構文を使用します。 ::
+
+    $attachment = $this->request->getUploadedFile('attachment');
+
+:php:meth:`Cake\\Http\\ServerRequest::getData()` と違って、 :php:meth:`Cake\\Http\\ServerRequest::getUploadedFile()`
+は、実際にアップロードされたファイルが指定されたパスに存在する場合にのみデータを返します。
+通常であれば、ファイルではないリクエストのbodyデータが指定されたパスに存在する場合、このメソッドは ``null`` を返します。
+
+.. php:method:: getUploadedFiles()
+
+アップロードされたすべてのファイルを正規化された配列構造で返します。
+上の例では、ファイルの入力名が ``attachment`` の場合、構造は次のようになります。 ::
+
+    [
+          'attachment' => object(Laminas\Diactoros\UploadedFile) {
+              // ...
+          }
+    ]
+
+.. php:method:: withUploadedFiles(array $files)
+
+このメソッドは、リクエストオブジェクトのアップロードファイルを設定します。
+これは `\\Psr\\Http\\Message\\UploadedFileInterface <https://www.php-fig.org/psr/psr-7/#16-uploaded-files>`__.
+を実装したオブジェクトの配列を受け付けます。
+これは、既存のアップロードされている可能性のあるすべてのファイルを置き換えます。 ::
+
+    $files = [
+        'MyModel' => [
+            'attachment' => new \Laminas\Diactoros\UploadedFile(
+                $streamOrFile,
+                $size,
+                $errorStatus,
+                $clientFilename,
+                $clientMediaType
+            ),
+            'anotherAttachment' => new \Laminas\Diactoros\UploadedFile(
+                '/tmp/hfz6dbn.tmp',
+                123,
+                \UPLOAD_ERR_OK,
+                'attachment.txt',
+                'text/plain'
+            ),
+        ],
+    ];
+
+    $this->request = $this->request->withUploadedFiles($files);
+
+.. note::
+
+    このメソッドでリクエストに追加したアップロードファイルは、リクエスト本文では利用 *できません*。
+    すなわち、 :php:meth:`Cake\\Http\\ServerRequest::getData()` を経由して受け取ることはできません！
+    リクエストデータに（も）必要な場合は、 :php:meth:`Cake\\Http\\ServerRequest::withData()` か
+    :php:meth:`Cake\\Http\\ServerRequest::withParsedBody()` を経由して設定する必要があります。
 
 PUT、PATCH または DELETE データ
 -------------------------------
@@ -141,9 +271,6 @@ XML や JSON のリクエストボディーのコンテンツと対話すると�
 ``getServerParams()`` を使用すると、全ての環境変数にアクセスできます。 ::
 
     $env = $this->request->getServerParams();
-
-.. versionadded:: 3.4.0
-    ``getServerParams()`` は、3.4.0 で追加されました。
 
 XML または JSON データ
 ----------------------
@@ -181,11 +308,6 @@ post 形式でデータを交換することがしばしばあります。 :php:
 
     // /subdir/ を保持
     $base = $request->getAttribute('webroot');
-
-    // 3.4.0 より前
-    $webroot = $request->webroot;
-    $base = $request->base;
-    $here = $request->here();
 
 .. _check-the-request:
 
@@ -233,6 +355,20 @@ post 形式でデータを交換することがしばしばあります。 :php:
         'options' => ['192.168.0.101', '192.168.0.100']
     ]);
 
+    // header detector を value comparison 付きで追加
+    $this->request->addDetector('fancy', [
+        'env' => 'CLIENT_IP',
+        'header' => ['X-Fancy' => 1]
+    ]);
+
+    // header detector を callable comparison 付きで追加
+    $this->request->addDetector('fancy', [
+        'env' => 'CLIENT_IP',
+        'header' => ['X-Fancy' => function ($value, $header) {
+            return in_array($value, ['1', '0', 'yes', 'no'], true);
+        }]
+    ]);
+
     // callback detector を追加。有効な callable 形式でなければなりません。
     $this->request->addDetector(
         'awesome',
@@ -241,18 +377,15 @@ post 形式でデータを交換することがしばしばあります。 :php:
         }
     );
 
-    // 追加の引数を使用する検出器を追加。3.3.0 以降。
+    // 追加の引数を使用する detector を追加
     $this->request->addDetector(
-        'controller',
-        function ($request, $name) {
-            return $request->getParam('controller') === $name;
-        }
+        'csv',
+        [
+            'accept' => ['text/csv'],
+            'param' => '_ext',
+            'value' => 'csv',
+        ]
     );
-
-``Request`` は、 :php:meth:`Cake\\Http\\ServerRequest::domain()` 、
-:php:meth:`Cake\\Http\\ServerRequest::subdomains()` 、
-:php:meth:`Cake\\Http\\ServerRequest::host()` のようにサブドメインで
-アプリケーションを助けるためのメソッドを含みます。
 
 利用可能な組み込みの検出器は以下の通りです。
 
@@ -267,21 +400,26 @@ post 形式でデータを交換することがしばしばあります。 :php:
   に由来するものかどうかを調べます。
 * ``is('ssl')`` リクエストが SSL 経由かどうかを調べます。
 * ``is('flash')`` リクエストに Flash の User-Agent があるかどうかを調べます。
-* ``is('requested')`` リクエストに、値が１のクエリーパラメーター 「requested」があるかどうかを調べます。
 * ``is('json')`` リクエストに 「json」 の拡張子を持ち 「application/json」
   MIME タイプを受付けるかどうかを調べます。
 * ``is('xml')`` リクエストが 「xml」拡張子を持ち、「application/xml」または「text/xml」
   MIME タイプを受付けるかどうかを調べます。
 
-.. versionadded:: 3.3.0
-    3.3.0 から検出器は追加のパラメーターが受け取れます。
+``ServerRequest`` は、
+:php:meth:`Cake\\Http\\ServerRequest::domain()` 、
+:php:meth:`Cake\\Http\\ServerRequest::subdomains()` 、
+:php:meth:`Cake\\Http\\ServerRequest::host()`
+のようにサブドメインでアプリケーションを助けるためのメソッドを含みます。
 
 セッションデータ
 ----------------
 
-特定のリクエストのセッションにアクセスするには、 ``session()`` メソッドを使用します。 ::
+特定のリクエストのセッションにアクセスするには、 ``getSession()`` メソッドか ``session`` 属性を使用します。 ::
 
-    $userName = $this->request->session()->read('Auth.User.name');
+    $session = $this->request->getSession();
+    $session = $this->request->getAttribute('session');
+
+    $userName = $session->read('Auth.User.name');
 
 詳細については、セッションオブジェクトを使用する方法のための :doc:`/development/sessions`
 ドキュメントを参照してください。
@@ -320,9 +458,6 @@ HTTP メソッドの読み込み
     // POST を出力
     echo $request->getMethod();
 
-    // 3.4.0 より前
-    echo $request->method();
-
 アクションが受け入れる HTTP メソッドの制限
 -------------------------------------------
 
@@ -343,7 +478,7 @@ HTTP ヘッダーの読み込み
 -----------------------
 
 リクエストで使われている ``HTTP_*`` ヘッダーにアクセスできます。
-例えば::
+例えば ::
 
     // 文字列としてヘッダーを取得
     $userAgent = $this->request->getHeaderLine('User-Agent');
@@ -353,9 +488,6 @@ HTTP ヘッダーの読み込み
 
     // ヘッダーの存在を確認
     $hasAcceptHeader = $this->request->hasHeader('Accept');
-
-    // 3.4.0 より前
-    $userAgent = $this->request->header('User-Agent');
 
 いくつかの apache インストール環境では、 ``Authorization`` ヘッダーにアクセスできませんが、
 CakePHP は、必要に応じて apache 固有のメソッドを介して利用できるようにします。
@@ -384,6 +516,15 @@ CakePHP は、必要に応じて apache 固有のメソッドを介して利用�
     $host = $this->request->host();
     $scheme = $this->request->scheme();
     $clientIp = $this->request->clientIp();
+
+一度プロキシが信頼されると、 ``clientIp()`` メソッドは ``X-Forwarded-For``
+ヘッダの中の *最後の* IPドレスを使用します。
+もし、アプリケーションが複数のプロキシの背後にある場合は
+``setTrustedProxies()`` を使ってコントロール内のプロキシのIPアドレスを定義することができます。 ::
+
+    $request->setTrustedProxies(['127.1.1.1', '127.8.1.3']);
+
+プロキシが信頼された後は ``clientIp()`` は ``X-Forwarded-For`` ヘッダの最初のIPアドレスを使用します。
 
 Accept ヘッダーの確認
 ---------------------
@@ -429,14 +570,39 @@ Accept ヘッダーの確認
     // ハッシュとして全てのクッキーを取得
     $cookies = $this->request->getCookieParams();
 
-    // CookieCollection インスタンス (3.5.0 以降) を取得
-    $cookies = $this->request->getCookieCollection()
-
 クッキーコレクションの操作方法については、 :php:class:`Cake\\Http\\Cookie\\CookieCollection`
 のドキュメントをご覧ください。
 
-.. versionadded:: 3.5.0
-    ``ServerRequest::getCookieCollection()`` は 3.5.0 で追加されました。
+アップロードされたファイル
+--------------------------
+
+リクエストはアップロードされたファイルのデータを ``getData()`` または ``getUploadedFiles()`` で
+``UploadedFileInterface`` オブジェクトとして公開します。 ::
+
+    // アップロードファイルオブジェクトのリストを取得
+    $files = $request->getUploadedFiles();
+
+    // ファイルデータの読み込み
+    $files[0]->getStream();
+    $files[0]->getSize();
+    $files[0]->getClientFileName();
+
+    // ファイルの移動
+    $files[0]->moveTo($targetPath);
+
+URIの操作
+---------
+
+リクエストは、リクエストされたURIと対話するためのメソッドを含むURIオブジェクトを含みます。 ::
+
+    // URIの取得
+    $uri = $request->getUri();
+
+    // URIからデータを読み出す
+    $path = $uri->getPath();
+    $query = $uri->getQuery();
+    $host = $uri->getHost();
+
 
 .. index:: $this->response
 
@@ -475,9 +641,6 @@ Accept ヘッダーの確認
     // レスポンスのコンテンツタイプを vcard に設定
     $this->response = $this->response->withType('vcf');
 
-    // 3.4.0 より前
-    $this->response->type('vcf');
-
 大抵の場合、追加のコンテンツタイプはコントローラーの :php:meth:`~Controller::beforeFilter()`
 コールバックの中で設定したいと思うので、 :php:class:`RequestHandlerComponent` が提供する
 ビューの自動切り替え機能を活用できます。
@@ -500,12 +663,6 @@ Accept ヘッダーの確認
         return $response;
     }
 
-    // 3.4.0 より前
-    $file = $this->Attachments->getFile($id);
-    $this->response->file($file['path']);
-    // レスポンスオブジェクトを返すとコントローラーがビューの描画を中止します
-    return $this->response;
-
 上記の例のようにメソッドにファイルのパスを渡す必要があります。CakePHP は、
 `Cake\\Http\\Response::$_mimeTypes` に登録された、よく知られるファイルタイプであれば
 正しいコンテンツタイプヘッダーを送ります。 :php:meth:`Cake\\Http\\Response::withFile()` を呼ぶ前に
@@ -515,12 +672,6 @@ Accept ヘッダーの確認
 ダウンロードさせることができます。 ::
 
     $response = $this->response->withFile(
-        $file['path'],
-        ['download' => true, 'name' => 'foo']
-    );
-
-    // 3.4.0 より前
-    $this->response->file(
         $file['path'],
         ['download' => true, 'name' => 'foo']
     );
@@ -542,11 +693,8 @@ download
         $icsString = $this->Calendars->generateIcs();
         $response = $this->response;
 
-        // レスポンスのボディーに文字列コンテンツを挿入する (3.4.0 以降)
+        // レスポンスのボディーに文字列コンテンツを挿入する
         $response = $response->withStringBody($icsString);
-
-        // レスポンスのボディーに文字列コンテンツを挿入する (3.4.0 より前)
-        $response->body($icsString);
 
         $response = $response->withType('ics');
 
@@ -556,6 +704,13 @@ download
         // レスポンスオブジェクトを返すとコントローラーがビューの描画を中止します
         return $response;
     }
+
+コールバックはボディーを文字列として返すこともできます。 ::
+
+    $path = '/some/file.png';
+    $this->response->body(function () use ($path) {
+        return file_get_contents($path);
+    });
 
 ヘッダーの設定
 --------------
@@ -575,9 +730,6 @@ download
 
     // 既存のヘッダーに値を追加
     $response = $response->withAddedHeader('Set-Cookie', 'remember_me=1');
-
-    // 3.4.0 より前 - 一つのヘッダーを設定
-    $this->response->header('Location', 'http://example.com');
 
 セットされた際、ヘッダーは送られません。これらのヘッダーは、 ``Cake\Http\Server`` によって
 レスポンスが実際に送られるまで保持されます。
@@ -599,27 +751,21 @@ download
     $response = $response->withType('application/json')
         ->withStringBody(json_encode(['Foo' => 'bar']));
 
-.. versionadded:: 3.4.3
-    ``withStringBody()`` は 3.4.3 で追加されました。
-
 .. php:method:: withBody($body)
 
-``withBody()`` を使って、 :php:class:`Zend\\Diactoros\\MessageTrait` によって提供される
+``withBody()`` を使って、 :php:class:`Laminas\\Diactoros\\MessageTrait` によって提供される
 レスポンスボディーを設定するには、 ::
 
     $response = $response->withBody($stream);
 
-    // 3.4.0 より前でボディーを設定
-    $this->response->body('My Body');
-
 ``$stream`` が :php:class:`Psr\\Http\\Message\\StreamInterface`
 オブジェクトであることを確認してください。新しいストリームを作成する方法は、以下をご覧ください。
 
-:php:class:`Zend\\Diactoros\\Stream` ストリームを使用して、
+:php:class:`Laminas\\Diactoros\\Stream` ストリームを使用して、
 ファイルからレスポンスをストリーム化することもできます。 ::
 
     // ファイルからのストリーム化
-    use Zend\Diactoros\Stream;
+    use Laminas\Diactoros\Stream;
 
     $stream = new Stream('/path/to/file', 'rb');
     $response = $response->withBody($stream);
@@ -640,14 +786,6 @@ download
     });
     $response = $response->withBody($stream);
 
-    // 3.4.0 より前では、次のようにストリーミングレスポンスを作成することができます。
-    $file = fopen('/some/file.png', 'r');
-    $this->response->body(function () use ($file) {
-        rewind($file);
-        fpassthru($file);
-        fclose($file);
-    });
-
 文字コードの設定
 ----------------
 
@@ -656,9 +794,6 @@ download
 レスポンスの中で使われる文字コードの種類を設定します。 ::
 
     $this->response = $this->response->withCharset('UTF-8');
-
-    // 3.4.0 より前
-    $this->response->charset('UTF-8');
 
 ブラウザーキャッシュとの対話
 ----------------------------
@@ -672,9 +807,6 @@ download
     {
         // キャッシュの無効化
         $this->response = $this->response->withDisabledCache();
-
-        // 3.4.0 より前
-        $this->response->disableCache();
     }
 
 .. warning::
@@ -794,10 +926,16 @@ HTTP におけるキャッシュの検証はコンテンツが定期的に変化
     public function index()
     {
         $articles = $this->Articles->find('all');
-        $response = $this->response->withEtag($this->Articles->generateHash($articles));
+
+        // 記事内容の単純なチェックサムです
+        // 現実世界のアプリケーションでは、もっと効率的な実装を使用する必要があります
+        $checksum = md5(json_encode($articles));
+
+        $response = $this->response->withEtag($checksum);
         if ($response->checkNotModified($this->request)) {
             return $response;
         }
+
         $this->response = $response;
         // ...
     }
@@ -865,29 +1003,27 @@ Not-Modified レスポンスの送信
 クッキーは、配列または :php:class:`Cake\Http\Cookie\Cookie` オブジェクトを使って
 レスポンスに追加することができます。 ::
 
-    // イミュータブル API (3.4.0 以上) を使って配列としてクッキーを追加
-    $this->response = $this->response->withCookie('remember_me', [
-        'value' => 'yes',
-        'path' => '/',
-        'httpOnly' => true,
-        'secure' => false,
-        'expire' => strtotime('+1 year')
-    ]);
+    use Cake\Http\Cookie\Cookie;
+    use DateTime;
 
-    // 3.4.0 より前
-    $this->response->cookie('remember', [
-        'value' => 'yes',
-        'path' => '/',
-        'httpOnly' => true,
-        'secure' => false,
-        'expire' => strtotime('+1 year')
+    // クッキーを追加
+    $this->response = $this->response->withCookie(Cookie::create(
+        'remember_me',
+        'yes',
+        // すべてのキーはオプションです
+        [
+            'expires' => new DateTime('+1 year'),
+            'path' => '',
+            'domain' => '',
+            'secure' => false,
+            'http' => false,
+        ]
     ]);
 
 クッキーオブジェクトの使い方は :ref:`creating-cookies` セクションをご覧ください。
 ``withExpiredCookie()`` を使ってレスポンスに期限切れのクッキーを送ることができます。
 これにより、ブラウザはローカルクッキーを削除します。 ::
 
-    // 3.5.0 以降
     $this->response = $this->response->withExpiredCookie('remember_me');
 
 .. _cors-headers:
@@ -895,11 +1031,11 @@ Not-Modified レスポンスの送信
 クロスオリジンリクエストヘッダー（CORS）の設定
 ==============================================
 
-3.2 から、 `HTTP アクセス制御
+`HTTP アクセス制御
 <https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS>`__ 関連の
 ヘッダーを定義するために、流れるようなインターフェイスの ``cors()`` メソッドが使用できます。 ::
 
-    $this->response->cors($this->request)
+    $this->response = $this->response->cors($this->request)
         ->allowOrigin(['*.cakephp.org'])
         ->allowMethods(['GET', 'POST'])
         ->allowHeaders(['X-CSRF-Token'])
@@ -910,16 +1046,13 @@ Not-Modified レスポンスの送信
 
 以下の基準が満たされた場合のみ、 CORS 関連ヘッダーはレスポンスに適用されます。
 
-1. リクエストは ``Origin`` ヘッダーがあります。
-2. リクエストの ``Origin`` 値が許可された Origin 値のいずれかと一致します。
-
-.. versionadded:: 3.2
-    ``CorsBuilder`` は 3.2 で追加されました。
+#. リクエストは ``Origin`` ヘッダーがあります。
+#. リクエストの ``Origin`` 値が許可された Origin 値のいずれかと一致します。
 
 不変レスポンスに伴うよくある失敗
 =================================
 
-CakePHP 3.4.0 以降、レスポンスオブジェクトはレスポンスを不変オブジェクトとして扱う
+レスポンスオブジェクトはレスポンスを不変オブジェクトとして扱う
 いくつかのメソッドを提供しています。不変オブジェクトは、偶発的な副作用の追跡を困難になるのを予防し、
 その変更順序のリファクタリングに起因するメソッド呼び出しに起因する間違いを減らします。
 それらは多くの利点を提供しますが、不変オブジェクトには慣れが必要です。
@@ -996,10 +1129,14 @@ CakePHP 3.4.0 以降、レスポンスオブジェクトはレスポンスを不
     コレクションは不変であり、クッキーを追加したりコレクションからクッキーを削除すると、
     *新規に* コレクションが作成されることに注意してください。
 
-クッキーを ``Response`` オブジェクトに追加するために ``withCookie()``
-メソッドを使ってください。 ::
+レスポンスにクッキーオブジェクトを追加することができます。 ::
 
+    // クッキーを1つ追加
     $response = $this->response->withCookie($cookie);
+
+    // クッキーコレクション全体を置き換える
+    $response = $this->response->withCookieCollection($cookies);
+
 
 レスポンスにセットするクッキーは :ref:`encrypted-cookie-middleware` を使って
 暗号化することができます。
@@ -1031,9 +1168,6 @@ CakePHP 3.4.0 以降、レスポンスオブジェクトはレスポンスを不
     // 状態のチェック
     $cookie->isHttpOnly();
     $cookie->isSecure();
-
-.. versionadded:: 3.5.0
-    ``CookieCollection`` と ``Cookie`` は 3.5.0 で追加されました。
 
 .. meta::
     :title lang=ja: リクエストとレスポンスオブジェクト

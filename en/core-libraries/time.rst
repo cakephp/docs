@@ -12,7 +12,6 @@ use the ``FrozenTime`` class::
 
     class UsersController extends AppController
     {
-
         public function initialize(): void
         {
             parent::initialize();
@@ -122,8 +121,17 @@ This method sets the default format used when converting an object to json::
     Date::setJsonEncodeFormat('yyyy-MM-dd HH:mm:ss');  // For any mutable Date
     FrozenDate::setJsonEncodeFormat('yyyy-MM-dd HH:mm:ss');  // For any immutable Date
 
+    // Added in 4.1.0
+    FrozenDate::setJsonEncodeFormat(static function($time) {
+        return $time->format(DATE_ATOM);
+    });
+
 .. note::
     This method must be called statically.
+
+.. versionchanged:: 4.1.0
+    The ``callable`` parameter type was added.
+
 
 .. php:method:: i18nFormat($format = null, $timezone = null, $locale = null)
 
@@ -152,7 +160,7 @@ You can either pass `IntlDateFormatter constants
 <http://www.php.net/manual/en/class.intldateformatter.php>`_ as the first
 argument of this function, or pass a full ICU date formatting string as
 specified in the following resource:
-http://www.icu-project.org/apiref/icu4c/classSimpleDateFormat.html#details.
+http://userguide.icu-project.org/formatparse/datetime#TOC-Date-Time-Format-Syntax.
 
 You can also format dates with non-gregorian calendars::
 

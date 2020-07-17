@@ -22,7 +22,10 @@ Query builder that does not include ORM features, if necessary. See the
 :ref:`database-queries` section for more information::
 
     use Cake\ORM\TableRegistry;
-    $articles = TableRegistry::get('Articles');
+
+    // Prior to 3.6 use TableRegistry::get('Articles')
+
+    $articles = TableRegistry::getTableLocator()->get('Articles');
 
     // Start a new query.
     $query = $articles->find();
@@ -41,7 +44,8 @@ Selecting Rows From A Table
 
     use Cake\ORM\TableRegistry;
 
-    $query = TableRegistry::get('Articles')->find();
+    // Prior to 3.6 use TableRegistry::get('Articles')
+    $query = TableRegistry::getTableLocator()->get('Articles')->find();
 
     foreach ($query as $article) {
         debug($article->title);
@@ -366,7 +370,9 @@ safely add user data to SQL functions. For example::
 By making arguments with a value of ``literal``, the ORM will know that
 the key should be treated as a literal SQL value. By making arguments with
 a value of ``identifier``, the ORM will know that the key should be treated
-as a field identifier. The above would generate the following SQL on MySQL::
+as a field identifier. The above would generate the following SQL on MySQL:
+
+.. code-block:: mysql
 
     SELECT CONCAT(Articles.title, :c0, Categories.name, :c1, (DATEDIFF(NOW(), Articles.created))) FROM articles;
 
@@ -390,7 +396,9 @@ For example::
         'timeCreated' => $time
     ]);
 
-Would result in::
+Would result in:
+
+.. code-block:: mysql
 
     SELECT YEAR(created) as yearCreated, DATE_FORMAT(created, '%H:%i') as timeCreated FROM articles;
 
@@ -429,7 +437,9 @@ for implementing ``if ... then ... else`` logic inside your SQL. This can be use
 for reporting on data where you need to conditionally sum or count data, or where you
 need to specific data based on a condition.
 
-If we wished to know how many published articles are in our database, we could use the following SQL::
+If we wished to know how many published articles are in our database, we could use the following SQL:
+
+.. code-block:: sql
 
     SELECT
     COUNT(CASE WHEN published = 'Y' THEN 1 END) AS number_published,
@@ -585,7 +595,9 @@ conditions arrays in previous versions of CakePHP::
             'OR' => [['view_count' => 2], ['view_count' => 3]],
         ]);
 
-The above would generate SQL like::
+The above would generate SQL like:
+
+.. code-block:: sql
 
     SELECT * FROM articles WHERE author_id = 3 AND (view_count = 2 OR view_count = 3)
 
@@ -597,7 +609,9 @@ operator used between the current and previous condition. For example::
         ->where(['author_id' => 2])
         ->orWhere(['author_id' => 3]);
 
-The above will output SQL similar to::
+The above will output SQL similar to:
+
+.. code-block:: sql
 
     SELECT * FROM articles WHERE (author_id = 2 OR author_id = 3)
 
@@ -613,7 +627,9 @@ conditions that use a mixture of operators::
         ])
         ->orWhere(['promoted' => true]);
 
-The above generates SQL similar to::
+The above generates SQL similar to:
+
+.. code-block:: sql
 
     SELECT *
     FROM articles
@@ -632,13 +648,15 @@ you can compose conditions together with the expression objects::
     $query = $articles->find()
         ->where(['title LIKE' => '%First%'])
         ->andWhere(function ($exp) {
-            return $exp->or_([
+            return $exp->or([
                 'author_id' => 2,
                 'is_highlighted' => true
             ]);
         });
 
-The above would create SQL like::
+The above would create SQL like:
+
+.. code-block:: sql
 
     SELECT *
     FROM articles
@@ -649,13 +667,13 @@ The above would create SQL like::
     )
 
 The expression object that is passed into ``where()`` functions has two kinds of
-methods. The first type of methods are **combinators**. The ``and_()`` and
-``or_()`` methods create new expression objects that change **how** conditions
+methods. The first type of methods are **combinators**. The ``and()`` and
+``or()`` methods create new expression objects that change **how** conditions
 are combined. The second type of methods are **conditions**. Conditions are
 added into an expression where they are combined with the current combinator.
 
-For example, calling ``$exp->and_(...)`` will create a new ``Expression`` object
-that combines all conditions it contains with ``AND``. While ``$exp->or_()``
+For example, calling ``$exp->and(...)`` will create a new ``Expression`` object
+that combines all conditions it contains with ``AND``. While ``$exp->or()``
 will create a new ``Expression`` object that combines all conditions added to it
 with ``OR``. An example of adding conditions with an ``Expression`` object would
 be::
@@ -669,9 +687,11 @@ be::
                 ->gt('view_count', 10);
         });
 
-Since we started off using ``where()``, we don't need to call ``and_()``, as
+Since we started off using ``where()``, we don't need to call ``and()``, as
 that happens implicitly. The above shows a few new condition
-methods being combined with ``AND``. The resulting SQL would look like::
+methods being combined with ``AND``. The resulting SQL would look like:
+
+.. code-block:: sql
 
     SELECT *
     FROM articles
@@ -692,7 +712,7 @@ following::
 
     $query = $articles->find()
         ->where(function ($exp) {
-            $orConditions = $exp->or_(['author_id' => 2])
+            $orConditions = $exp->or(['author_id' => 2])
                 ->eq('author_id', 5);
             return $exp
                 ->add($orConditions)
@@ -700,7 +720,9 @@ following::
                 ->gte('view_count', 10);
         });
 
-Which would generate the SQL similar to::
+Which would generate the SQL similar to:
+
+.. code-block:: sql
 
     SELECT *
     FROM articles
@@ -709,12 +731,12 @@ Which would generate the SQL similar to::
     AND published = 1
     AND view_count >= 10)
 
-The ``or_()`` and ``and_()`` methods also allow you to use functions as their
+The ``or()`` and ``and()`` methods also allow you to use functions as their
 parameters. This is often easier to read than method chaining::
 
     $query = $articles->find()
         ->where(function ($exp) {
-            $orConditions = $exp->or_(function ($or) {
+            $orConditions = $exp->or(function ($or) {
                 return $or->eq('author_id', 2)
                     ->eq('author_id', 5);
             });
@@ -727,14 +749,16 @@ You can negate sub-expressions using ``not()``::
 
     $query = $articles->find()
         ->where(function ($exp) {
-            $orConditions = $exp->or_(['author_id' => 2])
+            $orConditions = $exp->or(['author_id' => 2])
                 ->eq('author_id', 5);
             return $exp
                 ->not($orConditions)
                 ->lte('view_count', 10);
         });
 
-Which will generate the following SQL looking like::
+Which will generate the following SQL looking like:
+
+.. code-block:: sql
 
     SELECT *
     FROM articles
@@ -754,7 +778,9 @@ It is also possible to build expressions using SQL functions::
                 ->eq('published', true);
         });
 
-Which will generate the following SQL looking like::
+Which will generate the following SQL looking like:
+
+.. code-block:: sql
 
     SELECT *
     FROM articles
@@ -1104,12 +1130,12 @@ through event listeners.
 
 When the results for a cached query are fetched the following happens:
 
-1. The ``Model.beforeFind`` event is triggered.
-2. If the query has results set, those will be returned.
-3. The cache key will be resolved and cache data will be read. If the cache data
+1. If the query has results set, those will be returned.
+2. The cache key will be resolved and cache data will be read. If the cache data
    is not empty, those results will be returned.
-4. If the cache misses, the query will be executed and a new ``ResultSet`` will be
-   created. This ``ResultSet`` will be written to the cache and returned.
+3. If the cache misses, the query will be executed, the ``Model.beforeFind`` event
+   will be triggered, and a new ``ResultSet`` will be created. This
+   ``ResultSet`` will be written to the cache and returned.
 
 .. note::
 

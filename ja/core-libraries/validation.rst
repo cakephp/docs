@@ -28,14 +28,14 @@ CakePHP のバリデーションは、任意の配列データに対するバリ
 
     $validator
         ->requirePresence('title')
-        ->notEmpty('title', 'このフィールドに入力してください')
+        ->notEmptyString('title', 'このフィールドに入力してください')
         ->add('title', [
             'length' => [
                 'rule' => ['minLength', 10],
                 'message' => 'タイトルは 10 文字以上必要です',
             ]
         ])
-        ->allowEmpty('published')
+        ->allowEmptyDateTime('published')
         ->add('published', 'boolean', [
             'rule' => 'boolean'
         ])
@@ -87,33 +87,39 @@ CakePHP のバリデーションは、任意の配列データに対するバリ
         ]
     ]);
 
-.. versionadded:: 3.3.0
-    ``requirePresence()`` は、3.3.0 でフィールドの配列を受け取ります。
-
 空のフィールドを認める
 ----------------------
 
-``allowEmpty()`` と ``notEmpty()`` のメソッドを用いることにより、どのフィールドが
-空欄であってもよいかを制御することができます。 ``notEmpty()`` メソッドを用いると、
-フィールドが空欄であったときに無効となります。 ``allowEmpty()`` を用いると、
-空欄のフィールドを用いることが可能となります。 ``allowEmpty()`` と ``notEmpty()``
-ともに、フィールドが空欄でも良いか否かについてを制御するためのパラメーターを提供します。
+バリデーターは、フィールドが空の値を許容するかどうかを制御するためのいくつかのメソッドを提供します。
+そして、許容された空の値は他の名前付きフィールドのバリデーションルールには転送されません。
+CakePHPは6つの異なる形状のデータに対して空の値のサポートを提供します。
 
-* ``false`` フィールドが空欄であることが認められません。
-* ``create`` **create** 実行時にバリデーションを行う場合、フィールドは空欄にすることができます。
-* ``update`` **update** 実行時にバリデーションを行う場合、フィールドは空欄にすることができます。
+#. ``allowEmptyString()`` 空文字列を許容する場合にのみ使用します
+#. ``allowEmptyArray()`` 配列を許容する場合に使用します
+#. ``allowEmptyDate()`` 空文字列か、日付フィールドに取り込まれる配列を許容する場合に使用します
+#. ``allowEmptyTime()`` 空文字列か、時刻フィールドに取り込まれる配列を許容する場合に使用します
+#. ``allowEmptyDateTime()`` 空文字列か、日付時刻フィールドまたはタイムスタンプフィールドに取り込まれる配列を許容する場合に使用します
+#. ``allowEmptyFile()`` 空ファイルのアップロードが含まれた配列を許容する場合に使用します
 
-``''`` や、 ``null`` 、そして ``[]`` といった値（空の配列）は、フィールドが空欄であることが
-認められないときは、バリデーションエラーを引き起こします。一方、フィールドが空欄であることが
-認められる場合は、 ``''`` や、 ``null`` 、 ``[]`` , ``0`` , ``'0'`` といった値が
-認められます。
+``notEmpty()`` を使用して空のフィールドを無効にすることもできますが、
+推奨されるのは ``notEmpty()`` は使用せず、より具体的なバリデーターである
+``notEmptyString()``, ``notEmptyArray()``, ``notEmptyFile()``, ``notEmptyDate()``, ``notEmptyTime()``, ``notEmptyDateTime()``
+を使用することです。
 
-これらのメソッドの例は以下の通りです。 ::
+``allowEmpty*`` メソッドは、空のフィールドを許容するかを制御する ``when`` パラメーターをサポートします。
 
-    $validator->allowEmpty('published')
-        ->notEmpty('title', 'タイトルは空にできません')
-        ->notEmpty('body', '本文は空にできません', 'create')
-        ->allowEmpty('header_image', 'update');
+* ``false`` フィールドは空にできません
+* ``create`` **create** 操作のバリデーション時にフィールドを空にできます
+* ``update`` **update** 操作のバリデーション時にフィールドを空にできます
+* フィールドが空にできるかどうかを示す ``true`` または ``false`` を返すコールバック。このパラメーターの使用方法の例については、：ref：`conditional-validation` セクションを参照してください。
+
+これらのメソッドの使用例は次のとおりです。::
+
+    $validator->allowEmptyDateTime('published')
+        ->allowEmptyString('title', 'タイトルは空にできません', false)
+        ->allowEmptyString('body', '本文は空にできません', 'update')
+        ->allowEmptyFile('header_image', 'update');
+        ->allowEmptyDateTime('posted', 'update');
 
 バリデーションルールの追加
 ---------------------------
@@ -128,11 +134,8 @@ CakePHP のバリデーションは、任意の配列データに対するバリ
         ->lengthBetween('username', [4, 8]);
 
 バリデータメソッドの完全なセットについては、 `Validator API ドキュメント
-<https://api.cakephp.org/3.x/class-Cake.Validation.Validator.html>`_ 
+<https://api.cakephp.org/3.x/class-Cake.Validation.Validator.html>`_
 をご覧ください。
-
-.. versionadded:: 3.2
-    ルール構築のメソッドは 3.2.0 で追加されました。
 
 .. _custom-validation-rules:
 
@@ -259,12 +262,12 @@ CakePHP のバリデーションは、任意の配列データに対するバリ
         'rule' => ['uploadedFile', ['optional' => true]],
     ]);
 
-``allowEmpty()``, ``notEmpty()`` 及び ``requirePresence()`` メソッドは、
+``allowEmpty*``, ``notEmpty()`` 及び ``requirePresence()`` メソッドは、
 最後に引数としてコールバック関数を受け付けることができます。もしこれがあれば、
 ルールが適用されるべきか否かをコールバック関数が決めます。例えば、以下のように、
 フィールド値が空のままでも許容される時もあります。 ::
 
-    $validator->allowEmpty('tax', function ($context) {
+    $validator->allowEmptyString('tax', function ($context) {
         return !$context['data']['is_taxable'];
     });
 
@@ -291,10 +294,12 @@ CakePHP のバリデーションは、任意の配列データに対するバリ
 これは、申し込みを作成したいユーザーの場合のみ ``full_name`` フィールドの存在を求め、
 ``email`` フィールドは常に要求されます。申し込みをキャンセルした時にも必要とされます。
 
-.. versionadded:: 3.1.1
-    ``requirePresence()`` の callable 対応は、 3.1.1 で追加されました。
+条件付きのカスタムコールバックに渡される ``$context`` パラメータには、以下のキーが含まれます。
 
-
+* ``data`` バリデートされるデータ
+* ``newRecord`` 新規または既存のレコードが存在しているかどうかを示すブール値
+* ``field`` バリデートされるフィールド
+* ``providers`` バリデーターに付与されるバリデーションプロバイダー
 
 最後に適用されるルールとして設定する
 ------------------------------------
@@ -372,8 +377,6 @@ CakePHP のバリデーションは、任意の配列データに対するバリ
     デフォルトプロバイダーは、 ``Validator`` オブジェクトが作成される前に追加されなければなりません。
     そのため **config/bootstrap.php** がデフォルトプロバイダーの設定に最適な場所です。
 
-.. versionadded:: 3.5.0
-
 国に基いて提供するための `Localized プラグイン <https://github.com/cakephp/localized>`_
 が利用できます。このプラグインで、国に依存するモデルのフィールドをバリデートできます。
 例::
@@ -413,8 +416,6 @@ Localized プラグインは、バリデーションのための国の２文字�
 バリデーターをネストする
 ------------------------
 
-.. versionadded:: 3.0.5
-
 ネストされたデータで :doc:`/core-libraries/form` をバリデートする場合、
 また配列データを含むモデルを使用する場合、保有するネストされたデータをバリデートすることが
 必要となります。CakePHP では、簡単に特定の属性に対してバリデーターを加えることが可能となります。
@@ -440,7 +441,7 @@ Localized プラグインは、バリデーションのための国の２文字�
     $validator->addNestedMany('comments', $commentValidator);
 
     // ネストされたバリデーターからのエラーを含むすべてのエラーを取得する
-    $validator->errors($data);
+    $validator->validate($data);
 
 ``addNested()`` を用いることで、1:1 の関係を構築することができ、 ``addNestedMany()``
 を用いることで 1:N の関係を築くことができます。両方のメソッドを用いることにより、
@@ -456,9 +457,6 @@ Localized プラグインは、バリデーションのための国の２文字�
     );
 
 ネストされたバリデーターのエラーメッセージは、 ``_nested`` キーにあります。
-
-.. versionadded:: 3.6.0
-    ネストされたバリデーターのメッセージと条件は追加されました。
 
 .. _reusable-validators:
 
@@ -506,7 +504,7 @@ Localized プラグインは、バリデーションのための国の２文字�
         ->requirePresence('comment')
         ->notEmpty('comment', 'コメントが必要です。');
 
-    $errors = $validator->errors($this->request->getData());
+    $errors = $validator->validate($this->request->getData());
     if (empty($errors)) {
         // email を送る。
     }
@@ -523,7 +521,7 @@ Localized プラグインは、バリデーションのための国の２文字�
 適用されますが、 'update' を実行する際のルールを適用したい場合は、
 以下のことが可能となります。 ::
 
-    $errors = $validator->errors($this->request->getData(), false);
+    $errors = $validator->validate($this->request->getData(), false);
     if (empty($errors)) {
         // email を送る。
     }

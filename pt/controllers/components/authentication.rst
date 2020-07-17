@@ -39,7 +39,7 @@ usuários armazenados no seu aplicativo.
   Geralmente, este é um formulário de login no qual os usuários inserem informações.
 * ``BasicAuthenticate`` permite autenticar usuários usando a autenticação HTTP básica.
 * ``DigestAuthenticate`` permite autenticar usuários usando o Digest
-   Autenticação HTTP.
+  Autenticação HTTP.
 
 Por padrão, ``AuthComponent`` usa ``FormAuthenticate``.
 
@@ -104,7 +104,7 @@ chaves de configuração.
 - ``fields`` Os campos a serem usados para identificar um usuário. Você pode usar as chaves 
   ``username`` e ``password`` para especificar seus campos de nome de usuário e senha, respectivamente.
 - ``userModel`` O nome do modelo da tabela users; o padrão é Users.
-- ``finder``O método finder a ser usado para buscar um registro do usuário. O padrão é 'all'.
+- ``finder`` O método finder a ser usado para buscar um registro do usuário. O padrão é 'all'.
 - ``passwordHasher`` Classe de hasher de senha; O padrão é ``Default``.
 
 Para configurar campos diferentes para o usuário no seu método ``initialize()``::
@@ -531,7 +531,7 @@ Exibindo Mensagens Flash Relacionadas à Autenticação
 
 Para exibir as mensagens de erro da sessão que o Auth gera, você precisa 
 adicionar o seguinte código ao seu layout. Adicione as duas linhas a seguir 
-ao arquivo **templates/Layout/default.php** na seção body::
+ao arquivo **templates/layout/default.php** na seção body::
 
     echo $this->Flash->render();
 
@@ -542,7 +542,7 @@ As chaves disponíveis são
 
 - ``key`` - A chave a ser usada é padronizada como 'default'.
 - ``element`` - O nome do elemento a ser usado para renderização, o padrão é null.
-- ``params`` - A matriz de parâmetros adicionais a serem usados, o padrão é ``[] ``.
+- ``params`` - A matriz de parâmetros adicionais a serem usados, o padrão é ``[]``.
 
 Além das configurações de mensagens flash, você pode personalizar outras 
 mensagens de erro que o ``AuthComponent`` usa. Nas configurações ``beforeFilter()``

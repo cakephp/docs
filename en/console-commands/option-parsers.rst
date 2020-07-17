@@ -13,7 +13,7 @@ Defining an OptionParser
 Commands and Shells provide a ``buildOptionParser($parser)`` hook method that
 you can use to define the options and arguments for your commands::
 
-    protected function buildOptionParser($parser)
+    protected function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
     {
         // Define your options and arguments.
 
@@ -138,6 +138,8 @@ of the option:
   will be ``true``.
 * ``boolean`` - The option uses no value, it's just a boolean switch.
   Defaults to ``false``.
+* ``multiple`` - The option can be provided multiple times. The parsed option
+  will be an array of values when this option is enabled.
 * ``choices`` - An array of valid choices for this option. If left empty all
   values are valid. An exception will be raised when parse() encounters an
   invalid value.

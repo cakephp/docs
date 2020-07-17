@@ -9,7 +9,7 @@
    你需要储备基本的 SQL 知识。懂得如何使用 SQL 建立数据库以及执行教程中的各种 SQL 片段。
    CakePHP 可自动构造你的应用所需的各种查询语句。 由于此教程使用的是 MySQL, 请确定 PHP 的
    ``pdo_mysql``  已经启用。
-   
+
 #. 基本的 PHP 知识。
 
 在开始之前，请确保你的 PHP 已经更新。
@@ -36,7 +36,7 @@
 
 .. code-block:: bash
 
-    php composer.phar create-project --prefer-dist cakephp/app cms
+    php composer.phar create-project --prefer-dist cakephp/app:4.* cms
 
 
 如果你是下载使用的 `Composer Windows Installer
@@ -44,7 +44,7 @@
 
 .. code-block:: bash
 
-    composer self-update && composer create-project --prefer-dist cakephp/app cms
+    composer self-update && composer create-project --prefer-dist cakephp/app:4.* cms
 
 使用 Composer 的优势是它会自动完成一些重要的设置任务，比如建立合适的文件权限以及建立配置文件
  **config/app.php**。

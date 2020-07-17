@@ -17,8 +17,8 @@ CakePHP には、開発のスピードアップと日常的なタスクの自動
 
     namespace App\Command;
 
+    use Cake\Command\Command;
     use Cake\Console\Arguments;
-    use Cake\Console\Command;
     use Cake\Console\ConsoleIo;
 
     class HelloCommand extends Command
@@ -46,14 +46,14 @@ Commabd クラスは、大部分の作業を行う ``execute()`` メソッドを
 
     namespace App\Command;
 
+    use Cake\Command\Command;
     use Cake\Console\Arguments;
-    use Cake\Console\Command;
     use Cake\Console\ConsoleIo;
     use Cake\Console\ConsoleOptionParser;
 
     class HelloCommand extends Command
     {
-        protected function buildOptionParser(ConsoleOptionParser $parser)
+        protected function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
         {
             $parser->addArgument('name', [
                 'help' => 'What is your name'
@@ -86,7 +86,7 @@ Commabd クラスは、大部分の作業を行う ``execute()`` メソッドを
 追加することができます。 ::
 
     // ...
-    protected function buildOptionParser(ConsoleOptionParser $parser)
+    protected function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
     {
         $parser
             ->addArgument('name', [
@@ -127,20 +127,20 @@ Commabd クラスは、大部分の作業を行う ``execute()`` メソッドを
 
     namespace App\Command;
 
+    use Cake\Command\Command;
     use Cake\Console\Arguments;
-    use Cake\Console\Command;
     use Cake\Console\ConsoleIo;
     use Cake\Console\ConsoleOptionParser;
 
     class UserCommand extends Command
     {
-        public function initialize()
+        public function initialize(): void
         {
             parent::initialize();
             $this->loadModel('Users');
         }
 
-        protected function buildOptionParser(ConsoleOptionParser $parser)
+        protected function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
         {
             $parser
                 ->addArgument('name', [
@@ -184,7 +184,7 @@ Commabd クラスは、大部分の作業を行う ``execute()`` メソッドを
     終了コードの 64 から 78 は避けてください。それらは ``sysexits.h`` で記述された
     特定の意味を持っています。終了コードの 127 以上を避けてください。
     それらは、 SIGKILL や SIGSEGV のようなシグナルによるプロセスの終了を示すために使用されます。
-    
+
     従来の終了コードの詳細については、ほとんどの Unixシステム の sysexit マニュアルページ
     (``man sysexits``)、または Windows の ``System Error Codes`` ヘルプページを
     参照してください。
@@ -214,14 +214,14 @@ Commabd クラスは、大部分の作業を行う ``execute()`` メソッドを
 
     namespace App\Command;
 
+    use Cake\Command\Command;
     use Cake\Console\Arguments;
-    use Cake\Console\Command;
     use Cake\Console\ConsoleIo;
     use Cake\Console\ConsoleOptionParser;
 
     class UpdateTableCommand extends Command
     {
-        protected function buildOptionParser(ConsoleOptionParser $parser)
+        protected function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
         {
             $parser->setDescription('My cool console app');
 
@@ -243,7 +243,7 @@ Commabd クラスは、大部分の作業を行う ``execute()`` メソッドを
     {
         use ConsoleIntegrationTestTrait;
 
-        public function setUp()
+        public function setUp(): void
         {
             parent::setUp();
             $this->useCommandRunner();
@@ -262,15 +262,15 @@ Commabd クラスは、大部分の作業を行う ``execute()`` メソッドを
 
     namespace App\Command;
 
+    use Cake\Command\Command;
     use Cake\Console\Arguments;
-    use Cake\Console\Command;
     use Cake\Console\ConsoleIo;
     use Cake\Console\ConsoleOptionParser;
     use Cake\I18n\FrozenTime;
 
     class UpdateTableCommand extends Command
     {
-        protected function buildOptionParser(ConsoleOptionParser $parser)
+        protected function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
         {
             $parser
                 ->setDescription('My cool console app')
@@ -300,7 +300,7 @@ Commabd クラスは、大部分の作業を行う ``execute()`` メソッドを
 
     namespace Cake\Test\TestCase\Command;
 
-    use Cake\Console\Command;
+    use Cake\Command\Command;
     use Cake\I18n\FrozenTime;
     use Cake\ORM\TableRegistry;
     use Cake\TestSuite\ConsoleIntegrationTestTrait;
@@ -331,7 +331,8 @@ Commabd クラスは、大部分の作業を行う ``execute()`` メソッドを
             $this->exec('update_table Users');
             $this->assertExitCode(Command::CODE_SUCCESS);
 
-            $user = TableRegistry::get('Users')->get(1);
+            // Prior to 3.6 use TableRegistry::get('Users')
+            $user = TableRegistry::getTableLocator()->get('Users')->get(1);
             $this->assertSame($user->modified->timestamp, $now->timestamp);
 
             FrozenTime::setTestNow(null);
@@ -359,15 +360,15 @@ Commabd クラスは、大部分の作業を行う ``execute()`` メソッドを
 
     namespace App\Command;
 
+    use Cake\Command\Command;
     use Cake\Console\Arguments;
-    use Cake\Console\Command;
     use Cake\Console\ConsoleIo;
     use Cake\Console\ConsoleOptionParser;
     use Cake\I18n\FrozenTime;
 
     class UpdateTableCommand extends Command
     {
-        protected function buildOptionParser(ConsoleOptionParser $parser)
+        protected function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
         {
             $parser
                 ->setDescription('My cool console app')
@@ -411,7 +412,8 @@ Commabd クラスは、大部分の作業を行う ``execute()`` メソッドを
         $this->exec('update_table Users', ['y']);
         $this->assertExitCode(Command::CODE_SUCCESS);
 
-        $user = TableRegistry::get('Users')->get(1);
+        // Prior to 3.6 use TableRegistry::get('Users')
+        $user = TableRegistry::getTableLocator()->get('Users')->get(1);
         $this->assertSame($user->modified->timestamp, $now->timestamp);
 
         FrozenTime::setTestNow(null);
@@ -419,14 +421,16 @@ Commabd クラスは、大部分の作業を行う ``execute()`` メソッドを
 
     public function testUpdateModifiedUnsure()
     {
-        $user = TableRegistry::get('Users')->get(1);
+        // Prior to 3.6 use TableRegistry::get('Users')
+        $user = TableRegistry::getTableLocator()->get('Users')->get(1);
         $original = $user->modified->timestamp;
 
         $this->exec('my_console best_framework', ['n']);
         $this->assertExitCode(Command::CODE_ERROR);
         $this->assertErrorContains('You need to be sure.');
 
-        $user = TableRegistry::get('Users')->get(1);
+        // Prior to 3.6 use TableRegistry::get('Users')
+        $user = TableRegistry::getTableLocator()->get('Users')->get(1);
         $this->assertSame($original, $user->timestamp);
     }
 

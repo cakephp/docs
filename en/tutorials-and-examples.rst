@@ -17,6 +17,7 @@ and components.
     tutorials-and-examples/cms/articles-controller
     tutorials-and-examples/cms/tags-and-users
     tutorials-and-examples/cms/authentication
+    tutorials-and-examples/cms/authorization
 
 .. toctree::
     :hidden:

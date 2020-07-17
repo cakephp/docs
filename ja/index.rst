@@ -1,8 +1,8 @@
 ようこそ
 ########
 
-CakePHP 3 は、 **PHP 7.2** (最小は PHP |minphpversion|) 上で動作するウェブ開発フレームワークです。
-CakePHP 3 の基礎に入門するには :doc:`CakePHP 概要 </intro>` を読んでください。
+CakePHP 4 は、 PHP |phpversion| (最小は PHP |minphpversion|) 上で動作するウェブ開発フレームワークです。
+CakePHP の基礎に入門するには :doc:`CakePHP 概要 </intro>` を読んでください。
 
 CakePHP クックブックは、オープンに開発されている、コミュニティーで編集可能なドキュメントのプロジェクトです。
 ドキュメンテーションの品質、正当性、正確性の高さを維持することを期待しています。
@@ -21,7 +21,7 @@ CakePHP クックブックは、オープンに開発されている、コミュ
     多くのデバイス上でオフラインでドキュメントを読むことができます。
 
     - `PDF (英語) <../_downloads/en/CakePHPCookbook.pdf>`_
-    - `EPUB <../_downloads/ja/CakePHPCookbook.epub>`_
+    - `EPUB <../_downloads/ja/CakePHP.epub>`_
     - `オリジナルソース <http://github.com/cakephp/docs>`_
 
 助けを得るには
@@ -39,7 +39,7 @@ CakePHP クックブックは、オープンに開発されている、コミュ
 もし、あなたが初心者の場合、 CakePHP は何を提供できて、どのように動作するのかの
 クイックツアーを体験するために :doc:`/quickstart` から始めましょう。
 
-ブックマークチュートリアルを終えた後、 CakePHP アプリケーションの重要な要素の復習できます。
+クイックスタートチュートリアルを終えた後、 CakePHP アプリケーションの重要な要素の復習ができます。
 
 * :ref:`CakePHP のリクエストサイクル <request-cycle>`
 * CakePHP が使用する :doc:`規約 <intro/conventions>`

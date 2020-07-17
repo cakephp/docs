@@ -41,7 +41,11 @@ translating content.
     Allows you to override the current domain for a single message lookup.
 
     Useful when internationalizing a plugin:
-    ``echo __d('PluginName', 'This is my plugin');``
+    ``echo __d('plugin_name', 'This is my plugin');``
+
+    .. note::
+
+        Make sure to use the underscored version of the plugin name here as domain.
 
 .. php:function:: __dn(string $domain, string $singular, string $plural, integer $count, mixed $args = null)
 
@@ -191,6 +195,10 @@ Most of the following constants refer to paths in your application.
 .. php:const:: LOGS
 
     Path to the logs directory.
+
+.. php:const:: RESOURCES
+
+   Path to the resources directory.
 
 .. php:const:: ROOT
 

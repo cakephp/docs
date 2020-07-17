@@ -10,14 +10,14 @@ Primero, vamos a crear una tabla en nuestra base de datos para guardar los datos
 
     CREATE TABLE users (
         id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-        username VARCHAR(50),
+        email VARCHAR(255),
         password VARCHAR(255),
         role VARCHAR(20),
         created DATETIME DEFAULT NULL,
         modified DATETIME DEFAULT NULL
     );
 
-Siguimos las convenciones de CakePHP para nombrar tablas pero también estamos aprovechando otra convencion: al usar los campos username y password en nuestra tabla CakePHP configurará automáticamente la mayoria de las cosas al momento de implementar el login.
+Siguimos las convenciones de CakePHP para nombrar tablas pero también estamos aprovechando otra convencion: al usar los campos email y password en nuestra tabla CakePHP configurará automáticamente la mayoria de las cosas al momento de implementar el login.
 
 El siguiente paso es crear Users table, responsable de buscar, guardar y validar los datos de usuario::
 
@@ -33,7 +33,8 @@ El siguiente paso es crear Users table, responsable de buscar, guardar y validar
         public function validationDefault(Validator $validator)
         {
             return $validator
-                ->notEmpty('username', 'A username is required')
+                ->notEmpty('email', 'A email is required')
+                ->email('email')
                 ->notEmpty('password', 'A password is required')
                 ->notEmpty('role', 'A role is required')
                 ->add('role', 'inList', [
@@ -95,17 +96,17 @@ También vamos a crear UsersController; el siguiente contenido fue generado usan
 
     }
 
-De la misma forma que creamos las vistas para los posts del blog o usando la herramienta de generación de código, creamos las vistas. Para los objetivos de este tutorial, mostraremos solamente add.ctp:
+De la misma forma que creamos las vistas para los posts del blog o usando la herramienta de generación de código, creamos las vistas. Para los objetivos de este tutorial, mostraremos solamente add.php:
 
 .. code-block:: php
 
-    <!-- src/Template/Users/add.ctp -->
+    <!-- templates/Users/add.php -->
 
     <div class="users form">
     <?= $this->Form->create($user) ?>
         <fieldset>
             <legend><?= __('Add User') ?></legend>
-            <?= $this->Form->input('username') ?>
+            <?= $this->Form->input('email') ?>
             <?= $this->Form->input('password') ?>
             <?= $this->Form->input('role', [
                 'options' => ['admin' => 'Admin', 'author' => 'Author']
@@ -182,7 +183,7 @@ Ahora necesitamos poder registrar nuevos usuarios, guardar el nombre de usuario 
                 $this->Auth->setUser($user);
                 return $this->redirect($this->Auth->redirectUrl());
             }
-            $this->Flash->error(__('Invalid username or password, try again'));
+            $this->Flash->error(__('Invalid email or password, try again'));
         }
     }
 
@@ -219,19 +220,19 @@ Crea el archivo **src/Model/Entity/User.php** y agrega las siguientes lineas::
     }
 
 Ahora cada vez que la propiedad password sea asignada a un usuario, será hasheada usando la clase ``DefaultPasswordHasher``.
-Solamente nos falta un archivo para la vista de la acción login. Abre tu archivo **src/Template/Users/login.ctp** y agrega las siguientes
+Solamente nos falta un archivo para la vista de la acción login. Abre tu archivo **templates/Users/login.php** y agrega las siguientes
 lineas:
 
 .. code-block:: php
 
-    <!-- File: src/Template/Users/login.ctp -->
+    <!-- File: templates/Users/login.php -->
 
     <div class="users form">
     <?= $this->Flash->render('auth') ?>
     <?= $this->Form->create() ?>
         <fieldset>
-            <legend><?= __('Please enter your username and password') ?></legend>
-            <?= $this->Form->input('username') ?>
+            <legend><?= __('Please enter your email and password') ?></legend>
+            <?= $this->Form->input('email') ?>
             <?= $this->Form->input('password') ?>
         </fieldset>
     <?= $this->Form->button(__('Login')); ?>
@@ -242,7 +243,7 @@ Ya podés registrar un nuevo usuario accediendo a ``/users/add`` e iniciar sesi�
 
 Y eso es todo! Se ve demasiado simple para ser verdad. Volvamos un poco para explicar que pasa. La función ``beforeFilter()`` le dice al AuthComponent que no requiera login para la acción ``add()`` asi como para ``index()`` y ``view()``, autorizadas en el ``beforeFilter()`` del AppController.
 
-La función ``login()`` llama a ``$this->Auth->identify()`` del AuthComponent, y funciona sin ninguna otra configuración ya que seguimos la convención. Es decir, tener un modelo llamado User con los campos username y password, y usar un formulario que hace post a un controlador con los datos del usuario. Esta función devuelve si el login fue exitoso o no, y en caso de que tenga exito redirige a la URL puesta en AppController, dentro de la configuracion del AuthComponent.
+La función ``login()`` llama a ``$this->Auth->identify()`` del AuthComponent, y funciona sin ninguna otra configuración ya que seguimos la convención. Es decir, tener un modelo llamado User con los campos email y password, y usar un formulario que hace post a un controlador con los datos del usuario. Esta función devuelve si el login fue exitoso o no, y en caso de que tenga exito redirige a la URL puesta en AppController, dentro de la configuracion del AuthComponent.
 
 El logout funciona simplemente al acceder a ``/users/logout`` y redirecciona al usuario a la URL configurada.
 
@@ -259,7 +260,7 @@ También, un pequeño cambio en ArticlesController es necesario para guardar el 
 
     public function add()
     {
-        $article = $this->Articles->newEntity();
+        $article = $this->Articles->newEmptyEntity();
         if ($this->request->is('post')) {
             $article = $this->Articles->patchEntity($article, $this->request->getData());
             // Added this line

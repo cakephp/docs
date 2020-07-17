@@ -89,13 +89,13 @@ following composer command:
 
 .. code-block:: bash
 
-    php composer.phar create-project --prefer-dist cakephp/app my_app_name
+    php composer.phar create-project --prefer-dist cakephp/app:4.* my_app_name
 
 Or if Composer is installed globally:
 
 .. code-block:: bash
 
-    composer self-update && composer create-project --prefer-dist cakephp/app my_app_name
+    composer self-update && composer create-project --prefer-dist cakephp/app:4.* my_app_name
 
 Once Composer finishes downloading the application skeleton and the core CakePHP
 library, you should have a functioning CakePHP application installed via
@@ -104,7 +104,7 @@ rest of your source code.
 
 You can now visit the path to where you installed your CakePHP application and
 see the default home page. To change the content of this page, edit
-**src/Template/Pages/home.ctp**.
+**templates/Pages/home.php**.
 
 Although composer is the recommended installation method, there are
 pre-installed downloads available on

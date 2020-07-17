@@ -16,7 +16,7 @@ enregistrer les données de notre utilisateur::
 
     CREATE TABLE users (
         id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-        username VARCHAR(50),
+        email VARCHAR(50),
         password VARCHAR(255),
         role VARCHAR(20),
         created DATETIME DEFAULT NULL,
@@ -44,7 +44,8 @@ responsabilité de trouver, sauvegarder et valider toute donnée d'utilisateur::
         public function validationDefault(Validator $validator)
         {
             return $validator
-                ->notEmpty('username', "Un nom d'utilisateur est nécessaire")
+                ->notEmpty('email', "Un email est nécessaire")
+                ->email('email')
                 ->notEmpty('password', 'Un mot de passe est nécessaire')
                 ->notEmpty('role', 'Un role est nécessaire')
                 ->add('role', 'inList', [
@@ -104,17 +105,17 @@ classe obtenue grâce à l'utilitaire de génération de code fournis par CakePH
 
 De la même façon, nous avons créé les vues pour nos articles de blog en
 utilisant l'outil de génération de code. Dans
-le cadre de ce tutoriel, nous allons juste montrer le add.ctp:
+le cadre de ce tutoriel, nous allons juste montrer le add.php:
 
 .. code-block:: php
 
-    <!-- src/Template/Users/add.ctp -->
+    <!-- templates/Users/add.php -->
 
     <div class="users form">
     <?= $this->Form->create($user) ?>
         <fieldset>
             <legend><?= __('Ajouter un utilisateur') ?></legend>
-            <?= $this->Form->control('username') ?>
+            <?= $this->Form->control('email') ?>
             <?= $this->Form->control('password') ?>
             <?= $this->Form->control('role', [
                 'options' => ['admin' => 'Admin', 'author' => 'Author']
@@ -214,7 +215,7 @@ utilisateurs et de réaliser l'action connexion et déconnexion::
                     $this->Auth->setUser($user);
                     return $this->redirect($this->Auth->redirectUrl());
                 }
-                $this->Flash->error(__('Invalid username or password, try again'));
+                $this->Flash->error(__('Invalid email or password, try again'));
             }
         }
 
@@ -258,18 +259,18 @@ fichier entity dans **src/Model/Entity/User.php** et ajoutons ce qui suit::
 Ainsi, maintenant à chaque fois qu'un utilisateur est sauvegardé, le mot de
 passe est hashé en utilisant la classe ``DefaultPasswordHasher``. Il nous
 manque juste un fichier template de vue pour la fonction de connexion. Ouvrez
-votre fichier **src/Template/Users/login.ctp** et ajoutez les lignes suivantes:
+votre fichier **templates/Users/login.php** et ajoutez les lignes suivantes:
 
 .. code-block:: php
 
-    <!-- src/Template/Users/login.ctp -->
+    <!-- templates/Users/login.php -->
 
     <div class="users form">
     <?= $this->Flash->render() ?>
     <?= $this->Form->create() ?>
         <fieldset>
             <legend><?= __("Merci de rentrer vos nom d'utilisateur et mot de passe") ?></legend>
-            <?= $this->Form->control('username') ?>
+            <?= $this->Form->control('email') ?>
             <?= $this->Form->control('password') ?>
         </fieldset>
     <?= $this->Form->button(__('Se Connecter')); ?>
@@ -291,7 +292,7 @@ la fonction ``beforeFilter()`` de l'AppController.
 L'action ``login()`` appelle la fonction ``$this->Auth->identify()`` dans
 AuthComponent, et cela fonctionne sans autre config car nous suivons les
 conventions comme mentionnées plus tôt. C'est-à-dire, avoir un model
-User avec les colonnes username et password, et
+User avec les colonnes email et password, et
 utiliser un formulaire posté à un controller avec les données d'utilisateur.
 Cette fonction retourne si la connexion a réussi ou non, et en cas de succès,
 alors nous redirigeons l'utilisateur vers l'URL de redirection configurée que
@@ -317,7 +318,7 @@ l'utilisateur connecté courant en référence pour l'article créé::
     // src/Controller/ArticlesController.php
     public function add()
     {
-        $article = $this->Articles->newEntity();
+        $article = $this->Articles->newEmptyEntity();
         if ($this->request->is('post')) {
             // Avant 3.4.0 $this->request->data() etait utilisée.
             $article = $this->Articles->patchEntity($article, $this->request->getData());

@@ -83,7 +83,7 @@ You can also use your controller's ``beforeRender`` method to load helpers::
         public function beforeRender(EventInterface $event)
         {
             parent::beforeRender($event);
-            $this->viewBuilder()->helpers(['MyHelper']);
+            $this->viewBuilder()->addHelper('MyHelper');
         }
     }
 
@@ -106,17 +106,6 @@ attribute values or modify the behavior of a helper::
         }
     }
 
-Options can be specified when declaring helpers in controller as shown::
-
-    namespace App\Controller;
-
-    use App\Controller\AppController;
-
-    class AwesomeController extends AppController
-    {
-        public $helpers = ['Awesome' => ['option1' => 'value1']];
-    }
-
 By default all configuration options will be merged with the ``$_defaultConfig``
 property. This property should define the default values of any configuration
 your helper requires. For example::
@@ -128,7 +117,6 @@ your helper requires. For example::
 
     class AwesomeHelper extends Helper
     {
-
         use StringTemplateTrait;
 
         protected $_defaultConfig = [
@@ -326,13 +314,12 @@ If you would like to access a View variable inside a helper, you can use
 
     class AwesomeHelper extends Helper
     {
-
         public $helpers = ['Html'];
 
         public function someMethod()
         {
             // set meta description
-            echo $this->Html->meta(
+            return $this->Html->meta(
                 'description', $this->_View->get('metaDescription'), ['block' => 'meta']
             );
         }
@@ -348,13 +335,6 @@ If you would like to render an Element inside your Helper you can use
     {
         public function someFunction()
         {
-            // output directly in your helper
-            echo $this->_View->element(
-                '/path/to/element',
-                ['foo'=>'bar','bar'=>'foo']
-            );
-
-            // or return it to your view
             return $this->_View->element(
                 '/path/to/element',
                 ['foo'=>'bar','bar'=>'foo']

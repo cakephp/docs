@@ -5,7 +5,7 @@ CakePHP has a few system requirements:
 
 - HTTP Server. For example: Apache. Having mod\_rewrite is preferred, but
   by no means required. You can also use nginx, or Microsoft IIS if you prefer.
-- PHP |minphpversion| or greater (including PHP 7.3).
+- Minimum PHP |minphpversion| (|phpversion| supported).
 - mbstring PHP extension
 - intl PHP extension
 - simplexml PHP extension
@@ -14,7 +14,7 @@ CakePHP has a few system requirements:
 .. note::
 
     In XAMPP, intl extension is included but you have to uncomment
-    ``extension=php_intl.dll`` in **php.ini** and restart the server through
+    ``extension=php_intl.dll`` (or ``extension=intl``) in **php.ini** and restart the server through
     the XAMPP Control Panel.
 
     In WAMP, the intl extension is "activated" by default but not working.
@@ -82,7 +82,7 @@ command:
 
 .. code-block:: bash
 
-    composer create-project --prefer-dist cakephp/app my_app_name
+    composer create-project --prefer-dist cakephp/app:~4.0 my_app_name
 
 Once Composer finishes downloading the application skeleton and the core CakePHP
 library, you should have a functioning CakePHP application installed via
@@ -112,18 +112,6 @@ By default this is what your application **composer.json** looks like::
 Each time you run ``php composer.phar update`` you will receive patch
 releases for this minor version. You can instead change this to ``^4.0`` to
 also receive the latest stable minor releases of the ``4.x`` branch.
-
-If you want to stay up to date with the latest unreleased changes in CakePHP,
-designate **dev-master** as the package version in your application's
-**composer.json**::
-
-    "require": {
-        "cakephp/cakephp": "dev-master"
-    }
-
-Be aware that this is not recommended, as your application can break when the
-next major version is released. Additionally, composer does not cache
-development branches, so it slows down consecutive composer installs/updates.
 
 Installation using Oven
 -----------------------
@@ -492,6 +480,70 @@ A sample of the server directive is as follows:
     use the unix socket path (eg: fastcgi_pass
     unix:/var/run/php/php7.1-fpm.sock;) instead of the TCP port.
 
+NGINX Unit
+----------
+
+`NGINX Unit <https://unit.nginx.org>`_ is dynamically configurable in runtime;
+the following configuration relies on ``webroot/index.php``, also serving other
+``.php`` scripts if present via ``cakephp_direct``:
+
+.. code-block:: json
+
+   {
+       "listeners": {
+           "*:80": {
+               "pass": "routes/cakephp"
+           }
+       },
+
+       "routes": {
+           "cakephp": [
+               {
+                   "match": {
+                       "uri": [
+                           "*.php",
+                           "*.php/*"
+                       ]
+                   },
+
+                   "action": {
+                       "pass": "applications/cakephp_direct"
+                   }
+               },
+               {
+                   "action": {
+                       "share": "/path/to/cakephp/webroot/",
+                       "fallback": {
+                           "pass": "applications/cakephp_index"
+                       }
+                   }
+               }
+           ]
+       },
+
+       "applications": {
+           "cakephp_direct": {
+               "type": "php",
+               "root": "/path/to/cakephp/webroot/",
+               "user": "www-data"
+           },
+
+           "cakephp_index": {
+               "type": "php",
+               "root": "/path/to/cakephp/webroot/",
+               "user": "www-data",
+               "script": "index.php"
+           }
+       }
+   }
+   
+To enable this config (assuming it's saved as ``cakephp.json``):
+
+.. code-block:: console
+
+   # curl -X PUT --data-binary @cakephp.json --unix-socket \
+          /path/to/control.unit.sock http://localhost/config
+       
 IIS7 (Windows hosts)
 --------------------
 
@@ -539,6 +591,35 @@ these steps:
 
 Once the web.config file is created with the correct IIS-friendly rewrite rules,
 CakePHP's links, CSS, JavaScript, and rerouting should work correctly.
+
+Lighttpd
+--------
+Lighttpd does not make use of **.htaccess** files like Apache, so it is
+necessary to add a ``url.rewrite-once`` configuration in **conf/lighttpd.conf**.
+Ensure the following is present in your lighthttpd configuration:
+
+.. code-block:: php
+
+    server.modules += (
+        "mod_alias",
+        "mod_cgi",
+        "mod_rewrite"
+    )
+
+    # Directory Alias
+    alias.url       = ( "/TestCake" => "C:/Users/Nicola/Documents/TestCake" )
+
+    # CGI Php
+    cgi.assign      = ( ".php" => "c:/php/php-cgi.exe" )
+
+    # Rewrite Cake Php (on /TestCake path)
+    url.rewrite-once = (
+        "^/TestCake/(css|files|img|js|stats)/(.*)$" => "/TestCake/webroot/$1/$2",
+        "^/TestCake/(.*)$" => "/TestCake/webroot/index.php/$1"
+    )
+
+The above lines include PHP CGI configuration and example application
+configuration for an application on the ``/TestCake`` path.
 
 I Can't Use URL Rewriting
 -------------------------

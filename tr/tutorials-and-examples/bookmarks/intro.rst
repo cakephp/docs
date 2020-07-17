@@ -42,13 +42,13 @@ indirebilirsiniz.
 CakePHP iskeleti basitçe oluşturup kurmak için terminalizine **bookmarker**
 komut satırını çalıştırınız::
 
-    php composer.phar create-project --prefer-dist cakephp/app bookmarker
+    php composer.phar create-project --prefer-dist cakephp/app:4.* bookmarker
 
 Eğer `Composer Windows Installer <https://getcomposer.org/Composer-Setup.exe>`_
 'i indirip kurduysanız, o zaman kurulum klasöründe belirtilen komudu yazarak
 devam edebilirsiniz. (Örnek kurulum klasörü C:\\wamp\\www\\dev\\cakephp3)::
 
-    composer self-update && composer create-project --prefer-dist cakephp/app bookmarker
+    composer self-update && composer create-project --prefer-dist cakephp/app:4.* bookmarker
 
 Composer'i kullanmanın avantajı bir takım işlemleri sizin için otomatik yapıyor
 olmasıdır. Mesela dosya yetki izinleri ve **config/app.php** dosyasını sizin
@@ -383,7 +383,7 @@ View'ı Oluşturma
 Şimdi eğer **/bookmarks/tagged** url sayfasını ziyaret ederseniz CakePHP size
 bir başka hata sayfası daha gösterecektir.  Burada ise sizin View dosyasının var
 olmadığını belirtir. Bir sonra ki adım olarak view dosyasını bizim ``tags()``
-fonksiyonu için oluşturalım. **src/Template/Bookmarks/tags.ctp** de şu
+fonksiyonu için oluşturalım. **templates/Bookmarks/tags.php** de şu
 içerikleri izleyiniz::
 
     <h1>
@@ -410,7 +410,7 @@ oluşturuyoruz.  Biz aynı zaman da :php:func:`h` kısayol fonksiyonunu kullanar
 HTML encode çıktısını alıyoruz.Kullanıcı verisin de html injeksiyonlarından
 önlemek için her zaman  ``h()`` kullanmayı hatırlayın.
 
-Yeni oluşturduğumuz **tags.ctp** dosyası CakePHP'nin view şablon dosyası
+Yeni oluşturduğumuz **tags.php** dosyası CakePHP'nin view şablon dosyası
 standartlarına bağlıdır.  Bu standartda şablonların düşük karakterli ve alt
 tireli controller fonksiyon isimleri yer alır.
 

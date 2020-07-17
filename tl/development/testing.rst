@@ -594,7 +594,7 @@ use that to retrieve the table name::
         public $import = ['model' => 'Articles'];
     }
 
-Since this uses ``TableRegistry::get()``, it also supports plugin syntax.
+Since this uses ``TableRegistry::getTableLocator()->get()``, it also supports plugin syntax.
 
 You can naturally import your table definition from an existing model/table, but
 have your records defined directly on the fixture as it was shown on previous
@@ -746,7 +746,9 @@ now looks like this::
         public function setUp()
         {
             parent::setUp();
-            $this->Articles = TableRegistry::get('Articles');
+
+            // Prior to 3.6 use TableRegistry::get('Articles')
+            $this->Articles = TableRegistry::getTableLocator()->get('Articles');
         }
 
         public function testFindPublished()
@@ -892,9 +894,10 @@ Create a file named **ArticlesControllerTest.php** in your
                 'body' => 'New Body'
             ];
             $this->post('/articles', $data);
-
             $this->assertResponseSuccess();
-            $articles = TableRegistry::get('Articles');
+
+            // Prior to 3.6 use TableRegistry::get('Articles')
+            $articles = TableRegistry::getTableLocator()->get('Articles');
             $query = $articles->find()->where(['title' => $data['title']]);
             $this->assertEquals(1, $query->count());
         }
@@ -1448,7 +1451,8 @@ snippet of code::
             $this->exec('my_console update_modified Users');
             $this->assertExitCode(Shell::CODE_SUCCESS);
 
-            $user = TableRegistry::get('Users')->get(1);
+            // Prior to 3.6 use TableRegistry::get('Users')
+            $user = TableRegistry::getTableLocator()->get('Users')->get(1);
             $this->assertSame($user->modified->timestamp, $now->timestamp);
 
             FrozenTime::setTestNow(null);
@@ -1847,7 +1851,10 @@ the event data::
         public function setUp()
         {
             parent::setUp();
-            $this->Orders = TableRegistry::get('Orders');
+
+            // Prior to 3.6 use TableRegistry::get('Orders')
+            $this->Orders = TableRegistry::getTableLocator()->get('Orders');
+
             // enable event tracking
             $this->Orders->eventManager()->setEventList(new EventList());
         }
@@ -1933,7 +1940,7 @@ also need to prefix your plugin fixtures with ``plugin.blog.blog_posts``::
 
 If you want to use plugin fixtures in the app tests you can
 reference them using ``plugin.pluginName.fixtureName`` syntax in the
-``$fixtures`` array. Additionally if you use vendor plugin name or fixture 
+``$fixtures`` array. Additionally if you use vendor plugin name or fixture
 directories you can use the following: ``plugin.vendorName/pluginName.folderName/fixtureName``.
 
 Before you can use fixtures you should double check that your ``phpunit.xml``

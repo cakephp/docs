@@ -87,13 +87,13 @@ CakePHP использует мендежер зависимостей PHP `Comp
 
 .. code-block:: bash
 
-    php composer.phar create-project --prefer-dist cakephp/app my_app_name
+    php composer.phar create-project --prefer-dist cakephp/app:4.* my_app_name
 
 Или если Composer установлен глобально:
 
 .. code-block:: bash
 
-    composer self-update && composer create-project --prefer-dist cakephp/app my_app_name
+    composer self-update && composer create-project --prefer-dist cakephp/app:4.* my_app_name
 
 Как только Composer закончит скачивание каркаса приложения и библиотеки ядра
 CakePHP, у вас должно появиться полностью работоспособное приложение CakePHP.
@@ -102,7 +102,7 @@ composer.json и composer.lock.
 
 Вы можете перейти по тому пути, куда установлено ваше приложение CakePHP и
 вы увидите стандартную домашнюю страницу. Чтобы изменить ее содержимое, вы
-можете отредактировать файл **src/Template/Pages/home.ctp**.
+можете отредактировать файл **templates/Pages/home.php**.
 
 Несмотря на то, что composer является рекомендуемым методом установки,
 имеются также готовые сборки доступные для скачивания на

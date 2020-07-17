@@ -6,7 +6,7 @@ Console Commands
 In addition to a web framework, CakePHP also provides a console framework for
 creating command line tools & applications. Console applications are ideal for
 handling a variety of background & maintenance tasks that leverage your existing
-application configuratino, models, plugins and domain logic.
+application configuration, models, plugins and domain logic.
 
 CakePHP provides several console tools for interacting with CakePHP features
 like i18n and routing that enable you to introspect your application and
@@ -15,7 +15,7 @@ generate related files.
 The CakePHP Console
 ===================
 
-The CakePHP Console uses a dispatcher-type system to load a commands, parse
+The CakePHP Console uses a dispatcher-type system to load commands, parse
 their arguments and invoke the correct command. While the examples below use
 bash the CakePHP console is compatible with any \*nix shell and windows.
 
@@ -64,13 +64,14 @@ rename commands that are exposed::
     // in src/Application.php
     namespace App;
 
-    use App\Shell\UserShell;
-    use App\Shell\VersionShell;
+    use App\Command\UserCommand;
+    use App\Command\VersionCommand;
+    use Cake\Console\CommandCollection;
     use Cake\Http\BaseApplication;
 
     class Application extends BaseApplication
     {
-        public function console($commands)
+        public function console(CommandCollection $commands): CommandCollection
         {
             // Add by classname
             $commands->add('user', UserCommand::class);
@@ -103,7 +104,7 @@ do this, you can register your commands to create any desired naming.
 
 You can customize the command names by defining each command in your plugin::
 
-    public function console($commands)
+    public function console(CommandCollection $commands): CommandCollection
     {
         // Add commands with nested naming
         $commands->add('user dump', UserDumpCommand::class)

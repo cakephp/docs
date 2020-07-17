@@ -15,10 +15,11 @@ Let's create our first Command. For this example, we'll create a
 simple Hello world command. In your application's **src/Command** directory create
 **HelloCommand.php**. Put the following code inside it::
 
+    <?php
     namespace App\Command;
 
+    use Cake\Command\Command;
     use Cake\Console\Arguments;
-    use Cake\Console\Command;
     use Cake\Console\ConsoleIo;
 
     class HelloCommand extends Command
@@ -44,16 +45,17 @@ You should see the following output::
 Our ``execute()`` method isn't very interesting let's read some input from the
 command line::
 
+    <?php
     namespace App\Command;
 
+    use Cake\Command\Command;
     use Cake\Console\Arguments;
-    use Cake\Console\Command;
     use Cake\Console\ConsoleIo;
     use Cake\Console\ConsoleOptionParser;
 
     class HelloCommand extends Command
     {
-        protected function buildOptionParser(ConsoleOptionParser $parser)
+        protected function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
         {
             $parser->addArgument('name', [
                 'help' => 'What is your name'
@@ -78,6 +80,21 @@ After saving this file, you should be able to run the following command:
     # Outputs
     Hello jillian
 
+Changing the Default Command Name
+=================================
+
+CakePHP will use conventions to generate the name your commands use on the
+command line. If you want to overwrite the generated name implement the
+``defaultName()`` method in your command::
+
+    public static function defaultName(): string
+    {
+        return 'oh_hi';
+    }
+
+The above would make our ``HelloCommand`` accessible by ``cake oh_hi`` instead
+of ``cake hello``.
+
 Defining Arguments and Options
 ==============================
 
@@ -86,7 +103,7 @@ method to define arguments. We can also define options. For example, we could
 add a ``yell`` option to our ``HelloCommand``::
 
     // ...
-    protected function buildOptionParser(ConsoleOptionParser $parser)
+    protected function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
     {
         $parser
             ->addArgument('name', [
@@ -126,19 +143,20 @@ commands.  You can load models in commands, just as you would in a controller
 using ``loadModel()``. The loaded models are set as properties attached to your
 commands::
 
+    <?php
     namespace App\Command;
 
+    use Cake\Command\Command;
     use Cake\Console\Arguments;
-    use Cake\Console\Command;
     use Cake\Console\ConsoleIo;
     use Cake\Console\ConsoleOptionParser;
 
     class UserCommand extends Command
     {
         // Base Command will load the Users model with this property defined.
-        public $modelClass = 'Users';
+        protected $modelClass = 'Users';
 
-        protected function buildOptionParser(ConsoleOptionParser $parser)
+        protected function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
         {
             $parser
                 ->addArgument('name', [
@@ -148,12 +166,14 @@ commands::
             return $parser;
         }
 
-        public function execute(Arguments $args, ConsoleIo $io)
+        public function execute(Arguments $args, ConsoleIo $io): ?int
         {
             $name = $args->getArgument('name');
             $user = $this->Users->findByUsername($name)->first();
 
             $io->out(print_r($user, true));
+
+            return null;
         }
     }
 
@@ -174,6 +194,17 @@ to terminate execution::
             // Halt execution, output to stderr, and set exit code to 1
             $io->error('Name must be at least 4 characters long.');
             $this->abort();
+        }
+    }
+
+You can also use ``abort()`` on the ``$io`` object to emit a message and code::
+
+    public function execute(Arguments $args, ConsoleIo $io)
+    {
+        $name = $args->getArgument('name');
+        if (strlen($name) < 5) {
+            // Halt execution, output to stderr, and set exit code to 99
+            $io->abort('Name must be at least 4 characters long.', 99);
         }
     }
 
@@ -202,10 +233,6 @@ You may need to call other commands from your command. You can use
     $command = new OtherCommand($otherArgs);
     $this->executeCommand($command, ['--verbose', 'deploy']);
 
-
-.. versionadded:: 3.8.0
-    ``executeCommand()`` was added.
-
 .. _console-integration-testing:
 
 Testing Commands
@@ -225,14 +252,14 @@ Let's start with a very simple command, located in
 
     namespace App\Command;
 
+    use Cake\Command\Command;
     use Cake\Console\Arguments;
-    use Cake\Console\Command;
     use Cake\Console\ConsoleIo;
     use Cake\Console\ConsoleOptionParser;
 
     class UpdateTableCommand extends Command
     {
-        protected function buildOptionParser(ConsoleOptionParser $parser)
+        protected function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
         {
             $parser->setDescription('My cool console app');
 
@@ -254,7 +281,7 @@ moment, but let's just test that our shell's description is displayed in ``stdou
     {
         use ConsoleIntegrationTestTrait;
 
-        public function setUp()
+        public function setUp(): void
         {
             parent::setUp();
             $this->useCommandRunner();
@@ -273,15 +300,15 @@ adding more logic to our command::
 
     namespace App\Command;
 
+    use Cake\Command\Command;
     use Cake\Console\Arguments;
-    use Cake\Console\Command;
     use Cake\Console\ConsoleIo;
     use Cake\Console\ConsoleOptionParser;
     use Cake\I18n\FrozenTime;
 
     class UpdateTableCommand extends Command
     {
-        protected function buildOptionParser(ConsoleOptionParser $parser)
+        protected function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
         {
             $parser
                 ->setDescription('My cool console app')
@@ -311,9 +338,8 @@ Modify your test case to the following snippet of code::
 
     namespace Cake\Test\TestCase\Command;
 
-    use Cake\Console\Command;
+    use Cake\Command\Command;
     use Cake\I18n\FrozenTime;
-    use Cake\ORM\TableRegistry;
     use Cake\TestSuite\ConsoleIntegrationTestTrait;
     use Cake\TestSuite\TestCase;
 
@@ -321,7 +347,7 @@ Modify your test case to the following snippet of code::
     {
         use ConsoleIntegrationTestTrait;
 
-        public $fixtures = [
+        protected $fixtures = [
             // assumes you have a UsersFixture
             'app.Users'
         ];
@@ -342,7 +368,7 @@ Modify your test case to the following snippet of code::
             $this->exec('update_table Users');
             $this->assertExitCode(Command::CODE_SUCCESS);
 
-            $user = TableRegistry::get('Users')->get(1);
+            $user = $this->getTableLocator()->get('Users')->get(1);
             $this->assertSame($user->modified->timestamp, $now->timestamp);
 
             FrozenTime::setTestNow(null);
@@ -371,15 +397,15 @@ Update the command class to the following::
 
     namespace App\Command;
 
+    use Cake\Command\Command;
     use Cake\Console\Arguments;
-    use Cake\Console\Command;
     use Cake\Console\ConsoleIo;
     use Cake\Console\ConsoleOptionParser;
     use Cake\I18n\FrozenTime;
 
     class UpdateTableCommand extends Command
     {
-        protected function buildOptionParser(ConsoleOptionParser $parser)
+        protected function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
         {
             $parser
                 ->setDescription('My cool console app')
@@ -424,7 +450,7 @@ incorrect response. Remove the ``testUpdateModified`` method and, add the follow
         $this->exec('update_table Users', ['y']);
         $this->assertExitCode(Command::CODE_SUCCESS);
 
-        $user = TableRegistry::get('Users')->get(1);
+        $user = $this->getTableLocator()->get('Users')->get(1);
         $this->assertSame($user->modified->timestamp, $now->timestamp);
 
         FrozenTime::setTestNow(null);
@@ -432,14 +458,14 @@ incorrect response. Remove the ``testUpdateModified`` method and, add the follow
 
     public function testUpdateModifiedUnsure()
     {
-        $user = TableRegistry::get('Users')->get(1);
+        $user = $this->getTableLocator()->get('Users')->get(1);
         $original = $user->modified->timestamp;
 
         $this->exec('my_console best_framework', ['n']);
         $this->assertExitCode(Command::CODE_ERROR);
         $this->assertErrorContains('You need to be sure.');
 
-        $user = TableRegistry::get('Users')->get(1);
+        $user = $this->getTableLocator()->get('Users')->get(1);
         $this->assertSame($original, $user->timestamp);
     }
 
@@ -461,6 +487,12 @@ Assertion methods
 
 The ``Cake\TestSuite\ConsoleIntegrationTestTrait`` trait provides a number of
 assertion methods that make it easy to assert against console output::
+
+    // assert that the shell exited as success
+    $this->assertExitSuccess();
+
+    // assert that the shell exited as an error
+    $this->assertExitError();
 
     // assert that the shell exited with the expected code
     $this->assertExitCode($expected);

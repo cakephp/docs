@@ -13,7 +13,7 @@ interação com modelos, lógica de visualização, e lógica de renderizaço. U
 seria o carinho em uma loja online, ou um menu de navegação *data-driven* em um CMS.
 
 Para criar uma *cell*, defina uma classe em **src/View/Cell** e um *template*
-em **src/Template/Cell/**. Nesse exemplo, nós estaremos fazendo uma *cell* para exibir
+em **templates/cell/**. Nesse exemplo, nós estaremos fazendo uma *cell* para exibir
 o número de mensagens em uma caixa de notificações do usuário. Primeiro, crie o arquivo da
 classe. O seu conteúdo deve se parecer com::
 
@@ -40,14 +40,14 @@ outras classes no CakePHP, *Cells* tem algumas convenções:
 
 Nós adicionamos um método ``display()`` vazio para nossa *cell*; esse é o método padrão
 convencional quando a *cell* é renderizada. Nós vamos abordar o uso de outros métodos
-mais tarde na documentaço. Agora, crie o arquivo **src/Template/Cell/Inbox/display.ctp**.
+mais tarde na documentação. Agora, crie o arquivo **templates/cell/Inbox/display.php**.
 Esse será nosso *template* para a nossa nova *cell*.
 
 Vocẽ pode gerar este esboço de código rapidamente usando o ``bake``::
 
     bin/cake bake cell Inbox
 
-Gera o cdigo que digitamos acima.
+Gera o código que digitamos acima.
 
 Implementando a *Cell*
 ----------------------
@@ -77,7 +77,7 @@ Porque as *Cells* usam o ``ModelAwareTrait`` e o ``ViewVarsTrait``, Elas tem um 
 muito parecido com um *controller*. Nós podemos usar os métodos ``loadModel()`` e ``set()``
 como faríamos em um *controller*. Em nosso arquivo de *template*, adicione o seguinte::
 
-    <!-- src/Template/Cell/Inbox/display.ctp -->
+    <!-- templates/cell/Inbox/display.php -->
     <div class="notification-icon">
         Você tem <?= $unread_count ?> mensagen não lidas.
     </div>
@@ -102,7 +102,7 @@ forma em ambos os contextos::
     $cell = $this->cell('Messaging.Inbox');
 
 O código acima irá carregar a célula nomeada e executar o método ``display()``.
-Você pode executar outros método usando o seguinte::
+Você pode executar outros métodos usando o seguinte::
 
     // Executa o método *Run* na *cell* *Inbox*
     $cell = $this->cell('Inbox::expanded');
@@ -146,7 +146,7 @@ para renderizar uma *cell* é dando um *echo*::
     <?= $cell ?>
 
 Isso irá renderizar o *template* correspondente a versão minuscula e separada com underscore do nome da
-nossa action, e.g. **display.ctp**.
+nossa action, e.g. **display.php**.
 
 Porque as *cells* usam ``View`` para renderizar *templates*, você pode carregar *cells* adicionais
 dentro do template da *cell* se necessário.
@@ -162,7 +162,7 @@ Renderizando template alternativos
 ----------------------------------
 
 Por convenção *cells* renderizam *templates* que correspondem a *action* que está sendo executada.
-Se você precisar renderizar um *template* de visualizaço diferente, você pode especificar o *template*
+Se você precisar renderizar um *template* de visualização diferente, você pode especificar o *template*
 para usar quando estiver renderizando a *cell*::
 
     // Chamando render() explicitamente

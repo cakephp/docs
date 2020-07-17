@@ -45,12 +45,10 @@ method::
 
     class ArticlesTable extends Table
     {
-
         public function initialize(array $config): void
         {
             $this->setTable('my_table');
         }
-
     }
 
 No inflection conventions will be applied when specifying a table. By convention
@@ -94,17 +92,16 @@ Getting Instances of a Table Class
 ----------------------------------
 
 Before you can query a table, you'll need to get an instance of the table. You
-can do this by using the ``TableRegistry`` class::
+can do this by using the ``TableLocator`` class::
 
-    // In a controller or table method.
-    use Cake\ORM\TableRegistry;
+    // In a controller
 
-    $articles = TableRegistry::getTableLocator()->get('Articles');
+    $articles = $this->getTableLocator()->get('Articles');
 
-The TableRegistry class provides the various dependencies for constructing
+``TableLocator`` provides the various dependencies for constructing
 a table, and maintains a registry of all the constructed table instances making
 it easier to build relations and configure the ORM. See
-:ref:`table-registry-usage` for more information.
+:ref:`table-locator-usage` for more information.
 
 If your table class is in a plugin, be sure to use the correct name for your
 table class. Failing to do so can result in validation rules, or callbacks not
@@ -112,10 +109,10 @@ being triggered as a default class is used instead of your actual class. To
 correctly load plugin table classes use the following::
 
     // Plugin table
-    $articlesTable = TableRegistry::getTableLocator()->get('PluginName.Articles');
+    $articlesTable = $this->getTableLocator()->get('PluginName.Articles');
 
     // Vendor prefixed plugin table
-    $articlesTable = TableRegistry::getTableLocator()->get('VendorName/PluginName.Articles');
+    $articlesTable = $this->getTableLocator()->get('VendorName/PluginName.Articles');
 
 .. _table-callbacks:
 
@@ -141,6 +138,7 @@ Event List
 
 * ``Model.initialize``
 * ``Model.beforeMarshal``
+* ``Model.afterMarshal``
 * ``Model.beforeFind``
 * ``Model.buildValidator``
 * ``Model.buildRules``
@@ -170,10 +168,11 @@ which implements ``EventListenerInterface``::
     {
         public function implementedEvents()
         {
-            return array(
+            return [
                 'Model.initialize' => 'initializeEvent',
-            );
+            ];
         }
+
         public function initializeEvent($event): void
         {
             $table = $event->getSubject();
@@ -197,23 +196,49 @@ beforeMarshal
 The ``Model.beforeMarshal`` event is fired before request data is converted
 into entities. See the :ref:`before-marshal` documentation for more information.
 
+afterMarshal
+-------------
+
+.. php:method:: afterMarshal(EventInterface $event, EntityInterface $entity, ArrayObject $data, ArrayObject $options)
+
+The ``Model.afterMarshal`` event is fired after request data is converted
+into entities. Event handlers will get the converted entities, original request
+data and the options provided to the ``patchEntity()`` or ``newEntity()`` call.
+
+.. versionadded:: 4.1.0
+
 beforeFind
 ----------
 
 .. php:method:: beforeFind(EventInterface $event, Query $query, ArrayObject $options, $primary)
 
 The ``Model.beforeFind`` event is fired before each find operation. By stopping
-the event and supplying a return value you can bypass the find operation
-entirely. Any changes done to the $query instance will be retained for the rest
+the event, and feeding the query with a custom result set, you can bypass the find
+operation entirely::
+
+    public function beforeFind(EventInterface $event, Query $query, ArrayObject $options, $primary)
+    {
+        if (/* ... */) {
+            $event->stopPropagation();
+            $query->setResult(new \Cake\Datasource\ResultSetDecorator([]));
+
+            return;
+        }
+        // ...
+    }
+
+In this example, no further ``beforeFind`` events will be triggered on the
+related table or its attached behaviors (though behavior events are usually
+invoked earlier given their default priorities), and the query will return
+the empty result set that was passed via ``Query::setResult()``.
+
+Any changes done to the ``$query`` instance will be retained for the rest
 of the find. The ``$primary`` parameter indicates whether or not this is the root
 query, or an associated query. All associations participating in a query will
 have a ``Model.beforeFind`` event triggered. For associations that use joins,
 a dummy query will be provided. In your event listener you can set additional
 fields, conditions, joins or result formatters. These options/features will be
 copied onto the root query.
-
-You might use this callback to restrict find operations based on a user's role,
-or make caching decisions based on the current load.
 
 In previous versions of CakePHP there was an ``afterFind`` callback, this has
 been replaced with the :ref:`map-reduce` features and entity constructors.
@@ -260,7 +285,6 @@ beforeSave
 The ``Model.beforeSave`` event is fired before each entity is saved. Stopping
 this event will abort the save operation. When the event is stopped the result
 of the event will be returned.
-How to stop an event is documented :ref:`here <stopping-events>`.
 
 afterSave
 ---------
@@ -288,7 +312,6 @@ beforeDelete
 The ``Model.beforeDelete`` event is fired before an entity is deleted. By
 stopping this event you will abort the delete operation. When the event is stopped the result
 of the event will be returned.
-How to stop an event is documented :ref:`here <stopping-events>`.
 
 afterDelete
 -----------
@@ -307,6 +330,22 @@ delete operation is wrapped has been is committed. It's also triggered for non
 atomic deletes where database operations are implicitly committed. The event is
 triggered only for the primary table on which ``delete()`` is directly called.
 The event is not triggered if a transaction is started before calling delete.
+
+Stopping Table Events
+---------------------
+To prevent the save from continuing, simply stop event propagation in your callback::
+
+    public function beforeSave(EventInterface $event, EntityInterface $entity, ArrayObject $options)
+    {
+        if (...) {
+            $event->stopPropagation();
+            $event->setResult(false);
+            return;
+        }
+        ...
+    }
+
+Alternatively, you can return false from the callback. This has the same effect as stopping event propagation.
 
 Callback priorities
 -------------------
@@ -338,7 +377,7 @@ You can manage event priorities in one of a few ways:
    ``Model.implementedEvents()`` method. This allows you to assign a different
    priority per callback-function::
 
-        // In a Table class. 
+        // In a Table class.
         public function implementedEvents()
         {
             $events = parent::implementedEvents();
@@ -419,7 +458,7 @@ tables use which connections. This is the ``defaultConnectionName()`` method::
 
     class ArticlesTable extends Table
     {
-        public static function defaultConnectionName() {
+        public static function defaultConnectionName(): string {
             return 'replica_db';
         }
     }
@@ -429,25 +468,26 @@ tables use which connections. This is the ``defaultConnectionName()`` method::
     The ``defaultConnectionName()`` method **must** be static.
 
 .. _table-registry-usage:
+.. _table-locator-usage:
 
-Using the TableRegistry
+Using the TableLocator
 =======================
 
-.. php:class:: TableRegistry
+.. php:class:: TableLocator
 
-As we've seen earlier, the TableRegistry class provides an easy way to use
+As we've seen earlier, the TableLocator class provides an easy way to use
 factory/registry for accessing your applications table instances. It provides a
 few other useful features as well.
 
 Configuring Table Objects
 -------------------------
 
-.. php:staticmethod:: get($alias, $config)
+.. php:method:: get($alias, $config)
 
 When loading tables from the registry you can customize their dependencies, or
 use mock objects by providing an ``$options`` array::
 
-    $articles = TableRegistry::get('Articles', [
+    $articles = FactoryLocator::get('Table')->get('Articles', [
         'className' => 'App\Custom\ArticlesTable',
         'table' => 'my_articles',
         'connection' => $connectionObject,
@@ -470,7 +510,7 @@ You can also pre-configure the registry using the ``setConfig()`` method.
 Configuration data is stored *per alias*, and can be overridden by an object's
 ``initialize()`` method::
 
-    TableRegistry::getTableLocator()->setConfig('Users', ['table' => 'my_users']);
+    FactoryLocator::get('Table')->setConfig('Users', ['table' => 'my_users']);
 
 .. note::
 
@@ -478,20 +518,15 @@ Configuration data is stored *per alias*, and can be overridden by an object's
     access that alias. Doing it after the registry is populated will have no
     effect.
 
-.. note::
-
-    Static API of `Cake\ORM\TableRegistry` has been deprecated in 3.6.0. 
-    Use a table locator directly instead.
-
 Flushing the Registry
 ---------------------
 
-.. php:staticmethod:: clear()
+.. php:method:: clear()
 
 During test cases you may want to flush the registry. Doing so is often useful
 when you are using mock objects, or modifying a table's dependencies::
 
-    TableRegistry::clear();
+    FactoryLocator::get('Table')->clear();
 
 Configuring the Namespace to Locate ORM classes
 -----------------------------------------------

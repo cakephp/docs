@@ -110,6 +110,9 @@ application's ``bootstrap()`` function::
 
             // Load a plugin with a vendor namespace by 'short name'
             $this->addPlugin('AcmeCorp/ContactManager');
+
+            // Load a dev dependency that will not exist in production builds.
+            $this->addOptionalPlugin('AcmeCorp/ContactManager');
         }
     }
 
@@ -125,6 +128,9 @@ line:
 
 This would update your application's bootstrap method, or put the
 ``$this->addPlugin('ContactManager');`` snippet in the bootstrap for you.
+
+.. versionadded:: 4.1.0
+    The ``addOptionalPlugin()`` method was added.
 
 .. _plugin-configuration:
 
@@ -150,7 +156,7 @@ appliation::
 
     // In Application::bootstrap()
     use ContactManager\Plugin as ContactManagerPlugin;
-    
+
     // Disable routes for the ContactManager plugin
     $this->addPlugin(ContactManagerPlugin::class, ['routes' => false]);
 
@@ -159,7 +165,7 @@ classes::
 
     // In Application::bootstrap()
     use ContactManager\Plugin as ContactManagerPlugin;
-    
+
     // Use the disable/enable to configure hooks.
     $plugin = new ContactManagerPlugin();
 
@@ -187,10 +193,10 @@ helpers by prefixing the name of the plugin.
 
 For example, say you wanted to use the ContactManager plugin's
 ContactInfoHelper to output formatted contact information in
-one of your views. In your controller, ``setHelpers()``
+one of your views. In your controller, using ``addHelper()``
 could look like this::
 
-    $this->viewBuilder()->setHelpers(['ContactManager.ContactInfo']);
+    $this->viewBuilder()->addHelper('ContactManager.ContactInfo');
 
 .. note::
     This dot separated class name is referred to as :term:`plugin syntax`.
@@ -298,12 +304,16 @@ like::
         public function middleware($middleware)
         {
             // Add middleware here.
+            $middleware = parent::middleware($middleware);
+
             return $middleware;
         }
 
         public function console($commands)
         {
             // Add console commands here.
+            $commands = parent::console($commands);
+
             return $commands;
         }
 
@@ -337,7 +347,7 @@ ContactManager plugin routes, put the following into
     use Cake\Routing\Route\DashedRoute;
     use Cake\Routing\Router;
 
-    Router:{plugin}(
+    Router::plugin(
         'ContactManager',
         ['path' => '/contact-manager'],
         function ($routes) {
@@ -495,12 +505,12 @@ prefix on them, use the alternative syntax::
         }
     }
 
-You can use ``TableRegistry`` to load your plugin tables using the familiar
+You can use ``Cake\ORM\TableLocator`` to load your plugin tables using the familiar
 :term:`plugin syntax`::
 
-    use Cake\ORM\TableRegistry;
+    use Cake\ORM\Locator\LocatorAwareTrait;
 
-    $contacts = TableRegistry::getTableLocator()->get('ContactManager.Contacts');
+    $contacts = $this->getTableLocator()->get('ContactManager.Contacts');
 
 Alternatively, from a controller context, you can use::
 
@@ -556,7 +566,7 @@ Creating this file would allow you to override
 
 If the plugin implements a routing prefix, you must include the routing prefix
 in your application template overrides. For example, if the 'ContactManager'
-plugin implemented an 'admin' prefix the overridng path would be::
+plugin implemented an 'Admin' prefix the overridng path would be::
 
     templates/plugin/ContactManager/Admin/ContactManager/index.php
 

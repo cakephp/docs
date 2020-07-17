@@ -97,17 +97,152 @@ Request Body Data
 
 .. php:method:: getData($name, $default = null)
 
-All POST data can be accessed using
-:php:meth:`Cake\\Http\\ServerRequest::getData()`.  Any form data that
-contains a ``data`` prefix will have that data prefix removed. For example::
+All POST data normally available through PHP's ``$_POST`` global variable can be 
+accessed using :php:meth:`Cake\\Http\\ServerRequest::getData()`. For example::
 
-    // An input with a name attribute equal to 'MyModel[title]' is accessible at
-    $title = $this->request->getData('MyModel.title');
+    // An input with a name attribute equal to 'title' is accessible at
+    $title = $this->request->getData('title');
 
-Any keys that do not exist will return ``null``::
+You can use a dot separated names to access nested data. For example::
 
-    $foo = $this->request->getData('Value.that.does.not.exist');
+    $value = $this->request->getData('address.street_name');
+
+For non-existent names the ``$default`` value will be returned::
+
+    $foo = $this->request->getData('value.that.does.not.exist');
     // $foo == null
+
+You can also use :ref:`body-parser-middleware` to parse request body of different
+content types into an array, so that it's accessible through ``ServerRequest::getData()``.
+
+If you want to access all the data parameters you can use
+``getParsedBody()``::
+
+    $data = $this->request->getParsedBody();
+    
+.. _request-file-uploads:
+
+File Uploads
+------------
+
+Uploaded files can be accessed through the request body data, using the :php:meth:`Cake\\Http\\ServerRequest::getData()`
+method described above. For example, a file from an input element with a name attribute of ``attachment``, can
+be accessed like this::
+
+    $attachment = $this->request->getData('attachment');
+
+By default file uploads are represented in the request data as objects that implement
+`\\Psr\\Http\\Message\\UploadedFileInterface <https://www.php-fig.org/psr/psr-7/#16-uploaded-files>`__. In the current
+implementation, the ``$attachment`` variable in the above example would by default hold an instance of
+``\Laminas\Diactoros\UploadedFile``.
+
+Accessing the uploaded file details is fairly simple, here's how you can obtain the same data as provided by the old
+style file upload array::
+
+    $name = $attachment->getClientFilename();
+    $type = $attachment->getClientMediaType();
+    $size = $attachment->getSize();
+    $tmpName = $attachment->getStream()->getMetadata('uri');
+    $error = $attachment->getError();
+
+Moving the uploaded file from its temporary location to the desired target location, doesn't require manually accessing
+the temporary file, instead it can be easily done by using the objects ``moveTo()`` method::
+
+    $attachment->moveTo($targetPath);
+
+In an HTTP environment, the ``moveTo()`` method will automatically validate whether the file is an actual uploaded file,
+and throw an exception in case necessary. In an CLI environment, where the concept of uploading files doesn't exist, it
+will allow to move the file that you've referenced irrespective of its origins, which makes testing file uploads really
+easy.
+
+In order to switch back to using file upload arrays instead, set the configuration value ``App.uploadedFilesAsObjects``
+to ``false``, for example in your ``config/app.php`` file::
+
+    return [
+        // ...
+        'App' => [
+            // ...
+            'uploadedFilesAsObjects' => false,
+        ],
+        // ...
+    ];
+
+With the option disabled, the file uploads are represented in the request data as arrays, with a normalized structure
+that remains the same even for nested inputs/names, which is different from how PHP represents them in the ``$_FILES``
+superglobal (refer to `the PHP manual <https://www.php.net/manual/en/features.file-upload.php>`__ for more information),
+ie the ``$attachment`` value would look something like this::
+
+    [
+        'name' => 'attachment.txt',
+        'type' => 'text/plain',
+        'size' => 123,
+        'tmp_name' => '/tmp/hfz6dbn.tmp'
+        'error' => 0
+    ]
+
+.. tip::
+
+    Uploaded files can also be accessed as objects separately from the request data via the
+    :php:meth:`Cake\\Http\\ServerRequest::getUploadedFile()` and
+    :php:meth:`Cake\\Http\\ServerRequest::getUploadedFiles()` methods. These methods will always return objects,
+    irrespectively of the ``App.uploadedFilesAsObjects`` configuration.
+
+
+.. php:method:: getUploadedFile($path)
+
+Returns the uploaded file at a specific path. The path uses the same dot syntax as the
+:php:meth:`Cake\\Http\\ServerRequest::getData()` method::
+
+    $attachment = $this->request->getUploadedFile('attachment');
+
+Unlike :php:meth:`Cake\\Http\\ServerRequest::getData()`, :php:meth:`Cake\\Http\\ServerRequest::getUploadedFile()` would
+only return data when an actual file upload exists for the given path, if there is regular, non-file request body data
+present at the given path, then this method will return ``null``, just like it would for any non-existent path.
+
+.. php:method:: getUploadedFiles()
+
+Returns all uploaded files in a normalized array structure. For the above example with the file input name of
+``attachment``, the structure would look like::
+
+    [
+          'attachment' => object(Laminas\Diactoros\UploadedFile) {
+              // ...
+          }
+    ]
+
+.. php:method:: withUploadedFiles(array $files)
+
+This method sets the uploaded files of the request object, it accepts an array of objects that implement
+`\\Psr\\Http\\Message\\UploadedFileInterface <https://www.php-fig.org/psr/psr-7/#16-uploaded-files>`__. It will
+replace all possibly existing uploaded files::
+
+    $files = [
+        'MyModel' => [
+            'attachment' => new \Laminas\Diactoros\UploadedFile(
+                $streamOrFile,
+                $size,
+                $errorStatus,
+                $clientFilename,
+                $clientMediaType
+            ),
+            'anotherAttachment' => new \Laminas\Diactoros\UploadedFile(
+                '/tmp/hfz6dbn.tmp',
+                123,
+                \UPLOAD_ERR_OK,
+                'attachment.txt',
+                'text/plain'
+            ),
+        ],
+    ];
+
+    $this->request = $this->request->withUploadedFiles($files);
+
+.. note::
+
+    Uploaded files that have been added to the request via this method, will *not* be available in the request body
+    data, ie you cannot retrieve them via :php:meth:`Cake\\Http\\ServerRequest::getData()`! If you need them in the
+    request data (too), then you have to set them via :php:meth:`Cake\\Http\\ServerRequest::withData()` or
+    :php:meth:`Cake\\Http\\ServerRequest::withParsedBody()`.
 
 PUT, PATCH or DELETE Data
 -------------------------
@@ -199,10 +334,12 @@ conditions, as well as inspect other application specific request criteria::
 
 You can also extend the request detectors that are available, by using
 :php:meth:`Cake\\Http\\ServerRequest::addDetector()` to create new kinds of
-detectors. There are four different types of detectors that you can create:
+detectors. There are different types of detectors that you can create:
 
 * Environment value comparison - Compares a value fetched from :php:func:`env()`
   for equality with the provided value.
+* Header value comparison - If the specified header exists with the specified
+  value, or if the callable returns true.
 * Pattern value comparison - Pattern value comparison allows you to compare a
   value fetched from :php:func:`env()` to a regular expression.
 * Option based comparison -  Option based comparisons use a list of options to
@@ -234,6 +371,21 @@ Some examples would be::
         'options' => ['192.168.0.101', '192.168.0.100']
     ]);
 
+
+    // Add a header detector with value comparison
+    $this->request->addDetector('fancy', [
+        'env' => 'CLIENT_IP',
+        'header' => ['X-Fancy' => 1]
+    ]);
+
+    // Add a header detector with callable comparison
+    $this->request->addDetector('fancy', [
+        'env' => 'CLIENT_IP',
+        'header' => ['X-Fancy' => function ($value, $header) {
+            return in_array($value, ['1', '0', 'yes', 'no'], true);
+        }]
+    ]);
+
     // Add a callback detector. Must be a valid callable.
     $this->request->addDetector(
         'awesome',
@@ -244,17 +396,13 @@ Some examples would be::
 
     // Add a detector that uses additional arguments.
     $this->request->addDetector(
-        'controller',
-        function ($request, $name) {
-            return $request->getParam('controller') === $name;
-        }
+        'csv',
+        [
+            'accept' => ['text/csv'],
+            'param' => '_ext',
+            'value' => 'csv',
+        ]
     );
-
-``Request`` also includes methods like
-:php:meth:`Cake\\Http\\ServerRequest::domain()`,
-:php:meth:`Cake\\Http\\ServerRequest::subdomains()` and
-:php:meth:`Cake\\Http\\ServerRequest::host()` to help applications with subdomains,
-have a slightly easier life.
 
 There are several built-in detectors that you can use:
 
@@ -269,12 +417,16 @@ There are several built-in detectors that you can use:
   X-Requested-With = XMLHttpRequest.
 * ``is('ssl')`` Check to see whether the request is via SSL.
 * ``is('flash')`` Check to see whether the request has a User-Agent of Flash.
-* ``is('requested')`` Check to see whether the request has a query param
-  'requested' with value 1.
 * ``is('json')`` Check to see whether the request has 'json' extension and
   accept 'application/json' mimetype.
 * ``is('xml')`` Check to see whether the request has 'xml' extension and accept
   'application/xml' or 'text/xml' mimetype.
+
+``ServerRequest`` also includes methods like
+:php:meth:`Cake\\Http\\ServerRequest::domain()`,
+:php:meth:`Cake\\Http\\ServerRequest::subdomains()` and
+:php:meth:`Cake\\Http\\ServerRequest::host()` to make applications that use
+subdomains simpler.
 
 Session Data
 ------------
@@ -449,8 +601,8 @@ to work with cookie collection.
 Uploaded Files
 --------------
 
-Requests expose the uploaded file data in ``getData()`` as
-arrays, and as ``UploadedFileInterface`` objects by ``getUploadedFiles()``::
+Requests expose the uploaded file data in ``getData()`` or
+``getUploadedFiles()`` as ``UploadedFileInterface`` objects::
 
     // Get a list of UploadedFile objects
     $files = $request->getUploadedFiles();
@@ -639,17 +791,17 @@ To set a string as the response body, do the following::
 .. php:method:: withBody($body)
 
 To set the response body, use the ``withBody()`` method, which is provided by the
-:php:class:`Zend\\Diactoros\\MessageTrait`::
+:php:class:`Laminas\\Diactoros\\MessageTrait`::
 
     $response = $response->withBody($stream);
 
 Be sure that ``$stream`` is a :php:class:`Psr\\Http\\Message\\StreamInterface` object.
 See below on how to create a new stream.
 
-You can also stream responses from files using :php:class:`Zend\\Diactoros\\Stream` streams::
+You can also stream responses from files using :php:class:`Laminas\\Diactoros\\Stream` streams::
 
     // To stream from a file
-    use Zend\Diactoros\Stream;
+    use Laminas\Diactoros\Stream;
 
     $stream = new Stream('/path/to/file', 'rb');
     $response = $response->withBody($stream);
@@ -814,10 +966,17 @@ To take advantage of this header, you must either call the
     public function index()
     {
         $articles = $this->Articles->find('all');
-        $response = $this->response->withEtag($this->Articles->generateHash($articles));
+
+        // Simple checksum of the article contents.
+        // You should use a more efficient implementation
+        // in a real world application.
+        $checksum = md5(json_encode($articles));
+
+        $response = $this->response->withEtag($checksum);
         if ($response->checkNotModified($this->request)) {
             return $response;
         }
+
         $this->response = $response;
         // ...
     }
@@ -892,21 +1051,24 @@ object::
     use DateTime;
 
     // Add a cookie
-    $this->response = $this->response->withCookie(new Cookie(
+    $this->response = $this->response->withCookie(Cookie::create(
         'remember_me',
         'yes',
-        new DateTime('+1 year'), // expiration time
-        '/', // path
-        '', // domain
-        false, // secure
-        true // httponly
+        // All keys are optional
+        [
+            'expires' => new DateTime('+1 year'),
+            'path' => '',
+            'domain' => '',
+            'secure' => false,
+            'http' => false,
+        ]
     ]);
 
 See the :ref:`creating-cookies` section for how to use the cookie object. You
 can use ``withExpiredCookie()`` to send an expired cookie in the response. This
 will make the browser remove its local cookie::
 
-    $this->response = $this->response->withExpiredCookie('remember_me');
+    $this->response = $this->response->withExpiredCookie(new Cookie('remember_me'));
 
 .. _cors-headers:
 

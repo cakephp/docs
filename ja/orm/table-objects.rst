@@ -105,10 +105,8 @@
     // コントローラーやテーブルのメソッド内で
     use Cake\ORM\TableRegistry;
 
+    // Prior to 3.6 use TableRegistry::get('Articles')
     $articles = TableRegistry::getTableLocator()->get('Articles');
-
-    // 3.6.0 より前
-     $articles = TableRegistry::get('Articles');
 
 TableRegistry クラスはテーブルを作るための様々な依存関係を提供します。
 そして、作成されたすべてのテーブルインスタンスの設定を維持し、リレーションの構築と
@@ -120,15 +118,12 @@ ORM の設定を簡単にしてくれます。詳細は :ref:`table-registry-usa
 正しくロードするために、次のように使用してください。 ::
 
     // プラグインの Table
+    // Prior to 3.6 use TableRegistry::get('PluginName.Articles')
     $articlesTable = TableRegistry::getTableLocator()->get('PluginName.Articles');
 
     // ベンダープレフィックス付きのプラグイン Table
+    // Prior to 3.6 use TableRegistry::get('VendorName/PluginName.Articles')
     $articlesTable = TableRegistry::getTableLocator()->get('VendorName/PluginName.Articles');
-
-
-    // 3.6.0 より前
-    $articlesTable = TableRegistry::get('PluginName.Articles');
-    $articlesTable = TableRegistry::get('VendorName/PluginName.Articles');
 
 .. _table-callbacks:
 
@@ -213,16 +208,33 @@ beforeFind
 
 .. php:method:: beforeFind(Event $event, Query $query, ArrayObject $options, $primary)
 
-``Model.beforeFind`` イベントは各 find 操作の前に発行されます。イベントを止めて戻り値を返すことで
-find を完全にバイパスできます。 $query インスタンスに対してなされた全ての変更は find 処理の間
+``Model.beforeFind`` イベントは各 find 操作の前に発行されます。
+
+``Model.beforeFind`` イベントは、各検索操作の前に発生します。
+イベントを停止し、クエリにカスタム結果セットを渡すことにより、検索操作を完全にバイパスできます。::
+
+    public function beforeFind(EventInterface $event, Query $query, ArrayObject $options, $primary)
+    {
+        if (/* ... */) {
+            $event->stopPropagation();
+            $query->setResult(new \Cake\Datasource\ResultSetDecorator([]));
+
+            return;
+        }
+        // ...
+    }
+
+この例では、関連するテーブルまたはそのアタッチされたビヘイビアーで ``beforeFind``イベントはトリガーされません。
+ただし、振る舞いイベントは通常、デフォルトの優先順位が与えられているため、以前に呼び出されます。
+クエリは ``Query::setResult()`` を介して渡された空の結果セットを返します。
+
+イベントを止めて戻り値を返すことで find を完全にバイパスできます。 ``$query``
+インスタンスに対してなされた全ての変更は find 処理の間
 維持されます。 ``$primary`` パラメーターは、これがルートクエリーなのか、それともアソシエーションの
 クエリーなのかを示します。クエリーに含まれる全てのアソシエーションで ``Model.beforeFind``
 イベントが呼ばれます。 JOIN を使うアソシエーションに対しては、ダミーのクエリーが渡されます。
 イベントリスナーでは、追加のフィールド、検索条件、 JOIN や結果のフォーマッターを設定出来ます。
 これらのオプションや機能はルートクエリーにコピーされます。
-
-ユーザーの役職に基づいて find の操作を制限したり、現在の負荷状況に基づいてキャッシュの判断をしたり
-するために、このコールバックを利用できるかもしれません。
 
 CakePHP の旧バージョンでは ``afterFind`` コールバックがありましたが、 :ref:`map-reduce`
 機能とエンティティーのコンストラクターに置き換えられました。
@@ -410,7 +422,7 @@ TableRegistry の利用
 テーブルをレジストリーからロードする時に、依存関係をカスタマイズするか、
 ``$options`` 配列が用意するモックオブジェクトを使います。 ::
 
-    $articles = TableRegistry::get('Articles', [
+    $articles = TableRegistry::getTableLocator()->get('Articles', [
         'className' => 'App\Custom\ArticlesTable',
         'table' => 'my_articles',
         'connection' => $connectionObject,

@@ -464,7 +464,7 @@ PaginatorHelperのすべてのオプションを設定します。サポート�
 
 .. code-block:: php
 
-    <!-- src/Template/Posts/index.ctp -->
+    <!-- templates/Posts/index.php -->
     <table>
         <tr>
             <th><?= $this->Paginator->sort('id', 'ID') ?></th>
@@ -502,18 +502,18 @@ PaginatorHelperのすべてのオプションを設定します。サポート�
 
     関連するモデルでカラムをソートするには、 ``PaginationComponent::paginate``
     プロパティーで設定する必要があります。上記の例を使用すると、
-    ページ制御を処理するコントローラーは、次のように ``sortWhitelist`` キーを設定する必要があります。
+    ページ制御を処理するコントローラーは、次のように ``sortableFields`` キーを設定する必要があります。
     
     .. code-block:: php
     
         $this->paginate = [
-            'sortWhitelist' => [
+            'sortableFields' => [
                 'Posts.title',
                 'Authors.name',
             ],
         ];
         
-    ``sortWhitelist`` オプションの使い方の詳細については、
+    ``sortableFields`` オプションの使い方の詳細については、
     :ref:`control-which-fields-used-for-ordering` をご覧ください。
 
 ビューにおけるページ制御の表示に関する最後のネタは、

@@ -16,14 +16,14 @@ FlashComponent はフラッシュメッセージを ``$_SESSION`` に書き込�
 FlashComponent は、フラッシュメッセージの設定に２つの方法を用意しています。
 ひとつは、 ``__call()`` マジックメソッドで、もうひとつは ``set()`` メソッドです。
 アプリケーションをより様々な表現を用いて利用するためには、 FlashComponent の ``__call()``
-マジックメソッドを利用することで **src/Template/Element/Flash** ディレクトリー以下に配置された
+マジックメソッドを利用することで **templates/element/flash** ディレクトリー以下に配置された
 エレメントをマッピングしたメソッド名を使用することができます。規約により、キャメルケース形式の
 メソッドは、小文字でアンダースコアー区切りのエレメント名に置き換えられます。 ::
 
-    // src/Template/Element/Flash/success.ctp を使用
+    // templates/element/flash/success.php を使用
     $this->Flash->success('This was successful');
 
-    // src/Template/Element/Flash/great_success.ctp を使用
+    // templates/element/flash/great_success.php を使用
     $this->Flash->greatSuccess('This was greatly successful');
 
 あるいは、エレメントをレンダリングしないで平文メッセージを設定するためには、
@@ -65,7 +65,7 @@ FlashComponent の ``__call()`` および ``set()`` メソッドは任意に第2
     // ビューの中で
     <?= $this->Flash->render('positive') ?>
 
-    <!-- src/Template/Element/Flash/success.ctp の中で -->
+    <!-- templates/element/flash/success.php の中で -->
     <div id="flash-<?= h($key) ?>" class="message-info success">
         <?= h($message) ?>: <?= h($params['name']) ?>, <?= h($params['email']) ?>.
     </div>
@@ -77,8 +77,8 @@ FlashComponent の ``__call()`` および ``set()`` メソッドは任意に第2
     // コントローラーの中で
     $this->Flash->warning('My message', ['plugin' => 'PluginName']);
 
-上記のコードは **plugins/PluginName/src/Template/Element/Flash** 配下の
-**warning.ctp** エレメントを使用しています。
+上記のコードは **plugins/PluginName/templates/element/flash** 配下の
+**warning.php** エレメントを使用しています。
 
 .. note::
 

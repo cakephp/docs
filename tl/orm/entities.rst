@@ -62,13 +62,15 @@ The preferred way of getting new entities is using the ``newEntity()`` method fr
 
     use Cake\ORM\TableRegistry;
 
-    $article = TableRegistry::get('Articles')->newEntity();
-    $article = TableRegistry::get('Articles')->newEntity([
+    // Prior to 3.6 use TableRegistry::get('Articles')
+    $article = TableRegistry::getTableLocator()->get('Articles')->newEntity();
+
+    $article = TableRegistry::getTableLocator()->get('Articles')->newEntity([
         'id' => 1,
         'title' => 'New Article',
         'created' => new DateTime('now')
     ]);
-    
+
 ``$article`` will be an instance of ``App\Model\Entity\Article`` or fallback to
 ``Cake\ORM\Entity` instance if you haven't created the ``Article`` class.
 
@@ -113,7 +115,7 @@ the field name.
 
 .. php:method:: get($field)
 
-They receive the basic value stored in the ``_properties`` array
+They receive the basic value stored in the ``_fields`` array
 as their only argument. Accessors will be used when saving entities, so be
 careful when defining methods that format data, as the formatted data will be
 persisted. For example::
@@ -190,8 +192,8 @@ actually exist. For example if your users table has ``first_name`` and
     {
         protected function _getFullName()
         {
-            return $this->_properties['first_name'] . '  ' .
-                $this->_properties['last_name'];
+            return $this->_fields['first_name'] . '  ' .
+                $this->_fields['last_name'];
         }
     }
 

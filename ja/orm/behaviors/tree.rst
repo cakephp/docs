@@ -51,7 +51,8 @@ TreeBehavior は、オーバーヘッドをほとんどかけることなく照�
 テーブルがすでにいくつかの行を保持している場合、一度追加すると
 CakePHP は内部構造を構築することができます。 ::
 
-    $categories = TableRegistry::get('Categories');
+    // Prior to 3.6 use TableRegistry::get('Categories')
+    $categories = TableRegistry::getTableLocator()->get('Categories');
     $categories->recover();
 
 テーブルから行を取得し、その行が持つ子孫の数を調べることで動作することを確認できます。 ::

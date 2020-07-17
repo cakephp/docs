@@ -83,7 +83,7 @@ Strict Deletes
 .. php:method:: deleteOrFail($entity, $options = [])
 
 Using this method will throw an
-:php:exc:`Cake\\ORM\\Exception\\PersistenceFailedException` if :
+:php:exc:`Cake\\ORM\\Exception\\PersistenceFailedException` if:
 
 * the entity is new
 * the entity has no primary key value

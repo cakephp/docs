@@ -121,7 +121,9 @@ platform::
     ]);
 
 In the above example the ``id`` column would generate the following SQL in
-MySQL::
+MySQL:
+
+.. code-block:: mysql
 
     CREATE TABLE `posts` (
         `id` INTEGER AUTO_INCREMENT,
@@ -221,7 +223,7 @@ You can use it to get the list of tables or reflect tables into
     $db = ConnectionManager::get('default');
 
     // Create a schema collection.
-    $collection = $db->schemaCollection();
+    $collection = $db->getSchemaCollection();
 
     // Get the table names
     $tables = $collection->listTables();

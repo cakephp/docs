@@ -71,11 +71,11 @@ do LEIA-ME `aqui <https://github.com/composer/windows-setup>`_.
 Agora que você baixou e instalou o Composer, você pode receber uma nova
 aplicação CakePHP executando::
 
-    php composer.phar create-project --prefer-dist cakephp/app [app_name]
+    php composer.phar create-project --prefer-dist cakephp/app:4.* [app_name]
 
 Ou se o Composer estiver instalado globalmente::
 
-    composer create-project --prefer-dist cakephp/app [app_name]
+    composer create-project --prefer-dist cakephp/app:4.* [app_name]
 
 Uma vez que o Composer terminar de baixar o esqueleto da aplicação e o núcleo
 da biblioteca CakePHP, você deve ter uma aplicação funcional

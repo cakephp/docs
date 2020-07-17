@@ -44,7 +44,7 @@ Em seguida, basta digitar a seguinte linha de comando no seu terminal a partir
 do diretório onde se localiza o arquivo ``composer.phar`` para instalar o
 esqueleto da aplicação do CakePHP no diretório [nome_do_app]. ::
 
-    php composer.phar create-project --prefer-dist cakephp/app [nome_do_app]
+    php composer.phar create-project --prefer-dist cakephp/app:4.* [nome_do_app]
 
 A vantagem de usar o Composer é que ele irá completar automaticamente um conjunto
 importante de tarefas, como configurar corretamente as permissões de pastas
@@ -109,9 +109,11 @@ Criando o banco de dados do Blog
 Em seguida, vamos configurar o banco de dados para o nosso blog. Se você
 ainda não tiver feito isto, crie um banco de dados vazio para usar
 neste tutorial, com um nome de sua escolha, por exemplo, ``cake_blog``.
-Agora, vamos criar uma tabela para armazenar nossos artigos::
+Agora, vamos criar uma tabela para armazenar nossos artigos:
 
-    /* Primeiro, criamos a tabela articles: */
+.. code-block:: mysql
+
+    -- Primeiro, criamos a tabela articles
     CREATE TABLE articles (
         id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
         title VARCHAR(50),
@@ -121,9 +123,11 @@ Agora, vamos criar uma tabela para armazenar nossos artigos::
     );
 
 Nós vamos também inserir alguns artigos para usarmos em nossos testes.
-Execute os seguintes comandos SQL em seu banco de dados::
+Execute os seguintes comandos SQL em seu banco de dados:
 
-    /* Então inserimos articles para testes: */
+.. code-block:: mysql
+
+    -- Então inserimos articles para testes
     INSERT INTO articles (title,body,created)
         VALUES ('The title', 'This is the article body.', NOW());
     INSERT INTO articles (title,body,created)

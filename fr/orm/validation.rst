@@ -418,7 +418,7 @@ nulles de votre clé étrangère composite sont nulles::
     // Un "Node" peut faire référence à un parent Node mais ce n'est pas obligatoire.
     // Dans un cas d'utilisation, parent_id est null.
     // Nous permettons à cette règle de passer, même si les champs qui sont nullable, comme
-    // parent_id, sont null :
+    // parent_id, sont null:
     $rules->add($rules->existsIn(
         ['parent_id', 'site_id'], // Schema: parent_id NULL, site_id NOT NULL
         'ParentNodes',
@@ -663,7 +663,8 @@ qui définit des propriétés directement dans des entities::
         $rules->add(function ($entity) {
             $data = $entity->extract($this->schema()->columns(), true);
             $validator = $this->validator('default');
-            $errors = $validator->errors($data, $entity->isNew());
+            // Prior to 3.9 use $validator->errors()
+            $errors = $validator->validate($data, $entity->isNew());
             $entity->errors($errors);
 
             return empty($errors);

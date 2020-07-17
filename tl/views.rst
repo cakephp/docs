@@ -69,7 +69,7 @@ The view layer of CakePHP is how you speak to your users. Most of the time your
 views will be rendering HTML/XHTML documents to browsers, but you might also
 need to reply to a remote application via JSON, or output a CSV file for a user.
 
-CakePHP template files have a default extension of **.ctp** (CakePHP Template)
+CakePHP template files have a default extension of **.php** (CakePHP Template)
 and utilize the `alternative PHP syntax
 <http://php.net/manual/en/control-structures.alternative-syntax.php>`_
 for control structures and output. These files contain the logic necessary to
@@ -124,10 +124,10 @@ If you'd prefer using a templating language like
 `Twig <http://twig.sensiolabs.org>`_, a subclass of View will bridge your
 templating language and CakePHP.
 
-Template files are stored in **src/Template/**, in a folder named after the
+Template files are stored in **templates/**, in a folder named after the
 controller that uses the files, and named after the action it corresponds to.
 For example, the view file for the ``Products`` controller's ``view()`` action, would
-normally be found in **src/Template/Products/view.ctp**.
+normally be found in **templates/Products/view.php**.
 
 The view layer in CakePHP can be made up of a number of different parts. Each
 part has different uses, and will be covered in this chapter:
@@ -192,7 +192,7 @@ parts that change:
 
 .. code-block:: php
 
-    <!-- src/Template/Common/view.ctp -->
+    <!-- templates/Common/view.php -->
     <h1><?= $this->fetch('title') ?></h1>
     <?= $this->fetch('content') ?>
 
@@ -211,7 +211,7 @@ uncaptured content from the extending view. Assuming our view file has a
 
 .. code-block:: php
 
-    <!-- src/Template/Posts/view.ctp -->
+    <!-- templates/Posts/view.php -->
     <?php
     $this->extend('/Common/view');
 
@@ -243,7 +243,7 @@ view file will override the parent view that will be processed next::
     $this->extend('/Common/view');
     $this->extend('/Common/index');
 
-The above will result in **/Common/index.ctp** being rendered as the parent view
+The above will result in **/Common/index.php** being rendered as the parent view
 to the current view.
 
 You can nest extended views as many times as necessary. Each view can extend
@@ -333,7 +333,7 @@ want to conditionally show headings or other markup:
 
 .. code-block:: php
 
-    // In src/Template/Layout/default.ctp
+    // In templates/layout/default.php
     <?php if ($this->fetch('menu')): ?>
     <div class="menu">
         <h3>Menu options</h3>
@@ -394,12 +394,12 @@ Layouts
 A layout contains presentation code that wraps around a view. Anything you want
 to see in all of your views should be placed in a layout.
 
-CakePHP's default layout is located at **src/Template/Layout/default.ctp**.
+CakePHP's default layout is located at **templates/layout/default.php**.
 If you want to change the overall look of your application, then this is the
 right place to start, because controller-rendered view code is placed inside of
 the default layout when the page is rendered.
 
-Other layout files should be placed in **src/Template/Layout**. When you create
+Other layout files should be placed in **templates/layout**. When you create
 a layout, you need to tell CakePHP where to place the output of your views. To
 do so, make sure your layout includes a place for ``$this->fetch('content')``
 Here's an example of what a default layout might look like:
@@ -452,7 +452,7 @@ You can set the ``title`` block content from inside your view file::
     $this->assign('title', 'View Active Users');
 
 You can create as many layouts as you wish: just place them in the
-**src/Template/Layout** directory, and switch between them inside of your
+**templates/layout** directory, and switch between them inside of your
 controller actions using the controller or view's ``$layout`` property::
 
     // From a controller
@@ -541,7 +541,7 @@ layouts, and even within other elements. Elements can be used to make a view
 more readable, placing the rendering of repeating elements in its own file. They
 can also help you re-use content fragments in your application.
 
-Elements live in the **src/Template/Element/** folder, and have the .ctp
+Elements live in the **templates/element/** folder, and have the .php
 filename extension. They are output using the element method of the view::
 
     echo $this->element('helpbox');
@@ -558,9 +558,9 @@ You can pass data to an element through the element's second argument::
 Inside the element file, all the passed variables are available as members of
 the parameter array (in the same way that ``Controller::set()`` in the
 controller works with template files). In the above example, the
-**src/Template/Element/helpbox.ctp** file can use the ``$helptext`` variable::
+**templates/element/helpbox.php** file can use the ``$helptext`` variable::
 
-    // Inside src/Template/Element/helpbox.ctp
+    // Inside templates/element/helpbox.php
     echo $helptext; // Outputs "Oh, this text is very helpful."
 
 The ``View::element()`` method also supports options for the element.
@@ -648,21 +648,10 @@ if you are in the ``ContactsController`` of the Contacts plugin, the following::
 are equivalent and will result in the same element being rendered.
 
 For elements inside subfolder of a plugin
-(e.g., **plugins/Contacts/Template/Element/sidebar/helpbox.ctp**), use the
+(e.g., **plugins/Contacts/Template/element/sidebar/helpbox.php**), use the
 following::
 
     echo $this->element('Contacts.sidebar/helpbox');
-
-Requesting Elements from the App
---------------------------------
-
-If you are within a plugin's template file and want to render
-an element residing in your main application rather than this
-or another plugin, use the following::
-
-  echo $this->element('some_global_element', [], ['plugin' => false]);
-  // or...
-  echo $this->element('some_global_element', ['localVar' => $someData], ['plugin' => false]);
 
 Routing prefix and Elements
 ---------------------------
@@ -675,7 +664,7 @@ Assuming you have a prefix "Admin" configured and you call::
 
     echo $this->element('my_element');
 
-The element first be looked for in **src/Template/Admin/Element/**. If such a
+The element first be looked for in **templates/Admin/Element/**. If such a
 file does not exist, it will be looked for in the default location.
 
 Caching Sections of Your View

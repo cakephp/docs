@@ -238,7 +238,7 @@ following keys:
 Writing to Logs
 ===============
 
-Writing to the log files can be done in 2 different ways. The first
+Writing to the log files can be done in two different ways. The first
 is to use the static :php:meth:`Cake\\Log\\Log::write()` method::
 
     Log::write('debug', 'Something did not work');
@@ -254,6 +254,32 @@ All configured log streams are written to sequentially each time
 :php:meth:`Cake\\Log\\Log::write()` is called. If you have not configured any
 logging adapters ``log()`` will return ``false`` and no log messages will be
 written.
+
+Using Placeholders in Messages
+------------------------------
+
+If you need to log dynamically defined data, you can use placeholders in your
+log messages and provide an array of key/value pairs in the ``$context``
+parameter::
+
+    // Will log `Could not process for userid=1`
+    Log::write('error', 'Could not process for userid={user}', ['user' => $user->id]);
+
+Placeholders that do not have keys defined will not be replaced. If you need to
+use a literal braced word, you must escape the placeholder::
+
+    // Will log `No {replace}`
+    Log::write('error', 'No \\{replace}', ['replace' => 'no']);
+
+If you include objects in your logging placeholders those objects must implement
+one of the following methods:
+
+* ``__toString()``
+* ``toArray()``
+* ``__debugInfo()``
+
+.. versionadded:: 4.1.0
+    Logging placeholders were added.
 
 .. _logging-levels:
 
@@ -397,8 +423,7 @@ Logging Trait
 .. php:method:: log($msg, $level = LOG_ERR)
 
     Log a message to the logs.  By default messages are logged as
-    ERROR messages.  If ``$msg`` isn't a string it will be converted with
-    ``print_r`` before being logged.
+    ERROR messages.
 
 Using Monolog
 =============

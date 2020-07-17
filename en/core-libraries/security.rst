@@ -20,26 +20,20 @@ Encrypt ``$text`` using AES-256. The ``$key`` should be a value with a
 lots of variance in the data much like a good password. The returned result
 will be the encrypted value with an HMAC checksum.
 
-This method will use either `openssl <http://php.net/openssl>`_ or `mcrypt
-<http://php.net/mcrypt>`_ based on what is available on your system. Data
-encrypted in one implementation is portable to the other.
+The `openssl <http://php.net/openssl>`_ extension is required for encrypting/decrypting.
 
-.. warning::
-    The `mcrypt <http://php.net/mcrypt>`_ extension has been deprecated in
-    PHP7.1
-
-This method should **never** be used to store passwords.  Instead you should use
-the one way hashing methods provided by
-:php:meth:`~Cake\\Utility\\Security::hash()`. An example use would be::
+An example use would be::
 
     // Assuming key is stored somewhere it can be re-used for
     // decryption later.
     $key = 'wt1U5MACWJFTXGenFoZoiLwQGrLgdbHA';
     $result = Security::encrypt($value, $key);
 
-If you do not supply an HMAC salt, the ``Security.salt`` value will be used.
+If you do not supply an HMAC salt, the value of ``Security::getSalt()`` will be used.
 Encrypted values can be decrypted using
 :php:meth:`Cake\\Utility\\Security::decrypt()`.
+
+This method should **never** be used to store passwords.
 
 Decrypt a previously encrypted value. The ``$key`` and ``$hmacSalt``
 parameters must match the values used to encrypt or decryption will fail. An
@@ -54,24 +48,6 @@ example use would be::
 
 If the value cannot be decrypted due to changes in the key or HMAC salt
 ``false`` will be returned.
-
-.. _force-mcrypt:
-
-Choosing a Specific Crypto Implementation
------------------------------------------
-
-If you are upgrading an application from CakePHP 2.x, data encrypted in 2.x is
-not compatible with openssl. This is because the encrypted data is not fully AES
-compliant. If you don't want to go through the trouble of re-encrypting your
-data, you can force CakePHP to use ``mcrypt`` using the ``engine()`` method::
-
-    // In config/bootstrap.php
-    use Cake\Utility\Crypto\Mcrypt;
-
-    Security::engine(new Mcrypt());
-
-The above will allow you to seamlessly read data from older versions of CakePHP,
-and encrypt new data to be compatible with OpenSSL.
 
 Hashing Data
 ============
@@ -97,7 +73,7 @@ The ``hash()`` method supports the following hashing strategies:
 - sha1
 - sha256
 
-And any other hash algorithmn that PHP's ``hash()`` function supports.
+And any other hash algorithm that PHP's ``hash()`` function supports.
 
 .. warning::
 

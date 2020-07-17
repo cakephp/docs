@@ -160,8 +160,6 @@ find() で使えるオプションは次の通りです:
 変換 (hydrate) を無効化すれば、素となる配列を取得することができます。 ::
 
     $query->enableHydration(false);
-    // 3.4.0 より前は
-    $query->hydrate(false);
 
     // $data は配列のデータを含む ResultSet です。
     $data = $query->all();
@@ -230,8 +228,6 @@ CakePHP ではデータの 'list' を生成するメソッドを使うことで�
         public function initialize(array $config)
         {
             $this->setDisplayField('title');
-            // 3.4.0 より前は
-            $this->displayField('title');
         }
     }
 
@@ -289,8 +285,8 @@ join でつながっている関連テーブルからリストのデータを生
     // Authors の中で、エンティティーは displayFild として使用するために仮想フィールドを作成
     protected function _getLabel()
     {
-        return $this->_properties['first_name'] . ' ' . $this->_properties['last_name']
-          . ' / ' . __('User ID %s', $this->_properties['user_id']);
+        return $this->_fields['first_name'] . ' ' . $this->_fields['last_name']
+          . ' / ' . __('User ID %s', $this->_fields['user_id']);
     }
 
 この例は、Author エンティティーの ``_getLabel()``
@@ -368,16 +364,16 @@ fineder メソッドは、あなたが作成したい finder の名前が ``Foo`
     }
 
     // コントローラーやテーブルのメソッド内で
-    $articles = TableRegistry::get('Articles');
+    $articles = TableRegistry::getTableLocator()->get('Articles');
     $query = $articles->find('ownedBy', ['user' => $userEntity]);
 
-Finder メソッドはクエリーを必要応じて変更したり、 ``$options`` を使うことで関連するアプリケーションの
+Finder メソッドはクエリーを必要に応じて変更したり、 ``$options`` を使うことで関連するアプリケーションの
 ロジックにあわせて finder の操作をカスタマイズしたりすることができます。
 Finder の 'stack' (重ね呼び) もまた、複雑なクエリーを難なく表現できるようにしてくれます。
 'published' と 'recent' の両方の Finder を持っているとすると、次のようになります。 ::
 
     // コントローラーやテーブルのメソッド内で
-    $articles = TableRegistry::get('Articles');
+    $articles = TableRegistry::getTableLocator()->get('Articles');
     $query = $articles->find('published')->find('recent');
 
 ここまではいずれも、テーブルクラスの Finder メソッドを例に見てきましたが、Finder メソッドは
@@ -409,7 +405,7 @@ CakePHP の ORM は動的に構築する Finder メソッドを提供します�
     $query = $this->Users->findAllByUsername('joebob');
 
     // テーブルメソッドの中
-    $users = TableRegistry::get('Users');
+    $users = TableRegistry::getTableLocator()->get('Users');
     // 下記の２つは同じ
     $query = $users->findByUsername('joebob');
     $query = $users->findAllByUsername('joebob');
@@ -546,7 +542,6 @@ contain に条件を渡す
 ``\Cake\ORM\Query`` を受け取る無名関数を渡します。 ::
 
     // コントローラーやテーブルのメソッド内で
-    // 3.5.0 より前は、 contain(['Comments' => function () { ... }]) を使用
 
     $query = $articles->find()->contain('Comments', function (Query $q) {
         return $q
@@ -622,7 +617,7 @@ contain に条件を渡す
     // Articles から id と title を、 Users、Comments、Tags から全列を select する
     $query->select(['id', 'title'])
         ->contain(['Comments', 'Tags'])
-        ->enableAutoFields(true) // 3.4.0 より前は autoFields(true) を使用
+        ->enableAutoFields(true)
         ->contain(['Users' => function(Query $q) {
             return $q->autoFields(true);
         }]);
@@ -793,7 +788,7 @@ leftJoinWith を使う
     $query->select(['total_comments' => $query->func()->count('Comments.id')])
         ->leftJoinWith('Comments')
         ->group(['Articles.id'])
-        ->enableAutoFields(true); // 3.4.0 より前は autoFields(true); を使用
+        ->enableAutoFields(true);
 
 上記クエリーの結果は Article データの結果に加え、データごとに ``total_comments``
 プロパティーが含まれます。
@@ -808,7 +803,7 @@ leftJoinWith を使う
             return $q->where(['Tags.name' => 'awesome']);
         })
         ->group(['Authors.id'])
-        ->enableAutoFields(true); // 3.4.0 より前は autoFields(true); を使用
+        ->enableAutoFields(true);
 
 この関数は指定した関連からいずれのカラムも結果セットへとロードしません。
 
@@ -848,8 +843,6 @@ leftJoinWith を使う
 もしも戦略の変更を永続的に行いたいなら次のようにできます。 ::
 
     $articles->FirstComment->setStrategy('select');
-    // 3.4.0 より前は
-    $articles->FirstComment->strategy('select');
 
 ``select`` 戦略の利用は、別データベースにあるテーブルとの関連を作るのに優れた方法です。
 なぜなら、その場合は ``joins`` を使ってレコードをフェッチできないためです。
@@ -879,8 +872,6 @@ leftJoinWith を使う
 
     $articles->Comments->setStrategy('subquery');
 
-    // 3.4.0 より前は
-    $articles->Comments->strategy('subquery');
 
 関連をレイジーロード(Lazy Load)する
 ====================================
@@ -904,8 +895,6 @@ ResultSet オブジェクトは基本となるプリペアードステートメ�
 結果をストリームすることができます。 ::
 
     $query->enableBufferedResults(false);
-    // 3.4.0 より前は
-    $query->bufferResults(false);
 
 バッファを OFF に切り替える場合にはいくつか注意点があります:
 
@@ -941,7 +930,7 @@ serialize が簡単にできるだけでなく、結果セットは 'Collection'
 使えます。たとえば、記事 (Article) のコレクションにあるタグ (Tag) をユニークに取り出すことができます。 ::
 
     // コントローラーやテーブルのメソッド内で
-    $articles = TableRegistry::get('Articles');
+    $articles = TableRegistry::getTableLocator()->get('Articles');
     $query = $articles->find()->contain(['Tags']);
 
     $reducer = function ($output, $value) {
@@ -963,7 +952,7 @@ serialize が簡単にできるだけでなく、結果セットは 'Collection'
     });
 
     // 結果のプロパティーから連想配列を作成する
-    $articles = TableRegistry::get('Articles');
+    $articles = TableRegistry::getTableLocator()->get('Articles');
     $results = $articles->find()->contain(['Authors'])->all();
 
     $authorList = $results->combine('id', 'author.name');
@@ -1112,7 +1101,7 @@ CakePHP についての情報を含む記事 (article) でもっともよく発�
     $wordCount = $articles->find()
         ->where(['published' => true])
         ->andWhere(['published_date >=' => new DateTime('2014-01-01')])
-        ->enableHydrate(false) // 3.4.0 より前は hydrate(false) を使用
+        ->enableHydrate(false)
         ->mapReduce($mapper, $reducer)
         ->toArray();
 
@@ -1172,7 +1161,7 @@ reducer が呼ばれるごとに、reducer はユーザーごとのフォロワ�
 そして、クエリーにこの関数を渡します。 ::
 
     $fakeFriends = $friends->find()
-        ->enableHydrate(false) // 3.4.0 より前は hydrate(false) を使用
+        ->enableHydrate(false)
         ->mapReduce($mapper, $reducer)
         ->toArray();
 

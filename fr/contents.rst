@@ -2,10 +2,18 @@ Contenu
 #######
 
 .. toctree::
-   :hidden:
+    :hidden:
 
-   index
-   topics
+    index
+    topics
+    bake
+    bake/usage
+    chronos
+    debug-kit
+    elasticsearch
+    migrations
+    phinx
+
 
 .. toctree::
     :maxdepth: 3
@@ -13,7 +21,7 @@ Contenu
 
     intro
     quickstart
-    appendices/3-x-migration-guide
+    appendices/4-0-migration-guide
     tutorials-and-examples
     contributing
 
@@ -35,9 +43,8 @@ Contenu
     :caption: Généralités
 
     controllers/components/authentication
-    bake
     core-libraries/caching
-    console-and-shells
+    console-commands
     development/debugging
     deployment
     core-libraries/email
@@ -74,11 +81,11 @@ Contenu
     :maxdepth: 3
     :caption: Plugins
 
-    chronos
-    debug-kit
-    migrations
-    elasticsearch
-    upgrade-tool
+    Bake <https://book.cakephp.org/bake/1/fr/>
+    Chronos <https://book.cakephp.org/chronos/1/fr/>
+    Debug Kit <https://book.cakephp.org/debugkit/3/fr/>
+    Migrations <https://book.cakephp.org/migrations/3/fr/>
+    Elasticsearch <https://book.cakephp.org/elasticsearch/3/fr/>
 
 .. toctree::
     :maxdepth: 3
@@ -91,7 +98,7 @@ Contenu
     :maxdepth: 3
     :caption: Phinx
 
-    phinx
+    Phinx <https://book.cakephp.org/phinx/0/fr/>
 
 .. todolist::
 

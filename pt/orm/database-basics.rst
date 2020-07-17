@@ -134,7 +134,7 @@ sua aplicação usará. Exemplos de informações de conexão podem ser encontra
             'persistent' => false,
             'host' => 'localhost',
             'username' => 'my_app',
-            'password' => 'sekret',
+            'password' => 'secret',
             'database' => 'my_app',
             'encoding' => 'utf8',
             'timezone' => 'UTC',
@@ -155,7 +155,7 @@ definir conexões adicionais em tempo de execução usando o método
         'persistent' => false,
         'host' => 'localhost',
         'username' => 'my_app',
-        'password' => 'sekret',
+        'password' => 'secret',
         'database' => 'my_app',
         'encoding' => 'utf8',
         'timezone' => 'UTC',
@@ -166,7 +166,7 @@ As opções de configuração também podem ser fornecidas como uma string :term
 Isso é útil ao trabalhar com variáveis de ambiente ou :term:`PaaS` providers::
 
     ConnectionManager::config('default', [
-        'url' => 'mysql://my_app:sekret@localhost/my_app?encoding=utf8&timezone=UTC&cacheMetadata=true',
+        'url' => 'mysql://my_app:secret@localhost/my_app?encoding=utf8&timezone=UTC&cacheMetadata=true',
     ]);
 
 Ao usar uma string DSN, você pode definir qualquer parâmetros/opções adicionais como
@@ -281,7 +281,7 @@ conhecida existente::
 
     use Cake\Datasource\ConnectionManager;
 
-    $conn = ConnectionManager::get('default');
+    $connection = ConnectionManager::get('default');
 
 Ao tentar carregar conexões que não existem será lançado uma exceção.
 
@@ -292,7 +292,7 @@ Usando ``config()`` e ``get()`` você pode criar novas conexões que não estão
 definadas em seus arquivos de configuração em tempo de execução::
 
     ConnectionManager::config('my_connection', $config);
-    $conn = ConnectionManager::get('my_connection');
+    $connection = ConnectionManager::get('my_connection');
 
 Consulte a seção :ref:`database-configuration` para mais informações sobre os
 dados de configuração usados ao criar conexões.
@@ -567,7 +567,7 @@ personalizado à nossa classe table <saving-complex-types>`.
 
 .. _immutable-datetime-mapping:
 
-Habilitando Objetos DataTime Imutáveis
+Habilitando Objetos DateTime Imutáveis
 --------------------------------------
 
 .. versionadded:: 3.2
@@ -612,7 +612,7 @@ diferentes de executar consultas, dependendo do tipo de consulta que você
 precisa executar e do tipo de resultados que você precisa receber. O método
 mais básico é o ``query()`` que lhe permite executar consultas SQL já prontas::
 
-    $stmt = $conn->query('UPDATE articles SET published = 1 WHERE id = 2');
+    $statement = $connection->query('UPDATE articles SET published = 1 WHERE id = 2');
 
 .. php:method:: execute($sql, $params, $types)
 
@@ -620,7 +620,7 @@ O método ``query()`` não aceita parâmetros adicionais. Se você precisa de
 parâmetros adicionais, você deve usar o método ``execute()``, que permite que
 placeholders sejam usados::
 
-    $stmt = $conn->execute(
+    $statement = $connection->execute(
         'UPDATE articles SET published = ? WHERE id = ?',
         [1, 2]
     );
@@ -629,7 +629,7 @@ Sem qualquer informação de indução de tipo, ``execute`` assumirá que todos 
 placeholders são valores do tipo string. Se você precisa vincular tipos específicos
 de dados, você pode usar seus nomes de tipos abstratos ao criar uma consulta::
 
-    $stmt = $conn->execute(
+    $statement = $connection->execute(
         'UPDATE articles SET published_date = ? WHERE id = ?',
         [new DateTime('now'), 2],
         ['date', 'integer']
@@ -642,18 +642,18 @@ adequadamente em instruções SQL. A última e mais flexível maneira de criar c
 é usar o :doc:`/orm/query-builder`. Essa abordagem lhe permite criar consultas
 complexas e expressivas sem ter que usar SQL específico de plataforma::
 
-    $query = $conn->newQuery();
+    $query = $connection->newQuery();
     $query->update('articles')
         ->set(['published' => true])
         ->where(['id' => 2]);
-    $stmt = $query->execute();
+    $statement = $query->execute();
 
 Ao usar o construtor de consulta (*query builder*), nenhum SQL será enviado
 para o servidor do banco de dados até que o método ``execute()`` é chamado ou a
 consulta seja iterada. Iterar uma consulta irá primeiro executá-la e então começar a
 iterar sobre o conjunto de resultados::
 
-    $query = $conn->newQuery();
+    $query = $connection->newQuery();
     $query->select('*')
         ->from('articles')
         ->where(['published' => true]);
@@ -672,19 +672,19 @@ Os objetos de conexão lhe fornecem algumas maneiras simples de realizar transa�
 de banco de dados. A maneira mais básica de fazer transações é através dos métodos
 ``begin()``, ``commit()`` e ``rollback()``, que mapeiam para seus equivalentes em SQL::
 
-    $conn->begin();
-    $conn->execute('UPDATE articles SET published = ? WHERE id = ?', [true, 2]);
-    $conn->execute('UPDATE articles SET published = ? WHERE id = ?', [false, 4]);
-    $conn->commit();
+    $connection->begin();
+    $connection->execute('UPDATE articles SET published = ? WHERE id = ?', [true, 2]);
+    $connection->execute('UPDATE articles SET published = ? WHERE id = ?', [false, 4]);
+    $connection->commit();
 
 .. php:method:: transactional(callable $callback)
 
 Além disso, essas instâncias de interface de conexão também fornecem o método
 ``transactional()`` que torna o tratamento das chamadas begin/commit/rollback muito mais simples::
 
-    $conn->transactional(function ($conn) {
-        $conn->execute('UPDATE articles SET published = ? WHERE id = ?', [true, 2]);
-        $conn->execute('UPDATE articles SET published = ? WHERE id = ?', [false, 4]);
+    $connection->transactional(function ($connection) {
+        $connection->execute('UPDATE articles SET published = ? WHERE id = ?', [true, 2]);
+        $connection->execute('UPDATE articles SET published = ? WHERE id = ?', [false, 4]);
     });
 
 Além de consultas básicas, você pode executar consultas mais complexas usando
@@ -712,14 +712,14 @@ retorna uma instrução com os valores fornecidos ligados a ela. Enquanto que o 
 uma instrução incompleta::
 
     // Instruções do ``execute`` terão valores já vinculados a eles.
-    $stmt = $conn->execute(
+    $statement = $connection->execute(
         'SELECT * FROM articles WHERE published = ?',
         [true]
     );
 
     // Instruções do ``prepare``serão parâmetros para placeholders.
     // Você precisa vincular os parâmetros antes de executar.
-    $stmt = $conn->prepare('SELECT * FROM articles WHERE published = ?');
+    $statement = $connection->prepare('SELECT * FROM articles WHERE published = ?');
 
 Uma vez que você preparou uma instrução, você pode vincular dados adicionais e executá-lo.
 
@@ -732,34 +732,34 @@ Uma vez que você criou uma instrução preparada, você talvez precise vincular
 Você pode vincular vários valores ao mesmo tempo usando o método ``bind()``, ou vincular elementos
 individuais usando ``bindValue``::
 
-    $stmt = $conn->prepare(
+    $statement = $connection->prepare(
         'SELECT * FROM articles WHERE published = ? AND created > ?'
     );
     // Vincular vários valores
-    $stmt->bind(
+    $statement->bind(
         [true, new DateTime('2013-01-01')],
         ['boolean', 'date']
     );
 
     // Vincular único valor
-    $stmt->bindValue(1, true, 'boolean');
-    $stmt->bindValue(2, new DateTime('2013-01-01'), 'date');
+    $statement->bindValue(1, true, 'boolean');
+    $statement->bindValue(2, new DateTime('2013-01-01'), 'date');
 
 Ao criar instruções, você também pode usar chave de array nomeadas em vez de posicionais::
 
-    $stmt = $conn->prepare(
+    $statement = $connection->prepare(
         'SELECT * FROM articles WHERE published = :published AND created > :created'
     );
 
     // Vincular vários valores
-    $stmt->bind(
+    $statement->bind(
         ['published' => true, 'created' => new DateTime('2013-01-01')],
         ['published' => 'boolean', 'created' => 'date']
     );
 
     // Vincular um valor único
-    $stmt->bindValue('published', true, 'boolean');
-    $stmt->bindValue('created', new DateTime('2013-01-01'), 'date');
+    $statement->bindValue('published', true, 'boolean');
+    $statement->bindValue('created', new DateTime('2013-01-01'), 'date');
 
 .. warning::
 
@@ -773,16 +773,16 @@ linhas. As instruções devem ser executadas usando o método ``execute()``. Uma
 executado, os resultados podem ser obtidos usando ``fetch()``, ``fetchAll()`` ou iterando
 a instrução::
 
-    $stmt->execute();
+    $statement->execute();
 
     // Lê uma linha.
-    $row = $stmt->fetch('assoc');
+    $row = $statement->fetch('assoc');
 
     // Lê todas as linhas.
-    $rows = $stmt->fetchAll('assoc');
+    $rows = $statement->fetchAll('assoc');
 
     // Lê linhas através de iteração.
-    foreach ($stmt as $row) {
+    foreach ($statement as $row) {
         // Do work
     }
 
@@ -796,8 +796,8 @@ Obtendo Contagens de Linha
 
 Depois de executar uma declaração, você pode buscar o número de linhas afetadas::
 
-    $rowCount = count($stmt);
-    $rowCount = $stmt->rowCount();
+    $rowCount = count($statement);
+    $rowCount = $statement->rowCount();
 
 Verificando Códigos de Erro
 ---------------------------
@@ -806,8 +806,8 @@ Se a sua consulta não foi bem sucedida, você pode obter informações de erro 
 usando os métodos ``errorCode()`` e ``errorInfo()``. Estes métodos funcionam da mesma
 maneira que os fornecidos pelo PDO::
 
-    $code = $stmt->errorCode();
-    $info = $stmt->errorInfo();
+    $code = $statement->errorCode();
+    $info = $statement->errorInfo();
 
 .. todo::
     Possibly document CallbackStatement and BufferedStatement
@@ -822,10 +822,10 @@ com o valor ``true``. Você também pode alternar o log de consulta em tempo de 
 usando o método ``logQueries``::
 
     // Habilita log de consultas.
-    $conn->logQueries(true);
+    $connection->logQueries(true);
 
     // Desabilita o log de consultas.
-    $conn->logQueries(false);
+    $connection->logQueries(false);
 
 Quando o log de consultas está habilitado, as consultas serão logadas em
 :php:class:`Cake\\Log\\Log` usando o nível 'debug', e o escopo 'queriesLog'.
@@ -874,7 +874,7 @@ Se você estiver usando um schema legado que requer citação de identificador, 
 habilitar isso usando a configuração ``quoteIdentifiers``` em seu
 :ref:`database-configuration`. Você também pode habilitar esse recurso em tempo de execução::
 
-    $conn->driver()->autoQuoting(true);
+    $connection->getDriver()->enableAutoQuoting();
 
 Quando habilitado, a citação de identificador causará uma *traversal query* adicional
 que converte todos os identificadores em objetos ``IdentifierExpression``.

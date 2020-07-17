@@ -29,7 +29,7 @@ validate::
 
     $validator
         ->requirePresence('title')
-        ->notEmpty('title', 'Please fill this field')
+        ->notEmptyString('title', 'Please fill this field')
         ->add('title', [
             'length' => [
                 'rule' => ['minLength', 10],
@@ -95,7 +95,7 @@ Allowing Empty Fields
 
 Validators offer several methods to control which fields accept empty values and
 which empty values are accepted and not forwarded to other validation rules for
-the named field. CakePHP provides empty value support for five different shapes
+the named field. CakePHP provides empty value support for different shapes
 of data:
 
 #. ``allowEmptyString()`` Should be used when you want to only accept
@@ -112,9 +112,9 @@ of data:
 
 You can also use ``notEmpty()`` to mark a field invalid if any 'empty' value is
 used. In general, it is recommended that you do not use ``notEmpty()`` and use more
-specific validators instead.
+specific validators instead: ``notEmptyString()``, ``notEmptyArray()``, ``notEmptyFile()``, ``notEmptyDate()``, ``notEmptyTime()``, ``notEmptyDateTime()``.
 
-The ``allowEmpty*`` methods support a mode parameter that allows you to control
+The ``allowEmpty*`` methods support a ``when`` parameter that allows you to control
 when a field can or cannot be empty:
 
 * ``false`` The field is not allowed to be empty.
@@ -122,12 +122,15 @@ when a field can or cannot be empty:
   operation.
 * ``update`` The field can be empty when validating an **update**
   operation.
+* A callback that returns ``true`` or ``false`` to indicate whether a field is
+  allowed to be empty. See the :ref:`conditional-validation` section for examples on
+  how to use this parameter.
 
 An example of these methods in action is::
 
     $validator->allowEmptyDateTime('published')
-        ->allowEmptyString('title', false, 'Title cannot be empty')
-        ->allowEmptyString('body', 'update', 'Body cannot be empty')
+        ->allowEmptyString('title', 'Title cannot be empty', false)
+        ->allowEmptyString('body', 'Body cannot be empty', 'update')
         ->allowEmptyFile('header_image', 'update');
         ->allowEmptyDateTime('posted', 'update');
 
@@ -195,21 +198,6 @@ containing data related to the validation process:
 - **newRecord**: Whether the validation call is for a new record or
   a preexisting one.
 
-If you need to pass additional data to your validation methods such as the
-current user's id, you can use a custom dynamic provider from your controller. ::
-
-    $this->Examples->validator('default')->provider('passed', [
-        'count' => $countFromController,
-        'userid' => $this->Auth->user('id')
-    ]);
-
-Then ensure that your validation method has the second context parameter. ::
-
-    public function customValidationMethod($check, array $context)
-    {
-        $userid = $context['providers']['passed']['userid'];
-    }
-
 Closures should return boolean true if the validation passes. If it fails,
 return boolean false or for a custom error message return a string, see the
 :ref:`Conditional/Dynamic Error Messages <dynamic_validation_error_messages>`
@@ -248,6 +236,8 @@ overwritten by the ones returned from the validation rule method::
         'message' => 'Generic error message used when `false` is returned'
     ]);
 
+.. _conditional-validation:
+
 Conditional Validation
 ----------------------
 
@@ -267,9 +257,8 @@ not a particular rule should be applied::
     ]);
 
 You can access the other submitted field values using the ``$context['data']``
-array.
-The above example will make the rule for 'picture' optional depending on whether
-the value for ``show_profile_picture`` is empty. You could also use the
+array.  The above example will make the rule for 'picture' optional depending on
+whether the value for ``show_profile_picture`` is empty. You could also use the
 ``uploadedFile`` validation rule to create optional file upload inputs::
 
     $validator->add('picture', 'file', [
@@ -308,7 +297,16 @@ conditions only::
 
 This would require the ``full_name`` field to be present only in case the user
 wants to create a subscription, while the ``email`` field would always be
-required, since it would also be needed when canceling a subscription.
+required.
+
+The ``$context`` parameter passed to custom conditional callbacks contains the
+following keys:
+
+* ``data`` The data being validated.
+* ``newRecord`` a boolean indicating whether a new or existing record is being
+  validated.
+* ``field`` The current field being validated.
+* ``providers`` The validation providers attached to the current validator.
 
 
 Marking Rules as the Last to Run
@@ -397,10 +395,10 @@ model fields, depending on a country, ie::
 
     class PostsTable extends Table
     {
-        public function validationDefault(Validator $validator)
+        public function validationDefault(Validator $validator): Validator
         {
             // add the provider to the validator
-            $validator->setProvider('fr', 'Localized\Validation\FrValidation');
+            $validator->setProvider('fr', 'Cake\Localized\Validation\FrValidation');
             // use the provider in a field validation rule
             $validator->add('phoneField', 'myCustomRuleNameForPhone', [
                 'rule' => 'phone',
@@ -449,7 +447,7 @@ To validate the comments you would use a nested validator::
     $validator->addNestedMany('comments', $commentValidator);
 
     // Get all errors including those from nested validators.
-    $validator->errors($data);
+    $validator->validate($data);
 
 You can create 1:1 'relationships' with ``addNested()`` and 1:N 'relationships'
 with ``addNestedMany()``. With both methods, the nested validator's errors will
@@ -511,7 +509,7 @@ sending an email you could do the following::
         ->requirePresence('comment')
         ->notEmpty('comment', 'You need to give a comment.');
 
-    $errors = $validator->errors($this->request->getData());
+    $errors = $validator->validate($this->request->getData());
     if (empty($errors)) {
         // Send an email.
     }
@@ -528,7 +526,7 @@ be returned per field. By default the ``errors()`` method applies rules for
 the 'create' mode. If you'd like to apply 'update' rules you can do the
 following::
 
-    $errors = $validator->errors($this->request->getData(), false);
+    $errors = $validator->validate($this->request->getData(), false);
     if (empty($errors)) {
         // Send an email.
     }
@@ -539,16 +537,17 @@ following::
     :php:meth:`~Cake\\ORM\\Table::newEntity()`,
     :php:meth:`~Cake\\ORM\\Table::newEntities()`,
     :php:meth:`~Cake\\ORM\\Table::patchEntity()`,
-    :php:meth:`~Cake\\ORM\\Table::patchEntities()` or
-    :php:meth:`~Cake\\ORM\\Table::save()` as they are designed for that.
+    :php:meth:`~Cake\\ORM\\Table::patchEntities()`
+    as they are designed for that.
 
-Validating Entities
-===================
+Validating Entity Data
+======================
 
-While entities are validated as they are saved, you may also want to validate
-entities before attempting to do any saving. Validating entities before
-saving is done automatically when using the ``newEntity()``, ``newEntities()``,
-``patchEntity()`` or ``patchEntities()``::
+Validation is meant for checking request data coming from forms or other user 
+interfaces used to populate the entities.
+
+The request data is validated automatically when using the ``newEntity()``, 
+``newEntities()``, ``patchEntity()`` or ``patchEntities()`` methods of ``Table`` class::
 
     // In the ArticlesController class
     $article = $this->Articles->newEntity($this->request->getData());
@@ -556,7 +555,7 @@ saving is done automatically when using the ``newEntity()``, ``newEntities()``,
         // Do work to show error messages.
     }
 
-Similarly, when you need to pre-validate multiple entities at a time, you can
+Similarly, when you need to validate multiple entities at a time, you can
 use the ``newEntities()`` method::
 
     // In the ArticlesController class
@@ -580,12 +579,10 @@ validation sets to apply using the ``options`` parameter::
       ]
     ]);
 
-Validation is commonly used for user-facing forms or interfaces, and thus it is
-not limited to only validating columns in the table schema. However,
-maintaining integrity of data regardless where it came from is important. To
-solve this problem CakePHP offers a second level of validation which is called
-"application rules". You can read more about them in the
-:ref:`Applying Application Rules <application-rules>` section.
+Apart from validating user provided data maintaining integrity of data regardless 
+where it came from is important. To solve this problem CakePHP offers a second 
+level of validation which is called "application rules". You can read more about 
+them in the :ref:`Applying Application Rules <application-rules>` section.
 
 Core Validation Rules
 =====================
@@ -595,7 +592,7 @@ class. The Validation class contains a variety of static methods that provide
 validators for several common validation situations.
 
 The `API documentation
-<https://api.cakephp.org/3.x/class-Cake.Validation.Validation.html>`_ for the
+<https://api.cakephp.org/4.x/class-Cake.Validation.Validation.html>`_ for the
 ``Validation`` class provides a good list of the validation rules that are
 available, and their basic usage.
 

@@ -139,7 +139,7 @@ like::
             'persistent' => false,
             'host' => 'localhost',
             'username' => 'my_app',
-            'password' => 'sekret',
+            'password' => 'secret',
             'database' => 'my_app',
             'encoding' => 'utf8mb4',
             'timezone' => 'UTC',
@@ -161,7 +161,7 @@ would be::
         'persistent' => false,
         'host' => 'localhost',
         'username' => 'my_app',
-        'password' => 'sekret',
+        'password' => 'secret',
         'database' => 'my_app',
         'encoding' => 'utf8mb4',
         'timezone' => 'UTC',
@@ -246,9 +246,9 @@ flags
     by the driver you are using.
 cacheMetadata
     Either boolean ``true``, or a string containing the cache configuration to
-    store meta data in. Having metadata caching disable is not advised and can
-    result in very poor performance. See the :ref:`database-metadata-cache`
-    section for more information.
+    store meta data in. Having metadata caching disabled by setting it to ``false``
+    is not advised and can result in very poor performance. See the
+    :ref:`database-metadata-cache` section for more information.
 mask
     Set the permissions on the generated database file. (Only supported by SQLite)
 
@@ -260,6 +260,13 @@ table BigBoxesTable, and your controller BigBoxesController, everything will
 work together automatically. By convention, use underscores, lower case, and
 plural forms for your database table names - for example: bakers,
 pastry\_stores, and savory\_cakes.
+
+.. note::
+
+    If your MySQL server is configured with ``skip-character-set-client-handshake``
+    then you MUST use the ``flags`` config to set your charset encoding. For e.g.::
+
+        'flags' => [\PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8']
 
 .. php:namespace:: Cake\Datasource
 
@@ -284,7 +291,7 @@ existing known connection::
 
     use Cake\Datasource\ConnectionManager;
 
-    $conn = ConnectionManager::get('default');
+    $connection = ConnectionManager::get('default');
 
 Attempting to load connections that do not exist will throw an exception.
 
@@ -295,7 +302,7 @@ Using ``setConfig()`` and ``get()`` you can create new connections that are not
 defined in your configuration files at runtime::
 
     ConnectionManager::setConfig('my_connection', $config);
-    $conn = ConnectionManager::get('my_connection');
+    $connection = ConnectionManager::get('my_connection');
 
 See the :ref:`database-configuration` for more information on the configuration
 data used when creating connections.
@@ -314,8 +321,9 @@ the same names for similar data types, CakePHP provides a set of abstracted
 data types for use with the database layer. The types CakePHP supports are:
 
 string
-    Generally backed by ``CHAR`` or ``VARCHAR`` columns. Using the ``fixed`` option
-    will force a CHAR column. In SQL Server, ``NCHAR`` and ``NVARCHAR`` types are used.
+    Maps to ``VARCHAR`` type. In SQL Server the ``NVARCHAR`` types are used.
+char
+    Maps to ``CHAR`` type. In SQL Server the ``NCHAR`` type is used.
 text
     Maps to ``TEXT`` types.
 uuid
@@ -351,8 +359,12 @@ date
     class.
 datetime
     See :ref:`datetime-type`.
+datetimefractional
+    See :ref:`datetime-type`.
 timestamp
     Maps to the ``TIMESTAMP`` type.
+timestampfractional
+    Maps to the ``TIMESTAMP(N)`` type.
 time
     Maps to a ``TIME`` type in all databases.
 json
@@ -373,9 +385,9 @@ handles, and generate file handles when reading data.
 DateTime Type
 -------------
 
-.. php:class:: Type\DateTimeType
+.. php:class:: DateTimeType
 
-Maps to a native ``DATETIME`` column type. In PostgreSQL, and SQL Server
+Maps to a native ``DATETIME`` column type. In PostgreSQL and SQL Server
 this turns into a ``TIMESTAMP`` type. The default return value of this column
 type is :php:class:`Cake\\I18n\\FrozenTime` which extends the built-in
 ``DateTimeImmutable`` class and `Chronos <https://github.com/cakephp/chronos>`_.
@@ -386,6 +398,30 @@ If your database server's timezone does not match your application's PHP timezon
 then you can use this method to specify your database's timezone. This timezone
 will then used when converting PHP objects to database's datetime string and
 vice versa.
+
+.. php:class:: DateTimeFractionalType
+
+Can be used to map datetime columns that contain microseconds such as
+``DATETIME(6)`` in MySQL. To use this type you need to add it as a mapped type::
+
+    // in confib/bootstrap.php
+    use Cake\Database\TypeFactory;
+    use Cake\Database\Type\DateTimeFractionalType;
+
+    // Overwrite the default datetime type with a more precise one.
+    TypeFactory::map('datetime', DateTimeFractionalType::class);
+
+.. php:class:: DateTimeTimezoneType
+
+Can be used to map datetime columns that contain time zones such as
+``TIMESTAMPTZ`` in PostgreSQL. To use this type you need to add it as a mapped type::
+
+    // in confib/bootstrap.php
+    use Cake\Database\TypeFactory;
+    use Cake\Database\Type\DateTimeTimezoneType;
+
+    // Overwrite the default datetime type with a more precise one.
+    TypeFactory::map('datetime', DateTimeTimezoneType::class);
 
 .. _adding-custom-database-types:
 
@@ -411,14 +447,13 @@ we could make the following type class::
 
     namespace App\Database\Type;
 
-    use Cake\Database\Driver;
-    use Cake\Database\Type;
+    use Cake\Database\DriverInterface;
+    use Cake\Database\Type\BaseType;
     use PDO;
 
-    class JsonType extends Type
+    class JsonType extends BaseType
     {
-
-        public function toPHP($value, Driver $driver)
+        public function toPHP($value, DriverInterface $driver)
         {
             if ($value === null) {
                 return null;
@@ -434,19 +469,18 @@ we could make the following type class::
             return json_decode($value, true);
         }
 
-        public function toDatabase($value, Driver $driver)
+        public function toDatabase($value, DriverInterface $driver)
         {
             return json_encode($value);
         }
 
-        public function toStatement($value, Driver $driver)
+        public function toStatement($value, DriverInterface $driver)
         {
             if ($value === null) {
                 return PDO::PARAM_NULL;
             }
             return PDO::PARAM_STR;
         }
-
     }
 
 By default the ``toStatement()`` method will treat values as strings which will
@@ -462,17 +496,15 @@ CakePHP's database layer will automatically convert our JSON data when creating
 queries. You can use the custom types you've created by mapping the types in
 your Table's :ref:`_initializeSchema() method <saving-complex-types>`::
 
-    use Cake\Database\Schema\TableSchema;
+    use Cake\Database\Schema\TableSchemaInterface;
 
     class WidgetsTable extends Table
     {
-
-        protected function _initializeSchema(TableSchema $schema)
+        protected function _initializeSchema(TableSchemaInterface $schema): TableSchemaInterface
         {
-            $schema->columnType('widget_prefs', 'json');
+            $schema->setColumnType('widget_prefs', 'json');
             return $schema;
         }
-
     }
 
 .. _mapping-custom-datatypes-to-sql-expressions:
@@ -623,7 +655,7 @@ PDO. There are a few different ways you can run queries depending on the type of
 query you need to run and what kind of results you need back. The most basic
 method is ``query()`` which allows you to run already completed SQL queries::
 
-    $stmt = $conn->query('UPDATE articles SET published = 1 WHERE id = 2');
+    $statement = $connection->query('UPDATE articles SET published = 1 WHERE id = 2');
 
 .. php:method:: execute($sql, $params, $types)
 
@@ -631,7 +663,7 @@ The ``query()`` method does not allow for additional parameters. If you need
 additional parameters you should use the ``execute()`` method, which allows for
 placeholders to be used::
 
-    $stmt = $conn->execute(
+    $statement = $connection->execute(
         'UPDATE articles SET published = ? WHERE id = ?',
         [1, 2]
     );
@@ -640,7 +672,7 @@ Without any type hinting information, ``execute`` will assume all placeholders
 are string values. If you need to bind specific types of data, you can use their
 abstract type names when creating a query::
 
-    $stmt = $conn->execute(
+    $statement = $connection->execute(
         'UPDATE articles SET published_date = ? WHERE id = ?',
         [new DateTime('now'), 2],
         ['date', 'integer']
@@ -653,17 +685,17 @@ them into SQL statements. The last and most flexible way of creating queries is
 to use the :doc:`/orm/query-builder`. This approach allows you to build complex and
 expressive queries without having to use platform specific SQL::
 
-    $query = $conn->newQuery();
+    $query = $connection->newQuery();
     $query->update('articles')
         ->set(['published' => true])
         ->where(['id' => 2]);
-    $stmt = $query->execute();
+    $statement = $query->execute();
 
 When using the query builder, no SQL will be sent to the database server until
 the ``execute()`` method is called, or the query is iterated. Iterating a query
 will first execute it and then start iterating over the result set::
 
-    $query = $conn->newQuery();
+    $query = $connection->newQuery();
     $query->select('*')
         ->from('articles')
         ->where(['published' => true]);
@@ -684,10 +716,10 @@ The connection objects provide you a few simple ways you do database
 transactions. The most basic way of doing transactions is through the ``begin()``,
 ``commit()`` and ``rollback()`` methods, which map to their SQL equivalents::
 
-    $conn->begin();
-    $conn->execute('UPDATE articles SET published = ? WHERE id = ?', [true, 2]);
-    $conn->execute('UPDATE articles SET published = ? WHERE id = ?', [false, 4]);
-    $conn->commit();
+    $connection->begin();
+    $connection->execute('UPDATE articles SET published = ? WHERE id = ?', [true, 2]);
+    $connection->execute('UPDATE articles SET published = ? WHERE id = ?', [false, 4]);
+    $connection->commit();
 
 .. php:method:: transactional(callable $callback)
 
@@ -695,9 +727,9 @@ In addition to this interface connection instances also provide the
 ``transactional()`` method which makes handling the begin/commit/rollback calls
 much simpler::
 
-    $conn->transactional(function ($conn) {
-        $conn->execute('UPDATE articles SET published = ? WHERE id = ?', [true, 2]);
-        $conn->execute('UPDATE articles SET published = ? WHERE id = ?', [false, 4]);
+    $connection->transactional(function ($connection) {
+        $connection->execute('UPDATE articles SET published = ? WHERE id = ?', [true, 2]);
+        $connection->execute('UPDATE articles SET published = ? WHERE id = ?', [false, 4]);
     });
 
 In addition to basic queries, you can execute more complex queries using either
@@ -728,14 +760,14 @@ You can create a statement object using ``execute()``, or ``prepare()``. The
 While ``prepare()`` returns an incomplete statement::
 
     // Statements from execute will have values bound to them already.
-    $stmt = $conn->execute(
+    $statement = $connection->execute(
         'SELECT * FROM articles WHERE published = ?',
         [true]
     );
 
     // Statements from prepare will be parameters for placeholders.
     // You need to bind parameters before attempting to execute it.
-    $stmt = $conn->prepare('SELECT * FROM articles WHERE published = ?');
+    $statement = $connection->prepare('SELECT * FROM articles WHERE published = ?');
 
 Once you've prepared a statement you can bind additional data and execute it.
 
@@ -748,36 +780,36 @@ Once you've created a prepared statement, you may need to bind additional data.
 You can bind multiple values at once using the ``bind()`` method, or bind
 individual elements using ``bindValue``::
 
-    $stmt = $conn->prepare(
+    $statement = $connection->prepare(
         'SELECT * FROM articles WHERE published = ? AND created > ?'
     );
 
     // Bind multiple values
-    $stmt->bind(
+    $statement->bind(
         [true, new DateTime('2013-01-01')],
         ['boolean', 'date']
     );
 
     // Bind a single value
-    $stmt->bindValue(1, true, 'boolean');
-    $stmt->bindValue(2, new DateTime('2013-01-01'), 'date');
+    $statement->bindValue(1, true, 'boolean');
+    $statement->bindValue(2, new DateTime('2013-01-01'), 'date');
 
 When creating statements you can also use named array keys instead of
 positional ones::
 
-    $stmt = $conn->prepare(
+    $statement = $connection->prepare(
         'SELECT * FROM articles WHERE published = :published AND created > :created'
     );
 
     // Bind multiple values
-    $stmt->bind(
+    $statement->bind(
         ['published' => true, 'created' => new DateTime('2013-01-01')],
         ['published' => 'boolean', 'created' => 'date']
     );
 
     // Bind a single value
-    $stmt->bindValue('published', true, 'boolean');
-    $stmt->bindValue('created', new DateTime('2013-01-01'), 'date');
+    $statement->bindValue('published', true, 'boolean');
+    $statement->bindValue('created', new DateTime('2013-01-01'), 'date');
 
 .. warning::
 
@@ -791,16 +823,16 @@ rows. Statements should be executed using the ``execute()`` method. Once
 executed, results can be fetched using ``fetch()``, ``fetchAll()`` or iterating
 the statement::
 
-    $stmt->execute();
+    $statement->execute();
 
     // Read one row.
-    $row = $stmt->fetch('assoc');
+    $row = $statement->fetch('assoc');
 
     // Read all rows.
-    $rows = $stmt->fetchAll('assoc');
+    $rows = $statement->fetchAll('assoc');
 
     // Read rows through iteration.
-    foreach ($stmt as $row) {
+    foreach ($statement as $row) {
         // Do work
     }
 
@@ -814,8 +846,8 @@ Getting Row Counts
 
 After executing a statement, you can fetch the number of affected rows::
 
-    $rowCount = count($stmt);
-    $rowCount = $stmt->rowCount();
+    $rowCount = count($statement);
+    $rowCount = $statement->rowCount();
 
 Checking Error Codes
 --------------------
@@ -824,8 +856,8 @@ If your query was not successful, you can get related error information
 using the ``errorCode()`` and ``errorInfo()`` methods. These methods work the
 same way as the ones provided by PDO::
 
-    $code = $stmt->errorCode();
-    $info = $stmt->errorInfo();
+    $code = $statement->errorCode();
+    $info = $statement->errorInfo();
 
 .. todo::
     Possibly document CallbackStatement and BufferedStatement
@@ -840,10 +872,10 @@ Query logging can be enabled when configuring your connection by setting the
 ``enableQueryLogging``::
 
     // Turn query logging on.
-    $conn->enableQueryLogging(true);
+    $connection->enableQueryLogging(true);
 
     // Turn query logging off
-    $conn->enableQueryLogging(false);
+    $connection->enableQueryLogging(false);
 
 When query logging is enabled, queries will be logged to
 :php:class:`Cake\\Log\\Log` using the 'debug' level, and the 'queriesLog' scope.
@@ -890,7 +922,7 @@ If you are using a legacy schema that requires identifier quoting you can enable
 it using the ``quoteIdentifiers`` setting in your
 :ref:`database-configuration`. You can also enable this feature at runtime::
 
-    $conn->driver()->autoQuoting(true);
+    $connection->getDriver()->enableAutoQuoting();
 
 When enabled, identifier quoting will cause additional query traversal that
 converts all identifiers into ``IdentifierExpression`` objects.

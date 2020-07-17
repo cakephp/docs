@@ -31,7 +31,7 @@ CakePHP は基礎的な構造をクラス名、ファイル名、DB のテーブ
 
     use Cake\ORM\TableRegistry;
 
-    $users = TableRegistry::get('Users');
+    $users = TableRegistry::getTableLocator()->get('Users');
     $query = $users->find();
     foreach ($query as $row) {
         echo $row->username;
@@ -45,7 +45,7 @@ CakePHP は基礎的な構造をクラス名、ファイル名、DB のテーブ
 
     use Cake\ORM\TableRegistry;
 
-    $users = TableRegistry::get('Users');
+    $users = TableRegistry::getTableLocator()->get('Users');
     $user = $users->newEntity(['email' => 'mark@example.com']);
     $users->save($user);
 
@@ -78,7 +78,7 @@ XML 形式の結果をレンダリングできます。 ::
 コントローラー層はユーザーからのリクエストを扱います。これはモデル層とビュー層の助けを借りてレスポンスを
 レンダリングして返す責任を負います。
 
-コントローラーは、タスクを終える為の全ての必要とされるリソースが正しい労働者に委譲されることに注意を払う
+コントローラーは、タスクを終える為の全ての必要とされるリソースが正しいワーカーに委譲されることに注意を払う
 マネージャーと見ることができます。
 クライアントからの要求を待ち、認証と承認のルールによる検証を行い、データの取得または処理をモデルに委譲し、
 クライアントが受け入れる適切な表示上のデータの種類を採択し、最終的にその描画処理をビュー層に委譲します。
@@ -113,7 +113,7 @@ CakePHP のリクエストサイクル
    :alt: Flow diagram showing a typical CakePHP request
 
 典型的な CakePHP のリクエストサイクルはユーザーがアプリケーション内でページまたはリソースにリクエストを
-投げるところから始まります。高位のそれぞれのリクエストは以下のステップで動きします:
+投げるところから始まります。上位レベルの各リクエストは以下のステップを実行します。
 
 #. ウェブサーバーが **webroot/index.php** へのリクエストを制御するルールを書き換えます。
 #. あなたのアプリケーションがロードされ、 ``HttpServer`` にひも付きます。
@@ -131,7 +131,7 @@ CakePHP のリクエストサイクル
 さっそく始めましょう
 ====================
 
-この文章があなたの興味を惹くことを願っています。CakePHP には他にもとてもいい特徴があります。:
+この文章があなたの興味を惹くことを願っています。CakePHP には他にもとてもいい特徴があります。
 
 * Memcached, Redis や他のバックエンドと統合された :doc:`キャッシュ </core-libraries/caching>`
   フレームワーク。
@@ -140,7 +140,7 @@ CakePHP のリクエストサイクル
 
 次の明白なステップは :doc:`download CakePHP </installation>` で,
 :doc:`チュートリアルとなにかすごいものを作る
-</tutorials-and-examples/cms/installation>` を読んで下さい。.
+</tutorials-and-examples/cms/installation>` を読んで下さい。
 
 付録
 ====

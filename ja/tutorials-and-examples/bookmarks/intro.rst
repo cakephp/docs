@@ -41,13 +41,13 @@ cURL がインストールされていたら、以下のように実行するの
 そして、CakePHP アプリケーションのスケルトンを **bookmarker** ディレクトリーにインストールするために、
 インストールディレクトリーからターミナルに以下の行をシンプルにタイプしてください。 ::
 
-    php composer.phar create-project --prefer-dist cakephp/app bookmarker
+    php composer.phar create-project --prefer-dist cakephp/app:4.* bookmarker
 
 `Composer Windows Installer <https://getcomposer.org/Composer-Setup.exe>`_
 をダウンロードして実行した場合、インストールディレクトリー (例えば、 C:\\wamp\\www\\dev\\cakephp3)
 からターミナルに以下の行をタイプしてください。 ::
 
-    composer self-update && composer create-project --prefer-dist cakephp/app bookmarker
+    composer self-update && composer create-project --prefer-dist cakephp/app:4.* bookmarker
 
 Composer を使うメリットは、 正しいファイルパーミッションの設定や、 **config/app.php**
 ファイルの作成などのように、自動的に完全なセットアップをしてくれることです。
@@ -370,7 +370,7 @@ Finder メソッドは、常に :doc:`/orm/query-builder` オブジェクトと�
 
 **/bookmarks/tagged** の URL にアクセスすると、 CakePHP は、ビューファイルがないことを
 知らせるエラーを表示します。次に、ビューファイルを ``tags()`` アクションのために作りましょう。
-**src/Template/Bookmarks/tags.ctp** に以下の内容を追加します。 ::
+**templates/Bookmarks/tags.php** に以下の内容を追加します。 ::
 
     <h1>
         Bookmarks tagged with
@@ -395,7 +395,7 @@ Finder メソッドは、常に :doc:`/orm/query-builder` オブジェクトと�
 :php:func:`h` ショートカット関数を使いました。HTML インジェクション問題を防ぐために
 ユーザーデータ出力時には、必ず ``h()`` を使用することを覚えておいて下さい。
 
-ビューテンプレートファイルのための CakePHP の規約に従って **tags.ctp** ファイルを作りました。
+ビューテンプレートファイルのための CakePHP の規約に従って **tags.php** ファイルを作りました。
 この規約は、小文字を使い、コントローラーのアクション名をアンダースコアー化したテンプレート名にすることです。
 
 ビューで ``$tags`` や ``$bookmarks`` 変数を使えることにお気づきでしょう。

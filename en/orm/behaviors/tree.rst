@@ -52,8 +52,10 @@ hierarchical data in::
 
 Once added, you can let CakePHP build the internal structure if the table is
 already holding some rows::
-
-    $categories = TableRegistry::get('Categories');
+    
+    // In a controller
+    
+    $categories = $this->getTableLocator()->get('Categories');
     $categories->recover();
 
 You can verify it works by getting any row from the table and asking for the
@@ -134,7 +136,7 @@ An example of all options in use is::
         'valuePath' => 'id',
         'spacer' => ' '
     ]);
-    
+
 An example using closure::
 
     $query = $categories->find('treeList', [
@@ -210,14 +212,12 @@ a locations table you may want to create one tree per country::
 
     class LocationsTable extends Table
     {
-
         public function initialize(array $config): void
         {
             $this->addBehavior('Tree', [
                 'scope' => ['country_name' => 'Brazil']
             ]);
         }
-
     }
 
 In the previous example, all tree operations will be scoped to only the rows

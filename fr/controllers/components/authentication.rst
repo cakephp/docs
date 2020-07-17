@@ -281,7 +281,7 @@ Après avoir connecté un utilisateur, vous voudrez généralement le rediriger 
 l'endroit d'où il vient. Passez une URL pour définir la destination vers
 laquelle l'utilisateur doit être redirigé après s'être connecté.
 
-Si aucun paramètre n'est passé, l'URL retournée suivra les règles suivantes :
+Si aucun paramètre n'est passé, l'URL retournée suivra les règles suivantes:
 
 - Retourne l'URL normalisée du paramètre URL redirect s'il est présent et qu'il
   pointe sur le même domaine que celui de l'application. Avant 3.4.0, la valeur
@@ -583,7 +583,7 @@ Afficher les Messages Flash de Auth
 
 Pour afficher les messages d'erreur de session que Auth génère, vous devez
 ajouter les lignes de code suivante dans votre layout. Ajoutez les deux lignes
-suivantes au fichier **src/Template/Layouts/default.ctp** dans la section body::
+suivantes au fichier **templates/layouts/default.php** dans la section body::
 
     // Seule cette ligne est nécessaire à partir de 3.4.0.
     echo $this->Flash->render();

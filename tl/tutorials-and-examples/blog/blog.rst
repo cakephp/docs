@@ -39,11 +39,11 @@ installation directory to install the CakePHP application skeleton
 in the directory that you wish to use it with. For this example we will be using
 "blog" but feel free to change it to something else.::
 
-    php composer.phar create-project --prefer-dist cakephp/app blog
+    php composer.phar create-project --prefer-dist cakephp/app:4.* blog
 
 In case you've already got composer installed globally, you may instead type::
 
-    composer self-update && composer create-project --prefer-dist cakephp/app blog
+    composer self-update && composer create-project --prefer-dist cakephp/app:4.* blog
 
 The advantage to using Composer is that it will automatically complete some
 important set up tasks, such as setting the correct file permissions and
@@ -110,9 +110,11 @@ haven't already done so, create an empty database for use in this
 tutorial, with a name of your choice, e.g. ``cake_blog``. Right now,
 we'll just create a single table to store our articles. We'll also throw
 in a few articles to use for testing purposes. Execute the following
-SQL statements into your database::
+SQL statements into your database:
 
-    /* First, create our articles table: */
+.. code-block:: mysql
+
+    # First, create our articles table
     CREATE TABLE articles (
         id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
         title VARCHAR(50),
@@ -121,7 +123,7 @@ SQL statements into your database::
         modified DATETIME DEFAULT NULL
     );
 
-    /* Then insert some articles for testing: */
+    # Then insert some articles for testing
     INSERT INTO articles (title,body,created)
         VALUES ('The title', 'This is the article body.', NOW());
     INSERT INTO articles (title,body,created)

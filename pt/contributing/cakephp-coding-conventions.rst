@@ -148,7 +148,7 @@ ternária para esclarecer a operação::
 Arquivos de template
 --------------------
 
-Em arquivos de *template* (arquivos .ctp) os desenvolvedores devem usar
+Em arquivos de *template* (arquivos .php) os desenvolvedores devem usar
 estruturas de controle por palavra-chave. A legibilidade em arquivos de
 *template* complexos é muito melhor dessa forma. As estruturas de controle
 podem tanto estar contidas em grandes blocos de código PHP, ou ainda em *tags*
@@ -422,7 +422,7 @@ Tags do PHP
 ===========
 
 Use sempre *tags* longas (``<?php ?>``) ao invés de *tags* curtas (``<? ?>``).
-O *short echo* deve ser usado em arquivos de template (**.ctp**) quando
+O *short echo* deve ser usado em arquivos de template (**.php**) quando
 apropriado.
 
 Short Echo

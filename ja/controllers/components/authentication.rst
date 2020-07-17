@@ -9,6 +9,12 @@ AuthComponent
 識別・判定する柔軟な仕組みを作るための権限判定オブジェクトを組み合わせることができるように
 なります。
 
+.. deprecated:: 4.0.0
+    AuthComponent は 4.0.0 では非推奨になり、
+    `authorization <https://book.cakephp.org/authorization/>`__
+    と `authentication <https://book.cakephp.org/authentication/>`__ プラグインに
+    置き換えられます。
+
 .. _authentication-objects:
 
 以降を読む前に
@@ -511,7 +517,7 @@ CakePHP のライブラリーを使用してランダムにこれらの API ト�
 ------------------------------------
 
 Auth が生成するセッションエラーメッセージを表示するためには、あなたのレイアウトに次のコードを
-加えなければなりません。 **src/Template/Layout/default.ctp** の body 部に次の2行を
+加えなければなりません。 **templates/layout/default.php** の body 部に次の2行を
 追加してください。 ::
 
     // 3.4.0 以降は、これだけが必要です。

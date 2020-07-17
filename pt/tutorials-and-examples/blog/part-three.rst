@@ -177,8 +177,8 @@ fazer uma leitura rápida se quiser familiarizar como o CakePHP funciona.
 .. note::
     Se você estiver no Windows lembre-se de usar \\ em vez de /.
 
-Você vai precisar editar o seguinte em **src/Template/Categories/add.ctp**
-e **src/Template/Categories/edit.ctp**::
+Você vai precisar editar o seguinte em **templates/Categories/add.php**
+e **templates/Categories/edit.php**::
 
     echo $this->Form->input('parent_id', [
         'options' => $parentCategories,
@@ -283,7 +283,7 @@ moveUp() e moveDown() para ser capaz de reordenar as categorias na árvore:
         }
     }
 
-Em src/Template/Categories/index.ctp substituir o conteúdo existente com:
+Em templates/Categories/index.php substituir o conteúdo existente com:
 
 .. code-block:: php
 
@@ -351,7 +351,7 @@ ele:
 
         public function add()
         {
-            $article = $this->Articles->newEntity();
+            $article = $this->Articles->newEmptyEntity();
             if ($this->request->is('post')) {
                 $article = $this->Articles->patchEntity($article, $this->request->getData());
                 if ($this->Articles->save($article)) {
@@ -376,7 +376,7 @@ O artigo adicionado deveria se parecer como isto:
 
 .. code-block:: php
 
-    <!-- File: src/Template/Articles/add.ctp -->
+    <!-- File: templates/Articles/add.php -->
 
     <h1>Add Article</h1>
     <?php

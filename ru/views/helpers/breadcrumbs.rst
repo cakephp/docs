@@ -127,17 +127,17 @@
         'separator' => '<li{{attrs}}><span{{innerAttrs}}>{{separator}}</span></li>'
     ]
 
-Вы можете с легкостью изменять их, используя метод ``templates()``, из
+Вы можете с легкостью изменять их, используя метод ``setTemplates()``, из
 ``StringTemplateTrait``::
 
-    $this->Breadcrumbs->templates([
+    $this->Breadcrumbs->setTemplates([
         'wrapper' => '<nav class="breadcrumbs"><ul{{attrs}}>{{content}}</ul></nav>',
     ]);
 
 Как только ваши шаблоны будут обработаны, опция ``templateVars`` позволит
 вам добавить ваши собственные переменные в различные шаблоны::
 
-    $this->Breadcrumbs->templates([
+    $this->Breadcrumbs->setTemplates([
         'item' => '<li{{attrs}}>{{icon}}<a href="{{url}}"{{innerAttrs}}>{{title}}</a></li>{{separator}}'
     ]);
 

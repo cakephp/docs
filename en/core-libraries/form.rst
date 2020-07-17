@@ -27,28 +27,22 @@ a simple contact form would look like::
 
     class ContactForm extends Form
     {
-
-        protected function _buildSchema(Schema $schema)
+        protected function _buildSchema(Schema $schema): Schema
         {
             return $schema->addField('name', 'string')
                 ->addField('email', ['type' => 'string'])
                 ->addField('body', ['type' => 'text']);
         }
 
-        protected function _buildValidator(Validator $validator)
+        public function validationDefault(Validator $validator): Validator
         {
-            $validator->add('name', 'length', [
-                    'rule' => ['minLength', 10],
-                    'message' => 'A name is required'
-                ])->add('email', 'format', [
-                    'rule' => 'email',
-                    'message' => 'A valid email address is required',
-                ]);
+            $validator->minLength('name', 10)
+                ->email('email');
 
             return $validator;
         }
 
-        protected function _execute(array $data)
+        protected function _execute(array $data): bool
         {
             // Send an email.
             return true;
@@ -139,7 +133,20 @@ Values set with this method will overwrite existing data in the form object::
 
 Values should only be defined if the request method is GET, otherwise
 you will overwrite your previous POST Data which might have validation errors
-that need corrections.
+that need corrections. You can use ``set()`` to add or replace individual fields
+or a subset of fields::
+
+    // Set one field.
+    $contact->set('name', 'John Doe');
+
+    // Set multiple fields;
+    $contact->set([
+        'name' => 'John Doe',
+        'email' => 'john.doe@example.com',
+    ]);
+
+.. versionadded:: 4.1.0
+    The ``set()`` method was added.
 
 Getting Form Errors
 ===================

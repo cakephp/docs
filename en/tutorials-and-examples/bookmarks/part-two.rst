@@ -105,7 +105,7 @@ well. Again, in the ``UsersController``, add the following code::
         return $this->redirect($this->Auth->logout());
     }
 
-This code whitelists the ``logout`` action as a public action, and implements
+This code configures the ``logout`` action as a public action and implements
 the logout method. Now you can visit ``/users/logout`` to log out. You should
 then be sent to the login page.
 
@@ -307,8 +307,8 @@ can add a virtual/computed field to the entity. In
 
     protected function _getTagString()
     {
-        if (isset($this->_properties['tag_string'])) {
-            return $this->_properties['tag_string'];
+        if (isset($this->_fields['tag_string'])) {
+            return $this->_fields['tag_string'];
         }
         if (empty($this->tags)) {
             return '';

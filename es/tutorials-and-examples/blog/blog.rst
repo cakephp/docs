@@ -46,11 +46,11 @@ Luego, simplemente escribe la siguiente línea en tu terminal desde tu directori
 de instalación para instalar el esqueleto de la aplicación de CakePHP en el
 directorio [nombre_app]. ::
 
-    php composer.phar create-project --prefer-dist cakephp/app [nombre_app]
+    php composer.phar create-project --prefer-dist cakephp/app:4.* [nombre_app]
 
 O si tienes Composer instalado globalmente::
 
-    composer create-project --prefer-dist cakephp/app [nombre_app]
+    composer create-project --prefer-dist cakephp/app:4.* [nombre_app]
 
 La ventaja de utilizar Composer es que automáticamente completará algunas tareas
 de inicialización, como aplicar permisos a ficheros y crear tu fichero
@@ -110,9 +110,11 @@ Vamos a crear una nueva base de datos para el blog.
 Puedes crear una base de datos en blanco con el nombre que quieras. De momento
 vamos a definir sólo una tabla para nuestros artículos ("posts"). Además
 crearemos algunos artículos de test para usarlos luego.  Una vez creada la
-tabla, ejecuta el siguiente código SQL en ella::
+tabla, ejecuta el siguiente código SQL en ella:
 
-    /* Primero, creamos la tabla artículos: */
+.. code-block:: mysql
+
+    # Primero, creamos la tabla artículos
     CREATE TABLE articles (
         id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
         title VARCHAR(50),
@@ -121,7 +123,7 @@ tabla, ejecuta el siguiente código SQL en ella::
         modified DATETIME DEFAULT NULL
     );
 
-    /* Luego insertamos algunos artículos para probar */
+    # Luego insertamos algunos artículos para probar
     INSERT INTO articles (title,body,created)
         VALUES ('El título', 'Esto es el cuerpo del artículo.', NOW());
     INSERT INTO articles (title,body,created)

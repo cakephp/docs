@@ -30,7 +30,8 @@ options are:
   config. This combined with ``Session.handler`` replace the custom session
   handling features of previous versions
 
-* ``Session.cookie`` - The name of the cookie to use. Defaults to 'CAKEPHP'.
+* ``Session.cookie`` - The name of the cookie to use. Defaults to value set for
+  ``session.name`` php.ini config.
 
 * ``Session.cookiePath`` - The url path for which session cookie is set. Maps to
   the ``session.cookie_path`` php.ini config. Defaults to base path of app.
@@ -45,6 +46,17 @@ this::
         'defaults' => 'php',
         'ini' => [
             'session.cookie_secure' => false
+        ]
+    ]);
+
+As of v4.0 CakePHP also sets the `SameSite <https://www.owasp.org/index.php/SameSite>`__ attribute to ``Lax``
+by default for session cookies, which helps protect against CSRF attacks.
+You can change the default value by setting ``session.cookie_samesite`` php.ini config::
+
+    Configure::write('Session', [
+        'defaults' => 'php',
+        'ini' => [
+            'session.cookie_samesite' => 'Strict'
         ]
     ]);
 
@@ -138,7 +150,7 @@ You can then read those values out from inside your handler::
 
 The above shows how you could setup the Database session handler with an
 application model. When using class names as your handler.engine, CakePHP will
-expect to find your class in the ``Network\Session`` namespace. For example, if
+expect to find your class in the ``Http\Session`` namespace. For example, if
 you had an ``AppSessionHandler`` class,  the file should be
 **src/Http/Session/AppSessionHandler.php**, and the class name should be
 ``App\Http\Session\AppSessionHandler``. You can also use session handlers
@@ -241,7 +253,7 @@ something like::
 
     class ComboSession extends DatabaseSession
     {
-        public $cacheKey;
+        protected $cacheKey;
 
         public function __construct()
         {
@@ -319,26 +331,42 @@ This means the session is accessible from:
 * Cells
 * Components
 
-In addition to the basic session object, you can also use the
-:php:class:`Cake\\View\\Helper\\SessionHelper` to interact with the session in
-your views. A basic example of session usage would be::
+A basic example of session usage in controllers, views and cells would be::
 
-    $name = $this->getRequest()->getSession()->read('User.name');
+    $name = $this->request->getSession()->read('User.name');
 
     // If you are accessing the session multiple times,
     // you will probably want a local variable.
-    $session = $this->getRequest()->getSession();
+    $session = $this->request->getSession();
     $name = $session->read('User.name');
+
+In helpers you can use ``$this->_View->getRequest()`` to get the request object
+and in component you can use ``$this->getController->getRequest()``.
 
 Reading & Writing Session Data
 ==============================
 
-.. php:method:: read($key)
+.. php:method:: read($key, $default = null)
 
 You can read values from the session using :php:meth:`Hash::extract()`
 compatible syntax::
 
-    $session->read('Config.language');
+    $session->read('Config.language', 'en');
+
+.. versionchanged:: 4.1.0
+    The ``default`` parameter was added.
+
+.. php:method:: readOrFail($key)
+
+The same as convenience wrapper around non-nullable return value::
+
+    $session->readOrFail('Config.language');
+
+This is useful, when you know this key has to be set and you don't want to have to check
+for the existence in code itself.
+
+.. versionadded:: 4.1.0
+    The ``readOrFail()`` was added.
 
 .. php:method:: write($key, $value)
 

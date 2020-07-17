@@ -26,7 +26,7 @@ CMS 教程 － Tags 和 Users
 Bake 也会使用 CakePHP 约定来推断模型之间的关系以及模型的验证规则。
 
 
-添加标签至 Artciles
+添加标签至 Articles
 ==========================
 
 我们小巧的 :abbr:`CMS` 可允许多用户，如果可以给内容分类会是一个很棒的功能。我们将使用标签来让用户
@@ -59,7 +59,7 @@ Bake 也会使用 CakePHP 约定来推断模型之间的关系以及模型的验
 启用标记功能
 ===================================
 
-现在我们的应用有了标签，让我们给予用户 artciles 标记功能。首先，更新 ``add`` 行为如下::
+现在我们的应用有了标签，让我们给予用户 articles 标记功能。首先，更新 ``add`` 行为如下::
 
     // in src/Controller/ArticlesController.php
 
@@ -71,7 +71,7 @@ Bake 也会使用 CakePHP 约定来推断模型之间的关系以及模型的验
     {
         public function add()
         {
-            $article = $this->Articles->newEntity();
+            $article = $this->Articles->newEmptyEntity();
             if ($this->request->is('post')) {
                 $article = $this->Articles->patchEntity($article, $this->request->getData());
 
@@ -98,7 +98,7 @@ Bake 也会使用 CakePHP 约定来推断模型之间的关系以及模型的验
     }
 
 添加的几行代码将标签列表作为关联数组 ``id => title`` 加载。这种格式能够让我们在模板中创建一个新的标签输入。
-加入以下代码至 **src/Template/Articles/add.ctp** 来实现新的标签输入::
+加入以下代码至 **templates/Articles/add.php** 来实现新的标签输入::
 
     echo $this->Form->control('tags._ids', ['options' => $tags]);
 
@@ -131,7 +131,7 @@ articles，因为往下我们将加入使用标签搜索 articles 的功能。
         $this->set('article', $article);
     }
 
-记住参照 **add.ctp** 来添加多选的 select 选择器至  **src/Template/Articles/edit.ctp** 模版中。
+记住参照 **add.php** 来添加多选的 select 选择器至  **templates/Articles/edit.php** 模版中。
 
 
 使用标签搜寻 articles
@@ -273,7 +273,7 @@ articles，因为往下我们将加入使用标签搜索 articles 的功能。
 -----------------
 
 现在访问 **/articles/tagged**，你将会看到一个新的报错页面，提醒你还没有建立视图文件。让我们完成它。在
-**src/Template/Articles/tags.ctp** 加入以下内容::
+**templates/Articles/tags.php** 加入以下内容::
 
 
     <h1>
@@ -298,7 +298,7 @@ articles，因为往下我们将加入使用标签搜索 articles 的功能。
 我们使用了 :doc:`/views/helpers/html` 和 :doc:`/views/helpers/text` 来帮助生成视图内容。我们
 还使用了 :php:func:`h` 来编码 HTML 内容。``h()`` 能够帮助我们防止 HTML 注入。 
 
-以上创建的 **tags.ctp** 文件遵循 CakePHP 的视图约定。此约定要求视图文件名使用小写字母和下划线格式的控制器
+以上创建的 **tags.php** 文件遵循 CakePHP 的视图约定。此约定要求视图文件名使用小写字母和下划线格式的控制器
 行为名。
 
 我们可以在视图模版中使用 ``$tags`` and ``$articles`` 变量，这是因为当我们在控制器中使用了 ``set()`` 方法
@@ -326,8 +326,8 @@ articles，因为往下我们将加入使用标签搜索 articles 的功能。
 
     protected function _getTagString()
     {
-        if (isset($this->_properties['tag_string'])) {
-            return $this->_properties['tag_string'];
+        if (isset($this->_fields['tag_string'])) {
+            return $this->_fields['tag_string'];
         }
         if (empty($this->tags)) {
             return '';
@@ -347,7 +347,7 @@ articles，因为往下我们将加入使用标签搜索 articles 的功能。
 ------------------
 
 在更新完我们的模型以后，我们可以加入一个新的输入元素至对应的视图中。在 
-**src/Template/Articles/add.ctp** 和 **src/Template/Articles/edit.ctp** 中，用以下的代码
+**templates/Articles/add.php** 和 **templates/Articles/edit.php** 中，用以下的代码
 替换 ``tags._ids``::
 
     echo $this->Form->control('tag_string', ['type' => 'text']);

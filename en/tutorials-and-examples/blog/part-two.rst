@@ -86,7 +86,6 @@ articles. The code for that action would look like this::
 
     class ArticlesController extends AppController
     {
-
         public function index()
         {
             $articles = $this->Articles->find('all');
@@ -212,7 +211,6 @@ you are very sneaky. Otherwise, we'll create it in the
 
     class ArticlesController extends AppController
     {
-
         public function index()
         {
              $this->set('articles', $this->Articles->find('all'));
@@ -272,7 +270,6 @@ First, start by creating an ``add()`` action in the
 
     class ArticlesController extends AppController
     {
-
         public function initialize(): void
         {
             parent::initialize();
@@ -293,7 +290,7 @@ First, start by creating an ``add()`` action in the
 
         public function add()
         {
-            $article = $this->Articles->newEntity();
+            $article = $this->Articles->newEmptyEntity();
             if ($this->request->is('post')) {
                 $article = $this->Articles->patchEntity($article, $this->request->getData());
                 if ($this->Articles->save($article)) {
@@ -418,13 +415,13 @@ back at our Articles model and make a few adjustments::
             $this->addBehavior('Timestamp');
         }
 
-        public function validationDefault(Validator $validator)
+        public function validationDefault(Validator $validator): Validator
         {
             $validator
-                ->notEmpty('title')
-                ->requirePresence('title')
-                ->notEmpty('body')
-                ->requirePresence('body');
+                ->notEmptyString('title')
+                ->requirePresence('title', 'create')
+                ->notEmptyString('body')
+                ->requirePresence('body', 'create');
 
             return $validator;
         }
@@ -643,7 +640,7 @@ route. It looks like this:
 
 .. code-block:: php
 
-    $routes->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
+    $builder->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
 
 This line connects the URL '/' with the default CakePHP home page.
 We want it to connect with our own controller, so replace that line
@@ -651,7 +648,7 @@ with this one:
 
 .. code-block:: php
 
-    $routes->connect('/', ['controller' => 'Articles', 'action' => 'index']);
+    $builder->connect('/', ['controller' => 'Articles', 'action' => 'index']);
 
 This should connect users requesting '/' to the ``index()`` action of
 our ``ArticlesController``.

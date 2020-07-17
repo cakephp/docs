@@ -63,8 +63,10 @@ Outro maneira de obter novas entidades é usando o método ``newEntity()`` dos o
 
     use Cake\ORM\TableRegistry;
 
-    $article = TableRegistry::get('Articles')->newEntity();
-    $article = TableRegistry::get('Articles')->newEntity([
+    // Prior to 3.6 use TableRegistry::get('Articles')
+    $article = TableRegistry::getTableLocator()->get('Articles')->newEntity();
+
+    $article = TableRegistry::getTableLocator()->get('Articles')->newEntity([
         'id' => 1,
         'title' => 'New Article',
         'created' => new DateTime('now')
@@ -112,7 +114,7 @@ do campo.
 
 .. php:method:: get($field)
 
-Eles recebem o valor básico armazenado no array ``_properties`` como seu
+Eles recebem o valor básico armazenado no array ``_fields`` como seu
 único argumento. Acessadores serão usadas ao salvar entidades, então seja
 cuidadoso ao definir métodos que formatam dados, já que os dados formatados
 serão persistido. Por exemplo::
@@ -189,8 +191,8 @@ não existem. Por exemplo, se sua tabela users tem ``first_name`` e
 
         protected function _getFullName()
         {
-            return $this->_properties['first_name'] . '  ' .
-                $this->_properties['last_name'];
+            return $this->_fields['first_name'] . '  ' .
+                $this->_fields['last_name'];
         }
 
     }

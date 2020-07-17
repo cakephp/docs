@@ -96,19 +96,30 @@ output. The following options are available:
 |                     | with the international currency code.              |
 +---------------------+----------------------------------------------------+
 
-If $currency value is ``null``, the default currency will be retrieved from
-:php:meth:`Cake\\I18n\\Number::defaultCurrency()`
+If ``$currency`` value is ``null``, the default currency will be retrieved from
+:php:meth:`Cake\\I18n\\Number::defaultCurrency()`. To format currencies in an
+accounting format you should set the currency format::
+
+    Number::setDefaultCurrencyFormat(Number::FORMAT_CURRENCY_ACCOUNTING);
 
 Setting the Default Currency
 ============================
 
-.. php:method:: defaultCurrency($currency)
+.. php:method:: setDefaultCurrency($currency)
 
-Setter/getter for the default currency. This removes the need to always pass the
+Setter for the default currency. This removes the need to always pass the
 currency to :php:meth:`Cake\\I18n\\Number::currency()` and change all
-currency outputs by setting other default. If ``$currency`` is set to ``false``,
-it will clear the currently stored value. By default, it will retrieve the
-``intl.default_locale`` if set and 'en_US' if not.
+currency outputs by setting other default. If ``$currency`` is set to ``null``,
+it will clear the currently stored value.
+
+Setting the Default Currency
+============================
+
+.. php:method:: getDefaultCurrency()
+
+Getter for the default currency. If default currency was set earlier using
+``setDefaultCurrency()``, then that value will be returned. By default, it will 
+retrieve the ``intl.default_locale`` ini value if set and ``'en_US'`` if not.
 
 Formatting Floating Point Numbers
 =================================

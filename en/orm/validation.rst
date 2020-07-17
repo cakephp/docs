@@ -22,7 +22,7 @@ If any validation rules fail, the returned entity will contain errors. The
 fields with errors will not be present in the returned entity::
 
     $article = $articles->newEntity($this->request->getData());
-    if ($article->errors()) {
+    if ($article->getErrors()) {
         // Entity failed validation.
     }
 
@@ -66,7 +66,7 @@ To create a default validation object in your table, create the
 
     class ArticlesTable extends Table
     {
-        public function validationDefault(Validator $validator)
+        public function validationDefault(Validator $validator): Validator
         {
             $validator
                 ->requirePresence('title', 'create')
@@ -158,7 +158,7 @@ construction process into multiple reusable steps::
 
     // UsersTable.php
 
-    public function validationDefault(Validator $validator)
+    public function validationDefault(Validator $validator): Validator
     {
         $validator->notEmptyString('username');
         $validator->notEmptyString('password');
@@ -168,7 +168,7 @@ construction process into multiple reusable steps::
         return $validator;
     }
 
-    public function validationHardened(Validator $validator)
+    public function validationHardened(Validator $validator): Validator
     {
         $validator = $this->validationDefault($validator);
 
@@ -199,7 +199,7 @@ a validation rule::
 
     class UsersTable extends Table
     {
-        public function validationDefault(Validator $validator)
+        public function validationDefault(Validator $validator): Validator
         {
             $validator
                 ->add('role', 'validRole', [
@@ -210,7 +210,7 @@ a validation rule::
             return $validator;
         }
 
-        public function isValidRole($value, array $context)
+        public function isValidRole($value, array $context): bool
         {
             return in_array($value, ['admin', 'editor', 'author'], true);
         }
@@ -291,7 +291,7 @@ class::
     use Cake\ORM\RulesChecker;
 
     // In a table class
-    public function buildRules(RulesChecker $rules)
+    public function buildRules(RulesChecker $rules): RulesChecker
     {
         // Add a rule that is applied for create and update operations
         $rules->add(function ($entity, $options) {
@@ -336,9 +336,9 @@ message as options::
         'message' => 'This invoice cannot be moved to that status.'
     ]);
 
-The error will be visible when calling the ``errors()`` method on the entity::
+The error will be visible when calling the ``getErrors()`` method on the entity::
 
-    $entity->errors(); // Contains the domain rules error messages
+    $entity->getErrors(); // Contains the domain rules error messages
 
 Creating Unique Field Rules
 ---------------------------
@@ -429,6 +429,30 @@ Note that ``validCount`` returns ``false`` if the property is not countable or d
     // The save operation will fail if tags is null.
     $rules->add($rules->validCount('tags', 0, '<=', 'You must not have any tags'));
 
+Association Link Constraint Rule
+--------------------------------
+
+The ``LinkConstraint`` lets you emulate SQL constraints in databases that don't
+support them, or when you want to provide more user friendly error messages when
+constraints would fail. This rule enables you to check if an association does or does not
+have related records depending on the mode used::
+
+    // Ensure that each comment is linked to an Article during updates.
+    $rules->addUpdate($rules->isLinkedTo(
+        'Articles',
+        'article',
+        'Requires an article'
+    ));
+
+    // Ensure that an article has no linked comments during delete.
+    $rules->addDelete($rules->isNotLinkedTo(
+        'Comments',
+        'comments',
+        'Must have zero comments before deletion.'
+    ));
+
+.. versionadded:: 4.0.0
+
 Using Entity Methods as Rules
 -----------------------------
 
@@ -505,7 +529,7 @@ You may want to re-use custom domain rules. You can do so by creating your own i
 
     use App\ORM\Rule\IsUniqueWithNulls;
     // ...
-    public function buildRules(RulesChecker $rules)
+    public function buildRules(RulesChecker $rules): RulesChecker
     {
         $rules->add(new IsUniqueWithNulls(['parent_id', 'instance_id', 'name']), 'uniqueNamePerParent', [
             'errorField' => 'name',
@@ -585,7 +609,10 @@ In the above example, we'll use a 'custom' validator, which is defined using the
 
     public function validationCustomName($validator)
     {
-        $validator->add(...);
+        $validator->add(
+            // ...
+        );
+
         return $validator;
     }
 
@@ -600,7 +627,8 @@ from any request::
             'message' => 'Passwords are not equal',
         ]);
 
-        ...
+        // ...
+
         return $validator;
     }
 
@@ -618,9 +646,10 @@ Application rules as explained above will be checked whenever ``save()`` or
 ``delete()`` are called::
 
     // In src/Model/Table/UsersTable.php
-    public function buildRules(RulesChecker $rules)
+    public function buildRules(RulesChecker $rules): RulesChecker
     {
         $rules->add($rules->isUnique('email'));
+
         return $rules;
     }
 
@@ -632,18 +661,20 @@ While Validation is meant for direct user input, application rules are specific
 for data transitions generated inside your application::
 
     // In src/Model/Table/OrdersTable.php
-    public function buildRules(RulesChecker $rules)
+    public function buildRules(RulesChecker $rules): RulesChecker
     {
         $check = function($order) {
-            if($order->shipping_mode !== 'free'){
+            if ($order->shipping_mode !== 'free') {
                 return true;
             }
+
             return $order->price >= 100;
         };
         $rules->add($check, [
             'errorField' => 'shipping_mode',
             'message' => 'No free shipping for orders under 100!'
         ]);
+
         return $rules;
     }
 
@@ -660,29 +691,31 @@ data that was both generated by users and inside your application. This could
 come up when running a CLI script that directly sets properties on entities::
 
     // In src/Model/Table/UsersTable.php
-    public function validationDefault(Validator $validator)
+    public function validationDefault(Validator $validator): Validator
     {
-        $validator->add('email', 'valid', [
+        $validator->add('email', 'valid_email', [
             'rule' => 'email',
             'message' => 'Invalid email'
         ]);
-        ...
+
+        // ...
+
         return $validator;
     }
 
-    public function buildRules(RulesChecker $rules)
+    public function buildRules(RulesChecker $rules): RulesChecker
     {
         // Add validation rules
         $rules->add(function($entity) {
             $data = $entity->extract($this->schema()->columns(), true);
             $validator = $this->validator('default');
-            $errors = $validator->errors($data, $entity->isNew());
-            $entity->errors($errors);
+            $errors = $validator->validate($data, $entity->isNew());
+            $entity->setErrors($errors);
 
             return empty($errors);
         });
 
-        ...
+        // ...
 
         return $rules;
     }
@@ -692,10 +725,10 @@ was added::
 
     $userEntity->email = 'not an email!!!';
     $usersTable->save($userEntity);
-    $userEntity->errors('email'); // Invalid email
+    $userEntity->getError('email'); // Invalid email
 
 The same result can be expected when using ``newEntity()`` or
 ``patchEntity()``::
 
     $userEntity = $usersTable->newEntity(['email' => 'not an email!!']);
-    $userEntity->errors('email'); // Invalid email
+    $userEntity->getError('email'); // Invalid email

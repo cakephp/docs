@@ -1,20 +1,17 @@
-Blog Tutorial - Authentication and Authorization
-################################################
+Blog Tutorial - Authentication
+##############################
 
 Following our :doc:`/tutorials-and-examples/blog/blog` example, imagine we
-wanted to secure access to certain URLs, based on the logged-in
-user. We also have another requirement: to allow our blog to have multiple
-authors who can create, edit, and delete their own articles while disallowing
-other authors from making changes to articles they do not own.
+wanted to disallow unauthenticated users to create articles.
 
-Creating All User-Related Code
-==============================
+Creating Users Table and Controller
+===================================
 
 First, let's create a new table in our blog database to hold our users' data::
 
     CREATE TABLE users (
         id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-        username VARCHAR(50),
+        email VARCHAR(255),
         password VARCHAR(255),
         role VARCHAR(20),
         created DATETIME DEFAULT NULL,
@@ -22,12 +19,12 @@ First, let's create a new table in our blog database to hold our users' data::
     );
 
 We have adhered to the CakePHP conventions in naming tables, but we're also
-taking advantage of another convention: By using the username and password
+taking advantage of another convention: By using the email and password
 columns in a users table, CakePHP will be able to auto-configure most things for
 us when implementing the user login.
 
-Next step is to create our UsersTable class, responsible for finding, saving and
-validating any user data::
+Next step is to create our ``UsersTable`` class, responsible for finding, saving
+and validating any user data::
 
     // src/Model/Table/UsersTable.php
     namespace App\Model\Table;
@@ -37,11 +34,11 @@ validating any user data::
 
     class UsersTable extends Table
     {
-
-        public function validationDefault(Validator $validator)
+        public function validationDefault(Validator $validator): Validator
         {
             return $validator
-                ->notEmpty('username', 'A username is required')
+                ->notEmpty('email', 'An email is required')
+                ->email('email')
                 ->notEmpty('password', 'A password is required')
                 ->notEmpty('role', 'A role is required')
                 ->add('role', 'inList', [
@@ -52,9 +49,9 @@ validating any user data::
 
     }
 
-Let's also create our UsersController. The following content corresponds to
-parts of a basic baked UsersController class using the code generation utilities bundled
-with CakePHP::
+Let's also create our ``UsersController``. The following content corresponds to
+parts of a basic baked ``UsersController`` class using the code generation
+utilities bundled with CakePHP::
 
     // src/Controller/UsersController.php
 
@@ -65,15 +62,8 @@ with CakePHP::
 
     class UsersController extends AppController
     {
-
-        public function beforeFilter(EventInterface $event)
+        public function index()
         {
-            parent::beforeFilter($event);
-            $this->Auth->allow('add');
-        }
-
-         public function index()
-         {
             $this->set('users', $this->Users->find('all'));
         }
 
@@ -85,7 +75,7 @@ with CakePHP::
 
         public function add()
         {
-            $user = $this->Users->newEntity();
+            $user = $this->Users->newEmptyEntity();
             if ($this->request->is('post')) {
                 $user = $this->Users->patchEntity($user, $this->request->getData());
                 if ($this->Users->save($user)) {
@@ -96,12 +86,11 @@ with CakePHP::
             }
             $this->set('user', $user);
         }
-
     }
 
 In the same way we created the views for our articles by using the code
 generation tool, we can implement the user views. For the purpose of this
-tutorial, we will show just the add.php:
+tutorial, we will show just the **add.php**:
 
 .. code-block:: php
 
@@ -111,7 +100,7 @@ tutorial, we will show just the add.php:
     <?= $this->Form->create($user) ?>
         <fieldset>
             <legend><?= __('Add User') ?></legend>
-            <?= $this->Form->control('username') ?>
+            <?= $this->Form->control('email') ?>
             <?= $this->Form->control('password') ?>
             <?= $this->Form->control('role', [
                 'options' => ['admin' => 'Admin', 'author' => 'Author']
@@ -121,105 +110,27 @@ tutorial, we will show just the add.php:
     <?= $this->Form->end() ?>
     </div>
 
-Authentication (Login and Logout)
-=================================
+Adding Authentication
+=====================
 
 We're now ready to add our authentication layer. In CakePHP this is handled by
-the :php:class:`Cake\\Controller\\Component\\AuthComponent`, a class responsible
-for requiring login for certain actions, handling user login and logout, and
-also authorizing logged-in users to the actions they are allowed to reach.
+the ``authentication`` plugin. Let's start off by installing it. Use composer to
+install the Authentication Plugin:
 
-To add this component to your application open your
-**src/Controller/AppController.php** file and add the following lines::
+.. code-block:: bash
 
-    // src/Controller/AppController.php
+    composer require cakephp/authentication:^2.0
 
-    namespace App\Controller;
+Then add the following to your application's ``bootstrap()`` method::
 
-    use Cake\Controller\Controller;
-    use Cake\Event\Event;
+    // in src/Application.php in the bootstrap() method.
+    $this->addPlugin('Authentication');
 
-    class AppController extends Controller
-    {
-        //...
+Adding Password Hashing
+=======================
 
-        public function initialize(): void
-        {
-            $this->loadComponent('Flash');
-            $this->loadComponent('Auth', [
-                'loginRedirect' => [
-                    'controller' => 'Articles',
-                    'action' => 'index'
-                ],
-                'logoutRedirect' => [
-                    'controller' => 'Pages',
-                    'action' => 'display',
-                    'home'
-                ]
-            ]);
-        }
-
-        public function beforeFilter(EventInterface $event)
-        {
-            $this->Auth->allow(['index', 'view', 'display']);
-        }
-        //...
-    }
-
-There is not much to configure, as we used the conventions for the users table.
-We just set up the URLs that will be loaded after the login and logout actions
-is performed, in our case to ``/articles/`` and ``/`` respectively.
-
-What we did in the ``beforeFilter()`` function was to tell the AuthComponent to
-not require a login for all ``index()`` and ``view()`` actions, in every
-controller. We want our visitors to be able to read and list the entries without
-registering in the site.
-
-Now, we need to be able to register new users, save their username and password,
-and more importantly, hash their password so it is not stored as plain text in
-our database. Let's tell the AuthComponent to let un-authenticated users access
-the users add function and implement the login and logout action::
-
-    // src/Controller/UsersController.php
-    namespace App\Controller;
-
-    use App\Controller\AppController;
-    use Cake\Event\EventInterface;
-
-    class UsersController extends AppController
-    {
-        // Other methods..
-
-        public function beforeFilter(EventInterface $event)
-        {
-            parent::beforeFilter($event);
-            // Allow users to register and logout.
-            // You should not add the "login" action to allow list. Doing so would
-            // cause problems with normal functioning of AuthComponent.
-            $this->Auth->allow(['add', 'logout']);
-        }
-
-        public function login()
-        {
-            if ($this->request->is('post')) {
-                $user = $this->Auth->identify();
-                if ($user) {
-                    $this->Auth->setUser($user);
-                    return $this->redirect($this->Auth->redirectUrl());
-                }
-                $this->Flash->error(__('Invalid username or password, try again'));
-            }
-        }
-
-        public function logout()
-        {
-            return $this->redirect($this->Auth->logout());
-        }
-    }
-
-Password hashing is not done yet, we need an Entity class for our User in order
-to handle its own specific logic. Create the **src/Model/Entity/User.php**
-entity file and add the following::
+Next, we'll create the ``User`` entity and add password hashing.  Create the
+**src/Model/Entity/User.php** entity file and add the following::
 
     // src/Model/Entity/User.php
     namespace App\Model\Entity;
@@ -229,7 +140,6 @@ entity file and add the following::
 
     class User extends Entity
     {
-
         // Make all fields mass assignable except for primary key field "id".
         protected $_accessible = [
             '*' => true,
@@ -249,189 +159,209 @@ entity file and add the following::
     }
 
 Now every time the password property is assigned to the user it will be hashed
-using the ``DefaultPasswordHasher`` class.  We're just missing a template view
-file for the login function. Open up your **templates/Users/login.php** file
-and add the following lines:
+using the ``DefaultPasswordHasher`` class.
 
-.. code-block:: php
+Configuring Authentication
+==========================
 
-    <!-- File: templates/Users/login.php -->
+Now it's time to configure the Authentication Plugin.
+The Plugin will handle the authentication process using 3 different classes:
 
-    <div class="users form">
-    <?= $this->Flash->render() ?>
-    <?= $this->Form->create() ?>
-        <fieldset>
-            <legend><?= __('Please enter your username and password') ?></legend>
-            <?= $this->Form->control('username') ?>
-            <?= $this->Form->control('password') ?>
-        </fieldset>
-    <?= $this->Form->button(__('Login')); ?>
-    <?= $this->Form->end() ?>
-    </div>
+* ``Application`` will use the Authentication Middleware and provide an
+  AuthenticationService, holding all the configuration we want to define how are
+  we going to check the credentials, and where to find them.
+* ``AuthenticationService`` will be a utility class to allow you configure the
+  authentication process.
+* ``AuthenticationMiddleware`` will be executed as part of the middleware queue,
+  this is before your Controllers are processed by the framework, and will pick the
+  credentials and process them to check if the user is authenticated.
 
-You can now register a new user by accessing the ``/users/add`` URL and log in
-with the newly created credentials by going to ``/users/login`` URL. Also, try
-to access any other URL that was not explicitly allowed such as
-``/articles/add``, you will see that the application automatically redirects you
-to the login page.
+Authentication logic is divided into specific classes and the authentication
+process happens before your controller layer. First authentication checks if the
+user is authenticated (based in the configuration you provided) and injects the
+user and the authentication results into the request for further reference.
 
-And that's it! It looks too simple to be true. Let's go back a bit to explain
-what happened. The ``beforeFilter()`` function is telling the AuthComponent to
-not require a login for the ``add()`` action in addition to the ``index()`` and
-``view()`` actions that were already allowed in the AppController's
-``beforeFilter()`` function.
+In **src/Application.php**, add the following imports::
 
-The ``login()`` action calls the ``$this->Auth->identify()`` function in the
-AuthComponent, and it works without any further config because we are following
-conventions as mentioned earlier. That is, having a Users table with a username
-and a password column, and use a form posted to a controller with the user data.
-This function returns whether the login was successful or not, and in the case
-it succeeds, then we redirect the user to the configured redirection URL that we
-used when adding the AuthComponent to our application.
+    // In src/Application.php add the following imports
+    use Authentication\AuthenticationService;
+    use Authentication\AuthenticationServiceInterface;
+    use Authentication\AuthenticationServiceProviderInterface;
+    use Authentication\Middleware\AuthenticationMiddleware;
+    use Psr\Http\Message\ServerRequestInterface;
 
-The logout works by just accessing the ``/users/logout`` URL and will redirect
-the user to the configured logoutUrl formerly described. This URL is the result
-of the ``AuthComponent::logout()`` function on success.
+Then implement the authentication interface on your application class::
 
-Authorization (who's allowed to access what)
-============================================
-
-As stated before, we are converting this blog into a multi-user authoring tool,
-and in order to do this, we need to modify the articles table a bit to add the
-reference to the Users table::
-
-    ALTER TABLE articles ADD COLUMN user_id INT(11);
-
-Also, a small change in the ArticlesController is required to store the
-currently logged in user as a reference for the created article::
-
-    // src/Controller/ArticlesController.php
-
-    public function add()
+    // in src/Application.php
+    class Application extends BaseApplication
+        implements AuthenticationServiceProviderInterface
     {
-        $article = $this->Articles->newEntity();
-        if ($this->request->is('post')) {
-            $article = $this->Articles->patchEntity($article, $this->request->getData());
-            // Added this line
-            $article->user_id = $this->Auth->user('id');
-            // You could also do the following
-            //$newData = ['user_id' => $this->Auth->user('id')];
-            //$article = $this->Articles->patchEntity($article, $newData);
-            if ($this->Articles->save($article)) {
-                $this->Flash->success(__('Your article has been saved.'));
-                return $this->redirect(['action' => 'index']);
-            }
-            $this->Flash->error(__('Unable to add your article.'));
-        }
-        $this->set('article', $article);
 
-        // Just added the categories list to be able to choose
-        // one category for an article
-        $categories = $this->Articles->Categories->find('treeList');
-        $this->set(compact('categories'));
+Then add the following::
+
+    // src/Application.php
+    public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue
+    {
+        $middlewareQueue
+            // ... other middleware added before
+            ->add(new RoutingMiddleware($this))
+            // add Authentication after RoutingMiddleware
+            ->add(new AuthenticationMiddleware($this));
+
+        return $middlewareQueue;
     }
 
-The ``user()`` function provided by the component returns any column from the
-currently logged in user. We used this method to add the data into the request
-info that is saved.
-
-Let's secure our app to prevent some authors from editing or deleting the
-others' articles. Basic rules for our app are that admin users can access every
-URL, while normal users (the author role) can only access the permitted actions.
-Again, open the AppController class and add a few more options to the Auth
-config::
-
-    // src/Controller/AppController.php
-
-    public function initialize(): void
+    public function getAuthenticationService(ServerRequestInterface $request): AuthenticationServiceInterface
     {
-        $this->loadComponent('Flash');
-        $this->loadComponent('Auth', [
-            'authorize' => ['Controller'], // Added this line
-            'loginRedirect' => [
-                'controller' => 'Articles',
-                'action' => 'index'
-            ],
-            'logoutRedirect' => [
-                'controller' => 'Pages',
-                'action' => 'display',
-                'home'
+        $authenticationService = new AuthenticationService([
+            'unauthenticatedRedirect' => '/users/login',
+            'queryParam' => 'redirect',
+        ]);
+
+        // Load identifiers, ensure we check email and password fields
+        $authenticationService->loadIdentifier('Authentication.Password', [
+            'fields' => [
+                'username' => 'email',
+                'password' => 'password',
             ]
         ]);
+
+        // Load the authenticators, you want session first
+        $authenticationService->loadAuthenticator('Authentication.Session');
+        // Configure form data check to pick email and password
+        $authenticationService->loadAuthenticator('Authentication.Form', [
+            'fields' => [
+                'username' => 'email',
+                'password' => 'password',
+            ],
+            'loginUrl' => '/users/login',
+        ]);
+
+        return $authenticationService;
     }
 
-    public function isAuthorized($user)
+In you ``AppController`` class add the following code::
+
+    // src/Controller/AppController.php
+    public function initialize(): void
     {
-        // Admin can access every action
-        if (isset($user['role']) && $user['role'] === 'admin') {
-            return true;
-        }
+        parent::initialize();
+        $this->loadComponent('RequestHandler');
+        $this->loadComponent('Flash');
 
-        // Default deny
-        return false;
-    }
+        // Add this line to check authentication result and lock your site
+        $this->loadComponent('Authentication.Authentication');
 
-We just created a simple authorization mechanism. Users with the ``admin``
-role will be able to access any URL in the site when logged-in. All other
-users -- those with the ``author`` role -- will have the same access as
-users who aren't logged-in.
+Now, on every request, the ``AuthenticationMiddleware`` will inspect the request
+session to look for an authenticated user. If we are loading the
+``/users/login`` page, it'll inspect also the posted form data (if any) to
+extract the credentials.  By default the credentials will be extracted from the
+``email`` and ``password`` fields in the request data.  The authentication
+result will be injected in a request attribute named ``authentication``. You can
+inspect the result at any time using
+``$this->request->getAttribute('authentication')`` from your controller actions.
+All your pages will be restricted as the ``AuthenticationComponent`` is checking
+the result on every request. When it fails to find any authenticated user, it'll
+redirect the user to the ``/users/login`` page.  Note at this point, the site
+won't work as we don't have a login page yet.  If you visit your site, you'll
+get an "infinite redirect loop".  So, let's fix that!
 
-This is not exactly what we want. We need to supply more rules to our
-``isAuthorized()`` method. However instead of doing it in AppController,
-we'll delegate supplying those extra rules to each individual controller.
-The rules we're going to add to ArticlesController should permit authors
-to create articles but prevent authors from editing articles they do not
-own.  Add the following content to your **ArticlesController.php**::
+In your ``UsersController``, add the following code::
 
-    // src/Controller/ArticlesController.php
-
-    public function isAuthorized($user)
+    public function beforeFilter(\Cake\Event\EventInterface $event)
     {
-        // All registered users can add articles
-        if ($this->request->getParam('action') === 'add') {
-            return true;
-        }
-
-        // The owner of an article can edit and delete it
-        if (in_array($this->request->getParam('action'), ['edit', 'delete'])) {
-            $articleId = (int)$this->request->getParam('pass.0');
-            if ($this->Articles->isOwnedBy($articleId, $user['id'])) {
-                return true;
-            }
-        }
-
-        return parent::isAuthorized($user);
+        parent::beforeFilter($event);
+        // Configure the login action to not require authentication, preventing
+        // the infinite redirect loop issue
+        $this->Authentication->addUnauthenticatedActions(['login']);
     }
 
-We're now overriding the AppController's ``isAuthorized()`` call and internally
-checking if the parent class is already authorizing the user. If he isn't,
-then just allow him to access the add action, and conditionally access
-edit and delete. One final thing has not been implemented. To tell whether
-or not the user is authorized to edit the article, we're calling a ``isOwnedBy()``
-function in the Articles table. Let's then implement that function::
-
-    // src/Model/Table/ArticlesTable.php
-
-    public function isOwnedBy($articleId, $userId)
+    public function login()
     {
-        return $this->exists(['id' => $articleId, 'user_id' => $userId]);
+        $this->request->allowMethod(['get', 'post']);
+        $result = $this->Authentication->getResult();
+        // regardless of POST or GET, redirect if user is logged in
+        if ($result->isValid()) {
+            // redirect to /articles after login success
+            $redirect = $this->request->getQuery('redirect', [
+                'controller' => 'Articles',
+                'action' => 'index',
+            ]);
+
+            return $this->redirect($redirect);
+        }
+        // display error if user submitted and authentication failed
+        if ($this->request->is('post') && !$result->isValid()) {
+            $this->Flash->error(__('Invalid email or password'));
+        }
     }
 
-This concludes our simple authentication and authorization tutorial. For securing
-the UsersController you can follow the same technique we did for ArticlesController.
-You could also be more creative and code something more general in AppController based
-on your own rules.
+Add the template logic for your login action::
 
-Should you need more control, we suggest you read the complete Auth guide in the
-:doc:`/controllers/components/authentication` section where you will find more
-about configuring the component, creating custom Authorization classes, and much more.
+    <!-- in /templates/Users/login.php -->
+    <div class="users form">
+        <?= $this->Flash->render() ?>
+        <h3>Login</h3>
+        <?= $this->Form->create() ?>
+        <fieldset>
+            <legend><?= __('Please enter your email and password') ?></legend>
+            <?= $this->Form->control('email', ['required' => true]) ?>
+            <?= $this->Form->control('password', ['required' => true]) ?>
+        </fieldset>
+        <?= $this->Form->submit(__('Login')); ?>
+        <?= $this->Form->end() ?>
+
+        <?= $this->Html->link("Add User", ['action' => 'add']) ?>
+    </div>
+
+Now login page will allow us to correctly login into the application.
+Test it by requesting any page of your site. After being redirected
+to the ``/users/login`` page, enter the email and password you
+picked previously when creating your user. You should be redirected
+successfully after login.
+
+We need to add a couple more details to configure our application.  We want all
+``view`` and ``index`` pages accessible without logging in so we'll add this
+specific configuration in ``AppController``::
+
+    // in src/Controller/AppController.php
+    public function beforeFilter(\Cake\Event\EventInterface $event)
+    {
+        parent::beforeFilter($event);
+        // for all controllers in our application, make index and view
+        // actions public, skipping the authentication check.
+        $this->Authentication->addUnauthenticatedActions(['index', 'view']);
+    }
+
+Logout
+======
+
+Add the logout action to the ``UsersController`` class::
+
+    // in src/Controller/UsersController.php
+    public function logout()
+    {
+        $result = $this->Authentication->getResult();
+        // regardless of POST or GET, redirect if user is logged in
+        if ($result->isValid()) {
+            $this->Authentication->logout();
+            return $this->redirect(['controller' => 'Users', 'action' => 'login']);
+        }
+    }
+
+Now you can visit ``/users/logout`` to log out. You should then be sent to the
+login page. If you've made it this far, congratulations, you now have a simple
+blog that:
+
+* Allows authenticated users to create and edit articles.
+* Allows unauthenticated users to view articles and tags.
 
 Suggested Follow-up Reading
 ---------------------------
 
 #. :doc:`/bake/usage` Generating basic CRUD code
-#. :doc:`/controllers/components/authentication`: User registration and login
+#. `Authentication Plugin </authentication/>`__ documentation.
 
 .. meta::
-    :title lang=en: Simple Authentication and Authorization Application
+    :title lang=en: Simple Authentication Application
     :keywords lang=en: auto increment,authorization application,model user,array,conventions,authentication,urls,cakephp,delete,doc,columns

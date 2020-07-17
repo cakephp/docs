@@ -41,7 +41,9 @@ usar o ORM. Por exemplo, se quiséssemos carregar alguns dados da nossa tabela
 ``articles`` poderíamos fazer::
 
     use Cake\ORM\TableRegistry;
-    $articles = TableRegistry::get('Articles');
+
+    // Prior to 3.6 use TableRegistry::get('Articles')
+    $articles = TableRegistry::getTableLocator()->get('Articles');
     $query = $articles->find();
     foreach ($query as $row) {
         echo $row->title;
@@ -70,8 +72,10 @@ uma referência para esta utilizando o :php:class:`~Cake\\ORM\\TableRegistry`
 como antes::
 
     use Cake\ORM\TableRegistry;
+
     // Agora $articles é uma instância de nossa classe ArticlesTable.
-    $articles = TableRegistry::get('Articles');
+    // Prior to 3.6 use TableRegistry::get('Articles')
+    $articles = TableRegistry::getTableLocator()->get('Articles');
 
 Agora que temos uma classe de tabela concreta, nós provavelmente vamos querer
 usar uma classe de entidade concreta. As classes de entidade permitem definir
@@ -96,7 +100,8 @@ nossa nova classe Article::
     use Cake\ORM\TableRegistry;
 
     // Agora uma instância de ArticlesTable.
-    $articles = TableRegistry::get('Articles');
+    // Prior to 3.6 use TableRegistry::get('Articles')
+    $articles = TableRegistry::getTableLocator()->get('Articles');
     $query = $articles->find();
 
     foreach ($query as $row) {

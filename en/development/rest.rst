@@ -46,6 +46,7 @@ controller might look something like this::
 
         public function add()
         {
+            $this->request->allowMethod(['post', 'put']);
             $recipe = $this->Recipes->newEntity($this->request->getData());
             if ($this->Recipes->save($recipe)) {
                 $message = 'Saved';
@@ -61,14 +62,13 @@ controller might look something like this::
 
         public function edit($id)
         {
+            $this->request->allowMethod(['patch', 'post', 'put']);
             $recipe = $this->Recipes->get($id);
-            if ($this->request->is(['post', 'put'])) {
-                $recipe = $this->Recipes->patchEntity($recipe, $this->request->getData());
-                if ($this->Recipes->save($recipe)) {
-                    $message = 'Saved';
-                } else {
-                    $message = 'Error';
-                }
+            $recipe = $this->Recipes->patchEntity($recipe, $this->request->getData());
+            if ($this->Recipes->save($recipe)) {
+                $message = 'Saved';
+            } else {
+                $message = 'Error';
             }
             $this->set([
                 'message' => $message,
@@ -79,6 +79,7 @@ controller might look something like this::
 
         public function delete($id)
         {
+            $this->request->allowMethod(['delete']);
             $recipe = $this->Recipes->get($id);
             $message = 'Deleted';
             if (!$this->Recipes->delete($recipe)) {
@@ -150,11 +151,11 @@ Accepting Input in Other Formats
 
 Typically REST applications not only output content in alternate data formats,
 but also accept data in different formats. In CakePHP, the
-:php:class:`RequestHandlerComponent` helps facilitate this. By default,
+:php:class:`BodyParserMiddleware` helps facilitate this. By default,
 it will decode any incoming JSON/XML input data for POST/PUT requests
 and supply the array version of that data in ``$this->request->getData()``.
 You can also wire in additional deserializers for alternate formats if you
-need them, using :php:meth:`RequestHandler::addInputType()`.
+need them, using :php:meth:`BodyParserMiddleware::addParser()`.
 
 RESTful Routing
 ===============

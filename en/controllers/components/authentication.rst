@@ -539,7 +539,7 @@ Displaying Auth Related Flash Messages
 
 In order to display the session error messages that Auth generates, you
 need to add the following code to your layout. Add the following two
-lines to the **templates/Layout/default.php** file in the body section::
+lines to the **templates/layout/default.php** file in the body section::
 
     echo $this->Flash->render();
 
@@ -583,7 +583,6 @@ database, the easiest way is to use a setter function in your User entity::
 
     class User extends Entity
     {
-
         // ...
 
         protected function _setPassword($password)
@@ -619,7 +618,6 @@ In order to use a different password hasher, you need to create the class in
 
     class LegacyPasswordHasher extends AbstractPasswordHasher
     {
-
         public function hash($password)
         {
             return sha1($password);
@@ -853,8 +851,8 @@ In the above example, both the ``Actions`` and ``Controller`` will get the
 settings defined for the 'all' key. Any settings passed to a specific
 authorization object will override the matching key in the 'all' key.
 
-If an authenticated user tries to go to a URL he's not authorized to access,
-he's redirected back to the referrer. If you do not want such redirection
+If an authenticated user tries to go to a URL they are not authorized to access,
+they will be redirected back to the referrer. If you do not want such redirection
 (mostly needed when using stateless authentication adapter) you can set config
 option ``unauthorizedRedirect`` to ``false``. This causes ``AuthComponent``
 to throw a ``ForbiddenException`` instead of redirecting.
@@ -991,7 +989,7 @@ checked::
             }
 
             // Only admins can access admin functions
-            if ($this->request->getParam('prefix') === 'admin') {
+            if ($this->request->getParam('prefix') === 'Admin') {
                 return (bool)($user['role'] === 'admin');
             }
 
@@ -1071,7 +1069,7 @@ only the configuration option::
 
     $this->Auth->getConfig('loginAction');
 
-    $this->redirect($this->Auth->getConfig('loginAction'));
+    return $this->redirect($this->Auth->getConfig('loginAction'));
 
 This is useful if you want to redirect a user to the ``login`` route for example.
 Without a parameter, the full configuration will be returned.

@@ -43,7 +43,8 @@ pourrions faire::
 
     use Cake\ORM\TableRegistry;
 
-    $users = TableRegistry::get('Users');
+    // Prior to 3.6 use TableRegistry::get('Users')
+    $users = TableRegistry::getTableLocator()->get('Users');
     $query = $users->find();
     foreach ($query as $row) {
         echo $row->username;
@@ -59,7 +60,8 @@ nous ferions ceci::
 
     use Cake\ORM\TableRegistry;
 
-    $users = TableRegistry::get('Users');
+    // Prior to 3.6 use TableRegistry::get('Users')
+    $users = TableRegistry::getTableLocator()->get('Users');
     $user = $users->newEntity(['email' => 'mark@example.com']);
     $users->save($user);
 
@@ -68,11 +70,11 @@ La Couche View (Vue)
 
 La View retourne une présentation des données modélisées. Etant séparée des
 objets Model, elle est responsable de l'utilisation des informations dont
-elle dispose pour produire n'importe qu'elle interface de présentation
+elle dispose pour produire n'importe quelle interface de présentation
 nécessaire à votre application.
 
 Par exemple, la view pourrait utiliser les données du model pour afficher un
-template de vue HTML les contenant ou un résultat au format XML pour que
+template de vue HTML contenant ces données, ou alors un résultat au format XML pour que
 d'autres l'utilisent::
 
     // Dans un fichier de template de view, nous afficherons un 'element' pour chaque utilisateur (user).

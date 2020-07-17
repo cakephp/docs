@@ -36,7 +36,7 @@ Em seguida, basta digitar a seguinte linha no seu terminal a partir do diretóri
 onde se localiza o arquivo ``composer.phar`` para instalar o esqueleto de
 aplicações do CakePHP no diretório ``bookmarker``. ::
 
-    php composer.phar create-project --prefer-dist cakephp/app bookmarker
+    php composer.phar create-project --prefer-dist cakephp/app:4.* bookmarker
 
 A vantagem de usar Composer é que ele irá completar automaticamente um conjunto
 importante de tarefas, como configurar as permissões de arquivo e criar a sua
@@ -91,7 +91,9 @@ Criando o banco de dados
 Em seguida, vamos criar o banco de dados para a nossa aplicação. Se você
 ainda não tiver feito isso, crie um banco de dados vazio para uso
 nesse tutorial, com um nome de sua escolha, por exemplo, ``cake_bookmarks``.
-Você pode executar o seguinte SQL para criar as tabelas necessárias::
+Você pode executar o seguinte SQL para criar as tabelas necessárias:
+
+.. code-block:: mysql
 
     CREATE TABLE users (
         id INT AUTO_INCREMENT PRIMARY KEY,
@@ -320,7 +322,7 @@ Criando a view
 Agora, se você visitar a URL ``/bookmarks/tagged``, o CakePHP irá mostrar um
 erro e deixá-lo saber que você ainda não fez um arquivo view. Em seguida,
 vamos construir o arquivo view para a nossa ação ``tags``. Em
-**src/Template/Bookmarks/tags.ctp** coloque o seguinte conteúdo::
+**templates/Bookmarks/tags.php** coloque o seguinte conteúdo::
 
     <h1>
         Bookmarks tagged with

@@ -23,12 +23,9 @@ CakePHP ではデータの検証には二つの段階があります:
 エラーのあるフィールドは返されたエンティティーには含まれません。 ::
 
     $article = $articles->newEntity($this->request->getData());
-    if ($article->errors()) {
+    if ($article->getErrors()) {
         // エンティティー検証失敗。
     }
-
-.. versionadded:: 3.4.0
-    ``getErrors()`` 関数は追加されました。
 
 バリデーションが有効になっている状態でエンティティーを構築すると、次のことが起こります:
 
@@ -74,10 +71,10 @@ CakePHP ではデータの検証には二つの段階があります:
         {
             $validator
                 ->requirePresence('title', 'create')
-                ->notEmpty('title');
+                ->notEmptyString('title');
 
             $validator
-                ->allowEmpty('link')
+                ->allowEmptyString('link')
                 ->add('link', 'valid-url', ['rule' => 'url']);
 
             ...
@@ -114,14 +111,8 @@ CakePHP ではデータの検証には二つの段階があります:
         public function validationUpdate($validator)
         {
             $validator
-                ->add('title', 'notEmpty', [
-                    'rule' => 'notEmpty',
-                    'message' => __('タイトルを設定してください'),
-                ])
-                ->add('body', 'notEmpty', [
-                    'rule' => 'notEmpty',
-                    'message' => __('本文は必須です')
-                ]);
+                ->notEmptyString('title', __('タイトルを設定してください'))
+                ->notEmptyString('body', __('本文は必須です'));
             return $validator;
         }
     }
@@ -170,8 +161,8 @@ CakePHP ではデータの検証には二つの段階があります:
 
     public function validationDefault(Validator $validator)
     {
-        $validator->notEmpty('username');
-        $validator->notEmpty('password');
+        $validator->notEmptyString('username');
+        $validator->notEmptyString('password');
         $validator->add('email', 'valid-email', ['rule' => 'email']);
         ...
 
@@ -246,12 +237,9 @@ CakePHP ではデータの検証には二つの段階があります:
 テーブルクラスにバリデーションセットを作成した後は、
 名前を指定して結果のオブジェクトを取得できるようになります。 ::
 
-    $defaultValidator = $usersTable->validator('default');
+    $defaultValidator = $usersTable->getValidator('default');
 
-    $hardenedValidator = $usersTable->validator('hardened');
-
-.. deprecated:: 3.5.0
-    ``validator()`` は非推奨です。代わりに ``getValidator()`` を使用してください。
+    $hardenedValidator = $usersTable->getValidator('hardened');
 
 既定のバリデータクラス
 ======================
@@ -348,9 +336,9 @@ CakePHP は、エンティティーが保存される前に適用される「ル
         'message' => 'この請求書はそのステータスに遷移できません。'
     ]);
 
-エンティティーの ``errors()`` メソッドを呼ぶとエラーを確認できます。 ::
+エンティティーの ``getErrors()`` メソッドを呼ぶとエラーを確認できます。 ::
 
-    $entity->errors(); // ドメインルールのエラーメッセージを含んでいます
+    $entity->getErrors(); // ドメインルールのエラーメッセージを含んでいます
 
 一意フィールドルールの作成
 --------------------------
@@ -414,9 +402,6 @@ CakePHP は、エンティティーが保存される前に適用される「ル
         ['allowMultipleNulls' => false]
     ));
 
-.. versionadded:: 3.3.0
-    ``allowNullableNulls`` と ``allowMultipleNulls`` オプションが追加されました。
-
 アソシエーションカウントルール
 ------------------------------
 
@@ -442,8 +427,31 @@ CakePHP は、エンティティーが保存される前に適用される「ル
     // もし tags が null の場合、保存操作は失敗します。
     $rules->add($rules->validCount('tags', 0, '<=', 'タグを持つことはできません'));
 
-.. versionadded:: 3.3.0
-    ``validCount()`` メソッドは、3.3.0 で追加されました。
+アソシエーションリンクの制約ルール
+----------------------------------
+
+``LinkConstraint`` はデータベースがサポートしないSQL制約をエミュレートしたり、
+制約が失敗したときにユーザーフレンドリーなエラーメッセージを提供したい場合に使用できます。
+このルールを使用すると、アソシエーションが関連レコードを持っているかどうかを確認できます。　::
+
+    // 更新時に各コメントが記事にリンクされていることを確認してください。
+    $rules->addUpdate($rules->isLinkedTo(
+        'Articles',
+        'article',
+        '記事が必要です。'
+    ));
+
+    // 削除時に記事にリンクされたコメントがないことを確認してください。
+    $rules->addDelete($rules->isNotLinkedTo(
+        'Comments',
+        'comments',
+        '削除する前にコメントがない状態にしてください。'
+    ));
+
+.. versionadded:: 4.0.0
+
+    4.0.0 で追加されました。
+
 
 エンティティーメソッドをルールとして使用
 ----------------------------------------
@@ -692,9 +700,9 @@ CLI スクリプトを走らせる時に起こり得るでしょう。 ::
         // アプリケーションルールの追加
         $rules->add(function($entity) {
             $data = $entity->extract($this->schema()->columns(), true);
-            $validator = $this->validator('default');
-            $errors = $validator->errors($data, $entity->isNew());
-            $entity->errors($errors);
+            $validator = $this->getValidator('default');
+            $errors = $validator->validate($data, $entity->isNew());
+            $entity->setErrors($errors);
 
             return empty($errors);
         });
@@ -708,9 +716,9 @@ CLI スクリプトを走らせる時に起こり得るでしょう。 ::
 
     $userEntity->email = 'not an email!!!';
     $usersTable->save($userEntity);
-    $userEntity->errors('email'); // 無効なメールアドレスです
+    $userEntity->getError('email'); // 無効なメールアドレスです
 
 同じ結果が ``newEntity()`` や ``patchEntity()`` を使う時にも期待できます。 ::
 
     $userEntity = $usersTable->newEntity(['email' => 'not an email!!']);
-    $userEntity->errors('email'); // 無効なメールアドレスです
+    $userEntity->getError('email'); // 無効なメールアドレスです

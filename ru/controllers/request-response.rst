@@ -281,8 +281,6 @@ XML в объект DOMDocument, то :php:meth:`~Cake\\Http\\ServerRequest::inp
   X-Requested-With = XMLHttpRequest.
 * ``is('ssl')`` Проверьте, выполняется ли запрос через SSL.
 * ``is('flash')`` Проверьте, имеет ли запрос User-Agent - Flash.
-* ``is('requested')`` Проверьте, имеет ли запрос - параметр запроса
-  'requested' со значением 1.
 * ``is('json')`` Проверьте, имеет ли запрос расширение json и принимает
   ли 'application/json' mimetype.
 * ``is('xml')`` роверьте, есть ли запрос с расширением 'xml' и принимающий

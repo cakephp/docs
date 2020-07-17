@@ -254,12 +254,12 @@ Controlar Quais Campos Usados para Ordenamento
 Por padrão, a classificação pode ser feita em qualquer coluna não virtual que uma 
 tabela tenha. Às vezes, isso é indesejável, pois permite que os usuários classifiquem 
 em colunas não indexadas que podem ser caras de solicitar. Você pode definir a lista de 
-permissões dos campos que podem ser classificados usando a opção ``sortWhitelist``. Essa 
+permissões dos campos que podem ser classificados usando a opção ``sortableFields``. Essa 
 opção é necessária quando você deseja classificar os dados associados ou os campos computados 
 que podem fazer parte da sua consulta de paginação::
 
     public $paginate = [
-        'sortWhitelist' => [
+        'sortableFields' => [
             'id', 'title', 'Users.username', 'created'
         ]
     ];

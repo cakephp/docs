@@ -63,11 +63,11 @@ instrucciones acerca de esto, puedes leer el README del instalador de Windows
 Ya que has descargado e instalado Composer puedes generar una aplicación
 CakePHP ejecutando::
 
-    php composer.phar create-project --prefer-dist cakephp/app [app_name]
+    php composer.phar create-project --prefer-dist cakephp/app:4.* [app_name]
 
 O si tienes Composer definido globalmente::
 
-    composer create-project --prefer-dist cakephp/app [app_name]
+    composer create-project --prefer-dist cakephp/app:4.* [app_name]
 
 Una vez que Composer termine de descargar el esqueleto y la librería core
 de CakePHP, deberías tener una aplicación funcional de CakePHP instalada

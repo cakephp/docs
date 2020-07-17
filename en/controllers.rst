@@ -66,13 +66,11 @@ is invoked at the end of a Controller's constructor for this kind of use::
 
     class AppController extends Controller
     {
-
         public function initialize(): void
         {
             // Always enable the CSRF component.
             $this->loadComponent('Csrf');
         }
-
     }
 
 In addition to the ``initialize()`` method, the older ``$components`` property
@@ -201,9 +199,9 @@ theme that will be used when rendering the view, you can use the
 properties of the view before it is created::
 
     $this->viewBuilder()
-        ->helpers(['MyCustom'])
-        ->theme('Modern')
-        ->className('Modern.Admin');
+        ->addHelper('MyCustom')
+        ->setTheme('Modern')
+        ->setClassName('Modern.Admin');
 
 The above shows how you can load custom helpers, set the theme and use a custom
 view class.
@@ -230,7 +228,7 @@ the view file in **templates/Recipes/search.php** will be rendered::
         public function search()
         {
             // Render the view in templates/Recipes/search.php
-            $this->render();
+            return $this->render();
         }
     // ...
     }
@@ -291,51 +289,17 @@ Redirecting to Other Pages
 
 .. php:method:: redirect(string|array $url, integer $status)
 
-The flow control method you'll use most often is ``Controller::redirect()``.
-This method takes its first parameter in the form of a
-CakePHP-relative URL. When a user has successfully placed an order,
-you might wish to redirect him to a receipt screen. ::
+The ``redirect()`` method adds a ``Location`` header and sets the status code of
+a response and returns it. You should return the response created by
+``redirect()`` to have CakePHP send the redirect instead of completing the
+controller action and rendering a view.
 
-    public function place_order()
-    {
-        // Logic for finalizing order goes here
-        if ($success) {
-            return $this->redirect(
-                ['controller' => 'Orders', 'action' => 'thanks']
-            );
-        }
-        return $this->redirect(
-            ['controller' => 'Orders', 'action' => 'confirm']
-        );
-    }
-
-The method will return the response instance with appropriate headers set.
-You should return the response instance from your action to prevent
-view rendering and let the dispatcher handle actual redirection.
-
-You can also use a relative or absolute URL as the $url argument::
-
-    return $this->redirect('/orders/thanks');
-    return $this->redirect('http://www.example.com');
-
-You can also pass data to the action::
-
-    return $this->redirect(['action' => 'edit', $id]);
-
-The second parameter of ``Controller::redirect()`` allows you to define an HTTP
-status code to accompany the redirect. You may want to use 301
-(moved permanently) or 303 (see other), depending on the nature of
-the redirect.
-
-If you need to redirect to the referer page you can use::
-
-    return $this->redirect($this->referer());
-
-An example using query strings and hash would look like::
+You can redirect using :term:`routing array` values::
 
     return $this->redirect([
         'controller' => 'Orders',
         'action' => 'confirm',
+        $order->id,
         '?' => [
             'product' => 'pizza',
             'quantity' => 5
@@ -343,18 +307,35 @@ An example using query strings and hash would look like::
         '#' => 'top'
     ]);
 
-The generated URL would be::
+Or using a relative or absolute URL::
 
-    http://www.example.com/orders/confirm?product=pizza&quantity=5#top
+    return $this->redirect('/orders/confirm');
+    return $this->redirect('http://www.example.com');
 
-Redirecting to Another Action on the Same Controller
-----------------------------------------------------
+Or to the referer page::
+
+    return $this->redirect($this->referer());
+
+By using the second parameter you can define a status code for your redirect::
+
+    // Do a 301 (moved permanently)
+    return $this->redirect('/order/confirm', 301);
+
+    // Do a 303 (see other)
+    return $this->redirect('/order/confirm', 303);
+
+See the :ref:`redirect-component-events` section for how to redirect out of
+a life-cycle handler.
+
+Forwarding to an Action on the Same Controller
+----------------------------------------------
 
 .. php:method:: setAction($action, $args...)
 
 If you need to forward the current action to a different action on the *same*
-controller, you can use ``Controller::setAction()`` to update the request object, modify the
-view template that will be rendered and forward execution to the named action::
+controller, you can use ``Controller::setAction()`` to update the request
+object, modify the view template that will be rendered and forward execution to
+the named action::
 
     // From a delete action, you can render the updated
     // list page.
@@ -385,16 +366,13 @@ factory method::
         ['ElasticIndexes', 'factory']
     );
 
+The factory can be a callable or instance of ``\Cake\Datasource\Locator\LocatorInterface``.
+
 After registering a table factory, you can use ``loadModel`` to load
 instances::
 
     // In a controller method.
     $this->loadModel('Locations', 'ElasticIndex');
-
-.. note::
-
-    The built-in ORM's TableRegistry is connected by default as the 'Table'
-    provider.
 
 Paginating a Model
 ==================

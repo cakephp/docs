@@ -1,15 +1,11 @@
-Email
-#####
+Mailer
+######
 
 .. php:namespace:: Cake\Mailer
 
-.. warning::
-    バージョン 3.1 以前では、 ``Email`` と ``Transport`` クラスは
-    ``Cake\Mailer`` 名前空間の代わりに ``Cake\Network\Email`` 名前空間の下にありました。
+.. php:class:: Mailer(string|array|null $profile = null)
 
-.. php:class:: Email(mixed $profile = null)
-
-``Email`` は、メール送信の新しいクラスです。このクラスを使用すると、
+``Mailer`` は、メール送信の新しいクラスです。このクラスを使用すると、
 アプリケーションの任意の場所からメール送信できます。
 
 基本的な使用法
@@ -17,163 +13,73 @@ Email
 
 まず最初に、クラスがロードされていることを確認する必要があります。 ::
 
-    use Cake\Mailer\Email;
+    use Cake\Mailer\Mailer;
 
-``Email`` をロードしたら、次のようにメールを送信することができます。 ::
+``Mailer`` をロードしたら、次のようにメールを送信することができます。 ::
 
-    $email = new Email('default');
-    $email->from(['me@example.com' => 'My Site'])
-        ->to('you@example.com')
-        ->subject('About')
-        ->send('My message');
+    $mailer = new Mailer('default');
+    $mailer->setFrom(['me@example.com' => 'My Site'])
+        ->setTo('you@example.com')
+        ->setSubject('About')
+        ->deliver('My message');
 
-``Email`` のセッターメソッドは、クラスのインスタンスを返すので、
+``Mailer`` のセッターメソッドは、クラスのインスタンスを返すので、
 メソッド・チェーンでプロパティーを設定することができます。
 
-``Email`` は、受信者を定義するためのいくつかの方法があります - ``to()`` 、 ``cc()`` 、
-``bcc()`` 、 ``addTo()`` 、 ``addCc()`` そして ``addBcc()`` 。主な違いは最初の3つは、
+``Mailer`` は、受信者を定義するためのいくつかの方法があります - ``setTo()`` 、 ``setCc()`` 、
+``setBcc()`` 、 ``addTo()`` 、 ``addCc()`` そして ``addBcc()`` 。主な違いは最初の3つは、
 すでに設定されていたものを上書きし、後者は単にそれぞれのフィールドに複数の受信者を追加することです。 ::
 
-    $email = new Email();
-    $email->to('to@example.com', 'To Example');
-    $email->addTo('to2@example.com', 'To2 Example');
-    // メールの To 受信者は to@example.com と to2@example.com
-    $email->to('test@example.com', 'ToTest Example');
-    // メールの To 受信者は test@example.com
-
-.. deprecated:: 3.4.0
-    代わりに ``setFrom()`` 、 ``setTo()`` 、 ``setCc()`` 、 ``setBcc()``
-    そして、 ``setSubject()`` を使用してください。
+    $mailer = new Mailer();
+    $mailer->setTo('to@example.com', 'To Example');
+    $mailer->addTo('to2@example.com', 'To2 Example');
+    // The email's To recipients are: to@example.com and to2@example.com
+    $mailer->setTo('test@example.com', 'ToTest Example');
+    // The email's To recipient is: test@example.com
 
 送り主の選択
 ------------
 
 他の人々に代わってメールを送信するとき、Sender ヘッダーを使用して、
-元の送り主を定義することは良い考えです。 ``sender()`` を使用して行えます。 ::
+元の送り主を定義することは良い考えです。 ``setSender()`` を使用して行えます。 ::
 
-    $email = new Email();
-    $email->sender('app@example.com', 'MyApp emailer');
+    $mailer = new Mailer();
+    $mailer->setSender('app@example.com', 'MyApp emailer');
 
 .. note::
 
     別の人の代わりにメール送信するときに送り主 (envelope sender) をセットするのは良い考えです。
     これは、配信失敗に関するメッセージの受信を防ぐことができます。
 
-.. deprecated:: 3.4.0
-    代わりに ``setSender()`` を使用してください。
-
 .. _email-configuration:
 
 設定
 ====
 
-``Email`` のデフォルトの設定は、 ``config()`` と ``configTransport()`` を使用して作成されます。
-**config/app.php** ファイルにメールの設定を書いておきましょう。
-**config/app.default.php** ファイルは、このファイルの設定例です。
-**config/app.php** にメール設定を定義することは必須ではありません。
-``Email`` はそのファイルの設定なしでも利用可能で、すべての構成を個別に設定したり、
-設定の配列をロードするためのメソッドを使用することができます。
-
+メーラーのプロファイルとメールのトランスポートは、アプリケーションの
+設定ファイルを使用して作成されます。 ``Email`` と ``EmailTransport`` は
+それぞれメーラーのプロファイルとメールのトランスポート設定を定義します。
+アプリケーションのブートストラップ設定は ``setConfig()`` を使用することにより
+``Configure`` から　``Mailer`` および ``TransportFactory`` クラスに渡されます。
 プロファイルおよびトランスポートを定義することにより、アプリケーションコードにおいて
 設定データの自由を保ち、メンテナンスおよび配備をより困難にする重複を避けることができます。
 
-あらかじめ定義された設定をロードするには、 ``profile()`` メソッドを使用するか、
-または ``Email`` のコンストラクターに渡すことができます。 ::
+あらかじめ定義された設定をロードするには、 ``setProfile()`` メソッドを使用するか、
+または ``Mailer`` のコンストラクターに渡すことができます。 ::
 
-    $email = new Email();
-    $email->profile('default');
+    $mailer = new Mailer();
+    $mailer->setProfile('default');
 
-    // または、コンストラクター内で
-    $email = new Email('default');
+    // Or in constructor
+    $mailer = new Mailer('default');
 
 設定名の文字列を渡す代わりに、オプションの配列をロードすることもできます。 ::
 
-    $email = new Email();
-    $email->profile(['from' => 'me@example.org', 'transport' => 'my_custom']);
+    $mailer = new Mailer();
+    $mailer->setProfile(['from' => 'me@example.org', 'transport' => 'my_custom']);
 
-    // または、コンストラクター内で
-    $email = new Email(['from' => 'me@example.org', 'transport' => 'my_custom']);
-
-.. versionchanged:: 3.1
-    ``Email`` インスタンスが作成された時に ``default`` メールプロファイルが自動的に設定されます。
-
-.. deprecated:: 3.4.0
-    ``profile()`` の代わりに ``setProfile()`` を使用してください。
-
-トランスポートの設定
---------------------
-
-.. php:staticmethod:: configTransport($key, $config)
-
-メールメッセージは、トランスポートによって配信されます。さまざまなトランスポートを使用すると、
-PHP の ``mail()`` 関数や SMTP サーバーでメッセージを送信したり、
-デバッグが捗るようメッセージを送信しないこともできます。トランスポートを設定すると、
-アプリケーションのコードの外に、設定データを保持することができ、
-単純に設定データを変更できるのでデプロイが簡単になります。
-トランスポートの設定例は、次のようになります。 ::
-
-    use Cake\Mailer\Email;
-
-    // サンプル Mail 設定
-    Email::configTransport('default', [
-        'className' => 'Mail'
-    ]);
-
-    // サンプル SMTP 設定
-    Email::configTransport('gmail', [
-        'host' => 'ssl://smtp.gmail.com',
-        'port' => 465,
-        'username' => 'my@gmail.com',
-        'password' => 'secret',
-        'className' => 'Smtp'
-    ]);
-
-Gmail のように、SSL SMTP サーバーを設定することができます。これを行うには、 host に
-``ssl://`` プレフィックスをつけて、それに伴い port の値を設定してください。
-また、 ``tls`` オプションを使用して TLS SMTP を有効にすることもできます。 ::
-
-    use Cake\Mailer\Email;
-
-    Email::configTransport('gmail', [
-        'host' => 'smtp.gmail.com',
-        'port' => 587,
-        'username' => 'my@gmail.com',
-        'password' => 'secret',
-        'className' => 'Smtp',
-        'tls' => true
-    ]);
-
-上記の設定では、メールメッセージの TLS 通信を可能にします。
-
-.. warning::
-    あなたのグーグルアカウントでこれを動作させるためには安全性の低いアプリへのアクセスを
-    有効にする必要があります: `安全性の低いアプリがアカウントにアクセスするのを許可する
-    <https://support.google.com/accounts/answer/6010255>`__ 。
-
-.. note::
-    `Gmail の SMTP 設定 <https://support.google.com/a/answer/176600?hl=ja>`__ 。
-
-.. note::
-
-    SSL + SMTP を使用するには、PHP のインストール時に SSL が設定されている必要があります。
-
-設定オプションは、 :term:`DSN` 文字列として指定することもできます。
-これは、環境変数を使ったり :term:`PaaS` プロバイダーで動作する場合に便利です。 ::
-
-    Email::configTransport('default', [
-        'url' => 'smtp://my@gmail.com:secret@smtp.gmail.com:587?tls=true',
-    ]);
-
-DSN 文字列を使用するときは、クエリー文字列引数として任意の追加のパラメーターやオプションを
-定義することができます。
-
-.. deprecated:: 3.4.0
-    ``configTransport()`` の代わりに ``setConfigTransport()`` を使用してください。
-
-.. php:staticmethod:: dropTransport($key)
-
-設定が完了すると、トランスポートを変更することはできません。
-トランスポートを変更するためには、まずこれを取り消してから再設定する必要があります。
+    // Or in constructor
+    $mailer = new Mailer(['from' => 'me@example.org', 'transport' => 'my_custom']);
 
 .. _email-configurations:
 
@@ -183,54 +89,49 @@ DSN 文字列を使用するときは、クエリー文字列引数として任�
 配信プロファイルを定義すると、再利用可能なプロファイルに共通のメール設定を統合することができます。
 アプリケーションは、必要な数のプロファイルを持つことができます。次の設定キーが使用されます。
 
-- ``'from'``: 送信者のメールアドレスまたは配列。 ``Email::from()`` を参照。
-- ``'sender'``: 実際の送信者のメールアドレスまたは配列。 ``Email::sender()`` を参照。
-- ``'to'``: 宛先のメールアドレスまたは配列。 ``Email::to()`` を参照。
-- ``'cc'``: CC のメールアドレスまたは配列。 ``Email::cc()`` を参照。
-- ``'bcc'``: BCC のメールアドレスまたは配列。 ``Email::bcc()`` を参照。
-- ``'replyTo'``: メールの返信先のメールアドレスまたは配列。 ``Email::replyTo()`` を参照。
-- ``'readReceipt'``: 開封通知先メールアドレスまたはアドレスの配列。 ``Email::readReceipt()`` を参照。
-- ``'returnPath'``: エラーの返信先メールアドレスまたはアドレスの配列。 ``Email::returnPath()`` を参照。
-- ``'messageId'``: メールのメッセージID。 ``Email::messageId()`` を参照。
-- ``'subject'``: メッセージのサブジェクト。 ``Email::subject()`` を参照。
+- ``'from'``: 送信者のメールアドレスまたは配列。 ``Mailer::setFrom()`` を参照。
+- ``'sender'``: 実際の送信者のメールアドレスまたは配列。 ``Mailer::setSender()`` を参照。
+- ``'to'``: 宛先のメールアドレスまたは配列。 ``Mailer::setTo()`` を参照。
+- ``'cc'``: CC のメールアドレスまたは配列。 ``Mailer::setCc()`` を参照。
+- ``'bcc'``: BCC のメールアドレスまたは配列。 ``Mailer::setCcc()`` を参照。
+- ``'replyTo'``: メールの返信先のメールアドレスまたは配列。 ``Mailer::setReplyTo()`` を参照。
+- ``'readReceipt'``: 開封通知先メールアドレスまたはアドレスの配列。 ``Mailer::setReadReceipt()`` を参照。
+- ``'returnPath'``: エラーの返信先メールアドレスまたはアドレスの配列。 ``Mailer::setReturnPath()`` を参照。
+- ``'messageId'``: メールのメッセージID。 ``Mailer::setMessageId()`` を参照。
+- ``'subject'``: メッセージのサブジェクト。 ``Mailer::setSubject()`` を参照。
 - ``'message'``: メッセージ本文。レンダリングされた本文を使用する場合は、 この項目を設定しないでください。
 - ``'priority'``: メールの優先度 (数値。通常は 1 から 5 で、1 が最高)。
-- ``'headers'``: ヘッダー情報。 ``Email::headers()`` を参照。
+- ``'headers'``: ヘッダー情報。 ``Mailer::setHeaders()`` を参照。
 - ``'viewRender'``: レンダリングされた本文を使用する場合は、ビュークラス名をセット。
-  ``Email::viewRender()`` を参照。
+  ``Mailer::viewRender()`` を参照。
 - ``'template'``: レンダリングされた本文を使用する場合は、テンプレート名をセット。
-  ``Email::template()`` を参照。
-- ``'theme'``: テンプレートをレンダリングする際のテーマ。 ``Email::theme()`` を参照。
+  ``ViewBuilder::setTemplate()`` を参照。
+- ``'theme'``: テンプレートをレンダリングする際のテーマ。 ``ViewBuilder::setTheme()`` を参照。
 - ``'layout'``: レンダリングされた本文を使用する場合、描画するレイアウトをセット。
   レイアウトなしでテンプレートをレンダリングしたい場合は、このフィールドに null をセット。
-  ``Email::template()`` を参照。
+  ``ViewBuilder::setTemplate()`` を参照。
 - ``'viewVars'``: レンダリングされた本文を使用する場合は、ビューで使用する変数の配列をセット。
-  ``Email::viewVars()`` を参照。
-- ``'attachments'``: 添付ファイルの一覧。 ``Email::atachments()`` を参照。
-- ``'emailFormat'``: メールの書式 (html, text または both) ``Email::emailFormat()`` を参照。
-- ``'transport'``: トランスポート名。 :php:meth:`~Cake\\Mailer\\Email::configTransport()` を参照。
+  ``Mailer::setViewVars()`` を参照。
+- ``'attachments'``: 添付ファイルの一覧。 ``Mailer::setAttachments()`` を参照。
+- ``'emailFormat'``: メールの書式 (html, text または both) ``Mailer::setEmailFormat()`` を参照。
+- ``'transport'``: トランスポート名。 トランスポート設定を参照。
 - ``'log'``: メールヘッダーとメッセージをログに記録するログレベル。
   ``true`` なら LOG_DEBUG を使用します。 :ref:`logging-levels` を参照。
-- ``'helpers'``: メールテンプレート内で使用するヘルパーの配列。 ``Email::helpers()`` 。
-
-これらの設定の全ては ``'from'`` を除いてオプションです。
+- ``'helpers'``: メールテンプレート内で使用するヘルパーの配列。 ``ViewBuilder::setHelpers()`` 。
 
 .. note::
 
     メールアドレスや配列で使用する上記のキーの値 (from, to, cc 他）は、関連するメソッドの第一引数として
-    渡されます。例をあげると ``Email::from('my@example.com', 'My Site')`` は、設定の中では
+    渡されます。例をあげると ``$mailer->setFrom('my@example.com', 'My Site')`` は、設定の中では
     ``'from' => ['my@example.com' => 'My Site']`` と定義されます。
 
 ヘッダーの設定
 ==============
 
-``Email`` の中に、自由にヘッダーをセットできます。Email を使用する際、
+``Mailer`` の中に、自由にヘッダーをセットできます。Email を使用する際、
 独自のヘッダーにプレフィックスの ``X-`` をつけることを忘れないでください。
 
-``Email::headers()`` と ``Email::addHeaders()`` を参照してください。
-
-.. deprecated:: 3.4.0
-    ``headers()`` の代わりに ``setHeaders()`` を使用してください。
+``Mailer::setHeaders()`` と ``Mailer::addHeaders()`` を参照してください。
 
 テンプレートメールの送信
 ========================
@@ -238,44 +139,55 @@ DSN 文字列を使用するときは、クエリー文字列引数として任�
 メールはしばしば単純なテキストメッセージを超えたものになります。それを容易にするために
 CakePHP は、 :doc:`ビューレイヤー </views>` を使用してメールを送信することができます。
 
-メールのテンプレートは、 あなたのアプリケーションの ``Template`` ディレクトリー内の
-``Email`` と呼ばれる特別なフォルダーに置かれます。メールのビューは、
-普通のビューと同様にレイアウトとエレメントを使用します。 ::
+メールのテンプレートは、 ``templates/email`` と呼ばれる特別なフォルダーに置かれます。
+メールのビューは、普通のビューと同様にレイアウトとエレメントを使用します。 ::
 
-    $email = new Email();
-    $email
-        ->template('welcome', 'fancy')
-        ->emailFormat('html')
-        ->to('bob@example.com')
-        ->from('app@domain.com')
-        ->send();
+    $mailer = new Mailer();
+    $mailer = $mailer
+                 ->setEmailFormat('html')
+                 ->setTo('bob@example.com')
+                 ->setFrom('app@domain.com')
+                 ->viewBuilder()
+                     ->setTemplate('welcome')
+                     ->setLayout('fancy');
 
-上記は、ビューとして **src/Template/Email/html/welcome.ctp** を使用し、
-レイアウトとして **src/Template/Layout/Email/html/fancy.ctp** を使用します。
+    $mailer->deliver();
+
+上記は、ビューとして **templates/email/html/welcome.php** を使用し、
+レイアウトとして **templates/layout/email/html/fancy.php** を使用します。
 以下のように、マルチパートのテンプレートメールを送信することもできます。 ::
 
-    $email = new Email();
-    $email
-        ->template('welcome', 'fancy')
-        ->emailFormat('both')
-        ->to('bob@example.com')
-        ->from('app@domain.com')
-        ->send();
+    $mailer = new Mailer();
+    $mailer = $mailer
+                ->setEmailFormat('both')
+                ->setTo('bob@example.com')
+                ->setFrom('app@domain.com')
+                ->viewBuilder()
+                    ->setTemplate('welcome')
+                    ->setLayout('fancy');
+
+    $mailer->deliver();
 
 この例では、次のテンプレートファイルを使用します。
 
-* **src/Template/Email/text/welcome.ctp**
-* **src/Template/Layout/Email/text/fancy.ctp**
-* **src/Template/Email/html/welcome.ctp**
-* **src/Template/Layout/Email/html/fancy.ctp**
+* **templates/email/text/welcome.php**
+* **templates/layout/email/text/fancy.php**
+* **templates/email/html/welcome.php**
+* **templates/layout/email/html/fancy.php**
 
 テンプレートメールを送信する時、 ``text`` 、 ``html`` と ``both`` のうちの
 どれかを送信オプションとして指定します。
 
-``Email::viewVars()`` でビューの変数をセットできます。 ::
+``Mailer :: viewBuilder()`` で取得されたビュービルダーのインスタンスを使用して、
+コントローラーで行うことと似たように、すべてのビュー関連の設定をすることができます。
 
-    $email = new Email('templated');
-    $email->viewVars(['value' => 12345]);
+``Mailer::setViewVars()`` でビューの変数をセットできます。 ::
+
+    $mailer = new Mailer('templated');
+    $mailer->setViewVars(['value' => 12345]);
+
+または、 ビュービルダーのメソッド
+``ViewBuilder::setVar()`` および ``ViewBuilder::setVars()`` を使用できます。
 
 以下のようにメールテンプレート内で使用します。 ::
 
@@ -283,55 +195,48 @@ CakePHP は、 :doc:`ビューレイヤー </views>` を使用してメールを
 
 メールでも普通のテンプレートファイルと同様にヘルパーを使用できます。
 デフォルトでは、 ``HtmlHelper`` のみがロードされます。
-``helpers()`` メソッドを使うことで追加でヘルパーをロードできます。 ::
+``ViewBuilder::setHelpers()`` メソッドを使うことで追加でヘルパーをロードできます。 ::
 
-    $email->helpers(['Html', 'Custom', 'Text']);
+    $mailer->viewBuilder()->setHelpers(['Html', 'Custom', 'Text']);
 
 ヘルパーを設定する時は、’Html’ を含めて下さい。そうしなければ、メールテンプレートにロードされません。
 
 もし、プラグインの中でテンプレートを使用してメール送信したい場合、おなじみの :term:`プラグイン記法`
 を使います。 ::
 
-    $email = new Email();
-    $email->template('Blog.new_comment', 'Blog.auto_message');
+    $mailer = new Mailer();
+    $mailer->viewBuilder()->setTemplate('Blog.new_comment');
 
 上記の例は、 Blog プラグインのテンプレートとレイアウトを使用しています。
 
 いくつかのケースで、プラグインで用意されたデフォルトのテンプレートを上書きしたい場合があるかもしれません。
-``Email::theme()`` メソッドを使って適切なテーマを使用することを Email に伝えることによって行います。 ::
+テーマを利用して行うことができます。 ::
 
-    $email = new Email();
-    $email->template('Blog.new_comment', 'Blog.auto_message');
-    $email->theme('TestTheme');
+    $mailer->viewBuilder()
+        ->setTemplate('Blog.new_comment')
+        ->setLayout('Blog.auto_message')
+        ->setTheme('TestTheme');
 
 これは、Blog プラグインを更新せずにあなたのテーマの ``new_comment`` テンプレートで上書きできます。
 テンプレートファイルは、以下のパスで作成する必要があります:
-**src/Template/Plugin/TestTheme/Plugin/Blog/Email/text/new_comment.ctp**
-
-.. deprecated:: 3.4.0
-    ``template()`` の代わりに ``setTemplate()`` を使用してください。
-    ``template()`` のレイアウトの引数の代わりに ``setLayout()`` を使用してください。
-    ``theme()`` の代わりに ``setTheme()`` を使用してください。
+**templates/plugin/TestTheme/plugin/Blog/email/text/new_comment.php**
 
 添付ファイルの送信
 ==================
 
-.. php:method:: attachments($attachments)
+.. php:method:: setAttachments($attachments)
 
 メールにファイルを添付することができます。添付するファイルの種類や、
 宛先のメールクライアントにどのようなファイル名で送りたいのかによって幾つかの異なる書式があります。
 
-1. 文字列: ``$email->attachments('/full/file/path/file.png')`` は、
-   file.png というファイル名でこのファイルを添付します。
-2. 配列: ``$email->attachments(['/full/file/path/file.png'])`` は、
-   文字列の場合と同じ振る舞いをします。
-3. キー付き配列:
-   ``$email->attachments(['photo.png' => '/full/some_hash.png'])`` は、
+1. 配列: ``$email->attachments(['/full/file/path/file.png'])`` は、 文字列の場合と同じ振る舞いをします。
+2. キー付き配列:　
+   ``$mailer->setAttachments(['photo.png' => '/full/some_hash.png'])`` は、
    photo.png というファイル名で some_hash.png ファイルを添付します。
    受信者からは、some_hash.png ではなく photo.png として見えます。
-4. ネストした配列::
+3. ネストした配列::
 
-    $email->attachments([
+    $mailer->setAttachments([
         'photo.png' => [
             'file' => '/full/some_hash.png',
             'mimetype' => 'image/png',
@@ -343,92 +248,31 @@ CakePHP は、 :doc:`ビューレイヤー </views>` を使用してメールを
    (添付をインラインに変換する場合にコンテンツIDをセットします)。
    mimetype と contentId はこの形式のオプションです。
 
-   4.1. ``contentId`` を指定した時、HTML 内で ``<img src="cid:my-content-id">``
+   3.1. ``contentId`` を指定した時、HTML 内で ``<img src="cid:my-content-id">``
    のようにファイルを使用できます。
 
-   4.2. 添付の ``Content-Disposition`` ヘッダーを無効にするために
+   3.2. 添付の ``Content-Disposition`` ヘッダーを無効にするために
    ``contentDisposition`` オプションを使用できます。これは、outlook を使って
    ical の招待状をクライアントに送る時に便利です。
 
-   4.3. ``file`` オプションの代わりに ``data`` オプションを使うと、
+   3.3. ``file`` オプションの代わりに ``data`` オプションを使うと、
    ファイル本文を文字列として添付することができます。これは、ファイルパスを指定せずに
    添付することができます。
-
-.. deprecated:: 3.4.0
-    ``attachments()`` の代わりに ``setAttachments()`` を使用してください。
-
-トランスポートの使用
-====================
-
-トランスポートは、様々なプロトコルや方法でメールを送信するために設計されたクラスです。
-CakePHP は、 Mail (デフォルト)、 Debug と SMTP トランスポートをサポートします。
-
-これらの送信方法を設定するためには、 :php:meth:`Cake\\Mailer\\Email::transport()`
-メソッドを使用するか、設定内で transport を指定する必要があります。 ::
-
-    $email = new Email();
-
-    // Email::configTransport() を使ってすでに設定されたトランスポート名を使用
-    $email->transport('gmail');
-
-    // 構築されたオブジェクトを使用
-    $transport = new DebugTransport();
-    $email->transport($transport);
-
-.. deprecated:: 3.4.0
-    ``transport()`` の代わりに ``setTransport()`` を使用してください。
-
-独自のトランスポートの作成
---------------------------
-
-SwiftMailer のような他のメールシステムを使うために独自のトランスポートを作成することができます。
-トランスポートを作るためには、(Example という名前のトランスポートの場合）最初に
-**src/Mailer/Transport/ExampleTransport.php** ファイルを作成してください。
-作成開始時点のファイルは次のようになります。 ::
-
-    namespace App\Mailer\Transport;
-
-    use Cake\Mailer\AbstractTransport;
-    use Cake\Mailer\Email;
-
-    class ExampleTransport extends AbstractTransport
-    {
-        public function send(Email $email)
-        {
-            // 何かをします。
-        }
-    }
-
-独自のロジックで、 ``send(Email $email)`` メソッドを実装してください。
-オプションで、 ``config($config)`` メソッドも実装できます。
-``config()`` は、 send() の前に呼ばれ、ユーザーの設定を受け取ることができます
-デフォルトでは、このメソッドは、 protected な変数 ``$_config`` に設定内容をセットします。
-
-もし、送信前にトランスポート上のメソッドを追加で呼ぶ必要がある場合、
-トランスポートのインスタンスを取得するために :php:meth:`Cake\\Mailer\\Email::getTransport()`
-が使えます。例::
-
-    $yourInstance = $email->getTransport()->transportClass();
-    $yourInstance->myCustomMethod();
-    $email->send();
 
 アドレス検証ルールの緩和
 ------------------------
 
-.. php:method:: emailPattern($pattern)
+.. php:method:: setEmailPattern($pattern)
 
 もし、規約に準拠していないアドレスに送信するときにバリデーションに問題がある場合、
 メールアドレスのバリデーションに使用するパターンを緩和することができます。
 いくつかの ISP に送信するときに必要になります。 ::
 
-    $email = new Email('default');
+    $mailer = new Mailer('default');
 
-    // 規約に準拠しないアドレスに送信できるように
-    // メールのパターンを緩和します。
-    $email->emailPattern($newPattern);
-
-.. deprecated:: 3.4.0
-    ``emailPattern()`` の代わりに ``setEmailPattern()`` を使用してください。
+    // Relax the email pattern, so you can send
+    // to non-conformant addresses.
+    $mailer->setEmailPattern($newPattern);
 
 メッセージの即時送信
 ====================
@@ -442,7 +286,7 @@ SwiftMailer のような他のメールシステムを使うために独自の�
 
     Email::deliver('you@example.com', 'Subject', 'Message', ['from' => 'me@example.com']);
 
-このメソッドは、 you@example.com 宛に、 me@example.com から、サブジェクト「Subject」、
+このメソッドは、 「you@example.com」宛に、「me@example.com」から、件名「Subject」、
 本文「Message」でメールを送信します。
 
 ``deliver()`` の戻り値は、 すべての設定を持つ :php:class:`Cake\\Mailer\\Email` インスタンスです。
@@ -464,21 +308,16 @@ CLI からのメール送信
 セットしなければなりません。(ホスト名が CLI 環境にないとき) ドメイン名は、メッセージ ID
 のホスト名として使用されます。 ::
 
-    $email->domain('www.example.org');
+    $mailer->setDomain('www.example.org');
     // メッセージ ID は ``<UUID@>`` (無効) の代わりに、
     // ``<UUID@www.example.org>`` (有効) を返します。
 
 正しいメッセージ ID は、迷惑メールフォルダーへ振り分けられることを防ぐのに役立ちます。
 
-.. deprecated:: 3.4.0
-    ``domain()`` の代わりに ``setDomain()`` を使用してください。
-
 再利用可能なメールの作成
 ========================
 
-.. versionadded:: 3.1.0
-
-Mailer は、アプリケーション全体で再利用可能なメールを作成することができます。
+``Mailer`` は、アプリケーション全体で再利用可能なメールを作成することができます。
 また、一ヶ所に複数のメール設定を格納するために使用することができます。
 これは、コードを DRY に保つことができますし、アプリケーション内の他の領域から、
 メールの設定ノイズを除外します。
@@ -496,17 +335,18 @@ Mailer は、アプリケーション全体で再利用可能なメールを作�
         public function welcome($user)
         {
             $this
-                ->to($user->email)
-                ->subject(sprintf('Welcome %s', $user->name))
-                ->template('welcome_mail', 'custom') // デフォルトでテンプレートはメソッドと同じ名前が使われます。
+                ->setTo($user->email)
+                ->setSubject(sprintf('Welcome %s', $user->name))
+                ->viewBuilder()
+                    ->setTemplate('welcome_mail'); // デフォルトでテンプレートはメソッドと同じ名前が使われます。
         }
 
         public function resetPassword($user)
         {
             $this
-                ->to($user->email)
-                ->subject('Reset password')
-                ->set(['token' => $user->token]);
+                ->setTo($user->email)
+                ->setSubject('Reset password')
+                ->setViewVars(['token' => $user->token]);
         }
     }
 
@@ -528,7 +368,7 @@ Mailer は、アプリケーション全体で再利用可能なメールを作�
 
         public function register()
         {
-            $user = $this->Users->newEntity();
+            $user = $this->Users->newEmptyEntity();
             if ($this->request->is('post')) {
                 $user = $this->Users->patchEntity($user, $this->request->getData())
                 if ($this->Users->save($user)) {
@@ -552,7 +392,7 @@ Mailer は、アプリケーション全体で再利用可能なメールを作�
         ];
     }
 
-    public function onRegistration(Event $event, EntityInterface $entity, ArrayObject $options)
+    public function onRegistration(EventInterface $event, EntityInterface $entity, ArrayObject $options)
     {
         if ($entity->isNew()) {
             $this->send('welcome', [$entity]);
@@ -560,8 +400,161 @@ Mailer は、アプリケーション全体で再利用可能なメールを作�
     }
 
 Mailer オブジェクトは、イベントリスナーとして登録され、 ``onRegistration()`` メソッドは
-``Model.afterSave`` イベントが起こるたびに呼び出されます。イベントリスナーオブジェクトの
-登録方法に関する情報は、 :ref:`registering-event-listeners` のドキュメントを参照してください。
+``Model.afterSave`` イベントが起こるたびに呼び出されます。 ::
+
+    // Users イベントマネージャへアタッチする
+    $this->Users->getEventManager()->on($this->getMailer('User'));
+
+.. note::
+
+    イベントリスナーオブジェクトを登録する方法については、
+    :ref:`registering-event-listeners` のドキュメントを参照してください。
+
+.. _email-transport:
+
+トランスポートの設定
+====================
+
+メールメッセージは、トランスポートによって配信されます。さまざまなトランスポートを使用すると、
+PHP の ``mail()`` 関数や SMTP サーバーでメッセージを送信したり、
+デバッグが捗るようメッセージを送信しないこともできます。トランスポートを設定すると、
+アプリケーションのコードの外に、設定データを保持することができ、
+単純に設定データを変更できるのでデプロイが簡単になります。
+トランスポートの設定例は、次のようになります。 ::
+
+    // In config/app.php
+    'EmailTransport' => [
+        // Sample Mail configuration
+        'default' => [
+            'className' => 'Mail',
+        ],
+        // Sample SMTP configuration
+        'gmail' => [
+            'host' => 'smtp.gmail.com',
+            'port' => 587,
+            'username' => 'my@gmail.com',
+            'password' => 'secret',
+            'className' => 'Smtp',
+            'tls' => true
+        ]
+    ],
+
+``TransportFactory::setConfig()`` を利用して設定することもできます。::
+
+    use Cake\Mailer\TransportFactory;
+
+    // Define an STMP transport
+    TransportFactory::setConfig('gmail', [
+        'host' => 'ssl://smtp.gmail.com',
+        'port' => 465,
+        'username' => 'my@gmail.com',
+        'password' => 'secret',
+        'className' => 'Smtp'
+    ]);
+
+Gmail のように、SSL SMTP サーバーを設定することができます。これを行うには、 host に
+``ssl://`` プレフィックスをつけて、それに伴い port の値を設定してください。
+また、 ``tls`` オプションを使用して TLS SMTP を有効にすることもできます。 ::
+
+    use Cake\Mailer\TransportFactory;
+
+    TransportFactory::setConfig('gmail', [
+        'host' => 'smtp.gmail.com',
+        'port' => 587,
+        'username' => 'my@gmail.com',
+        'password' => 'secret',
+        'className' => 'Smtp',
+        'tls' => true
+    ]);
+
+上記の設定では、メールメッセージの TLS 通信を可能にします。
+
+特定のトランスポートを使用するようにメーラーを構成するには、
+``Cake\Mailer\Mailer::setTransport()`` メソッドを使用するか、
+設定にトランスポートを含めることができます。 ::
+
+    // TransportFactory::setConfig() を使用して設定済の名前付きトランスポートを使用します。
+    $mailer->setTransport('gmail');
+
+    // 構築されたオブジェクトを使用します。
+    $mailer->setTransport(new \Cake\Mailer\Transport\DebugTransport());
+
+.. warning::
+    あなたのグーグルアカウントでこれを動作させるためには安全性の低いアプリへのアクセスを
+    有効にする必要があります: `安全性の低いアプリがアカウントにアクセスするのを許可する
+    <https://support.google.com/accounts/answer/6010255>`__ 。
+
+.. note::
+    `Gmail の SMTP 設定 <https://support.google.com/a/answer/176600?hl=ja>`__ 。
+
+.. note::
+    SSL + SMTP を使用するには、PHP のインストール時に SSL が設定されている必要があります。
+
+設定オプションは、 :term:`DSN` 文字列として指定することもできます。
+これは、環境変数を使ったり :term:`PaaS` プロバイダーで動作する場合に便利です。 ::
+
+    TransportFactory::setConfig('default', [
+        'url' => 'smtp://my@gmail.com:secret@smtp.gmail.com:587?tls=true',
+    ]);
+
+DSN 文字列を使用するときは、クエリー文字列引数として任意の追加のパラメーターやオプションを
+定義することができます。
+
+.. php:staticmethod:: drop($key)
+
+設定が完了すると、トランスポートを変更することはできません。
+トランスポートを変更するためには、まずこれを取り消してから再設定する必要があります。
+
+独自のトランスポートの作成
+--------------------------
+
+SwiftMailer のような他のメールシステムを使うために独自のトランスポートを作成することができます。
+トランスポートを作るためには、(Example という名前のトランスポートの場合）最初に
+**src/Mailer/Transport/ExampleTransport.php** ファイルを作成してください。
+作成開始時点のファイルは次のようになります。 ::
+
+    namespace App\Mailer\Transport;
+
+    use Cake\Mailer\AbstractTransport;
+    use Cake\Mailer\Message;
+
+    class ExampleTransport extends AbstractTransport
+    {
+        public function send(Message $message): array
+        {
+            // 何かをします。
+        }
+    }
+
+独自のロジックで、 ``send(Mailer $mailer)`` メソッドを実装してください。
+
+Mailerを利用しないメール送信
+============================
+
+``Mailer`` は、``Cake\Mailer\Message``、``Cake\Mailer\Renderer``、
+および``Cake\Mailer\AbstractTransport`` 間の橋渡しをするより高いレベルの抽象化クラスであり、
+メールの設定と配信を簡単にするクラスです。
+
+必要であれば、これらのクラスを `` Mailer`` で直接使用することもできます。
+
+例 ::
+
+    $render = new \Cake\Mailer\Renderer();
+    $render->viewBuilder()
+        ->setTemplate('custom')
+        ->setLayout('sparkly');
+
+    $message = new \Cake\Mailer\Message();
+    $message
+        ->setFrom('admin@cakephp.org')
+        ->setTo('user@foo.com')
+        ->setBody($render->render());
+
+    $transport = new \Cake\Mailer\Transport\MailTransport();
+    $result = $transport->send($message);
+
+``Renderer`` の使用をスキップして、メッセージ本文を直接設定することもできます
+``Message::setBodyText()`` および ``Message::setBodyHtml()`` メソッドを使用します。
 
 .. _email-testing:
 
@@ -569,27 +562,48 @@ Mailer オブジェクトは、イベントリスナーとして登録され、 
 ==============
 
 メールをテストするためには、テストケースに ``Cake\TestSuite\EmailTrait`` を追加します。
-``EmailTrait`` は、アプリケーションから送信されたすべてのメールに対して実行できる
-一連のアサーションをテストケースに提供します。
+``MailerTrait`` は、PHPUnitのフックを使用して、アプリケーションのメールトランスポートをプロキシに置き換えます。
+プロキシはメールのメッセージをインターセプトし、配信されるメールに対してアサーションを実行することを可能とします。
 
-``EmailTrait`` をテストケースに追加すると、アプリケーションのすべてのメール転送が、
-``Cake\TestSuite\TestEmailTransport`` に置き換えられます。
-このトランスポートは送信する代わりにメールを傍受し、それらに対してアサートすることを可能とします。
+テストケースにトレイトを追加してメールのテストを開始します。
+メールでURLを生成する必要がある場合はルートを読み込みます。 ::
 
-テストケースにトレイトを追加してメールのテストを開始します。 ::
+    namespace App\Test\TestCase\Mailer;
 
-    namespace App\Test\TestCase;
+    use App\Mailer\WelcomeMailer;
+    use App\Model\Entity\User;
 
     use Cake\TestSuite\EmailTrait;
+    use Cake\TestSuite\TestCase;
 
-    class MyTestCase extends TestCase
+    class WelcomeMailerTestCase extends TestCase
     {
         use EmailTrait;
+
+        public function setUp(): void
+        {
+            parent::setUp();
+            $this->loadRoutes();
+        }
     }
 
-.. versionadded:: 3.7.0
+新しいユーザーが登録したときにウェルカムメールを配信するメーラーがあるとします。
+件名と本文にユーザーの名前が含まれていることを確認したい場合は、以下のようにします。 ::
 
-    ``Cake\TestSuite\EmailTrait`` が追加されました。
+    //  WelcomeMailerTestCase クラスにて
+    public function testName()
+    {
+        $user = new User([
+            'name' => 'Alice Alittea',
+            'email' => 'alice@example.org',
+        ]);
+        $mailer = new WelcomeMailer();
+        $mailer->send('welcome', [$user]);
+
+        $this->assertMailSentTo($user->email);
+        $this->assertMailContainsText('こんにちは。' . $user->name);
+        $this->assertMailContainsText('CakePHPへようこそ！');
+    }
 
 アサーションメソッド
 ====================
@@ -634,6 +648,9 @@ Mailer オブジェクトは、イベントリスナーとして登録され、 
 
     // 特定のインデックスのメールに期待したテキストコンテンツが含まれていることをアサート
     $this->assertMailContainsTextAt($at, $contents);
+
+    //  メールに添付ファイルが含まれていることをアサート
+    $this->assertMailContainsAttachment('test.png');
 
     // 特定のインデックスのメールにメールゲッター内の期待値が含まれていることをアサート（例："subject"）
     $this->assertMailSentWithAt($at, $expected, $parameter);

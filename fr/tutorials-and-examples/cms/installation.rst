@@ -15,7 +15,7 @@ Voici les pré-requis:
    utiliser MySQL, assurez-vous que ``pdo_mysql`` est bien activé dans PHP.
 #. Les connaissances de base en PHP.
 
-Avant de commencer, assurez-vous que votre version de PHP est à jour :
+Avant de commencer, assurez-vous que votre version de PHP est à jour:
 
 .. code-block:: bash
 
@@ -31,7 +31,7 @@ Récupérer CakePHP
 La manière la plus simple d'installer CakePHP est d'utiliser Composer. Composer
 est une manière simple d'installer CakePHP via votre terminal. Premièrement, vous
 devez télécharger et installer Composer si vous ne l'avez pas déjà fait. Si vous
-avez cURL installé, il suffit simplement de lancer la commande suivante :
+avez cURL installé, il suffit simplement de lancer la commande suivante:
 
 .. code-block:: bash
 
@@ -41,19 +41,19 @@ Ou vous pouvez télécharger ``composer.phar`` depuis le
 `site de Composer <https://getcomposer.org/download/>`_.
 
 Ensuite, tapez la commande suivante dans votre terminal pour installer le squelette
-d'application CakePHP dans le dossier **cms** du dossier courant :
+d'application CakePHP dans le dossier **cms** du dossier courant:
 
 .. code-block:: bash
 
-    php composer.phar create-project --prefer-dist cakephp/app cms
+    php composer.phar create-project --prefer-dist cakephp/app:4.* cms
 
 Si vous avez téléchargé et utilisé `l'Installer de Composer pour Windows
 <https://getcomposer.org/Composer-Setup.exe>`_, tapez la commande suivante dans
-votre terminal depuis le dossier d'installation (par exemple C:\\wamp\\www\\dev\\cakephp3) :
+votre terminal depuis le dossier d'installation (par exemple C:\\wamp\\www\\dev\\cakephp3):
 
 .. code-block:: bash
 
-    composer self-update && composer create-project --prefer-dist cakephp/app cms
+    composer self-update && composer create-project --prefer-dist cakephp/app:4.* cms
 
 Utiliser Composer a l'avantage d'exécuter automatiquement certaines tâches
 importantes d'installation, comme définir les bonnes permissions sur les dossiers
@@ -93,7 +93,7 @@ Vérifier l'installation
 
 Il est possible de vérifier que l'installation est terminée en vous rendant sur
 la page d'accueil. Avant de faire ça, vous allez devoir lancer le serveur de
-développement :
+développement:
 
 .. code-block:: bash
 

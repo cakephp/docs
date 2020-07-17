@@ -51,13 +51,11 @@ is invoked at the end of a View’s constructor for this kind of use:
 
     class AppView extends View
     {
-
         public function initialize(): void
         {
             // Always enable the MyUtils Helper
             $this->loadHelper('MyUtils');
         }
-
     }
 
 .. _view-templates:
@@ -222,7 +220,7 @@ uncaptured content from the extending view. Assuming our view file has a
     <?php
     echo $this->Html->link('edit', [
         'action' => 'edit',
-        $post->id
+        $post->id,
     ]);
     ?>
     </li>
@@ -641,17 +639,6 @@ For elements inside subfolder of a plugin
 following::
 
     echo $this->element('Contacts.sidebar/helpbox');
-
-Requesting Elements from the App
---------------------------------
-
-If you are within a plugin's template file and want to render
-an element residing in your main application rather than this
-or another plugin, use the following::
-
-  echo $this->element('some_global_element', [], ['plugin' => false]);
-  // or...
-  echo $this->element('some_global_element', ['localVar' => $someData], ['plugin' => false]);
 
 Routing prefix and Elements
 ---------------------------

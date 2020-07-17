@@ -67,7 +67,7 @@ AppController に追加しましょう。 ::
         }
     }
 
-さらに **src/Template/Users/login.ctp** に以下のように追記します。 ::
+さらに **templates/Users/login.php** に以下のように追記します。 ::
 
     <h1>Login</h1>
     <?= $this->Form->create() ?>
@@ -126,7 +126,7 @@ AppController に追加しましょう。 ::
     }
 
 上記では ``add()`` アクションは認証や許可が不要であることを ``AuthComponent`` に示しています。
-**Users/add.ctp** をクリーンアップする時間を作り、誤解を招くようなリンクを削除しても、
+**Users/add.php** をクリーンアップする時間を作り、誤解を招くようなリンクを削除しても、
 このまま次のセクションに進んでもかまいません。このチュートリアルではユーザーの編集、
 表示または一覧は構築しません。 それらのアクションは ``AuthComponent`` が拒否します。
 
@@ -205,7 +205,7 @@ AppController に追加しましょう。 ::
 元のページにリダイレクトされるはずです。もし、エラーメッセージが表示されないなら、
 レイアウトに以下を追加してください。 ::
 
-    // src/Template/Layout/default.ctp の中で
+    // templates/layout/default.php の中で
     <?= $this->Flash->render() ?>
 
 これで許可エラーメッセージが表示されるはずです。
@@ -219,7 +219,7 @@ AppController に追加しましょう。 ::
 #. ブックマークを編集するときにユーザーを選べる
 #. 一覧ページに他のユーザーのブックマークが表示される
 
-まず追加のフォームから取り組みましょう。はじめに **src/Template/Bookmarks/add.ctp** から
+まず追加のフォームから取り組みましょう。はじめに **templates/Bookmarks/add.php** から
 ``control('user_id')`` を削除します。 削除したら、 **src/Controller/BookmarksController.php**
 の ``add()`` アクションを以下のように修正します。 ::
 
@@ -302,8 +302,8 @@ AppController に追加しましょう。 ::
 
     protected function _getTagString()
     {
-        if (isset($this->_properties['tag_string'])) {
-            return $this->_properties['tag_string'];
+        if (isset($this->_fields['tag_string'])) {
+            return $this->_fields['tag_string'];
         }
         if (empty($this->tags)) {
             return '';
@@ -336,7 +336,7 @@ AppController に追加しましょう。 ::
 ----------------
 
 エンティティーを修正するとタグ用の新しいインプットを追加することができます。
-**src/Template/Bookmarks/add.ctp** と **src/Template/Bookmarks/edit.ctp** の
+**templates/Bookmarks/add.php** と **templates/Bookmarks/edit.php** の
 すでにある ``tags._ids`` のインプットを以下と置き換えます。 ::
 
     echo $this->Form->control('tag_string', ['type' => 'text']);

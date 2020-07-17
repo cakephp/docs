@@ -327,7 +327,7 @@ application. Vous pourrez voir les résultats en allant à
 
 Si vous utilisez PHP 5.6.0 (ou supérieur), vous pouvez utilisez `phpdbg <http://phpdbg.com/>`__
 pour générer la couverture des résultats à la place de xdebug. ``phpdbg`` est
-généralement plus rapide dans la génération des rapports de couverture :
+généralement plus rapide dans la génération des rapports de couverture:
 
 .. code-block:: bash
 
@@ -626,7 +626,7 @@ utiliser ceci pour récupérer le nom de la table::
         public $import = ['model' => 'Articles'];
     }
 
-Puisqu'on utilise ``TableRegistry::get()``, on peut aussi utiliser la syntaxe de
+Puisqu'on utilise ``TableRegistry::getTableLocator()->get()``, on peut aussi utiliser la syntaxe de
 plugin.
 
 Vous pouvez naturellement importer la définition de votre table à partir d'un
@@ -788,7 +788,9 @@ maintenant à ceci::
         public function setUp()
         {
             parent::setUp();
-            $this->Articles = TableRegistry::get('Articles');
+
+            // Prior to 3.6 use TableRegistry::get('Articles')
+            $this->Articles = TableRegistry::getTableLocator()->get('Articles');
         }
 
         public function testFindPublished()
@@ -939,9 +941,10 @@ Créez un fichier nommé **ArticlesControllerTest.php** dans votre répertoire
                 'body' => 'New Body'
             ];
             $this->post('/articles', $data);
-
             $this->assertResponseSuccess();
-            $articles = TableRegistry::get('Articles');
+
+            // Prior to 3.6 use TableRegistry::get('Articles')
+            $articles = TableRegistry::getTableLocator()->get('Articles');
             $query = $articles->find()->where(['title' => $data['title']]);
             $this->assertEquals(1, $query->count());
         }
@@ -1584,7 +1587,8 @@ morceau de code suivant::
             $this->exec('my_console update_modified Users');
             $this->assertExitCode(Shell::CODE_SUCCESS);
 
-            $user = TableRegistry::get('Users')->get(1);
+            // Prior to 3.6 use TableRegistry::get('Users')
+            $user = TableRegistry::getTableLocator()->get('Users')->get(1);
             $this->assertSame($user->modified->timestamp, $now->timestamp);
 
             FrozenTime::setTestNow(null);
@@ -1997,7 +2001,10 @@ puis que l'entity ``$order`` a été passée dans les données de l'événement:
         public function setUp()
         {
             parent::setUp();
-            $this->Orders = TableRegistry::get('Orders');
+
+            // Prior to 3.6 use TableRegistry::get('Orders')
+            $this->Orders = TableRegistry::getTableLocator()->get('Orders');
+
             // enable event tracking
             $this->Orders->eventManager()->setEventList(new EventList());
         }

@@ -213,7 +213,7 @@ edit template files::
 In addition you should disable or remove the requirePresence from the validator
 for both the ``lft`` and ``rght`` columns in your CategoriesTable model::
 
-    public function validationDefault(Validator $validator)
+    public function validationDefault(Validator $validator): Validator
     {
         $validator
             ->add('id', 'valid', ['rule' => 'numeric'])
@@ -341,12 +341,11 @@ it::
 
     class ArticlesController extends AppController
     {
-
         // ...
 
         public function add()
         {
-            $article = $this->Articles->newEntity();
+            $article = $this->Articles->newEmptyEntity();
             if ($this->request->is('post')) {
                 $article = $this->Articles->patchEntity($article, $this->request->getData());
                 if ($this->Articles->save($article)) {

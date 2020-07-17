@@ -5,10 +5,7 @@ Retornando dados e conjuntos de resultados
 
 .. php:class:: Table
 
-Quando executar uma query, você obterá um objeto Entidade. Nesta sessão
-discutiremos diferentes caminhos para se obter: entidades, carregar informações
-relacionais, abstratas, ou complexo relacional. Você poderá ler mais sobre
-:doc:`/orm/entities` ( ‘Entity’ em inglês ).
+Enquanto os objetos Table fornecem uma abstração em torno de um "repositório" ou coleção de objetos, quando você consulta registros individuais, obtém objetos Entity. Nesta sessão discutiremos diferentes caminhos para se obter: entidades, carregar informações relacionais, abstratas, ou complexo relacional. Você poderá ler mais sobre :doc:`/orm/entities` ( ‘Entity’ em inglês ).
 
 Depurando Queries e Resultados
 ==============================
@@ -36,7 +33,7 @@ você pode usar ``get()``::
 
     // No controller ou table tente isto.
 
-    // Retorna um único artigo pelo id primário.
+    // Retorna um único artigo pela chave primária.
     $article = $articles->get($id);
 
     // Retorna um artigo com seus comentários
@@ -48,7 +45,7 @@ Quando não conseguir obter um resultado
 ``Cake\Datasource\Exception\RecordNotFoundException`` será disparado. Você
 poderá tratar esta exceção, ou converter num erro 404.
 
-O metódo ``find()`` usa uma cache integrado. Você pode uma a opção ``cache``
+O metódo ``find()`` usa um cache integrado. Você pode usar a opção ``cache``
 quando chamar ``get()`` para uma performance na leitura - ``caching``::
 
     // No controller ou table tente isto.
@@ -84,8 +81,8 @@ Usando ``'find()'`` para carregar dados
 
 .. php:method:: find($type, $options = [])
 
-Agora que você sabe e pode trabalhar com entidades, Precisará carrega las
-e gostará muito como fazer isso. O caminho mais simples para carregar uma
+Agora que você sabe e pode trabalhar com entidades, precisará carregá-las
+e gostará muito de fazer isso. O caminho mais simples para carregar uma
 Entidade ou objetos relacionais metódo ``find()``. find provê um extensivél
 e facíl caminho para procurar e retornar dados, talves você se interesse por
 in::
@@ -356,7 +353,9 @@ Neste exemplo mostramos como encontrarmos um artigo quando este estiver publicad
     }
 
     // No controller ou table.
-    $articles = TableRegistry::get('Articles');
+
+    // Prior to 3.6 use TableRegistry::get('Articles')
+    $articles = TableRegistry::getTableLocator()->get('Articles');
     $query = $articles->find('ownedBy', ['user' => $userEntity]);
     //Retorne todos os artigos, quero que seja de meu usuário, porém somente os já publicados.
 
@@ -366,7 +365,9 @@ Sem esforço você pode expressar algumas consultas complexas. Assumindo que voc
 tem ambas as buscas 'published' e 'recent', poderia fazer assim::
 
     // No controller ou table.
-    $articles = TableRegistry::get('Articles');
+
+    // Prior to 3.6 use TableRegistry::get('Articles')
+    $articles = TableRegistry::getTableLocator()->get('Articles');
     $query = $articles->find('published')->find('recent');
     //Busque todos os artigos, dentre eles encontre os publicados, e retorne somente os recentes.
 
@@ -390,7 +391,9 @@ Por exemplo, se você quer buscar usuários por seu nome gostará de::
     $query = $this->Users->findAllByUsername('joebob');
 
     // Na tabela
-    $users = TableRegistry::get('Users');
+
+    // Prior to 3.6 use TableRegistry::get('Users')
+    $users = TableRegistry::getTableLocator()->get('Users');
     // Duas chamadas também iguais.
     $query = $users->findByUsername('joebob');
     $query = $users->findAllByUsername('joebob');
@@ -610,8 +613,8 @@ option to sort the data in those associations::
 
 .. _filtering-by-associated-data:
 
-Filtering by Associated Data
-----------------------------
+Filtering by Associated Data Via Matching And Joins
+===================================================
 
 .. start-filtering
 
@@ -666,7 +669,7 @@ association, you can expect to get both the ``_matchingData`` and standard
 association properties in your results.
 
 Using innerJoinWith
-~~~~~~~~~~~~~~~~~~~
+-------------------
 
 Using the ``matching()`` function, as we saw already, will create an ``INNER
 JOIN`` with the specified association and will also load the fields into the
@@ -698,7 +701,7 @@ result set, and no ``_matchingData`` property will be set.
     Query::innerJoinWith() was added in 3.1
 
 Using notMatching
-~~~~~~~~~~~~~~~~~
+-------------------
 
 The opposite of ``matching()`` is ``notMatching()``. This function will change
 the query so that it filters results that have no relation to the specified
@@ -758,7 +761,7 @@ will not add any data to the ``_matchingData`` property in the results.
     Query::notMatching() was added in 3.1
 
 Using leftJoinWith
-~~~~~~~~~~~~~~~~~~
+-------------------
 
 On certain occasions you may want to calculate a result based on an association,
 without having to load all the records for it. For example, if you wanted to
@@ -796,7 +799,7 @@ result set.
 .. end-filtering
 
 Changing Fetching Strategies
-----------------------------
+============================
 
 As you may know already, ``belongsTo`` and ``hasOne`` associations are loaded
 using a ``JOIN`` in the main finder query. While this improves query and
@@ -924,7 +927,9 @@ do. For example, you can extract a list of unique tags on a collection of
 articles by running::
 
     // In a controller or table method.
-    $articles = TableRegistry::get('Articles');
+
+    // Prior to 3.6 use TableRegistry::get('Articles')
+    $articles = TableRegistry::getTableLocator()->get('Articles');
     $query = $articles->find()->contain(['Tags']);
 
     $reducer = function ($output, $value) {
@@ -946,7 +951,9 @@ Some other examples of the collection methods being used with result sets are::
     });
 
     // Create an associative array from result properties
-    $articles = TableRegistry::get('Articles');
+
+    // Prior to 3.6 use TableRegistry::get('Articles')
+    $articles = TableRegistry::getTableLocator()->get('Articles');
     $results = $articles->find()->contain(['Authors'])->all();
 
     $authorList = $results->combine('id', 'author.name');

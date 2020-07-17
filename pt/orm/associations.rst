@@ -1,7 +1,7 @@
 Associações - Conectando tabelas
 ################################
 
-Definindo a relação entre diferentes objectos na sua aplicação deveria ser um processo natural. Por exemplo, um artigo deve ter muitos comentários, e pertencer a um autor. Autores deve ter muitos artigos e logo muitos comentários. O CakePHP torna fácil a gestão das relações entre os modelos. As quatro tipo de associações no CakePHP são:
+Definindo a relação entre diferentes objetos na sua aplicação deveria ser um processo natural. Por exemplo, um artigo deve ter muitos comentários, e pertencer a um autor. Autores deve ter muitos artigos e logo muitos comentários. O CakePHP torna fácil a gestão das relações entre os modelos. As quatro tipo de associações no CakePHP são:
 hasOne, hasMany, belongsTo, and belongsToMany.
 
 =================== ===================== =======================================
@@ -16,7 +16,7 @@ muitos para um       belongsTo             Many articles belong to a user.
 muitos para muitos   belongsToMany         Tags belong to many articles.
 =================== ===================== =======================================
 
-Associações são definidas durante o método  ``initialize()``  do objeto da sua tabela. Métodos que fechem com o tipo de associação permitem a você definir as associações da suaaplicação. Por exemplo se nós quisermos definir uma associação do tipo belongsTo em nosso ArticlesTable::
+Associações são definidas durante o método  ``initialize()``  do objeto da sua tabela. Métodos que fechem com o tipo de associação permitem a você definir as associações da sua aplicação. Por exemplo se nós quisermos definir uma associação do tipo belongsTo em nosso ArticlesTable::
 
     namespace App\Model\Table;
 
@@ -30,7 +30,7 @@ Associações são definidas durante o método  ``initialize()``  do objeto da s
         }
     }
 
-A forma mais simples de definição de qualquer associação é usar o alias do modelo que você quer associar. Por padrão todos os detalhes das associações serão usadas as conveões do CakePHP. Se você quiser customizar a forma como as suas associações são trabalhadas, você pode modificar elas com os setters::
+A forma mais simples de definição de qualquer associação é usar o alias do modelo que você quer associar. Por padrão todos os detalhes das associações serão usadas as convenções do CakePHP. Se você quiser customizar a forma como as suas associações são trabalhadas, você pode modificar elas com os setters::
 
     class ArticlesTable extends Table
     {
@@ -54,7 +54,7 @@ Você pode também usar arrays para customizar suas associações::
 
 Arrays, contudo, não oferecem o autocompletar, que uma IDE proporciona.
 
-A mesma tabela pdoe ser usada multiplas vezes para definir difernetes tipos de associações. Por exemplo considere um caso onde você deseja separar os comentários aprovados daqueles que ainda não foram moderados ainda::
+A mesma tabela pode ser usada múltiplas vezes para definir diferentes tipos de associações. Por exemplo considere um caso onde você deseja separar os comentários aprovados daqueles que ainda não foram moderados ainda::
 
     class ArticlesTable extends Table
     {
@@ -104,14 +104,14 @@ Você também pode definir associações em massa ao criar uma única chamada, p
         }
     }
 
-Cada associação aceita multiplas associações onde a chave é o alias, e a o valir são os dados da configuração da associação. Se a chave for usada for numerica, os valores serão tratados como aliases de associações.
+Cada associação aceita multiplas associações onde a chave é o alias, e a o valor são os dados da configuração da associação. Se a chave for usada for numérica, os valores serão tratados como aliases de associações.
 
 .. _has-one-associations:
 
 Associação HasOne
 ==================
 
-Vamos definir uma tabela Users com uma relação tem um para o endereço da tabela.
+Vamos definir uma tabela Users com uma relação hasOne para o endereço da tabela.
 
 Primeiramente, a sua tabela do seu banco de dados precisa de uma chave correta. Para uma relação hasOne funcionar, uma tabela precisa conter uma chave estrangeira que aponte para um registro em otura tabela. Neste caso o endereço da tabela vai conter um campo chamado ``user_id``. O padrão básico é:
 
@@ -127,9 +127,9 @@ Doctors hasOne Mentors mentors.doctor\_id
 
 .. note::
 
-    Não necessariamente precisa seguir as convenções do CakePHP, vocẽ pdoe sobrescrever o uso de qualquer chave estrangeira na definição das suas associações. Mesmo assim ao aderir as convenções o seu código se torna menos repetitivo, logo mais fácil de ler e de manter.
+    Não necessariamente precisa seguir as convenções do CakePHP, você pode sobrescrever o uso de qualquer chave estrangeira na definição das suas associações. Mesmo assim ao aderir as convenções o seu código se torna menos repetitivo, logo, mais fácil de ler e de manter.
 
-Se nos tivermos as classes ``UsersTable`` e ``AddressesTable`` fará com que possamos criar as associaões da seguinte forma::
+Se nos tivermos as classes ``UsersTable`` e ``AddressesTable`` fará com que possamos criar as associações da seguinte forma::
 
     class UsersTable extends Table
     {
@@ -139,7 +139,7 @@ Se nos tivermos as classes ``UsersTable`` e ``AddressesTable`` fará com que pos
         }
     }
 
-Se vocẽ necessitar mais controle, você pode definir as suas associações usando os setters.
+Se você necessitar mais controle, você pode definir as suas associações usando os setters.
 Por exemplo, você deseja limitar as associações para incluir somente certos registros::
 
     class UsersTable extends Table
@@ -159,16 +159,13 @@ As chaves possíveis para uma relação hasOne incluem:
 - **foreignKey**:  o nome da chave estrangeira na outra tabela. Este é especialmente acessivel se você precisa definir vários relacionamentos hasOne.
   O valor padrão para esta chave é o nome sublinhado, singular do modelo atual, seguido do sufixo com '\ _id'. No exemplo acima, seria o padrão para
   'user\_id'.
-- **bindingKey**: O nome da coluna na tabela atual, que será usado
-  para combinar com``foreignKey``. Se não for especificado, a chave primária (para
-  exemplo, a coluna de identificação da tabela ``Users``) será usado.
-- **conditions**: um array de find() compatível com as condições como
-  ``['Addresses.primary' => true]``
+- **bindingKey**: O nome da coluna na tabela atual, que será usado para combinar com``foreignKey``. Se não for especificado, a chave primária (para exemplo, a coluna de identificação da tabela ``Users``) será usado.
+- **conditions**: um array de find() compatível com as condições como ``['Addresses.primary' => true]``
 - **joinType**: o tipo do join a ser usado para o SQL query, o padão é LEFT. Você pode usar o INNER se a sua associação é hasOne e estiver sempre presente.
-- **dependent**: Quando a chave dependente é definida como ``true``, e uma entidade é deletada, os registros do modelo associado tabém devem ser excluídos. Neste caso nós precisamos definir isto para ``true`` então ao deletar um usuário fará excluir todos os resgistros associados aquele registro.
+- **dependent**: Quando a chave dependente é definida como ``true``, e uma entidade é deletada, os registros do modelo associado tabém devem ser excluídos. Neste caso nós precisamos definir isto para ``true`` então ao deletar um usuário fará excluir todos os resgistros associados àquele registro.
 - **cascadeCallbacks**: Quando este e o **dependent** são ``true``, o deletar em cascata vai carregar e excluir todos os registros. Quando ``false``, ``deleteAll()`` deve ser usado para remover o dados associados e não haverá callback disparado.
-- **propertyName**: O nome da propriedade deve ser preenchido com os dados de uma tabela associada para a tabela fonte. Por default este é o nome sublinhado e singulardas associações para ``address`` no nosso exemplo.
-- **strategy**: Definindo a estratégia de query a ser utilizada . Por padrão o 'join'. O outro  valor válido é 'select', aos quais utiliza uma quesry separada.
+- **propertyName**: O nome da propriedade deve ser preenchido com os dados de uma tabela associada para a tabela fonte. Por default este é o nome sublinhado e singular das associações para ``address`` no nosso exemplo.
+- **strategy**: Definindo a estratégia de query a ser utilizada . Por padrão o 'join'. O outro  valor válido é 'select', aos quais utiliza uma query separada.
 - **finder**: O método finder a ser usado quando carregamos os registros associados.
 
 Uma vez que as associações foram definidas, as operações de find na tabela de usuarios podem conter os registros de endereços se estes existirem::
@@ -179,17 +176,18 @@ Uma vez que as associações foram definidas, as operações de find na tabela d
         echo $user->address->street;
     }
 
-Abaixo emitirá um SQL similar a::
+Abaixo emitirá um SQL similar a:
+
+.. code-block:: sql
 
     SELECT * FROM users INNER JOIN addresses ON addresses.user_id = users.id;
 
 .. _belongs-to-associations:
 
-Associações BelongsTo 
+Associações BelongsTo
 ======================
 
-Agora que nós temos acessoaos registros de endereço através da tabela usuários, vamos criar a associação belongsTo em endereços a fim de ter acesso aos registros relacionados a usuário. A associação belongsTo é um complemento natural a associações do tipo hasOne e
-hasMany - isto permite a nós vermos dados relacionados a partir da outra perspectiva.
+Agora que nós temos acesso aos registros de endereço através da tabela usuários, vamos criar a associação belongsTo em endereços a fim de ter acesso aos registros relacionados a usuário. A associação belongsTo é um complemento natural a associações do tipo hasOne e hasMany - isto permite a nós vermos dados relacionados a partir da outra perspectiva.
 
 Quando definindo as chaves do seu banco de dados para uma relação pertence a (belongsTo) na sua tabela siga estas convenções:
 
@@ -241,7 +239,7 @@ Chaves possiveis para associações belongsTo arrays inclui:
 - **strategy**: Define uma estratégia de query a ser usada. Por padrão o 'join'. O outro valor valido é 'select', aos quais utiliza uma query separada.
 - **finder**: O método finder é usado quando carregamos registros associados.
 
-Uma vez que esta associação é definida, operações to tipo dina para a tabela Addresses pode conter o registro de User se este existir::
+Uma vez que esta associação é definida, operações do tipo find para a tabela Addresses pode conter o registro de User se este existir::
 
     // No controller ou no metodo de table.
     $query = $addresses->find('all')->contain(['Users']);
@@ -249,7 +247,9 @@ Uma vez que esta associação é definida, operações to tipo dina para a tabel
         echo $address->user->username;
     }
 
-Abaixo emite um SQL que é similar a::
+Abaixo emite um SQL que é similar a:
+
+.. code-block:: sql
 
     SELECT * FROM addresses LEFT JOIN users ON addresses.user_id = users.id;
 
@@ -258,9 +258,9 @@ Abaixo emite um SQL que é similar a::
 Associações HasMany
 ===================
 
-Um exemplo de associações hasMany é "Article hasMany Comments". Definindo que esta associação irá permitir a nós costurar comentários a artigos quando artigo é carregado.
+Um exemplo de associações hasMany é "Article hasMany Comments". Definindo que esta associação irá permitir a nós costurar comentários a artigos quando o artigo é carregado.
 
-Quando criado a tabela do seu banco de dados para uma relação hasMany, siga estas convenções:
+Quando criada a tabela do seu banco de dados para uma relação hasMany, siga estas convenções:
 
 **hasMany:** o *outro* modelo contem uma chave estrangeira.
 
@@ -284,7 +284,7 @@ Nós podemos definir uma associação hasMany em noos modelo de Articles seguind
         }
     }
 
-Nós também podemos definir uma relção mais especifica usando os setters::
+Nós também podemos definir uma relação mais especifica usando os setters::
 
     class ArticlesTable extends Table
     {
@@ -365,13 +365,17 @@ pode conter os registros de comentários se eles existem::
         echo $article->comments[0]->text;
     }
 
-O anterior emitiria SQL que é semelhante ao::
+O anterior emitiria SQL que é semelhante ao:
+
+.. code-block:: sql
 
     SELECT * FROM articles;
     SELECT * FROM comments WHERE article_id IN (1, 2, 3, 4, 5);
 
 Quando a estratégia de subconsulta é usada, SQL semelhante ao seguinte será
-gerado::
+gerado:
+
+.. code-block:: sql
 
     SELECT * FROM articles;
     SELECT * FROM comments WHERE article_id IN (SELECT id FROM articles);
@@ -518,7 +522,9 @@ conter os registros de tags se eles existirem::
         echo $article->tags[0]->text;
     }
 
-O anterior emitiria SQL que é semelhante ao::
+O anterior emitiria SQL que é semelhante ao:
+
+.. code-block:: sql
 
     SELECT * FROM articles;
     SELECT * FROM tags
@@ -528,7 +534,9 @@ O anterior emitiria SQL que é semelhante ao::
     );
 
 Quando a estratégia de subconsulta é usada, SQL semelhante ao seguinte será
-gerado::
+gerado:
+
+.. code-block:: sql
 
     SELECT * FROM articles;
     SELECT * FROM tags

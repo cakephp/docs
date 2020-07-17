@@ -27,7 +27,7 @@ CakePHP の取得
 
 最も簡単な CakePHP のインストール方法は Composer を使う方法です。Composer は、
 ターミナルやコマンドラインプロンプトから CakePHP をインストールのシンプルな方法です。
-まだ準備ができていない場合、最初に Composer をダウンロードとインストールが必要です。
+まだ準備ができていない場合、最初に Composer のダウンロードとインストールが必要です。
 cURL がインストールされていたら、次のように実行するのが簡単です。
 
 .. code-block:: bash
@@ -42,7 +42,7 @@ cURL がインストールされていたら、次のように実行するのが
 
 .. code-block:: bash
 
-    php composer.phar create-project --prefer-dist cakephp/app cms
+    php composer.phar create-project --prefer-dist cakephp/app:4.* cms
 
 `Composer Windows Installer <https://getcomposer.org/Composer-Setup.exe>`_
 をダウンロードして実行した場合、インストールディレクトリー (例えば、 C:\\wamp\\www\\dev\\cakephp3)
@@ -50,7 +50,7 @@ cURL がインストールされていたら、次のように実行するのが
 
 .. code-block:: bash
 
-    composer self-update && composer create-project --prefer-dist cakephp/app cms
+    composer self-update && composer create-project --prefer-dist cakephp/app:4.* cms
 
 Composer を使うメリットは、 正しいファイルパーミッションの設定や、 **config/app.php**
 ファイルの作成などのように、自動的に完全なセットアップをしてくれることです。

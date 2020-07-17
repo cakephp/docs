@@ -441,7 +441,6 @@ class::
 
     class YamlFileParser
     {
-
         public function parse($file)
         {
             return yaml_parse_file($file);
@@ -485,7 +484,7 @@ any language from an external service::
 
     I18n::config('default', function ($domain, $locale) {
         $locale = Locale::parseLocale($locale);
-        $language = $locale['language'];
+        $lang = $locale['language'];
         $messages = file_get_contents("http://example.com/translations/$lang.json");
 
         return new Package(
@@ -593,7 +592,7 @@ Parsing Localized Datetime Data
 
 When accepting localized data from the request, it is nice to accept datetime
 information in a user's localized format. In a controller, or
-:doc:`/development/middleware` you can configure the Date, Time, and
+:doc:`/controllers/middleware` you can configure the Date, Time, and
 DateTime types to parse localized formats::
 
     use Cake\Database\Type;
@@ -613,7 +612,7 @@ The default parsing format is the same as the default string format.
 Automatically Choosing the Locale Based on Request Data
 =======================================================
 
-By using the ``LocaleSelectorFilter`` in your application, CakePHP will
+By using the ``LocaleSelectorMiddleware`` in your application, CakePHP will
 automatically set the locale based on the current user::
 
     // in src/Application.php
@@ -624,14 +623,11 @@ automatically set the locale based on the current user::
     {
         // Add middleware and set the valid locales
         $middleware->add(new LocaleSelectorMiddleware(['en_US', 'fr_FR']));
+        // To accept any locale header value
+        $middleware->add(new LocaleSelectorMiddleware(['*']));
     }
 
-    DispatcherFactory::add('LocaleSelector');
-
-    // Restrict the locales to only en_US, fr_FR
-    DispatcherFactory::add('LocaleSelector', ['locales' => ['en_US', 'fr_FR']]);
-
-The ``LocaleSelectorFilter`` will use the ``Accept-Language`` header to
+The ``LocaleSelectorMiddleware`` will use the ``Accept-Language`` header to
 automatically set the user's preferred locale. You can use the locale list
 option to restrict which locales will automatically be used.
 

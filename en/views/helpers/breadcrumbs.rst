@@ -122,17 +122,17 @@ It includes four templates, with the following default declaration::
         'separator' => '<li{{attrs}}><span{{innerAttrs}}>{{separator}}</span></li>'
     ]
 
-You can easily customize them using the ``templates()`` method from the
+You can easily customize them using the ``setTemplates()`` method from the
 ``StringTemplateTrait``::
 
-    $this->Breadcrumbs->templates([
+    $this->Breadcrumbs->setTemplates([
         'wrapper' => '<nav class="breadcrumbs"><ul{{attrs}}>{{content}}</ul></nav>',
     ]);
 
 Since your templates will be rendered, the ``templateVars`` option
 allows you to add your own template variables in the various templates::
 
-    $this->Breadcrumbs->templates([
+    $this->Breadcrumbs->setTemplates([
         'item' => '<li{{attrs}}>{{icon}}<a href="{{url}}"{{innerAttrs}}>{{title}}</a></li>{{separator}}'
     ]);
 
@@ -172,7 +172,7 @@ rendered as HTML attributes::
         ]
     );
 
-    // Based on the default template, this will render the following HTML :
+    // Based on the default template, this will render the following HTML:
     <li class="products-crumb" data-foo="bar">
         <a href="/products/index" class="inner-products-crumb" id="the-products-crumb">Products</a>
     </li>

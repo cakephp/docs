@@ -21,7 +21,6 @@ The behavior offers two strategies for how the translations are stored.
 1. Eav Strategy: This strategy uses a ``i18n`` table where it stores the
    translation for each of the fields of any given Table object that it's bound to.
    This is currently the default strategy used by the behavior.
-
 2. Shadow table Strategy: This strategy use a separate "shadow table" for each
    Table object to store translation of all translated fields of that table.
 
@@ -72,7 +71,7 @@ Shadow Table Strategy
 =====================
 
 Let's assume we have an ``articles`` table and we want it's ``title`` and ``body``
-fields to be translated. For that we create a shadow table ``articles_translations``::
+fields to be translated. For that we create a shadow table ``articles_translations``:
 
 .. code-block:: sql
 
@@ -97,7 +96,6 @@ class::
 
     class ArticlesTable extends Table
     {
-
         public function initialize(array $config): void
         {
             // By default Eav strategy will be used.
@@ -117,13 +115,27 @@ as::
         public function initialize(array $config): void
         {
             $this->addBehavior('Translate', [
-                'strategyClass' => \Cake\ORM\Behavior\Translate\ShadowTableStrategy,
+                'strategyClass' => \Cake\ORM\Behavior\Translate\ShadowTableStrategy::class,
             ]);
         }
     }
 
 For shadow table strategy specifying the ``fields`` key is optional as the
 behavior can infer the fields from the shadow table columns.
+
+By default the locale specified in ``App.defaultLocale`` config is used as default
+locale for the ``TranslateBehavior``. You can override that by setting ``defaultLocale``
+config of the behavior::
+
+    class ArticlesTable extends Table
+    {
+        public function initialize(array $config): void
+        {
+            $this->addBehavior('Translate', [
+                'defaultLocale' => 'en_GB',
+            ]);
+        }
+    }
 
 
 Quick tour
@@ -230,6 +242,12 @@ use TranslateBehavior with ``find('list')``::
     // Data will contain
     [1 => 'Mi primer artículo', 2 => 'El segundo artículo', 15 => 'Otro articulo' ...]
 
+    // Change the locale to french for a single find call
+    $data = $this->Articles->find('list', ['locale' => 'fr'])->toArray();
+
+.. versionadded:: 4.1.0
+    The ``locale`` option was added in 4.1.0
+
 Retrieve All Translations For An Entity
 ---------------------------------------
 
@@ -298,7 +316,6 @@ If this is undesired, you can ignore translations which are empty using the
 
     class ArticlesTable extends Table
     {
-
         public function initialize(array $config): void
         {
             $this->addBehavior('Translate', [

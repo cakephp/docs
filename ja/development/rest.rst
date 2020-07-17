@@ -33,23 +33,20 @@ REST を動かすための手っ取り早い方法は、 config/routes.php フ�
         public function index()
         {
             $recipes = $this->Recipes->find('all');
-            $this->set([
-                'recipes' => $recipes,
-                '_serialize' => ['recipes']
-            ]);
+            $this->set('recipes', $recipes);
+            $this->viewBuilder()->setOption('serialize', ['recipes']);
         }
 
         public function view($id)
         {
             $recipe = $this->Recipes->get($id);
-            $this->set([
-                'recipe' => $recipe,
-                '_serialize' => ['recipe']
-            ]);
+            $this->set('recipe', $recipe);
+            $this->viewBuilder()->setOption('serialize', ['recipe']);
         }
 
         public function add()
         {
+            $this->request->allowMethod(['post', 'put']);
             $recipe = $this->Recipes->newEntity($this->request->getData());
             if ($this->Recipes->save($recipe)) {
                 $message = 'Saved';
@@ -59,38 +56,37 @@ REST を動かすための手っ取り早い方法は、 config/routes.php フ�
             $this->set([
                 'message' => $message,
                 'recipe' => $recipe,
-                '_serialize' => ['message', 'recipe']
             ]);
+            $this->viewBuilder()->setOption('serialize', ['recipe', 'message']);
         }
 
         public function edit($id)
         {
+            $this->request->allowMethod(['patch', 'post', 'put']);
             $recipe = $this->Recipes->get($id);
-            if ($this->request->is(['post', 'put'])) {
-                $recipe = $this->Recipes->patchEntity($recipe, $this->request->getData());
-                if ($this->Recipes->save($recipe)) {
-                    $message = 'Saved';
-                } else {
-                    $message = 'Error';
-                }
+            $recipe = $this->Recipes->patchEntity($recipe, $this->request->getData());
+            if ($this->Recipes->save($recipe)) {
+                $message = 'Saved';
+            } else {
+                $message = 'Error';
             }
             $this->set([
                 'message' => $message,
-                '_serialize' => ['message']
+                'recipe' => $recipe,
             ]);
+            $this->viewBuilder()->setOption('serialize', ['recipe', 'message']);
         }
 
         public function delete($id)
         {
+            $this->request->allowMethod(['delete']);
             $recipe = $this->Recipes->get($id);
             $message = 'Deleted';
             if (!$this->Recipes->delete($recipe)) {
                 $message = 'Error';
             }
-            $this->set([
-                'message' => $message,
-                '_serialize' => ['message']
-            ]);
+            $this->set('message', $message);
+            $this->viewBuilder()->setOption('serialize', ['message']);
         }
     }
 
@@ -103,13 +99,12 @@ JSON ビューを作成できます。組み込みの :php:class:`XmlView` を�
 
 XML データに変換する前にデータを修正したい場合は、 ``_serialize`` ビュー変数ではなく、
 ビューファイルを使いましょう。RecipesController に対する REST ビューを
-**src/Template/Recipes/xml** 以下に置きます。 :php:class:`Xml` クラスを使えば、
+**templates/Recipes/xml** 以下に置きます。 :php:class:`Xml` クラスを使えば、
 このビューファイル内で簡単に素早く XML を出力させることができます。
 下記に index ビューの例を載せます。 ::
 
-    // src/Template/Recipes/xml/index.ctp
-    // Do some formatting and manipulation on
-    // the $recipes array.
+    // templates/Recipes/xml/index.php
+    // $recipes 配列に対して いくつかのフォーマットと操作を行う。
     $xml = Xml::fromArray(['response' => $recipes]);
     echo $xml->asXML();
 

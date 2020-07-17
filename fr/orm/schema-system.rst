@@ -127,7 +127,9 @@ selon la plateforme de la base de données::
     ]);
 
 Dans l'exemple ci-dessus, la colonne ``id`` générerait le SQL suivant dans
-MySQL::
+MySQL:
+
+.. code-block:: mysql
 
     CREATE TABLE `posts` (
         `id` INTEGER AUTO_INCREMENT,
@@ -230,7 +232,8 @@ habituelle de la classe ressemble à::
     $db = ConnectionManager::get('default');
 
     // Crée une collection de schéma.
-    $collection = $db->schemaCollection();
+    // Prior to 3.4 use $db->schemaCollection()
+    $collection = $db->getSchemaCollection();
 
     // Récupère les noms des tables
     $schemaables = $collection->listTables();

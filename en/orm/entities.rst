@@ -57,13 +57,14 @@ to store in them::
         'created' => new DateTime('now')
     ]);
 
-The preferred way of getting new entities is using the ``newEntity()`` method from the
+The preferred way of getting new entities is using the ``newEmptyEntity()`` method from the
 ``Table`` objects::
+    
+    use \Cake\ORM\Locator\LocatorAwareTrait;
 
-    use Cake\ORM\TableRegistry;
+    $article = $this->getTableLocator()->newEmptyEntity();
 
-    $article = TableRegistry::get('Articles')->newEntity();
-    $article = TableRegistry::get('Articles')->newEntity([
+    $article = $this->getTableLocator()->newEntity([
         'id' => 1,
         'title' => 'New Article',
         'created' => new DateTime('now')
@@ -98,7 +99,7 @@ When using ``set()`` you can update multiple fields at once using an array::
 
 .. warning::
 
-    When updating entities with request data you should whitelist which fields
+    When updating entities with request data you should configure which fields
     can be set with mass assignment.
 
 You can check if fields are defined in your entities with ``has()``::
@@ -137,7 +138,7 @@ the field name.
 
 .. php:method:: get($field)
 
-They receive the basic value stored in the ``_properties`` array
+They receive the basic value stored in the ``_fields`` array
 as their only argument. Accessors will be used when saving entities, so be
 careful when defining methods that format data, as the formatted data will be
 persisted. For example::
@@ -281,7 +282,7 @@ Validation Errors
 
 After you :ref:`save an entity <saving-entities>` any validation errors will be
 stored on the entity itself. You can access any validation errors using the
-``getErrors()``, ``getError()`` or ``hadErrors()`` methods::
+``getErrors()``, ``getError()`` or ``hasErrors()`` methods::
 
     // Get all the errors
     $errors = $user->getErrors();
@@ -362,14 +363,14 @@ protect itself against mass assignment::
 Modifying the Guarded Fields at Runtime
 ---------------------------------------
 
-You can modify the list of guarded fields at runtime using the ``accessible``
+You can modify the list of guarded fields at runtime using the ``setAccess()``
 method::
 
     // Make user_id accessible.
-    $article->accessible('user_id', true);
+    $article->setAccess('user_id', true);
 
     // Make title guarded.
-    $article->accessible('title', false);
+    $article->setAccess('title', false);
 
 .. note::
 
@@ -521,9 +522,9 @@ field that should be exposed::
         protected $_virtual = ['full_name'];
     }
 
-This list can be modified at runtime using ``virtualProperties``::
+This list can be modified at runtime using the ``setVirtual()`` method::
 
-    $user->virtualProperties(['full_name', 'is_admin']);
+    $user->setVirtual(['full_name', 'is_admin']);
 
 Hiding Fields
 -------------
@@ -542,9 +543,9 @@ hidden::
         protected $_hidden = ['password'];
     }
 
-This list can be modified at runtime using ``hiddenProperties``::
+This list can be modified at runtime using the ``setHidden()`` method::
 
-    $user->hiddenProperties(['password', 'recovery_question']);
+    $user->setHidden(['password', 'recovery_question']);
 
 Storing Complex Types
 =====================

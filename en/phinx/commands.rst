@@ -21,7 +21,7 @@ project directory.
         $ phinx init .
 
 Open this file in your text editor to setup your project configuration. Please
-see the :doc:`Configuration <configuration>` chapter for more information.
+see the :doc:`Configuration <./configuration>` chapter for more information.
 
 The Create Command
 ------------------
@@ -36,7 +36,7 @@ CamelCase format.
 
 Open the new migration file in your text editor to add your database
 transformations. Phinx creates migration files using the path specified in your
-``phinx.yml`` file. Please see the :doc:`Configuration <configuration>` chapter
+``phinx.yml`` file. Please see the :doc:`Configuration <./configuration>` chapter
 for more information.
 
 You are able to override the template file used by Phinx by supplying an
@@ -198,7 +198,7 @@ in CamelCase format.
 
 Open the new seed file in your text editor to add your database seed commands.
 Phinx creates seed files using the path specified in your ``phinx.yml`` file.
-Please see the :doc:`Configuration <configuration>` chapter for more information.
+Please see the :doc:`Configuration <./configuration>` chapter for more information.
 
 The Seed Run Command
 --------------------
@@ -293,7 +293,7 @@ and to rollback use `<http://localhost:8000/rollback>`__.
 Using Phinx with PHPUnit
 --------------------------
 
-Phinx can be used within your unit tests to prepare or seed the database. You can use it programatically :
+Phinx can be used within your unit tests to prepare or seed the database. You can use it programatically:
 
 .. code-block:: php
 
@@ -304,7 +304,7 @@ Phinx can be used within your unit tests to prepare or seed the database. You ca
           $app->run(new StringInput('migrate'), new NullOutput());
         }
 
-If you use a memory database, you'll need to give Phinx a specific PDO instance. You can interact with Phinx directly using the Manager class :
+If you use a memory database, you'll need to give Phinx a specific PDO instance. You can interact with Phinx directly using the Manager class:
 
 .. code-block:: php
 
@@ -315,9 +315,9 @@ If you use a memory database, you'll need to give Phinx a specific PDO instance.
         use Symfony\Component\Console\Input\StringInput;
         use Symfony\Component\Console\Output\NullOutput;
 
-        class DatabaseTestCase extends TestCase {
-
-            public function setUp ()
+        class DatabaseTestCase extends TestCase
+        {
+            public function setUp()
             {
                 $pdo = new PDO('sqlite::memory:', null, null, [
                     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
@@ -335,5 +335,4 @@ If you use a memory database, you'll need to give Phinx a specific PDO instance.
                 $this->pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
                 $this->pdo = $pdo;
             }
-
         }

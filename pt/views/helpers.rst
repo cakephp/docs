@@ -21,7 +21,6 @@ Helpers (Facilitadores)
     /views/helpers/number
     /views/helpers/paginator
     /views/helpers/rss
-    /views/helpers/session
     /views/helpers/text
     /views/helpers/time
     /views/helpers/url

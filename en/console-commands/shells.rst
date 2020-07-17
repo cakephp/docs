@@ -113,7 +113,6 @@ will call this method when the task is invoked. A task class looks like::
     {
         public function main()
         {
-
         }
     }
 
@@ -183,7 +182,6 @@ properties attached to your shell::
 
     class UserShell extends Shell
     {
-
         public function initialize(): void
         {
             parent::initialize();

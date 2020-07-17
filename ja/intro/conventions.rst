@@ -30,7 +30,7 @@ protected メソッドや private メソッドはルーティングしてアク�
 ``ArticleCategoriesController::viewAll()`` アクションにアクセスするための正しい形式は
 ``/article-categories/view-all`` となります。
 
-``this->Html->link`` を使用してリンクを作成した時、URL 配列に以下の規約を使用できます。 ::
+``$this->Html->link`` を使用してリンクを作成した時、URL 配列に以下の規約を使用できます。 ::
 
     $this->Html->link('link-title', [
         'prefix' => 'MyPrefix', // パスカルケース
@@ -72,12 +72,12 @@ CakePHP の URL とパラメーターの取り扱いに関するより詳細な�
 データベースの規約
 ==================
 
-CakePHP のモデルに対応するテーブル名は、複数形でアンダースコアー記法です。上記の例で言えば、
+CakePHP のモデルに対応するテーブル名は、複数形でアンダースコア記法です。上記の例で言えば、
 テーブル名はそれぞれ、 ``users`` 、 ``article_categories`` 、 ``user_favorite_pages``
 になります。
 
 二個以上の単語で構成されるフィールド/カラムの名前は、
-``first_name`` のようにアンダースコアー記法になります。
+``first_name`` のようにアンダースコア記法になります。
 
 hasMany, blongsTo, hasOne 中の外部キーは、デフォルトで関連するモデルの(単数形の)名前に
 ``_id`` を付けたものとして認識されます。ユーザーが記事を複数持っている (*Users hasMany Articles*)
@@ -109,11 +109,11 @@ Entity クラスの名前は単数形でパスカルケースで、サフィッ�
 ============
 
 ビューのテンプレートファイルは、それを表示するコントローラーの関数に合わせた、
-アンダースコアー記法で命名されます。
+アンダースコア記法で命名されます。
 ``ArticlesController`` クラスの ``viewAll()`` 関数は、ビューテンプレートとして、
-**src/Template/Articles/view_all.ctp** を探すことになります。
+**templates/Articles/view_all.php** を探すことになります。
 
-基本パターンは、 **src/Template/コントローラー名/アンダースコアー記法_関数名.ctp** です。
+基本パターンは、 **templates/コントローラー名/アンダースコア記法_関数名.php** です。
 
 .. note::
 
@@ -134,7 +134,7 @@ Entity クラスの名前は単数形でパスカルケースで、サフィッ�
 -  Entity クラス: ``Article`` の場所は **src/Model/Entity/Article.php**
 -  Controller クラス: ``ArticlesController`` は
    **src/Controller/ArticlesController.php**
--  ビューテンプレートの場所は **src/Template/Articles/index.ctp**
+-  ビューテンプレートの場所は **templates/Articles/index.php**
 
 これらの規約により、CakePHP は、 ``http://example.com/articles`` へのリクエストを、
 ArticlesController の ``index()`` 関数にマップします。そして、Articles モデルが自動的に使える
@@ -155,7 +155,7 @@ CakePHP 所有のプラグインに予約されているため、ベンダー名
 
     // 悪い例
     cakephp/foo-bar
-    
+
     // 良い例
     your-name/cakephp-foo-bar
 

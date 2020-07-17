@@ -79,7 +79,7 @@ dans ce fichier:
 
 .. code-block:: php
 
-    <!-- Fichier : src/Template/Articles/index.ctp -->
+    <!-- Fichier : templates/Articles/index.php -->
 
     <h1>Articles</h1>
     <table>
@@ -154,11 +154,11 @@ Création du template View
 =========================
 
 Créons le template de view pour notre action "view" dans
-**src/Template/Articles/view.ctp**.
+**templates/Articles/view.php**.
 
 .. code-block:: php
 
-    <!-- Fichier : src/Template/Articles/view.ctp -->
+    <!-- Fichier : templates/Articles/view.php -->
 
     <h1><?= h($article->title) ?></h1>
     <p><?= h($article->body) ?></p>
@@ -207,12 +207,12 @@ la création d'articles. Commencez par créer une action ``add()`` dans le
 
         public function add()
         {
-            $article = $this->Articles->newEntity();
+            $article = $this->Articles->newEmptyEntity();
             if ($this->request->is('post')) {
                 $article = $this->Articles->patchEntity($article, $this->request->getData());
 
-                // Hardcoding the user_id is temporary, and will be removed later
-                // when we build authentication out.
+                // L'écriture de 'user_id' en dur est temporaire et
+                // sera supprimé quand nous aurons mis en place l'authentification.
                 $article->user_id = 1;
 
                 if ($this->Articles->save($article)) {
@@ -231,9 +231,9 @@ la création d'articles. Commencez par créer une action ``add()`` dans le
     où vous avez besoin de l'utiliser. Il est souvent conseillé de le charger
     directement dans le ``AppController``.
 
-Voici ce que l'action ``add()`` fait :
+Voici ce que l'action ``add()`` fait:
 
-* Si la méthode HTTP de la requête est un POST, cela tentera de sauvergarder les données
+* Si la méthode HTTP de la requête est un POST, cela tentera de sauvegarder les données
   en utilisant le model Articles.
 * Si pour une quelconque raison la sauvegarde ne se fait pas, cela rendra juste la view.
   Cela nous donne ainsi une chance de montrer les erreurs de validation ou d'autres
@@ -269,11 +269,11 @@ vous pouvez spécifier une URL.
 Création du Template Add
 ========================
 
-Voici le code de notre template de la view "add" :
+Voici le code de notre template de la view "add":
 
 .. code-block:: php
 
-    <!-- Fichier : src/Template/Articles/add.ctp -->
+    <!-- Fichier : templates/Articles/add.php -->
 
     <h1>Ajouter un article</h1>
     <?php
@@ -285,7 +285,7 @@ Voici le code de notre template de la view "add" :
     ?>
 
 Nous utilisons le FormHelper pour générer l'ouverture du form HTML.
-Voici le HTML que ``$this->Form->create()`` génère :
+Voici le HTML que ``$this->Form->create()`` génère:
 
 .. code-block:: html
 
@@ -304,7 +304,7 @@ spécifié et utilisera une inflection automatique pour définir le label associ
 Vous pouvez personnaliser le label, les inputs ou tout autre aspect du formulaire
 en utilisant les options. La méthode ``$this->Form->end()`` ferme le formulaire.
 
-Retournons à notre template **src/Template/Articles/index.ctp** pour ajouter
+Retournons à notre template **templates/Articles/index.php** pour ajouter
 un lien "Ajouter un article". Avant le ``<table>``, ajoutons la ligne
 suivante::
 
@@ -380,11 +380,11 @@ les erreurs de validation en fonction du résultat de l'opération de sauvegarde
 Création du template Edit
 =========================
 
-Le template edit devra ressembler à ceci :
+Le template edit devra ressembler à ceci:
 
 .. code-block:: php
 
-    <!-- Fichier : src/Template/Articles/edit.ctp -->
+    <!-- Fichier : templates/Articles/edit.php -->
 
     <h1>Modifier un article</h1>
     <?php
@@ -400,11 +400,11 @@ Ce template affiche le formulaire de modification (avec les valeurs déjà rempl
 ainsi que les messages d'erreurs de validation.
 
 Vous pouvez maintenant mettre à jour notre view index avec les liens pour modifier
-les articles :
+les articles:
 
 .. code-block:: php
 
-    <!-- Fichier : src/Template/Articles/index.ctp (liens de modification ajoutés) -->
+    <!-- Fichier : templates/Articles/index.php (liens de modification ajoutés) -->
 
     <h1>Articles</h1>
     <p><?= $this->Html->link("Ajouter un article", ['action' => 'add']) ?></p>
@@ -512,11 +512,11 @@ que votre application aurait besoin de générer.
 Puisque nous exécutons seulement de la logique et redirigeons directement sur une
 autre action, cette action n'a pas de template. Vous devez ensuite mettre à jour
 votre template index pour ajouter les liens qui permettront de supprimer les
-articles :
+articles:
 
 .. code-block:: php
 
-    <!-- Fichier : src/Template/Articles/index.ctp (ajout des liens de suppression) -->
+    <!-- Fichier : templates/Articles/index.php (ajout des liens de suppression) -->
 
     <h1>Articles</h1>
     <p><?= $this->Html->link("Add Article", ['action' => 'add']) ?></p>
@@ -560,4 +560,4 @@ qui utilisera du JavaScript pour faire une requête POST et supprimer notre arti
     effective de l'article.
 
 Maintenant que nous avons un minimum de gestion sur nos articles, il est temps
-de créer des actions basiques pour nos tables Tags et Users.
+de créer des actions basiques pour nos tables :doc:`Tags et Users </tutorials-and-examples/cms/tags-and-users>`.

@@ -436,6 +436,17 @@ Response objects provide a few methods for checking status codes::
     // Get the status code
     $response->getStatusCode();
 
+Changing Transport Adapters
+===========================
+
+By default ``Http\Client`` will prefer using a ``curl`` based transport adapter.
+If the curl extension is not available a stream based adapter will be used
+instead. You can force select a transport adapter using a constructor option::
+
+    use Cake\Http\Client\Adapter\Stream;
+
+    $client = new Client(['adapter' => Stream::class]);
+
 .. meta::
     :title lang=en: HttpClient
     :keywords lang=en: array name,array data,query parameter,query string,php class,string query,test type,string data,google,query results,webservices,apis,parameters,cakephp,meth,search results

@@ -119,7 +119,9 @@ auto-increment/serial カラムに変換されます。 ::
         'columns' => ['id']
     ]);
 
-上記の例では、 ``id`` カラムは、MySQL の次のような SQL を生成します。 ::
+上記の例では、 ``id`` カラムは、MySQL の次のような SQL を生成します。
+
+.. code-block:: mysql
 
     CREATE TABLE `posts` (
         `id` INTEGER AUTO_INCREMENT,
@@ -214,7 +216,8 @@ SQL クエリーのリストです。いくつかのプラットフォームで�
     $db = ConnectionManager::get('default');
 
     // スキーマコレクションの作成
-    $collection = $db->schemaCollection();
+    // Prior to 3.4 use $db->schemaCollection()
+    $collection = $db->getSchemaCollection();
 
     // テーブル名の取得
     $tables = $collection->listTables();

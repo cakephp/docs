@@ -108,7 +108,8 @@ can do this by using the ``TableRegistry`` class::
     // In a controller or table method.
     use Cake\ORM\TableRegistry;
 
-    $articles = TableRegistry::get('Articles');
+    // Prior to 3.6 use TableRegistry::get('Articles')
+    $articles = TableRegistry::getTableLocator::get('Articles');
 
 The TableRegistry class provides the various dependencies for constructing
 a table, and maintains a registry of all the constructed table instances making
@@ -121,10 +122,12 @@ being triggered as a default class is used instead of your actual class. To
 correctly load plugin table classes use the following::
 
     // Plugin table
-    $articlesTable = TableRegistry::get('PluginName.Articles');
+    // Prior to 3.6 use TableRegistry::get('PluginName.Articles')
+    $articlesTable = TableRegistry::getTableLocator()->get('PluginName.Articles');
 
     // Vendor prefixed plugin table
-    $articlesTable = TableRegistry::get('VendorName/PluginName.Articles');
+    // Prior to 3.6 use TableRegistry::get('VendorName/PluginName.Articles')
+    $articlesTable = TableRegistry::getTableLocator::get('VendorName/PluginName.Articles');
 
 .. _table-callbacks:
 
@@ -212,17 +215,32 @@ beforeFind
 .. php:method:: beforeFind(Event $event, Query $query, ArrayObject $options, $primary)
 
 The ``Model.beforeFind`` event is fired before each find operation. By stopping
-the event and supplying a return value you can bypass the find operation
-entirely. Any changes done to the $query instance will be retained for the rest
+the event, and feeding the query with a custom result set, you can bypass the find
+operation entirely::
+
+    public function beforeFind(EventInterface $event, Query $query, ArrayObject $options, $primary)
+    {
+        if (/* ... */) {
+            $event->stopPropagation();
+            $query->setResult(new \Cake\Datasource\ResultSetDecorator([]));
+
+            return;
+        }
+        // ...
+    }
+
+In this example, no further ``beforeFind`` events will be triggered on the
+related table or its attached behaviors (though behavior events are usually
+invoked earlier given their default priorities), and the query will return
+the empty result set that was passed via ``Query::setResult()``.
+
+Any changes done to the ``$query`` instance will be retained for the rest
 of the find. The ``$primary`` parameter indicates whether or not this is the root
 query, or an associated query. All associations participating in a query will
 have a ``Model.beforeFind`` event triggered. For associations that use joins,
 a dummy query will be provided. In your event listener you can set additional
 fields, conditions, joins or result formatters. These options/features will be
 copied onto the root query.
-
-You might use this callback to restrict find operations based on a user's role,
-or make caching decisions based on the current load.
 
 In previous versions of CakePHP there was an ``afterFind`` callback, this has
 been replaced with the :ref:`map-reduce` features and entity constructors.
@@ -414,7 +432,7 @@ Configuring Table Objects
 When loading tables from the registry you can customize their dependencies, or
 use mock objects by providing an ``$options`` array::
 
-    $articles = TableRegistry::get('Articles', [
+    $articles = TableRegistry::getTableLocator()->get('Articles', [
         'className' => 'App\Custom\ArticlesTable',
         'table' => 'my_articles',
         'connection' => $connectionObject,

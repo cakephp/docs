@@ -25,7 +25,8 @@
 
     use Cake\ORM\TableRegistry;
 
-    $articlesTable = TableRegistry::get('Articles');
+    // Prior to 3.6 use TableRegistry::get('Articles')
+    $articlesTable = TableRegistry::getTableLocator()->get('Articles');
     $article = $articlesTable->newEntity();
 
     $article->title = '新しい記事';
@@ -43,7 +44,8 @@
 
     use Cake\ORM\TableRegistry;
 
-    $articlesTable = TableRegistry::get('Articles');
+    // Prior to 3.6 use TableRegistry::get('Articles')
+    $articlesTable = TableRegistry::getTableLocator()->get('Articles');
     $article = $articlesTable->get(12); // id 12 の記事を返します
 
     $article->title = 'CakePHP は最高のフレームワークです！';
@@ -58,7 +60,8 @@ CakePHP は挿入または更新のいずれの処理を行うかを ``isNew()``
 
 既定では ``save()`` メソッドはアソシエーションの一階層目も保存します。 ::
 
-    $articlesTable = TableRegistry::get('Articles');
+    // Prior to 3.6 use TableRegistry::get('Articles')
+    $articlesTable = TableRegistry::getTableLocator()->get('Articles');
     $author = $articlesTable->Authors->findByUserName('mark')->first();
 
     $article = $articlesTable->newEntity();
@@ -129,7 +132,9 @@ Table クラスは、リクエストデータを一つまたは複数のエン�
 簡単で効果的な方法を提供します。単一のエンティティーの変換には次の方法を使います。 ::
 
     // コントローラーの中で
-    $articles = TableRegistry::get('Articles');
+
+    // Prior to 3.6 use TableRegistry::get('Articles')
+    $articles = TableRegistry::getTableLocator()->get('Articles');
 
     // 検証して Entity オブジェクトに変換します。
     $entity = $articles->newEntity($this->request->getData());
@@ -168,7 +173,9 @@ Table クラスは、リクエストデータを一つまたは複数のエン�
 どのアソシエーションが変換されるべきかを定義する必要があります。 ::
 
     // コントローラーの中で
-    $articles = TableRegistry::get('Articles');
+
+    // Prior to 3.6 use TableRegistry::get('Articles')
+    $articles = TableRegistry::getTableLocator()->get('Articles');
 
     // 入れ子になったアソシエーション付きの新しいエンティティー
     $entity = $articles->newEntity($this->request->getData(), [
@@ -181,7 +188,9 @@ Table クラスは、リクエストデータを一つまたは複数のエン�
 を示しています。代わりに、簡潔にするためにドット記法を使うことができます。 ::
 
     // コントローラーの中で
-    $articles = TableRegistry::get('Articles');
+
+    // Prior to 3.6 use TableRegistry::get('Articles')
+    $articles = TableRegistry::getTableLocator()->get('Articles');
 
     // ドット記法を用いた、入れ子になったアソシエーション付きの新しいエンティティー
     $entity = $articles->newEntity($this->request->getData(), [
@@ -198,7 +207,9 @@ Table クラスは、リクエストデータを一つまたは複数のエン�
 アソシエーションごとに使われる検証セットを変更することもできます。 ::
 
     // コントローラーの中で
-    $articles = TableRegistry::get('Articles');
+
+    // Prior to 3.6 use TableRegistry::get('Articles')
+    $articles = TableRegistry::getTableLocator()->get('Articles');
 
     // Tags アソシエーションの検証を回避して
     // Comments.Users 用に 'signup' の検証セットを指定します
@@ -320,7 +331,9 @@ belongsToMany の変換を ``_ids`` キーの使用のみに制限して、他�
 を使うことができます。 ::
 
     // コントローラーの中で。
-    $articles = TableRegistry::get('Articles');
+
+    // Prior to 3.6 use TableRegistry::get('Articles')
+    $articles = TableRegistry::getTableLocator()->get('Articles');
     $entities = $articles->newEntities($this->request->getData());
 
 この場合には、複数の記事用のリクエストデータはこうなるべきです。 ::
@@ -369,7 +382,9 @@ belongsToMany の変換を ``_ids`` キーの使用のみに制限して、他�
 これは関連付けられたエンティティーの ID を維持するために便利かもしれません。 ::
 
     // コントローラーの中で
-    $articles = TableRegistry::get('Articles');
+
+    // Prior to 3.6 use TableRegistry::get('Articles')
+    $articles = TableRegistry::getTableLocator()->get('Articles');
     $entity = $articles->newEntity($this->request->getData(), [
         'associated' => [
             'Tags', 'Comments' => [
@@ -401,7 +416,9 @@ belongsToMany の変換を ``_ids`` キーの使用のみに制限して、他�
 生データの配列を既存のエンティティーにマージすることができます。 ::
 
     // コントローラーの中で。
-    $articles = TableRegistry::get('Articles');
+
+    // Prior to 3.6 use TableRegistry::get('Articles')
+    $articles = TableRegistry::getTableLocator()->get('Articles');
     $article = $articles->get(1);
     $articles->patchEntity($article, $this->request->getData());
     $articles->save($article);
@@ -415,7 +432,9 @@ belongsToMany の変換を ``_ids`` キーの使用のみに制限して、他�
 オプションを渡してください。 ::
 
     // コントローラーの中で。
-    $articles = TableRegistry::get('Articles');
+
+    // Prior to 3.6 use TableRegistry::get('Articles')
+    $articles = TableRegistry::getTableLocator()->get('Articles');
     $article = $articles->get(1);
     $articles->patchEntity($article, $data, ['validate' => false]);
 
@@ -535,7 +554,9 @@ hasMany の belongsToMany アソシエーションについても同じことが
 を削除したいのであれば、その主キーを集約してリストにないものの一括削除を実行してください。 ::
 
     // コントローラーの中で。
-    $comments = TableRegistry::get('Comments');
+
+    // Prior to 3.6 use TableRegistry::get('Comments')
+    $comments = TableRegistry::getTableLocator()->get('Comments');
     $present = (new Collection($entity->comments))->extract('id')->filter()->toList();
     $comments->deleteAll([
         'article_id' => $article->id,
@@ -551,7 +572,9 @@ hasMany と belongsToMany アソシエーションに対してのパッチのた
 結果配列から取り除かれて現れない、というように複数のエンティティーにパッチをあてます。 ::
 
     // コントローラーの中で。
-    $articles = TableRegistry::get('Articles');
+
+    // Prior to 3.6 use TableRegistry::get('Articles')
+    $articles = TableRegistry::getTableLocator()->get('Articles');
     $list = $articles->find('popular')->toList();
     $patched = $articles->patchEntities($list, $this->request->getData());
     foreach ($patched as $entity) {
@@ -688,12 +711,14 @@ CakePHP の検証機能をどう使うかについてより詳しい情報があ
 ``newEntity()`` を使って新しいエンティティーをハイドレートする必要があります。
 例えばこうです。 ::
 
-  // コントローラーのの中で
-  $articles = TableRegistry::get('Articles');
-  $article = $articles->newEntity($this->request->getData());
-  if ($articles->save($article)) {
-      // ...
-  }
+    // コントローラーのの中で
+
+    // Prior to 3.6 use TableRegistry::get('Articles')
+    $articles = TableRegistry::getTableLocator()->get('Articles');
+    $article = $articles->newEntity($this->request->getData());
+    if ($articles->save($article)) {
+        // ...
+    }
 
 ORM は、挿入か更新のいずれが実行されるべきかを決定するために、エンティティーの ``isNew()``
 メソッドを使用します。もし ``isNew()`` が真を返し、エンティティーが主キー値を持っていれば、
@@ -705,7 +730,8 @@ ORM は、挿入か更新のいずれが実行されるべきかを決定する�
 いくつかのエンティティーが読み出した後は、おそらくそれらを変更して、
 データベースを更新したいでしょう。これは CakePHP では実に単純な課題です。 ::
 
-    $articles = TableRegistry::get('Articles');
+    // Prior to 3.6 use TableRegistry::get('Articles')
+    $articles = TableRegistry::getTableLocator()->get('Articles');
     $article = $articles->find('all')->where(['id' => 2])->first();
 
     $article->title = '私の新しいタイトル';
@@ -713,11 +739,15 @@ ORM は、挿入か更新のいずれが実行されるべきかを決定する�
 
 保存する時は、 CakePHP は :ref:`ルールを適用して <application-rules>` 、
 データベーストンザクションの保存操作を巻き取ります。また、変更のあったプロパティーのみを更新します。
-上記の ``save()`` の呼び出しは、こんな SQL を生成します。 ::
+上記の ``save()`` の呼び出しは、こんな SQL を生成します。
+
+.. code-block:: sql
 
     UPDATE articles SET title = '私の新しいタイトル' WHERE id = 2;
 
-もし新しいエンティティーであれば、こんな SQL が生成されます。 ::
+もし新しいエンティティーであれば、こんな SQL が生成されます。
+
+.. code-block:: sql
 
     INSERT INTO articles (title) VALUES ('私の新しいタイトル');
 
@@ -817,7 +847,9 @@ belongsTo アソシエーションを保存する時は、 ORM は単一の入�
             'username' => 'mark'
         ]
     ];
-    $articles = TableRegistry::get('Articles');
+
+    // Prior to 3.6 use TableRegistry::get('Articles')
+    $articles = TableRegistry::getTableLocator()->get('Articles');
     $article = $articles->newEntity($data, [
         'associated' => ['Users']
     ]);
@@ -839,7 +871,9 @@ hasOne アソシエーションを保存する時は、 ORM は単一の入れ�
             'twitter' => '@cakephp'
         ]
     ];
-    $users = TableRegistry::get('Users');
+
+    // Prior to 3.6 use TableRegistry::get('Articles')
+    $users = TableRegistry::getTableLocator()->get('Users');
     $user = $users->newEntity($data, [
         'associated' => ['Profiles']
     ]);
@@ -860,7 +894,9 @@ hasMany アソシエーションを保存する時は、 ORM はエンティテ�
             ['body' => '私は実にこれが好きだ。']
         ]
     ];
-    $articles = TableRegistry::get('Articles');
+
+    // Prior to 3.6 use TableRegistry::get('Articles')
+    $articles = TableRegistry::getTableLocator()->get('Articles');
     $article = $articles->newEntity($data, [
         'associated' => ['Comments']
     ]);
@@ -911,7 +947,9 @@ belongsToMany アソシエーションを保存する時は、 ORM はエンテ�
             ['tag' => 'Framework']
         ]
     ];
-    $articles = TableRegistry::get('Articles');
+
+    // Prior to 3.6 use TableRegistry::get('Articles')
+    $articles = TableRegistry::getTableLocator()->get('Articles');
     $article = $articles->newEntity($data, [
         'associated' => ['Tags']
     ]);
@@ -1119,7 +1157,9 @@ belongsToMany アソシエーションのそれぞれのエンティティーは
             'published' => 1
         ],
     ];
-    $articles = TableRegistry::get('Articles');
+
+    // Prior to 3.6 use TableRegistry::get('Articles')
+    $articles = TableRegistry::getTableLocator()->get('Articles');
     $entities = $articles->newEntities($data);
     $result = $articles->saveMany($entities);
 

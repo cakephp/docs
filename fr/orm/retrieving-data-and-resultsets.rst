@@ -321,8 +321,8 @@ mutation des entities dans vos finds list. ::
     champ à afficher:
     protected function _getLabel()
     {
-        return $this->_properties['first_name'] . ' ' . $this->_properties['last_name']
-          . ' / ' . __('User ID %s', $this->_properties['user_id']);
+        return $this->_fields['first_name'] . ' ' . $this->_fields['last_name']
+          . ' / ' . __('User ID %s', $this->_fields['user_id']);
     }
 
 Cet exemple montre l'utilisation de la méthode accesseur ``_getLabel()`` à
@@ -405,7 +405,8 @@ des articles publiés, nous ferions ce qui suit::
     }
 
     // Dans un controller ou dans une méthode table.
-    $articles = TableRegistry::get('Articles');
+    // Prior to 3.6 use TableRegistry::get('Articles')
+    $articles = TableRegistry::getTableLocator()->get('Articles');
     $query = $articles->find('published');
 
 Les méthodes finder peuvent modifier la requête comme ceci, ou utiliser
@@ -416,7 +417,8 @@ vous avez à la fois les finders 'published' et 'recent', vous pouvez faire
 ce qui suit::
 
     // Dans un controller ou dans une méthode de table.
-    $articles = TableRegistry::get('Articles');
+    // Prior to 3.6 use TableRegistry::get('Articles')
+    $articles = TableRegistry::getTableLocator()->get('Articles');
     $query = $articles->find('published')->find('recent');
 
 Alors que les exemples pour l'instant ont montré les méthodes finder sur les
@@ -444,7 +446,8 @@ pourriez faire::
     $query = $this->Users->findAllByUsername('joebob');
 
     // Dans une méthode de table
-    $users = TableRegistry::get('Users');
+    // Prior to 3.6 use TableRegistry::get('Users')
+    $users = TableRegistry::getTableLocator()->get('Users');
     // Les deux appels suivants sont équivalents.
     $query = $users->findByUsername('joebob');
     $query = $users->findAllByUsername('joebob');
@@ -1047,7 +1050,8 @@ pouvez extraire une liste des tags uniques sur une collection d'articles en
 exécutant::
 
     // Dans un controller ou une méthode de table.
-    $articles = TableRegistry::get('Articles');
+    // Prior to 3.6 use TableRegistry::get('Articles')
+    $articles = TableRegistry::getTableLocator()->get('Articles');
     $query = $articles->find()->contain(['Tags']);
 
     $reducer = function ($output, $value) {
@@ -1070,7 +1074,8 @@ avec des ensembles de données::
     });
 
     // Crée un tableau associatif depuis les propriétés du résultat
-    $articles = TableRegistry::get('Articles');
+    // Prior to 3.6 use TableRegistry::get('Articles')
+    $articles = TableRegistry::getTableLocator()->get('Articles');
     $results = $articles->find()->contain(['Authors'])->all();
 
     $authorList = $results->combine('id', 'author.name');

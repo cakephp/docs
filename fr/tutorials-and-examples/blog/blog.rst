@@ -6,7 +6,7 @@ de blog. Nous récupérerons et installerons CakePHP, créerons et configurerons
 une base de données et ajouterons suffisamment de logique applicative pour
 lister, ajouter, éditer et supprimer des articles.
 
-Voici ce dont vous aurez besoin :
+Voici ce dont vous aurez besoin:
 
 #. Un serveur web fonctionnel. Nous supposerons que vous utilisez Apache,
    bien que les instructions pour utiliser d'autres serveurs doivent
@@ -42,12 +42,12 @@ répertoire d'installation pour installer le squelette d'application de CakePHP
 dans le répertoire que vous souhaitez utiliser. Pour l'exemple nous utiliserons
 "blog", mais vous pouvez utiliser le nom que vous souhaitez::
 
-    php composer.phar create-project --prefer-dist cakephp/app blog
+    php composer.phar create-project --prefer-dist cakephp/app:4.* blog
 
 Dans le cas où vous avez déjà composer installé globalement, vous devrez plutôt
 taper::
 
-    composer self-update && composer create-project --prefer-dist cakephp/app blog
+    composer self-update && composer create-project --prefer-dist cakephp/app:4.* blog
 
 L'avantage d'utiliser Composer est qu'il va automatiquement réaliser certaines
 tâches de configurations importantes, comme configurer les bonnes permissions
@@ -116,9 +116,11 @@ ne l'avez pas déjà fait, créez une base de données vide avec le nom de votre
 choix pour l'utiliser dans ce tutoriel, par ex ``cake_blog``.Pour le moment,
 nous allons juste créer une simple table pour stocker nos posts. Nous allons
 également insérer quelques posts à des fins de tests. Exécutez les requêtes SQL
-suivantes dans votre base de données::
+suivantes dans votre base de données:
 
-    /* D'abord, créons la table des posts : */
+.. code-block:: mysql
+
+    # D'abord, créons la table des posts
     CREATE TABLE articles (
         id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
         title VARCHAR(50),
@@ -127,7 +129,7 @@ suivantes dans votre base de données::
         modified DATETIME DEFAULT NULL
     );
 
-    /* Puis insérons quelques posts pour les tests : */
+    # Puis insérons quelques posts pour les tests
     INSERT INTO articles (title,body,created)
         VALUES ('The title', 'This is the article body.', NOW());
     INSERT INTO articles (title,body,created)

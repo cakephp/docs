@@ -87,7 +87,7 @@ FormHelper は、 *追加* または *編集* のフォームを作成するか�
         $this->set('article', $article);
     }
 
-    // View/Articles/edit.ctp:
+    // View/Articles/edit.php:
     // $article->isNew() は false なので、編集フォームが得られます
     <?= $this->Form->create($article) ?>
 
@@ -630,6 +630,12 @@ HTML 属性を受け付けます。以下は ``FormHelper::control()`` で特有
 
 * ``$options['labelOptions']`` - これを ``false`` に設定すると nestedWidgets
   の周りのラベルを無効にします。または、 ``label`` タグに提供される属性の配列を設定します。
+
+* ``$options['readOnly']`` - フォームにて、フィールドを ``readOnly`` に設定します。
+
+  例::
+
+      echo $this->Form->control('name', ['readonly' => true]);
 
 コントロールの特定のタイプを生成
 ================================
@@ -1511,6 +1517,11 @@ CakePHP が Windows サーバー上にインストールされている場合、
 * ``'orderYear'`` - 年選択ピッカー内の年の値の順序。
   利用可能な値は ``'asc'`` と ``'desc'`` 。デフォルトは ``'desc'`` です。
 
+* ``'year', 'month', 'day'`` - これらのオプションを使用すると、コントロール要素が生成されるかどうか制御できます。
+  これらのオプションを ``false`` にセットすることにより、特定の選択ピッカーの生成を
+  無効にすることができます (デフォルトでは、使用されたメソッドの中で描画されます) 。
+  さらに、各オプションでは、HTML 属性を指定した ``select`` 要素に渡すことができます。
+
 .. _time-options:
 
 時刻関連コントロールのオプション
@@ -1539,6 +1550,11 @@ CakePHP が Windows サーバー上にインストールされている場合、
 
 * ``second`` - ``dateTime()`` と ``time()`` に適用されます。
   秒を有効にするために ``true`` に設定します。デフォルトは ``false`` です。
+
+* ``'hour', 'minute', 'second', 'meridian'`` - これらのオプションを使用すると、コントロール要素が生成されるかどうか制御できます。
+  これらのオプションを ``false`` にセットすることにより、特定の選択ピッカーの生成を
+  無効にすることができます (デフォルトでは、使用されたメソッドの中で描画されます) 。
+  さらに、各オプションでは、HTML 属性を指定した ``select`` 要素に渡すことができます。
 
 日時入力の作成
 ~~~~~~~~~~~~~~
@@ -1650,12 +1666,12 @@ CakePHP が Windows サーバー上にインストールされている場合、
     <?php
         echo $this->Form->date('registered', [
             'minYear' => 2018,
-            'monthNames' => false,
+            'monthNames' => false, // 月は数字で表示されます。
             'empty' => [
-                'year' => false,
-                'month' => 'Choose month...'
+                'year' => false, // 年選択コントロールは空の値のオプションを持ちません。
+                'month' => 'Choose month...' // しかしながら、月選択コントロールは持ちます。
             ],
-            'day' => false,
+            'day' => false, // 日付選択コントールを表示しない。
             'year' => [
                 'class' => 'cool-years',
                 'title' => 'Registration Year'
@@ -1986,7 +2002,7 @@ FormHelper は、フィールドエラーを簡単にチェックしたり、必
             ->notEmpty('ticket');
     }
 
-    // そして、 Templates/Tickets/add.ctp の中が次のような場合:
+    // そして、 templates/Tickets/add.php の中が次のような場合:
     echo $this->Form->text('ticket');
 
     if ($this->Form->isFieldError('ticket')) {
@@ -2133,7 +2149,7 @@ submit 入力は、基本的なテキストやイメージが必要な場合に�
 
 **ボタンのオプション**
 
-* ``$options['type']`` - これを設定すると、次の3つの button タイプのどれかが出力されます。
+* ``'type'`` - これを設定すると、次の3つの button タイプのどれかが出力されます。
 
   #. ``'submit'`` - ``$this->Form->submit()`` と同様に送信ボタンを作成します。
      しかしながら、 ``submit()`` のように ``div`` の囲い込みは生成しません。
@@ -2141,8 +2157,13 @@ submit 入力は、基本的なテキストやイメージが必要な場合に�
   #. ``'reset'`` - フォームのリセットボタンを作成します。
   #. ``'button'`` - 標準の押しボタンを作成します。
 
-* ``$options['escape']`` - ブール値。 ``true`` をセットした場合、
-  ``$title`` で指定された値を HTML エンコードします。デフォルトは ``false`` です。
+* ``'escapeTitle'`` - ブール値。 ``true`` をセットした場合、
+  ``$title`` で指定された値を HTML エンコードします。デフォルトは ``true`` です。
+
+* ``'escape'`` - ブール値。 ``true`` に設定すると、
+  ボタンに対して生成されたすべてのHTML属性をHTMLエンコードします。 デフォルトは ``true`` です。
+
+* ``'confirm'`` - クリック時に表示される確認メッセージ。デフォルトは ``null`` です。
 
 例::
 
@@ -2160,12 +2181,12 @@ submit 入力は、基本的なテキストやイメージが必要な場合に�
     <button type="reset">フォームのリセット</button>
     <button type="submit">フォームの送信</button>
 
-``'escape'`` オプションの使用例::
+``'escapeTitle'`` オプションの使用例::
 
-    // エスケープされた HTML を描画します。
+    // エスケープされていないHTMLをレンダリングします。
     echo $this->Form->button('<em>Submit Form</em>', [
         'type' => 'submit',
-        'escape' => true
+        'escapeTitle' => false,
     ]);
 
 フォームを閉じる
@@ -2240,7 +2261,7 @@ POST ボタンの作成
 
 例::
 
-    // Templates/Tickets/index.ctp の中で
+    // templates/Tickets/index.php の中で
     <?= $this->Form->postButton('Delete Record', ['controller' => 'Tickets', 'action' => 'delete', 5]) ?>
 
 出力結果:

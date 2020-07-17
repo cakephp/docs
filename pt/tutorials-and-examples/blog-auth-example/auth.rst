@@ -15,7 +15,7 @@ dados de nossos usuários::
 
     CREATE TABLE users (
         id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-        username VARCHAR(50),
+        email VARCHAR(255),
         password VARCHAR(255),
         role VARCHAR(20),
         created DATETIME DEFAULT NULL,
@@ -23,7 +23,7 @@ dados de nossos usuários::
     );
 
 Respeitado as convenções do CakePHP para nomear tabelas, mas também aproveitando
-de outras convenção: Usando as colunas ``username`` e ``password`` da tabela de
+de outras convenção: Usando as colunas ``email`` e ``password`` da tabela de
 usuários, CakePHP será capaz de configurar automaticamente a maioria das coisas
 para nós, na implementação do login do usuário.
 
@@ -42,7 +42,8 @@ salvar e validar os dados do usuário::
         public function validationDefault(Validator $validator)
         {
             return $validator
-                ->notEmpty('username', 'Usuário é necessário')
+                ->notEmpty('email', 'Email é necessário')
+                ->email('email')
                 ->notEmpty('password', 'Senha é necessária')
                 ->notEmpty('role', 'Função é necessária')
                 ->add('role', 'inList', [
@@ -102,17 +103,17 @@ geração de código ``bake`` fornecido com CakePHP::
 
 Da mesma maneira que criamos as ``views`` para os nossos artigos usando
 a ferramenta de geração de código, podemos implementar as ``views`` do
-usuário. Para o propósito deste tutorial, vamos mostrar apenas o add.ctp:
+usuário. Para o propósito deste tutorial, vamos mostrar apenas o add.php:
 
 .. code-block:: php
 
-    <!-- src/Template/Users/add.ctp -->
+    <!-- templates/Users/add.php -->
 
     <div class="users form">
     <?= $this->Form->create($user) ?>
         <fieldset>
             <legend><?= __('Add User') ?></legend>
-            <?= $this->Form->input('username') ?>
+            <?= $this->Form->input('email') ?>
             <?= $this->Form->input('password') ?>
             <?= $this->Form->input('role', [
                 'options' => ['admin' => 'Admin', 'author' => 'Author']
@@ -178,7 +179,7 @@ não exigir ``login`` em todos ``index()`` e ``view()``, em cada controlador.
 Queremos que os nossos visitantes sejam capaz de ler e listar as entradas sem
 registrar-se no site.
 
-Agora, precisamos ser capaz de registrar novos usuários, salvar seu ``username``
+Agora, precisamos ser capaz de registrar novos usuários, salvar seu ``email``
 e ``password``, e mais importante, o hash da senha para que ele não seja
 armazenado como texto simples no nosso banco de dados. Vamos dizer ao
 ``AuthComponet`` para permitir que usuários deslogados acessem a função add e
@@ -245,18 +246,18 @@ e adicione a seguinte trecho::
 
 Agora, a senha criptografada usando a classe ``DefaultPasswordHasher``.
 Está faltando apenas o arquivo para exibição da tela de login.
-Abra o arquivo **src/Template/Users/login.ctp** e adicione as seguintes linhas:
+Abra o arquivo **templates/Users/login.php** e adicione as seguintes linhas:
 
 .. code-block:: php
 
-    <!-- File: src/Template/Users/login.ctp -->
+    <!-- File: templates/Users/login.php -->
 
     <div class="users form">
     <?= $this->Flash->render('auth') ?>
     <?= $this->Form->create() ?>
         <fieldset>
             <legend><?= __('Por favor informe seu usuário e senha') ?></legend>
-            <?= $this->Form->input('username') ?>
+            <?= $this->Form->input('email') ?>
             <?= $this->Form->input('password') ?>
         </fieldset>
     <?= $this->Form->button(__('Login')); ?>
@@ -278,7 +279,7 @@ AuthComponent não solicitar um login para a ação ``add()`` em adição as aç
 A ação ``login()`` chama a função ``$this->Auth->identify()`` da AuthComponent,
 que funciona sem qualquer outra configuração porque estamos seguindo convenções,
 como mencionado anteriormente. Ou seja, ter uma tabela de usuários com um
-``username`` e uma coluna de ``password``, e usamos um form para postar os dados
+``email`` e uma coluna de ``password``, e usamos um form para postar os dados
 do usuário para o controller. Esta função retorna se o login foi bem sucedido ou
 não, e caso ela retorne sucesso, então nós redirecionamos o usuário para a URL
 que configuramos quando adicionamos o AuthComponent em nossa aplicação.
@@ -304,7 +305,7 @@ criado::
 
     public function add()
     {
-        $article = $this->Articles->newEntity();
+        $article = $this->Articles->newEmptyEntity();
         if ($this->request->is('post')) {
             $article = $this->Articles->patchEntity($article, $this->request->getData());
             // Adicione esta linha

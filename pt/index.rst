@@ -1,9 +1,9 @@
 Bem-vindo
 #########
 
-O CakePHP 3 é um framework de desenvolvimento web que funciona com o PHP 7 ou no
+O CakePHP 4 é um framework de desenvolvimento web que funciona com o PHP 7 ou no
 mínimo com o PHP |minphpversion|. Leia a seção :doc:`CakePHP num piscar de olhos </intro>`
-para ter uma ideia geral dos fundamentos do CakePHP 3.
+para ter uma ideia geral dos fundamentos do CakePHP 4.
 
 O *cookbook* do CakePHP é um projeto de documentação editável aberto à
 comunidade. Observe o botão com um ícone de um lápis no canto direito, ele
@@ -21,7 +21,7 @@ correções para a documentação.
     como PDF e EPUB, você pode lê-lo em diversos dispositivos, e também offline.
 
     - `PDF <../_downloads/pt/CakePHPCookbook.pdf>`_
-    - `EPUB <../_downloads/pt/CakePHPCookbook.epub>`_
+    - `EPUB <../_downloads/pt/CakePHP.epub>`_
     - `Código-fonte Original <http://github.com/cakephp/docs>`_
 
 Obtendo ajuda

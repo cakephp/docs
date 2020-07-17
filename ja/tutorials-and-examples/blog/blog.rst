@@ -37,11 +37,11 @@ cURL がインストールされていたら、以下のように実行するの
 インストールディレクトリーからターミナルに以下の行をシンプルにタイプしてください。
 この例では、"blog" を使用しますが、他のものに自由に変更できます。 ::
 
-    php composer.phar create-project --prefer-dist cakephp/app blog
+    php composer.phar create-project --prefer-dist cakephp/app:4.* blog
 
 Composer をグローバルにすでに設定している場合は、以下のようにタイプすることもできます。 ::
 
-    composer self-update && composer create-project --prefer-dist cakephp/app blog
+    composer self-update && composer create-project --prefer-dist cakephp/app:4.* blog
 
 Composer を使うメリットは、 正しいファイルパーミッションの設定や、 **config/app.php**
 ファイルの作成などのような、重要なセットアップを自動的に完全にしてくれることです。
@@ -104,9 +104,11 @@ tmp と logs ディレクトリーのパーミッション
 まだ作成していないのであれば、このチュートリアル用に好きな名前で、
 例えば ``cake_blog`` のような名前で空のデータベースを作成しておいてください。このページでは、
 投稿記事を保存するためのテーブルをひとつ作成します。そしてテスト用に、いくつかの記事も投入します。
-次の SQL をデータベースで実行してください。 ::
+次の SQL をデータベースで実行してください。
 
-    /* まず、articles テーブルを作成します: */
+.. code-block:: mysql
+
+    # まず、articles テーブルを作成します
     CREATE TABLE articles (
         id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
         title VARCHAR(50),
@@ -115,7 +117,7 @@ tmp と logs ディレクトリーのパーミッション
         modified DATETIME DEFAULT NULL
     );
 
-    /* それから、テスト用に記事をいくつか入れておきます: */
+    # それから、テスト用に記事をいくつか入れておきます
     INSERT INTO articles (title,body,created)
         VALUES ('タイトル', 'これは、記事の本文です。', NOW());
     INSERT INTO articles (title,body,created)

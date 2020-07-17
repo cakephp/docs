@@ -4,7 +4,7 @@ def final REPO_NAME = 'cakephp/docs'
 // job definition use a string 'template' to save duplication
 def final BUILD_STEPS = '''\
 # Rebuild the index.
-make populate-index ES_HOST="$ELASTICSEARCH_URL"
+make populate-index ES_HOST="$DOKKU_ELASTICSEARCH_AQUA_URL" ES_HOST_V2="$DOKKU_ELASTICSEARCH_AQUA_URL"
 
 rm -rf /tmp/book-VERSION-$GIT_COMMIT
 git clone . /tmp/book-VERSION-$GIT_COMMIT
@@ -17,7 +17,8 @@ git remote rm origin
 git branch -D master || true
 git checkout -b master
 
-git remote | grep dokku || git remote add dokku dokku@new.cakephp.org:book-VERSION
+git remote rm dokku || true
+git remote add dokku dokku@apps.cakephp.org:book-VERSION
 git push -fv dokku master
 rm -rf /tmp/book-VERSION-$GIT_COMMIT
 '''
@@ -25,7 +26,7 @@ rm -rf /tmp/book-VERSION-$GIT_COMMIT
 job('Book - Deploy 3.x') {
   description('Deploy the 3.x book when changes are pushed.')
   scm {
-    github(REPO_NAME, '3.0')
+    github(REPO_NAME, '3.x')
   }
   triggers {
     scm('H/5 * * * *')
@@ -91,10 +92,33 @@ job('Book - Deploy 4.0') {
   }
 }
 
+job('Book - Deploy 4.next') {
+  description('Deploy the 4.next book when changes are pushed.')
+  scm {
+    github(REPO_NAME, '4.next')
+  }
+  triggers {
+    scm('H/5 * * * *')
+  }
+  logRotator {
+    daysToKeep(30)
+  }
+  steps {
+    shell(BUILD_STEPS.replaceAll('VERSION', '4next'))
+  }
+  publishers {
+    slackNotifier {
+      room('#dev')
+      notifyFailure(true)
+      notifyRepeatedFailure(true)
+    }
+  }
+}
+
 job('Book - Deploy 2.x') {
   description('Deploy the 2.x book when changes are pushed.')
   scm {
-    github(REPO_NAME, 'master')
+    github(REPO_NAME, '2.x')
   }
   triggers {
     scm('H/5 * * * *')
@@ -165,7 +189,7 @@ job('Book - Deploy 1.1') {
 job('Book - Rebuild 2.x search index') {
   description('Rebuild the 2.x search index. Will result in temporary unavailability of search as index is rebuilt.')
   scm {
-    github(REPO_NAME, 'master')
+    github(REPO_NAME, '2.x')
   }
   logRotator {
     daysToKeep(30)
@@ -178,7 +202,20 @@ job('Book - Rebuild 2.x search index') {
 job('Book - Rebuild 3.x search index') {
   description('Rebuild the 3.x search index. Will result in temporary unavailability of search as index is rebuilt.')
   scm {
-    github(REPO_NAME, '3.0')
+    github(REPO_NAME, '3.x')
+  }
+  logRotator {
+    daysToKeep(30)
+  }
+  steps {
+    shell('make rebuild-index ES_HOST="$ELASTICSEARCH_URL"')
+  }
+}
+
+job('Book - Rebuild 4.x search index') {
+  description('Rebuild the 4.x search index. Will result in temporary unavailability of search as index is rebuilt.')
+  scm {
+    github(REPO_NAME, '4.x')
   }
   logRotator {
     daysToKeep(30)

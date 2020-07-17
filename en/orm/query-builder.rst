@@ -21,8 +21,9 @@ modified. You can also use a table's connection object to access the lower level
 Query builder that does not include ORM features, if necessary. See the
 :ref:`database-queries` section for more information::
 
-    use Cake\ORM\TableRegistry;
-    $articles = TableRegistry::get('Articles');
+    use Cake\ORM\Locator\LocatorAwareTrait;
+
+    $articles = $this->getTableLocator()->get('Articles');
 
     // Start a new query.
     $query = $articles->find();
@@ -39,9 +40,9 @@ Selecting Rows From A Table
 
 ::
 
-    use Cake\ORM\TableRegistry;
+    use Cake\ORM\Locator\LocatorAwareTrait;
 
-    $query = TableRegistry::get('Articles')->find();
+    $query = $this->getTableLocator()->get('Articles')->find();
 
     foreach ($query as $article) {
         debug($article->title);
@@ -247,44 +248,8 @@ anonymous function will receive an instance of
     });
 
 See the :ref:`advanced-query-conditions` section to find out how to construct
-more complex ``WHERE`` conditions. To apply ordering, you can use the ``order``
-method::
+more complex ``WHERE`` conditions.
 
-    $query = $articles->find()
-        ->order(['title' => 'ASC', 'id' => 'ASC']);
-
-When calling ``order()`` multiple times on a query, multiple clauses will be appended.
-However, when using finders you may sometimes need to overwrite the ``ORDER BY``.
-Set the second parameter of ``order()`` (as well as ``orderAsc()`` or ``orderDesc()``) to
-``Query::OVERWRITE`` or to ``true``::
-
-    $query = $articles->find()
-        ->order(['title' => 'ASC']);
-    // Later, overwrite the ORDER BY clause instead of appending to it.
-    $query = $articles->find()
-        ->order(['created' => 'DESC'], Query::OVERWRITE);
-
-The ``orderAsc`` and ``orderDesc`` methods can be used when you need to sort on
-complex expressions::
-
-    $query = $articles->find();
-    $concat = $query->func()->concat([
-        'title' => 'identifier',
-        'synopsis' => 'identifier'
-    ]);
-    $query->orderAsc($concat);
-
-To limit the number of rows or set the row offset you can use the ``limit()``
-and ``page()`` methods::
-
-    // Fetch rows 50 to 100
-    $query = $articles->find()
-        ->limit(50)
-        ->page(2);
-
-As you can see from the examples above, all the methods that modify the query
-provide a fluent interface, allowing you to build a query through chained method
-calls.
 
 Selecting Specific Fields
 -------------------------
@@ -332,30 +297,52 @@ portable::
     $query = $articles->find();
     $query->select(['count' => $query->func()->count('*')]);
 
-A number of commonly used functions can be created with the ``func()`` method:
+You can access existing wrappers for several SQL functions through ``Query::func()``:
 
-- ``rand()`` Generate a random value between 0 and 1 via SQL.
-- ``sum()`` Calculate a sum. The arguments will be treated as literal values.
-- ``avg()`` Calculate an average. The arguments will be treated as literal
-  values.
-- ``min()`` Calculate the min of a column. The arguments will be treated as
-  literal values.
-- ``max()`` Calculate the max of a column. The arguments will be treated as
-  literal values.
-- ``count()`` Calculate the count. The arguments will be treated as literal
-  values.
-- ``concat()`` Concatenate two values together. The arguments are treated as
-  bound parameters unless marked as literal.
-- ``coalesce()`` Coalesce values. The arguments are treated as bound parameters
-  unless marked as literal.
-- ``dateDiff()`` Get the difference between two dates/times. The arguments are
-  treated as bound parameters unless marked as literal.
-- ``now()`` Take either 'time' or 'date' as an argument allowing you to get
-  either the current time, or current date.
-- ``extract()`` Returns the specified date part from the SQL expression.
-- ``dateAdd()`` Add the time unit to the date expression.
-- ``dayOfWeek()`` Returns a FunctionExpression representing a call to SQL
-  WEEKDAY function.
+``rand()``
+    Generate a random value between 0 and 1 via SQL.
+``sum()``
+    Calculate a sum. `Assumes arguments are literal values.`
+``avg()``
+    Calculate an average. `Assumes arguments are literal values.`
+``min()``
+    Calculate the min of a column. `Assumes arguments are literal values.`
+``max()``
+    Calculate the max of a column. `Assumes arguments are literal values.`
+``count()``
+    Calculate the count. `Assumes arguments are literal values.`
+``concat()``
+    Concatenate two values together. `Assumes arguments are bound parameters.`
+``coalesce()``
+    Coalesce values. `Assumes arguments are bound parameters.`
+``dateDiff()``
+    Get the difference between two dates/times. `Assumes arguments are bound parameters.`
+``now()``
+    Defaults to returning date and time, but accepts 'time' or 'date' to return only
+    those values.
+``extract()``
+    Returns the specified date part from the SQL expression.
+``dateAdd()``
+    Add the time unit to the date expression.
+``dayOfWeek()``
+    Returns a FunctionExpression representing a call to SQL WEEKDAY function.
+
+Window Functions
+----------------
+
+These window-only functions contain a window expression by default:
+
+``rowNumber()``
+    Returns an Aggregate expression for the ``ROW_NUMBER()`` SQL function.
+``lag()``
+    Returns an Aggregate expression for the ``LAG()`` SQL function.
+``lead()``
+    Returns an Aggregate expression for the ``LEAD()`` SQL function.
+``lead()``
+    Returns an Aggregate expression for the ``LEAD()`` SQL function.
+
+.. versionadded:: 4.1.0
+    Window functions were added in 4.1.0
 
 When providing arguments for SQL functions, there are two kinds of parameters
 you can use, literal arguments and bound parameters. Identifier/Literal parameters allow
@@ -368,23 +355,40 @@ safely add user data to SQL functions. For example::
         ' - CAT: ',
         'Categories.name' => 'identifier',
         ' - Age: ',
-        '(DATEDIFF(NOW(), Articles.created))' => 'literal',
+        $query->func()->dateDiff(
+            'NOW()' => 'literal',
+            'Articles.created' => 'identifier'
+        )
     ]);
     $query->select(['link_title' => $concat]);
 
-By making arguments with a value of ``literal``, the ORM will know that
-the key should be treated as a literal SQL value. By making arguments with
-a value of ``identifier``, the ORM will know that the key should be treated
-as a field identifier. The above would generate the following SQL on MySQL::
+Both ``literal`` and ``identifier`` arguments allow you to reference other columns
+and SQL literals while ``identifier`` will be appropriately quoted if auto-quoting
+is enabled.  If not marked as literal or identifier, arguments will be bound
+parameters allowing you to safely pass user data to the function.
 
-    SELECT CONCAT(Articles.title, :c0, Categories.name, :c1, (DATEDIFF(NOW(), Articles.created))) FROM articles;
+The above example generates something like this in MYSQL.
 
-The ``:c0`` value will have the ``' - CAT:'`` text bound when the query is
-executed.
+.. code-block:: mysql
 
-In addition to the above functions, the ``func()`` method can be used to create
-any generic SQL function such as ``year``, ``date_format``, ``convert``, etc.
-For example::
+    SELECT CONCAT(
+        Articles.title,
+        :c0,
+        Categories.name,
+        :c1,
+        (DATEDIFF(NOW(), Articles.created))
+    ) FROM articles;
+
+The ``:c0`` argument will have ``' - CAT:'`` text bound when the query is
+executed. The ``dateDiff`` expression was translated to the appropriate SQL.
+
+Custom Functions
+^^^^^^^^^^^^^^^^
+
+If ``func()`` does not already wrap the SQL function you need, you can call
+it directly through ``func()`` and still safely pass arguments and user data
+as described. Make sure you pass the appropriate argument type for custom
+functions or they will be treated as bound parameters::
 
     $query = $articles->find();
     $year = $query->func()->year([
@@ -399,22 +403,67 @@ For example::
         'timeCreated' => $time
     ]);
 
-Would result in::
+These custom function would generate something like this in MYSQL:
 
-    SELECT YEAR(created) as yearCreated, DATE_FORMAT(created, '%H:%i') as timeCreated FROM articles;
+.. code-block:: mysql
 
-You should remember to use the function builder whenever you need to put
-untrusted data into SQL functions or stored procedures::
+    SELECT YEAR(created) as yearCreated,
+           DATE_FORMAT(created, '%H:%i') as timeCreated
+    FROM articles;
 
-    // Use a stored procedure
+.. note::
+    Use ``func()`` to pass untrusted user data to any SQL function.
+
+Ordering Results
+----------------
+
+To apply ordering, you can use the ``order`` method::
+
+    $query = $articles->find()
+        ->order(['title' => 'ASC', 'id' => 'ASC']);
+
+When calling ``order()`` multiple times on a query, multiple clauses will be
+appended.  However, when using finders you may sometimes need to overwrite the
+``ORDER BY``.  Set the second parameter of ``order()`` (as well as
+``orderAsc()`` or ``orderDesc()``) to ``Query::OVERWRITE`` or to ``true``::
+
+    $query = $articles->find()
+        ->order(['title' => 'ASC']);
+    // Later, overwrite the ORDER BY clause instead of appending to it.
+    $query = $articles->find()
+        ->order(['created' => 'DESC'], Query::OVERWRITE);
+
+The ``orderAsc`` and ``orderDesc`` methods can be used when you need to sort on
+complex expressions::
+
     $query = $articles->find();
-    $lev = $query->func()->levenshtein([$search, 'LOWER(title)' => 'literal']);
-    $query->where(function (QueryExpression $exp) use ($lev) {
-        return $exp->between($lev, 0, $tolerance);
+    $concat = $query->func()->concat([
+        'title' => 'identifier',
+        'synopsis' => 'identifier'
+    ]);
+    $query->orderAsc($concat);
+
+To build complex order clauses, use a Closure to build order expressions::
+
+    $query->orderAsc(function (QueryExpression $exp, Query $query) {
+        return $exp->addCase(...);
     });
 
-    // Generated SQL would be
-    WHERE levenshtein(:c0, lower(street)) BETWEEN :c1 AND :c2
+
+Limiting Results
+----------------
+
+To limit the number of rows or set the row offset you can use the ``limit()``
+and ``page()`` methods::
+
+    // Fetch rows 50 to 100
+    $query = $articles->find()
+        ->limit(50)
+        ->page(2);
+
+As you can see from the examples above, all the methods that modify the query
+provide a fluent interface, allowing you to build a query through chained method
+calls.
 
 Aggregates - Group and Having
 -----------------------------
@@ -430,7 +479,7 @@ When using aggregate functions like ``count`` and ``sum`` you may want to use
     ->group('published_date')
     ->having(['count >' => 3]);
 
-Case statements
+Case Statements
 ---------------
 
 The ORM also offers the SQL ``case`` expression. The ``case`` expression allows
@@ -438,7 +487,9 @@ for implementing ``if ... then ... else`` logic inside your SQL. This can be use
 for reporting on data where you need to conditionally sum or count data, or where you
 need to specific data based on a condition.
 
-If we wished to know how many published articles are in our database, we could use the following SQL::
+If we wished to know how many published articles are in our database, we could use the following SQL:
+
+.. code-block:: sql
 
     SELECT
     COUNT(CASE WHEN published = 'Y' THEN 1 END) AS number_published,
@@ -506,8 +557,8 @@ automatically produce an ``if .. then .. else`` statement::
     # WHERE CASE
     #   WHEN population = 0 THEN 'DESERTED' ELSE 'INHABITED' END
 
-Getting Arrays Instead of Entities
-----------------------------------
+Fetching Arrays Instead of Entities
+-----------------------------------
 
 While ORMs and object result sets are powerful, creating entities is sometimes
 unnecessary. For example, when accessing aggregated data, building an Entity may
@@ -594,26 +645,31 @@ an array of conditions::
             'OR' => [['view_count' => 2], ['view_count' => 3]],
         ]);
 
-The above would generate SQL like::
+The above would generate SQL like
+
+.. code-block:: sql
 
     SELECT * FROM articles WHERE author_id = 3 AND (view_count = 2 OR view_count = 3)
 
 If you'd prefer to avoid deeply nested arrays, you can use the callback form of
-``where()`` to build your queries. The callback form allows you to use the
-expression builder to build more complex conditions without arrays. For example::
+``where()`` to build your queries. The callback accepts a QueryExpression which allows
+you to use the expression builder interface to build more complex conditions without arrays.
+For example::
 
-    $query = $articles->find()->where(function ($exp, $query) {
+    $query = $articles->find()->where(function (QueryExpression $exp, Query $query) {
         // Use add() to add multiple conditions for the same field.
-        $author = $exp->or_(['author_id' => 3])->add(['author_id' => 2]);
-        $published = $exp->and_(['published' => true, 'view_count' => 10]);
+        $author = $query->newExpr()->or(['author_id' => 3])->add(['author_id' => 2]);
+        $published = $query->newExpr()->and(['published' => true, 'view_count' => 10]);
 
-        return $exp->or_([
+        return $exp->or([
             'promoted' => true,
-            $exp->and_([$author, $published])
+            $query->newExpr()->and([$author, $published])
         ]);
     });
 
-The above generates SQL similar to::
+The above generates SQL similar to:
+
+.. code-block:: sql
 
     SELECT *
     FROM articles
@@ -626,17 +682,21 @@ The above generates SQL similar to::
         OR promoted = 1
     )
 
-The expression object that is passed into ``where()`` functions has two kinds of
-methods. The first type of methods are **combinators**. The ``and_()`` and
-``or_()`` methods create new expression objects that change **how** conditions
-are combined. The second type of methods are **conditions**. Conditions are
-added into an expression where they are combined with the current combinator.
+The ``QueryExpression`` passed to the callback allows you to use both
+**combinators** and **conditions** to build the full expression.
 
-For example, calling ``$exp->and_(...)`` will create a new ``Expression`` object
-that combines all conditions it contains with ``AND``. While ``$exp->or_()``
-will create a new ``Expression`` object that combines all conditions added to it
-with ``OR``. An example of adding conditions with an ``Expression`` object would
-be::
+Combinators
+    These create new ``QueryExpression`` objects and set how the conditions added
+    to that expression are joined together.
+
+    - ``and()`` creates new expression objects that joins all conditions with ``AND``.
+    - ``or()``  creates new expression objects that joins all conditions with ``OR``.
+
+Conditions
+    These are added to the expression and automatically joined together
+    depending on which combinator was used.
+
+The ``QueryExpression`` passed to the callback function defaults to ``and()``::
 
     $query = $articles->find()
         ->where(function (QueryExpression $exp) {
@@ -647,9 +707,11 @@ be::
                 ->gt('view_count', 10);
         });
 
-Since we started off using ``where()``, we don't need to call ``and_()``, as
+Since we started off using ``where()``, we don't need to call ``and()``, as
 that happens implicitly. The above shows a few new condition
-methods being combined with ``AND``. The resulting SQL would look like::
+methods being combined with ``AND``. The resulting SQL would look like:
+
+.. code-block:: sql
 
     SELECT *
     FROM articles
@@ -664,7 +726,7 @@ following::
 
     $query = $articles->find()
         ->where(function (QueryExpression $exp) {
-            $orConditions = $exp->or_(['author_id' => 2])
+            $orConditions = $exp->or(['author_id' => 2])
                 ->eq('author_id', 5);
             return $exp
                 ->add($orConditions)
@@ -672,21 +734,25 @@ following::
                 ->gte('view_count', 10);
         });
 
-Which would generate the SQL similar to::
+Which would generate the SQL similar to:
+
+.. code-block:: sql
 
     SELECT *
     FROM articles
     WHERE (
-    (author_id = 2 OR author_id = 5)
-    AND published = 1
-    AND view_count >= 10)
+        (author_id = 2 OR author_id = 5)
+        AND published = 1
+        AND view_count >= 10
+    )
 
-The ``or_()`` and ``and_()`` methods also allow you to use functions as their
-parameters. This is often easier to read than method chaining::
+The **combinators**  also allow you pass in a callback which takes
+the new expression object as a parameter if you want to separate
+the method chaining::
 
     $query = $articles->find()
         ->where(function (QueryExpression $exp) {
-            $orConditions = $exp->or_(function ($or) {
+            $orConditions = $exp->or(function (QueryExpression $or) {
                 return $or->eq('author_id', 2)
                     ->eq('author_id', 5);
             });
@@ -699,20 +765,23 @@ You can negate sub-expressions using ``not()``::
 
     $query = $articles->find()
         ->where(function (QueryExpression $exp) {
-            $orConditions = $exp->or_(['author_id' => 2])
+            $orConditions = $exp->or(['author_id' => 2])
                 ->eq('author_id', 5);
             return $exp
                 ->not($orConditions)
                 ->lte('view_count', 10);
         });
 
-Which will generate the following SQL looking like::
+Which will generate the following SQL looking like:
+
+.. code-block:: sql
 
     SELECT *
     FROM articles
     WHERE (
-    NOT (author_id = 2 OR author_id = 5)
-    AND view_count <= 10)
+        NOT (author_id = 2 OR author_id = 5)
+        AND view_count <= 10
+    )
 
 It is also possible to build expressions using SQL functions::
 
@@ -726,13 +795,15 @@ It is also possible to build expressions using SQL functions::
                 ->eq('published', true);
         });
 
-Which will generate the following SQL looking like::
+Which will generate the following SQL looking like:
+
+.. code-block:: sql
 
     SELECT *
     FROM articles
     WHERE (
-    YEAR(created) >= 2014
-    AND published = 1
+        YEAR(created) >= 2014
+        AND published = 1
     )
 
 When using the expression objects you can use the following methods to create
@@ -872,6 +943,17 @@ conditions:
         });
     # WHERE NOT EXISTS (SELECT id FROM cities WHERE countries.id = cities.country_id AND population > 5000000)
 
+Expression objects should cover many commonly used functions and expressions. If
+you find yourself unable to create the required conditions with expressions you
+can may be able to use ``bind()`` to manually bind parameters into conditions::
+
+    $query = $cities->find()
+        ->where([
+            'start_date BETWEEN :start AND :end'
+        ])
+        ->bind(':start', '2014-01-01', 'date')
+        ->bind(':end',   '2014-12-31', 'date');
+
 In situations when you can't get, or don't want to use the builder methods to
 create the conditions you want you can also use snippets of SQL in where
 clauses::
@@ -882,8 +964,9 @@ clauses::
 .. warning::
 
     The field names used in expressions, and SQL snippets should **never**
-    contain untrusted content.  See the :ref:`using-sql-functions` section for
-    how to safely include unsafe data into function calls.
+    contain untrusted content as you will create SQL Injection vectors. See the
+    :ref:`using-sql-functions` section for how to safely include unsafe data
+    into function calls.
 
 Using Identifiers in Expressions
 --------------------------------
@@ -1096,12 +1179,12 @@ through event listeners.
 
 When the results for a cached query are fetched the following happens:
 
-1. The ``Model.beforeFind`` event is triggered.
-2. If the query has results set, those will be returned.
-3. The cache key will be resolved and cache data will be read. If the cache data
+1. If the query has results set, those will be returned.
+2. The cache key will be resolved and cache data will be read. If the cache data
    is not empty, those results will be returned.
-4. If the cache misses, the query will be executed and a new ``ResultSet`` will be
-   created. This ``ResultSet`` will be written to the cache and returned.
+3. If the cache misses, the query will be executed, the ``Model.beforeFind`` event
+   will be triggered, and a new ``ResultSet`` will be created. This
+   ``ResultSet`` will be written to the cache and returned.
 
 .. note::
 
@@ -1426,6 +1509,85 @@ operations. You can use the ``epilog()`` method for this::
 
 The ``epilog()`` method allows you to append raw SQL to the end of queries. You
 should never put raw user data into ``epilog()``.
+
+Window Functions
+----------------
+
+Window functions allow you to perform calculations using rows related to the
+current row. They are commonly used to calculate totals or offsets on partial sets of rows
+in the query. For example if we wanted to find the date of the earliest and latest comment on
+each article we could use window functions::
+
+    $query = $articles->find();
+    $query->select([
+        'Articles.id',
+        'Articles.title',
+        'Articles.user_id'
+        'oldest_comment' => $query->func()
+            ->min('Comments.created')
+            ->partition('Comments.article_id'),
+        'latest_comment' => $query->func()
+            ->max('Comments.created')
+            ->partition('Comments.article_id'),
+    ])
+    ->innerJoinWith('Comments');
+
+The above would generate SQL similar to:
+
+.. code-block:: sql
+
+    SELECT
+        Articles.id,
+        Articles.title,
+        Articles.user_id
+        MIN(Comments.created) OVER (PARTITION BY Comments.article_id) AS oldest_comment,
+        MAX(Comments.created) OVER (PARTITION BY Comments.article_id) AS latest_comment,
+    FROM articles AS Articles
+    INNER JOIN comments AS Comments
+
+Window expressions can be applied to most aggregate functions. Any aggregate function
+that cake abstracts with a wrapper in ``FunctionsBuilder`` will return an ``AggregateExpression``
+which lets you attach window expressions. You can create custom aggregate functions
+through ``FunctionsBuilder::aggregate()``.
+
+These are the most commonly supported window features. Most features are provided
+by ``AggregateExpresion``, but make sure you follow your database documentation on use and restrictions.
+
+- ``order($fields)`` Order the aggregate group the same as a query ORDER BY.
+- ``partition($expressions)`` Add one or more partitions to the window based on column
+  names.
+- ``rows($start, $end)`` Define a offset of rows that precede and/or follow the
+  current row that should be included in the aggregate function.
+- ``range($start, $end)`` Define a range of row values that precede and/or follow
+  the current row that should be included in the aggregate function. This
+  evaluates values based on the ``order()`` field.
+
+If you need to re-use the same window expression multiple times you can create
+named windows using the ``window()`` method::
+
+    $query = $articles->find();
+
+    // Define a named window
+    $query->window('related_article', function ($window, $query) {
+        $window->partition('Comments.article_id');
+
+        return $window;
+    });
+
+    $query->select([
+        'Articles.id',
+        'Articles.title',
+        'Articles.user_id'
+        'oldest_comment' => $query->func()
+            ->min('Comments.created')
+            ->over('related_article'),
+        'latest_comment' => $query->func()
+            ->max('Comments.created')
+            ->over('related_article'),
+    ]);
+
+.. versionadded:: 4.1.0
+    Window function support was added in 4.1.0
 
 Executing Complex Queries
 -------------------------

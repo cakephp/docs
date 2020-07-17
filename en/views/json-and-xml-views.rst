@@ -232,7 +232,7 @@ mappings in your controller::
             }
 
             // Set Out Format View
-            $this->viewBuilder()->className($formats[$format]);
+            $this->viewBuilder()->setClassName($formats[$format]);
 
             // Get data
             $videos = $this->Videos->find('latest');
