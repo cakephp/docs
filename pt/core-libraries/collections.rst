@@ -1,5 +1,5 @@
-Collections
-###########
+Coleções
+########
 
 .. php:namespace:: Cake\Collection
 
