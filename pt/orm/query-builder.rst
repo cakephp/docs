@@ -669,7 +669,7 @@ O exemplo acima irá gerar SQL semelhante a:
         (
             (author_id = 2 OR author_id = 3)
             AND
-            (published = 1 AND view_count > 10)
+            (published = 1 AND view_count = 10)
         )
         OR promoted = 1
     )
