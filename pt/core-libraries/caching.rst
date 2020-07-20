@@ -41,24 +41,23 @@ Independentemente do CacheEngine que você escolher, seu aplicativo interage com
 
 .. _cache-configuration:
 
-Configuring Cache Engines
-=========================
+Configurando Mecanismos de Cache
+================================
 
 .. php:staticmethod:: setConfig($key, $config = null)
 
-Your application can configure any number of 'engines' during its bootstrap
-process. Cache engine configurations are defined in **config/app.php**.
+Seu aplicativo pode configurar qualquer número de 'engines' durante o processo de inicialização. 
+As configurações do mecanismo de cache são definidas em **config/app.php**.
 
-For optimal performance CakePHP requires two cache engines to be defined.
+Para um desempenho ideal, o CakePHP requer que dois mecanismos de cache sejam definidos.
 
-* ``_cake_core_`` is used for storing file maps, and parsed results of
-  :doc:`/core-libraries/internationalization-and-localization` files.
-* ``_cake_model_``, is used to store schema descriptions for your applications
-  models.
+* ``_cake_core_`` é usado para armazenar mapas de arquivos e resultados analisados de 
+  arquivos :doc:`/core-libraries/internationalization-and-localization`.
+* ``_cake_model_``, é usado para armazenar descrições de esquema para seus modelos de 
+  aplicativos.
 
-Using multiple engine configurations also lets you incrementally change the
-storage as needed. For example in your **config/app.php** you could put the
-following::
+O uso de várias configurações de mecanismo também permite alterar gradualmente o armazenamento, 
+conforme necessário. Por exemplo, em seu **config/app.php**, você pode colocar o seguinte::
 
     // ...
     'Cache' => [
@@ -68,7 +67,7 @@ following::
             'path' => CACHE,
             'prefix' => 'cake_short_'
         ],
-        // Using a fully namespaced name.
+        // Usando um namespace para nome completo.
         'long' => [
             'className' => 'Cake\Cache\Engine\FileEngine',
             'duration' => '+1 week',
@@ -78,19 +77,19 @@ following::
     ]
     // ...
 
-Configuration options can also be provided as a :term:`DSN` string. This is
-useful when working with environment variables or :term:`PaaS` providers::
+As opções de configuração também podem ser fornecidas como uma string :term:`DSN`. 
+Isso é útil ao trabalhar com variáveis de ambiente ou provedores de :term:`PaaS`::
 
     Cache::setConfig('short', [
         'url' => 'memcached://user:password@cache-host/?timeout=3600&prefix=myapp_',
     ]);
 
-When using a DSN string you can define any additional parameters/options as
-query string arguments.
+Ao usar uma sequência DSN, você pode definir parâmetros/opções adicionais como 
+argumentos da sequência de consultas.
 
-You can also configure Cache engines at runtime::
+Você também pode configurar os mecanismos de cache em tempo de execução::
 
-    // Using a short name
+    // Usando um nome abreviado
     Cache::setConfig('short', [
         'className' => 'File',
         'duration' => '+1 hours',
@@ -98,7 +97,7 @@ You can also configure Cache engines at runtime::
         'prefix' => 'cake_short_'
     ]);
 
-    // Using a fully namespaced name.
+    // Usando um namespace para nome completo.
     Cache::setConfig('long', [
         'className' => 'Cake\Cache\Engine\FileEngine',
         'duration' => '+1 week',
@@ -106,48 +105,47 @@ You can also configure Cache engines at runtime::
         'path' => CACHE . 'long' . DS,
     ]);
 
-    // Using a constructed object.
+    // Usando um construtor de objeto
     $object = new FileEngine($config);
     Cache::setConfig('other', $object);
 
-The name of these engine configurations ('short' and 'long') are used as the ``$config``
-parameter for :php:meth:`Cake\\Cache\\Cache::write()` and
-:php:meth:`Cake\\Cache\\Cache::read()`. When configuring cache engines you can
-refer to the class name using the following syntaxes::
+O nome dessas configurações de mecanismo ('curto' e 'longo') é usado como o parâmetro ``$config`` 
+para :php:meth:`Cake\\Cache\\Cache::write()` e :php:meth:`Cake\\Cache\\Cache::read()`. Ao configurar 
+mecanismos de cache, você pode consultar o nome da classe usando as seguintes sintaxes::
 
-    // Short name (in App\ or Cake namespaces)
+    // Nome curto (in App\ or Cake namespaces)
     Cache::setConfig('long', ['className' => 'File']);
 
-    // Plugin short name
+    // Plugin com nome curto
     Cache::setConfig('long', ['className' => 'MyPlugin.SuperCache']);
 
-    // Full namespace
+    // Namespace completo
     Cache::setConfig('long', ['className' => 'Cake\Cache\Engine\FileEngine']);
 
-    // An object implementing CacheEngineInterface
+    // Um objeto implementando CacheEngineInterface
     Cache::setConfig('long', ['className' => $myCache]);
 
 .. note::
 
-    When using the FileEngine you might need to use the ``mask`` option to
-    ensure cache files are made with the correct permissions.
+    Ao usar o FileEngine, pode ser necessário usar a opção ``mask`` para 
+    garantir que os arquivos de cache sejam criados com as permissões corretas.
 
-Engine Options
---------------
-
-Each engine accepts the following options:
-
-* ``duration`` Specify a default duration for how long items are valid.
-  Specified as a ``strototime()`` compatible expression.
-* ``groups`` List of groups or 'tags' associated to every key stored in this
-  config. Useful when you need to delete a subset of data from a cache.
-* ``prefix`` Prepended to all entries. Good for when you need to share
-  a keyspace with either another cache config or another application.
-* ``probability`` Probability of hitting a cache gc cleanup. Setting to 0 will disable
-  ``Cache::gc()`` from ever being called automatically.
-
-FileEngine Options
+Opções do Mecanismo
 -------------------
+
+Cada mecanismo aceita as seguintes opções:
+
+* ``duration`` Especifique uma duração padrão para quanto tempo os itens são válidos. 
+   Especificada como uma expressão compatível com ``strototime()``.
+* ``groups`` Lista de grupos ou 'tags' associados a todas as chaves armazenadas nesta 
+   configuração. Útil quando você precisa excluir um subconjunto de dados de um cache.
+* ``prefix`` Anexado a todas as entradas. É bom para quando você precisar compartilhar 
+   um espaço de chave com outra configuração de cache ou outro aplicativo.
+* ``probability`` Probabilidade de atingir uma limpeza de cache. Definir como 0 o
+   ``Cache::gc()`` será desativado e não funcionará automaticamente.
+
+Opções do FileEngine
+--------------------
 
 FileEngine uses the following engine specific options:
 
