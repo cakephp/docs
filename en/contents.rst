@@ -2,20 +2,6 @@ Contents
 ########
 
 .. toctree::
-   :hidden:
-
-   index
-   topics
-   chronos
-   debug-kit
-   elasticsearch
-   bake
-   bake/development
-   bake/usage
-   migrations
-   phinx
-
-.. toctree::
     :maxdepth: 3
     :caption: Preface
 
@@ -105,6 +91,20 @@ Contents
     Authorization <https://book.cakephp.org/authorization/2/>
     Phinx <https://book.cakephp.org/phinx/0/en/>
     Chronos <https://book.cakephp.org/chronos/2/>
+
+.. toctree::
+   :hidden:
+
+   index
+   topics
+   chronos
+   debug-kit
+   elasticsearch
+   bake
+   bake/development
+   bake/usage
+   migrations
+   phinx
 
 .. todolist::
 

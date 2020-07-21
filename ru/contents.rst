@@ -2,18 +2,6 @@
 ##########
 
 .. toctree::
-    :hidden:
-
-    index
-    topics
-    bake
-    bake/usage
-    bake/development
-    chronos
-    debug-kit
-    migrations
-
-.. toctree::
     :maxdepth: 3
     :caption: Введение
 
@@ -91,6 +79,19 @@
 
     core-libraries/global-constants-and-functions
     appendices
+
+.. toctree::
+    :hidden:
+
+    index
+    topics
+    bake
+    bake/usage
+    bake/development
+    chronos
+    debug-kit
+    migrations
+
 
 .. todolist::
 

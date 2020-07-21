@@ -1,19 +1,6 @@
 Conteúdo
 ########
 
-.. toctree::
-    :hidden:
-
-    index
-    topics
-    chronos
-    bake
-    bake/development
-    bake/usage
-    debug-kit
-    elasticsearch
-    migrations
-
 
 .. toctree::
     :maxdepth: 3
@@ -93,6 +80,19 @@ Conteúdo
 
     core-libraries/global-constants-and-functions
     appendices
+
+.. toctree::
+    :hidden:
+
+    index
+    topics
+    chronos
+    bake
+    bake/development
+    bake/usage
+    debug-kit
+    elasticsearch
+    migrations
 
 .. todolist::
 

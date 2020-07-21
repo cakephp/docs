@@ -2,20 +2,6 @@
 ############
 
 .. toctree::
-    :hidden:
-
-    index
-    topics
-    chronos
-    debug-kit
-    elasticsearch
-    bake
-    bake/development
-    bake/usage
-    migrations
-    phinx
-
-.. toctree::
     :maxdepth: 3
     :caption: はじめに
 
@@ -102,6 +88,20 @@
     :caption: Phinx
 
     Phinx <https://book.cakephp.org/phinx/0/ja/>
+
+.. toctree::
+    :hidden:
+
+    index
+    topics
+    chronos
+    debug-kit
+    elasticsearch
+    bake
+    bake/development
+    bake/usage
+    migrations
+    phinx
 
 .. todolist::
 
