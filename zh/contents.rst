@@ -2,12 +2,6 @@ Contents
 ########
 
 .. toctree::
-   :hidden:
-
-   index
-   topics
-
-.. toctree::
     :maxdepth: 3
     :caption: Preface
 
@@ -85,6 +79,13 @@ Contents
 
     core-libraries/global-constants-and-functions
     appendices
+
+.. toctree::
+   :hidden:
+
+   index
+   topics
+
 
 .. todolist::
 
