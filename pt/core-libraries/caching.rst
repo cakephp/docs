@@ -147,25 +147,26 @@ Cada mecanismo aceita as seguintes opções:
 Opções do FileEngine
 --------------------
 
-FileEngine uses the following engine specific options:
+O FileEngine usa as seguintes opções específicas do mecanismo:
 
-* ``isWindows`` Automatically populated with whether the host is windows or not
-* ``lock`` Should files be locked before writing to them?
-* ``mask`` The mask used for created files
-* ``path`` Path to where cachefiles should be saved. Defaults to system's temp dir.
+* ``isWindows`` Preenchido automaticamente se o host é Windows ou não
+* ``lock`` Os arquivos devem ser bloqueados antes de serem gravados?
+* ``mask`` A máscara usada para arquivos criados
+* ``path`` Caminho para onde os arquivos de cache devem ser salvos. O padrão 
+   é o diretório temporário do sistema.
 
-RedisEngine Options
--------------------
+Opções RedisEngine
+------------------
 
-RedisEngine uses the following engine specific options:
+O RedisEngine usa as seguintes opções específicas do mecanismo:
 
-* ``port`` The port your Redis server is running on.
-* ``host`` The host your Redis server is running on.
-* ``database`` The database number to use for connection.
-* ``password`` Redis server password.
-* ``persistent`` Should a persistent connection be made to Redis.
-* ``timeout`` Connection timeout for Redis.
-* ``unix_socket`` Path to a unix socket for Redist.
+* ``port`` A porta em que o servidor Redis está sendo executado.
+* ``host`` O host em que o servidor Redis está sendo executado.
+* ``database`` O número do banco de dados a ser usado para conexão.
+* ``password`` Senha do servidor Redis.
+* ``persistent`` Uma conexão persistente deve ser feita com Redis.
+* ``timeout`` Tempo limite de conexão para Redis.
+* ``unix_socket`` Caminho para um soquete unix para Redist.
 
 MemcacheEngine Options
 ----------------------
