@@ -128,6 +128,7 @@ TestSuite
 ---------
 
 * ``TestCase::setAppNamespace()`` now returns the previous app namespace for easier save and restore.
+* GroupsFixture was renamed to SectionsFixture due to MySQL reserved keyword changes.
 
 View
 ----
