@@ -2,6 +2,11 @@ Contenu
 #######
 
 .. toctree::
+    :hidden:
+
+    index
+
+.. toctree::
     :maxdepth: 3
     :caption: Préface
 
@@ -89,7 +94,6 @@ Contenu
 .. toctree::
     :hidden:
 
-    index
     topics
     bake
     bake/usage

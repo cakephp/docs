@@ -2,6 +2,11 @@ Contenidos
 ##########
 
 .. toctree::
+   :hidden:
+
+   index
+
+.. toctree::
     :maxdepth: 3
     :caption: Prólogo
 
@@ -83,7 +88,6 @@ Contenidos
 .. toctree::
    :hidden:
 
-   index
    topics
    chronos
    debug-kit

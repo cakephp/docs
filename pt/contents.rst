@@ -1,6 +1,10 @@
 Conteúdo
 ########
 
+.. toctree::
+    :hidden:
+
+    index
 
 .. toctree::
     :maxdepth: 3
@@ -84,7 +88,6 @@ Conteúdo
 .. toctree::
     :hidden:
 
-    index
     topics
     chronos
     bake
