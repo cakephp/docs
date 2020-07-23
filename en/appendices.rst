@@ -11,6 +11,7 @@ introduced in each version and the migration path between versions.
     :maxdepth: 1
 
     appendices/4-0-migration-guide
+    appendices/4-1-migration-guide
 
 Backwards Compatibility Shimming
 ================================
