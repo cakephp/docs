@@ -146,6 +146,7 @@ New Features
 Datasource
 ----------
 
+* MySQL 8 is supported and tested.
 * ``EntityInterface::getAccessible()`` has been added.
 
 Console
