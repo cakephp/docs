@@ -536,3 +536,7 @@ assertion methods that make it easy to assert against console output::
 
     // assert that stderr matches a regular expression
     $this->assertErrorRegExp($expected);
+
+.. note::
+
+    By default, text output (including help texts) longer than 72 characters will be wrapped. Output assertions must be split accordingly.
