@@ -146,7 +146,6 @@ New Features
 Datasource
 ----------
 
-* MySQL 8 is supported and tested.
 * ``EntityInterface::getAccessible()`` has been added.
 
 Console
@@ -163,6 +162,7 @@ Console
 Database
 --------
 
+* MySQL 8 is supported and tested.
 * ``AggregateExpression`` was added to represent aggregate SQL functions. ``FunctionsBuilder::aggregate()``
   can be used to wrap new aggregate SQL functions.
 * Window function support was added for any aggregate expression. ``AggregateExpression`` wraps the window
