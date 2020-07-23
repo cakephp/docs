@@ -310,7 +310,7 @@ Accessing View Variables Inside Your Helper
 -------------------------------------------
 
 If you would like to access a View variable inside a helper, you can use
-``$this->_View->get()`` like::
+``$this->getView()->get()`` like::
 
     class AwesomeHelper extends Helper
     {
@@ -320,7 +320,7 @@ If you would like to access a View variable inside a helper, you can use
         {
             // set meta description
             return $this->Html->meta(
-                'description', $this->_View->get('metaDescription'), ['block' => 'meta']
+                'description', $this->getView()->get('metaDescription'), ['block' => 'meta']
             );
         }
     }
@@ -329,13 +329,13 @@ Rendering A View Element Inside Your Helper
 -------------------------------------------
 
 If you would like to render an Element inside your Helper you can use
-``$this->_View->element()`` like::
+``$this->getView()->element()`` like::
 
     class AwesomeHelper extends Helper
     {
         public function someFunction()
         {
-            return $this->_View->element(
+            return $this->getView()->element(
                 '/path/to/element',
                 ['foo'=>'bar','bar'=>'foo']
             );
