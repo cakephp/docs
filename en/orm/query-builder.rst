@@ -327,8 +327,8 @@ You can access existing wrappers for several SQL functions through ``Query::func
 ``dayOfWeek()``
     Returns a FunctionExpression representing a call to SQL WEEKDAY function.
 
-Window Functions
-----------------
+Window-Only Functions
+^^^^^^^^^^^^^^^^^^^^^
 
 These window-only functions contain a window expression by default:
 
