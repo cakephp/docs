@@ -14,9 +14,8 @@ CakePHP プラグインは、ホストアプリケーション自身とは基本
 アプリケーションの設定によって定義・共有される、アプリケーション固有のプロパティー
 （データベース接続パラメーターなど）を共有します。
 
-CakePHP 3.0 では、それぞれのプラグインごとに最上位の名前空間 (例えば ``DebugKit`` と
-いったように) を定義します。規約により、プラグインはそのパッケージ名が名前空間の名前と
-なります。
+プラグインは最上位の名前空間を定義しなければなりません。例えば ``DebugKit`` などです。
+規約により、プラグインはそのパッケージ名が名前空間の名前となります。
 もし別の名前空間名を使いたいなら、プラグインをロードする時に設定することが可能です。
 
 Composer を使ったプラグインのインストール
@@ -87,18 +86,6 @@ Composer を使ったプラグインのインストール
 
     php composer.phar dumpautoload
 
-もしあなたが何らかの理由で Composer を使う事ができないのなら、 ``Plugin`` を使って
-自動読み込みを行うこともできます。 ::
-
-    Plugin::load('ContactManager', ['autoload' => true]);
-
-
-.. deprecated:: 3.7.0
-    Plugin::load() と ``autoload`` オプションは非推奨です。
-
-.. note::
-    重要: ``autoload`` オプションは ``addPlugin()`` では使用できません。代わりに ``composer dumpautoload`` を使用してください。
-
 プラグインの読み込み
 ====================
 
@@ -106,7 +93,7 @@ Composer を使ったプラグインのインストール
 プラグインを読み込む必要があります。プラグインは、アプリケーションの ``bootstrap()`` 関数の中で
 読み込まれます。 ::
 
-    // src/Application.php の中。3.6.0 以上が必要。
+    // src/Application.php の中。
     use Cake\Http\BaseApplication;
     use ContactManager\Plugin as ContactManagerPlugin;
 
@@ -119,21 +106,14 @@ Composer を使ったプラグインのインストール
 
             // '短縮名' でベンダーの名前空間付きプラグインを読み込み
             $this->addPlugin('AcmeCorp/ContactManager');
+
+            // 本番環境には存在しない、開発環境の依存関係をロード
+            $this->addOptionalPlugin('AcmeCorp/ContactManager');
         }
     }
 
 単にプラグインのヘルパー、ビヘイビアー、またはコンポーネントが欲しいだけの場合、
 プラグインを読み込む必要はありません。
-
-3.6.0 より前の場合、 ``Plugin::load()`` を使ってください。 ::
-
-    // config/bootstrap.php の中で
-
-    // 特定のプラグインを読み込みます。
-    Plugin::load('ContactManager');
-
-    // ベンダーの名前空間の特定のプラグインを読み込みます。
-    Plugin::load('AcmeCorp/ContactManager');
 
 また、プラグインを有効にする便利なシェルコマンドがあります。次の行を実行してください。
 
@@ -144,9 +124,8 @@ Composer を使ったプラグインのインストール
 これは、アプリケーションの bootstrap メソッドを更新、
 または ``$this->addPlugin('ContactManager');`` を bootstrap に書き込みます。
 
-
-.. versionadded:: 3.6.0
-    ``addPlugin()`` が追加されました。
+.. versionadded:: 4.1.0
+    ``addOptionalPlugin()`` が追加されました。
 
 .. _plugin-configuration:
 
@@ -203,69 +182,6 @@ Plugin オブジェクトは、名前とパス情報も知っています。 ::
     $path = $plugin->getConfigPath();
     $path = $plugin->getClassPath();
 
-古いスタイルのプラグイン
-------------------------
-
-3.6.0 より前は、 ``bootstrap`` と ``routs`` フックを有効にする必要があります。
-古いスタイルのプラグインは、 ``middleware`` と ``console`` フックはサポートしません。 ::
-
-    // config/bootstrap.php の中、
-    // または Application::bootstrap() の中で
-
-    // loadAll() を使用
-    Plugin::loadAll([
-        'Blog' => ['routes' => true],
-        'ContactManager' => ['bootstrap' => true],
-        'WebmasterTools' => ['bootstrap' => true, 'routes' => true],
-    ]);
-
-また、プラグインを個別に読み込むことができます。 ::
-
-    // blog を読み込み、routes をインクルード
-    Plugin::load('Blog', ['routes' => true]);
-
-    // 設定と初期化を行う bootstrap をインクルード
-    Plugin::load('ContactManager', ['bootstrap' => true]);
-
-この設定スタイルは、プラグインの設定やルートを手動で ``include()`` や
-``require()`` する必要がなく、自動で正しい時間と正しい場所で読み込まれます。
-
-特定の設定を持たない全てのプラグインを読み込むデフォルトの ``loadAll()`` を設定できます。
-
-次の例は、全てのプラグインの bootstrap を読み込み、
-それに加えて Blog プラグインの routes を読み込みます。 ::
-
-    Plugin::loadAll([
-        ['bootstrap' => true],
-        'Blog' => ['routes' => true]
-    ]);
-
-プラグインで指定された全てのファイルが実際に存在しないと、PHP が読み込めないファイルごとに
-警告を出します。この潜在的な警告は、 ``ignoreMissing`` オプションを使用して避けることができます。 ::
-
-    Plugin::loadAll([
-        ['ignoreMissing' => true, 'bootstrap' => true],
-        'Blog' => ['routes' => true]
-    ]);
-
-プラグインを読み込むとき、プラグイン名は名前空間名と一致すべきです。
-例えば、最上位の名前空間が ``Users`` のプラグインがあるなら、このように読み込みます。 ::
-
-    Plugin::load('User');
-
-もしあなたが ``AcmeCorp/Users`` といったように、ベンダー名を最上位の名前空間名に
-したいのなら、このようにプラグインを読み込みます。 ::
-
-    Plugin::load('AcmeCorp/Users');
-
-クラス名は :term:`プラグイン記法` を使うことで、適切に解決されるでしょう。
-
-ほとんどのプラグインで、設定するための正確な手続きとデータベースのセットアップするための方法が、
-ドキュメントに書かれています。他よりセットアップが必要なものもあります。
-
-.. deprecated:: 3.7.0
-    Plugin::load() と Plugin::loadAll() は非推奨です。
-
 プラグインの利用
 ================
 
@@ -273,10 +189,10 @@ Plugin オブジェクトは、名前とパス情報も知っています。 ::
 モデル、コンポーネント、ビヘイビアーとヘルパーを参照できます。
 
 例えば、あなたの画面で整形された連絡先情報を表示するために、 ContactManager プラグインの
-ContactInfoHelper を使いたいとしましょう。この場合、あなたのコントローラーの
-``$helpers`` 配列にこのように記述します。 ::
+ContactInfoHelper を使いたいとしましょう。
+コントローラーの ``addHelper()`` を使うと、次のようになります。 ::
 
-    public $helpers = ['ContactManager.ContactInfo'];
+    $this->viewBuilder()->addHelper('ContactManager.ContactInfo');
 
 .. note::
     このドット区切りのクラス名は、 :term:`プラグイン記法` と呼ばれます。
@@ -285,6 +201,15 @@ ContactInfoHelper を使いたいとしましょう。この場合、あなた�
 アクセスできるようになります。 ::
 
     echo $this->ContactInfo->address($contact);
+
+プラグインは、アプリケーションが提供するモデル、コンポーネント、ビヘイビア、ヘルパー、
+または必要に応じて他のプラグインを使用することができます。 ::
+
+   // アプリケーションコンポーネントを使用する
+   $this->loadComponent('AppFlash');
+
+   // 他のプラグインのビヘイビアを使用する
+   $this->addBehavior('OtherPlugin.AuditLog');
 
 .. _plugin-create-your-own:
 
@@ -309,8 +234,8 @@ ContactInfoHelper を使いたいとしましょう。この場合、あなた�
                     /Behavior
                 /View
                     /Helper
-                /Template
-                    /Layout
+            /templates
+                /layout
             /tests
                 /TestCase
                 /Fixture
@@ -321,7 +246,7 @@ ContactInfoHelper を使いたいとしましょう。この場合、あなた�
 
 プラグインフォルダーの中は CakePHP アプリケーションと同じような構成であることに気づく
 思いますが、それが基本的な構成です。使わないフォルダーは作る必要はありません。
-コンポーネントとビヘイビアーだけで定義されるプラグインもあれば、 'Template' ディレクトリーが
+コンポーネントとビヘイビアーだけで定義されるプラグインもあれば、 'templates' ディレクトリーが
 完全に省略されるプラグインもあります。
 
 プラグインは、アプリケーションが持つ Config, Console, webroot 等といったディレクトリーも
@@ -360,7 +285,7 @@ Plugin オブジェクト
 Plugin オブジェクトを使用すると、プラグイン作成者は設定ロジックを定義し、
 デフォルトのフックを定義し、ルート、ミドルウェア、およびコンソールコマンドをロードできます。
 Plugin オブジェクトは、 **src/Plugin.php** にあります。
-ContactManager プラグイン の場合、 Plugin クラスは、次のようになります。 ::
+ContactManager プラグイン の場合、 plugin クラスは、次のようになります。 ::
 
     namespace ContactManager;
 
@@ -372,12 +297,16 @@ ContactManager プラグイン の場合、 Plugin クラスは、次のよう�
         public function middleware($middleware)
         {
             // ここにミドルウェアを追加。
+            $middleware = parent::middleware($middleware);
+
             return $middleware;
         }
 
         public function console($commands)
         {
             // ここにコンソールコマンドを追加。
+            $commands = parent::console($commands);
+
             return $commands;
         }
 
@@ -395,9 +324,6 @@ ContactManager プラグイン の場合、 Plugin クラスは、次のよう�
             parent::routes($routes);
         }
     }
-
-.. versionadded:: 3.6.0
-    Plugin オブジェクトは 3.6.0 で追加されました。
 
 .. _plugin-routes:
 
@@ -419,8 +345,8 @@ ContactManager プラグイン の場合、 Plugin クラスは、次のよう�
         ['path' => '/contact-manager'],
         function ($routes) {
             $routes->get('/contacts', ['controller' => 'Contacts']);
-            $routes->get('/contacts/:id', ['controller' => 'Contacts', 'action' => 'view']);
-            $routes->put('/contacts/:id', ['controller' => 'Contacts', 'action' => 'update']);
+            $routes->get('/contacts/{id}', ['controller' => 'Contacts', 'action' => 'view']);
+            $routes->put('/contacts/{id}', ['controller' => 'Contacts', 'action' => 'update']);
         }
     );
 
@@ -444,9 +370,6 @@ ContactManager プラグイン の場合、 Plugin クラスは、次のよう�
     });
 
 上記の結果は、 ``/backend/contact-manager/contacts`` のような URL になります。
-
-.. versionadded:: 3.5.0
-    ``RouteBuilder::loadPlugin()`` は 3.5.0 で追加されました。
 
 プラグインのコントローラー
 ==========================
@@ -501,8 +424,8 @@ Contact モデルが定義されていないためです。
 もしあなたのアプリケーションでルーティングプレフィックスを定義しているなら、
 CakePHP のデフォルトルーティングは下記の書式でルーティングします。 ::
 
-    /:prefix/:plugin/:controller
-    /:prefix/:plugin/:controller/:action
+    /{prefix}/{plugin}/{controller}
+    /{prefix}/{plugin}/{controller}/{action}
 
 特定ファイルにルーティングするようなプラグインの読み込み方法については、
 :ref:`plugin-configuration` のセクションをご覧ください。
@@ -564,7 +487,7 @@ bake で作っていないプラグインなら、クラスを自動的に読み
 
     class ContactsTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->hasMany('AltName', [
                 'className' => 'ContactManager.AltName',
@@ -573,12 +496,11 @@ bake で作っていないプラグインなら、クラスを自動的に読み
     }
 
 おなじみの :term:`プラグイン記法` を使う事で、プラグインのテーブルを
-読み込むために ``TableRegistry`` を使用することができます。 ::
+読み込むために ``Cake\ORM\TableLocator`` を使用することができます。 ::
 
-    use Cake\ORM\TableRegistry;
+    use Cake\ORM\Locator\LocatorAwareTrait;
 
-    // Prior to 3.6 use TableRegistry::get('ContactManager.Contacts')
-    $contacts = TableRegistry::getTableLocator()->get('ContactManager.Contacts');
+    $contacts = $this->getTableLocator()->get('ContactManager.Contacts');
 
 あるいは、コントローラーの処理の中で以下のように使用できます。 ::
 
@@ -602,7 +524,7 @@ bake で作っていないプラグインなら、クラスを自動的に読み
 ``plugins/[PluginName]/templates/layout`` に配置します。
 プラグインレイアウトをコントローラーで使用するには、下記のようにします。 ::
 
-    public $layout = 'ContactManager.admin';
+    $this->viewBuilder()->setLayout('ContactManager.admin');
 
 プラグインのプレフィックスを省略した場合は、レイアウトやビューファイルは通常のものを使用します。
 
@@ -635,10 +557,10 @@ Custom コントローラーの 'index' ビューへのパスは、次の通り�
 
 プラグインがルーティングプレフィックスを実装する場合、上書きする
 アプリケーションテンプレートのパスにルーティングプレフィックスが含まなければなりません。
-例えば、 'ContactManager' プラグインが 'admin' プレフィックスを実装する場合、
+例えば、 'ContactManager' プラグインが 'Admin' プレフィックスを実装する場合、
 上書きするパスは、次の通りです。 ::
 
-    templates/plugin/Company/ContactManager/Admin/Contact/index.php
+    templates/plugin/ContactManager/Admin/ContactManager/index.php
 
 .. _plugin-assets:
 
@@ -711,7 +633,7 @@ Custom コントローラーの 'index' ビューへのパスは、次の通り�
     }
 
     // コントローラーの中で
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
         $this->loadComponent('ContactManager.Example');
@@ -774,13 +696,14 @@ CakePHP 名前空間 (cakephp) を **使用しない** でください。
 プラグイン マップ ファイル
 ==========================
 
-Composer 経由でインストールすると、 ``vendor/cakephp-plugins.php`` というファイルが
+Composer 経由でインストールすると、 **vendor/cakephp-plugins.php** というファイルが
 作られることに気付くかもしれません。この設定ファイルにはプラグイン名とファイルシステム上の
 配置場所の情報が含まれています。これによって、プラグインを通常の検索パスの外の、標準の
-vendor ディレクトリーにインストールすることが可能になります。 ``Plugin`` クラスは
-``load()`` や ``loadAll()`` でプラグインをロードする時に、このファイルを使って
-場所を特定します。通常あなたはこのファイルを手動で編集する必要はなく、 Composer や
-``plugin-installer`` パッケージが管理してくれます。
+vendor ディレクトリーにインストールすることが可能になります。
+通常の検索パスのプラグインクラスは、このファイルを使ってプラグインが
+``addPlugin()`` で読み込まれたときに、そのプラグインが読み込まれるようになります。
+通常あなたはこのファイルを手動で編集する必要はなく、
+Composer や ``plugin-installer`` パッケージが管理してくれます。
 
 
 Mixer を使用したプラグインの管理
