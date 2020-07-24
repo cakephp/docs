@@ -183,7 +183,7 @@ creating classes and files that you'd need to create anyway.
 | Table      | ArticlesTable.php           | ArticleCategoriesTable.php      | Table class names are plural,                        |
 |            |                             |                                 | CamelCased and end in Table                          |
 +------------+-----------------------------+---------------------------------+------------------------------------------------------+
-| Entity     | Article.php                 | ArticleCategories.php           | Entity class names are singular,                     |
+| Entity     | Article.php                 | ArticleCategory.php             | Entity class names are singular,                     |
 |            |                             |                                 | CamelCased: Article and ArticleCategory              |
 +------------+-----------------------------+---------------------------------+------------------------------------------------------+
 | Class      | ArticlesController          | ArticleCategoriesController     |                                                      |
