@@ -27,6 +27,7 @@ New Features
 ORM
 ---
 
-- ``Query::subquery()`` was added. This method lets you create query objects
-  that don't have automatic aliasing. This helps reduce overhead and complexity
-  of building subqueries and common table expressions.
+- ``Table::subquery()`` and  ``Query::subquery()`` were added. These methods
+  lets you create query objects that don't have automatic aliasing. This helps
+  reduce overhead and complexity of building subqueries and common table
+  expressions.

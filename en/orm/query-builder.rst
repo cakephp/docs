@@ -1498,12 +1498,12 @@ Subqueries are accepted anywhere a query expression can be used. For example, in
 the ``select()`` and ``join()`` methods. The above example uses a standard
 ``Orm\Query`` object that will generate aliases, these aliases can make
 referencing results in the outer query more complex. As of 4.2.0 you can use
-``Query::subquery()`` to create a specialized query instance that will not
+``Table::subquery()`` to create a specialized query instance that will not
 generate aliases::
 
     $comments = $articles->getAssociation('Comments')->getTarget();
 
-    $matchingComment = Query::subquery($comments)
+    $matchingComment = $comments->subquery()
         ->select(['article_id'])
         ->distinct()
         ->where(['comment LIKE' => '%CakePHP%']);
@@ -1512,7 +1512,7 @@ generate aliases::
         ->where(['id IN' => $matchingComment]);
 
 .. versionadded:: 4.2.0
-    Query::subquery() was added.
+    ``Table::subquery()`` and ``Query::subquery()`` were added.
 
 Adding Locking Statements
 -------------------------
