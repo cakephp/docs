@@ -47,8 +47,10 @@ CakePHP provides several middleware to handle common tasks in web applications:
 * ``Cake\Http\Middleware\EncryptedCookieMiddleware`` gives you the ability to
   manipulate encrypted cookies in case you need to manipulate cookie with
   obfuscated data.
-* ``Cake\Http\Middleware\CsrfProtectionMiddleware`` adds CSRF protection to your
-  application.
+* ``Cake\Http\Middleware\CsrfProtectionMiddleware`` adds double-submit cookie
+  based CSRF protection to your application.
+* ``Cake\Http\Middleware\SessionCsrfProtectionMiddleware`` adds session based
+  CSRF protection to your application.
 * ``Cake\Http\Middleware\BodyParserMiddleware`` allows you to decode JSON, XML
   and other encoded request bodies based on ``Content-Type`` header.
 * ``Cake\Http\Middleware\CspMiddleware`` makes it simpler to add
@@ -327,7 +329,8 @@ backwards compatible with ``CookieComponent`` from earlier versions of CakePHP.
 Cross Site Request Forgery (CSRF) Middleware
 ============================================
 
-CSRF protection can be applied to your entire application, or to specific routing scopes.
+CSRF protection can be applied to your entire application, or to specific
+routing scopes.
 
 .. note::
 
@@ -335,11 +338,26 @@ CSRF protection can be applied to your entire application, or to specific routin
     only one.  If you use both approaches together, a CSRF token mismatch error
     will occur on every `PUT` and `POST` request
 
-By applying the ``CsrfProtectionMiddleware`` to your Application middleware
+CakePHP offers two forms of CSRF protection:
+
+* ``SessionCsrfProtectionMiddleware`` stores CSRF tokens in the session. This
+  requires that your application opens the session on every request with
+  side-effects. The benefits of session based CSRF tokens is that they are
+  scoped to a specific user, and only valid for the duration a session is live.
+* ``CsrfProtectionMiddleware`` stores CSRF tokens in a cookie. Using a cookie
+  allows CSRF checks to be done without any state on the server. Cookie values
+  are verified for authenticity using an HMAC check. However, due to their
+  stateless nature, CSRF tokens are re-usable across users and sessions.
+
+By applying a CSRF middleware to your Application middleware
 stack you protect all the actions in application::
 
     // in src/Application.php
+    // For Cookie based CSRF tokens.
     use Cake\Http\Middleware\CsrfProtectionMiddleware;
+
+    // For Session based CSRF tokens.
+    use Cake\Http\Middleware\SessionCsrfProtectionMiddleware;
 
     public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue
     {
@@ -347,13 +365,15 @@ stack you protect all the actions in application::
             // ...
         ];
         $csrf = new CsrfProtectionMiddleware($options);
+        // or
+        $csrf = new SessionCsrfProtectionMiddleware($options);
 
         $middlewareQueue->add($csrf);
         return $middlewareQueue;
     }
 
-By applying the ``CsrfProtectionMiddleware`` to routing scopes, you can include
-or exclude specific route groups::
+By applying CSRF protection to routing scopes, you can conditionally
+apply CSRF to specific groups of routes::
 
     // in src/Application.php
     use Cake\Http\Middleware\CsrfProtectionMiddleware;
@@ -373,7 +393,9 @@ or exclude specific route groups::
     });
 
 
-Options can be passed into the middleware's constructor.
+Cookie based CSRF middleware options
+------------------------------------
+
 The available configuration options are:
 
 - ``cookieName`` The name of the cookie to send. Defaults to ``csrfToken``.
@@ -386,12 +408,26 @@ The available configuration options are:
 - ``field`` The form field to check. Defaults to ``_csrfToken``. Changing this
   will also require configuring FormHelper.
 
+Session based CSRF middleware options
+-------------------------------------
+
+The available configuration options are:
+
+- ``key`` The session key to use. Defaults to `csrfToken`
+- ``field`` The form field to check. Changing this will also require configuring
+  FormHelper.
+
+
 When enabled, you can access the current CSRF token on the request object::
 
     $token = $this->request->getAttribute('csrfToken');
 
-You can use the skip check callback feature for more fine grained control over
-URLs for which CSRF token check should be done::
+Skipping CSRF checks for specific actions
+-----------------------------------------
+
+Both CSRF middleware implementations allow you to the skip check callback
+feature for more fine grained control over URLs for which CSRF token check
+should be done::
 
     // in src/Application.php
     use Cake\Http\Middleware\CsrfProtectionMiddleware;
@@ -416,9 +452,10 @@ URLs for which CSRF token check should be done::
 
 .. note::
 
-    You should apply the CSRF protection middleware only for URLs which handle stateful
-    requests using cookies/session. Stateless requests, for e.g. when developing an API,
-    are not affected by CSRF so the middleware does not need to be applied for those URLs.
+    You should apply the CSRF protection middleware only for URLs which handle
+    stateful requests using cookies/sessions. Stateless requests, for e.g. when
+    developing an API, are not affected by CSRF so the middleware does not need
+    to be applied for those URLs.
 
 Integration with FormHelper
 ---------------------------
