@@ -452,10 +452,9 @@ should be done::
 
 .. note::
 
-    You should apply the CSRF protection middleware only for URLs which handle
-    stateful requests using cookies/sessions. Stateless requests, for e.g. when
-    developing an API, are not affected by CSRF so the middleware does not need
-    to be applied for those URLs.
+    You should apply the CSRF protection middleware only for routes which handle
+    stateful requests using cookies/sessions. For example, when developing an API, stateless requests are not 
+    affected by CSRF so the middleware does not need to be applied for those routes.
 
 Integration with FormHelper
 ---------------------------
