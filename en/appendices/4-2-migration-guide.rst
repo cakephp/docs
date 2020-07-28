@@ -24,6 +24,15 @@ change the semantics or behavior of methods.
 New Features
 ============
 
+Http
+----
+
+- ``Http\Middleware\SessionCsrfProtectionMiddleware`` was added. Instead of
+  storing CSRF tokens in a cookie, this middleware stores tokens in the session.
+  This makes CSRF tokens user scoped and time based with the session, offering
+  enhanced security over cookie based CSRF tokens. This middleware is a drop in
+  replacement for the ``CsrfProtectionMiddleware``. 
+
 ORM
 ---
 
