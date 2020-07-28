@@ -24,6 +24,14 @@ change the semantics or behavior of methods.
 New Features
 ============
 
+Database
+----
+
+- ``SqlServer`` now creates client-side buffered cursors for prepared statements by default.
+  The maximum buffer size can be configured in ``php.ini`` with ``pdo_sqlsrv.client_buffer_max_kb_size``.
+  See https://docs.microsoft.com/en-us/sql/connect/php/cursor-types-pdo-sqlsrv-driver?view=sql-server-ver15#pdo_sqlsrv-and-client-side-cursors
+  for more information.
+
 Http
 ----
 
