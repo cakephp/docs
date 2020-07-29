@@ -29,7 +29,7 @@ Database
 
 - ``SqlServer`` now creates client-side buffered cursors for prepared statements by default.
 
-  .. warning:
+  .. warning::
       For users with large query results, this may cause an error allocating the client-side buffer unless
       ``Query::disableBufferedResults()`` is called.
       The maximum buffer size can be configured in ``php.ini`` with ``pdo_sqlsrv.client_buffer_max_kb_size``.
