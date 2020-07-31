@@ -43,7 +43,7 @@ Once loaded we can paginate an ORM table class or ``Query`` object::
 
         // Paginate a partially completed query
         $query = $this->Articles->find('published');
-        $this->('articles', $this->paginate($query));
+        $this->set('articles', $this->paginate($query));
     }
 
 Advanced Usage
