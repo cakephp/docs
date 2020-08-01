@@ -33,6 +33,10 @@ utilize one. CakePHP supports a variety of database storage engines:
 -  Microsoft SQL Server (2012 or higher)
 -  SQLite 3
 
+The Oracle database is supported through the
+`Driver for Oracle Database <https://github.com/CakeDC/cakephp-oracle-driver>`_
+community plugin.
+
 .. note::
 
     All built-in drivers require PDO. You should make sure you have the correct
@@ -536,14 +540,14 @@ the following configuration relies on ``webroot/index.php``, also serving other
            }
        }
    }
-   
+
 To enable this config (assuming it's saved as ``cakephp.json``):
 
 .. code-block:: console
 
    # curl -X PUT --data-binary @cakephp.json --unix-socket \
           /path/to/control.unit.sock http://localhost/config
-       
+
 IIS7 (Windows hosts)
 --------------------
 
