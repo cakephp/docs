@@ -1173,8 +1173,8 @@ options for this method are:
 * ``defaults`` Set to ``false`` to not set ``$search`` properties into the
   created entity.
 
-Saving with existing primary key
-================================
+Creating with existing primary key
+==================================
 
 Especially around non-integer primary keys (aka ``UUID``) one sometimes needs to provide an existing
 key and does not want one to be created for them.
