@@ -1173,6 +1173,20 @@ options for this method are:
 * ``defaults`` Set to ``false`` to not set ``$search`` properties into the
   created entity.
 
+Saving with existing primary key
+================================
+
+Especially around non-integer primary keys (aka ``UUID``) one sometimes needs to provide an existing
+key and does not want one to be created for them.
+
+In this case make sure you are not passing the ID as part of the marshalled data, as it should never
+be part of that. Instead, manually assign the primary key here and then patch in the rest::
+
+    $record = $table->newEmptyEntity();
+    $record->id = $existingUuid;
+    $record = $table->patchEntity($record, $existingData);
+    $table->saveOrFail($record);
+
 Saving Multiple Entities
 ========================
 
