@@ -46,7 +46,7 @@ Http
   storing CSRF tokens in a cookie, this middleware stores tokens in the session.
   This makes CSRF tokens user scoped and time based with the session, offering
   enhanced security over cookie based CSRF tokens. This middleware is a drop in
-  replacement for the ``CsrfProtectionMiddleware``. 
+  replacement for the ``CsrfProtectionMiddleware``.
 
 ORM
 ---
@@ -55,3 +55,13 @@ ORM
   lets you create query objects that don't have automatic aliasing. This helps
   reduce overhead and complexity of building subqueries and common table
   expressions.
+
+Breaking Changes
+================
+
+Behind the API, some breaking changes are necessary moving forward.
+They usually only affect tests.
+
+- The fixture names around UUIDs have been consolidated (``UuidItemsFixture``, ``BinaryUuidItemsFixture``).
+  If you use any of them, make sure you updated these names.
+  The ``UuidportfoliosFixture`` was unused in core and removed now.
