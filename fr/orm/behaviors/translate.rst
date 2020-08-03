@@ -494,7 +494,3 @@ créés/mis à jours par le behavior pendant ``newEntity()`` ou ``patchEntity()`
 
 Ce qui est au-dessus va utiliser le validateur créé par les entities traduites
 validées ``validationTranslated``.
-
-.. versionadded:: 3.3.0
-    La validation des entities traduites et l'amélioration de la sauvegarde des
-    traductions ont été ajoutées dans la version 3.3.0

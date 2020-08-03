@@ -21,11 +21,6 @@ hidden フィールドに CSRF トークンが追加されます。 ``Controller
     <check-the-request>` または :php:meth:`Cake\\Http\\ServerRequest::allowMethod()`
     を使用してください。
 
-.. versionadded:: 3.1
-
-    例外の型が :php:class:`Cake\\Network\\Exception\\ForbiddenException` から
-    :php:class:`Cake\\Network\\Exception\\InvalidCsrfTokenException` に変更されました。
-
 .. deprecated:: 3.5.0
     ``CsrfComponent`` の代わりに :ref:`csrf-middleware` を使用してください。
 

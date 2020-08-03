@@ -12,7 +12,7 @@ externos e o quanto essa classe depende desses objetos.
 Existem alguns casos onde você precisa se comunicar com outras partes da
 aplicação, sem existir dependências diretamente no código ("hardcoded"),
 diminuindo, assim, a coesão e aumentando o acoplamento. Usar o padrão Observer,
-que permite que objetos sejam notificados por outros objetos e ouvintes anônimos 
+que permite que objetos sejam notificados por outros objetos e ouvintes anônimos
 sobre mudanças. Observer é um padrão que ajuda a atingir esse objetivo.
 
 Ouvintes no padrão observer podem se inscrever para eventos e escolher se deve
@@ -144,9 +144,6 @@ eventos::
 O rastreamento de eventos pode ser desabilitado ao remover a lista de eventos ou
 chamando :php:meth:`Cake\\Event\\EventList::trackEvents(false)`.
 
-.. versionadded:: 3.2.11
-    Rastreamento de eventos e :php:class:`Cake\\Event\\EventList` foram adicionados.
-
 Eventos do Core
 ===============
 
@@ -262,7 +259,7 @@ Você pode usar esse mesmo método para ligar a objetos Listener.
 Interagindo com Listeners Existentes
 ------------------------------------
 
-Supondo que vários ouvintes de eventos tenham sido registrados, a presença ou ausência de um padrão de 
+Supondo que vários ouvintes de eventos tenham sido registrados, a presença ou ausência de um padrão de
 evento específico pode ser usada como base de alguma ação::
 
     // Anexa Listeners ao EventManager.
@@ -282,10 +279,6 @@ evento específico pode ser usada como base de alguma ação::
 
 .. note::
     O padrão passado para o método ``matchingListeners`` é case sensitive.
-
-.. versionadded:: 3.2.3
-    O método ``matchingListeners`` retorna um array de eventos que batem com o padrão
-     de pesquisa.
 
 .. _event-priorities:
 
@@ -351,8 +344,8 @@ Os ouvintes do callback ``View.afterRender`` devem ter a seguinte assinatura::
 
     function (Event $event, $viewFileName)
 
-Cada valor fornecido ao construtor Event será convertido em parâmetros de função na 
-ordem em que aparecem na matriz de dados. Se você usar uma matriz associativa, o 
+Cada valor fornecido ao construtor Event será convertido em parâmetros de função na
+ordem em que aparecem na matriz de dados. Se você usar uma matriz associativa, o
 resultado ``array_values`` determinará a ordem dos argumentos da função.
 
 .. note::
@@ -381,10 +374,10 @@ deve ser de fácil entendimento . Nós sugerimos a seguinte convenção:
 eventos que acontecen em uma classe especifica em uma camada, exemplo
 ``Model.User.afterRegister`` ou ``Controller.Courses.invalidAccess``.
 
-O segundo argumento é o ``subject``, ou seja, o objeto associado ao evento, geralmente 
-quando é a mesma classe que desencadeia eventos sobre si mesmo, o uso de ``$this`` será o 
-caso mais comum. Embora um componente também possa disparar eventos do controlador. 
-A classe de assunto é importante porque os ouvintes terão acesso imediato às propriedades 
+O segundo argumento é o ``subject``, ou seja, o objeto associado ao evento, geralmente
+quando é a mesma classe que desencadeia eventos sobre si mesmo, o uso de ``$this`` será o
+caso mais comum. Embora um componente também possa disparar eventos do controlador.
+A classe de assunto é importante porque os ouvintes terão acesso imediato às propriedades
 do objeto e terão a chance de inspecioná-las ou alterá-las rapidamente.
 
 Finalmente o terceiro argumento é qualquer dado adicional que você deseja enviar ao
@@ -422,7 +415,7 @@ chamar o método ``stopPropagation()`` no objeto do evento::
 
 Parar um evento vai previnir que qualquer callback adicional seja chamado.
 Além disso o código que disparou o evento pode se comportar de maneira diferente
-baseado no evento sendo parado ou não. Geralmente não faz sentido parar 'depois' do evento, 
+baseado no evento sendo parado ou não. Geralmente não faz sentido parar 'depois' do evento,
 mas parar 'antes' do evento costuma ser usado para impedir toda a operação de acontecer.
 
 Para verificar se um evento foi parado você pode chamar o metodo ``isStopped()`` no
@@ -483,10 +476,10 @@ diretamente ou retornando o valor no próprio callback::
         // ...
     }
 
-É possível alterar qualquer propriedade do objeto de evento e passar os novos 
-dados para o próximo retorno de chamada. Na maioria dos casos, fornecer objetos 
-como dados ou resultado de eventos e alterar diretamente o objeto é a melhor 
-solução, pois a referência é mantida a mesma e as modificações são compartilhadas 
+É possível alterar qualquer propriedade do objeto de evento e passar os novos
+dados para o próximo retorno de chamada. Na maioria dos casos, fornecer objetos
+como dados ou resultado de eventos e alterar diretamente o objeto é a melhor
+solução, pois a referência é mantida a mesma e as modificações são compartilhadas
 em todas as chamadas de retorno de chamada.
 
 Removento Callbacks e Ouvintes
@@ -523,7 +516,7 @@ Eventos são uma ótima maneira de separar responsabilidades na sua aplicação 
 com que classes sejam coesas e desacopladas. Eventos podem ser utilizados para
 desacoplar o código de uma aplicação e fazer extensão via plugins.
 
-Lembre-se de que com grande poder vem uma grande responsabilidade. Usar muitos 
+Lembre-se de que com grande poder vem uma grande responsabilidade. Usar muitos
 eventos pode dificultar a depuração e exigir testes adicionais de integração.
 
 Leitura Adicional

@@ -271,10 +271,6 @@ unique à implémenter::
 ``TranslateBehavior`` a une implémentation non banal de cette interface que vous
 pouvez aller consulter.
 
-.. versionadded:: 3.3.0
-    La possibilité pour les behaviors de participer au marshalling a été ajoutée
-    dans la version 3.3.0
-
 Retirer les Behaviors Chargés
 =============================
 

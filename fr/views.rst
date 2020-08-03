@@ -317,9 +317,6 @@ utilisée.::
     // Assigner une chaine vide aura le même effet.
     $this->assign('sidebar', '');
 
-.. versionadded:: 3.2
-    View::reset() a été ajoutée dans 3.2
-
 Assigner le contenu d'un block est souvent utile lorsque vous voulez convertir
 une variable de vue en un block. Par exemple, vous pourriez vouloir utiliser
 un block pour le titre de la page et parfois le définir depuis le controller::
@@ -701,8 +698,6 @@ Pour les elements dans le sous-dossier d'un plugin
 
 Préfix de Routing et Elements
 -----------------------------
-
-.. versionadded:: 3.0.1
 
 Si vous avez configuré un préfix de routage, la résolution des chemins d'accès
 aux Elements peut chercher dans un chemin préfixé, comme les Layouts et les vues

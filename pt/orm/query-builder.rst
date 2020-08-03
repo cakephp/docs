@@ -270,17 +270,15 @@ Defina o segundo parâmetro de ``order()`` (assim como ``orderAsc()`` ou
     $query = $articles->find()
         ->order(['created' => 'DESC'], Query::OVERWRITE);
 
-.. versionadded:: 3.0.12
+Além de ``order``, os métodos ``orderAsc`` e `` orderDesc`` podem ser usados quando
+você precisa organizar expressões complexas::
 
-    Além de ``order``, os métodos ``orderAsc`` e `` orderDesc`` podem ser usados quando
-    você precisa organizar expressões complexas::
-
-        $query = $articles->find();
-        $concat = $query->func()->concat([
-            'title' => 'identifier',
-            'synopsis' => 'identifier'
-        ]);
-        $query->orderAsc($concat);
+    $query = $articles->find();
+    $concat = $query->func()->concat([
+        'title' => 'identifier',
+        'synopsis' => 'identifier'
+    ]);
+    $query->orderAsc($concat);
 
 Para limitar o número de linhas ou definir o deslocamento da linha, você
 pode usar os métodos ``limit()`` e ``page()``::
@@ -314,9 +312,6 @@ para esse propósito::
         ->select(['slug' => $query->func()->concat(['title' => 'identifier', '-', 'id' => 'identifier'])])
         ->select($articlesTable); // Select all fields from articles
 
-.. versionadded:: 3.1
-    Passar um objeto de tabela para select() foi adicionado em 3.1.
-
 Se você desejar selecionar todos os campos, exceto alguns, em uma tabela, pode usar ``selectAllExcept()``::
 
     $query = $articlesTable->find();
@@ -325,9 +320,6 @@ Se você desejar selecionar todos os campos, exceto alguns, em uma tabela, pode 
     $query->selectAllExcept($articlesTable, ['published']);
 
 Você também pode passar um objeto ``Association`` ao trabalhar com associações embutidas.
-
-.. versionadded:: 3.6.0
-    O método ``selectAllExcept()`` foi adicionado.
 
 .. _using-sql-functions:
 
@@ -373,14 +365,6 @@ Várias funções comumente usadas podem ser criadas com o método ``func()``:
     Adicione a unidade de tempo à expressão de data.
 ``dayOfWeek()``
     Retorna uma FunctionExpression representando uma chamada para a função SQL WEEKDAY.
-
-.. versionadded:: 3.1
-
-    Os métodos ``extract()``, ``dateAdd()`` e ``dayOfWeek()`` foram adicionados.
-
-.. versionadded:: 3.7
-
-    ``rand()`` foi adicionado.
 
 Argumentos de Função
 ^^^^^^^^^^^^^^^^^^^^
@@ -961,10 +945,6 @@ suas consultas, poderá usar o método ``identifier()``::
 
     Para evitar injeções de SQL, as expressões Identifier nunca devem
     ter dados não confiáveis passados para elas.
-
-.. versionadded:: 3.6.0
-
-    ``Query::identifier()`` foi adicionado em 3.6.0
 
 Criando Cláusulas IN Automaticamente
 ------------------------------------

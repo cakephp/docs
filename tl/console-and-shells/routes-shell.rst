@@ -1,9 +1,6 @@
 Routes Shell
 ############
 
-.. versionadded:: 3.1
-    The RoutesShell was added in 3.1
-
 The RoutesShell provides a simple to use CLI interface for testing and debugging
 routes. You can use it to test how routes are parsed, and what URLs routing
 parameters will generate.

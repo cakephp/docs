@@ -343,9 +343,6 @@ See the :ref:`inflection-configuration` docs for more information.
     // Принесёт:
     ['name' => 'Pizza, Inc.', 'slogan' => 'Pizza for your body and soul'];
 
-.. versionadded:: 3.1.7
-    ``Configure::readOrFail()`` был добавлен в 3.1.7
-
 Проверка наличия определенных данных конфигурации
 -------------------------------------------------
 

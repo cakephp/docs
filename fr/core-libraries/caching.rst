@@ -182,9 +182,6 @@ Si l'écriture dans la configuration ``default`` échouait *elle aussi*, le mote
 se replierait à nouveau sur un autre 'fallback', ici le ``NullEngine``, et
 empêcherait l'application de lancer une exception.
 
-.. versionadded:: 3.5.0
-    Les fallbacks pour moteur de cache ont été ajoutés.
-
 Suppression de Configuration de Cache
 -------------------------------------
 

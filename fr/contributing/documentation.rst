@@ -498,13 +498,13 @@ Exemples
 
     Cela pourrait être dangereux.
 
-.. versionadded:: 2.6.3
+.. versionadded:: 4.0.0
 
-    Cette super fonctionnalité a été ajoutée à partir de la version 2.6.3.
+    Cette super fonctionnalité a été ajoutée à partir de la version 4.0.0.
 
-.. deprecated:: 2.6.3
+.. deprecated:: 4.0.1
 
-    Cette vieille fonctionnalité a été dépréciée à partir de la version 2.6.3.
+    Cette vieille fonctionnalité a été dépréciée à partir de la version 4.0.1.
 
 .. meta::
     :title lang=fr: Documentation

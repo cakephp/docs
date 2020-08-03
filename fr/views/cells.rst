@@ -256,6 +256,3 @@ favoris d'un utilisateur::
 
 La cell ci-dessus va paginer le model ``Messages`` en utilisant les
 :ref:`paramètres de pagination 'scopés' <paginating-multiple-queries>`.
-
-.. versionadded:: 3.5.0
-    ``Cake\Datasource\Paginator`` a été ajoutée dans 3.5.0.

@@ -335,8 +335,6 @@ from inside your plugin's shell.
 Passing extra parameters to the dispatched Shell
 ------------------------------------------------
 
-.. versionadded:: 3.1
-
 It can sometimes be useful to pass on extra parameters (that are not shell arguments)
 to the dispatched Shell. In order to do this, you can now pass an array to
 ``dispatchShell()``. The array is expected to have a ``command`` key as well
@@ -573,10 +571,6 @@ process::
         $this->abort('User cannot be found', 128);
     }
 
-.. versionadded:: 3.2
-    The abort() method was added in 3.2. In prior versions you can use
-    ``error()`` to output a message and stop execution.
-
 Status and Error Codes
 ----------------------
 
@@ -791,9 +785,6 @@ This will change the usage output to ``my-shell`` instead of the default ``cake`
 
     Usage:
     my-shell console [-h] [-v] [-q]
-
-.. versionadded:: 3.5.0
-    The ``setHelpAlias`` method was added in 3.5.0
 
 Set the Epilog
 --------------
@@ -1245,9 +1236,6 @@ the commands that are exposed::
 
 In the above example, the only commands available would be ``help``, ``version``
 and ``user``.
-
-.. versionadded:: 3.5.0
-    The ``console`` hook was added.
 
 Routing in Shells / CLI
 =======================

@@ -178,8 +178,6 @@ Opcionalmente, puede ejercer un control más riguroso pasando una clausura como 
 Recobro con campo de clasificación personalizada
 ================================================
 
-.. versionadded:: 3.0.14
-
 Por defecto, recover() clasifica los elementos por llave primaria. Eso funciona muy bien si se trata de una columna numérica (con incremento automático), pero puede ocasionar resultados raros si usted utiliza los UUIDs.
 Si necesita una clasificación personalizada para la recuperación de datos, puede agregar una cláusula de orden en la configuración::
 

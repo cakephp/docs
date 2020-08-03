@@ -531,8 +531,6 @@ dossier de spam.
 Créer des emails réutilisables
 ==============================
 
-.. versionadded:: 3.1.0
-
 Les ``Mailers`` vous permettent de créer des emails réutilisables pour votre
 application. Ils peuvent aussi servir à contenir plusieurs configurations
 d'emails en un seul et même endroit. Cela vous permet de garder votre code

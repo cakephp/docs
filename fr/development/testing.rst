@@ -140,11 +140,6 @@ conventions. En ce qui concerne les tests:
    Vous pouvez aussi utiliser l'annotation ``@test`` pour marquer les méthodes
    en méthodes de test.
 
-.. versionadded:: 3.4.1
-    Le support de PHPUnit 6 a été ajouté. Si vous utilisez une version de PHPUnit
-    inférieure à 5.7.0, vos classes de tests devront soit *extends* les classes
-    de CakePHP, soit ``PHPUnit_Framework_TestCase``.
-
 Créer Votre Premier Cas de Test
 ===============================
 
@@ -616,8 +611,6 @@ Si vous voulez utiliser une autre connexion, utilisez::
         public $import = ['table' => 'articles', 'connection' => 'other'];
     }
 
-.. versionadded:: 3.1.7
-
 En général vous avez une classe Table avec votre fixture. Vous pouvez aussi
 utiliser ceci pour récupérer le nom de la table::
 
@@ -969,9 +962,6 @@ une requête, vous pouvez utiliser les différentes assertions que fournit
 ``IntegrationTestCase`` ou PHPUnit afin de vous assurer que votre requête
 possède de correctes effets secondaires.
 
-.. versionadded:: 3.5.0
-    ``options()`` et ``head()`` ont été ajoutées dans 3.5.0.
-
 Configurer la Requête
 ---------------------
 
@@ -1100,10 +1090,6 @@ bonnes variables d'environnement::
         'environment' => ['HTTPS' => 'on']
     ]);
 
-.. versionadded:: 3.1.2
-    Les méthodes ``enableCsrfToken()`` et ``enableSecurityToken()`` ont été
-    ajoutées dans la version 3.1.2.
-
 Test d'intégration sur les middlewares PSR-7
 --------------------------------------------
 
@@ -1140,9 +1126,6 @@ pour charger les plugins qui contiennent des événements et des routes. De cett
 manière, vous vous assurez que les événements et les routes seront connectés pour
 chacun de vos "test case".
 
-.. versionadded:: 3.3.0
-    Les Middleware PSR-7 et la méthode ``useHttpServer()`` ont été ajoutée avec 3.3.0.
-
 Tester avec des cookies chiffrés
 --------------------------------
 
@@ -1159,10 +1142,6 @@ chiffrés dans vos "test cases"::
 
     $this->assertCookieEncrypted('An updated value', 'my_cookie');
 
-.. versionadded:: 3.1.7
-
-    ``assertCookieEncrypted`` et ``cookieEncrypted`` ont été ajoutées dans 3.1.7.
-
 Tester les Messages Flash
 -------------------------
 
@@ -1175,10 +1154,6 @@ pour que vous puissez écrire vos assertions::
     $this->get('/bookmarks/delete/9999');
 
     $this->assertSession('That bookmark does not exist', 'Flash.flash.0.message');
-
-.. versionadded:: 3.4.7
-
-    ``enableRetainFlashMessages()`` a été ajoutée dans 3.4.7
 
 Tester un controller retournant du JSON
 ---------------------------------------
@@ -1250,8 +1225,6 @@ des erreurs pour permettre aux erreurs de remonter. Vous pouvez utiliser la mét
 
 Dans l'exemple ci-dessus, le test échouera et le message d'exception et le stack-trace
 seront affichés à la place de la page d'erreur de l'application.
-
-.. versionadded:: 3.5.0
 
 Méthodes d'Assertion
 --------------------
@@ -1398,10 +1371,6 @@ test::
 
     $this->assertCookieEncrypted('Une valeur mise à jour', 'my_cookie');
 
-.. versionadded: 3.1.7
-    ``assertCookieEncrypted`` et ``cookieEncrypted`` ont été ajoutées dans la
-    version 3.1.7.
-
 Tester un Controller dont la Réponse est au format JSON
 -------------------------------------------------------
 
@@ -1462,10 +1431,6 @@ Tests d'Intégration de la Console
 Pour faciliter les tests de vos applications console, CakePHP est doté d'une classe
 ``ConsoleIntegrationTestCase`` qui peut être utilisée pour tester vos applications
 consoles et faire des assertions sur leurs résultats.
-
-.. versionadded:: 3.5.0
-
-    ``ConsoleIntegrationTestCase`` a été ajoutée dans 3.5.0.
 
 Pour commencer à tester votre application console, créez un "test case" qui étend
 ``Cake\TestSuite\ConsoleIntegrationTestCase``. Cette classe contient une méthode
@@ -1713,10 +1678,6 @@ Pour tester les shells qui sont "dispatchées" via la classe ``CommandRunner``,
 activer le dans votre "test case" avec la méthode suivante::
 
     $this->useCommandRunner();
-
-.. versionadded:: 3.5.0
-
-    La classe ``CommandRunner`` a été ajoutée dans 3.5.0.
 
 Méthodes d'assertions
 ---------------------
@@ -2030,11 +1991,6 @@ d'événements::
 
     $this->assertEventFired('My.Global.Event');
     $this->assertEventFiredWith('My.Global.Event', 'user', 1);
-
-.. versionadded:: 3.2.11
-
-    Le tracking d'événement, ``assertEventFired()``, et ``assertEventFiredWith``
-    ont été ajoutés.
 
 Créer des Suites de Test (Test Suites)
 ======================================

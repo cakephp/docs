@@ -22,22 +22,12 @@ aussi la ligne et le fichier dont ils sont originaires par défaut.
 La sortie de cette fonction est seulement montrée si la variable de ``$debug``
 du cœur a été définie à ``true``.
 
-.. versionadded:: 3.3.0
-
-    Utiliser cette méthode retournera la valeur de la variable ``$var`` passée
-    en paramètre, vous permettant ainsi, par exemple, de l'utiliser sur un
-    ``return``::
-
-        return debug($data); // Retournera $data dans tous les cas
-
 .. php:function:: stackTrace()
 
 La fonction ``stackTrace()`` est globalement disponible, et vous permet
 d'afficher une stack trace quelque soit la fonction appelée.
 
 .. php:function:: breakpoint()
-
-.. versionadded:: 3.1
 
 Si vous avez installé `Psysh <http://psysh.org/>`_ vous pouvez utiliser cette
 fonction dans les environnements CLI pour ouvrir une console interactive
@@ -105,10 +95,6 @@ vous pouvez spécifier les clés à masquer::
         'password' => 'xxxxx',
         'awsKey' => 'yyyyy',
     ]);
-
-.. versionadded:: 3.4.0
-
-    Les masques d'affichage ont été ajoutés dans la version 3.4.0
 
 Logging With Stack Traces
 =========================

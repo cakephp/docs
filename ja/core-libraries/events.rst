@@ -136,9 +136,6 @@ CakePHP の中でイベントはイベントマネージャーに対して動作
 追跡は、イベントリストを削除したり、 :php:meth:`Cake\\Event\\EventList::trackEvents(false)`
 を呼ぶことで無効にできます。
 
-.. versionadded:: 3.2.11
-    イベント追跡と :php:class:`Cake\\Event\\EventList` が追加されました。
-
 コアイベント
 ============
 
@@ -270,10 +267,6 @@ UserStatistic クラスがあると仮定しましょう。これは、リスナ
 .. note::
 
     ``matchingListeners`` メソッドに渡されたパターンは、大文字と小文字が区別されます。
-
-.. versionadded:: 3.2.3
-
-    ``matchingListeners`` メソッドは、検索パターンに一致するイベントの配列を返します。
 
 .. _event-priorities:
 

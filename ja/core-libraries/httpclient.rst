@@ -340,9 +340,6 @@ Client インスタンスに格納されているクッキーは、それ以後�
     ]);
     $http->addCookie(new Cookie('session', 'abc123'));
 
-.. versionadded:: 3.5.0
-    ``addCookie()`` は 3.5.0 で追加されました。
-
 .. _httpclient-response-objects:
 
 レスポンスオブジェクト

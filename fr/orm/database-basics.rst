@@ -507,9 +507,6 @@ votre Table::
 Faire correspondre des types de données personnalisés aux expressions SQL
 -------------------------------------------------------------------------
 
-.. versionadded:: 3.3.0
-    Le support pour le mappage des types de données personnalisés aux expressions SQL a été ajouté dans la version 3.3.0.
-
 L'exemple précédent fait correspondre un type de données personnalisé pour une
 colonne de type 'json' qui est facilement représenté sous la forme d'une chaîne
 dans une instruction SQL. Les types de données complexes ne peuvent pas être
@@ -615,9 +612,6 @@ notre class de table <saving-complex-types>`.
 
 Activer les Objets DateTime Immutables
 --------------------------------------
-
-.. versionadded:: 3.2
-    les objets date/heure immutables ont été ajoutés en 3.2.
 
 Puisque les objets Date/Time sont facilement mutables en place, CakePHP vous
 permet d'activer les objets immutables. le meilleur endroit pour cela est le

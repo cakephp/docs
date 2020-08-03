@@ -198,10 +198,6 @@ Pour faciliter les tests des applications de console, CakePHP fournit une classe
 ``ConsoleIntegrationTestCase`` qui peut être utilisée pour tester les applications console
 et faire des assertions de résultats.
 
-.. versionadded:: 3.5.0
-
-    ``ConsoleIntegrationTestCase`` a été ajoutée.
-
 Pour commencer à tester votre application console, créez un cas de test qui étend
 ``Cake\TestSuite\ConsoleIntegrationTestCase``. cette classe contient une méthode
 ``exec()`` qui est utilisée pour exécuter votre commande. Vous pouvez passer la même chaîne à cette méthode
@@ -433,10 +429,6 @@ Pour tester les shells qui sont dispatchés en utilisant la classe ``CommandRunn
 avec la méthode suivante::
 
     $this->useCommandRunner();
-
-.. versionadded:: 3.5.0
-
-    La classe ``CommandRunner`` a été ajoutée.
 
 Méthodes d'Assertion
 --------------------

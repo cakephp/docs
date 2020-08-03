@@ -1,10 +1,7 @@
 Mga Helper ng Shell
 ###################
 
-.. versionadded:: 3.1
-    Shell Helpers were added in 3.1.0
-
-Ang mga Helper ng Shell ay hinahayaan kang i-package ang kumplikadong output ng generation na code. Ang 
+Ang mga Helper ng Shell ay hinahayaan kang i-package ang kumplikadong output ng generation na code. Ang
 mga Helper ng Shell ay maaaring ma-access at magamit mula sa anumang shell o gawain::
 
     // Output some data as a table.
@@ -23,9 +20,9 @@ Maaari ka ring makakuha ng mga instance ng mga helper at tawagin ang anumang pub
 Paglikha ng mga Helper
 ======================
 
-Habang ang CakePHP ay may ilang mga helper ng shell maaari kang lumikha ng higit pa sa iyong 
-aplikasyon o mga plugin. Bilang isang halimbawa, tayo ay lilikha ng isang simpleng helper para makabuo 
-ng mga magarbong heading. Una ilikha ang **src/Shell/Helper/HeadingHelper.php** at ilagay 
+Habang ang CakePHP ay may ilang mga helper ng shell maaari kang lumikha ng higit pa sa iyong
+aplikasyon o mga plugin. Bilang isang halimbawa, tayo ay lilikha ng isang simpleng helper para makabuo
+ng mga magarbong heading. Una ilikha ang **src/Shell/Helper/HeadingHelper.php** at ilagay
 ang sumusunod sa loob nito::
 
     <?php
@@ -51,8 +48,8 @@ Maari nating gamitin ang bagong helper na ito sa isa sa ating mga command ng she
     // With ~~~~ on either side
     $this->helper('Heading')->output(['It works!', '~', 4]);
 
-Ang mga Helper sa pangkalahatan ay ipapatupad ang ``output()`` na paraan na kukuha ng isang array ng 
-mga parameter. Gayunpaman, dahil ang mga Helper ng Console ay mga class ng vanilla magagawa nilang 
+Ang mga Helper sa pangkalahatan ay ipapatupad ang ``output()`` na paraan na kukuha ng isang array ng
+mga parameter. Gayunpaman, dahil ang mga Helper ng Console ay mga class ng vanilla magagawa nilang
 ipatupad ang mga karagdagang paraan na kukuha ng anumang form ng mga argumento.
 
 Mga Helper na Built-In
@@ -61,7 +58,7 @@ Mga Helper na Built-In
 Helper ng Table
 ---------------
 
-Ang TableHelper ay tumutulong sa paggawa ng mahusay na format ng ASCII na mga table ng sining. Ang paggamit nito ay 
+Ang TableHelper ay tumutulong sa paggawa ng mahusay na format ng ASCII na mga table ng sining. Ang paggamit nito ay
 simple lang::
 
         $data = [
@@ -82,7 +79,7 @@ simple lang::
 Helper ng Pag-unlad
 -------------------
 
-Ang ProgressHelper ay maaaring gamitin sa dalawang magkaibang paraan. Ang simple na mode ay hinahayaan kang 
+Ang ProgressHelper ay maaaring gamitin sa dalawang magkaibang paraan. Ang simple na mode ay hinahayaan kang
 magbigay ng isang callback nai-invoke hanggang makumpleto ang pag-unlad::
 
     $this->helper('Progress')->output(['callback' => function ($progress) {
@@ -96,7 +93,7 @@ Maaari mong kontrolin ang progress bar nang higit pa sa pamamagitan ng pagbigay 
 - ``total`` Ang kabuuang bilang ng mga item sa progress bar. Ang default ay
   100.
 - ``width`` Ang lawak ng progress bar. Ang default ay 80.
-- ``callback`` Ang callback na tatawagan sa isang loop upang i-advance ang 
+- ``callback`` Ang callback na tatawagan sa isang loop upang i-advance ang
   progress bar.
 
 Ang isang halimbawa ng lahat ng mga opsyon na ginagamit ay magiging::
@@ -110,7 +107,7 @@ Ang isang halimbawa ng lahat ng mga opsyon na ginagamit ay magiging::
         }
     ]);
 
-Ang helper ng pag-unlad ay maaari ring gamitin ng manu-mano upang dagdagan at muling i-render ang 
+Ang helper ng pag-unlad ay maaari ring gamitin ng manu-mano upang dagdagan at muling i-render ang
 progress bar kung kinakailangan::
 
     $progress = $this->helper('Progress');

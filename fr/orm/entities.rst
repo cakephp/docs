@@ -267,10 +267,6 @@ vous pouvez utiliser la méthode ``getDirty()``::
 
     $dirtyFields = $entity->getDirty();
 
-.. versionadded:: 3.4.3
-
-    ``getDirty()`` a été ajoutée.
-
 Erreurs de Validation
 =====================
 

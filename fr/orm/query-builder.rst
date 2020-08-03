@@ -279,17 +279,15 @@ ou ``orderDesc()``) et le définir à ``Query::OVERWRITE`` ou ``true``::
     $query = $articles->find()
         ->order(['created' => 'DESC'], Query::OVERWRITE);
 
-.. versionadded:: 3.0.12
+En plus de ``order``, les méthodes ``orderAsc`` et ``orderDesc`` peuvent
+être utilisées quand vous devez trier selon des expressions complexes::
 
-    En plus de ``order``, les méthodes ``orderAsc`` et ``orderDesc`` peuvent
-    être utilisées quand vous devez trier selon des expressions complexes::
-
-        $query = $articles->find();
-        $concat = $query->func()->concat([
-            'title' => 'identifier',
-            'synopsis' => 'identifier'
-        ]);
-        $query->orderAsc($concat);
+    $query = $articles->find();
+    $concat = $query->func()->concat([
+        'title' => 'identifier',
+        'synopsis' => 'identifier'
+    ]);
+    $query->orderAsc($concat);
 
 Pour limiter le nombre de lignes ou définir la ligne offset, vous pouvez
 utiliser les méthodes ``limit()`` et ``page()``::
@@ -363,11 +361,6 @@ méthode ``func()``:
 - ``dateAdd()`` Ajoute l'unité de temps à l'expression de la date.
 - ``dayOfWeek()`` Retourne une FunctionExpression représentant un appel à la
   fonction SQL WEEKDAY.
-
-.. versionadded:: 3.1
-
-    Les méthodes ``extract()``, ``dateAdd()`` et ``dayOfWeek()`` ont été
-    ajoutées.
 
 Quand vous fournissez des arguments pour les fonctions SQL, il y a deux types de
 paramètres que vous pouvez utiliser; Les arguments littéraux et les paramètres

@@ -104,5 +104,3 @@ Se você deseja rastrear a entidade que falhou ao salvar, você pode usar o mét
 
 Como isso executa internamente uma chamada ao :php:meth:`Cake\\ORM\\Table::delete()`, todos eventos de exclusão
 correspondentes serão disparados.
-
-.. versionadded:: 3.4.1
