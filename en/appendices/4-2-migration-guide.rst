@@ -47,6 +47,8 @@ Http
   This makes CSRF tokens user scoped and time based with the session, offering
   enhanced security over cookie based CSRF tokens. This middleware is a drop in
   replacement for the ``CsrfProtectionMiddleware``.
+- The ``hal+json``, ``hal+xml``, and ``jsonld`` types were added to
+  ``Response`` making them usable with ``withType()``.
 
 ORM
 ---
