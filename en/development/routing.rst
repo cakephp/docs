@@ -1333,7 +1333,7 @@ defined pattern::
         ['controller' => $controller, 'action' => 'view', $id]
     );
 
-Elements included un-keyed in the array are treated as
+Elements with numeric keys are treated as
 :term:`pass values <pass value>` and will become arguments
 passed to your action.
 
