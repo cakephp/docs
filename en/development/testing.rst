@@ -1353,7 +1353,7 @@ In addition to the above assertion methods, you can also use all of the
 assertions in `TestSuite
 <https://api.cakephp.org/3.x/class-Cake.TestSuite.TestCase.html>`_ and those
 found in `PHPUnit
-<https://phpunit.de/manual/current/en/appendixes.assertions.html>`__.
+<https://phpunit.readthedocs.io/en/9.2/assertions.html>`__.
 
 Comparing test results to a file
 --------------------------------
