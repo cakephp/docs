@@ -1375,7 +1375,7 @@ You can also use any of the special route elements when generating URLs:
 Using ``Router::reverse()``
 ---------------------------
 
-``Router::reverse()`` allows you to use the :ref:`request-parameters' in cases
+``Router::reverse()`` allows you to use the :ref:`request-parameters` in cases
 where the current url is the basis for the destination, with some modification
 and the elements of the current url are unpredictable.
 
