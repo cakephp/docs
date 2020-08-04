@@ -5,8 +5,6 @@ Breadcrumbs
 
 .. php:class:: BreadcrumbsHelper(View $view, array $config = [])
 
-.. versionadded:: 3.3.6
-
 BreadcrumbsHelper vous offre la possibilité de gérer la création et le rendu
 de vos *breadcrumbs* (fil d'Ariane) pour vos applications.
 
@@ -200,9 +198,6 @@ complètement réinitialiser la liste::
     })->toArray();
 
     $this->Breadcrumbs->reset()->add($crumbs);
-
-.. versionadded:: 3.4.0
-    La méthode ``reset()`` a été ajoutée dans la version 3.4.0
 
 .. meta::
     :title lang=fr: BreadcrumbsHelper

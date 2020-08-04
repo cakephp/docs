@@ -628,7 +628,7 @@ CakePHP は計算された値が正しい Entity にセットされることを�
         (
             (author_id = 2 OR author_id = 3)
             AND
-            (published = 1 AND view_count > 10)
+            (published = 1 AND view_count = 10)
         )
         OR promoted = 1
     )

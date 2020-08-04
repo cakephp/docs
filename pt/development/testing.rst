@@ -122,10 +122,6 @@ respeito aos testes:
    começar com ``test``, como em ``testPublished()``. Você também pode usar a anotação
    ``@test`` para marcar métodos como métodos de teste.
 
-.. versionadded:: 3.4.1
-    Suporte para PHPUnit 6 foi adicionado. Se você estiver usando uma versão do PHPUnit menor que
-    5.7.0, suas classes de teste devem estender as classes CakePHP ou ``PHPUnit_Framework_TestCase``.
-
 Criando seu Primeiro Caso de Teste
 ==================================
 
@@ -570,8 +566,6 @@ Se você deseja usar uma conexão diferente, use::
         public $import = ['table' => 'articles', 'connection' => 'other'];
     }
 
-.. versionadded:: 3.1.7
-
 Normalmente, você também tem uma classe de tabela com sua fixture. Você também pode usar isso para
 recuperar o nome da tabela::
 
@@ -788,10 +782,6 @@ Embora você possa testar as classes de controladores de maneira semelhante aos 
 Models e Components, o CakePHP oferece uma trait especializada de nome ``IntegrationTestTrait``.
 O uso dessa trait nos casos de teste do controlador permite realizar testes de alto nível.
 
-.. versionadded:: 3.7.0
-
-    A classe ``IntegrationTestCase`` foi movida para a trait ``IntegrationTestTrait``.
-
 Se você não está familiarizado com o teste de integração, o teste de integração é uma abordagem
 que facilita a verificação de várias unidades em conjunto. Os recursos de teste de integração
 no CakePHP simulam uma solicitação HTTP sendo tratada pelo seu aplicativo. Por exemplo, testar
@@ -909,9 +899,6 @@ Todos os métodos, exceto ``get()`` e ``delete()``, aceitam um segundo parâmetr
 permite enviar um corpo de solicitação. Depois de enviar uma solicitação, você pode
 usar as várias asserções fornecidas por ``IntegrationTestTrait`` ou PHPUnit para
 garantir que sua solicitação tenha os efeitos colaterais corretos.
-
-.. versionadded:: 3.5.0
-    ``options()`` e ``head()`` foram adicionados no 3.5.0.
 
 Configurando a Solicitação
 --------------------------
@@ -1036,9 +1023,6 @@ você pode usar ``configRequest()`` para definir as variáveis de ambiente corre
         'environment' => ['HTTPS' => 'on']
     ]);
 
-.. versionadded:: 3.1.2
-    Os métodos ``enableCsrfToken()`` e ``enableSecurityToken()`` foram adicionados no 3.1.2
-
 Teste de Integração PSR-7 Middleware
 ------------------------------------
 
@@ -1074,9 +1058,6 @@ plug-in que contenha eventos/rotas. Isso garantirá que seus eventos/rotas
 estejam conectados para cada caso de teste. Como alternativa, se você deseja carregar
 plug-ins manualmente em um teste, pode usar o método ``loadPlugins()``.
 
-.. versionadded:: 3.3.0
-    O Middleware PSR-7 e o método ``useHttpServer()`` foram adicionados no 3.3.0.
-
 Testando com Cookies Criptografados
 -----------------------------------
 
@@ -1092,10 +1073,6 @@ com cookies criptografados nos seus casos de teste::
     $this->get('/bookmarks/index');
 
     $this->assertCookieEncrypted('An updated value', 'my_cookie');
-
-.. versionadded:: 3.1.7
-
-    ``assertCookieEncrypted`` e ``cookieEncrypted`` foi adicionado 3.1.7.
 
 Testando Mensagens Flash
 ------------------------
@@ -1128,12 +1105,6 @@ A partir da versão 3.7.0, existem auxiliares de teste adicionais para mensagens
 
     // Afirme o segundo elemento de mensagem flash
     $this->assertFlashElementAt(1, 'Flash/error');
-
-.. versionadded:: 3.4.7
-    ``enableRetainFlashMessages()`` foi adicionado em 3.4.7
-
-.. versionadded:: 3.7.0
-    Asserções de mensagens em Flash foram adicionadas.
 
 Testando um Controlador Com Resposta em JSON
 --------------------------------------------
@@ -1204,8 +1175,6 @@ para fazer isso::
 No exemplo acima, o teste falharia e a mensagem de exceção subjacente e o
 rastreamento da pilha seriam exibidos em vez da verificação da página de erro
 renderizada.
-
-.. versionadded:: 3.5.0
 
 Métodos Assertion
 -----------------
@@ -1627,10 +1596,6 @@ eventos globais não requer a aprovação do gerenciador de eventos::
 
     $this->assertEventFired('My.Global.Event');
     $this->assertEventFiredWith('My.Global.Event', 'user', 1);
-
-.. versionadded:: 3.2.11
-
-    O rastreamento de eventos, ``assertEventFired()`` e ``assertEventFiredWith`` foram adicionados.
 
 Testando Email
 ==============

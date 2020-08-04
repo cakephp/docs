@@ -128,9 +128,6 @@ CakePHP アプリケーション内の特定のファイルやディレクトリ
 
 .. php:function:: env(string $key, string $default = null)
 
-    .. versionadded:: 3.1.1
-        ``$default`` パラメーターが追加されました。
-
     可能な限りの環境変数を取得します。仮に ``$_SERVER`` か ``$_ENV`` が使用不可の場合には
     バックアップとして用いられます。
 

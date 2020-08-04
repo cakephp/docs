@@ -5,8 +5,6 @@ Breadcrumbs (パンくず)
 
 .. php:class:: BreadcrumbsHelper(View $view, array $config = [])
 
-.. versionadded:: 3.3.6
-
 BreadcrumbsHelper は簡単にアプリのパンくずリストの作成と描画に対処する方法を提供します。
 
 パンくずリストを作成
@@ -182,9 +180,6 @@ BreadcrumbsHelper は内部で ``StringTemplateTrait`` を使用しています�
     })->toArray();
 
     $this->Breadcrumbs->reset()->add($crumbs);
-
-.. versionadded:: 3.4.0
-    ``reset()`` メソッドは 3.4.0 で追加されました。
 
 .. meta::
     :title lang=ja: BreadcrumbsHelper

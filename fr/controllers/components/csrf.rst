@@ -23,12 +23,6 @@ deux valeurs ne correspondent pas, le component lancera une
     ou utiliser :php:meth:`Cake\\Http\\ServerRequest::allowMethod()` pour vous
     assurer que la bonne méthode HTTP est utilisée.
 
-.. versionadded:: 3.1
-
-    Le type d'exception a changé de
-    :php:class:`Cake\\Network\\Exception\\ForbiddenException` en
-    :php:class:`Cake\\Network\\Exception\\InvalidCsrfTokenException`.
-
 .. deprecated:: 3.5.0
     Vous devriez utiliser le :ref:`csrf-middleware` à la place du
     ``CsrfComponent``.

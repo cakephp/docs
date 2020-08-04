@@ -19,8 +19,6 @@ CakePHP のヘルパーに関する詳細については、各ヘルパーの章
     /views/helpers/html
     /views/helpers/number
     /views/helpers/paginator
-    /views/helpers/rss
-    /views/helpers/session
     /views/helpers/text
     /views/helpers/time
     /views/helpers/url
@@ -36,7 +34,7 @@ CakePHP でヘルパーを読み込むには、ビュークラスでヘルパー
 
     class AppView extends View
     {
-        public function initialize()
+        public function initialize(): void
         {
             parent::initialize();
             $this->loadHelper('Html');
@@ -68,7 +66,7 @@ CakePHP やアプリケーションにあるヘルパーを明示的に読み込
 
     class AppView extends View
     {
-        public function initialize()
+        public function initialize(): void
         {
             parent::initialize();
             if ($this->request->getParam('action') === 'index') {
@@ -81,10 +79,10 @@ CakePHP やアプリケーションにあるヘルパーを明示的に読み込
 
     class ArticlesController extends AppController
     {
-        public function beforeRender(Event $event)
+        public function beforeRender(EventInterface $event)
         {
             parent::beforeRender($event);
-            $this->viewBuilder()->helpers(['MyHelper']);
+            $this->viewBuilder()->addHelper('MyHelper');
         }
     }
 
@@ -101,24 +99,10 @@ CakePHP やアプリケーションにあるヘルパーを明示的に読み込
 
     class AwesomeHelper extends Helper
     {
-
-        // initialize() フックは 3.2 以降で使用可能です。前のバージョンで
-        // 必要な場合は、コンストラクターをオーバーライドしてください。
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             debug($config);
         }
-    }
-
-次に示すように、コントローラーのヘルパーを宣言するときにオプションを指定することができます。 ::
-
-    namespace App\Controller;
-
-    use App\Controller\AppController;
-
-    class AwesomeController extends AppController
-    {
-        public $helpers = ['Awesome' => ['option1' => 'value1']];
     }
 
 デフォルトでは、すべての設定オプションは、 ``$_defaultConfig`` プロパティーとマージされます。
@@ -131,7 +115,6 @@ CakePHP やアプリケーションにあるヘルパーを明示的に読み込
 
     class AwesomeHelper extends Helper
     {
-
         use StringTemplateTrait;
 
         protected $_defaultConfig = [
@@ -141,7 +124,6 @@ CakePHP やアプリケーションにあるヘルパーを明示的に読み込
             ],
         ];
     }
-
 ヘルパーのコンストラクターに提供される任意の設定は、構築時にデフォルト値とマージされ、
 マージされたデータは、 ``_config`` に設定されます。
 実行時設定を読み取るために ``config()`` メソッドを使用することができます。 ::
@@ -155,7 +137,7 @@ CakePHP やアプリケーションにあるヘルパーを明示的に読み込
 
     class PostsController extends AppController
     {
-        public function beforeRender(Event $event)
+        public function beforeRender(EventInterface $event)
         {
             parent::beforeRender($event);
             $builder = $this->viewBuilder();
@@ -177,7 +159,7 @@ CakePHP やアプリケーションにあるヘルパーを明示的に読み込
     // src/View/AppView.php
     class AppView extends View
     {
-        public function initialize()
+        public function initialize(): void
         {
             $this->loadHelper('Html', [
                 'className' => 'MyHtml'
@@ -297,7 +279,7 @@ CakePHP のコンポーネントと同様に、ヘルパークラスは、いく
 
     class AppView extends View
     {
-        public function initialize()
+        public function initialize(): void
         {
             parent::initialize();
             $this->loadHelper('Link');
@@ -317,19 +299,18 @@ CakePHP のコンポーネントと同様に、ヘルパークラスは、いく
 ヘルパー内部でビュー変数にアクセス
 -------------------------------------------
 
-ヘルパー内部でビュー変数にアクセスしたい場合は、次のように ``$this->_View->get()``
+ヘルパー内部でビュー変数にアクセスしたい場合は、次のように ``$this->getView()->get()``
 を使用することができます。 ::
 
     class AwesomeHelper extends Helper
     {
-
         public $helpers = ['Html'];
 
         public function someMethod()
         {
             // meta description の設定
-            echo $this->Html->meta(
-                'description', $this->_View->get('metaDescription'), ['block' => 'meta']
+            return $this->Html->meta(
+                'description', $this->getView()->get('metaDescription'), ['block' => 'meta']
             );
         }
     }
@@ -337,21 +318,14 @@ CakePHP のコンポーネントと同様に、ヘルパークラスは、いく
 ヘルパー内部でビューエレメントの描画
 ------------------------------------
 
-ヘルパー内部でエレメントを描画したい場合は、次のように ``$this->_View->element()``
+ヘルパー内部でエレメントを描画したい場合は、次のように ``$this->getView()->element()``
 を使用することができます。 ::
 
     class AwesomeHelper extends Helper
     {
         public function someFunction()
         {
-            // ヘルパー内で直接出力
-            echo $this->_View->element(
-                '/path/to/element',
-                ['foo'=>'bar','bar'=>'foo']
-            );
-
-            // または、ビューに返す
-            return $this->_View->element(
+            return $this->getView()->element(
                 '/path/to/element',
                 ['foo'=>'bar','bar'=>'foo']
             );
@@ -372,34 +346,34 @@ Helper クラス
 登録します。以前のバージョンの CakePHP とは異なり、ヘルパークラスはコールバックメソッドを
 実装していないので、あなたのコールバックでは ``parent`` を *コールしてはいけません* 。
 
-.. php:method:: beforeRenderFile(Event $event, $viewFile)
+.. php:method:: beforeRenderFile(EventInterface $event, $viewFile)
 
     各ビューファイルが描画される前に呼び出されます。
     これにはエレメント、ビュー、親ビュー、レイアウトを含みます。
 
-.. php:method:: afterRenderFile(Event $event, $viewFile, $content)
+.. php:method:: afterRenderFile(EventInterface $event, $viewFile, $content)
 
     各ビューファイルが描画された後に呼び出されます。
     これにはエレメント、ビュー、親ビュー、レイアウトを含みます。
     コールバックは描画されたコンテンツがブラウザーにどのように描画されるかを変えるために
     ``$content`` を変更して返すことができます。
 
-.. php:method:: beforeRender(Event $event, $viewFile)
+.. php:method:: beforeRender(EventInterface $event, $viewFile)
 
     beforeRender メソッドはコントローラーの beforeRender メソッドの後に呼び出されます。
     しかし、コントローラーがビューとレイアウトを描画する前です。
     描画されるファイルを引数として受け取ります。
 
-.. php:method:: afterRender(Event $event, $viewFile)
+.. php:method:: afterRender(EventInterface $event, $viewFile)
 
     ビューが描画された後に呼び出されます。しかし、レイアウトの描画開始前です。
 
-.. php:method:: beforeLayout(Event $event, $layoutFile)
+.. php:method:: beforeLayout(EventInterface $event, $layoutFile)
 
     レイアウトの描画開始前に呼び出されます。
     レイアウトファイル名を引数として受け取ります。
 
-.. php:method:: afterLayout(Event $event, $layoutFile)
+.. php:method:: afterLayout(EventInterface $event, $layoutFile)
 
     レイアウトの描画が完了した時に呼び出されます。
     レイアウトファイル名を引数として受け取ります。

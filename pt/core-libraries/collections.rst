@@ -487,7 +487,6 @@ um caminho correspondente ou função para extrair valores para gerar a mediana:
     // Média: 333
     $median = (new Collection($items))->median('invoice.total');
 
-
 Agrupamento e Contagem
 ----------------------
 

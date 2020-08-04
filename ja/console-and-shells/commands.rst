@@ -198,14 +198,6 @@ Commabd クラスは、大部分の作業を行う ``execute()`` メソッドを
 コンソールアプリケーションをテストし、結果に対してアサートするための
 ``ConsoleIntegrationTestTrait`` トレイトが付属しています。
 
-.. versionadded:: 3.5.0
-
-    ``ConsoleIntegrationTestCase`` が追加されました。
-
-.. versionadded:: 3.7.0
-
-    ``ConsoleIntegrationTestCase`` クラスは ``ConsoleIntegrationTestTrait`` トレイトへ移動しました。
-
 コンソールアプリケーションのテストを始めるために、 ``Cake\TestSuite\ConsoleIntegrationTestTrait``
 を使用したテストケースを作成してください。このトレイトは、あなたのコマンドを実行するために使用する
 ``exec()`` メソッドを含みます。このメソッドに、CLI で使用するのと同じ文字列を渡すことができます。
@@ -445,10 +437,6 @@ CommandRunner のテスト
 次のメソッドを使ってテストケースでそれを有効にしてください。 ::
 
     $this->useCommandRunner();
-
-.. versionadded:: 3.5.0
-
-    ``CommandRunner`` クラスが追加されました。
 
 
 アサーションメソッド

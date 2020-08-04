@@ -320,9 +320,6 @@ associatifs::
         ['c' => 3, 'd' => [4, 5]]
     ]
 
-.. versionadded:: 3.4.0
-    ``chunkWithKeys()`` a été ajoutée dans la version 3.4.0
-
 Filtrer
 =======
 
@@ -485,8 +482,6 @@ lesquelles vous souhaitez générer la moyenne::
     // Moyenne : 150
     $average = (new Collection($items))->avg('invoice.total');
 
-.. versionadded:: 3.5.0
-
 .. php:method:: median($matcher = null)
 
 Calcule la valeur médianne d'un jeu d'élément. Vous pouvez passer, en
@@ -503,8 +498,6 @@ lesquelles vous souhaitez calculer la valeur médianne::
 
     // Valeur médiane : 333
     $median = (new Collection($items))->median('invoice.total');
-
-.. versionadded:: 3.5.0
 
 Grouper et Compter
 ------------------
@@ -870,9 +863,6 @@ contenant une colonne avec chacune des colonnes originales::
          ['2014', '50', '100', '200'],
      ]
 
-.. versionadded:: 3.3.0
-    ``Collection::transpose()`` a été ajoutée dans la version 3.3.0.
-
 Retrait d'Eléments
 ------------------
 
@@ -1181,10 +1171,6 @@ utilisant la fonction ``buffered()``::
 
 Maintenant quand les deux collections sont itérées, elles vont seulement appeler
 l'opération d'extraction en une fois.
-
-.. versionadded:: 3.5.0
-    Les Collections initialisées avec un tableau ne peuvent plus etre itérées
-    de façon Lazy afin d'améliorer les performances.
 
 Rendre les Collections Rembobinables
 ------------------------------------

@@ -66,8 +66,8 @@ Http
 * ``CsrfProtectionMiddleware::whitelistCallback()`` has been deprecated. Use
   ``skipCheckCallback()`` instead.
 * ``ServerRequest::input()`` is deprecated. Use ``(string)$request->getBody()``
-   to get the raw PHP input as string; use ``BodyParserMiddleware`` to parse the
-   request body so that it's available as array/object through ``$request->getParsedBody()``
+  to get the raw PHP input as string; use ``BodyParserMiddleware`` to parse the
+  request body so that it's available as array/object through ``$request->getParsedBody()``
 * The ``httpOnly`` option for ``CsrfProtectionMiddleware`` is now ``httponly``
   to improve consistency with cookie creation elsewhere in the framework.
 
@@ -128,6 +128,7 @@ TestSuite
 ---------
 
 * ``TestCase::setAppNamespace()`` now returns the previous app namespace for easier save and restore.
+* GroupsFixture was renamed to SectionsFixture due to MySQL reserved keyword changes.
 
 View
 ----
@@ -161,6 +162,7 @@ Console
 Database
 --------
 
+* MySQL 8 is supported and tested.
 * ``AggregateExpression`` was added to represent aggregate SQL functions. ``FunctionsBuilder::aggregate()``
   can be used to wrap new aggregate SQL functions.
 * Window function support was added for any aggregate expression. ``AggregateExpression`` wraps the window

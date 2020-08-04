@@ -296,9 +296,6 @@ O método ``reset()`` irá limpar ou sobrescrever um bloco em qualquer momento. 
     // Atribuir uma string vazia também limpará o bloco *sidebar*.
     $this->assign('sidebar', '');
 
-.. versionadded:: 3.2
-    View::reset() foi adicionado na versão 3.2
-
 Atribuir um conteúdo de um *block* muitas vezes é usado quando você
 quer converter uma varável da *view* em um bloco. Por exemplo, você pode
 querer usar um *block* para a página Título e às vezes atribuir o título como uma
@@ -645,8 +642,6 @@ Para *elements* dentro de uma subpasta de um plugin
 
 *Routing prefix* e *Elements*
 -----------------------------
-
-.. versionadded:: 3.0.1
 
 Se você tiver um Routing prefix configurado, o caminho do *Element* pode ser trocado
 para a localização do prefixo, como layouts e *actions* da *View* fazem.

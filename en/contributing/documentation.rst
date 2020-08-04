@@ -470,13 +470,13 @@ Samples
 
     It could be dangerous.
 
-.. versionadded:: 2.6.3
+.. versionadded:: 4.0.0
 
-    This awesome feature was added on version 2.6.3
+    This awesome feature was added in version 4.0.0
 
-.. deprecated:: 2.6.3
+.. deprecated:: 4.0.1
 
-    This old feature was deprecated on version 2.6.3
+    This old feature was deprecated on version 4.0.1
 
 .. meta::
     :title lang=en: Documentation

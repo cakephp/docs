@@ -192,9 +192,6 @@ URL が特定されたら、一致したときにどのような動作をする�
     // プレフィックス付きのプラグインコントローラー
     Vendor/Cms.Management/Admin/Articles::view
 
-.. versionadded:: 3.6.0
-    文字列ベースのルートターゲットが追加されました。
-
 先ほど、パスの追加の部分を取り込むために貪欲なスター (greedy star) ``/*``  を使用していましたが、
 ``/**`` 流れ星 (trailing star) もあります。２つのアスタリスクをつなげると、
 URL の残りを１つの引数として取り込みます。これは、 ``/`` を含む引数を使用したい時に便利です。 ::
@@ -272,9 +269,6 @@ HTTP アクションを異なるコントローラーメソッドにマップす
 
 これらのメソッドはすべてルートインスタンスを返すので、 :ref:`流暢なセッター
 <route-fluent-methods>` を活用してルートをさらに設定することができます。
-
-.. versionadded:: 3.5.0
-    HTTP 動詞ヘルパーメソッドは追加されました。
 
 .. _route-elements:
 
@@ -454,9 +448,6 @@ CakePHP には、いくつかの特別な意味を持つルート要素があり
     // lang を永続的なパラメーターに設定
     ->setPersist(['lang']);
 
-.. versionadded:: 3.5.0
-    流れるようなビルダーメソッドは 3.5.0 で追加されました。
-
 アクションへのパラメーター渡し
 ------------------------------
 
@@ -581,9 +572,6 @@ CakePHP は、各スコープで名前のプレフィックスを定義するこ
 
 名前付きスコープに接続されているルートは命名されていているルートのみ追加されます。
 名前なしルートはそれらに適用される ``_namePrefix`` がありません。
-
-.. versionadded:: 3.1
-     ``_namePrefix`` オプションは 3.1 で追加されました。
 
 .. index:: admin routing, prefix routing
 .. _prefix-routing:
@@ -860,9 +848,6 @@ SEO に親和性があるルーティング
         '_host' => 'images.example.com',
     ]);
 
-.. versionadded:: 3.4.0
-    ``_host`` オプションは 3.4.0 で追加されました。
-
 .. index:: file extensions
 .. _file-extensions:
 
@@ -998,9 +983,6 @@ SEO に親和性があるルーティング
     // グループの適用
     $routes->applyMiddleware('web');
 
-.. versionadded:: 3.5.0
-    スコープ付きミドルウェアとミドルウェアグループは 3.5.0 で追加されました。
-
 .. _resource-routes:
 
 RESTful なルーティング
@@ -1089,9 +1071,6 @@ DELETE      /recipes/123.format   RecipesController::delete(123)
 
     あなたが望む深さまでリソースをネストできますが、
     ２段階以上の深さにネストさせることはお勧めしません。
-
-.. versionadded:: 3.3
-    3.3 で ``resources()`` に ``prefix`` オプションが追加されました。
 
 ルートの作成を制限
 ------------------
@@ -1200,9 +1179,6 @@ DELETE      /recipes/123.format   RecipesController::delete(123)
     Router::scope('/', function ($routes) {
         $routes->resources('BlogPosts', ['path' => 'posts']);
     });
-
-.. versionadded:: 3.5.0
-    ``path`` オプションは 3.5.0 で追加されました。
 
 .. index:: passed arguments
 .. _passed-arguments:
@@ -1393,10 +1369,6 @@ URL 生成に渡すことで、URL がより多くのパラメーターが必要
     Router::url(['_name' => 'articles:view', '_entity' => $article]);
 
 これは、提供されたエンティティーから ``id`` プロパティーと ``slug`` プロパティーの両方を抽出します。
-
-.. versionadded:: 3.6.0
-    エンティティールーティングは 3.6.0 で追加されました。
-
 
 .. _custom-route-classes:
 

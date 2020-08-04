@@ -341,10 +341,6 @@ balise  ``<head>`` de votre page::
     // pour le Model courant.
     echo $this->Paginator->meta(['first' => true, 'last' => true]);
 
-.. versionadded:: 3.4.0
-
-    Les options ``first`` et ``last`` ont été ajoutées dans la version 3.4.0
-
 Vérifier l'Etat de la Pagination
 ================================
 
@@ -373,7 +369,6 @@ Vérifier l'Etat de la Pagination
 
     Retourne le nombre total de pages pour le ``model`` passé en paramètre.
 
-    .. versionadded:: 3.4.0
 
 Création d'un compteur de page
 ==============================
@@ -449,9 +444,6 @@ Créer un ``select`` qui permet de changer le paramètre ``limit`` de la query::
 
 Cela générera un ``form`` qui sera automatiquement soumis lors d'un changement
 de valeur sur le ``select``.
-
-.. versionadded:: 3.5.0
-    La méthode ``limitControl()`` a été ajoutée dans 3.5.0
 
 Configurer les Options de Pagination
 ====================================
@@ -585,9 +577,6 @@ chaque appel de méthode que vous faîtes au ``PaginatorHelper``, soit utiliser
 
 En utilisant l'option ``model``, ``PaginatorHelper`` va automatiquement utiliser
 le ``scope`` défini quand la reqûete a été paginée.
-
-.. versionadded:: 3.3.0
-    La pagination multiple a été ajoutée dans la version 3.3.0
 
 .. meta::
     :title lang=fr: PaginatorHelper

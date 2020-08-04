@@ -39,9 +39,6 @@ pouvez mettre à jour votre fichier ``bootstrap_cli.php`` avec::
     bin/cake plugin load --cli MyPlugin
     bin/cake plugin unload --cli MyPlugin
 
-.. versionadded:: 3.4.0
-    A partir de 3.4.0, l'option ``--cli`` est supportée.
-
 Décharger les Plugins
 ---------------------
 

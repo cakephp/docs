@@ -111,9 +111,6 @@ la traduction de contenu.
 
 .. php:function:: env(string $key, string $default = null)
 
-    .. versionadded:: 3.1.1
-        Le paramètre ``$default`` a été ajouté.
-
     Récupère une variable d'environnement depuis les sources disponibles.
     Utilisé en secours si ``$_SERVER`` ou ``$_ENV`` sont désactivés.
 

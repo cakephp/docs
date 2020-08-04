@@ -363,9 +363,6 @@ Vous pouvez ajouter des cookies au client après l'avoir créé en utilisant la 
     ]);
     $http->addCookie(new Cookie('session', 'abc123'));
 
-.. versionadded:: 3.5.0
-    ``addCookie()`` a été ajoutée dans 3.5.0
-
 .. _httpclient-response-objects:
 
 Objets Response

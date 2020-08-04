@@ -107,9 +107,6 @@ CakePHP事件会触发事件管理器。在各表、视图、控制器中使用 
 
 追踪可以通过移除事件列表或者调用 :php:meth:`Cake\\Event\\EventList::trackEvents(false)` 来取消。
 
-.. versionadded:: 3.2.11
-    事件追踪和 :php:class:`Cake\\Event\\EventList` 被增加。
-
 核心事件
 =================
 
@@ -227,10 +224,6 @@ CakePHP事件会触发事件管理器。在各表、视图、控制器中使用 
 .. note::
 
     传递到 ``matchingListeners`` 方法的模式区分大小写。
-
-.. versionadded:: 3.2.3
-
-    ``matchingListeners`` 方法返回一个与检索模式一致的数组。
 
 .. _event-priorities:
 
