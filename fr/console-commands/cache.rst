@@ -10,6 +10,3 @@ les données mises en cache::
 
     // Efface toutes les configs mises en cache
     bin/cake cache clear_all
-
-.. versionadded:: 3.3.0
-    The cache shell was added in 3.3.0

@@ -29,10 +29,6 @@ retournée::
         // validation de l'entity a échouée.
     }
 
-.. versionadded:: 3.4.0
-
-    La méthode ``getErrors()`` a été ajoutée.
-
 Quand vous construisez une entity avec la validation activée, les choses
 suivantes vont se produire:
 
@@ -441,9 +437,6 @@ en utilisant ``allowMultipleNulls``::
         ['allowMultipleNulls' => false]
     ));
 
-.. versionadded:: 3.3.0
-    Les options ``allowNullableNulls`` et ``allowMultipleNulls`` ont été ajoutées.
-
 Règles sur le Nombre de Valeurs d'une Association
 -------------------------------------------------
 
@@ -470,9 +463,6 @@ ou n'existe pas::
 
     // La sauvegarde échouera si tags est null
     $rules->add($rules->validCount('tags', 0, '<=', 'Vous ne devez pas avoir de tags'));
-
-.. versionadded:: 3.3.0
-    La méthode ``validCount()`` a été ajoutée dans la version 3.3.0.
 
 Utiliser les Méthodes Entity en tant que Règles
 -----------------------------------------------

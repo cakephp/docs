@@ -358,9 +358,6 @@ clé/valeur. Dans le cas où la paire demandée n'existe pas, une
     //  Renvoie:
     ['name' => 'Pizza, Inc.', 'slogan' => 'Pizza for your body and soul'];
 
-.. versionadded:: 3.1.7
-    ``Configure::readOrFail()`` a été ajoutée dans 3.1.7
-
 Vérifier si les Données de Configuration sont Définies
 ------------------------------------------------------
 

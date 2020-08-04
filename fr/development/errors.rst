@@ -156,10 +156,6 @@ Exceptions HTTP
 
     Utilisée pour faire une erreur 403 Interdite.
 
-.. versionadded:: 3.1
-
-    InvalidCsrfTokenException a été ajoutée.
-
 .. php:exception:: InvalidCsrfTokenException
 
     Utilisée pour faire une erreur 403 causée par un token CSRF invalide.
@@ -176,19 +172,13 @@ Exceptions HTTP
 
     Utilisée pour faire une erreur 406 Not Acceptable.
 
-    .. versionadded:: 3.1.7 NotAcceptableException a été ajoutée.
-
 .. php:exception:: ConflictException
 
     Utilisée pour faire une erreur 409 Conflict.
 
-    .. versionadded:: 3.1.7 ConflictException a été ajoutée.
-
 .. php:exception:: GoneException
 
     Utilisée pour faire une erreur 410 Gone.
-
-    .. versionadded:: 3.1.7 GoneException a été ajoutée.
 
 Pour plus de détails sur les codes de statut d'erreur HTTP 4xx, regardez
 :rfc:`2616#section-10.4`.
@@ -204,8 +194,6 @@ Pour plus de détails sur les codes de statut d'erreur HTTP 4xx, regardez
 .. php:exception:: ServiceUnavailableException
 
     Utilisée pour faire une erreur 503 Service Unavailable.
-
-    .. versionadded:: 3.1.7 Service Unavailable a été ajoutée.
 
 Pour plus de détails sur les codes de statut d'erreur HTTP 5xx, regardez
 :rfc:`2616#section-10.5`.
@@ -332,8 +320,6 @@ Autres Exceptions Intégrées
 
     Une entity n'a pas pu être sauvegardée / supprimée en utilisant :php:meth:`Cake\\ORM\\Table::saveOrFail()` ou
     :php:meth:`Cake\\ORM\\Table::deleteOrFail()`
-
-    .. versionadded:: 3.4.1 PersistenceFailedException a été ajoutée.
 
 .. php:namespace:: Cake\Datasource\Exception
 

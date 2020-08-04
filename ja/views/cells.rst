@@ -251,9 +251,6 @@
 上記のセルは、 :ref:`スコープ指定のページ制御パラメーター <paginating-multiple-queries>`
 を使用して ``Messages`` モデルをページ制御します。
 
-.. versionadded:: 3.5.0
-    ``Cake\Datasource\Paginator`` は 3.5.0 で追加されました。
-
 セルのオプション
 =================
 

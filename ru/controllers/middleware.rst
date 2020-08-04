@@ -321,9 +321,6 @@ invokable классы. В то время как Closures подходят дл
 
     $middlewareQueue->add($headers);
 
-.. versionadded:: 3.5.0
-    ``SecurityHeadersMiddleware`` добавлено в 3.5.0
-
 .. _encrypted-cookie-middleware:
 
 Промежуточное ПО для шифрования файлов cookie
@@ -350,9 +347,6 @@ invokable классы. В то время как Closures подходят дл
 
 Алгоритмы шифрования и стиль заполнения, используемые промежуточным ПО для cookie,
 обратно совместимы с ``CookieComponent`` из более ранних версий CakePHP.
-
-.. versionadded:: 3.5.0
-    ``EncryptedCookieMiddleware`` было добавлено 3.5.0
 
 .. _csrf-middleware:
 
@@ -387,9 +381,6 @@ Cross Site Request Forgery (CSRF) Middleware
 Когда включено, вы можете получить доступ к текущему токену CSRF в объекте запроса::
 
     $token = $this->request->getParam('_csrfToken');
-
-.. versionadded:: 3.5.0
-    ``CsrfProtectionMiddleware`` добавлено в 3.5.0
 
 Интеграция с FormHelper
 -----------------------

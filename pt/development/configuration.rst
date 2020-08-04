@@ -271,9 +271,6 @@ solicitado não exista, a :php:class:`RuntimeException` será lançada::
     // Rendimentos:
     ['name' => 'Pizza, Inc.', 'slogan' => 'Pizza for your body and soul'];
 
-.. versionadded:: 3.1.7
-    ``Configure::readOrFail()`` Foi adicionado na versão 3.1.7
-
 Verificar se os dados de configuração estão definidos
 -----------------------------------------------------
 

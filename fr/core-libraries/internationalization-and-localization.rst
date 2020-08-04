@@ -535,9 +535,6 @@ the ``_fallback`` package::
         // Custom code that yields a package here.
     });
 
-.. versionadded:: 3.4.0
-    Replacing the ``_fallback`` loader was added in 3.4.0
-
 Pluriels et Contexte dans les Traducteurs Personnalisés
 -------------------------------------------------------
 

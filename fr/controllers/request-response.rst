@@ -98,9 +98,6 @@ Si vous souhaitez accéder à tous les paramètres de requête, vous pouvez util
 
     $query = $this->request->getQueryParams();
 
-.. versionadded:: 3.4.0
-    ``getQueryParams()`` et ``getQuery()`` ont été ajoutées dans la version 3.4.0
-
 Données du Corps de la Requête
 ------------------------------
 
@@ -156,9 +153,6 @@ Pour accéder à toutes les variables d'environnement dans une requête, utilise
 ``getServerParams()``::
 
     $env = $this->request->getServerParams();
-
-.. versionadded:: 3.4.0
-    ``getServerParams()`` a été ajoutée dans la version 3.4.0
 
 Données XML ou JSON
 -------------------
@@ -296,10 +290,6 @@ Il y a plusieurs détecteurs intégrés que vous pouvez utiliser:
   accepte le mimetype 'application/json'.
 * ``is('xml')`` Vérifie si la requête a l'extension 'xml' ajoutée et si elle
   accepte le mimetype 'application/xml' ou 'text/xml'.
-
-.. versionadded:: 3.3.0
-    Les détecteurs peuvent prendre des paramètres supplémentaires depuis la
-    version 3.3.0.
 
 Données de Session
 ------------------
@@ -464,9 +454,6 @@ Les cookies de la Request peuvent être lus à travers plusieurs méthodes::
 
 Référez-vous à la documentation de :php:class:`Cake\\Http\\Cookie\\CookieCollection`
 pour savoir comment travailler avec les collections de cookies.
-
-.. versionadded:: 3.5.0
-    ``ServerRequest::getCookieCollection()`` a été ajouté dans 3.5.0
 
 .. index:: $this->response
 
@@ -662,10 +649,6 @@ Pour définir une chaîne comme corps de réponse, écrivez ceci::
     // Si vous souhaitez une réponse JSON
     $response = $response->withType('application/json')
         ->withStringBody(json_encode(['Foo' => 'bar']));
-
-.. versionadded:: 3.4.3
-
-    ``withStringBody()`` was added in 3.4.3
 
 .. php:method:: withBody($body)
 
@@ -996,9 +979,6 @@ critères suivants sont vérifiés:
 #. La valeur ``Origin`` de la requête correspond à une des valeurs autorisées de
    Origin.
 
-.. versionadded:: 3.2
-    ``CorsBuilder`` a été ajouté dans 3.2
-
 Erreurs Communes avec les Responses Immutables
 ==============================================
 
@@ -1119,9 +1099,6 @@ devoir mettre à jour la collection si vous modifiez un cookie::
     // Vérifie l'état
     $cookie->isHttpOnly();
     $cookie->isSecure();
-
-.. versionadded:: 3.5.0
-    ``CookieCollection`` et ``Cookie`` ont été ajoutés dans 3.5.0.
 
 .. meta::
     :title lang=fr: Objets ServerRequest et Response

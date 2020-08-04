@@ -310,10 +310,6 @@ PaginatorHelper を使用すると、ページの ``<head>`` 要素に改行タ�
     // 現在のモデルの次ページと前ページ、先頭ページと最終ページのリンクを作成する。
     echo $this->Paginator->meta(['first' => true, 'last' => true]);
 
-.. versionadded:: 3.4.0
-
-    ``first`` と ``last`` オプションは 3.4.0 で追加されました
-
 ページ制御状態の確認
 ====================
 
@@ -340,8 +336,6 @@ PaginatorHelper を使用すると、ページの ``<head>`` 要素に改行タ�
 .. php:method:: total(string $model = null)
 
     与えられたモデルの総ページ数を返します。
-
-    .. versionadded:: 3.4.0
 
 ページカウンターの生成
 ======================
@@ -413,9 +407,6 @@ PaginatorHelper を使用すると、ページの ``<head>`` 要素に改行タ�
     echo $this->Paginator->limitControl([25 => 25, 50 => 50], $user->perPage);
 
 生成されたフォームやコントロールは、変更時に自動的に送信されます。
-
-.. versionadded:: 3.5.0
-    ``limitControl()`` メソッドは、3.5.0 で追加されました。
 
 ページ制御オプションの設定
 ==========================
@@ -503,16 +494,16 @@ PaginatorHelperのすべてのオプションを設定します。サポート�
     関連するモデルでカラムをソートするには、 ``PaginationComponent::paginate``
     プロパティーで設定する必要があります。上記の例を使用すると、
     ページ制御を処理するコントローラーは、次のように ``sortableFields`` キーを設定する必要があります。
-    
+
     .. code-block:: php
-    
+
         $this->paginate = [
             'sortableFields' => [
                 'Posts.title',
                 'Authors.name',
             ],
         ];
-        
+
     ``sortableFields`` オプションの使い方の詳細については、
     :ref:`control-which-fields-used-for-ordering` をご覧ください。
 
@@ -554,9 +545,6 @@ counter() メソッドによる文章出力は、特殊なマーカーを使用�
     echo $this->Paginator->sort('title');
 
 ``model`` オプションを使用すると、 ``PaginatorHelper`` はクエリーがページ制御されたときに定義された ``scope`` を自動的に使用します。
-
-.. versionadded:: 3.3.0
-    3.3.0で複数のページ制御が追加されました
 
 .. meta::
     :title lang=ja: PaginatorHelper

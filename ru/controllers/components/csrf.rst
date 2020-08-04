@@ -2,7 +2,7 @@
 ############################
 
 Активируя компонент ``CSRF`` вы получаете защиту от атак. `CSRF
-<http://en.wikipedia.org/wiki/Cross-site_request_forgery>`_ или 
+<http://en.wikipedia.org/wiki/Cross-site_request_forgery>`_ или
 Межсайтовая подделка запросов является распространенной уязвимостью в
 веб-приложениях. Он позволяет злоумышленнику захватывать и воспроизводить
 предыдущий запрос, а иногда и отправлять запросы данных с использованием
@@ -11,7 +11,7 @@
 Компонент ``CsrfComponent`` работает, устанавливая куки в браузер пользователя.
 При создании формы с помощью :php:class:`Cake\\View\\Helper\\FormHelper`,
 добавляется скрытое поле с токеном CSRF. Во время события ``Controller.startup``
-если запрос является POST, PUT, DELETE, PATCH запросом, компонент сравнит данные 
+если запрос является POST, PUT, DELETE, PATCH запросом, компонент сравнит данные
 запроса со значением хранящимся в куки. Если какое-либо из этих значений будет
 отсутствовать или же два значения не совпадут, компонент выбросит исключение
 :php:class:`Cake\\Network\\Exception\\InvalidCsrfTokenException`.
@@ -21,11 +21,6 @@
     во избежание побочных эффектов. Вы должны :ref:`проверять HTTP-vtnjl <check-the-request>`
     или использовать :php:meth:`Cake\\Http\\ServerRequest::allowMethod()`
     чтобы удостовериться, что используется правильный HTTP-метод.
-
-.. versionadded:: 3.1
-    Изменен тип выбрасываемого исключения с
-    :php:class:`Cake\\Network\\Exception\\ForbiddenException` на
-    :php:class:`Cake\\Network\\Exception\\InvalidCsrfTokenException`.
 
 .. deprecated:: 3.5.0
     Вы должны использовать :ref:`csrf-middleware` вместо

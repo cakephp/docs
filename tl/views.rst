@@ -304,9 +304,6 @@ specified block.::
     // Assigning an empty string will also clear the sidebar block.
     $this->assign('sidebar', '');
 
-.. versionadded:: 3.2
-    View::reset() was added in 3.2
-
 Assigning a block's content is often useful when you want to convert a view
 variable into a block. For example, you may want to use a block for the page
 title, and sometimes assign the title as a view variable in the controller::
@@ -655,8 +652,6 @@ following::
 
 Routing prefix and Elements
 ---------------------------
-
-.. versionadded:: 3.0.1
 
 If you have a Routing prefix configured, the Element path resolution can switch
 to a prefix location, as Layouts and action View do.

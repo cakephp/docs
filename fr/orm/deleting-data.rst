@@ -108,5 +108,3 @@ utiliser la méthode :php:meth:`Cake\\ORM\Exception\\PersistenceFailedException:
 
 Puisque cette méthode utilise la méthode :php:meth:`Cake\\ORM\\Table::delete()`,
 tous les événements de ``delete`` seront déclenchés.
-
-.. versionadded:: 3.4.1

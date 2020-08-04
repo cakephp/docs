@@ -193,8 +193,6 @@ Opcionalmente, você pode ter um controle mais refinado do escopo passando um cl
 Recuperando com campo de classificação personalizada
 ====================================================
 
-.. versionadded:: 3.0.14
-
 Por padrão, recover() classifica os itens utilizando a chave primária. Isso funciona muito bem se a chave primária é uma coluna numérica (incremento automático), mas pode levar a resultados estranhos se você use UUIDs.
 
 Se você precisar de classificação personalizada, você pode definir uma cláusula de ordem personalizada na sua configuração::

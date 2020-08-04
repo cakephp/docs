@@ -193,9 +193,6 @@ As rotas acima mapeiam a mesma URL para diferentes ações do controlador com ba
 
 Todos esses métodos retornam a instância da rota, permitindo que você aproveite os :ref:`fluent setters <route-fluent-methods>` para configurar ainda mais sua rota.
 
-.. versionadded:: 3.5.0
-    Os métodos auxiliares do verbo HTTP foram adicionados em 3.5.0
-
 .. _route-elements:
 
 Elementos de Rota
@@ -328,9 +325,6 @@ Há várias opções de rotas que podem ser definidas individualmente. Após con
     // Defina lang como um parâmetro persistente
     ->setPersist(['lang']);
 
-.. versionadded:: 3.5.0
-    Métodos construtores fluentes foram adicionados em 3.5.0
-
 Passando parâmetros para ação
 -----------------------------
 
@@ -453,9 +447,6 @@ conforme o esperado::
 
 As rotas conectadas nos escopos nomeados somente terão nomes adicionados se a rota também
 for nomeada. As rotas sem nome não terão o ``_namePrefix`` aplicado a elas.
-
-.. versionadded:: 3.1
-    A opção ``_namePrefix`` foi adicionada na versão 3.1
 
 .. index:: admin routing, prefix routing
 .. _prefix-routing:
@@ -730,9 +721,6 @@ curinga, precisará fornecer o parâmetro ``_host`` ao gerar URLs::
         '_host' => 'images.example.com',
     ]);
 
-.. versionadded:: 3.4.0
-    A opção `` _host`` foi adicionada na versão 3.4.0
-
 .. index:: file extensions
 .. _file-extensions:
 
@@ -859,9 +847,6 @@ Uma vez que grupos combinados podem ser aplicados, como o middleware::
     // Aplica o grupo
     $routes->applyMiddleware('web');
 
-.. versionadded:: 3.5.0
-    Grupos de middleware e middleware com escopo foram adicionados na 3.5.0
-
 .. _resource-routes:
 
 Criando rotas RESTful
@@ -946,9 +931,6 @@ separados permite manter a lógica do controlador mais simples. Os prefixos cria
 
     Embora você possa aninhar recursos tão profundamente quanto necessário, não é recomendável
     aninhar mais de 2 recursos juntos.
-
-.. versionadded:: 3.3
-    A opção ``prefix`` foi adicionada a ``resources()`` na versão 3.3.
 
 Limitando as rotas criadas
 --------------------------
@@ -1055,9 +1037,6 @@ Você pode definir um segmento de URL personalizado com a opção ``path``::
     Router::scope('/', function ($routes) {
         $routes->resources('BlogPosts', ['path' => 'posts']);
     });
-
-.. versionadded:: 3.5.0
-    A opção ``path`` foi adicionada na 3.5.0
 
 .. index:: passed arguments
 .. _passed-arguments:
