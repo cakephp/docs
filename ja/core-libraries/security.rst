@@ -60,7 +60,7 @@ openssl では互換性がありません。これは、暗号化されたデー
 です。もしデータを再度暗号化するときにトラブルを避けたければ、 ``engine()`` メソッドを使用して
 ``mcrypt`` の利用を CakePHP に強制できます。 ::
 
-    // In config/bootstrap.php
+    // config/bootstrap.php の中で
     use Cake\Utility\Crypto\Mcrypt;
 
     Security::engine(new Mcrypt());
