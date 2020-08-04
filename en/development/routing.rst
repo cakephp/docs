@@ -1377,7 +1377,7 @@ Using ``Router::reverse()``
 
 ``Router::reverse()`` allows you to use the :ref:`request-parameters` in cases
 where the current URL is the basis for the destination, with some modification
-and the elements of the current url are unpredictable.
+and the elements of the current URL are unpredictable.
 
 As an example, imagine a blog that allowed users to create **Articles** and
 **Comments**, and to mark both as either *published* or *draft*. Both the index
