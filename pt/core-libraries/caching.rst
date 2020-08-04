@@ -168,35 +168,33 @@ O RedisEngine usa as seguintes opções específicas do mecanismo:
 * ``timeout`` Tempo limite de conexão para Redis.
 * ``unix_socket`` Caminho para um soquete unix para Redist.
 
-MemcacheEngine Options
-----------------------
+Opções do MemcacheEngine 
+------------------------
 
-- ``compress`` Whether to compress data.
-- ``username`` Login to access the Memcache server.
-- ``password`` Password to access the Memcache server.
-- ``persistent`` The name of the persistent connection. All configurations using
-  the same persistent value will share a single underlying connection.
-- ``serialize`` The serializer engine used to serialize data. Available engines are php,
-  igbinary and json. Beside php, the memcached extension must be compiled with the
-  appropriate serializer support.
-- ``servers`` String or array of memcached servers. If an array MemcacheEngine will use
-  them as a pool.
-- ``options`` Additional options for the memcached client. Should be an array of option => value.
-  Use the ``\Memcached::OPT_*`` constants as keys.
+- ``compress`` Se deseja compactar dados.
+- ``username`` Faça login para acessar o servidor Memcache.
+- ``password`` Senha para acessar o servidor Memcache.
+- ``persistent`` O nome da conexão persistente. Todas as configurações 
+  que usam o mesmo valor persistente compartilharão uma única conexão subjacente.
+- ``serialize`` O mecanismo do serializador usado para serializar dados. Os mecanismos disponíveis são php, 
+  igbinary e json. Ao lado do php, a extensão memcached deve ser compilada com o suporte serializador apropriado.
+- ``servers`` Cadeia ou matriz de servidores com cache de memória. Se for um array, 
+  o MemcacheEngine os usará como um pool.
+- ``options`` Opções adicionais para o cliente memcached. Deve ser uma matriz de opção => valor. 
+  Use as constantes ``\Memcached::OPT_*`` como chaves.
 
 .. _cache-configuration-fallback:
 
-Configuring Cache Fallbacks
----------------------------
+Configurando Fallbacks de Cache
+-------------------------------
 
-In the event that an engine is not available, such as the ``FileEngine`` trying
-to write to an unwritable folder or the ``RedisEngine`` failing to connect to
-Redis, the engine will fall back to the noop ``NullEngine`` and trigger a loggable
-error. This prevents the application from throwing an uncaught exception due to
-cache failure.
+No caso de um mecanismo não estar disponível, como o ``FileEngine`` tentando 
+gravar em uma pasta não gravável ou o ``RedisEngine`` falhando ao se conectar 
+ao Redis, o mecanismo voltará ao noop ``NullEngine`` e acionará um erro registrável. 
+Isso impede que o aplicativo lance uma exceção não capturada devido a falha no cache.
 
-You can configure Cache configurations to fall back to a specified config using
-the ``fallback`` configuration key::
+Você pode ajustar as configurações de cache para retornar a uma configuração especifica 
+usando a chave de configuração ``fallback``::
 
     Cache::setConfig('redis', [
         'className' => 'Redis',
@@ -207,13 +205,13 @@ the ``fallback`` configuration key::
         'fallback' => 'default',
     ]);
 
-If the Redis server unexpectedly failed, writing to the ``redis`` cache
-configuration would fall back to writing to the ``default`` cache configuration.
-If writing to the ``default`` cache configuration *also* failed in this scenario, the
-engine would fall back once again to the ``NullEngine`` and prevent the application
-from throwing an uncaught exception.
+Se o servidor Redis falhar inesperadamente, a configuração de cache ``redis`` 
+retornaria à gravação na configuração de cache ``default``. Se a gravação na 
+configuração do cache ``default`` *também* falhar nesse cenário, o mecanismo 
+retornará novamente ao ``NullEngine`` e impedirá o aplicativo de lançar uma 
+exceção não capturada.
 
-You can turn off cache fallbacks with ``false``::
+Você pode desativar fallbacks de cache com ``false``::
 
     Cache::setConfig('redis', [
         'className' => 'Redis',
@@ -224,73 +222,74 @@ You can turn off cache fallbacks with ``false``::
         'fallback' => false
     ]);
 
-When there is no fallback cache failures will be raised as exceptions.
+Quando não houver falhas no cache de fallback, serão geradas exceções.
 
-Removing Configured Cache Engines
----------------------------------
+Remoção de Mecanismos de Cache Configurados
+-------------------------------------------
 
 .. php:staticmethod:: drop($key)
 
-Once a configuration is created you cannot change it. Instead you should drop
-the configuration and re-create it using :php:meth:`Cake\\Cache\\Cache::drop()` and
-:php:meth:`Cake\\Cache\\Cache::setConfig()`. Dropping a cache engine will remove
-the config and destroy the adapter if it was constructed.
+Depois que uma configuração é criada, você não pode alterá-la. Em vez disso, você 
+deve descartar a configuração e recriá-la usando :php:meth:`Cake\\Cache\\Cache::drop()` e
+:php:meth:`Cake\\Cache\\Cache::setConfig()`. Descartar um mecanismo de cache 
+removerá a configuração e destruirá o adaptador, se ele tiver sido construído.
 
-Writing to a Cache
-==================
+Gravando em um Cache
+====================
 
 .. php:staticmethod:: write($key, $value, $config = 'default')
 
-``Cache::write()`` will write a $value to the Cache. You can read or
-delete this value later by referring to it by ``$key``. You may
-specify an optional configuration to store the cache in as well. If
-no ``$config`` is specified, default will be used. ``Cache::write()``
-can store any type of object and is ideal for storing results of
-model finds::
+``Cache::write()`` gravará um $valor no cache. Você pode ler ou 
+excluir esse valor posteriormente consultando-o com ``$key``. 
+Você pode especificar uma configuração opcional para armazenar o 
+cache também. Se nenhum ``$config`` for especificado, o padrão 
+será usado. ``Cache::write()`` pode armazenar qualquer tipo 
+de objeto e é ideal para armazenar resultados de descobertas de 
+modelos::
 
     if (($posts = Cache::read('posts')) === false) {
         $posts = $someService->getAllPosts();
         Cache::write('posts', $posts);
     }
 
-Using ``Cache::write()`` and ``Cache::read()`` to reduce the number
-of trips made to the database to fetch posts.
+Usando ``Cache::write()`` e ``Cache::read()`` irá reduzir o 
+número de viagens feitas ao banco de dados para buscar postagens.
 
 .. note::
 
-    If you plan to cache the result of queries made with the CakePHP ORM,
-    it is better to use the built-in cache capabilities of the Query object
-    as described in the :ref:`caching-query-results` section
+    Se você planeja armazenar em cache o resultado de consultas feitas com o 
+    ORM do CakePHP, é melhor usar os recursos de cache internos do objeto Query, 
+    conforme descrito na seção :ref:`caching-query-results`
 
-Writing Multiple Keys at Once
------------------------------
+Escrevendo Várias Chaves de uma só Vez
+--------------------------------------
 
 .. php:staticmethod:: writeMany($data, $config = 'default')
 
-You may find yourself needing to write multiple cache keys at once. While you
-can use multiple calls to ``write()``, ``writeMany()`` allows CakePHP to use
-more efficient storage API's where available. For example using ``writeMany()``
-save multiple network connections when using Memcached::
+Você pode precisar escrever várias chaves de cache de uma só vez. Embora você 
+possa usar várias chamadas para ``write()``, ``writeMany()`` permite que 
+o CakePHP use APIs de armazenamento mais eficientes, quando disponíveis. Por exemplo, 
+usando ``writeMany()`` salve várias conexões de rede ao usar o Memcached::
 
     $result = Cache::writeMany([
         'article-' . $slug => $article,
         'article-' . $slug . '-comments' => $comments
     ]);
 
-    // $result will contain
+    // $result poderá conter
     ['article-first-post' => true, 'article-first-post-comments' => true]
 
-Read Through Caching
---------------------
+Armazenamento em Cache de Leitura
+---------------------------------
 
 .. php:staticmethod:: remember($key, $callable, $config = 'default')
 
-Cache makes it easy to do read-through caching. If the named cache key exists,
-it will be returned. If the key does not exist, the callable will be invoked
-and the results stored in the cache at the provided key.
+Esse recurso facilita o armazenamento em cache de leitura. Se a chave de 
+cache nomeada existir, ela será retornada. Se a chave não existir, a chamada 
+será invocada e os resultados armazenados no cache da chave fornecida.
 
-For example, you often want to cache remote service call results. You could use
-``remember()`` to make this simple::
+Por exemplo, você desejará armazenar em cache os resultados de chamadas 
+de serviço remoto. Você pode usar ``remember()`` para simplificar::
 
     class IssueService
     {
@@ -302,164 +301,164 @@ For example, you often want to cache remote service call results. You could use
         }
     }
 
-Reading From a Cache
-====================
+Lendo de um Cache
+=================
 
 .. php:staticmethod:: read($key, $config = 'default')
 
-``Cache::read()`` is used to read the cached value stored under
-``$key`` from the ``$config``. If ``$config`` is null the default
-config will be used. ``Cache::read()`` will return the cached value
-if it is a valid cache or ``false`` if the cache has expired or
-doesn't exist. The contents of the cache might evaluate false, so
-make sure you use the strict comparison operators: ``===`` or
-``!==``.
+``Cache::read()`` é usado para ler o valor em cache armazenado em ``$key``
+do ``$config``. Se ``$config`` for nulo, a configuração padrão será usada. 
+``Cache::read()`` retornará o valor em cache se for um cache válido ou 
+``false`` se o cache expirou ou não existe. O conteúdo do cache pode ser 
+avaliado como falso, portanto, use os operadores de comparação estritos: 
+``===`` ou ``!==``.
 
-For example::
+Por exemplo::
 
     $cloud = Cache::read('cloud');
     if ($cloud !== false) {
         return $cloud;
     }
 
-    // Generate cloud data
+    // Gere dados na nuvem
     // ...
 
-    // Store data in cache
+    // Armazenar dados no cache
     Cache::write('cloud', $cloud);
 
     return $cloud;
-    
-Or if you are using another cache configuration called ``short``, you can
-specify it in ``Cache::read()`` and ``Cache::write()`` calls as below::
 
-    // Read key "cloud", but from short configuration instead of default
+Ou, se você estiver usando outra configuração de cache chamada ``short``, 
+poderá especificá-la nas chamadas ``Cache::read()`` e ``Cache::write()``, 
+conforme abaixo::
+
+    // Leia a chave "cloud", mas a partir da configuração curta em vez do padrão
+
     $cloud = Cache::read('cloud', 'short');
     if ($cloud !== false) {
         return $cloud;
     }
 
-    // Generate cloud data
+    // Gere dados na nuvem
     // ...
 
-    // Store data in cache, using short cache configuration instead of default
+    // Armazene dados no cache, usando a configuração de cache "short" em vez do padrão
     Cache::write('cloud', $cloud, 'short');
 
     return $cloud;
 
-Reading Multiple Keys at Once
------------------------------
+Lendo Várias Chaves de uma só Vez
+---------------------------------
 
 .. php:staticmethod:: readMany($keys, $config = 'default')
 
-After you've written multiple keys at once, you'll probably want to read them as
-well. While you could use multiple calls to ``read()``, ``readMany()`` allows
-CakePHP to use more efficient storage API's where available. For example using
-``readMany()`` save multiple network connections when using Memcached::
+Depois de escrever várias chaves ao mesmo tempo, você provavelmente também as lerá. 
+Embora você possa usar várias chamadas para ``read()``, ``readMany()`` permite 
+que o CakePHP use APIs de armazenamento mais eficientes, quando disponíveis. Por 
+exemplo, usando ``readMany()`` salve várias conexões de rede ao usar o Memcached::
 
     $result = Cache::readMany([
         'article-' . $slug,
         'article-' . $slug . '-comments'
     ]);
-    // $result will contain
+    // $result poderá conter
     ['article-first-post' => '...', 'article-first-post-comments' => '...']
 
-Deleting From a Cache
-=====================
+Exclusão de um Cache
+====================
 
 .. php:staticmethod:: delete($key, $config = 'default')
 
-``Cache::delete()`` will allow you to completely remove a cached
-object from the store::
+``Cache::delete()`` permitirá remover completamente um objeto em cache da loja::
 
-    // Remove a key
+    // Remove uma chave
     Cache::delete('my_key');
 
-Deleting Multiple Keys at Once
-------------------------------
+Exclusão de Várias Chaves de uma só Vez
+---------------------------------------
 
 .. php:staticmethod:: deleteMany($keys, $config = 'default')
 
-After you've written multiple keys at once, you may want to delete them.  While
-you could use multiple calls to ``delete()``, ``deleteMany()`` allows CakePHP to use
-more efficient storage API's where available. For example using ``deleteMany()``
-save multiple network connections when using Memcached::
+Depois de escrever várias chaves de uma vez, você pode excluí-las. Embora 
+você possa usar várias chamadas para ``delete()``, ``deleteMany()`` 
+permite que o CakePHP use APIs de armazenamento mais eficientes, quando 
+disponíveis. Por exemplo, usando ``deleteMany()`` remove várias conexões 
+de rede ao usar o Memcached::
 
     $result = Cache::deleteMany([
         'article-' . $slug,
         'article-' . $slug . '-comments'
     ]);
-    // $result will contain
+    // $result conterá
     ['article-first-post' => true, 'article-first-post-comments' => true]
 
-Clearing Cached Data
-====================
+Limpando Dados em Cache
+=======================
 
 .. php:staticmethod:: clear($check, $config = 'default')
 
-Destroy all cached values for a cache configuration. In engines like: Apcu,
-Memcached, and Wincache, the cache configuration's prefix is used to remove
-cache entries. Make sure that different cache configurations have different
-prefixes::
+Destrua todos os valores em cache para uma configuração de cache. Em mecanismos 
+como: Apcu, Memcached e Wincache, o prefixo da configuração do cache é usado 
+para remover as entradas do cache. Verifique se diferentes configurações de 
+cache têm prefixos diferentes::
 
-    // Will only clear expired keys.
+    // Limpa apenas as chaves expiradas.
     Cache::clear(true);
 
-    // Will clear all keys.
+    // Limpará todas as chaves.
     Cache::clear(false);
 
 .. note::
 
-    Because APCu and Wincache use isolated caches for webserver and CLI they
-    have to be cleared separately (CLI cannot clear webserver and vice versa).
+    Como o APCu e o Wincache usam caches isolados para servidor da web e CLI, 
+    eles devem ser limpos separadamente (a CLI não pode limpar o servidor da web e vice-versa).
 
-Using Cache to Store Counters
-=============================
+Usando Cache para Armazenar Contadores
+======================================
 
 .. php:staticmethod:: increment($key, $offset = 1, $config = 'default')
 
 .. php:staticmethod:: decrement($key, $offset = 1, $config = 'default')
 
-Counters in your application are good candidates for storage in a cache.  As an
-example, a simple countdown for remaining 'slots' in a contest could be stored
-in Cache. The Cache class exposes atomic ways to increment/decrement counter
-values in an easy way. Atomic operations are important for these values as it
-reduces the risk of contention, and ability for two users to simultaneously
-lower the value by one, resulting in an incorrect value.
+Os contadores no seu aplicativo são bons candidatos para armazenamento em cache. 
+Como exemplo, uma contagem regressiva simples para os 'slots' restantes em uma
+disputa pode ser armazenada no cache. A classe Cache expõe maneiras atômicas 
+de aumentar/diminuir os valores dos contadores de maneira fácil. As operações 
+atômicas são importantes para esses valores, pois reduzem o risco de contenção e 
+a capacidade de dois usuários reduzirem simultaneamente o valor em um, resultando 
+em um valor incorreto.
 
-After setting an integer value you can manipulate it using ``increment()`` and
-``decrement()``::
+Depois de definir um valor inteiro, você pode manipulá-lo usando ``increment()`` e ``decrement()``::
 
     Cache::write('initial_count', 10);
 
-    // Later on
+    // Decrementa
     Cache::decrement('initial_count');
 
-    // Or
+    // Ou
     Cache::increment('initial_count');
 
 .. note::
 
-    Incrementing and decrementing do not work with FileEngine. You should use
-    APCu, Wincache, Redis or Memcached instead.
+    Incrementar e decrementar não funcionam com o FileEngine. 
+    Você deve usar APCu, Wincache, Redis ou Memcached.
 
-Using Cache to Store Common Query Results
-=========================================
+Usando o Cache para Armazenar Resultados Comuns de Consulta
+===========================================================
 
-You can greatly improve the performance of your application by putting results
-that infrequently change, or that are subject to heavy reads into the cache.
-A perfect example of this are the results from
-:php:meth:`Cake\\ORM\\Table::find()`. The Query object allows you to cache
-results using the ``cache()`` method. See the :ref:`caching-query-results` section
-for more information.
+Você pode melhorar bastante o desempenho do seu aplicativo colocando resultados 
+que raramente mudam ou estão sujeitos a leituras pesadas no cache. Um exemplo 
+perfeito disso são os resultados de :php:meth:`Cake\\ORM\\Table::find()`. O objeto 
+Query permite armazenar resultados em cache usando o método ``cache()``. Veja a seção 
+:ref:`caching-query-results` para mais informações.
 
-Using Groups
-============
+Usando Grupos
+=============
 
-Sometimes you will want to mark multiple cache entries to belong to certain
-group or namespace. This is a common requirement for mass-invalidating keys
-whenever some information changes that is shared among all entries in the same
-group. This is possible by declaring the groups in cache configuration::
+Às vezes, você deseja marcar várias entradas de cache para pertencer a determinado 
+grupo ou namespace. Esse é um requisito comum para chaves de invalidação em 
+massa sempre que algumas informações são alteradas e são compartilhadas entre todas 
+as entradas no mesmo grupo. Isso é possível declarando os grupos na configuração de cache::
 
     Cache::setConfig('site_home', [
         'className' => 'Redis',
@@ -469,14 +468,14 @@ group. This is possible by declaring the groups in cache configuration::
 
 .. php:method:: clearGroup($group, $config = 'default')
 
-Let's say you want to store the HTML generated for your homepage in cache, but
-would also want to automatically invalidate this cache every time a comment or
-post is added to your database. By adding the groups ``comment`` and ``article``,
-we have effectively tagged any key stored into this cache configuration with
-both group names.
+Digamos que você deseja armazenar o HTML gerado para sua página inicial no cache, 
+mas também deseja invalidá-lo automaticamente sempre que um comentário ou postagem 
+for adicionado ao seu banco de dados. Adicionando os grupos ``comment`` e ``article``, 
+identificamos efetivamente qualquer chave armazenada nessa configuração de cache com os 
+dois nomes de grupos.
 
-For instance, whenever a new post is added, we could tell the Cache engine to
-remove all entries associated to the ``article`` group::
+Por exemplo, sempre que uma nova postagem é adicionada, poderíamos dizer ao mecanismo de 
+cache para remover todas as entradas associadas ao grupo ``article``::
 
     // src/Model/Table/ArticlesTable.php
     public function afterSave($event, $entity, $options = [])
@@ -488,14 +487,14 @@ remove all entries associated to the ``article`` group::
 
 .. php:staticmethod:: groupConfigs($group = null)
 
-``groupConfigs()`` can be used to retrieve mapping between group and
-configurations, i.e.: having the same group::
+``groupConfigs()`` pode ser usado para recuperar o mapeamento 
+entre o grupo e as configurações, ou seja: ter o mesmo grupo::
 
     // src/Model/Table/ArticlesTable.php
 
     /**
-     * A variation of previous example that clears all Cache configurations
-     * having the same group
+     * Uma variação do exemplo anterior que limpa todas as 
+     * configurações de cache com o mesmo grupo
      */
     public function afterSave($event, $entity, $options = [])
     {
@@ -507,107 +506,106 @@ configurations, i.e.: having the same group::
         }
     }
 
-Groups are shared across all cache configs using the same engine and same
-prefix. If you are using groups and want to take advantage of group deletion,
-choose a common prefix for all your configs.
+Os grupos são compartilhados em todas as configurações de cache usando o 
+mesmo mecanismo e o mesmo prefixo. Se você estiver usando grupos e quiser 
+tirar proveito da exclusão do grupo, escolha um prefixo comum para todas 
+as suas configurações.
 
-Globally Enable or Disable Cache
-================================
+Ativar ou Desativar Globalmente o Cache
+=======================================
 
 .. php:staticmethod:: disable()
 
-You may need to disable all Cache read & writes when trying to figure out cache
-expiration related issues. You can do this using ``enable()`` and
-``disable()``::
+Pode ser necessário desativar todas as leituras e gravações do cache ao tentar 
+descobrir problemas relacionados à expiração do cache. Você pode fazer isso 
+usando ``enable()`` e ``disable()``::
 
-    // Disable all cache reads, and cache writes.
+    // Desative todas as leituras de cache e gravações de cache.
     Cache::disable();
 
-Once disabled, all reads and writes will return ``null``.
+Uma vez desativado, todas as leituras e gravações retornarão ``null``.
 
 .. php:staticmethod:: enable()
 
-Once disabled, you can use ``enable()`` to re-enable caching::
+Uma vez desativado, você pode usar ``enable()`` para reativar o cache::
 
-    // Re-enable all cache reads, and cache writes.
+    // Reative todas as leituras e gravações do cache.
     Cache::enable();
 
 .. php:staticmethod:: enabled()
 
-If you need to check on the state of Cache, you can use ``enabled()``.
+Se você precisar verificar o estado do cache, poderá usar ``enabled()``.
 
-Creating a Cache Engine
-=======================
+Criando um Mecanismo de Cache
+=============================
 
-You can provide custom ``Cache`` engines in ``App\Cache\Engine`` as well
-as in plugins using ``$plugin\Cache\Engine``. Cache engines must be in a cache
-directory. If you had a cache engine named ``MyCustomCacheEngine``
-it would be placed in either **src/Cache/Engine/MyCustomCacheEngine.php**.
-Or in **plugins/MyPlugin/src/Cache/Engine/MyCustomCacheEngine.php** as
-part of a plugin. Cache configs from plugins need to use the plugin
-dot syntax::
+Você pode fornecer mecanismos personalizados de ``Cache`` em ``App\Cache\Engine``, 
+bem como em plugins usando ``$plugin\Cache\Engine``. Os mecanismos de cache devem 
+estar em um diretório de cache. Se você tivesse um mecanismo de cache chamado 
+``MyCustomCacheEngine``, ele seria colocado em **src/Cache/Engine/MyCustomCacheEngine.php**. 
+Ou em **plugins/MyPlugin/src/Cache/Engine/MyCustomCacheEngine.php** como parte de um plug-in.
+As configurações de cache dos plugins precisam usar a sintaxe de pontos do plug-in::
 
     Cache::setConfig('custom', [
         'className' => 'MyPlugin.MyCustomCache',
         // ...
     ]);
 
-Custom Cache engines must extend :php:class:`Cake\\Cache\\CacheEngine` which
-defines a number of abstract methods as well as provides a few initialization
-methods.
+Os mecanismos de cache personalizado devem estender :php:class:`Cake\\Cache\\CacheEngine`, 
+que define vários métodos abstratos, além de fornecer alguns métodos de inicialização.
 
-The required API for a CacheEngine is
+A API necessária para um CacheEngine é
 
 .. php:class:: CacheEngine
 
-    The base class for all cache engines used with Cache.
+    A classe base para todos os mecanismos de cache usados com o Cache.
 
 .. php:method:: write($key, $value)
 
-    :return: boolean for success.
+    :return: boolean para sucesso.
 
-    Write value for a key into cache, Return ``true``
-    if the data was successfully cached, ``false`` on failure.
+    Escreva o valor de uma chave no cache, retorna ``true`` se os dados 
+    foram armazenados em cache com sucesso, ``false`` em caso de falha.
 
 .. php:method:: read($key)
 
-    :return: The cached value or ``false`` for failure.
+    :return: O valor em cache ou ``false`` para falha.
 
-    Read a key from the cache. Return ``false`` to indicate
-    the entry has expired or does not exist.
+    Leia uma chave do cache. Retorne ``false`` para indicar 
+    que a entrada expirou ou não existe.
 
 .. php:method:: delete($key)
 
-    :return: Boolean ``true`` on success.
+    :return: Booleano ``true`` para sucesso.
 
-    Delete a key from the cache. Return ``false`` to indicate that
-    the entry did not exist or could not be deleted.
+    Exclua uma chave do cache. Retorne ``false`` para indicar que a 
+    entrada não existia ou não pôde ser excluída.
 
 .. php:method:: clear($check)
 
-    :return: Boolean ``true`` on success.
+    :return: Booleano ``true`` para sucesso.
 
-    Delete all keys from the cache. If $check is ``true``, you should
-    validate that each value is actually expired.
+    Exclua todas as chaves do cache. Se $check for ``true``, você deve 
+    validar se cada valor realmente expirou.
 
 .. php:method:: clearGroup($group)
 
-    :return: Boolean ``true`` on success.
+    :return: Booleano ``true`` para sucesso.
 
-    Delete all keys from the cache belonging to the same group.
+    Exclua todas as chaves do cache pertencentes ao mesmo grupo.
 
 .. php:method:: decrement($key, $offset = 1)
 
-    :return: Boolean ``true`` on success.
+    :return: Booleano ``true`` para sucesso.
 
-    Decrement a number under the key and return decremented value
+    Decrementar um número na chave e retorna o valor decrementado
 
 .. php:method:: increment($key, $offset = 1)
 
-    :return: Boolean ``true`` on success.
+    :return: Booleano ``true`` para sucesso.
 
-    Increment a number under the key and return incremented value
+    Incremente um número abaixo da chave e retorna valor incrementado
 
 .. meta::
-    :title lang=en: Caching
-    :keywords lang=en: uniform api,cache engine,cache system,atomic operations,php class,disk storage,static methods,php extension,consistent manner,similar features,apcu,apc,memcache,queries,cakephp,elements,servers,memory
+    :title lang=pt: Cache
+    :keywords lang=pt-br: uniforme api,cache engine,sistema de cache,operacoes atomicas,php class,armazenamento em disco,metodos estaicos,extensao php,consistencia,recursos similares,apcu,apc,memcache,consultas,cakephp,elementos,servidores,memoria
