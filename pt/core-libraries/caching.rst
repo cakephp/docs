@@ -147,7 +147,7 @@ Cada mecanismo aceita as seguintes opções:
 Opções do FileEngine
 --------------------
 
-O FileEngine usa as seguintes opções específicas do mecanismo:
+O ``FileEngine`` usa as seguintes opções específicas do mecanismo:
 
 * ``isWindows`` Preenchido automaticamente se o host é Windows ou não
 * ``lock`` Os arquivos devem ser bloqueados antes de serem gravados?
