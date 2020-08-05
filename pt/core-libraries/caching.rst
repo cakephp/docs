@@ -440,7 +440,7 @@ Depois de definir um valor inteiro, você pode manipulá-lo usando ``increment()
 
 .. note::
 
-    Incrementar e decrementar não funcionam com o FileEngine. 
+    Incrementar e decrementar não funcionam com o ``FileEngine``. 
     Você deve usar APCu, Wincache, Redis ou Memcached.
 
 Usando o Cache para Armazenar Resultados Comuns de Consulta
