@@ -127,7 +127,7 @@ mecanismos de cache, você pode consultar o nome da classe usando as seguintes s
 
 .. note::
 
-    Ao usar o FileEngine, pode ser necessário usar a opção ``mask`` para 
+    Ao usar o ``FileEngine``, pode ser necessário usar a opção ``mask`` para 
     garantir que os arquivos de cache sejam criados com as permissões corretas.
 
 Opções do Mecanismo
