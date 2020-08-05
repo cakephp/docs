@@ -608,4 +608,4 @@ A API necessária para um CacheEngine é
 
 .. meta::
     :title lang=pt: Cache
-    :keywords lang=pt-br: uniforme api,cache engine,sistema de cache,operacoes atomicas,php class,armazenamento em disco,metodos estaicos,extensao php,consistencia,recursos similares,apcu,apc,memcache,consultas,cakephp,elementos,servidores,memoria
+    :keywords lang=pt: uniforme api,cache engine,sistema de cache,operacoes atomicas,php class,armazenamento em disco,metodos estaicos,extensao php,consistencia,recursos similares,apcu,apc,memcache,consultas,cakephp,elementos,servidores,memoria
