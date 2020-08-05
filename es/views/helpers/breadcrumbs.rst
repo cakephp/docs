@@ -5,8 +5,6 @@ Breadcrumbs
 
 .. php:class:: BreadcrumbsHelper(View $view, array $config = [])
 
-.. versionadded:: 3.3.6
-
 .. note::
     La documentación no es compatible actualmente con el idioma español en esta página.
 

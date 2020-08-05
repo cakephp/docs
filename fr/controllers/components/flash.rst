@@ -33,14 +33,6 @@ vous pouvez utiliser la méthode ``set()``::
 
     $this->Flash->set('Ceci est un message');
 
-.. versionadded:: 3.1
-
-    Les messages Flash peuvent maintenant s'empiler. Des appels
-    successifs à ``set()`` et ``__call()`` avec la même clé ajouteront les messages à
-    ``$_SESSION``. Si vous souhaitez conserver l'ancien comportement (un message malgré
-    plusieurs appels successifs), définissez le paramètre ``clear`` à ``true`` quand
-    vous configurez le Component.
-
 Les méthodes ``__call()`` et ``set()`` de FlashComponent prennent de façon
 optionnelle un deuxième paramètre, un tableau d'options:
 
@@ -51,12 +43,8 @@ optionnelle un deuxième paramètre, un tableau d'options:
   pour le rendu.
 * ``params`` Un tableau en option de clés/valeurs pour rendre disponible des
   variables dans un element.
-
-.. versionadded:: 3.1
-
-    Une nouvelle option ``clear`` a été ajoutée. Elle doit être un
-    ``bool`` et vous permet de supprimer tous les messages de la pile pour en commencer
-    une nouvelle.
+* ``clear`` expects a ``bool`` and allows you to delete all messages in the
+  current stack and start a new one.
 
 Un exemple de l'utilisation de ces options::
 
@@ -100,8 +88,6 @@ flash.
 
 HTML dans des Messages Flash
 ============================
-
-.. versionadded:: 3.3.3
 
 Il est possible d'afficher le HTML dans des messages flash en utilisant la clé
 d'option ``'escape'``::

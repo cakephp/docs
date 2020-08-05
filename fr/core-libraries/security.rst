@@ -123,9 +123,6 @@ data from one of the following sources:
 If neither source is available a warning will be emitted and an unsafe value
 will be used for backwards compatibility reasons.
 
-.. versionadded:: 3.2.3
-    The randomBytes method was added in 3.2.3.
-
 .. meta::
     :title lang=fr: Security
     :keywords lang=fr: Security api,secret password,cipher text,php class,class security,text key,security library,objet instance,security measures,basic security,security level,string type,fallback,hash,data security,singleton,inactivity,php encrypt,implementation,php sécurité

@@ -622,9 +622,6 @@ contain に条件を渡す
             return $q->autoFields(true);
         }]);
 
-.. versionadded:: 3.1
-    関連オブジェクトを介して列を select する機能は 3.1 で追加されました。
-
 関連を含んだソート
 ------------------
 
@@ -717,9 +714,6 @@ innerJoinWith を使う
 
 違いは結果セットに追加のカラムが追加されず、 ``_matchingData`` プロパティーがセットされないことだけです。
 
-.. versionadded:: 3.1
-    Query::innerJoinWith() は 3.1 で追加されました。
-
 notMatching を使う
 ------------------
 
@@ -774,9 +768,6 @@ notMatching を使う
 ``matching()`` 関数の正反対となる ``notMatching()`` ですが、いかなるデータも結果セットの
 ``_matchingData`` プロパティーに追加しないということを覚えておいてください。
 
-.. versionadded:: 3.1
-    Query::notMatching() は 3.1 で追加されました。
-
 leftJoinWith を使う
 -------------------
 
@@ -806,9 +797,6 @@ leftJoinWith を使う
         ->enableAutoFields(true);
 
 この関数は指定した関連からいずれのカラムも結果セットへとロードしません。
-
-.. versionadded:: 3.1
-    Query::leftJoinWith() は 3.1 で追加されました。
 
 .. end-filtering
 
@@ -1008,9 +996,6 @@ Query オブジェクトで ``isEmpty()`` メソッドを呼び出した場合�
 
 エンティティーが単一であれ、コレクションであれ、
 追加のデータをその中にイーガーロード (Eager Load) することができます。
-
-.. versionadded: 3.1
-    Table::loadInto() は 3.1 で追加されました。
 
 .. _map-reduce:
 

@@ -321,9 +321,6 @@ as rotas de plugin em escopos ou prefixos adicionais::
 
 O código acima resultaria em URLs como ``/backend/contact_manager/contacts``.
 
-.. versionadded:: 3.5.0
-    ``RouteBuilder::loadPlugin()`` foi adicionado in 3.5.0
-
 Plugin Controllers
 ==================
 

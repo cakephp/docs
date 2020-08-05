@@ -128,9 +128,6 @@ prefix. You could create the following class::
 This controller would only be used when an error is encountered in a prefixed
 controller, and allows you to define prefix specific logic/templates as needed.
 
-.. versionadded:: 3.7.0
-    Prefixed error controllers were added.
-
 Change the ExceptionRenderer
 ============================
 
@@ -360,10 +357,6 @@ exceptions for HTTP methods
 
     Used for doing a 403 Forbidden error.
 
-.. versionadded:: 3.1
-
-    InvalidCsrfTokenException has been added.
-
 .. php:exception:: InvalidCsrfTokenException
 
     Used for doing a 403 error caused by an invalid CSRF token.
@@ -380,19 +373,13 @@ exceptions for HTTP methods
 
     Used for doing a 406 Not Acceptable error.
 
-    .. versionadded:: 3.1.7 NotAcceptableException has been added.
-
 .. php:exception:: ConflictException
 
     Used for doing a 409 Conflict error.
 
-    .. versionadded:: 3.1.7 ConflictException has been added.
-
 .. php:exception:: GoneException
 
     Used for doing a 410 Gone error.
-
-    .. versionadded:: 3.1.7 GoneException has been added.
 
 For more details on HTTP 4xx error status codes see :rfc:`2616#section-10.4`.
 
@@ -407,8 +394,6 @@ For more details on HTTP 4xx error status codes see :rfc:`2616#section-10.4`.
 .. php:exception:: ServiceUnavailableException
 
     Used for doing a 503 Service Unavailable error.
-
-    .. versionadded:: 3.1.7 Service Unavailable has been added.
 
 For more details on HTTP 5xx error status codes see :rfc:`2616#section-10.5`.
 
@@ -553,8 +538,6 @@ In addition, CakePHP uses the following exceptions:
 
     An entity couldn't be saved/deleted while using :php:meth:`Cake\\ORM\\Table::saveOrFail()` or
     :php:meth:`Cake\\ORM\\Table::deleteOrFail()`.
-
-    .. versionadded:: 3.4.1 PersistenceFailedException has been added.
 
 .. php:namespace:: Cake\Datasource\Exception
 

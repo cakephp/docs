@@ -5,8 +5,6 @@
 
 .. php:class:: BreadcrumbsHelper(View $view, array $config = [])
 
-.. versionadded:: 3.3.6
-
 ``BreadcrumbsHelper`` предоставляет возможность легко справиться с созданием и
 отображением навигационных цепочек (хлебных крошек) для вашего приложения.
 
@@ -195,9 +193,6 @@
     })->toArray();
 
     $this->Breadcrumbs->reset()->add($crumbs);
-
-.. versionadded:: 3.4.0
-    Метод ``reset()`` был добавлен в версии 3.4.0
 
 .. meta::
     :title lang=ru: BreadcrumbsHelper

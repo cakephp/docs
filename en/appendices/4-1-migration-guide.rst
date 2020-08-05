@@ -66,8 +66,8 @@ Http
 * ``CsrfProtectionMiddleware::whitelistCallback()`` has been deprecated. Use
   ``skipCheckCallback()`` instead.
 * ``ServerRequest::input()`` is deprecated. Use ``(string)$request->getBody()``
-   to get the raw PHP input as string; use ``BodyParserMiddleware`` to parse the
-   request body so that it's available as array/object through ``$request->getParsedBody()``
+  to get the raw PHP input as string; use ``BodyParserMiddleware`` to parse the
+  request body so that it's available as array/object through ``$request->getParsedBody()``
 * The ``httpOnly`` option for ``CsrfProtectionMiddleware`` is now ``httponly``
   to improve consistency with cookie creation elsewhere in the framework.
 

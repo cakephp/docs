@@ -328,9 +328,6 @@ Ao converter dados belongsToMany, você pode desativar a criação de nova entid
 a opção ``onlyIds``. Quando habilitado, esta opção restringe transformação de
 belongsToMany para apenas usar a chave ``_ids`` e ignorar todos os outros dados.
 
-.. versionadded:: 3.1.0
-    A opção ``onlyIds`` foi adicionada na versão 3.1.0
-
 Convertendo Dados de Associação HasMany
 ---------------------------------------
 
@@ -363,9 +360,6 @@ você pode usar o formato ``_ids``::
 Ao converter dados hasMany, você pode desativar a criação de nova entidade, usando
 a opção ``onlyIds`. Quando ativada, esta opção restringe transformação de hasMany
 para apenas usar a chave ``_ids`` e ignorar todos os outros dados.
-
-.. versionadded:: 3.1.0
-     A opção ``onlyIds`` foi adicionada na versão 3.1.0
 
 Conventendo Vários Registros
 ----------------------------
@@ -1178,8 +1172,6 @@ Se você quiser rastrear a entidade que falhou ao salvar, você pode usar o mét
 Como isso executa internamente uma chamada ao  :php:meth:`Cake\\ORM\\Table::save()`,
 todos eventos de save correspondentes serão disparados.
 
-.. versionadded:: 3.4.1
-
 Salvando Várias Entidades
 =========================
 
@@ -1207,8 +1199,6 @@ podem ser um array de entidades criadas usando ``newEntities()`` / ``patchEntiti
 
 O resultado será as entidades atualizadas em caso de sucesso ou ``false``
 em caso de falha.
-
-.. versionadded:: 3.2.8
 
 Atualização em Massa
 ====================

@@ -11,6 +11,3 @@ Cache Shell
 
     You can refer to the english version in the select top menu to have
     information about this page's topic.
-
-.. versionadded:: 3.3.0
-    The cache shell was added in 3.3.0

@@ -31,7 +31,7 @@ Ang Middleware sa CakePHP
 
 Ang CakePHP ay nagbibigay ng ilang mga middleware para i-handle ang karaniwang mga gawain sa web na mga aplikasyon:
 
-* ``Cake\Error\Middleware\ErrorHandlerMiddleware`` nagbibitag ng mga exception mula sa 
+* ``Cake\Error\Middleware\ErrorHandlerMiddleware`` nagbibitag ng mga exception mula sa
   naka-wrap na middleware at mga render ng maling pahina gamit ang
   :doc:`/development/errors` Exception handler.
 * ``Cake\Routing\AssetMiddleware`` sumusuri kung ang hiling ay nagre-refer sa isang
@@ -178,7 +178,7 @@ Ang mga kahilingan ay naglalaman ng URI object, na kung saan ay naglalaman ng mg
     $query = $uri->getQuery();
     $host = $uri->getHost();
 
-Panghuli, maaari kang mag-ugnay sa isang humihiling na 'attributes'. Ang CakePHP ay gumagamit sa mga 
+Panghuli, maaari kang mag-ugnay sa isang humihiling na 'attributes'. Ang CakePHP ay gumagamit sa mga
 katangiang ito upang dalhin ang framework sa tiyak na mga parameter ng kahilingan. Mayroong kunting
 importante na mga katangian sa anumang kahilingan na hinawakan ni CakePHP:
 
@@ -193,7 +193,7 @@ importante na mga katangian sa anumang kahilingan na hinawakan ni CakePHP:
 Pag-uugnay ng mga Tugon
 -----------------------
 
-Ang pamamaraan na maaaring magamit upang lumikha ng server na tugon ay pareho dun sa maaaring 
+Ang pamamaraan na maaaring magamit upang lumikha ng server na tugon ay pareho dun sa maaaring
 magamit kapag nag-uugnay sa :ref:`httpclient-response-objects`. Habang ang
 interface ay pareho lamang ang paggamit na mga sitwasyon ay magkaiba.
 
@@ -318,9 +318,6 @@ iyong aplikasyon sa middleware stack::
         ->noSniff();
 
     $middlewareQueue->add($headers);
-
-.. versionadded:: 3.5.0
-    The ``SecurityHeadersMiddleware`` was added in 3.5.0
 
 .. _encrypted-cookie-middleware:
 

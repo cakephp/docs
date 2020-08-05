@@ -327,9 +327,6 @@ appliqué au stack de middlewares::
 
     $middlewareQueue->add($headers);
 
-.. versionadded:: 3.5.0
-    ``SecurityHeadersMiddleware`` a été ajouté dans 3.5.0
-
 .. _encrypted-cookie-middleware:
 
 Middleware de Gestion de Cookies Chiffrés
@@ -357,9 +354,6 @@ Les données des cookies sont chiffrées via OpenSSL, en AES::
 
 L'algorithme de chiffrement et le 'padding style' utilisé par le middleware
 sont compatible avec le ``CookieComponent`` des versions précédents de CakePHP.
-
-.. versionadded:: 3.5.0
-    ``EncryptedCookieMiddleware`` a été ajouté dans 3.5.0
 
 .. _csrf-middleware:
 
@@ -393,9 +387,6 @@ Les options utilisables sont:
 Une fois activé, vous pouvez accéder au token CSRF actuel via l'objet "Request"::
 
     $token = $this->request->getParam('_csrfToken');
-
-.. versionadded:: 3.5.0
-    ``CsrfProtectionMiddleware`` a été ajouté dans 3.5.0
 
 Intégration avec le FormHelper
 ------------------------------

@@ -95,9 +95,6 @@ If you have multiple fields that are required, you can define them as a list::
         ]
     ]);
 
-.. versionadded:: 3.3.0
-    ``requirePresence()`` accepts an array of fields as of 3.3.0
-
 Permettre aux Champs d'être Vides
 ---------------------------------
 
@@ -217,8 +214,6 @@ plus tard, vous pouvez utiliser la méthode ``addDefaultProvider()``::
     Les DefaultProviders doivent être ajoutés avant que l'objet ``Validator`` ne
     soit créé. Par conséquent **config/bootstrap.php** est le meilleur endroit
     pour définir vos providers par défaut.
-
-.. versionadded:: 3.5.0
 
 Vous pouvez utiliser le `plugin Localized <https://github.com/cakephp/localized>`_ pour fournir des providers basés sur
 les pays. Avec ce plugin, vous pourrez valider les champs de models selon un
@@ -384,14 +379,8 @@ cas où l'utilisateur veut créer une inscription, alors que le champ ``email``
 est toujours requis puisqu'il serait aussi demandée lors de l'annulation d'une
 inscription.
 
-.. versionadded:: 3.1.1
-    La possibilité de faire un callable pour ``requirePresence()`` a été ajoutée
-    dans 3.1.1.
-
 Imbriquer des Validators
 ------------------------
-
-.. versionadded:: 3.0.5
 
 Lorsque vous validez des :doc:`/core-libraries/form` avec des données
 imbriquées, ou lorsque vous travaillez avec des modèles qui contiennent des

@@ -473,13 +473,13 @@ Ejemplos
 
     Podría ser peligroso.
 
-.. versionadded:: 2.6.3
+.. versionadded:: 4.0.0
 
-    Esta funcionalidad tan genial fue añadida en la versión 2.6.3
+    Esta funcionalidad tan genial fue añadida en la versión 4.0.0
 
-.. deprecated:: 2.6.3
+.. deprecated:: 4.0.1
 
-    Esta antigua funcionalidad pasó a ser obsoleta en la versión 2.6.3
+    Esta antigua funcionalidad pasó a ser obsoleta en la versión 4.0.1
 
 .. meta::
     :title lang=es: Documentación

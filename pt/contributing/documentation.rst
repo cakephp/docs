@@ -479,13 +479,13 @@ Exemplos
 
     Pode ser perigoso.
 
-.. versionadded:: 2.6.3
+.. versionadded:: 4.0.0
 
-    Esse recurso incrível foi adicionado na versão 2.6.3
+    Esse recurso incrível foi adicionado na versão 4.0.0
 
-.. deprecated:: 2.6.3
+.. deprecated:: 4.0.1
 
-    Esse recurso antigo foi descontinuado na versão 2.6.3
+    Esse recurso antigo foi descontinuado na versão 4.0.1
 
 .. meta::
     :title lang=pt: Documentação

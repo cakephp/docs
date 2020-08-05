@@ -432,10 +432,6 @@ aplicativo, devemos fazer o seguinte::
 
     Type::map('json', 'App\Database\Type\JsonType');
 
-.. versionadded:: 3.3.0
-
-    A classe JsonType descrita neste exemplo foi adicionada ao core.
-
 Nós podemos então sobrecarregar os dados de schema refletido para usar nosso novo tipo, e
 a camada de banco de dados do CakePHP converterá automaticamente nossos dados JSON ao
 criar consultas. Você pode usar os tipos personalizados que você criou mapeando os tipos
@@ -458,10 +454,6 @@ no seu método :ref:`_initializeSchema() <saving-complex-types>` da Tabela::
 
 Mapeando Tipos de Dados Personalizados para Expressões SQL
 ----------------------------------------------------------
-
-.. versionadded:: 3.3.0
-   O suporte de mapeamento de tipos de dados personalizados para expressões SQL
-   foi adicionado na versão 3.3.0.
 
 O exemplo anterior mapeia um tipo de dados personalizado para um tipo de coluna
 'json' que é facilmente representado como uma string em uma instrução SQL. Os
@@ -569,9 +561,6 @@ personalizado à nossa classe table <saving-complex-types>`.
 
 Habilitando Objetos DateTime Imutáveis
 --------------------------------------
-
-.. versionadded:: 3.2
-    Immutable date/time objetos foram adicionados na versão 3.2.
 
 Como objetos Date/Time são facilmente modificados, o CakePHP permite você habilitar
 objetos de valores imutáveis. Isso é melhor feito no arquivo

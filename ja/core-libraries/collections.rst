@@ -309,9 +309,6 @@ PHP 5.5 以降を使用している場合は、 コレクション内の各ア�
         ['c' => 3, 'd' => [4, 5]]
     ]
 
-.. versionadded:: 3.4.0
-    ``chunkWithKeys()`` は 3.4.0 で追加されました。
-
 フィルタリング
 ==============
 
@@ -458,8 +455,6 @@ PHP 5.5 以降を使用している場合は、 コレクション内の各ア�
     // 平均値: 150
     $average = (new Collection($items))->avg('invoice.total');
 
-.. versionadded:: 3.5.0
-
 .. php:method:: median($matcher = null)
 
 要素の集合の中央値を計算します。必要に応じて、中央値を生成するためのマッチャーパスや
@@ -475,8 +470,6 @@ PHP 5.5 以降を使用している場合は、 コレクション内の各ア�
 
     // 中央値: 333
     $median = (new Collection($items))->median('invoice.total');
-
-.. versionadded:: 3.5.0
 
 グループ化とカウント
 --------------------
@@ -812,9 +805,6 @@ PHP 5.5 以降を使用している場合は、 コレクション内の各ア�
          ['2014', '50', '100', '200'],
      ]
 
-.. versionadded:: 3.3.0
-    ``Collection::transpose()`` は 3.3.0 で追加されました。
-
 要素の取り出し
 --------------
 
@@ -896,18 +886,12 @@ sample を満たすためのコレクション内に十分な要素がない場�
     $cakephpTweets = new Collection($tweets);
     $myTimeline = $cakephpTweets->appendItem($newTweet, 99);
 
-.. versionadded:: 3.6.0
-    appendItem() が追加されました。
-
 .. php:method:: prepend(array|Traversable $items)
 
 ``prepend()`` メソッドは両方のソースの値を含む新しいコレクションを返します。 ::
 
     $cakephpTweets = new Collection($tweets);
     $myTimeline = $cakephpTweets->prepend($phpTweets);
-
-.. versionadded:: 3.6.0
-    prepend() が追加されました。
 
 .. php:method:: prependItem($value, $key)
 
@@ -916,10 +900,6 @@ sample を満たすためのコレクション内に十分な要素がない場�
 
     $cakephpTweets = new Collection($tweets);
     $myTimeline = $cakephpTweets->prependItem($newTweet, 99);
-
-.. versionadded:: 3.6.0
-    prependItem() が追加されました。
-
 
 .. warning::
 
@@ -1124,9 +1104,6 @@ sample を満たすためのコレクション内に十分な要素がない場�
     $olderThan30 = ...
 
 両方のコレクションを反復処理しているときに、抽出操作を一度だけ呼び出します。
-
-.. versionadded:: 3.5.0
-    配列で初期化されたコレクションは、パフォーマンス向上のために遅延して反復されなくなりました。
 
 巻き戻し可能なコレクションの作成
 --------------------------------

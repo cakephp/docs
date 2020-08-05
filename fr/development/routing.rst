@@ -268,9 +268,6 @@ Toutes ces méthodes retournent une instance de Route ce qui vous permet d'utili
 :ref:`setters fluides <route-fluent-methods>` pour configurer plus précisément vos
 routes.
 
-.. versionadded:: 3.5.0
-    Les méthodes pour les verbes HTTP ont été ajoutées dans 3.5.0
-
 .. _route-elements:
 
 Les Eléments de Route
@@ -457,9 +454,6 @@ fluide pour la configurer. Ces méthodes remplacent la majorité des clés du pa
     // Définit 'lang' pour être un paramètre persistant
     ->setPersist(['lang']);
 
-.. versionadded:: 3.5.0
-    Les méthodes fluides ont été ajoutées dans 3.5.0
-
 Passer des Paramètres à l'Action
 --------------------------------
 
@@ -586,9 +580,6 @@ elle fonctionne comme vous pouvez vous y attendre::
 Les routes connectées dans les scopes nommés auront seulement des noms ajoutés
 si la route est aussi nommée. Les routes sans nom ne se verront pas appliquées
 ``_namePrefix``.
-
-.. versionadded:: 3.1
-    L'option ``_namePrefix`` a été ajoutée dans 3.1
 
 .. index:: admin routing, prefix routing
 .. _prefix-routing:
@@ -871,9 +862,6 @@ n'importe quelle sous-domaine::
 L'option ``_host`` n'affecte que le parsing des URL depuis les requêtes et
 n'intervient jamais dans la génération d'URL.
 
-.. versionadded:: 3.4.0
-    L'option ``_host`` a été ajoutée dans la version 3.4.0
-
 .. index:: file extensions
 .. _file-extensions:
 
@@ -1013,10 +1001,6 @@ middlewares peuvent être combinés en groupes. Une fois créés, les groupes pe
     // Application du groupe
     $routes->applyMiddleware('web');
 
-.. versionadded:: 3.5.0
-    Le support des middlewares par scope et des groupes de middlewares
-    a été ajouté dans 3.5.0
-
 .. _resource-routes:
 
 Créer des Routes RESTful
@@ -1109,9 +1093,6 @@ compatibles avec :ref:`prefix-routing`.
 
     Vous pouvez imbriquer autant de ressources que vous le souhaitez, mais il
     n'est pas recommandé d'imbriquer plus de 2 ressources ensembles.
-
-.. versionadded:: 3.3
-    L'option ``prefix`` a été ajoutée à ``resources()`` dans la version 3.3.
 
 Limiter la Création des Routes
 ------------------------------
@@ -1230,9 +1211,6 @@ personnalisé à l'aide de l'option ``path``::
     Router::scope('/', function ($routes) {
         $routes->resources('BlogPosts', ['path' => 'posts']);
     });
-
-.. versionadded:: 3.5.0
-    L'option ``path`` a été ajoutée dans 3.5.0.
 
 .. index:: passed arguments
 .. _passed-arguments:

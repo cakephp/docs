@@ -9,6 +9,3 @@ CLI 環境でキャッシュデータをよりよく管理するために、シ�
 
     // すべての設定のキャッシュをクリア
     bin/cake cache clear_all
-
-.. versionadded:: 3.3.0
-    cache シェルは、 3.3.0 で追加されました。

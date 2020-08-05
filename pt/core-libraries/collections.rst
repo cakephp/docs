@@ -321,9 +321,6 @@ matrizes associativas::
         ['c' => 3, 'd' => [4, 5]]
     ]
 
-.. versionadded:: 3.4.0
-    ``chunkWithKeys()`` was added in 3.4.0
-
 Filtragem
 =========
 
@@ -481,8 +478,6 @@ caminho correspondente ou função para extrair valores e gerar a média::
     // Média: 150
     $average = (new Collection($items))->avg('invoice.total');
 
-.. versionadded:: 3.5.0
-
 .. php:method:: median($matcher = null)
 
 Calcule o valor mediano de um conjunto de elementos. Opcionalmente, forneça
@@ -498,8 +493,6 @@ um caminho correspondente ou função para extrair valores e gerar a mediana::
 
     // Median: 333
     $median = (new Collection($items))->median('invoice.total');
-
-.. versionadded:: 3.5.0
 
 Agrupamento e Contagem
 ----------------------
@@ -850,9 +843,6 @@ por cada uma das colunas originais::
          ['2014', '50', '100', '200'],
      ]
 
-.. versionadded:: 3.3.0
-    ``Collection::transpose()`` was added in 3.3.0.
-
 Retirando Elementos
 -------------------
 
@@ -938,18 +928,12 @@ uma chave que já existe na coleção, o valor não será substituído::
     $cakephpTweets = new Collection($tweets);
     $myTimeline = $cakephpTweets->appendItem($newTweet, 99);
 
-.. versionadded:: 3.6.0
-    appendItem() foi adicionado.
-
 .. php:method:: prepend(array|Traversable $items)
 
 O método ``prepend()`` retornará uma nova coleção contendo os valores das duas fontes::
 
     $cakephpTweets = new Collection($tweets);
     $myTimeline = $cakephpTweets->prepend($phpTweets);
-
-.. versionadded:: 3.6.0
-    prepend() foi adicionado.
 
 .. php:method:: prependItem($value, $key)
 
@@ -958,10 +942,6 @@ uma chave que já existe na coleção, o valor não será substituído::
 
     $cakephpTweets = new Collection($tweets);
     $myTimeline = $cakephpTweets->prependItem($newTweet, 99);
-
-.. versionadded:: 3.6.0
-    prependItem() foi adicionado.
-
 
 .. warning::
 
@@ -1179,9 +1159,6 @@ planeja reutilizar os valores de determinadas operações mais de uma vez,
     $olderThan30 = ...
 
 Agora, quando as duas coleções forem iteradas, elas chamarão a operação de extração apenas uma vez.
-
-.. versionadded:: 3.5.0
-    As coleções inicializadas com uma matriz não são mais iteradas preguiçosamente para melhorar o desempenho.
 
 Tornando as Coleções Rebobináveis
 ---------------------------------

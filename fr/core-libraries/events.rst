@@ -160,10 +160,6 @@ Après avoir déclenché un événement sur le gestionnaire, vous pouvez le réc
 Le tracking peut être désactivé en retirant la liste d'événements ou en appelant
 :php:meth:`Cake\\Event\\EventList::trackEvents(false)`
 
-.. versionadded:: 3.2.11
-    Le tracking d'événements et :php:class:`Cake\\Event\\EventList` ont été
-    ajoutés.
-
 Events du Cœur
 ==============
 
@@ -307,11 +303,6 @@ comme base de certaines actions::
 
     Le modèle passé à la méthode ``matchingListeners`` n'est pas sensible à la
     casse.
-
-.. versionadded:: 3.2.3
-
-    La méthode ``matchingListeners`` retourne un tableau d'événements qui
-    matchent un patron de recherche.
 
 .. _event-priorities:
 
