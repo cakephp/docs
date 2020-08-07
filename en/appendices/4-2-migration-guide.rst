@@ -15,11 +15,30 @@ features::
 
     bin/cake upgrade rector --rules cakephp42 <path/to/app/src>
 
+
 Behavior Changes
 ================
 
 While the following changes do not change the signature of any methods they do
 change the semantics or behavior of methods.
+
+Controller
+----------
+
+- ``Controller::$components`` was marked protected. It was previously documented
+  as protected. This should not impact most application code as implementations
+  can change the visibility to public.
+
+
+Breaking Changes
+================
+
+Behind the API, some breaking changes are necessary moving forward.
+They usually only affect tests.
+
+- The fixture names around UUIDs have been consolidated (``UuidItemsFixture``, ``BinaryUuidItemsFixture``).
+  If you use any of them, make sure you updated these names.
+  The ``UuidportfoliosFixture`` was unused in core and removed now.
 
 New Features
 ============
@@ -58,12 +77,8 @@ ORM
   reduce overhead and complexity of building subqueries and common table
   expressions.
 
-Breaking Changes
-================
+TestSuite
+---------
 
-Behind the API, some breaking changes are necessary moving forward.
-They usually only affect tests.
-
-- The fixture names around UUIDs have been consolidated (``UuidItemsFixture``, ``BinaryUuidItemsFixture``).
-  If you use any of them, make sure you updated these names.
-  The ``UuidportfoliosFixture`` was unused in core and removed now.
+- ``EmailTrait::assertMailSubjectContains()`` and
+  ``assertMailSubjectContainsAt()`` were added.
