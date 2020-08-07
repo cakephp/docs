@@ -1293,6 +1293,8 @@ And then later decide that ``/articles`` should really be called
 'posts' instead, you would have to go through your entire
 application renaming URLs. However, if you defined your link like::
 
+    //`link()` uses Router::url() internally and accepts a routing array
+
     $this->Html->link(
         'View',
         ['controller' => 'Articles', 'action' => 'view', $id]
@@ -1300,16 +1302,17 @@ application renaming URLs. However, if you defined your link like::
 
 or::
 
-    $this->Html->link(
-        'View',
-        Router::reverse(Router::getRequest()->getAttributes('params'))
-    );
+    //'Router::reverse()' operates on the request parameters array
+    //and will produce a url string, valid input for `link()`
+
+    $request_params = Router::getRequest()->getAttributes('params');
+    $this->Html->link('View', Router::reverse($request_params));
 
 Then when you decided to change your URLs, you could do so by defining a
 route. This would change both the incoming URL mapping, as well as the
 generated URLs.
 
-The choice of method is determined by how well you can predict the routing
+The choice of technique is determined by how well you can predict the routing
 array elements.
 
 Using ``Router::url()``
@@ -1333,9 +1336,7 @@ defined pattern::
         ['controller' => $controller, 'action' => 'view', $id]
     );
 
-Elements with numeric keys are treated as
-:term:`pass values <pass value>` and will become arguments
-passed to your action.
+Elements with numeric keys are treated as :ref:`passed-arguments`.
 
 When using routing arrays, you can define both query string parameters and
 document fragments using special keys::
@@ -1376,7 +1377,7 @@ Using ``Router::reverse()``
 ---------------------------
 
 ``Router::reverse()`` allows you to use the :ref:`request-parameters` in cases
-where the current URL is the basis for the destination, with some modification
+where the current URL with some modification is the basis for the destination
 and the elements of the current URL are unpredictable.
 
 As an example, imagine a blog that allowed users to create **Articles** and
