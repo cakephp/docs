@@ -1,5 +1,5 @@
-Mailer
-######
+Email
+#####
 
 .. php:namespace:: Cake\Mailer
 
@@ -549,7 +549,7 @@ primeiro crie o arquivo **src/Mailer/Transport/ExampleTransport.php** (onde Exem
 Você deve implementar o método ``send(Mailer $mailer)`` com sua lógica personalizada.
 
 Enviar Emails sem Usar o Mailer
-================================
+===============================
 
 O ``Mailer`` é uma classe de abstração de nível superior que atua como uma ponte entre as 
 classes ``Cake\Mailer\Message``, ``Cake\Mailer\Renderer`` e ``Cake\Mailer\\AbstractTransport`` 
@@ -627,7 +627,7 @@ usuário se registra. Queremos verificar se o assunto e o corpo contêm o nome d
     }
 
 Métodos de Asserções
----------------------
+--------------------
 
 A trait ``Cake\TestSuite\EmailTrait`` fornece as seguintes asserções::
 
