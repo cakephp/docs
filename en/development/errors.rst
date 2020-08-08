@@ -176,7 +176,7 @@ error pages when this error is handled::
     {
         public function missingWidget($error)
         {
-            $response = $this->controller->response;
+            $response = $this->controller->getResponse();
 
             return $response->withStringBody('Oops that widget is missing.');
         }
