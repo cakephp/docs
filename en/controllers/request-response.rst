@@ -36,6 +36,8 @@ CakePHP's request object implements the `PSR-7
 ServerRequestInterface <http://www.php-fig.org/psr/psr-7/>`_ making it easier to
 use libraries from outside of CakePHP.
 
+.. _request_parameters:
+
 Request Parameters
 ------------------
 
