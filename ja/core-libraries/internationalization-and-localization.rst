@@ -35,11 +35,11 @@
 
 翻訳はアプリケーションの中にある言語ファイルを使って有効になります。
 CakePHP 翻訳ファイルのデフォルトの形式は、 `Gettext <http://en.wikipedia.org/wiki/Gettext>`_
-です。ファイルは **src/Locale** 以下に置かれる必要があります。各言語用のサブフォルダーは
+です。ファイルは **resources/locales/** 以下に置かれる必要があります。各言語用のサブフォルダーは
 以下のようになっている必要があります。 ::
 
-    /src
-        /Locale
+    /resources
+        /locales
             /en_US
                 default.po
             /en_GB
@@ -52,10 +52,10 @@ CakePHP 翻訳ファイルのデフォルトの形式は、 `Gettext <http://en.
 ファイルを含まなくてはなりません。ドメインは翻訳メッセージの任意のグルーピングを参照します。
 グループが使われていない場合、デフォルトのグループが選択されます。
 
-CakePHP のライブラリーから抜き出されたコアの文字列は **src/Locale** 内の **cake.po** という名前の
+CakePHP のライブラリーから抜き出されたコアの文字列は **resources/locales/** 内の **cake.po** という名前の
 ファイルに分けて置かれます。 `CakePHP localized library <https://github.com/cakephp/localized>`_
 は、コア (Cake のドメイン) の中にクライエント・フェイシングな翻訳文字列を置いています。
-これらのファイルを利用するには、期待された場所 **src/Locale/<locale>/cake.po** にリンク
+これらのファイルを利用するには、期待された場所 **resources/locales/<locale>/cake.po** にリンク
 またはコピーをしてください。もし不完全または正しくない場合は、修正するためにこのリポジトリーに
 PR を送ってください。
 
@@ -87,7 +87,7 @@ I18n を利用して Pot ファイルを生成する
 --------------------------------------
 
 アプリケーション内の、 `__()` や他の国際化されたメッセージから pot ファイルを生成するためには、
-i18n シェルを利用できます。より知りたい場合は、 :doc:`次の章 </console-and-shells/i18n-shell>`
+i18n シェルを利用できます。より知りたい場合は、 :doc:`次の章 </console-commands/i18n>`
 を読んでください。
 
 デフォルトのロケールを設定する
@@ -135,7 +135,7 @@ CakePHP はアプリケーションを国際化する手助けになるさまざ
 
     もし、名前空間付きのプラグインを翻訳したい場合、ドメイン文字列には ``Namespace/PluginName``
     と名前を付けなければなりません。しかし、関連する言語ファイルは、プラグインのフォルダーの中の
-    ``plugins/Namespace/PluginName/src/Locale/plugin_name.po`` になります。
+    ``plugins/Namespace/PluginName/resources/locales/plugin_name.po`` になります。
 
 翻訳の際に、翻訳すべき文字列が曖昧であることがあります。
 これは、2つの文字列がまったく同じであるのに異なることがらを指し示している場合に起こりえます。
@@ -417,7 +417,7 @@ CakePHP が利用しているものと同じやり方を使い続けることも
     }
 
 アプリケーションの **src/I18n/Parser** ディレクトリー内にこのファイルを作成してください。
-続いて、 **src/Locale/fr_FR/animals.yaml** として翻訳ファイルを作ります。
+続いて、 **resources/locales/fr_FR/animals.yaml** として翻訳ファイルを作ります。
 
 .. code-block:: yaml
 
@@ -429,6 +429,7 @@ CakePHP が利用しているものと同じやり方を使い続けることも
 
     use Cake\I18n\MessagesFileLoader as Loader;
 
+    // resources/locales/folder/sub_folder/filename.po からメッセージをロード
     I18n::setTranslator(
         'animals',
         new Loader('animals', 'fr_FR', 'yaml'),
@@ -552,7 +553,7 @@ ORM で返されるデフォルトの日付では結果は ``Cake\I18n\Time`` �
 ----------------------------------
 
 リクエストから地域化されたデータを受け取る場合、ユーザーが地域化したフォーマットから日時の情報を
-取得するのが良いでしょう。コントローラー、あるいは :doc:`/development/dispatch-filters` では、
+取得するのが良いでしょう。コントローラー、あるいは :doc:`/controllers/middleware` では、
 日付、時刻、そして日時の型が地域化のフォーマットをパースするために定義できます。 ::
 
     use Cake\Database\Type;
@@ -572,7 +573,7 @@ ORM で返されるデフォルトの日付では結果は ``Cake\I18n\Time`` �
 自動でリクエストデータに基づいたロケールを選択する
 ==================================================
 
-``LocaleSelectorFilter`` をアプリケーション内で使用すると、CakePHP は自動で現在のユーザーに基づいた
+``LocaleSelectorMiddleware`` をアプリケーション内で使用すると、CakePHP は自動で現在のユーザーに基づいた
 ロケールを設定します。 ::
 
     // src/Application.php の中で
@@ -583,6 +584,8 @@ ORM で返されるデフォルトの日付では結果は ``Cake\I18n\Time`` �
     {
         // ミドルウェアの追加し、有効なロケールの設定
         $middleware->add(new LocaleSelectorMiddleware(['en_US', 'fr_FR']));
+        // 任意のロケールヘッダー値を受け入れる
+        $middleware->add(new LocaleSelectorMiddleware(['*']));
     }
 
     // config/bootstrap.php 内で
@@ -591,7 +594,7 @@ ORM で返されるデフォルトの日付では結果は ``Cake\I18n\Time`` �
     // en_US, fr_FR のみにロケールを制限
     DispatcherFactory::add('LocaleSelector', ['locales' => ['en_US', 'fr_FR']]);
 
-``LocaleSelectorFilter`` は ``Accept-Language`` ヘッダーを用いて、ユーザーの選択したロケールを
+``LocaleSelectorMiddleware`` は ``Accept-Language`` ヘッダーを用いて、ユーザーの選択したロケールを
 自動的に設定します。どのロケールが自動で使われるかを制限するロケールリストオプションを使用することが
 できます。
 
