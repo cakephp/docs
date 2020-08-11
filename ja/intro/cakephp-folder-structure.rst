@@ -42,8 +42,6 @@ Console
     Composer によって実行されるインストールスクリプトを含みます。
 Controller
     アプリケーションのコントローラーとコンポーネントを含みます。
-Locale
-    国際化のための文字列ファイルを格納します。
 Middleware
     アプリケーションの :doc:`/controllers/middleware` を格納します。
 Model
@@ -56,7 +54,7 @@ View
 
 .. note::
 
-    ``Command`` と ``Locale`` フォルダーは、デフォルトでは存在しません。
+    ``Command`` フォルダーは、デフォルトでは存在しません。
     必要に応じて追加することができます。
 
 .. meta::
