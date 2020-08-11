@@ -48,6 +48,7 @@ Database
 
 - ``SqlServer`` now creates client-side buffered cursors for prepared statements by default.
   This was changed to fix significant performance issues with server-side SCROLL cursors.
+  Users should see a performance boost with most results sets.
 
   .. warning::
       For users with large query results, this may cause an error allocating the client-side buffer unless
