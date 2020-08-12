@@ -37,11 +37,11 @@ src フォルダー
 
 Command
     アプリケーションのコンソールコマンドを含みます。
-    更に学ぶためには、 :doc:`/console-and-shells/commands` をご覧ください。
+    更に学ぶためには、 :doc:`/console-commands/commands` をご覧ください。
 Console
     Composer によって実行されるインストールスクリプトを含みます。
 Controller
-    アプリケーションのコントローラーとコンポーネントを含みます。
+    アプリケーションの :doc:`/controllers` とコンポーネントを含みます。
 Middleware
     アプリケーションの :doc:`/controllers/middleware` を格納します。
 Model
@@ -54,7 +54,7 @@ View
 
 .. note::
 
-    ``Command`` フォルダーは、デフォルトでは存在しません。
+    ``Shell`` フォルダーは、デフォルトでは存在しません。
     必要に応じて追加することができます。
 
 .. meta::
