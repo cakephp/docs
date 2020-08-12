@@ -36,6 +36,16 @@ Breaking Changes
 Behind the API, some breaking changes are necessary moving forward.
 They usually only affect tests.
 
+I18n
+----
+- The dependency on [Aura.Intl](https://github.com/auraphp/Aura.Intl) package has been
+  removed as it is no longer maintained. If your app/plugin has :ref:`custom translation loaders <creating-generic-translators>` 
+  then they need to now return a ``Cake\I18n\Package`` instance instead of ``Aura\Intl\Package``.
+  Both the classes are API compatible so you won't need to change anything else.
+
+Testing
+-------
+
 - The fixture names around UUIDs have been consolidated (``UuidItemsFixture``, ``BinaryUuidItemsFixture``).
   If you use any of them, make sure you updated these names.
   The ``UuidportfoliosFixture`` was unused in core and removed now.
