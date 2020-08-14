@@ -149,10 +149,10 @@ CakePHP Provided Commands
     console-commands/i18n
     console-commands/plugin
     console-commands/schema-cache
-    console-commands/server
-    console-commands/shells
-    console-commands/repl
     console-commands/routes
+    console-commands/server
+    console-commands/repl
+    console-commands/shells
 
 Routing in the Console Environment
 ==================================
