@@ -154,8 +154,8 @@ able to connect to the database' section have a green chef hat.
 
 .. note::
 
-    If you have **config/app_local.php** in your app folder,
-    it overrides app.php configuration.
+    If you have **config/app_local.php** in your app folder, you need to
+    configure your database connection in that file instead.
 
 Creating our First Model
 ========================
