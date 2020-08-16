@@ -1,50 +1,68 @@
 CakePHP Development Process
 ###########################
 
-Here we attempt to explain the process we use when developing the
-CakePHP framework. We rely heavily on community interaction through
-tickets and IRC chat. IRC is the best place to find members of the
-`development team <https://github.com/cakephp?tab=members>`_ and discuss
-ideas, the latest code, and make general comments. If something more
-formal needs to be proposed or there is a problem with a release, the
-ticket system is the best place to share your thoughts.
+CakePHP projects broadly follow `semver <https://semver.org/>`__. This means that:
 
-We currently maintain 4 versions of CakePHP.
+- Releases are numbered in the form of **A.B.C**
+- **A** releases are *major releases*. They contain breaking changes and will
+  require non-trivial amounts of work to upgrade to from a lower **A** release.
+- **A.B** releases are *feature releases*. Each version will be backwards
+  compatible but may introduce new deprecations. If a breaking change is
+  absolutely required it will be noted in the migration guide for that release.
+- **A.B.C** releases are *patch* releases. They should be backwards compatible
+  with the previous patch release. The exception to this rule is if a security
+  issue is discovered and the only solution is to break an existing API.
 
-- **tagged release** : Tagged releases intended for production where stability
-  is more important than features. Issues filed against these releases
-  will be fixed in the related branch, and be part of the next release.
-- **mainline branch** : These branches are where all bugfixes are merged into.
-  Stable releases are tagged from these branches. ``master`` is the mainline
-  branch for the current release series. ``2.x`` is the maintenance branch for
-  the 2.x release series. If you are using a stable release and need fixes that
-  haven't made their way into a tagged release check here.
-- **development branches** : Development branches contain leading edge fixes and
-  features. They are named after the major version they are for. E.g *3.next*.
-  Once development branches have reached a stable release point they are merged
-  into the mainline branch.
-- **feature branches** : Feature branches contain unfinished or possibly
-  unstable features and are recommended only for power users interested in the
-  most advanced feature set and willing to contribute back to the community.
-  Feature branches are named with the following convention *version-feature*. An
-  example would be *3.3-router* Which would contain new features for the Router
-  for 3.3.
+See the :doc:`/contributing/backwards-compatibility` for what we consider to be
+backwards compatible and a breaking changes.
 
-Hopefully this will help you understand what version is right for you.
-Once you pick your version you may feel compelled to contribute a bug report or
-make general comments on the code.
+Major Releases
+==============
 
-- If you are using a stable version or maintenance branch, please submit tickets
-  or discuss with us on IRC.
-- If you are using the development branch or feature branch, the first place to
-  go is IRC. If you have a comment and cannot reach us in IRC after a day or
-  two, please submit a ticket.
+Major releases introduce new features and can remove functionality deprecated in
+an earlier release. These releases live in ``next`` branches that match their
+version number. e.g. ``5.next``. Once released they are promoted into ``master``
+and then ``5.next`` branch is used for future feature releases.
 
-If you find an issue, the best answer is to write a test. The best advice we can
-offer in writing tests is to look at the ones included in the core.
+Feature Releases
+================
 
-As always, if you have any questions or comments, visit us at #cakephp on
-irc.freenode.net.
+Feature releases are where new features or extensions to existing features are
+shipped. Each release series receiving updates will have a ``next`` branch. For
+example ``4.next``. If you would like to contribute a new feature please target
+these branches.
+
+Patch Releases
+==============
+
+Patch releases fix bugs in existing code/documentation and should always be
+compatible with earlier patch releases from the same feature release. These
+features are created from the 'stable' branches. These branches are either named
+after the release series e.g. ``3.x`` or from ``master`` for the latest stable
+release.
+
+Release Cadence
+===============
+
+- *Major Releases* are delivered approximately every two to three years. This timeframe
+  forces us to be deliberate and considerate with our breaking changes and gives
+  time for the community to keep up without feeling like they are being left
+  behind.
+- *Feature Releases* are delivered every five to eight months.
+- *Patch Releases* Are initially delivered every two weeks. As a feature release
+  matures this cadence relaxes to a monthly schedule.
+
+Deprecation Policy
+==================
+
+Before a feature can be removed in a major release it needs to be deprecated.
+When a behavior is deprecated in release **A.x** it will continue to work for
+remainder of all **A.x** releases. Deprecations are generally indicated via PHP
+warnings. You can enable deprecation warnings by adding ``E_USER_DEPRECATED`` to
+your application's ``Error.level`` value.
+
+Once deprecated behavior is not removed until the next major release. For
+example behavior deprecated in ``4.1`` will be removed in ``5.0``.
 
 .. meta::
     :title lang=en: CakePHP Development Process
