@@ -15,6 +15,10 @@ features::
 
     bin/cake upgrade rector --rules cakephp42 <path/to/app/src>
 
+* ``ORM\Behavior::getTable()`` has been deprecated. Use ``table()`` instead.
+  This change makes method names dissimilar between ``ORM\Table`` as the return
+  value of these methods is different.
+
 
 Behavior Changes
 ================
