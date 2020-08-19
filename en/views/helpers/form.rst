@@ -2470,7 +2470,7 @@ could do the following::
             $this->_templates = $templates;
         }
 
-        public function render(array $data, ContextInterface $context)
+        public function render(array $data, ContextInterface $context): string
         {
             $data += [
                 'name' => '',
@@ -2481,7 +2481,7 @@ could do the following::
             ]);
         }
 
-        public function secureFields(array $data)
+        public function secureFields(array $data): array
         {
             return [$data['name']];
         }
