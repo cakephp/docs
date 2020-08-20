@@ -174,8 +174,6 @@ valeurs autorisés:
 Récupérer les valeurs du formulaire depuis la query string
 ----------------------------------------------------------
 
-.. versionadded:: 3.4.0
-
 Les sources de valeurs du FormHelper définissent d'où les éléments du
 formulaire reçoivent leurs valeurs.
 
@@ -2502,9 +2500,6 @@ Affichera:
         <input name="password" id="password" type="password">
         <span class="help">Au moins 8 caractères.</span>
     </div>
-
-.. versionadded:: 3.1
-    L'option templateVars a été ajoutée dans 3.1.0
 
 Déplacer les Checkboxes & Boutons Radios à l'Extérieur du Label
 ---------------------------------------------------------------

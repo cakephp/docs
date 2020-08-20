@@ -1173,6 +1173,20 @@ options for this method are:
 * ``defaults`` Set to ``false`` to not set ``$search`` properties into the
   created entity.
 
+Creating with an existing primary key
+=====================================
+
+When handling UUID primary keys you often want to provide an externally generated value, and not have
+an an identifier generated for you.
+
+In this case make sure you are not passing the primary key as part of the marshalled data.
+Instead, assign the primary key and then patch in the remaining entity data::
+
+    $record = $table->newEmptyEntity();
+    $record->id = $existingUuid;
+    $record = $table->patchEntity($record, $existingData);
+    $table->saveOrFail($record);
+
 Saving Multiple Entities
 ========================
 

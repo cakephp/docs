@@ -249,10 +249,6 @@ você pode chamar::
 
     $dirtyFields = $entity->getDirty();
 
-.. versionadded:: 3.4.3
-
-    ``getDirty()`` foi adicionado.
-
 Erros de Validação
 ==================
 

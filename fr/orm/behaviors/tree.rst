@@ -249,8 +249,6 @@ closure au scope::
 Récupération avec un Tri Personnalisé du Champ
 ==============================================
 
-.. versionadded:: 3.0.14
-
 Par défaut, recover() trie les items en utilisant la clé primaire. Ceci
 fonctionne bien s'il s'agit d'une colonne numérique (avec incrémentation auto),
 mais cela peut entraîner des résultats étranges si vous utilisez les UUIDs.

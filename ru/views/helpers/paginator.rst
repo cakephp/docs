@@ -308,10 +308,6 @@ PaginatorHelper можно использовать для создания те
     // Создайте следующие/предыдущие и первые/последние ссылки для текущей модели.
     echo $this->Paginator->meta(['first' => true, 'last' => true]);
 
-.. versionadded:: 3.4.0
-
-    The ``first`` and ``last`` options were added in 3.4.0
-
 Проверка состояния пагинации
 ============================
 
@@ -338,8 +334,6 @@ PaginatorHelper можно использовать для создания те
 .. php:method:: total(string $model = null)
 
     Возвращает общее количество страниц для предоставленной модели.
-
-    .. versionadded:: 3.4.0
 
 Создание счетчика страниц
 =========================
@@ -412,9 +406,6 @@ PaginatorHelper можно использовать для создания те
     echo $this->Paginator->limitControl([25 => 25, 50 => 50], $user->perPage);
 
 The generated form and control will automatically submit on change.
-
-.. versionadded:: 3.5.0
-    The ``limitControl()`` method was added in 3.5.0
 
 Настройка параметров пагинации
 ==============================
@@ -539,9 +530,6 @@ The generated form and control will automatically submit on change.
 
 Используя опцию ``model``, ``PaginatorHelper`` автоматически будет использовать ``scope``,
 определенную в том случае, когда запрос был разбит на страницы.
-
-.. versionadded:: 3.3.0
-    Множественная разбивка на страницы добавлена в 3.3.0
 
 .. meta::
     :title lang=ru: PaginatorHelper

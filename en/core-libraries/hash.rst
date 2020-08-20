@@ -437,7 +437,7 @@ Attribute Matching Types
 .. php:staticmethod:: filter(array $data, $callback = ['Hash', 'filter'])
 
     Filters empty elements out of array, excluding '0'. You can also supply a
-    custom ``$callback`` to filter the array elements. You callback should
+    custom ``$callback`` to filter the array elements. The callback should
     return ``false`` to remove elements from the resulting array::
 
         $data = [

@@ -27,11 +27,15 @@ CakePHP has a few system requirements:
 While a database engine isn't required, we imagine that most applications will
 utilize one. CakePHP supports a variety of database storage engines:
 
--  MySQL (5.5.3 or greater)
--  MariaDB (5.5 or greater)
--  PostgreSQL
--  Microsoft SQL Server (2008 or higher)
+-  MySQL (5.6 or higher)
+-  MariaDB (5.6 or higher)
+-  PostgreSQL (9.4 or higher)
+-  Microsoft SQL Server (2012 or higher)
 -  SQLite 3
+
+The Oracle database is supported through the
+`Driver for Oracle Database <https://github.com/CakeDC/cakephp-oracle-driver>`_
+community plugin.
 
 .. note::
 
@@ -536,14 +540,14 @@ the following configuration relies on ``webroot/index.php``, also serving other
            }
        }
    }
-   
+
 To enable this config (assuming it's saved as ``cakephp.json``):
 
 .. code-block:: console
 
    # curl -X PUT --data-binary @cakephp.json --unix-socket \
           /path/to/control.unit.sock http://localhost/config
-       
+
 IIS7 (Windows hosts)
 --------------------
 

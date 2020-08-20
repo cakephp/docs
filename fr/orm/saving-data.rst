@@ -338,9 +338,6 @@ création d'une nouvelle entity, en utilisant l'option ``onlyIds``. Quand elle
 est activée, cette option restreint la conversion des données de belongsToMany
 pour utiliser uniquement la clé ``_ids`` et ignorer toutes les autres données.
 
-.. versionadded:: 3.1.0
-    L'option ``onlyIds`` a été ajoutée dans 3.1.0
-
 Convertir des Données HasMany
 -----------------------------
 
@@ -375,9 +372,6 @@ Quand les données de hasMany sont converties, vous pouvez désactiver la
 création d'une nouvelle entity, en utilisant l'option ``onlyIds``. Quand elle
 est activée, cette option restreint la conversion des données hasMany pour
 utiliser uniquement la clé ``_ids`` et ignorer toutes les autres données.
-
-.. versionadded:: 3.1.0
-    L'option ``onlyIds`` a été ajoutée dans 3.1.0
 
 Convertir des Enregistrements Multiples
 ---------------------------------------
@@ -1264,8 +1258,6 @@ utiliser la méthode :php:meth:`Cake\\ORM\Exception\\PersistenceFailedException:
 Puisque cette méthode utilise la méthode :php:meth:`Cake\\ORM\\Table::save()`,
 tous les événements de ``save`` seront déclenchés.
 
-.. versionadded:: 3.4.1
-
 Sauvegarder Plusieurs Entities
 ==============================
 
@@ -1294,8 +1286,6 @@ options que celles acceptées par ``save()``::
 
 Le résultat sera la mise à jour des entities en cas de succès ou ``false`` en
 cas d'échec.
-
-.. versionadded:: 3.2.8
 
 Mises à Jour en Masse
 =====================

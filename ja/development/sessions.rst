@@ -134,10 +134,6 @@ CakePHP は、 ``Http\Session`` 名前空間内にクラスがあることを期
 プラグインの中のセッションハンドラーを使うこともできます。その場合、エンジンを
 ``MyPlugin.PluginSessionHandler`` のように設定します。
 
-.. note::
-    3.6.0 より前のセッションアダプターファイルは、
-    **src/Network/Session/AppHandler.php** に配置してください。
-
 データーベースセッション
 ------------------------
 
@@ -315,7 +311,6 @@ IO をもたらします。
 :php:class:`Cake\\View\\Helper\\SessionHelper` が使用できます。
 基本的なセッションの使用例は以下の通り。 ::
 
-    // 3.6.0 より前は、代わりに session() を使用
     $name = $this->getRequest()->getSession()->read('User.name');
 
     // 複数回セッションにアクセスする場合、

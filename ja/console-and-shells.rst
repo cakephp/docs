@@ -149,9 +149,6 @@ CakePHP のアプリケーションは、シェルとタスクのすべてが含
     同じ Command クラスを使用する複数のコマンドを追加する場合、 ``help`` コマンドは、
     最短のオプションを表示します。
 
-.. versionadded:: 3.5.0
-    ``console`` フックが追加されました。
-
 .. _renaming-commands:
 .. index:: nested commands, subcommands
 

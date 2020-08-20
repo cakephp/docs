@@ -289,9 +289,6 @@ HasMany（有很多）和BelongsToMany（属于很多）的关联数据中进行
         ['c' => 3, 'd' => [4, 5]]
     ]
 
-.. versionadded:: 3.4.0
-    ``chunkWithKeys()`` was added in 3.4.0
-
 过滤（Filtering）
 ==================
 
@@ -435,8 +432,6 @@ HasMany（有很多）和BelongsToMany（属于很多）的关联数据中进行
     // 平均值: 150
     $average = (new Collection($items))->avg('invoice.total');
 
-.. versionadded:: 3.5.0
-
 .. php:method:: median($matcher = null)
 
 该方法可计算一组元素的中间值。在参数中输入一个复合路径或者函数来确定需要计算哪样属性的中间值::
@@ -451,8 +446,6 @@ HasMany（有很多）和BelongsToMany（属于很多）的关联数据中进行
 
     // Median: 333
     $median = (new Collection($items))->median('invoice.total');
-
-.. versionadded:: 3.5.0
 
 分组和统计（Grouping and Counting）
 ------------------------------------------
@@ -768,9 +761,6 @@ HasMany（有很多）和BelongsToMany（属于很多）的关联数据中进行
          ['2013', '100', '200', '300'],
          ['2014', '50', '100', '200'],
      ]
-
-.. versionadded:: 3.3.0
-    ``Collection::transpose()`` 追加于 3.3.0.
 
 抽取元素
 --------------------

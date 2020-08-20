@@ -221,9 +221,6 @@ utilisée pour paginer les tags et les articles en même temps::
 Consulter la section :ref:`paginator-helper-multiple` pour savoir comment
 générer les elements HTML scopés et les URLS pour la pagination.
 
-.. versionadded:: 3.3.0
-    Pagination multiple a été ajoutée dans la version 3.3.0
-
 Contrôler les Champs Utilisés pour le Tri
 =========================================
 

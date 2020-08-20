@@ -116,9 +116,6 @@ utiliza um dos seguntes métodos:
 Se nenhuma das opções estiverem disponíveis um ``warning`` será emitido e um
 valor não seguro será usado por motivos de compatibilidade.
 
-.. versionadded:: 3.2.3
-    O método  randomBytes foi adicionado na versão 3.2.3.
-
 .. meta::
     :title lang=pt: Segurança
     :keywords lang=pt: api segurança,senha,cipher text,php class,class security,text key,security library,object instance,security measures,basic security,security level,string type,fallback,hash,data security,singleton,inactivity,php encrypt,implementation,php security

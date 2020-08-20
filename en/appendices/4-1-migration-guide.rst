@@ -10,10 +10,13 @@ Deprecations
 
 4.1 introduces a few deprecations. All of these features will continue for the
 duration of 4.x but will be removed in 5.0. You can use the
-:ref:`upgrade tool <upgrade-tool-use>` to automate updating usage of deprecated
+:ref:`upgrade tool <upgrade-tool-use>` to automate updating deprecated
 features::
 
     bin/cake upgrade rector --rules cakephp41 <path/to/app/src>
+
+.. note::
+    This only updates CakePHP 4.1 changes. Make sure you apply CakePHP 4.0 changes first.
 
 Controller
 ----------
@@ -40,6 +43,7 @@ Database
 * ``DateTimeType::setTimezone()`` was deprecated. use ``setDatabaseTimezone()`` instead.
 * The magic method signature for ``FunctionBuilder::cast([...])`` is deprecated.
   Use ``FunctionBuilder::cast('field', 'type')`` instead.
+* ``Cake\Database\Expression\Comparison`` was renamed to ``Cake\Database\Expression\ComparisonExpression``.
 
 Datasource
 ----------
@@ -62,8 +66,8 @@ Http
 * ``CsrfProtectionMiddleware::whitelistCallback()`` has been deprecated. Use
   ``skipCheckCallback()`` instead.
 * ``ServerRequest::input()`` is deprecated. Use ``(string)$request->getBody()``
-   to get the raw PHP input as string; use ``BodyParserMiddleware`` to parse the
-   request body so that it's available as array/object through ``$request->getParsedBody()``
+  to get the raw PHP input as string; use ``BodyParserMiddleware`` to parse the
+  request body so that it's available as array/object through ``$request->getParsedBody()``
 * The ``httpOnly`` option for ``CsrfProtectionMiddleware`` is now ``httponly``
   to improve consistency with cookie creation elsewhere in the framework.
 
@@ -124,6 +128,7 @@ TestSuite
 ---------
 
 * ``TestCase::setAppNamespace()`` now returns the previous app namespace for easier save and restore.
+* GroupsFixture was renamed to SectionsFixture due to MySQL reserved keyword changes.
 
 View
 ----
@@ -157,6 +162,7 @@ Console
 Database
 --------
 
+* MySQL 8 is supported and tested.
 * ``AggregateExpression`` was added to represent aggregate SQL functions. ``FunctionsBuilder::aggregate()``
   can be used to wrap new aggregate SQL functions.
 * Window function support was added for any aggregate expression. ``AggregateExpression`` wraps the window

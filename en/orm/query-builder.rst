@@ -327,8 +327,8 @@ You can access existing wrappers for several SQL functions through ``Query::func
 ``dayOfWeek()``
     Returns a FunctionExpression representing a call to SQL WEEKDAY function.
 
-Window Functions
-----------------
+Window-Only Functions
+^^^^^^^^^^^^^^^^^^^^^
 
 These window-only functions contain a window expression by default:
 
@@ -677,7 +677,7 @@ The above generates SQL similar to:
         (
             (author_id = 2 OR author_id = 3)
             AND
-            (published = 1 AND view_count > 10)
+            (published = 1 AND view_count = 10)
         )
         OR promoted = 1
     )

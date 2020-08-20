@@ -343,9 +343,6 @@ dans des préfixes et des 'scopes' spécifiques::
 
 Le code ci-dessus vous permettrait d'avoir des URLs de la forme ``/backend/contact_manager/contacts``.
 
-.. versionadded:: 3.5.0
-    ``RouteBuilder::loadPlugin()`` a été ajoutée dans 3.5.0
-
 Controllers du Plugin
 =====================
 

@@ -298,10 +298,12 @@ like::
 
     use Cake\Core\BasePlugin;
     use Cake\Core\PluginApplicationInterface;
+    use Cake\Console\CommandCollection;
+    use Cake\Http\MiddlewareQueue;
 
     class Plugin extends BasePlugin
     {
-        public function middleware($middleware)
+        public function middleware(MiddlewareQueue $middleware): MiddlewareQueue
         {
             // Add middleware here.
             $middleware = parent::middleware($middleware);
@@ -309,7 +311,7 @@ like::
             return $middleware;
         }
 
-        public function console($commands)
+        public function console(CommandCollection $commands): CommandCollection
         {
             // Add console commands here.
             $commands = parent::console($commands);
@@ -317,14 +319,14 @@ like::
             return $commands;
         }
 
-        public function bootstrap(PluginApplicationInterface $app)
+        public function bootstrap(PluginApplicationInterface $app): void
         {
             // Add constants, load configuration defaults.
             // By default will load `config/bootstrap.php` in the plugin.
             parent::bootstrap($app);
         }
 
-        public function routes($routes)
+        public function routes($routes): void
         {
             // Add routes.
             // By default will load `config/routes.php` in the plugin.

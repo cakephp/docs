@@ -9,6 +9,3 @@ para limpar os dados em cache que seu aplicativo possui::
 
     // Limpar todas as configurações de cache
     bin/cake cache clear_all
-
-.. versionadded:: 3.3.0
-    Os comandos shell do cache foram adicionados na versão 3.3.0

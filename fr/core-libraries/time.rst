@@ -186,9 +186,6 @@ Les types de calendrier suivants sont supportés:
 * coptic
 * ethiopic
 
-.. versionadded:: 3.1
-    Le support des calendriers non-grégoriens a été ajouté dans 3.1
-
 .. note::
     Pour les chaînes constantes, par exemple pour IntlDateFormatter::FULL, Intl
     utilise la librairie ICU qui alimente ses données à partir de CLDR
@@ -360,8 +357,6 @@ Dates
 =====
 
 .. php:class: Date
-
-.. versionadded:: 3.2
 
 La classe ``Date`` dans CakePHP implémente les mêmes API et méthodes que
 :php:class:`Cake\\I18n\\Time`. La différence principale entre ``Time`` et

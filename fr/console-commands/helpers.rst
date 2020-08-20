@@ -1,9 +1,6 @@
 Shell Helpers
 #############
 
-.. versionadded:: 3.1
-    Les Shell Helpers ont été ajoutés dans la version 3.1.0
-
 Les Shell Helpers vous permettent d'empaqueter une logique de sortie complexe
 d'une manière réutilisable. Les Shell Helpers sont accessibles et utilisables
 depuis n'importe quel shell ou task::

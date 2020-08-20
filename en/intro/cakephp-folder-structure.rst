@@ -15,7 +15,7 @@ level folders you should see:
 - The *templates* folder has presentational files placed here:
   elements, error pages, layouts, and view template files.
 - The *resources* folder has sub folder for various types of resource files.
-  The *locales** sub folder stores string files for internationalization.
+  The *locales* sub folder stores language files for internationalization.
 - The *tests* folder will be where you put the test cases for your application.
 - The *tmp* folder is where CakePHP stores temporary data. The actual data it
   stores depends on how you have CakePHP configured, but this folder
@@ -46,8 +46,6 @@ Console
     Contains the installation script executed by Composer.
 Controller
     Contains your application's :doc:`/controllers` and their components.
-Locale
-    Stores language files for internationalization.
 Middleware
     Stores any :doc:`/controllers/middleware` for your application.
 Model
@@ -60,7 +58,7 @@ View
 
 .. note::
 
-    The folders ``Shell`` and ``Locale`` are not present by default.
+    The folders ``Shell`` is not present by default.
     You can add them when you need them.
 
 .. meta::

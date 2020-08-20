@@ -264,9 +264,6 @@ Esta interface requer um único método para ser implementado::
 O ``TranslateBehavior`` tem uma implementação não trivial desta interface
 à qual você pode querer referir.
 
-.. versionadded:: 3.3.0
-    A capacidade de behaviors para participar do processo de marshalling foi adicionada em in 3.3.0
-
 Removendo Behaviors Carregados
 ==============================
 

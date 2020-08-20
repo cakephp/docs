@@ -5,15 +5,6 @@ Contenu
     :hidden:
 
     index
-    topics
-    bake
-    bake/usage
-    chronos
-    debug-kit
-    elasticsearch
-    migrations
-    phinx
-
 
 .. toctree::
     :maxdepth: 3
@@ -99,6 +90,19 @@ Contenu
     :caption: Phinx
 
     Phinx <https://book.cakephp.org/phinx/0/fr/>
+
+.. toctree::
+    :hidden:
+
+    topics
+    bake
+    bake/usage
+    chronos
+    debug-kit
+    elasticsearch
+    migrations
+    phinx
+
 
 .. todolist::
 

@@ -691,9 +691,6 @@ pouvez utiliser ``enableAutoFields()``::
             return $q->autoFields(true);
         }]);
 
-.. versionadded:: 3.1
-    La sélection des colonnes via un objet association a été ajouté dans 3.1
-
 Ordonner les Associations Contain
 ---------------------------------
 
@@ -800,9 +797,6 @@ De même, la seule différence est qu'aucune colonne supplémentaire ne sera
 ajoutée à l'ensemble de résultats et aucune propriété ``_matchingData`` ne sera
 définie.
 
-.. versionadded:: 3.1
-    Query::innerJoinWith() a été ajoutée dans 3.1
-
 Utiliser notMatching
 --------------------
 
@@ -861,9 +855,6 @@ Gardez à l'esprit que le contraire de la fonction ``matching()``,
 ``notMatching()`` ne va pas ajouter toutes les données à la propriété
 ``_matchingData`` dans les résultats.
 
-.. versionadded:: 3.1
-    Query::notMatching() a été ajoutée dans 3.1
-
 Utiliser leftJoinWith
 ---------------------
 
@@ -897,9 +888,6 @@ avec un certain mot::
 
 Cette fonction ne va charger aucune colonne des associations spécifiées dans
 l'ensemble de résultats.
-
-.. versionadded:: 3.1
-    Query::leftJoinWith() a été ajoutée dans 3.1
 
 .. end-filtering
 
@@ -1136,9 +1124,6 @@ des données. Vous pouvez charger des associations additionnelles en utilisant
 
 Vous pouvez charger en eager des données additionnelles dans une entity unique
 ou une collection d'entites.
-
-.. versionadded: 3.1
-    Table::loadInto() was added in 3.1
 
 .. _map-reduce:
 

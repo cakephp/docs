@@ -340,8 +340,8 @@ A basic example of session usage in controllers, views and cells would be::
     $session = $this->request->getSession();
     $name = $session->read('User.name');
 
-In helpers you can use ``$this->_View->getRequest()`` to get the request object
-and in component you can use ``$this->getController->getRequest()``.
+In helpers you can use ``$this->getView()->getRequest()`` to get the request object
+and in component you can use ``$this->getController()->getRequest()``.
 
 Reading & Writing Session Data
 ==============================

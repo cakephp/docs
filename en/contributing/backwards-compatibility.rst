@@ -13,8 +13,8 @@ features, but are not allowed to break compatibility. Bug fix releases (such as 
 .. note::
 
     Deprecations are removed with the next major version of the framework.
-    It is advised to early on adapt your code already each minor as outlined in
-    the deprecation comments and the migration guides.
+    It is advised that you adapt to deprecations as they are introduced to
+    ensure future upgrades are easier.
 
 To clarify what changes you can expect in each release tier we have more
 detailed information for developers using CakePHP, and for developers working on

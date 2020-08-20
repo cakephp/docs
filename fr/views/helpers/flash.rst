@@ -47,20 +47,11 @@ FlashComponent::
     vous de correctement encoder les données utilisateurs. CakePHP n'échappera
     pas les paramètres passés aux templates des messages flash pour vous.
 
-.. versionadded:: 3.1
-
-    Le :doc:`FlashComponent </controllers/components/flash>` empile maintenant
-    les messages. Si vous définissez plusieurs messages, lors d'un appel à
-    ``render()``, chaque message sera rendu dans son élément, dans l'ordre
-    dans lequel les messages ont été définis.
-
 Pour plus d'informations sur le tableau d'options disponibles, consultez la
 section :doc:`FlashComponent </controllers/components/flash>`.
 
 Préfixe de Routage et Messages Flash
 ====================================
-
-.. versionadded:: 3.0.1
 
 Si vous avez configuré un préfixe de Routage, vous pouvez maintenant stocker vos
 elements de messages Flash dans **templates/{Prefix}/element/flash**. De

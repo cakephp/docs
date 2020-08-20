@@ -331,9 +331,6 @@ plugin routes in additional scopes or prefixes::
 
 The above would result in URLs like ``/backend/contact_manager/contacts``.
 
-.. versionadded:: 3.5.0
-    ``RouteBuilder::loadPlugin()`` was added in 3.5.0
-
 Plugin Controllers
 ==================
 

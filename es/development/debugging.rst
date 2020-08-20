@@ -16,19 +16,11 @@ Depuración Básica
 La función ``debug()`` es una función que está disponible globalmente y funciona
 de manera similar a la función ``print_r()`` de PHP. La función ``debug()``
 te permite mostrar el contenido de una variable de varias maneras.
-Primero, si deseas que los datos se muestren de una forma amigable con HTML, 
+Primero, si deseas que los datos se muestren de una forma amigable con HTML,
 debes establecer el segundo parámetro en ``true``. La función
 también imprime la línea y el archivo de origen por defecto.
 
 El resultado de esta función solo se mostrará si la variable ``$debug`` en el archivo core es ``true``.
-
-.. versionadded:: 3.3.0
-
-    Al llamar a este método se devolverá ``$var`` que se le haya pasado, para que pueda, por ejemplo,
-    colocarlo en declaraciones de retorno, por ejemplo::
-    
-
-        return debug($data); // devolverá $data en cualquier caso.
 
 Ver también ``dd()``, ``pr()`` y ``pj()``.
 
@@ -38,8 +30,6 @@ La función ``stackTrace()`` está disponible globalmente, esta permite mostrar
 el seguimiento de pila donde sea que se llame.
 
 .. php:function:: breakpoint()
-
-.. versionadded:: 3.1
 
 Si tienes `Psysh <http://psysh.org/>` _ instalado, puedes usar esta
 función en entornos CLI para abrir una consola interactiva con el
@@ -105,10 +95,6 @@ puedes enmascarar claves específicas::
         'password' => 'xxxxx',
         'awsKey' => 'yyyyy',
     ]);
-
-.. versionadded:: 3.4.0
-
-    El enmascarado de salida fue añadido en 3.4.0
 
 Registros Con Trazas De Pila
 ============================
@@ -185,7 +171,7 @@ puede ser usado para registrar mensajes::
 
 Lo anterior escribiría ``Llegó aquí`` en el registro de depuración. Puedes usar
 entradas de registro para ayudar a los métodos de depuración que involucran redireccionamientos
-o búcles complejos. También puedes usar :php:meth:`Cake\\Log\\Log::write()` para 
+o búcles complejos. También puedes usar :php:meth:`Cake\\Log\\Log::write()` para
 escribir mensajes de registro. Este método puede ser llamado estáticamente en
 cualquier lugar de tu aplicación que un Log haya sido cargado::
 
