@@ -40,6 +40,11 @@ You can also override any of the options that were set in FlashComponent::
         'element' => 'great_success'
     ]);
 
+    // In your template file: the flashy element file from the Company Plugin
+    <?= $this->Flash->render('flash', [
+        'element' => 'Company.flashy'
+    ]);
+
 .. note::
 
     When building custom flash message templates, be sure to properly HTML
