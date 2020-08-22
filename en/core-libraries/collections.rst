@@ -749,7 +749,7 @@ flatten it::
 By default, the tree is traversed from the root to the leaves. You can also
 instruct it to only return the leaf elements in the tree::
 
-    $nested->listNested()->toList();
+    $nested->listNested('leaves')->toList();
 
     // Returns
     [
