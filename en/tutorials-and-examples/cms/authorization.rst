@@ -33,7 +33,7 @@ imports::
     use Authorization\Policy\OrmResolver;
     use Psr\Http\Message\ResponseInterface;
 
-Add the ``AuthorizationProviderInterface`` to the implemented interfaces on your application::
+Add the ``AuthorizationServiceProviderInterface`` to the implemented interfaces on your application::
 
     class Application extends BaseApplication
         implements AuthenticationServiceProviderInterface,
