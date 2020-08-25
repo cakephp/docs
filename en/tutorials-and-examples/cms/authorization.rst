@@ -88,6 +88,12 @@ queries. Lets use bake to generate a basic policy:
 .. code-block:: bash
 
     bin/cake bake policy --type entity Article
+    
+    and
+    
+    bin/cake bake policy --type table Articles   (from cakephp v2 book)
+    (There is no information in this tutorial on what to do with it. I searched on google and cake v2 information to find some help to move on. Could anyone complement this?  I don't know how to do it.)
+
 
 This will generate an empty policy class for our ``Article`` entity. You can
 find the generated policy in **src/Policy/ArticlePolicy.php**. Next update the
