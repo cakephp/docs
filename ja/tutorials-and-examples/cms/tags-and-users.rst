@@ -350,6 +350,16 @@ CakePHP では、コントローラーのアクションをスリムに保ち、
 
     echo $this->Form->control('tag_string', ['type' => 'text']);
 
+また、記事のビューテンプレートを更新する必要があります。
+**/templates/Articles/view.php** に以下の行を追加してください。 ::
+
+    <!-- File: templates/Articles/view.php -->
+
+    <h1><?= h($article->title) ?></h1>
+    <p><?= h($article->body) ?></p>
+    // 以下の行を追加
+    <p><b>Tags:</b> <?= h($article->tag_string) ?></p>
+
 タグ文字列の永続化
 ------------------
 
