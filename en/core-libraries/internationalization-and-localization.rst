@@ -327,7 +327,7 @@ You can do::
     zero{No Results} one{One result} few{...} many{...} other{...}
 
 Make sure you read the
-`Language Plural Rules Guide <http://www.unicode.org/cldr/charts/latest/supplemental/language_plural_rules.html>`_
+`Language Plural Rules Guide <https://unicode-org.github.io/cldr-staging/charts/37/supplemental/language_plural_rules.html>`_
 to get a complete overview of the aliases you can use for each language.
 
 Using Gettext Plural Selection
