@@ -146,39 +146,24 @@ edit メソッドは次のようになります。 ::
 これを実装する前に、新しいルートを追加します。 **config/routes.php** は次のようになるはずです。 ::
 
     <?php
-    use Cake\Core\Plugin;
     use Cake\Routing\Route\DashedRoute;
-    use Cake\Routing\Router;
+    use Cake\Routing\RouteBuilder;
 
-    Router::defaultRouteClass(DashedRoute::class);
+    $routes->setRouteClass(DashedRoute::class);
 
-    // タグ付けられたアクションのために追加された新しいルート。
-    // 末尾の `*` は、このアクションがパラメーターを渡されることを
-    // CakePHP に伝えます。
-    Router::scope(
-        '/articles',
-        ['controller' => 'Articles'],
-        function ($routes) {
-            $routes->connect('/tagged/*', ['action' => 'tags']);
-        }
-    );
+    $routes->scope('/', function (RouteBuilder $builder) {
+        $builder->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
+        $builder->connect('/pages/*', ['controller' => 'Pages', 'action' => 'display']);
 
-    Router::scope('/', function ($routes) {
-        // デフォルトの home と /pages/* ルートを接続。
-        $routes->connect('/', [
-            'controller' => 'Pages',
-            'action' => 'display', 'home'
-        ]);
-        $routes->connect('/pages/*', [
-            'controller' => 'Pages',
-            'action' => 'display'
-        ]);
+        // タグ付けられたアクションのために追加された新しいルート。
+        // 末尾の `*` は、このアクションがパラメーターを渡されることを
+        // CakePHP に伝えます。
+        $builder->scope('/articles', function (RouteBuilder $builder) {
+            $builder->connect('/tagged/*', ['controller' => 'Articles', 'action' => 'tags']);
+        });
 
-        // 規約に基づいたデフォルトルートを接続。
-        $routes->fallbacks();
+        $builder->fallbacks();
     });
-
-    Plugin::routes();
 
 上記は、 **/articles/tagged/** パスを ``ArticlesController::tags()`` に接続する、新しい
 「ルート」を定義します。ルートを定義することにより、URL の外観とそれらの実装方法を分離することが
@@ -332,6 +317,12 @@ CakePHP では、コントローラーのアクションをスリムに保ち、
     // Collection クラスをインポートします
     use Cake\Collection\Collection;
 
+    // アクセス可能なプロパティに `tag_string` を含めるよう更新します
+    protected $_accessible = [
+        // その他のフィールドも追加可能
+        'tag_string' => true
+    ];
+
     protected function _getTagString()
     {
         if (isset($this->_fields['tag_string'])) {
@@ -358,6 +349,16 @@ CakePHP では、コントローラーのアクションをスリムに保ち、
 既存の ``tags._ids`` コントロールを次のものに置き換えてください。 ::
 
     echo $this->Form->control('tag_string', ['type' => 'text']);
+
+また、記事のビューテンプレートを更新する必要があります。
+**/templates/Articles/view.php** に以下の行を追加してください。 ::
+
+    <!-- File: templates/Articles/view.php -->
+
+    <h1><?= h($article->title) ?></h1>
+    <p><?= h($article->body) ?></p>
+    // 以下の行を追加
+    <p><b>Tags:</b> <?= h($article->tag_string) ?></p>
 
 タグ文字列の永続化
 ------------------
