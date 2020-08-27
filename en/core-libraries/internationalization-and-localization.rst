@@ -243,7 +243,7 @@ The word ``time`` after the placeholder number is also accepted and it
 understands the same options as ``date``.
 
 You can also use named placeholders like ``{name}`` in the message strings. 
-When using named placeholders pass the variables in an array using key/value pairs, 
+When using named placeholders, pass the placeholder and replacement in an array using key/value pairs, 
 for example ``['name' => 'Sara', 'age' => 12]``.
 
 Plurals
