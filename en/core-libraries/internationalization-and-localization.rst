@@ -588,16 +588,16 @@ information in a user's localized format. In a controller, or
 :doc:`/controllers/middleware` you can configure the Date, Time, and
 DateTime types to parse localized formats::
 
-    use Cake\Database\Type;
+    use Cake\Database\TypeFactory;
 
     // Enable default locale format parsing.
-    Type::build('datetime')->useLocaleParser();
+    TypeFactory::build('datetime')->useLocaleParser();
 
     // Configure a custom datetime format parser format.
-    Type::build('datetime')->useLocaleParser()->setLocaleFormat('dd-M-y');
+    TypeFactory::build('datetime')->useLocaleParser()->setLocaleFormat('dd-M-y');
 
     // You can also use IntlDateFormatter constants.
-    Type::build('datetime')->useLocaleParser()
+    TypeFactory::build('datetime')->useLocaleParser()
         ->setLocaleFormat([IntlDateFormatter::SHORT, -1]);
 
 The default parsing format is the same as the default string format.
@@ -612,12 +612,12 @@ automatically set the locale based on the current user::
     use Cake\I18n\Middleware\LocaleSelectorMiddleware;
 
     // Update the middleware function, adding the new middleware
-    public function middleware($middleware)
+    public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue
     {
         // Add middleware and set the valid locales
-        $middleware->add(new LocaleSelectorMiddleware(['en_US', 'fr_FR']));
+        $middlewareQueue->add(new LocaleSelectorMiddleware(['en_US', 'fr_FR']));
         // To accept any locale header value
-        $middleware->add(new LocaleSelectorMiddleware(['*']));
+        $middlewareQueue->add(new LocaleSelectorMiddleware(['*']));
     }
 
 The ``LocaleSelectorMiddleware`` will use the ``Accept-Language`` header to
