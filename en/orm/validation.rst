@@ -251,7 +251,7 @@ instance to be used each time, you can use table's ``$_validatorClass`` property
     // In your table class
     public function initialize(array $config): void
     {
-        $this->_validatorClass = '\FullyNamespaced\Custom\Validator';
+        $this->_validatorClass = \FullyNamespaced\Custom\Validator::class;
     }
 
 .. _application-rules:
