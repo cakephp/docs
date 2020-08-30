@@ -164,7 +164,7 @@ Then add the following::
         return $authenticationService;
     }
 
-In you ``AppController`` class add the following code::
+In your ``AppController`` class add the following code::
 
     // src/Controller/AppController.php
     public function initialize(): void
