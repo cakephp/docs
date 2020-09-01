@@ -88,3 +88,10 @@ composer commands:
 
     php composer.phar require --dev --update-with-dependencies "phpunit/phpunit:^8.0"
     php composer.phar require --update-with-dependencies "cakephp/cakephp:4.0.*"
+    
+    
+    
+Update CakePHP Skeleton
+=======================
+
+It might also be helpful to upgrade the app skeleton of your cakePHP app. See https://packagist.org/packages/dereuromark/upgrade-cakephp for more information.
