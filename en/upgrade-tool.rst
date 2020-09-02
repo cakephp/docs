@@ -11,7 +11,7 @@ Installation
 The upgrade tool is installed as a standalone application. You'll need to clone
 the upgrade tool with git, and install the dependencies with composer::
 
-    git clone https://github.com/cakephp/upgrade.git
+    git clone https://github.com/cakephp/upgrade.git -b 3.x
     cd upgrade
     php ../composer.phar install
 
