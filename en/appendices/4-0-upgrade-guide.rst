@@ -94,7 +94,7 @@ composer commands:
 Application.php
 ===============
 
-It is also advised to have a closer look at your `src/Application.php`. You can compare it with the one from the cake/app skeleton, which can be found here: https://github.com/cakephp/app/blob/master/src/Application.php.
+It is also advised to have a closer look at your ``src/Application.php``. You can compare it with the one from the cake/app skeleton, which can be found here: https://github.com/cakephp/app/blob/master/src/Application.php.
 
 For example if you are providing some kind of REST api, don't forget to include the BodyParserMiddleware as described in https://book.cakephp.org/4/en/controllers/middleware.html#body-parser-middleware.
 
