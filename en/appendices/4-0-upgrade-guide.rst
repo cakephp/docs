@@ -96,6 +96,6 @@ Application.php
 
 It is also advised to have a closer look at your ``src/Application.php``. You can compare it with the one from the cake/app skeleton, which can be found here: https://github.com/cakephp/app/blob/master/src/Application.php.
 
-For example if you are providing some kind of REST api, don't forget to include the BodyParserMiddleware as described in https://book.cakephp.org/4/en/controllers/middleware.html#body-parser-middleware.
+For example if you are providing some kind of REST API, don't forget to include the :ref:`body-parser-middleware`.
 
 You should also upgrade to the new AuthenticationMiddleware (https://book.cakephp.org/authentication/2/en/index.html) and AuthorizationMiddleware (https://book.cakephp.org/authorization/2/en/index.html), if you are still using the old depracated AuthComponent. 
