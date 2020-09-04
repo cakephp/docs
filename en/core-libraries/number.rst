@@ -112,7 +112,7 @@ currency to :php:meth:`Cake\\I18n\\Number::currency()` and change all
 currency outputs by setting other default. If ``$currency`` is set to ``null``,
 it will clear the currently stored value.
 
-Setting the Default Currency
+Getting the Default Currency
 ============================
 
 .. php:method:: getDefaultCurrency()
