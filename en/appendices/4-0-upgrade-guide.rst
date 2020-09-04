@@ -88,3 +88,14 @@ composer commands:
 
     php composer.phar require --dev --update-with-dependencies "phpunit/phpunit:^8.0"
     php composer.phar require --update-with-dependencies "cakephp/cakephp:4.0.*"
+    
+    
+    
+Application.php
+===============
+
+It is also advised to have a closer look at your ``src/Application.php``. You can compare it with the one from the cake/app skeleton, which can be found here: https://github.com/cakephp/app/blob/master/src/Application.php.
+
+For example if you are providing some kind of REST API, don't forget to include the :ref:`body-parser-middleware`.
+
+You should also upgrade to the new `AuthenticationMiddleware <https://book.cakephp.org/authentication/2/en/index.html>`__ and `AuthorizationMiddleware <https://book.cakephp.org/authorization/2/en/index.html>`__, if you are still using the old deprecated AuthComponent. 
