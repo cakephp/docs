@@ -90,6 +90,8 @@ parameters::
         ['controller' => 'Users', 'action' => 'login'],
         ['_name' => 'login']
     );
+    // Be aware if you change your actual login route you must also update your
+    // 'unauthenticatedRedirect' and 'loginUrl' in your src/Application.php
 
     use Cake\Routing\Router;
 
