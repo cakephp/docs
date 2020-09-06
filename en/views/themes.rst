@@ -8,6 +8,12 @@ your page quickly. In addition to template files, they can also provide helpers
 and cells if your theming requires that. When using cells and helpers from your
 theme, you will need to continue using the :term:`plugin syntax`.
 
+First ensure your theme plugin is loaded in your application's ``bootstrap``
+method. For example::
+
+    // Load our plugin theme residing in the folder /plugins/Modern
+    $this->addPlugin('Modern');
+
 To use themes, set the theme name in your controller's action or
 ``beforeRender()`` callback::
 
@@ -36,12 +42,6 @@ template in the plugin.
 If a view file can't be found in the theme, CakePHP will try to locate the view
 file in the **templates/** folder. This way, you can create master template files
 and simply override them on a case-by-case basis within your theme folder.
-
-If your theme also acts as a plugin, don't forget to ensure it is loaded in
-your application's ``bootstrap`` method. For example::
-
-    // Load our plugin theme residing in the folder /plugins/Modern
-    $this->addPlugin('Modern');
 
 Theme Assets
 ============
