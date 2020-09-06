@@ -86,16 +86,16 @@ parameters::
 
     // In routes.php
     $routes->connect(
-        '/login',
-        ['controller' => 'Users', 'action' => 'login'],
-        ['_name' => 'login']
+        '/upgrade',
+        ['controller' => 'Subscriptions', 'action' => 'create'],
+        ['_name' => 'upgrade']
     );
 
     use Cake\Routing\Router;
 
-    echo Router::url(['_name' => 'login']);
+    echo Router::url(['_name' => 'upgrade']);
     // Will output
-    /login
+    /upgrade
 
 To help keep your routing code DRY, the Router has the concept of 'scopes'.
 A scope defines a common path segment, and optionally route defaults. Any routes
