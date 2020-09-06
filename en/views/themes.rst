@@ -49,8 +49,9 @@ Theme Assets
 Because themes are standard CakePHP plugins, they can include any necessary
 assets in their webroot directory. This allows for easy packaging and
 distribution of themes. Whilst in development, requests for theme assets will be
-handled by ``Cake\Routing\AssetMiddleware``. To improve performance for production
-environments, it's recommended that you :ref:`symlink-assets`.
+handled by :php:class:`Cake\Routing\Middleware\AssetMiddleware` (which is loaded
+by default in cakephp/app ``Application::middleware()``). To improve 
+performance for production environments, it's recommended that you :ref:`symlink-assets`.
 
 All of CakePHP's built-in helpers are aware of themes and will create the
 correct paths automatically. Like template files, if a file isn't in the theme
