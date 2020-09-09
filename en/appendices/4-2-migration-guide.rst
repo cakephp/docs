@@ -35,6 +35,12 @@ Controller
   as protected. This should not impact most application code as implementations
   can change the visibility to public.
 
+Database
+--------
+
+- The ``TimeType`` will now correctly marshall values in the ``H:i`` format.
+  Previously these values would be cast to ``null`` after validation.
+
 
 Breaking Changes
 ================
