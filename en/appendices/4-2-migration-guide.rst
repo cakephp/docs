@@ -40,6 +40,12 @@ Database
 
 - The ``TimeType`` will now correctly marshall values in the ``H:i`` format.
   Previously these values would be cast to ``null`` after validation.
+  
+Validation
+----------
+
+- ``Validation::time()`` will now reject a string if minutes are missing. Previously,
+  this would accept hours-only digits although the api documentation showed minutes were required.
 
 
 Breaking Changes
