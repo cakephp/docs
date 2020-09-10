@@ -270,7 +270,7 @@ accept a callback function as their last argument. If present, the callback
 determines whether or not the rule should be applied. For example, a field is
 sometimes allowed to be empty::
 
-    $validator->allowEmptyString('tax', function ($context) {
+    $validator->allowEmptyString('tax', 'This field is required', function ($context) {
         return !$context['data']['is_taxable'];
     });
 
