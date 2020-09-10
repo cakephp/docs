@@ -150,7 +150,7 @@ prefix::
 
     public function sitemap()
     {
-        $pages = $this->Pages->find();
+        $pages = $this->Pages->find()->all();
         $urls = [];
         foreach ($pages as $page) {
             $urls[] = [
@@ -235,7 +235,7 @@ mappings in your controller::
             $this->viewBuilder()->setClassName($formats[$format]);
 
             // Get data
-            $videos = $this->Videos->find('latest');
+            $videos = $this->Videos->find('latest')->all();
 
             // Set Data View
             $this->set(compact('videos'));

@@ -238,7 +238,7 @@ like::
             }
             $this->Flash->error('The bookmark could not be saved. Please, try again.');
         }
-        $tags = $this->Bookmarks->Tags->find('list');
+        $tags = $this->Bookmarks->Tags->find('list')->all();
         $this->set(compact('bookmark', 'tags'));
         $this->viewBuilder()->setOption('serialize', ['bookmark']);
     }
@@ -262,7 +262,7 @@ edit form and action. Your ``edit()`` action from
             }
             $this->Flash->error('The bookmark could not be saved. Please, try again.');
         }
-        $tags = $this->Bookmarks->Tags->find('list');
+        $tags = $this->Bookmarks->Tags->find('list')->all();
         $this->set(compact('bookmark', 'tags'));
         $this->viewBuilder()->setOption('serialize', ['bookmark']);
     }
@@ -373,18 +373,18 @@ to **src/Model/Table/BookmarksTable.php**::
         $newTags = array_unique($newTags);
 
         $out = [];
-        $query = $this->Tags->find()
-            ->where(['Tags.title IN' => $newTags]);
+        $tags = $this->Tags->find()
+            ->where(['Tags.title IN' => $newTags])->all();
 
         // Remove existing tags from the list of new tags.
-        foreach ($query->extract('title') as $existing) {
+        foreach ($tags->extract('title') as $existing) {
             $index = array_search($existing, $newTags);
             if ($index !== false) {
                 unset($newTags[$index]);
             }
         }
         // Add existing tags.
-        foreach ($query as $tag) {
+        foreach ($tags as $tag) {
             $out[] = $tag;
         }
         // Add new tags.

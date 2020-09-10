@@ -36,9 +36,9 @@ from our ``articles`` table we could do::
     {
         $articles = $this->getTableLocator()->get('Articles');
 
-        $query = $articles->find();
+        $resultset = $articles->find()->all();
 
-        foreach ($query as $row) {
+        foreach ($resultset as $row) {
             echo $row->title;
         }
     }
@@ -91,9 +91,9 @@ load entities from the database we'll get instances of our new Article class::
     use Cake\ORM\Locator\LocatorAwareTrait;
 
     $articles = $this->getTableLocator()->get('Articles');
-    $query = $articles->find();
+    $resultset = $articles->find()->all();
 
-    foreach ($query as $row) {
+    foreach ($resultset as $row) {
         // Each row is now an instance of our Article class.
         echo $row->title;
     }

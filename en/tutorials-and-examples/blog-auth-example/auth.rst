@@ -79,7 +79,7 @@ utilities bundled with CakePHP::
     {
         public function index()
         {
-            $this->set('users', $this->Users->find('all'));
+            $this->set('users', $this->Users->find()->all());
         }
 
         public function view($id)

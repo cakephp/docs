@@ -366,8 +366,9 @@ add the following::
 
         // Use the BookmarksTable to find tagged bookmarks.
         $bookmarks = $this->Bookmarks->find('tagged', [
-            'tags' => $tags
-        ]);
+                'tags' => $tags
+            ])
+            ->all();
 
         // Pass variables into the view template context.
         $this->set([
@@ -394,7 +395,8 @@ method has not been implemented yet, so let's do that. In
     public function findTagged(Query $query, array $options)
     {
         $bookmarks = $this->find()
-            ->select(['id', 'url', 'title', 'description']);
+            ->select(['id', 'url', 'title', 'description'])
+            ->all();
 
         if (empty($options['tags'])) {
             $bookmarks

@@ -10,8 +10,9 @@ objects, entities represent individual rows or domain objects in your
 application. Entities contain methods to manipulate and
 access the data they contain. Fields can also be accessed as properties on the object.
 
-Entities are created for you each time you use ``find()`` on a table
-object.
+Entities are created for you each time you iterate the query instance returned 
+by ``find()`` of a table object or when you call ``all()`` or ``first()`` method
+of the query instance.
 
 Creating Entity Classes
 =======================
