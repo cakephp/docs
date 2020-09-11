@@ -162,7 +162,7 @@ CakePHP は snap を作成します。 ::
 この関数に第1引数として `IntlDateFormatter 定数
 <http://www.php.net/manual/ja/class.intldateformatter.php>`_ を渡したり、
 あるいは以下のリソースで指定されている ICU の日付フルフォーマット文字列を渡すことができます:
-http://www.icu-project.org/apiref/icu4c/classSimpleDateFormat.html#details.
+https://unicode-org.github.io/icu/userguide/format_parse/datetime/#datetime-format-syntax.
 
 グレゴリオ暦以外の暦で日付をフォーマットすることも可能です。 ::
 
