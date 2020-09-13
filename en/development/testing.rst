@@ -208,7 +208,7 @@ our code creates the output we expect::
     }
 
 The above test is a simple one but shows the potential benefit of using test
-cases. We use ``assertContains()`` to ensure that our helper is returning a
+cases. We use ``assertStringContainsString()`` to ensure that our helper is returning a
 string that contains the content we expect. If the result did not contain the
 expected content the test would fail, and we would know that our code is
 incorrect.
