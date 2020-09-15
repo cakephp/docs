@@ -245,10 +245,9 @@ understands the same options as ``date``.
 You can also use named placeholders like ``{name}`` in the message strings. 
 When using named placeholders, pass the placeholder and replacement in an array using key/value pairs, 
 for example::
-    echo __('Hi. My name is {name}. I'm {age} years old.', ['name' => 'Sara', 'age' => 12]);
 
-    // Returns
-    Hi. My name is Sara. I'm 12 years old.
+    // echos:  Hi. My name is Sara. I'm 12 years old.
+    echo __('Hi. My name is {name}. I'm {age} years old.', ['name' => 'Sara', 'age' => 12]);
 
 Plurals
 -------
