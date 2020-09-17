@@ -33,9 +33,9 @@ Mailer
     $mailer = new Mailer();
     $mailer->setTo('to@example.com', 'To Example');
     $mailer->addTo('to2@example.com', 'To2 Example');
-    // The email's To recipients are: to@example.com and to2@example.com
+    // メールの To 受信者は to@example.com と to2@example.com
     $mailer->setTo('test@example.com', 'ToTest Example');
-    // The email's To recipient is: test@example.com
+    // メールの To 受信者は test@example.com
 
 送り主の選択
 ------------
@@ -70,7 +70,7 @@ Mailer
     $mailer = new Mailer();
     $mailer->setProfile('default');
 
-    // Or in constructor
+    // または、コンストラクター内で
     $mailer = new Mailer('default');
 
 設定名の文字列を渡す代わりに、オプションの配列をロードすることもできます。 ::
@@ -78,7 +78,7 @@ Mailer
     $mailer = new Mailer();
     $mailer->setProfile(['from' => 'me@example.org', 'transport' => 'my_custom']);
 
-    // Or in constructor
+    // または、コンストラクター内で
     $mailer = new Mailer(['from' => 'me@example.org', 'transport' => 'my_custom']);
 
 .. _email-configurations:
@@ -270,8 +270,8 @@ CakePHP は、 :doc:`ビューレイヤー </views>` を使用してメールを
 
     $mailer = new Mailer('default');
 
-    // Relax the email pattern, so you can send
-    // to non-conformant addresses.
+    // 規約に準拠しないアドレスに送信できるように
+    // メールのパターンを緩和します。
     $mailer->setEmailPattern($newPattern);
 
 メッセージの即時送信
@@ -422,13 +422,13 @@ PHP の ``mail()`` 関数や SMTP サーバーでメッセージを送信した�
 単純に設定データを変更できるのでデプロイが簡単になります。
 トランスポートの設定例は、次のようになります。 ::
 
-    // In config/app.php
+    // config/app.php の中で
     'EmailTransport' => [
-        // Sample Mail configuration
+        // Mail構成の例
         'default' => [
             'className' => 'Mail',
         ],
-        // Sample SMTP configuration
+        // SMTP構成の例
         'gmail' => [
             'host' => 'smtp.gmail.com',
             'port' => 587,
@@ -443,7 +443,7 @@ PHP の ``mail()`` 関数や SMTP サーバーでメッセージを送信した�
 
     use Cake\Mailer\TransportFactory;
 
-    // Define an STMP transport
+    // STMPトランスポートを定義する
     TransportFactory::setConfig('gmail', [
         'host' => 'ssl://smtp.gmail.com',
         'port' => 465,
