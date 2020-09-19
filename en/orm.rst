@@ -34,7 +34,7 @@ from our ``articles`` table we could do::
 
     public function someMethod()
     {
-        $articles = $this->getTableLocator->get('Articles');
+        $articles = $this->getTableLocator()->get('Articles');
 
         $query = $articles->find();
 

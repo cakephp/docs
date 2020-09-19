@@ -135,7 +135,7 @@ PHP, mas também podem ser distribuídas como XML, CSV, ou ainda dados binários
 
 Um layout é um conjunto de códigos encontrado ao redor das views. Múltiplos
 layouts podem ser definidos, e você pode alterar entre eles, mas agora, vamos
-usar o default, localziado em **templates/layout/default.php**.
+usar o default, localizado em **templates/layout/default.php**.
 
 Lembra que na última sessão atribuímos a variável 'articles' à view usando o
 método ``set()``? Isso levará a coleção de objetos gerada pela query a ser

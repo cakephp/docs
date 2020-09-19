@@ -312,8 +312,8 @@ Writing Configuration data
 
 Use ``write()`` to store data in the application's configuration::
 
-    Configure::write('Company.name','Pizza, Inc.');
-    Configure::write('Company.slogan','Pizza for your body and soul');
+    Configure::write('Company.name', 'Pizza, Inc.');
+    Configure::write('Company.slogan', 'Pizza for your body and soul');
 
 .. note::
 
@@ -328,8 +328,13 @@ The above example could also be written in a single call::
     ]);
 
 You can use ``Configure::write('debug', $bool)`` to switch between debug and
-production modes on the fly. This is especially handy for JSON interactions
-where debugging information can cause parsing problems.
+production modes on the fly.
+
+.. note::
+
+    Any configuration changes done using ``Configure::write()`` are in memory
+    and will not persist across requests.
+
 
 Reading Configuration Data
 --------------------------

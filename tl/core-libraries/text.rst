@@ -50,7 +50,7 @@ string using ``Text::setTransliteratorId()``. ICU transliteration identifiers
 are basically of form ``<source script>:<target script>`` and you can specify
 multiple conversion pairs separated by ``;``. You can find more info about
 transliterator identifiers
-`here <http://userguide.icu-project.org/transforms/general#TOC-Transliterator-Identifiers>`_::
+`here <https://unicode-org.github.io/icu/userguide/transforms/general/#transliterator-identifiers>`_::
 
     // apple puree
     Text::transliterate('apple purée');

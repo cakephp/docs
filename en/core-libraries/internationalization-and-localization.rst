@@ -242,16 +242,12 @@ number. A list of extra options follows:
 The word ``time`` after the placeholder number is also accepted and it
 understands the same options as ``date``.
 
-.. note::
+You can also use named placeholders like ``{name}`` in the message strings. 
+When using named placeholders, pass the placeholder and replacement in an array using key/value pairs, 
+for example::
 
-    Named placeholders are supported in PHP 5.5+ and are formatted as
-    ``{name}``. When using named placeholders pass the variables in an array
-    using key/value pairs, for example ``['name' => 'Sara', 'age' => 12]``.
-
-    It is recommended to use PHP 5.5 or higher when making use of
-    internationalization features in CakePHP. The ``php5-intl`` extension must
-    be installed and the ICU version should be above 48.x.y (to check the ICU
-    version ``Intl::getIcuVersion()``).
+    // echos:  Hi. My name is Sara. I'm 12 years old.
+    echo __('Hi. My name is {name}. I'm {age} years old.', ['name' => 'Sara', 'age' => 12]);
 
 Plurals
 -------
@@ -334,7 +330,7 @@ You can do::
     zero{No Results} one{One result} few{...} many{...} other{...}
 
 Make sure you read the
-`Language Plural Rules Guide <http://www.unicode.org/cldr/charts/latest/supplemental/language_plural_rules.html>`_
+`Language Plural Rules Guide <https://unicode-org.github.io/cldr-staging/charts/37/supplemental/language_plural_rules.html>`_
 to get a complete overview of the aliases you can use for each language.
 
 Using Gettext Plural Selection
@@ -597,16 +593,16 @@ information in a user's localized format. In a controller, or
 :doc:`/controllers/middleware` you can configure the Date, Time, and
 DateTime types to parse localized formats::
 
-    use Cake\Database\Type;
+    use Cake\Database\TypeFactory;
 
     // Enable default locale format parsing.
-    Type::build('datetime')->useLocaleParser();
+    TypeFactory::build('datetime')->useLocaleParser();
 
     // Configure a custom datetime format parser format.
-    Type::build('datetime')->useLocaleParser()->setLocaleFormat('dd-M-y');
+    TypeFactory::build('datetime')->useLocaleParser()->setLocaleFormat('dd-M-y');
 
     // You can also use IntlDateFormatter constants.
-    Type::build('datetime')->useLocaleParser()
+    TypeFactory::build('datetime')->useLocaleParser()
         ->setLocaleFormat([IntlDateFormatter::SHORT, -1]);
 
 The default parsing format is the same as the default string format.
@@ -621,12 +617,12 @@ automatically set the locale based on the current user::
     use Cake\I18n\Middleware\LocaleSelectorMiddleware;
 
     // Update the middleware function, adding the new middleware
-    public function middleware($middleware)
+    public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue
     {
         // Add middleware and set the valid locales
-        $middleware->add(new LocaleSelectorMiddleware(['en_US', 'fr_FR']));
+        $middlewareQueue->add(new LocaleSelectorMiddleware(['en_US', 'fr_FR']));
         // To accept any locale header value
-        $middleware->add(new LocaleSelectorMiddleware(['*']));
+        $middlewareQueue->add(new LocaleSelectorMiddleware(['*']));
     }
 
 The ``LocaleSelectorMiddleware`` will use the ``Accept-Language`` header to

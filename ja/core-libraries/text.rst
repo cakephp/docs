@@ -47,7 +47,7 @@ transliterate はデフォルトで、与えられた文字列の文字すべて
 ICU のトランスリテレーション識別子は基本的に ``<元のスクリプト>:<変換後のスクリプト>`` の形で、
 ``;`` で区切って複数の変換の組み合わせを指定することができます。
 トランスリテレーション識別子についての詳細は
-`ここ <http://userguide.icu-project.org/transforms/general#TOC-Transliterator-Identifiers>`_
+`ここ <https://unicode-org.github.io/icu/userguide/transforms/general/#transliterator-identifiers>`_
 を参照してください。 ::
 
     // apple puree

@@ -42,7 +42,7 @@ Security コンポーネントのフォーム保護機能と、 ``startup()`` �
 ブラックホールコールバックの処理
 ================================
 
-.. php:method:: blackHole(object $controller, string $error = '', SecurityException $exception = null)
+.. php:method:: blackHole(Controller $controller, string $error = '', ?SecurityException $exception = null)
 
 あるアクションが Security コンポーネントによって制限されている時、
 デフォルトでは、不正なリクエストとして 400 エラーを返し破棄します。
@@ -52,59 +52,37 @@ Security コンポーネントのフォーム保護機能と、 ``startup()`` �
 コールバックメソッドを設定することによって、ブラックホール処理がどのように機能するかを
 カスタマイズすることができます。 ::
 
-    public function beforeFilter(Event $event)
+    public function beforeFilter(EventInterface $event)
     {
+        parent::beforeFilter($event);
+
         $this->Security->setConfig('blackHoleCallback', 'blackhole');
     }
 
-    public function blackhole($type)
+    public function blackhole($type, SecurityException $exception)
     {
-        // エラー処理
+        if ($exception->getMessage() === 'リクエストがSSLではありません。アクションは安全である必要があります。') {
+            // 例外メッセージを翻訳可能な文字列に書き換えます。
+            $exception->setMessage(__('要求されたページにHTTPSでアクセスしてください'));
+        }
+
+        // 条件付きでリワードされた例外を再度スローします。
+        throw $exception;
+
+        // または、フラッシュメッセージを設定して、
+        // 要求されたページの HTTPS バージョンにリダイレクトするなどして
+        // エラーを処理することもできます。
     }
-
-.. note::
-
-    CakePHP バージョン 3.4 より前の場合、 ``$this->Security->config()`` を使用してください。
 
 ``$type`` パラメーターは、以下の値を指定できます。
 
 * 'auth' は、フォームバリデーションエラー、もしくはコントローラー/アクションの不適合エラーを示します。
 * 'secure' は、SSL メソッド制限の失敗を示します。
 
-.. versionadded:: cakephp/cakephp 3.2.6
-
-    v3.2.6 では、追加のパラメーターが blackHole コールバックに含まれます。
-    ``Cake\Controller\Exception\SecurityException`` のインスタンスが、
-    ２番目のパラメーターに含まれます。
-
 アクションを SSL 通信に限定
 ===========================
 
-.. php:method:: requireSecure()
-
-    SSL で保護されたリクエストが必要なアクションを設定します。
-    複数の引数を渡すことができます。引数を指定しなければ、全てのアクションで
-    SSL 通信を強制します。
-
-.. php:method:: requireAuth()
-
-    Security コンポーネントで生成された正しいトークンが必要なアクションを設定します。
-    複数の引数を渡すことができます。引数を指定しなければ、全てのアクションで
-    正しい認証を強制します。
-
-コントローラー間通信の限定
-==========================
-
-allowedControllers
-    このコントローラーにリクエストを送ることができるコントローラーのリスト。
-    これは、コントローラー間リクエストの制御に利用できます。
-allowedActions
-    このコントローラーのアクションにリクエストを送ることができるアクションのリスト。
-    これは、コントローラー間リクエストの制御に利用できます。
-
-これらの設定オプションを使用すると、コントローラー間の通信を制限することができます。
-それらは、 ``setConfig()`` メソッドで設定します。
-もし CakePHP バージョン 3.4 より前を使用している場合は ``config()`` です。
+この機能は :ref:`https-enforcer-middleware` の登場に伴い削除されました。
 
 フォーム改ざん防止
 ==================
@@ -136,75 +114,36 @@ validatePost
     ``false`` をセットすると、POST リクエストのバリデーションを完全にスキップし、
     実質フォームバリデーションを無効化します。
 
-上記の設定オプションは、 ``setConfig()`` で設定することができます。
-
 使い方
 ======
 
-Security コンポーネントは、一般的にコントローラーの ``beforeFilter()`` で使用します。
-あなたが望むセキュリティ制限をここで指定すると SecurityComponent は起動時に
-それらの制限を有効にします。 ::
+Security コンポーネントは、一般的にコントローラーの
+``initialize`` または ``beforeFilter()`` のコールバックの中で行われます。 ::
 
     namespace App\Controller;
 
     use App\Controller\AppController;
-    use Cake\Event\Event;
+    use Cake\Event\EventInterface;
 
     class WidgetsController extends AppController
     {
-        public function initialize()
+        public function initialize(): void
         {
             parent::initialize();
             $this->loadComponent('Security');
         }
 
-        public function beforeFilter(Event $event)
+        public function beforeFilter(EventInterface $event)
         {
-            if ($this->request->getParam('admin')) {
-                $this->Security->requireSecure();
+            parent::beforeFilter($event);
+
+            if ($this->request->getParam('prefix') === 'Admin') {
+                $this->Security->setConfig('validatePost', false);
             }
         }
     }
-
-上記の例では、 管理者用ルーティングの全てのアクションは、セキュアな SSL 通信のみを許可します。 ::
-
-    namespace App\Controller;
-
-    use App\Controller\AppController;
-    use Cake\Event\Event;
-
-    class WidgetsController extends AppController
-    {
-        public function initialize()
-        {
-            parent::initialize();
-            $this->loadComponent('Security', ['blackHoleCallback' => 'forceSSL']);
-        }
-
-        public function beforeFilter(Event $event)
-        {
-            if ($this->request->getParam('admin')) {
-                $this->Security->requireSecure();
-            }
-        }
-
-        public function forceSSL($error = '', SecurityException $exception = null)
-        {
-            if ($exception instanceof SecurityException && $exception->getType() === 'secure') {
-                return $this->redirect('https://' . env('SERVER_NAME') . Router::url($this->request->getRequestTarget()));
-            }
-            
-            throw $exception;
-        }
-    }
-
-.. note::
-
-    CakePHP バージョン 3.4.0 より前では ``$this->request->here()`` を使用してください。
 
 上記の例では、 管理者用ルーティングの全てのアクションは、セキュアな SSL 通信のみを許可します。
-リクエストが破棄対象になった時、 ``forceSSL()`` コールバック関数が呼ばれ、非セキュアなリクエストを
-自動的にセキュアなリクエストにリダイレクトします。
 
 .. _security-csrf:
 
@@ -214,38 +153,35 @@ CSRF 防御
 CSRF つまり、クロスサイトリクエストフォージェリ (Cross Site Request Forgery) は、
 アプリケーションの一般的な脆弱性です。攻撃者が、直前のリクエストを記録し再生することを許し、
 他のドメイン上の画像タグやリソースを使用してデータを送信します。
-CSRF 保護機能を有効にするには、 :doc:`/controllers/components/csrf` を利用してください。
+CSRF 保護機能を有効にするには、:ref:`csrf-middleware` を利用してください。
 
 指定したアクションの Security コンポーネントの無効化
 ====================================================
 
 例えば AJAX リクエストなど、あるアクションで全てのセキュリティチェックを無効化したい場合があります。
 ``beforeFilter()`` 内で ``$this->Security->unlockedActions`` にリストアップすることで
-これらのアクションを「アンロック」できます。 ```unlockedActions`` プロパティーは、
-``SecurityComponent`` のその他の機能には **影響しません** 。 ::
+これらのアクションを「アンロック」できます。 ::
 
     namespace App\Controller;
 
     use App\Controller\AppController;
-    use Cake\Event\Event;
+    use Cake\Event\EventInterface;
 
     class WidgetController extends AppController
     {
-        public function initialize()
+        public function initialize(): void
         {
             parent::initialize();
             $this->loadComponent('Security');
         }
 
-        public function beforeFilter(Event $event)
+        public function beforeFilter(EventInterface $event)
         {
-             $this->Security->setConfig('unlockedActions', ['edit']);
+            parent::beforeFilter($event);
+
+            $this->Security->setConfig('unlockedActions', ['edit']);
         }
     }
-
-.. note::
-
-    CakePHP バージョン 3.4.0 より前の場合、 ``$this->Security->config()`` を使用してください。
 
 この例では、edit アクションのすべてのセキュリティチェックが無効になります。
 

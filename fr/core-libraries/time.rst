@@ -167,7 +167,7 @@ Il est possible de spécifier le format d'affichage désiré. Vous pouvez soit
 passer une `constante IntlDateFormatter
 <http://www.php.net/manual/en/class.intldateformatter.php>`_ ou une chaine
 complète de formatage tel que spécifié dans cette ressource:
-http://www.icu-project.org/apiref/icu4c/classSimpleDateFormat.html#details.
+https://unicode-org.github.io/icu/userguide/format_parse/datetime/#datetime-format-syntax.
 
 Vous pouvez aussi formater les dates avec des calendriers non-grégoriens::
 

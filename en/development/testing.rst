@@ -200,15 +200,15 @@ our code creates the output we expect::
     public function testBar(): void
     {
         $result = $this->Progress->bar(90);
-        $this->assertContains('width: 90%', $result);
-        $this->assertContains('progress-bar', $result);
+        $this->assertStringContainsString('width: 90%', $result);
+        $this->assertStringContainsString('progress-bar', $result);
 
         $result = $this->Progress->bar(33.3333333);
-        $this->assertContains('width: 33%', $result);
+        $this->assertStringContainsString('width: 33%', $result);
     }
 
 The above test is a simple one but shows the potential benefit of using test
-cases. We use ``assertContains()`` to ensure that our helper is returning a
+cases. We use ``assertStringContainsString()`` to ensure that our helper is returning a
 string that contains the content we expect. If the result did not contain the
 expected content the test would fail, and we would know that our code is
 incorrect.

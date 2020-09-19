@@ -458,7 +458,7 @@ CakePHP のコントローラーはリクエストのライフサイクル周り
 コントローラーでメソッドが実装されていれば、
 既定では以下のコールバックメソッドが関連するイベントに接続されます。
 
-.. php:method:: beforeFilter(Event $event)
+.. php:method:: beforeFilter(EventInterface $event)
 
     コントローラーの各アクションの前に発動する ``Controller.initialize``
     イベント中に呼ばれます。アクティブなセッションのチェックや、
@@ -472,7 +472,7 @@ CakePHP のコントローラーはリクエストのライフサイクル周り
     同イベントの他のリスナ―が呼ばれるのを抑制することはしません。
     明示的に :ref:`イベントを停止 <stopping-events>` しなければなりません。
 
-.. php:method:: beforeRender(Event $event)
+.. php:method:: beforeRender(EventInterface $event)
 
     コントローラーのアクションロジックの後、ビューが描画される前に発動する
     ``Controller.beforeRender`` イベント中に呼ばれます。
@@ -480,7 +480,7 @@ CakePHP のコントローラーはリクエストのライフサイクル周り
     :php:meth:`~Cake\\Controller\\Controller::render()` を手動で呼んでいれば
     必要になるかもしれません。
 
-.. php:method:: afterFilter(Event $event)
+.. php:method:: afterFilter(EventInterface $event)
 
     コントローラーの各アクションの後、ビューの描画が完了した後に発動される
     ``Controller.shutdown`` イベント中に呼ばれます。
@@ -492,8 +492,8 @@ CakePHP のコントローラーはリクエストのライフサイクル周り
 最良の結果を得るために、子コントローラーのコールバック中で
 ``AppController`` のコールバックを呼ぶのを忘れないでください。 ::
 
-    //use Cake\Event\Event;
-    public function beforeFilter(Event $event)
+    //use Cake\Event\EventInterface;
+    public function beforeFilter(EventInterface $event)
     {
         parent::beforeFilter($event);
     }

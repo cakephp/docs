@@ -8,6 +8,12 @@ your page quickly. In addition to template files, they can also provide helpers
 and cells if your theming requires that. When using cells and helpers from your
 theme, you will need to continue using the :term:`plugin syntax`.
 
+First ensure your theme plugin is loaded in your application's ``bootstrap``
+method. For example::
+
+    // Load our plugin theme residing in the folder /plugins/Modern
+    $this->addPlugin('Modern');
+
 To use themes, set the theme name in your controller's action or
 ``beforeRender()`` callback::
 
@@ -37,20 +43,15 @@ If a view file can't be found in the theme, CakePHP will try to locate the view
 file in the **templates/** folder. This way, you can create master template files
 and simply override them on a case-by-case basis within your theme folder.
 
-If your theme also acts as a plugin, don't forget to ensure it is loaded in
-your application's ``bootstrap`` method. For example::
-
-    // Load our plugin theme residing in the folder /plugins/Modern
-    $this->addPlugin('Modern');
-
 Theme Assets
 ============
 
 Because themes are standard CakePHP plugins, they can include any necessary
 assets in their webroot directory. This allows for easy packaging and
 distribution of themes. Whilst in development, requests for theme assets will be
-handled by :php:class:`Cake\\Routing\\Dispatcher`. To improve performance for production
-environments, it's recommended that you :ref:`symlink-assets`.
+handled by :php:class:`Cake\Routing\Middleware\AssetMiddleware` (which is loaded
+by default in cakephp/app ``Application::middleware()``). To improve 
+performance for production environments, it's recommended that you :ref:`symlink-assets`.
 
 All of CakePHP's built-in helpers are aware of themes and will create the
 correct paths automatically. Like template files, if a file isn't in the theme

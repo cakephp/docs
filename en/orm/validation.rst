@@ -251,7 +251,7 @@ instance to be used each time, you can use table's ``$_validatorClass`` property
     // In your table class
     public function initialize(array $config): void
     {
-        $this->_validatorClass = '\FullyNamespaced\Custom\Validator';
+        $this->_validatorClass = \FullyNamespaced\Custom\Validator::class;
     }
 
 .. _application-rules:
@@ -648,7 +648,7 @@ Application rules as explained above will be checked whenever ``save()`` or
     // In src/Model/Table/UsersTable.php
     public function buildRules(RulesChecker $rules): RulesChecker
     {
-        $rules->add($rules->isUnique('email'));
+        $rules->add($rules->isUnique(['email']));
 
         return $rules;
     }

@@ -53,7 +53,7 @@ Les identifiants de translitération d'ICU sont généralement sous la forme
 ``<source script>:<target script>`` et vous pouvez spécifier plusieurs couples
 de conversion en les séparant par des ``;``. Vous trouverez plus
 d'informations sur les identifiants de transliterateurs
-`ici <http://userguide.icu-project.org/transforms/general#TOC-Transliterator-Identifiers>`_::
+`ici <https://unicode-org.github.io/icu/userguide/transforms/general/#transliterator-identifiers>`_::
 
     // apple purée
     Text::transliterate('apple purée');

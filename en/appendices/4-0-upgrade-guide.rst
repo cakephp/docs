@@ -88,3 +88,17 @@ composer commands:
 
     php composer.phar require --dev --update-with-dependencies "phpunit/phpunit:^8.0"
     php composer.phar require --update-with-dependencies "cakephp/cakephp:4.0.*"
+
+Application.php
+===============
+
+Next, ensure your ``src/Application.php`` has been updated to have the same
+method signatures as the one found in cakephp/app. You can find the current
+`Application.php
+<https://github.com/cakephp/app/blob/master/src/Application.php>`__ on GitHub.
+
+If you are providing some kind of REST API, don't forget to include the
+:ref:`body-parser-middleware`. Finally, you should consider upgrading to the new 
+`AuthenticationMiddleware </authentication/2/en/index.html>`__ 
+and `AuthorizationMiddleware </authorization/2/en/index.html>`__, if you are still
+using ``AuthComponent``.

@@ -161,7 +161,7 @@ You can either pass `IntlDateFormatter constants
 <http://www.php.net/manual/en/class.intldateformatter.php>`_ as the first
 argument of this function, or pass a full ICU date formatting string as
 specified in the following resource:
-http://www.icu-project.org/apiref/icu4c/classSimpleDateFormat.html#details.
+https://unicode-org.github.io/icu/userguide/format_parse/datetime/#datetime-format-syntax.
 
 You can also format dates with non-gregorian calendars::
 
