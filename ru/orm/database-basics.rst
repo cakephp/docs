@@ -510,13 +510,15 @@ json
     namespace App\Database\Type;
 
     use App\Database\Point;
+    use Cake\Database\DriverInterface;
     use Cake\Database\Expression\FunctionExpression;
-    use Cake\Database\Type as BaseType;
+    use Cake\Database\ExpressionInterface;
+    use Cake\Database\Type\BaseType;
     use Cake\Database\Type\ExpressionTypeInterface;
 
     class PointType extends BaseType implements ExpressionTypeInterface
     {
-        public function toPHP($value, Driver $d)
+        public function toPHP($value, DriverInterface $d)
         {
             return Point::parse($value);
         }
@@ -532,7 +534,7 @@ json
             return null;
         }
 
-        public function toExpression($value)
+        public function toExpression($value): ExpressionInterface
         {
             if ($value instanceof Point) {
                 return new FunctionExpression(
@@ -547,6 +549,11 @@ json
                 return new FunctionExpression('POINT', [$value[0], $value[1]]);
             }
             // Обработка других случаев.
+        }
+
+        public function toDatabase($value, DriverInterface $driver)
+        {
+            return $value;
         }
     }
 
