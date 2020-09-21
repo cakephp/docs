@@ -465,20 +465,22 @@ expressão SQL. Como exemplo, nós vamos construir uma simples classe Type para
 manipular dados do tipo ``POINT`` do MySQL. Primeiramente, vamos definir um
 objeto 'value' que podemos usar para representar dados ``POINT`` no PHP::
 
-    // in src/Database/Point.php
+    // no src/Database/Point.php
     namespace App\Database;
 
-    // Our value object is immutable.
+    // Nosso objeto de valor é imutável.
     class Point
     {
         protected $_lat;
         protected $_long;
 
-        // Factory method.
+        // Método de fábrica.
         public static function parse($value)
         {
-            // Parse the data from MySQL.
-            return new static($value[0], $value[1]);
+            // Analise os dados WKB do MySQL.
+            $unpacked = unpack('x4/corder/Ltype/dlat/dlong', $value);
+
+            return new static($unpacked['lat'], $unpacked['long']);
         }
 
         public function __construct($lat, $long)

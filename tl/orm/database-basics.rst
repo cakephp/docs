@@ -493,8 +493,10 @@ PHP::
         // Factory method.
         public static function parse($value)
         {
-            // Parse the data from MySQL.
-            return new static($value[0], $value[1]);
+            // Parse the WKB data from MySQL.
+            $unpacked = unpack('x4/corder/Ltype/dlat/dlong', $value);
+
+            return new static($unpacked['lat'], $unpacked['long']);
         }
 
         public function __construct($lat, $long)
