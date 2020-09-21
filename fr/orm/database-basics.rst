@@ -557,13 +557,15 @@ faire correspondre les données dans cet objet et les expressions SQL::
     namespace App\Database\Type;
 
     use App\Database\Point;
+    use Cake\Database\DriverInterface;
     use Cake\Database\Expression\FunctionExpression;
-    use Cake\Database\Type as BaseType;
+    use Cake\Database\ExpressionInterface;
+    use Cake\Database\Type\BaseType;
     use Cake\Database\Type\ExpressionTypeInterface;
 
     class PointType extends BaseType implements ExpressionTypeInterface
     {
-        public function toPHP($value, Driver $d)
+        public function toPHP($value, DriverInterface $d)
         {
             return Point::parse($value);
         }
@@ -579,7 +581,7 @@ faire correspondre les données dans cet objet et les expressions SQL::
             return null;
         }
 
-        public function toExpression($value)
+        public function toExpression($value): ExpressionInterface
         {
             if ($value instanceof Point) {
                 return new FunctionExpression(
@@ -593,7 +595,12 @@ faire correspondre les données dans cet objet et les expressions SQL::
             if (is_array($value)) {
                 return new FunctionExpression('POINT', [$value[0], $value[1]]);
             }
-            // Handle other cases.
+            // Manipulez d'autres cas.
+        }
+
+        public function toDatabase($value, DriverInterface $driver)
+        {
+            return $value;
         }
     }
 
