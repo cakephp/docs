@@ -43,15 +43,55 @@ testing.
 Adding Services
 ===============
 
-* Class mappings
-* Primitive values.
-* Factory functions
-* Mapping an interface to an implementation.
+In order to have services created by the container, you need to tell it
+which classes it can create, and how to build those classes. The simplest
+definition is via a class name::
+
+    use App\Service\BillingService;
+
+    // in your application's register() method.
+
+    // Add a class by its name.
+    $container->add(BillingService::class);
+
+You can also define implementations for interfaces that your application uses or
+consumes::
+
+    use App\Service\AuditLogServiceInterface;
+    use App\Service\AuditLogService;
+
+    // in your application's register() method.
+
+    // Add an implementation for an interface.
+    $container->add(AuditLogServiceInterface::class, AuditLogService::class);
+
+The container can leverage factory functions to create objects if necessary::
+
+    $container->add(AuditLogServiceInterface::class, function (...$args) {
+        return new AuditLogService(...$args);
+    });
+
+Factory functions will receive all of the class' resolved dependencies as
+parameters.
+
+Once you've defined a class you also need to define the dependencies it
+requires. Those dependencies can either be other objects, or primitive values::
+
+    // Add a primitive value like a string, array or number.
+    $container->add('apiKey', 'abc123');
+
+    $container->add(BillingService::class)
+        ->addArgument('apiKey');
 
 Adding Shared Services
 ----------------------
 
-* Creating singletons and shared services.
+By default services are not shared, each time an object is fetched from the
+container it and all of its dependencies are created again. If you want to
+re-use a single instance, often referred to as a singleton, you can mark
+a service as 'shared'::
+
+    $container->share(BillingService::class);
 
 Extending Definitions
 ---------------------
