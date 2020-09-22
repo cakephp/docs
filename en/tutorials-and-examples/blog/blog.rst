@@ -108,9 +108,7 @@ Creating the Blog Database
 Next, let's set up the underlying MySQL database for our blog. If you
 haven't already done so, create an empty database for use in this
 tutorial, with a name of your choice, e.g. ``cake_blog``. Right now,
-we'll just create a single table to store our articles. We'll also throw
-in a few articles to use for testing purposes. Execute the following
-SQL statements into your database:
+we'll just create a single table to store our articles. 
 
 .. code-block:: mysql
 
@@ -122,15 +120,7 @@ SQL statements into your database:
         created DATETIME DEFAULT NULL,
         modified DATETIME DEFAULT NULL
     );
-
-    # Then insert some articles for testing:
-    INSERT INTO articles (title,body,created)
-        VALUES ('The title', 'This is the article body.', NOW());
-    INSERT INTO articles (title,body,created)
-        VALUES ('A title once again', 'And the article body follows.', NOW());
-    INSERT INTO articles (title,body,created)
-        VALUES ('Title strikes back', 'This is really exciting! Not.', NOW());
-        
+    
 If you are using PostgreSQL, connect to cake_blog database and execute the following SQL instead:
 
 .. code-block:: SQL
@@ -144,13 +134,18 @@ If you are using PostgreSQL, connect to cake_blog database and execute the follo
        modified TIMESTAMP DEFAULT NULL
    );
 
-   -- Then insert some articles for testing:
-   INSERT INTO articles (title,body,created)
-       VALUES ('The title', 'This is the article body.', NOW());
-   INSERT INTO articles (title,body,created)
-       VALUES ('A title once again', 'And the article body follows.', NOW());
-   INSERT INTO articles (title,body,created)
-       VALUES ('Title strikes back', 'This is really exciting! Not.', NOW());
+We'll also throw in a few articles to use for testing purposes. Execute the following
+SQL statements into your database (works for both MySQL and PostgreSQL):
+
+.. code-block:: mysql
+
+    # Then insert some articles for testing:
+    INSERT INTO articles (title,body,created)
+        VALUES ('The title', 'This is the article body.', NOW());
+    INSERT INTO articles (title,body,created)
+        VALUES ('A title once again', 'And the article body follows.', NOW());
+    INSERT INTO articles (title,body,created)
+        VALUES ('Title strikes back', 'This is really exciting! Not.', NOW());
 
 The choices on table and column names are not arbitrary. If you
 follow CakePHP's database naming conventions, and CakePHP's class naming
