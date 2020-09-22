@@ -482,8 +482,10 @@ JSON データを変換してクエリーを作成します。
         // ファクトリーメソッド
         public static function parse($value)
         {
-            // MySQL からのデータをパース
-            return new static($value[0], $value[1]);
+            // MySQLからWKBデータを解析します。
+            $unpacked = unpack('x4/corder/Ltype/dlat/dlong', $value);
+
+            return new static($unpacked['lat'], $unpacked['long']);
         }
 
         public function __construct($lat, $long)
