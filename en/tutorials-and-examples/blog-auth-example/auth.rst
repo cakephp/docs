@@ -7,7 +7,9 @@ wanted to disallow unauthenticated users to create articles.
 Creating Users Table and Controller
 ===================================
 
-First, let's create a new table in our blog database to hold our users' data::
+First, let's create a new table in our blog database to hold our users' data:
+
+.. code-block:: mysql
 
     CREATE TABLE users (
         id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -16,6 +18,19 @@ First, let's create a new table in our blog database to hold our users' data::
         role VARCHAR(20),
         created DATETIME DEFAULT NULL,
         modified DATETIME DEFAULT NULL
+    );
+    
+If you are using PostgreSQL, connect to cake_blog database and execute the following SQL instead:
+
+.. code-block:: SQL
+
+    CREATE TABLE users (
+        id SERIAL PRIMARY KEY,
+        email VARCHAR(255),
+        password VARCHAR(255),
+        role VARCHAR(20),
+        created TIMESTAMP DEFAULT NULL,
+        modified TIMESTAMP DEFAULT NULL
     );
 
 We have adhered to the CakePHP conventions in naming tables, but we're also
