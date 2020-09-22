@@ -130,6 +130,27 @@ SQL statements into your database:
         VALUES ('A title once again', 'And the article body follows.', NOW());
     INSERT INTO articles (title,body,created)
         VALUES ('Title strikes back', 'This is really exciting! Not.', NOW());
+        
+If you are using PostgreSQL, connect to cake_blog database and execute the following SQL instead:
+
+.. code-block:: SQL
+
+   -- First, create our articles table
+   CREATE TABLE articles (
+       id SERIAL PRIMARY KEY,
+       title VARCHAR(50),
+       body TEXT,
+       created TIMESTAMP DEFAULT NULL,
+       modified TIMESTAMP DEFAULT NULL
+   );
+
+   -- Then insert some articles for testing:
+   INSERT INTO articles (title,body,created)
+       VALUES ('The title', 'This is the article body.', NOW());
+   INSERT INTO articles (title,body,created)
+       VALUES ('A title once again', 'And the article body follows.', NOW());
+   INSERT INTO articles (title,body,created)
+       VALUES ('Title strikes back', 'This is really exciting! Not.', NOW());
 
 The choices on table and column names are not arbitrary. If you
 follow CakePHP's database naming conventions, and CakePHP's class naming
