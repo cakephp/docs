@@ -108,9 +108,7 @@ Creating the Blog Database
 Next, let's set up the underlying MySQL database for our blog. If you
 haven't already done so, create an empty database for use in this
 tutorial, with a name of your choice, e.g. ``cake_blog``. Right now,
-we'll just create a single table to store our articles. We'll also throw
-in a few articles to use for testing purposes. Execute the following
-SQL statements into your database:
+we'll just create a single table to store our articles. 
 
 .. code-block:: mysql
 
@@ -122,6 +120,24 @@ SQL statements into your database:
         created DATETIME DEFAULT NULL,
         modified DATETIME DEFAULT NULL
     );
+    
+If you are using PostgreSQL, connect to cake_blog database and execute the following SQL instead:
+
+.. code-block:: SQL
+
+   -- First, create our articles table
+   CREATE TABLE articles (
+       id SERIAL PRIMARY KEY,
+       title VARCHAR(50),
+       body TEXT,
+       created TIMESTAMP DEFAULT NULL,
+       modified TIMESTAMP DEFAULT NULL
+   );
+
+We'll also throw in a few articles to use for testing purposes. Execute the following
+SQL statements into your database (works for both MySQL and PostgreSQL):
+
+.. code-block:: mysql
 
     # Then insert some articles for testing:
     INSERT INTO articles (title,body,created)
