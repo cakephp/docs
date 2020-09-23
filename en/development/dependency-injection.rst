@@ -6,11 +6,12 @@ Dependency Injection
     API stable yet.
 
 The CakePHP service container enables you to manage class dependencies for your
-application services through dependency injection. Dependency injection automatically
-"injects" an object's dependencies via the constructor without having to manually instantiate them.
+application services through dependency injection. Dependency injection
+automatically "injects" an object's dependencies via the constructor without
+having to manually instantiate them.
 
 You can use the service container to define 'application services'. These
-classes are use models and interact with other objects like loggers and mailers
+classes can use models and interact with other objects like loggers and mailers
 to build re-usable workflows and business logic for your application.
 
 CakePHP will use the service container when calling actions on your controllers
