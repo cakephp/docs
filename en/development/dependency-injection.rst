@@ -85,28 +85,53 @@ requires. Those dependencies can be either objects or primitive values::
 Adding Shared Services
 ----------------------
 
-By default services are not shared. Every object (and dependencies) is created each time
-it is fetched from the container. If you want to
-re-use a single instance, often referred to as a singleton, you can mark
-a service as 'shared'::
+By default services are not shared. Every object (and dependencies) is created
+each time it is fetched from the container. If you want to re-use a single
+instance, often referred to as a singleton, you can mark a service as 'shared'::
 
     $container->share(BillingService::class);
 
 Extending Definitions
 ---------------------
 
-* Modify services defined in plugins.
+Once a service is defined you can modify or update the service definition by
+extending them. This allows you to add additional arguments to services defined
+elsewhere::
+
+    // Add an argument to a partially defined service elsewhere.
+    $container->extend(BillingService::class)
+        ->addArgument('logLevel');
 
 Tagging Services
 ----------------
 
-* Defining tagged services.
-* Consuming tagged services with a factory function.
+By tagging services you can get have all of those services resolved at the same
+time. This can be used to build services that combine collections of other
+services like in a reporting system::
+
+    $container->add(BillingReport::class)->addTag('reports');
+    $container->add(UsageReport::class)->addTag('reports');
+
+    $container->add(ReportAggregate::class, function () use ($container) {
+        return new ReportAggregate($container->get('reports'));
+    });
 
 Using Configuration Data
 ------------------------
 
-* Using ServiceConfig
+Often you'll need configuration data in your services. While you could register
+all the configuration keys your service needs into the container, that can be
+tedious. To make configuration easier to work with CakePHP includes an
+injectable configuration reader::
+
+    use Cake\Core\ServiceConfig;
+
+    // Use a shared instance 
+    $container->share(ServiceConfig::class);
+
+The ``ServiceConfig`` class provides a read-only view of all the data available
+in ``Configure`` so you don't have to worry about accidentally changing
+configuration.
 
 Service Providers
 =================
