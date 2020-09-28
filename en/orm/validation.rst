@@ -220,7 +220,7 @@ a validation rule::
 You can also use closures for validation rules::
 
     $validator->add('name', 'myRule', [
-        'rule' => function ($value, $context) {
+        'rule' => function ($value, array $context) {
             if ($value > 1) {
                 return true;
             }
