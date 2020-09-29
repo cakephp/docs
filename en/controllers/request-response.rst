@@ -1073,7 +1073,7 @@ object::
         '', // domain
         false, // secure
         true // httponly
-    ]);
+    ));
 
     // Before 3.4.0
     $this->response->cookie('remember', [
