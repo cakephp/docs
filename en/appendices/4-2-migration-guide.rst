@@ -111,3 +111,9 @@ TestSuite
 
 - ``EmailTrait::assertMailSubjectContains()`` and
   ``assertMailSubjectContainsAt()`` were added.
+
+View
+----
+
+- Context classes now include the ``comment``, ``null``, and ``default``
+  metadata options in the results of ``attributes()``.
