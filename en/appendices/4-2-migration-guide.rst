@@ -41,6 +41,19 @@ Database
 - The ``TimeType`` will now correctly marshall values in the ``H:i`` format.
   Previously these values would be cast to ``null`` after validation.
   
+Error
+-----
+
+- ``ExceptionRenderer`` will now use the exception code as the HTTP status code
+for ``HttpException`` only. Other exceptions that should return a non-500
+HTTP code are controlled by ``ExceptionRenderer::$exceptionHttpCodes``.
+
+  .. note::
+      If you need to restore the previous behavior until your exceptions are updated,
+      you can create a custom ExceptionRenderer and override the ``getHttpCode()`` function.
+      See https://book.cakephp.org/4/en/development/errors.html#custom-exceptionrenderer for
+      more information.
+  
 Validation
 ----------
 
