@@ -69,7 +69,7 @@ Liste des Méthodes
 Faire une Itération
 ===================
 
-.. php:method:: each(callable $c)
+.. php:method:: each($callback)
 
 Les Collections peuvent être itérées et/ou transformées en nouvelles
 collections avec les méthodes ``each()`` et ``map()``. La méthode ``each()``
@@ -84,7 +84,7 @@ objet dans la collection::
 Le retour de ``each()`` sera un objet collection. Each va itérer la collection
 en appliquant immédiatement le callback pour chaque valeur de la collection.
 
-.. php:method:: map(callable $c)
+.. php:method:: map($callback)
 
 La méthode ``map()`` va créer une nouvelle collection basée sur la sortie du
 callback étant appliqué à chaque objet dans la collection originelle::
@@ -102,7 +102,7 @@ callback étant appliqué à chaque objet dans la collection originelle::
 La méthode ``map()`` va créer un nouvel itérateur, qui va créer automatiquement
 les objets résultants quand ils sont itérés.
 
-.. php:method:: extract($matcher)
+.. php:method:: extract($path)
 
 Une des utilisations les plus courantes de la fonction ``map()`` est
 l'extraction d'une colonne unique d'une collection. Si vous souhaitez construire
@@ -233,7 +233,7 @@ retour des résultats si le callable passé retourne false pour l'un des
     // $result contient [10, 20];
     $result = $new->toArray();
 
-.. php:method:: unfold(callable $c)
+.. php:method:: unfold(callable $callback)
 
 Parfois les items internes d'une collection vont contenir des tableaux ou des
 itérateurs avec plus d'items. Si vous souhaitez aplatir la structure interne
@@ -323,7 +323,7 @@ associatifs::
 Filtrer
 =======
 
-.. php:method:: filter(callable $c)
+.. php:method:: filter($callback)
 
 Les collections permettent de filtrer et de créer facilement les nouvelles
 collections basées sur le résultat de fonctions callback. Vous pouvez utiliser
@@ -348,7 +348,7 @@ négatif, retirant les éléments qui matchent la fonction filter::
         return $person->gender === 'male';
     });
 
-.. php:method:: every(callable $c)
+.. php:method:: every($callback)
 
 Vous pouvez faire des tests de vérité avec les fonctions filter. Pour voir si
 chaque élément dans une collection matche un test, vous pouvez utiliser
@@ -359,7 +359,7 @@ chaque élément dans une collection matche un test, vous pouvez utiliser
         return $person->age < 21;
     });
 
-.. php:method:: some(callable $c)
+.. php:method:: some($callback)
 
 Vous pouvez regarder si la collection contient au moins un élément matchant une
 fonction filter en utilisant la méthode ``some()``::
@@ -369,7 +369,7 @@ fonction filter en utilisant la méthode ``some()``::
         return $person->age < 21;
     });
 
-.. php:method:: match(array $conditions)
+.. php:method:: match($conditions)
 
 Si vous avez besoin d'extraire une nouvelle collection contenant seulement les
 éléments qui contiennent un ensemble donné de propriétés, vous devez utiliser
@@ -378,7 +378,7 @@ la méthode ``match()``::
     $collection = new Collection($comments);
     $commentsFromMark = $collection->match(['user.name' => 'Mark']);
 
-.. php:method:: firstMatch(array $conditions)
+.. php:method:: firstMatch($conditions)
 
 Le nom de la propriété peut être un chemin séparé par des points. Vous pouvez
 traverser des entities imbriquées et matcher les valeurs qu'elles contiennent.
@@ -399,7 +399,7 @@ permettant d'exprimer des conditions complexes à faire correspondre.
 Agrégation
 ==========
 
-.. php:method:: reduce(callable $c)
+.. php:method:: reduce($callback)
 
 La contrepartie de l'opération ``map()`` est habituellement un ``reduce``. Cette
 fonction va vous aider à construire un résultat unique à partir de tous les
@@ -418,7 +418,7 @@ pour la fonction ``reduce()``, il prend la valeur initiale pour l'opération
         return array_merge($accumulated, $article->tags);
     }, []);
 
-.. php:method:: min(string|callable $callback, $type = SORT_NUMERIC)
+.. php:method:: min(string|$callback, $type = SORT_NUMERIC)
 
 Pour extraire la valeur minimum pour une collection basée sur une propriété,
 utilisez juste la fonction ``min()``. Celle-ci va retourner l'élément complet
@@ -439,7 +439,7 @@ une fonction callback::
 
     $personWithYoungestDad = $collection->min('dad.age');
 
-.. php:method:: max(string|callable $callback, $type = SORT_NUMERIC)
+.. php:method:: max($callback, $type = SORT_NUMERIC)
 
 La même chose peut être appliquée à la fonction ``max()``, qui retourne un
 élément unique à partir de la collection ayant la valeur de propriété la plus
@@ -454,7 +454,7 @@ La même chose peut être appliquée à la fonction ``max()``, qui retourne un
 
     $personWithOldestDad = $collection->max('dad.age');
 
-.. php:method:: sumOf(string|callable $callback)
+.. php:method:: sumOf($path = null)
 
 Pour finir, la méthode ``sumOf()`` va retourner la somme d'une propriété de tous
 les éléments::
@@ -468,7 +468,7 @@ les éléments::
 
     $sumOfDadAges = $collection->sumOf('dad.age');
 
-.. php:method:: avg($matcher = null)
+.. php:method:: avg($path = null)
 
 Calcule la moyenne des éléments de la collection. Vous pouvez passer, en
 option, un "path" à matcher ou une fonction pour extraire les valeurs pour
@@ -482,7 +482,7 @@ lesquelles vous souhaitez générer la moyenne::
     // Moyenne : 150
     $average = (new Collection($items))->avg('invoice.total');
 
-.. php:method:: median($matcher = null)
+.. php:method:: median($path = null)
 
 Calcule la valeur médianne d'un jeu d'élément. Vous pouvez passer, en
 option, un "path" à matcher ou une fonction pour extraire les valeurs pour
@@ -577,7 +577,7 @@ propriété ou un callback::
         return md5($file);
     });
 
-.. php:method:: zip($elements)
+.. php:method:: zip($items)
 
 Les éléments de différentes collections peuvent être groupés ensemble en
 utilisant la méthode ``zip()``. Elle retournera une nouvelle collection
@@ -628,7 +628,7 @@ des tableaux multidimensionnels::
 Trier
 =====
 
-.. php:method:: sortBy($callback)
+.. php:method:: sortBy($callback, $order = SORT_DESC, $sort = SORT_NUMERIC)
 
 Les valeurs de collection peuvent être triées par ordre croissant ou
 décroissant basé sur une colonne ou une fonction personnalisée. Pour créer une
@@ -744,7 +744,7 @@ de chacun des items dans la collection. Cette représentation de type de donnée
 aide à rendre les menus ou à traverser les éléments vers le haut à un certain
 niveau dans l'arbre.
 
-.. php:method:: listNested($dir = 'desc', $nestingKey = 'children')
+.. php:method:: listNested($sort = 'desc', $nestingKey = 'children')
 
 L'inverse de ``nest()`` est ``listNested()``. Cette méthode vous permet
 d'aplatir une structure en arbre en structure linéaire. Elle prend deux
@@ -866,7 +866,7 @@ contenant une colonne avec chacune des colonnes originales::
 Retrait d'Eléments
 ------------------
 
-.. php:method:: sample(int $size)
+.. php:method:: sample($length = 10)
 
 Remanier une collection est souvent utile quand vous faites des statistiques
 d'analyse rapides. Une autre opération habituelle quand vous faites ce type
@@ -885,7 +885,7 @@ le premier argument. S'il n'y a pas assez d'éléments dans la collection qui
 satisfont le sample, la collection sera retournée en entier dans un ordre au
 hasard.
 
-.. php:method:: take(int $size, int $from)
+.. php:method:: take($length, $offset)
 
 Quand vous souhaitez prendre une partie d'une collection, utilisez la fonction
 ``take()``, cela va créer une nouvelle collection avec au moins le nombre de
@@ -900,7 +900,7 @@ position passée dans le second argument::
 Les positions sont basées sur zéro, donc le premier nombre de la position est
 ``0``.
 
-.. php:method:: skip(int $positions)
+.. php:method:: skip($length)
 
 Alors que le second argument de ``take()`` peut vous aider à exclure quelques
 éléments avant de les récupérer depuis une collection, vous pouvez également
@@ -960,7 +960,7 @@ des deux sources::
 Modification d'Eléments
 -----------------------
 
-.. php:method:: insert(string $path, array|Traversable $items)
+.. php:method:: insert($path, $items)
 
 A certains moments, vous pourriez avoir à séparer des ensembles de données que
 vous souhaiteriez, pour insérer les éléments d'un ensemble dans chacun des
@@ -1076,7 +1076,7 @@ Cela peut être remodeler en créant une autre classe::
         // Use the logic in your map() call
         $collection->map(new TotalOrderCalculator)
 
-.. php:method:: through(callable $c)
+.. php:method:: through($callback)
 
 Parfois une suite d'appels de méthodes de Collection peut devenir réutilisable
 dans d'autres parties de votre application, mais seulement si elles sont
@@ -1192,7 +1192,7 @@ fois::
 Clonage de Collection
 ---------------------
 
-.. php:method:: compile(bool $preserveKeys = true)
+.. php:method:: compile($preserveKeys = true)
 
 Parfois vous devez cloner un des éléments à partir d'une collection. C'est
 utile quand vous avez besoin d'itérer le même ensemble à partir d'endroits

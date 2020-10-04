@@ -53,7 +53,7 @@ List of Methods
 .. csv-table::
     :class: docutils internal-toc
 
-    :php:meth:`append`, :php:meth:`appendItem`, :php:meth:`avg`, 
+    :php:meth:`append`, :php:meth:`appendItem`, :php:meth:`avg`,
     :php:meth:`buffered`, :php:meth:`chunk`, :php:meth:`chunkWithKeys`
     :php:meth:`combine`, :php:meth:`compile`, :php:meth:`contains`
     :php:meth:`countBy`, :php:meth:`each`, :php:meth:`every`
@@ -72,7 +72,7 @@ List of Methods
 Iterating
 =========
 
-.. php:method:: each(callable $c)
+.. php:method:: each($callback)
 
 Collections can be iterated and/or transformed into new collections with the
 ``each()`` and ``map()`` methods. The ``each()`` method will not create a new
@@ -86,7 +86,7 @@ collection, but will allow you to modify any objects within the collection::
 The return of ``each()`` will be the collection object. Each will iterate the
 collection immediately applying the callback to each value in the collection.
 
-.. php:method:: map(callable $c)
+.. php:method:: map($callback)
 
 The ``map()`` method will create a new collection based on the output of the
 callback being applied to each object in the original collection::
@@ -97,7 +97,7 @@ callback being applied to each object in the original collection::
     $new = $collection->map(function ($value, $key) {
         return $value * 2;
     });
-    
+
     // $result contains [2, 4, 6];
     $result = $new->toList();
 
@@ -107,7 +107,7 @@ callback being applied to each object in the original collection::
 The ``map()`` method will create a new iterator which lazily creates
 the resulting items when iterated.
 
-.. php:method:: extract($matcher)
+.. php:method:: extract($path)
 
 One of the most common uses for a ``map()`` function is to extract a single
 column from a collection. If you are looking to build a list of elements
@@ -235,7 +235,7 @@ passed callable returns true for one of the elements::
     // $result contains [10, 20];
     $result = $new->toList();
 
-.. php:method:: unfold(callable $c)
+.. php:method:: unfold(callable $callback)
 
 Sometimes the internal items of a collection will contain arrays or iterators
 with more items. If you wish to flatten the internal structure to iterate once
@@ -322,7 +322,7 @@ chunking associative arrays::
 Filtering
 =========
 
-.. php:method:: filter(callable $c)
+.. php:method:: filter($callback)
 
 Collections make it easy to filter and create new collections based on
 the result of callback functions. You can use ``filter()`` to create a new
@@ -346,7 +346,7 @@ removing elements that match the filter function::
         return $person->gender === 'male';
     });
 
-.. php:method:: every(callable $c)
+.. php:method:: every($callback)
 
 You can do truth tests with filter functions. To see if every element in
 a collection matches a test you can use ``every()``::
@@ -356,7 +356,7 @@ a collection matches a test you can use ``every()``::
         return $person->age < 21;
     });
 
-.. php:method:: some(callable $c)
+.. php:method:: some($callback)
 
 You can see if the collection contains at least one element matching a filter
 function using the ``some()`` method::
@@ -366,7 +366,7 @@ function using the ``some()`` method::
         return $person->age < 21;
     });
 
-.. php:method:: match(array $conditions)
+.. php:method:: match($conditions)
 
 If you need to extract a new collection containing only the elements that
 contain a given set of properties, you should use the ``match()`` method::
@@ -374,7 +374,7 @@ contain a given set of properties, you should use the ``match()`` method::
     $collection = new Collection($comments);
     $commentsFromMark = $collection->match(['user.name' => 'Mark']);
 
-.. php:method:: firstMatch(array $conditions)
+.. php:method:: firstMatch($conditions)
 
 The property name can be a dot-separated path. You can traverse into nested
 entities and match the values they contain. When you only need the first
@@ -394,7 +394,7 @@ against.
 Aggregation
 ===========
 
-.. php:method:: reduce(callable $c)
+.. php:method:: reduce($callback)
 
 The counterpart of a ``map()`` operation is usually a ``reduce``. This
 function will help you build a single result out of all the elements in a
@@ -413,7 +413,7 @@ performing::
         return array_merge($accumulated, $article->tags);
     }, []);
 
-.. php:method:: min(string|callable $callback, $type = SORT_NUMERIC)
+.. php:method:: min(string|$callback, $type = SORT_NUMERIC)
 
 To extract the minimum value for a collection based on a property, just use the
 ``min()`` function. This will return the full element from the collection and
@@ -434,7 +434,7 @@ callback function::
 
     $personWithYoungestDad = $collection->min('dad.age');
 
-.. php:method:: max(string|callable $callback, $type = SORT_NUMERIC)
+.. php:method:: max($callback, $type = SORT_NUMERIC)
 
 The same can be applied to the ``max()`` function, which will return a single
 element from the collection having the highest property value::
@@ -448,7 +448,7 @@ element from the collection having the highest property value::
 
     $personWithOldestDad = $collection->max('dad.age');
 
-.. php:method:: sumOf(string|callable $callback)
+.. php:method:: sumOf($path = null)
 
 Finally, the ``sumOf()`` method will return the sum of a property of all
 elements::
@@ -462,7 +462,7 @@ elements::
 
     $sumOfDadAges = $collection->sumOf('dad.age');
 
-.. php:method:: avg($matcher = null)
+.. php:method:: avg($path = null)
 
 Calculate the average value of the elements in the collection. Optionally
 provide a matcher path, or function to extract values to generate the average
@@ -476,7 +476,7 @@ for::
     // Average: 150
     $average = (new Collection($items))->avg('invoice.total');
 
-.. php:method:: median($matcher = null)
+.. php:method:: median($path = null)
 
 Calculate the median value of a set of elements. Optionally provide a matcher
 path, or function to extract values to generate the median for::
@@ -568,7 +568,7 @@ a callback::
         return md5($file);
     });
 
-.. php:method:: zip($elements)
+.. php:method:: zip($items)
 
 The elements of different collections can be grouped together using the
 ``zip()`` method. It will return a new collection containing an array grouping
@@ -618,7 +618,7 @@ multidimensional arrays::
 Sorting
 =======
 
-.. php:method:: sortBy($callback)
+.. php:method:: sortBy($callback, $order = SORT_DESC, $sort = SORT_NUMERIC)
 
 Collection values can be sorted in ascending or descending order based on
 a column or custom function. To create a new sorted collection out of the values
@@ -723,7 +723,7 @@ Children elements are nested inside the ``children`` property inside each of the
 items in the collection. This type of data representation is helpful for
 rendering menus or traversing elements up to certain level in the tree.
 
-.. php:method:: listNested($dir = 'desc', $nestingKey = 'children')
+.. php:method:: listNested($order = 'desc', $nestingKey = 'children')
 
 The inverse of ``nest()`` is ``listNested()``. This method allows you to flatten
 a tree structure back into a linear structure. It takes two parameters; the
@@ -844,7 +844,7 @@ of the each of the original columns::
 Withdrawing Elements
 --------------------
 
-.. php:method:: sample(int $size)
+.. php:method:: sample($length = 10)
 
 Shuffling a collection is often useful when doing quick statistical analysis.
 Another common operation when doing this sort of task is withdrawing a few
@@ -861,7 +861,7 @@ some A/B tests to, you can use the ``sample()`` function::
 argument. If there are not enough elements in the collection to satisfy the
 sample, the full collection in a random order is returned.
 
-.. php:method:: take(int $size, int $from)
+.. php:method:: take($length, $offset)
 
 Whenever you want to take a slice of a collection use the ``take()`` function,
 it will create a new collection with at most the number of values you specify in
@@ -874,7 +874,7 @@ the first argument, starting from the position passed in the second argument::
 
 Positions are zero-based, therefore the first position number is ``0``.
 
-.. php:method:: skip(int $positions)
+.. php:method:: skip($length)
 
 While the second argument of ``take()`` can help you skip some elements before
 getting them from the collection, you can also use ``skip()`` for the same
@@ -927,7 +927,7 @@ overwritten::
     $cakephpTweets = new Collection($tweets);
     $myTimeline = $cakephpTweets->appendItem($newTweet, 99);
 
-.. php:method:: prepend(array|Traversable $items)
+.. php:method:: prepend($items)
 
 The ``prepend()`` method will return a new collection containing the values from
 both sources::
@@ -956,7 +956,7 @@ overwritten::
 Modifiying Elements
 -------------------
 
-.. php:method:: insert(string $path, array|Traversable $items)
+.. php:method:: insert($path, $items)
 
 At times, you may have two separate sets of data that you would like to insert
 the elements of one set into each of the elements of the other set. This is
@@ -1068,7 +1068,7 @@ This can be refactored by creating another class::
         // Use the logic in your map() call
         $collection->map(new TotalOrderCalculator)
 
-.. php:method:: through(callable $c)
+.. php:method:: through($callback)
 
 Sometimes a chain of collection method calls can become reusable in other parts
 of your application, but only if they are called in that specific order. In
@@ -1179,7 +1179,7 @@ into collections that can be iterated more than once::
 Cloning Collections
 -------------------
 
-.. php:method:: compile(bool $preserveKeys = true)
+.. php:method:: compile($preserveKeys = true)
 
 Sometimes you need to get a clone of the elements from another
 collection. This is useful when you need to iterate the same set from different
