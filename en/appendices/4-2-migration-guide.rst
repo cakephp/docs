@@ -40,20 +40,22 @@ Database
 
 - The ``TimeType`` will now correctly marshall values in the ``H:i`` format.
   Previously these values would be cast to ``null`` after validation.
-  
+
 Error
 -----
 
-- ``ExceptionRenderer`` will now use the exception code as the HTTP status code
-for ``HttpException`` only. Other exceptions that should return a non-500
-HTTP code are controlled by ``ExceptionRenderer::$exceptionHttpCodes``.
+- ``ExceptionRenderer`` now uses the exception code as the HTTP status code
+  for ``HttpException`` only. Other exceptions that should return a non-500
+  HTTP code are controlled by ``ExceptionRenderer::$exceptionHttpCodes``.
 
   .. note::
       If you need to restore the previous behavior until your exceptions are updated,
       you can create a custom ExceptionRenderer and override the ``getHttpCode()`` function.
-      See https://book.cakephp.org/4/en/development/errors.html#custom-exceptionrenderer for
-      more information.
-  
+      See :ref:`custom-exceptionrenderer` for more information.
+
+- ``ConsoleErrorHandler`` now uses the exception code as the exit code for
+  ``ConsoleException`` only.
+
 Validation
 ----------
 
@@ -70,7 +72,7 @@ They usually only affect tests.
 I18n
 ----
 - The dependency on [Aura.Intl](https://github.com/auraphp/Aura.Intl) package has been
-  removed as it is no longer maintained. If your app/plugin has :ref:`custom translation loaders <creating-generic-translators>` 
+  removed as it is no longer maintained. If your app/plugin has :ref:`custom translation loaders <creating-generic-translators>`
   then they need to now return a ``Cake\I18n\Package`` instance instead of ``Aura\Intl\Package``.
   Both the classes are API compatible so you won't need to change anything else.
 
