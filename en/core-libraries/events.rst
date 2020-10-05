@@ -171,7 +171,7 @@ as necessary. Our ``UserStatistics`` listener might start out like::
 
     class UserStatistic implements EventListenerInterface
     {
-        public function implementedEvents()
+        public function implementedEvents(): array
         {
             return [
                 'Model.Order.afterPlace' => 'updateBuyStatistic',
