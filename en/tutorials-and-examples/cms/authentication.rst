@@ -158,7 +158,7 @@ Then add the following::
                 'username' => 'email',
                 'password' => 'password',
             ],
-            'loginUrl' => '/users/login',
+            'loginUrl' => '/users/login', //if your login system is not working then comment out this line
         ]);
 
         return $authenticationService;
