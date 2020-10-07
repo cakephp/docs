@@ -53,7 +53,7 @@ you can modify them with setters::
         }
     }
 
-The ``property`` will be the property key (of the associated entity) on the entity object, in this case::
+The property name will be the property key (of the associated entity) on the entity object, in this case::
 
     $authorEntity = $articleEntity->author;
 
