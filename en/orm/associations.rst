@@ -48,8 +48,8 @@ you can modify them with setters::
             $this->belongsTo('Authors', [
                     'className' => 'Publishing.Authors'
                 ])
-                ->setForeignKey('authorid')
-                ->setProperty('person');
+                ->setForeignKey('author_id')
+                ->setProperty('author');
         }
     }
 
@@ -57,8 +57,8 @@ You can also use arrays to customize your associations::
 
    $this->belongsTo('Authors', [
        'className' => 'Publishing.Authors',
-       'foreignKey' => 'authorid',
-       'propertyName' => 'person'
+       'foreignKey' => 'author_id',
+       'propertyName' => 'author'
    ]);
 
 However, arrays do not offer the typehinting and autocomplete benefits that the fluent interface does.
@@ -189,6 +189,7 @@ If you want to break different addresses into multiple associations, you can do 
                 ->setProperty('home_address')
                 ->setConditions(['HomeAddress.label' => 'Home'])
                 ->setDependent(true);
+
             $this->hasOne('WorkAddress', [
                     'className' => 'Addresses'
                 ])
