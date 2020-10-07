@@ -368,7 +368,7 @@ or exclude specific route groups::
     }
 
     // in config/routes.php
-    Router::scope('/', function (RouteBuilder $routes) {
+    $routes->scope('/', function (RouteBuilder $routes) {
         $routes->applyMiddleware('csrf');
     });
 

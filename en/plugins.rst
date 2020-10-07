@@ -347,12 +347,13 @@ ContactManager plugin routes, put the following into
 
     <?php
     use Cake\Routing\Route\DashedRoute;
-    use Cake\Routing\Router;
 
-    Router::plugin(
+    $routes->plugin(
         'ContactManager',
         ['path' => '/contact-manager'],
         function ($routes) {
+            $routes->setRouteClass(DashedRoute::class);
+        
             $routes->get('/contacts', ['controller' => 'Contacts']);
             $routes->get('/contacts/{id}', ['controller' => 'Contacts', 'action' => 'view']);
             $routes->put('/contacts/{id}', ['controller' => 'Contacts', 'action' => 'update']);
@@ -372,7 +373,7 @@ You can also load plugin routes in your application's routes list. Doing this
 provides you more control on how plugin routes are loaded and allows you to wrap
 plugin routes in additional scopes or prefixes::
 
-    Router::scope('/', function ($routes) {
+    $routes->scope('/', function ($routes) {
         // Connect other routes.
         $routes->scope('/backend', function ($routes) {
             $routes->loadPlugin('ContactManager');
