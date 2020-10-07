@@ -53,6 +53,10 @@ you can modify them with setters::
         }
     }
 
+The ``property`` will be the property key (of the associated entity) on the entity object, in this case::
+
+    $authorEntity = $articleEntity->author;
+
 You can also use arrays to customize your associations::
 
    $this->belongsTo('Authors', [
