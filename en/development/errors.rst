@@ -189,6 +189,8 @@ prefix. You could create the following class::
 This controller would only be used when an error is encountered in a prefixed
 controller, and allows you to define prefix specific logic/templates as needed.
 
+.. _custom-exceptionrenderer:
+
 Custom ExceptionRenderer
 ========================
 
