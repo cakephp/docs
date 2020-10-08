@@ -259,11 +259,12 @@ override the ``_getController()`` method in your exception renderer::
     namespace App\Error;
 
     use App\Controller\SuperCustomErrorController;
+    use Cake\Controller\Controller;
     use Cake\Error\ExceptionRenderer;
 
     class AppExceptionRenderer extends ExceptionRenderer
     {
-        protected function _getController()
+        protected function _getController(): Controller
         {
             return new SuperCustomErrorController();
         }
@@ -289,15 +290,16 @@ an example, we could build a class called ``AppError`` to handle our errors::
     namespace App\Error;
 
     use Cake\Error\BaseErrorHandler;
+    use Throwable;
 
     class AppError extends BaseErrorHandler
     {
-        public function _displayError($error, $debug)
+        protected function _displayError(array $error, bool $debug): void
         {
             echo 'There has been an error!';
         }
 
-        public function _displayException($exception)
+        protected function _displayException(Throwable $exception): void
         {
             echo 'There has been an exception!';
         }
@@ -342,7 +344,7 @@ standard error page, you can override it::
     {
         // Other methods.
 
-        public function handleFatalError($code, $description, $file, $line)
+        public function handleFatalError(int $code, string $description, string $file, int $line): bool
         {
             echo 'A fatal error has happened';
         }

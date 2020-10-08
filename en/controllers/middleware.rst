@@ -388,7 +388,7 @@ apply CSRF to specific groups of routes::
     }
 
     // in config/routes.php
-    Router::scope('/', function (RouteBuilder $routes) {
+    $routes->scope('/', function (RouteBuilder $routes) {
         $routes->applyMiddleware('csrf');
     });
 

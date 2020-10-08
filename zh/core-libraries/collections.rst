@@ -64,7 +64,7 @@ Collection()``::
 迭代（Iterating）
 ===================
 
-.. php:method:: each(callable $c)
+.. php:method:: each($callback)
 
 集合可以通过 ``each()`` 和 ``map()`` 方法来转换为一个新的集合。
 ``each()`` 方法不会创建一个新的集合，但是能让你修改集合中的任意对象::
@@ -77,7 +77,7 @@ Collection()``::
 ``each()`` 的返回值是一个集合对象。Each会迅速迭代集合同时将结果回调到
 集合中的每个值上。
 
-.. php:method:: map(callable $c)
+.. php:method:: map($callback)
 
 ``map()`` 方法会基于一开始的集合内的各对象产生回调影响后的输出结果，来创建一个
 新集合::
@@ -94,7 +94,7 @@ Collection()``::
 
 ``map()`` 通过迭代时逐渐更新内部项目来创建一个新的迭代器。
 
-.. php:method:: extract($matcher)
+.. php:method:: extract($path)
 
 ``map()`` 的一个最常用的功能是从集合中选取一个单独的项目。如果你打算建一个由
 个别属性值的元素组成的列表，你可以使用 ``extract()`` 方法::
@@ -213,7 +213,7 @@ HasMany（有很多）和BelongsToMany（属于很多）的关联数据中进行
     // $result 内容是 [10, 20];
     $result = $new->toArray();
 
-.. php:method:: unfold(callable $c)
+.. php:method:: unfold(callable $callback)
 
 有时集合的内部项目包含有拥有更多内部项目的数组或迭代器。如果你希望让这些内部结构变得平行并且一次迭代就能遍历所有元素，你可以使用 ``unfold()`` 方法。它将会创建一个单一嵌套着每个元素的新集合::
 
@@ -292,7 +292,7 @@ HasMany（有很多）和BelongsToMany（属于很多）的关联数据中进行
 过滤（Filtering）
 ==================
 
-.. php:method:: filter(callable $c)
+.. php:method:: filter($callback)
 
 集合能够基于回调方法简单地过滤并创建新的集合。你能用 ``filter()``
 创建一个符合回调标准元素构成的集合::
@@ -315,7 +315,7 @@ HasMany（有很多）和BelongsToMany（属于很多）的关联数据中进行
         return $person->gender === 'male';
     });
 
-.. php:method:: every(callable $c)
+.. php:method:: every($callback)
 
 你可以用过滤方法来进行真伪测试。要检测是否集合中每个元素都符合测试条件的
 话你可以使用 ``every()``::
@@ -325,7 +325,7 @@ HasMany（有很多）和BelongsToMany（属于很多）的关联数据中进行
         return $person->age < 21;
     });
 
-.. php:method:: some(callable $c)
+.. php:method:: some($callback)
 
 你可以用 `some()`` 方法来检测集合中包含的元是否至少有一个符合过滤条件::
 
@@ -334,7 +334,7 @@ HasMany（有很多）和BelongsToMany（属于很多）的关联数据中进行
         return $person->age < 21;
     });
 
-.. php:method:: match(array $conditions)
+.. php:method:: match($conditions)
 
 你想要提取出一个只包含你指定属性的元素的新集合的话，你可以使用
 ``match()`` 方法::
@@ -342,7 +342,7 @@ HasMany（有很多）和BelongsToMany（属于很多）的关联数据中进行
     $collection = new Collection($comments);
     $commentsFromMark = $collection->match(['user.name' => 'Mark']);
 
-.. php:method:: firstMatch(array $conditions)
+.. php:method:: firstMatch($conditions)
 
 属性名可以用点记法表示。你可以遍历过嵌套着的实例并匹配它们的值，当你只需要第一个匹配
 的元素时，你可以用 ``firstMatch()``::
@@ -359,7 +359,7 @@ HasMany（有很多）和BelongsToMany（属于很多）的关联数据中进行
 集成（Aggregation）
 ======================
 
-.. php:method:: reduce(callable $c)
+.. php:method:: reduce($callback)
 
 ``map()`` 的对立操作是 ``reduce()`` 。该方法能够从集合的所有元素中得到一
 个单一的结果::
@@ -375,7 +375,7 @@ HasMany（有很多）和BelongsToMany（属于很多）的关联数据中进行
         return array_merge($accumulated, $article->tags);
     }, []);
 
-.. php:method:: min(string|callable $callback, $type = SORT_NUMERIC)
+.. php:method:: min(string|$callback, $type = SORT_NUMERIC)
 
 需要选取一个属性的最小值的话，可以使用 ``min()`` 方法，注意它会返回集合中拥有该最小值的
 元素，而不仅仅是一个值::
@@ -394,7 +394,7 @@ HasMany（有很多）和BelongsToMany（属于很多）的关联数据中进行
 
     $personWithYoungestDad = $collection->min('dad.age');
 
-.. php:method:: max(string|callable $callback, $type = SORT_NUMERIC)
+.. php:method:: max($callback, $type = SORT_NUMERIC)
 
 以上用发也能应用到 ``max()`` 方法上，它将返回集合中拥有该属性最大值的的元素::
 
@@ -407,7 +407,7 @@ HasMany（有很多）和BelongsToMany（属于很多）的关联数据中进行
 
     $personWithOldestDad = $collection->max('dad.age');
 
-.. php:method:: sumOf(string|callable $callback)
+.. php:method:: sumOf($path = null)
 
 最后， ``sumOf()`` 方法会返回所有元素某项属性的和值::
 
@@ -420,7 +420,7 @@ HasMany（有很多）和BelongsToMany（属于很多）的关联数据中进行
 
     $sumOfDadAges = $collection->sumOf('dad.age');
 
-.. php:method:: avg($matcher = null)
+.. php:method:: avg($path = null)
 
 该方法能计算集合中元素的平均值。选择一个复合路径或者函数来确定需要计算哪样属性的平均值::
 
@@ -432,7 +432,7 @@ HasMany（有很多）和BelongsToMany（属于很多）的关联数据中进行
     // 平均值: 150
     $average = (new Collection($items))->avg('invoice.total');
 
-.. php:method:: median($matcher = null)
+.. php:method:: median($path = null)
 
 该方法可计算一组元素的中间值。在参数中输入一个复合路径或者函数来确定需要计算哪样属性的中间值::
 
@@ -516,7 +516,7 @@ HasMany（有很多）和BelongsToMany（属于很多）的关联数据中进行
         return md5($file);
     });
 
-.. php:method:: zip($elements)
+.. php:method:: zip($items)
 
 使用 ``zip()`` 方法能够将不同集合中的元素结合到一起。它将返回一个元素结合后的集合,
 其中处于集合中同一位置的元素将被结合到一起::
@@ -564,7 +564,7 @@ HasMany（有很多）和BelongsToMany（属于很多）的关联数据中进行
 排序（Sorting）
 ===================
 
-.. php:method:: sortBy($callback)
+.. php:method:: sortBy($callback, $order = SORT_DESC, $sort = SORT_NUMERIC)
 
 集合的值可以基于某一列或者一个自定义函数来升序或降序排列。使用 ``sortBy``
 你可以根据集合中的某项值来生成一个排序过的::
@@ -654,7 +654,7 @@ HasMany（有很多）和BelongsToMany（属于很多）的关联数据中进行
 子元素嵌套在集合中的每个元素的 ``children`` 属性里面。这样的数据表现方式对于展示某些品目
 或者将元素放置到树结构的确定的层级上时会比较有帮助。
 
-.. php:method:: listNested($dir = 'desc', $nestingKey = 'children')
+.. php:method:: listNested($order = 'desc', $nestingKey = 'children')
 
 将 ``nest()`` 进行反转的是 ``listNested()`` 。该方法能够将一个树结构变成一个线形结构。它
 需要两个参数，第一参数决定运行模式（升序，降序，或者保持不变），第二个是指向集合中各元素的子元素的属性名。
@@ -765,7 +765,7 @@ HasMany（有很多）和BelongsToMany（属于很多）的关联数据中进行
 抽取元素
 --------------------
 
-.. php:method:: sample(int $size)
+.. php:method:: sample($length = 10)
 
 当做一个快速的静态分析时，对一个集合的元素进行随机化的处理比较常见。另一个比较常见的处理是，
 从集合中抽取几个随机的值出来以进行更多的测试。比方说你想要随机抽取5名用户来进行A/B测试，你
@@ -779,7 +779,7 @@ HasMany（有很多）和BelongsToMany（属于很多）的关联数据中进行
 ``sample()`` 会根据你定义的第一个参数来决定最大的抽取数。如果集合中没有足够数量的元
 素来满足样本要求，那么将返回元素被随机排列过后的整个元素本身。
 
-.. php:method:: take(int $size, int $from)
+.. php:method:: take($length, $offset)
 
 无论何时你想要集合中的某一部分的时候，可以使用 ``take()`` 方法，它会创建一个数量为你在
 第一个参数中定义的，同时位置由你传的第二个参数定义的新集合::
@@ -791,7 +791,7 @@ HasMany（有很多）和BelongsToMany（属于很多）的关联数据中进行
 
 位置是从0开始的，所以第一个位置其实是``0``。
 
-.. php:method:: skip(int $positions)
+.. php:method:: skip($length)
 
 像 ``take()`` 的第二个参数能够让你从集合中取值时略过一些元素，你也可以用 ``skip()``
 来拿到某个位置之后余下的元素::
@@ -840,7 +840,7 @@ HasMany（有很多）和BelongsToMany（属于很多）的关联数据中进行
 元素的更新
 -------------------
 
-.. php:method:: insert(string $path, array|Traversable $items)
+.. php:method:: insert($path, $items)
 
 有时，你或许有两个不同数据的集合，你想要将其中一组的元素插入到另一组中间去。这是一个从
 没有支持数据结合以及合并的资源中取得数据的常见例子。
@@ -941,7 +941,7 @@ HasMany（有很多）和BelongsToMany（属于很多）的关联数据中进行
         // 在你的map()函数使用这些逻辑
         $collection->map(new TotalOrderCalculator)
 
-.. php:method:: through(callable $c)
+.. php:method:: through($callback)
 
 有时一个集合连锁使用一些方法也能够被重复利用，不过它们必须按照特定的顺序。在这些情况中，你可以用 ``through()``
 来与一个包含了 ``__invoke`` 的类组合以构建方便的数据调取::
@@ -1035,7 +1035,7 @@ map操作仅仅会作用到我们使用的30条元素。即使是很小的集合
 复制集合
 -------------------
 
-.. php:method:: compile(bool $preserveKeys = true)
+.. php:method:: compile($preserveKeys = true)
 
 有时候你需要从其它的集合中克隆出元素。这在你需要在不同地方同时迭代相同的一组元素时非常有帮助。
 ``compile()`` 方法可以从另一个集合中克隆出一个::

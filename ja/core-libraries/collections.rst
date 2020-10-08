@@ -69,7 +69,7 @@
 反復
 ====
 
-.. php:method:: each(callable $c)
+.. php:method:: each($callback)
 
 コレクションは、 ``each()`` と ``map()`` メソッドで反復したり新しいコレクションに
 変換することができます。 ``each()`` メソッドは新しいコレクションを作成しませんが、
@@ -83,7 +83,7 @@
 ``each()`` の戻り値はコレクションオブジェクトです。即時にコレクション内の各値にコールバックを
 適用する反復処理します。
 
-.. php:method:: map(callable $c)
+.. php:method:: map($callback)
 
 ``map()`` メソッドは、元のコレクション内の各オブジェクトに適用されるコールバックの出力に基づいて
 新しいコレクションを作成します。 ::
@@ -103,7 +103,7 @@
 
 ``map()`` メソッドは、新しいイテレータを作成し、反復する時に得られた項目を遅延して作成します。
 
-.. php:method:: extract($matcher)
+.. php:method:: extract($path)
 
 ``map()`` 関数の最も一般的な用途の1つはコレクションから単一の列を抽出することです。
 特定のプロパティーの値を含む要素のリストを構築したい場合は、 ``extract()`` メソッドを
@@ -229,7 +229,7 @@
     // $result には [10, 20] が含まれています。
     $result = $new->toList();
 
-.. php:method:: unfold(callable $c)
+.. php:method:: unfold(callable $callback)
 
 時々、コレクション内の要素に、複数の要素を持つ配列やイテレータが含まれています。
 すべての要素に対して一回の反復で済むように内部構造を平坦化したい場合は、
@@ -312,7 +312,7 @@ PHP 5.5 以降を使用している場合は、 コレクション内の各ア�
 フィルタリング
 ==============
 
-.. php:method:: filter(callable $c)
+.. php:method:: filter($callback)
 
 コレクションは、コールバック関数の結果に基づいてフィルタリングし、新しいコレクションを作成が容易になります。
 基準のコールバックに一致する要素の新しいコレクションを作成するには、 ``filter()`` を使用することができます。 ::
@@ -335,7 +335,7 @@ PHP 5.5 以降を使用している場合は、 コレクション内の各ア�
         return $person->gender === 'male';
     });
 
-.. php:method:: every(callable $c)
+.. php:method:: every($callback)
 
 フィルター関数で真偽のテストを行うことができます。コレクション内のすべての要素が条件を
 満たしているかどうかを確認するには、 ``every()`` が使用できます。 ::
@@ -345,7 +345,7 @@ PHP 5.5 以降を使用している場合は、 コレクション内の各ア�
         return $person->age < 21;
     });
 
-.. php:method:: some(callable $c)
+.. php:method:: some($callback)
 
 フィルター関数に合致する要素が、コレクションに少なくとも１つ含まれているかどうかを
 ``some()`` メソッドを使用して確認することができます。 ::
@@ -355,7 +355,7 @@ PHP 5.5 以降を使用している場合は、 コレクション内の各ア�
         return $person->age < 21;
     });
 
-.. php:method:: match(array $conditions)
+.. php:method:: match($conditions)
 
 指定したプロパティーを持つ要素のみを含んだ新しいコレクションを抽出する場合、
 ``match()`` メソッドを使用しましょう。 ::
@@ -363,7 +363,7 @@ PHP 5.5 以降を使用している場合は、 コレクション内の各ア�
     $collection = new Collection($comments);
     $commentsFromMark = $collection->match(['user.name' => 'Mark']);
 
-.. php:method:: firstMatch(array $conditions)
+.. php:method:: firstMatch($conditions)
 
 プロパティー名は、ドット区切りのパスになります。ネストされたエンティティーを横断し、
 それらに含まれる値を一致させることができます。コレクションから、最初に一致した要素が必要な場合、
@@ -381,7 +381,7 @@ PHP 5.5 以降を使用している場合は、 コレクション内の各ア�
 集約
 ====
 
-.. php:method:: reduce(callable $c)
+.. php:method:: reduce($callback)
 
 ``map()`` の反対の操作は、一般的には ``reduce`` です。
 この関数を使用すると、コレクション内のすべての要素から１つの結果を得ることができます。 ::
@@ -397,7 +397,7 @@ PHP 5.5 以降を使用している場合は、 コレクション内の各ア�
         return array_merge($accumulated, $article->tags);
     }, []);
 
-.. php:method:: min(string|callable $callback, $type = SORT_NUMERIC)
+.. php:method:: min(string|$callback, $type = SORT_NUMERIC)
 
 プロパティーに基づいて、コレクションの最小値を抽出するには、 ``min()`` 関数を使用します。
 これは、コレクションから、見つかったプロパティーの最小値だけでなく完全な要素を返します。 ::
@@ -416,7 +416,7 @@ PHP 5.5 以降を使用している場合は、 コレクション内の各ア�
 
     $personWithYoungestDad = $collection->min('dad.age');
 
-.. php:method:: max(string|callable $callback, $type = SORT_NUMERIC)
+.. php:method:: max($callback, $type = SORT_NUMERIC)
 
 同様に、 ``max()`` 関数を使用すると、コレクションから最も高いプロパティー値を持つ要素を返します。 ::
 
@@ -429,7 +429,7 @@ PHP 5.5 以降を使用している場合は、 コレクション内の各ア�
 
     $personWithOldestDad = $collection->max('dad.age');
 
-.. php:method:: sumOf(string|callable $callback)
+.. php:method:: sumOf($path = null)
 
 最後に、 ``sumOf()`` メソッドは、すべての要素のプロパティーの合計を返します。 ::
 
@@ -442,7 +442,7 @@ PHP 5.5 以降を使用している場合は、 コレクション内の各ア�
 
     $sumOfDadAges = $collection->sumOf('dad.age');
 
-.. php:method:: avg($matcher = null)
+.. php:method:: avg($path = null)
 
 コレクション内の要素の平均値を計算します。必要に応じて、平均値を生成するためのマッチャーパスや
 値を抽出する関数を指定してください。 ::
@@ -455,7 +455,7 @@ PHP 5.5 以降を使用している場合は、 コレクション内の各ア�
     // 平均値: 150
     $average = (new Collection($items))->avg('invoice.total');
 
-.. php:method:: median($matcher = null)
+.. php:method:: median($path = null)
 
 要素の集合の中央値を計算します。必要に応じて、中央値を生成するためのマッチャーパスや
 値を抽出する関数を指定してください。 ::
@@ -543,7 +543,7 @@ PHP 5.5 以降を使用している場合は、 コレクション内の各ア�
         return md5($file);
     });
 
-.. php:method:: zip($elements)
+.. php:method:: zip($items)
 
 ``zip()`` メソッドを使用して、異なるコレクションの要素をグループ化することができます。
 このメソッドは、各コレクションから同じ位置に配置されている要素をグループ化する配列の
@@ -592,7 +592,7 @@ PHP 5.5 以降を使用している場合は、 コレクション内の各ア�
 ソート
 ======
 
-.. php:method:: sortBy($callback)
+.. php:method:: sortBy($callback, $order = SORT_DESC, $sort = SORT_NUMERIC)
 
 コレクションの値は、カラムまたはカスタム関数に基づいて昇順または降順でソートすることができます。
 コレクションの値から新たにソートされたコレクションを作成するには、 ``sortBy`` を使用することができます。 ::
@@ -690,7 +690,7 @@ PHP 5.5 以降を使用している場合は、 コレクション内の各ア�
 子要素は、コレクション内の各項目の ``children`` プロパティーの中にネストされています。
 このデータ表現のタイプは、メニューを描画したり、ツリー内の特定のレベルまでの要素を走査するのに便利です。
 
-.. php:method:: listNested($dir = 'desc', $nestingKey = 'children')
+.. php:method:: listNested($sort = 'desc', $nestingKey = 'children')
 
 ``nest()`` の逆の関数は ``listNested()`` です。このメソッドは、ツリー構造を線形構造に
 戻すように平坦にすることができます。このメソッドは、2つのパラメーターを持ちます。
@@ -808,7 +808,7 @@ PHP 5.5 以降を使用している場合は、 コレクション内の各ア�
 要素の取り出し
 --------------
 
-.. php:method:: sample(int $size)
+.. php:method:: sample($length = 10)
 
 手早く統計分析を行うときにコレクションをシャッフルすることが有用であることが多いです。
 この種のタスクを行う一般的な操作は、より多くのテストが実行できるよう、コレクションから、
@@ -824,7 +824,7 @@ PHP 5.5 以降を使用している場合は、 コレクション内の各ア�
 sample を満たすためのコレクション内に十分な要素がない場合、
 ランダムな順序で全てのコレクションが返されます。
 
-.. php:method:: take(int $size, int $from)
+.. php:method:: take($length, $offset)
 
 コレクションのスライスを取り出したいときは、 ``take()`` 関数を使用してください。
 その関数は二番目の引数で渡されたポジションから開始して、最初の引数で指定した値の数だけの
@@ -837,7 +837,7 @@ sample を満たすためのコレクション内に十分な要素がない場�
 
 ポジションはゼロが基準なので、最初のポジション番号は ``0`` です。
 
-.. php:method:: skip(int $positions)
+.. php:method:: skip($length)
 
 ``take()`` の第二引数は、コレクションから取得する前にいくつかの要素をスキップすることができますが、
 特定のポジションの後にある残りの要素を取る方法として、同じ目的のために ``skip()`` を使用できます。 ::
@@ -886,7 +886,7 @@ sample を満たすためのコレクション内に十分な要素がない場�
     $cakephpTweets = new Collection($tweets);
     $myTimeline = $cakephpTweets->appendItem($newTweet, 99);
 
-.. php:method:: prepend(array|Traversable $items)
+.. php:method:: prepend($items)
 
 ``prepend()`` メソッドは両方のソースの値を含む新しいコレクションを返します。 ::
 
@@ -912,7 +912,7 @@ sample を満たすためのコレクション内に十分な要素がない場�
 要素の更新
 ----------
 
-.. php:method:: insert(string $path, array|Traversable $items)
+.. php:method:: insert($path, $items)
 
 時には、２つの別々のデータの集合があり、一方の集合の要素を、
 他方のそれぞれの要素に挿入したいこともあるでしょう。もともとデータのマージや結合を
@@ -1019,7 +1019,7 @@ sample を満たすためのコレクション内に十分な要素がない場�
         // map() 呼び出しでロジックを使用
         $collection->map(new TotalOrderCalculator)
 
-.. php:method:: through(callable $c)
+.. php:method:: through($callback)
 
 時々、コレクションメソッド呼び出しの連鎖は、特定の順序で呼び出された場合にのみ、
 アプリケーションの他の部分で再利用可能になります。これらの例では、
@@ -1124,7 +1124,7 @@ sample を満たすためのコレクション内に十分な要素がない場�
 コレクションの複製
 -------------------
 
-.. php:method:: compile(bool $preserveKeys = true)
+.. php:method:: compile($preserveKeys = true)
 
 時には、別のコレクションから要素の複製を取得する必要があります。
 同時に異なる場所から同じセットを反復処理する必要がある場合に便利です。

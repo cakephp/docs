@@ -518,20 +518,22 @@ Comme exemple, nous allons construire une simple classe Type pour manipuler le t
 données ``POINT`` de MysQL. Premièrement, nous allons définir un objet 'value' que nous
 allons pouvoir utiliser pour représenter les données de ``POINT`` en PHP::
 
-    // in src/Database/Point.php
+    // dans src/Database/Point.php
     namespace App\Database;
 
-    // Our value object is immutable.
+    // Notre objet de valeur est immuable.
     class Point
     {
         protected $_lat;
         protected $_long;
 
-        // Factory method.
+        // Méthode d'usine.
         public static function parse($value)
         {
-            // Parse the data from MySQL.
-            return new static($value[0], $value[1]);
+            // Analysez les données WKB de MySQL.
+            $unpacked = unpack('x4/corder/Ltype/dlat/dlong', $value);
+
+            return new static($unpacked['lat'], $unpacked['long']);
         }
 
         public function __construct($lat, $long)
@@ -557,13 +559,15 @@ faire correspondre les données dans cet objet et les expressions SQL::
     namespace App\Database\Type;
 
     use App\Database\Point;
+    use Cake\Database\DriverInterface;
     use Cake\Database\Expression\FunctionExpression;
-    use Cake\Database\Type as BaseType;
+    use Cake\Database\ExpressionInterface;
+    use Cake\Database\Type\BaseType;
     use Cake\Database\Type\ExpressionTypeInterface;
 
     class PointType extends BaseType implements ExpressionTypeInterface
     {
-        public function toPHP($value, Driver $d)
+        public function toPHP($value, DriverInterface $d)
         {
             return Point::parse($value);
         }
@@ -579,7 +583,7 @@ faire correspondre les données dans cet objet et les expressions SQL::
             return null;
         }
 
-        public function toExpression($value)
+        public function toExpression($value): ExpressionInterface
         {
             if ($value instanceof Point) {
                 return new FunctionExpression(
@@ -593,7 +597,12 @@ faire correspondre les données dans cet objet et les expressions SQL::
             if (is_array($value)) {
                 return new FunctionExpression('POINT', [$value[0], $value[1]]);
             }
-            // Handle other cases.
+            // Manipulez d'autres cas.
+        }
+
+        public function toDatabase($value, DriverInterface $driver)
+        {
+            return $value;
         }
     }
 

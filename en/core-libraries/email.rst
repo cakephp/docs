@@ -464,7 +464,7 @@ Transports can also be configured at runtime using
 
     use Cake\Mailer\TransportFactory;
 
-    // Define an STMP transport
+    // Define an SMTP transport
     TransportFactory::setConfig('gmail', [
         'host' => 'ssl://smtp.gmail.com',
         'port' => 465,

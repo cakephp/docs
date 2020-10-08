@@ -482,8 +482,10 @@ JSON データを変換してクエリーを作成します。
         // ファクトリーメソッド
         public static function parse($value)
         {
-            // MySQL からのデータをパース
-            return new static($value[0], $value[1]);
+            // MySQLからWKBデータを解析します。
+            $unpacked = unpack('x4/corder/Ltype/dlat/dlong', $value);
+
+            return new static($unpacked['lat'], $unpacked['long']);
         }
 
         public function __construct($lat, $long)
@@ -509,13 +511,15 @@ Type クラスが必要になります。 ::
     namespace App\Database\Type;
 
     use App\Database\Point;
+    use Cake\Database\DriverInterface;
     use Cake\Database\Expression\FunctionExpression;
-    use Cake\Database\Type as BaseType;
+    use Cake\Database\ExpressionInterface;
+    use Cake\Database\Type\BaseType;
     use Cake\Database\Type\ExpressionTypeInterface;
 
     class PointType extends BaseType implements ExpressionTypeInterface
     {
-        public function toPHP($value, Driver $d)
+        public function toPHP($value, DriverInterface $d)
         {
             return Point::parse($value);
         }
@@ -531,7 +535,7 @@ Type クラスが必要になります。 ::
             return null;
         }
 
-        public function toExpression($value)
+        public function toExpression($value): ExpressionInterface
         {
             if ($value instanceof Point) {
                 return new FunctionExpression(
@@ -546,6 +550,11 @@ Type クラスが必要になります。 ::
                 return new FunctionExpression('POINT', [$value[0], $value[1]]);
             }
             // その他のケースを処理
+        }
+
+        public function toDatabase($value, DriverInterface $driver)
+        {
+            return $value;
         }
     }
 

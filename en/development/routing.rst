@@ -3,7 +3,7 @@ Routing
 
 .. php:namespace:: Cake\Routing
 
-.. php:class:: Router
+.. php:class:: RouterBuilder
 
 Routing provides you tools that map URLs to controller actions. By defining
 routes, you can separate how your application is implemented from how its URL's
@@ -23,21 +23,8 @@ This section will teach you by example the most common uses of the CakePHP
 Router. Typically you want to display something as a landing page, so you add
 this to your **config/routes.php** file::
 
-    use Cake\Routing\RouteBuilder;
-    use Cake\Routing\Router;
-
-    // Using a scoped route builder (preferred way)
     /** @var \Cake\Routing\RouteBuilder $routes */
-    $routes->scope('/', function (RouteBuilder $routes) {
-        $routes->connect('/', ['controller' => 'Articles', 'action' => 'index']);
-    });
-
-    // Using the static method.
-    Router::connect('/', ['controller' => 'Articles', 'action' => 'index']);
-
-``Router`` provides two interfaces for connecting routes. The static method is
-a backwards compatible interface, while the scoped builders offer more terse
-syntax when building multiple routes, and better performance.
+    $routes->connect('/', ['controller' => 'Articles', 'action' => 'index']);
 
 This will execute the index method in the ``ArticlesController`` when the
 homepage of your site is visited. Sometimes you need dynamic routes that will
@@ -51,6 +38,7 @@ method ``view(15)`` in the ``ArticlesController``. This will not, though,
 prevent people from trying to access URLs looking like ``/articles/foobar``. If
 you wish, you can restrict some parameters to conform to a regular expression::
 
+    // Using fluent interface
     $routes->connect(
         '/articles/{id}',
         ['controller' => 'Articles', 'action' => 'view'],
@@ -58,6 +46,7 @@ you wish, you can restrict some parameters to conform to a regular expression::
     ->setPatterns(['id' => '\d+'])
     ->setPass(['id']);
 
+    // Using options array
     $routes->connect(
         '/articles/{id}',
         ['controller' => 'Articles', 'action' => 'view'],
@@ -126,6 +115,7 @@ operation. This method defaults to the ``/`` scope. To create a scope and connec
 some routes we'll use the ``scope()`` method::
 
     // In config/routes.php
+    use Cake\Routing\RouteBuilder;
     use Cake\Routing\Route\DashedRoute;
 
     $routes->scope('/', function (RouteBuilder $routes) {
@@ -884,18 +874,8 @@ Routing File Extensions
 
 .. php:staticmethod:: extensions(string|array|null $extensions, $merge = true)
 
-To handle different file extensions with your routes, you can define extensions
-on a global, as well as on a scoped level. Defining global extensions can be
-achieved via the routers static :php:meth:`Router::extensions()` method::
-
-    Router::extensions(['json', 'xml']);
-    // ...
-
-This will affect **all** routes that are being connected **afterwards**, no matter
-their scope.
-
-In order to restrict extensions to specific scopes, you can define them using the
-:php:meth:`Cake\\Routing\\RouteBuilder::setExtensions()` method::
+To handle different file extensions in your URLs, you can define the extensions
+using the :php:meth:`Cake\\Routing\\RouteBuilder::setExtensions()` method::
 
     $routes->scope('/', function (RouteBuilder $routes) {
         $routes->setExtensions(['json', 'xml']);
@@ -903,8 +883,7 @@ In order to restrict extensions to specific scopes, you can define them using th
 
 This will enable the named extensions for all routes that are being connected in
 that scope **after** the ``setExtensions()`` call, including those that are being
-connected in nested scopes. Similar to the global :php:meth:`Router::extensions()`
-method, any routes connected prior to the call will not inherit the extensions.
+connected in nested scopes.
 
 .. note::
 
@@ -915,8 +894,8 @@ method, any routes connected prior to the call will not inherit the extensions.
     Also be aware that re-opened scopes will **not** inherit extensions defined in
     previously opened scopes.
 
-By using extensions, you tell the router to remove any matching file extensions,
-and then parse what remains. If you want to create a URL such as
+By using extensions, you tell the router to remove any matching file extensions
+from the URL, and then parse what remains. If you want to create a URL such as
 /page/title-of-page.html you would create your route using::
 
     $routes->scope('/page', function (RouteBuilder $routes) {
@@ -1621,18 +1600,18 @@ standard :term:`plugin syntax`.
 Default Route Class
 -------------------
 
-.. php:staticmethod:: defaultRouteClass($routeClass = null)
+.. php:staticmethod:: setRouteClass($routeClass = null)
 
-If you want to use an alternate route class for all your routes besides the
-default ``Route``, you can do so by calling ``Router::defaultRouteClass()``
+If you want to use an alternate route class for your routes besides the
+default ``Route``, you can do so by calling ``RouterBuilder::setRouteClass()``
 before setting up any routes and avoid having to specify the ``routeClass``
 option for each route. For example using::
 
-    use Cake\Routing\Route\InflectedRoute;
+    use Cake\Routing\Route\DashedRoute;
 
-    Router::defaultRouteClass(InflectedRoute::class);
+    $routes->setRouteClass(DashedRoute::class);
 
-will cause all routes connected after this to use the ``InflectedRoute`` route class.
+will cause all routes connected after this to use the ``DashedRoute`` route class.
 Calling the method without an argument will return current default route class.
 
 Fallbacks Method
@@ -1642,7 +1621,7 @@ Fallbacks Method
 
 The fallbacks method is a simple shortcut for defining default routes. The
 method uses the passed routing class for the defined rules or if no class is
-provided the class returned by ``Router::defaultRouteClass()`` is used.
+provided the class returned by ``RouterBuilder::setRouteClass()`` is used.
 
 Calling fallbacks like so::
 
