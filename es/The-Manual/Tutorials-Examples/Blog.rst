@@ -867,8 +867,7 @@ y también se asegura de que los enlaces llevan al mismo sitio.
 Conclusión
 ==========
 
-Creado aplicaciones de esta manera ganará paz, honor, amor, y dinero,
-incluso más allá de sus fantasías más salvajes. Simple, ¿no? Tenga en
+Simple, ¿no? Tenga en
 cuenta que este tutorial es muy básico. CakePHP tiene *muchas* más
 características que ofrecer, y es flexible en formas que no se quiso
 cubrir aquí para simplificar. Utilice el resto de este manual como una
