@@ -870,9 +870,7 @@ vers la même destination.
 Conclusion
 ==========
 
-Créer des applications de cette manière vous apportera la paix,
-l'honneur, des femmes (ou des hommes) et de l'argent au-delà même de vos
-fantasmes les plus fous. Simple, n'est-ce-pas ? Gardez à l'esprit que ce
+Simple, n'est-ce-pas ? Gardez à l'esprit que ce
 tutoriel était très basique. CakePHP a *beaucoup* plus de
 fonctionnalités à offrir et il est aussi souple dans d'autres domaines
 que nous n'avons pas souhaités couvrir ici pour simplifier les choses.
