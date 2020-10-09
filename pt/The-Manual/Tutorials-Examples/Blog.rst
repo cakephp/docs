@@ -869,11 +869,9 @@ para o mesmo lugar.
 Conclusão
 =========
 
-Criar aplicações desta maneira irá lhe trazer paz, honra, amor e
-dinheiro além de satisfazer às suas mais ousadas fantasias. Simples,
-não? Tenha em mente que este tutorial foi muito básico. O CakePHP possui
-*muito* mais recursos a oferecer e é flexível de tantas maneiras que não
-conseguimos mostrar aqui por questões de simplicidade. Utilize o resto
+Simples, não? Tenha em mente que este tutorial foi muito básico. O CakePHP 
+possui *muito* mais recursos a oferecer e é flexível de tantas maneiras que 
+não conseguimos mostrar aqui por questões de simplicidade. Utilize o resto
 deste manual como guia para construir mais aplicações ricas em recursos.
 
 Agora que você criou uma aplicação básica em Cake, você está pronto para
