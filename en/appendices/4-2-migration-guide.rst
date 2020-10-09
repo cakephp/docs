@@ -21,6 +21,12 @@ features::
   This change makes method names dissimilar between ``ORM\Table`` as the return
   value of these methods is different.
 
+Core
+----
+
+- ``Exception::responseHeader()`` is now deprecated. Users must use `HttpException::setHeaders()``
+  when setting HTTP response headers. User exceptions that set response headers should convert to
+  ``HttpException``.
 
 Behavior Changes
 ================
