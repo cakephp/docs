@@ -604,8 +604,7 @@ nosso PostsController.
 Conclusão
 =========
 
-Criar aplicações desta maneira irá lhe trazer paz, honra, amor e dinheiro além
-de satisfazer às suas mais ousadas fantasias. Simples, não? Tenha em mente que
+Simples, não? Tenha em mente que
 este tutorial foi muito básico. O CakePHP possui *muito* mais recursos a
 oferecer e é flexível de tantas maneiras que não conseguimos mostrar aqui por
 questões de simplicidade. Utilize o resto deste manual como guia para construir
