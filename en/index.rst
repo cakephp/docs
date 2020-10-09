@@ -956,7 +956,7 @@ soon-to-be-created PostsController.
 Conclusion
 ----------
 
-Creating applications this way will win you peace, honor, women, and
+Creating applications this way will win you peace, honor, admiration, and
 money beyond even your wildest fantasies. Simple, isn't it? Keep in mind
 that this tutorial was very basic. Cake has many more features to offer,
 and is flexible in ways we didn't wish to cover here. Use the rest of
