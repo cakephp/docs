@@ -701,8 +701,6 @@ notre controller Articles (``ArticlesController``).
 Conclusion
 ==========
 
-Créer des applications de cette manière vous apportera, paix, honneur, amour
-et argent au-delà même de vos fantasmes les plus fous. Simple n'est ce pas ?
 Gardez à l'esprit que ce tutoriel était très basique. CakePHP a *beaucoup* plus
 de fonctionnalités à offrir et il est aussi souple dans d'autres domaines que
 nous n'avons pas souhaité couvrir ici pour simplifier les choses. Utilisez
