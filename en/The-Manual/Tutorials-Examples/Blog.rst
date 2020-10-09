@@ -854,9 +854,7 @@ to the same place too.
 Conclusion
 ==========
 
-Creating applications this way will win you peace, honor, love, and
-money beyond even your wildest fantasies. Simple, isn't it? Keep in mind
-that this tutorial was very basic. CakePHP has *many* more features to
+Keep in mind that this tutorial was very basic. CakePHP has *many* more features to
 offer, and is flexible in ways we didn't wish to cover here for
 simplicity's sake. Use the rest of this manual as a guide for building
 more feature-rich applications.
