@@ -890,10 +890,8 @@ richtige Stelle zeigt.
 Schlusswort
 ===========
 
-Auf diese Art und Weise Anwendungen zu erstellen bringt dir Frieden,
-Anerkennung, Beliebtheit und Geld in ungeahntem Maße. Simpel, oder?
-Behalte im Hinterkopf, dass dieses Tutorial nur die Grundzüge abgedeckt
-hat. CakePHP hat *viele* weitere Features zu bieten und ist auf
+Simpel, oder? Behalte im Hinterkopf, dass dieses Tutorial nur die Grundzüge 
+abgedeckt hat. CakePHP hat *viele* weitere Features zu bieten und ist auf
 vielfältige Weise flexibel, worauf wir hier aus Gründen der
 Verständlichkeit nicht eingegangen sind. Nutze den Rest dieses Handbuchs
 als Guide für das Erstellen umfangreicherer Anwendungen.
