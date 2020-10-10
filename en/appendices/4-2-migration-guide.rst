@@ -24,9 +24,9 @@ features::
 Core
 ----
 
-- ``Exception::responseHeader()`` is now deprecated. Users must use `HttpException::setHeaders()``
-  when setting HTTP response headers. User exceptions that set response headers should convert to
-  ``HttpException``.
+- ``Exception::responseHeader()`` is now deprecated. Users must use ``HttpException::setHeaders()``
+  when setting HTTP response headers. Application and plugin exceptions that set response headers 
+  should be updated to subclass ``HttpException``.
 
 Behavior Changes
 ================
