@@ -90,28 +90,6 @@ are documented in the :ref:`creating-validators` section.
     Validation objects are intended primarily for validating user input, i.e.
     forms and any other posted request data.
 
-Setting Default Strategy
-========================
-
-Whether to stop validation rule evaluation on the first failed rule.
-
-When enabled the first failing rule per field will cause validation to stop.
-When disabled all rules will be run even if there are failures::
-
-        public function validationDefault(Validator $validator): Validator
-        {
-            $validator
-                ->stopOnFailure()
-                ->requirePresence('email', 'create')
-                ->notBlank('email')
-                ->email('email');
-
-            return $validator;
-        }
-
-The email validation rule will only be invoked if the content is not empty.
-In this case only a single error message will appear under the form field.
-
 Using A Different Validation Set
 ================================
 
