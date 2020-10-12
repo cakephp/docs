@@ -137,8 +137,8 @@ Service Providers
 =================
 
 Service providers allow you to group of related services together helping you
-organize your services. ServiceProviders also help increase your application's
-performance as services defined in ServiceProviders are lazily registered after
+organize your services. Service providers can help increase your application's
+performance as defined services are lazily registered after
 their first use.
 
 Creating Service Providers
@@ -165,7 +165,7 @@ An example ServiceProvider would look like::
         }
     }
 
-ServiceProviders use their ``services()`` method to define all the services they
+Service providers use their ``services()`` method to define all the services they
 will provide. Additionally those services  **must be** defined in the ``$provides``
 property. Failing to include a service in the ``$provides`` property will result
 in it not be loadable from the container.
@@ -173,7 +173,7 @@ in it not be loadable from the container.
 Using Service Providers
 -----------------------
 
-To load a ServiceProvider add it into the container using the
+To load a service provider add it into the container using the
 ``addServiceProvider()`` method::
 
     $container->addServiceProvider(new BillingServiceProvider());
@@ -181,8 +181,8 @@ To load a ServiceProvider add it into the container using the
 Bootable ServiceProviders
 -------------------------
 
-If your service provider needs to run logic when it is added to the container
-you can implement the ``bootstrap()`` method. This situation can come up when you
+If your service provider needs to run logic when it is added to the container,
+you can implement the ``bootstrap()`` method. This situation can come up when your
 service provider needs to load additional configuration files, load additional
 service providers or modify a service defined elsewhere in your application. An
 example of a bootable service would be::
