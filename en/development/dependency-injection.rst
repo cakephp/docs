@@ -136,7 +136,7 @@ configuration.
 Service Providers
 =================
 
-Service providers allow you to group of related services together helping you
+Service providers allow you to group related services together helping you
 organize your services. Service providers can help increase your application's
 performance as defined services are lazily registered after
 their first use.
