@@ -89,11 +89,12 @@ table via a ``user_id`` foreign key. For a table like ``menu_links``
 whose name contains multiple words, the foreign key would be
 ``menu_link_id``.
 
-Join tables, used in BelongsToMany relationships between models, should be named
-after the model tables they will join or the bake command won't work, arranged in
-alphabetical order (``articles_tags`` rather than ``tags_articles``). If you
-need to add additional columns on the junction table you should create
-a separate entity/table class for that table.
+Join (or "junction") tables are used in BelongsToMany relationships between
+models. These should be named for the tables they connect. The names should be
+pluralized and sorted alphabetically: ``articles_tags``, not ``tags_articles``
+or ``article_tags``. *The bake command will not work if this convention is not
+followed.* If the junction table holds any data other than the linking foreign
+keys, you should create a concrete entity/table class for the table.
 
 In addition to using an auto-incrementing integer as primary keys, you can also
 use UUID columns. CakePHP will create UUID values automatically using
