@@ -49,7 +49,7 @@ definition is via a class name::
 
     use App\Service\BillingService;
 
-    // in your application's register() method.
+    // in your application's services() method.
 
     // Add a class by its name.
     $container->add(BillingService::class);
@@ -59,7 +59,7 @@ You can also define implementations for interfaces that your application uses::
     use App\Service\AuditLogServiceInterface;
     use App\Service\AuditLogService;
 
-    // in your application's register() method.
+    // in your application's services() method.
 
     // Add an implementation for an interface.
     $container->add(AuditLogServiceInterface::class, AuditLogService::class);
@@ -119,7 +119,7 @@ services like in a reporting system::
 Using Configuration Data
 ------------------------
 
-Often you'll need configuration data in your services. While you could register
+Often you'll need configuration data in your services. While you could add
 all the configuration keys your service needs into the container, that can be
 tedious. To make configuration easier to work with CakePHP includes an
 injectable configuration reader::
@@ -136,10 +136,71 @@ configuration.
 Service Providers
 =================
 
-* What is a service provider.
-* Why use service providers
+Service providers allow you to group related services together helping you
+organize your services. Service providers can help increase your application's
+performance as defined services are lazily registered after
+their first use.
 
 Creating Service Providers
 --------------------------
 
-* Example of service provider.
+An example ServiceProvider would look like::
+
+    namespace App\ServiceProvider;
+
+    use Cake\Core\AbstractServiceProvider;
+    // Other imports here.
+
+    class BillingServiceProvider extends AbstractServiceProvider
+    {
+        protected $provides = [
+            StripeService::class,
+            'configKey',
+        ];
+
+        public function services($container)
+        {
+            $container->add(StripService::class);
+            $container->add('configKey', 'some value');
+        }
+    }
+
+Service providers use their ``services()`` method to define all the services they
+will provide. Additionally those services  **must be** defined in the ``$provides``
+property. Failing to include a service in the ``$provides`` property will result
+in it not be loadable from the container.
+
+Using Service Providers
+-----------------------
+
+To load a service provider add it into the container using the
+``addServiceProvider()`` method::
+
+    $container->addServiceProvider(new BillingServiceProvider());
+
+Bootable ServiceProviders
+-------------------------
+
+If your service provider needs to run logic when it is added to the container,
+you can implement the ``bootstrap()`` method. This situation can come up when your
+service provider needs to load additional configuration files, load additional
+service providers or modify a service defined elsewhere in your application. An
+example of a bootable service would be::
+
+    namespace App\ServiceProvider;
+
+    use Cake\Core\AbstractServiceProvider;
+    // Other imports here.
+
+    class BillingServiceProvider extends AbstractServiceProvider
+    {
+        protected $provides = [
+            StripeService::class,
+            'configKey',
+        ];
+
+        public function bootstrap($container)
+        {
+            $container->addServiceProvider(new InvoicingServiceProvider();
+        }
+    }
