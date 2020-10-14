@@ -107,7 +107,8 @@ Database
       for more information.
 - ``Query::isResultsCastingEnabled()`` was added to get the current result
   casting mode.
-- ``StringExpression``was added to use collation with string literals. 
+- ``StringExpression``was added to use collation with string literals.
+- ``IdentifierExpression`` now supports collation.
 
 Http
 ----
