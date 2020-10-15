@@ -1143,7 +1143,7 @@ name::
         'map' => [
             'updateAll' => [
                 'action' => 'updateAll',
-                'method' => 'DELETE',
+                'method' => 'PUT',
                 'path' => '/update-many'
             ],
         ]
