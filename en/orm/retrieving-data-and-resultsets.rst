@@ -105,7 +105,7 @@ execute until you start fetching rows, convert it to an array, or when the
     $query = $articles->find('all');
 
     // Iteration will execute the query.
-    foreach ($query as $row) {
+    foreach ($query->all() as $row) {
     }
 
     // Calling all() will execute the query
@@ -1100,6 +1100,7 @@ Finally, we can put these two functions together to do the grouping::
 
     $articlesByStatus = $articles->find()
         ->where(['author_id' => 1])
+        ->all()
         ->mapReduce($mapper, $reducer);
 
     foreach ($articlesByStatus as $status => $articles) {
@@ -1145,6 +1146,7 @@ Finally, we put everything together::
         ->where(['published' => true])
         ->andWhere(['published_date >=' => new DateTime('2014-01-01')])
         ->disableHydration()
+        ->all()
         ->mapReduce($mapper, $reducer)
         ->toArray();
 
@@ -1205,6 +1207,7 @@ And we supply our functions to a query::
 
     $fakeFriends = $friends->find()
         ->disableHydration()
+        ->all()
         ->mapReduce($mapper, $reducer)
         ->toArray();
 
@@ -1271,7 +1274,7 @@ than 20 times across all articles::
         }
     };
 
-    $articles->find('commonWords')->mapReduce($mapper);
+    $articles->find('commonWords')->all()->mapReduce($mapper);
 
 Removing All Stacked Map-reduce Operations
 ------------------------------------------

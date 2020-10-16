@@ -784,7 +784,7 @@ now looks like this::
 
         public function testFindPublished(): void
         {
-            $query = $this->Articles->find('published');
+            $query = $this->Articles->find('published')->all();
             $this->assertInstanceOf('Cake\ORM\Query', $query);
             $result = $query->enableHydration(false)->toArray();
             $expected = [
@@ -865,10 +865,11 @@ controller code looks like::
             }
             if (!empty($short)) {
                 $result = $this->Articles->find('all', [
-                    'fields' => ['id', 'title']
-                ]);
+                        'fields' => ['id', 'title']
+                    ])
+                    ->all();
             } else {
-                $result = $this->Articles->find();
+                $result = $this->Articles->find()->all();
             }
 
             $this->set([

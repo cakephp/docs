@@ -206,7 +206,7 @@ logged in user. Replace your add action with the following::
             }
             $this->Flash->error(__('Unable to add your article.'));
         }
-        $tags = $this->Articles->Tags->find('list');
+        $tags = $this->Articles->Tags->find('list')->all();
         $this->set(compact('article', 'tags'));
     }
 
@@ -233,7 +233,7 @@ Next we'll update the ``edit`` action. Replace the edit method with the followin
             }
             $this->Flash->error(__('Unable to update your article.'));
         }
-        $tags = $this->Articles->Tags->find('list');
+        $tags = $this->Articles->Tags->find('list')->all();
         $this->set(compact('article', 'tags'));
     }
 

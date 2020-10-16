@@ -243,7 +243,7 @@ Once this association has been defined, find operations on the Users table can
 contain the Address record if it exists::
 
     // In a controller or table method.
-    $query = $users->find('all')->contain(['Addresses']);
+    $query = $users->find('all')->contain(['Addresses'])->all();
     foreach ($query as $user) {
         echo $user->address->street;
     }
@@ -332,7 +332,7 @@ Once this association has been defined, find operations on the Addresses table c
 contain the User record if it exists::
 
     // In a controller or table method.
-    $query = $addresses->find('all')->contain(['Users']);
+    $query = $addresses->find('all')->contain(['Users'])->all();
     foreach ($query as $address) {
         echo $address->user->username;
     }
@@ -458,7 +458,7 @@ Once this association has been defined, find operations on the Articles table
 can contain the Comment records if they exist::
 
     // In a controller or table method.
-    $query = $articles->find('all')->contain(['Comments']);
+    $query = $articles->find('all')->contain(['Comments'])->all();
     foreach ($query as $article) {
         echo $article->comments[0]->text;
     }
@@ -612,7 +612,7 @@ Once this association has been defined, find operations on the Articles table ca
 contain the Tag records if they exist::
 
     // In a controller or table method.
-    $query = $articles->find('all')->contain(['Tags']);
+    $query = $articles->find('all')->contain(['Tags'])->all();
     foreach ($query as $article) {
         echo $article->tags[0]->text;
     }

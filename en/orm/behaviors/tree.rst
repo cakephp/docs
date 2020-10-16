@@ -76,7 +76,8 @@ If you need to pass conditions you do so as per normal::
 
     $descendants = $categories
         ->find('children', ['for' => 1])
-        ->where(['name LIKE' => '%Foo%']);
+        ->where(['name LIKE' => '%Foo%'])
+        ->all();
 
     foreach ($descendants as $category) {
         echo $category->name . "\n";
@@ -99,7 +100,7 @@ only require a result set containing a single field from each level so you can
 display a list, in an HTML select for example, it is better to use the
 'treeList' finder::
 
-    $list = $categories->find('treeList');
+    $list = $categories->find('treeList')->toArray();
 
     // In a CakePHP template file:
     echo $this->Form->control('categories', ['options' => $list]);
@@ -152,7 +153,7 @@ of the tree. This is useful, for example, for adding the breadcrumbs list for
 a menu structure::
 
     $nodeId = 5;
-    $crumbs = $categories->find('path', ['for' => $nodeId]);
+    $crumbs = $categories->find('path', ['for' => $nodeId])->all();
 
     foreach ($crumbs as $crumb) {
         echo $crumb->name . ' > ';
@@ -295,7 +296,7 @@ The deletion of a node is based off of the lft and rght values of the entity. Th
 is important to note when looping through the various children of a node for
 conditional deletes::
 
-    $descendants = $teams->find('children', ['for' => 1]);
+    $descendants = $teams->find('children', ['for' => 1])->all();
 
     foreach ($descendants as $descendant) {
         $team = $teams->get($descendant->id); // search for the up-to-date entity object

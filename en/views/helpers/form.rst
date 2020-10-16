@@ -483,7 +483,7 @@ If you want to create a ``select`` form field while using a *belongsTo* (or
 *hasOne*) relation, you can add the following to your UsersController
 (assuming your User *belongsTo* Group)::
 
-    $this->set('groups', $this->Users->Groups->find('list'));
+    $this->set('groups', $this->Users->Groups->find('list')->all());
 
 Afterwards, add the following to your view template::
 
@@ -492,7 +492,7 @@ Afterwards, add the following to your view template::
 To make a ``select`` box for a *belongsToMany* Groups association you can
 add the following to your UsersController::
 
-    $this->set('groups', $this->Users->Groups->find('list'));
+    $this->set('groups', $this->Users->Groups->find('list')->all());
 
 Afterwards, add the following to your view template::
 
@@ -504,7 +504,7 @@ data in a pluralised and
 `lower camelCased <https://en.wikipedia.org/wiki/Camel_case#Variations_and_synonyms>`_
 format as follows::
 
-    $this->set('userGroups', $this->UserGroups->find('list'));
+    $this->set('userGroups', $this->UserGroups->find('list')->all());
 
 .. note::
 
