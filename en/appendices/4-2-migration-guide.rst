@@ -92,6 +92,12 @@ Testing
 New Features
 ============
 
+Console
+-------
+
+- ``ConsoleIo::comment()`` was added. This method formats text with a blue
+  foreground like comments in the generated help text.
+
 Database
 ----
 
