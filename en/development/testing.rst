@@ -1137,7 +1137,23 @@ you can use the remaining ``IntegrationTestTrait`` features as normal.
 You should also take care to try and use :ref:`application-bootstrap` to load
 any plugins containing events/routes. Doing so will ensure that your
 events/routes are connected for each test case. Alternatively if you wish to
-load plugins manually in a test you can use the ``loadPlugins()`` method.
+load plugins manually in a test you can use the ``loadPlugins()`` method::
+
+    use Cake\Routing\Router;
+
+    public function testRouteCount()
+    {
+        // Assert the amount of routes from the application, without loading plugins
+        $this->assertCount(35, Router::routes(), 'App route count does not match');
+    
+        // Assert the amount of routes from the application including a specific plugin "SomePlugin"
+        $this->loadPlugins(['SomePlugin']);
+        $this->assertCount(40, Router::routes(), 'App & SomePlugin route count does not match');
+    
+        // Assert the amount of routes from the application including all plugins
+        $this->loadPlugins();
+        $this->assertCount(60, Router::routes(), 'App & plugin route count does not match');
+    }
 
 .. versionadded:: 3.3.0
     PSR-7 Middleware and the ``useHttpServer()`` method were added in 3.3.0.
