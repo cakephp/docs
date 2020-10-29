@@ -758,7 +758,7 @@ En supposant que les articles appartiennent à plusieurs auteurs, il est possibl
 
 Notez que bien que les factories ne nécessitent ni la création, ni la déclaration de fixtures, elles sont
 parfaitement compatibles avec ces dernières. Pour plus de détails,
-rendez-vous `ici<https://github.com/vierge-noire/cakephp-fixture-factories>`_.
+rendez-vous `ici <https://github.com/vierge-noire/cakephp-fixture-factories>`_.
 
 Tester les Classes Table
 ========================
