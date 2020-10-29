@@ -761,7 +761,7 @@ create 5 articles each with 2 authors:
 
 Note that the fixture factories do not require any fixture creation or declaration. Still, they are fully
 compatible with the fixtures that come with cakephp. You will find additional insights
-and documentation `here<https://github.com/vierge-noire/cakephp-fixture-factories>`_.
+and documentation `here <https://github.com/vierge-noire/cakephp-fixture-factories>`_.
 
 Testing Table Classes
 =====================
