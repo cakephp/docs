@@ -728,7 +728,7 @@ to maintain them and to keep track of their content.
 The `fixture factories plugin <https://github.com/vierge-noire/cakephp-fixture-factories>`_ proposes an
 alternative for large sized applications.
 
-The plugin uses its own `phpunit listener <https://github.com/vierge-noire/cakephp-test-suite-light>`_,
+The plugin uses its own `phpunit listener <https://github.com/vierge-noire/cakephp-test-suite-light>`_
 which will perform the following actions:
 
 #. Run migrations once on the test DB `(see the migrator) <https://github.com/vierge-noire/cakephp-test-migrator>`_.
