@@ -735,8 +735,9 @@ which will perform the following actions:
 #. Truncate dirty tables before each test.
 #. Run tests.
 
-The following command will help you bake your factories:
-``bin/cake bake fixture_factory -h``
+The following command will help you bake your factories::
+
+    bin/cake bake fixture_factory -h
 
 Once your factories are
 `tuned <https://github.com/vierge-noire/cakephp-fixture-factories/blob/master/docs/factories.md>`_,
