@@ -733,8 +733,9 @@ qui effectue les actions suivantes:
 #. Tronquer les tables utilisées au préalable avant chaque test.
 #. Lancer les tests.
 
-La commande bake suivante vous assistera pour créer vos factories:
-``bin/cake bake fixture_factory -h``
+La commande bake suivante vous assistera pour créer vos factories::
+
+    bin/cake bake fixture_factory -h
 
 Une fois vos factories
 `mises en place <https://github.com/vierge-noire/cakephp-fixture-factories/blob/master/docs/factories.md>`_,
