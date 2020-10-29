@@ -743,15 +743,18 @@ vous voilà équipés pour créer vos fixtures de test à vitesse folle.
 
 Les intéractions non nécessaires avec la base de donnée ralentissent les tests, ainsi que votre application.
 Il est possible de créer des fixtures sans les insérer. Ceci est utile lorsque vous testez des méthodes
-qui n'intéragissent pas avec la base de donnée.
-``$article = ArticleFactory::make()->getEntity();``
+qui n'intéragissent pas avec la base de donnée::
 
-Pour insérer dans la base de donnée:
-``$article = ArticleFactory::make()->persist();``
+    $article = ArticleFactory::make()->getEntity();
+
+Pour insérer dans la base de donnée::
+
+    $article = ArticleFactory::make()->persist();
 
 En supposant que les articles appartiennent à plusieurs auteurs, il est possible de créer 5 articles ayant chacun
-2 auteurs de la manière suivante:
-``$articles = ArticleFactory::make(5)->with('Authors', 2)->getEntities();``
+2 auteurs de la manière suivante::
+
+    $articles = ArticleFactory::make(5)->with('Authors', 2)->getEntities();
 
 Notez que bien que les factories ne nécessitent ni la création, ni la déclaration de fixtures, elles sont
 parfaitement compatibles avec ces dernières. Pour plus de détails,
