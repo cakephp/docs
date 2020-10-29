@@ -730,42 +730,45 @@ In the above example, both fixtures would be loaded from
 Fixture Factories
 -----------------
 
-While your application grows, so do the number and the size of your test fixtures. You might find it difficult
+As your application grows, so does the number and the size of your test fixtures. You might find it difficult
 to maintain them and to keep track of their content.
-The `fixture factories plugin<https://github.com/vierge-noire/cakephp-fixture-factories>`_ proposes an
+The `fixture factories plugin <https://github.com/vierge-noire/cakephp-fixture-factories>`_ proposes an
 alternative for large sized applications.
 
-The plugin uses its own `phpunit listener <https://github.com/vierge-noire/cakephp-test-suite-light>`_,
+The plugin uses its own `phpunit listener <https://github.com/vierge-noire/cakephp-test-suite-light>`_
 which will perform the following actions:
 
 #. Run migrations once on the test DB `(see the migrator) <https://github.com/vierge-noire/cakephp-test-migrator>`_.
 #. Truncate dirty tables before each test.
 #. Run tests.
 
-The following command will help you bake your factories:
-``bin/cake bake fixture_factory -h``
+The following command will help you bake your factories::
+
+    bin/cake bake fixture_factory -h
 
 Once your factories are
 `tuned <https://github.com/vierge-noire/cakephp-fixture-factories/blob/master/docs/factories.md>`_,
 you are ready to create test fixtures in no time.
 
-Unnecessary interaction with the database will slow down your tests, as well as your application.
-You can create test fixtures without persisting them, which can be useful for
-testing methods without DB interaction.
-``$article = ArticleFactory::make()->getEntity();``
+Unnecessary interaction with the database will slow down your tests as well as your application.
+You can create test fixtures without persisting them which can be useful for
+testing methods without DB interaction::
 
-In order to persist:
-``$article = ArticleFactory::make()->persist();``
+    $article = ArticleFactory::make()->getEntity();
+
+In order to persist::
+
+    $article = ArticleFactory::make()->persist();
 
 The factories help creating associated fixtures too.
-Assuming that articles belongs to many authors, we can now for example
-create 5 articles with each 2 authors:
+Assuming that articles belongs to many authors, we can now, for example,
+create 5 articles each with 2 authors:
 
 ``$articles = ArticleFactory::make(5)->with('Authors', 2)->getEntities();``
 
 Note that the fixture factories do not require any fixture creation or declaration. Still, they are fully
 compatible with the fixtures that come with cakephp. You will find additional insights
-and documentation `here<https://github.com/vierge-noire/cakephp-fixture-factories>`_.
+and documentation `here <https://github.com/vierge-noire/cakephp-fixture-factories>`_.
 
 Testing Table Classes
 =====================
