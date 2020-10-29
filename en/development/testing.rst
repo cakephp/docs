@@ -745,8 +745,9 @@ you are ready to create test fixtures in no time.
 
 Unnecessary interaction with the database will slow down your tests as well as your application.
 You can create test fixtures without persisting them which can be useful for
-testing methods without DB interaction.
-``$article = ArticleFactory::make()->getEntity();``
+testing methods without DB interaction::
+
+    $article = ArticleFactory::make()->getEntity();
 
 In order to persist:
 ``$article = ArticleFactory::make()->persist();``
