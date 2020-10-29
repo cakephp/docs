@@ -749,8 +749,9 @@ testing methods without DB interaction::
 
     $article = ArticleFactory::make()->getEntity();
 
-In order to persist:
-``$article = ArticleFactory::make()->persist();``
+In order to persist::
+
+    $article = ArticleFactory::make()->persist();
 
 The factories help creating associated fixtures too.
 Assuming that articles belongs to many authors, we can now for example
