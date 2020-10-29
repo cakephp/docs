@@ -723,7 +723,7 @@ In the above example, both fixtures would be loaded from
 Fixture Factories
 -----------------
 
-While your application grows, so do the number and the size of your test fixtures. You might find it difficult
+As your application grows, so does the number and the size of your test fixtures. You might find it difficult
 to maintain them and to keep track of their content.
 The `fixture factories plugin<https://github.com/vierge-noire/cakephp-fixture-factories>`_ proposes an
 alternative for large sized applications.
