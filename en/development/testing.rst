@@ -754,8 +754,8 @@ In order to persist::
     $article = ArticleFactory::make()->persist();
 
 The factories help creating associated fixtures too.
-Assuming that articles belongs to many authors, we can now for example
-create 5 articles with each 2 authors:
+Assuming that articles belongs to many authors, we can now, for example,
+create 5 articles each with 2 authors:
 
 ``$articles = ArticleFactory::make(5)->with('Authors', 2)->getEntities();``
 
