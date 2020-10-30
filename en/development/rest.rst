@@ -32,7 +32,7 @@ controller might look something like this::
 
         public function index()
         {
-            $recipes = $this->Recipes->find('all');
+            $recipes = $this->Recipes->find('all')->all();
             $this->set('recipes', $recipes);
             $this->viewBuilder()->setOption('serialize', ['recipes']);
         }

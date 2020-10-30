@@ -267,7 +267,7 @@ creating a cell object::
         public function display($userId)
         {
             $this->loadModel('Users');
-            $result = $this->Users->find('friends', ['for' => $userId]);
+            $result = $this->Users->find('friends', ['for' => $userId])->all();
             $this->set('favorites', $result);
         }
     }

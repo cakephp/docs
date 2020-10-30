@@ -352,9 +352,10 @@ table/collection that is not the controller's default one::
     // In a controller method.
     $this->loadModel('Articles');
     $recentArticles = $this->Articles->find('all', [
-        'limit' => 5,
-        'order' => 'Articles.created DESC'
-    ]);
+            'limit' => 5,
+            'order' => 'Articles.created DESC'
+        ])
+        ->all();
 
 If you are using a table provider other than the built-in ORM you can
 link that table system into CakePHP's controllers by connecting its

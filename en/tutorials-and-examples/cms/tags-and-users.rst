@@ -90,7 +90,7 @@ articles. First, update the ``add`` action to look like::
                 $this->Flash->error(__('Unable to add your article.'));
             }
             // Get a list of tags.
-            $tags = $this->Articles->Tags->find('list');
+            $tags = $this->Articles->Tags->find('list')->all();
 
             // Set tags to the view context
             $this->set('tags', $tags);
@@ -131,7 +131,7 @@ edit method should now look like::
         }
 
         // Get a list of tags.
-        $tags = $this->Articles->Tags->find('list');
+        $tags = $this->Articles->Tags->find('list')->all();
 
         // Set tags to the view context
         $this->set('tags', $tags);
@@ -192,8 +192,9 @@ add the following::
 
         // Use the ArticlesTable to find tagged articles.
         $articles = $this->Articles->find('tagged', [
-            'tags' => $tags
-        ]);
+                'tags' => $tags
+            ])
+            ->all();
 
         // Pass variables into the view template context.
         $this->set([
@@ -212,8 +213,9 @@ action using PHP's variadic argument::
     {
         // Use the ArticlesTable to find tagged articles.
         $articles = $this->Articles->find('tagged', [
-            'tags' => $tags
-        ]);
+                'tags' => $tags
+            ])
+            ->all();
 
         // Pass variables into the view template context.
         $this->set([
@@ -406,18 +408,19 @@ to **src/Model/Table/ArticlesTable.php**::
         $newTags = array_unique($newTags);
 
         $out = [];
-        $query = $this->Tags->find()
-            ->where(['Tags.title IN' => $newTags]);
+        $tags = $this->Tags->find()
+            ->where(['Tags.title IN' => $newTags])
+            ->all();
 
         // Remove existing tags from the list of new tags.
-        foreach ($query->extract('title') as $existing) {
+        foreach ($tags->extract('title') as $existing) {
             $index = array_search($existing, $newTags);
             if ($index !== false) {
                 unset($newTags[$index]);
             }
         }
         // Add existing tags.
-        foreach ($query as $tag) {
+        foreach ($tags as $tag) {
             $out[] = $tag;
         }
         // Add new tags.

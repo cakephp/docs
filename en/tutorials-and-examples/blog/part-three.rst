@@ -251,7 +251,8 @@ the tree::
         public function index()
         {
             $categories = $this->Categories->find()
-                ->order(['lft' => 'ASC']);
+                ->order(['lft' => 'ASC'])
+                ->all();
             $this->set(compact('categories'));
             $this->viewBuilder()->setOption('serialize', ['categories']);
         }
@@ -358,7 +359,7 @@ it::
 
             // Just added the categories list to be able to choose
             // one category for an article
-            $categories = $this->Articles->Categories->find('treeList');
+            $categories = $this->Articles->Categories->find('treeList')->all();
             $this->set(compact('categories'));
         }
     }

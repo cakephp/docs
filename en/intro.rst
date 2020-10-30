@@ -38,8 +38,8 @@ The model objects can be thought of as "Friend", "User", "Comment", or
     use Cake\ORM\Locator\LocatorAwareTrait;
 
     $users = $this->getTableLocator()->get('Users');
-    $query = $users->find();
-    foreach ($query as $row) {
+    $resultset = $users->find()->all();
+    foreach ($resultset as $row) {
         echo $row->username;
     }
 

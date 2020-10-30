@@ -26,7 +26,7 @@ of a ``View``, use the ``Text`` class::
 
         public function afterLogin()
         {
-            $message = $this->Users->find('new_message');
+            $message = $this->Users->find('new_message')->first();
             if (!empty($message)) {
                 // Notify user of new message
                 $this->Flash->success(__(

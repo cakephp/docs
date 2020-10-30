@@ -88,7 +88,7 @@ articles. The code for that action would look like this::
     {
         public function index()
         {
-            $articles = $this->Articles->find('all');
+            $articles = $this->Articles->find()->all();
             $this->set(compact('articles'));
         }
     }
@@ -106,10 +106,11 @@ access that at www.example.com/articles/foobar.
     readable, understandable action names. You can map URLs to your code using
     :doc:`/development/routing` covered later on.
 
-The single instruction in the action uses ``set()`` to pass data
-from the controller to the view (which we'll create next). The line
-sets the view variable called 'articles' equal to the return value of
-the ``find('all')`` method of the ``ArticlesTable`` object.
+The single instruction in the action uses ``set()`` to pass resultset
+from the controller to the view (which we'll create next). The ``find()`` method 
+of the ``ArticlesTable`` object returns an instance of ``Cake\\ORM\\Query`` and
+calling its ``all()`` method returns as instance of ``Cake\\Collection\\CollectionInterface``
+which is set as a view variable called 'articles'.
 
 .. note::
 
@@ -213,7 +214,7 @@ you are very sneaky. Otherwise, we'll create it in the
     {
         public function index()
         {
-             $this->set('articles', $this->Articles->find('all'));
+            $this->set('articles', $this->Articles->find()->all());
         }
 
         public function view($id = null)
@@ -224,7 +225,7 @@ you are very sneaky. Otherwise, we'll create it in the
     }
 
 The ``set()`` call should look familiar. Notice we're using
-``get()`` rather than ``find('all')`` because we only really want
+``get()`` rather than ``find()`` because we only really want
 a single article's information.
 
 Notice that our view action takes a parameter: the ID of the article
@@ -279,7 +280,7 @@ First, start by creating an ``add()`` action in the
 
         public function index()
         {
-            $this->set('articles', $this->Articles->find('all'));
+            $this->set('articles', $this->Articles->find()->all());
         }
 
         public function view($id)
@@ -666,9 +667,7 @@ our ``ArticlesController``.
 Conclusion
 ==========
 
-Creating applications this way will win you peace, honor, love, and
-money beyond even your wildest fantasies. Simple, isn't it? Keep in
-mind that this tutorial was very basic. CakePHP has *many* more
+Keep in mind that this tutorial was very basic. CakePHP has *many* more
 features to offer, and is flexible in ways we didn't wish to cover
 here for simplicity's sake. Use the rest of this manual as a guide
 for building more feature-rich applications.

@@ -44,7 +44,7 @@ Selecting Rows From A Table
 
     $query = $this->getTableLocator()->get('Articles')->find();
 
-    foreach ($query as $article) {
+    foreach ($query->all() as $article) {
         debug($article->title);
     }
 
@@ -67,7 +67,7 @@ You can of course chain the methods you call on Query objects::
         ->where(['id !=' => 1])
         ->order(['created' => 'DESC']);
 
-    foreach ($query as $article) {
+    foreach ($query->all() as $article) {
         debug($article->created);
     }
 
@@ -133,7 +133,7 @@ Getting A List Of Values From A Column
 
     // Use the extract() method from the collections library
     // This executes the query as well
-    $allTitles = $articles->find()->extract('title');
+    $allTitles = $articles->find()->all()->extract('title');
 
     foreach ($allTitles as $title) {
         echo $title;
@@ -141,7 +141,7 @@ Getting A List Of Values From A Column
 
 You can also get a key-value list out of a query result::
 
-    $list = $articles->find('list');
+    $list = $articles->find('list')->all();
 
     foreach ($list as $id => $title) {
         echo "$id : $title"
@@ -161,7 +161,7 @@ can also do in a Query object::
 
     // Use the combine() method from the collections library
     // This is equivalent to find('list')
-    $keyValueList = $articles->find()->combine('id', 'title');
+    $keyValueList = $articles->find()->all()->combine('id', 'title');
 
     // An advanced example
     $results = $articles->find()
@@ -171,6 +171,7 @@ can also do in a Query object::
             $row->trimmedTitle = trim($row->title);
             return $row;
         })
+        ->all()
         ->combine('id', 'trimmedTitle') // combine() is another collection method
         ->toArray(); // Also a collections library method
 
@@ -209,7 +210,7 @@ you can use the ``select()`` method::
 
     $query = $articles->find();
     $query->select(['id', 'title', 'body']);
-    foreach ($query as $row) {
+    foreach ($query->all() as $row) {
         debug($row->title);
     }
 

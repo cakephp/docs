@@ -967,7 +967,7 @@ To take advantage of this header, you must either call the
 
     public function index()
     {
-        $articles = $this->Articles->find('all');
+        $articles = $this->Articles->find('all')->all();
 
         // Simple checksum of the article contents.
         // You should use a more efficient implementation

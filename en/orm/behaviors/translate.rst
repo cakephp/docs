@@ -388,7 +388,7 @@ TranslateBehavior does not substitute find conditions by default. You need to us
 ``translationField()`` method to compose find conditions on translated fields::
 
     $this->Articles->setLocale('es');
-    $data = $this->Articles->find()->where([
+    $query = $this->Articles->find()->where([
         $this->Articles->translationField('title') => 'Otro Título'
     ]);
 

@@ -314,7 +314,7 @@ Marking Rules as the Last to Run
 
 When fields have multiple rules, each validation rule will be run even if the
 previous one has failed. This allows you to collect as many validation errors as
-you can in a single pass. However, if you want to stop execution after
+you can in a single pass. If you want to stop execution after
 a specific rule has failed, you can set the ``last`` option to ``true``::
 
     $validator = new Validator();
@@ -333,6 +333,30 @@ a specific rule has failed, you can set the ``last`` option to ``true``::
 
 If the minLength rule fails in the example above, the maxLength rule will not be
 run.
+
+Make Rules 'last' by default
+============================
+
+You can have the ``last`` option automatically applied to each rule you can use
+the ``stopOnFailure()`` method to enable this behavior::
+
+        public function validationDefault(Validator $validator): Validator
+        {
+            $validator
+                ->stopOnFailure()
+                ->requirePresence('email', 'create')
+                ->notBlank('email')
+                ->email('email');
+
+            return $validator;
+        }
+
+When enabled all fields will stop validation on the first failing rule instead
+of checking all possible rules. In this case only a single error message will
+appear under the form field.
+
+.. versionadded::
+    The ``stopOnFailure()`` method was added in 4.1.6.
 
 .. _adding-validation-providers:
 
