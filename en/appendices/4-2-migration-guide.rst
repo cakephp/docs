@@ -15,11 +15,8 @@ features::
 
     bin/cake upgrade rector --rules cakephp42 <path/to/app/src>
 
-* A new configuration option has been added to disable deprecations on a path by
-  path basis. See :ref:`deprecation-warnings` for more information.
-* ``ORM\Behavior::getTable()`` has been deprecated. Use ``table()`` instead.
-  This change makes method names dissimilar between ``ORM\Table`` as the return
-  value of these methods is different.
+A new configuration option has been added to disable deprecations on a path by
+path basis. See :ref:`deprecation-warnings` for more information.
 
 Core
 ----
@@ -27,6 +24,22 @@ Core
 - ``Exception::responseHeader()`` is now deprecated. Users must use ``HttpException::setHeaders()``
   when setting HTTP response headers. Application and plugin exceptions that set response headers 
   should be updated to subclass ``HttpException``.
+- ``Cake\Core\Exception\Exception`` was renamed to
+  ``Cake\Core\Exception\CakeException``.
+
+
+Database
+--------
+
+- ``Cake\Database\Exception`` was renamed to ``Cake\Database\Exception\DatabaseException``.
+
+ORM
+---
+
+- ``ORM\Behavior::getTable()`` has been deprecated. Use ``table()`` instead.
+  This change makes method names dissimilar between ``ORM\Table`` as the return
+  value of these methods is different.
+
 
 Behavior Changes
 ================
