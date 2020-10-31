@@ -724,6 +724,49 @@ la fixture::
 Dans l'exemple ci-dessus, les deux fixtures seront chargées à partir de
 ``tests/Fixture/blog/``.
 
+Fixture Factories
+-----------------
+
+Le nombre et la taille de vos fixtures vont croissantes avec la taille votre application. Il est possible qu'à
+un certain point, vous ne soyez plus en mesure les maintenir.
+
+Le `fixture factories plugin<https://github.com/vierge-noire/cakephp-fixture-factories>`_ propose une
+alternative efficace pour des applications de taille moyenne et plus.
+
+Le plugin utilise son propre `phpunit listener <https://github.com/vierge-noire/cakephp-test-suite-light>`_,
+qui effectue les actions suivantes:
+
+#. Faire tourner les migrations `(description ici) <https://github.com/vierge-noire/cakephp-test-migrator>`_.
+#. Tronquer les tables utilisées au préalable avant chaque test.
+#. Lancer les tests.
+
+La commande bake suivante vous assistera pour créer vos factories::
+
+    bin/cake bake fixture_factory -h
+
+Une fois vos factories
+`mises en place <https://github.com/vierge-noire/cakephp-fixture-factories/blob/master/docs/factories.md>`_,
+vous voilà équipés pour créer vos fixtures de test à vitesse folle.
+
+Les intéractions non nécessaires avec la base de donnée ralentissent les tests, ainsi que votre application.
+Il est possible de créer des fixtures sans les insérer. Ceci est utile lorsque vous testez des méthodes
+qui n'intéragissent pas avec la base de donnée::
+
+    $article = ArticleFactory::make()->getEntity();
+
+Pour insérer dans la base de donnée::
+
+    $article = ArticleFactory::make()->persist();
+
+En supposant que les articles appartiennent à plusieurs auteurs, il est possible de créer 5 articles ayant chacun
+2 auteurs de la manière suivante::
+
+    $articles = ArticleFactory::make(5)->with('Authors', 2)->getEntities();
+
+Notez que bien que les factories ne nécessitent ni la création, ni la déclaration de fixtures, elles sont
+parfaitement compatibles avec ces dernières. Pour plus de détails,
+rendez-vous `ici <https://github.com/vierge-noire/cakephp-fixture-factories>`_.
+
 Tester les Classes Table
 ========================
 
@@ -817,6 +860,41 @@ enregistrements qui sont remplis initialement dans la table articles.). Nous
 testons que les résultats correspondent à nos attentes en utilisant la méthode
 ``assertEquals()``. Regardez la section sur les :ref:`running-tests` pour plus
 d'informations sur la façon de lancer les cas de test.
+
+
+En utilisant les fixture factories, le test se présente ainsi::
+
+    namespace App\Test\TestCase\Model\Table;
+
+    use App\Model\Table\ArticlesTable;
+    use App\Test\Factory\ArticleFactory;
+    use Cake\TestSuite\TestCase;
+
+    class ArticlesTableTest extends TestCase
+    {
+        public function setUp(): void
+        { ... }
+
+        public function testFindPublished(): void
+        {
+            // Insérer 3 articles publiés
+            $articles = ArticleFactory::make(['published' => 1], 3)->persist();
+            // Insérer 2 articles non publiés
+            ArticleFactory::make(['published' => 0], 2)->persist();
+
+            $result = $this->Articles->find('published')->find('list')->toArray();
+
+            $expected = [
+                $articles[0]->id => $articles[0]->title,
+                $articles[1]->id => $articles[1]->title,
+                $articles[2]->id => $articles[2]->title,
+            ];
+
+            $this->assertEquals($expected, $result);
+        }
+    }
+
+Aucune fixture n'est déclarée. Les 5 articles créés n'existeront que pour ce test.
 
 Méthodes de Mocking des Models
 ------------------------------
