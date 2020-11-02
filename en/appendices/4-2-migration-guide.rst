@@ -4,6 +4,14 @@
 CakePHP 4.2 is an API compatible upgrade from 4.0. This page outlines the
 deprecations and features added in 4.2.
 
+Upgrading to 4.2.0
+==================
+
+You can can use composer to upgrade to CakePHP 4.2.0::
+
+    php composer.phar require --update-with-dependencies "cakephp/cakephp:4.2.0-beta1"
+
+
 
 Deprecations
 ============
