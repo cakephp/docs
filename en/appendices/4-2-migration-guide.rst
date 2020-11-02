@@ -105,6 +105,16 @@ Testing
 New Features
 ============
 
+We're adding a new process to enable us to ship features, collect feedback from
+the community and evolve those features. We're calling this process
+:ref:`experimental-features`.
+
+Core
+----
+
+- Experimental support for a :doc:`/development/dependency-injection` container
+  was added.
+
 Console
 -------
 
