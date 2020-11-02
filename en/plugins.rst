@@ -508,7 +508,7 @@ prefix on them, use the alternative syntax::
         }
     }
 
-You can use ``Cake\ORM\TableLocator`` to load your plugin tables using the familiar
+You can use ``Cake\ORM\Locator\TableLocator`` to load your plugin tables using the familiar
 :term:`plugin syntax`::
 
     use Cake\ORM\Locator\LocatorAwareTrait;
