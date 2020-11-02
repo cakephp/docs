@@ -496,7 +496,7 @@ bake で作っていないプラグインなら、クラスを自動的に読み
     }
 
 おなじみの :term:`プラグイン記法` を使う事で、プラグインのテーブルを
-読み込むために ``Cake\ORM\TableLocator`` を使用することができます。 ::
+読み込むために ``Cake\ORM\Locator\TableLocator`` を使用することができます。 ::
 
     use Cake\ORM\Locator\LocatorAwareTrait;
 
