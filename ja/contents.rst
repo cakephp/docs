@@ -80,6 +80,7 @@
     Debug Kit <https://book.cakephp.org/debugkit/4/ja/>
     Migrations <https://book.cakephp.org/migrations/3/ja/>
     Elasticsearch <https://book.cakephp.org/elasticsearch/3/ja/>
+    Phinx <https://book.cakephp.org/phinx/0/ja/>
 
 .. toctree::
     :maxdepth: 3
@@ -87,12 +88,6 @@
 
     core-libraries/global-constants-and-functions
     appendices
-
-.. toctree::
-    :maxdepth: 3
-    :caption: Phinx
-
-    Phinx <https://book.cakephp.org/phinx/0/ja/>
 
 .. toctree::
     :hidden:
