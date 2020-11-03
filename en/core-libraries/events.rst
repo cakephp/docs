@@ -176,7 +176,7 @@ as necessary. Our ``UserStatistics`` listener might start out like::
         public function implementedEvents(): array
         {
             return [
-                'Model.Order.afterPlace' => 'updateBuyStatistic',
+                'Model.afterPlace' => 'updateBuyStatistic',
             ];
         }
 
