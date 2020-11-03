@@ -70,13 +70,14 @@ Contenu
 
 .. toctree::
     :maxdepth: 3
-    :caption: Plugins
+    :caption: Plugins & Packages
 
     Bake <https://book.cakephp.org/bake/1/fr/>
     Chronos <https://book.cakephp.org/chronos/1/fr/>
     Debug Kit <https://book.cakephp.org/debugkit/3/fr/>
     Migrations <https://book.cakephp.org/migrations/3/fr/>
     Elasticsearch <https://book.cakephp.org/elasticsearch/3/fr/>
+    Phinx <https://book.cakephp.org/phinx/0/fr/>
 
 .. toctree::
     :maxdepth: 3
@@ -84,12 +85,6 @@ Contenu
 
     core-libraries/global-constants-and-functions
     appendices
-
-.. toctree::
-    :maxdepth: 3
-    :caption: Phinx
-
-    Phinx <https://book.cakephp.org/phinx/0/fr/>
 
 .. toctree::
     :hidden:
