@@ -167,6 +167,8 @@ global site statistics. This is a great place to use a listener class. Doing so
 allows you to concentrate the statistics logic in one place and react to events
 as necessary. Our ``UserStatistics`` listener might start out like::
 
+    namespace App\Event;
+
     use Cake\Event\EventListenerInterface;
 
     class UserStatistic implements EventListenerInterface
@@ -184,7 +186,7 @@ as necessary. Our ``UserStatistics`` listener might start out like::
         }
     }
 
-    // Attach the UserStatistic object to the Order's event manager
+    // From your controller, attach the UserStatistic object to the Order's event manager
     $statistics = new UserStatistic();
     $this->Orders->getEventManager()->on($statistics);
 
