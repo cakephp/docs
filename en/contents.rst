@@ -72,14 +72,17 @@ Contents
 
 .. toctree::
     :maxdepth: 3
-    :caption: Plugins
+    :caption: Plugins & Packages
 
+    standalone-packages
     Authentication <https://book.cakephp.org/authentication/2/>
     Authorization <https://book.cakephp.org/authorization/2/>
     Bake <https://book.cakephp.org/bake/2/>
     Debug Kit <https://book.cakephp.org/debugkit/4/>
     Migrations <https://book.cakephp.org/migrations/3/>
     Elasticsearch <https://book.cakephp.org/elasticsearch/3/en/>
+    Phinx <https://book.cakephp.org/phinx/0/en/>
+    Chronos <https://book.cakephp.org/chronos/2/>
 
 .. toctree::
     :maxdepth: 3
@@ -87,16 +90,6 @@ Contents
 
     core-libraries/global-constants-and-functions
     appendices
-
-.. toctree::
-    :maxdepth: 3
-    :caption: Standalone Packages
-
-    standalone-packages
-    Authentication <https://book.cakephp.org/authentication/2/>
-    Authorization <https://book.cakephp.org/authorization/2/>
-    Phinx <https://book.cakephp.org/phinx/0/en/>
-    Chronos <https://book.cakephp.org/chronos/2/>
 
 .. toctree::
    :hidden:
