@@ -128,6 +128,8 @@ Console
 
 - ``ConsoleIo::comment()`` was added. This method formats text with a blue
   foreground like comments in the generated help text.
+- ``TableHelper`` now supports a ``<text-right>`` formatting tag, which aligns
+  cell content with the right edge instead of the left.
 
 Database
 ----
