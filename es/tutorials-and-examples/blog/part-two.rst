@@ -226,7 +226,7 @@ Creemos esta acción para evitar el error::
     }
 
 Si observas la función view(), ahora el método set() debería serte familiar.
-Verás que estamos usando ``read()`` en vez de ``find('all')`` ya que sólo
+Verás que estamos usando ``findById()`` en vez de ``find('all')`` ya que sólo
 queremos un post concreto.
 
 Verás que nuestra función view toma un parámetro ($id), que es el ID del
@@ -577,7 +577,7 @@ Rutas (*Routes*)
 ================
 
 En muchas ocasiones, las rutas por defecto de CakePHP funcionan bien tal y como
-están. Los desarroladores que quieren rutas diferentes para mejorar la
+están. Los desarrolladores que quieren rutas diferentes para mejorar la
 usabilidad apreciarán la forma en la que CakePHP relaciona las URLs con las
 acciones de los controladores. Vamos a hacer cambios ligeros para este tutorial.
 
