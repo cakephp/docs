@@ -159,6 +159,8 @@ Http
   replacement for the ``CsrfProtectionMiddleware``.
 - The ``hal+json``, ``hal+xml``, and ``jsonld`` types were added to
   ``Response`` making them usable with ``withType()``.
+- ``Client::createFromUrl()`` was added. This method can be used to create
+  HTTP clients scoped to specific domains including a base path.
 
 ORM
 ---
