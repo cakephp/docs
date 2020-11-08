@@ -2746,8 +2746,8 @@ create the following controls::
     echo $this->Form->control('comments.1.id');
     echo $this->Form->control('comments.1.comment');
     
-    // Multiple file control (hasMany)
-    echo $this->Form->control('files[].filename');
+    // Multiple file control (hasMany) (requires $this->Form->create($article, ['type' => 'file']))
+    echo $this->Form->control('files[].filename', ['type' => 'file', 'multiple' => 'true']);
 
 The above controls could then be marshalled into a completed entity graph using
 the following code in your controller::
