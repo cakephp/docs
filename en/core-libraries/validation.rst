@@ -338,12 +338,12 @@ Make Rules 'last' by default
 ============================
 
 You can have the ``last`` option automatically applied to each rule you can use
-the ``stopOnFailure()`` method to enable this behavior::
+the ``setStopOnFailure()`` method to enable this behavior::
 
         public function validationDefault(Validator $validator): Validator
         {
             $validator
-                ->stopOnFailure()
+                ->setStopOnFailure()
                 ->requirePresence('email', 'create')
                 ->notBlank('email')
                 ->email('email');
@@ -356,7 +356,7 @@ of checking all possible rules. In this case only a single error message will
 appear under the form field.
 
 .. versionadded::
-    The ``stopOnFailure()`` method was added in 4.1.6.
+    The ``setStopOnFailure()`` method was added in 4.1.6.
 
 .. _adding-validation-providers:
 
