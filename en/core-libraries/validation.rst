@@ -338,12 +338,12 @@ Make Rules 'last' by default
 ============================
 
 You can have the ``last`` option automatically applied to each rule you can use
-the ``stopOnFailure()`` method to enable this behavior::
+the ``setStopOnFailure()`` method to enable this behavior::
 
         public function validationDefault(Validator $validator): Validator
         {
             $validator
-                ->stopOnFailure()
+                ->setStopOnFailure()
                 ->requirePresence('email', 'create')
                 ->notBlank('email')
                 ->email('email');
@@ -356,7 +356,7 @@ of checking all possible rules. In this case only a single error message will
 appear under the form field.
 
 .. versionadded::
-    The ``stopOnFailure()`` method was added in 4.1.6.
+    The ``setStopOnFailure()`` method was added in 4.1.6.
 
 .. _adding-validation-providers:
 
@@ -538,7 +538,7 @@ sending an email you could do the following::
         // Send an email.
     }
 
-The ``errors()`` method will return a non-empty array when there are validation
+The ``getErrors()`` method will return a non-empty array when there are validation
 failures. The returned array of errors will be structured like::
 
     $errors = [
@@ -546,7 +546,7 @@ failures. The returned array of errors will be structured like::
     ];
 
 If you have multiple errors on a single field, an array of error messages will
-be returned per field. By default the ``errors()`` method applies rules for
+be returned per field. By default the ``getErrors()`` method applies rules for
 the 'create' mode. If you'd like to apply 'update' rules you can do the
 following::
 
@@ -575,7 +575,7 @@ The request data is validated automatically when using the ``newEntity()``,
 
     // In the ArticlesController class
     $article = $this->Articles->newEntity($this->request->getData());
-    if ($article->errors()) {
+    if ($article->getErrors()) {
         // Do work to show error messages.
     }
 
@@ -585,7 +585,7 @@ use the ``newEntities()`` method::
     // In the ArticlesController class
     $entities = $this->Articles->newEntities($this->request->getData());
     foreach ($entities as $entity) {
-        if (!$entity->errors()) {
+        if (!$entity->getErrors()) {
             $this->Articles->save($entity);
         }
     }
