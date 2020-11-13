@@ -767,7 +767,7 @@ Loading Routes in Tests
 -----------------------
 
 If you are testing mailers, controller components or other classes that require
-routes to be loaded and URLs to be resolve you will need to load routes. During
+routes and resolving URLs, you will need to load routes. During
 the ``setUp()`` of a class or during individual test methods you can use
 ``loadRoutes()`` to ensure your application routes are loaded::
 
