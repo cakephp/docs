@@ -763,6 +763,36 @@ Note that the fixture factories do not require any fixture creation or declarati
 compatible with the fixtures that come with cakephp. You will find additional insights
 and documentation `here <https://github.com/vierge-noire/cakephp-fixture-factories>`_.
 
+Loading Routes in Tests
+-----------------------
+
+If you are testing mailers, controller components or other classes that require
+routes and resolving URLs, you will need to load routes. During
+the ``setUp()`` of a class or during individual test methods you can use
+``loadRoutes()`` to ensure your application routes are loaded::
+
+    public function setUp(): void
+    {
+        parent::setUp();
+        $this->loadRoutes();
+    }
+
+This method will build an instance of your ``Application`` and call the
+``routes()`` method on it. If your ``Application`` class requires specialized
+constructor parameters you can provide those to ``loadRoutes($constructorArgs)``.
+
+Loading Plugins in Tests
+------------------------
+
+If your application would dynamically load plugins, you can use
+``loadPlugins()`` to load one or more plugins during tests::
+
+    public function testMethodUsingPluginResources()
+    {
+        $this->loadPlugins(['Company/Cms']);
+        // Test logic that requires Company/Cms to be loaded.
+    }
+
 Testing Table Classes
 =====================
 
@@ -1823,93 +1853,6 @@ code you wrote, you can use ``bake``:
 
 While ``<name>`` should be the name of the object you want to bake a test
 skeleton for.
-
-Integration with Jenkins
-========================
-
-`Jenkins <http://jenkins-ci.org>`_ is a continuous integration server, that can
-help you automate the running of your test cases. This helps ensure that all
-your tests stay passing and your application is always ready.
-
-Integrating a CakePHP application with Jenkins is fairly straightforward. The
-following assumes you've already installed Jenkins on \*nix system, and are able
-to administer it. You also know how to create jobs, and run builds. If you are
-unsure of any of these, refer to the `Jenkins documentation <http://jenkins-ci.org/>`_ .
-
-Create a Job
-------------
-
-Start off by creating a job for your application, and connect your repository
-so that jenkins can access your code.
-
-Add Test Database Config
-------------------------
-
-Using a separate database just for Jenkins is generally a good idea, as it stops
-bleed through and avoids a number of basic problems. Once you've created a new
-database in a database server that jenkins can access (usually localhost). Add
-a *shell script step* to the build that contains the following:
-
-.. code-block:: bash
-
-    cat > config/app_local.php <<'CONFIG'
-    <?php
-    return [
-        'Datasources' => [
-            'test' => [
-                'datasource' => 'Database/Mysql',
-                'host'       => 'localhost',
-                'database'   => 'jenkins_test',
-                'username'      => 'jenkins',
-                'password'   => 'cakephp_jenkins',
-                'encoding'   => 'utf8'
-            ]
-        ]
-    ];
-    CONFIG
-
-Then uncomment the following line in your **config/bootstrap.php** file::
-
-    //Configure::load('app_local', 'default');
-
-By creating an **app_local.php** file, you have an easy way to define
-configuration specific to Jenkins. You can use this same configuration file to
-override any other configuration files you need on Jenkins.
-
-It's often a good idea to drop and re-create the database before each build as
-well. This insulates you from chained failures, where one broken build causes
-others to fail. Add another *shell script step* to the build that contains the
-following:
-
-.. code-block:: bash
-
-    mysql -u jenkins -pcakephp_jenkins -e 'DROP DATABASE IF EXISTS jenkins_test; CREATE DATABASE jenkins_test';
-
-Add your Tests
---------------
-
-Add another *shell script step* to your build. In this step install your
-dependencies and run the tests for your application. Creating a junit log file,
-or clover coverage is often a nice bonus, as it gives you a nice graphical view
-of your testing results:
-
-.. code-block:: bash
-
-    # Download Composer if it is missing.
-    test -f 'composer.phar' || curl -sS https://getcomposer.org/installer | php
-    # Install dependencies
-    php composer.phar install
-    vendor/bin/phpunit --log-junit junit.xml --coverage-clover clover.xml
-
-If you use clover coverage, or the junit results, make sure to configure those
-in Jenkins as well. Failing to configure those steps will mean you won't see the
-results.
-
-Run a Build
------------
-
-You should be able to run a build now. Check the console output and make any
-necessary changes to get a passing build.
 
 .. meta::
     :title lang=en: Testing

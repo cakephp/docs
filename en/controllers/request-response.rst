@@ -664,10 +664,10 @@ Dealing with Content Types
 You can control the Content-Type of your application's responses with
 :php:meth:`Cake\\Http\\Response::withType()`. If your application needs to deal
 with content types that are not built into Response, you can map them with
-``type()`` as well::
+``setTypeMap()`` as well::
 
     // Add a vCard type
-    $this->response->type(['vcf' => 'text/v-card']);
+    $this->response->setTypeMap('vcf', ['text/v-card']);
 
     // Set the response Content-Type to vcard.
     $this->response = $this->response->withType('vcf');
