@@ -1085,7 +1085,7 @@ column Types::
 
     class UsersTable extends Table
     {
-        protected function _initializeSchema(TableSchema $schema): TableSchemaInterface
+        protected function _initializeSchema(TableSchemaInterface $schema): TableSchemaInterface
         {
             $schema->setColumnType('preferences', 'json');
 
