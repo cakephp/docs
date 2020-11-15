@@ -1080,7 +1080,6 @@ column Types::
     Type::map('json', 'Cake\Database\Type\JsonType');
 
     // In src/Model/Table/UsersTable.php
-    use Cake\Database\Schema\TableSchema;
     use Cake\Database\Schema\TableSchemaInterface;
 
     class UsersTable extends Table
