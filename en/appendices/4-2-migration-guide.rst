@@ -183,3 +183,6 @@ View
   metadata options in the results of ``attributes()``.
 - ``ViewBuilder::addHelper()`` now accepts an ``$options`` parameter to pass
   options into helper constructors.
+- The ``assetUrlClassName`` option was added to ``UrlHelper``. This option lets
+  you replace the default asset URL resolver with an application specific one.
+  This can be useful if you need to customize asset cache busting parameters.
