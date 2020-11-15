@@ -181,3 +181,5 @@ View
 
 - Context classes now include the ``comment``, ``null``, and ``default``
   metadata options in the results of ``attributes()``.
+- ``ViewBuilder::addHelper()`` now accepts an ``$options`` parameter to pass
+  options into helper constructors.
