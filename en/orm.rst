@@ -29,8 +29,8 @@ To get started you don't have to write any code. If you've followed the
 :ref:`CakePHP conventions for your database tables
 <model-and-database-conventions>` you can just start using the ORM. For example
 if we wanted to load some data from our ``articles`` table we would start off
-creating our ``Articles`` table class. Add the following to
-**src/Model/Table/ArticlesTable.php** after the ``<?php`` opening tag::
+creating our ``Articles`` table class. Create
+**src/Model/Table/ArticlesTable.php** with the following code::
 
     <?php
     namespace App\Model\Table;
