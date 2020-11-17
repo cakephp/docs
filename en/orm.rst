@@ -41,7 +41,7 @@ creating our ``Articles`` table class. Add the following to
     {
     }
 
-Then in a controller, or command we can have CakePHP create an instnace for us::
+Then in a controller, or command we can have CakePHP create an instance for us::
 
     public function someMethod()
     {
