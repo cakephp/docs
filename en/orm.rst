@@ -25,36 +25,14 @@ database connections <database-configuration>`.
 Quick Example
 =============
 
-To get started you don't have to write any code. If you've followed the :ref:`CakePHP
-conventions for your database tables <model-and-database-conventions>`
-you can just start using the ORM. For example if we wanted to load some data 
-from our ``articles`` table we could do::
-
-    use Cake\ORM\Locator\LocatorAwareTrait;
-
-    public function someMethod()
-    {
-        $articles = $this->getTableLocator()->get('Articles');
-
-        $resultset = $articles->find()->all();
-
-        foreach ($resultset as $row) {
-            echo $row->title;
-        }
-    }
-    
-Within a static method you can use the :php:class:`~Cake\\Datasource\\FactoryLocator` 
-to get the table locator::
-
-    $articles = FactoryLocator::get('Table')->get('Articles');
-
-Note that we didn't have to create any code or wire any configuration up.
-The conventions in CakePHP allow us to skip some boilerplate code and allow the
-framework to insert base classes when your application has not created
-a concrete class. If we wanted to customize our ArticlesTable class adding some
-associations or defining some additional methods we would add the following to
+To get started you don't have to write any code. If you've followed the
+:ref:`CakePHP conventions for your database tables
+<model-and-database-conventions>` you can just start using the ORM. For example
+if we wanted to load some data from our ``articles`` table we would start off
+creating our ``Articles`` table class. Add the following to
 **src/Model/Table/ArticlesTable.php** after the ``<?php`` opening tag::
 
+    <?php
     namespace App\Model\Table;
 
     use Cake\ORM\Table;
@@ -63,18 +41,39 @@ associations or defining some additional methods we would add the following to
     {
     }
 
-Table classes use the CamelCased version of the table name with the ``Table``
-suffix as the class name. Once your class has been created you get a reference
-to it using the :php:class:`~Cake\\ORM\\Locator\\TableLocator` as before::
+Then in a controller, or command we can have CakePHP create an instnace for us::
+
+    public function someMethod()
+    {
+        $this->loadModel('Articles');
+        $resultset = $this->Articles->find()->all();
+
+        foreach ($resultset as $row) {
+            echo $row->title;
+        }
+    }
+
+In other contexts, you can use the ``LocatorAwareTrait`` to add methods that
+enable you to get ORM tables::
 
     use Cake\ORM\Locator\LocatorAwareTrait;
 
-    $articles = $this->getTableLocator()->get('Articles');
+    public function someMethod()
+    {
+        $articles = $this->getTableLocator()->get('Articles');
+        // more code.
+    }
 
-Now that we have a concrete table class, we'll probably want to use a concrete
-entity class. Entity classes let you define accessor and mutator methods, define
-custom logic for individual records and much more. We'll start off by adding the
-following to **src/Model/Entity/Article.php** after the ``<?php`` opening tag::
+Within a static method you can use the :php:class:`~Cake\\Datasource\\FactoryLocator` 
+to get the table locator::
+
+    $articles = FactoryLocator::get('Table')->get('Articles');
+
+Table classes represent **collections** of **entities**. Next, lets create an
+entity class for our Articles. Entity classes let you define accessor and
+mutator methods, define custom logic for individual records and much more. We'll
+start off by adding the following to **src/Model/Entity/Article.php** after the
+``<?php`` opening tag::
 
     namespace App\Model\Entity;
 
