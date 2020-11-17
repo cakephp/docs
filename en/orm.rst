@@ -41,7 +41,7 @@ creating our ``Articles`` table class. Create
     {
     }
 
-Then in a controller, or command we can have CakePHP create an instance for us::
+Then in a controller or command we can have CakePHP create an instance for us::
 
     public function someMethod()
     {
@@ -53,8 +53,7 @@ Then in a controller, or command we can have CakePHP create an instance for us::
         }
     }
 
-In other contexts, you can use the ``LocatorAwareTrait`` to add methods that
-enable you to get ORM tables::
+In other contexts, you can use the ``LocatorAwareTrait`` which add accessor methods for ORM tables::
 
     use Cake\ORM\Locator\LocatorAwareTrait;
 
