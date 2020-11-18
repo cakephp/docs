@@ -41,12 +41,11 @@ Tandis que les objets Models seraient "Friend", "User", "Comment", "Photo".
 Si nous voulions charger des données depuis notre table ``users``, nous
 pourrions faire::
 
-    use Cake\ORM\TableRegistry;
+    use Cake\ORM\Locator\LocatorAwareTrait;
 
-    // Prior to 3.6 use TableRegistry::get('Users')
-    $users = TableRegistry::getTableLocator()->get('Users');
-    $query = $users->find();
-    foreach ($query as $row) {
+    $users = $this->getTableLocator()->get('Users');
+    $resultset = $users->find()->all();
+    foreach ($resultset as $row) {
         echo $row->username;
     }
 
@@ -58,10 +57,9 @@ et entity qui n'ont pas encore été définies.
 Si nous voulions créer un nouvel utilisateur et l'enregistrer (avec validation),
 nous ferions ceci::
 
-    use Cake\ORM\TableRegistry;
+    use Cake\ORM\Locator\LocatorAwareTrait;
 
-    // Prior to 3.6 use TableRegistry::get('Users')
-    $users = TableRegistry::getTableLocator()->get('Users');
+    $users = $this->getTableLocator()->get('Users');
     $user = $users->newEntity(['email' => 'mark@example.com']);
     $users->save($user);
 
@@ -77,10 +75,10 @@ Par exemple, la view pourrait utiliser les données du model pour afficher un
 template de vue HTML contenant ces données, ou alors un résultat au format XML pour que
 d'autres l'utilisent::
 
-    // Dans un fichier de template de view, nous afficherons un 'element' pour chaque utilisateur (user).
+    // In a view template file, we'll render an 'element' for each user.
     <?php foreach ($users as $user): ?>
         <li class="user">
-            <?= $this->element('user', ['user' => $user]) ?>
+            <?= $this->element('user_info', ['user' => $user]) ?>
         </li>
     <?php endforeach; ?>
 
@@ -179,7 +177,7 @@ fonctionnalités de CakePHP sont:
 
 Les prochaines étapes évidentes sont de
 :doc:`télécharger CakePHP </installation>`, lire le
-:doc:`tutoriel et construire un truc génial </tutorials-and-examples/bookmarks/intro>`.
+:doc:`tutoriel et construire un truc génial </tutorials-and-examples/cms/intro>`.
 
 Lectures Complémentaires
 ========================
