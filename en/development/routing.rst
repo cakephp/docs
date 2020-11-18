@@ -1330,10 +1330,6 @@ document fragments using special keys::
     // Will generate a URL like.
     /articles/index?page=1#top
 
-Router will also convert any parameters with unknown keys in a routing array to
-querystring parameters.  The ``?`` is offered for backwards compatibility with
-older versions of CakePHP.
-
 You can also use any of the special route elements when generating URLs:
 
 * ``_ext`` Used for :ref:`file-extensions` routing.
