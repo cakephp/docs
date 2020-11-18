@@ -44,6 +44,9 @@ Database
 ORM
 ---
 
+- ``TableLocator::allowFallbackClass()`` was added. This method lets you
+  disable automatically generated fallback table classes. Disabling is
+  currently opt-in, but will become the default in the future.
 - ``ORM\Behavior::getTable()`` has been deprecated. Use ``table()`` instead.
   This change makes method names dissimilar between ``ORM\Table`` as the return
   value of these methods is different.
