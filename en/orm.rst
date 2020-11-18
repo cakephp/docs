@@ -66,7 +66,7 @@ In other contexts, you can use the ``LocatorAwareTrait`` which add accessor meth
 Within a static method you can use the :php:class:`~Cake\\Datasource\\FactoryLocator` 
 to get the table locator::
 
-    $articles = FactoryLocator::get('Table')->get('Articles');
+    $articles = TableRegistry::getTableLocator()->get('Articles');
 
 Table classes represent **collections** of **entities**. Next, lets create an
 entity class for our Articles. Entity classes let you define accessor and
