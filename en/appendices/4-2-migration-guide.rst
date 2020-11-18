@@ -9,9 +9,7 @@ Upgrading to 4.2.0
 
 You can can use composer to upgrade to CakePHP 4.2.0::
 
-    php composer.phar require --update-with-dependencies "cakephp/cakephp:4.2.0-beta1"
-
-
+    php composer.phar require --update-with-dependencies "cakephp/cakephp:^4.2@beta"
 
 Deprecations
 ============
@@ -30,7 +28,7 @@ Core
 ----
 
 - ``Exception::responseHeader()`` is now deprecated. Users must use ``HttpException::setHeaders()``
-  when setting HTTP response headers. Application and plugin exceptions that set response headers 
+  when setting HTTP response headers. Application and plugin exceptions that set response headers
   should be updated to subclass ``HttpException``.
 - ``Cake\Core\Exception\Exception`` was renamed to
   ``Cake\Core\Exception\CakeException``.
@@ -64,6 +62,11 @@ Controller
 - ``Controller::$components`` was marked protected. It was previously documented
   as protected. This should not impact most application code as implementations
   can change the visibility to public.
+
+Component
+---------
+- ``FlashComponent::set()`` now sets the ``element`` option to ``error`` by
+  default when used with an ``Exception`` instance.
 
 Database
 --------
@@ -135,7 +138,7 @@ Console
   cell content with the right edge instead of the left.
 
 Database
-----
+--------
 
 - ``SqlServer`` now creates client-side buffered cursors for prepared statements by default.
   This was changed to fix significant performance issues with server-side SCROLL cursors.
@@ -155,7 +158,7 @@ Database
 Http
 ----
 
-- ``Http\Middleware\SessionCsrfProtectionMiddleware`` was added. Instead of
+- ``Cake\Http\Middleware\SessionCsrfProtectionMiddleware`` was added. Instead of
   storing CSRF tokens in a cookie, this middleware stores tokens in the session.
   This makes CSRF tokens user scoped and time based with the session, offering
   enhanced security over cookie based CSRF tokens. This middleware is a drop in
@@ -164,6 +167,10 @@ Http
   ``Response`` making them usable with ``withType()``.
 - ``Client::createFromUrl()`` was added. This method can be used to create
   HTTP clients scoped to specific domains including a base path.
+- ``A new utility class ``Cake\Http\FlashMessage`` was added whose instance is
+  available through ``ServerRequest::getFlash()``. The class similar to the
+  ``FlashComponent`` allows you to set flash messages. It can be particularly
+  useful for setting flash messages from middlewares.
 
 ORM
 ---
