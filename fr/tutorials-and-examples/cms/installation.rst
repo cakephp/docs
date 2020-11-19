@@ -49,7 +49,7 @@ d'application CakePHP dans le dossier **cms** du dossier courant:
 
 Si vous avez téléchargé et utilisé `l'Installer de Composer pour Windows
 <https://getcomposer.org/Composer-Setup.exe>`_, tapez la commande suivante dans
-votre terminal depuis le dossier d'installation (par exemple C:\\wamp\\www\\dev\\cakephp3):
+votre terminal depuis le dossier d'installation (par exemple C:\\wamp\\www\\dev):
 
 .. code-block:: bash
 
@@ -70,7 +70,9 @@ en place est terminée, votre dossier d'installation devrait ressembler à ceci:
       /config
       /logs
       /plugins
+      /resources
       /src
+      /templates
       /tests
       /tmp
       /vendor
@@ -87,6 +89,9 @@ en place est terminée, votre dossier d'installation devrait ressembler à ceci:
 C'est le bon moment pour en apprendre d'avantage sur le fonctionnement de la
 structure des dossiers de CakePHP : rendez-vous dans la section :doc:`/intro/cakephp-folder-structure`
 pour en savoir plus.
+
+Si vous vous perdez pendant ce tutoriel, vous pouvez voir le résultat final `on GitHub
+<https://github.com/cakephp/cms-tutorial>`_.
 
 Vérifier l'installation
 =======================

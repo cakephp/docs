@@ -9,11 +9,16 @@ répertoires que vous devriez voir:
   :doc:`/development/configuration` que CakePHP utilise. Les détails sur la
   connexion à la base de données, le bootstrapping, les fichiers de
   configuration du cœur et consorts doivent être stockés ici.
-- Le dossier *logs* contient normalement vos fichiers de log avec la
+- Le dossier *logs* contient normalement vos fichiers de log selon la
   configuration par défaut des logs.
 - Le dossier *plugins* est l'endroit où sont stockés les :doc:`/plugins` que
   votre application utilise.
-- Le dossier *src* sera celui vous placerez les fichiers de votre application.
+- Le dossier *src* sera celui vous placerez les fichiers source de votre application.
+- Le dossier *templates* contient les fichiers de présentation :
+  éléments, pages d'erreur, mises en page (layout) et les fichiers de vues.
+- Le dossier *resources* contient un sous-dossier pour différents types de fichiers de
+  ressources.
+  Le sous-dossier *locales* stocke les fichiers de langue pour l'internationalisation.
 - Le dossier *tests* est l'endroit où vous mettez les cas de test pour votre
   application.
 - Le dossier *tmp* est l'endroit où CakePHP stocke les données temporaires. Les
@@ -21,8 +26,9 @@ répertoires que vous devriez voir:
   mais ce dossier est généralement utilisé pour les stocker les traductions,
   les descriptions de model et parfois les informations de session.
 - Le dossier *vendor* est l'endroit où CakePHP et d'autres dépendances de
-  l'application vont être installés. Modifier ces fichiers est déconseillé car
-  composer écraser vos changements lors du prochain update que vous ferez.
+  l'application vont être installés par `Composer <http://getcomposer.org>`_.
+  Modifier ces fichiers est déconseillé car composer écrasera vos changements
+  lors du prochain update que vous ferez.
 - Le répertoire *webroot* est la racine publique de votre application. Il
   contient tous les fichiers que vous souhaitez voir accessibles publiquement.
 
@@ -38,21 +44,28 @@ Le répertoire *src* de CakePHP est l'endroit où vous réaliserez la majorité
 du développement de votre application. Regardons d'un peu plus près les dossiers
 à l'intérieur de *src*.
 
+Command
+    Contient les commandes de la console de votre application. Voir
+    :doc:`/console-commands/commands` pour en savoir plus.
+Console
+    Contient le script d'installation exécuté par Composer.
 Controller
-    Contient les controllers et les components de votre application.
-Locale
-    Stocke les fichiers pour l'internationalisation.
+    Contient les :doc:`/controllers` et les components de votre application.
+Middleware
+    Contient les :doc:`/controllers/middleware` de votre application.
 Model
-    Pour les tables, entity et behaviors de votre application.
+    Contient les tables, entity et behaviors de votre application.
 Shell
     Contient les commandes de la console et les tasks de la console pour votre
     application. Pour plus d'informations, regardez la section
     :doc:`/console-commands/shells`.
-Template
-    Les fichiers de présentation se trouvent ici: elements, pages d'erreur,
-    les layouts, et les fichiers de template de vue.
 View
     Les classes de présentation sont placés ici : views, cells, helpers.
+
+.. note::
+
+    Le dossier ``Shell`` n'est pas présent par défaut.
+    Vous pouvez l'ajouter lorsque vous en avez besoin..
 
 .. meta::
     :title lang=fr: Structure du dossier de CakePHP
