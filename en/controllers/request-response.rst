@@ -20,9 +20,9 @@ Request
 number of features for interrogating and interacting with request data.
 On each request one Request is created and then passed by reference to the
 various layers of an application that use request data. By default the request
-is assigned to ``$this->request``, and is available in Controllers, Cells, Views
-and Helpers. You can also access it in Components using the controller
-reference. Some of the duties ``ServerRequest`` performs include:
+is assigned to ``$this->request``, and is available in Controllers, Cells and
+Views. You can also access it in Components using the controller reference.
+Some of the duties ``ServerRequest`` performs include:
 
 * Processing the GET, POST, and FILES arrays into the data structures you are
   familiar with.
