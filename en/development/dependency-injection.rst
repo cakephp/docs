@@ -148,10 +148,10 @@ An example ServiceProvider would look like::
 
     namespace App\ServiceProvider;
 
-    use Cake\Core\AbstractServiceProvider;
+    use Cake\Core\ServiceProvider;
     // Other imports here.
 
-    class BillingServiceProvider extends AbstractServiceProvider
+    class BillingServiceProvider extends ServiceProvider
     {
         protected $provides = [
             StripeService::class,
@@ -189,10 +189,10 @@ example of a bootable service would be::
 
     namespace App\ServiceProvider;
 
-    use Cake\Core\AbstractServiceProvider;
+    use Cake\Core\ServiceProvider;
     // Other imports here.
 
-    class BillingServiceProvider extends AbstractServiceProvider
+    class BillingServiceProvider extends ServiceProvider
     {
         protected $provides = [
             StripeService::class,
