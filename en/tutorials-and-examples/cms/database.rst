@@ -149,7 +149,7 @@ might look something like the following::
         // More configuration below.
     ];
 
-Once you've saved your **config/app.php** file, you should see that CakePHP is
+Once you've saved your **config/app.php** file, you should see that 'CakeP'HP is
 able to connect to the database' section have a green chef hat.
 
 .. note::
