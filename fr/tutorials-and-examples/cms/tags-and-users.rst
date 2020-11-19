@@ -31,10 +31,11 @@ et les validations pour vos models.
 Ajouter un système de Tags aux Articles
 =======================================
 
-Il serait utile et pratique d'avoir, pour notre application :abbr:`CMS`, un moyen
-de catégoriser notre contenu. Nous allons donc utiliser des tags pour permettre aux
-utilisateurs d'ajouter des catégories et des labels à leurs contenus. Une fois de plus,
-nous allons utiliser ``bake`` pour générer rapidement un code de base:
+Avec plusieurs utilisateurs capables d'accéder à notre petit CMS, il serait bien d'avoir,
+pour notre application :abbr:`CMS`, un moyen de catégoriser notre contenu. Nous allons donc
+utiliser des tags pour permettre aux utilisateurs d'ajouter des catégories et des labels à
+leurs contenus. Une fois de plus, nous allons utiliser ``bake`` pour générer rapidement un
+code de base:
 
 .. code-block:: bash
 
@@ -67,7 +68,6 @@ l'action ``add`` pour qu'elle ressemble à ceci::
 
     <?php
     // dans src/Controller/ArticlesController.php
-
     namespace App\Controller;
 
     use App\Controller\AppController;
@@ -80,8 +80,8 @@ l'action ``add`` pour qu'elle ressemble à ceci::
             if ($this->request->is('post')) {
                 $article = $this->Articles->patchEntity($article, $this->request->getData());
 
-                // Hardcoding the user_id is temporary, and will be removed later
-                // when we build authentication out.
+                // L'écriture de 'user_id' en dur est temporaire et
+                // sera supprimée quand nous aurons mis en place l'authentification.
                 $article->user_id = 1;
 
                 if ($this->Articles->save($article)) {
@@ -116,7 +116,7 @@ de trouver des articles par leurs tags.
 
 Vous devriez également mettre à jour la méthode ``edit`` pour permettre l'ajout
 et la modification de tags sur les articles existant. La méthode ``edit`` devrait
-maintenant ressemble à ceci::
+maintenant ressembler à ceci::
 
     public function edit($slug)
     {
@@ -158,7 +158,7 @@ Idéalement, nous voulons une URL qui ressemblera à
 **http://localhost:8765/articles/tagged/funny/cat/gifs**. Cela nous permettra
 de trouver tous les articles avec le tag 'funny', 'cat' ou 'gifs'. Nous avons tout
 d'abord besoin d'ajouter une nouvelle route. Votre fichier **config/routes.php**
-devra ressembler à::
+(avec les commentaires générés par bake supprimés) devra ressembler à::
 
     <?php
     use Cake\Routing\Route\DashedRoute;
@@ -166,45 +166,27 @@ devra ressembler à::
 
     Router::defaultRouteClass(DashedRoute::class);
 
-    // Ceci est la route à ajouter pour notre nouvelle action.
-    // Le `*` à la fin permet de préciser à CakePHP que cette action
-    // a des paramètres qui lui seront passés
-    Router::scope(
-        '/articles',
-        ['controller' => 'Articles'],
-        function ($routes) {
-            $routes->connect('/tagged/*', ['action' => 'tags']);
-        }
-    );
+    $routes->scope('/', function (RouteBuilder $builder) {
+        $builder->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
+        $builder->connect('/pages/*', ['controller' => 'Pages', 'action' => 'display']);
 
-    Router::scope('/', function ($routes) {
-        // Connect the default home and /pages/* routes.
-        $routes->connect('/', [
-            'controller' => 'Pages',
-            'action' => 'display', 'home'
-        ]);
-        $routes->connect('/pages/*', [
-            'controller' => 'Pages',
-            'action' => 'display'
-        ]);
+        // Ceci est la route à ajouter pour notre nouvelle action.
+        // Le `*` à la fin permet de préciser à CakePHP que cette action
+        // a des paramètres qui lui seront passés
+        $builder->scope('/articles', function (RouteBuilder $builder) {
+            $builder->connect('/tagged/*', ['controller' => 'Articles', 'action' => 'tags']);
+        });
 
-        // Connect the conventions based default routes.
-        $routes->fallbacks();
+        $builder->fallbacks();
     });
 
-    Plugin::routes();
-
 Le code ci-dessus définit une nouvelle 'route' qui permet de connecter le chemin
-URL **/articles/tagged/** à ``ArticlesController::tags()``. En définissant une nouvelle
-route, vous pouvez isoler le format de vos URLs de la manière dont elles sont implémentées.
+URL **/articles/tagged/** à ``ArticlesController::tags()``. En définissant des routes,
+vous pouvez isoler le format de vos URLs de la manière dont elles sont implémentées.
 Si nous venions à visiter **http://localhost:8765/articles/tagged**, nous verrions
 une page d'erreur de CakePHP vous indiquant que l'action du controller n'existe
 pas. Créons de ce pas cette nouvelle méthode. Dans **src/Controller/ArticlesController.php**,
 ajoutez ce qui suit::
-
-    // Ajouter ce 'use' juste sous la déclaration du namespace pour importer
-    // la classe Query
-    use Cake\ORM\Query;
 
     public function tags()
     {
@@ -215,9 +197,10 @@ ajoutez ce qui suit::
         // Utilisation de ArticlesTable pour trouver les articles taggés
         $articles = $this->Articles->find('tagged', [
             'tags' => $tags
-        ]);
+        ])
+        ->all();
 
-        // Passage des variable dans le contexte de la view du template
+        // Passage des variables dans le contexte de la view du template
         $this->set([
             'articles' => $articles,
             'tags' => $tags
@@ -236,7 +219,8 @@ variadic de PHP::
         // Utilisation de ArticlesTable pour trouver les articles taggés
         $articles = $this->Articles->find('tagged', [
             'tags' => $tags
-        ]);
+        ])
+        ->all();
 
         // Passage des variable dans le contexte de la view du template
         $this->set([
@@ -295,16 +279,17 @@ retourner une instance modifiée de l'objet query. Dans notre finder, nous utili
 les méthodes ``distinct()`` et ``leftJoin()`` qui nous permettent de trouver les articles
 différents qui ont les tags correspondant.
 
-Création de la view
+Création de la View
 -------------------
 
 Si vous visitez à nouveau **/articles/tagged**, CakePHP vous affichera une nouvelle
-erreur qui vous fait savoir qu'il manque le fichier de view. Créez le fichier
-**templates/Articles/tags.php** et ajoutez le contenu suivant::
+erreur qui vous fait savoir qu'il manque le fichier de view. A présent, créons le fichier
+de vue pour notre action ``tags()`` action::
 
+    <!-- Dans templates/Articles/tags.php -->
     <h1>
         Articles avec les tags
-        <?= $this->Text->toList(h($tags), 'ou') ?>
+        <?= $this->Text->toList(h($tags), 'or') ?>
     </h1>
 
     <section>
@@ -315,7 +300,7 @@ erreur qui vous fait savoir qu'il manque le fichier de view. Créez le fichier
                 $article->title,
                 ['controller' => 'Articles', 'action' => 'view', $article->slug]
             ) ?></h4>
-            <span><?= h($article->created) ?>
+            <span><?= h($article->created) ?></span>
         </article>
     <?php endforeach; ?>
     </section>
@@ -334,7 +319,7 @@ Vous avez peut-être remarqué que nous utilisons les variables ``$tags`` et
 ``$articles`` dans notre template de view. Quand nous utilisons la méthode
 ``set()`` dans notre controller, nous définissons les variables qui doivent
 être envoyées à notre view. La classe View fera alors en sorte de passer les
-variables au scope du template comme variables "locales".
+variables au scope du template comme variables locales.
 
 Vous devriez maintenant être capable de visiter la page **/articles/tagged/funny**
 et voir tous les articles avec le tag 'funny'.
@@ -352,13 +337,18 @@ Ajouter un Champ Pré-calculé
 ----------------------------
 
 Puisque nous souhaitons une manière simple d'accéder aux tags formattés pour une
-entity, nous ajoutons un champ virtuel / pré-calculé pour l'entity. Dans
+entity, nous ajoutons un champ virtuel/pré-calculé pour l'entity. Dans
 **src/Model/Entity/Article.php** ajoutez la méthode suivante::
 
     // Ajouter ce 'use' juste sous la déclaration du namespace pour importer
     // la classe Collection
     use Cake\Collection\Collection;
 
+    // Mettez à jour la propriété accessible pour qu'elle contienne `tag_string`
+    protected $_accessible = [
+        //autres champs...
+        'tag_string' => true
+    ];
     protected function _getTagString()
     {
         if (isset($this->_fields['tag_string'])) {
@@ -375,7 +365,7 @@ entity, nous ajoutons un champ virtuel / pré-calculé pour l'entity. Dans
     }
 
 Cela nous permettra d'accéder à la propriété virtuelle ``$article->tag_string``.
-Nous utiliserons cette propriété plus tard.
+Nous utiliserons cette propriété plus tard dans nos contrôles (control).
 
 Mettre à jour nos View
 ----------------------
@@ -388,14 +378,25 @@ suivante::
 
     echo $this->Form->control('tag_string', ['type' => 'text']);
 
+
+Nous devrons également mettre à jour le modèle de vue d'article. Dans
+**templates/Articles/view.php**, ajoutez la ligne comme indiqué:
+
+    <!-- Fichier: templates/Articles/view.php -->
+
+    <h1><?= h($article->title) ?></h1>
+    <p><?= h($article->body) ?></p>
+    // Add the following line
+    <p><b>Tags:</b> <?= h($article->tag_string) ?></p>
+
 Persister la Chaîne de Tags
 ---------------------------
 
 Maintenant que nous voyons les tags existant sous forme d'une chaîne, nous avons
 besoin de sauvegarder les tags sous ce format. Puisque que nous avons rendu ``tag_string``
 accessible, l'ORM copiera les données de la requête dans notre entity. Nous
-pouvons utiliser le hook ``beforeSave()`` pour parser la chaîne de tags et trouver /
-construire les entities correspondantes. Ajoutez le code suivant à
+pouvons utiliser le hook ``beforeSave()`` pour parser la chaîne de tags et
+trouver/construire les entities correspondantes. Ajoutez le code suivant à
 **src/Model/Table/ArticlesTable.php**::
 
     public function beforeSave($event, $entity, $options)
@@ -418,7 +419,8 @@ construire les entities correspondantes. Ajoutez le code suivant à
 
         $out = [];
         $query = $this->Tags->find()
-            ->where(['Tags.title IN' => $newTags]);
+            ->where(['Tags.title IN' => $newTags])
+            ->all();
 
         // Retire les tags existant de la liste des nouveaux tags.
         foreach ($query->extract('title') as $existing) {
@@ -438,10 +440,66 @@ construire les entities correspondantes. Ajoutez le code suivant à
         return $out;
     }
 
+Si vous créez ou modifiez maintenant des articles, vous devriez pouvoir enregistrer les balises
+sous forme de liste de balises séparées par des virgules et créer automatiquement les balises et
+les enregistrements de liaison.
+
 Bien que ce code soit plus compliqué que tout ce que nous avons fait jusqu'ici,
 il permet de mettre en avant les fonctions avancées de l'ORM : vous pouvez manipuler
 le résultat de la requête en utilisant les méthodes de la classe Collection
 (voir la section :doc:`/core-libraries/collections`) et pouvez également gérer
 les scénarios où vous avez besoin de créer des entities à la volée.
 
-Dans le chapitre suivant, nous ajouter une couche :doc:`d'authentification <authentication>`.
+
+Remplir automatiquement les Tags
+================================
+
+Avant de terminer, nous aurons besoin d'un mécanisme qui chargera les Tag associés (le cas échéant)
+chaque fois que nous chargerons un article.
+
+Dans votre **src/Model/Table/ArticlesTable.php**, changez::
+
+    public function initialize(array $config): void
+    {
+        $this->addBehavior('Timestamp');
+        // Modifiez cette ligne
+        $this->belongsToMany('Tags', [
+            'joinTable' => 'articles_tags',
+            'dependent' => true
+        ]);
+    }
+
+
+Cela indiquera au modèle de table Articles qu'une table de jointure est associée
+avec des tags. L'option 'dépendent' indique à la table de supprimer tout
+enregistrement associé de la table de jointure si un article est supprimé.
+
+Enfin, mettez à jour les appels de la méthode ``findBySlug()`` dans
+**src/Controller/ArticlesController.php**::
+
+    public function edit($slug)
+    {
+        // Mettez à jour cette ligne
+        $article = $this->Articles
+            ->findBySlug($slug)
+            ->contain('Tags')
+            ->firstOrFail();
+    ...
+    }
+
+    public function view($slug = null)
+    {
+        // Mettez à jour cette ligne
+        $article = $this->Articles
+            ->findBySlug($slug)
+            ->contain('Tags')
+            ->firstOrFail();
+        $this->set(compact('article'));
+    }
+
+La méthode ``contain ()`` indique à l'objet ``ArticlesTable`` de remplir également l'association
+Tags lorsque l'article est chargé. Maintenant, quand tag_string est appelé pour
+une entité Article, il y aura des données présentes pour créer la chaîne!
+
+Dans le chapitre suivant, nous ajouter une couche
+:doc:`d'authentification </tutorials-and-examples/cms/authentication>`.
