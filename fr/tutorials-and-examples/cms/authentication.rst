@@ -194,7 +194,7 @@ l'utilisateur sur la page ``/users/login``.
 Notez qu'à ce stade, le site ne fonctionnera pas car nous n'avons pas encore de page de connexion.
 Si vous visitez votre site, vous obtiendrez une "boucle de redirection infinie", allons corriger cela.
 
-Dans votre ``UsersController`, ajoutez le code suivant::
+Dans votre ``UsersController``, ajoutez le code suivant::
 
     public function beforeFilter(\Cake\Event\EventInterface $event)
     {
