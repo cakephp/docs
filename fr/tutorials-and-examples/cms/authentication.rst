@@ -304,13 +304,6 @@ redirigé sur la page de connexion. Puisque nous voulons autoriser nos utilisate
     // Ajoutez la méthode beforeFilter au UsersController
     $this->Authentication->addUnauthenticatedActions(['login', 'add']);
 
-The above tells ``AuthenticationComponent`` that the ``add()`` action of the
-``UsersController`` does *not* require authentication or authorization. You may
-want to take the time to clean up the **Users/add.php** and remove the
-misleading links, or continue on to the next section. We won't be building out
-user editing, viewing or listing in this tutorial, but that is an exercise you
-can complete on your own.
-
 Le code ci-dessus indique à ``AuthenticationComponent`` que la méthode ``add()`` du
 ``UsersController`` peut être visitée *sans* être authentifié ou avoir besoin
 d'autorisation. Vous pouvez prendre le temps de nettoyer **Users/add.php**
