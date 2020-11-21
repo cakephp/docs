@@ -380,7 +380,7 @@ suivante::
 
 
 Nous devrons également mettre à jour le modèle de vue d'article. Dans
-**templates/Articles/view.php**, ajoutez la ligne comme indiqué:
+**templates/Articles/view.php**, ajoutez la ligne comme indiqué::
 
     <!-- Fichier: templates/Articles/view.php -->
 
