@@ -12,7 +12,7 @@ Use composer to install the Auhorization Plugin:
 
 .. code-block:: bash
 
-    composer require cakephp/authorization:^2.0
+    composer require "cakephp/authorization:^2.0"
 
 Load the plugin by adding the following statement to the ``bootstrap()`` method in **src/Application.php**::
 
@@ -173,7 +173,7 @@ name::
 Lastly add the following to the ``tags``, ``view``, and ``index`` methods on the
 ``ArticlesController``::
 
-    // View, index and tags actions are public methods 
+    // View, index and tags actions are public methods
     // and don't require authorization checks.
     $this->Authorization->skipAuthorization();
 
