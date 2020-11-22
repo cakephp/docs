@@ -12,7 +12,7 @@ Utilisez composer pour installer le plugin Authorization:
 
 .. code-block:: bash
 
-    composer require cakephp/authorization:^2.0
+    composer require "cakephp/authorization:^2.0"
 
 Chargez le plugin en ajoutant le code suivant à la méthode ``bootstrap()`` dans le fichier **src/Application.php**::
 

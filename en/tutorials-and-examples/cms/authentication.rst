@@ -14,7 +14,7 @@ Use composer to install the Authentication Plugin:
 
 .. code-block:: bash
 
-    composer require cakephp/authentication:^2.0
+    composer require "cakephp/authentication:^2.0"
 
 
 Adding Password Hashing
@@ -23,7 +23,7 @@ Adding Password Hashing
 You need to have created the ``Controller``, ``Table``, ``Entity`` and
 templates for the ``users`` table in your database. You can do this manually
 like you did before for the ArticlesController, or you can use the bake shell
-to generate the classes for you using: 
+to generate the classes for you using:
 
 .. code-block:: bash
 

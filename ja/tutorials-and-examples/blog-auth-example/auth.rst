@@ -120,7 +120,7 @@ composerを使ってAuthenticationプラグインをインストールします�
 
 .. code-block:: bash
 
-    composer require cakephp/authentication:^2.0
+    composer require "cakephp/authentication:^2.0"
 
 
 パスワードハッシュの追加
