@@ -863,7 +863,7 @@ result set.
 Changing Fetching Strategies
 ============================
 
-As mentioned in ref:`contain-conditions`, you can customize the ``strategy``
+As mentioned in :ref:`contain-conditions`, you can customize the ``strategy``
 used by an association in a ``contain()``.
 
 If you look at ``BelongsTo`` and ``HasOne`` ref:`associations` options,

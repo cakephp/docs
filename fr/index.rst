@@ -41,7 +41,7 @@ des tâches les plus communément effectuées. Si vous êtes nouveau, vous devri
 commencer avec le :doc:`/quickstart` puisqu'il vous donne
 un aperçu rapide de ce que CakePHP peut vous offrir et comment il fonctionne.
 
-Après avoir fini le Tutoriel du Bookmarker, vous pouvez regarder les éléments
+Après avoir fini le Tutoriel du Quickstart, vous pouvez regarder les éléments
 clés d'une application CakePHP:
 
 * Le :ref:`cycle de requête de CakePHP <request-cycle>`
@@ -57,4 +57,4 @@ clés d'une application CakePHP:
 
 .. meta::
     :title lang=fr: .. Documentation CakePHP
-    :keywords lang=fr: modèles,models,documentation,présentation vue,documentation du projet,démarrage rapide,source original,sphinx,liens,livre de cuisine,conventions,validation,cakephp,stockage et récupération,cœur,blog,projet
+:keywords lang=fr: modèles,models,documentation,présentation vue,documentation du projet,démarrage rapide,source original,sphinx,liens,livre de cuisine,conventions,validation,cakephp,stockage et récupération,cœur,blog,projet
