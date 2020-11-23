@@ -944,7 +944,7 @@ en utilisant la méthode :php:meth:`Cake\\Routing\\RouteBuilder::extensions()`.
 
 En utilisant des extensions, vous dites au router de supprimer toutes les
 extensions de fichiers correspondant, puis d'analyser le reste. Si vous
-souhaitez créer une URL comme /page/title-of-page.html vous devriez créer
+souhaitez créer une URL comme ``/page/title-of-page.html`` vous devriez créer
 un scope comme ceci::
 
     $routes->scope('/page', function (RouteBuilder $routes) {
