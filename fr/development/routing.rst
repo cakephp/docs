@@ -1434,7 +1434,7 @@ un identifiant d'article pour identifier l'article auquel le commentaire fait r�
 Voici les URL correspondant à ce scénario::
 
    /articles/index/42
-    /comments/index/42/18
+  /comments/index/42/18
 
 Lorsque l'auteur utilise ces pages, il serait pratique d'inclure des liens
 qui permettent d'afficher la page avec tous les résultats, publiés uniquement,
