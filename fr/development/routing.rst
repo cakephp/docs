@@ -894,7 +894,7 @@ n'importe quelle sous-domaine::
 
 L'option ``_host`` est également utilisée dans la génération d'URL. Si votre option ``_host``
 spécifie un domaine exact, ce domaine sera inclus dans l'URL générée.
-Cependant, si vous utilisez un caractère générique, vous devrez fournir le ``_host`
+Cependant, si vous utilisez un caractère générique, vous devrez fournir le ``_host``
 paramètre lors de la génération d'URL::
 
     // Si vous avez cette route
