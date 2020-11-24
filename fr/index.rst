@@ -57,4 +57,4 @@ clés d'une application CakePHP:
 
 .. meta::
     :title lang=fr: .. Documentation CakePHP
-:keywords lang=fr: modèles,models,documentation,présentation vue,documentation du projet,démarrage rapide,source original,sphinx,liens,livre de cuisine,conventions,validation,cakephp,stockage et récupération,cœur,blog,projet
+    :keywords lang=fr: modèles,models,documentation,présentation vue,documentation du projet,démarrage rapide,source original,sphinx,liens,livre de cuisine,conventions,validation,cakephp,stockage et récupération,cœur,blog,projet

@@ -1,28 +1,20 @@
 Installation
 ############
 
-CakePHP est rapide et facile à installer. Les conditions minimales requises sont
-un serveur web et une copie de CakePHP, c'est tout! Bien que ce manuel se
-focalise principalement sur la configuration avec Apache (parceque c'est la plus
-simple à installer et configurer), CakePHP fonctionnera sur une diversité de
-serveurs web tels que nginx, LightHTTPD ou Microsoft IIS.
+CakePHP a quelques exigences système:
 
-Exigences
-=========
-
-- Un serveur HTTP. Par exemple: Apache. mod\_rewrite est préférable, mais en
-  aucun cas nécessaire.
-- PHP |minphpversion| ou plus (y compris PHP |phpversion|)
+- Un serveur HTTP. Par exemple: Apache. Avoir mod\_rewrite est préférable, mais
+  en aucun cas nécessaire. Vous pouvez également utiliser nginx ou Microsoft IIS si vous préférez.
+- PHP minimum |minphpversion| (|phpversion| pris en charge).
 - L'extension PHP mbstring
 - L'extension PHP intl
 - L'extension PHP simplexml
+- L'extension PHP PDO
 
 .. note::
 
-    Avec XAMPP et WAMP, l'extension mbstring fonctionne par défaut.
-
     Dans XAMPP, l'extension intl est incluse mais vous devez décommenter
-    ``extension=php_intl.dll`` dans **php.ini** et redémarrer le serveur dans
+    ``extension=php_intl.dll`` (ou ``extension=intl``) dans **php.ini** et redémarrer le serveur dans
     le Panneau de Contrôle de XAMPP.
 
     Dans WAMP, l'extension intl est "activée" par défaut mais ne fonctionne pas.
@@ -36,11 +28,14 @@ Techniquement, un moteur de base de données n'est pas nécessaire, mais nous
 imaginons que la plupart des applications vont en utiliser un. CakePHP
 supporte une diversité de moteurs de stockage de données:
 
--  MySQL (5.5.3 ou supérieur)
--  MariaDB (5.5 ou supérieur)
--  PostgreSQL
--  Microsoft SQL Server (2008 ou supérieur)
+-  MySQL (5.6 ou supérieur)
+-  MariaDB (5.6 ou supérieur)
+-  PostgreSQL (9.4 ou supérieur)
+-  Microsoft SQL Server (2012 ou supérieur)
 -  SQLite 3
+
+La base de données Oracle est prise en charge via le plugin communautaire
+`Pilote pour Oracle Database <https://github.com/CakeDC/cakephp-oracle-driver>` _.
 
 .. note::
 
@@ -56,8 +51,9 @@ Avant de commencer, vous devez vous assurer que votre version de PHP est à jour
 
     php -v
 
-Vous devez avoir PHP |minphpversion| (CLI) ou supérieur. Le serveur web doit
-utiliser la même version de PHP que votre interface en ligne de commande.
+Vous devez avoir PHP |minphpversion| (CLI) ou supérieur.
+La version PHP de votre serveur Web doit également être de |minphpversion| ou supérieur, le
+serveur web doit utiliser la même version de PHP que votre interface en ligne de commande (CLI).
 
 Installer Composer
 ------------------
@@ -85,21 +81,14 @@ dépendances comme méthode officielle supportée pour l'installation.
 Créer un Projet CakePHP
 -----------------------
 
-Maintenant que vous avez téléchargé et installé Composer, imaginons que vous
-souhaitiez créer une nouvelle application CakePHP dans le dossier my_app_name.
-Pour ceci vous pouvez lancer la commande suivante:
+Vous pouvez créer une nouvelle application CakePHP en utilisant la commande ``create-project``
+de Composer:
 
 .. code-block:: bash
 
-    php composer.phar create-project --prefer-dist cakephp/app:4.* my_app_name
+    composer create-project --prefer-dist cakephp/app:~4.0 my_app_name
 
-Ou si Composer est installé globalement:
-
-.. code-block:: bash
-
-    composer self-update && composer create-project --prefer-dist cakephp/app:4.* my_app_name
-
-Une fois que Composer finit le téléchargement du squelette de l'application et
+Une fois que Composer a fini le téléchargement du squelette de l'application et
 du cœur de la librairie de CakePHP, vous devriez avoir une application CakePHP
 fonctionnelle, installée via Composer. Assurez-vous de garder les fichiers
 composer.json et composer.lock avec le reste de votre code source.
@@ -121,27 +110,14 @@ Rester à jour avec les derniers changements de CakePHP
 
 Par défaut le **composer.json** de l'application ressemble à cela::
 
-    "require": {
-        "cakephp/cakephp": "3.8.*"
+   "require": {
+        "cakephp/cakephp": "4.0.*"
     }
 
 A chaque fois que vous exécutez ``php composer.phar update``, vous recevrez
 des correctifs pour cette version mineure. Vous pouvez cependant modifier la
 version de CakePHP en ``^4.0`` pour recevoir également les dernières versions
-mineures stables de la branche 3.x.
-
-Si vous voulez rester à jour avec les derniers changements non stables de
-CakePHP, vous pouvez changer la version en ``dev-master`` le
-**composer.json** de votre application::
-
-    "require": {
-        "cakephp/cakephp": "dev-master"
-    }
-
-Notez que ce n'est pas recommandé, puisque votre application peut cesser de
-fonctionner quand la prochaine version majeure sera déployée. De plus,
-Composer ne met pas en cache les branches de développement, ce qui ralentit
-les Composer installs/updates consécutifs.
+mineures stables de la branche ``4.x``.
 
 Installation en utilisant Oven
 ------------------------------
@@ -151,7 +127,6 @@ Il s'agit d'un simple script PHP qui vérifie si vous respectez les
 recommandations systèmes, installe le squelette d'application CakePHP et met
 en place l'environnement de développement.
 
-Après l'installation, votre application CakePHP est prête !
 
 .. note::
 
@@ -171,7 +146,7 @@ session en sont juste quelques exemples.
 Le répertoire **logs** est utilisé pour écrire les fichiers de log par le
 moteur par défaut ``FileLog``.
 
-De même, assurez-vous que les répertoires **logs**, **tmp** et tous ses
+A ce titre, assurez-vous que les répertoires **logs**, **tmp** et tous ses
 sous-répertoires dans votre installation CakePHP sont accessibles en
 écriture pour l'utilisateur du serveur web. Le processus d'installation
 avec Composer va rendre **tmp** et ses sous-dossiers accessibles en écriture
@@ -195,7 +170,7 @@ dans votre projet pour vous assurer que les permissions sont bien configurées:
    setfacl -R -d -m u:${HTTPDUSER}:rwx logs
 
 Si vous souhaitez utiliser les outils de la console CakePHP, vous devez vous
-assurer que le fichier ``bin/cake`` (ou ``bin/cake.php``) est exécutable. Sur
+assurer que le fichier ``bin/cake`` est exécutable. Sur
 \*nix ou macOS, vous pouvez simplement exécuter la commande suivante:
 
 .. code-block:: bash
@@ -204,7 +179,7 @@ assurer que le fichier ``bin/cake`` (ou ``bin/cake.php``) est exécutable. Sur
 
 Sur Windows, le fichier **.bat** devrait déjà être exécutable. Si vous utilisez
 Vagrant ou un autre environnement virtualisé, tous les dossiers partagés devront
-être partagés avec des permissions d'exécutions (veuillez vous référer à la
+être partagés avec des permissions d'exécution (veuillez vous référer à la
 documentation de votre environnement virtualisé pour savoir comment procéder).
 
 Si, pour une quelconque raison, vous ne pouvez pas changer les permissions du
@@ -274,12 +249,14 @@ dans un répertoire de votre choix, nous considérerons que vous avez choisi
 le répertoire /cake_install, votre installation de production devrait
 ressembler à quelque chose comme ceci dans votre système de fichiers::
 
-    /cake_install/
+   /cake_install/
         bin/
         config/
         logs/
         plugins/
+        resources/
         src/
+        templates/
         tests/
         tmp/
         vendor/
@@ -323,7 +300,7 @@ Réécriture d'URL
 Apache
 ------
 
-Bien que CakePHP soit conçu pour fonctionner avec mod\_rewrite, et c'est
+Bien que CakePHP soit conçu par défaut pour fonctionner avec mod\_rewrite, et c'est
 généralement le cas, nous avons remarqué que quelques utilisateurs ont du
 mal à faire en sorte que tout se passe bien sur leurs systèmes.
 
@@ -378,7 +355,7 @@ http://wiki.apache.org/httpd/DistrosDefaultLayout pour plus d'informations.
 
 #. Assurez-vous que votre copie de CakePHP provient de la section
    téléchargements du site ou de notre dépôt Git, et qu'elle a été
-   décompressée correctement, en vérifiant les fichiers.htaccess.
+   décompressée correctement, en vérifiant les fichiers .htaccess.
 
    Le répertoire app de CakePHP (sera copié dans le répertoire supérieur de
    votre application par bake):
@@ -399,7 +376,7 @@ http://wiki.apache.org/httpd/DistrosDefaultLayout pour plus d'informations.
        <IfModule mod_rewrite.c>
            RewriteEngine On
            RewriteCond %{REQUEST_FILENAME} !-f
-           RewriteRule ^ index.php [QSA,L]
+           RewriteRule ^ index.php [L]
        </IfModule>
 
    Si votre site CakePHP a toujours des problèmes avec mod\_rewrite,
@@ -536,6 +513,72 @@ Un exemple de la directive server est le suivant:
     (ex: fastcgi_pass unix:/var/run/php/php7.1-fpm.sock;) au lieu du port
     TCP.
 
+NGINX Unit
+----------
+
+`NGINX Unit <https://unit.nginx.org>`_ est configurable dynamiquement en runtime;
+la configuration suivante repose sur ``webroot/index.php`, servant également d'autres
+Scripts ``.php`` s'ils sont présents via ``cakephp_direct``:
+
+.. code-block:: json
+
+   {
+       "listeners": {
+           "*:80": {
+               "pass": "routes/cakephp"
+           }
+       },
+
+       "routes": {
+           "cakephp": [
+               {
+                   "match": {
+                       "uri": [
+                           "*.php",
+                           "*.php/*"
+                       ]
+                   },
+
+                   "action": {
+                       "pass": "applications/cakephp_direct"
+                   }
+               },
+               {
+                   "action": {
+                       "share": "/path/to/cakephp/webroot/",
+                       "fallback": {
+                           "pass": "applications/cakephp_index"
+                       }
+                   }
+               }
+           ]
+       },
+
+       "applications": {
+           "cakephp_direct": {
+               "type": "php",
+               "root": "/path/to/cakephp/webroot/",
+               "user": "www-data"
+           },
+
+           "cakephp_index": {
+               "type": "php",
+               "root": "/path/to/cakephp/webroot/",
+               "user": "www-data",
+               "script": "index.php"
+           }
+       }
+   }
+
+Pour activer cette configuration (en supposant qu'elle soit enregistrée sous ``cakephp.json``):
+
+.. code-block:: console
+
+   # curl -X PUT --data-binary @cakephp.json --unix-socket \
+          /path/to/control.unit.sock http://localhost/config
+
+
+
 IIS7 (serveurs Windows)
 -----------------------
 
@@ -568,7 +611,7 @@ Pour ce faire, suivez les étapes suivantes:
                     </rule>
                     <rule name="Rewrite routed access to assets(img, css, files, js, favicon)"
                       stopProcessing="true">
-                        <match url="^(img|css|files|js|favicon.ico)(.*)$" />
+                        <match url="^(font|img|css|files|js|favicon.ico)(.*)$" />
                         <action type="Rewrite" url="webroot/{R:1}{R:2}"
                           appendQueryString="false" />
                     </rule>
@@ -586,6 +629,35 @@ Pour ce faire, suivez les étapes suivantes:
 Une fois que le fichier web.config est créé avec les bonnes règles de
 réécriture IIS, les liens CakePHP, les CSS, le JavaScript, et
 le reroutage devraient fonctionner correctement.
+
+Lighttpd
+--------
+Lighttpd n'utilise pas de fichiers **.htaccess** comme Apache, il est donc
+nécessaire d'ajouter une configuration ``url.rewrite-once`` dans **conf/lighttpd.conf**.
+Assurez-vous que les éléments suivants sont présents dans votre configuration lighthttpd:
+
+.. code-block:: php
+
+    server.modules += (
+        "mod_alias",
+        "mod_cgi",
+        "mod_rewrite"
+    )
+
+    # Directory Alias
+    alias.url       = ( "/TestCake" => "C:/Users/Nicola/Documents/TestCake" )
+
+    # CGI Php
+    cgi.assign      = ( ".php" => "c:/php/php-cgi.exe" )
+
+    # Rewrite Cake Php (on /TestCake path)
+    url.rewrite-once = (
+        "^/TestCake/(css|files|img|js|stats)/(.*)$" => "/TestCake/webroot/$1/$2",
+        "^/TestCake/(.*)$" => "/TestCake/webroot/index.php/$1"
+    )
+
+Les lignes ci-dessus incluent la configuration PHP CGI et un exemple de configuration d'une application
+pour le chemin ``/TestCake``.
 
 Je ne peux pas utiliser la réécriture d'URL
 -------------------------------------------

@@ -40,7 +40,7 @@ Le code de notre action index sera le suivant::
     }
 
 Maintenant que nous avons une méthode ``index()`` dans notre ``ArticlesController``,
-les utilisateurs peuvent maintenant y accéder via **www.example.com/articles/index**.
+les utilisateurs peuvent y accéder via **www.example.com/articles/index**.
 De la même manière, si nous définissions une méthode ``foobar()``, les utilisateurs
 pourraient y accéder via **www.example.com/articles/foobar**. Vous pourriez être tenté
 de nommer vos controllers et vos actions afin d'obtenir des URL spécifiques. Cependant,
@@ -50,7 +50,7 @@ ensuite utiliser le :doc:`/development/routing` pour obtenir les URLs que vous
 souhaitez et les connecter aux actions que vous avez créées.
 
 Notre action est très simple. Elle récupère un jeu d'articles paginés dans la base de
-données en utilisant l'objet model Articles qui est chargé automatiquement via les
+données en utilisant l'objet Model Articles qui est chargé automatiquement via les
 conventions de nommage. Elle utilise ensuite la méthode ``set()`` pour passer les
 articles récupérés au Template (que nous créerons par la suite). CakePHP va
 automatiquement rendre le Template une fois que notre action de Controller sera
@@ -67,14 +67,14 @@ le layout de votre application. Bien que nous créerons du HTML ici, les Views
 peuvent générer du JSON, du CSV ou même des fichiers binaires comme des PDFs.
 
 Un layout est le code de présentation qui englobe la view d'une action. Les fichiers
-de layout contiennent les éléments communs comme les headers, les footers et les
+de layout contiennent les éléments communs au site comme les headers, les footers et les
 éléments de navigation. Votre application peut très bien avoir plusieurs layouts et
 vous pouvez passer de l'un à l'autre. Mais pour le moment, utilisons seulement le
 layout par défaut.
 
-Les fichiers de template de CakePHP sont stockés dans **src/Template** et dans
+Les fichiers de template de CakePHP sont stockés dans **templates** et dans
 un dossier au nom du controller auquel ils sont attachés. Nous devons donc
-créer un dossier nommé 'Articles' dans notre cas. Ajouter le code suivant
+créer un dossier nommé 'Articles' dans notre cas. Ajoutez le code suivant
 dans ce fichier:
 
 .. code-block:: php
@@ -104,7 +104,7 @@ dans ce fichier:
 
 Dans la précédente section, nous avons assigné la variable 'articles' à la view en
 utilisant la méthode ``set()``. Les variables passées à la view sont disponibles dans
-les templates de view comme des "variables locales", comme nous l'avons fait ci-dessus.
+les templates de view comme des variables locales, comme nous l'avons fait ci-dessus.
 
 Vous avez peut-être remarqué que nous utilisons un objet appelé ``$this->Html``.
 C'est une instance du :doc:`HtmlHelper </views/helpers/html>`. CakePHP inclut
@@ -126,7 +126,7 @@ Création de l'action View
 
 Si vous cliquez sur le lien d'un article dans la page qui liste nos articles,
 vous tombez sur une page d'erreur vous indiquant que l'action n'a pas été implémentée.
-Vous pouvez corrigez cette erreur en créant l'action manquante correspondante::
+Vous pouvez corriger cette erreur en créant l'action manquante correspondante::
 
     // Ajouter au fichier existant src/Controller/ArticlesController.php
 
@@ -136,7 +136,7 @@ Vous pouvez corrigez cette erreur en créant l'action manquante correspondante::
         $this->set(compact('article'));
     }
 
-Bien que cette action soit simple, nous avons utilisez quelques-unes des fonctionnalités
+Bien que cette action soit simple, nous avons utilisé quelques-unes des fonctionnalités
 de CakePHP. Nous commençons par utiliser la méthode ``findBySlug()`` qui est un
 :ref:`finder dynamique <dynamic-finders>`. Cette méthode nous permet de créer
 une requête basique qui permet de récupérer des articles par un "slug" donné.
@@ -145,12 +145,12 @@ le premier enregistrement ou lancera une ``NotFoundException`` si aucun article
 correspondant n'est trouvé.
 
 Notre action attend un paramètre ``$slug``, mais d'où vient-il ? Si un utilisateur
-requête ``/articles/view/first-post``, alors la valeur 'first-post' sera passé
+requête ``/articles/view/first-post``, alors la valeur 'first-post' sera passée
 à ``$slug`` par la couche de routing et de dispatching de CakePHP. Si nous rechargeons
 notre navigateur, nous aurons une nouvelle erreur, nous indiquant qu'il manque un template
-de View.
+de View; corrigeons cela.
 
-Création du template View
+Création du Template View
 =========================
 
 Créons le template de view pour notre action "view" dans
@@ -212,7 +212,7 @@ la création d'articles. Commencez par créer une action ``add()`` dans le
                 $article = $this->Articles->patchEntity($article, $this->request->getData());
 
                 // L'écriture de 'user_id' en dur est temporaire et
-                // sera supprimé quand nous aurons mis en place l'authentification.
+                // sera supprimée quand nous aurons mis en place l'authentification.
                 $article->user_id = 1;
 
                 if ($this->Articles->save($article)) {
@@ -254,11 +254,11 @@ que nous avons créée plus tôt.
 
 Après la sauvegarde de notre article, nous utilisons la méthode ``success()`` du
 FlashComponent pour définir le message en Session. La méthode ``success`` est
-fournie via `les méthodes magiquesde PHP
+fournie via `les méthodes magiques de PHP
 <http://php.net/manual/en/language.oop5.overloading.php#object.call>`_.
 Les messages Flash seront affichés sur la page suivante après redirection. Dans
 notre layout, nous avons ``<?= $this->Flash->render() ?>`` qui affichera un message
-Flash et le supprimera du stockage de Session. Enfin, après la sauvegarde, nous
+Flash et le supprimera du stockage dans la session. Enfin, après la sauvegarde, nous
 utilisons :php:meth:`Cake\\Controller\\Controller::redirect` pour renvoyer
 l'utilisateur à la liste des articles. Le paramètre ``['action' => 'index']``
 correspond à l'URL ``/articles``, c'est-à-dire l'action index du ``ArticlesController``.
@@ -273,18 +273,20 @@ Voici le code de notre template de la view "add":
 
 .. code-block:: php
 
-    <!-- Fichier : templates/Articles/add.php -->
+    <!-- File: templates/Articles/add.php -->
 
     <h1>Ajouter un article</h1>
     <?php
         echo $this->Form->create($article);
+        // Hard code the user for now.
+        echo $this->Form->control('user_id', ['type' => 'hidden', 'value' => 1]);
         echo $this->Form->control('title');
         echo $this->Form->control('body', ['rows' => '3']);
         echo $this->Form->button(__('Sauvegarder l\'article'));
         echo $this->Form->end();
     ?>
 
-Nous utilisons le FormHelper pour générer l'ouverture du form HTML.
+Nous utilisons le FormHelper pour générer l'ouverture du formulaire HTML.
 Voici le HTML que ``$this->Form->create()`` génère:
 
 .. code-block:: html
@@ -319,11 +321,15 @@ créons pas l'attribut "slug" et la colonne correspondante est définie comme
 d'un article. Nous pouvons utiliser le :ref:`callback beforeSave() <table-callbacks>`
 de l'ORM pour créer notre slug::
 
+    <?php
     // dans src/Model/Table/ArticlesTable.php
+    namespace App\Model\Table;
 
-    // Ajoutez ce "use" juste sous la déclaration du namespace
-    // pour importer la classe Text
+    use Cake\ORM\Table;
+    // la classe Text
     use Cake\Utility\Text;
+    // la classe EventInterface
+    use Cake\Event\EventInterface;
 
     // Ajouter la méthode suivante
 
@@ -344,8 +350,8 @@ Ajout de l'action Edit
 ======================
 
 Notre application peut maintenant sauvegarder des articles, mais nous ne pouvons
-pas modifier les articles existants. Ajoutez l'action suivante dans votre
-``ArticlesController``::
+pas modifier les articles existants. Rectifions cela maintenant. Ajoutez l'action suivante
+dans votre ``ArticlesController``::
 
     // dans src/Controller/ArticlesController.php
 
@@ -353,7 +359,10 @@ pas modifier les articles existants. Ajoutez l'action suivante dans votre
 
     public function edit($slug)
     {
-        $article = $this->Articles->findBySlug($slug)->firstOrFail();
+        $article = $this->Articles
+            ->findBySlug($slug)
+            ->firstOrFail();
+
         if ($this->request->is(['post', 'put'])) {
             $this->Articles->patchEntity($article, $this->request->getData());
             if ($this->Articles->save($article)) {
@@ -369,7 +378,7 @@ pas modifier les articles existants. Ajoutez l'action suivante dans votre
 Cette action va d'abord s'assurer que l'utilisateur essaie d'accéder à un
 enregistrement existant. Si vous n'avez pas passé de paramètre ``$slug`` ou que
 l'article n'existe pas, une ``NotFoundException`` sera lancée et le ErrorHandler
-rendra la page d'erreur appropriée.
+de CakePHP rendra la page d'erreur appropriée.
 
 Ensuite l'action va vérifier si la requête est une requête POST ou PUT. Si c'est le cas,
 nous utiliserons alors les données du POST/PUT pour mettre à jour l'entity de l'article
@@ -377,7 +386,7 @@ en utilisant la méthode ``patchEntity()``. Enfin, nous appelons la méthode ``s
 nous définissons un message Flash approprié et soit nous redirigeons, soit nous affichons
 les erreurs de validation en fonction du résultat de l'opération de sauvegarde.
 
-Création du template Edit
+Création du Template Edit
 =========================
 
 Le template edit devra ressembler à ceci:
@@ -397,7 +406,7 @@ Le template edit devra ressembler à ceci:
     ?>
 
 Ce template affiche le formulaire de modification (avec les valeurs déjà remplies),
-ainsi que les messages d'erreurs de validation.
+ainsi que les messages d'erreurs de validation nécessaires.
 
 Vous pouvez maintenant mettre à jour notre view index avec les liens pour modifier
 les articles:
@@ -449,11 +458,11 @@ de ça en utilisant un :ref:`validator <validating-request-data>`::
     public function validationDefault(Validator $validator)
     {
         $validator
-            ->notEmpty('title')
+            ->notEmptyString('title')
             ->minLength('title', 10)
             ->maxLength('title', 255)
 
-            ->notEmpty('body')
+            ->notEmptyString('body')
             ->minLength('body', 10);
 
         return $validator;
@@ -461,7 +470,7 @@ de ça en utilisant un :ref:`validator <validating-request-data>`::
 
 La méthode ``validationDefault()`` indique à CakePHP comment valider les données
 quand la méthode ``save()`` est appelée. Ici, il est spécifié que les champs title
-et body ne peuvent pas être vides et qu'ils ont aussi des contraintes sur la taille.
+et body ne peuvent pas être vides et qu'ils ont aussi des contraintes sur la longueur.
 
 Le moteur de validation de CakePHP est à la fois puissant et flexible. Il vous fournit
 un jeu de règles sur des validations communes comme les adresses emails, les adresses IP,
@@ -482,6 +491,8 @@ Donnons maintenant la possibilité à nos utilisateurs de supprimer des articles
 Commencez par créer une action ``delete()`` dans ``ArticlesController``::
 
     // src/Controller/ArticlesController.php
+
+    // Ajouter la méthode suivante.
 
     public function delete($slug)
     {

@@ -1341,8 +1341,8 @@ You can also use any of the special route elements when generating URLs:
 * ``_host`` Set the host to use for the link.  Defaults to the current host.
 * ``_port`` Set the port if you need to create links on non-standard ports.
 * ``_method`` Define the HTTP verb the URL is for.
-* ``_full``  If ``true`` the ``FULL_BASE_URL`` constant will be prepended to
-  generated URLs.
+* ``_full``  If ``true`` the value of ``App.fullBaseUrl`` mentioned in
+  :ref:`general-configuration` will be prepended to generated URLs.
 * ``_ssl`` Set to ``true`` to convert the generated URL to https or ``false``
   to force http.
 * ``_name`` Name of route. If you have setup named routes, you can use this key

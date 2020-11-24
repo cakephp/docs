@@ -2,7 +2,7 @@ Tutoriel CMS - Autorisation
 ############################
 
 Maintenant que nos utilisateurs peuvent se connecter à notre CMS, nous voulons appliquer des règles d'autorisation
-pour nous assurer que chaque utilisateur ne puisse éditer que les messages dont ils sont l'auteur. Nous allons
+pour nous assurer que chaque utilisateur ne puisse éditer que les messages dont il est l'auteur. Nous allons
 utiliser le `plugin authorization <https://book.cakephp.org/authorization/2>`__ pour nous en assurer.
 
 Installer le plugin Authorization
@@ -22,8 +22,8 @@ Activer le plugin Authorization
 ===============================
 
 Le plugin Authorization s'intègre dans votre application grâce à la couche middleware et
-optionnellement par un composant pour faciliter les vérifications des doits.
-Premièrement, appliquons le middleware. Dans **src/Application.php** ajouter le code suivant
+optionnellement par un composant dans vos contrôleurs pour faciliter les vérifications des droits.
+Premièrement, attachons-nous au middleware. Dans **src/Application.php** ajoutez le code suivant
 dans les import de la classe::
 
     use Authorization\AuthorizationService;
@@ -55,32 +55,32 @@ fichier **src/Application.php**::
         return new AuthorizationService($resolver);
     }
 
-L'OrmResolver permet au plugin Authorization de trouver les classes de polices pour les
+L'OrmResolver permet au plugin Authorization de trouver les classes de stratégies (policies) pour les
 entités et les requêtes de l'ORM. Des resolvers supplémentaires peuvent être utilisés pour
-trouver des polices pour d'autres types de ressource.
+trouver des stratégies pour d'autres types de ressources.
 
-Maintenant, ajoutons ``AuthorizationComponent`` to ``AppController``. Dans
+Maintenant, ajoutons ``AuthorizationComponent`` à ``AppController``. Dans
 **src/Controller/AppController.php** ajoutez le code suivant à la méthode ``initialize()``::
 
     $this->loadComponent('Authorization.Authorization');
 
-Enfin, nous allons définir les actions add, login et logout comme étant détachées
-de Authorization en ajoutant le code suivante à **src/Controller/UsersController.php**::
+Enfin, nous allons définir les actions add, login et logout comme ne nécessitant pas
+d'autorisation en ajoutant le code suivante à **src/Controller/UsersController.php**::
 
     // Dans les méthodes add, login, et logout
     $this->Authorization->skipAuthorization();
 
-La méthode ``skipAuthorization()`` doit être appelé dans chaque controller ayant des
+La méthode ``skipAuthorization()`` doit être appelée dans chaque controller ayant des
 actions accessibles à tous les utilisateurs, même ceux qui ne sont pas identifiés.
 
-Création de Police
-==================
+Créons notre Première Stratégie
+===============================
 
-Le plugin Authorization défini les autorisation et les permissions par des classes de Police.
-Ces classes contiennent la logique pour vérifier qu'un **identifié** a la permission
-de **faire une action** sur une **ressource**. Notre **identifié** sera un utilisateur authentifié,
-et nos **ressource** sont des entités de l'ORM ainsi que des requêtes.
-Utilisons **bake** pour créer la base de notre première police.
+Le plugin Authorization représente les autorisation et les permissions par des classes Policy.
+Ces classes contiennent la logique pour vérifier qu'une **identity** a la permission
+de **faire une action** sur une **ressource**. Notre **identity** sera un utilisateur authentifié,
+et nos **ressources** sont des entités de l'ORM ainsi que des requêtes sur la base de données.
+Utilisons **bake** pour créer la base de notre première stratégie.
 
 .. code-block:: bash
 
@@ -88,7 +88,7 @@ Utilisons **bake** pour créer la base de notre première police.
 
 Cette commande va générer une classe de Police vide pour notre entity ``Article``.
 Vous retrouverez le fichier généré dans **src/Policy/ArticlePolicy.php**. Maintenant,
-modifiez la police pour qu'elle ressemble à cela::
+modifiez la stratégie pour qu'elle ressemble à cela::
 
     <?php
     namespace App\Policy;
@@ -128,7 +128,7 @@ complexes.
 Utiliser Authorization dans ArticlesController
 ==============================================
 
-Maintenant que nos polices sont créées nous pouvons vérifier les autorisations
+Maintenant que nos stratégies sont créées nous pouvons vérifier les autorisations
 dans chaque action de notre controller. Si nous oublions de vérifier les autorisations
 dans une action du controller, le plugin Authorization lèvera une exception.
 Dans **src/Controller/ArticlesController.php**, ajoutez le code suivant aux méthodes
@@ -145,7 +145,7 @@ Dans **src/Controller/ArticlesController.php**, ajoutez le code suivant aux mét
     {
         $article = $this->Articles
             ->findBySlug($slug)
-            ->contain('Tags') // load associated Tags
+            ->contain('Tags') // charge les Tags associés
             ->firstOrFail();
         $this->Authorization->authorize($article);
         // Le reste de la méthode..
@@ -161,8 +161,8 @@ Dans **src/Controller/ArticlesController.php**, ajoutez le code suivant aux mét
     }
 
 La méthode ``AuthorizationComponent::authorize()`` va utiliser le nom de l'action pour
-retrouver la méthode de la police à appeler. Si vous préférez définir vous-même la méthode
-de la police à utiliser vous devrez passer le nom de l'opération à ``authorize`::
+retrouver la méthode de la stratégie à appeler. Si vous préférez définir vous-même la méthode
+de la stratégie à utiliser vous devrez passer le nom de l'opération à ``authorize`::
 
     $this->Authorization->authorize($article, 'update');
 
@@ -176,7 +176,7 @@ Maintenant, ajoutez le code suivant aux méthodes ``tags``, ``view``, et ``index
 Amélioration des actions Add & Edit
 ===================================
 
-Bien que nous ayons bloqué l'accès à l'édition, nous sommes toujours vulnérable
+Bien que nous ayons bloqué l'accès à l'édition, nous sommes toujours vulnérables
 au changement de l'attribut ``user_id`` de l'article par l'utilisateur durant l'édition.
 Nous allons remédier à cela. Commençons avec l'action ``add``.
 
@@ -193,20 +193,20 @@ l'utilisateur actuellement authentifié. Remplacez l'action ``add`` par le code 
         if ($this->request->is('post')) {
             $article = $this->Articles->patchEntity($article, $this->request->getData());
 
-            // Changement: Chercher le user_id sur l'utilisateur authentifié.
+            // Changement: Chercher le user_id de l'utilisateur authentifié.
             $article->user_id = $this->request->getAttribute('identity')->getIdentifier();
 
             if ($this->Articles->save($article)) {
-                $this->Flash->success(__('Your article has been saved.'));
+                $this->Flash->success(__('Votre article a été enregistré avec succès.'));
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('Unable to add your article.'));
+            $this->Flash->error(__('Impossible d\'ajouter votre article.'));
         }
-        $tags = $this->Articles->Tags->find('list');
+        $tags = $this->Articles->Tags->find('list')->all();
         $this->set(compact('article', 'tags'));
     }
 
-Ensuite nous allons modifier l'action ``edit``::
+Ensuite nous allons modifier l'action ``edit``. Remplacez la méthode d'édition par ce qui suit::
 
     // Dans src/Controller/ArticlesController.php
 
@@ -214,7 +214,7 @@ Ensuite nous allons modifier l'action ``edit``::
     {
         $article = $this->Articles
             ->findBySlug($slug)
-            ->contain('Tags') // load associated Tags
+            ->contain('Tags') // charge les Tags associés
             ->firstOrFail();
         $this->Authorization->authorize($article);
 
@@ -224,16 +224,16 @@ Ensuite nous allons modifier l'action ``edit``::
                 'accessibleFields' => ['user_id' => false]
             ]);
             if ($this->Articles->save($article)) {
-                $this->Flash->success(__('Your article has been updated.'));
+                $this->Flash->success(__('Votre article a été sauvegardé.'));
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('Unable to update your article.'));
+            $this->Flash->error(__('Impossible de mettre à jour votre article.'));
         }
-        $tags = $this->Articles->Tags->find('list');
+        $tags = $this->Articles->Tags->find('list')->all();
         $this->set(compact('article', 'tags'));
     }
 
-Ici nous modifions les propriétés qui peuvent être assignées en masse en
+Ici nous définissons les propriétés qui peuvent être assignées en masse en
 utilisant ``patchEntity()``. Voir la section :ref:`changing-accessible-fields`
 pour plus d'informations. N'oubliez pas d'enlever le contrôle du ``user_id``
 dans **templates/Articles/edit.php**, nous n'en avons plus besoin.
@@ -244,7 +244,7 @@ Conclusion
 Nous avons construit une application CMS basique qui permet à des utilisateurs de
 s'authentifier, d'écrire des articles, d'y ajouter des tags, de parcourir les
 articles rédigés, et avons mis en place des contrôles pour nos articles.
-Nous avons même ajouter des améliorations à l'interface en exploitant le
+Nous avons même ajouté des améliorations à l'interface en exploitant le
 FormHelper et les capacités de l'ORM
 
 Merci d'avoir pris le temps d'explorer CakePHP. Nous vous proposons de continuer
