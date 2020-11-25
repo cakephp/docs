@@ -27,7 +27,7 @@
 
     // Prior to 3.6 use TableRegistry::get('Articles')
     $articlesTable = TableRegistry::getTableLocator()->get('Articles');
-    $article = $articlesTable->newEntity();
+    $article = $articlesTable->newEmptyEntity();
 
     $article->title = '新しい記事';
     $article->body = 'これは記事の本文です';
