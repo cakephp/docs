@@ -4,8 +4,11 @@ Tutoriel CMS - Création de la base de données
 Maintenant que CakePHP est installé, il est temps d'installer la base de données
 pour notre application :abbr:`CMS (Content Management System)`. Si vous ne l'avez
 pas encore fait, créez une base de données vide qui servira pour ce tutoriel, avec
-le nom de votre choix (par exemple ``cake_cms``). Exécutez ensuite la requête suivante
-pour créer les premières tables nécessaires au tutoriel::
+le nom de votre choix (par exemple ``cake_cms``).
+Si vous utilisez MySQL/MariaDB, vous pouvez exécuter le SQL suivant pour créer le
+tables nécessaires:
+
+.. code-block:: SQL
 
     USE cake_cms;
 
@@ -52,7 +55,57 @@ pour créer les premières tables nécessaires au tutoriel::
 
     INSERT INTO articles (user_id, title, slug, body, published, created, modified)
     VALUES
-    (1, 'First Post', 'first-post', 'This is the first post.', 1, now(), now());
+    (1, 'First Post', 'first-post', 'This is the first post.', 1, NOW(), NOW());
+
+Si vous utilisez PostgreSQL, connectez-vous à la base de données ``cake_cms`` et exécutez le
+code SQL suivant à la place:
+
+.. code-block:: SQL
+
+    CREATE TABLE users (
+        id SERIAL PRIMARY KEY,
+        email VARCHAR(255) NOT NULL,
+        password VARCHAR(255) NOT NULL,
+        created TIMESTAMP,
+        modified TIMESTAMP
+    );
+
+    CREATE TABLE articles (
+        id SERIAL PRIMARY KEY,
+        user_id INT NOT NULL,
+        title VARCHAR(255) NOT NULL,
+        slug VARCHAR(191) NOT NULL,
+        body TEXT,
+        published BOOLEAN DEFAULT FALSE,
+        created TIMESTAMP,
+        modified TIMESTAMP,
+        UNIQUE (slug),
+        FOREIGN KEY (user_id) REFERENCES users(id)
+    );
+
+    CREATE TABLE tags (
+        id SERIAL PRIMARY KEY,
+        title VARCHAR(191),
+        created TIMESTAMP,
+        modified TIMESTAMP,
+        UNIQUE (title)
+    );
+
+    CREATE TABLE articles_tags (
+        article_id INT NOT NULL,
+        tag_id INT NOT NULL,
+        PRIMARY KEY (article_id, tag_id),
+        FOREIGN KEY (tag_id) REFERENCES tags(id),
+        FOREIGN KEY (article_id) REFERENCES articles(id)
+    );
+
+    INSERT INTO users (email, password, created, modified)
+    VALUES
+    ('cakephp@example.com', 'secret', NOW(), NOW());
+
+    INSERT INTO articles (user_id, title, slug, body, published, created, modified)
+    VALUES
+    (1, 'First Post', 'first-post', 'This is the first post.', TRUE, NOW(), NOW());
 
 Vous avez peut-être remarqué que la table ``articles_tags`` utilise une clé primaire
 composée. CakePHP supporte les clés primaires composées presque partout,
@@ -70,7 +123,7 @@ Configuration de la base de données
 ===================================
 
 Ensuite, disons à CakePHP où est notre base de données et comment nous y connecter.
-Remplacer les valeurs dans le tableau ``Datasources.default`` de votre fichier
+Remplacez les valeurs dans le tableau ``Datasources.default`` de votre fichier
 **config/app.php** avec celle de votre installation de base de données. Un exemple
 de configuration complétée ressemblera à ceci::
 
@@ -80,12 +133,14 @@ de configuration complétée ressemblera à ceci::
         'Datasources' => [
             'default' => [
                 'className' => 'Cake\Database\Connection',
+                // Remplacez Mysql par Postgres si vous utilisez PostgreSQL
                 'driver' => 'Cake\Database\Driver\Mysql',
                 'persistent' => false,
                 'host' => 'localhost',
                 'username' => 'cakephp',
                 'password' => 'AngelF00dC4k3~',
                 'database' => 'cake_cms',
+                // Commentez la ligne ci-dessous si vous utilisez PostgreSQL
                 'encoding' => 'utf8mb4',
                 'timezone' => 'UTC',
                 'cacheMetadata' => true,
@@ -100,8 +155,8 @@ de votre projet.
 
 .. note::
 
-    Une copie du fichier de configuration par défaut peut être trouvée dans
-    **config/app.default.php**.
+    Si vous avez **config/app_local.php** dans votre dossier d'application, vous devez
+    plutôt configurer votre connexion à la base de données dans ce fichier.
 
 Création du premier Model
 =========================
@@ -126,7 +181,7 @@ Le fichier devra contenir ceci::
 
     class ArticlesTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->addBehavior('Timestamp');
         }
@@ -146,7 +201,7 @@ en utilisant les conventions, il saura que la colonne ``id`` est notre clé prim
     ArticleTable.php), CakePHP ne reconnaitra pas votre configuration et utilisera
     ce model généré à la place.
 
-Nous allons également créer une classe Entity pour notre Articles. Les Entities
+Nous allons également créer une classe Entity pour nos Articles. Les Entities
 représentent un enregistrement spécifique en base et donnent accès aux données
 d'une ligne de notre base. Notre Entity sera sauvegardée dans **src/Model/Entity/Article.php**.
 Le fichier devra ressembler à ceci::

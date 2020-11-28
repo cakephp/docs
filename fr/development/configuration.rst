@@ -2,14 +2,14 @@ Configuration
 #############
 
 Alors que les conventions enlèvent le besoin de configurer tout CakePHP, vous
-aurez tout de même besoin de configurer quelques options de configurations
-comme les accès à la base de données.
+aurez tout de même besoin de configurer quelques petites choses comme les accès
+à la base de données.
 
 De plus, certaines options de configuration facultatives vous permettent de
 changer les valeurs par défaut & les implémentations avec des options qui
 conviennent à votre application.
 
-.. index:: app.php, app.php.default
+.. index:: app.php, app_local.example.php
 
 .. index:: configuration
 
@@ -22,13 +22,21 @@ fichier de configuration par défaut, mais si cela et nécessaire, vous pouvez
 ajouter des fichiers supplémentaires de configuration et les charger dans le
 bootstrap de votre application. :php:class:`Cake\\Core\\Configure` est utilisée
 pour la configuration globale, et les classes comme ``Cache`` fournissent les
-méthodes ``config()`` pour faciliter la configuration et la rendre plus
+méthodes ``setConfig()`` pour faciliter la configuration et la rendre plus
 transparente.
+
+Le squelette de l'application contient un fichier **config/app.php** qui doit contenir
+la configuration qui ne varie pas selon les différents environnements dans lesquels votre
+application est déployée. Le fichier **config/app_local.php** doit contenir les
+données de configuration qui varient selon les environnements et doivent être gérées par
+la gestion de la configuration ou vos outils de déploiement. Ces deux fichiers font
+référence à des variables d'environnement via la fonction ``env()`` qui permet de définir
+les valeurs de configuration de l'environnement du serveur.
 
 Charger les Fichiers de Configuration Supplémentaires
 -----------------------------------------------------
 
-Si votre application a plusieurs options de configuration, il peut être utile de
+Si votre application a beaucoup d'options de configuration, il peut être utile de
 séparer la configuration dans plusieurs fichiers. Après avoir créé chacun des
 fichiers dans votre répertoire **config/**, vous pouvez les charger dans
 **bootstrap.php**::
@@ -40,11 +48,49 @@ fichiers dans votre répertoire **config/**, vous pouvez les charger dans
     Configure::load('app', 'default', false);
     Configure::load('other_config', 'default');
 
-Vous pouvez aussi utiliser des fichiers de configuration supplémentaires pour
-surcharger un environnement spécifique. Chaque fichier chargé après **app.php**
-peut redéfinir les valeurs déclarées précédemment ce qui vous permet de
-personnaliser la configuration pour les environnements de développement ou
-intermédiaires.
+.. _environment-variables:
+
+Variables d'Environnement
+=========================
+
+Beaucoup de fournisseurs de cloud, comme Heroku, vous permettent de définir des
+variables pour les données de configuration. Vous pouvez configurer CakePHP
+via des variables d'environnement à la manière `12factor app <http://12factor.net/>`_.
+Les variables d'environnement permettent à votre application d'avoir besoin de moins
+d'états, facilitant la gestion de votre application lors de déploiements sur
+plusieurs environnements.
+
+Comme vous pouvez le voir dans votre fichier **app.php**, la fonction ``env()``
+est utilisée pour lire des données de configuration depuis l'environnement et
+construire la configuration de l'application.
+CakePHP utilise les chaînes :term:`DSN` pour les configurations des bases de données,
+des logs, des transports d'emails et du cache, vous permettant de faire varier les
+configurations d'un environnement à l'autre.
+
+Lors d'un développement local, CakePHP utilise `dotenv
+<https://github.com/josegonzalez/php-dotenv>`_ pour faciliter l'utilisation des variables
+d'environnement. Utilisez composer pour ajouter cette bibliothèque, puis
+décommentez un bloc de code dans ``bootstrap.php`` pour l'exploiter.
+
+Vous verrez un fichier ``config/.env.default`` dans votre application.
+En copiant ce fichier dans ``config/.env`` et en modifiant les valeurs, vous pourrez
+configurer votre application.
+
+Il est conseillé de ne pas commiter le fichier ``config/.env`` dans votre dépôt
+et d'utiliser le fichier ``config/.env.default`` comme template avec des valeurs
+par défaut (ou des placeholders) pour que les membres de votre équipe sachent
+quelles variables sont utilisées et ce que chaque variable est censée contenir.
+
+Une fois vos variables d'environnement définies, vous pouvez utiliser la
+fonction ``env()`` pour lire les données depuis l'environnement::
+
+    $debug = env('APP_DEBUG', false);
+
+La seconde valeur passée à la fonction ``env()`` est la valeur par défaut. Cette
+valeur sera utilisée si aucune variable d'environnement n'existe pas pour la clé
+fournie.
+
+.. _general-configuration:
 
 Configuration Générale
 ----------------------
@@ -63,7 +109,7 @@ App.namespace
 
         Quand vous changez le namespace dans votre configuration, vous devez
         aussi mettre à jour le fichier **composer.json** pour utiliser aussi
-        ce namespace. De plus, créer un nouvel autoloader en lançant
+        ce namespace. De plus, créez un nouvel autoloader en lançant
         ``php composer.phar dumpautoload``.
 
 .. _core-configuration-baseurl:
@@ -74,10 +120,12 @@ App.baseUrl
     fichiers .htaccess.
 App.base
     Le répertoire de base où l'app se trouve. Si à ``false``, il sera détecté
-    automatiquement.
+    automatiquement. Si ce n'est pas ``false``, assurez-vous que votre chaîne commence
+    avec un `/` et ne se termine PAS par un `/`. Par exemple, `/ basedir` est une valeur
+    correcte pour App.base. Sinon, le composant AuthComponent ne fonctionnera pas correctement.
 App.encoding
     Définit l'encodage que votre application utilise. Cet encodage est utilisé
-    pour générer le charset dans le layout, et les entities encodés. Cela doit
+    pour générer le charset dans le layout, et les entities encodées. Il doit
     correspondre aux valeurs d'encodage spécifiées pour votre base de données.
 App.webroot
     Le répertoire webroot.
@@ -102,15 +150,20 @@ App.cssBaseUrl
     Le chemin Web vers le répertoire public des css dans webroot. Si vous
     utilisez un :term:`CDN`, vous devez définir cette valeur vers la
     localisation du CDN.
+App.jsBaseUrl
+    Le chemin Web vers le répertoire public des js dans webroot. Si vous
+    utilisez un :term:`CDN`, vous devriez définir cette valeur vers la
+    localisation du CDN.
 App.paths
     Les chemins de Configure pour les ressources non basées sur les classes.
     Accepte les sous-clés ``plugins``, ``templates``, ``locales``, qui
     permettent la définition de chemins respectivement pour les plugins, les
     templates de view et les fichiers de locales.
-App.jsBaseUrl
-    Le chemin Web vers le répertoire public des js dans webroot. Si vous
-    utilisez un :term:`CDN`, vous devriez définir cette valeur vers la
-    localisation du CDN.
+App.uploadedFilesAsObjects
+    Définit si les fichiers téléchargés sont représentés sous forme d'objets (``true``),
+    ou de tableaux (``false``). Cette option est considérée comme activée par défaut.
+    Référez-vous à :ref:`File Uploads section <request-file-uploads>` dans le chapitre
+    Objets Request & Response pour de plus amples informations.
 Security.salt
     Une chaîne au hasard utilisée dans les hashages. Cette valeur est aussi
     utilisée comme sel HMAC quand on fait des chiffrements symétriques.
@@ -123,6 +176,31 @@ Asset.timestamp
     - (bool) ``false`` - Ne fait rien (par défaut)
     - (bool) ``true`` - Ajoute le timestamp quand debug est à ``true``
     - (string) 'force' - Ajoute toujours le timestamp.
+Asset.cacheTime
+    Fixe la valeur de la mise en cache des ressources (assets). Elle détermine la valeur du
+    header http ``Cache-Control`` ``max-age``, ansi que du header http ``Expire`` pour les ressources.
+    Cela peut-être tout ce que votre version de `la fonction strtotime
+    <http://php.net/manual/en/function.strtotime.php>`_ de php accepte.
+    La valeur par défaut est ``+1 day``.
+
+Utilisation d'un CDN
+--------------------
+
+Pour utiliser un CDN pour charger vos actifs statiques, modifiez ``App.imageBaseUrl``,
+``App.cssBaseUrl``, ``App.jsBaseUrl`` pour pointer vers l'URI du CDN, par exemple:
+``https://mycdn.example.com/`` (notez le ``/`` à la fin).
+
+A toutes les images, scripts et styles chargés via HtmlHelper sera ajouté le path absolu du CDN,
+correspondant au même chemin relatif utilisé dans l'application. Notez s'il vous plaît
+il existe un cas d'utilisation spécifique lors de l'utilisation de ressources basée sur les plugins:
+les plugins n'utiliseront pas le prefixe de plugin quand l'URI absolue définie dans ``... BaseUrl``
+est utilisée, par exemple par défaut:
+
+* ``$this->Helper->assetUrl('TestPlugin.logo.png')`` resolves to ``test_plugin/logo.png``
+
+Si vous fixez ``App.imageBaseUrl`` à ``https://mycdn.example.com/``:
+
+* ``$this->Helper->assetUrl('TestPlugin.logo.png')`` resolves to ``https://mycdn.example.com/logo.png``.
 
 Configuration de la Base de Données
 -----------------------------------
@@ -134,14 +212,14 @@ données.
 Configuration de la Mise en Cache
 ---------------------------------
 
-Consultez :ref:`cache-configuration` pour plus d'informations sur la
+Consultez :ref:`Configuration du cache <cache-configuration>` pour plus d'informations sur la
 configuration de la mise en cache dans CakePHP.
 
 Configuration de Gestion des Erreurs et des Exceptions
 ------------------------------------------------------
 
-Consultez les sections sur :ref:`error-configuration` pour des informations sur
-la configuration des gestionnaires d'erreur et d'exception.
+Consultez les sections sur :ref:`Configuration des erreurs et des exceptions <error-configuration>`
+pour des informations sur la configuration des gestionnaires d'erreur et d'exception.
 
 Configuration des Logs
 ----------------------
@@ -152,7 +230,7 @@ des logs dans CakePHP.
 Configuration de Email
 ----------------------
 
-Consultez :ref:`email-configuration` pour avoir des informations sur la
+Consultez :ref:`Configuration des Email <email-configuration>` pour avoir des informations sur la
 configuration prédéfinie d'email dans CakePHP.
 
 Configuration de Session
@@ -164,7 +242,7 @@ configuration de la gestion des sessions dans CakePHP.
 Configuration du Routing
 ------------------------
 
-Consultez :ref:`routes-configuration` pour plus d'informations sur la
+Consultez :ref:`Configuration des Routes <routes-configuration>` pour plus d'informations sur la
 configuration du routing et de la création de routes pour votre application.
 
 .. _additional-class-paths:
@@ -179,8 +257,8 @@ pour les controllers dans votre application::
 
     "autoload": {
         "psr-4": {
-            "App\\Controller\\": "/path/to/directory/with/controller/folders",
-            "App\": "src"
+            "App\\Controller\\": "/path/to/directory/with/controller/folders/",
+            "App\\": "src/"
         }
     }
 
@@ -192,7 +270,7 @@ avec ce qui suit::
 
     "autoload": {
         "psr-4": {
-            "App\": ["src", "/path/to/directory"]
+            "App\\": ["src/", "/path/to/directory/"]
         }
     }
 
@@ -213,65 +291,23 @@ Dans votre **config/app.php**, vous pouvez définir les variables::
                     '/path/to/other/plugins/'
                 ],
                 'templates' => [
-                    APP . 'Template' . DS,
-                    APP . 'Template2' . DS
+                    ROOT . DS . 'templates' . DS,
+                    ROOT . DS . 'templates2' . DS
                 ],
                 'locales' => [
-                    APP . 'Locale' . DS
+                    ROOT . DS . 'resources' . DS . 'locales' . DS
                 ]
             ]
         ]
     ];
 
-Les chemins doivent finir par un séparateur de répertoire, ou ils ne
+Les chemins doivent finir par un séparateur de répertoire, sinon ils ne
 fonctionneront pas correctement.
 
 Configuration de Inflection
 ===========================
 
 Regardez :ref:`inflection-configuration` pour plus d'informations.
-
-.. _environment-variables:
-
-Variables d'Environnement
-=========================
-
-Beaucoup de fournisseurs de cloud, comme Heroku, vous permettent de définir des
-variables pour les données de configuration. Vous pouvez configurer CakePHP
-via des variables d'environnement à la manière `12factor app <http://12factor.net/>`_.
-Les variables d'environnement permettent à votre application d'avoir besoin de moins
-d'états, facilitant la gestion de votre application lors de déploiements sur
-plusieurs environnements.
-
-Comme vous pouvez le voir dans votre fichier **app.php**, la fonction ``env()``
-est utilisée pour lire des données de configuration depuis l'environnement et
-construire la configuration de l'application.
-CakePHP utilise les chaînes :term:`DSN` pour les configurations des bases de données,
-des logs, des transports d'emails et du cache, vous permettant de faire varier les
-configurations d'un environnement à l'autre.
-
-Lors d'un développement local, CakePHP utilise `dotenv
-<https://github.com/josegonzalez/php-dotenv>`_ pour faciliter l'utilisation des variables
-d'environnement. Vous verrez un fichier ``config/.env.default`` dans votre application.
-En copiant ce fichier dans ``config/.env`` et en modifiant les valeurs, vous pourrez
-configurer votre application.
-
-Il est conseillé de ne pas commiter le fichier ``config/.env`` dans votre dépôt
-et d'utiliser le fichier ``config/.env.default`` comme template avec des valeurs
-par défaut (ou des placeholders) pour que les membres de votre équipe sachent
-quelles variables sont utilisées et ce que chaque variable est censée contenir.
-
-Une fois vos variables d'environnement définies, vous pouvez utiliser la
-fonction ``env()`` pour lire les données depuis l'environnement::
-
-    $debug = env('APP_DEBUG', false);
-
-La seconde valeur passée à la fonction ``env()`` est la valeur par défaut. Cette
-valeur sera utilisée si aucune variable d'environnement n'existe pas pour la clé
-fournie.
-
-.. versionchanged:: 3.5.0
-    Support de la librairie dotenv ajouté au squelette d'application.
 
 Classe Configure
 ================
@@ -280,19 +316,14 @@ Classe Configure
 
 .. php:class:: Configure
 
-La nouvelle classe Configure de CakePHP peut être utilisée pour stocker et
+La classe Configure de CakePHP peut être utilisée pour stocker et
 récupérer des valeurs spécifiques d’exécution ou d’application. Attention,
 cette classe vous permet de stocker tout dedans, puis de l’utiliser dans toute
-autre partie de votre code: une tentative évidente de casser le modèle MVC avec
+autre partie de votre code: une tentation évidente de casser le modèle MVC avec
 lequel CakePHP a été conçu. Le but principal de la classe Configure est de
 garder les variables centralisées qui peuvent être partagées entre beaucoup
-d’objets. Souvenez-vous d’essayer de suivre la règle “convention plutôt que
-configuration” et vous ne casserez pas la structure MVC que nous avons mis en
-place.
-
-Vous pouvez accéder à ``Configure`` partout dans votre application::
-
-    Configure::read('debug');
+d’objets. Souvenez-vous d’essayer de suivre la règle "convention plutôt que
+configuration" et vous ne casserez pas la structure MVC que cakePHP fournit.
 
 Ecrire des Données de Configuration
 -----------------------------------
@@ -308,7 +339,7 @@ l'application::
 .. note::
 
     La :term:`notation avec points` utilisée dans le paramètre ``$key`` peut
-    être utilisée pour organiser vos paramètres de configuration dans des
+    être utilisée pour organiser vos paramètres de configuration en
     groupes logiques.
 
 L'exemple ci-dessus pourrait aussi être écrit en un appel unique::
@@ -319,27 +350,35 @@ L'exemple ci-dessus pourrait aussi être écrit en un appel unique::
     ]);
 
 Vous pouvez utiliser ``Configure::write('debug', $bool)`` pour intervertir les
-modes de debug et de production à la volée. C'est particulièrement pratique pour
-les interactions JSON quand les informations de debug peuvent entraîner des
-problèmes de parsing.
+modes de debug et de production à la volée.
+
+.. note::
+
+    Toutes les modifications de configuration effectuées à l'aide de
+    ``Configure::write()`` se font en mémoire et seront perdues
+    à la requête (request) suivante.
 
 Lire les Données de Configuration
 ---------------------------------
 
-.. php:staticmethod:: read($key = null)
+.. php:staticmethod:: read($key = null, $default = null)
 
-Utilisée pour lire les données de configuration à partir de l'application. Par
-défaut, la valeur de debug de CakePHP est au plus important. Si une clé est
-fournie, la donnée est retournée. En utilisant nos exemples du write()
-ci-dessus, nous pouvons lire cette donnée::
+Utilisé pour lire les données de configuration de l'application. Si une clé est fournie,
+la donnée est retournée. En utilisant nos exemples pour write() ci-dessus, nous pouvons
+lire cette donnée::
 
-    Configure::read('Company.name');    // Renvoie: 'Pizza, Inc.'
-    Configure::read('Company.slogan');  // Renvoie: 'Pizza for your body and soul'
+    // Renvoie: 'Pizza, Inc.'
+    Configure::read('Company.name');
+
+    // Renvoie: 'Pizza for your body and soul'
+    Configure::read('Company.slogan');
 
     Configure::read('Company');
-
-    //yields:
+    // Retourne:
     ['name' => 'Pizza, Inc.', 'slogan' => 'Pizza for your body and soul'];
+
+    // Renvoie 'fallback' car Company.nope nexiste pas.
+    Configure::read('Company.nope', 'fallback');
 
 Si $key est laissée à null, toutes les valeurs dans Configure seront retournées.
 
@@ -363,7 +402,7 @@ Vérifier si les Données de Configuration sont Définies
 
 .. php:staticmethod:: check($key)
 
-Utilisée pour vérifier si une clé/chemin existe et a une valeur non-null::
+Utilisée pour vérifier si une clé/chemin existe et a une valeur non nulle::
 
     $exists = Configure::check('Company.name');
 
@@ -372,7 +411,7 @@ Supprimer une Donnée de Configuration
 
 .. php:staticmethod:: delete($key)
 
-Utilisée pour supprimer l'information à partir de la configuration de
+Utilisée pour supprimer l'information de la configuration de
 l'application::
 
     Configure::delete('Company.name');
@@ -385,8 +424,24 @@ Lire & Supprimer les Données de Configuration
 Lit et supprime une clé de Configure. C'est utile quand vous voulez combiner la
 lecture et la suppression de valeurs en une seule opération.
 
+.. php:staticmethod:: consumeOrFail($key)
+
+Lit et supprime une donnée de configuration tout comme :php:meth:`Cake\\Core\\Configure::consume`
+mais s'attend à trouver une paire clé/valeur. Si la paire demandée n'existe pas une
+:php:class:`RuntimeException` sera levée::
+
+    Configure::consumeOrFail('Company.name');    // Renvoie: 'Pizza, Inc.'
+    Configure::consumeOrFail('Company.geolocation');  // Lèvera une exception
+
+    Configure::consumeOrFail('Company');
+
+    // Renvoie:
+    ['name' => 'Pizza, Inc.', 'slogan' => 'Pizza for your body and soul'];
+
 Lire et Ecrire les Fichiers de Configuration
 ============================================
+
+.. php:staticmethod:: setConfig($name, $engine)
 
 CakePHP est fourni avec deux lecteurs de fichiers de configuration intégrés.
 :php:class:`Cake\\Core\\Configure\\Engine\\PhpConfig` est capable de lire les
@@ -394,7 +449,7 @@ fichiers de config de PHP, dans le même format dans lequel Configure a lu
 historiquement. :php:class:`Cake\\Core\\Configure\\Engine\\IniConfig` est
 capable de lire les fichiers de config ini du cœur.
 Regardez la `documentation PHP <http://php.net/parse_ini_file>`_
-pour plus d'informations sur les fichiers ini spécifiés. Pour utiliser un
+pour plus d'informations sur les spécificités des fichiers ini. Pour utiliser un
 lecteur de config du cœur, vous aurez besoin de l'attacher à Configure en
 utilisant :php:meth:`Configure::config()`::
 
@@ -442,7 +497,7 @@ les fichiers de configuration::
 Les fichiers de configuration chargés fusionnent leurs données avec la
 configuration exécutée existante dans Configure. Cela vous permet d'écraser
 et d'ajouter de nouvelles valeurs dans la configuration existante exécutée.
-En configurant ``$merge`` à ``true``, les valeurs ne vont pas toujours écraser
+En configurant ``$merge`` à ``true``, les valeurs se combineront à celles de
 la configuration existante.
 
 Créer et Modifier les Fichiers de Configuration
@@ -458,7 +513,7 @@ l'adaptateur 'default' est
 un fichier de configuration PHP qu'on pourra charger avec
 :php:class:`Cake\\Core\\Configure\\Engine\\PhpConfig`.
 
-Etant donné que le lecteur 'default' est une instance de PhpReader.
+Etant donné que le lecteur 'default' est une instance de PhpConfig.
 Sauvegarder toutes les données de Configure  dans le fichier `my_config.php`::
 
     Configure::dump('my_config', 'default');
@@ -521,60 +576,6 @@ Les moteurs inclus dans CakePHP sont:
 
 Par défaut, votre application utilisera ``PhpConfig``.
 
-Bootstrapping CakePHP
-=====================
-
-Si vous avez des besoins de configuration supplémentaires, utilisez le fichier
-bootstrap de CakePHP dans **config/bootstrap.php**. Ce fichier est inclus juste
-avant chaque requête et commande CLI.
-
-Ce fichier est idéal pour un certain nombre de tâches de bootstrapping
-courantes:
-
-- Définir des fonctions commodes.
-- Déclarer des constantes.
-- Créer des configurations de cache.
-- Définir la configuration des logs.
-- Configurer les inflections personnalisées.
-- Charger les fichiers de configuration.
-
-Il pourrait être tentant de placer des fonctions de formatage ici pour les
-utiliser dans vos controllers. Comme vous le verrez dans les documentations sur
-les :doc:`/controllers` et les :doc:`/views`, il y a de meilleurs moyens pour
-vous d'ajouter de la logique personnalisée dans votre application.
-
-.. _application-bootstrap:
-
-Application::bootstrap()
-------------------------
-
-En plus du fichier **config/bootstrap.php** qui doit être utilisé pour faire de
-la configuration "bas niveau" de votre application, vous pouvez également
-utiliser la méthode "hook" ``Application::bootstrap()`` pour charger /
-initialiser des plugins et attacher des écouteurs d'événements globaux::
-
-    // in src/Application.php
-    namespace App;
-
-    use Cake\Core\Plugin;
-    use Cake\Http\BaseApplication;
-
-    class Application extends BaseApplication
-    {
-        public function bootstrap()
-        {
-            // Appeler la méthode parente permet de faire le `require_once`
-            // pour charger le fichier config/bootstrap.php
-            parent::bootstrap();
-
-            Plugin::load('MyPlugin', ['bootstrap' => true, 'routes' => true]);
-        }
-    }
-
-Charger les plugins et les événements dans ``Application::bootstrap()`` rend
-les :ref:`integration-testing` plus faciles car les événements et les routes
-seront ainsi à nouveau traités pour chaque méthode de test.
-
 Désactiver les tables génériques
 ================================
 
@@ -583,21 +584,20 @@ soit pratique lorsque vous développez rapidement de nouvelles applications, les
 tables génériques rendent le debug plus difficile dans certains cas.
 
 Vous pouvez vérifier si une requête a été générée à partir d'une table générique
-via le DebugKit, dans le panel SQL. Si vous avez encore des difficultés à
+via le DebugKit, dans le panneau SQL. Si vous avez encore des difficultés à
 diagnostiquer un problème qui pourrait être causé par les auto-tables, vous
 pouvez lancer une exception quand CakePHP utilise implicitement une ``Cake\ORM\Table``
 générique plutôt que la vraie classe du Model::
 
     // Dans votre fichier bootstrap.php
     use Cake\Event\EventManager;
-    // Prior to 3.6 use Cake\Network\Exception\NotFoundException
     use Cake\Http\Exception\InternalErrorException;
 
     $isCakeBakeShellRunning = (PHP_SAPI === 'cli' && isset($argv[1]) && $argv[1] === 'bake');
     if (!$isCakeBakeShellRunning) {
         EventManager::instance()->on('Model.initialize', function($event) {
             $subject = $event->getSubject();
-            if (get_class($subject === 'Cake\ORM\Table') {
+            if (get_class($subject) === 'Cake\ORM\Table') {
                 $msg = sprintf(
                     'Missing table class or incorrect alias when registering table class for database table %s.',
                     $subject->getTable());
