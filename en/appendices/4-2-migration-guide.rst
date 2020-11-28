@@ -65,6 +65,7 @@ Controller
 
 Component
 ---------
+
 - ``FlashComponent::set()`` now sets the ``element`` option to ``error`` by
   default when used with an ``Exception`` instance.
 
@@ -185,6 +186,10 @@ TestSuite
 
 - ``EmailTrait::assertMailSubjectContains()`` and
   ``assertMailSubjectContainsAt()`` were added.
+- ``mockService()`` was added to ``ConsoleIntegrationTestTrait`` and
+  ``IntegrationTestCaseTrait``. This method enables services injected with the
+    :doc:`/development/dependency-injection` container to be replaced with mock
+    or stub objects.
 
 View
 ----

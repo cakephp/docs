@@ -204,3 +204,25 @@ example of a bootable service would be::
             $container->addServiceProvider(new InvoicingServiceProvider();
         }
     }
+
+
+.. _mocking-services-in-tests:
+
+Mocking Services in Tests
+=========================
+
+In tests that use ``ConsoleIntegrationTestTrait`` or ``IntegrationTestTrait``
+you can replace services that are injected via the container with mocks or
+stubs::
+
+    // In a test method or setup().
+    $this->mockService(StripeService::class, function () {
+        return new FakeStripe();
+    });
+
+    // If you need to remove a mock
+    $this->removeMockService(StripeService::class);
+
+Any defined mocks will be replaced in your application's container during
+testing, and automatically injected into your controllers and commands. Mocks
+are cleaned up at the end of each test.
