@@ -1030,7 +1030,7 @@ from request data your POST data should look like::
         'associated' => ['Courses._joinData']
     ]);
 
-In some situations, even the junction table can have its own associations. For example if Courses hasMany Assigments, we could have a data like this::
+In some situations, even the junction table can have its own associations. For example if Courses hasMany Assignments, we could have a data like this::
 
  $data = [
         'first_name' => 'Sally',
@@ -1041,12 +1041,12 @@ In some situations, even the junction table can have its own associations. For e
                 '_joinData' => [
                     'grade' => 80.12,
                     'days_attended' => 30
-                    'assigments'=> [
+                    'assignments'=> [
                         [
                             'grade' => 100,
                             'description' => 'lorem ipsum'
                         ],
-                        // Other assigments.
+                        // Other assignments.
                     ]
                 ]
             ],
@@ -1054,7 +1054,7 @@ In some situations, even the junction table can have its own associations. For e
         ]
     ];
     $student = $this->Students->newEntity($data, [
-        'associated' => ['Courses', 'Courses._joinData.Assigments']
+        'associated' => ['Courses', 'Courses._joinData.Assignments']
     ]);
 
 See the :ref:`associated-form-inputs` documentation for how to build inputs with
