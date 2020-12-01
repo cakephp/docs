@@ -10,7 +10,7 @@
 .. toctree::
     :maxdepth: 1
 
-    appendices/4-0-migration-guide
+    appendices/migration-guides
 
 後方互換性の補完
 ================
