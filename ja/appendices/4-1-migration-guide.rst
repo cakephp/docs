@@ -7,14 +7,9 @@ CakePHP 4.1 は 4.0 からのAPI互換アップグレードです。
 非推奨
 ============
 
-4.1 introduces a few deprecations. All of these features will continue for the
-duration of 4.x but will be removed in 5.0. You can use the
-:ref:`upgrade tool <upgrade-tool-use>` to automate updating deprecated
-features::
-
 4.1では、いくつかの非推奨機能が導入されています。
 これらの機能はすべて 4.x の間は継続されますが、5.0 で削除されます。
-非推奨機能の更新を自動化するには、:ref:`upgrade tool <upgrade-tool-use>` を使用します。
+非推奨機能の更新を自動化するには、:ref:`upgrade tool <upgrade-tool-use>` を使用します。::
 
     bin/cake upgrade rector --rules cakephp41 <path/to/app/src>
 
@@ -23,11 +18,6 @@ features::
 
 Controller
 ----------
-
-* The ``sortWhitelist`` option of  ``PaginatorComponent`` has been deprecated.
-  Use ``sortableFields`` instead.
-* The ``whitelist`` option of  ``PaginatorComponent`` has been deprecated.
-  Use ``allowedParameters`` instead.
 
 * ``PaginatorComponent`` の ``sortWhitelist`` オプションは非推奨は非推奨になりました。
   代わりに、``sortableFields`` を使用してください。
@@ -78,8 +68,7 @@ Http
   代わりに、 ``skipCheckCallback()`` を使用してください。
 * ``ServerRequest::input()`` は非推奨になりました。
   PHP の生の入力を文字列として取得するには、 ``(string)$request->getBody()`` を使用してください。
-  use ``BodyParserMiddleware`` to parse the request body so that it's available as array/object through ``$request->getParsedBody()``
-  BodyParserMiddleware```を使ってリクエストのボディを解析してください。そうすれば、 ``$request->getParsedBody()`` で配列やオブジェクトとして利用できるようにします。
+  ``BodyParserMiddleware`` を使ってリクエストのボディを解析してください。そうすれば、 ``$request->getParsedBody()`` で配列やオブジェクトとして利用できるようにします。
 * フレームワーク内でのクッキー作成との一貫性を高めるために、
   ``CsrfProtectionMiddleware`` の ``httpOnly`` オプションは、``httponly`` に変更されました。
 
@@ -111,9 +100,6 @@ Behaviorの変更
 Database
 --------
 
-* MySQL: The display widths for integers now are ignored except for ``TINYINT(1)`` which
-  still maps to boolean type. Display widths are deprecated in MySQL 8.
-
 * MySQL: （未だにブーリアン型にマップされている） ``TINYINT(1)`` 以外の整数の表示幅は無視されるようになりました。
   MySQL 8では表示幅は非推奨です。
 
@@ -130,7 +116,7 @@ ORM
 
 * ``Cake\ORM\TableRegistry`` は非推奨になりました。
   テーブルロケーターインスタンスを取得するためには、
-　代わりに ``Cake\ORM\Locator\LocatorAwareTrait::getTableLocator()`` か
+  代わりに ``Cake\ORM\Locator\LocatorAwareTrait::getTableLocator()`` か
   ``Cake\Datasource\FactoryLocator::get('Table')``  を使用してください。
   ``Controller``, ``Command``, ``TestCase`` のようなクラスは、
   すでに ``Cake\ORMLocator\LocatorAwareTrait``` を使用しています。
@@ -177,7 +163,7 @@ Database
 
 * MySQL 8 がサポートされました。テストも行われています。
 * SQL関数の集約を表現するために ``AggregateExpression`` を追加しました。
-  ``FunctionsBuilder::aggregate()``は新しい集約SQL関数をラップするのに使えます。
+  ``FunctionsBuilder::aggregate()`` は新しい集約SQL関数をラップするのに使えます。
 * 任意の集約式にウィンドウ関数のサポートが追加されました。
   ``AggregateExpression`` はウィンドウ式をラップしたため、連鎖的な呼び出しによって任意のインスタンスを簡単に拡張することができます。
 * 集約関数が ``FILTER (WHERE ...)`` 区をサポートしました。
@@ -186,7 +172,7 @@ Database
 * Common Table Expression (CTE) が追加されました。
   CTEは、`Query::with()` を用いてクエリにアタッチすることが可能です。
 * ``Query::orderAsc()`` と ``Query::orderDesc()`` はClosureをフィールドとして受け付けるようになり、
-  提供されている ``QueryExpression``オブジェクトを使って複雑なオーダー式を構築できるようになりました。
+  提供されている ``QueryExpression`` オブジェクトを使って複雑なオーダー式を構築できるようになりました。
 
 Error
 -----
@@ -205,29 +191,26 @@ Error
 Form
 ----
 
-* ``フォーム::set()``を追加しました。
+* ``フォーム::set()`` を追加しました。
   このメソッドは ``View::set()`` や ``Controller::set()`` と同じようにフォームオブジェクトにデータを追加することができます。
 
 Http
 ----
 
-* BaseApplication::addOptionalPlugin()``を追加しました。
-このメソッドは、プラグインの読み込みや、開発者依存のため存在しない可能性のあるプラグインのエラー処理を行います。
-* ``Cake\HttpException\RedirectException``` を追加しました。
+* ``BaseApplication::addOptionalPlugin()`` を追加しました。
+  このメソッドは、プラグインの読み込みや、開発者依存のため存在しない可能性のあるプラグインのエラー処理を行います。
+* ``Cake\HttpException\RedirectException`` を追加しました。
   この例外は Routing パッケージの ``RedirectException``` を置き換えるもので、 アプリケーションのどこでも発生させることができます。
 * ``CsrfProtectionMiddleware`` は ``samesite`` 属性を設定したクッキーを作成することができるようになりました。
-* ``Session::read()``が2番目のパラメータでデフォルト値を設定できるようになりました。
-* ``Session::readOrFail()``は、キーが見つからなかった場合に例外を発生させたい場合に便利な ``read()``操作のラッパーとして追加されました。
+* ``Session::read()`` が2番目のパラメータでデフォルト値を設定できるようになりました。
+* ``Session::readOrFail()`` は、キーが見つからなかった場合に例外を発生させたい場合に便利な ``read()`` 操作のラッパーとして追加されました。
 
 I18n
 ----
 
 * ``Time`` , ``FrozenTime`` , ``Date`` , ``FrozenDate`` の ``setJsonEncodeFormat`` メソッドは、
   カスタムの文字列を返すための callable を受け入れるようになりました。
-* Lenient parsing can be disabled for ``parseDateTime()`` and ``parseDate()`` using
-  ``disableLenientParsing()``. The default is enabled - the same as IntlDateFormatter.
-
-* この場合、 ``parseDateTime()`` と ``parseDate()`` は、次のようにして構文解析を無効にすることができます。
+* ``parseDateTime()`` と ``parseDate()`` は、 ``disableLenientParsing()`` を使用して、簡潔な構文解析を無効にすることができます。
   デフォルトでは有効になっています。（IntlDateFormatter と同様です）
 
 Log
@@ -238,17 +221,6 @@ Log
 
 ORM
 ---
-
-* The ORM now triggers an ``Model.afterMarshal`` event which is triggered after
-  each entity is marshaled from request data.
-* You can use the ``locale`` finder option to modify the locale of a single find
-  call when using the ``TranslateBehavior``.
-* ``Query::clearResult()`` was added. This method lets you remove the result
-  from a query so you can re-execute it.
-* ``Table::delete()`` will now abort a delete operation and return false if a
-  dependent association fails to delete during cascadeCallback operations.
-* ``Table::saveMany()`` will now trigger the ``Model.afterSaveCommit`` event on
-  entities that are saved.
 
 * ORMはリクエストデータから各エンティティがマージされた後に
   ``Model.afterMarshal`` イベントをトリガーするようになりました。
@@ -269,42 +241,27 @@ Routing
 TestSuite
 ---------
 
-* ``FixtureManager::unload()`` no longer truncates tables at the *end* of a test
-  whilst fixtures are unloaded. Tables will still be truncated during fixture
-  setup. You should see faster test suite runs as fewer truncation operations
-  are being done.
-* ``FixtureManager::unload()``は、フィクスチャがアンロードされている間、
+* ``FixtureManager::unload()`` は、フィクスチャがアンロードされている間、
   テストの *end* でテーブルを切り詰めることはなくなりました。
   テーブルはフィクスチャのセットアップ中にも切り捨てられます。
   切り捨て処理が少なくなったため、テストスイートの実行がより速くなるはずです。
 * メールボディアサーションは、失敗メッセージにメールの内容を含めるようになり、
   テストのデバッグがより簡単になりました。
-* ``TestCase::addFixture()`` has been added to allow chainable fixture setup, that is also
-  auto-completable in IDEs.
 * チェーン可能なフィクスチャ設定を可能にするために、``TestCase::addFixture()`` が追加されました。
   これは、IDEでも自動補完可能です。
 
 View
 ----
 
-* Added ``TextHelper::slug()``. This method delegates to
-  ``Cake\Utility\Text::slug()``.
-* Added ``ViewBuilder::addHelper()`` as chainable wrapper method to add helpers.
-* Added ``HtmlHelper::linkFromPath()`` and ``UrlHelper::urlFromPath()`` to build
-  links and URLs from route paths more easily and with IDE support in the View layer.
-
 * ``TextHelper::::slug()`` を追加しました。
   このメソッドは、 ``Cake\Utility\Text::slug()`` を委譲します。
 * ヘルパーを追加するためのチェイン可能なラッパーメソッドとして
-  ``ViewBuilder::addHelper()``を追加しました。
+  ``ViewBuilder::addHelper()`` を追加しました。
 * ルートパスからのリンクやURLをより簡単に作成するために、ビュー層でIDEをサポートした
   ``HtmlHelper::linkFromPath()`` と ``UrlHelper::urlFromPath()`` を追加しました。
 
 Utility
 -------
-
-* ``Hash::combine()`` now accepts ``null`` for the ``$keyPath`` parameter.
-  Providing null will result in a numerically indexed output array.
 
 * ``Hash::combine()`` は ``$keyPath``` パラメータに ``null`` を指定できるようになりました。
   nullを指定すると、数値インデックス付きの出力配列になります。
