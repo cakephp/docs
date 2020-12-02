@@ -168,7 +168,7 @@ Http
   ``Response`` making them usable with ``withType()``.
 - ``Client::createFromUrl()`` was added. This method can be used to create
   HTTP clients scoped to specific domains including a base path.
-- ``A new utility class ``Cake\Http\FlashMessage`` was added whose instance is
+- A new utility class ``Cake\Http\FlashMessage`` was added whose instance is
   available through ``ServerRequest::getFlash()``. The class similar to the
   ``FlashComponent`` allows you to set flash messages. It can be particularly
   useful for setting flash messages from middlewares.
