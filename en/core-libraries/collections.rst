@@ -394,7 +394,7 @@ against.
 Aggregation
 ===========
 
-.. php:method:: reduce($callback)
+.. php:method:: reduce($callback, $initial)
 
 The counterpart of a ``map()`` operation is usually a ``reduce``. This
 function will help you build a single result out of all the elements in a
@@ -413,7 +413,7 @@ performing::
         return array_merge($accumulated, $article->tags);
     }, []);
 
-.. php:method:: min(string|$callback, $type = SORT_NUMERIC)
+.. php:method:: min(string|callable $callback, $type = SORT_NUMERIC)
 
 To extract the minimum value for a collection based on a property, just use the
 ``min()`` function. This will return the full element from the collection and
@@ -434,7 +434,7 @@ callback function::
 
     $personWithYoungestDad = $collection->min('dad.age');
 
-.. php:method:: max($callback, $type = SORT_NUMERIC)
+.. php:method:: max(string|callable $callback, $type = SORT_NUMERIC)
 
 The same can be applied to the ``max()`` function, which will return a single
 element from the collection having the highest property value::
