@@ -201,7 +201,7 @@ example of a bootable service would be::
 
         public function bootstrap($container)
         {
-            $container->addServiceProvider(new InvoicingServiceProvider();
+            $container->addServiceProvider(new InvoicingServiceProvider());
         }
     }
 
