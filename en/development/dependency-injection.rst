@@ -42,19 +42,32 @@ testing.
 
 Adding Services
 ===============
-
-In order to have services created by the container, you need to tell it
-which classes it can create and how to build those classes. The simplest
-definition is via a class name::
-
-    use App\Service\BillingService;
-
-    // in your Application::services() method.
+In order to have services created by the container, you need to tell it which
+classes it can create and how to build those classes. The
+simplest definition is via a class name::
 
     // Add a class by its name.
     $container->add(BillingService::class);
 
-You can also define implementations for interfaces that your application uses::
+Your application and plugins define the services they have in the
+``services()`` hook method::
+
+    // in src/Application.php
+    namespace App;
+
+    use App\Service\BillingService;
+    use Cake\Core\ContainerInterface;
+    use Cake\Http\BaseApplication;
+
+    class Application extends BaseApplication
+    {
+        public function services(ContainerInterface $container): void
+        {
+            $container->add(BillingService::class);
+        }
+    }
+
+You can define implementations for interfaces that your application uses::
 
     use App\Service\AuditLogServiceInterface;
     use App\Service\AuditLogService;
