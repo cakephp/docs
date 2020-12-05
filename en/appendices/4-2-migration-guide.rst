@@ -188,8 +188,8 @@ TestSuite
   ``assertMailSubjectContainsAt()`` were added.
 - ``mockService()`` was added to ``ConsoleIntegrationTestTrait`` and
   ``IntegrationTestCaseTrait``. This method enables services injected with the
-    :doc:`/development/dependency-injection` container to be replaced with mock
-    or stub objects.
+  :doc:`/development/dependency-injection` container to be replaced with mock
+  or stub objects.
 
 View
 ----
