@@ -49,7 +49,7 @@ definition is via a class name::
 
     use App\Service\BillingService;
 
-    // in your application's services() method.
+    // in your Application::services() method.
 
     // Add a class by its name.
     $container->add(BillingService::class);
@@ -59,7 +59,7 @@ You can also define implementations for interfaces that your application uses::
     use App\Service\AuditLogServiceInterface;
     use App\Service\AuditLogService;
 
-    // in your application's services() method.
+    // in your Application::services() method.
 
     // Add an implementation for an interface.
     $container->add(AuditLogServiceInterface::class, AuditLogService::class);
@@ -88,6 +88,8 @@ Adding Shared Services
 By default services are not shared. Every object (and dependencies) is created
 each time it is fetched from the container. If you want to re-use a single
 instance, often referred to as a singleton, you can mark a service as 'shared'::
+
+    // in your Application::services() method.
 
     $container->share(BillingService::class);
 
@@ -176,6 +178,7 @@ Using Service Providers
 To load a service provider add it into the container using the
 ``addServiceProvider()`` method::
 
+    // in your Application::services() method.
     $container->addServiceProvider(new BillingServiceProvider());
 
 Bootable ServiceProviders
