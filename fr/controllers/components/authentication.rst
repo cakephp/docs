@@ -10,6 +10,11 @@ combiner l'authentification des objets, l'autorisation des objets pour créer un
 moyen souple pour permettre l'identification et le contrôle des autorisations de
 l'utilisateur.
 
+.. deprecated:: 4.0.0
+    Le composant AuthComponent est obsolète à partir de la version 4.0.0 et sera remplacé
+    par les plugins `authorization <https://book.cakephp.org/authorization/>`__
+    et `authentication <https://book.cakephp.org/authentication/>`__.
+
 .. _authentication-objects:
 
 Lectures Suggérées Avant de Continuer
@@ -24,7 +29,8 @@ Tout ceci est couvert étape par étape dans le
 
 Si vous cherchez des solutions existantes pour l'authentification et / ou
 l'autorisation pour CakePHP, allez jeter un oeil à la section
-`Authentication and Authorization <https://github.com/FriendsOfCake/awesome-cakephp/blob/master/README.md#authentication-and-authorization>`_ de la CakePHP Awesome List.
+`Authentication and Authorization <https://github.com/FriendsOfCake/awesome-cakephp/blob/master/README.md#authentication-and-authorization>`_
+de la CakePHP Awesome List.
 
 Authentification
 ================
@@ -86,10 +92,10 @@ l'information de configuration dans chaque objet d'authentification en utilisant
 un tableau::
 
     // Configuration simple
-    $this->Auth->config('authenticate', ['Form']);
+    $this->Auth->setConfig('authenticate', ['Form']);
 
     // Passer la configuration
-    $this->Auth->config('authenticate', [
+    $this->Auth->setConfig('authenticate', [
         'Basic' => ['userModel' => 'Members'],
         'Form' => ['userModel' => 'Members']
     ]);
@@ -101,7 +107,7 @@ qui sont passés à chaque objet attaché. La clé ``all`` est aussi utilisée c
 cela ``AuthComponent::ALL``::
 
     // Passer la configuration en utilisant 'all'
-    $this->Auth->config('authenticate', [
+    $this->Auth->setConfig('authenticate', [
         AuthComponent::ALL => ['userModel' => 'Members'],
         'Basic',
         'Form'
@@ -121,12 +127,6 @@ suivante.
   l'utilisateur. 'all' par défaut.
 - ``passwordHasher`` La classe de hashage de mot de Passe. Par défaut à
   ``Default``.
-- ``storage`` Classe de stockage. Par défaut à ``Session``.
-- Les options ``scope`` et ``contain`` sont dépréciées dans 3.1. Utilisez un
-  finder personnalisé à la place pour modifier la requête qui récupère
-  l'utilisateur.
-- L'option ``userFields`` a été dépréciée depuis la version 3.1. Utilisez
-  ``select()`` dans vos finders personnalisés.
 
 Pour configurer les différents champs de l'utilisateur dans la méthode
 ``initialize()``::
@@ -143,8 +143,8 @@ Pour configurer les différents champs de l'utilisateur dans la méthode
         ]);
     }
 
-Ne mettez pas d'autre clés de configuration de Auth (comme authError,
-loginAction, ...) au sein d'élément ``authenticate`` ou ``Form``. Ils doivent
+Ne mettez pas d'autre clés de configuration de Auth (comme ``authError``, ``loginAction``, ...)
+au sein d'élément ``authenticate`` ou ``Form``. Ils doivent
 se trouver au même niveau que la clé d'authentification. La configuration
 ci-dessus avec d'autres configurations ressemblerait à quelque chose comme::
 
@@ -226,11 +226,6 @@ utilisateur, par exemple ``username`` et ``password``::
         return $query;
     }
 
-.. note::
-    L'option ``finder`` est disponible depuis 3.1. Pour les versions
-    antérieures, vous pouvez utiliser les options ``scope`` et ``contain``
-    pour modifier la requête.
-
 Identifier les Utilisateurs et les Connecter
 --------------------------------------------
 
@@ -269,7 +264,7 @@ message flash est défini.
 .. warning::
 
     ``$this->Auth->setUser($data)`` connectera l'utilisateur avec les données
-    postées. Elle ne va pas réellement vérifier les certificats avec une classe
+    postées. Elle ne va pas réellement vérifier l'identité avec une classe
     d'authentification.
 
 Rediriger les Utilisateurs Après Connexion
@@ -284,8 +279,7 @@ laquelle l'utilisateur doit être redirigé après s'être connecté.
 Si aucun paramètre n'est passé, l'URL retournée suivra les règles suivantes:
 
 - Retourne l'URL normalisée du paramètre URL redirect s'il est présent et qu'il
-  pointe sur le même domaine que celui de l'application. Avant 3.4.0, la valeur
-  de la clé ``Auth.redirect`` stockée en session était utilisée.
+  pointe sur le même domaine que celui de l'application.
 - S'il n'y a pas de valeur en session ou en paramètres URL et que la clé
   ``loginRedirect`` faisait partie de la configuration de ``AuthComponent``,
   la valeur de ``loginRedirect`` est retournée.
@@ -297,7 +291,7 @@ Création de Systèmes d'Authentification Stateless
 
 Les authentifications basic et digest sont des schémas d'authentification
 sans état (stateless) et ne nécessitent pas un POST initial ou un form. Si
-vous utilisez seulement les authentificateurs basic / digest, vous n'avez pas
+vous utilisez seulement les authentificateurs basic/digest, vous n'avez pas
 besoin d'action login dans votre controller. L'authentication stateless va
 re-vérifier les autorisations de l'utilisateur à chaque requête, ceci crée un
 petit surcoût mais permet aux clients de se connecter sans utiliser les
@@ -321,7 +315,7 @@ username et password.
 
 .. note::
 
-    Dans le cas ou l'authentification ne fonctionne pas tel qu'espéré,
+    Dans le cas ou l'authentification ne fonctionne pas telle qu'espérée,
     vérifiez si les requêtes sont exécutées (voir
     ``BaseAuthenticate::_query($username)``). Dans le cas où aucune
     requête n'est exécutée, vérifiez si ``$_SERVER['PHP_AUTH_USER']`` et
@@ -331,11 +325,12 @@ username et password.
 
         RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization},L]
 
-Pour chaque requête, ces valeurs sont utilisées pour ré-identifier
-l'utilisateur et s'assurer que c'est un utilisateur valide. Comme avec les
-méthodes d'authentification de l'objet ``authenticate()``, la méthode
-``getuser()`` devrait retourner un tableau d'information utilisateur en cas de
-succès et ``false`` en cas d'échec::
+Pour chaque requête, ces valeurs, ``PHP_AUTH_USER`` et ``PHP_AUTH_PW``)
+sont utilisées pour ré-identifier l'utilisateur et s'assurer que c'est
+un utilisateur valide. Comme avec les méthodes d'authentification de
+l'objet ``authenticate()``, la méthode ``getuser()`` devrait retourner
+un tableau d'information utilisateur en cas de succès et ``false``
+en cas d'échec::
 
     public function getUser(ServerRequest $request)
     {
@@ -360,11 +355,11 @@ Utiliser l'Authentification Basic
 
 L'Authentification Basic vous permet de créer une authentification stateless
 qui peut être utilisée pour des applications en intranet ou pour des scénarios
-d'API simple. Les certificats d'identification de l'authentification Basic
+d'API simple. Les données d'identification de l'authentification Basic
 seront revérifiés à chaque requête.
 
 .. warning::
-    L'authentification Basic transmet les certificats d'identification en clair.
+    L'authentification Basic transmet les données d'identification en clair.
     Vous devez utiliser HTTPS quand vous utilisez l'authentification Basic.
 
 Pour utiliser l'authentification basic, vous devez configurer AuthComponent::
@@ -386,7 +381,7 @@ model Users.
 Créer des clés d'API pour une Authentification Basic
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Comme le HTTP basic envoie les certificats d'identification en clair, il n'est
+Comme le HTTP basic envoie les données d'identification en clair, il n'est
 pas sage que les utilisateurs envoient leur mot de passe de connexion. A la
 place, une clé d'API opaque est généralement utilisée. Vous pouvez générer
 de façon aléatoire ces tokens d'API en utilisant les libraries de CakePHP::
@@ -395,19 +390,20 @@ de façon aléatoire ces tokens d'API en utilisant les libraries de CakePHP::
 
     use Cake\Auth\DefaultPasswordHasher;
     use Cake\Utility\Text;
-    use Cake\Event\Event;
+    use Cake\Event\EventInterface;
     use Cake\ORM\Table;
+    use Cake\Utility\Security;
 
     class UsersTable extends Table
     {
-        public function beforeSave(Event $event)
+        public function beforeSave(EventInterface $event)
         {
             $entity = $event->getData('entity');
 
             if ($entity->isNew()) {
                 $hasher = new DefaultPasswordHasher();
 
-                // Generate an API 'token'
+                // Génère un 'token' pour l'API
                 $entity->api_key_plain = Security::hash(Security::randomBytes(32), 'sha256', false);
 
                 // Bcrypt the token so BasicAuthenticate can check
@@ -585,19 +581,14 @@ Pour afficher les messages d'erreur de session que Auth génère, vous devez
 ajouter les lignes de code suivante dans votre layout. Ajoutez les deux lignes
 suivantes au fichier **templates/layouts/default.php** dans la section body::
 
-    // Seule cette ligne est nécessaire à partir de 3.4.0.
     echo $this->Flash->render();
-
-    // Avant 3.4.0, cette ligne sera également nécessaire.
-    echo $this->Flash->render('auth');
 
 Vous pouvez personnaliser les messages d'erreur et les réglages que le
 component Auth ``AuthComponent`` utilise. En utilisant ``flash``,
 vous pouvez configurer les paramètres que le component Auth utilise pour
 envoyer des messages flash. Les clés disponibles sont
 
-- ``key`` - La clé à utiliser, 'default' par défaut. Avant 3.4.0, la clé par
-  défaut était 'auth'.
+- ``key`` - La clé à utiliser, 'default' par défaut.
 - ``element`` - Le nom de l'élément à utiliser pour le rendu. ``null`` par défaut.
 - ``params`` - Le tableau des paramètres supplémentaires à utiliser, ``[]`` par
   défaut.
@@ -614,7 +605,7 @@ Parfois, vous voulez seulement afficher l'erreur d'autorisation après que
 l'user se soit déjà connecté. Vous pouvez supprimer ce message en configurant
 sa valeur avec le booléen ``false``.
 
-Dans le beforeFilter() de votre controller ou dans les configurations du
+Dans le ``beforeFilter()`` de votre controller ou dans la configuration du
 component::
 
     if (!$this->Auth->user()) {
@@ -703,7 +694,7 @@ hasher de mot de passe::
         ]);
     }
 
-Supporter des systèmes légaux est une bonne idée mais il est encore mieux de
+Supporter des systèmes hérités est une bonne idée mais il est encore mieux de
 garder votre base de données avec les derniers outils de sécurité. La section
 suivante va expliquer comment migrer d'un algorithme de hash vers celui par
 défaut de CakePHP.
@@ -767,52 +758,6 @@ Comme vous pouvez le voir, nous définissons le mot de passe en clair à nouveau
 pour que la fonction directrice (setter) dans l'entity hashe le mot de passe
 comme montré dans les exemples précédents et sauvegarde ensuite l'entity.
 
-Hachage des Mots de Passe pour l'Authentification Digest
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Puisque l'authentification Digest nécessite un mot de passe haché dans un
-format défini par la RFC, afin d'hacher correctement un mot de
-passe pour l'utilisation de l'authentification Digest, vous devriez utilisez
-la fonction spéciale ``DigestAuthenticate``. Si vous vous apprêtez à combiner
-l'authentification Digest avec d'autres stratégies d'authentifications, il
-est aussi recommandé de stocker le mot de passe  Digest dans une colonne
-séparée, pour le hachage normal de mot de passe::
-
-    namespace App\Model\Table;
-
-    use Cake\Auth\DigestAuthenticate;
-    use Cake\Event\Event;
-    use Cake\ORM\Table;
-
-    class UsersTable extends Table
-    {
-
-        public function beforeSave(Event $event)
-        {
-            $entity = $event->data['entity'];
-
-            // Make a password for digest auth.
-            $entity->digest_hash = DigestAuthenticate::password(
-                $entity->username,
-                $entity->plain_password,
-                env('SERVER_NAME')
-            );
-            return true;
-        }
-    }
-
-Les mots de passe pour l'authentification Digest ont besoin d'un peu plus
-d'information que pour d'autres mots de passe hachés, basé sur le RFC pour
-l'authentification Digest.
-
-.. note::
-
-    Le troisième paramètre de DigestAuthenticate::password() doit correspondre
-    à la valeur de la configuration 'realm' définie quand DigestAuthentication
-    était configuré dans AuthComponent::$authenticate. Par défaut à
-    ``env('SCRIPT_NAME')``. Vous devez utiliser une chaîne statique si vous
-    voulez un hachage permanent dans des environnements multiples.
-
 Connecter les Utilisateurs Manuellement
 ---------------------------------------
 
@@ -864,12 +809,12 @@ Déconnexion des Utilisateurs
 
 Éventuellement, vous aurez besoin d'un moyen rapide pour dés-authentifier
 les utilisateurs et les rediriger où ils devraient aller. Cette méthode
-est aussi très pratique si vous voulez fournir un lien 'Déconnecte-moi'
+est aussi très pratique si vous voulez fournir un lien 'Me déconnecter'
 à l'intérieur de la zone membres de votre application::
 
     public function logout()
     {
-        $this->redirect($this->Auth->logout());
+        return $this->redirect($this->Auth->logout());
     }
 
 La déconnexion des utilisateurs connectés avec l'authentification Basic
@@ -883,7 +828,7 @@ Décider quand lancer l'Authentification
 ---------------------------------------
 
 Dans certains cas, vous aurez peut-être envie d'utiliser ``$this->Auth->user()``
-dans la méthode ``beforeFilter(Event $event)``. C'est possible en utilisant la
+dans la méthode ``beforeFilter()``. C'est possible en utilisant la
 clé de config ``checkAuthIn``. Ce qui suit modifie les vérifications initiales
 d'authentification qui doivent être faites pour un event en particulier::
 
@@ -901,7 +846,7 @@ Autorisation
 
 L'autorisation est le processus qui permet de s'assurer qu'un utilisateur
 identifié/authentifié est autorisé à accéder aux ressources qu'il demande.
-S'il est activé, ``ÀuthComponent`` peut vérifier automatiquement des
+S'il est activé, ``AuthComponent`` peut vérifier automatiquement des
 gestionnaires d'autorisations et veiller à ce que les utilisateurs connectés
 soient autorisés à accéder aux ressources qu'ils demandent. Il y a plusieurs
 gestionnaires d'autorisations intégrés et vous pouvez créer vos propres
@@ -932,8 +877,8 @@ gestionnaires devraient retourner ``true`` s'ils sont capables de vérifier avec
 succès les autorisations. Les gestionnaires seront appelés dans l'ordre jusqu'à
 ce que l'un d'entre eux retourne ``true``. Si toutes les vérifications échouent,
 l'utilisateur sera redirigé vers la page d'où il vient. Vous pouvez également
-stopper les autorisations en levant une exception. Vous aurez besoin de traiter
-toutes les exceptions levées et de les manipuler.
+stopper les autorisations en levant une exception. Vous aurez besoin d'attraper
+toutes les exceptions levées et de les traiter.
 
 Vous pouvez configurer les gestionnaires d'autorisations dans l'une des méthodes
 ``beforeFilter()`` ou ``initialize()`` de votre controller. Vous pouvez passer
@@ -1008,8 +953,8 @@ Une fois que vous avez créé votre objet authorize personnalisé, vous pouvez
 l'utiliser en l'incluant dans le tableau authorize::
 
     $this->Auth->config('authorize', [
-        'Ldap', // app authorize object.
-        'AuthBag.Combo', // plugin authorize object.
+        'Ldap', // Objet d'autorisation de l'application.
+        'AuthBag.Combo', // Objet d'autorisation d'un plugin.
     ]);
 
 Ne pas Utiliser d'Autorisation
@@ -1017,11 +962,11 @@ Ne pas Utiliser d'Autorisation
 
 Si vous souhaitez ne pas utiliser les objets d'autorisation intégrés et que vous
 voulez gérer les choses entièrement à l'extérieur du Component Auth
-(AuthComponent), vous pouvez définir
-``$this->Auth->config('authorize', false);``. Par défaut, le component Auth
+(``AuthComponent``), vous pouvez définir
+``$this->Auth->setConfig('authorize', false);``. Par défaut, le component Auth
 démarre avec ``authorize`` à ``false``. Si vous n'utilisez pas de schéma
 d'autorisation, assurez-vous de vérifier les autorisations vous-même dans la
-partie beforeFilter de votre controller ou avec un autre component.
+partie ``beforeFilter()`` de votre controller ou avec un autre component.
 
 Rendre des Actions Publiques
 ----------------------------
@@ -1030,7 +975,7 @@ Rendre des Actions Publiques
 
 Il y a souvent des actions de controller que vous souhaitez laisser entièrement
 publiques ou qui ne nécessitent pas de connexion utilisateur. Le component Auth
-(AuthComponnent) est pessimiste et par défaut interdit l'accès. Vous pouvez
+(``AuthComponent``) est pessimiste et par défaut interdit l'accès. Vous pouvez
 marquer des actions comme publique en utilisant ``AuthComponent::allow()``. En
 marquant les actions comme publique, le component Auth ne vérifiera pas la
 connexion d'un utilisateur, ni n'autorisera la vérification des objets::
@@ -1045,7 +990,7 @@ connexion d'un utilisateur, ni n'autorisera la vérification des objets::
     $this->Auth->allow(['view', 'index']);
 
 En l'appellant sans paramètre, vous autorisez toutes les actions à être
-publique. Pour une action unique, vous pouvez fournir le nom comme une chaine,
+publiques. Pour une action unique, vous pouvez fournir le nom comme une chaine,
 sinon utiliser un tableau.
 
 .. note::
@@ -1126,7 +1071,7 @@ Options de Configuration
 
 Les configurations suivantes peuvent toutes être définies soit dans la méthode
 ``initialize()`` de votre controller, soit en utilisant
-``$this->Auth->config()`` dans votre ``beforeFilter()``:
+``$this->Auth->setConfig()`` dans votre ``beforeFilter()``:
 
 ajaxLogin
     Le nom d'une vue optionnelle d'un élément à rendre quand une requête AJAX
@@ -1192,12 +1137,12 @@ checkAuthIn
     vérifications soient faites avant que l'action ``beforeFilter()`` du
     controller soit executée.
 
-Aussi, ``$this->Auth->config()`` vous permet d'obtenir une valeur de
+Aussi, ``$this->Auth->getConfig()`` vous permet d'obtenir une valeur de
 configuration en appelant seulement l'option de configuration::
 
-    $this->Auth->config('loginAction');
+    $this->Auth->getConfig('loginAction');
 
-    $this->redirect($this->Auth->config('loginAction'));
+    return $this->redirect($this->Auth->getConfig('loginAction'));
 
 Utile si vous souhaitez rediriger un utilisateur sur la page ``login`` par
 exemple. Sans option, la configuration complète sera retournée.
