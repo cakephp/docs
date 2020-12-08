@@ -8,18 +8,18 @@ Controllers (Contrôleurs)
 Les Controllers sont le 'C' dans MVC. Après que le routage a été appliqué et
 que le bon controller a été trouvé, l'action de votre controller est appelée.
 Votre controller devra gérer l'interprétation des données requêtées, s'assurer
-que les bons models sont appelés et que la bonne réponse ou vue est rendue. Les
-controllers peuvent être imaginés comme une couche au milieu entre le Model et
-la Vue. Le mieux est de garder des controllers peu chargés, et des models plus
+que les bons modèles sont appelés et que la bonne réponse ou vue est rendue. Les
+controllers peuvent être imaginés comme une couche intercalée entre le Modèle et
+la Vue. Le mieux est de garder des controllers peu chargés, et des modèles plus
 fournis. Cela vous aidera à réutiliser votre code et facilitera le test de votre
 code.
 
 Habituellement, les controllers sont utilisés pour gérer la logique autour d'un
-seul model. Par exemple, si vous construisez un site pour gérer une boulangerie
+seul modèle. Par exemple, si vous construisez un site pour gérer une boulangerie
 en-ligne, vous aurez sans doute un RecettesController qui gère vos recettes et
 un IngredientsController qui gère vos ingrédients. Cependant, il est aussi
-possible d'avoir des controllers qui fonctionnent avec plus d'un model. Dans
-CakePHP, un controller est nommé d'après le model principal qu'il gère.
+possible d'avoir des controllers qui fonctionnent avec plus d'un modèle. Dans
+CakePHP, un controller est nommé d'après le modèle principal qu'il gère.
 
 Les controllers de votre application sont des classes qui étendent la classe
 CakePHP ``AppController``, qui hérite elle-même de la classe
@@ -81,10 +81,10 @@ pour ce type d'utilisation::
 En plus de la méthode ``initialize()``, l'ancienne propriété ``$components``
 vous permettra aussi de déclarer les components qui doivent être chargés. Bien
 que les règles d'héritage en orienté objet s'appliquent, les components et
-les helpers utilisés par un controller sont traités spécialement. Dans ces
+les helpers utilisés par un controller sont traités spécifiquement. Dans ces
 cas, les valeurs de la propriété de ``AppController`` sont fusionnées avec les
 tableaux de la classe de controller enfant. Les valeurs dans la classe enfant
-seront toujours surchargées par celles de ``AppController``.
+surchargeront toujours celles de ``AppController``.
 
 Déroulement d'une Requête
 =========================
@@ -147,8 +147,8 @@ pouvez retourner un objet de :php:class:`Cake\\Http\\Response` de l'action
 avec la response complètement créée.
 
 Afin que vous utilisiez efficacement le controller dans votre propre
-application, nous couvrons certains des attributs et méthodes du cœur fournis
-par les controllers de CakePHP.
+application, nous allons détailler certains des attributs et méthodes du cœur
+fournis par les controllers de CakePHP.
 
 Interactions avec les Vues
 ==========================
@@ -194,6 +194,10 @@ rapide d'affecter en une seule fois un jeu complet d'informations à la vue::
 
     $this->set($data);
 
+Gardez à l'esprit que les variables de vue sont partagées entre toutes les parties rendues par votre vue.
+Elles seront disponibles dans toutes les parties de la vue: le modèle, la mise en page et tous les éléments
+à l'intérieur des deux premiers.
+
 Définir les Options d'une View
 ------------------------------
 
@@ -219,7 +223,7 @@ Rendre une View
 La méthode ``Controller::render()`` est automatiquement appelée à
 la fin de chaque action exécutée par le controller. Cette méthode exécute
 toute la logique liée à la présentation (en utilisant les variables
-transmises via la méthode ``Controller::set()``, place le contenu
+transmises via la méthode ``Controller::set()``), place le contenu
 de la vue à l'intérieur de son ``View::$layout`` et transmet le
 tout à l'utilisateur final.
 
@@ -235,7 +239,7 @@ sera utilisé::
     // ...
         public function search()
         {
-            // Render the view in templates/Recipes/search.php
+            // Rend la vue située dans  templates/Recipes/search.php
             $this->render();
         }
     // ...
@@ -248,14 +252,14 @@ alternatif en précisant le nom d'un fichier de vue en premier argument de la
 méthode ``Controller::render()``.
 
 Si ``$view`` commence par un '/' on suppose que c'est un fichier de
-vue ou un élément dont le chemin est relatif au dossier **src/Template**.
+vue ou un élément dont le chemin est relatif au dossier **templates**.
 Cela permet un affichage direct des éléments, ce qui est très pratique lors
 d'appels AJAX::
 
     // Rend un élément dans templates/element/ajaxreturn.php
     $this->render('/element/ajaxreturn');
 
-Le paramètre ``$layout`` de ``Controller::render()`` vous permet de spécifier
+Le second paramètre ``$layout`` de ``Controller::render()`` vous permet de spécifier
 le layout de la vue qui est rendue.
 
 Rendre un Template de Vue Spécifique
@@ -300,55 +304,17 @@ Rediriger vers d'Autres Pages
 
 .. php:method:: redirect(string|array $url, integer $status)
 
-La méthode de contrôle de flux que vous utiliserez le plus souvent est
-``Controller::redirect()``. Cette méthode prend son premier
-paramètre sous la forme d'une URL relative à votre application CakePHP.
-Quand un utilisateur a réalisé un paiement avec succès, vous aimeriez le
-rediriger vers un écran affichant le reçu::
+La méthode ``redirect()`` ajoute un en-tête ``Location`` et définit le
+code d'état de la réponse et la renvoie. Vous devez renvoyer la réponse créée par
+``redirect()`` pour que CakePHP envoie la redirection au lieu de terminer l'action
+du contrôleur et rendre la vue.
 
-    public function place_order()
-    {
-        // Logique pour finaliser la commande
-        if ($success) {
-            return $this->redirect(
-                ['controller' => 'Orders', 'action' => 'thanks']
-            );
-        }
-        return $this->redirect(
-            ['controller' => 'Orders', 'action' => 'confirm']
-        );
-    }
-
-La méthode va retourner l'instance de réponse avec les bons headers définis.
-Vous devrez retourner l'instance de réponse à partir de votre action pour éviter
-les rendus de view et laisser le dispatcher gérer la bonne redirection.
-
-Vous pouvez aussi utiliser une URL relative ou absolue avec $url::
-
-    return $this->redirect('/orders/thanks');
-    return $this->redirect('http://www.example.com');
-
-Vous pouvez aussi passer des données à l'action::
-
-    return $this->redirect(['action' => 'edit', $id]);
-
-Le second paramètre de la fonction ``Controller::redirect()``
-vous permet de définir un code de statut HTTP accompagnant la redirection.
-Vous aurez peut-être besoin d'utiliser le code 301 (document
-déplacé de façon permanente) ou 303 (voir ailleurs), en fonction
-de la nature de la redirection.
-
-Si vous avez besoin de rediriger à la page appelante, vous pouvez
-utiliser::
-
-    return $this->redirect($this->referer());
-
-Un exemple d'utilisation des requêtes en chaînes et hashés ressemblerait
-à ceci::
+vous pouvez rediriger en utilisant les valeurs du :term:`tableau de routing`::
 
     return $this->redirect([
         'controller' => 'Orders',
         'action' => 'confirm',
+        $order->id,
         '?' => [
             'product' => 'pizza',
             'quantity' => 5
@@ -356,9 +322,25 @@ Un exemple d'utilisation des requêtes en chaînes et hashés ressemblerait
         '#' => 'top'
     ]);
 
-L'URL générée serait::
+Ou utiliser une URL relative ou absolue::
 
-    http://www.example.com/orders/confirm?product=pizza&quantity=5#top
+    return $this->redirect('/orders/confirm');
+    return $this->redirect('http://www.example.com');
+
+Ou rediriger vers l'URL appelante (referer)::
+
+    return $this->redirect($this->referer());
+
+En utilisant le deuxième paramètre, vous pouvez définir un code d'état pour votre redirection::
+
+    // Effectue un 301 (moved permanently)
+    return $this->redirect('/order/confirm', 301);
+
+    // Effectue un 303 (see other)
+    return $this->redirect('/order/confirm', 303);
+
+Voir la section :ref:`redirect-component-events` pour savoir comment rediriger hors de
+un gestionnaire de cycle de vie.
 
 Rediriger vers une Autre Action du Même Controller
 --------------------------------------------------
@@ -374,14 +356,14 @@ vers l'action nommée::
     // la liste mise à jour.
     $this->setAction('index');
 
-Chargement des Models Supplémentaires
-=====================================
+Chargement des Modèles Supplémentaires
+======================================
 
 .. php:method:: loadModel(string $modelClass, string $type)
 
 La fonction ``loadModel()`` devient pratique quand
-vous avez besoin d'utiliser une table de model/collection qui n'est pas le
-model du controller par défaut ou un de ses models associés::
+vous avez besoin d'utiliser une table de modèle/collection qui n'est pas le
+modèle du controller par défaut ou un de ses modèles associés::
 
     // Dans une méthode de controller.
     $this->loadModel('Articles');
@@ -400,29 +382,26 @@ connectant sa méthode factory::
         ['ElasticIndexes', 'factory']
     );
 
+La factory peut être un appelable ou une instance de ``\Cake\Datasource\Locator\LocatorInterface``.
+
 Après avoir enregistré la table factory, vous pouvez utiliser ``loadModel()``
 pour charger les instances::
 
     // Dans une méthode de controller.
     $this->loadModel('Locations', 'ElasticIndex');
 
-.. note::
-
-    La TableRegistry intégrée dans l'ORM est connectée par défaut comme
-    provider de 'Table'.
-
-Paginer un Model
-================
+Paginer un Modèle
+=================
 
 .. php:method:: paginate()
 
 Cette méthode est utilisée pour paginer les résultats retournés par vos
-models. Vous pouvez définir les tailles de la page, les conditions à
+modèles. Vous pouvez définir les tailles de la page, les conditions à
 utiliser pour la recherche de ces données et bien plus encore. Consultez la
 section :doc:`pagination <controllers/components/pagination>`
 pour plus de détails sur l'utilisation de la pagination.
 
-L'attribut paginate vous donne une façon facile de personnaliser la façon dont
+L'attribut ``$paginate`` vous donne une façon facile de personnaliser la façon dont
 ``paginate()`` se comporte::
 
     class ArticlesController extends AppController
@@ -459,30 +438,6 @@ d'informations. Comme mentionné plus tôt, la propriété ``$components`` sera
 fusionnée avec la propriété définie dans chacune des classes parentes de votre
 controller.
 
-Configurer les Helpers à Charger
-================================
-
-.. php:attr:: helpers
-
-Voyons comment dire à un controller de CakePHP que vous avez prévu d'utiliser
-les classes MVC supplémentaires::
-
-    class RecipesController extends AppController
-    {
-        public $helpers = ['Form'];
-    }
-
-Chacune de ces variables sont fusionnées avec leurs valeurs héritées,
-ainsi il n'est pas nécessaire (par exemple) de redéclarer ``FormHelper``, ou
-bien tout ce qui est déclaré dans votre ``AppController``.
-
-.. deprecated:: 3.0
-    Le chargement des helpers depuis le controller est fourni pour des raisons
-    de rétrocompatibilité. Référez-vous à la section suivante pour apprendre à
-    :ref:`configuring-helpers`.
-
-.. _controller-life-cycle:
-
 Cycle de Vie des Callbacks de la Requête
 ========================================
 
@@ -505,7 +460,7 @@ Callback des Controllers
 Par défaut, les méthodes de rappel (callbacks) suivantes sont connectées aux
 events liés si les méthodes sont implémentées dans vos controllers.
 
-.. php:method:: beforeFilter(Event $event)
+.. php:method:: beforeFilter(EventInterface $event)
 
     Cette méthode est appelée pendant l'event ``Controller.initialize`` qui se
     produit avant chaque action du controller. C'est un endroit pratique pour
@@ -519,18 +474,18 @@ events liés si les méthodes sont implémentées dans vos controllers.
     empêcher l'appel des autres écouteurs du même event. Vous devez
     explicitement :ref:`stopper l'event <stopping-events>`.
 
-.. php:method:: beforeRender(Event $event)
+.. php:method:: beforeRender(EventInterface $event)
 
     Cette méthode est appelée pendant l'event ``Controller.beforeRender`` qui
     se produit après l'action du controller mais avant que la vue ne soit
     rendue. Ce callback n'est pas souvent utilisé, mais peut-être nécessaire si
-    vous appelez :php:meth:`~Controller::render()` manuellement à la fin d'une
-    action donnée.
+    vous appelez :php:meth:`~Cake\\Controller\\Controller::render()` manuellement
+    à la fin d'une action donnée.
 
-.. php:method:: afterFilter(Event $event)
+.. php:method:: afterFilter(EventInterface $event)
 
     Cette méthode est appelée pendant l'event ``Controller.shutdown`` qui se
-    produit après chaque action du controller, et après que l'affichage est
+    produit après chaque action du controller, et après que l'affichage soit
     terminé. C'est la dernière méthode du controller qui est exécutée.
 
 En plus des callbacks des controllers, les :doc:`/controllers/components`
@@ -539,8 +494,8 @@ fournissent aussi un ensemble similaire de callbacks.
 N'oubliez pas d'appeler les callbacks de ``AppController`` dans les callbacks
 des controllers enfant pour avoir de meilleurs résultats::
 
-    //use Cake\Event\Event;
-    public function beforeFilter(Event $event)
+    //use Cake\Event\EventInterface;
+    public function beforeFilter(EventInterface $event)
     {
         parent::beforeFilter($event);
     }
