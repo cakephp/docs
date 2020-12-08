@@ -529,8 +529,8 @@ use the ``HttpsEnforcerMiddleware``::
         'disableOnDebug' => true,
     ]);
 
-If a non-HTTPs request is received that doesn't use GET
-a ``BadRequestException`` will be raised.
+Si une demande non-HTTP est reçue qui n'utilise pas GET
+une ``BadRequestException`` sera déclenchée.
 
 .. meta::
     :title lang=en: Http Middleware
