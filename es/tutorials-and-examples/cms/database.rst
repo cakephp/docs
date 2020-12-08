@@ -56,7 +56,7 @@ tablas necesarias:
     VALUES
     (1, 'First Post', 'first-post', 'This is the first post.', 1, NOW(), NOW());
 
-Si está utilizando PostgreSQL, conéctese a la base de datos `cake_cms`` y ejecute el
+Si está utilizando PostgreSQL, conéctese a la base de datos ``cake_cms`` y ejecute el
 siguiente SQL en su lugar:
 
 .. code-block:: SQL
