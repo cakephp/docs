@@ -1,14 +1,14 @@
-FlashComponent
-##############
+Flash
+#####
 
 .. php:namespace:: Cake\Controller\Component
 
 .. php:class:: FlashComponent(ComponentCollection $collection, array $config = [])
 
 FlashComponent est un moyen de définir des messages de notifications à afficher
-après avoir envoyé un formulaire ou des données connus. CakePHP appelle
-ces messages des "messages flash". FlashComponent écrit les messages flash dans
-``$_SESSION`` pour être affichés dans une View en utilisant
+après avoir traité les données envoyées via un formulaire ou acquitter des informations.
+CakePHP appelle ces messages des "messages flash". FlashComponent écrit les messages flash
+dans ``$_SESSION`` pour être affichés dans une View en utilisant
 :doc:`FlashHelper </views/helpers/flash>`.
 
 Définir les Messages Flash
@@ -19,7 +19,7 @@ magique ``__call()`` et sa méthode ``set()``. Pour remplir votre application
 sémantiquement, la méthode magique ``__call()`` de FlashComponent vous permet
 d'utiliser un nom de méthode qui est lié à un element qui se trouve dans le
 répertoire **templates/element/flash**. Par convention, les méthodes en
-camelcase vont être liées à un nom d'element en minuscule et avec des
+camelcase vont être liées à un nom d'élément en minuscule et avec des
 underscores (_)::
 
     // Utilise templates/element/flash/success.php
@@ -33,18 +33,24 @@ vous pouvez utiliser la méthode ``set()``::
 
     $this->Flash->set('Ceci est un message');
 
+Les messages Flash sont ajoutés à un tableau en interne. Les appels successifs à
+``set()`` ou ``__call()`` avec la même clé ajoutera les messages dans
+``$_SESSION``. Si vous souhaitez écraser les messages existants lors de la définition
+d'un flash message, mettez l'option ``clear`` sur ```true`` lors de la configuration
+du composant.
+
 Les méthodes ``__call()`` et ``set()`` de FlashComponent prennent de façon
 optionnelle un deuxième paramètre, un tableau d'options:
 
 * ``key`` Par défaut à 'flash'. La clé du tableau trouvé sous la clé 'Flash'
   dans la session.
 * ``element`` Par défaut à null, mais il va automatiquement être défini lors de
-  l'utilisation de la méthode magique ``__call()``. Le nom d'element à utiliser
+  l'utilisation de la méthode magique ``__call()``. Le nom d'élément à utiliser
   pour le rendu.
 * ``params`` Un tableau en option de clés/valeurs pour rendre disponible des
   variables dans un element.
-* ``clear`` expects a ``bool`` and allows you to delete all messages in the
-  current stack and start a new one.
+* ``clear`` attend un ``bool`` et permet d'effacer tous les messages de la pile
+  courante et d'en démarrer une nouvelle.
 
 Un exemple de l'utilisation de ces options::
 
