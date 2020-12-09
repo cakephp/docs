@@ -1,7 +1,7 @@
 Tutorial Gestor de Contenidos
 #############################
 
-Este tutorial lo guiará a través de la creación de un :abbr: `CMS (Sistema
+Este tutorial lo guiará a través de la creación de un :abbr:`CMS (Sistema
 de Gestión de Contenidos)` simple. Para empezar, instalaremos CakePHP,
 creando nuestra base de datos y construyendo una gestión simple de artículos.
 
