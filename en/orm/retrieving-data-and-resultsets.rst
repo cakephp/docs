@@ -306,7 +306,7 @@ the Author entity. ::
     $query = $articles->find('list', [
         'keyField' => 'id',
         'valueField' => function ($article) {
-            return $article->author->get('label');
+            return $article->get('label');
         }
     ]);
 
