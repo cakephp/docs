@@ -1,6 +1,7 @@
 Query Builder
 #############
 
+
 .. php:namespace:: Cake\ORM
 
 .. php:class:: Query
@@ -337,8 +338,6 @@ These window-only functions contain a window expression by default:
     Returns an Aggregate expression for the ``ROW_NUMBER()`` SQL function.
 ``lag()``
     Returns an Aggregate expression for the ``LAG()`` SQL function.
-``lead()``
-    Returns an Aggregate expression for the ``LEAD()`` SQL function.
 ``lead()``
     Returns an Aggregate expression for the ``LEAD()`` SQL function.
 
