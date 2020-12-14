@@ -182,7 +182,7 @@ CakePHP はレガシーなデータベーススキーマに対応できるくら
 この値は、ランダムで長い文字列にします。そうすることで推測がより困難になります。 ::
 
    'Security' => [
-      'salt' => 'something long and containing lots of different values.',
+      'salt' => '長いもので、多くの異なる値を含むもの。',
    ],
 
 mod\_rewrite について
