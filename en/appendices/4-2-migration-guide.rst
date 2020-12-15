@@ -56,6 +56,13 @@ Behavior Changes
 While the following changes do not change the signature of any methods they do
 change the semantics or behavior of methods.
 
+Collection
+----------
+
+- ``Collection::groupBy()`` and ``Collection::indexBy()`` now throw an exception when
+  the path does not exist or the path contains a null value. Users who need to support
+  null should use a callback to return a default value instead.
+
 Controller
 ----------
 
