@@ -50,11 +50,11 @@ Arquivos de Idiomas
 Traduções podem ser disponibilizados usando arquivos de idiomas armazenados na
 aplicação. O formato padrão para arquivos de tradução do CakePHP é o formato
 `Gettext <http://en.wikipedia.org/wiki/Gettext>`_. Os arquivos precisam ser
-colocado dentro do Diretório **src/Locale/** e dentro deste diretório, deve
+colocado dentro do Diretório **resources/locales/** e dentro deste diretório, deve
 haver uma subpasta para cada idioma, por exemplo::
 
-    /src
-        /Locale
+    /resources
+        /locales
             /en_US
                 default.po
             /en_GB
@@ -63,25 +63,25 @@ haver uma subpasta para cada idioma, por exemplo::
             /es
                 default.po
 
-O domínio padrão é 'default', portanto, a pasta **src/Locale/** deve pelo menos
+O domínio padrão é 'default', portanto, a pasta **resources/locales/** deve pelo menos
 conter o arquivo **default.po** como mostrado acima. Um domínio refere-se a
 qualquer arbitrário agrupamento de mensagens de tradução. Quando nenhum grupo é
 usado, o grupo padrão é selecionado.
 
 As mensagens das Strings do core extraídos da biblioteca CakePHP podem ser
-armazenado separadamente em um arquivo chamado **cake.po** em **src/Locale/**.
+armazenado separadamente em um arquivo chamado **cake.po** em **resources/locales/**.
 O `CakePHP localized library <https://github.com/cakephp/localized>`_ possui
 traduções para as mensagens traduzidas voltados para o cliente no núcleo (o
 domínio Cake). Para usar esses arquivos, baixar ou copiá-los para o seu local
-esperado: **src/Locale/<locale>/cake.po**. Se sua localidade está incompleta ou
+esperado: **resources/locales/<locale>/cake.po**. Se sua localidade está incompleta ou
 incorreta, por favor envie um PR neste repositório para corrigi-lo.
 
 Plugins também podem conter arquivos de tradução, a convenção é usar o
 ``under_score`` do nome do plugin como o domínio para a tradução mensagens::
 
     MyPlugin
-        /src
-            /Locale
+        /resources
+            /locales
                 /fr
                     my_plugin.po
                 /de
@@ -425,7 +425,7 @@ pode usar **.po**, mas carregado de outro local::
 
     use Cake\I18n\MessagesFileLoader as Loader;
 
-    // Load messages from src/Locale/folder/sub_folder/filename.po
+    // Load messages from resources/locales/folder/sub_folder/filename.po
 
     I18n::translator(
         'animals',
