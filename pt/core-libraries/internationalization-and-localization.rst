@@ -132,7 +132,7 @@ método::
 
     use Cake\I18n\I18n;
 
-    I18n::locale('de_DE');
+    I18n::setLocale('de_DE');
 
 Isso também irá alterar a forma como números e datas são formatadas quando
 usamos uma das ferramentas de localização.
@@ -413,7 +413,7 @@ O mínimo absoluto que é necessário para a criação de um tradutor é que a f
 do carregador deve retornar um ``Aura\Intl\Package`` objeto. Uma vez que o
 código é no lugar que você pode usar as funções de tradução, como de costume::
 
-    I18n::locale('fr_FR');
+    I18n::setLocale('fr_FR');
     __d('animals', 'Dog'); // Retorna "Chien"
 
 Como você vê objetos, ``Package`` carregam mensagens de tradução como uma
