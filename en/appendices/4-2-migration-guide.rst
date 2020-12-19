@@ -187,7 +187,7 @@ ORM
   lets you create query objects that don't have automatic aliasing. This helps
   reduce overhead and complexity of building subqueries and common table
   expressions.
-- ``IsUnique`` rule now accepts the `allowMultipleNulls` option that was available
+- ``IsUnique`` rule now accepts the ``allowMultipleNulls`` option that was available
   in 3.x. This is disabled by default unlike in 3.x.
 
 TestSuite
