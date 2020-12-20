@@ -361,6 +361,18 @@ When setting rules on foreign key fields it is important to remember, that
 only the fields listed are used in the rule. This means that setting
 ``$user->account->id`` will not trigger the above rule.
 
+Many database engines allow NULLs to be unique values in UNIQUE indexes.
+To simulate this, set the ``allowMultipleNulls`` options to true::
+
+    $rules->add($rules->isUnique(
+        ['username', 'account_id'],
+        ['allowMultipleNulls']
+    ));
+
+.. versionadded:: 4.2.0
+    The ``allowMultipleNulls`` option was added. This was previously in 3.x, but
+    it is now disabled by default.
+
 Foreign Key Rules
 -----------------
 
