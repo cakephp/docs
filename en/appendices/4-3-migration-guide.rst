@@ -21,6 +21,9 @@ features::
 
     bin/cake upgrade rector --rules cakephp43 <path/to/app/src>
 
+.. note::
+    This only updates CakePHP 4.3 changes. Make sure you apply CakePHP 4.2 changes first.
+    
 A new configuration option has been added to disable deprecations on a path by
 path basis. See :ref:`deprecation-warnings` for more information.
 
