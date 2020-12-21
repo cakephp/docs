@@ -74,8 +74,8 @@ You can include files in request bodies by including a filehandle in the array::
 
 The filehandle will be read until its end; it will not be rewound before being read.
 
-Building Multipart Request Bodies by Hand
------------------------------------------
+Building Multipart Request Bodies
+---------------------------------
 
 There may be times when you need to build a request body in a very specific way.
 In these situations you can often use ``Cake\Http\Client\FormData`` to craft
@@ -274,9 +274,18 @@ tedium, you can create scoped clients::
     // Do a request to api.example.com
     $response = $http->get('/test.php');
 
+If your scoped client only needs information from the URL you can use
+``createFromUrl()``::
+
+    $http = Client::createFromUrl('https://api.example.com/v1/test');
+
+The above would create a client instance with the ``protocol``, ``host``, and
+``basePath`` options set.
+
 The following information can be used when creating a scoped client:
 
 * host
+* basePath
 * scheme
 * proxy
 * auth
@@ -297,6 +306,12 @@ The above will replace the domain, scheme, and port.  However, this request will
 continue using all the other options defined when the scoped client was created.
 See :ref:`http_client_request_options` for more information on the options
 supported.
+
+.. versionadded:: 4.2.0
+    ``Client::createFromUrl()`` was added.
+
+.. versionchanged:: 4.2.0
+    The ``basePath`` option was added.
 
 Setting and Managing Cookies
 ============================

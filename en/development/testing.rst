@@ -1465,8 +1465,13 @@ comparison files as they are referenced:
 Console Integration Testing
 ===========================
 
-See :ref:`console-integration-testing` for information on testing shells and
-commands.
+See :ref:`console-integration-testing` for how to test console commands.
+
+Mocking Injected Dependencies
+=============================
+
+See :ref:`mocking-services-in-tests` for how to replace services injected with
+the dependency injection container in your integration tests.
 
 
 Testing Views

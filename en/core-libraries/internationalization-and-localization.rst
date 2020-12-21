@@ -384,7 +384,8 @@ translation messages are stored, you can create your own translation message
 loader. The easiest way to create your own translator is by defining a loader
 for a single domain and locale::
 
-    use Aura\Intl\Package;
+    use Cake\I18n\Package;
+    // Prior to 4.2 you need to use Aura\Intl\Package
 
     I18n::setTranslator('animals', function () {
         $package = new Package(
@@ -404,8 +405,8 @@ for a single domain and locale::
 The above code can be added to your **config/bootstrap.php** so that
 translations can be found before any translation function is used. The absolute
 minimum that is required for creating a translator is that the loader function
-should return a ``Aura\Intl\Package`` object. Once the code is in place you can
-use the translation functions as usual::
+should return a ``Cake\I18n\Package`` object (prior to 4.2 it should be an ``Aura\Intl\Package`` object). 
+Once the code is in place you can use the translation functions as usual::
 
     I18n::setLocale('fr_FR');
     __d('animals', 'Dog'); // Returns "Chien"
@@ -476,7 +477,8 @@ generic translator loaders for each domain.
 Imagine that you wanted to load all translations for the default domain and for
 any language from an external service::
 
-    use Aura\Intl\Package;
+    use Cake\I18n\Package;
+    // Prior to 4.2 you need to use Aura\Intl\Package
 
     I18n::config('default', function ($domain, $locale) {
         $locale = Locale::parseLocale($locale);

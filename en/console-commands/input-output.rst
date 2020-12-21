@@ -89,6 +89,25 @@ pretty simple::
         | Longer thing | short         | Longest Value |
         +--------------+---------------+---------------+
 
+You can use the ``<text-right>`` formatting tag in tables to right align
+content::
+
+        $data = [
+            ['Name', 'Total Price'],
+            ['Cake Mix', '<text-right>1.50</text-right>'],
+        ];
+        $io->helper('Table')->output($data);
+
+        // Outputs
+        +----------+-------------+
+        | Name 1   | Total Price |
+        +----------+-------------+
+        | Cake Mix |        1.50 |
+        +----------+-------------+
+
+.. versionadded:: 4.2.0
+    The ``<text-right>`` formatting tag was added in 4.2.
+
 Progress Helper
 ---------------
 

@@ -676,8 +676,14 @@ The ``Cake\TestSuite\EmailTrait`` trait provides the following assertions::
     // Asserts an email contains an attachment
     $this->assertMailContainsAttachment('test.png');
 
-    // Asserts an email at a specific index contains the expected value within an Message getter (e.g., "subject")
+    // Asserts an email at a specific index contains the expected value within an Message getter (e.g., "cc")
     $this->assertMailSentWithAt($at, $expected, $parameter);
+
+    // Asserts an email contains a substring in the subject.
+    $this->assertMailSubjectContains('Free Offer');
+
+    // Asserts an email at the specific index contains a substring in the subject.
+    $this->assertMailSubjectContainsAt(1, 'Free Offer');
 
 .. meta::
     :title lang=en: Email

@@ -133,6 +133,22 @@ methods for each of these asset types::
     // Or disable timestamps for one method call.
     $this->Url->css('app.css', ['timestamp' => false]);
 
+Customizing Asset URL generation
+================================
+
+If you need to customize how asset URLs are generated, or want to use custom
+asset cache busting parameters you can use the ``assetUrlClassName`` option::
+
+    // In view initialize
+    $this->loadHelper('Url', ['assetUrlClassName' => AppAsset::class]);
+
+When using the ``assetUrlClassName`` you must implement the same methods as
+``Cake\Routing\Asset`` does.
+
+
+.. versionadded:: 4.2.0
+    The ``assetUrlClassName`` option was added.
+
 For further information check
 `Router::url <https://api.cakephp.org/3.x/class-Cake.Routing.Router.html#_url>`_
 in the API.

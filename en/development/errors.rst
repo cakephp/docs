@@ -17,8 +17,8 @@ handling for your application. The following options are supported:
 
 * ``errorLevel`` - int - The level of errors you are interested in capturing.
   Use the built-in PHP error constants, and bitmasks to select the level of
-  error you are interested in. You can set this to ``E_ALL ^ E_USER_DEPRECATED``
-  to disable deprecation warnings.
+  error you are interested in. See :ref:`deprecation-warnings` to disable
+  deprecation warnings.
 * ``trace`` - bool - Include stack traces for errors in log files. Stack
   traces will be included in the log after each error. This is helpful for
   finding where/when errors are being raised.
@@ -36,6 +36,8 @@ handling for your application. The following options are supported:
 * ``errorLogger`` - ``Cake\Error\ErrorLoggerInterface`` - The class responsible
   for logging errors and unhandled exceptions. Defaults to
   ``Cake\Error\ErrorLogger``.
+* ``ignoredDeprecationPaths`` - array - A list of glob compatible paths that
+  deprecation errors should be ignored in. Added in 4.2.0
 
 By default, PHP errors are displayed when ``debug`` is ``true``, and logged
 when debug is ``false``. The fatal error handler will be called independent
@@ -48,6 +50,40 @@ message, file and line (``debug`` enabled).
 
     If you use a custom error handler, the supported options will
     depend on your handler.
+
+
+.. _deprecation-warnings:
+
+Deprecation Warnings
+--------------------
+
+CakePHP uses deprecation warnings to indicate when features have been
+deprecated. We also recommend this system for use in your plugins and
+application code when useful. You can trigger deprecation warnings with
+``deprecationWarning()``::
+
+    deprecationWarning('The example() method is deprecated. Use getExample() instead.');
+
+When upgrading CakePHP or plugins you may encounter new deprecation warnings.
+You can temporarily disable deprecation warnings in one of a few ways:
+
+#. Using the ``Error.errorLevel`` setting to ``E_ALL ^ E_USER_DEPRECATED`` to
+   ignore *all* deprecation warnings.
+#. Using the ``Error.ignoredDeprecationPaths`` configuration option to ignore
+   deprecations with glob compatible expressions. For example::
+
+        'Error' => [
+            'ignoredDeprecationPaths' => [
+                'vendors/company/contacts/*',
+                'src/Models/*',
+            ]
+        ],
+
+    Would ignore all deprecations from your ``Models`` directory and the
+    ``Contacts`` plugin in your application.
+
+.. versionadded:: 4.2.0
+    The ``Error.ignoredDeprecationPaths`` option was added.
 
 .. php:class:: ExceptionRenderer(Exception $exception)
 
@@ -152,6 +188,8 @@ prefix. You could create the following class::
 
 This controller would only be used when an error is encountered in a prefixed
 controller, and allows you to define prefix specific logic/templates as needed.
+
+.. _custom-exceptionrenderer:
 
 Custom ExceptionRenderer
 ========================

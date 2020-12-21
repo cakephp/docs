@@ -23,6 +23,7 @@ Contents
     installation
     development/configuration
     development/application
+    development/dependency-injection
     development/routing
     controllers/request-response
     controllers/middleware
