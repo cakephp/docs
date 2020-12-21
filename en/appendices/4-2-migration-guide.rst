@@ -9,8 +9,8 @@ Upgrading to 4.2.0
 
 You can can use composer to upgrade to CakePHP 4.2.0::
 
-    php composer.phar require --update-with-dependencies "cakephp/cakephp:^4.2@beta"
-
+    php composer.phar require --update-with-dependencies "cakephp/cakephp:4.2.x"
+    
 Deprecations
 ============
 
@@ -20,6 +20,9 @@ duration of 4.x but will be removed in 5.0. You can use the
 features::
 
     bin/cake upgrade rector --rules cakephp42 <path/to/app/src>
+
+.. note::
+    This only updates CakePHP 4.2 changes. Make sure you apply CakePHP 4.1 changes first.
 
 A new configuration option has been added to disable deprecations on a path by
 path basis. See :ref:`deprecation-warnings` for more information.
