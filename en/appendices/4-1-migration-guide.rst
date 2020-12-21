@@ -9,7 +9,7 @@ Upgrading to 4.1.0
 
 You can can use composer to upgrade to CakePHP 4.1.0::
 
-    php composer.phar require --update-with-dependencies "cakephp/cakephp:4.1"
+    php composer.phar require --update-with-dependencies "cakephp/cakephp:4.1.x"
 
 Deprecations
 ============
