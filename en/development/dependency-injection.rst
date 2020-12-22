@@ -54,7 +54,6 @@ Here an example of an injected service inside a command::
             $this->users = $users;
         }
 
-        
         public function execute( Arguments $args, ConsoleIo $io ) 
         {
             $valid = $this->users->check('all');
