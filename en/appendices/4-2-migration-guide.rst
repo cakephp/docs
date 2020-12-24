@@ -7,10 +7,10 @@ deprecations and features added in 4.2.
 Upgrading to 4.2.0
 ==================
 
-You can can use composer to upgrade to CakePHP 4.2.0::
+You can use composer to upgrade to CakePHP 4.2.0::
 
     php composer.phar require --update-with-dependencies "cakephp/cakephp:4.2.x"
-    
+
 Deprecations
 ============
 
