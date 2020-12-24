@@ -144,9 +144,9 @@ domain::
 
 .. note::
 
-    If you want to translate your plugins and they're namespaced, you must name
-    your domain string ``Namespace/PluginName``. But the related language file
-    will become ``plugins/Namespace/PluginName/resources/locales/plugin_name.po``
+    If you want to translate plugins that are vendor namespaced, you must use 
+    the domain string ``vendor/plugin_name``. But the related language file
+    will become ``plugins/<Vendor>/<PluginName>/resources/locales/<locale>/plugin_name.po``
     inside your plugin folder.
 
 Sometimes translations strings can be ambiguous for people translating them.
