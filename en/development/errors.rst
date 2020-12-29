@@ -313,13 +313,13 @@ Then we can register our error handler as the PHP error handler::
     $errorHandler = new AppError();
     $errorHandler->register();
 
-Finally, we can use our error handler in the ``ErrorHandlingMiddleware``::
+Finally, we can use our error handler in the ``ErrorHandlerMiddleware``::
 
     // in src/Application.php
     public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue
     {
         $error = new AppError(Configure::read('Error'));
-        $middleware->add(new ErrorHandlingMiddleware($error));
+        $middleware->add(new ErrorHandlerMiddleware($error));
 
         return $middleware;
     }
