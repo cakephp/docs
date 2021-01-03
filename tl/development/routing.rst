@@ -787,7 +787,7 @@ the ``*.`` wildcard to match any subdomain::
         $routes->connect(
             '/images/old-log.png',
             ['controller' => 'Images', 'action' => 'oldLogo']
-        )->setHost('images.example.com');
+        )->setHost('*.example.com');
     });
 
 The ``_host`` option is also used in URL generation. If your ``_host`` option

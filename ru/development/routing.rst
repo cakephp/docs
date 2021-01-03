@@ -793,7 +793,7 @@ CakePHP какое ожидать имя контроллера.
         $routes->connect(
             '/images/old-log.png',
             ['controller' => 'Images', 'action' => 'oldLogo']
-        )->setHost('images.example.com');
+        )->setHost('*.example.com');
     });
 
 Опция ``_host`` также используется в генерации URL. Если ваш параметр ``_host``

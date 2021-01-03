@@ -804,7 +804,7 @@ SEO に親和性があるルーティング
         $routes->connect(
             '/images/old-log.png',
             ['controller' => 'Images', 'action' => 'oldLogo']
-        )->setHost('images.example.com');
+        )->setHost('*.example.com');
     });
 
 ``_host`` オプションは URL 生成でも使用されます。 ``_host`` オプションで正確なドメインを
