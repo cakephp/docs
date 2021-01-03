@@ -701,7 +701,7 @@ pode usar o curinga ``*.`` para corresponder a qualquer subdomínio::
         $routes->connect(
             '/images/old-log.png',
             ['controller' => 'Images', 'action' => 'oldLogo']
-        )->setHost('images.example.com');
+        )->setHost('*.example.com');
     });
 
 A opção ``_host`` também é usada na geração de URL. Se a opção ``_host`` especificar um
