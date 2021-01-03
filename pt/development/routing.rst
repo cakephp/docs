@@ -644,7 +644,7 @@ As rotas podem usar a opção ``_host`` para corresponder apenas a hosts especí
         $routes->connect(
             '/images/old-log.png',
             ['controller' => 'Images', 'action' => 'oldLogo']
-        )->setHost('images.example.com');
+        )->setHost('*.example.com');
     });
 
 A opção ``_host`` também é usada na geração de URL. Se a opção ``_host`` especificar um domínio exato, esse domínio será incluído no URL gerado. No entanto, se você usar um curinga, precisará fornecer o parâmetro ``_host`` ao gerar URLs:
