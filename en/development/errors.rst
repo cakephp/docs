@@ -286,7 +286,7 @@ that are not caught by middleware are handled. Error handlers are different for
 the HTTP and Console parts of your application.
 
 To create an error handler for HTTP requests, you should extend
-``Cake\Error\ErrorHandler``, for console commands you should extend
+``Cake\Error\ErrorHandler``. For console commands, you should extend
 ``Cake\Error\ConsoleErrorHandler`` instead.  As an example, we could build
 a class called ``AppError`` to handle errors during HTTP requests::
 
