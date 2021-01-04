@@ -825,7 +825,7 @@ n'importe quelle sous-domaine::
         $routes->connect(
             '/images/old-log.png',
             ['controller' => 'Images', 'action' => 'oldLogo']
-        )->setHost('images.example.com');
+        )->setHost('*.example.com');
     });
 
 L'option ``_host`` n'affecte que le parsing des URL depuis les requêtes et
