@@ -282,17 +282,21 @@ Creating your Own Error Handler
 ===============================
 
 By replacing the error handler you can customize how PHP errors and exceptions
-that are not caught by middleware are handled. By extending
-``Cake\Error\BaseErrorHandler`` you can customize display logic more simply. As
-an example, we could build a class called ``AppError`` to handle our errors::
+that are not caught by middleware are handled. Error handlers are different for
+the HTTP and Console parts of your application.
+
+To create an error handler for HTTP requests, you should extend
+``Cake\Error\ErrorHandler``. For console commands, you should extend
+``Cake\Error\ConsoleErrorHandler`` instead.  As an example, we could build
+a class called ``AppError`` to handle errors during HTTP requests::
 
     // In src/Error/AppError.php
     namespace App\Error;
 
-    use Cake\Error\BaseErrorHandler;
+    use Cake\Error\ErrorHandler;
     use Throwable;
 
-    class AppError extends BaseErrorHandler
+    class AppError extends ErrorHandler
     {
         protected function _displayError(array $error, bool $debug): void
         {
@@ -310,8 +314,10 @@ Then we can register our error handler as the PHP error handler::
     // In config/bootstrap.php
     use App\Error\AppError;
 
-    $errorHandler = new AppError();
-    $errorHandler->register();
+    if (PHP_SAPI !== 'cli') {
+        $errorHandler = new AppError();
+        $errorHandler->register();
+    }
 
 Finally, we can use our error handler in the ``ErrorHandlerMiddleware``::
 
@@ -324,9 +330,13 @@ Finally, we can use our error handler in the ``ErrorHandlerMiddleware``::
         return $middleware;
     }
 
-The ``BaseErrorHandler`` defines two abstract methods. ``_displayError()`` is
-used when errors are triggered. The ``_displayException()`` method is called
-when there is an uncaught exception.
+ErrorHandler objects have a few methods you may want to implement:
+
+* ``_displayError(array $error, bool $debug)`` is used when errors are triggered. 
+* ``_displayException(Throwable $exception)`` method is called when there is an uncaught exception.
+* ``_logError($level, array $error)`` is called when there is an error to log.
+* ``logException(Throwable $exception)`` is called when there is an exception to log.
+
 
 Changing Fatal Error Behavior
 -----------------------------
