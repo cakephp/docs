@@ -23,7 +23,7 @@ features::
 
 .. note::
     This only updates CakePHP 4.3 changes. Make sure you apply CakePHP 4.2 changes first.
-    
+
 A new configuration option has been added to disable deprecations on a path by
 path basis. See :ref:`deprecation-warnings` for more information.
 
@@ -45,6 +45,11 @@ They usually only affect tests.
 New Features
 ============
 
-We're adding a new process to enable us to ship features, collect feedback from
-the community and evolve those features. We're calling this process
-:ref:`experimental-features`.
+ORM
+---
+
+- Queries that ``contain()`` HasMany and BelongsToMany associations now
+  propagate the status of result casting. This ensures that results from all
+  associations are either cast with type mapping objects or not at all.
+- ``Table`` now includes ``label`` in the list of fields that are candidates for
+  ``displayField`` defaults.
