@@ -22,7 +22,9 @@ If any validation rules fail, the returned entity will contain errors. The
 fields with errors will not be present in the returned entity::
 
     $article = $articles->newEntity($this->request->getData());
-    if ($article->errors()) {
+    
+    // Prior to 3.4 use $article->errors()
+    if ($article->getErrors()) {
         // Entity failed validation.
     }
 
