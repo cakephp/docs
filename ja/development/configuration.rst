@@ -7,7 +7,7 @@
 さらに、デフォルト値と実装をアプリケーションに合わせて差し替えできるようにするオプションの
 設定オプションもあります。
 
-.. index:: app.php, app.php.default
+.. index:: app.php, app_local.example.php
 
 .. index:: configuration
 
@@ -20,6 +20,12 @@ CakePHP はデフォルトで一つの設定ファイルからなりますが、
 は一般的な設定に利用され、基底クラスのアダプターで提供されている ``config()`` メソッドは設定を
 シンプルで明快にします。
 
+アプリケーションのスケルトンは、デプロイ済のアプリケーションがにおいて
+環境間で変わらない設定を **config/app.php** ファイルにを含むことを特徴としています。
+**config/app_local.php** ファイルには環境間で異なる設定データを含むべきです。
+これらのファイルはどちらも ``env()`` 関数を使って環境変数を参照しており、
+サーバ環境で設定値を設定することができます。
+
 追加の設定ファイルの読み込み
 ----------------------------
 
@@ -29,13 +35,42 @@ CakePHP はデフォルトで一つの設定ファイルからなりますが、
     use Cake\Core\Configure;
     use Cake\Core\Configure\Engine\PhpConfig;
 
-    Configure::config('default', new PhpConfig());
+    Configure::setConfig('default', new PhpConfig());
     Configure::load('app', 'default', false);
     Configure::load('other_config', 'default');
 
-追加の設定ファイルを使用して、環境特有の設定に上書きすることもできます。各ファイルを **app.php**
-の後で読み込むことで、開発環境やステージング環境の設定をカスタマイズするために
-以前に宣言した変数を再定義できます。
+.. _environment-variables:
+
+環境変数
+========
+
+例えば Heroku のように、多くの現代的なクラウド事業者では、設定データのために環境変数を定義できます。
+`12factor app style <http://12factor.net/>`_ の環境変数を通して CakePHP を設定することができます。
+環境変数を使用すると、アプリケーションの状態を少なくして、
+多くの環境にデプロイされたアプリケーションの管理が容易になります。
+
+**app.php** を参照の通り、 ``env()`` 関数は、環境から設定を読み込むために使用され、
+アプリケーションの設定を構築します。 CakePHP は、データベースやログ、メール送信や
+キャッシュ設定のための :term:`DSN` 文字列を使用して、各環境でこれらのライブラリーを簡単に変更できます。
+
+CakePHP は、環境変数を使ってローカル開発を容易にするために `dotenv
+<https://github.com/josegonzalez/php-dotenv>`_ を活用します。
+アプリケーションの中に ``config/.env.default`` があるでしょう。
+このファイルを ``config/.env`` にコピーし、値をカスタマイズすることで、
+アプリケーションを設定できます。
+
+``config/.env`` ファイルをあなたのリポジトリーにコミットすることは避けてください。
+代わりに、プレースホルダー値を持つテンプレートとして ``config/.env.default`` を使用して、
+チームの全員が、どの環境変数が使用されているのか、それぞれの環境変数を把握する必要があります。
+
+環境変数がセットされると、環境からデータを読むために ``env()`` を使用することができます。 ::
+
+    $debug = env('APP_DEBUG', false);
+
+env 関数に渡された２番目の値は、デフォルト値です。この値は、
+与えられたキーの環境変数が存在しない場合に使用されます。
+
+.. _general-configuration:
 
 一般的な設定
 ------------
@@ -76,7 +111,7 @@ App.wwwRoot
 App.fullBaseUrl
     アプリケーションのルートまでの (プロトコルを含む) 完全修飾ドメイン名です。
     これは完全な URL を生成する際に利用されます。デフォルトでは、この値は
-    $_SERVER の環境情報から生成されます。しかし、パフォーマンスを最適化したり、
+    ``$_SERVER`` の環境情報から生成されます。しかし、パフォーマンスを最適化したり、
     他人が ``Host`` ヘッダーを操作するのを心配するならば、自分で指定すべきでしょう。
     CLI 環境 (シェル) ではウェブサーバーとの関連が無いので  `fullBaseUrl` を
     $_SERVER から読むことができません。もしシェルから URL を作成する必要がある場合
@@ -94,6 +129,10 @@ App.paths
     クラスベースではないリソースの Configure のパスです。
     ``plugins`` 、 ``templates`` 、 ``locales`` などのサブキーをサポートし、
     それぞれプラグイン、ビューテンプレート、ロケールファイルのパスを指定できます。
+App.uploadedFilesAsObjects
+    アップロードされたファイルをオブジェクトとして表現するか(``true``)、
+    配列として表現するか(``false``)を指定します。
+    このオプションはデフォルトで有効になっています。
 Security.salt
     ハッシュ化の時に利用されるランダムな文字列です。
     この値は 対称キー暗号化の際、HMAC ソルトとして利用されます。
@@ -105,15 +144,34 @@ Asset.timestamp
     - (bool) ``false`` - 何もしません (デフォルト)。
     - (bool) ``true`` - debug が ``true`` の時にタイムスタンプを加えます。
     - (string) 'force' - 常にタイムスタンプを加えます。
-
-    .. versionchanged:: 3.6.0
-        3.6.0 以降、アセットのリンク時に ``timestamp`` オプションを使用することで、
-	グローバルな設定を上書きできます。
 Asset.cacheTime
     アセットのキャッシュ時間を設定します。 アセットのための HTTP ヘッダー ``Cache-Control`` の
     ``max-age`` と HTTP ヘッダーの ``Expire`` の時間を決定します。
     php の `strtotime 関数 <http://php.net/manual/ja/function.strtotime.php>`_
     の書式を設定できます。デフォルトは ``+1 day`` です。
+
+CDNの利用
+---------
+
+静的ファイルを読み込むために 例えば、
+``https://mycdn.example.com/`` (最後の ``/`` に注意してください)
+のようなCDNを使う場合は、
+``App.imageBaseUrl`` 、 ``App.cssBaseUrl`` 、 ``App.jsBaseUrl``
+をCDNのURIに変更してください。
+
+HtmlHelper経由で読み込まれた全ての画像、スクリプト、スタイルは、
+アプリケーションで使用されているのと同じ相対パスに合わせて、CDNの絶対パスを前に付けます。
+プラグインベースのアセットを使う場合には、特定の用途があることに注意してください。
+プラグインは絶対パスの ``...BaseUrl`` URIを使った場合、
+プラグインのプレフィックスを使わないようになっています。
+
+デフォルトの場合:
+
+* ``$this->Helper->assetUrl('TestPlugin.logo.png')`` は ``test_plugin/logo.png`` に変換されます。
+
+``App.imageBaseUrl`` を ``https://mycdn.example.com/`` に設定した場合:
+
+* ``$this->Helper->assetUrl('TestPlugin.logo.png')`` は ``https://mycdn.example.com/logo.png`` に変換されます
 
 データベースの設定
 ------------------
@@ -194,11 +252,11 @@ CakePHP はこれらのリソースの追加パスをセットアップするた
                     '/path/to/other/plugins/'
                 ],
                 'templates' => [
-                    APP . 'Template' . DS,
-                    APP . 'Template2' . DS
+                    ROOT . DS . 'templates' . DS,
+                    ROOT . DS . 'templates2' . DS
                 ],
                 'locales' => [
-                    APP . 'Locale' . DS
+                    ROOT . DS . 'resources' . DS . 'locales' . DS
                 ]
             ]
         ]
@@ -210,40 +268,6 @@ Inflection の設定
 =================
 
 :ref:`inflection-configuration` を参照してください。
-
-.. _environment-variables:
-
-環境変数
-========
-
-例えば Heroku のように、多くの現代的なクラウド事業者では、設定データのために環境変数を定義できます。
-`12factor app style <http://12factor.net/>`_ の環境変数を通して CakePHP を設定することができます。
-環境変数を使用すると、アプリケーションの状態を少なくして、
-多くの環境にデプロイされたアプリケーションの管理が容易になります。
-
-**app.php** を参照の通り、 ``env()`` 関数は、環境から設定を読み込むために使用され、
-アプリケーションの設定を構築します。 CakePHP は、データベースやログ、メール送信や
-キャッシュ設定のための :term:`DSN` 文字列を使用して、各環境でこれらのライブラリーを簡単に変更できます。
-
-CakePHP は、環境変数を使ってローカル開発を容易にするために `dotenv
-<https://github.com/josegonzalez/php-dotenv>`_ を活用します。
-アプリケーションの中に ``config/.env.default`` があるでしょう。
-このファイルを ``config/.env`` にコピーし、値をカスタマイズすることで、
-アプリケーションを設定できます。
-
-``config/.env`` ファイルをあなたのリポジトリーにコミットすることは避けてください。
-代わりに、プレースホルダー値を持つテンプレートとして ``config/.env.default`` を使用して、
-チームの全員が、どの環境変数が使用されているのか、それぞれの環境変数を把握する必要があります。
-
-環境変数がセットされると、環境からデータを読むために ``env()`` を使用することができます。 ::
-
-    $debug = env('APP_DEBUG', false);
-
-env 関数に渡された２番目の値は、デフォルト値です。この値は、
-与えられたキーの環境変数が存在しない場合に使用されます。
-
-.. versionchanged:: 3.5.0
-    dotenv ライブラリーのサポートが、アプリケーションスケルトンに追加されました。
 
 Configure クラス
 ================
@@ -283,6 +307,11 @@ MVC デザインパターンを破壊する誘惑に気をつけてください�
 ``Configure::write('debug', $bool)`` を利用してデバッグと本番モードを即時に変更できます。
 これはとりわけ JSON のやりとりで使いやすく、デバッグ情報がパースの問題を引き起こす際です。
 
+.. note::
+
+    Configure::write()``を使って行われた設定の変更はすべてメモリに保存され、
+    リクエストをまたいでも持続しないようになっています。
+
 設定データの読み込み
 --------------------
 
@@ -305,9 +334,6 @@ MVC デザインパターンを破壊する誘惑に気をつけてください�
     Configure::read('Company.nope', 'fallback');
 
 もし ``$key`` が null のままだと、Configure のすべての値が返却されます。
-
-.. versionchanged:: 3.5.0
-    ``$default`` パラメーターは 3.5.0 で追加されました。
 
 .. php:staticmethod:: readOrFail($key)
 
@@ -487,54 +513,6 @@ CakePHP は、さまざまなソースから設定ファイルを読み込む機
 
 デフォルトでは、アプリケーションは ``PhpConfig`` を使用します。
 
-CakePHP のブート処理
-====================
-
-もし何か追加の設定が必要であれば、 **config/bootstrap.php** ファイルに加えます。
-このファイルは各リクエストや CLI コマンドの前に読み込まれます。
-
-このファイルは多数の共通ブート処理タスクに理想的です。
-
-- 便利な関数の定義
-- 定数の宣言
-- キャッシュ設定の定義
-- ロギング設定の定義
-- 独自語尾変化の読み込み
-- 設定ファイルの読み込み
-
-コントローラーで使うための独自フォーマット関数を配置したくなる欲望にかられる恐れがあります。
-カスタムロジックをアプリケーションに加える良い方法は :doc:`/controllers` や
-:doc:`/views` のセクションを参照してください。
-
-.. _application-bootstrap:
-
-Application::bootstrap()
-------------------------
-
-アプリケーションの低レベルな関心事を設定するために使用する **config/bootstrap.php**
-ファイルに加えて、 プラグインのロードや初期化、グローバルイベントリスナーの追加のために
-``Application::bootstrap()`` フックメソッドが利用できます。 ::
-
-    // src/Application.php の中で
-    namespace App;
-
-    use Cake\Core\Plugin;
-    use Cake\Http\BaseApplication;
-
-    class Application extends BaseApplication
-    {
-        public function bootstrap()
-        {
-            // config/bootstrap.php を `require_once`  するために parent を呼びます。
-            parent::bootstrap();
-
-            $this->addPlugin('MyPlugin', ['bootstrap' => true, 'routes' => true]);
-        }
-    }
-
-``Application::bootstrap()`` の中でプラグインやイベントを読み込むと、各テストメソッドで
-イベントやルートが再処理されるため :ref:`integration-testing` が簡単になります。
-
 汎用テーブルの無効化
 ====================
 
@@ -550,7 +528,6 @@ CakePHP が固有のクラスを使用する代わりに、暗黙的に汎用的
 
     // bootstrap.php の中で
     use Cake\Event\EventManager;
-    // 3.6 より前は Cake\Network\Exception\NotFoundException を使用
     use Cake\Http\Exception\InternalErrorException;
 
     $isCakeBakeShellRunning = (PHP_SAPI === 'cli' && isset($argv[1]) && $argv[1] === 'bake');
