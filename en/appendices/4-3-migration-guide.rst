@@ -53,5 +53,6 @@ ORM
   associations are either cast with type mapping objects or not at all.
 - ``Table`` now includes ``label`` in the list of fields that are candidates for
   ``displayField`` defaults.
-- Added ``Query::whereNotInListOrNull()`` and ``QueryExpression::notInOrNull()`` to support
-  nullable columns to avoid ``NOT IN`` failing ``null != value`` checks.
+- Added ``Query::whereNotInListOrNull()`` and ``QueryExpression::notInOrNull()`` for nullable
+  columns since ``null != value`` is always false and the ``NOT IN`` test will always fail when
+  the column is null.
