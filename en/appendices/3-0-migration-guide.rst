@@ -23,7 +23,7 @@ Upgrade Tool
 While this document covers all the breaking changes and improvements made in
 CakePHP 3.0, we've also created a console application to help you complete some
 of the time consuming mechanical changes. You can `get the upgrade tool from
-github <https://github.com/cakephp/upgrade>`_.
+github <https://github.com/cakephp/upgrade/tree/3.x>`_.
 
 Application Directory Layout
 ============================
