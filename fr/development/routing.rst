@@ -1364,7 +1364,7 @@ Utilisation de  ``Router::url()``
 ---------------------------------
 
 ``Router::url()`` vous permet d'utiliser des :term:`Tableaux de routage <routing array>`
-ans les situations où les éléments de tableau requis sont fixes ou facilement déduits.
+dans les situations où les éléments de tableau requis sont fixes ou facilement déduits.
 
 Il fournira un routage inversé lorsque l'URL de destination est bien définie::
 
