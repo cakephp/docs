@@ -746,9 +746,7 @@ ics generated on the fly from a string::
 Callbacks can also return the body as a string::
 
     $path = '/some/file.png';
-    $this->response->body(function () use ($path) {
-        return file_get_contents($path);
-    });
+    $this->response->withStringBody(file_get_contents($path));
 
 Setting Headers
 ---------------
