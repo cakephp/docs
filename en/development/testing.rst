@@ -1305,7 +1305,7 @@ that option when ``debug`` is enabled.
 Testing with file uploads
 -------------------------
 
-Simulating file uploads is pretty easy when you're using the default
+Simulating file uploads is straightforward when you use the default
 ":ref:`uploaded files as objects <request-file-uploads>`" mode. You can simply
 create instances that implement
 `\\Psr\\Http\\Message\\UploadedFileInterface <https://www.php-fig.org/psr/psr-7/#16-uploaded-files>`__
