@@ -21,7 +21,7 @@ CounterCache は、呼び出されたときにオプションで割り当てら�
 
     class CommentsTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->addBehavior('CounterCache', [
                 'Articles' => ['comment_count']
@@ -114,6 +114,3 @@ entity-update がアソシエーションを変更した場合、コールバッ
     アソシエーションオプションで設定されたカスタム ``through`` テーブルで CounterCache
     ビヘイビアーを有効にして ``cascadeCallbacks`` 設定オプションを true にする必要があります。
     カスタム JOIN テーブルを設定する方法は :ref:`using-the-through-option` を参照してください。
-
-.. versionchanged:: 3.6.0
-    更新をスキップするために ``false`` を返すことが追加されました。
