@@ -304,11 +304,12 @@ the Author entity. ::
 
     // In your finders/controller:
     $query = $articles->find('list', [
-        'keyField' => 'id',
-        'valueField' => function ($article) {
-            return $article->author->get('label');
-        }
-    ]);
+            'keyField' => 'id',
+            'valueField' => function ($article) {
+                return $article->author->get('label');
+            }
+        ])
+        ->contain('Authors');
 
 You can also fetch the label in the list directly using. ::
 
