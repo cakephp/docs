@@ -49,7 +49,7 @@ Http
 ====
 
 - The ``CspMiddleware`` now sets the ``cspScriptNonce`` and ``cspStyleNonce``
-  request attributes, streamlining the adoption of strict
+  request attributes which streamlines the adoption of strict
   content-security-policy rules.
 
 ORM
