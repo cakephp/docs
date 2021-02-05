@@ -15,7 +15,7 @@ Objects can be loaded on-the-fly using add<registry-object>()
 Example::
 
     $this->loadComponent('Acl.Acl');
-    $this->addHelper('Flash')
+    $this->addHelper('Flash');
 
 This will result in the ``Acl`` property and ``Flash`` helper being loaded.
 Configuration can also be set on-the-fly. Example::
