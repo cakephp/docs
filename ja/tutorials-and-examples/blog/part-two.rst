@@ -187,8 +187,7 @@ CakePHP のリバースルーティング機能を活用することができま
 この時点で、ブラウザーから http://www.example.com/articles/index を開いてみてください。
 タイトルと投稿内容のテーブル一覧がまとめられているビューが表示されるはずです。
 
-ビューの中のリンク (投稿記事のタイトルから ``/articles/view/some\_id`` という URL へのリンク) を
-クリックすると、CakePHP は、そのアクションはまだ定義されていません、という表示を出します。
+ビューの中のリンク (投稿記事のタイトルから ``/articles/view/どれかのID番号``いう表示を出します。
 もしそういう表示が出ない場合には、何かおかしくなってしまったか、もうすでにあなたが
 その定義作業をしてしまったから（仕事がハヤイ！）か、のどちらかです。
 そうでないなら、これから ``ArticlesController`` の中に作ってみましょう。 ::
@@ -257,11 +256,11 @@ Articles テーブルに対して ``get()`` を用いるとき、存在するレ
     class ArticlesController extends AppController
     {
 
-        public function initialize()
+        public function initialize(): void
         {
             parent::initialize();
 
-            $this->loadComponent('Flash'); // Include the FlashComponent
+            $this->loadComponent('Flash'); // Flashコンポーネントを含める
         }
 
         public function index()
@@ -282,10 +281,10 @@ Articles テーブルに対して ``get()`` を用いるとき、存在するレ
                 // 3.4.0 より前は $this->request->data() が使われました。
                 $article = $this->Articles->patchEntity($article, $this->request->getData());
                 if ($this->Articles->save($article)) {
-                    $this->Flash->success(__('Your article has been saved.'));
+                    $this->Flash->success(__('記事が保存されました。'));
                     return $this->redirect(['action' => 'index']);
                 }
-                $this->Flash->error(__('Unable to add your article.'));
+                $this->Flash->error(__('記事の保存が出来ませんでした。'));
             }
             $this->set('article', $article);
         }
@@ -397,12 +396,12 @@ Article モデルを見直して、幾つか修正してみましょう。 ::
             $this->addBehavior('Timestamp');
         }
 
-        public function validationDefault(Validator $validator)
+        public function validationDefault(Validator $validator): Validator
         {
             $validator
                 ->notEmpty('title')
                 ->requirePresence('title')
-                ->notEmpty('body')
+                ->notEmptyString('body')
                 ->requirePresence('body');
 
             return $validator;
@@ -438,10 +437,10 @@ CakePHP のバリデーションエンジンは強力で、
             // 3.4.0 より前は $this->request->data() が使われました。
             $this->Articles->patchEntity($article, $this->request->getData());
             if ($this->Articles->save($article)) {
-                $this->Flash->success(__('Your article has been updated.'));
+                $this->Flash->success(__('記事が更新されました。'));
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('Unable to update your article.'));
+            $this->Flash->error(__('記事の更新が出来ませんでした。'));
         }
 
         $this->set('article', $article);
@@ -525,7 +524,7 @@ CakePHP は挿入あるいは更新のどちらを生成するかを決定しま
 
         $article = $this->Articles->get($id);
         if ($this->Articles->delete($article)) {
-            $this->Flash->success(__('The article with id: {0} has been deleted.', h($id)));
+            $this->Flash->success(__('ID：{0}の記事が削除されました。', h($id)));
             return $this->redirect(['action' => 'index']);
         }
     }

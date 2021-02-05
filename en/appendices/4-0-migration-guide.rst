@@ -270,6 +270,8 @@ ORM
 * ``TableLocator::get()`` and ``TableRegistry::get()`` now expect that alias
   names are always **CamelCased** by your code. Passing incorrectly cased
   aliases will result in table and entity classes not being loaded correctly.
+* ``IsUnique`` rule no longer accepts ``allowMultipleNulls`` option which was enabled by default.
+  This was re-added in 4.2 but disabled by default.
 
 Router
 ------

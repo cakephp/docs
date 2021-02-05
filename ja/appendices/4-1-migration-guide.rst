@@ -4,6 +4,13 @@
 CakePHP 4.1 は 4.0 からのAPI互換アップグレードです。
 このページでは、4.1で追加された非推奨事項と機能の概要を説明します。
 
+4.1.0へのアップグレード
+=======================
+
+CakePHP 4.1.0にアップグレードするには、次の Composer コマンドを実行してください。::
+
+    php composer.phar require --update-with-dependencies "cakephp/cakephp:4.1.x"
+
 非推奨
 ============
 

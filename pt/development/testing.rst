@@ -1157,6 +1157,186 @@ garantimos que nosso serviço da Web retorne a resposta adequada::
 Nós usamos a opção ``JSON_PRETTY_PRINT``, pois o CakePHP
 embutido no JsonView usará essa opção quando ``debug`` estiver ativado.
 
+Teste com carregamentos de ficheiros
+------------------------------------
+
+A simulação de carregamentos de ficheiros é simples quando se utiliza o modo
+padrão ":ref:`arquivos carregados como objectos <request-file-uploads>`". Pode
+simplesmente criar instâncias que implementem
+`\\Psr\\Http\\Message\\UploadedFileInterface <https://www.php-fig.org/psr/psr-7/#16-uploaded-files>`__
+(a implementação padrão actualmente utilizada pelo CakePHP é
+``\Laminas\Diactoros\UploadedFile``), e passá-los nos seus dados de pedido de
+teste. No ambiente CLI, tais objectos irão, por defeito, passar na validação
+que testa se o ficheiro foi carregado via HTTP. O mesmo não é verdade para os
+dados de estilo array como os encontrados em ``$_FILES``, falharia essa
+verificação.
+
+A fim de simular exactamente como os objectos de ficheiro carregados estariam
+presentes num pedido regular, é necessário não só passá-los nos dados do pedido,
+mas também passá-los para a configuração do pedido de teste através da opção
+``files``. Mas não é tecnicamente necessário, a menos que o seu código aceda
+aos ficheiros carregados através dos métodos
+:php:meth:`Cake\\Http\\ServerRequest::getUploadedFile()` ou
+:php:meth:`Cake\\Http\\ServerRequest::getUploadedFiles()`.
+
+Vamos assumir que os artigos têm uma imagem teaser, e uma associação
+``Articles hasMany Attachments``, o formulário pareceria algo parecido com isto
+em conformidade, onde um ficheiro de imagem, e múltiplos anexos/arquivos seriam
+aceites::
+
+    <?= $this->Form->create($article, ['type' => 'file']) ?>
+    <?= $this->Form->control('title') ?>
+    <?= $this->Form->control('teaser_image', ['type' => 'file']) ?>
+    <?= $this->Form->control('attachments.0.attachment', ['type' => 'file']) ?>
+    <?= $this->Form->control('attachments.0.description']) ?>
+    <?= $this->Form->control('attachments.1.attachment', ['type' => 'file']) ?>
+    <?= $this->Form->control('attachments.1.description']) ?>
+    <?= $this->Form->button('Submit') ?>
+    <?= $this->Form->end() ?>
+
+O teste que simularia o pedido correspondente poderia parecer-se com o seguinte::
+
+    public function testAddWithUploads(): void
+    {
+        $teaserImage = new \Laminas\Diactoros\UploadedFile(
+            '/path/to/test/file.jpg', // fluxo ou caminho para o ficheiro que representa o ficheiro temporário
+            12345,                    // os ficheiros em bytes
+            \UPLOAD_ERR_OK,           // o estado de carregamento/erro
+            'teaser.jpg',             // o nome do ficheiro tal como enviado pelo cliente
+            'image/jpeg'              // a mimetype tal como enviada pelo cliente
+        );
+
+        $textAttachment = new \Laminas\Diactoros\UploadedFile(
+            '/path/to/test/file.txt',
+            12345,
+            \UPLOAD_ERR_OK,
+            'attachment.txt',
+            'text/plain'
+        );
+
+        $pdfAttachment = new \Laminas\Diactoros\UploadedFile(
+            '/path/to/test/file.pdf',
+            12345,
+            \UPLOAD_ERR_OK,
+            'attachment.pdf',
+            'application/pdf'
+        );
+
+        // Estes são os dados acessíveis através de `$this->request->getUploadedFile()`
+        // e `$this->request->getUploadedFiles()`.
+        $this->configRequest([
+            'files' => [
+                'teaser_image' => $teaserImage,
+                'attachments' => [
+                    0 => [
+                        'attachment' => $textAttachment,
+                    ],
+                    1 => [
+                        'attachment' => $pdfAttachment,
+                    ],
+                ],
+            ],
+        ]);
+
+        // Estes são os dados acessíveis através de  `$this->request->getData()`.
+        $postData = [
+            'title' => 'Novo Artigo',
+            'teaser_image' => $teaserImage,
+            'attachments' => [
+                0 => [
+                    'attachment' => $textAttachment,
+                    'description' => 'Text attachment',
+                ],
+                1 => [
+                    'attachment' => $pdfAttachment,
+                    'description' => 'PDF attachment',
+                ],
+            ],
+        ];
+        $this->post('/articles/add', $postData);
+
+        $this->assertResponseOk();
+        $this->assertFlashMessage('O artigo foi salvo com sucesso');
+        $this->assertFileExists('/path/to/uploads/teaser.jpg');
+        $this->assertFileExists('/path/to/uploads/attachment.txt');
+        $this->assertFileExists('/path/to/uploads/attachment.pdf');
+    }
+
+.. tip::
+
+    Se configurar o pedido de teste com ficheiros, então ele *terá* de
+    corresponder à estrutura dos seus dados POST (mas apenas incluir os
+    objectos de ficheiro carregados)!
+
+Da mesma forma, pode simular `erros de carregamento <https://www.php.net/manual/en/features.file-upload.errors.php>`_
+ou ficheiros inválidos que não passem na validação::
+
+    public function testAddWithInvalidUploads(): void
+    {
+        $missingTeaserImageUpload = new \Laminas\Diactoros\UploadedFile(
+            '',
+            0,
+            \UPLOAD_ERR_NO_FILE,
+            '',
+            ''
+        );
+
+        $uploadFailureAttachment = new \Laminas\Diactoros\UploadedFile(
+            '/path/to/test/file.txt',
+            1234567890,
+            \UPLOAD_ERR_INI_SIZE,
+            'attachment.txt',
+            'text/plain'
+        );
+
+        $invalidTypeAttachment = new \Laminas\Diactoros\UploadedFile(
+            '/path/to/test/file.exe',
+            12345,
+            \UPLOAD_ERR_OK,
+            'attachment.exe',
+            'application/vnd.microsoft.portable-executable'
+        );
+
+        $this->configRequest([
+            'files' => [
+                'teaser_image' => $missingTeaserImageUpload,
+                'attachments' => [
+                    0 => [
+                        'file' => $uploadFailureAttachment,
+                    ],
+                    1 => [
+                        'file' => $invalidTypeAttachment,
+                    ],
+                ],
+            ],
+        ]);
+
+        $postData = [
+            'title' => 'Novo Artigo',
+            'teaser_image' => $missingTeaserImageUpload,
+            'attachments' => [
+                0 => [
+                    'file' => $uploadFailureAttachment,
+                    'description' => 'Upload de anexo de falha',
+                ],
+                1 => [
+                    'file' => $invalidTypeAttachment,
+                    'description' => 'Fixação de tipo inválido',
+                ],
+            ],
+        ];
+        $this->post('/articles/add', $postData);
+
+        $this->assertResponseOk();
+        $this->assertFlashMessage('O artigo não pôde ser salvo');
+        $this->assertResponseContains('É necessária uma imagem de teaser');
+        $this->assertResponseContains('Tamanho máximo de ficheiros permitido excedido');
+        $this->assertResponseContains('Tipo de ficheiro não suportado');
+        $this->assertFileNotExists('/path/to/uploads/teaser.jpg');
+        $this->assertFileNotExists('/path/to/uploads/attachment.txt');
+        $this->assertFileNotExists('/path/to/uploads/attachment.exe');
+    }
+
 Desabilitando o Tratamento de Erros de Middlewares nos Testes
 -------------------------------------------------------------
 

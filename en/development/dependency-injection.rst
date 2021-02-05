@@ -40,6 +40,42 @@ database. Because this service is injected into our controller, we can easily
 swap the implementation out with a mock object or a dummy sub-class when
 testing.
 
+Here an example of an injected service inside a command::
+
+    // In src/Command/CheckUsersCommand.php
+    class CheckUsersCommand extends Command
+    {
+        /** @var UsersService */
+        public $users;
+
+        public function __construct(UsersService $users) 
+        {
+            parent::__construct();
+            $this->users = $users;
+        }
+
+        public function execute( Arguments $args, ConsoleIo $io ) 
+        {
+            $valid = $this->users->check('all');
+        }
+    
+    }
+    
+    // In src/Application.php
+    public function services( ContainerInterface $container ): void 
+    {
+        $container
+            ->add(CheckUsersCommand::class)
+            ->addArgument(UsersService::class);
+    }
+    
+The injection process is a bit different here. Instead of adding the 
+``UsersService`` to the container we first have to add the Command as
+a whole to the Container and add the ``UsersService`` as an argument.
+With that you can then access that service inside the constructor 
+of the command.
+
+
 Adding Services
 ===============
 In order to have services created by the container, you need to tell it which

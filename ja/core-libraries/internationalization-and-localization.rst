@@ -580,19 +580,13 @@ ORM で返されるデフォルトの日付では結果は ``Cake\I18n\Time`` �
     use Cake\I18n\Middleware\LocaleSelectorMiddleware;
 
     // 新しいミドルウェアを追加するために middleware 関数を更新してください。
-    public function middleware($middleware)
+    public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue
     {
         // ミドルウェアの追加し、有効なロケールの設定
-        $middleware->add(new LocaleSelectorMiddleware(['en_US', 'fr_FR']));
-        // 任意のロケールヘッダー値を受け入れる
-        $middleware->add(new LocaleSelectorMiddleware(['*']));
+        $middlewareQueue->add(new LocaleSelectorMiddleware(['en_US', 'fr_FR']));
+        // 全てののロケールヘッダー値を受け入れる
+        $middlewareQueue->add(new LocaleSelectorMiddleware(['*']));
     }
-
-    // config/bootstrap.php 内で
-    DispatcherFactory::add('LocaleSelector');
-
-    // en_US, fr_FR のみにロケールを制限
-    DispatcherFactory::add('LocaleSelector', ['locales' => ['en_US', 'fr_FR']]);
 
 ``LocaleSelectorMiddleware`` は ``Accept-Language`` ヘッダーを用いて、ユーザーの選択したロケールを
 自動的に設定します。どのロケールが自動で使われるかを制限するロケールリストオプションを使用することが

@@ -505,9 +505,9 @@ souvent référence au "has and belongs to many", et est une association classiq
 "many to many".
 
 La principale différence entre hasMany et BelongsToMany est que le lien entre
-les models dans une association BelongsToMany n'est pas exclusif. par exemple
-nous joignons notre table Articles avec la table Tags. En utilisant 'funny'
-comme un Tag pour mon Article, n'"utilise" pas le tag. Je peux aussi l'utiliser
+les modèles dans une association BelongsToMany n'est pas exclusif. Par exemple
+nous joignons notre table Articles avec la table Tags. Utiliser 'funny'
+comme un Tag pour mon Article, n'"épuise" pas le tag. Je peux toujours l'utiliser
 pour le prochain article que j'écris.
 
 Trois tables de la base de données sont nécessaires pour une association

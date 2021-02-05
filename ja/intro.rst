@@ -29,11 +29,11 @@ CakePHP は基礎的な構造をクラス名、ファイル名、DB のテーブ
 「写真 (*Photo*)」と考えることができます。もし ``users`` テーブルからデータを読み出したいのであれば
 次のようにできます。 ::
 
-    use Cake\ORM\TableRegistry;
+    use Cake\ORM\Locator\LocatorAwareTrait;
 
-    $users = TableRegistry::getTableLocator()->get('Users');
-    $query = $users->find();
-    foreach ($query as $row) {
+    $users = $this->getTableLocator()->get('Users');
+    $resultset = $users->find()->all();
+    foreach ($resultset as $row) {
         echo $row->username;
     }
 
@@ -43,9 +43,9 @@ CakePHP は基礎的な構造をクラス名、ファイル名、DB のテーブ
 
 新しいユーザーを作成し、それを (検証して) 保存したい場合には次のようにします。 ::
 
-    use Cake\ORM\TableRegistry;
+    use Cake\ORM\Locator\LocatorAwareTrait;
 
-    $users = TableRegistry::getTableLocator()->get('Users');
+    $users = $this->getTableLocator()->get('Users');
     $user = $users->newEntity(['email' => 'mark@example.com']);
     $users->save($user);
 
@@ -86,7 +86,7 @@ XML 形式の結果をレンダリングできます。 ::
 
     public function add()
     {
-        $user = $this->Users->newEntity();
+        $user = $this->Users->newEmptyEntity();
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
             if ($this->Users->save($user, ['validate' => 'registration'])) {

@@ -17,64 +17,57 @@ le chapitre de chaque component:
     :maxdepth: 1
 
     /controllers/components/authentication
-    /controllers/components/cookie
-    /controllers/components/csrf
     /controllers/components/flash
     /controllers/components/security
     /controllers/components/pagination
     /controllers/components/request-handling
+    /controllers/components/form-protection
 
 .. _configuring-components:
 
 Configuration des Components
 ============================
 
-De nombreux components du cœur nécessitent une configuration. Quelques
-exemples:
-:doc:`/controllers/components/authentication` et
-:doc:`/controllers/components/cookie`.
+De nombreux components du cœur nécessitent une configuration. Quleques exemples de composants
+qui requièrent une configuration sont :doc:`/controllers/components/security` et
+:doc:`/controllers/components/request-handling`.
 La configuration pour ces components, et pour les components en général, se fait
 via ``loadComponent()`` dans la méthode ``initialize()`` de votre Controller ou
 via le tableau ``$components``::
 
     class PostsController extends AppController
     {
-        public function initialize()
+        public function initialize(): void
         {
             parent::initialize();
-            $this->loadComponent('Auth', [
-                'authorize' => ['controller'],
-                'loginAction' => ['controller' => 'Users', 'action' => 'login']
+            $this->loadComponent('RequestHandler', [
+                'viewClassMap' => ['json' => 'AppJsonView'],
             ]);
-            $this->loadComponent('Cookie', ['expires' => '1 day']);
+            $this->loadComponent('Security', ['blackholeCallback' => 'blackhole']);
         }
-
     }
 
 Vous pouvez configurer les components à la volée en utilisant la méthode
-``config()``. Souvent, ceci est fait dans la méthode ``beforeFilter()`` de votre
+``setConfig()``. Souvent, ceci est fait dans la méthode ``beforeFilter()`` de votre
 controller. Ceci peut aussi être exprimé comme ceci::
 
-    public function beforeFilter(Event $event)
+    public function beforeFilter(EventInterface $event)
     {
-        $this->Auth->config('authorize', ['controller']);
-        $this->Auth->config('loginAction', ['controller' => 'Users', 'action' => 'login']);
-
-        $this->Cookie->config('name', 'CookieMonster');
+        $this->RequestHandler->setConfig('viewClassMap', ['rss' => 'MyRssView']);
     }
 
-Comme les helpers, les components ont une méthode ``config()`` qui est utilisée
-pour récupérer et définir toutes les configurations pour un component::
+Comme les helpers, les components ont des méthodes ``getConfig()`` et ``setConfig()``
+qui sont utilisées pour récupérer et définir toutes les configurations pour un component::
 
     // Lire des données de config.
-    $this->Auth->config('loginAction');
+     $this->RequestHandler->getConfig('viewClassMap');
 
     // Définir la config
-    $this->Csrf->config('cookieName', 'token');
+    $this->Csrf->setConfig('cookieName', 'token');
 
 Comme avec les helpers, les components vont automatiquement fusionner leur
 propriété ``$_defaultConfig`` avec la configuration du constructeur pour créer
-la propriété ``$_config`` qui est accessible avec ``config()``.
+la propriété ``$_config`` qui est accessible avec ``getConfig()`` et  ``setConfig()``.
 
 Faire des Alias avec les Components
 -----------------------------------
@@ -118,7 +111,7 @@ Vous n'avez parfois pas besoin de rendre le component accessible sur chaque
 action du controller. Dans ce cas là, vous pouvez le charger à la volée en
 utilisant la méthode ``loadComponent()`` à l'intérieur de votre controller::
 
-    // Dans les actions du controller
+    // Dans l'action du controller
     $this->loadComponent('OneTimer');
     $time = $this->OneTimer->getTime();
 
@@ -126,7 +119,7 @@ utilisant la méthode ``loadComponent()`` à l'intérieur de votre controller::
 
     Gardez à l'esprit que le chargement d'un component à la volée n'appellera
     pas les callbacks manquants. Si vous souhaitez que les callbacks
-    ``initialize()`` ou ``startup()`` soient appelées, vous devrez les appeler
+    ``beforeFilter`` ou ``startup()`` soient appelées, vous devrez les appeler
     manuellement selon le moment où vous chargez votre component.
 
 Utiliser les Components
@@ -149,14 +142,14 @@ vous pouvez y accéder comme ceci::
         public function delete()
         {
             if ($this->Post->delete($this->request->getData('Post.id')) {
-                $this->Flash->success('Post deleted.');
+                $this->Flash->success('Publication effacée.');
                 return $this->redirect(['action' => 'index']);
             }
         }
 
 .. note::
 
-    Puisque les Models et les Components sont tous deux ajoutés aux
+    Puisque les Modèles et les Components sont tous deux ajoutés aux
     controllers en tant que propriétés, ils partagent le même 'espace de noms'.
     Assurez-vous de ne pas donner le même nom à un component et à un model.
 
@@ -279,18 +272,13 @@ la même manière que dans vos controllers - en utilisant la variable
     Au contraire d'un component inclus dans un controller, aucun callback
     ne sera attrapé pour un component inclus dans un component.
 
-Accéder au Controller du  Component
+Accéder au Controller du Component
 -----------------------------------
 
 À partir d'un component, vous pouvez accéder au controller courant via le
 registre::
 
-    $controller = $this->_registry->getController();
-
-Vous pouvez également accéder facilement au controller dans n'importe quel
-callback via l'objet event::
-
-    $controller = $event->getSubject());
+    $controller = $this->getController();
 
 Callbacks des Components
 ========================
@@ -298,32 +286,68 @@ Callbacks des Components
 Les components vous offrent aussi quelques callbacks durant leur cycle de vie
 qui vous permettent d'augmenter le cycle de la requête.
 
-.. php:method:: beforeFilter(Event $event)
+.. php:method:: beforeFilter(EventInterface $event)
 
     Est appelée avant la méthode du controller beforeFilter, mais *après*
     la méthode initialize() du controller.
 
-.. php:method:: startup(Event $event)
+.. php:method:: startup(EventInterface $event)
 
     Est appelée après la méthode du controller beforeFilter mais avant que
     le controller n'exécute l'action prévue.
 
-.. php:method:: beforeRender(Event $event)
+.. php:method:: beforeRender(EventInterface $event)
 
     Est appelée après que le controller exécute la logique de l'action
     requêtée, mais avant le rendu de la vue et le layout du controller.
 
-.. php:method:: shutdown(Event $event)
+.. php:method:: shutdown(EventInterface $event)
 
     Est appelée avant que la sortie soit envoyée au navigateur.
 
-.. php:method:: beforeRedirect(Event $event, $url, Response $response)
+.. php:method:: beforeRedirect(EventInterface $event, $url, Response $response)
 
     Est invoquée quand la méthode de redirection du controller est appelée,
     mais avant toute action qui suit. Si cette méthode retourne ``false``, le
     controller ne continuera pas à rediriger la requête. Les paramètres $url et
     $response vous permettent d'inspecter et de modifier la localisation ou
     toutes autres entêtes dans la réponse.
+
+.. _redirect-component-events:
+
+Utiliser des Redirections dans les Events des Components
+========================================================
+
+Pour rediriger à partir d'une méthode de rappel de composant, vous pouvez utiliser ce qui suit::
+
+    public function beforeFilter(EventInterface $event)
+    {
+        $event->stopPropagation();
+        return $this->getController()->redirect('/');
+    }
+
+En arrêtant l'événement, vous faites savoir à CakePHP que vous ne voulez pas que les autres
+méthodes de callback de d'autres composants ne soient appelées ni que le controller ne
+gère l'action plus avant. À partir de la version 4.1.0, vous pouvez déclencher une
+``RedirectException`` pour signaler une redirection::
+
+    use Cake\Http\Exception\RedirectException;
+    use Cake\Routing\Router;
+
+    public function beforeFilter(EventInterface $event)
+    {
+        throw new RedirectException(Router::url('/'))
+    }
+
+La levée d'une exception arrêtera tous les autres écouteurs d'événements et créera une
+nouvelle réponse qui ne conserve ou n'hérite d'aucun des en-têtes de la réponse actuelle.
+Lors de la levée d'une ``RedirectException``, vous pouvez inclure des en-têtes supplémentaires::
+
+    throw new RedirectException(Router::url('/'), 302, [
+        'Header-Key' => 'value',
+    ]);
+
+.. versionadded:: 4.1.0
 
 .. meta::
     :title lang=fr: Components (Composants)

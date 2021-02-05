@@ -31,7 +31,6 @@ imports::
     use Authorization\AuthorizationServiceProviderInterface;
     use Authorization\Middleware\AuthorizationMiddleware;
     use Authorization\Policy\OrmResolver;
-    use Psr\Http\Message\ResponseInterface;
 
 Add the ``AuthorizationServiceProviderInterface`` to the implemented interfaces on your application::
 

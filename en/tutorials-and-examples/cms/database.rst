@@ -123,7 +123,7 @@ Database Configuration
 ======================
 
 Next, let's tell CakePHP where our database is and how to connect to it. Replace
-the values in the ``Datasources.default`` array in your **config/app.php** file
+the values in the ``Datasources.default`` array in your **config/app_local.php** file
 with those that apply to your setup. A sample completed configuration array
 might look something like the following::
 

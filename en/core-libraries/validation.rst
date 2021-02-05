@@ -6,7 +6,7 @@ Validation
 The validation package in CakePHP provides features to build validators that can
 validate arbitrary arrays of data with ease. You can find a `list of available
 Validation rules in the API
-<https://api.cakephp.org/3.x/class-Cake.Validation.Validation.html>`__.
+<https://api.cakephp.org/4.x/class-Cake.Validation.Validation.html>`__.
 
 .. _creating-validators:
 
@@ -148,7 +148,7 @@ like::
         ->lengthBetween('username', [4, 8]);
 
 See the `Validator API documentation
-<https://api.cakephp.org/3.x/class-Cake.Validation.Validator.html>`_ for the
+<https://api.cakephp.org/4.x/class-Cake.Validation.Validator.html>`_ for the
 full set of validator methods.
 
 .. _custom-validation-rules:

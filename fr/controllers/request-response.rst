@@ -23,13 +23,13 @@ créée et passée en référence aux différentes couches de l'application que 
 requête de données utilise. Par défaut la requête est assignée à
 ``$this->request``, et est disponible dans les Controllers, Cells, Vues et
 Helpers. Vous pouvez aussi y accéder dans les Components en utilisant la
-référence du controller. Certaines des tâches incluses que ``ServerRequest``
+référence du controller. Certaines des tâches que ``ServerRequest``
 permet sont les suivantes:
 
 * Transformer les tableaux GET, POST, et FILES en structures de données avec
   lesquelles vous êtes familiers.
 * Fournir une introspection de l'environnement se rapportant à la demande.
-  Des informations comme les envois d'en-têtes (headers), l'adresse IP du client
+  Des informations comme les d'en-têtes (headers) envoyés, l'adresse IP du client
   et les informations des sous-domaines/domaines sur lesquels le serveur de
   l'application tourne.
 * Fournit un accès aux paramètres de la requête à la fois en tableaux indicés
@@ -46,8 +46,9 @@ Paramètres de la Requête
 
     $controllerName = $this->request->getParam('controller');
 
-    // Avant 3.4.0
-    $controllerName = $this->request->param('controller');
+Pour obtenir tous les paramètres de routage sous forme de tableau, utilisez getAttribute ()::
+
+    $parameters = $this->request->getAttribute('params');
 
 Tous les éléments de route :ref:`route-elements` sont accessibles à travers
 cette interface.
@@ -63,7 +64,7 @@ Tous vous fournissent un accès aux arguments passés. Il y a de nombreux
 paramètres importants et utiles que CakePHP utilise en interne qu'on peut aussi
 trouver dans les paramètres de routing:
 
-* ``plugin`` Le plugin gérant la requête aura une valeur nulle quand il n'y a
+* ``plugin`` Le plugin gérant la requête. Aura une valeur nulle quand il n'y a
   pas de plugins.
 * ``controller`` Le controller gérant la requête courante.
 * ``action`` L'action gérant la requête courante.
@@ -79,9 +80,6 @@ Les paramètres Querystring peuvent être lus en utilisant la méthode ``getQuer
 
     // l'URL est /posts/index?page=1&sort=title
     $page = $this->request->getQuery('page');
-
-    // Avant 3.4.0
-    $page = $this->request->query('page');
 
 Vous pouvez soit directement accéder à la propriété demandée, soit vous pouvez
 utiliser ``getQuery()`` pour lire l'URL requêtée sans erreur. Toute clé qui
@@ -104,16 +102,156 @@ Données du Corps de la Requête
 .. php:method:: getData($name, $default = null)
 
 Toutes les données POST sont accessibles en utilisant
-:php:meth:`Cake\\Http\\ServerRequest::getData()`. Toute donnée de formulaire qui
-contient un préfix ``data`` aura ce préfixe supprimé. Par exemple::
+:php:meth:`Cake\\Http\\ServerRequest::getData()`. Par exemple::
 
-    // Un input avec un attribut de nom égal à 'MyModel[title]' est accessible via
-    $title = $this->request->getData('MyModel.title');
+    // Un input avec un attribut de nom égal à 'title' est accessible via
+    $title = $this->request->getData('title');
 
-Toute clé qui n'existe pas va retourner ``null``::
+Vous pouvez utiliser des noms séparés par des points pour accéder aux données imbriquées. Par exemple::
+
+    $value = $this->request->getData('adresse.nom_de_rue');
+
+Pour toute clé qui n'existe pas, la valeur par ``$default`` sera retournée::
 
     $foo = $this->request->getData('Valeur.qui.n.existe.pas');
     // $foo == null
+
+Vous pouvez également utiliser :ref:`body-parser-middleware` pour analyser le corps de la requête de différents
+types de contenu dans un tableau de sortie, de sorte qu'il soit accessible via ``ServerRequest::getData()``.
+
+Si vous souhaitez accéder à tous les paramètres de requête, vous pouvez utiliser ``getQueryParams()``::
+
+    $query = $this->request->getQueryParams();
+
+Envoyer des fichiers
+--------------------
+
+Les fichiers téléchargés sont accessibles via les données du corps de la requête, en utilisant
+la méthode :php:meth:`Cake\\Http\\ServerRequest::getData()` décrite ci-dessus. Par exemple,
+un fichier correspondant au nom ``attachment``, peut
+être accédé comme ceci::
+
+    $attachment = $this->request->getData('attachment');
+
+Par défaut, les téléchargements de fichiers sont représentés dans les données de requête comme des objets
+qui implémentent
+`\\Psr\\Http\\Message\\UploadedFileInterface <https://www.php-fig.org/psr/psr-7/#16-uploaded-files>`__. Dans l'actuelle
+implémentation, la variable ``$attachment`` dans l'exemple ci-dessus contiendrait par défaut une instance de
+``\Laminas\Diactoros\UploadedFile``.
+
+L'accès aux détails du fichier téléchargé est assez simple, voici comment obtenir les mêmes données que celles
+fournies par le tableau de téléchargement de fichier des anciennes versions de cakePHP::
+
+    $name = $attachment->getClientFilename();
+    $type = $attachment->getClientMediaType();
+    $size = $attachment->getSize();
+    $tmpName = $attachment->getStream()->getMetadata('uri');
+    $error = $attachment->getError();
+
+Le déplacement du fichier téléchargé de son emplacement temporaire vers l'emplacement cible souhaité ne nécessite pas
+d'accéder manuellement au fichier temporaire, à la place cela peut être facilement fait en utilisant les méthodes
+``moveTo()`` des objets::
+
+   $attachment->moveTo($targetPath);
+
+Dans un environnement HTTP, la méthode ``moveTo()`` validera automatiquement si le fichier est un fichier téléchargé,
+et lancera une exception si nécessaire. Dans un environnement CLI, où le concept de téléchargement de fichiers
+n'existe pas, il permettra de déplacer le fichier que vous avez référencé indépendamment de ses origines,
+ce qui rend le test des téléchargements de fichiers vraiment facile.
+
+Pour revenir à l'utilisation des tableaux de téléchargement de fichiers des versions antérieures, définissez la valeur
+de configuration ``App.uploadedFilesAsObjects`` à ``false``, par exemple dans votre fichier ``config/app.php``::
+
+
+    return [
+        // ...
+        'App' => [
+            // ...
+            'uploadedFilesAsObjects' => false,
+        ],
+        // ...
+    ];
+
+Avec l'option désactivée, les téléchargements de fichiers sont représentés dans les données de la requête sous
+forme de tableaux, avec une structure normalisée qui reste la même y compris pour pour les entrées/noms imbriqués,
+ce qui est différent de la façon dont PHP les représente dans la variable ``$ _FILES``
+(reportez-vous au `manuel PHP <https://www.php.net/manual/en/features.file-upload.php>` __ pour plus d'informations),
+c'est-à-dire que la valeur ``$attachment` ressemblerait à quelque chose comme ceci::
+
+    [
+        'name' => 'attachment.txt',
+        'type' => 'text/plain',
+        'size' => 123,
+        'tmp_name' => '/tmp/hfz6dbn.tmp'
+        'error' => 0
+    ]
+
+.. tip::
+
+    Les fichiers téléchargés sont également accessibles en tant qu'objets séparément des données de requête via les
+    méthodes :php:meth:`Cake\\Http\\ServerRequest::getUploadedFile()` et
+    :php:meth:`Cake\\Http\\ServerRequest::getUploadedFiles()`. Ces méthodes renverront toujours des objets,
+     indépendamment de la configuration ``App.uploadedFilesAsObjects``.
+
+
+.. php:method:: getUploadedFile($path)
+
+Renvoie le fichier téléchargé à un chemin spécifique. Le chemin utilise la même syntaxe de point (dot) que la
+méthode :php:meth:`Cake\\Http\\ServerRequest::getData()`::
+
+    $attachment = $this->request->getUploadedFile('attachment');
+
+Contrairement à :php:meth:`Cake\\Http\\ServerRequest::getData()`,
+:php:meth:`Cake\\Http\\ServerRequest::getUploadedFile()` ne renvoie des données que lorsqu'un téléchargement de fichier
+réel existe pour le chemin donné, s'il existe des données de corps de requête régulières, non liées à un fichier,
+correspondant au chemin donné, alors cette méthode retournera ``null``, comme elle le ferait pour tout chemin
+inexistant.
+
+.. php:method:: getUploadedFiles()
+
+Renvoie tous les fichiers téléchargés dans une structure de tableau normalisée. Pour l'exemple ci-dessus avec le
+nom d'entrée de fichier ``attachement``, la structure ressemblerait à::
+
+    [
+          'attachment' => object(Laminas\Diactoros\UploadedFile) {
+              // ...
+          }
+    ]
+
+.. php:method:: withUploadedFiles(array $files)
+
+Cette méthode définit les fichiers téléchargés de l'objet de requête, elle accepte un tableau d'objets qui implémentent
+`\\Psr\\Http\\Message\\UploadedFileInterface <https://www.php-fig.org/psr/psr-7/#16-uploaded-files>`__. Elle va
+remplacer tous les fichiers téléchargés éventuellement existants::
+
+    $files = [
+        'MyModel' => [
+            'attachment' => new \Laminas\Diactoros\UploadedFile(
+                $streamOrFile,
+                $size,
+                $errorStatus,
+                $clientFilename,
+                $clientMediaType
+            ),
+            'anotherAttachment' => new \Laminas\Diactoros\UploadedFile(
+                '/tmp/hfz6dbn.tmp',
+                123,
+                \UPLOAD_ERR_OK,
+                'attachment.txt',
+                'text/plain'
+            ),
+        ],
+    ];
+
+    $this->request = $this->request->withUploadedFiles($files);
+
+.. note::
+
+    Les fichiers téléchargés qui ont été ajoutés à la demande via cette méthode ne seront *pas* disponibles
+    dans les données du corps de la requête, c'est-à-dire que vous ne pouvez pas les récupérer via
+    :php:meth:`Cake\\Http\\ServerRequest::getData()`! Si vous en avez besoin également dans les données de la requête,
+    vous devez les définir via :php:meth:`Cake\\Http\\ServerRequest::withData()` ou
+    :php:meth:`Cake\\Http\\ServerRequest::withParsedBody()`.
 
 Accéder aux Données PUT, PATCH ou DELETE
 ----------------------------------------
@@ -158,7 +296,7 @@ Données XML ou JSON
 -------------------
 
 Les applications employant :doc:`/development/rest` échangent souvent des
-données dans des organes post non encodées en URL. Vous pouvez lire les données
+données dans des corps de requête post non encodés en URL. Vous pouvez lire les données
 entrantes dans n'importe quel format en utilisant
 :php:meth:`~Cake\\Http\\ServerRequest::input()`. En fournissant une fonction de
 décodage, vous pouvez recevoir le contenu dans un format déserializé::
@@ -166,8 +304,8 @@ décodage, vous pouvez recevoir le contenu dans un format déserializé::
     // Obtenir les données encodées JSON soumises par une action PUT/POST
     $jsonData = $this->request->input('json_decode');
 
-Quelques méthodes de desérialization requièrent des paramètres supplémentaires
-quand elles sont appelées, comme le paramètre de type tableau de
+Certaines méthodes de desérialization requièrent des paramètres supplémentaires
+quand elles sont appelées, comme le paramètre de type 'comme tableau' de
 ``json_decode``. Si vous voulez convertir du XML en objet DOMDocument,
 :php:meth:`~Cake\\Http\\ServerRequest::input()` supporte aussi le passage de
 paramètres supplémentaires::
@@ -194,11 +332,6 @@ sous-dossier. Les attributs que vous pouvez utiliser sont::
     // Contient /subdir/
     $base = $request->getAttribute('webroot');
 
-    // Avant la version 3.4.0
-    $webroot = $request->webroot;
-    $base = $request->base;
-    $here = $request->here();
-
 .. _check-the-request:
 
 Vérifier les Conditions de la Requête
@@ -207,7 +340,7 @@ Vérifier les Conditions de la Requête
 .. php:method:: is($type, $args...)
 
 L'objet ``ServerRequest`` fournit une façon d'inspecter différentes conditions de la
-requête utilisée. En utilisant la méthode ``is()``, vous pouvez vérifier un
+requête. En utilisant la méthode ``is()``, vous pouvez vérifier un
 certain nombre de conditions, ainsi qu'inspecter d'autres critères de la requête
 spécifique à l'application::
 
@@ -215,11 +348,13 @@ spécifique à l'application::
 
 Vous pouvez aussi étendre les détecteurs de la requête qui sont disponibles, en
 utilisant :php:meth:`Cake\\Http\\ServerRequest::addDetector()` pour créer de
-nouveaux types de détecteurs. Il y a quatre différents types de détecteurs que
+nouveaux types de détecteurs. Il y a différents types de détecteurs que
 vous pouvez créer:
 
 * Comparaison avec valeur d'environnement - Compare l'égalité de la valeur
   extraite à partir de :php:func:`env()` avec la valeur fournie.
+* Comparaison de la valeur d'en-tête - Si l'en-tête spécifié existe avec la
+   valeur spécifiée, la fonction appelable renvoie true.
 * Comparaison de valeur avec motif - Vous permet de comparer la valeur
   extraite de :php:func:`env()` avec une expression régulière.
 * Comparaison basée sur les options -  Utilise une liste d'options pour créer
@@ -251,6 +386,20 @@ Quelques exemples seraient::
         'options' => ['192.168.0.101', '192.168.0.100']
     ]);
 
+    // Ajouter un détecteur d'en-tête avec comparaison de valeurs
+    $this->request->addDetector('fancy', [
+        'env' => 'CLIENT_IP',
+        'header' => ['X-Fancy' => 1]
+    ]);
+
+    // Ajouter un détecteur d'en-tête avec comparaison appelable
+    $this->request->addDetector('fancy', [
+        'env' => 'CLIENT_IP',
+        'header' => ['X-Fancy' => function ($value, $header) {
+            return in_array($value, ['1', '0', 'yes', 'no'], true);
+        }]
+    ]);
+
     // Ajouter un détecteur de callback. Doit être un callable valide.
     $this->request->addDetector(
         'awesome',
@@ -259,19 +408,15 @@ Quelques exemples seraient::
         }
     );
 
-    // Ajouter un détecteur qui utilise des arguments supplémentaires. Depuis la version 3.3.0
+    // Ajouter un détecteur qui utilise des arguments supplémentaires.
     $this->request->addDetector(
-        'controller',
-        function ($request, $name) {
-            return $request->getParam('controller') === $name;
-        }
+        'csv',
+        [
+            'accept' => ['text/csv'],
+            'param' => '_ext',
+            'value' => 'csv',
+        ]
     );
-
-``ServerRequest`` inclut aussi des méthodes comme
-:php:meth:`Cake\\Http\\ServerRequest::domain()`,
-:php:meth:`Cake\\Http\\ServerRequest::subdomains()`
-et :php:meth:`Cake\\Http\\ServerRequest::host()` qui facilitent la vie des
-applications avec sous-domaines.
 
 Il y a plusieurs détecteurs intégrés que vous pouvez utiliser:
 
@@ -291,13 +436,23 @@ Il y a plusieurs détecteurs intégrés que vous pouvez utiliser:
 * ``is('xml')`` Vérifie si la requête a l'extension 'xml' ajoutée et si elle
   accepte le mimetype 'application/xml' ou 'text/xml'.
 
+``ServerRequest`` inclut aussi des méthodes comme
+:php:meth:`Cake\\Http\\ServerRequest::domain()`,
+:php:meth:`Cake\\Http\\ServerRequest::subdomains()`
+et :php:meth:`Cake\\Http\\ServerRequest::host()` qui facilitent la vie des
+applications avec sous-domaines.
+
+
 Données de Session
 ------------------
 
-Pour accéder à la session pour une requête donnée, utilisez la méthode
+Pour accéder à la session pour une requête donnée, utilisez la méthode ``getSession()`` ou l'attribut
 ``session()``::
 
-    $userName = $this->request->session()->read('Auth.User.name');
+    $session = $this->request->getSession();
+    $session = $this->request->getAttribute('session');
+
+    $userName = $session->read('Auth.User.name');
 
 Pour plus d'informations, consultez la documentation
 :doc:`/development/sessions` sur la façon d'utiliser l'objet ``Session``.
@@ -331,13 +486,11 @@ Lire la Méthode HTTP
 
 .. php:method:: getMethod()
 
-Retourne la méthode HTTP où la requête a été faite::
+Retourne le type de méthode HTTP avec lequel la requête a été faite::
 
     // Affiche POST
     echo $request->getMethod();
 
-    // Avant la version 3.4.0
-    echo $request->method();
 
 Restreindre les Méthodes HTTP qu'une Action Accepte
 ---------------------------------------------------
@@ -350,7 +503,7 @@ l'en-tête ``Allow`` nécessaire avec les méthodes passées::
 
     public function delete()
     {
-        // Only accept POST and DELETE requests
+        // Accepter uniquement les demandes POST et DELETE
         $this->request->allowMethod(['post', 'delete']);
         ...
     }
@@ -359,19 +512,17 @@ Lire les en-têtes HTTP
 ----------------------
 
 Ces méthodes vous permettent d'accéder à n'importe quel en-tête ``HTTP_*`` qui
-ont été utilisés dans la requête. Par exemple::
+a été utilisé dans la requête. Par exemple::
 
     // Récupère le header dans une chaîne
     $userAgent = $this->request->getHeaderLine('User-Agent');
 
-    // Récupère un tableau de toutes les valeurs
-    $acceptHeader = $this->request->getHeaders();
+    // Récupère un tableau contenant toutes les valeurs.
+    $acceptHeader = $this->request->getHeader('Accept');
 
     // Vérifie l'existence d'un header
     $hasAcceptHeader = $this->request->hasHeader('Accept');
 
-    // Avant to 3.4.0
-    $userAgent = $this->request->header('User-Agent');
 
 Du fait que certaines installations d'Apache ne rendent pas le header
 ``Authorization`` accessible, CakePHP le rend disponible via des méthodes
@@ -392,7 +543,7 @@ Si votre application est derrière un load balancer ou exécutée sur un service
 cloud, vous voudrez souvent obtenir l'hôte de load balancer, le port et le
 schéma dans vos requêtes. Souvent les load balancers vont aussi envoyer
 des en-têtes ``HTTP-X-Forwarded-*`` avec les valeurs originales. Les en-têtes
-forwarded ne seront pas utilisés par CakePHP directement. Pour que l'objet
+forwardés ne seront pas utilisés par CakePHP directement. Pour que l'objet
 request utilise les en-têtes, définissez la propriété ``trustProxy`` à
 ``true``::
 
@@ -403,6 +554,17 @@ request utilise les en-têtes, définissez la propriété ``trustProxy`` à
     $host = $this->request->host();
     $scheme = $this->request->scheme();
     $clientIp = $this->request->clientIp();
+
+Une fois que les proxys sont approuvés, la méthode ``clientIp()`` utilisera la *dernière*
+adresse IP dans l'en-tête ``X-Forwarded-For``. Si votre application est derrière
+plusieurs proxies, vous pouvez utiliser ``setTrustedProxies()`` pour définir les adresses IP
+des proxies sous votre contrôle::
+
+    request->setTrustedProxies(['127.1.1.1', '127.8.1.3']);
+
+Une fois les proxys approuvés, ``clientIp()`` utilisera la première adresse IP de
+l'en-tête ``X-Forwarded-For`` à condition que ce soit la seule valeur qui ne provienne pas
+d'un proxy approuvé.
 
 Vérifier les En-têtes Acceptés
 ------------------------------
@@ -438,7 +600,7 @@ Vérifier si une langue spécifique est acceptée::
 Cookies
 -------
 
-Les cookies de la Request peuvent être lus à travers plusieurs méthodes::
+Les cookies de la requête peuvent être lus à travers plusieurs méthodes::
 
     // Récupère la valeur du cookie, ou null si le cookie n'existe pas
     $rememberMe = $this->request->getCookie('remember_me');
@@ -449,11 +611,42 @@ Les cookies de la Request peuvent être lus à travers plusieurs méthodes::
     // Récupère tous les cookies dans un tableau
     $cookies = $this->request->getCookieParams();
 
-    // Récupère une instance de CookieCollection (à partir de 3.5.0)
+    // Récupère une instance de CookieCollection
     $cookies = $this->request->getCookieCollection()
 
 Référez-vous à la documentation de :php:class:`Cake\\Http\\Cookie\\CookieCollection`
 pour savoir comment travailler avec les collections de cookies.
+
+Fichiers uploadés
+-----------------
+
+Les requêtes exposent les données du fichier téléchargé dans ``getData()` ou
+``getUploadedFiles()`` comme objets implémentant l'interface``UploadedFileInterface``::
+
+    // Récupère une liste des objets UploadedFile
+    $files = $request->getUploadedFiles();
+
+    // Lire les données du fichier.
+    $files[0]->getStream();
+    $files[0]->getSize();
+    $files[0]->getClientFileName();
+
+    // Déplacer le fichier.
+    $files[0]->moveTo($targetPath);
+
+
+Manipuler les URIs
+------------------
+
+Les requêtes contiennent un objet URI, qui contient des méthodes pour interagir avec l'URI demandée::
+
+    // Récupère l'URI
+    $uri = $request->getUri();
+
+    // Extrait les données de l'URI.
+    $path = $uri->getPath();
+    $query = $uri->getQuery();
+    $host = $uri->getHost();
 
 .. index:: $this->response
 
@@ -470,7 +663,7 @@ en-têtes qui vont être envoyés.
 :php:class:`Cake\\Http\\ServerRequest`, :php:class:`Cake\\Http\\Response`
 consolide un certain nombre de méthodes qu'on pouvait trouver avant dans
 :php:class:`Controller`,
-:php:class:`ServerRequestHandlerComponent` et :php:class:`Dispatcher`. Les anciennes
+:php:class:`RequestHandlerComponent` et :php:class:`Dispatcher`. Les anciennes
 méthodes sont dépréciées en faveur de l'utilisation de
 :php:class:`Cake\\Http\\Response`.
 
@@ -479,7 +672,7 @@ communes liées, telles que:
 
 * Envoyer des en-têtes pour les redirections.
 * Envoyer des en-têtes de type de contenu.
-* Envoyer tout en-tête.
+* Envoyer n'importe quel en-tête.
 * Envoyer le corps de la réponse.
 
 Gérer les Types de Contenu
@@ -490,22 +683,18 @@ Gérer les Types de Contenu
 Vous pouvez contrôler le Content-Type des réponses de votre application en
 utilisant :php:meth:`Cake\\Http\\Response::withType()`. Si votre application a
 besoin de gérer les types de contenu qui ne sont pas construits dans Response,
-vous pouvez faire correspondre ces types avec ``withType()`` comme ceci::
+vous pouvez faire correspondre ces types avec ``setTypeMap()`` comme ceci::
 
     // Ajouter un type vCard
-    $this->response->withType(['vcf' => 'text/v-card']);
+    $this->response->setTypeMap('vcf', ['text/v-card']);
 
     // Configurer la réponse de Type de Contenu pour vcard.
-    $this->response->withType('vcf');
-
-    // Avant 3.4.0
-    $this->response->type('vcf');
+    $this->response = $this->response->withType('vcf');
 
 Habituellement, vous voudrez faire correspondre des types de contenu
 supplémentaires dans le callback :php:meth:`~Controller::beforeFilter()` de
-votre controller afin que vous puissiez tirer parti de la fonctionnalité de
-vue de commutation automatique de :php:class:`RequestHandlerComponent`, si vous
-l'utilisez.
+votre controller afin que vous puissiez tirer parti de la fonctionnalité de commutation
+automatique de vue de :php:class:`RequestHandlerComponent`, si vous l'utilisez.
 
 .. _cake-response-file:
 
@@ -514,93 +703,67 @@ Envoyer des fichiers
 
 .. php:method:: withFile($path, $options = [])
 
-Il y a des fois où vous voulez envoyer des fichiers en réponses de vos requêtes.
-Vous pouvez le faire en utilisant
-:php:meth:`Cake\\Http\\Response::withFile()`::
+Il y a des moments où vous souhaitez envoyer des fichiers en réponse à vos demandes.
+Vous pouvez accomplir cela en utilisant :php:meth:`Cake\\Http\\Response::withFile()`::
 
     public function sendFile($id)
     {
         $file = $this->Attachments->getFile($id);
         $response = $this->response->withFile($file['path']);
-        // Retourne la réponse pour éviter que le controller n'essaie de
-        // rendre la vue
+        // Renvoie la réponse pour empêcher le contrôleur d'essayer
+        // de rendre une vue
         return $response;
     }
 
-    // Avant 3.4.0
-    $file = $this->Attachments->getFile($id);
-    $this->response->file($file['path']);
-    // Retourne la réponse pour éviter que le controller n'essaie de
-    // rendre la vue
-    return $this->response;
+Comme indiqué dans l'exemple ci-dessus, vous devez transmettre le chemin du fichier à la méthode.
+CakePHP enverra un en-tête de type de contenu approprié s'il s'agit d'un type de fichier connu répertorié
+dans `Cake\\Http\\Response::$_mimeTypes`. Vous pouvez ajouter de nouveaux types avant d'appeler
+:php:meth:`Cake\\Http\\Response::withFile()` en utilisant la méthode
+:php:meth:`Cake\\Http\\Response::withType()`.
 
-Comme montré dans l'exemple ci-dessus, vous devez passer le
-chemin du fichier à la méthode. CakePHP va envoyer le bon en-tête de type de
-contenu si c'est un type de fichier connu listé dans
-`Cake\\Http\\Reponse::$_mimeTypes`. Vous pouvez ajouter des nouveaux types
-avant d'appeler :php:meth:`Cake\\Http\\Response::withFile()` en utilisant la
-méthode :php:meth:`Cake\\Http\\Response::withType()`.
-
-Si vous voulez, vous pouvez aussi forcer un fichier à être téléchargé au lieu
-d'être affiché dans le navigateur en spécifiant les options::
+Si vous le souhaitez, vous pouvez également forcer le téléchargement d'un fichier
+au lieu de l'afficher dans le navigateur en spécifiant les options::
 
     $response = $this->response->withFile(
         $file['path'],
         ['download' => true, 'name' => 'foo']
     );
 
-    // Avant 3.4.0
-    $this->response->file(
-        $file['path'],
-        ['download' => true, 'name' => 'foo']
-    );
-
-les options possibles sont:
+Les options prises en charge sont:
 
 name
-    Le nom vous permet de spécifier un nom de fichier alternatif à envoyer à
-    l'utilisateur.
+     Le nom vous permet de spécifier un autre nom de fichier à envoyer
+     l'utilisateur.
 download
-    Une valeur booléenne indiquant si les en-têtes doivent être définis pour
-    forcer le téléchargement.
+     Une valeur booléenne indiquant si les en-têtes doivent être définis pour
+     forcer le téléchargement.
 
-Envoyer une Chaîne de Caractères en Fichier
--------------------------------------------
+Envoyer une Chaîne de Caractères comme Fichier
+----------------------------------------------
 
 Vous pouvez répondre avec un fichier qui n'existe pas sur le disque, par
 exemple si vous voulez générer un pdf ou un ics à la volée à partir d'une
 chaine::
 
-    public function sendIcs()
-    {
+     public function sendIcs()
+     {
         $icsString = $this->Calendars->generateIcs();
-        $reponse = $this->response;
-        $response->body($icsString);
+        $response = $this->response;
 
-        $this->response->withType('ics');
+        // Injecter le contenu de la chaîne dans le corps de la réponse
+        $response = $response->withStringBody($icsString);
+
+        $response = $response->withType('ics');
 
         // Force le téléchargement de fichier en option
-        $response = $this->response->withDownload('filename_for_download.ics');
+        $response = $response->withDownload('filename_for_download.ics');
 
-        // Retourne l'object pour éviter au controller d'essayer de rendre
-        // une vue
+        // Renvoie la réponse pour empêcher le contrôleur d'essayer
+        // de rendre une vue
         return $response;
-    }
+     }
 
-Streaming Resources
--------------------
-
-Vous pouvez utiliser une fonction de rappel avec ``body()`` pour convertir des
-flux de ressources en réponses::
-
-    $file = fopen('/some/file.png', 'r');
-    $this->response->body(function () use ($file) {
-        rewind($file);
-        fpassthru($file);
-        fclose($file);
-    });
-
-Les fonctions de rappel peuvent également renvoyer le corps en tant que chaîne
+Les fonctions de rappel (callbacks) peuvent également renvoyer le corps en tant que chaîne
 de caractères::
 
     $path = '/some/file.png';
@@ -613,11 +776,11 @@ Définir les En-têtes
 
 .. php:method:: withHeader($header, $value)
 
-Les définitions de headers se font avec la méthode :php:meth:`Cake\\Http\\Response::withHeader()`.
+La définition de headers se fait avec la méthode :php:meth:`Cake\\Http\\Response::withHeader()`.
 Comme toutes les méthodes de l'interface PSR-7, cette méthode retourne une
 nouvelle instance avec le nouvel header::
 
-    // Ajoute / remplace un header
+    // Ajoute/remplace un header
     $response = $response->withHeader('X-Extra', 'My header');
 
     // Définit plusieurs headers
@@ -626,9 +789,6 @@ nouvelle instance avec le nouvel header::
 
     // Ajoute une valeur à un header existant
     $response = $response->withAddedHeader('Set-Cookie', 'remember_me=1');
-
-    // Avant to 3.4.0 - Définit a header
-    $this->response->header('Location', 'http://example.com');
 
 Les headers ne sont pas envoyés dès que vous les définissez. Ils sont stockés
 jusqu'à ce que la réponse soit émise par ``Cake\Http\Server``.
@@ -653,21 +813,18 @@ Pour définir une chaîne comme corps de réponse, écrivez ceci::
 .. php:method:: withBody($body)
 
 Pour définir le corps de la réponse, utilisez la méthode ``withBody()`` qui est
-fournie par le :php:class:`Zend\\Diactoros\\MessageTrait`::
+fournie par le :php:class:`Laminas\\Diactoros\\MessageTrait`::
 
     $response = $response->withBody($stream);
 
-    // Avant 3.4.0, pour définir le corps de la réponse
-    $this->response->body('My Body');
-
 Assurez-vous que ``$stream`` est un objet de type :php:class:`Psr\\Http\\Message\\StreamInterface`.
-Ci-dessous, la manière de créer un nouveau stream.
+Concernant la manière de créer un nouveau stream, voyez ci-dessous.
 
 Vous pouvez également "*streamer*" les réponses depuis des fichiers en
-utilisant des streams :php:class:`Zend\\Diactoros\\Stream`::
+utilisant des streams :php:class:`Laminas\\Diactoros\\Stream`::
 
     // Pour "streamer" depuis un fichier
-    use Zend\Diactoros\Stream;
+    use Laminas\Diactoros\Stream;
 
     $stream = new Stream('/path/to/file', 'rb');
     $response = $response->withBody($stream);
@@ -688,15 +845,6 @@ des fichiers CSV ou des fichiers PDF à streamer au client::
     });
     $response = $response->withBody($stream);
 
-    // Avant 3.4.0, vous pouvez utiliser la méthode ci-dessous pour créer des
-    // réponses sous forme de stream
-    $file = fopen('/some/file.png', 'r');
-    $this->response->body(function () use ($file) {
-        rewind($file);
-        fpassthru($file);
-        fclose($file);
-    });
-
 Définir le Character Set
 ------------------------
 
@@ -705,9 +853,6 @@ Définir le Character Set
 Cette méthode permet de définir le charset qui sera utilisé dans la réponse::
 
     $this->response = $this->response->withCharset('UTF-8');
-
-    // Avant to 3.4.0
-    $this->response->charset('UTF-8');
 
 Interagir avec le Cache du Navigateur
 -------------------------------------
@@ -738,19 +883,20 @@ des réponses. En utilisant :php:meth:`Cake\\Http\\Response::withCache()`::
 
     public function index()
     {
+        // Autoriser la mise en cache
         $this->response = $this->response->withCache('-1 minute', '+5 days');
     }
 
 Ce qui est au-dessus indiquera aux clients de mettre en cache la réponse résultante
-pendant 5 jours, en espérant accélérer l'expérience de vos visiteurs.
+pendant 5 jours, espérant ainsi accélérer l'expérience de vos visiteurs.
 La méthode ``withCache()`` définit valeur ``Last-Modified`` en
 premier argument. L'entête ``Expires`` et ``max-age`` sont définis en se basant
 sur le second paramètre. Le Cache-Control est défini aussi à ``public``.
 
 .. _cake-response-caching:
 
-Configuration affinée du Cache HTTP
------------------------------------
+Configuration fine du Cache HTTP
+--------------------------------
 
 L'une des meilleures méthodes et des plus simples pour rendre votre application
 plus rapide est d'utiliser le cache HTTP. Selon ce modèle de mise en cache,
@@ -760,19 +906,19 @@ d'en-têtes comme la date de mise à jour et la balise entity de réponse.
 
 Plutôt que d'avoir à coder la logique de mise en cache et de sa désactivation
 (rafraîchissement) une fois que les données ont changé, HTTP utilise deux
-modèles, l'expiration et la validation qui sont habituellement beaucoup plus
+méthodes, l'expiration et la validation qui sont habituellement beaucoup plus
 simples à utiliser.
 
 En dehors de l'utilisation de :php:meth:`Cake\\Http\\Response::withCache()`, vous
-pouvez également utiliser d'autres méthodes pour affiner les en-têtes de
-cache HTTP pour tirer profit du cache du navigateur ou du proxy inverse.
+pouvez également utiliser d'autres méthodes pour régler finement les en-têtes de
+cache HTTP et ainsi tirer profit du cache du navigateur ou du proxy inverse.
 
 L'En-tête de Contrôle du Cache
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. php:method:: withSharable($public = null, $time = null)
+.. php:method:: withSharable($public, $time = null)
 
-Utilisé sous le modèle d'expiration, cet en-tête contient de multiples
+Utilisé par la méthode méthode d'expiration, cet en-tête contient de multiples
 indicateurs qui peuvent changer la façon dont les navigateurs ou les proxies
 utilisent le contenu mis en cache. Un en-tête ``Cache-Control`` peut ressembler
 à ceci::
@@ -813,10 +959,10 @@ dans l'en-tête de ``Cache-Control``.
 L'En-tête d'Expiration
 ~~~~~~~~~~~~~~~~~~~~~~
 
-.. php:method:: withExpires($time = null)
+.. php:method:: withExpires($time)
 
 Vous pouvez définir l'en-tête ``Expires`` avec une date et un temps après
-lesquels la réponse n'est plus considérée comme récente. Cet en-tête peut être
+lesquels la réponse n'est plus considérée comme à jour. Cet en-tête peut être
 défini en utilisant la méthode ``withExpires()``::
 
     public function view()
@@ -834,11 +980,11 @@ L'En-tête Etag
 
 La validation du Cache dans HTTP est souvent utilisée quand le contenu change
 constamment et demande à l'application de générer seulement les contenus de la
-réponse si le cache n'est plus récent. Sous ce modèle, le client continue
+réponse si le cache n'est plus à jour. Sous ce modèle, le client continue
 de stocker les pages dans le cache, mais au lieu de l'utiliser directement,
 il demande à l'application à chaque fois si les ressources ont changé ou non.
 C'est utilisé couramment avec des ressources statiques comme les images et
-autres choses.
+autres ressources.
 
 La méthode ``withEtag()`` (appelée balise d'entité) est une
 chaîne de caractère qui identifie de façon unique les ressources requêtées
@@ -848,15 +994,22 @@ correspond à une ressource du cache.
 Pour réellement tirer profit de l'utilisation de cet en-tête, vous devez
 soit appeler manuellement la méthode
 ``checkNotModified()`` ou inclure le
-:doc:`/controllers/components/request-handling` in your controller::
+:doc:`/controllers/components/request-handling` dans votre controlleur::
 
     public function index()
     {
-        $articles = $this->Articles->find('all');
-        $response = $this->response->withEtag($this->Articles->generateHash($articles));
+        $articles = $this->Articles->find('all')->all();
+
+        // Somme de contrôle simple du contenu de l'article.
+        // Vous devriez utiliser une implémentation plus efficace
+        // dans une application du monde réel.
+        $checksum = md5(json_encode($articles));
+
+        $response = $this->response->withEtag($checksum);
         if ($response->checkNotModified($this->request)) {
             return $response;
         }
+
         $this->response = $response;
         // ...
     }
@@ -870,9 +1023,9 @@ soit appeler manuellement la méthode
 L'En-tête Last-Modified
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-.. php:method:: withModified($time = null)
+.. php:method:: withModified($time)
 
-De même, avec le modèle de validation du cache HTTP, vous pouvez définir
+De même, avec la méthode consistant à valider du cache HTTP, vous pouvez définir
 l'en-tête ``Last-Modified`` pour indiquer la date et l'heure à laquelle la
 ressource a été modifiée pour la dernière fois. Définir cet en-tête aide CakePHP
 à indiquer à ces clients si la réponse a été modifiée ou n'est pas basée sur
@@ -880,13 +1033,13 @@ leur cache.
 
 Pour réellement tirer profit de l'utilisation de cet en-tête, vous devez soit
 appeler manuellement la méthode ``checkNotModified()`` ou inclure le
-:doc:`/controllers/components/request-handling` in your controller::
+:doc:`/controllers/components/request-handling` dans votre controlleur::
 
     public function view()
     {
         $article = $this->Articles->find()->first();
-        $response = this->response->withModified($article->modified);
-        if ($this->response->checkNotModified($this->request)) {
+        $response = $this->response->withModified($article->modified);
+        if ($response->checkNotModified($this->request)) {
             return $response;
         }
         $this->response;
@@ -903,17 +1056,17 @@ URL. C'est souvent le cas quand vous avez une page multilingue ou que vous
 répondez avec différentes pages HTML selon le navigateur qui requête la
 ressource. Dans ces circonstances, vous pouvez utiliser l'en-tête ``Vary``::
 
-    $this->response = $this->response->withVary('User-Agent');
-    $this->response = $this->response->withVary('Accept-Encoding', 'User-Agent');
-    $this->response = $this->response->withVary('Accept-Language');
+    $response = $this->response->withVary('User-Agent');
+    $response = $this->response->withVary('Accept-Encoding', 'User-Agent');
+    $response = $this->response->withVary('Accept-Language');
 
 Envoyer des Réponses Non-Modifiées
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. php:method:: checkNotModified(ServerRequest $request)
+.. php:method:: checkNotModified(Request $request)
 
 Compare les en-têtes de cache pour l'objet requêté avec l'en-tête du cache de
-la réponse et determine s'il peut toujours être considéré comme récent. Si oui,
+la réponse et determine s'il peut toujours être considéré comme à jour. Si oui,
 il supprime le contenu de la réponse et envoie l'en-tête `304 Not Modified`::
 
     // Dans une action de controller.
@@ -929,41 +1082,39 @@ Définir des Cookies
 Des cookies peuvent être ajoutés aux réponses en utilisant soit un tableau, soit
 un objet :php:class:`Cake\\Http\\Cookie\\Cookie`::
 
-    // Ajoute un cookie avec un tableau en utilisant l'API immutable (3.4.0+)
-    $this->response = $this->response->withCookie('remember_me', [
-        'value' => 'yes',
-        'path' => '/',
-        'httpOnly' => true,
-        'secure' => false,
-        'expire' => strtotime('+1 year')
-    ]);
+    use Cake\Http\Cookie\Cookie;
+    use DateTime;
 
-    // Avant 3.4.0
-    $this->response->cookie('remember', [
-        'value' => 'yes',
-        'path' => '/',
-        'httpOnly' => true,
-        'secure' => false,
-        'expire' => strtotime('+1 year')
+    // Ajoute un cookie
+    $this->response = $this->response->withCookie(Cookie::create(
+        'remember_me',
+        'yes',
+        // Toutes les clés sont facultatives
+        [
+            'expires' => new DateTime('+1 year'),
+            'path' => '',
+            'domain' => '',
+            'secure' => false,
+            'http' => false,
+        ]
     ]);
 
 Référez-vous à la section :ref:`creating-cookies` pour savoir comment utiliser
 l'objet Cookie. Vous pouvez utiliser ``withExpiredCookie()`` pour envoyer un cookie
 expiré dans la réponse. De cette manière, le navigateur supprimera son cookie local::
 
-    // À partir de 3.5.0
-    $this->response = $this->response->withExpiredCookie('remember_me');
+    $this->response = $this->response->withExpiredCookie(new Cookie('remember_me'));
 
 .. _cors-headers:
 
 Définir les En-têtes de Requête d'Origine Croisée (Cross Origin Request Headers = CORS)
 =======================================================================================
 
-Depuis 3.2, vous pouvez utiliser la méthode ``cors()`` pour définir `le Contrôle
-d'Accès HTTP <https://developer.mozilla.org/fr/docs/HTTP/Access_control_CORS>`__
-et ses en-têtes liés avec une interface simple::
+La méthode ``cors()`` est utilisée pour définir `le Contrôle
+d'Accès HTTP <https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS>`__
+et ses en-têtes liés au travers d'une interface simple::
 
-    $this->response->cors($this->request)
+    $this->response = $this->response->cors($this->request)
         ->allowOrigin(['*.cakephp.org'])
         ->allowMethods(['GET', 'POST'])
         ->allowHeaders(['X-CSRF-Token'])
@@ -982,7 +1133,7 @@ critères suivants sont vérifiés:
 Erreurs Communes avec les Responses Immutables
 ==============================================
 
-Depuis CakePHP 3.4.0, les objets responses offrent de nombreuses méthodes qui
+Les objets responses offrent de nombreuses méthodes qui
 traitent les responses comme des objets immutables. Les objets immutables
 permettent de prévenir les effets de bord difficiles à repérer.
 Malgré leurs nombreux avantages, s'habituer aux objets immutables peut prendre
@@ -1066,7 +1217,11 @@ Une fois que vous avez créer un cookie, vous pouvez l'ajouter à une nouvelle
 Vous devriez utiliser la méthode ``withCookie()`` pour ajouter des cookies aux
 objets ``Response``::
 
+    // Ajoute un cookie
     $response = $this->response->withCookie($cookie);
+
+    // Remplace la collection de cookies
+    $response = $this->response->withCookieCollection($cookies);
 
 Les cookies ajoutés aux Response peuvent être chiffrés en utilisant le
 :ref:`encrypted-cookie-middleware`
