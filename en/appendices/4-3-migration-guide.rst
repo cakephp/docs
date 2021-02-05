@@ -45,6 +45,13 @@ They usually only affect tests.
 New Features
 ============
 
+Http
+====
+
+- The ``CspMiddleware`` now sets the ``cspScriptNonce`` and ``cspStyleNonce``
+  request attributes which streamlines the adoption of strict
+  content-security-policy rules.
+
 ORM
 ---
 
@@ -56,3 +63,10 @@ ORM
 - Added ``Query::whereNotInListOrNull()`` and ``QueryExpression::notInOrNull()`` for nullable
   columns since ``null != value`` is always false and the ``NOT IN`` test will always fail when
   the column is null.
+
+View
+====
+
+- ``HtmlHelper::script()`` and ``HtmlHelper::css()`` now add the ``nonce``
+  attribute to generated tags when the ``cspScriptNonce`` and ``cspStyleNonce``
+  request attributes are present.
