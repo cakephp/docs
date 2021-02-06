@@ -64,7 +64,7 @@ CakePHP は挿入または更新のいずれの処理を行うかを ``isNew()``
     $articlesTable = TableRegistry::getTableLocator()->get('Articles');
     $author = $articlesTable->Authors->findByUserName('mark')->first();
 
-    $article = $articlesTable->newEntity();
+    $article = $articlesTable->newEmptyEntity();
     $article->title = 'mark の記事';
     $article->author = $author;
 
