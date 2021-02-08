@@ -366,7 +366,7 @@ To simulate this, set the ``allowMultipleNulls`` options to true::
 
     $rules->add($rules->isUnique(
         ['username', 'account_id'],
-        ['allowMultipleNulls']
+        ['allowMultipleNulls' => true]
     ));
 
 .. versionadded:: 4.2.0
