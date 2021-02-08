@@ -103,7 +103,7 @@ the request data::
 Setting Form Values
 ===================
 
-You can set default values for modelless forms using the ``setData()`` method.
+You can set default values for modelless forms using the ``setData()`` method. You can get values from modelless forms using the ``getData()`` method.
 Values set with this method will overwrite existing data in the form object::
 
     // In a controller
@@ -130,6 +130,9 @@ Values set with this method will overwrite existing data in the form object::
                     'name' => 'John Doe',
                     'email' => 'john.doe@example.com'
                 ]);
+                // Get the values like this
+                $allValues = $contact->getData();
+                $nameValue = $contact->getData('name');
             }
 
             $this->set('contact', $contact);
