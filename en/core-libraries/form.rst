@@ -37,7 +37,7 @@ a simple contact form would look like::
         public function validationDefault(Validator $validator)
         {
             $validator->add('name', 'length', [
-                    'rule' => ['minLength', 10],
+                    'rule' => ['minLength', 5],
                     'message' => 'A name is required'
                 ])->add('email', 'format', [
                     'rule' => 'email',
@@ -103,7 +103,7 @@ the request data::
 Setting Form Values
 ===================
 
-You can set default values for modelless forms using the ``setData()`` method. You can get values from modelless forms using the ``getData()`` method.
+You can set default values for modelless forms using the ``setData()`` method.
 Values set with this method will overwrite existing data in the form object::
 
     // In a controller
@@ -130,9 +130,6 @@ Values set with this method will overwrite existing data in the form object::
                     'name' => 'John Doe',
                     'email' => 'john.doe@example.com'
                 ]);
-                // Get the values like this
-                $allValues = $contact->getData();
-                $nameValue = $contact->getData('name');
             }
 
             $this->set('contact', $contact);
@@ -156,6 +153,48 @@ that need corrections.
 .. versionadded:: 3.7.0
     ``Form::setData()`` was added.
 
+Getting Form Values
+===================
+
+You can get  values from modelless forms using the ``getData()`` method::
+
+
+    // In a controller
+    namespace App\Controller;
+
+    use App\Controller\AppController;
+    use App\Form\ContactForm;
+
+    class ContactController extends AppController
+    {
+        public function index()
+        {
+            $contact = new ContactForm();
+            if ($this->request->is('post')) {
+                if ($contact->execute($this->request->getData())) {
+                    $contact->setData($this->request->getData());
+                    $name = $contact->getData('name');
+                    $this->Flash->success("Dear $name, we will get back to you soon.");
+                } else {
+                    $this->Flash->error('There was a problem submitting your form.');
+                }
+            }
+
+            if ($this->request->is('get')) {
+                $contact->setData([
+                    'name' => 'John Doe',
+                    'email' => 'john.doe@example.com'
+                ]);
+            }
+
+            $this->set('contact', $contact);
+        }
+    }
+
+
+.. versionadded:: 3.7.0
+    ``Form::getData()`` was added.
+    
 Getting Form Errors
 ===================
 
