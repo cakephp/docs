@@ -34,10 +34,10 @@ a simple contact form would look like::
                 ->addField('body', ['type' => 'text']);
         }
 
-        protected function validationDefault(Validator $validator)
+        public function validationDefault(Validator $validator)
         {
             $validator->add('name', 'length', [
-                    'rule' => ['minLength', 10],
+                    'rule' => ['minLength', 5],
                     'message' => 'A name is required'
                 ])->add('email', 'format', [
                     'rule' => 'email',
@@ -64,41 +64,6 @@ In the above example we see the 3 hook methods that forms provide:
   ``execute()`` is called and the data is valid.
 
 You can always define additional public methods as you need as well.
-
-Processing Request Data
-=======================
-
-Once you've defined your form, you can use it in your controller to process
-and validate request data::
-
-    // In a controller
-    namespace App\Controller;
-
-    use App\Controller\AppController;
-    use App\Form\ContactForm;
-
-    class ContactController extends AppController
-    {
-        public function index()
-        {
-            $contact = new ContactForm();
-            if ($this->request->is('post')) {
-                if ($contact->execute($this->request->getData())) {
-                    $this->Flash->success('We will get back to you soon.');
-                } else {
-                    $this->Flash->error('There was a problem submitting your form.');
-                }
-            }
-            $this->set('contact', $contact);
-        }
-    }
-
-In the above example, we use the ``execute()`` method to run our form's
-``_execute()`` method only when the data is valid, and set flash messages
-accordingly. We could have also used the ``validate()`` method to only validate
-the request data::
-
-    $isValid = $form->validate($this->request->getData());
 
 Setting Form Values
 ===================
@@ -152,6 +117,83 @@ that need corrections.
 
 .. versionadded:: 3.7.0
     ``Form::setData()`` was added.
+
+Getting Form Values
+===================
+
+You can get  values from modelless forms using the ``getData()`` method::
+
+
+    // In a controller
+    namespace App\Controller;
+
+    use App\Controller\AppController;
+    use App\Form\ContactForm;
+
+    class ContactController extends AppController
+    {
+        public function index()
+        {
+            $contact = new ContactForm();
+            if ($this->request->is('post')) {
+                if ($contact->execute($this->request->getData())) {
+                    $contact->setData($this->request->getData());
+                    $name = $contact->getData('name');
+                    $this->Flash->success("Dear $name, we will get back to you soon.");
+                } else {
+                    $this->Flash->error('There was a problem submitting your form.');
+                }
+            }
+
+            if ($this->request->is('get')) {
+                $contact->setData([
+                    'name' => 'John Doe',
+                    'email' => 'john.doe@example.com'
+                ]);
+            }
+
+            $this->set('contact', $contact);
+        }
+    }
+
+
+.. versionadded:: 3.7.0
+    ``Form::getData()`` was added.
+    
+Processing Request Data
+=======================
+
+Once you've defined your form, you can use it in your controller to process
+and validate request data::
+
+    // In a controller
+    namespace App\Controller;
+
+    use App\Controller\AppController;
+    use App\Form\ContactForm;
+
+    class ContactController extends AppController
+    {
+        public function index()
+        {
+            $contact = new ContactForm();
+            if ($this->request->is('post')) {
+                if ($contact->execute($this->request->getData())) {
+                    $this->Flash->success('We will get back to you soon.');
+                } else {
+                    $this->Flash->error('There was a problem submitting your form.');
+                }
+            }
+            $this->set('contact', $contact);
+        }
+    }
+
+In the above example, we use the ``execute()`` method to run our form's
+``_execute()`` method only when the data is valid, and set flash messages
+accordingly. We could have also used the ``validate()`` method to only validate
+the request data::
+
+    $isValid = $form->validate($this->request->getData());
 
 Getting Form Errors
 ===================
