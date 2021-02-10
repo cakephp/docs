@@ -65,41 +65,6 @@ In the above example we see the 3 hook methods that forms provide:
 
 You can always define additional public methods as you need as well.
 
-Processing Request Data
-=======================
-
-Once you've defined your form, you can use it in your controller to process
-and validate request data::
-
-    // In a controller
-    namespace App\Controller;
-
-    use App\Controller\AppController;
-    use App\Form\ContactForm;
-
-    class ContactController extends AppController
-    {
-        public function index()
-        {
-            $contact = new ContactForm();
-            if ($this->request->is('post')) {
-                if ($contact->execute($this->request->getData())) {
-                    $this->Flash->success('We will get back to you soon.');
-                } else {
-                    $this->Flash->error('There was a problem submitting your form.');
-                }
-            }
-            $this->set('contact', $contact);
-        }
-    }
-
-In the above example, we use the ``execute()`` method to run our form's
-``_execute()`` method only when the data is valid, and set flash messages
-accordingly. We could have also used the ``validate()`` method to only validate
-the request data::
-
-    $isValid = $form->validate($this->request->getData());
-
 Setting Form Values
 ===================
 
@@ -195,6 +160,41 @@ You can get  values from modelless forms using the ``getData()`` method::
 .. versionadded:: 3.7.0
     ``Form::getData()`` was added.
     
+Processing Request Data
+=======================
+
+Once you've defined your form, you can use it in your controller to process
+and validate request data::
+
+    // In a controller
+    namespace App\Controller;
+
+    use App\Controller\AppController;
+    use App\Form\ContactForm;
+
+    class ContactController extends AppController
+    {
+        public function index()
+        {
+            $contact = new ContactForm();
+            if ($this->request->is('post')) {
+                if ($contact->execute($this->request->getData())) {
+                    $this->Flash->success('We will get back to you soon.');
+                } else {
+                    $this->Flash->error('There was a problem submitting your form.');
+                }
+            }
+            $this->set('contact', $contact);
+        }
+    }
+
+In the above example, we use the ``execute()`` method to run our form's
+``_execute()`` method only when the data is valid, and set flash messages
+accordingly. We could have also used the ``validate()`` method to only validate
+the request data::
+
+    $isValid = $form->validate($this->request->getData());
+
 Getting Form Errors
 ===================
 
