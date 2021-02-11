@@ -389,26 +389,41 @@ application's logic in the models. If you were to visit the
 method has not been implemented yet, so let's do that. In
 **src/Model/Table/BookmarksTable.php** add the following::
 
-    // The $query argument is a query builder instance.
-    // The $options array will contain the 'tags' option we passed
-    // to find('tagged') in our controller action.
+    /**
+     * The $query argument is a query builder instance.
+     * The $options array will contain the 'tags' option we passed
+     * to find('tagged') in our controller action
+     * @param \Cake\ORM\Query $query
+     * @param array $options
+     * @return \Cake\ORM\Query 
+     *  -Modified query object.
+     */
     public function findTagged(Query $query, array $options)
     {
-        $bookmarks = $this->find()
-            ->select(['id', 'url', 'title', 'description'])
-            ->all();
-
+        $columns = [
+            'Bookmarks.id',
+            'Bookmarks.url',
+            'Bookmarks.title',
+            'Bookmarks.description', 
+        ];
+        
         if (empty($options['tags'])) {
-            $bookmarks
+            $bookmarks = $query
+                ->select($columns)
                 ->leftJoinWith('Tags')
-                ->where(['Tags.title IS' => null]);
+                ->where(['Tags.title IS' => null])
+                ->group(['Bookmarks.id'])
+                ->all();
         } else {
-            $bookmarks
+            $bookmarks = $query
+                ->select($columns)
                 ->innerJoinWith('Tags')
-                ->where(['Tags.title IN ' => $options['tags']]);
+                ->where(['Tags.title IN ' => $options['tags']])
+                ->group(['Bookmarks.id'])
+                ->all();
         }
-
-        return $bookmarks->group(['Bookmarks.id']);
+        
+        return $query;
     }
 
 We just implemented a :ref:`custom finder method <custom-find-methods>`. This is
