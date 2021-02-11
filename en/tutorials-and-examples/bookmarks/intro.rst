@@ -402,16 +402,16 @@ method has not been implemented yet, so let's do that. In
     {
         if (empty($options['tags'])) {
             $bookmarks = $query
-                ->select(['Bookmarks.id','Bookmarks.url','Bookmarks.title',Bookmarks.description'])
+                ->select(['Bookmarks.id','Bookmarks.url','Bookmarks.title','Bookmarks.description'])
                 ->leftJoinWith('Tags')
                 ->where(['Tags.title IS' => null])
-                ->group(['Bookmarks.id'])
+                ->group(['Bookmarks.id']);
         } else {
             $bookmarks = $query
-                ->select(['Bookmarks.id','Bookmarks.url','Bookmarks.title',Bookmarks.description'])
+                ->select(['Bookmarks.id','Bookmarks.url','Bookmarks.title','Bookmarks.description'])
                 ->innerJoinWith('Tags')
                 ->where(['Tags.title IN ' => $options['tags']])
-                ->group(['Bookmarks.id'])
+                ->group(['Bookmarks.id']);
         }
         return $query;
     }
