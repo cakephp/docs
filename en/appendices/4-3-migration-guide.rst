@@ -34,6 +34,12 @@ Behavior Changes
 While the following changes do not change the signature of any methods they do
 change the semantics or behavior of methods.
 
+ORM
+---
+
+- Aligned ``Entity::isEmpty()`` and ``Entity::hasValue()`` to treat '0' as a non-empty value. 
+  This aligns the behavior with documentation and original intent.
+
 
 Breaking Changes
 ================
