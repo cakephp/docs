@@ -729,7 +729,7 @@ above restrictions and can also use result formatters or map/reduce functions.
 Association Conventions
 =======================
 
-By default, associations are should be configured and referenced using the CamelCase style.
+By default, associations should be configured and referenced using the CamelCase style.
 This enables property chains to related tables in the following way::
 
     $this->MyTableOne->MyTableTwo->find()->...;
