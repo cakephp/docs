@@ -34,6 +34,11 @@ Behavior Changes
 While the following changes do not change the signature of any methods they do
 change the semantics or behavior of methods.
 
+Collection
+----------
+
+- ``Collection::avg()`` now returns 0 instead of null for 0 rows.
+
 ORM
 ---
 
