@@ -247,7 +247,7 @@ When using named placeholders, pass the placeholder and replacement in an array 
 for example::
 
     // echos:  Hi. My name is Sara. I'm 12 years old.
-    echo __('Hi. My name is {name}. I'm {age} years old.', ['name' => 'Sara', 'age' => 12]);
+    echo __("Hi. My name is {name}. I'm {age} years old.", ['name' => 'Sara', 'age' => 12]);
 
 Plurals
 -------
