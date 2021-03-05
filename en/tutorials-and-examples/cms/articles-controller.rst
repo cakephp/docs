@@ -440,11 +440,12 @@ using :ref:`a validator <validating-request-data>`::
     public function validationDefault(Validator $validator)
     {
         $validator
-            ->allowEmptyString('title', false)
+            ->allowEmptyString('title', 'Title cannot be empty', false)
             ->minLength('title', 10)
-            ->maxLength('title', 255)
-
-            ->allowEmptyString('body', false)
+            ->maxLength('title', 255);
+            
+        $validator
+            ->allowEmptyString('body', 'Body cannot be empty', false)
             ->minLength('body', 10);
 
         return $validator;
