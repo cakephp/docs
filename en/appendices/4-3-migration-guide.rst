@@ -51,6 +51,13 @@ They usually only affect tests.
 New Features
 ============
 
+Database
+========
+
+- Logged queries now use ``TRUE`` and ``FALSE`` for postgres, sqlite and mysql
+  drivers. This makes it easier to copy queries and run them in an interactive
+  prompt.
+
 Http
 ====
 
