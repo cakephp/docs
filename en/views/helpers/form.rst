@@ -358,7 +358,7 @@ Creating Form Controls
   ``control()`` employs internally to generate various HTML elements) as
   well as any valid HTML attributes.
 
-The ``control()`` method lets you to generate complete form controls. These
+The ``control()`` method lets you generate complete form controls. These
 controls will include a wrapping ``div``, ``label``, control widget, and validation error if
 necessary. By using the metadata in the form context, this method will choose an
 appropriate control type for each field. Internally ``control()`` uses the other
