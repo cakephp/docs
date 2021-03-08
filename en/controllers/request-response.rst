@@ -743,13 +743,6 @@ ics generated on the fly from a string::
         return $response;
     }
 
-Callbacks can also return the body as a string::
-
-    $path = '/some/file.png';
-    $this->response->body(function () use ($path) {
-        return file_get_contents($path);
-    });
-
 Setting Headers
 ---------------
 
