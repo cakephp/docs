@@ -60,7 +60,7 @@ plugin:
     bin/cake upgrade file_rename templates <path/to/app>
 
 Once you've renamed your template and locale files, make sure you update
-``App.paths.locales`` and ``App.paths.templates`` paths (in **/config/app.php**) to be correct.
+``App.paths.locales`` and ``App.paths.templates`` paths in **/config/app.php**. If needed, refer to the [skeleton app config](https://github.com/cakephp/app/blob/master/config/app.php).
 
 Applying Rector Refactorings
 ----------------------------
