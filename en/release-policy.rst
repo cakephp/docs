@@ -30,7 +30,7 @@ release.
 Features might be deprecated, but they are never removed in a minor release.
 
 Interfaces are not changed, but annotations might be added for new methods exposed
-in the class.
+in implementations provided by CakePHP.
 
 New features are usually only added in minor releases so users can follow migration
 notes. New features can also include new exceptions thrown when behavior is fixed
@@ -48,7 +48,7 @@ are made.
 Typically, users should be able to rely on bug fix releases not changing behavior except
 to fix an issue.
 
-Issues that change long-standing behavior are typically not in bug fix release. These are
+Issues that change long-standing behavior are typically not in bug fix releases. These are
 considered behavior changes and will go into either minor or major releases so users can
 migrate.
 
