@@ -719,8 +719,8 @@ come up when running a CLI script that directly sets properties on entities::
     {
         // Add validation rules
         $rules->add(function($entity) {
-            $data = $entity->extract($this->schema()->columns(), true);
-            $validator = $this->validator('default');
+            $data = $entity->extract($this->getSchema()->columns(), true);
+            $validator = $this->getValidator('default');
             $errors = $validator->validate($data, $entity->isNew());
             $entity->setErrors($errors);
 
