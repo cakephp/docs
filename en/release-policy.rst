@@ -2,7 +2,7 @@ Release Policy
 ##############
 
 CakePHP follows Semantic Versioning for all releases. This follows the versioning
-convention of `**major**.**minor**.**bugfix**`.
+convention of **major**.**minor**.**bugfix**.
 
 The development team tries to guarantee each release follow the restrictions and
 and guarantees below.
