@@ -299,8 +299,6 @@ data used when creating connections.
 Data Types
 ==========
 
-.. php:class:: Type
-
 Since not every database vendor includes the same set of data types, or
 the same names for similar data types, CakePHP provides a set of abstracted
 data types for use with the database layer. The types CakePHP supports are:
@@ -413,6 +411,7 @@ Can be used to map datetime columns that contain time zones such as
 Adding Custom Types
 -------------------
 
+.. php:class:: TypeFactory
 .. php:staticmethod:: map($name, $class)
 
 If you need to use vendor specific types that are not built into CakePHP you can
@@ -469,17 +468,28 @@ we could make the following type class::
     }
 
 By default the ``toStatement()`` method will treat values as strings which will
-work for our new type. Once we've created our new type, we need to add it into
+work for our new type.
+
+Connecting Custom Datatypes to Schema Reflection and Generation
+---------------------------------------------------------------
+
+Once we've created our new type, we need to add it into
 the type mapping. During our application bootstrap we should do the following::
 
-    use Cake\Database\Type;
+    use Cake\Database\TypeFactory;
 
-    Type::map('json', 'App\Database\Type\JsonType');
+    TypeFactory::map('json', 'App\Database\Type\JsonType');
 
-We can then overload the reflected schema data to use our new type, and
-CakePHP's database layer will automatically convert our JSON data when creating
-queries. You can use the custom types you've created by mapping the types in
-your Table's :ref:`_initializeSchema() method <saving-complex-types>`::
+We then have two ways to use our datatype in our models. 
+
+#. The first path is to overwrite the reflected schema data to use our new type.
+#. The second is to implement ``Cake\Database\Type\ColumnSchemaAwareInterface``
+   and define the SQL column type and reflection logic.
+
+Overwriting the reflected schema with our custom type will enable CakePHP's
+database layer to automatically convert JSON data when creating queries. In your
+Table's :ref:`_initializeSchema() method <saving-complex-types>` add the
+following::
 
     use Cake\Database\Schema\TableSchemaInterface;
 
@@ -491,6 +501,66 @@ your Table's :ref:`_initializeSchema() method <saving-complex-types>`::
             return $schema;
         }
     }
+
+Implmenting the ``ColumnSchemaAwareInterface`` gives you more control over
+custom datatypes and can avoid the need to overwrite schema definitions if your
+datatype has an unambiguous SQL column definition. For example, we could have
+our JSON type be used anytime a ``TEXT`` column with a specific comment is
+used::
+
+    // in src/Database/Type/JsonType.php
+
+    namespace App\Database\Type;
+
+    use Cake\Database\DriverInterface;
+    use Cake\Database\Type\BaseType;
+    use Cake\Database\Type\ColumnSchemaAwareInterface;
+    use Cake\Database\Schema\TableSchemaInterface;
+    use PDO;
+
+    class JsonType extends BaseType
+        implements ColumnSchemaAwareInterface
+    {
+        // other methods from earlier
+
+        /**
+         * Convert abstract schema definition into a driver specific
+         * SQL snippet that can be used in a CREATE TABLE statement.
+         *
+         * Returning null will fall through to CakePHP's built-in types.
+         */
+        public function getColumnSql(
+            TableSchemaInterface $schema,
+            string $column,
+            DriverInterface $driver
+        ): ?string {
+            $data = $schema->getColumn($column);
+            $sql = $driver->quoteIdentifier($column);
+            $sql .= ' JSON';
+            if (isset($data['null') && $data['null'] === false) {
+                $sql .= ' NOT NULL';
+            }
+            return $sql;
+        }
+
+        /**
+         * Convert the column data returned from schema reflection
+         * into the abstract schema data.
+         *
+         * Returning null will fall through to CakePHP's built-in types.
+         */
+        public function convertColumnDefinition(
+            array $definition,
+            DriverInterface $driver
+        ): ?array {
+            return [
+                'type' => $this->_name,
+                'length' => null,
+            ];
+        }
+
+.. versionadded:: 4.3.0
+    ``ColumnSchemaAwareInterface`` was added.
 
 .. _mapping-custom-datatypes-to-sql-expressions:
 
@@ -617,10 +687,10 @@ Because Date/Time objects are easily mutated in place, CakePHP allows you to
 enable immutable value objects. This is best done in your application's
 **config/bootstrap.php** file::
 
-    Type::build('datetime')->useImmutable();
-    Type::build('date')->useImmutable();
-    Type::build('time')->useImmutable();
-    Type::build('timestamp')->useImmutable();
+    TypeFactory::build('datetime')->useImmutable();
+    TypeFactory::build('date')->useImmutable();
+    TypeFactory::build('time')->useImmutable();
+    TypeFactory::build('timestamp')->useImmutable();
 
 .. note::
     New applications will have immutable objects enabled by default.
