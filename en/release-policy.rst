@@ -2,12 +2,12 @@ Release Policy
 ##############
 
 CakePHP follows Semantic Versioning for all releases. This follows the versioning
-convention of **major.minor.bugfix**.
+convention of **major.minor.patch**.
 
 The development team tries to guarantee each release follow the restrictions and
 and guarantees below.
 
-Major releases
+Major Releases
 --------------
 
 Major releases are generally not backwards compatible. Although CakePHP tries
@@ -24,7 +24,7 @@ code upgrades using rector.
 Minor Releases
 --------------
 
-Minor release are generally backwards compatible with the previous minor and bug fix
+Minor release are generally backwards compatible with the previous minor and patch
 release.
 
 Features might be deprecated, but they are never removed in a minor release.
@@ -39,18 +39,24 @@ or bugs are reported.
 Behavior changes that require documentation are made in minor releases, but these are
 still typically backwards compatible. Some exceptions can be made if the issue is severe.
 
-Bug Fix Releases
+.. note:
+    Minor releases are also known as point releases.
+    
+Patch Releases
 ----------------
 
-Bug fix releases are always backwards compatible. Only changes that fix broken features
+Patch releases are always backwards compatible. Only changes that fix broken features
 are made.
 
-Typically, users should be able to rely on bug fix releases not changing behavior except
+Typically, users should be able to rely on patch releases not changing behavior except
 to fix an issue.
 
-Issues that change long-standing behavior are typically not in bug fix releases. These are
+Issues that change long-standing behavior are typically not in patch releases. These are
 considered behavior changes and will go into either minor or major releases so users can
 migrate.
+
+.. note:
+    Patch releases are also known as bug fix releases.
 
 Experimental Features
 ---------------------
