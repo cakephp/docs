@@ -502,8 +502,8 @@ following::
         }
     }
 
-Implmenting the ``ColumnSchemaAwareInterface`` gives you more control over
-custom datatypes and can avoid the need to overwrite schema definitions if your
+Implementing ``ColumnSchemaAwareInterface`` gives you more control over
+custom datatypes.  This avoids overwriting schema definitions if your
 datatype has an unambiguous SQL column definition. For example, we could have
 our JSON type be used anytime a ``TEXT`` column with a specific comment is
 used::
