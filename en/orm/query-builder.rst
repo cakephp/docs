@@ -299,6 +299,15 @@ portable::
     $query = $articles->find();
     $query->select(['count' => $query->func()->count('*')]);
 
+Note that most of the functions accept an additional argument to specify the types to bind to the arguments and/or the return type,
+for example:
+
+
+    $query->select(['minDate' => $query->func()->min('date', ['text']);
+
+
+For details, see the documentation for [FunctionsBuilder](https://api.cakephp.org/4.1/class-Cake.Database.FunctionsBuilder.html)
+
 You can access existing wrappers for several SQL functions through ``Query::func()``:
 
 ``rand()``
@@ -368,6 +377,7 @@ is enabled.  If not marked as literal or identifier, arguments will be bound
 parameters allowing you to safely pass user data to the function.
 
 The above example generates something like this in MYSQL.
+
 
 .. code-block:: mysql
 
