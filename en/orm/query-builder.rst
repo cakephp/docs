@@ -299,14 +299,12 @@ portable::
     $query = $articles->find();
     $query->select(['count' => $query->func()->count('*')]);
 
-Note that most of the functions accept an additional argument to specify the types to bind to the arguments and/or the return type,
-for example:
+Note that most of the functions accept an additional argument to specify the types
+to bind to the arguments and/or the return type, for example::
 
+    $query->select(['minDate' => $query->func()->min('date', ['date']);
 
-    $query->select(['minDate' => $query->func()->min('date', ['text']);
-
-
-For details, see the documentation for [FunctionsBuilder](https://api.cakephp.org/4.1/class-Cake.Database.FunctionsBuilder.html)
+For details, see the documentation for :php:class:`Cake\\Database\\FunctionsBuilder`.
 
 You can access existing wrappers for several SQL functions through ``Query::func()``:
 
