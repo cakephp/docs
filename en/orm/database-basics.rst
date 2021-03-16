@@ -559,6 +559,13 @@ used::
             ];
         }
 
+The ``$definition`` data passed to ``convertColumnDefinition()`` could contain
+the following keys:
+
+- ``length`` The length of a column.
+- ``precision`` The precision of the column if any.
+- ``scale`` Can be included for SQLServer connections.
+
 .. versionadded:: 4.3.0
     ``ColumnSchemaAwareInterface`` was added.
 
