@@ -40,6 +40,12 @@ ORM
 - Aligned ``Entity::isEmpty()`` and ``Entity::hasValue()`` to treat '0' as a non-empty value. 
   This aligns the behavior with documentation and original intent.
 
+Routing
+-------
+
+- ``RouteBuilder::resources()`` now generates routes that use 'braced'
+  placeholders.
+
 
 Breaking Changes
 ================
