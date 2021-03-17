@@ -1414,7 +1414,7 @@ Request parameters include pass parameters on the 'pass' key of the array::
         'controller' => 'Articles',
         'action' => 'View',
         'pass' => [$id], //the pass parameters
-        '?' => 'page' => 3, //the query arguments
+        '?' => ['page' => 3], //the query arguments
     ];
 
 So it is possible, if you wish, to convert the request parameters into
