@@ -92,7 +92,7 @@ CMS チュートリアル - データベース作成
         // 下には他の設定があります
     ];
 
-一度 **config/app.php** ファイルを保存して、 'CakePHP is able to connect to the database'
+一度 **config/app_local.php** ファイルを保存して、 'CakePHP is able to connect to the database'
 が緑色のコック帽であることを確認してください。
 
 .. note::
