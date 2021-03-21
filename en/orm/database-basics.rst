@@ -559,11 +559,12 @@ used::
             ];
         }
 
-The ``$definition`` data passed to ``convertColumnDefinition()`` could contain
-the following keys:
+The ``$definition`` data passed to ``convertColumnDefinition()`` will contain
+the following keys. All keys will exist but may contain ``null`` if the key has
+no value for the current database driver:
 
-- ``length`` The length of a column.
-- ``precision`` The precision of the column if any.
+- ``length`` The length of a column if available..
+- ``precision`` The precision of the column if available.
 - ``scale`` Can be included for SQLServer connections.
 
 .. versionadded:: 4.3.0
