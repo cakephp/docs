@@ -60,6 +60,10 @@ New Features
 Database
 ========
 
+- Database mapping types can now implement
+  ``Cake\Database\Type\ColumnSchemaAwareInterface`` to specify 
+  column sql generation and column schema reflection. This allows
+  custom types handle non-standard columns.
 - Logged queries now use ``TRUE`` and ``FALSE`` for postgres, sqlite and mysql
   drivers. This makes it easier to copy queries and run them in an interactive
   prompt.
