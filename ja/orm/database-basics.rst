@@ -656,7 +656,7 @@ CakePHP のデータベース抽象化レイヤは、PDO とネイティブド�
         ->where(['published' => true]);
 
     foreach ($query as $row) {
-        // Do something with the row.
+        // 行に何かする
     }
 
 .. note::
@@ -902,9 +902,9 @@ CakePHP の ORM は、あなたのアプリケーションのスキーマ、イ�
 
     'Datasources' => [
         'default' => [
-            // Other keys go here.
+            // その他のキーはここに書く
 
-            // Use the 'orm_metadata' cache config for metadata.
+            // メタデータのキャッシュ設定に'orm_metadata'を使用
             'cacheMetadata' => 'orm_metadata',
         ]
     ],

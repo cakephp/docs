@@ -1,3 +1,4 @@
-sphinx==1.8.5
-sphinxcontrib-phpdomain==0.6.2
-cakephpsphinx>=0.1.18,<1.0
+# Updated Mar 11 2021
+sphinx==2.4.4
+sphinxcontrib-phpdomain==0.7.1
+cakephpsphinx>=0.1.27,<1.0

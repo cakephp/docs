@@ -727,6 +727,49 @@ name::
 In the above example, both fixtures would be loaded from
 ``tests/Fixture/Blog/``.
 
+Fixture Factories
+-----------------
+
+As your application grows, so does the number and the size of your test fixtures. You might find it difficult
+to maintain them and to keep track of their content.
+The `fixture factories plugin <https://github.com/vierge-noire/cakephp-fixture-factories>`_ proposes an
+alternative for large sized applications.
+
+The plugin uses its own `phpunit listener <https://github.com/vierge-noire/cakephp-test-suite-light>`_
+which will perform the following actions:
+
+#. Run migrations once on the test DB `(see the migrator) <https://github.com/vierge-noire/cakephp-test-migrator>`_.
+#. Truncate dirty tables before each test.
+#. Run tests.
+
+The following command will help you bake your factories::
+
+    bin/cake bake fixture_factory -h
+
+Once your factories are
+`tuned <https://github.com/vierge-noire/cakephp-fixture-factories/blob/master/docs/factories.md>`_,
+you are ready to create test fixtures in no time.
+
+Unnecessary interaction with the database will slow down your tests as well as your application.
+You can create test fixtures without persisting them which can be useful for
+testing methods without DB interaction::
+
+    $article = ArticleFactory::make()->getEntity();
+
+In order to persist::
+
+    $article = ArticleFactory::make()->persist();
+
+The factories help creating associated fixtures too.
+Assuming that articles belongs to many authors, we can now, for example,
+create 5 articles each with 2 authors:
+
+``$articles = ArticleFactory::make(5)->with('Authors', 2)->getEntities();``
+
+Note that the fixture factories do not require any fixture creation or declaration. Still, they are fully
+compatible with the fixtures that come with cakephp. You will find additional insights
+and documentation `here <https://github.com/vierge-noire/cakephp-fixture-factories>`_.
+
 Testing Table Classes
 =====================
 
@@ -813,6 +856,40 @@ the proper result (that we know since we have defined which records are
 initially populated to the article table.) We test that the result equals our
 expectation by using the ``assertEquals()`` method. See the :ref:`running-tests`
 section for more information on how to run your test case.
+
+Using the fixture factories, the test would now look like this::
+
+    namespace App\Test\TestCase\Model\Table;
+
+    use App\Model\Table\ArticlesTable;
+    use App\Test\Factory\ArticleFactory;
+    use Cake\TestSuite\TestCase;
+
+    class ArticlesTableTest extends TestCase
+    {
+        public function setUp(): void
+        { ... }
+
+        public function testFindPublished(): void
+        {
+            // Persist 3 published articles
+            $articles = ArticleFactory::make(['published' => 1], 3)->persist();
+            // Persist 2 unpublished articles
+            ArticleFactory::make(['published' => 0], 2)->persist();
+
+            $result = $this->Articles->find('published')->find('list')->toArray();
+
+            $expected = [
+                $articles[0]->id => $articles[0]->title,
+                $articles[1]->id => $articles[1]->title,
+                $articles[2]->id => $articles[2]->title,
+            ];
+
+            $this->assertEquals($expected, $result);
+        }
+    }
+
+No fixtures need to be loaded. The 5 articles created will exist only in this test.
 
 Mocking Model Methods
 ---------------------
@@ -1137,7 +1214,23 @@ you can use the remaining ``IntegrationTestTrait`` features as normal.
 You should also take care to try and use :ref:`application-bootstrap` to load
 any plugins containing events/routes. Doing so will ensure that your
 events/routes are connected for each test case. Alternatively if you wish to
-load plugins manually in a test you can use the ``loadPlugins()`` method.
+load plugins manually in a test you can use the ``loadPlugins()`` method::
+
+    use Cake\Routing\Router;
+
+    public function testRouteCount()
+    {
+        // Assert the amount of routes from the application, without loading plugins
+        $this->assertCount(35, Router::routes(), 'App route count does not match');
+    
+        // Assert the amount of routes from the application including a specific plugin "SomePlugin"
+        $this->loadPlugins(['SomePlugin']);
+        $this->assertCount(40, Router::routes(), 'App & SomePlugin route count does not match');
+    
+        // Assert the amount of routes from the application including all plugins
+        $this->loadPlugins();
+        $this->assertCount(60, Router::routes(), 'App & plugin route count does not match');
+    }
 
 .. versionadded:: 3.3.0
     PSR-7 Middleware and the ``useHttpServer()`` method were added in 3.3.0.
@@ -1353,7 +1446,7 @@ In addition to the above assertion methods, you can also use all of the
 assertions in `TestSuite
 <https://api.cakephp.org/3.x/class-Cake.TestSuite.TestCase.html>`_ and those
 found in `PHPUnit
-<https://phpunit.de/manual/current/en/appendixes.assertions.html>`__.
+<https://phpunit.readthedocs.io/en/8.5/assertions.html>`__.
 
 Comparing test results to a file
 --------------------------------

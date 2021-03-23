@@ -81,8 +81,8 @@
     :maxdepth: 3
     :caption: プラグイン
 
-    Authorization <https://book.cakephp.org/authorization/1/ja/>
-    Authentication <https://book.cakephp.org/authentication/1/ja/>
+    Authorization <https://book.cakephp.org/authorization/1/>
+    Authentication <https://book.cakephp.org/authentication/1/>
     Bake <https://book.cakephp.org/bake/1/ja/>
     Chronos <https://book.cakephp.org/chronos/1/ja/>
     Debug Kit <https://book.cakephp.org/debugkit/3/ja/>

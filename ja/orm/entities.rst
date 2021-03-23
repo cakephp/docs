@@ -381,12 +381,18 @@ CakePHP は一括代入から保護しません。
 保護されたフィールドを実行時に変更する
 ----------------------------------------
 
-``accessible`` メソッドを使うことで保護されたフィールドのリストを実行時に変更できます。 ::
+``setAccess`` メソッドを使うことで保護されたフィールドのリストを実行時に変更できます。 ::
 
     // user_id にアクセスできるようにする
+    $article->setAccess('user_id', true);
+
+    // 3.5 より前は accessible() を使用
     $article->accessible('user_id', true);
 
     // title を保護する。
+    $article->setAccess('title', false);
+
+    // 3.5 より前は accessible() を使用
     $article->accessible('title', false);
 
 .. note::

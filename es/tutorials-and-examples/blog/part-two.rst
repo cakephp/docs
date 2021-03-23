@@ -623,8 +623,7 @@ controlador ArticlesController.
 Conclusión
 ==========
 
-Creando aplicaciones de este modo te traerá paz, honor, amor, dinero a carretas e
-incluso tus fantasías más salvajes. Simple, no te parece? Ten en cuenta que este
+Simple, no te parece? Ten en cuenta que este
 tutorial es muy básico, CakePHP tiene *muchas* otras cosas que ofrecer y es
 flexible aunque no hemos cubierto aquí estos puntos para que te sea más simple
 al principio. Usa el resto de este manual como una guía para construir mejores

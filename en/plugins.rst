@@ -617,7 +617,7 @@ You can use ``TableRegistry`` to load your plugin tables using the familiar
 
 Alternatively, from a controller context, you can use::
 
-    $this->loadModel('ContactsMangager.Contacts');
+    $this->loadModel('ContactsManager.Contacts');
 
 Plugin Templates
 ================

@@ -69,7 +69,7 @@ Database Configuration
 ======================
 
 Next, let's tell CakePHP where our database is and how to connect to it. Replace
-the values in the ``Datasources.default`` array in your **config/app.php** file
+the values in the ``Datasources.default`` array in your **config/app_local.php** file
 with those that apply to your setup. A sample completed configuration array
 might look something like the following::
 
@@ -93,7 +93,7 @@ might look something like the following::
         // More configuration below.
     ];
 
-Once you've saved your **config/app.php** file, you should see that 'CakePHP is
+Once you've saved your **config/app_local.php** file, you should see that 'CakePHP is
 able to connect to the database' section have a green chef hat.
 
 .. note::
