@@ -134,7 +134,7 @@ the following SQL to create the necessary tables:
 
     CREATE TABLE tags (
         id INT AUTO_INCREMENT PRIMARY KEY,
-        title VARCHAR(255),
+        title VARCHAR(191),
         created DATETIME,
         modified DATETIME,
         UNIQUE KEY (title)
