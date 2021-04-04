@@ -233,7 +233,7 @@ way you include them in controllers - using the ``$components`` var::
     class CustomComponent extends Component
     {
         // The other component your component uses
-        public $components = ['Existing'];
+        protected $components = ['Existing'];
 
         // Execute any other additional setup for your component.
         public function initialize(array $config): void
