@@ -1,13 +1,14 @@
 Bem-vindo
 #########
 
-O CakePHP 4 é um framework de desenvolvimento web que funciona com o PHP 8.0 (pelo menos |minphpversion|). Leia a seção :doc:`CakePHP num piscar de olhos </intro>`
+O CakePHP 4 é um framework de desenvolvimento web que funciona com o PHP 8.0
+(pelo menos |minphpversion|). Leia a seção :doc:`CakePHP num piscar de olhos </intro>`
 para ter uma ideia geral dos fundamentos do CakePHP.
 
-O *cookbook* (guia de receitas) do CakePHP é um projeto de documentação 
-editável e aberto à comunidade. Observe o botão com um ícone de um lápis 
-no canto direito, ele vai direcioná-lo para o editor online do GitHub 
-referente a página atual, permitindo que você facilmente contribua com 
+O *cookbook* (guia de receitas) do CakePHP é um projeto de documentação
+editável e aberto à comunidade. Observe o botão com um ícone de um lápis
+no canto direito, ele vai direcioná-lo para o editor online do GitHub
+referente a página atual, permitindo que você facilmente contribua com
 quaisquer adições, exclusões ou correções para a documentação.
 
 .. container:: offline-download
