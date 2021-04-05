@@ -36,7 +36,7 @@ CakePHP's request object implements the `PSR-7
 ServerRequestInterface <http://www.php-fig.org/psr/psr-7/>`_ making it easier to
 use libraries from outside of CakePHP.
 
-.. _request_parameters:
+.. _request-parameters:
 
 Request Parameters
 ------------------
@@ -121,7 +121,7 @@ If you want to access all the data parameters you can use
 ``getParsedBody()``::
 
     $data = $this->request->getParsedBody();
-    
+
 .. _request-file-uploads:
 
 File Uploads
