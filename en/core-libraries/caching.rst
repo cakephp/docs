@@ -169,7 +169,7 @@ RedisEngine uses the following engine specific options:
 * ``password`` Redis server password.
 * ``persistent`` Should a persistent connection be made to Redis.
 * ``timeout`` Connection timeout for Redis.
-* ``unix_socket`` Path to a unix socket for Redist.
+* ``unix_socket`` Path to a unix socket for Redis.
 
 MemcacheEngine Options
 ----------------------
