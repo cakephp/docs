@@ -267,17 +267,17 @@ Additional parameters for the decoding function can be passed as arguments to
 Environment Variables (from $_SERVER and $_ENV)
 -----------------------------------------------
 
-.. php:method:: env($key, $value = null)
+.. php:method:: putenv($key, $value = null)
 
-``ServerRequest::env()`` is a wrapper for ``env()`` global function and acts as
+``ServerRequest::getEnv()`` is a wrapper for ``getenv()`` global function and acts as
 a getter/setter for environment variables without having to modify globals
 ``$_SERVER`` and ``$_ENV``::
 
     // Get the host
-    $host = $this->request->env('HTTP_HOST');
+    $host = $this->request->getEnv('HTTP_HOST');
 
     // Set a value, generally helpful in testing.
-    $this->request->env('REQUEST_METHOD', 'POST');
+    $this->request->withEnv('REQUEST_METHOD', 'POST');
 
 To access all the environment variables in a request use ``getServerParams()``::
 
