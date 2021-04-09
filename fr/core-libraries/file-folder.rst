@@ -7,6 +7,12 @@ Les utilitaires Folder et File sont des classes pratiques pour la lecture,
 l'écriture/l'ajout de fichiers, lister les fichiers d'un dossier et toute autre
 tâche habituelle liée aux répertoires.
 
+.. deprecated:: 4.0
+    Les classes ``File`` et ``Folder`` vont être retirées dans la version 5.0.
+    Utilisez plutôt les classes ``SplFileInfo`` ou ``SplFileObject`` et les classes d'itérateurs comme 
+     ``RecursiveDirectoryIterator``, ``RecursiveRegexIterator`` etc.
+
+
 Utilisation Basique
 ===================
 

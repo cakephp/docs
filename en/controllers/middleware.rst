@@ -418,6 +418,9 @@ The available configuration options are:
   will fail. Defaults to ``false``.
 - ``httponly`` Whether or not the cookie will be set with the HttpOnly flag.
   Defaults to ``false``. Prior to 4.1.0 use the ``httpOnly`` option.
+- ``samesite`` Allows you to declare if your cookie should be restricted to a 
+  first-party or same-site context. Posible values are ``Lax``, ``Strict`` and 
+  ``None``. Defaults to ``null``.
 - ``field`` The form field to check. Defaults to ``_csrfToken``. Changing this
   will also require configuring FormHelper.
 

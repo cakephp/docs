@@ -132,46 +132,8 @@ RequestHandler はクライアントやリクエストについての情報を�
 リクエストデータの自動デコード
 ==============================
 
-リクエストデータのデコーダーを追加します。
-ハンドラーは、コールバックとコールバックのための追加の変数を含める必要があります。
-コールバックは、リクエストの入力に含まれるデータの配列を返す必要があります。
-たとえば、 CSV ハンドラーを追加する場合::
-
-    class ArticlesController extends AppController
-    {
-        public function initialize()
-        {
-            parent::initialize();
-            $parser = function ($data) {
-                $rows = str_getcsv($data, "\n");
-                foreach ($rows as &$row) {
-                    $row = str_getcsv($row, ',');
-                }
-                return $rows;
-            };
-            $this->loadComponent('RequestHandler', [
-                'inputTypeMap' => [
-                    'csv' => [$parser]
-                ]
-            ]);
-        }
-    }
-
-ハンドラー関数として、任意の `callable <http://php.net/callback>`_ を利用できます。
-コールバックには追加の引数を渡すこともでき、これは ``json_decode`` のような
-コールバックのときに便利です。 ::
-
-    $this->RequestHandler->addInputType('json', ['json_decode', true]);
-
-    // 3.1.0 以降では、以下を使用してください
-    $this->RequestHandler->config('inputTypeMap.json', ['json_decode', true]);
-
-上記の例は、 JSON によるデータを ``$this->request->getData()`` の配列にします。
-``stdClass`` オブジェクトで取得したい場合は、引数の ``true`` なしになります。
-
-.. deprecated:: 3.1.0
-    3.1.0 から ``addInputType()`` メソッドは非推奨です。
-    実行時に入力タイプを追加するには、 ``config()`` を使用してください。
+この機能はバージョン4.0において ``RequestHandlerComponent`` から削除されました。
+代わりに :ref:`body-parser-middleware` を使用してください。
 
 コンテンツタイプの設定を確認
 ============================

@@ -554,6 +554,7 @@ to ``true``::
     For example, if you have declared an assocation as ``belongsTo('Users')`` then you must 
     use ``contain('Users')`` and not ``contain('users')`` or ``contain('user')``.
 
+
 Passing Conditions to Contain
 -----------------------------
 
@@ -864,7 +865,7 @@ result set.
 Changing Fetching Strategies
 ============================
 
-As mentioned in :ref:`contain-conditions`, you can customize the ``strategy``
+As mentioned in earlier, you can customize the ``strategy``
 used by an association in a ``contain()``.
 
 If you look at ``BelongsTo`` and ``HasOne`` ref:`associations` options,

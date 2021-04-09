@@ -128,7 +128,7 @@ properties that a basic ``$paginate`` array would.
 
 Once you have used ``paginate()`` to create results. The controller's request
 will be updated with paging parameters. You can access the pagination metadata
-at ``$this->request->getParam('paging')``.
+at ``$this->request->getAttribute('paging')``.
 
 Simple Pagination
 =================

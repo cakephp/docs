@@ -2,7 +2,7 @@ Padrões de codificação
 ######################
 
 Desenvolvedores do CakePHP deverão usar o `guia de codificação
-PSR-2 <http://www.php-fig.org/psr/psr-2/>`_ em adição às regras apresentadas
+PSR-12 <https://www.php-fig.org/psr/psr-12/>`_ em adição às regras apresentadas
 a seguir e definidas como padrão.
 
 É recomendado que outros desenvolvedores que optem pelo CakePHP sigam os mesmos
@@ -275,8 +275,8 @@ primitivo::
 Funções anônimas (Closures)
 ---------------------------
 
-Para se definir funções anônimas, segue-se o estilo de codificação `PSR-2
-<http://www.php-fig.org/psr/psr-2/>`_, onde elas são declaradas com um espaço
+Para se definir funções anônimas, segue-se o estilo de codificação `PSR-12
+<https://www.php-fig.org/psr/psr-12/>`_, onde elas são declaradas com um espaço
 depois da palavra-chave `function`, e um espaço antes e depois da palavra-chave
 `use`::
 

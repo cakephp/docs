@@ -64,7 +64,7 @@ CakePHP は挿入または更新のいずれの処理を行うかを ``isNew()``
     $articlesTable = TableRegistry::getTableLocator()->get('Articles');
     $author = $articlesTable->Authors->findByUserName('mark')->first();
 
-    $article = $articlesTable->newEntity();
+    $article = $articlesTable->newEmptyEntity();
     $article->title = 'mark の記事';
     $article->author = $author;
 
@@ -75,14 +75,14 @@ CakePHP は挿入または更新のいずれの処理を行うかを ``isNew()``
 
 ``save()`` メソッドはアソシエーションのレコードも作成することができます。 ::
 
-    $firstComment = $articlesTable->Comments->newEntity();
+    $firstComment = $articlesTable->Comments->newEmptyEntity();
     $firstComment->body = 'CakePHP の機能は傑出しています';
 
-    $secondComment = $articlesTable->Comments->newEntity();
+    $secondComment = $articlesTable->Comments->newEmptyEntity();
     $secondComment->body = 'CakePHP のパフォーマンスは素晴らしい！';
 
     $tag1 = $articlesTable->Tags->findByName('cakephp')->first();
-    $tag2 = $articlesTable->Tags->newEntity();
+    $tag2 = $articlesTable->Tags->newEmptyEntity();
     $tag2->name = 'すごい';
 
     $article = $articlesTable->get(12);
@@ -99,7 +99,7 @@ CakePHP は挿入または更新のいずれの処理を行うかを ``isNew()``
 ``link()`` メソッドを使用する方法があります。 ::
 
     $tag1 = $articlesTable->Tags->findByName('cakephp')->first();
-    $tag2 = $articlesTable->Tags->newEntity();
+    $tag2 = $articlesTable->Tags->newEmptyEntity();
     $tag2->name = 'すごい';
 
     $articlesTable->Tags->link($article, [$tag1, $tag2]);

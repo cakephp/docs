@@ -1,8 +1,8 @@
 Coding Standards
 ################
 
-CakePHP developers will use the `PSR-2 coding style guide
-<http://www.php-fig.org/psr/psr-2/>`_ in addition to the following rules as
+CakePHP developers will use the `PSR-12 coding style guide
+<https://www.php-fig.org/psr/psr-12/>`_ in addition to the following rules as
 coding standards.
 
 It is recommended that others developing CakeIngredients follow the same
@@ -310,8 +310,8 @@ type::
 Anonymous Functions (Closures)
 ------------------------------
 
-Defining anonymous functions follows the `PSR-2
-<http://www.php-fig.org/psr/psr-2/>`_ coding style guide, where they are
+Defining anonymous functions follows the `PSR-12
+<https://www.php-fig.org/psr/psr-12/>`_ coding style guide, where they are
 declared with a space after the `function` keyword, and a space before and after
 the `use` keyword::
 

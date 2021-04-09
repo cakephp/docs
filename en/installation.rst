@@ -8,7 +8,7 @@ CakePHP has a few system requirements:
 - Minimum PHP |minphpversion| (|phpversion| supported).
 - mbstring PHP extension
 - intl PHP extension
-- simplexml PHP extension
+- SimpleXML PHP extension
 - PDO PHP extension
 
 .. note::

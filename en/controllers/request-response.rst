@@ -36,7 +36,7 @@ CakePHP's request object implements the `PSR-7
 ServerRequestInterface <http://www.php-fig.org/psr/psr-7/>`_ making it easier to
 use libraries from outside of CakePHP.
 
-.. _request_parameters:
+.. _request-parameters:
 
 Request Parameters
 ------------------
@@ -121,7 +121,7 @@ If you want to access all the data parameters you can use
 ``getParsedBody()``::
 
     $data = $this->request->getParsedBody();
-    
+
 .. _request-file-uploads:
 
 File Uploads
@@ -267,17 +267,17 @@ Additional parameters for the decoding function can be passed as arguments to
 Environment Variables (from $_SERVER and $_ENV)
 -----------------------------------------------
 
-.. php:method:: env($key, $value = null)
+.. php:method:: putenv($key, $value = null)
 
-``ServerRequest::env()`` is a wrapper for ``env()`` global function and acts as
+``ServerRequest::getEnv()`` is a wrapper for ``getenv()`` global function and acts as
 a getter/setter for environment variables without having to modify globals
 ``$_SERVER`` and ``$_ENV``::
 
     // Get the host
-    $host = $this->request->env('HTTP_HOST');
+    $host = $this->request->getEnv('HTTP_HOST');
 
     // Set a value, generally helpful in testing.
-    $this->request->env('REQUEST_METHOD', 'POST');
+    $this->request->withEnv('REQUEST_METHOD', 'POST');
 
 To access all the environment variables in a request use ``getServerParams()``::
 
@@ -742,13 +742,6 @@ ics generated on the fly from a string::
         // a view.
         return $response;
     }
-
-Callbacks can also return the body as a string::
-
-    $path = '/some/file.png';
-    $this->response->body(function () use ($path) {
-        return file_get_contents($path);
-    });
 
 Setting Headers
 ---------------
