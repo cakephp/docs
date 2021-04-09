@@ -1,8 +1,8 @@
 Estándares de codificación
 ##########################
 
-Los desarrolladores de CakePHP deberán utilizar la `Guia de estilo de codificación PSR-2
-<http://www.php-fig.org/psr/psr-2/>`_ además de las siguientes normas como estándares
+Los desarrolladores de CakePHP deberán utilizar la `Guia de estilo de codificación PSR-12
+<https://www.php-fig.org/psr/psr-12/>`_ además de las siguientes normas como estándares
 de codificación.
 
 Es recomendable que otos *CakeIngredients* que se desarrollen sigan los mismos
@@ -279,7 +279,7 @@ Funciones anónimas (``Closures``)
 ---------------------------------
 
 Para definir funciones anónimas sigue la guía de estilo de código
-`PSR-2 <http://www.php-fig.org/psr/psr-2/>`_ , donde se declaran con un espacio
+`PSR-12 <http://www.php-fig.org/psr/psr-12/>`_ , donde se declaran con un espacio
 después de la palabra ``function`` y antes y después de la palabra ``use``::
 
     $closure = function ($arg1, $arg2) use ($var1, $var2) {
