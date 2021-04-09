@@ -1,8 +1,8 @@
 Coding Standards
 ################
 
-CakePHP developers will use the `PSR-2 coding style guide
-<http://www.php-fig.org/psr/psr-2/>`_ in addition to the following rules as
+CakePHP developers will use the `PSR-12 coding style guide
+<https://www.php-fig.org/psr/psr-12/>`_ in addition to the following rules as
 coding standards.
 
 It is recommended that others developing CakeIngredients follow the same
