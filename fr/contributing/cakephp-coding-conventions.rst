@@ -2,7 +2,7 @@ Normes de codes
 ###############
 
 Les développeurs de CakePHP vont utiliser le `guide pour l'écriture de code
-PSR-2 <http://www.php-fig.org/psr/psr-2/fr/>`_ en plus des règles de code
+PSR-12 <https://www.php-fig.org/psr/psr-12/>`_ en plus des règles de code
 suivantes.
 
 Il est recommandé que les autres personnes qui développent des Ingrédients de
@@ -290,7 +290,7 @@ Fonctions Anonymes (Closures)
 -----------------------------
 
 La définition des fonctions anonymes suit le guide sur le style de codage
-`PSR-2 <http://www.php-fig.org/psr/psr-2/>`_, où elles sont déclarées
+`PSR-12 <https://www.php-fig.org/psr/psr-12/>`_, où elles sont déclarées
 avec un espace après le mot clé `function`, et un espace avant et après
 le mot clé `use`::
 
