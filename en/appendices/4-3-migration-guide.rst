@@ -34,6 +34,12 @@ Behavior Changes
 While the following changes do not change the signature of any methods they do
 change the semantics or behavior of methods.
 
+Command
+-------
+
+- ``cake i18n extract`` no longer has a ``--relative-paths`` option. This option
+  is on by default now.
+
 ORM
 ---
 
