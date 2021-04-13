@@ -1174,7 +1174,7 @@ token mismatches::
         $this->post('/posts/add', ['title' => 'Exciting news!']);
     }
 
-To make your FormProtector work properly in your integration tests, be aware that ``session_id('cli');`` needs to called in your /test/bootstrap.php.
+To make your FormProtector work properly in your integration tests, be aware that ``session_id('cli');`` needs to called in your ``/test/bootstrap.php``.
 
 It is also important to enable debug in tests that use tokens to prevent the
 SecurityComponent from thinking the debug token is being used in a non-debug
