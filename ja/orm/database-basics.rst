@@ -395,7 +395,7 @@ Type クラスは次のメソッドを実装することが期待されます。
     namespace App\Database\Type;
 
     use Cake\Database\Driver;
-    use Cake\Database\Type;
+    use Cake\Database\TypeFactory;
     use PDO;
 
     class JsonType extends Type
@@ -436,9 +436,9 @@ Type クラスは次のメソッドを実装することが期待されます。
 私たちは新しい型を作成したら、型マッピングに追加しなければなりません。
 アプリケーションの bootstrap 時に、次の事を行います。 ::
 
-    use Cake\Database\Type;
+    use Cake\Database\TypeFactory;
 
-    Type::map('json', 'App\Database\Type\JsonType');
+    TypeFactory::map('json', 'App\Database\Type\JsonType');
 
 こうすればスキーマ情報は新しい型で上書きされ、CakePHP のデータベース層は自動的に
 JSON データを変換してクエリーを作成します。
@@ -578,10 +578,10 @@ Date/Time オブジェクトは容易に変更されてしまうため、CakePHP
 オブジェクトを利用できるようなっています。以下の設定は、 あなたのアプリケーションの
 **config/bootstrap.php** ファイル内で行うのが最適です。 ::
 
-    Type::build('datetime')->useImmutable();
-    Type::build('date')->useImmutable();
-    Type::build('time')->useImmutable();
-    Type::build('timestamp')->useImmutable();
+    TypeFactory::build('datetime')->useImmutable();
+    TypeFactory::build('date')->useImmutable();
+    TypeFactory::build('time')->useImmutable();
+    TypeFactory::build('timestamp')->useImmutable();
 
 .. note::
     新しいアプリケーションは、デフォルトでイミュータブルオブジェクトが有効になります。

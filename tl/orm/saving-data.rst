@@ -1073,8 +1073,8 @@ This functionality is achieved by using the custom types system. See the
 column Types::
 
     // In config/bootstrap.php
-    use Cake\Database\Type;
-    Type::map('json', 'Cake\Database\Type\JsonType');
+    use Cake\Database\TypeFactory;
+    TypeFactory::map('json', 'Cake\Database\Type\JsonType');
 
     // In src/Model/Table/UsersTable.php
     use Cake\Database\Schema\TableSchema;
