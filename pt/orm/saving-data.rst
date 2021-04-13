@@ -1102,8 +1102,8 @@ Consulte a seção :ref:`adding-custom-database-types` para descobrir como criar
 personalizada (custom column Types)::
 
     // No config/bootstrap.php
-    use Cake\Database\Type;
-    Type::map('json', 'Cake\Database\Type\JsonType');
+    use Cake\Database\TypeFactory;
+    TypeFactory::map('json', 'Cake\Database\Type\JsonType');
 
     // No src/Model/Table/UsersTable.php
     use Cake\Database\Schema\TableSchema;

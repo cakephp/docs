@@ -629,16 +629,16 @@ informations de type datetime dans un format localisé pour l'utilisateur. Dans
 un controller, ou :doc:`/development/dispatch-filters`, vous pouvez configurer
 les types Date, Time, et DateTime pour parser les formats localisés::
 
-    use Cake\Database\Type;
+    use Cake\Database\TypeFactory;
 
     // Permet de parser avec le format de locale par défaut.
-    Type::build('datetime')->useLocaleParser();
+    TypeFactory::build('datetime')->useLocaleParser();
 
     // Configure un parser personnalisé du format de datetime.
-    Type::build('datetime')->useLocaleParser()->setLocaleFormat('dd-M-y');
+    TypeFactory::build('datetime')->useLocaleParser()->setLocaleFormat('dd-M-y');
 
     // Vous pouvez aussi utiliser les constantes IntlDateFormatter.
-    Type::build('datetime')->useLocaleParser()
+    TypeFactory::build('datetime')->useLocaleParser()
         ->setLocaleFormat([IntlDateFormatter::SHORT, -1]);
 
 Le parsing du format par défaut est le même que le format de chaîne par défaut.
