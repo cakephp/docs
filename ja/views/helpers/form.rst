@@ -436,8 +436,8 @@ binary
 
     echo $this->Form->control('birth_dt', [
         'label' => '生年月日',
-        'minYear' => date('Y') - 70,
-        'maxYear' => date('Y') - 18,
+        'min' => date('Y') - 70,
+        'max' => date('Y') - 18,
     ]);
 
 特定の :ref:`control-specific-options` に加えて、選択された (または CakePHP によって推論された)
@@ -1508,11 +1508,11 @@ CakePHP が Windows サーバー上にインストールされている場合、
   テキストの代わりに2桁の数字が使用されます。配列をセットした場合
   (例 ``['01' => 'Jan', '02' => 'Feb', ...]``)、指定された配列が使用されます。
 
-* ``'minYear'`` - 年の select フィールドで使用される最小の年。
+* ``'min'`` - 年の select フィールドで使用される最小の年。
 
-* ``'maxYear'`` - 年の select フィールドで使用される最大の年。
+* ``'max'`` - 年の select フィールドで使用される最大の年。
 
-* ``'orderYear'`` - 年選択ピッカー内の年の値の順序。
+* ``'order'`` - 年選択ピッカー内の年の値の順序。
   利用可能な値は ``'asc'`` と ``'desc'`` 。デフォルトは ``'desc'`` です。
 
 * ``'year', 'month', 'day'`` - これらのオプションを使用すると、コントロール要素が生成されるかどうか制御できます。
@@ -1749,7 +1749,7 @@ CakePHP が Windows サーバー上にインストールされている場合、
 * ``$options`` - :ref:`general-control-options` 、 :ref:`datetime-options` 、
   適用可能な :ref:`time-options` 、そして有効な HTML 属性を含むオプション配列。
 
-``minYear`` から ``maxYear`` （これらのオプションが提供されているとき）、
+``min`` から ``max`` （これらのオプションが提供されているとき）、
 または今日から数えて-5年から+5年までの値を持つ ``select`` 要素を作成します。
 さらに、HTML 属性は、 ``$options`` で指定することができます。
 ``$options ['empty']`` が ``false`` の場合、選択ピッカーはリスト内に空の項目を含みません。
@@ -1757,8 +1757,8 @@ CakePHP が Windows サーバー上にインストールされている場合、
 たとえば、2000 年から今年までの年を作成するには、次のようにします。 ::
 
     echo $this->Form->year('purchased', [
-        'minYear' => 2000,
-        'maxYear' => date('Y')
+        'min' => 2000,
+        'max' => date('Y')
     ]);
 
 2009 年だった場合は、次のようになるでしょう。
