@@ -45,6 +45,11 @@ ORM
 
 - Aligned ``Entity::isEmpty()`` and ``Entity::hasValue()`` to treat '0' as a non-empty value. 
   This aligns the behavior with documentation and original intent.
+- ``TranslateBehavior`` entity validation errors are now set in the
+  ``_translations.{lang}`` path instead of ``{lang}``. This normalizes the
+  entity error path with the fields used for request data. If you have forms
+  that modify multiple translations at once, you may need to update how you
+  render validation errors.
 
 Routing
 -------
