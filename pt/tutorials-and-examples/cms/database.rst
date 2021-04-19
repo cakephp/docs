@@ -1,5 +1,5 @@
 Tutorial - Gerenciador de Conteúdo - Criando o Banco de Dados
-####################################
+#############################################################
 
 Agora que temos o CakePHP instalado, vamos configurar o banco de dados para nossa
 aplicação :abbr:`CMS (Sistema Gerenciador de Conteúdo)`. Se você ainda não tiver
@@ -126,7 +126,7 @@ a convenção baseada em valores padrões que o CakePHP oferece.
     <core-libraries/inflector>` do CakePHP para reconhecer as convenções em português.
 
 Configuração do Banco de Dados
-======================
+==============================
 
 A seguir vamos dizer ao CakePHP onde nosso banco de dados está e como se conectar a ele.
 Substitua os valores no array ``Datasources.default`` dentro do arquivo **config/app_local.php**
@@ -167,7 +167,7 @@ com o chapéu de chefe na cor verde.
 
 
 Criando nosso Primeiro Modelo
-========================
+=============================
 
 Modelos são o coração de uma aplicação CakePHP. Ele permite a nós ler e
 escrever nossos dados. Eles possibilitam a criação de relacionamentos

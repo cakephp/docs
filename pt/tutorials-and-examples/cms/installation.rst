@@ -1,5 +1,5 @@
 Tutorial - Gerenciador de Conteúdo
-###########################
+##################################
 
 Este tutorial irá orientá-lo através da criação de uma simples aplicação do
 tipo :abbr:`CMS (Sistema Gerenciador de Conteúdo)`. Para começar, nós iremos
@@ -27,7 +27,7 @@ A versão PHP do seu servidor web ta'bme precisa ser no mínimo |minphpversion|
 ou superior, e deve ser a mesma versão encontrada no terminal de comando (CLI).
 
 Instalando CakePHP
-===============
+==================
 
 A maneira mais fácil de instalar o CakePHP é usando Composer, um gerenciador
 de dependências para o PHP. Se trata de uma forma simples de instalar o
@@ -97,7 +97,7 @@ Caso tenha dificuldades durante este tutorial, você pode ver o resultado final 
 `GitHub <https://github.com/cakephp/cms-tutorial>`_.
 
 Verificando sua Instalação
-=========================
+==========================
 
 Podemos verificar rapidamente se nossa instalação está correta acessando a página
 inicial padrão. Mas antes de poder acessar, você precisa iniciar um servidor de
