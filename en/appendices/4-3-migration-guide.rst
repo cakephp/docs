@@ -57,6 +57,13 @@ Routing
 - ``RouteBuilder::resources()`` now generates routes that use 'braced'
   placeholders.
 
+Validation
+----------
+
+- ``Validator::setProvider()`` now raises an exception when a non-object,
+  non-string provider name is used. Previously there would be no error, but the
+  provider would also not work.
+
 
 Breaking Changes
 ================
