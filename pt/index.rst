@@ -1,19 +1,19 @@
 Bem-vindo
 #########
 
-O CakePHP 4 é um framework de desenvolvimento web que funciona com o PHP 7 ou no
-mínimo com o PHP |minphpversion|. Leia a seção :doc:`CakePHP num piscar de olhos </intro>`
-para ter uma ideia geral dos fundamentos do CakePHP 4.
+O CakePHP 4 é um framework de desenvolvimento web que funciona com o PHP 8.0
+(pelo menos |minphpversion|). Leia a seção :doc:`CakePHP num piscar de olhos </intro>`
+para ter uma ideia geral dos fundamentos do CakePHP.
 
-O *cookbook* do CakePHP é um projeto de documentação editável aberto à
-comunidade. Observe o botão com um ícone de um lápis no canto direito, ele
-vai direcioná-lo para o editor online do GitHub referente a página atual,
-permitindo que você facilmente contribua com quaisquer adições, exclusões ou
-correções para a documentação.
+O *cookbook* (guia de receitas) do CakePHP é um projeto de documentação
+editável e aberto à comunidade. Observe o botão com um ícone de um lápis
+no canto direito, ele vai direcioná-lo para o editor online do GitHub
+referente a página atual, permitindo que você facilmente contribua com
+quaisquer adições, exclusões ou correções para a documentação.
 
 .. container:: offline-download
 
-    **Leia o manual em qualquer lugar**
+    **Leia o guia em qualquer lugar**
 
     .. image:: /_static/img/read-the-book.jpg
 
@@ -27,7 +27,7 @@ correções para a documentação.
 Obtendo ajuda
 =============
 
-Se você está confuso, há um bom número de lugares onde
+Se você está com dificuldades, existem vários lugares onde
 :doc:`Você pode receber ajuda </intro/where-to-get-help>`.
 
 Primeiros passos
@@ -35,11 +35,11 @@ Primeiros passos
 
 Aprender um novo framework pode ser intimidador e excitante ao mesmo tempo. Para
 ajudar você nesse processo, nós criamos um *cookbook* recheado de exemplos e
-receitas que remetem tarefas rotineiras. Se você é iniciante, deveria começar
+receitas que remetem tarefas rotineiras. Se você está iniciando, deveria começar
 com o :doc:`/quickstart` que vai lhe proporcionar um panorama geral sobre o que
 o CakePHP tem a oferecer e seu funcionamento.
 
-Após concluir o tutorial do *Bookmarker*, você pode se aprofundar sobre os
+Após concluir o Guia de Início Rápido, você pode se aprofundar sobre os
 principais elementos existentes em uma aplicação construída com o CakePHP:
 
 * O :ref:`ciclo de requisição do CakePHP <request-cycle>`

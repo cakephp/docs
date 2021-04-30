@@ -435,7 +435,7 @@ type JSON, nous pourrions faire la classe type suivante::
     namespace App\Database\Type;
 
     use Cake\Database\Driver;
-    use Cake\Database\Type;
+    use Cake\Database\TypeFactory;
     use PDO;
 
     class JsonType extends Type
@@ -477,9 +477,9 @@ vont fonctionner pour notre nouveau type. Une fois que nous avons créé notre
 nouveau type, nous avons besoin de l'ajouter dans la correspondance de type.
 Pendant le bootstrap de notre application, nous devrions faire ce qui suit::
 
-    use Cake\Database\Type;
+    use Cake\Database\TypeFactory;
 
-    Type::map('json', 'Cake\Database\Type\JsonType');
+    TypeFactory::map('json', 'Cake\Database\Type\JsonType');
 
 Nous pouvons ensuite surcharger les données de schema reflected pour utiliser
 notre nouveau type, et la couche de base de données de CakePHP va
@@ -626,10 +626,10 @@ Puisque les objets Date/Time sont facilement mutables en place, CakePHP vous
 permet d'activer les objets immutables. le meilleur endroit pour cela est le
 fichier **config/bootstrap.php** ::
 
-    Type::build('datetime')->useImmutable();
-    Type::build('date')->useImmutable();
-    Type::build('time')->useImmutable();
-    Type::build('timestamp')->useImmutable();
+    TypeFactory::build('datetime')->useImmutable();
+    TypeFactory::build('date')->useImmutable();
+    TypeFactory::build('time')->useImmutable();
+    TypeFactory::build('timestamp')->useImmutable();
 
 .. note::
     Les nouvelles applications auront les objets immutables activés par défaut.

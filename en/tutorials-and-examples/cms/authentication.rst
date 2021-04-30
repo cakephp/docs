@@ -3,7 +3,7 @@ CMS Tutorial - Authentication
 
 Now that our CMS has users, we can enable them to login using the
 `cakephp/authentication <https://book.cakephp.org/authentication/2>`__
-plugin. We'll start off by ensurin passwords are stored securely in
+plugin. We'll start off by ensuring passwords are stored securely in
 our database. Then we are going to provide a working login and logout, and
 enable new users to register.
 

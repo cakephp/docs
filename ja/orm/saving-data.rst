@@ -1059,9 +1059,9 @@ belongsToMany アソシエーションのそれぞれのエンティティーは
 
     // 3.6 より前では、 config/bootstrap.php で型マップを追加する必要があります。
 
-    use Cake\Database\Type;
+    use Cake\Database\TypeFactory;
 
-    Type::map('json', 'Cake\Database\Type\JsonType');
+    TypeFactory::map('json', 'Cake\Database\Type\JsonType');
 
     // src/Model/Table/UsersTable.php の中で
     use Cake\Database\Schema\TableSchema;

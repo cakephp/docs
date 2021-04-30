@@ -604,7 +604,7 @@ information in a user's localized format. In a controller, or
 :doc:`/development/dispatch-filters` you can configure the Date, Time, and
 DateTime types to parse localized formats::
 
-    use Cake\Database\Type;
+    use Cake\Database\TypeFactory;
 
     // Enable default locale format parsing.
     Type::build('datetime')->useLocaleParser();
