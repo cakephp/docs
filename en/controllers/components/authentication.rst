@@ -754,7 +754,7 @@ Accessing the Logged In User
 
 Once a user is logged in, you will often need some particular
 information about the current user. You can access the currently logged
-in user using ``AuthComponent::user()``::
+in user using the following ::
 
     // From inside a controller or other component.
     $this->Auth->user('id');
