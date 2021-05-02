@@ -848,8 +848,7 @@ Accéder à l'Utilisateur Connecté
 
 Une fois que l'utilisateur est connecté, vous avez souvent besoin
 d'information particulière à propos de l'utilisateur courant. Vous pouvez
-accéder à l'utilisateur en cours de connexion en utilisant
-``AuthComponent::user()``::
+accéder à l'utilisateur en cours de connexion de la façon suivante::
 
     // Depuis l'intérieur du controler
     $this->Auth->user('id');
