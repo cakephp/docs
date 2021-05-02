@@ -666,7 +666,7 @@ AuthComponent
 - La méthode ``login()`` a été retirée et remplacée par ``setUser()``.
   Pour connecter un utilisateur, vous devez maintenant appeler ``identify()``
   qui retourne les informations d'utilisateur en cas de succès d'identification
-  et utilise ensuite ``setUser()`` pour sauvegarder les informations de session
+  et utiliser ensuite ``setUser()`` pour sauvegarder les informations de session
   pour la persistance au cours des différentes requêtes.
 
 - ``BaseAuthenticate::_password()`` a été retirée. Utilisez ``PasswordHasher``
