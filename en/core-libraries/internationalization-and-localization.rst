@@ -620,11 +620,10 @@ make this process simpler::
     // Set the user's timezone
     TypeFactory::build('datetime')->setUserTimezone($user->timezone);
 
-Once set, all datetime data will be treated as coming *from* the user's
-timezone. When marshalling request data, the ORM will automatically convert
-datetime values from the user's timezone into your application's timezone. This
-ensures that your application is always working in the timezone defined in
-``App.defaultTimezone``.
+Once set, when your application creates or updates enities from request data,
+the ORM will automatically convert datetime values from the user's timezone into
+your application's timezone. This ensures that your application is always
+working in the timezone defined in ``App.defaultTimezone``.
 
 If your application handles datetime information in a number of actions you can
 use a middleware to define both timezone conversion and locale parsing::
@@ -644,6 +643,7 @@ use a middleware to define both timezone conversion and locale parsing::
             RequestHandlerInterface $handler
         ): ResponseInterface {
             // Get the user from the request.
+            // This example assumes your user entity has a timezone attribute.
             $user = $request->getAttribute('identity');
             if ($user) {
                 TypeFactory::build('datetime')
