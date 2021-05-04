@@ -71,6 +71,8 @@ Breaking Changes
 Behind the API, some breaking changes are necessary moving forward.
 They usually only affect tests.
 
+- No breaking changes.
+
 
 New Features
 ============
@@ -85,6 +87,9 @@ Database
 - Logged queries now use ``TRUE`` and ``FALSE`` for postgres, sqlite and mysql
   drivers. This makes it easier to copy queries and run them in an interactive
   prompt.
+- The ``DatetimeType`` can now convert request data from the user's timezone
+  to the application timezone. See
+  :ref:`converting-request-data-from-user-timezone` for more information.
 
 Http
 ====

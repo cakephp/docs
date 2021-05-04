@@ -607,6 +607,57 @@ DateTime types to parse localized formats::
 
 The default parsing format is the same as the default string format.
 
+.. _converting-request-data-from-user-timezone:
+
+Converting Request Data from the User's Timezone
+------------------------------------------------
+
+When handling data from users in different timezones you will need to convert
+the datetimes in request data into your application's timezone. You can use
+``setUserTimezone()`` from a controller or :doc:`/controllers/middleware` to
+make this process simpler::
+
+    // Set the user's timezone
+    TypeFactory::build('datetime')->setUserTimezone($user->timezone);
+
+Once set, all datetime data will be treated as coming *from* the user's
+timezone. During marshalling operations, the ORM will automatically convert
+datetime values from the user's timezone into your application's timezone. This
+ensures that your application is always working in the timezone defined in
+``App.timezone``.
+
+If your application handles datetime information in a number of actions you can
+use a middleware to define both timezone conversion and locale parsing::
+
+    namespace App\Middleware;
+
+    use Cake\Database\TypeFactory;
+    use Psr\Http\Message\ResponseInterface;
+    use Psr\Http\Message\ServerRequestInterface;
+    use Psr\Http\Server\MiddlewareInterface;
+    use Psr\Http\Server\RequestHandlerInterface;
+
+    class DatetimeMiddleare implements MiddlewareInterface
+    {
+        public function process(
+            ServerRequestInterface $request,
+            RequestHandlerInterface $handler
+        ): ResponseInterface {
+            // Get the user from the request.
+            $user = $requets->getAttribute('identity');
+            if ($user) {
+                TypeFactory::build('datetime')
+                    ->useLocaleParser()
+                    ->setUserTimezone($user->timezone);
+            }
+
+            return $handler->handle($request);
+        }
+    }
+
+.. versionadded:: 4.3.0
+    The ``setUserTimezone()`` method was added.
+
 Automatically Choosing the Locale Based on Request Data
 =======================================================
 
