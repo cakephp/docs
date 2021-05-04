@@ -17,15 +17,14 @@ Once your application is running on latest CakePHP 3.x, enable deprecation warni
 
 Now that you can see all the warnings, make sure these are fixed before proceding with the upgrade.
 
-Upgrade to PHP 7.2
+Upgrade to PHP 7.3
 ==================
 
-If you are not running on **PHP 7.2 or higher**, you will need to upgrade PHP before updating CakePHP.
+If you are not running on **PHP 7.3 or higher**, you will need to upgrade PHP before updating CakePHP.
 
 .. note::
     CakePHP 4.0 requires **a minimum of PHP 7.2**.
-
-.. _upgrade-tool-use:
+    The upgrade tool makes use of nikic/rector, which requires **a minimum of PHP 7.3**.
 
 Use the Upgrade Tool
 ====================
