@@ -54,7 +54,6 @@ global event listeners::
     // in src/Application.php
     namespace App;
 
-    use Cake\Core\Plugin;
     use Cake\Http\BaseApplication;
 
     class Application extends BaseApplication
