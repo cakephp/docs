@@ -59,7 +59,6 @@ initialiser des plugins et attacher des écouteurs d'événements globaux::
     // in src/Application.php
     namespace App;
 
-    use Cake\Core\Plugin;
     use Cake\Http\BaseApplication;
 
     class Application extends BaseApplication
