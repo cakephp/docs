@@ -71,7 +71,7 @@ initialiser des plugins et attacher des écouteurs d'événements globaux::
             parent::bootstrap();
 
             // Charger mon plugin
-            Plugin::load('MyPlugin');
+            $this->addPlugin('MyPlugin');
         }
     }
 
