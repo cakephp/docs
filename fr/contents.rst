@@ -15,6 +15,7 @@ Contenu
     appendices/migration-guides
     tutorials-and-examples
     contributing
+    release-policy
 
 .. toctree::
     :maxdepth: 3
