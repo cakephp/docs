@@ -65,6 +65,7 @@ Contenu
     core-libraries/httpclient
     core-libraries/inflector
     core-libraries/number
+    core-libraries/plugin
     core-libraries/registry-objects
     core-libraries/text
     core-libraries/time
