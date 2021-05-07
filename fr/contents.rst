@@ -105,7 +105,6 @@ Contenu
    migrations
    phinx
 
-
 .. todolist::
 
 .. meta::
