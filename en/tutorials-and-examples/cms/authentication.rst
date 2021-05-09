@@ -112,6 +112,7 @@ In **src/Application.php**, add the following imports::
     use Authentication\AuthenticationServiceInterface;
     use Authentication\AuthenticationServiceProviderInterface;
     use Authentication\Middleware\AuthenticationMiddleware;
+    use Cake\Routing\Router;
     use Psr\Http\Message\ServerRequestInterface;
 
 Then implement the authentication interface on your ``Application`` class::
@@ -138,7 +139,7 @@ Then add the following::
     public function getAuthenticationService(ServerRequestInterface $request): AuthenticationServiceInterface
     {
         $authenticationService = new AuthenticationService([
-            'unauthenticatedRedirect' => '/users/login',
+            'unauthenticatedRedirect' => Router::url('/users/login'),
             'queryParam' => 'redirect',
         ]);
 
@@ -158,7 +159,7 @@ Then add the following::
                 'username' => 'email',
                 'password' => 'password',
             ],
-            'loginUrl' => '/users/login',
+            'loginUrl' => Router::url('/users/login'),
         ]);
 
         return $authenticationService;
