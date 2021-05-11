@@ -126,7 +126,7 @@ ORM
   代わりに ``Cake\ORM\Locator\LocatorAwareTrait::getTableLocator()`` か
   ``Cake\Datasource\FactoryLocator::get('Table')``  を使用してください。
   ``Controller``, ``Command``, ``TestCase`` のようなクラスは、
-  すでに ``Cake\ORMLocator\LocatorAwareTrait``` を使用しています。
+  すでに ``Cake\ORMLocator\LocatorAwareTrait`` を使用しています。
   そのため、これらのクラスでは ``$this->getTableLocator()->get('ModelName')`` を使うことができます。
 * BelongsToMany アソシエーションは、ジャンクションテーブルの BelongsTo アソシエーションで設定された bindingKey を尊重するようになりました。
   以前は、ターゲットテーブルの主キーが常に代わりに使用されていました。
@@ -198,7 +198,7 @@ Error
 Form
 ----
 
-* ``フォーム::set()`` を追加しました。
+* ``Form::set()`` を追加しました。
   このメソッドは ``View::set()`` や ``Controller::set()`` と同じようにフォームオブジェクトにデータを追加することができます。
 
 Http
@@ -207,7 +207,7 @@ Http
 * ``BaseApplication::addOptionalPlugin()`` を追加しました。
   このメソッドは、プラグインの読み込みや、開発者依存のため存在しない可能性のあるプラグインのエラー処理を行います。
 * ``Cake\HttpException\RedirectException`` を追加しました。
-  この例外は Routing パッケージの ``RedirectException``` を置き換えるもので、 アプリケーションのどこでも発生させることができます。
+  この例外は Routing パッケージの ``RedirectException`` を置き換えるもので、 アプリケーションのどこでも発生させることができます。
 * ``CsrfProtectionMiddleware`` は ``samesite`` 属性を設定したクッキーを作成することができるようになりました。
 * ``Session::read()`` が2番目のパラメータでデフォルト値を設定できるようになりました。
 * ``Session::readOrFail()`` は、キーが見つからなかった場合に例外を発生させたい場合に便利な ``read()`` 操作のラッパーとして追加されました。
@@ -270,5 +270,5 @@ View
 Utility
 -------
 
-* ``Hash::combine()`` は ``$keyPath``` パラメータに ``null`` を指定できるようになりました。
+* ``Hash::combine()`` は ``$keyPath`` パラメータに ``null`` を指定できるようになりました。
   nullを指定すると、数値インデックス付きの出力配列になります。
