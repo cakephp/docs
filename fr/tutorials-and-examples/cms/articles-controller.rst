@@ -185,7 +185,7 @@ la création d'articles. Commencez par créer une action ``add()`` dans le
     class ArticlesController extends AppController
     {
 
-        public function initialize()
+        public function initialize(): void
         {
             parent::initialize();
 
