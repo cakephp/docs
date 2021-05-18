@@ -184,6 +184,8 @@ MemcacheEngine Options
   appropriate serializer support.
 - ``servers`` String or array of memcached servers. If an array MemcacheEngine will use
   them as a pool.
+- ``duration`` Be aware that any duration greater than 30 days will be treated as real 
+  Unix time value rather than an offset from current time.
 - ``options`` Additional options for the memcached client. Should be an array of option => value.
   Use the ``\Memcached::OPT_*`` constants as keys.
 
