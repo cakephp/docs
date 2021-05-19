@@ -128,7 +128,7 @@ d'``Entity`` de la table de jointure::
     $article->tags[0]->_joinData->tagComment = 'Fresh comment.'
 
     // Nécessaire car nous changeons une propriété directement
-    $article->dirty('tags', true);
+    $article->setDirty('tags', true);
 
     $articlesTable->save($article, ['associated' => ['Tags']]);
 
@@ -929,10 +929,10 @@ Consultez la documentation du helper Form pour savoir comment
 
 Si vous construisez ou modifiez une donnée d'association après avoir construit
 vos entities, vous devrez marquer la propriété d'association comme étant
-modifiée avec ``dirty()``::
+modifiée avec ``setDirty()``::
 
     $company->author->name = 'Master Chef';
-    $company->dirty('author', true);
+    $company->setDirty('author', true);
 
 Sauvegarder les Associations BelongsTo
 --------------------------------------
@@ -1026,13 +1026,13 @@ de ``saveStrategy``.
 
 Peu importe le moment où vous ajoutez de nouveaux enregistrements dans une
 association existante, vous devez toujours marquer la propriété de l'association
-comme 'dirty'. Ceci dit à l'ORM que la propriété de l'association doit
+comme 'setDirty'. Ceci dit à l'ORM que la propriété de l'association doit
 persister::
 
     $article->comments[] = $comment;
-    $article->dirty('comments', true);
+    $article->setDirty('comments', true);
 
-Sans l'appel à ``dirty()``, les commentaires mis à jour ne seront pas
+Sans l'appel à ``setDirty()``, les commentaires mis à jour ne seront pas
 sauvegardés.
 
 Sauvegarder les Associations BelongsToMany
@@ -1088,9 +1088,9 @@ la propriété de l'association en 'dirty'. Ceci dit à l'ORM que la propriété
 de l'association doit persister::
 
     $article->tags[] = $tag;
-    $article->dirty('tags', true);
+    $article->setDirty('tags', true);
 
-Sans appel à ``dirty()``, les tags mis à jour ne seront pas sauvegardés.
+Sans appel à ``setDirty()``, les tags mis à jour ne seront pas sauvegardés.
 
 Vous vous voudrez probablement souvent créer une association entre deux entities
 existantes, par exemple un utilisateur co-auteur d'un article. Cela est possible
@@ -1184,9 +1184,9 @@ construire les Types de colonne personnalisés::
 
     // Dans config/bootstrap.php
 
-    use Cake\Database\Type;
+    use Cake\Database\TypeFactory;
 
-    Type::map('json', 'Cake\Database\Type\JsonType');
+    TypeFactory::map('json', 'Cake\Database\Type\JsonType');
 
     // Dans src/Model/Table/UsersTable.php
     use Cake\Database\Schema\TableSchema;

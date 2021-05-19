@@ -169,7 +169,7 @@ RedisEngine uses the following engine specific options:
 * ``password`` Redis server password.
 * ``persistent`` Should a persistent connection be made to Redis.
 * ``timeout`` Connection timeout for Redis.
-* ``unix_socket`` Path to a unix socket for Redist.
+* ``unix_socket`` Path to a unix socket for Redis.
 
 MemcacheEngine Options
 ----------------------
@@ -184,6 +184,8 @@ MemcacheEngine Options
   appropriate serializer support.
 - ``servers`` String or array of memcached servers. If an array MemcacheEngine will use
   them as a pool.
+- ``duration`` Be aware that any duration greater than 30 days will be treated as real 
+  Unix time value rather than an offset from current time.
 - ``options`` Additional options for the memcached client. Should be an array of option => value.
   Use the ``\Memcached::OPT_*`` constants as keys.
 

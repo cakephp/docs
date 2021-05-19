@@ -17,19 +17,22 @@ CakePHP には、いくつかのキャッシュエンジンが用意されてい
 独自のバックエンドを構築する必要な場合、シンプルなインターフェイスを提供します。
 以下が、組み込みのキャッシュエンジンです。
 
-* ``FileCache`` File キャッシュはローカルファイルを使用するシンプルなキャッシュです。
+* ``File`` File キャッシュはローカルファイルを使用するシンプルなキャッシュです。
   最も遅いキャッシュエンジンで、アトミックな操作のための多くの機能を持ちません。
   しかし、ディスクストレージは非常に安価なので、頻繁に書き込みが行なわれない
   大きなオブジェクトや要素の保存はファイルに適しています。
-* ``ApcuEngine`` APCu キャッシュは、PHP の `APCu <http://php.net/apcu>`_ 拡張を使用します。
+* ``Memcached`` `Memcached <http://php.net/memcached>`_ 拡張を使います。
+* ``Redis`` `phpredis <https://github.com/nicolasff/phpredis>`_ 拡張を使います。
+  Redis は高速で、Memcached と同様の永続キャッシュシステム、アトミックな操作を提供します。
+* ``Apcu`` APCu キャッシュは、PHP の `APCu <http://php.net/apcu>`_ 拡張を使用します。
   この拡張はオブジェクトを保存するためにウェブサーバー上の共有メモリーを使います。
   これはとても高速で、かつアトミックな読み込み/書き込みの機能を提供することが可能になります。
   3.6.0 より前は ``ApcuEngine`` は ``ApcEngine`` という名前でした。
 * ``Wincache`` Wincache は `Wincache <http://php.net/wincache>`_ 拡張を使います。
   Wincache は APC と同様の機能とパフォーマンスを持ちますが、Windows と IIS に最適化されています。
-* ``MemcachedEngine`` `Memcached <http://php.net/memcached>`_ 拡張を使います。
-* ``RedisEngine`` `phpredis <https://github.com/nicolasff/phpredis>`_ 拡張を使います。
-  Redis は高速で、Memcached と同様の永続キャッシュシステム、アトミックな操作を提供します。
+* ``Array`` はすべてのデータを配列に保存します。
+  永続的なストレージを提供せず、test suites内での使用を想定しています。
+* ``Null`` nullエンジンは実質何も保存せず、すべての読み込み操作を失敗させます。
 
 あなたが選択したキャッシュエンジンに関わらず、
 アプリケーションは :php:class:`Cake\\Cache\\Cache` とやり取りします。
@@ -39,7 +42,7 @@ CakePHP には、いくつかのキャッシュエンジンが用意されてい
 Cache エンジンの設定
 ====================
 
-.. php:staticmethod:: config($key, $config = null)
+.. php:staticmethod:: setConfig($key, $config = null)
 
 アプリケーションは、ブート処理中に任意の数の「エンジン」を設定できます。
 キャッシュエンジンの設定は、 **config/app.php** で定義されています。
@@ -75,7 +78,7 @@ Cache エンジンの設定
 オプション設定は :term:`DSN` を指定することもできます。
 これは環境変数や :term:`PaaS` プロバイダーと一緒に動作するときに便利です。 ::
 
-    Cache::config('short', [
+    Cache::setConfig('short', [
         'url' => 'memcached://user:password@cache-host/?timeout=3600&prefix=myapp_',
     ]);
 
@@ -84,7 +87,7 @@ DSN を使用するとき、追加のクエリー文字列要素としてパラ�
 実行時におけるキャッシュエンジンの設定もできます。 ::
 
     // 短い名前で
-    Cache::config('short', [
+    Cache::setConfig('short', [
         'className' => 'File',
         'duration' => '+1 hours',
         'path' => CACHE,
@@ -92,7 +95,7 @@ DSN を使用するとき、追加のクエリー文字列要素としてパラ�
     ]);
 
     // 完全な名前空間つきの名前を使用。
-    Cache::config('long', [
+    Cache::setConfig('long', [
         'className' => 'Cake\Cache\Engine\FileEngine',
         'duration' => '+1 week',
         'probability' => 100,
@@ -101,23 +104,23 @@ DSN を使用するとき、追加のクエリー文字列要素としてパラ�
 
     // オブジェクトで
     $object = new FileEngine($config);
-    Cache::config('other', $object);
+    Cache::setConfig('other', $object);
 
 これらのエンジン設定の名前 ('short' や 'long') は :php:meth:`Cake\\Cache\\Cache::write()` と
 :php:meth:`Cake\\Cache\\Cache::read()` の ``$config`` パラメーターとして使われます。
 キャッシュエンジンを設定する場合は、次の構文を使用してクラス名を参照することができます。 ::
 
     // 省略名 (App\ または Cake 名前空間の中)
-    Cache::config('long', ['className' => 'File']);
+    Cache::setConfig('long', ['className' => 'File']);
 
     // プラグインの省略名
-    Cache::config('long', ['className' => 'MyPlugin.SuperCache']);
+    Cache::setConfig('long', ['className' => 'MyPlugin.SuperCache']);
 
     // 完全な名前空間
-    Cache::config('long', ['className' => 'Cake\Cache\Engine\FileEngine']);
+    Cache::setConfig('long', ['className' => 'Cake\Cache\Engine\FileEngine']);
 
     // CacheEngineInterface を実装したオブジェクト
-    Cache::config('long', ['className' => $myCache]);
+    Cache::setConfig('long', ['className' => $myCache]);
 
 .. note::
 
@@ -189,7 +192,7 @@ MemcacheEngine オプション
 
 ``fallback`` 設定キーを使ってキャッシュ設定を指定された設定にフォールバックするよう設定できます。 ::
 
-    Cache::config('redis', [
+    Cache::setConfig('redis', [
         'className' => 'Redis',
         'duration' => '+1 hours',
         'prefix' => 'cake_redis_',
@@ -204,7 +207,7 @@ Redis サーバーが予期せず失敗した場合、 ``redis`` キャッシュ
 
 ``false`` でキャッシュフォールバックを無効にすることができます。 ::
 
-    Cache::config('redis', [
+    Cache::setConfig('redis', [
         'className' => 'Redis',
         'duration' => '+1 hours',
         'prefix' => 'cake_redis_',
@@ -239,8 +242,8 @@ Redis サーバーが予期せず失敗した場合、 ``redis`` キャッシュ
 ``$config`` を指定しない場合、デフォルトが使用されます。
 ``Cache::write()`` はあらゆるタイプのオブジェクトを格納することができ、
 以下のようにモデルの結果を格納するのに理想的です。 ::
-
-    if (($posts = Cache::read('posts')) === false) {
+    $posts = Cache::read('posts');
+    if ($posts === null) {
         $posts = $someService->getAllPosts();
         Cache::write('posts', $posts);
     }
@@ -310,7 +313,7 @@ Cache を使用すると、Read-through キャッシュを簡単に行うこと�
 
     $cloud = Cache::read('cloud');
 
-    if ($cloud !== false) {
+    if ($cloud !== null) {
         return $cloud;
     }
 
@@ -319,6 +322,21 @@ Cache を使用すると、Read-through キャッシュを簡単に行うこと�
 
     // キャッシュにデータを保存する
     Cache::write('cloud', $cloud);
+
+    return $cloud;
+
+``short`` という別のキャッシュ設定を使っている場合、
+下記のように ``Cache::read()`` と ``Cache::write()`` に明記してください。 ::
+    // デフォルトの代わりにshort からキー"cloud" を読み込む
+    $cloud = Cache::read('cloud', 'short');
+    if ($cloud === null) {
+        // cloudデータ生成
+        // ...
+
+        // デフォルトの代わりにshort でデータをキャッシュ保存
+        Cache::write('cloud', $cloud, 'short');
+    }
+
     return $cloud;
 
 一度に複数のキーを読み込む
@@ -368,17 +386,14 @@ Cache を使用すると、Read-through キャッシュを簡単に行うこと�
 キャッシュデータのクリア
 ========================
 
-.. php:staticmethod:: clear($check, $config = 'default')
+.. php:staticmethod:: clear($config = 'default')
 
 キャッシュ設定から、すべてのキャッシュされた値を破棄します。Apcu、Memcached、Wincache
 などのエンジンでは、キャッシュ設定のプレフィックスを使用してキャッシュエントリーを削除します。
 異なるキャッシュ設定には異なる接頭辞が付いていることを確認してください。 ::
 
-    // 有効期限切れのキーのみをクリアする。
-    Cache::clear(true);
-
     // すべてのキーをクリアする。
-    Cache::clear(false);
+    Cache::clear();
 
 .. php:staticmethod:: gc($config)
 
@@ -434,7 +449,7 @@ Cache クラスは簡単な方法でカウンター値をインクリメント/�
 同じグループ内のすべてのエントリーで共有される情報が変更されるたびに、キーを大量に無効化したいというのは
 一般的な要件です。これは、キャッシュ設定でグループを宣言することで可能です。 ::
 
-    Cache::config('site_home', [
+    Cache::setConfig('site_home', [
         'className' => 'Redis',
         'duration' => '+999 days',
         'groups' => ['comment', 'article']
@@ -517,7 +532,7 @@ Cache クラスは簡単な方法でカウンター値をインクリメント/�
 **plugins/MyPlugin/src/Cache/Engine/MyCustomCacheEngine.php** に置かれます。
 プラグインのキャッシュ設定は、プラグインのドット構文を使用する必要があります。 ::
 
-    Cache::config('custom', [
+    Cache::setConfig('custom', [
         'className' => 'MyPlugin.MyCustomCache',
         // ...
     ]);
@@ -576,11 +591,6 @@ Cache クラスは簡単な方法でカウンター値をインクリメント/�
     :return: Boolean 成功時に ``true``
 
     キー配下の数字をインクリメントし、インクリメントされた値を返します。
-
-.. php:method:: gc()
-
-    必須ではありませんが、リソースの有効期限が切れたときにクリーンアップするために使用されます。
-    FileEngine はこれを使用して、期限切れのコンテンツを含むファイルを削除します。
 
 .. meta::
     :title lang=ja: キャッシュ

@@ -1302,6 +1302,182 @@ and make sure our web service is returning the proper response::
 We use the ``JSON_PRETTY_PRINT`` option as CakePHP's built in JsonView will use
 that option when ``debug`` is enabled.
 
+Testing with file uploads
+-------------------------
+
+Simulating file uploads is straightforward when you use the default
+":ref:`uploaded files as objects <request-file-uploads>`" mode. You can simply
+create instances that implement
+`\\Psr\\Http\\Message\\UploadedFileInterface <https://www.php-fig.org/psr/psr-7/#16-uploaded-files>`__
+(the default implementation currently used by CakePHP is
+``\Laminas\Diactoros\UploadedFile``), and pass them in your test request data.
+In the CLI environment such objects will by default pass validation checks that
+test whether the file was uploaded via HTTP. The same is not true for array style
+data as found in ``$_FILES``, it would fail that check.
+
+In order to simulate exactly how the uploaded file objects would be present on
+a regular request, you not only need to pass them in the request data, but you also
+need to pass them to the test request configuration via the ``files`` option. It's
+not technically necessary though unless your code accesses uploaded files via the
+:php:meth:`Cake\\Http\\ServerRequest::getUploadedFile()` or
+:php:meth:`Cake\\Http\\ServerRequest::getUploadedFiles()` methods.
+
+Let's assume articles have a teaser image, and a ``Articles hasMany Attachments``
+association, the form would look like something like this accordingly, where one
+image file, and multiple attachments/files would be accepted::
+
+    <?= $this->Form->create($article, ['type' => 'file']) ?>
+    <?= $this->Form->control('title') ?>
+    <?= $this->Form->control('teaser_image', ['type' => 'file']) ?>
+    <?= $this->Form->control('attachments.0.attachment', ['type' => 'file']) ?>
+    <?= $this->Form->control('attachments.0.description']) ?>
+    <?= $this->Form->control('attachments.1.attachment', ['type' => 'file']) ?>
+    <?= $this->Form->control('attachments.1.description']) ?>
+    <?= $this->Form->button('Submit') ?>
+    <?= $this->Form->end() ?>
+
+The test that would simulate the corresponding request could look like this::
+
+    public function testAddWithUploads(): void
+    {
+        $teaserImage = new \Laminas\Diactoros\UploadedFile(
+            '/path/to/test/file.jpg', // stream or path to file representing the temp file
+            12345,                    // the filesize in bytes
+            \UPLOAD_ERR_OK,           // the upload/error status
+            'teaser.jpg',             // the filename as sent by the client
+            'image/jpeg'              // the mimetype as sent by the client
+        );
+
+        $textAttachment = new \Laminas\Diactoros\UploadedFile(
+            '/path/to/test/file.txt',
+            12345,
+            \UPLOAD_ERR_OK,
+            'attachment.txt',
+            'text/plain'
+        );
+
+        $pdfAttachment = new \Laminas\Diactoros\UploadedFile(
+            '/path/to/test/file.pdf',
+            12345,
+            \UPLOAD_ERR_OK,
+            'attachment.pdf',
+            'application/pdf'
+        );
+
+        // This is the data accessible via `$this->request->getUploadedFile()`
+        // and `$this->request->getUploadedFiles()`.
+        $this->configRequest([
+            'files' => [
+                'teaser_image' => $teaserImage,
+                'attachments' => [
+                    0 => [
+                        'attachment' => $textAttachment,
+                    ],
+                    1 => [
+                        'attachment' => $pdfAttachment,
+                    ],
+                ],
+            ],
+        ]);
+
+        // This is the data accessible via `$this->request->getData()`.
+        $postData = [
+            'title' => 'New Article',
+            'teaser_image' => $teaserImage,
+            'attachments' => [
+                0 => [
+                    'attachment' => $textAttachment,
+                    'description' => 'Text attachment',
+                ],
+                1 => [
+                    'attachment' => $pdfAttachment,
+                    'description' => 'PDF attachment',
+                ],
+            ],
+        ];
+        $this->post('/articles/add', $postData);
+
+        $this->assertResponseOk();
+        $this->assertFlashMessage('The article was saved successfully');
+        $this->assertFileExists('/path/to/uploads/teaser.jpg');
+        $this->assertFileExists('/path/to/uploads/attachment.txt');
+        $this->assertFileExists('/path/to/uploads/attachment.pdf');
+    }
+
+.. tip::
+
+    If you configure the test request with files, then it *must* match the
+    structure of your POST data (but only include the uploaded file objects)!
+
+Likewise you can simulate `upload errors <https://www.php.net/manual/en/features.file-upload.errors.php>`_
+or otherwise invalid files that do not pass validation::
+
+    public function testAddWithInvalidUploads(): void
+    {
+        $missingTeaserImageUpload = new \Laminas\Diactoros\UploadedFile(
+            '',
+            0,
+            \UPLOAD_ERR_NO_FILE,
+            '',
+            ''
+        );
+
+        $uploadFailureAttachment = new \Laminas\Diactoros\UploadedFile(
+            '/path/to/test/file.txt',
+            1234567890,
+            \UPLOAD_ERR_INI_SIZE,
+            'attachment.txt',
+            'text/plain'
+        );
+
+        $invalidTypeAttachment = new \Laminas\Diactoros\UploadedFile(
+            '/path/to/test/file.exe',
+            12345,
+            \UPLOAD_ERR_OK,
+            'attachment.exe',
+            'application/vnd.microsoft.portable-executable'
+        );
+
+        $this->configRequest([
+            'files' => [
+                'teaser_image' => $missingTeaserImageUpload,
+                'attachments' => [
+                    0 => [
+                        'file' => $uploadFailureAttachment,
+                    ],
+                    1 => [
+                        'file' => $invalidTypeAttachment,
+                    ],
+                ],
+            ],
+        ]);
+
+        $postData = [
+            'title' => 'New Article',
+            'teaser_image' => $missingTeaserImageUpload,
+            'attachments' => [
+                0 => [
+                    'file' => $uploadFailureAttachment,
+                    'description' => 'Upload failure attachment',
+                ],
+                1 => [
+                    'file' => $invalidTypeAttachment,
+                    'description' => 'Invalid type attachment',
+                ],
+            ],
+        ];
+        $this->post('/articles/add', $postData);
+
+        $this->assertResponseOk();
+        $this->assertFlashMessage('The article could not be saved');
+        $this->assertResponseContains('A teaser image is required');
+        $this->assertResponseContains('Max allowed filesize exceeded');
+        $this->assertResponseContains('Unsupported file type');
+        $this->assertFileNotExists('/path/to/uploads/teaser.jpg');
+        $this->assertFileNotExists('/path/to/uploads/attachment.txt');
+        $this->assertFileNotExists('/path/to/uploads/attachment.exe');
+    }
+
 Disabling Error Handling Middleware in Tests
 --------------------------------------------
 

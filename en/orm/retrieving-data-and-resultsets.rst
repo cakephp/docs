@@ -304,11 +304,12 @@ the Author entity. ::
 
     // In your finders/controller:
     $query = $articles->find('list', [
-        'keyField' => 'id',
-        'valueField' => function ($article) {
-            return $article->author->get('label');
-        }
-    ]);
+            'keyField' => 'id',
+            'valueField' => function ($article) {
+                return $article->author->get('label');
+            }
+        ])
+        ->contain('Authors');
 
 You can also fetch the label in the list directly using. ::
 
@@ -552,6 +553,7 @@ to ``true``::
     in your association definitions,  not the property name used to hold the association record(s).
     For example, if you have declared an assocation as ``belongsTo('Users')`` then you must 
     use ``contain('Users')`` and not ``contain('users')`` or ``contain('user')``.
+
 
 Passing Conditions to Contain
 -----------------------------
@@ -863,7 +865,7 @@ result set.
 Changing Fetching Strategies
 ============================
 
-As mentioned in :ref:`contain-conditions`, you can customize the ``strategy``
+As mentioned in earlier, you can customize the ``strategy``
 used by an association in a ``contain()``.
 
 If you look at ``BelongsTo`` and ``HasOne`` ref:`associations` options,

@@ -1,11 +1,13 @@
 CakePHP num piscar de olhos
 ###########################
 
-O CakePHP foi desenvolvido para tornar tarefas de desenvolvimento web mais simples e fáceis. Ao fornecer uma caixa de ferramentas tudo-em-um para você começar, as várias partes do CakePHP funcionam bem juntas ou separadamente.
+O CakePHP é desenvolvido para tornar tarefas rotineiras do desenvolvimento web 
+mais simples e fáceis. Ao fornecer uma caixa de ferramentas completa para você 
+começar, as várias partes do CakePHP funcionam bem juntas ou separadamente.
 
-O objetivo desta análise é introduzir os conceitos gerais presentes no CakePHP
+O objetivo desta apresentação é introduzir os conceitos gerais presentes no CakePHP
 e lhe dar uma rápida visão geral de como esses conceitos são implementados. Se
-você está ancioso para começar um projeto, você pode :doc:`começar com o tutorial
+você está ansioso para começar um projeto, você pode :doc:`começar com o tutorial
 </tutorials-and-examples/bookmarks/intro>`, ou
 :doc:`mergulhar na documentação</topics>`.
 
@@ -13,12 +15,11 @@ Convenções Sobre Configuração
 =============================
 
 O CakePHP provê uma estrutura organizacional básica que cobre nomenclaturas de
-classes, arquivos, banco de dados e outras
-convenções. Apesar das convenções levarem algum tempo para serem assimiladas,
-ao seguí-las o CakePHP evita configurações desnecessárias e cria uma estrutura de
-aplicação uniforme que faz trabalhar com vários projetos uma tarefa suave. O
-:doc:`capítulo de convenções</intro/conventions>` explica as várias convenções
-que o CakePHP utiliza.
+classes, arquivos, banco de dados e outras convenções. Apesar das convenções 
+levarem algum tempo para serem assimiladas, ao seguí-las você evita configurações 
+desnecessárias e cria uma estrutura de aplicação uniforme, que faz trabalhar com 
+vários projetos uma tarefa suave. O :doc:`capítulo de convenções</intro/conventions>` 
+explica as várias convenções que o CakePHP utiliza.
 
 A Camada Model
 ==============

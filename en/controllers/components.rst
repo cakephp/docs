@@ -222,8 +222,7 @@ Using Other Components in your Component
 ----------------------------------------
 
 Sometimes one of your components may need to use another component.
-In this case you can include other components in your component the exact same
-way you include them in controllers - using the ``$components`` var::
+You can load other components by adding them to the `$components` property::
 
     // src/Controller/Component/CustomComponent.php
     namespace App\Controller\Component;
@@ -233,7 +232,7 @@ way you include them in controllers - using the ``$components`` var::
     class CustomComponent extends Component
     {
         // The other component your component uses
-        public $components = ['Existing'];
+        protected $components = ['Existing'];
 
         // Execute any other additional setup for your component.
         public function initialize(array $config): void

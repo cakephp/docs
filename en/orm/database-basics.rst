@@ -472,9 +472,9 @@ By default the ``toStatement()`` method will treat values as strings which will
 work for our new type. Once we've created our new type, we need to add it into
 the type mapping. During our application bootstrap we should do the following::
 
-    use Cake\Database\Type;
+    use Cake\Database\TypeFactory;
 
-    Type::map('json', 'App\Database\Type\JsonType');
+    TypeFactory::map('json', 'App\Database\Type\JsonType');
 
 We can then overload the reflected schema data to use our new type, and
 CakePHP's database layer will automatically convert our JSON data when creating
@@ -617,10 +617,10 @@ Because Date/Time objects are easily mutated in place, CakePHP allows you to
 enable immutable value objects. This is best done in your application's
 **config/bootstrap.php** file::
 
-    Type::build('datetime')->useImmutable();
-    Type::build('date')->useImmutable();
-    Type::build('time')->useImmutable();
-    Type::build('timestamp')->useImmutable();
+    TypeFactory::build('datetime')->useImmutable();
+    TypeFactory::build('date')->useImmutable();
+    TypeFactory::build('time')->useImmutable();
+    TypeFactory::build('timestamp')->useImmutable();
 
 .. note::
     New applications will have immutable objects enabled by default.

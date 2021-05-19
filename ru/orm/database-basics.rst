@@ -395,7 +395,7 @@ json
     namespace App\Database\Type;
 
     use Cake\Database\Driver;
-    use Cake\Database\Type;
+    use Cake\Database\TypeFactory;
     use PDO;
 
     class JsonType extends Type
@@ -436,9 +436,9 @@ json
 для нового типа. Как только новый тип создан, необходимо добавить его в отображение типа.
 Во время начальной загрузки приложения необходимо сделать следующее::
 
-    use Cake\Database\Type;
+    use Cake\Database\TypeFactory;
 
-    Type::map('json', 'App\Database\Type\JsonType');
+    TypeFactory::map('json', 'App\Database\Type\JsonType');
 
 Затем мы можем перезагрузить данные отраженной схемы для использования нового типа,
 и слой базы данных CakePHP автоматически конвертирует JSON данные при создании запросов.
@@ -579,10 +579,10 @@ json
 неизменяемые объект-значения. Наилучшим образом это можно сделать в файле
 **config/bootstrap.php**::
 
-    Type::build('datetime')->useImmutable();
-    Type::build('date')->useImmutable();
-    Type::build('time')->useImmutable();
-    Type::build('timestamp')->useImmutable();
+    TypeFactory::build('datetime')->useImmutable();
+    TypeFactory::build('date')->useImmutable();
+    TypeFactory::build('time')->useImmutable();
+    TypeFactory::build('timestamp')->useImmutable();
 
 .. note::
     В новых приложениях неизменяемые объекты используются по умолчанию.

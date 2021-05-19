@@ -807,7 +807,7 @@ on failure. You can disable rules and/or transactions using the
 Saving Associations
 -------------------
 
-When you are saving an entity, you can also elect to save some or all of the
+When you are saving an entity, you can also choose to save some or all of the
 associated entities. By default all first level entities will be saved. For
 example saving an Article, will also automatically update any dirty entities
 that are directly related to articles table.
@@ -1075,9 +1075,9 @@ This functionality is achieved by using the custom types system. See the
 :ref:`adding-custom-database-types` section to find out how to build custom
 column Types::
 
-    use Cake\Database\Type;
+    use Cake\Database\TypeFactory;
 
-    Type::map('json', 'Cake\Database\Type\JsonType');
+    TypeFactory::map('json', 'Cake\Database\Type\JsonType');
 
     // In src/Model/Table/UsersTable.php
     use Cake\Database\Schema\TableSchemaInterface;

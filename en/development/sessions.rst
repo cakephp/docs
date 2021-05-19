@@ -288,7 +288,7 @@ something like::
         // Removes expired sessions.
         public function gc($expires = null): bool
         {
-            return Cache::clear(true, $this->cacheKey) && parent::gc($expires);
+            return Cache::clear($this->cacheKey) && parent::gc($expires);
         }
     }
 

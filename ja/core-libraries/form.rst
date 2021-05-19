@@ -27,28 +27,22 @@
 
     class ContactForm extends Form
     {
-
-        protected function _buildSchema(Schema $schema)
+        protected function _buildSchema(Schema $schema): Schema
         {
             return $schema->addField('name', 'string')
                 ->addField('email', ['type' => 'string'])
                 ->addField('body', ['type' => 'text']);
         }
 
-        protected function _buildValidator(Validator $validator)
+        public function validationDefault(Validator $validator): Validator
         {
-            $validator->add('name', 'length', [
-                    'rule' => ['minLength', 10],
-                    'message' => '名前は必須です'
-                ])->add('email', 'format', [
-                    'rule' => 'email',
-                    'message' => '有効なメールアドレスが要求されます',
-                ]);
+            $validator->minLength('name', 10)
+                ->email('email');
 
             return $validator;
         }
 
-        protected function _execute(array $data)
+        protected function _execute(array $data): bool
         {
             // メールを送信する
             return true;
@@ -135,17 +129,17 @@
         }
     }
 
-3.7.0 より前の場合は、request を修正してフォームのデフォルト値を設定してください。 ::
+値はリクエストメソッドが GET の時にのみ定義する必要があります。そうしないと、修正が必要なバリデーションエラーの直前の POST データを上書きしてしまいます。
+また、 ``set()`` を使用して、個々のフィールドまたはフィールドのサブセットを追加または置換することができます。::
 
-    // GET 時にデフォルト値を設定
-    if ($this->request->is('get')) {
-        // たとえばユーザーモデルの値
-        $this->request->data('name', 'John Doe');
-        $this->request->data('email','john.doe@example.com');
-    }
+    // 一つのフィールドをセット
+    $contact->set('name', 'John Doe');
 
-値はリクエストメソッドが GET の時にのみ定義されるべきで、
-さもないと修正が必要なバリデーションエラーのある直前の POST データを上書きしてしまいます。
+    // 複数のフィールドをセット;
+    $contact->set([
+        'name' => 'John Doe',
+        'email' => 'john.doe@example.com',
+    ]);
 
 フォームエラーの取得
 ====================

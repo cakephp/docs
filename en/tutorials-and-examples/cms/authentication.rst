@@ -3,7 +3,7 @@ CMS Tutorial - Authentication
 
 Now that our CMS has users, we can enable them to login using the
 `cakephp/authentication <https://book.cakephp.org/authentication/2>`__
-plugin. We'll start off by ensurin passwords are stored securely in
+plugin. We'll start off by ensuring passwords are stored securely in
 our database. Then we are going to provide a working login and logout, and
 enable new users to register.
 
@@ -112,6 +112,7 @@ In **src/Application.php**, add the following imports::
     use Authentication\AuthenticationServiceInterface;
     use Authentication\AuthenticationServiceProviderInterface;
     use Authentication\Middleware\AuthenticationMiddleware;
+    use Cake\Routing\Router;
     use Psr\Http\Message\ServerRequestInterface;
 
 Then implement the authentication interface on your ``Application`` class::
@@ -138,7 +139,7 @@ Then add the following::
     public function getAuthenticationService(ServerRequestInterface $request): AuthenticationServiceInterface
     {
         $authenticationService = new AuthenticationService([
-            'unauthenticatedRedirect' => '/users/login',
+            'unauthenticatedRedirect' => Router::url('/users/login'),
             'queryParam' => 'redirect',
         ]);
 
@@ -158,7 +159,7 @@ Then add the following::
                 'username' => 'email',
                 'password' => 'password',
             ],
-            'loginUrl' => '/users/login',
+            'loginUrl' => Router::url('/users/login'),
         ]);
 
         return $authenticationService;
