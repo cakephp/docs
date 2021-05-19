@@ -731,7 +731,7 @@ loading the matching records like ``matching()``. You can create just the
         return $q->where(['Tags.name' => 'CakePHP']);
     });
 
-``innerJoinWith()`` allows you to the same parameters and dot notation::
+``innerJoinWith()`` allows you to use the same parameters and dot notation::
 
     $query = $products->find()->innerJoinWith(
         'Shops.Cities.Countries', function ($q) {
