@@ -33,9 +33,9 @@ CakePHPはコントローラーでアクションを呼ぶ際サービスコン�
 シングルサインオンプロバイダーからユーザーを取得し、ローカルのデータベースにその値が存在すると保証されている必要があります。
 このサービスはコントローラーに注入されているからこそ、テストをする際に簡単に実装をモックオブジェクトや偽のサブクラスと交換できるのです。
 
-Here an example of an injected service inside a command::
+コマンド内でサービス注入を行う例::
 
-    // In src/Command/CheckUsersCommand.php
+    // src/Command/CheckUsersCommand.php
     class CheckUsersCommand extends Command
     {
         /** @var UsersService */
@@ -54,7 +54,7 @@ Here an example of an injected service inside a command::
 
     }
 
-    // In src/Application.php
+    // src/Application.php
     public function services( ContainerInterface $container ): void
     {
         $container
@@ -62,26 +62,24 @@ Here an example of an injected service inside a command::
             ->addArgument(UsersService::class);
     }
 
-The injection process is a bit different here. Instead of adding the
-``UsersService`` to the container we first have to add the Command as
-a whole to the Container and add the ``UsersService`` as an argument.
-With that you can then access that service inside the constructor
-of the command.
+注入過程は少し異なります。
+``UsersService`` の代わりにコマンドを始めに追加する必要があります。
+全体としてコマンドにコンテナと ``UsersService`` を引数として与えます。
+そうすることでコマンド内コンストラクタのサービスにアクセスすることができるのです。
 
-
-Adding Services
+サービスの追加
 ===============
-In order to have services created by the container, you need to tell it which
-classes it can create and how to build those classes. The
-simplest definition is via a class name::
+コンテナに作成したサービスを持たせるには、
+どのクラスが作成でき、どうビルドするかを伝える必要があります。
 
-    // Add a class by its name.
+最もシンプルな方法はクラス名で定義することです::
+
+    // 名前でクラスを追加する
     $container->add(BillingService::class);
 
-Your application and plugins define the services they have in the
-``services()`` hook method::
+アプリとプラグイン内の ``services()`` フックメソッドからサービスを定義します。::
 
-    // in src/Application.php
+    // src/Application.php
     namespace App;
 
     use App\Service\BillingService;
@@ -96,62 +94,59 @@ Your application and plugins define the services they have in the
         }
     }
 
-You can define implementations for interfaces that your application uses::
+アプリケーションが使うインターフェースに実装を定義できます::
 
     use App\Service\AuditLogServiceInterface;
     use App\Service\AuditLogService;
 
-    // in your Application::services() method.
+    // あなたのApplication::services() メソッド内
 
-    // Add an implementation for an interface.
+    // 実装をインターフェースに追加
     $container->add(AuditLogServiceInterface::class, AuditLogService::class);
 
-The container can leverage factory functions to create objects if necessary::
+必要ならオブジェクト生成にコンテナ側でファクトリー関数を活用できます::
 
     $container->add(AuditLogServiceInterface::class, function (...$args) {
         return new AuditLogService(...$args);
     });
 
-Factory functions will receive all of the class' resolved dependencies as
-arguments.
+ファクトリー関数はすべてのクラス解決された依存関係を引数として受け取ります。
 
-Once you've defined a class, you also need to define the dependencies it
-requires. Those dependencies can be either objects or primitive values::
+一度クラスを定義すると求められる依存性も定義する必要があります。それらの依存性はオブジェクトやプリミティブ値にもなります。::
 
-    // Add a primitive value like a string, array or number.
+    // 文字列や配列や数値のプリミティブ値を追加する
     $container->add('apiKey', 'abc123');
 
     $container->add(BillingService::class)
         ->addArgument('apiKey');
 
-Adding Shared Services
+共有サービスを追加する
 ----------------------
 
-By default services are not shared. Every object (and dependencies) is created
-each time it is fetched from the container. If you want to re-use a single
-instance, often referred to as a singleton, you can mark a service as 'shared'::
+デフォルトではサービスは共有されません。オブジェクトや(依存性)はコンテナから取得される時にそれぞれ生成されます。
+もしシングルトン・パターンに基づく単一のインスタンスを再利用したい場合は、サービスに'shared'をつけてください。::
 
-    // in your Application::services() method.
+    // あなたのApplication::services()メソッド内で
 
     $container->share(BillingService::class);
 
-Extending Definitions
+定義の拡張
 ---------------------
 
-Once a service is defined you can modify or update the service definition by
-extending them. This allows you to add additional arguments to services defined
-elsewhere::
+定義の拡張によって、一度サービスが定義されてからも編集や更新が可能です。
+これにより、定義されたサービスに引数の追加ができます。
 
-    // Add an argument to a partially defined service elsewhere.
+どこかコード内で::
+
+    // 部分的に定義されたサービスのどこかで引数の追加
     $container->extend(BillingService::class)
         ->addArgument('logLevel');
 
-Tagging Services
+サービスのタグ化
 ----------------
 
-By tagging services you can get have all of those services resolved at the same
-time. This can be used to build services that combine collections of other
-services like in a reporting system::
+サービスのタグ化により同時にすべてのタグ化されたサービスを取得できます。
+レポートシステムなど他サービスのコレクションと組み合わせるサービスをビルドする際に使えます。::
 
     $container->add(BillingReport::class)->addTag('reports');
     $container->add(UsageReport::class)->addTag('reports');
@@ -160,22 +155,21 @@ services like in a reporting system::
         return new ReportAggregate($container->get('reports'));
     });
 
-Using Configuration Data
+設定データを使用する場合
 ------------------------
 
-Often you'll need configuration data in your services. While you could add
-all the configuration keys your service needs into the container, that can be
-tedious. To make configuration easier to work with CakePHP includes an
-injectable configuration reader::
+しばしば、サービスで設定データが必要な時がありますよね。
+コンテナに入れる際必要なサービスの設定キーをすべて追加するなんてうんざりします。
+サービス設定をより簡単にするために、CakePHPの注入可能な設定読み込み機能を使います。::
+
 
     use Cake\Core\ServiceConfig;
 
-    // Use a shared instance
+    // シェアされたインスタンスを使用する
     $container->share(ServiceConfig::class);
 
-The ``ServiceConfig`` class provides a read-only view of all the data available
-in ``Configure`` so you don't have to worry about accidentally changing
-configuration.
+``ServiceConfig`` クラスは ``Configure`` で利用可能な全データのread-onlyな一覧を提供します。
+なので、誤って設定が変わる心配はありません。
 
 Service Providers
 =================
