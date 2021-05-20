@@ -4,12 +4,12 @@
 .. warning::
     DIコンテナはAPIがまだ安定していない実験的な特徴になります。
 
-CakePHPのサービスコンテナは依存性の注入(DI)によりアプリのサービスのためのクラス依存性を管理できます。
+CakePHPのサービスコンテナは依存性の注入(DI)によりアプリケーションのサービスのためのクラス依存性を管理できます。
 DIは手動でインスタンス化することなく、自動でコンストラクタを通してオブジェクトの依存性を"注入"します。
 
 サービスコンテナを使うことで‘application services’を定義することができ、
 これらのクラスはモデルを使います。また、loggerやmailerなどを使って
-再利用可能なワークフローの構築やアプリのビジネスロジックに作用します。
+再利用可能なワークフローの構築やアプリケーションのビジネスロジックに作用します。
 
 CakePHPはコントローラーでアクションを呼ぶ際サービスコンテナを使い、その後コンソールコマンドを呼び出します。
 コントローラーのコンストラクタにもDIを持たせることができます。
@@ -77,7 +77,7 @@ CakePHPはコントローラーでアクションを呼ぶ際サービスコン�
     // 名前でクラスを追加する
     $container->add(BillingService::class);
 
-アプリとプラグイン内の ``services()`` フックメソッドからサービスを定義します。::
+アプリケーションとプラグイン内の ``services()`` フックメソッドからサービスを定義します。::
 
     // src/Application.php
     namespace App;
@@ -134,9 +134,9 @@ CakePHPはコントローラーでアクションを呼ぶ際サービスコン�
 ---------------------
 
 定義の拡張によって、一度サービスが定義されてからも編集や更新が可能です。
-これにより、定義されたサービスに引数の追加ができます。
+これにより、定義されたサービスに引数を追加できます。
 
-どこかコード内で::
+コード内どこかで::
 
     // 部分的に定義されたサービスのどこかで引数の追加
     $container->extend(BillingService::class)
@@ -171,23 +171,23 @@ CakePHPはコントローラーでアクションを呼ぶ際サービスコン�
 ``ServiceConfig`` クラスは ``Configure`` で利用可能な全データのread-onlyな一覧を提供します。
 なので、誤って設定が変わる心配はありません。
 
-Service Providers
+サービス・プロバイダー
 =================
 
-Service providers allow you to group related services together helping you
-organize your services. Service providers can help increase your application's
-performance as defined services are lazily registered after
-their first use.
+サービス・プロバイダーによって関連したサービスをまとめ上げる補助をし、グループ化することができます。
 
-Creating Service Providers
+また、サービス・プロバイダーは定義したサービスが初めて使われる際、遅延登録され
+アプリケーションのパフォーマンスを上げることができます。
+
+サービス・プロバイダーの作成
 --------------------------
 
-An example ServiceProvider would look like::
+ServiceProviderの一例::
 
     namespace App\ServiceProvider;
 
     use Cake\Core\ServiceProvider;
-    // Other imports here.
+    // 他はここにインポート
 
     class BillingServiceProvider extends ServiceProvider
     {
@@ -203,33 +203,34 @@ An example ServiceProvider would look like::
         }
     }
 
-Service providers use their ``services()`` method to define all the services they
-will provide. Additionally those services  **must be** defined in the ``$provides``
-property. Failing to include a service in the ``$provides`` property will result
-in it not be loadable from the container.
+サービス・プロバイダーは自身の ``services()`` メソッドを使って、提供するサービスをすべて定義します。
+さらに、それらのサービスは **絶対に** ``$provides`` に正しく定義する必要があります。
+正しく ``$provides`` に含められなかった場合、コンテナから読み込めなくなります。
 
-Using Service Providers
+サービス・プロバイダーの使用
 -----------------------
 
-To load a service provider add it into the container using the
-``addServiceProvider()`` method::
+サービス・プロバイダーを読み込むには ``addServiceProvider()`` メソッドを使ってコンテナに追加してください::
 
-    // in your Application::services() method.
+    // Application::services()メソッド内で
     $container->addServiceProvider(new BillingServiceProvider());
 
-Bootable ServiceProviders
+起動可能なサービス・プロバイダー
 -------------------------
 
-If your service provider needs to run logic when it is added to the container,
-you can implement the ``bootstrap()`` method. This situation can come up when your
-service provider needs to load additional configuration files, load additional
-service providers or modify a service defined elsewhere in your application. An
-example of a bootable service would be::
+もしサービス・プロバイダーがコンテナに追加された時、ロジックを走らせる必要がある場合
+``bootstrap()`` メソッドを使ってください。
+想定される状況として
+サービス・プロバイダーが追加の設定ファイルを読み込む必要があったり、
+追加のサービス・プロバイダーを読み込んだり、
+アプリケーションのどこかで定義されたサービスを変更する場合などが考えられます。
+
+起動可能なサービス・プロバイダーの例::
 
     namespace App\ServiceProvider;
 
     use Cake\Core\ServiceProvider;
-    // Other imports here.
+    // 他はここにインポート
 
     class BillingServiceProvider extends ServiceProvider
     {
@@ -247,21 +248,19 @@ example of a bootable service would be::
 
 .. _mocking-services-in-tests:
 
-Mocking Services in Tests
+サービスをモック化してテストする
 =========================
 
-In tests that use ``ConsoleIntegrationTestTrait`` or ``IntegrationTestTrait``
-you can replace services that are injected via the container with mocks or
-stubs::
+テスト内で ``ConsoleIntegrationTestTrait`` や ``IntegrationTestTrait`` を使うことででコンテナを通して注入されるサービスとスタブやモックを入れ替えることができます。::
 
-    // In a test method or setup().
+    // テストメソッドやsetup()内で
     $this->mockService(StripeService::class, function () {
         return new FakeStripe();
     });
 
-    // If you need to remove a mock
+    // モックを削除する場合
     $this->removeMockService(StripeService::class);
 
-Any defined mocks will be replaced in your application's container during
-testing, and automatically injected into your controllers and commands. Mocks
-are cleaned up at the end of each test.
+テスト時には定義されたどんなモックもアプリケーションのコンテナ内で交換されます。
+そして、自動的にコンテナやコマンドに注入されます。
+それぞれのテストの最後でモックは除去されます。
