@@ -119,8 +119,8 @@ The container can leverage factory functions to create objects if necessary::
         return new AuditLogService(...$args);
     });
 
-Factory functions will receive all of the class' resolved dependencies as
-arguments.
+Factory functions will receive all of the resolved dependencies for the class
+as arguments.
 
 Once you've defined a class, you also need to define the dependencies it
 requires. Those dependencies can be either objects or primitive values::

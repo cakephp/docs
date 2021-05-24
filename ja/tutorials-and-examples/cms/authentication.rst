@@ -103,6 +103,7 @@ bcrypt は `PHPの推奨パスワードハッシュアルゴリズム <https://w
     use Authentication\AuthenticationServiceInterface;
     use Authentication\AuthenticationServiceProviderInterface;
     use Authentication\Middleware\AuthenticationMiddleware;
+    use Cake\Routing\Router;
     use Psr\Http\Message\ServerRequestInterface;
 
 次に ``Application`` クラスに認証インターフェースを実装します::
@@ -129,7 +130,7 @@ bcrypt は `PHPの推奨パスワードハッシュアルゴリズム <https://w
     public function getAuthenticationService(ServerRequestInterface $request): AuthenticationServiceInterface
     {
         $authenticationService = new AuthenticationService([
-            'unauthenticatedRedirect' => '/users/login',
+            'unauthenticatedRedirect' => Router::url('/users/login'),
             'queryParam' => 'redirect',
         ]);
 
@@ -149,7 +150,7 @@ bcrypt は `PHPの推奨パスワードハッシュアルゴリズム <https://w
                 'username' => 'email',
                 'password' => 'password',
             ],
-            'loginUrl' => '/users/login',
+            'loginUrl' => Router::url('/users/login'),
         ]);
 
         return $authenticationService;

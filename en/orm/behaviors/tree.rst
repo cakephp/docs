@@ -23,9 +23,9 @@ Requirements
 
 This behavior requires the following columns in your table:
 
-- ``parent_id`` (nullable) The column holding the ID of the parent row
-- ``lft`` (integer, signed) Used to maintain the tree structure
-- ``rght`` (integer, signed) Used to maintain the tree structure
+- ``parent_id`` (nullable) The column holding the ID of the parent row. This column should be indexed.
+- ``lft`` (integer, signed) Used to maintain the tree structure. This column should be indexed.
+- ``rght`` (integer, signed) Used to maintain the tree structure.
 
 You can configure the name of those fields should you need to customize them.
 More information on the meaning of the fields and how they are used can be found

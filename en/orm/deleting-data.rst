@@ -96,8 +96,9 @@ function returns the number of deleted records as an integer.
 
 .. warning::
 
-    deleteAll will *not* trigger beforeDelete/afterDelete events. If you need those
-    first load a collection of records and delete them.
+    deleteAll will *not* trigger beforeDelete/afterDelete events.
+    If you need callbacks triggered, first load the entities with ``find()``
+    and delete them in a loop.
 
 Strict Deletes
 --------------

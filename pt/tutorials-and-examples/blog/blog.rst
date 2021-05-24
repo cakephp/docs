@@ -32,8 +32,10 @@ Instalação do CakePHP
 A maneira mais fácil de instalar o CakePHP é usando Composer, um gerenciador
 de dependências para o PHP. Se trata de uma forma simples de instalar o
 CakePHP a partir de seu terminal ou prompt de comando. Primeiro, você
-precisa baixar e instalar o Composer. Se possuir instalada a extensão *cURL*
-do PHP, execute o seguinte comando::
+precisa baixar e instalar o Composer, caso você já não o tenha. Se possuir
+instalado o programa *cURL*, basta executar o seguinte comando::
+
+.. code-block:: bash
 
     curl -s https://getcomposer.org/installer | php
 
