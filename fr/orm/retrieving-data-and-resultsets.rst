@@ -1102,7 +1102,7 @@ Vous pouvez utiliser la méthode ``isEmpty()`` sur un objet Query ou ResultSet
 pour voir s'il contient au moins une colonne. Appeler ``isEmpty()`` sur un
 objet Query va évaluer la requête::
 
-    // VérifieCheck une requête.
+    // Vérifie une requête.
     $query->isEmpty();
 
     // Vérifie les résultats.
