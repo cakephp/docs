@@ -27,6 +27,12 @@ features::
 A new configuration option has been added to disable deprecations on a path by
 path basis. See :ref:`deprecation-warnings` for more information.
 
+Log
+---
+
+- ``FileLog`` moved the ``dateFormat`` config option to ``DefaultFormatter``.
+- ``ConsoleLog`` moved the ``dateFormat`` config option to ``DefaultFormatter``.
+- ``SyslogLog`` moved the ``format`` config option to ``SyslogFormatter``.
 
 Behavior Changes
 ================
@@ -71,7 +77,11 @@ Breaking Changes
 Behind the API, some breaking changes are necessary moving forward.
 They usually only affect tests.
 
-- No breaking changes.
+Log
+---
+
+- ``BaseLog::_getFormattedDate()`` and ``dateFormat`` config were removed
+  since the message formatting logic was moved into log formatters.
 
 
 New Features
@@ -97,6 +107,18 @@ Http
 - The ``CspMiddleware`` now sets the ``cspScriptNonce`` and ``cspStyleNonce``
   request attributes which streamlines the adoption of strict
   content-security-policy rules.
+  
+Log
+---
+
+- Log engines now use formatters to format the message string before writing.
+  This can be configured with the ``formatter`` config option. Any log engine configs
+  that were moved to the formatter are copied with a deprecation notice.
+- ``AbstractFormatter`` was added for all custom formatters to extend.
+- ``DefaultFormatter`` was added which creates the existing message format used by
+  ``ConsoleLog`` and ``FileLog`. This formatter is the default for that log engine.
+- ``SyslogFormatter`` was added which creates the existing message format used by
+  ``SyslogLog``. This formatter is the default for that log engine.
 
 ORM
 ---
