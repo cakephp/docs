@@ -120,7 +120,7 @@ des lignes, les convertissez en tableau, ou quand la méthode
     // et retourne l'ensemble de résultats.
     $results = $query->all();
 
-    // Once we have a result set we can get all the rows
+    // Une fois le résultat obtenu, nous pouvons en récupérer toutes les lignes
     $data = $results->toArray();
 
     // Convertir la requête en tableau va l'exécuter.
