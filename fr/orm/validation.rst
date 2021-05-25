@@ -257,12 +257,9 @@ Récupérer des Validators depuis les Tables
 Une fois que vous avez créé quelques ensembles de validation dans votre classe
 table, vous pouvez récupérer l'objet résultant via son nom::
 
-    $defaultValidator = $usersTable->validator('default');
+    $defaultValidator = $usersTable->getValidator('default');
 
-    $hardenedValidator = $usersTable->validator('hardened');
-
-.. deprecated:: 3.5.0
-    ``validator()`` est dépréciée. Utilisez ``getValidator()`` à la place.
+    $hardenedValidator = $usersTable->getValidator('hardened');
 
 Classe Validator par Défault
 ============================
