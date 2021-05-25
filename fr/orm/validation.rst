@@ -482,7 +482,7 @@ le faire en créant votre propre règle invokable::
     {
         $rules->add(new IsUniqueWithNulls(['parent_id', 'instance_id', 'name']), 'uniqueNamePerParent', [
             'errorField' => 'name',
-            'message' => 'Name must be unique per parent.'
+            'message' => 'Doit être unique pour chaque parent.'
         ]);
         return $rules;
     }
@@ -505,7 +505,7 @@ utile de packager ces règles dans des classes réutilisables::
     {
         public function __invoke(EntityInterface $entity, array $options)
         {
-            // Do work
+            // Faire le boulot ici
             return false;
         }
     }
@@ -600,7 +600,7 @@ fois que ``save()`` ou ``delete()`` sont appelées::
     }
 
     // Autre part dans le code de votre application
-    $userEntity->email = 'a@duplicated.email';
+    $userEntity->email = 'a@email.en.doblon';
     $usersTable->save($userEntity); // Retourne false
 
 Alors que la validation est conçue pour les données provenant directement
