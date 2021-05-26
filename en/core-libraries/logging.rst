@@ -321,7 +321,7 @@ properties are passed to the log engine's constructor as an array. ::
 
     class DatabaseLog extends BaseLog
     {
-        public function __construct(array $config= [])
+        public function __construct(array $config = [])
         {
             parent::__construct($config);
             // ...
