@@ -214,7 +214,7 @@ Logging to Files
 As its name implies ``FileLog`` writes log messages to files. The level of log
 message being written determines the name of the file the message is stored in.
 If a level is not supplied, :php:const:`LOG_ERR` is used which writes to the
-error log. The default log location is ``logs/$level.log``::
+error log. The default log location is **logs/$level.log**::
 
     // Executing this inside a CakePHP class
     $this->log("Something didn't work!");
@@ -321,13 +321,13 @@ properties are passed to the log engine's constructor as an array. ::
 
     class DatabaseLog extends BaseLog
     {
-        public function __construct($options = [])
+        public function __construct(array $config= [])
         {
-            parent::__construct($options);
+            parent::__construct($config);
             // ...
         }
 
-        public function log($level, $message, array $context = [])
+        public function log($level, string $message, array $context = [])
         {
             // Write to the database.
         }
