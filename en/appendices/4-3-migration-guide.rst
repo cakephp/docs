@@ -107,18 +107,19 @@ Http
 - The ``CspMiddleware`` now sets the ``cspScriptNonce`` and ``cspStyleNonce``
   request attributes which streamlines the adoption of strict
   content-security-policy rules.
-  
+
 Log
 ---
 
 - Log engines now use formatters to format the message string before writing.
-  This can be configured with the ``formatter`` config option. Any log engine configs
-  that were moved to the formatter are copied with a deprecation notice.
+  This can be configured with the ``formatter`` config option. See the
+  :ref:`logging-formatters` section for more details.
 - ``AbstractFormatter`` was added for all custom formatters to extend.
-- ``DefaultFormatter`` was added which creates the existing message format used by
-  ``ConsoleLog`` and ``FileLog`. This formatter is the default for that log engine.
-- ``SyslogFormatter`` was added which creates the existing message format used by
-  ``SyslogLog``. This formatter is the default for that log engine.
+- ``DefaultFormatter`` was added. It creates the existing message format used
+  by ``ConsoleLog`` and ``FileLog``.
+- ``SyslogFormatter`` was added. It creates the existing message format used
+  by ``SyslogLog``.
+
 
 ORM
 ---
