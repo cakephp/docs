@@ -187,7 +187,7 @@ diviser leur process de construction en de petites étapes réutilisables::
 
     public function validationeHardened(Validator $validator)
     {
-        $validator = $this->validationeDefault($validator);
+        $validator = $this->validationDefault($validator);
 
         $validator->add('password', 'length', ['rule' => ['lengthBetween', 8, 100]]);
         return $validator;
@@ -203,9 +203,9 @@ Validation Providers
 Les règles de validation peuvent utiliser les fonctions définies sur tout
 provider connu. Par défaut, CakePHP définit quelques providers:
 
-1. Les méthodes sur la classe table, ou ses behaviors sont disponible sur
+1. Les méthodes sur la classe table, ou ses behaviors, sont disponibles sur
    le provider ``table``.
-2. La classe de :php:class:`~Cake\\Validation\\Validation` du coeur est
+2. La classe :php:class:`~Cake\\Validation\\Validation` du cœur est
    configurée avec le provider ``default``.
 
 Quand une règle de validation est créée, vous pouvez nommer le provider de cette
@@ -257,14 +257,11 @@ Récupérer des Validators depuis les Tables
 Une fois que vous avez créé quelques ensembles de validation dans votre classe
 table, vous pouvez récupérer l'objet résultant via son nom::
 
-    $defaultValidator = $usersTable->validator('default');
+    $defaultValidator = $usersTable->getValidator('default');
 
-    $hardenedValidator = $usersTable->validator('hardened');
+    $hardenedValidator = $usersTable->getValidator('hardened');
 
-.. deprecated:: 3.5.0
-    ``validator()`` est dépréciée. Utilisez ``getValidator()`` à la place.
-
-Classe Validator par Défault
+Classe Validator par Défaut
 ============================
 
 Comme mentionné ci-dessus, par défaut les méthodes de validation reçoivent
@@ -405,7 +402,7 @@ une classe de règle ``ExistsIn``::
     $rules->add($rules->existsIn(['site_id', 'article_id'], 'articles'));
 
 Les champs dont il faut vérifier l'existence dans la table liée doivent faire
-parti de la clé primaire.
+partie de la clé primaire.
 
 Vous pouvez forcer ``existsIn`` à passer quand des parties qui peuvent être
 nulles de votre clé étrangère composite sont nulles::
@@ -485,7 +482,7 @@ le faire en créant votre propre règle invokable::
     {
         $rules->add(new IsUniqueWithNulls(['parent_id', 'instance_id', 'name']), 'uniqueNamePerParent', [
             'errorField' => 'name',
-            'message' => 'Name must be unique per parent.'
+            'message' => 'Doit être unique pour chaque parent.'
         ]);
         return $rules;
     }
@@ -508,7 +505,7 @@ utile de packager ces règles dans des classes réutilisables::
     {
         public function __invoke(EntityInterface $entity, array $options)
         {
-            // Do work
+            // Faire le boulot ici
             return false;
         }
     }
@@ -575,7 +572,7 @@ sont passés puisque c'est ce qui est reçu par n'importe quelle requête::
     {
         $validator->add('confirm_password', 'no-misspelling', [
             'rule' => ['compareWith', 'password'],
-            'message' => 'Les mot de passe ne sont pas égaux',
+            'message' => 'Les mots de passe ne sont pas identiques',
         ]);
 
         ...
@@ -603,7 +600,7 @@ fois que ``save()`` ou ``delete()`` sont appelées::
     }
 
     // Autre part dans le code de votre application
-    $userEntity->email = 'a@duplicated.email';
+    $userEntity->email = 'a@email.en.doblon';
     $usersTable->save($userEntity); // Retourne false
 
 Alors que la validation est conçue pour les données provenant directement
@@ -618,7 +615,7 @@ données générées à l'intérieur de l'application::
         };
         $rules->add($check, [
             'errorField' => 'shipping_mode',
-            'message' => 'Pas de frais de port gratuit pour une commande de moins de 100!'
+            'message' => 'Pas de frais de port gratuits pour une commande de moins de 100!'
         ]);
         return $rules;
     }

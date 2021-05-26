@@ -1501,15 +1501,15 @@ les champs ``files``,
     type d'envodage du formulaire en définissant l'option type à 'file' dans
     ``$this->Form->create()``.
 
-Creating Date & Time Related Controls
--------------------------------------
+Créer des éléments de formulaire pour les dates et heures
+---------------------------------------------------------
 
 .. _datetime-options:
 
 Les Options communes pour les éléments Date et Time
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-These options are common for the date and time related controls:
+Ces options sont communes à tous les éléments de formulaires traitant des dates et heures:
 
 * ``'empty'`` - Si à ``true``, un élément ``option`` vide sera ajouté dans le
   ``select`` en début de liste. Si vous fournissez une chaîne, elle sera utilisé
