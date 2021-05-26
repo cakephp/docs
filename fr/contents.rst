@@ -76,8 +76,8 @@ Contenu
     :caption: Plugins & Packages
 
     standalone-packages
-    Authentication <https://book.cakephp.org/authentication/2/>
-    Authorization <https://book.cakephp.org/authorization/2/>
+    Authentification <https://book.cakephp.org/authentication/2/>
+    Autorisation <https://book.cakephp.org/authorization/2/>
     Bake <https://book.cakephp.org/bake/2/>
     Debug Kit <https://book.cakephp.org/debugkit/4/>
     Migrations <https://book.cakephp.org/migrations/3/>
