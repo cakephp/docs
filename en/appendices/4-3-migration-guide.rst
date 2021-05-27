@@ -114,12 +114,6 @@ Log
 - Log engines now use formatters to format the message string before writing.
   This can be configured with the ``formatter`` config option. See the
   :ref:`logging-formatters` section for more details.
-- ``AbstractFormatter`` was added for all custom formatters to extend.
-- ``DefaultFormatter`` was added. It creates the existing message format used
-  by ``ConsoleLog`` and ``FileLog``.
-- ``SyslogFormatter`` was added. It creates the existing message format used
-  by ``SyslogLog``.
-
 
 ORM
 ---
