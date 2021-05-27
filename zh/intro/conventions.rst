@@ -80,7 +80,7 @@ Entity 类名是单数、首字母大写、无后缀的。``User``、``ArticleCa
 视图约定
 ========
 
-视图模板文件使用它对应的控制器方法的名字以下划线形式命名。``ArticlesController`` 类的 ``viewAll()`` 防范将会对应视图模板文件 **templates/Articles/view_all.php**。
+视图模板文件使用它对应的控制器方法的名字以下划线形式命名。``ArticlesController`` 类的 ``viewAll()`` 方法将会对应视图模板文件 **templates/Articles/view_all.php**。
 
 基本模式就是：**templates/Controller/underscored_function_name.php**。
 
