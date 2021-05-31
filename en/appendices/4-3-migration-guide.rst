@@ -32,7 +32,8 @@ Log
 
 - ``FileLog`` moved the ``dateFormat`` config option to ``DefaultFormatter``.
 - ``ConsoleLog`` moved the ``dateFormat`` config option to ``DefaultFormatter``.
-- ``SyslogLog`` moved the ``format`` config option to ``SyslogFormatter``.
+- ``SyslogLog`` moved the ``format`` config option to ``LegacySyslogFormatter``.
+  Defaults to ``DefaultFormatter`` now.
 
 Behavior Changes
 ================
