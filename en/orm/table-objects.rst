@@ -304,6 +304,18 @@ saves where database operations are implicitly committed. The event is triggered
 only for the primary table on which ``save()`` is directly called. The event is
 not triggered if a transaction is started before calling save.
 
+    // In a controller
+    $articles->save($article, ['customVariable' => 'yourValue']);
+    
+    // In ArticlesTable.php
+    public function afterSaveCommit(Event $event, EntityInterface $entity, ArrayObject $options)
+    {
+        $customVariable = $options['customVariable'];	// 'yourValue'
+    }
+
+
+
+
 beforeDelete
 ------------
 
