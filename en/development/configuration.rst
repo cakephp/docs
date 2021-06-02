@@ -472,7 +472,7 @@ configuration in Configure. This allows you to overwrite and add new values into
 the existing runtime configuration. By setting ``$merge`` to ``true``, values
 will not ever overwrite the existing configuration.
 
-.. warning:
+.. warning::
     When merging configuration files with `$merge = true`, dot notation in keys is
     not expanded::
        
