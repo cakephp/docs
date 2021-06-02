@@ -476,23 +476,23 @@ will not ever overwrite the existing configuration.
     When merging configuration files with `$merge = true`, dot notation in keys is
     not expanded::
        
-    // config1.php
-    'Key1' => [
-        'Key2' => [
-            'Key3' => ['NestedKey1' => 'Value'],
+        // config1.php
+        'Key1' => [
+            'Key2' => [
+                'Key3' => ['NestedKey1' => 'Value'],
+            ],
         ],
-    ],
-    
-    // config2.php
-    'Key1.Key2' => [
-        'Key3' => ['NestedKey2' => 'Value2'],
-    ]
-    
-    Configure::load('config1', 'default');
-    Configure::load('config2', 'default', true);
-    
-    // Now Key1.Key2.Key3 has the value ['NestedKey2' => 'Value2']
-    // instead of ['NestedKey1' => 'Value', 'NestedKey2' => 'Value2']
+
+        // config2.php
+        'Key1.Key2' => [
+            'Key3' => ['NestedKey2' => 'Value2'],
+        ]
+
+        Configure::load('config1', 'default');
+        Configure::load('config2', 'default', true);
+
+        // Now Key1.Key2.Key3 has the value ['NestedKey2' => 'Value2']
+        // instead of ['NestedKey1' => 'Value', 'NestedKey2' => 'Value2']
 
 Creating or Modifying Configuration Files
 -----------------------------------------
