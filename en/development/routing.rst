@@ -916,10 +916,10 @@ Then to create links which map back to the routes simply use::
 File extensions are used by :doc:`/controllers/components/request-handling`
 to do automatic view switching based on content types.
 
-.. _connecting-scoped-middleware:
+.. _route-scoped-middleware:
 
-Connecting Scoped Middleware
-============================
+Route Scoped Middleware
+=======================
 
 While Middleware can be applied to your entire application, applying middleware
 to specific routing scopes offers more flexibility, as you can apply middleware
