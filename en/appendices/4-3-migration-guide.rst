@@ -88,8 +88,14 @@ Log
 New Features
 ============
 
+Controller
+----------
+
+- ``Controller::middleware()`` was added which allows you to define middleware 
+  for a single controller only. See :ref:`controller-middleware` for more information.
+
 Database
-========
+--------
 
 - Database mapping types can now implement
   ``Cake\Database\Type\ColumnSchemaAwareInterface`` to specify 
@@ -103,7 +109,7 @@ Database
   :ref:`converting-request-data-from-user-timezone` for more information.
 
 Http
-====
+----
 
 - The ``CspMiddleware`` now sets the ``cspScriptNonce`` and ``cspStyleNonce``
   request attributes which streamlines the adoption of strict

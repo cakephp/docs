@@ -468,6 +468,35 @@ for best results::
         parent::beforeFilter($event);
     }
 
+.. _controller-middleware:
+
+Controller Middleware
+=====================
+
+.. php:method:: middleware($middleware, array $options = [])
+
+:doc:`Middleware </controllers/middleware>` can be defined globally, in
+a routing scope or within a controller. To define middleware for a specific
+controller use the ``middleware()`` method from your controller's
+``initialize()`` method::
+
+    public function initialize(): void
+    {
+        parent::initialize();
+
+        $this->middleware(function ($request, $handler) {
+            // Do middleware logic.
+
+            // Make sure you return a response or call handle()
+            return $handler->handle($request);
+        });
+    }
+
+Middleware defined by a controller will be called **before** ``beforeFilter()`` and action methods are called.
+
+.. versionadded:: 4.3.0
+    ``Controller::middleware()`` was added.
+
 More on Controllers
 ===================
 
