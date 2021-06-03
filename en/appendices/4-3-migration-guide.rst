@@ -115,6 +115,8 @@ Log
 - Log engines now use formatters to format the message string before writing.
   This can be configured with the ``formatter`` config option. See the
   :ref:`logging-formatters` section for more details.
+- ``JsonFormatter`` was added and can be set as the ``formatter`` option for
+  any log engine.
 
 ORM
 ---
