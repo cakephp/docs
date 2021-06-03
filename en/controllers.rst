@@ -477,7 +477,7 @@ Controller Middleware
 
 :doc:`Middleware </controllers/middleware>` can be defined globally, in
 a routing scope or within a controller. To define middleware for a specific
-controller use the ``middleware()`` method from your controllers's
+controller use the ``middleware()`` method from your controller's
 ``initialize()`` method::
 
     public function initialize(): void
@@ -492,8 +492,7 @@ controller use the ``middleware()`` method from your controllers's
         });
     }
 
-Middleware defined by a controller will be called **before** your controller's
-``beforeFilter()`` and action methods are called.
+Middleware defined by a controller will be called **before** ``beforeFilter()`` and action methods are called.
 
 .. versionadded:: 4.3.0
     ``Controller::middleware()`` was added.

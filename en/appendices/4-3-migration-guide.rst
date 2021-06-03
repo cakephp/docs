@@ -91,9 +91,8 @@ New Features
 Controller
 ----------
 
-- ``Controller::middleware()`` was added. Enabling you to define middleware that
-  is only applied before each action in a single controller. See
-  :ref:`controller-middleware` for more information.
+- ``Controller::middleware()`` was added which allows you to define middleware 
+  for a single controller only. See :ref:`controller-middleware` for more information.
 
 Database
 --------
