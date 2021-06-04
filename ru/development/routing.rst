@@ -934,7 +934,7 @@ URL-адрес, такой как /page/title-of-page.html, вам нужно с
     $routes->scope('/cms', function ($routes) {
         // Включим CSRF & cookies middleware
         $routes->applyMiddleware('csrf', 'cookies');
-        $routes->get('/articles/:action/*', ['controller' => 'Articles'])
+        $routes->get('/articles/:action/*', ['controller' => 'Articles']);
     });
 
 В ситуациях, когда у вас есть вложенные области, внутренние области наследуют
