@@ -1000,7 +1000,7 @@ Une fois enregistré, le middleware peut être appliqué
     $routes->scope('/cms', function (RouteBuilder $routes) {
         // Enable CSRF & cookies middleware
         $routes->applyMiddleware('csrf', 'cookies');
-        $routes->get('/articles/{action}/*', ['controller' => 'Articles'])
+        $routes->get('/articles/{action}/*', ['controller' => 'Articles']);
     });
 
 Dans le cas où vous auriez des 'scopes' imbriqués, les "sous" scopes hériteront
