@@ -1057,7 +1057,7 @@ object::
             'secure' => false,
             'http' => false,
         ]
-    ]);
+    ));
 
 See the :ref:`creating-cookies` section for how to use the cookie object. You
 can use ``withExpiredCookie()`` to send an expired cookie in the response. This
