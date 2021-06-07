@@ -1,7 +1,7 @@
 Fixture Upgrade
 ###############
 
-As of 4.3.0 a fixture schema and data management responsibilities were split.
+As of 4.3.0 fixture schema and data management responsibilities were split.
 Maintaining schema in fixture classes and migrations added complexity and
 maintenance cost to applications. In 4.3.0 new APIs were added to enable you to
 more easily re-use your existing migrations or schema management tools with
@@ -9,29 +9,29 @@ tests.
 
 To upgrade to the new fixture system, you need to make a few updates:
 
-#. First open your ``phpunit.xml`` file and remove the ``<listeners>`` block.
-#. In ``phpunit.xml`` add the followin::
+#. First, remove the ``<listeners>`` block from your ``phpunit.xml``.
+#. Add the following to your ``phpunit.xml``::
 
-    <extensions>
-        <extension class="\Cake\TestSuite\FixtureSchemaExtension" />
-    </extensions>
+        <extensions>
+            <extension class="\Cake\TestSuite\FixtureSchemaExtension" />
+        </extensions>
 
    This removes schema management from the test fixture manager. Instead your
    application needs to create/update schema at the beginning of each test run.
-#. Next update ``tests/boostrap.php`` to create schema. There are a few
+#. Next, update ``tests/boostrap.php`` to create schema. There are a few
    different ways to create schema. Refer to :ref:`creating-test-database-schema`
    for the methods provided by CakePHP.
 #. Then, remove all the ``$fields`` and ``$import`` properties from your fixtures.
    These properties are unused in the new fixture system.
 
 Your tests should continue to pass, and you can experiment with
-:ref:`fixture-state-managers`. The ``TransactionStrategy`` can yield significant
+:ref:`fixture-state-managers`. ``TransactionStrategy`` can yield significant
 performance improvements.
 
 Legacy Fixture Documentation
 ================================
 
-The following documentation applies only to the listener based fixtures that are
+The following documentation applies only to the listener-based fixtures that are
 the default prior to 4.3.0.
 
 .. _fixture-schema:
@@ -81,8 +81,8 @@ to maintain in larger applications. Because of this CakePHP provides the ability
 to import the schema from an existing connection and use the reflected table
 definition to create the table definition used in the test suite.
 
-Let's start with an example. Assuming you have a table named articles available
-in your application, change the example fixture given in the previous section
+Let's start with an example. Assuming you have a table named articles, change the example
+fixture given in the previous section
 (**tests/Fixture/ArticlesFixture.php**) to::
 
     class ArticlesFixture extends TestFixture
@@ -90,14 +90,14 @@ in your application, change the example fixture given in the previous section
         public $import = ['table' => 'articles'];
     }
 
-If you want to use a different connection use::
+If you want to use a different connection, use::
 
     class ArticlesFixture extends TestFixture
     {
         public $import = ['table' => 'articles', 'connection' => 'other'];
     }
 
-Usually, you have a Table class along with your fixture, as well. You can also
+Usually, you have a Table class along with your fixture. You can also
 use that to retrieve the table name::
 
     class ArticlesFixture extends TestFixture
@@ -143,4 +143,3 @@ Finally, it's possible to not load/create any schema in a fixture. This is usefu
 already have a test database setup with all the empty tables created. By
 defining neither ``$fields`` nor ``$import``, a fixture will only insert its
 records and truncate the records on each test method.
-

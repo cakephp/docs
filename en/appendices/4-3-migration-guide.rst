@@ -38,8 +38,8 @@ Log
 TestSuite
 ---------
 
-- ``TestFixture::$fields`` and ``TestFixture::$import`` are deprecated you
-  should convert your application to use the :doc:`new fixture system <./fixture-upgrade>`.
+- ``TestFixture::$fields`` and ``TestFixture::$import`` are deprecated. You
+  should convert your application to the :doc:`new fixture system <./fixture-upgrade>`.
 
 Behavior Changes
 ================
