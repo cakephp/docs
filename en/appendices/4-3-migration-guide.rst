@@ -35,6 +35,12 @@ Log
 - ``SyslogLog`` moved the ``format`` config option to ``LegacySyslogFormatter``.
   Defaults to ``DefaultFormatter`` now.
 
+TestSuite
+---------
+
+- ``TestFixture::$fields`` and ``TestFixture::$import`` are deprecated. You
+  should convert your application to the :doc:`new fixture system <./fixture-upgrade>`.
+
 Behavior Changes
 ================
 
@@ -136,8 +142,15 @@ ORM
   columns since ``null != value`` is always false and the ``NOT IN`` test will always fail when
   the column is null.
 
+TestSuite
+---------
+
+- A new fixture system has been introduced. This fixture system separates schema
+  and data enabling you to re-use your existing migrations to define test
+  schema. The :doc:`./fixture-upgrade` guide covers how to upgrade.
+
 View
-====
+----
 
 - ``HtmlHelper::script()`` and ``HtmlHelper::css()`` now add the ``nonce``
   attribute to generated tags when the ``cspScriptNonce`` and ``cspStyleNonce``
