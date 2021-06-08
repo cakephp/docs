@@ -102,11 +102,11 @@ Um exemplo de arquivo de tradução pode ser visto como:
      msgstr "J'ai {0,number} ans"
 
 .. note::
-    Traduções estão sendo armazenadas em cache - Certifique-se de que você sempre
-    limpa o cache após fazer alterações nas traduções! Você pode utilizar a ferramenta
+    As traduções são armazenadas em cache - Certifique-se de que você sempre limpa
+    o cache após fazer alterações nas traduções! Você pode utilizar a ferramenta
     :doc:`cache tool </console-and-shells/cache>` e executar por exemplo
     ``bin/cake cache clear _cake_core_``, ou limpar manualmente a pasta
-    ``tmp/cache/persistent``.
+    ``tmp/cache/persistent`` (se estiver utilizando o cache baseado em arquivo).
 
 Extraindo arquivos .pot com I18n Shell
 --------------------------------------

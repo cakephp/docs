@@ -91,11 +91,11 @@ An example translation file could look like this:
      msgstr "J'ai {0,number} ans"
 
 .. note::
-    Translations are being cached - Make sure that you always clear the cache after
+    Translations are cached - Make sure that you always clear the cache after
     making changes to translations! You can either use the
     :doc:`cache tool </console-commands/cache>` and run for example
     ``bin/cake cache clear _cake_core_``, or manually clear the ``tmp/cache/persistent``
-    folder.
+    folder (if using file based caching).
 
 Extract Pot Files with I18n Shell
 ---------------------------------
