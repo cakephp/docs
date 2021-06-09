@@ -44,17 +44,17 @@ ce que nous allons voir dans la prochaine section. Ceux intégrés correspondent
 aux valeurs suivantes de ``$context``:
 
 * Une instance ``Entity`` ou un iterateur qui mappe vers
-  `EntityContext <https://github.com/cakephp/cakephp/tree/master/src/View/Form/EntityContext.php>`_;
+  `EntityContext <https://api.cakephp.org/4.x/class-Cake.View.Form.EntityContext.html>`_;
   ce contexte permet au FormHelper de fonctionner avec les retours de l'ORM
   intégré.
 
 * Un tableau contenant la clé ``schema``, qui mappe vers
-  `ArrayContext <https://github.com/cakephp/cakephp/tree/master/src/View/Form/ArrayContext.php>`_
+  `ArrayContext <https://api.cakephp.org/4.x/class-Cake.View.Form.ArrayContext.html>`_
   ce qui vous permet de créer des structures simples de données pour construire
   des formulaires.
 
 * ``null`` et ``false`` mappe vers
-  `NullContext <https://github.com/cakephp/cakephp/tree/master/src/View/Form/NullContext.php>`_;
+  `NullContext <https://api.cakephp.org/4.x/class-Cake.View.Form.NullContext.html>`_;
   cette classe de contexte satisfait simplement l'interface requise par FormHelper.
   Ce contexte est utile si vous voulez construire un formulaire court qui ne nécessite
   pas de persistance via l'ORM.
@@ -350,7 +350,7 @@ Alors que les classes de contexte intégrées essaient de couvrir les cas
 habituels que vous pouvez rencontrer, vous pouvez avoir besoin de construire
 une nouvelle classe de contexte si vous utilisez un ORM différent. Dans ces
 situations, vous devrez implémenter `Cake\\View\\Form\\ContextInterface
-<https://api.cakephp.org/3.x/class-Cake.View.Form.ContextInterface.html>`_ . Une
+<https://api.cakephp.org/4.x/interface-Cake.View.Form.ContextInterface.html>`_ . Une
 fois que vous avez implémenté cette interface, vous pouvez connecter votre
 nouveau contexte dans le FormHelper. Le mieux est souvent de le faire dans un
 event listener ``View.beforeRender``, ou dans une classe de vue de
