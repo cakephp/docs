@@ -1,15 +1,15 @@
 Tutoriel d'un Blog - Authentification
 #####################################
 
-En suivant notre exemple :doc:`/tutorials-and-examples/blog/blog` example,
-imaginons que nous voulions empêcher les utilisateurs non connectés de créer des
+Poursuivant notre exemple :doc:`/tutorials-and-examples/blog/blog`, imaginons
+que nous souhaitions interdire aux utilisateurs non connectés de créer des
 articles.
 
-Créer la Table Users et le Contrôleur
-=====================================
+Créer la Table et le Controller pour Users
+==========================================
 
 Premièrement, créons une nouvelle table dans notre base de données blog pour
-enregistrer les données de notre utilisateur::
+enregistrer les données de nos utilisateurs::
 
 .. code-block:: mysql
  
@@ -21,7 +21,6 @@ enregistrer les données de notre utilisateur::
         created DATETIME DEFAULT NULL,
         modified DATETIME DEFAULT NULL
     );
-
 
 Si vous utilisez PostgreSQL, connectez-vous à la base de données cake_blog et
 exécutez plutôt la commande SQL suivante:
@@ -38,8 +37,8 @@ exécutez plutôt la commande SQL suivante:
     );
 
 Nous avons respecté les conventions de CakePHP pour le nommage des tables, mais
-nous profitons d'une autre convention: en utilisant les colonnes du nom
-d'utilisateur et du mot de passe dans une table users, CakePHP sera capable de
+nous profitons d'une autre convention: en utilisant les colonnes ``email`` et
+``password`` dans une table ``users``, CakePHP sera capable de
 configurer automatiquement la plupart des choses pour nous quand nous
 réaliserons la connexion de l'utilisateur.
 
@@ -55,7 +54,7 @@ responsabilité de trouver, sauvegarder et valider toute donnée d'utilisateur::
     class UsersTable extends Table
     {
 
-        public function validationDefault(Validator $validator)): Validator
+        public function validationDefault(Validator $validator): Validator
         {
             return $validator
                 ->notEmpty('email', "Un email est nécessaire")
@@ -70,8 +69,8 @@ responsabilité de trouver, sauvegarder et valider toute donnée d'utilisateur::
 
     }
 
-Créons aussi notre UsersController, le contenu suivant correspond à la
-classe obtenue grâce à l'utilitaire de génération de code fournis par CakePHP::
+Créons aussi notre UsersController. Le contenu suivant correspond à la
+classe obtenue grâce à l'utilitaire de génération de code fourni par CakePHP::
 
     // src/Controller/UsersController.php
 
@@ -84,7 +83,7 @@ classe obtenue grâce à l'utilitaire de génération de code fournis par CakePH
     {
 
         public function index()
-         {
+        {
             $this->set('users', $this->Users->find()->all());
         }
 
@@ -113,7 +112,7 @@ classe obtenue grâce à l'utilitaire de génération de code fournis par CakePH
 De la même façon que nous avons créé les vues pour nos articles en utilisant
 l'outil de génération de code, nous pouvons implémenter les vues des
 utilisateurs. Dans le cadre de ce tutoriel, nous allons juste montrer le
-add.php:
+**add.php**:
 
 .. code-block:: php
 
@@ -149,8 +148,8 @@ Puis ajoutez le code suivant à la méthode ``bootstrap()`` de votre application
     // dans la méthode bootstrap() de src/Application.php
     $this->addPlugin('Authentication');
 
-Adding Password Hashing
-=======================
+Hachage des Mots de Passe
+=========================
 
 Ensuite, nous allons créer l'entité ``User`` et ajouter un hachage de mots de
 passe. Créez le fichier d'entité **src/Model/Entity/User.php** et ajoutez ce qui
@@ -165,7 +164,7 @@ suit::
     class User extends Entity
     {
 
-        // Rend les champs assignables en masse sauf pour le champ clé primaire "id".
+        // Rend les champs assignables en masse sauf pour la clé primaire "id".
         protected $_accessible = [
             '*' => true,
             'id' => false
@@ -396,5 +395,5 @@ Lectures suivantes suggérées
 #. Documentation de `Authentication Plugin </authentication/>`__.
 
 .. meta::
-    :title lang=fr: Authentification Simple et Autorisation de l'Application
+    :title lang=fr: Authentification Simple
     :keywords lang=fr: incrémentation auto,autorisation application,modèle user,tableau,conventions,authentification,urls,cakephp,suppression,doc,colonnes
