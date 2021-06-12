@@ -37,28 +37,30 @@ For more details on Chronos please see `the API documentation
 
 .. start-time
 
-Creating Time Instances
+Creating FrozenTime Instances
 =======================
 
-There are a few ways to create ``FrozenTime`` instances::
+``FrozenTime`` are immutable objects that useful when you want to prevent
+accidental changes to data, or when you want to avoid order based dependency
+issues. Refer to ``Time`` instances for mutable objects. There are a few ways to create ``FrozenTime`` instances::
 
     use Cake\I18n\FrozenTime;
 
     // Create from a string datetime.
     $time = FrozenTime::createFromFormat(
         'Y-m-d H:i:s',
-        $datetime,
+        '2021-01-31 22:11:30',
         'America/New_York'
     );
 
-    // Create from a timestamp
-    $time = FrozenTime::createFromTimestamp($ts);
+    // Create from a timestamp and set timezone
+    $time = FrozenTime::createFromTimestamp(1612149090, 'America/New_York');
 
     // Get the current time.
     $time = FrozenTime::now();
 
     // Or just use 'new'
-    $time = new FrozenTime('2014-01-10 11:11', 'America/New_York');
+    $time = new FrozenTime('2021-01-31 22:11:30', 'America/New_York');
 
     $time = new FrozenTime('2 hours ago');
 
@@ -69,45 +71,55 @@ as a UNIX timestamp.
 In test cases you can mock out ``now()`` using ``setTestNow()``::
 
     // Fixate time.
-    $now = new FrozenTime('2014-04-12 12:22:30');
-    FrozenTime::setTestNow($now);
+    $time = new FrozenTime('2021-01-31 22:11:30');
+    FrozenTime::setTestNow($time);
 
-    // Returns '2014-04-12 12:22:30'
-    $now = FrozenTime::now();
+    // Outputs '1/31/21, 10:11 PM'
+    echo FrozenTime::now();
 
-    // Returns '2014-04-12 12:22:30'
-    $now = FrozenTime::parse('now');
+    // Outputs '1/31/21, 10:11 PM'
+    echo FrozenTime::parse('now');
 
 Manipulation
 ============
 
-Once created, you can manipulate ``FrozenTime`` instances using setter methods::
+Once created, you cannot manipulate ``FrozenTime`` instances as it is immutable. Using setter methods will not work::
 
-    $now = FrozenTime::now();
-    $now->year(2013)
+    $time = FrozenTime::create(2021, 1, 31, 22, 11, 30);
+    $time->year(2013)
         ->month(10)
         ->day(31);
+    // Output '1/31/21, 10:11 PM'
+    echo $time;
+        
 
-You can also use the methods provided by PHP's built-in ``DateTime`` class::
+You will need to create another instance. You can also use the methods provided by PHP's built-in ``DateTime`` class::
 
-    $now = $now->setDate(2013, 10, 31);
+    $newTime = $time->setDate(2013, 10, 31);
+    // Outputs '10/31/13, 10:11 PM'
+    echo $newTime;
 
-Dates can be modified through subtraction and addition of their components::
+You can create another instance with modified dates, through subtraction and addition of their components::
 
-    $now = FrozenTime::now();
-    $now = $now->subDays(5)
+    $time = FrozenTime::create(2021, 1, 31, 22, 11, 30);
+    $newTime = $time->subDays(5)
+		->addHours(-2)
         ->addMonth(1);
+    // Outputs '2/26/21, 8:11 PM'
+    echo $newTime;
 
     // Using strtotime strings.
-    $now = $now->modify('+5 days');
+	$newTime = $time->modify('+1 month -5 days -2 hours');
+	// Outputs '2/26/21, 8:11 PM'
+    echo $newTime;
 
 You can get the internal components of a date by accessing its properties::
 
-    $now = FrozenTime::now();
-    echo $now->year; // 2014
-    echo $now->month; // 5
-    echo $now->day; // 10
-    echo $now->timezone; // America/New_York
+    $time = FrozenTime::create(2021, 1, 31, 22, 11, 30);
+    echo $time->year; // 2021
+    echo $time->month; // 1
+    echo $time->day; // 31
+    echo $time->timezoneName; // America/New_York
 
 Formatting
 ==========
@@ -116,15 +128,20 @@ Formatting
 
 This method sets the default format used when converting an object to json::
 
+    
     Time::setJsonEncodeFormat('yyyy-MM-dd HH:mm:ss');  // For any mutable DateTime
     FrozenTime::setJsonEncodeFormat('yyyy-MM-dd HH:mm:ss');  // For any immutable DateTime
     Date::setJsonEncodeFormat('yyyy-MM-dd HH:mm:ss');  // For any mutable Date
     FrozenDate::setJsonEncodeFormat('yyyy-MM-dd HH:mm:ss');  // For any immutable Date
 
+    $time = FrozenTime::parse('2021-01-31 22:11:30');
+    echo json_encode($time);   // Outputs '2021-01-31 22:11:30'
+    
     // Added in 4.1.0
     FrozenDate::setJsonEncodeFormat(static function($time) {
         return $time->format(DATE_ATOM);
     });
+    
 
 .. note::
     This method must be called statically.
@@ -138,22 +155,22 @@ This method sets the default format used when converting an object to json::
 A very common thing to do with ``Time`` instances is to print out formatted
 dates. CakePHP makes this a snap::
 
-    $now = Time::parse('2014-10-31');
+	$time = FrozenTime::parse('2021-01-31 22:11:30');
 
-    // Prints a localized datetime stamp.
-    echo $now;
+	// Prints a localized datetime stamp. Outputs '1/31/21, 10:11 PM'
+	echo $time;
 
-    // Outputs '10/31/14, 12:00 AM' for the en-US locale
-    $now->i18nFormat();
+    // Outputs '1/31/21, 10:11 PM' for the en-US locale
+	echo $time->i18nFormat();
 
-    // Use the full date and time format
-    $now->i18nFormat(\IntlDateFormatter::FULL);
+    // Use the full date and time format. Outputs 'Sunday, January 31, 2021 at 10:11:30 PM Eastern Standard Time'
+	echo $time->i18nFormat(\IntlDateFormatter::FULL);
 
-    // Use full date but short time format
-    $now->i18nFormat([\IntlDateFormatter::FULL, \IntlDateFormatter::SHORT]);
+    // Use full date but short time format. Outputs 'Sunday, January 31, 2021 at 10:11 PM'
+    echo $time->i18nFormat([\IntlDateFormatter::FULL, \IntlDateFormatter::SHORT]);
 
-    // Outputs '2014-10-31 00:00:00'
-    $now->i18nFormat('yyyy-MM-dd HH:mm:ss');
+    // Outputs '2021-Jan-31 22:11:30'
+    echo $time->i18nFormat('yyyy-MMM-dd HH:mm:ss');
 
 It is possible to specify the desired format for the string to be displayed.
 You can either pass `IntlDateFormatter constants
@@ -164,8 +181,22 @@ https://unicode-org.github.io/icu/userguide/format_parse/datetime/#datetime-form
 
 You can also format dates with non-gregorian calendars::
 
-    // Outputs 'Friday, Aban 9, 1393 AP at 12:00:00 AM GMT'
-    $result = $now->i18nFormat(\IntlDateFormatter::FULL, null, 'en-IR@calendar=persian');
+    // On ICU version 66.1
+    $time = FrozenTime::create(2021, 1, 31, 22, 11, 30);
+    
+    // Outputs 'Sunday, Bahman 12, 1399 AP at 10:11:30 PM Eastern Standard Time'
+    echo $time->i18nFormat(\IntlDateFormatter::FULL, null, 'en-IR@calendar=persian');
+    
+    // Outputs 'Sunday, January 31, 3 Reiwa at 10:11:30 PM Eastern Standard Time'
+    echo $time->i18nFormat(\IntlDateFormatter::FULL, null, 'en-JP@calendar=japanese');
+    
+    // Outputs 'Sunday, Twelfth Month 19, 2020(geng-zi) at 10:11:30 PM Eastern Standard Time'
+    echo $time->i18nFormat(\IntlDateFormatter::FULL, null, 'en-CN@calendar=chinese');
+    
+    // Outputs 'Sunday, Jumada II 18, 1442 AH at 10:11:30 PM Eastern Standard Time'
+    echo $time->i18nFormat(\IntlDateFormatter::FULL, null, 'en-SA@calendar=islamic');
+    
+    
 
 The following calendar types are supported:
 
@@ -188,26 +219,36 @@ The following calendar types are supported:
 
 Print out a predefined 'nice' format::
 
-    $now = Time::parse('2014-10-31');
+    $time = FrozenTime::parse('2021-01-31 22:11:30', new \DateTimeZone('America/New_York'));
 
-    // Outputs 'Oct 31, 2014 12:00 AM' in en-US
-    echo $now->nice();
+    // Outputs 'Jan 31, 2021, 10:11 PM' in en-US
+    echo $time->nice();
 
 You can alter the timezone in which the date is displayed without altering the
-``Time`` object itself. This is useful when you store dates in one timezone, but
+``FrozenTime`` or ``Time`` object itself. This is useful when you store dates in one timezone, but
 want to display them in a user's own timezone::
 
-    $now->i18nFormat(\IntlDateFormatter::FULL, 'Europe/Paris');
+    // Outputs 'Monday, February 1, 2021 at 4:11:30 AM Central European Standard Time'
+    echo $time->i18nFormat(\IntlDateFormatter::FULL, 'Europe/Paris');
+    
+    // Outputs 'Monday, February 1, 2021 at 12:11:30 PM Japan Standard Time'
+    echo $time->i18nFormat(\IntlDateFormatter::FULL, 'Asia/Tokyo');
+
+    // Timezone is unchanged. Outputs 'America/New_York'
+    echo $time->timezoneName;
 
 Leaving the first parameter as ``null`` will use the default formatting string::
 
-    $now->i18nFormat(null, 'Europe/Paris');
+    // Outputs '2/1/21, 4:11 AM'
+    echo $time->i18nFormat(null, 'Europe/Paris');
 
 Finally, it is possible to use a different locale for displaying a date::
 
-    echo $now->i18nFormat(\IntlDateFormatter::FULL, 'Europe/Paris', 'fr-FR');
+    // Outputs 'lundi 1 février 2021 à 04:11:30 heure normale d’Europe centrale'
+    echo $time->i18nFormat(\IntlDateFormatter::FULL, 'Europe/Paris', 'fr-FR');
 
-    echo $now->nice('Europe/Paris', 'fr-FR');
+    // Outputs '1 févr. 2021 à 04:11'
+    echo $time->nice('Europe/Paris', 'fr-FR');
 
 Setting the Default Locale and Format String
 --------------------------------------------
@@ -221,6 +262,10 @@ You can, however, modify this default at runtime::
     FrozenTime::setDefaultLocale('es-ES'); // For any immutable DateTime
     Date::setDefaultLocale('es-ES'); // For any mutable Date
     FrozenDate::setDefaultLocale('es-ES'); // For any immutable Date
+    
+    // Outputs '31 ene. 2021 22:11'
+    echo $time->nice(); 
+    
 
 From now on, datetimes will be displayed in the Spanish preferred format unless
 a different locale is specified directly in the formatting method.
@@ -233,14 +278,18 @@ Likewise, it is possible to alter the default formatting string to be used for
     Date::setToStringFormat(\IntlDateFormatter::SHORT); // For any mutable Date
     FrozenDate::setToStringFormat(\IntlDateFormatter::SHORT); // For any immutable Date
 
-    // The same method exists on Date, FrozenDate and FrozenTime
-    Time::setToStringFormat([
+    // The same method exists on Date, FrozenDate, Time and FrozenTime
+    FrozenTime::setToStringFormat([
         \IntlDateFormatter::FULL,
         \IntlDateFormatter::SHORT
     ]);
+    // Outputs 'Sunday, January 31, 2021 at 10:11 PM'
+    echo $time; 
 
-    // The same method exists on Date, FrozenDate and FrozenTime
-    Time::setToStringFormat('yyyy-MM-dd HH:mm:ss');
+    // The same method exists on Date, FrozenDate, Time and FrozenTime
+    FrozenTime::setToStringFormat("EEEE, MMMM dd, yyyy 'at' KK:mm:ss a");
+    // Outputs 'Sunday, January 31, 2021 at 10:11:30 PM'
+    echo $time; 
 
 It is recommended to always use the constants instead of directly passing a date
 format string.
@@ -252,29 +301,28 @@ Formatting Relative Times
 
 Often it is useful to print times relative to the present::
 
-    $now = new Time('Aug 22, 2011');
-    echo $now->timeAgoInWords(
+    $time = new FrozenTime('Jan 31, 2021');
+    // On 12-Jun-21, outputs '4 months, 1 week, 6 days ago'
+    echo $time->timeAgoInWords(
         ['format' => 'MMM d, YYY', 'end' => '+1 year']
     );
-    // On Nov 10th, 2011 this would display: 2 months, 2 weeks, 6 days ago
 
 The ``end`` option lets you define at which point after which relative times
 should be formatted using the ``format`` option. The ``accuracy`` option lets
 us control what level of detail should be used for each interval range::
 
-    // If $timestamp is 1 month, 1 week, 5 days and 6 hours ago
-    echo $timestamp->timeAgoInWords([
+    // Outputs '4 months ago'
+    echo $time->timeAgoInWords([
         'accuracy' => ['month' => 'month'],
         'end' => '1 year'
     ]);
-    // Outputs '1 month ago'
 
 By setting ``accuracy`` to a string, you can specify what is the maximum level
 of detail you want output::
 
-    $time = new Time('+23 hours');
+    $time = new FrozenTime('+23 hours');
     // Outputs 'in about a day'
-    $result = $time->timeAgoInWords([
+    echo $time->timeAgoInWords([
         'accuracy' => 'day'
     ]);
 
@@ -283,12 +331,12 @@ Conversion
 
 .. php:method:: toQuarter()
 
-Once created, you can convert ``Time`` instances into timestamps or quarter
+Once created, you can convert ``FrozenTime`` instances into timestamps or quarter
 values::
 
-    $time = new Time('2014-06-15');
-    $time->toQuarter();
-    $time->toUnixString();
+    $time = new FrozenTime('2021-01-31');
+    echo $time->toQuarter();  // Outputs '1'
+    echo $time->toUnixString();  // Outputs '1612069200'
 
 Comparing With the Present
 ==========================
@@ -298,86 +346,97 @@ Comparing With the Present
 .. php:method:: isThisMonth()
 .. php:method:: isThisYear()
 
-You can compare a ``Time`` instance with the present in a variety of ways::
+You can compare a ``FrozenTime`` instance with the present in a variety of ways::
 
-    $time = new Time('2014-06-15');
+    $time = new FrozenTime('+3 days');
 
-    echo $time->isYesterday();
-    echo $time->isThisWeek();
-    echo $time->isThisMonth();
-    echo $time->isThisYear();
+    var_export($time->isYesterday());
+    var_export($time->isThisWeek());
+    var_export($time->isThisMonth());
+    var_export($time->isThisYear());
 
 Each of the above methods will return ``true``/``false`` based on whether or
-not the ``Time`` instance matches the present.
+not the ``FrozenTime`` instance matches the present.
 
 Comparing With Intervals
 ========================
 
 .. php:method:: isWithinNext($interval)
 
-You can see if a ``Time`` instance falls within a given range using
+You can see if a ``FrozenTime`` instance falls within a given range using
 ``wasWithinLast()`` and ``isWithinNext()``::
 
-    $time = new Time('2014-06-15');
+    $time = new FrozenTime('+3 days');
 
-    // Within 2 days.
-    echo $time->isWithinNext(2);
+    // Within 2 days. Outputs 'false'
+    var_export($time->isWithinNext('2 days'));
 
-    // Within 2 next weeks.
-    echo $time->isWithinNext('2 weeks');
+    // Within 2 next weeks. Outputs 'true'
+     var_export($time->isWithinNext('2 weeks'));
 
 .. php:method:: wasWithinLast($interval)
 
-You can also compare a ``Time`` instance within a range in the past::
+You can also compare a ``FrozenTime`` instance within a range in the past::
 
-    // Within past 2 days.
-    echo $time->wasWithinLast(2);
+    $time = new FrozenTime('-72 hours');
+    
+    // Within past 2 days. Outputs 'false'
+    var_export($time->wasWithinLast('2 days'));
 
-    // Within past 2 weeks.
-    echo $time->wasWithinLast('2 weeks');
+    // Within past 3 days. Outputs 'true'
+    var_export($time->wasWithinLast('3 days'));
+    
+    // Within past 2 weeks. Outputs 'true'
+    var_export($time->wasWithinLast('2 weeks'));
 
 .. end-time
 
-Dates
+FrozenDate
 =====
 
-.. php:class: Date
+.. php:class: FrozenDate
 
-The ``Date`` class in CakePHP implements the same API and methods as
-:php:class:`Cake\\I18n\\Time` does. The main difference between ``Time`` and
-``Date`` is that ``Date`` does not track time components, and is always in UTC.
+The immutable ``FrozenDate`` class in CakePHP implements the same API and methods as
+:php:class:`Cake\\I18n\\FrozenTime` does. The main difference between ``FrozenTime`` and
+``FrozenDate`` is that ``FrozenDate`` does not track time components, and is always in UTC.
 As an example::
 
-    use Cake\I18n\Date;
-    $date = new Date('2015-06-15');
+    use Cake\I18n\FrozenDate;
+    $date = new FrozenDate('2021-01-31');
 
-    $date->modify('+2 hours');
-    // Outputs 2015-06-15 00:00:00
-    echo $date->format('Y-m-d H:i:s');
+    $newDate = $date->modify('+2 hours');
+    // Outputs '2021-01-31 00:00:00'
+    echo $newDate->format('Y-m-d H:i:s');
+    
+    $newDate = $date->addHours(36);
+    // Outputs '2021-01-31 00:00:00'
+    echo $newDate->format('Y-m-d H:i:s');
 
-    $date->modify('+36 hours');
-    // Outputs 2015-06-15 00:00:00
-    echo $date->format('Y-m-d H:i:s');
+    $newDate = $date->addDays(10);
+    // Outputs '2021-02-10 00:00:00'
+    echo $newDate->format('Y-m-d H:i:s');
 
-Attempts to modify the timezone on a ``Date`` instance are also ignored::
+    
 
-    use Cake\I18n\Date;
-    $date = new Date('2015-06-15');
-    $date->setTimezone(new \DateTimeZone('America/New_York'));
+Attempts to modify the timezone on a ``FrozenDate`` instance are also ignored::
 
-    // Outputs UTC
-    echo $date->format('e');
+    use Cake\I18n\FrozenDate;
+    $date = new FrozenDate('2021-01-31', new \DateTimeZone('America/New_York'));
+    $newDate = $date->setTimezone(new \DateTimeZone('Europe/Berlin'));
 
-.. _immutable-time:
+    // Outputs 'America/New_York'
+    echo $newDate->format('e');
 
-Immutable Dates and Times
+.. _mutable-time:
+
+Mutable Dates and Times
 =========================
 
-.. php:class:: FrozenTime
-.. php:class:: FrozenDate
+.. php:class:: Time
+.. php:class:: Date
 
-CakePHP uses immutable date and time classes that implement the same interface
-as their mutable siblings. Immutable objects are useful when you want to prevent
+CakePHP uses mutable date and time classes that implement the same interface
+as their immutable siblings. Immutable objects are useful when you want to prevent
 accidental changes to data, or when you want to avoid order based dependency
 issues. Take the following code::
 
