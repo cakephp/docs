@@ -68,36 +68,39 @@ The ``FrozenTime`` class constructor can take any parameter that the internal ``
 PHP class can. When passing a number or numeric string, it will be interpreted
 as a UNIX timestamp.
 
-In test cases you can mock out ``now()`` using ``setTestNow()``::
+In test cases, you can mock out ``now()`` using ``setTestNow()``::
 
     // Fixate time.
     $time = new FrozenTime('2021-01-31 22:11:30');
     FrozenTime::setTestNow($time);
 
-    // Outputs '1/31/21, 10:11 PM'
-    echo FrozenTime::now();
+    // Outputs '2021-01-31 22:11:30'
+    $now = FrozenTime::now();
+	echo $now->i18nFormat('yyyy-MM-dd HH:mm:ss');
 
-    // Outputs '1/31/21, 10:11 PM'
-    echo FrozenTime::parse('now');
+    // Outputs '2021-01-31 22:11:30'
+    $now = FrozenTime::parse('now');
+	echo $now->i18nFormat('yyyy-MM-dd HH:mm:ss');
 
 Manipulation
 ============
 
-Once created, you cannot manipulate ``FrozenTime`` instances as it is immutable. Using setter methods will not work::
+Once created, ``FrozenTime`` instances cannot be manipulated as it is immutable. You will need to create another instance. You can also use the methods provided by PHP's built-in ``DateTime`` class::
 
-    $time = FrozenTime::create(2021, 1, 31, 22, 11, 30);
+    $time = FrozenTime::parse('2021-01-31 22:11:30');
+    
+    // Create another instance
+    $newTime = $time->setDate(2013, 10, 31);
+    // Outputs '2013-10-31 22:11:30'
+    echo $newTime->i18nFormat('yyyy-MM-dd HH:mm:ss');
+
+Using setter methods to manipulate ``FrozenTime`` instances will not work::
+
     $time->year(2013)
         ->month(10)
         ->day(31);
-    // Output '1/31/21, 10:11 PM'
-    echo $time;
-        
-
-You will need to create another instance. You can also use the methods provided by PHP's built-in ``DateTime`` class::
-
-    $newTime = $time->setDate(2013, 10, 31);
-    // Outputs '10/31/13, 10:11 PM'
-    echo $newTime;
+    // Outputs '2021-01-31 22:11:30'
+    echo $time->i18nFormat('yyyy-MM-dd HH:mm:ss');
 
 You can create another instance with modified dates, through subtraction and addition of their components::
 
