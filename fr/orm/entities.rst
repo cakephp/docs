@@ -5,14 +5,16 @@ Entities
 
 .. php:class:: Entity
 
-Alors que les :doc:`objets Table</orm/table-objects>` représentent et
+Tandis que les :doc:`objets Table</orm/table-objects>` représentent et
 fournissent un accès à une collection d'objets, les entities représentent des
 lignes individuelles ou des objets de domaine dans votre application. Les
-entities contiennent des propriétés et des méthodes persistantes pour manipuler
-et accéder aux données qu'ils contiennent.
+entities contiennent des méthodes pour manipuler et accéder aux données qu'elles
+contiennent. Les champs sont aussi accessibles en tant que propriétés de
+l'objet.
 
-Les entities sont créées pour vous par CakePHP à chaque fois que vous utilisez
-``find()`` sur un objet table.
+Les entities sont créées pour vous par CakePHP à chaque fois que vous faites une
+itération sur l'objet query renvoyé par ``find()`` sur un objet table, ou quand
+vous appelez les méthodes  ``all()`` ou ``first()`` sur l'objet query.
 
 Créer des Classes Entity
 ========================
@@ -21,7 +23,7 @@ Vous n'avez pas besoin de créer des classes entity pour utiliser l'ORM dans
 CakePHP. Cependant si vous souhaitez avoir de la logique personnalisée dans
 vos entities, vous devrez créer des classes. Par convention, les classes
 entity se trouvent dans **src/Model/Entity/**. Si notre application a une
-table ``articles``, nous pourrions créer l'entity suivante::
+table ``articles``, nous pouvons créer l'entity suivante::
 
     // src/Model/Entity/Article.php
     namespace App\Model\Entity;
@@ -50,7 +52,7 @@ Les Entities peuvent être instanciées directement::
 
     $article = new Article();
 
-Lorsque vous instanciez une entity, vous pouvez lui passer des propriétés avec
+Lorsque vous instanciez une entity, vous pouvez lui passer des champs avec
 les données que vous voulez y stocker::
 
     use App\Model\Entity\Article;
@@ -61,24 +63,27 @@ les données que vous voulez y stocker::
         'created' => new DateTime('now')
     ]);
 
-Une autre approche pour récupérer une nouvelle entity est d'utiliser la méthode
-``newEntity()`` de l'objet ``Table``::
+La méthode recommandée pour récupérer une nouvelle entity est d'appeler
+``newEntity()`` sur l'objet ``Table``::
 
-    use Cake\ORM\TableRegistry;
+    use \Cake\ORM\Locator\LocatorAwareTrait;
 
-    // Prior to 3.6 use TableRegistry::get('Articles')
-    $article = TableRegistry::getTableLocator()->get('Articles')->newEntity();
+    $article = $this->getTableLocator()->newEmptyEntity();
 
-    $article = TableRegistry::getTableLocator()->get('Articles')->newEntity([
+    $article = $this->getTableLocator()->newEntity([
         'id' => 1,
         'title' => 'New Article',
         'created' => new DateTime('now')
     ]);
 
+``$article`` sera une instance de ``App\Model\Entity\Article``, ou une instance
+de la classe par défaut ``Cake\ORM\Entity`` si vous n'avez pas créé la classe
+``Article``.
+
 Accéder aux Données de l'Entity
 ===============================
 
-Les entities fournissent quelques façons d'accéder aux données qu'elles
+Les entities fournissent plusieurs façons d'accéder aux données qu'elles
 contiennent. La plupart du temps, vous accéderez aux données dans une entity
 en utilisant la notation objet::
 
@@ -93,8 +98,8 @@ Vous pouvez aussi utiliser les méthodes ``get()`` et ``set()``::
     $article->set('title', 'Ceci est mon premier post');
     echo $article->get('title');
 
-Quand vous utilisez ``set()``, vous pouvez mettre à jour plusieurs propriétés
-en une fois en utilisant un tableau::
+Quand vous utilisez ``set()``, vous pouvez mettre à jour plusieurs champs
+en une seule fois en utilisant un tableau::
 
     $article->set([
         'title' => 'Mon premier post',
@@ -107,12 +112,37 @@ en une fois en utilisant un tableau::
     devriez faire une liste des champs qui peuvent être définis par
     assignement de masse.
 
+Vous pouvez vérifier si des champs sont définis dans vos entities avec
+``has()``::
+
+    $article = new Article([
+        'title' => 'Premier post',
+        'user_id' => null
+    ]);
+    $article->has('title'); // true
+    $article->has('user_id'); // false
+    $article->has('undefined'); // false.
+
+La méthode ``has()`` va renvoyer ``true`` si un champ est défini est a une
+valeur non null. Vous pouvez utiliser ``isEmpty()`` et ``hasValue()`` pour
+vérifier si un champ contient une valeur 'non-empty'::
+
+    $article = new Article([
+        'title' => 'Premier post',
+        'user_id' => null
+    ]);
+    $article->isEmpty('title');  // false
+    $article->hasValue('title'); // true
+
+    $article->isEmpty('user_id');  // true
+    $article->hasValue('user_id'); // false
+
 Accesseurs & Mutateurs
 ======================
 
 En plus de l'interface simple get/set, les entities vous permettent de fournir
 des méthodes accesseurs et mutateurs. Ces méthodes vous laissent personnaliser
-la façon dont les propriétés sont lues ou définies.
+la façon dont les champs sont lus ou définis.
 
 Les accesseurs utilisent la convention ``_get`` suivi par la version en camel
 case du nom du champ.
@@ -137,26 +167,34 @@ sont ces données formatées qui seront sauvegardées. Par exemple::
         }
     }
 
-Les accesseurs seront utilisés quand vous récupérerez la propriété via une de
+Les accesseurs seront utilisés quand vous récupérerez le champ *via* une de
 ces deux manières::
 
     echo $article->title;
     echo $article->get('title');
 
-Vous pouvez personnaliser la façon dont les propriétés sont récupérées/définies
-en définissant un mutateur:
+.. note::
+
+    Le code dans vos accesseurs est exécuté à chaque fois que vous faites
+    référence au champ. Vous pouvez utiliser une variable locale de la façon
+    suivante pour le mettre en cache si vous réalisez une opération gourmande en
+    ressources: `$myEntityProp = $entity->my_property`.
+
+Vous pouvez personnaliser la façon dont les champs sont définis
+en implémentant un mutateur:
 
 .. php:method:: set($field = null, $value = null)
 
 Les méthodes mutateurs doivent toujours retourner la valeur qui doit être
-stockée dans la propriété. Comme vous pouvez le voir au-dessus, vous pouvez
-aussi utiliser les mutateurs pour définir d'autres propriétés calculées. En
-faisant cela, attention à ne pas introduire de boucles, puisque CakePHP
-n'empêchera pas les méthodes mutateur de faire des boucles infinies. Les
-mutateurs vous permettent de convertir les propriétés lorsqu'elles sont définies
+stockée dans le champ. Comme vous pouvez le voir ci-dessus, vous pouvez aussi
+utiliser les mutateurs pour définir d'autres champs calculés. Quand vous faites
+cela, attention à ne pas introduire de boucles, puisque CakePHP n'empêchera pas
+les méthodes mutateurs de faire des boucles infinies.
+
+Les mutateurs vous permettent de convertir les champs lorsqu'ils sont définis,
 ou de créer des données calculées. Les mutateurs et accesseurs sont appliqués
-quand les propriétés sont lues en utilisant la notation objet ou en utilisant
-get() et set(). Par exemple::
+quand les champs sont lus en utilisant la notation objet ou en utilisant
+``get()`` et ``set()``. Par exemple::
 
     namespace App\Model\Entity;
 
@@ -173,7 +211,7 @@ get() et set(). Par exemple::
 
     }
 
-Les mutateurs seront utilisés lorsque vous définirez une propriété via une de
+Les mutateurs seront utilisés lorsque vous définirez une propriété *via* une de
 ces deux manières::
 
     $user->title = 'foo' // slug sera aussi défini
@@ -181,20 +219,20 @@ ces deux manières::
 
 .. warning::
 
-    Les accesseurs sont également appelés avant que l'entity ne soit persistée
-    en base. Si vous souhaitez transformer un champ mais ne pas persister la
-    transformation, il est recommandé d'utiliser les propriétés virtuelles car
-    ces dernières ne seront pas persistées.
+  Les accesseurs sont également appelés avant que l'entity ne soit persistée
+  dans la base. Si vous souhaitez transformer un champ mais ne pas persister la
+  transformation, il est recommandé d'utiliser les propriétés virtuelles car
+  ces dernières ne seront pas persistées.
 
-.. _entities-virtual-properties:
+.. _entities-virtual-fields:
 
-Créer des Propriétés Virtuelles
--------------------------------
+Créer des Champs Virtuels
+-------------------------
 
-En définissant des accesseurs, vous pouvez fournir un accès aux
-champs/propriétés qui n'existent pas réellement. Par exemple si votre table
-users a ``first_name`` et ``last_name``, vous pouvez créer une méthode pour le
-nom complet::
+En définissant des accesseurs, vous pouvez fournir un accès à des champs qui
+n'existent pas réellement. Par exemple si votre table users a des champs
+``first_name`` et ``last_name``, vous pouvez créer une méthode pour le nom
+complet::
 
     namespace App\Model\Entity;
 
@@ -205,72 +243,71 @@ nom complet::
 
         protected function _getFullName()
         {
-            return $this->_fields['first_name'] . '  ' .
-                $this->_fields['last_name'];
+            return $this->first_name . '  ' . $this->last_name;
         }
 
     }
 
-Vous pouvez accéder aux propriétés virtuelles puisqu'elles existent sur
-l'entity. Le nom de la propriété sera la version en minuscule et en underscore
-de la méthode::
+Vous pouvez accéder aux champs virtuels comme s'ils existaient sur l'entity.
+Le nom du champ sera le nom de la méthode en minuscules, avec des underscores
+pour séparer les mots (``full_name``)::
 
     echo $user->full_name;
 
-Souvenez-vous que les propriétés virtuelles ne peuvent pas être utilisées dans
-les finds. Si vous voulez que les propriétés virtuelles fassent parties des
-données affichées lorsque vous affichez les représentations JSON ou en tableau
-de vos entités, reportez-vous à la section :ref:`exposing-virtual-properties`.
+Souvenez-vous que les champs virtuels ne peuvent pas être utilisés dans
+les finds. Si vous voulez qu'ils fassent partie des données JSON ou dans des
+représentations en tableau de vos entités, reportez-vous à la section
+:ref:`exposing-virtual-fields`.
 
 Vérifier si une Entity a été Modifiée
 =====================================
 
 .. php:method:: dirty($field = null, $dirty = null)
 
-Vous pourriez vouloir écrire du code conditionnel basé sur si oui ou non
-les propriétés ont été modifiées dans l'entity. Par exemple, vous pourriez
-vouloir valider uniquement les champs lorsqu'ils ont été modifiés::
+Vous pourriez vouloir écrire du code conditionnel basé sur l'existence ou non de
+modifications dans l'entity. Par exemple, vous pourriez vouloir valider
+uniquement les champs lorsqu'ils ont été modifiés::
 
     // Vérifie si le champ title n'a pas été modifié.
-    $article->dirty('title');
+    $article->isDirty('title');
 
 Vous pouvez également marquer un champ comme ayant été modifié. C'est pratique
-lorsque vous ajoutez des données dans un tableau de propriétés::
+lorsque vous ajoutez des données dans des champs contenant un tableau car sinon
+cela ne marque pas automatiquement le champ comme ayant été modifié, seule la
+redéfinition du tableau complet aurait cet effet::
 
     // Ajoute un commentaire et marque le champ comme modifié.
     $article->comments[] = $newComment;
-    $article->dirty('comments', true);
+    $article->setDirty('comments', true);
 
 De plus, vous pouvez également baser votre code conditionnel sur les valeurs
-initiales des propriétés en utilisant la méthode ``getOriginal()``. Cette
+initiales des champs en utilisant la méthode ``getOriginal()``. Cette
 méthode retournera soit la valeur initiale de la propriété si elle a été
 modifiée soit la valeur actuelle.
 
-Vous pouvez également vérifier si une des propriétés de l'entity a été
-modifiée::
+Vous pouvez également vérifier si l'un quelconque des champs de l'entity a été
+modifié::
 
     // Vérifier si l'entity a changé
-    $article->dirty();
+    $article->isDirty();
 
-Pour retirer le marquage dirty des champs d'une entity, vous pouvez utiliser
-la méthode ``clean()``::
+Pour retirer le marquage *dirty* (modifié) des champs d'une entity, vous pouvez
+utiliser la méthode ``clean()``::
 
     $article->clean();
 
 Lors de la création d'un nouvelle entity, vous pouvez empêcher les champs
-d'être marqués dirty en passant une option supplémentaire::
+d'être marqués *dirty* en passant une option supplémentaire::
 
     $article = new Article(['title' => 'New Article'], ['markClean' => true]);
 
-Pour récupérer la liste des propriétés *dirty* (modifiées) d'une ``Entity``,
+Pour récupérer la liste des propriétés *dirty* d'une ``Entity``,
 vous pouvez utiliser la méthode ``getDirty()``::
 
     $dirtyFields = $entity->getDirty();
 
 Erreurs de Validation
 =====================
-
-.. php:method:: errors($field = null, $errors = null)
 
 Après avoir :ref:`sauvegardé une entity <saving-entities>` toute erreur de
 validation sera stockée sur l'entity elle-même. Vous pouvez accéder à toutes
@@ -279,39 +316,41 @@ les erreurs de validation en utilisant les méthodes ``getErrors()`` et
 
     // Récupère toutes les erreurs
     $errors = $user->getErrors();
-    // Avant 3.4.0
-    $errors = $user->errors();
 
-    // Récupère les erreurs pour un champ unique.
+    // Récupère les erreurs pour un seul champ.
     $errors = $user->getError('password');
-    // Avant 3.4.0
-    $errors = $user->errors('password');
+
+    // L'entity (ou une entity imbriquée) a-t-elle une erreur ?
+    $user->hasErrors();
+
+    // L'entity racine (uniquement) a-t-elle une erreur ?
+    $user->hasErrors(false);
 
 Les méthodes ``setErrors()`` et ``setError()`` peuvent aussi être utilisées
 pour définir les erreurs sur une entity, facilitant les tests du code qui
-fonctionne avec les messages d'erreur::
+fonctionne avec des messages d'erreur::
 
-    $user->setError('password', ['Password is required.']);
-    $user->setErrors(['password' => ['Password is required'], 'username' => ['Username is required']]);
-
-    // Avant 3.4.0
-    $user->errors('password', ['Password is required.']);
+    $user->setError('password', ['Le mot de passe est obligatoire.']);
+    $user->setErrors([
+      'password' => ['Le mot de passe est obligatoire'],
+      'username' => ['Le nom d'utilisateur est obligatoire']
+    ]);
 
 .. _entities-mass-assignment:
 
 Assignement de Masse
 ====================
 
-Alors que la définition des propriétés des entities en masse est simple et
-pratique, elle peut créer des problèmes importants de sécurité.
+Bien que la définition en masse de champs des entities soit simple et pratique,
+elle peut créer d'importants problèmes de sécurité.
 Assigner en masse les données d'utilisateur à partir de la requête dans une
-entity permet à l'utilisateur de modifier n'importe quelles (voir toutes) les
-colonnes. Quand vous utilisez les classes entity anonymes, CakePHP ne protège
-pas contre l'assignement en masse. Vous pouvez vous protéger de l'assignement de
-masse en utilisant :doc:`la commande bake </bake>` pour générer vos entities.
+entity permet à l'utilisateur de modifier n'importe quelles colonnes (voire
+toutes). Utiliser des classes entity anonymes ou créer des classes entity avec
+la commande :doc:`/bake` de CakePHP ne protège pas contre l'assignement en
+masse.
 
 La propriété ``_accessible`` vous permet de fournir une liste des champs et
-si oui ou non ils peuvent être assignés en masse. Les valeurs ``true`` et
+d'indiquer s'ils peuvent être assignés en masse ou non. Les valeurs ``true`` et
 ``false`` indiquent si un champ peut ou ne peut pas être assigné massivement::
 
     namespace App\Model\Entity;
@@ -322,7 +361,7 @@ si oui ou non ils peuvent être assignés en masse. Les valeurs ``true`` et
     {
         protected $_accessible = [
             'title' => true,
-            'body' => true,
+            'body' => true
         ];
     }
 
@@ -344,11 +383,11 @@ comportement par défaut si un champ n'est pas nommé spécifiquement::
 
 .. note:: Si la propriété ``*`` n'est pas définie, elle sera par défaut à ``false``.
 
-Eviter la Protection Contre l'Assignement de Masse
+Éviter la Protection Contre l'Assignement de Masse
 --------------------------------------------------
 
-lors de la création d'un nouvelle entity via le mot clé ``new`` vous pouvez
-lui spécifier de ne pas se protéger contre l'assignement de masse::
+Lors de la création d'un nouvelle entity un utilisant le mot clé ``new``, vous
+pouvez lui spécifier de ne pas se protéger contre l'assignement de masse::
 
     use App\Model\Entity\Article;
 
@@ -357,24 +396,24 @@ lui spécifier de ne pas se protéger contre l'assignement de masse::
 Modifier les Champs Protégés à l'Exécution
 ------------------------------------------
 
-Vous pouvez modifier la liste des champs protégés à la volée en utilisant la
-méthode ``accessible``::
+Vous pouvez modifier à la volée la liste des champs protégés en utilisant la
+méthode ``setAccess()``::
 
     // Rendre user_id accessible.
-    $article->accessible('user_id', true);
+    $article->setAccess('user_id', true);
 
     // Rendre title protégé.
-    $article->accessible('title', false);
+    $article->setAccess('title', false);
 
 .. note::
 
-    Modifier des champs accessibles agit seulement sur l'instance de la
-    méthode sur laquelle il est appelé.
+    Modifier des champs accessibles agit seulement sur l'instance sur laquelle
+    la méthode est appelée.
 
 Lorsque vous utilisez les méthodes ``newEntity()`` et ``patchEntity()`` dans
-les objets ``Table`` vous avez également le contrôle sur la protection de
-masse. Référez vous à la section to the :ref:`changing-accessible-fields`
-pour plus d'information.
+les objets ``Table`` vous pouvez également utiliser des options pour
+personnaliser la protection de masse. Référez-vous à la section
+:ref:`changing-accessible-fields` pour plus d'information.
 
 Outrepasser la Protection de Champ
 ----------------------------------
@@ -382,7 +421,7 @@ Outrepasser la Protection de Champ
 Il arrive parfois que vous souhaitiez permettre un assignement en masse aux
 champs protégés::
 
-    $article->set($properties, ['guard' => false]);
+    $article->set($fields, ['guard' => false]);
 
 En définissant l'option ``guard`` à ``false``. vous pouvez ignorer la liste des
 champs accessibles pour un appel unique de ``set()``.
@@ -417,30 +456,30 @@ voir comment utiliser le Lazy loading d'associations, nous devrions
 discuter des différences entre le chargement des associations eager et lazy:
 
 Eager loading
-    Le Eager loading utilise les joins (si possible) pour récupérer les
+    Le Eager loading utilise les joins (quand c'est possible) pour récupérer les
     données de la base de données avec aussi *peu* de requêtes que possible.
     Quand une requête séparée est nécessaire comme dans le cas d'une
     association HasMany, une requête unique est émise pour récupérer *toutes*
     les données associées pour l'ensemble courant d'objets.
 Lazy loading
     Le Lazy loading diffère le chargement des données de l'association jusqu'à
-    ce que ce soit complètement nécessaire. Alors que ceci peut sauver du temps
+    ce que ce soit absolument nécessaire. Si cela peut certes économiser du temps
     CPU car des données possiblement non utilisées ne sont pas hydratées dans
-    les objets, cela peut résulter en plus de requêtes émises vers la base de
+    les objets, cela peut aussi résulter en plus de requêtes émises vers la base de
     données. Par exemple faire des boucles sur un ensemble d'articles et leurs
     commentaires va fréquemment émettre N requêtes où N est le nombre d'articles
-    étant itérés.
+    itérés.
 
-Bien que le lazy loading n'est pas inclus dans l'ORM de CakePHP, vous pouvez
-utiliser un des plugins de la communauté. Nous recommandons le `plugin LazyLoad
-<https://github.com/jeremyharris/cakephp-lazyload>`__
+Bien que le lazy loading ne soit pas inclus dans l'ORM de CakePHP, vous pouvez
+tout simplement utiliser un des plugins de la communauté pour le faire. Nous
+recommandons `le plugin LazyLoad <https://github.com/jeremyharris/cakephp-lazyload>`__
 
-Après avoir ajouté le plugin à votre entity, vous pourrez le faire avec ce qui
+Après avoir ajouté le plugin à votre entity, vous pourrez faire ce qui
 suit::
 
     $article = $this->Articles->findById($id);
 
-    // La propriété comments a été chargé en lazy
+    // La propriété comments a été chargée en lazy
     foreach ($article->comments as $comment) {
         echo $comment->body;
     }
@@ -454,11 +493,11 @@ Vous pouvez mettre les traits de votre application dans **src/Model/Entity**.
 Par convention, les traits dans CakePHP sont suffixés avec ``Trait`` pour
 qu'ils soient discernables des classes ou des interfaces. Les traits sont
 souvent un bon allié des behaviors, vous permettant de fournir des
-fonctionnalités pour la table et les objets entity.
+fonctionnalités pour les objets table et entity.
 
-Par exemple si nous avons un plugin SoftDeletable, il pourrait fournir un trait.
-Ce trait pourrait donner des méthodes pour rendre les entities comme
-'supprimé', la méthode ``softDelete`` pourrait être fournie par un trait::
+Par exemple si nous avions un plugin SoftDeletable, il pourrait fournir un trait.
+Ce trait pourrait donner des méthodes pour marquer les entities comme
+'supprimées', la méthode ``softDelete`` pourrait être fournie par un trait::
 
     // SoftDelete/Model/Entity/SoftDeleteTrait.php
 
@@ -490,33 +529,34 @@ et en l'incluant::
 Convertir en Tableaux/JSON
 ==========================
 
-Lors de la construction d'APIs, vous avez peut-être besoin de convertir des
-entities en tableaux ou en données JSON. CakePHP facilite cela::
+Lors de la construction d'APIs, vous aurez sûrement besoin férquemment de
+convertir des entities en tableaux ou en données JSON. CakePHP rend cela très
+simple::
 
     // Obtenir un tableau.
-    // Les associations seront aussi converties avec toArray().
+    // Les associations seront aussi converties par toArray().
     $array = $user->toArray();
 
     // Convertir en JSON
     // Les associations seront aussi converties avec le hook jsonSerialize.
     $json = json_encode($user);
 
-Lors de la conversion d'une entity en JSON, les listes de champ virtuel & caché
-sont utilisées. Les entities sont converties aussi de façon récursive en JSON.
+Lors de la conversion d'une entity en JSON, les listes de champs virtuels & cachés
+sont utilisées. Les entities sont aussi converties de façon récursive en JSON.
 Cela signifie que si les entities et leurs associations sont chargées en eager
-loading, CakePHP va correctement gérer la conversion des données associées dans
+loading, CakePHP va gérer correctement la conversion des données associées dans
 le bon format.
 
-.. _exposing-virtual-properties:
+.. _exposing-virtual-fields:
 
-Montrer les Propriétés Virtuelles
----------------------------------
+Montrer les Champs Virtuels
+---------------------------
 
-Par défaut, les propriétés virtuelles ne sont pas exportées lors de la
-conversion des entities en tableaux ou JSON. Afin de montrer les propriétés
-virtuelles, vous devez les rendre visibles. Lors de la définition de votre
-classe entity, vous pouvez fournir une liste de propriétés virtuelles qui
-doivent être exposées::
+Par défaut, les champs virtuels ne sont pas exportés lors de la conversion des
+entities en tableaux ou en JSON. Pour exposer les champs virtuels, vous devez
+les rendre visibles. Lors de la définition de votre
+classe entity, vous pouvez fournir une liste de champs virtuels qui
+doivent être exposés::
 
     namespace App\Model\Entity;
 
@@ -524,23 +564,21 @@ doivent être exposées::
 
     class User extends Entity
     {
-
         protected $_virtual = ['full_name'];
-
     }
 
-Cette liste peut être modifiée à la volée en utilisant ``virtualProperties``::
+Cette liste peut être modifiée à la volée en utilisant la méthode
+``setVirtual``::
 
-    $user->virtualProperties(['full_name', 'is_admin']);
+    $user->setVirtual(['full_name', 'is_admin']);
 
-Cacher les Propriétés
----------------------
+Cacher les Champs
+-----------------
 
 Il arrive souvent que vous ne souhaitiez pas exporter certains champs dans
-des formats JSON ou tableau. Par exemple il n'est souvent pas sage de montrer
-les hashs de mot de passe ou les questions pour retrouver son compte. Lors
-de la définition d'une classe entity, définissez les propriétés qui doivent
-être cachées::
+des formats JSON ou en tableau. Par exemple il est souvent mal avisé de montrer
+les hashs de mot de passe ou les questions de récupération du compte. Lors de la
+définition d'une classe entity, définissez quels champs doivent être cachés::
 
     namespace App\Model\Entity;
 
@@ -548,14 +586,13 @@ de la définition d'une classe entity, définissez les propriétés qui doivent
 
     class User extends Entity
     {
-
         protected $_hidden = ['password'];
-
     }
 
-Cette liste peut être modifiée à la volée en utilisant ``hiddenProperties``::
+Cette liste peut être modifiée à la volée en utilisant la méthode
+``setHidden``::
 
-    $user->hiddenProperties(['password', 'recovery_question']);
+    $user->setHidden(['password', 'recovery_question']);
 
 Stocker des Types Complexes
 ===========================
@@ -565,3 +602,7 @@ la logique pour sérialiser et desérialiser les données complexes venant de la
 base de données. Consultez la section :ref:`saving-complex-types` pour
 comprendre la façon dont votre application peut stocker des types de données
 complexes comme les tableaux et les objets.
+
+.. meta::
+    :title lang=fr: Entities
+    :keywords lang=en: entity, entities, single row, individual record
