@@ -1,15 +1,18 @@
-4.0 Upgrade Guide
+5.0 Upgrade Guide
 #################
 
-First, check that your application is running on latest CakePHP 3.x version.
+.. warning::
+    The upgrade guid for 5.0 is not complete.
+
+First, check that your application is running on latest CakePHP 4.x version.
 
 .. note::
-    The upgrade tool only works on applications running on latest CakePHP 3.x. You cannot run the upgrade tool after updating to CakePHP 4.0.
+    The upgrade tool only works on applications running on latest CakePHP 4.x. You cannot run the upgrade tool after updating to CakePHP 5.0.
 
 Fix Deprecation Warnings
 ========================
 
-Once your application is running on latest CakePHP 3.x, enable deprecation warnings in **config/app.php**::
+Once your application is running on latest CakePHP 4.x, enable deprecation warnings in **config/app.php**::
 
     'Error' => [
         'errorLevel' => E_ALL,
@@ -17,13 +20,13 @@ Once your application is running on latest CakePHP 3.x, enable deprecation warni
 
 Now that you can see all the warnings, make sure these are fixed before proceding with the upgrade.
 
-Upgrade to PHP 7.2
+Upgrade to PHP 8.0
 ==================
 
-If you are not running on **PHP 7.2 or higher**, you will need to upgrade PHP before updating CakePHP.
+If you are not running on **PHP 8.0 or higher**, you will need to upgrade PHP before updating CakePHP.
 
 .. note::
-    CakePHP 4.0 requires **a minimum of PHP 7.2**.
+    CakePHP 5.0 requires **a minimum of PHP 8.0**.
 
 .. _upgrade-tool-use:
 
@@ -98,7 +101,7 @@ method signatures as the one found in cakephp/app. You can find the current
 <https://github.com/cakephp/app/blob/master/src/Application.php>`__ on GitHub.
 
 If you are providing some kind of REST API, don't forget to include the
-:ref:`body-parser-middleware`. Finally, you should consider upgrading to the new 
-`AuthenticationMiddleware </authentication/2/en/index.html>`__ 
+:ref:`body-parser-middleware`. Finally, you should consider upgrading to the new
+`AuthenticationMiddleware </authentication/2/en/index.html>`__
 and `AuthorizationMiddleware </authorization/2/en/index.html>`__, if you are still
 using ``AuthComponent``.
