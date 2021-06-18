@@ -5,6 +5,7 @@ on:
     branches:
       - '4.x'
       - '4.next'
+      - '5.0'
   pull_request:
     branches:
       - '*'
