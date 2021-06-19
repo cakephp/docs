@@ -425,7 +425,6 @@ As an example::
     // Outputs '2021-02-10 00:00:00'
     echo $newDate->format('Y-m-d H:i:s');
 
-    
 
 Attempts to modify the timezone on a ``FrozenDate`` instance are also ignored::
 
