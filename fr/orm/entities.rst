@@ -66,7 +66,7 @@ les données que vous voulez y stocker::
 La méthode recommandée pour récupérer une nouvelle entity est d'appeler
 ``newEntity()`` sur l'objet ``Table``::
 
-    use \Cake\ORM\Locator\LocatorAwareTrait;
+    use Cake\ORM\Locator\LocatorAwareTrait;
 
     $article = $this->getTableLocator()->newEmptyEntity();
 
