@@ -272,7 +272,6 @@ You can, however, modify this default at runtime::
     
     // Outputs '31 ene. 2021 22:11'
     echo $time->nice(); 
-    
 
 From now on, datetimes will be displayed in the Spanish preferred format unless
 a different locale is specified directly in the formatting method.
