@@ -82,7 +82,7 @@ In test cases, you can mock out ``now()`` using ``setTestNow()``::
 
     // Outputs '2021-01-31 22:11:30'
     $now = FrozenTime::parse('now');
-	echo $now->i18nFormat('yyyy-MM-dd HH:mm:ss');
+    echo $now->i18nFormat('yyyy-MM-dd HH:mm:ss');
 
 Manipulation
 ============
