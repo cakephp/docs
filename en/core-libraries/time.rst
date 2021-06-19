@@ -204,8 +204,6 @@ You can also format dates with non-gregorian calendars::
     
     // Outputs 'Sunday, Jumada II 18, 1442 AH at 10:11:30 PM Eastern Standard Time'
     echo $time->i18nFormat(\IntlDateFormatter::FULL, null, 'en-SA@calendar=islamic');
-    
-    
 
 The following calendar types are supported:
 
