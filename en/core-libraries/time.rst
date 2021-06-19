@@ -96,7 +96,11 @@ Once created, ``FrozenTime`` instances cannot be manipulated as it is immutable.
     // Outputs '2013-10-31 22:11:30'
     echo $newTime->i18nFormat('yyyy-MM-dd HH:mm:ss');
 
-Using setter methods to manipulate ``FrozenTime`` instances will not work::
+You can also use the methods provided by PHP's built-in ``DateTime`` class::
+
+    $time = $time->setDate(2013, 10, 31);
+
+Failing to reassign the new ``FrozenTime`` instances will result in the original, unmodified instance being used::
 
     $time->year(2013)
         ->month(10)
