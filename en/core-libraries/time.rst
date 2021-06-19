@@ -89,10 +89,12 @@ Manipulation
 
 Once created, ``FrozenTime`` instances cannot be manipulated as it is immutable. You will need to create another instance. You can also use the methods provided by PHP's built-in ``DateTime`` class::
 
-    $time = FrozenTime::parse('2021-01-31 22:11:30');
+    $time = FrozenTime::now();
     
-    // Create another instance
-    $newTime = $time->setDate(2013, 10, 31);
+    // Create and reassign a new instance
+    $time = $now->year(2013)
+        ->month(10)
+        ->day(31);
     // Outputs '2013-10-31 22:11:30'
     echo $newTime->i18nFormat('yyyy-MM-dd HH:mm:ss');
 
