@@ -284,7 +284,7 @@ Likewise, it is possible to alter the default formatting string to be used for
     Date::setToStringFormat(\IntlDateFormatter::SHORT); // For any mutable Date
     FrozenDate::setToStringFormat(\IntlDateFormatter::SHORT); // For any immutable Date
 
-    // The same method exists on Date, FrozenDate, Time and FrozenTime
+    // The same method exists on Date, FrozenDate, and Time
     FrozenTime::setToStringFormat([
         \IntlDateFormatter::FULL,
         \IntlDateFormatter::SHORT
