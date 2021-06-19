@@ -112,7 +112,7 @@ You can create another instance with modified dates, through subtraction and add
 
     $time = FrozenTime::create(2021, 1, 31, 22, 11, 30);
     $newTime = $time->subDays(5)
-		->addHours(-2)
+        ->addHours(-2)
         ->addMonth(1);
     // Outputs '2/26/21, 8:11 PM'
     echo $newTime;
