@@ -292,7 +292,7 @@ Likewise, it is possible to alter the default formatting string to be used for
     // Outputs 'Sunday, January 31, 2021 at 10:11 PM'
     echo $time; 
 
-    // The same method exists on Date, FrozenDate, Time and FrozenTime
+    // The same method exists on Date, FrozenDate, and Time
     FrozenTime::setToStringFormat("EEEE, MMMM dd, yyyy 'at' KK:mm:ss a");
     // Outputs 'Sunday, January 31, 2021 at 10:11:30 PM'
     echo $time; 
