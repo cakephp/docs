@@ -40,9 +40,11 @@ For more details on Chronos please see `the API documentation
 Creating FrozenTime Instances
 =======================
 
-``FrozenTime`` are immutable objects that useful when you want to prevent
+``FrozenTime`` are immutable objects that are useful when you want to prevent
 accidental changes to data, or when you want to avoid order based dependency
-issues. Refer to ``Time`` instances for mutable objects. There are a few ways to create ``FrozenTime`` instances::
+issues. Refer to ``Time`` instances for mutable objects.
+
+There are a few ways to create ``FrozenTime`` instances::
 
     use Cake\I18n\FrozenTime;
 
