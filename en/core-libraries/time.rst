@@ -311,7 +311,7 @@ Formatting Relative Times
 Often it is useful to print times relative to the present::
 
     $time = new FrozenTime('Jan 31, 2021');
-    // On 12-Jun-21, outputs '4 months, 1 week, 6 days ago'
+    // On June 12, 2021, this would output '4 months, 1 week, 6 days ago'
     echo $time->timeAgoInWords(
         ['format' => 'MMM d, YYY', 'end' => '+1 year']
     );
