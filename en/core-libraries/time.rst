@@ -173,7 +173,7 @@ dates. CakePHP makes this a snap::
     echo $time->i18nFormat();
 
     // Use the full date and time format. Outputs 'Sunday, January 31, 2021 at 10:11:30 PM Eastern Standard Time'
-	echo $time->i18nFormat(\IntlDateFormatter::FULL);
+    echo $time->i18nFormat(\IntlDateFormatter::FULL);
 
     // Use full date but short time format. Outputs 'Sunday, January 31, 2021 at 10:11 PM'
     echo $time->i18nFormat([\IntlDateFormatter::FULL, \IntlDateFormatter::SHORT]);
