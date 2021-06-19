@@ -78,7 +78,7 @@ In test cases, you can mock out ``now()`` using ``setTestNow()``::
 
     // Outputs '2021-01-31 22:11:30'
     $now = FrozenTime::now();
-	echo $now->i18nFormat('yyyy-MM-dd HH:mm:ss');
+    echo $now->i18nFormat('yyyy-MM-dd HH:mm:ss');
 
     // Outputs '2021-01-31 22:11:30'
     $now = FrozenTime::parse('now');
@@ -87,12 +87,12 @@ In test cases, you can mock out ``now()`` using ``setTestNow()``::
 Manipulation
 ============
 
-Once created, ``FrozenTime`` instances cannot be manipulated as it is immutable. You will need to create another instance. You can also use the methods provided by PHP's built-in ``DateTime`` class::
+Once created, ``FrozenTime`` instances cannot be manipulated or changed anymore, as they are immutable. Manipulating them will create new instance::
 
     $time = FrozenTime::now();
     
     // Create and reassign a new instance
-    $time = $now->year(2013)
+    $newTime = $time->year(2013)
         ->month(10)
         ->day(31);
     // Outputs '2013-10-31 22:11:30'
