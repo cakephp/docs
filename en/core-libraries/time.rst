@@ -120,8 +120,8 @@ You can create another instance with modified dates, through subtraction and add
     echo $newTime;
 
     // Using strtotime strings.
-	$newTime = $time->modify('+1 month -5 days -2 hours');
-	// Outputs '2/26/21, 8:11 PM'
+    $newTime = $time->modify('+1 month -5 days -2 hours');
+    // Outputs '2/26/21, 8:11 PM'
     echo $newTime;
 
 You can get the internal components of a date by accessing its properties::
