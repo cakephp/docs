@@ -139,7 +139,6 @@ Formatting
 
 This method sets the default format used when converting an object to json::
 
-    
     Time::setJsonEncodeFormat('yyyy-MM-dd HH:mm:ss');  // For any mutable DateTime
     FrozenTime::setJsonEncodeFormat('yyyy-MM-dd HH:mm:ss');  // For any immutable DateTime
     Date::setJsonEncodeFormat('yyyy-MM-dd HH:mm:ss');  // For any mutable Date
