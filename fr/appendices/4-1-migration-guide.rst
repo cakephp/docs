@@ -4,6 +4,13 @@ Guide de migration vers la version 4.1
 CakePHP 4.1 est une mise à jour de l'API compatible à partir de la version 4.0. Cette page présente les
 dépréciations et fonctionnalités ajoutées dans la version 4.1.
 
+Mettre à jour vers la version 4.1.0
+===================================
+
+Vous pouvez utiliser composer pour mettre à jour vers CakePHP 4.1.0::
+
+    php composer.phar require --update-with-dependencies "cakephp/cakephp:4.1.x"
+
 Dépréciations
 =============
 

@@ -279,6 +279,9 @@ ORM
 * ``TableLocator::get()`` et ``TableRegistry::get()`` s'attendent maintenant à ce
   que les alias des noms soient toujours **CamelCased** dans votre code. Passer des alias
   avec la mauvaise casse entraînera un chargement incorrect des classes de table et d'entité.
+* La règle ``IsUnique`` n'accepte plus l'option ``allowMultipleNulls`` qui était
+  activée par défaut.
+  Ceci a été ré-ajouté dans 4.2 mais désactivé par défaut.
 
 Router
 ------
