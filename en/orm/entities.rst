@@ -61,7 +61,7 @@ to store in them::
 The preferred way of getting new entities is using the ``newEmptyEntity()`` method from the
 ``Table`` objects::
     
-    use \Cake\ORM\Locator\LocatorAwareTrait;
+    use Cake\ORM\Locator\LocatorAwareTrait;
 
     $article = $this->getTableLocator()->newEmptyEntity();
 
