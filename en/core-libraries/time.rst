@@ -166,8 +166,8 @@ dates. CakePHP makes this a snap::
 
     $time = FrozenTime::parse('2021-01-31 22:11:30');
 
-	// Prints a localized datetime stamp. Outputs '1/31/21, 10:11 PM'
-	echo $time;
+    // Prints a localized datetime stamp. Outputs '1/31/21, 10:11 PM'
+    echo $time;
 
     // Outputs '1/31/21, 10:11 PM' for the en-US locale
 	echo $time->i18nFormat();
