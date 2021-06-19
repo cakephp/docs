@@ -151,7 +151,6 @@ This method sets the default format used when converting an object to json::
     FrozenDate::setJsonEncodeFormat(static function($time) {
         return $time->format(DATE_ATOM);
     });
-    
 
 .. note::
     This method must be called statically.
