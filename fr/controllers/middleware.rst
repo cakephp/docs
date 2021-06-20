@@ -65,8 +65,8 @@ d'une application web:
 Utilisation des Middleware
 ==========================
 
-Les middlewares peuvent être appliqués de manière globale à votre application ou
-un scope de routing.
+Les middlewares peuvent être appliqués de manière globale à votre application, à
+un scope de routing ou à des controllers spécifiques.
 
 Pour appliquer un middleware à toutes les requêtes, utilisez la méthode ``middleware``
 de la classe ``App\Application``.
@@ -121,9 +121,9 @@ différentes opérations ::
             $layer
         );
 
-En plus d'appliquer des middleware à la totalité de votre application, vous pouvez
-appliquer des middleware à des jeux de routes spécifiques en utilisant les
-:ref:`middlewares connectés à un scope <connecting-scoped-middleware>`.
+Si votre middleware n'est applicable qu'à certaines routes ou à des controllers
+individuels, vous pouvez utiliser :ref:`un middleware limité à des routes <route-scoped-middleware>`,
+ou :ref:`un middleware de controller <controller-middleware>`.
 
 Ajout de Middleware à partir de Plugins
 ---------------------------------------
