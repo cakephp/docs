@@ -356,10 +356,10 @@ You can compare a ``FrozenTime`` instance with the present in a variety of ways:
 
     $time = new FrozenTime('+3 days');
 
-    var_export($time->isYesterday());
-    var_export($time->isThisWeek());
-    var_export($time->isThisMonth());
-    var_export($time->isThisYear());
+    debug($time->isYesterday());
+    debug($time->isThisWeek());
+    debug($time->isThisMonth());
+    debug($time->isThisYear());
 
 Each of the above methods will return ``true``/``false`` based on whether or
 not the ``FrozenTime`` instance matches the present.
