@@ -620,7 +620,7 @@ make this process simpler::
     // Set the user's timezone
     TypeFactory::build('datetime')->setUserTimezone($user->timezone);
 
-Once set, when your application creates or updates enities from request data,
+Once set, when your application creates or updates entities from request data,
 the ORM will automatically convert datetime values from the user's timezone into
 your application's timezone. This ensures that your application is always
 working in the timezone defined in ``App.defaultTimezone``.
