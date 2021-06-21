@@ -393,7 +393,7 @@ You can also compare a ``FrozenTime`` instance within a range in the past::
     var_export($time->wasWithinLast('3 days'));
     
     // Within past 2 weeks. Outputs 'true'
-    var_export($time->wasWithinLast('2 weeks'));
+    debug($time->wasWithinLast('2 weeks'));
 
 .. end-time
 
