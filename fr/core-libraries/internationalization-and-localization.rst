@@ -95,6 +95,13 @@ Un fichier de traduction pourrait ressembler à ceci:
      msgid "I'm {0,number} years old"
      msgstr "J'ai {0,number} ans"
 
+.. note::
+    Les traductions sont mises en cache - Assurez-vous de toujours vider le cache après
+    avoir apporté des modifications aux traductions! Vous pouvez soit utiliser
+    :doc:`l'outil cache </console-commands/cache>` et exécuter par exemple
+    ``bin/cake cache clear _cake_core_``, soit vider manuellement le dossier
+    ``tmp/cache/persistent`` (si vous utilisez une mise en cache basée sur des fichiers).
+
 Extraire les Fichiers Pot avec le Shell I18n
 --------------------------------------------
 

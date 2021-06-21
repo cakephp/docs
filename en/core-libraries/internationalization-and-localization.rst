@@ -90,6 +90,13 @@ An example translation file could look like this:
      msgid "I'm {0,number} years old"
      msgstr "J'ai {0,number} ans"
 
+.. note::
+    Translations are cached - Make sure that you always clear the cache after
+    making changes to translations! You can either use the
+    :doc:`cache tool </console-commands/cache>` and run for example
+    ``bin/cake cache clear _cake_core_``, or manually clear the ``tmp/cache/persistent``
+    folder (if using file based caching).
+
 Extract Pot Files with I18n Shell
 ---------------------------------
 

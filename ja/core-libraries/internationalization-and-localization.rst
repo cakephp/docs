@@ -83,6 +83,12 @@ PR を送ってください。
      msgid "I'm {0,number} years old"
      msgstr "J'ai {0,number} ans"
 
+.. note::
+    翻訳はキャッシュされています。翻訳を変更した後は、必ずキャッシュをクリアしてください。
+    :doc:`キャッシュツール </console-and-shells/cache>` を使って、例えば
+    ``bin/cake cache clear _cake_core_`` を実行するか、手動で ``tmp/cache/persistent``
+    フォルダをクリアすることができます (ファイルベースのキャッシュを使用している場合)。
+
 I18n を利用して Pot ファイルを生成する
 --------------------------------------
 
