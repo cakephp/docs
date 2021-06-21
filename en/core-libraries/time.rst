@@ -378,7 +378,7 @@ You can see if a ``FrozenTime`` instance falls within a given range using
     debug($time->isWithinNext('2 days'));
 
     // Within 2 next weeks. Outputs 'true'
-    var_export($time->isWithinNext('2 weeks'));
+    debug($time->isWithinNext('2 weeks'));
 
 .. php:method:: wasWithinLast($interval)
 
