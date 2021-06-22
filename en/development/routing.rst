@@ -1284,7 +1284,7 @@ or::
     //'Router::reverse()' operates on the request parameters array
     //and will produce a url string, valid input for `link()`
 
-    $requestParams = Router::getRequest()->getAttributes('params');
+    $requestParams = Router::getRequest()->getAttribute('params');
     $this->Html->link('View', Router::reverse($requestParams));
 
 Then when you decided to change your URLs, you could do so by defining a
