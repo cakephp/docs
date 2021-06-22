@@ -26,6 +26,11 @@ Breaking Changes
 In addition to the removal of deprecated features there have been breaking
 changes made:
 
+Event
+-----
+
+- Event payloads must be an array. Other object such as ArrayAccess are no longer cast to array.
+
 
 New Features
 ============
