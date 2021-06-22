@@ -38,7 +38,7 @@ For more details on Chronos please see `the API documentation
 .. start-time
 
 Creating FrozenTime Instances
-=======================
+=============================
 
 ``FrozenTime`` are immutable objects that are useful when you want to prevent
 accidental changes to data, or when you want to avoid order based dependency
@@ -87,7 +87,7 @@ In test cases, you can mock out ``now()`` using ``setTestNow()``::
 Manipulation
 ============
 
-Once created, ``FrozenTime`` instances cannot be manipulated or changed anymore, as they are immutable. Manipulating them will create new instance::
+Once created, FrozenTime instances cannot be manipulated or changed, as they are immutable. A new instance can be created from a FrozenTime instance::
 
     $time = FrozenTime::now();
     
@@ -398,13 +398,13 @@ You can also compare a ``FrozenTime`` instance within a range in the past::
 .. end-time
 
 FrozenDate
-=====
+==========
 
 .. php:class: FrozenDate
 
 The immutable ``FrozenDate`` class in CakePHP implements the same API and methods as
 :php:class:`Cake\\I18n\\FrozenTime` does. The main difference between ``FrozenTime`` and
-``FrozenDate`` is that ``FrozenDate`` does not track time components, and is always in UTC.
+``FrozenDate`` is that ``FrozenDate`` does not track time components.
 As an example::
 
     use Cake\I18n\FrozenDate;
@@ -435,7 +435,7 @@ Attempts to modify the timezone on a ``FrozenDate`` instance are also ignored::
 .. _mutable-time:
 
 Mutable Dates and Times
-=========================
+=======================
 
 .. php:class:: Time
 .. php:class:: Date
