@@ -236,8 +236,7 @@ mise en cache des routes, fournissez la :ref:`configuration de cache <cache-conf
 souhaitée en paramètre::
 
     // Dans Application.php
-    public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQue
-ue
+    public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue
     {
         // ...
         $middlewareQueue->add(new RoutingMiddleware($this, 'routing'));
