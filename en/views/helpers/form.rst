@@ -2412,7 +2412,6 @@ create the following controls::
 
     If you only want to update the _joinData (e.g. ``starred``) without updating the associated data (e.g. ``tags``), you may need to add in the associated data as a hidden part of the form (e.g. ``'type'=>'hidden'``). This is to ensure the associated data is present if your validation requires it.
 
-..
 
 The above controls could then be marshalled into a completed entity graph using
 the following code in your controller::
