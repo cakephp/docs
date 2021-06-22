@@ -193,6 +193,21 @@ key.
 .. note::
 
     The ``first()`` method will return ``null`` if no results are found.
+    
+
+.. warning::
+
+    All instances returned from the same unmodified query is referenced to one another. Modify the query to create a new unreferenced instance.
+
+All instances returned from the same unmodified query is referenced to one another::
+
+    $first  = $query->first();
+    $first->title = 'Modified Title';  
+    
+    $firstAgain = $query->first();
+    // Outputs 'Modified Title'
+    echo $firstAgain->title;
+
 
 Getting a Count of Results
 ==========================
