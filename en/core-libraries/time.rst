@@ -87,7 +87,7 @@ In test cases, you can mock out ``now()`` using ``setTestNow()``::
 Manipulation
 ============
 
-Once created, FrozenTime instances cannot be manipulated or changed, as they are immutable. A new instance can be created from a FrozenTime instance::
+Remember, ``FrozenTime`` instance always return a new instance from setters instead of modifying itself.
 
     $time = FrozenTime::now();
     
