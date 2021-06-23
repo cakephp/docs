@@ -35,7 +35,13 @@ Cache
 Event
 -----
 
-- Event payloads must be an array. Other object such as ArrayAccess are no longer cast to array.
+- Event payloads must be an array. Other object such as ``ArrayAccess`` are no longer cast to array.
+
+Log
+---
+
+- Log engine config now uses ``null`` instead of ``false`` to disable scopes. 
+  So instead of ``'scopes' => false`` you need to use ``'scopes' => null`` in your log config.
 
 
 New Features
