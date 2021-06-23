@@ -26,6 +26,12 @@ Breaking Changes
 In addition to the removal of deprecated features there have been breaking
 changes made:
 
+Cache
+-----
+
+- The ``Wincache`` engine was removed. The wincache extension is not supported
+  on PHP 8.
+
 Event
 -----
 

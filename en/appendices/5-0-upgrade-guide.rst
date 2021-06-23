@@ -2,7 +2,7 @@
 #################
 
 .. warning::
-    The upgrade guid for 5.0 is not complete.
+    The upgrade guide for 5.0 is not complete.
 
 First, check that your application is running on latest CakePHP 4.x version.
 
@@ -51,20 +51,6 @@ To help expedite fixing these tedious changes there is an upgrade CLI tool:
     git checkout master
     composer install --no-dev
 
-With the upgrade tool installed you can now run it on your application or
-plugin:
-
-.. code-block:: bash
-
-    # Rename locale files
-    bin/cake upgrade file_rename locales <path/to/app>
-
-    # Rename template files
-    bin/cake upgrade file_rename templates <path/to/app>
-
-Once you've renamed your template and locale files, make sure you update
-``App.paths.locales`` and ``App.paths.templates`` paths in **/config/app.php**. If needed, refer to the [skeleton app config](https://github.com/cakephp/app/blob/master/config/app.php).
-
 Applying Rector Refactorings
 ----------------------------
 
@@ -72,14 +58,8 @@ Next use the ``rector`` command to automatically fix many deprecated CakePHP and
 PHPUnit method calls. It is important to apply rector **before** you upgrade
 your dependencies::
 
-    bin/cake upgrade rector --rules phpunit80 <path/to/app/tests>
-    bin/cake upgrade rector --rules cakephp40 <path/to/app/src>
+    bin/cake upgrade rector --rules cakephp50 <path/to/app/src>
 
-You can also use the upgrade tool to apply new rector rules for each minor
-version of CakePHP::
-
-    # Run the rector rules for the 4.0 -> 4.1 upgrade.
-    bin/cake upgrade rector --rules cakephp41 <path/to/app/src>
 
 Update CakePHP Dependency
 =========================
@@ -89,19 +69,4 @@ composer commands:
 
 .. code-block:: bash
 
-    php composer.phar require --dev --update-with-dependencies "phpunit/phpunit:^8.0"
-    php composer.phar require --update-with-dependencies "cakephp/cakephp:4.0.*"
-
-Application.php
-===============
-
-Next, ensure your ``src/Application.php`` has been updated to have the same
-method signatures as the one found in cakephp/app. You can find the current
-`Application.php
-<https://github.com/cakephp/app/blob/master/src/Application.php>`__ on GitHub.
-
-If you are providing some kind of REST API, don't forget to include the
-:ref:`body-parser-middleware`. Finally, you should consider upgrading to the new
-`AuthenticationMiddleware </authentication/2/en/index.html>`__
-and `AuthorizationMiddleware </authorization/2/en/index.html>`__, if you are still
-using ``AuthComponent``.
+    php composer.phar require --update-with-dependencies "cakephp/cakephp:5.0.*"
