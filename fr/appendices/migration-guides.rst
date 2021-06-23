@@ -11,3 +11,4 @@ chaque version et le chemin de migration entre 3.x et 4.x.
     ./4-0-migration-guide
     ./4-1-migration-guide
     ./4-2-migration-guide
+    ./4-3-migration-guide

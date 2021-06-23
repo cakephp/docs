@@ -15,7 +15,7 @@ Vous pouvez utiliser composer pour mettre à jour vers CakePHP 4.2.0::
 Dépréciations
 =============
 
-4.2 introiduit quelques dépréciations. Toutes ces fonctionnalités continueront
+4.2 introduit quelques dépréciations. Toutes ces fonctionnalités continueront
 d'exister dans les versions 4.x mais seront supprimées dans la version 5.0. Vous
 pouvez utiliser l':ref:`outil de mise à niveau <upgrade-tool-use>` pour
 automatiser la mise à jour des fonctionnalités obsolètes::

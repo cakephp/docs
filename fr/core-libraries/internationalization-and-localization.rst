@@ -643,6 +643,60 @@ les types Date, Time, et DateTime pour parser les formats localisés::
 
 Le parsing du format par défaut est le même que le format de chaîne par défaut.
 
+.. _converting-request-data-from-user-timezone:
+
+Convertir des Données de Requêtes du Fuseau Horaire de l'Utilisateur
+--------------------------------------------------------------------
+
+Quand vous gérez des données d'utilisateurs situés dans différents fuseaux
+horaires, vous avez besoin de convertir ces datetimes de la requête vers le
+fuseau horaire de votre application. Vous pouvez utiliser ``setUserTimezone()``
+depuis un controller ou :doc:`/controllers/middleware` pour faire cela plus
+simplement::
+
+    // Définir le fuseau horaire de l'utilisateur
+    TypeFactory::build('datetime')->setUserTimezone($user->timezone);
+
+Une fois que c'est fait, quand votre application crée ou met à jour des entities
+à partir de la requête, l'ORM va convertir automatiquement les valeurs datetime
+du fuseau de l'utilisateur vers le fuseau de votre application. Cela garantit
+que l'application travaillera toujours dans le fuseau horaire défini dans
+``App.defaultTimezone``.
+
+Si votre application gère des données datetime dans de nombreuses actions, vous
+pouvez utiliser un middleware pour définir à la fois la conversion du décalage
+horaire et le format localisé::
+
+    namespace App\Middleware;
+
+    use Cake\Database\TypeFactory;
+    use Psr\Http\Message\ResponseInterface;
+    use Psr\Http\Message\ServerRequestInterface;
+    use Psr\Http\Server\MiddlewareInterface;
+    use Psr\Http\Server\RequestHandlerInterface;
+
+    class DatetimeMiddleare implements MiddlewareInterface
+    {
+        public function process(
+            ServerRequestInterface $request,
+            RequestHandlerInterface $handler
+        ): ResponseInterface {
+            // Obtenir l'utilisateur depuis la requête.
+            // Cet exemple suppose que votre entity utilisteur a un attribut timezone.
+            $user = $request->getAttribute('identity');
+            if ($user) {
+                TypeFactory::build('datetime')
+                    ->useLocaleParser()
+                    ->setUserTimezone($user->timezone);
+            }
+
+            return $handler->handle($request);
+        }
+    }
+
+.. versionadded:: 4.3.0
+    La méthode ``setUserTimezone()`` a été ajoutée.
+
 Sélection Automatique de Locale Basée sur les Données de Requêtes
 =================================================================
 
