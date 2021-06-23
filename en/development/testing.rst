@@ -475,7 +475,7 @@ configuration. See the `migrations docs </migrations>` for more information.
 To load a SQL dump file you can use the following::
 
     // in tests/bootstrap.php
-    use Cake\TestSuite\Schema\SchemaManager;
+    use Cake\TestSuite\Fixture\SchemaManager;
 
     // Load one or more SQL files.
     SchemaManager::create('test', 'path/to/schema.sql');
