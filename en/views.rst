@@ -118,7 +118,7 @@ Another example, using if/elseif/else. Notice the colons:
   <?php endif; ?>
 
 If you'd prefer using a templating language like
-`Twig <http://twig.sensiolabs.org>`_, a subclass of View will bridge your
+`Twig <https://twig.symfony.com>`_, a subclass of View will bridge your
 templating language and CakePHP.
 
 Template files are stored in **templates/**, in a folder named after the
