@@ -38,3 +38,5 @@ jobs:
         if [[ ${{ matrix.doc-type }} == 'HTML' ]]; then make html; fi
         if [[ ${{ matrix.doc-type }} == 'EPUB' ]]; then make epub; fi
         if [[ ${{ matrix.doc-type }} == 'PDF' ]]; then make latex; fi
+      env:
+        SPHINXOPTS: "-W --keep-going"
