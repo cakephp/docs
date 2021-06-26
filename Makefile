@@ -40,7 +40,7 @@ rebuild-index: $(foreach lang, $(LANGS), rebuild-index-$(lang))
 
 # Make the HTML version of the documentation with correctly nested language folders.
 html-%:
-	cd $* && make html SPHINXOPTS=$(SPHINXOPTS)
+	cd $* && make html SPHINXOPTS="$(SPHINXOPTS)"
 	make build/html/$*/_static/css/app.css
 	make build/html/$*/_static/app.js
 

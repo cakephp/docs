@@ -144,7 +144,7 @@ View
 
 
 Nouvelles fonctions
-==================
+===================
 
 Datasource
 ----------
@@ -167,7 +167,7 @@ Database
 
 * MySQL 8 est pris en charge et testé.
 * ``AggregateExpression`` a été ajouté pour représenter les fonctions SQL d'agrégation.
-  ``FunctionsBuilder::aggregate()``peut être utilisé pour encapsuler de nouvelles fonctions SQL agrégées.
+  ``FunctionsBuilder::aggregate()`` peut être utilisé pour encapsuler de nouvelles fonctions SQL agrégées.
 * La prise en charge des fonctions 'Window' a été ajoutée pour n'importe quelle expression agrégée.
   ``AggregateExpression`` enveloppe l'expression de fenêtrage (window expression) permettant ainsi
   d'étendre n'importe quelle instance en chaînant les appels.
@@ -178,7 +178,7 @@ Database
 * Le support des Common Table Expression (CTE) a été ajouté. Les CTE peuvent être attachées
   en utilisant `Query::with()`.
 * ``Query::orderAsc()`` et ``Query::orderDesc()`` acceptent désormais des closures comme champs
-    vous permettant ainsi de construire des expressions de tri (order) complexes utilisant l'objet
+  vous permettant ainsi de construire des expressions de tri (order) complexes utilisant l'objet
   ``QueryExpression``.
 
 Error

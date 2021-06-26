@@ -74,6 +74,7 @@ Mailer
 
 App
 ---
+
 * ``App::path()`` a été dépréciée pour les chemins de classes (class paths).
   Utilisez ``\Cake\Core\App::classPath()`` à sa place.
 
@@ -81,7 +82,7 @@ Changements non rétro-compatibles
 ==================================
 
 En plus de la suppression des fonctionnalités obsolètes, des
-changements non rétro-compatibles ont été effectués::
+changements non rétro-compatibles ont été effectués:
 
 Cache
 -----
@@ -397,8 +398,7 @@ Miscellaneous
   Le getter magique ``ObjectRegistry::__get()`` continuera à retourner ``null`` si l'objet
   correspondant au nom n'est pas chargé.
 * Les fichiers de traduction (Locale) ont été déplacés de  ``src/Locale`` vers ``resources/locales``.
-*
-Le fichier  ``cacert.pem`` qui était fourni dans CakePHP a été remplacé par
+* Le fichier  ``cacert.pem`` qui était fourni dans CakePHP a été remplacé par
   une dépendance vers `composer/ca-bundle <https://packagist.org/packages/composer/ca-bundle>`__.
 
 
@@ -416,8 +416,8 @@ Core
 
 * ``InstanceConfigTrait::getConfigOrFail()`` et
   ``StaticConfigTrait::getConfigOrFail()`` ont été ajoutées. Comme les autres ``orFail``
-   méthodes ces méthodes lèveront une exception lorsque la clé demandée n'existe pas
-   ou possède la valeur ``null``.
+  méthodes ces méthodes lèveront une exception lorsque la clé demandée n'existe pas
+  ou possède la valeur ``null``.
 
 Database
 --------

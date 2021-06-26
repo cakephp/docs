@@ -242,6 +242,7 @@ Redis サーバーが予期せず失敗した場合、 ``redis`` キャッシュ
 ``$config`` を指定しない場合、デフォルトが使用されます。
 ``Cache::write()`` はあらゆるタイプのオブジェクトを格納することができ、
 以下のようにモデルの結果を格納するのに理想的です。 ::
+
     $posts = Cache::read('posts');
     if ($posts === null) {
         $posts = $someService->getAllPosts();
@@ -327,6 +328,7 @@ Cache を使用すると、Read-through キャッシュを簡単に行うこと�
 
 ``short`` という別のキャッシュ設定を使っている場合、
 下記のように ``Cache::read()`` と ``Cache::write()`` に明記してください。 ::
+
     // デフォルトの代わりにshort からキー"cloud" を読み込む
     $cloud = Cache::read('cloud', 'short');
     if ($cloud === null) {

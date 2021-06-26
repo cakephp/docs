@@ -20,7 +20,6 @@ Helpers (Facilitadores)
     /views/helpers/html
     /views/helpers/number
     /views/helpers/paginator
-    /views/helpers/rss
     /views/helpers/text
     /views/helpers/time
     /views/helpers/url
