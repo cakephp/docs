@@ -87,10 +87,11 @@ In test cases, you can mock out ``now()`` using ``setTestNow()``::
 Manipulation
 ============
 
-Remember, ``FrozenTime`` instance always return a new instance from setters instead of modifying itself.
+Remember, ``FrozenTime`` instance always return a new instance from setters
+instead of modifying itself::
 
     $time = FrozenTime::now();
-    
+
     // Create and reassign a new instance
     $newTime = $time->year(2013)
         ->month(10)
@@ -102,7 +103,8 @@ You can also use the methods provided by PHP's built-in ``DateTime`` class::
 
     $time = $time->setDate(2013, 10, 31);
 
-Failing to reassign the new ``FrozenTime`` instances will result in the original, unmodified instance being used::
+Failing to reassign the new ``FrozenTime`` instances will result in the
+original, unmodified instance being used::
 
     $time->year(2013)
         ->month(10)
@@ -110,7 +112,8 @@ Failing to reassign the new ``FrozenTime`` instances will result in the original
     // Outputs '2021-01-31 22:11:30'
     echo $time->i18nFormat('yyyy-MM-dd HH:mm:ss');
 
-You can create another instance with modified dates, through subtraction and addition of their components::
+You can create another instance with modified dates, through subtraction and
+addition of their components::
 
     $time = FrozenTime::create(2021, 1, 31, 22, 11, 30);
     $newTime = $time->subDays(5)
@@ -146,7 +149,7 @@ This method sets the default format used when converting an object to json::
 
     $time = FrozenTime::parse('2021-01-31 22:11:30');
     echo json_encode($time);   // Outputs '2021-01-31 22:11:30'
-    
+
     // Added in 4.1.0
     FrozenDate::setJsonEncodeFormat(static function($time) {
         return $time->format(DATE_ATOM);
