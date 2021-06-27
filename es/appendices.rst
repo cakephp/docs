@@ -11,6 +11,7 @@ Guía de Migración a 4.x
     :maxdepth: 1
 
     appendices/4-0-migration-guide
+    appendices/orm-migration
 
 Información General
 ===================
