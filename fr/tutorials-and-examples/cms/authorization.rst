@@ -162,7 +162,7 @@ Dans **src/Controller/ArticlesController.php**, ajoutez le code suivant aux mét
 
 La méthode ``AuthorizationComponent::authorize()`` va utiliser le nom de l'action pour
 retrouver la méthode de la stratégie à appeler. Si vous préférez définir vous-même la méthode
-de la stratégie à utiliser vous devrez passer le nom de l'opération à ``authorize`::
+de la stratégie à utiliser vous devrez passer le nom de l'opération à ``authorize``::
 
     $this->Authorization->authorize($article, 'update');
 

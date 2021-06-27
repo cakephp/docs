@@ -218,8 +218,8 @@ archivo completo debería verse así::
 
 Nuestra entidad es bastante delgada en este momento, y solo hemos configurado
 la propiedad ``_accessible`` que controla cómo las propiedades pueden ser
-modificadas por :ref:`entities-mass-assignment`.
+modificadas por `entities-mass-assignment`.
 
 No podemos hacer mucho con nuestros modelos en este momento, así que a continuación
-crearemos nuestro primer :doc:`Controller y Template </tutorials-and-examples/cms/articles-controller>`
+crearemos nuestro primer `Controller y Template </tutorials-and-examples/cms/articles-controller>`
 para permitirnos interactuar con nuestro modelo.

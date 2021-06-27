@@ -177,7 +177,8 @@ fonctionnalités de CakePHP sont:
 
 Les prochaines étapes évidentes sont de
 :doc:`télécharger CakePHP </installation>`, lire le
-:doc:`tutoriel et construire un truc génial </tutorials-and-examples/cms/intro>`.
+:doc:`tutoriel et construire un truc génial
+</tutorials-and-examples/cms/installation>`.
 
 Lectures Complémentaires
 ========================

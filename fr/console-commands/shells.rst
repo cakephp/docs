@@ -96,7 +96,7 @@ shell using the ``$tasks`` property::
         public $tasks = ['Template'];
     }
 
-You can use tasks from plugins using the standard :term:`plugin syntax`.
+You can use tasks from plugins using the standard :term:`syntaxe de plugin`.
 Tasks are stored in ``Shell/Task/`` in files named after their classes. So if
 we were to create a new 'FileGenerator' task, you would create
 **src/Shell/Task/FileGeneratorTask.php**.
@@ -207,7 +207,7 @@ Shell Helpers
 =============
 
 If you have complex output generation logic, you can use
-:doc:`/console-commands/helpers` to encapsulate this logic in a re-usable way.
+`/console-commands/helpers` to encapsulate this logic in a re-usable way.
 
 .. _invoking-other-shells-from-your-shell:
 

@@ -108,7 +108,7 @@ Extraire les Fichiers Pot avec le Shell I18n
 Pour créer les fichiers pot à partir de `__()` et des autres types de messages
 internationalisés qui se trouvent dans votre code, vous pouvez utiliser le shell
 i18n. Vous pouvez consulter le
-:doc:`chapitre suivant </console-and-shells/i18n-shell>` pour en savoir plus.
+:doc:`chapitre suivant </console-commands/i18n>` pour en savoir plus.
 
 Définir la Locale par Défaut
 ----------------------------
@@ -633,7 +633,7 @@ Parser les Données Datetime Localisées
 
 Quand vous acceptez les données localisées, c'est sympa d'accepter les
 informations de type datetime dans un format localisé pour l'utilisateur. Dans
-un controller, ou :doc:`/development/dispatch-filters`, vous pouvez configurer
+un controller, ou :doc:`/controllers/middleware`, vous pouvez configurer
 les types Date, Time, et DateTime pour parser les formats localisés::
 
     use Cake\Database\TypeFactory;

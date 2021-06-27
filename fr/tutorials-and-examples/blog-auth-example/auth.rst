@@ -9,10 +9,10 @@ Créer la Table et le Controller pour Users
 ==========================================
 
 Premièrement, créons une nouvelle table dans notre base de données blog pour
-enregistrer les données de nos utilisateurs::
+enregistrer les données de nos utilisateurs:
 
 .. code-block:: mysql
- 
+
     CREATE TABLE users (
         id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
         email VARCHAR(255),
@@ -269,12 +269,13 @@ Et ajoutez ce qui suit::
     }
 
 Dans votre classe ``AppController``, ajoutez ce code::
+
     public function initialize(): void
     {
         parent::initialize();
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
- 
+
         // AJoutez cette ligne pour vérifier le résultat de l'authentification
         // et donc verrouiller l'accès à votre site.
         $this->loadComponent('Authentication.Authentication');

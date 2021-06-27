@@ -424,7 +424,7 @@ Database
 
 * Si le fuseau horaire de votre base de données ne correspond pas au fuseau horaire PHP,
   vous pouvez utiliser ``DateTime::setDatabaseTimezone()``.
-  Référez-vous à :ref:`datetime-type` pour plus de détails.
+  Référez-vous à `datetime-type` pour plus de détails.
 * ``DateTime::setKeepDatabaseTimezone()`` vous permet de conserver le fuseau horaire de
   la base de données dans les objets DateTime créés par des requêtes..
 * ``Cake\Database\Log\LoggedQuery`` implémente à présent ``JsonSerializable``.
@@ -538,7 +538,7 @@ View
   marqués comme "notEmpty" dans la classe Table correspondant à l'entité. Cette fonction
   peut être activée grâce à l'option de configuration ``autoSetCustomValidity`` de la classe.
 * ``FormHelper`` génère désormais des balises d'entrée HTML5 natives pour les champs datetime.
-  Consultez la page :ref:`Form Helper <create-datetime-controls>` pour plus de détails.
+  Consultez la page `Form Helper <create-datetime-controls>` pour plus de détails.
   Si vous devez conserver l'ancien balisage, un FormHelper calé peut être trouvé dans
   `Shim plugin <https://github.com/dereuromark/cakephp-shim>`__ avec l'ancien
   behavior/generation (4.x branch).
