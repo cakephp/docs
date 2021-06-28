@@ -9,7 +9,7 @@ ES_HOST_V2 =
 .PHONY: all clean html latexpdf epub htmlhelp website website-dirs rebuild-index
 
 # Languages that can be built.
-LANGS = en es fr ja pt zh tr
+LANGS = en es fr ja pt
 
 # pdflatex does not like ja, zh & tr for some reason.
 PDF_LANGS = en es fr pt
