@@ -156,6 +156,8 @@ ORM
 TestSuite
 ---------
 
+- ``IntegrationTestTrait::enableCsrfToken()`` permet maintenant l'utilisation de
+  noms de clés personnalisés pour les cookies/sessions CSRF.
 - Un nouveau système de fixture a été introduit. Ce système de fixture sépare le
   schéma et les données, ce qui vous permet de réutiliser vos migrations
   existantes pour définir un schéma de test. Le guide `./fixture-upgrade`
