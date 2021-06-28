@@ -12,6 +12,7 @@
 
     appendices/4-0-migration-guide
     appendices/4-0-upgrade-guide
+    appendices/orm-migration
     appendices/4-1-migration-guide
     appendices/4-2-migration-guide
 
