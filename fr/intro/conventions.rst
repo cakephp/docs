@@ -192,7 +192,7 @@ abordées:
 
 En utilisant ces conventions, CakePHP sait qu'une requête de type
 http://exemple.com/articles/ sera liée à un appel à la fonction ``index()`` du
-Controller ``ArticlesController`, dans lequel le model ``Articles` est
+Controller ``ArticlesController``, dans lequel le model ``Articles`` est
 automatiquement disponible. Aucune de ces relations n'a été
 configurée par rien d'autre que la création des classes et des fichiers dont
 vous aviez besoin de toute façon.
@@ -239,7 +239,8 @@ vous aviez besoin de toute façon.
 
 
 Résumé des conventions de Base de Données
-========================================
+==========================================
+
 +-----------------+--------------------------------------------------------------+
 | Clés étrangères | Les relations sont reconnues par défaut comme le nom (au     |
 |                 | singulier) de la table associée suivi par ``_id``.           |

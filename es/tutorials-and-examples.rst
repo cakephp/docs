@@ -13,6 +13,12 @@ para usar.
 .. toctree::
     :maxdepth: 1
 
+    tutorials-and-examples/cms/installation
+    tutorials-and-examples/cms/database
+
+.. toctree::
+    :maxdepth: 1
+
     tutorials-and-examples/bookmarks/intro
     tutorials-and-examples/bookmarks/part-two
     tutorials-and-examples/blog/blog

@@ -507,7 +507,7 @@ Vous pouvez utiliser les méthodes d'une entity en tant que règles de domaine::
 Utiliser des Règles Conditionnelles
 -----------------------------------
 
-Vous pouvez appliquer des règles sous condition selon les données de l'entity:
+Vous pouvez appliquer des règles sous condition selon les données de l'entity::
 
     $rules->add(function ($entity, $options) use($rules) {
         if ($entity->role == 'admin') {

@@ -199,14 +199,14 @@ para paginar tags e artigos ao mesmo tempo::
 
     /dashboard?article[page]=1&tag[page]=3
 
-Veja a seção :ref:`paginator-helper-multiple` para saber como gerar elementos HTML 
+Veja a seção `paginator-helper-multiple` para saber como gerar elementos HTML 
 com escopo e URLs para paginação.
 
 Paginando o Mesmo Modelo Várias Vezes
 -------------------------------------
 
 Para paginar o mesmo modelo várias vezes em uma única ação do controlador, é 
-necessário definir um alias para o modelo. Consulte :ref:`table-registry-usage` 
+necessário definir um alias para o modelo. Consulte `table-registry-usage` 
 para obter detalhes adicionais sobre como usar o registro da tabela::
 
     // Em um método do controlador

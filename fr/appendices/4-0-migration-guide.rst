@@ -74,6 +74,7 @@ Mailer
 
 App
 ---
+
 * ``App::path()`` a été dépréciée pour les chemins de classes (class paths).
   Utilisez ``\Cake\Core\App::classPath()`` à sa place.
 
@@ -81,7 +82,7 @@ Changements non rétro-compatibles
 ==================================
 
 En plus de la suppression des fonctionnalités obsolètes, des
-changements non rétro-compatibles ont été effectués::
+changements non rétro-compatibles ont été effectués:
 
 Cache
 -----
@@ -397,8 +398,7 @@ Miscellaneous
   Le getter magique ``ObjectRegistry::__get()`` continuera à retourner ``null`` si l'objet
   correspondant au nom n'est pas chargé.
 * Les fichiers de traduction (Locale) ont été déplacés de  ``src/Locale`` vers ``resources/locales``.
-*
-Le fichier  ``cacert.pem`` qui était fourni dans CakePHP a été remplacé par
+* Le fichier  ``cacert.pem`` qui était fourni dans CakePHP a été remplacé par
   une dépendance vers `composer/ca-bundle <https://packagist.org/packages/composer/ca-bundle>`__.
 
 
@@ -416,15 +416,15 @@ Core
 
 * ``InstanceConfigTrait::getConfigOrFail()`` et
   ``StaticConfigTrait::getConfigOrFail()`` ont été ajoutées. Comme les autres ``orFail``
-   méthodes ces méthodes lèveront une exception lorsque la clé demandée n'existe pas
-   ou possède la valeur ``null``.
+  méthodes ces méthodes lèveront une exception lorsque la clé demandée n'existe pas
+  ou possède la valeur ``null``.
 
 Database
 --------
 
 * Si le fuseau horaire de votre base de données ne correspond pas au fuseau horaire PHP,
   vous pouvez utiliser ``DateTime::setDatabaseTimezone()``.
-  Référez-vous à :ref:`datetime-type` pour plus de détails.
+  Référez-vous à `datetime-type` pour plus de détails.
 * ``DateTime::setKeepDatabaseTimezone()`` vous permet de conserver le fuseau horaire de
   la base de données dans les objets DateTime créés par des requêtes..
 * ``Cake\Database\Log\LoggedQuery`` implémente à présent ``JsonSerializable``.
@@ -538,7 +538,7 @@ View
   marqués comme "notEmpty" dans la classe Table correspondant à l'entité. Cette fonction
   peut être activée grâce à l'option de configuration ``autoSetCustomValidity`` de la classe.
 * ``FormHelper`` génère désormais des balises d'entrée HTML5 natives pour les champs datetime.
-  Consultez la page :ref:`Form Helper <create-datetime-controls>` pour plus de détails.
+  Consultez la page `Form Helper <create-datetime-controls>` pour plus de détails.
   Si vous devez conserver l'ancien balisage, un FormHelper calé peut être trouvé dans
   `Shim plugin <https://github.com/dereuromark/cakephp-shim>`__ avec l'ancien
   behavior/generation (4.x branch).

@@ -1721,12 +1721,13 @@ Créer des Éléments Année
   :ref:`options générales<general-control-options>` ainsi que n'importe
   quels attributs HTML valides.
   Les autres options valides sont:
-  * ``min``: La plus petite valeur pouvant être utilisée dans l'élément de
-    saisie de l'année.
-  * ``max``: La plus grande valeur pouvant être utilisée dans l'élément de
-    saisie de l'année.
-  * ``order``: L'ordre des années dans l'élément de saisie.
-    Les valeurs possibles sont ``'asc'`` et ``'desc'``. Par défaut ``'desc'``.
+
+      * ``min``: La plus petite valeur pouvant être utilisée dans l'élément de
+        saisie de l'année.
+      * ``max``: La plus grande valeur pouvant être utilisée dans l'élément de
+        saisie de l'année.
+      * ``order``: L'ordre des années dans l'élément de saisie.
+        Les valeurs possibles sont ``'asc'`` et ``'desc'``. Par défaut ``'desc'``.
 
 Crée un élément ``select`` qui contiendra une option par année pour les années
 situées entre ``min`` et ``max`` si ces options sont fournies, ou pour les
@@ -1950,10 +1951,8 @@ Par défaut, les templates de widgets utilisés sont::
 
 * ``'type'`` - Définissez cette option à ``'reset'`` pour générer un bouton
   "reset" (de remise à zéro du formulaire). Défaut à ``'submit'``.
-
 * ``'templateVars'`` - Utilisez ce tableau pour fournir des variables de
-template supplémentaires pour l'élément et ses conteneurs.
-
+  template supplémentaires pour l'élément et ses conteneurs.
 * Tout autre paramètre sera ajouté comme un attribut à l'élément HTML ``input``.
 
 Le code suivant::
@@ -2162,7 +2161,7 @@ Créer des liens POST
   valides.
 
 Crée un lien HTML, mais accède à l'Url en utilisant la méthode spécifiée (par
-défaut POST). Requiert que JavaScript soit activé dans le navigateur.
+défaut POST). Requiert que JavaScript soit activé dans le navigateur::
 
     // Dans votre template, à l'emplacement pour supprimer un article
     <?= $this->Form->postLink(

@@ -167,9 +167,9 @@ Il y a de certain nombre d'événements du cœur du framework que votre applicat
 peut écouter. Chaque couche de CakePHP émet des événements que vous pouvez
 écouter dans votre application.
 
-* :ref:`Events de l'ORM et du Model<table-callbacks>`
-* :ref:`Events du Controller<controller-life-cycle>`
-* :ref:`Events de View<view-events>`
+* :ref:`Events de l'ORM et du Model <table-callbacks>`
+* :ref:`Events du Controller <controller-life-cycle>`
+* :ref:`Events de View <view-events>`
 
 .. _registering-event-listeners:
 

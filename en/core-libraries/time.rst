@@ -87,10 +87,11 @@ In test cases, you can mock out ``now()`` using ``setTestNow()``::
 Manipulation
 ============
 
-Remember, ``FrozenTime`` instance always return a new instance from setters instead of modifying itself.
+Remember, ``FrozenTime`` instance always return a new instance from setters
+instead of modifying itself::
 
     $time = FrozenTime::now();
-    
+
     // Create and reassign a new instance
     $newTime = $time->year(2013)
         ->month(10)
@@ -102,7 +103,8 @@ You can also use the methods provided by PHP's built-in ``DateTime`` class::
 
     $time = $time->setDate(2013, 10, 31);
 
-Failing to reassign the new ``FrozenTime`` instances will result in the original, unmodified instance being used::
+Failing to reassign the new ``FrozenTime`` instances will result in the
+original, unmodified instance being used::
 
     $time->year(2013)
         ->month(10)
@@ -110,7 +112,8 @@ Failing to reassign the new ``FrozenTime`` instances will result in the original
     // Outputs '2021-01-31 22:11:30'
     echo $time->i18nFormat('yyyy-MM-dd HH:mm:ss');
 
-You can create another instance with modified dates, through subtraction and addition of their components::
+You can create another instance with modified dates, through subtraction and
+addition of their components::
 
     $time = FrozenTime::create(2021, 1, 31, 22, 11, 30);
     $newTime = $time->subDays(5)
@@ -146,7 +149,7 @@ This method sets the default format used when converting an object to json::
 
     $time = FrozenTime::parse('2021-01-31 22:11:30');
     echo json_encode($time);   // Outputs '2021-01-31 22:11:30'
-    
+
     // Added in 4.1.0
     FrozenDate::setJsonEncodeFormat(static function($time) {
         return $time->format(DATE_ATOM);
@@ -192,16 +195,16 @@ You can also format dates with non-gregorian calendars::
 
     // On ICU version 66.1
     $time = FrozenTime::create(2021, 1, 31, 22, 11, 30);
-    
+
     // Outputs 'Sunday, Bahman 12, 1399 AP at 10:11:30 PM Eastern Standard Time'
     echo $time->i18nFormat(\IntlDateFormatter::FULL, null, 'en-IR@calendar=persian');
-    
+
     // Outputs 'Sunday, January 31, 3 Reiwa at 10:11:30 PM Eastern Standard Time'
     echo $time->i18nFormat(\IntlDateFormatter::FULL, null, 'en-JP@calendar=japanese');
-    
+
     // Outputs 'Sunday, Twelfth Month 19, 2020(geng-zi) at 10:11:30 PM Eastern Standard Time'
     echo $time->i18nFormat(\IntlDateFormatter::FULL, null, 'en-CN@calendar=chinese');
-    
+
     // Outputs 'Sunday, Jumada II 18, 1442 AH at 10:11:30 PM Eastern Standard Time'
     echo $time->i18nFormat(\IntlDateFormatter::FULL, null, 'en-SA@calendar=islamic');
 
@@ -237,7 +240,7 @@ want to display them in a user's own timezone::
 
     // Outputs 'Monday, February 1, 2021 at 4:11:30 AM Central European Standard Time'
     echo $time->i18nFormat(\IntlDateFormatter::FULL, 'Europe/Paris');
-    
+
     // Outputs 'Monday, February 1, 2021 at 12:11:30 PM Japan Standard Time'
     echo $time->i18nFormat(\IntlDateFormatter::FULL, 'Asia/Tokyo');
 
@@ -269,9 +272,9 @@ You can, however, modify this default at runtime::
     FrozenTime::setDefaultLocale('es-ES'); // For any immutable DateTime
     Date::setDefaultLocale('es-ES'); // For any mutable Date
     FrozenDate::setDefaultLocale('es-ES'); // For any immutable Date
-    
+
     // Outputs '31 ene. 2021 22:11'
-    echo $time->nice(); 
+    echo $time->nice();
 
 From now on, datetimes will be displayed in the Spanish preferred format unless
 a different locale is specified directly in the formatting method.
@@ -290,12 +293,12 @@ Likewise, it is possible to alter the default formatting string to be used for
         \IntlDateFormatter::SHORT
     ]);
     // Outputs 'Sunday, January 31, 2021 at 10:11 PM'
-    echo $time; 
+    echo $time;
 
     // The same method exists on Date, FrozenDate, and Time
     FrozenTime::setToStringFormat("EEEE, MMMM dd, yyyy 'at' KK:mm:ss a");
     // Outputs 'Sunday, January 31, 2021 at 10:11:30 PM'
-    echo $time; 
+    echo $time;
 
 It is recommended to always use the constants instead of directly passing a date
 format string.
@@ -385,13 +388,13 @@ You can see if a ``FrozenTime`` instance falls within a given range using
 You can also compare a ``FrozenTime`` instance within a range in the past::
 
     $time = new FrozenTime('-72 hours');
-    
+
     // Within past 2 days. Outputs 'false'
     debug($time->wasWithinLast('2 days'));
 
     // Within past 3 days. Outputs 'true'
     debug($time->wasWithinLast('3 days'));
-    
+
     // Within past 2 weeks. Outputs 'true'
     debug($time->wasWithinLast('2 weeks'));
 
@@ -413,7 +416,7 @@ As an example::
     $newDate = $date->modify('+2 hours');
     // Outputs '2021-01-31 00:00:00'
     echo $newDate->format('Y-m-d H:i:s');
-    
+
     $newDate = $date->addHours(36);
     // Outputs '2021-01-31 00:00:00'
     echo $newDate->format('Y-m-d H:i:s');

@@ -87,7 +87,7 @@ pour chaque version mineure de::
     bin/cake upgrade rector --rules cakephp41 <path/to/app/src>
 
 Mettez à jour la dépendance de CakePHP
-===================================
+======================================
 
 Après avoir appliqué les refactorisations de rector, mettez à niveau CakePHP et PHPUnit en utilisant
 les commandes suivantes de composer:

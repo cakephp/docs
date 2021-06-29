@@ -195,15 +195,15 @@ al mismo tiempo::
 
     /dashboard?article[page]=1&tag[page]=3
 
-Consulte la sección :ref:`paginator-helper-multiple` para saber como generar elementos HTML con ambito 
+Consulte la sección `paginator-helper-multiple` para saber como generar elementos HTML con ambito 
 y URLs para paginación.
 
 Paginar el Mismo Modelo Varias Veces
 ------------------------------------
 
 Para paginar el mismo modelo multiples veces dentro de una sola acción del controlador necesitas definir 
-un alias para el modelo. Consulte :ref:`table-registry-usage` para detalles adicionales sobre como 
-utilizar la tabla de registros:: 
+un alias para el modelo. Consulte `table-registry-usage` para detalles adicionales sobre como 
+utilizar la tabla de registros::
 
     // En una acción del controlador
     $this->paginate = [

@@ -94,7 +94,7 @@ Ajouter la Connexion
 Il est maintenant temps de configurer le Plugin d'authentification.
 Le plugin gérera le processus d'authentification en utilisant 3 classes différentes:
 
-* ``Application` utilisera le middleware d'authentification et fournira un
+* ``Application`` utilisera le middleware d'authentification et fournira un
   AuthenticationService contenant toute la configuration que nous voulons définir, comment
   nous allons vérifier les informations d'identification, et où les trouver.
 * ``AuthenticationService`` sera une classe utilitaire pour vous permettre de configurer le

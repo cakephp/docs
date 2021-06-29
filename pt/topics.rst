@@ -26,7 +26,6 @@ Introdução aos principais tópicos do CakePHP:
 * :doc:`/development/rest`
 * :doc:`/controllers/components/authentication`
 * :doc:`/controllers/components/pagination`
-* :doc:`/controllers/components/csrf`
 * :doc:`/core-libraries/email`
 * :doc:`/views/helpers/form`
 * :doc:`/views/helpers/html`

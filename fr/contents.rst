@@ -12,7 +12,7 @@ Contenu
 
     intro
     quickstart
-    appendices/migration-guides
+    appendices
     tutorials-and-examples
     contributing
     release-policy
