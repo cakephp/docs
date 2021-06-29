@@ -374,11 +374,11 @@ As opções de configuração disponíveis são:
 - ``cookieName`` O nome do cookie a ser enviado. O padrão é `` csrfToken``.
 - ``expiry`` Quanto tempo o token CSRF deve durar. O padrão é a sessão do navegador.
 - ``secure`` Se o cookie será ou não definido com o sinalizador Secure. Isso é,
-  o cookie será definido apenas em uma conexão HTTPS e qualquer tentativa no 
+    o cookie será definido apenas em uma conexão HTTPS e qualquer tentativa no
   HTTP normal falhará. O padrão é ``false``.
 - ``httpOnly`` Se o cookie será ou não definido com o sinalizador HttpOnly. O padrão é ``false``.
-- ``field`` O campo do formulário a ser verificado. O padrão é ``_csrfToken``. Alterar 
-  isso também exigirá a configuração do FormHelper.
+- ``field`` O campo do formulário a ser verificado. O padrão é ``_csrfToken``.
+  Alterar isso também exigirá a configuração do FormHelper.
 
 Quando ativado, você pode acessar o token CSRF atual no objeto de solicitação::
 

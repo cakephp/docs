@@ -109,7 +109,7 @@ abreviação de idioma com código de área `UN M.49 <https://en.wikipedia.org/w
 .. tip::
 
     É aconselhável usar as mesmas abreviações de idioma necessárias para
-    :doc:`Internacionalização e localização</core-libraries/internationalization-and-location>`.
+    :doc:`Internacionalização e localização</core-libraries/internationalization-and-localization>`.
     Assim, é consistente e a alternância do idioma funciona de forma idêntica para
     ambos, o ``Translate Behaviour`` e ``Internationalization and Localization``.
 

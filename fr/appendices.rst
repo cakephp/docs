@@ -11,6 +11,9 @@ introduites dans chaque version et le chemin de migration entre les versions.
     :maxdepth: 1
 
     appendices/4-0-migration-guide
+    appendices/4-0-upgrade-guide
+    appendices/4-1-migration-guide
+    appendices/4-2-migration-guide
 
 Informations générales
 ======================

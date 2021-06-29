@@ -14,6 +14,8 @@ componentes existentes.
 
     tutorials-and-examples/cms/installation
     tutorials-and-examples/cms/database
+    tutorials-and-examples/cms/articles-controller
+    tutorials-and-examples/cms/authentication
 
 .. toctree::
     :maxdepth: 1

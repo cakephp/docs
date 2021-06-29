@@ -969,7 +969,7 @@ outra coleção::
 
     $merged = (new Collection($users))->insert('skills', $languages);
 
-Quando convertida em uma matriz, a coleção ``$merged`` ficará assim:
+Quando convertida em uma matriz, a coleção ``$merged`` ficará assim::
 
     [
         ['username' => 'mark', 'skills' => ['PHP', 'Python', 'Ruby']],

@@ -45,7 +45,7 @@ Checar a segurança
 Se você está jogando sua aplicação na selva, é uma boa idéia certificar-se
 que ela não possui vulnerabilidades óbvias:
 
-* Certifique-se de utilizar o :doc:`/controllers/components/csrf`.
+* Certifique-se de utilizar o :ref:`csrf-middleware`.
 * Você pode querer habilitar o :doc:`/controllers/components/security`.
   Isso pode prevenir diversos tipos de adulteração de formulários e reduzir
   a possibilidade de overdose de requisições.

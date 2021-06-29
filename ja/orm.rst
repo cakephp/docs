@@ -20,11 +20,6 @@ CakePHP の ORM はアクティブレコードやデータマッパーパター�
 ORM の調査を始める前に :ref:`あなたのデータベース接続の設定 <database-configuration>`
 をご確認ください。
 
-.. note::
-
-    もし過去のバージョンの CakePHP に慣れ親しんでいる場合は、 :doc:`/appendices/orm-migration`
-    に記述されている CakePHP 3.0 と過去のバージョンとの違いを読むべきでしょう。
-
 簡単な例
 ========
 

@@ -944,7 +944,6 @@ Mais tópicos
     console-and-shells/completion-shell
     console-and-shells/plugin-shell
     console-and-shells/routes-shell
-    console-and-shells/upgrade-shell
     console-and-shells/server-shell
     console-and-shells/cache
 
