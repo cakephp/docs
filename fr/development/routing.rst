@@ -968,8 +968,8 @@ vues automatiquement en se basant sur les types de contenu.
 
 .. _route-scoped-middleware:
 
-Route Scoped Middleware
-------------------------------------
+Middleware appliqué à une Route
+-------------------------------
 
 Bien que les middlewares puissent être appliqués à toute votre application, appliquer
 les middlewares à des 'scopes' de routing offre plus de flexibilité puisque vous
@@ -1000,7 +1000,7 @@ Une fois enregistré, le middleware peut être appliqué
     $routes->scope('/cms', function (RouteBuilder $routes) {
         // Enable CSRF & cookies middleware
         $routes->applyMiddleware('csrf', 'cookies');
-        $routes->get('/articles/{action}/*', ['controller' => 'Articles']);
+        $routes->get('/articles/{action}/*', ['controller' => 'Articles'])
     });
 
 Dans le cas où vous auriez des 'scopes' imbriqués, les "sous" scopes hériteront
@@ -1363,8 +1363,7 @@ les éléments du tableau de routage.
 Utilisation de  ``Router::url()``
 ---------------------------------
 
-``Router::url()`` vous permet d'utiliser des :term:`Tableaux de routage
-<tableau de routing>`
+``Router::url()`` vous permet d'utiliser des :term:`Tableaux de routage <routing array>`
 dans les situations où les éléments de tableau requis sont fixes ou facilement déduits.
 
 Il fournira un routage inversé lorsque l'URL de destination est bien définie::
@@ -1517,11 +1516,12 @@ css, javascript, images et autres fichiers statiques de votre application::
     // Génère une URL pointant vers APP/webroot/files/upload/photo.png
     $file = Asset::url('files/upload/photo.png');
 
-Les méthodes ci-dessus acceptent également un tableau d'options comme deuxième paramètre:
+Les méthodes ci-dessus acceptent également un tableau d'options comme deuxième paramètre::
 
 * ``fullBase`` Ajoute l'url complète incluant le nom de domaine.
 * ``pathPrefix`` Indique le préfixe pour les url relatives.
-* ``plugin`` Vous pouvez indiquer ``false`` pour éviter que les chemins ne soient traité comme des ressources appartenant à un plugin.
+* ``plugin`` Vous pouvez indiquer ``false`` pour éviter que les chemins ne soient traités
+  comme des ressources appartenant à un plugin.
 * ``timestamp`` Remplace la valeur de ``Asset.timestamp`` définie dans la configuration (Configure).
   Mettez-le à ``false`` pour désactiver la génération des timestamp. Mettez-le à ``true`` pour
   générer les timestamp quand debug est à ``true``. Mettez-le à ``'force'`` pour forcer la génération
@@ -1536,7 +1536,7 @@ Les méthodes ci-dessus acceptent également un tableau d'options comme deuxièm
     // Pour lequel le timestamp correspond à la date de dernière modification du fichier
     $img = Asset::url('logo.png', ['timestamp' => true]);
 
-Pour générer des URL de ressources pour les fichiers dans les plugins, utilisez :term:`syntaxe de plugin`::
+Pour générer des URL de ressources pour les fichiers dans les plugins, utilisez :term:`plugin syntax`::
 
     // Génère `/debug_kit/img/cake.png`
     $img = Asset::imageUrl('DebugKit.cake.png');
