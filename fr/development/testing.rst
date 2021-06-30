@@ -25,10 +25,7 @@ Pour installer PHPUnit avec Composer:
 
 .. code-block:: bash
 
-    $ php composer.phar require --dev phpunit/phpunit:"^5.7|^6.0"
-
-    // Avant CakePHP 3.4.1
-    $ php composer.phar require --dev phpunit/phpunit:"<6.0"
+    $ php composer.phar require --dev phpunit/phpunit:"^7.0"
 
 Ceci va ajouter la dépendance à la section ``require-dev`` de votre
 ``composer.json``, et ensuite installer PHPUnit avec vos autres dépendances.
@@ -320,9 +317,9 @@ Cela mettra la couverture des résultats dans le répertoire webroot de votre
 application. Vous pourrez voir les résultats en allant à
 ``http://localhost/votre_app/coverage``.
 
-Si vous utilisez PHP 5.6.0 (ou supérieur), vous pouvez utilisez `phpdbg <http://phpdbg.com/>`__
-pour générer la couverture des résultats à la place de xdebug. ``phpdbg`` est
-généralement plus rapide dans la génération des rapports de couverture:
+Vous pouvez aussi utiliser ``phpdbg`` pour générer la couverture des résultats à
+la place de xdebug. ``phpdbg`` est généralement plus rapide dans la génération
+des rapports de couverture:
 
 .. code-block:: bash
 
