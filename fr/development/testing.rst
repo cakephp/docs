@@ -1239,7 +1239,7 @@ Commençons avec un simple exemple de controller qui renvoie du JSON::
 
     class MarkersController extends AppController
     {
-        public function initialize()
+        public function initialize(): void
         {
             parent::initialize();
             $this->loadComponent('RequestHandler');

@@ -133,7 +133,7 @@ classe Table::
     class ArticlesTable extends Table
     {
 
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->addBehavior('Translate', ['fields' => ['title', 'body']]);
         }
@@ -155,7 +155,7 @@ chaque table spécifiquement::
     class Articles extends Table
     {
 
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->addBehavior('Translate', [
                 'fields' => ['title', 'body'],
@@ -263,7 +263,7 @@ utilisant la clé de config ``allowEmptyTranslations``::
     class ArticlesTable extends Table
     {
 
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->addBehavior('Translate', [
                 'fields' => ['title', 'body'],
@@ -356,7 +356,7 @@ donnée. Par exemple, étant donné la configuration suivante::
     // dans src/Model/Table/ArticlesTable.php
     class ArticlesTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->addBehavior('Translate', ['fields' => ['title', 'body']]);
         }
@@ -483,7 +483,7 @@ créés/mis à jours par le behavior pendant ``newEntity()`` ou ``patchEntity()`
 
     class ArticlesTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->addBehavior('Translate', [
                 'fields' => ['title'],

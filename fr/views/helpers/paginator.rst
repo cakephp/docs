@@ -35,7 +35,7 @@ Cela vous permet de personnaliser plusieurs templates et de garder votre code
 DRY::
 
     // Dans votre fichier AppView.php
-    public function initialize()
+    public function initialize(): void
     {
         ...
         $this->loadHelper('Paginator', ['templates' => 'paginator-templates']);
@@ -47,7 +47,7 @@ quoi doit ressembler le fichier. Vous pouvez aussi charger les templates à
 partir d'un plugin en utilisant la :term:`syntaxe de plugin`::
 
     // Dans votre fichier AppView.php
-    public function initialize()
+    public function initialize(): void
     {
         ...
         $this->loadHelper('Paginator', ['templates' => 'MyPlugin.paginator-templates']);

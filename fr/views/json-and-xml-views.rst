@@ -20,7 +20,7 @@ Avant que vous ne puissiez utiliser les classes de vue de données, vous devrez
 charger :php:class:`Cake\\Controller\\Component\\RequestHandlerComponent` dans
 votre controller::
 
-    public function initialize()
+    public function initialize(): void
     {
         ...
         $this->loadComponent('RequestHandler');
@@ -59,7 +59,7 @@ caractère, soit un tableau de variables de vue à sérialiser::
 
     class ArticlesController extends AppController
     {
-        public function initialize()
+        public function initialize(): void
         {
             parent::initialize();
             $this->loadComponent('RequestHandler');
@@ -80,7 +80,7 @@ combiner::
 
     class ArticlesController extends AppController
     {
-        public function initialize()
+        public function initialize(): void
         {
             parent::initialize();
             $this->loadComponent('RequestHandler');

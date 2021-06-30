@@ -27,7 +27,7 @@ Afin d'utiliser le Request Handler, il doit être chargé depuis la méthode
     class WidgetController extends AppController
     {
 
-        public function initialize()
+        public function initialize(): void
         {
             parent::initialize();
             $this->loadComponent('RequestHandler');
@@ -53,13 +53,13 @@ contenu que le client accepte. Par exemple::
         class ArticlesController extends AppController
         {
 
-            public function initialize()
+            public function initialize(): void
             {
                 parent::initialize();
                 $this->loadComponent('RequestHandler');
             }
 
-            public function beforeFilter(Event $event)
+            public function beforeFilter(EventInterface $event)
             {
                 if ($this->RequestHandler->accepts('html')) {
                     // Execute le code seulement si le client accepte une
@@ -148,7 +148,7 @@ ajouter un gestionnaire de CSV pourrait ressembler à ceci::
 
     class ArticlesController extends AppController
     {
-        public function initialize()
+        public function initialize(): void
         {
             parent::initialize();
             $parser = function ($data) {
@@ -253,7 +253,7 @@ au client, augmentant la bande passante. Le code de réponse est défini
 Vous pouvez mettre en retrait ce contrôle automatique en paramétrant
 ``checkHttpCache`` à ``false``::
 
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
         $this->loadComponent('RequestHandler', [
@@ -272,7 +272,7 @@ Vous pouvez mapper les types existants et les nouveaux types à vos classes
 personnalisées. Vous pouvez aussi définir ceci automatiquement en utilisant
 la configuration ``viewClassMap``::
 
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
         $this->loadComponent('RequestHandler', [

@@ -27,7 +27,7 @@ AuthComponent dans notre AppController::
 
     class AppController extends Controller
     {
-        public function initialize()
+        public function initialize(): void
         {
             $this->loadComponent('Flash');
             $this->loadComponent('Auth', [
@@ -106,7 +106,7 @@ Maintenant que les personnes peuvent se connecter, vous voudrez aussi
 probablement fournir un moyen de se déconnecter. Encore une fois, dans
 ``UsersController``, ajoutez le code suivant::
 
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
         $this->Auth->allow(['logout']);
@@ -131,7 +131,7 @@ serez renvoyés vers la page de connexion. Nous devrions régler cela puisque no
 voulons que les utilisateurs s'inscrivent à notre application. Dans
 ``UsersController``, ajoutez ce qui suit::
 
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
         // Ajoute l'action 'add' à la liste des actions autorisées.
@@ -169,7 +169,7 @@ Ajoutez aussi ce qui suit dans la configuration de ``Auth`` dans
 
 Votre méthode ``initialize()`` doit maintenant ressembler à ceci::
 
-        public function initialize()
+        public function initialize(): void
         {
             $this->loadComponent('Flash');
             $this->loadComponent('Auth', [

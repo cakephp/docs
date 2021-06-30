@@ -48,7 +48,7 @@ spécifier la table en utilisant la méthode ``setTable()``::
     class ArticlesTable extends Table
     {
 
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->setTable('my_table');
 
@@ -69,7 +69,7 @@ utiliser la méthode ``setPrimaryKey()``::
 
     class ArticlesTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->setPrimaryKey('my_id');
 
@@ -90,7 +90,7 @@ utiliser la méthode ``setEntityClass()`` pour changer les choses::
 
     class PurchaseOrdersTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->setEntityClass('App\Model\Entity\PO');
 
@@ -196,7 +196,7 @@ Pour répondre à l'event ``Model.initialize``, vous pouvez créer une classe
                 'Model.initialize' => 'initializeEvent',
             );
         }
-        public function initializeEvent($event)
+        public function initializeEvent($event): void
         {
             $table = $event->getSubject();
             // faire quelque chose ici
@@ -377,7 +377,7 @@ méthode ``initialize()``::
 
     class ArticlesTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->addBehavior('Timestamp');
         }
@@ -392,7 +392,7 @@ et fournir des options de configuration supplémentaires::
 
     class ArticlesTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->addBehavior('Timestamp', [
                 'events' => [

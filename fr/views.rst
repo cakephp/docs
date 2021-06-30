@@ -56,7 +56,7 @@ type d'utilisation:
     class AppView extends View
     {
 
-        public function initialize()
+        public function initialize(): void
         {
             // Toujours activer le helper MyUtils
             $this->loadHelper('MyUtils');

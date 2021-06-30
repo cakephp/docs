@@ -29,7 +29,7 @@ dans nos actions de controller. Un controller basique pourrait ressembler
     class RecipesController extends AppController
     {
 
-        public function initialize()
+        public function initialize(): void
         {
             parent::initialize();
             $this->loadComponent('RequestHandler');

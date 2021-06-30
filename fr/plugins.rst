@@ -450,7 +450,7 @@ exemple::
 
     class ContactsTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->hasMany('ContactManager.AltName');
         }
@@ -466,7 +466,7 @@ préfix du plugin, utilisez la syntaxe alternative::
 
     class ContactsTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->hasMany('AltName', [
                 'className' => 'ContactManager.AltName',
@@ -624,7 +624,7 @@ nom du component. Par exemple::
     }
 
     // dans vos controllers:
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
         $this->loadComponent('ContactManager.Example');
