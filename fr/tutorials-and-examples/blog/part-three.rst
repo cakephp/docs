@@ -264,7 +264,7 @@ catégories dans l'arbre::
             $categories = $this->Categories->find()
                 ->order(['lft' => 'ASC']);
             $this->set(compact('categories'));
-            $this->set('_serialize', ['categories']);
+            $this->viewBuilder()->setOption('serialize', ['categories']);
         }
 
         public function moveUp($id = null)

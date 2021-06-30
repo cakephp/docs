@@ -11,7 +11,7 @@ automatiquement vous appuyer sur les nouvelles classes de vue. ``JsonView`` et
 ``XmlView`` feront référence aux vues de données pour le reste de cette page.
 
 Il y a deux façons de générer des vues de données. La première est en utilisant
-la clé ``_serialize``, et la seconde en créant des fichiers de template normaux.
+l'option ``serialize``, et la seconde en créant des fichiers de template normaux.
 
 Activation des Vues de Données dans votre Application
 =====================================================
@@ -43,10 +43,10 @@ Par défaut, quand vous n'activez pas les :ref:`file-extensions`, l'en-tête
 doit être rendu à l'utilisateur. Un exemple de format ``Accept`` utilisé pour
 rendre les réponses ``JSON`` est ``application/json``.
 
-Utilisation des Vues de Données avec la Clé Serialize
-=====================================================
+Utilisation des Vues de Données avec l'option Serialize
+=======================================================
 
-La clé ``_serialize`` est une variable de vue spéciale qui indique quelle(s)
+L'option ``serialize`` indique quelle(s)
 autre(s) variable(s) de vue devrai(en)t être sérialisée(s) quand on utilise la
 vue de données. Cela vous permet de sauter la définition des fichiers de
 template pour vos actions de controller si vous n'avez pas besoin de faire un
@@ -54,7 +54,7 @@ formatage avant que vos données ne soient converties en json/xml.
 
 Si vous avez besoin de faire tout type de formatage ou de manipulation de vos
 variables de vue avant la génération de la réponse, vous devrez utiliser les
-fichiers de template. La valeur de ``_serialize`` peut être soit une chaîne de
+fichiers de template. La valeur de ``serialize`` peut être soit une chaîne de
 caractère, soit un tableau de variables de vue à sérialiser::
 
     class ArticlesController extends AppController
@@ -71,11 +71,11 @@ caractère, soit un tableau de variables de vue à sérialiser::
             $this->set('articles', $this->paginate());
 
             // Spécifie quelles variables de vues JsonView doit sérialiser.
-            $this->set('_serialize', ['articles']);
+            $this->viewBuilder()->setOption('serialize', 'articles');
         }
     }
 
-Vous pouvez aussi définir ``_serialize`` en tableau de variables de vue à
+Vous pouvez aussi définir ``serialize`` en tableau de variables de vue à
 combiner::
 
     class ArticlesController extends AppController
@@ -94,14 +94,14 @@ combiner::
             $this->set(compact('articles', 'comments'));
 
             // Spécifie les variables de vues JsonView à sérialiser.
-            $this->set('_serialize', ['articles', 'comments']);
+            $this->viewBuilder()->setOption('serialize', ['articles', 'comments']);
         }
     }
 
-Définir ``_serialize`` en tableau comporte le bénéfice supplémentaire d'ajouter
+Définir ``serialize`` en tableau comporte le bénéfice supplémentaire d'ajouter
 automatiquement un élément de top-niveau ``<response>`` en utilisant
 :php:class:`XmlView`. Si vous utilisez une valeur de chaîne de caractère pour
-``_serialize`` et XmlView, assurez-vous que vos variables de vue aient un
+``serialize`` et XmlView, assurez-vous que vos variables de vue aient un
 élément unique de top-niveau. Sans un élément de top-niveau, le Xml ne pourra
 être généré.
 
@@ -135,31 +135,22 @@ utiliser les helpers pour formater. Les classes de vue ded onnées ne supportent
 pas les layouts. Elles supposent que le fichier de vue va afficher le contenu
 sérialisé.
 
-.. note::
-
-    Depuis 3.1.0, le AppController du squelette d'application ajoute
-    automatiquement ``'_serialize' => true`` à toutes les requêtes XML/JSON.
-    Vous devrez retirer ce code à partir du callback beforeRender ou définir
-    ``'_serialize' => false`` dans l'action de votre controller si vous souhaitez
-    utiliser les fichiers de vue.
-
 Créer des Views XML
 ===================
 
 .. php:class:: XmlView
 
-Par défaut quand on utilise ``_serialize``, XmlView va envelopper vos
+Par défaut quand on utilise ``serialize``, XmlView va envelopper vos
 variables de vue sérialisées avec un nœud ``<response>``. Vous pouvez
-définir un nom personnalisé pour ce nœud en utilisant la variable de vue
-``_rootNode``.
+définir un nom personnalisé pour ce nœud en utilisant l'option ``rootNode``.
 
-La classe XmlView intègre la variable ``_xmlOptions`` qui vous permet de
+La classe XmlView intègre l'option ``xmlOptions`` qui vous permet de
 personnaliser les options utilisées pour générer le XML, par exemple ``tags``
 au lieu d'``attributes``.
 
 Comme exemple d'utilisation de ``XmlView``, on peut imaginer la génération d'un
 `sitemap.xml <https://www.sitemaps.org/protocol.html>`_. Ce tye de document
-nécessite de changer ``_rootNode`` et de définir des attributs. Les attributs
+nécessite de changer ``rootNode`` et de définir des attributs. Les attributs
 sont définis en utilisant le préfixe ``@``::
  
     public function sitemap()
@@ -201,8 +192,9 @@ CakePHP de manière cohérente, vous pouvez le faire de la manière suivante::
 
     // Dans l'action de votre controller, quand une sauvegarde échoue
     $this->set('errors', $articles->errors());
-    $this->set('_jsonOptions', JSON_FORCE_OBJECT);
-    $this->set('_serialize', ['errors']);
+    $this->viewBuilder()
+        ->setOption('serialize', ['errors'])
+        ->setOption('jsonOptions', JSON_FORCE_OBJECT);
 
 Réponse JSONP
 -------------
@@ -227,7 +219,6 @@ gérer les mappings de vue dans votre controller::
     namespace App\Controller;
 
     use App\Controller\AppController;
-    // Prior to 3.6 use Cake\Network\Exception\NotFoundException
     use Cake\Http\Exception\NotFoundException;
 
     class VideosController extends AppController
@@ -255,11 +246,9 @@ gérer les mappings de vue dans votre controller::
 
             // Définir les Données de la Vue
             $this->set(compact('videos'));
-            $this->set('_serialize', ['videos']);
+            $this->viewBuilder()->setOption('serialize', ['videos']);
 
             // Définit le téléchargement forcé
-            // Avant 3.4.0
-            // $this->response->download('report-' . date('YmdHis') . '.' . $format);
             return $this->response->withDownload('report-' . date('YmdHis') . '.' . $format);
         }
     }

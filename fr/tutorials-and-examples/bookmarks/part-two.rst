@@ -253,7 +253,7 @@ ressembler à ceci::
         }
         $tags = $this->Bookmarks->Tags->find('list');
         $this->set(compact('bookmark', 'tags'));
-        $this->set('_serialize', ['bookmark']);
+        $this->viewBuilder()->setOption('serialize', ['bookmark']);
     }
 
 En définissant la propriété entity avec les données de session, nous retirons
@@ -279,7 +279,7 @@ ceci::
         }
         $tags = $this->Bookmarks->Tags->find('list');
         $this->set(compact('bookmark', 'tags'));
-        $this->set('_serialize', ['bookmark']);
+        $this->viewBuilder()->setOption('serialize', ['bookmark']);
     }
 
 Vue de Liste
@@ -298,7 +298,7 @@ Faites en sorte que votre action ``index()`` dans
             ]
         ];
         $this->set('bookmarks', $this->paginate($this->Bookmarks));
-        $this->set('_serialize', ['bookmarks']);
+        $this->viewBuilder()->setOption('serialize', ['bookmarks']);
     }
 
 Nous devrions aussi mettre à jour l'action ``tags()`` et la méthode finder
