@@ -61,17 +61,15 @@ Vous pouvez faire ceci en utilisant ``setSender()``::
 Configuration
 =============
 
-La Configuration par défaut pour ``Email`` est créée en utilisant ``config()`` et
-``configTransport()``. Vous devrez mettre vos préconfigurations d'email dans
-le fichier **config/app.php**. Le fichier **config/app.default.php** est
-un exemple de ce fichier. Il n'est pas nécessaire de définir de configuration
-d'email dans **config/app.php**. ``Email`` peut être utilisé sans cela
-et utilise les méthodes séparément pour définir toutes les configurations
-ou charger un tableau de configs.
-
-En définissant des profiles et des transports, vous pouvez garder le code de
-votre application sans données de configuration, et éviter de dupliquer, ce qui
-rend la maintenance et le déploiement moins compliqués.
+Les configurations des profiles du Mailer et du transport d'emails sont définies
+dans les fichiers de configuration de votre application. Les clés ``Email`` et
+``EmailTransport`` définissent respectivement les configurations des profiles du
+mailer et du transport des emails. Pendant le bottstrap de l'application, les
+paramètres de configuration sont passés de la classe ``Configure`` aux classes
+``Mailer`` et ``TransportFactory`` en utilisant ``setConfig()``. En définissant
+des profiles et des transports, vous pouvez libérer le code de votre application
+de toutes données de configuration, et éviter des duplications de code qui
+rendent plus difficiles la maintenance et le déploiement.
 
 Pour charger une configuration prédéfinie, vous pouvez utiliser la méthode
 ``setProfile()`` ou la passer au constructeur d'``Email``::
@@ -90,83 +88,6 @@ vous pouvez aussi juste charger un tableau d'options::
 
     // ou dans le constructeur::
     $email = new Email(['from' => 'me@example.org', 'transport' => 'my_custom']);
-
-Configurer les Transports
--------------------------
-
-.. php:staticmethod:: configTransport($key, $config = null)
-
-Les messages d'Email sont délivrés par les transports. Différents transports
-vous permettent d'envoyer les messages par la fonction ``mail()`` de PHP,
-les serveurs SMTP, ou aucun d'eux ce qui peut être utile pour débugger. La
-configuration des transports vous permet de garder les données de configuration
-en dehors du code de votre application et rend le déploiement plus simple
-puisque vous pouvez simplement changer les données de configuration. Un
-exemple de configuration des transports ressemblerai à ceci::
-
-    use Cake\Mailer\Email;
-
-    // Exemple de configuration de Mail
-    Email::configTransport('default', [
-        'className' => 'Mail'
-    ]);
-
-    // Exemple de configuration SMTP.
-    Email::configTransport('gmail', [
-        'host' => 'ssl://smtp.gmail.com',
-        'port' => 465,
-        'username' => 'my@gmail.com',
-        'password' => 'secret',
-        'className' => 'Smtp'
-    ]);
-
-Vous pouvez configurer les serveurs SSL SMTP, comme Gmail. pour faire ceci,
-mettez le prefix ``ssl://`` dans l'hôte et configurez le port avec la bonne
-valeur. Vous pouvez aussi activer TLS SMTP en utilisant l'option ``tls``::
-
-    use Cake\Mailer\Email;
-
-    Email::configTransport('gmail', [
-        'host' => 'smtp.gmail.com',
-        'port' => 587,
-        'username' => 'my@gmail.com',
-        'password' => 'secret',
-        'className' => 'Smtp',
-        'tls' => true
-    ]);
-
-La configuration ci-dessus va activer la communication TLS pour tous les
-messages d'email.
-
-.. warning::
-    Vous devrez avoir l'accès aux applications moins sécurisées activé dans votre
-    compte Google pour que cela fonctionne:
-    `Autoriser les applications moins sécurisées à accéder à votre
-    compte <https://support.google.com/accounts/answer/6010255>`__.
-
-.. note::
-
-    Pour utiliser SSL + SMTP, vous devrez avoir SSL configuré dans votre
-    installation PHP.
-
-Les options de configuration peuvent également être fournies en tant que chaine
-:term:`DSN`. C'est utile lorsque vous travaillez avec des variables
-d'environnement ou des fournisseurs :term:`PaaS`::
-
-    Email::configTransport('default', [
-        'url' => 'smtp://my@gmail.com:secret@smtp.gmail.com:465?tls=true',
-    ]);
-
-Lorsque vous utilisez une chaine DSN, vous pouvez définir des paramètres/options
-supplémentaires en tant qu'arguments de query string.
-
-.. deprecated:: 3.4.0
-    Utilisez ``setConfigTransport()`` à la place de ``configTransport()``.
-
-.. php:staticmethod:: dropTransport($key)
-
-Une fois configuré, les transports ne peuvent pas être modifiés. Afin de
-modifier un transport, vous devez d'abord le supprimer et le reconfigurer.
 
 .. _email-configurations:
 
