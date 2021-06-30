@@ -1225,6 +1225,7 @@ session et pas sur le rendu du HTML, vous pouvez utiliser ``enableRetainFlashMes
 dans vos tests pour que les messages Flash soient conservés dans la session
 pour que vous puissez écrire vos assertions::
 
+    // Active la rétention des messages flash plutôt que leur consommation
     $this->enableRetainFlashMessages();
     $this->get('/bookmarks/delete/9999');
 
@@ -1510,6 +1511,9 @@ d'assertions afin de tester plus simplement les réponses. Quelques exemples::
 
     // Vérifie une partie de l'en-tête Location
     $this->assertRedirectContains('/articles/edit/');
+    
+    // Vérifie que l'en-tête location ne contient pas...
+    $this->assertRedirectNotContains('/articles/edit/');
 
     // Vérifie que le contenu de la réponse n'est pas vide
     $this->assertResponseNotEmpty();
@@ -1533,8 +1537,12 @@ d'assertions afin de tester plus simplement les réponses. Quelques exemples::
     // Vérifie les données de la session
     $this->assertSession(1, 'Auth.User.id');
 
-    // Vérifie l'entête de la réponse.
+    // Vérifie l'en-tête de la réponse.
     $this->assertHeader('Content-Type', 'application/json');
+    $this->assertHeaderContains('Content-Type', 'html');
+
+    // Vérifie que l'en-tête de la réponse ne contient pas de xml
+    $this->assertHeaderNotContains('Content-Type', 'xml');
 
     // Vérifie le contenu d'une variable.
     $user =  $this->viewVariable('user');
