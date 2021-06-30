@@ -13,7 +13,7 @@ ont été utilisés ? Quelles sortes d'erreurs ont été vues par mes utilisateu
 A quelle fréquence est exécutée une requête particulière ?
 
 La journalisation des données dans CakePHP est facile - la fonction log()
-est fourni par ``LogTrait``, qui est l'ancêtre commun de beaucoup de classes
+est fournie par ``LogTrait``, qui est l'ancêtre commun de beaucoup de classes
 CakePHP. Si le contexte est une classe CakePHP (Controller, Component, View...),
 vous pouvez loguer (journaliser) vos données. Vous pouvez aussi utiliser
 ``Log::write()`` directement. Consultez :ref:`writing-to-logs`.
@@ -32,7 +32,7 @@ Un exemple serait::
     use Cake\Log\Log;
 
     // Nom de classe court
-    Log::config('debug', [
+    Log::setConfig('debug', [
         'className' => 'File',
         'path' => LOGS,
         'levels' => ['notice', 'info', 'debug'],
@@ -40,7 +40,7 @@ Un exemple serait::
     ]);
 
     // Nom avec le namespace complet.
-    Log::config('error', [
+    Log::setConfig('error', [
         'className' => 'Cake\Log\Engine\FileLog',
         'path' => LOGS,
         'levels' => ['warning', 'error', 'critical', 'alert', 'emergency'],
@@ -57,14 +57,14 @@ différents niveaux et ce qu'ils signifient.
 Une fois qu'une configuration est créée, vous ne pouvez pas la changer. A la
 place, vous devez retirer la configuration et la re-créer en utilisant
 :php:meth:`Cake\\Log\\Log::drop()` et
-:php:meth:`Cake\\Log\\Log::config()`.
+:php:meth:`Cake\\Log\\Log::setConfig()`.
 
 Il est aussi possible de créer des loggers en fournissant une closure. C'est
 utile quand vous devez avoir un contrôle complet sur la façon dont l'objet est
 construit. La closure doit retourner l'instance de logger construite. Par
 exemple::
 
-    Log::config('special', function () {
+    Log::setConfig('special', function () {
         return new \Cake\Log\Engine\FileLog(['path' => LOGS, 'file' => 'log']);
     });
 
@@ -72,7 +72,7 @@ Les options de configuration peuvent également être fournies en tant que chain
 :term:`DSN`. C'est utile lorsque vous travaillez avec des variables
 d'environnement ou des fournisseurs :term:`PaaS`::
 
-    Log::config('error', [
+    Log::setConfig('error', [
         'url' => 'file:///?levels[]=warning&levels[]=error&file=error',
     ]);
 
@@ -85,24 +85,24 @@ Créer des Adaptateurs de Log
 ----------------------------
 
 Les gestionnaires de flux de log peuvent faire partie de votre application,
-ou parti d'un plugin. Si par exemple vous avez un enregistreur de logs de
+ou partie d'un plugin. Si par exemple vous avez un enregistreur de logs de
 base de données appelé ``DatabaseLog``. Comme faisant partie de votre
 application il devrait être placé dans
 **src/Log/Engine/DatabaseLog.php**. Comme faisant partie d'un plugin
 il devrait être placé dans
 **plugins/LoggingPack/src/Log/Engine/DatabaseLog.php**. Pour configurer des
-flux de logs, vous devez utiliser :php:meth:`Cake\\Log\\Log::config()`. Par
+flux de logs, vous devez utiliser :php:meth:`Cake\\Log\\Log::setConfig()`. Par
 example, la configuration de notre ``DatabaseLog`` pourrait ressembler à ceci::
 
     // Pour src/Log
-    Log::config('otherFile', [
+    Log::setConfig('autreFichier', [
         'className' => 'Database',
         'model' => 'LogEntry',
         // ...
     ]);
 
     // Pour un plugin appelé LoggingPack
-    Log::config('otherFile', [
+    Log::setConfig('autreFichier', [
         'className' => 'LoggingPack.Database',
         'model' => 'LogEntry',
         // ...
@@ -197,7 +197,7 @@ utilisé ce qui a pour effet d'écrire dans le log error. Le chemin par défaut 
     // Execute cela dans une classe CakePHP
     $this->log("Quelque chose ne fonctionne pas!");
 
-    // Aboutit à ce que cela soit ajouté à tmp/logs/error.log
+    // Aboutit à ce que cela soit ajouté à logs/error.log
     // 2007-11-02 10:22:02 Error: Quelque chose ne fonctionne pas!
 
 Le répertoire configuré doit être accessible en écriture par le serveur web de
@@ -207,7 +207,7 @@ Vous pouvez configurer/changer la localisation de FileLog lors de la
 configuration du logger. FileLog accepte un ``path`` qui permet aux
 chemins personnalisés d'être utilisés::
 
-    Log::config('chemin_perso', [
+    Log::setConfig('chemin_perso', [
         'className' => 'File',
         'path' => '/chemin/vers/endroit/perso/'
     ]);
@@ -223,8 +223,8 @@ Logging vers Syslog
 
 Dans les environnements de production, il est fortement recommandé que vous
 configuriez votre système pour utiliser syslog plutôt que le logger de
-fichiers. Cela va fonctionner bien mieux que ceux écrits et sera fait (presque)
-d'une manière  non-blocking et le logger de votre système d'exploitation peut
+fichiers. Cela va fonctionner bien mieux parce que tout sera écrit de façon
+(presque) non bloquante et le logger de votre système d'exploitation peut
 être configuré séparément pour faire des rotations de fichier, pré-lancer
 les écritures ou utiliser un stockage complètement différent pour vos logs.
 
@@ -233,7 +233,7 @@ vous devez juste spécifier `Syslog` comme moteur à utiliser pour la
 journalisation. Le bout de configuration suivant va remplacer le logger
 par défaut avec syslog, ceci va être fait dans le fichier `bootstrap.php`::
 
-    Log::config('default', [
+    Log::setConfig('default', [
         'engine' => 'Syslog'
     ]);
 
@@ -252,7 +252,7 @@ comprend les clés suivantes:
   logger, par défaut `LOG_ODELAY` sera utilisée. Regardez la documentation
   de ``openlog`` pour plus d'options.
 * `facility`: Le slot de journalisation à utiliser dans syslog. Par défaut
-  ``LOG_USER`` est utilisé. Regardez la documentation de `syslog` pour plus
+  ``LOG_USER`` est utilisé. Regardez la documentation de ``syslog`` pour plus
   d'options.
 
 .. _writing-to-logs:
@@ -263,20 +263,47 @@ Ecrire dans les logs
 Ecrire dans les fichiers peut être réalisé de deux façons. La première est
 d'utiliser la méthode statique :php:meth:`Cake\\Log\\Log::write()`::
 
-    Log::write('debug', 'Quelque chose qui ne fonctionne pas');
+    Log::write('debug', 'Quelque chose ne fonctionne pas');
 
-La seconde est d'utiliser la fonction raccourcie log() disponible dans chacune
+La seconde est d'utiliser la fonction raccourcie ``log()`` disponible dans chacune
 des classes qui utilisent ``LogTrait``. En appelant log() cela appellera en
 interne ``Log::write()``::
 
-    // Exécuter cela dans une classe CakePHP:
-    $this->log("Quelque chose qui ne fonctionne pas!", 'debug');
+    // Exécuter cela dans une classe qui utilise LogTrait:
+    $this->log("Quelque chose ne fonctionne pas!", 'debug');
 
 Tous les flux de log configurés sont écrits séquentiellement à chaque fois
 que :php:meth:`Cake\\Log\\Log::write()` est appelée. Vous n'avez pas besoin de
 configurer un flux pour utiliser la journalisation. Si vous n'avez pas
 configuré d'adaptateurs de log, ``log()`` va retourner false et aucun
 message de log ne sera écrit.
+
+Utiliser des Placeholders dans les Messages
+-------------------------------------------
+ 
+Si vous avez besoin de loguer des données définies dynamiquement, vous pouvez
+utiliser des placeholders dans vos messages de log et fournir un tableau de
+paires clé/valeur dans le paramètre ``$context``::
+
+    // Enverra le log `Traitement impossible pour userid=1`
+    Log::write('error', 'Traitement impossible pour userid={user}', ['user' => $user->id]);
+
+Les placeholders pour lesquels aucune clé n'a été définie ne seront pas
+remplacés. Si vous avez besoin d'utiliser des mots entre accolades, vous devez
+les échapper::
+ 
+    // Enverra le log `Pas de {remplacement}`
+    Log::write('error', 'Pas de \\{remplacement}', ['remplacement' => 'no']);
+
+Si vous incluez des objets dans vos placeholders de logs, ces objets devront
+implémenter une des méthodes suivantes:
+
+* ``__toString()``
+* ``toArray()``
+* ``__debugInfo()``
+
+.. versionadded:: 4.1.0
+    Les placeholders de logs ont été ajoutés.
 
 .. _logging-levels:
 
@@ -321,40 +348,39 @@ d'erreur sont écrits, vous pouvez inclure un nom scope. S'il y a un logger
 configuré pour ce scope, les messages de log seront dirigés vers ces loggers.
 Par exemple::
 
-    // Configurez logs/shops.log pour recevoir tous les types (niveaux de log),
-    // mais seulement ceux avec les scope `orders` et `payments`
-    Log::config('shops', [
+    // Configure logs/magasins.log pour recevoir tous les types (niveaux de log),
+    // mais seulement ceux avec les scopes `commandes` et `paiements`
+    Log::setConfig('magasins', [
         'className' => 'File',
         'path' => LOGS,
         'levels' => [],
-        'scopes' => ['orders', 'payments'],
-        'file' => 'shops.log',
+        'scopes' => ['commandes', 'paiements'],
+        'file' => 'magasins.log',
     ]);
 
-    // configurez logs/payments.log pour recevoir tous les types, mais seulement
-    // ceux qui ont un scope `payments`
-    Log::config('payments', [
+    // Configure logs/paiements.log pour recevoir tous les types, mais seulement
+    // ceux qui ont un scope `paiements`
+    Log::setConfig('paiements', [
         'className' => 'File',
         'path' => LOGS,
         'levels' => [],
-        'scopes' => ['payments'],
-        'file' => 'payments.log',
+        'scopes' => ['paiements'],
+        'file' => 'paiements.log',
     ]);
 
-    Log::warning('this gets written only to shops.log', ['scope' => ['orders']]);
-    Log::warning('this gets written to both shops.log and payments.log', ['scope' => ['payments']]);
-    Log::warning('this gets written to both shops.log and payments.log', ['scope' => ['unknown']]);
+    Log::warning('ceci sera écrit seulement dans magasins.log', ['scope' => ['commandes']]);
+    Log::warning('ceci sera écrit dans magasins.log et dans paiements.log', ['scope' => ['paiements']]);
 
-Les scopes peuvent aussi être passées en une chaine unique ou un tableau
-numériquement indexé.
-Notez que l'utilisation de ce formulaire va limiter la capacité de passer plus
-de données en contexte::
+Les scopes peuvent aussi être passées dans une chaîne de texte ou un tableau
+indexé numériquement.
+Notez que si vous utilisez cette forme, cela limitera la possibilité de passer
+d'autres données de contexte::
 
-    Log::warning('This is a warning', ['orders']);
-    Log::warning('This is a warning', 'payments');
+    Log::warning('Ceci est un avertissement', ['commandes']);
+    Log::warning('Ceci est un avertissement', 'paiements');
 
 .. note::
-    Quand l'option ``scopes`` est vide ou ``null`` dans la configuration d'un
+    Quand l'option ``scopes`` est un tableau vide ou ``null`` dans la configuration d'un
     logger, les messages de tous les ``scopes`` seront capturés. Définir l'option
     à ``false`` captura seulement les messages sans scope.
 
@@ -367,7 +393,7 @@ l'API de Log
 
     Une simple classe pour écrire dans les logs (journaux).
 
-.. php:staticmethod:: config($key, $config)
+.. php:staticmethod:: setConfig($key, $config)
 
     :param string $name: Nom du journal en cours de connexion, utilisé
         pour rejeter un journal plus tard.
@@ -398,7 +424,7 @@ l'API de Log
 
 .. php:staticmethod:: levels()
 
-Appelle cette méthode sans arguments, ex: `Log::levels()` pour
+Appelez cette méthode sans arguments, ex: `Log::levels()` pour
 obtenir le niveau de configuration actuel.
 
 Méthodes pratiques
@@ -413,8 +439,8 @@ le niveau de log approprié.
 .. php:staticmethod:: error($message, $scope = [])
 .. php:staticmethod:: warning($message, $scope = [])
 .. php:staticmethod:: notice($message, $scope = [])
-.. php:staticmethod:: debug($message, $scope = [])
 .. php:staticmethod:: info($message, $scope = [])
+.. php:staticmethod:: debug($message, $scope = [])
 
 Logging Trait
 =============
@@ -426,8 +452,7 @@ Logging Trait
 .. php:method:: log($msg, $level = LOG_ERR)
 
     Ecrit un message dans les logs. Par défaut, les messages sont écrits dans
-    les messages ERROR. Si ``$msg`` n'est pas une chaîne, elle sera convertie
-    avec ``print_r`` avant d'être écrite.
+    les messages ERROR.
 
 Utiliser Monolog
 ================
@@ -437,14 +462,14 @@ que les loggers de CakePHP, il est facile de l'utiliser dans votre application
 comme logger par défaut.
 
 Après avoir installé Monolog en utilisant composer, configurez le logger en
-utilisant la méthode ``Log::config()``::
+utilisant la méthode ``Log::setConfig()``::
 
     // config/bootstrap.php
 
     use Monolog\Logger;
     use Monolog\Handler\StreamHandler;
 
-    Log::config('default', function () {
+    Log::setConfig('default', function () {
         $log = new Logger('app');
         $log->pushHandler(new StreamHandler('path/to/your/combined.log'));
         return $log;
@@ -461,7 +486,7 @@ Utilisez des méthodes similaires pour configurer un logger différent pour la c
     use Monolog\Logger;
     use Monolog\Handler\StreamHandler;
 
-    Log::config('default', function () {
+    Log::setConfig('default', function () {
         $log = new Logger('cli');
         $log->pushHandler(new StreamHandler('path/to/your/combined-cli.log'));
         return $log;
