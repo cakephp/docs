@@ -84,11 +84,6 @@ Et dans **templates/Users/login.php**, ajoutez ce qui suit::
     <?= $this->Form->button('Login') ?>
     <?= $this->Form->end() ?>
 
-.. note::
-
-    La méthode ``control()`` est disponible depuis 3.4. Si vous utilisez une
-    version précédente, utilisez la méthode ``input()``.
-
 Maintenant que nous avons un formulaire simple de connexion, nous devrions
 pouvoir nous connecter avec un de nos utilisateurs qui a un mot de passe
 hashé.

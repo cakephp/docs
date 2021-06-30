@@ -16,7 +16,7 @@ leurs espaces dédiés mais partage des propriétés spécifiques à l'applicati
 les paramètres de connexion à la base de données par exemple) qui sont définies et
 partagées au travers de la configuration de l'application.
 
-Dans CakePHP 3.0 chaque plugin définit son namespace de top-niveau. Par exemple
+Chaque plugin est censé définir son namespace de top-niveau. Par exemple
 ``DebugKit``. Par convention, les plugins utilisent leur nom de package pour
 leur namespace. Si vous souhaitez utiliser un namespace différent, vous pouvez
 configurer le namespace du plugin, quand les plugins sont chargés.

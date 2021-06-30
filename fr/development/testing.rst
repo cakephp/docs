@@ -1204,10 +1204,9 @@ chacun de vos "test case".
 Tester avec des cookies chiffrés
 --------------------------------
 
-Si vous utilisez le :php:class:`Cake\\Controller\\Component\\CookieComponent`
-dans vos controllers, vos cookies sont probablement chiffrés. Depuis 3.1.7,
-CakePHP met à votre disposition des méthodes pour intéragir avec les cookies
-chiffrés dans vos "test cases"::
+Si vous utilisez le :ref:`encrypted-cookie-middleware:` dans votre application,
+il y a des méthodes pratiques pour définir des cookies chiffrés dans vos
+*test cases*::
 
     // Définit un cookie en utilisant AES et la clé par défaut.
     $this->cookieEncrypted('my_cookie', 'Some secret values');

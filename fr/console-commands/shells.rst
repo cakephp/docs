@@ -192,7 +192,6 @@ properties attached to your shell::
         public function show()
         {
             if (empty($this->args[0])) {
-                // Use error() before CakePHP 3.2
                 return $this->abort('Please enter a username.');
             }
             $user = $this->Users->findByUsername($this->args[0])->first();
@@ -292,9 +291,6 @@ methods. These methods are shortcuts and aliases to those found on ``ConsoleIo``
 
     // Write to stderr and raise a stop exception
     $this->abort('Fatal error');
-
-    // Before CakePHP 3.2. Write to stderr and exit()
-    $this->error('Fatal error');
 
 It also provides two convenience methods regarding the output level::
 

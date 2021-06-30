@@ -446,8 +446,7 @@ Maintenant vous pouvez ajouter les translations avant de les sauvegarder::
 
     $this->Articles->save($article);
 
-Depuis la version 3.3.0, le travail avec plusieurs traductions a été amélioré.
-Vous pouvez créer des inputs de formulaire pour vos champs traduits::
+Et créer des inputs de formulaire pour vos champs traduits::
 
     // Dans un template de vue.
     <?= $this->Form->create($article); ?>
