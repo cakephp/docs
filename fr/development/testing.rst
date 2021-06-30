@@ -498,6 +498,7 @@ la définition de la table sont:
 ``type``
     Type de données interne à CakePHP. Actuellement supportés:
     - ``string``: redirige vers ``VARCHAR``.
+    - ``char``: redirige vers ``CHAR``
     - ``uuid``: redirige vers ``UUID``
     - ``text``: redirige vers ``TEXT``.
     - ``integer``: redirige vers ``INT``.
@@ -505,13 +506,14 @@ la définition de la table sont:
     - ``decimal``: redirige vers ``DECIMAL``
     - ``float``: redirige vers ``FLOAT``.
     - ``datetime``: redirige vers ``DATETIME``.
+    - ``datetimefractional``: redirige vers ``DATETIME(6)`` ou ``TIMESTAMP``
+    - ``timestamp``: redirige vers ``TIMESTAMP``
+    - ``timestampfractional``: maps to ``TIMESTAMP(6)`` ou ``TIMESTAMP``
     - ``timestamp``: redirige vers ``TIMESTAMP``.
     - ``time``: redirige vers ``TIME``.
     - ``date``: redirige vers ``DATE``.
     - ``binary``: redirige vers ``BLOB``.
-fixed
-    Utilisé avec les types ``string`` pour créer des colonnes de type ``CHAR``
-    dans les plates-formes qui les supportent.
+
 length
     Défini à la longueur spécifique que le champ doit prendre.
 precision
