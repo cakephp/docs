@@ -157,6 +157,35 @@ La classe XmlView intègre la variable ``_xmlOptions`` qui vous permet de
 personnaliser les options utilisées pour générer le XML, par exemple ``tags``
 au lieu d'``attributes``.
 
+Comme exemple d'utilisation de ``XmlView``, on peut imaginer la génération d'un
+`sitemap.xml <https://www.sitemaps.org/protocol.html>`_. Ce tye de document
+nécessite de changer ``_rootNode`` et de définir des attributs. Les attributs
+sont définis en utilisant le préfixe ``@``::
+ 
+    public function sitemap()
+    {
+        $pages = $this->Pages->find()->all();
+        $urls = [];
+        foreach ($pages as $page) {
+            $urls[] = [
+                'loc' => Router::url(['controller' => 'Pages', 'action' => 'view', $page->slug, '_full' => true]),
+                'lastmod' => $page->modified->format('Y-m-d'),
+                'changefreq' => 'daily',
+                'priority' => '0.5'
+            ];
+        }
+
+        // Définir un root node personnalisé dans le document généré.
+        $this->viewBuilder()
+            ->setOption('rootNode', 'urlset')
+            ->setOption('serialize', ['@xmlns', 'url']);
+        $this->set([
+            // Définir un attribut sur le root node.
+            '@xmlns' => 'http://www.sitemaps.org/schemas/sitemap/0.9',
+            'url' => $urls
+        ]);
+    }
+
 Créer des Views JSON
 ====================
 
