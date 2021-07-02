@@ -1167,6 +1167,11 @@ bonnes variables d'environnement::
         'environment' => ['HTTPS' => 'on']
     ]);
 
+Si votre action a besoin de champs déverrouillés vous pouvez les déclarer avec
+``setUnlockedFields()``::
+
+    $this->setUnlockedFields(['dynamic_field']);
+
 Test d'intégration sur les middlewares PSR-7
 --------------------------------------------
 
