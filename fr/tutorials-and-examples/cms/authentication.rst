@@ -94,7 +94,7 @@ Ajouter la Connexion
 Il est maintenant temps de configurer le Plugin d'authentification.
 Le plugin gérera le processus d'authentification en utilisant 3 classes différentes:
 
-* ``Application` utilisera le middleware d'authentification et fournira un
+* ``Application`` utilisera le middleware d'authentification et fournira un
   AuthenticationService contenant toute la configuration que nous voulons définir, comment
   nous allons vérifier les informations d'identification, et où les trouver.
 * ``AuthenticationService`` sera une classe utilitaire pour vous permettre de configurer le
@@ -193,7 +193,7 @@ Toutes vos pages seront restreintes car le ``AuthenticationComponent`` vérifie 
 résultat à chaque demande. Lorsqu'il ne parvient pas à trouver un utilisateur authentifié, il redirige
 l'utilisateur sur la page ``/users/login``.
 Notez qu'à ce stade, le site ne fonctionnera pas car nous n'avons pas encore de page de connexion.
-Si vous visitez votre site, vous obtiendrez une "boucle de redirection infinie", allons corriger cela.
+Si vous visitez votre site, vous obtiendrez une boucle de redirection infinie. Alors, réglons ça !
 
 Dans votre ``UsersController``, ajoutez le code suivant::
 
@@ -219,14 +219,14 @@ Dans votre ``UsersController``, ajoutez le code suivant::
 
             return $this->redirect($redirect);
         }
-        // afficher une erreur si l'utilisateur a soumis le formulaire
+        // afficher une erreur si l'utilisateur a soumis un formulaire
         // et que l'authentification a échoué
         if ($this->request->is('post') && !$result->isValid()) {
             $this->Flash->error(__('Votre identifiant ou votre mot de passe est incorrect.'));
         }
     }
 
-Ajoutez la logique de modèle pour votre action de connexion::
+Ajoutez la logique du template pour votre action de connexion::
 
     <!-- dans /templates/Users/login.php -->
     <div class="users form">
@@ -247,7 +247,7 @@ Ajoutez la logique de modèle pour votre action de connexion::
 Maintenant, la page de connexion nous permettra de nous connecter correctement à l'application.
 Testez-le en affichant n'importe quelle page de votre site. Après avoir été redirigé
 à la page ``/users/login``, saisissez l'email et le mot de passe
-choisi précédemment lors de la création de votre utilisateur. Vous devriez être redirigé
+choisis lors de la création de votre utilisateur. Vous devriez être redirigé
 avec succès après la connexion.
 
 Nous devons ajouter quelques détails supplémentaires pour configurer notre application.

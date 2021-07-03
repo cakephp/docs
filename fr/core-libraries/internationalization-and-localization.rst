@@ -95,13 +95,20 @@ Un fichier de traduction pourrait ressembler à ceci:
      msgid "I'm {0,number} years old"
      msgstr "J'ai {0,number} ans"
 
+.. note::
+    Les traductions sont mises en cache - Assurez-vous de toujours vider le cache après
+    avoir apporté des modifications aux traductions! Vous pouvez soit utiliser
+    :doc:`l'outil cache </console-commands/cache>` et exécuter par exemple
+    ``bin/cake cache clear _cake_core_``, soit vider manuellement le dossier
+    ``tmp/cache/persistent`` (si vous utilisez une mise en cache basée sur des fichiers).
+
 Extraire les Fichiers Pot avec le Shell I18n
 --------------------------------------------
 
 Pour créer les fichiers pot à partir de `__()` et des autres types de messages
 internationalisés qui se trouvent dans votre code, vous pouvez utiliser le shell
 i18n. Vous pouvez consulter le
-:doc:`chapitre suivant </console-and-shells/i18n-shell>` pour en savoir plus.
+:doc:`chapitre suivant </console-commands/i18n>` pour en savoir plus.
 
 Définir la Locale par Défaut
 ----------------------------
@@ -626,7 +633,7 @@ Parser les Données Datetime Localisées
 
 Quand vous acceptez les données localisées, c'est sympa d'accepter les
 informations de type datetime dans un format localisé pour l'utilisateur. Dans
-un controller, ou :doc:`/development/dispatch-filters`, vous pouvez configurer
+un controller, ou :doc:`/controllers/middleware`, vous pouvez configurer
 les types Date, Time, et DateTime pour parser les formats localisés::
 
     use Cake\Database\TypeFactory;

@@ -41,16 +41,16 @@ a following section. The built-in providers map to the following values of
 
 * An ``Entity`` instance or an iterator will map to
   `EntityContext
-  <https://github.com/cakephp/cakephp/tree/master/src/View/Form/EntityContext.php>`_;
+  <https://api.cakephp.org/4.x/class-Cake.View.Form.EntityContext.html>`_;
   this context class allows FormHelper to work with results from the
   built-in ORM.
 
 * An array containing the ``'schema'`` key, will map to
-  `ArrayContext <https://github.com/cakephp/cakephp/tree/master/src/View/Form/ArrayContext.php>`_
+  `ArrayContext <https://api.cakephp.org/4.x/class-Cake.View.Form.ArrayContext.html>`_
   which allows you to create simple data structures to build forms against.
 
 * ``null`` will map to
-  `NullContext <https://github.com/cakephp/cakephp/tree/master/src/View/Form/NullContext.php>`_;
+  `NullContext <https://api.cakephp.org/4.x/class-Cake.View.Form.NullContext.html>`_;
   this context class
   simply satisfies the interface FormHelper requires. This context is useful if
   you want to build a short form that doesn't require ORM persistence.
@@ -330,7 +330,7 @@ While the built-in context classes are intended to cover the basic cases you'll
 encounter you may need to build a new context class if you are using a different
 ORM. In these situations you need to implement the
 `Cake\\View\\Form\\ContextInterface
-<https://github.com/cakephp/cakephp/tree/master/src/View/Form/ContextInterface.php>`_ . Once
+<https://api.cakephp.org/4.x/interface-Cake.View.Form.ContextInterface.html>`_ . Once
 you have implemented this interface you can wire your new context into the
 FormHelper. It is often best to do this in a ``View.beforeRender`` event
 listener, or in an application view class::

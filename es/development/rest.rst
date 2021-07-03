@@ -17,7 +17,7 @@ La Configuración Simple
 =======================
 
 La forma más rapida para empezar a utilizar REST es agregar unas lineas para
-configurar la :ref:`resource routes <resource-routes>` en su archivo **config/routes.php** .
+configurar la `resource routes <resource-routes>` en su archivo **config/routes.php** .
 
 Una vez que la ruta se ha configurado para mapear las solicitudes REST a 
 cierto controlador de acciones, se puede proceder a crear la lógica de nuestro
@@ -160,7 +160,7 @@ Enrutamiento RESTful
 ====================
 
 El enrutador de CakePHP fácilita la conexión de rutas de recursos RESTful. Ver la sección
-:ref:`resource-routes` para más información. 
+`resource-routes` para más información. 
 
 .. meta::
     :title lang=es: REST

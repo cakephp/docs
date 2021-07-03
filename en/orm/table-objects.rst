@@ -131,7 +131,24 @@ callback methods are triggered. This follows the same sequencing as controllers
 
 To add an event listener to a Table class or Behavior simply implement the
 method signatures as described below. See the :doc:`/core-libraries/events` for
-more detail on how to use the events subsystem.
+more detail on how to use the events subsystem::
+
+    // In a controller
+    $articles->save($article, ['customVariable1' => 'yourValue1']);
+    
+    // In ArticlesTable.php
+    public function afterSave(Event $event, EntityInterface $entity, ArrayObject $options)
+    {
+        $customVariable = $options['customVariable1'];	// 'yourValue1'
+        $options['customVariable2'] = 'yourValue2';	
+    }  
+    
+    public function afterSaveCommit(Event $event, EntityInterface $entity, ArrayObject $options)
+    {
+        $customVariable = $options['customVariable1'];	// 'yourValue1'
+        $customVariable = $options['customVariable2'];	// 'yourValue2'
+    }
+    
 
 Event List
 ----------

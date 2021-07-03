@@ -438,6 +438,8 @@ d'informations. Comme mentionné plus tôt, la propriété ``$components`` sera
 fusionnée avec la propriété définie dans chacune des classes parentes de votre
 controller.
 
+.. _controller-life-cycle:
+
 Cycle de Vie des Callbacks de la Requête
 ========================================
 

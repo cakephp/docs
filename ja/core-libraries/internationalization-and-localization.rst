@@ -83,11 +83,18 @@ PR を送ってください。
      msgid "I'm {0,number} years old"
      msgstr "J'ai {0,number} ans"
 
+.. note::
+    翻訳はキャッシュされています。翻訳を変更した後は、必ずキャッシュをクリアしてください。
+    :doc:`キャッシュツール </console-and-shells/cache>` を使って、例えば
+    ``bin/cake cache clear _cake_core_`` を実行するか、手動で ``tmp/cache/persistent``
+    フォルダをクリアすることができます (ファイルベースのキャッシュを使用している場合)。
+
 I18n を利用して Pot ファイルを生成する
 --------------------------------------
 
 アプリケーション内の、 `__()` や他の国際化されたメッセージから pot ファイルを生成するためには、
-i18n シェルを利用できます。より知りたい場合は、 :doc:`次の章 </console-commands/i18n>`
+i18n シェルを利用できます。より知りたい場合は、 :doc:`次の章
+</console-and-shells/i18n-shell>`
 を読んでください。
 
 デフォルトのロケールを設定する

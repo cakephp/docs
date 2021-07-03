@@ -806,7 +806,7 @@ Uma vez registrado, o middleware com escopo definido pode ser aplicado a escopos
     $routes->scope('/cms', function ($routes) {
         // Habilita os middlewares de CSRF & cookies
         $routes->applyMiddleware('csrf', 'cookies');
-        $routes->get('/articles/:action/*', ['controller' => 'Articles'])
+        $routes->get('/articles/:action/*', ['controller' => 'Articles']);
     });
 
 Nas situações em que você tem escopos aninhados, os escopos internos herdarão o middleware aplicado no escopo que o contém::

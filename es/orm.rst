@@ -21,11 +21,6 @@ y fácil de usar.
 Antes de comentar explorando el ORM, asegurate de configurar tu conexion :ref:`configure your
 database connections <database-configuration>`.
 
-.. note::
-
-    Si estás familiarizado con las versiones anteriores de CakePHP, deberías leer :doc:`/appendices/orm-migration`
-    para entender las diferencias entre CakePHP 3.0 y las versiones anteriores.
-
 Ejemplo rápido
 ==============
 

@@ -64,8 +64,6 @@ Utilisée pour trouver le chemin vers un package dans CakePHP::
 Localiser les Plugins
 =====================
 
-.. php:staticmethod:: Plugin::path(string $plugin)
-
 Les plugins peuvent être localisés avec Plugin. En utilisant
 ``Plugin::path('DebugKit');`` par exemple, cela vous donnera le chemin
 complet vers le plugin DebugKit::

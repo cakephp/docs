@@ -353,7 +353,7 @@ Database
 --------
 
 * データベースのタイムゾーンが PHP のタイムゾーンと一致しない場合は、 ``DateTime::setDatabaseTimezone()`` を使用できます。
-  詳しくは、 :ref:`datetime-type` をご覧ください。
+  詳しくは、 `datetime-type` をご覧ください。
 * ``DateTime::setKeepDatabaseTimezone()`` により、クエリーによって生成された DateTime オブジェクトに、
   データベースのタイムゾーンを保持できます。
 * ``Cake\Database\Log\LoggedQuery`` は ``JsonSerializable`` を実装するようになりました。
@@ -438,7 +438,7 @@ Routing
 -------
 
 * ``Cake\Routing\Asset`` が追加されました。このクラスは、 ``Router::url()`` と同等の静的インターフェースで、
-  アセットURL生成を公開します。詳しくは :ref:`asset-routing` をご覧ください。
+  アセットURL生成を公開します。詳しくは `asset-routing` をご覧ください。
 
 TestSuite
 ---------
@@ -457,7 +457,7 @@ View
   HTML5 検証メッセージを生成するようになりました。この機能は ``autoSetCustomValidity``
   クラス設定オプションで切り替えることができます。
 * ``FormHelper`` は、日時フィールドのネイティブ HTML5 入力タグを生成するようになりました。
-  詳しくは、 :ref:`Form Helper <create-datetime-controls>` ページを参照してください。
+  詳しくは、`Form Helper <create-datetime-controls>` ページを参照してください。
   以前のマークアップを保持する必要がある場合は、シム化された FormHelper が
   `Shim plugin <https://github.com/dereuromark/cakephp-shim>`__ にあり、
   古い動作・生成が含まれています（4.x ブランチ）。
