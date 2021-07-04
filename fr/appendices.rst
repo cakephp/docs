@@ -14,6 +14,7 @@ introduites dans chaque version et le chemin de migration entre les versions.
     appendices/4-0-upgrade-guide
     appendices/4-1-migration-guide
     appendices/4-2-migration-guide
+    appendices/4-3-migration-guide
 
 Informations générales
 ======================
