@@ -27,6 +27,16 @@ features::
 A new configuration option has been added to disable deprecations on a path by
 path basis. See :ref:`deprecation-warnings` for more information.
 
+Middleware
+----------
+- "Double pass" middlewares, i.e. classes with ``__invoke($request, $response, $next)`` method are deprecated.
+  Instead use ``Closure`` with signature ``function($request, $handler)`` or classes which 
+  implement ``Psr\Http\Server\MiddlewareInterface`` instead.
+
+Routing
+-------
+- Colon prefixed route placeholders like ``:controller`` are deprecated. Use braced placeholders like ``{controller}`` instead.
+
 Log
 ---
 
