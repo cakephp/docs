@@ -25,7 +25,7 @@ To upgrade to the new fixture system, you need to make a few updates:
    These properties are unused in the new fixture system.
 
 Your tests should continue to pass, and you can experiment with
-:ref:`fixture-state-managers`. ``TransactionStrategy`` can yield significant
+:ref:`fixture-state-management`. ``TransactionStrategy`` can yield significant
 performance improvements.
 
 Legacy Fixture Documentation
