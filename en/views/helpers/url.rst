@@ -21,9 +21,9 @@ generates the URL for the controller and action combo. If ``full`` is
 ``true``, the full base URL will be prepended to the result::
 
     echo $this->Url->build([
-        "controller" => "Posts",
-        "action" => "view",
-        "bar",
+        'controller' => 'Posts',
+        'action' => 'view',
+        'bar',
     ]);
 
     // Output
@@ -34,9 +34,9 @@ Here are a few more usage examples:
 URL with extension::
 
     echo $this->Url->build([
-        "controller" => "Posts",
-        "action" => "list",
-        "_ext" => "rss",
+        'controller' => 'Posts',
+        'action' => 'list',
+        '_ext' => 'rss',
     ]);
 
     // Output
@@ -52,10 +52,10 @@ URL (starting with '/') with the full base URL prepended::
 URL with GET parameters and fragment anchor::
 
     echo $this->Url->build([
-        "controller" => "Posts",
-        "action" => "search",
-        "?" => ["foo" => "bar"],
-        "#" => "first",
+        'controller' => 'Posts',
+        'action' => 'search',
+        '?' => ['foo' => 'bar'],
+        '#' => 'first',
     ]);
 
     // Output
