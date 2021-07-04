@@ -108,9 +108,10 @@ Add the following to the PHP block of controls in **templates/Articles/add.php**
     echo $this->Form->control('tags._ids', ['options' => $tags]);
 
 This will render a multiple select element that uses the ``$tags`` variable to
-generate the select box options. You should now create a couple new articles
+generate the select box options. You should now create a couple of new articles
 that have tags, as in the following section we'll be adding the ability to find
-articles by tags.
+articles by tags. For now, you will only be able to select from the predefined tags.
+Later, we'll add the ability to create new tags, and to display tags on the view page.
 
 You should also update the ``edit`` method to allow adding or editing tags. The
 edit method should now look like::
@@ -317,6 +318,15 @@ all passed variables available in the template scope as local variables.
 
 You should now be able to visit the **/articles/tagged/funny** URL and see all
 the articles tagged with 'funny'.
+
+You will notice that the page could use some improvements. If you visit the
+**//articles/tagged/** URL to see a list of pages with no tags, the header says
+'Articles tagged with' and nothing else.
+
+Also, if the tag you're searching for doesn't exist, let's say **/articles/taggged/thoughtful**,
+then there will be a complete blank below the 'Articles tagged with thoughtful' heading.
+
+We leave making those improvements as an exercise for you.
 
 Improving the Tagging Experience
 ================================
