@@ -546,12 +546,12 @@ to ``true``::
 
     $query = $articles->find();
     $query->contain(['Authors', 'Comments'], true);
-    
+
 .. note::
 
     Association names in ``contain()`` calls should use the same association casing as
     in your association definitions,  not the property name used to hold the association record(s).
-    For example, if you have declared an assocation as ``belongsTo('Users')`` then you must 
+    For example, if you have declared an assocation as ``belongsTo('Users')`` then you must
     use ``contain('Users')`` and not ``contain('users')`` or ``contain('user')``.
 
 
@@ -700,7 +700,7 @@ already familiar to you::
         }
     );
 
-    // Bring unique articles that were commented by 'markstory' using passed variable
+    // Bring unique articles that were commented by `markstory` using passed variable
     // Dotted matching paths should be used over nested matching() calls
     $username = 'markstory';
     $query = $articles->find()->matching('Comments.Users', function ($q) use ($username) {

@@ -535,7 +535,7 @@ Passing Variables into an Element
 You can pass data to an element through the element's second argument::
 
     echo $this->element('helpbox', [
-        "helptext" => "Oh, this text is very helpful."
+        'helptext' => 'Oh, this text is very helpful.',
     ]);
 
 Inside the element file, all the passed variables are available as members of
@@ -544,7 +544,7 @@ controller works with template files). In the above example, the
 **templates/element/helpbox.php** file can use the ``$helptext`` variable::
 
     // Inside templates/element/helpbox.php
-    echo $helptext; // Outputs "Oh, this text is very helpful."
+    echo $helptext; // Outputs `Oh, this text is very helpful.`
 
 Keep in mind that in those view vars are merged with the view vars from the view
 itself. So all view vars set using ``Controller::set()`` in the controller and
@@ -554,14 +554,14 @@ The ``View::element()`` method also supports options for the element.
 The options supported are 'cache' and 'callbacks'. An example::
 
     echo $this->element('helpbox', [
-            "helptext" => "This is passed to the element as $helptext",
-            "foobar" => "This is passed to the element as $foobar",
+            'helptext' => "This is passed to the element as $helptext",
+            'foobar' => "This is passed to the element as $foobar",
         ],
         [
-            // uses the "long_view" cache configuration
-            "cache" => "long_view",
+            // uses the `long_view` cache configuration
+            'cache' => 'long_view',
             // set to true to have before/afterRender called for the element
-            "callbacks" => true
+            'callbacks' => true,
         ]
     );
 
@@ -572,7 +572,7 @@ stored. To cache different versions of the same element in an application,
 provide a unique cache key value using the following format::
 
     $this->element('helpbox', [], [
-            "cache" => ['config' => 'short', 'key' => 'unique value']
+            'cache' => ['config' => 'short', 'key' => 'unique value'],
         ]
     );
 
