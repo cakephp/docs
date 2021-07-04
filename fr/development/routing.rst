@@ -966,9 +966,9 @@ Les extensions de fichier sont utilisées par le
 :doc:`/controllers/components/request-handling` qui fait la commutation des
 vues automatiquement en se basant sur les types de contenu.
 
-.. _connecting-scoped-middleware:
+.. _route-scoped-middleware:
 
-Connecter des Middlewares à un scope
+Route Scoped Middleware
 ------------------------------------
 
 Bien que les middlewares puissent être appliqués à toute votre application, appliquer
