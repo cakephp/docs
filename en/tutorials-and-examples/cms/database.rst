@@ -56,6 +56,12 @@ necessary tables:
     INSERT INTO articles (user_id, title, slug, body, published, created, modified)
     VALUES
     (1, 'First Post', 'first-post', 'This is the first post.', 1, NOW(), NOW());
+    
+    INSERT INTO tags (title, created, modified)
+    VALUES
+    ('cats', NOW(), NOW()),
+    ('funny', NOW(), NOW()),
+    ('gifs', NOW(), NOW());
 
 If you are using PostgreSQL, connecting to ``cake_cms`` database and execute the
 following SQL instead:
@@ -107,6 +113,11 @@ following SQL instead:
     VALUES
     (1, 'First Post', 'first-post', 'This is the first post.', TRUE, NOW(), NOW());
 
+    INSERT INTO tags (title, created, modified)
+    VALUES
+    ('cats', NOW(), NOW()),
+    ('funny', NOW(), NOW()),
+    ('gifs', NOW(), NOW());
 
 You may have noticed that the ``articles_tags`` table used a composite primary
 key. CakePHP supports composite primary keys almost everywhere allowing you to
