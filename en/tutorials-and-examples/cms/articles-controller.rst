@@ -319,12 +319,12 @@ typically a URL-safe version of an article's title. We can use the
     use Cake\ORM\Table;
     // the Text class
     use Cake\Utility\Text;
-    // the EventInterface class
-    use Cake\Event\EventInterface;
+    // the Event class
+    use Cake\Event\Event;
 
     // Add the following method.
 
-    public function beforeSave(EventInterface $event, $entity, $options)
+    public function beforeSave(Event $event, $entity, $options)
     {
         if ($entity->isNew() && !$entity->slug) {
             $sluggedTitle = Text::slug($entity->title);
