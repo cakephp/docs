@@ -45,7 +45,7 @@ TestSuite
 ---------
 
 - ``TestFixture::$fields`` et ``TestFixture::$import`` sont dépréciés. Il est
-  conseillé de convertir votre application vers le :doc:`nouveau système de fixture <./fixture-upgrade>`.
+  conseillé de convertir votre application vers le `nouveau système de fixture <./fixture-upgrade>`.
 
 Changements dans les Behaviors
 ==============================
@@ -136,7 +136,7 @@ Log
 - Les moteurs de log utilisent maintenant des formatters pour formater le texte
   du message avant de l'écrire.
   Cela peut être configuré avec l'option de configuration ``formatter``.
-  Consultez la section :ref:`logging-formatters` pour plus de détails.
+  Consultez la section `logging-formatters` pour plus de détails.
 - ``JsonFormatter`` a été ajouté et peut être défini comme option ``formatter``
   pour n'importe quel moteur de log.
 
@@ -158,7 +158,7 @@ TestSuite
 
 - Un nouveau système de fixture a été introduit. Ce système de fixture sépare le
   schéma et les données, ce qui vous permet de réutiliser vos migrations
-  existantes pour définir un schéma de test. Le guide :doc:`./fixture-upgrade`
+  existantes pour définir un schéma de test. Le guide `./fixture-upgrade`
   explique comment mettre à niveau.
 
 View
