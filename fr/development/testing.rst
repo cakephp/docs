@@ -525,7 +525,7 @@ null
 default
     Valeur par défaut que le champ prend.
 
-Nos pouvons définir un ensemble d'enregistrements qui seront remplis après que
+Nous pouvons définir un ensemble d'enregistrements qui seront remplis après que
 la table de fixture est créée. Le format est assez simple, ``$records`` est un
 tableau d'enregistrements. Chaque item dans ``$records`` doit être
 un enregistrement (une seule ligne). A l'intérieur de chaque ligne, il doit y
