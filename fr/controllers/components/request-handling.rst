@@ -169,6 +169,7 @@ ajouter un gestionnaire de CSV pourrait ressembler à ceci::
 Vous pouvez utiliser n'importe quel `callback <http://php.net/callback>`_ pour
 la fonction de gestion. Vous pouvez aussi passer des arguments supplémentaires
 au callback, c'est très utile pour les callbacks comme ``json_decode``::
+
     $this->RequestHandler->config('inputTypeMap.json', ['json_decode', true]);
 
 Le contenu ci-dessus créera ``$this->request->getData()`` un tableau des données
