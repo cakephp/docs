@@ -185,7 +185,8 @@ vous pouvez spécifier le template à utiliser lors de l'affichage de la cell::
 
     // Définit le template avant de faire un echo de la cell.
     $cell = $this->cell('Inbox'); ?>
-    $cell->template = 'messages';
+    $cell->viewBuilder()->setTemplate('messages');
+
     echo $cell;
 
 Mettre en Cache la Sortie de Cell

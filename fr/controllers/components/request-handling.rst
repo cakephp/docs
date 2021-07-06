@@ -27,7 +27,7 @@ Afin d'utiliser le Request Handler, il doit être chargé depuis la méthode
     class WidgetController extends AppController
     {
 
-        public function initialize()
+        public function initialize(): void
         {
             parent::initialize();
             $this->loadComponent('RequestHandler');
@@ -53,13 +53,13 @@ contenu que le client accepte. Par exemple::
         class ArticlesController extends AppController
         {
 
-            public function initialize()
+            public function initialize(): void
             {
                 parent::initialize();
                 $this->loadComponent('RequestHandler');
             }
 
-            public function beforeFilter(Event $event)
+            public function beforeFilter(EventInterface $event)
             {
                 if ($this->RequestHandler->accepts('html')) {
                     // Execute le code seulement si le client accepte une
@@ -148,7 +148,7 @@ ajouter un gestionnaire de CSV pourrait ressembler à ceci::
 
     class ArticlesController extends AppController
     {
-        public function initialize()
+        public function initialize(): void
         {
             parent::initialize();
             $parser = function ($data) {
@@ -170,18 +170,11 @@ Vous pouvez utiliser n'importe quel `callback <http://php.net/callback>`_ pour
 la fonction de gestion. Vous pouvez aussi passer des arguments supplémentaires
 au callback, c'est très utile pour les callbacks comme ``json_decode``::
 
-    $this->RequestHandler->addInputType('json', ['json_decode', true]);
-
-    // Depuis 3.1.0, vous devez utiliser
     $this->RequestHandler->config('inputTypeMap.json', ['json_decode', true]);
 
 Le contenu ci-dessus créera ``$this->request->getData()`` un tableau des données
 d'entrées JSON, sans le ``true`` supplémentaire vous obtiendrez un jeu
 d'objets ``stdClass``.
-
-.. deprecated:: 3.1.0
-    Depuis 3.1.0 la méthode ``addInputType()`` est dépréciée. Vous devez
-    utiliser ``config()`` pour ajouter des types d'input à la volée.
 
 Vérifier les Préférences de Content-Type
 ========================================
@@ -253,7 +246,7 @@ au client, augmentant la bande passante. Le code de réponse est défini
 Vous pouvez mettre en retrait ce contrôle automatique en paramétrant
 ``checkHttpCache`` à ``false``::
 
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
         $this->loadComponent('RequestHandler', [
@@ -272,7 +265,7 @@ Vous pouvez mapper les types existants et les nouveaux types à vos classes
 personnalisées. Vous pouvez aussi définir ceci automatiquement en utilisant
 la configuration ``viewClassMap``::
 
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
         $this->loadComponent('RequestHandler', [

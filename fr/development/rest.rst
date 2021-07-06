@@ -29,7 +29,7 @@ dans nos actions de controller. Un controller basique pourrait ressembler
     class RecipesController extends AppController
     {
 
-        public function initialize()
+        public function initialize(): void
         {
             parent::initialize();
             $this->loadComponent('RequestHandler');
@@ -38,19 +38,15 @@ dans nos actions de controller. Un controller basique pourrait ressembler
         public function index()
         {
             $recipes = $this->Recipes->find('all');
-            $this->set([
-                'recipes' => $recipes,
-                '_serialize' => ['recipes']
-            ]);
+            $this->set('recipes', $recipes);
+            $this->viewBuilder()->setOption('serialize', ['recipes']);
         }
 
         public function view($id)
         {
             $recipe = $this->Recipes->get($id);
-            $this->set([
-                'recipe' => $recipe,
-                '_serialize' => ['recipe']
-            ]);
+            $this->set('recipe', $recipe);
+            $this->viewBuilder()->setOption('serialize', ['recipe']);
         }
 
         public function add()
@@ -64,8 +60,8 @@ dans nos actions de controller. Un controller basique pourrait ressembler
             $this->set([
                 'message' => $message,
                 'recipe' => $recipe,
-                '_serialize' => ['message', 'recipe']
             ]);
+            $this->viewBuilder()->setOption('serialize', ['recipe', 'message']);
         }
 
         public function edit($id)
@@ -81,8 +77,9 @@ dans nos actions de controller. Un controller basique pourrait ressembler
             }
             $this->set([
                 'message' => $message,
-                '_serialize' => ['message']
+                'recipe' => $recipe,
             ]);
+            $this->viewBuilder()->setOption('serialize', ['recipe', 'message']);
         }
 
         public function delete($id)
@@ -92,10 +89,8 @@ dans nos actions de controller. Un controller basique pourrait ressembler
             if (!$this->Recipes->delete($recipe)) {
                 $message = 'Error';
             }
-            $this->set([
-                'message' => $message,
-                '_serialize' => ['message']
-            ]);
+            $this->set('message', $message);
+            $this->viewBuilder()->setOption('serialize', ['message']);
         }
     }
 
@@ -103,12 +98,12 @@ Les controllers RESTful utilisent souvent les extensions parsées pour servir
 différentes views basées sur différents types de requête. Puisque nous gérons
 les requêtes REST, nous ferons des views XML. Vous pouvez aussi faire des views
 JSON en utilisant les :doc:`/views/json-and-xml-views` intégrées à CakePHP. En
-utilisant :php:class:`XmlView` intégré, nous pouvons définir une variable de vue
-``_serialize``. Cette variable de vue spéciale est utilisée pour définir les
+utilisant :php:class:`XmlView` intégré, nous pouvons définir une option
+``_serialize``. Cette option est utilisée pour définir les
 variables de vue que ``XmlView`` doit sérialiser en XML.
 
 Si nous voulons modifier les données avant qu'elles soient converties en XML,
-nous ne devons pas définir la variable de vue ``_serialize``, et à la place
+nous ne devons pas définir l'option ``_serialize``, et à la place
 utiliser les fichiers de template. Nous plaçons les vues REST pour notre
 RecipesController à l'intérieur de **templates/Recipes/xml**. Nous pouvons
 aussi utiliser :php:class:`Xml` pour une sortie XML facile et rapide dans ces

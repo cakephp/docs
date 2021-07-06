@@ -16,7 +16,7 @@ leurs espaces dédiés mais partage des propriétés spécifiques à l'applicati
 les paramètres de connexion à la base de données par exemple) qui sont définies et
 partagées au travers de la configuration de l'application.
 
-Dans CakePHP 3.0 chaque plugin définit son namespace de top-niveau. Par exemple
+Chaque plugin est censé définir son namespace de top-niveau. Par exemple
 ``DebugKit``. Par convention, les plugins utilisent leur nom de package pour
 leur namespace. Si vous souhaitez utiliser un namespace différent, vous pouvez
 configurer le namespace du plugin, quand les plugins sont chargés.
@@ -450,7 +450,7 @@ exemple::
 
     class ContactsTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->hasMany('ContactManager.AltName');
         }
@@ -466,7 +466,7 @@ préfix du plugin, utilisez la syntaxe alternative::
 
     class ContactsTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->hasMany('AltName', [
                 'className' => 'ContactManager.AltName',
@@ -624,7 +624,7 @@ nom du component. Par exemple::
     }
 
     // dans vos controllers:
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
         $this->loadComponent('ContactManager.Example');

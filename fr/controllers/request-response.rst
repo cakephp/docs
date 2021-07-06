@@ -35,7 +35,7 @@ permet sont les suivantes:
 * Fournit un accès aux paramètres de la requête à la fois en tableaux indicés
   et en propriétés d'un objet.
 
-Depuis la version 3.4.0, l'objet ServerRequest de CakePHP implémente `l'interface
+L'objet ServerRequest de CakePHP implémente `l'interface
 PSR-7 ServerServerRequestInterface <http://www.php-fig.org/psr/psr-7/>`_ facilitant
 l'utilisation des librairies en-dehors de CakePHP.
 
@@ -449,7 +449,7 @@ Données de Session
 ------------------
 
 Pour accéder à la session pour une requête donnée, utilisez la méthode ``getSession()`` ou l'attribut
-``session()``::
+``session``::
 
     $session = $this->request->getSession();
     $session = $this->request->getAttribute('session');

@@ -43,7 +43,7 @@ doit être définie dans une structure en tableau comme ci-dessous::
             ]
         ];
 
-        public function initialize()
+        public function initialize(): void
         {
             parent::initialize();
             $this->loadComponent('Paginator');
@@ -64,7 +64,7 @@ Vous pouvez aussi inclure d'autres options
             ]
         ];
 
-        public function initialize()
+        public function initialize(): void
         {
             parent::initialize();
             $this->loadComponent('Paginator');
