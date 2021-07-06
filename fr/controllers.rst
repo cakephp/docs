@@ -429,14 +429,7 @@ pour eux::
         $this->loadComponent('Comments', Configure::read('Comments'));
     }
 
-.. php:attr:: components
-
-La propriété ``$components`` de vos controllers vous permet de configurer les
-components. Les components configurés et leurs dépendances vont être créés par
-CakePHP pour vous. Lisez la section :ref:`configuring-components` pour plus
-d'informations. Comme mentionné plus tôt, la propriété ``$components`` sera
-fusionnée avec la propriété définie dans chacune des classes parentes de votre
-controller.
+.. _controller-life-cycle:
 
 Cycle de Vie des Callbacks de la Requête
 ========================================
