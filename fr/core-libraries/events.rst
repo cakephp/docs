@@ -75,7 +75,7 @@ garder votre model Orders propre, vous pouvez utiliser les événements::
                 $event = new Event('Model.Orders.afterPlace', $this, [
                     'order' => $order
                 ]);
-                $this->eventManager()->dispatch($event);
+                $this->getEventManager()->dispatch($event);
                 return true;
             }
             return false;

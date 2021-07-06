@@ -13,7 +13,7 @@ d'une ``View``, utilisez la classe ``Time``::
     class UsersController extends AppController
     {
 
-        public function initialize()
+        public function initialize(): void
         {
             parent::initialize();
             $this->loadComponent('Auth');

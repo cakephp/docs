@@ -177,14 +177,14 @@ invalidate the fields accordingly to the feedback from the remote server::
 According to how the validator class would have returned the errors, ``$errors``
 must be in this format::
 
-    ["fieldName" => ["validatorName" => "The error message to display"]]
+    ['fieldName' => ['validatorName' => 'The error message to display']]
 
 Now you will be able to invalidate form fields by setting the fieldName, then
 set the error messages::
 
     // In a controller
     $contact = new ContactForm();
-    $contact->setErrors(["email" => ["_required" => "Your email is required"]]);
+    $contact->setErrors(['email' => ['_required' => 'Your email is required']]);
 
 Proceed to Creating HTML with FormHelper to see the results.
 

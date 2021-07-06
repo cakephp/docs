@@ -131,7 +131,7 @@ suivante.
 Pour configurer les différents champs de l'utilisateur dans la méthode
 ``initialize()``::
 
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
         $this->loadComponent('Auth', [
@@ -148,7 +148,7 @@ au sein d'élément ``authenticate`` ou ``Form``. Ils doivent
 se trouver au même niveau que la clé d'authentification. La configuration
 ci-dessus avec d'autres configurations ressemblerait à quelque chose comme::
 
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
         $this->loadComponent('Auth', [
@@ -199,7 +199,7 @@ Vous pouvez personnaliser la requête utilisée pour chercher l'utilisateur en
 utilisant l'option ``finder`` dans la configuration de la classe
 d'authentification::
 
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
         $this->loadComponent('Auth', [
@@ -680,7 +680,7 @@ et ``check()``. Cette classe doit étendre la classe ``AbstractPasswordHasher``:
 Ensuite, vous devez configurer AuthComponent pour utiliser votre propre
 hasher de mot de passe::
 
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
         $this->loadComponent('Auth', [
@@ -708,7 +708,7 @@ d'un algorithme vers un autre, ceci est possible avec la classe
 CakePHP 2.x qui utilise des hash de mot de passe ``sha1``, vous pouvez
 configurer le AuthComponent comme suit::
 
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
         $this->loadComponent('Auth', [
@@ -1036,7 +1036,7 @@ il peut donc être vérifié::
 
     class AppController extends Controller
     {
-        public function initialize()
+        public function initialize(): void
         {
             parent::initialize();
             $this->loadComponent('Auth', [

@@ -21,7 +21,7 @@ Tour Rapide
 
 Cette section va vous apprendre les utilisations les plus habituelles du Router
 de CakePHP. Typiquement si vous voulez afficher quelque chose en page d'accueil,
-vous ajoutez ceci au fichier **routes.php**::
+vous ajoutez ceci au fichier **config/routes.php**::
 
     /** @var \Cake\Routing\RouteBuilder $routes */
     $routes->connect('/', ['controller' => 'Articles', 'action' => 'index']);

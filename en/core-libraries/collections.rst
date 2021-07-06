@@ -913,7 +913,7 @@ collection containing the values from both sources::
     $cakephpTweets = new Collection($tweets);
     $myTimeline = $cakephpTweets->append($phpTweets);
 
-    // Tweets containing cakefest from both sources
+    // Tweets containing `cakefest` from both sources
     $myTimeline->filter(function ($tweet) {
         return strpos($tweet, 'cakefest');
     });

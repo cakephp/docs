@@ -49,7 +49,7 @@ Maintenant que nous avons une table Tags, nous pouvons créer une association en
 la table Articles et la table Tags. Nous pouvons le faire en ajoutant le code suivant
 à la méthode ``initialize`` de ArticlesTable::
 
-    public function initialize(array $config)
+    public function initialize(array $config): void
     {
         $this->addBehavior('Timestamp');
         $this->belongsToMany('Tags'); // Ajoutez cette ligne

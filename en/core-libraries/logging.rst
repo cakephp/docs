@@ -98,7 +98,7 @@ class using the ``LogTrait``. Calling ``log()`` will internally call
 ``Log::write()``::
 
     // Executing this inside a class using LogTrait
-    $this->log("Something did not work!", 'debug');
+    $this->log('Something did not work!', 'debug');
 
 All configured log streams are written to sequentially each time
 :php:meth:`Cake\\Log\\Log::write()` is called. If you have not configured any
@@ -217,7 +217,7 @@ If a level is not supplied, :php:const:`LOG_ERR` is used which writes to the
 error log. The default log location is **logs/$level.log**::
 
     // Executing this inside a CakePHP class
-    $this->log("Something didn't work!");
+    $this->log('Something didn't work!');
 
     // Results in this being appended to logs/error.log
     // 2007-11-02 10:22:02 Error: Something didn't work!

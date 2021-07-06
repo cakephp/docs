@@ -38,7 +38,7 @@ lieu idéal pour charger les helpers::
 
     class AppView extends View
     {
-        public function initialize()
+        public function initialize(): void
         {
             parent::initialize();
             $this->loadHelper('Html');
@@ -71,7 +71,7 @@ conditionnellement des helpers::
 
     class AppView extends View
     {
-        public function initialize()
+        public function initialize(): void
         {
             parent::initialize();
             if ($this->request->getParam('action') === 'index') {
@@ -106,10 +106,7 @@ comportement du helper::
 
     class AwesomeHelper extends Helper
     {
-
-        // Le hook initialize() est disponible depuis 3.2. Pour les versions
-        // précédentes, vous pouvez surcharger le constructeur si nécessaire.
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             debug($config);
         }
@@ -193,7 +190,7 @@ Helper habituel avec une implémentation personnalisée::
     // src/View/AppView.php
     class AppView extends View
     {
-        public function initialize()
+        public function initialize(): void
         {
             $this->loadHelper('Html', [
                 'className' => 'MyHtml'
@@ -323,7 +320,7 @@ Une fois que vous avez créé votre helper et l'avez placé dans
 
     class AppView extends View
     {
-        public function initialize()
+        public function initialize(): void
         {
             parent::initialize();
             $this->loadHelper('Link');

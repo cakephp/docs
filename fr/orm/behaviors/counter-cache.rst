@@ -25,7 +25,7 @@ pour chaque article avec ce qui suit::
 
     class CommentsTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->addBehavior('CounterCache', [
                 'Articles' => ['comment_count']

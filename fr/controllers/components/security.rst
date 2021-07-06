@@ -165,18 +165,18 @@ de sécurité que vous voulez et le component Security les forcera au démarrage
     namespace App\Controller;
 
     use App\Controller\AppController;
-    use Cake\Event\Event;
+    use Cake\Event\EventInterface;
 
     class WidgetsController extends AppController
     {
 
-        public function initialize()
+        public function initialize(): void
         {
             parent::initialize();
             $this->loadComponent('Security');
         }
 
-        public function beforeFilter(Event $event)
+        public function beforeFilter(EventInterface $event)
         {
             if ($this->request->getParam('admin')) {
                 $this->Security->requireSecure();
@@ -190,18 +190,18 @@ Cette exemple forcera toutes les actions qui proviennent de la "route" Admin à
     namespace App\Controller;
 
     use App\Controller\AppController;
-    use Cake\Event\Event;
+    use Cake\Event\EventInterface;
 
     class WidgetsController extends AppController
     {
 
-        public function initialize()
+        public function initialize(): void
         {
             parent::initialize();
             $this->loadComponent('Security', ['blackHoleCallback' => 'forceSSL']);
         }
 
-        public function beforeFilter(Event $event)
+        public function beforeFilter(EventInterface $event)
         {
             if ($this->request->getParam('admin')) {
                 $this->Security->requireSecure();
@@ -248,18 +248,18 @@ fonctionnalités de ``SecurityComponent``::
     namespace App\Controller;
 
     use App\Controller\AppController;
-    use Cake\Event\Event;
+    use Cake\Event\EventInterface;
 
     class WidgetController extends AppController
     {
 
-        public function initialize()
+        public function initialize(): void
         {
             parent::initialize();
             $this->loadComponent('Security');
         }
 
-        public function beforeFilter(Event $event)
+        public function beforeFilter(EventInterface $event)
         {
              $this->Security->setConfig('unlockedActions', ['edit']);
         }

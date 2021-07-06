@@ -254,7 +254,7 @@ table pour configurer le champ à afficher sur une table::
     class Articles extends Table
     {
 
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->setDisplayField('title');
 

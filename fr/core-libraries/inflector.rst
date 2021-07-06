@@ -151,22 +151,6 @@ meta-programming qui impliquent la génération de code ou des opérations basé
     // applePie
     Inflector::variable('apple_pie');
 
-Créer des Chaînes d'URL Safe
-============================
-
-.. php:staticmethod:: slug($word, $replacement = '-')
-
-Slug convertit les caractères spéciaux en version latins et convertit les
-caractères ne correspondant pas et les espaces en tirets. La méthode slug
-s'attend à un encodage UTF-8::
-
-    // apple-puree
-    Inflector::slug('apple purée');
-
-.. note::
-    ``Inflector::slug()`` est dépréciée depuis la version 3.2.7. Utilisez
-    ``Text::slug()`` à la place.
-
 .. _inflection-configuration:
 
 Configuration d'Inflexion
