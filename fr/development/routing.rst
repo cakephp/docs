@@ -1516,7 +1516,7 @@ css, javascript, images et autres fichiers statiques de votre application::
     // Génère une URL pointant vers APP/webroot/files/upload/photo.png
     $file = Asset::url('files/upload/photo.png');
 
-Les méthodes ci-dessus acceptent également un tableau d'options comme deuxième paramètre::
+Les méthodes ci-dessus acceptent également un tableau d'options comme deuxième paramètre:
 
 * ``fullBase`` Ajoute l'url complète incluant le nom de domaine.
 * ``pathPrefix`` Indique le préfixe pour les url relatives.
