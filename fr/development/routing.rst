@@ -1363,7 +1363,7 @@ les éléments du tableau de routage.
 Utilisation de  ``Router::url()``
 ---------------------------------
 
-``Router::url()`` vous permet d'utiliser des :term:`Tableaux de routage <routing array>`
+``Router::url()`` vous permet d'utiliser des :term:`Tableaux de routage <tableau de routing>`
 dans les situations où les éléments de tableau requis sont fixes ou facilement déduits.
 
 Il fournira un routage inversé lorsque l'URL de destination est bien définie::
@@ -1536,7 +1536,7 @@ Les méthodes ci-dessus acceptent également un tableau d'options comme deuxièm
     // Pour lequel le timestamp correspond à la date de dernière modification du fichier
     $img = Asset::url('logo.png', ['timestamp' => true]);
 
-Pour générer des URL de ressources pour les fichiers dans les plugins, utilisez :term:`plugin syntax`::
+Pour générer des URL de ressources pour les fichiers dans les plugins, utilisez la :term:`syntaxe de plugin`::
 
     // Génère `/debug_kit/img/cake.png`
     $img = Asset::imageUrl('DebugKit.cake.png');
