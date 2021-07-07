@@ -416,6 +416,30 @@ la connexion 'default', à la place, vous obtiendrez la connexion ``test`` dans
 les cas de test. Si vous utilisez la connexion 'replica', la suite de tests va
 tenter d'utiliser 'test_replica'.
 
+.. _fixture-phpunit-configuration:
+
+Configuration de PHPUnit
+------------------------
+
+Avant de pouvoir utiliser les fixtures vous devez vous assurer que votre
+``phpunit.xml`` contienne l'écouteur (*listener*) de fixture:
+
+.. code-block:: xml
+
+    <!-- dans phpunit.xml -->
+    <!-- Définir un listener pour les fixtures -->
+    <listeners>
+        <listener
+        class="\Cake\TestSuite\Fixture\FixtureInjector">
+            <arguments>
+                <object class="\Cake\TestSuite\Fixture\FixtureManager" />
+            </arguments>
+        </listener>
+    </listeners>
+
+Le listener est inclus par défaut dans votre application et vos plugins générés
+par ``bake``
+
 Créer les Fixtures
 ------------------
 
@@ -2077,22 +2101,11 @@ Si vous voulez utiliser les fixtures de plugin dans les app tests, vous pouvez
 y faire référence en utilisant la syntaxe ``plugin.pluginName.fixtureName``
 dans le tableau ``$fixtures``.
 
-Avant d'utiliser des fixtures assurez-vous que votre ``phpunit.xml``
-contienne un listener (écouteur) pour les fixtures::
-
-    <!-- Configure un listener pour les fixtures -->
-    <listeners>
-        <listener
-        class="\Cake\TestSuite\Fixture\FixtureInjector"
-        file="./vendor/cakephp/cakephp/src/TestSuite/Fixture/FixtureInjector.php">
-            <arguments>
-                <object class="\Cake\TestSuite\Fixture\FixtureManager" />
-            </arguments>
-        </listener>
-    </listeners>
-
+Avant d'utiliser des fixtures, assurez-vous que le
+:ref:`listener de fixture <fixture-phpunit-configuration>` soit configuré dans
+votre fichier ``phpunit.xml``.
 Vous devez également vous assurer que vos fixtures sont chargeables.
-Vérifiez que le code suivant est présent dans votre fichier ``composer.json``::
+Vérifiez que le code suivant est présent dans votre fichier **composer.json**::
 
     "autoload-dev": {
         "psr-4": {
