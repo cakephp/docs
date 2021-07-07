@@ -45,7 +45,8 @@ TestSuite
 ---------
 
 - ``TestFixture::$fields`` et ``TestFixture::$import`` sont dépréciés. Il est
-  conseillé de convertir votre application vers le `nouveau système de fixture <./fixture-upgrade>`.
+  conseillé de convertir votre application vers le
+  :doc:`nouveau système de fixture <./fixture-upgrade>`.
 
 Changements dans les Behaviors
 ==============================
@@ -160,7 +161,7 @@ TestSuite
   noms de clés personnalisés pour les cookies/sessions CSRF.
 - Un nouveau système de fixture a été introduit. Ce système de fixture sépare le
   schéma et les données, ce qui vous permet de réutiliser vos migrations
-  existantes pour définir un schéma de test. Le guide `./fixture-upgrade`
+  existantes pour définir un schéma de test. Le guide :doc:`./fixture-upgrade`
   explique comment mettre à niveau.
 
 View
