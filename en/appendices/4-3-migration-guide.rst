@@ -27,16 +27,6 @@ features::
 A new configuration option has been added to disable deprecations on a path by
 path basis. See :ref:`deprecation-warnings` for more information.
 
-Middleware
-----------
-- "Double pass" middlewares, i.e. classes with ``__invoke($request, $response, $next)`` method are deprecated.
-  Instead use ``Closure`` with signature ``function($request, $handler)`` or classes which 
-  implement ``Psr\Http\Server\MiddlewareInterface`` instead.
-
-Routing
--------
-- Colon prefixed route placeholders like ``:controller`` are deprecated. Use braced placeholders like ``{controller}`` instead.
-
 Log
 ---
 
@@ -44,6 +34,26 @@ Log
 - ``ConsoleLog`` moved the ``dateFormat`` config option to ``DefaultFormatter``.
 - ``SyslogLog`` moved the ``format`` config option to ``LegacySyslogFormatter``.
   Defaults to ``DefaultFormatter`` now.
+
+Middleware
+----------
+- "Double pass" middlewares, i.e. classes with ``__invoke($request, $response, $next)``
+  method are deprecated.  Instead use ``Closure`` with signature
+  ``function($request, $handler)`` or classes which implement
+  ``Psr\Http\Server\MiddlewareInterface`` instead.
+
+ORM
+---
+
+- Query proxying all ``ResultSetInterface`` method, fetching results and calling
+  the proxied method on the results is now deprecated. An example of the
+  deprecated usage is ``$query->combine('id', 'title');``. This should be
+  updated to ``$query->all()->combine('id', 'title');`` instead.
+
+Routing
+-------
+- Colon prefixed route placeholders like ``:controller`` are deprecated. Use
+  braced placeholders like ``{controller}`` instead.
 
 TestSuite
 ---------
