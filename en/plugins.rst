@@ -152,7 +152,7 @@ appropriate parts of your application. The hooks are:
 When loading plugins you can configure which hooks are enabled. By default
 plugins without a :ref:`plugin-objects` have all hooks disabled. New style plugins
 allow plugin authors to set defaults, which can be configured by you in your
-appliation::
+application::
 
     // In Application::bootstrap()
     use ContactManager\Plugin as ContactManagerPlugin;
@@ -353,7 +353,7 @@ ContactManager plugin routes, put the following into
         ['path' => '/contact-manager'],
         function ($routes) {
             $routes->setRouteClass(DashedRoute::class);
-        
+
             $routes->get('/contacts', ['controller' => 'Contacts']);
             $routes->get('/contacts/{id}', ['controller' => 'Contacts', 'action' => 'view']);
             $routes->put('/contacts/{id}', ['controller' => 'Contacts', 'action' => 'update']);
@@ -569,7 +569,7 @@ Creating this file would allow you to override
 
 If the plugin implements a routing prefix, you must include the routing prefix
 in your application template overrides. For example, if the 'ContactManager'
-plugin implemented an 'Admin' prefix the overridng path would be::
+plugin implemented an 'Admin' prefix the overriding path would be::
 
     templates/plugin/ContactManager/Admin/ContactManager/index.php
 

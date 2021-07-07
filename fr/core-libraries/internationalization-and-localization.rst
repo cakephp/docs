@@ -455,7 +455,6 @@ depuis un autre endroit::
 
     // Charge les messages depuis src/Locale/folder/sub_folder/filename.po
 
-    // Avant 3.5, utilisez translator()
     I18n::setTranslator(
         'animals',
         new Loader('filename', 'folder/sub_folder', 'po'),

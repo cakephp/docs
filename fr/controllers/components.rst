@@ -79,7 +79,7 @@ avec une implémentation sur mesure::
     // src/Controller/PostsController.php
     class PostsController extends AppController
     {
-        public function initialize()
+        public function initialize(): void
         {
             parent::initialize('Auth', [
                 'className' => 'MyAuth'
@@ -132,7 +132,7 @@ vous pouvez y accéder comme ceci::
 
     class PostsController extends AppController
     {
-        public function initialize()
+        public function initialize(): void
         {
             parent::initialize();
             $this->loadComponent('Flash');
@@ -197,7 +197,7 @@ de celui-ci::
     // Dans un controller
     // Rend le nouveau component disponible avec $this->Math
     // ainsi que le component standard $this->Csrf
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
         $this->loadComponent('Math');
@@ -209,7 +209,7 @@ un ensemble de paramètres qui seront passés au constructeur du Component. Ces
 paramètres peuvent alors être pris en charge par le Component::
 
     // Dans votre controller.
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
         $this->loadComponent('Math', [
@@ -241,7 +241,7 @@ la même manière que dans vos controllers - en utilisant la variable
         public $components = ['Existing'];
 
         // Exécute une autre configuration additionnelle pour votre component.
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->Existing->foo();
         }

@@ -70,7 +70,7 @@ pour ce type d'utilisation::
     class AppController extends Controller
     {
 
-        public function initialize()
+        public function initialize(): void
         {
             // Active toujours le component CSRF.
             $this->loadComponent('Csrf');
@@ -422,7 +422,7 @@ Dans la méthode ``initialize()`` de votre Controller, vous pouvez définir
 tout component que vous voulez charger et toute donnée de configuration
 pour eux::
 
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
         $this->loadComponent('Csrf');

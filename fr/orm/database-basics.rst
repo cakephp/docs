@@ -204,9 +204,8 @@ driver
     courts sont Mysql, Sqlite, Postgres, et Sqlserver.
 persistent
     S'il faut utiliser ou non une connexion persistante à la base de données.
-    Cette option n'est pas supportée par SqlServer. A partir de CakePHP 3.4.13,
-    une exception est lancée si vous essayez de définir ``persistent`` à ``true``
-    sur SqlServer.
+    Cette option n'est pas supportée par SqlServer. Une exception est lancée si
+    vous essayez de définir ``persistent`` à ``true`` sur SqlServer.
 host
     Le nom d'hôte du serveur de base de données (ou une adresse IP).
 username
@@ -386,8 +385,7 @@ timestamp
 time
     Correspond au type TIME dans toutes les bases de données.
 json
-    Correspond au type JSON s'il est disponible, sinon il correspond à TEXT. Le
-    type 'json' a été ajouté dans la version 3.3.0.
+    Correspond au type JSON s'il est disponible, sinon il correspond à TEXT.
 
 Ces types sont utilisés à la fois pour les fonctionnalités de reflection de
 schema fournies par CakePHP, et pour les fonctionnalités de génération de schema

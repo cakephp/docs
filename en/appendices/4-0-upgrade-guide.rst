@@ -15,7 +15,7 @@ Once your application is running on latest CakePHP 3.x, enable deprecation warni
         'errorLevel' => E_ALL,
     ]
 
-Now that you can see all the warnings, make sure these are fixed before proceding with the upgrade.
+Now that you can see all the warnings, make sure these are fixed before proceeding with the upgrade.
 
 Upgrade to PHP 7.2
 ==================
@@ -98,7 +98,7 @@ method signatures as the one found in cakephp/app. You can find the current
 <https://github.com/cakephp/app/blob/master/src/Application.php>`__ on GitHub.
 
 If you are providing some kind of REST API, don't forget to include the
-:ref:`body-parser-middleware`. Finally, you should consider upgrading to the new 
-`AuthenticationMiddleware </authentication/2/en/index.html>`__ 
+:ref:`body-parser-middleware`. Finally, you should consider upgrading to the new
+`AuthenticationMiddleware </authentication/2/en/index.html>`__
 and `AuthorizationMiddleware </authorization/2/en/index.html>`__, if you are still
 using ``AuthComponent``.

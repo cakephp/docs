@@ -24,7 +24,7 @@ collection des entities stockées dans une table spécifique et vont dans
 
     class ArticlesTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->addBehavior('Timestamp');
         }
@@ -289,7 +289,7 @@ Premièrement, commençons par créer une action ``add()`` dans le
 
     class ArticlesController extends AppController
     {
-        public function initialize()
+        public function initialize(): void
         {
             parent::initialize();
             $this->loadComponent('Flash'); // Charge le FlashComponent
@@ -436,7 +436,7 @@ ajustements::
 
     class ArticlesTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->addBehavior('Timestamp');
         }

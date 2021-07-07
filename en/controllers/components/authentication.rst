@@ -556,7 +556,7 @@ messages ``AuthComponent`` uses. In your controller's ``beforeFilter()``, or
 component settings you can use ``authError`` to customize the error used
 for when authorization fails::
 
-    $this->Auth->setConfig('authError', "Woopsie, you are not authorized to access this area.");
+    $this->Auth->setConfig('authError', 'Woopsie, you are not authorized to access this area.');
 
 Sometimes, you want to display the authorization error only after
 the user has already logged-in. You can suppress this message by setting

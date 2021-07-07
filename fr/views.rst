@@ -56,7 +56,7 @@ type d'utilisation:
     class AppView extends View
     {
 
-        public function initialize()
+        public function initialize(): void
         {
             // Toujours activer le helper MyUtils
             $this->loadHelper('MyUtils');
@@ -483,20 +483,14 @@ le répertoire **templates/layout**, et passez de l'un à l'autre depuis les
 actions de votre controller en utilisant la propriété
 ``$layout`` de votre controller ou de votre vue::
 
-    // A partir d'un controller
+    // À partir d'un controller
     public function view()
     {
-        // Défini le layout
+        // Définir le layout
         $this->viewBuilder()->setLayout('admin');
-
-        // Avant 3.4
-        $this->viewBuilder()->layout('admin');
-
-        // Avant 3.1
-        $this->layout = 'admin';
     }
 
-    // A partir d'un fichier de vue
+    // À partir d'un fichier de vue
     $this->layout = 'loggedin';
 
 Par exemple, si une section de mon site incorpore un plus petit espace pour
@@ -512,12 +506,6 @@ actions du controller en utilisant quelque chose comme::
         {
             $this->set('title', 'View Active Users');
             $this->viewBuilder()->setLayout('default_small_ad');
-
-            // ou ce qui suit avant 3.4
-            $this->viewBuilder()->layout('default_small_ad');
-
-            // ou ce qui suit avant 3.1
-            $this->layout = 'default_small_ad';
         }
 
         public function viewImage()
@@ -550,8 +538,6 @@ contact à partir du plugin Contacts::
         public function view_active()
         {
             $this->viewBuilder()->layout('Contacts.contact');
-            // ou ce qui suit avant 3.1
-            $this->layout = 'Contacts.contact';
         }
     }
 
