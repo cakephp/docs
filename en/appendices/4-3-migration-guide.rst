@@ -45,8 +45,8 @@ Middleware
 ORM
 ---
 
-- Query proxying all ``ResultSetInterface`` method, fetching results and calling
-  the proxied method on the results is now deprecated. An example of the
+- Query proxying all ``ResultSetInterface`` methods (including ```CollectionInterface```), which forces
+   fetching results and calls the proxied method on the results, is now deprecated. An example of the
   deprecated usage is ``$query->combine('id', 'title');``. This should be
   updated to ``$query->all()->combine('id', 'title');`` instead.
 
