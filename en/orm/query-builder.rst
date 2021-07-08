@@ -156,9 +156,8 @@ Queries Are Collection Objects
 
 Once you get familiar with the Query object methods, it is strongly encouraged
 that you visit the :doc:`Collection </core-libraries/collections>` section to
-improve your skills in efficiently traversing the data. In short, it is
-important to remember that anything you can call on a Collection object, you
-can also do in a Query object::
+improve your skills in efficiently traversing the results. Query results
+implement the collection interface::
 
     // Use the combine() method from the collections library
     // This is equivalent to find('list')
@@ -168,11 +167,11 @@ can also do in a Query object::
     $results = $articles->find()
         ->where(['id >' => 1])
         ->order(['title' => 'DESC'])
-        ->map(function ($row) { // map() is a collection method, it executes the query
+        ->all()
+        ->map(function ($row) {
             $row->trimmedTitle = trim($row->title);
             return $row;
         })
-        ->all()
         ->combine('id', 'trimmedTitle') // combine() is another collection method
         ->toArray(); // Also a collections library method
 
@@ -186,7 +185,7 @@ Queries Are Lazily Evaluated
 Query objects are lazily evaluated. This means a query is not executed until one
 of the following things occur:
 
-- The query is iterated with ``foreach()``.
+- The query is iterated with ``foreach``.
 - The query's ``execute()`` method is called. This will return the underlying
   statement object, and is to be used with insert/update/delete queries.
 - The query's ``first()`` method is called. This will return the first result in the set
