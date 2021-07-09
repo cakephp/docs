@@ -383,25 +383,26 @@ Fixtures
 ========
 
 Quand on teste du code qui dépend de models et d'une base de données, on
-peut utiliser les **fixtures** comme une façon de générer temporairement des
-tables de données chargées avec des données d'exemple qui peuvent être utilisées
-par le test. Le bénéfice de l'utilisation de fixtures est que votre test n'a
-aucune chance d'abîmer les données de l'application qui tourne. De plus, vous
-pouvez commencer à tester votre code avant de développer réellement en live le
-contenu pour une application.
+peut utiliser les **fixtures** comme une façon de créer un état initial pour les
+tests de votre application. En utilisant les données de fixture vous réduiser
+les étapes de configuration répétitives dans vos tests. Les fixtures sont bien
+adaptées pour des données communes, ou partagées entre de nombreux tests, voire
+tous. Les données qui ne sont utiles que dans quelques tests devraient plutôt
+être crées dans les tests qui en ont besoin.
 
 CakePHP utilise la connexion nommée ``test`` dans votre fichier de configuration
 **config/app.php**. Si la connexion n'est pas utilisable, une exception
 sera levée et vous ne pourrez pas utiliser les fixtures de la base de données.
 
-CakePHP effectue ce qui suit pendant le déroulement d'une fixture basée sur un cas
-de test:
+CakePHP effectue ce qui suit pendant le déroulement d'un test:
 
 #. Crée les tables pour chacune des fixtures nécessaires.
-#. Remplit les tables avec les données, si les données sont fournies dans la fixture.
+#. Remplit les tables avec les données.
 #. Lance les méthodes de test.
 #. Vide les tables de fixture.
-#. Retire les tables de fixture de la base de données.
+
+Le schéma pour les fixtures est créé au début d'un test par des migrations ou un
+dump SQL.
 
 Connexions de Test
 ------------------
@@ -416,12 +417,122 @@ la connexion 'default', à la place, vous obtiendrez la connexion ``test`` dans
 les cas de test. Si vous utilisez la connexion 'replica', la suite de tests va
 tenter d'utiliser 'test_replica'.
 
+.. _fixture-phpunit-configuration:
+
+Configuration de PHPUnit
+------------------------
+
+Avant de pouvoir utiliser les fixtures vous devez vous assurer que votre
+``phpunit.xml`` contienne l'extension fixture:
+
+.. code-block:: xml
+
+    <!-- dans phpunit.xml -->
+    <!-- Configurer l'extension pour les fixtures -->
+    <extensions>
+        <extension class="\Cake\TestSuite\FixtureSchemaExtension" />
+    </extensions>
+
+L'extension est incluse par défaut dans votre application et vos plugins générés
+par ``bake``.
+
+Avant 4.3.0, CakePHP utilisait un listener PHPUnit au lieu d'une extension
+PHPUnit et votre fichier ``phpunit.xml`` devait contenir:
+
+.. code-block:: xml
+
+    <!-- dans phpunit.xml -->
+    <!-- Définir un listener pour les fixtures -->
+    <listeners>
+        <listener
+        class="\Cake\TestSuite\Fixture\FixtureInjector">
+            <arguments>
+                <object class="\Cake\TestSuite\Fixture\FixtureManager" />
+            </arguments>
+        </listener>
+    </listeners>
+
+Le listener est déprécié et vous devriez
+:doc:`mettre à niveau votre configuration de fixture </appendices/fixture-upgrade>`.
+
+.. _creating-test-database-schema:
+
+Créer un Schéma de Base de Données de Test
+------------------------------------------
+
+Vous pouvez générer un schéma de base de données de test soit par des migrations
+de CakePHP, soit en chargeant un fichier de dump SQL, soit en utilisant un autre
+outil externe de gestion de schéma. Vous devez créer votre schéma dans le 
+fichier ``tests/bootstrap.php`` de votre application. 
+
+Si vous utilisez le `plugin de migrations </migrations>`  de CakePHP pour gérer
+les schémas de votre application, vous pouvez tout aussi bien réutiliser ces
+migrations pour générer le schéma de votre base de données de test::
+
+    // dans tests/bootstrap.php
+    use Migrations\TestSuite\Migrator;
+
+    // Configuration simple sans plugin
+    Migrator::migrate();
+
+    // Lancer les migrations pour plusieurs plugins
+    Migrator::migrate([
+        ['plugin' => 'Contacts'],
+        // Lancer les migrations Documents sur la connexion test_docs.
+        ['plugin' => 'Documents', 'connection' => 'test_docs'],
+    ]);
+
+Le plugin de migrations lancera uniquement les migrations qui n'ont pas été
+appliquées, et réinitialisera les migrations si l'en-tête de votre migration
+actuelle est différente des migrations appliquées.
+
+Vous pouvez aussi configurer dans vos datasources la façon dont les migrations
+doivent être lancées dans les tests. Consultez la
+`documentation des migrations </migrations>` pour plus d'information.
+
+Pour charger un fichier de dump SQL, vous pouvez faire ceci::
+
+    // dans tests/bootstrap.php
+    use Cake\TestSuite\Schema\SchemaManager;
+
+    // Charger un ou plusieurs fichiers SQL.
+    SchemaManager::create('test', 'chemin/vers/schema.sql');
+
+Au début du lancement de chaque test, ``SchemaManager`` supprimera toutes les
+tables dans la connexion et les reconstruira à partir du fichier de schéma
+fourni.
+
+.. versionadded:: 4.3.0
+    SchemaManager a été ajouté.
+
+.. _fixture-state-management:
+
+Gestionnaires d'Etat des Fixtures
+---------------------------------
+
+Par défaut, CakePHP réinitialise l'état des fixtures à la fin de chaque test en
+tronquant toutes les tabes dans la base de données. Cette opération peut être
+coûteuse si votre application a beaucoup de tables. Si votre application ne
+modifie pas le schéma, ou si elle utilise des opérations qui ne peuvent pas être
+lancées dans une transaction dans les tests, vous pouvez profiter de la
+``TransactionStrategy`` pour obtenir une meilleure performance. La stratégie du
+gestionaire d'état de la fixture peut être définie à l'intérieur du test::
+
+    use Cake\TestSuite\TestCase;
+    use Cake\TestSuite\Fixture\TransactionStrategy;
+
+    class ArticlesTableTest extends TestCase
+    {
+        protected $stateResetStrategy = TransactionStrategy::class;
+    }
+
+.. versionadded:: 4.3.0
+
 Créer les Fixtures
 ------------------
 
-A la création d'une fixture, vous pouvez définir principalement deux choses:
-comment la table est créée (quels champs font partie de la table), et quels
-enregistrements seront remplis initialement dans la table. Créons notre
+Les fixtures définissent les enregistrements qui seront insérés dans la base de
+données au démarrage de chaque test. Créons notre
 première fixture, qui sera utilisée pour tester notre propre model Article.
 Créez un fichier nommé **ArticlesFixture.php** dans votre répertoire
 **tests/Fixture** avec le contenu suivant::
@@ -437,17 +548,6 @@ Créez un fichier nommé **ArticlesFixture.php** dans votre répertoire
           // une base de données de test différente.
           public $connection = 'test';
 
-          public $fields = [
-              'id' => ['type' => 'integer'],
-              'title' => ['type' => 'string', 'length' => 255, 'null' => false],
-              'body' => 'text',
-              'published' => ['type' => 'integer', 'default' => '0', 'null' => false],
-              'created' => 'datetime',
-              'modified' => 'datetime',
-              '_constraints' => [
-                'primary' => ['type' => 'primary', 'columns' => ['id']]
-              ]
-          ];
           public $records = [
               [
                   'title' => 'First Article',
@@ -490,59 +590,26 @@ fixture devra utiliser la source de données ``test_mydb``. Si la connexion
 par ``test`` pour réduire la possibilité de trucher accidentellement toutes
 les données de votre application quand vous lancez des tests.
 
-Nous utilisons ``$fields`` pour spécifier les champs qui feront parti de cette
-table, et comment ils sont définis. Le format utilisé pour définir ces champs
-est le même qu'utilisé avec :php:class:`CakeSchema`. Les clés disponibles pour
-la définition de la table sont:
-
-``type``
-    Type de données interne à CakePHP. Actuellement supportés:
-    - ``string``: redirige vers ``VARCHAR``.
-    - ``char``: redirige vers ``CHAR``
-    - ``uuid``: redirige vers ``UUID``
-    - ``text``: redirige vers ``TEXT``.
-    - ``integer``: redirige vers ``INT``.
-    - ``biginteger``: redirige vers ``BIGINTEGER``
-    - ``decimal``: redirige vers ``DECIMAL``
-    - ``float``: redirige vers ``FLOAT``.
-    - ``datetime``: redirige vers ``DATETIME``.
-    - ``datetimefractional``: redirige vers ``DATETIME(6)`` ou ``TIMESTAMP``
-    - ``timestamp``: redirige vers ``TIMESTAMP``
-    - ``timestampfractional``: maps to ``TIMESTAMP(6)`` ou ``TIMESTAMP``
-    - ``time``: redirige vers ``TIME``.
-    - ``date``: redirige vers ``DATE``.
-    - ``binary``: redirige vers ``BLOB``.
-
-length
-    Défini à la longueur spécifique que le champ doit prendre.
-precision
-    Défini le nombre de décimales utilisées sur les champs ``float`` et
-    ``decimal``.
-null
-    Défini soit à ``true`` (pour permettre les NULLs) soit à ``false`` (pour
-    ne pas permettre les NULLs).
-default
-    Valeur par défaut que le champ prend.
-
 Nous pouvons définir un ensemble d'enregistrements qui seront remplis après que
 la table de fixture est créée. Le format est assez simple, ``$records`` est un
 tableau d'enregistrements. Chaque item dans ``$records`` doit être
 un enregistrement (une seule ligne). A l'intérieur de chaque ligne, il doit y
 avoir un tableau associatif des colonnes et valeurs pour la ligne. Gardez juste
-à l'esprit que chaque enregistrement dans le tableau $records doit avoir une
-clé pour **chaque** champ spécifié dans le tableau ``$fields``. Si un champ
-pour un enregistrement particulier a besoin d'avoir une valeur ``null``,
-spécifiez juste la valeur de cette clé à ``null``.
+à l'esprit que tous les enregistrements dans le tableau ``$records`` doivent
+avoir les mêmes clés car les lignes sont insérées en une seule requête SQL.
 
-Les Données Dynamiques et les Fixtures
---------------------------------------
+.. versionchanged:: 4.3.0
 
-Depuis que les enregistrements pour une fixture sont déclarés en propriété
-de classe, vous ne pouvez pas utiliser les fonctions ou autres données
-dynamiques pour définir les fixtures. Pour résoudre ce problème, vous pouvez
-définir ``$records`` dans la fonction ``init()`` de votre fixture. Par exemple,
-si vous voulez que tous les timestamps soient créés et mis à jours pour refléter
-la date d'aujourd'hui, vous pouvez faire ce qui suit::
+    Avant 4.3.0 les fixtures définissaient aussi le schéma de la table. Pour en
+    savoir plus, consultez :ref:`fixture-schema` si vous avez encore besoin de
+    définir le schéma dans vos fixtures.
+
+Les Données Dynamiques
+----------------------
+
+Pour utiliser des fonctions ou d'autres données dynamiques dans les
+enregistrements de vos fixtures, vous pouvez définir vos enregistrements dans la
+méthode ``init()`` des fixtures::
 
     namespace App\Test\Fixture;
 
@@ -550,19 +617,6 @@ la date d'aujourd'hui, vous pouvez faire ce qui suit::
 
     class ArticlesFixture extends TestFixture
     {
-
-        public $fields = [
-            'id' => ['type' => 'integer'],
-            'title' => ['type' => 'string', 'length' => 255, 'null' => false],
-            'body' => 'text',
-            'published' => ['type' => 'integer', 'default' => '0', 'null' => false],
-            'created' => 'datetime',
-            'modified' => 'datetime',
-            '_constraints' => [
-                'primary' => ['type' => 'primary', 'columns' => ['id']],
-            ]
-        ];
-
         public function init(): void
         {
             $this->records = [
@@ -578,85 +632,9 @@ la date d'aujourd'hui, vous pouvez faire ce qui suit::
         }
     }
 
-Quand vous surchargez ``init()``, rappelez-vous juste de toujours appeler
-``parent::init()``.
-
-Importer les Informations de Table
-----------------------------------
-
-Définir le schema des fixtures peut être vraiment pratique lorsque vous créez
-des plugins, des librairies ou si vous créez un application qui doit être
-portable. La redéfinition du schéma dans les fixtures peut devenir difficile à
-maintenir pour les applications de grandes échelles. A cause de cela, CakePHP
-fournit la possibilité d'importer le schema depuis une connexion existante et
-utilise une définition de la table réfléchie pour créer la définition de la
-table utilisée par la suite de tests.
-
-Commençons par un exemple. Imaginons que vous ayez un model nommé articles
-disponible dans votre application (qui est lié avec une table nommée
-articles), on changerait la fixture donnée dans la section précédente
-(**tests/Fixture/ArticlesFixture.php**) en ce qui suit::
-
-    class ArticlesFixture extends TestFixture
-    {
-        public $import = ['table' => 'articles'];
-    }
-
-Si vous voulez utiliser une autre connexion, utilisez::
-
-    class ArticlesFixture extends TestFixture
-    {
-        public $import = ['table' => 'articles', 'connection' => 'other'];
-    }
-
-En général vous avez une classe Table avec votre fixture. Vous pouvez aussi
-utiliser ceci pour récupérer le nom de la table::
-
-    class ArticlesFixture extends TestFixture
-    {
-        public $import = ['model' => 'Articles'];
-    }
-
-On peut aussi utiliser la syntaxe de plugin.
-
-Vous pouvez naturellement importer la définition de votre table à partir d'un
-model/d'une table existante, mais vous avez vos enregistrements directement
-définis dans le fixture comme il a été montré dans la section précédente.
-Par exemple::
-
-    class ArticlesFixture extends TestFixture
-    {
-        public $import = ['table' => 'articles'];
-        public $records = [
-            [
-              'title' => 'First Article',
-              'body' => 'First Article Body',
-              'published' => '1',
-              'created' => '2007-03-18 10:39:23',
-              'modified' => '2007-03-18 10:41:31'
-            ],
-            [
-              'title' => 'Second Article',
-              'body' => 'Second Article Body',
-              'published' => '1',
-              'created' => '2007-03-18 10:41:23',
-              'modified' => '2007-03-18 10:43:31'
-            ],
-            [
-              'title' => 'Third Article',
-              'body' => 'Third Article Body',
-              'published' => '1',
-              'created' => '2007-03-18 10:43:23',
-              'modified' => '2007-03-18 10:45:31'
-            ]
-        ];
-    }
-
-Vous pouvez ne pas charger/créer schéma dans une fixture. Ceci est utile si
-vous aviez déjà une configuration de base de données de test, avec toutes
-les tables vides créées. En ne définissant ni ``$fields`` ni ``$import``, une
-fixture va seulement insérer les enregistrements et tronquer les
-enregistrements sur chaque méthode de test.
+.. note::
+    Quand vous surchargez ``init()``, rappelez-vous juste de toujours appeler
+    ``parent::init()``.
 
 Charger les Fixtures dans vos Tests (TestCase)
 ----------------------------------------------
@@ -2077,22 +2055,11 @@ Si vous voulez utiliser les fixtures de plugin dans les app tests, vous pouvez
 y faire référence en utilisant la syntaxe ``plugin.pluginName.fixtureName``
 dans le tableau ``$fixtures``.
 
-Avant d'utiliser des fixtures assurez-vous que votre ``phpunit.xml``
-contienne un listener (écouteur) pour les fixtures::
-
-    <!-- Configure un listener pour les fixtures -->
-    <listeners>
-        <listener
-        class="\Cake\TestSuite\Fixture\FixtureInjector"
-        file="./vendor/cakephp/cakephp/src/TestSuite/Fixture/FixtureInjector.php">
-            <arguments>
-                <object class="\Cake\TestSuite\Fixture\FixtureManager" />
-            </arguments>
-        </listener>
-    </listeners>
-
+Avant d'utiliser des fixtures, assurez-vous que le
+:ref:`listener de fixture <fixture-phpunit-configuration>` soit configuré dans
+votre fichier ``phpunit.xml``.
 Vous devez également vous assurer que vos fixtures sont chargeables.
-Vérifiez que le code suivant est présent dans votre fichier ``composer.json``::
+Vérifiez que le code suivant est présent dans votre fichier **composer.json**::
 
     "autoload-dev": {
         "psr-4": {
