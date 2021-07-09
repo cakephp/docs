@@ -186,6 +186,7 @@ ServiceProviderの一例::
 
     namespace App\ServiceProvider;
 
+    use Cake\Core\ContainerInterface;
     use Cake\Core\ServiceProvider;
     // 他はここにインポート
 
@@ -196,7 +197,7 @@ ServiceProviderの一例::
             'configKey',
         ];
 
-        public function services($container)
+        public function services(ContainerInterface $container): void
         {
             $container->add(StripService::class);
             $container->add('configKey', 'some value');
