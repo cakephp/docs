@@ -380,6 +380,20 @@ We'll also need to update the article view template. In
     // Add the following line
     <p><b>Tags:</b> <?= h($article->tag_string) ?></p>
 
+You should also update the view method to allow retrieving existing tags::
+
+    // src/Controller/ArticlesController.php file
+
+    public function view($slug = null)
+    {
+       // Update to retrieving the tags
+       $article = $this->Articles
+            ->findBySlug($slug)
+            ->contain('Tags')
+            ->firstOrFail();
+        $this->set(compact('article'));
+    }
+
 Persisting the Tag String
 -------------------------
 
