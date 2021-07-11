@@ -386,7 +386,7 @@ You should also update the view method to allow retrieving existing tags::
 
     public function view($slug = null)
     {
-       // Update to retrieving the tags
+       // Update retrieving tags with contain()
        $article = $this->Articles
             ->findBySlug($slug)
             ->contain('Tags')
