@@ -357,9 +357,10 @@ allows you to define unique field sets::
         'This username & account_id combination has already been used.'
     ));
 
-When setting rules on foreign key fields it is important to remember, that
-only the fields listed are used in the rule. This means that setting
-``$user->account->id`` will not trigger the above rule.
+When setting rules on foreign key fields it is important to remember, that only
+the fields listed are used in the rule. The unique set of rules will be found
+with ``find('all')``. This means that setting ``$user->account->id`` will not
+trigger the above rule. 
 
 Many database engines allow NULLs to be unique values in UNIQUE indexes.
 To simulate this, set the ``allowMultipleNulls`` options to true::
