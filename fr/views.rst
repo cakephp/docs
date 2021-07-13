@@ -572,7 +572,7 @@ Passer des Variables à l'intérieur d'un Element
 Vous pouvez passer des données dans un element grâce au deuxième argument::
 
     echo $this->element('helpbox', [
-        "helptext" => "Oh, this text is very helpful."
+        'helptext' => 'Oh, ce texte est très utile.'
     ]);
 
 Dans le fichier element, toutes les variables passées sont disponibles comme
@@ -582,20 +582,20 @@ de template). Dans l'exemple ci-dessus, le fichier
 **templates/element/helpbox.php** peut utiliser la variable ``$helptext``::
 
     // A l'intérieur de templates/element/helpbox.php
-    echo $helptext; //outputs "Oh, this text is very helpful."
+    echo $helptext; //affiche 'Oh, ce texte est très utile.'
 
 La méthode :php:meth:`View::element()` supporte aussi les options pour
 l'element. Les options supportées sont 'cache' et 'callbacks'. Un exemple::
 
     echo $this->element('helpbox', [
-            "helptext" => "Ceci est passé à l'element comme $helptext",
-            "foobar" => "Ceci est passé à l'element via $foobar",
+            'helptext' => "Ceci est passé à l'element comme $helptext",
+            'foobar' => "Ceci est passé à l'element via $foobar",
         ],
         [
-            // utilise la configuration de cache "long_view"
-            "cache" => "long_view",
+            // utilise la configuration de cache `long_view`
+            'cache' => 'long_view"',
             // défini à true pour avoir before/afterRender appelé pour l'element
-            "callbacks" => true
+            'callbacks' => true
         ]
     );
 
@@ -607,7 +607,7 @@ les différentes versions du même element dans une application,
 fournissez une valeur unique de la clé cache en utilisant le format suivant::
 
     $this->element('helpbox', [], [
-            "cache" => ['config' => 'short', 'key' => 'unique value']
+            'cache' => ['config' => 'short', 'key' => 'unique value']
         ]
     );
 

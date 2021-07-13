@@ -195,7 +195,7 @@ utilisé ce qui a pour effet d'écrire dans le log error. Le chemin par défaut 
 ``logs/$level.log``::
 
     // Execute cela dans une classe CakePHP
-    $this->log("Quelque chose ne fonctionne pas!");
+    $this->log('Quelque chose ne fonctionne pas!');
 
     // Aboutit à ce que cela soit ajouté à logs/error.log
     // 2007-11-02 10:22:02 Error: Quelque chose ne fonctionne pas!
