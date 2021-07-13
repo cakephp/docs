@@ -125,7 +125,7 @@ Un autre exemple utilisant if/elseif/else. Remarquez les doubles points:
      <h3>Hi unknown user</h3>
   <?php endif; ?>
 
-Si vous préférez utiliser un langage de template comme `Twig <http://twig.sensiolabs.org>`_, une sous-classe de View va faire le pont entre le langage du template et CakePHP.
+Si vous préférez utiliser un langage de template comme `Twig <https://twig.symfony.com>`_, une sous-classe de View va faire le pont entre le langage du template et CakePHP.
 
 Un fichier de template est stocké dans **templates/**, dans un sous-dossier
 portant le nom du controller qui utilise ce fichier. Il a un nom de fichier
