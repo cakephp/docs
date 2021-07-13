@@ -493,7 +493,7 @@ doivent être lancées dans les tests. Consultez la
 Pour charger un fichier de dump SQL, vous pouvez faire ceci::
 
     // dans tests/bootstrap.php
-    use Cake\TestSuite\Schema\SchemaManager;
+    use Cake\TestSuite\Fixture\SchemaManager;
 
     // Charger un ou plusieurs fichiers SQL.
     SchemaManager::create('test', 'chemin/vers/schema.sql');
