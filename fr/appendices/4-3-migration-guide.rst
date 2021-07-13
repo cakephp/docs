@@ -41,6 +41,28 @@ Log
   ``LegacySyslogFormatter``.
   Par défaut, c'est maintenant ``DefaultFormatter`` qui est utilisé.
 
+Middleware
+----------
+- Les middlewares "double pass", c'est-à-dire les classes avec une méthode
+  ``__invoke($request, $response, $next)``, sont dépréciés. À la place, utilisez
+  ``Closure`` avec la signature ``function($request, $handler)`` o des classes
+  qui implémentent ``Psr\Http\Server\MiddlewareInterface``.
+
+ORM
+---
+- L'usage de requêtes pour intercepter toutes les méthodes de 
+  ``ResultSetInterface`` (y compris ```CollectionInterface```), forcer la
+  récupération des résultats et appeler la méthode sous-jacente sur ces
+  résultats est maintenant déprécié. Un exemple de cet usage est
+  ``$query->combine('id', 'title');``. Ceci doit être remplacé par
+  ``$query->all()->combine('id', 'title');``.
+
+Routing
+-------
+- Les placeholders de routes préfixés par des doubles points tels que
+  ``:controller`` sont dépréciés. Remplacez-les par des placeholders entre
+  accollades tels que ``{controller}``.
+
 TestSuite
 ---------
 
