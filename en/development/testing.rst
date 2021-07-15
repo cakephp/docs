@@ -493,7 +493,7 @@ Fixture State Managers
 
 By default CakePHP resets fixture state at the end of each test by truncating
 all the tables in the database. This operation can become expensive as your
-application grows. By using ``TransactionStrategy`` each test method will be run
+application grows. By using ``TransactionResetStrategy`` each test method will be run
 inside a transaction that is rolled back at the end of the test. This can yield
 improved performance but requires your tests not heavily rely on static fixture
 data, as auto-increment values are not reset before each test.
@@ -501,11 +501,11 @@ data, as auto-increment values are not reset before each test.
 The fixture state management strategy can be defined within the test case::
 
     use Cake\TestSuite\TestCase;
-    use Cake\TestSuite\Fixture\TransactionStrategy;
+    use Cake\TestSuite\Fixture\TransactionResetStrategy;
 
     class ArticlesTableTest extends TestCase
     {
-        protected $stateResetStrategy = TransactionStrategy::class;
+        protected $stateResetStrategy = TransactionResetStrategy::class;
     }
 
 .. versionadded:: 4.3.0

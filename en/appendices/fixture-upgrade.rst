@@ -25,8 +25,8 @@ To upgrade to the new fixture system, you need to make a few updates:
    These properties are unused in the new fixture system.
 
 Your tests should continue to pass, and you can experiment with
-:ref:`fixture-state-management`. ``TransactionStrategy`` which yield significant
-performance improvements. The trade-off with ``TransactionStrategy`` is that
+:ref:`fixture-state-management`. ``TransactionResetStrategy`` which yield significant
+performance improvements. The trade-off with ``TransactionResetStrategy`` is that
 your auto-increment values will no longer start at ``1`` with each test.
 
 Legacy Fixture Documentation
