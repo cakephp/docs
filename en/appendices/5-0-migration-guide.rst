@@ -35,7 +35,7 @@ Cache
 Core
 ----
 
-- The function `getTypeName()` has been dropped. Use PHP's `get_debug_type()` instead.
+- The function ``getTypeName()`` has been dropped. Use PHP's ``get_debug_type()`` instead.
 
 Event
 -----
