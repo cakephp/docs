@@ -31,6 +31,11 @@ Cache
 
 - The ``Wincache`` engine was removed. The wincache extension is not supported
   on PHP 8.
+  
+Core
+----
+
+- The function `getTypeName()` has been dropped. Use PHP's `get_debug_type()` instead.
 
 Event
 -----
