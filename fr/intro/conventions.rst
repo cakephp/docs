@@ -84,7 +84,8 @@ Conventions pour les Models et les Bases de Données
 Les noms de tables correspondant aux models CakePHP sont au pluriel et utilisent
 le caractère souligné (underscore). Les tables correspondantes aux models
 mentionnés ci-dessus seront donc respectivement : ``users``,
-``article_categories`` et ``user_favorite_pages``.
+``menu_links`` et ``user_favorite_pages``. Si le nom de table contient plusieurs
+mots, seul le dernier doit être au pluriel, par exemple ``menu_links``.
 
 La convention est d'utiliser des mots anglais pour les noms de colonne et de
 table. Si vous utilisez des mots dans une autre langue, CakePHP ne va pas
