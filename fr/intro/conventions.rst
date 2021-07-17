@@ -87,18 +87,6 @@ mentionnés ci-dessus seront donc respectivement : ``users``,
 ``menu_links`` et ``user_favorite_pages``. Si le nom de table contient plusieurs
 mots, seul le dernier doit être au pluriel, par exemple ``menu_links``.
 
-La convention est d'utiliser des mots anglais pour les noms de colonne et de
-table. Si vous utilisez des mots dans une autre langue, CakePHP ne va pas
-pouvoir convertir correctement les bonnes inflections (du singulier vers le
-pluriel et vice-versa).
-Dans certains cas, si vous souhaitez ajouter vos propres règles pour des mots
-d'une autre langue, vous pouvez utiliser la classe utilitaire
-:php:class:`Cake\\Utility\\Inflector`. En plus de définir ces règles
-d'inflections personnalisées, cette classe va aussi vous permettre de vérifier
-que CakePHP comprend votre syntaxe personnalisée pour les mots pluriels et
-singuliers. Vous pouvez consulter la documentation sur
-:doc:`/core-libraries/inflector` pour plus d'informations.
-
 Les noms des champs avec deux mots ou plus doivent être avec des underscores
 comme ici : ``first_name``.
 
