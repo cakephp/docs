@@ -108,12 +108,14 @@ Donc, si Users hasMany Articles, la table ``articles`` se référera à la table
 plusieurs mots comme ``menu_links``, la clé étrangère sera
 ``menu_link_id``.
 
-Les tables de jointure utilisées dans les relations BelongsToMany entre models
-doivent être nommées d'après le nom des tables qu'elles unissent dans l'ordre
-alphabétique : ``articles_tags`` plutôt que ``tags_articles`` ou `àrticle_tags``.
-Si vous ne respectez pas ces conventions, la commande bake ne fonctionnera pas.
-Dans le cas où vous souhaiteriez ajouter des données supplémentaires à la table
-intermédiaire, vous devriez créer une une entité/table réelle pour cette table.
+Les tables de jointure sont utilisées dans les relations BelongsToMany entre
+models. Elles doivent être nommées d'après le nom des tables qu'elles unissent.
+Les noms doivent être au pluriel et dans l'ordre alphabétique :
+``articles_tags`` plutôt que ``tags_articles`` ou `àrticle_tags``.
+*Si vous ne respectez pas ces conventions, la commande bake ne fonctionnera
+pas.* Si la table de jointure contient d'autres colonnes que les clés
+étrangères qui servent à l'association, vous devriez créer une une entité/table
+réelle pour cette table.
 
 En plus de l'utilisation des clés auto-incrémentées en tant que clés primaires,
 vous pouvez aussi utiliser des colonnes UUID. CakePHP va créer un
