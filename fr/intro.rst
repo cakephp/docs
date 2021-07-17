@@ -110,7 +110,7 @@ serait::
 
     public function add()
     {
-        $user = $this->Users->newEntity();
+        $user = $this->Users->newEmptyEntity();
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
             if ($this->Users->save($user, ['validate' => 'registration'])) {
