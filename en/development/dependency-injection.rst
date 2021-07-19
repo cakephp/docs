@@ -199,6 +199,7 @@ An example ServiceProvider would look like::
 
     namespace App\ServiceProvider;
 
+    use Cake\Core\ContainerInterface;
     use Cake\Core\ServiceProvider;
     // Other imports here.
 
@@ -209,7 +210,7 @@ An example ServiceProvider would look like::
             'configKey',
         ];
 
-        public function services($container)
+        public function services(ContainerInterface $container): void
         {
             $container->add(StripService::class);
             $container->add('configKey', 'some value');

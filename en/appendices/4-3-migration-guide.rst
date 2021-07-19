@@ -46,7 +46,7 @@ ORM
 ---
 
 - Query proxying all ``ResultSetInterface`` methods (including ```CollectionInterface```), which forces
-   fetching results and calls the proxied method on the results, is now deprecated. An example of the
+  fetching results and calls the proxied method on the results, is now deprecated. An example of the
   deprecated usage is ``$query->combine('id', 'title');``. This should be
   updated to ``$query->all()->combine('id', 'title');`` instead.
 
@@ -72,6 +72,12 @@ Command
 
 - ``cake i18n extract`` no longer has a ``--relative-paths`` option. This option
   is on by default now.
+
+Core
+----
+
+- ``Configure::load()`` will now raise an exception when an invalid
+  configuration engine is used.
 
 ORM
 ---

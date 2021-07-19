@@ -30,7 +30,7 @@ quelques mises à jour:
    fixture.
 
 Vos tests devraient continuer à passer, et vous pouvez essayer avec
-:ref:`fixture-state-management`. ``TransactionStrategy`` peut apporter des gains
+:ref:`fixture-state-management`. ``TransactionResetStrategy`` peut apporter des gains
 de performance significatifs.
 
 

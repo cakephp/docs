@@ -515,15 +515,15 @@ tronquant toutes les tabes dans la base de données. Cette opération peut être
 coûteuse si votre application a beaucoup de tables. Si votre application ne
 modifie pas le schéma, ou si elle utilise des opérations qui ne peuvent pas être
 lancées dans une transaction dans les tests, vous pouvez profiter de la
-``TransactionStrategy`` pour obtenir une meilleure performance. La stratégie du
+``TransactionResetStrategy`` pour obtenir une meilleure performance. La stratégie du
 gestionaire d'état de la fixture peut être définie à l'intérieur du test::
 
     use Cake\TestSuite\TestCase;
-    use Cake\TestSuite\Fixture\TransactionStrategy;
+    use Cake\TestSuite\Fixture\TransactionResetStrategy;
 
     class ArticlesTableTest extends TestCase
     {
-        protected $stateResetStrategy = TransactionStrategy::class;
+        protected $stateResetStrategy = TransactionResetStrategy::class;
     }
 
 .. versionadded:: 4.3.0
