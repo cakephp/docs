@@ -82,6 +82,12 @@ Command
 - ``cake i18n extract`` n'a plus d'option ``--relative-paths``. Cette option est
   maintenant activée par défaut.
 
+Core
+----
+
+- ``Configure::load()`` soulèvera désormais une exception en cas d'utilisation
+  d'un moteur de configuration invalide.
+
 ORM
 ---
 
