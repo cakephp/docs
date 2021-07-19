@@ -73,6 +73,12 @@ Command
 - ``cake i18n extract`` no longer has a ``--relative-paths`` option. This option
   is on by default now.
 
+Core
+----
+
+- ``Configure::load()`` will now raise an exception when an invalid
+  configuration engine is used.
+
 ORM
 ---
 
