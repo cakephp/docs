@@ -396,7 +396,7 @@ les tags existants::
 
     public function view($slug = null)
     {
-       // Mettre à jour pour récupérer les tags
+       // Mettre à jour la récupération des tags avec contain()
        $article = $this->Articles
            ->findBySlug($slug)
             ->contain('Tags')

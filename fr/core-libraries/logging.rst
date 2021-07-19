@@ -29,7 +29,16 @@ ceci. Vous pouvez définir autant de jounaux que votre application nécessite.
 Les journaux doivent être configurés en utilisant :php:class:`Cake\\Log\\Log`.
 Un exemple serait::
 
+    use Cake\Log\Engine\FileLog;
     use Cake\Log\Log;
+
+    // Nom de classe à partir de la constante 'class' du logger
+    Log::setConfig('info', [
+        'className' => FileLog::class,
+        'path' => LOGS,
+        'levels' => ['info'],
+        'file' => 'info',
+    ]);
 
     // Nom de classe court
     Log::setConfig('debug', [
@@ -207,8 +216,10 @@ Vous pouvez configurer/changer la localisation de FileLog lors de la
 configuration du logger. FileLog accepte un ``path`` qui permet aux
 chemins personnalisés d'être utilisés::
 
+    use Cake\Log\Engine\FileLog;
+
     Log::setConfig('chemin_perso', [
-        'className' => 'File',
+        'className' => FileLog::class,
         'path' => '/chemin/vers/endroit/perso/'
     ]);
 
@@ -348,10 +359,12 @@ d'erreur sont écrits, vous pouvez inclure un nom scope. S'il y a un logger
 configuré pour ce scope, les messages de log seront dirigés vers ces loggers.
 Par exemple::
 
+    use Cake\Log\Engine\FileLog;
+
     // Configure logs/magasins.log pour recevoir tous les types (niveaux de log),
     // mais seulement ceux avec les scopes `commandes` et `paiements`
     Log::setConfig('magasins', [
-        'className' => 'File',
+        'className' => FileLog::class,
         'path' => LOGS,
         'levels' => [],
         'scopes' => ['commandes', 'paiements'],
@@ -361,7 +374,7 @@ Par exemple::
     // Configure logs/paiements.log pour recevoir tous les types, mais seulement
     // ceux qui ont un scope `paiements`
     Log::setConfig('paiements', [
-        'className' => 'File',
+        'className' => FileLog::class,
         'path' => LOGS,
         'levels' => [],
         'scopes' => ['paiements'],
