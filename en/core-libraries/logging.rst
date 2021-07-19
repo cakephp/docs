@@ -28,13 +28,22 @@ The **config/app.php** file is intended for just this.  You can define
 as many or as few loggers as your application needs.  Loggers should be
 configured using :php:class:`Cake\\Log\\Log`. An example would be::
 
+    use Cake\Log\Engine\FileLog;
     use Cake\Log\Log;
+
+    // Classname using logger 'class' constant
+    Log::setConfig('info', [
+        'className' => FileLog::class,
+        'path' => LOGS,
+        'levels' => ['info'],
+        'file' => 'info',
+    ]);
 
     // Short classname
     Log::setConfig('debug', [
         'className' => 'File',
         'path' => LOGS,
-        'levels' => ['notice', 'info', 'debug'],
+        'levels' => ['notice', 'debug'],
         'file' => 'debug',
     ]);
 
@@ -82,9 +91,6 @@ values in your **config/app.php** file.  Errors will be displayed when debug is
 ``true`` and logged when debug is ``false``. To log uncaught exceptions, set the
 ``log`` option to ``true``. See :doc:`/development/configuration` for more
 information.
-
-.. _writing-to-logs:
-
 Writing to Logs
 ===============
 
@@ -172,10 +178,12 @@ CakePHP exposes this concept as logging scopes. When log messages are written
 you can include a scope name. If there is a configured logger for that scope,
 the log messages will be directed to those loggers. For example::
 
+    use Cake\Log\Engine\FileLog;
+
     // Configure logs/shops.log to receive all levels, but only
     // those with `orders` and `payments` scope.
     Log::setConfig('shops', [
-        'className' => 'File',
+        'className' => FileLog::class,
         'path' => LOGS,
         'levels' => [],
         'scopes' => ['orders', 'payments'],
@@ -185,7 +193,7 @@ the log messages will be directed to those loggers. For example::
     // Configure logs/payments.log to receive all levels, but only
     // those with `payments` scope.
     Log::setConfig('payments', [
-        'className' => 'File',
+        'className' => FileLog::class,
         'path' => LOGS,
         'levels' => [],
         'scopes' => ['payments'],
