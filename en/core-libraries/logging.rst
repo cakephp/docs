@@ -91,6 +91,9 @@ values in your **config/app.php** file.  Errors will be displayed when debug is
 ``true`` and logged when debug is ``false``. To log uncaught exceptions, set the
 ``log`` option to ``true``. See :doc:`/development/configuration` for more
 information.
+
+.. _writing-to-logs:
+
 Writing to Logs
 ===============
 
