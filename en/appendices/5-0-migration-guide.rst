@@ -44,6 +44,11 @@ Event
 
 - Event payloads must be an array. Other object such as ``ArrayAccess`` are no longer cast to array.
 
+Filesystem
+----------
+
+- The Filesystem package was removed, and the ``Filesystem`` was moved to the Utility package.
+
 Log
 ---
 
