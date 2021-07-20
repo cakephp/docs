@@ -380,7 +380,8 @@ de règle simple qui vous permet de définir des ensembles de champs uniques::
 
 Quand vous définissez des règles sur des champs de clé étrangère, il est
 important de se rappeler que seuls les champs listés sont utilisés dans la
-règle. Cela signifie que définir ``$user->account->id`` ne va pas déclencher
+règle. L'ensemble des règles d'unicité sera trouvé avec ``find('all')``. Cela
+signifie que définir ``$user->account->id`` ne va pas déclencher
 la règle ci-dessus.
 
 Beaucoup de moteurs de base de données autorisent les valeurs NULL à être

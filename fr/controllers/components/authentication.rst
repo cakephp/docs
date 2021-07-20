@@ -599,7 +599,7 @@ beforeFilter de votre controller ou dans le paramétrage du component, vous
 pouvez utiliser ``authError`` pour personnaliser l'erreur à utiliser quand
 l'authentification échoue::
 
-    $this->Auth->config('authError', "Désolé, vous n'êtes pas autorisés à accéder à cette zone.");
+    $this->Auth->config('authError', 'Désolé, vous n'êtes pas autorisés à accéder à cette zone.');
 
 Parfois, vous voulez seulement afficher l'erreur d'autorisation après que
 l'user se soit déjà connecté. Vous pouvez supprimer ce message en configurant
