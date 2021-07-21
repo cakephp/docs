@@ -493,7 +493,7 @@ doivent être lancées dans les tests. Consultez la
 Pour charger un fichier de dump SQL, vous pouvez faire ceci::
 
     // dans tests/bootstrap.php
-    use Cake\TestSuite\Schema\SchemaManager;
+    use Cake\TestSuite\Fixture\SchemaManager;
 
     // Charger un ou plusieurs fichiers SQL.
     SchemaManager::create('test', 'chemin/vers/schema.sql');
@@ -511,12 +511,16 @@ Gestionnaires d'Etat des Fixtures
 ---------------------------------
 
 Par défaut, CakePHP réinitialise l'état des fixtures à la fin de chaque test en
-tronquant toutes les tabes dans la base de données. Cette opération peut être
-coûteuse si votre application a beaucoup de tables. Si votre application ne
-modifie pas le schéma, ou si elle utilise des opérations qui ne peuvent pas être
-lancées dans une transaction dans les tests, vous pouvez profiter de la
-``TransactionResetStrategy`` pour obtenir une meilleure performance. La stratégie du
-gestionaire d'état de la fixture peut être définie à l'intérieur du test::
+tronquant toutes les tabes dans la base de données. Cette opération peut devenir
+coûteuse quand votre application grossit. Si vous utilisez
+``TransactionStrategy``, chaque méthode de test sera lancée à l'intérieur d'une
+transaction suivie d'un rollback à la fin du test. Cela peut améliorer vos
+performances mais nécessite que vos tests ne dépendent pas trop de données
+statiques de fixtures, car les valeurs des auto-incréments ne sont pas
+réinitialisées avant chaque test.
+
+La stratégie de gestion de l'état des fixtures peut être définie à l'intérieur
+du test::
 
     use Cake\TestSuite\TestCase;
     use Cake\TestSuite\Fixture\TransactionResetStrategy;

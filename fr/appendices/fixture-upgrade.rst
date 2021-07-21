@@ -30,9 +30,10 @@ quelques mises à jour:
    fixture.
 
 Vos tests devraient continuer à passer, et vous pouvez essayer avec
-:ref:`fixture-state-management`. ``TransactionResetStrategy`` peut apporter des gains
-de performance significatifs.
-
+:ref:`fixture-state-management`. ``TransactionResetStrategy`` qui apporte des
+gains de performance significatifs. La contrepartie est qu'avec
+``TransactionResetStrategy``, vos valeurs auto-incrémentées ne commenceront plus
+à 1 à chaque test.
 
 Documentation des Anciennes Fixture
 ===================================
