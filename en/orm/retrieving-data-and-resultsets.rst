@@ -233,7 +233,7 @@ data::
     ];
 
 With no additional options the keys of ``$data`` will be the primary key of your
-table, while the values will be the 'displayField' of the table. You can use the
+table, while the values will be the 'displayField' of the table. The default 'displayField' of the table are ``title`` or ``name``. While, you can use the
 ``setDisplayField()`` method on a table object to configure the display field of
 a table::
 
@@ -241,9 +241,9 @@ a table::
     {
         public function initialize(array $config)
         {
-            $this->setDisplayField('title');
+            $this->setDisplayField('label');
             // Prior to 3.4.0
-            $this->displayField('title');
+            $this->displayField('label');
         }
     }
 
@@ -253,7 +253,7 @@ with the ``keyField`` and ``valueField`` options respectively::
     // In a controller or table method.
     $query = $articles->find('list', [
         'keyField' => 'slug',
-        'valueField' => 'title'
+        'valueField' => 'label'
     ]);
     $data = $query->toArray();
 
@@ -269,7 +269,7 @@ bucketed sets, or want to build ``<optgroup>`` elements with FormHelper::
     // In a controller or table method.
     $query = $articles->find('list', [
         'keyField' => 'slug',
-        'valueField' => 'title',
+        'valueField' => 'label',
         'groupField' => 'author_id'
     ]);
     $data = $query->toArray();
