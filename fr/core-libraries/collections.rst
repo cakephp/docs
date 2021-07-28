@@ -941,7 +941,7 @@ des deux sources::
     $cakephpTweets = new Collection($tweets);
     $myTimeline = $cakephpTweets->append($phpTweets);
 
-    // Tweets contenant cakefest à partir des deux sources
+    // Tweets contenant `cakefest` à partir des deux sources
     $myTimeline->filter(function ($tweet) {
         return strpos($tweet, 'cakefest');
     });

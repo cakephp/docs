@@ -40,7 +40,7 @@ database. Because this service is injected into our controller, we can easily
 swap the implementation out with a mock object or a dummy sub-class when
 testing.
 
-Here an example of an injected service inside a command::
+Here is an example of an injected service inside a command::
 
     // In src/Command/CheckUsersCommand.php
     class CheckUsersCommand extends Command

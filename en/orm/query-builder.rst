@@ -197,7 +197,7 @@ of the following things occur:
 Until one of these conditions are met, the query can be modified without additional
 SQL being sent to the database. It also means that if a Query hasn't been
 evaluated, no SQL is ever sent to the database. Once executed, modifying and
-re-evaluating a query will result in additional SQL being run.
+re-evaluating a query will result in additional SQL being run. Calling the same query without modification multiple times will return same reference.
 
 If you want to take a look at what SQL CakePHP is generating, you can turn
 database :ref:`query logging <database-query-logging>` on.

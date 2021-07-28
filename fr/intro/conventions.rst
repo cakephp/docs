@@ -84,19 +84,8 @@ Conventions pour les Models et les Bases de Données
 Les noms de tables correspondant aux models CakePHP sont au pluriel et utilisent
 le caractère souligné (underscore). Les tables correspondantes aux models
 mentionnés ci-dessus seront donc respectivement : ``users``,
-``article_categories`` et ``user_favorite_pages``.
-
-La convention est d'utiliser des mots anglais pour les noms de colonne et de
-table. Si vous utilisez des mots dans une autre langue, CakePHP ne va pas
-pouvoir convertir correctement les bonnes inflections (du singulier vers le
-pluriel et vice-versa).
-Dans certains cas, si vous souhaitez ajouter vos propres règles pour des mots
-d'une autre langue, vous pouvez utiliser la classe utilitaire
-:php:class:`Cake\\Utility\\Inflector`. En plus de définir ces règles
-d'inflections personnalisées, cette classe va aussi vous permettre de vérifier
-que CakePHP comprend votre syntaxe personnalisée pour les mots pluriels et
-singuliers. Vous pouvez consulter la documentation sur
-:doc:`/core-libraries/inflector` pour plus d'informations.
+``menu_links`` et ``user_favorite_pages``. Si le nom de table contient plusieurs
+mots, seul le dernier doit être au pluriel, par exemple ``menu_links``.
 
 Les noms des champs avec deux mots ou plus doivent être avec des underscores
 comme ici : ``first_name``.
@@ -108,12 +97,14 @@ Donc, si Users hasMany Articles, la table ``articles`` se référera à la table
 plusieurs mots comme ``menu_links``, la clé étrangère sera
 ``menu_link_id``.
 
-Les tables de jointure utilisées dans les relations BelongsToMany entre models
-doivent être nommées d'après le nom des tables qu'elles unissent dans l'ordre
-alphabétique : ``articles_tags`` plutôt que ``tags_articles`` ou `àrticle_tags``.
-Si vous ne respectez pas ces conventions, la commande bake ne fonctionnera pas.
-Dans le cas où vous souhaiteriez ajouter des données supplémentaires à la table
-intermédiaire, vous devriez créer une une entité/table réelle pour cette table.
+Les tables de jointure sont utilisées dans les relations BelongsToMany entre
+models. Elles doivent être nommées d'après le nom des tables qu'elles unissent.
+Les noms doivent être au pluriel et dans l'ordre alphabétique :
+``articles_tags`` plutôt que ``tags_articles`` ou `àrticle_tags``.
+*Si vous ne respectez pas ces conventions, la commande bake ne fonctionnera
+pas.* Si la table de jointure contient d'autres colonnes que les clés
+étrangères qui servent à l'association, vous devriez créer une une entité/table
+réelle pour cette table.
 
 En plus de l'utilisation des clés auto-incrémentées en tant que clés primaires,
 vous pouvez aussi utiliser des colonnes UUID. CakePHP va créer un

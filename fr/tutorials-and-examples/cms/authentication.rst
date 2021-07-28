@@ -111,7 +111,7 @@ résultat de l'authentification dans la requête afin que vous puissiez les util
 
 Dans **src/Application.php**, ajoutez les imports suivants::
 
- // In src/Application.php add the following imports
+    // Dans src/Application.php, ajoutez les imports suivants
     use Authentication\AuthenticationService;
     use Authentication\AuthenticationServiceInterface;
     use Authentication\AuthenticationServiceProviderInterface;
@@ -121,7 +121,7 @@ Dans **src/Application.php**, ajoutez les imports suivants::
 
 Ensuite, implémentez l'interface d'authentification pour votre classe ``Application```::
 
- // dans src/Application.php
+    // dans src/Application.php
     class Application extends BaseApplication
         implements AuthenticationServiceProviderInterface
     {

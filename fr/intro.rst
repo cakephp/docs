@@ -75,7 +75,7 @@ Par exemple, la view pourrait utiliser les données du model pour afficher un
 template de vue HTML contenant ces données, ou alors un résultat au format XML pour que
 d'autres l'utilisent::
 
-    // In a view template file, we'll render an 'element' for each user.
+    // Dans un fichier de template de vue, nous afficherions un 'element' pour chaque user.
     <?php foreach ($users as $user): ?>
         <li class="user">
             <?= $this->element('user_info', ['user' => $user]) ?>
@@ -110,7 +110,7 @@ serait::
 
     public function add()
     {
-        $user = $this->Users->newEntity();
+        $user = $this->Users->newEmptyEntity();
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
             if ($this->Users->save($user, ['validate' => 'registration'])) {

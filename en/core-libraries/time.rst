@@ -452,7 +452,7 @@ issues. Take the following code::
     $time = new Time('2015-06-15 08:23:45');
     $time->modify('+2 hours');
 
-    // This method also modifies the $time instancegg/
+    // This method also modifies the $time instance
     $this->someOtherFunction($time);
 
     // Output here is unknown.
