@@ -229,7 +229,7 @@ data::
     ];
 
 With no additional options the keys of ``$data`` will be the primary key of your
-table, while the values will be the 'displayField' of the table. The default ‘displayField’ of the table are ``title`` or ``name``. While, you can use the
+table, while the values will be the 'displayField' of the table. The default ‘displayField’ of the table is ``title`` or ``name``. While, you can use the
 ``setDisplayField()`` method on a table object to configure the display field of
 a table::
 
