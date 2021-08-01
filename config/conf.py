@@ -9,10 +9,10 @@ from cakephpsphinx.config.all import *
 # built documents.
 #
 # The short X.Y version.
-version = '3.9'
+version = '3.10'
 
 # The full version, including alpha/beta/rc tags.
-release = '3.9'
+release = '3.10'
 
 # The search index version.
 search_version = '30'
