@@ -201,7 +201,7 @@ and attach the listener to the ``EventManager`` as below::
 
     use Cake\Event\EventManager;
     $listener = new ModelInitializeListener();
-    EventManager::instance()->attach($listener);
+    EventManager::instance()->on($listener);
 
 This will call the ``initializeEvent`` when any ``Table`` class is constructed.
 
