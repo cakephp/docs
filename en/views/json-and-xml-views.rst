@@ -70,6 +70,8 @@ serialize::
             $this->set('articles', $this->paginate());
             // Specify which view vars JsonView should serialize.
             $this->viewBuilder()->setOption('serialize', 'articles');
+            // Change the render mode
+            $this->RequestHandler->renderAs($this, 'json');
         }
     }
 
@@ -94,6 +96,9 @@ You can also define ``serialize`` as an array of view variables to combine::
 
             // Specify which view vars JsonView should serialize.
             $this->viewBuilder()->setOption('serialize', ['articles', 'comments']);
+            
+            // Change the render mode
+            $this->RequestHandler->renderAs($this, 'json');
         }
     }
 
