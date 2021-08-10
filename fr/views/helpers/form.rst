@@ -2255,7 +2255,7 @@ Liste des Templates
 -------------------
 
 La liste des templates par défaut, leur format par défaut et les variables
-qu'ils attendent se trouvent dans la `documentation API du FormHelper <https://api.cakephp.org/3.x/class-Cake.View.Helper.FormHelper.html#%24_defaultConfig>`_.
+qu'ils attendent se trouvent dans la `documentation API du FormHelper <https://api.cakephp.org/4.x/class-Cake.View.Helper.FormHelper.html#%24_defaultConfig>`_.
 
 Utiliser des conteneurs personnalisés distincts pour les éléments
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
