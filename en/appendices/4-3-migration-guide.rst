@@ -89,6 +89,9 @@ ORM
   entity error path with the fields used for request data. If you have forms
   that modify multiple translations at once, you may need to update how you
   render validation errors.
+- The types specified in function expressions now take precedence over default types set for
+  columns when selecting columns. For e.g. using ``$query->select(['id' => $query->func()->min('id')])``
+  the value for `id` in fetched entity will be `float` instead of `integer`.
 
 Routing
 -------
