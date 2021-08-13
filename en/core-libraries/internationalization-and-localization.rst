@@ -634,6 +634,6 @@ option to restrict which locales will automatically be used.
     :keywords lang=en: internationalization localization,internationalization and localization,language application,gettext,l10n,pot,i18n,translation,languages
     
 Translate Content/Entities
-=======================================================
+==========================
 
 If you want to translate content/entities then you should look at the :doc:`Translate Behavior </orm/behaviors/translate>`
