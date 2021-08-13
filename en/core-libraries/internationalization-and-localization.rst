@@ -628,12 +628,12 @@ automatically set the locale based on the current user::
 The ``LocaleSelectorMiddleware`` will use the ``Accept-Language`` header to
 automatically set the user's preferred locale. You can use the locale list
 option to restrict which locales will automatically be used.
-
-.. meta::
-    :title lang=en: Internationalization & Localization
-    :keywords lang=en: internationalization localization,internationalization and localization,language application,gettext,l10n,pot,i18n,translation,languages
     
 Translate Content/Entities
 ==========================
 
 If you want to translate content/entities then you should look at the :doc:`Translate Behavior </orm/behaviors/translate>`
+
+.. meta::
+    :title lang=en: Internationalization & Localization
+    :keywords lang=en: internationalization localization,internationalization and localization,language application,gettext,l10n,pot,i18n,translation,languages
