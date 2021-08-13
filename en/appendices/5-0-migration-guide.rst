@@ -35,9 +35,23 @@ Cache
 Core
 ----
 
+- The ``services()`` method was added to ``PluginInterface``.
 - The function ``getTypeName()`` has been dropped. Use PHP's ``get_debug_type()`` instead.
 - The dependency on ``league/container`` was updated to ``4.x``. This will
   require the addition of typehints to your ``ServiceProvider`` implementations.
+
+
+Database
+--------
+
+- The ``getMaxAliasLength()`` and ``getConnectionRetries()`` methods were added
+  to ``DriverInterface``.
+
+Datasource
+----------
+
+- The ``getAccessible()`` method was added to ``EntityInterface``.
+
 
 Event
 -----
