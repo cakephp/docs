@@ -639,7 +639,7 @@ option to restrict which locales will automatically be used.
 Translate Content/Entities
 ==========================
 
-If you want to translate content/entities then you should look at the :doc:`Translate Behavior </orm/behaviors/translate>`
+If you want to translate content/entities then you should look at the :doc:`Translate Behavior </orm/behaviors/translate>`.
 
 .. meta::
     :title lang=en: Internationalization & Localization
