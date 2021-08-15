@@ -42,6 +42,11 @@ Middleware
   ``function($request, $handler)`` or classes which implement
   ``Psr\Http\Server\MiddlewareInterface`` instead.
 
+I18n
+----
+- The datetime classes ``Time`` and ``Date`` are deprecated.
+  Use their immutable alternatives ``FrozenTime`` and ``FrozenDate`` instead.
+
 ORM
 ---
 
@@ -49,6 +54,13 @@ ORM
   fetching results and calls the proxied method on the results, is now deprecated. An example of the
   deprecated usage is ``$query->combine('id', 'title');``. This should be
   updated to ``$query->all()->combine('id', 'title');`` instead.
+
+Database
+--------
+
+- Using mutable datetime classes with ``DateTimeType`` and other time related type classes is deprecated.
+  Hence methods ``DatetimeType::useMutable()``, ``DatetimeType::useImmutable()`` and similar methods
+  in other type classes are deprecated.
 
 Routing
 -------
@@ -82,7 +94,7 @@ Core
 ORM
 ---
 
-- Aligned ``Entity::isEmpty()`` and ``Entity::hasValue()`` to treat '0' as a non-empty value. 
+- Aligned ``Entity::isEmpty()`` and ``Entity::hasValue()`` to treat '0' as a non-empty value.
   This aligns the behavior with documentation and original intent.
 - ``TranslateBehavior`` entity validation errors are now set in the
   ``_translations.{lang}`` path instead of ``{lang}``. This normalizes the
@@ -119,6 +131,9 @@ Log
 - ``BaseLog::_getFormattedDate()`` and ``dateFormat`` config were removed
   since the message formatting logic was moved into log formatters.
 
+View
+----
+- ``TimeHelper::fromString()`` now returns an instance of ``FrozenTime`` instead of ``Time``.
 
 New Features
 ============
@@ -126,14 +141,14 @@ New Features
 Controller
 ----------
 
-- ``Controller::middleware()`` was added which allows you to define middleware 
+- ``Controller::middleware()`` was added which allows you to define middleware
   for a single controller only. See :ref:`controller-middleware` for more information.
 
 Database
 --------
 
 - Database mapping types can now implement
-  ``Cake\Database\Type\ColumnSchemaAwareInterface`` to specify 
+  ``Cake\Database\Type\ColumnSchemaAwareInterface`` to specify
   column sql generation and column schema reflection. This allows
   custom types handle non-standard columns.
 - Logged queries now use ``TRUE`` and ``FALSE`` for postgres, sqlite and mysql
