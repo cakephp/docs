@@ -299,7 +299,7 @@ data used when creating connections.
 Data Types
 ==========
 
-.. php:class:: Type
+.. php:class:: TypeFactory
 
 Since not every database vendor includes the same set of data types, or
 the same names for similar data types, CakePHP provides a set of abstracted
@@ -413,6 +413,7 @@ Can be used to map datetime columns that contain time zones such as
 Adding Custom Types
 -------------------
 
+.. php:class:: TypeFactory
 .. php:staticmethod:: map($name, $class)
 
 If you need to use vendor specific types that are not built into CakePHP you can
