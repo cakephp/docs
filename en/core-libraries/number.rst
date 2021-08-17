@@ -349,7 +349,7 @@ to various methods.
 
 Example::
 
-    Number::setConfig('en_IN', \NumberFormatter::CURRENCY, [
+    Number::config('en_IN', \NumberFormatter::CURRENCY, [
         'pattern' => '#,##,##0'
     ]);
 
