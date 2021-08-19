@@ -286,8 +286,7 @@ that are not caught by middleware are handled. Error handlers are different for
 the HTTP and Console parts of your application.
 
 To create an error handler for HTTP requests, you should extend
-``Cake\Error\ErrorHandler``. For console commands, you should extend
-``Cake\Error\ConsoleErrorHandler`` instead.  As an example, we could build
+``Cake\Error\ErrorHandler``.  As an example, we could build
 a class called ``AppError`` to handle errors during HTTP requests::
 
     // In src/Error/AppError.php
@@ -329,6 +328,32 @@ Finally, we can use our error handler in the ``ErrorHandlerMiddleware``::
 
         return $middleware;
     }
+
+For console commands, you should extend ``Cake\Error\ConsoleErrorHandler`` instead. 
+
+    // In /src/Error/AppConsoleErrorHandler.php
+    namespace App\Error;
+    use Cake\Error\ConsoleErrorHandler;
+
+    class AppConsoleErrorHandler extends ConsoleErrorHandler {
+
+        protected function _displayException(Throwable $exception): void {
+            parent::_displayException($exception);
+            if (isset($exception->queryString)) {
+                $this->_stderr->write('Query String: ' . $exception->queryString);
+            }
+        }
+
+    }
+
+Then we can register our console error handler as the PHP error handler:
+
+    // In config/bootstrap.php
+    use App\Error\AppConsoleErrorHandler;
+    $isCli = PHP_SAPI === 'cli';
+    if ($isCli) {
+        (new AppConsoleErrorHandler(Configure::read('Error')))->register();
+    } 
 
 ErrorHandler objects have a few methods you may want to implement:
 
