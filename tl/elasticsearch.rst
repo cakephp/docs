@@ -2,7 +2,7 @@ ElasticSearch
 #############
 
 The ElasticSearch plugin provides an ORM-like abstraction on top of
-`elasticsearch <https://www.elastic.co/products/elasticsearch>`_. The plugin
+`elasticsearch <https://www.elastic.co/elasticsearch/>`_. The plugin
 provides features that make testing, indexing documents and searching your
 indexes easier.
 
