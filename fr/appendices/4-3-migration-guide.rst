@@ -100,6 +100,11 @@ ORM
   vous avez des formulaires qui modifient plusieurs tranductions à la fois, vous
   aurez vraisemblablement besoin de mettre à jour la façon dont sont rendues les
   erreurs de validation.
+- Les types spécifiés dans des expressions de fonctions ont maintenant la
+  préséance sur les ensembles de types par défaut pour les colonnes, quand des
+  colonnes sont sélectionnées. Par exemple, pour utiliser
+  ``$query->select(['id' => $query->func()->min('id')])`` la valeur pour `id`
+  dans l'entity récupérée sera un `float` au lieu d'un `integer`.
 
 Routing
 -------
