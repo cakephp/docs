@@ -677,6 +677,11 @@ automatiquement la locale préférée de l'utilisateur. Vous pouvez utiliser
 l'option de liste de locale pour limiter les locales pouvant être utilisées
 automatiquement.
 
+Translate Content/Entities
+==========================
+
+Si vous voulez traduire du contenu ou des entities, vous pouvez consulter le :doc:`Behavior Translate </orm/behaviors/translate>`.
+
 .. meta::
     :title lang=fr: Internationalization & Localization
     :keywords lang=fr: internationalization localization,internationalization et localization,localization features,language application,gettext,l10n,daunting task,adaptation,pot,i18n,audience,traduction,languages
