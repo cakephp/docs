@@ -48,6 +48,12 @@ Middleware
   ``Closure`` avec la signature ``function($request, $handler)`` o des classes
   qui implémentent ``Psr\Http\Server\MiddlewareInterface``.
 
+I18n
+----
+- Les classes de date et heure ``Time`` et ``Date`` sont dépréciées.
+  À la place, utilisez leurs alternatives immutables ``FrozenTime`` et
+  ``FrozenDate``.
+
 ORM
 ---
 - L'usage de requêtes pour intercepter toutes les méthodes de 
@@ -56,6 +62,15 @@ ORM
   résultats est maintenant déprécié. Un exemple de cet usage est
   ``$query->combine('id', 'title');``. Ceci doit être remplacé par
   ``$query->all()->combine('id', 'title');``.
+
+Database
+--------
+
+- L'utilisation de classes de date et heure mutables avec ``DateTimeType`` et
+  les autres classes de types relatifs aux heures est déprécié.
+  De ce fait, les méthodes ``DatetimeType::useMutable()``,
+  ``DatetimeType::useImmutable()`` et les méthodes similaires dans d'autres
+  classes de types sont dépréciées.
 
 Routing
 -------
@@ -131,6 +146,11 @@ Log
 - Les configurations de ``BaseLog::_getFormattedDate()`` et ``dateFormat`` ont
   été supprimées puisque la logique de formatage du message a été déplacée vers
   les formatters de logs.
+
+View
+----
+- ``TimeHelper::fromString()`` renvoie maintenant une instance de ``FrozenTime``
+  au lieu de ``Time``.
 
 Nouvelles fonctionnalités
 =========================
