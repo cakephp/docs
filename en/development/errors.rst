@@ -346,7 +346,7 @@ For console commands, you should extend ``Cake\Error\ConsoleErrorHandler`` inste
 
     }
 
-Then we can register our console error handler as the PHP error handler:
+Then we can register our console error handler as the PHP error handler::
 
     // In config/bootstrap.php
     use App\Error\AppConsoleErrorHandler;
