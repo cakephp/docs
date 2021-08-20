@@ -329,7 +329,7 @@ Finally, we can use our error handler in the ``ErrorHandlerMiddleware``::
         return $middleware;
     }
 
-For console commands, you should extend ``Cake\Error\ConsoleErrorHandler`` instead. 
+For console error handling, you should extend ``Cake\Error\ConsoleErrorHandler`` instead::
 
     // In /src/Error/AppConsoleErrorHandler.php
     namespace App\Error;
