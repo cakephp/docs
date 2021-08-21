@@ -333,6 +333,8 @@ la création de connexions.
 Types de Données
 ================
 
+.. php:class:: TypeFactory
+
 Puisque tous les fournisseurs de base de données n'intègrent pas la même
 définition des types de données, ou les mêmes noms pour des types de données
 similaires, CakePHP fournit un ensemble de types de données abstraites à
@@ -399,11 +401,51 @@ en 'datetime' va automatiquement convertir les paramètres d'input d'instances
 colonnes 'binary' vont accepter un fichier qui gère, et génère le fichier lors
 de la lecture des données.
 
-.. versionchanged:: 3.3.0
-    Le type ``json`` a été ajouté.
+.. _datetime-type:
 
-.. versionchanged:: 3.5.0
-    Les types ``smallinteger`` et ``tinyinteger`` ont été ajoutés.
+Type DateTime
+-------------
+
+.. php:class:: DateTimeType
+
+Correspond à un type de colonne natif ``DATETIME``. Dans PostgreSQL et SQL Server,
+il s'agit du type ``TIMESTAMP``. La valeur de retour par défaut de ce type de
+colonne est :php:class:`Cake\\I18n\\FrozenTime` qui étend la classe intégrée
+``DateTimeImmutable`` et `Chronos <https://github.com/cakephp/chronos>`_.
+
+.. php:method:: setTimezone(string|\DateTimeZone|null $timezone)
+
+Si le fuseau horaire de votre serveur de base de données ne correspond pas au fuseau
+horaire PHP de votre application, vous pouvez utiliser cette méthode pour spécifier
+le fuseau horaire de votre base de données. Ce fuseau horaire sera alors utilisé
+lors de la conversion des objets PHP en chaîne de date de la base de données et vice
+versa.
+
+.. php:class:: DateTimeFractionalType
+
+Peut être utilisé pour mettre en correspondance des colonnes de temps de date qui
+contiennent des microsecondes, telles que ``DATETIME(6)`` dans MySQL. Pour utiliser
+ce type, vous devez l'ajouter comme type mappé::
+
+    // dans config/bootstrap.php
+    use Cake\Database\TypeFactory;
+    use Cake\Database\Type\DateTimeFractionalType;
+
+    // Remplacer le type de date par défaut par un type plus précis.
+    TypeFactory::map('datetime', DateTimeFractionalType::class);
+
+.. php:class:: DateTimeTimezoneType
+
+Peut être utilisé pour mapper des colonnes de temps de date qui contiennent des
+fuseaux horaires comme ``TIMESTAMPTZ`` dans PostgreSQL. Pour utiliser ce type, vous
+devez l'ajouter comme type mappé::
+
+    // dans config/bootstrap.php
+    use Cake\Database\TypeFactory;
+    use Cake\Database\Type\DateTimeTimezoneType;
+
+    // Remplacer le type de date par défaut par un type plus précis.
+    TypeFactory::map('datetime', DateTimeTimezoneType::class);
 
 .. _adding-custom-database-types:
 

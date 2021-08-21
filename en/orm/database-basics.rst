@@ -299,6 +299,8 @@ data used when creating connections.
 Data Types
 ==========
 
+.. php:class:: TypeFactory
+
 Since not every database vendor includes the same set of data types, or
 the same names for similar data types, CakePHP provides a set of abstracted
 data types for use with the database layer. The types CakePHP supports are:
@@ -387,7 +389,7 @@ vice versa.
 Can be used to map datetime columns that contain microseconds such as
 ``DATETIME(6)`` in MySQL. To use this type you need to add it as a mapped type::
 
-    // in confib/bootstrap.php
+    // in config/bootstrap.php
     use Cake\Database\TypeFactory;
     use Cake\Database\Type\DateTimeFractionalType;
 
@@ -399,7 +401,7 @@ Can be used to map datetime columns that contain microseconds such as
 Can be used to map datetime columns that contain time zones such as
 ``TIMESTAMPTZ`` in PostgreSQL. To use this type you need to add it as a mapped type::
 
-    // in confib/bootstrap.php
+    // in config/bootstrap.php
     use Cake\Database\TypeFactory;
     use Cake\Database\Type\DateTimeTimezoneType;
 

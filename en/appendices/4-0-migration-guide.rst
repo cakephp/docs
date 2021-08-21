@@ -85,6 +85,7 @@ changes made:
 Cache
 -----
 
+* ``Cake\Cache\Cache::read()`` returns ``null`` instead of ``false`` if the data doesn't exist.
 * ``Cake\Cache\CacheEngine::gc()`` and all implementations of this method have
   been removed. This method was a no-op in most cache drivers and was only used
   in file caching.

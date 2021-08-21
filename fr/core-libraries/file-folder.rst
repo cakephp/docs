@@ -10,7 +10,7 @@ tâche habituelle liée aux répertoires.
 .. deprecated:: 4.0
     Les classes ``File`` et ``Folder`` vont être retirées dans la version 5.0.
     Utilisez plutôt les classes ``SplFileInfo`` ou ``SplFileObject`` et les classes d'itérateurs comme 
-     ``RecursiveDirectoryIterator``, ``RecursiveRegexIterator`` etc.
+    ``RecursiveDirectoryIterator``, ``RecursiveRegexIterator`` etc.
 
 
 Utilisation Basique
@@ -59,7 +59,8 @@ API de Folder
 
 .. php:attr:: sort
 
-    Dit si la liste des résultats doit être oui ou non rangée selon name.
+    Dit si la liste des résultats doit être oui ou non rangée par ordre
+    alphabétique.
 
 .. php:attr:: mode
 
@@ -70,13 +71,13 @@ API de Folder
 
     Retourne $path avec $element ajouté, avec le bon slash entre-deux::
 
-        $path = Folder::addPathElement('/a/path/for', 'testing');
-        // $path égal /a/path/for/testing
+        $path = Folder::addPathElement('/un/chemin/pour', 'tester');
+        // $path égal /un/chemin/pour/tester
 
     $element peut aussi être un tableau::
 
-        $path = Folder::addPathElement('/a/path/for', ['testing', 'another']);
-        // $path égal à /a/path/for/testing/another
+        $path = Folder::addPathElement('/un/chemin/pour', ['un-autre', 'test']);
+        // $path égal à /un/chemin/pour/un-autre/test
 
 .. php:method:: cd( $path )
 
@@ -86,7 +87,7 @@ API de Folder
         echo $folder->path; // Affiche /foo
         $folder->cd('/bar');
         echo $folder->path; // Affiche /bar
-        $false = $folder->cd('/non-existent-folder');
+        $false = $folder->cd('/repertoire-inexistant');
 
 .. php:method:: chmod(string $path, integer $mode = false, boolean $recursive = true, array $exceptions = [])
 
@@ -105,16 +106,16 @@ API de Folder
         $folder1->copy('/path/to/folder2');
         // mettra le folder1 et tout son contenu dans folder2
 
-        $folder = new Folder('/path/to/folder');
+        $folder = new Folder('chemin/vers/repertoire');
         $folder->copy([
-            'to' => '/path/to/new/folder',
-            'from' => '/path/to/copy/from', // Will cause a cd() to occur
+            'to' => '/chemin/vers/nouveau/repertoire',
+            'from' => '/chemin/de/depart', // Va provoquer un cd()
             'mode' => 0755,
-            'skip' => ['skip-me.php', '.git'],
-            'scheme' => Folder::SKIP  // Ne fait pas les répertoires/fichiers qui existent déjà.
+            'skip' => ['bon-a-ignorer.php', '.git'],
+            'scheme' => Folder::SKIP  // Ne crée pas les répertoires/fichiers qui existent déjà.
         ]);
 
-    y a 3 schémas supportés:
+    Il y a 3 schémas supportés:
 
     * ``Folder::SKIP`` échapper la copie/déplacement des fichiers & répertoires
       qui existent dans le répertoire de destination.
@@ -139,7 +140,7 @@ API de Folder
 
         $folder = new Folder();
         if ($folder->create('foo' . DS . 'bar' . DS . 'baz' . DS . 'shoe' . DS . 'horn')) {
-            // Successfully created the nested folders
+            // Répertoires imbriqués créés avec succèse
         }
 
 .. php:method:: delete(string $path = null)
@@ -153,7 +154,7 @@ API de Folder
 
 .. php:method:: dirsize()
 
-    Retourne la taille en bytes de ce Dossier et ses contenus.
+    Retourne la taille en octets de ce dossier et ses contenus.
 
 .. php:method:: errors()
 
@@ -206,11 +207,11 @@ API de Folder
 
 .. php:method:: inCakePath(string $path = '')
 
-    Retourne ``true`` si le Fichier est dans un CakePath donné.
+    Retourne ``true`` si le fichier est dans un CakePath donné.
 
 .. php:method:: inPath(string $path = '', boolean $reverse = false)
 
-    Retourne ``true`` si le Fichier est dans le chemin donné::
+    Retourne ``true`` si le fichier est dans le chemin donné::
 
         $Folder = new Folder(WWW_ROOT);
         $result = $Folder->inPath(APP);
@@ -245,10 +246,10 @@ API de Folder
 
     Déplace le répertoire de façon récursive.
 
-.. php:staticmethod:: normalizePath(string $path)
+.. php:staticmethod:: normalizeFullPath(string $path)
 
-    Retourne un ensemble correct de slashes pour un $path donné. ('\\' pour
-    les chemins Windows et '/' pour les autres chemins.)
+    Retourne un chemin avec des slashes normalisés pour le système
+    d'exploitation.
 
 .. php:method:: pwd()
 
@@ -328,7 +329,7 @@ L'API de File
 
     Le chemin absolu du fichier courant.
 
-.. php:method:: append(string $data, boolean $force = false )
+.. php:method:: append(string $data, boolean $force = false)
 
     Ajoute la chaîne de caractères donnée au fichier courant.
 
@@ -338,27 +339,27 @@ L'API de File
 
 .. php:method:: copy(string $dest, boolean $overwrite = true)
 
-    Copie le Fichier vers $dest.
+    Copie le fichier vers ``$dest``.
 
 .. php:method:: create()
 
-    Crée le Fichier.
+    Crée le fichier.
 
 .. php:method:: delete()
 
-    Supprime le Fichier.
+    Supprime le fichier.
 
 .. php:method:: executable()
 
-    Retourne ``true`` si le Fichier est exécutable.
+    Retourne ``true`` si le fichier est exécutable.
 
 .. php:method:: exists()
 
-    Retourne ``true`` si le Fichier existe.
+    Retourne ``true`` si le fichier existe.
 
 .. php:method:: ext()
 
-    Retourne l'extension du Fichier.
+    Retourne l'extension du fichier.
 
 .. php:method:: Folder()
 
@@ -366,28 +367,28 @@ L'API de File
 
 .. php:method:: group()
 
-    Retourne le groupe du Fichier ou ``false`` en cas d'erreur.
+    Retourne le groupe du fichier ou ``false`` en cas d'erreur.
 
 .. php:method:: info()
 
-    Retourne l'info du Fichier.
+    Retourne l'info du fichier.
 
 .. php:method:: lastAccess()
 
-    Retourne le dernier temps d'accès.
+    Retourne l'heure du dernier d'accès.
 
 .. php:method:: lastChange()
 
-    Retourne le dernier temps modifié ou ``false`` en cas d'erreur.
+    Retourne l'heure de la dernière modification ou ``false`` en cas d'erreur.
 
 .. php:method:: md5(integer|boolean $maxsize = 5)
 
-    Récupère la MD5 Checksum du fichier avec la vérification précédente du
-    Filesize ou ``false`` en cas d'erreur.
+    Récupère la checksum MD5 du fichier avec vérification préalable de la taille
+    du fichier ou ``false`` en cas d'erreur.
 
 .. php:method:: name()
 
-    Retourne le nom du Fichier sans l'extension.
+    Retourne le nom du fichier sans l'extension.
 
 .. php:method:: offset(integer|boolean $offset = false, integer $seek = 0)
 
@@ -399,7 +400,7 @@ L'API de File
 
 .. php:method:: owner()
 
-    Retourne le propriétaire du Fichier.
+    Retourne le propriétaire du fichier.
 
 .. php:method:: perms()
 
@@ -407,44 +408,42 @@ L'API de File
 
 .. php:staticmethod:: prepare(string $data, boolean $forceWindows = false)
 
-    Prépare une chaîne de caractères ascii pour l'écriture. Convertit les lignes
-    de fin en un terminator correct pour la plateforme courante. Si c'est
+    Prépare une chaîne de caractères ascii pour l'écriture. Convertit les fins
+    de lignes en caractère correct pour la plateforme courante. Si c'est
     Windows "\\r\\n" sera utilisé, toutes les autres plateformes utiliseront "\\n".
 
 .. php:method:: pwd()
 
-    Retourne un chemin complet du Fichier.
+    Retourne un chemin complet du fichier.
 
 .. php:method:: read(string $bytes = false, string $mode = 'rb', boolean $force = false)
 
-    Retourne les contenus du Fichier en chaîne de caractère ou retourne
+    Retourne les contenus du fichier en chaîne de caractères ou retourne
     ``false`` en cas d'échec.
 
 .. php:method:: readable()
 
-    Retourne ``true`` si le Fichier est lisible.
+    Retourne ``true`` si le fichier est lisible.
 
 .. php:method:: safe(string $name = null, string $ext = null)
 
-    Rend le nom de fichier bon pour la sauvegarde.
+    Sécurise le nom de fichier pour la sauvegarde.
 
 .. php:method:: size()
 
-    Retourne le Filesize en bytes.
+    Retourne la taille du fichier en octets.
 
 .. php:method:: writable()
 
-    :rtype: boolean
-
-    Retourne ``true`` si le Fichier est ouvert en écriture.
+    Retourne ``true`` si le fichier est ouvert en écriture.
 
 .. php:method:: write(string $data, string $mode = 'w', boolean$force = false)
 
-    Ecrit le $data donné dans le Fichier.
+    Ecrit le $data donné dans le fichier.
 
 .. php:method:: mime()
 
-    Récupère le mimetype du Fichier, retourne ``false`` en cas d'échec.
+    Récupère le mimetype du fichier, retourne ``false`` en cas d'échec.
 
 .. php:method:: replaceText( $search, $replace )
 

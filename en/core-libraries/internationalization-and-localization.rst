@@ -77,8 +77,10 @@ messages::
                     my_plugin.po
 
 Translation folders can be the two or three letter ISO code of the language or
-the full locale name such as ``fr_FR``, ``es_AR``, ``da_DK`` which contains
+the full ICU locale name such as ``fr_FR``, ``es_AR``, ``da_DK`` which contains
 both the language and the country where it is spoken.
+
+See https://www.localeplanet.com/icu/ for the full list.
 
 An example translation file could look like this:
 
@@ -686,6 +688,11 @@ automatically set the locale based on the current user::
 The ``LocaleSelectorMiddleware`` will use the ``Accept-Language`` header to
 automatically set the user's preferred locale. You can use the locale list
 option to restrict which locales will automatically be used.
+    
+Translate Content/Entities
+==========================
+
+If you want to translate content/entities then you should look at the :doc:`Translate Behavior </orm/behaviors/translate>`.
 
 .. meta::
     :title lang=en: Internationalization & Localization

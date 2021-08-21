@@ -549,7 +549,7 @@ transport). To start off your file should look like::
         }
     }
 
-You must implement the method ``send(Mailer $mailer)`` with your custom logic.
+You must implement the method ``send(Message $message)`` with your custom logic.
 
 Sending emails without using Mailer
 ===================================
