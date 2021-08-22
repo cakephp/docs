@@ -462,7 +462,7 @@ instead. You can force select a transport adapter using a constructor option::
 
     $client = new Client(['adapter' => Stream::class]);
 
-.. _httpclient-testing::
+.. _httpclient-testing:
 
 Testing
 =======
