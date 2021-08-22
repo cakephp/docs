@@ -195,7 +195,7 @@ TestSuite
 
 - ``IntegrationTestTrait::enableCsrfToken()`` now lets you use custom CSRF
   cookie/session key names.
-- ``HttpClientTrait`` was added to make defining HTTP mocks easier to define.
+- ``HttpClientTrait`` was added to make writing HTTP mocks easier.
   See :ref:`httpclient-testing` for more information.
 - A new fixture system has been introduced. This fixture system separates schema
   and data enabling you to re-use your existing migrations to define test
