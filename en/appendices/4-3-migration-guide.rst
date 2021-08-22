@@ -27,6 +27,19 @@ features::
 A new configuration option has been added to disable deprecations on a path by
 path basis. See :ref:`deprecation-warnings` for more information.
 
+Database
+--------
+
+- Using mutable datetime classes with ``DateTimeType`` and other time related type classes is deprecated.
+  Hence methods ``DatetimeType::useMutable()``, ``DatetimeType::useImmutable()`` and similar methods
+  in other type classes are deprecated.
+
+I18n
+----
+
+- The datetime classes ``Time`` and ``Date`` are deprecated.
+  Use their immutable alternatives ``FrozenTime`` and ``FrozenDate`` instead.
+
 Log
 ---
 
@@ -37,15 +50,11 @@ Log
 
 Middleware
 ----------
+
 - "Double pass" middlewares, i.e. classes with ``__invoke($request, $response, $next)``
   method are deprecated.  Instead use ``Closure`` with signature
   ``function($request, $handler)`` or classes which implement
   ``Psr\Http\Server\MiddlewareInterface`` instead.
-
-I18n
-----
-- The datetime classes ``Time`` and ``Date`` are deprecated.
-  Use their immutable alternatives ``FrozenTime`` and ``FrozenDate`` instead.
 
 ORM
 ---
@@ -55,15 +64,9 @@ ORM
   deprecated usage is ``$query->combine('id', 'title');``. This should be
   updated to ``$query->all()->combine('id', 'title');`` instead.
 
-Database
---------
-
-- Using mutable datetime classes with ``DateTimeType`` and other time related type classes is deprecated.
-  Hence methods ``DatetimeType::useMutable()``, ``DatetimeType::useImmutable()`` and similar methods
-  in other type classes are deprecated.
-
 Routing
 -------
+
 - Colon prefixed route placeholders like ``:controller`` are deprecated. Use
   braced placeholders like ``{controller}`` instead.
 
@@ -164,6 +167,7 @@ Http
 - The ``CspMiddleware`` now sets the ``cspScriptNonce`` and ``cspStyleNonce``
   request attributes which streamlines the adoption of strict
   content-security-policy rules.
+- ``Client::addMockResponse()`` and ``clearMockResponses()`` were added.
 
 Log
 ---
@@ -191,6 +195,8 @@ TestSuite
 
 - ``IntegrationTestTrait::enableCsrfToken()`` now lets you use custom CSRF
   cookie/session key names.
+- ``HttpClientTrait`` was added to make writing HTTP mocks easier.
+  See :ref:`httpclient-testing` for more information.
 - A new fixture system has been introduced. This fixture system separates schema
   and data enabling you to re-use your existing migrations to define test
   schema. The :doc:`./fixture-upgrade` guide covers how to upgrade.
