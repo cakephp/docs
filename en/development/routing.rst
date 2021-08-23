@@ -1538,7 +1538,7 @@ rework when URLs require more parameters::
 
     // Create the route just like before.
     $routes->get(
-        '/view/{id}',
+        '/view/{id}/{slug}',
         ['controller' => 'Articles', 'action' => 'view'],
         'articles:view'
     );
