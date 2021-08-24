@@ -30,6 +30,21 @@ Une nouvelle option de configuration a été ajoutée pour désactiver les
 dépéréciations chemin par chemin. Cf. :ref:`deprecation-warnings` pour plus
 d'informations.
 
+Base De Données
+---------------
+
+- L'utilisation de classes de date et heure mutables avec ``DateTimeType`` et
+  les autres classes de types relatifs aux heures est déprécié.
+  De ce fait, les méthodes ``DatetimeType::useMutable()``,
+  ``DatetimeType::useImmutable()`` et les méthodes similaires dans d'autres
+  classes de types sont dépréciées.
+
+I18n
+----
+- Les classes de date et heure ``Time`` et ``Date`` sont dépréciées.
+  À la place, utilisez leurs alternatives immutables ``FrozenTime`` et
+  ``FrozenDate``.
+
 Log
 ---
 
@@ -43,6 +58,7 @@ Log
 
 Middleware
 ----------
+
 - Les middlewares "double pass", c'est-à-dire les classes avec une méthode
   ``__invoke($request, $response, $next)``, sont dépréciés. À la place, utilisez
   ``Closure`` avec la signature ``function($request, $handler)`` o des classes
@@ -50,6 +66,7 @@ Middleware
 
 ORM
 ---
+
 - L'usage de requêtes pour intercepter toutes les méthodes de 
   ``ResultSetInterface`` (y compris ```CollectionInterface```), forcer la
   récupération des résultats et appeler la méthode sous-jacente sur ces
@@ -59,6 +76,7 @@ ORM
 
 Routing
 -------
+
 - Les placeholders de routes préfixés par des doubles points tels que
   ``:controller`` sont dépréciés. Remplacez-les par des placeholders entre
   accollades tels que ``{controller}``.
@@ -100,6 +118,11 @@ ORM
   vous avez des formulaires qui modifient plusieurs tranductions à la fois, vous
   aurez vraisemblablement besoin de mettre à jour la façon dont sont rendues les
   erreurs de validation.
+- Les types spécifiés dans des expressions de fonctions ont maintenant la
+  préséance sur les ensembles de types par défaut pour les colonnes, quand des
+  colonnes sont sélectionnées. Par exemple, pour utiliser
+  ``$query->select(['id' => $query->func()->min('id')])`` la valeur pour `id`
+  dans l'entity récupérée sera un `float` au lieu d'un `integer`.
 
 Routing
 -------
@@ -126,6 +149,11 @@ Log
 - Les configurations de ``BaseLog::_getFormattedDate()`` et ``dateFormat`` ont
   été supprimées puisque la logique de formatage du message a été déplacée vers
   les formatters de logs.
+
+View
+----
+- ``TimeHelper::fromString()`` renvoie maintenant une instance de ``FrozenTime``
+  au lieu de ``Time``.
 
 Nouvelles fonctionnalités
 =========================
@@ -158,6 +186,7 @@ Http
 - Le ``CspMiddleware`` définit maintenant les attributs de la requête
   ``cspScriptNonce`` et ``cspStyleNonce`` qui rationalise l'adoption de
   content-security-policy strict.
+- ``Client::addMockResponse()`` et ``clearMockResponses()`` ont été ajoutées.
 
 Log
 ---
@@ -187,6 +216,8 @@ TestSuite
 
 - ``IntegrationTestTrait::enableCsrfToken()`` permet maintenant l'utilisation de
   noms de clés personnalisés pour les cookies/sessions CSRF.
+- ``HttpClientTrait`` a été ajouté pour faciliter l'écriture de mocks HTTP.
+  Cf. :ref:`httpclient-testing` pour plus d'information.
 - Un nouveau système de fixture a été introduit. Ce système de fixture sépare le
   schéma et les données, ce qui vous permet de réutiliser vos migrations
   existantes pour définir un schéma de test. Le guide :doc:`./fixture-upgrade`
