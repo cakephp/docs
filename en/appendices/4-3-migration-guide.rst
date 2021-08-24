@@ -160,6 +160,9 @@ Database
 - The ``DatetimeType`` can now convert request data from the user's timezone
   to the application timezone. See
   :ref:`converting-request-data-from-user-timezone` for more information.
+- ``JsonType::setEncodingOptions()`` was added. This method lets you define
+  ``json_encode()`` options for when the ORM serializes JSON when persisting
+  data.
 
 Http
 ----
