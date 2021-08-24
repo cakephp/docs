@@ -308,8 +308,7 @@ un middleware. Les gestionnaires d'erreurs sont différents pour la partie HTTP
 et la partie Console de votre application.
 
 Pour créer un gestionnaire d'erreurs pour les requêtes HTTP, vous devriez
-étendre ``Cake\Error\ErrorHandler``. Pour le commandes en console, vous devriez
-plutôt étendre ``Cake\Error\ConsoleErrorHandler``. À titre d'exemple, nous
+étendre ``Cake\Error\ErrorHandler``. À titre d'exemple, nous
 pourrions définir une classe appelée ``AppError`` pour gérer les erreurs dans
 les requêtes HTTP::
 
@@ -355,6 +354,34 @@ l'``ErrorHandlerMiddleware``::
 
         return $middleware;
     }
+
+Pour la gestion d'erreurs par console, vous devez étendre
+``Cake\Error\ConsoleErrorHandler`` au lieu de ``Cake\Error\ErrorHandler``::
+
+    // Dans /src/Error/AppConsoleErrorHandler.php
+    namespace App\Error;
+    use Cake\Error\ConsoleErrorHandler;
+
+    class AppConsoleErrorHandler extends ConsoleErrorHandler {
+
+        protected function _displayException(Throwable $exception): void {
+            parent::_displayException($exception);
+            if (isset($exception->queryString)) {
+                $this->_stderr->write('Query String: ' . $exception->queryString);
+            }
+        }
+
+    }
+
+Puis nous pouvons enregistrer notre gestionnaire d'erreurs sur console en tant
+que gestionnaire d'erreurs PHP::
+
+    // Dans config/bootstrap.php
+    use App\Error\AppConsoleErrorHandler;
+    $isCli = PHP_SAPI === 'cli';
+    if ($isCli) {
+        (new AppConsoleErrorHandler(Configure::read('Error')))->register();
+    } 
 
 Les objets ErrorHandler ont quelques méthodes que vous pourriez vouloir
 implémenter:
