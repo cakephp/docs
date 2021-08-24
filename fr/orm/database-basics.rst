@@ -436,7 +436,7 @@ ce type, vous devez l'ajouter comme type mappé::
 
 .. php:class:: DateTimeTimezoneType
 
-Peut être utilisé pour mapper des colonnes de temps de date qui contiennent des
+Peut être utilisé pour mapper des colonnes date et heure qui contiennent des
 fuseaux horaires comme ``TIMESTAMPTZ`` dans PostgreSQL. Pour utiliser ce type, vous
 devez l'ajouter comme type mappé::
 

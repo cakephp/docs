@@ -1615,7 +1615,7 @@ nécessitent plus de paramètres::
 
     // Créez une route comme précédemment.
     $routes->get(
-        '/view/{id}',
+        '/view/{id}/{slug}',
         ['controller' => 'Articles', 'action' => 'view'],
         'articles:view'
     );
