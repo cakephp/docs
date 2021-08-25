@@ -63,6 +63,11 @@ Filesystem
 
 - The Filesystem package was removed, and the ``Filesystem`` was moved to the Utility package.
 
+I18n
+----
+
+- `Time` was renamed to `DateTime` to allow for future time-only types.
+
 Log
 ---
 
