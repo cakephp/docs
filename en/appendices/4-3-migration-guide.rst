@@ -75,6 +75,9 @@ TestSuite
 
 - ``TestFixture::$fields`` and ``TestFixture::$import`` are deprecated. You
   should convert your application to the :doc:`new fixture system <./fixture-upgrade>`.
+- ``TestCase::$dropTables`` is deprecated. Dropping tables during a test run is
+  not compatible with the new migration/schema dump based fixtures and will be
+  removed in 5.0.
 
 Behavior Changes
 ================
