@@ -96,6 +96,12 @@ Core
 
 - ``Configure::load()`` will now raise an exception when an invalid
   configuration engine is used.
+  
+Database
+--------
+
+- `ComparisonExpression` no longer wraps `IdentifierExpression` sql in (). This affects
+  `Query::where()` and anywhere else a `ComparisonExpression` is generated.
 
 ORM
 ---
