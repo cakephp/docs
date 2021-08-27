@@ -100,8 +100,8 @@ Core
 Database
 --------
 
-- `ComparisonExpression` no longer wraps `IdentifierExpression` sql in (). This affects
-  `Query::where()` and anywhere else a `ComparisonExpression` is generated.
+- ``ComparisonExpression`` no longer wraps generated ``IdentifierExpression`` sql in (). This affects
+  ``Query::where()`` and anywhere else a ``ComparisonExpression`` is generated.
 
 ORM
 ---
