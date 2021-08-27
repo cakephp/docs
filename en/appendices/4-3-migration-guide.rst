@@ -124,6 +124,11 @@ Validation
   non-string provider name is used. Previously there would be no error, but the
   provider would also not work.
 
+View
+----
+
+- The ``$vars`` parameter of  ``ViewBuilder::build()`` is deprecated. Use
+  ``setVar()`` instead.
 
 Breaking Changes
 ================
