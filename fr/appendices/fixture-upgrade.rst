@@ -16,7 +16,7 @@ quelques mises à jour:
 #. Ajoutez ceci à votre fichier ``phpunit.xml``::
 
         <extensions>
-            <extension class="\Cake\TestSuite\FixtureSchemaExtension" />
+            <extension class="\Cake\TestSuite\Fixture\PHPUnitExtension" />
         </extensions>
 
    Cela enlève la gestion de schéma du gestionnaire de fixture de test. À la
