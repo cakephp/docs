@@ -103,6 +103,12 @@ Database
 - ``ComparisonExpression`` no longer wraps generated ``IdentifierExpression`` sql in (). This affects
   ``Query::where()`` and anywhere else a ``ComparisonExpression`` is generated.
 
+Datasource
+----------
+
+- Switched ``ConnectionManager::alias()`` ``$alias`` and ``$source`` parameter names to match what they are.
+  This only affects documentation and named parameters.
+
 ORM
 ---
 
