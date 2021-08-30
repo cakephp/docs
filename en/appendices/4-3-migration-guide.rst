@@ -96,7 +96,7 @@ Core
 
 - ``Configure::load()`` will now raise an exception when an invalid
   configuration engine is used.
-  
+
 Database
 --------
 
@@ -120,6 +120,8 @@ ORM
 Routing
 -------
 
+- ``Router::content()``, ``Router::prefix()``, ``Router::plugin()`` and ``Router::scope()``
+  are deprecated. Use the corresponding non-static ``RouteBuilder`` methods instead.
 - ``RouteBuilder::resources()`` now generates routes that use 'braced'
   placeholders.
 
