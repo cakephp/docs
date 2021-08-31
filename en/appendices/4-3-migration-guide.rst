@@ -56,6 +56,14 @@ Middleware
   ``function($request, $handler)`` or classes which implement
   ``Psr\Http\Server\MiddlewareInterface`` instead.
 
+Network
+-------
+
+- ``Socket::$connected`` is deprecated. Use ``isConnected()`` instead.
+- ``Socket::$description`` is deprecated.
+- ``Socket::$encrypted`` is deprecated. Use ``isEncrypted()`` instead.
+- ``Socket::$lastError`` is deprecated. Use ``lastError()`` instead.
+
 ORM
 ---
 
