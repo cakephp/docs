@@ -109,6 +109,12 @@ Datasource
 - Switched ``ConnectionManager::alias()`` ``$alias`` and ``$source`` parameter names to match what they are.
   This only affects documentation and named parameters.
 
+Http
+---
+
+- ``Http\Client`` now uses ``ini_get('user_agent')`` with 'CakePHP' as
+  a fallback for its user-agent.
+
 ORM
 ---
 
