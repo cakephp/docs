@@ -17,7 +17,7 @@ Generating URLs
 
 Returns a URL pointing to a combination of controller and action.
 If ``$url`` is empty, it returns the ``REQUEST_URI``, otherwise it
-generates the URL for the controller and action combo. If ``full`` is
+generates the URL for the controller and action combo. If ``fullBase`` is
 ``true``, the full base URL will be prepended to the result::
 
     echo $this->Url->build([
