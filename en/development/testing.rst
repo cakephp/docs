@@ -747,7 +747,7 @@ The following command will help you bake your factories::
     bin/cake bake fixture_factory -h
 
 Once your factories are
-`tuned <https://github.com/vierge-noire/cakephp-fixture-factories/blob/master/docs/factories.md>`_,
+`tuned <https://github.com/vierge-noire/cakephp-fixture-factories/blob/main/docs/factories.md>`_,
 you are ready to create test fixtures in no time.
 
 Unnecessary interaction with the database will slow down your tests as well as your application.
@@ -1222,11 +1222,11 @@ load plugins manually in a test you can use the ``loadPlugins()`` method::
     {
         // Assert the amount of routes from the application, without loading plugins
         $this->assertCount(35, Router::routes(), 'App route count does not match');
-    
+
         // Assert the amount of routes from the application including a specific plugin "SomePlugin"
         $this->loadPlugins(['SomePlugin']);
         $this->assertCount(40, Router::routes(), 'App & SomePlugin route count does not match');
-    
+
         // Assert the amount of routes from the application including all plugins
         $this->loadPlugins();
         $this->assertCount(60, Router::routes(), 'App & plugin route count does not match');

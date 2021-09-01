@@ -745,7 +745,7 @@ La commande bake suivante vous assistera pour créer vos factories::
     bin/cake bake fixture_factory -h
 
 Une fois vos factories
-`mises en place <https://github.com/vierge-noire/cakephp-fixture-factories/blob/master/docs/factories.md>`_,
+`mises en place <https://github.com/vierge-noire/cakephp-fixture-factories/blob/main/docs/factories.md>`_,
 vous voilà équipés pour créer vos fixtures de test à vitesse folle.
 
 Les intéractions non nécessaires avec la base de donnée ralentissent les tests, ainsi que votre application.
