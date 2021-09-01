@@ -771,7 +771,7 @@ La commande bake suivante vous assistera pour créer vos factories::
     bin/cake bake fixture_factory -h
 
 Une fois vos factories
-`mises en place <https://github.com/vierge-noire/cakephp-fixture-factories/blob/master/docs/factories.md>`__,
+`mises en place <https://github.com/vierge-noire/cakephp-fixture-factories/blob/main/docs/factories.md>`__,
 vous voilà équipés pour créer vos fixtures de test à vitesse folle.
 
 Les intéractions non nécessaires avec la base de donnée ralentissent les tests, ainsi que votre application.
@@ -1563,7 +1563,7 @@ d'assertions afin de tester plus simplement les réponses. Quelques exemples::
 
     // Vérifie une partie de l'en-tête Location
     $this->assertRedirectContains('/articles/edit/');
-    
+
     // Vérifie que l'en-tête location ne contient pas...
     $this->assertRedirectNotContains('/articles/edit/');
 
