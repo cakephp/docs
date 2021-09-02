@@ -2459,17 +2459,37 @@ could do the following::
     namespace App\View\Widget;
 
     use Cake\View\Form\ContextInterface;
+    use Cake\View\StringTemplate;
     use Cake\View\Widget\WidgetInterface;
 
     class AutocompleteWidget implements WidgetInterface
     {
+
+        /**
+         * StringTemplate instance.
+         *
+         * @var \Cake\View\StringTemplate
+         */
         protected $_templates;
 
-        public function __construct($templates)
+        /**
+         * Constructor.
+         *
+         * @param \Cake\View\StringTemplate $templates Templates list.
+         */
+        public function __construct(StringTemplate $templates)
         {
             $this->_templates = $templates;
         }
 
+        /**
+         * Methods that render the widget.
+         *
+         * @param array $data The data to build an input with.
+         * @param \Cake\View\Form\ContextInterface $context The current form context.
+         * 
+         * @return string
+         */
         public function render(array $data, ContextInterface $context): string
         {
             $data += [
