@@ -475,16 +475,16 @@ configuration. See the `migrations docs </migrations>` for more information.
 To load a SQL dump file you can use the following::
 
     // in tests/bootstrap.php
-    use Cake\TestSuite\Fixture\SchemaManager;
+    use Cake\TestSuite\Fixture\SchemaLoader;
 
     // Load one or more SQL files.
-    SchemaManager::create('test', 'path/to/schema.sql');
+    (new SchemaLoader())->loadFiles('path/to/schema.sql', 'test');
 
-At the beginning of each test run ``SchemaManager`` will drop all tables in the
+At the beginning of each test run ``SchemaLoader`` will drop all tables in the
 connection and rebuild tables based on the provided schema file.
 
 .. versionadded:: 4.3.0
-    SchemaManager was added.
+    SchemaLoader was added.
 
 .. _fixture-state-management:
 
@@ -493,7 +493,7 @@ Fixture State Managers
 
 By default CakePHP resets fixture state at the end of each test by truncating
 all the tables in the database. This operation can become expensive as your
-application grows. By using ``TransactionResetStrategy`` each test method will be run
+application grows. By using ``TransactionStrategy`` each test method will be run
 inside a transaction that is rolled back at the end of the test. This can yield
 improved performance but requires your tests not heavily rely on static fixture
 data, as auto-increment values are not reset before each test.
@@ -501,11 +501,19 @@ data, as auto-increment values are not reset before each test.
 The fixture state management strategy can be defined within the test case::
 
     use Cake\TestSuite\TestCase;
-    use Cake\TestSuite\Fixture\TransactionResetStrategy;
+    use Cake\TestSuite\Fixture\FixtureStrategyInterface;
+    use Cake\TestSuite\Fixture\TransactionStrategy;
 
     class ArticlesTableTest extends TestCase
     {
-        protected $stateResetStrategy = TransactionResetStrategy::class;
+        /**
+         * Create the fixtures strategy used for this test case.
+         * You can use a base class/trait to change multiple classes.
+         */
+        protected function getFixtureStrategy(): FixtureStrategyInterface
+        {
+            return new TransactionStrategy();
+        }
     }
 
 .. versionadded:: 4.3.0
