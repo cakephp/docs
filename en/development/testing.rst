@@ -475,16 +475,16 @@ configuration. See the `migrations docs </migrations>` for more information.
 To load a SQL dump file you can use the following::
 
     // in tests/bootstrap.php
-    use Cake\TestSuite\Fixture\SchemaManager;
+    use Cake\TestSuite\Fixture\SchemaLoader;
 
     // Load one or more SQL files.
-    SchemaManager::create('test', 'path/to/schema.sql');
+    (new SchemaLoader())->loadFiles('path/to/schema.sql', 'test');
 
-At the beginning of each test run ``SchemaManager`` will drop all tables in the
+At the beginning of each test run ``SchemaLoader`` will drop all tables in the
 connection and rebuild tables based on the provided schema file.
 
 .. versionadded:: 4.3.0
-    SchemaManager was added.
+    SchemaLoader was added.
 
 .. _fixture-state-management:
 

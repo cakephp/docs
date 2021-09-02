@@ -493,17 +493,17 @@ doivent être lancées dans les tests. Consultez la
 Pour charger un fichier de dump SQL, vous pouvez faire ceci::
 
     // dans tests/bootstrap.php
-    use Cake\TestSuite\Fixture\SchemaManager;
+    use Cake\TestSuite\Fixture\SchemaLoader;
 
     // Charger un ou plusieurs fichiers SQL.
-    SchemaManager::create('test', 'chemin/vers/schema.sql');
+    (new SchemaLoader())->loadFiles('chemin/vers/schema.sql', 'test');
 
-Au début du lancement de chaque test, ``SchemaManager`` supprimera toutes les
+Au début du lancement de chaque test, ``SchemaLoader`` supprimera toutes les
 tables dans la connexion et les reconstruira à partir du fichier de schéma
 fourni.
 
 .. versionadded:: 4.3.0
-    SchemaManager a été ajouté.
+    SchemaLoader a été ajouté.
 
 .. _fixture-state-management:
 
