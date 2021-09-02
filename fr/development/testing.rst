@@ -523,11 +523,19 @@ La stratégie de gestion de l'état des fixtures peut être définie à l'intér
 du test::
 
     use Cake\TestSuite\TestCase;
-    use Cake\TestSuite\Fixture\TransactionResetStrategy;
+    use Cake\TestSuite\Fixture\TransactionStrategy;
 
     class ArticlesTableTest extends TestCase
     {
-        protected $stateResetStrategy = TransactionResetStrategy::class;
+        /**
+         * Créez la stratégie de fixation utilisée pour ce cas de test.
+         * Vous pouvez utiliser une classe/un trait de base pour modifier
+         * plusieurs classes.
+         */
+        protected function getFixtureStrategy(): FixtureStrategyInterface
+        {
+            return new TransactionStrategy();
+        }
     }
 
 .. versionadded:: 4.3.0
