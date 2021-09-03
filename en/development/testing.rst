@@ -217,7 +217,7 @@ By using test cases you can describe the relationship between a set of
 known inputs and their expected output. This helps you be more confident of the
 code you're writing as you can ensure that the code you wrote fulfills the
 expectations and assertions your tests make. Additionally because tests are
-code, they are easy to re-run whenever you make a change. This helps prevent
+code, they can be re-run whenever you make a change. This helps prevent
 the creation of new bugs.
 
 .. note::
@@ -944,7 +944,7 @@ Using this trait in your controller test cases allows you to
 test controllers from a high level.
 
 If you are unfamiliar with integration testing, it is a testing approach that
-makes it easy to test multiple units in concert. The integration testing
+allows you to test multiple units in concert. The integration testing
 features in CakePHP simulate an HTTP request being handled by your application.
 For example, testing your controller will also exercise any components, models
 and helpers that would be involved in handling a given request. This gives you a
@@ -1064,7 +1064,7 @@ ensure your request had the correct side-effects.
 Setting up the Request
 ----------------------
 
-The ``IntegrationTestTrait`` trait comes with a number of helpers to make it easy
+The ``IntegrationTestTrait`` trait comes with a number of helpers to
 to configure the requests you will send to your application under test::
 
     // Set cookies

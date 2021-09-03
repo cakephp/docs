@@ -3,7 +3,7 @@ Security
 
 .. php:class:: SecurityComponent(ComponentCollection $collection, array $config = [])
 
-The Security Component creates an easy way to integrate tighter
+The Security Component creates a way to integrate tighter
 security in your application. It provides methods for various tasks like:
 
 * Restricting which HTTP methods your application accepts.

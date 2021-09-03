@@ -2,10 +2,9 @@ Associations - Linking Tables Together
 ######################################
 
 Defining relations between different objects in your application should be
-a natural process. For example, an article may have many comments, and belong
-to an author. Authors may have many articles and comments. CakePHP makes
-managing these associations easy. The four association types in CakePHP are:
-hasOne, hasMany, belongsTo, and belongsToMany.
+a natural process. For example, an article may have many comments, and belong to
+an author. Authors may have many articles and comments. The four association
+types in CakePHP are: hasOne, hasMany, belongsTo, and belongsToMany.
 
 ============= ===================== =======================================
 Relationship  Association Type      Example

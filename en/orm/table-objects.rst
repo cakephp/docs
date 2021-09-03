@@ -413,7 +413,7 @@ Behaviors
 
 .. start-behaviors
 
-Behaviors provide an easy way to create horizontally re-usable pieces of logic
+Behaviors provide a way to create horizontally re-usable pieces of logic
 related to table classes. You may be wondering why behaviors are regular classes
 and not traits. The primary reason for this is event listeners. While traits
 would allow for re-usable pieces of logic, they would complicate binding events.
@@ -492,7 +492,7 @@ Using the TableLocator
 
 .. php:class:: TableLocator
 
-As we've seen earlier, the TableLocator class provides an easy way to use
+As we've seen earlier, the TableLocator class provides a way to use a
 factory/registry for accessing your applications table instances. It provides a
 few other useful features as well.
 

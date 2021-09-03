@@ -2,11 +2,11 @@ REST
 ####
 
 Many newer application programmers are realizing the need to open their core
-functionality to a greater audience. Providing easy, unfettered access to your
-core API can help get your platform accepted, and allows for mashups and easy
+functionality to a greater audience. Providing unfettered access to your
+core API can help get your platform accepted, and allows for mashups and
 integration with other systems.
 
-While other solutions exist, REST is a great way to provide easy access to the
+While other solutions exist, REST is a great way to provide access to the
 logic you've created in your application. It's simple, usually XML-based (we're
 talking simple XML, nothing like a SOAP envelope), and depends on HTTP headers
 for direction. Exposing an API via REST in CakePHP is simple.
@@ -100,7 +100,7 @@ variables ``XmlView`` should serialize into XML.
 If we wanted to modify the data before it is converted into XML we should not
 define the ``serialize`` option, and instead use template files. We place
 the REST views for our RecipesController inside **templates/Recipes/xml**. We can also use
-the :php:class:`Xml` for quick-and-easy XML output in those views. Here's what
+the :php:class:`Xml` for low-effort XML output in those views. Here's what
 our index view might look like::
 
     // templates/Recipes/xml/index.php
@@ -160,9 +160,9 @@ need them, using :php:meth:`BodyParserMiddleware::addParser()`.
 RESTful Routing
 ===============
 
-CakePHP's Router makes connecting RESTful resource routes easy. See the section
-on :ref:`resource-routes` for more information.
+CakePHP's Router lets you connect RESTful resource routes with a fluent
+interface. See the section on :ref:`resource-routes` for more information.
 
 .. meta::
     :title lang=en: REST
-    :keywords lang=en: application programmers,default routes,core functionality,result format,mashups,recipe database,request method,easy access,config,soap,recipes,logic,audience,cakephp,running,api
+    :keywords lang=en: application programmers,default routes,core functionality,result format,mashups,recipe database,request method,access,config,soap,recipes,logic,audience,cakephp,running,api

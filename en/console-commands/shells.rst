@@ -172,9 +172,9 @@ Using Models in Your Shells
 ===========================
 
 You'll often need access to your application's business logic in shell
-utilities; CakePHP makes that super easy. You can load models in shells, just as
-you would in a controller using ``loadModel()``. The loaded models are set as
-properties attached to your shell::
+utilities. You can load models in shells, just as you would in a controller
+using ``loadModel()``. The loaded models are set as properties attached to your
+shell::
 
     namespace App\Shell;
 

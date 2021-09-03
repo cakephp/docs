@@ -21,7 +21,7 @@ ways to inspect the data returned by the ORM.
 - ``debug($query)`` Shows the SQL and bound parameters, does not show results.
 - ``sql($query)`` Shows the final rendered SQL, but only when having DebugKit installed.
 - ``debug($query->all())`` Shows the ResultSet properties (not the results).
-- ``debug($query->toList())`` An easy way to show each of the results.
+- ``debug($query->toList())`` Show results in an array.
 - ``debug(iterator_to_array($query))`` Shows query results in an array format.
 - ``debug(json_encode($query, JSON_PRETTY_PRINT))`` More human readable results.
 - ``debug($query->first())`` Show the properties of a single entity.
@@ -84,7 +84,7 @@ Using Finders to Load Data
 .. php:method:: find($type, $options = [])
 
 Before you can work with entities, you'll need to load them. The easiest way to
-do this is using the ``find()`` method. The find method provides an easy and
+do this is using the ``find()`` method. The find method provides a short and
 extensible way to find the data you are interested in::
 
     // In a controller or table method.
@@ -512,7 +512,7 @@ You can eager load associations as deep as you like::
         'Shops.Managers'
     ]);
 
-You can select fields from all associations with multiple easy ``contain()``
+You can select fields from all associations with multiple ``contain()``
 statements::
 
     $query = $this->find()->select([
@@ -690,8 +690,7 @@ published articles using the following::
         return $q->where(['Articles.created >=' => new DateTime('-10 days')]);
     });
 
-Filtering by deep associations is surprisingly easy, and the syntax should be
-already familiar to you::
+Filtering by deep associations uses the same predictable syntax from ``contain()``::
 
     // In a controller or table method.
     $query = $products->find()->matching(
@@ -913,7 +912,7 @@ databases that limit the amount of bound parameters per query, such as
 Lazy Loading Associations
 =========================
 
-While CakePHP makes it easy to eager load your associations, there may be cases
+While CakePHP uses eager loading to fetch your associations, there may be cases
 where you need to lazy-load associations. You should refer to the
 :ref:`lazy-load-associations` and :ref:`loading-additional-associations`
 sections for more information.
@@ -965,10 +964,9 @@ serialized data can be unserialized into a working result set. Converting to
 JSON respects hidden & virtual field settings on all entity objects
 within a result set.
 
-In addition to making serialization easy, result sets are a 'Collection' object and
-support the same methods that :doc:`collection objects </core-libraries/collections>`
-do. For example, you can extract a list of unique tags on a collection of
-articles by running::
+Result sets are a 'Collection' object and support the same methods that
+:doc:`collection objects </core-libraries/collections>` do. For example, you can
+extract a list of unique tags on a collection of articles by running::
 
     // In a controller or table method.
     $query = $articles->find()->contain(['Tags']);

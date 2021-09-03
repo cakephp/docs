@@ -386,8 +386,8 @@ You can also access the stream object for the response and use its methods::
 Reading JSON and XML Response Bodies
 ------------------------------------
 
-Since JSON and XML responses are commonly used, response objects provide easy to
-use accessors to read decoded data. JSON data is decoded into an array, while
+Since JSON and XML responses are commonly used, response objects provide a way
+to use accessors to read decoded data. JSON data is decoded into an array, while
 XML data is decoded into a ``SimpleXMLElement`` tree::
 
     // Get some XML
