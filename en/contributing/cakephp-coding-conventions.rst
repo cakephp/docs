@@ -271,7 +271,7 @@ Try to avoid unnecessary nesting by bailing early::
         ...
     }
 
-This helps to keep the code flow more linear improving readability.
+This helps to keep the logic sequential which improves readability.
 
 Typehinting
 -----------
@@ -574,7 +574,7 @@ underscore character, for example::
 Careful when using empty()/isset()
 ==================================
 
-While ``empty()`` can seem like the correct function to use, it can mask errors
+While ``empty()`` often seems correct to use, it can mask errors
 and cause unintended effects when ``'0'`` and ``0`` are given. When variables or
 properties are already defined, the usage of ``empty()`` is not recommended.
 When working with variables, it is better to rely on type-coercion to boolean

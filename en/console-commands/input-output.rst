@@ -189,7 +189,7 @@ Creating Output
 .. php:method:out($message, $newlines, $level)
 .. php:method:err($message, $newlines)
 
-Writing to ``stdout`` and ``stderr`` is another routine operation in CakePHP::
+Writing to ``stdout`` and ``stderr`` is another common operation in CakePHP::
 
     // Write to stdout
     $io->out('Normal message');
