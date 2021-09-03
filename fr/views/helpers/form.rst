@@ -2501,17 +2501,37 @@ vouliez construire un widget Autocomplete, vous pourriez le faire comme ceci::
     namespace App\View\Widget;
 
     use Cake\View\Form\ContextInterface;
+    use Cake\View\StringTemplate;
     use Cake\View\Widget\WidgetInterface;
 
     class AutocompleteWidget implements WidgetInterface
     {
+
+        /**
+         * StringTemplate instance.
+         *
+         * @var \Cake\View\StringTemplate
+         */
         protected $_templates;
 
-        public function __construct($templates)
+        /**
+         * Constructor.
+         *
+         * @param \Cake\View\StringTemplate $templates Liste des templates.
+         */
+        public function __construct(StringTemplate $templates)
         {
             $this->_templates = $templates;
         }
 
+        /**
+         * Méthode qui fait le rendu du widget.
+         *
+         * @param array $data Les données à utiliser pour construire l'input.
+         * @param \Cake\View\Form\ContextInterface $context Le contexte courant du formulaire.
+         * 
+         * @return string
+         */
         public function render(array $data, ContextInterface $context): string
         {
             $data += [
