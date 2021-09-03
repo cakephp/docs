@@ -332,7 +332,15 @@ float
     option can be used to define the precision used.
 decimal
     Maps to the ``DECIMAL`` type. Supports the ``length`` and  ``precision``
-    options.
+    options. Values for decimal type ares be represented as strings (not as float
+    as some might expect). This is because decimal types are used to represent
+    exact numeric values in databases and using float type for them in PHP can
+    potentially lead to precision loss.
+
+    If you want the values to be `float` in your PHP code then consider using
+    `FLOAT` or `DOUBLE` type columns in your database. Also, depending on your use
+    case you can explicitly map your decimal columns to `float` type in your table
+    schema.
 boolean
     Maps to ``BOOLEAN`` except in MySQL, where ``TINYINT(1)`` is used to represent
     booleans. ``BIT(1)`` is not yet supported at this moment.
