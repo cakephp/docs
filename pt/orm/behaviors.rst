@@ -205,7 +205,7 @@ implementar um método de 'finder'(busca) para que possamos obter artigos por
 seus slugs. Em métodos de 'finder'(busca) de behaviors, use as mesmas convenções
 que :ref:`custom-find-methods` usa. Nosso método ``find('slug')`` pareceria com::
 
-    public function findSlug(Query $query, array $options)
+    protected function findSlug(Query $query, array $options)
     {
         return $query->where(['slug' => $options['slug']]);
     }

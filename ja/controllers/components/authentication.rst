@@ -189,7 +189,7 @@ SSL 暗号化しないアプリケーションにもふさわしいものです�
 ``username`` と ``password`` のようにユーザーを認証する必要があるフィールドを、選択することを
 保証する必要があります。 ::
 
-    public function findAuth(\Cake\ORM\Query $query, array $options)
+    protected function findAuth(\Cake\ORM\Query $query, array $options)
     {
         $query
             ->select(['id', 'username', 'password'])

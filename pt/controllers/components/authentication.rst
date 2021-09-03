@@ -186,7 +186,7 @@ No exemplo mostrado abaixo, a consulta é modificada para buscar apenas os campo
 obrigatórios e adicionar uma condição. Você deve garantir que você selecione os
 campos necessários para autenticar um usuário, como ``username`` e ``password``::
 
-    public function findAuth(\Cake\ORM\Query $query, array $options)
+    protected function findAuth(\Cake\ORM\Query $query, array $options)
     {
         $query
             ->select(['id', 'username', 'password'])

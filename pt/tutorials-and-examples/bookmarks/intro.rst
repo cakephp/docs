@@ -292,7 +292,7 @@ visitar a URL ``/bookmarks/tagged`` agora, você veria um erro sobre o
 método ``findTagged`` não estar implementado ainda, então vamos fazer isso. Em
 **src/Model/Table/BookmarksTable.php** adicione o seguinte::
 
-    public function findTagged(Query $query, array $options)
+    protected function findTagged(Query $query, array $options)
     {
         $bookmarks = $this->find()
             ->select(['id', 'url', 'title', 'description']);

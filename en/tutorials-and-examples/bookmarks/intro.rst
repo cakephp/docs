@@ -395,10 +395,10 @@ method has not been implemented yet, so let's do that. In
      * to find('tagged') in our controller action
      * @param \Cake\ORM\Query $query
      * @param array $options
-     * @return \Cake\ORM\Query 
+     * @return \Cake\ORM\Query
      *  -Modified query object.
      */
-    public function findTagged(Query $query, array $options)
+    protected function findTagged(Query $query, array $options)
     {
         if (empty($options['tags'])) {
             $bookmarks = $query

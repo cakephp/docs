@@ -5,28 +5,28 @@ Pagination
 
 .. php:class:: PaginatorComponent
 
-Um dos principais obstáculos da criação de aplicativos Web flexíveis e fáceis de usar 
-é o design de uma interface de usuário intuitiva. Muitos aplicativos tendem a crescer 
-em tamanho e complexidade rapidamente, e designers e programadores acham que não conseguem 
-lidar com a exibição de centenas ou milhares de registros. A refatoração leva tempo, e o 
+Um dos principais obstáculos da criação de aplicativos Web flexíveis e fáceis de usar
+é o design de uma interface de usuário intuitiva. Muitos aplicativos tendem a crescer
+em tamanho e complexidade rapidamente, e designers e programadores acham que não conseguem
+lidar com a exibição de centenas ou milhares de registros. A refatoração leva tempo, e o
 desempenho e a satisfação do usuário podem sofrer.
 
-A exibição de um número razoável de registros por página sempre foi uma parte crítica 
-de todos os aplicativos e usada para causar muitas dores de cabeça aos desenvolvedores. 
-O CakePHP facilita a carga para o desenvolvedor, fornecendo uma maneira rápida e fácil 
+A exibição de um número razoável de registros por página sempre foi uma parte crítica
+de todos os aplicativos e usada para causar muitas dores de cabeça aos desenvolvedores.
+O CakePHP facilita a carga para o desenvolvedor, fornecendo uma maneira rápida e fácil
 de paginar os dados.
 
-A paginação no CakePHP é oferecida por um componente no controlador, para facilitar a 
-criação de consultas paginadas. A View :php:class:`~Cake\\View\\Helper\\PaginatorHelper` 
+A paginação no CakePHP é oferecida por um componente no controlador, para facilitar a
+criação de consultas paginadas. A View :php:class:`~Cake\\View\\Helper\\PaginatorHelper`
 é usada para simplificar a geração de links e botões de paginação.
 
 Usando Controller::paginate()
 =============================
 
-No controlador, começamos definindo as condições de consulta padrão que a paginação usará 
-na variável do controlador ``$paginate``. Essas condições servem como base para suas 
-consultas de paginação. Eles são aumentados pelos parâmetros ``sort``, ``direction``, 
-``limit`` e ``page`` transmitidos a partir da URL. É importante notar que a chave ``order`` 
+No controlador, começamos definindo as condições de consulta padrão que a paginação usará
+na variável do controlador ``$paginate``. Essas condições servem como base para suas
+consultas de paginação. Eles são aumentados pelos parâmetros ``sort``, ``direction``,
+``limit`` e ``page`` transmitidos a partir da URL. É importante notar que a chave ``order``
 deve ser definida em uma estrutura de matriz como abaixo::
 
     class ArticlesController extends AppController
@@ -45,7 +45,7 @@ deve ser definida em uma estrutura de matriz como abaixo::
         }
     }
 
-Você também pode incluir qualquer uma das opções suportadas 
+Você também pode incluir qualquer uma das opções suportadas
 por :php:meth:`~Cake\\ORM\\Table::find()`, como ``fields``::
 
     class ArticlesController extends AppController
@@ -65,9 +65,9 @@ por :php:meth:`~Cake\\ORM\\Table::find()`, como ``fields``::
         }
     }
 
-Enquanto você pode passar a maioria das opções de consulta da propriedade 
-paginate, geralmente é mais fácil e simples agrupar suas opções de paginação 
-em :ref:`custom-find-methods`. Você pode definir o uso da paginação do 
+Enquanto você pode passar a maioria das opções de consulta da propriedade
+paginate, geralmente é mais fácil e simples agrupar suas opções de paginação
+em :ref:`custom-find-methods`. Você pode definir o uso da paginação do
 localizador, definindo a opção ``finder``::
 
     class ArticlesController extends AppController
@@ -77,8 +77,8 @@ localizador, definindo a opção ``finder``::
         ];
     }
 
-Como os métodos localizadores personalizados também podem receber opções, é assim 
-que você passa as opções para um método find personalizado dentro da propriedade 
+Como os métodos localizadores personalizados também podem receber opções, é assim
+que você passa as opções para um método find personalizado dentro da propriedade
 paginate::
 
     class ArticlesController extends AppController
@@ -91,8 +91,8 @@ paginate::
             $customFinderOptions = [
                 'tags' => $tags
             ];
-            // o método find personalizado é chamado findTagged dentro de ArticlesTable.php, 
-            // e deve ter se parecer com: public function findTagged(Query $query, array $options) {
+            // o método find personalizado é chamado findTagged dentro de ArticlesTable.php,
+            // e deve ter se parecer com: protected function findTagged(Query $query, array $options) {
             // portanto, você usa tags como a chave
             $this->paginate = [
                 'finder' => [
@@ -104,8 +104,8 @@ paginate::
         }
     }
 
-Além de definir valores gerais de paginação, você pode definir mais de um 
-conjunto de padrões de paginação no controlador, basta nomear as chaves da 
+Além de definir valores gerais de paginação, você pode definir mais de um
+conjunto de padrões de paginação no controlador, basta nomear as chaves da
 matriz após o modelo que deseja configurar::
 
     class ArticlesController extends AppController
@@ -116,14 +116,14 @@ matriz após o modelo que deseja configurar::
         ];
     }
 
-Os valores das chaves ``Articles`` e ``Authors`` podem conter todas as propriedades 
+Os valores das chaves ``Articles`` e ``Authors`` podem conter todas as propriedades
 que um modelo/chave menos a matriz ``$paginate``.
 
-Depois de definida a propriedade ``$paginate``, podemos usar o método :php:meth:`~Cake\\Controller\\Controller::paginate()` 
-para criar os dados de paginação e adicionar o ``PaginatorHelper `` se ainda não foi adicionado. 
-O método paginado do controlador retornará o conjunto de resultados da consulta paginada e 
-definirá os metadados de paginação para a solicitação. Você pode acessar os metadados da 
-paginação em ``$this->request->getParam('paging')``. Um exemplo mais completo do uso de 
+Depois de definida a propriedade ``$paginate``, podemos usar o método :php:meth:`~Cake\\Controller\\Controller::paginate()`
+para criar os dados de paginação e adicionar o ``PaginatorHelper `` se ainda não foi adicionado.
+O método paginado do controlador retornará o conjunto de resultados da consulta paginada e
+definirá os metadados de paginação para a solicitação. Você pode acessar os metadados da
+paginação em ``$this->request->getParam('paging')``. Um exemplo mais completo do uso de
 ``paginate()`` seria::
 
     class ArticlesController extends AppController
@@ -143,7 +143,7 @@ um controlador. Você também pode passar a consulta resultante de um método fi
         $this->set('articles', $this->paginate($query));
      }
 
-Se você quiser paginar um modelo diferente, poderá fornecer uma consulta para ele, 
+Se você quiser paginar um modelo diferente, poderá fornecer uma consulta para ele,
 sendo o próprio objeto de tabela ou seu nome::
 
     // Usando a query.
@@ -158,7 +158,7 @@ sendo o próprio objeto de tabela ou seu nome::
 Usando o Paginator Diretamente
 ==============================
 
-Se você precisar paginar os dados de outro componente, poderá usar o PaginatorComponent 
+Se você precisar paginar os dados de outro componente, poderá usar o PaginatorComponent
 diretamente. O PaginatorComponent possui uma API semelhante ao método do controlador::
 
     $articles = $this->Paginator->paginate($articleTable->find(), $config);
@@ -166,11 +166,11 @@ diretamente. O PaginatorComponent possui uma API semelhante ao método do contro
     // Ou
     $articles = $this->Paginator->paginate($articleTable, $config);
 
-O primeiro parâmetro deve ser o objeto de consulta de um objeto de localização na tabela 
-do qual você deseja paginar os resultados. Opcionalmente, você pode passar o objeto de 
-tabela e permitir que a consulta seja construída para você. O segundo parâmetro deve ser 
-a matriz de configurações a serem usadas para paginação. Essa matriz deve ter a mesma estrutura 
-que a propriedade ``$paginate`` em um controlador. Ao paginar um objeto ``Query``, a opção 
+O primeiro parâmetro deve ser o objeto de consulta de um objeto de localização na tabela
+do qual você deseja paginar os resultados. Opcionalmente, você pode passar o objeto de
+tabela e permitir que a consulta seja construída para você. O segundo parâmetro deve ser
+a matriz de configurações a serem usadas para paginação. Essa matriz deve ter a mesma estrutura
+que a propriedade ``$paginate`` em um controlador. Ao paginar um objeto ``Query``, a opção
 ``finder`` será ignorada. Supõe-se que você esteja passando a consulta que deseja paginar.
 
 .. _paginating-multiple-queries:
@@ -178,8 +178,8 @@ que a propriedade ``$paginate`` em um controlador. Ao paginar um objeto ``Query`
 Paginando Múltiplas Queries
 ===========================
 
-Você pode paginar vários modelos em uma única ação do controlador, usando a opção 
-``scope`` na propriedade ``$paginate`` do controlador e na chamada para o 
+Você pode paginar vários modelos em uma única ação do controlador, usando a opção
+``scope`` na propriedade ``$paginate`` do controlador e na chamada para o
 método ``paginate()``::
 
     // Propriedade Paginar
@@ -193,20 +193,20 @@ método ``paginate()``::
     $tags = $this->paginate($this->Tags, ['scope' => 'tag']);
     $this->set(compact('articles', 'tags'));
 
-A opção ``scope`` resultará na ``PaginatorComponent`` procurando nos parâmetros da 
-string de consulta com escopo definido. Por exemplo, o URL a seguir pode ser usado 
+A opção ``scope`` resultará na ``PaginatorComponent`` procurando nos parâmetros da
+string de consulta com escopo definido. Por exemplo, o URL a seguir pode ser usado
 para paginar tags e artigos ao mesmo tempo::
 
     /dashboard?article[page]=1&tag[page]=3
 
-Veja a seção `paginator-helper-multiple` para saber como gerar elementos HTML 
+Veja a seção `paginator-helper-multiple` para saber como gerar elementos HTML
 com escopo e URLs para paginação.
 
 Paginando o Mesmo Modelo Várias Vezes
 -------------------------------------
 
-Para paginar o mesmo modelo várias vezes em uma única ação do controlador, é 
-necessário definir um alias para o modelo. Consulte `table-registry-usage` 
+Para paginar o mesmo modelo várias vezes em uma única ação do controlador, é
+necessário definir um alias para o modelo. Consulte `table-registry-usage`
 para obter detalhes adicionais sobre como usar o registro da tabela::
 
     // Em um método do controlador
@@ -226,7 +226,7 @@ para obter detalhes adicionais sobre como usar o registro da tabela::
             ],
         ],
     ];
-    
+
     // Registre um objeto de tabela adicional para permitir a diferenciação no componente de paginação
     TableRegistry::getTableLocator()->setConfig('UnpublishedArticles', [
         'className' => 'App\Model\Table\ArticlesTable',
@@ -239,7 +239,7 @@ para obter detalhes adicionais sobre como usar o registro da tabela::
             'scope' => 'published_articles'
         ])->where(['published' => true])
     );
-    
+
     $unpublishedArticles = $this->paginate(
         TableRegistry::getTableLocator()->get('UnpublishedArticles')->find('all', [
             'scope' => 'unpublished_articles'
@@ -251,11 +251,11 @@ para obter detalhes adicionais sobre como usar o registro da tabela::
 Controlar Quais Campos Usados para Ordenamento
 ==============================================
 
-Por padrão, a classificação pode ser feita em qualquer coluna não virtual que uma 
-tabela tenha. Às vezes, isso é indesejável, pois permite que os usuários classifiquem 
-em colunas não indexadas que podem ser caras de solicitar. Você pode definir a lista de 
-permissões dos campos que podem ser classificados usando a opção ``sortableFields``. Essa 
-opção é necessária quando você deseja classificar os dados associados ou os campos computados 
+Por padrão, a classificação pode ser feita em qualquer coluna não virtual que uma
+tabela tenha. Às vezes, isso é indesejável, pois permite que os usuários classifiquem
+em colunas não indexadas que podem ser caras de solicitar. Você pode definir a lista de
+permissões dos campos que podem ser classificados usando a opção ``sortableFields``. Essa
+opção é necessária quando você deseja classificar os dados associados ou os campos computados
 que podem fazer parte da sua consulta de paginação::
 
     public $paginate = [
@@ -269,12 +269,12 @@ Quaisquer solicitações que tentem classificar campos que não estão na lista 
 Limitar o Número Máximo de Linhas por Página
 ============================================
 
-O número de resultados que são buscados por página é exposto ao usuário como o 
-parâmetro ``limit``. Geralmente, é indesejável permitir que os usuários busquem 
-todas as linhas em um conjunto paginado. A opção ``maxLimit`` afirma que ninguém 
-pode definir esse limite muito alto do lado de fora. Por padrão, o CakePHP limita 
-o número máximo de linhas que podem ser buscadas para 100. Se esse padrão não for 
-apropriado para a sua aplicação, você poderá ajustá-lo como parte das opções de paginação, 
+O número de resultados que são buscados por página é exposto ao usuário como o
+parâmetro ``limit``. Geralmente, é indesejável permitir que os usuários busquem
+todas as linhas em um conjunto paginado. A opção ``maxLimit`` afirma que ninguém
+pode definir esse limite muito alto do lado de fora. Por padrão, o CakePHP limita
+o número máximo de linhas que podem ser buscadas para 100. Se esse padrão não for
+apropriado para a sua aplicação, você poderá ajustá-lo como parte das opções de paginação,
 por exemplo, reduzindo-o para ``10``::
 
     public $paginate = [
@@ -282,13 +282,13 @@ por exemplo, reduzindo-o para ``10``::
         'maxLimit' => 10
     ];
 
-Se o parâmetro de limite da solicitação for maior que esse valor, 
+Se o parâmetro de limite da solicitação for maior que esse valor,
 ele será reduzido ao valor ``maxLimit``.
 
 Juntando Associações Adicionais
 ===============================
 
-Associações adicionais podem ser carregadas na tabela paginada usando o 
+Associações adicionais podem ser carregadas na tabela paginada usando o
 parâmetro ``contains``::
 
     public function index()
@@ -303,10 +303,10 @@ parâmetro ``contains``::
 Solicitações de Página Fora do Intervalo
 ========================================
 
-O PaginatorComponent lançará uma ``NotFoundException`` ao tentar acessar uma página 
+O PaginatorComponent lançará uma ``NotFoundException`` ao tentar acessar uma página
 inexistente, ou seja, o número da página solicitada é maior que a contagem total de páginas.
 
-Portanto, você pode permitir que a página de erro normal seja renderizada ou usar um 
+Portanto, você pode permitir que a página de erro normal seja renderizada ou usar um
 bloco try catch e executar a ação apropriada quando um ``NotFoundException`` for capturado::
 
     use Cake\Http\Exception\NotFoundException;
@@ -316,7 +316,7 @@ bloco try catch e executar a ação apropriada quando um ``NotFoundException`` f
         try {
             $this->paginate();
         } catch (NotFoundException $e) {
-            // Faça algo aqui como redirecionar para a primeira ou a última página. 
+            // Faça algo aqui como redirecionar para a primeira ou a última página.
             // $this->request->getParam('paging') fornecerá as informações necessárias.
         }
     }
@@ -324,7 +324,7 @@ bloco try catch e executar a ação apropriada quando um ``NotFoundException`` f
 Paginação na View
 =================
 
-Verifique a documentação :php:class:`~Cake\\View\\Helper\\PaginatorHelper` 
+Verifique a documentação :php:class:`~Cake\\View\\Helper\\PaginatorHelper`
 para saber como criar links para navegação de paginação.
 
 .. meta::

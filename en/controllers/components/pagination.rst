@@ -100,7 +100,7 @@ as values for the finder::
             // Our custom finder is called findTagged inside ArticlesTable.php
             // which is why we're using `tagged` as the key.
             // Our finder should look like:
-            // public function findTagged(Query $query, array $options) {
+            // protected function findTagged(Query $query, array $options) {
             $settings = [
                 'finder' => [
                     'tagged' => $customFinderOptions

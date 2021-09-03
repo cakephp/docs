@@ -245,7 +245,7 @@ vous indiquant que la méthode ``findTagged()`` n'existe pas. Dans
     // L'argument $query est une instance du Query builder.
     // Le tableau $options va contenir l'option 'tags' que nous avons passé
     // à find('tagged') dans notre action de controller.
-    public function findTagged(Query $query, array $options)
+    protected function findTagged(Query $query, array $options)
     {
         $columns = [
             'Articles.id', 'Articles.user_id', 'Articles.title',

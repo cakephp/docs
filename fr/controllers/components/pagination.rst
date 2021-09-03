@@ -102,7 +102,7 @@ personnalisée dans la propriété paginate::
             // la méthode de finder personnalisée est appelée findTagged dans
             // ArticlesTable.php
             // elle devrait ressembler à ceci:
-            // public function findTagged(Query $query, array $options) {
+            // protected function findTagged(Query $query, array $options) {
             // ainsi vous utilisez tagged en clé
             $this->paginate = [
                 'finder' => [

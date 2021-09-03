@@ -355,7 +355,7 @@ fineder メソッドは、あなたが作成したい finder の名前が ``Foo`
     class ArticlesTable extends Table
     {
 
-        public function findOwnedBy(Query $query, array $options)
+        protected function findOwnedBy(Query $query, array $options)
         {
             $user = $options['user'];
             return $query->where(['author_id' => $user->id]);
@@ -1179,17 +1179,17 @@ reducer が呼ばれるごとに、reducer はユーザーごとのフォロワ�
 これは :ref:`custom-find-methods` セクションで説明しているように、
 カスタム Finder メソッドを構築するのに非常に便利です。 ::
 
-    public function findPublished(Query $query, array $options)
+    protected function findPublished(Query $query, array $options)
     {
         return $query->where(['published' => true]);
     }
 
-    public function findRecent(Query $query, array $options)
+    protected function findRecent(Query $query, array $options)
     {
         return $query->where(['created >=' => new DateTime('1 day ago')]);
     }
 
-    public function findCommonWords(Query $query, array $options)
+    protected function findCommonWords(Query $query, array $options)
     {
         // 前のセクションで説明した共通の単語の件と同じもの
         $mapper = ...;

@@ -158,13 +158,13 @@ the baked comments removed) should look like::
     <?php
     use Cake\Routing\Route\DashedRoute;
     use Cake\Routing\RouteBuilder;
-    
+
     $routes->setRouteClass(DashedRoute::class);
-    
+
     $routes->scope('/', function (RouteBuilder $builder) {
         $builder->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
         $builder->connect('/pages/*', ['controller' => 'Pages', 'action' => 'display']);
-    
+
         // Add this
         // New route we're adding for our tagged action.
         // The trailing `*` tells CakePHP that this action has
@@ -172,7 +172,7 @@ the baked comments removed) should look like::
         $builder->scope('/articles', function (RouteBuilder $builder) {
             $builder->connect('/tagged/*', ['controller' => 'Articles', 'action' => 'tags']);
         });
-    
+
         $builder->fallbacks();
     });
 
@@ -240,7 +240,7 @@ method has not been implemented yet, so let's do that. In
     // The $query argument is a query builder instance.
     // The $options array will contain the 'tags' option we passed
     // to find('tagged') in our controller action.
-    public function findTagged(Query $query, array $options)
+    protected function findTagged(Query $query, array $options)
     {
         $columns = [
             'Articles.id', 'Articles.user_id', 'Articles.title',
@@ -279,7 +279,7 @@ Creating the View
 
 Now if you visit the **/articles/tagged** URL again, CakePHP will show a new error
 letting you know that you have not made a view file. Next, let's build the
-view file for our ``tags()`` action:: 
+view file for our ``tags()`` action::
 
     <!-- In templates/Articles/tags.php -->
     <h1>

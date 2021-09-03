@@ -393,7 +393,7 @@ des articles publiés, nous ferions ce qui suit::
     class ArticlesTable extends Table
     {
 
-        public function findPublished(Query $query, array $options)
+        protected function findPublished(Query $query, array $options)
         {
             $query->where([
                 'Articles.published' => true,
@@ -1322,17 +1322,17 @@ Ceci vous permet de continuer à chainer les méthodes et les filtres
 C'est particulièrement utile pour construire des méthodes finder personnalisées
  comme décrit dans la section :ref:`custom-find-methods`::
 
-    public function findPublished(Query $query, array $options)
+    protected function findPublished(Query $query, array $options)
     {
         return $query->where(['published' => true]);
     }
 
-    public function findRecent(Query $query, array $options)
+    protected function findRecent(Query $query, array $options)
     {
         return $query->where(['created >=' => new DateTime('1 day ago')]);
     }
 
-    public function findCommonWords(Query $query, array $options)
+    protected function findCommonWords(Query $query, array $options)
     {
         // Same as in the common words example in the previous section
         $mapper = ...;

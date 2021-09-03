@@ -96,7 +96,7 @@ CakePHP におけるページネーションは、コントローラーにおけ
 
             // カスタム Finder メソッドは、ArticlesTable.php の中で "findTagged" と呼ばれる
             // 以下のような構文となっている
-            // public function findTagged(Query $query, array $options) {
+            // protected function findTagged(Query $query, array $options) {
             // そのため、taggedをキーとして使用する
             $this->paginate = [
                 'finder' => [

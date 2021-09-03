@@ -379,7 +379,7 @@ Dans **src/Model/Table/BookmarksTable.php** ajoutez ce qui suit::
     // L'argument $query est une instance de \Cake\ORM\Query.
     // Le tableau $options contiendra les tags que nous avons passé à find('tagged')
     // dans l'action de notre Controller
-    public function findTagged(Query $query, array $options)
+    protected function findTagged(Query $query, array $options)
     {
         $bookmarks = $this->find()
             ->select(['id', 'url', 'title', 'description']);

@@ -320,7 +320,7 @@ En **src/Model/Table/BookmarksTable.php** añade lo siguiente::
     // El argumento $query es una instancia de query.
     // El array $options contendrá las opciones de 'tags' que pasemos
     // para encontrar'tagged') en nuestra acción del controlador.
-    public function findTagged(Query $query, array $options)
+    protected function findTagged(Query $query, array $options)
     {
         $bookmarks = $this->find()
             ->select(['id', 'url', 'title', 'description']);

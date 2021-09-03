@@ -705,7 +705,7 @@ modified のタイムスタンプに今日の日付を反映させたいので�
 
     class ArticlesTable extends Table
     {
-        public function findPublished(Query $query, array $options): Query
+        protected function findPublished(Query $query, array $options): Query
         {
             $query->where([
                 $this->alias() . '.published' => 1

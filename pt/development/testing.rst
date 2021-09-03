@@ -679,7 +679,7 @@ Digamos que já temos nossa classe de tabela de artigos definida em
 
     class ArticlesTable extends Table
     {
-        public function findPublished(Query $query, array $options)
+        protected function findPublished(Query $query, array $options)
         {
             $query->where([
                 $this->alias() . '.published' => 1

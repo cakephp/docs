@@ -217,7 +217,7 @@ les champs et ajouter une condition. Vous devez vous assurer que vous avez
 fait un select sur les champs pour lesquels vous souhaitez authentifier un
 utilisateur, par exemple ``username`` et ``password``::
 
-    public function findAuth(\Cake\ORM\Query $query, array $options)
+    protected function findAuth(\Cake\ORM\Query $query, array $options)
     {
         $query
             ->select(['id', 'username', 'password'])

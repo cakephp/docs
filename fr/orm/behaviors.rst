@@ -209,7 +209,7 @@ les articles par leur slug. Les méthodes find de behavior utilisent les mêmes
 conventions que les :ref:`custom-find-methods`. Notre méthode ``find('slug')``
 ressemblerait à ceci::
 
-    public function findSlug(Query $query, array $options)
+    protected function findSlug(Query $query, array $options)
     {
         return $query->where(['slug' => $options['slug']]);
     }

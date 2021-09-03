@@ -187,7 +187,7 @@ slug 値を持つ記事を保存できるようになったので、slug で記�
 ビヘイビアーファインダーメソッドは、 :ref:`custom-find-methods` と同じ規約を使用します。
 ``find( 'slug')`` メソッドは以下のようになります。 ::
 
-    public function findSlug(Query $query, array $options)
+    protected function findSlug(Query $query, array $options)
     {
         return $query->where(['slug' => $options['slug']]);
     }

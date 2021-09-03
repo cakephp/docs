@@ -337,7 +337,7 @@ CakePHP では、コントローラーのアクションをスリムに保ち、
     // $query 引数は、クエリービルダーのインスタンスです。
     // $options 配列には、コントローラーのアクション中で find('tagged') に渡した
     // 'tag' オプションが含まれます。
-    public function findTagged(Query $query, array $options)
+    protected function findTagged(Query $query, array $options)
     {
         $bookmarks = $this->find()
             ->select(['id', 'url', 'title', 'description']);

@@ -806,7 +806,7 @@ Let's say we already have our Articles Table class defined in
 
     class ArticlesTable extends Table
     {
-        public function findPublished(Query $query, array $options): Query
+        protected function findPublished(Query $query, array $options): Query
         {
             $query->where([
                 $this->alias() . '.published' => 1
