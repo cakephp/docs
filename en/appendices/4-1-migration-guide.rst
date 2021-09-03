@@ -172,7 +172,7 @@ Database
 * ``AggregateExpression`` was added to represent aggregate SQL functions. ``FunctionsBuilder::aggregate()``
   can be used to wrap new aggregate SQL functions.
 * Window function support was added for any aggregate expression. ``AggregateExpression`` wraps the window
-  expression making it easy to extend any instance with call chaining.
+  expression for call chaining.
 * Aggregate functions now support ``FILTER (WHERE ...)`` clauses.
 * Postgres and SQLServer now support ``HAVING`` conditions on aggregate
   functions with aliases.

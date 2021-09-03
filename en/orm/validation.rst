@@ -153,7 +153,7 @@ of the associations to be converted::
 Combining Validators
 ====================
 
-Because of how validator objects are built, it is easy to break their
+Because of how validator objects are built, you can decompose their
 construction process into multiple reusable steps::
 
     // UsersTable.php
@@ -580,8 +580,8 @@ those rules into re-usable classes::
 
     $rules->add(new CustomRule(...), 'ruleName');
 
-By creating custom rule classes you can keep your code DRY and make your domain
-rules easy to test.
+By creating custom rule classes you can keep your code DRY and tests your domain
+rules in isolation.
 
 Disabling Rules
 ---------------

@@ -526,9 +526,9 @@ You can create controls for associated models, or arbitrary models by passing in
 
 Any dots in your field names will be converted into nested request data. For
 example, if you created a field with a name ``0.comments.body`` you would get
-a name attribute that looks like ``0[comments][body]``. This convention makes it
-easy to save data with the ORM. Details for the various association types can
-be found in the :ref:`associated-form-inputs` section.
+a name attribute that looks like ``0[comments][body]``. This convention matches
+the conventions you use with the ORM. Details for the various association types
+can be found in the :ref:`associated-form-inputs` section.
 
 When creating datetime related controls, FormHelper will append a field-suffix.
 You may notice additional fields named ``year``, ``month``, ``day``, ``hour``,
@@ -2436,10 +2436,9 @@ a multiple select input for belongs to many associations::
 Adding Custom Widgets
 =====================
 
-CakePHP makes it easy to add custom control widgets in your application, and use
-them like any other control type. All of the core control types are implemented as
-widgets, which means you can override any core widget with your own
-implementation as well.
+You can add custom control widgets in CakePHP, and use them like any other
+control type. All of the core control types are implemented as widgets, which
+means you can override any core widget with your own implementation as well.
 
 Building a Widget Class
 -----------------------

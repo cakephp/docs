@@ -425,9 +425,9 @@ implement the following methods:
 * ``toStatement``: Casts given value to its Statement equivalent.
 * ``marshal``: Marshals flat data into PHP objects.
 
-An easy way to fulfill the basic interface is to extend
-:php:class:`Cake\\Database\\Type`. For example if we wanted to add a JSON type,
-we could make the following type class::
+To fulfill the basic interface, extend :php:class:`Cake\\Database\\Type`.
+For example if we wanted to add a JSON type, we could make the following type
+class::
 
     // in src/Database/Type/JsonType.php
 

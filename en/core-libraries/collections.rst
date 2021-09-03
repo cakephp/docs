@@ -324,7 +324,7 @@ Filtering
 
 .. php:method:: filter($callback)
 
-Collections make it easy to filter and create new collections based on
+Collections allow you to filter and create new collections based on
 the result of callback functions. You can use ``filter()`` to create a new
 collection of elements matching a criteria callback::
 
@@ -680,8 +680,8 @@ Working with Tree Data
 
 Not all data is meant to be represented in a linear way. Collections make it
 easier to construct and flatten hierarchical or nested structures. Creating
-a nested structure where children are grouped by a parent identifier property is
-easy with the ``nest()`` method.
+a nested structure where children are grouped by a parent identifier property
+can be done with the ``nest()`` method.
 
 Two parameters are required for this function. The first one is the property
 representing the item identifier. The second parameter is the name of the

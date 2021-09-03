@@ -295,8 +295,8 @@ moment, but let's just test that our shell's description is displayed in ``stdou
     }
 
 Our test passes! While this is very trivial example, it shows that creating an
-integration test case for console applications is quite easy. Let's continue by
-adding more logic to our command::
+integration test case for console applications can follow command line
+conventions. Let's continue by adding more logic to our command::
 
     namespace App\Command;
 
@@ -486,7 +486,7 @@ Assertion methods
 -----------------
 
 The ``Cake\TestSuite\ConsoleIntegrationTestTrait`` trait provides a number of
-assertion methods that make it easy to assert against console output::
+assertion methods that make help assert against console output::
 
     // assert that the shell exited as success
     $this->assertExitSuccess();

@@ -44,7 +44,7 @@ Provides support for message translation and localization for dates and numbers.
 `Cache <https://github.com/cakephp/cache>`_
 -------------------------------------------
 
-PSR-16 compliant easy to use caching library with support for multiple caching backends.
+PSR-16 compliant caching library with support for multiple caching backends.
 
 `Log <https://github.com/cakephp/log>`_
 ---------------------------------------

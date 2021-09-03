@@ -291,7 +291,7 @@ Read Through Caching
 
 .. php:staticmethod:: remember($key, $callable, $config = 'default')
 
-Cache makes it easy to do read-through caching. If the named cache key exists,
+Cache helps with read-through caching. If the named cache key exists,
 it will be returned. If the key does not exist, the callable will be invoked
 and the results stored in the cache at the provided key.
 
@@ -423,7 +423,7 @@ Using Cache to Store Counters
 Counters in your application are good candidates for storage in a cache.  As an
 example, a simple countdown for remaining 'slots' in a contest could be stored
 in Cache. The Cache class exposes atomic ways to increment/decrement counter
-values in an easy way. Atomic operations are important for these values as it
+values. Atomic operations are important for these values as it
 reduces the risk of contention, and ability for two users to simultaneously
 lower the value by one, resulting in an incorrect value.
 
