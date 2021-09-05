@@ -737,7 +737,7 @@ La commande bake suivante vous assistera pour créer vos factories::
     bin/cake bake fixture_factory -h
 
 Une fois vos factories
-`mises en place <https://github.com/vierge-noire/cakephp-fixture-factories/blob/master/docs/factories.md>`__,
+`mises en place <https://github.com/vierge-noire/cakephp-fixture-factories/blob/main/docs/factories.md>`__,
 vous voilà équipés pour créer vos fixtures de test à vitesse folle.
 
 Les intéractions non nécessaires avec la base de donnée ralentissent les tests, ainsi que votre application.
@@ -1529,7 +1529,7 @@ d'assertions afin de tester plus simplement les réponses. Quelques exemples::
 
     // Vérifie une partie de l'en-tête Location
     $this->assertRedirectContains('/articles/edit/');
-    
+
     // Vérifie que l'en-tête location ne contient pas...
     $this->assertRedirectNotContains('/articles/edit/');
 
@@ -1729,7 +1729,7 @@ pouvez inspecter le contenu de la vue rendue en configurant l'option
 ``return`` à 'view'. Alors qu'il est possible de tester le contenu de la vue
 en utilisant ControllerTestCase, un test d'intégration/vue plus robuste
 et maintenable peut être effectué en utilisant des outils comme
-`Selenium webdriver <http://seleniumhq.org>`_.
+`Selenium webdriver <https://www.selenium.dev/>`_.
 
 Tester les Components
 =====================

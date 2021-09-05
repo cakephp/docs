@@ -184,7 +184,7 @@ Now you can find all translations for a single entity::
 
     echo $article->translation('en')->title; // 'An Article';
 
-It is equally easy to save multiple translations at once::
+And save multiple translations at once::
 
     $article->translation('es')->title = 'Otro Título';
     $article->translation('fr')->title = 'Un autre Titre';

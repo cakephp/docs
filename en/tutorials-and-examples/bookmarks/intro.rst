@@ -33,7 +33,7 @@ Getting CakePHP
 The easiest way to install CakePHP is to use Composer.  Composer is a simple way
 of installing CakePHP from your terminal or command line prompt.  First, you'll
 need to download and install Composer if you haven't done so already. If you
-have cURL installed, it's as easy as running the following::
+have cURL installed run the following::
 
     curl -s https://getcomposer.org/installer | php
 

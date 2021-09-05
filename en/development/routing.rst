@@ -999,7 +999,7 @@ can::
 RESTful Routing
 ===============
 
-Router makes it easy to generate RESTful routes for your controllers. RESTful
+Router helps generate RESTful routes for your controllers. RESTful
 routes are helpful when you are creating API endpoints for your application.  If
 we wanted to allow REST access to a recipe controller, we'd do something like
 this::
@@ -1011,7 +1011,7 @@ this::
         $routes->resources('Recipes');
     });
 
-The first line sets up a number of default routes for easy REST
+The first line sets up a number of default routes for REST
 access where method specifies the desired result format (e.g. xml,
 json, rss). These routes are HTTP Request Method sensitive.
 
@@ -1538,7 +1538,7 @@ rework when URLs require more parameters::
 
     // Create the route just like before.
     $routes->get(
-        '/view/{id}',
+        '/view/{id}/{slug}',
         ['controller' => 'Articles', 'action' => 'view'],
         'articles:view'
     );

@@ -82,8 +82,10 @@ traduction des messages::
                     my_plugin.po
 
 Les dossiers de traduction peuvent être composées d'un code à deux ou trois lettres ISO
-de la langue ou du nom de la locale, par exemple ``fr_FR``, ``es_AR``,
+de la langue ou du nom de la locale ICU, par exemple ``fr_FR``, ``es_AR``,
 ``da_DK``, qui contient en même temps la langue et le pays où elle est parlée.
+
+La liste complète est disponible sur https://www.localeplanet.com/icu/.
 
 Un fichier de traduction pourrait ressembler à ceci:
 
@@ -730,6 +732,11 @@ Le ``LocaleSelectorFilter`` utilisera l'entête ``Accept-Language`` pour défini
 automatiquement la locale préférée de l'utilisateur. Vous pouvez utiliser
 l'option de liste de locale pour limiter les locales pouvant être utilisées
 automatiquement.
+
+Translate Content/Entities
+==========================
+
+Si vous voulez traduire du contenu ou des entities, vous pouvez consulter le :doc:`Behavior Translate </orm/behaviors/translate>`.
 
 .. meta::
     :title lang=fr: Internationalization & Localization

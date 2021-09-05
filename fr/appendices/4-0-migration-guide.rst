@@ -87,6 +87,8 @@ changements non rétro-compatibles ont été effectués:
 Cache
 -----
 
+* ``Cake\Cache\Cache::read()`` renvoie ``null`` au lieu de ``false`` si les
+  données n'existent pas.
 * ``Cake\Cache\CacheEngine::gc()`` et toutes les implémentations de cette méthode ont
   été supprimées. Cette méthode était interdite dans la plupart des pilotes de cache
   et n'était utilisée que pour la mise en cache de fichiers.
