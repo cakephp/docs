@@ -629,15 +629,15 @@ you define the ``$fixtures`` property in your model::
         protected $fixtures = ['app.Articles', 'app.Comments'];
     }
 
-As of 4.1.0 you can use the ``getFixtures()`` and ``addFixture()`` methods to
-define your fixture array using a fluent interface::
+As of 4.1.0 you can use ``getFixtures()`` to define your fixture list with
+a method::
 
     public function getFixtures(): array
     {
-        $this->addFixture('app.Articles')
-            ->addFixture('app.Comments');
-
-        return parent::getFixtures();
+        return [
+            'app.Articles',
+            'app.Comments',
+        ];
     }
 
 The above will load the Article and Comment fixtures from the application's
@@ -654,22 +654,6 @@ Fixture directory. You can also load fixtures from CakePHP core, or plugins::
 
 Using the ``core`` prefix will load fixtures from CakePHP, and using a plugin
 name as the prefix, will load the fixture from the named plugin.
-
-You can control when your fixtures are loaded by setting
-:php:attr:`Cake\\TestSuite\\TestCase::$autoFixtures` to ``false`` and later load
-them using :php:meth:`Cake\\TestSuite\\TestCase::loadFixtures()`::
-
-    class ArticlesTest extends TestCase
-    {
-        public $autoFixtures = false;
-
-        protected $fixtures = ['app.Articles', 'app.Comments'];
-
-        public function testMyFunction(): void
-        {
-            $this->loadFixtures('Articles', 'Comments');
-        }
-    }
 
 You can load fixtures in subdirectories. Using multiple directories can make it
 easier to organize your fixtures if you have a larger application. To load
