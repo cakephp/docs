@@ -1828,7 +1828,7 @@ pouvez inspecter le contenu de la vue rendue en configurant l'option
 ``return`` à 'view'. Alors qu'il est possible de tester le contenu de la vue
 en utilisant ControllerTestCase, un test d'intégration/vue plus robuste
 et maintenable peut être effectué en utilisant des outils comme
-`Selenium webdriver <http://seleniumhq.org>`_.
+`Selenium webdriver <https://www.selenium.dev/>`_.
 
 Tester les Components
 =====================
