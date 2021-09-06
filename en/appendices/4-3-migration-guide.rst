@@ -248,3 +248,7 @@ View
 - ``HtmlHelper::script()`` and ``HtmlHelper::css()`` now add the ``nonce``
   attribute to generated tags when the ``cspScriptNonce`` and ``cspStyleNonce``
   request attributes are present.
+- ``FormHelper::control()`` will now populate the ``aria-invalid``,
+  ``aria-required``, and ``aria-describedby``  attributes based on
+  metadata from the validator. The ``aria-label`` attribute will be set if
+  you disable the automatic label element and provide a placeholder.
