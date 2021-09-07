@@ -447,7 +447,7 @@ Creating Test Database Schema
 
 You can generate test database schema either via CakePHP's migrations, loading
 a SQL dump file or using another external schema management tool. You should
-create your schema in your application's ``tests/bootstrap.php`` file. 
+create your schema in your application's ``tests/bootstrap.php`` file.
 
 If you use CakePHP's `migrations plugin </migrations>` to manage your
 application's schema, you can reuse those migrations to generate your test
@@ -478,7 +478,7 @@ To load a SQL dump file you can use the following::
     use Cake\TestSuite\Fixture\SchemaLoader;
 
     // Load one or more SQL files.
-    (new SchemaLoader())->loadFiles('path/to/schema.sql', 'test');
+    (new SchemaLoader())->loadSqlFiles('path/to/schema.sql', 'test');
 
 At the beginning of each test run ``SchemaLoader`` will drop all tables in the
 connection and rebuild tables based on the provided schema file.
