@@ -27,6 +27,12 @@ features::
 A new configuration option has been added to disable deprecations on a path by
 path basis. See :ref:`deprecation-warnings` for more information.
 
+Connection
+----------
+
+- ``Connection::supportsDynamicConstraints()`` was deprecated now that fixtures don't try to dynamically
+  drop and create constraints.
+
 Database
 --------
 
@@ -35,6 +41,8 @@ Database
   in other type classes are deprecated.
 - ``DriverInterface::supportsQuoting()`` and ``DriverInterface::supportSavepoints()`` are now deprecated
   in favor of ``DriverInterface::supports()`` which accepts feature constants defined in ``DriverInterface``.
+- ``DriverInterface::supportsDynamicConstraints()`` was deprecated now that fixtures don't try to dynamically
+  drop and create constraints.
 
 I18n
 ----
