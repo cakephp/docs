@@ -82,6 +82,11 @@ Routing
 - Colon prefixed route placeholders like ``:controller`` are deprecated. Use
   braced placeholders like ``{controller}`` instead.
 
+View
+----
+
+- FormHelper methods' non-associative options (e.g. ``['disabled']``) are now deprecated.
+
 TestSuite
 ---------
 
