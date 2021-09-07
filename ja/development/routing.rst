@@ -939,7 +939,7 @@ SEO に親和性があるルーティング
     $routes->scope('/cms', function ($routes) {
         // CSRF & cookies ミドルウェアを有効化
         $routes->applyMiddleware('csrf', 'cookies');
-        $routes->get('/articles/:action/*', ['controller' => 'Articles'])
+        $routes->get('/articles/:action/*', ['controller' => 'Articles']);
     });
 
 ネストされたスコープがある状況では、内部スコープは、

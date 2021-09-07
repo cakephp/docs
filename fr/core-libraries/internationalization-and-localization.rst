@@ -82,8 +82,10 @@ traduction des messages::
                     my_plugin.po
 
 Les dossiers de traduction peuvent être composées d'un code à deux ou trois lettres ISO
-de la langue ou du nom de la locale, par exemple ``fr_FR``, ``es_AR``,
+de la langue ou du nom de la locale ICU, par exemple ``fr_FR``, ``es_AR``,
 ``da_DK``, qui contient en même temps la langue et le pays où elle est parlée.
+
+La liste complète est disponible sur https://www.localeplanet.com/icu/.
 
 Un fichier de traduction pourrait ressembler à ceci:
 
@@ -95,13 +97,20 @@ Un fichier de traduction pourrait ressembler à ceci:
      msgid "I'm {0,number} years old"
      msgstr "J'ai {0,number} ans"
 
+.. note::
+    Les traductions sont mises en cache - Assurez-vous de toujours vider le cache après
+    avoir apporté des modifications aux traductions! Vous pouvez soit utiliser
+    :doc:`l'outil cache </console-commands/cache>` et exécuter par exemple
+    ``bin/cake cache clear _cake_core_``, soit vider manuellement le dossier
+    ``tmp/cache/persistent`` (si vous utilisez une mise en cache basée sur des fichiers).
+
 Extraire les Fichiers Pot avec le Shell I18n
 --------------------------------------------
 
 Pour créer les fichiers pot à partir de `__()` et des autres types de messages
 internationalisés qui se trouvent dans votre code, vous pouvez utiliser le shell
 i18n. Vous pouvez consulter le
-:doc:`chapitre suivant </console-and-shells/i18n-shell>` pour en savoir plus.
+:doc:`chapitre suivant </console-commands/i18n>` pour en savoir plus.
 
 Définir la Locale par Défaut
 ----------------------------
@@ -448,7 +457,6 @@ depuis un autre endroit::
 
     // Charge les messages depuis src/Locale/folder/sub_folder/filename.po
 
-    // Avant 3.5, utilisez translator()
     I18n::setTranslator(
         'animals',
         new Loader('filename', 'folder/sub_folder', 'po'),
@@ -626,7 +634,7 @@ Parser les Données Datetime Localisées
 
 Quand vous acceptez les données localisées, c'est sympa d'accepter les
 informations de type datetime dans un format localisé pour l'utilisateur. Dans
-un controller, ou :doc:`/development/dispatch-filters`, vous pouvez configurer
+un controller, ou :doc:`/controllers/middleware`, vous pouvez configurer
 les types Date, Time, et DateTime pour parser les formats localisés::
 
     use Cake\Database\TypeFactory;
@@ -642,6 +650,60 @@ les types Date, Time, et DateTime pour parser les formats localisés::
         ->setLocaleFormat([IntlDateFormatter::SHORT, -1]);
 
 Le parsing du format par défaut est le même que le format de chaîne par défaut.
+
+.. _converting-request-data-from-user-timezone:
+
+Convertir des Données de Requêtes du Fuseau Horaire de l'Utilisateur
+--------------------------------------------------------------------
+
+Quand vous gérez des données d'utilisateurs situés dans différents fuseaux
+horaires, vous avez besoin de convertir ces datetimes de la requête vers le
+fuseau horaire de votre application. Vous pouvez utiliser ``setUserTimezone()``
+depuis un controller ou :doc:`/controllers/middleware` pour faire cela plus
+simplement::
+
+    // Définir le fuseau horaire de l'utilisateur
+    TypeFactory::build('datetime')->setUserTimezone($user->timezone);
+
+Une fois que c'est fait, quand votre application crée ou met à jour des entities
+à partir de la requête, l'ORM va convertir automatiquement les valeurs datetime
+du fuseau de l'utilisateur vers le fuseau de votre application. Cela garantit
+que l'application travaillera toujours dans le fuseau horaire défini dans
+``App.defaultTimezone``.
+
+Si votre application gère des données datetime dans de nombreuses actions, vous
+pouvez utiliser un middleware pour définir à la fois la conversion du décalage
+horaire et le format localisé::
+
+    namespace App\Middleware;
+
+    use Cake\Database\TypeFactory;
+    use Psr\Http\Message\ResponseInterface;
+    use Psr\Http\Message\ServerRequestInterface;
+    use Psr\Http\Server\MiddlewareInterface;
+    use Psr\Http\Server\RequestHandlerInterface;
+
+    class DatetimeMiddleare implements MiddlewareInterface
+    {
+        public function process(
+            ServerRequestInterface $request,
+            RequestHandlerInterface $handler
+        ): ResponseInterface {
+            // Obtenir l'utilisateur depuis la requête.
+            // Cet exemple suppose que votre entity utilisteur a un attribut timezone.
+            $user = $request->getAttribute('identity');
+            if ($user) {
+                TypeFactory::build('datetime')
+                    ->useLocaleParser()
+                    ->setUserTimezone($user->timezone);
+            }
+
+            return $handler->handle($request);
+        }
+    }
+
+.. versionadded:: 4.3.0
+    La méthode ``setUserTimezone()`` a été ajoutée.
 
 Sélection Automatique de Locale Basée sur les Données de Requêtes
 =================================================================
@@ -670,6 +732,11 @@ Le ``LocaleSelectorFilter`` utilisera l'entête ``Accept-Language`` pour défini
 automatiquement la locale préférée de l'utilisateur. Vous pouvez utiliser
 l'option de liste de locale pour limiter les locales pouvant être utilisées
 automatiquement.
+
+Translate Content/Entities
+==========================
+
+Si vous voulez traduire du contenu ou des entities, vous pouvez consulter le :doc:`Behavior Translate </orm/behaviors/translate>`.
 
 .. meta::
     :title lang=fr: Internationalization & Localization

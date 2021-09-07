@@ -204,9 +204,8 @@ driver
     courts sont Mysql, Sqlite, Postgres, et Sqlserver.
 persistent
     S'il faut utiliser ou non une connexion persistante à la base de données.
-    Cette option n'est pas supportée par SqlServer. A partir de CakePHP 3.4.13,
-    une exception est lancée si vous essayez de définir ``persistent`` à ``true``
-    sur SqlServer.
+    Cette option n'est pas supportée par SqlServer. Une exception est lancée si
+    vous essayez de définir ``persistent`` à ``true`` sur SqlServer.
 host
     Le nom d'hôte du serveur de base de données (ou une adresse IP).
 username
@@ -334,7 +333,7 @@ la création de connexions.
 Types de Données
 ================
 
-.. php:class:: Type
+.. php:class:: TypeFactory
 
 Puisque tous les fournisseurs de base de données n'intègrent pas la même
 définition des types de données, ou les mêmes noms pour des types de données
@@ -388,8 +387,7 @@ timestamp
 time
     Correspond au type TIME dans toutes les bases de données.
 json
-    Correspond au type JSON s'il est disponible, sinon il correspond à TEXT. Le
-    type 'json' a été ajouté dans la version 3.3.0.
+    Correspond au type JSON s'il est disponible, sinon il correspond à TEXT.
 
 Ces types sont utilisés à la fois pour les fonctionnalités de reflection de
 schema fournies par CakePHP, et pour les fonctionnalités de génération de schema
@@ -403,17 +401,58 @@ en 'datetime' va automatiquement convertir les paramètres d'input d'instances
 colonnes 'binary' vont accepter un fichier qui gère, et génère le fichier lors
 de la lecture des données.
 
-.. versionchanged:: 3.3.0
-    Le type ``json`` a été ajouté.
+.. _datetime-type:
 
-.. versionchanged:: 3.5.0
-    Les types ``smallinteger`` et ``tinyinteger`` ont été ajoutés.
+Type DateTime
+-------------
+
+.. php:class:: DateTimeType
+
+Correspond à un type de colonne natif ``DATETIME``. Dans PostgreSQL et SQL Server,
+il s'agit du type ``TIMESTAMP``. La valeur de retour par défaut de ce type de
+colonne est :php:class:`Cake\\I18n\\FrozenTime` qui étend la classe intégrée
+``DateTimeImmutable`` et `Chronos <https://github.com/cakephp/chronos>`_.
+
+.. php:method:: setTimezone(string|\DateTimeZone|null $timezone)
+
+Si le fuseau horaire de votre serveur de base de données ne correspond pas au fuseau
+horaire PHP de votre application, vous pouvez utiliser cette méthode pour spécifier
+le fuseau horaire de votre base de données. Ce fuseau horaire sera alors utilisé
+lors de la conversion des objets PHP en chaîne de date de la base de données et vice
+versa.
+
+.. php:class:: DateTimeFractionalType
+
+Peut être utilisé pour mettre en correspondance des colonnes de temps de date qui
+contiennent des microsecondes, telles que ``DATETIME(6)`` dans MySQL. Pour utiliser
+ce type, vous devez l'ajouter comme type mappé::
+
+    // dans config/bootstrap.php
+    use Cake\Database\TypeFactory;
+    use Cake\Database\Type\DateTimeFractionalType;
+
+    // Remplacer le type de date par défaut par un type plus précis.
+    TypeFactory::map('datetime', DateTimeFractionalType::class);
+
+.. php:class:: DateTimeTimezoneType
+
+Peut être utilisé pour mapper des colonnes date et heure qui contiennent des
+fuseaux horaires comme ``TIMESTAMPTZ`` dans PostgreSQL. Pour utiliser ce type, vous
+devez l'ajouter comme type mappé::
+
+    // dans config/bootstrap.php
+    use Cake\Database\TypeFactory;
+    use Cake\Database\Type\DateTimeTimezoneType;
+
+    // Remplacer le type de date par défaut par un type plus précis.
+    TypeFactory::map('datetime', DateTimeTimezoneType::class);
 
 .. _adding-custom-database-types:
 
 Ajouter des Types Personnalisés
 -------------------------------
 
+.. php:class:: TypeFactory
 .. php:staticmethod:: map($name, $class)
 
 Si vous avez besoin d'utiliser des types spécifiques qui ne sont pas
@@ -473,7 +512,12 @@ type JSON, nous pourrions faire la classe type suivante::
     }
 
 Par défaut, la méthode ``toStatement`` va traiter les valeurs en chaines qui
-vont fonctionner pour notre nouveau type. Une fois que nous avons créé notre
+vont fonctionner pour notre nouveau type.
+
+Connecter des Types Personnalisés à la Reflection et Génération de Schéma
+-------------------------------------------------------------------------
+
+Une fois que nous avons créé notre
 nouveau type, nous avons besoin de l'ajouter dans la correspondance de type.
 Pendant le bootstrap de notre application, nous devrions faire ce qui suit::
 
@@ -481,12 +525,19 @@ Pendant le bootstrap de notre application, nous devrions faire ce qui suit::
 
     TypeFactory::map('json', 'Cake\Database\Type\JsonType');
 
-Nous pouvons ensuite surcharger les données de schema reflected pour utiliser
-notre nouveau type, et la couche de base de données de CakePHP va
-automatiquement convertir nos données JSON lors de la création de requêtes.
-Vous pouvez utiliser les types personnalisés créés en faisant la correspondance
-des types dans la :ref:`méthode _initializeSchema() <saving-complex-types>` de
-votre Table::
+Nous avons ensuite deux façons d'utiliser notre type dans nos modèles.
+
+#. La première façon est d'écraser les données de schéma reflected pour utiliser
+   notre nouveau type.
+#. La deuxième est d'implémenter
+   ``Cake\Database\Type\ColumnSchemaAwareInterface`` et de définir le type de
+   colonne SQL et la logique de reflection.
+
+Écraser le schéma reflected avec notre type personnalisé va activer dans la
+couche de base de données de CakePHP la conversion automatique de nos données
+JSON lors de la création de requêtes.
+Dans votre :ref:`méthode _initializeSchema() <saving-complex-types>` de
+votre Table, ajoutez ceci::
 
     use Cake\Database\Schema\TableSchema;
 
@@ -501,6 +552,74 @@ votre Table::
         }
 
     }
+
+Le fait d'implémenter ``ColumnSchemaAwareInterface`` vous donne plus de contrôle
+sur les types personnalisés Cela évite de réécrire les définitions de schéma si
+votre type a une définition de colonne SQL ambiguë. Par exemple, notre type JSON
+pourrait être utilisé pour chaque colonne ``TEXT`` ayant un commentaire
+spécifique::
+
+    // dans src/Database/Type/JsonType.php
+
+    namespace App\Database\Type;
+
+    use Cake\Database\DriverInterface;
+    use Cake\Database\Type\BaseType;
+    use Cake\Database\Type\ColumnSchemaAwareInterface;
+    use Cake\Database\Schema\TableSchemaInterface;
+    use PDO;
+
+    class JsonType extends BaseType
+        implements ColumnSchemaAwareInterface
+    {
+        // les autres méthodes d'avant
+
+        /**
+         * Convertit la définition de schéma abstrait en un code SQL spécifique
+         * au pilote pouvant être utilisé dans une instruction CREATE TABLE.
+         *
+         * Returner null va faire retomber vers les types intégrés à CakePHP.
+         */
+        public function getColumnSql(
+            TableSchemaInterface $schema,
+            string $column,
+            DriverInterface $driver
+        ): ?string {
+            $data = $schema->getColumn($column);
+            $sql = $driver->quoteIdentifier($column);
+            $sql .= ' JSON';
+            if (isset($data['null') && $data['null'] === false) {
+                $sql .= ' NOT NULL';
+            }
+            return $sql;
+        }
+
+        /**
+         * Convertit les données de la colonnes renvoyées par la reflection du
+         * schéma en données abstraites de schéma.
+         *
+         * Returner null va faire retomber vers les types intégrés à CakePHP.
+         */
+        public function convertColumnDefinition(
+            array $definition,
+            DriverInterface $driver
+        ): ?array {
+            return [
+                'type' => $this->_name,
+                'length' => null,
+            ];
+        }
+
+La donnée ``$definition`` passée à ``convertColumnDefinition()`` contiendra les
+clés suivantes. Toutes les clés existeront mais seront susceptibles de contenir
+``null`` si la clé n'a pas de valeur pour le pilote de base de données actuel:
+
+- ``length`` La longueur d'une colonne, si disponible.
+- ``precision`` La précision d'une colonne, si disponible.
+- ``scale`` Peut être inclus pour les connexions SQLServer.
+
+.. versionadded:: 4.3.0
+    ``ColumnSchemaAwareInterface`` a été ajouté.
 
 .. _mapping-custom-datatypes-to-sql-expressions:
 

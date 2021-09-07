@@ -21,7 +21,7 @@ Tour Rapide
 
 Cette section va vous apprendre les utilisations les plus habituelles du Router
 de CakePHP. Typiquement si vous voulez afficher quelque chose en page d'accueil,
-vous ajoutez ceci au fichier **routes.php**::
+vous ajoutez ceci au fichier **config/routes.php**::
 
     /** @var \Cake\Routing\RouteBuilder $routes */
     $routes->connect('/', ['controller' => 'Articles', 'action' => 'index']);
@@ -966,10 +966,10 @@ Les extensions de fichier sont utilisées par le
 :doc:`/controllers/components/request-handling` qui fait la commutation des
 vues automatiquement en se basant sur les types de contenu.
 
-.. _connecting-scoped-middleware:
+.. _route-scoped-middleware:
 
-Connecter des Middlewares à un scope
-------------------------------------
+Middleware appliqué à une Route
+-------------------------------
 
 Bien que les middlewares puissent être appliqués à toute votre application, appliquer
 les middlewares à des 'scopes' de routing offre plus de flexibilité puisque vous
@@ -1363,7 +1363,7 @@ les éléments du tableau de routage.
 Utilisation de  ``Router::url()``
 ---------------------------------
 
-``Router::url()`` vous permet d'utiliser des :term:`Tableaux de routage <routing array>`
+``Router::url()`` vous permet d'utiliser des :term:`Tableaux de routage <tableau de routing>`
 dans les situations où les éléments de tableau requis sont fixes ou facilement déduits.
 
 Il fournira un routage inversé lorsque l'URL de destination est bien définie::
@@ -1516,7 +1516,7 @@ css, javascript, images et autres fichiers statiques de votre application::
     // Génère une URL pointant vers APP/webroot/files/upload/photo.png
     $file = Asset::url('files/upload/photo.png');
 
-Les méthodes ci-dessus acceptent également un tableau d'options comme deuxième paramètre::
+Les méthodes ci-dessus acceptent également un tableau d'options comme deuxième paramètre:
 
 * ``fullBase`` Ajoute l'url complète incluant le nom de domaine.
 * ``pathPrefix`` Indique le préfixe pour les url relatives.
@@ -1536,7 +1536,7 @@ Les méthodes ci-dessus acceptent également un tableau d'options comme deuxièm
     // Pour lequel le timestamp correspond à la date de dernière modification du fichier
     $img = Asset::url('logo.png', ['timestamp' => true]);
 
-Pour générer des URL de ressources pour les fichiers dans les plugins, utilisez :term:`plugin syntax`::
+Pour générer des URL de ressources pour les fichiers dans les plugins, utilisez la :term:`syntaxe de plugin`::
 
     // Génère `/debug_kit/img/cake.png`
     $img = Asset::imageUrl('DebugKit.cake.png');
@@ -1615,7 +1615,7 @@ nécessitent plus de paramètres::
 
     // Créez une route comme précédemment.
     $routes->get(
-        '/view/{id}',
+        '/view/{id}/{slug}',
         ['controller' => 'Articles', 'action' => 'view'],
         'articles:view'
     );

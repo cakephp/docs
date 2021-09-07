@@ -87,7 +87,7 @@ pour chaque version mineure de::
     bin/cake upgrade rector --rules cakephp41 <path/to/app/src>
 
 Mettez à jour la dépendance de CakePHP
-===================================
+======================================
 
 Après avoir appliqué les refactorisations de rector, mettez à niveau CakePHP et PHPUnit en utilisant
 les commandes suivantes de composer:
@@ -105,7 +105,7 @@ signatures de méthodes que celles trouvées dans cakephp/app. vous trouverez la
 `Application.php
 <https://github.com/cakephp/app/blob/master/src/Application.php>`__ sur GitHub.
 
-Si vous fournissez  une API de type REST, n'oubliez pas d'inclure le
+Si vous fournissez une API de type REST, n'oubliez pas d'inclure le
 :ref:`body-parser-middleware`. Enfin, vous devriez envisager de passer aux nouveaux
 `AuthenticationMiddleware </authentication/2/en/index.html>`__
 et `AuthorizationMiddleware </authorization/2/en/index.html>`__, si vous utilisez encore

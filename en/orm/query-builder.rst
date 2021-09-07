@@ -156,9 +156,8 @@ Queries Are Collection Objects
 
 Once you get familiar with the Query object methods, it is strongly encouraged
 that you visit the :doc:`Collection </core-libraries/collections>` section to
-improve your skills in efficiently traversing the data. In short, it is
-important to remember that anything you can call on a Collection object, you
-can also do in a Query object::
+improve your skills in efficiently traversing the results. Query results
+implement the collection interface::
 
     // Use the combine() method from the collections library
     // This is equivalent to find('list')
@@ -168,11 +167,11 @@ can also do in a Query object::
     $results = $articles->find()
         ->where(['id >' => 1])
         ->order(['title' => 'DESC'])
-        ->map(function ($row) { // map() is a collection method, it executes the query
+        ->all()
+        ->map(function ($row) {
             $row->trimmedTitle = trim($row->title);
             return $row;
         })
-        ->all()
         ->combine('id', 'trimmedTitle') // combine() is another collection method
         ->toArray(); // Also a collections library method
 
@@ -186,7 +185,7 @@ Queries Are Lazily Evaluated
 Query objects are lazily evaluated. This means a query is not executed until one
 of the following things occur:
 
-- The query is iterated with ``foreach()``.
+- The query is iterated with ``foreach``.
 - The query's ``execute()`` method is called. This will return the underlying
   statement object, and is to be used with insert/update/delete queries.
 - The query's ``first()`` method is called. This will return the first result in the set
@@ -198,7 +197,7 @@ of the following things occur:
 Until one of these conditions are met, the query can be modified without additional
 SQL being sent to the database. It also means that if a Query hasn't been
 evaluated, no SQL is ever sent to the database. Once executed, modifying and
-re-evaluating a query will result in additional SQL being run.
+re-evaluating a query will result in additional SQL being run. Calling the same query without modification multiple times will return same reference.
 
 If you want to take a look at what SQL CakePHP is generating, you can turn
 database :ref:`query logging <database-query-logging>` on.
@@ -1616,9 +1615,9 @@ named windows using the ``window()`` method::
 Executing Complex Queries
 -------------------------
 
-While the query builder makes it easy to build most queries, very complex
-queries can be tedious and complicated to build. You may want to :ref:`execute
-the desired SQL directly <running-select-statements>`.
+While the query builder makes most queries possible through builder methods,
+very complex queries can be tedious and complicated to build. You may want to
+:ref:`execute the desired SQL directly <running-select-statements>`.
 
 Executing SQL directly allows you to fine tune the query that will be run.
 However, doing so doesn't let you use ``contain`` or other higher level ORM

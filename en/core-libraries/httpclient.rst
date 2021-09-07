@@ -386,8 +386,8 @@ You can also access the stream object for the response and use its methods::
 Reading JSON and XML Response Bodies
 ------------------------------------
 
-Since JSON and XML responses are commonly used, response objects provide easy to
-use accessors to read decoded data. JSON data is decoded into an array, while
+Since JSON and XML responses are commonly used, response objects provide a way
+to use accessors to read decoded data. JSON data is decoded into an array, while
 XML data is decoded into a ``SimpleXMLElement`` tree::
 
     // Get some XML
@@ -461,6 +461,59 @@ instead. You can force select a transport adapter using a constructor option::
     use Cake\Http\Client\Adapter\Stream;
 
     $client = new Client(['adapter' => Stream::class]);
+
+.. _httpclient-testing:
+
+Testing
+=======
+
+.. php:trait:: Cake\TestSuite\HttpClientTrait
+
+In tests you will often want to create mock responses to external APIs. You can
+use the ``HttpClientTrait`` to define responses to the requests your application
+is making::
+
+    use Cake\TestSuite\HttpClientTrait;
+    use Cake\TestSuite\TestCase;
+
+    class CartControllerTests extends TestCase
+    {
+        use HttpClientTrait;
+
+        public function testCheckout()
+        {
+            // Mock a POST request that will be made.
+            $this->mockClientPost(
+                'https://example.com/process-payment',
+                $this->newClientResponse(200, [], json_encode(['ok' => true]))
+            );
+            $this->post("/cart/checkout");
+            // Do assertions.
+        }
+    }
+
+There are methods to mock the most commonly used HTTP methods::
+
+    $this->mockClientGet(...);
+    $this->mockClientPatch(...);
+    $this->mockClientPost(...);
+    $this->mockClientPut(...);
+    $this->mockClientDelete(...);
+
+... php:method:: newClientResponse(int $code = 200, array $headers = [], string $body = '')
+
+As seen above you can use the ``newClientResponse()`` method to create responses
+for the requests your application will make. The headers need to be a list of
+strings::
+
+    $headers = [
+        'Content-Type: application/json',
+        'Connection: close',
+    ];
+    $response = $this->newClientResponse(200, $headers, $body)
+
+
+.. versionadded:: 4.3.0
 
 .. meta::
     :title lang=en: HttpClient

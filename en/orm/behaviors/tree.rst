@@ -64,7 +64,7 @@ count of descendants it has::
     $node = $categories->get(1);
     echo $categories->childCount($node);
 
-Getting a flat list of the descendants for a node is equally easy::
+Getting a flat list of the descendants for a node can be done with::
 
     $descendants = $categories->find('children', ['for' => 1]);
 

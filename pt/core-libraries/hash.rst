@@ -818,7 +818,7 @@ Tipos de Correspondência de Atributos
     **Opções:**
 
     - ``children`` O nome da chave a ser usada no conjunto de resultados para 
-    os valores aninhados. O padrão é 'children'.
+      os valores aninhados. O padrão é 'children'.
     - ``idPath`` O caminho para uma chave que identifica cada entrada. Deve ser compatível 
       com :php:meth:`Hash::extract()`. O padrão é ``{n}.$alias.id``
     - ``parentPath`` O caminho para uma chave que identifica o pai de cada entrada. Deve ser compatível com 

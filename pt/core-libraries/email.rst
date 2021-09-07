@@ -120,7 +120,7 @@ necessários. As seguintes chaves de configuração são usadas:
 - ``'emailFormat'``: Formato de email (html, text ou ambos). Veja ``Mailer::setEmailFormat()``.
 - ``'transport'``: Nome da configuração de Transporte. Veja :ref:`email-transport`.
 - ``'log'``: Nível de logs para registrar os cabeçalhos e a mensagem do e-mail. ``true`` usará LOG_DEBUG. 
-  Veja também :ref:`logging-levels`.
+  Veja também `logging-levels`.
 - ``'helpers'``: Conjunto de auxiliares usados no template de e-mail. ``ViewBuilder::setHelpers()``.
 
 .. note::
@@ -212,7 +212,7 @@ Ao configurar ajudantes, certifique-se de incluir 'Html' ou ele será removido d
 ajudantes carregados em seu modelo de email.
 
 Se você deseja enviar e-mail usando templates em um plugin, você pode usar a familiar 
-:term:`plugin syntax` para fazer isso::
+:term:`sintaxe plugin` para fazer isso::
 
     $mailer = new Mailer();
     $mailer->viewBuilder()->setTemplate('Blog.new_comment');

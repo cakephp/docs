@@ -13,7 +13,7 @@ Refactoring takes time, and performance and user satisfaction can suffer.
 
 Displaying a reasonable number of records per page has always been a critical
 part of every application and used to cause many headaches for developers.
-CakePHP eases the burden on the developer by providing a quick, easy way to
+CakePHP eases the burden on the developer by providing a terse way to
 paginate data.
 
 Pagination in CakePHP is offered by a component in the controller. You then use

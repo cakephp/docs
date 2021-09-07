@@ -41,16 +41,16 @@ a following section. The built-in providers map to the following values of
 
 * An ``Entity`` instance or an iterator will map to
   `EntityContext
-  <https://github.com/cakephp/cakephp/tree/master/src/View/Form/EntityContext.php>`_;
+  <https://api.cakephp.org/4.x/class-Cake.View.Form.EntityContext.html>`_;
   this context class allows FormHelper to work with results from the
   built-in ORM.
 
 * An array containing the ``'schema'`` key, will map to
-  `ArrayContext <https://github.com/cakephp/cakephp/tree/master/src/View/Form/ArrayContext.php>`_
+  `ArrayContext <https://api.cakephp.org/4.x/class-Cake.View.Form.ArrayContext.html>`_
   which allows you to create simple data structures to build forms against.
 
 * ``null`` will map to
-  `NullContext <https://github.com/cakephp/cakephp/tree/master/src/View/Form/NullContext.php>`_;
+  `NullContext <https://api.cakephp.org/4.x/class-Cake.View.Form.NullContext.html>`_;
   this context class
   simply satisfies the interface FormHelper requires. This context is useful if
   you want to build a short form that doesn't require ORM persistence.
@@ -316,12 +316,14 @@ can define validation rules for each association by using an array::
     ]);
 
 The above would use ``register`` for the user, and ``default`` for the user's
-comments. FormHelper uses validators to generate HTML5 required attributes and
-set error messages with the `browser validator API
+comments. FormHelper uses validators to generate HTML5 required attributes,
+relevant ARIA attributes, and set error messages with the `browser validator API
 <https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Form_validation#Customized_error_messages>`_
 . If you would like to disable HTML5 validation messages use::
 
     $this->Form->setConfig('autoSetCustomValidity', false);
+
+This will not disable ``required``/``aria-required`` attributes.
 
 Creating context classes
 ------------------------
@@ -330,7 +332,7 @@ While the built-in context classes are intended to cover the basic cases you'll
 encounter you may need to build a new context class if you are using a different
 ORM. In these situations you need to implement the
 `Cake\\View\\Form\\ContextInterface
-<https://github.com/cakephp/cakephp/tree/master/src/View/Form/ContextInterface.php>`_ . Once
+<https://api.cakephp.org/4.x/interface-Cake.View.Form.ContextInterface.html>`_ . Once
 you have implemented this interface you can wire your new context into the
 FormHelper. It is often best to do this in a ``View.beforeRender`` event
 listener, or in an application view class::
@@ -526,9 +528,9 @@ You can create controls for associated models, or arbitrary models by passing in
 
 Any dots in your field names will be converted into nested request data. For
 example, if you created a field with a name ``0.comments.body`` you would get
-a name attribute that looks like ``0[comments][body]``. This convention makes it
-easy to save data with the ORM. Details for the various association types can
-be found in the :ref:`associated-form-inputs` section.
+a name attribute that looks like ``0[comments][body]``. This convention matches
+the conventions you use with the ORM. Details for the various association types
+can be found in the :ref:`associated-form-inputs` section.
 
 When creating datetime related controls, FormHelper will append a field-suffix.
 You may notice additional fields named ``year``, ``month``, ``day``, ``hour``,
@@ -606,7 +608,10 @@ as well as HTML attributes. This subsection will cover the options specific to
           <input name="name" type="text" value="" id="name" />
       </div>
 
-  Set this to an array to provide additional options for the
+  If the label is disabled, and a ``placeholder`` attribute is provided, the
+  generated input will have ``aria-label`` set.
+
+  Set the ``label`` option to an array to provide additional options for the
   ``label`` element. If you do this, you can use a ``'text'`` key in
   the array to customize the label text.
 
@@ -2202,7 +2207,7 @@ List of Templates
 
 The list of default templates, their default format and the variables they
 expect can be found in the
-`FormHelper API documentation <https://api.cakephp.org/3.x/class-Cake.View.Helper.FormHelper.html#%24_defaultConfig>`_.
+`FormHelper API documentation <https://api.cakephp.org/4.x/class-Cake.View.Helper.FormHelper.html#%24_defaultConfig>`_.
 
 Using Distinct Custom Control Containers
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2436,10 +2441,9 @@ a multiple select input for belongs to many associations::
 Adding Custom Widgets
 =====================
 
-CakePHP makes it easy to add custom control widgets in your application, and use
-them like any other control type. All of the core control types are implemented as
-widgets, which means you can override any core widget with your own
-implementation as well.
+You can add custom control widgets in CakePHP, and use them like any other
+control type. All of the core control types are implemented as widgets, which
+means you can override any core widget with your own implementation as well.
 
 Building a Widget Class
 -----------------------
@@ -2459,17 +2463,37 @@ could do the following::
     namespace App\View\Widget;
 
     use Cake\View\Form\ContextInterface;
+    use Cake\View\StringTemplate;
     use Cake\View\Widget\WidgetInterface;
 
     class AutocompleteWidget implements WidgetInterface
     {
+
+        /**
+         * StringTemplate instance.
+         *
+         * @var \Cake\View\StringTemplate
+         */
         protected $_templates;
 
-        public function __construct($templates)
+        /**
+         * Constructor.
+         *
+         * @param \Cake\View\StringTemplate $templates Templates list.
+         */
+        public function __construct(StringTemplate $templates)
         {
             $this->_templates = $templates;
         }
 
+        /**
+         * Methods that render the widget.
+         *
+         * @param array $data The data to build an input with.
+         * @param \Cake\View\Form\ContextInterface $context The current form context.
+         * 
+         * @return string
+         */
         public function render(array $data, ContextInterface $context): string
         {
             $data += [

@@ -120,7 +120,7 @@ des lignes, les convertissez en tableau, ou quand la méthode
     // et retourne l'ensemble de résultats.
     $results = $query->all();
 
-    // Once we have a result set we can get all the rows
+    // Une fois le résultat obtenu, nous pouvons en récupérer toutes les lignes
     $data = $results->toArray();
 
     // Convertir la requête en tableau va l'exécuter.
@@ -254,7 +254,7 @@ table pour configurer le champ à afficher sur une table::
     class Articles extends Table
     {
 
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->setDisplayField('title');
 
@@ -1102,7 +1102,7 @@ Vous pouvez utiliser la méthode ``isEmpty()`` sur un objet Query ou ResultSet
 pour voir s'il contient au moins une colonne. Appeler ``isEmpty()`` sur un
 objet Query va évaluer la requête::
 
-    // VérifieCheck une requête.
+    // Vérifie une requête.
     $query->isEmpty();
 
     // Vérifie les résultats.

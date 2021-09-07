@@ -16,6 +16,7 @@ CakePHP の中に含まれるコンポーネントの詳細については、各
 
     /controllers/components/authentication
     /controllers/components/flash
+    /controllers/components/form-protection
     /controllers/components/security
     /controllers/components/pagination
     /controllers/components/request-handling
@@ -27,7 +28,7 @@ CakePHP の中に含まれるコンポーネントの詳細については、各
 
 コアコンポーネントの多くは設定を必要としています。コンポーネントが設定を
 必要としている例は、 :doc:`/controllers/components/authentication` や
-:doc:`/controllers/components/cookie` などにあります。これらのコンポーネントや
+などにあります。これらのコンポーネントや
 一般的なコンポーネントの設定は、通常、お使いのコントローラーの ``initialize()``
 メソッド内で ``loadComponent()`` を使用するか、 ``$components`` 配列を介して行われます。 ::
 

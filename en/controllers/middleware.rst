@@ -42,7 +42,7 @@ CakePHP provides several middleware to handle common tasks in web applications:
 * ``Cake\I18n\Middleware\LocaleSelectorMiddleware`` enables automatic language
   switching from the ``Accept-Language`` header sent by the browser.
 * ``Cake\Http\Middleware\HttpsEnforcerMiddleware`` requires HTTPS to be used.
-* ``Cake\Http\Middleware\SecurityHeadersMiddleware`` makes it easy to add
+* ``Cake\Http\Middleware\SecurityHeadersMiddleware`` makes it possible to add
   security related headers like ``X-Frame-Options`` to responses.
 * ``Cake\Http\Middleware\EncryptedCookieMiddleware`` gives you the ability to
   manipulate encrypted cookies in case you need to manipulate cookie with
@@ -244,7 +244,7 @@ collection.
 Security Header Middleware
 ==========================
 
-The ``SecurityHeaderMiddleware`` layer makes it easy to apply security related
+The ``SecurityHeaderMiddleware`` layer allows you to apply security related
 headers to your application. Once setup the middleware can apply the following
 headers to responses:
 

@@ -299,6 +299,8 @@ data used when creating connections.
 Data Types
 ==========
 
+.. php:class:: TypeFactory
+
 Since not every database vendor includes the same set of data types, or
 the same names for similar data types, CakePHP provides a set of abstracted
 data types for use with the database layer. The types CakePHP supports are:
@@ -330,7 +332,15 @@ float
     option can be used to define the precision used.
 decimal
     Maps to the ``DECIMAL`` type. Supports the ``length`` and  ``precision``
-    options.
+    options. Values for decimal type ares be represented as strings (not as float
+    as some might expect). This is because decimal types are used to represent
+    exact numeric values in databases and using float type for them in PHP can
+    potentially lead to precision loss.
+
+    If you want the values to be `float` in your PHP code then consider using
+    `FLOAT` or `DOUBLE` type columns in your database. Also, depending on your use
+    case you can explicitly map your decimal columns to `float` type in your table
+    schema.
 boolean
     Maps to ``BOOLEAN`` except in MySQL, where ``TINYINT(1)`` is used to represent
     booleans. ``BIT(1)`` is not yet supported at this moment.
@@ -387,7 +397,7 @@ vice versa.
 Can be used to map datetime columns that contain microseconds such as
 ``DATETIME(6)`` in MySQL. To use this type you need to add it as a mapped type::
 
-    // in confib/bootstrap.php
+    // in config/bootstrap.php
     use Cake\Database\TypeFactory;
     use Cake\Database\Type\DateTimeFractionalType;
 
@@ -399,7 +409,7 @@ Can be used to map datetime columns that contain microseconds such as
 Can be used to map datetime columns that contain time zones such as
 ``TIMESTAMPTZ`` in PostgreSQL. To use this type you need to add it as a mapped type::
 
-    // in confib/bootstrap.php
+    // in config/bootstrap.php
     use Cake\Database\TypeFactory;
     use Cake\Database\Type\DateTimeTimezoneType;
 
@@ -423,9 +433,9 @@ implement the following methods:
 * ``toStatement``: Casts given value to its Statement equivalent.
 * ``marshal``: Marshals flat data into PHP objects.
 
-An easy way to fulfill the basic interface is to extend
-:php:class:`Cake\\Database\\Type`. For example if we wanted to add a JSON type,
-we could make the following type class::
+To fulfill the basic interface, extend :php:class:`Cake\\Database\\Type`.
+For example if we wanted to add a JSON type, we could make the following type
+class::
 
     // in src/Database/Type/JsonType.php
 

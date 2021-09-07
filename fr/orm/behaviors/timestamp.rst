@@ -18,7 +18,7 @@ Vous activez le behavior timestamp comme tout autre behavior::
 
     class ArticlesTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->addBehavior('Timestamp');
         }
@@ -40,7 +40,7 @@ personnalisés, vous pouvez utiliser quelques configurations supplémentaires::
 
     class OrdersTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->addBehavior('Timestamp', [
                 'events' => [

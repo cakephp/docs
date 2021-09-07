@@ -61,14 +61,14 @@ CakePHP uses :term:`DSN` strings for databases, logs, email transports and cache
 configurations allowing you to easily vary these libraries in each environment.
 
 For local development, CakePHP leverages `dotenv
-<https://github.com/josegonzalez/php-dotenv>`_ to allow easy local development using
-environment variables. Use composer to require this library and then 
-there is a block of code in ``bootstrap.php`` that needs to be uncommented to harness it.
+<https://github.com/josegonzalez/php-dotenv>`_ to make local development
+automatically reload environment variables. Use composer to require this library
+and then there is a block of code in ``bootstrap.php`` that needs to be
+uncommented to harness it.
 
 You will see a ``config/.env.example`` in your
 application. By copying this file into ``config/.env`` and customizing the
 values you can configure your application.
-    
 
 You should avoid committing the ``config/.env`` file to your repository and
 instead use the ``config/.env.example`` as a template with placeholder values so
@@ -471,6 +471,28 @@ Loaded configuration files merge their data with the existing runtime
 configuration in Configure. This allows you to overwrite and add new values into
 the existing runtime configuration. By setting ``$merge`` to ``true``, values
 will not ever overwrite the existing configuration.
+
+.. warning::
+    When merging configuration files with `$merge = true`, dot notation in keys is
+    not expanded::
+       
+        // config1.php
+        'Key1' => [
+            'Key2' => [
+                'Key3' => ['NestedKey1' => 'Value'],
+            ],
+        ],
+
+        // config2.php
+        'Key1.Key2' => [
+            'Key3' => ['NestedKey2' => 'Value2'],
+        ]
+
+        Configure::load('config1', 'default');
+        Configure::load('config2', 'default', true);
+
+        // Now Key1.Key2.Key3 has the value ['NestedKey2' => 'Value2']
+        // instead of ['NestedKey1' => 'Value', 'NestedKey2' => 'Value2']
 
 Creating or Modifying Configuration Files
 -----------------------------------------

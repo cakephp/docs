@@ -13,7 +13,7 @@ To upgrade to the new fixture system, you need to make a few updates:
 #. Add the following to your ``phpunit.xml``::
 
         <extensions>
-            <extension class="\Cake\TestSuite\FixtureSchemaExtension" />
+            <extension class="\Cake\TestSuite\Fixture\PHPUnitExtension" />
         </extensions>
 
    This removes schema management from the test fixture manager. Instead your
@@ -25,8 +25,9 @@ To upgrade to the new fixture system, you need to make a few updates:
    These properties are unused in the new fixture system.
 
 Your tests should continue to pass, and you can experiment with
-:ref:`fixture-state-managers`. ``TransactionStrategy`` can yield significant
-performance improvements.
+:ref:`fixture-state-management`. ``TransactionStrategy`` which yield significant
+performance improvements. The trade-off with ``TransactionStrategy`` is that
+your auto-increment values will no longer start at ``1`` with each test.
 
 Legacy Fixture Documentation
 ================================

@@ -70,7 +70,7 @@ pour ce type d'utilisation::
     class AppController extends Controller
     {
 
-        public function initialize()
+        public function initialize(): void
         {
             // Active toujours le component CSRF.
             $this->loadComponent('Csrf');
@@ -422,21 +422,14 @@ Dans la méthode ``initialize()`` de votre Controller, vous pouvez définir
 tout component que vous voulez charger et toute donnée de configuration
 pour eux::
 
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
         $this->loadComponent('Csrf');
         $this->loadComponent('Comments', Configure::read('Comments'));
     }
 
-.. php:attr:: components
-
-La propriété ``$components`` de vos controllers vous permet de configurer les
-components. Les components configurés et leurs dépendances vont être créés par
-CakePHP pour vous. Lisez la section :ref:`configuring-components` pour plus
-d'informations. Comme mentionné plus tôt, la propriété ``$components`` sera
-fusionnée avec la propriété définie dans chacune des classes parentes de votre
-controller.
+.. _controller-life-cycle:
 
 Cycle de Vie des Callbacks de la Requête
 ========================================
@@ -499,6 +492,36 @@ des controllers enfant pour avoir de meilleurs résultats::
     {
         parent::beforeFilter($event);
     }
+
+.. _controller-middleware:
+
+Middleware de Controller
+========================
+
+.. php:method:: middleware($middleware, array $options = [])
+
+Les :doc:`Middlewares </controllers/middleware>` peuvent être définis
+globalement, dans le scope d'une routine ou dans un contrôleur. Pour définir un
+middleware pour un contrôleur spécifique, utilisez la méthode ``middleware()``
+depuis l'intérieur de la méthode ``initialize()`` de votre contrôleur::
+
+    public function initialize(): void
+    {
+        parent::initialize();
+
+        $this->middleware(function ($request, $handler) {
+            // Faire la logique du middleware.
+
+            // Assurez-vous de renvoyer une réponse ou d'appeler handle()
+            return $handler->handle($request);
+        });
+    }
+
+Les middlewares définis par un contrôleur seront appelés **avant** que
+``beforeFilter()`` les méthodes d'action ne soient appelées.
+
+.. versionadded:: 4.3.0
+    ``Controller::middleware()`` a été ajoutée.
 
 Plus sur les Controllers
 ========================

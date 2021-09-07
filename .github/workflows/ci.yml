@@ -36,6 +36,6 @@ jobs:
 
     - name: Build Docs
       run: |
-        if [[ ${{ matrix.doc-type }} == 'HTML' ]]; then make html; fi
+        if [[ ${{ matrix.doc-type }} == 'HTML' ]]; then make html SPHINXOPTS='-W --keep-going'; fi
         if [[ ${{ matrix.doc-type }} == 'EPUB' ]]; then make epub; fi
         if [[ ${{ matrix.doc-type }} == 'PDF' ]]; then make latex; fi

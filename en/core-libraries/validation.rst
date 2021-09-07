@@ -108,7 +108,7 @@ of data:
 #. ``allowEmptyDateTime()`` Should be used when you want to accept an empty
    string or an array that is marshalled into a datetime or timestamp field.
 #. ``allowEmptyFile()`` Should be used when you want to accept an array that
-   is contains an empty uploaded file.
+   contains an empty uploaded file.
 
 You can also use ``notEmpty()`` to mark a field invalid if any 'empty' value is
 used. In general, it is recommended that you do not use ``notEmpty()`` and use more

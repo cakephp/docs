@@ -65,7 +65,7 @@ CakePHPはコントローラーでアクションを呼ぶ際サービスコン�
 注入過程は少し異なります。
 ``UsersService`` の代わりにコマンドを始めに追加する必要があります。
 全体としてコマンドにコンテナと ``UsersService`` を引数として与えます。
-そうすることでコマンド内コンストラクタのサービスにアクセスすることができるのです。
+そうすることでコマンド内コンストラクタにサービスをアクセスさせることができるのです。
 
 サービスの追加
 ===============
@@ -172,7 +172,7 @@ CakePHPはコントローラーでアクションを呼ぶ際サービスコン�
 なので、誤って設定が変わる心配はありません。
 
 サービス・プロバイダー
-=================
+======================
 
 サービス・プロバイダーによって関連したサービスをまとめ上げる補助をし、グループ化することができます。
 
@@ -180,12 +180,13 @@ CakePHPはコントローラーでアクションを呼ぶ際サービスコン�
 アプリケーションのパフォーマンスを上げることができます。
 
 サービス・プロバイダーの作成
---------------------------
+----------------------------
 
 ServiceProviderの一例::
 
     namespace App\ServiceProvider;
 
+    use Cake\Core\ContainerInterface;
     use Cake\Core\ServiceProvider;
     // 他はここにインポート
 
@@ -196,7 +197,7 @@ ServiceProviderの一例::
             'configKey',
         ];
 
-        public function services($container)
+        public function services(ContainerInterface $container): void
         {
             $container->add(StripService::class);
             $container->add('configKey', 'some value');
@@ -208,7 +209,7 @@ ServiceProviderの一例::
 正しく ``$provides`` に含められなかった場合、コンテナから読み込めなくなります。
 
 サービス・プロバイダーの使用
------------------------
+----------------------------
 
 サービス・プロバイダーを読み込むには ``addServiceProvider()`` メソッドを使ってコンテナに追加してください::
 
@@ -216,7 +217,7 @@ ServiceProviderの一例::
     $container->addServiceProvider(new BillingServiceProvider());
 
 起動可能なサービス・プロバイダー
--------------------------
+--------------------------------
 
 もしサービス・プロバイダーがコンテナに追加された時、ロジックを走らせる必要がある場合
 ``bootstrap()`` メソッドを使ってください。
@@ -249,7 +250,7 @@ ServiceProviderの一例::
 .. _mocking-services-in-tests:
 
 サービスをモック化してテストする
-=========================
+================================
 
 テスト内で ``ConsoleIntegrationTestTrait`` や ``IntegrationTestTrait`` を使うことででコンテナを通して注入されるサービスとスタブやモックを入れ替えることができます。::
 

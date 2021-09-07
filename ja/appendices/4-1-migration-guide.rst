@@ -16,7 +16,7 @@ CakePHP 4.1.0にアップグレードするには、次の Composer コマンド
 
 4.1では、いくつかの非推奨機能が導入されています。
 これらの機能はすべて 4.x の間は継続されますが、5.0 で削除されます。
-非推奨機能の更新を自動化するには、:ref:`upgrade tool <upgrade-tool-use>` を使用します。::
+非推奨機能の更新を自動化するには、`upgrade tool <upgrade-tool-use>` を使用します。::
 
     bin/cake upgrade rector --rules cakephp41 <path/to/app/src>
 
@@ -224,7 +224,7 @@ Log
 ---
 
 * ログメッセージに ``{foo}`` スタイルのプレースホルダを含めることができるようになりました。
-これらのプレースホルダは ``$context`` パラメータの値に置き換えられます。
+  これらのプレースホルダは ``$context`` パラメータの値に置き換えられます。
 
 ORM
 ---

@@ -35,7 +35,7 @@ permet sont les suivantes:
 * Fournit un accès aux paramètres de la requête à la fois en tableaux indicés
   et en propriétés d'un objet.
 
-Depuis la version 3.4.0, l'objet ServerRequest de CakePHP implémente `l'interface
+L'objet ServerRequest de CakePHP implémente `l'interface
 PSR-7 ServerServerRequestInterface <http://www.php-fig.org/psr/psr-7/>`_ facilitant
 l'utilisation des librairies en-dehors de CakePHP.
 
@@ -123,6 +123,8 @@ Si vous souhaitez accéder à tous les paramètres de requête, vous pouvez util
 
     $query = $this->request->getQueryParams();
 
+.. _request-file-uploads:
+
 Envoyer des fichiers
 --------------------
 
@@ -176,7 +178,7 @@ Avec l'option désactivée, les téléchargements de fichiers sont représentés
 forme de tableaux, avec une structure normalisée qui reste la même y compris pour pour les entrées/noms imbriqués,
 ce qui est différent de la façon dont PHP les représente dans la variable ``$ _FILES``
 (reportez-vous au `manuel PHP <https://www.php.net/manual/en/features.file-upload.php>` __ pour plus d'informations),
-c'est-à-dire que la valeur ``$attachment` ressemblerait à quelque chose comme ceci::
+c'est-à-dire que la valeur ``$attachment`` ressemblerait à quelque chose comme ceci::
 
     [
         'name' => 'attachment.txt',
@@ -191,7 +193,7 @@ c'est-à-dire que la valeur ``$attachment` ressemblerait à quelque chose comme 
     Les fichiers téléchargés sont également accessibles en tant qu'objets séparément des données de requête via les
     méthodes :php:meth:`Cake\\Http\\ServerRequest::getUploadedFile()` et
     :php:meth:`Cake\\Http\\ServerRequest::getUploadedFiles()`. Ces méthodes renverront toujours des objets,
-     indépendamment de la configuration ``App.uploadedFilesAsObjects``.
+    indépendamment de la configuration ``App.uploadedFilesAsObjects``.
 
 
 .. php:method:: getUploadedFile($path)
@@ -447,7 +449,7 @@ Données de Session
 ------------------
 
 Pour accéder à la session pour une requête donnée, utilisez la méthode ``getSession()`` ou l'attribut
-``session()``::
+``session``::
 
     $session = $this->request->getSession();
     $session = $this->request->getAttribute('session');

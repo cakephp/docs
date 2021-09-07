@@ -302,7 +302,7 @@ BigBoxesTable と、コントローラー BigBoxesController は、全て自動�
 データの型
 ==========
 
-.. php:class:: Type
+.. php:class:: TypeFactory
 
 各ベンダーのデータベースは全て同じデータ型を持つわけではなく、似たようなデータ型が
 同じ名前になっているわけでもありませんので、 CakePHP ではデータベース層で使用するために
@@ -364,17 +364,55 @@ timestamp か 整形した日付文字列に変換します。
 同様に 'binary' という名前の項目ならファイルハンドラを受け入れ、データを読み込むときには
 ファイルハンドラを生成します。
 
-.. versionchanged:: 3.3.0
-    ``json`` 型が追加されました。
+.. _datetime-type:
 
-.. versionchanged:: 3.5.0
-    ``smallinteger`` 型と ``tinyinteger`` 型が追加されました。
+DateTime タイプ
+---------------
+
+.. php:class:: DateTimeType
+
+ネイティブの ``DATETIME`` カラムタイプにマッピングします。
+PostgreSQL や SQL Server では、これは ``TIMESTAMP`` 型になります。
+このカラム型のデフォルトの戻り値は :php:class:`Cake\\I18n\\FrozenTime` で、これは組み込みの
+``DateTimeImmutable`` クラスと `Chronos <https://github.com/cakephp/chronos>`_
+を拡張したものです。
+
+.. php:method:: setTimezone(string|\DateTimeZone|null $timezone)
+
+データベースサーバーのタイムゾーンとアプリケーションの PHP のタイムゾーンが一致しない場合は、
+このメソッドを使用してデータベースのタイムゾーンを指定することができます。このタイムゾーンは、PHP
+のオブジェクトをデータベースの日付文字列に変換する際に使用されます（その逆も同様です）。
+
+.. php:class:: DateTimeFractionalType
+
+MySQLの ``DATETIME(6)`` のようなマイクロ秒を含むdatetimeカラムのマッピングに使用できます。
+このタイプを使用するには、マッピングされたタイプとして追加する必要があります。::
+
+    // config/bootstrap.php の中で
+    use Cake\Database\TypeFactory;
+    use Cake\Database\Type\DateTimeFractionalType;
+
+    // デフォルトのdatetime型を、より正確なものに上書きします。
+    TypeFactory::map('datetime', DateTimeFractionalType::class);
+
+.. php:class:: DateTimeTimezoneType
+
+PostgreSQLの ``TIMESTAMPTZ`` のような、タイムゾーンを含むdatetimeカラムをマッピングするために使用できます。
+このタイプを使用するには、マッピングされたタイプとして追加する必要があります。::
+
+    // config/bootstrap.php の中で
+    use Cake\Database\TypeFactory;
+    use Cake\Database\Type\DateTimeTimezoneType;
+
+    // デフォルトのdatetime型を、より正確なものに上書きします。
+    TypeFactory::map('datetime', DateTimeTimezoneType::class);
 
 .. _adding-custom-database-types:
 
 独自の型を作成する
 ------------------
 
+.. php:class:: TypeFactory
 .. php:staticmethod:: map($name, $class)
 
 もしあなたが CakePHP に実装されていない、データベース独自の型が必要な場合、

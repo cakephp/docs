@@ -152,13 +152,15 @@ the temporary file, instead it can be easily done by using the objects ``moveTo(
 
     $attachment->moveTo($targetPath);
 
-In an HTTP environment, the ``moveTo()`` method will automatically validate whether the file is an actual uploaded file,
-and throw an exception in case necessary. In an CLI environment, where the concept of uploading files doesn't exist, it
-will allow to move the file that you've referenced irrespective of its origins, which makes testing file uploads really
-easy.
+In an HTTP environment, the ``moveTo()`` method will automatically validate
+whether the file is an actual uploaded file, and throw an exception in case
+necessary. In an CLI environment, where the concept of uploading files doesn't
+exist, it will allow to move the file that you've referenced irrespective of its
+origins, which makes testing file uploads possible.
 
-In order to switch back to using file upload arrays instead, set the configuration value ``App.uploadedFilesAsObjects``
-to ``false``, for example in your ``config/app.php`` file::
+In order to switch back to using file upload arrays instead, set the
+configuration value ``App.uploadedFilesAsObjects`` to ``false``, for example in
+your ``config/app.php`` file::
 
     return [
         // ...
@@ -328,7 +330,7 @@ Checking Request Conditions
 
 .. php:method:: is($type, $args...)
 
-The request object provides an easy way to inspect certain conditions in a given
+The request object provides a way to inspect certain conditions in a given
 request. By using the ``is()`` method you can check a number of common
 conditions, as well as inspect other application specific request criteria::
 
@@ -1057,7 +1059,7 @@ object::
             'secure' => false,
             'http' => false,
         ]
-    ]);
+    ));
 
 See the :ref:`creating-cookies` section for how to use the cookie object. You
 can use ``withExpiredCookie()`` to send an expired cookie in the response. This

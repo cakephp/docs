@@ -77,8 +77,10 @@ messages::
                     my_plugin.po
 
 Translation folders can be the two or three letter ISO code of the language or
-the full locale name such as ``fr_FR``, ``es_AR``, ``da_DK`` which contains
+the full ICU locale name such as ``fr_FR``, ``es_AR``, ``da_DK`` which contains
 both the language and the country where it is spoken.
+
+See https://www.localeplanet.com/icu/ for the full list.
 
 An example translation file could look like this:
 
@@ -89,6 +91,13 @@ An example translation file could look like this:
 
      msgid "I'm {0,number} years old"
      msgstr "J'ai {0,number} ans"
+
+.. note::
+    Translations are cached - Make sure that you always clear the cache after
+    making changes to translations! You can either use the
+    :doc:`cache tool </console-commands/cache>` and run for example
+    ``bin/cake cache clear _cake_core_``, or manually clear the ``tmp/cache/persistent``
+    folder (if using file based caching).
 
 Extract Pot Files with I18n Shell
 ---------------------------------
@@ -620,7 +629,7 @@ make this process simpler::
     // Set the user's timezone
     TypeFactory::build('datetime')->setUserTimezone($user->timezone);
 
-Once set, when your application creates or updates enities from request data,
+Once set, when your application creates or updates entities from request data,
 the ORM will automatically convert datetime values from the user's timezone into
 your application's timezone. This ensures that your application is always
 working in the timezone defined in ``App.defaultTimezone``.
@@ -679,6 +688,11 @@ automatically set the locale based on the current user::
 The ``LocaleSelectorMiddleware`` will use the ``Accept-Language`` header to
 automatically set the user's preferred locale. You can use the locale list
 option to restrict which locales will automatically be used.
+    
+Translate Content/Entities
+==========================
+
+If you want to translate content/entities then you should look at the :doc:`Translate Behavior </orm/behaviors/translate>`.
 
 .. meta::
     :title lang=en: Internationalization & Localization

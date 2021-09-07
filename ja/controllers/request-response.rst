@@ -102,12 +102,14 @@ query プロパティーに直接アクセスするか、エラーが発生し�
     $foo = $this->request->getData('Value.that.does.not.exist');
     // $foo == null
 
-また、異なるリクエストのボディをパースするために :ref:`ボディパーサミドルウェア` を使うこともできます。
+また、異なるリクエストのボディをパースするために :ref:`ボディパーサミドルウェア <body-parser-middleware>` を使うこともできます。
 これは ``ServerRequest::getData()`` でアクセスできるようにするための配列です。
 
 すべてのデータパラメータにアクセスしたい場合は ``getParsedBody()`` を使うことができます。 ::
 
     $data = $this->request->getParsedBody();
+
+.. _request-file-uploads:
 
 ファイルのアップロード
 ----------------------

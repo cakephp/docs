@@ -208,6 +208,7 @@ Un exemple de <em>Service Provider</em> pourrait être::
 
     namespace App\ServiceProvider;
 
+    use Cake\Core\ContainerInterface;
     use Cake\Core\ServiceProvider;
     // Autres imports ici.
 
@@ -218,7 +219,7 @@ Un exemple de <em>Service Provider</em> pourrait être::
             'configKey',
         ];
 
-        public function services($container)
+        public function services(ContainerInterface $container): void
         {
             $container->add(StripService::class);
             $container->add('configKey', 'some value');

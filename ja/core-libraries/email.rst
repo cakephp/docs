@@ -143,7 +143,7 @@ CakePHP は、 :doc:`ビューレイヤー </views>` を使用してメールを
 メールのビューは、普通のビューと同様にレイアウトとエレメントを使用します。 ::
 
     $mailer = new Mailer();
-    $mailer = $mailer
+    $mailer
                  ->setEmailFormat('html')
                  ->setTo('bob@example.com')
                  ->setFrom('app@domain.com')
@@ -158,7 +158,7 @@ CakePHP は、 :doc:`ビューレイヤー </views>` を使用してメールを
 以下のように、マルチパートのテンプレートメールを送信することもできます。 ::
 
     $mailer = new Mailer();
-    $mailer = $mailer
+    $mailer
                 ->setEmailFormat('both')
                 ->setTo('bob@example.com')
                 ->setFrom('app@domain.com')

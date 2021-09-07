@@ -27,7 +27,7 @@ AuthComponent dans notre AppController::
 
     class AppController extends Controller
     {
-        public function initialize()
+        public function initialize(): void
         {
             $this->loadComponent('Flash');
             $this->loadComponent('Auth', [
@@ -84,11 +84,6 @@ Et dans **templates/Users/login.php**, ajoutez ce qui suit::
     <?= $this->Form->button('Login') ?>
     <?= $this->Form->end() ?>
 
-.. note::
-
-    La méthode ``control()`` est disponible depuis 3.4. Si vous utilisez une
-    version précédente, utilisez la méthode ``input()``.
-
 Maintenant que nous avons un formulaire simple de connexion, nous devrions
 pouvoir nous connecter avec un de nos utilisateurs qui a un mot de passe
 hashé.
@@ -106,7 +101,7 @@ Maintenant que les personnes peuvent se connecter, vous voudrez aussi
 probablement fournir un moyen de se déconnecter. Encore une fois, dans
 ``UsersController``, ajoutez le code suivant::
 
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
         $this->Auth->allow(['logout']);
@@ -131,7 +126,7 @@ serez renvoyés vers la page de connexion. Nous devrions régler cela puisque no
 voulons que les utilisateurs s'inscrivent à notre application. Dans
 ``UsersController``, ajoutez ce qui suit::
 
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
         // Ajoute l'action 'add' à la liste des actions autorisées.
@@ -169,7 +164,7 @@ Ajoutez aussi ce qui suit dans la configuration de ``Auth`` dans
 
 Votre méthode ``initialize()`` doit maintenant ressembler à ceci::
 
-        public function initialize()
+        public function initialize(): void
         {
             $this->loadComponent('Flash');
             $this->loadComponent('Auth', [
@@ -258,7 +253,7 @@ ressembler à ceci::
         }
         $tags = $this->Bookmarks->Tags->find('list');
         $this->set(compact('bookmark', 'tags'));
-        $this->set('_serialize', ['bookmark']);
+        $this->viewBuilder()->setOption('serialize', ['bookmark']);
     }
 
 En définissant la propriété entity avec les données de session, nous retirons
@@ -284,7 +279,7 @@ ceci::
         }
         $tags = $this->Bookmarks->Tags->find('list');
         $this->set(compact('bookmark', 'tags'));
-        $this->set('_serialize', ['bookmark']);
+        $this->viewBuilder()->setOption('serialize', ['bookmark']);
     }
 
 Vue de Liste
@@ -303,7 +298,7 @@ Faites en sorte que votre action ``index()`` dans
             ]
         ];
         $this->set('bookmarks', $this->paginate($this->Bookmarks));
-        $this->set('_serialize', ['bookmarks']);
+        $this->viewBuilder()->setOption('serialize', ['bookmarks']);
     }
 
 Nous devrions aussi mettre à jour l'action ``tags()`` et la méthode finder

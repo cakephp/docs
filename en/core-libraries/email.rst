@@ -549,14 +549,14 @@ transport). To start off your file should look like::
         }
     }
 
-You must implement the method ``send(Mailer $mailer)`` with your custom logic.
+You must implement the method ``send(Message $message)`` with your custom logic.
 
 Sending emails without using Mailer
 ===================================
 
 The ``Mailer`` is a higher level abstraction class which acts as a bridge between
 the ``Cake\Mailer\Message``, ``Cake\Mailer\Renderer`` and ``Cake\Mailer\\AbstractTransport``
-classes to make email configuration and delivery easy.
+classes to configure emails with a fluent interface.
 
 If you want you can use these classes directly with the ``Mailer`` too.
 

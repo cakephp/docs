@@ -67,27 +67,6 @@ gestionnaire de fichier dans le tableau de données::
 Le gestionnaire de fichiers sera lu jusqu'à sa fin, il ne sera pas rembobiné
 avant d'être lu.
 
-.. warning::
-
-    Pour des raisons de compatibilité, les chaînes commençant par ``@`` seront
-    considérées comme locales ou des chemins de fichier d'un dépôt.
-
-Cette fonctionnalité est dépréciée depuis CakePHP 3.0.5 et sera retirée dans une
-version future. Avant que cela n'arrive, les données d'utilisateur passées
-au Client Http devront être nettoyées comme suit::
-
-    $response = $http->post('http://example.com/api', [
-        'search' => ltrim($this->request->getData('search'), '@'),
-    ]);
-
-S'il est nécessaire de garder les caractères du début ``@`` dans les chaînes
-de la requête, vous pouvez passer une chaîne de requête pré-encodée avec
-``http_build_query()``::
-
-    $response = $http->post('http://example.com/api', http_build_query([
-        'search' => $this->request->getData('search'),
-    ]));
-
 Construire des Corps de Requête Multipart à la Main
 ---------------------------------------------------
 
@@ -483,6 +462,59 @@ statuts::
 
     // helper __get()
     $response->code;
+
+.. _httpclient-testing:
+
+Tests
+=====
+
+.. php:trait:: Cake\TestSuite\HttpClientTrait
+
+Dans les tests, vous voudrez souvent créer des réponses de mocks vers des API
+externes. Vous pouvez utiliser ``HttpClientTrait`` pour définir des réponses aux
+requêtes faites par votre application::
+
+    use Cake\TestSuite\HttpClientTrait;
+    use Cake\TestSuite\TestCase;
+
+    class CartControllerTests extends TestCase
+    {
+        use HttpClientTrait;
+
+        public function testCheckout()
+        {
+            // Mocker une requête POST qui sera faite.
+            $this->mockClientPost(
+                'https://example.com/process-payment',
+                $this->newClientResponse(200, [], json_encode(['ok' => true]))
+            );
+            $this->post("/cart/checkout");
+            // Faire des assertions.
+        }
+    }
+
+Il existe des méthodes pour mocker les méthodes HTTP les plus courantes::
+
+    $this->mockClientGet(...);
+    $this->mockClientPatch(...);
+    $this->mockClientPost(...);
+    $this->mockClientPut(...);
+    $this->mockClientDelete(...);
+
+... php:method:: newClientResponse(int $code = 200, array $headers = [], string $body = '')
+
+Comme vu précédemment, vous pouvez utiliser la méthode ``newClientResponse()``
+pour créer des réponses pour les requêtes que fera votre application. Les
+en-têtes doivent être une liste de chaînes de caractères::
+
+    $headers = [
+        'Content-Type: application/json',
+        'Connection: close',
+    ];
+    $response = $this->newClientResponse(200, $headers, $body)
+
+
+.. versionadded:: 4.3.0
 
 .. meta::
     :title lang=fr: HttpClient

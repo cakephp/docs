@@ -268,11 +268,11 @@ Existem vários detectores embutidos que você pode usar:
 * ``is('ssl')`` Verifique se a solicitação é via SSL.
 * ``is('flash')`` Verifique se a solicitação possui um User-Agent de Flash.
 * ``is('requested')`` Verifique se a solicitação possui um parâmetro de consulta
-  'solicitado' com o valor 1.
-* ``is('json')`` Verifique se a solicitação possui extensão 'json' e
-  aceite mimetype 'application/json'.
+  'solicitado' com o valor 1.
+* ``is('json')`` Verifique se a solicitação possui extensão 'json' e aceite
+  mimetype 'application/json'.
 * ``is('xml')`` Verifique se a solicitação possui extensão 'xml' e aceite
-  mimetype 'application/xml' ou 'text/xml'.
+  mimetype 'application/xml' ou 'text/xml'.
 
 Dados da Sessão
 ---------------
@@ -892,7 +892,7 @@ Os cookies podem ser adicionados à resposta usando um array ou um objeto :php:c
         true // httponly
     ]);
 
-Veja a seção :ref:`created-cookies` para saber como usar o objeto cookie. 
+Veja a seção `created-cookies` para saber como usar o objeto cookie. 
 Você pode usar ``withExpiredCookie()`` para enviar um cookie expirado na 
 resposta. Isso fará com que o navegador remova seu cookie local::
 
