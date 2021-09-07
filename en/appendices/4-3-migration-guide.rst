@@ -33,6 +33,8 @@ Database
 - Using mutable datetime classes with ``DateTimeType`` and other time related type classes is deprecated.
   Hence methods ``DatetimeType::useMutable()``, ``DatetimeType::useImmutable()`` and similar methods
   in other type classes are deprecated.
+- ``DriverInterface::supportsQuoting()`` and ``DriverInterface::supportSavepoints()`` are now deprecated
+  in favor of ``DriverInterface::supports()`` which accepts feature constants defined in ``DriverInterface``.
 
 I18n
 ----
@@ -201,6 +203,8 @@ Database
 - ``JsonType::setEncodingOptions()`` was added. This method lets you define
   ``json_encode()`` options for when the ORM serializes JSON when persisting
   data.
+- ``DriverInterface::supports()`` consolidates all feature checks into one function.
+  Drivers can support custom feature namees or any of the `FEATURE\_` constants.
 
 Http
 ----
