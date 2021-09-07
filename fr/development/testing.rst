@@ -462,8 +462,8 @@ Créer un Schéma de Base de Données de Test
 
 Vous pouvez générer un schéma de base de données de test soit par des migrations
 de CakePHP, soit en chargeant un fichier de dump SQL, soit en utilisant un autre
-outil externe de gestion de schéma. Vous devez créer votre schéma dans le 
-fichier ``tests/bootstrap.php`` de votre application. 
+outil externe de gestion de schéma. Vous devez créer votre schéma dans le
+fichier ``tests/bootstrap.php`` de votre application.
 
 Si vous utilisez le `plugin de migrations </migrations>`  de CakePHP pour gérer
 les schémas de votre application, vous pouvez tout aussi bien réutiliser ces
@@ -496,7 +496,7 @@ Pour charger un fichier de dump SQL, vous pouvez faire ceci::
     use Cake\TestSuite\Fixture\SchemaLoader;
 
     // Charger un ou plusieurs fichiers SQL.
-    (new SchemaLoader())->loadFiles('chemin/vers/schema.sql', 'test');
+    (new SchemaLoader())->loadSqlFiles('chemin/vers/schema.sql', 'test');
 
 Au début du lancement de chaque test, ``SchemaLoader`` supprimera toutes les
 tables dans la connexion et les reconstruira à partir du fichier de schéma
