@@ -216,9 +216,11 @@ Database
 - ``JsonType::setEncodingOptions()`` was added. This method lets you define
   ``json_encode()`` options for when the ORM serializes JSON when persisting
   data.
-- ``DriverInterface::supports()`` consolidates all feature checks into one function.
+- Added ``DriverInterface::supports()`` which consolidates all feature checks into one function.
   Drivers can support custom feature namees or any of the ``DriverInterface::FEATURE\_*``
   constants.
+- Added ``DriverInterface::inTransaction()`` which reflects the status returned by
+  ``PDO::inTranaction()``.
 
 Http
 ----
