@@ -8,7 +8,7 @@ Contents
 
     intro
     quickstart
-    appendices/4-0-migration-guide
+    appendices/5-0-migration-guide
     tutorials-and-examples
     contributing
 

@@ -9,3 +9,4 @@ each version and the migration path between 3.x and 4.x.
 
     ./5-0-upgrade-guide
     ./5-0-migration-guide
+    ./fixture-upgrade
