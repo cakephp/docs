@@ -222,6 +222,14 @@ Database
 - Added ``DriverInterface::inTransaction()`` which reflects the status returned by
   ``PDO::inTranaction()``.
 
+Form
+----
+
+* ``Form::execute()`` now accepts an ``$options`` parameter. This parameter can
+  be used to choose which validator is applied or disable validation.
+* ``Form::validate()`` now accepts a ``$validator`` parameter which chooses the
+  validation set to be applied.
+
 Http
 ----
 

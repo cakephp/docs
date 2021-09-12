@@ -90,10 +90,26 @@ and validate request data::
 
 In the above example, we use the ``execute()`` method to run our form's
 ``_execute()`` method only when the data is valid, and set flash messages
-accordingly. We could have also used the ``validate()`` method to only validate
+accordingly. If we want to use a non-default validation set we can use the
+``validate`` option::
+
+    if ($contact->execute($this->request->getData(), 'update')) {
+        // Handle form success.
+    }
+
+This option can also be set to ``false`` to disable validation.
+
+We could have also used the ``validate()`` method to only validate
 the request data::
 
     $isValid = $form->validate($this->request->getData());
+
+    // You can also use other validation sets. The following
+    // would use the rules defined by `validationUpdate()`
+    $isValid = $form->validate($this->request->getData(), 'update');
+
+.. versionadded:: 4.3.0
+    Using validators other than ``default`` was added.
 
 Setting Form Values
 ===================
