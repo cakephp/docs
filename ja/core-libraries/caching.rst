@@ -22,7 +22,7 @@ CakePHP には、いくつかのキャッシュエンジンが用意されてい
   しかし、ディスクストレージは非常に安価なので、頻繁に書き込みが行なわれない
   大きなオブジェクトや要素の保存はファイルに適しています。
 * ``Memcached`` `Memcached <http://php.net/memcached>`_ 拡張を使います。
-* ``Redis`` `phpredis <https://github.com/nicolasff/phpredis>`_ 拡張を使います。
+* ``Redis`` `phpredis <https://github.com/phpredis/phpredis>`_ 拡張を使います。
   Redis は高速で、Memcached と同様の永続キャッシュシステム、アトミックな操作を提供します。
 * ``Apcu`` APCu キャッシュは、PHP の `APCu <http://php.net/apcu>`_ 拡張を使用します。
   この拡張はオブジェクトを保存するためにウェブサーバー上の共有メモリーを使います。
