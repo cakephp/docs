@@ -32,6 +32,12 @@ Cache
 - The ``Wincache`` engine was removed. The wincache extension is not supported
   on PHP 8.
 
+Controller
+----------
+
+- The components' ``Controller.shutdown`` event callback has been renamed from
+  ``shutdown`` to ``afterFilter`` to match the controller one. This makes the callbacks more consistent.
+
 Core
 ----
 
@@ -39,7 +45,6 @@ Core
 - The function ``getTypeName()`` has been dropped. Use PHP's ``get_debug_type()`` instead.
 - The dependency on ``league/container`` was updated to ``4.x``. This will
   require the addition of typehints to your ``ServiceProvider`` implementations.
-
 
 Database
 --------
@@ -71,7 +76,7 @@ I18n
 Log
 ---
 
-- Log engine config now uses ``null`` instead of ``false`` to disable scopes. 
+- Log engine config now uses ``null`` instead of ``false`` to disable scopes.
   So instead of ``'scopes' => false`` you need to use ``'scopes' => null`` in your log config.
 
 

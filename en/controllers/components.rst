@@ -281,11 +281,11 @@ augment the request cycle.
 .. php:method:: beforeFilter(EventInterface $event)
 
     Is called before the controller's
-    beforeFilter method, but *after* the controller's initialize() method.
+    beforeFilter() method, but *after* the controller's initialize() method.
 
 .. php:method:: startup(EventInterface $event)
 
-    Is called after the controller's beforeFilter
+    Is called after the controller's beforeFilter()
     method but before the controller executes the current action
     handler.
 
@@ -294,9 +294,9 @@ augment the request cycle.
     Is called after the controller executes the requested action's logic,
     but before the controller renders views and layout.
 
-.. php:method:: shutdown(EventInterface $event)
+.. php:method:: afterFilter(EventInterface $event)
 
-    Is called before output is sent to the browser.
+    Is called during the ``Controller.shutdown`` event, before output is sent to the browser.
 
 .. php:method:: beforeRedirect(EventInterface $event, $url, Response $response)
 
