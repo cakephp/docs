@@ -90,6 +90,12 @@ Routing
 - Colon prefixed route placeholders like ``:controller`` are deprecated. Use
   braced placeholders like ``{controller}`` instead.
 
+Controller
+----------
+
+- The components' ``Controller.shutdown`` event callback has been renamed from
+  ``shutdown`` to ``afterFilter`` to match the controller one. This makes the callbacks more consistent.
+
 View
 ----
 
