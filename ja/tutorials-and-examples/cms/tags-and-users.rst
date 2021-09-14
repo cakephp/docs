@@ -1,3 +1,4 @@
+
 CMS チュートリアル - タグとユーザー
 ###################################
 
@@ -84,7 +85,7 @@ ArticlesTable の ``initialize`` メソッドに以下を追加することで�
                 $this->Flash->error(__('Unable to add your article.'));
             }
             // タグのリストを取得
-            $tags = $this->Articles->Tags->find('list');
+            $tags = $this->Articles->Tags->find('list')->all();
 
             // ビューコンテキストに tags をセット
             $this->set('tags', $tags);
@@ -123,7 +124,7 @@ edit メソッドは次のようになります。 ::
         }
 
         // タグのリストを取得
-        $tags = $this->Articles->Tags->find('list');
+        $tags = $this->Articles->Tags->find('list')->all();
 
         // ビューコンテキストに tags をセット
         $this->set('tags', $tags);
@@ -181,7 +182,8 @@ edit メソッドは次のようになります。 ::
         // ArticlesTable を使用してタグ付きの記事を検索します。
         $articles = $this->Articles->find('tagged', [
             'tags' => $tags
-        ]);
+        ])
+        ->all();
 
         // 変数をビューテンプレートのコンテキストに渡します。
         $this->set([
@@ -201,7 +203,8 @@ PHP の可変引数を使ってアクションを記述することもできま�
         // ArticlesTable を使用してタグ付きの記事を検索します。
         $articles = $this->Articles->find('tagged', [
             'tags' => $tags
-        ]);
+        ])
+        ->all();
 
         // 変数をビューテンプレートのコンテキストに渡します。
         $this->set([
@@ -360,6 +363,20 @@ CakePHP では、コントローラーのアクションをスリムに保ち、
     // 以下の行を追加
     <p><b>Tags:</b> <?= h($article->tag_string) ?></p>
 
+また、既存のタグを取得できるようにviewメソッドを更新する必要があります。 ::
+
+    // src/Controller/ArticlesController.phpの中で
+
+    public function view($slug = null)
+    {
+       // Update retrieving tags with contain()
+       $article = $this->Articles
+            ->findBySlug($slug)
+            ->contain('Tags')
+            ->firstOrFail();
+        $this->set(compact('article'));
+    }
+
 タグ文字列の永続化
 ------------------
 
@@ -416,4 +433,53 @@ CakePHP では、コントローラーのアクションをスリムに保ち、
 役立ちます。 :doc:`/core-libraries/collections` のメソッドを使用してクエリー結果を操作したり、
 エンティティーを簡単に作成したりするシナリオを扱うことができます。
 
+タグ文字列の自動入力
+==============================
+
+記事を読み込む際に、関連するタグをロードする仕組みが必要です。
+**src/Model/Table/ArticlesTable.php** を変更してください。 ::
+
+    public function initialize(array $config): void
+    {
+        $this->addBehavior('Timestamp');
+        // Change this line
+        $this->belongsToMany('Tags', [
+            'joinTable' => 'articles_tags',
+            'dependent' => true
+        ]);
+    }
+
+これにより、Articlesテーブルモデルに対して、Tagsテーブルが関連付けられていることが
+通知されます。'dependent'オプションはarticlesのレコードが削除された時、
+関連するtagを削除するよう指示します。
+
+最後に **src/Controller/ArticlesController.php** の
+``findBySlug`` メソッドを更新します。 ::
+
+    public function edit($slug)
+    {
+        // Update this line
+        $article = $this->Articles
+            ->findBySlug($slug)
+            ->contain('Tags')
+            ->firstOrFail();
+    ...
+    }
+
+    public function view($slug = null)
+    {
+        // Update this line
+        $article = $this->Articles
+            ->findBySlug($slug)
+            ->contain('Tags')
+            ->firstOrFail();
+        $this->set(compact('article'));
+    }
+
+``contain()`` メソッドはarticleが読み込まれた時、 ``ArticlesTable`` オブジェクトに
+関連したtagsを読み込むよう指示します。
+これで、Articleエンティティに対してtag_stringが呼び出されると、文字列を
+作成するためのデータが存在します。
+
 次は :doc:`認証 </tutorials-and-examples/cms/authentication>` を追加しましょう。
+
