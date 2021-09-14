@@ -475,6 +475,7 @@ CakePHP では、コントローラーのアクションをスリムに保ち、
             ->firstOrFail();
         $this->set(compact('article'));
     }
+
 ``contain()`` メソッドはarticleが読み込まれた時、 ``ArticlesTable`` オブジェクトに
 関連したtagsを読み込むよう指示します。
 これで、Articleエンティティに対してtag_stringが呼び出されると、文字列を
