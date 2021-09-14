@@ -72,6 +72,9 @@ I18n
 ----
 
 - `Time` was renamed to `DateTime` to allow for future time-only types.
+- Translation files for plugins with vendor prefixed names (``FooBar/Awesome``) will now have that
+  prefix in the file name, e.g. ``foo_bar_awesome.po`` to avoid collision with a ``awesome.po`` file
+  from a corresponding plugin (``Awesome``).
 
 Log
 ---
