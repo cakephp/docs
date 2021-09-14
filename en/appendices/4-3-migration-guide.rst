@@ -100,6 +100,8 @@ View
 ----
 
 - FormHelper methods' non-associative options (e.g. ``['disabled']``) are now deprecated.
+- Second argument ``$merge`` of ``ViewBuilder::setHelpers()`` has been deprecated in favor of dedicated
+  ``ViewBuilder::addHelpers()`` method to cleanly separate merge from overwrite operation.
 
 TestSuite
 ---------
@@ -286,3 +288,4 @@ View
   ``aria-required``, and ``aria-describedby``  attributes based on
   metadata from the validator. The ``aria-label`` attribute will be set if
   you disable the automatic label element and provide a placeholder.
+- ``ViewBuilder::addHelpers()`` has been added cleanly separate merge from overwrite operation.
