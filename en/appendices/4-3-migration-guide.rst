@@ -288,4 +288,4 @@ View
   ``aria-required``, and ``aria-describedby``  attributes based on
   metadata from the validator. The ``aria-label`` attribute will be set if
   you disable the automatic label element and provide a placeholder.
-- ``ViewBuilder::addHelpers()`` has been added cleanly separate merge from overwrite operation.
+- ``ViewBuilder::addHelpers()`` has been added to cleanly separate merge from overwrite operation.

@@ -212,7 +212,8 @@ helpers using the ``ViewBuilder::addHelpers()`` method::
 When adding helpers be sure to include 'Html' or it will be removed from the
 helpers loaded in your email template.
 
-Note: In versions prior to 4.3+, you will need to use setHelpers() instead.
+.. note::
+    In versions prior to 4.3.0, you will need to use ``setHelpers()`` instead.
 
 If you want to send email using templates in a plugin you can use the familiar
 :term:`plugin syntax` to do so::
