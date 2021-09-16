@@ -24,7 +24,7 @@
 * ``Wincache`` - использует расширение `Wincache <http://php.net/wincache>`_. Wincache похож на APC по функциям и производительности, но оптимизирован для Windows и IIS.
 * ``XcacheEngine`` - `Xcache <http://xcache.lighttpd.net/>`_ - является расширением PHP, которое предоставляет функции  аналогичные APC.
 * ``MemcachedEngine`` - использует расширение - `Memcached <http://php.net/memcached>`_.
-* ``RedisEngine`` (Redis) - использует расширение - `phpredis <https://github.com/nicolasff/phpredis>`_. Redis обеспечивает быструю и постоянную систему кэширования, похожую на Memcached и также обеспечивает атомарные операции.
+* ``RedisEngine`` (Redis) - использует расширение - `phpredis <https://github.com/phpredis/phpredis>`_. Redis обеспечивает быструю и постоянную систему кэширования, похожую на Memcached и также обеспечивает атомарные операции.
 
 Независимо от используемого вами CacheEngine, ваше приложение взаимодействует с
 :php:class:`Cake\\Cache\\Cache` согласованным образом. Вы можете менять ваш CacheEngine,

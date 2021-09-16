@@ -31,7 +31,7 @@ build your own backend. The built-in caching engines are:
   optimized for Windows and IIS.
 * ``Memcached`` Uses the `Memcached <http://php.net/memcached>`_
   extension.
-* ``Redis`` Uses the `phpredis <https://github.com/nicolasff/phpredis>`_
+* ``Redis`` Uses the `phpredis <https://github.com/phpredis/phpredis>`_
   extension. Redis provides a fast and persistent cache system similar to
   Memcached, also provides atomic operations.
 * ``Array`` Stores all data in an array. This engine does not provide
@@ -343,7 +343,7 @@ For example::
     Cache::write('cloud', $cloud);
 
     return $cloud;
-    
+
 Or if you are using another cache configuration called ``short``, you can
 specify it in ``Cache::read()`` and ``Cache::write()`` calls as below::
 

@@ -32,7 +32,7 @@ build your own backend. The built-in caching engines are:
   is a PHP extension that provides similar features to APC.
 * ``MemcachedEngine`` Uses the `Memcached <http://php.net/memcached>`_
   extension.
-* ``RedisEngine`` Uses the `phpredis <https://github.com/nicolasff/phpredis>`_
+* ``RedisEngine`` Uses the `phpredis <https://github.com/phpredis/phpredis>`_
   extension. Redis provides a fast and persistent cache system similar to
   Memcached, also provides atomic operations.
 
