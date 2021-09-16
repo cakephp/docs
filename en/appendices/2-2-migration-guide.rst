@@ -262,7 +262,7 @@ Redis Engine
 ------------
 
 A new caching engine was added using the `phpredis extension
-<https://github.com/nicolasff/phpredis>`_ it is configured similarly to the
+<https://github.com/phpredis/phpredis>`_ it is configured similarly to the
 Memcache engine.
 
 Cache groups

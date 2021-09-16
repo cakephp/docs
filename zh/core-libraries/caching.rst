@@ -23,7 +23,7 @@ CakePHP 中的缓存主要是由 :php:class:`Cache` 类来帮助（处理）的�
   提供了非常快速的缓存系统，可以分布于很多台服务器，而且提供原子化操作。
 * ``MemcachedEngine`` 使用 `Memcached <https://secure.php.net/memcached>`_ 扩展。它也与
   memcache 接口，但提供更好的性能。
-* ``RedisEngine`` 使用 `phpredis <https://github.com/nicolasff/phpredis>`_ 扩展。
+* ``RedisEngine`` 使用 `phpredis <https://github.com/phpredis/phpredis>`_ 扩展。
   Redis 类似于 memcached，提供了快速和可持久化的缓存系统，也提供原子化操作。
 
 .. versionchanged:: 2.3
@@ -35,7 +35,7 @@ CakePHP 中的缓存主要是由 :php:class:`Cache` 类来帮助（处理）的�
     增加了Memcached引擎，Memcache引擎作废了。
 
 不论你选择使用哪种缓存引擎，你的应用程序都是以一致的方式与 :php:class:`Cache` 类
-交互。这意味着你可以随着应用程序的增长而容易地替换缓存引擎。除了 
+交互。这意味着你可以随着应用程序的增长而容易地替换缓存引擎。除了
 :php:class:`Cache` 类，:doc:`/core-libraries/helpers/cache` 允许缓存整个页面，这
 也能极大地改善性能。
 
@@ -72,7 +72,7 @@ Memcache，你一定要为核心缓存设置唯一的键。这将防止多个应
     ));
 
 把上面的代码放在 ``app/Config/bootstrap.php`` 中，你就多了两个缓存配置。这两个
-配置的名称'short'或'long'会作为 :php:func:`Cache::write()` 和 
+配置的名称'short'或'long'会作为 :php:func:`Cache::write()` 和
 :php:func:`Cache::read()` 方法的 ``$config`` 参数。
 
 .. note::
@@ -86,10 +86,10 @@ Memcache，你一定要为核心缓存设置唯一的键。这将防止多个应
 为缓存创建存储引擎
 ===================================
 
-你可以在 ``app/Lib`` 目录以及在插件中用 ``$plugin/Lib`` 目录中提供自定义的 
+你可以在 ``app/Lib`` 目录以及在插件中用 ``$plugin/Lib`` 目录中提供自定义的
 ``Cache`` 适配器。App/插件的缓存引擎也可以重载核心的引擎。缓存适配器必须在cache
-目录中。如果你有一个叫做 ``MyCustomCacheEngine`` 的缓存引擎，它就会被放在 
-``app/Lib/Cache/Engine/MyCustomCacheEngine.php`` 作为 app/libs，或者在 
+目录中。如果你有一个叫做 ``MyCustomCacheEngine`` 的缓存引擎，它就会被放在
+``app/Lib/Cache/Engine/MyCustomCacheEngine.php`` 作为 app/libs，或者在
 ``$plugin/Lib/Cache/Engine/MyCustomCacheEngine.php`` 作为插件的一部分。插件的缓存
 配置需要使用插件的点语法。::
 
@@ -205,7 +205,7 @@ CacheEngine必需的API为
 可以保存在缓存中。Cache类提供了原子化的方式来轻易地增/减计数器的值。原子化操作对
 这些值很重要，因为这减少了竞争的风险，即两个用户同时把值减一，导致不正确的值。
 
-在设置一个整数值之后，你可以用 :php:meth:`Cache::increment()` 和 
+在设置一个整数值之后，你可以用 :php:meth:`Cache::increment()` 和
 :php:meth:`Cache::decrement()` 方法来对它进行操作::
 
     Cache::write('initial_count', 10);
@@ -311,7 +311,7 @@ CacheEngine必需的API为
 .. php:staticmethod:: write($key, $value, $config = 'default')
 
     ``Cache::write()`` 方法会把$value写入缓存。之后你可以通过 ``$key`` 来读取或
-    删除它。你也可以指定一个可选的（缓存）配置来保存要缓存的值。如果 ``$config`` 
+    删除它。你也可以指定一个可选的（缓存）配置来保存要缓存的值。如果 ``$config``
     没有指定，默认（配置）就会被使用。``Cache::write()`` 方法可以保存任意类型的
     对象，很适合保存模型 find 方法调用的结果::
 

@@ -41,7 +41,7 @@ votre propre système de mise en cache. Les moteurs de cache intégrés sont:
   `Memcached <https://secure.php.net/memcached>`_. Il est aussi une interface avec
   memcache mais il fournit une meilleur performance.
 * ``RedisEngine`` Utilise l'extension
-  `phpredis (2.2.3 minimum) <https://github.com/nicolasff/phpredis>`_. Redis
+  `phpredis (2.2.3 minimum) <https://github.com/phpredis/phpredis>`_. Redis
   fournit un système de cache cohérent et rapide similaire à memcached et il
   permet aussi les opérations atomiques.
 
