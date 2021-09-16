@@ -34,7 +34,7 @@ to implement your own caching systems. The built-in caching engines are:
   distributed across many servers, and provides atomic operations.
 * ``MemcachedEngine`` Uses the `Memcached <https://secure.php.net/memcached>`_
   extension. It also interfaces with memcache but provides better performance.
-* ``RedisEngine`` Uses the `phpredis <https://github.com/nicolasff/phpredis>`_
+* ``RedisEngine`` Uses the `phpredis <https://github.com/phpredis/phpredis>`_
   extension (2.2.3 minimum). Redis provides a fast and persistent cache system
   similar to memcached, also provides atomic operations.
 

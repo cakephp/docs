@@ -237,7 +237,7 @@ Router
 Redis エンジン
 --------------
 
-新しいキャッシュエンジン `phpredis extension <https://github.com/nicolasff/phpredis>`_ が追加されました。
+新しいキャッシュエンジン `phpredis extension <https://github.com/phpredis/phpredis>`_ が追加されました。
 設定は Memcacheエンジンに似ています。
 
 
