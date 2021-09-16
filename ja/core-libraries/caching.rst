@@ -28,7 +28,7 @@ CakePHP には、いくつかのキャッシュエンジンが用意されてい
 * ``Wincache`` Wincache は `Wincache <http://php.net/wincache>`_ 拡張を使います。
   Wincache は APC と同様の機能とパフォーマンスを持ちますが、Windows と IIS に最適化されています。
 * ``MemcachedEngine`` `Memcached <http://php.net/memcached>`_ 拡張を使います。
-* ``RedisEngine`` `phpredis <https://github.com/nicolasff/phpredis>`_ 拡張を使います。
+* ``RedisEngine`` `phpredis <https://github.com/phpredis/phpredis>`_ 拡張を使います。
   Redis は高速で、Memcached と同様の永続キャッシュシステム、アトミックな操作を提供します。
 
 あなたが選択したキャッシュエンジンに関わらず、
