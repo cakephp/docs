@@ -140,7 +140,8 @@ sont utilisées:
   :php:meth:`~Cake\\Mailer\\Email::configTransport()`.
 - ``'log'``: Niveau de Log pour connecter les headers de l'email headers et le
   message. ``true`` va utiliser LOG_DEBUG. Regardez aussi :ref:`logging-levels`.
-- ``'helpers'``: Tableau de helpers utilisés dans le template email. ``Email::helpers()``.
+- ``'helpers'``: Tableau de helpers utilisés dans le template email.
+  ``ViewBuilder::setHelpers()``/``ViewBuilder::addHelpers()``
 
 Toutes ces configurations sont optionnelles, excepté ``'from'``.
 
@@ -215,12 +216,16 @@ Dans votre email template, vous pouvez utiliser ceux-ci avec::
 Vous pouvez aussi utiliser les helpers dans les emails, un peu comme vous
 pouvez dans des fichiers de template normaux. Par défaut, seul
 :php:class:`HtmlHelper` est chargé. Vous pouvez chargez des helpers
-supplémentaires en utilisant la méthode ``helpers()``::
+supplémentaires en utilisant la méthode ``ViewBuilder::addHelpers()``::
 
-    $email->setHelpers(['Html', 'Custom', 'Text']);
+    $email->viewBuilder()->addHelpers(['Html', 'Custom', 'Text']);
 
-Quand vous définissez les helpers, assurez vous d'inclure 'Html' ou il sera
+Quand vous ajoutez des helpers, assurez vous d'inclure 'Html' ou il sera
 retiré des helpers chargés dans votre template d'email.
+
+.. note::
+    Dans les versions antérieures à 4.3.0, vous deviez utilisez ``setHelpers()``
+    à la place.
 
 Si vous voulez envoyer un email en utilisant templates dans un plugin, vous
 pouvez utiliser la :term:`syntaxe de plugin` familière pour le faire::

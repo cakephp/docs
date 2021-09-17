@@ -30,6 +30,12 @@ Une nouvelle option de configuration a été ajoutée pour désactiver les
 dépéréciations chemin par chemin. Cf. :ref:`deprecation-warnings` pour plus
 d'informations.
 
+Connection
+----------
+
+- ``Connection::supportsDynamicConstraints()`` a été dépréciée car les fixtures
+  ne tentent plus de supprimer ou créer des contraintes dynamiquement.
+
 Base De Données
 ---------------
 
@@ -38,7 +44,14 @@ Base De Données
   De ce fait, les méthodes ``DatetimeType::useMutable()``,
   ``DatetimeType::useImmutable()`` et les méthodes similaires dans d'autres
   classes de types sont dépréciées.
-
+- ``DriverInterface::supportsQuoting()`` et
+  ``DriverInterface::supportSavepoints()`` sont maintenant dépréciées au profit
+  de ``DriverInterface::supports()`` qui accepte des constantes de feature
+  définies dans ``DriverInterface``.
+- ``DriverInterface::supportsDynamicConstraints()`` a été dépréciée dès lors que
+  les fixtures ne tentent plus de supprimer ou créer des contraintes
+  dynamiquement.
+  
 I18n
 ----
 - Les classes de date et heure ``Time`` et ``Date`` sont dépréciées.
@@ -64,6 +77,14 @@ Middleware
   ``Closure`` avec la signature ``function($request, $handler)`` o des classes
   qui implémentent ``Psr\Http\Server\MiddlewareInterface``.
 
+Network
+-------
+
+- ``Socket::$connected`` est déprécié. Utilisez ``isConnected()`` à la place.
+- ``Socket::$description`` est déprécié.
+- ``Socket::$encrypted`` est déprécié. Utilisez ``isEncrypted()`` à la place.
+- ``Socket::$lastError`` est déprécié. Utilisez ``lastError()`` à la place.
+
 ORM
 ---
 
@@ -73,13 +94,32 @@ ORM
   résultats est maintenant déprécié. Un exemple de cet usage est
   ``$query->combine('id', 'title');``. Ceci doit être remplacé par
   ``$query->all()->combine('id', 'title');``.
+- Passer un object validator à ``Table::save()`` via l'option ``validate`` est
+  déprécié. Définissez le validator dans la classe de table ou utilisez
+  ``setValidator()`` à la place.
 
 Routing
 -------
 
 - Les placeholders de routes préfixés par des doubles points tels que
   ``:controller`` sont dépréciés. Remplacez-les par des placeholders entre
-  accollades tels que ``{controller}``.
+  accolades tels que ``{controller}``.
+
+Controller
+----------
+
+- Le callback de l'événement ``Controller.shutdown`` des controllers a été
+  renommé de ``shutdown`` à ``afterFilter`` pour correspondre à celui du
+  controller. Cela rend les callbacks plus cohérents.
+
+View
+----
+
+- Les options non associatives des méthodes de FormHelper (par exemple
+  ``['disabled']``) sont maintenant dépréciées.
+- Le second argument ``$merge`` de ``ViewBuilder::setHelpers()`` a été déprécié
+  au profit de la méthode dédiée ``ViewBuilder::addHelpers()`` qui sépare
+  proprement l'ajout et le remplacement de helpers.
 
 TestSuite
 ---------
@@ -87,6 +127,9 @@ TestSuite
 - ``TestFixture::$fields`` et ``TestFixture::$import`` sont dépréciés. Il est
   conseillé de convertir votre application vers le
   :doc:`nouveau système de fixture <./fixture-upgrade>`.
+- ``TestCase::$dropTables`` est déprécié. La suppression de tables pendant
+  l'exécution d'un test est incompatible avec les nouvelles fixtures basées sur
+  le dump d'une migration/schéma. La fonctionnalité sera supprimée dans 5.0.
 
 Changements dans les Behaviors
 ==============================
@@ -105,6 +148,26 @@ Core
 
 - ``Configure::load()`` soulèvera désormais une exception en cas d'utilisation
   d'un moteur de configuration invalide.
+
+Database
+--------
+
+- ``ComparisonExpression `` n'entoure plus le SQL de ``IdentifierExpression``
+  entre des parenthèses. Cela affecte ``Query::where()`` et tous les autres
+  endroits où une ``ComparisonExpression`` est générée.
+
+Datasource
+----------
+
+- Les noms des paramètres ``$alias`` et ``$source`` de
+  ``ConnectionManager::alias()`` ont été modifiés pour correspondre à ce qu'ils
+  sont. Cela affecte uniquement la documentation et les paramètres nommés.
+
+Http
+----
+
+- ``Http\Client`` utilise maintenant ``ini_get('user_agent')`` avec 'CakePHP' en
+  tant que valeur de repli pour son user-agent.
 
 ORM
 ---
@@ -127,6 +190,9 @@ ORM
 Routing
 -------
 
+- ``Router::connect()``, ``Router::prefix()``, ``Router::plugin()`` et
+  ``Router::scope()`` sont dépréciées. Utilisez les méthodes non statiques
+  correspondantes de ``RouteBuilder`` à la place.
 - ``RouteBuilder::resources()`` génère maintenant des routes qui utilisent des
   placeholders entre accolades.
 
@@ -136,6 +202,12 @@ Validation
 - ``Validator::setProvider()`` lève maintenant une exception quand un nom de
   provider fourni n'est ni un objet ni une chaîne de caractères. Auparavant cela
   n'était pas une erreur, mais le provider ne fonctionnait pas.
+
+View
+----
+
+- Le paramètre ``$vars`` de ``ViewBuilder::build()`` est déprécié. Utilisez
+  ``setVar()`` à la place.
 
 Changements entraînant une rupture
 ==================================
@@ -179,6 +251,20 @@ Database
   fuseau horaire de l'utilisateur vers le fuseau horaire de l'application.
   Reportez-vous à :ref:`converting-request-data-from-user-timezone` pour plus
   d'informations.
+- Ajout de ``DriverInterface::supports()`` qui consolide toutes les
+  vérifications de feature en une seule fonction. Les pilotes peuvent supporter
+  les nommages personnalisés de feature ou n'importe quelle constante
+  ``DriverInterface::FEATURE\_*``
+- Ajout de ``DriverInterface::inTransaction()`` qui reflète le statut renvoyé
+  par ``PDO::inTranaction()``.
+
+Form
+----
+
+* ``Form::execute()`` now accepts an ``$options`` parameter. This parameter can
+  be used to choose which validator is applied or disable validation.
+* ``Form::validate()`` now accepts a ``$validator`` parameter which chooses the
+  validation set to be applied.
 
 Http
 ----
@@ -229,3 +315,9 @@ View
 - ``HtmlHelper::script()`` et ``HtmlHelper::css()`` ajoutent maintenant
   l'attribut ``nonce`` pour générer des balises quand les attributs de requête
   ``cspScriptNonce`` et ``cspStyleNonce`` sont présents.
+- ``FormHelper::control()`` complète maintenant les attributs ``aria-invalid``,
+  ``aria-required`` et ``aria-describedby``  à partir des métadonnées depuis le
+  validator. L'attribut ``aria-label`` sera défini si vous désactivez l'élement
+  automatique label et fournissez un placeholder.
+- ``ViewBuilder::addHelpers()`` a été ajoutée pour séparer proprement les
+  opérations d'ajout et de redéfinition de helpers.
