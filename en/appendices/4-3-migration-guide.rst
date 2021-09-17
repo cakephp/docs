@@ -83,6 +83,8 @@ ORM
   updated to ``$query->all()->combine('id', 'title');`` instead.
 - Passing a validator object to ``Table::save()`` via the ``validate`` option is
   deprecated. Define the validator within the table class or use ``setValidator()`` instead.
+- ``Association::setName()`` is deprecated. Association names should be defined
+  when the association is.
 
 Routing
 -------
