@@ -367,7 +367,18 @@ float
     utilisée.
 decimal
     Correspond au type ``DECIMAL``. Supporte les options ``length`` et
-    ``precision``.
+    ``precision``. Les valeurs du type `decimal` sont représentées par des
+    chaînes de texte (et non par des `float` comme on pourrait s'y attendre).
+    Cela vient du fait que les types décimaux sont utilisés pour réprésenter des
+    valeurs numériques exactes dans les bases de données, alors que
+    l'utilisation de type flottants en PHP peut potentiellement entraîner des
+    pertes de précision.
+
+    Si vous voulez que les valeurs soient représentées par des `float` dans
+    votre code PHP, envisagez plutôt d'utiliser des types de colonnes `FLOAT` ou
+    `DOUBLE` dans votre base de données. Ensuite, selon l'utilisation que vous
+    en ferez, vous pourrez faire correspondre explicitement vos colonnes
+    décimales à un type `float` dans votre schéma de table.
 boolean
     Correspond au ``BOOLEAN`` sauf pour MySQL, où ``TINYINT(1)`` est utilisé pour
     représenter les booléens. ``BIT(1)`` n'est pour l'instant pas supporté.
