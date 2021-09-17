@@ -230,6 +230,13 @@ sur le code que vous écrivez puisque vous pouvez vérifier que le code que vous
 puisque les tests sont du code, ils peuvent être re-lancés dès que vous faîtes
 un changement. Cela évite la création de nouveaux bugs.
 
+.. note::
+
+    L'EventManager est remis à blanc pour chaque méthode de test. Cela signifie
+    que lorsque vous lancez plusieurs tests ensemble, vous perdez les écouteurs
+    d'events qui ont été enregistrés dans config/bootstrap.php puisque le
+    bootstrap n'est exécuté qu'une seule fois.
+
 .. _running-tests:
 
 Lancer les Tests
@@ -1104,8 +1111,8 @@ possède de correctes effets secondaires.
 Configurer la Requête
 ---------------------
 
-La classe ``IntegrationTestCase`` intègre de nombreux helpers pour faciliter
-la configuration des requêtes que vous allez envoyer à votre controller::
+La classe ``IntegrationTestCase`` intègre de nombreux helpers pour configurer
+les requêtes que vous allez envoyer à votre controller::
 
     // Définit des cookies
     $this->cookie('name', 'Uncle Bob');

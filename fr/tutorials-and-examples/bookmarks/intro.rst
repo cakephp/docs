@@ -35,7 +35,7 @@ La façon la plus simple pour installer CakePHP est d'utiliser Composer. Compose
 est un moyen simple d'installer CakePHP depuis votre terminal ou votre
 prompteur de ligne de commandes. D'abord, vous aurez besoin de télécharger et
 d'installer Composer si vous ne l'avez pas déjà fait. Si vous avez cURL
-installé, c'est aussi facile que de lancer ce qui suit::
+installé, exécutez ce qui suit::
 
     curl -s https://getcomposer.org/installer | php
 

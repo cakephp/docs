@@ -404,7 +404,7 @@ Lire des Corps de Réponse JSON et XML
 -------------------------------------
 
 Puisque les réponses JSON et XML sont souvent utilisées, les objets response
-fournissent des accesseurs faciles à utiliser pour lire les données décodées.
+fournissent des accesseurs pour lire les données décodées.
 Les données JSON décodées sont fournies sous forme de tableau, tandis que les
 données XML sont décodées en un arbre ``SimpleXMLElement``::
 

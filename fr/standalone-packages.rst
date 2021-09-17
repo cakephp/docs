@@ -48,7 +48,7 @@ et nombres.
 `Cache <https://github.com/cakephp/cache>`_
 -------------------------------------------
 
-Bibliothèque de cache conforme à PSR-16 et facile à utiliser, supportant les
+Bibliothèque de cache conforme à PSR-16, supportant les
 caches multiples en backend.
 
 `Log <https://github.com/cakephp/log>`_

@@ -360,7 +360,7 @@ Behaviors
 
 .. start-behaviors
 
-Les Behaviors fournissent une façon facile de créer des parties de logique
+Les Behaviors fournissent un moyen de créer des parties de logique
 réutilisables horizontalement liées aux classes table. Vous vous demandez
 peut-être pourquoi les behaviors sont des classes classiques et non des
 traits. La première raison est les écouteurs d'event. Alors que les traits

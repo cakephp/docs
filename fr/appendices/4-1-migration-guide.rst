@@ -169,8 +169,8 @@ Database
 * ``AggregateExpression`` a été ajouté pour représenter les fonctions SQL d'agrégation.
   ``FunctionsBuilder::aggregate()`` peut être utilisé pour encapsuler de nouvelles fonctions SQL agrégées.
 * La prise en charge des fonctions 'Window' a été ajoutée pour n'importe quelle expression agrégée.
-  ``AggregateExpression`` enveloppe l'expression de fenêtrage (window expression) permettant ainsi
-  d'étendre n'importe quelle instance en chaînant les appels.
+  ``AggregateExpression`` enveloppe l'expression de fenêtrage (window expression)
+  pour le chaînage des appels.
 * Les fonctions d'agrégation prennent désormais en charge les clauses ``FILTER (WHERE ...)``.
 * Postgres et SQLServer prennent désormais en charge les conditions ``HAVING`` sur les fonctions
   d'aggrégation avec alias.

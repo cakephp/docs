@@ -74,7 +74,7 @@ Il est également facile de sauvegarder plusieurs traductions en une fois::
     $article->translation('fr')->title = 'Un autre Titre';
     $this->Articles->save($article);
 
-Oui, aussi facilement. Si vous voulez aller plus en profondeur sur la façon
+Si vous voulez aller plus en profondeur sur la façon
 dont il fonctionne ou pour affiner le behavior à vos besoins, continuez de
 lire le reste de ce chapitre.
 

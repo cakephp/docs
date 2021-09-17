@@ -4,8 +4,7 @@ Associations - Lier les Tables Ensemble
 Définir les relations entre les différents objets dans votre application
 sera un processus naturel. Par exemple, un article peut avoir plusieurs
 commentaires, et appartenir à un auteur. Les Auteurs peuvent avoir plusieurs
-articles et plusieurs commentaires. CakePHP facilite la gestion de ces
-associations. Les quatre types d'association dans CakePHP sont:
+articles et plusieurs commentaires. Les quatre types d'association dans CakePHP sont:
 hasOne, hasMany, belongsTo, et belongsToMany.
 
 ============= ===================== =======================================

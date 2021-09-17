@@ -480,7 +480,7 @@ les méthodes suivantes:
   Statement.
 * ``marshal``: Transforme des données à plat en objets PHP.
 
-Un moyen simple de remplir l'interface basique est d'étendre
+Pour remplir l'interface basique, vous pouvez étendre
 :php:class:`Cake\\Database\\Type`. Par exemple, si nous souhaitions ajouter un
 type JSON, nous pourrions créer la classe de type suivante::
 
