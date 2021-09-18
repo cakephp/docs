@@ -1085,7 +1085,7 @@ breaking. When writing functional tests using :php:class:`ControllerTestCase`
 you can inspect the rendered view content by setting the ``return`` option to
 'view'. While it is possible to test view content using ControllerTestCase,
 more robust and maintainable integration/view testing can be accomplished using
-tools like `Selenium webdriver <http://seleniumhq.org>`_.
+tools like `Selenium webdriver <https://www.selenium.dev/>`_.
 
 
 Testing Components

@@ -949,7 +949,7 @@ SessionComponent 组件，我们就能够在它上面运行测试方法。假设
 测试套件，容易遭到破坏。在使用 :php:class:`ControllerTestCase` 编写功能性测试时，
 可以设置 ``return`` 选项为 'view' 来检视渲染的视图内容。虽然有可能使用
 ControllerTestCase 测试视图内容，更健壮、易于维护的集成/视图测试可以使用象
-`Selenium webdriver <http://seleniumhq.org>`_ 这样的工具来实现。
+`Selenium webdriver <https://www.selenium.dev/>`_ 这样的工具来实现。
 
 
 测试组件
