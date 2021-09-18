@@ -456,11 +456,13 @@ database schema as well::
     // in tests/bootstrap.php
     use Migrations\TestSuite\Migrator;
 
+    $migrator = new Migrator();
+    
     // Simple setup for with no plugins
-    Migrator::migrate();
+    $migrator->run();
 
     // Run migrations for multiple plugins
-    Migrator::migrate([
+    $migrator->run([
         ['plugin' => 'Contacts'],
         // Run the Documents migrations on the test_docs connection.
         ['plugin' => 'Documents', 'connection' => 'test_docs'],
