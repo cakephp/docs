@@ -372,7 +372,7 @@ Helper
   de construire des jetons de formulaires à partir des données est désormais incluse dans
   la classe interne ``FormProtector``.
 * La méthode ``HtmlHelper::docType()`` a été supprimée. HTML4 et XHTML sont maintenant
-  obsolètes et doctype pour HTML5 est assez court et facile à taper directement.
+  obsolètes et doctype pour HTML5 est court à taper directement.
 * L'option  ``safe`` pour ``HtmlHelper::scriptBlock()`` et ``HtmlHelper::scriptStart()``
   a été retiré. Lorsqu'il était activé, il générait des tags ``CDATA`` qui ne sont
   nécessaires que pour XHTML qui est maintenant obsolète..

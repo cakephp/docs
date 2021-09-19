@@ -31,7 +31,7 @@ Récupérer CakePHP
 La manière la plus simple d'installer CakePHP est d'utiliser Composer. Composer
 est une manière simple d'installer CakePHP via votre terminal. Premièrement, vous
 devez télécharger et installer Composer si vous ne l'avez pas déjà fait. Si vous
-avez cURL installé, il suffit simplement de lancer la commande suivante:
+avez cURL installé, exécutez la commande suivante:
 
 .. code-block:: bash
 

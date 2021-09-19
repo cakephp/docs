@@ -12,8 +12,8 @@ s'est passé dans votre application à chaque instant. Quels termes de recherche
 ont été utilisés ? Quelles sortes d'erreurs ont été vues par mes utilisateurs ?
 A quelle fréquence est exécutée une requête particulière ?
 
-La journalisation des données dans CakePHP est facile - la fonction log()
-est fournie par ``LogTrait``, qui est l'ancêtre commun de beaucoup de classes
+La journalisation des données dans CakePHP passe par la fonction log()
+fournie par ``LogTrait``, qui est l'ancêtre commun de beaucoup de classes
 CakePHP. Si le contexte est une classe CakePHP (Controller, Component, View...),
 vous pouvez loguer (journaliser) vos données. Vous pouvez aussi utiliser
 ``Log::write()`` directement. Consultez :ref:`writing-to-logs`.
@@ -56,10 +56,10 @@ Un exemple serait::
         'file' => 'error',
     ]);
 
-Ce qui est au-dessus crée deux journaux. Un appelé ``debug``, l'autre appelé
+Le code ci-dessus crée deux journaux. Un appelé ``debug``, l'autre appelé
 ``error``. Chacun est configuré pour gérer différents niveaux de message. Ils
-stockent aussi leurs messages de journal dans des fichiers séparés, ainsi il
-est facile de séparer les logs de debug/notice/info des erreurs plus sérieuses.
+stockent aussi leurs messages de journal dans des fichiers séparés, ainsi il est
+possible de séparer les logs de debug/notice/info des erreurs plus sérieuses.
 Regardez la section sur :ref:`logging-levels` pour plus d'informations sur les
 différents niveaux et ce qu'ils signifient.
 
@@ -141,7 +141,7 @@ un tableau::
 
 CakePHP a besoin que tous les adaptateurs de logging intègrent
 ``Psr\Log\LoggerInterface``. La classe :php:class:`Cake\Log\Engine\BaseLog` est
-un moyen facile de satisfaire l'interface puisqu'elle nécessite seulement
+un moyen de satisfaire l'interface puisqu'elle nécessite seulement
 que vous intégriez la méthode ``log()``.
 
 .. _file-log:
@@ -471,7 +471,7 @@ Utiliser Monolog
 ================
 
 Monolog est un logger populaire pour PHP. Puisqu'il intègre les mêmes interfaces
-que les loggers de CakePHP, il est facile de l'utiliser dans votre application
+que les loggers de CakePHP, vous pouvez l'utiliser dans votre application
 comme logger par défaut.
 
 Après avoir installé Monolog en utilisant composer, configurez le logger en

@@ -3,7 +3,7 @@ SecurityComponent (Sécurité)
 
 .. php:class:: SecurityComponent(ComponentCollection $collection, array $config = [])
 
-Le Component Security offre une manière simple d'inclure une sécurité renforcée
+Le Component Security apporte une sécurité renforcée
 à votre application. Il fournit des méthodes pour diverses tâches comme:
 
 * Restreindre les méthodes HTTP que votre application accepte.

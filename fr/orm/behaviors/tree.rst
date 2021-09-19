@@ -66,7 +66,7 @@ et en demandant le nombre de descendants qu'il a::
     $node = $categories->get(1);
     echo $categories->childCount($node);
 
-Obtenir une liste aplatie des descendants pour un nœud est également facile::
+Pour obtenir une liste à plat des descendants pour un nœud::
 
     $descendants = $categories->find('children', ['for' => 1]);
 

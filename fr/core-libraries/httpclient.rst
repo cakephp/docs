@@ -5,12 +5,9 @@ Client Http
 
 .. php:class:: Client(mixed $config = [])
 
-CakePHP intègre un client HTTP basique mais puissant qui peut être utilisé pour
-faire des requêtes. C'est un bon moyen de communiquer avec des services webs et
-des APIs distantes.
-
-.. versionchanged:: 3.3.0
-    Avant 3.3.0, vous devez utiliser ``Cake\Network\Http\Client``.
+CakePHP intègre un client HTTP basique respectant le standard PSR-18, que vous
+pouvez utiliser pour faire des requêtes. C'est un bon moyen de communiquer avec
+des services webs et des APIs distantes.
 
 Faire des Requêtes
 ==================
@@ -33,16 +30,16 @@ ceci::
       'headers' => ['X-Requested-With' => 'XMLHttpRequest']
     ]);
 
-Faire des requêtes POST et PUT est également simple::
+Faire des requêtes POST et PUT est tout aussi simple::
 
-    // Envoi d'une requête POST avec des données encodées application/x-www-form-urlencoded
+    // Envoi d'une requête POST avec des données encodées en application/x-www-form-urlencoded
     $http = new Client();
     $response = $http->post('http://example.com/posts/add', [
       'title' => 'testing',
       'body' => 'content in the post'
     ]);
 
-    // Envoi d'une requête PUT avec des données encodées application/x-www-form-urlencoded
+    // Envoi d'une requête PUT avec des données encodées en application/x-www-form-urlencoded
     $response = $http->put('http://example.com/posts/add', [
       'title' => 'testing',
       'body' => 'content in the post'
@@ -52,6 +49,19 @@ Faire des requêtes POST et PUT est également simple::
     $http->delete(...);
     $http->head(...);
     $http->patch(...);
+
+Si vous avez créé un objet de requêtes PSR-7, vous pouvez l'envoyer avec
+``sendRequest()``::
+
+    use Cake\Http\Client;
+    use Cake\Http\Client\Request as ClientRequest;
+
+    $request = new ClientRequest(
+        'http://example.com/search',
+        ClientRequest::METHOD_GET
+    );
+    $client = new Client();
+    $response = $client->sendRequest($request);
 
 Créer des Requêtes Multipart avec des Fichiers
 ==============================================
@@ -64,11 +74,11 @@ gestionnaire de fichier dans le tableau de données::
       'image' => fopen('/path/to/a/file', 'r'),
     ]);
 
-Le gestionnaire de fichiers sera lu jusqu'à sa fin, il ne sera pas rembobiné
+Le gestionnaire de fichiers sera lu jusqu'à sa fin; il ne sera pas rembobiné
 avant d'être lu.
 
-Construire des Corps de Requête Multipart à la Main
----------------------------------------------------
+Construire des Corps de Requête Multipart
+-----------------------------------------
 
 Il peut arriver que vous souhaitiez construire un corps de requête d'une
 façon très spécifique. Dans ces situations, vous pouvez utiliser
@@ -85,7 +95,7 @@ spécifique que vous souhaitez::
     $xml->type('application/xml');
     $data->add($xml);
 
-    // Création d'un fichier upload avec addFile()
+    // Création d'un upload de fichier avec addFile()
     // Ceci va aussi ajouter le fichier aux données du formulaire.
     $file = $data->addFile('upload', fopen('/some/file.txt', 'r'));
     $file->contentId('abc123');
@@ -101,7 +111,7 @@ spécifique que vous souhaitez::
 Envoyer des Corps de Requête
 ============================
 
-Lorsque vous utilisez des REST API, vous avez souvent besoin d'envoyer des corps
+Lorsque vous utilisez des API REST, vous avez souvent besoin d'envoyer des corps
 de requête qui ne sont pas encodés. Http\\Client le permet grâce à l'option
 type::
 
@@ -115,9 +125,8 @@ type::
 
 La clé ``type`` peut être soit 'json', soit 'xml' ou bien un mime type complet.
 Quand vous utilisez l'option ``type``, vous devrez fournir les données en
-chaîne de caractères. Si vous faîtes une requête GET qui a besoin des deux
-paramètres querystring et d'un corps de requête, vous pouvez faire comme ce
-qui suit::
+chaîne de caractères. Si vous faites une requête GET qui a besoin à la fois de
+paramètres querystring et d'un corps de requête, vous pouvez faire ceci::
 
     // Envoi d'un body JSON dans une requête GET avec des paramètres query string.
     $http = new Client();
@@ -140,22 +149,24 @@ utilisées dans ``$options``:
 - ``cookie`` - Tableau de cookies à utiliser.
 - ``proxy`` - Tableau d'informations proxy.
 - ``auth`` - Tableau de données d'authentification, la clé ``type`` est utilisée
-  pour déléguer à une stratégie d'authentification. Par défaut l'Auth Basic est
-  utilisée.
+  pour déléguer à une stratégie d'authentification. Par défaut c'est
+  l'authentification Basic qui est utilisée.
 - ``ssl_verify_peer`` - par défaut à ``true``. Définie à ``false`` pour
   désactiver la certification SSL (non recommandé)
 - ``ssl_verify_peer_name`` - par défaut à ``true``. Définie à ``false`` pour
-  désactiver la vérification du nom d'hôte quand lors des vérifications des
+  désactiver la vérification du nom d'hôte lors des vérifications des
   certificats  SSL (non recommandé).
-- ``ssl_verify_depth`` - par défaut à 5. Depth to traverse in the CA chain.
-- ``ssl_verify_host`` - par défaut à ``true``. Valide le certificat SSL pour un
-  nom d'hôte.
-- ``ssl_cafile`` - par défaut pour construire dans cafile. Ecrasez-le pour
-  utiliser des bundles CA personnalisés.
-- ``timeout`` - Durée d'attente avant le timing out en secondes.
-- ``type`` - Envoi un corps de requête dans un type de contenu personnalisé.
+- ``ssl_verify_depth`` - par défaut à 5. Profondeur de recherche dans la chaîne
+  des autorités de certification (CA).
+- ``ssl_verify_host`` - par défaut à ``true``. Valide le certificat SSL au
+  regard du nom d'hôte.
+- ``ssl_cafile`` - par défaut le fichier d'autorités de certification intégré.
+  Définissez cette option manuellement pour utiliser des autorités de
+  certification personnalisées.
+- ``timeout`` - Durée d'attente maximale en secondes.
+- ``type`` - Envoie un corps de requête dans un type de contenu personnalisé.
   Nécessite que ``$data`` soit une chaîne ou que l'option ``_content`` soit
-  définie quand vous faîtes des requêtes GET.
+  définie quand vous faites des requêtes GET.
 - ``redirect`` - Nombre de redirections à suivre. ``false`` par défaut.
 
 Le paramètre options est toujours le 3ème paramètre dans chaque méthode HTTP.
@@ -165,11 +176,10 @@ Elles peuvent aussi être utilisées en construisant ``Client`` pour créer des
 Authentification
 ================
 
-``Cake\Http\Client`` intègre plusieurs systèmes d'authentification. Les
-différentes stratégies d'authentification peuvent être ajoutées par les
-développeurs. Les stratégies d'Authentification sont appelées avant que la
-requête ne soit envoyée, et permettent aux headers d'être ajoutés au contexte de
-la requête.
+``Cake\Http\Client`` supporte quelques systèmes d'authentification différents.
+Des stratégies d'authentification différentes peuvent être ajoutées par les
+développeurs. Les stratégies d'authentification sont appelées avant que la
+requête ne soit envoyée, et d'ajouter les headers au contexte de la requête.
 
 Utiliser l'Authentication Basic
 -------------------------------
@@ -178,7 +188,7 @@ Un exemple simple d'authentification::
 
     $http = new Client();
     $response = $http->get('http://example.com/profile/1', [], [
-      'auth' => ['username' => 'mark', 'password' => 'secret']
+      'auth' => ['username' => 'marc', 'password' => 'secret']
     ]);
 
 Par défaut ``Cake\Http\Client`` va utiliser l'authentification basic s'il n'y a
@@ -193,30 +203,30 @@ Un exemple simple d'authentification::
     $response = $http->get('http://example.com/profile/1', [], [
       'auth' => [
         'type' => 'digest',
-        'username' => 'mark',
+        'username' => 'marc',
         'password' => 'secret',
         'realm' => 'myrealm',
-        'nonce' => 'onetimevalue',
+        'nonce' => 'valeurunique',
         'qop' => 1,
-        'opaque' => 'someval'
+        'opaque' => 'unevaleur'
       ]
     ]);
 
-En configurant la clé 'type' à 'digest', vous dîtes au sous-système
+En configurant la clé 'type' à 'digest', vous dites au sous-système
 d'authentification d'utiliser l'authentification digest.
 
 Authentification OAuth 1
 ------------------------
 
 Plusieurs services web modernes nécessitent une authentication OAuth pour
-accéder à leur API. L'authentification OAuth inclue suppose que vous ayez
+accéder à leur API. L'authentification OAuth incluse suppose que vous ayez
 déjà votre clé de consommateur et un secret de consommateur::
 
     $http = new Client();
     $response = $http->get('http://example.com/profile/1', [], [
       'auth' => [
         'type' => 'oauth',
-        'consumerKey' => 'bigkey',
+        'consumerKey' => 'grandeclé',
         'consumerSecret' => 'secret',
         'token' => '...',
         'tokenSecret' => '...',
@@ -228,7 +238,7 @@ Authentification OAuth 2
 ------------------------
 
 Il n'y a pas d'adapteur d'authentification spécialisé car OAuth2 est souvent
-un simple entête. A la place, vous pouvez créer un client avec le token
+un simple en-tête. À la place, vous pouvez créer un client avec le token
 d'accès::
 
     $http = new Client([
@@ -241,13 +251,13 @@ Authentification Proxy
 
 Certains proxies ont besoin d'une authentification pour les utiliser.
 Généralement cette authentification est Basic, mais elle peut être implémentée
-par un adaptateur d'authentification. Par défaut, Http\\Client va supposer
+par n'importe quel adaptateur d'authentification. Par défaut, Http\\Client va supposer
 une authentification Basic, à moins que la clé type ne soit définie::
 
     $http = new Client();
     $response = $http->get('http://example.com/test.php', [], [
       'proxy' => [
-        'username' => 'mark',
+        'username' => 'marc',
         'password' => 'testing',
         'proxy' => '127.0.0.1:8080',
       ]
@@ -261,27 +271,36 @@ les en-têtes de la requête, alors que la chaîne du proxy sera passée dans
 
 .. _http_client_scoped_client:
 
-Créer des Scoped Clients
-========================
+Créer des Clients Délimités (Scoped Clients)
+============================================
 
 Devoir retaper le nom de domaine, les paramètres d'authentification et de proxy
 peut devenir fastidieux et source d'erreurs. Pour réduire ce risque d'erreur et
-être moins pénible, vous pouvez créer des clients scoped::
+rendre l'exercice moins pénible, vous pouvez créer des clients délimités::
 
-    // Création d'un client scoped.
+    // Création d'un client délimité.
     $http = new Client([
       'host' => 'api.example.com',
       'scheme' => 'https',
-      'auth' => ['username' => 'mark', 'password' => 'testing']
+      'auth' => ['username' => 'marc', 'password' => 'testing']
     ]);
 
     // Faire une requête vers api.example.com
     $response = $http->get('/test.php');
 
+Si votre client délimité a seulement besoin d'informations sur l'URL, vous
+pouvez utiliser ``createFromUrl()``::
+
+    $http = Client::createFromUrl('https://api.example.com/v1/test');
+
+Le code ci-dessus crée une instance client avec les options ``protocol``,
+``host``, et ``basePath`` déjà définies.
+
 Les informations suivantes peuvent être utilisées lors de la création d'un
-client scoped:
+client délimité:
 
 * host
+* basepath
 * scheme
 * proxy
 * auth
@@ -292,27 +311,33 @@ client scoped:
 * ssl_verify_depth
 * ssl_verify_host
 
-Chacune de ces options peut être remplacées en les spécifiant quand vous
-faîtes des requêtes.
+Chacune de ces options peut être remplacée en les spécifiant quand vous faites
+des requêtes.
 host, scheme, proxy, port sont remplacées dans l'URL de la requête::
 
-    // Utilisation du client scoped que nous avons créé précédemment.
+    // Utilisation du client délimité que nous avons créé précédemment.
     $response = $http->get('http://foo.com/test.php');
 
-Ce qui est au-dessus va remplacer le domaine, le scheme, et le port. Cependant,
+Le code ci-dessus va remplacer le domaine, le scheme, et le port. Cependant,
 cette requête va continuer à utiliser toutes les autres options définies quand
-le client scoped a été créé. Consultez :ref:`http_client_request_options`
+le client délimité a été créé. Consultez :ref:`http_client_request_options`
 pour plus d'informations sur les options intégrées.
+
+.. versionadded:: 4.2.0
+    ``Client::createFromUrl()`` a été ajoutée.
+
+.. versionchanged:: 4.2.0
+    L'option ``basePath`` a été ajoutée.
 
 Configurer et Gérer les Cookies
 ===============================
 
 Http\\Client peut aussi accepter les cookies quand on fait des requêtes. En plus
 d'accepter les cookies, il va aussi automatiquement stocker les cookies valides
-définis dans les responses. Toute response avec des cookies, les verra
+définis dans les réponses. À chaque réponse avec des cookies, ceux-ci seront
 stockés dans l'instance d'origine de Http\\Client. Les cookies stockés dans une
-instance Client sont automatiquement inclus dans les futures requêtes vers
-le domaine + combinaisons de chemin qui correspondent::
+instance Client sont automatiquement inclus dans les futures requêtes qui
+correspondent au domaine + chemin::
 
     $http = new Client([
         'host' => 'cakephp.org'
@@ -321,13 +346,13 @@ le domaine + combinaisons de chemin qui correspondent::
     // Création d'une requête qui définit des cookies
     $response = $http->get('/');
 
-    // Cookies à partir de la première requête seront inclus par défaut.
+    // Les cookies de la première requête seront inclus par défaut.
     $response2 = $http->get('/changelogs');
 
 Vous pouvez toujours remplacer les cookies auto-inclus en les définissant dans
 les paramètres ``$options`` de la requête::
 
-    // Personalisation d'un cookie existant.
+    // Remplacement d'un cookie existant par une valeur personnalisée.
     $response = $http->get('/changelogs', [], [
         'cookies' => ['sessionid' => '123abc']
     ]);
@@ -354,29 +379,21 @@ Objets Response
 Les objets Response ont un certain nombre de méthodes pour parcourir les données
 de réponse.
 
-.. versionchanged:: 3.3.0
-    Depuis la version 3.3.0 ``Cake\Http\Client\Response`` implémente
-    `PSR-7 ResponseInterface
-    <http://www.php-fig.org/psr/psr-7/#3-3-psr-http-message-responseinterface>`__.
-
-Lire des Corps des Réponses
+Lire les Corps des Réponses
 ---------------------------
 
 Vous pouvez lire le corps entier de la réponse en chaîne de caractères::
 
     // Lit le corps entier de la réponse en chaîne de caractères.
-    $response->body();
+    $response->getStringBody();
 
-    // En propriété
-    $response->body;
-
-Vous pouvez aussi accéder à l'objet stream de la réponse et utilisez ses
+Vous pouvez aussi accéder à l'objet stream de la réponse et utiliser ses
 méthodes::
 
     // Récupère une Psr\Http\Message\StreamInterface contenant le corps de la réponse
     $stream = $response->getBody();
 
-    // Lit un stream de 100 bytes en une fois.
+    // Lit un stream par blocs de 100 bytes.
     while (!$stream->eof()) {
         echo $stream->read(100);
     }
@@ -387,31 +404,31 @@ Lire des Corps de Réponse JSON et XML
 -------------------------------------
 
 Puisque les réponses JSON et XML sont souvent utilisées, les objets response
-fournissent une utilisation facile d'accéder à la lecture des données décodées.
-Les données JSON dans un tableau, alors que les données XML sont décodées dans
-un arbre ``SimpleXMLElement``::
+fournissent des accesseurs pour lire les données décodées.
+Les données JSON décodées sont fournies sous forme de tableau, tandis que les
+données XML sont décodées en un arbre ``SimpleXMLElement``::
 
     // Récupération du XML.
     $http = new Client();
     $response = $http->get('http://example.com/test.xml');
-    $xml = $response->xml;
+    $xml = $response->getXml();
 
     // Récupération du JSON.
     $http = new Client();
     $response = $http->get('http://example.com/test.json');
-    $json = $response->json;
+    $json = $response->getJson();
 
 Les données de réponse décodées sont stockées dans l'objet response, donc y
-accéder de nombreuses fois n'augmente pas la charge.
+accéder plusieurs fois n'augmente pas la charge.
 
 Accéder aux En-têtes de la Réponse
 ----------------------------------
 
 Vous pouvez accéder aux en-têtes de différentes manières. Les noms de l'en-tête
-sont toujours traités avec des valeurs sensibles à la casse quand vous y accédez
-avec les méthodes::
+sont toujours traités comme des valeurs sensibles à la casse quand vous y
+accédez par une méthode::
 
-    // Récupère les en-têtes sous la forme d'un tableau associatif array.
+    // Récupère les en-têtes sous la forme d'un tableau associatif.
     $response->getHeaders();
 
     // Récupère un en-tête unique sous la forme d'un tableau.
@@ -420,32 +437,26 @@ avec les méthodes::
     // Récupère un en-tête sous la forme d'une chaîne de caractères
     $response->getHeaderLine('content-type');
 
-    // Récupère la réponse encodée
+    // Récupère l'encodage de la réponse
     $response->getEncoding();
 
-    // Récupère un tableau de key=>value pour tous les en-têtes
-    $response->headers;
+Accéder aux Données des Cookies
+-------------------------------
 
-Accéder aux données de Cookie
------------------------------
-
-Vous pouvez lire les cookies avec différentes méthodes selon le nombre de
+Vous pouvez lire les cookies avec différentes méthodes selon la quantité de
 données que vous souhaitez sur les cookies::
 
     // Récupère tous les cookies (toutes les données)
     $response->getCookies();
 
-    // Récupère une valeur d'une unique cookie.
+    // Récupère une valeur d'un cookie unique.
     $response->getCookie('session_id');
 
     // Récupère les données complètes pour un unique cookie
     // includes value, expires, path, httponly, secure keys.
     $response->getCookieData('session_id');
 
-    // Accède aux données complètes pour tous les cookies.
-    $response->cookies;
-
-Vérifier le Code de statut
+Vérifier le Code de Statut
 --------------------------
 
 Les objets Response fournissent quelques méthodes pour vérifier les codes de
@@ -460,8 +471,19 @@ statuts::
     // Récupère le code de statut
     $response->getStatusCode();
 
-    // helper __get()
-    $response->code;
+Changer les Adaptateurs de Transport
+====================================
+
+Par défaut, ``Http\Client`` préférera utiliser un adaptateur de transport basé
+sur ``curl``.
+Si l'extension curl n'est pas disponible, il utilisera à la place un adaptateur
+basé sur le stream.
+Vous pouvez forcer la sélection d'un adaptateur de transport en utilisant une
+option du constructeur::
+
+    use Cake\Http\Client\Adapter\Stream;
+
+    $client = new Client(['adapter' => Stream::class]);
 
 .. meta::
     :title lang=fr: HttpClient
