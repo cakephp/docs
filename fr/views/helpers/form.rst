@@ -336,12 +336,14 @@ validation pour chaque association en utilisant un tableau::
 
 Ce qui est au-dessus va utiliser ``register`` pour l'utilisateur, et ``default``
 pour les commentaires de l'utilisateur. FormHelper utilise les validateurs pour
-générer les attributs HTML5 *required* et définir les messages d'erreur avec la
-`browser validator API
+générer les attributs HTML5 *required*, les attributs ARIA appropriés, et
+définir les messages d'erreur avec la `browser validator API
 <https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Form_validation#Customized_error_messages>`_
 . Si vous voulez désactiver les messages de validation HTML5, utilisez::
 
     $this->Form->setConfig('autoSetCustomValidity', false);
+
+Cela ne désactivera pas les attributs``required``/``aria-required``.
 
 Créer des Classes de Contexte
 -----------------------------
@@ -632,8 +634,12 @@ couvrir les options spécifiques de ``FormHelper::control()``.
           <input name="name" type="text" value="" id="name" />
       </div>
 
-  Si vous passez un tableau, vous pourrez fournir des options supplémentaires pour
-  l'élément ``label``. Si vous le faites, vous pouvez utiliser une clé ``text``
+  Si le label est désactivé et qu'un attribut ``placeholder`` est fourni,
+  l'input généré aura un ``aria-label`` défini.
+
+  Définissez l'option ``label`` comme un tableau pour fournir des options
+  supplémentaires pour l'élément ``label``. Si vous faites ainsi, vous pouvez
+  utiliser une clé ``text``
   dans le tableau pour personnaliser le texte du label::
   Par exemple::
 

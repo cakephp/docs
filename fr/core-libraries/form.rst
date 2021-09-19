@@ -99,13 +99,26 @@ votre controller pour traiter et valider les données de la requête::
         }
     }
 
-Dans l'exemple ci-dessus, nous utilisons la méthode ``execute()`` pour lancer
-la méthode ``_execute()`` de notre formulaire seulement lorsque les données
-sont valides, et définissons un message flash en conséquence. Nous aurions
-aussi pu utiliser la méthode ``validate()`` pour valider uniquement les données
-de requête::
+Dans l'exemple ci-dessus, si nous voulons utiliser un autre ensemble de
+validation que default, nous pouvons utiliser l'option ``validate``::
+
+    if ($contact->execute($this->request->getData(), 'update')) {
+        // Gestion du formulaire OK.
+    }
+
+Cette option peut aussi être définie à ``false`` pour désactiver la validation.
+
+Nous aurions aussi pu utiliser la méthode ``validate()`` pour valider uniquement
+les données de requête::
 
     $isValid = $form->validate($this->request->getData());
+
+    // Vous pouvez aussi utiliser d'autres ensembles de validation. Ceci
+    // utiliserait les règles définies par `validationUpdate()`
+    $isValid = $form->validate($this->request->getData(), 'update');
+
+.. versionadded:: 4.3.0
+    Ajout de l'utilisation d'autres validators que ``default``.
 
 Définir des Valeurs pour le Formulaire
 ======================================

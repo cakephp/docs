@@ -430,7 +430,7 @@ Avant de pouvoir utiliser les fixtures vous devez vous assurer que votre
     <!-- dans phpunit.xml -->
     <!-- Configurer l'extension pour les fixtures -->
     <extensions>
-        <extension class="\Cake\TestSuite\FixtureSchemaExtension" />
+        <extension class="\Cake\TestSuite\Fixture\PHPUnitExtension" />
     </extensions>
 
 L'extension est incluse par défaut dans votre application et vos plugins générés
@@ -447,7 +447,7 @@ PHPUnit et votre fichier ``phpunit.xml`` devait contenir:
         <listener
         class="\Cake\TestSuite\Fixture\FixtureInjector">
             <arguments>
-                <object class="\Cake\TestSuite\Fixture\FixtureManager" />
+                <object class="\Cake\TestSuite\Fixture\PHPUnitExtension" />
             </arguments>
         </listener>
     </listeners>
@@ -496,7 +496,7 @@ Pour charger un fichier de dump SQL, vous pouvez faire ceci::
     use Cake\TestSuite\Fixture\SchemaLoader;
 
     // Charger un ou plusieurs fichiers SQL.
-    (new SchemaLoader())->loadSqlFiles('chemin/vers/schema.sql', 'test');
+    (new SchemaLoader())->loadSqlFiles('chemin/vers/le/schema.sql', 'test');
 
 Au début du lancement de chaque test, ``SchemaLoader`` supprimera toutes les
 tables dans la connexion et les reconstruira à partir du fichier de schéma
@@ -523,12 +523,13 @@ La stratégie de gestion de l'état des fixtures peut être définie à l'intér
 du test::
 
     use Cake\TestSuite\TestCase;
+    use Cake\TestSuite\Fixture\FixtureStrategyInterface;
     use Cake\TestSuite\Fixture\TransactionStrategy;
 
     class ArticlesTableTest extends TestCase
     {
         /**
-         * Créez la stratégie de fixation utilisée pour ce cas de test.
+         * Crée la stratégie de fixation utilisée pour ce cas de test.
          * Vous pouvez utiliser une classe/un trait de base pour modifier
          * plusieurs classes.
          */
@@ -675,31 +676,16 @@ Utiliser le préfixe ``core`` va charger les fixtures à partir de CakePHP, et
 utiliser un nom de plugin en préfixe chargera la fixture à partir d'un plugin
 nommé.
 
-Vous pouvez contrôler quand vos fixtures sont chargées en configurant
-:php:attr:`Cake\\TestSuite\\TestCase::$autoFixtures` à ``false`` et plus tard
-les charger en utilisant :php:meth:`Cake\\TestSuite\\TestCase::loadFixtures()`::
-
-    class ArticlesTest extends TestCase
-    {
-        public $autoFixtures = false;
-
-        protected $fixtures = ['app.Articles', 'app.Comments'];
-
-        public function testMyFunction(): void
-        {
-            $this->loadFixtures('Articles', 'Comments');
-        }
-
-À partir de 4.1.0 vous pouvez utiliser les méthodes ``getFixtures()`` et
-``addFixture()`` pour définir votre tableau de fixtures avec un code plus
-fluide::
+À partir de 4.1.0 vous pouvez utiliser ``getFixtures()`` pour définir votre
+liste de fixtures avec une méthode::
 
     public function getFixtures(): array
     {
-        $this->addFixture('app.Articles')
-            ->addFixture('app.Comments');
+        return [
+            'app.Articles',
+            'app.Comments',
+        ];
 
-        return parent::getFixtures();
     }
 
 Vous pouvez charger les fixtures dans les sous-répertoires.
