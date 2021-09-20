@@ -51,6 +51,11 @@ Database
 
 - The ``getMaxAliasLength()`` and ``getConnectionRetries()`` methods were added
   to ``DriverInterface``.
+  
+View
+----
+
+- ``NumberHelper`` and ``TextHelper`` no longer accept an ``engine`` config.
 
 Datasource
 ----------
