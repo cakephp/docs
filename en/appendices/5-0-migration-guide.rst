@@ -55,7 +55,7 @@ Database
 View
 ----
 
-- ``NumberHelper`` and ``TextHelper` no longer accept an ``engine`` config.
+- ``NumberHelper`` and ``TextHelper`` no longer accept an ``engine`` config.
 
 Datasource
 ----------
