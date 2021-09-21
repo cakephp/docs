@@ -84,6 +84,7 @@ Database
 
 - The ``TimeType`` will now correctly marshall values in the ``H:i`` format.
   Previously these values would be cast to ``null`` after validation.
+- ``Sqlserver`` driver will retry connect after receiving "Azure Sql Database pausd" errors.
 
 Error
 -----
