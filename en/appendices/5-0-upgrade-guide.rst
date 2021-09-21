@@ -33,15 +33,15 @@ If you are not running on **PHP 8.0 or higher**, you will need to upgrade PHP be
 Use the Upgrade Tool
 ====================
 
-Because CakePHP 4 adopts strict mode and uses more typehinting, there are many
+Because CakePHP 5 leverages union types and ``mixed``, there are many
 backwards incompatible changes concerning method signatures and file renames.
 To help expedite fixing these tedious changes there is an upgrade CLI tool:
 
 .. warning::
     The ``file_rename`` command and rector rules for cakephp40, and phpunit80
     are intended to be run **before** you update your application's dependencies
-    to 4.0. The ``cakephp40`` rector rules will not run correctly if your
-    application already has its dependencies updated to 4.x or PHPUnit8.
+    to 5.0. The ``cakephp50`` rector rules will not run correctly if your
+    application already has its dependencies updated to 5.x or PHPUnit9.
 
 .. code-block:: bash
 
@@ -59,7 +59,6 @@ PHPUnit method calls. It is important to apply rector **before** you upgrade
 your dependencies::
 
     bin/cake upgrade rector --rules cakephp50 <path/to/app/src>
-
 
 Update CakePHP Dependency
 =========================

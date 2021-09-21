@@ -51,17 +51,11 @@ Database
 
 - The ``getMaxAliasLength()`` and ``getConnectionRetries()`` methods were added
   to ``DriverInterface``.
-  
-View
-----
-
-- ``NumberHelper`` and ``TextHelper`` no longer accept an ``engine`` config.
 
 Datasource
 ----------
 
 - The ``getAccessible()`` method was added to ``EntityInterface``.
-
 
 Event
 -----
@@ -86,6 +80,18 @@ Log
 
 - Log engine config now uses ``null`` instead of ``false`` to disable scopes.
   So instead of ``'scopes' => false`` you need to use ``'scopes' => null`` in your log config.
+
+ORM
+---
+
+- ``TranslateBehavior`` now defaults to the ``ShadowTable`` strategy. If you are
+  using the ``Eav`` strategy you will need to update your behavior configuration
+  to retain the previous behavior.
+
+View
+----
+
+- ``NumberHelper`` and ``TextHelper`` no longer accept an ``engine`` config.
 
 
 New Features
