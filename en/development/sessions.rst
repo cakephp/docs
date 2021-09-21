@@ -49,7 +49,7 @@ this::
         ]
     ]);
 
-As of v4.0 CakePHP also sets the `SameSite <https://www.owasp.org/index.php/SameSite>`__ attribute to ``Lax``
+As of v4.0 CakePHP also sets the `SameSite <https://owasp.org/www-community/SameSite>`__ attribute to ``Lax``
 by default for session cookies, which helps protect against CSRF attacks.
 You can change the default value by setting ``session.cookie_samesite`` php.ini config::
 

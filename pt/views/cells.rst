@@ -3,7 +3,7 @@ View Cells (Células de Visualização)
 
 View cells são pequenos *mini-controllers* que podem invocar lógica de visualização
 e renderizar templates. A ideia de *cells* é emprestada das `cells do Ruby
-<https://github.com/apotonick/cells>`_, onde desempenham papel e finalidade semelhantes.
+<https://github.com/trailblazer/cells>`_, onde desempenham papel e finalidade semelhantes.
 
 Quando usar *Cells*
 ===================

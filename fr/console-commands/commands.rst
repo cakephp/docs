@@ -247,8 +247,10 @@ moment, mais testons simplement si la description de notre shell description s'a
         }
     }
 
-Notre test passe! Bien que ce soit un exemple très facile, cela montre que créer un cas de test d'intégration pour
-nos applications de console est assez facile. Continuons par ajouter plus de logique à notre commande::
+Notre test passe! Bien que ce soit un exemple très facile, cela montre que créer
+un cas de test d'intégration pour nos applications de console peut suivre les
+conventions de la ligne de commande. Continuons en ajoutant plus de logique à
+notre commande::
 
     namespace App\Command;
 
@@ -433,8 +435,8 @@ avec la méthode suivante::
 Méthodes d'Assertion
 --------------------
 
-La classe ``Cake\TestSuite\ConsoleIntegrationTestCase`` fournit un certain nombre de méthodes d'assertion qui
-facilitent l'assertion de sorties de consoles::
+La classe ``Cake\TestSuite\ConsoleIntegrationTestCase`` fournit un certain
+nombre de méthodes d'assertion qui aident à l'assertion de sorties de consoles::
 
     // assert that the shell exited with the expected code
     $this->assertExitCode($expected);

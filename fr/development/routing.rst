@@ -1050,7 +1050,7 @@ middlewares peuvent être combinés en groupes. Une fois créés, les groupes pe
 Créer des Routes RESTful
 ========================
 
-Le router rend facile la génération des routes RESTful pour vos controllers.
+Le router aide à générer des routes RESTful pour vos controllers.
 Les routes RESTful sont utiles lorsque vous créez des points de terminaison
 (endpoint) d'API pour vos applications. Si nous voulions autoriser l'accès REST
 à un contrôleur de recette, nous ferions quelque chose comme ceci::

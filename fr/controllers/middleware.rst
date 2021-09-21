@@ -45,8 +45,8 @@ d'une application web:
   automatique de langage à partir de l'en-tête ``Accept-Language`` envoyé par le
   navigateur
 * ``Cake\Http\Middleware\HttpsEnforcerMiddleware`` exige l'usage de HTTPS.
-* ``Cake\Http\Middleware\SecurityHeadersMiddleware`` facilite l'ajout de
-  header liés à la sécurité comme ``X-Frame-Options`` aux réponses.
+* ``Cake\Http\Middleware\SecurityHeadersMiddleware`` rend possible l'ajout de
+  headers liés à la sécurité comme ``X-Frame-Options`` dans les réponses.
 * ``Cake\Http\Middleware\EncryptedCookieMiddleware`` vous permet de manipuler
   des cookies chiffrés dans le cas où vous auriez besoin de manipuler des cookies
   avec des données obfusqués.
@@ -250,8 +250,8 @@ routes générée.
 Ajouter des Headers de Sécurité
 ===============================
 
-La couche ``SecurityHeaderMiddleware`` facilite l'ajout de headers liés à la
-sécurité à votre application. Une fois configuré, le middleware peut ajouter
+La couche ``SecurityHeaderMiddleware`` vous permet d'ajouter à votre application
+des headers liés à la sécurité. Une fois configuré, le middleware peut ajouter
 les headers suivants aux réponses:
 
 * ``X-Content-Type-Options``

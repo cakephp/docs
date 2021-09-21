@@ -401,8 +401,8 @@ utiliser pour la recherche de ces données et bien plus encore. Consultez la
 section :doc:`pagination <controllers/components/pagination>`
 pour plus de détails sur l'utilisation de la pagination.
 
-L'attribut ``$paginate`` vous donne une façon facile de personnaliser la façon dont
-``paginate()`` se comporte::
+L'attribut ``$paginate`` vous permet de de personnaliser le comportement de
+``paginate()``::
 
     class ArticlesController extends AppController
     {

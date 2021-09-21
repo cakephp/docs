@@ -39,7 +39,7 @@ votre propre système de mise en cache. Les moteurs de cache intégrés sont:
 * ``MemcachedEngine`` Utilise l'extension
   `Memcached <http://php.net/memcached>`_.
 * ``RedisEngine`` Utilise l'extension
-  `phpredis <https://github.com/nicolasff/phpredis>`_. Redis fournit un système
+  `phpredis <https://github.com/phpredis/phpredis>`_. Redis fournit un système
   de cache cohérent et rapide similaire à Memcached et il permet aussi les
   opérations atomiques.
 
@@ -245,7 +245,7 @@ Lire un Cache Distribué
 
 .. php:staticmethod:: remember($key, $callable, $config = 'default')
 
-Cache facilite la lecture d'un cache distribué. Si la clé de cache demandée
+Cache permet la lecture d'un cache distribué. Si la clé de cache demandée
 existe, elle sera retournée. Si la clé n'existe pas, le callable sera invoqué
 et les résultats stockés dans le cache pour la clé fournie.
 
@@ -378,8 +378,8 @@ Utiliser le Cache pour Stocker les Compteurs
 Les compteurs de votre application sont de bons candidats pour le stockage dans
 un cache. Par exemple, un simple compte à rebours pour des places restantes dans
 un concours peut être stocké dans le cache. La classe Cache expose des
-opérations atomiques pour incrémenter/décrémenter les valeurs du compteur de
-manière simple. Les opérations atomiques sont importantes pour ces valeurs, car
+opérations atomiques pour incrémenter/décrémenter les valeurs du compteur.
+Les opérations atomiques sont importantes pour ces valeurs, car
 elle réduisent le risque de contention, et la capacité pour deux utilisateurs
 d'abaisser simultanément la valeur, ce qui entraînerait une valeur incorrecte.
 

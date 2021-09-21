@@ -12,8 +12,8 @@ s'est passé dans votre application à chaque instant. Quels termes de recherche
 ont été utilisés ? Quelles sortes d'erreurs ont été vues par mes utilisateurs ?
 A quelle fréquence est exécutée une requête particulière ?
 
-La journalisation des données dans CakePHP est facile - la fonction log()
-est fournie par ``LogTrait``, qui est l'ancêtre commun de beaucoup de classes
+La journalisation des données dans CakePHP passe par la fonction log()
+fournie par ``LogTrait``, qui est l'ancêtre commun de beaucoup de classes
 CakePHP. Si le contexte est une classe CakePHP (Controller, Component, View...),
 vous pouvez loguer (journaliser) vos données. Vous pouvez aussi utiliser
 ``Log::write()`` directement. Consultez :ref:`writing-to-logs`.
@@ -56,10 +56,10 @@ Un exemple serait::
         'file' => 'error',
     ]);
 
-Ce qui est au-dessus crée deux journaux. Un appelé ``debug``, l'autre appelé
+Le code ci-dessus crée deux journaux. Un appelé ``debug``, l'autre appelé
 ``error``. Chacun est configuré pour gérer différents niveaux de message. Ils
-stockent aussi leurs messages de journal dans des fichiers séparés, ainsi il
-est facile de séparer les logs de debug/notice/info des erreurs plus sérieuses.
+stockent aussi leurs messages de journal dans des fichiers séparés, ainsi il est
+possible de séparer les logs de debug/notice/info des erreurs plus sérieuses.
 Regardez la section sur :ref:`logging-levels` pour plus d'informations sur les
 différents niveaux et ce qu'ils signifient.
 
@@ -84,6 +84,82 @@ d'environnement ou des fournisseurs :term:`PaaS`::
     Log::setConfig('error', [
         'url' => 'file:///?levels[]=warning&levels[]=error&file=error',
     ]);
+
+.. note::
+
+    Les loggers sont nécessaires pour intégrer l'interface
+    ``Psr\Log\LoggerInterface``.
+
+Créer des Adaptateurs de Log
+----------------------------
+
+Les gestionnaires de flux de log peuvent faire partie de votre application,
+ou partie d'un plugin. Si par exemple vous avez un enregistreur de logs de
+base de données appelé ``DatabaseLog``. Comme faisant partie de votre
+application il devrait être placé dans
+**src/Log/Engine/DatabaseLog.php**. Comme faisant partie d'un plugin
+il devrait être placé dans
+**plugins/LoggingPack/src/Log/Engine/DatabaseLog.php**. Pour configurer des
+flux de logs, vous devez utiliser :php:meth:`Cake\\Log\\Log::setConfig()`. Par
+example, la configuration de notre ``DatabaseLog`` pourrait ressembler à ceci::
+
+    // Pour src/Log
+    Log::setConfig('autreFichier', [
+        'className' => 'Database',
+        'model' => 'LogEntry',
+        // ...
+    ]);
+
+    // Pour un plugin appelé LoggingPack
+    Log::setConfig('autreFichier', [
+        'className' => 'LoggingPack.Database',
+        'model' => 'LogEntry',
+        // ...
+    ]);
+
+Lorsque vous configurez le flux d'un log le paramètre de ``className`` est
+utilisé pour localiser et charger le handler de log. Toutes les autres
+propriétés de configuration sont passées au constructeur des flux de log comme
+un tableau::
+
+    namespace App\Log\Engine;
+    use Cake\Log\Engine\BaseLog;
+
+    class DatabaseLog extends BaseLog
+    {
+        public function __construct($options = [])
+        {
+            parent::__construct($options);
+            // ...
+        }
+
+        public function log($level, $message, array $context = [])
+        {
+            // Write to the database.
+        }
+    }
+
+CakePHP a besoin que tous les adaptateurs de logging intègrent
+``Psr\Log\LoggerInterface``. La classe :php:class:`Cake\Log\Engine\BaseLog` est
+un moyen de satisfaire l'interface puisqu'elle nécessite seulement
+que vous intégriez la méthode ``log()``.
+
+.. _file-log:
+
+Le moteur de ``FileLog`` a quelques nouvelles configurations:
+
+* ``size`` Utilisé pour implémenter la rotation de fichier de journal basic.
+  Si la taille d'un fichier de log atteint la taille spécifiée, le fichier
+  existant est renommé en ajoutant le timestamp au nom du fichier et un
+  nouveau fichier de log est créé. Peut être une valeur de bytes en entier
+  ou des valeurs de chaînes lisible par l'humain comme '10MB', '100KB' etc.
+  Par défaut à 10MB.
+* ``rotate`` Les fichiers de log font une rotation à un temps spécifié
+  avant d'être retiré.
+  Si la valeur est 0, les versions anciennes seront retirées plutôt que
+  mises en rotation. Par défaut à 10.
+* ``mask`` Définit les permissions du fichier pour les fichiers créés. Si
+  laissé vide, les permissions par défaut sont utilisées.
 
 .. warning::
 
@@ -124,7 +200,7 @@ message de log ne sera écrit.
 
 Utiliser des Placeholders dans les Messages
 -------------------------------------------
- 
+
 Si vous avez besoin de loguer des données définies dynamiquement, vous pouvez
 utiliser des placeholders dans vos messages de log et fournir un tableau de
 paires clé/valeur dans le paramètre ``$context``::
@@ -135,7 +211,7 @@ paires clé/valeur dans le paramètre ``$context``::
 Les placeholders pour lesquels aucune clé n'a été définie ne seront pas
 remplacés. Si vous avez besoin d'utiliser des mots entre accolades, vous devez
 les échapper::
- 
+
     // Enverra le log `Pas de {remplacement}`
     Log::write('error', 'Pas de \\{remplacement}', ['remplacement' => 'no']);
 
@@ -485,7 +561,7 @@ Utiliser Monolog
 ================
 
 Monolog est un logger populaire pour PHP. Puisqu'il intègre les mêmes interfaces
-que les loggers de CakePHP, il est facile de l'utiliser dans votre application
+que les loggers de CakePHP, vous pouvez l'utiliser dans votre application
 comme logger par défaut.
 
 Après avoir installé Monolog en utilisant composer, configurez le logger en

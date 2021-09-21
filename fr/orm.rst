@@ -19,7 +19,7 @@ L'ORM intégré dans CakePHP se spécialise dans les bases de données
 relationnelles, mais peut être étendu pour supporter des sources de données
 alternatives.
 
-L'ORM de CakePHP emprunte des idées et concepts à la fois des patterns
+L'ORM de CakePHP emprunte des idées et concepts à la fois aux patterns
 de ActiveRecord et de Datamapper. Il a pour objectif de créer une implémentation
 hybride qui combine les aspects des deux patterns pour créer un ORM rapide et
 facile d'utilisation.
@@ -33,53 +33,55 @@ Exemple Rapide
 Pour commencer, vous n'avez à écrire aucun code. Si vous suivez les
 :ref:`conventions de CakePHP pour vos tables de base de données <model-and-database-conventions>`,
 vous pouvez simplement commencer à utiliser l'ORM. Par exemple si vous voulez
-charger des données de la table ``articles``, vous pourriez faire::
+charger des données de la table ``articles``, il suffit de créer votre table de
+classe ``Articles``. Créez le fichier **src/Model/Table/ArticlesTable.php** avec
+le code suivant::
 
-    use Cake\ORM\TableRegistry;
-
-    // Prior to 3.6 use TableRegistry::get('Articles')
-    $articles = TableRegistry::getTableLocator()->get('Articles');
-
-    $query = $articles->find();
-
-    foreach ($query as $row) {
-        echo $row->title;
-    }
-
-Notez que nous n'avons créé aucun code ou généré aucune configuration. Les
-conventions dans CakePHP nous permettent d'éviter un code bancal et permettent au
-framework d'insérer des classes de base lorsque votre application n'a pas créé
-de classe concrète. Si nous voulions personnaliser notre classe ArticlesTable en
-ajoutant des associations ou en définissant des méthodes supplémentaires, nous
-ajouterions ce qui suit dans **src/Model/Table/ArticlesTable.php** après la
-balise d'ouverture ``<?php``::
-
+    <?php
     namespace App\Model\Table;
 
     use Cake\ORM\Table;
 
     class ArticlesTable extends Table
     {
-
     }
 
-Les classes de Table utilisent la version CamelCased du nom de la table avec le
-suffixe ``Table`` en nom de classe. Une fois que votre classe a été créée vous
-obtenez une référence vers celle-ci en utilisant
-:php:class:`~Cake\\ORM\\TableRegistry` comme avant::
+Ensuite, dans un controller ou une command CakePHP pourra créer une instance
+pour nous::
 
-    use Cake\ORM\TableRegistry;
+    public function uneMethode()
+    {
+        $this->loadModel('Articles');
+        $resultset = $this->Articles->find()->all();
 
-    // Maintenant $articles est une instance de notre classe ArticlesTable.
-    // Prior to 3.6 use TableRegistry::get('Articles')
-    $articles = TableRegistry::getTableLocator()->get('Articles');
+        foreach ($resultset as $row) {
+            echo $row->title;
+        }
+    }
 
-Maintenant que nous avons une classe de table concrète, nous allons
-probablement vouloir utiliser une classe entity concrète. Les classes Entity
-vous laissent définir les méthodes accesseurs et mutateurs, définissant la
-logique personnalisée pour des enregistrements individuels et plus encore. Nous
-commencerons par ajouter ce qui suit à **src/Model/Entity/Article.php** après la
-balise d'ouverture ``<?php``::
+Dans d'autres contextes, vous pouvez utiliser ``LocatorAwareTrait``, qui ajoute
+des accesseurs pour les tables de l'ORM::
+
+    use Cake\ORM\Locator\LocatorAwareTrait;
+
+    public function uneMethode()
+    {
+        $articles = $this->getTableLocator()->get('Articles');
+        // le reste du code.
+    }
+
+Depuis une méthode statique, vous pouvez utiliser
+:php:class:`~Cake\\Datasource\\FactoryLocator` pour obtenir le locator de la
+table::
+
+     $articles = TableRegistry::getTableLocator()->get('Articles');
+
+Les classes de tables représentent des **collections** ou **entities**. À
+présent, créons une classe d'entity pour nos Articles. Les classes Entity vous
+permettent de définir des accesseurs et mutateurs, une logique personnalisé pour
+les enregistrements pris individuellement, et bien d'autres choses. Commençons
+par ajouter ceci à **src/Model/Entity/Article.php** après la balise d'ouverture
+``<?php``::
 
     namespace App\Model\Entity;
 
@@ -87,7 +89,6 @@ balise d'ouverture ``<?php``::
 
     class Article extends Entity
     {
-
     }
 
 Les Entities utilisent la version CamelCase du nom de la table comme nom de
@@ -95,29 +96,27 @@ classe par défaut. Maintenant que nous avons créé notre classe entity, quand
 nous chargeons les entities de la base de données, nous obtenons les instances
 de notre nouvelle classe Article::
 
-    use Cake\ORM\TableRegistry;
+    use Cake\ORM\Locator\LocatorAwareTrait;
 
-    // Maintenant une instance de ArticlesTable.
-    // Prior to 3.6 use TableRegistry::get('Articles')
-    $articles = TableRegistry::getTableLocator()->get('Articles');
-    $query = $articles->find();
+    $articles = $this->getTableLocator()->get('Articles');
+    $resultset = $articles->find()->all();
 
-    foreach ($query as $row) {
+    foreach ($resultset as $row) {
         // Chaque ligne est maintenant une instance de notre classe Article.
         echo $row->title;
     }
 
-CakePHP utilise des conventions de nommage pour lier ensemble les classes Table
+CakePHP utilise des conventions de nommage pour relier les classes Table
 et Entity. Si vous avez besoin de personnaliser l'entity qu'une table utilise,
 vous pouvez utiliser la méthode ``entityClass()`` pour définir un nom de
 classe spécifique.
 
-Regardez les chapitres sur :doc:`/orm/table-objects` et :doc:`/orm/entities`
+Regardez les chapitres sur :doc:`/orm/table-objects` et les :doc:`/orm/entities`
 pour plus d'informations sur la façon d'utiliser les objets table et les
 entities dans votre application.
 
-Pour en savoir plus sur les Models
-==================================
+Pour en savoir plus
+===================
 
 .. toctree::
     :maxdepth: 2

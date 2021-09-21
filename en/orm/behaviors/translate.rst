@@ -137,6 +137,14 @@ config of the behavior::
         }
     }
 
+.. note::
+
+    For historical reasons and to maintain backwards compatibility, by default
+    the ``TranslateBehavior`` uses the ``EavStrategy``. But for new projects it's
+    recommended to use the ``ShadowTableStrategy`` as it's more efficient. You can
+    use ``TranslateBehavior::setDefaultStrategyClass(ShadowTableStrategy::class)``
+    in your ``Application::bootstrap()`` to change the default strategy and avoid
+    having to specify the ``strategyClass`` config each time.
 
 Quick tour
 ==========

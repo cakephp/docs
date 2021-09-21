@@ -159,7 +159,7 @@ d'accéder manuellement au fichier temporaire, à la place cela peut être facil
 Dans un environnement HTTP, la méthode ``moveTo()`` validera automatiquement si le fichier est un fichier téléchargé,
 et lancera une exception si nécessaire. Dans un environnement CLI, où le concept de téléchargement de fichiers
 n'existe pas, il permettra de déplacer le fichier que vous avez référencé indépendamment de ses origines,
-ce qui rend le test des téléchargements de fichiers vraiment facile.
+ce qui rend possible le test des téléchargements de fichiers.
 
 Pour revenir à l'utilisation des tableaux de téléchargement de fichiers des versions antérieures, définissez la valeur
 de configuration ``App.uploadedFilesAsObjects`` à ``false``, par exemple dans votre fichier ``config/app.php``::
