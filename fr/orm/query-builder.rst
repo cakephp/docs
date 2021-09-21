@@ -1524,7 +1524,7 @@ should never put raw user data into ``epilog()``.
 Exécuter des Requêtes Complexes
 -------------------------------
 
-Bien que le constructeur de requêtes facilite la construction de la plupart des
+Bien que le constructeur de requêtes permette la construction de la plupart des
 requêtes, les requêtes très complexes peuvent être fastidieuses et compliquées
 à construire. Vous voudrez surement vous référer à :ref:`l'exécution
 directe du SQL souhaité <running-select-statements>`.

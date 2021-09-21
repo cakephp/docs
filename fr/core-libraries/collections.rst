@@ -325,7 +325,7 @@ Filtrer
 
 .. php:method:: filter($callback)
 
-Les collections permettent de filtrer et de créer facilement les nouvelles
+Les collections permettent de filtrer et de créer les nouvelles
 collections basées sur le résultat de fonctions callback. Vous pouvez utiliser
 ``filter()`` pour créer une nouvelle collection d'éléments qui matchent un
 critère callback::
@@ -693,9 +693,9 @@ Utiliser des Données en Arbre
 
 Toutes les données ne sont pas destinées à être représentées de façon linéaire.
 Les collections facilitent la construction et l'aplatissement de structures
-hiérarchiques ou imbriquées. Créer une structure imbriquée où les enfants sont
-groupés selon une propriété identifier parente est facile avec la méthode
-``nest()``.
+hiérarchiques ou imbriquées. Avec la méthode ``nest()``, il devient possible de
+créer une structure imbriquée où les enfants sont groupés selon une propriété
+identifier parente.
 
 Deux paramètres sont requis pour cette fonction. La première est la propriété
 représentant l'identifier de l'item. Le second paramètre est le nom de la

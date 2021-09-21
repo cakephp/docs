@@ -555,8 +555,8 @@ arbitraires en le passant dans ``association.fieldname`` en premier paramètre::
 Tout point dans vos noms de champs sera converti en données de requête
 imbriquées. Par exemple, si vous créez un champ avec un nom
 ``0.comments.body`` vous aurez un nom d'attribut qui sera
-``0[comments][body]``. Cette convention facilite la sauvegarde des données
-avec l'ORM. Plus de détails pour tous les types d'associations se trouvent
+``0[comments][body]``. Cette convention coorespond à celle de l'ORM. Plus de
+détails pour tous les types d'associations se trouvent
 dans la section :ref:`associated-form-inputs`.
 
 Lors de la création d'inputs de type datetime, FormHelper va ajouter un
@@ -2484,8 +2484,8 @@ utilisant le code suivant dans votre controller::
 Ajouter des Widgets Personnalisés
 =================================
 
-CakePHP permet d'ajouter facilement des widgets personnalisés dans votre application, afin
-de les utiliser comme n'importe quel input. Tous les types d'input que contient
+Vous pouvez ajouter des widgets personnalisés dans CakePHP, et les utiliser
+comme n'importe quel input. Tous les types d'input que contient
 le cœur de cake sont implémentés comme des widgets. Ainsi vous pouvez remplacer
 n'importe quel widget de base par votre propre implémentation.
 

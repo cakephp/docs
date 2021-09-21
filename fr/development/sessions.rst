@@ -308,9 +308,8 @@ Notre classe étend la classe intégrée ``DatabaseSession`` donc nous ne devons
 pas dupliquer toute sa logique et son comportement. Nous entourons chaque
 opération avec une opération :php:class:`Cake\\Cache\\Cache`. Cela nous permet
 de récupérer les sessions de la mise en cache rapide, et nous évite de nous
-inquiéter sur ce qui arrive quand nous remplissons le cache. Utiliser le
-gestionnaire de session est aussi facile. Dans votre **config/app.php**, imitez
-le block de session qui suit::
+inquiéter sur ce qui arrive quand nous remplissons le cache. Dans votre
+**config/app.php**, écrivez un block de session comme ceci::
 
     'Session' => [
         'defaults' => 'database',

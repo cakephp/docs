@@ -68,7 +68,7 @@ des logs, des transports d'emails et du cache, vous permettant de faire varier l
 configurations d'un environnement à l'autre.
 
 Lors d'un développement local, CakePHP utilise `dotenv
-<https://github.com/josegonzalez/php-dotenv>`_ pour faciliter l'utilisation des variables
+<https://github.com/josegonzalez/php-dotenv>`_ pour permettre l'utilisation des variables
 d'environnement. Utilisez composer pour ajouter cette bibliothèque, puis
 décommentez un bloc de code dans ``bootstrap.php`` pour l'exploiter.
 

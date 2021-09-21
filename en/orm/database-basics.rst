@@ -174,7 +174,7 @@ className
     This class is responsible for loading the database driver, providing SQL
     transaction mechanisms and preparing SQL statements among other things.
 driver
-    The class name of the driver used to implements all specificities for
+    The class name of the driver used to implement all specificities for
     a database engine. This can either be a short classname using :term:`plugin syntax`,
     a fully namespaced name, or a constructed driver instance.
     Examples of short classnames are Mysql, Sqlite, Postgres, and Sqlserver.

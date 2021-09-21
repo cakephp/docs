@@ -164,8 +164,8 @@ convertie::
 Combiner les Validators
 =======================
 
-Grâce à la manière dont les objets validator sont construits, il est facile de
-diviser leur process de construction en de petites étapes réutilisables::
+Grâce à la manière dont les objets validator sont construits, vous pouvez
+diviser leur process de construction en petites étapes réutilisables::
 
     // UsersTable.php
 
@@ -615,7 +615,7 @@ utile de packager ces règles dans des classes réutilisables::
     $rules->add(new CustomRule(...), 'ruleName');
 
 En ajoutant des classes de règle personnalisée, vous pouvez garder votre code
-DRY et faciliter le test de vos règles de domaine.
+DRY et tester vos règles de domaine isolément.
 
 Désactiver les Règles
 ---------------------

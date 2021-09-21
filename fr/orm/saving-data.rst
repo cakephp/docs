@@ -41,8 +41,7 @@ créer une nouvelle entity et de la passer à la méthode ``save()`` de la class
 Mettre à jour des Données
 -------------------------
 
-La mise à jour est aussi simple et la méthode ``save()`` sert également ce
-but::
+La méthode ``save()`` sert également à la mise à jour des données::
 
     use Cake\ORM\TableRegistry;
 
@@ -179,7 +178,7 @@ Avant de modifier et sauvegarder à nouveau les données dans la base de donnée
 vous devrez convertir les données requêtées (qui se trouvent dans
 $this->request->getData()) à partir du format de tableau
 qui se trouvent dans la requête, et les entities que l'ORM utilise. La classe
-Table facilite la conversion d'une ou de plusieurs entities à partir des
+Table peut convertir efficacement une ou plusieurs entities à partir des
 données requêtées. Vous pouvez convertir une entity unique en utilisant::
 
     // Dans un controller.

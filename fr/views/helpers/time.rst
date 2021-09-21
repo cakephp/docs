@@ -18,7 +18,7 @@ Utiliser le Helper
 Une utilisation courante de Time Helper est de compenser la date et le time
 pour correspondre au time zone de l'utilisateur. Utilisons un exemple de forum.
 Votre forum a plusieurs utilisateurs qui peuvent poster des messages depuis
-n'importe quelle partie du monde. Une façon facile de gérer le temps est de
+n'importe quelle partie du monde. Une façon de gérer le temps est de
 sauvegarder toutes les dates et les times à GMT+0 or UTC. Décommenter la
 ligne ``date_default_timezone_set('UTC');`` dans **config/bootstrap.php** pour
 s'assurer que le time zone de votre application est défini à GMT+0.
