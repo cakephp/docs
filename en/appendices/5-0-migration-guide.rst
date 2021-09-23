@@ -20,6 +20,8 @@ Deprecations
 The following is a list of deprecated methods, properties and behaviors. These
 features will continue to function in 5.x and will be removed in 6.0.
 
+n/a
+
 Breaking Changes
 ================
 
@@ -100,6 +102,7 @@ View
 ----
 
 - ``NumberHelper`` and ``TextHelper`` no longer accept an ``engine`` config.
+- ``ViewBuilder::setHelpers()`` has no second (merge) param anymore. Use ``addHelpers()`` here instead.
 
 
 New Features
