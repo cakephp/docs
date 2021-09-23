@@ -479,11 +479,13 @@ migrations pour générer le schéma de votre base de données de test::
     // dans tests/bootstrap.php
     use Migrations\TestSuite\Migrator;
 
+    $migrator = new Migrator();
+
     // Configuration simple sans plugin
-    Migrator::migrate();
+    $migrator->run();
 
     // Lancer les migrations pour plusieurs plugins
-    Migrator::migrate([
+    $migrator->run([
         ['plugin' => 'Contacts'],
         // Lancer les migrations Documents sur la connexion test_docs.
         ['plugin' => 'Documents', 'connection' => 'test_docs'],
