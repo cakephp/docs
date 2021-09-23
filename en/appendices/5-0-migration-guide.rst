@@ -65,7 +65,7 @@ Event
 Filesystem
 ----------
 
-- The Filesystem package was removed, and the ``Filesystem`` was moved to the Utility package.
+- The Filesystem package was removed, and ``Filesystem`` class was moved to the Utility package.
 
 I18n
 ----
@@ -87,6 +87,8 @@ ORM
 - ``TranslateBehavior`` now defaults to the ``ShadowTable`` strategy. If you are
   using the ``Eav`` strategy you will need to update your behavior configuration
   to retain the previous behavior.
+- ``allowMultipleNulls`` option for ``isUnique`` rule now default to true matching
+  the original 3.x behavior.
 
 View
 ----
