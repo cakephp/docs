@@ -97,6 +97,8 @@ ORM
 - Passer un object validator à ``Table::save()`` via l'option ``validate`` est
   déprécié. Définissez le validator dans la classe de table ou utilisez
   ``setValidator()`` à la place.
+- ``Association::setName()`` est dépréciée. Les noms d'associations doivent être
+  définis en même temps que l'association.
 
 Routing
 -------
