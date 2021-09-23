@@ -29,9 +29,9 @@ changes made:
 Global
 ------
 
-- Type hints were added to all function parameter and returns where possible. These are intended
+- Type declarations were added to all function parameter and returns where possible. These are intended
   to match the docblock annotations, but include fixes for incorrect annotations.
-- Type hints were added to all class properties where possible. These also include some fixes for
+- Type declarations were added to all class properties where possible. These also include some fixes for
   incorrect annotations.
 
 Cache
