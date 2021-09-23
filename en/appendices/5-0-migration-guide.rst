@@ -26,6 +26,14 @@ Breaking Changes
 In addition to the removal of deprecated features there have been breaking
 changes made:
 
+Global
+------
+
+- Type declarations were added to all function parameter and returns where possible. These are intended
+  to match the docblock annotations, but include fixes for incorrect annotations.
+- Type declarations were added to all class properties where possible. These also include some fixes for
+  incorrect annotations.
+
 Cache
 -----
 
