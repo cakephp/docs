@@ -298,14 +298,20 @@ You can then configure the middleware using an array, or passing in a built
 
     $middlewareQueue->add($csp);
 
-Once the CSP middleware is activated, requests will have the ``cspScriptNonce``
-and ``cspStyleNonce`` attributes set. These attributes are applied to the
-``nonce`` attribute of all script and CSS link elements created by
+If you want to use a more strict CSP configuration, you can enable nonce based
+CSP rules with the ``scriptNonce`` and ``styleNonce`` options. When enabled
+these options will modify your CSP policy and set the  ``cspScriptNonce`` and
+``cspStyleNonce`` attributes in the request. These attributes are applied to
+the ``nonce`` attribute of all script and CSS link elements created by
 ``HtmlHelper``. This simplifies the adoption of policies that use
 a `nonce-base64
 <https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src>`__
-and ``strict-dynamic`` for increased security and easier maintenance.
+and ``strict-dynamic`` for increased security and easier maintenance::
 
+    $middlewareQueue->add($csp, [
+        'scriptNonce' => true,
+        'styleNonce' => true,
+    ]);
 
 .. versionadded:: 4.3.0
     Automatic nonce population was added.
