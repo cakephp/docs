@@ -102,7 +102,7 @@ View
 ----
 
 - ``NumberHelper`` and ``TextHelper`` no longer accept an ``engine`` config.
-- ``ViewBuilder::setHelpers()`` has no second (merge) param anymore. Use ``addHelpers()`` here instead.
+- ``ViewBuilder::setHelpers()`` parameter ``$merge`` was removed. Use ``ViewBuilder::addHelpers()`` instead.
 
 
 New Features
