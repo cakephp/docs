@@ -1190,6 +1190,16 @@ name::
 If you define 'only' and 'map', make sure that your mapped methods are also in
 the 'only' list.
 
+Prefixed Resource Routing
+-------------------------
+
+Resource routes can be connected to controllers in routing prefixes by
+connecting routes within a prefixed scope or by using the ``prefix`` option::
+
+    $routes->resources('Articles', [
+        'prefix' => 'Api',
+    ]);
+
 .. _custom-rest-routing:
 
 Custom Route Classes for Resource Routes
