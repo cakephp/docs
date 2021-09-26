@@ -104,6 +104,7 @@ ORM
 View
 ----
 
+- ``ViewBuilder`` options are now truly associative (string keys).
 - ``NumberHelper`` and ``TextHelper`` no longer accept an ``engine`` config.
 - ``ViewBuilder::setHelpers()`` parameter ``$merge`` was removed. Use ``ViewBuilder::addHelpers()`` instead.
 
