@@ -23,7 +23,6 @@ The behavior offers two strategies for how the translations are stored.
    This is the default strategy.
 2. Eav Strategy: This strategy uses a ``i18n`` table where it stores the
    translation for each of the fields of any given Table object that it's bound to.
-   This is currently the default strategy used by the behavior.
 
 Shadow Table Strategy
 =====================
@@ -41,7 +40,7 @@ fields to be translated. For that we create a shadow table ``articles_translatio
         PRIMARY KEY (`id`,`locale`)
     );
 
-So basically the shadow table needs ``id`` and ``locale`` columns which together
+The shadow table needs ``id`` and ``locale`` columns which together
 form the primary key and other columns with same name as primary table which
 need to be translated.
 
