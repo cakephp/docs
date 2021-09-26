@@ -91,7 +91,8 @@ Routing
 
 - Colon prefixed route placeholders like ``:controller`` are deprecated. Use
   braced placeholders like ``{controller}`` instead.
-- ``Router::extensions()`` for setting is deprecated, use ``Router::setExtensions()`` instead.
+- Using ``Router::extensions()`` to set a value is deprecated, use
+  ``Router::setExtensions()`` instead.
 
 Controller
 ----------
