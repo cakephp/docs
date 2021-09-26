@@ -129,9 +129,9 @@ App.fullBaseUrl
     is generated using the ``$_SERVER`` environment. However, you should define it
     manually to optimize performance or if you are concerned about people
     manipulating the ``Host`` header.
-    In a CLI context (from shells) the `fullBaseUrl` cannot be read from $_SERVER,
+    In a CLI context (from command) the `fullBaseUrl` cannot be read from $_SERVER,
     as there is no webserver involved. You do need to specify it yourself if
-    you do need to generate URLs from a shell (e.g. when sending emails).
+    you do need to generate URLs from a command (e.g. when sending emails).
 App.imageBaseUrl
     Web path to the public images directory under webroot. If you are using
     a :term:`CDN` you should set this value to the CDN's location.
@@ -475,7 +475,7 @@ will not ever overwrite the existing configuration.
 .. warning::
     When merging configuration files with `$merge = true`, dot notation in keys is
     not expanded::
-       
+
         // config1.php
         'Key1' => [
             'Key2' => [

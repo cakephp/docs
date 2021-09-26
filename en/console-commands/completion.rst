@@ -161,8 +161,8 @@ Subcommands
 Sample output for subcommands autocompletion::
 
     $ bin/cake bake <tab>
-    behavior            helper              shell
-    cell                mailer              shell_helper
+    behavior            helper              command
+    cell                mailer              command_helper
     component           migration           template
     controller          migration_snapshot  test
     fixture             model

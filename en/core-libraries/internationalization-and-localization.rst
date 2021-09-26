@@ -103,7 +103,7 @@ Extract Pot Files with I18n Shell
 ---------------------------------
 
 To create the pot files from `__()` and other internationalized types of
-messages that can be found in the application code, you can use the i18n shell.
+messages that can be found in the application code, you can use the i18n command.
 Please read the :doc:`following chapter </console-commands/i18n>` to
 learn more.
 
@@ -153,7 +153,7 @@ domain::
 
 .. note::
 
-    If you want to translate plugins that are vendor namespaced, you must use 
+    If you want to translate plugins that are vendor namespaced, you must use
     the domain string ``vendor/plugin_name``. But the related language file
     will become ``plugins/<Vendor>/<PluginName>/resources/locales/<locale>/plugin_name.po``
     inside your plugin folder.
@@ -251,8 +251,8 @@ number. A list of extra options follows:
 The word ``time`` after the placeholder number is also accepted and it
 understands the same options as ``date``.
 
-You can also use named placeholders like ``{name}`` in the message strings. 
-When using named placeholders, pass the placeholder and replacement in an array using key/value pairs, 
+You can also use named placeholders like ``{name}`` in the message strings.
+When using named placeholders, pass the placeholder and replacement in an array using key/value pairs,
 for example::
 
     // echos:  Hi. My name is Sara. I'm 12 years old.
@@ -414,7 +414,7 @@ for a single domain and locale::
 The above code can be added to your **config/bootstrap.php** so that
 translations can be found before any translation function is used. The absolute
 minimum that is required for creating a translator is that the loader function
-should return a ``Cake\I18n\Package`` object (prior to 4.2 it should be an ``Aura\Intl\Package`` object). 
+should return a ``Cake\I18n\Package`` object (prior to 4.2 it should be an ``Aura\Intl\Package`` object).
 Once the code is in place you can use the translation functions as usual::
 
     I18n::setLocale('fr_FR');
@@ -688,7 +688,7 @@ automatically set the locale based on the current user::
 The ``LocaleSelectorMiddleware`` will use the ``Accept-Language`` header to
 automatically set the user's preferred locale. You can use the locale list
 option to restrict which locales will automatically be used.
-    
+
 Translate Content/Entities
 ==========================
 
