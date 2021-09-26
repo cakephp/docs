@@ -67,6 +67,9 @@ Datasource
 ----------
 
 - The ``getAccessible()`` method was added to ``EntityInterface``.
+- ``ModelAwareTrait`` has been removed, so you can no longer use ``$this->loadModel()``
+  in tables, commands and cells. You can instead use ``$this->getTable()`` to get
+  table instances.
 
 Event
 -----

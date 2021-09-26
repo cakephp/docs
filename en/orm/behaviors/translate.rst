@@ -157,21 +157,20 @@ the application language, which will affect all translations::
 
     // In a controller. Change the locale, e.g. to Spanish
     I18n::setLocale('es');
-    $this->loadModel('Articles');
 
 Then, get an existing entity::
 
-    $article = $this->Articles->get(12);
+    $article = $this->getTable('Articles')->get(12);
     echo $article->title; // Echoes 'A title', not translated yet
 
 Next, translate your entity::
 
     $article->title = 'Un Artículo';
-    $this->Articles->save($article);
+    $this->getTable('Articles')->save($article);
 
 You can try now getting your entity again::
 
-    $article = $this->Articles->get(12);
+    $article = $this->getTable('Articles')->get(12);
     echo $article->title; // Echoes 'Un Artículo', yay piece of cake!
 
 Working with multiple translations can be done by using a special trait
@@ -236,22 +235,21 @@ translation for entities that are loaded::
 
     // Then you can change the language in your action:
     I18n::setLocale('es');
-    $this->loadModel('Articles');
 
     // All entities in results will contain spanish translation
-    $results = $this->Articles->find()->all();
+    $results = $this->getTable('Articles')->find()->all();
 
 This method works with any finder in your tables. For example, you can
 use TranslateBehavior with ``find('list')``::
 
     I18n::setLocale('es');
-    $data = $this->Articles->find('list')->toArray();
+    $data = $this->getTable('Articles')->find('list')->toArray();
 
     // Data will contain
     [1 => 'Mi primer artículo', 2 => 'El segundo artículo', 15 => 'Otro articulo' ...]
 
     // Change the locale to french for a single find call
-    $data = $this->Articles->find('list', ['locale' => 'fr'])->toArray();
+    $data = $this->getTable('Articles')->find('list', ['locale' => 'fr'])->toArray();
 
 .. versionadded:: 4.1.0
     The ``locale`` option was added in 4.1.0
@@ -366,12 +364,10 @@ modifying the application's state. For these scenarios use the behavior's
 
     I18n::setLocale('en'); // reset for illustration
 
-    $this->loadModel('Articles');
-
     // specific locale.
-    $this->Articles->setLocale('es');
+    $this->getTable('Articles')->setLocale('es');
 
-    $article = $this->Articles->get(12);
+    $article = $this->getTable('Articles')->get(12);
     echo $article->title; // Echoes 'Un Artículo', yay piece of cake!
 
 Note that this only changes the locale of the Articles table, it would not
@@ -380,11 +376,10 @@ to call the method on each table, for example::
 
     I18n::setLocale('en'); // reset for illustration
 
-    $this->loadModel('Articles');
-    $this->Articles->setLocale('es');
-    $this->Articles->Categories->setLocale('es');
+    $this->getTable('Articles')->setLocale('es');
+    $this->getTable('Articles')->Categories->setLocale('es');
 
-    $data = $this->Articles->find('all', ['contain' => ['Categories']]);
+    $data = $this->getTable('Articles')->find('all', ['contain' => ['Categories']]);
 
 This example also assumes that ``Categories`` has the TranslateBehavior attached
 to it.
@@ -423,8 +418,7 @@ translations for any given entity. For example, given the following setup::
         use TranslateTrait;
     }
 
-    // In a Controller
-    $this->loadModel('Articles');
+    // In the Articles Controller
     $article = new Article([
         'title' => 'My First Article',
         'body' => 'This is the content',

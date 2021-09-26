@@ -513,11 +513,11 @@ You can use ``Cake\ORM\Locator\TableLocator`` to load your plugin tables using t
 
     use Cake\ORM\Locator\LocatorAwareTrait;
 
-    $contacts = $this->getTableLocator()->get('ContactManager.Contacts');
+    $contacts = $this->getTable('ContactManager.Contacts');
 
 Alternatively, from a controller context, you can use::
 
-    $this->loadModel('ContactsMangager.Contacts');
+    $this->getTable('ContactsMangager.Contacts');
 
 Plugin Templates
 ================
