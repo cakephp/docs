@@ -12,7 +12,7 @@ interactively read user input and output information to the user.
 Command Helpers
 ===============
 
-Command Helpers can be accessed and used from any command, shell or task::
+Command Helpers can be accessed and used from any command::
 
     // Output some data as a table.
     $io->helper('Table')->output($data);
@@ -279,7 +279,7 @@ You can mark output as follows::
     $io->out('extra message', 1, ConsoleIo::VERBOSE);
     $io->verbose('Verbose output');
 
-You can control the output level of shells, by using the ``--quiet`` and
+You can control the output level of commands, by using the ``--quiet`` and
 ``--verbose`` options. These options are added by default, and allow you to
 consistently control output levels inside your CakePHP comands.
 

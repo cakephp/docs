@@ -101,7 +101,7 @@ your production server once the application is deployed::
 Since handling static assets, such as images, JavaScript and CSS files of
 plugins, through the ``Dispatcher`` is incredibly inefficient, it is strongly
 recommended to symlink them for production. This can be done by using
-the ``plugin`` shell::
+the ``plugin`` command::
 
     bin/cake plugin assets symlink
 
@@ -118,7 +118,7 @@ Deploying an update
 ===================
 
 After deployment of an update you might also want to run ``bin/cake schema_cache
-clear``, part of the :doc:`/console-commands/schema-cache` shell.
+clear``, part of the :doc:`/console-commands/schema-cache` command.
 
 .. meta::
     :title lang=en: Deployment

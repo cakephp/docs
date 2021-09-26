@@ -353,11 +353,11 @@ Then we can register our console error handler as the PHP error handler::
     $isCli = PHP_SAPI === 'cli';
     if ($isCli) {
         (new AppConsoleErrorHandler(Configure::read('Error')))->register();
-    } 
+    }
 
 ErrorHandler objects have a few methods you may want to implement:
 
-* ``_displayError(array $error, bool $debug)`` is used when errors are triggered. 
+* ``_displayError(array $error, bool $debug)`` is used when errors are triggered.
 * ``_displayException(Throwable $exception)`` method is called when there is an uncaught exception.
 * ``_logError($level, array $error)`` is called when there is an error to log.
 * ``logException(Throwable $exception)`` is called when there is an exception to log.
@@ -641,18 +641,6 @@ In addition, CakePHP uses the following exceptions:
 .. php:exception:: ConsoleException
 
     A console library class encounter an error.
-
-.. php:exception:: MissingTaskException
-
-    A configured task could not found.
-
-.. php:exception:: MissingShellException
-
-    The shell class could not be found.
-
-.. php:exception:: MissingShellMethodException
-
-    The chosen shell class has no method of that name.
 
 .. php:namespace:: Cake\Database\Exception
 
