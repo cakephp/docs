@@ -33,6 +33,12 @@ Connection
 - ``Connection::supportsDynamicConstraints()`` was deprecated now that fixtures don't try to dynamically
   drop and create constraints.
 
+Controller
+----------
+
+- The components' ``Controller.shutdown`` event callback has been renamed from
+  ``shutdown`` to ``afterFilter`` to match the controller one. This makes the callbacks more consistent.
+
 Database
 --------
 
@@ -94,19 +100,6 @@ Routing
 - Using ``Router::extensions()`` to set a value is deprecated, use
   ``Router::setExtensions()`` instead.
 
-Controller
-----------
-
-- The components' ``Controller.shutdown`` event callback has been renamed from
-  ``shutdown`` to ``afterFilter`` to match the controller one. This makes the callbacks more consistent.
-
-View
-----
-
-- FormHelper methods' non-associative options (e.g. ``['disabled']``) are now deprecated.
-- Second argument ``$merge`` of ``ViewBuilder::setHelpers()`` has been deprecated in favor of dedicated
-  ``ViewBuilder::addHelpers()`` method to cleanly separate merge from overwrite operation.
-
 TestSuite
 ---------
 
@@ -115,6 +108,13 @@ TestSuite
 - ``TestCase::$dropTables`` is deprecated. Dropping tables during a test run is
   not compatible with the new migration/schema dump based fixtures and will be
   removed in 5.0.
+
+View
+----
+
+- FormHelper methods' non-associative options (e.g. ``['disabled']``) are now deprecated.
+- Second argument ``$merge`` of ``ViewBuilder::setHelpers()`` has been deprecated in favor of dedicated
+  ``ViewBuilder::addHelpers()`` method to cleanly separate merge from overwrite operation.
 
 Behavior Changes
 ================
@@ -186,6 +186,8 @@ View
 
 - The ``$vars`` parameter of  ``ViewBuilder::build()`` is deprecated. Use
   ``setVar()`` instead.
+- ``HtmlHelper::script()`` and ``HtmlHelper::css()`` now escape absolute URLs
+  that include a scheme.
 
 Breaking Changes
 ================
