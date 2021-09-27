@@ -223,7 +223,7 @@ messages could look like::
 
             // Paginate the model
             $results = $paginator->paginate(
-                $this->getTable('Messages'_,
+                $this->getTable('Messages'),
                 $this->request->getQueryParams(),
                 [
                     // Use a parameterized custom finder.
