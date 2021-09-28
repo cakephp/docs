@@ -558,9 +558,9 @@ configuration engines
 <https://api.cakephp.org/4.x/interface-Cake.Core.Configure.ConfigEngineInterface.html>`__.
 The built in configuration engines are:
 
-* `JsonConfig <https://api.cakephp.org/3.x/class-Cake.Core.Configure.Engine.JsonConfig.html>`__
-* `IniConfig <https://api.cakephp.org/3.x/class-Cake.Core.Configure.Engine.IniConfig.html>`__
-* `PhpConfig <https://api.cakephp.org/3.x/class-Cake.Core.Configure.Engine.PhpConfig.html>`__
+* `JsonConfig <https://api.cakephp.org/4.x/class-Cake.Core.Configure.Engine.JsonConfig.html>`__
+* `IniConfig <https://api.cakephp.org/4.x/class-Cake.Core.Configure.Engine.IniConfig.html>`__
+* `PhpConfig <https://api.cakephp.org/4.x/class-Cake.Core.Configure.Engine.PhpConfig.html>`__
 
 By default your application will use ``PhpConfig``.
 
