@@ -226,21 +226,21 @@ additional details on how to use the table registry::
         ],
     ];
 
-    // Load an additional table object to allow differentiating in pagination component
-    $this->loadModel('UnpublishedArticles', [
-        'className' => 'App\Model\Table\ArticlesTable',
-        'table' => 'articles',
-        'entityClass' => 'App\Model\Entity\Article',
-    ]);
-
     $publishedArticles = $this->paginate(
         $this->Articles->find('all', [
             'scope' => 'published_articles'
         ])->where(['published' => true])
     );
 
+    // Load an additional table object to allow differentiating in pagination component
+    $unpublishedArticlesTable = $this->getTable('UnpublishedArticles', [
+        'className' => 'App\Model\Table\ArticlesTable',
+        'table' => 'articles',
+        'entityClass' => 'App\Model\Entity\Article',
+    ]);
+
     $unpublishedArticles = $this->paginate(
-        $this->UnpublishedArticles->find('all', [
+        $unpublishedArticlesTable->find('all', [
             'scope' => 'unpublished_articles'
         ])->where(['published' => false])
     );

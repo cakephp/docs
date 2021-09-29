@@ -67,14 +67,13 @@ case for a cell. In the class we just made, add the following::
     {
         public function display()
         {
-            $this->loadModel('Messages');
-            $unread = $this->Messages->find('unread');
+            $unread = $this->getTable('Messages')->find('unread');
             $this->set('unread_count', $unread->count());
         }
     }
 
-Because Cells use the ``ModelAwareTrait`` and ``ViewVarsTrait``, they behave
-very much like a controller would.  We can use the ``loadModel()`` and ``set()``
+Because Cells use the ``LocatorAwareTrait`` and ``ViewVarsTrait``, they behave
+very much like a controller would.  We can use the ``getTable()`` and ``set()``
 methods just like we would in a controller. In our template file, add the
 following::
 
@@ -219,14 +218,12 @@ messages could look like::
     {
         public function display($user)
         {
-            $this->loadModel('Messages');
-
             // Create a paginator
             $paginator = new Paginator();
 
             // Paginate the model
             $results = $paginator->paginate(
-                $this->Messages,
+                $this->getTable('Messages'),
                 $this->request->getQueryParams(),
                 [
                     // Use a parameterized custom finder.
@@ -266,8 +263,7 @@ creating a cell object::
 
         public function display($userId)
         {
-            $this->loadModel('Users');
-            $result = $this->Users->find('friends', ['for' => $userId])->all();
+            $result = $this->getTable('Users')->find('friends', ['for' => $userId])->all();
             $this->set('favorites', $result);
         }
     }
