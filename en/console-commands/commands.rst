@@ -140,7 +140,7 @@ Using Models in Commands
 
 You'll often need access to your application's business logic in console
 commands.  You can load models in commands, just as you would in a controller
-using ``$this->loadTable()`` since command use the ``LocatorAwareTrait``::
+using ``$this->getTable()`` since command use the ``LocatorAwareTrait``::
 
     <?php
     declare(strict_types=1);
