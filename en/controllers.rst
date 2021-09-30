@@ -269,7 +269,7 @@ For example::
 
     class PostsController extends AppController
     {
-        public function my_action()
+        public function myAction()
         {
             $this->render('Users.UserDetails/custom_file');
         }
@@ -337,36 +337,20 @@ the named action::
 Loading Additional Models
 =========================
 
-.. php:method:: loadModel(string $modelClass, string $type)
+.. php:method:: getTable(string $alias, array $config = [])
 
-The ``loadModel()`` function comes handy when you need to use a model
-table/collection that is not the controller's default one::
+The ``getTable()`` function comes handy when you need to use a table that is not
+the controller's default one::
 
     // In a controller method.
-    $this->loadModel('Articles');
-    $recentArticles = $this->Articles->find('all', [
+    $recentArticles = $this->getTable('Articles')->find('all', [
             'limit' => 5,
             'order' => 'Articles.created DESC'
         ])
         ->all();
 
-If you are using a table provider other than the built-in ORM you can
-link that table system into CakePHP's controllers by connecting its
-factory method::
-
-    // In a controller method.
-    $this->modelFactory(
-        'ElasticIndex',
-        ['ElasticIndexes', 'factory']
-    );
-
-The factory can be a callable or instance of ``\Cake\Datasource\Locator\LocatorInterface``.
-
-After registering a table factory, you can use ``loadModel`` to load
-instances::
-
-    // In a controller method.
-    $this->loadModel('Locations', 'ElasticIndex');
+.. versionadded:: 4.3.0
+    ``Controller::getTable()`` was added. Prior to 4.3 you need to use ``Controller::loadModel()``.
 
 Paginating a Model
 ==================

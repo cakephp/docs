@@ -508,16 +508,13 @@ prefix on them, use the alternative syntax::
         }
     }
 
-You can use ``Cake\ORM\Locator\TableLocator`` to load your plugin tables using the familiar
+You can use ``Cake\ORM\Locator\LocatorAwareTrait`` to load your plugin tables using the familiar
 :term:`plugin syntax`::
 
+    // Controllers already use LocatorAwareTrait, so you don't need this.
     use Cake\ORM\Locator\LocatorAwareTrait;
 
-    $contacts = $this->getTableLocator()->get('ContactManager.Contacts');
-
-Alternatively, from a controller context, you can use::
-
-    $this->loadModel('ContactsMangager.Contacts');
+    $contacts = $this->getTable('ContactManager.Contacts');
 
 Plugin Templates
 ================

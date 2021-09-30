@@ -140,10 +140,11 @@ Using Models in Commands
 
 You'll often need access to your application's business logic in console
 commands.  You can load models in commands, just as you would in a controller
-using ``loadModel()``. The loaded models are set as properties attached to your
-commands::
+using ``$this->getTable()`` since command use the ``LocatorAwareTrait``::
 
     <?php
+    declare(strict_types=1);
+
     namespace App\Command;
 
     use Cake\Command\Command;
@@ -153,8 +154,8 @@ commands::
 
     class UserCommand extends Command
     {
-        // Base Command will load the Users model with this property defined.
-        protected $modelClass = 'Users';
+        // Define the default table. This allows you to use `getTable()` without any argument.
+        protected $defaultTable = 'Users';
 
         protected function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
         {
@@ -169,7 +170,7 @@ commands::
         public function execute(Arguments $args, ConsoleIo $io): ?int
         {
             $name = $args->getArgument('name');
-            $user = $this->Users->findByUsername($name)->first();
+            $user = $this->getTable()->findByUsername($name)->first();
 
             $io->out(print_r($user, true));
 
@@ -323,8 +324,7 @@ conventions. Let's continue by adding more logic to our command::
         public function execute(Arguments $args, ConsoleIo $io)
         {
             $table = $args->getArgument('table');
-            $this->loadModel($table);
-            $this->{$table}->query()
+            $this->getTable($table)->query()
                 ->update()
                 ->set([
                     'modified' => new FrozenTime()
@@ -420,12 +420,11 @@ Update the command class to the following::
         public function execute(Arguments $args, ConsoleIo $io)
         {
             $table = $args->getArgument('table');
-            $this->loadModel($table);
             if ($io->ask('Are you sure?', 'n', ['y', 'n']) === 'n') {
                 $io->error('You need to be sure.');
                 $this->abort();
             }
-            $this->{$table}->query()
+            $this->getTable($table)->query()
                 ->update()
                 ->set([
                     'modified' => new FrozenTime()

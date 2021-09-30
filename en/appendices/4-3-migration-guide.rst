@@ -9,7 +9,7 @@ Upgrading to 4.3.0
 
 You can can use composer to upgrade to CakePHP 4.3.0::
 
-    php composer.phar require --update-with-dependencies "cakephp/cakephp:^4.3@beta"
+    php composer.phar require --update-with-dependencies "cakephp/cakephp:^4.3@RC"
 
 Deprecations
 ============
@@ -272,6 +272,9 @@ ORM
 - Added ``Query::whereNotInListOrNull()`` and ``QueryExpression::notInOrNull()`` for nullable
   columns since ``null != value`` is always false and the ``NOT IN`` test will always fail when
   the column is null.
+- ``LocatorAwareTrait::getTable()`` was added. This allows you to use ``$this->getTable()``
+  to get a table instance in classes which use the trait, like controllers,
+  commands, mailers and cells.
 
 TestSuite
 ---------
