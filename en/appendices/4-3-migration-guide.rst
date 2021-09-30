@@ -97,8 +97,6 @@ Routing
 
 - Colon prefixed route placeholders like ``:controller`` are deprecated. Use
   braced placeholders like ``{controller}`` instead.
-- Using ``Router::extensions()`` to set a value is deprecated, use
-  ``Router::setExtensions()`` instead.
 
 TestSuite
 ---------
