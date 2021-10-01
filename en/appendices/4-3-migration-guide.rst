@@ -211,6 +211,7 @@ Controller
 
 - ``Controller::middleware()`` was added which allows you to define middleware
   for a single controller only. See :ref:`controller-middleware` for more information.
+- Controllers now support action parameters with ``float``, ``int`` or ``bool`` type declarations.
 
 Database
 --------
