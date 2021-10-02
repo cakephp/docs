@@ -120,6 +120,11 @@ Behavior Changes
 While the following changes do not change the signature of any methods they do
 change the semantics or behavior of methods.
 
+Collection
+----------
+
+- Renamed ``$preserveKeys`` parameter to ``$keepKeys`` with same implementation.
+
 Command
 -------
 
