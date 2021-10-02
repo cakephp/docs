@@ -514,7 +514,7 @@ You can use ``Cake\ORM\Locator\LocatorAwareTrait`` to load your plugin tables us
     // Controllers already use LocatorAwareTrait, so you don't need this.
     use Cake\ORM\Locator\LocatorAwareTrait;
 
-    $contacts = $this->getTable('ContactManager.Contacts');
+    $contacts = $this->fetchTable('ContactManager.Contacts');
 
 Plugin Templates
 ================

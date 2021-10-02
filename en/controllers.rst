@@ -337,20 +337,20 @@ the named action::
 Loading Additional Models
 =========================
 
-.. php:method:: getTable(string $alias, array $config = [])
+.. php:method:: fetchTable(string $alias, array $config = [])
 
-The ``getTable()`` function comes handy when you need to use a table that is not
+The ``fetchTable()`` function comes handy when you need to use a table that is not
 the controller's default one::
 
     // In a controller method.
-    $recentArticles = $this->getTable('Articles')->find('all', [
+    $recentArticles = $this->fetchTable('Articles')->find('all', [
             'limit' => 5,
             'order' => 'Articles.created DESC'
         ])
         ->all();
 
 .. versionadded:: 4.3.0
-    ``Controller::getTable()`` was added. Prior to 4.3 you need to use ``Controller::loadModel()``.
+    ``Controller::fetchTable()`` was added. Prior to 4.3 you need to use ``Controller::loadModel()``.
 
 Paginating a Model
 ==================
