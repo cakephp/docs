@@ -272,7 +272,7 @@ ORM
 - Added ``Query::whereNotInListOrNull()`` and ``QueryExpression::notInOrNull()`` for nullable
   columns since ``null != value`` is always false and the ``NOT IN`` test will always fail when
   the column is null.
-- ``LocatorAwareTrait::getTable()`` was added. This allows you to use ``$this->getTable()``
+- ``LocatorAwareTrait::fetchTable()`` was added. This allows you to use ``$this->fetchTable()``
   to get a table instance in classes which use the trait, like controllers,
   commands, mailers and cells.
 

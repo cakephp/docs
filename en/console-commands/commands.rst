@@ -140,7 +140,7 @@ Using Models in Commands
 
 You'll often need access to your application's business logic in console
 commands.  You can load models in commands, just as you would in a controller
-using ``$this->getTable()`` since command use the ``LocatorAwareTrait``::
+using ``$this->fetchTable()`` since command use the ``LocatorAwareTrait``::
 
     <?php
     declare(strict_types=1);
@@ -154,7 +154,7 @@ using ``$this->getTable()`` since command use the ``LocatorAwareTrait``::
 
     class UserCommand extends Command
     {
-        // Define the default table. This allows you to use `getTable()` without any argument.
+        // Define the default table. This allows you to use `fetchTable()` without any argument.
         protected $defaultTable = 'Users';
 
         protected function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
@@ -170,7 +170,7 @@ using ``$this->getTable()`` since command use the ``LocatorAwareTrait``::
         public function execute(Arguments $args, ConsoleIo $io): ?int
         {
             $name = $args->getArgument('name');
-            $user = $this->getTable()->findByUsername($name)->first();
+            $user = $this->fetchTable()->findByUsername($name)->first();
 
             $io->out(print_r($user, true));
 
@@ -324,7 +324,7 @@ conventions. Let's continue by adding more logic to our command::
         public function execute(Arguments $args, ConsoleIo $io)
         {
             $table = $args->getArgument('table');
-            $this->getTable($table)->query()
+            $this->fetchTable($table)->query()
                 ->update()
                 ->set([
                     'modified' => new FrozenTime()
@@ -424,7 +424,7 @@ Update the command class to the following::
                 $io->error('You need to be sure.');
                 $this->abort();
             }
-            $this->getTable($table)->query()
+            $this->fetchTable($table)->query()
                 ->update()
                 ->set([
                     'modified' => new FrozenTime()

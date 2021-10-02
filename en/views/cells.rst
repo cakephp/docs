@@ -67,13 +67,13 @@ case for a cell. In the class we just made, add the following::
     {
         public function display()
         {
-            $unread = $this->getTable('Messages')->find('unread');
+            $unread = $this->fetchTable('Messages')->find('unread');
             $this->set('unread_count', $unread->count());
         }
     }
 
 Because Cells use the ``LocatorAwareTrait`` and ``ViewVarsTrait``, they behave
-very much like a controller would.  We can use the ``getTable()`` and ``set()``
+very much like a controller would.  We can use the ``fetchTable()`` and ``set()``
 methods just like we would in a controller. In our template file, add the
 following::
 
@@ -223,7 +223,7 @@ messages could look like::
 
             // Paginate the model
             $results = $paginator->paginate(
-                $this->getTable('Messages'),
+                $this->fetchTable('Messages'),
                 $this->request->getQueryParams(),
                 [
                     // Use a parameterized custom finder.
@@ -263,7 +263,7 @@ creating a cell object::
 
         public function display($userId)
         {
-            $result = $this->getTable('Users')->find('friends', ['for' => $userId])->all();
+            $result = $this->fetchTable('Users')->find('friends', ['for' => $userId])->all();
             $this->set('favorites', $result);
         }
     }

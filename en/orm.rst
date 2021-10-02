@@ -45,7 +45,7 @@ Then in a controller or command we can have CakePHP create an instance for us::
 
     public function someMethod()
     {
-        $resultset = $this->getTable('Articles')->find()->all();
+        $resultset = $this->fetchTable('Articles')->find()->all();
 
         foreach ($resultset as $row) {
             echo $row->title;

@@ -233,7 +233,7 @@ additional details on how to use the table registry::
     );
 
     // Load an additional table object to allow differentiating in pagination component
-    $unpublishedArticlesTable = $this->getTable('UnpublishedArticles', [
+    $unpublishedArticlesTable = $this->fetchTable('UnpublishedArticles', [
         'className' => 'App\Model\Table\ArticlesTable',
         'table' => 'articles',
         'entityClass' => 'App\Model\Entity\Article',
