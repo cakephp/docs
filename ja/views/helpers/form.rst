@@ -36,15 +36,15 @@ FormHelper を活用するために最初に使うメソッドは ``create()`` �
 組み込みのプロバイダーは、 ``$context`` の次の値とマップします。
 
 * ``Entity`` インスタンスまたはイテレーターは、
-  `EntityContext <https://api.cakephp.org/3.x/class-Cake.View.Form.EntityContext.html>`_
+  `EntityContext <https://api.cakephp.org/4.x/class-Cake.View.Form.EntityContext.html>`_
   にマップされます。このコンテキストは、FormHelper が組み込みの ORM の結果を処理できるようにします。
 
 * ``schema`` キーを含む配列は、
-  `ArrayContext <https://api.cakephp.org/3.x/class-Cake.View.Form.ArrayContext.html>`_
+  `ArrayContext <https://api.cakephp.org/4.x/class-Cake.View.Form.ArrayContext.html>`_
   にマップされます。これは単純なデータ構造を作成してフォームを構築することができます。
 
 * ``null`` と ``false`` は、
-  `NullContext <https://api.cakephp.org/3.x/class-Cake.View.Form.NullContext.html>`_
+  `NullContext <https://api.cakephp.org/4.x/class-Cake.View.Form.NullContext.html>`_
   にマップされます。
   このコンテキストクラスは、FormHelper が必要とするインターフェイスを単に満たすだけです。
   このコンテキストは、ORM の永続性を必要としない短いフォームを作成したい場合に便利です。
@@ -306,7 +306,7 @@ FormHelper の値ソースは、input タグなどの描画される要素がど
 組み込みのコンテキストクラスは基本的なケースをカバーすることを目的としていますが、
 異なる ORM を使用している場合は新しいコンテキストクラスを作成する必要があります。
 このような状況では、 `Cake\\View\\Form\\ContextInterface
-<https://api.cakephp.org/3.x/class-Cake.View.Form.ContextInterface.html>`_
+<https://api.cakephp.org/4.x/class-Cake.View.Form.ContextInterface.html>`_
 を実装する必要があります。
 このインターフェイスを実装すると、新しいコンテキストを FormHelper に追加することができます。
 ``View.beforeRender`` イベントリスナーやアプリケーションビュークラスで行うのが最善の方法です。 ::
@@ -2375,7 +2375,7 @@ CakePHP の多くのヘルパーと同じように、FormHelper は、
 
 デフォルトのテンプレートのリスト、それらのデフォルトのフォーマット、そして期待される変数は
 `FormHelper API ドキュメント
-<https://api.cakephp.org/3.x/class-Cake.View.Helper.FormHelper.html#%24_defaultConfig>`_
+<https://api.cakephp.org/4.x/class-Cake.View.Helper.FormHelper.html#%24_defaultConfig>`_
 で見つけることができます。
 
 異なるカスタムコントロールコンテナーの使用

@@ -122,7 +122,7 @@ CSS や JavaScript、または画像ファイルの URL を生成する場合、
     $this->Url->css('app.css', ['timestamp' => false]);
 
 詳細は API の
-`Router::url <https://api.cakephp.org/3.x/class-Cake.Routing.Router.html#_url>`_
+`Router::url <https://api.cakephp.org/4.x/class-Cake.Routing.Router.html#_url>`_
 を確認してください。
 
 .. meta::
