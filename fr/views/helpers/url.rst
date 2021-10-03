@@ -105,7 +105,7 @@ existe des méthodes d'helper pour chacun de ces types d'assets::
     $this->Url->css('app.css');
 
 Pour de plus amples informations, voir
-`Router::url <https://api.cakephp.org/3.x/class-Cake.Routing.Router.html#_url>`_
+`Router::url <https://api.cakephp.org/4.x/class-Cake.Routing.Router.html#_url>`_
 dans l'API.
 
 .. meta::
