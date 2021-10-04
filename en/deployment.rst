@@ -122,7 +122,7 @@ using::
 Deploying an update
 ===================
 
-On each deploy you'll likely have a few tasks to co-ordinate. Some typical ones
+On each deploy you'll likely have a few tasks to co-ordinate on your web server. Some typical ones
 are:
 
 1. Install dependencies with ``composer install``. Avoid using ``composer
