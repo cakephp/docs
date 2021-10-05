@@ -292,7 +292,7 @@ your httpd.conf. (Make sure you are editing the system httpd.conf rather than a
 user- or site-specific httpd.conf.)
 
 These files can vary between different distributions and Apache versions. You
-may also take a look at http://wiki.apache.org/httpd/DistrosDefaultLayout for
+may also take a look at https://cwiki.apache.org/confluence/display/httpd/DistrosDefaultLayout for
 further information.
 
 #. Make sure that an .htaccess override is allowed and that AllowOverride is set

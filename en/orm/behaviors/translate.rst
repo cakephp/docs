@@ -145,9 +145,8 @@ same API to manage translations.
 Now, select a language to be used for retrieving entities by changing
 the application language, which will affect all translations::
 
-    // In a controller. Change the locale, e.g. to Spanish
+    // In the Articles controller. Change the locale, e.g. to Spanish
     I18n::setLocale('es');
-    $this->loadModel('Articles');
 
 Then, get an existing entity::
 
@@ -221,12 +220,11 @@ Reading Translated Content
 As shown above you can use the ``setLocale()`` method to choose the active
 translation for entities that are loaded::
 
-    // Load I18n core functions at the beginning of your Controller:
+    // Load I18n core functions at the beginning of your Articles Controller:
     use Cake\I18n\I18n;
 
     // Then you can change the language in your action:
     I18n::setLocale('es');
-    $this->loadModel('Articles');
 
     // All entities in results will contain spanish translation
     $results = $this->Articles->find()->all();
@@ -353,8 +351,6 @@ modifying the application's state. For these scenarios use the behavior's
 
     I18n::setLocale('en'); // reset for illustration
 
-    $this->loadModel('Articles');
-
     // specific locale.
     $this->Articles->setLocale('es');
 
@@ -367,7 +363,6 @@ to call the method on each table, for example::
 
     I18n::setLocale('en'); // reset for illustration
 
-    $this->loadModel('Articles');
     $this->Articles->setLocale('es');
     $this->Articles->Categories->setLocale('es');
 
@@ -410,8 +405,7 @@ translations for any given entity. For example, given the following setup::
         use TranslateTrait;
     }
 
-    // In a Controller
-    $this->loadModel('Articles');
+    // In the Articles Controller
     $article = new Article([
         'title' => 'My First Article',
         'body' => 'This is the content',

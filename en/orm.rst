@@ -45,8 +45,7 @@ Then in a controller or command we can have CakePHP create an instance for us::
 
     public function someMethod()
     {
-        $this->loadModel('Articles');
-        $resultset = $this->Articles->find()->all();
+        $resultset = $this->fetchTable('Articles')->find()->all();
 
         foreach ($resultset as $row) {
             echo $row->title;
@@ -63,7 +62,7 @@ In other contexts, you can use the ``LocatorAwareTrait`` which add accessor meth
         // more code.
     }
 
-Within a static method you can use the :php:class:`~Cake\\Datasource\\FactoryLocator` 
+Within a static method you can use the :php:class:`~Cake\\Datasource\\FactoryLocator`
 to get the table locator::
 
     $articles = TableRegistry::getTableLocator()->get('Articles');

@@ -1,39 +1,39 @@
 Deployment
 ##########
 
-Once your application is complete, or even before that you'll want to deploy it.
-There are a few things you should do when deploying a CakePHP application.
+Once your is ready to be deployed there are a few things you should do.
 
 Moving files
 ============
 
-You are encouraged to create a git commit and pull or clone that commit or
-repository on your server and run ``composer install``.
-While this requires some knowledge about git and an existing install of ``git``
-and ``composer`` this process will take care about library dependencies and file
-and folder permissions.
+You can clone your repository onto your production server and then checkout the
+commit/tag you want to run. Then, run ``composer install``.  While this requires
+some knowledge about git and an existing install of ``git`` and ``composer``
+this process will take care about library dependencies and file and folder
+permissions.
 
 Be aware that when deploying via FTP you will at least have to fix file and
 folder permissions.
 
-You can also use this deployment technique to setup a staging- or demo-server
-(pre-production) and keep it in sync with your dev box.
+You can also use this deployment technique to setup a staging or demo-server
+(pre-production) and keep it in sync with your local environment.
 
-Adjust config/app.php
-=====================
+Adjusting Configuration
+=======================
 
-Adjusting app.php, specifically the value of ``debug`` is extremely important.
+You'll want to make a few adjustments to your application's configuration for
+a production environment. The value of ``debug`` is extremely important.
 Turning debug = ``false`` disables a number of development features that should
 never be exposed to the Internet at large. Disabling debug changes the following
-types of things:
+features:
 
 * Debug messages, created with :php:func:`pr()`, :php:func:`debug()` and :php:func:`dd()` are
   disabled.
-* Core CakePHP caches are by default flushed every year (about 365 days), instead of every
-  10 seconds as in development.
-* Error views are less informative, and give generic error messages instead.
-* PHP Errors are not displayed.
-* Exception stack traces are disabled.
+* Core CakePHP caches duration are defaulted to 365 days, instead of 10 seconds
+  as in development.
+* Error views are less informative, and display generic error messages instead
+  of detailed error messages with stack traces.
+* PHP Warnings and Errors are not displayed.
 
 In addition to the above, many plugins and application extensions use ``debug``
 to modify their behavior.
@@ -47,7 +47,7 @@ For example, you can set an environment variable in your Apache configuration::
 
     SetEnv CAKEPHP_DEBUG 1
 
-And then you can set the debug level dynamically in **app.php**::
+And then you can set the debug level dynamically in **app_local.php**::
 
     $debug = (bool)getenv('CAKEPHP_DEBUG');
 
@@ -55,6 +55,11 @@ And then you can set the debug level dynamically in **app.php**::
         'debug' => $debug,
         .....
     ];
+
+It is recommended that you put configuration that is shared across all
+of your application's environments in **config/app.php**. For configuration that
+varies between environments either use **config/app_local.php** or environment
+variables.
 
 Check Your Security
 ===================
@@ -117,8 +122,15 @@ using::
 Deploying an update
 ===================
 
-After deployment of an update you might also want to run ``bin/cake schema_cache
-clear``, part of the :doc:`/console-commands/schema-cache` command.
+On each deploy you'll likely have a few tasks to co-ordinate on your web server. Some typical ones
+are:
+
+1. Install dependencies with ``composer install``. Avoid using ``composer
+   update`` when doing deploys as you could get unexpected versions of packages.
+2. Run database `migrations </migrations/>`__ with either the Migrations plugin
+   or another tool.
+3. Clear model schema cache with ``bin/cake schema_cache clear``. The :doc:`/console-commands/schema-cache`
+   has more information on this command.
 
 .. meta::
     :title lang=en: Deployment

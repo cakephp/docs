@@ -504,12 +504,12 @@ Configure の全てのデータを `my_config.php` に保存します。 ::
 
 CakePHP は、さまざまなソースから設定ファイルを読み込む機能を提供し、
 `独自の設定エンジンを作成するための
-<https://api.cakephp.org/3.x/class-Cake.Core.Configure.ConfigEngineInterface.html>`__
+<https://api.cakephp.org/4.x/class-Cake.Core.Configure.ConfigEngineInterface.html>`__
 プラガブルなシステムを備えています。組み込みの設定エンジンは次の通りです。
 
-* `JsonConfig <https://api.cakephp.org/3.x/class-Cake.Core.Configure.Engine.JsonConfig.html>`__
-* `IniConfig <https://api.cakephp.org/3.x/class-Cake.Core.Configure.Engine.IniConfig.html>`__
-* `PhpConfig <https://api.cakephp.org/3.x/class-Cake.Core.Configure.Engine.PhpConfig.html>`__
+* `JsonConfig <https://api.cakephp.org/4.x/class-Cake.Core.Configure.Engine.JsonConfig.html>`__
+* `IniConfig <https://api.cakephp.org/4.x/class-Cake.Core.Configure.Engine.IniConfig.html>`__
+* `PhpConfig <https://api.cakephp.org/4.x/class-Cake.Core.Configure.Engine.PhpConfig.html>`__
 
 デフォルトでは、アプリケーションは ``PhpConfig`` を使用します。
 
