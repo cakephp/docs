@@ -62,7 +62,7 @@ deprecated. We also recommend this system for use in your plugins and
 application code when useful. You can trigger deprecation warnings with
 ``deprecationWarning()``::
 
-    deprecationWarning('The example() method is deprecated. Use getExample() instead.');
+    deprecationWarning('5.0', 'The example() method is deprecated. Use getExample() instead.');
 
 When upgrading CakePHP or plugins you may encounter new deprecation warnings.
 You can temporarily disable deprecation warnings in one of a few ways:

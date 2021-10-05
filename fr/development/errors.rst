@@ -70,7 +70,7 @@ fonctionnalités ont été dépréciées. Nous recommandons également ce systè
 le code de vos plugins ou de vos applications quand c'est utile. Vous pouvez
 déclencher un avertissement de dépréciation avec ``deprecationWarning()``::
 
-    deprecationWarning('La méthode example() est dépréciée. Veuillez utiliser
+    deprecationWarning('5.0', 'La méthode example() est dépréciée. Veuillez utiliser
     getExample() à la place.');
 
 Quand vous mettez à jour CakePHP ou des plugins, vous pouvez y découvrir de
@@ -381,7 +381,7 @@ que gestionnaire d'erreurs PHP::
     $isCli = PHP_SAPI === 'cli';
     if ($isCli) {
         (new AppConsoleErrorHandler(Configure::read('Error')))->register();
-    } 
+    }
 
 Les objets ErrorHandler ont quelques méthodes que vous pourriez vouloir
 implémenter:
