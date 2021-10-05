@@ -1,4 +1,4 @@
-FROM debian:stretch as builder
+FROM debian:bullseye as builder
 
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -32,7 +32,7 @@ RUN make website
 
 # Create a slim nginx image.
 # Final image doesn't need python or latex
-FROM nginx:1.15-alpine
+FROM nginx:1.21-alpine
 
 COPY --from=builder /data/website /data/website
 COPY --from=builder /data/nginx.conf /etc/nginx/conf.d/default.conf

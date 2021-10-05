@@ -306,7 +306,7 @@ CakePHP は、展開した状態では mod_rewrite を使用するようにな�
 必ずシステムの httpd.conf を編集してください）。
 
 これらのファイルはディストリビューションや Apache のバージョンによって大きく異なります。
-詳細については http://wiki.apache.org/httpd/DistrosDefaultLayout を見てもよいかも
+詳細については https://cwiki.apache.org/confluence/display/httpd/DistrosDefaultLayout を見てもよいかも
 しれません。
 
 #. 適切な DocumentRoot に対して .htaccess による設定の上書きを許可するよう、
