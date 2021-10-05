@@ -311,7 +311,7 @@ plutôt que celui d'un utilisateur ou d'un site spécifique).
 
 Ces fichiers peuvent varier selon les différentes distributions et les versions
 d'Apache. Vous pouvez consulter
-http://wiki.apache.org/httpd/DistrosDefaultLayout pour plus d'informations.
+https://cwiki.apache.org/confluence/display/httpd/DistrosDefaultLayout pour plus d'informations.
 
 #. Assurez-vous que l'utilisation des fichiers .htaccess est permise et que
    AllowOverride est défini à All pour le bon DocumentRoot. Vous devriez voir

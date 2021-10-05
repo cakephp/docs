@@ -250,7 +250,7 @@ La primera mirada debe ir a httpd.conf. (Asegura de que estás editando el
 httpd.conf del sistema en lugar del httpd.conf de un usuario o sitio específico)
 
 Hay archivos que pueden variar entre diferentes distribuciones y versiones de Apache.
-Debes también mirar en http://wiki.apache.org/httpd/DistrosDefaultLayout para
+Debes también mirar en https://cwiki.apache.org/confluence/display/httpd/DistrosDefaultLayout para
 obtener información.
 
 #. Asegura de que un archivo .htaccess de sobreescritura esté permitido
