@@ -11,7 +11,7 @@ JSON と XML レスポンスを作成できるようになり、
 以降、このページでは ``JsonView`` と ``XmlView`` をデータビューと呼びます。
 
 データビューを生成する方法は2つあります。
-一つ目は ``_serialize`` キーを使用する方法、二つ目は通常のテンプレートファイルを使用する方法です。
+一つ目は ``serialize`` オプションを使用する方法、二つ目は通常のテンプレートファイルを使用する方法です。
 
 あなたのアプリケーションでデータビューを有効化する
 ==================================================
@@ -42,13 +42,13 @@ JSON と XML レスポンスを作成できるようになり、
 シリアライズキーをデータビューで使用する
 ========================================
 
-``_serialize`` キーは、データビューを使用する時に、どのビュー変数がシリアライズされるべきかを示す
-特別なビュー変数です。json/xml に変換する前に独自のフォーマット処理が不要な場合、
+``serialize`` オプションは、データビューを使用する時に、どのビュー変数がシリアライズされるべきかを示します。
+json/xml に変換する前に独自のフォーマット処理が不要な場合、
 これはコントローラーのアクションでテンプレートファイルを定義する手間を省いてくれます。
 
 レスポンスを生成する前にビュー変数へ独自のフォーマット処理や操作が必要な場合は、
 テンプレートファイルを使用する必要があります。
-``_serialize`` の値は、文字列かシリアライズしたいビュー変数の配列のどちらかになります。 ::
+``serialize`` の値は、文字列かシリアライズしたいビュー変数の配列のどちらかになります。 ::
 
     namespace App\Controller;
 
@@ -65,11 +65,11 @@ JSON と XML レスポンスを作成できるようになり、
             // シリアライズする必要があるビュー変数をセットする
             $this->set('articles', $this->paginate());
             // JsonView がシリアライズするべきビュー変数を指定する
-            $this->set('_serialize', 'articles');
+            $this->viewBuilder()->setOption('serialize', 'articles');
         }
     }
 
-``_serialize`` をビュー変数の配列として定義し結合することも出来ます。 ::
+``serialize`` をビュー変数の配列として定義し結合することも出来ます。 ::
 
     namespace App\Controller;
 
@@ -83,18 +83,18 @@ JSON と XML レスポンスを作成できるようになり、
 
         public function index()
         {
-            // $articles と $comments を生成する何某かのコード
+            // $articles と $comments を生成する何かのコード
 
             // シリアライズする必要があるビュー変数をセットする
             $this->set(compact('articles', 'comments'));
 
             // JsonView がシリアライズするべきビュー変数を指定する
-            $this->set('_serialize', ['articles', 'comments']);
+            $this->viewBuilder()->setOption('serialize', ['articles', 'comments']);
         }
     }
 
-:php:class:`XmlView` を使用するケースでは、配列として ``_serialize`` を定義することには最上位に
-``<response>`` 要素が自動的に付与されるという利点があります。 ``_serialize`` と XmlView に
+:php:class:`XmlView` を使用するケースでは、配列として ``serialize`` を定義することには最上位に
+``<response>`` 要素が自動的に付与されるという利点があります。 ``serialize`` と XmlView に
 文字列を使用する時は、ビュー変数が最上位要素を一つ持つことに確認してください。
 一つも最上位要素を持たない場合、XML の生成に失敗するでしょう。
 
@@ -125,32 +125,26 @@ JSON レスポンスからそれを取り除きたいとします。こういっ
 ビューファイルはシリアライズされたコンテンツを出力することを前提としているため、
 レイアウトをサポートしません。
 
-.. note::
-    3.1.0 から 3.5.0 まで、 アプリケーションスケルトンの AppController は、
-    全ての XML/JSON リクエストに対して、自動的に ``'_serialize' => true`` を追加していました。
-    そのためビューファイルを使用したい場合は、このコードを beforeRender コールバックから
-    取り除くか、 ``'_serialize' => false`` をセットする必要があります。
-
 XML ビューの作成
 ================
 
 .. php:class:: XmlView
 
-デフォルトでは ``_serialize`` を使用する時、XmlView は
+デフォルトでは ``serialize`` を使用する時、XmlView は
 ``<response>`` ノードでシリアル化されるビュー変数をラップします。
-``_rootNode`` ビュー変数を使用することで、このノードに別の名前を設定することが出来ます。
+``rootNode`` オプションを使用することで、このノードに別の名前を設定することが出来ます。
 
 XmlView クラスは、XML の生成に使用するオプション（例: ``tags`` vs ``attributes`` ）を
-変更するための ``_xmlOptions`` 変数をサポートしています。
+変更するための ``xmlOptions`` オプションをサポートしています。
 
 ``XmlView`` の使用例は `sitemap.xml
 <https://www.sitemaps.org/protocol.html>`_ を生成することです。
-このドキュメントタイプでは ``_rootNode`` を変更し属性を設定する必要があります。
+このドキュメントタイプでは ``rootNode`` を変更し属性を設定する必要があります。
 属性は ``@`` プレフィックスを使用して定義されます。 ::
 
     public function sitemap()
     {
-        $pages = $this->Pages->find();
+        $pages = $this->Pages->find()->all();
         $urls = [];
         foreach ($pages as $page) {
             $urls[] = [
@@ -162,13 +156,14 @@ XmlView クラスは、XML の生成に使用するオプション（例: ``tags
         }
 
         // 生成されたドキュメントにカスタムルートノードを定義します。
-        $this->set('_rootNode', 'urlset');
+        $this->viewBuilder()
+            ->setOption('rootNode', 'urlset')
+            ->setOption('serialize', ['@xmlns', 'url']);
         $this->set([
             // ルートノードで属性を定義します。
             '@xmlns' => 'http://www.sitemaps.org/schemas/sitemap/0.9',
             'url' => $urls
         ]);
-        $this->set('_serialize', ['@xmlns', 'url']);
     }
 
 JSON ビューの作成
@@ -177,15 +172,16 @@ JSON ビューの作成
 .. php:class:: JsonView
 
 JsonView クラスは、JSON の生成に使用するビットマスクを変更するためための
-``_jsonOptions`` 変数をサポートします。このオプションの有効な値は
+``jsonOptions`` オプションをサポートします。このオプションの有効な値は
 `json_encode <http://php.net/json_encode>`_  を参照してください。
 
 例えば、一貫した JSON 形式で CakePHP エンティティーの検証エラーをシリアライズするには::
 
     // コントローラーのアクションの中で、保存に失敗した時
     $this->set('errors', $articles->errors());
-    $this->set('_jsonOptions', JSON_FORCE_OBJECT);
-    $this->set('_serialize', ['errors']);
+    $this->viewBuilder()
+        ->setOption('serialize', ['errors'])
+        ->setOption('jsonOptions', JSON_FORCE_OBJECT);
 
 JSONP レスポンス
 ----------------
@@ -209,7 +205,6 @@ JSONP レスポンスの返すことが出来ます。これに ``true`` を設�
     namespace App\Controller;
 
     use App\Controller\AppController;
-    // 3.6 より前は Cake\Network\Exception\NotFoundException を使用
     use Cake\Http\Exception\NotFoundException;
 
     class VideosController extends AppController
@@ -233,15 +228,13 @@ JSONP レスポンスの返すことが出来ます。これに ``true`` を設�
             $this->viewBuilder()->setClassName($formats[$format]);
 
             // データを取得
-            $videos = $this->Videos->find('latest');
+            $videos = $this->Videos->find('latest')->all();
 
             // ビューにデータをセット
             $this->set(compact('videos'));
-            $this->set('_serialize', ['videos']);
+            $this->viewBuilder()->setOption('serialize', ['videos']);
 
             // ダウンロードを指定
-            // 3.4.0 より前は
-            // $this->response->download('report-' . date('YmdHis') . '.' . $format);
             return $this->response->withDownload('report-' . date('YmdHis') . '.' . $format);
         }
     }
