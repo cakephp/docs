@@ -60,8 +60,9 @@ Core
 Database
 --------
 
-- The ``getMaxAliasLength()`` and ``getConnectionRetries()`` methods were added
+- ``getMaxAliasLength()`` and ``getConnectionRetries()`` were added
   to ``DriverInterface``.
+- ``TableSchemaAwareInterface`` was removed.
 
 Datasource
 ----------
