@@ -177,6 +177,12 @@ Routing
 - ``RouteBuilder::resources()`` now generates routes that use 'braced'
   placeholders.
 
+TestSuite
+---------
+
+- ``TestCase::deprecated()`` now asserts that at least one deprecation warning
+  was triggered by the callback.
+
 Validation
 ----------
 
@@ -218,6 +224,15 @@ Controller
   for a single controller only. See :ref:`controller-middleware` for more information.
 - Controllers now support action parameters with ``float``, ``int`` or ``bool`` type declarations.
   Boolean passed parameters must be either 0 or 1.
+
+Core
+----
+
+- ``deprecationWarning()`` no longer emits duplicate notices. Instead only the
+  first instance of a deprecation will be displayed. This improves the
+  readability of test output, and visual noise in an HTML context. You can
+  restore duplicate notice output by setting the
+  ``Error.enableDuplicateDeprecations`` to ``true`` in your ``app_local.php``.
 
 Database
 --------
