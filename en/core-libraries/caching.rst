@@ -24,7 +24,7 @@ build your own backend. The built-in caching engines are:
   work well in files.
 * ``Memcached`` Uses the `Memcached <http://php.net/memcached>`_
   extension.
-* ``Redis`` Uses the `phpredis <https://github.com/nicolasff/phpredis>`_
+* ``Redis`` Uses the `phpredis <https://github.com/phpredis/phpredis>`_
   extension. Redis provides a fast and persistent cache system similar to
   Memcached, also provides atomic operations.
 * ``Apcu`` APCu cache uses the PHP `APCu <http://php.net/apcu>`_ extension.
@@ -36,7 +36,7 @@ build your own backend. The built-in caching engines are:
 * ``Array`` Stores all data in an array. This engine does not provide
   persistent storage and is intended for use in application test suites.
 * ``Null`` The null engine doesn't actually store anything and fails all read
-  operations. 
+  operations.
 
 Regardless of the CacheEngine you choose to use, your application interacts with
 :php:class:`Cake\\Cache\\Cache`.
@@ -184,6 +184,8 @@ MemcacheEngine Options
   appropriate serializer support.
 - ``servers`` String or array of memcached servers. If an array MemcacheEngine will use
   them as a pool.
+- ``duration`` Be aware that any duration greater than 30 days will be treated as real
+  Unix time value rather than an offset from current time.
 - ``options`` Additional options for the memcached client. Should be an array of option => value.
   Use the ``\Memcached::OPT_*`` constants as keys.
 
@@ -289,7 +291,7 @@ Read Through Caching
 
 .. php:staticmethod:: remember($key, $callable, $config = 'default')
 
-Cache makes it easy to do read-through caching. If the named cache key exists,
+Cache helps with read-through caching. If the named cache key exists,
 it will be returned. If the key does not exist, the callable will be invoked
 and the results stored in the cache at the provided key.
 
@@ -332,7 +334,7 @@ For example::
     Cache::write('cloud', $cloud);
 
     return $cloud;
-    
+
 Or if you are using another cache configuration called ``short``, you can
 specify it in ``Cache::read()`` and ``Cache::write()`` calls as below::
 
@@ -421,7 +423,7 @@ Using Cache to Store Counters
 Counters in your application are good candidates for storage in a cache.  As an
 example, a simple countdown for remaining 'slots' in a contest could be stored
 in Cache. The Cache class exposes atomic ways to increment/decrement counter
-values in an easy way. Atomic operations are important for these values as it
+values. Atomic operations are important for these values as it
 reduces the risk of contention, and ability for two users to simultaneously
 lower the value by one, resulting in an incorrect value.
 

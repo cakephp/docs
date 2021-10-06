@@ -16,7 +16,7 @@ Using the Helper
 
 A common use of the TimeHelper is to offset the date and time to match a
 user's time zone. Lets use a forum as an example. Your forum has many users who
-may post messages at any time from any part of the world. An easy way to
+may post messages at any time from any part of the world. A way to
 manage the time is to save all dates and times as GMT+0 or UTC. Uncomment the
 line ``date_default_timezone_set('UTC');`` in **config/bootstrap.php** to ensure
 your application's time zone is set to GMT+0.
@@ -43,7 +43,7 @@ ORM returns :php:class:`Cake\\I18n\\Time` instances for every ``timestamp``
 and ``datetime`` column, you can use the methods there to do most tasks.
 For example, to read about the accepted formatting strings take a look at the
 `Cake\\I18n\\Time::i18nFormat()
-<https://api.cakephp.org/3.x/class-Cake.I18n.Time.html#_i18nFormat>`_ method.
+<https://api.cakephp.org/4.x/class-Cake.I18n.Time.html#i18nFormat()>`_ method.
 
 .. meta::
     :title lang=en: TimeHelper

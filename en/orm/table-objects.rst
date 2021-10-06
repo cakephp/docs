@@ -131,7 +131,24 @@ callback methods are triggered. This follows the same sequencing as controllers
 
 To add an event listener to a Table class or Behavior simply implement the
 method signatures as described below. See the :doc:`/core-libraries/events` for
-more detail on how to use the events subsystem.
+more detail on how to use the events subsystem::
+
+    // In a controller
+    $articles->save($article, ['customVariable1' => 'yourValue1']);
+    
+    // In ArticlesTable.php
+    public function afterSave(Event $event, EntityInterface $entity, ArrayObject $options)
+    {
+        $customVariable = $options['customVariable1'];	// 'yourValue1'
+        $options['customVariable2'] = 'yourValue2';	
+    }  
+    
+    public function afterSaveCommit(Event $event, EntityInterface $entity, ArrayObject $options)
+    {
+        $customVariable = $options['customVariable1'];	// 'yourValue1'
+        $customVariable = $options['customVariable2'];	// 'yourValue2'
+    }
+    
 
 Event List
 ----------
@@ -396,7 +413,7 @@ Behaviors
 
 .. start-behaviors
 
-Behaviors provide an easy way to create horizontally re-usable pieces of logic
+Behaviors provide a way to create horizontally re-usable pieces of logic
 related to table classes. You may be wondering why behaviors are regular classes
 and not traits. The primary reason for this is event listeners. While traits
 would allow for re-usable pieces of logic, they would complicate binding events.
@@ -475,7 +492,7 @@ Using the TableLocator
 
 .. php:class:: TableLocator
 
-As we've seen earlier, the TableLocator class provides an easy way to use
+As we've seen earlier, the TableLocator class provides a way to use a
 factory/registry for accessing your applications table instances. It provides a
 few other useful features as well.
 

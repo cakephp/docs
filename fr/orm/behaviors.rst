@@ -62,7 +62,7 @@ Pour créer notre behavior sluggable. Mettez ce qui suit dans
 Comme les tables, les behaviors ont également un hook ``initialize()`` où vous
 pouvez mettre le code d'initialisation, si nécessaire::
 
-    public function initialize(array $config)
+    public function initialize(array $config): void
     {
         // Code d'initialisation ici
     }
@@ -78,7 +78,7 @@ articles ont souvent des propriétés slug pour créer de belles URLs::
     class ArticlesTable extends Table
     {
 
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->addBehavior('Sluggable');
         }
@@ -316,7 +316,7 @@ lequel nous souhaitons que Timestamp réponde::
 
     class UsersTable extends AppTable
     {
-        public function initialize(array $options)
+        public function initialize(array $options): void
         {
             parent::initialize($options);
 

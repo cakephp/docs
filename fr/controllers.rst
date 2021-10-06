@@ -70,7 +70,7 @@ pour ce type d'utilisation::
     class AppController extends Controller
     {
 
-        public function initialize()
+        public function initialize(): void
         {
             // Active toujours le component CSRF.
             $this->loadComponent('Csrf');
@@ -401,8 +401,8 @@ utiliser pour la recherche de ces données et bien plus encore. Consultez la
 section :doc:`pagination <controllers/components/pagination>`
 pour plus de détails sur l'utilisation de la pagination.
 
-L'attribut ``$paginate`` vous donne une façon facile de personnaliser la façon dont
-``paginate()`` se comporte::
+L'attribut ``$paginate`` vous permet de de personnaliser le comportement de
+``paginate()``::
 
     class ArticlesController extends AppController
     {
@@ -422,7 +422,7 @@ Dans la méthode ``initialize()`` de votre Controller, vous pouvez définir
 tout component que vous voulez charger et toute donnée de configuration
 pour eux::
 
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
         $this->loadComponent('Csrf');
@@ -437,6 +437,8 @@ CakePHP pour vous. Lisez la section :ref:`configuring-components` pour plus
 d'informations. Comme mentionné plus tôt, la propriété ``$components`` sera
 fusionnée avec la propriété définie dans chacune des classes parentes de votre
 controller.
+
+.. _controller-life-cycle:
 
 Cycle de Vie des Callbacks de la Requête
 ========================================

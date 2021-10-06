@@ -47,7 +47,7 @@ les données hiérarchisées dans::
 
     class CategoriesTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->addBehavior('Tree');
         }
@@ -66,7 +66,7 @@ et en demandant le nombre de descendants qu'il a::
     $node = $categories->get(1);
     echo $categories->childCount($node);
 
-Obtenir une liste aplatie des descendants pour un nœud est également facile::
+Pour obtenir une liste à plat des descendants pour un nœud::
 
     $descendants = $categories->find('children', ['for' => 1]);
 
@@ -188,7 +188,7 @@ Configuration
 Si les noms de colonne par défaut qui sont utilisés par ce behavior ne
 correspondent pas à votre schéma, vous pouvez leur fournir des alias::
 
-    public function initialize(array $config)
+    public function initialize(array $config): void
     {
         $this->addBehavior('Tree', [
             'parent' => 'ancestor_id', // Utilise ceci plutôt que parent_id,
@@ -223,7 +223,7 @@ dans une table locations vous voudrez créer un arbre par pays::
     class LocationsTable extends Table
     {
 
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->addBehavior('Tree', [
                 'scope' => ['country_name' => 'Brazil']

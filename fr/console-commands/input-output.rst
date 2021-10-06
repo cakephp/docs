@@ -139,13 +139,13 @@ réafficher la barre de progression quand nécessaire::
     $progress->draw();
 
 
-Récuperer l'entrée utilisateur
+Récupérer l'entrée utilisateur
 ==============================
 
 .. php:method:: ask($question, $choices = null, $default = null)
 
 Lorsque vous créez des applications de console interactive, vous devez obtenir
-les entrées de l'utilisateur. CakePHP fournit un moyen facile de le faire::
+les entrées de l'utilisateur. CakePHP fournit un moyen de le faire::
 
     // Get arbitrary text from the user.
     $color = $io->ask('What color do you like?');
@@ -177,8 +177,8 @@ Créer une sortie
 .. php:method:out($message, $newlines, $level)
 .. php:method:err($message, $newlines)
 
-Écrire dans ``stdout`` et ``stderr`` est une autre opération de routine
-facilitée par CakePHP::
+Écrire dans ``stdout`` et ``stderr`` est une autre opération courante dans
+CakePHP::
 
     // Écrire dans stdout
     $io->out('Normal message');

@@ -135,12 +135,12 @@ le pull request est créée.
   de fusion.
 * Si votre changement est une **nouvelle fonctionnalité** ou un ajout
   au framework, alors vous devez choisir la branche avec le nombre de la version
-  prochaine. Par exemple si la version stable courante est ``3.2.10``, la
-  branche acceptant les nouvelles fonctionnalités sera ``3.next``.
+  prochaine. Par exemple si la version stable courante est ``4.2.0``, la
+  branche acceptant les nouvelles fonctionnalités sera ``4.next``.
 * Si votre changement casse une fonctionnalité existante, ou casse l'API, alors
   vous devrez choisir la prochaine version majeure. Par exemple, si la version
-  courante est ``3.2.2`` alors la prochaine fois qu'un comportement peut être
-  cassé sera dans ``4.x`` ainsi vous devez cibler cette branche.
+  courante est ``4.2.0`` alors la prochaine fois qu'un comportement peut être
+  cassé sera dans ``5.x`` ainsi vous devez cibler cette branche.
 
 .. note::
 

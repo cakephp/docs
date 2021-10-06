@@ -21,7 +21,7 @@ Tour Rapide
 
 Cette section va vous apprendre les utilisations les plus habituelles du Router
 de CakePHP. Typiquement si vous voulez afficher quelque chose en page d'accueil,
-vous ajoutez ceci au fichier **routes.php**::
+vous ajoutez ceci au fichier **config/routes.php**::
 
     /** @var \Cake\Routing\RouteBuilder $routes */
     $routes->connect('/', ['controller' => 'Articles', 'action' => 'index']);
@@ -1000,7 +1000,7 @@ Une fois enregistré, le middleware peut être appliqué
     $routes->scope('/cms', function (RouteBuilder $routes) {
         // Enable CSRF & cookies middleware
         $routes->applyMiddleware('csrf', 'cookies');
-        $routes->get('/articles/{action}/*', ['controller' => 'Articles'])
+        $routes->get('/articles/{action}/*', ['controller' => 'Articles']);
     });
 
 Dans le cas où vous auriez des 'scopes' imbriqués, les "sous" scopes hériteront
@@ -1050,7 +1050,7 @@ middlewares peuvent être combinés en groupes. Une fois créés, les groupes pe
 Créer des Routes RESTful
 ========================
 
-Le router rend facile la génération des routes RESTful pour vos controllers.
+Le router aide à générer des routes RESTful pour vos controllers.
 Les routes RESTful sont utiles lorsque vous créez des points de terminaison
 (endpoint) d'API pour vos applications. Si nous voulions autoriser l'accès REST
 à un contrôleur de recette, nous ferions quelque chose comme ceci::
@@ -1363,7 +1363,8 @@ les éléments du tableau de routage.
 Utilisation de  ``Router::url()``
 ---------------------------------
 
-``Router::url()`` vous permet d'utiliser des :term:`Tableaux de routage <routing array>`
+``Router::url()`` vous permet d'utiliser des :term:`Tableaux de routage
+<tableau de routing>`
 dans les situations où les éléments de tableau requis sont fixes ou facilement déduits.
 
 Il fournira un routage inversé lorsque l'URL de destination est bien définie::
@@ -1516,12 +1517,11 @@ css, javascript, images et autres fichiers statiques de votre application::
     // Génère une URL pointant vers APP/webroot/files/upload/photo.png
     $file = Asset::url('files/upload/photo.png');
 
-Les méthodes ci-dessus acceptent également un tableau d'options comme deuxième paramètre::
+Les méthodes ci-dessus acceptent également un tableau d'options comme deuxième paramètre:
 
 * ``fullBase`` Ajoute l'url complète incluant le nom de domaine.
 * ``pathPrefix`` Indique le préfixe pour les url relatives.
-* ``plugin`` Vous pouvez indiquer ``false`` pour éviter que les chemins ne soient traités
-  comme des ressources appartenant à un plugin.
+* ``plugin`` Vous pouvez indiquer ``false`` pour éviter que les chemins ne soient traité comme des ressources appartenant à un plugin.
 * ``timestamp`` Remplace la valeur de ``Asset.timestamp`` définie dans la configuration (Configure).
   Mettez-le à ``false`` pour désactiver la génération des timestamp. Mettez-le à ``true`` pour
   générer les timestamp quand debug est à ``true``. Mettez-le à ``'force'`` pour forcer la génération
@@ -1536,7 +1536,7 @@ Les méthodes ci-dessus acceptent également un tableau d'options comme deuxièm
     // Pour lequel le timestamp correspond à la date de dernière modification du fichier
     $img = Asset::url('logo.png', ['timestamp' => true]);
 
-Pour générer des URL de ressources pour les fichiers dans les plugins, utilisez :term:`plugin syntax`::
+Pour générer des URL de ressources pour les fichiers dans les plugins, utilisez :term:`syntaxe de plugin`::
 
     // Génère `/debug_kit/img/cake.png`
     $img = Asset::imageUrl('DebugKit.cake.png');
@@ -1615,7 +1615,7 @@ nécessitent plus de paramètres::
 
     // Créez une route comme précédemment.
     $routes->get(
-        '/view/{id}',
+        '/view/{id}/{slug}',
         ['controller' => 'Articles', 'action' => 'view'],
         'articles:view'
     );

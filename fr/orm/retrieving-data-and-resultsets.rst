@@ -91,7 +91,7 @@ Utiliser les Finders pour Charger les Données
 
 Avant de travailler avec les entities, vous devrez les charger. La façon la
 plus facile de le faire est d'utiliser la méthode ``find``. La méthode find
-est un moyen facile et extensible pour trouver les données qui vous
+est un moyen simple et extensible pour trouver les données qui vous
 intéressent::
 
     // Dans un controller ou dans une méthode table.
@@ -120,7 +120,7 @@ des lignes, les convertissez en tableau, ou quand la méthode
     // et retourne l'ensemble de résultats.
     $results = $query->all();
 
-    // Once we have a result set we can get all the rows
+    // Une fois le résultat obtenu, nous pouvons en récupérer toutes les lignes
     $data = $results->toArray();
 
     // Convertir la requête en tableau va l'exécuter.
@@ -254,7 +254,7 @@ table pour configurer le champ à afficher sur une table::
     class Articles extends Table
     {
 
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->setDisplayField('title');
 
@@ -734,8 +734,8 @@ avec les articles récemment publiés en utilisant ce qui suit::
         return $q->where(['Articles.created >=' => new DateTime('-10 days')]);
     });
 
-Filtrer des associations imbriquées est étonnamment facile, et la syntaxe doit
-déjà vous être familière::
+La syntaxe de ``contain()``, qui doit déjà vous être familière, permet aussi de
+filtrer des associations imbriquées::
 
     // Dans un controller ou une table de méthode.
     $query = $products->find()->matching(
@@ -971,7 +971,7 @@ faisant::
 Lazy loading des Associations
 =============================
 
-Bien que CakePHP facilite le chargement en eager de vos associations, il y a des
+Bien que CakePHP propose le chargement en eager de vos associations, il y a des
 cas où vous devrez charger en lazy les associations. Vous devez vous référer
 aux sections :ref:`lazy-load-associations` et
 :ref:`loading-additional-associations` pour plus d'informations.
@@ -1031,7 +1031,7 @@ désérializées en un ensemble de résultats de travail. Convertir en JSON
 garde les configurations de champ caché & virtuel sur tous les objets
 entity dans un ensemble de résultat.
 
-En plus de faciliter la sérialisation, les ensembles de résultats sont un
+Les ensembles de résultats sont un
 objet 'Collection' et supportent les mêmes méthodes que les
 :doc:`objets collection </core-libraries/collections>`. Par exemple, vous
 pouvez extraire une liste des tags uniques sur une collection d'articles en
@@ -1102,7 +1102,7 @@ Vous pouvez utiliser la méthode ``isEmpty()`` sur un objet Query ou ResultSet
 pour voir s'il contient au moins une colonne. Appeler ``isEmpty()`` sur un
 objet Query va évaluer la requête::
 
-    // VérifieCheck une requête.
+    // Vérifie une requête.
     $query->isEmpty();
 
     // Vérifie les résultats.

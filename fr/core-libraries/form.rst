@@ -176,14 +176,14 @@ manuellement le champ suivant le retour du serveur distant::
 De la même façon que ce que la classe Validator aurait retourné l'erreur,
 ``$errors`` doit être sous ce format::
 
-    ["fieldName" => ["validatorName" => "The error message to display"]]
+    ['fieldName' => ['validatorName' => 'The error message to display']]
 
 Maintenant vous pourrez invalider des champs de formulaire en définissant le nom
 du champ suivi du message d'erreur::
 
     // Dans un controller
     $contact = new ContactForm();
-    $contact->setErrors(["email" => ["_required" => "Your email is required"]]);
+    $contact->setErrors(['email' => ['_required' => 'Your email is required']]);
 
 Créez un formulaire HTML avec FormHelper pour voir le résultat.
 

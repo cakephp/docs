@@ -4,8 +4,7 @@ Associations - Lier les Tables Ensemble
 Définir les relations entre les différents objets dans votre application
 sera un processus naturel. Par exemple, un article peut avoir plusieurs
 commentaires, et appartenir à un auteur. Les Auteurs peuvent avoir plusieurs
-articles et plusieurs commentaires. CakePHP facilite la gestion de ces
-associations. Les quatre types d'association dans CakePHP sont:
+articles et plusieurs commentaires. Les quatre types d'association dans CakePHP sont:
 hasOne, hasMany, belongsTo, et belongsToMany.
 
 ============= ===================== =======================================
@@ -31,7 +30,7 @@ souhaitions définir une association belongsTo dans notre ArticlesTable::
 
     class ArticlesTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->belongsTo('Authors');
         }
@@ -45,7 +44,7 @@ modifier avec les setters::
 
     class ArticlesTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->belongsTo('Authors', [
                     'className' => 'Publishing.Authors'
@@ -70,7 +69,7 @@ commentaires approuvés et ceux qui n'ont pas encore été modérés::
 
     class ArticlesTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->hasMany('Comments')
                 ->setConditions(['approved' => true]);
@@ -90,7 +89,7 @@ relations parent-enfant::
 
     class CategoriesTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->hasMany('SubCategories', [
                 'className' => 'Categories'
@@ -108,7 +107,7 @@ tableau contenant les noms de tables indexés par association::
 
     class PostsTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
            $this->addAssociations([
                'belongsTo' => [
@@ -160,7 +159,7 @@ pourrions faire l'association avec le code suivant::
 
     class UsersTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->hasOne('Addresses');
         }
@@ -172,7 +171,7 @@ l'association pour inclure seulement certains enregistrements::
 
     class UsersTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->hasOne('Addresses')
                 ->setName('Addresses')
@@ -268,7 +267,7 @@ ce qui suit::
     class AddressesTable extends Table
     {
 
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->belongsTo('Users');
         }
@@ -280,7 +279,7 @@ setters::
     class AddressesTable extends Table
     {
 
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->belongsTo('Users')
                 ->setForeignKey('user_id') // Avant la version CakePHP 3.4, utilisez foreignKey() au lieu de setForeignKey()
@@ -361,7 +360,7 @@ suit::
     class ArticlesTable extends Table
     {
 
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->hasMany('Comments');
         }
@@ -373,7 +372,7 @@ setters::
     class ArticlesTable extends Table
     {
 
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->hasMany('Comments')
                 ->setForeignKey('article_id')
@@ -494,11 +493,6 @@ l'association ou le nom de la colonne.
 Associations BelongsToMany
 ==========================
 
-.. note::
-
-    A partir de la version 3.0, ``hasAndBelongsToMany`` / ``HABTM`` a été renommé
-    en ``belongsToMany`` / ``BTM``.
-
 Un exemple d'association BelongsToMany est "Article BelongsToMany Tags", où
 les tags d'un article sont partagés avec d'autres articles. BelongsToMany fait
 souvent référence au "has and belongs to many", et est une association classique
@@ -537,7 +531,7 @@ suit::
     class ArticlesTable extends Table
     {
 
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->belongsToMany('Tags');
         }
@@ -547,7 +541,7 @@ suit::
     class TagsTable extends Table
     {
 
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->belongsToMany('Articles');
         }
@@ -560,7 +554,7 @@ de configuration::
     class TagsTable extends Table
     {
 
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->belongsToMany('Articles', [
                 'joinTable' => 'articles_tags',
@@ -691,7 +685,7 @@ Regardez les models suivants::
 
     class StudentsTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->belongsToMany('Courses', [
                 'through' => 'CoursesMemberships',
@@ -701,7 +695,7 @@ Regardez les models suivants::
 
     class CoursesTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->belongsToMany('Students', [
                 'through' => 'CoursesMemberships',
@@ -711,7 +705,7 @@ Regardez les models suivants::
 
     class CoursesMembershipsTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->belongsTo('Students');
             $this->belongsTo('Courses');

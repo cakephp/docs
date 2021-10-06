@@ -22,7 +22,7 @@ CakePHP には、いくつかのキャッシュエンジンが用意されてい
   しかし、ディスクストレージは非常に安価なので、頻繁に書き込みが行なわれない
   大きなオブジェクトや要素の保存はファイルに適しています。
 * ``Memcached`` `Memcached <http://php.net/memcached>`_ 拡張を使います。
-* ``Redis`` `phpredis <https://github.com/nicolasff/phpredis>`_ 拡張を使います。
+* ``Redis`` `phpredis <https://github.com/phpredis/phpredis>`_ 拡張を使います。
   Redis は高速で、Memcached と同様の永続キャッシュシステム、アトミックな操作を提供します。
 * ``Apcu`` APCu キャッシュは、PHP の `APCu <http://php.net/apcu>`_ 拡張を使用します。
   この拡張はオブジェクトを保存するためにウェブサーバー上の共有メモリーを使います。
@@ -242,6 +242,7 @@ Redis サーバーが予期せず失敗した場合、 ``redis`` キャッシュ
 ``$config`` を指定しない場合、デフォルトが使用されます。
 ``Cache::write()`` はあらゆるタイプのオブジェクトを格納することができ、
 以下のようにモデルの結果を格納するのに理想的です。 ::
+
     $posts = Cache::read('posts');
     if ($posts === null) {
         $posts = $someService->getAllPosts();
@@ -327,6 +328,7 @@ Cache を使用すると、Read-through キャッシュを簡単に行うこと�
 
 ``short`` という別のキャッシュ設定を使っている場合、
 下記のように ``Cache::read()`` と ``Cache::write()`` に明記してください。 ::
+
     // デフォルトの代わりにshort からキー"cloud" を読み込む
     $cloud = Cache::read('cloud', 'short');
     if ($cloud === null) {

@@ -96,7 +96,7 @@ shell using the ``$tasks`` property::
         public $tasks = ['Template'];
     }
 
-You can use tasks from plugins using the standard :term:`plugin syntax`.
+You can use tasks from plugins using the standard :term:`syntaxe de plugin`.
 Tasks are stored in ``Shell/Task/`` in files named after their classes. So if
 we were to create a new 'FileGenerator' task, you would create
 **src/Shell/Task/FileGeneratorTask.php**.
@@ -172,9 +172,9 @@ Using Models in Your Shells
 ===========================
 
 You'll often need access to your application's business logic in shell
-utilities; CakePHP makes that super easy. You can load models in shells, just as
-you would in a controller using ``loadModel()``. The loaded models are set as
-properties attached to your shell::
+utilities. You can load models in shells, just as you would in a controller
+using ``loadModel()``. The loaded models are set as properties attached to your
+shell:::
 
     namespace App\Shell;
 
@@ -183,7 +183,7 @@ properties attached to your shell::
     class UserShell extends Shell
     {
 
-        public function initialize()
+        public function initialize(): void
         {
             parent::initialize();
             $this->loadModel('Users');
@@ -192,7 +192,6 @@ properties attached to your shell::
         public function show()
         {
             if (empty($this->args[0])) {
-                // Use error() before CakePHP 3.2
                 return $this->abort('Please enter a username.');
             }
             $user = $this->Users->findByUsername($this->args[0])->first();
@@ -207,7 +206,7 @@ Shell Helpers
 =============
 
 If you have complex output generation logic, you can use
-:doc:`/console-commands/helpers` to encapsulate this logic in a re-usable way.
+`/console-commands/helpers` to encapsulate this logic in a re-usable way.
 
 .. _invoking-other-shells-from-your-shell:
 
@@ -292,9 +291,6 @@ methods. These methods are shortcuts and aliases to those found on ``ConsoleIo``
 
     // Write to stderr and raise a stop exception
     $this->abort('Fatal error');
-
-    // Before CakePHP 3.2. Write to stderr and exit()
-    $this->error('Fatal error');
 
 It also provides two convenience methods regarding the output level::
 

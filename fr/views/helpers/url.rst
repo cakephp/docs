@@ -5,7 +5,7 @@ Url
 
 .. php:class:: UrlHelper(View $view, array $config = [])
 
-UrlHelper vous permet de générer facilement des liens pour vos autres Helpers.
+UrlHelper vous permet de générer des liens pour vos autres Helpers.
 C'est aussi un endroit unique pour personnaliser la façon dont les URLs sont
 générées en surchargeant le helper du cœur avec celui d'une application.
 Regardez la section :ref:`aliasing-helpers` pour voir comment faire.
@@ -18,7 +18,7 @@ Générer des URLs
 Cette méthode retourne une URL pointant vers la combinaison du controller
 et de l'action.
 Si ``$url`` est vide, elle retourne ``REQUEST_URI``, dans les autre cas,
-elle génère le lien utilisant le controller et l'action. Si ``full`` vaut
+elle génère le lien utilisant le controller et l'action. Si ``fullBase`` vaut
 ``true``, le lien fourni contiendra le chemin complet menant à la page::
 
     echo $this->Url->build([
@@ -105,7 +105,7 @@ existe des méthodes d'helper pour chacun de ces types d'assets::
     $this->Url->css('app.css');
 
 Pour de plus amples informations, voir
-`Router::url <https://api.cakephp.org/3.x/class-Cake.Routing.Router.html#_url>`_
+`Router::url <https://api.cakephp.org/4.x/class-Cake.Routing.Router.html#_url>`_
 dans l'API.
 
 .. meta::

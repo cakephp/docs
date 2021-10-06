@@ -1266,7 +1266,7 @@ CakePHP の組込み JsonView で、 ``debug`` が有効になっている場合
     $this->assertContentType('application/json');
 
 上記のアサーションメソッドに加えて、
-`TestSuite <https://api.cakephp.org/3.x/class-Cake.TestSuite.TestCase.html>`_ と
+`TestSuite <https://api.cakephp.org/4.x/class-Cake.TestSuite.TestCase.html>`_ と
 `PHPUnit <https://phpunit.de/manual/current/en/appendixes.assertions.html>`__ の
 中にある全てのアサーションを使用することができます。
 
@@ -1340,7 +1340,7 @@ CakePHP の組込み JsonView で、 ``debug`` が有効になっている場合
 使用して機能テストを書くときに ‘view’ に ``return`` オプションを設定することで、
 レンダリングされたビューの内容を調べることができます。 ``IntegrationTestTrait`` を使用して
 ビューのコンテンツをテストすることは可能ですが、より堅牢でメンテナンスしやすい統合/ビューテストは、
-`Selenium webdriver <http://seleniumhq.org>`_ のようなツールを使うことで実現できます
+`Selenium webdriver <https://www.selenium.dev/>`_ のようなツールを使うことで実現できます
 
 コンポーネントのテスト
 ======================

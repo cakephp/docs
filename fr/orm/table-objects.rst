@@ -48,7 +48,7 @@ spécifier la table en utilisant la méthode ``setTable()``::
     class ArticlesTable extends Table
     {
 
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->setTable('my_table');
 
@@ -69,7 +69,7 @@ utiliser la méthode ``setPrimaryKey()``::
 
     class ArticlesTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->setPrimaryKey('my_id');
 
@@ -90,7 +90,7 @@ utiliser la méthode ``setEntityClass()`` pour changer les choses::
 
     class PurchaseOrdersTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->setEntityClass('App\Model\Entity\PO');
 
@@ -196,7 +196,7 @@ Pour répondre à l'event ``Model.initialize``, vous pouvez créer une classe
                 'Model.initialize' => 'initializeEvent',
             );
         }
-        public function initializeEvent($event)
+        public function initializeEvent($event): void
         {
             $table = $event->getSubject();
             // faire quelque chose ici
@@ -360,7 +360,7 @@ Behaviors
 
 .. start-behaviors
 
-Les Behaviors fournissent une façon facile de créer des parties de logique
+Les Behaviors fournissent un moyen de créer des parties de logique
 réutilisables horizontalement liées aux classes table. Vous vous demandez
 peut-être pourquoi les behaviors sont des classes classiques et non des
 traits. La première raison est les écouteurs d'event. Alors que les traits
@@ -377,7 +377,7 @@ méthode ``initialize()``::
 
     class ArticlesTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->addBehavior('Timestamp');
         }
@@ -392,7 +392,7 @@ et fournir des options de configuration supplémentaires::
 
     class ArticlesTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->addBehavior('Timestamp', [
                 'events' => [

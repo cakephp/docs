@@ -151,7 +151,7 @@ Nouvelles fonctionnalités
 Nous sommes en train de mettre en place un nouveau process pour nous permettre
 de lancer de nouvelles fonctionnalités, de recevoir des feedbacks de la
 communauté et de faire évoluer ces fonctionnalités. Nous appelons ce process
-:ref:`experimental-features`.
+`experimental-features`.
 
 Core
 ----

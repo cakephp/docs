@@ -1161,7 +1161,7 @@ Teste com carregamentos de ficheiros
 ------------------------------------
 
 A simulação de carregamentos de ficheiros é simples quando se utiliza o modo
-padrão ":ref:`arquivos carregados como objectos <request-file-uploads>`". Pode
+padrão `arquivos carregados como objectos <request-file-uploads>`. Pode
 simplesmente criar instâncias que implementem
 `\\Psr\\Http\\Message\\UploadedFileInterface <https://www.php-fig.org/psr/psr-7/#16-uploaded-files>`__
 (a implementação padrão actualmente utilizada pelo CakePHP é
@@ -1435,7 +1435,7 @@ que tornam as respostas de teste muito mais simples. Alguns exemplos são::
     $this->assertContentType('application/json');
 
 Além dos métodos de asserção acima, você também pode usar todas as asserções no `TestSuite
-<https://api.cakephp.org/3.x/class-Cake.TestSuite.TestCase.html>`__ e
+<https://api.cakephp.org/4.x/class-Cake.TestSuite.TestCase.html>`__ e
 os encontrados em `PHPUnit <https://phpunit.de/manual/current/en/appendixes. assertions.html>`__.
 
 Comparando Resultados de Teste com um Arquivo
@@ -1497,7 +1497,7 @@ arquivos de comparação de testes à medida que forem referenciados:
 Teste de Integração de Console
 ==============================
 
-Veja :ref:`console-integration-testing` para obter informações sobre testes de shells e comandos.
+Veja `console-integration-testing` para obter informações sobre testes de shells e comandos.
 
 Testando Views
 ==============
@@ -1509,7 +1509,7 @@ manter, com tendência a serem quebrados. Ao escrever testes funcionais usando
 visualização renderizada configurando a opção` `return`` para 'view'. Embora
 seja possível testar o conteúdo da visualização usando ``IntegrationTestTrait``,
 um teste de integração/visualização mais robusto e sustentável pode ser realizado
-usando ferramentas como `Selenium webdriver <http://seleniumhq.org>`__.
+usando ferramentas como `Selenium webdriver <https://www.selenium.dev/>`__.
 
 Testando Componentes
 ====================
@@ -1869,7 +1869,7 @@ seguinte arquivo está presente em seu arquivo **composer.json**::
 Gerando Testes com o Bake
 ==========================
 
-Se você usar :doc:`bake </bake/use>` para gerar scaffolding, ele também gerará stubs
+Se você usar :doc:`bake </bake>` para gerar scaffolding, ele também gerará stubs
 de teste. Se você precisar gerar novamente esqueletos de casos de teste ou se desejar
 gerar esqueletos de teste para o código que escreveu, poderá usar o ``bake``:
 

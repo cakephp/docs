@@ -1,6 +1,12 @@
 Welcome
 #######
 
+.. container:: banner-image
+
+    .. image:: /_static/img/cakefest-2021-banner.png
+        :alt: CakeFest 2021 tickets are available now
+        :target: https://cakefest.org
+
 CakePHP 4 is a web development framework running on PHP |phpversion| (min. PHP |minphpversion|).
 Read :doc:`CakePHP at a Glance </intro>` to get an introduction to the
 fundamentals of CakePHP.

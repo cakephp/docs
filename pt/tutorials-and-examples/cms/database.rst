@@ -123,7 +123,7 @@ a convenção baseada em valores padrões que o CakePHP oferece.
 
     Os nomes das tabelas e colunas estão em inglês para que as convenções funcionem
     sem nenhuma configuração extra, mas é possível :doc:`configurar as inflexões
-    <core-libraries/inflector>` do CakePHP para reconhecer as convenções em português.
+    </core-libraries/inflector>` do CakePHP para reconhecer as convenções em português.
 
 Configuração do Banco de Dados
 ==============================

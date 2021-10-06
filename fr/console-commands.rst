@@ -83,7 +83,7 @@ rename commands that are exposed::
     }
 
 In the above example, the only commands available would be ``help``, ``version``
-and ``user``. See the :ref:`plugin-commands` section for how to add commands in
+and ``user``. See the `plugin-commands` section for how to add commands in
 your plugins.
 
 .. note::

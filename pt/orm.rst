@@ -26,12 +26,6 @@ ambos padrões para criar uma ORM rápida e simples de utilizar.
 Antes de nós começarmos explorando o ORM, tenha certeza que você
 :ref:`configure your database connections <database-configuration>`.
 
-.. note::
-
-    Se você é familiarizado com versões anteriores do CakePHP, você deveria ler
-    o :doc:`/appendices/orm-migration` para esclarecer diferenças importantes
-    entre o CakePHP 3.0 e suas versões antigas.
-
 Exemplo rápido
 ==============
 

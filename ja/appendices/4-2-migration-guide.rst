@@ -16,7 +16,7 @@ CakePHP 4.2.0にアップグレードするには、次の Composer コマンド
 
 4.2では、いくつかの非推奨機能が導入されています。
 これらの機能はすべて 4.x の間は継続されますが、5.0 で削除されます。
-非推奨機能の更新を自動化するには、:ref:`upgrade tool <upgrade-tool-use>` を使用します。::
+非推奨機能の更新を自動化するには、`upgrade tool <upgrade-tool-use>` を使用します。::
 
     bin/cake upgrade rector --rules cakephp42 <path/to/app/src>
 
@@ -24,7 +24,7 @@ CakePHP 4.2.0にアップグレードするには、次の Composer コマンド
     これはCakePHP 4.2の変更点のみを更新します。CakePHP 4.1の変更を最初に適用していることを確認してください。
 
 パスごとに非推奨を無効にするための新しい設定オプションが追加されました。
-詳細は :ref:`deprecation-warnings` を参照してください。
+詳細は `deprecation-warnings` を参照してください。
 
 Core
 ----
@@ -90,7 +90,7 @@ Error
   .. note::
       例外が更新されるまで以前の動作に戻す必要がある場合は、
       カスタムの ExceptionRenderer を作成して ``getHttpCode()`` 関数をオーバーライドすることができます。
-      詳細は :ref:`custom-exceptionrenderer` を参照してください。
+      詳細は `custom-exceptionrenderer` を参照してください。
 
 - ``ConsoleErrorHandler`` は例外コードを ``ConsoleException`` の終了コードとしてのみ使用するようになりました。
 
@@ -124,7 +124,7 @@ I18n
 
 私たちは、機能を出荷できるようにするために、新しいプロセスを追加し、
 コミュニティからのフィードバックを集めて それらの機能を進化させていきます。
-私たちはこの仕組みを :ref:`experimental-features` と呼んでいます。
+私たちはこの仕組みを `experimental-features` と呼んでいます。
 
 Core
 ----

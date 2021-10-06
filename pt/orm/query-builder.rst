@@ -192,12 +192,14 @@ Objetos de consulta são avaliados preguiçosamente. Isso significa que uma cons
 não é executada até que ocorra uma das seguintes coisas:
 
 - A consulta é iterada com ``foreach()``.
-- O método ``execute()`` da consulta é chamado. Isso retornará o objeto subjacente
-  de instrução e deve ser usado com consultas de inserção/atualização/exclusão.
-- O método ``first()`` da consulta é chamado. Isso retornará o primeiro resultado no conjunto
-  construído por ``SELECT`` (ele adiciona ``LIMIT 1`` à consulta).
-- O método ``all()`` da consulta é chamado. Isso retornará o conjunto de resultados e
-  só pode ser usado com instruções ``SELECT``.
+- O método ``execute()`` da consulta é chamado. Isso retornará o objeto
+  subjacente de instrução e deve ser usado com consultas de
+  inserção/atualização/exclusão.
+- O método ``first()`` da consulta é chamado. Isso retornará o primeiro
+  resultado no conjunto construído por ``SELECT`` (ele adiciona ``LIMIT 1``
+  à consulta).
+- O método ``all()`` da consulta é chamado. Isso retornará o conjunto de
+  resultados e   só pode ser usado com instruções ``SELECT``.
 - O método ``toList()`` ou ``toArray()`` da consulta é chamado.
 
 Até que uma dessas condições seja atendida, a consulta pode ser modificada sem

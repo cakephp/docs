@@ -158,7 +158,7 @@ Getting User Input
 .. php:method:: ask($question, $choices = null, $default = null)
 
 When building interactive console applications you'll need to get user input.
-CakePHP provides an easy way to do this::
+CakePHP provides a way to do this::
 
     // Get arbitrary text from the user.
     $color = $io->ask('What color do you like?');
@@ -189,8 +189,7 @@ Creating Output
 .. php:method:out($message, $newlines, $level)
 .. php:method:err($message, $newlines)
 
-Writing to ``stdout`` and ``stderr`` is another routine operation CakePHP makes
-easy::
+Writing to ``stdout`` and ``stderr`` is another common operation in CakePHP::
 
     // Write to stdout
     $io->out('Normal message');

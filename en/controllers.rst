@@ -73,13 +73,6 @@ is invoked at the end of a Controller's constructor for this kind of use::
         }
     }
 
-In addition to the ``initialize()`` method, the older ``$components`` property
-will also allow you to declare which components should be loaded. While normal
-object-oriented inheritance rules apply, the components and helpers used by
-a controller are treated specially. In these cases, ``AppController`` property
-values are merged with child controller class arrays.  The values in the child
-class will always override those in ``AppController``.
-
 Request Flow
 ============
 
@@ -385,7 +378,7 @@ You can specify page sizes, model find conditions and more. See the
 :doc:`pagination <controllers/components/pagination>` section for more details on
 how to use ``paginate()``.
 
-The ``$paginate`` attribute gives you an easy way to customize how ``paginate()``
+The ``$paginate`` attribute gives you a way to customize how ``paginate()``
 behaves::
 
     class ArticlesController extends AppController
@@ -411,14 +404,6 @@ want loaded, and any configuration data for them::
         $this->loadComponent('Csrf');
         $this->loadComponent('Comments', Configure::read('Comments'));
     }
-
-.. php:attr:: components
-
-The ``$components`` property on your controllers allows you to configure
-components. Configured components and their dependencies will be created by
-CakePHP for you. Read the :ref:`configuring-components` section for more
-information. As mentioned earlier the ``$components`` property will be merged
-with the property defined in each of your controller's parent classes.
 
 .. _controller-life-cycle:
 

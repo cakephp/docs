@@ -93,6 +93,7 @@ Contenidos
    debug-kit
    bake
    bake/usage
+   bake/development
 
 .. todolist::
 

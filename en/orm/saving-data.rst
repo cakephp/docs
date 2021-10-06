@@ -38,8 +38,7 @@ passing it to the ``save()`` method in the ``Table`` class::
 Updating Data
 -------------
 
-Updating your data is equally easy, and the ``save()`` method is also used for
-that purpose::
+Updating your data is achieved by using the ``save()`` method ::
 
     use Cake\ORM\Locator\LocatorAwareTrait;
 
@@ -126,7 +125,7 @@ Converting Request Data into Entities
 
 Before editing and saving data back to your database, you'll need to convert
 the request data from the array format held in the request, and the entities
-that the ORM uses. The Table class provides an easy and efficient way to convert
+that the ORM uses. The Table class provides an efficient way to convert
 one or many entities from request data. You can convert a single entity using::
 
     // In a controller
@@ -963,7 +962,7 @@ the plural, :ref:`underscored <inflector-methods-summary>` version of the associ
 
 When converting request data into entities, the ``newEntity()`` and
 ``newEntities()`` methods will handle both arrays of properties, as well as a
-list of ids at the ``_ids`` key. Using the ``_ids`` key makes it easy to build a
+list of ids at the ``_ids`` key. Using the ``_ids`` key makes it possible to building a
 select box or checkbox based form controls for belongs to many associations. See
 the :ref:`converting-request-data` section for more information.
 

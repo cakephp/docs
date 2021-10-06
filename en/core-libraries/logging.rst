@@ -12,11 +12,10 @@ application over time. What search terms are being used? What sorts
 of errors are my users being shown? How often is a particular query
 being executed?
 
-Logging data in CakePHP is easy - the log() function is provided by the
-``LogTrait``, which is the common ancestor for many CakePHP classes. If
-the context is a CakePHP class (Controller, Component, View,...),
-you can log your data.  You can also use ``Log::write()`` directly.
-See :ref:`writing-to-logs`.
+Logging data in CakePHP is done with the ``log()`` function is provided by the
+``LogTrait``, which is the common ancestor for many CakePHP classes. If the
+context is a CakePHP class (Controller, Component, View,...), you can log your
+data.  You can also use ``Log::write()`` directly.  See :ref:`writing-to-logs`.
 
 .. _log-configuration:
 
@@ -28,13 +27,22 @@ The **config/app.php** file is intended for just this.  You can define
 as many or as few loggers as your application needs.  Loggers should be
 configured using :php:class:`Cake\\Log\\Log`. An example would be::
 
+    use Cake\Log\Engine\FileLog;
     use Cake\Log\Log;
+
+    // Classname using logger 'class' constant
+    Log::setConfig('info', [
+        'className' => FileLog::class,
+        'path' => LOGS,
+        'levels' => ['info'],
+        'file' => 'info',
+    ]);
 
     // Short classname
     Log::setConfig('debug', [
         'className' => 'File',
         'path' => LOGS,
-        'levels' => ['notice', 'info', 'debug'],
+        'levels' => ['notice', 'debug'],
         'file' => 'debug',
     ]);
 
@@ -48,7 +56,7 @@ configured using :php:class:`Cake\\Log\\Log`. An example would be::
 
 The above creates two loggers.  One named ``debug`` the other named ``error``.
 Each is configured to handle different levels of messages. They also store their
-log messages in separate files, so it's easy to separate debug/notice/info logs
+log messages in separate files, so we can separate debug/notice/info logs
 from more serious errors. See the section on :ref:`logging-levels` for more
 information on the different levels and what they mean.
 
@@ -122,7 +130,7 @@ properties are passed to the log adapter's constructor as an array. ::
     }
 
 CakePHP requires that all logging adapters implement ``Psr\Log\LoggerInterface``.
-The class :php:class:`Cake\Log\Engine\BaseLog` is an easy way to satisfy the
+The class :php:class:`Cake\Log\Engine\BaseLog` is a way to satisfy the
 interface as it only requires you to implement the ``log()`` method.
 
 .. _file-log:
@@ -177,7 +185,7 @@ If a level is not supplied, :php:const:`LOG_ERR` is used which writes to the
 error log. The default log location is ``logs/$level.log``::
 
     // Executing this inside a CakePHP class
-    $this->log("Something didn't work!");
+    $this->log('Something didn't work!');
 
     // Results in this being appended to logs/error.log
     // 2007-11-02 10:22:02 Error: Something didn't work!
@@ -189,8 +197,10 @@ You can configure additional/alternate FileLog locations when configuring
 a logger. FileLog accepts a ``path`` which allows for
 custom paths to be used::
 
+    use Cake\Log\Engine\FileLog;
+    
     Log::setConfig('custom_path', [
-        'className' => 'File',
+        'className' => FileLog::class,
         'path' => '/path/to/custom/place/'
     ]);
 
@@ -248,7 +258,7 @@ class using the ``LogTrait``. Calling log() will internally call
 ``Log::write()``::
 
     // Executing this inside a class using LogTrait
-    $this->log("Something did not work!", 'debug');
+    $this->log('Something did not work!', 'debug');
 
 All configured log streams are written to sequentially each time
 :php:meth:`Cake\\Log\\Log::write()` is called. If you have not configured any
@@ -322,10 +332,12 @@ CakePHP exposes this concept as logging scopes. When log messages are written
 you can include a scope name. If there is a configured logger for that scope,
 the log messages will be directed to those loggers. For example::
 
+    use Cake\Log\Engine\FileLog;
+
     // Configure logs/shops.log to receive all levels, but only
     // those with `orders` and `payments` scope.
     Log::setConfig('shops', [
-        'className' => 'File',
+        'className' => FileLog::class,
         'path' => LOGS,
         'levels' => [],
         'scopes' => ['orders', 'payments'],
@@ -335,7 +347,7 @@ the log messages will be directed to those loggers. For example::
     // Configure logs/payments.log to receive all levels, but only
     // those with `payments` scope.
     Log::setConfig('payments', [
-        'className' => 'File',
+        'className' => FileLog::class,
         'path' => LOGS,
         'levels' => [],
         'scopes' => ['payments'],
@@ -429,7 +441,7 @@ Using Monolog
 =============
 
 Monolog is a popular logger for PHP. Since it implements the same interfaces as
-the CakePHP loggers, it is easy to use in your application as the default
+the CakePHP loggers, you can use them in your application as the default
 logger.
 
 After installing Monolog using composer, configure the logger using the

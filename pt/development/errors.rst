@@ -93,7 +93,7 @@ rendering to render the error page view and receives all the standard request
 life-cycle events. By modifying this class you can control which components are
 used and which templates are rendered.
 
-If your application uses :ref:`routing-prefixes` you can create custom error
+If your application uses `routing-prefixes` you can create custom error
 controllers for each routing prefix. For example, if you had an ``admin``
 prefix. You could create the following class::
 

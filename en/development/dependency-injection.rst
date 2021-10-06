@@ -40,7 +40,7 @@ database. Because this service is injected into our controller, we can easily
 swap the implementation out with a mock object or a dummy sub-class when
 testing.
 
-Here an example of an injected service inside a command::
+Here is an example of an injected service inside a command::
 
     // In src/Command/CheckUsersCommand.php
     class CheckUsersCommand extends Command
@@ -119,8 +119,8 @@ The container can leverage factory functions to create objects if necessary::
         return new AuditLogService(...$args);
     });
 
-Factory functions will receive all of the class' resolved dependencies as
-arguments.
+Factory functions will receive all of the resolved dependencies for the class
+as arguments.
 
 Once you've defined a class, you also need to define the dependencies it
 requires. Those dependencies can be either objects or primitive values::
@@ -199,6 +199,7 @@ An example ServiceProvider would look like::
 
     namespace App\ServiceProvider;
 
+    use Cake\Core\ContainerInterface;
     use Cake\Core\ServiceProvider;
     // Other imports here.
 
@@ -209,7 +210,7 @@ An example ServiceProvider would look like::
             'configKey',
         ];
 
-        public function services($container)
+        public function services(ContainerInterface $container): void
         {
             $container->add(StripService::class);
             $container->add('configKey', 'some value');

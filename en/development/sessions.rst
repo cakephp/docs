@@ -49,7 +49,7 @@ this::
         ]
     ]);
 
-As of v4.0 CakePHP also sets the `SameSite <https://www.owasp.org/index.php/SameSite>`__ attribute to ``Lax``
+As of v4.0 CakePHP also sets the `SameSite <https://owasp.org/www-community/SameSite>`__ attribute to ``Lax``
 by default for session cookies, which helps protect against CSRF attacks.
 You can change the default value by setting ``session.cookie_samesite`` php.ini config::
 
@@ -296,8 +296,7 @@ Our class extends the built-in ``DatabaseSession`` so we don't have to duplicate
 all of its logic and behavior. We wrap each operation with
 a :php:class:`Cake\\Cache\\Cache` operation. This lets us fetch sessions from
 the fast cache, and not have to worry about what happens when we fill the cache.
-Using this session handler is also easy. In **config/app.php** make the session
-block look like::
+In **config/app.php** make the session block look like::
 
     'Session' => [
         'defaults' => 'database',

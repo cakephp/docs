@@ -3,7 +3,7 @@ SecurityComponent (Sécurité)
 
 .. php:class:: SecurityComponent(ComponentCollection $collection, array $config = [])
 
-Le Component Security offre une manière simple d'inclure une sécurité renforcée
+Le Component Security apporte une sécurité renforcée
 à votre application. Il fournit des méthodes pour diverses tâches comme:
 
 * Restreindre les méthodes HTTP que votre application accepte.
@@ -165,18 +165,18 @@ de sécurité que vous voulez et le component Security les forcera au démarrage
     namespace App\Controller;
 
     use App\Controller\AppController;
-    use Cake\Event\Event;
+    use Cake\Event\EventInterface;
 
     class WidgetsController extends AppController
     {
 
-        public function initialize()
+        public function initialize(): void
         {
             parent::initialize();
             $this->loadComponent('Security');
         }
 
-        public function beforeFilter(Event $event)
+        public function beforeFilter(EventInterface $event)
         {
             if ($this->request->getParam('admin')) {
                 $this->Security->requireSecure();
@@ -190,18 +190,18 @@ Cette exemple forcera toutes les actions qui proviennent de la "route" Admin à
     namespace App\Controller;
 
     use App\Controller\AppController;
-    use Cake\Event\Event;
+    use Cake\Event\EventInterface;
 
     class WidgetsController extends AppController
     {
 
-        public function initialize()
+        public function initialize(): void
         {
             parent::initialize();
             $this->loadComponent('Security', ['blackHoleCallback' => 'forceSSL']);
         }
 
-        public function beforeFilter(Event $event)
+        public function beforeFilter(EventInterface $event)
         {
             if ($this->request->getParam('admin')) {
                 $this->Security->requireSecure();
@@ -233,7 +233,7 @@ CSRF ou Cross Site Request Forgery est une vulnérabilité courante pour les
 applications Web. Cela permet à un attaquant de capturer et de rejouer une
 requête, et parfois de soumettre des demandes de données en utilisant les
 balises images ou des ressources sur d'autres domaines.
-Pour activer la protection CSRF, utilisez :doc:`/controllers/components/csrf`.
+Pour activer la protection CSRF, utilisez :doc:`CSRF Middleware </controllers/middleware>`.
 
 Désactiver le Component Security pour des Actions Spécifiques
 =============================================================
@@ -248,18 +248,18 @@ fonctionnalités de ``SecurityComponent``::
     namespace App\Controller;
 
     use App\Controller\AppController;
-    use Cake\Event\Event;
+    use Cake\Event\EventInterface;
 
     class WidgetController extends AppController
     {
 
-        public function initialize()
+        public function initialize(): void
         {
             parent::initialize();
             $this->loadComponent('Security');
         }
 
-        public function beforeFilter(Event $event)
+        public function beforeFilter(EventInterface $event)
         {
              $this->Security->setConfig('unlockedActions', ['edit']);
         }

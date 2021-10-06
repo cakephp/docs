@@ -21,6 +21,14 @@
 * ``events`` アプリケーションのイベントマネージャーに
   :doc:`イベントリスナー </core-libraries/events>` を追加するために使用されます。
 
+
+.. _application-bootstrap:
+
+Application::bootstrap()
+------------------------
+
+TODO
+
 .. _adding-http-stack:
 
 既存アプリケーションへの新しい HTTP スタック追加

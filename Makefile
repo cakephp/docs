@@ -9,7 +9,7 @@ ES_HOST_V2 =
 .PHONY: all clean html latexpdf epub htmlhelp website website-dirs rebuild-index
 
 # Languages that can be built.
-LANGS = en es fr ja pt zh tr ru
+LANGS = en es fr ja pt
 
 # pdflatex does not like ja, zh & tr for some reason.
 PDF_LANGS = en es fr pt
@@ -17,6 +17,7 @@ PDF_LANGS = en es fr pt
 DEST = website
 
 EPUB_ARGS =
+SPHINXOPTS =
 
 # Get path to theme directory to build static assets.
 THEME_DIR = $(shell python3 -c 'import os, cakephpsphinx; print(os.path.abspath(os.path.dirname(cakephpsphinx.__file__)))')
@@ -39,7 +40,7 @@ rebuild-index: $(foreach lang, $(LANGS), rebuild-index-$(lang))
 
 # Make the HTML version of the documentation with correctly nested language folders.
 html-%:
-	cd $* && make html
+	cd $* && make html SPHINXOPTS="$(SPHINXOPTS)"
 	make build/html/$*/_static/css/app.css
 	make build/html/$*/_static/app.js
 

@@ -35,7 +35,7 @@ Cela vous permet de personnaliser plusieurs templates et de garder votre code
 DRY::
 
     // Dans votre fichier AppView.php
-    public function initialize()
+    public function initialize(): void
     {
         ...
         $this->loadHelper('Paginator', ['templates' => 'paginator-templates']);
@@ -47,7 +47,7 @@ quoi doit ressembler le fichier. Vous pouvez aussi charger les templates à
 partir d'un plugin en utilisant la :term:`syntaxe de plugin`::
 
     // Dans votre fichier AppView.php
-    public function initialize()
+    public function initialize(): void
     {
         ...
         $this->loadHelper('Paginator', ['templates' => 'MyPlugin.paginator-templates']);
@@ -494,7 +494,7 @@ ci-dessous suppose une présentation tabulaire, mais le PaginatorHelper
 disponible dans les vues n'a pas toujours besoin d'être limité en tant que tel.
 
 Voir les détails sur
-`PaginatorHelper <https://api.cakephp.org/3.x/class-Cake.View.Helper.PaginatorHelper.html>`_
+`PaginatorHelper <https://api.cakephp.org/4.x/class-Cake.View.Helper.PaginatorHelper.html>`_
 dans l' API. Comme mentionné précédemment, le PaginatorHelper offre également
 des fonctionnalités de tri qui peuvent être intégrées dans vos en-têtes de
 colonne de table:

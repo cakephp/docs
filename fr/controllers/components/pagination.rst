@@ -16,7 +16,7 @@ satisfaction des utilisateurs peut en pâtir.
 Afficher un nombre raisonnable d'enregistrements par page a toujours été une
 partie critique dans toutes les applications et cause régulièrement de nombreux
 maux de tête aux développeurs. CakePHP allège le fardeau des développeurs en
-fournissant un moyen rapide et facile pour paginer les données.
+fournissant un moyen efficace de paginer les données.
 
 La pagination dans CakePHP se fait par un Component dans le controller, pour
 faciliter la création des requêtes de pagination. Dans la Vue,
@@ -43,7 +43,7 @@ doit être définie dans une structure en tableau comme ci-dessous::
             ]
         ];
 
-        public function initialize()
+        public function initialize(): void
         {
             parent::initialize();
             $this->loadComponent('Paginator');
@@ -64,7 +64,7 @@ Vous pouvez aussi inclure d'autres options
             ]
         ];
 
-        public function initialize()
+        public function initialize(): void
         {
             parent::initialize();
             $this->loadComponent('Paginator');

@@ -74,7 +74,7 @@ Il est également facile de sauvegarder plusieurs traductions en une fois::
     $article->translation('fr')->title = 'Un autre Titre';
     $this->Articles->save($article);
 
-Oui, aussi facilement. Si vous voulez aller plus en profondeur sur la façon
+Si vous voulez aller plus en profondeur sur la façon
 dont il fonctionne ou pour affiner le behavior à vos besoins, continuez de
 lire le reste de ce chapitre.
 
@@ -133,7 +133,7 @@ classe Table::
     class ArticlesTable extends Table
     {
 
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->addBehavior('Translate', ['fields' => ['title', 'body']]);
         }
@@ -155,7 +155,7 @@ chaque table spécifiquement::
     class Articles extends Table
     {
 
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->addBehavior('Translate', [
                 'fields' => ['title', 'body'],
@@ -263,7 +263,7 @@ utilisant la clé de config ``allowEmptyTranslations``::
     class ArticlesTable extends Table
     {
 
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->addBehavior('Translate', [
                 'fields' => ['title', 'body'],
@@ -356,7 +356,7 @@ donnée. Par exemple, étant donné la configuration suivante::
     // dans src/Model/Table/ArticlesTable.php
     class ArticlesTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->addBehavior('Translate', ['fields' => ['title', 'body']]);
         }
@@ -446,8 +446,7 @@ Maintenant vous pouvez ajouter les translations avant de les sauvegarder::
 
     $this->Articles->save($article);
 
-Depuis la version 3.3.0, le travail avec plusieurs traductions a été amélioré.
-Vous pouvez créer des inputs de formulaire pour vos champs traduits::
+Et créer des inputs de formulaire pour vos champs traduits::
 
     // Dans un template de vue.
     <?= $this->Form->create($article); ?>
@@ -483,7 +482,7 @@ créés/mis à jours par le behavior pendant ``newEntity()`` ou ``patchEntity()`
 
     class ArticlesTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->addBehavior('Translate', [
                 'fields' => ['title'],

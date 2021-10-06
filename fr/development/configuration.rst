@@ -68,7 +68,7 @@ des logs, des transports d'emails et du cache, vous permettant de faire varier l
 configurations d'un environnement à l'autre.
 
 Lors d'un développement local, CakePHP utilise `dotenv
-<https://github.com/josegonzalez/php-dotenv>`_ pour faciliter l'utilisation des variables
+<https://github.com/josegonzalez/php-dotenv>`_ pour permettre l'utilisation des variables
 d'environnement. Utilisez composer pour ajouter cette bibliothèque, puis
 décommentez un bloc de code dans ``bootstrap.php`` pour l'exploiter.
 
@@ -567,12 +567,12 @@ Moteurs de Configuration
 CakePHP vous permet de charger des configurations provenant de plusieurs sources
 et formats de données différents et vous donne accès à un système extensible pour
 `créer vos propres moteurs de configuration
-<https://api.cakephp.org/3.x/class-Cake.Core.Configure.ConfigEngineInterface.html>`__.
+<https://api.cakephp.org/4.x/class-Cake.Core.Configure.ConfigEngineInterface.html>`__.
 Les moteurs inclus dans CakePHP sont:
 
-* `JsonConfig <https://api.cakephp.org/3.x/class-Cake.Core.Configure.Engine.JsonConfig.html>`__
-* `IniConfig <https://api.cakephp.org/3.x/class-Cake.Core.Configure.Engine.IniConfig.html>`__
-* `PhpConfig <https://api.cakephp.org/3.x/class-Cake.Core.Configure.Engine.PhpConfig.html>`__
+* `JsonConfig <https://api.cakephp.org/4.x/class-Cake.Core.Configure.Engine.JsonConfig.html>`__
+* `IniConfig <https://api.cakephp.org/4.x/class-Cake.Core.Configure.Engine.IniConfig.html>`__
+* `PhpConfig <https://api.cakephp.org/4.x/class-Cake.Core.Configure.Engine.PhpConfig.html>`__
 
 Par défaut, votre application utilisera ``PhpConfig``.
 

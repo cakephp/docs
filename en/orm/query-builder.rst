@@ -198,7 +198,7 @@ of the following things occur:
 Until one of these conditions are met, the query can be modified without additional
 SQL being sent to the database. It also means that if a Query hasn't been
 evaluated, no SQL is ever sent to the database. Once executed, modifying and
-re-evaluating a query will result in additional SQL being run.
+re-evaluating a query will result in additional SQL being run. Calling the same query without modification multiple times will return same reference.
 
 If you want to take a look at what SQL CakePHP is generating, you can turn
 database :ref:`query logging <database-query-logging>` on.
@@ -1616,9 +1616,9 @@ named windows using the ``window()`` method::
 Executing Complex Queries
 -------------------------
 
-While the query builder makes it easy to build most queries, very complex
-queries can be tedious and complicated to build. You may want to :ref:`execute
-the desired SQL directly <running-select-statements>`.
+While the query builder makes most queries possible through builder methods,
+very complex queries can be tedious and complicated to build. You may want to
+:ref:`execute the desired SQL directly <running-select-statements>`.
 
 Executing SQL directly allows you to fine tune the query that will be run.
 However, doing so doesn't let you use ``contain`` or other higher level ORM

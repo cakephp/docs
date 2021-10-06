@@ -41,7 +41,7 @@ Formatting Currency Values
 .. php:method:: currency(mixed $value, string $currency = null, array $options = [])
 
 This method is used to display a number in common currency formats
-(EUR, GBP, USD). Usage in a view looks like::
+(EUR, GBP, USD), based on the 3-letter ISO 4217 currency code. Usage in a view looks like::
 
     // Called as NumberHelper
     echo $this->Number->currency($value, $currency);
@@ -349,7 +349,7 @@ to various methods.
 
 Example::
 
-    Number::setConfig('en_IN', \NumberFormatter::CURRENCY, [
+    Number::config('en_IN', \NumberFormatter::CURRENCY, [
         'pattern' => '#,##,##0'
     ]);
 

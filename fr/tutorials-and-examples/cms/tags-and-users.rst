@@ -49,7 +49,7 @@ Maintenant que nous avons une table Tags, nous pouvons créer une association en
 la table Articles et la table Tags. Nous pouvons le faire en ajoutant le code suivant
 à la méthode ``initialize`` de ArticlesTable::
 
-    public function initialize(array $config)
+    public function initialize(array $config): void
     {
         $this->addBehavior('Timestamp');
         $this->belongsToMany('Tags'); // Ajoutez cette ligne
@@ -388,6 +388,21 @@ Nous devrons également mettre à jour le modèle de vue d'article. Dans
     <p><?= h($article->body) ?></p>
     // Add the following line
     <p><b>Tags:</b> <?= h($article->tag_string) ?></p>
+
+Vous devriez aussi mettre à jour la méthode de vue pour permettre de récupérer
+les tags existants::
+
+    // fichier src/Controller/ArticlesController.php
+
+    public function view($slug = null)
+    {
+       // Mettre à jour la récupération des tags avec contain()
+       $article = $this->Articles
+           ->findBySlug($slug)
+            ->contain('Tags')
+            ->firstOrFail();
+        $this->set(compact('article'));
+    }
 
 Persister la Chaîne de Tags
 ---------------------------

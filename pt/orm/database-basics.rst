@@ -304,7 +304,7 @@ dados de configuração usados ao criar conexões.
 Tipos de Dados
 ==============
 
-.. php:class:: Type
+.. php:class:: TypeFactory
 
 Como nem todos os fornecedores de banco de dados incluem o mesmo conjunto de tipos
 de dados, ou os mesmos nomes para tipos de dados semelhantes, o CakePHP fornece um
@@ -361,11 +361,57 @@ de entrada das instâncias ``DateTime`` em timestamp ou string de data formatada
 forma, as colunas 'binary' aceitarão manipuladores de arquivos e gerarão manipuladores de
 arquivos ao ler dados.
 
+.. _datetime-type:
+
+Tipo DateTime
+-------------
+
+.. php:class:: DateTimeType
+
+Mapas para um tipo de coluna nativa ``DATETIME``. No PostgreSQL e SQL Server isto
+se transforma em um tipo ``TIMESTAMP```. O valor de retorno padrão deste tipo de
+coluna é :php:class:`Cake\\I18n\\FrozenTime` que estende a classe
+``DateTimeImmutable`` embutida e `Chronos <https://github.com/cakephp/chronos>`_.
+
+.. php:method:: setTimezone(string|\DateTimeZone|null $timezone)
+
+Se o fuso horário de seu servidor de banco de dados não corresponder ao fuso horário
+PHP de sua aplicação então você pode usar este método para especificar o fuso
+horário de seu banco de dados. Este fuso horário será então utilizado na conversão
+de objetos PHP para a cadeia de data/hora do banco de dados e vice versa.
+
+.. php:class:: DateTimeFractionalType
+
+Pode ser utilizado para mapear colunas de data/hora que contenham microssegundos
+como ``DATETIME(6)`` no MySQL. Para utilizar este tipo você precisa adicioná-lo
+como um tipo mapeado::
+
+    // em config/bootstrap.php
+    use Cake\Database\TypeFactory;
+    use Cake\Database\Type\DateTimeFractionalType;
+
+    // Sobregravar o tipo de data/hora padrão com uma mais precisa.
+    TypeFactory::map('datetime', DateTimeFractionalType::class);
+
+.. php:class:: DateTimeTimezoneType
+
+Pode ser usado para mapear colunas de data/hora que contenham fusos horários, tais
+como ``TIMESTAMPTZ`` no PostgreSQL. Para utilizar este tipo você precisa adicioná-lo
+como um tipo mapeado::
+
+    // em config/bootstrap.php
+    use Cake\Database\TypeFactory;
+    use Cake\Database\Type\DateTimeTimezoneType;
+
+    // Sobregravar o tipo de data/hora padrão com uma mais precisa.
+    TypeFactory::map('datetime', DateTimeTimezoneType::class);
+
 .. _adding-custom-database-types:
 
 Adicionando Tipos Personalizados
 --------------------------------
 
+.. php:class:: TypeFactory
 .. php:staticmethod:: map($name, $class)
 
 Se você precisa usar tipos específicos do fornecedor que não estão incorporados no CakePHP,

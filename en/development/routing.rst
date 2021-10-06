@@ -949,7 +949,7 @@ scopes::
     $routes->scope('/cms', function (RouteBuilder $routes) {
         // Enable CSRF & cookies middleware
         $routes->applyMiddleware('csrf', 'cookies');
-        $routes->get('/articles/{action}/*', ['controller' => 'Articles'])
+        $routes->get('/articles/{action}/*', ['controller' => 'Articles']);
     });
 
 In situations where you have nested scopes, inner scopes will inherit the
@@ -999,7 +999,7 @@ can::
 RESTful Routing
 ===============
 
-Router makes it easy to generate RESTful routes for your controllers. RESTful
+Router helps generate RESTful routes for your controllers. RESTful
 routes are helpful when you are creating API endpoints for your application.  If
 we wanted to allow REST access to a recipe controller, we'd do something like
 this::
@@ -1011,7 +1011,7 @@ this::
         $routes->resources('Recipes');
     });
 
-The first line sets up a number of default routes for easy REST
+The first line sets up a number of default routes for REST
 access where method specifies the desired result format (e.g. xml,
 json, rss). These routes are HTTP Request Method sensitive.
 
@@ -1153,6 +1153,16 @@ name::
 If you define 'only' and 'map', make sure that your mapped methods are also in
 the 'only' list.
 
+Prefixed Resource Routing
+-------------------------
+
+Resource routes can be connected to controllers in routing prefixes by
+connecting routes within a prefixed scope or by using the ``prefix`` option::
+
+    $routes->resources('Articles', [
+        'prefix' => 'Api',
+    ]);
+
 .. _custom-rest-routing:
 
 Custom Route Classes for Resource Routes
@@ -1284,7 +1294,7 @@ or::
     //'Router::reverse()' operates on the request parameters array
     //and will produce a url string, valid input for `link()`
 
-    $requestParams = Router::getRequest()->getAttributes('params');
+    $requestParams = Router::getRequest()->getAttribute('params');
     $this->Html->link('View', Router::reverse($requestParams));
 
 Then when you decided to change your URLs, you could do so by defining a
@@ -1538,7 +1548,7 @@ rework when URLs require more parameters::
 
     // Create the route just like before.
     $routes->get(
-        '/view/{id}',
+        '/view/{id}/{slug}',
         ['controller' => 'Articles', 'action' => 'view'],
         'articles:view'
     );

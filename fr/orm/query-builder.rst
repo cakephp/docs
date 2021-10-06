@@ -207,7 +207,9 @@ Jusqu'à ce qu'une de ces conditions soit rencontrée, la requête peut être
 modifiée avec du SQL supplémentaire envoyé à la base de données. Cela signifie
 que si une Query n'a pas été évaluée, aucun SQL ne sera jamais envoyé à la
 base de données. Une fois exécutée, la modification et la ré-évaluation
-d'une requête va entraîner l'exécution de SQL supplémentaire.
+d'une requête va entraîner l'exécution de SQL supplémentaire. Si une requête est
+exécutée plusieurs fois d'affilée sans avoir été modifiée entre-temps, elle
+renvoie la même référence.
 
 Si vous souhaitez jeter un œil sur le SQL que CakePHP génère, vous pouvez
 activer les :ref:`logs de requête <database-query-logging>` de la base de
@@ -1522,7 +1524,7 @@ should never put raw user data into ``epilog()``.
 Exécuter des Requêtes Complexes
 -------------------------------
 
-Bien que le constructeur de requêtes facilite la construction de la plupart des
+Bien que le constructeur de requêtes permette la construction de la plupart des
 requêtes, les requêtes très complexes peuvent être fastidieuses et compliquées
 à construire. Vous voudrez surement vous référer à :ref:`l'exécution
 directe du SQL souhaité <running-select-statements>`.

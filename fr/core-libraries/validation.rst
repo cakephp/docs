@@ -7,7 +7,7 @@ Le package de validation dans CakePHP fournit des fonctionnalités pour
 construire des validators qui peuvent valider des tableaux arbitraires de
 données avec simplicité. Vous pouvez trouver une `liste des règles de validation
 dans l'API
-<https://api.cakephp.org/3.x/class-Cake.Validation.Validation.html>`__.
+<https://api.cakephp.org/4.x/class-Cake.Validation.Validation.html>`__.
 
 .. _creating-validators:
 
@@ -78,20 +78,21 @@ le deuxième paramètre::
 
     $validator->requirePresence('author_id', 'create');
 
-If you have multiple fields that are required, you can define them as a list::
+Si vous avez plusieurs champs dont la présence est requise, vous pouvez les
+définir en liste::
 
-    // Define multiple fields for create
+    // Définir plusieurs champs pour create
     $validator->requirePresence(['author_id', 'title'], 'create');
 
-    // Define multiple fields for mixed modes
+    // Définir plusieurs champs pour divers modes
     $validator->requirePresence([
         'author_id' => [
             'mode' => 'create',
-            'message' => 'An author is required.',
+            'message' => "L'auteur est obligatoire.",
         ],
         'published' => [
             'mode' => 'update',
-            'message' => 'The published state is required.',
+            'message' => 'Le statut de publication est obligatoire.',
         ]
     ]);
 
@@ -139,11 +140,11 @@ l'option ``last`` à ``true``::
             'minLength' => [
                 'rule' => ['minLength', 10],
                 'last' => true,
-                'message' => 'Comments must have a substantial body.'
+                'message' => 'Les commentaires doivent avoir un contenu un peu fourni.'
             ],
             'maxLength' => [
                 'rule' => ['maxLength', 250],
-                'message' => 'Comments cannot be too long.'
+                'message' => 'Les commentaires ne peuvent pas être trop longs.'
             ]
         ]);
 
@@ -260,29 +261,29 @@ validation::
     // Utilise une fonction globale
     $validator->add('title', 'custom', [
         'rule' => 'validate_title',
-        'message' => 'The title is not valid'
+        'message' => 'Le titre est invalide'
     ]);
 
     // Utilise un tableau appelable qui n'est pas un provider
     $validator->add('title', 'custom', [
         'rule' => [$this, 'method'],
-        'message' => 'The title is not valid'
+        'message' => 'Le titre est invalide'
     ]);
 
     // Utilise une closure
-    $extra = 'Some additional value needed inside the closure';
+    $extra = 'Des valeurs supplémentaires dont vous avez besoin dans la closure';
     $validator->add('title', 'custom', [
         'rule' => function ($value, $context) use ($extra) {
             // Logique personnalisée qui retourne true/false
         },
-        'message' => 'The title is not valid'
+        'message' => 'Le titre est invalide'
     ]);
 
     // Utilisez une règle à partir d'un provider personnalisé
     $validator->add('title', 'custom', [
         'rule' => 'customRule',
         'provider' => 'custom',
-        'message' => 'The title is not unique enough'
+        'message' => 'Le titre n'est pas suffisamment unique'
     ]);
 
 Les Closures ou les méthodes appelables vont recevoir 2 arguments lors de leur
@@ -553,7 +554,7 @@ CakePHP fournit une suite basique de méthodes de validation dans la classe
 fournissent des validators pour plusieurs situations de validation habituelles.
 
 La `documentation de l'API
-<https://api.cakephp.org/3.x/class-Cake.Validation.Validation.html>`_ pour la
+<https://api.cakephp.org/4.x/class-Cake.Validation.Validation.html>`_ pour la
 classe ``Validation`` fournit une bonne liste de règles de validation qui sont
 disponibles, et leur utilisation basique.
 

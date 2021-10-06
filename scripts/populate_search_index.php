@@ -20,7 +20,6 @@ const FILE_EXCLUSIONS = [
  *
  * Populates the search index for the given language.
  *
- * @param array $argv The array of CLI arguments, 1: language, 2. Elastic search host.
  * @return void
  */
 function main()

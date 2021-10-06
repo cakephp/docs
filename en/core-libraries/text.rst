@@ -178,8 +178,8 @@ supported options are:
 .. php:staticmethod:: wrapBlock($text, $options = [])
 
 If you need to ensure that the total width of the generated block won't
-exceed a certain length even with internal identation, you need to use
-``wrapBlock()`` instead of ``wrap()``. This is particulary useful to generate
+exceed a certain length even with internal indentation, you need to use
+``wrapBlock()`` instead of ``wrap()``. This is particularly useful to generate
 text for the console for example. It accepts the same options as ``wrap()``::
 
     $text = 'This is the song that never ends. This is the song that never ends.';

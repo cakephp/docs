@@ -232,7 +232,7 @@ corretamente. Primeiramente observe seu httpd.conf. (Tenha certeza que você est
 editando o httpd.conf do sistema ao invés de um usuário, ou site específico.)
 
 Esses arquivos podem variar entre diferentes distribuições e versões do Apache.
-Você também pode pesquisar em http://wiki.apache.org/httpd/DistrosDefaultLayout
+Você também pode pesquisar em https://cwiki.apache.org/confluence/display/httpd/DistrosDefaultLayout
 para maiores informações.
 
 #. Tenha certeza que a sobreescrita do .htaccess está permitida e que

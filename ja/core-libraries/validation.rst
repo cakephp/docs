@@ -5,7 +5,7 @@
 
 CakePHP のバリデーションは、任意の配列データに対するバリデーションを簡単に行うための
 バリデーター構築のパッケージを提供します。 `API 中の利用可能なバリデーションルールの一覧
-<https://api.cakephp.org/3.x/class-Cake.Validation.Validation.html>`__
+<https://api.cakephp.org/4.x/class-Cake.Validation.Validation.html>`__
 をご覧ください。
 
 .. _creating-validators:
@@ -134,7 +134,7 @@ CakePHPは6つの異なる形状のデータに対して空の値のサポート
         ->lengthBetween('username', [4, 8]);
 
 バリデータメソッドの完全なセットについては、 `Validator API ドキュメント
-<https://api.cakephp.org/3.x/class-Cake.Validation.Validator.html>`_
+<https://api.cakephp.org/4.x/class-Cake.Validation.Validator.html>`_
 をご覧ください。
 
 .. _custom-validation-rules:
@@ -590,7 +590,7 @@ CakePHP は ``Validation`` クラス内にバリデーションメソッドに�
 様々な静的なメソッドが含まれます。
 
 ``Validation`` クラスにおける `API ドキュメント
-<https://api.cakephp.org/3.x/class-Cake.Validation.Validation.html>`_ では、
+<https://api.cakephp.org/4.x/class-Cake.Validation.Validation.html>`_ では、
 利用可能なバリデーションのルールについてのリスト及び基本的な使い方が案内されております。
 
 いくつかのバリデーションメソッドは、上限下限に関する条件や有効なオプションを設定することができます。

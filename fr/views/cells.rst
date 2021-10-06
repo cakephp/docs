@@ -3,7 +3,7 @@ View Cells
 
 View cells sont des mini-controllers qui peuvent invoquer de la logique de vue
 et afficher les templates. L'idée des cells est empruntée aux `cells dans ruby
-<https://github.com/apotonick/cells>`_, où elles remplissent un rôle et un
+<https://github.com/trailblazer/cells>`_, où elles remplissent un rôle et un
 sujet similaire.
 
 Quand utiliser les Cells
@@ -185,7 +185,8 @@ vous pouvez spécifier le template à utiliser lors de l'affichage de la cell::
 
     // Définit le template avant de faire un echo de la cell.
     $cell = $this->cell('Inbox'); ?>
-    $cell->template = 'messages';
+    $cell->viewBuilder()->setTemplate('messages');
+
     echo $cell;
 
 Mettre en Cache la Sortie de Cell

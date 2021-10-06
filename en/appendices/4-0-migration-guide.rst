@@ -85,6 +85,7 @@ changes made:
 Cache
 -----
 
+* ``Cake\Cache\Cache::read()`` returns ``null`` instead of ``false`` if the data doesn't exist.
 * ``Cake\Cache\CacheEngine::gc()`` and all implementations of this method have
   been removed. This method was a no-op in most cache drivers and was only used
   in file caching.
@@ -299,6 +300,7 @@ Router
   and ``Router::setRequestContext()`` have been removed, use ``Router::setRequest()``
   instead. ``Router::popRequest()`` has been removed. ``Router::getRequest()``
   no longer has a ``$current`` argument.
+* ``Router::url()`` and all routes generation methods (``HtmlHelper::link()``, ``UrlHelper::build()``, ...) will not automatically move unknown variables to ``?`` query. ``Router::url(['_name' => 'route', 'c' => 1234])`` should be rewritten to ``Router::url(['_name' => 'route', '?' => ['c' => 1234]])``. 
 
 TestSuite
 ---------
@@ -365,7 +367,7 @@ Helper
 * ``Cake\View\Helper\SecureFieldTokenTrait`` has been removed. Its form token
   data building functionality is now included in the internal class ``FormProtector``.
 * ``HtmlHelper::docType()`` method has been removed. HTML4 and XHTML are now
-  defunct and doctype for HTML5 is pretty short and easy to type out directly.
+  defunct and doctype for HTML5 is short to type out directly.
 * The ``safe`` option for ``HtmlHelper::scriptBlock()`` and ``HtmlHelper::scriptStart()``
   has been removed. When enabled it generated ``CDATA`` tags which are only required
   for XHTML which is now defunct.

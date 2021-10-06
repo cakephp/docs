@@ -3,12 +3,12 @@ REST
 
 Beaucoup de programmeurs néophytes d'application réalisent qu'ils ont
 besoin d'ouvrir leurs fonctionnalités principales à un public plus important.
-Fournir facilement, un accès sans entrave à votre API du cœur peut
+Fournir un accès sans entrave à votre API du cœur peut
 aider à ce que votre plateforme soit acceptée, et permettre les
 mashups et une intégration facile avec les autres systèmes.
 
 Alors que d'autres solutions existent, REST est un bon moyen de fournir
-facilement un accès à la logique que vous avez créée dans votre application.
+un accès à la logique que vous avez créée dans votre application.
 C'est simple, habituellement basé sur XML (nous parlons de XML simple, rien
 de semblable à une enveloppe SOAP), et dépend des headers HTTP pour la
 direction. Exposer une API via REST dans CakePHP est simple.
@@ -29,7 +29,7 @@ dans nos actions de controller. Un controller basique pourrait ressembler
     class RecipesController extends AppController
     {
 
-        public function initialize()
+        public function initialize(): void
         {
             parent::initialize();
             $this->loadComponent('RequestHandler');
@@ -38,19 +38,15 @@ dans nos actions de controller. Un controller basique pourrait ressembler
         public function index()
         {
             $recipes = $this->Recipes->find('all');
-            $this->set([
-                'recipes' => $recipes,
-                '_serialize' => ['recipes']
-            ]);
+            $this->set('recipes', $recipes);
+            $this->viewBuilder()->setOption('serialize', ['recipes']);
         }
 
         public function view($id)
         {
             $recipe = $this->Recipes->get($id);
-            $this->set([
-                'recipe' => $recipe,
-                '_serialize' => ['recipe']
-            ]);
+            $this->set('recipe', $recipe);
+            $this->viewBuilder()->setOption('serialize', ['recipe']);
         }
 
         public function add()
@@ -64,8 +60,8 @@ dans nos actions de controller. Un controller basique pourrait ressembler
             $this->set([
                 'message' => $message,
                 'recipe' => $recipe,
-                '_serialize' => ['message', 'recipe']
             ]);
+            $this->viewBuilder()->setOption('serialize', ['recipe', 'message']);
         }
 
         public function edit($id)
@@ -81,8 +77,9 @@ dans nos actions de controller. Un controller basique pourrait ressembler
             }
             $this->set([
                 'message' => $message,
-                '_serialize' => ['message']
+                'recipe' => $recipe,
             ]);
+            $this->viewBuilder()->setOption('serialize', ['recipe', 'message']);
         }
 
         public function delete($id)
@@ -92,10 +89,8 @@ dans nos actions de controller. Un controller basique pourrait ressembler
             if (!$this->Recipes->delete($recipe)) {
                 $message = 'Error';
             }
-            $this->set([
-                'message' => $message,
-                '_serialize' => ['message']
-            ]);
+            $this->set('message', $message);
+            $this->viewBuilder()->setOption('serialize', ['message']);
         }
     }
 
@@ -103,16 +98,16 @@ Les controllers RESTful utilisent souvent les extensions parsées pour servir
 différentes views basées sur différents types de requête. Puisque nous gérons
 les requêtes REST, nous ferons des views XML. Vous pouvez aussi faire des views
 JSON en utilisant les :doc:`/views/json-and-xml-views` intégrées à CakePHP. En
-utilisant :php:class:`XmlView` intégré, nous pouvons définir une variable de vue
-``_serialize``. Cette variable de vue spéciale est utilisée pour définir les
+utilisant :php:class:`XmlView` intégré, nous pouvons définir une option
+``_serialize``. Cette option est utilisée pour définir les
 variables de vue que ``XmlView`` doit sérialiser en XML.
 
 Si nous voulons modifier les données avant qu'elles soient converties en XML,
-nous ne devons pas définir la variable de vue ``_serialize``, et à la place
+nous ne devons pas définir l'option ``_serialize``, et à la place
 utiliser les fichiers de template. Nous plaçons les vues REST pour notre
 RecipesController à l'intérieur de **templates/Recipes/xml**. Nous pouvons
-aussi utiliser :php:class:`Xml` pour une sortie XML facile et rapide dans ces
-vues. Voici ce que notre vue index pourrait ressembler à::
+aussi utiliser :php:class:`Xml` pour une sortie XML simple à mettre en place
+dans ces vues. Voici à quoi notre vue index pourrait ressembler::
 
     // templates/Recipes/xml/index.php
     // Faire du formatage et de la manipulation sur le tableau
@@ -173,9 +168,10 @@ utilisant :php:meth:`RequestHandler::addInputType()`
 RESTful Routing
 ===============
 
-Le Router de CakePHP facilite la connexion des routes pour les ressources
-RESTful. Consultez la section :ref:`resource-routes` pour plus d'informations.
+Le Router de CakePHP fournit une interface pratique pour connecter des routes
+pour les ressources RESTful. Consultez la section :ref:`resource-routes` pour
+plus d'informations.
 
 .. meta::
     :title lang=fr: REST
-    :keywords lang=fr: application programmers,default routes,core functionality,result format,mashups,recipe database,request method,easy access,config,soap,recipes,logic,audience,cakephp,running,api
+    :keywords lang=fr: application programmers,default routes,core functionality,result format,mashups,recipe database,request method,access,config,soap,recipes,logic,audience,cakephp,running,api

@@ -108,8 +108,8 @@ les templates de view comme des variables locales, comme nous l'avons fait ci-de
 
 Vous avez peut-être remarqué que nous utilisons un objet appelé ``$this->Html``.
 C'est une instance du :doc:`HtmlHelper </views/helpers/html>`. CakePHP inclut
-plusieurs helpers de view qui rendent les tâches comme créer des liens, des
-formulaires et des éléments de paginations très faciles. Vous pouvez en apprendre
+plusieurs helpers de view qui peuvent créer des liens, des
+formulaires et des éléments de paginations. Vous pouvez en apprendre
 plus à propos des :doc:`/views/helpers` dans le chapitre de la documentation qui
 leur est consacré, mais le plus important ici est la méthode ``link()``, qui générera
 un lien HTML avec le texte fourni (le premier paramètre) et l'URL (le second paramètre).
@@ -455,7 +455,7 @@ de ça en utilisant un :ref:`validator <validating-request-data>`::
     use Cake\Validation\Validator;
 
     // Ajouter la méthode suivante.
-    public function validationDefault(Validator $validator)
+    public function validationDefault(Validator $validator): Validator
     {
         $validator
             ->notEmptyString('title')
