@@ -232,7 +232,7 @@ Core
   first instance of a deprecation will be displayed. This improves the
   readability of test output, and visual noise in an HTML context. You can
   restore duplicate notice output by setting the
-  ``Error.enableDuplicateDeprecations`` to ``true`` in your ``app_local.php``.
+  ``Error.allowDuplicateDeprecations`` to ``true`` in your ``app_local.php``.
 
 Database
 --------
