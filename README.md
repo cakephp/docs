@@ -37,17 +37,20 @@ you'll only need to do this once.
 
 Now that the image is built, you can run all the commands to build the docs:
 
+##### To build the html: #####
 ```bash
-# To build the html
 docker run -it --rm -v $(pwd):/data cakephp/docs make html
-
-# To build the epub
+```
+##### To build the epub: #####
+```bash
 docker run -it --rm -v $(pwd):/data cakephp/docs make epub
-
-# To build the latex
+```
+##### To build the latex: #####
+```bash
 docker run -it --rm -v $(pwd):/data cakephp/docs make latex
-
-# To build the pdf
+```
+##### To build the pdf: #####
+```bash
 docker run -it --rm -v $(pwd):/data cakephp/docs make pdf
 ```
 
