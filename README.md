@@ -28,24 +28,28 @@ docker](https://docs.docker.com/mac/started/) for more information.
 Starting in the top-level directory, you can build the provided `Dockerfile`
 and tag it with the name `cakephp/docs` by running:
 
-    docker build -t cakephp/docs .
+```bash
+docker build -t cakephp/docs .
+```
 
 This can take a little while, because all packages needs to be downloaded, but
 you'll only need to do this once.
 
 Now that the image is built, you can run all the commands to build the docs:
 
-    # To build the html
-    docker run -it --rm -v $(pwd):/data cakephp/docs make html
+```bash
+# To build the html
+docker run -it --rm -v $(pwd):/data cakephp/docs make html
 
-    # To build the epub
-    docker run -it --rm -v $(pwd):/data cakephp/docs make epub
+# To build the epub
+docker run -it --rm -v $(pwd):/data cakephp/docs make epub
 
-    # To build the latex
-    docker run -it --rm -v $(pwd):/data cakephp/docs make latex
+# To build the latex
+docker run -it --rm -v $(pwd):/data cakephp/docs make latex
 
-    # To build the pdf
-    docker run -it --rm -v $(pwd):/data cakephp/docs make pdf
+# To build the pdf
+docker run -it --rm -v $(pwd):/data cakephp/docs make pdf
+```
 
 All the documentation will output to the `build` directory.
 
@@ -65,20 +69,22 @@ To build the documentation you'll need to install dependencies using:
 After installing the required packages, you can build the documentation using
 `make`.
 
-    # Create all the HTML docs. Including all the languages.
-    make html
-
-    # Create just the English HTML docs.
-    make html-en
-
-    # Create all the EPUB (e-book) docs.
-    make epub
-
-    # Create just the English EPUB docs.
-    make epub-en
-
-    # Populate the search index
-    make populate-index
+```bash
+ # Create all the HTML docs. Including all the languages.
+ make html
+ 
+ # Create just the English HTML docs.
+ make html-en
+ 
+ # Create all the EPUB (e-book) docs.
+ make epub
+ 
+ # Create just the English EPUB docs.
+ make epub-en
+ 
+ # Populate the search index
+ make populate-index
+```
 
 This will generate all the documentation in an HTML form. Other output such as
 'htmlhelp' are not fully complete at this time.
@@ -97,7 +103,7 @@ Building the PDF is a non-trivial task.
 2. Run `make latex-en`.
 3. Run `make pdf-en`.
 
-At this point the completed PDF should be in build/latex/en/CakePHPCookbook.pdf.
+At this point the completed PDF should be in `build/latex/en/CakePHPCookbook.pdf`.
 
 Contributing
 ------------
@@ -106,8 +112,9 @@ There are currently a number of outstanding issues that need to be addressed.
 We've tried to flag these with `.. todo::` where possible. To see all the
 outstanding todo's add the following to your `config/all.py`
 
-    todo_include_todos = True
-
+```python
+todo_include_todos = True
+```
 After rebuilding the HTML content, you should see a list of existing todo items
 at the bottom of the table of contents.
 
