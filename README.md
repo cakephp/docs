@@ -60,7 +60,9 @@ Build the Documentation Manually
 
 To build the documentation you'll need to install dependencies using:
 
-    pip install -r requirements.txt
+```bash
+pip install -r requirements.txt
+```
 
 *To run the pip command, python-pip package must be previously installed.*
 
@@ -69,21 +71,27 @@ To build the documentation you'll need to install dependencies using:
 After installing the required packages, you can build the documentation using
 `make`.
 
+##### Create all the HTML docs. Including all the languages: #####
 ```bash
- # Create all the HTML docs. Including all the languages.
- make html
- 
- # Create just the English HTML docs.
- make html-en
- 
- # Create all the EPUB (e-book) docs.
- make epub
- 
- # Create just the English EPUB docs.
- make epub-en
- 
- # Populate the search index
- make populate-index
+make html
+```
+ ##### Create just the English HTML docs: #####
+```bash
+make html-en
+```
+
+##### Create all the EPUB (e-book) docs: #####
+```bash
+make epub
+```
+##### Create just the English EPUB docs: #####
+```bash
+make epub-en
+```
+
+##### Populate the search index: #####
+```bash
+make populate-index
 ```
 
 This will generate all the documentation in an HTML form. Other output such as
