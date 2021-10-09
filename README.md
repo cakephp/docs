@@ -21,7 +21,7 @@ Build the Documentation with Docker
 
 Docker will let you create a container with all packages needed to build the
 docs. You need to have docker installed, see the [official docs of
-docker](https://docs.docker.com/mac/started/) for more information.
+docker](https://docs.docker.com/desktop/) for more information.
 
 ### Build the image locally ###
 
