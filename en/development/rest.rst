@@ -109,7 +109,7 @@ our index view might look like::
     $xml = Xml::fromArray(['response' => $recipes]);
     echo $xml->asXML();
 
-When serving up a specific content type using :php:meth:`Cake\\Routing\\Router::setExtensions()`,
+When serving up a specific content type using :php:meth:`Cake\\Routing\\Router::extensions()`,
 CakePHP automatically looks for a view helper that matches the type.
 Since we're using XML as the content type, there is no built-in helper,
 however if you were to create one it would automatically be loaded
