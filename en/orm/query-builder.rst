@@ -507,6 +507,83 @@ To do this with the query builder, we'd use the following code::
 
     $query = $articles->find();
     $publishedCase = $query->newExpr()
+        ->case()
+        ->when(['published' => 'Y'])
+        ->then(1);
+    $unpublishedCase = $query->newExpr()
+        ->case()(
+        ->when(['published' => 'N'])
+        ->then(1);
+
+    $query->select([
+        'number_published' => $query->func()->count($publishedCase),
+        'number_unpublished' => $query->func()->count($unpublishedCase)
+    ]);
+
+If we wanted to classify cities into SMALL, MEDIUM, or LARGE based on population
+size, we could do the following::
+
+    $query = $cities->find()
+        ->where(function (QueryExpression $exp, Query $q) {
+            return $exp->case()
+                ->when(['population <' => 100000])
+                ->then('SMALL'
+                ->when('population BETWEEN 100000 AND 999000')
+                ->then('MEDIUM')
+                ->when(['population >=' => 999001])
+                ->then('LARGE');
+        });
+    # WHERE CASE
+    #   WHEN population < 100000 THEN 'SMALL'
+    #   WHEN population BETWEEN 100000 AND 999000 THEN 'MEDIUM'
+    #   WHEN population >= 999001 THEN 'LARGE'
+    #   END
+
+The ``when()`` method accepts SQL snippets, array conditions, and ``Closure``
+for when you need additional logic.
+
+.. warning::
+    Passing user data directly into ``when()`` creates a SQL Injection
+    vulnerability. Only pass user data in as values to array conditions
+    or bind values with ``bind()``.
+
+The ``then()`` method assumes all its parameter is a string. If you need
+additional types you can declare those types::
+
+    $case->when(['published' => true])->then(1, 'integer');
+
+You can create ``if ... then ... else`` conditions by using ``else()``::
+
+    $published = $query->newExpr()
+        ->case()
+        ->when(['published' => true])
+        ->then('Y');
+        ->else('N');
+
+    # CASE WHEN published = true THEN 'Y' ELSE 'N' END;
+
+For more complex scenarios you can use ``QueryExpression`` objects and bound
+values::
+
+    $userValue = $query->newExpr()
+        ->case()
+        ->when($query->newExpr(':userData'))
+        ->then(123, 'integer');
+
+    $query->select(['val' => $userValue])
+        ->bind(':userData', $requestData['value'], 'integer');
+
+
+By using query expressions you can safely embed user data into complex raw SQL
+snippets.
+
+.. versionchanged:: 4.3.0
+    The fluent ``case()`` builder method was added.
+
+Prior to 4.3.0, you would need to use::
+
+    $query = $articles->find();
+    $publishedCase = $query->newExpr()
         ->addCase(
             $query->newExpr()->add(['published' => 'Y']),
             1,
