@@ -520,47 +520,34 @@ To do this with the query builder, we'd use the following code::
         'number_unpublished' => $query->func()->count($unpublishedCase)
     ]);
 
-If we wanted to classify cities into SMALL, MEDIUM, or LARGE based on population
-size, we could do the following::
+The ``when()`` method accepts SQL snippets, array conditions, and ``Closure``
+for when you need additional logic to build the cases. If we wanted to classify
+cities into SMALL, MEDIUM, or LARGE based on population size, we could do the
+following::
 
-    $query = $cities->find()
-        ->where(function (QueryExpression $exp, Query $q) {
-            return $exp->case()
-                ->when(['population <' => 100000])
-                ->then('SMALL')
-                ->when($q->between('population', 100000, 999000))
-                ->then('MEDIUM')
-                ->when(['population >=' => 999001])
-                ->then('LARGE');
-        });
-    # WHERE CASE
+    $query = $cities->find();
+    $sizing = $query->newExpr()->case()
+        ->when(['population <' => 100000])
+        ->then('SMALL')
+        ->when($q->between('population', 100000, 999000))
+        ->then('MEDIUM')
+        ->when(['population >=' => 999001])
+        ->then('LARGE');
+    $query = $query->select(['size' => $sizing]);
+    # SELECT CASE
     #   WHEN population < 100000 THEN 'SMALL'
     #   WHEN population BETWEEN 100000 AND 999000 THEN 'MEDIUM'
     #   WHEN population >= 999001 THEN 'LARGE'
-    #   END
+    #   END AS size
 
-The ``when()`` method accepts SQL snippets, array conditions, and ``Closure``
-for when you need additional logic.
+You need to be careful when including user provided data into case expressions
+as it can create SQL injection vulnerabilities::
 
-.. warning::
-    Passing user data directly into ``when()`` creates a SQL Injection
-    vulnerability. Only pass user data in as values to array conditions
-    or bind values with ``bind()``.
+    // Unsafe do *not* use
+    $case->when($requestData['published']);
 
-The ``then()`` method assumes all its parameter is a string. If you need
-additional types you can declare those types::
-
-    $case->when(['published' => true])->then(1, 'integer');
-
-You can create ``if ... then ... else`` conditions by using ``else()``::
-
-    $published = $query->newExpr()
-        ->case()
-        ->when(['published' => true])
-        ->then('Y');
-        ->else('N');
-
-    # CASE WHEN published = true THEN 'Y' ELSE 'N' END;
+    // Instead pass user data as values to array conditions
+    $case->when(['published' => $requestData['published']]);
 
 For more complex scenarios you can use ``QueryExpression`` objects and bound
 values::
@@ -573,8 +560,23 @@ values::
     $query->select(['val' => $userValue])
         ->bind(':userData', $requestData['value'], 'integer');
 
-
 By using bindings you can safely embed user data into complex raw SQL snippets.
+
+The ``then()`` method assumes will attempt to infer the value type based on the
+parameter type. If you need to bind a value as a different type you can declare
+the desired type::
+
+    $case->when(['published' => true])->then('1', 'integer');
+
+You can create ``if ... then ... else`` conditions by using ``else()``::
+
+    $published = $query->newExpr()
+        ->case()
+        ->when(['published' => true])
+        ->then('Y');
+        ->else('N');
+
+    # CASE WHEN published = true THEN 'Y' ELSE 'N' END;
 
 .. versionchanged:: 4.3.0
     The fluent ``case()`` builder method was added.
