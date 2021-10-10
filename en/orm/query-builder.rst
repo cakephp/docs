@@ -527,8 +527,8 @@ size, we could do the following::
         ->where(function (QueryExpression $exp, Query $q) {
             return $exp->case()
                 ->when(['population <' => 100000])
-                ->then('SMALL'
-                ->when('population BETWEEN 100000 AND 999000')
+                ->then('SMALL')
+                ->when($q->between('population', 100000, 999000))
                 ->then('MEDIUM')
                 ->when(['population >=' => 999001])
                 ->then('LARGE');
@@ -574,8 +574,7 @@ values::
         ->bind(':userData', $requestData['value'], 'integer');
 
 
-By using query expressions you can safely embed user data into complex raw SQL
-snippets.
+By using bindings you can safely embed user data into complex raw SQL snippets.
 
 .. versionchanged:: 4.3.0
     The fluent ``case()`` builder method was added.
