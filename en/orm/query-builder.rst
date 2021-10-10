@@ -511,7 +511,7 @@ To do this with the query builder, we'd use the following code::
         ->when(['published' => 'Y'])
         ->then(1);
     $unpublishedCase = $query->newExpr()
-        ->case()(
+        ->case()
         ->when(['published' => 'N'])
         ->then(1);
 
