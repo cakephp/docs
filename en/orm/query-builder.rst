@@ -554,7 +554,7 @@ values::
 
     $userValue = $query->newExpr()
         ->case()
-        ->when($query->newExpr(':userData'))
+        ->when($query->newExpr('population >= :userData'))
         ->then(123, 'integer');
 
     $query->select(['val' => $userValue])
