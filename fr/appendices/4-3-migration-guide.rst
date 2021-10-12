@@ -204,6 +204,12 @@ Routing
 - ``RouteBuilder::resources()`` génère maintenant des routes qui utilisent des
   placeholders entre accolades.
 
+TestSuite
+---------
+
+- ``TestCase::deprecated()`` vérifie (*asserts*) maintenant qu'au moins un
+  avertissement de dépréciation ait été déclenché par le callback.
+
 Validation
 ----------
 
@@ -249,6 +255,15 @@ Controller
 - Les controllers supportent maintenant des paramètres d'actions avec des types
   déclarés ``float``, ``int`` ou ``bool``. Les booléens passés doivent être soit
   0 soit 1.
+
+Core
+----
+
+- ``deprecationWarning()`` n'émet plus de notices en doublon. Au lieu de cela,
+  seule la permière instance de dépréciation sera affichée. Cela améliore la
+  lisibilité de la sortie de test, et le bruit visuel dans un contexte HTML.
+  Vous pouvez restaurer la sortie de notices en doublon en définissant
+  ``Error.allowDuplicateDeprecations`` à ``true`` dans votre ``app_local.php``.
 
 Database
 --------
