@@ -1,14 +1,15 @@
 Déploiement
 ###########
 
-Une fois que votre application CakePHP est terminée, ou même avant que
-vous souhaitiez la déployer, il y a certains points à vérifier.
+Une fois que votre application CakePHP est prête à être déployée, il reste un
+certains nombre de choses à faire.
 
 Déplacer les Fichiers
 =====================
 
-Nous vous incitons à créer un git commit et de faire un pull ou un clone du
-commit ou du répertoire sur votre serveur et de lancer ``composer install``.
+Vous pouvez cloner votre dépôt sur votre serveur de production, puis faire un
+checkout du commit/tag que vous voulez lancer. Puis, exécutez
+``composer install``.
 Bien que cela nécessite quelques connaissances de git et que vous ayez ``git``
 et ``composer`` installés, cette façon de faire vous permettra de gérer les
 dépendances de librairies et les permissions des fichiers et des dossiers.
@@ -18,13 +19,14 @@ bonnes permissions pour les fichiers et les dossiers.
 
 Vous pouvez aussi utiliser cette technique de déploiement pour configurer des
 versions staging ou demo (pre-production) et les garder à jour avec votre
-version de dev.
+environnement local.
 
-Modifier le fichier config/app.php
-==================================
+Ajuster la Configuration
+========================
 
-Mettre à jour app.php, spécialement la valeur de ``debug`` est extrêmement
-important. Mettre debug = ``false`` désactive un certain nombre de
+Vous voudrez faire quelques ajustements à la configuration de votre application
+pour un environnement de production. La valeur de ``debug`` est extrêmement
+importante. Mettre debug = ``false`` désactive un certain nombre de
 fonctionnalités de développement qui ne devraient jamais être exposées sur
 internet. Désactiver le debug change les types de choses suivantes:
 
@@ -52,7 +54,7 @@ configuration Apache::
     SetEnv CAKEPHP_DEBUG 1
 
 Et ensuite vous pouvez définir le niveau de debug dynamiquement dans
-**config/app.php**::
+**config/app_local.php**::
 
     $debug = (bool)getenv('CAKEPHP_DEBUG');
 
@@ -129,6 +131,18 @@ Déployer une Mise à Jour
 
 Après un déploiement ou une mise à jour, vous pouvez aussi lancer ``bin/cake
 schema_cache clear``, qui fait parti du shell :doc:`/console-commands/schema-cache`.
+
+À chaque dépoloiement, vous aurez sans doute quelques tâches à coordonner sur
+votre serveur web. Les plus typiques sont:
+
+1. Installer des dépendances avec ``composer install``. Évitez d'utiliser
+   ``composer update`` en déploiement car vous pourriez obtenir des versions
+   inattendues des packages.
+2. Lancez les `migrations </migrations/>`__ de bases de données, que ce soit
+   avec le plugin Migrations ou un autre outil.
+3. Vider le cache du schéma du modèle avec ``bin/cake schema_cache clear``. La
+   section :doc:`/console-commands/schema-cache` vous en apprendra plus sur
+   cette commande.
 
 .. meta::
     :title lang=fr: Déploiement
