@@ -1209,6 +1209,17 @@ de la ressource pour personnaliser le nom de chemin::
 Si vous définissez 'only' et 'map', assurez-vous que vos méthodes mappées sont
 aussi dans la liste 'only'.
 
+Router vers une Ressource Préfixée
+----------------------------------
+
+Les routes vers des ressources peuvent être connectées à des controllers ayant
+des préfixes de routage en connectant des routes à l'intérieur d'un scope
+préfixé, ou en utilisant l'option ``prefix``::
+
+    $routes->resources('Articles', [
+        'prefix' => 'Api',
+    ]);
+
 .. _custom-rest-routing:
 
 Classes de Route Personnalisée pour les Ressources
