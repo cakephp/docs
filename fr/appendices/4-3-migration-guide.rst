@@ -240,6 +240,9 @@ Controller
 - ``Controller::middleware()`` a été ajoutée. Elle vous permet de définir un
   middleware pour un seul contrôleur. Reportez-vous à :ref:`controller-middleware`
   pour plus d'informations.
+- Les controllers supportent maintenant des paramètres d'actions avec des types
+  déclarés ``float``, ``int`` ou ``bool``. Les booléens passés doivent être soit
+  0 soit 1.
 
 Database
 --------
