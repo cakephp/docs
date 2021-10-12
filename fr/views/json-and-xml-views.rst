@@ -150,7 +150,7 @@ au lieu d'``attributes``.
 
 Comme exemple d'utilisation de ``XmlView``, on peut imaginer la génération d'un
 `sitemap.xml <https://www.sitemaps.org/protocol.html>`_. Ce tye de document
-nécessite de changer ``rootNode`` et de définir des attributs. Les attributs
+nécessite de changer ``_rootNode`` et de définir des attributs. Les attributs
 sont définis en utilisant le préfixe ``@``::
  
     public function sitemap()
