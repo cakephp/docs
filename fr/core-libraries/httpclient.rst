@@ -168,6 +168,8 @@ utilisées dans ``$options``:
   Nécessite que ``$data`` soit une chaîne ou que l'option ``_content`` soit
   définie quand vous faites des requêtes GET.
 - ``redirect`` - Nombre de redirections à suivre. ``false`` par défaut.
+- ``curl`` - Un tableau d'option supplémentaires pour curl (si l'adaptateur curl
+  est utilisé). Par exemple ``[CURLOPT_SSLKEY => 'key.pem']``.
 
 Le paramètre options est toujours le 3ème paramètre dans chaque méthode HTTP.
 Elles peuvent aussi être utilisées en construisant ``Client`` pour créer des
