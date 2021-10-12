@@ -139,6 +139,12 @@ Changements dans les Behaviors
 Bien que les changements qui suivent ne changent la signature d'aucune méthode,
 ils en changent la sémantique ou le comportement.
 
+Collection
+----------
+
+- Le paramètre ``$preserveKeys`` a été renommé en ``$keepKeys`` avec la même
+  implémentation.
+
 Command
 -------
 
