@@ -302,7 +302,12 @@ Router
   et ``Router::setRequestContext()`` ont été supprimées, utilisez ``Router::setRequest()``
   à la place. ``Router::popRequest()`` a été supprimée. ``Router::getRequest()``
   ne possède plus d'argument ``$current``.
-
+* ``Router::url()`` et toutes les méthodes de génération de routes
+  (``HtmlHelper::link()``, ``UrlHelper::build()``, ...) ne déplaceront plus
+  automatiquement les variables inconnues dans le ``?``.
+  ``Router::url(['_name' => 'route', 'c' => 1234])`` doit être réécrit en
+  ``Router::url(['_name' => 'route', '?' => ['c' => 1234]])``. 
+ 
 TestSuite
 ---------
 
