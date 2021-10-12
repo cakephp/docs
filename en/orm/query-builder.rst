@@ -562,7 +562,7 @@ values::
 
 By using bindings you can safely embed user data into complex raw SQL snippets.
 
-The ``then()``, ``when()`` and ``else()`` methods will attempt to infer the
+``then()``, ``when()`` and ``else()`` will try to infer the
 value type based on the parameter type. If you need to bind a value as
 a different type you can declare the desired type::
 
