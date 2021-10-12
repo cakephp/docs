@@ -10,7 +10,7 @@ Mettre à jour vers la version 4.3.0
 
 Vous pouvez utiliser composer pour mettre à jour vers CakePHP 4.3.0::
 
-    php composer.phar require --update-with-dependencies "cakephp/cakephp:^4.3@beta"
+    php composer.phar require --update-with-dependencies "cakephp/cakephp:^4.3@RC"
 
 Dépréciations
 =============
@@ -300,6 +300,10 @@ ORM
 - ``Query::whereNotInListOrNull()`` et ``QueryExpression::notInOrNull()`` ont
   été ajoutés pour les colonnes nullable puisque ``null != value`` est toujours
   false et le test ``NOT IN`` échoue toujours quand la colonne est null.
+- ``LocatorAwareTrait::fetchTable()`` a été ajoutée. Elle vous permet d'utiliser
+  ``$this->fetchTable()`` pour obtenir une instance de table depuis les classes
+  qui utilisent ce trait, telles que les controllers, les commands, mailers et
+  cells.
 
 TestSuite
 ---------
