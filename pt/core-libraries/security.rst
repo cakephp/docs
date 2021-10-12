@@ -6,7 +6,7 @@ Segurança
 .. php:class:: Security
 
 A `biblioteca de segurança
-<https://api.cakephp.org/3.x/class-Cake.Utility.Security.html>`_
+<https://api.cakephp.org/4.x/class-Cake.Utility.Security.html>`_
 trabalha com medidas básicas de segurança fornecendo métodos para
 `hash` e criptografia de dados.
 

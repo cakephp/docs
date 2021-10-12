@@ -145,7 +145,7 @@ customize the options used to generate XML, e.g. ``tags`` vs ``attributes``.
 
 An example of using ``XmlView`` would be to generate a `sitemap.xml
 <https://www.sitemaps.org/protocol.html>`_. This document type requires that you
-change ``_rootNode`` and set attributes. Attributes are defined using the ``@``
+change ``rootNode`` and set attributes. Attributes are defined using the ``@``
 prefix::
 
     public function sitemap()
@@ -177,7 +177,7 @@ Creating JSON Views
 
 .. php:class:: JsonView
 
-The JsonView class supports the ``_jsonOptions`` variable that allows you to
+The JsonView class supports the ``jsonOptions`` option that allows you to
 customize the bit-mask used to generate JSON. See the
 `json_encode <http://php.net/json_encode>`_ documentation for the valid
 values of this option.

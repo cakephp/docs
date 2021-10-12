@@ -292,7 +292,7 @@ your httpd.conf. (Make sure you are editing the system httpd.conf rather than a
 user- or site-specific httpd.conf.)
 
 These files can vary between different distributions and Apache versions. You
-may also take a look at http://wiki.apache.org/httpd/DistrosDefaultLayout for
+may also take a look at https://cwiki.apache.org/confluence/display/httpd/DistrosDefaultLayout for
 further information.
 
 #. Make sure that an .htaccess override is allowed and that AllowOverride is set
@@ -558,8 +558,8 @@ these steps:
 
 #. Use `Microsoft's Web Platform Installer <http://www.microsoft.com/web/downloads/platform.aspx>`_
    to install the URL `Rewrite Module 2.0 <http://www.iis.net/downloads/microsoft/url-rewrite>`_
-   or download it directly (`32-bit <http://www.microsoft.com/en-us/download/details.aspx?id=5747>`_ /
-   `64-bit <http://www.microsoft.com/en-us/download/details.aspx?id=7435>`_).
+   or download it directly (`32-bit <https://download.microsoft.com/download/D/8/1/D81E5DD6-1ABB-46B0-9B4B-21894E18B77F/rewrite_x86_en-US.msi>`_ /
+   `64-bit <https://download.microsoft.com/download/1/2/8/128E2E22-C1B9-44A4-BE2A-5859ED1D4592/rewrite_amd64_en-US.msi>`_).
 #. Create a new file called web.config in your CakePHP root folder.
 #. Using Notepad or any XML-safe editor, copy the following
    code into your new web.config file:

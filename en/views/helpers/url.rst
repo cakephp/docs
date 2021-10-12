@@ -150,7 +150,7 @@ When using the ``assetUrlClassName`` you must implement the same methods as
     The ``assetUrlClassName`` option was added.
 
 For further information check
-`Router::url <https://api.cakephp.org/3.x/class-Cake.Routing.Router.html#_url>`_
+`Router::url <https://api.cakephp.org/4.x/class-Cake.Routing.Router.html#_url>`_
 in the API.
 
 .. meta::
