@@ -36,6 +36,13 @@ Connection
 - ``Connection::supportsDynamicConstraints()`` a été dépréciée car les fixtures
   ne tentent plus de supprimer ou créer des contraintes dynamiquement.
 
+Controller
+----------
+
+- Le callback de l'événement ``Controller.shutdown`` des controllers a été
+  renommé de ``shutdown`` à ``afterFilter`` pour correspondre à celui du
+  controller. Cela rend les callbacks plus cohérents.
+
 Base De Données
 ---------------
 
@@ -107,22 +114,6 @@ Routing
   ``:controller`` sont dépréciés. Remplacez-les par des placeholders entre
   accolades tels que ``{controller}``.
 
-Controller
-----------
-
-- Le callback de l'événement ``Controller.shutdown`` des controllers a été
-  renommé de ``shutdown`` à ``afterFilter`` pour correspondre à celui du
-  controller. Cela rend les callbacks plus cohérents.
-
-View
-----
-
-- Les options non associatives des méthodes de FormHelper (par exemple
-  ``['disabled']``) sont maintenant dépréciées.
-- Le second argument ``$merge`` de ``ViewBuilder::setHelpers()`` a été déprécié
-  au profit de la méthode dédiée ``ViewBuilder::addHelpers()`` qui sépare
-  proprement l'ajout et le remplacement de helpers.
-
 TestSuite
 ---------
 
@@ -132,6 +123,15 @@ TestSuite
 - ``TestCase::$dropTables`` est déprécié. La suppression de tables pendant
   l'exécution d'un test est incompatible avec les nouvelles fixtures basées sur
   le dump d'une migration/schéma. La fonctionnalité sera supprimée dans 5.0.
+
+View
+----
+
+- Les options non associatives des méthodes de FormHelper (par exemple
+  ``['disabled']``) sont maintenant dépréciées.
+- Le second argument ``$merge`` de ``ViewBuilder::setHelpers()`` a été déprécié
+  au profit de la méthode dédiée ``ViewBuilder::addHelpers()`` qui sépare
+  proprement l'ajout et le remplacement de helpers.
 
 Changements dans les Behaviors
 ==============================
@@ -210,6 +210,8 @@ View
 
 - Le paramètre ``$vars`` de ``ViewBuilder::build()`` est déprécié. Utilisez
   ``setVar()`` à la place.
+- ``HtmlHelper::script()`` et ``HtmlHelper::css()`` échappent désormais les URLs
+  absolues qui incluent un scheme.
 
 Changements entraînant une rupture
 ==================================
