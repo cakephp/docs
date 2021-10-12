@@ -91,6 +91,7 @@ ORM
   deprecated. Define the validator within the table class or use ``setValidator()`` instead.
 - ``Association::setName()`` is deprecated. Association names should be defined
   when the association is.
+- ``QueryExpression::addCase()`` is deprecated. Use ``case()`` instead.
 
 Routing
 -------
