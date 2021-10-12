@@ -258,6 +258,7 @@ Database
   constants.
 - Added ``DriverInterface::inTransaction()`` which reflects the status returned by
   ``PDO::inTranaction()``.
+- A fluent builder for ``CASE, WHEN, THEN`` statements has been added. 
 
 Form
 ----
