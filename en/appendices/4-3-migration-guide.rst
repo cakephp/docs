@@ -233,6 +233,9 @@ Core
   readability of test output, and visual noise in an HTML context. You can
   restore duplicate notice output by setting the
   ``Error.allowDuplicateDeprecations`` to ``true`` in your ``app_local.php``.
+- CakePHP's dependency on ``league/container`` was bumped to ``^4.1.1``. While
+  the DI container is marked as experimental, this upgrade could require you to
+  upgrade your service provider definitions.
 
 Database
 --------
