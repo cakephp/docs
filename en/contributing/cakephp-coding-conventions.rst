@@ -339,18 +339,16 @@ the commented block of code.
 Comments can include the following `phpDocumentor <http://phpdoc.org>`_
 tags:
 
-*  `@author <http://phpdoc.org/docs/latest/references/phpdoc/tags/author.html>`_
-*  `@copyright <http://phpdoc.org/docs/latest/references/phpdoc/tags/copyright.html>`_
-*  `@deprecated <http://phpdoc.org/docs/latest/references/phpdoc/tags/deprecated.html>`_
+*  `@deprecated <https://docs.phpdoc.org/latest/guide/references/phpdoc/tags/deprecated.html>`_
    Using the ``@version <vector> <description>`` format, where ``version``
    and ``description`` are mandatory. Version refers to the one it got deprecated in.
-*  `@example <http://phpdoc.org/docs/latest/references/phpdoc/tags/example.html>`_
-*  `@ignore <http://phpdoc.org/docs/latest/references/phpdoc/tags/ignore.html>`_
-*  `@internal <http://phpdoc.org/docs/latest/references/phpdoc/tags/internal.html>`_
-*  `@link <http://phpdoc.org/docs/latest/references/phpdoc/tags/link.html>`_
-*  `@see <http://phpdoc.org/docs/latest/references/phpdoc/tags/see.html>`_
-*  `@since <http://phpdoc.org/docs/latest/references/phpdoc/tags/since.html>`_
-*  `@version <http://phpdoc.org/docs/latest/references/phpdoc/tags/version.html>`_
+*  `@example <https://docs.phpdoc.org/latest/guide/references/phpdoc/tags/example.html>`_
+*  `@ignore <https://docs.phpdoc.org/latest/guide/references/phpdoc/tags/ignore.html>`_
+*  `@internal <https://docs.phpdoc.org/latest/guide/references/phpdoc/tags/internal.html>`_
+*  `@link <https://docs.phpdoc.org/latest/guide/references/phpdoc/tags/link.html>`_
+*  `@see <https://docs.phpdoc.org/latest/guide/references/phpdoc/tags/see.html>`_
+*  `@since <https://docs.phpdoc.org/latest/guide/references/phpdoc/tags/since.html>`_
+*  `@version <https://docs.phpdoc.org/latest/guide/references/phpdoc/tags/version.html>`_
 
 PhpDoc tags are very much like JavaDoc tags in Java. Tags are only processed if
 they are the first thing in a DocBlock line, for example::
