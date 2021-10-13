@@ -264,6 +264,10 @@ Core
   lisibilité de la sortie de test, et le bruit visuel dans un contexte HTML.
   Vous pouvez restaurer la sortie de notices en doublon en définissant
   ``Error.allowDuplicateDeprecations`` à ``true`` dans votre ``app_local.php``.
+- La dépendance de CakePHP envers ``league/container`` a été mise à niveau à
+  ``^4.1.1``. Le conteneur DI étant marqué comme expérimental, cette mise à
+  niveau peut nécessiter que vous mettiez à niveau les définitions de vos
+  service providers.
 
 Database
 --------
