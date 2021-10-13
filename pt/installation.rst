@@ -401,8 +401,8 @@ os seguintes passos:
 #. Utilize o
    `Microsoft's Web Platform Installer <http://www.microsoft.com/web/downloads/platform.aspx>`_
    para instalar o `Rewrite Module 2.0 <http://www.iis.net/downloads/microsoft/url-rewrite>`_
-   ou baixe-o diretamente (`32-bit <http://www.microsoft.com/en-us/download/details.aspx?id=5747>`_ /
-   `64-bit <http://www.microsoft.com/en-us/download/details.aspx?id=7435>`_).
+   ou baixe-o diretamente (`32-bit <https://download.microsoft.com/download/D/8/1/D81E5DD6-1ABB-46B0-9B4B-21894E18B77F/rewrite_x86_en-US.msi>`_ /
+   `64-bit <https://download.microsoft.com/download/1/2/8/128E2E22-C1B9-44A4-BE2A-5859ED1D4592/rewrite_amd64_en-US.msi>`_).
 #. Crie um novo arquivo chamado web.config em seu diretório raiz do CakePHP.
 #. Utilize o Notepad ou qualquer editor seguro XML para copiar o seguinte código
    em seu novo arquivo web.config::
