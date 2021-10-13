@@ -468,6 +468,88 @@ suivant::
 
     $query = $articles->find();
     $publishedCase = $query->newExpr()
+        ->case()
+        ->when(['published' => 'Y'])
+        ->then(1);
+    $unpublishedCase = $query->newExpr()
+        ->case()
+        ->when(['published' => 'N'])
+        ->then(1);
+
+    $query->select([
+        'number_published' => $query->func()->count($publishedCase),
+        'number_unpublished' => $query->func()->count($unpublishedCase)
+    ]);
+
+La méthode ``when()`` accepte des extraits de code SQL, des conditions en
+tableau, et des ``Closure`` pour les situations où vous avez besoin d'une
+logique supplémentaire pour construire les cas. Si nous souhaitions classer des
+villes selon des tailles de population PETITE, MOYENNE, ou GRANDE, nous
+pourrions le faire ainsi::
+
+    $query = $cities->find();
+    $sizing = $query->newExpr()->case()
+        ->when(['population <' => 100000])
+        ->then('PETITE')
+        ->when($q->between('population', 100000, 999000))
+        ->then('MOYENNE')
+        ->when(['population >=' => 999001])
+        ->then('GRANDE');
+    $query = $query->select(['size' => $sizing]);
+    # SELECT CASE
+    #   WHEN population < 100000 THEN 'PETITE'
+    #   WHEN population BETWEEN 100000 AND 999000 THEN 'MOYENNE'
+    #   WHEN population >= 999001 THEN 'GRANDE'
+    #   END AS size
+
+Il faut que vous fassiez attention lorsque vous incluez dans des expression
+*case* des données fournies par l'utilisateur, car cela peut créer des
+vulnérabilités aux injections SQL::
+
+    // Non sécurisé. *Ne pas* utiliser
+    $case->when($requestData['published']);
+
+    // Au lieu de cela, passez les données utilisateur en valeurs dans un
+    // tableau de conditions
+    $case->when(['published' => $requestData['published']]);
+
+Pour des scénarios plus complexes, vous pouvez utiliser les objets
+``QueryExpression`` et les valeurs liées::
+
+    $userValue = $query->newExpr()
+        ->case()
+        ->when($query->newExpr('population >= :userData'))
+        ->then(123, 'integer');
+
+    $query->select(['val' => $userValue])
+        ->bind(':userData', $requestData['value'], 'integer');
+
+L'utilisation des valeurs liées permet d'insérer des données utilisateur en
+toute sécurité dans des bouts de code SQL bruts complexes. ``then()``,
+``when()`` et ``else()`` essayeront de deviner le type de valeur en se basant
+sur le type de paramètre. Si vous avez besoin de lier une valeur d'un type
+différent, vous pouvez déclarer le type souhaité::
+
+    $case->when(['published' => true])->then('1', 'integer');
+
+Vous pouvez créer des conditions ``if ... then ... else`` en utilisant
+``else()``::
+
+    $published = $query->newExpr()
+        ->case()
+        ->when(['published' => true])
+        ->then('Y');
+        ->else('N');
+
+    # CASE WHEN published = true THEN 'Y' ELSE 'N' END;
+
+.. versionchanged:: 4.3.0
+    Ajout du builder fluide ``case()``.
+
+Avant 4.3.0, vous deviez utiliser::
+
+    $query = $articles->find();
+    $publishedCase = $query->newExpr()
         ->addCase(
             $query->newExpr()->add(['published' => 'Y']),
             1,

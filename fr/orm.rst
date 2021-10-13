@@ -51,8 +51,7 @@ pour nous::
 
     public function uneMethode()
     {
-        $this->loadModel('Articles');
-        $resultset = $this->Articles->find()->all();
+        $resultset = $this->fetchTable('Articles')->find()->all();
 
         foreach ($resultset as $row) {
             echo $row->title;
