@@ -285,6 +285,7 @@ Database
   ``DriverInterface::FEATURE\_*``
 - Ajout de ``DriverInterface::inTransaction()`` qui reflète le statut renvoyé
   par ``PDO::inTranaction()``.
+- Ajout d'un builder fluide pour les instructions ``CASE, WHEN, THEN``.
 
 Form
 ----
