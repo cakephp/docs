@@ -106,6 +106,7 @@ ORM
   ``setValidator()`` à la place.
 - ``Association::setName()`` est dépréciée. Les noms d'associations doivent être
   définis en même temps que l'association.
+- ``QueryExpression::addCase()`` est dépréciée. Utilisez ``case()`` à la place.
 
 Routing
 -------
