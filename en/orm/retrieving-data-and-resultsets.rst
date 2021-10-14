@@ -612,8 +612,8 @@ finders in your associations, you can use them inside ``contain()``::
 
 You can control more than just the query clauses used by ``contain()``.  If you pass an array
 with the association, you can override the ``foreignKey``, ``joinType`` and ``strategy``.
-See the ref:`associations` for details on the default value and options for each
-association type.
+See :doc:`/orm/associations` for details on the default value and options for each association
+type.
 
 You can pass ``false`` as the new ``foreignKey`` to disable foreign key constraints entirely.
 Use the ``queryBuilder`` option to customize the query when using an array::
@@ -867,8 +867,8 @@ Changing Fetching Strategies
 As mentioned in earlier, you can customize the ``strategy``
 used by an association in a ``contain()``.
 
-If you look at ``BelongsTo`` and ``HasOne`` ref:`associations` options,
-the default 'join' strategy and 'INNER' ``joinType`` can be changed to
+If you look at ``BelongsTo`` and ``HasOne`` :doc:`association </orm/associations>`
+options, the default 'join' strategy and 'INNER' ``joinType`` can be changed to
 'select'::
 
     $query = $articles->find()->contain([
