@@ -285,6 +285,11 @@ You can also create list data from associations that can be reached with joins::
         'keyField' => 'id',
         'valueField' => 'author.name'
     ])->contain(['Authors']);
+    
+.. note::
+    Please note that the provided field names resemble an array path (lowercase, singular) in this case 
+    and are not consistent with the naming conventions in other finder option keys! 
+    Therefore, fieldnames like 'Articles.id' or 'Authors.name' would not work, but 'id' and 'author.name'.
 
 Customize Key-Value Output
 --------------------------
