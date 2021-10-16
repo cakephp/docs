@@ -286,7 +286,7 @@ You can also create list data from associations that can be reached with joins::
         'valueField' => 'author.name'
     ])->contain(['Authors']);
 
-The ``valueField`` expression will operate on entity attribute paths, and not
+The ``valueField`` expression will operate on entity attribute paths not
 the database columns. This means that you can use virtual fields in the results
 of ``find(list)``.
 
