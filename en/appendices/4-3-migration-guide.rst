@@ -241,22 +241,30 @@ Core
 Database
 --------
 
-- Database mapping types can now implement
+* Database mapping types can now implement
   ``Cake\Database\Type\ColumnSchemaAwareInterface`` to specify
   column sql generation and column schema reflection. This allows
   custom types handle non-standard columns.
-- Logged queries now use ``TRUE`` and ``FALSE`` for postgres, sqlite and mysql
+* Logged queries now use ``TRUE`` and ``FALSE`` for postgres, sqlite and mysql
   drivers. This makes it easier to copy queries and run them in an interactive
   prompt.
-- The ``DatetimeType`` can now convert request data from the user's timezone
+* The ``DatetimeType`` can now convert request data from the user's timezone
   to the application timezone. See
   :ref:`converting-request-data-from-user-timezone` for more information.
-- ``JsonType::setEncodingOptions()`` was added. This method lets you define
+* ``JsonType::setEncodingOptions()`` was added. This method lets you define
   ``json_encode()`` options for when the ORM serializes JSON when persisting
   data.
-- Added ``DriverInterface::supports()`` which consolidates all feature checks into one function.
+* Added ``DriverInterface::supports()`` which consolidates all feature checks into one function.
   Drivers can support custom feature namees or any of the ``DriverInterface::FEATURE\_*``
   constants.
+  
+  * ``FEATURE_CTE``
+  * ``FEATURE_DISABLE_CONSTRAINT_WITHOUT_TRANSACTION``
+  * ``FEATURE_JSON``
+  * ``FEATURE_QUOTE``
+  * ``FEATURE_SAVEPOINT``
+  * ``FEATURE_WINDOW``
+  
 - Added ``DriverInterface::inTransaction()`` which reflects the status returned by
   ``PDO::inTranaction()``.
 - A fluent builder for ``CASE, WHEN, THEN`` statements has been added. 
