@@ -255,7 +255,7 @@ Database
   ``json_encode()`` options for when the ORM serializes JSON when persisting
   data.
 * Added ``DriverInterface::supports()`` which consolidates all feature checks into one function.
-  Drivers can support custom feature namees or any of the ``DriverInterface::FEATURE\_*``
+  Drivers can support custom feature namees or any of the feature constants:
   constants.
   
   * ``FEATURE_CTE``
