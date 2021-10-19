@@ -88,6 +88,7 @@ This is the code you need to put inside the **cake** file in the correct locatio
 in order to get autocompletion when using the CakePHP console:
 
 .. code-block:: bash
+
     #
     # Bash completion file for CakePHP console
     #
