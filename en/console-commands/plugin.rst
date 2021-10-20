@@ -6,7 +6,7 @@ Plugin Tool
 The plugin tool allows you to load and unload plugins via the command prompt.
 If you need help, run:
 
-.. code-block:: bash
+.. code-block:: console
 
     bin/cake plugin --help
 
@@ -16,7 +16,7 @@ Loading Plugins
 Via the ``Load`` task you are able to load plugins in your
 **config/bootstrap.php**. You can do this by running:
 
-.. code-block:: bash
+.. code-block:: console
 
     bin/cake plugin load MyPlugin
 
@@ -31,11 +31,11 @@ Unloading Plugins
 
 You can unload a plugin by specifying its name:
 
-.. code-block:: bash
+.. code-block:: console
 
     bin/cake plugin unload MyPlugin
 
-This will remove the line ``$this->addPlugin('MyPlugin',...)`` from 
+This will remove the line ``$this->addPlugin('MyPlugin',...)`` from
 **src/Application.php**.
 
 Plugin Assets
@@ -46,7 +46,7 @@ While this is a good convenience, it is recommended to symlink / copy
 the plugin assets under app's webroot so that they can be directly served by the
 web server without invoking PHP. You can do this by running:
 
-.. code-block:: bash
+.. code-block:: console
 
     bin/cake plugin assets symlink
 
@@ -56,7 +56,7 @@ respective folders instead of being symlinked.
 
 You can symlink assets of one particular plugin by specifying its name:
 
-.. code-block:: bash
+.. code-block:: console
 
     bin/cake plugin assets symlink MyPlugin
 

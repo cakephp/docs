@@ -41,7 +41,7 @@ CakePHP のアプリケーションは、シェルとタスクのすべてが含
 **src/Shell** そして **src/Shell/Task** ディレクトリーが含まれています。
 また、**bin** ディレクトリー内に実行可能なコマンドが付属しています。
 
-.. code-block:: bash
+.. code-block:: console
 
     $ cd /path/to/app
     $ bin/cake
@@ -95,7 +95,7 @@ CakePHP のアプリケーションは、シェルとタスクのすべてが含
 
 あなたは、その名前を使用して記載されているシェルのいずれかを実行できます。
 
-.. code-block:: bash
+.. code-block:: console
 
     # server シェルの実行
     bin/cake server

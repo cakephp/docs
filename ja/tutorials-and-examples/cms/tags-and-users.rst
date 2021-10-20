@@ -8,7 +8,7 @@ Bake は、CakePHP が :abbr:`CRUD (Create, Read, Update, Delete)` アプリケ�
 とても効率的に作成するために、規約を活用した強力なコード生成 :abbr:`CLI (Command Line Interface)`
 ツールです。ユーザーコードを構築するために ``bake`` を使ってみましょう。
 
-.. code-block:: bash
+.. code-block:: console
 
     cd /path/to/our/app
 
@@ -33,7 +33,7 @@ Bake はまた、CakePHP の規約を使用して、モデルが持つ関連付�
 ユーザーがコンテンツに自由形式のカテゴリーやラベルを作成するためにタグを使用します。
 ここでも、アプリケーション用のスケルトンコードを素早く生成するために ``bake`` を使います。
 
-.. code-block:: bash
+.. code-block:: console
 
     # 一度にすべてのコードを生成します。
     bin/cake bake all tags

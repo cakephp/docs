@@ -47,7 +47,7 @@ Installer CakePHP
 
 Avant de commencer, vous devez vous assurer que votre version de PHP est à jour:
 
-.. code-block:: bash
+.. code-block:: console
 
     php -v
 
@@ -84,7 +84,7 @@ Créer un Projet CakePHP
 Vous pouvez créer une nouvelle application CakePHP en utilisant la commande ``create-project``
 de Composer:
 
-.. code-block:: bash
+.. code-block:: console
 
     composer create-project --prefer-dist cakephp/app:~4.0 my_app_name
 
@@ -161,7 +161,7 @@ votre utilisateur du serveur web est différent de l'utilisateur des lignes
 de commande, vous pouvez lancer les commandes suivantes, une seule fois,
 dans votre projet pour vous assurer que les permissions sont bien configurées:
 
-.. code-block:: bash
+.. code-block:: console
 
    HTTPDUSER=`ps aux | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1`
    setfacl -R -m u:${HTTPDUSER}:rwx tmp
@@ -173,7 +173,7 @@ Si vous souhaitez utiliser les outils de la console CakePHP, vous devez vous
 assurer que le fichier ``bin/cake`` est exécutable. Sur
 \*nix ou macOS, vous pouvez simplement exécuter la commande suivante:
 
-.. code-block:: bash
+.. code-block:: console
 
     chmod +x bin/cake
 
@@ -186,7 +186,7 @@ Si, pour une quelconque raison, vous ne pouvez pas changer les permissions du
 fichier ``bin/cake``, vous pouvez lancer la console CakePHP avec la commande
 suivante:
 
-.. code-block:: bash
+.. code-block:: console
 
     php bin/cake.php
 
@@ -198,7 +198,7 @@ CakePHP. Dans cet exemple, nous utiliserons la console de CakePHP pour exécuter
 le serveur web PHP intégré qui va rendre votre application disponible sur
 **http://host:port**. A partir du répertoire de l'application, lancez:
 
-.. code-block:: bash
+.. code-block:: console
 
     bin/cake server
 
@@ -209,7 +209,7 @@ Si vous avez quelque chose qui rentre en conflit avec **localhost** ou le
 port 8765, vous pouvez dire à la console CakePHP de démarrer le serveur web
 sur un hôte et/ou un port spécifique utilisant les arguments suivants:
 
-.. code-block:: bash
+.. code-block:: console
 
     bin/cake server -H 192.168.13.37 -p 5673
 

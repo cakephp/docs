@@ -14,7 +14,7 @@
 
 始める前に、最新の PHP バージョンであることを確認してください。
 
-.. code-block:: bash
+.. code-block:: console
 
     php -v
 
@@ -30,7 +30,7 @@ CakePHP の取得
 まだ準備ができていない場合、最初に Composer のダウンロードとインストールが必要です。
 cURL がインストールされていたら、次のように実行するのが簡単です。
 
-.. code-block:: bash
+.. code-block:: console
 
     curl -s https://getcomposer.org/installer | php
 
@@ -40,7 +40,7 @@ cURL がインストールされていたら、次のように実行するのが
 そして、インストールディレクトリーからターミナルに次の行を入力するだけで、現在の作業ディレクトリーの
 **cms** ディレクトリーに CakePHP アプリケーションのスケルトンをインストールすることができます。
 
-.. code-block:: bash
+.. code-block:: console
 
     php composer.phar create-project --prefer-dist cakephp/app:4.* cms
 
@@ -48,7 +48,7 @@ cURL がインストールされていたら、次のように実行するのが
 をダウンロードして実行した場合、インストールディレクトリー (例えば、 C:\\wamp\\www\\dev\\cakephp3)
 からターミナルに次の行を入力してください。
 
-.. code-block:: bash
+.. code-block:: console
 
     composer self-update && composer create-project --prefer-dist cakephp/app:4.* cms
 
@@ -92,7 +92,7 @@ CakePHP のディレクトリー構造がどのように働くかを学ぶのに
 デフォルトホームページを確認することで、インストールが正しいことをざっと確かめることができます。
 その前に、開発用サーバーを起動する必要があります。
 
-.. code-block:: bash
+.. code-block:: console
 
     cd /path/to/our/app
 

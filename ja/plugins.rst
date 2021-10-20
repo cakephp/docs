@@ -24,7 +24,7 @@ Composer を使ったプラグインのインストール
 `Packagist <http://packagist.org>`_ には多くのプラグインがあり、 ``Composer`` を
 使ってインストールが可能です。DebugKit をインストールには、下記のコマンドを実行します。
 
-.. code-block:: bash
+.. code-block:: console
 
     php composer.phar require cakephp/debug_kit
 
@@ -82,7 +82,7 @@ Composer を使ったプラグインのインストール
 
 そして、 Composer の自動読み込みキャッシュを初期化する必要があります。
 
-.. code-block:: bash
+.. code-block:: console
 
     php composer.phar dumpautoload
 
@@ -117,7 +117,7 @@ Composer を使ったプラグインのインストール
 
 また、プラグインを有効にする便利なシェルコマンドがあります。次の行を実行してください。
 
-.. code-block:: bash
+.. code-block:: console
 
     bin/cake plugin load ContactManager
 
@@ -259,21 +259,21 @@ Bake を使ってプラグインを作成
 
 プラグインを bake するのは以下のコマンドになります。
 
-.. code-block:: bash
+.. code-block:: console
 
     bin/cake bake plugin ContactManager
 
 Bake を使用して、プラグインのクラスを作成できます。
 例えばプラグインのコントローラーを bake するには
 
-.. code-block:: bash
+.. code-block:: console
 
     bin/cake bake controller --plugin ContactManager Contacts
 
 もしコマンドラインで問題があれば、 :doc:`/bake/usage` の章を参照してください。
 また、プラグインを作ったら必ずオートローダーを再作成してください。
 
-.. code-block:: bash
+.. code-block:: console
 
     php composer.phar dumpautoload
 

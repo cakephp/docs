@@ -244,14 +244,14 @@ group コマンドを構築する場合、おそらく、いくつかのパー�
 それぞれのコマンドに ``--help`` と ``-h`` を追加することができます。
 これらのオプションのいずれかを使用すると、生成されたヘルプの内容を見ることができます。
 
-.. code-block:: bash
+.. code-block:: console
 
     bin/cake bake --help
     bin/cake bake -h
 
 このいずれでも bake のヘルプを生成します。ネストされたコマンドのヘルプを表示することもできます。
 
-.. code-block:: bash
+.. code-block:: console
 
     bin/cake bake model --help
     bin/cake bake model -h
@@ -265,7 +265,7 @@ group コマンドを構築する場合、おそらく、いくつかのパー�
 ヘルプを機械がパースできる形式で取得できると便利です。
 ConsoleOptionParser に以下の引数を追加することで、ヘルプを xml で出力できます。
 
-.. code-block:: bash
+.. code-block:: console
 
     cake bake --help xml
     cake bake -h xml

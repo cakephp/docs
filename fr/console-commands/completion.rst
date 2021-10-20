@@ -89,7 +89,9 @@ Contenu du fichier bash d'autocomplétion
 
 Voici le code que vous devez saisir dans le fichier **cake** (préalablement créé
 au bon emplacement pour bénéficier de l'autocomplétion quand vous utilisez la
-console CakePHP::
+console CakePHP:
+
+.. code-block:: bash
 
     #
     # Fichier de completion Bash pour la console CakePHP

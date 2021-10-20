@@ -10,7 +10,7 @@ code qui se base sur les conventions de CakePHP pour créer des applications
 :abbr:`CRUD (Create, Read, Update, Delete)` basique très rapidement. Nous allons
 utiliser ``bake`` pour créer le code relatif à la gestion d'utilisateurs:
 
-.. code-block:: bash
+.. code-block:: console
 
     cd /path/to/our/app
 
@@ -37,7 +37,7 @@ utiliser des tags pour permettre aux utilisateurs d'ajouter des catégories et d
 leurs contenus. Une fois de plus, nous allons utiliser ``bake`` pour générer rapidement un
 code de base:
 
-.. code-block:: bash
+.. code-block:: console
 
     # Génère tout le code d'un coup.
     bin/cake bake all tags
