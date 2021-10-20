@@ -240,10 +240,8 @@ application's tests you can simply run:
 
 .. code-block:: console
 
-    # composer install
-    $ vendor/bin/phpunit
+    vendor/bin/phpunit
 
-    # phar file
     php phpunit.phar
 
 If you have cloned the `CakePHP source from GitHub <https://github.com/cakephp/cakephp>`__
@@ -252,7 +250,7 @@ command prior to running ``phpunit`` so that any dependencies are installed:
 
 .. code-block:: console
 
-    $ composer install
+    composer install
 
 From your application's root directory. To run tests for a plugin that is part
 of your application source, first ``cd`` into the plugin directory, then use
@@ -262,10 +260,8 @@ of your application source, first ``cd`` into the plugin directory, then use
 
     cd plugins
 
-    # Using composer installed phpunit
     ../vendor/bin/phpunit
 
-    # Using phar file
     php ../phpunit.phar
 
 To run tests on a standalone plugin, you should first install the project in

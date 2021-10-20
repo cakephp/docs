@@ -252,10 +252,8 @@ Pour lancer vos tests d'application, vous pouvez simplement lancer:
 
 .. code-block:: console
 
-    # avec l'installation de composer
-    $ vendor/bin/phpunit
+    vendor/bin/phpunit
 
-    # avec le fichier phar
     php phpunit.phar
 
 Si vous avez cloné la `source de CakePHP à partir de GitHub <https://github.com/cakephp/cakephp>`__
@@ -265,7 +263,7 @@ que toutes les dépendances soient installées:
 
 .. code-block:: console
 
-    $ composer install
+    composer install
 
 À partir du répertoire racine de votre application. Pour lancer les tests pour
 un plugin qui fait parti de la source de votre application, d'abord faîtes la
@@ -276,10 +274,8 @@ commande ``cd`` vers le répertoire du plugin, ensuite utilisez la commande
 
     cd plugins
 
-    # En utilisant phpunit installé avec composer
     ../vendor/bin/phpunit
 
-    # En utilisant le fichier phar
     php ../phpunit.phar
 
 Pour lancer les tests sur un plugin séparé, vous devez d'abord installer le
