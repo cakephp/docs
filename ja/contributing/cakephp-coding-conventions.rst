@@ -324,18 +324,16 @@ false を、関数呼び出しが成功したかどうかを判定できるよ�
 
 コメントは以下の `phpDocumentor <http://phpdoc.org>`_ タグを含めることができます。
 
-*  `@author <http://phpdoc.org/docs/latest/references/phpdoc/tags/author.html>`_
-*  `@copyright <http://phpdoc.org/docs/latest/references/phpdoc/tags/copyright.html>`_
-*  `@deprecated <http://phpdoc.org/docs/latest/references/phpdoc/tags/deprecated.html>`_
+*  `@deprecated <https://docs.phpdoc.org/latest/guide/references/phpdoc/tags/deprecated.html>`_
    ``@version <vector> <description>`` 形式を使用して、 ``version`` と ``description``
    は必須です。バージョンは非推奨のバージョンを示します。
-*  `@example <http://phpdoc.org/docs/latest/references/phpdoc/tags/example.html>`_
-*  `@ignore <http://phpdoc.org/docs/latest/references/phpdoc/tags/ignore.html>`_
-*  `@internal <http://phpdoc.org/docs/latest/references/phpdoc/tags/internal.html>`_
-*  `@link <http://phpdoc.org/docs/latest/references/phpdoc/tags/link.html>`_
-*  `@see <http://phpdoc.org/docs/latest/references/phpdoc/tags/see.html>`_
-*  `@since <http://phpdoc.org/docs/latest/references/phpdoc/tags/since.html>`_
-*  `@version <http://phpdoc.org/docs/latest/references/phpdoc/tags/version.html>`_
+*  `@example <https://docs.phpdoc.org/latest/guide/references/phpdoc/tags/example.html>`_
+*  `@ignore <https://docs.phpdoc.org/latest/guide/references/phpdoc/tags/ignore.html>`_
+*  `@internal <https://docs.phpdoc.org/latest/guide/references/phpdoc/tags/internal.html>`_
+*  `@link <https://docs.phpdoc.org/latest/guide/references/phpdoc/tags/link.html>`_
+*  `@see <https://docs.phpdoc.org/latest/guide/references/phpdoc/tags/see.html>`_
+*  `@since <https://docs.phpdoc.org/latest/guide/references/phpdoc/tags/since.html>`_
+*  `@version <https://docs.phpdoc.org/latest/guide/references/phpdoc/tags/version.html>`_
 
 PhpDoc タグは Java の JavaDoc タグによく似ています。
 タグはドキュメントブロックの行の最初のもののみ処理されます。
