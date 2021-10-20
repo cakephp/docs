@@ -39,7 +39,6 @@ code de base:
 
 .. code-block:: console
 
-    # Génère tout le code d'un coup.
     bin/cake bake all tags
 
 Une fois que le code de base est généré, créez quelques tags en vous rendant sur
