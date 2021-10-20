@@ -142,7 +142,7 @@ Ao fazer *pull requests* você deve ter certeza que selecionou o *branch* corret
     sob a licença MIT, e a `Cake Software Foundation <http://cakefoundation.org/pages/about>`_
     será a proprietária de qualquer código proveniente de contribuição. Os
     contribuidores devem seguir as
-    `regras comunitárias do CakePHP <http://community.cakephp.org/guidelines>`_.
+    `regras comunitárias do CakePHP <https://cakephp.org/get-involved>`_.
 
 Todas as correções de *bugs* incorporadas a um *branch* de manutenção serão
 posteriormente mescladas nos lançamentos futuros realizados pelo time do
