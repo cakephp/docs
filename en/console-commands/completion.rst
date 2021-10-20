@@ -153,7 +153,7 @@ Commands
 
 Sample output for commands autocompletion:
 
-.. code-block:: bash
+.. code-block:: console
 
     $ bin/cake <tab>
     bake        i18n        schema_cache   routes
@@ -164,7 +164,7 @@ Subcommands
 
 Sample output for subcommands autocompletion:
 
-.. code-block:: bash
+.. code-block:: console
 
     $ bin/cake bake <tab>
     behavior            helper              shell
@@ -179,7 +179,7 @@ Options
 
 Sample output for subcommands options autocompletion:
 
-.. code-block:: bash
+.. code-block:: console
 
     $ bin/cake bake -<tab>
     -c            --everything  --force       --help        --plugin      -q            -t            -v

@@ -139,7 +139,7 @@ Nous sommes maintenant prêts à ajouter notre couche d'authentification. Dans
 CakePHP, cette couche est gérée par le plugin ``authentication``. Commençons par
 l'installer. Utilisez composer pour l'installation du plugin:
 
-.. code-block:: bash
+.. code-block:: console
 
     composer require "cakephp/authentication:^2.0"
 
@@ -342,7 +342,7 @@ Ajoutez la logique du template pour votre action login::
         </fieldset>
         <?= $this->Form->submit(__('Se Connecter')); ?>
         <?= $this->Form->end() ?>
- 
+
         <?= $this->Html->link("Ajouter un utilisateur", ['action' => 'add']) ?>
     </div>
 
@@ -365,7 +365,7 @@ dans ``AppController``::
         // pour tous les contrôleurs de notre application, rendre les actions
         // index et viex publiques en sautant l'étape d'authentification.
         $this->Authentication->addUnauthenticatedActions(['index', 'view']);
- 
+
 Déconnexion
 ===========
 

@@ -49,7 +49,7 @@ CakePHP のインストール
 
 始める前に、最新の PHP バージョンであることを確認してください。
 
-.. code-block:: bash
+.. code-block:: console
 
     php -v
 
@@ -83,13 +83,13 @@ CakePHP プロジェクトを作成
 以上で、Composer をダウンロードとインストールしましたので、 my_app_name フォルダーに
 CakePHP の新しいアプリケーションを作成してください。下記の composer コマンドを実行して作成します。
 
-.. code-block:: bash
+.. code-block:: console
 
     php composer.phar create-project --prefer-dist cakephp/app:4.* my_app_name
 
 または Composer にパスが通っているのであれば下記のコマンドも使えます。
 
-.. code-block:: bash
+.. code-block:: console
 
     composer self-update && composer create-project --prefer-dist cakephp/app:4.* my_app_name
 
@@ -170,7 +170,7 @@ UNIX システム上で ウェブサーバーユーザーとコマンドライ�
 パーミッションのプロパティー設定を確保するために、あなたのプロジェクトのアプリケーション
 ディレクトリーで一度だけ以下のコマンドを実行してください。
 
-.. code-block:: bash
+.. code-block:: console
 
     HTTPDUSER=`ps aux | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1`
     setfacl -R -m u:${HTTPDUSER}:rwx tmp
@@ -181,7 +181,7 @@ UNIX システム上で ウェブサーバーユーザーとコマンドライ�
 CakePHP コンソールツールを使用するためには、 ``bin/cake`` ファイルが
 実行可能である必要があります。 \*nix または macOS 上では、以下を実行します。
 
-.. code-block:: bash
+.. code-block:: console
 
     chmod +x bin/cake
 
@@ -192,7 +192,7 @@ Windows 上では、 **.bat** ファイルはすでに実行可能なはずで�
 もし、なんらかの理由で、 ``bin/cake`` ファイルのパーミッションを変更できない場合、
 CakePHP コンソールは、以下のように実行できます。
 
-.. code-block:: bash
+.. code-block:: console
 
     php bin/cake.php
 
@@ -204,7 +204,7 @@ CakePHP コンソールは、以下のように実行できます。
 あなたのアプリケーションに **http://host:port** という形式でアクセスできるように
 します。app ディレクトリーで下記のコマンドを実行しましょう。
 
-.. code-block:: bash
+.. code-block:: console
 
     bin/cake server
 
@@ -214,7 +214,7 @@ CakePHP コンソールは、以下のように実行できます。
 もしあなたの環境で **localhost** や 8765番ポートが使用済みなら、CakePHP のコンソールから
 下記のような引数を使って特定のホスト名やポート番号でウェブサーバーを起動することができます。
 
-.. code-block:: bash
+.. code-block:: console
 
     bin/cake server -H 192.168.13.37 -p 5673
 

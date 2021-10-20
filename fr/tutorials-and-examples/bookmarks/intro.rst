@@ -16,7 +16,7 @@ Voici ce dont vous allez avoir besoin:
 
 Avant de commencer, vous devez vous assurer que votre version de PHP est à jour:
 
-.. code-block:: bash
+.. code-block:: console
 
     php -v
 

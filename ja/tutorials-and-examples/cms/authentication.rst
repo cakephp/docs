@@ -11,7 +11,7 @@ CMS にはユーザーがいますので、
 
 composer を使用して認証プラグインをインストール
 
-.. code-block:: bash
+.. code-block:: console
 
     composer require "cakephp/authentication:^2.0"
 
@@ -21,7 +21,7 @@ composer を使用して認証プラグインをインストール
 データベースの ``users`` テーブル用に ``Controller``, ``Table``, ``Entity`` および テンプレートを作成する必要があります。
 ArticlesController と同様に、手動、もしくは bake シェルを使用してこれらのクラスを生成することができます。
 
-.. code-block:: bash
+.. code-block:: console
 
     bin/cake bake all users
 

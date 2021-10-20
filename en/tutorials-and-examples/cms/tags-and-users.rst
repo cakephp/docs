@@ -10,7 +10,7 @@ conventions CakePHP uses to create skeleton :abbr:`CRUD (Create, Read, Update,
 Delete)` applications very efficiently. We're going to use ``bake`` to build our
 users code:
 
-.. code-block:: bash
+.. code-block:: console
 
     cd /path/to/our/app
 
@@ -37,7 +37,7 @@ have a way to categorize our content. We'll use tags and tagging to allow users
 to create free-form categories and labels for their content. Again, we'll use
 ``bake`` to quickly generate some skeleton code for our application:
 
-.. code-block:: bash
+.. code-block:: console
 
     # Generate all the code at once.
     bin/cake bake all tags
@@ -158,13 +158,13 @@ the baked comments removed) should look like::
     <?php
     use Cake\Routing\Route\DashedRoute;
     use Cake\Routing\RouteBuilder;
-    
+
     $routes->setRouteClass(DashedRoute::class);
-    
+
     $routes->scope('/', function (RouteBuilder $builder) {
         $builder->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
         $builder->connect('/pages/*', ['controller' => 'Pages', 'action' => 'display']);
-    
+
         // Add this
         // New route we're adding for our tagged action.
         // The trailing `*` tells CakePHP that this action has
@@ -172,7 +172,7 @@ the baked comments removed) should look like::
         $builder->scope('/articles', function (RouteBuilder $builder) {
             $builder->connect('/tagged/*', ['controller' => 'Articles', 'action' => 'tags']);
         });
-    
+
         $builder->fallbacks();
     });
 
@@ -279,7 +279,7 @@ Creating the View
 
 Now if you visit the **/articles/tagged** URL again, CakePHP will show a new error
 letting you know that you have not made a view file. Next, let's build the
-view file for our ``tags()`` action:: 
+view file for our ``tags()`` action::
 
     <!-- In templates/Articles/tags.php -->
     <h1>

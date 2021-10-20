@@ -23,7 +23,7 @@ A CakePHP application contains **src/Command**, **src/Shell** and
 **src/Shell/Task** directories that contain its shells and tasks. It also
 comes with an executable in the **bin** directory:
 
-.. code-block:: bash
+.. code-block:: console
 
     $ cd /path/to/app
     $ bin/cake
@@ -35,7 +35,7 @@ comes with an executable in the **bin** directory:
 Running the Console with no arguments will list out available commands. You
 could then run the any of the listed commands by using its name:
 
-.. code-block:: bash
+.. code-block:: console
 
     # run server shell
     bin/cake server

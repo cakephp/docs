@@ -12,7 +12,7 @@ Installing Authentication Plugin
 
 Use composer to install the Authentication Plugin:
 
-.. code-block:: bash
+.. code-block:: console
 
     composer require "cakephp/authentication:^2.0"
 
@@ -25,7 +25,7 @@ templates for the ``users`` table in your database. You can do this manually
 like you did before for the ArticlesController, or you can use the bake shell
 to generate the classes for you using:
 
-.. code-block:: bash
+.. code-block:: console
 
     bin/cake bake all users
 

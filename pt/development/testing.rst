@@ -82,7 +82,7 @@ Depois de instalar o PHPUnit e definir a configuração da fonte de dados ``test
 você pode se certificar de que está pronto para escrever e executar seus próprios
 testes executando os testes do aplicativo:
 
-.. code-block:: bash
+.. code-block:: console
 
     # Para phpunit.phar
     $ php phpunit.phar
@@ -95,7 +95,7 @@ teste foi executado. Para executar um teste específico, você pode fornecer o c
 para o teste como um parâmetro para o PHPUnit. Por exemplo, se você tiver um caso de
 teste para a classe ArticlesTable, poderá executá-lo com
 
-.. code-block:: bash
+.. code-block:: console
 
     $ vendor/bin/phpunit tests/TestCase/Model/Table/ArticlesTableTest
 
@@ -228,7 +228,7 @@ a garantir que você não tenha quebrado nada.
 Ao usar o ``phpunit``, você pode executar os testes do aplicativo. Para executar os testes do seu
 aplicativo, você pode simplesmente executar:
 
-.. code-block:: bash
+.. code-block:: console
 
     # instalado pelo Composer
     $ vendor/bin/phpunit
@@ -240,7 +240,7 @@ Se você clonou o código-fonte `CakePHP do GitHub <https://github.com/cakephp/c
 executar os testes de unidade do CakePHP, não se esqueça de executar o seguinte comando ``Composer``
 antes de executar ``phpunit`` para que todas as dependências sejam instaladas:
 
-.. code-block:: bash
+.. code-block:: console
 
     $ composer install
 
@@ -248,7 +248,7 @@ No diretório raiz do seu aplicativo. Para executar testes para um plug-in que f
 aplicativo, primeiro execute ``cd`` para o diretório do plug-in, depois use o comando ``phpunit`` que
 corresponde à maneira como você instalou o phpunit:
 
-.. code-block:: bash
+.. code-block:: console
 
     cd plugins
 
@@ -261,7 +261,7 @@ corresponde à maneira como você instalou o phpunit:
 Para executar testes em um plug-in independente, você deve primeiro instalar o projeto
 em um diretório separado e instalar suas dependências:
 
-.. code-block:: bash
+.. code-block:: console
 
     git clone git://github.com/cakephp/debug_kit.git
     cd debug_kit
@@ -275,7 +275,7 @@ Quando você tem casos de teste maiores, geralmente deseja executar um subconjun
 dos métodos de teste ao tentar trabalhar em um único caso com falha. Com o corredor
 da CLI, você pode usar uma opção para filtrar os métodos de teste:
 
-.. code-block:: bash
+.. code-block:: console
 
     $ phpunit --filter testSave tests/TestCase/Model/Table/ArticlesTableTest
 
@@ -290,7 +290,7 @@ ferramentas internas de cobertura de código do PHPUnit. O PHPUnit irá gerar um
 arquivos HTML estáticos contendo os resultados da cobertura. Você pode gerar cobertura para
 um caso de teste, fazendo o seguinte:
 
-.. code-block:: bash
+.. code-block:: console
 
     $ phpunit --coverage-html webroot/coverage tests/TestCase/Model/Table/ArticlesTableTest
 
@@ -300,7 +300,7 @@ Você deve conseguir visualizar os resultados acessando ``http://localhost/your_
 Se você estiver usando o PHP 5.6.0 ou superior, poderá usar o ``phpdbg`` para gerar cobertura
 em vez do xdebug. O ``phpdbg`` geralmente é mais rápido na geração de cobertura:
 
-.. code-block:: bash
+.. code-block:: console
 
     $ phpdbg -qrr phpunit --coverage-html webroot/coverage tests/TestCase/Model/Table/ArticlesTableTest
 
@@ -1474,7 +1474,7 @@ Um mecanismo é fornecido para gravar/atualizar arquivos de teste, configurando
 a variável de ambiente ``UPDATE_TEST_COMPARISON_FILES``, que criará e/ou atualizará os
 arquivos de comparação de testes à medida que forem referenciados:
 
-.. code-block:: bash
+.. code-block:: console
 
     phpunit
     ...
@@ -1873,7 +1873,7 @@ Se você usar :doc:`bake </bake>` para gerar scaffolding, ele também gerará st
 de teste. Se você precisar gerar novamente esqueletos de casos de teste ou se desejar
 gerar esqueletos de teste para o código que escreveu, poderá usar o ``bake``:
 
-.. code-block:: bash
+.. code-block:: console
 
     bin/cake bake test <type> <name>
 
@@ -1922,7 +1922,7 @@ pois evita vários problemas básicos. Depois de criar um novo banco de dados em
 um servidor de banco de dados que jenkins pode acessar (geralmente localhost).
 Adicione um *shell script* à compilação que contém o seguinte:
 
-.. code-block:: bash
+.. code-block:: console
 
     cat > config/app_local.php <<'CONFIG'
     <?php
@@ -1954,7 +1954,7 @@ compilação também. Isso o isola de falhas encadeadas, onde uma construção q
 faz com que outras falhem. Adicione outra etapa do *shell script* à compilação que
 contém o seguinte:
 
-.. code-block:: bash
+.. code-block:: console
 
     mysql -u jenkins -pcakephp_jenkins -e 'DROP DATABASE IF EXISTS jenkins_test; CREATE DATABASE jenkins_test';
 
@@ -1966,7 +1966,7 @@ suas dependências e execute os testes para seu aplicativo. Criar um arquivo de
 log junit ou cobertura de código geralmente é um bom bônus, pois fornece uma
 boa visualização gráfica dos resultados dos testes:
 
-.. code-block:: bash
+.. code-block:: console
 
     # Faça o download do Composer, se estiver faltando.
     test -f 'composer.phar' || curl -sS https://getcomposer.org/installer | php
