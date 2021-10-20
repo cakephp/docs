@@ -132,7 +132,7 @@ Pull Request を作る際には、ベースとなるブランチが正しく選�
     覚えておいてください。 `Cake Software Foundation
     <http://cakefoundation.org/pages/about>`_ がすべての貢献されたコードの所有者になります。
     貢献する人は `CakePHP Community Guidelines
-    <http://community.cakephp.org/guidelines>`_ に従うようお願いします。
+    <https://cakephp.org/get-involved>`_ に従うようお願いします。
 
 メンテナンス・ブランチへとマージされたすべてのバグ修正は、
 コアチームにより定期的に次期リリースにもマージされます。

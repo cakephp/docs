@@ -148,7 +148,7 @@ le pull request est créée.
     sous Licence MIT, et la
     `Cake Software Foundation <http://cakefoundation.org/pages/about>`_ sera la
     propriétaire de toutes les contributions de code. Les contributeurs doivent
-    suivre les `Guidelines de la Communauté CakePHP <http://community.cakephp.org/guidelines>`_.
+    suivre les `Guidelines de la Communauté CakePHP <https://cakephp.org/get-involved>`_.
 
 Tous les bugs réparés fusionnés sur une branche de maintenance seront aussi
 fusionnés périodiquement à la version publiée par l'équipe centrale (core team).
