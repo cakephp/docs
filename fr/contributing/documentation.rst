@@ -88,7 +88,7 @@ Astuces de traducteurs
 - N'hésitez pas à plonger droit dans votre langue qui existe déjà dans le
   livre.
 - Utilisez une
-  `Forme Informelle <http://en.wikipedia.org/wiki/Register_(linguistics)>`_.
+  `Forme Informelle <https://en.wikipedia.org/wiki/Register#Linguistics>`_.
 - Traduisez à la fois le contenu et le titre en même temps.
 - Comparez au contenu anglais avant de soumettre une correction
   (si vous corrigez quelque chose, mais n'intégrez pas un changement 'en amont',

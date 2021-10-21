@@ -83,7 +83,7 @@ IRC (#cakephp on freenode) で、参加したい旨を連絡してください�
 
 - 翻訳先の言語のページを閲覧・編集してください。そうしなければ、翻訳済みのものは見えません。
 - 選択した言語が book 上にすでに存在しているなら、遠慮無くその先に飛び込んでください。
-- `堅苦しくない文体 <http://en.wikipedia.org/wiki/Register_(linguistics)>`_
+- `堅苦しくない文体 <https://en.wikipedia.org/wiki/Register#Linguistics>`_
   を使ってください。
 - タイトルと内容を同時に翻訳してください。
 - 修正を投稿する前に、英語版との比較を行うようにしてください
