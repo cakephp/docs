@@ -404,11 +404,11 @@ in the database. In those situations use the ``isNew()`` method::
     }
 
 If you are certain that an entity has already been persisted, you can use
-``isNew()`` as a setter::
+``setNew()`` as a setter::
 
-    $article->isNew(false);
+    $article->setNew(false);
 
-    $article->isNew(true);
+    $article->setNew(true);
 
 .. _lazy-load-associations:
 
