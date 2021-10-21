@@ -404,7 +404,7 @@ in the database. In those situations use the ``isNew()`` method::
     }
 
 If you are certain that an entity has already been persisted, you can use
-``setNew()`` as a setter::
+``setNew()``::
 
     $article->setNew(false);
 
