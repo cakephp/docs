@@ -257,7 +257,7 @@ automatically generate rudimentary help information and add a ``--help`` and
 ``-h`` to each of your commands. Using one of these options will allow you to
 see the generated help content:
 
-.. code-block:: bash
+.. code-block:: console
 
     bin/cake bake --help
     bin/cake bake -h
@@ -265,7 +265,7 @@ see the generated help content:
 Would both generate the help for bake. You can also get help for nested
 commands:
 
-.. code-block:: bash
+.. code-block:: console
 
     bin/cake bake model --help
     bin/cake bake model -h
@@ -280,7 +280,7 @@ CakePHP shells, it's nice to have help available in a machine parse-able format.
 By providing the ``xml`` option when requesting help you can have help content
 returned as XML:
 
-.. code-block:: bash
+.. code-block:: console
 
     cake bake --help xml
     cake bake -h xml

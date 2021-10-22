@@ -10,7 +10,7 @@ Installing Authorization Plugin
 
 Use composer to install the Auhorization Plugin:
 
-.. code-block:: bash
+.. code-block:: console
 
     composer require "cakephp/authorization:^2.0"
 
@@ -84,7 +84,7 @@ allowed to **perform an action** on a given **resource**. Our **identity** is
 going to be our logged in user, and our **resources** are our ORM entities and
 queries. Lets use bake to generate a basic policy:
 
-.. code-block:: bash
+.. code-block:: console
 
     bin/cake bake policy --type entity Article
 

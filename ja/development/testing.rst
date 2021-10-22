@@ -19,7 +19,7 @@ Composer による PHPUnit のインストール
 
 Composer で PHPUnit をインストールするには:
 
-.. code-block:: bash
+.. code-block:: console
 
     $ php composer.phar require --dev phpunit/phpunit:"^8.5"
 
@@ -28,7 +28,7 @@ Composer で PHPUnit をインストールするには:
 
 これで、PHPUnit を以下のように実行することができます。
 
-.. code-block:: bash
+.. code-block:: console
 
     $ vendor/bin/phpunit
 
@@ -37,7 +37,7 @@ PHAR ファイルの使用
 
 **phpunit.phar** ファイルをダウンロードすると、テストを実行するために使用することができます。
 
-.. code-block:: bash
+.. code-block:: console
 
     php phpunit.phar
 
@@ -83,7 +83,7 @@ PHAR ファイルの使用
 PHPUnit をインストールして ``test`` データソースを設定した後、 独自のテストを作成し
 実行する準備ができていることを、アプリケーションのテストを実行することにより確認できます。
 
-.. code-block:: bash
+.. code-block:: console
 
     # phpunit.phar について
     $ php phpunit.phar
@@ -95,7 +95,7 @@ PHPUnit をインストールして ``test`` データソースを設定した�
 特定のテストを実行するためには PHPUnit にパラメーターとしてテストのパスを指定します。
 例えば、ArticlesTable クラスのテストケースがある場合、次のように実行します。
 
-.. code-block:: bash
+.. code-block:: console
 
     $ vendor/bin/phpunit tests/TestCase/Model/Table/ArticlesTableTest
 
@@ -225,7 +225,7 @@ PHPUnit をインストールし、テストケースをいくつか書いたら
 ``phpunit`` を使うことで、あなたはアプリケーションのテストを実行できます。
 アプリケーションのテストを実行するには、シンプルに実行することができます。
 
-.. code-block:: bash
+.. code-block:: console
 
     # composer のインストール
     $ vendor/bin/phpunit
@@ -237,7 +237,7 @@ PHPUnit をインストールし、テストケースをいくつか書いたら
 CakePHP のユニットテストを実行したい場合、 ``phpunit`` を実行する前に、すべての依存関係が
 インストールされているように、以下の ``Composer`` コマンドを実行することを忘れないでください。
 
-.. code-block:: bash
+.. code-block:: console
 
     $ composer install
 
@@ -245,7 +245,7 @@ CakePHP のユニットテストを実行したい場合、 ``phpunit`` を実�
 プラグインのテストを実行するには、まず ``cd`` でプラグインディレクトリーに移動し、その後、
 PHPUnit のインストール方法に合わせて ``phpunit`` コマンドを使用してください。
 
-.. code-block:: bash
+.. code-block:: console
 
     cd plugins
 
@@ -258,7 +258,7 @@ PHPUnit のインストール方法に合わせて ``phpunit`` コマンドを�
 スタンドアロンのプラグインのテストを実行するには、最初に別のディレクトリーにプロジェクトを
 インストールして、その依存関係をインストールする必要があります。
 
-.. code-block:: bash
+.. code-block:: console
 
     git clone git://github.com/cakephp/debug_kit.git
     cd debug_kit
@@ -272,7 +272,7 @@ PHPUnit のインストール方法に合わせて ``phpunit`` コマンドを�
 実行したいときがあると思います。コマンドラインからテストメソッドをフィルタリングするときはオプションを
 使用します。
 
-.. code-block:: bash
+.. code-block:: console
 
     $ phpunit --filter testSave tests/TestCase/Model/Table/ArticlesTableTest
 
@@ -286,7 +286,7 @@ PHPUnit のインストール方法に合わせて ``phpunit`` コマンドを�
 生成することができます。PHPUnit はカバレッジの結果を含む静的な HTML ファイルをいくつか生成します。
 テストケースのカバレッジを生成するには以下のようにします。
 
-.. code-block:: bash
+.. code-block:: console
 
     $ phpunit --coverage-html webroot/coverage tests/TestCase/Model/Table/ArticlesTableTest
 
@@ -296,7 +296,7 @@ PHPUnit のインストール方法に合わせて ``phpunit`` コマンドを�
 また、カバレッジを生成するために xdebug の代わりに
 ``phpdbg`` を使用できます。一般的にカバレッジの生成は ``phpdbg`` の方が速いです。
 
-.. code-block:: bash
+.. code-block:: console
 
     $ phpdbg -qrr phpunit --coverage-html webroot/coverage tests/TestCase/Model/Table/ArticlesTableTest
 
@@ -1306,7 +1306,7 @@ CakePHP の組込み JsonView で、 ``debug`` が有効になっている場合
 ``UPDATE_TEST_COMPARISON_FILES`` を設定することで、テストファイルを更新/書き込みするために
 仕組みが提供されています。
 
-.. code-block:: bash
+.. code-block:: console
 
     phpunit
     ...
@@ -1693,7 +1693,7 @@ Bake でのテストの生成
 テストのスタブも生成します。テストケースのスケルトンを再生成する必要がある場合、または、
 あなたが書いたコードのテストスケルトンを生成する場合、 ``bake`` を使用することができます。
 
-.. code-block:: bash
+.. code-block:: console
 
     bin/cake bake test <type> <name>
 
@@ -1740,7 +1740,7 @@ Jenkins のために別のデータベースを用意するのは、初歩的な
 一度 Jenkins がアクセスできる (通常は localhost の) データベースサーバーに新しくデータベースを
 作成しました。以下のような *シェルスクリプトのステップ* をビルドに加えてください。
 
-.. code-block:: bash
+.. code-block:: console
 
     cat > config/app_local.php <<'CONFIG'
     <?php
@@ -1770,7 +1770,7 @@ Jenkins のために別のデータベースを用意するのは、初歩的な
 一度のビルドの失敗によって、立て続けに起きるであろう失敗の連鎖を断ち切ってくれるはずです。
 以下のような *シェルスクリプトのステップ* をビルドに加えてください。
 
-.. code-block:: bash
+.. code-block:: console
 
     mysql -u jenkins -pcakephp_jenkins -e 'DROP DATABASE IF EXISTS jenkins_test; CREATE DATABASE jenkins_test';
 
@@ -1781,7 +1781,7 @@ Jenkins のために別のデータベースを用意するのは、初歩的な
 アプリケーションのテストを実行します。JUnit のログファイルや Clover カバレッジを作成することにより、
 テストの結果を視覚的に確認できるようになります。
 
-.. code-block:: bash
+.. code-block:: console
 
     # もしなければ、Composer をダウンロード
     test -f 'composer.phar' || curl -sS https://getcomposer.org/installer | php

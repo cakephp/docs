@@ -34,7 +34,7 @@ Command classes must implement an ``execute()`` method that does the bulk of
 their work. This method is called when a command is invoked. Lets call our first
 command application directory, run:
 
-.. code-block:: bash
+.. code-block:: console
 
     bin/cake hello
 
@@ -73,7 +73,7 @@ command line::
 
 After saving this file, you should be able to run the following command:
 
-.. code-block:: bash
+.. code-block:: console
 
     bin/cake hello jillian
 

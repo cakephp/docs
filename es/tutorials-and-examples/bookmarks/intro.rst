@@ -12,7 +12,7 @@ Esto es lo que necesitarás:
 
 Antes de empezar deberías de asegurarte de que tienes actualizada la versión de PHP:
 
-.. code-block:: bash
+.. code-block:: console
 
     php -v
 

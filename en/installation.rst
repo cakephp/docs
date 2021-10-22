@@ -47,7 +47,7 @@ Installing CakePHP
 
 Before starting you should make sure that your PHP version is up to date:
 
-.. code-block:: bash
+.. code-block:: console
 
     php -v
 
@@ -84,7 +84,7 @@ Create a CakePHP Project
 You can create a new CakePHP application using composer's ``create-project``
 command:
 
-.. code-block:: bash
+.. code-block:: console
 
     composer create-project --prefer-dist cakephp/app:~4.0 my_app_name
 
@@ -151,7 +151,7 @@ system, if your web server user is different from your command line user, you
 can run the following commands from your application directory just once in your
 project to ensure that permissions will be setup properly:
 
-.. code-block:: bash
+.. code-block:: console
 
     HTTPDUSER=`ps aux | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1`
     setfacl -R -m u:${HTTPDUSER}:rwx tmp
@@ -163,7 +163,7 @@ In order to use the CakePHP console tools, you need to ensure that
 ``bin/cake`` file is executable. On \*nix or macOS, you can
 execute:
 
-.. code-block:: bash
+.. code-block:: console
 
     chmod +x bin/cake
 
@@ -175,7 +175,7 @@ environment's documentation on how to do this).
 If, for whatever reason, you cannot change the permissions of the ``bin/cake``
 file, you can run the CakePHP console with:
 
-.. code-block:: bash
+.. code-block:: console
 
     php bin/cake.php
 
@@ -187,7 +187,7 @@ example, we use CakePHP's console to run PHP's built-in web server which
 will make your application available at **http://host:port**. From the app
 directory, execute:
 
-.. code-block:: bash
+.. code-block:: console
 
     bin/cake server
 
@@ -198,7 +198,7 @@ If there is conflict with **localhost** or port 8765, you can tell
 the CakePHP console to run the web server on a specific host and/or port
 utilizing the following arguments:
 
-.. code-block:: bash
+.. code-block:: console
 
     bin/cake server -H 192.168.13.37 -p 5673
 
@@ -558,8 +558,8 @@ these steps:
 
 #. Use `Microsoft's Web Platform Installer <http://www.microsoft.com/web/downloads/platform.aspx>`_
    to install the URL `Rewrite Module 2.0 <http://www.iis.net/downloads/microsoft/url-rewrite>`_
-   or download it directly (`32-bit <http://www.microsoft.com/en-us/download/details.aspx?id=5747>`_ /
-   `64-bit <http://www.microsoft.com/en-us/download/details.aspx?id=7435>`_).
+   or download it directly (`32-bit <https://download.microsoft.com/download/D/8/1/D81E5DD6-1ABB-46B0-9B4B-21894E18B77F/rewrite_x86_en-US.msi>`_ /
+   `64-bit <https://download.microsoft.com/download/1/2/8/128E2E22-C1B9-44A4-BE2A-5859ED1D4592/rewrite_amd64_en-US.msi>`_).
 #. Create a new file called web.config in your CakePHP root folder.
 #. Using Notepad or any XML-safe editor, copy the following
    code into your new web.config file:

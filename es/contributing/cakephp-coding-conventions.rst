@@ -306,18 +306,16 @@ el bloque de código comentado.
 Los comentarios pueden incluir las siguientes etiquetas de
 `phpDocumentor <http://phpdoc.org>`_:
 
-*  `@author <http://phpdoc.org/docs/latest/references/phpdoc/tags/author.html>`_
-*  `@copyright <http://phpdoc.org/docs/latest/references/phpdoc/tags/copyright.html>`_
-*  `@deprecated <http://phpdoc.org/docs/latest/references/phpdoc/tags/deprecated.html>`_
+*  `@deprecated <https://docs.phpdoc.org/latest/guide/references/phpdoc/tags/deprecated.html>`_
    Usando el formato ``@version <vector> <description>``, donde ``version``
    y ``description`` son obligatorios.
-*  `@example <http://phpdoc.org/docs/latest/references/phpdoc/tags/example.html>`_
-*  `@ignore <http://phpdoc.org/docs/latest/references/phpdoc/tags/ignore.html>`_
-*  `@internal <http://phpdoc.org/docs/latest/references/phpdoc/tags/internal.html>`_
-*  `@link <http://phpdoc.org/docs/latest/references/phpdoc/tags/link.html>`_
-*  `@see <http://phpdoc.org/docs/latest/references/phpdoc/tags/see.html>`_
-*  `@since <http://phpdoc.org/docs/latest/references/phpdoc/tags/since.html>`_
-*  `@version <http://phpdoc.org/docs/latest/references/phpdoc/tags/version.html>`_
+*  `@example <https://docs.phpdoc.org/latest/guide/references/phpdoc/tags/example.html>`_
+*  `@ignore <https://docs.phpdoc.org/latest/guide/references/phpdoc/tags/ignore.html>`_
+*  `@internal <https://docs.phpdoc.org/latest/guide/references/phpdoc/tags/internal.html>`_
+*  `@link <https://docs.phpdoc.org/latest/guide/references/phpdoc/tags/link.html>`_
+*  `@see <https://docs.phpdoc.org/latest/guide/references/phpdoc/tags/see.html>`_
+*  `@since <https://docs.phpdoc.org/latest/guide/references/phpdoc/tags/since.html>`_
+*  `@version <https://docs.phpdoc.org/latest/guide/references/phpdoc/tags/version.html>`_
 
 Las etiquetas PhpDoc son muy similares a las etiquetas JavaDoc en Java. Las etiquetas
 solo son procesadas si son el primer elemento en una línea DocBlock, por ejemplo::

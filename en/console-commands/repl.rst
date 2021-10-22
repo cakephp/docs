@@ -5,7 +5,7 @@ The CakePHP app skeleton comes with a built in REPL(Read Eval Print Loop) to let
 you explore some CakePHP and your application in an interactive console. You can
 start the interactive console using:
 
-.. code-block:: bash
+.. code-block:: console
 
     bin/cake console
 
@@ -13,7 +13,7 @@ This will bootstrap your application and start an interactive console. At this
 point you can interact with your application code and execute queries using your
 application's models:
 
-.. code-block:: bash
+.. code-block:: console
 
     bin/cake console
 

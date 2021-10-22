@@ -135,7 +135,7 @@ branch, as you cannot edit it once the pull request is created.
     MIT License, and the `Cake Software Foundation
     <http://cakefoundation.org/pages/about>`_ will become the owner of any
     contributed code. Contributors should follow the `CakePHP Community
-    Guidelines <http://community.cakephp.org/guidelines>`_.
+    Guidelines <https://cakephp.org/get-involved>`_.
 
 All bug fixes merged into a maintenance branch will also be merged into upcoming
 releases periodically by the core team.

@@ -29,7 +29,7 @@ CakePHP 4 は、 strict モードを採用し、多くのタイプヒントを�
     に実行することを目的としています。アプリケーションの依存関係がすでに 4.x または PHPUnit8
     に更新されている場合、 rector ベースのタスクは正しく実行されません。
 
-.. code-block:: bash
+.. code-block:: console
 
     # アップグレードツールをインストール
     git clone git://github.com/cakephp/upgrade
@@ -39,7 +39,7 @@ CakePHP 4 は、 strict モードを採用し、多くのタイプヒントを�
 
 アップグレードツールをインストールすると、アプリケーションまたはプラグインで実行できるようになります。
 
-.. code-block:: bash
+.. code-block:: console
 
     # ロケールファイルの名前を変更する
     bin/cake upgrade file_rename locales <path/to/app>
@@ -64,7 +64,7 @@ CakePHP の依存関係をアップデートする
 
  ``rector`` によるリファクタリングを適用した後、下記の composer コマンドを使用して CakePHP と PHPUnit をアップデートします。
 
-.. code-block:: bash
+.. code-block:: console
 
     php composer.phar require --update-with-dependencies "phpunit/phpunit:^8.0"
     php composer.phar require --update-with-dependencies "cakephp/cakephp:4.0.*"

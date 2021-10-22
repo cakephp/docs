@@ -49,7 +49,7 @@ CakePHP のインストール
 
 始める前に、最新の PHP バージョンであることを確認してください。
 
-.. code-block:: bash
+.. code-block:: console
 
     php -v
 
@@ -83,13 +83,13 @@ CakePHP プロジェクトを作成
 以上で、Composer をダウンロードとインストールしましたので、 my_app_name フォルダーに
 CakePHP の新しいアプリケーションを作成してください。下記の composer コマンドを実行して作成します。
 
-.. code-block:: bash
+.. code-block:: console
 
     php composer.phar create-project --prefer-dist cakephp/app:4.* my_app_name
 
 または Composer にパスが通っているのであれば下記のコマンドも使えます。
 
-.. code-block:: bash
+.. code-block:: console
 
     composer self-update && composer create-project --prefer-dist cakephp/app:4.* my_app_name
 
@@ -170,7 +170,7 @@ UNIX システム上で ウェブサーバーユーザーとコマンドライ�
 パーミッションのプロパティー設定を確保するために、あなたのプロジェクトのアプリケーション
 ディレクトリーで一度だけ以下のコマンドを実行してください。
 
-.. code-block:: bash
+.. code-block:: console
 
     HTTPDUSER=`ps aux | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1`
     setfacl -R -m u:${HTTPDUSER}:rwx tmp
@@ -181,7 +181,7 @@ UNIX システム上で ウェブサーバーユーザーとコマンドライ�
 CakePHP コンソールツールを使用するためには、 ``bin/cake`` ファイルが
 実行可能である必要があります。 \*nix または macOS 上では、以下を実行します。
 
-.. code-block:: bash
+.. code-block:: console
 
     chmod +x bin/cake
 
@@ -192,7 +192,7 @@ Windows 上では、 **.bat** ファイルはすでに実行可能なはずで�
 もし、なんらかの理由で、 ``bin/cake`` ファイルのパーミッションを変更できない場合、
 CakePHP コンソールは、以下のように実行できます。
 
-.. code-block:: bash
+.. code-block:: console
 
     php bin/cake.php
 
@@ -204,7 +204,7 @@ CakePHP コンソールは、以下のように実行できます。
 あなたのアプリケーションに **http://host:port** という形式でアクセスできるように
 します。app ディレクトリーで下記のコマンドを実行しましょう。
 
-.. code-block:: bash
+.. code-block:: console
 
     bin/cake server
 
@@ -214,7 +214,7 @@ CakePHP コンソールは、以下のように実行できます。
 もしあなたの環境で **localhost** や 8765番ポートが使用済みなら、CakePHP のコンソールから
 下記のような引数を使って特定のホスト名やポート番号でウェブサーバーを起動することができます。
 
-.. code-block:: bash
+.. code-block:: console
 
     bin/cake server -H 192.168.13.37 -p 5673
 
@@ -504,8 +504,8 @@ IIS に htaccess のルールをインポートすることもできます。
 
 #. URL `Rewrite Module 2.0 <http://www.iis.net/downloads/microsoft/url-rewrite>`_
    をインストールするために、`Microsoftの Web Platform Installer <http://www.microsoft.com/web/downloads/platform.aspx>`_
-   を使うか、直接ダウンロードします。(`32ビット <http://www.microsoft.com/en-us/download/details.aspx?id=5747>`_ /
-   `64ビット <http://www.microsoft.com/en-us/download/details.aspx?id=7435>`_)
+   を使うか、直接ダウンロードします。(`32ビット <https://download.microsoft.com/download/D/8/1/D81E5DD6-1ABB-46B0-9B4B-21894E18B77F/rewrite_x86_en-US.msi>`_ /
+   `64ビット <https://download.microsoft.com/download/1/2/8/128E2E22-C1B9-44A4-BE2A-5859ED1D4592/rewrite_amd64_en-US.msi>`_)
 #. CakePHP のルートフォルダーに web.config という名前の新しいファイルを作成してください。
 #. メモ帳か XML が編集可能なエディターを使って、以下のコードを今作った web.config ファイルに
    コピーしてください。

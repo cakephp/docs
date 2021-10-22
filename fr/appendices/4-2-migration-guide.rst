@@ -93,6 +93,8 @@ Database
 
 - Le ``TimeType`` sérialisera désormais correctement les valeurs dans le format
   ``H:i``. Auparavant ces valeurs étaient castées en ``null`` après validation.
+- Le pilote ``Sqlserver`` réessayera de se connecter après une erreur
+  "Azure Sql Database paused".
 
 Error
 -----

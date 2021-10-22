@@ -17,7 +17,7 @@ Here's what you'll need:
 Before starting you should make sure that you have got an up to date PHP
 version:
 
-.. code-block:: bash
+.. code-block:: console
 
     php -v
 
@@ -395,7 +395,7 @@ method has not been implemented yet, so let's do that. In
      * to find('tagged') in our controller action
      * @param \Cake\ORM\Query $query
      * @param array $options
-     * @return \Cake\ORM\Query 
+     * @return \Cake\ORM\Query
      *  -Modified query object.
      */
     public function findTagged(Query $query, array $options)

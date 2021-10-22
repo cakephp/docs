@@ -46,7 +46,7 @@ il existe un outil CLI de mise à niveau:
     ne fonctionneront pas correctement si votre application a déjà ses dépendances mises à jour
     vers 4.x ou PHPUnit8.
 
-.. code-block:: bash
+.. code-block:: console
 
     # Installe l'outil d'upgrade
     git clone git://github.com/cakephp/upgrade
@@ -58,7 +58,7 @@ il existe un outil CLI de mise à niveau:
 Une fois l'outil de mise à niveau installé, vous pouvez maintenant l'exécuter sur votre application
 ou votre plugin:
 
-.. code-block:: bash
+.. code-block:: console
 
     # Renomme les fichiers locaux
     bin/cake upgrade file_rename locales <path/to/app>
@@ -92,7 +92,7 @@ Mettez à jour la dépendance de CakePHP
 Après avoir appliqué les refactorisations de rector, mettez à niveau CakePHP et PHPUnit en utilisant
 les commandes suivantes de composer:
 
-.. code-block:: bash
+.. code-block:: console
 
     php composer.phar require --dev --update-with-dependencies "phpunit/phpunit:^8.0"
     php composer.phar require --update-with-dependencies "cakephp/cakephp:4.0.*"

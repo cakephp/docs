@@ -85,7 +85,9 @@ Bash Completion file content
 ----------------------------
 
 This is the code you need to put inside the **cake** file in the correct location
-in order to get autocompletion when using the CakePHP console::
+in order to get autocompletion when using the CakePHP console:
+
+.. code-block:: bash
 
     #
     # Bash completion file for CakePHP console
@@ -149,7 +151,9 @@ Three type of autocompletion are provided. The following output are from a fresh
 Commands
 --------
 
-Sample output for commands autocompletion::
+Sample output for commands autocompletion:
+
+.. code-block:: console
 
     $ bin/cake <tab>
     bake        i18n        schema_cache   routes
@@ -158,7 +162,9 @@ Sample output for commands autocompletion::
 Subcommands
 -----------
 
-Sample output for subcommands autocompletion::
+Sample output for subcommands autocompletion:
+
+.. code-block:: console
 
     $ bin/cake bake <tab>
     behavior            helper              shell
@@ -171,7 +177,9 @@ Sample output for subcommands autocompletion::
 Options
 -------
 
-Sample output for subcommands options autocompletion::
+Sample output for subcommands options autocompletion:
+
+.. code-block:: console
 
     $ bin/cake bake -<tab>
     -c            --everything  --force       --help        --plugin      -q            -t            -v
