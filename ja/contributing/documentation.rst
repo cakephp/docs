@@ -268,7 +268,7 @@ Sphinx は toc-tree 内に参照されないファイルがあると警告を出
 --------------------------
 
 CakePHP のドキュメントは `phpdomain
-<http://pypi.python.org/pypi/sphinxcontrib-phpdomain>`_
+<https://pypi.org/project/sphinxcontrib-phpdomain/>`_
 を用いて PHP のオブジェクトと構成物を記述するための独自のディレクティブを提供します。
 適切な索引 (*index*) と相互参照機能を与えるためにこのディレクティブとロールの利用は欠かせません。
 
