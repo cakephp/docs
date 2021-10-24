@@ -13,6 +13,8 @@ introduced in each version and the migration path between versions.
     appendices/4-0-migration-guide
     appendices/4-1-migration-guide
     appendices/4-2-migration-guide
+    appendices/4-3-migration-guide
+    appendices/fixture-upgrade
 
 Backwards Compatibility Shimming
 ================================

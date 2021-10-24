@@ -260,7 +260,7 @@ mask
     Définit les droits sur le fichier de base de données généré (seulement supporté
     par SQLite)
 
-Au point où nous sommes, vous pouvez aller voir 
+Au point où nous sommes, vous pouvez aller voir
 :doc:`/intro/conventions`. Le nommage correct de vos tables (et de quelques
 colonnes) peut vous offrir des fonctionnalités utiles sans
 aucun effort et vous éviter d'avoir à faire de la configuration. Par
@@ -525,21 +525,33 @@ type JSON, nous pourrions créer la classe de type suivante::
 
     }
 
-Par défaut, la méthode ``toStatement`` va traiter les valeurs comme des chaînes qui
-vont fonctionner pour notre nouveau type. Une fois que nous avons créé notre
-nouveau type, nous avons besoin de l'ajouter dans la correspondance de types.
+Par défaut, la méthode ``toStatement`` va traiter les valeurs en chaines qui
+vont fonctionner pour notre nouveau type.
+
+Connecter des Types Personnalisés à la Reflection et Génération de Schéma
+-------------------------------------------------------------------------
+
+Une fois que nous avons créé notre
+nouveau type, nous avons besoin de l'ajouter dans la correspondance de type.
 Pendant le bootstrap de notre application, nous devrions faire ce qui suit::
 
     use Cake\Database\TypeFactory;
 
     TypeFactory::map('json', 'App\Database\Type\JsonType');
 
-Nous pouvons ensuite surcharger les données réflexives du schema pour utiliser
-notre nouveau type, et la couche de base de données de CakePHP va
-automatiquement convertir nos données JSON lors de la création de requêtes.
-Vous pouvez utiliser les types personnalisés que vous avez créés en définissant
-des correspondances dans la
-:ref:`méthode _initializeSchema() <saving-complex-types>` de votre Table::
+Nous avons ensuite deux façons d'utiliser notre type dans nos modèles.
+
+#. La première façon est d'écraser les données de schéma reflected pour utiliser
+   notre nouveau type.
+#. La deuxième est d'implémenter
+   ``Cake\Database\Type\ColumnSchemaAwareInterface`` et de définir le type de
+   colonne SQL et la logique de reflection.
+
+Écraser le schéma reflected avec notre type personnalisé va activer dans la
+couche de base de données de CakePHP la conversion automatique de nos données
+JSON lors de la création de requêtes.
+Dans votre :ref:`méthode _initializeSchema() <saving-complex-types>` de
+votre Table, ajoutez ceci::
 
     use Cake\Database\Schema\TableSchemaInterface;
 
@@ -552,6 +564,74 @@ des correspondances dans la
         }
 
     }
+
+Le fait d'implémenter ``ColumnSchemaAwareInterface`` vous donne plus de contrôle
+sur les types personnalisés Cela évite de réécrire les définitions de schéma si
+votre type a une définition de colonne SQL ambiguë. Par exemple, notre type JSON
+pourrait être utilisé pour chaque colonne ``TEXT`` ayant un commentaire
+spécifique::
+
+    // dans src/Database/Type/JsonType.php
+
+    namespace App\Database\Type;
+
+    use Cake\Database\DriverInterface;
+    use Cake\Database\Type\BaseType;
+    use Cake\Database\Type\ColumnSchemaAwareInterface;
+    use Cake\Database\Schema\TableSchemaInterface;
+    use PDO;
+
+    class JsonType extends BaseType
+        implements ColumnSchemaAwareInterface
+    {
+        // les autres méthodes d'avant
+
+        /**
+         * Convertit la définition de schéma abstrait en un code SQL spécifique
+         * au pilote pouvant être utilisé dans une instruction CREATE TABLE.
+         *
+         * Returner null va faire retomber vers les types intégrés à CakePHP.
+         */
+        public function getColumnSql(
+            TableSchemaInterface $schema,
+            string $column,
+            DriverInterface $driver
+        ): ?string {
+            $data = $schema->getColumn($column);
+            $sql = $driver->quoteIdentifier($column);
+            $sql .= ' JSON';
+            if (isset($data['null') && $data['null'] === false) {
+                $sql .= ' NOT NULL';
+            }
+            return $sql;
+        }
+
+        /**
+         * Convertit les données de la colonnes renvoyées par la reflection du
+         * schéma en données abstraites de schéma.
+         *
+         * Returner null va faire retomber vers les types intégrés à CakePHP.
+         */
+        public function convertColumnDefinition(
+            array $definition,
+            DriverInterface $driver
+        ): ?array {
+            return [
+                'type' => $this->_name,
+                'length' => null,
+            ];
+        }
+
+La donnée ``$definition`` passée à ``convertColumnDefinition()`` contiendra les
+clés suivantes. Toutes les clés existeront mais seront susceptibles de contenir
+``null`` si la clé n'a pas de valeur pour le pilote de base de données actuel:
+
+- ``length`` La longueur d'une colonne, si disponible.
+- ``precision`` La précision d'une colonne, si disponible.
+- ``scale`` Peut être inclus pour les connexions SQLServer.
+
+.. versionadded:: 4.3.0
+    ``ColumnSchemaAwareInterface`` a été ajouté.
 
 .. _mapping-custom-datatypes-to-sql-expressions:
 

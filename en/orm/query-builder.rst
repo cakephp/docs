@@ -156,9 +156,8 @@ Queries Are Collection Objects
 
 Once you get familiar with the Query object methods, it is strongly encouraged
 that you visit the :doc:`Collection </core-libraries/collections>` section to
-improve your skills in efficiently traversing the data. In short, it is
-important to remember that anything you can call on a Collection object, you
-can also do in a Query object::
+improve your skills in efficiently traversing the results. Query results
+implement the collection interface::
 
     // Use the combine() method from the collections library
     // This is equivalent to find('list')
@@ -168,11 +167,11 @@ can also do in a Query object::
     $results = $articles->find()
         ->where(['id >' => 1])
         ->order(['title' => 'DESC'])
-        ->map(function ($row) { // map() is a collection method, it executes the query
+        ->all()
+        ->map(function ($row) {
             $row->trimmedTitle = trim($row->title);
             return $row;
         })
-        ->all()
         ->combine('id', 'trimmedTitle') // combine() is another collection method
         ->toArray(); // Also a collections library method
 
@@ -186,7 +185,7 @@ Queries Are Lazily Evaluated
 Query objects are lazily evaluated. This means a query is not executed until one
 of the following things occur:
 
-- The query is iterated with ``foreach()``.
+- The query is iterated with ``foreach``.
 - The query's ``execute()`` method is called. This will return the underlying
   statement object, and is to be used with insert/update/delete queries.
 - The query's ``first()`` method is called. This will return the first result in the set
@@ -505,6 +504,94 @@ If we wished to know how many published articles are in our database, we could u
     FROM articles
 
 To do this with the query builder, we'd use the following code::
+
+    $query = $articles->find();
+    $publishedCase = $query->newExpr()
+        ->case()
+        ->when(['published' => 'Y'])
+        ->then(1);
+    $unpublishedCase = $query->newExpr()
+        ->case()
+        ->when(['published' => 'N'])
+        ->then(1);
+
+    $query->select([
+        'number_published' => $query->func()->count($publishedCase),
+        'number_unpublished' => $query->func()->count($unpublishedCase)
+    ]);
+
+The ``when()`` method accepts SQL snippets, array conditions, and ``Closure``
+for when you need additional logic to build the cases. If we wanted to classify
+cities into SMALL, MEDIUM, or LARGE based on population size, we could do the
+following::
+
+    $query = $cities->find();
+    $sizing = $query->newExpr()->case()
+        ->when(['population <' => 100000])
+        ->then('SMALL')
+        ->when($q->between('population', 100000, 999000))
+        ->then('MEDIUM')
+        ->when(['population >=' => 999001])
+        ->then('LARGE');
+    $query = $query->select(['size' => $sizing]);
+    # SELECT CASE
+    #   WHEN population < 100000 THEN 'SMALL'
+    #   WHEN population BETWEEN 100000 AND 999000 THEN 'MEDIUM'
+    #   WHEN population >= 999001 THEN 'LARGE'
+    #   END AS size
+
+You need to be careful when including user provided data into case expressions
+as it can create SQL injection vulnerabilities::
+
+    // Unsafe do *not* use
+    $case->when($requestData['published']);
+
+    // Instead pass user data as values to array conditions
+    $case->when(['published' => $requestData['published']]);
+
+For more complex scenarios you can use ``QueryExpression`` objects and bound
+values::
+
+    $userValue = $query->newExpr()
+        ->case()
+        ->when($query->newExpr('population >= :userData'))
+        ->then(123, 'integer');
+
+    $query->select(['val' => $userValue])
+        ->bind(':userData', $requestData['value'], 'integer');
+
+By using bindings you can safely embed user data into complex raw SQL snippets.
+
+``then()``, ``when()`` and ``else()`` will try to infer the
+value type based on the parameter type. If you need to bind a value as
+a different type you can declare the desired type::
+
+    $case->when(['published' => true])->then('1', 'integer');
+
+You can create ``if ... then ... else`` conditions by using ``else()``::
+
+    $published = $query->newExpr()
+        ->case()
+        ->when(['published' => true])
+        ->then('Y');
+        ->else('N');
+
+    # CASE WHEN published = true THEN 'Y' ELSE 'N' END;
+
+Also, it's possible to create the simple variant by passing a value to ``case()``::
+
+    $published = $query->newExpr()
+        ->case($query->identifier('published'))
+        ->when(true)
+        ->then('Y');
+        ->else('N');
+
+    # CASE published WHEN true THEN 'Y' ELSE 'N' END;
+
+.. versionchanged:: 4.3.0
+    The fluent ``case()`` builder method was added.
+
+Prior to 4.3.0, you would need to use::
 
     $query = $articles->find();
     $publishedCase = $query->newExpr()

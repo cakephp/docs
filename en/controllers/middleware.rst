@@ -61,8 +61,8 @@ CakePHP provides several middleware to handle common tasks in web applications:
 Using Middleware
 ================
 
-Middleware can be applied to your application globally, or to individual
-routing scopes.
+Middleware can be applied to your application globally, to individual
+routing scopes, or to specific controllers.
 
 To apply middleware to all requests, use the ``middleware`` method of your
 ``App\Application`` class. Your application's ``middleware`` hook method will be
@@ -116,9 +116,10 @@ a variety of operations::
             $layer
         );
 
-In addition to applying middleware to your entire application, you can apply
-middleware to specific sets of routes using
-:ref:`Scoped Middleware <connecting-scoped-middleware>`.
+
+If your middleware is only applicable to a subset of routes or individual
+controllers you can use :ref:`Route scoped middleware <route-scoped-middleware>`, 
+or :ref:`Controller middleware <controller-middleware>`.
 
 Adding Middleware from Plugins
 ------------------------------
@@ -296,6 +297,25 @@ You can then configure the middleware using an array, or passing in a built
     ]);
 
     $middlewareQueue->add($csp);
+
+If you want to use a more strict CSP configuration, you can enable nonce based
+CSP rules with the ``scriptNonce`` and ``styleNonce`` options. When enabled
+these options will modify your CSP policy and set the  ``cspScriptNonce`` and
+``cspStyleNonce`` attributes in the request. These attributes are applied to
+the ``nonce`` attribute of all script and CSS link elements created by
+``HtmlHelper``. This simplifies the adoption of policies that use
+a `nonce-base64
+<https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src>`__
+and ``strict-dynamic`` for increased security and easier maintenance::
+
+    $middlewareQueue->add($csp, [
+        'scriptNonce' => true,
+        'styleNonce' => true,
+    ]);
+
+.. versionadded:: 4.3.0
+    Automatic nonce population was added.
+
 
 .. _encrypted-cookie-middleware:
 

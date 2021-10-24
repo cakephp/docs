@@ -478,17 +478,28 @@ class::
     }
 
 By default the ``toStatement()`` method will treat values as strings which will
-work for our new type. Once we've created our new type, we need to add it into
+work for our new type.
+
+Connecting Custom Datatypes to Schema Reflection and Generation
+---------------------------------------------------------------
+
+Once we've created our new type, we need to add it into
 the type mapping. During our application bootstrap we should do the following::
 
     use Cake\Database\TypeFactory;
 
     TypeFactory::map('json', 'App\Database\Type\JsonType');
 
-We can then overload the reflected schema data to use our new type, and
-CakePHP's database layer will automatically convert our JSON data when creating
-queries. You can use the custom types you've created by mapping the types in
-your Table's :ref:`_initializeSchema() method <saving-complex-types>`::
+We then have two ways to use our datatype in our models. 
+
+#. The first path is to overwrite the reflected schema data to use our new type.
+#. The second is to implement ``Cake\Database\Type\ColumnSchemaAwareInterface``
+   and define the SQL column type and reflection logic.
+
+Overwriting the reflected schema with our custom type will enable CakePHP's
+database layer to automatically convert JSON data when creating queries. In your
+Table's :ref:`_initializeSchema() method <saving-complex-types>` add the
+following::
 
     use Cake\Database\Schema\TableSchemaInterface;
 
@@ -500,6 +511,74 @@ your Table's :ref:`_initializeSchema() method <saving-complex-types>`::
             return $schema;
         }
     }
+
+Implementing ``ColumnSchemaAwareInterface`` gives you more control over
+custom datatypes.  This avoids overwriting schema definitions if your
+datatype has an unambiguous SQL column definition. For example, we could have
+our JSON type be used anytime a ``TEXT`` column with a specific comment is
+used::
+
+    // in src/Database/Type/JsonType.php
+
+    namespace App\Database\Type;
+
+    use Cake\Database\DriverInterface;
+    use Cake\Database\Type\BaseType;
+    use Cake\Database\Type\ColumnSchemaAwareInterface;
+    use Cake\Database\Schema\TableSchemaInterface;
+    use PDO;
+
+    class JsonType extends BaseType
+        implements ColumnSchemaAwareInterface
+    {
+        // other methods from earlier
+
+        /**
+         * Convert abstract schema definition into a driver specific
+         * SQL snippet that can be used in a CREATE TABLE statement.
+         *
+         * Returning null will fall through to CakePHP's built-in types.
+         */
+        public function getColumnSql(
+            TableSchemaInterface $schema,
+            string $column,
+            DriverInterface $driver
+        ): ?string {
+            $data = $schema->getColumn($column);
+            $sql = $driver->quoteIdentifier($column);
+            $sql .= ' JSON';
+            if (isset($data['null') && $data['null'] === false) {
+                $sql .= ' NOT NULL';
+            }
+            return $sql;
+        }
+
+        /**
+         * Convert the column data returned from schema reflection
+         * into the abstract schema data.
+         *
+         * Returning null will fall through to CakePHP's built-in types.
+         */
+        public function convertColumnDefinition(
+            array $definition,
+            DriverInterface $driver
+        ): ?array {
+            return [
+                'type' => $this->_name,
+                'length' => null,
+            ];
+        }
+
+The ``$definition`` data passed to ``convertColumnDefinition()`` will contain
+the following keys. All keys will exist but may contain ``null`` if the key has
+no value for the current database driver:
+
+- ``length`` The length of a column if available..
+- ``precision`` The precision of the column if available.
+- ``scale`` Can be included for SQLServer connections.
+
+.. versionadded:: 4.3.0
+    ``ColumnSchemaAwareInterface`` was added.
 
 .. _mapping-custom-datatypes-to-sql-expressions:
 

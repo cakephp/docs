@@ -75,16 +75,15 @@ la classe, nous avons juste ajouté ce qui suit::
 
         public function display()
         {
-            $this->loadModel('Messages');
-            $unread = $this->Messages->find('unread');
+            $unread = $this->fetchTable('Messages')->find('unread');
             $this->set('unread_count', $unread->count());
         }
 
     }
 
-Puisque les cells utilisent ``ModelAwareTrait`` et ``ViewVarsTrait``, elles
+Puisque les cells utilisent ``LocatorAwareTrait`` et ``ViewVarsTrait``, elles
 se comportent un peu comme un controller. Nous pouvons utiliser les méthodes
-``loadModel()`` et ``set()`` un peu comme nous le ferions dans un controller.
+``fetchTable()`` et ``set()`` un peu comme nous le ferions dans un controller.
 Dans notre fichier de template, ajoutons ce qui suit::
 
     <!-- templates/cell/Inbox/display.php -->
@@ -234,14 +233,12 @@ favoris d'un utilisateur::
     {
         public function display($user)
         {
-            $this->loadModel('Messages');
-
             // Création du paginator
             $paginator = new Paginator();
 
             // Pagination du model
             $results = $paginator->paginate(
-                $this->Messages,
+                $this->fetchTable('Messages'),
                 $this->request->getQueryParams(),
                 [
                     // Utilisation d'un finder personnalisé avec paramètre

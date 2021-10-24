@@ -79,169 +79,17 @@ useful when working with environment variables or :term:`PaaS` providers::
         'url' => 'file:///?levels[]=warning&levels[]=error&file=error',
     ]);
 
-.. note::
-
-    Loggers are required to implement the ``Psr\Log\LoggerInterface`` interface.
-
-Creating Log Adapters
----------------------
-
-Log adapters can be part of your application, or part of
-plugins. If for example you had a database logger called
-``DatabaseLog``. As part of your application it would be placed in
-**src/Log/Engine/DatabaseLog.php**. As part of a plugin it would be placed in
-**plugins/LoggingPack/src/Log/Engine/DatabaseLog.php**. To configure log
-adapters you should use :php:meth:`Cake\\Log\\Log::setConfig()`.  For example
-configuring our DatabaseLog would look like::
-
-    // For src/Log
-    Log::setConfig('otherFile', [
-        'className' => 'Database',
-        'model' => 'LogEntry',
-        // ...
-    ]);
-
-    // For plugin called LoggingPack
-    Log::setConfig('otherFile', [
-        'className' => 'LoggingPack.Database',
-        'model' => 'LogEntry',
-        // ...
-    ]);
-
-When configuring a log adapter the ``className`` parameter is used to
-locate and load the log handler. All of the other configuration
-properties are passed to the log adapter's constructor as an array. ::
-
-    namespace App\Log\Engine;
-    use Cake\Log\Engine\BaseLog;
-
-    class DatabaseLog extends BaseLog
-    {
-        public function __construct($options = [])
-        {
-            parent::__construct($options);
-            // ...
-        }
-
-        public function log($level, $message, array $context = [])
-        {
-            // Write to the database.
-        }
-    }
-
-CakePHP requires that all logging adapters implement ``Psr\Log\LoggerInterface``.
-The class :php:class:`Cake\Log\Engine\BaseLog` is a way to satisfy the
-interface as it only requires you to implement the ``log()`` method.
-
-.. _file-log:
-
-``FileLog`` engine takes the following options:
-
-* ``size`` Used to implement basic log file rotation. If log file size
-  reaches specified size the existing file is renamed by appending timestamp
-  to filename and new log file is created. Can be integer bytes value or
-  human readable string values like '10MB', '100KB' etc. Defaults to 10MB.
-* ``rotate`` Log files are rotated specified times before being removed.
-  If value is 0, old versions are removed rather then rotated. Defaults to 10.
-* ``mask`` Set the file permissions for created files. If left empty the default
-  permissions are used.
-
 .. warning::
-
-    Engines have the suffix ``Log``. You should avoid class names like ``SomeLogLog``
-    which include the suffix twice at the end.
-
-.. note::
-
-    You should configure loggers during bootstrapping. **config/app.php** is the
-    conventional place to configure log adapters.
-
-    In debug mode missing directories will be automatically created to avoid unnecessary
-    errors thrown when using the FileEngine.
+    If you do not configure logging engines, log messages will not be stored.
 
 Error and Exception Logging
 ===========================
 
 Errors and Exceptions can also be logged. By configuring the corresponding
-values in your app.php file.  Errors will be displayed when debug is ``true``
-and logged when debug is ``false``. To log uncaught exceptions, set the ``log``
-option to ``true``. See :doc:`/development/configuration` for more information.
-
-Interacting with Log Streams
-============================
-
-You can introspect the configured streams with
-:php:meth:`Cake\\Log\\Log::configured()`. The return of ``configured()`` is an
-array of all the currently configured streams. You can remove
-streams using :php:meth:`Cake\\Log\\Log::drop()`. Once a log stream has been
-dropped it will no longer receive messages.
-
-Using the FileLog Adapter
-=========================
-
-As its name implies FileLog writes log messages to files. The level of log
-message being written determines the name of the file the message is stored in.
-If a level is not supplied, :php:const:`LOG_ERR` is used which writes to the
-error log. The default log location is ``logs/$level.log``::
-
-    // Executing this inside a CakePHP class
-    $this->log('Something didn't work!');
-
-    // Results in this being appended to logs/error.log
-    // 2007-11-02 10:22:02 Error: Something didn't work!
-
-The configured directory must be writable by the web server user in
-order for logging to work correctly.
-
-You can configure additional/alternate FileLog locations when configuring
-a logger. FileLog accepts a ``path`` which allows for
-custom paths to be used::
-
-    use Cake\Log\Engine\FileLog;
-    
-    Log::setConfig('custom_path', [
-        'className' => FileLog::class,
-        'path' => '/path/to/custom/place/'
-    ]);
-
-.. warning::
-    If you do not configure a logging adapter, log messages will not be stored.
-
-.. _syslog-log:
-
-Logging to Syslog
-=================
-
-In production environments it is highly recommended that you setup your system to
-use syslog instead of the files logger. This will perform much better as any
-writes will be done in a (almost) non-blocking fashion and your operating  system
-logger can be configured separately to rotate files, pre-process writes or use
-a completely different storage for your logs.
-
-Using syslog is pretty much like using the default FileLog engine, you just need
-to specify ``Syslog`` as the engine to be used for logging. The following
-configuration snippet will replace the default logger with syslog, this should
-be done in the **bootstrap.php** file::
-
-    Log::setConfig('default', [
-        'engine' => 'Syslog'
-    ]);
-
-The configuration array accepted for the Syslog logging engine understands the
-following keys:
-
-* ``format``: An sprintf template string with two placeholders, the first one
-  for the error level, and the second for the message itself. This key is
-  useful to add additional information about the server or process in the
-  logged message. For example: ``%s - Web Server 1 - %s`` will look like
-  ``error - Web Server 1 - An error occurred in this request`` after
-  replacing the placeholders.
-* ``prefix``: An string that will be prefixed to every logged message.
-* ``flag``: An integer flag to be used for opening the connection to the
-  logger, by default ``LOG_ODELAY`` will be used. See ``openlog`` documentation
-  for more options
-* ``facility``: The logging slot to use in syslog. By default ``LOG_USER`` is
-  used. See ``syslog`` documentation for more options
+values in your **config/app.php** file.  Errors will be displayed when debug is
+``true`` and logged when debug is ``false``. To log uncaught exceptions, set the
+``log`` option to ``true``. See :doc:`/development/configuration` for more
+information.
 
 .. _writing-to-logs:
 
@@ -254,7 +102,7 @@ is to use the static :php:meth:`Cake\\Log\\Log::write()` method::
     Log::write('debug', 'Something did not work');
 
 The second is to use the ``log()`` shortcut function available on any
-class using the ``LogTrait``. Calling log() will internally call
+class using the ``LogTrait``. Calling ``log()`` will internally call
 ``Log::write()``::
 
     // Executing this inside a class using LogTrait
@@ -262,7 +110,7 @@ class using the ``LogTrait``. Calling log() will internally call
 
 All configured log streams are written to sequentially each time
 :php:meth:`Cake\\Log\\Log::write()` is called. If you have not configured any
-logging adapters ``log()`` will return ``false`` and no log messages will be
+logging engines ``log()`` will return ``false`` and no log messages will be
 written.
 
 Using Placeholders in Messages
@@ -367,6 +215,174 @@ Note that using this form will limit the ability to pass more data as context::
     When ``scopes`` is set to an empty array or ``null`` in a logger's
     configuration, it will take messages of any scope. Setting it to ``false``
     will only match messages without scope.
+
+.. _file-log:
+
+Logging to Files
+================
+
+As its name implies ``FileLog`` writes log messages to files. The level of log
+message being written determines the name of the file the message is stored in.
+If a level is not supplied, :php:const:`LOG_ERR` is used which writes to the
+error log. The default log location is **logs/$level.log**::
+
+    // Executing this inside a CakePHP class
+    $this->log('Something didn't work!');
+
+    // Results in this being appended to logs/error.log
+    // 2007-11-02 10:22:02 Error: Something didn't work!
+
+The configured directory must be writable by the web server user in
+order for logging to work correctly.
+
+You can configure additional/alternate FileLog locations when configuring
+a logger. FileLog accepts a ``path`` which allows for
+custom paths to be used::
+
+    Log::setConfig('custom_path', [
+        'className' => 'File',
+        'path' => '/path/to/custom/place/'
+    ]);
+
+``FileLog`` engine takes the following options:
+
+* ``size`` Used to implement basic log file rotation. If log file size
+  reaches specified size the existing file is renamed by appending timestamp
+  to filename and new log file is created. Can be integer bytes value or
+  human readable string values like '10MB', '100KB' etc. Defaults to 10MB.
+* ``rotate`` Log files are rotated specified times before being removed.
+  If value is 0, old versions are removed rather then rotated. Defaults to 10.
+* ``mask`` Set the file permissions for created files. If left empty the default
+  permissions are used.
+
+.. note::
+
+    In debug mode missing directories will be automatically created to avoid
+    unnecessary errors thrown when using the FileEngine.
+
+.. _syslog-log:
+
+Logging to Syslog
+=================
+
+In production environments it is highly recommended that you setup your system to
+use syslog instead of the file logger. This will perform much better as any
+writes will be done in a (almost) non-blocking fashion and your operating  system
+logger can be configured separately to rotate files, pre-process writes or use
+a completely different storage for your logs.
+
+Using syslog is pretty much like using the default FileLog engine, you just need
+to specify ``Syslog`` as the engine to be used for logging. The following
+configuration snippet will replace the default logger with syslog, this should
+be done in the **config/bootstrap.php** file::
+
+    Log::setConfig('default', [
+        'engine' => 'Syslog'
+    ]);
+
+The configuration array accepted for the Syslog logging engine understands the
+following keys:
+
+* ``format``: An sprintf template string with two placeholders, the first one
+  for the error level, and the second for the message itself. This key is
+  useful to add additional information about the server or process in the
+  logged message. For example: ``%s - Web Server 1 - %s`` will look like
+  ``error - Web Server 1 - An error occurred in this request`` after
+  replacing the placeholders. This option is deprecated. You should use
+  :ref:`logging-formatters` instead.
+* ``prefix``: An string that will be prefixed to every logged message.
+* ``flag``: An integer flag to be used for opening the connection to the
+  logger, by default ``LOG_ODELAY`` will be used. See ``openlog`` documentation
+  for more options
+* ``facility``: The logging slot to use in syslog. By default ``LOG_USER`` is
+  used. See ``syslog`` documentation for more options
+
+Creating Log Engines
+=====================
+
+Log engines can be part of your application, or part of
+plugins. If for example you had a database logger called
+``DatabaseLog``. As part of your application it would be placed in
+**src/Log/Engine/DatabaseLog.php**. As part of a plugin it would be placed in
+**plugins/LoggingPack/src/Log/Engine/DatabaseLog.php**. To configure log
+engine you should use :php:meth:`Cake\\Log\\Log::setConfig()`.  For example
+configuring our DatabaseLog would look like::
+
+    // For src/Log
+    Log::setConfig('otherFile', [
+        'className' => 'Database',
+        'model' => 'LogEntry',
+        // ...
+    ]);
+
+    // For plugin called LoggingPack
+    Log::setConfig('otherFile', [
+        'className' => 'LoggingPack.Database',
+        'model' => 'LogEntry',
+        // ...
+    ]);
+
+When configuring a log engine the ``className`` parameter is used to
+locate and load the log handler. All of the other configuration
+properties are passed to the log engine's constructor as an array. ::
+
+    namespace App\Log\Engine;
+    use Cake\Log\Engine\BaseLog;
+
+    class DatabaseLog extends BaseLog
+    {
+        public function __construct(array $config = [])
+        {
+            parent::__construct($config);
+            // ...
+        }
+
+        public function log($level, string $message, array $context = [])
+        {
+            // Write to the database.
+        }
+    }
+
+CakePHP requires that all logging engine implement ``Psr\Log\LoggerInterface``.
+The class :php:class:`Cake\Log\Engine\BaseLog` is an easy way to satisfy the
+interface as it only requires you to implement the ``log()`` method.
+
+.. _logging-formatters:
+
+Logging Formatters
+------------------
+
+Logging formatters allow you to control how log messages are formatted
+independent of the storage engine. Each core provided logging engine comes with
+a formatter configured to maintain backwards compatible output. However, you can
+adjust the formatters to fit your requirements. Formatters are configured
+alongside the logging engine::
+
+    use Cake\Log\Engine\SyslogLog;
+    use App\Log\Formatter\CustomFormatter;
+
+    // Simple formatting configuration with no options.
+    Log::setConfig('error', [
+        'className' => SyslogLog::class,
+        'formatter' => CustomFormatter::class,
+    ]);
+
+    // Configure a formatter with additional options.
+    Log::setConfig('error', [
+        'className' => SyslogLog::class,
+        'formatter' => [
+            'className' => CustomFormatter::class,
+            'key' => 'value',
+        ],
+    ]);
+
+To implement your own logging formatter you need to extend
+``Cake\Log\Format\AbstractFormatter`` or one of its subclasses. The primary
+method you need to implement is ``format($level, $message, $context)`` which is
+responsible for formatting log messages.
+
+.. versionadded:: 4.3.0
+    Logging formatters were added in 4.3.0
 
 Log API
 =======

@@ -274,7 +274,7 @@ directement ``Controller::render()``. Une fois que vous avez appelé
 
     class PostsController extends AppController
     {
-        public function my_action()
+        public function myAction()
         {
             $this->render('custom_file');
         }
@@ -359,36 +359,20 @@ vers l'action nommée::
 Chargement des Modèles Supplémentaires
 ======================================
 
-.. php:method:: loadModel(string $modelClass, string $type)
+.. php:method:: fetchTable(string $alias, array $config = [])
 
-La fonction ``loadModel()`` devient pratique quand
-vous avez besoin d'utiliser une table de modèle/collection qui n'est pas le
-modèle du controller par défaut ou un de ses modèles associés::
+La fonction ``fetchTable()`` devient pratique quand vous avez besoin d'utiliser
+une table autre que la table par défaut du controller::
 
     // Dans une méthode de controller.
-    $this->loadModel('Articles');
-    $recentArticles = $this->Articles->find('all', [
+    $recentArticles = $this->fetchTable('Articles')->find('all', [
         'limit' => 5,
         'order' => 'Articles.created DESC'
     ]);
 
-Si vous utilisez un provider de table différent de l'ORM intégré, vous
-pouvez lier ce système de table dans les controllers de CakePHP en
-connectant sa méthode factory::
-
-    // Dans une méthode de controller.
-    $this->modelFactory(
-        'ElasticIndex',
-        ['ElasticIndexes', 'factory']
-    );
-
-La factory peut être un appelable ou une instance de ``\Cake\Datasource\Locator\LocatorInterface``.
-
-Après avoir enregistré la table factory, vous pouvez utiliser ``loadModel()``
-pour charger les instances::
-
-    // Dans une méthode de controller.
-    $this->loadModel('Locations', 'ElasticIndex');
+.. versionadded:: 4.3.0
+    ``Controller::fetchTable()`` a été ajoutée. Avant 4.3, vous deviez utiliser
+    ``Controller::loadModel()``.
 
 Paginer un Modèle
 =================
@@ -428,15 +412,6 @@ pour eux::
         $this->loadComponent('Csrf');
         $this->loadComponent('Comments', Configure::read('Comments'));
     }
-
-.. php:attr:: components
-
-La propriété ``$components`` de vos controllers vous permet de configurer les
-components. Les components configurés et leurs dépendances vont être créés par
-CakePHP pour vous. Lisez la section :ref:`configuring-components` pour plus
-d'informations. Comme mentionné plus tôt, la propriété ``$components`` sera
-fusionnée avec la propriété définie dans chacune des classes parentes de votre
-controller.
 
 .. _controller-life-cycle:
 
@@ -501,6 +476,36 @@ des controllers enfant pour avoir de meilleurs résultats::
     {
         parent::beforeFilter($event);
     }
+
+.. _controller-middleware:
+
+Middleware de Controller
+========================
+
+.. php:method:: middleware($middleware, array $options = [])
+
+Les :doc:`Middlewares </controllers/middleware>` peuvent être définis
+globalement, dans le scope d'une routine ou dans un contrôleur. Pour définir un
+middleware pour un contrôleur spécifique, utilisez la méthode ``middleware()``
+depuis l'intérieur de la méthode ``initialize()`` de votre contrôleur::
+
+    public function initialize(): void
+    {
+        parent::initialize();
+
+        $this->middleware(function ($request, $handler) {
+            // Faire la logique du middleware.
+
+            // Assurez-vous de renvoyer une réponse ou d'appeler handle()
+            return $handler->handle($request);
+        });
+    }
+
+Les middlewares définis par un contrôleur seront appelés **avant** que
+``beforeFilter()`` les méthodes d'action ne soient appelées.
+
+.. versionadded:: 4.3.0
+    ``Controller::middleware()`` a été ajoutée.
 
 Plus sur les Controllers
 ========================

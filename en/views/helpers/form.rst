@@ -316,12 +316,14 @@ can define validation rules for each association by using an array::
     ]);
 
 The above would use ``register`` for the user, and ``default`` for the user's
-comments. FormHelper uses validators to generate HTML5 required attributes and
-set error messages with the `browser validator API
+comments. FormHelper uses validators to generate HTML5 required attributes,
+relevant ARIA attributes, and set error messages with the `browser validator API
 <https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Form_validation#Customized_error_messages>`_
 . If you would like to disable HTML5 validation messages use::
 
     $this->Form->setConfig('autoSetCustomValidity', false);
+
+This will not disable ``required``/``aria-required`` attributes.
 
 Creating context classes
 ------------------------
@@ -606,7 +608,10 @@ as well as HTML attributes. This subsection will cover the options specific to
           <input name="name" type="text" value="" id="name" />
       </div>
 
-  Set this to an array to provide additional options for the
+  If the label is disabled, and a ``placeholder`` attribute is provided, the
+  generated input will have ``aria-label`` set.
+
+  Set the ``label`` option to an array to provide additional options for the
   ``label`` element. If you do this, you can use a ``'text'`` key in
   the array to customize the label text.
 

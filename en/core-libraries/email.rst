@@ -124,7 +124,8 @@ following configuration keys are used:
 - ``'transport'``: Transport configuration name. See :ref:`email-transport`.
 - ``'log'``: Log level to log the email headers and message. ``true`` will use
   LOG_DEBUG. See also :ref:`logging-levels`.
-- ``'helpers'``: Array of helpers used in the email template. ``ViewBuilder::setHelpers()``.
+- ``'helpers'``: Array of helpers used in the email template.
+  ``ViewBuilder::setHelpers()``/``ViewBuilder::addHelpers()``.
 
 .. note::
 
@@ -204,12 +205,15 @@ In your email templates you can use these with::
 
 You can use helpers in emails as well, much like you can in normal template files.
 By default only the ``HtmlHelper`` is loaded. You can load additional
-helpers using the ``ViewBuilder::setHelpers()`` method::
+helpers using the ``ViewBuilder::addHelpers()`` method::
 
-    $mailer->viewBuilder()->setHelpers(['Html', 'Custom', 'Text']);
+    $mailer->viewBuilder()->addHelpers(['Html', 'Custom', 'Text']);
 
-When setting helpers be sure to include 'Html' or it will be removed from the
+When adding helpers be sure to include 'Html' or it will be removed from the
 helpers loaded in your email template.
+
+.. note::
+    In versions prior to 4.3.0, you will need to use ``setHelpers()`` instead.
 
 If you want to send email using templates in a plugin you can use the familiar
 :term:`plugin syntax` to do so::

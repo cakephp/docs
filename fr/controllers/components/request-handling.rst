@@ -13,7 +13,7 @@ approprié, quand les extensions de fichier sont disponibles.
 Par défaut, le RequestHandler détectera automatiquement les requêtes AJAX
 en se basant sur le header ``X-Requested-With``, qui est utilisé par de nombreuses
 librairies JavaScript. Quand il est utilisé conjointement avec
-:php:meth:`Router::parseExtensions()`, RequestHandler changera automatiquement
+:php:meth:`Cake\\Routing\\Router::extensions()`, RequestHandler changera automatiquement
 le layout et les fichiers de template par ceux qui correspondent à des types
 de média non-HTML.
 En outre, s'il existe un helper avec le même nom que l'extension demandée,
