@@ -273,7 +273,7 @@ Describing Classes and their Contents
 -------------------------------------
 
 The CakePHP documentation uses the `phpdomain
-<http://pypi.python.org/pypi/sphinxcontrib-phpdomain>`_ to provide custom
+<https://pypi.org/project/sphinxcontrib-phpdomain/>`_ to provide custom
 directives for describing PHP objects and constructs. Using these directives
 and roles is required to give proper indexing and cross referencing features.
 
