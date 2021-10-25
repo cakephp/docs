@@ -7,3 +7,4 @@
 * :doc:`./4-0-migration-guide`
 * :doc:`./4-1-migration-guide`
 * :doc:`./4-2-migration-guide`
+* :doc:`./4-3-migration-guide`
