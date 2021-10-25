@@ -46,7 +46,10 @@ Breaking Changes
 Behind the API, some breaking changes are necessary moving forward.
 They usually only affect tests.
 
-* TODO
+Global
+------
+
+* Increased minimum requirement to PHP 7.4.
 
 New Features
 ============
