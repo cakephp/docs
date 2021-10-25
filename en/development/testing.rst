@@ -453,16 +453,15 @@ database schema as well::
     use Migrations\TestSuite\Migrator;
 
     $migrator = new Migrator();
-    
+
     // Simple setup for with no plugins
     $migrator->run();
 
     // Run migrations for multiple plugins
-    $migrator->run([
-        ['plugin' => 'Contacts'],
-        // Run the Documents migrations on the test_docs connection.
-        ['plugin' => 'Documents', 'connection' => 'test_docs'],
-    ]);
+    $migrator->run(['plugin' => 'Contacts']);
+
+    // Run the Documents migrations on the test_docs connection.
+    $migrator->run(['plugin' => 'Documents', 'connection' => 'test_docs']);
 
 The migrations plugin will only run unapplied migrations, and will reset
 migrations if your current migration head differs from the applied migrations.
