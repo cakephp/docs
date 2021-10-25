@@ -61,8 +61,7 @@ Convertir du Texte en Paragraphes
 
 .. php:method:: autoParagraph(string $text)
 
-Ajoute <p> autour du texte où la double ligne retourne et <br> où une
-simple ligne retourne, sont trouvés::
+Ajoute <p> autour du texte où un double retour ligne est trouvé, et <br> quand un simple retour ligne est rencontré::
 
     $myText = 'For more information
     regarding our world-famous pastries and desserts.
