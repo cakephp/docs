@@ -131,7 +131,7 @@ n'affectent généralement pas les tests.
 I18n
 ----
 - La dépendance envers le paquet
-  [Aura.Intl](https://github.com/auraphp/Aura.Intl) a été supprimée car il n'est
+  `Aura.Intl <https://github.com/auraphp/Aura.Intl>`_ a été supprimée car il n'est
   plus maintenu. Si votre application/plugin a des traducteurs génériques
   (:ref:`custom translation loaders <creating-generic-translators>`) alors elle
   doit retourner désormais une instance ``Cake\I18n\Package`` à la place de
