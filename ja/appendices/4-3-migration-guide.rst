@@ -24,7 +24,7 @@ CakePHP 4.3.0にアップグレードするには、次の Composer コマンド
     これはCakePHP 4.3の変更点のみを更新します。CakePHP 4.2の変更を最初に適用していることを確認してください。
 
 新しい設定オプションが追加され、パスごとに非推奨を無効にすることができるようになりました。
-詳細は :ref:`deprecation-warnings` を参照してください。
+詳細は `deprecation-warnings` を参照してください。
 
 Connection
 ----------
@@ -213,7 +213,7 @@ Controller
 ----------
 
 - ``Controller::middleware()`` が追加され、単一のコントローラに対してのみミドルウェアを定義することができるようになりました。
-  詳しくは :ref:`controller-middleware` をご覧ください。
+  詳しくは `controller-middleware` をご覧ください。
 - コントローラでは、アクションパラメータに ``float``, ``int``, ``bool`` のいずれかの型宣言をサポートするようになりました。
   ブール型で渡されるパラメータは、0か1のどちらかでなければなりません。
 
@@ -239,7 +239,7 @@ Database
   これにより、クエリをコピーして対話型プロンプトで実行することが容易になりました。
 * ``DatetimeType`` では、リクエストデータをユーザーのタイムゾーンから
   アプリケーションのタイムゾーンに変換できるようになりました。
-  詳しくは :ref:`converting-request-data-from-user-timezone` をご覧ください。
+  詳しくは `converting-request-data-from-user-timezone` をご覧ください。
 * ``JsonType::setEncodingOptions()``が追加されました。
   このメソッドでは、データを永続化する際にORMがJSONをシリアライズする際の
   ``json_encode()`` オプションを定義することができます。
@@ -275,7 +275,7 @@ Log
 
 - ログエンジンは、書き込む前にメッセージ文字列をフォーマットするためにフォーマッタを使用するようになりました。
   これは ``formatter`` 設定オプションで設定できます。
-  詳細は :ref:`logging-formatters` のセクションを参照してください。
+  詳細は `logging-formatters` のセクションを参照してください。
 - ``JsonFormatter`` が追加され、任意のログエンジンの ``formatter`` オプションとして設定できるようになりました。
 
 ORM
@@ -299,7 +299,7 @@ TestSuite
 - ``IntegrationTestTrait::enableCsrfToken()`` において、
   カスタムのCSRFクッキー/セッションキー名を使用できるようになりました。
 - HTTPモックを簡単に書けるように ``HttpClientTrait`` を追加しました。
-  詳細は :ref:`httpclient-testing` を参照してください。
+  詳細は `httpclient-testing` を参照してください。
 - 新しいフィクスチャシステムが導入されました。
   このフィクスチャシステムはスキーマとデータを分離し、既存のマイグレーションを再利用してテストスキーマを定義することができます。
   アップグレードの方法は :doc:`./fixture-upgrade` ガイドで説明しています。

@@ -20,12 +20,12 @@
    代わりに アプリケーションは、各テスト実行の最初にスキーマを作成/更新する必要があります。
 #. 次に、スキーマを作成するために ``tests/boostrap.php`` を更新します。
    スキーマを作成するにはいくつかの異なる方法があります。
-   CakePHPで提供されている方法については、 :ref:`creating-test-database-schema` を参照してください。
+   CakePHPで提供されている方法については、`creating-test-database-schema` を参照してください。
 #. それから、フィクスチャから ``$fields`` と ``$import`` のプロパティをすべて削除してください。
    これらのプロパティは新しいフィクスチャシステムでは使用されません。
 
 テストは引き続き通過するはずです。
-そして、 :ref:`fixture-state-management` を使って実験できるようになります。
+そして、`fixture-state-management` を使って実験できるようになります。
 大幅な性能向上を実現する ``TransactionStrategy`` を試すことができます。
 ``TransactionStrategy`` のトレードオフは、テストごとに自動インクリメントの値が ``1`` から始まらなくなることです。
 
