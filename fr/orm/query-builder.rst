@@ -614,6 +614,17 @@ Vous pouvez créer des conditions ``if ... then ... else`` en utilisant
 
     # CASE WHEN published = true THEN 'Y' ELSE 'N' END;
 
+Il est également possible créer une variable simple en passant une valeur à
+``case()``:
+
+    $published = $query->newExpr()
+        ->case($query->identifier('published'))
+        ->when(true)
+        ->then('Y');
+        ->else('N');
+
+   # CASE published WHEN true THEN 'Y' ELSE 'N' END;
+
 .. versionchanged:: 4.3.0
     Ajout du builder fluide ``case()``.
 
