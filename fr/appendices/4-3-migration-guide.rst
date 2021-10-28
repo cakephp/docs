@@ -10,7 +10,7 @@ Mettre à jour vers la version 4.3.0
 
 Vous pouvez utiliser composer pour mettre à jour vers CakePHP 4.3.0::
 
-    php composer.phar require --update-with-dependencies "cakephp/cakephp:^4.3@RC"
+    php composer.phar require --update-with-dependencies "cakephp/cakephp:^4.3"
 
 Dépréciations
 =============
