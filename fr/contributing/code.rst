@@ -146,7 +146,7 @@ le pull request est créée.
 
     Souvenez-vous que tout le code auquel vous contribuez pour CakePHP sera
     sous Licence MIT, et la
-    `Cake Software Foundation <http://cakefoundation.org/pages/about>`_ sera la
+    `Cake Software Foundation <https://cakefoundation.org/old>`_ sera la
     propriétaire de toutes les contributions de code. Les contributeurs doivent
     suivre les `Guidelines de la Communauté CakePHP <https://cakephp.org/get-involved>`_.
 
