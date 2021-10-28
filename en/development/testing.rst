@@ -673,12 +673,8 @@ to maintain them and to keep track of their content.
 The `fixture factories plugin <https://github.com/vierge-noire/cakephp-fixture-factories>`_ proposes an
 alternative for large sized applications.
 
-The plugin uses its own `phpunit listener <https://github.com/vierge-noire/cakephp-test-suite-light>`_
-which will perform the following actions:
-
-#. Run migrations once on the test DB `(see the migrator) <https://github.com/vierge-noire/cakephp-test-migrator>`_.
-#. Truncate dirty tables before each test.
-#. Run tests.
+The plugin uses the `test suite light plugin <https://github.com/vierge-noire/cakephp-test-suite-light>`_
+in order to truncate all dirty tables before each test.
 
 The following command will help you bake your factories::
 
@@ -827,15 +823,11 @@ Using the fixture factories, the test would now look like this::
 
     namespace App\Test\TestCase\Model\Table;
 
-    use App\Model\Table\ArticlesTable;
     use App\Test\Factory\ArticleFactory;
     use Cake\TestSuite\TestCase;
 
     class ArticlesTableTest extends TestCase
     {
-        public function setUp(): void
-        { ... }
-
         public function testFindPublished(): void
         {
             // Persist 3 published articles
@@ -843,7 +835,7 @@ Using the fixture factories, the test would now look like this::
             // Persist 2 unpublished articles
             ArticleFactory::make(['published' => 0], 2)->persist();
 
-            $result = $this->Articles->find('published')->find('list')->toArray();
+            $result = ArticleFactory::find('published')->find('list')->toArray();
 
             $expected = [
                 $articles[0]->id => $articles[0]->title,
@@ -855,7 +847,9 @@ Using the fixture factories, the test would now look like this::
         }
     }
 
-No fixtures need to be loaded. The 5 articles created will exist only in this test.
+No fixtures need to be loaded. The 5 articles created will exist only in this test. The
+static method ``::find()`` will query the database without using the table ``ArticlesTable``
+and it's events.
 
 Mocking Model Methods
 ---------------------
