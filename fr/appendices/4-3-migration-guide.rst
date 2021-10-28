@@ -134,8 +134,8 @@ View
   au profit de la méthode dédiée ``ViewBuilder::addHelpers()`` qui sépare
   proprement l'ajout et le remplacement de helpers.
 
-Changements dans les Behaviors
-==============================
+Changements de comportements
+============================
 
 Bien que les changements qui suivent ne changent la signature d'aucune méthode,
 ils en changent la sémantique ou le comportement.
