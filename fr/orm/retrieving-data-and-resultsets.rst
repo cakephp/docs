@@ -282,7 +282,7 @@ la clé et la valeur avec respectivement les options ``keyField`` et
 
 Les résultats peuvent être groupés en des ensembles imbriqués. C'est utile
 quand vous voulez des ensembles bucketed ou que vous voulez construire des
-elements ``<optgroup>`` avec FormHelper::
+elements ``<optgroup>`` avec ``FormHelper``::
 
     // Dans un controller ou dans une méthode de table.
     $query = $articles->find('list', [
@@ -310,6 +310,11 @@ peuvent être atteintes avec les jointures::
         'keyField' => 'id',
         'valueField' => 'author.name'
     ])->contain(['Authors']);
+
+Les expressions ``keyField``, ``valueField``, et ``groupField`` agiront sur le
+chemin des attributs des entités, et non sur des colonnes de la bases de
+données. Vous pouvez donc utiliser des champs vrituels dans les résultats de
+``find(list)``.
 
 Personnaliser la Sortie Clé-Valeur
 ----------------------------------
