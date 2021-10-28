@@ -273,21 +273,28 @@ Core
 Database
 --------
 
-- Les types de mappage de bases de données peuvent maintenant implémenter
+* Les types de mappage de bases de données peuvent maintenant implémenter
   ``Cake\Database\Type\ColumnSchemaAwareInterface`` pour spécifier la génération
   de colonne SQL et la réflexivité du schéma de colonne. Cela permet au types
   personnalisés de prendre en charge des colonnes non standard.
-- Les queries loguées utilisent maintenant ``TRUE`` et ``FALSE`` pour les
+* Les queries loguées utilisent maintenant ``TRUE`` et ``FALSE`` pour les
   pilotes postgres, sqlite et mysql. Cela facilite la copie de queries et leur
   exécution dans un prompt interactif.
-- Le ``DatetimeType`` peut maintenant convertir les données de la requête du
+* Le ``DatetimeType`` peut maintenant convertir les données de la requête du
   fuseau horaire de l'utilisateur vers le fuseau horaire de l'application.
   Reportez-vous à :ref:`converting-request-data-from-user-timezone` pour plus
   d'informations.
-- Ajout de ``DriverInterface::supports()`` qui consolide toutes les
+* Ajout de ``DriverInterface::supports()`` qui consolide toutes les
   vérifications de feature en une seule fonction. Les pilotes peuvent supporter
-  les nommages personnalisés de feature ou n'importe quelle constante
-  ``DriverInterface::FEATURE\_*``
+  les nommages personnalisés de feature ou n'importe quelle constante de
+  feature:
+  
+  * ``FEATURE_CTE``
+  * ``FEATURE_JSON``
+  * ``FEATURE_QUOTE``
+  * ``FEATURE_SAVEPOINT``
+  * ``FEATURE_WINDOW``
+    
 - Ajout de ``DriverInterface::inTransaction()`` qui reflète le statut renvoyé
   par ``PDO::inTranaction()``.
 - Ajout d'un builder fluide pour les instructions ``CASE, WHEN, THEN``.
