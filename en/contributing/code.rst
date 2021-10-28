@@ -133,7 +133,7 @@ branch, as you cannot edit it once the pull request is created.
 
     Remember that all code you contribute to CakePHP will be licensed under the
     MIT License, and the `Cake Software Foundation
-    <http://cakefoundation.org/pages/about>`_ will become the owner of any
+    <https://cakefoundation.org/old>`_ will become the owner of any
     contributed code. Contributors should follow the `CakePHP Community
     Guidelines <https://cakephp.org/get-involved>`_.
 
