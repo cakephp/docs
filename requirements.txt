@@ -1,4 +1,4 @@
-# Updated Oct 28, 2021
+# Updated Oct 28 2021
 # sphinx does not work with docutils 0.18
 docutils==0.17.1
 sphinx==2.4.4
