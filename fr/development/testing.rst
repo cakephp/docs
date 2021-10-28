@@ -716,12 +716,8 @@ un certain point, vous ne soyez plus en mesure les maintenir.
 Le `fixture factories plugin <https://github.com/vierge-noire/cakephp-fixture-factories>`__ propose une
 alternative efficace pour des applications de taille moyenne et plus.
 
-Le plugin utilise son propre `phpunit listener <https://github.com/vierge-noire/cakephp-test-suite-light>`__,
-qui effectue les actions suivantes:
-
-#. Faire tourner les migrations `(description ici) <https://github.com/vierge-noire/cakephp-test-migrator>`__.
-#. Tronquer les tables utilisées au préalable avant chaque test.
-#. Lancer les tests.
+Le plugin utilise le `test suite light plugin <https://github.com/vierge-noire/cakephp-test-suite-light>`__
+afin de tronquer les tables non vierges avant chaque test.
 
 La commande bake suivante vous assistera pour créer vos factories::
 
@@ -877,15 +873,11 @@ En utilisant les fixture factories, le test se présente ainsi::
 
     namespace App\Test\TestCase\Model\Table;
 
-    use App\Model\Table\ArticlesTable;
     use App\Test\Factory\ArticleFactory;
     use Cake\TestSuite\TestCase;
 
     class ArticlesTableTest extends TestCase
     {
-        public function setUp(): void
-        { ... }
-
         public function testFindPublished(): void
         {
             // Insérer 3 articles publiés
@@ -893,7 +885,7 @@ En utilisant les fixture factories, le test se présente ainsi::
             // Insérer 2 articles non publiés
             ArticleFactory::make(['published' => 0], 2)->persist();
 
-            $result = $this->Articles->find('published')->find('list')->toArray();
+            $result = ArticleFactory::find('published')->find('list')->toArray();
 
             $expected = [
                 $articles[0]->id => $articles[0]->title,
@@ -905,7 +897,8 @@ En utilisant les fixture factories, le test se présente ainsi::
         }
     }
 
-Aucune fixture n'est déclarée. Les 5 articles créés n'existeront que pour ce test.
+Aucune fixture n'est déclarée. Les 5 articles créés n'existeront que pour ce test. La méthode statique ``::find()``
+permet d'explorer la base de donnée sans évènements et sans recours à la table ``ArticlesTable``.
 
 Méthodes de Mocking des Models
 ------------------------------
