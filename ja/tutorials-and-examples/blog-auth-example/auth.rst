@@ -118,7 +118,7 @@ CakePHPでは、これは ``authentication`` プラグインによって処理�
 まずはインストールしてみましょう。
 composerを使ってAuthenticationプラグインをインストールします。
 
-.. code-block:: bash
+.. code-block:: console
 
     composer require "cakephp/authentication:^2.0"
 

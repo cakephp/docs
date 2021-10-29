@@ -85,7 +85,7 @@ Translator tips
   translated.
 - Feel free to dive right in if your chosen language already
   exists on the book.
-- Use `Informal Form <http://en.wikipedia.org/wiki/Register_(linguistics)>`_.
+- Use `Informal Form <https://en.wikipedia.org/wiki/Register#Linguistics>`_.
 - Translate both the content and the title at the same time.
 - Do compare to the English content before submitting a correction
   (if you correct something, but don't integrate an 'upstream' change
@@ -273,7 +273,7 @@ Describing Classes and their Contents
 -------------------------------------
 
 The CakePHP documentation uses the `phpdomain
-<http://pypi.python.org/pypi/sphinxcontrib-phpdomain>`_ to provide custom
+<https://pypi.org/project/sphinxcontrib-phpdomain/>`_ to provide custom
 directives for describing PHP objects and constructs. Using these directives
 and roles is required to give proper indexing and cross referencing features.
 

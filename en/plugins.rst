@@ -26,7 +26,7 @@ Many plugins are available on `Packagist <http://packagist.org>`_
 and can be installed with ``Composer``. To install DebugKit, you
 would do the following:
 
-.. code-block:: bash
+.. code-block:: console
 
     php composer.phar require cakephp/debug_kit
 
@@ -86,7 +86,7 @@ should resemble the following:
 
 Additionally, you will need to tell Composer to refresh its autoloading cache:
 
-.. code-block:: bash
+.. code-block:: console
 
     php composer.phar dumpautoload
 
@@ -122,7 +122,7 @@ not need to load a plugin.
 There is also a handy shell command to enable the plugin.  Execute the following
 line:
 
-.. code-block:: bash
+.. code-block:: console
 
     bin/cake plugin load ContactManager
 
@@ -264,14 +264,14 @@ The process of creating plugins can be greatly simplified by using bake.
 
 In order to bake a plugin, use the following command:
 
-.. code-block:: bash
+.. code-block:: console
 
     bin/cake bake plugin ContactManager
 
 Bake can be used to create classes in your plugin. For example to generate
 a plugin controller you could run:
 
-.. code-block:: bash
+.. code-block:: console
 
     bin/cake bake controller --plugin ContactManager Contacts
 
@@ -280,7 +280,7 @@ Please refer to the chapter
 have any problems with using the command line. Be sure to re-generate your
 autoloader once you've created your plugin:
 
-.. code-block:: bash
+.. code-block:: console
 
     php composer.phar dumpautoload
 

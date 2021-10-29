@@ -139,7 +139,7 @@ Ao fazer *pull requests* você deve ter certeza que selecionou o *branch* corret
 .. note::
 
     Lembre-se que todo código que você contribui com o CakePHP será licensiado
-    sob a licença MIT, e a `Cake Software Foundation <http://cakefoundation.org/pages/about>`_
+    sob a licença MIT, e a `Cake Software Foundation <https://cakefoundation.org/old>`_
     será a proprietária de qualquer código proveniente de contribuição. Os
     contribuidores devem seguir as
     `regras comunitárias do CakePHP <https://cakephp.org/get-involved>`_.

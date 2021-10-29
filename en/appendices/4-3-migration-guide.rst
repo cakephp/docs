@@ -9,7 +9,7 @@ Upgrading to 4.3.0
 
 You can can use composer to upgrade to CakePHP 4.3.0::
 
-    php composer.phar require --update-with-dependencies "cakephp/cakephp:^4.3@RC"
+    php composer.phar require --update-with-dependencies "cakephp/cakephp:^4.3"
 
 Deprecations
 ============
@@ -255,7 +255,7 @@ Database
   ``json_encode()`` options for when the ORM serializes JSON when persisting
   data.
 * Added ``DriverInterface::supports()`` which consolidates all feature checks into one function.
-  Drivers can support custom feature namees or any of the feature constants:
+  Drivers can support custom feature names or any of the feature constants:
   constants.
   
   * ``FEATURE_CTE``

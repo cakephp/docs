@@ -18,7 +18,7 @@ Você vai precisar:
 
 Antes de começar, verifique se você está usando uma versão atualizada do PHP:
 
-.. code-block:: bash
+.. code-block:: console
 
     php -v
 
@@ -35,7 +35,7 @@ CakePHP a partir de seu terminal ou prompt de comando. Primeiro, você
 precisa baixar e instalar o Composer, caso você já não o tenha. Se possuir
 instalado o programa *cURL*, basta executar o seguinte comando::
 
-.. code-block:: bash
+.. code-block:: console
 
     curl -s https://getcomposer.org/installer | php
 
@@ -46,7 +46,7 @@ Em seguida, basta digitar a seguinte linha de comando no seu terminal a partir
 do diretório onde se localiza o arquivo ``composer.phar`` para instalar o
 esqueleto da aplicação do CakePHP no diretório **cms**. ::
 
-.. code-block:: bash
+.. code-block:: console
 
     php composer.phar create-project --prefer-dist cakephp/app:4.* cms
 
@@ -55,7 +55,7 @@ Composer <https://getcomposer.org/Composer-Setup.exe>`_, então digite a linha
 abaixo no seu terminal de dentro do diretório de instalação (ex.
 C:\\wamp\\www\\dev):
 
-.. code-block:: bash
+.. code-block:: console
 
     composer self-update && composer create-project --prefer-dist cakephp/app:4.* cms
 
@@ -103,7 +103,7 @@ Podemos verificar rapidamente se nossa instalação está correta acessando a p�
 inicial padrão. Mas antes de poder acessar, você precisa iniciar um servidor de
 desenvolvimento:
 
-.. code-block:: bash
+.. code-block:: console
 
     cd /path/to/our/app
 

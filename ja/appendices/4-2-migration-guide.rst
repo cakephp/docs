@@ -1,7 +1,7 @@
 4.2 移行ガイド
 ##############
 
-CakePHP 4.2 は 4.1 からのAPI互換アップグレードです。
+CakePHP 4.2 は 4.0 からのAPI互換アップグレードです。
 このページでは、4.2で追加された非推奨事項と機能の概要を説明します。
 
 4.2.0へのアップグレード
@@ -108,7 +108,7 @@ API の背後に、対応が必要ないくつかの破壊的変更がありま�
 
 I18n
 ----
-- [Aura.Intl](https://github.com/auraphp/Aura.Intl) パッケージへの依存性は、もはやメンテナンスされていないため削除されました。
+- `Aura.Intl <https://github.com/auraphp/Aura.Intl>`_ パッケージへの依存性は、もはやメンテナンスされていないため削除されました。
   アプリ/プラグインが :ref:`custom translation loaders <creating-generic-translators>` を持っている場合、
   ``Aura\Intl\Package`` の代わりに ``Cake\I18n\Package`` のインスタンスを返す必要があります。
 

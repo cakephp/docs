@@ -116,7 +116,7 @@ They usually only affect tests.
 
 I18n
 ----
-- The dependency on [Aura.Intl](https://github.com/auraphp/Aura.Intl) package has been
+- The dependency on `Aura.Intl <https://github.com/auraphp/Aura.Intl>`_ package has been
   removed as it is no longer maintained. If your app/plugin has :ref:`custom translation loaders <creating-generic-translators>`
   then they need to now return a ``Cake\I18n\Package`` instance instead of ``Aura\Intl\Package``.
   Both the classes are API compatible so you won't need to change anything else.
