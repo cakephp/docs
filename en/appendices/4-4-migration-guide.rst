@@ -54,4 +54,7 @@ Global
 New Features
 ============
 
-* TODO
+Database
+--------
+
+* ``Query::expr()`` was added as an alternative to ``Query::newExpr()``.
