@@ -1,5 +1,5 @@
 # Updated Oct 28 2021
-docutils==0.16
+docutils==0.18
 sphinx==3.5.4
 sphinxcontrib-phpdomain==0.7.3
 cakephpsphinx>=0.1.40,<1.0
