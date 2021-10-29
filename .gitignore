@@ -1,7 +1,7 @@
 # Project specific files #
 ##########################
 *.pyc
-build/*
+/build
 */_build/*
 
 # IDE and editor specific files #
