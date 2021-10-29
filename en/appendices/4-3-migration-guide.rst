@@ -91,7 +91,9 @@ ORM
   deprecated. Define the validator within the table class or use ``setValidator()`` instead.
 - ``Association::setName()`` is deprecated. Association names should be defined
   when the association is.
-- ``QueryExpression::addCase()`` is deprecated. Use ``case()`` instead.
+- ``QueryExpression::addCase()`` is deprecated. Use ``case()`` instead. The ``['value' => 'literal']``
+  and ``['column' => 'identifier']`` syntax is not supported in the new fluent case builder, inserting raw
+  SQL or identifiers requires to explicitly use expressions.
 
 Routing
 -------
@@ -257,16 +259,16 @@ Database
 * Added ``DriverInterface::supports()`` which consolidates all feature checks into one function.
   Drivers can support custom feature names or any of the feature constants:
   constants.
-  
+
   * ``FEATURE_CTE``
   * ``FEATURE_JSON``
   * ``FEATURE_QUOTE``
   * ``FEATURE_SAVEPOINT``
   * ``FEATURE_WINDOW``
-  
+
 - Added ``DriverInterface::inTransaction()`` which reflects the status returned by
   ``PDO::inTranaction()``.
-- A fluent builder for ``CASE, WHEN, THEN`` statements has been added. 
+- A fluent builder for ``CASE, WHEN, THEN`` statements has been added.
 
 Form
 ----
