@@ -35,7 +35,7 @@ CakePHP a partir de seu terminal ou prompt de comando. Primeiro, você
 precisa baixar e instalar o Composer, caso você já não o tenha. Se possuir
 instalado o programa *cURL*, basta executar o seguinte comando::
 
-.. code-block:: bash
+.. code-block:: console
 
     curl -s https://getcomposer.org/installer | php
 

@@ -33,7 +33,7 @@ Command クラスは、大部分の作業を行う ``execute()`` メソッドを
 コマンドが呼び出されたときに、このメソッドが呼び出されます。
 最初のコマンドアプリケーションディレクトリーを呼び出して、次のコマンドを実行します。
 
-.. code-block:: bash
+.. code-block:: console
 
     bin/cake hello
 
@@ -71,7 +71,7 @@ Command クラスは、大部分の作業を行う ``execute()`` メソッドを
 
 このファイルを保存した後、次のコマンドを実行できるはずです。
 
-.. code-block:: bash
+.. code-block:: console
 
     bin/cake hello jillian
 

@@ -19,7 +19,7 @@ First, let's create a new table in our blog database to hold our users' data:
         created DATETIME DEFAULT NULL,
         modified DATETIME DEFAULT NULL
     );
-    
+
 If you are using PostgreSQL, connect to cake_blog database and execute the following SQL instead:
 
 .. code-block:: SQL
@@ -132,7 +132,7 @@ We're now ready to add our authentication layer. In CakePHP this is handled by
 the ``authentication`` plugin. Let's start off by installing it. Use composer to
 install the Authentication Plugin:
 
-.. code-block:: bash
+.. code-block:: console
 
     composer require "cakephp/authentication:^2.0"
 

@@ -79,8 +79,8 @@ You can temporarily disable deprecation warnings in one of a few ways:
             ]
         ],
 
-    Would ignore all deprecations from your ``Models`` directory and the
-    ``Contacts`` plugin in your application.
+   Would ignore all deprecations from your ``Models`` directory and the
+   ``Contacts`` plugin in your application.
 
 .. versionadded:: 4.2.0
     The ``Error.ignoredDeprecationPaths`` option was added.

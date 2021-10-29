@@ -22,7 +22,7 @@ bash the CakePHP console is compatible with any \*nix shell and windows.
 A CakePHP application contains **src/Command** directory that contain its commands.
 It also comes with an executable in the **bin** directory:
 
-.. code-block:: bash
+.. code-block:: console
 
     $ cd /path/to/app
     $ bin/cake
@@ -34,7 +34,7 @@ It also comes with an executable in the **bin** directory:
 Running the Console with no arguments will list out available commands. You
 could then run the any of the listed commands by using its name:
 
-.. code-block:: bash
+.. code-block:: console
 
     # run server command
     bin/cake server

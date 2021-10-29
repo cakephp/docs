@@ -507,6 +507,94 @@ To do this with the query builder, we'd use the following code::
 
     $query = $articles->find();
     $publishedCase = $query->newExpr()
+        ->case()
+        ->when(['published' => 'Y'])
+        ->then(1);
+    $unpublishedCase = $query->newExpr()
+        ->case()
+        ->when(['published' => 'N'])
+        ->then(1);
+
+    $query->select([
+        'number_published' => $query->func()->count($publishedCase),
+        'number_unpublished' => $query->func()->count($unpublishedCase)
+    ]);
+
+The ``when()`` method accepts SQL snippets, array conditions, and ``Closure``
+for when you need additional logic to build the cases. If we wanted to classify
+cities into SMALL, MEDIUM, or LARGE based on population size, we could do the
+following::
+
+    $query = $cities->find();
+    $sizing = $query->newExpr()->case()
+        ->when(['population <' => 100000])
+        ->then('SMALL')
+        ->when($q->between('population', 100000, 999000))
+        ->then('MEDIUM')
+        ->when(['population >=' => 999001])
+        ->then('LARGE');
+    $query = $query->select(['size' => $sizing]);
+    # SELECT CASE
+    #   WHEN population < 100000 THEN 'SMALL'
+    #   WHEN population BETWEEN 100000 AND 999000 THEN 'MEDIUM'
+    #   WHEN population >= 999001 THEN 'LARGE'
+    #   END AS size
+
+You need to be careful when including user provided data into case expressions
+as it can create SQL injection vulnerabilities::
+
+    // Unsafe do *not* use
+    $case->when($requestData['published']);
+
+    // Instead pass user data as values to array conditions
+    $case->when(['published' => $requestData['published']]);
+
+For more complex scenarios you can use ``QueryExpression`` objects and bound
+values::
+
+    $userValue = $query->newExpr()
+        ->case()
+        ->when($query->newExpr('population >= :userData'))
+        ->then(123, 'integer');
+
+    $query->select(['val' => $userValue])
+        ->bind(':userData', $requestData['value'], 'integer');
+
+By using bindings you can safely embed user data into complex raw SQL snippets.
+
+``then()``, ``when()`` and ``else()`` will try to infer the
+value type based on the parameter type. If you need to bind a value as
+a different type you can declare the desired type::
+
+    $case->when(['published' => true])->then('1', 'integer');
+
+You can create ``if ... then ... else`` conditions by using ``else()``::
+
+    $published = $query->newExpr()
+        ->case()
+        ->when(['published' => true])
+        ->then('Y');
+        ->else('N');
+
+    # CASE WHEN published = true THEN 'Y' ELSE 'N' END;
+
+Also, it's possible to create the simple variant by passing a value to ``case()``::
+
+    $published = $query->newExpr()
+        ->case($query->identifier('published'))
+        ->when(true)
+        ->then('Y');
+        ->else('N');
+
+    # CASE published WHEN true THEN 'Y' ELSE 'N' END;
+
+.. versionchanged:: 4.3.0
+    The fluent ``case()`` builder method was added.
+
+Prior to 4.3.0, you would need to use::
+
+    $query = $articles->find();
+    $publishedCase = $query->newExpr()
         ->addCase(
             $query->newExpr()->add(['published' => 'Y']),
             1,

@@ -88,7 +88,7 @@ Astuces de traducteurs
 - N'hésitez pas à plonger droit dans votre langue qui existe déjà dans le
   livre.
 - Utilisez une
-  `Forme Informelle <http://en.wikipedia.org/wiki/Register_(linguistics)>`_.
+  `Forme Informelle <https://en.wikipedia.org/wiki/Register#Linguistics>`_.
 - Traduisez à la fois le contenu et le titre en même temps.
 - Comparez au contenu anglais avant de soumettre une correction
   (si vous corrigez quelque chose, mais n'intégrez pas un changement 'en amont',
@@ -286,7 +286,7 @@ Description des classes et de leur contenu
 ------------------------------------------
 
 La documentation de CakePHP utilise `phpdomain
-<http://pypi.python.org/pypi/sphinxcontrib-phpdomain>`_ pour fournir des
+<https://pypi.org/project/sphinxcontrib-phpdomain/>`_ pour fournir des
 directives sur mesure pour décrire les objets PHP et les constructs. Utiliser
 les directives et les modèles est requis pour donner une bonne indexation et
 des fonctionnalités de référencement croisé.

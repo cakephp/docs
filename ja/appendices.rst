@@ -14,6 +14,8 @@
     appendices/4-0-upgrade-guide
     appendices/4-1-migration-guide
     appendices/4-2-migration-guide
+    appendices/4-3-migration-guide
+    appendices/fixture-upgrade
 
 後方互換性の補完
 ================

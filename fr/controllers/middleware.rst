@@ -306,13 +306,23 @@ un objet ``CSPBuilder`` déjà construit::
     $middlewareQueue->add($csp);
 
 Une fois le middleware CSP activé, les attributs ``cspScriptNonce`` et
-``cspStyleNonce`` seront définis sur les requêtes. Ces attributs sont appliqués
+``cspStyleNonce`` seront définis sur les requêtes.
+
+Si vous voulez utiliser une configuration CSP plus stricte, vous pouvez activer
+des règles CSP basées sur le nonce avec les options ``scriptNonce`` et
+``styleNonce``. Lorsqu'elles sont activées, ces options vont modifier votre
+politique CSP et définir les attributs ``cspScriptNonce`` et ``cspStyleNonce``
+dans la requête. Ces attributs sont appliqués
 à l'attribut ``nonce`` de tous les éléments scripts et liens CSS créés par
 ``HtmlHelper``. Cela simplifie l'adoption de stratégies utilisant un `nonce-base64
 <https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src>`__
 et ``strict-dynamic`` pour un surcroît de sécurité et une maintenance plus
-facile.
+facile::
 
+    $middlewareQueue->add($csp, [
+        'scriptNonce' => true,
+        'styleNonce' => true,
+    ]);
 
 .. versionadded:: 4.3.0
     Le remplissage automatique du nonce a été ajouté.

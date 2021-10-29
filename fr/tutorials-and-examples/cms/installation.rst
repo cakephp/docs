@@ -17,7 +17,7 @@ Voici les pré-requis:
 
 Avant de commencer, assurez-vous que votre version de PHP est à jour:
 
-.. code-block:: bash
+.. code-block:: console
 
     php -v
 
@@ -33,7 +33,7 @@ est une manière simple d'installer CakePHP via votre terminal. Premièrement, v
 devez télécharger et installer Composer si vous ne l'avez pas déjà fait. Si vous
 avez cURL installé, exécutez la commande suivante:
 
-.. code-block:: bash
+.. code-block:: console
 
     curl -s https://getcomposer.org/installer | php
 
@@ -43,7 +43,7 @@ Ou vous pouvez télécharger ``composer.phar`` depuis le
 Ensuite, tapez la commande suivante dans votre terminal pour installer le squelette
 d'application CakePHP dans le dossier **cms** du dossier courant:
 
-.. code-block:: bash
+.. code-block:: console
 
     php composer.phar create-project --prefer-dist cakephp/app:4.* cms
 
@@ -51,7 +51,7 @@ Si vous avez téléchargé et utilisé `l'Installer de Composer pour Windows
 <https://getcomposer.org/Composer-Setup.exe>`_, tapez la commande suivante dans
 votre terminal depuis le dossier d'installation (par exemple C:\\wamp\\www\\dev):
 
-.. code-block:: bash
+.. code-block:: console
 
     composer self-update && composer create-project --prefer-dist cakephp/app:4.* cms
 
@@ -100,7 +100,7 @@ Il est possible de vérifier que l'installation est terminée en vous rendant su
 la page d'accueil. Avant de faire ça, vous allez devoir lancer le serveur de
 développement:
 
-.. code-block:: bash
+.. code-block:: console
 
     cd /path/to/our/app
 

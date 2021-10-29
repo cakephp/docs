@@ -33,7 +33,7 @@ Les classes Command doivent avoir une méthode ``execute()`` qui fait la plus gr
 Cette méthode est appelée quand une commande est appelée. Appelons la première commande de notre
 application, exécutez:
 
-.. code-block:: bash
+.. code-block:: console
 
     bin/cake hello
 
@@ -70,7 +70,7 @@ Notre méthode ``execute()`` n'est pas très intéressente, ajoutons des entrée
 
 Après avoir sauvegardé ce fichier, vous devriez pouvoir exécuter la commande suivante:
 
-.. code-block:: bash
+.. code-block:: console
 
     bin/cake hello jillian
 

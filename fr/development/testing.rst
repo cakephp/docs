@@ -23,7 +23,7 @@ Installer PHPUnit avec Composer
 
 Pour installer PHPUnit avec Composer:
 
-.. code-block:: bash
+.. code-block:: console
 
     $ php composer.phar require --dev phpunit/phpunit:"^8.5"
 
@@ -32,7 +32,7 @@ Ceci va ajouter la dépendance à la section ``require-dev`` de votre
 
 Vous pouvez maintenant lancer PHPUnit en utilisant:
 
-.. code-block:: bash
+.. code-block:: console
 
     $ vendor/bin/phpunit
 
@@ -42,7 +42,7 @@ Utiliser le fichier PHAR
 Après avoir téléchargé le fichier **phpunit.phar**, vous pouvez l'utiliser pour
 lancer vos tests:
 
-.. code-block:: bash
+.. code-block:: console
 
     php phpunit.phar
 
@@ -92,7 +92,7 @@ Vérifier la Configuration Test
 Après avoir installé PHPUnit et configuré la configuration de la base de données de ``test``, vous pouvez vous assurer que vous êtes prêt à écrire et lancer
 vos propres tests en lançant un de ceux présents dans le cœur:
 
-.. code-block:: bash
+.. code-block:: console
 
     # Pour phpunit.phar
     $ php phpunit.phar
@@ -105,7 +105,7 @@ qu'aucun test n'a été lancé. Pour lancer un test spécifique, vous pouvez fou
 le chemin au test en paramètre de PHPUnit. Par exemple, si vous aviez un cas
 de test pour la classe ArticlesTable, vous pourriez le lancer avec:
 
-.. code-block:: bash
+.. code-block:: console
 
     $ vendor/bin/phpunit tests/TestCase/Model/Table/ArticlesTableTest
 
@@ -250,12 +250,10 @@ bonne idée de lancer les tests avant de committer tout changement pour aider
 En utilisant ``phpunit``, vous pouvez lancer les tests de votre application.
 Pour lancer vos tests d'application, vous pouvez simplement lancer:
 
-.. code-block:: bash
+.. code-block:: console
 
-    # avec l'installation de composer
-    $ vendor/bin/phpunit
+    vendor/bin/phpunit
 
-    # avec le fichier phar
     php phpunit.phar
 
 Si vous avez cloné la `source de CakePHP à partir de GitHub <https://github.com/cakephp/cakephp>`__
@@ -263,29 +261,27 @@ et que vous souhaitez exécuter les tests unitaires de CakePHP, n'oubliez pas
 d'exécuter la commande suivante de ``Composer`` avant de lancer ``phpunit`` pour
 que toutes les dépendances soient installées:
 
-.. code-block:: bash
+.. code-block:: console
 
-    $ composer install
+    composer install
 
 À partir du répertoire racine de votre application. Pour lancer les tests pour
 un plugin qui fait parti de la source de votre application, d'abord faîtes la
 commande ``cd`` vers le répertoire du plugin, ensuite utilisez la commande
 ``phpunit`` qui correspond à la façon dont vous avez installé phpunit:
 
-.. code-block:: bash
+.. code-block:: console
 
     cd plugins
 
-    # En utilisant phpunit installé avec composer
     ../vendor/bin/phpunit
 
-    # En utilisant le fichier phar
     php ../phpunit.phar
 
 Pour lancer les tests sur un plugin séparé, vous devez d'abord installer le
 projet dans un répertoire séparé et installer ses dépendances:
 
-.. code-block:: bash
+.. code-block:: console
 
     git clone git://github.com/cakephp/debug_kit.git
     cd debug_kit
@@ -300,7 +296,7 @@ sous-ensemble de méthodes de test quand vous essayez de travailler sur un
 cas unique d'échec. Avec l'exécuteur CLI vous pouvez utiliser une option pour
 filtrer les méthodes de test:
 
-.. code-block:: bash
+.. code-block:: console
 
     $ phpunit --filter testSave tests/TestCase/Model/Table/ArticlesTableTest
 
@@ -316,7 +312,7 @@ PHPUnit va générer un ensemble de fichiers en HTML statique contenant les
 résultats de la couverture. Vous pouvez générer une couverture pour un cas de
 test en faisant ce qui suit:
 
-.. code-block:: bash
+.. code-block:: console
 
     $ phpunit --coverage-html webroot/coverage tests/TestCase/Model/Table/ArticlesTableTest
 
@@ -328,7 +324,7 @@ Vous pouvez aussi utiliser ``phpdbg`` pour générer la couverture des résultat
 la place de xdebug. ``phpdbg`` est généralement plus rapide dans la génération
 des rapports de couverture:
 
-.. code-block:: bash
+.. code-block:: console
 
     $ phpdbg -qrr phpunit --coverage-html webroot/coverage tests/TestCase/Model/Table/ArticlesTableTest
 
@@ -479,11 +475,13 @@ migrations pour générer le schéma de votre base de données de test::
     // dans tests/bootstrap.php
     use Migrations\TestSuite\Migrator;
 
+    $migrator = new Migrator();
+
     // Configuration simple sans plugin
-    Migrator::migrate();
+    $migrator->run();
 
     // Lancer les migrations pour plusieurs plugins
-    Migrator::migrate([
+    $migrator->run([
         ['plugin' => 'Contacts'],
         // Lancer les migrations Documents sur la connexion test_docs.
         ['plugin' => 'Documents', 'connection' => 'test_docs'],
@@ -718,12 +716,8 @@ un certain point, vous ne soyez plus en mesure les maintenir.
 Le `fixture factories plugin <https://github.com/vierge-noire/cakephp-fixture-factories>`__ propose une
 alternative efficace pour des applications de taille moyenne et plus.
 
-Le plugin utilise son propre `phpunit listener <https://github.com/vierge-noire/cakephp-test-suite-light>`__,
-qui effectue les actions suivantes:
-
-#. Faire tourner les migrations `(description ici) <https://github.com/vierge-noire/cakephp-test-migrator>`__.
-#. Tronquer les tables utilisées au préalable avant chaque test.
-#. Lancer les tests.
+Le plugin utilise le `test suite light plugin <https://github.com/vierge-noire/cakephp-test-suite-light>`__
+afin de tronquer les tables non vierges avant chaque test.
 
 La commande bake suivante vous assistera pour créer vos factories::
 
@@ -879,15 +873,11 @@ En utilisant les fixture factories, le test se présente ainsi::
 
     namespace App\Test\TestCase\Model\Table;
 
-    use App\Model\Table\ArticlesTable;
     use App\Test\Factory\ArticleFactory;
     use Cake\TestSuite\TestCase;
 
     class ArticlesTableTest extends TestCase
     {
-        public function setUp(): void
-        { ... }
-
         public function testFindPublished(): void
         {
             // Insérer 3 articles publiés
@@ -895,7 +885,7 @@ En utilisant les fixture factories, le test se présente ainsi::
             // Insérer 2 articles non publiés
             ArticleFactory::make(['published' => 0], 2)->persist();
 
-            $result = $this->Articles->find('published')->find('list')->toArray();
+            $result = ArticleFactory::find('published')->find('list')->toArray();
 
             $expected = [
                 $articles[0]->id => $articles[0]->title,
@@ -907,7 +897,8 @@ En utilisant les fixture factories, le test se présente ainsi::
         }
     }
 
-Aucune fixture n'est déclarée. Les 5 articles créés n'existeront que pour ce test.
+Aucune fixture n'est déclarée. Les 5 articles créés n'existeront que pour ce test. La méthode statique ``::find()``
+permet d'explorer la base de donnée sans évènements et sans recours à la table ``ArticlesTable``.
 
 Méthodes de Mocking des Models
 ------------------------------
@@ -1610,7 +1601,7 @@ définissant la variable d'environment ``UPDATE_TEST_COMPARISON_FILES``, ce qui
 va créer et/ou mettre à jour les fichiers de comparaison de test au fur et à
 mesure où ils sont rendus:
 
-.. code-block:: bash
+.. code-block:: console
 
     phpunit
     ...
@@ -2086,7 +2077,7 @@ de re-générer le squelette de vos fichiers de tests, ou si vous souhaitez
 générer le squelette de test pour le code que vous avez écrit, vous pouvez
 utiliser ``bake``:
 
-.. code-block:: bash
+.. code-block:: console
 
     bin/cake bake test <type> <name>
 

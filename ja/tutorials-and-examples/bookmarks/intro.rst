@@ -14,7 +14,7 @@
 
 始める前に、最新の PHP バージョンであることを確認してください。
 
-.. code-block:: bash
+.. code-block:: console
 
     php -v
 

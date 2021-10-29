@@ -18,7 +18,7 @@ command. This command will scan your entire application for ``__()`` style
 function calls, and extract the message string. Each unique string in your
 application will be combined into a single POT file:
 
-.. code-block:: bash
+.. code-block:: console
 
     bin/cake i18n extract
 
@@ -32,7 +32,7 @@ Generating POT Files for Plugins
 
 You can generate a POT file for a specific plugin using:
 
-.. code-block:: bash
+.. code-block:: console
 
     bin/cake i18n extract --plugin <Plugin>
 
@@ -48,7 +48,7 @@ from this directory as well as from the ``src`` directory. You can do it by
 using the ``--paths`` option. It takes a comma-separated list of absolute paths
 to extract:
 
-.. code-block:: bash
+.. code-block:: console
 
     bin/cake i18n extract --paths /var/www/app/config,/var/www/app/src
 
@@ -58,7 +58,7 @@ Excluding Folders
 You can pass a comma separated list of folders that you wish to be excluded.
 Any path containing a path segment with the provided values will be ignored:
 
-.. code-block:: bash
+.. code-block:: console
 
     bin/cake i18n extract --exclude vendor,tests
 
@@ -68,7 +68,7 @@ Skipping Overwrite Warnings for Existing POT Files
 By adding ``--overwrite``, the shell script will no longer warn you if a POT
 file already exists and will overwrite by default:
 
-.. code-block:: bash
+.. code-block:: console
 
     bin/cake i18n extract --overwrite
 
@@ -79,7 +79,7 @@ By default, the extract shell script will ask you if you like to extract
 the messages used in the CakePHP core libraries. Set ``--extract-core`` to yes
 or no to set the default behavior:
 
-.. code-block:: bash
+.. code-block:: console
 
     bin/cake i18n extract --extract-core yes
 
