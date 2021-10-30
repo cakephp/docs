@@ -311,8 +311,8 @@ and ``strict-dynamic`` for increased security and easier maintenance::
 
     $policy = [
         // Necessary for nonce to be set for script-src
-        'script-src' => []
-        'style-src' => []
+        'script-src' => [],
+        'style-src' => [],
     ];
     // Enable automatic nonce addition to script & CSS link tags.
     $csp = new CspMiddleware($policy, [
