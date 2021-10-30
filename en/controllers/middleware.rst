@@ -308,10 +308,18 @@ a `nonce-base64
 <https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src>`__
 and ``strict-dynamic`` for increased security and easier maintenance::
 
-    $middlewareQueue->add($csp, [
+
+    $policy = [
+        // Necessary for nonce to be set for script-src
+        'script-src' => []
+        'style-src' => []
+    ];
+    // Enable automatic nonce addition to script & CSS link tags.
+    $csp = new CspMiddleware($policy, [
         'scriptNonce' => true,
         'styleNonce' => true,
     ]);
+    $middlewareQueue->add($csp);
 
 .. versionadded:: 4.3.0
     Automatic nonce population was added.
