@@ -310,7 +310,7 @@ and ``strict-dynamic`` for increased security and easier maintenance::
 
 
     $policy = [
-        // Necessary for nonce to be set for script-src
+        // Must exist even if empty to set nonce for for script-src
         'script-src' => [],
         'style-src' => [],
     ];
