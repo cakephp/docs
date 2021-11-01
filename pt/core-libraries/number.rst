@@ -36,7 +36,7 @@ Todas essas funções retornam o número formatado; eles não
 são impressas automaticamente na visualização de saída.
 
 Formatação de Valores Monetários
-==========================
+================================
 
 .. php:method:: currency(mixed $value, string $currency = null, array $options = [])
 
@@ -105,7 +105,7 @@ formato de contabilidade, você deve definir o formato da moeda::
     Number::setDefaultCurrencyFormat(Number::FORMAT_CURRENCY_ACCOUNTING);
 
 Definição da moeda padrão
-============================
+=========================
 
 .. php:method:: setDefaultCurrency($currency)
 
@@ -115,7 +115,7 @@ moeda definindo outro padrão. Se ``$currency`` atribuído o valor ``null``,
 ele apagará o valor armazenado no momento.
 
 Obtendo a moeda padrão
-============================
+======================
 
 .. php:method:: getDefaultCurrency()
 
@@ -124,7 +124,7 @@ Obtem a moeda padrão. Se a moeda padrão foi definida anteriormente usando
 retornar o valor ``intl.default_locale`` do ini se estiver atribuído e ``'en_US'`` se não estiver.
 
 Formatando números de ponto flutuante
-=================================
+=====================================
 
 .. php:method:: precision(float $value, int $precision = 3, array $options = [])
 
@@ -141,7 +141,7 @@ Ele será arredondado para manter o nível de precisão definido. ::
     echo Number::precision(456.91873645, 2);
 
 Formatação de Porcentagens
-======================
+==========================
 
 .. php:method:: toPercentage(mixed $value, int $precision = 2, array $options = [])
 
@@ -169,7 +169,7 @@ porcentagem e anexa a saída com um sinal de porcentagem. ::
     ]);
 
 Interagindo com valores legíveis para humanos
-======================================
+=============================================
 
 .. php:method:: toReadableSize(string $size)
 
@@ -285,7 +285,7 @@ Exemplos::
     // Output '410th'
 
 Diferenças de formato
-==================
+=====================
 
 .. php:method:: formatDelta(mixed $value, array $options = [])
 
@@ -340,7 +340,7 @@ Exemplo::
 .. end-cakenumber
 
 Configurar formatadores
-====================
+=======================
 
 .. php:method:: config(string $locale, int $type = NumberFormatter::DECIMAL, array $options = [])
 
