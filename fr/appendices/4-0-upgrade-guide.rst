@@ -103,7 +103,7 @@ Application.php
 Ensuite, assurez-vous que votre ``src/Application.php`` a été mis à jour pour avoir les mêmes
 signatures de méthodes que celles trouvées dans cakephp/app. vous trouverez la dernière version de
 `Application.php
-<https://github.com/cakephp/app/blob/master/src/Application.php>`__ sur GitHub.
+<https://github.com/cakephp/app/blob/4.x/src/Application.php>`__ sur GitHub.
 
 Si vous fournissez une API de type REST, n'oubliez pas d'inclure le
 :ref:`body-parser-middleware`. Enfin, vous devriez envisager de passer aux nouveaux
