@@ -83,6 +83,10 @@ Network
 ORM
 ---
 
+- ``ModelAwareTrait::loadModel()`` is deprecated. Use the new ``LocatorAwareTrait::fetchTable()`` instead.
+  So for e.g. in controllers you can do ``$this->fetchTable()` to get the default table instance or use
+  ``$this->fetchTable('Foos')`` for a non-default table.  You can set the ``LocatorAwareTrait::$defaultTable`` 
+  property to specify the default table alias for ``fetchTable()``.
 - Query proxying all ``ResultSetInterface`` methods (including ```CollectionInterface```), which forces
   fetching results and calls the proxied method on the results, is now deprecated. An example of the
   deprecated usage is ``$query->combine('id', 'title');``. This should be
@@ -308,7 +312,8 @@ ORM
   the column is null.
 - ``LocatorAwareTrait::fetchTable()`` was added. This allows you to use ``$this->fetchTable()``
   to get a table instance in classes which use the trait, like controllers,
-  commands, mailers and cells.
+  commands, mailers and cells. You can set the ``LocatorAwareTrait::$defaultTable`` property
+  to specify the default table alias.
 
 TestSuite
 ---------
