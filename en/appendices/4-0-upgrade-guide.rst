@@ -60,7 +60,7 @@ plugin:
     bin/cake upgrade file_rename templates <path/to/app>
 
 Once you've renamed your template and locale files, make sure you update
-``App.paths.locales`` and ``App.paths.templates`` paths in **/config/app.php**. If needed, refer to the [skeleton app config](https://github.com/cakephp/app/blob/master/config/app.php).
+``App.paths.locales`` and ``App.paths.templates`` paths in **/config/app.php**. If needed, refer to the `skeleton app config <https://github.com/cakephp/app/blob/4.x/config/app.php>`_.
 
 Applying Rector Refactorings
 ----------------------------
@@ -95,7 +95,7 @@ Application.php
 Next, ensure your ``src/Application.php`` has been updated to have the same
 method signatures as the one found in cakephp/app. You can find the current
 `Application.php
-<https://github.com/cakephp/app/blob/master/src/Application.php>`__ on GitHub.
+<https://github.com/cakephp/app/blob/4.x/src/Application.php>`__ on GitHub.
 
 If you are providing some kind of REST API, don't forget to include the
 :ref:`body-parser-middleware`. Finally, you should consider upgrading to the new
