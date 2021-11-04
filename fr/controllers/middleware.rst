@@ -319,10 +319,17 @@ dans la requête. Ces attributs sont appliqués
 et ``strict-dynamic`` pour un surcroît de sécurité et une maintenance plus
 facile::
 
-    $middlewareQueue->add($csp, [
+    $policy = [
+        // Doivent exister, même vides, pour définir le nonce pour script-src
+        'script-src' => [],
+        'style-src' => [],
+    ];
+    // Active l'ajout automatique du nonce aux tags script & liens CSS.
+    $csp = new CspMiddleware($policy, [
         'scriptNonce' => true,
         'styleNonce' => true,
     ]);
+    $middlewareQueue->add($csp);
 
 .. versionadded:: 4.3.0
     Le remplissage automatique du nonce a été ajouté.
