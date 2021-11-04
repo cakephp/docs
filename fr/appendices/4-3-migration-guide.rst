@@ -107,6 +107,9 @@ ORM
 - ``Association::setName()`` est dépréciée. Les noms d'associations doivent être
   définis en même temps que l'association.
 - ``QueryExpression::addCase()`` est dépréciée. Utilisez ``case()`` à la place.
+  Les syntaxes ``['value' => 'literal']`` et ``['column' => 'identifier']`` ne
+  sont pas supportées dans le nouveau case builder. L'insertion de SQL brut ou
+  d'identifiants nécessite d'utiliser des expressions explicitement.
 
 Routing
 -------
