@@ -8,8 +8,11 @@ The following sections cover those tools:
     :maxdepth: 1
 
     core-libraries/security
-    Form Protection Component <controllers/components/form-protection>
-    CSRF Protection Middleware <controllers/middleware>
+    Form Protection Middleware <controllers/components/form-protection>
+    CSRF Protection <security/csrf>
+    Content Security Policy <security/content-security-policy>
+    Security Headers <security/security-headers>
+    HTTPS Enforcer <security/https-enforcer>
 
 .. meta::
     :title lang=en: Security

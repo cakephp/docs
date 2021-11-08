@@ -41,20 +41,22 @@ CakePHP provides several middleware to handle common tasks in web applications:
   incoming URL and assign routing parameters to the request.
 * ``Cake\I18n\Middleware\LocaleSelectorMiddleware`` enables automatic language
   switching from the ``Accept-Language`` header sent by the browser.
-* ``Cake\Http\Middleware\HttpsEnforcerMiddleware`` requires HTTPS to be used.
-* ``Cake\Http\Middleware\SecurityHeadersMiddleware`` makes it possible to add
-  security related headers like ``X-Frame-Options`` to responses.
 * ``Cake\Http\Middleware\EncryptedCookieMiddleware`` gives you the ability to
   manipulate encrypted cookies in case you need to manipulate cookie with
   obfuscated data.
-* ``Cake\Http\Middleware\CsrfProtectionMiddleware`` adds double-submit cookie
-  based CSRF protection to your application.
-* ``Cake\Http\Middleware\SessionCsrfProtectionMiddleware`` adds session based
-  CSRF protection to your application.
 * ``Cake\Http\Middleware\BodyParserMiddleware`` allows you to decode JSON, XML
   and other encoded request bodies based on ``Content-Type`` header.
-* ``Cake\Http\Middleware\CspMiddleware`` makes it simpler to add
-  Content-Security-Policy headers to your application.
+* :doc:`Cake\Http\Middleware\HttpsEnforcerMiddleware </security/https-enforcer>`
+  requires HTTPS to be used.
+* :doc:`Cake\Http\Middleware\CsrfProtectionMiddleware </security/csrf>` adds
+  double-submit cookie based CSRF protection to your application.
+* :ref:`Cake\Http\Middleware\SessionCsrfProtectionMiddleware <session-csrf-protection>` 
+  adds session based CSRF protection to your application.
+* :doc:`Cake\Http\Middleware\CspMiddleware </security/content-security-policy>`
+  makes it simpler to add Content-Security-Policy headers to your application.
+* :doc:`Cake\Http\Middleware\SecurityHeadersMiddleware </security/security-header-middleware>`
+  makes it possible to add security related headers like ``X-Frame-Options`` to
+  responses.
 
 .. _using-middleware:
 
@@ -239,92 +241,6 @@ enable cached routes, provide the desired :ref:`cache configuration
 The above would use the ``routing`` cache engine to store the generated route
 collection.
 
-.. _security-header-middleware:
-
-Security Header Middleware
-==========================
-
-The ``SecurityHeaderMiddleware`` layer allows you to apply security related
-headers to your application. Once setup the middleware can apply the following
-headers to responses:
-
-* ``X-Content-Type-Options``
-* ``X-Download-Options``
-* ``X-Frame-Options``
-* ``X-Permitted-Cross-Domain-Policies``
-* ``Referrer-Policy``
-
-This middleware is configured using a fluent interface before it is applied to
-your application's middleware stack::
-
-    use Cake\Http\Middleware\SecurityHeadersMiddleware;
-
-    $securityHeaders = new SecurityHeadersMiddleware();
-    $securityHeaders
-        ->setCrossDomainPolicy()
-        ->setReferrerPolicy()
-        ->setXFrameOptions()
-        ->setXssProtection()
-        ->noOpen()
-        ->noSniff();
-
-    $middlewareQueue->add($securityHeaders);
-
-Content Security Policy Header Middleware
-=========================================
-
-The ``CspMiddleware`` makes it simpler to add Content-Security-Policy headers in
-your application. Before using it you should install ``paragonie/csp-builder``:
-
-.. code-block::bash
-
-    composer require paragonie/csp-builder
-
-You can then configure the middleware using an array, or passing in a built
-``CSPBuilder`` object::
-
-    use Cake\Http\Middleware\CspMiddleware;
-
-    $csp = new CspMiddleware([
-        'script-src' => [
-            'allow' => [
-                'https://www.google-analytics.com',
-            ],
-            'self' => true,
-            'unsafe-inline' => false,
-            'unsafe-eval' => false,
-        ],
-    ]);
-
-    $middlewareQueue->add($csp);
-
-If you want to use a more strict CSP configuration, you can enable nonce based
-CSP rules with the ``scriptNonce`` and ``styleNonce`` options. When enabled
-these options will modify your CSP policy and set the  ``cspScriptNonce`` and
-``cspStyleNonce`` attributes in the request. These attributes are applied to
-the ``nonce`` attribute of all script and CSS link elements created by
-``HtmlHelper``. This simplifies the adoption of policies that use
-a `nonce-base64
-<https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src>`__
-and ``strict-dynamic`` for increased security and easier maintenance::
-
-
-    $policy = [
-        // Must exist even if empty to set nonce for for script-src
-        'script-src' => [],
-        'style-src' => [],
-    ];
-    // Enable automatic nonce addition to script & CSS link tags.
-    $csp = new CspMiddleware($policy, [
-        'scriptNonce' => true,
-        'styleNonce' => true,
-    ]);
-    $middlewareQueue->add($csp);
-
-.. versionadded:: 4.3.0
-    Automatic nonce population was added.
-
-
 .. _encrypted-cookie-middleware:
 
 Encrypted Cookie Middleware
@@ -351,189 +267,6 @@ Cookie data is encrypted with via OpenSSL using AES::
 
 The encryption algorithms and padding style used by the cookie middleware are
 backwards compatible with ``CookieComponent`` from earlier versions of CakePHP.
-
-.. _csrf-middleware:
-
-Cross Site Request Forgery (CSRF) Middleware
-============================================
-
-CSRF protection can be applied to your entire application, or to specific
-routing scopes.
-
-.. note::
-
-    You cannot use both of the following approaches together, you must choose
-    only one.  If you use both approaches together, a CSRF token mismatch error
-    will occur on every `PUT` and `POST` request
-
-CakePHP offers two forms of CSRF protection:
-
-* ``SessionCsrfProtectionMiddleware`` stores CSRF tokens in the session. This
-  requires that your application opens the session on every request with
-  side-effects. The benefits of session based CSRF tokens is that they are
-  scoped to a specific user, and only valid for the duration a session is live.
-* ``CsrfProtectionMiddleware`` stores CSRF tokens in a cookie. Using a cookie
-  allows CSRF checks to be done without any state on the server. Cookie values
-  are verified for authenticity using an HMAC check. However, due to their
-  stateless nature, CSRF tokens are re-usable across users and sessions.
-
-By applying a CSRF middleware to your Application middleware
-stack you protect all the actions in application::
-
-    // in src/Application.php
-    // For Cookie based CSRF tokens.
-    use Cake\Http\Middleware\CsrfProtectionMiddleware;
-
-    // For Session based CSRF tokens.
-    use Cake\Http\Middleware\SessionCsrfProtectionMiddleware;
-
-    public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue
-    {
-        $options = [
-            // ...
-        ];
-        $csrf = new CsrfProtectionMiddleware($options);
-        // or
-        $csrf = new SessionCsrfProtectionMiddleware($options);
-
-        $middlewareQueue->add($csrf);
-        return $middlewareQueue;
-    }
-
-By applying CSRF protection to routing scopes, you can conditionally
-apply CSRF to specific groups of routes::
-
-    // in src/Application.php
-    use Cake\Http\Middleware\CsrfProtectionMiddleware;
-
-    public function routes(RouteBuilder $routes) : void
-    {
-        $options = [
-            // ...
-        ];
-        $routes->registerMiddleware('csrf', new CsrfProtectionMiddleware($options));
-        parent::routes($routes);
-    }
-
-    // in config/routes.php
-    $routes->scope('/', function (RouteBuilder $routes) {
-        $routes->applyMiddleware('csrf');
-    });
-
-
-Cookie based CSRF middleware options
-------------------------------------
-
-The available configuration options are:
-
-- ``cookieName`` The name of the cookie to send. Defaults to ``csrfToken``.
-- ``expiry`` How long the CSRF token should last. Defaults to browser session.
-- ``secure`` Whether or not the cookie will be set with the Secure flag. That is,
-  the cookie will only be set on a HTTPS connection and any attempt over normal HTTP
-  will fail. Defaults to ``false``.
-- ``httponly`` Whether or not the cookie will be set with the HttpOnly flag.
-  Defaults to ``false``. Prior to 4.1.0 use the ``httpOnly`` option.
-- ``samesite`` Allows you to declare if your cookie should be restricted to a 
-  first-party or same-site context. Possible values are ``Lax``, ``Strict`` and 
-  ``None``. Defaults to ``null``.
-- ``field`` The form field to check. Defaults to ``_csrfToken``. Changing this
-  will also require configuring FormHelper.
-
-Session based CSRF middleware options
--------------------------------------
-
-The available configuration options are:
-
-- ``key`` The session key to use. Defaults to `csrfToken`
-- ``field`` The form field to check. Changing this will also require configuring
-  FormHelper.
-
-
-When enabled, you can access the current CSRF token on the request object::
-
-    $token = $this->request->getAttribute('csrfToken');
-
-Skipping CSRF checks for specific actions
------------------------------------------
-
-Both CSRF middleware implementations allow you to the skip check callback
-feature for more fine grained control over URLs for which CSRF token check
-should be done::
-
-    // in src/Application.php
-    use Cake\Http\Middleware\CsrfProtectionMiddleware;
-
-    public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue
-    {
-        $csrf = new CsrfProtectionMiddleware();
-
-        // Token check will be skipped when callback returns `true`.
-        $csrf->skipCheckCallback(function ($request) {
-            // Skip token check for API URLs.
-            if ($request->getParam('prefix') === 'Api') {
-                return true;
-            }
-        });
-
-        // Ensure routing middleware is added to the queue before CSRF protection middleware.
-        $middlewareQueue->add($csrf);
-
-        return $middlewareQueue;
-    }
-
-.. note::
-
-    You should apply the CSRF protection middleware only for routes which handle
-    stateful requests using cookies/sessions. For example, when developing an API, stateless requests are not 
-    affected by CSRF so the middleware does not need to be applied for those routes.
-
-Integration with FormHelper
----------------------------
-
-The ``CsrfProtectionMiddleware`` integrates seamlessly with ``FormHelper``. Each
-time you create a form with ``FormHelper``, it will insert a hidden field containing
-the CSRF token.
-
-.. note::
-
-    When using CSRF protection you should always start your forms with the
-    ``FormHelper``. If you do not, you will need to manually create hidden inputs in
-    each of your forms.
-
-CSRF Protection and AJAX Requests
----------------------------------
-
-In addition to request data parameters, CSRF tokens can be submitted through
-a special ``X-CSRF-Token`` header. Using a header often makes it easier to
-integrate a CSRF token with JavaScript heavy applications, or XML/JSON based API
-endpoints.
-
-The CSRF Token can be obtained in JavaScript via the Cookie ``csrfToken``, or in PHP
-via the request object attribute named ``csrfToken``. Using the cookie might be easier
-when your JavaScript code resides in files separate from the CakePHP view templates,
-and when you already have functionality for parsing cookies via JavaScript.
-
-If you have separate JavaScript files but don't want to deal with handling cookies,
-you could for example set the token in a global JavaScript variable in your layout, by
-defining a script block like this::
-
-    echo $this->Html->scriptBlock(sprintf(
-        'var csrfToken = %s;',
-        json_encode($this->request->getAttribute('csrfToken'))
-    ));
-
-You can then access the token as ``csrfToken`` or ``window.csrfToken`` in any script
-file that is loaded after this script block.
-
-Another alternative would be to put the token in a custom meta tag like this::
-
-    echo $this->Html->meta('csrfToken', $this->request->getAttribute('csrfToken'));
-
-which could then be accessed in your scripts by looking for the ``meta`` element with
-the name ``csrfToken``, which could be as simple as this when using jQuery::
-
-    var csrfToken = $('meta[name="csrfToken"]').attr('content');
-
 
 .. _body-parser-middleware:
 
@@ -564,39 +297,6 @@ an option. You can also define your own parsers::
         // Use a CSV parsing library.
         return Csv::parse($body);
     });
-
-.. _https-enforcer-middleware:
-
-HTTPS Enforcer Middleware
-=========================
-
-If you want your application to only be available via HTTPS connections you can
-use the ``HttpsEnforcerMiddleware``::
-
-    use Cake\Http\Middleware\HttpsEnforcerMiddleware;
-
-    // Always raise an exception and never redirect.
-    $https = new HttpsEnforcerMiddleware([
-        'redirect' => false,
-    ]);
-
-    // Send a 302 status code when redirecting
-    $https = new HttpsEnforcerMiddleware([
-        'redirect' => true,
-        'statusCode' => 302,
-    ]);
-
-    // Send additional headers in the redirect response.
-    $https = new HttpsEnforcerMiddleware([
-        'headers' => ['X-Https-Upgrade' => 1],
-    ]);
-
-    // Disable HTTPs enforcement when ``debug`` is on.
-    $https = new HttpsEnforcerMiddleware([
-        'disableOnDebug' => true,
-    ]);
-
-If a non-HTTP request is received that does not use GET a ``BadRequestException`` will be raised.
 
 .. meta::
     :title lang=en: Http Middleware
