@@ -54,7 +54,7 @@ CakePHP provides several middleware to handle common tasks in web applications:
   adds session based CSRF protection to your application.
 * :doc:`Cake\Http\Middleware\CspMiddleware </security/content-security-policy>`
   makes it simpler to add Content-Security-Policy headers to your application.
-* :doc:`Cake\Http\Middleware\SecurityHeadersMiddleware </security/security-header-middleware>`
+* :doc:`Cake\Http\Middleware\SecurityHeadersMiddleware </security/security-headers>`
   makes it possible to add security related headers like ``X-Frame-Options`` to
   responses.
 
