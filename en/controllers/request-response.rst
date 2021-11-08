@@ -779,7 +779,7 @@ Setting the Body
 To set a string as the response body, do the following::
 
     // Set a string into the body
-    $response = $response->withStringBody('My Body');
+    $response = $this->response->withStringBody('My Body');
 
     // If you want a json response
     $response = $response->withType('application/json')
