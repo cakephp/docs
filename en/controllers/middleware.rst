@@ -50,7 +50,7 @@ CakePHP provides several middleware to handle common tasks in web applications:
   requires HTTPS to be used.
 * :doc:`Cake\Http\Middleware\CsrfProtectionMiddleware </security/csrf>` adds
   double-submit cookie based CSRF protection to your application.
-* :ref:`Cake\Http\Middleware\SessionCsrfProtectionMiddleware <session-csrf-protection>` 
+* :doc:`Cake\Http\Middleware\SessionCsrfProtectionMiddleware </security/csrf>` 
   adds session based CSRF protection to your application.
 * :doc:`Cake\Http\Middleware\CspMiddleware </security/content-security-policy>`
   makes it simpler to add Content-Security-Policy headers to your application.
