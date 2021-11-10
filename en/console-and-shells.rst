@@ -168,11 +168,11 @@ You can customize the command names by defining each command in your plugin::
     public function console($commands)
     {
         // Add commands with nested naming
-        $commands->add('user dump', UserDumpCommand::class)
-        $commands->add('user:show', UserShowCommand::class)
+        $commands->add('user dump', UserDumpCommand::class);
+        $commands->add('user:show', UserShowCommand::class);
 
         // Rename a command entirely
-        $commands->add('lazer', UserDeleteCommand::class)
+        $commands->add('lazer', UserDeleteCommand::class);
 
         return $commands;
     }
