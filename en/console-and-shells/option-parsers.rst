@@ -387,6 +387,9 @@ Adding Subcommands
 
 .. php:method:: addSubcommand($name, $options = [])
 
+.. deprecated:: 3.6.0
+    Subcommands are deprecated. Instead use :ref:`nested commands <renaming-commands>`.
+
 Console applications are often made of subcommands, and these subcommands may
 require special option parsing and have their own help. A perfect example of
 this is ``bake``. Bake is made of many separate tasks that all have their own
@@ -427,6 +430,3 @@ Adding subcommands can be done as part of a fluent method chain.
 .. versionchanged:: 3.5.0
     When adding multi-word subcommands you can now invoke those commands using
     ``snake_case`` in addition to the camelBacked form.
-
-.. deprecated:: 3.6.0
-    Subcommands are deprecated. Instead use :ref:`nested commands <renaming-commands>`.
