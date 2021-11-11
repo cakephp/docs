@@ -58,3 +58,6 @@ Database
 --------
 
 * ``Query::expr()`` was added as an alternative to ``Query::newExpr()``.
+* The ``QueryExpression::case()`` builder now supports inferring the type
+  from expressions passed to ``then()`` and ``else()`` that implement
+  ``\Cake\Database\TypedResultInterface``.
