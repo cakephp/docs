@@ -28,6 +28,8 @@ languages = ['en', 'pt_BR', 'fr']
 
 branch = '1.1'
 
+is_eol = True
+
 # Add any paths that contain custom themes here, relative to this directory.
 html_theme_path = []
 html_theme = 'cakephp'
