@@ -20,6 +20,9 @@ DEST = website
 # Clone the en/Makefile everywhere.
 SPHINX_DEPENDENCIES = $(foreach lang, $(LANGS), $(lang)/Makefile)
 
+# Get path to theme to build static assets
+THEME_DIR = $(shell python3 -c 'import os, cakephpsphinx; print(os.path.abspath(os.path.dirname(cakephpsphinx.__file__)))')
+
 # Copy-paste the english Makefile everwhere its needed.
 %/Makefile: en/Makefile
 	cp $< $@
@@ -41,6 +44,8 @@ populate-index: $(foreach lang, $(LANGS), populate-index-$(lang))
 # Make the HTML version of the documentation with correctly nested language folders.
 html-%: $(SPHINX_DEPENDENCIES)
 	cd $* && make html LANG=$*
+	make build/html/$*/_static/css/app.css
+	make build/html/$*/_static/app.js
 
 htmlhelp-%: $(SPHINX_DEPENDENCIES)
 	cd $* && make htmlhelp LANG=$*
@@ -70,7 +75,7 @@ website-dirs:
 	# Make downloads for each language
 	$(foreach lang, $(LANGS), [ ! -d $(DEST)/_downloads/$(lang) ] && mkdir $(DEST)/_downloads/$(lang) || true;)
 
-website: website-dirs html populate-index
+website: website-dirs html
 	# Move HTML
 	$(foreach lang, $(LANGS), cp -r build/html/$(lang) $(DEST)/$(lang);)
 	
@@ -88,3 +93,28 @@ clean:
 
 clean-website:
 	rm -rf $(DEST)/*
+
+build/html/%/_static:
+	mkdir -p build/html/$*/_static
+
+CSS_FILES = $(THEME_DIR)/themes/cakephp/static/css/fonts.css \
+  $(THEME_DIR)/themes/cakephp/static/css/bootstrap.min.css \
+  $(THEME_DIR)/themes/cakephp/static/css/font-awesome.min.css \
+  $(THEME_DIR)/themes/cakephp/static/css/style.css \
+  $(THEME_DIR)/themes/cakephp/static/css/default.css \
+  $(THEME_DIR)/themes/cakephp/static/css/pygments.css \
+  $(THEME_DIR)/themes/cakephp/static/css/responsive.css
+
+build/html/%/_static/css/app.css: build/html/%/_static $(CSS_FILES)
+	# echo all dependencies ($$^) into the output ($$@)
+	cat $(CSS_FILES) > $@
+
+JS_FILES = $(THEME_DIR)/themes/cakephp/static/jquery.js \
+  $(THEME_DIR)/themes/cakephp/static/vendor.js \
+  $(THEME_DIR)/themes/cakephp/static/app.js \
+  $(THEME_DIR)/themes/cakephp/static/search.js \
+  $(THEME_DIR)/themes/cakephp/static/typeahead.js
+
+build/html/%/_static/app.js: build/html/%/_static $(JS_FILES)
+	# echo all dependencies ($JS_FILES) into the output ($$@)
+	cat $(JS_FILES) > $@
