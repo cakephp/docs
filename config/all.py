@@ -14,7 +14,7 @@ search_version = '12'
 
 version_name = ''
 
-# Show a warning that this release is not supported.
+# Show a warning that this release is not end of life.
 is_eol = True
 
 # Other versions that display in the version picker menu.
