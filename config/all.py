@@ -28,6 +28,7 @@ languages = ['en', 'pt_BR', 'fr']
 
 branch = '1.1'
 
+# Show a warning that this release is unmaintained.
 is_eol = True
 
 # Add any paths that contain custom themes here, relative to this directory.
