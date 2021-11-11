@@ -14,6 +14,8 @@ search_version = '12'
 
 version_name = ''
 
+is_eol = True
+
 # Other versions that display in the version picker menu.
 version_list = [
     {'name': '4.x', 'number': '4', 'title': '4.x Book'},
