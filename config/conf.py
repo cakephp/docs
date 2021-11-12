@@ -19,10 +19,13 @@ release = '2.x'
 search_version = '20'
 
 # Branch name in cakephp/docs
-branch = 'master'
+branch = '2.x'
 
 # 2.x has no marketing name
 version_name = ''
+
+# 2.x is out of support
+is_eol = True
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
@@ -40,7 +43,7 @@ version_list = [
     {'name': '1.1', 'number': '1.1', 'title': '1.1 Book'},
 ]
 
-languages =  ['en', 'pt', 'es', 'ja', 'fr', 'zh']
+languages =  ['en', 'pt_BR', 'es', 'ja', 'fr', 'zh']
 
 
 # The name of the Pygments (syntax highlighting) style to use.

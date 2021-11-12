@@ -2,7 +2,7 @@
 # Inspired by the Makefile used by bazaar.
 # http://bazaar.launchpad.net/~bzr-pqm/bzr/2.3/
 
-PYTHON = python3
+PYTHON = python
 ES_HOST =
 ES_HOST_V2 =
 

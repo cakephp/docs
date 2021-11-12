@@ -1,41 +1,27 @@
-FROM debian:bullseye as builder
+FROM markstory/cakephp-docs-builder as builder
 
-ENV DEBIAN_FRONTEND noninteractive
-
-LABEL Description="This image is used to create deployable images for book.cakephp.org"
-
-RUN apt-get update && apt-get install -y \
-    python3-pip \
-    texlive-latex-recommended \
-    texlive-latex-extra \
-    texlive-fonts-recommended \
-    texlive-lang-all \
-    latexmk \
-  && apt-get clean \
-  && rm -rf /var/lib/apt/lists/*
-
-RUN apt-get update \
-  && apt-get install -y curl php-cli php-curl \
-  && apt-get clean \
-  && rm -rf /var/lib/apt/lists/*
-
+COPY . /data/docs
 COPY requirements.txt /tmp/
+RUN pip install -r /tmp/requirements.txt && rm /tmp/requirements.txt
 
-RUN pip3 install -r /tmp/requirements.txt
+WORKDIR /data/docs
 
-WORKDIR /data
-
-COPY . /data
-
-RUN make website
+RUN make website DEST="/data/website"
 
 # Create a slim nginx image.
 # Final image doesn't need python or latex
-FROM nginx:1.21-alpine
+FROM markstory/cakephp-docs-builder:runtime as runtime
+
+# Configure search index script
+ENV LANGS="en es fr ja pt zh"
+ENV SEARCH_SOURCE="/data/docs"
+ENV SEARCH_URL_PREFIX="/20"
 
 COPY --from=builder /data/website /data/website
-COPY --from=builder /data/nginx.conf /etc/nginx/conf.d/default.conf
+COPY --from=builder /data/docs/nginx.conf /etc/nginx/conf.d/default.conf
 
 # Move built site into place
 RUN cp -R /data/website/* /usr/share/nginx/html \
   && rm -rf /data/website/
+
+CMD ["/data/run.sh"]
