@@ -6,7 +6,7 @@ fáciles. Proporciona una caja de herramientas todo-en-uno y para que puedas
 empezar rápidamente, las diferentes partes de CakePHP trabajan correctamente de
 manera conjunta o separada.
 
-El objetivo de esta artículo es el de introducirte en los conceptos generales de
+El objetivo de este artículo es introducirte en los conceptos generales de
 CakePHP y darte un rápido vistazo sobre como esos conceptos están implementados
 en CakePHP. Si estás deseando comenzar un proyecto puedes :doc:`empezar con el tutorial
 </tutorials-and-examples/bookmarks/intro>`, o :doc:`profundizar en la documentación
