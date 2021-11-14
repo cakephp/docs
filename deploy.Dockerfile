@@ -20,8 +20,6 @@ ENV SEARCH_URL_PREFIX="/20"
 COPY --from=builder /data/website /data/website
 COPY --from=builder /data/docs/nginx.conf /etc/nginx/conf.d/default.conf
 
-# Move built site into place
+# Move built site into place.
 RUN cp -R /data/website/* /usr/share/nginx/html \
   && rm -rf /data/website/
-
-CMD ["/data/run.sh"]
