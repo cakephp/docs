@@ -17,6 +17,7 @@ ENV LANGS="en es fr ja pt zh"
 ENV SEARCH_SOURCE="/data/docs"
 ENV SEARCH_URL_PREFIX="/20"
 
+COPY --from=builder /data/docs /data/docs
 COPY --from=builder /data/website /data/website
 COPY --from=builder /data/docs/nginx.conf /etc/nginx/conf.d/default.conf
 
