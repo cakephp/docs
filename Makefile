@@ -78,7 +78,7 @@ website-dirs:
 	# Make downloads for each language
 	$(foreach lang, $(LANGS), [ ! -d $(DEST)/_downloads/$(lang) ] && mkdir $(DEST)/_downloads/$(lang) || true;)
 
-website: website-dirs html populate-index epub pdf
+website: website-dirs html epub pdf
 	# Move HTML
 	$(foreach lang, $(LANGS), cp -r build/html/$(lang) $(DEST)/$(lang);)
 
