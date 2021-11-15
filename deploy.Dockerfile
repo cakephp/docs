@@ -18,7 +18,7 @@ ENV SEARCH_URL_PREFIX="/30"
 
 COPY --from=builder /data/docs /data/docs
 COPY --from=builder /data/website /data/website
-COPY --from=builder /data/nginx.conf /etc/nginx/conf.d/default.conf
+COPY --from=builder /data/docs/nginx.conf /etc/nginx/conf.d/default.conf
 
 # Move built site into place
 RUN cp -R /data/website/* /usr/share/nginx/html \
