@@ -15,7 +15,7 @@ version = '3.10'
 release = '3.10'
 
 # The search index version.
-search_version = '30'
+search_version = '3'
 
 # The marketing diplay name for the book.
 version_name = 'Red Velvet'
