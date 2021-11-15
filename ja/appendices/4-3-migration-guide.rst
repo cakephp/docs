@@ -9,7 +9,7 @@ CakePHP 4.3 は 4.0 からのAPI互換アップグレードです。
 
 CakePHP 4.3.0にアップグレードするには、次の Composer コマンドを実行してください。::
 
-    php composer.phar require --update-with-dependencies "cakephp/cakephp:^4.3@RC"
+    php composer.phar require --update-with-dependencies "cakephp/cakephp:^4.3"
 
 非推奨
 ============
@@ -79,7 +79,10 @@ Network
 
 ORM
 ---
-
+- ``ModelAwareTrait::loadModel()`` は非推奨です。
+  代わりに、新しい ``LocatorAwareTrait::fetchTable()`` を使用してください。
+  例えば、コントローラではデフォルトのテーブルインスタンスを取得するために ``$this->fetchTable()`` を実行することもできますし、
+  デフォルト以外のテーブルを取得するには ``$this->fetchTable('Foos')`` を使用することもできます。
 - クエリをプロキシするすべての ``ResultSetInterface`` メソッド（ ```CollectionInterface``` を含む）
   （これらは強制的に結果を取得し、その結果に対してプロキシされたメソッドを呼び出します）は非推奨になりました。
   非推奨な使い方の例として、 ``$query->combine('id', 'title');`` があります。
@@ -89,6 +92,7 @@ ORM
 - ``Association::setName()`` は非推奨です。
   アソシエーションの名前は、アソシエーションが の時に定義しなければなりません。
 - ``QueryExpression::addCase()`` は非推奨です。代わりに ``case()`` を使用してください。
+  また、 ``[['value' => 'literal']`` および ``[['column' => 'identifier']`` の構文は、新しい流暢なケースビルダーではサポートされていません。
 
 Routing
 -------
@@ -214,8 +218,8 @@ Controller
 
 - ``Controller::middleware()`` が追加され、単一のコントローラに対してのみミドルウェアを定義することができるようになりました。
   詳しくは `controller-middleware` をご覧ください。
-- コントローラでは、アクションパラメータに ``float``, ``int``, ``bool`` のいずれかの型宣言をサポートするようになりました。
-  ブール型で渡されるパラメータは、0か1のどちらかでなければなりません。
+- コントローラでは、アクションパラメータに ``float``, ``int``, ``bool``, ``array`` のいずれかの型宣言をサポートするようになりました。
+  ブール型で渡されるパラメータは、 ``0`` か ``1`` のどちらかでなければなりません。
 
 Core
 ----
@@ -292,6 +296,7 @@ ORM
 - ``LocatorAwareTrait::fetchTable()`` が追加されました。
   これにより、 ``$this->fetchTable()`` を使って、コントローラ、コマンド、メーラー、セルなどの
   traitを使ったクラスのテーブルインスタンスを取得することができます。
+  ``LocatorAwareTrait::$defaultTable`` プロパティを設定することで、デフォルトのテーブルエイリアスを指定することができます。
 
 TestSuite
 ---------
