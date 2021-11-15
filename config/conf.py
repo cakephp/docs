@@ -15,7 +15,7 @@ version = '5.x'
 release = '5.x'
 
 # The search index version.
-search_version = '50'
+search_version = '5'
 
 # The marketing diplay name for the book.
 version_name = '?'
