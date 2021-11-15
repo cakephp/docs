@@ -5,7 +5,7 @@ name: 'deploy_4.x'
 on:
   push:
     branches:
-      - 3.x
+      - 4.x
 
 jobs:
   deploy:
