@@ -171,7 +171,7 @@ assign a set of information to the view::
     $data = [
         'color' => 'pink',
         'type' => 'sugar',
-        'base_price' => 23.95
+        'base_price' => 23.95,
     ];
 
     // Make $color, $type, and $base_price
