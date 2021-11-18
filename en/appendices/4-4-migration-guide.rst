@@ -61,3 +61,9 @@ Database
 * The ``QueryExpression::case()`` builder now supports inferring the type
   from expressions passed to ``then()`` and ``else()`` that implement
   ``\Cake\Database\TypedResultInterface``.
+
+Http
+----
+
+* ``HttpsEnforcerMiddleware`` now has an ``hsts`` option that allows you to
+  configure the ``Strict-Transport-Security`` header.
