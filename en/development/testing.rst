@@ -61,9 +61,9 @@ tests:
 Test Database Setup
 ===================
 
-Remember to have debug enabled in your **config/app.php** file before running
+Remember to have debug enabled in your **config/app_local.php** file before running
 any tests.  Before running any tests you should be sure to add a ``test``
-datasource configuration to **config/app.php**. This configuration is used by
+datasource configuration to **config/app_local.php**. This configuration is used by
 CakePHP for fixture tables and data::
 
     'Datasources' => [
