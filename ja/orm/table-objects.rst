@@ -162,7 +162,7 @@ ORM 内でフックしたり、サブクラス化やメソッドをオーバー�
 initialize
 ----------
 
-.. php:method:: initialize(Event $event, ArrayObject $data, ArrayObject $options)
+.. php:method:: initialize(EventInterface $event, ArrayObject $data, ArrayObject $options)
 
 ``Model.initialize`` イベントは、コンストラクターと initialize メソッドが呼ばれた後に発行されます。
 デフォルトでは、 ``Table`` クラスは、このイベントを購読しません。そして、代わりに ``initialize``
@@ -198,15 +198,25 @@ initialize
 beforeMarshal
 -------------
 
-.. php:method:: beforeMarshal(Event $event, ArrayObject $data, ArrayObject $options)
+.. php:method:: beforeMarshal(EventInterface $event, ArrayObject $data, ArrayObject $options)
 
 ``Model.beforeMarshal`` イベントは、リクエストデータがエンティティーに変換される前に発行されます。
 詳細は :ref:`before-marshal` をご覧ください。
 
+afterMarshal
+-------------
+
+.. php:method:: afterMarshal(EventInterface $event, EntityInterface $entity, ArrayObject $data, ArrayObject $options)
+
+The ``Model.afterMarshal`` イベントは、リクエストデータがエンティティーに変換された後に発行されます。
+イベントハンドラは、変換されたエンティティ、元のリクエストデータ、および ``patchEntity()`` または ``newEntity()`` 呼び出しに提供されたオプションを取得します。
+
+.. versionadded:: 4.1.0
+
 beforeFind
 ----------
 
-.. php:method:: beforeFind(Event $event, Query $query, ArrayObject $options, $primary)
+.. php:method:: beforeFind(EventInterface $event, Query $query, ArrayObject $options, $primary)
 
 ``Model.beforeFind`` イベントは各 find 操作の前に発行されます。
 
@@ -242,7 +252,7 @@ CakePHP の旧バージョンでは ``afterFind`` コールバックがありま
 buildValidator
 ---------------
 
-.. php:method:: buildValidator(Event $event, Validator $validator, $name)
+.. php:method:: buildValidator(EventInterface $event, Validator $validator, $name)
 
 ``Model.buildValidator`` イベントは ``$name`` バリデーターが作られた時に発行されます。
 ビヘイビアーは、バリデーションメソッドに追加するために、このフックが使用できます。
@@ -250,7 +260,7 @@ buildValidator
 buildRules
 ----------
 
-.. php:method:: buildRules(Event $event, RulesChecker $rules)
+.. php:method:: buildRules(EventInterface $event, RulesChecker $rules)
 
 ``Model.buildRules`` イベントはルールインスタンスが作られた後と、
 Table の ``beforeRules()`` メソッドが呼ばれた後に発行されます。
@@ -258,7 +268,7 @@ Table の ``beforeRules()`` メソッドが呼ばれた後に発行されます�
 beforeRules
 --------------
 
-.. php:method:: beforeRules(Event $event, EntityInterface $entity, ArrayObject $options, $operation)
+.. php:method:: beforeRules(EventInterface $event, EntityInterface $entity, ArrayObject $options, $operation)
 
 ``Model.beforeRules`` イベントはエンティティーにルールが適用される前に発行されます。
 このイベントが止まると、チェックのためのルールを停止して、適用したルールの結果を
@@ -267,7 +277,7 @@ beforeRules
 afterRules
 --------------
 
-.. php:method:: afterRules(Event $event, EntityInterface $entity, ArrayObject $options, $result, $operation)
+.. php:method:: afterRules(EventInterface $event, EntityInterface $entity, ArrayObject $options, $result, $operation)
 
 ``Model.afterRules`` イベントはルールがエンティティーに適用された後に発行されます。
 このイベントが止まると、操作をチェックするためのルールの結果の値を返すことができます。
@@ -275,7 +285,7 @@ afterRules
 beforeSave
 ----------
 
-.. php:method:: beforeSave(Event $event, EntityInterface $entity, ArrayObject $options)
+.. php:method:: beforeSave(EventInterface $event, EntityInterface $entity, ArrayObject $options)
 
 ``Model.beforeSave`` イベントはエンティティーが保存する前に発行されます。
 このイベントを止めることによって、保存を停止できます。イベントが停止すると、
@@ -285,14 +295,14 @@ beforeSave
 afterSave
 ---------
 
-.. php:method:: afterSave(Event $event, EntityInterface $entity, ArrayObject $options)
+.. php:method:: afterSave(EventInterface $event, EntityInterface $entity, ArrayObject $options)
 
 ``Model.afterSave`` イベントはエンティティーを保存した後に発行されます。
 
 afterSaveCommit
 ---------------
 
-.. php:method:: afterSaveCommit(Event $event, EntityInterface $entity, ArrayObject $options)
+.. php:method:: afterSaveCommit(EventInterface $event, EntityInterface $entity, ArrayObject $options)
 
 ``Model.afterSaveCommit`` イベントは、保存処理がラップされたトランザクションが
 コミットされた後に発行されます。データベース操作が暗黙的にコミットされる非アトミックな保存でも
@@ -302,7 +312,7 @@ save が呼ばれる前にトランザクションが始まっている場合、
 beforeDelete
 ------------
 
-.. php:method:: beforeDelete(Event $event, EntityInterface $entity, ArrayObject $options)
+.. php:method:: beforeDelete(EventInterface $event, EntityInterface $entity, ArrayObject $options)
 
 ``Model.beforeDelete`` イベントはエンティティーを削除する前に発行されます。
 このイベントを停止することによって、削除を中止できます。イベントが停止すると、
@@ -312,19 +322,77 @@ beforeDelete
 afterDelete
 -----------
 
-.. php:method:: afterDelete(Event $event, EntityInterface $entity, ArrayObject $options)
+.. php:method:: afterDelete(EventInterface $event, EntityInterface $entity, ArrayObject $options)
 
 ``Model.afterDelete`` イベントはエンティティーが削除された後に発行されます。
 
 afterDeleteCommit
 -----------------
 
-.. php:method:: afterDeleteCommit(Event $event, EntityInterface $entity, ArrayObject $options)
+.. php:method:: afterDeleteCommit(EventInterface $event, EntityInterface $entity, ArrayObject $options)
 
 ``Model.afterDeleteCommit`` イベントは、削除処理がラップされたトランザクションが
 コミットされた後に発行されます。データベース操作が暗黙的にコミットされる非アトミックな保存でも
 引き起こされます。イベントは、 ``delete()`` が直接呼ばれた最初のテーブルだけに引き起こされます。
 delete が呼ばれる前にトランザクションが始まっている場合、イベントは起こりません。
+
+Stopping Table Events
+---------------------
+保存を継続しないようにするには、コールバックでイベントの伝搬を停止するだけです::
+
+    public function beforeSave(EventInterface $event, EntityInterface $entity, ArrayObject $options)
+    {
+        if (...) {
+            $event->stopPropagation();
+            $event->setResult(false);
+            return;
+        }
+        ...
+    }
+
+また、コールバックからfalseを返すこともできます。これはイベントの伝播を止めるのと同じ効果があります。
+
+Callback priorities
+-------------------
+
+テーブルやビヘイビアでイベントを使用する際には、優先順位とリスナーが付く順番に注意してください。
+ビヘイビアイベントは、テーブルイベントの前にアタッチされます。
+デフォルトの優先順位では、ビヘイビアのコールバックが同名のテーブルイベントの**前**にトリガーされます。
+
+例えば、テーブルが ``TreeBehavior`` を使用している場合、
+``TreeBehavior::beforeDelete()`` メソッドは、テーブルの ``beforeDelete()`` メソッドよりも先に呼び出されてしまい、
+テーブルのメソッドで削除される子要素のレコードを操作することはできません。
+
+イベントの優先順位を管理するには、いくつかの方法があります:
+
+#. ``priority`` オプションを使って、ビヘイビアのリスナーの**優先度** を変更します。
+   これは、ビヘイビアの**すべての** コールバックメソッドの優先度を変更します。
+
+   Behavior::
+
+        // In a Table initialize() method
+        $this->addBehavior('Tree', [
+            // Default value is 10 and listeners are dispatched from the
+            // lowest to highest priority.
+            'priority' => 2,
+        ]);
+
+#. テーブルクラスの ``priority`` を変更するには、
+   ``Model.implementedEvents()`` メソッドを使用し、 ``Table`` クラスの ``priority`` を変更します。
+   これにより、コールバック関数ごとに異なる優先度を割り当てることができます::
+
+        // In a Table class.
+        public function implementedEvents()
+        {
+            $events = parent::implementedEvents();
+            $events['Model.beforeDelete'] = [
+                'callable' => 'beforeDelete',
+                'priority' => 3
+            ];
+
+            return $events;
+        }
+
 
 ビヘイビアー
 ============

@@ -5,8 +5,8 @@ Somos muy fans de la convención por encima de la configuración. A pesar de que
 toma algo de tiempo aprender las convenciones de CakePHP, ahorrarás tiempo
 a la larga. Siguiendo las convenciones obtendrás funcionalidades gratuitas y
 te liberarás de la pesadilla de mantener archivos de configuración. Las
-convenciones también hacen que el desarrollo sea uniforme, permitiendo que
-otros desarrolladores comprendan fácilmente tu código y ayudar.
+convenciones también hacen que el desarrollo sea uniforme, permitiendo a
+otros desarrolladores intervenir y ayudar facilmente.
 
 Convenciones de Controlador
 ===========================
