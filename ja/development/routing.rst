@@ -48,18 +48,11 @@ index メソッドを実行します。時々、複数のパラメーターを�
 制限することができます。 ::
 
     $routes->connect(
-        '/articles/:id',
+        '/articles/{id}',
         ['controller' => 'Articles', 'action' => 'view']
     )
     ->setPatterns(['id' => '\d+'])
     ->setPass(['id']);
-
-    // 3.5 より前はオプション配列を使用
-    $routes->connect(
-        '/articles/:id',
-        ['controller' => 'Articles', 'action' => 'view'],
-        ['id' => '\d+', 'pass' => ['id']]
-    );
 
 上の例はスターマッチャーを新たにプレースホルダー ``:id`` に変更しました。
 プレースホルダーを使うことで、URL 部分のバリデーションができます。
@@ -156,7 +149,6 @@ URL が特定されたら、一致したときにどのような動作をする�
         '/users/view/*',
         ['controller' => 'Users', 'action' => 'view']
     );
-    // アプリケーションのコントローラーへの文字列ターゲット。 3.6.0 以上が必要
     $routes->connect('/users/view/*', 'Users::view');
 
     // プレフィックス付きのプラグインコントローラーへの配列ターゲット
@@ -164,7 +156,6 @@ URL が特定されたら、一致したときにどのような動作をする�
         '/admin/cms/articles',
         ['prefix' => 'Admin', 'plugin' => 'Cms', 'controller' => 'Articles', 'action' => 'index']
     );
-    // プレフィックス付きのプラグインコントローラーへの文字列ターゲット。3.6.0 以上が必要
     $routes->connect('/admin/cms/articles', 'Cms.Admin/Articles::index');
 
 接続する最初のルートは、 ``/users/view`` から始まる URL と一致し、
@@ -223,7 +214,7 @@ URL の残りを１つの引数として取り込みます。これは、 ``/`` 
 次のルートでそれが処理できます。 ::
 
     $routes->connect(
-        '/cooks/:action/*', ['controller' => 'Users']
+        '/cooks/{action}/*', ['controller' => 'Users']
     );
 
 これは Router に ``/cooks/`` で始まるすべての URL は ``UsersController`` に送るように
@@ -243,14 +234,14 @@ HTTP アクションを異なるコントローラーメソッドにマップす
 
     // GET リクエストへのみ応答するルートの作成
     $routes->get(
-        '/cooks/:id',
+        '/cooks/{id}',
         ['controller' => 'Users', 'action' => 'view'],
         'users:view'
     );
 
     // PUT リクエストへのみ応答するルートの作成
     $routes->put(
-        '/cooks/:id',
+        '/cooks/{id}',
         ['controller' => 'Users', 'action' => 'update'],
         'users:update'
     );
@@ -283,18 +274,11 @@ URL のどこに配置すべきなのかを定義することができます。�
 正規表現を使用しなかった場合、 ``/`` 以外の文字はパラメーターの一部として扱われます。 ::
 
     $routes->connect(
-        '/:controller/:id',
+        '/{controller}/{id}',
         ['action' => 'view']
     )->setPatterns(['id' => '[0-9]+']);
 
-    // 3.5 より前はオプション配列を使用
-    $routes->connect(
-        '/:controller/:id',
-        ['action' => 'view'],
-        ['id' => '[0-9]+']
-    );
-
-上記の例は、 ``/コントローラー名/:id`` のような形の URL で、任意のコントローラーの
+上記の例は、 ``/コントローラー名/{id}`` のような形の URL で、任意のコントローラーの
 モデルを表示するための、素早く作成する方法を示しています。 ``connect()`` に渡した URL は
 ``:controller`` と ``:id`` という２つのルート要素を指定します。この ``:controller`` 要素は
 CakePHP のデフォルトルート要素であるため、ルーターが URL のコントローラー名をどのように照合し識別するかを
@@ -309,15 +293,8 @@ CakePHP は小文字とダッシュによって表された URL を ``:controlle
     // 異なるルートクラスを持つビルダーを作成します。
     $routes->scope('/', function ($routes) {
         $routes->setRouteClass(DashedRoute::class);
-        $routes->connect('/:controller/:id', ['action' => 'view'])
+        $routes->connect('/{controller}/{id}', ['action' => 'view'])
             ->setPatterns(['id' => '[0-9]+']);
-
-        // 3.5 より前はオプション配列を使用
-        $routes->connect(
-            '/:controller/:id',
-            ['action' => 'view'],
-            ['id' => '[0-9]+']
-        );
     });
 
 ``DashedRoute`` クラス ``:controller`` を確認し、
@@ -340,21 +317,19 @@ ApplesController の ``view()`` メソッドを呼びます。  ``view()`` メ�
 たとえば、 ``home`` コントローラーのアクションにすべての URL をマップするために、
 ``/home/demo`` の代わりに ``/demo``  という URL を持つとすると、次のようにできます。 ::
 
-    $routes->connect('/:action', ['controller' => 'Home']);
+    $routes->connect('/{action}', ['controller' => 'Home']);
 
 もし、大文字小文字を区別しない URL を提供したい場合、正規表現インライン修飾子を使います。 ::
 
-    // 3.5 より前は setPatterns() の代わりにオプション配列を使用
     $routes->connect(
-        '/:userShortcut',
+        '/{userShortcut}',
         ['controller' => 'Teachers', 'action' => 'profile', 1],
     )->setPatterns(['userShortcut' => '(?i:principal)']);
 
 もう一つ例を挙げます。これであなたはルーティングのプロです。 ::
 
-    // 3.5 より前は setPatterns() の代わりにオプション配列を使用
     $routes->connect(
-        '/:controller/:year/:month/:day',
+        '/{controller}/{year}/{month}/{day}',
         ['action' => 'index']
     )->setPatterns([
         'year' => '[12][0-9]{3}',
@@ -375,17 +350,6 @@ CakePHP にコントローラー名が必要なことを伝えています。
 一度定義されると、このルートは ``/articles/2007/02/01`` , ``/articles/2004/11/16``
 にマッチし、 ``$this->request->getParam()`` の中の日付パラメーターを伴って
 それぞれのコントローラーの ``index()`` アクションにリクエストを渡します。
-
-3.6.0 から、 ``:var`` の代わりに ``{var}`` をルート要素に使うことができます。
-この新しいパラメータースタイルを使用すると、ルート要素を区切りのない区画に
-埋め込むことができます。例::
-
-    $routes->connect(
-        '/images/resize/{id}/{width}x{height}',
-        ['controller' => 'Images', 'action' => 'view']
-    );
-
-上記は ``:var`` スタイルのプレースホルダーを使って定義することは不可能です。
 
 予約済みルート要素
 -----------------------
@@ -424,7 +388,7 @@ CakePHP には、いくつかの特別な意味を持つルート要素があり
 これらのメソッドは、 ``connect()`` の ``$options`` パラメーターの多くのキーを置き換えます。 ::
 
     $routes->connect(
-        '/:lang/articles/:slug',
+        '/{lang}/articles/{slug}',
         ['controller' => 'Articles', 'action' => 'view']
     )
     // GET と POST リクエストを許可
@@ -464,7 +428,7 @@ CakePHP には、いくつかの特別な意味を持つルート要素があり
     // routes.php
     Router::scope('/', function ($routes) {
         $routes->connect(
-            '/blog/:id-:slug', // 例えば /blog/3-CakePHP_Rocks
+            '/blog/{id}-{slug}', // 例えば /blog/3-CakePHP_Rocks
             ['controller' => 'Blogs', 'action' => 'view']
         )
         // 関数に引数を渡すためのルーティングテンプレートの中で、ルート要素を定義します。
@@ -514,7 +478,7 @@ CakePHP はルートに定義された URL をどのように整えるのかを�
         ['_name' => 'login']
     );
 
-    // HTTP メソッド指定でルートを命名 (3.5.0 以降)
+    // HTTP メソッド指定でルートを命名
     $routes->post(
         '/logout',
         ['controller' => 'Users', 'action' => 'logout'],
@@ -619,7 +583,7 @@ CakePHP では、プレフィックスルーティングは,  ``prefix`` スコ�
     Router::prefix('Admin', ['param' => 'value'], function ($routes) {
         // ここで接続されているルートは '/admin' でプレフィックスされており、
         // 'param' ルーティングキーを持っています。
-        $routes->connect('/:controller');
+        $routes->connect('/{controller}');
     });
 
 マルチワードのプレフィックスはデフォルトでダッシュの屈折を使用して変換されます。つまり、
@@ -628,29 +592,29 @@ CakePHP では、プレフィックスルーティングは,  ``prefix`` スコ�
 
     Router::prefix('MyPrefix', ['path' => '/my_prefix'], function (RouteBuilder $routes) {
         // ここに接続されているルートには、 ``/my_prefix`` というプレフィックスが付きます
-        $routes->connect('/:controller');
+        $routes->connect('/{controller}');
     });
 
 このようにプラグインスコープの中で、プレフィックスを定義できます。 ::
 
     Router::plugin('DebugKit', function ($routes) {
         $routes->prefix('Admin', function ($routes) {
-            $routes->connect('/:controller');
+            $routes->connect('/{controller}');
         });
     });
 
-上記は ``/debug_kit/admin/:controller`` のようなルートテンプレートを作ります。
+上記は ``/debug_kit/admin/{controller}`` のようなルートテンプレートを作ります。
 接続されたルートは、 ``plugin`` と ``prefix`` というルート要素を持ちます。
 
 プレフィックスを定義したときに、必要ならば複数のプレフィックスをネストできます。 ::
 
     Router::prefix('Manager', function ($routes) {
         $routes->prefix('Admin', function ($routes) {
-            $routes->connect('/:controller/:action');
+            $routes->connect('/{controller}/{action}');
         });
     });
 
-上記のコードは、 ``/manager/admin/:controller/:action`` のようなルートテンプレートを生成します。
+上記のコードは、 ``/manager/admin/{controller}/{action}`` のようなルートテンプレートを生成します。
 接続されたルートは ``prefix`` というルート要素を ``Manager/Admin`` に設定します。
 
 現在のプレフィックスはコントローラーのメソッドから ``$this->request->getParam('prefix')``
@@ -714,7 +678,7 @@ CakePHP では、プレフィックスルーティングは,  ``prefix`` スコ�
     Router::plugin('DebugKit', function ($routes) {
         // ここに接続されるルートは '/debug_kit' というプレフィックスが付き、
         // このプラグインのルート要素には 'DebugKit' がセットされています。
-        $routes->connect('/:controller');
+        $routes->connect('/{controller}');
     });
 
 プラグインスコープを作るときに、 ``path`` オプションでパス要素をカスタマイズできます。 ::
@@ -722,25 +686,25 @@ CakePHP では、プレフィックスルーティングは,  ``prefix`` スコ�
     Router::plugin('DebugKit', ['path' => '/debugger'], function ($routes) {
         // ここに接続されるルートは '/debugger' というプレフィックスが付き、
         // このプラグインのルート要素には 'DebugKit' がセットされています。
-        $routes->connect('/:controller');
+        $routes->connect('/{controller}');
     });
 
 スコープを使うときに、プレフィックススコープ内でプラグインスコープをネストできます。 ::
 
     Router::prefix('Admin', function ($routes) {
         $routes->plugin('DebugKit', function ($routes) {
-            $routes->connect('/:controller');
+            $routes->connect('/{controller}');
         });
     });
 
-上記は、 ``/admin/debug_kit/:controller`` のようなルートを作成します。
+上記は、 ``/admin/debug_kit/{controller}`` のようなルートを作成します。
 これは ``prefix`` と ``plugin`` のルート要素の組み合わせになります。
 プラグインルートの構築について、詳しくは :ref:`plugin-routes` にあります。
 
 プラグインルートへのリンクの作成
 --------------------------------
 
-上記は、 ``/admin/debug_kit/:controller`` のようなルーティングを作ります。
+上記は、 ``/admin/debug_kit/{controller}`` のようなルーティングを作ります。
 これは、 ``prefix`` と ``plugin`` をルート要素として持ちます。
 
 URL 配列に plugin キーを追加することによって、プラグインを指すリンクを作成できます。 ::
@@ -789,7 +753,6 @@ SEO に親和性があるルーティング
         );
 
         // 複数 HTTP メソッドとマッチします
-        // 3.5 より前は $options['_method'] をメソッドにセットして使用
         $routes->connect(
             '/reviews/start',
             [
@@ -818,7 +781,6 @@ SEO に親和性があるルーティング
 
     Router::scope('/', function($routes) {
         // このルートは http://images.example.com のみマッチします。
-        // 3.5 より前は _host オプションを使用
         $routes->connect(
             '/images/default-logo.png',
             ['controller' => 'Images', 'action' => 'default']
@@ -869,7 +831,6 @@ SEO に親和性があるルーティング
 メソッドを使用して定義することができます。 ::
 
     Router::scope('/', function ($routes) {
-        // 3.5.0 より前は `extensions()` を使用
         $routes->setExtensions(['json', 'xml']);
     });
 
@@ -891,10 +852,9 @@ SEO に親和性があるルーティング
 以下を使ってルートを設定します。 ::
 
     Router::scope('/page', function ($routes) {
-        // 3.5.0 より前は `extensions()` を使用
         $routes->setExtensions(['json', 'xml', 'html']);
         $routes->connect(
-            '/:title',
+            '/{title}',
             ['controller' => 'Pages', 'action' => 'view']
         )->setPass(['title']);
     });
@@ -939,7 +899,7 @@ SEO に親和性があるルーティング
     $routes->scope('/cms', function ($routes) {
         // CSRF & cookies ミドルウェアを有効化
         $routes->applyMiddleware('csrf', 'cookies');
-        $routes->get('/articles/:action/*', ['controller' => 'Articles']);
+        $routes->get('/articles/{action}/*', ['controller' => 'Articles']);
     });
 
 ネストされたスコープがある状況では、内部スコープは、
@@ -995,7 +955,6 @@ recipe コントローラーに REST アクセスできるようにしたい場�
     // config/routes.php 内で...
 
     Router::scope('/', function ($routes) {
-        // 3.5.0 より前は `extensions()` を使用
         $routes->setExtensions(['json']);
         $routes->resources('Recipes');
     });
@@ -1046,8 +1005,8 @@ DELETE      /recipes/123.format   RecipesController::delete(123)
 これで ``articles`` と ``comments`` 両方のリソースルートを生成します。
 この comments のルートは次のようになります。 ::
 
-    /api/articles/:article_id/comments
-    /api/articles/:article_id/comments/:id
+    /api/articles/{article_id}/comments
+    /api/articles/{article_id}/comments/{id}
 
 ``CommentsController`` の ``article_id`` を次のように取得できます。 ::
 
@@ -1336,7 +1295,7 @@ URL を生成するときに、特別なルート要素が使用できます。
 たとえば、次のようなルートで開始するとします。 ::
 
     $routes->get(
-        '/view/:id',
+        '/view/{id}',
         ['controller' => 'Articles', 'action' => 'view'],
         'articles:view'
     );
@@ -1359,7 +1318,7 @@ URL 生成に渡すことで、URL がより多くのパラメーターが必要
 
     // 以前と同じようにルートを作成します。
     $routes->get(
-        '/view/:id',
+        '/view/{id}',
         ['controller' => 'Articles', 'action' => 'view'],
         'articles:view'
     );
@@ -1393,17 +1352,16 @@ URL を文字列で生成します。URL パラメーターがルートに一致
 カスタムルートクラスを ``routeClass`` オプションを使って設定することができます。 ::
 
     $routes->connect(
-         '/:slug',
+         '/{slug}',
          ['controller' => 'Articles', 'action' => 'view'],
          ['routeClass' => 'SlugRoute']
     );
 
     // また、スコープの中で routeClass を設定することもできます。
     $routes->scope('/', function ($routes) {
-        // 3.5.0 以前では `routeClass()` を使用
         $routes->setRouteClass('SlugRoute');
         $routes->connect(
-             '/:slug',
+             '/{slug}',
              ['controller' => 'Articles', 'action' => 'view']
         );
     });
@@ -1447,8 +1405,8 @@ fallbacks メソッドはデフォルトルートをショートカットする�
 
     use Cake\Routing\Route\DashedRoute;
 
-    $routes->connect('/:controller', ['action' => 'index'], ['routeClass' => DashedRoute::class]);
-    $routes->connect('/:controller/:action/*', [], ['routeClass' => DashedRoute::class]);
+    $routes->connect('/{controller}', ['action' => 'index'], ['routeClass' => DashedRoute::class]);
+    $routes->connect('/{controller}/{action}/*', [], ['routeClass' => DashedRoute::class]);
 
 .. note::
 

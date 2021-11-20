@@ -4,7 +4,7 @@ Content Security Policy Middleware
 The ``CspMiddleware`` makes it simpler to add Content-Security-Policy headers in
 your application. Before using it you should install ``paragonie/csp-builder``:
 
-.. code-block::bash
+.. code-block:: bash
 
     composer require paragonie/csp-builder
 
