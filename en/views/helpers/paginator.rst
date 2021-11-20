@@ -9,7 +9,7 @@ The PaginatorHelper is used to output pagination controls such as page numbers
 and next/previous links. It works in tandem with
 :php:class:`PaginatorComponent`.
 
-See also :doc:`/controllers/components/pagination` for information on how to
+See also :doc:`/controllers/pagination` for information on how to
 create paginated datasets and do paginated queries.
 
 .. _paginator-templates:
