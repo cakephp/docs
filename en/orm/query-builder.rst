@@ -1731,8 +1731,8 @@ To build that query with the ORM query builder we would use::
 
     // Attach a common table expression
     $query->with(function ($cte) {
-        // Create a query to use in our table expression
-        $q = $this->Orders->find();
+        // Create a subquery to use in our table expression
+        $q = $this->Orders->subquery();
         $q->select([
             'order_count' => $q->func()->count('*'),
             'customer_id'
