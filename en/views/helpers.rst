@@ -235,8 +235,8 @@ Like most components of CakePHP, helper classes have a few conventions:
 * Helper class files should be put in **src/View/Helper**. For example:
   **src/View/Helper/LinkHelper.php**
 * Helper classes should be suffixed with ``Helper``. For example: ``LinkHelper``.
-* When referencing helper class names you should omit the ``Helper`` suffix. For
-  example: ``$this->addHelper('Link');`` or ``$this->setHelper('Link');``.
+* When referencing helper names you should omit the ``Helper`` suffix. For
+  example: ``$this->addHelper('Link');`` or ``$this->loadHelper('Link');``.
 
 You'll also want to extend ``Helper`` to ensure things work correctly::
 
