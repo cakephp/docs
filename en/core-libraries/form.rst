@@ -36,10 +36,12 @@ a simple contact form would look like::
 
         public function validationDefault(Validator $validator)
         {
-            $validator->add('name', 'length', [
+            $validator
+                ->add('name', 'length', [
                     'rule' => ['minLength', 5],
                     'message' => 'A name is required'
-                ])->add('email', 'format', [
+                ])
+                ->add('email', 'format', [
                     'rule' => 'email',
                     'message' => 'A valid email address is required',
                 ]);
