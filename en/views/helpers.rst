@@ -30,30 +30,30 @@ helpers included in CakePHP, check out the chapter for each helper:
 Configuring Helpers
 ===================
 
-You load helpers in CakePHP by declaring them in a view class. An ``AppView``
-class comes with every CakePHP application and is the ideal place to load
-helpers::
+You configure helpers in CakePHP by declaring them in a view class. An ``AppView``
+class comes with every CakePHP application and is the ideal place to add
+helpers for global use::
 
     class AppView extends View
     {
         public function initialize(): void
         {
             parent::initialize();
-            $this->loadHelper('Html');
-            $this->loadHelper('Form');
-            $this->loadHelper('Flash');
+            $this->addHelper('Html');
+            $this->addHelper('Form');
+            $this->addHelper('Flash');
         }
     }
 
-To load helpers from plugins use the :term:`plugin syntax` used elsewhere in
+To add helpers from plugins use the :term:`plugin syntax` used elsewhere in
 CakePHP::
 
-    $this->loadHelper('Blog.Comment');
+    $this->addHelper('Blog.Comment');
 
-You don't have to explicitly load Helpers that come from CakePHP or your
+You don't have to explicitly add Helpers that come from CakePHP or your
 application. These helpers can be lazily loaded upon first use. For example::
 
-    // Loads the FormHelper if it has not already been loaded.
+    // Loads the FormHelper if it has not already been explicitly added/loaded.
     $this->Form->create($article);
 
 From within a plugin's views, plugin helpers can also be lazily loaded. For
@@ -63,7 +63,7 @@ same plugin.
 Conditionally Loading Helpers
 -----------------------------
 
-You can use the current action name to conditionally load helpers::
+You can use the current action name to conditionally add helpers::
 
     class AppView extends View
     {
@@ -71,12 +71,12 @@ You can use the current action name to conditionally load helpers::
         {
             parent::initialize();
             if ($this->request->getParam('action') === 'index') {
-                $this->loadHelper('ListPage');
+                $this->addHelper('ListPage');
             }
         }
     }
 
-You can also use your controller's ``beforeRender`` method to load helpers::
+You can also use your controller's ``beforeRender`` method to add helpers::
 
     class ArticlesController extends AppController
     {
@@ -119,6 +119,9 @@ your helper requires. For example::
     {
         use StringTemplateTrait;
 
+        /**
+         * @var array<string, mixed>
+         */
         protected $_defaultConfig = [
             'errorClass' => 'error',
             'templates' => [
@@ -166,7 +169,7 @@ implementation::
     {
         public function initialize(): void
         {
-            $this->loadHelper('Html', [
+            $this->addHelper('Html', [
                 'className' => 'MyHtml'
             ]);
         }
@@ -232,8 +235,8 @@ Like most components of CakePHP, helper classes have a few conventions:
 * Helper class files should be put in **src/View/Helper**. For example:
   **src/View/Helper/LinkHelper.php**
 * Helper classes should be suffixed with ``Helper``. For example: ``LinkHelper``.
-* When referencing helper class names you should omit the ``Helper`` suffix. For
-  example: ``$this->loadHelper('Link');``.
+* When referencing helper names you should omit the ``Helper`` suffix. For
+  example: ``$this->addHelper('Link');`` or ``$this->loadHelper('Link');``.
 
 You'll also want to extend ``Helper`` to ensure things work correctly::
 
@@ -265,7 +268,7 @@ just as you would in a controller::
 
     class LinkHelper extends Helper
     {
-        public $helpers = ['Html'];
+        protected $helpers = ['Html'];
 
         public function makeEdit($title, $url)
         {
@@ -291,7 +294,7 @@ load it in your views::
         public function initialize(): void
         {
             parent::initialize();
-            $this->loadHelper('Link');
+            $this->addHelper('Link');
         }
     }
 
