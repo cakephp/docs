@@ -463,11 +463,23 @@ database schema as well::
     // Run the Documents migrations on the test_docs connection.
     $migrator->run(['plugin' => 'Documents', 'connection' => 'test_docs']);
 
+If you need to run multiple sets of migrations, those can be run as follows::
+
+    // Run migrations for plugin Contacts on
+    // the ``test`` connection, and Documents on the ``test_docs`` connection
+    $migrator->runMany([
+        ['plugin' => 'Contacts'],
+        ['plugin' => 'Documents', 'connection' => 'test_docs']
+    ]);
+
+Using ``runMany()`` will ensure that plugins that share a database don't drop
+tables as each set of migrations is run.
+
 The migrations plugin will only run unapplied migrations, and will reset
 migrations if your current migration head differs from the applied migrations.
 
 You can also configure how migrations should be run in tests in your datasources
-configuration. See the `migrations docs </migrations>` for more information.
+configuration. See the :doc:`migrations docs </migrations>` for more information.
 
 To load a SQL dump file you can use the following::
 
