@@ -466,9 +466,12 @@ database schema as well::
 If you need to run multiple sets of migrations, those can be run as follows::
 
     // Run migrations for plugin Contacts on
-    // the ``test`` connection, and Documents on the ``test_docs`` connection
     $migrator->runMany([
+        // Run app migrations on test connection.
+        ['connection' => 'test']
+        // Run Contacts migrations on test connection.
         ['plugin' => 'Contacts'],
+        // Run Documents migrations on test_docs connection.
         ['plugin' => 'Documents', 'connection' => 'test_docs']
     ]);
 
