@@ -45,6 +45,9 @@ Cache
 Controller
 ----------
 
+- After loading components are no longer set as dynamic properties. Instead
+  ``Controller`` uses ``__get()`` to provide property access to components. This
+  change can impact applications that use ``property_exists()`` on components.
 - The components' ``Controller.shutdown`` event callback has been renamed from
   ``shutdown`` to ``afterFilter`` to match the controller one. This makes the callbacks more consistent.
 
