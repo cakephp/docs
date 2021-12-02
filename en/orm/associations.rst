@@ -234,7 +234,7 @@ Possible keys for hasOne association arrays include:
   associated table into the source table results. By default this is the
   underscored & singular name of the association so ``address`` in our example.
 - **strategy**: The query strategy used to load matching record from the other table.
-  Accepted values are ``'join'`` and ``'select'``. Using 'select' will generate a separate query
+  Accepted values are ``'join'`` and ``'select'``. Using ``'select'`` will generate a separate query
   and can be useful when the other table is in different database. The default is ``'join'``.
 - **finder**: The finder method to use when loading associated records.
 
@@ -323,7 +323,7 @@ Possible keys for belongsTo association arrays include:
   associated table into the source table results. By default this is the
   underscored & singular name of the association so ``user`` in our example.
 - **strategy**: The query strategy used to load matching record from the other table.
-  Accepted values are ``'join'`` and ``'select'``. Using 'select' will generate a separate query
+  Accepted values are ``'join'`` and ``'select'``. Using ``'select'`` will generate a separate query
   and can be useful when the other table is in different database. The default is ``'join'``.
 - **finder**: The finder method to use when loading associated records.
 
