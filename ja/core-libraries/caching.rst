@@ -26,7 +26,7 @@ CakePHP のキャッシュは、主に :php:class:`Cache` クラスを使用し�
 * ``Wincache`` Wincache は、 `Wincache <https://secure.php.net/wincache>`_ 拡張を使用します。
   Wincache は APC と同等の機能やパフォーマンスですが、 Windows と Microsoft IIS に
   最適化しています。
-* ``XcacheEngine`` `Xcache <http://xcache.lighttpd.net/>`_
+* ``XcacheEngine`` `Xcache <https://en.wikipedia.org/wiki/List_of_PHP_accelerators#XCache>`_
   は、APC と同等の機能を持つ PHP 拡張です。
 * ``MemcacheEngine`` `Memcache <https://secure.php.net/memcache>`_ 拡張を使用します。
   Memcache は、複数サーバに分散されたとても速いキャッシュシステムを提供し、

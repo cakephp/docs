@@ -27,7 +27,7 @@ to implement your own caching systems. The built-in caching engines are:
 * ``Wincache`` Wincache uses the `Wincache <https://secure.php.net/wincache>`_
   extension. Wincache is similar to APC in features and performance, but
   optimized for Windows and Microsoft IIS.
-* ``XcacheEngine`` `Xcache <http://xcache.lighttpd.net/>`_
+* ``XcacheEngine`` `Xcache <https://en.wikipedia.org/wiki/List_of_PHP_accelerators#XCache>`_
   is a PHP extension that provides similar features to APC.
 * ``MemcacheEngine`` Uses the `Memcache <https://secure.php.net/memcache>`_
   extension. Memcache provides a very fast cache system that can be
