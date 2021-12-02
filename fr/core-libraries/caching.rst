@@ -32,7 +32,7 @@ votre propre système de mise en cache. Les moteurs de cache intégrés sont:
 * ``Wincache`` Utilise l'extension `Wincache <https://secure.php.net/wincache>`_.
   Wincache offre des fonctionnalités et des performances semblables à APC, mais
   optimisées pour Windows et IIS.
-* ``XcacheEngine`` `Xcache <http://xcache.lighttpd.net/>`_.
+* ``XcacheEngine`` `Xcache <https://en.wikipedia.org/wiki/List_of_PHP_accelerators#XCache>`_.
   est une extension PHP qui fournit des fonctionnalités similaires à APC.
 * ``MemcacheEngine`` Utilise l'extension `Memcache <https://secure.php.net/memcache>`_.
   Memcache fournit un cache très rapide qui peut être distribué au travers

@@ -17,7 +17,7 @@ CakePHP 中的缓存主要是由 :php:class:`Cache` 类来帮助（处理）的�
   默认情况下 CakePHP 2.0-2.2 会使用该缓存引擎，如果可用的话。
 * ``Wincache`` Wincache 使用 `Wincache <https://secure.php.net/wincache>`_ 扩展。
   Wincache 在功能和性能上类似于 APC，但针对 Windows 和 微软的IIS 做了优化。
-* ``XcacheEngine`` `Xcache <http://xcache.lighttpd.net/>`_ 是一个 PHP 扩展，提供
+* ``XcacheEngine`` `Xcache <https://en.wikipedia.org/wiki/List_of_PHP_accelerators#XCache>`_ 是一个 PHP 扩展，提供
   类似 APC 的功能。
 * ``MemcacheEngine`` 使用 `Memcache <https://secure.php.net/memcache>`_ 扩展。Memcache
   提供了非常快速的缓存系统，可以分布于很多台服务器，而且提供原子化操作。
