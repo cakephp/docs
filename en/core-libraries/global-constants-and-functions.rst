@@ -212,7 +212,7 @@ Most of the following constants refer to paths in your application.
 
     Path to the temporary files directory.
 
-.. php:const:: WWW\_ROOT
+.. php:const:: WWW_ROOT
 
     Full path to the webroot.
 
