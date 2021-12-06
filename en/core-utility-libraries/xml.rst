@@ -4,8 +4,8 @@ Xml
 .. php:class:: Xml
 
 The Xml class was all refactored. PHP 5 implements a
-`SimpleXML <https://secure.php.net/simplexml>`_ and
-`DOMDocument <https://secure.php.net/domdocument>`_, so that CakePHP doesn't need to
+`SimpleXML <https://www.php.net/simplexml>`_ and
+`DOMDocument <https://www.php.net/domdocument>`_, so that CakePHP doesn't need to
 re-implement an XML parser. The new XML class will transform an array into a
 SimpleXMLElement or DOMDocument objects, and vice versa.
 
@@ -79,8 +79,8 @@ If your input is invalid the Xml class will throw a Exception::
 
 .. note::
 
-    `DOMDocument <https://secure.php.net/domdocument>`_ and
-    `SimpleXML <https://secure.php.net/simplexml>`_ implement different API's.
+    `DOMDocument <https://www.php.net/domdocument>`_ and
+    `SimpleXML <https://www.php.net/simplexml>`_ implement different API's.
     Be sure to use the correct methods on the object you request from Xml.
 
 Transforming a XML string in array

@@ -123,7 +123,7 @@ Restricting cross controller communication
 
 .. php:attr:: allowedControllers
 
-    A list of controllers which can send requests 
+    A list of controllers which can send requests
     to this controller.
     This can be used to control cross controller requests.
 
@@ -282,7 +282,7 @@ You can also set this property in your controller's ``beforeFilter``::
     }
 
 The csrfExpires property can be any value that is compatible with
-`strtotime() <https://secure.php.net/manual/en/function.strtotime.php>`_. By default the
+`strtotime() <https://www.php.net/manual/en/function.strtotime.php>`_. By default the
 :php:class:`FormHelper` will add a ``data[_Token][key]`` containing the CSRF
 token to every form when the component is enabled.
 

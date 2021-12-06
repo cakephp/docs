@@ -9,9 +9,9 @@ hashing and encrypting data.
 
 .. note::
     By default the encryption features offered by Security rely on the deprecated
-    ``mcrypt`` extension. 
+    ``mcrypt`` extension.
     This behaviour can be changed by setting ``Security.useOpenSsl``.
-    If you are using the default behaviour using PHP>=7.1 you will need to 
+    If you are using the default behaviour using PHP>=7.1 you will need to
     install ``mcrypt`` via PECL.
 
 Security API
@@ -42,7 +42,7 @@ Security API
     :param string $mode: The mode to use, either 'encrypt' or 'decrypt'
 
     Encrypts/Decrypts text using the rijndael-256 cipher. This requires the
-    `mcrypt extension <https://secure.php.net/mcrypt>`_ to be installed::
+    `mcrypt extension <https://www.php.net/mcrypt>`_ to be installed::
 
         // Encrypt some data.
         $encrypted = Security::rijndael('a secret', Configure::read('Security.key'), 'encrypt');
