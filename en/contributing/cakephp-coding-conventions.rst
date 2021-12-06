@@ -458,7 +458,7 @@ Including Files
     require_once $class;
 
 When including files with classes or libraries, use only and always the
-`require\_once <https://secure.php.net/require_once>`_ function.
+`require\_once <https://www.php.net/require_once>`_ function.
 
 PHP Tags
 ========

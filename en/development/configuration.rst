@@ -287,15 +287,15 @@ App.baseUrl
     can find instructions for getting URL rewriting working for other
     servers under the :doc:`/installation/url-rewriting` section.
 App.fullBaseUrl
-    The fully qualified domain name (including protocol) to your application’s root. 
-    To configure CakePHP to use a particular domain URL for any URL 
-    generation inside the application, set this configuration 
-    variable. This will override the automatic detection of full 
-    base URL and can be useful when generating links from the CLI 
-    (e.g. sending emails). If the application runs in a subfolder, 
+    The fully qualified domain name (including protocol) to your application’s root.
+    To configure CakePHP to use a particular domain URL for any URL
+    generation inside the application, set this configuration
+    variable. This will override the automatic detection of full
+    base URL and can be useful when generating links from the CLI
+    (e.g. sending emails). If the application runs in a subfolder,
     you should also set ``App.base``.
 App.base
-    The base directory the app resides in. Should be used if the application runs 
+    The base directory the app resides in. Should be used if the application runs
     in a subfolder and ``App.fullBaseUrl`` is set.
 App.encoding
     Define what encoding your application uses. This encoding
@@ -535,7 +535,7 @@ Reading and writing configuration files
 CakePHP comes with two built-in configuration file readers.
 :php:class:`PhpReader` is able to read PHP config files, in the same
 format that Configure has historically read. :php:class:`IniReader` is
-able to read ini config files. See the `PHP documentation <https://secure.php.net/parse_ini_file>`_
+able to read ini config files. See the `PHP documentation <https://www.php.net/parse_ini_file>`_
 for more information on the specifics of ini files.
 To use a core config reader, you'll need to attach it to Configure
 using :php:meth:`Configure::config()`::
@@ -700,7 +700,7 @@ In your ``app/Config/bootstrap.php`` you could attach this reader and use it::
 
         It is not a good idea to call your custom configure class ``XmlReader`` because that
         class name is an internal PHP one already:
-        `XMLReader <https://secure.php.net/manual/en/book.xmlreader.php>`_
+        `XMLReader <https://www.php.net/manual/en/book.xmlreader.php>`_
 
 The ``read()`` method of a config reader, must return an array of the configuration information
 that the resource named ``$key`` contains.

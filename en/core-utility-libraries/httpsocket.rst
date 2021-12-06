@@ -123,8 +123,8 @@ Handling the response
 Responses from requests made with ``HttpSocket`` are instances of
 ``HttpResponse``. This object gives you a few accessor methods to access the
 contents of an HTTP response. This class implements the
-`ArrayAccess <https://secure.php.net/manual/en/class.arrayaccess.php>`_ and
-`__toString() <https://secure.php.net/manual/en/language.oop5.magic.php#language.oop5.magic.tostring>`_,
+`ArrayAccess <https://www.php.net/manual/en/class.arrayaccess.php>`_ and
+`__toString() <https://www.php.net/manual/en/language.oop5.magic.php#language.oop5.magic.tostring>`_,
 so you can continue using the ``$http->response`` as array and the return of
 request methods as string::
 

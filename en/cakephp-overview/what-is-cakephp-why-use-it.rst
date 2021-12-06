@@ -6,7 +6,7 @@ What is CakePHP? Why use it?
 `open-source <https://en.wikipedia.org/wiki/Open_source>`_,
 `rapid development <https://en.wikipedia.org/wiki/Rapid_application_development>`_
 `framework <https://en.wikipedia.org/wiki/Application_framework>`_
-for `PHP <https://secure.php.net/>`_. It's a foundational structure for
+for `PHP <https://www.php.net/>`_. It's a foundational structure for
 programmers to create web applications. Our primary goal is to
 enable you to work in a structured and rapid manner–without loss of
 flexibility.
