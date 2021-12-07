@@ -452,7 +452,7 @@ callable
     require_once $class;
 
 クラスまたはライブラリを伴うファイルを読み込む場合、
-`require\_once <https://secure.php.net/require_once>`_
+`require\_once <https://www.php.net/require_once>`_
 関数のみを常に使用してください。
 
 PHP タグ

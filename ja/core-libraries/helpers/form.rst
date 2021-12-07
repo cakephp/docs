@@ -1272,10 +1272,10 @@ select, checkbox, radio に関するオプション
     * ``$attributes['fieldset']`` legend 属性に false がセットされていなければ、
       この属性は fieldset 要素のクラスを設定するために使用できます。
 
- 
+
     .. versionchanged:: 2.1
         ``$attributes['disabled']`` オプションは 2.1 で追加されました。
-        
+
     .. versionchanged:: 2.8.5
         ``$attributes['fieldset']`` オプションは 2.8.5 で追加されました。
 
@@ -1496,7 +1496,7 @@ select, checkbox, radio に関するオプション
     この配列は PHP 自体によって生成されます。PHP が file フィールドを
     通してデータをどう処理しているのかについては、PHP マニュアルの
     ファイルアップロードのセクション
-    `<https://secure.php.net/features.file-upload>`_ を読んでみてください。
+    `<https://www.php.net/features.file-upload>`_ を読んでみてください。
 
 アップロードの検証
 ------------------

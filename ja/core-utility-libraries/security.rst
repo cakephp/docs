@@ -40,7 +40,7 @@ Security API
     :param string $mode: モード。'encrypt' もしくは 'decrypt'
 
     rijndael-256 暗号を使って、テキストを暗号化・復号します。
-    このメソッドを使うには `mcrypt extension <https://secure.php.net/mcrypt>`_
+    このメソッドを使うには `mcrypt extension <https://www.php.net/mcrypt>`_
     がインストールされている必要があります。 ::
 
         // データを暗号化

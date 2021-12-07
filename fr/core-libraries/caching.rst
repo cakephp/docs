@@ -24,21 +24,21 @@ votre propre système de mise en cache. Les moteurs de cache intégrés sont:
   grands objets ou des éléments qui sont rarement écrits fonctionne
   bien dans les fichiers. C'est le moteur de Cache par défaut pour 2.3+.
 * ``ApcCache`` Le cache APC utilise l'extension PHP
-  `APC <https://secure.php.net/apc>`_ ou `APCu <https://secure.php.net/apcu>`_. Ces extensions
+  `APC <https://secure.php.net/apc>`_ ou `APCu <https://www.php.net/apcu>`_. Ces extensions
   utilisent la mémoire partagée du serveur Web pour stocker les objets. Cela le
   rend très rapide, et capable de fournir les fonctionnalités atomiques en
   lecture/écriture. Par défaut CakePHP dans 2.0-2.2 utilisera ce moteur de cache
   si il est disponible.
-* ``Wincache`` Utilise l'extension `Wincache <https://secure.php.net/wincache>`_.
+* ``Wincache`` Utilise l'extension `Wincache <https://www.php.net/wincache>`_.
   Wincache offre des fonctionnalités et des performances semblables à APC, mais
   optimisées pour Windows et IIS.
 * ``XcacheEngine`` `Xcache <https://en.wikipedia.org/wiki/List_of_PHP_accelerators#XCache>`_.
   est une extension PHP qui fournit des fonctionnalités similaires à APC.
-* ``MemcacheEngine`` Utilise l'extension `Memcache <https://secure.php.net/memcache>`_.
+* ``MemcacheEngine`` Utilise l'extension `Memcache <https://www.php.net/memcache>`_.
   Memcache fournit un cache très rapide qui peut être distribué au travers
   de nombreux serveurs et il permet les opérations atomiques.
 * ``MemcachedEngine`` Utilise l'extension
-  `Memcached <https://secure.php.net/memcached>`_. Il est aussi une interface avec
+  `Memcached <https://www.php.net/memcached>`_. Il est aussi une interface avec
   memcache mais il fournit une meilleur performance.
 * ``RedisEngine`` Utilise l'extension
   `phpredis (2.2.3 minimum) <https://github.com/phpredis/phpredis>`_. Redis

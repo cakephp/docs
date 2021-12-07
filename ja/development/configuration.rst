@@ -105,7 +105,7 @@ settings
 に関する正確なネーミングルールを適用することで、自由に Cake の
 能力を引き出すことができ、またいくつかの設定作業を省略できます。
 たとえば、あなたのデータベーステーブルの名前を big\_boxes 、
-モデル名を BigBox 、コントローラ名ーを BigBoxesController 
+モデル名を BigBox 、コントローラ名ーを BigBoxesController
 とすることで、すべての機能が自動的に有効になります。慣習として、
 データベーステーブル名はアンダースコア、小文字、複数形にします。
 たとえば bakers, pastry\_stores, and savory\_cakes のようにします。
@@ -330,7 +330,7 @@ Session
       デフォルト設定。php, cake, cache, database という４種類の
       ビルトイン機構があります。
     * ``handler`` - ユーザー独自のセッションハンドラーとして使えます。
-       このハンドラーは `session_save_handler` と一緒に使える callable 
+       このハンドラーは `session_save_handler` と一緒に使える callable
        の配列を期待します。このオプションを有効にすると、ini 配列に
        `session.save_handler` が自動的に追加されます。
     * ``autoRegenerate`` - この設定を有効にすると、セッションを毎回
@@ -393,7 +393,7 @@ CakePHP が参照する定数がいくつか存在します。
 コアのキャッシュ設定
 --------------------
 
-CakePHP は内部的に ``_cake_model_`` と ``_cake_core_`` 
+CakePHP は内部的に ``_cake_model_`` と ``_cake_core_``
 という２つのキャッシュ設定を使います。``_cake_core_`` はファイルの
 パスやオブジェクトの格納位置を保存するのに使われ、``_cake_model_``
 はスキーマの定義やデータソースのソース一覧を保存するのに使われます。
@@ -533,7 +533,7 @@ CakePHP には２つのビルトインの設定ファイル用リーダーが備
 Configure も歴史的にこれと同じフォーマットのファイルを読めるように
 なっています。 :php:class:`IniReader` は ini 形式の設定ファイルを
 読むことができます。ini ファイルの仕様については
-`PHP documentation <https://secure.php.net/parse_ini_file>`_ を参照してください。
+`PHP documentation <https://www.php.net/parse_ini_file>`_ を参照してください。
 コアの設定ファイルリーダーを使うには、そのファイルを
 :php:meth:`Configure::config()` で Configure に接続してください。::
 
@@ -661,7 +661,7 @@ configure は現在のリクエストの値しか記憶しないので、何ら�
 
 設定用リーダーは CakePHP の中で拡張可能な部品です。このため、
 あなたのアプリケーションとプラグインの中で、設定用リーダーを
-新たに作成することも可能です。設定用リーダーは 
+新たに作成することも可能です。設定用リーダーは
 :php:interface:`ConfigReaderInterface` をインプリメント(implements)
 する必要があります。このインターフェースでは唯一の必須メソッドとして
 read メソッドが定義されています。たとえば、あなたが本当に XML
@@ -766,7 +766,7 @@ XML 設定リーダを作ることもできます。::
 .. php:class:: IniReader
 
     このクラスではプレーンな .ini ファイルとして保存された設定ファイルを
-    読み込むことができます。ini ファイルは PHP の ``parse_ini_file`` 
+    読み込むことができます。ini ファイルは PHP の ``parse_ini_file``
     関数と互換性を持っている必要があり、また以下の追加機能が使えます。
 
     * ドット区切りの値は配列に展開されます。
@@ -855,7 +855,7 @@ CakePHP のコアな起動処理の直後に実行されます。
 
 また、何かを :php:class:`AppController` クラスに入れることを考慮する
 必要があるかもしれません。このクラスはあなたのアプリケーションの
-すべてのコントローラーの親クラスです。 :php:class:`AppController` 
+すべてのコントローラーの親クラスです。 :php:class:`AppController`
 はあなたのコントローラーすべてにおいて使われるコールバックや
 メソッドを定義するための便利な場所です。
 

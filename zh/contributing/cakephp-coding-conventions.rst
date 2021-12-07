@@ -440,7 +440,7 @@ callable
     require_once $class;
 
 当包括类或者库的文件时, 总是只使用
-`require\_once <https://secure.php.net/require_once>`_ 函数。
+`require\_once <https://www.php.net/require_once>`_ 函数。
 
 PHP 标签
 ========

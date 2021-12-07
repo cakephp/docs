@@ -128,7 +128,7 @@ HTTP メソッドの限定
 
     このコントローラのアクションにリクエストを送ることができるアクションのリスト。
     これは、コントローラ間リクエストの制御に利用できます。
- 
+
 
 フォーム改ざん防止
 ==================
@@ -270,7 +270,7 @@ CSRF 防御の恩恵を受けられます。デフォルトでは CSRF トーク
     }
 
 csrfExpires プロパティは、
-`strtotime() <https://secure.php.net/manual/en/function.strtotime.php>`_
+`strtotime() <https://www.php.net/manual/en/function.strtotime.php>`_
 互換の値を設定できます。このコンポーネントが有効になると、全てのフォームの
 :php:class:`FormHelper` に CSRF トークンを含む ``data[_Token][key]`` が追加されます。
 

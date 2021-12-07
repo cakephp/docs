@@ -4,8 +4,8 @@ XML
 .. php:class:: Xml
 
 Xml クラスはすべてリファクタリングされました。 PHP 5 には
-`SimpleXML <https://secure.php.net/simplexml>`_ と
-`DOMDocument <https://secure.php.net/domdocument>`_ があり、
+`SimpleXML <https://www.php.net/simplexml>`_ と
+`DOMDocument <https://www.php.net/domdocument>`_ があり、
 CakePHP で XML パーサーを再実装する必要がないからです。
 新しい Xml クラスは配列から SimpleXMLElement や DOMDocument
 または逆方向への基本的な変換を行います。
@@ -81,8 +81,8 @@ Xml オブジェクトが返るまでの間、 SimpleXMLElement または DOMDoc
 
 .. note::
 
-    `DOMDocument <https://secure.php.net/domdocument>`_ と
-    `SimpleXML <https://secure.php.net/simplexml>`_ は異なる API を実装しています。
+    `DOMDocument <https://www.php.net/domdocument>`_ と
+    `SimpleXML <https://www.php.net/simplexml>`_ は異なる API を実装しています。
     必ずXmlから要求されたオブジェクトの正しいメソッドを使用してください。
 
 XML 文字列から配列への変換
