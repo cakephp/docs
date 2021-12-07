@@ -122,8 +122,8 @@ Gérer la réponse
 Les réponses des requêtes faîtes avec ``HttpSocket`` sont des instances de
 ``HttpResponse``. L'objet vous donne quelques méthodes accessor pour accéder
 au contenu de la réponse HTTP. Cette classe intègre le
-`ArrayAccess <https://secure.php.net/manual/en/class.arrayaccess.php>`_ et
-`__toString() <https://secure.php.net/manual/en/language.oop5.magic.php#language.oop5.magic.tostring>`_,
+`ArrayAccess <https://www.php.net/manual/en/class.arrayaccess.php>`_ et
+`__toString() <https://www.php.net/manual/en/language.oop5.magic.php#language.oop5.magic.tostring>`_,
 donc vous pouvez continuer en utilisant ``$http->response`` en tableau et le
 retour des méthodes de requête en chaîne::
 

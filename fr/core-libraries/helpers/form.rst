@@ -1497,7 +1497,7 @@ Ex: name=data[User][username], id=UserUsername
     sur la façon dont PHP gère les données passées a travers
     les champs ``files``.
     `lire la section file uploads du manuel de PHP
-    <https://secure.php.net/features.file-upload>`_.
+    <https://www.php.net/features.file-upload>`_.
 
 Validation des Uploads
 ----------------------

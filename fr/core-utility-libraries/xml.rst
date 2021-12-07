@@ -4,8 +4,8 @@ Xml
 .. php:class:: Xml
 
 La classe Xml a été reconstruite. Comme PHP 5 a
-`SimpleXML <https://secure.php.net/simplexml>`_ et
-`DOMDocument <https://secure.php.net/domdocument>`_, CakePHP ne nécéssite pas de
+`SimpleXML <https://www.php.net/simplexml>`_ et
+`DOMDocument <https://www.php.net/domdocument>`_, CakePHP ne nécéssite pas de
 ré-implémenter un parser XML. La nouvelle classe XML va fondamentalement
 transformer un tableau en objets SimpleXMLElement ou DOMDocument, et vice
 versa.
@@ -83,8 +83,8 @@ Si votre entrée est invalide, la classe Xml enverra une Exception::
 
 .. note::
 
-    `DOMDocument <https://secure.php.net/domdocument>`_ et
-    `SimpleXML <https://secure.php.net/simplexml>`_ implement different API's.
+    `DOMDocument <https://www.php.net/domdocument>`_ et
+    `SimpleXML <https://www.php.net/simplexml>`_ implement different API's.
     Assurez vous d'utiliser les bonnes méthodes sur l'objet que vous
     requêtez à partir d'un Xml.
 

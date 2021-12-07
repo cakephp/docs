@@ -40,7 +40,7 @@ L'API de Security
     :param string $mode: Le mode à utiliser, soit 'encrypt' soit 'decrypt'.
 
     Chiffre/Déchiffre le texte en utilisant le cipher rijndael-256. Ceci
-    nécessite que `l'extension mcrypt <https://secure.php.net/mcrypt>`_ soit
+    nécessite que `l'extension mcrypt <https://www.php.net/mcrypt>`_ soit
     installée::
 
         // Chiffre quelques données.
@@ -134,7 +134,7 @@ L'API de Security
 
     Au contraire des autres types de hash, la comparaison des valeurs de texte
     brut devra être faîte comme ce qui suit::
-    
+
         // $storedPassword, est un hash bcrypt précédemment généré.
         $newHash = Security::hash($newPassword, 'blowfish', $storedPassword);
 

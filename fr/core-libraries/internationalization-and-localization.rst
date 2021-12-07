@@ -227,10 +227,10 @@ Il y a d'autres aspects de localisation de votre application qui
 ne sont pas couverts par l'utilisation des fonctions de traduction,
 ce sont les formats date/monnaie. N'oubliez pas que CakePHP est PHP :),
 donc pour définir les formats de ses éléments vous devez utiliser
-`setlocale <https://secure.php.net/setlocale>`_.
+`setlocale <https://www.php.net/setlocale>`_.
 
 Si vous passez une locale qui n'existe pas sur votre ordinateur
-`setlocale <https://secure.php.net/setlocale>`_ cela n'aura aucun effet.
+`setlocale <https://www.php.net/setlocale>`_ cela n'aura aucun effet.
 Vous pouvez trouver la liste des locales disponibles en exécutant
 la commande ``locale -a`` dans un terminal.
 

@@ -478,7 +478,7 @@ parenthèses::
 
 Quand vous incluez les fichiers avec des classes ou librairies, utilisez
 seulement et toujours la fonction
-`require\_once <https://secure.php.net/require_once>`_.
+`require\_once <https://www.php.net/require_once>`_.
 
 Les Tags PHP
 ============

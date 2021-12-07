@@ -59,7 +59,7 @@ CakePHP にはデフォルトで２つのフィルタークラスが備わって
         )
     ));
 
-これに示されるように、PHP で有効な `callback <https://secure.php.net/callback>`_
+これに示されるように、PHP で有効な `callback <https://www.php.net/callback>`_
 であれば、何でも渡すことができます。覚えていると思いますが、 `callback`
 は PHP が ``call_user_func`` で実行することのできるものすべでです。
 ただ小さな例外があります。もし文字列が渡されると、それは関数名としては
@@ -130,7 +130,7 @@ CakePHP にはデフォルトで２つのフィルタークラスが備わって
 ================
 
 ディスパッチフィルターが設定の中でクラス名として定義されている場合、
-それは CakePHP ディレクトリの `Routing` の中で ``DispatcherFilter`` 
+それは CakePHP ディレクトリの `Routing` の中で ``DispatcherFilter``
 を継承している必要があります。ここで特定の URL に対して 'Hello World'
 を返すようなシンプルなフィルターを作ってみましょう。::
 
@@ -168,8 +168,8 @@ CakePHP にはデフォルトで２つのフィルタークラスが備わって
 ``beforeDispatch`` と ``afterDispatch`` があります。これらは順に、
 コントローラーが実行される『前』と『後』に実行されます。いずれのメソッドも
 :php:class:`CakeEvent` イベントを受け取りますが、この中には ``request``
-と ``response`` オブジェクト（:php:class:`CakeRequest` と 
-:php:class:`CakeResponse` インスタンス）が含まれており、さらに ``data`` 
+と ``response`` オブジェクト（:php:class:`CakeRequest` と
+:php:class:`CakeResponse` インスタンス）が含まれており、さらに ``data``
 プロパティの中に ``additionalParams`` 配列が入っています。後者には
 ``requestAction`` をコールする際の内部ディスパッチングで使われる情報も
 入っています。

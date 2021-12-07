@@ -115,8 +115,8 @@ CakePHP には、リクエストを簡単に行える HttpSocket クラスがあ
 
 ``HttpSocket`` を使ったリクエストからのレスポンスは、 ``HttpResponse`` のインスタンスです。
 このオブジェクトは、HTTP レスポンスの内容にアクセスするための、いくつかのアクセッサーメソッドを
-持っています。このクラスは `ArrayAccess <https://secure.php.net/manual/ja/class.arrayaccess.php>`_ と
-`__toString() <https://secure.php.net/manual/ja/language.oop5.magic.php#language.oop5.magic.tostring>`_
+持っています。このクラスは `ArrayAccess <https://www.php.net/manual/ja/class.arrayaccess.php>`_ と
+`__toString() <https://www.php.net/manual/ja/language.oop5.magic.php#language.oop5.magic.tostring>`_
 を実装していますので、 ``$http->response`` を配列として使用でき、リクエストメソッドの戻り値を
 文字列として使用できます。 ::
 

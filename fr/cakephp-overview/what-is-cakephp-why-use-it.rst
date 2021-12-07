@@ -3,7 +3,7 @@ Qu'est ce que CakePHP? Pourquoi l'Utiliser?
 
 `CakePHP <https://cakephp.org/>`_ est un
 `framework <https://en.wikipedia.org/wiki/Application_framework>`_
-pour `PHP <https://secure.php.net/>`_
+pour `PHP <https://www.php.net/>`_
 `gratuit <https://en.wikipedia.org/wiki/MIT_License>`_,
 `open-source <https://en.wikipedia.org/wiki/Open_source>`_,
 `de développement rapide <https://en.wikipedia.org/wiki/Rapid_application_development>`_.

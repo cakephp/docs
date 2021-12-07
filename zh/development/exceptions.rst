@@ -5,7 +5,7 @@
 错误。所有 CakePHP 抛出的异常都扩展了 :php:exc:`CakeException`，类/任务相关的
 异常扩展了这个基类。
 
-CakePHP 也提供了一些异常类，可用于 HTTP 错误。欲知更多信息，可参看 
+CakePHP 也提供了一些异常类，可用于 HTTP 错误。欲知更多信息，可参看
 :ref:`built-in-exceptions` 一节。
 
 异常的配置
@@ -205,11 +205,11 @@ RESTful 响应。
 错误页面的视图在 ``app/View/Errors/`` 目录中。对所有 4xx 和 5xx 错误，分别使用
 视图文件 ``error400.ctp`` 和 ``error500.ctp``。你可以根据需要定制这些视图。默认
 情况下，错误页面也使用布局 ``app/Layouts/default.ctp``。如果想要对错误页面使用
-另一个布局，例如 ``app/Layouts/my_error.ctp``，那么只需编辑错误视图，添加语句 
+另一个布局，例如 ``app/Layouts/my_error.ctp``，那么只需编辑错误视图，添加语句
 ``$this->layout = 'my_error';`` 到 ``error400.ctp`` 和 ``error500.ctp``。
 
 每个框架层异常都有自己位于核心模板中的视图文件，但你真的不必定制它们，因为它们只
-在开发过程中使用。在关闭调试后，所有框架层异常都会转变为 
+在开发过程中使用。在关闭调试后，所有框架层异常都会转变为
 ``InternalErrorException``。
 
 .. index:: application exceptions
@@ -217,12 +217,12 @@ RESTful 响应。
 创建你自己的应用程序的异常
 ==========================
 
-你可以使用任何内置的 
-`SPL exceptions <https://secure.php.net/manual/en/spl.exceptions.php>`_ 、 ``Exception``
+你可以使用任何内置的
+`SPL exceptions <https://www.php.net/manual/en/spl.exceptions.php>`_ 、 ``Exception``
 本身或 :php:exc:`CakeException` 来创建你自己的应用程序的异常。扩展 Exception 类
 或者 SPL 异常的应用程序异常在生产模式下会被当作 500 错误对待。
 :php:exc:`CakeException` 比较特别，所有 :php:exc:`CakeException`  对象会根据它们
-使用的编码被强制转换为 500 或 404 错误。在开发模式下，:php:exc:`CakeException` 
+使用的编码被强制转换为 500 或 404 错误。在开发模式下，:php:exc:`CakeException`
 对象只需新增一个匹配类名的新模板就能提供有用的信息。如果应用程序包含如下异常::
 
     class MissingWidgetException extends CakeException {};
@@ -243,7 +243,7 @@ RESTful 响应。
 
 
 当被内置的异常处理器捕获时，在错误视图模板中会得到一个 ``$widget`` 变量。而且，
-如果把异常转换(*cast*)为字符串，或者调用它的 ``getMessage()`` 方法，就会得到 
+如果把异常转换(*cast*)为字符串，或者调用它的 ``getMessage()`` 方法，就会得到
 ``Seems that Pointy is missing.``。这让你可以轻松快速地创建你自己富含(信息)的
 开发错误，就像 CakePHP 内部使用的一样。
 
@@ -255,7 +255,7 @@ RESTful 响应。
     throw new MissingWidgetHelperException('Its not here', 501);
 
 就会创建一个 ``501`` 响应编码，你可以使用任何 HTTP 状态编码。在开发中，如果你的
-异常没有一个特定的模板，而你使用了大于等于 ``500`` 的编码，你就会看到 
+异常没有一个特定的模板，而你使用了大于等于 ``500`` 的编码，你就会看到
 ``error500`` 模板。对于任何其它错误编码，就会得到 ``error400`` 模板。如果你为
 自定义异常定义了错误模板，在开发模式下就会使用该模板。如果你甚至在生产环境中也要
 使用自己的异常处理逻辑，请看下一节。
@@ -274,7 +274,7 @@ RESTful 响应。
 用 `Exception.handler` 创建你自己的异常处理器
 =============================================
 
-创建你自己的异常处理器，给你提供了对异常处理过程的完全控制。你选择的类应当在 
+创建你自己的异常处理器，给你提供了对异常处理过程的完全控制。你选择的类应当在
 ``app/Config/bootstrap.php`` 文件中加载，这样它才能够用于处理任何异常。你可以把
 处理器定义为任何回调类型。设置了 ``Exception.handler``，CakePHP 就会忽略所有其它
 的异常设置。下面就是一个自定义异常处理设置的例子::
@@ -294,8 +294,8 @@ RESTful 响应。
         // ...
     }
 
-你可以在 ``handleException`` 方法中运行任何你想要运行的代码。上面的代码会输出 
-'Oh noes! ' 加上异常消息。你可以定义处理器为任何类型的回调，如果使用 PHP 5.3 
+你可以在 ``handleException`` 方法中运行任何你想要运行的代码。上面的代码会输出
+'Oh noes! ' 加上异常消息。你可以定义处理器为任何类型的回调，如果使用 PHP 5.3
 甚至可以是匿名函数::
 
     Configure::write('Exception.handler', function ($error) {
@@ -335,7 +335,7 @@ RESTful 响应。
 
 如果你不想控制异常处理，但要改变如何渲染异常，你可以用 ``Configure::write(
 'Exception.renderer', 'AppExceptionRenderer');`` 选择一个类来渲染异常页面。默认
-情况下会使用 :php:class`ExceptionRenderer`。你的自定义异常渲染类应当放在 
+情况下会使用 :php:class`ExceptionRenderer`。你的自定义异常渲染类应当放在
 ``app/Lib/Error`` 目录中，或者在一个启动加载的 Lib 路径内的 ``Error`` 目录内。
 在自定义异常渲染类中，你可以为应用程序相关的错误提供特殊的处理::
 
@@ -385,7 +385,7 @@ RESTful 响应。
 ------------------
 
 用内置的异常处理，你只要在 core.php 文件中设置 ``Exception.log`` 为 true，就可以
-在日志中记录所有由 ErrorHandler 处理的异常。启用之后，就会把每个异常记录到 
+在日志中记录所有由 ErrorHandler 处理的异常。启用之后，就会把每个异常记录到
 :php:class:`CakeLog` 和配置的日志中。
 
 .. note::

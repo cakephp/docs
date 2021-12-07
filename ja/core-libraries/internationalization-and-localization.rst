@@ -65,7 +65,7 @@ po ファイルを更新する際に便利です。
 ３文字ロケールコードは、
 `ISO 639-2 <http://www.loc.gov/standards/iso639-2/php/code_list.php>`_
 標準に準拠します。もし、地域ロケール (`en\_US`, `en\_GB`, その他) を作成した場合、
-CakePHP はそちらを使用します。 
+CakePHP はそちらを使用します。
 
 .. warning::
 
@@ -188,10 +188,10 @@ CakePHP は、自動的に ``$validate`` 配列中のすべてのモデルのバ
 
 翻訳関数を使用することでカバーできないアプリケーションの地域化の側面があります。
 それは、日付やお金のフォーマットです。CakePHP は PHP であることを忘れないでください。
-これらのためのフォーマットを設定するには、 `setlocale <https://secure.php.net/setlocale>`_
+これらのためのフォーマットを設定するには、 `setlocale <https://www.php.net/setlocale>`_
 を使用する必要があります。
 
-もし、コンピュータに存在しないロケールを `setlocale <https://secure.php.net/setlocale>`_
+もし、コンピュータに存在しないロケールを `setlocale <https://www.php.net/setlocale>`_
 に指定した場合、何も影響しません。ターミナル上で、 ``locale -a`` コマンドを実行することで、
 利用可能な一覧を取得できます。
 

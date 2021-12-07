@@ -40,35 +40,35 @@ Estruturas de controle
 Estruturas de controle são  "``if``", "``for``", "``foreach``",
 "``while``", "``switch``" etc. Veja um exemplo abaixo com "``if``"::
 
-    <?php 
-    if ((expr_1) || (expr_2)) { 
+    <?php
+    if ((expr_1) || (expr_2)) {
         // action_1;
     } elseif (!(expr_3) && (expr_4)) {
-        // action_2; 
+        // action_2;
     } else {
-        // default_action; 
-    } 
+        // default_action;
+    }
 
-* Em estruturas de controle, deve haver 1 (um) espaço antes do primeiro 
+* Em estruturas de controle, deve haver 1 (um) espaço antes do primeiro
   parênteses e 1 (um) espaço entre o último parênteses e o abre-chaves.
-* Sempre utilize chaves para delimitar blocos em estruturas de contole 
-  mesmo se elas não forem necessárias. Chaves aumentam a legibilidade 
+* Sempre utilize chaves para delimitar blocos em estruturas de contole
+  mesmo se elas não forem necessárias. Chaves aumentam a legibilidade
   do código, o que reduz a possibilidade de erros de lógica.
-* O caracter abre-chaves deve estar na mesma linha que a estrutura de controle. 
-  Já o fecha-chaves deve estar sempre numa nova linha, e deve ter o mesmo nível de 
-  indentação da estrutura de controle. O bloco de instruções delimitado pelas chaves 
-  deve começar numa nova linha, e o código nele contido deve ser um nível de indentação 
+* O caracter abre-chaves deve estar na mesma linha que a estrutura de controle.
+  Já o fecha-chaves deve estar sempre numa nova linha, e deve ter o mesmo nível de
+  indentação da estrutura de controle. O bloco de instruções delimitado pelas chaves
+  deve começar numa nova linha, e o código nele contido deve ser um nível de indentação
   maior que o da estrutura de controle.
 
 ::
 
-    <?php 
+    <?php
     // wrong = no brackets, badly placed statement
-    if (expr) statement; 
+    if (expr) statement;
 
     // wrong = no brackets
-    if (expr) 
-        statement; 
+    if (expr)
+        statement;
 
     // good
     if (expr) {
@@ -78,9 +78,9 @@ Estruturas de controle são  "``if``", "``for``", "``foreach``",
 Operador Ternário
 -----------------
 
-O Operador Ternário é permitido quando a operação ternária cabe em uma linha. 
-Ternários mais longos devem ser divididos em uma instrução ``if else``. Você não deve 
-aninhar operadores ternários. Opcionalmente, parênteses podem ser utilizados em 
+O Operador Ternário é permitido quando a operação ternária cabe em uma linha.
+Ternários mais longos devem ser divididos em uma instrução ``if else``. Você não deve
+aninhar operadores ternários. Opcionalmente, parênteses podem ser utilizados em
 volta da condição de verificação do ternário para dar mais clareza::
 
     //Good, simple and readable
@@ -92,11 +92,11 @@ volta da condição de verificação do ternário para dar mais clareza::
 Chamadas de Funções
 ===================
 
-Funções deve ser chamadas sem espaços entre o nome da função e o abre-parênteses. 
+Funções deve ser chamadas sem espaços entre o nome da função e o abre-parênteses.
 Deverá ter um espaço entre cada parâmetro na chamda da função::
 
-    <?php 
-    $var = foo($bar, $bar2, $bar3); 
+    <?php
+    $var = foo($bar, $bar2, $bar3);
 
 Como você pode ver neste código, também deve haver um espaço em ambos os lados do sinal de atribuição (=).
 
@@ -106,7 +106,7 @@ Definição de Metódos
 
 Exemplo de definição de metódo::
 
-    <?php 
+    <?php
     function someFunction($arg1, $arg2 = '') {
         if (expr) {
             statement;
@@ -119,7 +119,7 @@ Parâmetros que possuam valores padrões devem ser adicionados por últimos
 na definição do metódo. Tente fazer que seus metódos sempre retornem algo, pelos menos
 true ou false - assim facilita a identificação que a chamada ao metódo realmente aconteceu::
 
-    <?php 
+    <?php
     function connection($dns, $persistent = false) {
         if (is_array($dns)) {
             $dnsInfo = $dns;
@@ -138,7 +138,7 @@ De novo, note que deve haver espaços em ambos os lados dos sinais de igual.
 Comentando o Código
 ===================
 
-Todos os comentários devem ser escritos em Inglês 
+Todos os comentários devem ser escritos em Inglês
 e deve haver uma clara maneira de identificar o bloco de código comentado.
 
 Comentários podem conter as seguintes tags do `phpDocumentor <https://phpdoc.org>`:
@@ -155,8 +155,8 @@ Comentários podem conter as seguintes tags do `phpDocumentor <https://phpdoc.or
 *  `@since <https://phpdoc.org/docs/latest/references/phpdoc/tags/since.html>`_
 *  `@version <https://phpdoc.org/docs/latest/references/phpdoc/tags/version.html>`_
 
-As tags PhpDoc são bem parecidas com as tags JavaDoc em Java. As tags 
-só são processadas se elas forem a primeira coisa a aparecer numa linha 
+As tags PhpDoc são bem parecidas com as tags JavaDoc em Java. As tags
+só são processadas se elas forem a primeira coisa a aparecer numa linha
 de um bloco de documentação. Por exemplo::
 
     /**
@@ -167,7 +167,7 @@ de um bloco de documentação. Por exemplo::
 
 ::
 
-    <?php 
+    <?php
     /**
      * Example of inline phpDoc tags.
      *
@@ -175,21 +175,21 @@ de um bloco de documentação. Por exemplo::
      */
     function bar() {
     }
-     
+
     /**
      * Foo function
      */
     function foo() {
     }
 
-Todos os blocos de comentários, exceto o primeiro bloco de um arquivo, 
+Todos os blocos de comentários, exceto o primeiro bloco de um arquivo,
 devem ser precedidos com uma linha em branco.
 
 Includindo Arquivos
 ===================
 
-Se for precisar incluir arquivos com classes ou bibliotecas, 
-utilize sempre a função `require\_once <https://secure.php.net/require_once>`_.
+Se for precisar incluir arquivos com classes ou bibliotecas,
+utilize sempre a função `require\_once <https://www.php.net/require_once>`_.
 
 Tags PHP
 ========
@@ -218,10 +218,10 @@ Nome de Classes devem ser escritar em CamelCase, por exemplo::
 Variáveis
 ---------
 
-Nomes de variável devem ser os mais descritivos possível, mas também tão curtos quanto possível. 
-Variáveis normais devem ter inicial minúscula e escritas no formato camelBack? caso sejam compostas 
-por mais de uma palavra. Variáveis que contenham objetos devem iniciar com uma letra maiúscula 
-e estar associadas de alguma maneira ao nome da classe a que o objeto pertence. 
+Nomes de variável devem ser os mais descritivos possível, mas também tão curtos quanto possível.
+Variáveis normais devem ter inicial minúscula e escritas no formato camelBack? caso sejam compostas
+por mais de uma palavra. Variáveis que contenham objetos devem iniciar com uma letra maiúscula
+e estar associadas de alguma maneira ao nome da classe a que o objeto pertence.
 Por exemplo::
 
     $user = 'John';
@@ -267,7 +267,7 @@ Métodos encadeados devem ser chamandos em múltiplas linhas e indentado com um 
 Endereços de Exemplos
 ---------------------
 
-Para todas as URLs e endereços de email de exemplo, utilize "example.com", 
+Para todas as URLs e endereços de email de exemplo, utilize "example.com",
 "example.org" ou "example.net" como domínios. Por exemplo:
 
 
@@ -281,8 +281,8 @@ utilizar em documentações ou exemplos.
 Arquivos
 --------
 
-Nomes de arquivos devem ser criados em minúsculas. Se um nome de 
-arquivo consistir de múltiplas palavras, elas devem ser 
+Nomes de arquivos devem ser criados em minúsculas. Se um nome de
+arquivo consistir de múltiplas palavras, elas devem ser
 divididas por um caracter underscore. Por exemplo:
 
 ::
@@ -314,7 +314,7 @@ resource
     Tipo recurso (como retornado, p.ex., pelo mysql\_connect()).
 	Lembre-se que quando você especifica como mixed, você deve indicar
 	qual os valores possíves
-	
+
 Constantes
 ----------
 

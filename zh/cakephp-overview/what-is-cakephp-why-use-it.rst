@@ -5,8 +5,8 @@ CakePHP 是什么？为什么使用它？
 `免费 <https://en.wikipedia.org/wiki/MIT_License>`_ 、
 `开源 <https://en.wikipedia.org/wiki/Open_source>`_ 、
 `快速开发 <https://en.wikipedia.org/wiki/Rapid_application_development>`_ 的
-`PHP <https://secure.php.net/>`_ 
-`框架 <https://en.wikipedia.org/wiki/Application_framework>`_ 。是程序员创建 
+`PHP <https://www.php.net/>`_
+`框架 <https://en.wikipedia.org/wiki/Application_framework>`_ 。是程序员创建
 web 应用程序的一个基础结构。我们的首要目标是使您能够进行结构化的和快速的开发，而
 又不丧失灵活性。
 

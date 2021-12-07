@@ -62,7 +62,7 @@ dans le controller.
     sera abandonnée. Si un callback de controller est défini pour
     SecurityComponent::blackHoleCallback, il sera appelé et passera
     toute information sur l'erreur.
- 
+
 .. php:attr:: blackHoleCallback
 
     La fonction de rappel (callback) du controller qui va gérer et requéter
@@ -71,7 +71,7 @@ dans le controller.
     n'importe quelle méthode publique d'un controller.
     La fonction de rappel doit s'attendre a un paramètre indiquant le type
     d'erreur::
-    
+
         public function beforeFilter() {
             $this->Security->blackHoleCallback = 'blackhole';
         }
@@ -99,13 +99,13 @@ Restreindre les méthodes HTTP
     Définit les actions qui nécessitent une requête POST. Prend un
     nombre indéfini de paramètres. Peut être appelé sans argument,
     pour forcer toutes les actions à requérir un POST.
-    
+
 .. php:method:: requireGet()
 
     Définit les actions qui nécessitent une requête GET. Prend un
     nombre indéfini de paramètres. Peut-être appelé sans argument,
     pour forcer toutes les actions à requérir un GET.
-    
+
 .. php:method:: requirePut()
 
     Définit les actions qui nécessitent une requête PUT. Prend un
@@ -117,7 +117,7 @@ Restreindre les méthodes HTTP
     Définit les actions qui nécessitent une requête DELETE. Prend un
     nombre indéfini de paramètres. Peut-être appelé sans argument,
     pour forcer toutes les actions à requérir un DELETE.
-   
+
 Restreindre les actions à SSL
 =============================
 
@@ -133,7 +133,7 @@ Restreindre les actions à SSL
     le component Security. Prend un nombre indéfini de paramètres.
     Peut-être appelé sans argument, pour forcer toutes les actions
     à requérir une authentification valide.
-    
+
 Restreindre les demandes croisées de controller
 ===============================================
 
@@ -148,7 +148,7 @@ Restreindre les demandes croisées de controller
     Une liste des actions qui peuvent envoyer des requêtes vers les actions
     de ce controller. Ceci peut être utilisé pour contrôler les demandes
     croisées de controller.
-   
+
 Prévention de la falsification de formulaire
 ============================================
 
@@ -199,7 +199,7 @@ configuration CSRF (Cross site request forgery)
 
     Si vous utilisez les formulaires de protection CSRF. Définit à
     ``false`` pour désactiver la protection CSRF sur les formulaires.
-    
+
 .. php:attr:: csrfExpires
 
    La durée avant expiration d'un jeton CSRF.
@@ -225,9 +225,9 @@ de sécurité que vous voulez et le component Security les forcera
 au démarrage::
 
     class WidgetController extends AppController {
-    
+
         public $components = array('Security');
-    
+
         public function beforeFilter() {
             $this->Security->requirePost('delete');
         }
@@ -237,9 +237,9 @@ Dans cette exemple, l'action delete peut être effectuée
 avec succès si celui ci reçoit une requête POST::
 
     class WidgetController extends AppController {
-    
+
         public $components = array('Security');
-    
+
         public function beforeFilter() {
             if (isset($this->request->params['admin'])) {
                 $this->Security->requireSecure();
@@ -251,16 +251,16 @@ Cette exemple forcera toutes les actions qui proviennent de la
 "route" Admin à être effectuées via des requêtes sécurisées SSL::
 
     class WidgetController extends AppController {
-    
+
         public $components = array('Security');
-    
+
         public function beforeFilter() {
             if (isset($this->params['admin'])) {
                 $this->Security->blackHoleCallback = 'forceSSL';
                 $this->Security->requireSecure();
             }
         }
-    
+
         public function forceSSL() {
             $this->redirect('https://' . env('SERVER_NAME') . $this->here);
         }
@@ -313,7 +313,7 @@ de votre controller. ::
 
 La valeur de la propriété csrfExpires peut être n'importe quelle valeur
 compatible à la propriété
-`strtotime() <https://secure.php.net/manual/en/function.strtotime.php>`_.
+`strtotime() <https://www.php.net/manual/en/function.strtotime.php>`_.
 Par défaut le Helper Form :php:class:`FormHelper` ajoutera une
 ``data[_Token][key]`` contenant le jeton CSRF pour tous les formulaires
 quand le component est activé.
@@ -347,7 +347,7 @@ partie ``beforeFilter`` de votre controller::
 Cela dira au component que vous voulez ré-utiliser un jeton CSRF jusqu'à
 ce que la requête expire - C'est contrôlé par les valeurs de ``csrfExpires``.
 Si vous avez des problèmes avec les jetons expirés, ceci peut être une
-bon équilibrage entre la sécurité et la facilité d'utilisation. 
+bon équilibrage entre la sécurité et la facilité d'utilisation.
 
 Désactiver la protection CSRF
 -----------------------------
