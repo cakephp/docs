@@ -255,7 +255,7 @@ que nous avons créée plus tôt.
 Après la sauvegarde de notre article, nous utilisons la méthode ``success()`` du
 FlashComponent pour définir le message en Session. La méthode ``success`` est
 fournie via `les méthodes magiques de PHP
-<http://php.net/manual/en/language.oop5.overloading.php#object.call>`_.
+<https://php.net/manual/en/language.oop5.overloading.php#object.call>`_.
 Les messages Flash seront affichés sur la page suivante après redirection. Dans
 notre layout, nous avons ``<?= $this->Flash->render() ?>`` qui affichera un message
 Flash et le supprimera du stockage dans la session. Enfin, après la sauvegarde, nous

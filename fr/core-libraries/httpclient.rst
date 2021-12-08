@@ -269,7 +269,7 @@ Le deuxième paramètre du proxy doit être une chaîne avec une IP ou un domain
 sans protocole. Le nom d'utilisateur et le mot de passe seront passés dans
 les en-têtes de la requête, alors que la chaîne du proxy sera passée dans
 `stream_context_create()
-<http://php.net/manual/en/function.stream-context-create.php>`_.
+<https://php.net/manual/en/function.stream-context-create.php>`_.
 
 .. _http_client_scoped_client:
 

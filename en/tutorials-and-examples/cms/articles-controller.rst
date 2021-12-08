@@ -247,7 +247,7 @@ created earlier.
 After saving our new article we use FlashComponent's ``success()`` method to set
 a message into the session. The ``success`` method is provided using PHP's
 `magic method features
-<http://php.net/manual/en/language.oop5.overloading.php#object.call>`_.  Flash
+<https://php.net/manual/en/language.oop5.overloading.php#object.call>`_.  Flash
 messages will be displayed on the next page after redirecting. In our layout we have
 ``<?= $this->Flash->render() ?>`` which displays flash messages and clears the
 corresponding session variable. Finally, after saving is complete, we use

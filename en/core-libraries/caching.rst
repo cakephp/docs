@@ -22,12 +22,12 @@ build your own backend. The built-in caching engines are:
   atomic operations. However, since disk storage is often quite cheap,
   storing large objects, or elements that are infrequently written
   work well in files.
-* ``Memcached`` Uses the `Memcached <http://php.net/memcached>`_
+* ``Memcached`` Uses the `Memcached <https://php.net/memcached>`_
   extension.
 * ``Redis`` Uses the `phpredis <https://github.com/phpredis/phpredis>`_
   extension. Redis provides a fast and persistent cache system similar to
   Memcached, also provides atomic operations.
-* ``Apcu`` APCu cache uses the PHP `APCu <http://php.net/apcu>`_ extension.
+* ``Apcu`` APCu cache uses the PHP `APCu <https://php.net/apcu>`_ extension.
   This extension uses shared memory on the webserver to store objects.
   This makes it very fast, and able to provide atomic read/write features.
 * ``Array`` Stores all data in an array. This engine does not provide

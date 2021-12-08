@@ -69,7 +69,7 @@ HTML/XHTML ドキュメントをブラウザーに返しますが、JSON を介�
 
 CakePHP のテンプレートファイルは既定の拡張子を **.php** (CakePHP Template) としており、
 制御構造や出力のために `PHP 別の構文
-<http://php.net/manual/ja/control-structures.alternative-syntax.php>`_
+<https://php.net/manual/ja/control-structures.alternative-syntax.php>`_
 を利用することができます。
 これらのファイルにはコントローラーから受け取ったデータを、
 閲覧者のために用意した表示形式に整形するのに必要なロジックを入れます。
@@ -117,7 +117,7 @@ CakePHP のテンプレートファイルは既定の拡張子を **.php** (Cake
      <h3>やあ、知らない人</h3>
   <?php endif; ?>
 
-もしも、 `Twig <http://twig.sensiolabs.org>`_ のようなテンプレート言語を使いたいのであれば、
+もしも、 `Twig <https://twig.sensiolabs.org>`_ のようなテンプレート言語を使いたいのであれば、
 ビューのサブクラスがテンプレート言語と CakePHP の橋渡しをしてくれるでしょう。
 
 テンプレートファイルは **/templates/** の中の、ファイルを使用するコントローラーにちなんで

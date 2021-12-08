@@ -313,7 +313,7 @@ em ``$this->request->getData()``. Você pode usar as funções :php:func:`pr()` 
 Usamos os métodos ``success()`` e ``error()`` do ``FlashComponent`` para definir
 uma mensagem que será armazenada numa variável de sessão. Esses métodos são
 gerados usando os `recursos de métodos mágicos
-<http://php.net/manual/en/language.oop5.overloading.php#object.call>`_ do PHP.
+<https://php.net/manual/en/language.oop5.overloading.php#object.call>`_ do PHP.
 Mensagens flash serão exibidas na página após um redirecionamento. No layout nós
 temos ``<?= $this->Flash->render() ?>`` que exibe a mensagem e limpa a variável
 de sessão. A função do controller

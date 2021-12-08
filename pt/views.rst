@@ -69,7 +69,7 @@ suas views irão renderizar documentos HTML/XHTML para os browsers, mas você ta
 responder uma aplicação remota via JSON, ou ter uma saída de um arquivo csv para o usuário.
 
 Os arquivos de *template* CakePHP tem a extensão padrão **.php** (CakePHP Template) e utiliza a
-`Sintaxe PHP alternativa <http://php.net/manual/en/control-structures.alternative-syntax.php>`_
+`Sintaxe PHP alternativa <https://php.net/manual/en/control-structures.alternative-syntax.php>`_
 para controlar estruturas e saídas. Esses arquivos contem a lógica necessária para preparar os
 dados recebidos do *controller* para o formato de apresentação que estará pronto para o seu público.
 
@@ -118,7 +118,7 @@ Outro exemplo, usando if/elseif/else. Note os dois pontos:
   <?php endif; ?>
 
 Se você preferir usar uma linguagem de template como
-`Twig <http://twig.sensiolabs.org>`_, uma subclasse da *View* irá ligar
+`Twig <https://twig.sensiolabs.org>`_, uma subclasse da *View* irá ligar
 sua linguagem de template e o CakePHP.
 
 Arquivos de template são armazenados em **templates/**, em uma pasta nomeada com o

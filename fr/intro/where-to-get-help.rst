@@ -81,7 +81,7 @@ voiture sportive.
 Forum Officiel
 ==============
 
-`Forum Officiel de CakePHP <http://discourse.cakephp.org>`_
+`Forum Officiel de CakePHP <https://discourse.cakephp.org>`_
 
 Notre forum officiel où vous pouvez demander de l'aide, suggérer des idées et
 discuter de CakePHP. C'est l'endroit idéal pour trouver rapidement des réponses
@@ -102,7 +102,7 @@ Où Trouver de l'Aide dans Votre Langue
 Portugais brésilien
 -------------------
 
-- `Communauté de CakePHP brésilienne <http://cakephp-br.org>`_
+- `Communauté de CakePHP brésilienne <https://cakephp-br.org>`_
 
 Danoise
 -------
@@ -111,7 +111,7 @@ Danoise
 
 Française
 ---------
-- `Communauté de CakePHP Francophone <http://cakephp-fr.org>`_
+- `Communauté de CakePHP Francophone <https://cakephp-fr.org>`_
 
 Allemande
 ---------
@@ -122,7 +122,7 @@ Allemande
 Iranienne
 ---------
 
-- `Communauté CakePHP Iranienne <http://cakephp.ir>`_
+- `Communauté CakePHP Iranienne <https://cakephp.ir>`_
 
 Hollandaise
 -----------
@@ -138,14 +138,14 @@ Japonaise
 Portugaise
 ----------
 
-- `Groupe Google CakePHP protugais <http://groups.google.com/group/cakephp-pt>`_
+- `Groupe Google CakePHP protugais <https://groups.google.com/group/cakephp-pt>`_
 
 Espagnol
 --------
 
 - `Canal CakePHP espagnol sur Slack <https://cakesf.slack.com/messages/spanish/>`_
 - `Canal IRC de CakePHP espagnol <irc://irc.freenode.net/cakephp-es>`_
-- `Groupe Google de CakePHP espagnol <http://groups.google.com/group/cakephp-esp>`_
+- `Groupe Google de CakePHP espagnol <https://groups.google.com/group/cakephp-esp>`_
 
 .. meta::
     :title lang=fr: Où trouver de l'aide

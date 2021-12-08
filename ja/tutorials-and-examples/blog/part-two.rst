@@ -313,7 +313,7 @@ POST なら、Articles モデルを使ってデータの保存を試みます。
 
 FlashComponent の ``success()`` および ``error()`` メソッドを使って
 セッション変数にメッセージをセットします。これらのメソッドは PHP の `マジックメソッド
-<http://php.net/manual/en/language.oop5.overloading.php#object.call>`_ を利用しています。
+<https://php.net/manual/en/language.oop5.overloading.php#object.call>`_ を利用しています。
 Flash メッセージはリダイレクト後のページに表示されます。
 レイアウトでは ``<?= $this->Flash->render() ?>`` を用いてメッセージを表示し、
 対応するセッション変数を削除します。コントローラーの :php:meth:`Cake\\Controller\\Controller::redirect`

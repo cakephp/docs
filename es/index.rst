@@ -21,7 +21,7 @@ o corrección de la documentación.
 
     - `PDF <../_downloads/es/CakePHPCookbook.pdf>`_
     - `EPUB <../_downloads/es/CakePHP.epub>`_
-    - `Original Source <http://github.com/cakephp/docs>`_
+    - `Original Source <https://github.com/cakephp/docs>`_
 
 Obtener ayuda
 =============

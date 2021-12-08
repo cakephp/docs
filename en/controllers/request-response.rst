@@ -33,7 +33,7 @@ reference. Some of the duties ``ServerRequest`` performs include:
   properties.
 
 CakePHP's request object implements the `PSR-7
-ServerRequestInterface <http://www.php-fig.org/psr/psr-7/>`_ making it easier to
+ServerRequestInterface <https://www.php-fig.org/psr/psr-7/>`_ making it easier to
 use libraries from outside of CakePHP.
 
 .. _request-parameters:
@@ -99,7 +99,7 @@ Request Body Data
 
 .. php:method:: getData($name, $default = null)
 
-All POST data normally available through PHP's ``$_POST`` global variable can be 
+All POST data normally available through PHP's ``$_POST`` global variable can be
 accessed using :php:meth:`Cake\\Http\\ServerRequest::getData()`. For example::
 
     // An input with a name attribute equal to 'title' is accessible at

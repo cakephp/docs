@@ -287,7 +287,7 @@ ErrorController クラスの変更
 独自アプリケーション例外の作成
 ==============================
 
-組み込みの `SPL の例外 <http://php.net/manual/en/spl.exceptions.php>`_ 、
+組み込みの `SPL の例外 <https://php.net/manual/en/spl.exceptions.php>`_ 、
 ``Exception`` そのもの、または :php:exc:`Cake\\Core\\Exception\\Exception`
 のいずれかを使って、独自のアプリケーション例外を作ることができます。
 もしアプリケーションが以下の例外を含んでいたなら::
