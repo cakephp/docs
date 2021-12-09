@@ -149,7 +149,6 @@ Vous pouvez aussi récupérer une liste de clés-valeurs à partir du résultat 
 requête::
 
     $list = $articles->find('list')->all();
-
     foreach ($list as $id => $title) {
         echo "$id : $title"
     }
@@ -1626,11 +1625,11 @@ plus haut, qui était vulnérable à une injection SQL::
     ``Query::bind()`` a besoin que vous passiez les "placeholders" en incluant
     les deux-points (``:``) !
 
-Plus de Requêtes Complexes
-==========================
+Requêtes Plus Complexes
+=======================
 
-Le constructeur de requête est capable de construire des requêtes complexes
-comme les requêtes ``UNION`` et sous-requêtes.
+Si votre application a besoin de recourir à des requêtes plus complexes, vous
+pouvez en écrire de nombreuses manières avec le constructeur de requêtes ORM.
 
 Unions
 ------
@@ -1789,7 +1788,71 @@ reprises, vous pouvez créer des fenêtres nommées en utilisant la méthode
     ]);
 
 .. versionadded:: 4.1.0
-    Le support des fonctions de fenêtrage a été ajouté dans 4.1.0
+    Le support des fonctions de fenêtrage a été ajouté.
+
+Common Table Expressions
+------------------------
+
+Les *Common Table Expressions* ou CTE sont utiles pour construire des requêtes
+dans lesquelles vous devez rassembler les résultats de plusieurs petites
+requêtes. Ils peuvent avoir la même utilité que les vues de base de données ou
+que les résultats de sous-requêtes. Les *Common Table Expression* se
+différencient des tables dérivées et des vues sur plusieurs points:
+
+#. Contrairement aux vues, vous n'avez pas besoin de maintenir un schéma pour
+   les CTE. Le schéma est basé implicitement sur le result set de l'expression.
+#. Vous pouvez faire plusieurs références aux résultats d'une CTE sans
+   dégradation de performance, contrairement aux jointures de sous-requêtes.
+
+À titre d'exemple, récupérons une liste de clients et le nombre de commandes
+qu'ils ont passées. En SQL nous utiliserions:
+
+.. code-block:: sql
+
+    WITH commandes_par_client AS (
+        SELECT COUNT(*) AS nb_commandes, client_id FROM commandes GROUP BY client_id
+    )
+    SELECT nom, commandes_par_client.nb_commandes
+    FROM clients
+    INNER JOIN commandes_par_client ON commandes_par_client.client_id = clients.id
+
+Pour construire cette requête avec le constructeur de requêtes, nous
+utiliserions::
+
+    // Démarrer la requête finale
+    $query = $this->Clients->find();
+
+    // Attacher une common table expression
+    $query->with(function ($cte) {
+        // Créer une sous-requête à utiliser dans notre CTE
+        $q = $this->Commandes->subquery();
+        $q->select([
+            'nb_commandes' => $q->func()->count('*'),
+            'client_id'
+        ])
+        ->group('client_id');
+
+        // Attacher la nouvelle requête à notre CTE
+        return $cte
+            ->name('commandes_par_client')
+            ->query($q);
+    });
+
+    // Terminer la construction de la requête finale
+    $query->select([
+        'name',
+        'nb_commandes' => 'commandes_par_client.nb_commandes',
+    ])
+    ->join([
+        // Définir la jointure avec notre CTE
+        'commandes_par_client' => [
+            'table' => 'commandes_par_client',
+            'conditions' => 'commandes_par_client.client_id = Clients.id'
+        ]
+    ]);
+
+.. versionadded:: 4.1.0
+    Ajout des Common table expressions.
 
 Exécuter des Requêtes Complexes
 -------------------------------
