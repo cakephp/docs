@@ -481,11 +481,26 @@ migrations pour générer le schéma de votre base de données de test::
     $migrator->run();
 
     // Lancer les migrations pour plusieurs plugins
-    $migrator->run([
+    $migrator->run(['plugin' => 'Contacts']);
+
+    // Lancer les migrations Documents sur la connexion test_docs.
+    $migrator->run(['plugin' => 'Documents', 'connection' => 'test_docs']);
+
+Si vous avez besoin de lancer plusieurs ensembles de migrations, vous pouvez le
+faire comme ceci::
+
+    $migrator->runMany([
+        // Lancer les migrations de l'application sur la connexion test
+        ['connection' => 'test'],
+        // Lancer les migrations du plugin Contacts sur la connexion test
         ['plugin' => 'Contacts'],
-        // Lancer les migrations Documents sur la connexion test_docs.
-        ['plugin' => 'Documents', 'connection' => 'test_docs'],
+        // Lancer les migrations du plugin Documents sur la connexion test_docs
+        ['plugin' => 'Documents', 'connection' => 'test_docs']
     ]);
+
+L'utilisation de ``runMany()`` vous garantit que les plugins qui partagent une
+même base de données ne risquent pas de supprimer des tables quand chaque
+ensemble de migrations est lancé.
 
 Le plugin de migrations lancera uniquement les migrations qui n'ont pas été
 appliquées, et réinitialisera les migrations si l'en-tête de votre migration
@@ -493,7 +508,7 @@ actuelle est différente des migrations appliquées.
 
 Vous pouvez aussi configurer dans vos datasources la façon dont les migrations
 doivent être lancées dans les tests. Consultez la
-`documentation des migrations </migrations>` pour plus d'information.
+:doc:`documentation des migrations </migrations>` pour plus d'information.
 
 Pour charger un fichier de dump SQL, vous pouvez faire ceci::
 
