@@ -4,7 +4,7 @@ Guia de retrocompatibilidade
 Garantir que você possa atualizar suas aplicações facilmente é importante para
 nós. Por esse motivo, apenas quebramos compatibilidade nos *major releases*.
 Você deve estar familiarizado  com
-`versionamento semântico <http://semver.org/>`_, orientação usada em
+`versionamento semântico <https://semver.org/>`_, orientação usada em
 todos os projetos do CakePHP. Resumindo, significa que apenas *major releases*
 (tais como 2.0, 3.0, 4.0) podem quebrar retrocompatibilidades. *Minor releases*
 (tais como 2.1, 3.1, 4.1) podem introduzir novos recursos, mas não podem quebrar

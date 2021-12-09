@@ -88,7 +88,7 @@ Onde conseguir ajuda em sua língua
 
 Francês
 -------
-- `Comunidade CakePHP francesa <http://cakephp-fr.org>`_
+- `Comunidade CakePHP francesa <https://cakephp-fr.org>`_
 
 .. meta::
     :title lang=pt: Onde conseguir ajuda

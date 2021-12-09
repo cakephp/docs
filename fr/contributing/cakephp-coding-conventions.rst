@@ -316,7 +316,7 @@ Tous les commentaires doivent être écrits en anglais, et doivent clairement
 décrire le block de code commenté.
 
 Les commentaires doivent inclure les tags de
-`phpDocumentor <http://phpdoc.org>`_ suivants:
+`phpDocumentor <https://phpdoc.org>`_ suivants:
 
 *  `@deprecated <https://docs.phpdoc.org/latest/guide/references/phpdoc/tags/deprecated.html>`_
    Using the ``@version <vector> <description>`` format, where ``version`` and ``description`` are mandatory.
@@ -430,7 +430,7 @@ parenthèses::
 
 Quand vous incluez les fichiers avec des classes ou librairies, utilisez
 seulement et toujours la fonction
-`require\_once <http://php.net/require_once>`_.
+`require\_once <https://php.net/require_once>`_.
 
 Les Balises PHP
 ===============

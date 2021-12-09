@@ -22,14 +22,14 @@ seu próprio back-end. Os mecanismos de armazenamento em cache integrados são:
   atômicas. No entanto, como o armazenamento em disco geralmente é bastante barato,
   o armazenamento de objetos grandes ou elementos que raramente são gravados
   funciona bem em arquivos.
-* ``Memcached`` Usa a extensão `Memcached <http://php.net/memcached>`_.
+* ``Memcached`` Usa a extensão `Memcached <https://php.net/memcached>`_.
 * ``Redis`` Usa a extensão `phpredis <https://github.com/phpredis/phpredis>`_. O
   Redis fornece um sistema de cache rápido e persistente semelhante ao Memcached,
   também fornece operações atômicas.
-* ``Apcu`` O cache do APCu usa a extensão PHP `APCu <http://php.net/apcu>`_. Essa
+* ``Apcu`` O cache do APCu usa a extensão PHP `APCu <https://php.net/apcu>`_. Essa
   extensão usa memória compartilhada no servidor da web para armazenar objetos.
   Isso o torna muito rápido e capaz de fornecer recursos atômicos de leitura/gravação.
-* ``Wincache`` O Wincache usa a extensão `Wincache <http://php.net/wincache>`_.
+* ``Wincache`` O Wincache usa a extensão `Wincache <https://php.net/wincache>`_.
   O Wincache é semelhante ao APC em recursos e desempenho, mas otimizado para
   Windows e IIS.
 * ``Array`` Armazena todos os dados em uma matriz. Esse mecanismo não fornece

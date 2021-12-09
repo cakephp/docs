@@ -69,7 +69,7 @@ find users in your area, or would like to donate your brand new sports car.
 
 Official CakePHP Forum
 ======================
-`CakePHP Official Forum <http://discourse.cakephp.org>`_
+`CakePHP Official Forum <https://discourse.cakephp.org>`_
 
 Our official forum where you can ask for help, suggest ideas and have a talk
 about CakePHP. It's a perfect place for quickly finding answers and help others.
@@ -94,7 +94,7 @@ Danish
 French
 ------
 
-- `French CakePHP Community <http://cakephp-fr.org>`_
+- `French CakePHP Community <https://cakephp-fr.org>`_
 
 German
 ------
@@ -105,7 +105,7 @@ German
 Iranian
 -------
 
-- `Iranian CakePHP Community <http://cakephp.ir>`_
+- `Iranian CakePHP Community <https://cakephp.ir>`_
 
 Dutch
 -----
@@ -121,14 +121,14 @@ Japanese
 Portuguese
 ----------
 
-- `Portuguese CakePHP Google Group <http://groups.google.com/group/cakephp-pt>`_
+- `Portuguese CakePHP Google Group <https://groups.google.com/group/cakephp-pt>`_
 
 Spanish
 -------
 
 - `Spanish CakePHP Slack Channel <https://cakesf.slack.com/messages/spanish/>`_
 - `Spanish CakePHP IRC Channel <irc://irc.freenode.net/cakephp-es>`_
-- `Spanish CakePHP Google Group <http://groups.google.com/group/cakephp-esp>`_
+- `Spanish CakePHP Google Group <https://groups.google.com/group/cakephp-esp>`_
 
 .. meta::
     :title lang=en: Where to Get Help

@@ -21,7 +21,7 @@ CakePHP プラグインは、ホストアプリケーション自身とは基本
 Composer を使ったプラグインのインストール
 =========================================
 
-`Packagist <http://packagist.org>`_ には多くのプラグインがあり、 ``Composer`` を
+`Packagist <https://packagist.org>`_ には多くのプラグインがあり、 ``Composer`` を
 使ってインストールが可能です。DebugKit をインストールには、下記のコマンドを実行します。
 
 .. code-block:: console

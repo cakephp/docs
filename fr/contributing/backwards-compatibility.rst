@@ -4,7 +4,7 @@ Guide de Compatibilité Rétroactive
 Nous assurer que la mise à jour de vos applications se fasse facilement
 et en douceur est important à nos yeux. C'est pour cela que nous ne cassons
 la compatibilité que pour les versions majeures.
-Vous connaissez peut-être le `versioning sémantique <http://semver.org/>`_
+Vous connaissez peut-être le `versioning sémantique <https://semver.org/>`_
 qui est la règle générale que nous utilisons pour tous les projets CakePHP.
 En résumé, le versioning sémantique signifie que seules les versions majeures
 (comme 2.0, 3.0, 4.0) peuvent casser la compatibilité rétroactive. Les versions

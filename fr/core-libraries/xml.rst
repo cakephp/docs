@@ -54,8 +54,8 @@ Si votre entrée est invalide, la classe Xml enverra une Exception::
 
 .. note::
 
-    `DOMDocument <http://php.net/domdocument>`_ et
-    `SimpleXML <http://php.net/simplexml>`_ implémentent différentes APIs.
+    `DOMDocument <https://php.net/domdocument>`_ et
+    `SimpleXML <https://php.net/simplexml>`_ implémentent différentes APIs.
     Assurez-vous d'utiliser les bonnes méthodes sur l'objet que vous
     requêtez à partir d'un Xml.
 

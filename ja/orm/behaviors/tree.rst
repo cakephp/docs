@@ -28,7 +28,7 @@ TreeBehavior は、オーバーヘッドをほとんどかけることなく照�
 
 カスタマイズする必要がある場合は、これらのフィールドの名前を設定できます。
 フィールドの意味とその使用方法の詳細については、 `MPTT ロジック
-<http://www.sitepoint.com/hierarchical-data-database-2/>`_
+<https://www.sitepoint.com/hierarchical-data-database-2/>`_
 に書いてある記事を参照してください。
 
 .. warning::

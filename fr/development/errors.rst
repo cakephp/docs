@@ -458,7 +458,7 @@ Créer vos propres Exceptions d'Application
 
 Vous pouvez créer vos propres exceptions d'application en utilisant l'une des
 exceptions intégrées
-`SPL exceptions <http://php.net/manual/en/spl.exceptions.php>`_, ``Exception``
+`SPL exceptions <https://php.net/manual/en/spl.exceptions.php>`_, ``Exception``
 , ou :php:exc:`Cake\\Core\\Exception\\Exception`.
 Si votre application contenait l'exception suivante::
 

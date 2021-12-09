@@ -192,7 +192,7 @@ dates formatées. CakePHP facilite cela::
 
 Il est possible de spécifier le format d'affichage désiré. Vous pouvez soit
 passer une `constante IntlDateFormatter
-<http://www.php.net/manual/en/class.intldateformatter.php>`_ en premier argument
+<https://www.php.net/manual/en/class.intldateformatter.php>`_ en premier argument
 de cette fonction, soit une chaîne
 complète de formatage tel que spécifié dans cette ressource:
 https://unicode-org.github.io/icu/userguide/format_parse/datetime/#datetime-format-syntax.
@@ -230,7 +230,7 @@ Les types de calendrier suivants sont supportés:
 .. note::
     Pour les chaînes constantes, par exemple pour IntlDateFormatter::FULL, Intl
     utilise la librairie ICU qui alimente ses données à partir de CLDR
-    (http://cldr.unicode.org/) dont la version peut varier selon l'installation
+    (https://cldr.unicode.org/) dont la version peut varier selon l'installation
     PHP et donner des résultats différents.
 
 .. php:method:: nice()
@@ -277,7 +277,7 @@ Définir la Locale par défaut et la Chaîne Format
 
 La locale par défaut avec laquelle les dates sont affichées quand vous utilisez
 ``nice`` ``i18nFormat`` est prise à partir de la directive
-`intl.default_locale <http://www.php.net/manual/en/intl.configuration.php#ini.intl.default-locale>`_.
+`intl.default_locale <https://www.php.net/manual/en/intl.configuration.php#ini.intl.default-locale>`_.
 Vous pouvez cependant modifier ceci par défaut à la volée::
 
     Time::setDefaultLocale('es-ES'); // Pour tout DateTime modifiable
@@ -438,7 +438,7 @@ Voici un exemple::
     $newDate = $date->addHours(36);
     // Affiche '2021-01-31 00:00:00'
     echo $newDate->format('Y-m-d H:i:s');
- 
+
     $newDate = $date->addDays(10);
     // Affiche '2021-02-10 00:00:00'
     echo $newDate->format('Y-m-d H:i:s');
@@ -514,7 +514,7 @@ Timezones Supportés
 ===================
 
 CakePHP supporte tous les timezones valides de PHP. Pour la liste des timezones,
-`consultez cette page <http://php.net/manual/fr/timezones.php>`_.
+`consultez cette page <https://php.net/manual/fr/timezones.php>`_.
 
 .. meta::
     :title lang=fr: Time

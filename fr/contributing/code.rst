@@ -25,12 +25,12 @@ e-mail de travail::
 .. note::
 
     Si vous êtes nouveau sous Git, nous vous recommandons fortement de lire
-    l'excellent livre gratuit `ProGit <http://git-scm.com/book/>`_.
+    l'excellent livre gratuit `ProGit <https://git-scm.com/book/>`_.
 
 Récupérez un clone du code source de CakePHP sous GitHub:
 
-* Si vous n'avez pas de compte `github <http://github.com>`_ , créez-en un.
-* Forkez le `dépôt de CakePHP <http://github.com/cakephp/cakephp>`_ en cliquant
+* Si vous n'avez pas de compte `github <https://github.com>`_ , créez-en un.
+* Forkez le `dépôt de CakePHP <https://github.com/cakephp/cakephp>`_ en cliquant
   sur le bouton **Fork**.
 
 Après que le fork est fait, clonez votre fork sur votre machine locale::

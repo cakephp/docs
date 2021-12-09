@@ -93,7 +93,7 @@ IRC (#cakephp on freenode) で、参加したい旨を連絡してください�
 - 一部だけ翻訳して投稿しないでください。
 - 保留されている項目があるセクションは編集しないでください。
 - アクセント文字のために
-  `HTML エンティティー <http://en.wikipedia.org/wiki/List_of_XML_and_HTML_character_entity_references>`_
+  `HTML エンティティー <https://en.wikipedia.org/wiki/List_of_XML_and_HTML_character_entity_references>`_
   を使用しないでください。
   この book は UTF-8 を使っています。
 - マークアップ (HTML) の変更や新しいコンテンツを絶対に変更しないでください。
@@ -214,9 +214,9 @@ ReST (Re Structured Text) は markdown や textile に似たプレーンテキ�
 
 外部のドキュメントへのリンクは以下のようにできます。 ::
 
-    `php.net への外部リンク <http://php.net>`_
+    `php.net への外部リンク <https://php.net>`_
 
-以上のものは次のようにリンクします: `php.net への外部リンク <http://php.net>`_
+以上のものは次のようにリンクします: `php.net への外部リンク <https://php.net>`_
 
 他のページへのリンク
 ~~~~~~~~~~~~~~~~~~~~

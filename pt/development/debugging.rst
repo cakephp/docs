@@ -29,7 +29,7 @@ que seja exibida a pilha de execução onde quer que a mesma tenha sido chamada.
 
 .. php:function:: breakpoint()
 
-Se você tem o `Psysh <http://psysh.org/>`_ instalado poderá usar esta função em
+Se você tem o `Psysh <https://psysh.org/>`_ instalado poderá usar esta função em
 ambientes de interface de linha de comando (CLI) para abrir um console
 interativo com o escopo local atual::
 

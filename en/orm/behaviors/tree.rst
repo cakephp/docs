@@ -29,7 +29,7 @@ This behavior requires the following columns in your table:
 
 You can configure the name of those fields should you need to customize them.
 More information on the meaning of the fields and how they are used can be found
-in this article describing the `MPTT logic <http://www.sitepoint.com/hierarchical-data-database-2/>`_
+in this article describing the `MPTT logic <https://www.sitepoint.com/hierarchical-data-database-2/>`_
 
 .. warning::
 
@@ -52,9 +52,9 @@ hierarchical data in::
 
 Once added, you can let CakePHP build the internal structure if the table is
 already holding some rows::
-    
+
     // In a controller
-    
+
     $categories = $this->getTableLocator()->get('Categories');
     $categories->recover();
 

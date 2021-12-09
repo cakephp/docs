@@ -72,7 +72,7 @@ You can edit the default user that was created during
 :doc:`Installation <installation>`. If you change that user's password,
 you should see a hashed password instead of the original value on the list or
 view pages. CakePHP hashes passwords with `bcrypt
-<http://codahale.com/how-to-safely-store-a-password/>`_ by default. We recommend
+<https://codahale.com/how-to-safely-store-a-password/>`_ by default. We recommend
 bcrypt for all new applications to keep your security standards high. This
 is the `recommended password hash algorithm for PHP <https://www.php.net/manual/en/function.password-hash.php>`_.
 

@@ -255,7 +255,7 @@ The second proxy parameter must be a string with an IP or a domain without
 protocol. The username and password information will be passed through the
 request headers, while the proxy string will be passed through
 `stream_context_create()
-<http://php.net/manual/en/function.stream-context-create.php>`_.
+<https://php.net/manual/en/function.stream-context-create.php>`_.
 
 .. _http_client_scoped_client:
 

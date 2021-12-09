@@ -113,7 +113,7 @@ Agregar el TreeBehavior a CategoriesTable
 =========================================
 
 :doc:`TreeBehavior </orm/behaviors/tree>` ayuda a manejar estructuras de árbol jerarquica en una tabla. Utiliza `MPTT logic
-<http://www.sitepoint.com/hierarchical-data-database-2/>`_ para manejar los datos.
+<https://www.sitepoint.com/hierarchical-data-database-2/>`_ para manejar los datos.
 Las estructuras en árbol MPTT están optimizadas para lecturas, lo cual las hace ideal para aplicaciones con gran carga de
 lectura como los blogs.
 

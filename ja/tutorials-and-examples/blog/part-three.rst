@@ -190,7 +190,7 @@ TreeBehavior を Categories テーブルに追加
 
 データベーステーブルの階層的なツリー構造を管理するのに :doc:`TreeBehavior </orm/behaviors/tree>`
 が役に立つでしょう。データ管理の際に `MPTT logic
-<http://www.sitepoint.com/hierarchical-data-database-2/>`_ を利用しています。
+<https://www.sitepoint.com/hierarchical-data-database-2/>`_ を利用しています。
 MPTT ツリー構造は読み込みに最適化されているので、
 ときにブログのような読み込みが重いアプリケーションに適しています。
 

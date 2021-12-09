@@ -107,7 +107,7 @@ access that at www.example.com/articles/foobar.
     :doc:`/development/routing` covered later on.
 
 The single instruction in the action uses ``set()`` to pass resultset
-from the controller to the view (which we'll create next). The ``find()`` method 
+from the controller to the view (which we'll create next). The ``find()`` method
 of the ``ArticlesTable`` object returns an instance of ``Cake\\ORM\\Query`` and
 calling its ``all()`` method returns as instance of ``Cake\\Collection\\CollectionInterface``
 which is set as a view variable called 'articles'.
@@ -327,7 +327,7 @@ see what it looks like.
 
 We use FlashComponent's ``success()`` and ``error()`` methods to set a message
 to a session variable. These methods are provided using PHP's `magic method
-features <http://php.net/manual/en/language.oop5.overloading.php#object.call>`_.
+features <https://php.net/manual/en/language.oop5.overloading.php#object.call>`_.
 Flash messages will be displayed on the page after redirection. In the layout we
 have ``<?= $this->Flash->render() ?>`` which displays the message and clears the
 corresponding session variable. The controller's

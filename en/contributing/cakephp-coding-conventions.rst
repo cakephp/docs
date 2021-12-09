@@ -336,7 +336,7 @@ Commenting Code
 All comments should be written in English, and should in a clear way describe
 the commented block of code.
 
-Comments can include the following `phpDocumentor <http://phpdoc.org>`_
+Comments can include the following `phpDocumentor <https://phpdoc.org>`_
 tags:
 
 *  `@deprecated <https://docs.phpdoc.org/latest/guide/references/phpdoc/tags/deprecated.html>`_
@@ -449,7 +449,7 @@ parentheses::
     require_once $class;
 
 When including files with classes or libraries, use only and always the
-`require\_once <http://php.net/require_once>`_ function.
+`require\_once <https://php.net/require_once>`_ function.
 
 PHP Tags
 ========

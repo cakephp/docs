@@ -1,7 +1,7 @@
 テスト
 #######
 
-CakePHP はテストの包括的なサポートが組込まれています。CakePHP は `PHPUnit <http://phpunit.de>`_
+CakePHP はテストの包括的なサポートが組込まれています。CakePHP は `PHPUnit <https://phpunit.de>`_
 のための統合が付属しています。PHPUnit が提供する機能に加えて、CakePHP は簡単にテストするために
 いくつかの追加機能を提供しています。このセクションでは、PHPUnit のインストールからユニットテストの
 はじめ方、そして、CakePHP が提供する拡張機能について説明します。
@@ -11,8 +11,8 @@ PHPUnit のインストール
 
 CakePHP のテストフレームワークは、PHPUnit を基礎としています。PHPUnit は、PHP での
 ユニットテストのためのデファクトスタンダードです。それはあなたが思い通りのコードを確実に書くための、
-深遠で強力な機能を提供します。PHPUnit は `PHAR パッケージ <http://phpunit.de/#download>`__ や
-`Composer <http://getcomposer.org>`_ のいずれかを使用してを介してインストールすることができます。
+深遠で強力な機能を提供します。PHPUnit は `PHAR パッケージ <https://phpunit.de/#download>`__ や
+`Composer <https://getcomposer.org>`_ のいずれかを使用してを介してインストールすることができます。
 
 Composer による PHPUnit のインストール
 --------------------------------------
@@ -51,7 +51,7 @@ PHAR ファイルの使用
           sudo mv phpunit.phar /usr/local/bin/phpunit
           phpunit --version
 
-    `Windows 上で PHPUnit の PHAR をグローバルにインストールする方法 <http://phpunit.de/manual/current/ja/installation.html#installation.phar.windows>`__
+    `Windows 上で PHPUnit の PHAR をグローバルにインストールする方法 <https://phpunit.de/manual/current/ja/installation.html#installation.phar.windows>`__
     に関する手順については、PHPUnit のドキュメントを参照してください。
 
 テスト用データベースのセットアップ
@@ -984,7 +984,7 @@ Basic 認証のようなステートレス認証を使用する API をテスト
 リクエストヘッダーをシミュレートする環境変数やヘッダーを注入するためにリクエストを設定できます。
 
 Basic または Digest 認証をテストする際、自動的に
-`PHP が作成する <http://php.net/manual/ja/features.http-auth.php>`_
+`PHP が作成する <https://php.net/manual/ja/features.http-auth.php>`_
 環境変数を追加できます。これらの環境変数は、 :ref:`basic-authentication` に概説されている
 認証アダプター内で使用されます。 ::
 
@@ -1718,14 +1718,14 @@ Bake でのテストの生成
 Jenkins によるインテグレーション
 ================================
 
-`Jenkins <http://jenkins-ci.org>`_ は、あなたのテストケースの実行を自動化することができる
+`Jenkins <https://jenkins-ci.org>`_ は、あなたのテストケースの実行を自動化することができる
 継続的インテグレーションサーバーです。これは、すべてのテストがパスし、アプリケーションが常に準備が
 できていることを保証するのに役立ちます。
 
 Jenkins で CakePHP アプリケーションを統合することは非常に簡単です。以下では、すでに \*nix の
 システムに Jenkins をインストールしていると仮定して、それを管理することができます。
 また、ジョブを作成とビルドの実行を知っているとします。これらのいずれかが不明な場合は、
-`Jenkins のドキュメント <http://jenkins-ci.org/>`_ を参照してください。
+`Jenkins のドキュメント <https://jenkins-ci.org/>`_ を参照してください。
 
 ジョブの作成
 ------------

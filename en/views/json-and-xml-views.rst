@@ -179,7 +179,7 @@ Creating JSON Views
 
 The JsonView class supports the ``jsonOptions`` option that allows you to
 customize the bit-mask used to generate JSON. See the
-`json_encode <http://php.net/json_encode>`_ documentation for the valid
+`json_encode <https://php.net/json_encode>`_ documentation for the valid
 values of this option.
 
 For example, to serialize validation error output of CakePHP entities in a consistent form of JSON do::
