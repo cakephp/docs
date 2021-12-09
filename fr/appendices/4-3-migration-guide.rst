@@ -95,6 +95,13 @@ Network
 ORM
 ---
 
+- ``ModelAwareTrait::loadModel()`` est dépréciée. Utilisez la nouvelle méthode
+  ``LocatorAwareTrait::fetchTable()`` à la place. Par exemple, dans les
+  controllers vous pouvez faire ``$this->fetchTable()`` pour obtenir l'instance
+  de la table par défaut, ou utiliser ``$this->fetchTable('Foos')`` pour une
+  table autre que celle par défaut. Vous pouvez définir la propriété
+  ``LocatorAwareTrait::$defaultTable`` pour spécifier l'alias de la table par
+  défaut pour ``fetchTable()``.
 - L'usage de requêtes pour intercepter toutes les méthodes de 
   ``ResultSetInterface`` (y compris ```CollectionInterface```), forcer la
   récupération des résultats et appeler la méthode sous-jacente sur ces
@@ -109,7 +116,9 @@ ORM
 - ``QueryExpression::addCase()`` est dépréciée. Utilisez ``case()`` à la place.
   Les syntaxes ``['value' => 'literal']`` et ``['column' => 'identifier']`` ne
   sont pas supportées dans le nouveau case builder. L'insertion de SQL brut ou
-  d'identifiants nécessite d'utiliser des expressions explicitement.
+  d'identifiants nécessite d'utiliser des expressions explicitement. Vous pouvez
+  définir la propriété ``LocatorAwareTrait::$defaultTable`` pour spécifier
+  l'alias de la table par défaut.
 
 Routing
 -------
