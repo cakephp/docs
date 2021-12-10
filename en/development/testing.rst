@@ -61,9 +61,9 @@ tests:
 Test Database Setup
 ===================
 
-Remember to have debug enabled in your **config/app.php** file before running
+Remember to have debug enabled in your **config/app_local.php** file before running
 any tests.  Before running any tests you should be sure to add a ``test``
-datasource configuration to **config/app.php**. This configuration is used by
+datasource configuration to **config/app_local.php**. This configuration is used by
 CakePHP for fixture tables and data::
 
     'Datasources' => [
@@ -463,11 +463,26 @@ database schema as well::
     // Run the Documents migrations on the test_docs connection.
     $migrator->run(['plugin' => 'Documents', 'connection' => 'test_docs']);
 
+If you need to run multiple sets of migrations, those can be run as follows::
+
+    // Run migrations for plugin Contacts on
+    $migrator->runMany([
+        // Run app migrations on test connection.
+        ['connection' => 'test']
+        // Run Contacts migrations on test connection.
+        ['plugin' => 'Contacts'],
+        // Run Documents migrations on test_docs connection.
+        ['plugin' => 'Documents', 'connection' => 'test_docs']
+    ]);
+
+Using ``runMany()`` will ensure that plugins that share a database don't drop
+tables as each set of migrations is run.
+
 The migrations plugin will only run unapplied migrations, and will reset
 migrations if your current migration head differs from the applied migrations.
 
 You can also configure how migrations should be run in tests in your datasources
-configuration. See the `migrations docs </migrations>` for more information.
+configuration. See the :doc:`migrations docs </migrations>` for more information.
 
 To load a SQL dump file you can use the following::
 
