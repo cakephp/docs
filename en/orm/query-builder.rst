@@ -143,7 +143,6 @@ Getting A List Of Values From A Column
 You can also get a key-value list out of a query result::
 
     $list = $articles->find('list')->all();
-
     foreach ($list as $id => $title) {
         echo "$id : $title"
     }
@@ -1549,8 +1548,8 @@ example given above::
 More Complex Queries
 ====================
 
-The query builder is capable of building complex queries like ``UNION`` queries
-and sub-queries.
+If your application requires using more complex queries, you can express many
+complex queries using the ORM query builder.
 
 Unions
 ------
@@ -1698,7 +1697,69 @@ named windows using the ``window()`` method::
     ]);
 
 .. versionadded:: 4.1.0
-    Window function support was added in 4.1.0
+    Window function support was added.
+
+Common Table Expressions
+------------------------
+
+Common Table Expressions or CTE are useful when building reporting queries where
+you need to compose the results of several smaller query results together. They
+can serve a similar purpose to database views or subquery results. Common Table
+Expressions differ from derived tables and views in a couple ways:
+
+#. Unlike views, you don't have to maintain schema for common table expressions.
+   The schema is implicitly based on the result set of the table expression.
+#. You can reference the results of a common table expression multiple times
+   without incurring performance penalties unlike subquery joins.
+
+As an example lets fetch a list of customers and the number of orders each of
+them has made. In SQL we would use:
+
+.. code-block:: sql
+
+    WITH orders_per_customer AS (
+        SELECT COUNT(*) AS order_count, customer_id FROM orders GROUP BY customer_id
+    )
+    SELECT name, orders_per_customer.order_count
+    FROM customers
+    INNER JOIN orders_per_customer ON orders_per_customer.customer_id = customers.id
+
+To build that query with the ORM query builder we would use::
+
+    // Start the final query
+    $query = $this->Customers->find();
+
+    // Attach a common table expression
+    $query->with(function ($cte) {
+        // Create a subquery to use in our table expression
+        $q = $this->Orders->subquery();
+        $q->select([
+            'order_count' => $q->func()->count('*'),
+            'customer_id'
+        ])
+        ->group('customer_id');
+
+        // Attach the new query to the table expression
+        return $cte
+            ->name('orders_per_customer')
+            ->query($q);
+    });
+
+    // Finish building the final query
+    $query->select([
+        'name',
+        'order_count' => 'orders_per_customer.order_count',
+    ])
+    ->join([
+        // Define the join with our table expression
+        'orders_per_customer' => [
+            'table' => 'orders_per_customer',
+            'conditions' => 'orders_per_customer.customer_id = Customers.id'
+        ]
+    ]);
+
+.. versionadded:: 4.1.0
+    Common table expression support was added.
 
 Executing Complex Queries
 -------------------------

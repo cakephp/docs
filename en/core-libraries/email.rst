@@ -109,8 +109,8 @@ following configuration keys are used:
 - ``'message'``: Content of message. Do not set this field if you are using rendered content.
 - ``'priority'``: Priority of the email as numeric value (usually from 1 to 5 with 1 being the highest).
 - ``'headers'``: Headers to be included. See ``Mailer::setHeaders()``.
-- ``'viewRender'``: If you are using rendered content, set the view classname.
-  See ``Mailer::viewRender()``.
+- ``'viewRenderer'``: If you are using rendered content, set the view classname.
+  See ``ViewBuilder::setClassName()``.
 - ``'template'``: If you are using rendered content, set the template name. See
   ``ViewBuilder::setTemplate()``.
 - ``'theme'``: Theme used when rendering template. See ``ViewBuilder::setTheme()``.

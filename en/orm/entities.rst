@@ -10,7 +10,7 @@ objects, entities represent individual rows or domain objects in your
 application. Entities contain methods to manipulate and
 access the data they contain. Fields can also be accessed as properties on the object.
 
-Entities are created for you each time you iterate the query instance returned 
+Entities are created for you each time you iterate the query instance returned
 by ``find()`` of a table object or when you call ``all()`` or ``first()`` method
 of the query instance.
 
@@ -60,12 +60,12 @@ to store in them::
 
 The preferred way of getting new entities is using the ``newEmptyEntity()`` method from the
 ``Table`` objects::
-    
+
     use Cake\ORM\Locator\LocatorAwareTrait;
 
-    $article = $this->getTableLocator()->newEmptyEntity();
+    $article = $this->fetchTable('Articles')->newEmptyEntity();
 
-    $article = $this->getTableLocator()->newEntity([
+    $article = $this->fetchTable('Articles')->newEntity([
         'id' => 1,
         'title' => 'New Article',
         'created' => new DateTime('now')
@@ -73,6 +73,11 @@ The preferred way of getting new entities is using the ``newEmptyEntity()`` meth
 
 ``$article`` will be an instance of ``App\Model\Entity\Article`` or fallback to
 ``Cake\ORM\Entity`` instance if you haven't created the ``Article`` class.
+
+.. note::
+
+    Prior to CakePHP 4.3 you need to use ``$this->getTableLocator->get('Articles')``
+    to get the table instance.
 
 Accessing Entity Data
 =====================
