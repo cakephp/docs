@@ -18,7 +18,6 @@ chapter for each component:
     /controllers/components/authentication
     /controllers/components/flash
     /controllers/components/security
-    /controllers/components/pagination
     /controllers/components/request-handling
     /controllers/components/form-protection
 
