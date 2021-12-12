@@ -65,5 +65,7 @@ Database
 Http
 ----
 
+* ``BaseApplication::handle()`` now adds the ``$request`` into the service
+  container all the time.
 * ``HttpsEnforcerMiddleware`` now has an ``hsts`` option that allows you to
   configure the ``Strict-Transport-Security`` header.
