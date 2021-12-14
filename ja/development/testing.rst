@@ -451,7 +451,7 @@ CakePHPの`マイグレーションプラグイン </migrations>`を使用して
 
 データソース構成のテストでマイグレーションを実行する方法を構成することもできます。詳細については、:doc:`マイグレーションに関するドキュメント </migrations>`を参照してください。
 
-SQLダンプファイルをロードしたい場合は、下記のメソッドを使用できます。
+SQLダンプファイルをロードしたい場合は、下記のメソッドを使用できます。::
 
     // in tests/bootstrap.php
     use Cake\TestSuite\Fixture\SchemaLoader;
