@@ -433,7 +433,7 @@ CakePHPの`マイグレーションプラグイン </migrations>`を使用して
     $migrator->run(['plugin' => 'Documents', 'connection' => 'test_docs']);
 
 
-複数のマイグレーションを実行する必要がある場合は、次のように実行できます。
+複数のマイグレーションを実行する必要がある場合は、次のように実行できます。::
 
     // Run migrations for plugin Contacts on
     $migrator->runMany([
