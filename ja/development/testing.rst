@@ -189,15 +189,15 @@ CakePHP におけるほとんどのことがそうであるように、テスト
     public function testBar(): void
     {
         $result = $this->Progress->bar(90);
-        $this->assertContains('width: 90%', $result);
-        $this->assertContains('progress-bar', $result);
-
+        $this->assertStringContainsString('width: 90%', $result);
+        $this->assertStringContainsString('progress-bar', $result);
+    
         $result = $this->Progress->bar(33.3333333);
-        $this->assertContains('width: 33%', $result);
+        $this->assertStringContainsString('width: 33%', $result);
     }
 
 上記のテストは単純なものですが、テストケースを使用しての潜在的な利点を示しています。
-このコードでは ``assertContains()`` を使うことで、ヘルパーが返した値に、期待した文字列が
+このコードでは ``assertStringContainsString()`` を使うことで、ヘルパーが返した値に、期待した文字列が
 含まれていることを保証しています。もし期待した文字列が含まれていなければテストは失敗し、
 コードが正しくないことがわかります。
 
