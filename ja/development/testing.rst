@@ -673,7 +673,7 @@ CakePHPコアまたはプラグインからフィクスチャをロードする�
 プラグインをロード
 ------------------------
 
-プラグインをロードしたい場合は ``loadPlugins()`` メソッドを使用できます。
+プラグインをロードしたい場合は ``loadPlugins()`` メソッドを使用できます。::
 
     public function testMethodUsingPluginResources()
     {
