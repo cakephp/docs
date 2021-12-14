@@ -189,15 +189,15 @@ CakePHP におけるほとんどのことがそうであるように、テスト
     public function testBar(): void
     {
         $result = $this->Progress->bar(90);
-        $this->assertStringContainsString('width: 90%', $result);
-        $this->assertStringContainsString('progress-bar', $result);
-    
+        $this->assertContains('width: 90%', $result);
+        $this->assertContains('progress-bar', $result);
+
         $result = $this->Progress->bar(33.3333333);
-        $this->assertStringContainsString('width: 33%', $result);
+        $this->assertContains('width: 33%', $result);
     }
 
 上記のテストは単純なものですが、テストケースを使用しての潜在的な利点を示しています。
-このコードでは ``assertStringContainsString()`` を使うことで、ヘルパーが返した値に、期待した文字列が
+このコードでは ``assertContains()`` を使うことで、ヘルパーが返した値に、期待した文字列が
 含まれていることを保証しています。もし期待した文字列が含まれていなければテストは失敗し、
 コードが正しくないことがわかります。
 
@@ -389,8 +389,17 @@ CakePHP はフィクスチャーに基づいたテストケースを実行する
 PHPUnitの設定
 -------------
 
-フィクスチャーを使う前に、``phpunit.xml`` にフィクスチャーリスナーが含まれていることを
-ダブルチェックする必要があります。
+フィクスチャーを使う前に、``phpunit.xml``にフィクスチャExtensionが含まれていることを再確認する必要があります。
+
+.. code-block:: xml
+
+    <!-- in phpunit.xml -->
+    <!-- Setup the extension for fixtures -->
+    <extensions>
+        <extension class="\Cake\TestSuite\Fixture\PHPUnitExtension" />
+    </extensions>
+
+※CakePHP 4.3.0より以前の場合はPHPUnitのフィクスチャExtensionではなくテストリスナー機能が使用されていたため、phpunit.xmlには下記のように書く必要があります。
 
 .. code-block:: xml
 
