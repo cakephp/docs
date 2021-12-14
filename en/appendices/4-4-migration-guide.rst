@@ -57,6 +57,7 @@ New Features
 Database
 --------
 
+* The ``SQLite`` driver now supports shared in memory databases in PHP8.1+.
 * ``Query::expr()`` was added as an alternative to ``Query::newExpr()``.
 * The ``QueryExpression::case()`` builder now supports inferring the type
   from expressions passed to ``then()`` and ``else()`` that implement
