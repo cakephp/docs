@@ -652,7 +652,7 @@ CakePHPコアまたはプラグインからフィクスチャをロードする�
 
 ファクトリーは、関連するフィクスチャの生成にも役立ちます。記事が複数の著者に属していると仮定すると、たとえば、それぞれ5つの記事を持つ2人の著者を作成できます。
 
-    $articles = ArticleFactory::make(5)->with('Authors', 2)->getEntities();``
+    $articles = ArticleFactory::make(5)->with('Authors', 2)->getEntities();
 
 フィクスチャファクトリはフィクスチャの作成または宣言を必要としません。それでも、それらはCakePHPに付属しているフィクスチャと完全に互換性があります。`ここ <https://github.com/vierge-noire/cakephp-fixture-factories>`_ に追加の洞察とドキュメントがあります。
 
