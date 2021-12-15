@@ -112,15 +112,10 @@ CakePHP が全般的にそうであるように、テストケースにもいく
 
 #. テストを含むPHPファイルは、 ``tests/TestCase/[Type]`` ディレクトリーに置きます。
 #. ファイル名のサフィックスは .php ではなく **Test.php** とします。
-#. テストを含むクラスは ``Cake\TestSuite\TestCase`` 、
-    ``Cake\TestSuite\IntegrationTestCase`` または ``\PHPUnit\Framework\TestCase``
-    を継承する必要があります。
+#. テストを含むクラスは ``Cake\TestSuite\TestCase`` 、 ``Cake\TestSuite\IntegrationTestCase`` または ``\PHPUnit\Framework\TestCase`` を継承する必要があります。
 #. 他のクラス名と同様に、テストケースのクラス名はファイル名と一致する必要があります。
-   **RouterTest.php** は、 ``class RouterTest extends TestCase`` が含まれている
-    必要があります。
-#. テストを含むメソッド (つまり、アサーションを含むメソッド) の名前は ``testPublished()``
-    のように ``test`` で始める必要があります。 ``@test`` というアノテーションをメソッドに
-    マークすることでテストメソッドとすることもできます。
+   **RouterTest.php** は、 ``class RouterTest extends TestCase`` が含まれている必要があります。
+#. テストを含むメソッド (つまり、アサーションを含むメソッド) の名前は ``testPublished()`` のように ``test`` で始める必要があります。 ``@test`` というアノテーションをメソッドにマークすることでテストメソッドとすることもできます。
 
 最初のテストケースを作成
 ==========================
@@ -412,7 +407,7 @@ PHPUnitの設定
 .. _creating-test-database-schema:
 
 テスト用のデータベーススキーマ作成
---------------------------------
+-------------------------------------
 
 CakePHPのマイグレーション機能・SQLダンプファイルのロード、または他のスキーマ管理ツールを使用して、テスト用のデータベーススキーマを生成できます。アプリケーションの ``tests/bootstrap.php`` ファイルにスキーマを作成する必要があります。
 
