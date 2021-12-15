@@ -4,15 +4,13 @@
 CakePHP はテストの包括的なサポートが組込まれています。CakePHP は `PHPUnit <http://phpunit.de>`_
 のための統合が付属しています。PHPUnit が提供する機能に加えて、CakePHP は簡単にテストするために
 いくつかの追加機能を提供しています。このセクションでは、PHPUnit のインストールからユニットテストの
-はじめ方、そして、CakePHP が提供する拡張機能について説明します。
+はじめ方、そしてCakePHP が提供する拡張機能について説明します。
 
 PHPUnit のインストール
 ======================
 
-CakePHP のテストフレームワークは、PHPUnit を基礎としています。PHPUnit は、PHP での
-ユニットテストのためのデファクトスタンダードです。それはあなたが思い通りのコードを確実に書くための、
-深遠で強力な機能を提供します。PHPUnit は `PHAR パッケージ <http://phpunit.de/#download>`__ や
-`Composer <http://getcomposer.org>`_ のいずれかを使用してを介してインストールすることができます。
+CakePHP のテストフレームワークは PHPUnit をベースとしています。PHPUnit は PHP ユニットテストフレームワークのデファクトスタンダードであり、思いどおりのコードを確実に書くための豊富な機能を提供します。PHPUnit は `PHAR パッケージ <http://phpunit.de/#download>`__ または
+`Composer <http://getcomposer.org>`_ のいずれかを使用してインストールできます。
 
 Composer による PHPUnit のインストール
 --------------------------------------
@@ -91,15 +89,16 @@ PHPUnit をインストールして ``test`` データソースを設定した�
     # Composer でインストールされた phpunit
     $ vendor/bin/phpunit
 
-上記は、あなたが用意した任意のテストを実行するか、もしくはテストが実行されなかったことが分かります。
-特定のテストを実行するためには PHPUnit にパラメーターとしてテストのパスを指定します。
+上記を実行するとテストが実行されます(テストが作成されている場合)。
+
+特定のテストを実行したい場合は、パラメーターとしてテストのパスを指定します。
 例えば、ArticlesTable クラスのテストケースがある場合、次のように実行します。
 
 .. code-block:: console
 
     $ vendor/bin/phpunit tests/TestCase/Model/Table/ArticlesTableTest
 
-グリーンバーと実行したテストや成功したテストの数など、 いくつかの追加情報が表示されます。
+実行したテストや成功したテスト・失敗したテストの数など、 各種情報がカラーで表示されます。
 
 .. note::
 
@@ -108,26 +107,21 @@ PHPUnit をインストールして ``test`` データソースを設定した�
 テストケースの規約
 ==================
 
-CakePHP におけるほとんどのことがそうであるように、テストケースにもいくつか規約があります。
+CakePHP が全般的にそうであるように、テストケースにもいくつか規約があります。
 以下のとおりです。
 
 #. テストを含むPHPファイルは、 ``tests/TestCase/[Type]`` ディレクトリーに置きます。
-#. ファイル名の最後は必ずただ .php とだけ書くのではなく **Test.php** とします。
-#. テストを含むクラスは ``Cake\TestSuite\TestCase`` 、
-   ``Cake\TestSuite\IntegrationTestCase`` または ``\PHPUnit\Framework\TestCase``
-   を継承する必要があります。
+#. ファイル名のサフィックスは .php ではなく **Test.php** とします。
+#. テストを含むクラスは ``Cake\TestSuite\TestCase`` 、 ``Cake\TestSuite\IntegrationTestCase`` または ``\PHPUnit\Framework\TestCase`` を継承する必要があります。
 #. 他のクラス名と同様に、テストケースのクラス名はファイル名と一致する必要があります。
-   **RouterTest.php** は、 ``class RouterTest extends TestCase`` が含まれている
-   必要があります。
-#. テストを含むメソッド (つまり、アサーションを含むメソッド) の名前は ``testPublished()``
-   のように ``test`` で始める必要があります。 ``@test`` というアノテーションをメソッドに
-   マークすることでテストメソッドとすることもできます。
+   **RouterTest.php** は、 ``class RouterTest extends TestCase`` が含まれている必要があります。
+#. テストを含むメソッド (つまり、アサーションを含むメソッド) の名前は ``testPublished()`` のように ``test`` で始める必要があります。 ``@test`` というアノテーションをメソッドにマークすることでテストメソッドとすることもできます。
 
-最初のテストケース作成
-======================
+最初のテストケースを作成
+==========================
 
-一例として、非常に簡単なヘルパーメソッドのためのテストケースを作成します。
-これからテストのために作成するメソッドは HTML でプログレスバーを作成します。
+一例として、とても簡単な、ヘルパーメソッドのためのテストケースを作成します。
+これからテストのために作成するメソッドは HTML でプログレスバーを描画するものです。
 ヘルパーは次のようになります。 ::
 
     namespace App\View\Helper;
@@ -146,9 +140,8 @@ CakePHP におけるほとんどのことがそうであるように、テスト
         }
     }
 
-非常に簡単な例ですが、シンプルなテストケースを作成する方法をお見せするのに役立つことでしょう。
-ヘルパーを作成し保存したら、 **tests/TestCase/View/Helper/ProgressHelperTest.php**
-にテストケースの ファイルを作成します。このファイルにまず、以下のように書き込みます。 ::
+作成したヘルパーを保存したら、 **tests/TestCase/View/Helper/ProgressHelperTest.php**
+としてテストケースのファイルを作成します。このファイルにまず、以下のように書き込みます。::
 
     namespace App\Test\TestCase\View\Helper;
 
@@ -167,8 +160,8 @@ CakePHP におけるほとんどのことがそうであるように、テスト
         }
     }
 
-ここからすぐに中身を増やしていきます。まずはメソッドを2つ加えました。最初は ``setUp()`` です。
-このメソッドはこのテストケースクラスの *テスト* メソッドが 呼び出される前に毎回呼び出されます。
+空のメソッドが2つあります。次にメソッドの中身を書きます。最初は ``setUp()`` です。
+このメソッドはこのテストケースクラスのテストメソッドが 呼び出される前に毎回呼び出されます。
 セットアップメソッドはテストに必要なオブジェクトの初期化や設定を行います。
 今回のセットアップメソッドには次のように書き加えます。 ::
 
@@ -179,33 +172,29 @@ CakePHP におけるほとんどのことがそうであるように、テスト
         $this->Progress = new ProgressHelper($View);
     }
 
-テストケースで親のメソッドを呼ぶことは重要です。 ``TestCase::setUp()`` は、
+親メソッドを必ずロードしてください。 ``TestCase::setUp()`` は、
 :php:class:`~Cake\\Core\\Configure` の値をバックアップしたり、
 :php:class:`~Cake\\Core\\App` にパスを保存したりといった、いくつかの作業をしているからです。
 
-次に、テストメソッドの内容を充実させていきます。あなたの書いたコードが期待した結果を
-出力するかどうか保証するため、アサーションを使います。 ::
+次に、テストメソッドの内容を記述します。期待した結果を
+出力できるかどうかをテストするため「アサーション」を使います。 ::
 
     public function testBar(): void
     {
         $result = $this->Progress->bar(90);
-        $this->assertContains('width: 90%', $result);
-        $this->assertContains('progress-bar', $result);
+        $this->assertStringContainsString('width: 90%', $result);
+        $this->assertStringContainsString('progress-bar', $result);
 
         $result = $this->Progress->bar(33.3333333);
-        $this->assertContains('width: 33%', $result);
+        $this->assertStringContainsString('width: 33%', $result);
     }
 
-上記のテストは単純なものですが、テストケースを使用しての潜在的な利点を示しています。
-このコードでは ``assertContains()`` を使うことで、ヘルパーが返した値に、期待した文字列が
-含まれていることを保証しています。もし期待した文字列が含まれていなければテストは失敗し、
+``assertStringContainsString()`` というアサーションを用いることで、ヘルパーが返した値に期待した文字列が
+含まれていることをテストできます。期待した文字列が含まれていなければテストは失敗し、
 コードが正しくないことがわかります。
 
 テストケースを使うことにより、 既知の入力セットと期待される出力結果との関係を 簡単に記述することが
-できます。これにより、あなたの書いたコードが期待した動作を満たしているかどうか 簡単に確かめることが
-できます。あなたはより自信を持ってコードを書くことができるようになる 手助けをしてくれます。
-また、テストはコードなので、あなたが変更を加えるたびに再実行するのは簡単です。
-これは新たなバグの発生を防ぐ手助けをしてくれるでしょう。
+できます。つまり、書いたコードが期待した動作を満たしているかどうかを自動的にテストできます。これにより、新たなバグの発生を未然に検知し、私達は自信を持って開発を進めていくことができるようになります。
 
 .. note::
 
@@ -222,15 +211,15 @@ PHPUnit をインストールし、テストケースをいくつか書いたら
 すべての変更をコミットする前に、何も壊れていないことを確認するために、テストを実行することを
 お勧めします。
 
-``phpunit`` を使うことで、あなたはアプリケーションのテストを実行できます。
+``phpunit`` を使うことで、アプリケーションのテストを実行できます。
 アプリケーションのテストを実行するには、シンプルに実行することができます。
 
 .. code-block:: console
 
-    # composer のインストール
-    $ vendor/bin/phpunit
+    # composer でインストールされたファイルを実行する場合
+    vendor/bin/phpunit
 
-    # phar 形式のファイル
+    # phar 形式のファイルを実行する場合
     php phpunit.phar
 
 `GitHub から CakePHP ソース <https://github.com/cakephp/cakephp>`__ をクローンして
@@ -239,7 +228,7 @@ CakePHP のユニットテストを実行したい場合、 ``phpunit`` を実�
 
 .. code-block:: console
 
-    $ composer install
+    composer install
 
 アプリケーションのルートディレクトリーから以下を行います。アプリケーションのソースの一部である
 プラグインのテストを実行するには、まず ``cd`` でプラグインディレクトリーに移動し、その後、
@@ -303,8 +292,8 @@ PHPUnit のインストール方法に合わせて ``phpunit`` コマンドを�
 プラグインのテストスイートを組合わせ
 ------------------------------------
 
-しばしば、あなたのアプリケーションは、いくつかのプラグインで構成されます。これらの状況では、
-各プラグインのテストを実行することは、かなり面倒です。アプリケーションの **phpunit.xml.dist**
+アプリケーションは、複数のプラグインで構成されることもあります。
+通常、各プラグインのテストを実行することは、かなり面倒です。しかしアプリケーションの **phpunit.xml.dist**
 ファイルに ``<testsuite>`` セクションを追加して、アプリケーションを構成するプラグインの
 それぞれのテストを実行することができます。
 
@@ -380,16 +369,15 @@ CakePHP はフィクスチャーに基づいたテストケースを実行する
 アプリケーションのブートストラップで定義された (``test_`` がつかない) 各データベース接続は、
 ``test_`` プレフィクスがついた別名を持つことになります。テストケースで誤って間違った接続を
 使用しないことを、エイリアシングの接続が保証します。接続エイリアシングは、アプリケーションの
-残りの部分には透過的です。例えば、あなたは 'default' コネクションを使用している場合、
-代わりに、テストケースで ``test`` コネクションを取得します。あなたが 'replica' コネクションを
-使用する場合、テストスイートは 'test_replica' を使用しようとします。
+残りの部分には透過的です。例えば 'default' コネクションを使用している場合、
+代わりに、テストケースで ``test`` コネクションを取得します。 'replica' コネクションを使用する場合、テストスイートは 'test_replica' を使おうとします。
 
 .. _fixture-phpunit-configuration:
 
 PHPUnitの設定
--------------
+---------------
 
-フィクスチャーを使う前に、``phpunit.xml`` にフィクスチャExtensionが含まれていることを再確認する必要があります。
+フィクスチャーを使う前に、 ``phpunit.xml`` にフィクスチャExtensionが含まれていることを再確認する必要があります。
 
 .. code-block:: xml
 
@@ -399,7 +387,7 @@ PHPUnitの設定
         <extension class="\Cake\TestSuite\Fixture\PHPUnitExtension" />
     </extensions>
 
-※CakePHP 4.3.0より以前の場合はPHPUnitのフィクスチャExtensionではなくテストリスナー機能が使用されていたため、phpunit.xmlには下記のように書く必要があります。
+※CakePHP 4.3.0より以前はPHPUnitのフィクスチャExtensionではなくテストリスナー機能が使用されていたため、phpunit.xmlには下記のように書く必要があります。
 
 .. code-block:: xml
 
@@ -414,14 +402,95 @@ PHPUnitの設定
         </listener>
     </listeners>
 
-リスナーは ``bake`` によって生成されるアプリケーションやプラグインに
-デフォルトで含まれています。
+※リスナーは非推奨であり、 :doc:`フィクスチャ構成を更新</appendices/fixture-upgrade>` する必要があります。
+
+.. _creating-test-database-schema:
+
+テスト用のデータベーススキーマ作成
+-------------------------------------
+
+CakePHPのマイグレーション機能・SQLダンプファイルのロード、または他のスキーマ管理ツールを使用して、テスト用のデータベーススキーマを生成できます。アプリケーションの ``tests/bootstrap.php`` ファイルにスキーマを作成する必要があります。
+
+CakePHPの`マイグレーションプラグイン </migrations>`を使用してアプリケーションのスキーマを管理する場合は、それらのマイグレーションを利用してテストデータベーススキーマを生成することもできます。::
+
+    // in tests/bootstrap.php
+    use Migrations\TestSuite\Migrator;
+
+    $migrator = new Migrator();
+
+    // Simple setup for with no plugins
+    $migrator->run();
+
+    // Run migrations for multiple plugins
+    $migrator->run(['plugin' => 'Contacts']);
+
+    // Run the Documents migrations on the test_docs connection.
+    $migrator->run(['plugin' => 'Documents', 'connection' => 'test_docs']);
+
+
+複数のマイグレーションを実行する必要がある場合は、次のように実行できます。::
+
+    // Run migrations for plugin Contacts on
+    $migrator->runMany([
+        // Run app migrations on test connection.
+        ['connection' => 'test']
+        // Run Contacts migrations on test connection.
+        ['plugin' => 'Contacts'],
+        // Run Documents migrations on test_docs connection.
+        ['plugin' => 'Documents', 'connection' => 'test_docs']
+    ]);
+
+``runMany()`` を使うと、データベースを共有するプラグインが、各マイグレーションが実行される時にテーブルをドロップしないようになります。
+
+マイグレーションプラグインは、適用されていないマイグレーションのみを実行し、カレントのマイグレーションヘッドが適用されたマイグレーションと異なる場合はマイグレーションをリセットします。
+
+データソース構成のテストでマイグレーションを実行する方法を構成することもできます。詳細については、 :doc:` マイグレーションに関するドキュメント </migrations>` を参照してください。
+
+SQLダンプファイルをロードしたい場合は、下記のメソッドを使用できます。::
+
+    // in tests/bootstrap.php
+    use Cake\TestSuite\Fixture\SchemaLoader;
+
+    // Load one or more SQL files.
+    (new SchemaLoader())->loadSqlFiles('path/to/schema.sql', 'test');
+
+各テスト実行の ``SchemaLoader`` 開始時に、コネクションに紐づく全のテーブルを削除し、提供されたスキーマファイルに基づいてテーブルを再構築します。
+
+.. versionadded:: 4.3.0
+    SchemaLoaderが追加されました。
+
+.. _fixture-state-management:
+
+フィクスチャステートマネージャ
+-------------------------------------
+
+デフォルトでは、CakePHPは、データベース内のすべてのテーブルを truncate することにより、各テストの最後にフィクスチャの状態をリセットします。この処理は、アプリケーションが大きくなるにつれてコストがかかる可能性があります。 ``TransactionStrategy`` を各テストメソッドに使用すると、テストの最後にロールバックされるトランザクション内で実行されます。これによりパフォーマンスが向上しますが、各テストの前に自動インクリメント値がリセットされないため、テストで静的フィクスチャデータに大きく依存しないようにする必要があります。
+
+フィクスチャの状態管理は、テストケース内で定義できます。::
+
+    use Cake\TestSuite\TestCase;
+    use Cake\TestSuite\Fixture\FixtureStrategyInterface;
+    use Cake\TestSuite\Fixture\TransactionStrategy;
+
+    class ArticlesTableTest extends TestCase
+    {
+        /**
+         * Create the fixtures strategy used for this test case.
+         * You can use a base class/trait to change multiple classes.
+         */
+        protected function getFixtureStrategy(): FixtureStrategyInterface
+        {
+            return new TransactionStrategy();
+        }
+    }
+
+.. versionadded:: 4.3.0
 
 フィクスチャーの作成
 --------------------
 
-フィクスチャーを作成するときは主にふたつのことを定義します。ひとつはどのようなフィールドを持った
-テーブルを作成するか、もうひとつは初期状態でどのようなレコードをテーブルに配置するかです。
+フィクスチャは、テストのためにデータベースに挿入されるレコードを定義します。
+
 それでは最初のフィクスチャーを作成してみましょう。この例ではArticleモデルのフィクスチャーを作成します。
 以下の内容で、 **tests/Fixture** ディレクトリーに **ArticlesFixture.php** という名前のファイルを
 作成してください。 ::
@@ -432,20 +501,9 @@ PHPUnitの設定
 
     class ArticlesFixture extends TestFixture
     {
-          // オプション。異なるテストデータソースにフィクスチャーをロードするために、このプロパティーを設定
+          // (オプション) 異なるテストデータソースにフィクスチャーをロードするために、このプロパティーを設定
           public $connection = 'test';
 
-          public $fields = [
-              'id' => ['type' => 'integer'],
-              'title' => ['type' => 'string', 'length' => 255, 'null' => false],
-              'body' => 'text',
-              'published' => ['type' => 'integer', 'default' => '0', 'null' => false],
-              'created' => 'datetime',
-              'modified' => 'datetime',
-              '_constraints' => [
-                'primary' => ['type' => 'primary', 'columns' => ['id']]
-              ]
-          ];
           public $records = [
               [
                   'title' => 'First Article',
@@ -473,61 +531,28 @@ PHPUnitの設定
 
 .. note::
 
-    PostgreSQL や SQLServer のシーケンス生成を妨げるように手動で自動インクリメントカラムに
-    値を追加しないことをお勧めします。
+    autoincrementカラムに手動で値を追加しないことをお勧めします。PostgreSQLおよびSQLServerでのシーケンス生成に干渉するためです。
 
-``$connection`` プロパティーは、フィクスチャーが使用するデータソースを定義します。アプリケーションが
+``$connection`` プロパティは、フィクスチャーが使用するデータソースを定義します。アプリケーションが
 複数のデータソースを使用している場合、フィクスチャーはモデルのデータソースと一致しますが、 ``test_``
-プレフィックスを必要があります。例えば、お使いのモデルが ``mydb`` データソースを使用している場合、
-あなたのフィクスチャーは、 ``test_mydb`` データソースを使用する必要があります。
+プレフィックスを付ける必要があります。例えば、お使いのモデルが ``mydb`` データソースを使用している場合、
+フィクスチャーは、 ``test_mydb`` データソースになります。
 ``test_mydb`` 接続が存在しない場合、モデルはデフォルトの ``test`` データソースを使用します。
 テストを実行するときにテーブル名の衝突を避けるため、フィクスチャーのデータソースには ``test``
 のプレフィックスが必ず付きます。
 
-``$fields`` ではテーブルを構成するフィールドと、その定義を記述します。フィールドの定義には
-:php:class:`Cake\\Database\\Schema\\Table` と同じ書式を使います。
-テーブル定義のための利用可能なキーは以下のとおりです。
+フィクスチャテーブルの作成後に入力される一連のレコードを定義できます。 ``$records`` はレコードの配列データです。 ``$records`` 内の各項目は単一の行である必要があります。各行の中には、行の列と値の連想配列が必要です。複数レコードを一括挿入する際に用いる ``$records`` 配列内の各レコードは、同じキー構成が必要であることに注意してください。
 
-type
-    CakePHP の内部データ型。現在サポートしているのは、以下の型です。
+.. versionchanged:: 4.3.0
 
-    - ``string``: ``VARCHAR``  にマップ
-    - ``char``: ``CHAR`` にマップ
-    - ``uuid``: ``UUID`` にマップ
-    - ``text``: ``TEXT`` にマップ
-    - ``integer``: ``INT`` にマップ
-    - ``biginteger``: ``BIGINTEGER`` にマップ
-    - ``decimal``: ``DECIMAL`` にマップ
-    - ``float``: ``FLOAT`` にマップ
-    - ``datetime``: ``DATETIME`` にマップ
-    - ``datetimefractional``: ``DATETIME(6)`` または ``TIMESTAMP`` にマップ
-    - ``timestamp``: ``TIMESTAMP`` にマップ
-    - ``timestampfractional``: ``TIMESTAMP(6)`` または ``TIMESTAMP`` にマップ
-    - ``time``: ``TIME`` にマップ
-    - ``date``: ``DATE`` にマップ
-    - ``binary``: ``BLOB`` にマップ
-length
-    フィールドが許容するサイズを設定します。
-precision
-    float や decimal フィールド上で使用される小数点以下の桁数を設定します。
-null
-    ``true`` ( NULL を許容する) または ``false`` ( NULL を許容しない) のいずれかを設定します。
-default
-    フィールドが持つデフォルト値。
+    4.3.0より前のフィクスチャは、テーブルのスキーマも定義していました。フィクスチャでスキーマを定義する必要がある場合は、 :ref:`fixture-schema` を確認できます。
 
-フィクスチャーのテーブルを作成してから、そのテーブルに投入するレコードを定義することができます。
-``$records`` はレコードの配列であり、データの書式もとても簡単です。 ``$records`` の各アイテムは
-ひとつの行を表し、カラム名と値の連想配列で構成されます。$records の持つ配列は各要素 **ごとに**
-``$fields`` で指定した特定のキーを 持たなければならないことを覚えておいてください。
-あるフィールドの値を ``null`` と したいときは、そのキーの値を ``null`` とします。
+動的データ
+--------------
 
-動的データとフィクスチャー
---------------------------
-
-レコードのフィクスチャーをクラスプロパティーとして定義すると、関数を使ったり、フィクスチャーの定義に
-他の動的なデータを使用することは易しいものではありません。解決策として、 ``$records`` を
-フィクスチャークラスの関数 ``init()`` で定義するという方法があります。 例えば、created と
-modified のタイムスタンプに今日の日付を反映させたいのであれば、 以下のようにするとよいでしょう。 ::
+フィクスチャレコードで関数またはその他の動的データを使用するには、フィクスチャの ``init()`` メソッドでレコードを定義できます。例えば、created と
+modified のタイムスタンプに今日の日付を反映させたいのであれば、
+以下のようにするとよいでしょう。::
 
     namespace App\Test\Fixture;
 
@@ -535,18 +560,6 @@ modified のタイムスタンプに今日の日付を反映させたいので�
 
     class ArticlesFixture extends TestFixture
     {
-        public $fields = [
-            'id' => ['type' => 'integer'],
-            'title' => ['type' => 'string', 'length' => 255, 'null' => false],
-            'body' => 'text',
-            'published' => ['type' => 'integer', 'default' => '0', 'null' => false],
-            'created' => 'datetime',
-            'modified' => 'datetime',
-            '_constraints' => [
-                'primary' => ['type' => 'primary', 'columns' => ['id']],
-            ]
-        ];
-
         public function init(): void
         {
             $this->records = [
@@ -562,87 +575,17 @@ modified のタイムスタンプに今日の日付を反映させたいので�
         }
     }
 
-``init()`` をオーバーライドするときは、必ず ``parent::init()`` を呼び出すことを
-忘れないでください。
+.. note::
+    ``init()`` をオーバーライドするときは、必ず ``parent::init()`` をコールしてください。
 
-テーブル情報のインポート
-------------------------
+テストケースにフィクスチャを読み込む
+----------------------------------------
 
-データベース・ベンダー間の移植可能にする必要があるアプリケーションを作成する場合やプラグインや
-ライブラリーを作成する際にフィクスチャーファイルのスキーマを定義することは本当に便利です。
-フィクスチャーのスキーマを再定義すると、大規模なアプリケーションで維持することが困難になリます。
-テストスイートで使用されるテーブル定義を作成するために、 CakePHP は既存の接続からスキーマを
-インポートし、反映されたテーブル定義を使用する機能を提供します。
-
-例を見てみましょう。アプリケーションで利用可能な articles という名前のテーブルがあると仮定すると、
-前のセクションで作成した 例のフィクスチャー (**tests/Fixture/ArticlesFixture.php**) を、
-次のように書き換えてください。 ::
-
-    class ArticlesFixture extends TestFixture
-    {
-        public $import = ['table' => 'articles'];
-    }
-
-異なる接続の使用を使用したい場合::
-
-    class ArticlesFixture extends TestFixture
-    {
-        public $import = ['table' => 'articles', 'connection' => 'other'];
-    }
-
-通常、フィクスチャーと共に Table クラスも持っています。
-テーブル名を取得するためにそれを使用することができます。 ::
-
-    class ArticlesFixture extends TestFixture
-    {
-        public $import = ['model' => 'Articles'];
-    }
-
-``TableRegistry::getTableLocator()->get()`` を使用するので、プラグイン記法をサポートしています。
-
-あなたは自然に既存のモデルやテーブルからテーブル定義をインポートしますが、それは前のセクションに
-示されたように、フィクスチャーで直接定義されたレコードを設定することができます。例えば ::
-
-    class ArticlesFixture extends TestFixture
-    {
-        public $import = ['table' => 'articles'];
-        public $records = [
-            [
-              'title' => 'First Article',
-              'body' => 'First Article Body',
-              'published' => '1',
-              'created' => '2007-03-18 10:39:23',
-              'modified' => '2007-03-18 10:41:31'
-            ],
-            [
-              'title' => 'Second Article',
-              'body' => 'Second Article Body',
-              'published' => '1',
-              'created' => '2007-03-18 10:41:23',
-              'modified' => '2007-03-18 10:43:31'
-            ],
-            [
-              'title' => 'Third Article',
-              'body' => 'Third Article Body',
-              'published' => '1',
-              'created' => '2007-03-18 10:43:23',
-              'modified' => '2007-03-18 10:45:31'
-            ]
-        ];
-    }
-
-最後に、フィクスチャー内で任意のスキーマを作成やロードすることはできません。すでに作成されたすべての
-空のテーブルを使用してテスト・データベースを設定している場合に便利です。 ``$fields`` または
-``$import`` のいずれかを定義することにより、フィクスチャーは各テストメソッドでレコードを挿入し
-削除します。
-
-テストケース内のフィクスチャーのロード
---------------------------------------
-
-フィクスチャーを作成したらそれらをテストで使いたくなることでしょう。
-各テストケースではあなたが必要としているフィクスチャーをロードすることができます。
-クエリーの実行に際して必要となるモデルのフィクスチャーをロードする必要があります。
-フィクスチャーをロードするには、テストケースに ``$fixtures`` プロパティーを設定します。 ::
+各テストケースごとにフィクスチャを定義します。
+クエリを実行するすべてのモデルのフィクスチャを
+ロードする必要があります。
+フィクスチャをロードするには、
+モデルで ``$fixtures`` プロパティを定義します。::
 
     class ArticlesTest extends TestCase
     {
@@ -650,17 +593,19 @@ modified のタイムスタンプに今日の日付を反映させたいので�
     }
 
 
-.. note::
-    また、　``$fixtures`` プロパティを定義する代わりに
-    ``TestCase::getFixtures()`` をオーバーライドすることもできます。 ::
+4.1.0以降、フィクスチャを定義するために ``getFixtures()`` メソッドを使うことができます。::
 
-        public function getFixtures(): array
-        {
-            return ['app.Articles', 'app.Comments'];
-        }
+    public function getFixtures(): array
+    {
+        return [
+            'app.Articles',
+            'app.Comments',
+        ];
+    }
 
-上記の例では、「Article」と「Comment」フィクスチャーをアプリケーションの 「Fixture」ディレクトリーから
-ロードします。同じように CakePHP のコアや プラグインからもロードすることができます。 ::
+上記の例では、アプリケーションのFixtureディレクトリからArticleおよびCommentフィクスチャをロードします。
+
+CakePHPコアまたはプラグインからフィクスチャをロードすることもできます。::
 
     class ArticlesTest extends TestCase
     {
@@ -671,41 +616,78 @@ modified のタイムスタンプに今日の日付を反映させたいので�
         ];
     }
 
-``core`` のプレフィックスを使えば CakePHP からフィクスチャーをロードし、プラグイン名を
-プレフィックスとして使えば その名前のプラグインからフィクスチャーをロードします。
+``core`` プレフィックスを使用すると、CakePHPコアからフィクスチャがロードされます。また、プラグイン名をプレフィックスとして使用すると、指定されたプラグインからフィクスチャがロードされます。
 
-フィクスチャーのロードは :php:attr:`Cake\\TestSuite\\TestCase::$autoFixtures` を
-`false` に設定したあと、テストメソッドの中で
-:php:meth:`Cake\\TestSuite\\TestCase::loadFixtures()` を使ってを制御することもできます。 ::
-
-    class ArticlesTest extends TestCase
-    {
-        public $autoFixtures = false;
-
-        protected $fixtures = ['app.Articles', 'app.Comments'];
-
-        public function testMyFunction(): void
-        {
-            $this->loadFixtures('Articles', 'Comments');
-        }
-    }
-
-あなたはサブディレクトリーにフィクスチャーをロードすることができます。複数ディレクトリーを使用することは、
-大規模なアプリケーションで、フィクスチャーを整理しやすくします。サブディレクトリー中のフィクスチャーを
-ロードするためには、フィクスチャー名にサブディレクトリーを加えてください。 ::
+サブディレクトリを作成してフィクスチャを整理することができます。大規模なアプリケーションを使用している場合などに便利です。サブディレクトリ内のフィクスチャをロードするには、フィクスチャ名にサブディレクトリ名を含めるだけです。::
 
     class ArticlesTest extends CakeTestCase
     {
         protected $fixtures = ['app.Blog/Articles', 'app.Blog/Comments'];
     }
 
-上記の例では、両方のフィクスチャーは ``tests/Fixture/Blog`` からロードされることになります。
+
+上記の例では、各フィクスチャが ``tests/Fixture/Blog/`` ディレクトリからロードされます。
+
+フィクスチャファクトリー
+-------------------------------
+
+アプリケーションが大規模になると、テストフィクスチャの量も肥大化し、システム全体の管理が困難になりがちです。`フィクスチャファクトリープラグイン  <https://github.com/vierge-noire/cakephp-fixture-factories>`_ は、大規模システム管理のための有効な解決手段です。
+
+このプラグインは、各テストの前にすべてのダーティテーブルを切り捨てるために、 `テストスイートライトプラグイン <https://github.com/vierge-noire/cakephp-test-suite-light>`_ を使用します。
+
+下記のcakeコマンドでフィクスチャファクトリーをbakeできます。::
+
+    bin/cake bake fixture_factory -h
+
+
+`ファクトリー <https://github.com/vierge-noire/cakephp-fixture-factories/blob/main/docs/factories.md>`_ のbakeが完了すると、すぐにテストフィクスチャを作成することができます。
+
+データベースとの不要なインタラクションは、テストとアプリケーションの速度を低下させます。テストフィクスチャを永続化せずに作成できます。これは、DBとのインタラクションなしでメソッドをテストする場合に役立ちます。::
+
+    $article = ArticleFactory::make()->getEntity();
+
+永続化したい場合は下記のように。::
+
+    $article = ArticleFactory::make()->persist();
+
+ファクトリーは、関連するフィクスチャの生成にも役立ちます。記事が複数の著者に属していると仮定すると、たとえば、それぞれ5つの記事を持つ2人の著者を作成できます。
+
+    $articles = ArticleFactory::make(5)->with('Authors', 2)->getEntities();
+
+フィクスチャファクトリはフィクスチャの作成または宣言を必要としません。それでも、それらはCakePHPに付属しているフィクスチャと完全に互換性があります。 `ここ <https://github.com/vierge-noire/cakephp-fixture-factories>`_ に追加の洞察とドキュメントがあります。
+
+テストでルートを読み込む
+-------------------------
+
+ルートを必要とし、メール送信・コントローラー・コンポーネント、
+またはその他クラスのテストでURLを紐付ける必要がある場合は、
+Routesを読み込む必要があります。 ``setUp()`` または
+それぞれのテストメソッドの中で、 ``loadRoutes()`` を記述します::
+
+    public function setUp(): void
+    {
+        parent::setUp();
+        $this->loadRoutes();
+    }
+
+このメソッドは、 ``Application`` インスタンスの作成と、そのインスタンスでの ``routes()`` メソッドの呼び出しを行ないます。
+この ``Application`` インスタンスのコンストラクタには、 ``loadRoutes($constructorArgs)`` としてパラメータを渡すことができます。
+
+プラグインをロード
+------------------------
+
+プラグインをロードしたい場合は ``loadPlugins()`` メソッドを使用できます。::
+
+    public function testMethodUsingPluginResources()
+    {
+        $this->loadPlugins(['Company/Cms']);
+        // Test logic that requires Company/Cms to be loaded.
+    }
 
 テーブルクラスのテスト
 ======================
 
-既に **src/Model/Table/ArticlesTable.php** に定義された ArticlesTable クラスがあると
-しましょう 、それは次のようになります。 ::
+**src/Model/Table/ArticlesTable.php** に ArticlesTable クラスが定義されているとします。 ::
 
     namespace App\Model\Table;
 
@@ -723,14 +705,13 @@ modified のタイムスタンプに今日の日付を反映させたいので�
         }
     }
 
-今から、このテーブルクラスをテストするテストを設定します。それでは、以下の内容で、
-**tests/TestCase/Table** ディレクトリーに **ArticlesTableTest.php** という名前のファイルを
-作成してみましょう。 ::
+このテーブルクラスに対するテストを設定します。以下の内容で、
+**tests/TestCase/Table** ディレクトリーに **ArticlesTableTest.php** というファイルを
+作成してください。 ::
 
     namespace App\Test\TestCase\Model\Table;
 
     use App\Model\Table\ArticlesTable;
-    use Cake\ORM\TableRegistry;
     use Cake\TestSuite\TestCase;
 
     class ArticlesTableTest extends TestCase
@@ -738,19 +719,18 @@ modified のタイムスタンプに今日の日付を反映させたいので�
         protected $fixtures = ['app.Articles'];
     }
 
-このテストケースの ``$fixtures`` 変数に使用する予定のフィクスチャーを設定します。
-クエリーを実行するにあたり、必要なフィクスチャーをすべてインクルードすることを覚えておいてください。
+このテストケースの ``$fixtures`` 変数に、使用したいフィクスチャーを設定します。
+クエリーを実行するために要なフィクスチャーをすべて設定してください。
 
 テストメソッドの作成
 --------------------
 
-今から、ArticlesTable の ``published()`` 関数をテストするメソッドを追加してみましょう。
+次に、ArticlesTable の ``published()`` メソッドに対するテストを追加してみましょう。
 **tests/TestCase/Model/Table/ArticlesTableTest.php** ファイルを次のように編集してください。 ::
 
     namespace App\Test\TestCase\Model\Table;
 
     use App\Model\Table\ArticlesTable;
-    use Cake\ORM\TableRegistry;
     use Cake\TestSuite\TestCase;
 
     class ArticlesTableTest extends TestCase
@@ -760,12 +740,12 @@ modified のタイムスタンプに今日の日付を反映させたいので�
         public function setUp(): void
         {
             parent::setUp();
-            $this->Articles = TableRegistry::getTableLocator()->get('Articles');
+            $this->Articles = $this->getTableLocator()->get('Articles');
         }
 
         public function testFindPublished(): void
         {
-            $query = $this->Articles->find('published');
+            $query = $this->Articles->find('published')->all();
             $this->assertInstanceOf('Cake\ORM\Query', $query);
             $result = $query->enableHydration(false)->toArray();
             $expected = [
@@ -778,12 +758,43 @@ modified のタイムスタンプに今日の日付を反映させたいので�
         }
     }
 
-``testFindPublished()`` というメソッドを追加されていることが確認できます。私たちは、
-``ArticlesTable`` クラスのインスタンスを作成することから始め、その後、 ``find('published')``
+``testFindPublished()`` というメソッドがあります。
+``ArticlesTable`` クラスのインスタンスを作成した後、 ``find('published')``
 メソッドを実行します。 ``$expected`` に、期待する適切な結果をセットします。
 (article テーブルに配置されるレコードを定義します。) ``assertEquals()`` メソッドを使用して、
-結果が私たちの期待に等しいことをテストします。テストケースを実行する方法の詳細については
+結果が期待どおりであることをテストします。テストケースを実行する方法の詳細については
 :ref:`running-tests` セクションをご覧ください。
+
+フィクスチャファクトリを使用する場合は、テストは次のようになります。
+::
+
+    namespace App\Test\TestCase\Model\Table;
+
+    use App\Test\Factory\ArticleFactory;
+    use Cake\TestSuite\TestCase;
+
+    class ArticlesTableTest extends TestCase
+    {
+        public function testFindPublished(): void
+        {
+            // Persist 3 published articles
+            $articles = ArticleFactory::make(['published' => 1], 3)->persist();
+            // Persist 2 unpublished articles
+            ArticleFactory::make(['published' => 0], 2)->persist();
+
+            $result = ArticleFactory::find('published')->find('list')->toArray();
+
+            $expected = [
+                $articles[0]->id => $articles[0]->title,
+                $articles[1]->id => $articles[1]->title,
+                $articles[2]->id => $articles[2]->title,
+            ];
+
+            $this->assertEquals($expected, $result);
+        }
+    }
+
+フィクスチャをロードする必要はありません。作成された5つの記事は、このテストにのみ存在します。staticメソッド ``::find()`` は、テーブル ``ArticlesTable`` やそのイベントを使用せずにデータベースを読み込みます。
 
 モデルメソッドのモック化
 ------------------------
@@ -815,13 +826,11 @@ modified のタイムスタンプに今日の日付を反映させたいので�
 CakePHP は特殊な ``IntegrationTestTrait`` トレイトを提供しています。コントローラーのテストケースに
 このトレイトを使用すると、高いレベルからコントローラーをテストすることができます。
 
-あなたが統合テストに慣れていない場合、一斉に複数のユニットをテストすることが容易になるテストの
-アプローチがあります。CakePHP の統合テスト機能は、アプリケーションによって処理される HTTP
+統合テストに不慣れな場合は、いっせいに複数のユニットをテストすることが容易になるテストのアプローチがあります。CakePHP の統合テスト機能は、アプリケーションによって処理される HTTP
 リクエストをシミュレートします。例えば、コントローラーをテストすると、与えられたリクエストに関する
-コンポーネント、モデルそしてヘルパーを実行します。これはあなたのアプリケーションとその動作する部品の
-全てにより高いレベルのテストを提供します。
+コンポーネント、モデル、そしてヘルパーを実行します。これはアプリケーションとその動作する部品の全てに、より高いレベルのテストを提供します。
 
-あなたは典型的な ArticlesController、およびそれに対応するモデルを持っているとします。
+典型的な ArticlesController、およびそれに対応するモデルがあるとします。
 コントローラーのコードは次のようになります。 ::
 
     namespace App\Controller;
@@ -843,10 +852,11 @@ CakePHP は特殊な ``IntegrationTestTrait`` トレイトを提供していま�
             }
             if (!empty($short)) {
                 $result = $this->Articles->find('all', [
-                    'fields' => ['id', 'title']
-                ]);
+                        'fields' => ['id', 'title']
+                    ])
+                    ->all();
             } else {
-                $result = $this->Articles->find();
+                $result = $this->Articles->find()->all();
             }
 
             $this->set([
@@ -861,7 +871,6 @@ CakePHP は特殊な ``IntegrationTestTrait`` トレイトを提供していま�
 
     namespace App\Test\TestCase\Controller;
 
-    use Cake\ORM\TableRegistry;
     use Cake\TestSuite\IntegrationTestTrait;
     use Cake\TestSuite\TestCase;
 
@@ -908,14 +917,14 @@ CakePHP は特殊な ``IntegrationTestTrait`` トレイトを提供していま�
             $this->post('/articles', $data);
 
             $this->assertResponseSuccess();
-            $articles = TableRegistry::getTableLocator()->get('Articles');
+            $articles = $this->getTableLocator()->get('Articles');
             $query = $articles->find()->where(['title' => $data['title']]);
             $this->assertEquals(1, $query->count());
         }
     }
 
 この例では、いくつかのリクエストを送信するメソッドと ``IntegrationTestTrait`` が提供するいくつかの
-アサーションを示しています。あなたが任意のアサーションを行う前に、リクエストをディスパッチする必要が
+アサーションを示しています。任意のアサーションを行う前に、リクエストをディスパッチする必要が
 あります。リクエストを送信するには、以下のいずれかのメソッドを使用することができます。
 
 * ``get()`` GET リクエストを送信します。
@@ -926,8 +935,8 @@ CakePHP は特殊な ``IntegrationTestTrait`` トレイトを提供していま�
 * ``options()`` OPTIONS リクエストを送信します。
 * ``head()`` HEAD リクエストを送信します。
 
-``get()`` と ``delete()`` を除く全てのメソッドは、あなたがリクエストボディーを送信することを
-可能にする二番目のパラメーターを受け入れます。リクエストをディスパッチした後、あなたのリクエストに対して
+``get()`` と ``delete()`` を除く全てのメソッドは、リクエストボディーを送信することを
+可能にする二番目のパラメーターを受け入れます。リクエストをディスパッチした後、ユーザのリクエストに対して
 正しく動作したことを確実にするために ``IntegrationTestTrait`` や、PHPUnit が提供するさまざまな
 アサーションを使用することができます。
 
@@ -1044,7 +1053,7 @@ SecurityComponent または CsrfComponent のいずれかで保護されたア�
 また、トークンを使用するテストで debug を有効にすることは重要です。SecurityComponent が
 「デバッグ用トークンがデバッグ以外の環境で使われている」と考えてしまうのを防ぐためです。
 ``requireSecure()`` のような他のメソッドでテストした時は、適切な環境変数をセットするために
-``configRequest()`` を利用できます。 ::
+``configRequest()`` を利用できます。::
 
     // SSL 接続を装います。
     $this->configRequest([
@@ -1059,19 +1068,10 @@ SecurityComponent または CsrfComponent のいずれかで保護されたア�
 PSR-7 ミドルウェアの統合テスト
 ------------------------------
 
-統合テストは、あなたの PSR-7 アプリケーション全体や :doc:`/controllers/middleware` を
+統合テストは、PSR-7 アプリケーション全体や :doc:`/controllers/middleware` を
 テストするために利用されます。デフォルトで ``IntegrationTestTrait`` は、
-``App\Application`` クラスの存在を自動検知し、あなたのアプリケーションの統合テストを
-自動的に有効にします。 ``useHttpServer()`` メソッドでこの振舞いを切り替えられます。 ::
-
-    public function setUp(): void
-    {
-        // PSR-7 統合テストの有効化
-        $this->useHttpServer(true);
-
-        // PSR-7 統合テストの無効化
-        $this->useHttpServer(false);
-    }
+``App\Application`` クラスの存在を自動検知し、アプリケーションの統合テストを
+自動的に有効にします。
 
 ``configApplication()`` メソッドを使うことによって、使用するアプリケーションクラス名と
 コンストラクターの引数をカスタマイズすることができます。 ::
@@ -1081,8 +1081,6 @@ PSR-7 ミドルウェアの統合テスト
         $this->configApplication('App\App', [CONFIG]);
     }
 
-PSR-7 モードを有効にして、アプリケーションクラスの設定を可能にした後でも、
-``IntegrationTestTrait`` に存在する機能は、通常と同様に利用できます。
 
 イベントやルートを含むプラグインを読み込むために :ref:`application-bootstrap` を
 試してみてください。そうすることで、各テストケースごとにイベントやルートが接続されます。
@@ -1158,14 +1156,14 @@ JSON を返すコントローラーの簡単な例を示します。 ::
 
     class MarkersControllerTest extends IntegrationTestCase
     {
-        public function testGet()
+        public function testGet(): void
         {
             $this->configRequest([
                 'headers' => ['Accept' => 'application/json']
             ]);
             $result = $this->get('/markers/view/1.json');
 
-            // レスポンスが 200 だったことを確認
+            // レスポンスが 200 であることを確認
             $this->assertResponseOk();
 
             $expected = [
@@ -1179,12 +1177,183 @@ JSON を返すコントローラーの簡単な例を示します。 ::
 CakePHP の組込み JsonView で、 ``debug`` が有効になっている場合、 ``JSON_PRETTY_PRINT``
 オプションを使用します。
 
+ファイルアップロードのテスト
+------------------------------------
+
+デフォルトの「:ref:`オブジェクトとしてアップロードされたファイル <request-file-uploads>`」モードを使用すると、ファイルのアップロードのシミュレーションは簡単です。 `\\Psr\\Http\\Message\\UploadedFileInterface <https://www.php-fig.org/psr/psr-7/#16-uploaded-files>`_ (現在CakePHPで使用されているデフォルトの実装は ``\Laminas\Diactoros\UploadedFile`` )を実装するインスタンスを作成し、それらをテストリクエストデータに渡すだけ。
+CLI環境では、このようなオブジェクトはデフォルトで、ファイルが
+HTTP経由でアップロードされたかどうかをテストするバリデーションに合格します。
+``$_FILES`` にある配列スタイルのデータには同じことが当てはまらず、バリデーションは失敗します。
+
+アップロードされたファイルオブジェクトが通常のリクエストでどのように
+存在するかを正確にシミュレートするには、リクエストデータでそれらを
+渡すだけでなく、 ``files`` オプションを介してテストリクエスト構成に
+渡す必要があります。ただし、コードが :php:meth:`Cake\\Http\\ServerRequest::getUploadedFile()` または :php:meth:`Cake\\Http\\ServerRequest::getUploadedFiles()` メソッドを介して
+アップロードされたファイルにアクセスしない限り、技術的には必要ありません。
+
+記事にティザー画像と ``複数の添付ファイル`` の関連付けがあるとして、
+フォームはそれに応じて、1つの画像ファイルと複数の
+添付ファイル/ファイルとして受け入れます。::
+
+    <?= $this->Form->create($article, ['type' => 'file']) ?>
+    <?= $this->Form->control('title') ?>
+    <?= $this->Form->control('teaser_image', ['type' => 'file']) ?>
+    <?= $this->Form->control('attachments.0.attachment', ['type' => 'file']) ?>
+    <?= $this->Form->control('attachments.0.description']) ?>
+    <?= $this->Form->control('attachments.1.attachment', ['type' => 'file']) ?>
+    <?= $this->Form->control('attachments.1.description']) ?>
+    <?= $this->Form->button('Submit') ?>
+    <?= $this->Form->end() ?>
+
+対応するリクエストをシミュレートするテストは、
+次のようになります。::
+
+    public function testAddWithUploads(): void
+    {
+        $teaserImage = new \Laminas\Diactoros\UploadedFile(
+            '/path/to/test/file.jpg', // stream or path to file representing the temp file
+            12345,                    // the filesize in bytes
+            \UPLOAD_ERR_OK,           // the upload/error status
+            'teaser.jpg',             // the filename as sent by the client
+            'image/jpeg'              // the mimetype as sent by the client
+        );
+
+        $textAttachment = new \Laminas\Diactoros\UploadedFile(
+            '/path/to/test/file.txt',
+            12345,
+            \UPLOAD_ERR_OK,
+            'attachment.txt',
+            'text/plain'
+        );
+
+        $pdfAttachment = new \Laminas\Diactoros\UploadedFile(
+            '/path/to/test/file.pdf',
+            12345,
+            \UPLOAD_ERR_OK,
+            'attachment.pdf',
+            'application/pdf'
+        );
+
+        // This is the data accessible via `$this->request->getUploadedFile()`
+        // and `$this->request->getUploadedFiles()`.
+        $this->configRequest([
+            'files' => [
+                'teaser_image' => $teaserImage,
+                'attachments' => [
+                    0 => [
+                        'attachment' => $textAttachment,
+                    ],
+                    1 => [
+                        'attachment' => $pdfAttachment,
+                    ],
+                ],
+            ],
+        ]);
+
+        // This is the data accessible via `$this->request->getData()`.
+        $postData = [
+            'title' => 'New Article',
+            'teaser_image' => $teaserImage,
+            'attachments' => [
+                0 => [
+                    'attachment' => $textAttachment,
+                    'description' => 'Text attachment',
+                ],
+                1 => [
+                    'attachment' => $pdfAttachment,
+                    'description' => 'PDF attachment',
+                ],
+            ],
+        ];
+        $this->post('/articles/add', $postData);
+
+        $this->assertResponseOk();
+        $this->assertFlashMessage('The article was saved successfully');
+        $this->assertFileExists('/path/to/uploads/teaser.jpg');
+        $this->assertFileExists('/path/to/uploads/attachment.txt');
+        $this->assertFileExists('/path/to/uploads/attachment.pdf');
+    }
+
+.. tip::
+
+    ファイルを使用してテストリクエストを構成する場合は、POSTデータの構造と *必ず* 一致する必要があります（ただし、アップロードされたファイルオブジェクトのみが含まれます）。
+
+同様に、 `アップロードエラー <https://www.php.net/manual/en/features.file-upload.errors.php>`_ や、
+検証に合格しない無効なファイルをシミュレートできます。::
+
+    public function testAddWithInvalidUploads(): void
+    {
+        $missingTeaserImageUpload = new \Laminas\Diactoros\UploadedFile(
+            '',
+            0,
+            \UPLOAD_ERR_NO_FILE,
+            '',
+            ''
+        );
+
+        $uploadFailureAttachment = new \Laminas\Diactoros\UploadedFile(
+            '/path/to/test/file.txt',
+            1234567890,
+            \UPLOAD_ERR_INI_SIZE,
+            'attachment.txt',
+            'text/plain'
+        );
+
+        $invalidTypeAttachment = new \Laminas\Diactoros\UploadedFile(
+            '/path/to/test/file.exe',
+            12345,
+            \UPLOAD_ERR_OK,
+            'attachment.exe',
+            'application/vnd.microsoft.portable-executable'
+        );
+
+        $this->configRequest([
+            'files' => [
+                'teaser_image' => $missingTeaserImageUpload,
+                'attachments' => [
+                    0 => [
+                        'file' => $uploadFailureAttachment,
+                    ],
+                    1 => [
+                        'file' => $invalidTypeAttachment,
+                    ],
+                ],
+            ],
+        ]);
+
+        $postData = [
+            'title' => 'New Article',
+            'teaser_image' => $missingTeaserImageUpload,
+            'attachments' => [
+                0 => [
+                    'file' => $uploadFailureAttachment,
+                    'description' => 'Upload failure attachment',
+                ],
+                1 => [
+                    'file' => $invalidTypeAttachment,
+                    'description' => 'Invalid type attachment',
+                ],
+            ],
+        ];
+        $this->post('/articles/add', $postData);
+
+        $this->assertResponseOk();
+        $this->assertFlashMessage('The article could not be saved');
+        $this->assertResponseContains('A teaser image is required');
+        $this->assertResponseContains('Max allowed filesize exceeded');
+        $this->assertResponseContains('Unsupported file type');
+        $this->assertFileNotExists('/path/to/uploads/teaser.jpg');
+        $this->assertFileNotExists('/path/to/uploads/attachment.txt');
+        $this->assertFileNotExists('/path/to/uploads/attachment.exe');
+    }
+
 テスト中のエラー処理ミドルウェアの無効化
---------------------------------------------
+----------------------------------------
 
 アプリケーションにエラーが発生したために失敗したテストをデバッグする場合、
 エラー処理ミドルウェアを一時的に無効にして、根本的なエラーを目立たせることができます。
-これをするために ``disableErrorHandlerMiddleware()`` が使用できます。 ::
+これをするために ``disableErrorHandlerMiddleware()`` が
+使用できます。 ::
 
     public function testGetMissing(): void
     {
@@ -1276,7 +1445,7 @@ CakePHP の組込み JsonView で、 ``debug`` が有効になっている場合
 
 上記のアサーションメソッドに加えて、
 `TestSuite <https://api.cakephp.org/4.x/class-Cake.TestSuite.TestCase.html>`_ と
-`PHPUnit <https://phpunit.de/manual/current/en/appendixes.assertions.html>`__ の
+`PHPUnit <https://phpunit.de/manual/current/ja/appendixes.assertions.html>`__ の
 中にある全てのアサーションを使用することができます。
 
 ファイルへのテスト結果を比較
@@ -1312,7 +1481,8 @@ CakePHP の組込み JsonView で、 ``debug`` が有効になっている場合
 ``$result`` を比較します。
 
 それらが参照されているように、テストの比較ファイルが作成・更新され、環境変数
-``UPDATE_TEST_COMPARISON_FILES`` を設定することで、テストファイルを更新/書き込みするために
+``UPDATE_TEST_COMPARISON_FILES`` を設定することで、
+テストファイルを更新/書き込みするために
 仕組みが提供されています。
 
 .. code-block:: console
@@ -1340,6 +1510,12 @@ CakePHP の組込み JsonView で、 ``debug`` が有効になっている場合
 
 シェルとコマンドをテストについては :ref:`console-integration-testing` をご覧ください。
 
+Mocking Injected Dependencies
+=============================
+
+See :ref:`mocking-services-in-tests` for how to replace services injected with
+the dependency injection container in your integration tests.
+
 
 ビューのテスト
 ==============
@@ -1357,8 +1533,8 @@ CakePHP の組込み JsonView で、 ``debug`` が有効になっている場合
 PagematronComponent というコンポーネントがアプリケーションにあったとしましょう。
 このコンポーネントは、このコンポーネントを使用している全てのコントローラーにおいて、
 ページネーションの limit 値を設定することができます。
-**src/Controller/Component/PagematronComponent.php** に置かれたコンポーネントの例は
-こちらです。 ::
+**src/Controller/Component/PagematronComponent.php** に置かれた
+コンポーネントの例はこちらです。 ::
 
     class PagematronComponent extends Component
     {
@@ -1395,7 +1571,8 @@ PagematronComponent というコンポーネントがアプリケーションに
     }
 
 今、コンポーネントの中の ``adjust()`` メソッドによって、ページネーションの
-``limit`` パラメーターが正しく設定されていることを保証するためのテストを書くことができます。
+``limit`` パラメーターが正しく設定されていることを保証するためのテストを
+書くことができます。
 **tests/TestCase/Controller/Component/PagematronComponentTest.php**
 ファイルを作成します。 ::
 
@@ -1458,7 +1635,8 @@ PagematronComponent というコンポーネントがアプリケーションに
 カバーされていることを確認することは重要です。
 
 はじめに、テストのための例として、ヘルパーを作成します。 ``CurrencyRendererHelper`` は、
-ビューで通貨の表示を補助するための、 ``usd()`` という唯一の単純なメソッドを持っています。 ::
+ビューで通貨の表示を補助するための、 ``usd()`` という
+唯一の単純なメソッドを持っています。 ::
 
     // src/View/Helper/CurrencyRendererHelper.php
     namespace App\View\Helper;
@@ -1467,7 +1645,7 @@ PagematronComponent というコンポーネントがアプリケーションに
 
     class CurrencyRendererHelper extends Helper
     {
-        public function usd($amount)
+        public function usd($amount): string
         {
             return 'USD ' . number_format($amount, 2, '.', ',');
         }
@@ -1572,7 +1750,7 @@ Orders を例に詳しく説明します。以下のテーブルを持ってい�
     イベントの発生をアサートするために、イベントマネージャー上で最初に :ref:`tracking-events`
     を有効にしなければなりません。
 
-上記の ``OrdersTable`` をテストするために、``setUp()`` 内でトラッキングを有効にした後、
+上記の ``OrdersTable`` をテストするために、 ``setUp()`` 内でトラッキングを有効にした後、
 イベントが発生することをアサートし、そして ``$order`` エンティティーがイベントデータに
 渡されることをアサートします。 ::
 
@@ -1580,7 +1758,6 @@ Orders を例に詳しく説明します。以下のテーブルを持ってい�
 
     use App\Model\Table\OrdersTable;
     use Cake\Event\EventList;
-    use Cake\ORM\TableRegistry;
     use Cake\TestSuite\TestCase;
 
     class OrdersTableTest extends TestCase
@@ -1590,7 +1767,7 @@ Orders を例に詳しく説明します。以下のテーブルを持ってい�
         public function setUp(): void
         {
             parent::setUp();
-            $this->Orders = TableRegistry::getTableLocator()->get('Orders');
+            $this->Orders = $this->getTableLocator()->get('Orders');
             // イベントトラッキングの有効化
             $this->Orders->getEventManager()->setEventList(new EventList());
         }
@@ -1700,7 +1877,7 @@ Bake でのテストの生成
 
 スキャフォールディングを生成するために :doc:`bake </bake/usage>` を使う場合、
 テストのスタブも生成します。テストケースのスケルトンを再生成する必要がある場合、または、
-あなたが書いたコードのテストスケルトンを生成する場合、 ``bake`` を使用することができます。
+書いたコードのテストスケルトンを生成する場合、 ``bake`` を使用することができます。
 
 .. code-block:: console
 
@@ -1724,88 +1901,6 @@ Bake でのテストの生成
 
 ``<name>`` は作成したいテストの雛形のオブジェクトの名前です。
 
-Jenkins によるインテグレーション
-================================
-
-`Jenkins <http://jenkins-ci.org>`_ は、あなたのテストケースの実行を自動化することができる
-継続的インテグレーションサーバーです。これは、すべてのテストがパスし、アプリケーションが常に準備が
-できていることを保証するのに役立ちます。
-
-Jenkins で CakePHP アプリケーションを統合することは非常に簡単です。以下では、すでに \*nix の
-システムに Jenkins をインストールしていると仮定して、それを管理することができます。
-また、ジョブを作成とビルドの実行を知っているとします。これらのいずれかが不明な場合は、
-`Jenkins のドキュメント <http://jenkins-ci.org/>`_ を参照してください。
-
-ジョブの作成
-------------
-
-アプリケーションのためのジョブを作成することから始めてください。次に、Jenkins があなたのコードに
-アクセスできるように、リポジトリーと接続します。
-
-テストデータベースの設定追加
-----------------------------
-
-Jenkins のために別のデータベースを用意するのは、初歩的な問題を回避するためには良い考えです。
-一度 Jenkins がアクセスできる (通常は localhost の) データベースサーバーに新しくデータベースを
-作成しました。以下のような *シェルスクリプトのステップ* をビルドに加えてください。
-
-.. code-block:: console
-
-    cat > config/app_local.php <<'CONFIG'
-    <?php
-    return [
-        'Datasources' => [
-            'test' => [
-                'datasource' => 'Database/Mysql',
-                'host'       => 'localhost',
-                'database'   => 'jenkins_test',
-                'username'      => 'jenkins',
-                'password'   => 'cakephp_jenkins',
-                'encoding'   => 'utf8'
-            ]
-        ]
-    ];
-    CONFIG
-
-**config/bootstrap.php** ファイルの中の以下の行のコメントを外してください。 ::
-
-    //Configure::load('app_local', 'default');
-
-**app_local.php** ファイルを作成することにより、Jenkins に特有の設定を簡単に定義できます。
-あなたは Jenkins 上で必要な任意の他の設定ファイルを上書きするために、この同じ設定ファイルを
-使用することができます。
-
-各ビルドの前に、データベースのドロップと再作成することをお勧めします。
-一度のビルドの失敗によって、立て続けに起きるであろう失敗の連鎖を断ち切ってくれるはずです。
-以下のような *シェルスクリプトのステップ* をビルドに加えてください。
-
-.. code-block:: console
-
-    mysql -u jenkins -pcakephp_jenkins -e 'DROP DATABASE IF EXISTS jenkins_test; CREATE DATABASE jenkins_test';
-
-テストの追加
-------------
-
-ビルドに別の *シェルスクリプトのステップ* を追加してください。このステップでは、依存関係をインストールし、
-アプリケーションのテストを実行します。JUnit のログファイルや Clover カバレッジを作成することにより、
-テストの結果を視覚的に確認できるようになります。
-
-.. code-block:: console
-
-    # もしなければ、Composer をダウンロード
-    test -f 'composer.phar' || curl -sS https://getcomposer.org/installer | php
-    # 依存関係をインストール
-    php composer.phar install
-    vendor/bin/phpunit --log-junit junit.xml --coverage-clover clover.xml
-
-clover カバレッジや JUnit の結果を使用する場合は、Jenkins のための設定をしてください。
-これらのステップを設定しないと、あなたは結果を見ることができません。
-
-ビルドの実行
-------------
-
-これでビルドを実行することができるようになりました。コンソール出力を確認して、
-ビルドがパスするように必要な変更を加えてください。
 
 .. meta::
     :title lang=ja: テスト
