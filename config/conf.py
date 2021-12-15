@@ -20,6 +20,9 @@ search_version = '3'
 # The marketing diplay name for the book.
 version_name = 'Red Velvet'
 
+# 3.x only receives security updates.
+is_security = True
+
 # Other versions that display in the version picker menu.
 version_list = [
     {'name': '4.x', 'number': '4', 'title': '4.x Book'},
