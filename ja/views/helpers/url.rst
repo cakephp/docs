@@ -21,9 +21,9 @@ URL の生成
 ``full`` が ``true`` の場合、結果がフルベース URL で返されます。 ::
 
     echo $this->Url->build([
-        "controller" => "Posts",
-        "action" => "view",
-        "bar",
+        'controller' => 'Posts',
+        'action' => 'view',
+        'bar',
     ]);
 
     // 出力結果
@@ -34,9 +34,9 @@ URL の生成
 拡張子つきの URL::
 
     echo $this->Url->build([
-        "controller" => "Posts",
-        "action" => "list",
-        "_ext" => "rss",
+        'controller' => 'Posts',
+        'action' => 'list',
+        '_ext' => 'rss',
     ]);
 
     // 出力結果
@@ -44,7 +44,7 @@ URL の生成
 
 フルベース URL を前につけた ('/' から始まる) URL::
 
-    echo $this->Url->build('/posts', true);
+    echo $this->Url->build('/posts', ['fullBase' => true]);
 
     // 出力結果
     http://somedomain.com/posts
@@ -52,10 +52,10 @@ URL の生成
 GET パラメーターとフラグメントアンカーの URL::
 
     echo $this->Url->build([
-        "controller" => "Posts",
-        "action" => "search",
-        "?" => ["foo" => "bar"],
-        "#" => "first",
+        'controller' => 'Posts',
+        'action' => 'search',
+        '?' => ['foo' => 'bar'],
+        '#' => 'first',
     ]);
 
     // 出力結果
@@ -71,7 +71,7 @@ GET パラメーターとフラグメントアンカーの URL::
 
     // 以下のようにルートをセットアップすることを仮定:
     // $router->connect(
-    //     '/products/:slug',
+    //     '/products/{slug}',
     //     [
     //         'controller' => 'Products',
     //         'action' => 'view',
@@ -80,6 +80,9 @@ GET パラメーターとフラグメントアンカーの URL::
     //         '_name' => 'product-page',
     //     ]
     // );
+
+    echo $this->Url->build(['_name' => 'product-page', 'slug' => 'i-m-slug']);
+    // Will result in:
     /products/i-m-slug
 
 第２パラメーターは、HTML エスケープやベースパスを追加するかどうかを制御するオプションを

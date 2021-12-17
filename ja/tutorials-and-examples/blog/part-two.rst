@@ -22,7 +22,7 @@ CakePHP のモデルクラスのファイルは、 ``Table`` オブジェクト�
 
     class ArticlesTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->addBehavior('Timestamp');
         }
@@ -82,10 +82,9 @@ Articles コントローラーの作成
 
     class ArticlesController extends AppController
     {
-
         public function index()
         {
-            $articles = $this->Articles->find('all');
+            $articles = $this->Articles->find()->all();
             $this->set(compact('articles'));
         }
     }
@@ -255,7 +254,6 @@ Articles テーブルに対して ``get()`` を用いるとき、存在するレ
 
     class ArticlesController extends AppController
     {
-
         public function initialize(): void
         {
             parent::initialize();
@@ -265,7 +263,7 @@ Articles テーブルに対して ``get()`` を用いるとき、存在するレ
 
         public function index()
         {
-            $this->set('articles', $this->Articles->find('all'));
+            $this->set('articles', $this->Articles->find()->all());
         }
 
         public function view($id)
@@ -391,7 +389,7 @@ Article モデルを見直して、幾つか修正してみましょう。 ::
 
     class ArticlesTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->addBehavior('Timestamp');
         }
@@ -399,10 +397,10 @@ Article モデルを見直して、幾つか修正してみましょう。 ::
         public function validationDefault(Validator $validator): Validator
         {
             $validator
-                ->notEmpty('title')
-                ->requirePresence('title')
+                ->notEmptyString('title')
+                ->requirePresence('title', 'create')
                 ->notEmptyString('body')
-                ->requirePresence('body');
+                ->requirePresence('body', 'create');
 
             return $validator;
         }
@@ -617,7 +615,7 @@ CakePHP のルーティングは、 **config/routes.php** の中にあります�
 
 .. code-block:: php
 
-    $routes->connect('/', ['controller' => 'Articles', 'action' => 'index']);
+    $builder->connect('/', ['controller' => 'Articles', 'action' => 'index']);
 
 これで、「/」でリクエストしてきたユーザーを、ArticlesController の index() アクションに
 接続させることができます。

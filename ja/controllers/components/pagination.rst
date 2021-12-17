@@ -1,9 +1,9 @@
 ページネーション
 #################
 
-..  php:namespace:: Cake\Controller\Component
+.. php:namespace:: Cake\Controller\Component
 
-..  php:class:: PaginatorComponent
+.. php:class:: PaginatorComponent
 
 フレキシブルでかつユーザーフレンドリーなウェブアプリケーションを作成する際の主たる障害の
 一つとなるのが、直感的なユーザーインターフェイスです。多くのアプリケーションはすぐに巨大となり
@@ -68,7 +68,7 @@ CakePHP におけるページネーションは、コントローラーにおけ
 .. tip::
     デフォルトの ``order`` オプションは配列として定義されていなければなりません。
 
-:php:meth:`~Cake\\ORM\\\Table::find()` でサポートされているオプションのいずれかを
+:php:meth:`~Cake\\ORM\\Table::find()` でサポートされているオプションのいずれかを
 ページ分割の設定に含めることができます。
 ページネーションオプションを :ref:`custom-find-methods` にバンドルする方が
 すっきりしていてシンプルです。
@@ -98,12 +98,12 @@ CakePHP におけるページネーションは、コントローラーにおけ
             // 以下のような構文となっている
             // public function findTagged(Query $query, array $options) {
             // そのため、taggedをキーとして使用する
-            $this->paginate = [
+            $settings = [
                 'finder' => [
                     'tagged' => $customFinderOptions
                 ]
             ];
-            $articles = $this->paginate($this->Articles);
+            $articles = $this->paginate($this->Articles, $settings);
             $this->set(compact('articles', 'tags'));
         }
     }
@@ -223,25 +223,24 @@ PaginatorComponent を直接使用する
         ],
     ];
 
-    // ページ分割コンポーネントで差別化できるようにテーブルオブジェクトを追加登録します。
-    TableRegistry::getTableLocator()->setConfig('UnpublishedArticles', [
-        'className' => 'App\Model\Table\ArticlesTable',
-        'table' => 'articles',
-        'entityClass' => 'App\Model\Entity\Article',
-    ]);
-
     $publishedArticles = $this->paginate(
         $this->Articles->find('all', [
             'scope' => 'published_articles'
         ])->where(['published' => true])
     );
 
+    // ページ分割コンポーネントで差別化できるようにテーブルオブジェクトを追加登録します。
+    $unpublishedArticlesTable = $this->fetchTable('UnpublishedArticles', [
+        'className' => 'App\Model\Table\ArticlesTable',
+        'table' => 'articles',
+        'entityClass' => 'App\Model\Entity\Article',
+    ]);
+
     $unpublishedArticles = $this->paginate(
-        TableRegistry::getTableLocator()->get('UnpublishedArticles')->find('all', [
+        $unpublishedArticlesTable->find('all', [
             'scope' => 'unpublished_articles'
         ])->where(['published' => false])
     );
-
 
 .. _control-which-fields-used-for-ordering:
 
@@ -316,7 +315,7 @@ PaginatorComponent は、存在しないページにアクセスしようとす�
 ビューのページネーション
 ========================
 
-ページネーションナビゲーションのリンクの作り方は、 :php:class:`~Cake\\View\\\Helper\PaginatorHelper`
+ページネーションナビゲーションのリンクの作り方は、 :php:class:`~Cake\\View\\Helper\PaginatorHelper`
 のドキュメントを確認してください。
 
 ..

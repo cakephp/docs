@@ -291,10 +291,12 @@ ContactManager プラグイン の場合、 plugin クラスは、次のよう�
 
     use Cake\Core\BasePlugin;
     use Cake\Core\PluginApplicationInterface;
+    use Cake\Console\CommandCollection;
+    use Cake\Http\MiddlewareQueue;
 
     class Plugin extends BasePlugin
     {
-        public function middleware($middleware)
+        public function middleware(MiddlewareQueue $middleware): MiddlewareQueue
         {
             // ここにミドルウェアを追加。
             $middleware = parent::middleware($middleware);
@@ -302,7 +304,7 @@ ContactManager プラグイン の場合、 plugin クラスは、次のよう�
             return $middleware;
         }
 
-        public function console($commands)
+        public function console(CommandCollection $commands): CommandCollection
         {
             // ここにコンソールコマンドを追加。
             $commands = parent::console($commands);
@@ -310,14 +312,14 @@ ContactManager プラグイン の場合、 plugin クラスは、次のよう�
             return $commands;
         }
 
-        public function bootstrap(PluginApplicationInterface $app)
+        public function bootstrap(PluginApplicationInterface $app): void
         {
             // 定数を追加。デフォルトの設定をロード。
             // デフォルトでは、プラグインの中の `config/bootstrap.php` をロードします。
             parent::bootstrap($app);
         }
 
-        public function routes($routes)
+        public function routes($routes): void
         {
             // ルートの追加。
             // デフォルトでは、プラグインの中の `config/routes.php` をロードします。
@@ -338,12 +340,13 @@ ContactManager プラグイン の場合、 plugin クラスは、次のよう�
 
     <?php
     use Cake\Routing\Route\DashedRoute;
-    use Cake\Routing\Router;
 
-    Router::plugin(
+    $routes->plugin(
         'ContactManager',
         ['path' => '/contact-manager'],
         function ($routes) {
+            $routes->setRouteClass(DashedRoute::class);
+
             $routes->get('/contacts', ['controller' => 'Contacts']);
             $routes->get('/contacts/{id}', ['controller' => 'Contacts', 'action' => 'view']);
             $routes->put('/contacts/{id}', ['controller' => 'Contacts', 'action' => 'update']);
@@ -362,7 +365,7 @@ ContactManager プラグイン の場合、 plugin クラスは、次のよう�
 これにより、プラグインのルートをロードする方法をより詳細に制御し、
 追加のスコープやプレフィックスでプラグインのルートをラップすることができます。 ::
 
-    Router::scope('/', function ($routes) {
+    $routes->scope('/', function ($routes) {
         // 他のルートに接続。
         $routes->scope('/backend', function ($routes) {
             $routes->loadPlugin('ContactManager');
@@ -471,7 +474,7 @@ bake で作っていないプラグインなら、クラスを自動的に読み
 
     class ContactsTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->hasMany('ContactManager.AltName');
         }
@@ -496,15 +499,11 @@ bake で作っていないプラグインなら、クラスを自動的に読み
     }
 
 おなじみの :term:`プラグイン記法` を使う事で、プラグインのテーブルを
-読み込むために ``Cake\ORM\Locator\TableLocator`` を使用することができます。 ::
+読み込むために ``Cake\ORM\Locator\LocatorAwareTrait`` を使用することができます。 ::
 
     use Cake\ORM\Locator\LocatorAwareTrait;
 
-    $contacts = $this->getTableLocator()->get('ContactManager.Contacts');
-
-あるいは、コントローラーの処理の中で以下のように使用できます。 ::
-
-    $this->loadModel('ContactsMangager.Contacts');
+    $contacts = $this->fetchTable('ContactManager.Contacts');
 
 プラグインのビュー
 ==================

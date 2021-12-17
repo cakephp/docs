@@ -3,7 +3,7 @@
 
 .. php:namespace:: Cake\Routing
 
-.. php:class:: Router
+.. php:class:: RouterBuilder
 
 ルーティングは URL とコントローラーのアクションをマップするツールを提供します。
 ルートを設定することで、アプリケーションの実装方法を URL の構造から分離できます。
@@ -21,21 +21,8 @@ CakePHP でのルーティングはまた パラメーターの配列を URL 文
 ランディングページとして何かを表示したい時がよくあるでしょう。そのときは、 **routes.php**
 ファイルに以下を加えます。 ::
 
-    use Cake\Routing\Router;
-
-    // スコープ付きルートビルダーを使用（推奨）
     /** @var \Cake\Routing\RouteBuilder $routes */
-    $routes->scope('/', function (RouteBuilder $routes) {
-        $routes->connect('/', ['controller' => 'Articles', 'action' => 'index']);
-    });
-
-    // static メソッドを使用。
-    Router::connect('/', ['controller' => 'Articles', 'action' => 'index']);
-
-``Router`` はルーティングするための2つのインターフェースを提供します。
-この static メソッドは後方互換性のあるインターフェースですが、
-スコープ付きビルダーで複数のルートを構築するためのより簡潔な構文を提供し、
-パフォーマンスは向上します。
+    $routes->connect('/', ['controller' => 'Articles', 'action' => 'index']);
 
 これはサイトのホームページにアクセスした時に ``ArticlesController`` の
 index メソッドを実行します。時々、複数のパラメーターを受け取る動的なルートが
@@ -48,12 +35,20 @@ index メソッドを実行します。時々、複数のパラメーターを�
 アクセスを防ぐわけではありません。もし、あなたが望むなら、いくつかのパラメーターを正規表現に従うように
 制限することができます。 ::
 
+    // Using fluent interface
     $routes->connect(
         '/articles/{id}',
-        ['controller' => 'Articles', 'action' => 'view']
+        ['controller' => 'Articles', 'action' => 'view'],
     )
     ->setPatterns(['id' => '\d+'])
     ->setPass(['id']);
+
+    // Using options array
+    $routes->connect(
+        '/articles/{id}',
+        ['controller' => 'Articles', 'action' => 'view'],
+        ['id' => '\d+', 'pass' => ['id']]
+    );
 
 上の例はスターマッチャーを新たにプレースホルダー ``:id`` に変更しました。
 プレースホルダーを使うことで、URL 部分のバリデーションができます。
@@ -101,7 +96,7 @@ URL 文字列を生成できることを意味します。 ::
 アプリケーションの雛形は、いくつかのルートをはじめから持った状態で作られます。
 一度自分でルートを追加したら、デフォルトルートが必要ない場合は除去できます。
 
-.. index:: :controller, :action, :plugin
+.. index:: {controller}, {action}, {plugin}
 .. index:: greedy star, trailing star
 .. _connecting-routes:
 .. _routes-configuration:

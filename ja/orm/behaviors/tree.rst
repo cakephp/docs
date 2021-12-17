@@ -42,7 +42,7 @@ TreeBehavior は、オーバーヘッドをほとんどかけることなく照�
 
     class CategoriesTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->addBehavior('Tree');
         }
@@ -51,8 +51,7 @@ TreeBehavior は、オーバーヘッドをほとんどかけることなく照�
 テーブルがすでにいくつかの行を保持している場合、一度追加すると
 CakePHP は内部構造を構築することができます。 ::
 
-    // Prior to 3.6 use TableRegistry::get('Categories')
-    $categories = TableRegistry::getTableLocator()->get('Categories');
+    $categories = $this->getTableLocator()->get('Categories');
     $categories->recover();
 
 テーブルから行を取得し、その行が持つ子孫の数を調べることで動作することを確認できます。 ::
@@ -72,7 +71,8 @@ CakePHP は内部構造を構築することができます。 ::
 
     $descendants = $categories
         ->find('children', ['for' => 1])
-        ->where(['name LIKE' => '%Foo%']);
+        ->where(['name LIKE' => '%Foo%'])
+        ->all();
 
     foreach ($descendants as $category) {
         echo $category->name . "\n";
@@ -203,14 +203,12 @@ db フィールドを使用してレベルをキャッシュしたくない場�
 
     class LocationsTable extends Table
     {
-
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->addBehavior('Tree', [
                 'scope' => ['country_name' => 'Brazil']
             ]);
         }
-
     }
 
 前の例では、すべてのツリーの操作は、 ``country_name`` カラムに
@@ -280,7 +278,7 @@ TreeBehavior は、内部のすべての削除操作を処理します。
 ノードの削除は、エンティティーの lft と rght の値に基づいて行われます。
 これは条件付き削除のためにノードのさまざまな子をループするときに注意することは重要です。 ::
 
-    $descendants = $teams->find('children', ['for' => 1]);
+    $descendants = $teams->find('children', ['for' => 1])->all();
 
     foreach ($descendants as $descendant) {
         $team = $teams->get($descendant->id); // 最新のエンティティーオブジェクトを検索

@@ -15,7 +15,7 @@ Text クラスは文字列を作ったり操作したりする便利なメソッ
 
     class UsersController extends AppController
     {
-        public function initialize()
+        public function initialize(): void
         {
             parent::initialize();
             $this->loadComponent('Auth')
@@ -23,7 +23,7 @@ Text クラスは文字列を作ったり操作したりする便利なメソッ
 
         public function afterLogin()
         {
-            $message = $this->Users->find('new_message');
+            $message = $this->Users->find('new_message')->first();
             if (!empty($message)) {
                 // ユーザーに新しいメッセージを通知
                 $this->Flash->success(__(

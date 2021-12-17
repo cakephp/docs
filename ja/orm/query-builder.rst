@@ -39,11 +39,11 @@ SQL インジェクション攻撃から守っています。
 
 ::
 
-    use Cake\ORM\TableRegistry;
+    use Cake\ORM\Locator\LocatorAwareTrait;
 
-    $query = TableRegistry::getTableLocator()->get('Articles')->find();
+    $query = $this->getTableLocator()->get('Articles')->find();
 
-    foreach ($query as $article) {
+    foreach ($query->all() as $article) {
         debug($article->title);
     }
 
@@ -65,7 +65,7 @@ SQL インジェクション攻撃から守っています。
         ->where(['id !=' => 1])
         ->order(['created' => 'DESC']);
 
-    foreach ($query as $article) {
+    foreach ($query->all() as $article) {
         debug($article->created);
     }
 
@@ -130,7 +130,7 @@ SQL が出力されます。 ::
 
     // Collection ライブラリーの extract() メソッドを使います
     // これもクエリーを実行します
-    $allTitles = $articles->find()->extract('title');
+    $allTitles = $articles->find()->all()->extract('title');
 
     foreach ($allTitles as $title) {
         echo $title;
@@ -140,6 +140,7 @@ SQL が出力されます。 ::
 
     $list = $articles->find('list');
 
+    $list = $articles->find('list')->all();
     foreach ($list as $id => $title) {
         echo "$id : $title"
     }
@@ -163,7 +164,9 @@ Query オブジェクトのメソッドに慣れたら、 :doc:`Collection </cor
     $results = $articles->find()
         ->where(['id >' => 1])
         ->order(['title' => 'DESC'])
-        ->map(function ($row) { // map() は Collection のメソッドで、クエリーを実行します
+        ->all()
+        ->map(function ($row) {
+        // map() は Collection のメソッドで、クエリーを実行します
             $row->trimmedTitle = trim($row->title);
             return $row;
         })
@@ -689,16 +692,17 @@ Conditions
     SELECT *
     FROM articles
     WHERE (
-    (author_id = 2 OR author_id = 5)
-    AND published = 1
-    AND view_count >= 10)
+        (author_id = 2 OR author_id = 5)
+        AND published = 1
+        AND view_count >= 10
+    )
 
 **combinators** では、メソッドのチェーンを分離したい場合に、
 新しい式オブジェクトをパラメータとして受け取るコールバックを渡すこともできます。 ::
 
     $query = $articles->find()
         ->where(function (QueryExpression $exp) {
-            $orConditions = $exp->or(function ($or) {
+            $orConditions = $exp->or(function (QueryExpression $or) {
                 return $or->eq('author_id', 2)
                     ->eq('author_id', 5);
             });
@@ -1205,9 +1209,9 @@ join を作成する際には ``join()`` だけでなく、``rightJoin()``、 ``
     $query->innerJoin(
         ['Authors' => 'authors'],
         [
-            'Authors.promoted' => true,
-            'Authors.created' => new DateTime('-5 days'),
-            'Authors.id = Articles.author_id'
+        'Authors.promoted' => true,
+        'Authors.created' => new DateTime('-5 days'),
+        'Authors.id = Articles.author_id'
         ],
         ['Authors.promoted' => 'boolean', 'Authors.created' => 'datetime']);
 

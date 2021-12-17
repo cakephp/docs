@@ -25,38 +25,40 @@ ORM の調査を始める前に :ref:`あなたのデータベース接続の設
 
 始めるにあたり、何もコードを書く必要はありません。もし、あなたのデータベーステーブルが :ref:`CakePHP
 の規約 <model-and-database-conventions>` に準拠している場合、すぐに ORM の利用を開始できます。
-例えば ``articles`` からいくつかデータをロードしたい場合、このように記述できます。 ::
+例えば ``articles`` からいくつかデータをロードしたい場合、 **src/Model/Table/ArticlesTable.php** を作成し、下記のように記述できます。 ::
 
-    use Cake\ORM\TableRegistry;
-
-    $articles = TableRegistry::getTableLocator()->get('Articles');
-
-    $query = $articles->find();
-
-    foreach ($query as $row) {
-        echo $row->title;
-    }
-
-ここで留意すべき点は、何もコードを作ったり設定を書いたりする必要がない点です。
-CakePHP の規約により、お決まりのコード記述をスキップし、具象クラスを作っていない状態で
-ベースクラスをフレームワークに登録することができます。もし ArticlesTable に幾つかの
-アソシエーションを加えたりメソッドを定義したい場合、下記を
-**src/Model/Table/ArticlesTable.php** 内、 ``<?php`` の開始タグの後に追加します。 ::
-
+    <?php
     namespace App\Model\Table;
 
     use Cake\ORM\Table;
 
     class ArticlesTable extends Table
     {
-
     }
 
-テーブルクラスは、キャメルケースのテーブル名に接尾語 ``Table`` を加えます。
-一度クラスを作成したら、 :php:class:`~Cake\\ORM\\TableRegistry` 経由で
-:php:class:`~Cake\\ORM\\Locator\\TableLocator` を利用して参照できます。 ::
+Then in a controller or command we can have CakePHP create an instance for us::
 
-    use Cake\ORM\TableRegistry;
+    public function someMethod()
+    {
+        $resultset = $this->fetchTable('Articles')->find()->all();
+
+        foreach ($resultset as $row) {
+            echo $row->title;
+        }
+    }
+
+In other contexts, you can use the ``LocatorAwareTrait`` which add accessor methods for ORM tables::
+
+    use Cake\ORM\Locator\LocatorAwareTrait;
+
+    public function someMethod()
+    {
+        $articles = $this->getTableLocator()->get('Articles');
+        // more code.
+    }
+
+Within a static method you can use the :php:class:`~Cake\\Datasource\\FactoryLocator`
+to get the table locator::
 
     // $articles は、 ArticlesTable クラスのインスタンスです。
     $articles = TableRegistry::getTableLocator()->get('Articles');
@@ -72,20 +74,19 @@ CakePHP の規約により、お決まりのコード記述をスキップし、
 
     class Article extends Entity
     {
-
     }
 
 エンティティーはデフォルトで単数形キャメルケースのテーブル名を利用します。
 前の手順でエンティティークラスはすでに作ったので、データベースからエンティティーをロードした時に、
 新しい Article クラスのインスタンスが生成されます。 ::
 
-    use Cake\ORM\TableRegistry;
+    use Cake\ORM\Locator\LocatorAwareTrait;
 
     // ArticlesTable のインスタンス取得
-    $articles = TableRegistry::getTableLocator()->get('Articles');
-    $query = $articles->find();
+    $articles = $this->getTableLocator()->get('Articles');
+    $resultset = $articles->find()->all();
 
-    foreach ($query as $row) {
+    foreach ($resultset as $row) {
         // 各 row は、 Article クラスのインスタンスです。
         echo $row->title;
     }
@@ -114,4 +115,4 @@ CakePHP は命名規則でテーブルクラスとエンティティークラス
     orm/associations
     orm/behaviors
     orm/schema-system
-    console-and-shells/schema-cache
+    console-commands/schema-cache

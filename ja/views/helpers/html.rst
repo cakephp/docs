@@ -156,16 +156,16 @@ icon     image/x-icon
     // 新旧両方のブラウザーでアイコンをダウンロードさせるための
     // ２つのタグを作成します。
     <link
-        href="/subdir/favicon.ico" 
-        type="image/x-icon" 
+        href="/subdir/favicon.ico"
+        type="image/x-icon"
         rel="icon"
     />
     <link
-        href="/subdir/favicon.ico" 
-        type="image/x-icon" 
+        href="/subdir/favicon.ico"
+        type="image/x-icon"
         rel="shortcut icon"
     />
-    
+
     <?= $this->Html->meta(
         'Comments',
         '/comments/index.rss',

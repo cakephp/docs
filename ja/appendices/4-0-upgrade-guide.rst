@@ -6,7 +6,7 @@
 
     // config/app.php の中で
     'Error' => [
-        'errorLevel' => E_ALL ^ E_USER_DEPRECATED,
+        'errorLevel' => E_ALL,
     ]
 
 次に、アプリケーションとそのプラグインが発行する非推奨の警告を段階的に修正します。
@@ -34,7 +34,7 @@ CakePHP 4 は、 strict モードを採用し、多くのタイプヒントを�
     # アップグレードツールをインストール
     git clone git://github.com/cakephp/upgrade
     cd upgrade
-    git checkout 4.x
+    git checkout master
     composer install --no-dev
 
 アップグレードツールをインストールすると、アプリケーションまたはプラグインで実行できるようになります。
@@ -59,6 +59,12 @@ Rector によるリファクタリングを適用する
     bin/cake upgrade rector --rules phpunit80 <path/to/app/tests>
     bin/cake upgrade rector --rules cakephp40 <path/to/app/src>
 
+You can also use the upgrade tool to apply new rector rules for each minor
+version of CakePHP::
+
+    # Run the rector rules for the 4.0 -> 4.1 upgrade.
+    bin/cake upgrade rector --rules cakephp41 <path/to/app/src>
+
 CakePHP の依存関係をアップデートする
 ====================================
 
@@ -66,5 +72,19 @@ CakePHP の依存関係をアップデートする
 
 .. code-block:: console
 
-    php composer.phar require --update-with-dependencies "phpunit/phpunit:^8.0"
+    php composer.phar require --dev --update-with-dependencies "phpunit/phpunit:^8.0"
     php composer.phar require --update-with-dependencies "cakephp/cakephp:4.0.*"
+
+Application.php
+===============
+
+Next, ensure your ``src/Application.php`` has been updated to have the same
+method signatures as the one found in cakephp/app. You can find the current
+`Application.php
+<https://github.com/cakephp/app/blob/4.x/src/Application.php>`__ on GitHub.
+
+If you are providing some kind of REST API, don't forget to include the
+:ref:`body-parser-middleware`. Finally, you should consider upgrading to the new
+`AuthenticationMiddleware </authentication/2/en/index.html>`__
+and `AuthorizationMiddleware </authorization/2/en/index.html>`__, if you are still
+using ``AuthComponent``.

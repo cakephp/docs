@@ -101,7 +101,7 @@ Query オブジェクトは怠惰に評価され、行のフェッチ、配列�
     $query = $articles->find('all');
 
     // イテレーションはクエリーを実行する
-    foreach ($query as $row) {
+    foreach ($query->all() as $row) {
     }
 
     // all() の呼び出しはクエリーを実行し、結果セットを返す
@@ -159,7 +159,7 @@ find() で使えるオプションは次の通りです:
 デフォルトでクエリーと結果セットは :doc:`/orm/entities` オブジェクトを返します。
 変換 (hydrate) を無効化すれば、素となる配列を取得することができます。 ::
 
-    $query->enableHydration(false);
+    $query->disableHydration();
 
     // $data は配列のデータを含む ResultSet です。
     $data = $query->all();
@@ -224,10 +224,9 @@ CakePHP ではデータの 'list' を生成するメソッドを使うことで�
 
     class ArticlesTable extends Table
     {
-
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
-            $this->setDisplayField('title');
+            $this->setDisplayField('label');
         }
     }
 
@@ -237,7 +236,7 @@ CakePHP ではデータの 'list' を生成するメソッドを使うことで�
     // コントローラーやテーブルのメソッド内で
     $query = $articles->find('list', [
         'keyField' => 'slug',
-        'valueField' => 'title'
+        'valueField' => 'label'
     ]);
     $data = $query->toArray();
 
@@ -253,7 +252,7 @@ FormHelper で ``<optgroup>`` エレメントを構築したいときに便利�
     // コントローラーやテーブルのメソッド内で
     $query = $articles->find('list', [
         'keyField' => 'slug',
-        'valueField' => 'title',
+        'valueField' => 'label',
         'groupField' => 'author_id'
     ]);
     $data = $query->toArray();
@@ -294,11 +293,12 @@ join でつながっている関連テーブルからリストのデータを生
 
     // ファインダーやコントローラーの中で
     $query = $articles->find('list', [
-        'keyField' => 'id',
-        'valueField' => function ($article) {
-            return $article->author->get('label');
-        }
-    ]);
+            'keyField' => 'id',
+            'valueField' => function ($article) {
+                return $article->author->get('label');
+            }
+        ])
+        ->contain('Authors');
 
 オプション指定なしで、ラベルを取得することもできます。 ::
 
@@ -354,13 +354,11 @@ fineder メソッドは、あなたが作成したい finder の名前が ``Foo`
 
     class ArticlesTable extends Table
     {
-
         public function findOwnedBy(Query $query, array $options)
         {
             $user = $options['user'];
             return $query->where(['author_id' => $user->id]);
         }
-
     }
 
     // コントローラーやテーブルのメソッド内で
@@ -819,11 +817,8 @@ leftJoinWith を使う
 クエリーに ``select`` 戦略 (strategy) を使うのだと教える必要があります。 ::
 
     $query = $articles->find()->contain([
-        'FirstComment' => [
+        'Comments' => [
             'strategy' => 'select',
-            'queryBuilder' => function ($q) {
-                return $q->order(['FirstComment.created' =>'ASC'])->limit(1);
-            }
         ]
     ]);
 
@@ -1146,7 +1141,8 @@ reducer が呼ばれるごとに、reducer はユーザーごとのフォロワ�
 そして、クエリーにこの関数を渡します。 ::
 
     $fakeFriends = $friends->find()
-        ->enableHydrate(false)
+        ->disableHydration()
+        ->all()
         ->mapReduce($mapper, $reducer)
         ->toArray();
 
@@ -1212,7 +1208,7 @@ reducer が呼ばれるごとに、reducer はユーザーごとのフォロワ�
         }
     };
 
-    $articles->find('commonWords')->mapReduce($mapper);
+    $articles->find('commonWords')->all()->mapReduce($mapper);
 
 stack されたすべての MapReduce 操作を取り除く
 ---------------------------------------------
