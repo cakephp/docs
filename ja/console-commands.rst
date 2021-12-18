@@ -176,5 +176,5 @@ CakePHPが提供するコマンド
 これにより生成されたメッセージIDはは有効で、メール送信元のドメインに適合していることが保証されます。
 
 .. meta::
-    :title lang=ja: シェル・タスク・コンソールツール
+    :title lang=ja: Shells, Tasks & Console Tools
     :keywords lang=ja: shell scripts,system shell,application classes,background tasks,line script,cron job,request response,system path,acl,new projects,shells,specifics,parameters,i18n,cakephp,directory,maintenance,ideal,applications,mvc
