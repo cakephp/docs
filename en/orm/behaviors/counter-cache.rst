@@ -149,8 +149,8 @@ If you don't have it you should create it with the bake CLI tool.
 In this ``src/Model/Table/CommentsArticlesTable.php`` you then need to add the behavior
 with the same code as described above.
 
-    $this->addBehavior( 'CounterCache', [
-      'Articles' => [ 'comments_count' ],
-    ] );
+    $this->addBehavior('CounterCache', [
+        'Articles' => ['comments_count'],
+    ]);
 
 Finally clear all caches with ``bin/cake cache clear_all`` and try it out
