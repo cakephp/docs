@@ -131,11 +131,6 @@ then updates the counter of the *previously* associated item.
     behavior to the ``CommentsTable`` in order to generate ``comment_count`` for
     Articles table.
 
-    It is possible though to make this work for ``belongsToMany`` associations.
-    You need to enable the CounterCache behavior in a custom ``through`` table
-    configured in association options and set the ``cascadeCallbacks`` configuration
-    option to true.
-
 Belongs to many Usage
 ==============
 
