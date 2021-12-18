@@ -136,7 +136,7 @@ Belongs to many Usage
 
 It is possible to use the CounterCache behavior in a ``belongsToMany`` association.
 First of all you need to add the ``through`` and ``cascadeCallbacks`` options to the
-``belongsToMany`` association
+``belongsToMany`` association::
 
     'through'          => 'CommentsArticles',
     'cascadeCallbacks' => true
