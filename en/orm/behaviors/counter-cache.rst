@@ -147,7 +147,7 @@ The ``CommentsArticles`` is the name of the junction table classname.
 If you don't have it you should create it with the bake CLI tool.
 
 In this ``src/Model/Table/CommentsArticlesTable.php`` you then need to add the behavior
-with the same code as described above.
+with the same code as described above.::
 
     $this->addBehavior('CounterCache', [
         'Articles' => ['comments_count'],
