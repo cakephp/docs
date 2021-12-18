@@ -39,7 +39,7 @@ count for each article with the following::
 The CounterCache configuration should be a map of relation names and the
 specific configuration for that relation.
 
-A you see you need to add the behavior on the "other side" of the association
+As you see you need to add the behavior on the "other side" of the association
 where you actually want the field to be updated. In this example the behavior
 is added to the ``CommentsTable`` even though it updates the ``comment_count``
 field in the ``ArticlesTable``
