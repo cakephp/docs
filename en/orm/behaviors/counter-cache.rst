@@ -132,7 +132,7 @@ then updates the counter of the *previously* associated item.
     Articles table.
 
 Belongs to many Usage
-==============
+=====================
 
 It is possible to use the CounterCache behavior in a ``belongsToMany`` association.
 First of all you need to add the ``through`` and ``cascadeCallbacks`` options to the
