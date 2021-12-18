@@ -42,7 +42,7 @@ specific configuration for that relation.
 As you see you need to add the behavior on the "other side" of the association
 where you actually want the field to be updated. In this example the behavior
 is added to the ``CommentsTable`` even though it updates the ``comment_count``
-field in the ``ArticlesTable``
+field in the ``ArticlesTable``.
 
 The counter's value will be updated each time an entity is saved or deleted.
 The counter **will not** be updated when you
@@ -141,7 +141,7 @@ First of all you need to add the ``through`` and ``cascadeCallbacks`` options to
     'through'          => 'CommentsArticles',
     'cascadeCallbacks' => true
 
-Also see :ref:`using-the-through-option` how to configure a custom join table
+Also see :ref:`using-the-through-option` how to configure a custom join table.
 
 The ``CommentsArticles`` is the name of the junction table classname.
 If you don't have it you should create it with the bake CLI tool.
@@ -153,4 +153,4 @@ with the same code as described above.::
         'Articles' => ['comments_count'],
     ]);
 
-Finally clear all caches with ``bin/cake cache clear_all`` and try it out
+Finally clear all caches with ``bin/cake cache clear_all`` and try it out.
