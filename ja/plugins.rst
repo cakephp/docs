@@ -679,7 +679,7 @@ CakePHP のプラグインは `the packagist <https://packagist.org>`_ に公開
 `awesome-cakephp list <https://github.com/FriendsOfCake/awesome-cakephp>`_
 に申し込みできます。
 
-パッケージ名にセマンティックな意味のある名前を選んでください。これは、理想を言えば、
+パッケージ名は意味のあるセマンティックな名前を選んでください。できれば、
 "cakephp" をフレームワークとして依存関係を設定するべきです。
 ベンダー名は、通常あなたの GitHub ユーザー名になります。
 CakePHP 名前空間 (cakephp) を **使用しない** でください。
@@ -701,7 +701,7 @@ Composer 経由でインストールすると、 **vendor/cakephp-plugins.php** 
 vendor ディレクトリーにインストールすることが可能になります。
 通常の検索パスのプラグインクラスは、このファイルを使ってプラグインが
 ``addPlugin()`` で読み込まれたときに、そのプラグインが読み込まれるようになります。
-通常あなたはこのファイルを手動で編集する必要はなく、
+通常このファイルを手動で編集する必要はなく、
 Composer や ``plugin-installer`` パッケージが管理してくれます。
 
 
