@@ -34,7 +34,7 @@ count for each article with the following::
 
 .. note::
 
-    The column ``comment_count`` should exists in the ``articles`` table.
+    The column ``comment_count`` should exist in the ``articles`` table.
 
 The CounterCache configuration should be a map of relation names and the
 specific configuration for that relation.
