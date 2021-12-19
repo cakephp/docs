@@ -15,7 +15,7 @@
   デフォルトでは、 **config/routes.php** を含みます。
 * ``middleware`` アプリケーションに :doc:`ミドルウェア </controllers/middleware>`
   を追加するために使用されます。
-* ``console`` アプリケーションに :doc:`コンソールコマンド </console-and-shells>`
+* ``console`` アプリケーションに :doc:`コンソールコマンド </console-commands>`
   を追加するために使用されます。
   デフォルトでは、アプリケーションとすべてのプラグインのシェルとコマンドが自動的に検出されます。
 * ``events`` アプリケーションのイベントマネージャーに
