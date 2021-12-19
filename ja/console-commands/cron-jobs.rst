@@ -6,7 +6,7 @@ cron ジョブとして実行します。
 
 このように簡単な設定で行えます。 ::
 
-      */5  *    *    *    *  cd /full/path/to/app && bin/cake myshell myparam
+      */5  *    *    *    *  cd /full/path/to/root && bin/cake myshell myparam
     # *    *    *    *    *  実行するコマンド
     # │    │    │    │    │
     # │    │    │    │    │
@@ -26,8 +26,8 @@ cron ジョブとして実行します。
 共有ホスティング上の cron ジョブ
 --------------------------------
 
-いくつかの共有ホスティング上で ``cd /full/path/to/root && bin/cake myshell myparam``
-は動作しません。代わりに ``php /full/path/to/root/bin/cake.php myshell myparam``
+いくつかの共有ホスティング上で ``cd /full/path/to/root && bin/cake mycommand myparam``
+は動作しません。代わりに ``php /full/path/to/root/bin/cake.php mycommand myparam``
 が使用できます。
 
 .. note::
