@@ -19,7 +19,7 @@
 
 .. toctree::
     :maxdepth: 3
-    :caption: 入門
+    :caption: CakePHP 入門
 
     installation
     development/configuration
@@ -75,7 +75,8 @@
     :maxdepth: 3
     :caption: プラグインとパッケージ
 
-    Authentication <https://book.cakephp.org/authentication/2/>
+    standalone-packages
+    Authentication <https://book.cakephp.org/authentication/2/ja/>
     Authorization <https://book.cakephp.org/authorization/2/>
     Bake <https://book.cakephp.org/bake/2/ja/>
     Debug Kit <https://book.cakephp.org/debugkit/4/ja/>
