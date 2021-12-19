@@ -44,6 +44,7 @@ FlashComponent の ``__call()`` および ``set()`` メソッドは任意に第2
     // コントローラーの中で
     $this->Flash->success('The user has been saved', [
         'key' => 'positive',
+        'clear' => true,
         'params' => [
             'name' => $user->name,
             'email' => $user->email

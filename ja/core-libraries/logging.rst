@@ -23,13 +23,22 @@ View 等) であれば、あなたはデータを記録することができま�
 これのためです。多かれ少なかれアプリケーションが望むロガーを定義できます。
 ロガーは、 :php:class:`Cake\\Log\\Log` を使い設定する必要があります。一例として::
 
+    use Cake\Log\Engine\FileLog;
     use Cake\Log\Log;
+
+    // Classname using logger 'class' constant
+    Log::setConfig('info', [
+        'className' => FileLog::class,
+        'path' => LOGS,
+        'levels' => ['info'],
+        'file' => 'info',
+    ]);
 
     // 短いクラス名
     Log::setConfig('debug', [
         'className' => 'File',
         'path' => LOGS,
-        'levels' => ['notice', 'info', 'debug'],
+        'levels' => ['notice', 'debug'],
         'file' => 'debug',
     ]);
 
@@ -63,12 +72,11 @@ debug/notice/info のログをより深刻なエラーから分離するのが�
 プロバイダーを扱っている時に役立ちます。 ::
 
     Log::setConfig('error', [
-        'url' => 'file:///?levels[]=warning&levels[]=error&file=error',
+        'url' => 'file:///full/path/to/logs/?levels[]=warning&levels[]=error&file=error',
     ]);
 
-.. note::
-
-    ロガーは ``Psr\Log\LoggerInterface`` を、実装する必要があります。
+.. warning::
+    If you do not configure logging engines, log messages will not be stored.
 
 ログアダプターの作成
 --------------------
@@ -357,8 +365,8 @@ Log API
 .. php:staticmethod:: error($message, $scope = [])
 .. php:staticmethod:: warning($message, $scope = [])
 .. php:staticmethod:: notice($message, $scope = [])
-.. php:staticmethod:: debug($message, $scope = [])
 .. php:staticmethod:: info($message, $scope = [])
+.. php:staticmethod:: debug($message, $scope = [])
 
 ロギングトレイト
 ================

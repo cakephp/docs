@@ -1,4 +1,4 @@
 Chronos
 #######
 
-このページは `移動しました <https://book.cakephp.org/chronos/1.x/ja/>`__ 。
+このページは `移動しました <https://book.cakephp.org/chronos/2.x/ja/>`__ 。

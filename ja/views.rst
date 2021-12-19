@@ -49,13 +49,11 @@ App ビュー
 
     class AppView extends View
     {
-
-        public function initialize()
+        public function initialize(): void
         {
             // MyUtils ヘルパーをいつでも有効にする
             $this->loadHelper('MyUtils');
         }
-
     }
 
 .. _view-templates:
@@ -114,7 +112,7 @@ CakePHP のテンプレートファイルは既定の拡張子を **.php** (Cake
   <?php elseif ($username === 'joe'): ?>
      <h3>やあ、Joe</h3>
   <?php else: ?>
-     <h3>やあ、知らない人</h3>
+     <h3>やあ、そこの誰かさん！</h3>
   <?php endif; ?>
 
 もしも、 `Twig <http://twig.sensiolabs.org>`_ のようなテンプレート言語を使いたいのであれば、
@@ -185,7 +183,7 @@ CakePHP は自動では出力をエスケープしませんので、ユーザー
 .. code-block:: php
 
     <!-- templates/Common/view.php -->
-    <h1><?= $this->fetch('title') ?></h1>
+    <h1><?= h($this->fetch('title')) ?></h1>
     <?= $this->fetch('content') ?>
 
     <div class="actions">
@@ -215,7 +213,7 @@ CakePHP は自動では出力をエスケープしませんので、ユーザー
     <?php
     echo $this->Html->link('edit', [
         'action' => 'edit',
-        $post->id
+        $post->id,
     ]);
     ?>
     </li>
@@ -446,12 +444,6 @@ CakePHP の既定のレイアウトは **templates/layout/default.php** に置�
     {
         // レイアウトの設定
         $this->viewBuilder()->setLayout('admin');
-
-        // 3.4 以前
-        $this->viewBuilder()->layout('admin');
-
-        // 3.1 以前
-        $this->layout = 'admin';
     }
 
     // ビューファイルから
@@ -468,12 +460,6 @@ CakePHP の既定のレイアウトは **templates/layout/default.php** に置�
         {
             $this->set('title', 'アクティブユーザー表示');
             $this->viewBuilder()->setLayout('default_small_ad');
-
-            // あるいは 3.4 以前では以下
-            $this->viewBuilder()->layout('default_small_ad');
-
-            // あるいは 3.1 以前では以下
-            $this->layout = 'default_small_ad';
         }
 
         public function viewImage()
@@ -505,10 +491,6 @@ Ajax レイアウトは AJAX のレスポンスを組み立てるのに便利で
         public function viewActive()
         {
             $this->viewBuilder()->setLayout('Contacts.contact');
-            // あるいは 3.4 以前では以下
-            $this->viewBuilder()->layout('Contacts.contact');
-            // あるいは 3.1 以前では以下
-            $this->layout = 'Contacts.contact';
         }
     }
 
@@ -573,7 +555,7 @@ element メソッドの第二引数を通してエレメントにデータを渡
 次の書式を使って一意のキャッシュキーを提供してください。 ::
 
     $this->element('helpbox', [], [
-            "cache" => ['config' => 'short', 'key' => 'unique value']
+            'cache' => ['config' => 'short', 'key' => 'unique value'],
         ]
     );
 

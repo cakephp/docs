@@ -7,20 +7,21 @@ CakePHP には `PHPUnit <http://phpunit.de>`_ をベースとした高度なイ�
 PHPUnit のインストール
 ======================
 
-CakePHP のテストフレームワークは PHPUnit をベースとしています。PHPUnit は PHP ユニットテストフレームワークのデファクトスタンダードであり、思いどおりのコードを安全に書くための豊富な機能を提供します。PHPUnit は `PHAR パッケージ <http://phpunit.de/#download>`__ または
-`Composer <http://getcomposer.org>`_ のいずれかを使用してインストールできます。
+CakePHP のテストフレームワークは PHPUnit をベースとしています。PHPUnit は PHP ユニットテストフレームワークのデファクトスタンダードであり、思いどおりのコードを安全に書くための豊富な機能を提供します。
+PHPUnit は `Composer <http://getcomposer.org>`_ または `PHAR パッケージ <http://phpunit.de/#download>`__ 
+のいずれかを使用してインストールできます。
 
 Composer による PHPUnit のインストール
 --------------------------------------
 
-Composer で PHPUnit をインストールするには:
+Composer で PHPUnit をインストールする場合:
 
 .. code-block:: console
 
     $ php composer.phar require --dev phpunit/phpunit:"^8.5"
 
-これで ``composer.json`` の ``require-dev`` セクションに依存関係を追加し、すべての依存関係と
-一緒に PHPUnit をインストールします。
+コマンドラインで上記のように実行すると、 ``composer.json`` の ``require-dev`` セクションに
+依存関係を追加し、すべての依存関係と一緒に PHPUnit をインストールします。
 
 これで、PHPUnit を以下のように実行することができます。
 
@@ -28,8 +29,8 @@ Composer で PHPUnit をインストールするには:
 
     $ vendor/bin/phpunit
 
-PHAR ファイルの使用
--------------------
+PHAR ファイルを使用する場合
+----------------------------------
 
 **phpunit.phar** ファイルをダウンロードすると、テストを実行するために使用することができます。
 

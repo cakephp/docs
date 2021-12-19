@@ -3,22 +3,21 @@
 
 CakePHP の app スケルトンは、組み込みの REPL (Read Eval Print Loop) を備えており、
 このことで CakePHP やアプリケーションがインタラクティブ・コンソール内で探索しやすくなります。
-以下のようにするとインタラクティブ・コンソールを使い始めることができます。 ::
+以下のようにするとインタラクティブ・コンソールを使い始めることができます。
+
+.. code-block:: console
 
     $ bin/cake console
 
 これは、アプリケーションを自動実行し、インタラクティブコンソールを開始します。
 この時点で、アプリケーションコードを対話的に実行したり、
-アプリケーションのモデルを利用してクエリーを実行することができます。 ::
+アプリケーションのモデルを利用してクエリーを実行することができます。
 
-    $ bin/cake console
+.. code-block:: console
 
-    Welcome to CakePHP v3.0.0 Console
-    ---------------------------------------------------------------
-    App : App
-    Path: /Users/mark/projects/cakephp-app/src/
-    ---------------------------------------------------------------
-    >>> $articles = Cake\ORM\TableRegistry::getTableLocator()->get('Articles');
+    bin/cake console
+
+    >>> $articles = Cake\Datasource\FactoryLocator::get('Table')->get('Articles');
     // object(Cake\ORM\Table)(
     //
     // )

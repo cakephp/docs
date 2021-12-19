@@ -89,9 +89,26 @@
 
 上の例では、データが有効な時にのみフォームの ``_execute()`` を走らせるために ``execute()``
 メソッドを実行し、それに応じたフラッシュメッセージを設定しています。
-データ検証のみ行うために ``validate()`` を使うこともできます。 ::
+データ検証のみ行うために ``validate()`` を
+使うこともできます。 ::
+
+    if ($contact->execute($this->request->getData(), 'update')) {
+        // Handle form success.
+    }
+
+This option can also be set to ``false`` to disable validation.
+
+We could have also used the ``validate()`` method to only validate
+the request data::
 
     $isValid = $form->validate($this->request->getData());
+
+    // You can also use other validation sets. The following
+    // would use the rules defined by `validationUpdate()`
+    $isValid = $form->validate($this->request->getData(), 'update');
+
+.. versionadded:: 4.3.0
+    Using validators other than ``default`` was added.
 
 フォーム値の設定
 ================

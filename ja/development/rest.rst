@@ -24,7 +24,7 @@ REST を動かすための手っ取り早い方法は、 config/routes.php フ�
     // src/Controller/RecipesController.php
     class RecipesController extends AppController
     {
-        public function initialize()
+        public function initialize(): void
         {
             parent::initialize();
             $this->loadComponent('RequestHandler');
@@ -32,7 +32,7 @@ REST を動かすための手っ取り早い方法は、 config/routes.php フ�
 
         public function index()
         {
-            $recipes = $this->Recipes->find('all');
+            $recipes = $this->Recipes->find('all')->all();
             $this->set('recipes', $recipes);
             $this->viewBuilder()->setOption('serialize', ['recipes']);
         }

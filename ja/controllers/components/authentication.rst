@@ -76,10 +76,10 @@ SSL 暗号化しないアプリケーションにもふさわしいものです�
 渡すことができます。 ::
 
     // シンプルな設定
-    $this->Auth->config('authenticate', ['Form']);
+    $this->Auth->setConfig('authenticate', ['Form']);
 
     // 設定を記述
-    $this->Auth->config('authenticate', [
+    $this->Auth->setConfig('authenticate', [
         'Basic' => ['userModel' => 'Members'],
         'Form' => ['userModel' => 'Members']
     ]);
@@ -90,7 +90,7 @@ SSL 暗号化しないアプリケーションにもふさわしいものです�
 ``all`` キーは ``AuthComponent::ALL`` と記述することもできます。 ::
 
     // 'all' を使って設定を記述
-    $this->Auth->config('authenticate', [
+    $this->Auth->setConfig('authenticate', [
         AuthComponent::ALL => ['userModel' => 'Members'],
         'Basic',
         'Form'
@@ -128,7 +128,7 @@ SSL 暗号化しないアプリケーションにもふさわしいものです�
 ``Form`` の要素として書いてはいけません。それらは authenticate キーと同じレベルであるべきです。
 上記の例を他の Auth 設定を使って書いた場合は次のようになります。 ::
 
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
         $this->loadComponent('Auth', [
@@ -172,7 +172,7 @@ SSL 暗号化しないアプリケーションにもふさわしいものです�
 認証クラスの設定で ``finder`` オプションを使用して、ユーザーレコードを取得するために
 使用されるクエリーをカスタマイズすることができます。 ::
 
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
         $this->loadComponent('Auth', [
@@ -348,12 +348,13 @@ CakePHP のライブラリーを使用してランダムにこれらの API ト�
 
     use Cake\Auth\DefaultPasswordHasher;
     use Cake\Utility\Text;
-    use Cake\Event\Event;
+    use Cake\Event\EventInterface;
     use Cake\ORM\Table;
+    use Cake\Utility\Security;
 
     class UsersTable extends Table
     {
-        public function beforeSave(Event $event)
+        public function beforeSave(EventInterface $event)
         {
             $entity = $event->getData('entity');
 
@@ -411,12 +412,12 @@ CakePHP のライブラリーを使用してランダムにこれらの API ト�
     namespace App\Model\Table;
 
     use Cake\Auth\DigestAuthenticate;
-    use Cake\Event\Event;
+    use Cake\Event\EventInterface;
     use Cake\ORM\Table;
 
     class UsersTable extends Table
     {
-        public function beforeSave(Event $event)
+        public function beforeSave(EventInterface $event)
         {
             $entity = $event->getData('entity');
 
@@ -490,7 +491,7 @@ CakePHP のライブラリーを使用してランダムにこれらの API ト�
 カスタム認証オブジェクトを作成したら、 ``AuthComponent`` の authenticate 配列内にそれを
 含めることで利用することができます。 ::
 
-    $this->Auth->config('authenticate', [
+    $this->Auth->setConfig('authenticate', [
         'Openid', // app 内の認証オブジェクト
         'AuthBag.Openid', // プラグインの認証オブジェクト
     ]);
@@ -538,7 +539,7 @@ Auth が生成するセッションエラーメッセージを表示するため
 カスタマイズすることもできます。コントローラーの ``beforeFilter()`` の中や component の設定で、
 認証が失敗した際に使われるエラーをカスタマイズするのに ``authError`` を使うことができます。 ::
 
-    $this->Auth->config('authError', "Woopsie, you are not authorized to access this area.");
+    $this->Auth->setConfig('authError', 'Woopsie, you are not authorized to access this area.');
 
 ユーザーがすでにログインしていた後にのみ、認可エラーを表示したいということもあると思います。
 その場合は ``false`` を設定することにより、このメッセージを表示しないようにすることができます。
@@ -546,7 +547,7 @@ Auth が生成するセッションエラーメッセージを表示するため
 コントローラーの ``beforeFilter()`` 、またはコンポーネントの設定で::
 
     if (!$this->Auth->user()) {
-        $this->Auth->config('authError', false);
+        $this->Auth->setConfig('authError', false);
     }
 
 .. _hashing-passwords:
@@ -564,7 +565,6 @@ User エンティティーでセッター機能を使用することです。 ::
 
     class User extends Entity
     {
-
         // ...
 
         protected function _setPassword($password)
@@ -598,7 +598,6 @@ User エンティティーでセッター機能を使用することです。 ::
 
     class LegacyPasswordHasher extends AbstractPasswordHasher
     {
-
         public function hash($password)
         {
             return sha1($password);
@@ -612,7 +611,7 @@ User エンティティーでセッター機能を使用することです。 ::
 
 その後、独自のパスワードハッシュ化クラスを使用するために ``AuthComponent`` の設定が必要です。 ::
 
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
         $this->loadComponent('Auth', [
@@ -638,7 +637,7 @@ CakePHP は、1つのアルゴリズムから別のユーザーのパスワー�
 ``sha1`` パスワードハッシュを使用している CakePHP 2.x のアプリを移行していると仮定すると、
 次のように ``AuthComponent`` を設定することができます。 ::
 
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
         $this->loadComponent('Auth', [
@@ -751,7 +750,7 @@ CakePHP は、1つのアルゴリズムから別のユーザーのパスワー�
 最初に認証チェックを行いたいイベントの指定は次のように変更します。 ::
 
     // initialize() の中で認証するために AuthComponent を設定
-    $this->Auth->config('checkAuthIn', 'Controller.initialize');
+    $this->Auth->setConfig('checkAuthIn', 'Controller.initialize');
 
 ``checkAuthIn`` のデフォルト値は ``'Controller.startup'`` ですが、
 ``'Controller.initialize'`` を使用することによって、 ``beforeFilter()`` メソッドの前に
@@ -796,10 +795,10 @@ CakePHP は、1つのアルゴリズムから別のユーザーのパスワー�
 配列を使用して各認可オブジェクトに設定情報を渡すことができます。 ::
 
     // 基本的な設定
-    $this->Auth->config('authorize', ['Controller']);
+    $this->Auth->setConfig('authorize', ['Controller']);
 
     // 設定を記述
-    $this->Auth->config('authorize', [
+    $this->Auth->setConfig('authorize', [
         'Actions' => ['actionPath' => 'controllers/'],
         'Controller'
     ]);
@@ -809,7 +808,7 @@ CakePHP は、1つのアルゴリズムから別のユーザーのパスワー�
 設定が渡されることになります。 ``all`` キーは ``AuthComponent::ALL`` と記述することもできます。 ::
 
     // 'all' を使って設定を記述
-    $this->Auth->config('authorize', [
+    $this->Auth->setConfig('authorize', [
         AuthComponent::ALL => ['actionPath' => 'controllers/'],
         'Actions',
         'Controller'
@@ -857,7 +856,7 @@ CakePHP は、1つのアルゴリズムから別のユーザーのパスワー�
 カスタム認可オブジェクトを作成したら、AuthComponent の authorize 配列にそれらを
 含めることで使うことができます。 ::
 
-    $this->Auth->config('authorize', [
+    $this->Auth->setConfig('authorize', [
         'Ldap', // app 内の認可オブジェクト
         'AuthBag.Combo', // プラグインの認可オブジェクト
     ]);
@@ -866,7 +865,7 @@ CakePHP は、1つのアルゴリズムから別のユーザーのパスワー�
 ----------------
 
 どの組み込み認可オブジェクトも使いたくなくて、 ``AuthComponent`` の外側で完全に
-権限を扱いたい場合は、 ``$this->Auth->config('authorize', false);`` を設定することが可能です。
+権限を扱いたい場合は、 ``$this->Auth->setConfig('authorize', false);`` を設定することが可能です。
 デフォルトでは、 ``AuthComponent`` は、 ``authorize`` に ``false`` をセットした状態で始まります。
 認可スキームを使用しない場合は、独自にコントローラーの ``beforeFilter()`` または別のコンポーネントで
 認可を確認してください。
@@ -935,7 +934,7 @@ ControllerAuthorize では、コントローラーのコールバックで認可
 
     class AppController extends Controller
     {
-        public function initialize()
+        public function initialize(): void
         {
             parent::initialize();
             $this->loadComponent('Auth', [
@@ -951,7 +950,7 @@ ControllerAuthorize では、コントローラーのコールバックで認可
             }
 
             // admin ユーザーだけが管理機能にアクセス可能です。
-            if ($this->request->getParam('prefix') === 'admin') {
+            if ($this->request->getParam('prefix') === 'Admin') {
                 return (bool)($user['role'] === 'admin');
             }
 
@@ -966,7 +965,7 @@ admin に設定されたアクションにアクセスすることができま�
 設定オプション
 ==============
 
-以下の設定は、コントローラーの ``initialize()`` メソッドもしくは、 ``$this->Auth->config()``
+以下の設定は、コントローラーの ``initialize()`` メソッドもしくは、 ``$this->Auth->setConfig()``
 を使用するかのどちらかで定義することができます。
 
 ajaxLogin
@@ -1019,11 +1018,11 @@ checkAuthIn
     コントローラーの ``beforeFilter()`` メソッドが実行される前にチェックしたい場合は、
     ``Controller.initialize`` に設定することができます。
 
-``$this->Auth->config()`` を呼ぶことで、現在の設定の値を取得できます。 ::
+``$this->Auth->getConfig()`` を呼ぶことで、現在の設定の値を取得できます。 ::
 
-    $this->Auth->config('loginAction');
+    $this->Auth->getConfig('loginAction');
 
-    $this->redirect($this->Auth->config('loginAction'));
+    return $this->redirect($this->Auth->getConfig('loginAction'));
 
 例えば ``login`` ルートにユーザーをリダイレクトしたい場合に便利です。
 パラメーターを指定せずに、完全な設定が返されます。

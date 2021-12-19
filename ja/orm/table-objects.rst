@@ -43,15 +43,10 @@
 
     class ArticlesTable extends Table
     {
-
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->setTable('my_table');
-
-            // 3.4 より前
-            $this->table('my_table');
         }
-
     }
 
 テーブルを指定した時は、命名規則は適用されません。規約により、ORM はそれぞれのテーブルが
@@ -64,12 +59,9 @@
 
     class ArticlesTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->setPrimaryKey('my_id');
-
-            // 3.4 より前
-            $this->primaryKey('my_id');
         }
     }
 
@@ -83,12 +75,9 @@
 
     class PurchaseOrdersTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->setEntityClass('App\Model\Entity\PO');
-
-            // 3.4 より前
-            $this->entityClass('App\Model\Entity\PO');
         }
     }
 
@@ -147,6 +136,7 @@ ORM 内でフックしたり、サブクラス化やメソッドをオーバー�
 
 * ``Model.initialize``
 * ``Model.beforeMarshal``
+* ``Model.afterMarshal``
 * ``Model.beforeFind``
 * ``Model.buildValidator``
 * ``Model.buildRules``
@@ -176,11 +166,12 @@ initialize
     {
         public function implementedEvents()
         {
-            return array(
+            return [
                 'Model.initialize' => 'initializeEvent',
-            );
+            ];
         }
-        public function initializeEvent($event)
+
+        public function initializeEvent($event): void
         {
             $table = $event->getSubject();
             // ここで何かする
@@ -429,7 +420,7 @@ Callback priorities
 
     class ArticlesTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->addBehavior('Timestamp', [
                 'events' => [
@@ -462,8 +453,8 @@ CakePHP によって提供されるビヘイビアーを含む、ビヘイビア
 
     class ArticlesTable extends Table
     {
-        public static function defaultConnectionName() {
-            return 'slavedb';
+        public static function defaultConnectionName(): string {
+            return 'replica_db';
         }
     }
 
@@ -490,7 +481,7 @@ TableRegistry の利用
 テーブルをレジストリーからロードする時に、依存関係をカスタマイズするか、
 ``$options`` 配列が用意するモックオブジェクトを使います。 ::
 
-    $articles = TableRegistry::getTableLocator()->get('Articles', [
+    $articles = FactoryLocator::get('Table')->get('Articles', [
         'className' => 'App\Custom\ArticlesTable',
         'table' => 'my_articles',
         'connection' => $connectionObject,
@@ -513,7 +504,7 @@ TableRegistry の利用
 設定データは *エイリアスごと* に保存され、オブジェクトの
 ``initialize()`` メソッドで上書きできます。 ::
 
-    TableRegistry::config('Users', ['table' => 'my_users']);
+    FactoryLocator::get('Table')->setConfig('Users', ['table' => 'my_users']);
 
 .. note::
 
