@@ -7,7 +7,7 @@
 
     composer require paragonie/csp-builder
 
-次に、配列を使用するか、ビルドされた ``CSPBuilder`` オブジェクトを渡すことで、ミドルウェアを構成できます。
+次に、配列を使用するか、ビルドされた ``CSPBuilder`` オブジェクトを渡すことで、ミドルウェアを構成できます。::
 
     use Cake\Http\Middleware\CspMiddleware;
 
@@ -30,7 +30,7 @@
 リクエストに ``cspScriptNonce`` 属性と``cspStyleNonce`` 属性が設定されます。
 これらの属性は、 ``HtmlHelper`` によって作成されたすべてのスクリプトおよびCSSリンク要素のnonce属性に適用されます。
 これにより `nonce-base64 <https://developer.mozilla.org/ja/docs/Web/HTTP/Headers/Content-Security-Policy/script-src>`__ と
-``strict-dynamic`` を使用するポリシーの採用が簡素化され、セキュリティが強化され、メンテナンスが容易になります。
+``strict-dynamic`` を使用するポリシーの採用が簡素化され、セキュリティが強化され、メンテナンスが容易になります。::
 
     $policy = [
         // script-srcにノンスを設定するには、内容が空の場合でも作成する必要があります
@@ -48,5 +48,5 @@
     ナンス自動追加機能が実装されました。
 
 .. meta::
-    :title lang=ja: Content Security Policy Middleware
+    :title lang=ja: コンテンツセキュリティポリシーミドルウェア
     :keywords lang=ja: security, content security policy, csp, middleware, cross-site scripting
