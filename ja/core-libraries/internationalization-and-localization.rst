@@ -87,7 +87,7 @@ https://www.localeplanet.com/icu/ (参考)
 
 .. note::
     翻訳はキャッシュされています。翻訳を変更した後は、必ずキャッシュをクリアしてください。
-    :doc:`/console-commands/cache` を使って、例えば
+    :doc:`キャッシュツール </console-commands/cache>` を使って、例えば
     ``bin/cake cache clear _cake_core_`` を実行するか、手動で ``tmp/cache/persistent``
     フォルダをクリアすることができます (ファイルベースのキャッシュを使用している場合)。
 
