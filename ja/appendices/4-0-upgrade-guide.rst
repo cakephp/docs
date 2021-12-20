@@ -83,7 +83,7 @@ Rector によるリファクタリングを適用する
 CakePHP の依存関係をアップデートする
 ====================================
 
- ``rector`` によるリファクタリングを適用した後、下記の composer コマンドを使用して CakePHP と PHPUnit をアップデートします。
+``rector`` によるリファクタリングを適用した後、下記の composer コマンドを使用して CakePHP と PHPUnit をアップデートします。
 
 .. code-block:: console
 
