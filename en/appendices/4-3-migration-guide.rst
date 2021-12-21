@@ -262,7 +262,6 @@ Database
   data.
 * Added ``DriverInterface::supports()`` which consolidates all feature checks into one function.
   Drivers can support custom feature names or any of the feature constants:
-  constants.
 
   * ``FEATURE_CTE``
   * ``FEATURE_JSON``

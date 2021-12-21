@@ -84,6 +84,7 @@ Contenu
     Elasticsearch <https://book.cakephp.org/elasticsearch/3/fr/>
     Phinx <https://book.cakephp.org/phinx/0/fr/>
     Chronos <https://book.cakephp.org/chronos/2/fr/>
+    Queue <https://book.cakephp.org/queue/1/en/>
 
 .. toctree::
     :maxdepth: 3

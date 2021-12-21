@@ -10,7 +10,7 @@ Mettre à jour vers la version 4.3.0
 
 Vous pouvez utiliser composer pour mettre à jour vers CakePHP 4.3.0::
 
-    php composer.phar require --update-with-dependencies "cakephp/cakephp:^4.3@RC"
+    php composer.phar require --update-with-dependencies "cakephp/cakephp:^4.3"
 
 Dépréciations
 =============
@@ -95,6 +95,13 @@ Network
 ORM
 ---
 
+- ``ModelAwareTrait::loadModel()`` est dépréciée. Utilisez la nouvelle méthode
+  ``LocatorAwareTrait::fetchTable()`` à la place. Par exemple, dans les
+  controllers vous pouvez faire ``$this->fetchTable()`` pour obtenir l'instance
+  de la table par défaut, ou utiliser ``$this->fetchTable('Foos')`` pour une
+  table autre que celle par défaut. Vous pouvez définir la propriété
+  ``LocatorAwareTrait::$defaultTable`` pour spécifier l'alias de la table par
+  défaut pour ``fetchTable()``.
 - L'usage de requêtes pour intercepter toutes les méthodes de 
   ``ResultSetInterface`` (y compris ```CollectionInterface```), forcer la
   récupération des résultats et appeler la méthode sous-jacente sur ces
@@ -107,6 +114,11 @@ ORM
 - ``Association::setName()`` est dépréciée. Les noms d'associations doivent être
   définis en même temps que l'association.
 - ``QueryExpression::addCase()`` est dépréciée. Utilisez ``case()`` à la place.
+  Les syntaxes ``['value' => 'literal']`` et ``['column' => 'identifier']`` ne
+  sont pas supportées dans le nouveau case builder. L'insertion de SQL brut ou
+  d'identifiants nécessite d'utiliser des expressions explicitement. Vous pouvez
+  définir la propriété ``LocatorAwareTrait::$defaultTable`` pour spécifier
+  l'alias de la table par défaut.
 
 Routing
 -------
@@ -134,8 +146,8 @@ View
   au profit de la méthode dédiée ``ViewBuilder::addHelpers()`` qui sépare
   proprement l'ajout et le remplacement de helpers.
 
-Changements dans les Behaviors
-==============================
+Changements de comportements
+============================
 
 Bien que les changements qui suivent ne changent la signature d'aucune méthode,
 ils en changent la sémantique ou le comportement.
@@ -254,8 +266,8 @@ Controller
   middleware pour un seul contrôleur. Reportez-vous à :ref:`controller-middleware`
   pour plus d'informations.
 - Les controllers supportent maintenant des paramètres d'actions avec des types
-  déclarés ``float``, ``int`` ou ``bool``. Les booléens passés doivent être soit
-  0 soit 1.
+  déclarés ``float``, ``int``, ``bool`` ou ``array``. Les booléens passés
+  doivent être soit ``0`` soit ``1``.
 
 Core
 ----
@@ -273,21 +285,28 @@ Core
 Database
 --------
 
-- Les types de mappage de bases de données peuvent maintenant implémenter
+* Les types de mappage de bases de données peuvent maintenant implémenter
   ``Cake\Database\Type\ColumnSchemaAwareInterface`` pour spécifier la génération
   de colonne SQL et la réflexivité du schéma de colonne. Cela permet au types
   personnalisés de prendre en charge des colonnes non standard.
-- Les queries loguées utilisent maintenant ``TRUE`` et ``FALSE`` pour les
+* Les queries loguées utilisent maintenant ``TRUE`` et ``FALSE`` pour les
   pilotes postgres, sqlite et mysql. Cela facilite la copie de queries et leur
   exécution dans un prompt interactif.
-- Le ``DatetimeType`` peut maintenant convertir les données de la requête du
+* Le ``DatetimeType`` peut maintenant convertir les données de la requête du
   fuseau horaire de l'utilisateur vers le fuseau horaire de l'application.
   Reportez-vous à :ref:`converting-request-data-from-user-timezone` pour plus
   d'informations.
-- Ajout de ``DriverInterface::supports()`` qui consolide toutes les
+* Ajout de ``DriverInterface::supports()`` qui consolide toutes les
   vérifications de feature en une seule fonction. Les pilotes peuvent supporter
-  les nommages personnalisés de feature ou n'importe quelle constante
-  ``DriverInterface::FEATURE\_*``
+  les nommages personnalisés de feature ou n'importe quelle constante de
+  feature:
+  
+  * ``FEATURE_CTE``
+  * ``FEATURE_JSON``
+  * ``FEATURE_QUOTE``
+  * ``FEATURE_SAVEPOINT``
+  * ``FEATURE_WINDOW``
+    
 - Ajout de ``DriverInterface::inTransaction()`` qui reflète le statut renvoyé
   par ``PDO::inTranaction()``.
 - Ajout d'un builder fluide pour les instructions ``CASE, WHEN, THEN``.

@@ -217,7 +217,7 @@ application.
 
     Chemin vers le répertoire des fichiers temporaires.
 
-.. php:const:: WWW\_ROOT
+.. php:const:: WWW_ROOT
 
     Chemin d'accès complet vers la racine web (webroot).
 

@@ -183,7 +183,7 @@ Database
   d'aggrégation avec alias.
 * ``FunctionsBuilder::cast()`` a été ajoutée.
 * Le support des Common Table Expression (CTE) a été ajouté. Les CTE peuvent être attachées
-  en utilisant `Query::with()`.
+  en utilisant ``Query::with()``.
 * ``Query::orderAsc()`` et ``Query::orderDesc()`` acceptent désormais des closures comme champs
   vous permettant ainsi de construire des expressions de tri (order) complexes utilisant l'objet
   ``QueryExpression``.
