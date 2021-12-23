@@ -31,12 +31,26 @@ count for each article with the following::
         }
     }
 
+
+.. note::
+
+    The column ``comment_count`` should exist in the ``articles`` table.
+
 The CounterCache configuration should be a map of relation names and the
 specific configuration for that relation.
 
-The counter's value will be updated each time an entity is saved or deleted. The
-counter **will not** be updated when you use ``updateAll()`` or ``deleteAll()``,
-or execute SQL you have written.
+As you see you need to add the behavior on the "other side" of the association
+where you actually want the field to be updated. In this example the behavior
+is added to the ``CommentsTable`` even though it updates the ``comment_count``
+field in the ``ArticlesTable``.
+
+The counter's value will be updated each time an entity is saved or deleted.
+The counter **will not** be updated when you
+
+- save the entity without changing data or
+- use ``updateAll()`` or
+- use ``deleteAll()`` or
+- execute SQL you have written
 
 Advanced Usage
 ==============
@@ -117,8 +131,26 @@ then updates the counter of the *previously* associated item.
     behavior to the ``CommentsTable`` in order to generate ``comment_count`` for
     Articles table.
 
-    It is possible though to make this work for ``belongsToMany`` associations.
-    You need to enable the CounterCache behavior in a custom ``through`` table
-    configured in association options and set the ``cascadeCallbacks`` configuration
-    option to true. See how to configure a custom join table
-    :ref:`using-the-through-option`.
+Belongs to many Usage
+=====================
+
+It is possible to use the CounterCache behavior in a ``belongsToMany`` association.
+First, you need to add the ``through`` and ``cascadeCallbacks`` options to the
+``belongsToMany`` association::
+
+    'through'          => 'CommentsArticles',
+    'cascadeCallbacks' => true
+
+Also see :ref:`using-the-through-option` how to configure a custom join table.
+
+The ``CommentsArticles`` is the name of the junction table classname.
+If you don't have it you should create it with the bake CLI tool.
+
+In this ``src/Model/Table/CommentsArticlesTable.php`` you then need to add the behavior
+with the same code as described above.::
+
+    $this->addBehavior('CounterCache', [
+        'Articles' => ['comments_count'],
+    ]);
+
+Finally clear all caches with ``bin/cake cache clear_all`` and try it out.
