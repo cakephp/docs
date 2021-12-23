@@ -276,3 +276,28 @@ This will allow us to define the option when creating the cell::
 Cell options are handy when you want data available as properties allowing you
 to override default values.
 
+Using Helpers inside a Cell
+===========================
+
+Since cells have their own View scope they don't share they helpers defined in
+`src/View/AppView.php`. You need to load those helpers again inside your cell::
+
+    namespace App\View\Cell;
+
+    use Cake\View\Cell;
+    use Cake\Datasource\Paginator;
+
+    class FavoritesCell extends Cell
+    {
+        protected $_validCellOptions = [];
+
+        public function initialize(): void {
+            $this->viewBuilder()->addHelper('MyCustomHelper');
+        }
+
+        public function display($userId)
+        {
+            // Your code
+        }
+    }
+
