@@ -38,7 +38,8 @@ Behavior Changes
 While the following changes do not change the signature of any methods they do
 change the semantics or behavior of methods.
 
-* TODO
+* ``Router::parseRequest()`` now raises ``BadRequestException`` instead of
+  ``InvalidArgumentException`` when an invalid HTTP method is used by a client.
 
 Breaking Changes
 ================
