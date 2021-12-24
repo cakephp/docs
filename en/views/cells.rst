@@ -279,7 +279,7 @@ to override default values.
 Using Helpers inside a Cell
 ===========================
 
-Since cells have their own View scope they don't share they helpers defined in
+Since cells have their own View scope they don't share the helpers defined in
 `src/View/AppView.php`. You need to load those helpers again inside your cell::
 
     namespace App\View\Cell;
