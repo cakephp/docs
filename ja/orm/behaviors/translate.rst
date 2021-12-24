@@ -21,9 +21,11 @@ Table オブジェクトにビヘイビアーを追加してください。 ::
 
     class ArticlesTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
-            $this->addBehavior('Translate', ['fields' => ['title']]);
+            $this->addBehavior('Translate', [
+                'defaultLocale' => 'en_GB',
+            ]);
         }
     }
 
@@ -121,8 +123,7 @@ Table への Translate ビヘイビアーの追加
 
     class ArticlesTable extends Table
     {
-
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->addBehavior('Translate', ['fields' => ['title', 'body']]);
         }
@@ -245,8 +246,7 @@ translate ビヘイビアーは元のフィールド値を上書きします。
 
     class ArticlesTable extends Table
     {
-
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->addBehavior('Translate', [
                 'fields' => ['title', 'body'],
@@ -449,7 +449,7 @@ TranslateBehavior の背後にある哲学は、デフォルトの言語を表�
 
     class ArticlesTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->addBehavior('Translate', [
                 'fields' => ['title'],

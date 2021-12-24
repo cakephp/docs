@@ -15,7 +15,7 @@
   デフォルトでは、 **config/routes.php** を含みます。
 * ``middleware`` アプリケーションに :doc:`ミドルウェア </controllers/middleware>`
   を追加するために使用されます。
-* ``console`` アプリケーションに :doc:`コンソールコマンド </console-and-shells>`
+* ``console`` アプリケーションに :doc:`コンソールコマンド </console-commands>`
   を追加するために使用されます。
   デフォルトでは、アプリケーションとすべてのプラグインのシェルとコマンドが自動的に検出されます。
 * ``events`` アプリケーションのイベントマネージャーに
@@ -27,33 +27,31 @@
 Application::bootstrap()
 ------------------------
 
-TODO
+In addition to the **config/bootstrap.php** file which should be used to
+configure low-level concerns of your application, you can also use the
+``Application::bootstrap()`` hook method to load/initialize plugins, and attach
+global event listeners::
 
-.. _adding-http-stack:
+    // in src/Application.php
+    namespace App;
 
-既存アプリケーションへの新しい HTTP スタック追加
-================================================
+    use Cake\Http\BaseApplication;
 
-既存のアプリケーションで HTTP ミドルウェアを使うには、アプリケーションにいくつかの
-変更を行わなければなりません。
+    class Application extends BaseApplication
+    {
+        public function bootstrap()
+        {
+            // Call the parent to `require_once` config/bootstrap.php
+            parent::bootstrap();
 
-#. まず **webroot/index.php** を更新します。 `app スケルトン
-   <https://github.com/cakephp/app/tree/master/webroot/index.php>`__ から
-   ファイルの内容をコピーしてください。
-#. ``Application`` クラスを作成します。どのようにするかについては上の :ref:`using-middleware`
-   セクションを参照してください。もしくは `app スケルトン
-   <https://github.com/cakephp/app/tree/master/src/Application.php>`__
-   の中の例をコピーしてください。
-#. **config/requirements.php** を作成します。もし存在しない場合、 `app スケルトン
-   <https://github.com/cakephp/app/blob/master/config/requirements.php>`__ から
-   内容を追加してください。
+            // Load MyPlugin
+            $this->addPlugin('MyPlugin');
+        }
+    }
 
-これら三つの手順が完了すると、アプリケーション／プラグインのディスパッチフィルターを
-HTTP ミドルウェアとして再実装を始める準備が整います。
-
-もし、テストを実行する場合は、 `app スケルトン
-<https://github.com/cakephp/app/tree/master/tests/bootstrap.php>`_ から、
-ファイルの内容をコピーして **tests/bootstrap.php** を更新することも必要になります。
+Loading plugins and events in ``Application::bootstrap()`` makes
+:ref:`integration-testing` easier as events and routes will be re-processed on
+each test method.
 
 .. meta::
     :title lang=en: CakePHP Application

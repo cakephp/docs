@@ -35,27 +35,27 @@ CakePHPはコントローラーでアクションを呼ぶ際サービスコン�
 
 コマンド内でサービス注入を行う例::
 
-    // src/Command/CheckUsersCommand.php
+    // In src/Command/CheckUsersCommand.php
     class CheckUsersCommand extends Command
     {
         /** @var UsersService */
         public $users;
 
-        public function __construct(UsersService $users)
+        public function __construct(UsersService $users) 
         {
             parent::__construct();
             $this->users = $users;
         }
 
-        public function execute( Arguments $args, ConsoleIo $io )
+        public function execute( Arguments $args, ConsoleIo $io ) 
         {
             $valid = $this->users->check('all');
         }
-
+    
     }
-
-    // src/Application.php
-    public function services( ContainerInterface $container ): void
+    
+    // In src/Application.php
+    public function services( ContainerInterface $container ): void 
     {
         $container
             ->add(CheckUsersCommand::class)
@@ -79,7 +79,7 @@ CakePHPはコントローラーでアクションを呼ぶ際サービスコン�
 
 アプリケーションとプラグイン内の ``services()`` フックメソッドからサービスを定義します。::
 
-    // src/Application.php
+    // in src/Application.php
     namespace App;
 
     use App\Service\BillingService;

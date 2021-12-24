@@ -41,7 +41,7 @@ CakePHP において、 ``$_SESSION`` の利用は通常避けています。代
     Configure::write('Session', [
         'defaults' => 'php',
         'ini' => [
-            'session.cookie_secure' => false
+            'session.cookie_samesite' => 'Strict'
         ]
     ]);
 
@@ -231,7 +231,7 @@ IO をもたらします。
 
     class ComboSession extends DatabaseSession
     {
-        public $cacheKey;
+        protected $cacheKey;
 
         public function __construct()
         {
@@ -240,7 +240,7 @@ IO をもたらします。
         }
 
         // セッションからデータ読込み
-        public function read($id)
+        public function read($id): string
         {
             $result = Cache::read($id, $this->cacheKey);
             if ($result) {
@@ -250,23 +250,23 @@ IO をもたらします。
         }
 
         // セッションへのデータ書込み
-        public function write($id, $data)
+        public function write($id, $data): bool
         {
             Cache::write($id, $data, $this->cacheKey);
             return parent::write($id, $data);
         }
 
         // セッションの破棄
-        public function destroy($id)
+        public function destroy($id): bool
         {
             Cache::delete($id, $this->cacheKey);
             return parent::destroy($id);
         }
 
         // 有効期限切れセッションの削除
-        public function gc($expires = null)
+        public function gc($expires = null): bool
         {
-            return Cache::gc($this->cacheKey) && parent::gc($expires);
+            return Cache::clear($this->cacheKey) && parent::gc($expires);
         }
     }
 

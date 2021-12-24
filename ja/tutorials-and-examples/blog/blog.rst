@@ -157,7 +157,7 @@ CakePHP はレガシーなデータベーススキーマに対応できるくら
                 'password' => 'AngelF00dC4k3~',
                 'database' => 'cake_blog',
                 'encoding' => 'utf8',
-                'timezone' => 'UTC',
+                'timezone' => 'UTC'
             ],
         ],
         // More configuration below.

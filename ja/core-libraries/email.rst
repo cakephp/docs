@@ -144,12 +144,12 @@ CakePHP は、 :doc:`ビューレイヤー </views>` を使用してメールを
 
     $mailer = new Mailer();
     $mailer
-                 ->setEmailFormat('html')
-                 ->setTo('bob@example.com')
-                 ->setFrom('app@domain.com')
-                 ->viewBuilder()
-                     ->setTemplate('welcome')
-                     ->setLayout('fancy');
+                ->setEmailFormat('html')
+                ->setTo('bob@example.com')
+                ->setFrom('app@domain.com')
+                ->viewBuilder()
+                    ->setTemplate('welcome')
+                    ->setLayout('fancy');
 
     $mailer->deliver();
 

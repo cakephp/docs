@@ -438,11 +438,11 @@ est déjà présente en base de données. Pour cela, utilisez la méthode
     }
 
 Si vous êtes certains qu'une entity a déjà été sauvegardée, vous pouvez
-utiliser ``isNew()`` en tant que setter::
+utiliser ``setNew()``::
 
-    $article->isNew(false);
+    $article->setNew(false);
 
-    $article->isNew(true);
+    $article->setNew(true);
 
 .. _lazy-load-associations:
 

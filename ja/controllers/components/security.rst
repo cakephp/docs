@@ -55,7 +55,7 @@ Security コンポーネントのフォーム保護機能と、 ``startup()`` �
     public function beforeFilter(EventInterface $event)
     {
         parent::beforeFilter($event);
-
+        
         $this->Security->setConfig('blackHoleCallback', 'blackhole');
     }
 

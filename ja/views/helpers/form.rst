@@ -171,20 +171,23 @@ FormHelper の値ソースは、input タグなどの描画される要素がど
 
     // コンテキストでクエリー文字列の優先順位をつける
     echo $this->Form->create($article, [
+        'type' => 'get',
         'valueSources' => ['query', 'context']
     ]);
 
     // 同じ効果:
     echo $this->Form
         ->setValueSources(['query', 'context'])
-        ->create($articles);
+        ->create($articles, ['type' => 'get']);
 
-    // クエリー文字列からのみのデータの読み取り
-    echo $this->Form->create($article);
-    $this->Form->setValueSources('query');
+When input data has to be processed by the entity, i.e. marshal transformations, table
+query result or entity computations, and displayed after one or multiple form submissions
+where request data is retained, you need to put ``context`` first::
 
-    // 同じ効果:
-    echo $this->Form->create($article, ['valueSources' => 'query']);
+    // Prioritize context over request data:
+    echo $this->Form->create($article,
+        'valueSources' => ['context', 'data']
+    ]);
 
 サポートするソースは、 ``context``, ``data`` そして ``query`` です。
 単一または複数のソースを使用できます。 ``FormHelper`` によって生成されたウィジェットは
@@ -467,7 +470,7 @@ UsersController に以下を追加します。 ::
 `ローワーキャメルケース <https://en.wikipedia.org/wiki/Camel_case#Variations_and_synonyms>`_
 で名前を付ける必要があります。 ::
 
-    $this->set('userGroups', $this->UserGroups->find('list'));
+    $this->set('userGroups', $this->UserGroups->find('list')->all());
 
 .. note::
 
@@ -766,7 +769,7 @@ FormHelper で利用可能なメソッドには、さらに特定のフォーム
 
 .. code-block:: html
 
-    <input name="id" value="10" type="hidden" />
+    <input name="id" type="hidden" />
 
 テキストエリアの作成
 --------------------
@@ -1322,13 +1325,13 @@ optgroup 付きで ``select`` を生成したい場合は、データを階層�
   または、関連するチェックボックスのリストを出力するために
   ``'multiple'`` を ``'checkbox'`` に設定します。 ::
 
-    $options = [
-        'Value 1' => 'Label 1',
-        'Value 2' => 'Label 2'
-    ];
-    echo $this->Form->select('field', $options, [
-        'multiple' => 'checkbox'
-    ]);
+      $options = [
+          'Value 1' => 'Label 1',
+          'Value 2' => 'Label 2'
+      ];
+      echo $this->Form->select('field', $options, [
+          'multiple' => 'checkbox'
+      ]);
 
   出力結果:
 
@@ -1336,16 +1339,16 @@ optgroup 付きで ``select`` を生成したい場合は、データを階層�
 
       <input name="field" value="" type="hidden">
       <div class="checkbox">
-        <label for="field-1">
-         <input name="field[]" value="Value 1" id="field-1" type="checkbox">
-         Label 1
-         </label>
+          <label for="field-1">
+              <input name="field[]" value="Value 1" id="field-1" type="checkbox">
+              Label 1
+          </label>
       </div>
       <div class="checkbox">
-         <label for="field-2">
-         <input name="field[]" value="Value 2" id="field-2" type="checkbox">
-         Label 2
-         </label>
+          <label for="field-2">
+              <input name="field[]" value="Value 2" id="field-2" type="checkbox">
+              Label 2
+          </label>
       </div>
 
 * ``'disabled'`` - このオプションを設定して、すべてまたは一部の ``select`` の ``option`` 項目を
@@ -1378,32 +1381,32 @@ optgroup 付きで ``select`` を生成したい場合は、データを階層�
 
   このオプションは ``'multiple'`` が ``'checkbox'`` に設定されている場合にも有効です。 ::
 
-    $options = [
-        'Value 1' => 'Label 1',
-        'Value 2' => 'Label 2'
-    ];
-    echo $this->Form->select('field', $options, [
-        'multiple' => 'checkbox',
-        'disabled' => ['Value 1']
-    ]);
+      $options = [
+          'Value 1' => 'Label 1',
+          'Value 2' => 'Label 2'
+      ];
+      echo $this->Form->select('field', $options, [
+          'multiple' => 'checkbox',
+          'disabled' => ['Value 1']
+      ]);
 
   出力結果:
 
   .. code-block:: html
 
-       <input name="field" value="" type="hidden">
-       <div class="checkbox">
+      <input name="field" value="" type="hidden">
+      <div class="checkbox">
           <label for="field-1">
-          <input name="field[]" disabled="disabled" value="Value 1" type="checkbox">
-          Label 1
+              <input name="field[]" disabled="disabled" value="Value 1" type="checkbox">
+              Label 1
           </label>
-       </div>
-       <div class="checkbox">
+      </div>
+      <div class="checkbox">
           <label for="field-2">
-          <input name="field[]" value="Value 2" id="field-2" type="checkbox">
-          Label 2
+              <input name="field[]" value="Value 2" id="field-2" type="checkbox">
+              Label 2
           </label>
-       </div>
+      </div>
 
 ファイル入力の作成
 ------------------
@@ -1617,34 +1620,17 @@ CakePHP が Windows サーバー上にインストールされている場合、
 
 例::
 
-    echo $this->Form->dateTime('released', [
-        'year' => [
-            'class' => 'year-classname',
-        ],
-        'month' => [
-            'class' => 'month-class',
-            'data-type' => 'month',
-        ],
-    ]);
+    <?= $this->form->dateTime('registered', ['value' => new DateTime()]) ?>
 
 これは、次の2つの選択ピッカーを作成します。
 
 .. code-block:: html
 
-    <select name="released[year]" class="year-class">
-        <option value="" selected="selected"></option>
-        <option value="00">0</option>
-        <option value="01">1</option>
-        <!-- .. 以下省略 .. -->
-    </select>
-    <select name="released[month]" class="month-class" data-type="month">
-        <option value="" selected="selected"></option>
-        <option value="01">January</option>
-        <!-- .. 以下省略 .. -->
-    </select>
+    <input type="datetime-local" name="registered" value="2019-02-08T18:20:10" />
 
 日付コントロールの作成
 ~~~~~~~~~~~~~~~~~~~~~~
+
 .. php:method:: date($fieldName, $options = [])
 
 * ``$fieldName`` - ``select`` 要素の HTML ``name`` 属性のプレフィックスとして使用される文字列。
@@ -1681,18 +1667,7 @@ CakePHP が Windows サーバー上にインストールされている場合、
 
 .. code-block:: html
 
-    <select class= "cool-years" name="registered[year]" title="Registration Year">
-        <option value="2022">2022</option>
-        <option value="2021">2021</option>
-        ...
-        <option value="2018">2018</option>
-    </select>
-    <select name="registered[month]">
-        <option value="" selected="selected">Choose month...</option>
-        <option value="01">1</option>
-        ...
-        <option value="12">12</option>
-    </select>
+    <input type="date" name="registered" />
 
 時間コントロールの作成
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -1724,21 +1699,7 @@ CakePHP が Windows サーバー上にインストールされている場合、
 
 .. code-block:: html
 
-    <select name="released[hour]" class="foo-class">
-        <option value="" selected="selected"></option>
-        <option value="00">0</option>
-        <option value="01">1</option>
-        <!-- .. 中略 .. -->
-        <option value="22">22</option>
-        <option value="23">23</option>
-    </select>
-    <select name="released[minute]" class="bar-class">
-        <option value="" selected="selected"></option>
-        <option value="00">00</option>
-        <option value="15">15</option>
-        <option value="30">30</option>
-        <option value="45">45</option>
-    </select>
+    echo $this->Form->time('released');
 
 年コントロールの作成
 ~~~~~~~~~~~~~~~~~~~~
@@ -1765,19 +1726,7 @@ CakePHP が Windows サーバー上にインストールされている場合、
 
 .. code-block:: html
 
-    <select name="purchased[year]">
-    <option value=""></option>
-    <option value="2009">2009</option>
-    <option value="2008">2008</option>
-    <option value="2007">2007</option>
-    <option value="2006">2006</option>
-    <option value="2005">2005</option>
-    <option value="2004">2004</option>
-    <option value="2003">2003</option>
-    <option value="2002">2002</option>
-    <option value="2001">2001</option>
-    <option value="2000">2000</option>
-    </select>
+    <input type="time" name="released" />
 
 月コントロールの作成
 ~~~~~~~~~~~~~~~~~~~~
@@ -1794,73 +1743,16 @@ CakePHP が Windows サーバー上にインストールされている場合、
 
     echo $this->Form->month('mob');
 
-出力結果:
+Will output:
 
 .. code-block:: html
 
-    <select name="mob[month]">
-    <option value=""></option>
-    <option value="01">January</option>
-    <option value="02">February</option>
-    <option value="03">March</option>
-    <option value="04">April</option>
-    <option value="05">May</option>
-    <option value="06">June</option>
-    <option value="07">July</option>
-    <option value="08">August</option>
-    <option value="09">September</option>
-    <option value="10">October</option>
-    <option value="11">November</option>
-    <option value="12">December</option>
-    </select>
-
-``'monthNames'`` 属性に独自の月の名前を配列で設定することもできます。
-また ``false`` を指定すると、月が数字で表示されます。
-
-例::
-
-  echo $this->Form->month('mob', ['monthNames' => false]);
-
-.. note::
-
-    デフォルトの月は、CakePHP の :doc:`/core-libraries/internationalization-and-localization`
-    機能でローカライズすることができます。
-
-日コントロールの作成
-~~~~~~~~~~~~~~~~~~~~
-
-.. php:method:: day(string $fieldName, array $attributes)
-
-* ``$fieldName`` - ``select`` 要素の HTML ``name`` 属性のプレフィックスとして使用される文字列。
-* ``$attributes`` - :ref:`general-control-options` 、 :ref:`datetime-options` 、
-  適用可能な :ref:`time-options` 、そして有効な HTML 属性を含むオプション配列。
-
-（数字の）日を列挙する ``select`` 要素を作成します。
-
-あなたの選択した指示テキストで空の ``option`` を作成するには（たとえば、
-最初のオプションは 'Day'）、 ``'empty'`` パラメーターにテキストを指定できます。
-
-例::
-
-    echo $this->Form->day('created', ['empty' => 'Day']);
-
-出力結果:
-
-.. code-block:: html
-
-    <select name="created[day]">
-        <option value="" selected="selected">Day</option>
-        <option value="01">1</option>
-        <option value="02">2</option>
-        <option value="03">3</option>
-        ...
-        <option value="31">31</option>
-    </select>
+    <input type="month" name="mob" />
 
 時間コントロールの作成
 ~~~~~~~~~~~~~~~~~~~~~~
 
-.. php:method:: hour(string $fieldName, array $attributes)
+.. php:method:: year(string $fieldName, array $options = [])
 
 * ``$fieldName`` - ``select`` 要素の HTML ``name`` 属性のプレフィックスとして使用される文字列。
 * ``$attributes`` - :ref:`general-control-options` 、 :ref:`datetime-options` 、
@@ -1900,26 +1792,19 @@ CakePHP が Windows サーバー上にインストールされている場合、
 
 .. code-block:: html
 
-    <select name="arrival[minute]">
-        <option value="" selected="selected"></option>
-        <option value="00">00</option>
-        <option value="10">10</option>
-        <option value="20">20</option>
-        <option value="30">30</option>
-        <option value="40">40</option>
-        <option value="50">50</option>
+    <select name="purchased">
+        <option value=""></option>
+        <option value="2009">2009</option>
+        <option value="2008">2008</option>
+        <option value="2007">2007</option>
+        <option value="2006">2006</option>
+        <option value="2005">2005</option>
+        <option value="2004">2004</option>
+        <option value="2003">2003</option>
+        <option value="2002">2002</option>
+        <option value="2001">2001</option>
+        <option value="2000">2000</option>
     </select>
-
-午前と午後コントロールの作成
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. php:method:: meridian(string $fieldName, array $attributes)
-
-* ``$fieldName`` - ``select`` 要素の HTML ``name`` 属性のプレフィックスとして使用される文字列。
-* ``$attributes`` - :ref:`general-control-options` と有効な HTML 属性を含むオプション配列。
-
-'am' と 'pm' を列挙した ``select`` 要素を生成します。これは、時間の書式を
-``24`` の代わりに ``12`` をセットした時に便利で、時間が属する期間を指定することができます。
 
 .. _create-label:
 
@@ -2646,7 +2531,15 @@ autocomplete ウィジェットを作成したい場合、以下を実行でき�
             $this->_templates = $templates;
         }
 
-        public function render(array $data, ContextInterface $context)
+        /**
+         * Methods that render the widget.
+         *
+         * @param array $data The data to build an input with.
+         * @param \Cake\View\Form\ContextInterface $context The current form context.
+         * 
+         * @return string
+         */
+        public function render(array $data, ContextInterface $context): string
         {
             $data += [
                 'name' => '',
@@ -2657,7 +2550,7 @@ autocomplete ウィジェットを作成したい場合、以下を実行でき�
             ]);
         }
 
-        public function secureFields(array $data)
+        public function secureFields(array $data): array
         {
             return [$data['name']];
         }

@@ -3,7 +3,7 @@
 
 .. php:namespace:: Cake\Routing
 
-.. php:class:: Router
+.. php:class:: RouterBuilder
 
 ルーティングは URL とコントローラーのアクションをマップするツールを提供します。
 ルートを設定することで、アプリケーションの実装方法を URL の構造から分離できます。
@@ -21,21 +21,8 @@ CakePHP でのルーティングはまた パラメーターの配列を URL 文
 ランディングページとして何かを表示したい時がよくあるでしょう。そのときは、 **routes.php**
 ファイルに以下を加えます。 ::
 
-    use Cake\Routing\Router;
-
-    // スコープ付きルートビルダーを使用（推奨）
     /** @var \Cake\Routing\RouteBuilder $routes */
-    $routes->scope('/', function (RouteBuilder $routes) {
-        $routes->connect('/', ['controller' => 'Articles', 'action' => 'index']);
-    });
-
-    // static メソッドを使用。
-    Router::connect('/', ['controller' => 'Articles', 'action' => 'index']);
-
-``Router`` はルーティングするための2つのインターフェースを提供します。
-この static メソッドは後方互換性のあるインターフェースですが、
-スコープ付きビルダーで複数のルートを構築するためのより簡潔な構文を提供し、
-パフォーマンスは向上します。
+    $routes->connect('/', ['controller' => 'Articles', 'action' => 'index']);
 
 これはサイトのホームページにアクセスした時に ``ArticlesController`` の
 index メソッドを実行します。時々、複数のパラメーターを受け取る動的なルートが
@@ -48,12 +35,20 @@ index メソッドを実行します。時々、複数のパラメーターを�
 アクセスを防ぐわけではありません。もし、あなたが望むなら、いくつかのパラメーターを正規表現に従うように
 制限することができます。 ::
 
+    // Using fluent interface
     $routes->connect(
         '/articles/{id}',
-        ['controller' => 'Articles', 'action' => 'view']
+        ['controller' => 'Articles', 'action' => 'view'],
     )
     ->setPatterns(['id' => '\d+'])
     ->setPass(['id']);
+
+    // Using options array
+    $routes->connect(
+        '/articles/{id}',
+        ['controller' => 'Articles', 'action' => 'view'],
+        ['id' => '\d+', 'pass' => ['id']]
+    );
 
 上の例はスターマッチャーを新たにプレースホルダー ``:id`` に変更しました。
 プレースホルダーを使うことで、URL 部分のバリデーションができます。
@@ -101,7 +96,7 @@ URL 文字列を生成できることを意味します。 ::
 アプリケーションの雛形は、いくつかのルートをはじめから持った状態で作られます。
 一度自分でルートを追加したら、デフォルトルートが必要ない場合は除去できます。
 
-.. index:: :controller, :action, :plugin
+.. index:: {controller}, {action}, {plugin}
 .. index:: greedy star, trailing star
 .. _connecting-routes:
 .. _routes-configuration:
@@ -867,7 +862,7 @@ SEO に親和性があるルーティング
 拡張子が :doc:`/controllers/components/request-handling` で使われ、それによって
 コンテンツタイプに合わせた自動的なビューの切り替えを行います。
 
-.. _connecting-scoped-middleware:
+.. _route-scoped-middleware:
 
 スコープ付きミドルウェアの接続
 ------------------------------
@@ -889,12 +884,12 @@ SEO に親和性があるルーティング
 
     $routes->scope('/', function (RouteBuilder $routes) {
         $routes->registerMiddleware('csrf', new CsrfProtectionMiddleware());
-        $routes->registerMiddleware('cookies', new EncryptedCookiesMiddleware());
+        $routes->registerMiddleware('cookies', new EncryptedCookieMiddleware());
     });
 
 一度登録されると、スコープ付きミドルウェアは特定のスコープに適用されます。 ::
 
-    $routes->scope('/cms', function ($routes) {
+    $routes->scope('/cms', function (RouteBuilder $routes) {
         // CSRF & cookies ミドルウェアを有効化
         $routes->applyMiddleware('csrf', 'cookies');
         $routes->get('/articles/{action}/*', ['controller' => 'Articles']);
@@ -903,9 +898,9 @@ SEO に親和性があるルーティング
 ネストされたスコープがある状況では、内部スコープは、
 スコープ内に適用されたミドルウェアを継承します。 ::
 
-    $routes->scope('/api', function ($routes) {
+    $routes->scope('/api', function (RouteBuilder $routes) {
         $routes->applyMiddleware('ratelimit', 'auth.api');
-        $routes->scope('/v1', function ($routes) {
+        $routes->scope('/v1', function (RouteBuilder $routes) {
             $routes->applyMiddleware('v1compat');
             // ここにルートを定義。
         });
@@ -915,7 +910,7 @@ SEO に親和性があるルーティング
 ミドルウェアが適用されます。スコープを再度開くと、各スコープ内のルートに適用されたミドルウェアが
 分離されます。 ::
 
-    $routes->scope('/blog', function ($routes) {
+    $routes->scope('/blog', function (RouteBuilder $routes) {
         $routes->applyMiddleware('auth');
         // ここに blog の認証が必要なアクションを接続
     });
@@ -995,7 +990,7 @@ DELETE      /recipes/123.format   RecipesController::delete(123)
 サブリソースのルートは、オリジナルのリソース名と id パラメーターの後に追加されます。例えば::
 
     $routes->scope('/api', function (RouteBuilder $routes) {
-        $routes->resources('Articles', function ($routes) {
+        $routes->resources('Articles', function (RouteBuilder $routes) {
             $routes->resources('Comments');
         });
     });
@@ -1015,7 +1010,7 @@ DELETE      /recipes/123.format   RecipesController::delete(123)
 プレフィックスを利用して各コンテキスト内で異なるコントローラーを使用できます。 ::
 
     $routes->scope('/api', function (RouteBuilder $routes) {
-        $routes->resources('Articles', function ($routes) {
+        $routes->resources('Articles', function (RouteBuilder $routes) {
             $routes->resources('Comments', ['prefix' => 'Articles']);
         });
     });
@@ -1080,14 +1075,24 @@ DELETE      /recipes/123.format   RecipesController::delete(123)
         'map' => [
             'updateAll' => [
                 'action' => 'updateAll',
-                'method' => 'DELETE',
-                'path' => '/update_many'
+                'method' => 'PUT',
+                'path' => '/update-many'
             ],
         ]
     ]);
     // これは /articles/update_many に接続します。
 
 'only' と 'map' を定義した場合、マップされたメソッドが 'only' リストにもあるか確かめましょう。.
+
+プレフィックス付きのリソースルーティング
+--------------------------------------------------
+
+リソースルートは、ルーティングプレフィックスでコントローラに接続できます。
+プレフィックス付きスコープ内で、または ``prefix`` オプションを使用してルートを接続します。::
+
+    $routes->resources('Articles', [
+        'prefix' => 'Api',
+    ]);
 
 .. _custom-rest-routing:
 

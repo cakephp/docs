@@ -11,7 +11,6 @@
     :maxdepth: 1
 
     appendices/4-0-migration-guide
-    appendices/4-0-upgrade-guide
     appendices/4-1-migration-guide
     appendices/4-2-migration-guide
     appendices/4-3-migration-guide
@@ -20,7 +19,7 @@
 後方互換性の補完
 ================
 
-3.x の振舞いとの補完が必要な場合、または段階的に部分的な移行が必要な場合、
+3.x の挙動に関する対応が必要な場合、または段階的な移行に関する助けが必要な場合、
 `Shim プラグイン <https://github.com/dereuromark/cakephp-shim>`__ を確認してください。
 後方互換性を損なう変更を移行するのに役立ちます。
 
@@ -29,9 +28,9 @@
 
 前方互換性の補完は、次のメジャーリリース (4.x) のために、3.x アプリを準備できます。
 
-既存の 3.x で 4.x の振舞いに合わせたい場合、
+既存の 3.x で 4.x の挙動に合わせたい場合、
 `Shim プラグイン <https://github.com/dereuromark/cakephp-shim>`__ を確認してください。
-後方互換性を損なう変更を移行するのに役立ちます。
+後方互換性を損なう変更を移行するのに役立つ可能性があります。
 3.x アプリが 4.x に近いほど、変更の差分は小さくなり、最終的なアップグレードはよりスムーズになります。
 
 

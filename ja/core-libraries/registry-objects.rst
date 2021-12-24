@@ -46,10 +46,10 @@
 たとえば、次のようにコンポーネントのコールバックを無効にすることができます。 ::
 
     // Auth コールバックを無効化
-    $this->eventManager()->off($this->Auth);
+    $this->getEventManager()->off($this->Auth);
 
     // Auth コールバックを再度有効化
-    $this->eventManager()->on($this->Auth);
+    $this->getEventManager()->on($this->Auth);
 
 .. meta::
     :title lang=ja: Object Registry

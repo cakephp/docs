@@ -62,7 +62,7 @@ CakePHP は、jQuery などの一般的な JavaScript フレームワークに�
                 $event = new Event('Model.Order.afterPlace', $this, [
                     'order' => $order
                 ]);
-                $this->eventManager()->dispatch($event);
+                $this->getEventManager()->dispatch($event);
                 return true;
             }
             return false;
@@ -167,14 +167,14 @@ UserStatistic クラスがあると仮定しましょう。これは、リスナ
 
     class UserStatistic implements EventListenerInterface
     {
-        public function implementedEvents()
+        public function implementedEvents(): array
         {
             return [
                 'Model.Order.afterPlace' => 'updateBuyStatistic',
             ];
         }
 
-        public function updateBuyStatistic($event, $order)
+        public function updateBuyStatistic($event)
         {
             // 統計値を更新するコード
         }
@@ -228,14 +228,14 @@ UserStatistic クラスがあると仮定しましょう。これは、リスナ
     // メールを送信する場合
     use Cake\Mailer\Email;
 
-    TableRegistry::getTableLocator()->get('ThirdPartyPlugin.Feedbacks')
+    FactoryLocator::get('Table')->get('ThirdPartyPlugin.Feedbacks')
         ->getEventManager()
         ->on('Model.afterSave', function($event, $entity)
         {
             // 例えば、管理者のメールを送信することができます。
 	    // 3.4 より前は from()/to()/subject() メソッドを使用してください。
             $email = new Email('default');
-            $email->setFrom('info@yoursite.com' => 'Your Site')
+            $email->setFrom(['info@yoursite.com' => 'Your Site'])
                 ->setTo('admin@yoursite.com')
                 ->setSubject('New Feedback - Your Site')
                 ->send('Body of message');

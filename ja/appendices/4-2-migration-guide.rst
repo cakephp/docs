@@ -150,7 +150,7 @@ Database
       クエリ結果が大きいユーザの場合、``Query::disableBufferedResults()`` が呼ばれないと
       クライアント側のバッファの割り当てにエラーが発生する可能性があります。
       最大バッファサイズは ``php.ini`` で ``pdo_sqlsrv.client_buffer_max_kb_size`` で設定できます。
-      詳細は https://docs.microsoft.com/en-us/sql/connect/php/cursor-types-pdo-sqlsrv-driver?view=sql-server-ver15#pdo_sqlsrv-and-client-side-cursors
+      詳細は https://docs.microsoft.com/ja-jp/sql/connect/php/cursor-types-pdo-sqlsrv-driver?view=sql-server-ver15#pdo_sqlsrv-and-client-side-cursors
       を参照してください。
 - 現在の結果キャスティングモードを取得するために ``Query::isResultsCastingEnabled()`` が追加されました。
 - 照合（ collation ）に文字列リテラルを使えるように、 ``StringExpression`` が追加されました。

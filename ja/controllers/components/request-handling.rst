@@ -19,7 +19,7 @@ RequestHandler を利用するためには ``initialize()`` メソッドに含�
 
     class WidgetsController extends AppController
     {
-        public function initialize()
+        public function initialize(): void
         {
             parent::initialize();
             $this->loadComponent('RequestHandler');
@@ -45,14 +45,13 @@ RequestHandler はクライアントやリクエストについての情報を�
 
         class ArticlesController extends AppController
         {
-
-            public function initialize()
+            public function initialize(): void
             {
                 parent::initialize();
                 $this->loadComponent('RequestHandler');
             }
 
-            public function beforeFilter(Event $event)
+            public function beforeFilter(EventInterface $event)
             {
                 if ($this->RequestHandler->accepts('html')) {
                     // クライアントが HTML (text/html) のレスポンスを
@@ -196,7 +195,7 @@ CPU の処理を節約することができます。
 自動的なチェックは、 ``checkHttpCache`` を ``false`` にすることで
 行わないようにすることができます。 ::
 
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
         $this->loadComponent('RequestHandler', [
@@ -213,7 +212,7 @@ JsonView/XmlView を利用する場合、カスタムビュークラスでデフ
 その場合、既存のタイプや新規タイプのクラスをマッピングすることができます。
 また、 ``viewClassMap`` 設定を使用して、これを自動的に設定することができます。 ::
 
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
         $this->loadComponent('RequestHandler', [

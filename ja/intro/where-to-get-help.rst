@@ -88,11 +88,6 @@ Stack Overflow の既存ユーザーが質問を見つけやすくするため�
 あなたの言語で情報を得るには
 ============================
 
-ブラジルポルトガル語
---------------------
-
-- `Brazilian CakePHP Community <http://cakephp-br.org>`_
-
 デンマーク語
 ------------
 
@@ -109,8 +104,13 @@ Stack Overflow の既存ユーザーが質問を見つけやすくするため�
 - `German CakePHP Slack Channel <https://cakesf.slack.com/messages/german/>`_
 - `German CakePHP Facebook Group <https://www.facebook.com/groups/146324018754907/>`_
 
-オランダ語
-----------
+Iranian
+-------
+
+- `Iranian CakePHP Community <http://cakephp.ir>`_
+
+Dutch
+-----
 
 - `Dutch CakePHP Slack Channel <https://cakesf.slack.com/messages/netherlands/>`_
 

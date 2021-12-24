@@ -30,7 +30,7 @@ hasOne 、 hasMany 、 belongsTo 、そして belongsToMany です。
 
     class ArticlesTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->belongsTo('Authors');
         }
@@ -43,13 +43,13 @@ hasOne 、 hasMany 、 belongsTo 、そして belongsToMany です。
 
     class ArticlesTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->belongsTo('Authors', [
                     'className' => 'Publishing.Authors'
                 ])
-                ->setForeignKey('authorid')
-                ->setProperty('person');
+                ->setForeignKey('author_id')
+                ->setProperty('author');
         }
     }
 
@@ -57,8 +57,8 @@ hasOne 、 hasMany 、 belongsTo 、そして belongsToMany です。
 
    $this->belongsTo('Authors', [
        'className' => 'Publishing.Authors',
-       'foreignKey' => 'authorid',
-       'propertyName' => 'person'
+       'foreignKey' => 'author_id',
+       'propertyName' => 'author'
    ]);
 
 しかし、配列は、流れるようなインターフェイスから得られるタイプヒントや自動補完を提供しません。
@@ -68,15 +68,15 @@ hasOne 、 hasMany 、 belongsTo 、そして belongsToMany です。
 
     class ArticlesTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->hasMany('Comments')
-                ->setConditions(['approved' => true]);
+                ->setFinder('approved');
 
             $this->hasMany('UnapprovedComments', [
                     'className' => 'Comments'
                 ])
-                ->setConditions(['approved' => false])
+                ->setFinder('unapproved')
                 ->setProperty('unapproved_comments');
         }
     }
@@ -87,7 +87,7 @@ hasOne 、 hasMany 、 belongsTo 、そして belongsToMany です。
 
     class CategoriesTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->hasMany('SubCategories', [
                 'className' => 'Categories'
@@ -105,7 +105,7 @@ hasOne 、 hasMany 、 belongsTo 、そして belongsToMany です。
 
     class PostsTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
            $this->addAssociations([
                'belongsTo' => [
@@ -154,7 +154,7 @@ Doctors hasOne Mentors mentors.doctor\_id
 
     class UsersTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->hasOne('Addresses');
         }
@@ -165,11 +165,11 @@ Doctors hasOne Mentors mentors.doctor\_id
 
     class UsersTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->hasOne('Addresses')
                 ->setName('Addresses')
-                ->setConditions(['Addresses.primary' => '1'])
+                ->setFinder('primary')
                 ->setDependent(true);
         }
     }
@@ -178,7 +178,7 @@ Doctors hasOne Mentors mentors.doctor\_id
 
     class UsersTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->hasOne('HomeAddress', [
                     'className' => 'Addresses'
@@ -186,6 +186,7 @@ Doctors hasOne Mentors mentors.doctor\_id
                 ->setProperty('home_address')
                 ->setConditions(['HomeAddress.label' => 'Home'])
                 ->setDependent(true);
+
             $this->hasOne('WorkAddress', [
                     'className' => 'Addresses'
                 ])
@@ -232,7 +233,7 @@ hasOne アソシエーションの配列で可能なキーは以下の通りで�
 のレコードが存在すればそれを含むことができます。 ::
 
     // コントローラーまたはテーブルのメソッドの中で
-    $query = $users->find('all')->contain(['Addresses']);
+    $query = $users->find('all')->contain(['Addresses'])->all();
     foreach ($query as $user) {
         echo $user->address->street;
     }
@@ -272,7 +273,7 @@ Mentors belongsTo Doctors mentors.doctor\_id
 
     class AddressesTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->belongsTo('Users');
         }
@@ -282,7 +283,7 @@ Mentors belongsTo Doctors mentors.doctor\_id
 
     class AddressesTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             // バージョン 3.4 より前は、 foreignKey() と joinType() を使用してください
             $this->belongsTo('Users')
@@ -316,7 +317,7 @@ belongsTo アソシエーションの配列で可能なキーは以下の通り�
 のレコードが存在すればそれを含むことができます。 ::
 
     // コントローラーまたはテーブルのメソッドの中で
-    $query = $addresses->find('all')->contain(['Users']);
+    $query = $addresses->find('all')->contain(['Users'])->all();
     foreach ($query as $address) {
         echo $address->user->username;
     }
@@ -354,7 +355,7 @@ Articles モデルの中で、 hasMany アソシエーションを次のよう�
 
     class ArticlesTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->hasMany('Comments');
         }
@@ -364,7 +365,7 @@ Articles モデルの中で、 hasMany アソシエーションを次のよう�
 
     class ArticlesTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->hasMany('Comments')
                 ->setForeignKey('article_id')
@@ -375,7 +376,7 @@ Articles モデルの中で、 hasMany アソシエーションを次のよう�
 時にはアソシエーションで複合キーを設定したいかもしれません。 ::
 
     // ArticlesTable::initialize() の呼び出しの中で
-    $this->hasMany('Reviews')
+    $this->hasMany('Comments')
         ->setForeignKey([
             'article_id',
             'article_hash'
@@ -387,7 +388,7 @@ Articles モデルの中で、 hasMany アソシエーションを次のよう�
 を手動で設定することができます。 ::
 
     // ArticlesTable::initialize() の呼び出しの中で
-    $this->hasMany('Reviews')
+    $this->hasMany('Comments')
         ->setForeignKey([
             'article_id',
             'article_hash'
@@ -509,7 +510,7 @@ Patient belongsToMany Doctor doctors_patients.id, doctors_patients.doctor_id,
     // src/Model/Table/ArticlesTable.php の中で
     class ArticlesTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->belongsToMany('Tags');
         }
@@ -518,7 +519,7 @@ Patient belongsToMany Doctor doctors_patients.id, doctors_patients.doctor_id,
     // src/Model/Table/TagsTable.php の中で
     class TagsTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->belongsToMany('Articles');
         }
@@ -529,7 +530,7 @@ Patient belongsToMany Doctor doctors_patients.id, doctors_patients.doctor_id,
     // src/Model/Table/TagsTable.php の中で
     class TagsTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->belongsToMany('Articles', [
                 'joinTable' => 'articles_tags',
@@ -584,7 +585,7 @@ belongsToMany アソシエーションの配列で可能なキーは以下の通
 のレコードが存在すればそれを含むことができます。 ::
 
     // コントローラーまたはテーブルのメソッドの中で
-    $query = $articles->find('all')->contain(['Tags']);
+    $query = $articles->find('all')->contain(['Tags'])->all();
     foreach ($query as $article) {
         echo $article->tags[0]->text;
     }
@@ -643,7 +644,7 @@ CoursesMemberships モデルを作ればよいのです。以下のモデルを�
 
     class StudentsTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->belongsToMany('Courses', [
                 'through' => 'CoursesMemberships',
@@ -653,7 +654,7 @@ CoursesMemberships モデルを作ればよいのです。以下のモデルを�
 
     class CoursesTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->belongsToMany('Students', [
                 'through' => 'CoursesMemberships',
@@ -663,7 +664,7 @@ CoursesMemberships モデルを作ればよいのです。以下のモデルを�
 
     class CoursesMembershipsTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->belongsTo('Students');
             $this->belongsTo('Courses');

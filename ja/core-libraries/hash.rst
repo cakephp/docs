@@ -275,9 +275,18 @@ Hash パス構文
             ]
         */
 
-    ``$keyPath`` と ``$valuePath`` の両方とも、配列を指定することができます。
-    その場合は、配列の１要素目はフォーマット文字列とみなされ、
-    ２要素目以降のパスで取得された値のために使われます。 ::
+        // As of 3.9.0 $keyPath can be null
+        $result = Hash::combine($a, null, '{n}.User.Data.name');
+        /* $result now looks like:
+            [
+                [0] => Mariano Iglesias
+                [1] => Larry E. Masters
+            ]
+        */
+
+    You can provide arrays for both ``$keyPath`` and ``$valuePath``. If you do this,
+    the first value will be used as a format string, for values extracted by the
+    other paths::
 
         $result = Hash::combine(
             $a,

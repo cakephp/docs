@@ -59,21 +59,13 @@ AppController
 
     class AppController extends Controller
     {
-
-        public function initialize()
+        public function initialize(): void
         {
             // CSRF コンポーネントを常に有効にします。
             $this->loadComponent('Csrf');
         }
-
     }
 
-``initialize()`` メソッドに加えて、旧来の ``$components`` プロパティーでも
-どのコンポーネントが読まれるべきかを定義することができます。
-通常のオブジェクト指向の継承ルールが適用されますが、
-コントローラーで使用されるコンポーネントとヘルパーは特別に扱われます。
-これらの場合、 ``AppController`` のプロパティーの値は、子コントローラーの配列の値とマージされます。
-常に子クラスの値が ``AppController`` の値を上書きします。
 
 リクエストの流れ
 ================
@@ -93,7 +85,7 @@ CakePHP のリクエストオブジェクトについてのより詳しい情報
 本来であればあなたが書かなければならなかったコードを省いてくれます。
 
 CakePHP は規約に従って、アクション名のビューを描画します。オンラインベーカリーの例に戻りますが、
-RecipesController は ``view()`` 、 ``share()`` 、 ``search()`` アクションを持つかもしれません。
+RecipesController は ``view()`` ・ ``share()`` ・ ``search()`` アクションを持つかもしれません。
 このコントローラーは **src/Controller/RecipesController.php** にあり、
 次のようなコードになっています。 ::
 
@@ -167,7 +159,7 @@ CakePHP の規約に従うと、手動でビューを描画したり生成した
         'base_price' => 23.95
     ];
 
-    // $color 、 $type 、および $base_price を作成し
+    // $color・$type および $base_price を作成し
     // ビューで使用できるようになります
 
     $this->set($data);
@@ -181,7 +173,7 @@ CakePHP の規約に従うと、手動でビューを描画したり生成した
 このビルダーは、ビューが作成される前にビューのプロパティーを設定するために使われます。 ::
 
     $this->viewBuilder()
-        ->setHelpers(['MyCustom'])
+        ->addHelper('MyCustom')
         ->setTheme('Modern')
         ->setClassName('Modern.Admin');
 
@@ -210,7 +202,7 @@ RecipesController の ``search()`` アクションがリクエストされたら
         public function search()
         {
             // templates/Recipes/search.php のビューを描画します
-            $this->render();
+            return $this->render();
         }
     // ...
     }
@@ -257,7 +249,7 @@ AJAX 呼び出しではとても有用です。 ::
 
     class PostsController extends AppController
     {
-        public function my_action()
+        public function myAction()
         {
             $this->render('Users.UserDetails/custom_file');
         }
@@ -265,8 +257,8 @@ AJAX 呼び出しではとても有用です。 ::
 
 これは **plugins/Users/templates/UserDetails/custom_file.php** を描画します。
 
-他のページへの転送
-==================
+他のページへのリダイレクト
+======================================
 
 .. php:method:: redirect(string|array $url, integer $status)
 
@@ -313,6 +305,7 @@ HTTP ステータスコードを定義することができます。リダイレ
     return $this->redirect([
         'controller' => 'Orders',
         'action' => 'confirm',
+        $order->id,
         '?' => [
             'product' => 'pizza',
             'quantity' => 5
@@ -371,8 +364,8 @@ CakePHP のコントローラーに紐づけることができます。 ::
     組み込みの ORM の TableRegistry は既定では 'Table' プロバイダーとして
     接続されています。
 
-モデルのページ分け
-==================
+モデルのページネーション
+=====================================
 
 .. php:method:: paginate()
 
@@ -400,7 +393,7 @@ CakePHP のコントローラーに紐づけることができます。 ::
 コントローラーの ``initialize()`` メソッドの中で、読み込みたいコンポーネントや、
 その設定データを定義することができます。 ::
 
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
         $this->loadComponent('Csrf');
@@ -497,6 +490,35 @@ CakePHP のコントローラーはリクエストのライフサイクル周り
     {
         parent::beforeFilter($event);
     }
+
+.. _controller-middleware:
+
+Controller Middleware
+=====================
+
+.. php:method:: middleware($middleware, array $options = [])
+
+:doc:`Middleware </controllers/middleware>` can be defined globally, in
+a routing scope or within a controller. To define middleware for a specific
+controller use the ``middleware()`` method from your controller's
+``initialize()`` method::
+
+    public function initialize(): void
+    {
+        parent::initialize();
+
+        $this->middleware(function ($request, $handler) {
+            // Do middleware logic.
+
+            // Make sure you return a response or call handle()
+            return $handler->handle($request);
+        });
+    }
+
+Middleware defined by a controller will be called **before** ``beforeFilter()`` and action methods are called.
+
+.. versionadded:: 4.3.0
+    ``Controller::middleware()`` was added.
 
 コントローラーのより詳細
 ========================

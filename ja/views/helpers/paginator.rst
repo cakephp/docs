@@ -43,7 +43,7 @@ PaginatorHelper テンプレート
 を使ってプラグインからテンプレートをロードすることもできます。 ::
 
     // AppView.php の中で
-    public function initialize()
+    public function initialize(): void
     {
         ...
         $this->loadHelper('Paginator', ['templates' => 'MyPlugin.paginator-templates']);
@@ -66,8 +66,6 @@ PaginatorHelper テンプレート
 
     // 現在のテンプレート値を読み込みます
     $result = $this->Paginator->getTemplates('number');
-    // 3.4 より前
-    $result = $this->Paginator->templates('number');
 
     // テンプレートを変更します
     $this->Paginator->setTemplates([
@@ -259,7 +257,7 @@ first と last オプションを使って先頭ページと最終ページへ�
 
     .. code-block:: html
 
-        <li class="prev disabled"><span>&lt;&lt; previous</span></li>
+        <li class="prev disabled"><a href="" onclick="return false;">&lt;&lt; previous</a></li>
 
     このメソッドで使用するテンプレートを変更するには、 :ref:`paginator-templates` を参照してください。
 
@@ -329,7 +327,7 @@ PaginatorHelper を使用すると、ページの ``<head>`` 要素に改行タ�
 
     与えられた結果セットが先頭ページでない場合に ``true`` を返します。
 
-.. php:method:: hasPage(string $model = null, integer $page = 1)
+.. php:method:: hasPage(int $page = 1, string $model = null)
 
     与えられた結果セットが ``$page`` が示すページ番号を含む場合に ``true`` を返します。
 

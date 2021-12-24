@@ -14,7 +14,7 @@ Mais d'abord, nous devons modifier nos tables.
 Plugin Migrations
 =================
 
-Nous voulons utiliser le
+Nous allons utiliser le
 `plugin migrations <https://github.com/cakephp/migrations>`_ pour créer une
 table dans notre base de données. Si vous avez déjà une table articles dans
 votre base de données, supprimez-la.
@@ -26,8 +26,8 @@ n'est pas le cas, ajoutez-le en utilisant::
     composer require cakephp/migrations:~1.0
 
 Le plugin migrations va maintenant être dans le dossier **plugins** de votre
-application. Ajoutez aussi ``Plugin::load('Migrations');`` dans le fichier
-bootstrap.php de votre application.
+application. Ajoutez aussi ``Plugin::load('Migrations');`` à la méthode
+``bootstrap`` de votre application.
 
 Une fois que le plugin est chargé, lancez la commande suivante pour créer un
 fichier de migration::
@@ -128,8 +128,8 @@ Ceci va générer le fichier suivant dans **config/Migrations**::
 
 Maintenant que les fichiers de migration sont créés, vous pouvez les modifier
 avant de créer vos tables. Nous devons changer ``'null' => false`` pour
-le champ ``parent_id`` par ``'null' => true`` car une catégorie de niveau
-supérieur a un ``parent_id`` null.
+le champ ``parent_id`` par ``'null' => true`` car une catégorie de premier
+niveau a un ``parent_id`` null.
 
 Exécutez la commande suivante pour créer vos tables::
 
@@ -143,7 +143,7 @@ catégorisation de nos articles.
 
 Nous supposons que vous avez déjà les fichiers (Tables, Controllers et
 Templates des Articles) de la partie 2. Donc nous allons juste ajouter les
-références aux categories.
+références aux catégories.
 
 Nous devons associer ensemble les tables Articles et Categories. Ouvrez le
 fichier **src/Model/Table/ArticlesTable.php** et ajoutez ce qui suit::
@@ -169,13 +169,13 @@ fichier **src/Model/Table/ArticlesTable.php** et ajoutez ce qui suit::
 Générer les Squelettes de Code des Catégories
 =============================================
 
-Créez tous les fichiers en lançant les commandes de bake suivantes::
+Créez tous les fichiers en lançant les commandes **bake** suivantes::
 
     bin/cake bake model Categories
     bin/cake bake controller Categories
     bin/cake bake template Categories
 
-De manière alternative, vous pouvez créer la totalité avec une seule ligne::
+Au choix, vous pouvez aussi tous les créer en une seule ligne::
 
     bin/cake bake all Categories
 
@@ -198,10 +198,10 @@ Attacher TreeBehavior à CategoriesTable
 =======================================
 
 Le :doc:`TreeBehavior </orm/behaviors/tree>` vous aide à gérer des structures
-hiérarchiques en arbre dans une table de base de données. Il utilise
-`MPTT logic <http://www.sitepoint.com/hierarchical-data-database-2/>`_ pour
+hiérarchiques en arbre dans une table de base de données. Il utilise la
+`logique MPTT <http://www.sitepoint.com/hierarchical-data-database-2/>`_ pour
 gérer les données. Les structures en arbre MPTT sont optimisées pour lire des
-données ce qui les rend souvent pratique pour lire des applications lourdes
+données, ce qui les rend souvent pratiques pour lire des applications lourdes
 comme les blogs.
 
 Si vous ouvrez le fichier **src/Model/Table/CategoriesTable.php**, vous verrez
@@ -211,24 +211,24 @@ qui contiennent les colonnes ``lft`` et ``rght``::
 
     $this->addBehavior('Tree');
 
-Avec le TreeBehavior attaché, vous serez capable d'accéder à quelques
+Avec le TreeBehavior attaché, vous serez capable d'accéder à certaines
 fonctionnalités comme la réorganisation de l'ordre des categories. Nous verrons
 cela dans un moment.
 
-Mais pour l'instant, vous devez retirer les lignes suivantes dans vos fichiers
-de template add et edit::
+Mais pour l'instant, vous devez retirer les lignes suivantes dans vos templates
+**add** et **edit** des catégories::
 
     echo $this->Form->control('lft');
     echo $this->Form->control('rght');
 
 De plus, vous devez désactiver ou retirer les requirePresence du validateur
-pour ``lft`` et ``rght`` dans votre model CategoriesTable::
+pour les colonnes ``lft`` et ``rght`` dans votre model CategoriesTable::
 
-    public function validationDefault(Validator $validator)
+    public function validationDefault(Validator $validator): Validator
     {
         $validator
             ->add('id', 'valid', ['rule' => 'numeric'])
-            ->allowEmpty('id', 'create');
+            ->allowEmptyString('id', 'create');
 
         $validator
             ->add('lft', 'valid', ['rule' => 'numeric'])
@@ -241,20 +241,20 @@ pour ``lft`` et ``rght`` dans votre model CategoriesTable::
             ->notEmpty('rght');
     }
 
-Ces champs sont automatiquement gérés par le TreeBehavior quand
+Ces champs sont gérés automatiquement par le TreeBehavior quand
 une catégorie est sauvegardée.
 
 En utilisant votre navigateur, ajoutez quelques nouvelles catégories en
-utilisant l'action du controller ``/yoursite/categories/add``.
+utilisant l'action ``/yoursite/categories/add``.
 
 Réorganiser l'Ordre des Catégories avec le TreeBehavior
 =======================================================
 
-Dans votre fichier de template index des catégories, vous pouvez lister les
+Dans votre fichier de template **index** des catégories, vous pouvez lister les
 catégories et les réordonner.
 
-Modifiez la méthode index dans votre **CategoriesController.php** et ajoutez les
-méthodes ``moveUp()`` et ``moveDown()`` pour pouvoir réorganiser l'ordre des
+Modifions la méthode index dans votre **CategoriesController.php** et ajoutons
+les méthodes ``moveUp()`` et ``moveDown()`` pour pouvoir réorganiser l'ordre des
 catégories dans l'arbre::
 
     class CategoriesController extends AppController
@@ -262,7 +262,8 @@ catégories dans l'arbre::
         public function index()
         {
             $categories = $this->Categories->find()
-                ->order(['lft' => 'ASC']);
+                ->order(['lft' => 'ASC'])
+                ->all();
             $this->set(compact('categories'));
             $this->viewBuilder()->setOption('serialize', ['categories']);
         }
@@ -272,9 +273,9 @@ catégories dans l'arbre::
             $this->request->allowMethod(['post', 'put']);
             $category = $this->Categories->get($id);
             if ($this->Categories->moveUp($category)) {
-                $this->Flash->success('The category has been moved Up.');
+                $this->Flash->success('La catégorie a été remontée.');
             } else {
-                $this->Flash->error('The category could not be moved up. Please, try again.');
+                $this->Flash->error("La catégorie n'a pas pu être remontée. Veuillez réessayer.");
             }
             return $this->redirect($this->referer(['action' => 'index']));
         }
@@ -284,9 +285,9 @@ catégories dans l'arbre::
             $this->request->allowMethod(['post', 'put']);
             $category = $this->Categories->get($id);
             if ($this->Categories->moveDown($category)) {
-                $this->Flash->success('The category has been moved down.');
+                $this->Flash->success('La catégorie a été descendue.');
             } else {
-                $this->Flash->error('The category could not be moved down. Please, try again.');
+                $this->Flash->error("La catégorie n'a pas pu être descendue. Veuillez réessayer.");
             }
             return $this->redirect($this->referer(['action' => 'index']));
         }
@@ -306,12 +307,12 @@ ceci::
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Parent Id</th>
-                <th>Lft</th>
-                <th>Rght</th>
-                <th>Name</th>
+                <th>Id parent</th>
+                <th>Gauche</th>
+                <th>Droite</th>
+                <th>Nom</th>
                 <th>Description</th>
-                <th>Created</th>
+                <th>Créée le</th>
                 <th class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -343,13 +344,12 @@ Modifier ArticlesController
 
 Dans notre ``ArticlesController``, nous allons récupérer la liste de toutes les
 catégories. Ceci va nous permettre de choisir une catégorie pour un Article
-lorsque l'on va le créer ou le modifier::
+lorsqu'on va le créer ou le modifier::
 
     // src/Controller/ArticlesController.php
 
     namespace App\Controller;
 
-    // Prior to 3.6 use Cake\Network\Exception\NotFoundException
     use Cake\Http\Exception\NotFoundException;
 
     class ArticlesController extends AppController
@@ -363,10 +363,10 @@ lorsque l'on va le créer ou le modifier::
             if ($this->request->is('post')) {
                 $article = $this->Articles->patchEntity($article, $this->request->getData());
                 if ($this->Articles->save($article)) {
-                    $this->Flash->success(__('Your article has been saved.'));
+                    $this->Flash->success(__('Votre article a été enregistré.'));
                     return $this->redirect(['action' => 'index']);
                 }
-                $this->Flash->error(__('Unable to add your article.'));
+                $this->Flash->error(__("Impossible d'ajouter votre article."));
             }
             $this->set('article', $article);
 
@@ -384,20 +384,20 @@ Le fichier **add** des articles devrait ressembler à ceci:
 
 .. code-block:: php
 
-    <!-- File: templates/Articles/add.php -->
+    <!-- Fichier: templates/Articles/add.php -->
 
-    <h1>Add Article</h1>
+    <h1>Ajouter un Article</h1>
     <?php
     echo $this->Form->create($article);
-    // Ajout des input (via la méthode "control") liés aux catégories
+    // Ajout des input liés aux catégories (via la méthode "control")
     echo $this->Form->control('category_id');
     echo $this->Form->control('title');
     echo $this->Form->control('body', ['rows' => '3']);
-    echo $this->Form->button(__('Save Article'));
+    echo $this->Form->button(__("Enregistrer l'article"));
     echo $this->Form->end();
 
 Quand vous allez à l'adresse ``/yoursite/categories/add``, vous devriez voir une
-liste des catégories à choisir.
+liste de choix des catégories.
 
 .. meta::
     :title lang=fr: Tutoriel d'un Blog, Migrations et Tree

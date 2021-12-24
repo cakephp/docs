@@ -241,19 +241,58 @@ ErrorController クラスの変更
     // src/Error/AppError.php の中で
     namespace App\Error;
 
-    use Cake\Error\BaseErrorHandler;
+    use Cake\Error\ErrorHandler;
+    use Throwable;
 
-    class AppError extends BaseErrorHandler
+    class AppError extends ErrorHandler
     {
-        public function _displayError($error, $debug)
+        protected function _displayError(array $error, bool $debug): void
         {
             echo 'エラーがありました！';
         }
 
-        public function _displayException($exception)
+        protected function _displayException(Throwable $exception): void
         {
             echo '例外がありました！';
         }
+    }
+
+Then we can register our error handler as the PHP error handler::
+
+    // In config/bootstrap.php
+    use App\Error\AppError;
+
+    if (PHP_SAPI !== 'cli') {
+        $errorHandler = new AppError();
+        $errorHandler->register();
+    }
+
+Finally, we can use our error handler in the ``ErrorHandlerMiddleware``::
+
+    // in src/Application.php
+    public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue
+    {
+        $error = new AppError(Configure::read('Error'));
+        $middleware->add(new ErrorHandlerMiddleware($error));
+
+        return $middleware;
+    }
+
+For console error handling, you should extend ``Cake\Error\ConsoleErrorHandler`` instead::
+
+    // In /src/Error/AppConsoleErrorHandler.php
+    namespace App\Error;
+    use Cake\Error\ConsoleErrorHandler;
+
+    class AppConsoleErrorHandler extends ConsoleErrorHandler {
+
+        protected function _displayException(Throwable $exception): void {
+            parent::_displayException($exception);
+            if (isset($exception->queryString)) {
+                $this->_stderr->write('Query String: ' . $exception->queryString);
+            }
+        }
+
     }
 
 ``BaseErrorHandler`` は二つの抽象メソッドを定義しています。
@@ -276,11 +315,48 @@ ErrorController クラスの変更
     {
         // 他のメソッド
 
-        public function handleFatalError($code, $description, $file, $line)
+        public function handleFatalError(int $code, string $description, string $file, int $line): bool
         {
             echo '致命的エラーが発生しました';
         }
     }
+
+
+Custom Error Logging
+====================
+
+Error handlers use instances of ``Cake\Error\ErrorLoggingInterface`` to create
+log messages and log them to the appropriate place. You can replace the error
+logger using the ``Error.errorLogger`` configure value. An example error
+logger::
+
+    namespace App\Error;
+
+    use Cake\Error\ErrorLoggerInterface;
+    use Psr\Http\Message\ServerRequestInterface;
+    use Throwable;
+
+    /**
+     * Log errors and unhandled exceptions to `Cake\Log\Log`
+     */
+    class ErrorLogger implements ErrorLoggerInterface
+    {
+        /**
+         * @inheritDoc
+         */
+        public function logMessage($level, string $message, array $context = []): bool
+        {
+            // Log PHP Errors
+        }
+
+        public function log(Throwable $exception, ?ServerRequestInterface $request = null): bool
+        {
+            // Log exceptions.
+        }
+    }
+
+.. versionadded:: 4.1.0
+    ErrorLoggerInterface was added.
 
 .. index:: application exceptions
 

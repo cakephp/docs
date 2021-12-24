@@ -56,15 +56,11 @@ Inflector の組み込みメソッドの簡単な概要と、複数単語の引�
 +                   +---------------+---------------+
 |                   | big apples    | bigApples     |
 +-------------------+---------------+---------------+
-| ``slug()``        | Big Apple     | big-apple     |
-+                   +---------------+---------------+
-|                   | BigApples     | BigApples     |
-+-------------------+---------------+---------------+
 
 複数形と単数形の作成
 ====================
 
-.. php:staticmethod:: singularize($plural)
+.. php:staticmethod:: singularize($singular)
 .. php:staticmethod:: pluralize($singular)
 
 ``pluralize`` や ``singularize()`` の両方は、多くの英語名詞に作用します。
@@ -145,16 +141,6 @@ underscore メソッドは、 キャメルケース形式の単語のみ変換�
     // applePie
     Inflector::variable('apple_pie');
 
-URL セーフな文字列
-==================
-
-.. php:staticmethod:: slug($word, $replacement = '_')
-
-slug は特殊文字をラテン文字に変換したり、スペースをアンダースコアーに変換します。
-slug は UTF-8 を前提とします。 ::
-
-    // apple-puree
-    Inflector::slug('apple purée');
 
 .. _inflection-configuration:
 

@@ -388,10 +388,10 @@ CakePHPは6つの異なる形状のデータに対して空の値のサポート
 
     class PostsTable extends Table
     {
-        public function validationDefault(Validator $validator)
+        public function validationDefault(Validator $validator): Validator
         {
             // バリデーターにプロバイダーを追加
-            $validator->setProvider('fr', 'Localized\Validation\FrValidation');
+            $validator->setProvider('fr', 'Cake\Localized\Validation\FrValidation');
             // フィールドのバリデーションルールの中にプロバイダーを利用
             $validator->add('phoneField', 'myCustomRuleNameForPhone', [
                 'rule' => 'phone',
@@ -533,8 +533,8 @@ Localized プラグインは、バリデーションのための国の２文字�
     :php:meth:`~Cake\\ORM\\Table::newEntity()`,
     :php:meth:`~Cake\\ORM\\Table::newEntities()`,
     :php:meth:`~Cake\\ORM\\Table::patchEntity()`,
-    :php:meth:`~Cake\\ORM\\Table::patchEntities()` または
-    :php:meth:`~Cake\\ORM\\Table::save()`
+    :php:meth:`~Cake\\ORM\\Table::patchEntities()`
+    as they are designed for that.
 
 エンティティーをバリデーションする
 ==================================

@@ -41,7 +41,7 @@ CakePHP のリクエストオブジェクトは、入ってきたリクエスト
 
 全てのルーティングパラメーターを配列として取得するためには ``getAttribute()`` を使用します。 ::
 
-    $params = $this->request->getAttribute('params');
+    $parameters = $this->request->getAttribute('params');
 
 すべての :ref:`route-elements` は、このインターフェイスを通してアクセスされます。
 
@@ -185,7 +185,7 @@ HTTP環境では、 ``moveTo()`` メソッドはファイルが実際にアッ�
 .. php:method:: getUploadedFile($path)
 
 アップロードされたファイルの特定のパスで返します。
-パスは :php:meth:`Cake\\Http\\\ServerRequest::getData()` メソッドと同じドット構文を使用します。 ::
+パスは :php:meth:`Cake\\Http\\ServerRequest::getData()` メソッドと同じドット構文を使用します。 ::
 
     $attachment = $this->request->getUploadedFile('attachment');
 
@@ -572,8 +572,12 @@ Accept ヘッダーの確認
     // ハッシュとして全てのクッキーを取得
     $cookies = $this->request->getCookieParams();
 
+    // Get a CookieCollection instance
+    $cookies = $this->request->getCookieCollection()
+
 クッキーコレクションの操作方法については、 :php:class:`Cake\\Http\\Cookie\\CookieCollection`
 のドキュメントをご覧ください。
+
 
 アップロードされたファイル
 --------------------------
@@ -638,7 +642,7 @@ URIの操作
 コンテンツの種類に対処する必要がある場合は、以下のように ``type()`` を使って設定することができます。 ::
 
     // vCard タイプを追加
-    $this->response->type(['vcf' => 'text/v-card']);
+    $this->response->setTypeMap('vcf', ['text/v-card']);
 
     // レスポンスのコンテンツタイプを vcard に設定
     $this->response = $this->response->withType('vcf');
@@ -927,7 +931,7 @@ HTTP におけるキャッシュの検証はコンテンツが定期的に変化
 
     public function index()
     {
-        $articles = $this->Articles->find('all');
+        $articles = $this->Articles->find('all')->all();
 
         // 記事内容の単純なチェックサムです
         // 現実世界のアプリケーションでは、もっと効率的な実装を使用する必要があります
@@ -1002,7 +1006,7 @@ Not-Modified レスポンスの送信
 クッキーの設定
 ===============
 
-クッキーは、配列または :php:class:`Cake\Http\Cookie\Cookie` オブジェクトを使って
+クッキーは、配列または :php:class:`Cake\\Http\\Cookie\\Cookie` オブジェクトを使って
 レスポンスに追加することができます。 ::
 
     use Cake\Http\Cookie\Cookie;
@@ -1020,13 +1024,13 @@ Not-Modified レスポンスの送信
             'secure' => false,
             'http' => false,
         ]
-    ]);
+    ));
 
 クッキーオブジェクトの使い方は :ref:`creating-cookies` セクションをご覧ください。
 ``withExpiredCookie()`` を使ってレスポンスに期限切れのクッキーを送ることができます。
 これにより、ブラウザはローカルクッキーを削除します。 ::
 
-    $this->response = $this->response->withExpiredCookie('remember_me');
+    $this->response = $this->response->withExpiredCookie(new Cookie('remember_me'));
 
 .. _cors-headers:
 

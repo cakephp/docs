@@ -120,8 +120,8 @@ sont utilisées:
 - ``'priority'``: Priorité de l'email, exprimée avec un nombre (généralement de
   1 à 5, 1 étant la priorité la plus haute).
 - ``'headers'``: Headers à inclure. Regardez ``Email::setHeaders()``.
-- ``'viewRender'``: Si vous utilisez un contenu rendu, définissez le nom de
-  classe de la vue. Regardez ``Email::viewRenderer()``.
+- ``'viewRenderer'``: Si vous utilisez un contenu rendu, définissez le nom de
+  classe de la vue. Regardez ``ViewBuilder::setClassName()``.
 - ``'template'``: Si vous utilisez un contenu rendu, définissez le nom du
   template. Regardez ``Email::template()``.
 - ``'theme'``: Theme utilisé pour le rendu du template. Voir

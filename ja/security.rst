@@ -8,8 +8,11 @@ CakePHP はあなたのアプリケーションをセキュアにする幾つか
     :maxdepth: 1
 
     core-libraries/security
-    controllers/components/csrf
-    Security コンポーネント <controllers/components/security>
+    Form Protection Middleware <controllers/components/form-protection>
+    CSRF Protection <security/csrf>
+    Content Security Policy <security/content-security-policy>
+    Security Headers <security/security-headers>
+    HTTPS Enforcer <security/https-enforcer>
 
 .. meta::
     :title lang=ja: セキュリティ

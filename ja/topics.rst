@@ -26,13 +26,13 @@ CakePHP のすべての重要な部分の紹介
 * :doc:`/development/rest`
 * :doc:`/controllers/components/authentication`
 * :doc:`/controllers/components/pagination`
-* :doc:`/controllers/components/csrf`
+* :ref:`csrf-middleware`
 * :doc:`/core-libraries/email`
 * :doc:`/views/helpers/form`
 * :doc:`/views/helpers/html`
 * :doc:`/core-libraries/validation`
 * :doc:`/development/testing`
 * :doc:`/deployment`
-* :doc:`/console-and-shells`
+* :doc:`/console-commands`
 * :doc:`/contributing`
 * :doc:`/tutorials-and-examples`

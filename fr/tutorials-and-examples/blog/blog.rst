@@ -29,17 +29,18 @@ Obtenir CakePHP
 
 Le manière la plus simple pour l'installer est d'utiliser Composer.
 Composer est une manière simple d'installer CakePHP à partir de votre
-terminal ou de l'invité de ligne de commande. Tapez simplement les deux lignes
-suivantes dans votre terminal à partir de votre répertoire webroot::
+terminal ou de l'invite de ligne de commande. Pour commencer, vous devrez
+télécharger et installer Composer si vous ne l'avez pas déjà. Si vous avez cURL,
+c'est aussi simple que de lancer la commande suivante::
 
     curl -s https://getcomposer.org/installer | php
 
-Ou vous pouvez télécharger ``composer.phar`` du
+Ou vous pouvez télécharger ``composer.phar`` depuis le
 `site de Composer <https://getcomposer.org/download/>`_.
 
 Ensuite tapez simplement la ligne suivante dans votre terminal depuis votre
 répertoire d'installation pour installer le squelette d'application de CakePHP
-dans le répertoire que vous souhaitez utiliser. Pour l'exemple nous utiliserons
+dans le répertoire où vous souhaitez l'utiliser. Pour l'exemple nous utiliserons
 "blog", mais vous pouvez utiliser le nom que vous souhaitez::
 
     php composer.phar create-project --prefer-dist cakephp/app:4.* blog
@@ -51,14 +52,14 @@ taper::
 
 L'avantage d'utiliser Composer est qu'il va automatiquement réaliser certaines
 tâches de configurations importantes, comme configurer les bonnes permissions
-de fichier et créer votre fichier config/app.php à votre place.
+de fichiers et créer votre fichier config/app.php à votre place.
 
-Il y a d'autres moyens d'installer CakePHP. Si vous ne pouvez ou ne voulez pas
+Il y a d'autres moyens d'installer CakePHP. Si vous ne pouvez pas ou ne voulez pas
 utiliser ``Composer``, regardez la section :doc:`/installation`.
 
-Peu importe la façon dont vous l'avez téléchargé, placez le code à l'intérieur
-du "DocumentRoot" de votre serveur. Une fois terminé, votre répertoire
-d'installation devrait ressembler à quelque chose comme cela::
+Quelle que soit la façon dont vous avez téléchargé et installé CakePHP, une fois
+la configuration terminée, votre répertoire d'installation devrait ressembler à
+quelque chose comme cela::
 
     /cake_install
         /bin
@@ -86,23 +87,23 @@ structure de fichiers de CakePHP : lisez le chapitre
 Les Permissions des Répertoires tmp et logs
 ===========================================
 
-Les répertoires ``tmp`` and ``logs`` doivent être en écriture pour le serveur
-web. Si vous avez utilisé Composer pour l'installation, ceci a du être fait pour
-vous et confirmé par un message "Permissions set on <folder>". Si vous avez
-plutôt un message d'erreur ou voulez le faire manuellement, la meilleur façon
-de le faire est de trouver sous quel utilisateur votre serveur web tourne en
-faisant (``<?= `whoami`; ?>``) et en changeant le possesseur du répertoire
-**src/tmp** pour cet utilisateur. La commande finale que vous pouvez lancer
-(dans \*nix) pourrait ressembler à ceci::
+Les répertoires ``tmp`` and ``logs`` doivent être accessibles en écriture pour
+le serveur web. Si vous avez utilisé Composer pour l'installation, ceci a du
+être fait pour vous et confirmé par un message
+"Permissions set on <répertoire>". Si vous avez un message d'erreur à la place,
+ou si vous voulez le faire manuellement, la meilleure façon est de trouver sous
+quel utilisateur votre serveur web tourne en faisant (``<?= `whoami`; ?>``) et
+en attribuant la propriété du répertoire **src/tmp** à cet utilisateur. La
+commande finale que vous pouvez lancer (dans \*nix) pourrait ressembler à ceci::
 
     chown -R www-data tmp
     chown -R www-data logs
 
 Si pour une raison ou une autre, CakePHP ne peut écrire dans ce répertoire, vous
-serez informé par un avertissement quand vous n'êtes pas en mode production.
+en serez informé par un avertissement quand vous n'êtes pas en mode production.
 
-Bien que non recommandé, si vous ne pouvez pas configurer les permissions de la
-même façon que pour votre serveur web, vous pouvez simplement définir les
+Bien que non recommandé, si vous ne pouvez pas attribuer la propriété de ces
+répertoires à votre serveur web, vous pouvez simplement définir les
 permissions sur le dossier en lançant une commande comme celle-ci::
 
     chmod -R 777 tmp
@@ -111,16 +112,14 @@ permissions sur le dossier en lançant une commande comme celle-ci::
 Créer la Base de Données du Blog
 ================================
 
-Maintenant, mettons en place la base de données pour notre blog. Si vous
+Maintenant, mettons en place la base de données MySQL pour notre blog. Si vous
 ne l'avez pas déjà fait, créez une base de données vide avec le nom de votre
-choix pour l'utiliser dans ce tutoriel, par ex ``cake_blog``.Pour le moment,
-nous allons juste créer une simple table pour stocker nos posts. Nous allons
-également insérer quelques posts à des fins de tests. Exécutez les requêtes SQL
-suivantes dans votre base de données:
+choix pour l'utiliser dans ce tutoriel, par exemple ``cake_blog``. Pour le
+moment, nous allons juste créer une seule table pour stocker nos articles.
 
 .. code-block:: mysql
 
-    # D'abord, créons la table des posts
+    # D'abord, créons la table des articles
     CREATE TABLE articles (
         id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
         title VARCHAR(50),
@@ -129,15 +128,35 @@ suivantes dans votre base de données:
         modified DATETIME DEFAULT NULL
     );
 
-    # Puis insérons quelques posts pour les tests
-    INSERT INTO articles (title,body,created)
-        VALUES ('The title', 'This is the article body.', NOW());
-    INSERT INTO articles (title,body,created)
-        VALUES ('A title once again', 'And the article body follows.', NOW());
-    INSERT INTO articles (title,body,created)
-        VALUES ('Title strikes back', 'This is really exciting! Not.', NOW());
+Si vous utilisez PostgreSQL, connectez-vous à la base de données cake_blog et
+exécutez plutôt cette commande SQL:
 
-Les choix des noms pour les tables et les colonnes ne sont pas arbitraires.
+.. code-block:: SQL
+
+   -- D'abord, créons la table des articles
+   CREATE TABLE articles (
+       id SERIAL PRIMARY KEY,
+       title VARCHAR(50),
+       body TEXT,
+       created TIMESTAMP DEFAULT NULL,
+       modified TIMESTAMP DEFAULT NULL
+   );
+
+Nous allons aussi y placer quelques articles qui pourront être utilisés pour les
+tests. Exécutez les instructions SQL suivantes dans votre base de données (cela
+marche aussi bien pour MySQL que pour PostgreSQL):
+
+.. code-block:: mysql
+
+    # Puis insérons quelques articles pour les tests
+    INSERT INTO articles (title,body,created)
+        VALUES ('Le titre', 'Ceci est un contenu d\'article.', NOW());
+    INSERT INTO articles (title,body,created)
+        VALUES ('Encore un titre', 'Et un autre contenu d\'article.', NOW());
+    INSERT INTO articles (title,body,created)
+        VALUES ('Le retour du titre', 'C\'est vraiment excitant! Non.', NOW());
+
+Le choix des noms de tables et de colonnes n'est pas arbitraire.
 Si vous respectez les conventions de nommage de CakePHP pour les bases de
 données et les classes (toutes deux expliquées au chapitre
 :doc:`/intro/conventions`), vous tirerez profit d'un
@@ -149,7 +168,7 @@ du temps.
 Consultez le chapitre :doc:`/intro/conventions` pour plus
 d'informations, mais il suffit de comprendre que nommer notre table 'articles'
 permet de la relier automatiquement à notre model Articles, et qu'avoir des
-champs 'modified' et 'created' permet de les avoir gérés automagiquement par
+champs 'modified' et 'created' fait qu'ils seront gérés *automagiquement* par
 CakePHP.
 
 Configurer la base de données
@@ -201,13 +220,14 @@ sont pas obligatoires pour ce tutoriel. Le premier consiste à définir une
 chaîne de caractères personnalisée (ou "grain de sel") afin de sécuriser les
 hashs.
 
-Le "grain de sel" est utilisé pour générer des hashes. Changez sa valeur par
-défaut en modifiant **config/app.php**.
+Le "grain de sel" est utilisé pour générer des hashes. Si vous avez utilisé
+Composer, cela aussi a été pris en charge pendant l'installation. Sinon, changez
+sa valeur par défaut en modifiant **config/app.php**.
 La nouvelle valeur n'a pas beaucoup d'importance du moment qu'elle est
 difficile à deviner::
 
     'Security' => [
-        'salt' => 'something long and containing lots of different values.',
+        'salt' => 'quelque chose de long et qui contienne plein de valeurs différentes.',
     ],
 
 Une note sur mod\_rewrite
@@ -217,7 +237,7 @@ Occasionnellement, les nouveaux utilisateurs peuvent avoir des problèmes de
 mod\_rewrite. Par exemple si la page d'accueil de CakePHP a l'air bizarre
 (pas d'images ou de styles CSS), cela signifie probablement que
 mod\_rewrite ne fonctionne pas sur votre système. Merci de consulter la section
-:ref:`url-rewriting` pour que votre serveur web fonctionne:
+:ref:`url-rewriting` pour résoudre le problème.
 
 Maintenant continuez vers :doc:`/tutorials-and-examples/blog/part-two` pour
 commencer à construire votre première application CakePHP.
