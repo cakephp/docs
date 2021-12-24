@@ -30,7 +30,8 @@ features::
 A new configuration option has been added to disable deprecations on a path by
 path basis. See :ref:`deprecation-warnings` for more information.
 
-* TODO
+* Defining view class mappings with ``RequestHandlerComponent`` is deprecated.
+  Use :ref:`controller-viewclasses` instead.
 
 Behavior Changes
 ================
@@ -54,6 +55,14 @@ Global
 
 New Features
 ============
+
+Controller
+----------
+
+* ``Controller::viewClasses()`` was added. This method can be implemented by
+  controllers that need to perform content-type negotiation. View classes will
+  need to implement the static ``contentType()`` method to be used in
+  content-type negotiation.
 
 Database
 --------
