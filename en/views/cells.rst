@@ -279,8 +279,10 @@ to override default values.
 Using Helpers inside a Cell
 ===========================
 
-Since cells have their own View scope they don't share the helpers defined in
-`src/View/AppView.php`. You need to load those helpers again inside your cell::
+Cells have their own context and their own View instance but Helpers loaded inside your
+`AppView::initialize()` function are still loaded as usual.
+
+Loading a specific Helper just for a specific cell can be done via the following example::
 
     namespace App\View\Cell;
 
@@ -295,7 +297,7 @@ Since cells have their own View scope they don't share the helpers defined in
             $this->viewBuilder()->addHelper('MyCustomHelper');
         }
 
-        public function display($userId)
+        public function display()
         {
             // Your code
         }
