@@ -287,19 +287,11 @@ Loading a specific Helper just for a specific cell can be done via the following
     namespace App\View\Cell;
 
     use Cake\View\Cell;
-    use Cake\Datasource\Paginator;
 
     class FavoritesCell extends Cell
     {
-        protected $_validCellOptions = [];
-
         public function initialize(): void {
             $this->viewBuilder()->addHelper('MyCustomHelper');
-        }
-
-        public function display()
-        {
-            // Your code
         }
     }
 
