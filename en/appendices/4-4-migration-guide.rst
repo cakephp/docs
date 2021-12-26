@@ -59,9 +59,9 @@ New Features
 Controller
 ----------
 
-* ``Controller::viewClasses()`` was added. This method can be implemented by
+* ``Controller::viewClasses()`` was added. This method should be implemented by
   controllers that need to perform content-type negotiation. View classes will
-  need to implement the static ``contentType()`` method to be used in
+  need to implement the static method ``contentType()`` to participate in
   content-type negotiation.
 
 Database

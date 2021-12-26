@@ -302,8 +302,8 @@ define the list of supported view classes for a controller is done with the
         }
     }
 
-You do not need to include the basic ``View`` class in your view class list as
-it is used as a fallback when no other view can be selected based on the
+The basic ``View`` class is automatically used as a fallback
+when no other view can be selected based on the
 requests' ``Accept`` header or routing extension. If your application needs to
 perform different logic for different response formats you can use
 ``$this->request->is()`` to build the required conditional logic.
