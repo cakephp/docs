@@ -394,10 +394,10 @@ for more examples of different types of URLs.
 If you want to use route path strings, you can do that using this method::
 
     echo $this->Html->linkFromPath('Index', 'Articles::index');
-    // results in: <a href="/articles">Index</a>
+    // outputs: <a href="/articles">Index</a>
 
     echo $this->Html->linkFromPath('View', 'MyBackend.Admin/Articles::view', [3]);
-    // results in e.g.: <a href="/admin/my-backend/articles/view/3">View</a>
+    // outputs: <a href="/admin/my-backend/articles/view/3">View</a>
 
 .. versionadded:: 4.1.0
     ``linkFromPath()`` was added.

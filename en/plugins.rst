@@ -12,7 +12,7 @@ A CakePHP plugin is separate from the host application itself and generally
 provides some well-defined functionality that can be packaged up neatly, and
 reused with little effort in other applications. The application and the plugin
 operate in their own respective spaces, but share the application's
-configuration data (e.g. database connections, email transports)
+configuration data (for example, database connections, email transports)
 
 Plugin should define their own top-level namespace. For example:
 ``DebugKit``. By convention, plugins use their package name as their namespace.

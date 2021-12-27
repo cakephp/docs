@@ -368,7 +368,7 @@ an event::
 :php:class:`Cake\\Event\\Event` accepts 3 arguments in its constructor. The
 first one is the event name, you should try to keep this name as unique as
 possible, while making it readable. We suggest a convention as follows:
-``Layer.eventName`` for general events happening at a layer level (e.g.
+``Layer.eventName`` for general events happening at a layer level (for example,
 ``Controller.startup``, ``View.beforeRender``) and ``Layer.Class.eventName`` for
 events happening in specific classes on a layer, for example
 ``Model.User.afterRegister`` or ``Controller.Courses.invalidAccess``.
@@ -394,7 +394,7 @@ Stopping Events
 
 Much like DOM events, you may want to stop an event to prevent additional
 listeners from being notified. You can see this in action during model callbacks
-(e.g. beforeSave) in which it is possible to stop the saving operation if
+(for example, beforeSave) in which it is possible to stop the saving operation if
 the code detects it cannot proceed any further.
 
 In order to stop events you can either return ``false`` in your callbacks or

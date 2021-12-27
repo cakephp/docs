@@ -78,9 +78,9 @@ Database Conventions
 Table names corresponding to CakePHP models are plural and underscored. For
 example ``users``, ``menu_links``, and ``user_favorite_pages``
 respectively. Table name whose name contains multiple words should only
-pluralize the last word e.g. ``menu_links``.
+pluralize the last word, for example, ``menu_links``.
 
-Column names with two or more words are underscored e.g. ``first_name``.
+Column names with two or more words are underscored, for example, ``first_name``.
 
 Foreign keys in hasMany, belongsTo/hasOne relationships are recognized by
 default as the (singular) name of the related table followed by ``_id``. So if

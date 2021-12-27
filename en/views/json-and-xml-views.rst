@@ -141,7 +141,7 @@ view variables with a ``<response>`` node. You can set a custom name for
 this node using the ``rootNode`` option.
 
 The XmlView class supports the ``xmlOptions`` option that allows you to
-customize the options used to generate XML, e.g. ``tags`` vs ``attributes``.
+customize the options, such as ``tags`` or ``attributes``, used to generate XML.
 
 An example of using ``XmlView`` would be to generate a `sitemap.xml
 <https://www.sitemaps.org/protocol.html>`_. This document type requires that you

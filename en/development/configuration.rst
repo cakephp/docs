@@ -113,7 +113,7 @@ App.baseUrl
 App.base
     The base directory the app resides in. If ``false`` this
     will be auto detected. If not ``false``, ensure your string starts
-    with a `/` and does NOT end with a `/`. E.g., `/basedir` is a valid
+    with a `/` and does NOT end with a `/`. For example, `/basedir` is a valid
     App.base. Otherwise, the AuthComponent will not work properly.
 App.encoding
     Define what encoding your application uses.  This encoding
@@ -131,7 +131,7 @@ App.fullBaseUrl
     manipulating the ``Host`` header.
     In a CLI context (from shells) the `fullBaseUrl` cannot be read from $_SERVER,
     as there is no webserver involved. You do need to specify it yourself if
-    you do need to generate URLs from a shell (e.g. when sending emails).
+    you do need to generate URLs from a shell (for example, when sending emails).
 App.imageBaseUrl
     Web path to the public images directory under webroot. If you are using
     a :term:`CDN` you should set this value to the CDN's location.

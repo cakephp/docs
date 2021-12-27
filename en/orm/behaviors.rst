@@ -295,7 +295,7 @@ To modify the configuration of an already loaded behavior you can combine the
 ``BehaviorRegistry::get`` command with ``config`` command provided by the
 ``InstanceConfigTrait`` trait.
 
-For example if a parent (e.g. an ``AppTable``) class loaded the ``Timestamp``
+For example, if a parent class, such as ``AppTable``, loaded the ``Timestamp``
 behavior you could do the following to add, modify or remove the configurations
 for the behavior. In this case, we will add an event we want Timestamp to
 respond to::
@@ -310,7 +310,7 @@ respond to::
         {
             parent::initialize($options);
 
-            // e.g. if our parent calls $this->addBehavior('Timestamp');
+            // For example, if our parent calls $this->addBehavior('Timestamp')
             // and we want to add an additional event
             if ($this->behaviors()->has('Timestamp')) {
                 $this->behaviors()->get('Timestamp')->setConfig([

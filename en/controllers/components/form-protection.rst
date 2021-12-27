@@ -21,8 +21,8 @@ in your ``initialize()`` method.
     created and managed by the FormHelper (especially those created in
     :php:meth:`~Cake\\View\\Helper\\FormHelper::create()` and
     :php:meth:`~Cake\\View\\Helper\\FormHelper::end()`).  Dynamically altering
-    the fields that are submitted in a POST request (e.g.  disabling, deleting
-    or creating new fields via JavaScript) is likely to cause the form token
+    the fields that are submitted in a POST request, such as disabling, deleting
+    or creating new fields via JavaScript, is likely to cause the form token
     validation to fail.
 
 Form tampering prevention
