@@ -45,7 +45,7 @@ que se utiliza para representar respuestas ``JSON`` es ``application/json``.
 Uso de vistas de datos con la clave Serialize
 =============================================
 
-La opción ``serialize'' indica qué variable(s) de vista se deben serializar
+La opción ``serialize`` indica qué variable(s) de vista se deben serializar
 cuando se utiliza una vista de datos. Esto le permite omitir la definición de
 archivos de plantilla para las acciones del controlador si no necesita realizar
 ningún formateo personalizado antes de que los datos se conviertan en json/xml.
@@ -144,7 +144,7 @@ las variables de vista serializadas con un nodo ``<response>``. Puede
 establecer un nombre personalizado para este nodo mediante la opción
 ``rootNode``.
 
-La clase XmlView admite la opción``xmlOptions`` que le permite personalizar
+La clase XmlView admite la opción ``xmlOptions`` que le permite personalizar
 las opciones utilizadas para generar XML, por ejemplo, ``tags`` frente
 ``attributes``.
 
@@ -213,7 +213,7 @@ Ejemplo de uso
 Si bien el :doc:`RequestHandlerComponent 
 </controllers/components/request-handling>` puede establecer automáticamente la 
 vista en función del tipo de contenido o la extensión de la solicitud, también puede
-controlar las asignaciones de vistas en el controlador:::
+controlar las asignaciones de vistas en el controlador::
 
     // src/Controller/VideosController.php
     namespace App\Controller;
