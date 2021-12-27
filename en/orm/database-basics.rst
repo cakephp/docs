@@ -192,7 +192,7 @@ database
     The name of the database for this connection to use. Avoid using ``.`` in
     your database name. Because of how it complicates identifier quoting CakePHP
     does not support ``.`` in database names. The path to your SQLite database
-    should be an absolute path (e.g. ``ROOT . DS . 'my_app.db'``) to avoid
+    should be an absolute path (for example, ``ROOT . DS . 'my_app.db'``) to avoid
     incorrect paths caused by relative paths.
 port (*optional*)
     The TCP port or Unix socket used to connect to the server.
@@ -249,7 +249,7 @@ pastry\_stores, and savory\_cakes.
 .. note::
 
     If your MySQL server is configured with ``skip-character-set-client-handshake``
-    then you MUST use the ``flags`` config to set your charset encoding. For e.g.::
+    then you MUST use the ``flags`` config to set your charset encoding. For example::
 
         'flags' => [\PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8']
 
@@ -490,7 +490,7 @@ the type mapping. During our application bootstrap we should do the following::
 
     TypeFactory::map('json', 'App\Database\Type\JsonType');
 
-We then have two ways to use our datatype in our models. 
+We then have two ways to use our datatype in our models.
 
 #. The first path is to overwrite the reflected schema data to use our new type.
 #. The second is to implement ``Cake\Database\Type\ColumnSchemaAwareInterface``

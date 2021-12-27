@@ -107,7 +107,7 @@ access that at www.example.com/articles/foobar.
     :doc:`/development/routing` covered later on.
 
 The single instruction in the action uses ``set()`` to pass resultset
-from the controller to the view (which we'll create next). The ``find()`` method 
+from the controller to the view (which we'll create next). The ``find()`` method
 of the ``ArticlesTable`` object returns an instance of ``Cake\\ORM\\Query`` and
 calling its ``all()`` method returns as instance of ``Cake\\Collection\\CollectionInterface``
 which is set as a view variable called 'articles'.
@@ -631,7 +631,7 @@ For more information on advanced routing techniques, see
 :ref:`routes-configuration`.
 
 By default, CakePHP responds to a request for the root of your site
-(e.g., http://www.example.com) using its ``PagesController``, rendering
+(for example, http://www.example.com) using its ``PagesController``, rendering
 a view called "home". Instead, we'll replace this with our
 ArticlesController by creating a routing rule.
 

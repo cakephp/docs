@@ -91,8 +91,8 @@ Translator tips
   (if you correct something, but don't integrate an 'upstream' change
   your submission won't be accepted).
 - If you need to write an English term, wrap it in ``<em>`` tags.
-  E.g. "asdf asdf *Controller* asdf" or "asdf asdf Kontroller
-  (*Controller*) asfd" as appropriate.
+  For example, "asdf asdf *Controller* asdf" or "asdf asdf Kontroller
+  (*Controller*) asfd".
 - Do not submit partial translations.
 - Do not edit a section with a pending change.
 - Do not use

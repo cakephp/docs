@@ -85,7 +85,7 @@ ORM
 
 - ``ModelAwareTrait::loadModel()`` is deprecated. Use the new ``LocatorAwareTrait::fetchTable()`` instead.
   For example, in controllers you can do ``$this->fetchTable()`` to get the default table instance or use
-  ``$this->fetchTable('Foos')`` for a non-default table.  You can set the ``LocatorAwareTrait::$defaultTable`` 
+  ``$this->fetchTable('Foos')`` for a non-default table.  You can set the ``LocatorAwareTrait::$defaultTable``
   property to specify the default table alias for ``fetchTable()``.
 - Query proxying all ``ResultSetInterface`` methods (including ```CollectionInterface```), which forces
   fetching results and calls the proxied method on the results, is now deprecated. An example of the
@@ -117,7 +117,7 @@ TestSuite
 View
 ----
 
-- FormHelper methods' non-associative options (e.g. ``['disabled']``) are now deprecated.
+- FormHelper methods' non-associative options (for example, ``['disabled']``) are now deprecated.
 - Second argument ``$merge`` of ``ViewBuilder::setHelpers()`` has been deprecated in favor of dedicated
   ``ViewBuilder::addHelpers()`` method to cleanly separate merge from overwrite operation.
 
@@ -173,7 +173,7 @@ ORM
   that modify multiple translations at once, you may need to update how you
   render validation errors.
 - The types specified in function expressions now take precedence over default types set for
-  columns when selecting columns. For e.g. using ``$query->select(['id' => $query->func()->min('id')])``
+  columns when selecting columns. For example, using ``$query->select(['id' => $query->func()->min('id')])``
   the value for `id` in fetched entity will be `float` instead of `integer`.
 
 Routing

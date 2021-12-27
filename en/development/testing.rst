@@ -1468,7 +1468,7 @@ make testing responses much simpler. Some examples are::
     // Check for a 5xx response code
     $this->assertResponseFailure();
 
-    // Check for a specific response code, e.g. 200
+    // Check for a specific response code, for example, 200
     $this->assertResponseCode(200);
 
     // Check the Location header
