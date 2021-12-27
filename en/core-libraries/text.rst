@@ -75,7 +75,7 @@ options are:
   ``Text::$_defaultTransliteratorId`` to be used.
   If ``false`` no transliteration will be done, only non words will be removed.
 * ``preserve`` Specific non-word character to preserve. Defaults to ``null``.
-  For e.g. this option can be set to '.' to generate clean file names::
+  For example, this option can be set to '.' to generate clean file names::
 
     // apple-puree
     Text::slug('apple purée');

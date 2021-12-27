@@ -21,7 +21,7 @@ Major Releases
 
 Major releases introduce new features and can remove functionality deprecated in
 an earlier release. These releases live in ``next`` branches that match their
-version number. e.g. ``5.next``. Once released they are promoted into ``master``
+version number such as ``5.next``. Once released they are promoted into ``master``
 and then ``5.next`` branch is used for future feature releases.
 
 Feature Releases
@@ -37,9 +37,8 @@ Patch Releases
 
 Patch releases fix bugs in existing code/documentation and should always be
 compatible with earlier patch releases from the same feature release. These
-features are created from the 'stable' branches. These branches are either named
-after the release series e.g. ``3.x`` or from ``master`` for the latest stable
-release.
+releases are created from the stable branches. Stable branches are often named
+after the release series such as ``3.x``.
 
 Release Cadence
 ===============

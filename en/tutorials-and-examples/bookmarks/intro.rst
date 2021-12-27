@@ -108,7 +108,7 @@ Creating the Database
 
 Next, let's set up the database for our bookmarking application. If you
 haven't already done so, create an empty database for use in this
-tutorial, with a name of your choice, e.g. ``cake_bookmarks``. You can execute
+tutorial, with the name of your choice such as ``cake_bookmarks``. You can execute
 the following SQL to create the necessary tables:
 
 .. code-block:: mysql

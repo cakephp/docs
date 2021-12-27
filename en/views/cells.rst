@@ -146,7 +146,7 @@ easiest way to render a cell is to echo it::
     <?= $cell ?>
 
 This will render the template matching the lowercased and underscored version of
-our action name, e.g. **display.php**.
+our action name like **display.php**.
 
 Because cells use ``View`` to render templates, you can load additional cells
 within a cell template if required.
