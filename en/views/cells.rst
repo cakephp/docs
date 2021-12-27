@@ -280,7 +280,7 @@ Using Helpers inside a Cell
 ===========================
 
 Cells have their own context and their own View instance but Helpers loaded inside your
-`AppView::initialize()` function are still loaded as usual.
+``AppView::initialize()`` function are still loaded as usual.
 
 Loading a specific Helper just for a specific cell can be done via the following example::
 
