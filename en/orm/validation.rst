@@ -272,7 +272,7 @@ rules'. CakePHP exposes this concept through 'RulesCheckers' which are applied
 before entities are persisted. Some example domain rules are:
 
 * Ensuring email uniqueness
-* State transitions or workflow steps (e.g., updating an invoice's status).
+* State transitions or workflow steps, for example, updating an invoice's status.
 * Preventing the modification of soft deleted items.
 * Enforcing usage/rate limit caps.
 
@@ -360,7 +360,7 @@ allows you to define unique field sets::
 When setting rules on foreign key fields it is important to remember, that only
 the fields listed are used in the rule. The unique set of rules will be found
 with ``find('all')``. This means that setting ``$user->account->id`` will not
-trigger the above rule. 
+trigger the above rule.
 
 Many database engines allow NULLs to be unique values in UNIQUE indexes.
 To simulate this, set the ``allowMultipleNulls`` options to true::

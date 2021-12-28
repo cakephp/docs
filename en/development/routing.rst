@@ -457,7 +457,7 @@ functions::
     // routes.php
     $routes->scope('/', function (RouteBuilder $routes) {
         $routes->connect(
-            '/blog/{id}-{slug}', // E.g. /blog/3-CakePHP_Rocks
+            '/blog/{id}-{slug}', // For example, /blog/3-CakePHP_Rocks
             ['controller' => 'Blogs', 'action' => 'view']
         )
         // Define the route elements in the route template
@@ -501,10 +501,10 @@ We talked about string targets above. The same also works for URL generation usi
 ``Router::pathUrl()``::
 
     echo Router::pathUrl('Articles::index');
-    // results in e.g.: /articles
+    // outputs: /articles
 
     echo Router::pathUrl('MyBackend.Admin/Articles::view', [3]);
-    // results in e.g.: /admin/my-backend/articles/view/3
+    // outputs: /admin/my-backend/articles/view/3
 
 .. tip::
 
@@ -1012,8 +1012,8 @@ this::
     });
 
 The first line sets up a number of default routes for REST
-access where method specifies the desired result format (e.g. xml,
-json, rss). These routes are HTTP Request Method sensitive.
+access where method specifies the desired result format, for example, xml,
+json and rss. These routes are HTTP Request Method sensitive.
 
 =========== ===================== ==============================
 HTTP format URL.format            Controller action invoked
@@ -1035,7 +1035,7 @@ DELETE      /recipes/123.format   RecipesController::delete(123)
 
     The default for pattern for resource IDs only matches integers or UUIDs.
     If your IDs are different you will have to supply a regular expression pattern
-    via the  ``id`` option. E.g. ``$builder->resources('Recipes', ['id' => '.*'])``.
+    via the  ``id`` option, for example, ``$builder->resources('Recipes', ['id' => '.*'])``.
 
 The HTTP method being used is detected from a few different sources.
 The sources in order of preference are:
@@ -1183,7 +1183,7 @@ URL Inflection for Resource Routes
 ----------------------------------
 
 By default, multi-worded controllers' URL fragments are the dashed
-form of the controller's name. E.g., ``BlogPostsController``'s URL fragment
+form of the controller's name. For example, ``BlogPostsController``'s URL fragment
 would be **/blog-posts**.
 
 You can specify an alternative inflection type using the ``inflect`` option::

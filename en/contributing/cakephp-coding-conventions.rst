@@ -421,7 +421,7 @@ You can also combine types using the pipe char::
 
 For more than two types it is usually best to just use ``mixed``.
 
-When returning the object itself, e.g. for chaining, one should use ``$this``
+When returning the object itself (for exmaple, for chaining), one should use ``$this``
 instead::
 
     /**

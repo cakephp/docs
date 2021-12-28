@@ -1,5 +1,5 @@
-コンソールコマンド
-##################
+コマンドオブジェクト
+#########################
 
 .. php:namespace:: Cake\Console
 .. php:class:: Command
@@ -9,12 +9,13 @@ CakePHP には、開発のスピードアップと日常的なタスクの自動
 作成することができます。
 
 コマンドの作成
-==============
+==================
 
 最初のコマンドを作ってみましょう。この例では、単純な Hello world コマンドを作成します。
 アプリケーションの **src/Command** ディレクトリの中で、 **HelloCommand.php** を作成してください。
 その中に次のコードを書いてください。 ::
 
+    <?php
     namespace App\Command;
 
     use Cake\Command\Command;
@@ -29,9 +30,10 @@ CakePHP には、開発のスピードアップと日常的なタスクの自動
         }
     }
 
-Command クラスは、大部分の作業を行う ``execute()`` メソッドを実装する必要があります。
+上記のように、Command クラスでは、さまざまな処理まとめて
+行うための ``execute()`` メソッドを実装する必要があります。
 コマンドが呼び出されたときに、このメソッドが呼び出されます。
-最初のコマンドアプリケーションディレクトリーを呼び出して、次のコマンドを実行します。
+それでは、このコマンド実行してみましょう。
 
 .. code-block:: console
 
@@ -41,9 +43,11 @@ Command クラスは、大部分の作業を行う ``execute()`` メソッドを
 
     Hello world.
 
-今までの ``execute()`` メソッドはあまり面白くないので、
-コマンドラインから何らかの入力を読みましょう。 ::
+無事に表示されましたか？
+次に、パラメータを与えられるようにしてみます。
+``buildOptionParser()`` を使用します。 ::
 
+    <?php
     namespace App\Command;
 
     use Cake\Command\Command;
@@ -69,7 +73,7 @@ Command クラスは、大部分の作業を行う ``execute()`` メソッドを
     }
 
 
-このファイルを保存した後、次のコマンドを実行できるはずです。
+このファイルを保存した後、次のようにコマンドを実行できます。
 
 .. code-block:: console
 
@@ -78,10 +82,26 @@ Command クラスは、大部分の作業を行う ``execute()`` メソッドを
     # 出力結果
     Hello jillian
 
-引数やオプションの定義
-======================
+デフォルトのコマンド名の変更
+=================================
 
-最後の例で見たように、 ``buildOptionParser()`` フックメソッドを使って引数を定義することができます。
+コマンド名は原則的にCakePHPの規約に則ったものになります。
+このコマンド名を上書きする場合は、
+コマンドの ``defaultName()`` メソッドを用います。::
+
+    public static function defaultName(): string
+    {
+        return 'oh_hi';
+    }
+
+上記のように書くことで、 ``HelloCommand`` コマンドは
+``cake hello`` ではなく ``cake oh_hi`` として
+実行できるようになります。
+
+引数やオプションの定義
+==============================
+
+すでに說明したように、 ``buildOptionParser()`` フックメソッドを使って引数を定義することができます。
 また、オプションも定義できます。 たとえば、 ``HelloCommand`` に ``yell`` オプションを
 追加することができます。 ::
 
@@ -109,21 +129,25 @@ Command クラスは、大部分の作業を行う ``execute()`` メソッドを
         $io->out("Hello {$name}.");
     }
 
-詳しくは、 :doc:`/console-and-shells/option-parsers` をご覧ください。
+詳しくは、 :doc:`/console-commands/option-parsers` をご覧ください。
 
-出力の作成
-==========
+ファイルに出力
+====================
 
 コマンドは、実行されると ``ConsoleIo`` インスタンスが提供されます。
-このオブジェクトは ``stdout`` 、 ``stderr`` と対話してファイルを作成することを可能にします。
-詳しくは、 :doc:`/console-and-shells/input-output` セクションをご覧ください。
+このオブジェクトは ``stdout`` 、 ``stderr`` とのハンドシェイクによりファイルを生成することができます。
+詳しくは、 :doc:`/console-commands/input-output` セクションをご覧ください。
 
 コマンド内でのモデルの使用
 ==========================
 
-しばしば、コンソールコマンドでアプリケーションのビジネスロジックにアクセスする必要があります。
-``loadModel()`` を使ってコントローラーと同じように、コマンドでモデルを読み込むことができます。
-ロードされたモデルは、コマンドに追加されたプロパティとして設定されます。 ::
+コンソールコマンドでアプリケーションのビジネスロジックにアクセスしたいケースが、しばしばあると思います。
+コントローラと同じように、コマンドでは ``LocatorAwareTrait`` を
+通じてモデルをロードできます。
+そのために、 ``$this->fetchTable()`` を使用します。::
+
+    <?php
+    declare(strict_types=1);
 
     namespace App\Command;
 
@@ -134,11 +158,8 @@ Command クラスは、大部分の作業を行う ``execute()`` メソッドを
 
     class UserCommand extends Command
     {
-        public function initialize(): void
-        {
-            parent::initialize();
-            $this->loadModel('Users');
-        }
+        // デフォルトのテーブルを定義します。これにより、引数なしで  `fetchTable()` を使用できます。
+        protected $defaultTable = 'Users';
 
         protected function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
         {
@@ -150,12 +171,14 @@ Command クラスは、大部分の作業を行う ``execute()`` メソッドを
             return $parser;
         }
 
-        public function execute(Arguments $args, ConsoleIo $io)
+        public function execute(Arguments $args, ConsoleIo $io): ?int
         {
             $name = $args->getArgument('name');
-            $user = $this->Users->findByUsername($name)->first();
+            $user = $this->fetchTable()->findByUsername($name)->first();
 
             $io->out(print_r($user, true));
+
+            return null;
         }
     }
 
@@ -177,30 +200,51 @@ Command クラスは、大部分の作業を行う ``execute()`` メソッドを
         }
     }
 
-任意の終了コードを ``abort()`` に渡すことができます。
+``$io->abort()`` の引数を使用して、任意のメッセージと終了コードを渡すこともできます::
+
+    public function execute(Arguments $args, ConsoleIo $io)
+    {
+        $name = $args->getArgument('name');
+        if (strlen($name) < 5) {
+            // 実行を停止しstderrに出力し、終了コードを99に設定します
+            $io->abort('名前は4文字以上にする必要があります。', 99);
+        }
+    }
 
 .. tip::
 
     終了コードの 64 から 78 は避けてください。それらは ``sysexits.h`` で記述された
-    特定の意味を持っています。終了コードの 127 以上を避けてください。
-    それらは、 SIGKILL や SIGSEGV のようなシグナルによるプロセスの終了を示すために使用されます。
+    特定の意味を持っています。また、127 以上も避けてください。
+    それらは、 SIGKILL や SIGSEGV のようなシグナルによるプロセスの終了を示すために使用されるからです。
 
-    従来の終了コードの詳細については、ほとんどの Unixシステム の sysexit マニュアルページ
+    OS既存の終了コードの詳細については、Unixシステム の sysexit マニュアルページ
     (``man sysexits``)、または Windows の ``System Error Codes`` ヘルプページを
     参照してください。
+
+他のコマンドの呼び出し
+===========================
+
+コマンド内から他のコマンドを呼び出す必要がある場合があります。
+そのために ``executeCommand()`` を用いることができます。::
+
+    // コマンドのオプションと引数は配列で渡します。
+    $this->executeCommand(OtherCommand::class, ['--verbose', 'deploy']);
+
+    // コンストラクターに引数がある場合はインスタンスを生成して渡します。
+    $command = new OtherCommand($otherArgs);
+    $this->executeCommand($command, ['--verbose', 'deploy']);
 
 .. _console-integration-testing:
 
 コマンドのテスト
 ================
 
-コンソールアプリケーションをより簡単にテストするため、CakePHP は、
-コンソールアプリケーションをテストし、結果に対してアサートするための
-``ConsoleIntegrationTestTrait`` トレイトが付属しています。
-
-コンソールアプリケーションのテストを始めるために、 ``Cake\TestSuite\ConsoleIntegrationTestTrait``
-を使用したテストケースを作成してください。このトレイトは、あなたのコマンドを実行するために使用する
-``exec()`` メソッドを含みます。このメソッドに、CLI で使用するのと同じ文字列を渡すことができます。
+コンソールアプリケーションをより簡単にテストするため、CakePHP には、
+コンソールアプリケーションをテストし、結果をアサートするための
+``ConsoleIntegrationTestTrait`` トレイトが備わっています。
+このトレイトは、コマンドを実行するために使用する
+``exec()`` メソッドが定義されており、このメソッドに、
+CLI で使用するのと同じ文字列を渡すことができます。
 
 **src/Command/UpdateTableCommand.php** に置かれた、とてもシンプルなシェルで始めましょう。 ::
 
@@ -221,10 +265,9 @@ Command クラスは、大部分の作業を行う ``execute()`` メソッドを
         }
     }
 
-このシェルの統合テストを書くために、 **tests/TestCase/Command/UpdateTableCommandTest.php**
+このシェルの統合テストを書くために、 **tests/TestCase/Command/UpdateTableTest.php**
 に ``Cake\TestSuite\ConsoleIntegrationTestTrait`` を使用したテストケースを作成します。
-このシェルは現時点ですることはあまりありませんが、シェルの説明が ``stdout``
-に表示されていることをテストしましょう。 ::
+このシェルの説明が ``stdout`` に出力されることをテストしましょう。 ::
 
     namespace App\Test\TestCase\Command;
 
@@ -248,9 +291,9 @@ Command クラスは、大部分の作業を行う ``execute()`` メソッドを
         }
     }
 
-テストが合格します！これは非常に簡単な例ですが、コンソールアプリケーションの
-統合テストケースを作成することは非常に簡単です。このシェルにいくつかの
-コマンドにもっと多くのロジックを追加してみましょう。 ::
+テストが成立しました。これは簡単な例ですが、コンソールアプリケーションの
+統合テストケースを作成することは基本的に簡単です。
+このコマンドにさらに多くのロジックを追加してみましょう。 ::
 
     namespace App\Command;
 
@@ -277,8 +320,7 @@ Command クラスは、大部分の作業を行う ``execute()`` メソッドを
         public function execute(Arguments $args, ConsoleIo $io)
         {
             $table = $args->getArgument('table');
-            $this->loadModel($table);
-            $this->{$table}->query()
+            $this->fetchTable($table)->query()
                 ->update()
                 ->set([
                     'modified' => new FrozenTime()
@@ -287,14 +329,14 @@ Command クラスは、大部分の作業を行う ``execute()`` メソッドを
         }
     }
 
-これはオプションと関連するロジックを必要とするより完全なシェルです。
-テストケースを次のコードスニペットに変更します。 ::
+これはオプションと関連するロジックを必要とする、
+より完成度が高いシェルです。
+テストケースを次のコードスニペットに変更してみましょう。 ::
 
     namespace Cake\Test\TestCase\Command;
 
     use Cake\Command\Command;
     use Cake\I18n\FrozenTime;
-    use Cake\ORM\TableRegistry;
     use Cake\TestSuite\ConsoleIntegrationTestTrait;
     use Cake\TestSuite\TestCase;
 
@@ -302,7 +344,7 @@ Command クラスは、大部分の作業を行う ``execute()`` メソッドを
     {
         use ConsoleIntegrationTestTrait;
 
-        public $fixtures = [
+        protected $fixtures = [
             // assumes you have a UsersFixture
             'app.Users'
         ];
@@ -315,7 +357,7 @@ Command クラスは、大部分の作業を行う ``execute()`` メソッドを
 
         public function testUpdateModified()
         {
-            $now = new FrozenTime('2017-01-01 00:00:00');
+            $now = new FrozenTime('2021-12-12 00:00:00');
             FrozenTime::setTestNow($now);
 
             $this->loadFixtures('Users');
@@ -323,32 +365,36 @@ Command クラスは、大部分の作業を行う ``execute()`` メソッドを
             $this->exec('update_table Users');
             $this->assertExitCode(Command::CODE_SUCCESS);
 
-            // Prior to 3.6 use TableRegistry::get('Users')
-            $user = TableRegistry::getTableLocator()->get('Users')->get(1);
+            $user = $this->getTableLocator()->get('Users')->get(1);
             $this->assertSame($user->modified->timestamp, $now->timestamp);
 
             FrozenTime::setTestNow(null);
         }
     }
 
-``testUpdateModified`` メソッドから分かるように、コマンドが
-１番目の引数として渡すテーブルを更新することをテストしています。
-最初に、コマンドが適切なステータスコード ``0`` で終了したことをアサートします。
-次に、私たちのコマンドが動作したことを確認します。つまり、提供したテーブルを更新し、
-``modified`` カラムを現在の時刻に設定します。
+``testUpdateModified()`` メソッドを見ると分かると思いますが、
+コマンドが最初の引数として渡すテーブルを更新することをテストします。
+まず最初に、コマンドが適切なステータスコード ``0`` で終了したことを
+``assertExitCode()`` によってアサートします。
 
-また、 ``exec()`` はあなたが入力したのと同じ文字列を CLI に取り込むので、
-コマンド文字列にオプションと引数を含めることができます。
+次に、このコマンドが意図どおりに動作したことを確認します。
+つまり、 ``modified`` カラムが現在の時刻に更新されたことを
+``assertSame()`` で確認します。
+
+ちなみに、 ``exec()`` はCLIに入力したのと同じ文字列を
+使用するため、コマンド文字列としてオプションと引数を含める
+ことができます。
 
 対話的なシェルのテスト
-----------------------
+--------------------------
 
-コンソールはしばしば対話的です。 ``Cake\TestSuite\ConsoleIntegrationTestTrait``
-トレイトで対話的なシェルをテストするには、期待する入力を ``exec()`` の２番目の
+コンソールは対話的に用いることも多いインターフェイスです。
+``Cake\TestSuite\ConsoleIntegrationTestTrait`` トレイトで
+対話的なシェルをテストするには、期待する入力を ``exec()`` の２番目の
 パラメーターとして渡すだけです。それらは、期待どおりの順序で配列として含める必要があります。
 
-引き続きコマンドの例で、対話的な確認を追加しましょう。
-コマンドクラスを次のように更新します。 ::
+引き続き、対話的な確認フローを追加してみましょう。
+テスト元のコマンドクラスを次のように更新します。 ::
 
     namespace App\Command;
 
@@ -375,12 +421,11 @@ Command クラスは、大部分の作業を行う ``execute()`` メソッドを
         public function execute(Arguments $args, ConsoleIo $io)
         {
             $table = $args->getArgument('table');
-            $this->loadModel($table);
             if ($io->ask('Are you sure?', 'n', ['y', 'n']) === 'n') {
                 $io->error('You need to be sure.');
                 $this->abort();
             }
-            $this->{$table}->query()
+            $this->fetchTable($table)->query()
                 ->update()
                 ->set([
                     'modified' => new FrozenTime()
@@ -389,8 +434,9 @@ Command クラスは、大部分の作業を行う ``execute()`` メソッドを
         }
     }
 
-対話的なサブコマンドがあるので、適切な応答を受け取るかどうかをテストするテストケースと、
-誤った応答を受け取るかどうかをテストするケースを追加できます。 ``testUpdateModified``
+対話的なサブコマンドができました。次に、適切な応答を受け取るか
+どうかをテストするテストケースと、誤った応答を受け取るかどうかを
+テストするケースを追加しましょう。 ``testUpdateModified``
 メソッドを削除し、 **tests/TestCase/Command/UpdateTableCommandTest.php**
 に以下のメソッドを追加してください。 ::
 
@@ -404,8 +450,7 @@ Command クラスは、大部分の作業を行う ``execute()`` メソッドを
         $this->exec('update_table Users', ['y']);
         $this->assertExitCode(Command::CODE_SUCCESS);
 
-        // Prior to 3.6 use TableRegistry::get('Users')
-        $user = TableRegistry::getTableLocator()->get('Users')->get(1);
+        $user = $this->getTableLocator()->get('Users')->get(1);
         $this->assertSame($user->modified->timestamp, $now->timestamp);
 
         FrozenTime::setTestNow(null);
@@ -413,16 +458,14 @@ Command クラスは、大部分の作業を行う ``execute()`` メソッドを
 
     public function testUpdateModifiedUnsure()
     {
-        // Prior to 3.6 use TableRegistry::get('Users')
-        $user = TableRegistry::getTableLocator()->get('Users')->get(1);
+        $user = $this->getTableLocator()->get('Users')->get(1);
         $original = $user->modified->timestamp;
 
         $this->exec('my_console best_framework', ['n']);
         $this->assertExitCode(Command::CODE_ERROR);
         $this->assertErrorContains('You need to be sure.');
 
-        // Prior to 3.6 use TableRegistry::get('Users')
-        $user = TableRegistry::getTableLocator()->get('Users')->get(1);
+        $user = $this->getTableLocator()->get('Users')->get(1);
         $this->assertSame($original, $user->timestamp);
     }
 
@@ -438,12 +481,17 @@ CommandRunner のテスト
 
     $this->useCommandRunner();
 
-
 アサーションメソッド
---------------------
+----------------------
 
 ``Cake\TestSuite\ConsoleIntegrationTestTrait`` トレイトは、コンソールの出力に対して
 容易にアサートできるようにするいくつかのアサーションメソッドを提供します。 ::
+
+    // シェルがsuccessステータスで終了したことをアサート
+    $this->assertExitSuccess();
+
+    // シェルがerrorステータスで終了したことをアサート
+    $this->assertExitError();
 
     // シェルが期待したコードで終了したことをアサート
     $this->assertExitCode($expected);
@@ -459,4 +507,3 @@ CommandRunner のテスト
 
     // 標準エラーが正規表現にマッチするかをアサート
     $this->assertErrorRegExp($expected);
-

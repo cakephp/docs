@@ -56,7 +56,7 @@ sluggable behavior を作成してみます。
 
 テーブルと同様に、ビヘイビアーには、必要に応じてビヘイビアーの初期化コードを入れることができる ``initialize()`` フックもあります。 ::
 
-    public function initialize(array $config)
+    public function initialize(array $config): void
     {
         // 何らかの初期化処理
     }
@@ -70,8 +70,7 @@ sluggable behavior を作成してみます。
 
     class ArticlesTable extends Table
     {
-
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->addBehavior('Sluggable');
         }
@@ -135,7 +134,7 @@ sluggable behavior を作成してみます。
 
     use ArrayObject;
     use Cake\Datasource\EntityInterface;
-    use Cake\Event\Event;
+    use Cake\Event\EventInterface;
     use Cake\ORM\Behavior;
     use Cake\ORM\Entity;
     use Cake\ORM\Query;
@@ -149,14 +148,14 @@ sluggable behavior を作成してみます。
             'replacement' => '-',
         ];
 
-        public function slug(Entity $entity)
+        public function slug(EntityInterface $entity)
         {
-            $config = $this->config();
+            $config = $this->getConfig();
             $value = $entity->get($config['field']);
             $entity->set($config['slug'], Text::slug($value, $config['replacement']));
         }
 
-        public function beforeSave(Event $event, EntityInterface $entity, ArrayObject $options)
+        public function beforeSave(EventInterface $event, EntityInterface $entity, ArrayObject $options)
         {
             $this->slug($entity);
         }
@@ -171,10 +170,11 @@ sluggable behavior を作成してみます。
 
 保存が続行しないようにするには、コールバック内のイベント伝播を停止するだけです。 ::
 
-    public function beforeSave(Event $event, EntityInterface $entity, ArrayObject $options)
+    public function beforeSave(EventInterface $event, EntityInterface $entity, ArrayObject $options)
     {
         if (...) {
             $event->stopPropagation();
+            $event->setResult(false);
             return;
         }
         $this->slug($entity);
@@ -185,7 +185,7 @@ sluggable behavior を作成してみます。
 
 slug 値を持つ記事を保存できるようになったので、slug で記事を取得できるようにファインダーメソッドを実装する必要があります。
 ビヘイビアーファインダーメソッドは、 :ref:`custom-find-methods` と同じ規約を使用します。
-``find( 'slug')`` メソッドは以下のようになります。 ::
+``find('slug')`` メソッドは以下のようになります。 ::
 
     public function findSlug(Query $query, array $options)
     {
@@ -286,13 +286,13 @@ slug 値を持つ記事を保存できるようになったので、slug で記�
 
     class UsersTable extends AppTable
     {
-        public function initialize(array $options)
+        public function initialize(array $options): void
         {
             parent::initialize($options);
 
             // 例：親クラスが $this->addBehavior('Timestamp'); を呼び出していて、さらにイベントを追加したい場合
             if ($this->behaviors()->has('Timestamp')) {
-                $this->behaviors()->get('Timestamp')->config([
+                $this->behaviors()->get('Timestamp')->setConfig([
                     'events' => [
                         'Users.login' => [
                             'last_login' => 'always'
@@ -302,3 +302,4 @@ slug 値を持つ記事を保存できるようになったので、slug で記�
             }
         }
     }
+

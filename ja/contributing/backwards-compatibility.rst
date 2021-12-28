@@ -184,3 +184,18 @@ CakePHP をより良くする手助けをしようという場合、機能の追
     // ...
 
 これで、実行時の非推奨警告を無効にします。
+
+.. _experimental-features:
+
+Experimental Features
+=====================
+
+Experimental features are **not included** in the above backwards compatibility
+promises. Experimental features can have breaking changes made in minor releases
+as long as they remain experimental. Experiemental features can be identified by
+the warning in the book and the usage of ``@experimental`` in the API
+documentation.
+
+Experimental features are intended to help gather feedback on how a feature
+works before it becomes stable. Once the interfaces and behavior has been vetted
+with the community the experimental flags will be removed.

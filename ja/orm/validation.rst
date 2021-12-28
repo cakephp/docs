@@ -169,7 +169,7 @@ CakePHP ではデータの検証には二つの段階があります:
         return $validator;
     }
 
-    public function validationHardened(Validator $validator)
+    public function validationHardened(Validator $validator): Validator
     {
         $validator = $this->validationDefault($validator);
 
@@ -199,7 +199,7 @@ CakePHP ではデータの検証には二つの段階があります:
 
     class UsersTable extends Table
     {
-        public function validationDefault(Validator $validator)
+        public function validationDefault(Validator $validator): Validator
         {
             $validator
                 ->add('role', 'validRole', [
@@ -210,7 +210,7 @@ CakePHP ではデータの検証には二つの段階があります:
             return $validator;
         }
 
-        public function isValidRole($value, array $context)
+        public function isValidRole($value, array $context): bool
         {
             return in_array($value, ['admin', 'editor', 'author'], true);
         }
@@ -220,8 +220,8 @@ CakePHP ではデータの検証には二つの段階があります:
 バリデーションルールにはクロージャも使うことができます。 ::
 
     $validator->add('name', 'myRule', [
-        'rule' => function ($data, $provider) {
-            if ($data > 1) {
+        'rule' => function ($value, array $context) {
+            if ($value > 1) {
                 return true;
             }
             return '適切な値ではありません。';
@@ -644,7 +644,8 @@ CakePHP の ORM は検証に二層のアプローチを使う点がユニーク�
     // src/Model/Table/UsersTable.php の中で
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->isUnique('email'));
+        $rules->add($rules->isUnique(['email']));
+
         return $rules;
     }
 
@@ -659,15 +660,17 @@ CakePHP の ORM は検証に二層のアプローチを使う点がユニーク�
     public function buildRules(RulesChecker $rules)
     {
         $check = function($order) {
-            if($order->shipping_mode !== 'free'){
+            if ($order->shipping_mode !== 'free') {
                 return true;
             }
+
             return $order->price >= 100;
         };
         $rules->add($check, [
             'errorField' => 'shipping_mode',
             'message' => '100ドル以下の注文を送料無料にはできません！'
         ]);
+
         return $rules;
     }
 
@@ -687,19 +690,21 @@ CLI スクリプトを走らせる時に起こり得るでしょう。 ::
     // src/Model/Table/UsersTable.php の中で
     public function validationDefault(Validator $validator)
     {
-        $validator->add('email', 'valid', [
+        $validator->add('email', 'valid_email', [
             'rule' => 'email',
             'message' => '無効なメールアドレスです'
         ]);
-        ...
+
+        // ...
+
         return $validator;
     }
 
-    public function buildRules(RulesChecker $rules)
+    public function buildRules(RulesChecker $rules): RulesChecker
     {
         // アプリケーションルールの追加
         $rules->add(function($entity) {
-            $data = $entity->extract($this->schema()->columns(), true);
+            $data = $entity->extract($this->getSchema()->columns(), true);
             $validator = $this->getValidator('default');
             $errors = $validator->validate($data, $entity->isNew());
             $entity->setErrors($errors);
@@ -707,7 +712,7 @@ CLI スクリプトを走らせる時に起こり得るでしょう。 ::
             return empty($errors);
         });
 
-        ...
+        // ...
 
         return $rules;
     }

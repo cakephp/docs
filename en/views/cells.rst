@@ -146,7 +146,7 @@ easiest way to render a cell is to echo it::
     <?= $cell ?>
 
 This will render the template matching the lowercased and underscored version of
-our action name, e.g. **display.php**.
+our action name like **display.php**.
 
 Because cells use ``View`` to render templates, you can load additional cells
 within a cell template if required.
@@ -275,4 +275,23 @@ This will allow us to define the option when creating the cell::
 
 Cell options are handy when you want data available as properties allowing you
 to override default values.
+
+Using Helpers inside a Cell
+===========================
+
+Cells have their own context and their own View instance but Helpers loaded inside your
+``AppView::initialize()`` function are still loaded as usual.
+
+Loading a specific Helper just for a specific cell can be done via the following example::
+
+    namespace App\View\Cell;
+
+    use Cake\View\Cell;
+
+    class FavoritesCell extends Cell
+    {
+        public function initialize(): void {
+            $this->viewBuilder()->addHelper('MyCustomHelper');
+        }
+    }
 

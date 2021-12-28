@@ -16,10 +16,10 @@ CakePHP の中に含まれるコンポーネントの詳細については、各
 
     /controllers/components/authentication
     /controllers/components/flash
-    /controllers/components/form-protection
     /controllers/components/security
     /controllers/components/pagination
     /controllers/components/request-handling
+    /controllers/components/form-protection
 
 .. _configuring-components:
 
@@ -77,7 +77,7 @@ CakePHP の中に含まれるコンポーネントの詳細については、各
     // src/Controller/PostsController.php
     class PostsController extends AppController
     {
-        public function initialize()
+        public function initialize(): void
         {
             $this->loadComponent('Auth', [
                 'className' => 'MyAuth'
@@ -234,7 +234,7 @@ CakePHP の中に含まれるコンポーネントの詳細については、各
         public $components = ['Existing'];
 
         // あなたのコンポーネントに必要な、その他の追加のセットアップを実行
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->Existing->foo();
         }
@@ -242,7 +242,7 @@ CakePHP の中に含まれるコンポーネントの詳細については、各
         public function bar()
         {
             // ...
-       }
+        }
     }
 
     // src/Controller/Component/ExistingComponent.php
@@ -317,6 +317,26 @@ CakePHP の中に含まれるコンポーネントの詳細については、各
 
 イベントを停止することで、CakePHPに他のコンポーネントのコールバックを実行させたくないこと、
 そしてコントローラがこれ以上アクションを処理してはいけないことを知らせます。
+As of 4.1.0 you can raise a ``RedirectException`` to signal
+a redirect::
+
+    use Cake\Http\Exception\RedirectException;
+    use Cake\Routing\Router;
+
+    public function beforeFilter(EventInterface $event)
+    {
+        throw new RedirectException(Router::url('/'))
+    }
+
+Raising an exception will halt all other event listeners and create a new
+response that doesn't retain or inherit any of the current response's headers.
+When raising a ``RedirectException`` you can include additional headers::
+
+    throw new RedirectException(Router::url('/'), 302, [
+        'Header-Key' => 'value',
+    ]);
+
+.. versionadded:: 4.1.0
 
 .. meta::
     :title lang=ja: コンポーネント

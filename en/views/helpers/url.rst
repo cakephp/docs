@@ -95,10 +95,10 @@ whether or not the base path should be added::
 If you want to use route path strings, you can do that using this method::
 
     echo $this->Url->buildFromPath('Articles::index');
-    // results in: /articles
+    // outputs: /articles
 
     echo $this->Url->buildFromPath('MyBackend.Admin/Articles::view', [3]);
-    // results in e.g.: /admin/my-backend/articles/view/3
+    // outputs: /admin/my-backend/articles/view/3
 
 .. versionadded:: 4.1.0
     ``buildFromPath()`` was added.

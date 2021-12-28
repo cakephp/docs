@@ -174,8 +174,7 @@ Table クラスは、リクエストデータを一つまたは複数のエン�
 
     // コントローラーの中で
 
-    // Prior to 3.6 use TableRegistry::get('Articles')
-    $articles = TableRegistry::getTableLocator()->get('Articles');
+    $articles = $this->getTableLocator()->get('Articles');
 
     // 入れ子になったアソシエーション付きの新しいエンティティー
     $entity = $articles->newEntity($this->request->getData(), [
@@ -248,7 +247,7 @@ BelongsToMany データの変換
         'tags' => [
             ['name' => 'CakePHP'],
             ['name' => 'インターネット'],
-        ]
+        ],
     ];
 
 上記は二つの新しいタグを作成します。もし既存のタグをある記事に紐付けたいのであれば
@@ -259,7 +258,7 @@ ID のリストを使うことができます。リクエストデータはこ�
         'body' => '本文',
         'user_id' => 1,
         'tags' => [
-            '_ids' => [1, 2, 3, 4]
+            '_ids' => [1, 2, 3, 4],
         ]
     ];
 
@@ -274,8 +273,8 @@ ID のリストを使うことができます。リクエストデータはこ�
             ['name' => '新しいタグ'],
             ['name' => '別の新しいタグ'],
             ['id' => 5],
-            ['id' => 21]
-        ]
+            ['id' => 21],
+        ],
     ];
 
 上記のデータがエンティティーに変換されるとき、四つのタグを持つことになります。
@@ -299,7 +298,7 @@ HasMany データの変換
             ['id' => 1, 'comment' => 'Update the first comment'],
             ['id' => 2, 'comment' => 'Update the second comment'],
             ['comment' => 'Create a new comment'],
-        ]
+        ],
     ];
 
 もし hasMany アソシエーションを保存しようとしている場合で、既存のレコードを
@@ -311,7 +310,7 @@ HasMany データの変換
         'user_id' => 1,
         'comments' => [
             '_ids' => [1, 2, 3, 4]
-        ]
+        ],
     ];
 
 hasMany データを変換するときは、 ``onlyIds`` オプションを使って、
@@ -327,7 +326,7 @@ belongsToMany の変換を ``_ids`` キーの使用のみに制限して、他�
     // コントローラーの中で。
 
     // Prior to 3.6 use TableRegistry::get('Articles')
-    $articles = TableRegistry::getTableLocator()->get('Articles');
+    $articles = $this->getTableLocator()->get('Articles');
     $entities = $articles->newEntities($this->request->getData());
 
 この場合には、複数の記事用のリクエストデータはこうなるべきです。 ::
@@ -339,7 +338,7 @@ belongsToMany の変換を ``_ids`` キーの使用のみに制限して、他�
         ],
         [
             'title' => '二番目の投稿',
-            'published' => 1
+            'published' => 1,
         ],
     ];
 
@@ -377,18 +376,17 @@ belongsToMany の変換を ``_ids`` キーの使用のみに制限して、他�
 
     // コントローラーの中で
 
-    // Prior to 3.6 use TableRegistry::get('Articles')
-    $articles = TableRegistry::getTableLocator()->get('Articles');
+    $articles = $this->getTableLocator()->get('Articles');
     $entity = $articles->newEntity($this->request->getData(), [
         'associated' => [
             'Tags', 'Comments' => [
                 'associated' => [
                     'Users' => [
-                        'accessibleFields' => ['id' => true]
-                    ]
-                ]
-            ]
-        ]
+                        'accessibleFields' => ['id' => true],
+                    ],
+                ],
+            ],
+        ],
     ]);
 
 上記では、問題のエンティティーについては Comments と Users の間でのアソシエーションが
@@ -412,7 +410,7 @@ belongsToMany の変換を ``_ids`` キーの使用のみに制限して、他�
     // コントローラーの中で。
 
     // Prior to 3.6 use TableRegistry::get('Articles')
-    $articles = TableRegistry::getTableLocator()->get('Articles');
+    $articles = $this->getTableLocator()->get('Articles');
     $article = $articles->get(1);
     $articles->patchEntity($article, $this->request->getData());
     $articles->save($article);
@@ -427,8 +425,7 @@ belongsToMany の変換を ``_ids`` キーの使用のみに制限して、他�
 
     // コントローラーの中で。
 
-    // Prior to 3.6 use TableRegistry::get('Articles')
-    $articles = TableRegistry::getTableLocator()->get('Articles');
+    $articles = $this->getTableLocator()->get('Articles');
     $article = $articles->get(1);
     $articles->patchEntity($article, $data, ['validate' => false]);
 
@@ -452,7 +449,7 @@ HasMany と BelongsToMany へのパッチ
     $associated = ['Tags', 'Comments.Users'];
     $article = $articles->get(1, ['contain' => $associated]);
     $articles->patchEntity($article, $this->request->getData(), [
-        'associated' => $associated
+        'associated' => $associated,
     ]);
     $articles->save($article);
 
@@ -465,8 +462,8 @@ HasMany と BelongsToMany へのパッチ
     $data = [
         'title' => '私のタイトル',
         'user' => [
-            'username' => 'mark'
-        ]
+            'username' => 'mark',
+        ],
     ];
 
 user プロパティーの中にエンティティーない状態で、エンティティーへのパッチを試みると、

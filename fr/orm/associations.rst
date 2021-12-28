@@ -211,9 +211,11 @@ Les clés possibles pour une association hasOne sont:
   d'une table associée dans les résultats d'une table source. Par défaut, c'est
   un nom en underscore et singulier de l'association, donc ``address`` dans
   notre exemple.
-- **strategy**: Définit la stratégie de requête à utiliser. Par défaut à
-  'join'. L'autre valeur valide est 'select', qui utilise une requête distincte
-  à la place.
+- **strategy**: La stratégie de requête utilisée pour charger les données
+  correspondantes de l'autre table. Les valeurs acceptées sont ``'join'`` et
+  ``'select'``. L'utilisation de ``'select'`` générera une requête séparée, ce
+  qui peut être utile quand l'autre table se trouve dans une base de données
+  différente. Par défaut à ``'join'``.
 - **finder**: La méthode finder à utiliser lors du chargement des
   enregistrements associés.
 
@@ -309,9 +311,11 @@ Les clés possibles pour les tableaux d'association belongsTo sont:
   données de la table associée dans les résultats de la table source. Par défaut
   il s'agit du nom singulier avec des underscores de l'association donc
   ``user`` dans notre exemple.
-- **strategy**: Définit la stratégie de requête à utiliser. Par défaut à
-  'join'. L'autre valeur valide est 'select', qui utilise une requête distincte
-  à la place.
+- **strategy**: La stratégie de requête utilisée pour charger les données
+  correspondantes de l'autre table. Les valeurs acceptées sont ``'join'`` et
+  ``'select'``. L'utilisation de ``'select'`` générera une requête séparée, ce
+  qui peut être utile quand l'autre table se trouve dans une base de données
+  différente. Par défaut à ``'join'``.
 - **finder**: La méthode finder à utiliser lors du chargement des
   enregistrements associés.
 

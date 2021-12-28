@@ -535,10 +535,10 @@ you must first drop it and then reconfigure it.
 Creating Custom Transports
 --------------------------
 
-You are able to create your custom transports to for e.g. send email using services
-like SendGrid, MailGun, Postmark etc. To create your transport, first create the file
+You are able to create your custom transports for situations such as send email using services
+like SendGrid, MailGun or Postmark. To create your transport, first create the file
 **src/Mailer/Transport/ExampleTransport.php** (where Example is the name of your
-transport). To start off your file should look like::
+transport). To start, your file should look like::
 
     namespace App\Mailer\Transport;
 
@@ -564,7 +564,7 @@ classes to configure emails with a fluent interface.
 
 If you want you can use these classes directly with the ``Mailer`` too.
 
-For e.g.::
+For example::
 
     $render = new \Cake\Mailer\Renderer();
     $render->viewBuilder()
@@ -659,7 +659,7 @@ The ``Cake\TestSuite\EmailTrait`` trait provides the following assertions::
     // Asserts an email contains expected text contents
     $this->assertMailContainsText($contents);
 
-    // Asserts an email contains the expected value within an Message getter (e.g., "subject")
+    // Asserts an email contains the expected value within an Message getter (for example, "subject")
     $this->assertMailSentWith($expected, $parameter);
 
     // Asserts an email at a specific index was sent to an address
@@ -680,7 +680,7 @@ The ``Cake\TestSuite\EmailTrait`` trait provides the following assertions::
     // Asserts an email contains an attachment
     $this->assertMailContainsAttachment('test.png');
 
-    // Asserts an email at a specific index contains the expected value within an Message getter (e.g., "cc")
+    // Asserts an email at a specific index contains the expected value within an Message getter (for example, "cc")
     $this->assertMailSentWithAt($at, $expected, $parameter);
 
     // Asserts an email contains a substring in the subject.

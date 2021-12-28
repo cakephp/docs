@@ -89,8 +89,8 @@ temporairement en utilisant un de ces moyens:
             ]
         ],
 
-    ignorerait toutes les dépréciations depuis votre répertoire ``Models`` et le
-    plugin ``Contacts`` dans votre application.
+   ignorerait toutes les dépréciations depuis votre répertoire ``Models`` et le
+   plugin ``Contacts`` dans votre application.
 
 .. versionadded:: 4.2.0
     L'option ``Error.ignoredDeprecationPaths`` a été ajoutée.

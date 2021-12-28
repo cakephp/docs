@@ -18,7 +18,7 @@ CakePHP データベースアクセス層は、リレーショナルデータベ
     use Cake\Datasource\ConnectionManager;
 
     $dsn = 'mysql://root:password@localhost/my_database';
-    ConnectionManager::config('default', ['url' => $dsn]);
+    ConnectionManager::setConfig('default', ['url' => $dsn]);
 
 作成したら、コネクションオブジェクトにアクセスして使えるようになります。 ::
 
@@ -139,7 +139,7 @@ Delete 文の実行
             'username' => 'my_app',
             'password' => 'secret',
             'database' => 'my_app',
-            'encoding' => 'utf8',
+            'encoding' => 'utf8mb4',
             'timezone' => 'UTC',
             'cacheMetadata' => true,
         ]
@@ -152,7 +152,7 @@ Delete 文の実行
 
     use Cake\Datasource\ConnectionManager;
 
-    ConnectionManager::config('default', [
+    ConnectionManager::setConfig('default', [
         'className' => 'Cake\Database\Connection',
         'driver' => 'Cake\Database\Driver\Mysql',
         'persistent' => false,
@@ -160,7 +160,7 @@ Delete 文の実行
         'username' => 'my_app',
         'password' => 'secret',
         'database' => 'my_app',
-        'encoding' => 'utf8',
+        'encoding' => 'utf8mb4',
         'timezone' => 'UTC',
         'cacheMetadata' => true,
     ]);
@@ -168,8 +168,8 @@ Delete 文の実行
 設定オプションは :term:`DSN` 文字列形式で設定することもできます。
 これは、環境変数や :term:`PaaS` 環境で作業する時に便利です。::
 
-    ConnectionManager::config('default', [
-        'url' => 'mysql://my_app:secret@localhost/my_app?encoding=utf8&timezone=UTC&cacheMetadata=true',
+    ConnectionManager::setConfig('default', [
+        'url' => 'mysql://my_app:sekret@localhost/my_app?encoding=utf8&timezone=UTC&cacheMetadata=true',
     ]);
 
 DSN 文字列を使用するときには、クエリー文字列引数として追加のパラメーターやオプションを
@@ -290,7 +290,7 @@ BigBoxesTable と、コントローラー BigBoxesController は、全て自動�
 ``config()`` や ``get()`` を使用して、実行時に設定ファイルに定義されていない
 コネクションを生成することができます。 ::
 
-    ConnectionManager::config('my_connection', $config);
+    ConnectionManager::setConfig('my_connection', $config);
     $connection = ConnectionManager::get('my_connection');
 
 コネクション生成時の設定についての詳細は :ref:`database-configuration` を参照してください。
@@ -432,14 +432,13 @@ Type クラスは次のメソッドを実装することが期待されます。
 
     namespace App\Database\Type;
 
-    use Cake\Database\Driver;
-    use Cake\Database\TypeFactory;
+    use Cake\Database\DriverInterface;
+    use Cake\Database\Type\BaseType;
     use PDO;
 
-    class JsonType extends Type
+    class JsonType extends BaseType
     {
-
-        public function toPHP($value, Driver $driver)
+        public function toPHP($value, DriverInterface $driver)
         {
             if ($value === null) {
                 return null;
@@ -455,12 +454,12 @@ Type クラスは次のメソッドを実装することが期待されます。
             return json_decode($value, true);
         }
 
-        public function toDatabase($value, Driver $driver)
+        public function toDatabase($value, DriverInterface $driver)
         {
             return json_encode($value);
         }
 
-        public function toStatement($value, Driver $driver)
+        public function toStatement($value, DriverInterface $driver)
         {
             if ($value === null) {
                 return PDO::PARAM_NULL;
@@ -867,10 +866,10 @@ SQL 文を準備したら、あなたは追加のデータをバインドし、�
 また、 ``logQueries`` を使って実行中にクエリーログを切り替えることができます。 ::
 
     // クエリーログを有効
-    $connection->logQueries(true);
+    $connection->enableQueryLogging(true);
 
     // クエリーログを停止
-    $connection->logQueries(false);
+    $connection->enableQueryLogging(false);
 
 クエリーログを有効にしていると、 'debug' レベルで 'queriesLog' スコープで
 :php:class:`Cake\\Log\\Log` にクエリーをログ出力します。
@@ -881,14 +880,14 @@ Web リクエストの時に便利です。 ::
     use Cake\Log\Log;
 
     // Console logging
-    Log::config('queries', [
+    Log::setConfig('queries', [
         'className' => 'Console',
         'stream' => 'php://stderr',
         'scopes' => ['queriesLog']
     ]);
 
     // File logging
-    Log::config('queries', [
+    Log::setConfig('queries', [
         'className' => 'File',
         'path' => LOGS,
         'file' => 'queries.log',
@@ -960,7 +959,7 @@ CakePHP の ORM は、あなたのアプリケーションのスキーマ、イ�
     $connection->cacheMetadata('orm_metadata');
 
 CakePHP にはメタデータキャッシュを管理するための CLI ツールも同梱しています。
-詳細については :doc:`/console-and-shells/schema-cache` を参照してください。
+詳細については :doc:`/console-commands/schema-cache` を参照してください。
 
 データベースの作成
 ==================

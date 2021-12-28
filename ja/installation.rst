@@ -11,17 +11,18 @@ CakePHP は nginx や lighttpd や Microsoft IIS のような様々なウェブ�
 
 - HTTP サーバー。例: Apache。mod\_rewrite が推奨されますが、必須ではありません。
 - PHP |minphpversion| 以上 (PHP |phpversion| も含む)
-- mbstring PHP 拡張
-- intl PHP 拡張
-- simplexml PHP 拡張
+- mbstring PHP エクステンション
+- intl PHP エクステンション
+- simplexml PHP エクステンション
+- PDO PHP エクステンション
 
 .. note::
 
-    XAMPP / WAMP のいずれでも、mbstring 拡張が初期インストール状態で
+    Laragon / XAMPP / WAMP のいずれでも、mbstring 拡張が初期インストール状態で
     動きます。
 
-    XAMPP では intl 拡張は同梱されていますが、 **php.ini** の ``extension=php_intl.dll``
-    のコメントを外して XAMPP コントロールパネルからサーバーの再起動を行う必要はあります。
+    Laragon / XAMPP では intl 拡張は同梱されていますが、 **php.ini** の ``extension=php_intl.dll``
+    のコメントを外して コントロールパネルからサーバーの再起動を行う必要はあります。
 
     WAMP では intl 拡張は最初からアクティブになっているのですが動作しません。
     動作させるためには php フォルダー（初期状態では **C:\\wamp\\bin\\php\\php{version}** ）にある
@@ -33,10 +34,10 @@ CakePHP は nginx や lighttpd や Microsoft IIS のような様々なウェブ�
 これを活用することが想像できます。
 CakePHP は種々のデータベース・ストレージのエンジンをサポートしています：
 
--  MySQL (5.5.3 以上)
--  MariaDB (5.5 以上)
--  PostgreSQL
--  Microsoft SQL Server (2008 以上)
+-  MySQL (5.6 以上)
+-  MariaDB (5.6 以上)
+-  PostgreSQL (9.4 以上)
+-  Microsoft SQL Server (2012 以上)
 -  SQLite 3
 
 .. note::
@@ -115,29 +116,17 @@ CakePHP の変更に合わせて最新の状態に保つ
 デフォルトではあなたのアプリケーションの **composer.json** は下記のようになっています。 ::
 
     "require": {
-        "cakephp/cakephp": "3.6.*"
+        "cakephp/cakephp": "4.0.*"
     }
 
-あなたが ``php composer.phar update`` を実行するたびに、このマイナーバージョンの
-パッチリリースが手に入ります。代わりに ``^3.6`` に変更して、 ``3.x`` ブランチの
+``php composer.phar update`` を実行するたびに、このマイナーバージョンの
+パッチリリースが手に入ります。代わりに ``^4.0`` に変更して、 ``4.x`` ブランチの
 最新の安定版マイナーリリースを手に入れることができます。
-
-もし CakePHP をリリース前の最新状態で維持したいのなら、あなたのアプリケーションの
-**composer.json** にパッケージバージョンとして **dev-master** を指定してください。 ::
-
-    "require": {
-        "cakephp/cakephp": "dev-master"
-    }
-
-この方法は次のメジャーバージョンがリリースされた時にあなたのアプリケーションが
-動かなくなる可能性がありますので、お奨めできない事に注意してください。
-さらに、composer は開発ブランチをキャッシュしませんので、composer による
-連続したインストール・アップデートには時間がかかります。
 
 Oven を使用したインストール
 ---------------------------
 
-CakePHP を素早くインストールするための別の方法は、 `Oven <https://github.com/CakeDC/oven>`_ です。
+CakePHP を手軽にインストールするための別の方法は、 `Oven <https://github.com/CakeDC/oven>`_ です。
 これは、必要なシステム要件をチェック、CakePHP アプリケーションのスケルトンをインストール、そして、
 開発環境をセットアップするシンプルな PHP スクリプトです。
 
@@ -256,7 +245,9 @@ Apache ウェブサーバーでこの方法を使う場合は、 ``DocumentRoot`
         config/
         logs/
         plugins/
+        resources/
         src/
+        templates/
         tests/
         tmp/
         vendor/
@@ -287,7 +278,7 @@ http://example.com/ あるいは http://localhost:8765/ にアクセスしてく
 これで CakePHP のデフォルトのホーム画面と、データベースへの接続状態を表すメッセージが
 表示されるでしょう。
 
-おめでとうございます！これでもう :doc:`最初の CakePHP アプリケーション作成 </quickstart>`
+おつかれさまです！ これでもう :doc:`最初の CakePHP アプリケーション作成 </quickstart>`
 の準備ができました。
 
 .. _url-rewriting:
@@ -494,6 +485,70 @@ server ディレクティブの例は、次の通りです。
     TCP ポートの代わりに unix ソケットパスを使用するために ``fastcgi_pass`` を更新してください
     (例: fastcgi_pass unix:/var/run/php/php7.1-fpm.sock;)。
 
+NGINX Unit
+----------
+
+`NGINX Unit <https://unit.nginx.org>`_ is dynamically configurable in runtime;
+the following configuration relies on ``webroot/index.php``, also serving other
+``.php`` scripts if present via ``cakephp_direct``:
+
+.. code-block:: json
+
+   {
+       "listeners": {
+           "*:80": {
+               "pass": "routes/cakephp"
+           }
+       },
+
+       "routes": {
+           "cakephp": [
+               {
+                   "match": {
+                       "uri": [
+                           "*.php",
+                           "*.php/*"
+                       ]
+                   },
+
+                   "action": {
+                       "pass": "applications/cakephp_direct"
+                   }
+               },
+               {
+                   "action": {
+                       "share": "/path/to/cakephp/webroot/",
+                       "fallback": {
+                           "pass": "applications/cakephp_index"
+                       }
+                   }
+               }
+           ]
+       },
+
+       "applications": {
+           "cakephp_direct": {
+               "type": "php",
+               "root": "/path/to/cakephp/webroot/",
+               "user": "www-data"
+           },
+
+           "cakephp_index": {
+               "type": "php",
+               "root": "/path/to/cakephp/webroot/",
+               "user": "www-data",
+               "script": "index.php"
+           }
+       }
+   }
+
+To enable this config (assuming it's saved as ``cakephp.json``):
+
+.. code-block:: console
+
+   # curl -X PUT --data-binary @cakephp.json --unix-socket \
+          /path/to/control.unit.sock http://localhost/config
+
 IIS7 (Windows hosts)
 --------------------
 
@@ -539,8 +594,37 @@ IIS に htaccess のルールをインポートすることもできます。
         </system.webServer>
     </configuration>
 
-一旦 IIS で利用可能な書き換えルールを含む web.config ファイルができたら、
+いったん IIS で利用可能な書き換えルールを含む web.config ファイルができたら、
 CakePHP のリンク、CSS、JavaScript、再ルーティング (rerouting) は正しく動作するでしょう。
+
+Lighttpd
+--------
+Lighttpd does not make use of **.htaccess** files like Apache, so it is
+necessary to add a ``url.rewrite-once`` configuration in **conf/lighttpd.conf**.
+Ensure the following is present in your lighthttpd configuration:
+
+.. code-block:: php
+
+    server.modules += (
+        "mod_alias",
+        "mod_cgi",
+        "mod_rewrite"
+    )
+
+    # Directory Alias
+    alias.url       = ( "/TestCake" => "C:/Users/Nicola/Documents/TestCake" )
+
+    # CGI Php
+    cgi.assign      = ( ".php" => "c:/php/php-cgi.exe" )
+
+    # Rewrite Cake Php (on /TestCake path)
+    url.rewrite-once = (
+        "^/TestCake/(css|files|img|js|stats)/(.*)$" => "/TestCake/webroot/$1/$2",
+        "^/TestCake/(.*)$" => "/TestCake/webroot/index.php/$1"
+    )
+
+The above lines include PHP CGI configuration and example application
+configuration for an application on the ``/TestCake`` path.
 
 URL リライティングを使わない場合
 --------------------------------

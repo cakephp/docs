@@ -47,7 +47,7 @@ app.php、特に ``debug`` の値を調整することは非常に重要なこ�
 
     SetEnv CAKEPHP_DEBUG 1
 
-それから、**app.php** にてデバッグレベルを動的にセットすることができます。 ::
+それから、**app_local.php** にてデバッグレベルを動的にセットすることができます。 ::
 
     $debug = (bool)getenv('CAKEPHP_DEBUG');
 
@@ -56,13 +56,18 @@ app.php、特に ``debug`` の値を調整することは非常に重要なこ�
         .....
     ];
 
+It is recommended that you put configuration that is shared across all
+of your application's environments in **config/app.php**. For configuration that
+varies between environments either use **config/app_local.php** or environment
+variables.
+
 セキュリティのチェック
 ======================
 
 もしあなたがウェブ上の荒野にアプリケーションを解き放とうとするなら、
 何か抜け穴がないかを確認しておくことをお勧めします。
 
-* :doc:`/controllers/components/csrf` コンポーネントを使用していることを確認して
+* :ref:`csrf-middleware` コンポーネントまたはミドルウェアを使用していることを確認して
   下さい。
 * :doc:`/controllers/components/security` コンポーネントを有効化しておいた方が
   いいかもしれません。フォームの改ざんや一括代入 (mass-assignment) 脆弱性に関する
@@ -117,8 +122,15 @@ CakePHP のアプリケーションは、アプリケーションの ``webroot``
 更新のデプロイ
 ==============
 
-更新をデプロイした後、 :doc:`/console-and-shells/schema-cache` シェルの一部、
-``bin/cake orm_cache clear`` を実行したい場合もあるかもしれません。
+On each deploy you'll likely have a few tasks to co-ordinate on your web server. Some typical ones
+are:
+
+1. Install dependencies with ``composer install``. Avoid using ``composer
+   update`` when doing deploys as you could get unexpected versions of packages.
+2. Run database `migrations </migrations/>`__ with either the Migrations plugin
+   or another tool.
+3. Clear model schema cache with ``bin/cake schema_cache clear``. The :doc:`/console-commands/schema-cache`
+   has more information on this command.
 
 .. meta::
     :title lang=ja: デプロイ

@@ -465,10 +465,9 @@ database schema as well::
 
 If you need to run multiple sets of migrations, those can be run as follows::
 
-    // Run migrations for plugin Contacts on
     $migrator->runMany([
         // Run app migrations on test connection.
-        ['connection' => 'test']
+        ['connection' => 'test'],
         // Run Contacts migrations on test connection.
         ['plugin' => 'Contacts'],
         // Run Documents migrations on test_docs connection.
@@ -1469,7 +1468,7 @@ make testing responses much simpler. Some examples are::
     // Check for a 5xx response code
     $this->assertResponseFailure();
 
-    // Check for a specific response code, e.g. 200
+    // Check for a specific response code, for example, 200
     $this->assertResponseCode(200);
 
     // Check the Location header

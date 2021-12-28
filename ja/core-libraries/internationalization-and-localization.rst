@@ -24,7 +24,7 @@
 あなたのコードを国際化するためには、以下のように :php:func:`__()`
 で文字列を囲んでください。 ::
 
-      <h2><?= __('Popular Articles') ?></h2>
+    <h2><?= __('Popular Articles') ?></h2>
 
 これ以上何もしなければ、上記の２つのコードの例は、機能的に同じです。それらは、
 両方ともブラウザーに同じ内容を送信します。 :php:func:`__()` 関数は、
@@ -63,8 +63,8 @@ PR を送ってください。
 翻訳メッセージのドメインとして利用する方法は以下の通りです。 ::
 
     MyPlugin
-        /src
-            /Locale
+        /resources
+            /locales
                 /fr
                     my_plugin.po
                 /de
@@ -72,6 +72,8 @@ PR を送ってください。
 
 翻訳フォルダーは、2文字または3文字の言語 ISO コード、または、言語及び話されている国を含む
 ``fr_FR``, ``es_AR``, ``da_DK`` のような完全なロケールの名称にしてください。
+
+https://www.localeplanet.com/icu/ (参考)
 
 翻訳ファイルの具体例は以下のようになります。
 
@@ -85,7 +87,7 @@ PR を送ってください。
 
 .. note::
     翻訳はキャッシュされています。翻訳を変更した後は、必ずキャッシュをクリアしてください。
-    :doc:`キャッシュツール </console-and-shells/cache>` を使って、例えば
+    :doc:`キャッシュツール </console-commands/cache>` を使って、例えば
     ``bin/cake cache clear _cake_core_`` を実行するか、手動で ``tmp/cache/persistent``
     フォルダをクリアすることができます (ファイルベースのキャッシュを使用している場合)。
 
@@ -94,7 +96,7 @@ I18n を利用して Pot ファイルを生成する
 
 アプリケーション内の、 `__()` や他の国際化されたメッセージから pot ファイルを生成するためには、
 i18n シェルを利用できます。より知りたい場合は、 :doc:`次の章
-</console-and-shells/i18n-shell>`
+</console-commands/i18n>`
 を読んでください。
 
 デフォルトのロケールを設定する
@@ -314,7 +316,7 @@ ICU の複数形選択を利用する
     zero{No Results} one{One result} few{...} many{...} other{...}
 
 各言語のエイリアスの完全な概要を知りたい場合は
-`Language Plural Rules Guide <https://www.unicode.org/cldr/charts/latest/supplemental/language_plural_rules.html>`_
+`Language Plural Rules Guide <https://unicode-org.github.io/cldr-staging/charts/37/supplemental/language_plural_rules.html>`_
 をご参照ください。
 
 Gettext の複数形選択を使用する
@@ -396,11 +398,11 @@ Gettext の複数形選択を使用する
 
     use Cake\I18n\MessagesFileLoader as Loader;
 
-    // src/Locale/folder/sub_folder/filename.po からメッセージをロード
+    // Load messages from resources/locales/folder/sub_folder/filename.po からメッセージをロード
     I18n::setTranslator(
         'animals',
         new Loader('filename', 'folder/sub_folder', 'po'),
-        'fr_FR',
+        'fr_FR'
     );
 
 のようになります。
@@ -416,7 +418,6 @@ CakePHP が利用しているものと同じやり方を使い続けることも
 
     class YamlFileParser
     {
-
         public function parse($file)
         {
             return yaml_parse_file($file);
@@ -436,7 +437,6 @@ CakePHP が利用しているものと同じやり方を使い続けることも
 
     use Cake\I18n\MessagesFileLoader as Loader;
 
-    // resources/locales/folder/sub_folder/filename.po からメッセージをロード
     I18n::setTranslator(
         'animals',
         new Loader('animals', 'fr_FR', 'yaml'),
@@ -455,7 +455,8 @@ CakePHP が利用しているものと同じやり方を使い続けることも
 デフォルトのドメインとあらゆる言語のすべての翻訳を、外部のサービス読み込みたいときのことを
 想像してみてください。 ::
 
-    use Aura\Intl\Package;
+    use Cake\I18n\Package;
+    // Prior to 4.2 you need to use Aura\Intl\Package
 
     I18n::config('default', function ($domain, $locale) {
         $locale = Locale::parseLocale($locale);
@@ -566,16 +567,67 @@ ORM で返されるデフォルトの日付では結果は ``Cake\I18n\Time`` �
     use Cake\Database\TypeFactory;
 
     // デフォルトのロケールフォーマットのパースを有効化
-    Type::build('datetime')->useLocaleParser();
+    TypeFactory::build('datetime')->useLocaleParser();
 
     // カスタム datetime フォーマットパース書式の設定
-    Type::build('datetime')->useLocaleParser()->setLocaleFormat('dd-M-y');
+    TypeFactory::build('datetime')->useLocaleParser()->setLocaleFormat('dd-M-y');
 
     // IntlDateFormatter 定数を使用することもできます。
-    Type::build('datetime')->useLocaleParser()
+    TypeFactory::build('datetime')->useLocaleParser()
         ->setLocaleFormat([IntlDateFormatter::SHORT, -1]);
 
 デフォルトでパースするフォーマットは、デフォルトの文字列のフォーマットと同じです。
+
+.. _converting-request-data-from-user-timezone:
+
+Converting Request Data from the User's Timezone
+------------------------------------------------
+
+When handling data from users in different timezones you will need to convert
+the datetimes in request data into your application's timezone. You can use
+``setUserTimezone()`` from a controller or :doc:`/controllers/middleware` to
+make this process simpler::
+
+    // Set the user's timezone
+    TypeFactory::build('datetime')->setUserTimezone($user->timezone);
+
+Once set, when your application creates or updates entities from request data,
+the ORM will automatically convert datetime values from the user's timezone into
+your application's timezone. This ensures that your application is always
+working in the timezone defined in ``App.defaultTimezone``.
+
+If your application handles datetime information in a number of actions you can
+use a middleware to define both timezone conversion and locale parsing::
+
+    namespace App\Middleware;
+
+    use Cake\Database\TypeFactory;
+    use Psr\Http\Message\ResponseInterface;
+    use Psr\Http\Message\ServerRequestInterface;
+    use Psr\Http\Server\MiddlewareInterface;
+    use Psr\Http\Server\RequestHandlerInterface;
+
+    class DatetimeMiddleare implements MiddlewareInterface
+    {
+        public function process(
+            ServerRequestInterface $request,
+            RequestHandlerInterface $handler
+        ): ResponseInterface {
+            // Get the user from the request.
+            // This example assumes your user entity has a timezone attribute.
+            $user = $request->getAttribute('identity');
+            if ($user) {
+                TypeFactory::build('datetime')
+                    ->useLocaleParser()
+                    ->setUserTimezone($user->timezone);
+            }
+
+            return $handler->handle($request);
+        }
+    }
+
+.. versionadded:: 4.3.0
+    The ``setUserTimezone()`` method was added.
 
 自動でリクエストデータに基づいたロケールを選択する
 ==================================================
@@ -598,6 +650,11 @@ ORM で返されるデフォルトの日付では結果は ``Cake\I18n\Time`` �
 ``LocaleSelectorMiddleware`` は ``Accept-Language`` ヘッダーを用いて、ユーザーの選択したロケールを
 自動的に設定します。どのロケールが自動で使われるかを制限するロケールリストオプションを使用することが
 できます。
+
+Translate Content/Entities
+==========================
+
+If you want to translate content/entities then you should look at the :doc:`Translate Behavior </orm/behaviors/translate>`.
 
 .. meta::
    :title lang=ja: 国際化と地域化

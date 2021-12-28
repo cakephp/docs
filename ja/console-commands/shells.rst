@@ -7,7 +7,7 @@
 
 .. deprecated:: 3.6.0
     Shell は 3.6.0 で非推奨ですが、 5.x までは削除されません。
-    代わりに :doc:`/console-and-shells/commands` を使用してください。
+    代わりに :doc:`/console-commands/commands` を使用してください。
 
 シェルの作成
 ============
@@ -200,7 +200,7 @@ ProjectTask インスタンスをロードして返します。
 ==============
 
 複雑な出力生成ロジックの場合、再利用可能な方法で、このロジックをカプセル化するために
-:doc:`/console-and-shells/helpers` を利用することができます。
+:ref:`command-helpers` を利用することができます。
 
 .. _invoking-other-shells-from-your-shell:
 
@@ -255,13 +255,13 @@ CLI オプションのパース
 =======================
 
 シェルはオプション、引数を定義し、ヘルプの生成を自動化するために
-:doc:`/console-and-shells/option-parsers` を使います。
+:doc:`/console-commands/option-parsers` を使います。
 
 入出力との対話
 =============================
 
 シェルでは、 ``getIo()`` メソッドを使って ``ConsoleIo`` インスタンスにアクセスすることができます。
-詳細は、 :doc:`/console-and-shells/input-output` をご覧ください。
+詳細は、 :doc:`/console-commands/input-output` をご覧ください。
 
 ``ConsoleIo`` オブジェクトに加えて、シェルクラスは一連のショートカットメソッドを提供します。
 これらのメソッドは、 ``ConsoleIo`` にあるメソッドのショートカットやエイリアスです。 ::

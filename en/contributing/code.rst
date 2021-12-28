@@ -67,8 +67,8 @@ the 2.x release series, you should use the ``2.x`` branch::
 
 .. tip::
 
-    Use a descriptive name for your branch, referencing the ticket or feature
-    name is a good convention. e.g. ticket-1234, feature-awesome
+    Use a descriptive name for your branch. Referencing the ticket or feature
+    name is a good convention. Examples include ``ticket-1234`` and ``feature-awesome``.
 
 The above will create a local branch based on the upstream (CakePHP) 2.x branch.
 Work on your fix, and make as many commits as you need; but keep in mind the

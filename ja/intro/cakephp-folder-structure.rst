@@ -37,7 +37,7 @@ src フォルダー
 
 Command
     アプリケーションのコンソールコマンドを含みます。
-    更に学ぶためには、 :doc:`/console-and-shells/commands` をご覧ください。
+    更に学ぶためには、 :doc:`/console-commands/commands` をご覧ください。
 Console
     Composer によって実行されるインストールスクリプトを含みます。
 Controller
@@ -48,7 +48,7 @@ Model
     アプリケーションのテーブル、エンティティー、ビヘイビアーを含みます。
 Shell
     アプリケーションのシェルタスクを含みます。
-    更に学ぶためには、 :doc:`/console-and-shells/shells` をご覧ください。
+    更に学ぶためには、 :doc:`/console-commands/shells` をご覧ください。
 View
     表示用のクラスが、ここに配置されます。ビュー、セル、ヘルパーなどです。
 

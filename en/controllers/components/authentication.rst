@@ -1056,7 +1056,7 @@ unauthorizedRedirect
 storage
     Storage class to use for persisting user record. When using stateless
     authenticator you should set this to ``Memory``. Defaults to ``Session``.
-    You can pass config options to storage class using array format. For e.g. to
+    You can pass config options to storage class using array format. For example, to
     use a custom session key you can set ``storage`` to ``['className' => 'Session', 'key' => 'Auth.Admin']``.
 checkAuthIn
     Name of the event in which initial auth checks should be done. Defaults
