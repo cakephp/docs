@@ -19,13 +19,13 @@ des exemples respectant cette convention.
 Les méthodes publiques des controllers sont souvent exposées comme des 'actions'
 accessibles via un navigateur web. Par exemple ``/users/view-me`` correspond à
 la méthode ``viewMe()`` de ``UsersController`` sans rien modifier (si l'on utilise
-l'inflexion <em>dashed</em> par défaut dans le routage. Les méthodes privées ou
+l'inflexion dashed par défaut dans le routage. Les méthodes privées ou
 protégées ne sont pas accessibles avec le routing.
 
 Considérations concernant les URLs et les Noms des Controllers
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Comme vous venez de voir, un controller dont le nom est constitu" d'un seul mot
+Comme vous venez de voir, un controller dont le nom est constitué d'un seul mot
 renvoie vers un chemin URL en minuscules. Par exemple, ``UsersController``
 (qui serait défini dans le fichier nommé **UsersController.php**) est accessible
 à l'adresse http://exemple.com/users.
@@ -116,7 +116,7 @@ Model Conventions
 =================
 
 Les noms de classe de modèle (model) sont au pluriel, en CamelCase et finissent
-par ``Table`. ``UsersTable``, ``MenuLinksTable`` et ``UserFavoritePagesTable```
+par ``Table``. ``UsersTable``, ``MenuLinksTable`` et ``UserFavoritePagesTable``
 sont des exemples de nom de classes de table correspondant respectivement aux
 tables ``users``, ``menu_links`` and ``user_favorite_pages``.
 
@@ -165,7 +165,7 @@ Voir `awesome list recommendations
 <https://github.com/FriendsOfCake/awesome-cakephp/blob/master/CONTRIBUTING.md#tips-for-creating-cakephp-plugins>`__
 pour plus de détails.
 
-En résummé
+En résumé
 ==========
 
 En utilisant les conventions CakePHP dans le nommage des différentes parties
@@ -174,11 +174,9 @@ affres de la configuration. Voici un exemple récapitulant les conventions
 abordées:
 
 -  Nom de la table de la base de données: "articles", "menu_links"
--  Classe Table: ``ArticlesTable`` se trouvant dans
-    **src/Model/Table/ArticlesTable.php**
+-  Classe Table: ``ArticlesTable`` se trouvant dans **src/Model/Table/ArticlesTable.php**
 -  Classe Entity: ``Article`` se trouvant dans **src/Model/Entity/Article.php**
--  Classe Controller: ``ArticlesController`` se trouvant dans
-   **src/Controller/ArticlesController.php**
+-  Classe Controller: ``ArticlesController`` se trouvant dans **src/Controller/ArticlesController.php**
 -  Template de View se trouvant dans **templates/Articles/index.php**
 
 En utilisant ces conventions, CakePHP sait qu'une requête de type
@@ -235,8 +233,8 @@ Résumé des conventions de Base de Données
 +-----------------+--------------------------------------------------------------+
 | Clés étrangères | Les relations sont reconnues par défaut comme le nom (au     |
 |                 | singulier) de la table associée suivi par ``_id``.           |
-| hasMany         | Users hasMany Articles, la table ``articles``fera référence  |
-| belongsTo/      | à la table ``users`` via la clé étrangère `user_id``.        |
+| hasMany         | Users hasMany Articles, la table ``articles`` fera référence |
+| belongsTo/      | à la table ``users`` via la clé étrangère ``user_id``.       |
 | hasOne          |                                                              |
 | BelongsToMany   |                                                              |
 |                 |                                                              |
@@ -252,12 +250,11 @@ Résumé des conventions de Base de Données
 |                 | enregistrement en utlisant la méthode ``Table::save()``.     |
 +-----------------+--------------------------------------------------------------+
 | Tables jointes  | Doivent être nommées d'après les tables du modèle qu'elles   |
-|                 | joindront sinon la commande bake ne fonctionnera pas, dans   |
-|                 | l'ordre alphabétique (``articles_tags`` plutôt que           |
-|                 | ``tags_articles``).                                          |
-|                 | En cas de besoin de colonne supplémentaire dans la table de  |
-|                 | intermédiaire, vous devez créer une une entité/table         |
-|                 | séparée pour cette table.                                    |
+|                 | joindront dans l'ordre alphabétique (``articles_tags`` plutôt|
+|                 | que ``tags_articles``) sinon la commande bake ne fonctionnera|
+|                 | pas. En cas de besoin de colonne supplémentaire dans la table|
+|                 | intermédiaire, vous devez créer une entité/table séparée     |
+|                 | pour cette table.                                            |
 +-----------------+--------------------------------------------------------------+
 
 Maintenant que vous avez été initié aux fondamentaux de CakePHP, vous devriez
