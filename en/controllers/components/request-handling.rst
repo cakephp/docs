@@ -168,6 +168,10 @@ automatically by using the ``viewClassMap`` setting::
         ]);
     }
 
+.. deprecated:: 4.4.0
+    Instead of defining ``viewClassMap`` you should use
+    :ref:`controller-viewclasses` instead.
+
 .. meta::
     :title lang=en: Request Handling
     :keywords lang=en: handler component,javascript libraries,public components,null returns,model data,request data,content types,file extensions,ajax,meth,content type,array,conjunction,cakephp,insight,php
