@@ -16,7 +16,7 @@ plantilla normales.
 Habilitación de vistas de datos en su aplicación
 ================================================
 
-Antes de poder usar las clases de vista de datos, primero deberá cargar el 
+Antes de poder usar las clases de vista de datos, primero deberá cargar el
 :php:class:`Cake\\Controller\\Component\\RequestHandlerComponent` en su
 controlador::
 
@@ -32,12 +32,12 @@ con la configuración ``viewClassMap``, para asignar tipos a sus clases
 personalizadas y/o asignar otros tipos de datos.
 
 Opcionalmente, puede habilitar las extensiones json y/o xml con
-:ref:`file-extensions`. Esto le permitirá acceder a ``JSON``, ``XML`` o cualquier
+`file-extensions`. Esto le permitirá acceder a ``JSON``, ``XML`` o cualquier
 otra vista de formato especial utilizando una URL personalizada que termine con
-el nombre del tipo de respuesta como una extensión de archivo como 
+el nombre del tipo de respuesta como una extensión de archivo como
 ``http://example.com/articles.json``.
 
-De forma predeterminada, cuando no se habilitan las :ref:`file-extensions`, se
+De forma predeterminada, cuando no se habilitan las `file-extensions`, se
 utiliza la solicitud, seleccionando el encabezado ``Accept``, seleccionando qué
 tipo de formato se debe presentar al usuario. Un ejemplo de formato ``Accept``
 que se utiliza para representar respuestas ``JSON`` es ``application/json``.
@@ -210,8 +210,8 @@ lugar de ``true.``.
 Ejemplo de uso
 ==============
 
-Si bien el :doc:`RequestHandlerComponent 
-</controllers/components/request-handling>` puede establecer automáticamente la 
+Si bien el :doc:`RequestHandlerComponent
+</controllers/components/request-handling>` puede establecer automáticamente la
 vista en función del tipo de contenido o la extensión de la solicitud, también puede
 controlar las asignaciones de vistas en el controlador::
 
