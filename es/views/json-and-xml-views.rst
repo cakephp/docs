@@ -1,5 +1,5 @@
-JSON and XML views
-##################
+Vistas JSON y XML
+#################
 
 JsonView y XmlView le permiten crear respuestas JSON y XML, e integrarse con el
 :php:class:`Cake\\Controller\\Component\\RequestHandlerComponent`.
