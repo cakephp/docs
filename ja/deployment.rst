@@ -122,15 +122,14 @@ CakePHP のアプリケーションは、アプリケーションの ``webroot``
 更新のデプロイ
 ==============
 
-On each deploy you'll likely have a few tasks to co-ordinate on your web server. Some typical ones
-are:
+デプロイごとに、Webサーバーで調整するタスクがいくつかある可能性があります。
+いくつかの典型的なものは次のとおりです。
 
-1. Install dependencies with ``composer install``. Avoid using ``composer
-   update`` when doing deploys as you could get unexpected versions of packages.
-2. Run database `migrations </migrations/>`__ with either the Migrations plugin
-   or another tool.
-3. Clear model schema cache with ``bin/cake schema_cache clear``. The :doc:`/console-commands/schema-cache`
-   has more information on this command.
+1. ``composer install`` を使用して依存関係をインストールします。
+   予期しないバージョンのパッケージを取得する可能性があるため、デプロイを行うときに ``composer update`` は使用しないでください。
+2. Migrations プラグインまたは別のツールを使用して、データベースの `マイグレーション </migrations/>`__ を実行します。
+3. ``bin/cake schema_cache clear`` を実行してモデルスキーマキャッシュをクリアします。
+   :doc:`/console-commands/schema-cache` には、このコマンドに関する詳細情報があります。
 
 .. meta::
     :title lang=ja: デプロイ
