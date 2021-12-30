@@ -80,3 +80,9 @@ Http
   container all the time.
 * ``HttpsEnforcerMiddleware`` now has an ``hsts`` option that allows you to
   configure the ``Strict-Transport-Security`` header.
+  
+Mailer
+------
+
+* ``Mailer`` now accepts a ``autoLayout`` config which disabled auto layout
+  in the ``ViewBuilder`` if set to ``false``.
