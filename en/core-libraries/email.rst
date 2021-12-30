@@ -117,7 +117,7 @@ following configuration keys are used:
 - ``'layout'``: If you are using rendered content, set the layout to render. See
   ``ViewBuilder::setTemplate()``.
 - ``'autoLayout'``: If you want to render a template without layout, set this field to
-  false. See ``ViewBuilder::disableAutoLayout()``.
+  ``false``. See ``ViewBuilder::disableAutoLayout()``.
 - ``'viewVars'``: If you are using rendered content, set the array with
   variables to be used in the view. See ``Mailer::setViewVars()``.
 - ``'attachments'``: List of files to attach. See ``Mailer::setAttachments()``.
