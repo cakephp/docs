@@ -42,7 +42,7 @@ Database
 --------
 
 - 可変のdatetimeクラスを ``DateTimeType`` やその他の時間関連の型クラスで使用することは、非推奨となります。
-  そのため、他の型クラスのメソッドである ``DatetimeType::useMutable()``, ``DatetimeType::useImmutable()`` や
+  そのため、他の型クラスのメソッドである ``DateTimeType::useMutable()``, ``DateTimeType::useImmutable()`` や
   同様のメソッドは非推奨となります。
 - ``DriverInterface`` で定義された機能定数を受け付ける ``DriverInterface::supports()`` を採用している
   ``DriverInterface::supportsQuoting()`` および ``DriverInterface::supportSavepoints()`` は現在、非推奨となっています。
@@ -241,7 +241,7 @@ Database
 * ログに記録されるクエリは、postgres、sqlite、mysql の各ドライバで
   ``TRUE`` と ``FALSE`` を使用するようになりました。
   これにより、クエリをコピーして対話型プロンプトで実行することが容易になりました。
-* ``DatetimeType`` では、リクエストデータをユーザーのタイムゾーンから
+* ``DateTimeType`` では、リクエストデータをユーザーのタイムゾーンから
   アプリケーションのタイムゾーンに変換できるようになりました。
   詳しくは `converting-request-data-from-user-timezone` をご覧ください。
 * ``JsonType::setEncodingOptions()``が追加されました。

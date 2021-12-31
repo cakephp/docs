@@ -48,8 +48,8 @@ Base De Données
 
 - L'utilisation de classes de date et heure mutables avec ``DateTimeType`` et
   les autres classes de types relatifs aux heures est déprécié.
-  De ce fait, les méthodes ``DatetimeType::useMutable()``,
-  ``DatetimeType::useImmutable()`` et les méthodes similaires dans d'autres
+  De ce fait, les méthodes ``DateTimeType::useMutable()``,
+  ``DateTimeType::useImmutable()`` et les méthodes similaires dans d'autres
   classes de types sont dépréciées.
 - ``DriverInterface::supportsQuoting()`` et
   ``DriverInterface::supportSavepoints()`` sont maintenant dépréciées au profit
@@ -58,7 +58,7 @@ Base De Données
 - ``DriverInterface::supportsDynamicConstraints()`` a été dépréciée dès lors que
   les fixtures ne tentent plus de supprimer ou créer des contraintes
   dynamiquement.
-  
+
 I18n
 ----
 - Les classes de date et heure ``Time`` et ``Date`` sont dépréciées.
@@ -102,7 +102,7 @@ ORM
   table autre que celle par défaut. Vous pouvez définir la propriété
   ``LocatorAwareTrait::$defaultTable`` pour spécifier l'alias de la table par
   défaut pour ``fetchTable()``.
-- L'usage de requêtes pour intercepter toutes les méthodes de 
+- L'usage de requêtes pour intercepter toutes les méthodes de
   ``ResultSetInterface`` (y compris ```CollectionInterface```), forcer la
   récupération des résultats et appeler la méthode sous-jacente sur ces
   résultats est maintenant déprécié. Un exemple de cet usage est
@@ -194,7 +194,7 @@ ORM
 ---
 
 - ``Entity::isEmpty()`` et ``Entity::hasValue()`` ont été alignées pour traiter
-  '0' comme une valeur non-empty. 
+  '0' comme une valeur non-empty.
   Cela aligne le behavior avec la documentation et l'intention originelle.
 - Les erreurs de validation d'entity de ``TranslateBehavior`` sont maintenant
   définies dans le chemin ``_translations.{lang}`` au lieu de ``{lang}``. Cela
@@ -292,7 +292,7 @@ Database
 * Les queries loguées utilisent maintenant ``TRUE`` et ``FALSE`` pour les
   pilotes postgres, sqlite et mysql. Cela facilite la copie de queries et leur
   exécution dans un prompt interactif.
-* Le ``DatetimeType`` peut maintenant convertir les données de la requête du
+* Le ``DateTimeType`` peut maintenant convertir les données de la requête du
   fuseau horaire de l'utilisateur vers le fuseau horaire de l'application.
   Reportez-vous à :ref:`converting-request-data-from-user-timezone` pour plus
   d'informations.
@@ -300,13 +300,13 @@ Database
   vérifications de feature en une seule fonction. Les pilotes peuvent supporter
   les nommages personnalisés de feature ou n'importe quelle constante de
   feature:
-  
+
   * ``FEATURE_CTE``
   * ``FEATURE_JSON``
   * ``FEATURE_QUOTE``
   * ``FEATURE_SAVEPOINT``
   * ``FEATURE_WINDOW``
-    
+
 - Ajout de ``DriverInterface::inTransaction()`` qui reflète le statut renvoyé
   par ``PDO::inTranaction()``.
 - Ajout d'un builder fluide pour les instructions ``CASE, WHEN, THEN``.
