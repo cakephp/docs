@@ -78,14 +78,14 @@ debug/notice/info のログをより深刻なエラーから分離するのが�
 .. warning::
     If you do not configure logging engines, log messages will not be stored.
 
-ログアダプターの作成
---------------------
+ログエンジンの作成
+====================
 
-ログアダプターはアプリケーションの一部やプラグインの一部になりえます。
+ログエンジンはアプリケーションの一部やプラグインの一部になりえます。
 例えば ``DatabaseLog`` という名前のデータベースロガーがあったとします。
 アプリケーションの一部として **src/Log/Engine/DatabaseLog.php** に置かれます。
 プラグインの一部として **plugins/LoggingPack/src/Log/Engine/DatabaseLog.php** に置かれます。
-また、ログアダプターの設定は :php:meth:`Cake\\Log\\Log::setConfig()` を使う必要があります。
+また、ログエンジンの設定は :php:meth:`Cake\\Log\\Log::setConfig()` を使う必要があります。
 例えば DatabaseLog の設定はこのようになります。 ::
 
     // src/Log 用
@@ -102,8 +102,8 @@ debug/notice/info のログをより深刻なエラーから分離するのが�
         // ...
     ]);
 
-ログアダプターを設定する時、 ``className`` パラメーターは、ログハンドラーを配置しロードするために使用されます。
-その他の設定プロパティーの全ては、ログアダプターのコンストラクターに配列として渡されます。 ::
+ログエンジンを設定する時、 ``className`` パラメーターは、ログハンドラーを配置しロードするために使用されます。
+その他の設定プロパティーの全ては、ログエンジンのコンストラクターに配列として渡されます。 ::
 
     namespace App\Log\Engine;
     use Cake\Log\Engine\BaseLog;
@@ -122,9 +122,43 @@ debug/notice/info のログをより深刻なエラーから分離するのが�
         }
     }
 
-CakePHP では 全てのロギングアダプターにおいて ``Psr\Log\LoggerInterface`` を実装する必要があります。
+CakePHP では 全てのログエンジンにおいて ``Psr\Log\LoggerInterface`` を実装する必要があります。
 :php:class:`Cake\Log\Engine\BaseLog` クラスは、 ``log()`` メソッドを実装することだけを要求しますので、
 そのインターフェイスを満たすための簡単な方法です。
+
+.. _logging-formatters:
+
+ロギングフォーマッタ
+--------------------
+
+ロギングフォーマッタは、ログメッセージがストレージエンジンに依存せずにフォーマットされる方法を制御することができます。
+各コア提供のログエンジンは、後方互換性のある出力を維持するように設定されたフォーマッタが付属しています。
+しかし、あなたの要件に合うようにフォーマッタを調整することができます。
+フォーマッターはロギングエンジンと一緒に設定されます。 ::
+
+    use Cake\Log\Engine\SyslogLog;
+    use App\Log\Formatter\CustomFormatter;
+
+    // オプションのない単純なフォーマット構成
+    Log::setConfig('error', [
+        'className' => SyslogLog::class,
+        'formatter' => CustomFormatter::class,
+    ]);
+
+    // 追加オプションを使用してフォーマッターを構成します
+    Log::setConfig('error', [
+        'className' => SyslogLog::class,
+        'formatter' => [
+            'className' => CustomFormatter::class,
+            'key' => 'value',
+        ],
+    ]);
+
+独自のロギングフォーマッターを実装するには ``Cake\Log\Format\AbstractFormatter`` またはそのサブクラスのいずれかを継承する必要があります。
+実装する必要がある主なメソッドは ``format($level, $message, $context)`` で、これはログメッセージの書式設定を担当します。
+
+.. versionadded:: 4.3.0
+    ロギングフォーマッタは4.3.0で追加されました。
 
 .. _file-log:
 
@@ -220,6 +254,7 @@ Syslog ロギングエンジンのための設定配列は、以下のキーを�
   サーバーやプロセスに関する追加の情報を付加するのに便利です。例えば、
   ``%s - Web Server 1 - %s`` は、プレースホルダーが置き換えられると、
   ``error - Web Server 1 - An error occurred in this request`` のようになります。
+  このオプションは非推奨です。代わりに :ref:`logging-formatters` を使用する必要があります。
 * ``prefix``: 全てのログメッセージの先頭につく文字列です。
 * ``flag``: ロガーへの接続を開くために使用される整数値のフラグで、デフォルトは、
   ``LOG_ODELAY`` が使用されます。 詳しくは、 ``openlog`` のドキュメントをご覧ください。
