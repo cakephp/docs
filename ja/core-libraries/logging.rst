@@ -220,11 +220,46 @@ Syslog ロギングエンジンのための設定配列は、以下のキーを�
   サーバーやプロセスに関する追加の情報を付加するのに便利です。例えば、
   ``%s - Web Server 1 - %s`` は、プレースホルダーが置き換えられると、
   ``error - Web Server 1 - An error occurred in this request`` のようになります。
+  このオプションは非推奨です。代わりに :ref:`logging-formatters` を使用する必要があります。
 * ``prefix``: 全てのログメッセージの先頭につく文字列です。
 * ``flag``: ロガーへの接続を開くために使用される整数値のフラグで、デフォルトは、
   ``LOG_ODELAY`` が使用されます。 詳しくは、 ``openlog`` のドキュメントをご覧ください。
 * ``facility``: syslog で使用するロギングスロット。デフォルトでは、 ``LOG_USER`` が使用されます。
   詳しくは、 ドキュメントの ``syslog`` をご覧ください。
+
+.. _logging-formatters:
+
+ロギングフォーマッタ
+------------------
+
+ロギングフォーマッタは、ログメッセージがストレージエンジンに依存せずにフォーマットされる方法を制御することができます。
+各コア提供のログエンジンは、後方互換性のある出力を維持するように設定されたフォーマッタが付属しています。
+しかし、あなたの要件に合うようにフォーマッタを調整することができます。
+フォーマッターはロギングエンジンと一緒に設定されます。 ::
+
+    use Cake\Log\Engine\SyslogLog;
+    use App\Log\Formatter\CustomFormatter;
+
+    // Simple formatting configuration with no options.
+    Log::setConfig('error', [
+        'className' => SyslogLog::class,
+        'formatter' => CustomFormatter::class,
+    ]);
+
+    // Configure a formatter with additional options.
+    Log::setConfig('error', [
+        'className' => SyslogLog::class,
+        'formatter' => [
+            'className' => CustomFormatter::class,
+            'key' => 'value',
+        ],
+    ]);
+
+独自のロギングフォーマッターを実装するには ``Cake\Log\Format\AbstractFormatter`` またはそのサブクラスのいずれかを継承する必要があります。
+実装する必要がある主なメソッドは ``format($level, $message, $context)`` で、これはログメッセージの書式設定を担当します。
+
+.. versionadded:: 4.3.0
+    ロギングフォーマッタは4.3.0で追加されました。
 
 .. _writing-to-logs:
 

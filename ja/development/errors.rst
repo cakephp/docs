@@ -45,6 +45,37 @@ CakePHP は PHP エラーと例外の両方を処理するために ``Cake\Error
 
     もしカスタムエラーハンドラーを使うなら、サポートされるオプションはあなたのハンドラーに依存します。
 
+
+.. _deprecation-warnings:
+
+非推奨の警告
+--------------------
+
+CakePHPは、非推奨の警告を使用して、機能が非推奨になったことを示します。
+また、このシステムをプラグインやアプリケーションコードで使用することをお勧めします。
+``deprecationWarning()`` を使用して非推奨の警告をトリガーできます。 ::
+
+    deprecationWarning('The example() method is deprecated. Use getExample() instead.');
+
+CakePHPまたはプラグインをアップグレードすると、新しい非推奨の警告が表示される場合があります。
+いくつかの方法のいずれかで、非推奨の警告を一時的に無効にすることができます。
+
+#. ``Error.errorLevel`` を ``E_ALL ^ E_USER_DEPRECATED`` に設定して、すべての非推奨警告を無視します。
+#. ``Error.ignoredDeprecationPaths`` 構成オプションを使用して、glob互換の式での非推奨を無視します。
+   以下をご覧ください。 ::
+
+        'Error' => [
+            'ignoredDeprecationPaths' => [
+                'vendors/company/contacts/*',
+                'src/Models/*',
+            ]
+        ],
+
+   ``Models`` ディレクトリとアプリケーションの ``Contacts`` プラグインからのすべての非推奨を無視します。
+
+.. versionadded:: 4.2.0
+    ``Error.ignoredDeprecationPaths`` オプションが追加されました。
+
 .. php:class:: ExceptionRenderer(Exception $exception)
 
 例外処理の変更
