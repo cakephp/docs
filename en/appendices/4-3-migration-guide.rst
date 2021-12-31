@@ -43,7 +43,7 @@ Database
 --------
 
 - Using mutable datetime classes with ``DateTimeType`` and other time related type classes is deprecated.
-  Hence methods ``DatetimeType::useMutable()``, ``DatetimeType::useImmutable()`` and similar methods
+  Hence methods ``DateTimeType::useMutable()``, ``DateTimeType::useImmutable()`` and similar methods
   in other type classes are deprecated.
 - ``DriverInterface::supportsQuoting()`` and ``DriverInterface::supportSavepoints()`` are now deprecated
   in favor of ``DriverInterface::supports()`` which accepts feature constants defined in ``DriverInterface``.
@@ -254,7 +254,7 @@ Database
 * Logged queries now use ``TRUE`` and ``FALSE`` for postgres, sqlite and mysql
   drivers. This makes it easier to copy queries and run them in an interactive
   prompt.
-* The ``DatetimeType`` can now convert request data from the user's timezone
+* The ``DateTimeType`` can now convert request data from the user's timezone
   to the application timezone. See
   :ref:`converting-request-data-from-user-timezone` for more information.
 * ``JsonType::setEncodingOptions()`` was added. This method lets you define
