@@ -67,6 +67,7 @@ Here is an example of an injected service inside a command::
         $container
             ->add(CheckUsersCommand::class)
             ->addArgument(UsersService::class);
+        $container->add(UsersService::class);
     }
     
 The injection process is a bit different here. Instead of adding the 
