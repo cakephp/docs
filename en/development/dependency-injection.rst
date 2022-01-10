@@ -76,7 +76,11 @@ Here is an example of an injected service inside a command::
         $container->add(UsersService::class);
     }
 
-The injection process is a bit different here. Instead of adding the UsersService to the container we first have to add the Command as a whole to the Container and add the UsersService as an argument. With that you can then access that service inside the constructor of the command.
+The injection process is a bit different here. Instead of adding the 
+``UsersService`` to the container we first have to add the Command as
+a whole to the Container and add the ``UsersService`` as an argument.
+With that you can then access that service inside the constructor 
+of the command.
 
 Adding Services
 ===============
