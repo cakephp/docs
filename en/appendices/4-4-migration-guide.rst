@@ -56,6 +56,11 @@ Global
 New Features
 ============
 
+Command
+-------
+
+* ``bin/cake routes`` now highlights collisions in route templates.
+
 Controller
 ----------
 
