@@ -33,6 +33,12 @@ A short example would be::
             }
         }
     }
+    
+    // In src/Application.php
+    public function services(ContainerInterface $container): void 
+    {
+        $container->add(UsersService::class);
+    }
 
 In this example, the ``UsersController::ssoCallback()`` action needs to fetch
 a user from a Single-Sign-On provider and ensure it exists in the local
@@ -69,13 +75,12 @@ Here is an example of an injected service inside a command::
             ->addArgument(UsersService::class);
         $container->add(UsersService::class);
     }
-    
+
 The injection process is a bit different here. Instead of adding the 
 ``UsersService`` to the container we first have to add the Command as
 a whole to the Container and add the ``UsersService`` as an argument.
 With that you can then access that service inside the constructor 
 of the command.
-
 
 Adding Services
 ===============
@@ -280,3 +285,18 @@ stubs::
 Any defined mocks will be replaced in your application's container during
 testing, and automatically injected into your controllers and commands. Mocks
 are cleaned up at the end of each test.
+
+Auto Wiring 
+===============
+
+Auto Wiring is turned off by default. To enable it::
+
+    // In src/Application.php
+    public function services(ContainerInterface $container): void
+    {
+        $container->delegate(
+            new \League\Container\ReflectionContainer()
+        );
+    }
+    
+Now your dependencies can be resolved automatically. Read more about auto wiring in the `PHP League Container documentation <https://container.thephpleague.com/4.x/auto-wiring/>`_.
