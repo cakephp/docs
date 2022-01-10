@@ -295,4 +295,4 @@ Auto Wiring is turned off by default. To enable it::
         );
     }
     
-Now your dependencies can be resolved automatically. Read more about autowiring in the `PHP League Container documentation <https://container.thephpleague.com/4.x/auto-wiring/>`_
+Now your dependencies can be resolved automatically. Read more about auto wiring in the `PHP League Container documentation <https://container.thephpleague.com/4.x/auto-wiring/>`_.
