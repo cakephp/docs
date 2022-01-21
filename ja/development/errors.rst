@@ -31,7 +31,10 @@ CakePHP は PHP エラーと例外の両方を処理するために ``Cake\Error
   除外するのに役立ちます。
 * ``extraFatalErrorMemory`` - int - 致命的エラーが起きた時にメモリーの上限を増加させるための
   メガバイト数を設定します。これはログの記録やエラー処理を完了するために猶予を与えます。
-* ``errorLogger`` - \Cake\Error\ErrorLogger - エラーログの記録および未処理の例外を担当するクラス。
+* ``errorLogger`` - ``Cake\Error\ErrorLoggerInterface`` - エラーログの記録および未処理の
+  例外を担当するクラス。デフォルトは ``Cake\Error\ErrorLogger``
+* ``ignoredDeprecationPaths`` - array - 非推奨のエラーが無視されるべきパス（glob互換）のリスト。
+  4.2.0で追加
 
 エラーハンドラーは既定では、 ``debug`` が ``true`` の時にエラーを表示し、
 ``debug`` が ``false`` の時にエラーをログに記録します。
@@ -61,7 +64,7 @@ CakePHPまたはプラグインをアップグレードすると、新しい非�
 いくつかの方法のいずれかで、非推奨の警告を一時的に無効にすることができます。
 
 #. ``Error.errorLevel`` を ``E_ALL ^ E_USER_DEPRECATED`` に設定して、すべての非推奨警告を無視します。
-#. ``Error.ignoredDeprecationPaths`` 構成オプションを使用して、glob互換の式での非推奨を無視します。
+#. ``Error.ignoredDeprecationPaths`` 設定オプションを使用して、glob互換の表現で非推奨を無視します。
    以下をご覧ください。 ::
 
         'Error' => [
@@ -71,6 +74,7 @@ CakePHPまたはプラグインをアップグレードすると、新しい非�
             ]
         ],
 
+   あなたのアプリケーションにおいて
    ``Models`` ディレクトリとアプリケーションの ``Contacts`` プラグインからのすべての非推奨を無視します。
 
 .. versionadded:: 4.2.0
