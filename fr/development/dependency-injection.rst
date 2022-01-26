@@ -35,6 +35,12 @@ Un exemple simple serait::
             }
         }
     }
+    
+    // Dans src/Application.php
+    public function services(ContainerInterface $container): void 
+    {
+        $container->add(UsersService::class);
+    }
 
 Dans cet exemple, l'action ``UsersController::ssoCallback()`` a besoin de
 récupérer un utilisateur à partir d'un fournisseur Single-Sign-On et de
@@ -69,6 +75,7 @@ Voici un exemple de service injecté dans une commande::
         $container
             ->add(CheckUsersCommand::class)
             ->addArgument(UsersService::class);
+        $container->add(UsersService::class);
     }
     
 Ici, le processus d'injection est un peu différent. Au lieu d'ajouter le
@@ -290,3 +297,20 @@ conteneur par des Mocks ou des stubs::
 Tous les Mocks définis seront remplacés dans le conteneur de votre application
 pendant le test, et automatiquement injectés dans vos contrôleurs et vos 
 commandes. Les Mocks sont supprimés à la fin de chaque test.
+
+Auto Wiring
+===========
+
+L'autowWiring est désactivé par défaut. Pour l'activer::
+
+    // Dans src/Application.php
+    public function services(ContainerInterface $container): void
+    {
+        $container->delegate(
+            new \League\Container\ReflectionContainer()
+        );
+    }
+    
+À présent, vos dépendances sont résolues automatiquement. Pour en savoir plus
+sur l'auto wiring, consultez la
+`PHP League Container documentation <https://container.thephpleague.com/4.x/auto-wiring/>`.

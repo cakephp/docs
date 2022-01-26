@@ -362,17 +362,16 @@ Fonctions de fenêtrage
 
 Ces fonctions de fenêtrage (*window-only*) contiennent une expression de
 fenêtrage par défaut:
--
--``rowNumber()``
--    Renvoie une expression Aggregate pour la fonction SQL ``ROW_NUMBER()``.
--``lag()``
--    Renvoie une expression Aggregate pour la fonction SQL ``LAG()``.
--``lead()``
--    Renvoie une expression Aggregate pour la fonction SQL ``LEAD()``.
--
--.. versionadded:: 4.1.0
--    Les fonctions de fenêtrage ont été ajoutées dans 4.1.0
 
+``rowNumber()``
+    Renvoie une expression Aggregate pour la fonction SQL ``ROW_NUMBER()``.
+``lag()``
+    Renvoie une expression Aggregate pour la fonction SQL ``LAG()``.
+``lead()``
+    Renvoie une expression Aggregate pour la fonction SQL ``LEAD()``.
+
+.. versionadded:: 4.1.0
+    Les fonctions de fenêtrage ont été ajoutées dans 4.1.0
 
 Quand vous fournissez des arguments pour les fonctions SQL, il y a deux types de
 paramètres que vous pouvez utiliser: les arguments littéraux et les paramètres
