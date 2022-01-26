@@ -82,7 +82,7 @@ Les options de configuration peuvent également être fournies en tant que chain
 d'environnement ou des fournisseurs :term:`PaaS`::
 
     Log::setConfig('error', [
-        'url' => 'file:///?levels[]=warning&levels[]=error&file=error',
+        'url' => 'file:///full/path/to/logs/?levels[]=warning&levels[]=error&file=error',
     ]);
 
 .. warning::
