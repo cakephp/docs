@@ -176,6 +176,9 @@ Database
 - ``ComparisonExpression `` n'entoure plus le SQL de ``IdentifierExpression``
   entre des parenthèses. Cela affecte ``Query::where()`` et tous les autres
   endroits où une ``ComparisonExpression`` est générée.
+- L'implémentation SQLite de ``listTables()`` renvoie maintenant les tables
+  **et** les vues. Ce changement aligne SQLite avec les autres dialectes de
+  bases de données.
 
 Datasource
 ----------
@@ -285,18 +288,18 @@ Core
 Database
 --------
 
-* Les types de mappage de bases de données peuvent maintenant implémenter
+- Les types de mappage de bases de données peuvent maintenant implémenter
   ``Cake\Database\Type\ColumnSchemaAwareInterface`` pour spécifier la génération
   de colonne SQL et la réflexivité du schéma de colonne. Cela permet au types
   personnalisés de prendre en charge des colonnes non standard.
-* Les queries loguées utilisent maintenant ``TRUE`` et ``FALSE`` pour les
+- Les queries loguées utilisent maintenant ``TRUE`` et ``FALSE`` pour les
   pilotes postgres, sqlite et mysql. Cela facilite la copie de queries et leur
   exécution dans un prompt interactif.
-* Le ``DateTimeType`` peut maintenant convertir les données de la requête du
+- Le ``DateTimeType`` peut maintenant convertir les données de la requête du
   fuseau horaire de l'utilisateur vers le fuseau horaire de l'application.
   Reportez-vous à :ref:`converting-request-data-from-user-timezone` pour plus
   d'informations.
-* Ajout de ``DriverInterface::supports()`` qui consolide toutes les
+- Ajout de ``DriverInterface::supports()`` qui consolide toutes les
   vérifications de feature en une seule fonction. Les pilotes peuvent supporter
   les nommages personnalisés de feature ou n'importe quelle constante de
   feature:
@@ -310,6 +313,9 @@ Database
 - Ajout de ``DriverInterface::inTransaction()`` qui reflète le statut renvoyé
   par ``PDO::inTranaction()``.
 - Ajout d'un builder fluide pour les instructions ``CASE, WHEN, THEN``.
+- La méthode ``listTablesWithoutViews()`` a été ajoutée à ``SchemaCollection``
+  et aux dialectes des pilotes. Elle renvoie la liste des tables en excluant les
+  vues. Ceci est principalement utilisé pour tronquer les tables dans les tests.
 
 Form
 ----
