@@ -295,8 +295,14 @@ Auto Wiring is turned off by default. To enable it::
     public function services(ContainerInterface $container): void
     {
         $container->delegate(
-            new \League\Container\ReflectionContainer()
+            new \League\Container\ReflectionContainer() 
         );
     }
     
-Now your dependencies can be resolved automatically. Read more about auto wiring in the `PHP League Container documentation <https://container.thephpleague.com/4.x/auto-wiring/>`_.
+While your dependencies will now be resolved automatically, this approach will not cache resolutions which can be detrimental to performance. To enable caching::
+
+    $container->delegate(
+        new \League\Container\ReflectionContainer(true) // or consider using the value of Configure::read('debug') 
+    );
+
+Read more about auto wiring in the `PHP League Container documentation <https://container.thephpleague.com/4.x/auto-wiring/>`_.
