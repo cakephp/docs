@@ -785,7 +785,7 @@ de conditions::
             'OR' => [['nombre_de_vues' => 2], ['nombre_de_vues' => 3]],
         ]);
 
-Ce qui précède générerait le code SQL::
+Ce qui précède générerait le code SQL:
 
 .. code-block:: sql
 
