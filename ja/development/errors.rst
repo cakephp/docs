@@ -74,7 +74,7 @@ CakePHPまたはプラグインをアップグレードすると、新しい非�
             ]
         ],
 
-   あなたのアプリケーションにおける ``Models`` ディレクトリと ``Contacts`` プラグインからのすべての非推奨を無視します。
+   アプリケーションにおける ``Models`` ディレクトリと ``Contacts`` プラグインからのすべての非推奨を無視します。
 
 .. versionadded:: 4.2.0
     ``Error.ignoredDeprecationPaths`` オプションが追加されました。
