@@ -68,7 +68,7 @@ views will be rendering HTML/XHTML documents to browsers, but you might also
 need to reply to a remote application via JSON, or output a CSV file for a user.
 
 CakePHP template files are regular PHP files and utilize the `alternative PHP syntax
-<http://php.net/manual/en/control-structures.alternative-syntax.php>`_
+<https://php.net/manual/en/control-structures.alternative-syntax.php>`_
 for control structures and output. These files contain the logic necessary to
 prepare the data received from the controller into a presentation format that is
 ready for your audience.

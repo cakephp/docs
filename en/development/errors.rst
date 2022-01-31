@@ -353,11 +353,11 @@ Then we can register our console error handler as the PHP error handler::
     $isCli = PHP_SAPI === 'cli';
     if ($isCli) {
         (new AppConsoleErrorHandler(Configure::read('Error')))->register();
-    } 
+    }
 
 ErrorHandler objects have a few methods you may want to implement:
 
-* ``_displayError(array $error, bool $debug)`` is used when errors are triggered. 
+* ``_displayError(array $error, bool $debug)`` is used when errors are triggered.
 * ``_displayException(Throwable $exception)`` method is called when there is an uncaught exception.
 * ``_logError($level, array $error)`` is called when there is an error to log.
 * ``logException(Throwable $exception)`` is called when there is an exception to log.
@@ -427,7 +427,7 @@ Creating your own Application Exceptions
 ========================================
 
 You can create your own application exceptions using any of the built in `SPL
-exceptions <http://php.net/manual/en/spl.exceptions.php>`_, ``Exception``
+exceptions <https://php.net/manual/en/spl.exceptions.php>`_, ``Exception``
 itself, or :php:exc:`Cake\\Core\\Exception\\Exception`.
 If your application contained the following exception::
 

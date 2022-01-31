@@ -58,7 +58,7 @@ the same version your command line interface (CLI) uses.
 Installing Composer
 -------------------
 
-CakePHP uses `Composer <http://getcomposer.org>`_, a dependency management tool,
+CakePHP uses `Composer <https://getcomposer.org>`_, a dependency management tool,
 as the officially supported method for installation.
 
 - Installing Composer on Linux and macOS
@@ -375,7 +375,7 @@ further information.
        </Directory>
 
    On macOS, another solution is to use the tool
-   `virtualhostx <http://clickontyler.com/virtualhostx/>`_ to make a Virtual
+   `virtualhostx <https://clickontyler.com/virtualhostx/>`_ to make a Virtual
    Host to point to your folder.
 
    For many hosting services (GoDaddy, 1and1), your web server is being
@@ -556,8 +556,8 @@ add-ons that can add this support, you can also import htaccess
 rules into IIS to use CakePHP's native rewrites. To do this, follow
 these steps:
 
-#. Use `Microsoft's Web Platform Installer <http://www.microsoft.com/web/downloads/platform.aspx>`_
-   to install the URL `Rewrite Module 2.0 <http://www.iis.net/downloads/microsoft/url-rewrite>`_
+#. Use `Microsoft's Web Platform Installer <https://www.microsoft.com/web/downloads/platform.aspx>`_
+   to install the URL `Rewrite Module 2.0 <https://www.iis.net/downloads/microsoft/url-rewrite>`_
    or download it directly (`32-bit <https://download.microsoft.com/download/D/8/1/D81E5DD6-1ABB-46B0-9B4B-21894E18B77F/rewrite_x86_en-US.msi>`_ /
    `64-bit <https://download.microsoft.com/download/1/2/8/128E2E22-C1B9-44A4-BE2A-5859ED1D4592/rewrite_amd64_en-US.msi>`_).
 #. Create a new file called web.config in your CakePHP root folder.
@@ -646,8 +646,8 @@ This will make your URLs look like
 www.example.com/index.php/controllername/actionname/param rather than
 www.example.com/controllername/actionname/param.
 
-.. _GitHub: http://github.com/cakephp/cakephp
-.. _Composer: http://getcomposer.org
+.. _GitHub: https://github.com/cakephp/cakephp
+.. _Composer: https://getcomposer.org
 
 .. meta::
     :title lang=en: Installation
