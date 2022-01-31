@@ -33,7 +33,7 @@ a stack trace wherever the function is called.
 
 .. php:function:: breakpoint()
 
-If you have `Psysh <http://psysh.org/>`_ installed you can use this
+If you have `Psysh <https://psysh.org/>`_ installed you can use this
 function in CLI environments to open an interactive console with the current
 local scope::
 
