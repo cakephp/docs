@@ -275,7 +275,7 @@ OAuth2 は、多くの場合、単一のヘッダーであるため、特殊な�
 
 ２番目のプロキシーパラメーターは、プロトコルのない IP またはドメインの文字列でなければなりません。
 ユーザー名とパスワードは、ヘッダー通じて渡されますが、プロキシー文字列は `stream_context_create()
-<http://php.net/manual/ja/function.stream-context-create.php>`_ を通じて渡されます。
+<https://php.net/manual/ja/function.stream-context-create.php>`_ を通じて渡されます。
 
 .. _http_client_scoped_client:
 
@@ -371,7 +371,7 @@ Response オブジェクトは、レスポンスデータを検査するため�
 
 .. versionchanged:: 3.3.0
     3.3.0 では、 ``Cake\Http\Client\Response`` は `PSR-7 ResponseInterface
-    <http://www.php-fig.org/psr/psr-7/#3-3-psr-http-message-responseinterface>`__
+    <https://www.php-fig.org/psr/psr-7/#3-3-psr-http-message-responseinterface>`__
     を実装します。
 
 レスポンスボディーの読み込み

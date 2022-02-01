@@ -2,7 +2,7 @@
 ################
 
 CakePHP の開発者はコーディング規約として下記のルールに加え、 `PSR-12 coding style guide
-<http://www.php-fig.org/psr/psr-12/>`_ にも従って頂くことになります。
+<https://www.php-fig.org/psr/psr-12/>`_ にも従って頂くことになります。
 
 その他の CakePHP プラグイン等 (訳注:原文 *CakeIngredients* 、ケーキの材料のこと)
 の開発でも同じ規約に従うことが推奨されます。
@@ -322,7 +322,7 @@ false を、関数呼び出しが成功したかどうかを判定できるよ�
 
 全てのコメントは英語で書かれ、コードのコメントブロックを明確な方法で記述する必要があります。
 
-コメントは以下の `phpDocumentor <http://phpdoc.org>`_ タグを含めることができます。
+コメントは以下の `phpDocumentor <https://phpdoc.org>`_ タグを含めることができます。
 
 *  `@deprecated <https://docs.phpdoc.org/latest/guide/references/phpdoc/tags/deprecated.html>`_
    ``@version <vector> <description>`` 形式を使用して、 ``version`` と ``description``
@@ -431,7 +431,7 @@ callable
     require_once $class;
 
 クラスまたはライブラリーを伴うファイルを読み込む場合、
-`require\_once <http://php.net/require_once>`_
+`require\_once <https://php.net/require_once>`_
 関数のみを常に使用してください。
 
 PHP タグ

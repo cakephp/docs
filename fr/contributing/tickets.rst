@@ -26,7 +26,7 @@ faire le meilleur rapport de bug possible:
   question de support technique. Le canal IRC #cakephp sur
   `Freenode <https://webchat.freenode.net>`__ a plusieurs développeurs prêts à
   répondre à vos questions. Les autres possibilités sont le
-  `Groupe Google de CakePHP <http://groups.google.com/group/cake-php>`__ et le
+  `Groupe Google de CakePHP <https://groups.google.com/group/cake-php>`__ et le
   déjà populaire `Stack Overflow
   <https://stackoverflow.com/questions/tagged/cakephp>`__.
 

@@ -21,14 +21,14 @@ CakePHP には、いくつかのキャッシュエンジンが用意されてい
   最も遅いキャッシュエンジンで、アトミックな操作のための多くの機能を持ちません。
   しかし、ディスクストレージは非常に安価なので、頻繁に書き込みが行なわれない
   大きなオブジェクトや要素の保存はファイルに適しています。
-* ``Memcached`` `Memcached <http://php.net/memcached>`_ 拡張を使います。
+* ``Memcached`` `Memcached <https://php.net/memcached>`_ 拡張を使います。
 * ``Redis`` `phpredis <https://github.com/phpredis/phpredis>`_ 拡張を使います。
   Redis は高速で、Memcached と同様の永続キャッシュシステム、アトミックな操作を提供します。
-* ``Apcu`` APCu キャッシュは、PHP の `APCu <http://php.net/apcu>`_ 拡張を使用します。
+* ``Apcu`` APCu キャッシュは、PHP の `APCu <https://php.net/apcu>`_ 拡張を使用します。
   この拡張はオブジェクトを保存するためにウェブサーバー上の共有メモリーを使います。
   これはとても高速で、かつアトミックな読み込み/書き込みの機能を提供することが可能になります。
   3.6.0 より前は ``ApcuEngine`` は ``ApcEngine`` という名前でした。
-* ``Wincache`` Wincache は `Wincache <http://php.net/wincache>`_ 拡張を使います。
+* ``Wincache`` Wincache は `Wincache <https://php.net/wincache>`_ 拡張を使います。
   Wincache は APC と同様の機能とパフォーマンスを持ちますが、Windows と IIS に最適化されています。
 * ``Array`` はすべてのデータを配列に保存します。
   永続的なストレージを提供せず、test suites内での使用を想定しています。

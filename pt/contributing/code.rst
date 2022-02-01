@@ -23,12 +23,12 @@ Defina suas informações de usuário com seu nome e endereço de email::
 .. note::
 
     Se você é novo no Git, recomendamos que leia o gratuito e excelente manual
-    `ProGit <http://git-scm.com/book/>`_.
+    `ProGit <https://git-scm.com/book/>`_.
 
 Clone o código-fonte do CakePHP do Github:
 
-* Se você não tem uma conta no `GitHub <http://github.com>`_, crie uma.
-* Dê *Fork* no `repositório do CakePHP <http://github.com/cakephp/cakephp>`_
+* Se você não tem uma conta no `GitHub <https://github.com>`_, crie uma.
+* Dê *Fork* no `repositório do CakePHP <https://github.com/cakephp/cakephp>`_
   clicando no botão **Fork&**.
 
 Depois que seu *fork* for feito, clone seu *fork* para sua máquina::

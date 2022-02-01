@@ -71,7 +71,7 @@ IRC チャンネル
 
 公式 CakePHP フォーラム
 =======================
-`CakePHP 公式フォーラム <http://discourse.cakephp.org>`_
+`CakePHP 公式フォーラム <https://discourse.cakephp.org>`_
 
 公式フォーラムは、助けを求めたり、アイディアを提案したり、CakePHP について
 語り合う場所です。素早く答えや助けを得るために最適です。
@@ -96,7 +96,7 @@ Stack Overflow の既存ユーザーが質問を見つけやすくするため�
 フランス語
 ----------
 
-- `French CakePHP Community <http://cakephp-fr.org>`_
+- `French CakePHP Community <https://cakephp-fr.org>`_
 
 ドイツ語
 --------
@@ -107,7 +107,7 @@ Stack Overflow の既存ユーザーが質問を見つけやすくするため�
 Iranian
 -------
 
-- `Iranian CakePHP Community <http://cakephp.ir>`_
+- `Iranian CakePHP Community <https://cakephp.ir>`_
 
 Dutch
 -----
@@ -123,14 +123,14 @@ Dutch
 ポルトガル語
 ------------
 
-- `Portuguese CakePHP Google Group <http://groups.google.com/group/cakephp-pt>`_
+- `Portuguese CakePHP Google Group <https://groups.google.com/group/cakephp-pt>`_
 
 スペイン語
 ----------
 
 - `Spanish CakePHP Slack Channel <https://cakesf.slack.com/messages/spanish/>`_
 - `Spanish CakePHP IRC Channel <irc://irc.freenode.net/cakephp-es>`_
-- `Spanish CakePHP Google Group <http://groups.google.com/group/cakephp-esp>`_
+- `Spanish CakePHP Google Group <https://groups.google.com/group/cakephp-esp>`_
 
 .. meta::
     :title lang=ja: Where to Get Help

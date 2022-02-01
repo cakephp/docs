@@ -58,7 +58,7 @@ serveur web doit utiliser la même version de PHP que votre interface en ligne d
 Installer Composer
 ------------------
 
-CakePHP utilise `Composer <http://getcomposer.org>`_, un outil de gestion de
+CakePHP utilise `Composer <https://getcomposer.org>`_, un outil de gestion de
 dépendances comme méthode officielle supportée pour l'installation.
 
 - Installer Composer sur Linux et macOS
@@ -400,7 +400,7 @@ https://cwiki.apache.org/confluence/display/httpd/DistrosDefaultLayout pour plus
        </Directory>
 
    Sur macOS, une autre solution est d'utiliser l'outil
-   `virtualhostx <http://clickontyler.com/virtualhostx/>`_ pour créer un Hôte
+   `virtualhostx <https://clickontyler.com/virtualhostx/>`_ pour créer un Hôte
    Virtuel pour pointer vers votre dossier.
 
    Pour de nombreux services d'hébergement (GoDaddy, 1and1), votre serveur web
@@ -588,9 +588,9 @@ règles htaccess dans IIS pour utiliser les réécritures natives de CakePHP.
 Pour ce faire, suivez les étapes suivantes:
 
 #. Utilisez `l'installeur de la plateforme Web de Microsoft
-   <http://www.microsoft.com/web/downloads/platform.aspx>`_ pour installer
+   <https://www.microsoft.com/web/downloads/platform.aspx>`_ pour installer
    l'URL
-   `Rewrite Module 2.0 <http://www.iis.net/downloads/microsoft/url-rewrite>`_
+   `Rewrite Module 2.0 <https://www.iis.net/downloads/microsoft/url-rewrite>`_
    ou téléchargez-le directement (`32-bit <https://download.microsoft.com/download/D/8/1/D81E5DD6-1ABB-46B0-9B4B-21894E18B77F/rewrite_x86_en-US.msi>`_ /
    `64-bit <https://download.microsoft.com/download/1/2/8/128E2E22-C1B9-44A4-BE2A-5859ED1D4592/rewrite_amd64_en-US.msi>`_).
 #. Créez un nouveau fichier appelé web.config dans votre dossier racine de CakePHP.
@@ -681,8 +681,8 @@ Vos URLs ressembleront à
 www.example.com/index.php/controllername/actionname/param plutôt qu'à
 www.example.com/controllername/actionname/param.
 
-.. _GitHub: http://github.com/cakephp/cakephp
-.. _Composer: http://getcomposer.org
+.. _GitHub: https://github.com/cakephp/cakephp
+.. _Composer: https://getcomposer.org
 
 .. meta::
     :title lang=fr: Installation

@@ -26,7 +26,7 @@ répertoires que vous devriez voir:
   mais ce dossier est généralement utilisé pour les stocker les traductions,
   les descriptions de model et parfois les informations de session.
 - Le dossier *vendor* est l'endroit où CakePHP et d'autres dépendances de
-  l'application vont être installés par `Composer <http://getcomposer.org>`_.
+  l'application vont être installés par `Composer <https://getcomposer.org>`_.
   Modifier ces fichiers est déconseillé car composer écrasera vos changements
   lors du prochain update que vous ferez.
 - Le répertoire *webroot* est la racine publique de votre application. Il

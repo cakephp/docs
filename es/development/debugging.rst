@@ -31,7 +31,7 @@ el seguimiento de pila donde sea que se llame.
 
 .. php:function:: breakpoint()
 
-Si tienes `Psysh <http://psysh.org/>` _ instalado, puedes usar esta
+Si tienes `Psysh <https://psysh.org/>` _ instalado, puedes usar esta
 función en entornos CLI para abrir una consola interactiva con el
 ámbito local actual::
 

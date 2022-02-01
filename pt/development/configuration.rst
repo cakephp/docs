@@ -306,7 +306,7 @@ O CakePHP vem com dois mecanismos de arquivos de configuração embutidos.
 :php:class:`Cake\\Core\\Configure\\Engine\\PhpConfig` é capaz de ler arquivos de configuração do PHP, no mesmo formato que o
 Configure tem lido historicamente.
 :php:class:`Cake\\Core\\Configure\\Engine\\IniConfig` é capaz de ler os arquivos de configuração no formato ini(.ini).
-Consulte a documentação do `PHP <http://php.net/parse_ini_file>`_ para obter mais informações sobre os detalhes dos arquivos
+Consulte a documentação do `PHP <https://php.net/parse_ini_file>`_ para obter mais informações sobre os detalhes dos arquivos
 ini. Para usar um mecanismo de configuração do núcleo, você precisará conectá-lo ao Configure usando
 :php:meth:`Configure::config()`::
 
@@ -596,7 +596,7 @@ Variáveis de Ambiente
 
 Alguns dos provedores modernos de nuvem, como o Heroku, permitem definir variáveis de ambiente. Ao definir variáveis de
 ambiente, você pode configurar seu aplicativo CakePHP como um aplicativo 12factor. Seguir as instruções do aplicativo
-`12factor app instructions <http://12factor.net/>`_ é uma boa maneira de criar um app sem estado e facilitar a implantação
+`12factor app instructions <https://12factor.net/>`_ é uma boa maneira de criar um app sem estado e facilitar a implantação
 do seu aplicativo. Isso significa, por exemplo, que, se você precisar alterar seu banco de dados, você precisará modificar
 uma variável DATABASE_URL na sua configuração de host sem a necessidade de alterá-la em seu código-fonte.
 

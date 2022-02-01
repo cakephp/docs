@@ -28,16 +28,16 @@ votre propre système de mise en cache. Les moteurs de cache intégrés sont:
   grands objets ou des éléments qui sont rarement écrits fonctionne
   bien dans les fichiers.
 * ``ApcCache`` Le cache APC utilise l'extension PHP
-  `APCu <http://php.net/apcu>`_. Cette extension utilise la mémoire partagée du
+  `APCu <https://php.net/apcu>`_. Cette extension utilise la mémoire partagée du
   serveur Web pour stocker les objets. Cela le rend très rapide, et capable de
   fournir les fonctionnalités atomiques en lecture/écriture.
-* ``Wincache`` Utilise l'extension `Wincache <http://php.net/wincache>`_.
+* ``Wincache`` Utilise l'extension `Wincache <https://php.net/wincache>`_.
   Wincache offre des fonctionnalités et des performances semblables à APC, mais
   optimisées pour Windows et IIS.
 * ``XcacheEngine`` `Xcache <https://en.wikipedia.org/wiki/List_of_PHP_accelerators#XCache>`_.
   est une extension PHP qui fournit des fonctionnalités similaires à APC.
 * ``MemcachedEngine`` Utilise l'extension
-  `Memcached <http://php.net/memcached>`_.
+  `Memcached <https://php.net/memcached>`_.
 * ``RedisEngine`` Utilise l'extension
   `phpredis <https://github.com/phpredis/phpredis>`_. Redis fournit un système
   de cache cohérent et rapide similaire à Memcached et il permet aussi les

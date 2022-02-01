@@ -62,7 +62,7 @@ Composer のインストール
 -----------------------
 
 CakePHP の公式のインストール方法として、依存性管理ツール
-`Composer <http://getcomposer.org>`_ を使用します。
+`Composer <https://getcomposer.org>`_ を使用します。
 
 - Linux や macOS に Composer をインストール
 
@@ -379,7 +379,7 @@ CakePHP は、展開した状態では mod_rewrite を使用するようにな�
        </Directory>
 
    macOS 上での別解は、仮想ホストをフォルダーに向けさせるのに、
-   `virtualhostx <http://clickontyler.com/virtualhostx/>`_
+   `virtualhostx <https://clickontyler.com/virtualhostx/>`_
    ツールを使うことが挙げられます。
 
    多くのホスティングサービス (GoDaddy、1and1) では、ウェブサーバーが
@@ -557,8 +557,8 @@ IIS7 はネイティブで .htaccess ファイルをサポートしていませ�
 IIS に htaccess のルールをインポートすることもできます。
 これをするには、以下のステップを踏んでください:
 
-#. URL `Rewrite Module 2.0 <http://www.iis.net/downloads/microsoft/url-rewrite>`_
-   をインストールするために、`Microsoftの Web Platform Installer <http://www.microsoft.com/web/downloads/platform.aspx>`_
+#. URL `Rewrite Module 2.0 <https://www.iis.net/downloads/microsoft/url-rewrite>`_
+   をインストールするために、`Microsoftの Web Platform Installer <https://www.microsoft.com/web/downloads/platform.aspx>`_
    を使うか、直接ダウンロードします。(`32ビット <https://download.microsoft.com/download/D/8/1/D81E5DD6-1ABB-46B0-9B4B-21894E18B77F/rewrite_x86_en-US.msi>`_ /
    `64ビット <https://download.microsoft.com/download/1/2/8/128E2E22-C1B9-44A4-BE2A-5859ED1D4592/rewrite_amd64_en-US.msi>`_)
 #. CakePHP のルートフォルダーに web.config という名前の新しいファイルを作成してください。
@@ -646,8 +646,8 @@ URL リライティングを使わない場合
 これで URL は www.example.com/controllername/actionname/param ではなく
 www.example.com/index.php/controllername/actionname/param という書式になるでしょう。
 
-.. _GitHub: http://github.com/cakephp/cakephp
-.. _Composer: http://getcomposer.org
+.. _GitHub: https://github.com/cakephp/cakephp
+.. _Composer: https://getcomposer.org
 
 .. meta::
     :title lang=ja: インストール

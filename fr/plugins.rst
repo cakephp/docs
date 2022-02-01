@@ -24,7 +24,7 @@ configurer le namespace du plugin, quand les plugins sont chargés.
 Installer un Plugin Avec Composer
 =================================
 
-Plusieurs plugins sont disponibles sur `Packagist <http://packagist.org>`_
+Plusieurs plugins sont disponibles sur `Packagist <https://packagist.org>`_
 et peuvent être installés avec ``Composer``. Pour installer DebugKit, vous
 feriez ce qui suit::
 
