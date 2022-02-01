@@ -26,12 +26,12 @@ de trabajo::
 .. note::
 
     Si eres nuevo en Git, te recomendamos encarecidamente que leas el maravilloso
-    y gratuito libro `ProGit <http://git-scm.com/book/>`_
+    y gratuito libro `ProGit <https://git-scm.com/book/>`_
 
 Clona el código fuente de CakePHP desde GitHub:
 
-* Si no tienes una cuenta de `GitHub <http://github.com>`_  créate una.
-* Haz un *fork* del `repositorio CakePHP <http://github.com/cakephp/cakephp>`_
+* Si no tienes una cuenta de `GitHub <https://github.com>`_  créate una.
+* Haz un *fork* del `repositorio CakePHP <https://github.com/cakephp/cakephp>`_
   haciendo click en el botón **Fork**.
 
 Después de haber hecho el fork, clónalo en tu equipo local::

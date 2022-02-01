@@ -77,7 +77,7 @@ fichier CSV pour un utilisateur.
 
 Les fichiers de template de CakePHP possèdent une extension **.php** (CakePHP Template)
 et utilisent la `syntaxe alternative de PHP
-<http://php.net/manual/fr/control-structures.alternative-syntax.php>`_
+<https://php.net/manual/fr/control-structures.alternative-syntax.php>`_
 pour les structures de contrôle et les sorties. Ces fichiers contiennent la logique nécessaire
 pour servir les données reçues d'un controller dans un format de présentation qui est lisible
 par votre public.

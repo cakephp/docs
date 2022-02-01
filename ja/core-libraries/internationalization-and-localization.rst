@@ -34,7 +34,7 @@
 ------------
 
 翻訳はアプリケーションの中にある言語ファイルを使って有効になります。
-CakePHP 翻訳ファイルのデフォルトの形式は、 `Gettext <http://en.wikipedia.org/wiki/Gettext>`_
+CakePHP 翻訳ファイルのデフォルトの形式は、 `Gettext <https://en.wikipedia.org/wiki/Gettext>`_
 です。ファイルは **resources/locales/** 以下に置かれる必要があります。各言語用のサブフォルダーは
 以下のようになっている必要があります。 ::
 
@@ -191,7 +191,7 @@ CakePHP はアプリケーションを国際化する手助けになるさまざ
 
     __("This variable ''{0}'' be replaced.", 'will');
 
-これらの関数は `ICU MessageFormatter <http://php.net/manual/ja/messageformatter.format.php>`_
+これらの関数は `ICU MessageFormatter <https://php.net/manual/ja/messageformatter.format.php>`_
 を活用しています。そのためメッセージと地域化された日付や番号、通貨とを同時に翻訳することが可能です。 ::
 
     echo __(

@@ -184,7 +184,7 @@ Creación de vistas JSON
 
 La clase JsonView admite la opción ``jsonOptions`` que permite personalizar
 la máscara de bits utilizada para generar JSON. Consulte la documentación de
-`json_encode <http://php.net/json_encode>`_ para conocer los valores válidos
+`json_encode <https://php.net/json_encode>`_ para conocer los valores válidos
 de esta opción.
 
 Por ejemplo, para serializar la salida de errores de validación de las entidades

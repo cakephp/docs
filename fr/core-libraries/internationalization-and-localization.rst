@@ -40,7 +40,7 @@ Fichiers de Langues
 
 Les traductions peuvent être mises à disposition en utilisant des fichiers de
 langue stockés dans votre application. Le format par défaut pour ces fichiers
-est le format `Gettext <http://en.wikipedia.org/wiki/Gettext>`_.
+est le format `Gettext <https://en.wikipedia.org/wiki/Gettext>`_.
 Ces fichiers doivent être placés dans **src/Locale/** et dans ce répertoire, il
 devrait y avoir un sous-dossier par langue que l'application doit prendre en
 charge::
@@ -219,7 +219,7 @@ remplacées correctement::
     __("This variable ''{0}'' be replaced.", 'will');
 
 Ces fonctions profitent des avantages du `MessageFormatter ICU
-<http://php.net/manual/fr/messageformatter.format.php>`_ pour que vous puissiez
+<https://php.net/manual/fr/messageformatter.format.php>`_ pour que vous puissiez
 traduire des messages, des dates, des nombres et des devises en même temps::
 
     echo __(
@@ -358,7 +358,7 @@ Vous pouvez faire::
     zero{No Results} one{One result} few{...} many{...} other{...}
 
 Assurez-vous de lire le `Guide des Règles Plurielles des Langues
-<http://www.unicode.org/cldr/charts/latest/supplemental/language_plural_rules.html>`_
+<https://www.unicode.org/cldr/charts/latest/supplemental/language_plural_rules.html>`_
 pour obtenir une vue d'ensemble complète des alias que vous pouvez utiliser pour
 chaque langue.
 

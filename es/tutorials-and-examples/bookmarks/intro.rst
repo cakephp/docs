@@ -229,7 +229,7 @@ Añadamos un setter para la contraseña añadiendo el siguiente código en **src
 Ahora actualiza uno de los usuarios que creaste antes, si cambias su contraseña deberías ver una contraseña encriptada en vez del valor original en la lista de usuarios o en su página de View.
 
 CakePHP encripta contraseñas con `bcrypt
-<http://codahale.com/how-to-safely-store-a-password/>`_ por defecto. Puedes usar también sha1 o md5 si estás trabajando con bases de datos ya existentes.
+<https://codahale.com/how-to-safely-store-a-password/>`_ por defecto. Puedes usar también sha1 o md5 si estás trabajando con bases de datos ya existentes.
 
 .. note::
 
@@ -344,7 +344,7 @@ Esto es un concepto muy poderoso en CakePHP que te permite empaquetar queries re
 
 Los métodos finder siempre reciben un objeto :doc:`/orm/query-builder` y un array de opciones como parámetros. Estos métodos pueden manipular la query y añadir cualquier condición o criterio requerido; cuando se completan devuelven un objeto query modificado.
 
-En nuestro método finder sacamos provecho de los métodos ``distinct()`` y ``matching()`` que nos permiten encontrar distintos ('distincts') bookmarks que tienen un tag coincidente (matching). El método ``matching()`` acepta una  `función anónima <http://php.net/manual/es/functions.anonymous.php>`_ que recibe un generador de consultas. Dentro del callback usaremos este generador para definir las condiciones que filtrarán bookmarks que tienen las etiquetas (tags) especificadas.
+En nuestro método finder sacamos provecho de los métodos ``distinct()`` y ``matching()`` que nos permiten encontrar distintos ('distincts') bookmarks que tienen un tag coincidente (matching). El método ``matching()`` acepta una  `función anónima <https://php.net/manual/es/functions.anonymous.php>`_ que recibe un generador de consultas. Dentro del callback usaremos este generador para definir las condiciones que filtrarán bookmarks que tienen las etiquetas (tags) especificadas.
 
 Crear la vista
 --------------
