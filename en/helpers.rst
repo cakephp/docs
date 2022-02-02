@@ -365,7 +365,7 @@ AJAX
 The Cake Ajax helper utilizes the ever-popular Prototype and
 script.aculo.us libraries for Ajax operations and client side effects.
 In order to use this helper, you must have a current version of the
-JavaScript libraries from http://script.aculo.us placed in
+JavaScript libraries from https://script.aculo.us placed in
 **/app/webroot/js/**. In addition, any views that plan to use the Ajax
 Helper will need to include those libraries.
 
