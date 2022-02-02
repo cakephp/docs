@@ -210,7 +210,7 @@ Getting Cake
 First, let's get a copy of fresh Cake code.
 
 To get a fresh download, visit the CakePHP project at Cakeforge:
-`http://cakeforge.org/projects/cakephp/ <http://cakeforge.org/projects/cakephp/>`_
+`https://cakeforge.org/projects/cakephp/ <https://cakeforge.org/projects/cakephp/>`_
 and download the stable release.
 
 You can also checkout/export a fresh copy of our trunk code at:

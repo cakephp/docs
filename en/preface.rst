@@ -24,7 +24,7 @@ CakePHP is Free
 
 CakePHP is free. You don't have to pay for it, you can use it any way
 you want. CakePHP is developed under the `MIT
-License <http://www.opensource.org/licenses/mit-license.php>`_. CakePHP
+License <https://www.opensource.org/licenses/mit-license.php>`_. CakePHP
 is an Open Source project, this means you have full access to the source
 code. The best place to get the most recent version is at the CakePHP
 web site (`https://cakephp.org <https://cakephp.org>`_). You can

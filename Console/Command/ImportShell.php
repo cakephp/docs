@@ -129,7 +129,7 @@ class ImportShell extends Shell {
                 $contents = str_replace($matches[0][$i], ':doc:`/' . $this->_referenceMap[$url] . '`', $contents);
             } else {
                 $this->out('No reference found for ' . $url);
-                $replace = str_replace('</', '<http://docs.cakephp.org/', $matches[0][$i]);
+                $replace = str_replace('</', '<https://docs.cakephp.org/', $matches[0][$i]);
                 $contents = str_replace($matches[0][$i], $replace, $contents);
             }
         }

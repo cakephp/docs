@@ -112,5 +112,5 @@ Bakery <https://bakery.cakephp.org/>`_. A component that becomes
 increasingly useful for the community may some day be included in the
 core distribution.
 
-Also check the `snippet archive <http://cakeforge.org/snippet/>`_ for
+Also check the `snippet archive <https://cakeforge.org/snippet/>`_ for
 user committed components.
