@@ -371,8 +371,8 @@ the appropriate error page.
 
 Next the action checks whether the request is either a POST or a PUT request. If
 it is, then we use the POST/PUT data to update our article entity by using the
-``patchEntity()`` method.  Finally, we call ``save()`` set the appropriate flash
-message and either redirect or display validation errors.
+``patchEntity()`` method.  Finally, we call ``save()``, set the appropriate flash
+message, and either redirect or display validation errors.
 
 Create Edit Template
 ====================
