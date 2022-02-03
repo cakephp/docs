@@ -244,6 +244,14 @@ You may need to call other commands from your command. You can use
 .. versionadded:: 3.8.0
     ``executeCommand()`` was added.
 
+
+.. note::
+
+    When calling ``executeCommand`` in a loop, it is recommended to pass in the
+    parent command's ``ConsoleIo`` instance as the optional 3rd argument to
+    avoid a potential "open files" limit that could occur in some environments.
+
+
 .. _console-integration-testing:
 
 Testing Commands
