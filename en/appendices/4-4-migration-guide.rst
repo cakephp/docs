@@ -35,11 +35,11 @@ RequestHandlerComponent
 
 The RequestHandlerComponent has been soft-deprecated. Like ``AuthComponent``
 using ``RequestHandler`` will not trigger runtime deprecations but it **will**
-be removed in 5.0
+be removed in 5.0.
 
 - Replace ``accepts()`` with ``$this->request->accepts()``.
-- Replace ``requestedWith()`` with a custom request detector.
-  eg. ``$this->request->is('json')``
+- Replace ``requestedWith()`` with a custom request detector (for example,
+  ``$this->request->is('json')``).
 - Replace ``prefers()`` with ``ContentTypeNegotiation``. See :ref:`controller-viewclasses`.
 - Replace ``renderAs()`` with controller content negotiation features on
   ``Controller``.
