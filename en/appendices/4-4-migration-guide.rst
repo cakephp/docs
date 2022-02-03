@@ -30,8 +30,22 @@ features::
 A new configuration option has been added to disable deprecations on a path by
 path basis. See :ref:`deprecation-warnings` for more information.
 
-* Defining view class mappings with ``RequestHandlerComponent`` is deprecated.
-  Use :ref:`controller-viewclasses` instead.
+RequestHandlerComponent
+------------------------
+
+The RequestHandlerComponent has been soft-deprecated. Like ``AuthComponent``
+using ``RequestHandler`` will not trigger runtime deprecations but it **will**
+be removed in 5.0
+
+- Replace ``accepts()`` with ``$this->request->accepts()``.
+- Replace ``requestedWith()`` with a custom request detector.
+  eg. ``$this->request->is('json')``
+- Replace ``prefers()`` with ``ContentTypeNegotiation``. See :ref:`controller-viewclasses`.
+- Replace ``renderAs()`` with controller content negotiation features on
+  ``Controller``.
+- Replace ``checkHttpCache`` option with ``CheckHttpCacheComponent``.
+- Use :ref:`controller-viewclasses` instead of defining view class mappings in
+  ``RequestHandlerComponent``.
 
 Behavior Changes
 ================
