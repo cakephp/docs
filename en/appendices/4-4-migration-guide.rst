@@ -105,3 +105,8 @@ Mailer
 
 * ``Mailer`` now accepts a ``autoLayout`` config which disabled auto layout
   in the ``ViewBuilder`` if set to ``false``.
+  
+Routing
+-------
+
+* ``RoutingMiddleware`` now sets the "route" request attribute with the matched ``Route`` instance.
