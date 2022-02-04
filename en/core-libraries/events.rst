@@ -176,7 +176,7 @@ as necessary. Our ``UserStatistics`` listener might start out like::
         public function implementedEvents(): array
         {
             return [
-                // Custom event names let you model your application events
+                // Custom event names let you design your application events
                 // as required.
                 'Order.afterPlace' => 'updateBuyStatistic',
             ];
