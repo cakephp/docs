@@ -9,7 +9,7 @@ ACL
 フィールドをデータベーステーブルに追加したり、アイテムの親が何であるかを追跡することは簡単です。しかしながら
 CakePHP にバンドルされているビヘイビアの機能は非常にパワフルです。
 `MPTT(Modified Preorder Tree Traversal)
-ロジック <http://dev.mysql.com/tech-resources/articles/hierarchical-data.html>`_\ を扱うには複雑なテクニックを駆使する必要がありますが、このビヘイビアを使用すると、それにわずらわされることなく
+ロジック <https://dev.mysql.com/tech-resources/articles/hierarchical-data.html>`_\ を扱うには複雑なテクニックを駆使する必要がありますが、このビヘイビアを使用すると、それにわずらわされることなく
 MPTT ロジックの恩恵を受けることができます。
 
 必要なもの

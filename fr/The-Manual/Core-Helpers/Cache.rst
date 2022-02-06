@@ -52,13 +52,13 @@ possède des options mais fonctionne bien avec les options par défaut.
 APC
 
 Le moteur de cache APC implémente l'alternative APC : `Alternative PHP
-Cache <http://php.net/apc>`_, le cache d'opcode libre et ouvert pour
+Cache <https://php.net/apc>`_, le cache d'opcode libre et ouvert pour
 PHP. Comme XCache, ce moteur met en cache le code intermédiaire PHP.
 
 XCache
 
 Ce moteur de cache est fonctionnellement similaire à APC met implémente
-`XCache <http://xcache.lighttpd.net/>`_, le cache d'opcode. Il nécessite
+`XCache <https://xcache.lighttpd.net/>`_, le cache d'opcode. Il nécessite
 de rentrer une authentification utilisateur pour fonctionner
 correctement.
 
@@ -67,8 +67,8 @@ Memcache
 Le moteur de cache Memcache fonctionne avec serveur Memcache: un démon
 vous autorisant à créer un objet cache dans la mémoire vive du système.
 Plus d'information sur le module Memcache qui sert d'interface au démon
-sur `php.net <http://www.php.net/memcache>`_ et sur le `démon memcached
-ici. <http://www.danga.com/memcached/>`_
+sur `php.net <https://www.php.net/memcache>`_ et sur le `démon memcached
+ici. <https://www.danga.com/memcached/>`_
 
 La configuration de l'assistant Cache
 =====================================

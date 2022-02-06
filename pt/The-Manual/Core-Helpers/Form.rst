@@ -862,7 +862,7 @@ CakePHP.
 
 Esse array é gerado automaticamente pelo próprio PHP. Para mais detalhes
 sobre os dados de arquivo passados pelo PHP `leia a documentação no site
-oficial do PHP <http://php.net/manual/pt_BR/features.file-upload.php>`_.
+oficial do PHP <https://php.net/manual/pt_BR/features.file-upload.php>`_.
 
 Validando Uploads
 -----------------

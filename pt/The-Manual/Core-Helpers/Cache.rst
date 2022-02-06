@@ -53,13 +53,13 @@ opcionais, mas funciona bem com os valores padrão.
 APC
 
 O mecanismo APC implementa o `Alternative PHP
-Cache <http://php.net/apc>`_ em opcode. Como o XCache, este mecanismo
+Cache <https://php.net/apc>`_ em opcode. Como o XCache, este mecanismo
 faz cache do código opcode de PHP compilado.
 
 XCache
 
 O mecanismo XCache é funcionalmente semelhante ao APC e é outro que
-implementa cache em opcode, via `XCache <http://xcache.lighttpd.net/>`_.
+implementa cache em opcode, via `XCache <https://xcache.lighttpd.net/>`_.
 Este mecanismo precisa de um usuário e senha para funcionar
 adequadamente
 
@@ -68,8 +68,8 @@ Memcache
 O mecanismo Memcache funciona com um servidor que permite a você criar
 um cache de objetos na memória do sistema. Mas informações sobre cache
 em memória podem ser encontradas em
-`php.net <http://www.php.net/memcache>`_ and
-`memcached <http://www.danga.com/memcached/>`_
+`php.net <https://www.php.net/memcache>`_ and
+`memcached <https://www.danga.com/memcached/>`_
 
 Configuração do Cache Helper
 ============================

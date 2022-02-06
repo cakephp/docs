@@ -138,7 +138,7 @@ Attributs des Contrôleurs
 
 Pour une liste complète des attributs des contrôleurs avec leurs
 descriptions, consultez l'API CakePHP :
-`http://api12.cakephp.org/class/controller <http://api12.cakephp.org/class/controller>`_.
+`https://api12.cakephp.org/class/controller <https://api12.cakephp.org/class/controller>`_.
 
 $name
 -----

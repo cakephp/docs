@@ -159,7 +159,7 @@ blackHole(object $controller, string $error)
 
 SecurityComponent は強力な認証機能をいくつか持っています。
 場合によって、アプリケーション中のいくつかの機能を `HTTP
-ベーシック認証 <http://ja.wikipedia.org/wiki/Basic%E8%AA%8D%E8%A8%BC>`_\ によって保護したいかもしれません。
+ベーシック認証 <https://ja.wikipedia.org/wiki/Basic%E8%AA%8D%E8%A8%BC>`_\ によって保護したいかもしれません。
 HTTP 認証がよく使われるものとしては、 REST や SOAP の API
 の保護が挙げられます。
 

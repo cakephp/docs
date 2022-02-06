@@ -12,7 +12,7 @@ níveis, é simples adicionar campos como parent\_id, e utilizar esse
 campo para determinar o parente do dados, assim conseguindo exibir em
 uma estrutura hierárquica. Bundled com o cake no entanto, provem um
 poderoso behavior que permite usar os benefícios do `MPTT
-logic <http://dev.mysql.com/tech-resources/articles/hierarchical-data.html>`_,
+logic <https://dev.mysql.com/tech-resources/articles/hierarchical-data.html>`_,
 sem se preocupar com com nada de técnica, ao menos que você quiser ;)
 
 Requisitos

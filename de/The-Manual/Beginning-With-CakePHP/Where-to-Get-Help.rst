@@ -49,8 +49,6 @@ bring Deinen Sturzhelm mit.
 CakeForge
 =========
 
-`http://www.cakeforge.org <http://www.cakeforge.org>`_
-
 CakeForge ist eine weitere Entwickler-Resource, die Du nutzen kannst um
 Deine CakePHP Projekte mit Anderen zu teilen. Wenn Du Deine
 Killer-Komponente oder ein lobenswertes Plugin planst oder
@@ -88,7 +86,7 @@ oder Deinen nagelneuen Sportwagen spenden willst.
 Die Google-Group
 ================
 
-`http://groups.google.com/group/cake-php <http://groups.google.com/group/cake-php>`_
+`https://groups.google.com/group/cake-php <https://groups.google.com/group/cake-php>`_
 
 CakePHP hat außerdem eine sehr aktive Google-Gruppe (Google Group). Sie
 kann eine großartige Quelle für bereits archivierte Antworten sein,
@@ -100,12 +98,12 @@ Google-Gruppe, die zwar bisher nicht so aktiv ist, wie das amerikanische
 Gegenstück, dafür aber wird Deutsch gesprochen. Die deutsche
 Google-Gruppe zu CakePHP findest Du hier
 
-`http://groups.google.com/group/cakephp-de <http://groups.google.com/group/cakephp-de>`_
+`https://groups.google.com/group/cakephp-de <https://groups.google.com/group/cakephp-de>`_
 
 Das inoffizielle CakePHP Forum
 ==============================
 
-`http://www.cakephpforum.net <http://www.cakephpforum.net>`_
+`https://www.cakephpforum.net <https://www.cakephpforum.net>`_
 
 Das inoffizielle CakePHP Forum ist eine alternative Anlaufstelle für
 CakePHP Bäcker um Informationen über CakePHP auszutauschen.

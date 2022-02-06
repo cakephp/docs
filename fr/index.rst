@@ -7,7 +7,7 @@ publiques. Avec un système ouvert, nous espérons maintenir un haut
 niveau de qualité, de validité et de précision. Le Cookbook est aussi
 fait de telle sorte qu'il est facile à tout un chacun de contribuer.
 
-Un ***énorme*** merci à `AD7six <http://www.ad7six.com/>`_ qui s'est
+Un ***énorme*** merci à `AD7six <https://www.ad7six.com/>`_ qui s'est
 dévoué corps et âme au Cookbook, en y consacrant d'innombrables heures
 de développement, de test et d'amélioration.
 
@@ -40,12 +40,12 @@ retrouvez-le sur IRC (#cakephp sur freenode, pseudo "\_psychic\_") pour
 discutez de tout effort de traduction auquel vous aimeriez participer.
 
 Note des traducteurs francophones : une section du `forum du portail
-CakePHP-fr.org <http://forum.cakephp-fr.org/viewforum.php?id=14>`_ est
+CakePHP-fr.org <https://forum.cakephp-fr.org/viewforum.php?id=14>`_ est
 dédié à la traduction du CookBook. Il regroupe des informations et des
 conseils pour participer à cet effort. Avant de vous lancer dans un
 effort de traduction, nous vous invitons à `souscrire à la mailing-list
 des traducteurs
-francophones <http://forum.cakephp-fr.org/viewtopic.php?id=364>`_ pour
+francophones <https://forum.cakephp-fr.org/viewtopic.php?id=364>`_ pour
 vous présenter et poser vos questions !
 
 Astuces pour les traducteurs :

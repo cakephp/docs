@@ -35,8 +35,7 @@ Vorbereiten der Anwendung
 
 Als erstes musst Du eine frische CakePHP Kopie holen.
 
-Um an den Download zu kommen, besuche das CakePHP Projekt in der
-`Cakeforge <http://cakeforge.org/projects/cakephp/>`_ und lade das
+Um an den Download zu kommen, besuche das CakePHP Projekt in der und lade das
 stable Release herunter. Für dieses Tutorial benötigst Du die Version
 1.2.x.x.
 

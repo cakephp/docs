@@ -26,8 +26,7 @@ Um ein frisches Archiv zu erhalten, besuche unsere Website unter
 `https://cakephp.org <https://cakephp.org>`_. Folge dem großen
 “Download Now!” link zum Paradies. CakePHP Downloads werden bei
 CakeForge gehosted, Du kannst aber auch unsere Projektwebsite besuchen,
-unter
-`http://cakeforge.org/projects/cakephp <http://cakeforge.org/projects/cakephp>`_.
+unter.
 
 Wenn Du immer das Neueste haben willst, checke unsere nightly downloads
 aus unter

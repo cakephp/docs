@@ -4,8 +4,8 @@ AJAX
 The AjaxHelper utilizes the ever-popular Prototype and script.aculo.us
 libraries for Ajax operations and client side effects. To use the
 AjaxHelper, you must have a current version of the JavaScript libraries
-from `www.prototypejs.org <http://www.prototypejs.org>`_ and
-`http://script.aculo.us <http://script.aculo.us/>`_ placed in
+from `www.prototypejs.org <https://www.prototypejs.org>`_ and
+`https://script.aculo.us <https://script.aculo.us/>`_ placed in
 /app/webroot/js/. In addition, you must include the Prototype and
 script.aculo.us JavaScript libraries in any layouts or views that
 require AjaxHelper functionality.
@@ -103,7 +103,7 @@ in to the post body for any other method. Example: ``x=1&foo=bar&y=2``.
 The parameters will be available in ``$this->params['form']`` or
 available in ``$this->data`` depending on formatting. For more
 information see the `Prototype
-Serialize <http://www.prototypejs.org/api/form/serialize>`_ method.
+Serialize <https://www.prototypejs.org/api/form/serialize>`_ method.
 
 Callback Options
 ----------------
@@ -557,7 +557,7 @@ slider
 ``slider(string $id, string $track_id, array  $options)``
 
 Creates a directional slider control. For more information see
-`http://wiki.github.com/madrobby/scriptaculous/slider <http://wiki.github.com/madrobby/scriptaculous/slider>`_.
+`https://wiki.github.com/madrobby/scriptaculous/slider <https://wiki.github.com/madrobby/scriptaculous/slider>`_.
 
 Common options might include:
 
@@ -698,7 +698,7 @@ sortable
 Makes a list or group of floated objects contained by $id sortable. The
 options array supports a number of parameters. To find out more about
 sortable see
-`http://wiki.github.com/madrobby/scriptaculous/sortable <http://wiki.github.com/madrobby/scriptaculous/sortable>`_.
+`https://wiki.github.com/madrobby/scriptaculous/sortable <https://wiki.github.com/madrobby/scriptaculous/sortable>`_.
 
 ::
 

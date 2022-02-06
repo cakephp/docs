@@ -39,8 +39,6 @@ PHP
 CakeForge
 =========
 
-`http://www.cakeforge.org <http://www.cakeforge.org>`_
-
 CakeForgeは、CakePHPプロジェクトを他の人に公開できる、もう一つの開発者用リソースです。すばらしいコンポーネントやすごいプラグインを探している（または公開したい）のなら、CakeForgeをチェックしてみましょう。
 
 The Test Cases
@@ -72,15 +70,15 @@ IRC チャンネル
 Google グループ
 ===============
 
-`http://groups.google.com/group/cake-php <http://groups.google.com/group/cake-php>`_
+`https://groups.google.com/group/cake-php <https://groups.google.com/group/cake-php>`_
 
 CakePHP には、非常にアクティブな Google
-グループがあります。過去に話し合われた解決策、よくある質問、直近の問題に対する解答などを見つけることのできる、優れたリソースセンターになるでしょう。（注：日本語では、\ `http://cakephp.jp <http://cakephp.jp>`_\ もどうぞ。）
+グループがあります。過去に話し合われた解決策、よくある質問、直近の問題に対する解答などを見つけることのできる、優れたリソースセンターになるでしょう。（注：日本語では、\ `https://cakephp.jp <https://cakephp.jp>`_\ もどうぞ。）
 
 The Unofficial CakePHP forum
 ============================
 
-`http://www.cakephpforum.net <http://www.cakephpforum.net>`_\ （訳注：英語）
+`https://www.cakephpforum.net <https://www.cakephpforum.net>`_\ （訳注：英語）
 
 The UnOfficial CakePHP
 forumはCakeのBaker（訳注：ケーキを焼く人、開発者などの親称）がCakePHPについて議論や情報の交換をする場のうちの一つです。

@@ -82,13 +82,13 @@ copiar el archivo pot a la ubicación correcta y cambiar la extensión, a
 menos que usted esté familiarizado con su formato. Es muy fácil crear un
 archivo po inválido o guardarlos con una codificación errónea (si está
 editando manualmente el archivo po use UTF-8 para evitar problemas).
-Existen herramientas gratuitas como `PoEdit <http://www.poedit.net>`_
+Existen herramientas gratuitas como `PoEdit <https://www.poedit.net>`_
 que hacen de la edición y actualización de sus archivos po una tarea
 fácil.
 
 Los códigos de localización correctos son los de tres caracteres
 conforme al estandar `ISO
-639-2 <http://www.loc.gov/standards/iso639-2/php/code_list.php>`_ aunque
+639-2 <https://www.loc.gov/standards/iso639-2/php/code_list.php>`_ aunque
 si crea locales regionales (en\_US, en\_GB, etc.) Cake los utiliza si
 procede.
 
@@ -129,7 +129,7 @@ lo siguiente:
 Esto le dice a Cake qué localización debe usar (si usa una localización
 regional como fr\_FR, como alternativa en caso que no exista, se
 utilizará la localización de la norma `ISO
-639-2 <http://www.loc.gov/standards/iso639-2/php/code_list.php>`_).
+639-2 <https://www.loc.gov/standards/iso639-2/php/code_list.php>`_).
 Puede cambiar el idioma en cualquier momento, por ejemplo en el
 bootstrap si desea definir el idioma por defecto para su aplicación, en
 el beforeFilter del controlador si el idioma es específico para una
@@ -190,9 +190,9 @@ Hay otro aspecto de la localización de su aplicación que no está
 cubierto por el uso de las funciones de traducción, estos son los
 formatos de fecha y moneda. No olvide que CakePHP es PHP :), por lo
 tanto para establecer los formatos para este tipo de cosas deberá
-utilizar ```setlocale`` <http://www.php.net/setlocale>`_.
+utilizar ```setlocale`` <https://www.php.net/setlocale>`_.
 
 Si pasa una localización que no existe en su computadora a
-```setlocale`` <http://www.php.net/setlocale>`_, no tendrá ningún
+```setlocale`` <https://www.php.net/setlocale>`_, no tendrá ningún
 efecto. Puede encontrar la lista de localizaciones disponibles
 ejecutando el comando $locale -a

@@ -108,7 +108,7 @@ URL でそれにアクセスできます。
 ==================
 
 コントローラの属性の完全な一覧とその説明は、CakePHP API
-を参照してください。\ `http://api12.cakephp.org/class/controller <http://api12.cakephp.org/class/controller>`_
+を参照してください。\ `https://api12.cakephp.org/class/controller <https://api12.cakephp.org/class/controller>`_
 にあります。
 
 $name

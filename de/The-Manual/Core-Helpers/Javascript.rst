@@ -4,7 +4,7 @@ Javascript
 Der Javascript-Helper wird verwendet, um die Erzegung von wohl geformten
 Javascript-Tags und Codeblöcken zu unterstützen. Es gibt zahlreiche
 Methoden, von denen einige erzeugt wuden, um mit der
-`Prototype <http://www.prototypejs.org>`_ Javascript-Bibliothek
+`Prototype <https://www.prototypejs.org>`_ Javascript-Bibliothek
 zusammenzuarbeiten.
 
 Methods

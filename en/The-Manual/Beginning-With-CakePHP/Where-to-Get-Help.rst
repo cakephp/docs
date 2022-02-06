@@ -45,8 +45,6 @@ bring your propeller hat.
 CakeForge
 =========
 
-`http://www.cakeforge.org <http://www.cakeforge.org>`_
-
 CakeForge is another developer resource you can use to host your CakePHP
 projects to share with others. If you’re looking for (or want to share)
 a killer component or a praiseworthy plugin, check out CakeForge.
@@ -85,7 +83,7 @@ would like to donate your brand new sports car.
 The Google Group
 ================
 
-`http://groups.google.com/group/cake-php <http://groups.google.com/group/cake-php>`_
+`https://groups.google.com/group/cake-php <https://groups.google.com/group/cake-php>`_
 
 CakePHP also has a very active Google Group. It can be a great resource
 for finding archived answers, frequently asked questions, and getting
@@ -94,7 +92,7 @@ answers to immediate problems.
 The Unofficial CakePHP forum
 ============================
 
-`http://www.cakephpforum.net <http://www.cakephpforum.net>`_
+`https://www.cakephpforum.net <https://www.cakephpforum.net>`_
 
 The UnOfficial CakePHP forum is an alternative place for Cake Bakers to
 discuss and exchange information about CakePHP.

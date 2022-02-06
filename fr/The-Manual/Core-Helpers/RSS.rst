@@ -191,7 +191,7 @@ RSS en allant sur votre site à /posts/index.rss et vous verrez votre
 nouveau flux. Il est toujours important que vous validiez votre flux RSS
 avant de le rendre actif. Ceci peut être effectué en visitant des sites
 qui valident le XML comme Feed Validator ou le site du w3c :
-http://validator.w3.org/feed/.
+https://validator.w3.org/feed/.
 
 Vous aurez besoin de définir la valeur de 'debug' à 1 ou 0 dans votre
 configuration du cœur pour obtenir un flux valide, à cause des

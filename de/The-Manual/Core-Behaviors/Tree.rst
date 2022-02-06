@@ -11,7 +11,7 @@ werden - reicht es aus, eine ``parent_id`` zu haben. Anhand dieser lässt
 sich dann leicht die Hierarchische Struktur ablesen. Zusammen mit
 cakePHP kommt ein mächtiges Verhalten (``Behavior``), das sich ``Tree``
 nennt. Mit diesem ist es möglich, sogenannte `MPTT
-Bäume <http://dev.mysql.com/tech-resources/articles/hierarchical-data.html>`_
+Bäume <https://dev.mysql.com/tech-resources/articles/hierarchical-data.html>`_
 aufzubauen und zu bedienen. Und das alles, ohne sich näher mit der
 Technik auseinandersetzen zu müssen, solange man das nicht möchte ;).
 

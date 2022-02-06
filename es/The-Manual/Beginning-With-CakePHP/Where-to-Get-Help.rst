@@ -51,8 +51,6 @@ código concisa.
 CakeForge
 =========
 
-`http://www.cakeforge.org <http://www.cakeforge.org>`_
-
 CakeForge es otro recurso para desarrolladores que puedes utilizar para
 hospedar tus proyectos CakePHP para compartir con los demás. Si estás
 buscando (o quieres compartir) un componente interesante o un plugin
@@ -100,17 +98,17 @@ Además, CakePHP tiene un grupo Google muy activo; un recurso excelente
 en que se encuentran respuestas archivadas, preguntas frecuentes, y
 donde también puedes obtener respuestas inmediatas a tus problemas.
 
-`http://groups.google.com/group/cake-php/ <http://groups.google.com/group/cake-php/>`_
+`https://groups.google.com/group/cake-php/ <https://groups.google.com/group/cake-php/>`_
 
 Si estás buscando un grupo Google en español, suscríbete al grupo de la
 comunidad hispanohablante.
 
-`http://groups.google.com/group/cakephp-esp/ <http://groups.google.com/group/cakephp-esp/>`_
+`https://groups.google.com/group/cakephp-esp/ <https://groups.google.com/group/cakephp-esp/>`_
 
 El foro no official de CakePHP
 ==============================
 
-`http://www.cakephpforum.net <http://www.cakephpforum.net>`_
+`https://www.cakephpforum.net <https://www.cakephpforum.net>`_
 
 El foro no oficial de CakePHP es un lugar alternativo para
 desarrolladores Cake donde discutir e intercambiar información acerca de

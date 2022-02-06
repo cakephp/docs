@@ -9,7 +9,7 @@ uuid
 ====
 
 La méthode uuid est utilisée pour générer un identifiant unique suivant
-la `RFC 4122 <http://www.ietf.org/rfc/rfc4122.txt>`_. Une uuid est une
+la `RFC 4122 <https://www.ietf.org/rfc/rfc4122.txt>`_. Une uuid est une
 chaîne de caractère de 128 bits dans un format de type
 485fc381-e790-47a3-9794-1337c0a8fe68.
 

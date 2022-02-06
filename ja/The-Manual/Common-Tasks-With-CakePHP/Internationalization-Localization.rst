@@ -36,7 +36,7 @@ default.po ファイルを持たなければなりません。
 「locale」フォルダは、 CakePHP がインストールされた場所の app
 フォルダ内にあります。3文字のロケールコードは ISO 639-2
 標準に準拠します。例はアメリカ議会図書館のウェブサイトで確認できます。
-http://www.loc.gov/standards/iso639-2/php/code\_list.php
+https://www.loc.gov/standards/iso639-2/php/code\_list.php
 を参照してください。
 
 ファイルを作成したら、ローカライズの過程で使用する、文字列のキーと値を入力してください。文字列の各キーは必ず、ユニークで対応する値をもたなければなりません。英語の
@@ -53,7 +53,7 @@ http://www.loc.gov/standards/iso639-2/php/code\_list.php
 1014 であることに注意してください。 Macintosh を使う場合、必ず Unix
 の改行文字(LF)を使うようにしてください。そうしないと、言語ファイルが正確に解析されないことがあります。
 po ファイルを編集するにあたり、フリーのツールである
-`Poedit <http://www.poedit.net>`_
+`Poedit <https://www.poedit.net>`_
 を利用することで、このあたりの面倒を回避することができます。
 
 .po ファイルを正しく作成すれば、アプリケーションは地域化されます。

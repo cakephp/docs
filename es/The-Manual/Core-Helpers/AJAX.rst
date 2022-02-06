@@ -5,8 +5,8 @@ El AjaxHelper utilizas las populares librerías Prototype y
 script.aculo.us para operaciones Ajax y efectos en el lado del cliente.
 Para utilizar el AjaxHelper has de tener la versión actual de las
 librerías de JavaScript de
-`www.prototypejs.org <http://www.prototypejs.org>`_ y
-`http://script.aculo.us <http://script.aculo.us/>`_ situadas en
+`www.prototypejs.org <https://www.prototypejs.org>`_ y
+`https://script.aculo.us <https://script.aculo.us/>`_ situadas en
 ``/app/webroot/js``. Además has de incluir las librerías Prototype y
 script.aculo.us en los *layouts* o *vistas* que requieran las
 funcionalidades de AjaxHelper.
@@ -528,7 +528,7 @@ slider
 ``slider(string $id, string $track_id, array  $options)``
 
 Creates a directional slider control. For more information see
-`http://wiki.github.com/madrobby/scriptaculous/slider <http://wiki.github.com/madrobby/scriptaculous/slider>`_.
+`https://wiki.github.com/madrobby/scriptaculous/slider <https://wiki.github.com/madrobby/scriptaculous/slider>`_.
 
 Common options might include:
 
@@ -669,7 +669,7 @@ sortable
 Makes a list or group of floated objects contained by $id sortable. The
 options array supports a number of parameters. To find out more about
 sortable see
-`http://wiki.github.com/madrobby/scriptaculous/sortable <http://wiki.github.com/madrobby/scriptaculous/sortable>`_.
+`https://wiki.github.com/madrobby/scriptaculous/sortable <https://wiki.github.com/madrobby/scriptaculous/sortable>`_.
 
 ::
 

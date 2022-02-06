@@ -18,4 +18,4 @@ de choses.
 Vous pouvez en apprendre plus dans `le
 book <https://book.cakephp.org/view/529/Using-App-import>`_ ou `la
 documentation de
-l'API <http://api12.cakephp.org/class/app#method-Appimport>`_
+l'API <https://api12.cakephp.org/class/app#method-Appimport>`_
