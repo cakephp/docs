@@ -86,13 +86,13 @@ extensão; *porém*, a menos que você esteja familiarizado com seu
 formato, é muito fácil corromper o arquivo e torná-lo inválido ou mesmo
 salvá-lo com o conjunto de caracteres incorreto (se você estiver
 editando-o manualmente, utilize sempre UTF-8 para evitar problemas).
-Existem ferramentas livres, como o `PoEdit <http://www.poedit.net>`_,
+Existem ferramentas livres, como o `PoEdit <https://www.poedit.net>`_,
 que tornam a edição e atualização de seus arquivos po uma tarefa mais
 fácil; especialmente no caso da atualização de um arquivo po existente a
 partir de um recém-atualizado arquivo pot.
 
 Os códigos de três letras do locale estão de acordo com o padrão `ISO
-639-2 <http://www.loc.gov/standards/iso639-2/php/code_list.php>`_,
+639-2 <https://www.loc.gov/standards/iso639-2/php/code_list.php>`_,
 apesar de que se você for criar locales regionais (en\_US, en\_GB, etc.)
 o Cake vai usá-los apropriadamente.
 
@@ -133,7 +133,7 @@ precisa fazer é o seguinte:
 
 Isso diz ao Cake que locale usar (se você usar um locale regional, como
 fr\_FR, ele irá usar o código do locale do padrão `ISO
-639-2 <http://www.loc.gov/standards/iso639-2/php/code_list.php>`_ como
+639-2 <https://www.loc.gov/standards/iso639-2/php/code_list.php>`_ como
 segunda opção caso o locale regional principal não exista), você pode
 modificar o idioma a qualquer momento, p.ex., em seu bootstrap, se você
 estiver definindo o idioma padrão da aplicação, ou no beforeFilter de
@@ -201,9 +201,9 @@ Há um outro aspecto sobre localização de sua aplicação que não foi
 abordado pelo uso das funções de tradução, que são os formatos de data e
 moeda. Não se esqueça de que o CakePHP é PHP :), sendo assim, para
 definir o formato para tais coisas você vai precisar usar o
-```setlocale`` <http://www.php.net/setlocale>`_.
+```setlocale`` <https://www.php.net/setlocale>`_.
 
 Se você passar um locale que não exista em seu computador para a função
-```setlocale`` <http://www.php.net/setlocale>`_, sua chamada não terá
+```setlocale`` <https://www.php.net/setlocale>`_, sua chamada não terá
 efeito. Você pode obter a lista de locales disponíveis executando o
 comando $ locale -a em um terminal.

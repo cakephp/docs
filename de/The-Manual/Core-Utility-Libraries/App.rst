@@ -17,4 +17,4 @@ durchführen:
 
 Mehr dazu gibts in `the
 book <https://book.cakephp.org/view/529/Using-App-import>`_ oder `der API
-documentation <http://api12.cakephp.org/class/app#method-Appimport>`_
+documentation <https://api12.cakephp.org/class/app#method-Appimport>`_

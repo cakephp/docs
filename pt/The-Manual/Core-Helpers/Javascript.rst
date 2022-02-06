@@ -4,7 +4,7 @@ Javascript
 O helper Javascript é usado para ajudar na criação de tags e blocos de
 código javascript bem-formados. Ele contém diversos métodos, alguns dos
 quais foram desenvolvidos para funcionar com a biblioteca de Javascript
-`Prototype <http://www.prototypejs.org>`_.
+`Prototype <https://www.prototypejs.org>`_.
 
 Métodos
 =======

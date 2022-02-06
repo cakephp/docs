@@ -57,7 +57,7 @@ contient un élément tabulaire après le nom du modèle, et que ce tableau
 contient une valeur non nulle pour la clé primaire du modèle, alors le
 *FormHelper* créera un formulaire de modification pour cet
 enregistrement précis. Par exemple, si on va à l'adresse
-http://site.com/recettes/edit/5, nous devrions obtenir ceci :
+https://site.com/recettes/edit/5, nous devrions obtenir ceci :
 
 ::
 
@@ -887,7 +887,7 @@ environnement Unix.
 Ce tableau est généré par PHP lui-même, donc pour plus de détail sur la
 façon dont PHP gère les données passées dans les champ de fichier, lisez
 la `section sur l'upload de fichier du manuel
-PHP <http://php.net/features.file-upload>`_.
+PHP <https://php.net/features.file-upload>`_.
 
 Valider un upload de fichier
 ----------------------------

@@ -36,14 +36,14 @@ File
 
 APC
 
-APC エンジンは `Alternative PHP Cache <http://php.net/apc>`_
+APC エンジンは `Alternative PHP Cache <https://php.net/apc>`_
 オペコードキャッシュの実装です。XCache
 と同様にこのエンジンはコンパイルされた PHP
 オペコードをキャッシュします。
 
 XCache
 
-XCache キャッシングエンジンは、\ `XCache <http://xcache.lighttpd.net/>`_
+XCache キャッシングエンジンは、\ `XCache <https://xcache.lighttpd.net/>`_
 オペコードキャッシングエンジンを実装している以外は機能的に APC
 と同じです。適切に動作するにはユーザとパスワードが必要です。
 
@@ -51,8 +51,8 @@ Memcache
 
 Memcache
 エンジンはメモリキャッシュングサーバとして動作し、システムメモリ内にキャッシュオブジェクトを生成します。キャッシュングについての詳細は
-`php.net <http://www.php.net/memcache>`_ や
-`memcached <http://www.danga.com/memcached/>`_ にあります。
+`php.net <https://www.php.net/memcache>`_ や
+`memcached <https://www.danga.com/memcached/>`_ にあります。
 
 キャッシュヘルパーの設定
 ========================

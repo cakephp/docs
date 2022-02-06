@@ -5,8 +5,8 @@ Ajax ヘルパーは、Ajax
 操作やクライアントサイドのエフェクト（効果）用の人気のある Prototype や
 script.aculo.us ライブラリのユーティリティです。Ajax
 ヘルパーを使用するには、Javascript ライブラリの最新バージョンを
-`www.prototypejs.org <http://www.prototypejs.org>`_ や
-`http://script.aculo.us <http://script.aculo.us/>`_
+`www.prototypejs.org <https://www.prototypejs.org>`_ や
+`https://script.aculo.us <https://script.aculo.us/>`_
 から入手し、/app/webroot/js/ に配置しなければなりません。さらに、Ajax
 ヘルパー機能を必要とするレイアウトやビュー内で、 Prototype や
 script.aculo.us JavaScript ライブラリを読み込む必要があります。
@@ -99,7 +99,7 @@ GET メソッドの URL に追加する、あるいは、その他のメソッ�
 に追加する、 URL エンコードされた文字列。たとえば、 ``x=1&foo=bar&y=2``
 というようにします。パラメータは、フォーマットに依存し、\ ``$this->params['form']``
 あるいは ``$this->data`` でアクセスできます。詳細は `Prototype の
-Serialize <http://www.prototypejs.org/api/form/serialize>`_
+Serialize <https://www.prototypejs.org/api/form/serialize>`_
 メソッドを参照してください。
 
 コールバックオプション
@@ -518,7 +518,7 @@ slider
 ``slider(string $id, string $track_id, array  $options)``
 
 方向スライダーコントロールを作成します。詳細は、
-`http://wiki.script.aculo.us/scriptaculous/show/Slider <http://wiki.script.aculo.us/scriptaculous/show/Slider>`_
+`https://wiki.script.aculo.us/scriptaculous/show/Slider <https://wiki.script.aculo.us/scriptaculous/show/Slider>`_
 をみてください。
 
 一般的なオプションは次です:
@@ -661,7 +661,7 @@ sortable
 $id
 に含まれるリスト、あるいはフロートオブジェクトのグループをソート可能にします。オプション配列はいくつかのパラメータをサポートしています。sortable
 についての詳細は、
-`http://wiki.github.com/madrobby/scriptaculous/sortable <http://wiki.github.com/madrobby/scriptaculous/sortable>`_
+`https://wiki.github.com/madrobby/scriptaculous/sortable <https://wiki.github.com/madrobby/scriptaculous/sortable>`_
 を参照してください。
 
 一般的なオプションは次の通りです:

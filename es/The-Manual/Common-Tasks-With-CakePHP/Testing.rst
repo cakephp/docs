@@ -20,7 +20,7 @@ El entorno de testing provisto con CakePHP 1.2 está construido sobre el
 entorno de testing SimpleTest. SimpleTest no se distribuye con la
 instalación por defecto de CakePHP por lo que debemos descargarlo
 primero. Lo puedes encontrar aquí:
-`http://simpletest.sourceforge.net/ <http://simpletest.sourceforge.net/>`_
+`https://simpletest.sourceforge.net/ <https://simpletest.sourceforge.net/>`_
 
 Consigue la última versión y descomprime el código en tu carpeta
 cake/vendors, o en tu carpeta app/vendors, según tus preferencias. Ahora
@@ -288,7 +288,7 @@ tests:
    **testPublished()**.
 
 Cuando se crea un caso test, puede ejecutarce por medio del navegador en
-la siguiente dirección **http://tu.dominio.cake/carpeta\_cake/test.php**
+la siguiente dirección **https://tu.dominio.cake/carpeta\_cake/test.php**
 (dependiendo de cómo se ve específicamente tu configuración) y haciendo
 clic en App casos de test, y a continuación, haga clic en el enlace a su
 archivo.
@@ -566,7 +566,7 @@ for a possible fix.
 
 For an in-depth explanation of controller testing please see this blog
 post by Mark Story `Testing CakePHP Controllers the hard
-way <http://mark-story.com/posts/view/testing-cakephp-controllers-the-hard-way>`_.
+way <https://mark-story.com/posts/view/testing-cakephp-controllers-the-hard-way>`_.
 
 Testing Helpers
 ===============
@@ -749,7 +749,7 @@ About CakeWebTestCase
 **CakeWebTestCase** es una extensión directa de SimpleTest WebTestCase,
 sin ninguna funcionalidad extra. Toda la funcionalidad encontrada en `la
 documentación de SimpleTest para Testeo Web (Web
-testing) <http://simpletest.sourceforge.net/en/web_tester_documentation.html>`_
+testing) <https://simpletest.sourceforge.net/en/web_tester_documentation.html>`_
 tambien están disponibles aqui. Esto quiere decir que no se pueden usar
 los fixtures, y que **todos los casos de testeo involucrados en un ABM
 (alta, baja o modificación) a la base de datos modificarán

@@ -23,7 +23,6 @@ Cakeをダウンロード
 まずは、最新のCakeのコードをダウンロードしてきましょう。
 
 最新のCakeをダウンロードするには、CakeforgeにあるCakePHPプロジェクトを見てみましょう。
-`http://cakeforge.org/projects/cakephp/ <http://cakeforge.org/projects/cakephp/>`_
 そして、安定版（stable）リリースをダウンロードします。このチュートリアルでは、1.2.x.x.を使用します。
 
 または、trunkコードを次の場所から、チェックアウト／エクスポートすることもできます。

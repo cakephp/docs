@@ -155,7 +155,7 @@ Umgang mit Datentypen, je nach Datenbank
 ----------------------------------------
 
 Jedes `relationales Datenbankmanagementsystem
-(RDBMS) <http://de.wikipedia.org/wiki/Relationale%20Datenbak>`_
+(RDBMS) <https://de.wikipedia.org/wiki/Relationale%20Datenbak>`_
 definiert Datentypen ein bischen unterschiedlich. In den
 Datenquellen-Klassen nimmt CakePHP für jedes RDBMS diese Datentypen auf,
 so dass es die Datentypen einheitlich wiedererkennen kann; egal welches

@@ -8,7 +8,7 @@ String
 uuid
 ====
 
-uuid メソッドは `RFC 4122 <http://www.ietf.org/rfc/rfc4122.txt>`_
+uuid メソッドは `RFC 4122 <https://www.ietf.org/rfc/rfc4122.txt>`_
 にもとづきユニークな識別子を作成するために使用します。 uuid とは
 485fc381-e790-47a3-9794-1337c0a8fe68
 というフォーマットの128ビットの文字列のことです。

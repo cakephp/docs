@@ -20,7 +20,7 @@ SimpleTest-Test-Framework. SimpleTest ist in der
 Standard-CakePHP-Installation nicht enthalten, somit müssen wir das nun
 runterladen.
 Hier findest du SimpleTest:
-`http://simpletest.sourceforge.net/ <http://simpletest.sourceforge.net/>`_.
+`https://simpletest.sourceforge.net/ <https://simpletest.sourceforge.net/>`_.
 Besorg dir die letzte Version und entpack die Dateien entweder in
 deinen /cake/vendors/ oder in den /app/vendors/ Ordner, je nach euren
 Anforderungen. Du solltest also jetzt einen ../vendors/simpletest/
@@ -34,7 +34,7 @@ Starten der integrierten Test-Funktionen
 CakePHP 1.2 kommt mit einem Bündel an Test-Fallbeispielen, involviert in
 die Core-CakePHP-Funktionen, daher. Auf diese Test\`s kann zugegriffen
 werden indem man mit dem Browser
-http://deine.cake.adresse/dein\_cake\_ordner/test.php (je nachdem wie
+https://deine.cake.adresse/dein\_cake\_ordner/test.php (je nachdem wie
 euer spezifisches Setup aussieht..), ansteuert.
 Probier eine von den Core-Test-Gruppen aus (indem du die Links
 anklickst... ;-D).
@@ -294,7 +294,7 @@ Test\`s:
 
 Wenn du einen Test-Fall erstellt hast, dann kannst du diesen starten,
 indem du mit deinem Browser folgende Adresse ansteuerst:
-**http://deine.cake.domain/cake\_ordner/test.php** (abhängig von deinem
+**https://deine.cake.domain/cake\_ordner/test.php** (abhängig von deinem
 persönlichen Setup für CakePHP!). Im Anschluss an\`s durchklicken der
 Programm-Test-Möglichkeiten, bitte den Link zu deiner persönlichen Datei
 anklicken.
@@ -574,7 +574,7 @@ for a possible fix.
 
 For an in-depth explanation of controller testing please see this blog
 post by Mark Story `Testing CakePHP Controllers the hard
-way <http://mark-story.com/posts/view/testing-cakephp-controllers-the-hard-way>`_.
+way <https://mark-story.com/posts/view/testing-cakephp-controllers-the-hard-way>`_.
 
 Testing Helpers
 ===============
@@ -753,7 +753,7 @@ About CakeWebTestCase
 **CakeWebTestCase** is a direct extension of the SimpleTest WebTestCase,
 without any extra functionality. All the functionality found in the
 `SimpleTest documentation for Web
-testing <http://simpletest.sourceforge.net/en/web_tester_documentation.html>`_
+testing <https://simpletest.sourceforge.net/en/web_tester_documentation.html>`_
 is also available here. This also means that no functionality other than
 that of SimpleTest is available. This means that you cannot use
 fixtures, and **all web test cases involving updating/saving to the

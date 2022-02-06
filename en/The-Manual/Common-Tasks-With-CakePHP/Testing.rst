@@ -20,7 +20,7 @@ The testing framework provided with CakePHP 1.2 is built upon the
 SimpleTest testing framework. SimpleTest is not shipped with the default
 CakePHP installation, so we need to download it first. You can find it
 here:
-`http://simpletest.sourceforge.net/ <http://simpletest.sourceforge.net/>`_.
+`https://simpletest.sourceforge.net/ <https://simpletest.sourceforge.net/>`_.
 
 Fetch the latest version, and unzip the code to your vendors folder, or
 your app/vendors folder, depending on your preference. You should now
@@ -53,7 +53,7 @@ Running Core test cases
 The release packages of CakePHP 1.2 do not ship with the core test
 cases. In order to get these tests, you need to download from the
 repository. All versions of CakePHP are currently located at the website
-`http://code.cakephp.org/ <http://code.cakephp.org/>`_. You will need to
+`https://code.cakephp.org/ <https://code.cakephp.org/>`_. You will need to
 create a user account with personal key, and use Git to access the
 repository.
 
@@ -573,7 +573,7 @@ for a possible fix.
 
 For an in-depth explanation of controller testing please see this blog
 post by Mark Story `Testing CakePHP Controllers the hard
-way <http://mark-story.com/posts/view/testing-cakephp-controllers-the-hard-way>`_.
+way <https://mark-story.com/posts/view/testing-cakephp-controllers-the-hard-way>`_.
 
 Testing Helpers
 ===============
@@ -751,7 +751,7 @@ About CakeWebTestCase
 **CakeWebTestCase** is a direct extension of the SimpleTest WebTestCase,
 without any extra functionality. All the functionality found in the
 `SimpleTest documentation for Web
-testing <http://simpletest.sourceforge.net/en/web_tester_documentation.html>`_
+testing <https://simpletest.sourceforge.net/en/web_tester_documentation.html>`_
 is also available here. This also means that no functionality other than
 that of SimpleTest is available. This means that you cannot use
 fixtures, and **all web test cases involving updating/saving to the

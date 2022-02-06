@@ -268,7 +268,7 @@ CakePHP のセキュリティレベルを設定します。'Session.timeout'
 'medium' = x 100
 'low' = x 300
 'high' と 'medium' は、両方とも
-`session.referer\_check <http://www.php.net/manual/ja/session.configuration.php#ini.session.referer-check>`_
+`session.referer\_check <https://www.php.net/manual/ja/session.configuration.php#ini.session.referer-check>`_
 が有効になります。
 'Security.level' が 'high' にセットされていた場合、 CakePHP のセッション
 ID はリクエストごとに再生成されます。

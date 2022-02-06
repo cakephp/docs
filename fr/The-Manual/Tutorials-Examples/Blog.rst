@@ -41,7 +41,6 @@ Tout d'abord, récupérons une copie récente de Cake.
 
 Pour télécharger la dernière révision, visitez le projet CakePHP sur
 Cakeforge :
-`http://cakeforge.org/projects/cakephp/ <http://cakeforge.org/projects/cakephp/>`_
 et téléchargez la version stable. Pour ce tutoriel, vous avez besoin de
 la version 1.2.x.x
 

@@ -5,7 +5,7 @@ Qu'est-ce que CakePHP ? Pourquoi l'utiliser ?
 `framework <https://en.wikipedia.org/wiki/Application_framework>`_ de
 `développement
 rapide <https://en.wikipedia.org/wiki/Rapid_application_development>`_
-pour `PHP <http://www.php.net/>`_,
+pour `PHP <https://www.php.net/>`_,
 `gratuit <https://en.wikipedia.org/wiki/MIT_License>`_ et
 `open-source <https://en.wikipedia.org/wiki/Open_source>`_. C’est un
 ensemble de briques élémentaires pour les programmeurs qui créent des
@@ -36,7 +36,7 @@ utilisant CakePHP :
 -  `Communauté <https://cakephp.org/feeds>`_ active et sympathique
 -  Système de `license <https://en.wikipedia.org/wiki/MIT_License>`_
    souple
--  Compatible avec les versions 4 et 5 de `PHP <http://www.php.net/>`_
+-  Compatible avec les versions 4 et 5 de `PHP <https://www.php.net/>`_
 -  Fonctions
    `CRUD <https://en.wikipedia.org/wiki/Create%2C_read%2C_update_and_delete>`_
    (create, read, update, delete) intégrées pour les interactions avec
@@ -64,6 +64,6 @@ utilisant CakePHP :
 -  Système de `cache <https://en.wikipedia.org/wiki/Web_cache>`_ souple
 -  Localisation et internationalisation
 -  Fonctionne sur n’importe quelle arborescence de site web, avec un
-   zeste de configuration `Apache <http://httpd.apache.org/>`_ pas très
+   zeste de configuration `Apache <https://httpd.apache.org/>`_ pas très
    compliquée
 

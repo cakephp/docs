@@ -164,7 +164,7 @@ Asociaciones de Tipo de Dato por Base de Datos
 ----------------------------------------------
 
 Todo
-`RDMS <http://es.wikipedia.org/wiki/Sistema_administrador_de_bases_de_datos_relacionales>`_
+`RDMS <https://es.wikipedia.org/wiki/Sistema_administrador_de_bases_de_datos_relacionales>`_
 define tipos de datos de manera ligeramente diferente. Dentro de la
 clase de origen de datos (o "fuente de datos", *datasource*) para cada
 sistema de base de datos, CakePHP "mapea" dichos tipos a algo que

@@ -19,7 +19,7 @@ Desarrollo
 
 Usar una instalación de desarrollo es el método más rápido para montar
 Cake. Este ejemplo te ayudará a instalar una aplicación de CakePHP y
-hacerla disponible en http://www.ejemplo.com/cake\_1\_2/. Asumimos para
+hacerla disponible en https://www.ejemplo.com/cake\_1\_2/. Asumimos para
 el fin de este ejemplo que tu raíz de documentos está establecido a
 /var/www/html.
 
@@ -41,7 +41,7 @@ cake\_1\_2
 -  README
 
 Si tu servidor web está configurado correctamente, deberías encontrar tu
-aplicación de Cake accesible en http://www.ejemplo.com/cake\_1\_2/.
+aplicación de Cake accesible en https://www.ejemplo.com/cake\_1\_2/.
 
 Producción
 ==========
@@ -50,7 +50,7 @@ Una instalación de producción es una manera más flexible de instalar
 Cake. Usar este método permite que un dominio entero se comporte como
 una aplicación CakePHP única. Este ejemplo te ayudará a installar Cake
 en cualquier sitio de tu sistema de ficheros y ponerlo disponible en
-http://www.ejemplo.com. Tener en cuenta que esta instalación puede
+https://www.ejemplo.com. Tener en cuenta que esta instalación puede
 requerir los privilegios para cambiar el ``DocumentRoot`` (raíz de
 documentos) en servidores web Apache.
 
@@ -80,7 +80,7 @@ Los desarrolladores que usan Apache deberán establecer la directiva
     DocumentRoot /cake_install/app/webroot
 
 Si tu servidor web está configurado correctamente, deberías encontrar tu
-aplicación Cake accesible en http://www.ejemplo.com.
+aplicación Cake accesible en https://www.ejemplo.com.
 
 Instalación Avanzada
 ====================
@@ -272,7 +272,7 @@ específico de un usuario o del *site*).
    En muchos servicios de hosting (GoDaddy, 1and1), tu servidor web está
    realmente siendo servido desde un directorio de usuario que ya
    utiliza mod\_rewrite. Si estás instalando CakePHP en un directorio de
-   usuario (http://ejemplo.com/~nombreusuario/cakephp), o en cualquier
+   usuario o en cualquier
    otra estructura que ya utilice mod\_rewrite necesitarás añadir
    sentencias ``RewriteBase`` a los archivos .htaccess que utiliza
    CakePHP (/.htaccess, /app/.htaccess, /app/webroot/.htaccess)

@@ -17,7 +17,7 @@ aplicación CakePHP.
 Negro = elemento requerido, Gris = elemento opcional, Azul = callback
 
 -  Ricardo hace clic en el enlace apuntando a
-   http://www.ejemplo.com/tortas/comprar, y su navegador hace una
+   https://www.ejemplo.com/tortas/comprar, y su navegador hace una
    petición a su servidor Web.
 -  El enrutador analiza la URL para extraer los parámetros para esta
    petición: el controlador, la acción, y cualquier otro argumento(s)

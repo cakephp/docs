@@ -20,7 +20,7 @@ Ricardo acaba de hacer clic en el enlace "¡Comprar un pastel
 personalizado ahora!" de la página de inicial de la aplicación.
 
 #. Ricardo hace clic en el enlace apuntando a
-   http://www.ejemplo.com/pasteles/comprar, y su navegador hace una
+   https://www.ejemplo.com/pasteles/comprar, y su navegador hace una
    petición al servidor web.
 #. El despachador comprueba la URL de la petición (/pasteles/comprar), y
    le pasa la petición al controlador adecuado.

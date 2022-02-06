@@ -128,7 +128,7 @@ Controller Attributes
 
 For a complete list of controller attributes and their descriptions
 visit the CakePHP API. Check out
-`http://api12.cakephp.org/class/controller <http://api12.cakephp.org/class/controller>`_.
+`https://api12.cakephp.org/class/controller <https://api12.cakephp.org/class/controller>`_.
 
 $name
 -----

@@ -25,8 +25,7 @@ Preparing our Application
 
 First, let's get a copy of fresh Cake code.
 
-To get a fresh download, visit the CakePHP project at Cakeforge:
-http://cakeforge.org/projects/cakephp/ and download the stable release.
+To get a fresh download, visit the CakePHP project at Cakeforge: and download the stable release.
 For this tutorial you need 1.2.x.x
 
 You can also checkout/export a fresh copy of our trunk code at:

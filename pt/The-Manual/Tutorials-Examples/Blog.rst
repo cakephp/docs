@@ -41,7 +41,6 @@ Download do CakePHP
 Primeiro, vamos fazer o download do CakePHP.
 
 Para fazer o download, acesse o site do projeto CakePHP no Cakeforge:
-`http://cakeforge.org/projects/cakephp/ <http://cakeforge.org/projects/cakephp/>`_
 e faça o download da última versão estável. Para este tutorial você vai
 precisar da versão 1.2.x.x
 

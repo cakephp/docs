@@ -3,7 +3,7 @@
 
 このセクションでは、見本のCakePHPアプリケーションを通して、どのように全ての部品が組み合わさるかを知ることができます。
 
-また、\ `CakeForge <http://cakeforge.org/>`_ と
+また、\ `CakeForge <https://cakeforge.org/>`_ と
 `Bakery <https://bakery.cakephp.org/>`_
 で、実際のアプリケーションやコンポーネントを参照することもできます。\ `このCookbookアプリケーションのソースコード <http://thechaw.com/cakebook/>`_\ を参照することもできます。
 

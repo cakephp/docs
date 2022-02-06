@@ -172,4 +172,4 @@ RSS. Una vez que hayas hecho todo esto, puedes probar tu RSS
 dirigiéndote a la direccion /entries/index.rss y verás tu nuevo feed.
 Siempre es importante que valides tu RSS feed antes de ponerlo en
 produccion. Esto se puede hacer visitando algunos sitios como
-FeedValidator o el sitio de w3c en http://validator.w3.org/feed/.
+FeedValidator o el sitio de w3c en https://validator.w3.org/feed/.

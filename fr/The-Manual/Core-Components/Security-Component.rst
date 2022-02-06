@@ -190,7 +190,7 @@ Authentification HTTP Basic
 Le composant Security a quelques fonctions d'authentifications très
 puissantes. Parfois, vous pouvez avoir besoin de protéger quelques
 fonctionnalités de votre application, en utilisant une `authentification
-HTTP Basic <http://fr.wikipedia.org/wiki/HTTP_Authentification>`_. L'un
+HTTP Basic <https://fr.wikipedia.org/wiki/HTTP_Authentification>`_. L'un
 des usages courant de l'authentification HTTP est la protection d'une
 API REST ou SOAP.
 

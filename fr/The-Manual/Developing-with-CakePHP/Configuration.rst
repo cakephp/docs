@@ -325,7 +325,7 @@ Valeurs possibles :
 - 'medium' = x 100
 - 'low' = x 300
 - 'high' et 'medium' active également
-  `session.referer\_check <http://www.php.net/manual/fr/session.configuration.php#ini.session.referer-check>`_
+  `session.referer\_check <https://www.php.net/manual/fr/session.configuration.php#ini.session.referer-check>`_
   Les IDs de session CakePHP sont aussi regénérés entre les requêtes si
   'Security.level' est défini à 'high'.
 
