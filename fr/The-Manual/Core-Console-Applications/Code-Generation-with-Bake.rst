@@ -14,7 +14,7 @@ prototypée.
 
 Ceux qui sont novices avec Bake (spécialement les utilisateurs de
 Windows) pourraient trouver le `*screencast*
-Bake <http://tv.cakephp.org/video/gwoo/2010/12/24/setting_up_the_cakephp_console_on_windows>`_
+Bake <https://tv.cakephp.org/video/gwoo/2010/12/24/setting_up_the_cakephp_console_on_windows>`_
 utile pour paramétrer les choses avant de continuer.
 
 Suivant la configuration de votre installation, vous devrez peut être

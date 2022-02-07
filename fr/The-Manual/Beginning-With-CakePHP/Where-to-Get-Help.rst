@@ -49,8 +49,6 @@ chapeau à hélice.
 La forge Cake
 =============
 
-`http://www.cakeforge.org <http://www.cakeforge.org>`_
-
 La forge Cake est une autre ressource développeur que vous pouvez
 utiliser pour héberger vos projets CakePHP et les partager avec
 d'autres. Si vous recherchez (ou voulez partager) un composant de tueur
@@ -96,7 +94,7 @@ nouvelle voiture sportive de marque.
 Le Groupe Google
 ================
 
-`http://groups.google.com/group/cake-php <http://groups.google.com/group/cake-php>`_
+`https://groups.google.com/group/cake-php <https://groups.google.com/group/cake-php>`_
 
 CakePHP dispose également d'un Groupe Google très actif. Il peut être
 une ressource de choix pour trouver des réponses archivées, des

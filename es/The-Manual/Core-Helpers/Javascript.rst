@@ -4,7 +4,7 @@ Javascript
 EL ayudante Javascript es usado para en la creación de etiquetas y
 bloques de código javascript bien formados. Existen varios métodos
 algunos de los cuales están diseñados para trabajar con el framework
-Javascript `Prototype <http://www.prototypejs.org>`_.
+Javascript `Prototype <https://www.prototypejs.org>`_.
 
 Methods
 =======

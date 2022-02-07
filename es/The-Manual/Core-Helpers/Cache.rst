@@ -57,7 +57,7 @@ codigo ya compilado de PHP.
 XCache
 
 El motor XCache opera en forma similar al APC, pero implementanto el
-método `XCache <http://xcache.lighttpd.net/>`_. Requiere la
+método `XCache <https://xcache.lighttpd.net/>`_. Requiere la
 autenticacion de usuarios para funcionar apropiadamente.
 
 Memcache
@@ -65,8 +65,8 @@ Memcache
 El motor Memcache funciona utilizando un servidor de almacenamiento en
 memoria, lo que permite crear objetos cache en la memoria del sistema.
 Mas informacion acerca de este método puede ser encontrada en
-`php.net <http://www.php.net/memcache>`_ y
-`memcached <http://www.danga.com/memcached/>`_
+`php.net <https://www.php.net/memcache>`_ y
+`memcached <https://www.danga.com/memcached/>`_
 
 Configuracion del Cache Helper
 ==============================

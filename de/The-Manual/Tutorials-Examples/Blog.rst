@@ -45,7 +45,6 @@ Zunächst brauchen wir eine aktuelle Version des Cake-Codes.
 
 Um diese aktuelle Version herunterzuladen, besuche das CakePHP-Projekt
 auf Cakeforge:
-`http://cakeforge.org/projects/cakephp/ <http://cakeforge.org/projects/cakephp/>`_
 und wähle die stabile (*stable*) Version zum Download. Um dieses
 Tutorial nachvollziehen zu können benötigst du die Version 1.2.x.x.
 

@@ -296,7 +296,7 @@ The level of CakePHP security. The session timeout time defined in
  'high' = x 10
  'medium' = x 100
  'low' = x 300
- 'high' and 'medium' also enable `session.referer\_check <http://www.php.net/manual/en/session.configuration.php#ini.session.referer-check>`_
+ 'high' and 'medium' also enable `session.referer\_check <https://www.php.net/manual/en/session.configuration.php#ini.session.referer-check>`_
 
 'Security.level' is set to 'high'.
 

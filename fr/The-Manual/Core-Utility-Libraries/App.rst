@@ -17,4 +17,4 @@ method. But, with the import method, you can accomplish a lot.
 You can read more about it in `the
 book <https://book.cakephp.org/view/936/Importing-Controllers-Models-Components-Behaviors->`_
 or `the API
-documentation <http://api13.cakephp.org/class/app#method-Appimport>`_
+documentation <https://api13.cakephp.org/class/app#method-Appimport>`_

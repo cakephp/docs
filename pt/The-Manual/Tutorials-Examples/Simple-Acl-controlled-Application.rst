@@ -30,7 +30,7 @@ Preparando sua Aplicação
 Primeiro, vamos pegar uma cópia recente do Cake.
 
 Para obter um download recente, visite o projeto CakePHP no Cakeforge:
-http://cakeforge.org/projects/cakephp/ e faça o download da versão
+e faça o download da versão
 estável. Para este tutorial você precisa da verão 1.2.x.x
 
 Você também pode verificar/exportar uma cópia recente do nosso código

@@ -2,7 +2,7 @@ Comprendre le modèle M-V-C
 ##########################
 
 CakePHP suit le motif de conception logicielle
-`MVC <http://fr.wikipedia.org/wiki/Mod%C3%A8le-Vue-Contr%C3%B4leur>`_.
+`MVC <https://fr.wikipedia.org/wiki/Mod%C3%A8le-Vue-Contr%C3%B4leur>`_.
 Programmer en utilisant MVC sépare votre application en 3 parties
 principales :
 

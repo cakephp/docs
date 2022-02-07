@@ -55,15 +55,15 @@ caches the compiled PHP opcode.
 XCache
 
 The XCache caching engine is functionally similar to APC other than it
-implements the `XCache <http://xcache.lighttpd.net/>`_ opcode caching
+implements the `XCache <https://xcache.lighttpd.net/>`_ opcode caching
 engine. It requires the entry of a user and password to work properly.
 
 Memcache
 
 The Memcache engine works with a memcaching server allowing you to
 create a cache object in system memory. More information on memcaching
-can be found on `php.net <http://www.php.net/memcache>`_ and
-`memcached <http://www.danga.com/memcached/>`_
+can be found on `php.net <https://www.php.net/memcache>`_ and
+`memcached <https://www.danga.com/memcached/>`_
 
 Cache Helper Configuration
 ==========================

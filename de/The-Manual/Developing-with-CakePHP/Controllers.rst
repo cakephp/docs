@@ -163,7 +163,7 @@ Controller-Attribute
 
 Eine komplette Liste der Controller-Attribute, inklusive deren
 Beschreibung, findest Du in der CakePHP API, unter <a
-href="http://api13.cakephp.org/class/controller">http://api13.cakephp.org/class/controller</a>.
+href="https://api13.cakephp.org/class/controller">https://api13.cakephp.org/class/controller</a>.
 
 $name
 -----

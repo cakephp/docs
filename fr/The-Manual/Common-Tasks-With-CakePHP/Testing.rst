@@ -18,7 +18,7 @@ Le framework de tests fourni avec CakePHP 1.2 est basé sur le framework
 de tests SimpleTest. SimpleTest n'est pas livré avec l'installation par
 défaut de CakePHP, donc nous avons d'abord besoin de le télécharger.
 Vous pouvez le trouver ici :
-`http://simpletest.sourceforge.net/ <http://simpletest.sourceforge.net/>`_.
+`https://simpletest.sourceforge.net/ <https://simpletest.sourceforge.net/>`_.
 
 Récupérez la dernière version et décompressez le code dans votre dossier
 cake/vendors ou votre dossier app/vendors, comme vous préférez. Vous
@@ -54,7 +54,7 @@ Les différents packages de CakePHP 1.2 ne sont pas livrés avec les cas
 de test du cœur. Pour obtenir ces tests, vous devez les télécharger
 depuis le dépôt. Toutes les versions de CakePHP sont actuellement
 situées sur le site
-`http://code.cakephp.org/ <http://code.cakephp.org/>`_. Vous aurez
+`https://code.cakephp.org/ <https://code.cakephp.org/>`_. Vous aurez
 besoin de vous créer un compte utilisateur avec une clé personnalisée et
 utiliser Git pour accéder au dépôt.
 
@@ -64,7 +64,7 @@ temporaire. Localisez le répertoire ``/cake/tests`` sur le dépôt et
 copiez-le (récursivement) dans votre dossier ``/cake/tests``.
 
 Ces tests peuvent alors être atteints en naviguant à l'adresse
-http://votre.domaine.cake/test.php - qui dépend de vos paramétrages
+https://votre.domaine.cake/test.php - qui dépend de vos paramétrages
 spécifiques. Essayez d'exécuter l'un des groupes de test du cœur en
 cliquant sur le lien correspondant. L'exécution d'un groupe de tests
 peut prendre un certain temps, mais vous devriez finir par voir quelque
@@ -312,7 +312,7 @@ les tests :
    **testPublished()**.
 
 Quand vous avez créé un cas de test, vous pouvez l'exécuter en naviguant
-à l'adresse **http://votre.domaine.cake/dossier\_cake/test.php** (ceci
+à l'adresse **https://votre.domaine.cake/dossier\_cake/test.php** (ceci
 dépend de vos réglages spécifiques) et cliquer les cas de test de l'App,
 puis cliquer le lien vers votre fichier spéficique.
 
@@ -786,7 +786,7 @@ A propos de CakeWebTestCase
 **CakeWebTestCase** est une extension directe du SimpleTest WebTestCase,
 sans aucune autre fonctionnalité. Toutes les fonctionnalités trouvées
 dans `SimpleTest, documentation pour le test
-Web <http://simpletest.sourceforge.net/fr/web_tester_documentation.html>`_
+Web <https://simpletest.sourceforge.net/fr/web_tester_documentation.html>`_
 est également disponible ici. Cela veut dire aussi, qu'aucune autre
 fonctionnalité que celles de SimpleTest n'est disponible. Cela veut dire
 que vous ne pouvez pas utiliser les fixtures et que **tous les cas de
@@ -827,7 +827,7 @@ réalisant une requête **get** ou **post**, en utilisant respectivement
 **get()**\ ou **post()**. Ces deux méthodes prennent une url absolue
 comme premier paramètre. Ceci peut être récupéré dynamiquement, si nous
 supposons que le script de test est situé sous
-http://votre.domaine/cake/folder/webroot/test.php, en tapant :
+https://votre.domaine/cake/folder/webroot/test.php, en tapant :
 
 ::
 

@@ -58,7 +58,7 @@ automatically detect whether to create an add or edit form. If
 ``$this->data`` contains an array element named after the form's model,
 and that array contains a non-empty value of the model's primary key,
 then the FormHelper will create an edit form for that record. For
-example, if we browse to http://site.com/recipes/edit/5, we might get
+example, if we browse to https://site.com/recipes/edit/5, we might get
 the following:
 
 ::

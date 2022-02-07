@@ -11,7 +11,7 @@ minutes. In fact, Bake is a natural step to take once an application has
 been scaffolded.
 
 Those new to Bake (especially Windows users) may find the `Bake
-screencast <http://tv.cakephp.org/video/gwoo/2010/12/24/setting_up_the_cakephp_console_on_windows>`_
+screencast <https://tv.cakephp.org/video/gwoo/2010/12/24/setting_up_the_cakephp_console_on_windows>`_
 helpful in setting things up before continuing.
 
 Depending on the configuration of your setup, you may have to set

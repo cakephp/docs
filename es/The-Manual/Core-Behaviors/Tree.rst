@@ -13,7 +13,7 @@ tabla de base de datos y utilizar este para hacer un seguimiento de cual
 item es padre de quien. Sin embargo, Cake Viene equipado con este
 paquete, pero con un comportamiento de gran alcance que le permite
 utilizar los beneficios de la lógica
-`MPTT <http://dev.mysql.com/tech-resources/articles/hierarchical-data.html>`_
+`MPTT <https://dev.mysql.com/tech-resources/articles/hierarchical-data.html>`_
 sin preocuparse de cualquiera de los entresijos de la técnica - a menos
 que ud lo desee ;).
 

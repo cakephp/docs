@@ -5,8 +5,8 @@ L'assistant AJAX utilise les librairies populaires que sont Prototype et
 script.aculo.us pour les requêtes AJAX et les effets de slide côté
 client. Pour utiliser l'assistant AJAX, vous devez avoir la version
 actuelle de la librairie Javascript
-`www.prototypejs.org <http://www.prototypejs.org>`_ et
-`http://script.aculo.us <http://script.aculo.us/>`_ placé dans
+`www.prototypejs.org <https://www.prototypejs.org>`_ et
+`https://script.aculo.us <https://script.aculo.us/>`_ placé dans
 /app/webroot/js/.De plus, vous devrez inclure les librairies Javascript
 Prototype et script.aculo.us dans chaque vues utilisant les
 fonctionnalités de l'assistant AJAX.
@@ -104,7 +104,7 @@ ou dans le corps du post pour tout autre méthode. Exemple :
 ``x=1&toto=tata&y=2``. Les paramètres seront disponibles dans
 ``$this->params['form']`` ou dans ``$this->data``, en fonction du
 format. Pour plus d'information, voyez la méthode `Serialize de
-Prototype <http://www.prototypejs.org/api/form/serialize>`_.
+Prototype <https://www.prototypejs.org/api/form/serialize>`_.
 
 Options Callback
 ----------------
@@ -551,7 +551,7 @@ slider
 ``slider(string $id, string $track_id, array  $options)``
 
 Creates a directional slider control. For more information see
-`http://wiki.github.com/madrobby/scriptaculous/slider <http://wiki.github.com/madrobby/scriptaculous/slider>`_.
+`https://wiki.github.com/madrobby/scriptaculous/slider <https://wiki.github.com/madrobby/scriptaculous/slider>`_.
 
 Common options might include:
 

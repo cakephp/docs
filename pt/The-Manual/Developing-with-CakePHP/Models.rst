@@ -159,7 +159,7 @@ Tipos de dados associados à cada SGBD
 -------------------------------------
 
 Cada
-`SGBD <http://pt.wikipedia.org/wiki/Sistema_de_gerenciamento_de_banco_de_dados>`_
+`SGBD <https://pt.wikipedia.org/wiki/Sistema_de_gerenciamento_de_banco_de_dados>`_
 define os tipos de dados de forma ligeiramente diferente. Dentro da
 classe de dados para cada sistema de base de dados, o CakePHP possui
 mapas, esses tipos de coisa que reconhece e cria uma interface
@@ -505,7 +505,7 @@ Chaves primárias normalmente são definidas como campos INT. O banco de
 dados irá automaticamente incrementar o campo, iniciando em 1, para cada
 novo registro adicionado. Alternativamente, se você especificar sua
 chave primária como CHAR(36) ou BINARY(36), CakePHP irá automaticamento
-gerar `UUIDs <http://pt.wikipedia.org/wiki/Identificador_Único_Global>`_
+gerar `UUIDs <https://pt.wikipedia.org/wiki/Identificador_Único_Global>`_
 quando novos registros forem criados.
 
 Uma UUID é uma string de 32 byte separada por quatro hífens, com um

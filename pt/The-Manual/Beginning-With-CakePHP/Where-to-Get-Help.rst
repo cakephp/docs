@@ -46,8 +46,6 @@ código de referência, para trazer o seu chapéu de hélice.
 CakeForge
 =========
 
-`http://www.cakeforge.org <http://www.cakeforge.org>`_
-
 CakeForge é outro recurso para desenvolvedores que você pode usar para
 hospedar seu projetos CakePHP para partilhar com os outros. Se você está
 procurando (ou quiser compartilhar) um componente assassino ou um
@@ -90,9 +88,9 @@ ou se quer doar o seu novo carro esporte.
 O Google Group
 ==============
 
-`http://groups.google.com/group/cake-php <http://groups.google.com/group/cake-php>`_
+`https://groups.google.com/group/cake-php <https://groups.google.com/group/cake-php>`_
 (e
-`http://groups.google.com/group/cakephp-pt <http://groups.google.com/group/cakephp-pt>`_)
+`https://groups.google.com/group/cakephp-pt <https://groups.google.com/group/cakephp-pt>`_)
 
 CakePHP também tem um grupo muito ativo no Google. Pode ser um excelente
 recurso para encontrar respostas arquivadas, perguntas frequentes e

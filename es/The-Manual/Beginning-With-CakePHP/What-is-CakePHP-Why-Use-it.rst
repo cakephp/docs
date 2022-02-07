@@ -14,7 +14,7 @@ CakePHP, empieza con lo verdaderamente importante y no reinventes la
 rueda cada vez que te incorpores a un nuevo proyecto.
 
 CakePHP tiene un `equipo de
-desarrolladores <http://cakephp.lighthouseapp.com/contributors>`_ y una
+desarrolladores <https://cakephp.lighthouseapp.com/contributors>`_ y una
 comunidad activos, lo que añade valor al proyecto. Con CakePHP, además
 de no tener que reinventar la rueda, el núcleo de tu aplicación se
 mejora constantemente y está bien probado.

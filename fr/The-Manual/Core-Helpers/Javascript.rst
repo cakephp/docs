@@ -4,7 +4,7 @@ Javascript
 L'assistant Javascript est utilisé dans l'aide à la création de tags et
 blocs de code Javascript bien formatés. Il y a plusieurs méthodes dont
 certaines sont conçues pour fonctionner avec la librairie Javascript
-`Prototype <http://www.prototypejs.org>`_.
+`Prototype <https://www.prototypejs.org>`_.
 
 Methods
 =======

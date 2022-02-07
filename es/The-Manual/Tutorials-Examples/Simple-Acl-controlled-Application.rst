@@ -35,8 +35,7 @@ Preparando nuestra aplicación
 
 Primero, consigamos una copia fresca de CakePHP.
 
-Para descargarla, visita la página de CakePHP en Cakeforge:
-http://cakeforge.org/projects/cakephp/ y descarga la última versión
+Para descargarla, visita la página de CakePHP en Cakeforge: y descarga la última versión
 estable. Para este tutorial necesitaras la version 1.2.x.x
 
 También puedes hacer checkout/export desde el trunk en:

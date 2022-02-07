@@ -14,7 +14,7 @@ quelques niveaux de profondeurs, c'est simple d'ajouter un champ
 parent\_id à votre table et de l'utiliser pour savoir quel objet est le
 parent de quel autre. En natif avec CakePHP, il existe cependant un
 moyen puissant d'avoir les bénéfices de `la logique
-MPTT <http://dev.mysql.com/tech-resources/articles/hierarchical-data.html>`_,
+MPTT <https://dev.mysql.com/tech-resources/articles/hierarchical-data.html>`_,
 sans avoir à connaître les détails de l'implémentation technique - à
 moins que ça ne vous intéresse ;).
 

@@ -21,7 +21,7 @@ O framework de testes disponível com o CakePHP 1.2 foi construído com
 base no framework de testes SimleTest. O SimpleTest não é
 disponibilizado numa instalação padrão do CakePHP, então primeiramente
 precisamos fazer obtê-lo. Você pode fazer o download do SimpleTest aqui:
-`http://simpletest.sourceforge.net/ <http://simpletest.sourceforge.net/>`_.
+`https://simpletest.sourceforge.net/ <https://simpletest.sourceforge.net/>`_.
 
 Pegue a versão mais recente e descompacte o conteúdo para sua pasta
 vendors, ou para app/vendors, dependendo de sua preferência. Agora então
@@ -69,7 +69,7 @@ inteiramente para dentro da pasta ``/cake/tests`` de sua aplicação
 CakePHP.
 
 Feito isto, então os testes podem ser acessados via browser acessando-se
-http://seu.dominio.cake/test.php - dependendo de sua instalação
+https://seu.dominio.cake/test.php - dependendo de sua instalação
 específica do CakePHP. Tente executar um dos grupos de testes do núcleo
 (Core Tests) clicando no link correspondente. Executr um grupo de testes
 pode demorar um pouco, mas ao final você eventualmente deve ver algo
@@ -765,7 +765,7 @@ Sobre a CakeWebTestCase
 **CakeWebTestCase** é uma extensão direta da classe WebTestCase do
 SimpleTest, sem qualquer funcionalidade extra. Toda a funcionalidade
 encontrada na `documentação do SimpleTest para testes
-Web <http://simpletest.sourceforge.net/en/web_tester_documentation.html>`_
+Web <https://simpletest.sourceforge.net/en/web_tester_documentation.html>`_
 também está disponível. Isto também significa que nenhuma funcionalidade
 além das presentes no SimpleTest está disponível. Isso quer dizer que
 você não pode usar fixtures, e que **todos os casos de teste que
@@ -807,7 +807,7 @@ requisição **get** ou **post**, usando-se os métodos **get()** ou
 **post()**, respectivamente. Ambos métodos recebem uma url completa como
 primeiro parâmetro. Esta url pode ser obtida dinamicamente. Neste caso,
 supondo que o script de teste esteja localizado em
-http://seu.dominio/cake/pasta/webroot/test.php , poder-se-ia obter esta
+https://seu.dominio/cake/pasta/webroot/test.php , poder-se-ia obter esta
 url com:
 
 ::
@@ -841,7 +841,7 @@ Navegando-se por uma página
 A classe CakeWebTest também permite navegar-se por uma página, clicando
 em links ou imagens, preenchendo formulários e clicando em botões. Por
 favor, confira a `documentação do
-SimpleTest <http://www.simpletest.org/en/web_tester_documentation.html#navigation>`_
+SimpleTest <https://www.simpletest.org/en/web_tester_documentation.html#navigation>`_
 para mais informações sobre isto.
 
 Testando plugins

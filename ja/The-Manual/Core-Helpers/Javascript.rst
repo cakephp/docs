@@ -3,7 +3,7 @@ Javascript
 
 Javascript ヘルパーは 整形済み javascript
 タグやコードブロックを生成します。いくつかのメソッドは
-`Prototype <http://www.prototypejs.org>`_ javascript
+`Prototype <https://www.prototypejs.org>`_ javascript
 ライブラリで動作するように設計されています。
 
 JavascriptHelper は CakePHP 1.3

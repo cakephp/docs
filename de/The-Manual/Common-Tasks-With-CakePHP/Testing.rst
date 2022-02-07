@@ -20,7 +20,7 @@ SimpleTest-Test-Framework. SimpleTest ist in der
 Standard-CakePHP-Installation nicht enthalten, somit müssen wir das nun
 runterladen.
 
-`http://simpletest.sourceforge.net/ <http://simpletest.sourceforge.net/>`_.
+`https://simpletest.sourceforge.net/ <https://simpletest.sourceforge.net/>`_.
 
 deinen /cake/vendors/ oder in den /app/vendors/ Ordner, je nach euren
 Anforderungen. Du solltest also jetzt einen ../vendors/simpletest/
@@ -34,7 +34,7 @@ Starten der integrierten Test-Funktionen
 CakePHP 1.2 kommt mit einem Bündel an Test-Fallbeispielen, involviert in
 die Core-CakePHP-Funktionen, daher. Auf diese Test\`s kann zugegriffen
 werden indem man mit dem Browser
-http://deine.cake.adresse/dein\_cake\_ordner/test.php (je nachdem wie
+https://deine.cake.adresse/dein\_cake\_ordner/test.php (je nachdem wie
 euer spezifisches Setup aussieht..), ansteuert.
 
 anklickst... ;-D).
@@ -580,7 +580,7 @@ If you use testAction to test a method in a controller that does a
 redirect, your test will terminate immediately, not yielding any
 results.
 
-`http://mark-story.com/posts/view/testing-cakephp-controllers-the-hard-way <http://mark-story.com/posts/view/testing-cakephp-controllers-the-hard-way>`_
+`https://mark-story.com/posts/view/testing-cakephp-controllers-the-hard-way <https://mark-story.com/posts/view/testing-cakephp-controllers-the-hard-way>`_
 for a possible fix.
 
 Testing Helpers
@@ -760,7 +760,7 @@ About CakeWebTestCase
 **CakeWebTestCase** is a direct extension of the SimpleTest WebTestCase,
 without any extra functionality. All the functionality found in the
 `SimpleTest documentation for Web
-testing <http://simpletest.sourceforge.net/en/web_tester_documentation.html>`_
+testing <https://simpletest.sourceforge.net/en/web_tester_documentation.html>`_
 is also available here. This also means that no functionality other than
 that of SimpleTest is available. This means that you cannot use
 fixtures, and **all web test cases involving updating/saving to the

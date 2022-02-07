@@ -138,7 +138,7 @@ Attributs des Contrôleurs
 
 Pour une liste complète des attributs des contrôleurs avec leurs
 descriptions, consultez l'API CakePHP :
-`https://api.cakephp.org/class/controller <http://api13.cakephp.org/class/controller>`_.
+`https://api.cakephp.org/class/controller <https://api13.cakephp.org/class/controller>`_.
 
 $name
 -----
@@ -433,7 +433,7 @@ Méthodes des Contrôleurs
 
 Pour une liste complète des méthodes de contrôleur avec leurs
 descriptions, consultez l'API CakePHP :
-`https://api.cakephp.org/class/controller <http://api13.cakephp.org/class/controller>`_.
+`https://api.cakephp.org/class/controller <https://api13.cakephp.org/class/controller>`_.
 
 Interaction avec les Vues
 -------------------------

@@ -4,8 +4,8 @@ AJAX
 Der AjaxHelper benutzt die populären Bibliotheken Prototype und
 script.aculo.us für Ajax und clientseitige Effekte. Um diesen Helfer
 benutzen zu können musst eine aktuelle Version von
-`www.prototypejs.org <http://www.prototypejs.org>`_ und
-`http://script.aculo.us <http://script.aculo.us/>`_ in das
+`www.prototypejs.org <https://www.prototypejs.org>`_ und
+`https://script.aculo.us <https://script.aculo.us/>`_ in das
 /app/webroot/js/-Verzeichnis packen. Außerdem müssen die Bibliotheken in
 allen Layouts oder Views die AjaxHelper-Funktionalität benötigen,
 eingebunden werden.
@@ -103,7 +103,7 @@ in to the post body for any other method. Example: ``x=1&foo=bar&y=2``.
 The parameters will be available in ``$this->params['form']`` or
 available in ``$this->data`` depending on formatting. For more
 information see the `Prototype
-Serialize <http://www.prototypejs.org/api/form/serialize>`_ method.
+Serialize <https://www.prototypejs.org/api/form/serialize>`_ method.
 
 Callback Options
 ----------------
@@ -544,7 +544,7 @@ slider
 ``slider(string $id, string $track_id, array  $options)``
 
 Creates a directional slider control. For more information see
-`http://wiki.github.com/madrobby/scriptaculous/slider <http://wiki.github.com/madrobby/scriptaculous/slider>`_.
+`https://wiki.github.com/madrobby/scriptaculous/slider <https://wiki.github.com/madrobby/scriptaculous/slider>`_.
 
 Common options might include:
 

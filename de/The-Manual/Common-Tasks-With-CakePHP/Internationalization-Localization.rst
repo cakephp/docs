@@ -95,12 +95,12 @@ possible to copy the pot file to the correct location and change the
 extension *however* unless you're familiar with their format, it's quite
 easy to create an invalid po file or to save it as the wrong charset (if
 you're editing manually, use UTF-8 to avoid problems). There are free
-tools such as `PoEdit <http://www.poedit.net>`_ which make editing and
+tools such as `PoEdit <https://www.poedit.net>`_ which make editing and
 updating your po files an easy task; especially for updating an existing
 po file with a newly updated pot file.
 
 The three-character locale codes conform to the `ISO
-639-2 <http://www.loc.gov/standards/iso639-2/php/code_list.php>`_
+639-2 <https://www.loc.gov/standards/iso639-2/php/code_list.php>`_
 standard, although if you create regional locales (en\_US, en\_GB, etc.)
 cake will use them if appropriate.
 
@@ -140,7 +140,7 @@ is the following:
 
 This tells Cake which locale to use (if you use a regional locale, such
 as fr\_FR, it will use the `ISO
-639-2 <http://www.loc.gov/standards/iso639-2/php/code_list.php>`_ locale
+639-2 <https://www.loc.gov/standards/iso639-2/php/code_list.php>`_ locale
 as a fallback if it doesn't exist), you can change the language at any
 time, e.g. in your bootstrap if you're setting the application default
 language, in your (app) controller beforeFilter if it's specific to the
@@ -210,9 +210,9 @@ There's one other aspect of localizing your application which is not
 covered by the use of the translate functions, and that is date/money
 formats. Don't forget that CakePHP is PHP :), therefore to set the
 formats for these things you need to use
-```setlocale`` <http://www.php.net/setlocale>`_.
+```setlocale`` <https://www.php.net/setlocale>`_.
 
 If you pass a locale that doesn't exist on your computer to
-```setlocale`` <http://www.php.net/setlocale>`_ it will have no effect.
+```setlocale`` <https://www.php.net/setlocale>`_ it will have no effect.
 You can find the list of available locales by running the command
 $locale -a in a terminal.

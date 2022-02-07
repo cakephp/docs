@@ -9,7 +9,7 @@ Dokumentationsanwendung. Wir hoffen, dass diese neue Anwendung
 Dokumentationsbeiträge leichter machen wird, während gleichzeitig ein
 hoher Qualitätsstandard für Veröffentlichung eingehalten wird.
 
-Ein **großer** Dank geht an `AD7six <http://www.ad7six.com/>`_, den
+Ein **großer** Dank geht an `AD7six <https://www.ad7six.com/>`_, den
 Vorkämpfer der "Kochbuch"-Idee. Er hat endlose Stunden mit der
 Entwicklung und dem Testen und Verbessern dieser Anwendung zugebracht.
 
@@ -40,7 +40,7 @@ IRC (#cakephp bei freenode, unter dem Namen \_psychic\_).
 Hinweise für Übersetzer:
 
 -  Bitte keine `HTML
-   Zeichenreferenzen <http://de.wikipedia.org/wiki/Zeichenreferenz>`_
+   Zeichenreferenzen <https://de.wikipedia.org/wiki/Zeichenreferenz>`_
    für Umlaute u.ä. verwenden. Im *Cookbook* ist alles UTF-8 kodiert,
    sodass dies Dinge nur unnötig verkomplizieren würde.
 -  Haltet den Schreibstil locker, nicht übermäßig formell.

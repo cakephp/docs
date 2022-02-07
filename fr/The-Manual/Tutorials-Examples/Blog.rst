@@ -40,7 +40,6 @@ Tout d'abord, récupérons une copie récente de Cake.
 
 Pour télécharger la dernière révision, visitez le projet CakePHP sur
 Cakeforge :
-`http://cakeforge.org/projects/cakephp/ <http://cakeforge.org/projects/cakephp/>`_
 et téléchargez la version stable. Pour ce tutoriel, vous avez besoin de
 la version 1.2.x.x
 
@@ -895,7 +894,7 @@ apprentis cuisiniers :
    Construire une ébauche d'application sans avoir à coder
 #. `Utiliser Bake
    : <https://book.cakephp.org/fr/view/1522/Generation-de-code-avec-Bake>`_
-   Générer un code `CRUD <http://fr.wikipedia.org/wiki/CRUD>`_ basique
+   Générer un code `CRUD <https://fr.wikipedia.org/wiki/CRUD>`_ basique
 #. `Authentification
    : <https://book.cakephp.org/fr/view/1250/Authentification>`_
    Enregistrement et connexion d'utilisateurs
