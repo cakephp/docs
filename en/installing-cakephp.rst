@@ -44,8 +44,7 @@ release from CakeForge, grabbing a nightly build, or getting a fresh
 version of code from SVN.
 
 To download a stable version of code, check out the files section of the
-CakePHP project at CakeForge by going to
-`https://cakeforge.org/projects/cakephp/ <https://cakeforge.org/projects/cakephp/>`_.
+CakePHP project at CakeForge by going to.
 
 To grab a nightly, download one from
 `https://cakephp.org/downloads/index/nightly <https://cakephp.org/downloads/index/nightly>`_.
