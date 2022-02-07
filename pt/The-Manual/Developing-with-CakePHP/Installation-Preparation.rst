@@ -27,8 +27,7 @@ chamado “Download Now!” para baixar.
 Todas as versões do CakePHP também são armazenados no CakeForge, a casa
 do CakePHP. Esse site também contém links para muitos outros projetos
 CakePHP, incluindo plugins e aplicações para CakePHP. As versões de
-CakePHP estão disponíveis em
-`http://cakeforge.org/projects/cakephp <http://cakeforge.org/projects/cakephp>`_.
+CakePHP estão disponíveis em.
 
 Uma alternativa são as compilações do tipo nighlyt, que incluem
 correções de bugs e melhorias do último minuto (bem, do último dia).
@@ -36,7 +35,7 @@ Elas podem ser acessadas a partir do índice de download aqui:
 `https://cakephp.org/downloads/index/nightly <https://cakephp.org/downloads/index/nightly>`_.
 Para atualizações verdadeiramente do último minuto, você pode buscá-las
 diretamente do branch de desenvolvimento no repositório GIT aqui:
-`http://code.cakephp.org/source <http://code.cakephp.org/source>`_.
+`https://code.cakephp.org/source <https://code.cakephp.org/source>`_.
 
 Permissões
 ==========

@@ -20,7 +20,7 @@ The testing framework provided with CakePHP 1.3 is built upon the
 SimpleTest testing framework. SimpleTest is not shipped with the default
 CakePHP installation, so we need to download it first. You can find it
 here:
-`http://simpletest.sourceforge.net/ <http://simpletest.sourceforge.net/>`_.
+`https://simpletest.sourceforge.net/ <https://simpletest.sourceforge.net/>`_.
 
 Fetch the latest version, and unzip the code to your vendors folder, or
 your app/vendors folder, depending on your preference. You should now
@@ -59,7 +59,7 @@ repository <https://github.com/cakephp/cakephp>`_.
 
 The tests can then be accessed by browsing to
 http://your.cake.domain/test.php
-(http://path-to-app/app/webroot/test.php if mod\_rewrite is disabled) -
+(https://path-to-app/app/webroot/test.php if mod\_rewrite is disabled) -
 depending on how your specific setup looks. Try executing one of the
 core test groups by clicking on the corresponding link. Executing a test
 group might take a while, but you should eventually see something like
@@ -552,7 +552,7 @@ Pitfalls
 
 If you use testAction to test a method in a controller that does a
 redirect, your test will terminate immediately, not yielding any
-results. See `http://mark-story.com/posts/view/testing-cakephp-controllers-the-hard-way <http://mark-story.com/posts/view/testing-cakephp-controllers-the-hard-way>`_ for a possible fix.
+results. See `https://mark-story.com/posts/view/testing-cakephp-controllers-the-hard-way <https://mark-story.com/posts/view/testing-cakephp-controllers-the-hard-way>`_ for a possible fix.
 
 Testing Helpers
 ===============
@@ -729,7 +729,7 @@ About CakeWebTestCase
 **CakeWebTestCase** is a direct extension of the SimpleTest WebTestCase,
 without any extra functionality. All the functionality found in the
 `SimpleTest documentation for Web
-testing <http://simpletest.sourceforge.net/en/web_tester_documentation.html>`_
+testing <https://simpletest.sourceforge.net/en/web_tester_documentation.html>`_
 is also available here. This also means that no functionality other than
 that of SimpleTest is available. This means that you cannot use
 fixtures, and **all web test cases involving updating/saving to the

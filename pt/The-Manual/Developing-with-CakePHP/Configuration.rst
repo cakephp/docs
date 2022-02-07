@@ -316,7 +316,7 @@ presentes.
  'medium' = x 100
  'low' = x 300
 
-`session.referer\_check <http://www.php.net/manual/en/session.configuration.php#ini.session.referer-check>`_
+`session.referer\_check <https://www.php.net/manual/en/session.configuration.php#ini.session.referer-check>`_
 
 nível de segurança ('Security.level') é atribuido para alto ('high').
 

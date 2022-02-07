@@ -31,7 +31,7 @@ bake と cake
 まず、最新の CakePHP のコピーを取得しましょう。
 
 最新版をダウンロードするには Cakeforge の CakePHP
-プロジェクト(http://cakeforge.org/projects/cakephp/)にアクセスし、安定版のリリースをダウンロードしてください。このチュートリアルで必要なバージョンは
+プロジェクト にアクセスし、安定版のリリースをダウンロードしてください。このチュートリアルで必要なバージョンは
 1.2.x.x です。
 
 https://svn.cakephp.org/repo/trunk/cake/1.2.x.x/ から trunk

@@ -53,7 +53,7 @@ etc)
 
 Après avoir préparé votre code pour le multi-langue, l'étape suivante
 est de créer votre `fichier
-pot <http://fr.wikipedia.org/wiki/Gettext>`_, qui est le template pour
+pot <https://fr.wikipedia.org/wiki/Gettext>`_, qui est le template pour
 toutes les chaînes traduisibles de votre application. Pour générer votre
 (vos) fichier(s) pot, tout ce que vous avez à faire est de lancer `la
 tâche i18n de la console
@@ -65,7 +65,7 @@ changez les chaînes traduisibles dans votre code.
 
 Le(s) fichier(s) pot ne sont pas utilisés par CakePHP, ils sont les
 templates utilisés pour créer ou mettre à jour vos `fichiers
-po <http://fr.wikipedia.org/wiki/Gettext>`_, qui contiennent les
+po <https://fr.wikipedia.org/wiki/Gettext>`_, qui contiennent les
 traductions. Cake cherchera après vos fichiers po dans les dossiers
 suivants :
 
@@ -90,13 +90,13 @@ soyez familiarisé avec leur format, il est très facile de créer un
 fichier po invalide, ou de le sauver dans un mauvais encodage de
 caractères (si vous éditez ces fichiers manuellement, utilisez l'UTF-8
 pour éviter les problèmes). Il y a des outils gratuits tel que
-`PoEdit <http://www.poedit.net>`_ qui rendent les tâches d'édition et de
+`PoEdit <https://www.poedit.net>`_ qui rendent les tâches d'édition et de
 mise à jour de vos fichiers po vraiment simples, spécialement pour la
 mise à jour d'un fichier po existant avec un fichier pot nouvellement
 mis à jour.
 
 Les codes des locales en trois caractères suivent la norme `ISO
-639-2 <http://www.loc.gov/standards/iso639-2/php/code_list.php>`_ mais
+639-2 <https://www.loc.gov/standards/iso639-2/php/code_list.php>`_ mais
 si vous créez des locales régionales (en\_US, en\_GB, etc.) Cake les
 utilisera dans les cas appropriés.
 

@@ -73,7 +73,7 @@ Um Exemplo
 
 Aqui está um exemplo simples de como usar DataSources e o ``HttpSocket``
 para implementar um datasource muito básico para o
-`Twitter <http://twitter.com>`_, que lhe permita consultar a Twitter API
+`Twitter <https://twitter.com>`_, que lhe permita consultar a Twitter API
 bem como submeter novas atualizações de status para uma conta
 configurada.
 
@@ -95,15 +95,15 @@ app/models/datasources/twitter\_source.php:
      * PHP Version 5.x
      *
      * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
-     * Copyright 2005-2009, Cake Software Foundation, Inc. (http://www.cakefoundation.org)
+     * Copyright 2005-2009, Cake Software Foundation, Inc. (https://www.cakefoundation.org)
      *
      * Disponibilizado sob licença MIT.
      * Redistribuições dos arquivos devem manter a nota de copyright acima.
      *
      * @filesource
-     * @copyright     Copyright 2009, Cake Software Foundation, Inc. (http://www.cakefoundation.org)
+     * @copyright     Copyright 2009, Cake Software Foundation, Inc. (https://www.cakefoundation.org)
      * @link          https://cakephp.org Projeto CakePHP(tm)
-     * @license       http://www.opensource.org/licenses/mit-license.php A licença MIT
+     * @license       https://www.opensource.org/licenses/mit-license.php A licença MIT
      */
     App::import('Core', 'HttpSocket');
     class TwitterSource extends DataSource {

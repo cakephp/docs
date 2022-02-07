@@ -40,12 +40,12 @@ retrouvez-le sur IRC (#cakephp sur freenode) pour discutez de tout
 effort de traduction auquel vous aimeriez participer.
 
 Note des traducteurs francophones : une section du `forum du portail
-CakePHP-fr.org <http://forum.cakephp-fr.org/viewforum.php?id=14>`_ est
+CakePHP-fr.org <https://forum.cakephp-fr.org/viewforum.php?id=14>`_ est
 dédié à la traduction du CookBook. Il regroupe des informations et des
 conseils pour participer à cet effort. Avant de vous lancer dans un
 effort de traduction, nous vous invitons à `souscrire à la mailing-list
 des traducteurs
-francophones <http://forum.cakephp-fr.org/viewtopic.php?id=364>`_ pour
+francophones <https://forum.cakephp-fr.org/viewtopic.php?id=364>`_ pour
 vous présenter et poser vos questions !
 
 Astuces pour les traducteurs :

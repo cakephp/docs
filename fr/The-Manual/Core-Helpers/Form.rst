@@ -57,7 +57,7 @@ contient un élément tabulaire après le nom du modèle, et que ce tableau
 contient une valeur non nulle pour la clé primaire du modèle, alors le
 *FormHelper* créera un formulaire de modification pour cet
 enregistrement précis. Par exemple, si on va à l'adresse
-http://site.com/recettes/edit/5, nous devrions obtenir ceci :
+https://site.com/recettes/edit/5, nous devrions obtenir ceci :
 
 ::
 

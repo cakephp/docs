@@ -26,8 +26,7 @@ en el enlace “Download Now”.
 Todas las *releases* actuales están alojadas en CakeForge. Este *site*
 también contiene enlaces a muchos otros proyectos en CakePHP, incluyendo
 *plugins* y aplicaciones para CakePHP. Las *releases* de CakePHP estásn
-disponibles en
-`http://cakeforge.org/projects/cakephp <http://cakeforge.org/projects/cakephp>`_.
+disponibles en.
 
 Se crean *nightly builds* alternativas que incluyen parches y mejoras al
 minuto (bueno, al día). Estas pueden ser accedidas desde la página
@@ -35,7 +34,7 @@ principal de descargas aquí:
 `https://cakephp.org/downloads/index/nightly <https://cakephp.org/downloads/index/nightly>`_.
 Para actualizaciones realmente al minuto, puedes obtener el código
 directamente de la rama de desarrollo del repositorio git aquí:
-`http://code.cakephp.org/source <http://code.cakephp.org/source>`_.
+`https://code.cakephp.org/source <https://code.cakephp.org/source>`_.
 
 Permisos
 ========

@@ -37,7 +37,7 @@ Préparation de notre application
 Premièrement, récupérons une copie fraîche de CakePHP
 
 Pour obtenir un téléchargement à jour, visitez le projet CakePHP chez
-CakeForge: http://cakeforge.org/projects/cakephp/ et téléchargez la
+CakeForge: et téléchargez la
 version stable. Pour ce tutoriel vous aurez besoin de la 1.2.x.x
 
 Vous pouvez aussi faire une extraction/un export SVN du *trunk* de notre

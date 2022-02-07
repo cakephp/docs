@@ -5,8 +5,8 @@ O AjaxHelper utiliza as populares bibliotecas Javascript Prototype e
 script.aculo.us para operações Ajax e efeitos no lado do cliente. Para
 usar o AjaxHelper, você precisa que a versão atual destas bibliotecas
 Javascript (obtidas a partir de
-`www.prototypejs.org <http://www.prototypejs.org>`_ e
-`http://script.aculo.us <http://script.aculo.us/>`_) estejam presentes
+`www.prototypejs.org <https://www.prototypejs.org>`_ e
+`https://script.aculo.us <https://script.aculo.us/>`_) estejam presentes
 na pasta /app/webroot/js/. Além disso, você deve incluir as bibliotecas
 Javascript Prototype e script.aculo.us em todos os layouts ou views que
 utilizarem funcionalidade do AjaxHelper.
@@ -107,7 +107,7 @@ get, ou no corpo da requisição post para qualquer outro método. Exemplo:
 ``x=1&foo=bar&y=2``. Os parâmetros estarão disponíveis através de
 ``$this->params['form']`` ou de ``$this->data`` dependendo do formato.
 Para mais informações, leia sobre o método `serialize do
-Prototype <http://www.prototypejs.org/api/form/serialize>`_.
+Prototype <https://www.prototypejs.org/api/form/serialize>`_.
 
 Opções de Callback
 ------------------
@@ -540,7 +540,7 @@ slider
 ``slider(string $id, string $track_id, array  $options)``
 
 Cria um controle deslizante direcional. Para mais informações, veja
-`http://wiki.github.com/madrobby/scriptaculous/slider <http://wiki.github.com/madrobby/scriptaculous/slider>`_.
+`https://wiki.github.com/madrobby/scriptaculous/slider <https://wiki.github.com/madrobby/scriptaculous/slider>`_.
 
 Opções comuns incluem:
 
@@ -686,7 +686,7 @@ sortable
 Torna ordenáveis uma lista ou grupo de objetos flutuantes que estejam
 contidos no elemento dado por $id. O array $options suporta diversos
 parâmetros. Para saber mais sobre sortable, veja
-`http://wiki.github.com/madrobby/scriptaculous/sortable <http://wiki.github.com/madrobby/scriptaculous/sortable>`_.
+`https://wiki.github.com/madrobby/scriptaculous/sortable <https://wiki.github.com/madrobby/scriptaculous/sortable>`_.
 
 Opções comuns incluem:
 

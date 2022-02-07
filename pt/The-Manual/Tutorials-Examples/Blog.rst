@@ -46,7 +46,7 @@ Para fazer o download, acesse o projeto CakePHP no github:
 e faça o download da última versão estável do 1.3.
 
 Você também pode clonar o repositório usando o
-`git <http://git-scm.com/>`_.
+`git <https://git-scm.com/>`_.
 ``git clone git://github.com/cakephp/cakephp.git``
 
 Independente de como você fez o download, coloque o código dentro da

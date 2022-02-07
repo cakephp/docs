@@ -6,7 +6,7 @@ What is CakePHP? Why Use it?
 `open-source <https://en.wikipedia.org/wiki/Open_source>`_, `rapid
 development <https://en.wikipedia.org/wiki/Rapid_application_development>`_
 `framework <https://en.wikipedia.org/wiki/Application_framework>`_ for
-`PHP <http://www.php.net/>`_. It’s a foundational structure for
+`PHP <https://www.php.net/>`_. It’s a foundational structure for
 programmers to create web applications. Our primary goal is to enable
 you to work in a structured and rapid manner–without loss of
 flexibility.
@@ -18,7 +18,7 @@ wheel every time you sit down to a new project, check out a copy of
 CakePHP and get started with the real guts of your application.
 
 CakePHP has an active `developer
-team <http://cakephp.lighthouseapp.com/contributors>`_ and community,
+team <https://cakephp.lighthouseapp.com/contributors>`_ and community,
 bringing great value to the project. In addition to keeping you from
 wheel-reinventing, using CakePHP means your application’s core is well
 tested and is being constantly improved.
@@ -48,5 +48,5 @@ Here’s a quick list of features you’ll enjoy when using CakePHP:
 -  Flexible `Caching <https://en.wikipedia.org/wiki/Web_cache>`_
 -  Localization
 -  Works from any web site directory, with little to no
-   `Apache <http://httpd.apache.org/>`_ configuration involved
+   `Apache <https://httpd.apache.org/>`_ configuration involved
 

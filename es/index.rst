@@ -51,7 +51,7 @@ Pautas para la traducción:
 -  Usa la lista *Todo* (arriba a la derecha) para ver dónde se requiere
    atención en tu lengua.
 -  Utiliza el `registro
-   informal <http://es.wikipedia.org/wiki/Registro_ling%C3%BC%C3%ADstico>`_.
+   informal <https://es.wikipedia.org/wiki/Registro_ling%C3%BC%C3%ADstico>`_.
 -  Traduce a la vez el título y el contenido.
 -  Comprara el texto con el contenido en inglés antes de enviar una
    corrección (si corriges algo, pero no integras los cambios de la rama

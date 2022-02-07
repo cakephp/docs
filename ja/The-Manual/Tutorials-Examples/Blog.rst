@@ -26,7 +26,7 @@ Cakeをダウンロード
 `https://github.com/cakephp/cakephp/downloads/ <https://github.com/cakephp/downloads/>`_
 そして、1.3の最新リリースをダウンロードします。
 
-または、\ `git <http://git-scm.com/>`_\ を使ってレポジトリをcloneすることもできます。
+または、\ `git <https://git-scm.com/>`_\ を使ってレポジトリをcloneすることもできます。
 git clone git://github.com/cakephp/cakephp.git
 
 どちらにしても、ダウンロードしたコードをDocumentRoot内に配置してください。そうすると、ディレクトリは次のようになります。

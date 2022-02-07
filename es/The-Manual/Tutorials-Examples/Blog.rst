@@ -41,7 +41,6 @@ Obteniendo Cake
 Primero debemos conseguir una copia reciente de CakePHP.
 
 Para esto debes visitar la sección del proyecto CakePHP en Cakeforge
-`http://cakeforge.org/projects/cakephp/ <http://cakeforge.org/projects/cakephp/>`_
 y descargar la versión estable. Para este tutorial vamos a usar la
 1.2.x.x
 

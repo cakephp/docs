@@ -7,7 +7,7 @@ CakePHP のドキュメント Cookbook にようこそ。Cookbook
 CakePHP のドキュメントを維持することを望みます。また、Cookbook
 で、誰でも簡単に貢献できるようになります。
 
-`AD7six <http://www.ad7six.com/>`_ には\ ***非常に***
+`AD7six <https://www.ad7six.com/>`_ には\ ***非常に***
 感謝したいと思います。彼は Cookbook
 の発起人でもあり、多くの時間をかけて、このアプリケーションの開発、テスト、改良にあたっています。
 

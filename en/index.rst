@@ -7,7 +7,7 @@ system, we hope to maintain a high level of quality, validity, and
 accuracy for the CakePHP documentation. The Cookbook also makes it easy
 for anybody to contribute.
 
-A **huge** thank you to `AD7six <http://www.ad7six.com/>`_, who
+A **huge** thank you to `AD7six <https://www.ad7six.com/>`_, who
 championed the Cookbook by putting in endless hours developing, testing
 and improving this application.
 

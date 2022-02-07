@@ -9,7 +9,7 @@ uuid
 ====
 
 Die ``uid``-Methode generiert eindeutige 128bit-UUIDs nach `RFC
-4122 <http://www.ietf.org/rfc/rfc4122.txt>`_.
+4122 <https://www.ietf.org/rfc/rfc4122.txt>`_.
 
 ::
 

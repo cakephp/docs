@@ -73,7 +73,7 @@ Un ejemplo
 
 Lo que sigue es un ejemplo simple de como usar dataSources y
 ``HttpSocket`` para implementar una fuente muy básica de
-`Twitter <http://twitter.com>`_ que nos permita utilizar la API de
+`Twitter <https://twitter.com>`_ que nos permita utilizar la API de
 twitter y enviar nuestras actualizaciones.
 
 **Este ejemplo sólo funcionará sobre PHP 5.2 o superior**, debido al uso
@@ -93,15 +93,15 @@ app/models/datasources/twitter\_source.php:
      * PHP Version 5.x
      *
      * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
-     * Copyright 2005-2009, Cake Software Foundation, Inc. (http://www.cakefoundation.org)
+     * Copyright 2005-2009, Cake Software Foundation, Inc. (https://www.cakefoundation.org)
      *
      * Licensed under The MIT License
      * Redistributions of files must retain the above copyright notice.
      *
      * @filesource
-     * @copyright     Copyright 2009, Cake Software Foundation, Inc. (http://www.cakefoundation.org)
+     * @copyright     Copyright 2009, Cake Software Foundation, Inc. (https://www.cakefoundation.org)
      * @link          https://cakephp.org CakePHP(tm) Project
-     * @license       http://www.opensource.org/licenses/mit-license.php The MIT License
+     * @license       https://www.opensource.org/licenses/mit-license.php The MIT License
      */
     App::import('Core', 'HttpSocket');
     class TwitterSource extends DataSource {

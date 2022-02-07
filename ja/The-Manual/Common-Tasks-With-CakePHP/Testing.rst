@@ -18,7 +18,7 @@ SimpleTest のインストール
 
 CakePHP 1.3 のテストフレームワークは、SimpleTest
 で構築されています。SimpleTest はデフォルトで CakePHP
-に含まれていないため、まずそれをダウンロードしてこなければなりません。ダウンロードは\ `http://simpletest.sourceforge.net/ <http://simpletest.sourceforge.net/>`_\ から行えます。
+に含まれていないため、まずそれをダウンロードしてこなければなりません。ダウンロードは\ `https://simpletest.sourceforge.net/ <https://simpletest.sourceforge.net/>`_\ から行えます。
 
 最新版を取得し、解凍後に vendors もしくは app/vendors
 フォルダに展開してください。どちらでも好きな方に設置してかまいません。これで
@@ -656,7 +656,7 @@ CakeWebTestCase について
 **CakeWebTestCase** は、SimpleTest の WebTestCase
 をただ拡張したもので、特に機能追加はありません。\ `SimpleTest の Web
 testing
-に関する文書 <http://simpletest.sourceforge.net/en/web_tester_documentation.html>`_\ 中に記載がある全ての機能は、
+に関する文書 <https://simpletest.sourceforge.net/en/web_tester_documentation.html>`_\ 中に記載がある全ての機能は、
 CakeWebTestCase で利用できます。これはまた、 SimpleTest
 が持つ機能以外のものは使えないことを意味します。すなわち、
 CakeWebTestCase

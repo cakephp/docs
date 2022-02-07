@@ -16,4 +16,4 @@ Porém você poderá realizar muito com com o método **import**.
 
 Você pode ler mais sobre no
 `Cookbook <https://book.cakephp.org/view/936/Importing-Controllers-Models-Components-Behaviors->`_
-ou na `API <http://api13.cakephp.org/class/app#method-Appimport>`_
+ou na `API <https://api13.cakephp.org/class/app#method-Appimport>`_

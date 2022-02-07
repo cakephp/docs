@@ -13,7 +13,7 @@ normalen Requests, er greift dazu auf den HTTP-X-Requested-With Header
 zurück, den viele Javascript-Libraries benutzen.
 
 Im Zusammenspiel mit
-`Router::parseExtensions() <http://api13.cakephp.org/class/router#method-RouterparseExtensions>`_
+`Router::parseExtensions() <https://api13.cakephp.org/class/router#method-RouterparseExtensions>`_
 wird der RequestHandler automatisch das Layout und die View-Files dem
 gewünschten Typ anpassen - nicht nur das, wenn ein Helper existiert, der
 den gleichen Namen wie die Dateiendung trägt, wird er der Helper-Liste

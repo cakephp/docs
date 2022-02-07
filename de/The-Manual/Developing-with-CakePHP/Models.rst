@@ -159,7 +159,7 @@ Umgang mit Datentypen, je nach Datenbank
 ----------------------------------------
 
 Jedes `relationales Datenbankmanagementsystem
-(RDBMS) <http://de.wikipedia.org/wiki/Relationale%20Datenbak>`_
+(RDBMS) <https://de.wikipedia.org/wiki/Relationale%20Datenbak>`_
 definiert Datentypen ein bischen unterschiedlich. In den
 Datenquellen-Klassen nimmt CakePHP für jedes RDBMS diese Datentypen auf,
 so dass es die Datentypen einheitlich wiedererkennen kann; egal welches
@@ -516,7 +516,7 @@ Primärschlüssel sind normalerweise INT-Felder. Die Datenbank
 inkrementiert das Feld für jeden neuen Datensatz automatisch, beginnend
 bei 1. Alternativ kann man den Primärschlüssel auch als ``CHAR(36)``
 oder ``BINARY(36)`` definieren. CakePHP generiert in diesem Fall
-automatisch `UUIDs <http://de.wikipedia.org/wiki/UUID>`_ für jeden neuen
+automatisch `UUIDs <https://de.wikipedia.org/wiki/UUID>`_ für jeden neuen
 Datensatz.
 
 Eine UUID ist ein 32 byte String der durch 4 Bindestriche getrennt ist

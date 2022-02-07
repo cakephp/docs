@@ -29,8 +29,8 @@ clicou no link “Comprar um bolo personalizado agora!” da sua aplicação.
 #. O controller também usa os models para acessar os dados da sua
    aplicação. Muitas vezes, os models representam as tabelas do banco de
    dados, mas podem representar registros
-   `LDAP <http://pt.wikipedia.org/wiki/LDAP>`_, feeds de
-   `RSS <http://pt.wikipedia.org/wiki/RSS>`_ ou até mesmo arquivos do
+   `LDAP <https://pt.wikipedia.org/wiki/LDAP>`_, feeds de
+   `RSS <https://pt.wikipedia.org/wiki/RSS>`_ ou até mesmo arquivos do
    sistema. Neste exemplo, o controller usa o model para trazer ao
    Ricardo as últimas compras do banco de dados;
 #. Depois que o controller fez sua mágica sobre os dados, ele repassa

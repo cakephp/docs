@@ -49,7 +49,7 @@ CakeForge was a developer resource that could be used to host CakePHP
 projects to share with others. It has been discontinued and taken
 offline in early 2011. If you have a CakePHP project that you would like
 to share with the world, try a site like
-`github <http://www.github.com/>`_.
+`github <https://www.github.com/>`_.
 
 The Test Cases
 ==============
@@ -82,7 +82,7 @@ would like to donate your brand new sports car.
 The Google Group
 ================
 
-`http://groups.google.com/group/cake-php <http://groups.google.com/group/cake-php>`_
+`https://groups.google.com/group/cake-php <https://groups.google.com/group/cake-php>`_
 
 CakePHP also has a very active Google Group. It can be a great resource
 for finding archived answers, frequently asked questions, and getting

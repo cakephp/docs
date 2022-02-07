@@ -181,7 +181,7 @@ configuração, você pode testar seu feed RSS acessando o endereço
 /posts/index.rss em seu site. É sempre importante que você valide seu
 feed RSS antes de disponibilizá-lo pra valer. Isto pode ser feito
 visitando-se sites que validem conteúdos XML como o Feed Validator ou o
-site do W3C em http://validator.w3.org/feed/.
+site do W3C em https://validator.w3.org/feed/.
 
 Você pode precisar definir o valor de 'debug' de sua configuração no
 core.php para 1 ou para 0 para obter um feed válido, porque as
