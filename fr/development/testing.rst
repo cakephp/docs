@@ -863,7 +863,7 @@ maintenant à ceci::
         {
             $query = $this->Articles->find('published')->all();
             $this->assertInstanceOf('Cake\ORM\Query', $query);
-            $result = $query->hydrate(false)->toArray();
+            $result = $query->enableHydration(false)->toArray();
             $expected = [
                 ['id' => 1, 'title' => 'First Article'],
                 ['id' => 2, 'title' => 'Second Article'],
