@@ -1,7 +1,7 @@
 Entendendo o Model-View-Controller
 ##################################
 
-O CakePHP segue o padrão de projeto `MVC <http://pt.wikipedia.org/wiki/MVC>`_.
+O CakePHP segue o padrão de projeto `MVC <https://pt.wikipedia.org/wiki/MVC>`_.
 Programar usando o MVC separa sua aplicação em três partes principais:
 
 .. note::

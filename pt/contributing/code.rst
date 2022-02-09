@@ -22,7 +22,7 @@ Configure suas informações pessoais com seu nome e e-mail::
 .. note::
 
     Se você é novo com Git, é recomendável que você leia o excelente e gratuito
-    `ProGit <http://git-scm.com/book/>`_ book.
+    `ProGit <https://git-scm.com/book/>`_ book.
 
 Faça o clone do código do CakePHP diretamente do GitHub:
 
@@ -98,7 +98,7 @@ sua branch para seu fork::
     git push origin <branch-name>
 
 Agora que sua branch está no GitHub, você pode discutir as alterações
-na lista de discussão `cakephp-core <http://groups.google.com/group/cakephp-core>`_  ou
+na lista de discussão `cakephp-core <https://groups.google.com/group/cakephp-core>`_  ou
 enviar um pull request no GitHub.
 
 .. note::
@@ -106,7 +106,7 @@ enviar um pull request no GitHub.
 	Lembre-se de que todo o código contribuido para o CakePHP será licenciado sob
 	a licença MIT, e a Cake Software Foundation se tornará proprietária de qualquer
 	código contribuido, além de que todo código contribuido está sujeito ao
-	`Contrato de licença de contribuidores <http://cakefoundation.org/pages/cla>`_.
+	`Contrato de licença de contribuidores <https://cakefoundation.org/pages/cla>`_.
 
 Todos as correções de bugs serão aplicadas em um branch de manutenção que será aplicado
 nas próximas versão pelo *core team*.

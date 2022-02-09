@@ -141,7 +141,7 @@ Formatting
 
     :rtype: string
 
-    Takes a string and uses `strtotime <http://us.php.net/manual/en/function.date.php>`_
+    Takes a string and uses `strtotime <https://us.php.net/manual/en/function.date.php>`_
     to convert it into a date integer::
 
         // called via TimeHelper

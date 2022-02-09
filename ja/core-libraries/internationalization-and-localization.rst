@@ -58,12 +58,12 @@ po ファイルの作成や編集は、あなたの好きなエディタを使�
 (見慣れない書式だと思いますが) 拡張子を変更します。それでは、不正な po ファイルを
 作成してしまったり、誤った文字セットで保存してしまうことが簡単に起こります。
 (手動で編集した場合、問題を避けるために UTF-8 を使用してください。)
-`PoEdit <http://www.poedit.net>`_ のようなフリーのツールを使うと、po ファイルを
+`PoEdit <https://www.poedit.net>`_ のようなフリーのツールを使うと、po ファイルを
 簡単な作業で編集や更新できます。特に新たに更新された pot ファイルをもとに既存の
 po ファイルを更新する際に便利です。
 
 ３文字ロケールコードは、
-`ISO 639-2 <http://www.loc.gov/standards/iso639-2/php/code_list.php>`_
+`ISO 639-2 <https://www.loc.gov/standards/iso639-2/php/code_list.php>`_
 標準に準拠します。もし、地域ロケール (`en\_US`, `en\_GB`, その他) を作成した場合、
 CakePHP はそちらを使用します。
 
@@ -150,7 +150,7 @@ CakePHP における地域化
 
 上記は、どのロケールを使用するかを CakePHP に伝えます。 (例えば、 `fr\_FR`
 の様な地域ロケールを使用していて、 もし翻訳が存在しない時は代わりに `ISO 639-2
-<http://www.loc.gov/standards/iso639-2/php/code_list.php>`_
+<https://www.loc.gov/standards/iso639-2/php/code_list.php>`_
 ロケールを使用します。) リクエストの間にいつでも言語を変更できます。
 例えば、bootstrap 中でアプリケションのデフォルトの言語を設定した場合、
 コントローラの beforeFilter でリクエストやユーザーや実際に異なる言語のメッセージに

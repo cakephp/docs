@@ -6,7 +6,7 @@
 使得表单的处理容易得多得多。
 
 验证过程包含很多方面。本节中我们只涉及模型中的部分。基本上这意味着:当你调用模型
-的 save() 方法时会发生什么。有关如何处理验证错误显示的更多信息，请参看 
+的 save() 方法时会发生什么。有关如何处理验证错误显示的更多信息，请参看
 :doc:`/core-libraries/helpers/form` 。
 
 数据验证的第一步是在模型中建立验证规则。这需要用到在模型中定义的 Model::validate
@@ -28,7 +28,7 @@
         );
     }
 
-上面的例子展示了验证规则如何作用于模型的字段。login 字段只接受字母和数字，email 
+上面的例子展示了验证规则如何作用于模型的字段。login 字段只接受字母和数字，email
 应当是合法的电子邮件格式，以及 born 应当是合法的日期。定义了验证规则之后，如果提
 交的数据不符合定义的规则，CakePHP 就能够在表单中自动显示错误信息。
 
@@ -169,12 +169,12 @@ required
 allowEmpty
 ----------
 
-如果设为 ``false`` ，字段的值必须为 *非空*，而 "nonempty" 定义为 
+如果设为 ``false`` ，字段的值必须为 *非空*，而 "nonempty" 定义为
 ``!empty($value) || is_numeric($value)`` 。对数字的检查是为了使 CakePHP 能正确处
 理 ``$value`` 为零的情况。
 
 ``required`` 和 ``allowEmpty`` 的区别可能令人迷惑。``'required' => true`` 意味着
-在 ``$this->data``中没有该字段的 *键* ，你就不能保存模型(使用 ``isset`` 检查)； 
+在 ``$this->data``中没有该字段的 *键* ，你就不能保存模型(使用 ``isset`` 检查)；
 然而，``'allowEmpty' => false`` 正如前所述，确保当前字段的 *值* 不为空。
 
 on
@@ -256,7 +256,7 @@ last
 就会返回，而该字段的其它规则就不会继续执行了。如果你希望,即使在一条规则验证失败
 时，验证也继续执行，就把该条规则的 ``last`` 设置为 ``false``。
 
-在下面的例子中，即使 "rule1" 验证失败，"rule2" 也会继续执行，而且，如果 "rule2" 
+在下面的例子中，即使 "rule1" 验证失败，"rule2" 也会继续执行，而且，如果 "rule2"
 也失败，则两条失败规则的错误信息都会返回::
 
     public $validate = array(
@@ -347,7 +347,7 @@ last
 中。这包括映射方法(*mapped method*)。
 
 模型/行为方法会优先考虑，之后才会查找 ``Validation`` 类的方法。这意味着你可以重
-载现存的验证方法(例如 ``alphaNumeric()``)，或者在应用程序级别(通过给 
+载现存的验证方法(例如 ``alphaNumeric()``)，或者在应用程序级别(通过给
 ``AppModel`` 添加方法)，或者在模型级别。
 
 当编写一个可以用于多个字段的验证规则时，注意从 $check 提取字段的值。$check 数组
@@ -380,7 +380,7 @@ last
     不支持的。
 
 如果值合法，方法应该返回 ``true``。如果验证失败，返回 ``false``。其它合法的返回
-值可以是字符串，作为错误信息显示。返回字符串意味着验证失败。字符串会覆盖 
+值可以是字符串，作为错误信息显示。返回字符串意味着验证失败。字符串会覆盖
 $validate 数组中设置的信息，作为字段不合法的原因，显示在视图的表单中。
 
 
@@ -601,7 +601,7 @@ CakePHP 的 Validation 类有许多验证规则，可以使模型数据的验证
     组。
 
     'deep' 键应当设置为布尔值。如果设为 true，就会检查信用卡的 Luhn 算法(
-    `https://en.wikipedia.org/wiki/Luhn\_algorithm <https://en.wikipedia.org/wiki/Luhn_algorithm>`_ 
+    `https://en.wikipedia.org/wiki/Luhn\_algorithm <https://en.wikipedia.org/wiki/Luhn_algorithm>`_
     )。缺省值为 false。
 
     'regex' 键允许提供自定义正则表达式，用来验证信用卡号码::
@@ -1086,7 +1086,7 @@ CakePHP 的 Validation 类有许多验证规则，可以使模型数据的验证
             )
         );
 
-    这个验证方法用到了复杂正则表达式，有时会在 Windows 平台上在使用 mod\_php 
+    这个验证方法用到了复杂正则表达式，有时会在 Windows 平台上在使用 mod\_php
     模块的 Apache2 中出现问题。
 
 .. php:staticmethod:: userDefined(mixed $check, object $object, string $method, array $args = null)
@@ -1096,7 +1096,7 @@ CakePHP 的 Validation 类有许多验证规则，可以使模型数据的验证
 
 .. php:staticmethod:: uuid(string $check)
 
-    检查数据是合法的 UUID: http://tools.ietf.org/html/rfc4122。
+    检查数据是合法的 UUID: https://tools.ietf.org/html/rfc4122。
 
 
 本地化验证

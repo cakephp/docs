@@ -69,12 +69,12 @@ the extension *however* unless you're familiar with their format,
 it's quite easy to create an invalid po file or to save it as the
 wrong charset (if you're editing manually, use UTF-8 to avoid
 problems). There are free tools such as
-`PoEdit <http://www.poedit.net>`_ which make editing and updating
+`PoEdit <https://www.poedit.net>`_ which make editing and updating
 your po files an easy task; especially for updating an existing po
 file with a newly updated pot file.
 
 The three-character locale codes conform to the
-`ISO 639-2 <http://www.loc.gov/standards/iso639-2/php/code_list.php>`_
+`ISO 639-2 <https://www.loc.gov/standards/iso639-2/php/code_list.php>`_
 standard, although if you create regional locales (`en\_US`, `en\_GB`,
 etc.) cake will use them if appropriate.
 
@@ -165,7 +165,7 @@ do is the following::
 
 This tells CakePHP which locale to use (if you use a regional locale, such as
 `fr\_FR`, it will use the `ISO 639-2
-<http://www.loc.gov/standards/iso639-2/php/code_list.php>`_ locale as a fallback
+<https://www.loc.gov/standards/iso639-2/php/code_list.php>`_ locale as a fallback
 if it doesn't exist), you can change the language at any time during a request.
 e.g. in your bootstrap if you're setting the application default language, in
 your (app) controller beforeFilter if it's specific to the request or user, or

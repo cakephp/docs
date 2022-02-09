@@ -17,7 +17,7 @@ cronjobとして実行します。
     # │    \──────────────────── 時 (0 - 23)
     # \───────────────────────── 分 (0 - 59)
 
-詳しくはこちら: http://ja.wikipedia.org/wiki/Crontab
+詳しくはこちら: https://ja.wikipedia.org/wiki/Crontab
 
 .. meta::
     :title lang=ja: cronjobに登録してシェルを実行する

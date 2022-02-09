@@ -18,7 +18,7 @@ HTML データを受信
 =====================
 
 しばしば入力フィルタリングは、ユーザーが送信した HTML を受信する時に使われます。
-これらの場合、 `HTML Purifier <http://htmlpurifier.org/>`_ のような専門の
+これらの場合、 `HTML Purifier <https://htmlpurifier.org/>`_ のような専門の
 ライブラリを使用するのがベストです。
 
 SQL のエスケープ

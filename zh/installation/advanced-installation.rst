@@ -38,7 +38,7 @@ CakePHP 发行 PEAR 的安装包，故可以通过 PEAR 安装程序安装。用
 Composer 是一个适用于 PHP 5.3+ 的依赖管理工具，解决了 PEAR 安装程序的很多问题，
 并且简化了对类库的多个版本的管理。`Packagist <https://packagist.org/>`_ 是
 Composer 安装包的主要仓库。由于 CakePHP 也发布版本到 Packagist，故而可以使用
-`Composer <http://getcomposer.org>`_ 安装 CakePHP。
+`Composer <https://getcomposer.org>`_ 安装 CakePHP。
 
 - 在 Linux 和 Mac OS X 上安装 Composer
 

@@ -15,7 +15,7 @@ plutôt que celui d'un utilisateur- ou le httpd.conf d'un site spécifique).
 
 Ces fichiers peuvent varier selon les différentes distributions et les versions
 d'Apache. Vous pouvez allez voir
-http://wiki.apache.org/httpd/DistrosDefaultLayout pour plus d'informations.
+https://wiki.apache.org/httpd/DistrosDefaultLayout pour plus d'informations.
 
 #. Assurez-vous qu'un .htaccess est permis et que AllowOverride est défini à
    All pour le bon DocumentRoot. Vous devriez voir quelque chose comme::
@@ -113,7 +113,7 @@ http://wiki.apache.org/httpd/DistrosDefaultLayout pour plus d'informations.
        </Directory>
 
    Si vous êtes sur Mac OSX, une autre solution est d'utiliser l'outil
-   `virtualhostx <http://clickontyler.com/virtualhostx/>`_ pour faire un Hôte
+   `virtualhostx <https://clickontyler.com/virtualhostx/>`_ pour faire un Hôte
    Virtuel pour pointer vers votre dossier.
 
    Pour beaucoup de services d'hébergement (GoDaddy, 1and1), votre serveur web
@@ -233,10 +233,10 @@ des .htaccess dans IIS pour utiliser les rewrites natifs de CakePHP. Pour ce
 faire, suivez ces étapes:
 
 #. Utilisez `l'installeur de la plateforme Web de Microsoft
-   <http://www.microsoft.com/web/downloads/platform.aspx>`_ pour installer
+   <https://www.microsoft.com/web/downloads/platform.aspx>`_ pour installer
    l'URL
-   `Rewrite Module 2.0 <http://www.iis.net/downloads/microsoft/url-rewrite>`_
-   ou téléchargez le directement (`32-bit <http://www.microsoft.com/en-us/download/details.aspx?id=5747>`_ / `64-bit <http://www.microsoft.com/en-us/download/details.aspx?id=7435>`_).
+   `Rewrite Module 2.0 <https://www.iis.net/downloads/microsoft/url-rewrite>`_
+   ou téléchargez le directement (`32-bit <https://www.microsoft.com/en-us/download/details.aspx?id=5747>`_ / `64-bit <https://www.microsoft.com/en-us/download/details.aspx?id=7435>`_).
 #. Créez un nouveau fichier dans votre dossier CakePHP, appelé web.config.
 #. Utilisez Notepad ou tout autre éditeur XML-safe, copiez le code suivant
    dans votre nouveau fichier web.config...

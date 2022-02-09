@@ -21,7 +21,7 @@ Algumas dicas:
   contrário você não saberá o que já foi traduzido.
 - Sinta-se livre para traduzir se o idioma escolhido já existir no book.
 - Utilize a
-  `linguagem informal <http://pt.wikipedia.org/wiki/Linguagem_coloquial>`_.
+  `linguagem informal <https://pt.wikipedia.org/wiki/Linguagem_coloquial>`_.
 - Traduza o conteúdo e o título ao mesmo tempo.
 - Faça uma comparação com o Inglês antes de enviar uma correção.
   (Se você corrigir alguma coisa, mas não sincroniza com o 'upstream' a
@@ -194,7 +194,7 @@ Descrevendo classes e seus conteúdos
 ------------------------------------
 
 A documentação do CakePHP utiliza o `phpdomain
-<http://pypi.python.org/pypi/sphinxcontrib-phpdomain>`_ que fornece
+<https://pypi.python.org/pypi/sphinxcontrib-phpdomain>`_ que fornece
 algumas diretivas para descrever objetos e construtores.
 Usar essas diretivas é essêncial para criar índices e referências em toda a
 documentação.

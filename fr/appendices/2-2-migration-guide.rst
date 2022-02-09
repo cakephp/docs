@@ -322,7 +322,7 @@ et :doc:`/core-libraries/logging`.
 
 - La classe :php:class:`CakeLog` accèpte maintenant les mêmes niveaux de log
   que défini dans
-  `RFC 5424 <http://tools.ietf.org/html/rfc5424>`_.  Plusieurs méthodes
+  `RFC 5424 <https://tools.ietf.org/html/rfc5424>`_.  Plusieurs méthodes
   pratiques ont été aussi ajoutées:
 
   * :php:meth:`CakeLog::emergency($message, $scope = array())`

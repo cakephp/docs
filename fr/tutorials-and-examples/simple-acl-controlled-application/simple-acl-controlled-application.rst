@@ -41,7 +41,7 @@ https://github.com/cakephp/cakephp/tags et téléchargez la version stable.
 Pour ce tutoriel vous aurez besoin de la dernière version 2.x.
 
 Vous pouvez aussi dupliquer le dépôt en utilisant
-`git <http://git-scm.com/>`_::
+`git <https://git-scm.com/>`_::
 
     git clone -b 2.x git://github.com/cakephp/cakephp.git
 

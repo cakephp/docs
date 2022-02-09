@@ -344,7 +344,7 @@ Security
 --------
 
 - Le support pour
-  `bcrypt <http://codahale.com/how-to-safely-store-a-password/>`_
+  `bcrypt <https://codahale.com/how-to-safely-store-a-password/>`_
   a été ajouté. Regardez la documentation de :php:class:`Security::hash()`
   pour plus d'informations sur la façon d'utiliser bcrypt.
 

@@ -249,7 +249,7 @@ ReST (Re Structured Text)是与 markdown 或者 textile 类似的纯文本标记
 ------------------
 
 CakePHP 文档使用
-`phpdomain <http://pypi.python.org/pypi/sphinxcontrib-phpdomain>`_ 提供自定义指
+`phpdomain <https://pypi.python.org/pypi/sphinxcontrib-phpdomain>`_ 提供自定义指
 令描述 PHP 对象和结构。我们必须使用这些指令和角色，才能保证正确的索引和交叉引用。
 
 描述类及其组成

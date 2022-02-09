@@ -44,7 +44,7 @@ plusieurs problèmes que l'installateur PEAR a, et simplifie la gestion de
 plusieurs versions de librairies. `Packagist <https://packagist.org/>`_ est le
 dépôt principal des packages installables avec Composer. Puisque CakePHP publie
 aussi les versions dans Packagist, vous pouvez installer CakePHP en utilisant
-`Composer <http://getcomposer.org>`_.
+`Composer <https://getcomposer.org>`_.
 
 - Installer Composer sur Linux et Mac OS X
 

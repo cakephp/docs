@@ -63,7 +63,7 @@ FormHelper の利点を活用するために最初に使うメソッドは ``cre
     ``$this->request->data`` にフォームのモデルに関連する名前がついた
     配列要素が含まれていて、かつその配列に含まれるモデルのプライマリキー
     の値が空でなければ、FormHelper はそのレコードの編集用フォームを作成
-    します。たとえば http://site.com/recipes/edit/5 にアクセスすると、
+    します。たとえば https://site.com/recipes/edit/5 にアクセスすると、
     以下の様な出力が得られます::
 
         // Controller/RecipesController.php:

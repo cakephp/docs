@@ -72,7 +72,7 @@ le même::
             'order' => 'Post.created DESC',
             'limit' => 10
         );
-        
+
         $posts = $this->paginate();
         $this->set(compact('posts'));
     }
@@ -189,7 +189,7 @@ que vous avez toutes ces configurations, vous pouvez tester votre feed RSS
 en allant à votre ``/posts/index.rss`` et que vous verrez votre nouveau feed.
 Il est toujours important que vous validiez votre feed RSS avant de le mettre
 en live. Ceci peut être fait en visitant les sites qui valident le XML comme
-Le Validateur de Feed ou le site de w3c à http://validator.w3.org/feed/.
+Le Validateur de Feed ou le site de w3c à https://validator.w3.org/feed/.
 
 .. note::
 
@@ -266,14 +266,14 @@ API de Rss Helper
 
     :rtype: string
 
-    Transforme un tableau de données en utilisant un callback optionnel, et le 
+    Transforme un tableau de données en utilisant un callback optionnel, et le
     map pour un ensemble de tags ``<item />``.
 
 .. php:method:: time(mixed $time)
 
     :rtype: string
 
-    Convertit un time de tout format en time de RSS. Regardez 
+    Convertit un time de tout format en time de RSS. Regardez
     :php:meth:`TimeHelper::toRSS()`.
 
 

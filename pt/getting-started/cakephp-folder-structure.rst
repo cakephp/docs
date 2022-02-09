@@ -32,8 +32,8 @@ de app.
 Config
     Armazena os (poucos) arquivos de configuração que o CakePHP utiliza.
     Parâmetros de conexão com o banco de dados, inicialização do sistema
-    (`Bootstrapping <http://pt.wikipedia.org/wiki/Bootstrapping>`_),
-    arquivos de configuração do núcleo do framework, 
+    (`Bootstrapping <https://pt.wikipedia.org/wiki/Bootstrapping>`_),
+    arquivos de configuração do núcleo do framework,
     e outros, devem ficar aqui.
 Controller
     Contém os controllers e componentes da sua aplicação.

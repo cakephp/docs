@@ -3,7 +3,7 @@ Backwards Compatibility Guide
 
 Ensuring that you can upgrade your applications easily and smoothly is important
 to us. That's why we only break compatibility at major release milestones.
-You might be familiar with `semantic versioning <http://semver.org/>`_, which is
+You might be familiar with `semantic versioning <https://semver.org/>`_, which is
 the general guideline we use on all CakePHP projects. In short, semantic
 versioning means that only major releases (such as 2.0, 3.0, 4.0) can break
 backwards compatibility. Minor releases (such as 2.1, 3.1, 3.2) may introduce

@@ -12,7 +12,7 @@ Tree
 フィールドをデータベーステーブルに追加したり、アイテムの親が何であるかを
 追跡することは簡単です。しかしながら CakePHP にバンドルされている
 ビヘイビアの機能は非常にパワフルです。
-`MPTT ロジック <http://www.sitepoint.com/hierarchical-data-database-2/>`_
+`MPTT ロジック <https://www.sitepoint.com/hierarchical-data-database-2/>`_
 を扱うには複雑なテクニックを駆使する必要がありますが、このビヘイビアを使用すると、
 それにわずらわされることなく MPTT ロジックの恩恵を受けることができます。
 

@@ -14,7 +14,7 @@ deep it is simple to add a parent\_id field to your database table
 and use this to keep track of which item is the parent of what.
 Bundled with cake however, is a powerful behavior which allows you
 to use the benefits of
-`MPTT logic <http://www.sitepoint.com/hierarchical-data-database-2/>`_
+`MPTT logic <https://www.sitepoint.com/hierarchical-data-database-2/>`_
 without worrying about any of the intricacies of the technique -
 unless you want to ;).
 

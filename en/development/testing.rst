@@ -2,7 +2,7 @@ Testing
 #######
 
 CakePHP comes with comprehensive testing support built-in. CakePHP comes with
-integration for `PHPUnit <http://phpunit.de>`_. In addition to the features
+integration for `PHPUnit <https://phpunit.de>`_. In addition to the features
 offered by PHPUnit, CakePHP offers some additional features to make testing
 easier. This section will cover installing PHPUnit, and getting started with
 Unit Testing, and how you can use the extensions that CakePHP offers.
@@ -238,7 +238,7 @@ results.
 Viewing code coverage
 ~~~~~~~~~~~~~~~~~~~~~
 
-If you have `Xdebug <http://xdebug.org>`_ installed, you can view code coverage
+If you have `Xdebug <https://xdebug.org>`_ installed, you can view code coverage
 results. Code coverage is useful for telling you what parts of your code your
 tests do not reach. Coverage is useful for determining where you should add
 tests in the future, and gives you one measurement to track your testing
@@ -1320,14 +1320,14 @@ reference them using ``plugin.pluginName.fixtureName`` syntax in the
 Integration with Jenkins
 ========================
 
-`Jenkins <http://jenkins-ci.org>`_ is a continuous integration server, that can
+`Jenkins <https://jenkins-ci.org>`_ is a continuous integration server, that can
 help you automate the running of your test cases. This helps ensure that all
 your tests stay passing and your application is always ready.
 
 Integrating a CakePHP application with Jenkins is fairly straightforward. The
 following assumes you've already installed Jenkins on \*nix system, and are able
 to administer it. You also know how to create jobs, and run builds. If you are
-unsure of any of these, refer to the `Jenkins documentation <http://jenkins-ci.org/>`_ .
+unsure of any of these, refer to the `Jenkins documentation <https://jenkins-ci.org/>`_ .
 
 Create a job
 ------------

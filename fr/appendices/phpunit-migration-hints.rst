@@ -2,9 +2,9 @@ PHPUnit Migration Hints
 #######################
 
 Migrer vos cas de test vers
-`PHPUnit 3.7 <http://www.phpunit.de/manual/current/en/>`_ va, espérons-le être
+`PHPUnit 3.7 <https://www.phpunit.de/manual/current/en/>`_ va, espérons-le être
 une transition sans douleur. Cepeandant, il y a quelques différences entre les
-cas de test sous PHPUnit et `SimpleTest <http://www.simpletest.org/>`_.
+cas de test sous PHPUnit et `SimpleTest <https://www.simpletest.org/>`_.
 
 Différences avec SimpleTest
 ===========================
@@ -86,7 +86,7 @@ de compatibilité de wrapper entre eux. Mettre à jour l'utilisation de mock
 object peut être un processus douloureux mais nous espérons que les astuces
 suivantes vous aideront dans votre migration. Il est hautement recommandé de
 vous familiariser vous-même avec la documentation de
-`PHPUnit Mock object <http://www.phpunit.de/manual/current/en/test-doubles.html#test-doubles.mock-objects>`_.
+`PHPUnit Mock object <https://www.phpunit.de/manual/current/en/test-doubles.html#test-doubles.mock-objects>`_.
 
 Remplacez les appels de méthode
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

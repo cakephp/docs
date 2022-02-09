@@ -309,7 +309,7 @@ Debugger
 Security
 --------
 
-- Support for `bcrypt <http://codahale.com/how-to-safely-store-a-password/>`_
+- Support for `bcrypt <https://codahale.com/how-to-safely-store-a-password/>`_
   was added. See the :php:class:`Security::hash()` documentation for more
   information on how to use bcrypt.
 

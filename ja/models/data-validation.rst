@@ -1245,7 +1245,7 @@ CakePHP のバリデーションクラスには多くのバリデーションル
 
 .. php:staticmethod:: uuid(string $check)
 
-    正当な UUID http://tools.ietf.org/html/rfc4122 かどうかを検査します。
+    正当な UUID https://tools.ietf.org/html/rfc4122 かどうかを検査します。
 
 
 ローカライズされたバリデーション

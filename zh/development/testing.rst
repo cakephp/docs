@@ -1,7 +1,7 @@
 测试
 ####
 
-CakePHP 内置带有全面的测试支持。CakePHP 自带有与 `PHPUnit <http://phpunit.de>`_
+CakePHP 内置带有全面的测试支持。CakePHP 自带有与 `PHPUnit <https://phpunit.de>`_
 的集成。除了 PHPUnit 提供的特性，CakePHP 提供了一些额外的功能，使得测试更为容易。
 本节将介绍 PHPUnit 的安装，开始进行单元测试，以及如何使用 CakePHP 提供的扩展。
 
@@ -190,7 +190,7 @@ CakePHP 提供了 web 界面来运行测试，这样，如果你觉得这样的�
 查看代码覆盖
 ~~~~~~~~~~~~
 
-如果你安装了 `Xdebug <http://xdebug.org>`_，就可以查看代码覆盖的结果。代码覆盖
+如果你安装了 `Xdebug <https://xdebug.org>`_，就可以查看代码覆盖的结果。代码覆盖
 可以告诉你，你的测试没有触及代码的哪部分。覆盖率用于决定今后在哪里还应当添加测试，
 并给你一个度量来监测你测试的进展。
 
@@ -1172,12 +1172,12 @@ ControllerTestCase 测试视图内容，更健壮、易于维护的集成/视图
 与 Jenkins 集成
 ===============
 
-`Jenkins <http://jenkins-ci.org>`_ 是持续集成服务器，可以帮你自动化运行测试用例。
+`Jenkins <https://jenkins-ci.org>`_ 是持续集成服务器，可以帮你自动化运行测试用例。
 这有助于确保所有测试保持通过，应用程序总是准备就绪的。
 
 CakePHP 应用程序与 Jenkins 的集成是相当直截了当的。下面假设你已经在 \*nix 系统上
 安装好了 Jenkins，并且可以管理它。你也知道如何创建作业(*job*)，运行构建。如果你
-对这些有任何不确定，请参考 `Jenkins 文档 <http://jenkins-ci.org/>`_
+对这些有任何不确定，请参考 `Jenkins 文档 <https://jenkins-ci.org/>`_
 
 创建作业
 --------

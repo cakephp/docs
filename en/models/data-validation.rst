@@ -1263,7 +1263,7 @@ with usage examples.
 
 .. php:staticmethod:: uuid(string $check)
 
-    Checks that a value is a valid UUID: http://tools.ietf.org/html/rfc4122
+    Checks that a value is a valid UUID: https://tools.ietf.org/html/rfc4122
 
 
 Localized Validation

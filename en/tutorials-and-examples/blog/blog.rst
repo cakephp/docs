@@ -41,7 +41,7 @@ To get a fresh download, visit the CakePHP project on GitHub:
 and download the latest release of 2.0
 
 You can also clone the repository using
-`git <http://git-scm.com/>`_::
+`git <https://git-scm.com/>`_::
 
     git clone -b 2.x git://github.com/cakephp/cakephp.git
 

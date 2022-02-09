@@ -28,7 +28,7 @@ adresse e-mail de travail::
 .. note::
 
     Si vous êtes nouveau sous Git, nous vous recommandons fortement de lire l'
-    excellent livre gratuit `ProGit <http://git-scm.com/book/>`_.
+    excellent livre gratuit `ProGit <https://git-scm.com/book/>`_.
 
 Récupérer un clone du code source de CakePHP sous GitHub.:
 
@@ -111,7 +111,7 @@ Vérifiez que tous les tests continuent. Ensuite faîtes un push de votre branch
     git push origin <branch-name>
 
 Une fois que votre branche est sur GitHub, vous pouvez discuter de cela sur la
-mailing-liste `cakephp-core <http://groups.google.com/group/cakephp-core>`_  ou
+mailing-liste `cakephp-core <https://groups.google.com/group/cakephp-core>`_  ou
 soumettre un pull request sur GitHub.
 
 Choisir l'emplacement dans lequel vos changements seront fusionnés
@@ -135,10 +135,10 @@ la pull request est créée.
 
     Rappelez vous que tout le code auquel vous contribuez pour CakePHP sera
     sous la licence MIT License, et la
-    `Cake Software Foundation <http://cakefoundation.org/pages/about>`_ sera le
+    `Cake Software Foundation <https://cakefoundation.org/pages/about>`_ sera le
     propriétaire de toutes les contributions de code et toutes les
     contributions de code sont soumises au `contrat de licence des
-    Contributeurs <http://cakefoundation.org/pages/cla>`_.
+    Contributeurs <https://cakefoundation.org/pages/cla>`_.
 
 Tous les bugs réparés fusionnés sur une branche de maintenance seront aussi
 fusionnés périodiquement à la version publiée par l'équipe centrale (core team).

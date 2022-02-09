@@ -195,7 +195,7 @@ Xdebug
 
 あなたの環境に Xdebug PHP 拡張が組み込まれている場合、致命的なエラーは、
 Xdebug スタックトレースの詳細が表示されます。Xdebug の詳細は、
-`Xdebug <http://xdebug.org>`_ をご覧ください。
+`Xdebug <https://xdebug.org>`_ をご覧ください。
 
 
 .. meta::

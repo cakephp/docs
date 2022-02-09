@@ -179,7 +179,7 @@ Xdebug
 ======
 
 如果你的环境提供了 Xdebug PHP 扩展，严重错误(*fatal error*)就会显示额外的 Xdebug
-堆栈追踪明细。关于 Xdebug 的详情可见 `Xdebug <http://xdebug.org>`_ 。
+堆栈追踪明细。关于 Xdebug 的详情可见 `Xdebug <https://xdebug.org>`_ 。
 
 
 .. meta::

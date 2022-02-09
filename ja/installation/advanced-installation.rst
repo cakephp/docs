@@ -40,7 +40,7 @@ Composer は、PHP 5.3 以上向けの依存関係管理ツールです。これ
 問題の多くを解決し、いろんなバージョンのライブラリをシンプルに管理できるようにします。
 `Packagist <https://packagist.org/>`_ は、Composer でインストール可能なパッケージの
 メインリポジトリです。 CakePHP は、Packagist 上に公開された時、
-`Composer <http://getcomposer.org>`_ を使用してインストールすることができます。
+`Composer <https://getcomposer.org>`_ を使用してインストールすることができます。
 
 - Linux や Mac OS X に Composer をインストール
 

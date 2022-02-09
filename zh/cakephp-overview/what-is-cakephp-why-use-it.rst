@@ -45,7 +45,7 @@ CakePHP 有积极的 `开发团队 <https://github.com/cakephp?tab=members>`_ �
 -  灵活的 `缓存 <https://en.wikipedia.org/wiki/Web_cache>`_
 -  本地化
 -  可在任何网站目录中运行，几乎不需要改动
-   `Apache <http://httpd.apache.org/>`_ 配置
+   `Apache <https://httpd.apache.org/>`_ 配置
 
 
 .. meta::

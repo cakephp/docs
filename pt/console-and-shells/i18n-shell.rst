@@ -3,7 +3,7 @@ I18N shell
 
 A internacionalização no CakePHP é realizada através de
 `arquivos po <https://pt.wikipedia.org/wiki/Gettext>`_. Isto faz com que seja
-fácil utilizar ferramentas como o `poedit <http://www.poedit.net/>`_ e outras.
+fácil utilizar ferramentas como o `poedit <https://www.poedit.net/>`_ e outras.
 
 O shell i18n (é chamado de i18n pois é derivado da palavra inglesa
 internationalization, que inicia com a letra i, termina com a letra n e possui

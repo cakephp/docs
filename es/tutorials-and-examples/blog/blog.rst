@@ -27,7 +27,7 @@ Esto es lo que necesitas:
 
 #. Conocimiento sobre patrón MVC. Puedes encontrar una definición rápida aquí:
    :doc:`/cakephp-overview/understanding-model-view-controller`. No tengas miedo, sólo
-   es media página. 
+   es media página.
 
 ¡ Vamos allá !
 
@@ -37,11 +37,11 @@ Descargar CakePHP
 Vamos a descargar la última versión de CakePHP.
 
 Para ello, visita la web del proyecto en GitHub:
-`https://github.com/cakephp/cakephp/tags <https://github.com/cakephp/cakephp/tags>`_ 
+`https://github.com/cakephp/cakephp/tags <https://github.com/cakephp/cakephp/tags>`_
 y descargar / descomprimir la última versión de la rama 2.0
 
-También puedes clonar el repositorio usando 
-`git <http://git-scm.com/>`_.
+También puedes clonar el repositorio usando
+`git <https://git-scm.com/>`_.
 ``git clone git://github.com/cakephp/cakephp.git``
 
 Usa el método que prefieras y coloca la carpeta que has descargado bajo la ruta
@@ -82,8 +82,8 @@ tabla, ejecuta el siguiente código SQL en ella:
         created DATETIME DEFAULT NULL,
         modified DATETIME DEFAULT NULL
     );
-    
-     
+
+
     /* algunos valores de test */
     INSERT INTO posts (title,body,created)
         VALUES ('The title', 'This is the post body.', NOW());
@@ -158,7 +158,7 @@ Hay otras tres cosas que puedes querer configurar, aunque no son requeridas para
 este tutorial no está mal echarles un vistazo. Para ello abre el fichero
 ``/app/Config/core.php`` que contiene todos estos parámetros.
 
-#. Configurar un string de seguridad 'salt' para usarlo al realizar los 'hash'. 
+#. Configurar un string de seguridad 'salt' para usarlo al realizar los 'hash'.
 
 #. Configurar un número semilla para el encriptado 'seed'.
 

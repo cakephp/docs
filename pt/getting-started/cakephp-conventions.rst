@@ -2,7 +2,7 @@ Convenções no CakePHP
 #####################
 
 Nós somos grandes fãns de `convenções sobre configuração
-<http://pt.wikipedia.org/wiki/Conven%C3%A7%C3%A3o_sobre_configura%C3%A7%C3%A3o>`_.
+<https://pt.wikipedia.org/wiki/Conven%C3%A7%C3%A3o_sobre_configura%C3%A7%C3%A3o>`_.
 Enquanto pode levar um tempo para aprender as convenções do CakePHP, você
 ganhará muito tempo a longo prazo: seguindo as convenções você ganhará
 funcionalidades e ficará livre dos pesadelos de manter arquivos de configuração.
@@ -21,7 +21,7 @@ Convenções nos Controllers
 ==========================
 
 As classes Controllers devem ser escritas no plural, usando o formato
-`CamelCase <http://pt.wikipedia.org/wiki/CamelCase>`_ e terminarem com a
+`CamelCase <https://pt.wikipedia.org/wiki/CamelCase>`_ e terminarem com a
 palavra ``Controller``. ``PeopleController`` e ``LatestArticlesController`` são
 dois exemplos de nomes de controllers que seguem a convenção.
 
@@ -34,16 +34,16 @@ http://www.example.com/apples/view/ é mapeada para a chamada do método
 ``view()`` do mesmo controller.
 
 Você também pode alterar a visibilidade dos métodos de controllers no CakePHP
-prefixando os nome dos métodos com underscores. Se um método de um controller 
+prefixando os nome dos métodos com underscores. Se um método de um controller
 for prefixado, o método não poderá ser acessado diretamente da web mas estará
 disponível para uso interno. Por exemplo::
 
     class NewsController extends AppController {
-    
+
         function latest() {
             $this->_findNewArticles();
         }
-        
+
         function _findNewArticles() {
             // lógica para encontrar os os últimos artigos
         }
@@ -86,7 +86,7 @@ Convenções de Arquivos e Nomes de Classes
 =========================================
 
 Geralmente, nomes de arquivos correspondem com o nome de suas classes, que são
-em `CamelCase <http://pt.wikipedia.org/wiki/CamelCase>`_. Então se você possui
+em `CamelCase <https://pt.wikipedia.org/wiki/CamelCase>`_. Então se você possui
 uma classe **MyNiftyClass**, para o Cake, o nome do arquivo deve ser
 **MyNiftyClass.php**. Abaixo estão alguns exemplos de como nomear arquivos para
 diferentes tipos de classes que você usará em aplicações CakePHP:
@@ -111,7 +111,7 @@ Convenções de Models e Banco de Dados
 =====================================
 
 O nome dos Models devem ser escritos no singular e no formato `CamelCase
-<http://pt.wikipedia.org/wiki/CamelCase>`_. Car, BigCar e ReallyBigCar são todos
+<https://pt.wikipedia.org/wiki/CamelCase>`_. Car, BigCar e ReallyBigCar são todos
 exemplos de nomes de models que seguem a convenção.
 
 Nomes de tabelas correspondentes à models do CakePHP são escritos no plural e
@@ -153,7 +153,7 @@ como um model normal. Ex.::
         post_id INT(10) NOT NULL,
         tag_id  INT(10) NOT NULL,
         PRIMARY KEY(id)
-    ); 
+    );
 
 Ao invés de usar chaves auto incrementadas, você também pode usar o tipo
 char(36). Desta forma o Cake irá usar um identificador único (uuid) de 36
