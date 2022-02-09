@@ -3,7 +3,7 @@ I18N shell
 
 The i18n features of CakePHP use `po files <https://en.wikipedia.org/wiki/GNU_gettext>`_
 as their translation source. This makes them easily to integrate with tools
-like `poedit <http://www.poedit.net/>`_ and other common translation tools.
+like `poedit <https://www.poedit.net/>`_ and other common translation tools.
 
 The i18n shell provides a quick and easy way to generate po template files.
 These templates files can then be given to translators so they can translate the

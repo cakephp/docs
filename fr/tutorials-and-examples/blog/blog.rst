@@ -42,7 +42,7 @@ Pour obtenir la dernière version, allez sur le site GitHub du projet CakePHP :
 et téléchargez la dernière version de la 2.0.
 
 Vous pouvez aussi cloner le dépôt en utilisant
-`git <http://git-scm.com/>`_::
+`git <https://git-scm.com/>`_::
 
     git clone -b 2.x git://github.com/cakephp/cakephp.git
 

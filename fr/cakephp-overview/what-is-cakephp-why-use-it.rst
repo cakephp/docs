@@ -53,7 +53,7 @@ CakePHP :
 -  Système de `cache <https://en.wikipedia.org/wiki/Web_cache>`_ souple.
 -  Localisation et internationalisation.
 -  Fonctionne sur n'importe quelle arborescence de site web, avec un zest de
-   configuration `Apache <http://httpd.apache.org/>`_ pas très compliquée.
+   configuration `Apache <https://httpd.apache.org/>`_ pas très compliquée.
 
 
 .. meta::

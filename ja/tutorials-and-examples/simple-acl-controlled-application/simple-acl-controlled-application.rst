@@ -38,7 +38,7 @@ CakePHP のある程度の経験と、MVCの概念についての理解、
 https://github.com/cakephp/cakephp/tags) にアクセスし、安定版のリリースを
 ダウンロードしてください。このチュートリアルで必要なバージョンは最新の 2.0 リリースです。
 
-`git <http://git-scm.com/>`_ を使ってレポジトリを複製 (*clone*) することもできます。 ::
+`git <https://git-scm.com/>`_ を使ってレポジトリを複製 (*clone*) することもできます。 ::
 
     git clone -b 2.x git://github.com/cakephp/cakephp.git
 

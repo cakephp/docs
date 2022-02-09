@@ -65,7 +65,7 @@ opening form tag.
     form's model, and that array contains a non-empty value of the
     model's primary key, then the FormHelper will create an edit form
     for that record. For example, if we browse to
-    http://site.com/recipes/edit/5, we would get the following::
+    https://site.com/recipes/edit/5, we would get the following::
 
         // Controller/RecipesController.php:
         public function edit($id = null) {

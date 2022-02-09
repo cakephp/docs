@@ -353,7 +353,7 @@ Debugger
 Security
 --------
 
-- `bcrypt <http://codahale.com/how-to-safely-store-a-password/>`_ のサポートが追加されました。
+- `bcrypt <https://codahale.com/how-to-safely-store-a-password/>`_ のサポートが追加されました。
   bcrypt の使用方法の詳細は :php:class:`Security::hash()` のドキュメントを参照して下さい。
 
 

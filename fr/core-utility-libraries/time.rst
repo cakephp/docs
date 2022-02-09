@@ -147,7 +147,7 @@ Formatage
 
     :rtype: string
 
-    Prend une chaîne et utilise `strtotime <http://us.php.net/manual/en/function.date.php>`_
+    Prend une chaîne et utilise `strtotime <https://us.php.net/manual/en/function.date.php>`_
     pour la convertir en une date integer::
 
         // Appelé avec TimeHelper

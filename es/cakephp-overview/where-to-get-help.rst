@@ -69,7 +69,7 @@ El grupo de Google
 ==================
 
 En Español:
-`http://groups.google.com/group/cakephp-esp <http://groups.google.com/group/cakephp-esp>`_
+`https://groups.google.com/group/cakephp-esp <https://groups.google.com/group/cakephp-esp>`_
 
 CakePHP tiene también un Grupo de Google muy activo. Puede ser un gran
 recurso para encontrar las respuestas archivadas, preguntas frecuentes,
@@ -80,4 +80,4 @@ Where to get Help in your Language
 
 French
 ------
-- `French CakePHP Community <http://cakephp-fr.org>`_
+- `French CakePHP Community <https://cakephp-fr.org>`_

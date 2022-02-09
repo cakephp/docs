@@ -68,7 +68,7 @@ affichera un tag d'ouverture de formulaire.
     non nulle pour la clé primaire du model, alors le FormHelper créera
     un formulaire de modification pour cet enregistrement précis. Par
     exemple, si on va à l'adresse
-    http://site.com/recipes/edit/5, nous pourrions avoir cela::
+    https://site.com/recipes/edit/5, nous pourrions avoir cela::
 
         // Controller/RecipesController.php:
         public function edit($id = null) {

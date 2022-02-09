@@ -25,7 +25,7 @@ Aqui vai uma lista do que você vai precisar:
    já programou, melhor: mas não tenha medo se é fã de programação procedural.
 #. E por último, você vai precisar de um conhecimento básico do padrão de
    projetos MVC. Uma rápida visão geral pode ser encontrada em
-   :doc:`/cakephp-overview/understanding-model-view-controller`. 
+   :doc:`/cakephp-overview/understanding-model-view-controller`.
    Não se preocupe, deve ter meia página ou menos.
 
 Então, vamos começar!
@@ -40,7 +40,7 @@ github: `https://github.com/cakephp/cakephp/downloads
 <https://github.com/cakephp/cakephp/downloads>`_
 e faça o download da última versão 2.0.
 
-Você também pode clonar o repositório usando o `git <http://git-scm.com/>`_.
+Você também pode clonar o repositório usando o `git <https://git-scm.com/>`_.
 ``git clone git://github.com/cakephp/cakephp.git``.
 
 Idependente da maneira de como você baixou o Cake, coloque o código obtido
@@ -77,7 +77,7 @@ teste. Execute as instruções a seguir no seu banco de dados::
         created DATETIME DEFAULT NULL,
         modified DATETIME DEFAULT NULL
     );
-    
+
     -- Agora inserimos alguns posts para testar
     INSERT INTO posts (title, body, created)
         VALUES ('The title', 'This is the post body.', NOW());
@@ -215,7 +215,7 @@ tudo funcionando corretamente:
    ou (para o Apache 1.3)::
 
        AddModule                       mod_rewrite.c
-   
+
    em seu httpd.conf.
 
 Se você não quiser ou não puder carregar o mod\_rewrite (ou algum outro módulo

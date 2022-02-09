@@ -54,7 +54,7 @@ Here's a quick list of features you'll enjoy when using CakePHP:
 -  Flexible `caching <https://en.wikipedia.org/wiki/Web_cache>`_
 -  Localization
 -  Works from any web site directory, with little to no
-   `Apache <http://httpd.apache.org/>`_ configuration involved
+   `Apache <https://httpd.apache.org/>`_ configuration involved
 
 
 .. meta::

@@ -265,7 +265,7 @@ Redis エンジン
 :php:class:`CakeLog` の変更によって、いくつかの設定を ``app/Config/bootstrap.php`` ファイルに追加する必要があります。
 詳細は、 :doc:`/core-libraries/logging` を参照ください。
 
-- :php:class:`CakeLog` クラスは `RFC 5424 <http://tools.ietf.org/html/rfc5424>`_ の定義と同じレベルでログを出力します。
+- :php:class:`CakeLog` クラスは `RFC 5424 <https://tools.ietf.org/html/rfc5424>`_ の定義と同じレベルでログを出力します。
   いくつかの便利なメソッドが追加されました。
 
   * :php:meth:`CakeLog::emergency($message, $scope = array())`

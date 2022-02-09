@@ -15,7 +15,7 @@ niveaux de profondeurs, c'est simple d'ajouter un champ parent_id à votre table
 et de l'utiliser pour savoir quel objet est le parent de quel autre. En natif
 avec CakePHP, il existe cependant un moyen puissant d'avoir les bénéfices de
 la logique MPTT
-`MPTT logic <http://www.sitepoint.com/hierarchical-data-database-2/>`,
+`MPTT logic <https://www.sitepoint.com/hierarchical-data-database-2/>`,
 sans avoir à connaître les détails de l'implémentation technique - à moins que
 ça ne vous intéresse ;).
 

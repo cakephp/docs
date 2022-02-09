@@ -70,13 +70,13 @@ l'extension. *Cependant*, à moins que vous ne soyez familiarisé avec leur
 format, il est très facile de créer un fichier po invalide, ou de le sauver
 dans un mauvais encodage de caractères (si vous éditez ces fichiers
 manuellement, utilisez l'UTF-8 pour éviter les problèmes). Il y a des outils
-gratuits tel que PoEdit `PoEdit <http://www.poedit.net>`_ qui rendent les
+gratuits tel que PoEdit `PoEdit <https://www.poedit.net>`_ qui rendent les
 tâches d'édition et de mise à jour de vos fichiers po vraiment simples,
 spécialement pour la mise à jour d'un fichier po existant avec un fichier pot
 nouvellement mis à jour.
 
 Les codes des locales en trois caractères suivent la norme
-`ISO 639-2 <http://www.loc.gov/standards/iso639-2/php/code_list.php>`_
+`ISO 639-2 <https://www.loc.gov/standards/iso639-2/php/code_list.php>`_
 mais si vous créez des locales régionales (`en\_US`, `en\_GB`, etc.)
 CakePHP les utilisera dans les cas appropriés.
 
@@ -174,7 +174,7 @@ vous avez à faire est dans la partie suivante::
 
 Ceci signale à CakePHP quelle locale utiliser (si vous utilisez une locale
 régionale, comme `fr\_FR`, la locale
-`ISO 639-2 <http://www.loc.gov/standards/iso639-2/php/code_list.php>`_) sera
+`ISO 639-2 <https://www.loc.gov/standards/iso639-2/php/code_list.php>`_) sera
 utilisée au cas où cela n'existerait pas), vous pouvez changer la langue
 à n'importe quel moment pendant une requête. Ex: dans votre bootstrap
 si vous avez défini les paramètres de langue par défaut, dans la partie

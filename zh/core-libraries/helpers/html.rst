@@ -193,7 +193,7 @@ HtmlHelper助件的一些方法及如何使用它们。
 
     如果你要添加自定义的meta标签，那么第一个参数应当设置为数组。要输出robots
     noindex标签（译注：防止漫游器将网页编入索引，可参考 `noindex
-    <http://baike.baidu.com/link?url=wZMV3V5BOO9BrKxVaSp2jEUO2ICTI-cFhFOkcOkQ5FzxcTa0_1s9yQFib06vigYuC1RHYETpkwLHPnVS4qqd5_>`_
+    <https://baike.baidu.com/link?url=wZMV3V5BOO9BrKxVaSp2jEUO2ICTI-cFhFOkcOkQ5FzxcTa0_1s9yQFib06vigYuC1RHYETpkwLHPnVS4qqd5_>`_
     ），可以使用下面的代码::
 
         echo $this->Html->meta(array('name' => 'robots', 'content' => 'noindex'));

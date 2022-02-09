@@ -292,7 +292,7 @@ your ``app/Config/bootstrap.php``. See :ref:`required-steps-to-upgrade-2-2`,
 and :doc:`/core-libraries/logging`.
 
 - The :php:class:`CakeLog` class now accepts the same log levels as defined in
-  `RFC 5424 <http://tools.ietf.org/html/rfc5424>`_. Several convenience
+  `RFC 5424 <https://tools.ietf.org/html/rfc5424>`_. Several convenience
   methods have also been added:
 
   * :php:meth:`CakeLog::emergency($message, $scope = array())`

@@ -24,7 +24,7 @@ Accepter le HTML soumis par l'utilisateur
 Souvent, le filtre d'entrées est utilisé quand on veut accepter le HTML soumis
 par l'utilisateur. Dans ces situations, il est mieux d'utiliser une librairie
 dédiée comme ` le Purificateur de HTML
-<http://htmlpurifier.org/>`_.
+<https://htmlpurifier.org/>`_.
 
 Echappement de SQL
 ==================

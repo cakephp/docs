@@ -367,7 +367,7 @@ inflection (except slug method).
 **Set**
 
 Set has a new method ``Set::apply()``, which allows you to apply
-`callbacks <http://ca2.php.net/callback>`_ to the results of
+`callbacks <https://ca2.php.net/callback>`_ to the results of
 ``Set::extract`` and do so in either a map or reduce fashion.
 
 ::
@@ -453,7 +453,7 @@ the time preferences for French language this way:
 
 You can read a complete guide of possible values in LC\_TIME
 definition file in
-`this page <http://sunsson.iptime.org/susv3/basedefs/xbd_chap07.html>`_
+`this page <https://sunsson.iptime.org/susv3/basedefs/xbd_chap07.html>`_
 
 Miscellaneous
 ~~~~~~~~~~~~~

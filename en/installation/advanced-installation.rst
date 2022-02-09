@@ -42,7 +42,7 @@ Composer is a dependency management tool for PHP 5.3+. It solves many of the
 problems the PEAR installer has, and simplifies managing multiple versions of
 libraries. `Packagist <https://packagist.org/>`_ is the main repository of
 Composer installable packages. Since CakePHP also publishes releases to
-Packagist, you can install CakePHP using `Composer <http://getcomposer.org>`_.
+Packagist, you can install CakePHP using `Composer <https://getcomposer.org>`_.
 
 - Installing Composer on Linux and Mac OS X
 

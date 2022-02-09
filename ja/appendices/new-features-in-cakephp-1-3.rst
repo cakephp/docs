@@ -352,7 +352,7 @@ Inflector::rules を使い、Inflector::slug で使われる音訳マップの�
 **Set**
 
 Set には新しく ``Set::apply()`` メソッドがあります。これは ``Set::extract`` の結果に
-`コールバック <http://ca2.php.net/callback>`_ を適用することができ、map や reduce
+`コールバック <https://ca2.php.net/callback>`_ を適用することができ、map や reduce
 として振舞うこともできます。 ::
 
     Set::apply('/Movie/rating', $data, 'array_sum');
@@ -427,7 +427,7 @@ LC\_TIME に該当する部分を app/locale/fr\_fr/LC\_TIME（ファイル）�
     $dateFormat = __c('d_fmt',LC_TIME,true); // フランスで好まれる日にちのフォーマットを返す
 
 LC\_TIME 定義ファイルで使うことの出来る値の完全なガイドを
-`このページ（英語） <http://sunsson.iptime.org/susv3/basedefs/xbd_chap07.html>`_
+`このページ（英語） <https://sunsson.iptime.org/susv3/basedefs/xbd_chap07.html>`_
 で読むことが出来ます。
 
 

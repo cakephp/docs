@@ -11,7 +11,7 @@ Apache 和 mod\_rewrite (以及 .htaccess)
 改系统级的 httpd.conf，而不是用户级或者站点级的 httpd.conf。)
 
 这些文件随(Linux)发行版本的不同和 Apache 版本的不同而有所变化。你也可以查看
-http://wiki.apache.org/httpd/DistrosDefaultLayout 以获取更多的信息。
+https://wiki.apache.org/httpd/DistrosDefaultLayout 以获取更多的信息。
 
 
 #. 确保允许 .htaccess 优先(*override*)，并且正确的 DocumentRoot 的 AllowOverride
@@ -95,7 +95,7 @@ http://wiki.apache.org/httpd/DistrosDefaultLayout 以获取更多的信息。
        </Directory>
 
    在 Mac OSX 中，另一个方法是使用
-   `virtualhostx <http://clickontyler.com/virtualhostx/>`_ 工具来创建一个虚拟主机
+   `virtualhostx <https://clickontyler.com/virtualhostx/>`_ 工具来创建一个虚拟主机
    ，指向你的目录。
 
    对于很多托管服务(GoDaddy, 1and1)，你的 web 服务器实际上是从一个已经使用
@@ -204,10 +204,10 @@ IIS7 本身不支持 .htaccess 文件。虽然有插件(*add-on*)可增加这种
 htaccess 规则导入 IIS，来使用 CakePHP 的原生重写。为此，按照如下步骤进行:
 
 
-#. 使用 `Microsoft 的 Web Platform Installer <http://www.microsoft.com/web/downloads/platform.aspx>`_
-   来安装网址 `重写模块 2.0 <http://www.iis.net/downloads/microsoft/url-rewrite>`_
-   或者直接下载(`32位 <http://www.microsoft.com/en-us/download/details.aspx?id=5747>`_
-   / `64位 <http://www.microsoft.com/en-us/download/details.aspx?id=7435>`_)。
+#. 使用 `Microsoft 的 Web Platform Installer <https://www.microsoft.com/web/downloads/platform.aspx>`_
+   来安装网址 `重写模块 2.0 <https://www.iis.net/downloads/microsoft/url-rewrite>`_
+   或者直接下载(`32位 <https://www.microsoft.com/en-us/download/details.aspx?id=5747>`_
+   / `64位 <https://www.microsoft.com/en-us/download/details.aspx?id=7435>`_)。
 #. 在 CakePHP 根目录创建一个文件 web.config。
 #. 使用记事本(*Notepad*)或任何对 XML 安全的编辑器，拷贝下面的代码到新建的
    web.config 文件中……

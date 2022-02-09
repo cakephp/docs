@@ -122,9 +122,9 @@ Pull Request を作る際には、ベースとなるブランチが正しく選�
 .. note::
 
     あなたが貢献したすべてのコードは MIT License に基づき CakePHP にライセンスされることを
-    覚えておいてください。 `Cake Software Foundation <http://cakefoundation.org/pages/about>`_
+    覚えておいてください。 `Cake Software Foundation <https://cakefoundation.org/pages/about>`_
     がすべての貢献されたコードの所有者になります。貢献する人は
-    `CakePHP Community Guidelines <http://community.cakephp.org/guidelines>`_
+    `CakePHP Community Guidelines <https://community.cakephp.org/guidelines>`_
     に従うようお願いします。
 
 メンテナンス・ブランチへとマージされたすべてのバグ修正は、

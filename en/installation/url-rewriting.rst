@@ -13,7 +13,7 @@ First look at your httpd.conf. (Make sure you are editing the system
 httpd.conf rather than a user- or site-specific httpd.conf.)
 
 These files can vary between different distributions and Apache versions.
-You may also take a look at http://wiki.apache.org/httpd/DistrosDefaultLayout for further information.
+You may also take a look at https://wiki.apache.org/httpd/DistrosDefaultLayout for further information.
 
 
 #. Make sure that an .htaccess override is allowed and that
@@ -109,7 +109,7 @@ You may also take a look at http://wiki.apache.org/httpd/DistrosDefaultLayout fo
        </Directory>
 
    On Mac OSX, another solution is to use the tool
-   `virtualhostx <http://clickontyler.com/virtualhostx/>`_
+   `virtualhostx <https://clickontyler.com/virtualhostx/>`_
    to make a Virtual Host to point to your folder.
 
    For many hosting services (GoDaddy, 1and1), your web server is
@@ -210,7 +210,7 @@ inject "/webroot" in each request.
 
       ... php handling ...
    }
-   
+
 .. note::
    Recent configuration of PHP-FPM is set to listen to php-fpm socket instead of TCP port 9000 on address 127.0.0.1. If you get 502 bad gateway error from above configuration, try replacing fastcgi_pass from TCP port to socket path (eg: fastcgi_pass unix:/var/run/php5-fpm.sock;).
 
@@ -222,8 +222,8 @@ add-ons that can add this support, you can also import htaccess
 rules into IIS to use CakePHP's native rewrites. To do this, follow
 these steps:
 
-#. Use `Microsoft's Web Platform Installer <http://www.microsoft.com/web/downloads/platform.aspx>`_ to install the URL
-   `Rewrite Module 2.0 <http://www.iis.net/downloads/microsoft/url-rewrite>`_ or download it directly (`32-bit <http://www.microsoft.com/en-us/download/details.aspx?id=5747>`_ / `64-bit <http://www.microsoft.com/en-us/download/details.aspx?id=7435>`_).
+#. Use `Microsoft's Web Platform Installer <https://www.microsoft.com/web/downloads/platform.aspx>`_ to install the URL
+   `Rewrite Module 2.0 <https://www.iis.net/downloads/microsoft/url-rewrite>`_ or download it directly (`32-bit <https://www.microsoft.com/en-us/download/details.aspx?id=5747>`_ / `64-bit <https://www.microsoft.com/en-us/download/details.aspx?id=7435>`_).
 #. Create a new file called web.config in your CakePHP root folder.
 #. Using Notepad or any XML-safe editor, copy the following
    code into your new web.config file...

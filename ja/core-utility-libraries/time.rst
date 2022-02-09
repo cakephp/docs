@@ -143,7 +143,7 @@ CakeTime
     :rtype: string
 
     文字列を受け取り、日付の整数値に変換するために
-    `strtotime <http://us.php.net/manual/en/function.date.php>`_ を使います。 ::
+    `strtotime <https://us.php.net/manual/en/function.date.php>`_ を使います。 ::
 
         // TimeHelper で実行
         echo $this->Time->fromString('Aug 22, 2011');

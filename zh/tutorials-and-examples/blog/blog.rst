@@ -18,7 +18,7 @@
    PHP 中开启了 ``pdo_mysql`` 模块。
 #. 基础的 PHP 知识。你对面向对象编程的经验越多越好，不过如果你只懂面向过程编程，
    也不要害怕。
-#. 最后, 你将需要对 MVC 编程模式有基本的了解。这里有一个简介 
+#. 最后, 你将需要对 MVC 编程模式有基本的了解。这里有一个简介
    :doc:`/cakephp-overview/understanding-model-view-controller`。别怕，只是半页而
    已。
 
@@ -33,7 +33,7 @@
 `https://github.com/cakephp/cakephp/tags <https://github.com/cakephp/cakephp/tags>`_ ，
 并下载2.0的最新发行版本。
 
-你也可以用 `git <http://git-scm.com/>`_ 检出(*clone*)最新的代码。
+你也可以用 `git <https://git-scm.com/>`_ 检出(*clone*)最新的代码。
 ``git clone git://github.com/cakephp/cakephp.git``
 
 不管你是通过什么方式下载的，将下载后的代码放到你的文档根目录(*DocumentRoot*)里。
@@ -48,14 +48,14 @@
         index.php
         README
 
-现在也许是个适当的时机去了解一下 CakePHP 的目录结构是如何组织的，请参阅 
+现在也许是个适当的时机去了解一下 CakePHP 的目录结构是如何组织的，请参阅
 :doc:`/getting-started/cakephp-folder-structure` 一节 。
 
 Tmp 目录的权限
 --------------
 
 下面我们要让目录 ``app/tmp`` 可以被 web 服务器写入。最好的方法是找出你的 web 服务
-器使用哪个用户运行。你可以在 web 服务器可以执行的任何 PHP 文件中运行 
+器使用哪个用户运行。你可以在 web 服务器可以执行的任何 PHP 文件中运行
 ``<?php echo `whoami`; ?>``。你应当会看到一个用户名被输出。将目录 ``app/tmp`` 的
 拥有者(*owner*)改为该用户。最终(在 \*nix系统中)运行的命令会象这样::
 
@@ -122,14 +122,14 @@ CakePHP 数据库配置
         'encoding' => 'utf8'
     );
 
-一旦你已经保存了新的 ``database.php`` 文件, 你应该能够打开你的浏览器并看到 
+一旦你已经保存了新的 ``database.php`` 文件, 你应该能够打开你的浏览器并看到
 CakePHP 的欢迎页面。它应当告诉你，数据库连接文件已经找到，CakePHP 已经成功连接到
 数据库了。
 
 .. note::
 
     记住如果你需要使用 PDO，你需要在 php.ini 中启用 pdo_mysql 模块。
- 
+
 可选的配置
 ==========
 
@@ -138,7 +138,7 @@ CakePHP 的欢迎页面。它应当告诉你，数据库连接文件已经找到
 于生成密码哈希的一个随机字符串)用于安全哈希，二是定义一个定制数(或者叫"seed")用于
 加密。
 
-安全字符串(*security salt*)用于生成哈希。在 ``/app/Config/core.php`` 中改变 
+安全字符串(*security salt*)用于生成哈希。在 ``/app/Config/core.php`` 中改变
 ``Security.salt`` 的值。新的值应该足够长，难于猜测，并尽可能的随机::
 
     /**
@@ -167,7 +167,7 @@ CakePHP 的欢迎页面。它应当告诉你，数据库连接文件已经找到
     /installation/url-rewriting
 
 
-接下来进入 :doc:`/tutorials-and-examples/blog/part-two`，开始建立你的第一个 
+接下来进入 :doc:`/tutorials-and-examples/blog/part-two`，开始建立你的第一个
 CakePHP 应用程序.
 
 

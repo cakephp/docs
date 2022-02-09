@@ -265,7 +265,7 @@ toc-tree に無い警告を抑制することができます。
 --------------------------
 
 CakePHP のドキュメントは `phpdomain
-<http://pypi.python.org/pypi/sphinxcontrib-phpdomain>`_
+<https://pypi.python.org/pypi/sphinxcontrib-phpdomain>`_
 を用いて PHP のオブジェクトと構成物を記述するための独自のディレクティブを提供します。
 適切な索引 (*index*) と相互参照機能を与えるためにこのディレクティブとロールを必ず使う
 必要があります。

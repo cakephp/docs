@@ -35,7 +35,7 @@ https://github.com/cakephp/cakephp/tags，并下载稳定发行版。对于本�
 最新的 2.0 发行版本。
 
 
-你也可以使用 `git <http://git-scm.com/>`_ 检出最新的代码::
+你也可以使用 `git <https://git-scm.com/>`_ 检出最新的代码::
 
     git clone git://github.com/cakephp/cakephp.git
 

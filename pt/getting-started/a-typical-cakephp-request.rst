@@ -5,13 +5,13 @@ Nós já abordamos os ingredientes básicos do CakePHP, então agora vamos dar u
 olhada em como os objetos trabalham juntos para completar uma requisição básica.
 Continuando com o exemplo da requisição original, vamos imaginar que nosso amigo
 Ricardo apenas clicou no link "Compre um bolo personalizado agora!" em uma
-`landing page <http://pt.wikipedia.org/wiki/Landing_page>`_ de uma aplicação
+`landing page <https://pt.wikipedia.org/wiki/Landing_page>`_ de uma aplicação
 CakePHP.
 
 .. figure:: /_static/img/typical-cake-request.png
    :align: center
    :alt: Um diagrama de fluxo mostrando uma típica requisição CakePHP
-   
+
    Um diagrama de fluxo mostrando uma típica requisição CakePHP
 
 Figure: 2. Requisição típica do CakePHP.

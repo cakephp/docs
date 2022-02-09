@@ -37,7 +37,7 @@ CakePHP のダウンロード
 `https://github.com/cakephp/cakephp/tags <https://github.com/cakephp/cakephp/tags>`_
 そして、2.0 の最新リリースをダウンロードします。
 
-または、 `git <http://git-scm.com/>`_ を使ってレポジトリを clone することもできます。 ::
+または、 `git <https://git-scm.com/>`_ を使ってレポジトリを clone することもできます。 ::
 
     git clone -b 2.x git://github.com/cakephp/cakephp.git
 
@@ -97,7 +97,7 @@ Tmp ディレクトリのパーミッション
         VALUES ('タイトルの逆襲', 'こりゃ本当にわくわくする！うそ。', NOW());
 
 テーブル名とフィールド名は適当に選んだわけではありません。CakePHP のデータベース命名規約と
-クラスの命名規約に従っておくと、（どちらも、 
+クラスの命名規約に従っておくと、（どちらも、
 :doc:`/getting-started/cakephp-conventions` の中で説明されています）たくさんの機能を
 自由に使うことができ、設定作業をする必要がなくなります。CakePHP はフレキシブルなので、
 最悪な従来型のデータベーススキーマにも対応することができますが、規約に従えば、

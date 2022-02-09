@@ -12,7 +12,7 @@ httpd.conf を見てください（ユーザーやサイト独自の httpd.conf 
 必ずシステムの httpd.conf を編集してください）。
 
 これらのファイルは、ディストリビューションや Apache のバージョンによって異なります。
-詳しくは http://wiki.apache.org/httpd/DistrosDefaultLayout を参照してください。
+詳しくは https://wiki.apache.org/httpd/DistrosDefaultLayout を参照してください。
 
 #. .htaccess のオーバーライドが許可されていること、正確な DocumentRoot に対して
    AllowOverride が All に設定されていることを確かめてください。
@@ -106,7 +106,7 @@ httpd.conf を見てください（ユーザーやサイト独自の httpd.conf 
        </Directory>
 
    Mac OSX 上での別解は、仮想ホストをフォルダに向けさせるのに、
-   `virtualhostx <http://clickontyler.com/virtualhostx/>`_ ツールを使うことが
+   `virtualhostx <https://clickontyler.com/virtualhostx/>`_ ツールを使うことが
    挙げられます。
 
    多くのホスティングサービス (GoDaddy、1and1) では、実際にウェブサーバーが既に mod\_rewrite
@@ -221,10 +221,10 @@ IIS7 はネイティブで .htaccess ファイルをサポートしていませ�
 ルールをインポートすることもできます。これをするには、以下のステップを踏んでください:
 
 
-#. `Microsoft の Web Platform Installer <http://www.microsoft.com/web/downloads/platform.aspx>`_ を使って
-   `URL Rewrite Module 2.0 <http://www.iis.net/downloads/microsoft/url-rewrite>`_ をインストールするか、
-   直接ダウンロードしてください (`32-bit <http://www.microsoft.com/en-us/download/details.aspx?id=5747>`_ /
-   `64-bit <http://www.microsoft.com/en-us/download/details.aspx?id=7435>`_)。
+#. `Microsoft の Web Platform Installer <https://www.microsoft.com/web/downloads/platform.aspx>`_ を使って
+   `URL Rewrite Module 2.0 <https://www.iis.net/downloads/microsoft/url-rewrite>`_ をインストールするか、
+   直接ダウンロードしてください (`32-bit <https://www.microsoft.com/en-us/download/details.aspx?id=5747>`_ /
+   `64-bit <https://www.microsoft.com/en-us/download/details.aspx?id=7435>`_)。
 #. CakePHP フォルダに web.config という新しいファイルを作成してください。
 #. メモ帳か XML セーフなエディタを使って、以下のコードを真新しい web.config ファイルに
    コピーしてください。

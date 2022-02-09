@@ -20,7 +20,7 @@ Accepting user submitted HTML
 
 Often input filtering is used when accepting user-submitted HTML. In these
 situations it is best to use a dedicated library like `HTML Purifier
-<http://htmlpurifier.org/>`_.
+<https://htmlpurifier.org/>`_.
 
 SQL Escaping
 ============

@@ -1,8 +1,8 @@
 PHPUnitへの移行のヒント
 #######################
 
-テストケースの `PHPUnit 3.7 <http://www.phpunit.de/manual/current/ja/>`_ への移行は、うまくいけばかなり苦痛の無い遷移となります。
-しかしながら、PHPUnitと `SimpleTest <http://www.simpletest.org/>`_ の間では、いくつかの既知の違いがあります。
+テストケースの `PHPUnit 3.7 <https://www.phpunit.de/manual/current/ja/>`_ への移行は、うまくいけばかなり苦痛の無い遷移となります。
+しかしながら、PHPUnitと `SimpleTest <https://www.simpletest.org/>`_ の間では、いくつかの既知の違いがあります。
 
 SimpleTestとの違い
 ==================
@@ -74,7 +74,7 @@ WEBテストランナーは基本的な正規表現を指定することが出�
 モックオブジェクトはPHPUnitとSimpleTestの間で劇的に違います。
 この間の互換性のあるラッパーは存在しません。
 モックオブジェクトの使用方法を書き換えることは辛い作業になることがありますが、移行の際にきっと次のTIPSが助けになるでしょう。
-`PHPUnit モックオブジェクト <http://www.phpunit.de/manual/current/ja/test-doubles.html#test-doubles.mock-objects>`_
+`PHPUnit モックオブジェクト <https://www.phpunit.de/manual/current/ja/test-doubles.html#test-doubles.mock-objects>`_
 ドキュメントを用いて、自分自身で身につけることを高く推奨します。
 
 メソッドの呼び出しの置換
