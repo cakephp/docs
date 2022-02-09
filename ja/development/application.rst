@@ -27,10 +27,8 @@
 Application::bootstrap()
 ------------------------
 
-In addition to the **config/bootstrap.php** file which should be used to
-configure low-level concerns of your application, you can also use the
-``Application::bootstrap()`` hook method to load/initialize plugins, and attach
-global event listeners::
+アプリケーションの低レベルな関心事を設定するために使用する **config/bootstrap.php** ファイルに加えて、
+プラグインのロードや初期化、グローバルイベントリスナーの追加のために ``Application::bootstrap()`` フックメソッドが利用できます::
 
     // in src/Application.php
     namespace App;
@@ -49,9 +47,8 @@ global event listeners::
         }
     }
 
-Loading plugins and events in ``Application::bootstrap()`` makes
-:ref:`integration-testing` easier as events and routes will be re-processed on
-each test method.
+``Application::bootstrap()`` でプラグインとイベントをロードすると、イベントとルートが各テストメソッドで再処理されるので、
+:ref:`integration-testing` が簡単になります。
 
 .. meta::
     :title lang=en: CakePHP Application
