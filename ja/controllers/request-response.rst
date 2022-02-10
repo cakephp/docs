@@ -29,7 +29,7 @@ CakePHP のリクエストオブジェクトは、入ってきたリクエスト
   両方の形式で提供します。
 
 3.4.0 以降、 CakePHP のリクエストオブジェクトは、CakePHP の外部のライブラリーを
-使用しやすくするため `PSR-7 ServerRequestInterface <http://www.php-fig.org/psr/psr-7/>`_
+使用しやすくするため `PSR-7 ServerRequestInterface <https://www.php-fig.org/psr/psr-7/>`_
 を実装します。
 
 リクエストパラメーター

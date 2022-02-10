@@ -330,7 +330,7 @@ see what it looks like.
 
 We use FlashComponent's ``success()`` and ``error()`` methods to set a message
 to a session variable. These methods are provided using PHP's `magic method
-features <http://php.net/manual/en/language.oop5.overloading.php#object.call>`_.
+features <https://php.net/manual/en/language.oop5.overloading.php#object.call>`_.
 Flash messages will be displayed on the page after redirection. In the layout we
 have ``<?= $this->Flash->render() ?>`` which displays the message and clears the
 corresponding session variable. The controller's

@@ -4,7 +4,7 @@ CMS 教案 - 认证
 我们现在需要加入登陆以及权限控制等到我们的 CMS 中。
 
 
-添加密码哈希 
+添加密码哈希
 -----------------------
 
 现在用户的密码都是以纯文本形式保存在数据库中，我们需要修复这个安全漏洞。
@@ -41,7 +41,7 @@ CMS 教案 - 认证
 
 现在打开 **http://localhost:8765/users** ，它将展示很多的 user。你可以在 :doc:`安装 <installation>`
 时编辑默认用户。如果你编辑用户的密码，你应该看到在用户的密码栏看到一段哈希值。CakePHP 默认使用 `bcrypt
-<http://codahale.com/how-to-safely-store-a-password/>` 哈希方法。如果有需要，你也可以使用 SHA-1 或者 MD5，
+<https://codahale.com/how-to-safely-store-a-password/>` 哈希方法。如果有需要，你也可以使用 SHA-1 或者 MD5，
 但是我们推荐 bcrypt。
 
 
@@ -177,7 +177,7 @@ CMS 教案 - 认证
 ==========================
 
 用户登录以后，我们需要限制用户权限，每位用户应该仅能编辑自己创建的 articles 。我们可以通过使用 'authorization' 适配器
-来实现。实现原理其实很简单，我们只需要使用 ``ArticlesController`` 控制器中的一个勾。在此之前，我们需要指导 ``AuthComponent`` 
+来实现。实现原理其实很简单，我们只需要使用 ``ArticlesController`` 控制器中的一个勾。在此之前，我们需要指导 ``AuthComponent``
 如何去授权控制器动作。在 ``AppController`` 中加入以下代码::
 
 

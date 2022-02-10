@@ -21,13 +21,13 @@
 .. note::
 
     如果你对 Git 完全陌生，我们强烈建议你阅读优秀且免费的
-    `ProGit <http://git-scm.com/book/>`_ 这本书。
+    `ProGit <https://git-scm.com/book/>`_ 这本书。
 
 从 GitHub 获得一份 CakePHP 源程序的克隆(*clone*)。
 
-* 如果你没有 `GitHub <http://github.com>`_ 的账号，创建一个。
+* 如果你没有 `GitHub <https://github.com>`_ 的账号，创建一个。
 * 点击**Fork**按键，复制(*fork*)一份
-  `CakePHP repository <http://github.com/cakephp/cakephp>`_ 的源码。
+  `CakePHP repository <https://github.com/cakephp/cakephp>`_ 的源码。
 
 你的复制完成后，从你的复制仓库(*repository*)克隆(*clone*)到你的本地机器::
 
@@ -94,7 +94,7 @@ CakePHP 仓库的改动，保持与 CakePHP 仓库一致::
     git push origin <branch-name>
 
 一旦你的分支在 GitHub 上，你就可以在
-`cakephp-core <http://groups.google.com/group/cakephp-core>`_ 邮件列表上进行讨论
+`cakephp-core <https://groups.google.com/group/cakephp-core>`_ 邮件列表上进行讨论
 或在 GitHub 上提交拉取请求。
 
 选择你的改动会被合并到哪里
@@ -114,9 +114,9 @@ CakePHP 仓库的改动，保持与 CakePHP 仓库一致::
 .. note::
 
     请记住，所有你贡献给 CakePHP 的代码将被置于 MIT 许可之下，
-    `Cake Software Foundation <http://cakefoundation.org/pages/about>`_ 将会成为
+    `Cake Software Foundation <https://cakefoundation.org/pages/about>`_ 将会成为
     任何贡献出去的代码的所有者。代码贡献者应当遵循
-    `CakePHP Community Guidelines <http://community.cakephp.org/guidelines>`_ 。
+    `CakePHP Community Guidelines <https://community.cakephp.org/guidelines>`_ 。
 
 所有合并到维护分支中的臭虫修复，也将被核心团队定期地合并到即将发布的下一个版本。
 

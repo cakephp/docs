@@ -243,7 +243,7 @@ Scaffold コードの生成
 
 今から既存のユーザーのパスワードを更新してくだい。パスワードを変更した際、一覧もしくは詳細ページで、
 入力した値の代わりにハッシュ化されたパスワードがあることを確認してください。CakePHP は、
-デフォルトで `bcrypt <http://codahale.com/how-to-safely-store-a-password/>`_
+デフォルトで `bcrypt <https://codahale.com/how-to-safely-store-a-password/>`_
 を使ってパスワードをハッシュ化します。既存のデータベースが動作している場合、 sha1 や md5 も
 使用できます。
 

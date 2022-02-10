@@ -23,12 +23,12 @@
 .. note::
 
     Если вы новичок в Git, мы настоятельно рекомендуем вам ознакомиться с превосходной и
-    бесплатной книгой `ProGit <http://git-scm.com/book/>`_.
+    бесплатной книгой `ProGit <https://git-scm.com/book/>`_.
 
 Получите клон исходного кода CakePHP с GitHub:
 
-* Если вы не имеете аккаунта на `GitHub <http://github.com>`_, создайте его.
-* Сделайте fork `CakePHP repository <http://github.com/cakephp/cakephp>`_, нажав
+* Если вы не имеете аккаунта на `GitHub <https://github.com>`_, создайте его.
+* Сделайте fork `CakePHP repository <https://github.com/cakephp/cakephp>`_, нажав
   кнопку **Fork**
 
 После того, как ваш fork сделан, клонируйте его на свою локальную машину::
@@ -130,8 +130,8 @@
 .. note::
 
     Помните, что весь код, который вы вносите в CakePHP, будет лицензирован в соответствии с
-    лицензией MIT и `Cake Software Foundation <http://cakefoundation.org/pages/about>`_
-    станет владельцем любого внесенного кода. Авторы должны следовать `CakePHP Community Guidelines <http://community.cakephp.org/guidelines>`_.
+    лицензией MIT и `Cake Software Foundation <https://cakefoundation.org/pages/about>`_
+    станет владельцем любого внесенного кода. Авторы должны следовать `CakePHP Community Guidelines <https://community.cakephp.org/guidelines>`_.
 
 Все исправления ошибок, объединенные в текущую ветку, также будут объединены в предстоящие
 релизы, выпускаемые основной командой.

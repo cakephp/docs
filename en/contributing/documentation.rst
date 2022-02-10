@@ -9,7 +9,7 @@ files -- the "Improve this Doc" button on any given page will direct you to
 GitHub's online editor for that page.
 
 CakePHP documentation is
-`continuously integrated <http://en.wikipedia.org/wiki/Continuous_integration>`_,
+`continuously integrated <https://en.wikipedia.org/wiki/Continuous_integration>`_,
 and deployed after each pull request is merged.
 
 Translations
@@ -85,7 +85,7 @@ Translator tips
   translated.
 - Feel free to dive right in if your chosen language already
   exists on the book.
-- Use `Informal Form <http://en.wikipedia.org/wiki/Register_(linguistics)>`_.
+- Use `Informal Form <https://en.wikipedia.org/wiki/Register_(linguistics)>`_.
 - Translate both the content and the title at the same time.
 - Do compare to the English content before submitting a correction
   (if you correct something, but don't integrate an 'upstream' change
@@ -96,7 +96,7 @@ Translator tips
 - Do not submit partial translations.
 - Do not edit a section with a pending change.
 - Do not use
-  `HTML entities <http://en.wikipedia.org/wiki/List_of_XML_and_HTML_character_entity_references>`_
+  `HTML entities <https://en.wikipedia.org/wiki/List_of_XML_and_HTML_character_entity_references>`_
   for accented characters, the book uses UTF-8.
 - Do not significantly change the markup (HTML) or add new content.
 - If the original content is missing some info, submit an edit for
@@ -106,7 +106,7 @@ Documentation Formatting Guide
 ==============================
 
 The new CakePHP documentation is written with
-`ReST formatted text <http://en.wikipedia.org/wiki/ReStructuredText>`_. ReST
+`ReST formatted text <https://en.wikipedia.org/wiki/ReStructuredText>`_. ReST
 (Re Structured Text) is a plain text markup syntax similar to markdown, or
 textile. To maintain consistency it is recommended that when adding to the
 CakePHP documentation you follow the guidelines here on how to format and
@@ -219,9 +219,9 @@ External Links
 
 Links to external documents can be done with the following::
 
-    `External Link to php.net <http://php.net>`_
+    `External Link to php.net <https://php.net>`_
 
-The resulting link would look like this: `External Link to php.net <http://php.net>`_
+The resulting link would look like this: `External Link to php.net <https://php.net>`_
 
 Links to Other Pages
 ~~~~~~~~~~~~~~~~~~~~
@@ -273,7 +273,7 @@ Describing Classes and their Contents
 -------------------------------------
 
 The CakePHP documentation uses the `phpdomain
-<http://pypi.python.org/pypi/sphinxcontrib-phpdomain>`_ to provide custom
+<https://pypi.python.org/pypi/sphinxcontrib-phpdomain>`_ to provide custom
 directives for describing PHP objects and constructs. Using these directives
 and roles is required to give proper indexing and cross referencing features.
 

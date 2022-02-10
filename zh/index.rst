@@ -14,7 +14,7 @@ CakePHP CookBook 是一个公开地开发和社区可以编辑的文档项目。
 
     - `PDF <../_downloads/en/CakePHPCookbook.pdf>`_
     - `EPUB <../_downloads/zh/CakePHP.epub>`_
-    - `原文出处 <http://github.com/cakephp/docs>`_
+    - `原文出处 <https://github.com/cakephp/docs>`_
 
 获取帮助
 ============

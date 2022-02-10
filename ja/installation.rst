@@ -61,7 +61,7 @@ Composer のインストール
 -----------------------
 
 CakePHP の公式のインストール方法として、依存性管理ツール
-`Composer <http://getcomposer.org>`_ を使用します。
+`Composer <https://getcomposer.org>`_ を使用します。
 
 - Linux や macOS に Composer をインストール
 
@@ -306,7 +306,7 @@ CakePHP は、展開した状態では mod_rewrite を使用するようにな�
 必ずシステムの httpd.conf を編集してください）。
 
 これらのファイルはディストリビューションや Apache のバージョンによって大きく異なります。
-詳細については http://wiki.apache.org/httpd/DistrosDefaultLayout を見てもよいかも
+詳細については https://wiki.apache.org/httpd/DistrosDefaultLayout を見てもよいかも
 しれません。
 
 #. 適切な DocumentRoot に対して .htaccess による設定の上書きを許可するよう、
@@ -388,7 +388,7 @@ CakePHP は、展開した状態では mod_rewrite を使用するようにな�
        </Directory>
 
    macOS 上での別解は、仮想ホストをフォルダーに向けさせるのに、
-   `virtualhostx <http://clickontyler.com/virtualhostx/>`_
+   `virtualhostx <https://clickontyler.com/virtualhostx/>`_
    ツールを使うことが挙げられます。
 
    多くのホスティングサービス (GoDaddy、1and1) では、ウェブサーバーが
@@ -502,10 +502,10 @@ IIS7 はネイティブで .htaccess ファイルをサポートしていませ�
 IIS に htaccess のルールをインポートすることもできます。
 これをするには、以下のステップを踏んでください:
 
-#. URL `Rewrite Module 2.0 <http://www.iis.net/downloads/microsoft/url-rewrite>`_
-   をインストールするために、`Microsoftの Web Platform Installer <http://www.microsoft.com/web/downloads/platform.aspx>`_
-   を使うか、直接ダウンロードします。(`32ビット <http://www.microsoft.com/en-us/download/details.aspx?id=5747>`_ /
-   `64ビット <http://www.microsoft.com/en-us/download/details.aspx?id=7435>`_)
+#. URL `Rewrite Module 2.0 <https://www.iis.net/downloads/microsoft/url-rewrite>`_
+   をインストールするために、`Microsoftの Web Platform Installer <https://www.microsoft.com/web/downloads/platform.aspx>`_
+   を使うか、直接ダウンロードします。(`32ビット <https://www.microsoft.com/en-us/download/details.aspx?id=5747>`_ /
+   `64ビット <https://www.microsoft.com/en-us/download/details.aspx?id=7435>`_)
 #. CakePHP のルートフォルダーに web.config という名前の新しいファイルを作成してください。
 #. メモ帳か XML が編集可能なエディターを使って、以下のコードを今作った web.config ファイルに
    コピーしてください。
@@ -562,8 +562,8 @@ URL リライティングを使わない場合
 これで URL は www.example.com/controllername/actionname/param ではなく
 www.example.com/index.php/controllername/actionname/param という書式になるでしょう。
 
-.. _GitHub: http://github.com/cakephp/cakephp
-.. _Composer: http://getcomposer.org
+.. _GitHub: https://github.com/cakephp/cakephp
+.. _Composer: https://getcomposer.org
 
 .. meta::
     :title lang=ja: インストール

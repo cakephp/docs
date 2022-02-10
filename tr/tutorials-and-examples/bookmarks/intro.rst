@@ -258,7 +258,7 @@ ekleyelim.  **src/Model/Entity/User.php** de şunları izleyin::
 değiştirirseniz, orjinal değerden farklı olarak karıştırılmış şifrenin
 kullanıldığını listede veya view sayfasında göreceksiniz.  CakePHP şifre
 karıştırma yöntemlerinden `bcrypt
-<http://codahale.com/how-to-safely-store-a-password/>`_ ı varsayılan olarak
+<https://codahale.com/how-to-safely-store-a-password/>`_ ı varsayılan olarak
 kullanır.  Siz aynı zamanda sha1 veya md5'i de kullanabilir, zaten var olan bir
 veritabanını uyarlayabilirsiniz.
 
@@ -372,7 +372,7 @@ kriter ekleyebilir.  Bittiği zaman, bulucu metodu değiştirilmiş sorgu nesnes
 döndürmek zorundadır. Bizim bulucumuzda ``distinct()`` ve ``matching()``
 metotlarını kullanarak farklı 'matching' tagına sahip yerimilerini bulmamızı
 sağlar. ``matching()`` metodu `anonymous function
-<http://php.net/manual/en/functions.anonymous.php>`_ 'u kabul ederek onu bir
+<https://php.net/manual/en/functions.anonymous.php>`_ 'u kabul ederek onu bir
 argument şeklinde sorgu oluşturucu olarak karşılar. Geri Çağırmanın içerisinde
 biz sorgu oluşturucuyu koşulları tanımlamak için yani yerimilerini filterlayıp
 özel taglara sahip olması için kullanırız.

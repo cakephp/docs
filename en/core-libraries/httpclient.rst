@@ -249,7 +249,7 @@ The second proxy parameter must be a string with an IP or a domain without
 protocol. The username and password information will be passed through the
 request headers, while the proxy string will be passed through
 `stream_context_create()
-<http://php.net/manual/en/function.stream-context-create.php>`_.
+<https://php.net/manual/en/function.stream-context-create.php>`_.
 
 .. _http_client_scoped_client:
 
@@ -350,7 +350,7 @@ Response objects have a number of methods for inspecting the response data.
 .. versionchanged:: 3.3.0
     As of 3.3.0 ``Cake\Http\Client\Response`` implements the `PSR-7
     ResponseInterface
-    <http://www.php-fig.org/psr/psr-7/#3-3-psr-http-message-responseinterface>`__.
+    <https://www.php-fig.org/psr/psr-7/#3-3-psr-http-message-responseinterface>`__.
 
 Reading Response Bodies
 -----------------------

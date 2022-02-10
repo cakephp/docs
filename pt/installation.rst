@@ -50,7 +50,7 @@ mecanismos de armazenamento de banco de dados:
 Instalando o CakePHP
 ====================
 
-O CakePHP utiliza `Composer <http://getcomposer.org>`_, uma ferramenta de
+O CakePHP utiliza `Composer <https://getcomposer.org>`_, uma ferramenta de
 gerenciamento de dependências para PHP 5.3+, como o método suportado oficial
 para instalação.
 
@@ -232,7 +232,7 @@ corretamente. Primeiramente observe seu httpd.conf. (Tenha certeza que você est
 editando o httpd.conf do sistema ao invés de um usuário, ou site específico.)
 
 Esses arquivos podem variar entre diferentes distribuições e versões do Apache.
-Você também pode pesquisar em http://wiki.apache.org/httpd/DistrosDefaultLayout
+Você também pode pesquisar em https://wiki.apache.org/httpd/DistrosDefaultLayout
 para maiores informações.
 
 #. Tenha certeza que a sobreescrita do .htaccess está permitida e que
@@ -307,7 +307,7 @@ para maiores informações.
        </Directory>
 
    No macOS, outra solução é usar a ferramenta
-   `virtualhostx <http://clickontyler.com/virtualhostx/>`_
+   `virtualhostx <https://clickontyler.com/virtualhostx/>`_
    para fazer um Virtual Host apontar para o seu diretório.
 
    Para muitos serviços de hospedagem (GoDaddy, land1), seu servidor web é
@@ -399,10 +399,10 @@ add-ons que adicionam esse suporte, você também pode importar as regras
 os seguintes passos:
 
 #. Utilize o
-   `Microsoft's Web Platform Installer <http://www.microsoft.com/web/downloads/platform.aspx>`_
-   para instalar o `Rewrite Module 2.0 <http://www.iis.net/downloads/microsoft/url-rewrite>`_
-   ou baixe-o diretamente (`32-bit <http://www.microsoft.com/en-us/download/details.aspx?id=5747>`_ /
-   `64-bit <http://www.microsoft.com/en-us/download/details.aspx?id=7435>`_).
+   `Microsoft's Web Platform Installer <https://www.microsoft.com/web/downloads/platform.aspx>`_
+   para instalar o `Rewrite Module 2.0 <https://www.iis.net/downloads/microsoft/url-rewrite>`_
+   ou baixe-o diretamente (`32-bit <https://www.microsoft.com/en-us/download/details.aspx?id=5747>`_ /
+   `64-bit <https://www.microsoft.com/en-us/download/details.aspx?id=7435>`_).
 #. Crie um novo arquivo chamado web.config em seu diretório raiz do CakePHP.
 #. Utilize o Notepad ou qualquer editor seguro XML para copiar o seguinte código
    em seu novo arquivo web.config::
@@ -459,8 +459,8 @@ Isso fará suas URLs parecem como
 www.example.com/index.php/controllername/actionname/param ao
 invés de www.example.com/controllername/actionname/param.
 
-.. _GitHub: http://github.com/cakephp/cakephp
-.. _Composer: http://getcomposer.org
+.. _GitHub: https://github.com/cakephp/cakephp
+.. _Composer: https://getcomposer.org
 
 .. meta::
     :title lang=pt: Instalação

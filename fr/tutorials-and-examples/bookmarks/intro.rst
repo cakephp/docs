@@ -280,7 +280,7 @@ Maintenant mettez à jour un des users que vous avez créé précédemment, si v
 changez son mot de passe, vous devriez voir un mot de passe hashé à la place de
 la valeur originale sur la liste ou les pages de vue. CakePHP hashe les mots de
 passe avec
-`bcrypt <http://codahale.com/how-to-safely-store-a-password/>`_ par défaut.
+`bcrypt <https://codahale.com/how-to-safely-store-a-password/>`_ par défaut.
 Vous pouvez aussi utiliser sha1 ou md5 si vous travaillez avec une base de
 données existante.
 

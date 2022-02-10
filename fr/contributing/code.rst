@@ -25,12 +25,12 @@ e-mail de travail::
 .. note::
 
     Si vous êtes nouveau sous Git, nous vous recommandons fortement de lire
-    l'excellent livre gratuit `ProGit <http://git-scm.com/book/>`_.
+    l'excellent livre gratuit `ProGit <https://git-scm.com/book/>`_.
 
 Récupérez un clone du code source de CakePHP sous GitHub:
 
-* Si vous n'avez pas de compte `github <http://github.com>`_ , créez-en un.
-* Forkez le `dépôt de CakePHP <http://github.com/cakephp/cakephp>`_ en cliquant
+* Si vous n'avez pas de compte `github <https://github.com>`_ , créez-en un.
+* Forkez le `dépôt de CakePHP <https://github.com/cakephp/cakephp>`_ en cliquant
   sur le bouton **Fork**.
 
 Après que le fork est fait, clonez votre fork sur votre machine locale::
@@ -146,9 +146,9 @@ le pull request est créée.
 
     Souvenez-vous que tout le code auquel vous contribuez pour CakePHP sera
     sous Licence MIT, et la
-    `Cake Software Foundation <http://cakefoundation.org/pages/about>`_ sera la
+    `Cake Software Foundation <https://cakefoundation.org/pages/about>`_ sera la
     propriétaire de toutes les contributions de code. Les contributeurs doivent
-    suivre les `Guidelines de la Communauté CakePHP <http://community.cakephp.org/guidelines>`_.
+    suivre les `Guidelines de la Communauté CakePHP <https://community.cakephp.org/guidelines>`_.
 
 Tous les bugs réparés fusionnés sur une branche de maintenance seront aussi
 fusionnés périodiquement à la version publiée par l'équipe centrale (core team).

@@ -23,23 +23,23 @@ Pang-Update na Kasangkapan
 Habang ang dokumentong ito ay tumatalakay sa lahat ng nakakasirang mga pagbabago at
 mga pagpapabuti na ginawa sa CakePHP 3.0, kami ay nakalikha rin ng isang console na
 aplikasyon upang tumulong sa iyo na kumpletuhin ang ilang nakakaubos ng oras na mekanikal
-na mga pagbabago. Maaari kang `kumuha sa pang-upgrade na kasangkapan mula sa 
+na mga pagbabago. Maaari kang `kumuha sa pang-upgrade na kasangkapan mula sa
 github <https://github.com/cakephp/upgrade>`_.
 
 Layout ng Aplikasyon na Direktoryo
 ==================================
 
 Ang layout ng aplikasyon na direktoryo ay nabago at ngayon ay sumusunod sa
-`PSR-4 <http://www.php-fig.org/psr/psr-4/>`_. Dapat mong gamitin ang 
-`app skeleton <https://github.com/cakephp/app>`_ na proyekto bilang isang 
+`PSR-4 <https://www.php-fig.org/psr/psr-4/>`_. Dapat mong gamitin ang
+`app skeleton <https://github.com/cakephp/app>`_ na proyekto bilang isang
 punto ng reperensya kapag nag-a-update ng iyong aplikasyon.
 
 Ang CakePHP ay dapat naka-install gamit ang Composer
 ====================================================
 
 Dahil ang CakePHP ay hindi na nai-install gamit ang PEAR, o sa isang nakabahaging
-direktoryo, ang mga opsyon na iyon ay hindi na suportado. Sa halip dapat mong 
-gamitin ang `Composer <http://getcomposer.org>`_ upang i-install ang CakePHP sa
+direktoryo, ang mga opsyon na iyon ay hindi na suportado. Sa halip dapat mong
+gamitin ang `Composer <https://getcomposer.org>`_ upang i-install ang CakePHP sa
 iyong aplikasyon.
 
 Mga Namespace
@@ -48,7 +48,7 @@ Mga Namespace
 Lahat ng core na mga class ng CakePHP ay kasalukuyang naka-namespace at sumusunod sa
 PSR-4 autoloading na mga espesipikasyon. Halimbawa ang **src/Cache/Cache.php** ay
 naka-namespace bilang ``Cake\Cache\Cache``. Ang global na mga constant at katulong na
-mga paraan katulad ng :php:meth:`__()` at :php:meth:`debug()` ay hindi naka-namespace 
+mga paraan katulad ng :php:meth:`__()` at :php:meth:`debug()` ay hindi naka-namespace
 para sa kaginhawahan.
 
 Tinanggal ang mga Constant
@@ -83,7 +83,7 @@ i-configure ang maramihang mga landas para sa mga template, mga plugin at lokal 
 file ayon sa pagkakabanggit.
 
 Ang config key na ``www_root`` ay nabago sa ``wwwRoot`` para sa pagkakaalinsunod. Mangyaring
-ayusin ang iyong **app.php** config na file pati na rin sa anumang paggamit ng 
+ayusin ang iyong **app.php** config na file pati na rin sa anumang paggamit ng
 ``Configure::read('App.wwwRoot')``.
 
 Bagong ORM
@@ -113,7 +113,7 @@ Pag-debug
 Object na mga setting/kumpigurasyon
 ===================================
 
-* Ang mga object na ginagamit sa CakePHP ngayon ay may isang magkaalinsunod na 
+* Ang mga object na ginagamit sa CakePHP ngayon ay may isang magkaalinsunod na
   instance-configuration na storage/retrieval na sistema. Ang code na na-access dati sa
   halimbawa: Ang ``$object->settings`` ay dapat sa halip ma-update upang magamit ang
   ``$object->config()``.
@@ -132,7 +132,7 @@ Cache
   mong baguhin ang kumpigurasyon dapat mo unang i-drop ang kumpigurasyon at
   pagkatapos ay likhain muli ito. Iniiwasan nito ang sinkronisasyon na mga isyu
   sa kumpigurasyon na mga opsyon.
-* Ang ``Cache::set()`` ay tinanggal. Inirekomenda na gumawa ka ng maramihang 
+* Ang ``Cache::set()`` ay tinanggal. Inirekomenda na gumawa ka ng maramihang
   cache na mga kumpigurasyon upang palitan ang runtime na kumpigurasyon na mga tweak sa
   nakaraan na posible gamit ang ``Cache::set()``.
 * Ang lahat ng ``CacheEngine`` na mga subclass ngayon ay nagpapatupad ng isang ``config()``
@@ -141,10 +141,10 @@ Cache
   at :php:meth:`Cake\\Cache\\Cache::writeMany()` ay naidagdag.
 
 Ang lahat ng :php:class:`Cake\\Cache\\Cache\\CacheEngine` na mga paraan ngayon ay pumaparangal/
-responsable sa pag-aasikaso ng na-configure na key prefix. Ang :php:meth:`Cake\\Cache\\CacheEngine::write()` 
+responsable sa pag-aasikaso ng na-configure na key prefix. Ang :php:meth:`Cake\\Cache\\CacheEngine::write()`
 ay hindi na pumapahintulot sa pagtatakda ng tagal sa pagsulat - ang tagal ay kinuha mula sa runtime
 config ng cache engine. Ang pagtawag ng isang cache na paraan gamit ang isang walang laman na key
-ay hindi na maghahagis ng isang :php:class:`InvalidArgumentException`, sa halip ng pagsasauli ng 
+ay hindi na maghahagis ng isang :php:class:`InvalidArgumentException`, sa halip ng pagsasauli ng
 ``false``.
 
 Core
@@ -176,19 +176,19 @@ Plugin
 Configure
 ---------
 
-- Ang ``Cake\Configure\PhpReader`` ay pinalitan ang pangalan sa 
+- Ang ``Cake\Configure\PhpReader`` ay pinalitan ang pangalan sa
   :php:class:`Cake\\Core\\Configure\\Engine\PhpConfig`
-- Ang ``Cake\Configure\IniReader`` ay pinalitan ang pangalan sa 
+- Ang ``Cake\Configure\IniReader`` ay pinalitan ang pangalan sa
   :php:class:`Cake\\Core\\Configure\\Engine\IniConfig`
-- Ang ``Cake\Configure\ConfigReaderInterface`` ay pinalitan ang pangalan sa 
+- Ang ``Cake\Configure\ConfigReaderInterface`` ay pinalitan ang pangalan sa
   :php:class:`Cake\\Core\\Configure\\ConfigEngineInterface`
 - Ang :php:meth:`Cake\\Core\\Configure::consume()` ay idinagdag.
 - Ang :php:meth:`Cake\\Core\\Configure::load()` ngayon ay umaasa sa pangalan
-  ng file na walang ekstensyon na suffix dahil ito ay maaaring makuha mula sa 
-  engine. E.g. ang paggamit ng PhpConfig gamit ang ``app`` upang i-load ang 
+  ng file na walang ekstensyon na suffix dahil ito ay maaaring makuha mula sa
+  engine. E.g. ang paggamit ng PhpConfig gamit ang ``app`` upang i-load ang
   **app.php**.
 - Ang pagtakda ng isang ``$config`` na variable sa PHP config na file ay
-  hindi na magagamit. Ang :php:class:`Cake\\Core\\Configure\\Engine\PhpConfig` 
+  hindi na magagamit. Ang :php:class:`Cake\\Core\\Configure\\Engine\PhpConfig`
   ngayon ay umaasa ng config na file na magsasauli ng isang array.
 - Isang bagong config engine na :php:class:`Cake\\Core\\Configure\\Engine\JsonConfig`
   ay naidagdag.
@@ -197,17 +197,17 @@ Object
 ------
 
 Ang ``Object`` na class ay itinanggal. Ito dati ay naglalaman ng maraming iba't ibang
-mga paraan na ginamit sa magkaibang mga lugar sa kabuuan ng balangkas. Ang pinaka 
+mga paraan na ginamit sa magkaibang mga lugar sa kabuuan ng balangkas. Ang pinaka
 kapaki-pakinabang sa lahat ng mga paraang ito ay nakuha sa mga katangian. Maaari
 mong gamitin ang :php:trait:`Cake\\Log\\LogTrait` upang ma-access ang ``log()``
-na paraan. Ang :php:trait:`Cake\\Routing\\RequestActionTrait` ay nagbibigay ng 
+na paraan. Ang :php:trait:`Cake\\Routing\\RequestActionTrait` ay nagbibigay ng
 ``requestAction()``.
 
 Console
 =======
 
 Ang ``cake`` na executable ay inilipat mula sa **app/Console** na direktoryo tungo sa
-**bin** na direktoryo sa loob ng balangkas ng aplikasyon. Maaari mo na ngayong tawagin 
+**bin** na direktoryo sa loob ng balangkas ng aplikasyon. Maaari mo na ngayong tawagin
 ang console ng CakePHP gamit ang ``bin/cake``.
 
 Ang TaskCollection ay Napalitan
@@ -215,9 +215,9 @@ Ang TaskCollection ay Napalitan
 
 Ang class na ito ay napalitan ng pangalan sa :php:class:`Cake\\Console\\TaskRegistry`.
 Tingnan ang seksyon sa :doc:`/core-libraries/registry-objects` para sa higit pang
-impormasyon sa mga tampok na ibinigay gamit ang bagong class. Maaari mong gamitin ang 
-``cake upgrade rename_collections`` upang makatulong sa pag-upgrade ng iyong code. 
-Ang mga task ay wala nang access sa mga callback, dahil walang anumang mga callback 
+impormasyon sa mga tampok na ibinigay gamit ang bagong class. Maaari mong gamitin ang
+``cake upgrade rename_collections`` upang makatulong sa pag-upgrade ng iyong code.
+Ang mga task ay wala nang access sa mga callback, dahil walang anumang mga callback
 na magagamit.
 
 Shell
@@ -228,9 +228,9 @@ Shell
 - Ang ``Shell::param()`` ay naidagdag bilang kaginhawaan na pag-access sa mga param.
 
 Bukod pa rito ang lahat ng shell na mga paraan ay mababago sa camel case kapag tinawag.
-Halimbawa, kung mayroon kang isang ``hello_world()`` na paraan sa loob ng isang shell at 
-tinawag ito gamit ang ``bin/cake my_shell hello_world``, kakailanganin mong palitan 
-ang pangalan ng paraan sa ``helloWorld``. Walang mga pagbabagong kailangan sa paraan 
+Halimbawa, kung mayroon kang isang ``hello_world()`` na paraan sa loob ng isang shell at
+tinawag ito gamit ang ``bin/cake my_shell hello_world``, kakailanganin mong palitan
+ang pangalan ng paraan sa ``helloWorld``. Walang mga pagbabagong kailangan sa paraan
 ng pagtawag mo sa mga utos.
 
 ConsoleOptionParser
@@ -260,7 +260,7 @@ Ang SchemaShell ay Itinanggal
 
 Ang SchemaShell ay itinanggal dahil hindi ito kailanman isang kumpletong implementasyon ng database
 migration at mas mabuting mga kasangkapan katulad ng `Phinx <https://phinx.org/>`_ ay lumitaw.
-Ito ay napalitan ng `CakePHP Migrations Plugin <https://github.com/cakephp/migrations>`_ 
+Ito ay napalitan ng `CakePHP Migrations Plugin <https://github.com/cakephp/migrations>`_
 na kumikilos bilang isang wrapper sa pagitan ng CakePHP at `Phinx <https://phinx.org/>`_.
 
 ExtractTask
@@ -273,7 +273,7 @@ ExtractTask
 BakeShell / TemplateTask
 ------------------------
 
-- Ang Bake ay hindi na parte ng core na pinagmulan at napalitan na ng 
+- Ang Bake ay hindi na parte ng core na pinagmulan at napalitan na ng
   `CakePHP Bake Plugin <https://github.com/cakephp/bake>`_
 - Ang Bake na mga template ay inilipat sa ilalim ng **src/Template/Bake**.
 - Ngayon ang palaugnayan ng Bake na mga template ay gumagamit ng erb-style na mga tag
@@ -287,7 +287,7 @@ Kaganapan
 Ang ``getEventManager()`` na paraan, ay itinanggal sa lahat ng mga object kung
 saan naroon ito. Ang isang ``eventManager()`` na paraan ay ibinibigay na ngayon
 ng ``EventManagerTrait``. Ang ``EventManagerTrait`` ay naglalaman ng lohika ng
-pagbibigay ng halimbawa at pagpapanatili ng isang reperensya sa isang lokal na 
+pagbibigay ng halimbawa at pagpapanatili ng isang reperensya sa isang lokal na
 tagapamahala ng kaganapan.
 
 Ang Event na subsystem ay may iilang opsyonal na mga tampok na itinanggal.
@@ -295,7 +295,7 @@ Kapag nagpapadala ng mga kaganapan hindi mo na maaaring gamitin ang sumusunod
 na mga opsyon:
 
 * ``passParams`` Ngayon ang opsyon na ito ay palagi nang ganap na gumagana.
-  Hindi mo na maaaring i-off ito. 
+  Hindi mo na maaaring i-off ito.
 * ``break`` Ang opsyon na ito ay itinanggal. Dapat mo na ngayong itigil ang mga
   kaganapan.
 * ``breakOn`` Ang opsyon na ito ay itinanggal. Dapat mo na ngayong itigil ang mga
@@ -318,7 +318,7 @@ Log
 * Hindi mo na maaaring matukoy ang pasadyang log na mga antas. Dapat kang gumamit
   ng default na hanay ng log na mga antas. Dapat kang gumamit ng mga logging scope
   upang lumikha ng pasadyang log na mga file o tiyak na pag-asikaso para sa
-  magkaibang mga seksyon ng iyong aplikasyon. Ang paggamit ng isang non-standard na 
+  magkaibang mga seksyon ng iyong aplikasyon. Ang paggamit ng isang non-standard na
   antas ng log ay maghahagis na ngayong ng isang eksepsyon.
 * Ang :php:trait:`Cake\\Log\\LogTrait` ay naidagdag. Maaari mong gamitin ang katangiang
   ito sa iyong mga class upang magdagdag ng ``log()`` na paraan.
@@ -326,8 +326,8 @@ Log
   naipasa na ngayon sa ``write()`` na paraan ng mga log engine upang magbigay
   ng mas mabuting konteksto sa mga engine.
 * Ngayon ang mga log engine ay nangangailangang magpatupad ng ``Psr\Log\LogInterface``
-  sa halip ng ``LogInterface`` ng Cake. Sa pangkalahatan, kung pinalawak ang 
-  :php:class:`Cake\\Log\\Engine\\BaseEngine` kailangan mo lang palitan ang pangalan 
+  sa halip ng ``LogInterface`` ng Cake. Sa pangkalahatan, kung pinalawak ang
+  :php:class:`Cake\\Log\\Engine\\BaseEngine` kailangan mo lang palitan ang pangalan
   ng ``write()`` na paraan ng ``log()``.
 * Ang :php:meth:`Cake\\Log\\Engine\\FileLog` ngayon ay magsusulat ng mga file sa
   ``ROOT/logs`` sa halip ng ``ROOT/tmp/logs``.
@@ -338,25 +338,25 @@ Pag-Route
 Nakapangalang mga Parameter
 ---------------------------
 
-Ang nakapangalang mga parameter ay itinanggal sa 3.0. Ang nakapangalang mga 
+Ang nakapangalang mga parameter ay itinanggal sa 3.0. Ang nakapangalang mga
 parameter ay idinagdag sa 1.2.0 bilang isang 'magandang' bersyon ng query string
 na mga parameter. Habang ang biswal na pakinabang ay malabo, ang mga problema
 na ginawa ng nakapangalang mga parameter ay hindi.
 
 Ang nakapangalang mga parameter ay nangangailangan ng espesyal na pag-aasikaso
 sa CakePHP pati na rin sa anumang PHP o JavaScript na library na kailangang
-makipag-ugnayan sa kanila, dahil ang nakapangalang mga parameter ay hindi 
+makipag-ugnayan sa kanila, dahil ang nakapangalang mga parameter ay hindi
 naipatupad o naintindihan ng anumang library *maliban sa* CakePHP. Ang karagdagang
-pagkakumplikado at code na kailangan upang sumuporta ng nakapangalang mga 
+pagkakumplikado at code na kailangan upang sumuporta ng nakapangalang mga
 parameter ay hindi nagbibigay-katwiran sa kanilang pag-iral, at sila ay itinanggal.
 Sa kanilang lugar dapat kang gumamit ng standard query string na mga parameter o
-naipasang mga argumento. Bilang default ang ``Router`` ay makikitungo sa 
+naipasang mga argumento. Bilang default ang ``Router`` ay makikitungo sa
 anumang karagdagang mga parameter sa ``Router::url()`` bilang query string na
 mga argumento.
 
 Dahil maraming mga aplikasyon ang nangangailangan pa ring mag-parse ng paparating
-na mga URL na naglalamang ng nakapangalang mga parameter. Ang 
-:php:meth:`Cake\\Routing\\Router::parseNamedParams()` ay naidagdag upang 
+na mga URL na naglalamang ng nakapangalang mga parameter. Ang
+:php:meth:`Cake\\Routing\\Router::parseNamedParams()` ay naidagdag upang
 magpahintulot ng backwards compatibility gamit ang umiiral na mga URL.
 
 RequestActionTrait
@@ -378,14 +378,14 @@ Router
 * Ang ``ext`` na opsyon ay napalitan ng ``_ext`` na opsyon.
 * Ang ``_scheme``, ``_port``, ``_host``, ``_base``, ``_full``, ``_ext`` na mga
   opsyon ay nadagdag.
-* Ang String na mga URL ay hindi na nababago sa pamamagitan ng pagdagdag ng 
+* Ang String na mga URL ay hindi na nababago sa pamamagitan ng pagdagdag ng
   plugin/controller/prefix na mga pangalan.
-* Ang default na fallback route na pag-aasikaso ay itinanggal. Kung walang route 
+* Ang default na fallback route na pag-aasikaso ay itinanggal. Kung walang route
   na tumutugma ang isang hanay ng parameter na ``/`` ang maisasauli.
 * Ang Route na mga class ay responsable para sa *lahat* ng pagbuo ng URL pati na
   rin sa query string na mga parameter. Ginagawa nitong sobrang mas makapangyarihan
   at umaangkop ang mga route.
-* Ang paulit-ulit na mga parameter ay natanggal. Sila ay napalitan ng 
+* Ang paulit-ulit na mga parameter ay natanggal. Sila ay napalitan ng
   :php:meth:`Cake\\Routing\\Router::urlFilter()` na nagpapahintulot ng isang
   mas umaangkop na paraan upang mag-mutate ng mga URL na iniri-reverse route.
 * Ang ``Router::parseExtensions()`` ay itinanggal.
@@ -397,7 +397,7 @@ Router
 * Ang ``Router::resourceMap()`` ay itinanggal.
 * Ang ``[method]`` na opsyon ay napalitan ang pangalan ng ``_method``.
 * Ang kakayahang tumugma ng mga arbitrary headers gamit ang ``[]`` na estilo
-  na mga parameter ay itinanggal. Kung kailangan mong mag-parse/tumugma sa 
+  na mga parameter ay itinanggal. Kung kailangan mong mag-parse/tumugma sa
   arbitrary na mga kondisyon isaalang-alang ang paggamit ng pasadyang route
   na mga class.
 * Ang ``Router::promote()`` ay itinanggal.
@@ -406,7 +406,7 @@ Router
 * Ang ``Router::url()`` ngayon ay magtataas ng isang eksepsyon kapag walang route
   na tumutugma sa isang hanay ng mga parameter.
 * Ang mga routing scope ay naipakilala. Ang mga routing scope ay nagpapahintulot
-  sa iyo na mapanatiling TUYO ang iyong mga route na file at nagbibigay ng 
+  sa iyo na mapanatiling TUYO ang iyong mga route na file at nagbibigay ng
   mga pahiwatig sa Router kung papaano i-optimize ang pag-parse at pag-reverse
   routing ng mga URL.
 
@@ -422,21 +422,21 @@ Route
 Ang Kumpigurasyon ng Dispatcher na mga Filter ay Nabago
 -------------------------------------------------------
 
-Ang Dispatcher na mga filter ay hindi na nadagdag sa iyong aplikasyon gamit 
-ang ``Configure``. Idaragdag mo na ngayon ang mga ito gamit ang 
+Ang Dispatcher na mga filter ay hindi na nadagdag sa iyong aplikasyon gamit
+ang ``Configure``. Idaragdag mo na ngayon ang mga ito gamit ang
 :php:class:`Cake\\Routing\\DispatcherFactory`. Ito ay nangangahulugang kung
 ang iyong aplikasyon ay gumamit ng ``Dispatcher.filters``, dapat mo na ngayong
 gamitin ang :php:meth:`Cake\\Routing\\DispatcherFactory::add()`.
 
 Sa karagdagan sa pagkumpigura ng mga pagbabago, ang dispatcher na mga filter
-ay may mga kombensiyon na na-update, at mga tampok na nadagdag. Tingnan ang 
+ay may mga kombensiyon na na-update, at mga tampok na nadagdag. Tingnan ang
 :doc:`/development/dispatch-filters` na dokumentasyon para sa karagdagang
 impormasyon.
 
 Filter\AssetFilter
 ------------------
 
-* Ang plugin at theme na mga asset na inasikaso ng AssetFilter ay hindi na 
+* Ang plugin at theme na mga asset na inasikaso ng AssetFilter ay hindi na
   nababasa gamit ang ``include`` sa halip sila ay tinatrato bilang payak na teksto
   na mga file. Inaayos nito ang ilang mga isyu gamit ang JavaScript na mga library
   katulad ng TinyMCE at mga environment gamit ang gumaganang short_tags.
@@ -461,7 +461,7 @@ Kahilingan
 * Ang :php:meth:`Cake\\Network\\Request::acceptLanguage()` ay nabago mula sa static na
   paraan at naging hindi static.
 * Ang detektor ng kahilingan para sa "mobile" ay tinanggal mula sa core. Sa halip ang app
-  na template ay nagdagdag ng mga detektor para sa "mobile" at "table" gamit ang 
+  na template ay nagdagdag ng mga detektor para sa "mobile" at "table" gamit ang
   ``MobileDetect`` na lib.
 * Ang paraan na ``onlyAllow()`` ay napalitan ang pangalan ng ``allowMethod()`` at hindi
   na tumatanggap ng "var args". Ang lahat ng mga pangalan ng paraan na ipapasa bilang
@@ -474,8 +474,8 @@ Tugon
   Bilang kapalit ang :php:class:`Cake\\Controller\\Component\\RequestHandlerComponent`
   ay hindi nagtatakda ng ekstensyon sa ``csv`` kung ang ``Accept`` na header ay
   naglalaman ng mimetype na ``text/plain`` na isang karaniwang kaguluhan kapag
-  tumatanggap ng isang jQuery XHR na kahilingan.  
-  
+  tumatanggap ng isang jQuery XHR na kahilingan.
+
 Mga Sesyon
 ==========
 
@@ -500,7 +500,7 @@ dokumentasyon para sa paggamit ng sesyon na object.
 * Isang bagong kaginhawaang paraan na :php:meth:`Cake\\Network\\Session::consume()`
   ang naidagdag upang payagan ang pagbasa at pagbura ng sesyon na datos sa
   isang solong hakbang.
-* Ang default na halaga ng argumentong ``$renew`` ng 
+* Ang default na halaga ng argumentong ``$renew`` ng
   :php:meth:`Cake\\Network\\Session::clear() ay nabago mula sa ``true`` at
   naging ``false``.
 
@@ -519,7 +519,7 @@ Network\\Email
 ==============
 
 * Ang :php:meth:`Cake\\Network\\Email\\Email::config()` ngayon ay ginagamit
-  upang tukuyin ang kumpigurasyon na mga profile. Pinapalitan nito ang 
+  upang tukuyin ang kumpigurasyon na mga profile. Pinapalitan nito ang
   ``EmailConfig`` na mga class sa nakaraang mga bersyon.
 * Ang :php:meth:`Cake\\Network\\Email\\Email::profile()` ay pinapalitan ang
   ``config()`` bilang paraan upang mabago ang bawat instansiya na kumpigurasyon
@@ -543,8 +543,8 @@ Controller
 - Ang ``$helpers``, ``$components`` na mga katangian ay na-merge na ngayon
   kasama ang **lahat** ng magulang na mga class hindi lang ang ``AppController``
   at ang plugin na AppController. Ang mga katangian din ay magkaibang na-merge.
-  Sa halip na lahat ng mga setting sa lahat ng mga class ang sama-samang i-merge, 
-  ang kumpigurasyon na natukoy sa anak na class ay magagamit. Ito ay 
+  Sa halip na lahat ng mga setting sa lahat ng mga class ang sama-samang i-merge,
+  ang kumpigurasyon na natukoy sa anak na class ay magagamit. Ito ay
   nangangahulugan na kung mayroon kang ilang kumpigurasyon na tinukoy sa isang
   subclass, ang kumpigurasyon lamang sa subclass ang magagamit.
 - Ang ``Controller::httpCodes()`` ay tinanggal, sa halip ay gamitin ang
@@ -562,33 +562,33 @@ Controller
   na nakapangalang CRUD, ay maaaring matagpuan dito:
   https://github.com/FriendsOfCake/crud
 - Ang ``Controller::$ext`` na katangian ay tinanggal. Ngayon kailangan mong palawigin
-  at i-override ang ``View::$_ext`` na katangian kung gusto mong gumamit ng isang 
+  at i-override ang ``View::$_ext`` na katangian kung gusto mong gumamit ng isang
   hindi default na view file na ekstensyon.
 - Ang ``Controller::$methods`` na katangian ay tinanggal. Dapat mo na ngayong
-  gamitin ang ``Controller::isAction()`` upang matukoy kung ang pangalan ng 
+  gamitin ang ``Controller::isAction()`` upang matukoy kung ang pangalan ng
   paraan ay isang aksyon o hindi. Ang pagbabagong ito ay ginawa upang payagan
   ang mas madaling pag-customize ng kung ano at kung ano ang hindi ang binibilang
   bilang isang aksyon.
-- Ang ``Controller::$Components`` na katangian ay tinanggal at pinalitan ng 
+- Ang ``Controller::$Components`` na katangian ay tinanggal at pinalitan ng
   ``_components``. Kung kailangan mong mag-load ng mga komponent sa runtime dapat
   kang gumamit ng ``$this->loadComponent()`` sa iyong controller.
 - Ang lagda ng :php:meth:`Cake\\Controller\\Controller::redirect()` ay binago
-  sa ``Controller::redirect(string|array $url, int $status = null)``. Ang 
+  sa ``Controller::redirect(string|array $url, int $status = null)``. Ang
   pangatlong argumento na ``$exit`` ay tinanggal. Ang paraan ay hindi na nagpapadala
   ng tugon at labasan na iskrip, sa halip ito ay nagsasauli ng isang ``Response``
   na instansiya na may nakatakdang angkop na mga header.
 - Ang ``base``, ``webroot``, ``here``, ``data``,  ``action``, at ``params``
-  na madyik mga katangian ay tinanggal. Sa halip ay dapat mong i-access ang lahat 
+  na madyik mga katangian ay tinanggal. Sa halip ay dapat mong i-access ang lahat
   ng mga katangiang ito sa ``$this->request``.
 - Ang naka-prefix sa underscore na controller na mga paraan katulad ng ``_someMethod()``
-  ay hindi na tinatrato bilang pribadong mga paraan. Sa halip ay gumamit ng angkop na 
+  ay hindi na tinatrato bilang pribadong mga paraan. Sa halip ay gumamit ng angkop na
   kakayahang makita na mga keyword. Ang publikong mga paraan lamang ang maaaring
   gamitin bilang controller na mga aksyon.
 
 Tinanggal ang Scaffold
 ----------------------
 
-Ang dynamic scaffolding sa CakePHP ay tinanggal mula sa core ng CakePHP. Ito 
+Ang dynamic scaffolding sa CakePHP ay tinanggal mula sa core ng CakePHP. Ito
 ay madalang lamang gamitin, at hindi kailanman nilayon para gamitin sa produksyon.
 Isang pinaunlad na scaffolding plugin, na nakapangalang CRUD, ay maaaring matagpuan
 dito:
@@ -601,7 +601,7 @@ Ang class na ito ay napalitan ang pangalan ng
 :php:class:`Cake\\Controller\\ComponentRegistry`.
 Tingnan ang seksyon sa :doc:`/core-libraries/registry-objects` para sa higit
 pang impormasyon sa mga tampok na ibinigay ng bagong class. Maaari mong
-gamitin ang ``cake upgrade rename_collections`` upang tumulong sa 
+gamitin ang ``cake upgrade rename_collections`` upang tumulong sa
 pag-upgrade ng iyong code.
 
 Komponent
@@ -614,7 +614,7 @@ Komponent
 * Ang default na kumpigurasyon para sa mga komponent ay dapat matukoy sa
   ``$_defaultConfig`` na katangian. Ang katangiang ito ay awtomatikong nami-merge
   sa anumang kumpigurasyon na binigay sa constructor.
-* Ang kumpigurasyon na mga opsyon ay hindi na nakatakda bilang publikong mga 
+* Ang kumpigurasyon na mga opsyon ay hindi na nakatakda bilang publikong mga
   katangian.
 * Ang ``Component::initialize()`` na paraan ay hindi na isang tagapakinig ng kaganapan.
   Sa halip, ito ay isang post-constructor na hook katulad ng ``Table::initialize()``
@@ -632,7 +632,7 @@ CookieComponent
 - Gumagamit ng :php:meth:`Cake\\Network\\Request::cookie()` upang makabasa ng
   cookie na datos, pinapadali nito ang pagsusubok, at pinapahintulutan para sa
   ControllerTestCase upang magtakda ng mga cookie.
-- Ang mga cookie na naka-encrypt sa nakaraang mga bersyon ng CakePHP na gumagamit ng 
+- Ang mga cookie na naka-encrypt sa nakaraang mga bersyon ng CakePHP na gumagamit ng
   ``cipher()`` na paraan ay hindi na mababasa ngayon dahil ang ``Security::cipher()``
   ay tinanggal. Kailangan mong mag-encrypt muli ng mga cookie gamit ang ``rijndael()``
   o ``aes()`` na paraan bago mag-upgrade.
@@ -648,8 +648,8 @@ AuthComponent
 -------------
 
 - Ang ``Default`` ngayon ay ang default na password hasher na ginagamit ng pagpapatunay
-  na mga class. Ito ay eksklusibong gumagamit ng bcrypt hashing na algoritmo. Kung 
-  gusto mong magpatuloy sa paggamit ng SHA1 hashing na ginamit sa 2.x gamitin ang 
+  na mga class. Ito ay eksklusibong gumagamit ng bcrypt hashing na algoritmo. Kung
+  gusto mong magpatuloy sa paggamit ng SHA1 hashing na ginamit sa 2.x gamitin ang
   ``'passwordHasher' => 'Weak'`` sa iyong authenticator na kumpigurasyon.
 - Isang bagong ``FallbackPasswordHasher`` ang dinagdag upang tulungan ang mga gumagamit
   na maglipat ng lumang mga password mula sa isang algoritmo patungo sa iba pa. Suriin
@@ -674,7 +674,7 @@ AuthComponent
   ang ``Auth.afterIdentify`` at ang ``Auth.logout`` pagkatapos natukoy ang
   isang gumagamit at bago nag-log out ang isang gumagamit ayon sa pagkakabanggit.
   Maaari kang magtakda ng callback na mga function para sa mga kaganapang
-  ito sa pamamagitan ng pagsasauli ng isang pagmapa na array mula sa 
+  ito sa pamamagitan ng pagsasauli ng isang pagmapa na array mula sa
   ``implementedEvents()`` na paraan ng iyong authenticate na class.
 
 Ang may kaugnayan sa ACL na mga class ay nilipat sa isang hiwalay na plugin. Ang mga password hasher,
@@ -719,15 +719,15 @@ SessionComponent
 Error
 -----
 
-Ang pasadyang mga ExceptionRenderer ngayon ay inaasahan na alinman ay magsauli ng 
+Ang pasadyang mga ExceptionRenderer ngayon ay inaasahan na alinman ay magsauli ng
 isang :php:class:`Cake\\Network\\Response` na object o string kapag may mga error sa pag-render.
-Ito ay nangangahulugan na anumang mga paraan na nag-aasikaso ng tiyak na mga eksepsyon ay 
+Ito ay nangangahulugan na anumang mga paraan na nag-aasikaso ng tiyak na mga eksepsyon ay
 dapat magsauli ng tugon o string na halaga.
 
 Model
 =====
 
-Ang Model layer sa 2.x ay pangkalahatang isinulat muli at pinalitan. Dapat mong 
+Ang Model layer sa 2.x ay pangkalahatang isinulat muli at pinalitan. Dapat mong
 suriin ang :doc:`/appendices/orm-migration` para sa impormasyon kung paano gamitin
 ang bagong ORM.
 
@@ -748,7 +748,7 @@ ConnectionManager
   - ``loadDataSource``
   - ``enumConnectionObjects``
 
-- Ang :php:meth:`~Cake\\Database\\ConnectionManager::config()` ay naidagdag at 
+- Ang :php:meth:`~Cake\\Database\\ConnectionManager::config()` ay naidagdag at
   ngayon ang natatanging paraan upang mag-configure ng mga koneksyon.
 - Ang :php:meth:`~Cake\\Database\\ConnectionManager::get()` ay naidagdag. Pinapalitan
   nito ang ``getDataSource()``.
@@ -761,7 +761,7 @@ ConnectionManager
 Mga Pag-uugali
 --------------
 - Ang naka-prefix ng underscore na pag-uugali na mga paraan katulad ng ``_someMethod()``
-  ay hindi na tinatrato bilang pribadong mga paraan. Sa halip ay gumamit ng nararapat na 
+  ay hindi na tinatrato bilang pribadong mga paraan. Sa halip ay gumamit ng nararapat na
   kakayahang makita na mga keyword.
 
 TreeBehavior
@@ -785,7 +785,7 @@ TestCase
 --------
 
 - Ang ``_normalizePath()`` ay naidagdag upang payagan ang mga pagsubok sa paghahambing ng landas
-  upang mapatakbo sa kabuuang lahat ng operasyon na mga sistema tungkol sa kanilang DS na mga 
+  upang mapatakbo sa kabuuang lahat ng operasyon na mga sistema tungkol sa kanilang DS na mga
   setting (``\`` sa Windows kontra sa ``/`` ng UNIX, halimbawa).
 
 Ang sumusunod na assertion na mga paraan ay tinanggal dahil sila ay matagal nang hindi ginagamit
@@ -808,7 +808,7 @@ Ang sumusunod na assertion na mga paraan ay hindi na ginagamit at matatanggal sa
 - Ang ``assertWithinMargin()`` sa pabor ng ``assertWithinRange()``
 - Ang ``assertTags()`` sa pabor ng ``assertHtml()``
 
-Parehong mga pagpapalit ng paraan din ay nagpalit ng pagkakaayos ng argumento para sa 
+Parehong mga pagpapalit ng paraan din ay nagpalit ng pagkakaayos ng argumento para sa
 isang naaalinsunod na assert method na API gamit ang ``$expected`` bilang unang argumento.
 
 Ang sumusunod na assertion na mga paraan ay naidagdag:
@@ -821,7 +821,7 @@ View
 Ngayon Ang Mga Tema ay Batayan na mga Plugin
 --------------------------------------------
 
-Ang pagkakaroon ng mga tema at mga plugin bilang mga paraan sa paglikha ng 
+Ang pagkakaroon ng mga tema at mga plugin bilang mga paraan sa paglikha ng
 modyular na aplikasyon na mga komponent ay napatunayang limitado, at nakakalito.
 Sa CakePHP 3.0, ang mga tema ay hindi na naninirahan **sa loob** ng aplikasyon.
 Sa halip sila ay standalone na mga plugin. Nilulutas nito ang ilang mga problema
@@ -836,7 +836,7 @@ ng mga plugin.
 Tingnan ang mga Folder na Napalitan ang Pangalan
 ------------------------------------------------
 
-Ngayon ang mga folder na naglalaman ng view na mga file ay pupunta sa ilalim ng 
+Ngayon ang mga folder na naglalaman ng view na mga file ay pupunta sa ilalim ng
 **src/Template** sa halip ng **src/View**.
 Ito ay nagawa upang mahiwalay ang view na mga file mula sa mga file na naglalaman ng
 php na mga class (eg. Helpers, View na mga class).
@@ -854,31 +854,31 @@ Ang HelperCollection ay Napalitan
 
 Ang class na ito ay napalitan ang pangalan ng :php:class:`Cake\\View\\HelperRegistry`.
 Tingnan ang seksyon sa :doc:`/core-libraries/registry-objects` para sa karagdagang
-impormasyon sa mga tampok na ibinigay ng bagong class. Maaari mong gamitin ang 
+impormasyon sa mga tampok na ibinigay ng bagong class. Maaari mong gamitin ang
 ``cake upgrade rename_collections`` upang tumulong sa pag-upgrade ng iyong code.
 
 View na Class
 -------------
 
-- Ang ``plugin`` na key ay tinanggal mula sa ``$options`` na argumento ng 
-  :php:meth:`Cake\\View\\View::element()`. Sa halip ay tukuyin ang pangalan ng elemento bilang 
+- Ang ``plugin`` na key ay tinanggal mula sa ``$options`` na argumento ng
+  :php:meth:`Cake\\View\\View::element()`. Sa halip ay tukuyin ang pangalan ng elemento bilang
   ``SomePlugin.element_name``.
 - Ang ``View::getVar()`` ay tinanggal, sa halip ay gamitin ang :php:meth:`Cake\\View\\View::get()`.
 - Ang ``View::$ext`` ay tinanggal at sa halip ay isang protektadong katangian
   na ``View::$_ext`` ang dinagdag.
 - Ang ``View::addScript()`` ay tinanggal. Sa halip ay gumamit ng :ref:`view-blocks`.
 - Ang ``base``, ``webroot``, ``here``, ``data``,  ``action``, at ``params``
-  na madyik na mga katangian ay natanggal. Sa halip ay dapat mong i-access lahat 
+  na madyik na mga katangian ay natanggal. Sa halip ay dapat mong i-access lahat
   ang mga katangiang ito sa ``$this->request``.
 - Ang ``View::start()`` ay hindi na dumurugtong sa isang umiiral na bloke. Sa halip ito
   ay io-overwrite ang bloke na nilalaman kapag natawag ang katapusan. Kung kailangan mong
   pagsamahin ang bloke na mga nilalaman dapat mong kunin ang bloke na nilalaman kapag
-  ang pagtawag ay nagsimula sa pangalawang pagkakataon, o gamitin ang capturing mode ng 
+  ang pagtawag ay nagsimula sa pangalawang pagkakataon, o gamitin ang capturing mode ng
   ``append()``.
 - Ang ``View::prepend()`` ay hindi na isang capturing mode.
-- Ang ``View::startIfEmpty()`` ay tinanggal. Ngayon na ang start() ay palaging 
+- Ang ``View::startIfEmpty()`` ay tinanggal. Ngayon na ang start() ay palaging
   nag-o-overwrite ng startIfEmpty ay wala nang pinasisilbihang layunin.
-- Ang ``View::$Helpers`` na katangian ay tinanggal at pinalitan gamit ang 
+- Ang ``View::$Helpers`` na katangian ay tinanggal at pinalitan gamit ang
   ``_helpers``. Kung kailangan mong mag-load ng mga katulong sa runtime dapat mong
   gamitin ang ``$this->addHelper()`` sa iyong view na mga file.
 - Ang ``View`` ngayon ay magtataas ng ``Cake\View\Exception\MissingTemplateException``
@@ -947,7 +947,7 @@ Ang helper ay mayroong sumusunod na mga paraan na tinanggal:
 
 Ang mga paraang ito ay parteng ginamit lamang ng FormHelper, at parte ng paulit-ulit
 na patlang na mga tampok na napatunayang nakapag-aalingan sa paglipas ng panahon.
-Ang FormHelper ay hindi na umaasa sa mga paraang ito at ang pagkakumplikado na 
+Ang FormHelper ay hindi na umaasa sa mga paraang ito at ang pagkakumplikado na
 binigay nila ay hindi na kinakailangan.
 
 Ang sumusunod na mga paraan ay tinanggal:
@@ -966,19 +966,19 @@ FormHelper
 Ang FormHelper ay pangkalahatang isinulat muli para sa 3.0. Ito ay nagtatampok ng
 ilang malalaking mga pagbabago:
 
-* Ang FormHelper ay gumagana sa bagong ORM. Ngunit mayroong isang napapalawak na 
+* Ang FormHelper ay gumagana sa bagong ORM. Ngunit mayroong isang napapalawak na
   sistema para sa pagsasama ng ibang mga ORM o mga datasource.
 * Ang FormHelper na mga tampok ay isang napapalawak na widget na sistema na nagpapahintulot
   sa iyo na lumikha ng bagong pasadyang input na mga widget at dagdagan ang
   mga built-in.
-* Ang string na mga template ay ang pundasyon ng helper. Sa halip na kasamang 
+* Ang string na mga template ay ang pundasyon ng helper. Sa halip na kasamang
   manipulahin ang mga array kahit saan, kadalasan sa mga HTML FormHelper na mga
   binuo ay maaaring i-customize sa isang sentral na lugar gamit ang mga
   template set.
 
 At saka sa mas malaking mga pagbabagong ito, ilang mas maliit na nakakasirang mga
 pagbabago ang nagawa rin. Ang mga pagbabagong ito ay dapat tumulong sa pag-streamline
-sa mga binuo ng HTML FormHelper at magbawas ng mga problema na nakasalubong sa 
+sa mga binuo ng HTML FormHelper at magbawas ng mga problema na nakasalubong sa
 mga tao sa nakaraan:
 
 - Ang ``data[`` na prefix ay natanggal mula sa lahat na nabuong mga input.
@@ -989,11 +989,11 @@ mga tao sa nakaraan:
 - Ang mga opsyon na ``default`` at ``onsubmit`` ng ``create()`` ay tinanggal.
   Sa halip ang isa ay dapat gumamit ng JavaScript event binding o itakda ang lahat
   na kinakailangan na js code para sa ``onsubmit``.
-- Ang ``end()`` ay hindi na maaaring gumawa ng mga pindutan. Dapat kang gumawa ng 
+- Ang ``end()`` ay hindi na maaaring gumawa ng mga pindutan. Dapat kang gumawa ng
   mga pindutan gamit ang ``button()`` o ``submit()``.
 - Ang ``FormHelper::tagIsInvalid()`` ay tinanggal. Sa halip ay gumamit ng
   ``isFieldError()``.
-- Ang ``FormHelper::inputDefaults()`` ay tinanggal. Maaari kang gumamit ng 
+- Ang ``FormHelper::inputDefaults()`` ay tinanggal. Maaari kang gumamit ng
   ``templates()`` upang tumukoy/magdagdag ng mga template na ginagamit ng FormHelper.
 - Ang ``wrap`` at ``class`` na mga opsyon ay tinanggal mula sa ``error()``
   na paraan.
@@ -1002,14 +1002,14 @@ mga tao sa nakaraan:
   ay tinanggal mula sa ``input()``. Maaari kang gumamit ng mga template upang mag-update
   ng bumabalot na HTML. Ang ``templates`` na opsyon ay nagpapahintulot sa iyo na
   i-override ang na-load na mga template para sa isang input.
-- Ang ``separator``, ``between``, at ``legend`` na mga opsyon na tinanggal mula 
+- Ang ``separator``, ``between``, at ``legend`` na mga opsyon na tinanggal mula
   sa ``radio()``. Maaari kang gumamit ng mga template upang baguhin ang bumabalot na
   HTML ngayon.
 - Ang ``format24Hours`` na parameter ay tinanggal mula sa ``hour()``.
   Ito ay napalitan ng ``format`` na opsyon.
 - Ang ``minYear``, at ``maxYear`` na mga parameter ay natanggal mula sa ``year()``.
   Parehong ang mga parameter na ito ay maaari na ngayong ibigay bilang mga opsyon.
-- Ang ``dateFormat`` at ``timeFormat`` na mga parameter ay tinanggal mula sa 
+- Ang ``dateFormat`` at ``timeFormat`` na mga parameter ay tinanggal mula sa
   ``datetime()``. Maaari mong gamitin ang template upang tukuyin ang pagkakaayos ng
   mga input kung paano ipapakita ang mga ito.
 - Ang ``submit()`` dati ay may ``div``, ``before`` at ``after`` na mga opsyon na
@@ -1030,10 +1030,10 @@ mga tao sa nakaraan:
   ay tinanggal. Dapat ka na ngayong gumamit ng key na ``confirm`` sa ``$options``
   upang tumukoy ng mensahe.
 - Ang checkbox at radio input na mga uri ay nare-render na ngayon *sa loob* ng
-  label na mga elemento bilang default. Tinutulungan nitong pataasin ang 
-  pagkakangkop sa popular na CSS na mga library katulad ng 
-  `Bootstrap <http://getbootstrap.com/>`_ at
-  `Foundation <http://foundation.zurb.com/>`_.
+  label na mga elemento bilang default. Tinutulungan nitong pataasin ang
+  pagkakangkop sa popular na CSS na mga library katulad ng
+  `Bootstrap <https://getbootstrap.com/>`_ at
+  `Foundation <https://foundation.zurb.com/>`_.
 - Ang mga tag ng mga template ngayon ay naka-camelBack na. Ang nauuna sa 3.0 na mga tag na
   ``formstart``, ``formend``, ``hiddenblock`` at ``inputsubmit`` ay
   ``formStart``, ``formEnd``, ``hiddenBlock`` at ``inputSubmit`` na ngayon.
@@ -1054,7 +1054,7 @@ HtmlHelper
 - Ang unang parameter na ``$data`` para sa ``HtmlHelper::style()`` ay palagi na ngayong
   nangangailangan ng isang array batay sa nadokumento.
 - Ang ``inline`` na parameter ay tinanggal mula sa meta(), css(), script(), scriptBlock()
-  na mga paraan. Sa halip ay dapat mong gamitin ang ``block``. Ang pagtatakda ng 
+  na mga paraan. Sa halip ay dapat mong gamitin ang ``block``. Ang pagtatakda ng
   ``block => true`` ay magtutulad sa nakaraang pagkilos.
 - Ang ``HtmlHelper::meta()`` ngayon ay nangangailangan ng ``$type`` na maging isang string.
   Ang karagdagang mga opsyon ay maaaring mas higit pang maipasa bilang ``$options``.
@@ -1068,7 +1068,7 @@ PaginatorHelper
 ---------------
 
 - Ang ``link()`` ay tinanggal. Ito ay hindi na panloob na ginagamit ng helper.
-  Ito ay may mababang paggamit sa user land code, at hindi na kasya sa mga 
+  Ito ay may mababang paggamit sa user land code, at hindi na kasya sa mga
   layunin ng helper.
 - Ang ``next()`` ay wala nang 'class', o 'tag' na mga opsyon. Wala na itong naka-disable
   na mga argumento. Sa halip ay ginamit ang mga template.
@@ -1077,10 +1077,10 @@ PaginatorHelper
 - Ang ``first()`` ay wala nang 'after', 'ellipsis', 'separator', 'class', o 'tag' na mga opsyon.
 - Ang ``last()`` ay wala nang 'after', 'ellipsis', 'separator', 'class', o 'tag' na mga opsyon.
 - Ang ``numbers()`` ay wala nang 'separator', 'tag', 'currentTag', 'currentClass',
-  'class', 'tag', 'ellipsis' na mga opsyon. Ang mga opsyon na ito ay pinadali na ngayon gamit 
-  ang mga template. Ito rin ay nangangailangan ng ``$options`` na parameter na maging 
+  'class', 'tag', 'ellipsis' na mga opsyon. Ang mga opsyon na ito ay pinadali na ngayon gamit
+  ang mga template. Ito rin ay nangangailangan ng ``$options`` na parameter na maging
   isang array na ngayon.
-- Ang ``%page%`` na estilo na mga placeholder ay tinanggal mula sa 
+- Ang ``%page%`` na estilo na mga placeholder ay tinanggal mula sa
   :php:meth:`Cake\\View\\Helper\\PaginatorHelper::counter()`.
   Sa halip ay gamitin ang ``{{page}}`` na estilo na mga placeholder.
 - Ang ``url()`` ay napalitan ang pangaln sa ``generateUrl()`` upang maiwasan ang banggaan sa deklarasyon ng paraan
@@ -1112,10 +1112,10 @@ NumberHelper
 SessionHelper
 -------------
 
-- Ang ``SessionHelper`` ay hindi na nagagamit. Maaari mong direktang gamitin ang 
-  ``$this->request->session()``, at sa halip ang functionality ng flash na mensahe ay nailipat sa 
+- Ang ``SessionHelper`` ay hindi na nagagamit. Maaari mong direktang gamitin ang
+  ``$this->request->session()``, at sa halip ang functionality ng flash na mensahe ay nailipat sa
   :doc:`/views/helpers/flash`
-  
+
 JsHelper
 --------
 
@@ -1133,10 +1133,10 @@ non-standard, limited and incompatible with non-HTML layouts and data views.
 These limitations meant a full rebuild would be necessary. Edge Side Includes
 have become a standardized way to implement the functionality CacheHelper used
 to provide. However, implementing `Edge Side Includes
-<http://en.wikipedia.org/wiki/Edge_Side_Includes>`_ in PHP has a number of
+<https://en.wikipedia.org/wiki/Edge_Side_Includes>`_ in PHP has a number of
 limitations and edge cases. Instead of building a sub-par solution, we recommend
 that developers needing full response caching use `Varnish
-<http://varnish-cache.org>`_ or `Squid <http://squid-cache.org>`_ instead.
+<https://varnish-cache.org>`_ or `Squid <https://squid-cache.org>`_ instead.
 
 I18n
 ====

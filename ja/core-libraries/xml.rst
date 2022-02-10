@@ -54,8 +54,8 @@ DOMDocument を返却します。
 
 .. note::
 
-    `DOMDocument <http://php.net/domdocument>`_ と
-    `SimpleXML <http://php.net/simplexml>`_ は異なる API を実装します。
+    `DOMDocument <https://php.net/domdocument>`_ と
+    `SimpleXML <https://php.net/simplexml>`_ は異なる API を実装します。
     Xml によって返却されるオブジェクトの正しいメソッドを利用しているか
     確認してください。
 

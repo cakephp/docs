@@ -33,7 +33,7 @@ table:
 Vous pouvez configurer le nom de ces champs.
 Plus d'informations sur la signification des champs et comment ils sont utilisés
 peuvent être trouvées dans cet article décrivant la
-`MPTT logic <http://www.sitepoint.com/hierarchical-data-database-2/>`_
+`MPTT logic <https://www.sitepoint.com/hierarchical-data-database-2/>`_
 
 .. warning::
 

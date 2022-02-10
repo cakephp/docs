@@ -20,13 +20,13 @@ Chiffre ``$text`` en utilisant AES-256. La ``$key`` devrait être une valeur
 avec beaucoup de différence dans les données un peu comme un bon mot de
 passe. Le résultat retourné sera la valeur chiffrée avec un checksum HMAC.
 
-Cette méthode va soit utiliser `openssl <http://php.net/openssl>`_ soit `mcrypt
-<http://php.net/mcrypt>`_ selon ce qui est disponible sur votre système. Les
+Cette méthode va soit utiliser `openssl <https://php.net/openssl>`_ soit `mcrypt
+<https://php.net/mcrypt>`_ selon ce qui est disponible sur votre système. Les
 données cryptées dans une implémentation sont portables vers les autres
 implémentations.
 
 .. warning::
-    L'extension `mcrypt <http://php.net/mcrypt>`_ a été dépréciée dans PHP7.1
+    L'extension `mcrypt <https://php.net/mcrypt>`_ a été dépréciée dans PHP7.1
 
 Cette méthode **ne** devrait **jamais** être utilisée pour stocker des mots
 de passe. A la place, vous devriez utiliser la manière de hasher les mots

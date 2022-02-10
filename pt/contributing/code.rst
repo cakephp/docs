@@ -23,12 +23,12 @@ Defina suas informações de usuário com seu nome e endereço de email::
 .. note::
 
     Se você é novo no Git, recomendamos que leia o gratuito e excelente manual
-    `ProGit <http://git-scm.com/book/>`_.
+    `ProGit <https://git-scm.com/book/>`_.
 
 Clone o código-fonte do CakePHP do Github:
 
-* Se você não tem uma conta no `GitHub <http://github.com>`_, crie uma.
-* Dê *Fork* no `repositório do CakePHP <http://github.com/cakephp/cakephp>`_
+* Se você não tem uma conta no `GitHub <https://github.com>`_, crie uma.
+* Dê *Fork* no `repositório do CakePHP <https://github.com/cakephp/cakephp>`_
   clicando no botão **Fork&**.
 
 Depois que seu *fork* for feito, clone seu *fork* para sua máquina::
@@ -139,10 +139,10 @@ Ao fazer *pull requests* você deve ter certeza que selecionou o *branch* corret
 .. note::
 
     Lembre-se que todo código que você contribui com o CakePHP será licensiado
-    sob a licença MIT, e a `Cake Software Foundation <http://cakefoundation.org/pages/about>`_
+    sob a licença MIT, e a `Cake Software Foundation <https://cakefoundation.org/pages/about>`_
     será a proprietária de qualquer código proveniente de contribuição. Os
     contribuidores devem seguir as
-    `regras comunitárias do CakePHP <http://community.cakephp.org/guidelines>`_.
+    `regras comunitárias do CakePHP <https://community.cakephp.org/guidelines>`_.
 
 Todas as correções de *bugs* incorporadas a um *branch* de manutenção serão
 posteriormente mescladas nos lançamentos futuros realizados pelo time do

@@ -39,7 +39,7 @@ d'afficher une stack trace quelque soit la fonction appelée.
 
 .. versionadded:: 3.1
 
-Si vous avez installé `Psysh <http://psysh.org/>`_ vous pouvez utiliser cette
+Si vous avez installé `Psysh <https://psysh.org/>`_ vous pouvez utiliser cette
 fonction dans les environnements CLI pour ouvrir une console interactive
 avec le scope local courant::
 

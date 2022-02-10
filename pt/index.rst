@@ -22,7 +22,7 @@ correções para a documentação.
 
     - `PDF <../_downloads/pt/CakePHPCookbook.pdf>`_
     - `EPUB <../_downloads/pt/CakePHP.epub>`_
-    - `Código-fonte Original <http://github.com/cakephp/docs>`_
+    - `Código-fonte Original <https://github.com/cakephp/docs>`_
 
 Obtendo ajuda
 =============

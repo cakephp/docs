@@ -20,12 +20,12 @@ Encrypt ``$text`` using AES-256. The ``$key`` should be a value with a
 lots of variance in the data much like a good password. The returned result
 will be the encrypted value with an HMAC checksum.
 
-This method will use either `openssl <http://php.net/openssl>`_ or `mcrypt
-<http://php.net/mcrypt>`_ based on what is available on your system. Data
+This method will use either `openssl <https://php.net/openssl>`_ or `mcrypt
+<https://php.net/mcrypt>`_ based on what is available on your system. Data
 encrypted in one implementation is portable to the other.
 
 .. warning::
-    The `mcrypt <http://php.net/mcrypt>`_ extension has been deprecated in
+    The `mcrypt <https://php.net/mcrypt>`_ extension has been deprecated in
     PHP7.1
 
 This method should **never** be used to store passwords.  Instead you should use

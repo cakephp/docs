@@ -69,7 +69,7 @@ need to reply to a remote application via JSON, or output a CSV file for a user.
 
 CakePHP template files have a default extension of **.ctp** (CakePHP Template)
 and utilize the `alternative PHP syntax
-<http://php.net/manual/en/control-structures.alternative-syntax.php>`_
+<https://php.net/manual/en/control-structures.alternative-syntax.php>`_
 for control structures and output. These files contain the logic necessary to
 prepare the data received from the controller into a presentation format that is
 ready for your audience.
@@ -119,7 +119,7 @@ Another example, using if/elseif/else. Notice the colons:
   <?php endif; ?>
 
 If you'd prefer using a templating language like
-`Twig <http://twig.sensiolabs.org>`_, a subclass of View will bridge your
+`Twig <https://twig.sensiolabs.org>`_, a subclass of View will bridge your
 templating language and CakePHP.
 
 Template files are stored in **src/Template/**, in a folder named after the

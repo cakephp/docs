@@ -31,7 +31,7 @@ Layout do diretório da aplicação
 ================================
 
 O Layout do diretório da aplicação mudou e agora segue o
-`PSR-4 <http://www.php-fig.org/psr/psr-4/>`_. Você deve usar o projeto do
+`PSR-4 <https://www.php-fig.org/psr/psr-4/>`_. Você deve usar o projeto do
 `esqueleto da aplicação <https://github.com/cakephp/app>`_ como um
 ponto de referência quando atualizar sua aplicação.
 
@@ -40,7 +40,7 @@ O CakePHP deve ser instalado via Composer
 
 Como o CakePHP não pode mais ser instalado facilmente via PEAR, ou em um
 diretório compartilhado, essas opções não são mais suportadas. Ao invés disso,
-você deve usar o `Composer <http://getcomposer.org>`_ para instalar o
+você deve usar o `Composer <https://getcomposer.org>`_ para instalar o
 CakePHP em sua aplicação.
 
 Namespaces
@@ -991,7 +991,7 @@ os problemas que as pessoas tinham no passado:
   especificar a mensagem.
 - As entradas do tipo Checkbox e radio são agora renderizadas *dentro* de elementos
   do tipo label por padrão. Isso ajuda a aumentar a compatibilidade com bibliotecas CSS
-  populares como `Bootstrap <http://getbootstrap.com/>`_ e `Foundation <http://foundation.zurb.com/>`_.
+  populares como `Bootstrap <https://getbootstrap.com/>`_ e `Foundation <https://foundation.zurb.com/>`_.
 - As tags de template agora são todas camelBacked (primeira letra minúscula e inicio de
   novas palavras em maiúsculo). As tags pré-3.0 ``formstart``, ``formend``, ``hiddenblock``
   e ``inputsubmit`` são agora ``formStart``, ``formEnd``, ``hiddenBlock`` e ``inputSubmit``.
@@ -1082,10 +1082,10 @@ não era padrão, limitada e incompatível com layouts não-HTML e views de dado
 Essas limitações significavam que uma reconstrução completa era necessária.
 O ESI (Edge Side Includes) se tornou uma maneira padronizada para implementar
 a funcionalidade que o CacheHelper costumava fornecer. Entretanto, implementando
-`Edge Side Includes <http://en.wikipedia.org/wiki/Edge_Side_Includes>`_ em PHP
+`Edge Side Includes <https://en.wikipedia.org/wiki/Edge_Side_Includes>`_ em PHP
 tem várias limitações e casos. Ao invés de construir uma solução ruim,
 é recomendado que os desenvolvedores que precisem de cache de resposta completa
-use o `Varnish <http://varnish-cache.org>`_ ou `Squid <http://squid-cache.org>`_
+use o `Varnish <https://varnish-cache.org>`_ ou `Squid <https://squid-cache.org>`_
 no lugar.
 
 I18n

@@ -58,7 +58,7 @@ CakePHP на Apache (поскольку он прост в установке и
 Установка Composer
 ------------------
 
-CakePHP использует мендежер зависимостей PHP `Composer <http://getcomposer.org>`_,
+CakePHP использует мендежер зависимостей PHP `Composer <https://getcomposer.org>`_,
 как официально поддерживаемый метод установки.
 
 - Установка Composer на Linux и macOS
@@ -317,7 +317,7 @@ Apache
 httpd.conf.)
 
 Эти файлы могут различаться в разных дистрибутивах и версиях Apache. Вы
-Может также посмотреть http://wiki.apache.org/httpd/DistrosDefaultLayout для
+Может также посмотреть https://wiki.apache.org/httpd/DistrosDefaultLayout для
 более подробной информации.
 
 #. Убедитесь, что переопределение .htaccess разрешено и, что AllowOverride
@@ -400,7 +400,7 @@ httpd.conf.)
        </Directory>
 
    На macOS, другое решение - это использовать инструмент
-   `virtualhostx <http://clickontyler.com/virtualhostx/>`_, чтобы заставить Virtual
+   `virtualhostx <https://clickontyler.com/virtualhostx/>`_, чтобы заставить Virtual
    Host ссылаться на вашу папку.
 
    Для многих хостингов (GoDaddy, 1and1) ваш веб-сервер изначально обслуживается
@@ -495,7 +495,7 @@ nginx не использует файлы .htaccess как Apache, так чт�
 
 На некоторых серверах (таких как Ubuntu 14.04) приведенная выше конфигурация
 не будет работать "из коробки", и документация nginx рекомендует иной подход
-(http://nginx.org/en/docs/http/converting_rewrite_rules.html). Попробуйте
+(https://nginx.org/en/docs/http/converting_rewrite_rules.html). Попробуйте
 нижеприведенные настройки (вы можете заметить, что в данном случае
 используется всего один блок server {}, а не два, как бы там ни было, если
 вы хотите иметь доступ к вашему приложению CakePHP еще и с адреса example.com
@@ -536,10 +536,10 @@ IIS7 изначально не поддерживает файлы .htaccess. В
 htaccess в IIS для использования встроенных в CakePHP переопределений. Чтобы
 сделать это, выполните следующие шаги:
 
-#. Используйте `Microsoft Web Platform Installer <http://www.microsoft.com/web/downloads/platform.aspx>`_
-   для установки URL `Rewrite Module 2.0 <http://www.iis.net/downloads/microsoft/url-rewrite>`_
-   или скачайте его (`32-bit <http://www.microsoft.com/en-us/download/details.aspx?id=5747>`_ /
-   `64-bit <http://www.microsoft.com/en-us/download/details.aspx?id=7435>`_).
+#. Используйте `Microsoft Web Platform Installer <https://www.microsoft.com/web/downloads/platform.aspx>`_
+   для установки URL `Rewrite Module 2.0 <https://www.iis.net/downloads/microsoft/url-rewrite>`_
+   или скачайте его (`32-bit <https://www.microsoft.com/en-us/download/details.aspx?id=5747>`_ /
+   `64-bit <https://www.microsoft.com/en-us/download/details.aspx?id=7435>`_).
 #. Создайте новый файл  web.config в вашей корневой папке CakePHP.
 #. Используя Блокнот или любой XML-safe редактор, скопируйте следующий
    код в ваш новый файл web.config:
@@ -598,8 +598,8 @@ htaccess в IIS для использования встроенных в CakePH
 www.example.com/index.php/controllername/actionname/param вместо
 www.example.com/controllername/actionname/param.
 
-.. _GitHub: http://github.com/cakephp/cakephp
-.. _Composer: http://getcomposer.org
+.. _GitHub: https://github.com/cakephp/cakephp
+.. _Composer: https://getcomposer.org
 
 .. meta::
     :title lang=ru: Установка

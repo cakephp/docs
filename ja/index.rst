@@ -22,7 +22,7 @@ CakePHP クックブックは、オープンに開発されている、コミュ
 
     - `PDF (英語) <../_downloads/en/CakePHPCookbook.pdf>`_
     - `EPUB <../_downloads/ja/CakePHP.epub>`_
-    - `オリジナルソース <http://github.com/cakephp/docs>`_
+    - `オリジナルソース <https://github.com/cakephp/docs>`_
 
 助けを得るには
 ==============

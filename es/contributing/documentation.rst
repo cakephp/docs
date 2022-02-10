@@ -219,9 +219,9 @@ Enlaces externos
 
 Los enlaces a documentos externos pueden hacerse de la siguiente manera::
 
-    `Enlace externo a php.net <http://php.net>`_
+    `Enlace externo a php.net <https://php.net>`_
 
-El resultado debería verse así: `Enlace externo a php.net <http://php.net>`_
+El resultado debería verse así: `Enlace externo a php.net <https://php.net>`_
 
 Enlaces a otras páginas
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -273,7 +273,7 @@ Describir clases y sus contenidos
 ---------------------------------
 
 La documentación de CakePHP usa el `phpdomain
-<http://pypi.python.org/pypi/sphinxcontrib-phpdomain>`_ para proveer directivas
+<https://pypi.python.org/pypi/sphinxcontrib-phpdomain>`_ para proveer directivas
 personalizadas para describir objetos PHP y constructores. El uso de estas
 directivas y funciones es necesario para una correcta indexación y uso de las
 herramientas de referenciación cruzada.

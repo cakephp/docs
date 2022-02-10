@@ -160,7 +160,7 @@ handler could look like::
         }
     }
 
-You can use any `callable <http://php.net/callback>`_ for the handling function.
+You can use any `callable <https://php.net/callback>`_ for the handling function.
 You can also pass additional arguments to the callback, this is useful for
 callbacks like ``json_decode``::
 

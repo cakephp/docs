@@ -2,7 +2,7 @@ Testing
 #######
 
 CakePHP comes with comprehensive testing support built-in. CakePHP comes with
-integration for `PHPUnit <http://phpunit.de>`_. In addition to the features
+integration for `PHPUnit <https://phpunit.de>`_. In addition to the features
 offered by PHPUnit, CakePHP offers some additional features to make testing
 easier. This section will cover installing PHPUnit, and getting started with
 Unit Testing, and how you can use the extensions that CakePHP offers.
@@ -13,8 +13,8 @@ Installing PHPUnit
 CakePHP uses PHPUnit as its underlying test framework. PHPUnit is the de-facto
 standard for unit testing in PHP. It offers a deep and powerful set of features
 for making sure your code does what you think it does. PHPUnit can be installed
-through using either a `PHAR package <http://phpunit.de/#download>`__ or
-`Composer <http://getcomposer.org>`_.
+through using either a `PHAR package <https://phpunit.de/#download>`__ or
+`Composer <https://getcomposer.org>`_.
 
 Install PHPUnit with Composer
 -----------------------------
@@ -59,7 +59,7 @@ tests:
           phpunit --version
 
     Please refer to the PHPUnit documentation for instructions regarding
-    `Globally installing the PHPUnit PHAR on Windows <http://phpunit.de/manual/current/en/installation.html#installation.phar.windows>`__.
+    `Globally installing the PHPUnit PHAR on Windows <https://phpunit.de/manual/current/en/installation.html#installation.phar.windows>`__.
 
 Test Database Setup
 ===================
@@ -1111,7 +1111,7 @@ you can configure the request to inject environment conditions or headers that
 simulate actual authentication request headers.
 
 When testing Basic or Digest Authentication, you can add the environment
-variables that `PHP creates <http://php.net/manual/en/features.http-auth.php>`_
+variables that `PHP creates <https://php.net/manual/en/features.http-auth.php>`_
 automatically. These environment variables used in the authentication adapter
 outlined in :ref:`basic-authentication`::
 
@@ -1906,14 +1906,14 @@ skeleton for.
 Integration with Jenkins
 ========================
 
-`Jenkins <http://jenkins-ci.org>`_ is a continuous integration server, that can
+`Jenkins <https://jenkins-ci.org>`_ is a continuous integration server, that can
 help you automate the running of your test cases. This helps ensure that all
 your tests stay passing and your application is always ready.
 
 Integrating a CakePHP application with Jenkins is fairly straightforward. The
 following assumes you've already installed Jenkins on \*nix system, and are able
 to administer it. You also know how to create jobs, and run builds. If you are
-unsure of any of these, refer to the `Jenkins documentation <http://jenkins-ci.org/>`_ .
+unsure of any of these, refer to the `Jenkins documentation <https://jenkins-ci.org/>`_ .
 
 Create a Job
 ------------

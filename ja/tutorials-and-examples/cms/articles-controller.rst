@@ -241,7 +241,7 @@ POST データは、 ``$this->request->getData()`` で利用可能です。そ�
 
 新しい記事を保存した後、セッションにメッセージをセットするために FlashComponent の
 ``success()`` メソッドを使用します。 ``success`` メソッドは PHP の
-`マジックメソッド機能 <http://php.net/manual/ja/language.oop5.overloading.php#object.call>`_
+`マジックメソッド機能 <https://php.net/manual/ja/language.oop5.overloading.php#object.call>`_
 を使用して提供されます。フラッシュメッセージは、リダイレクトした後の次のページ上で表示されます。
 レイアウトの中に、フラッシュメッセージを表示し、対応するセッション変数をクリアする
 ``<?= $this->Flash->render() ?>`` があります。最後に、保存が完了した後、

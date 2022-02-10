@@ -77,7 +77,7 @@ fichier CSV pour un utilisateur.
 
 Les fichiers de template de CakePHP possèdent une extension **.ctp** (CakePHP Template)
 et utilisent la `syntaxe alternative de PHP
-<http://php.net/manual/fr/control-structures.alternative-syntax.php>`_
+<https://php.net/manual/fr/control-structures.alternative-syntax.php>`_
 pour les structures de contrôle et les sorties. Ces fichiers contiennent la logique nécessaire
 pour servir les données reçues d'un controller dans un format de présentation qui est lisible
 par votre public.
@@ -125,7 +125,7 @@ Un autre exemple utilisant if/elseif/else. Remarquez les doubles points:
      <h3>Hi unknown user</h3>
   <?php endif; ?>
 
-Si vous préférez utiliser un langage de template comme `Twig <http://twig.sensiolabs.org>`_, une sous-classe de View va faire le pont entre le langage du template et CakePHP.
+Si vous préférez utiliser un langage de template comme `Twig <https://twig.sensiolabs.org>`_, une sous-classe de View va faire le pont entre le langage du template et CakePHP.
 
 Un fichier de template est stocké dans **src/Template/**, dans un sous-dossier
 portant le nom du controller qui utilise ce fichier. Il a un nom de fichier

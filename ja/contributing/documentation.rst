@@ -83,7 +83,7 @@ IRC (#cakephp on freenode) で、参加したい旨を連絡してください�
 
 - 翻訳先の言語のページを閲覧・編集してください。そうしなければ、翻訳済みのものは見えません。
 - 選択した言語が book 上にすでに存在しているなら、遠慮無くその先に飛び込んでください。
-- `堅苦しくない文体 <http://en.wikipedia.org/wiki/Register_(linguistics)>`_
+- `堅苦しくない文体 <https://en.wikipedia.org/wiki/Register_(linguistics)>`_
   を使ってください。
 - タイトルと内容を同時に翻訳してください。
 - 修正を投稿する前に、英語版との比較を行うようにしてください
@@ -93,7 +93,7 @@ IRC (#cakephp on freenode) で、参加したい旨を連絡してください�
 - 一部だけ翻訳して投稿しないでください。
 - 保留されている項目があるセクションは編集しないでください。
 - アクセント文字のために
-  `HTML エンティティー <http://en.wikipedia.org/wiki/List_of_XML_and_HTML_character_entity_references>`_
+  `HTML エンティティー <https://en.wikipedia.org/wiki/List_of_XML_and_HTML_character_entity_references>`_
   を使用しないでください。
   この book は UTF-8 を使っています。
 - マークアップ (HTML) の変更や新しいコンテンツを絶対に変更しないでください。
@@ -214,9 +214,9 @@ ReST (Re Structured Text) は markdown や textile に似たプレーンテキ�
 
 外部のドキュメントへのリンクは以下のようにできます。 ::
 
-    `php.net への外部リンク <http://php.net>`_
+    `php.net への外部リンク <https://php.net>`_
 
-以上のものは次のようにリンクします: `php.net への外部リンク <http://php.net>`_
+以上のものは次のようにリンクします: `php.net への外部リンク <https://php.net>`_
 
 他のページへのリンク
 ~~~~~~~~~~~~~~~~~~~~
@@ -268,7 +268,7 @@ Sphinx は toc-tree 内に参照されないファイルがあると警告を出
 --------------------------
 
 CakePHP のドキュメントは `phpdomain
-<http://pypi.python.org/pypi/sphinxcontrib-phpdomain>`_
+<https://pypi.python.org/pypi/sphinxcontrib-phpdomain>`_
 を用いて PHP のオブジェクトと構成物を記述するための独自のディレクティブを提供します。
 適切な索引 (*index*) と相互参照機能を与えるためにこのディレクティブとロールの利用は欠かせません。
 

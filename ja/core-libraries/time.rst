@@ -160,7 +160,7 @@ CakePHP は snap を作成します。 ::
 
 文字列が表示される希望のフォーマットを特定することも可能です。
 この関数に第1引数として `IntlDateFormatter 定数
-<http://www.php.net/manual/ja/class.intldateformatter.php>`_ を渡したり、
+<https://www.php.net/manual/ja/class.intldateformatter.php>`_ を渡したり、
 あるいは以下のリソースで指定されている ICU の日付フルフォーマット文字列を渡すことができます:
 https://unicode-org.github.io/icu/userguide/format_parse/datetime/#datetime-format-syntax.
 
@@ -186,7 +186,7 @@ https://unicode-org.github.io/icu/userguide/format_parse/datetime/#datetime-form
 
 .. note::
    IntlDateFormatter::FULL のような文字列定数のために Intl は ICU ライブラリーを使用します。
-   そのライブラリーは、 CLDR (http://cldr.unicode.org/) からデータを取り入れています。
+   そのライブラリーは、 CLDR (https://cldr.unicode.org/) からデータを取り入れています。
    ライブラリーのバージョンは、 PHP のインストールにとても依存し、バージョンにより異なる結果を返します。
 
 .. php:method:: nice()
@@ -218,7 +218,7 @@ https://unicode-org.github.io/icu/userguide/format_parse/datetime/#datetime-form
 --------------------------------------------------
 
 ``nice`` や ``i18nFormat`` を利用している際に表示される日付のデフォルトのロケールは、
-`intl.default_locale <http://www.php.net/manual/en/intl.configuration.php#ini.intl.default-locale>`_ の指令です。
+`intl.default_locale <https://www.php.net/manual/en/intl.configuration.php#ini.intl.default-locale>`_ の指令です。
 しかしながら、このデフォルト値は実行時にも変更できます。 ::
 
     Time::setDefaultLocale('es-ES'); // 可変の DateTime 用
@@ -425,7 +425,7 @@ CakePHP は、変更可能な仲間と同じインターフェイスを実装す
 ==========================
 
 CakePHP はすべての有効な PHP タイムゾーンをサポートしています。サポートされるタイムゾーンの一覧は、
-`このページをご覧ください <http://php.net/manual/ja/timezones.php>`_ 。
+`このページをご覧ください <https://php.net/manual/ja/timezones.php>`_ 。
 
 .. meta::
     :title lang=ja: Time

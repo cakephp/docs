@@ -53,7 +53,7 @@ créé pendant le chapitre :doc:`Installation <installation>` du tutoriel. Si vo
 changez le mot de passe de l'utilisateur, vous devriez voir une version hashé du
 mot de passe à la place de la valeur par défaut sur l'action index ou view. CakePHP
 hash les mots de passe, par défaut, avec `bcrypt
-<http://codahale.com/how-to-safely-store-a-password/>`_. Vous pouvez aussi utiliser
+<https://codahale.com/how-to-safely-store-a-password/>`_. Vous pouvez aussi utiliser
 SHA-1 ou MD5 si vous travaillez sur une base de données déjà existante mais nous
 vous recommandons d'utiliser bcrypt pour toutes vos nouvelles applications.
 

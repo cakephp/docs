@@ -34,7 +34,7 @@ Licencia
 ========
 
 CakePHP está licenciado bajo la
-`Licencia MIT <http://www.opensource.org/licenses/mit-license.php>`_. Esto
+`Licencia MIT <https://www.opensource.org/licenses/mit-license.php>`_. Esto
 significa que eres libre para modificar, distribuir y republicar el código
 fuente con la condición de que las notas de copyright queden intactas. También
 eres libre para incorporar CakePHP en cualquier aplicación comercial o de código
@@ -43,7 +43,7 @@ cerrado.
 Instalando CakePHP
 ==================
 
-CakePHP utiliza `Composer <http://getcomposer.org>`_, una herramienta de manejo
+CakePHP utiliza `Composer <https://getcomposer.org>`_, una herramienta de manejo
 de dependencias para PHP 5.3+, como el método de instalación oficialmente
 soportado.
 
@@ -250,7 +250,7 @@ La primera mirada debe ir a httpd.conf. (Asegura de que estás editando el
 httpd.conf del sistema en lugar del httpd.conf de un usuario o sitio específico)
 
 Hay archivos que pueden variar entre diferentes distribuciones y versiones de Apache.
-Debes también mirar en http://wiki.apache.org/httpd/DistrosDefaultLayout para
+Debes también mirar en https://wiki.apache.org/httpd/DistrosDefaultLayout para
 obtener información.
 
 #. Asegura de que un archivo .htaccess de sobreescritura esté permitido
@@ -335,13 +335,13 @@ obtener información.
        </Directory>
 
    En macOS, otra solución es usar la herramienta
-   `virtualhostx <http://clickontyler.com/virtualhostx/>`_
+   `virtualhostx <https://clickontyler.com/virtualhostx/>`_
    para crear servidores virtuales y apuntarlos a tu carpeta.
 
    Para muchos servicios de alojamiento (GoDaddy, 1and1), tu servidor
    web estará actualmente sirviendo desde un directorio de usuario que
    actualmente usa mod\_rewrite. Si tu estás instalando CakePHP en la carpeta
-   de usuario (http://example.com/~username/cakephp/), o alguna otra
+   de usuario (https://example.com/~username/cakephp/), o alguna otra
    estructura de URL que ya utilice mod\_rewrite, necesitarás agregar una
    declaración a los archivos .htaccess que CakePHP usa (.htaccess,
    webroot/.htaccess).
@@ -431,7 +431,7 @@ necesitas PHP corriendo como una instancia FastCGI:
 En algunos servidores (Como Ubuntu 14.04) la configuración anterior no funcionará
 recién instalado, y de todas formas la documentación de nginx recomienda
 una forma diferente de abordar esto
-(http://nginx.org/en/docs/http/converting_rewrite_rules.html). Puedes intentar
+(https://nginx.org/en/docs/http/converting_rewrite_rules.html). Puedes intentar
 lo siguiente (Notarás que esto es un bloque de servidor {}, en vez de dos,
 pese a que si quieres que example.com resuelva a tu aplicación CakePHP en adición
 a www.example.com consulta el enlace de nginx anterior):
@@ -471,10 +471,10 @@ IIS7 no soporta de manera nativa los archivos .htaccess. Mientras hayan
 las reglas htaccess en IIS para usar las redirecciones nativas de CakePHP. Para hacer
 esto, sigue los siguientes pasos:
 
-#. Usa el `Intalador de plataforma Web de Microsoft <http://www.microsoft.com/web/downloads/platform.aspx>`_
-   para instalar el `Modulo de Redirreción 2.0 <http://www.iis.net/downloads/microsoft/url-rewrite>`_ de URLs
-   o descarga directamente (`32-bit <http://www.microsoft.com/en-us/download/details.aspx?id=5747>`_ /
-   `64-bit <http://www.microsoft.com/en-us/download/details.aspx?id=7435>`_).
+#. Usa el `Intalador de plataforma Web de Microsoft <https://www.microsoft.com/web/downloads/platform.aspx>`_
+   para instalar el `Modulo de Redirreción 2.0 <https://www.iis.net/downloads/microsoft/url-rewrite>`_ de URLs
+   o descarga directamente (`32-bit <https://www.microsoft.com/en-us/download/details.aspx?id=5747>`_ /
+   `64-bit <https://www.microsoft.com/en-us/download/details.aspx?id=7435>`_).
 #. Crear un nuevo archivo llamado web.config en tu directorio de raíz de CakePHP.
 #. Usando Notepad o cualquier editor de XML, copia el siguiente código
    en tu nuevo archivo web.config:
@@ -534,8 +534,8 @@ Esto hará tus URL verse así
 www.example.com/index.php/controllername/actionname/param antes que
 www.example.com/controllername/actionname/param.
 
-.. _GitHub: http://github.com/cakephp/cakephp
-.. _Composer: http://getcomposer.org
+.. _GitHub: https://github.com/cakephp/cakephp
+.. _Composer: https://getcomposer.org
 
 .. meta::
     :title lang=es: Instalación

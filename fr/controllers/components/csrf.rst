@@ -2,7 +2,7 @@ Cross Site Request Forgery
 ##########################
 
 En activant le component CSRFComponent vous bénéficiez d'une protection contre
-les attaques `CSRF <http://fr.wikipedia.org/wiki/Cross-Site_Request_Forgery>`_
+les attaques `CSRF <https://fr.wikipedia.org/wiki/Cross-Site_Request_Forgery>`_
 ou "Cross Site Request Forgery" qui est une vulnérabilité habituelle dans les
 applications web. Cela permet à un attaquant de capturer et rejouer une requête
 précédente, et parfois soumettre des données en utilisant des balises images ou

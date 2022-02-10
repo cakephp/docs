@@ -240,7 +240,7 @@ para a senha. Em **src/Model/Entity/User.php** adicione o seguinte::
 Agora atualize um dos usuários que você criou anteriormente, se você alterar
 sua senha, você deve ver um senha criptografada ao invés do valor original nas
 páginas de lista ou visualização. O CakePHP criptografa senhas com
-`bcrypt <http://codahale.com/how-to-safely-store-a-password/>`_ por padrão.
+`bcrypt <https://codahale.com/how-to-safely-store-a-password/>`_ por padrão.
 Você também pode usar sha1 ou md5 caso venha a trabalhar com um
 banco de dados existente.
 

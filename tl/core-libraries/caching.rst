@@ -22,15 +22,15 @@ build your own backend. The built-in caching engines are:
   atomic operations. However, since disk storage is often quite cheap,
   storing large objects, or elements that are infrequently written
   work well in files.
-* ``ApcCache`` APC cache uses the PHP `APCu <http://php.net/apcu>`_ extension.
+* ``ApcCache`` APC cache uses the PHP `APCu <https://php.net/apcu>`_ extension.
   This extension uses shared memory on the webserver to store objects.
   This makes it very fast, and able to provide atomic read/write features.
-* ``Wincache`` Wincache uses the `Wincache <http://php.net/wincache>`_
+* ``Wincache`` Wincache uses the `Wincache <https://php.net/wincache>`_
   extension. Wincache is similar to APC in features and performance, but
   optimized for Windows and IIS.
 * ``XcacheEngine`` `Xcache <https://en.wikipedia.org/wiki/List_of_PHP_accelerators#XCache>`_
   is a PHP extension that provides similar features to APC.
-* ``MemcachedEngine`` Uses the `Memcached <http://php.net/memcached>`_
+* ``MemcachedEngine`` Uses the `Memcached <https://php.net/memcached>`_
   extension.
 * ``RedisEngine`` Uses the `phpredis <https://github.com/phpredis/phpredis>`_
   extension. Redis provides a fast and persistent cache system similar to

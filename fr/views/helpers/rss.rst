@@ -198,7 +198,7 @@ que vous avez toutes ces configurations, vous pouvez tester votre flux RSS
 en allant à votre ``/posts/index.rss`` et que vous verrez votre nouveau flux.
 Il est toujours important que vous validiez votre flux RSS avant de le mettre
 en live. Ceci peut être fait en visitant les sites qui valident le XML comme
-Le Validateur de flux ou le site de w3c à http://validator.w3.org/feed/.
+Le Validateur de flux ou le site de w3c à https://validator.w3.org/feed/.
 
 .. note::
 

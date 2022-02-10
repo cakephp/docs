@@ -73,7 +73,7 @@ Http Client は PSR-7 互換
 
 ``Cake\Network\Http\Client`` は ``Cake\Http\Client`` に移動しました。
 そのリクエストとレスンポンスオブジェクトは `PSR-7 インターフェイス
-<http://www.php-fig.org/psr/psr-7/>`__ を実装しています。
+<https://www.php-fig.org/psr/psr-7/>`__ を実装しています。
 ``Cake\Http\Client\Response`` の幾つかのメソッドは非推奨です。
 詳細は、上記をご覧ください。
 
