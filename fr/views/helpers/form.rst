@@ -1495,7 +1495,7 @@ Ce tableau est généré par PHP lui-même, pour plus de détails
 sur la façon dont PHP gère les données passées a travers
 les champs ``files``,
 `lire la section file uploads du manuel de PHP
-<http://php.net/features.file-upload>`_.
+<https://php.net/features.file-upload>`_.
 
 .. note::
 

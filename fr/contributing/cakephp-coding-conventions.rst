@@ -2,7 +2,7 @@ Normes de codes
 ###############
 
 Les développeurs de CakePHP vont utiliser le `guide pour l'écriture de code
-PSR-2 <http://www.php-fig.org/psr/psr-2/fr/>`_ en plus des règles de code
+PSR-2 <https://www.php-fig.org/psr/psr-2/fr/>`_ en plus des règles de code
 suivantes.
 
 Il est recommandé que les autres personnes qui développent des Ingrédients de
@@ -290,7 +290,7 @@ Fonctions Anonymes (Closures)
 -----------------------------
 
 La définition des fonctions anonymes suit le guide sur le style de codage
-`PSR-2 <http://www.php-fig.org/psr/psr-2/>`_, où elles sont déclarées
+`PSR-2 <https://www.php-fig.org/psr/psr-2/>`_, où elles sont déclarées
 avec un espace après le mot clé `function`, et un espace avant et après
 le mot clé `use`::
 
@@ -316,19 +316,19 @@ Tous les commentaires doivent être écrits en anglais, et doivent clairement
 décrire le block de code commenté.
 
 Les commentaires doivent inclure les tags de
-`phpDocumentor <http://phpdoc.org>`_ suivants:
+`phpDocumentor <https://phpdoc.org>`_ suivants:
 
-*  `@author <http://phpdoc.org/docs/latest/references/phpdoc/tags/author.html>`_
-*  `@copyright <http://phpdoc.org/docs/latest/references/phpdoc/tags/copyright.html>`_
-*  `@deprecated <http://phpdoc.org/docs/latest/references/phpdoc/tags/deprecated.html>`_
+*  `@author <https://phpdoc.org/docs/latest/references/phpdoc/tags/author.html>`_
+*  `@copyright <https://phpdoc.org/docs/latest/references/phpdoc/tags/copyright.html>`_
+*  `@deprecated <https://phpdoc.org/docs/latest/references/phpdoc/tags/deprecated.html>`_
    Using the ``@version <vector> <description>`` format, where ``version`` and ``description`` are mandatory.
-*  `@example <http://phpdoc.org/docs/latest/references/phpdoc/tags/example.html>`_
-*  `@ignore <http://phpdoc.org/docs/latest/references/phpdoc/tags/ignore.html>`_
-*  `@internal <http://phpdoc.org/docs/latest/references/phpdoc/tags/internal.html>`_
-*  `@link <http://phpdoc.org/docs/latest/references/phpdoc/tags/link.html>`_
-*  `@see <http://phpdoc.org/docs/latest/references/phpdoc/tags/see.html>`_
-*  `@since <http://phpdoc.org/docs/latest/references/phpdoc/tags/since.html>`_
-*  `@version <http://phpdoc.org/docs/latest/references/phpdoc/tags/version.html>`_
+*  `@example <https://phpdoc.org/docs/latest/references/phpdoc/tags/example.html>`_
+*  `@ignore <https://phpdoc.org/docs/latest/references/phpdoc/tags/ignore.html>`_
+*  `@internal <https://phpdoc.org/docs/latest/references/phpdoc/tags/internal.html>`_
+*  `@link <https://phpdoc.org/docs/latest/references/phpdoc/tags/link.html>`_
+*  `@see <https://phpdoc.org/docs/latest/references/phpdoc/tags/see.html>`_
+*  `@since <https://phpdoc.org/docs/latest/references/phpdoc/tags/since.html>`_
+*  `@version <https://phpdoc.org/docs/latest/references/phpdoc/tags/version.html>`_
 
 Les tags de PhpDoc sont un peu du même style que les tags de JavaDoc dans
 Java. Les tags sont seulement traités s'il sont la première chose dans la
@@ -432,7 +432,7 @@ parenthèses::
 
 Quand vous incluez les fichiers avec des classes ou librairies, utilisez
 seulement et toujours la fonction
-`require\_once <http://php.net/require_once>`_.
+`require\_once <https://php.net/require_once>`_.
 
 Les Balises PHP
 ===============

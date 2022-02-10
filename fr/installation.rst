@@ -62,7 +62,7 @@ utiliser la même version de PHP que votre interface en ligne de commande.
 Installer Composer
 ------------------
 
-CakePHP utilise `Composer <http://getcomposer.org>`_, un outil de gestion de
+CakePHP utilise `Composer <https://getcomposer.org>`_, un outil de gestion de
 dépendances comme méthode officielle supportée pour l'installation.
 
 - Installer Composer sur Linux et macOS
@@ -334,7 +334,7 @@ plutôt que celui d'un utilisateur ou d'un site spécifique).
 
 Ces fichiers peuvent varier selon les différentes distributions et les versions
 d'Apache. Vous pouvez consulter
-http://wiki.apache.org/httpd/DistrosDefaultLayout pour plus d'informations.
+https://wiki.apache.org/httpd/DistrosDefaultLayout pour plus d'informations.
 
 #. Assurez-vous que l'utilisation des fichiers .htaccess est permise et que
    AllowOverride est défini à All pour le bon DocumentRoot. Vous devriez voir
@@ -423,7 +423,7 @@ http://wiki.apache.org/httpd/DistrosDefaultLayout pour plus d'informations.
        </Directory>
 
    Sur macOS, une autre solution est d'utiliser l'outil
-   `virtualhostx <http://clickontyler.com/virtualhostx/>`_ pour créer un Hôte
+   `virtualhostx <https://clickontyler.com/virtualhostx/>`_ pour créer un Hôte
    Virtuel pour pointer vers votre dossier.
 
    Pour de nombreux services d'hébergement (GoDaddy, 1and1), votre serveur web
@@ -530,7 +530,7 @@ Un exemple de la directive server est le suivant :
 
 .. note::
     Les configurations récentes de PHP-FPM sont configurées pour écouter le
-    socket unix php-fpm au lieu du port TCP 9000 sur l'adresse 127.0.0.0.1. 
+    socket unix php-fpm au lieu du port TCP 9000 sur l'adresse 127.0.0.0.1.
     Si vous avez des erreurs 502 bad gateway avec la configuration ci-dessus,
     essayez de mettre à jour ``fastcgi_pass`` pour utiliser le socket unix
     (ex: fastcgi_pass unix:/var/run/php/php7.1-fpm.sock;) au lieu du port
@@ -545,11 +545,11 @@ règles htaccess dans IIS pour utiliser les réécritures natives de CakePHP.
 Pour ce faire, suivez les étapes suivantes :
 
 #. Utilisez `l'installeur de la plateforme Web de Microsoft
-   <http://www.microsoft.com/web/downloads/platform.aspx>`_ pour installer
+   <https://www.microsoft.com/web/downloads/platform.aspx>`_ pour installer
    l'URL
-   `Rewrite Module 2.0 <http://www.iis.net/downloads/microsoft/url-rewrite>`_
-   ou téléchargez-le directement (`32-bit <http://www.microsoft.com/en-us/download/details.aspx?id=5747>`_ /
-   `64-bit <http://www.microsoft.com/en-us/download/details.aspx?id=7435>`_).
+   `Rewrite Module 2.0 <https://www.iis.net/downloads/microsoft/url-rewrite>`_
+   ou téléchargez-le directement (`32-bit <https://www.microsoft.com/en-us/download/details.aspx?id=5747>`_ /
+   `64-bit <https://www.microsoft.com/en-us/download/details.aspx?id=7435>`_).
 #. Créez un nouveau fichier appelé web.config dans votre dossier racine de CakePHP.
 #. Utilisez Notepad ou tout autre éditeur XML-safe, copiez le code suivant
    dans votre nouveau fichier web.config:
@@ -609,8 +609,8 @@ Vos URLs ressembleront à
 www.example.com/index.php/controllername/actionname/param plutôt qu'à
 www.example.com/controllername/actionname/param.
 
-.. _GitHub: http://github.com/cakephp/cakephp
-.. _Composer: http://getcomposer.org
+.. _GitHub: https://github.com/cakephp/cakephp
+.. _Composer: https://getcomposer.org
 
 .. meta::
     :title lang=fr: Installation

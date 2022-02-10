@@ -26,12 +26,12 @@ de trabajo::
 .. note::
 
     Si eres nuevo en Git, te recomendamos encarecidamente que leas el maravilloso
-    y gratuito libro `ProGit <http://git-scm.com/book/>`_
+    y gratuito libro `ProGit <https://git-scm.com/book/>`_
 
 Clona el código fuente de CakePHP desde GitHub:
 
-* Si no tienes una cuenta de `GitHub <http://github.com>`_  créate una.
-* Haz un *fork* del `repositorio CakePHP <http://github.com/cakephp/cakephp>`_
+* Si no tienes una cuenta de `GitHub <https://github.com>`_  créate una.
+* Haz un *fork* del `repositorio CakePHP <https://github.com/cakephp/cakephp>`_
   haciendo click en el botón **Fork**.
 
 Después de haber hecho el fork, clónalo en tu equipo local::
@@ -141,9 +141,9 @@ como base ya que no podrás editarla una vez creada.
 .. note::
 
     Recuerda que todo código que contribuyas a CakePHP será licenciado bajo la
-    Licencia MIT, y la `Cake Software Foundation <http://cakefoundation.org/pages/about>`_
+    Licencia MIT, y la `Cake Software Foundation <https://cakefoundation.org/pages/about>`_
     será la propietaria de cualquier código contribuido. Los contribuidores deberán seguir las
-    `Guías de la comunidad CakePHP <http://community.cakephp.org/guidelines>`_.
+    `Guías de la comunidad CakePHP <https://community.cakephp.org/guidelines>`_.
 
 Todos los *merge* de corrección de errores que se hagan a una rama de mantenimiento
 se harán también periódicamente sobre futuros lanzamientos por el equipo central.

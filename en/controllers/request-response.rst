@@ -33,7 +33,7 @@ reference. Some of the duties ``ServerRequest`` performs include:
   properties.
 
 As of 3.4.0, CakePHP's request object implements the `PSR-7
-ServerRequestInterface <http://www.php-fig.org/psr/psr-7/>`_ making it easier to
+ServerRequestInterface <https://www.php-fig.org/psr/psr-7/>`_ making it easier to
 use libraries from outside of CakePHP.
 
 Request Parameters
@@ -715,10 +715,10 @@ ics generated on the fly from a string::
     {
         $icsString = $this->Calendars->generateIcs();
         $response = $this->response;
-        
+
         // Inject string content into response body (3.4.0+)
         $response = $response->withStringBody($icsString);
-        
+
         // Inject string content into response body (before 3.4.0)
         $response->body($icsString);
 

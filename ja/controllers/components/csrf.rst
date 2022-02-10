@@ -2,7 +2,7 @@
 ##################################
 
 CSRF コンポーネントを有効にすると、攻撃から防御することができます。 `CSRF
-<http://en.wikipedia.org/wiki/Cross-site_request_forgery>`_ あるいは
+<https://en.wikipedia.org/wiki/Cross-site_request_forgery>`_ あるいは
 クロスサイトリクエストフォージェリは、ウェブアプリケーションの一般的な脆弱性です。
 攻撃者がひとつ前のリクエストを捕捉あるいは再現したり、ときには異なるドメインの画像タグや
 リソースを使うことでデータを送信することもあります。

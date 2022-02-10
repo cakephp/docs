@@ -10,7 +10,7 @@ les pages vous redirigera vers l'éditeur en ligne de Github pour la page
 correspondante.
 
 La documentation de CakePHP est `intégrée de façon continue
-<http://en.wikipedia.org/wiki/Continuous_integration>`_, et déployée après
+<https://en.wikipedia.org/wiki/Continuous_integration>`_, et déployée après
 chaque pull request est fusionnée.
 
 Traductions
@@ -88,7 +88,7 @@ Astuces de traducteurs
 - N'hésitez pas à plonger droit dans votre langue qui existe déjà dans le
   livre.
 - Utilisez une
-  `Forme Informelle <http://en.wikipedia.org/wiki/Register_(linguistics)>`_.
+  `Forme Informelle <https://en.wikipedia.org/wiki/Register_(linguistics)>`_.
 - Traduisez à la fois le contenu et le titre en même temps.
 - Comparez au contenu anglais avant de soumettre une correction
   (si vous corrigez quelque chose, mais n'intégrez pas un changement 'en amont',
@@ -99,7 +99,7 @@ Astuces de traducteurs
 - Ne soumettez pas de traductions partielles.
 - Ne modifiez pas une section avec un changement en attente.
 - N'utilisez pas d'
-  `entités HTML <http://en.wikipedia.org/wiki/List_of_XML_and_HTML_character_entity_references>`_
+  `entités HTML <https://en.wikipedia.org/wiki/List_of_XML_and_HTML_character_entity_references>`_
   pour les caractères accentués, le livre utilise UTF-8.
 - Ne changez pas les balises (HTML) de façon significative ou n'ajoutez pas
   de nouveau contenu.
@@ -110,7 +110,7 @@ Guide de mise en forme de la documentation
 ==========================================
 
 La documentation du nouveau CakePHP est écrit avec le
-`formatage du texte ReST <http://en.wikipedia.org/wiki/ReStructuredText>`_.
+`formatage du texte ReST <https://en.wikipedia.org/wiki/ReStructuredText>`_.
 ReST (Re Structured Text) est une syntaxe de texte de balisage similaire à
 markdown, ou textile. Pour maintenir la cohérence, il est recommandé quand
 vous ajoutez quelque chose à la documentation CakePHP que vous suiviez les
@@ -228,9 +228,9 @@ Liens externes
 
 Les liens vers les documents externes peuvent être faits avec ce qui suit::
 
-    `Lien externe vers php.net <http://php.net>`_
+    `Lien externe vers php.net <https://php.net>`_
 
-Le lien résultant ressemblerait à ceci: `Lien externe vers php.net <http://php.net>`_
+Le lien résultant ressemblerait à ceci: `Lien externe vers php.net <https://php.net>`_
 
 Lien vers les autres pages
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -286,7 +286,7 @@ Description des classes et de leur contenu
 ------------------------------------------
 
 La documentation de CakePHP utilise `phpdomain
-<http://pypi.python.org/pypi/sphinxcontrib-phpdomain>`_ pour fournir des
+<https://pypi.python.org/pypi/sphinxcontrib-phpdomain>`_ pour fournir des
 directives sur mesure pour décrire les objets PHP et les constructs. Utiliser
 les directives et les modèles est requis pour donner une bonne indexation et
 des fonctionnalités de référencement croisé.

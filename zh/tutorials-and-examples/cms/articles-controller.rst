@@ -93,7 +93,7 @@ CakePHP 的视图模版是插入应用布局中的演示型 PHP 代码。视图�
 
 你也许注意到我们使用了一个叫做 ``$this->Html`` 的对象。它是 CakePHP 中 :doc:`HtmlHelper </views/helpers/html>`
 的一个实例。CakePHP 自带一系列的视图助手 (view helper），它们简化了很多任务，比如创建衔接，表单以及分页。
-你可以在 :doc:`/views/helpers` 章节学到更多关于它们的内容，但是在这里，我们需要注意到的是 ``link()`` 
+你可以在 :doc:`/views/helpers` 章节学到更多关于它们的内容，但是在这里，我们需要注意到的是 ``link()``
 方法会使用第一个参数作为文字和第二个参数作为 URL 来生产一个 HTML 衔接。
 
 When specifying URLs in CakePHP, it is recommended that you use arrays or
@@ -204,10 +204,10 @@ CakePHP 报错页面，提示我们 'missing a view template'。让我们修复�
     }
 
 .. note::
-    
+
     如果你需要在控制器中使用 :doc:`/controllers/components/flash` 的组件，你必须要先加载它。通常情况下
     我们可以在 ``AppController`` 中加载它，由于它是一个比较常用的组件。
-    
+
 
 以下是 ``add()`` 行为的功能：
 
@@ -217,12 +217,12 @@ CakePHP 报错页面，提示我们 'missing a view template'。让我们修复�
 每一个 CakePHP 请求包含着一个 request 对象，我们可以通过 ``$this->request`` 获取到。这个 request 对象包含着
 当前的请求的所有信息。我们使用 :php:meth:`Cake\\Http\\ServerRequest::is()` 方法检测此次请求是否是一个 HTTP POST请求。
 
-POST 数据可以通过 ``$this->request->getData()`` 获取。如果需要检查它里面的数据内容，我们可以通过方法 :php:func:`pr()` 
+POST 数据可以通过 ``$this->request->getData()`` 获取。如果需要检查它里面的数据内容，我们可以通过方法 :php:func:`pr()`
 或者 :php:func:`debug()`。在保存数据之前，我们首先 'marshal' 数据成一个 Article Entity。然后我们使用之前创建的 ArticlesTable
 来存储。
 
-保存完以后，我们使用 FlashComponent 的 ``success()`` 方法来把提示信息传入 session 中。``success`` 方法是通过 
-PHP 的 `魔术方法 <http://php.net/manual/en/language.oop5.overloading.php#object.call>`_ 实现的.  
+保存完以后，我们使用 FlashComponent 的 ``success()`` 方法来把提示信息传入 session 中。``success`` 方法是通过
+PHP 的 `魔术方法 <https://php.net/manual/en/language.oop5.overloading.php#object.call>`_ 实现的.
 瞬间提示信息将会在页面跳转以后显示出来。在我们的布局中，我们使用了 ``<?= $this->Flash->render() ?>``，它会将瞬间提示信息显示出来，
 然后删除其对应的 session 变量。保存完成以后，我们使用 :php:meth:`Cake\\Controller\\Controller::redirect` 将用户页面带回 artciles
 列表。参数 ``['action' => 'index']`` 将被翻译为 ``/articles``，也就是 ``ArticlesController`` 的 index 行为。参照 `API
@@ -266,7 +266,7 @@ PHP 的 `魔术方法 <http://php.net/manual/en/language.oop5.overloading.php#ob
 代码::
 
     <?= $this->Html->link('Add Article', ['action' => 'add']) ?>
-    
+
 
 添加简单 slug 生成功能
 =============================
@@ -415,7 +415,7 @@ PHP 的 `魔术方法 <http://php.net/manual/en/language.oop5.overloading.php#ob
 CakePHP 的验证器很强大也很灵活。它提供了一些常用的规则，比如邮箱地址，IP 地址等等。此外，你也可以灵活
 地加入自定的规则。参考 :doc:`/core-libraries/validation` 文档可了解如何自定义验证规则。
 
-现在我们部署好了验证规则，你可以尝试着使用空 title 或者 body 来测试。由于我们使用了 FormHelper 的 
+现在我们部署好了验证规则，你可以尝试着使用空 title 或者 body 来测试。由于我们使用了 FormHelper 的
 :php:meth:`Cake\\View\\Helper\\FormHelper::control()` 来创建表单元素，你会发现验证错误信息回自动的呈现出来。
 
 
@@ -438,15 +438,15 @@ CakePHP 的验证器很强大也很灵活。它提供了一些常用的规则，
         }
     }
 
-以上的代码逻辑将会使用规定的 ``$slug`` 来删除指定 article，跳转页面至 ``/articles``，然后使用 ``$this->Flash->success()`` 
+以上的代码逻辑将会使用规定的 ``$slug`` 来删除指定 article，跳转页面至 ``/articles``，然后使用 ``$this->Flash->success()``
 呈现一条确认信息。如果用户尝试用 GET 请求，``allowMethod()`` 将会抛出异常。未捕获的异常将被 CakePHP 内核的异常处理器捕获，自带的
 错误页面将被展示出来。CakePHP 自带很多 :doc:`异常 </development/errors>` ，我们可以使用它们来响应不同的 HTTP 错误。
 
 .. warning::
-    
+
     允许 GET 请求删除内容是 *很* 危险的，这种做法可能导致爬虫不小心删除所有的内容。这就是我们
     在控制器中使用 ``allowMethod()`` 的原因。
-    
+
 
 由于我们只是运行了一段逻辑然后跳转到另一个动作，此处不需要模版。让我们更新下 index 模版，加入 delete 的衔接:
 

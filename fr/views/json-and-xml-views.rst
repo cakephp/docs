@@ -170,7 +170,7 @@ Créer des Views JSON
 
 La classe JsonView intègre la variable ``_jsonOptions`` qui vous permet de
 personnaliser le masque utilisé pour générer le JSON. Regardez la
-documentation `json_encode <http://php.net/json_encode>`_ sur les valeurs
+documentation `json_encode <https://php.net/json_encode>`_ sur les valeurs
 valides de cette option.
 
 Par exemple, pour serializer le rendu des erreurs de validation des entités de

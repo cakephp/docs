@@ -31,7 +31,7 @@ Organisation des Répertoires de l'Application
 =============================================
 
 L'organisation des répertoires de l'application a changé et suit maintenant
-`PSR-4 <http://www.php-fig.org/psr/psr-4/>`_. Vous devez utiliser le projet de
+`PSR-4 <https://www.php-fig.org/psr/psr-4/>`_. Vous devez utiliser le projet de
 `squelette d'application <https://github.com/cakephp/app>`_ comme
 point de référence lors de la mise à jour de votre application.
 
@@ -40,7 +40,7 @@ CakePHP doit être installé avec Composer
 
 Puisque CakePHP ne peut plus être installé via PEAR, ou dans un répertoire
 partagé, ces options ne sont plus supportées. A la place, vous devez utiliser
-`Composer <http://getcomposer.org>`_ pour installer CakePHP dans votre
+`Composer <https://getcomposer.org>`_ pour installer CakePHP dans votre
 application.
 
 Namespaces (Espaces de Noms)
@@ -1046,8 +1046,8 @@ FormHelper génère et réduire les problèmes que les gens ont eu dans le pass�
 - Les inputs de type checkbox et boutons radios types sont maintenant générées
   *à l'intérieur* de balises label par défaut. Ceci aide à accroître la
   compatibilité avec les librairies CSS populaires telles que
-  `Bootstrap <http://getbootstrap.com/>`_ et
-  `Foundation <http://foundation.zurb.com/>`_.
+  `Bootstrap <https://getbootstrap.com/>`_ et
+  `Foundation <https://foundation.zurb.com/>`_.
 - Les tags de templates sont maintenant tous écrits en *camelBack*. Les tags
   pre-3.0 ``formstart``, ``formend``, ``hiddenblock`` et ``inputsubmit`` sont
   maintenant ``formStart``, ``formEnd``, ``hiddenBlock`` et ``inputSubmit``.
@@ -1153,11 +1153,11 @@ pas standard, limitée et incompatible avec les mises en page non-HTML et les
 vues de données. Ces limitations signifiaient qu'une réécriture complète était
 nécessaire. Edge Side Includes est devenu un moyen standard d'implémenter les
 fonctionnalités que CacheHelper fournissait. Cependant, implémenter `Edge Side
-Includes <http://fr.wikipedia.org/wiki/Edge_Side_Includes>`_ en PHP présente un
+Includes <https://fr.wikipedia.org/wiki/Edge_Side_Includes>`_ en PHP présente un
 grand nombre de limitations. Au lieu de construire une solution de qualité
 inférieure, nous recommandons aux développeurs ayant besoin d'un cache global
-d'utiliser `Varnish <http://varnish-cache.org>`_ ou
-`Squid <http://squid-cache.org>`_ à la place.
+d'utiliser `Varnish <https://varnish-cache.org>`_ ou
+`Squid <https://squid-cache.org>`_ à la place.
 
 I18n
 ====

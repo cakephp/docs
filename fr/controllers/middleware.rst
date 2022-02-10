@@ -138,7 +138,7 @@ Requêtes et Réponses PSR-7
 ==========================
 
 Les Middleware et la nouvelle pile HTTP sont construits sur les `Interfaces
-de Requête et Réponse PSR-7 <http://www.php-fig.org/psr/psr-7/>`__. Alors
+de Requête et Réponse PSR-7 <https://www.php-fig.org/psr/psr-7/>`__. Alors
 que les middleware sont exposés à ces interfaces, vos controlleurs,
 composants, et vues *ne le seront pas*.
 

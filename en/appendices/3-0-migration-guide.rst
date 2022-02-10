@@ -29,7 +29,7 @@ Application Directory Layout
 ============================
 
 The application directory layout has changed and now follows
-`PSR-4 <http://www.php-fig.org/psr/psr-4/>`_. You should use the
+`PSR-4 <https://www.php-fig.org/psr/psr-4/>`_. You should use the
 `app skeleton <https://github.com/cakephp/app>`_ project as a reference point
 when updating your application.
 
@@ -38,7 +38,7 @@ CakePHP should be installed with Composer
 
 Since CakePHP can no longer be installed via PEAR, or in a shared
 directory, those options are no longer supported. Instead you should use
-`Composer <http://getcomposer.org>`_ to install CakePHP into your application.
+`Composer <https://getcomposer.org>`_ to install CakePHP into your application.
 
 Namespaces
 ==========
@@ -948,8 +948,8 @@ and reduce the problems people had in the past:
   the message.
 - Checkbox and radio input types are now rendered *inside* of label elements
   by default. This helps increase compatibility with popular CSS libraries like
-  `Bootstrap <http://getbootstrap.com/>`_ and
-  `Foundation <http://foundation.zurb.com/>`_.
+  `Bootstrap <https://getbootstrap.com/>`_ and
+  `Foundation <https://foundation.zurb.com/>`_.
 - Templates tags are now all camelBacked. Pre-3.0 tags ``formstart``, ``formend``, ``hiddenblock``
   and ``inputsubmit`` are now ``formStart``, ``formEnd``, ``hiddenBlock`` and ``inputSubmit``.
   Make sure you change them if they are customized in your app.
@@ -1038,10 +1038,10 @@ non-standard, limited and incompatible with non-HTML layouts and data views.
 These limitations meant a full rebuild would be necessary. Edge Side Includes
 have become a standardized way to implement the functionality CacheHelper used
 to provide. However, implementing `Edge Side Includes
-<http://en.wikipedia.org/wiki/Edge_Side_Includes>`_ in PHP has a number of
+<https://en.wikipedia.org/wiki/Edge_Side_Includes>`_ in PHP has a number of
 limitations and edge cases. Instead of building a sub-par solution, we recommend
 that developers needing full response caching use `Varnish
-<http://varnish-cache.org>`_ or `Squid <http://squid-cache.org>`_ instead.
+<https://varnish-cache.org>`_ or `Squid <https://squid-cache.org>`_ instead.
 
 I18n
 ====

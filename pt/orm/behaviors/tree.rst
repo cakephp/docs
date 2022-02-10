@@ -20,7 +20,7 @@ Esse behavior requer as seguintes colunas na tabela do seu banco de dados:
 - ``lft`` (integer, signed) Usado para manter a estrutura da árvore
 - ``rght`` (integer, signed) Usado para manter a estrutura da árvore
 
-Você pode configurar o nome desses campos caso precise personalizá-los. Mais informações sobre o significado dos campos e como elas são usadas podem ser encontradas neste artigo que descreve a `lógica do MPTT <http://www.sitepoint.com/hierarchical-data-database-2/>`_
+Você pode configurar o nome desses campos caso precise personalizá-los. Mais informações sobre o significado dos campos e como elas são usadas podem ser encontradas neste artigo que descreve a `lógica do MPTT <https://www.sitepoint.com/hierarchical-data-database-2/>`_
 
 .. warning::
 

@@ -171,7 +171,7 @@ RSS レイアウトはとてもシンプルです。 **src/Template/Layout/rss/d
 ひとたびフィードのためのデータをセットアップしたら、RSS 形式の XML を作成するために :php:meth:`RssHelper::item()` メソッドを使用します。
 一旦このセットアップをすべて行ったら、あなたのサイトの ``/posts/index.rss`` へアクセスして RSS フィードをテストでき、新しいフィードを確認します。
 本番で作成する前に RSS フィードを検証することは重要です。
-Feed Validator や w3c サイトの http://validator.w3.org/feed/ など、XML を検証するサイトで確認することができます。
+Feed Validator や w3c サイトの https://validator.w3.org/feed/ など、XML を検証するサイトで確認することができます。
 
 .. note::
 

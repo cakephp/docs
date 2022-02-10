@@ -47,7 +47,7 @@ CMS にはユーザーがいますので、ログインできるようにし、
 見てください。 :doc:`インストール <installation>` 中に作成されたデフォルトユーザーを
 編集することができます。ユーザーのパスワードを変更すると、リストやビューページでは
 元の値の代わりにハッシュ化されたパスワードが表示されます。CakePHP は、デフォルトでは
-`bcrypt <http://codahale.com/how-to-safely-store-a-password/>`_ を使って
+`bcrypt <https://codahale.com/how-to-safely-store-a-password/>`_ を使って
 パスワードをハッシュ化します。既存のデータベースを使用している場合は SHA-1 または MD5 を
 使用することもできますが、すべての新しいアプリケーションに対して bcrypt を推奨します。
 

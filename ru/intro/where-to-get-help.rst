@@ -66,7 +66,7 @@
 
 Официальный форум CakePHP
 =========================
-`CakePHP официальный форум <http://discourse.cakephp.org>`_
+`CakePHP официальный форум <https://discourse.cakephp.org>`_
 
 Форум - место где вы можете получить помощь, предложить идею и поболтать
 о CakePHP. Это идеальное место где можно быстро получить ответы на вопросы и помочь другим.
@@ -86,7 +86,7 @@ Stackoverflow
 Бразилия, Португалия
 --------------------
 
-- `Brazilian CakePHP Community <http://cakephp-br.org>`_
+- `Brazilian CakePHP Community <https://cakephp-br.org>`_
 
 Датский
 -------
@@ -96,7 +96,7 @@ Stackoverflow
 Французский
 -----------
 
-- `French CakePHP Community <http://cakephp-fr.org>`_
+- `French CakePHP Community <https://cakephp-fr.org>`_
 
 Немецкий
 --------
@@ -107,7 +107,7 @@ Stackoverflow
 Иранский
 --------
 
-- `Iranian CakePHP Community <http://cakephp.ir>`_
+- `Iranian CakePHP Community <https://cakephp.ir>`_
 
 Голландский
 -----------
@@ -123,14 +123,14 @@ Stackoverflow
 Португальский
 -------------
 
-- `Portuguese CakePHP Google Group <http://groups.google.com/group/cakephp-pt>`_
+- `Portuguese CakePHP Google Group <https://groups.google.com/group/cakephp-pt>`_
 
 Испанский
 ---------
 
 - `Spanish CakePHP Slack Channel <https://cakesf.slack.com/messages/spanish/>`_
 - `Spanish CakePHP IRC Channel <irc://irc.freenode.net/cakephp-es>`_
-- `Spanish CakePHP Google Group <http://groups.google.com/group/cakephp-esp>`_
+- `Spanish CakePHP Google Group <https://groups.google.com/group/cakephp-esp>`_
 
 .. meta::
     :title lang=ru: Где получить помощь

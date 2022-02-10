@@ -2,7 +2,7 @@ Testing
 #######
 
 CakePHP fournit un support de test intégré compréhensible. CakePHP permet
-l'intégration de `PHPUnit <http://phpunit.de>`_. En plus de toutes les
+l'intégration de `PHPUnit <https://phpunit.de>`_. En plus de toutes les
 fonctionnalités offertes par PHPUnit, CakePHP offre quelques fonctionnalités
 supplémentaires pour faciliter le test. Cette section va couvrir l'installation
 de PHPUnit, comment commencer avec le Test Unitaire, et comment vous pouvez
@@ -15,8 +15,8 @@ CakePHP utilise PHPUnit comme framework de test sous-jacent. PHPUnit est le
 standard de-facto pour le test unitaire dans PHP. Il offre un ensemble de
 fonctionnalités profondes et puissantes pour s'assurer que votre code fait ce
 que vous pensez qu'il doit faire. PHPUnit peut être installé avec le `PHAR
-package <http://phpunit.de/#download>`__ ou avec
-`Composer <http://getcomposer.org>`_.
+package <https://phpunit.de/#download>`__ ou avec
+`Composer <https://getcomposer.org>`_.
 
 Installer PHPUnit avec Composer
 -------------------------------
@@ -61,7 +61,7 @@ lancer vos tests:
           phpunit --version
 
     Référez vous à la documentation de PHPUnit pour les instructions concernant
-    `l'installation globale du PHAR PHPUnit sur Windows <http://phpunit.de/manual/current/en/installation.html#installation.phar.windows>`__.
+    `l'installation globale du PHAR PHPUnit sur Windows <https://phpunit.de/manual/current/en/installation.html#installation.phar.windows>`__.
 
 Tester la Configuration de la Base de Données
 =============================================
@@ -325,7 +325,7 @@ Cela mettra la couverture des résultats dans le répertoire webroot de votre
 application. Vous pourrez voir les résultats en allant à
 ``http://localhost/votre_app/coverage``.
 
-Si vous utilisez PHP 5.6.0 (ou supérieur), vous pouvez utilisez `phpdbg <http://phpdbg.com/>`__
+Si vous utilisez PHP 5.6.0 (ou supérieur), vous pouvez utilisez `phpdbg <https://phpdbg.com/>`__
 pour générer la couverture des résultats à la place de xdebug. ``phpdbg`` est
 généralement plus rapide dans la génération des rapports de couverture :
 
@@ -1118,7 +1118,7 @@ permettra de simuler les en-têtes d'une demande d'authentification réelle.
 
 Lorsque vous testez l'authentification simple (Basic) ou de type "Digest", vous
 pouvez ajouter les variables d'environnement que PHP crée
-`<http://php.net/manual/fr/features.http-auth.php> `_ automatiquement.
+`<https://php.net/manual/fr/features.http-auth.php> `_ automatiquement.
 Ces variables d'environnement utilisées dans l'adaptateur d'authentification sont
 décrites dans: ref: `basic-authentication` ::
 
@@ -2232,7 +2232,7 @@ tests.
 Intégration avec Jenkins
 ========================
 
-`Jenkins <http://jenkins-ci.org>`_ est un serveur d'intégration continu, qui
+`Jenkins <https://jenkins-ci.org>`_ est un serveur d'intégration continu, qui
 peut vous aider à automatiser l'exécution de vos cas de test. Cela aide à
 s'assurer que tous les tests passent et que votre application est déjà
 prête.
@@ -2241,7 +2241,7 @@ Intégrer une application CakePHP avec Jenkins est assez simple. Ce qui suit
 suppose que vous avez déjà installé Jenkins sur un système \*nix, et que vous
 êtes capable de l'administrer. Vous savez aussi comment créer des jobs, et
 lancer des builds. Si vous n'êtes pas sur de tout cela, référez vous à la
-`documentation de Jenkins <http://jenkins-ci.org/>`_.
+`documentation de Jenkins <https://jenkins-ci.org/>`_.
 
 Créer un Job
 ------------

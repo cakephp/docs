@@ -71,7 +71,7 @@ Http Client is now PSR-7 Compatible
 
 ``Cake\Network\Http\Client`` has been moved to ``Cake\Http\Client``. Its request
 and response objects now implement the
-`PSR-7 interfaces <http://www.php-fig.org/psr/psr-7/>`__. Several methods on
+`PSR-7 interfaces <https://www.php-fig.org/psr/psr-7/>`__. Several methods on
 ``Cake\Http\Client\Response`` are now deprecated, see above for more
 information.
 

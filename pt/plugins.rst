@@ -13,7 +13,7 @@ Por convenção, os plugins usam o nome do pacote como seu namespace. Se você q
 Instalando um Plugin com Composer
 =================================
 
-Muitos plugins estão disponíveis no `Packagist <http://packagist.org>` _
+Muitos plugins estão disponíveis no `Packagist <https://packagist.org>` _
 E podem ser instalados com o ``Composer``. Para instalar o DebugKit, você
 deve fazer assim o assim::
 

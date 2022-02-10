@@ -32,7 +32,7 @@
   объекта.
 
 Начиная с версии 3.4.0, объект запроса CakePHP реализует
-`PSR-7 ServerRequestInterface <http://www.php-fig.org/psr/psr-7/>`_, что упрощает
+`PSR-7 ServerRequestInterface <https://www.php-fig.org/psr/psr-7/>`_, что упрощает
 использование библиотек вне CakePHP.
 
 Параметры запроса

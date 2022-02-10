@@ -2,7 +2,7 @@ Cross Site Request Forgery
 ##########################
 
 By enabling the CSRF Component you get protection against attacks. `CSRF
-<http://en.wikipedia.org/wiki/Cross-site_request_forgery>`_ or Cross Site
+<https://en.wikipedia.org/wiki/Cross-site_request_forgery>`_ or Cross Site
 Request Forgery is a common vulnerability in web applications. It allows an
 attacker to capture and replay a previous request, and sometimes submit data
 requests using image tags or resources on other domains.

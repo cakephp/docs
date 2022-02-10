@@ -16,7 +16,7 @@ envoyer des newsletters::
     # │    \──────────────────── hour (0 - 23)
     # \───────────────────────── min (0 - 59)
 
-Vous pouvez avoir plus d'infos ici: http://fr.wikipedia.org/wiki/Cron
+Vous pouvez avoir plus d'infos ici: https://fr.wikipedia.org/wiki/Cron
 
 .. tip::
 

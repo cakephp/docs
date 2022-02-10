@@ -37,7 +37,7 @@ Language Files
 
 Translations can be made available by using language files stored in the
 application. The default format for CakePHP translation files is the
-`Gettext <http://en.wikipedia.org/wiki/Gettext>`_ format. Files need to be
+`Gettext <https://en.wikipedia.org/wiki/Gettext>`_ format. Files need to be
 placed under **src/Locale/** and within this directory, there should be a
 subfolder for each language the application needs to support::
 
@@ -198,7 +198,7 @@ By using two adjacent quotes your variables will be replaced properly::
     __("This variable ''{0}'' be replaced.", 'will');
 
 These functions take advantage of the
-`ICU MessageFormatter <http://php.net/manual/en/messageformatter.format.php>`_
+`ICU MessageFormatter <https://php.net/manual/en/messageformatter.format.php>`_
 so you can translate messages and localize dates, numbers and currency at the
 same time::
 
@@ -335,7 +335,7 @@ You can do::
     zero{No Results} one{One result} few{...} many{...} other{...}
 
 Make sure you read the
-`Language Plural Rules Guide <http://www.unicode.org/cldr/charts/latest/supplemental/language_plural_rules.html>`_
+`Language Plural Rules Guide <https://www.unicode.org/cldr/charts/latest/supplemental/language_plural_rules.html>`_
 to get a complete overview of the aliases you can use for each language.
 
 Using Gettext Plural Selection

@@ -36,7 +36,7 @@ permet sont les suivantes :
   et en propriétés d'un objet.
 
 Depuis la version 3.4.0, l'objet ServerRequest de CakePHP implémente `l'interface
-PSR-7 ServerServerRequestInterface <http://www.php-fig.org/psr/psr-7/>`_ facilitant
+PSR-7 ServerServerRequestInterface <https://www.php-fig.org/psr/psr-7/>`_ facilitant
 l'utilisation des librairies en-dehors de CakePHP.
 
 Paramètres de la Requête

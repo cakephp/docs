@@ -28,7 +28,7 @@
 ==========================================
 
 アプリケーションディレクトリーのレイアウトが変更となりました。現在は
-`PSR-4 <http://www.php-fig.org/psr/psr-4/>`_ に従います。
+`PSR-4 <https://www.php-fig.org/psr/psr-4/>`_ に従います。
 あなたのアプリケーションを更新するときには、基準点として `app スケルトン
 <https://github.com/cakephp/app>`_ プロジェクトを使用する必要があります。
 
@@ -38,7 +38,7 @@ CakePHP は Composer でのインストールが必要
 もはや CakePHP は PEAR 経由、または共有ディレクトリーにインストールすることは
 できなくなりましたので、それらのインストール方法はサポートされなくなりました。
 アプリケーションに CakePHP をインストールするためには、代わりに `Composer
-<http://getcomposer.org>`_ を使用する必要があります。
+<https://getcomposer.org>`_ を使用する必要があります。
 
 名前空間
 ========
@@ -246,7 +246,7 @@ ApiShell を削除
 SchemaShell を削除
 -------------------
 
-完全なデータベースマイグレーションの実装ではなく、 `Phinx <http://phinx.org/>`_
+完全なデータベースマイグレーションの実装ではなく、 `Phinx <https://phinx.org/>`_
 のようなより良いツールの登場により、SchemaShell は削除されました。
 これは、CakePHP と `Phinx <https://phinx.org/>`__ の間のラッパーとして機能する
 `CakePHP Migrations プラグイン <https://github.com/cakephp/migrations>`_
@@ -969,8 +969,8 @@ FormHelper は、3.0 のために完全に書き直されました。
   ``$confirmMessage`` は、削除されました。
   メッセージを指定するために ``$options`` にキー ``confirm`` を使用する必要があります。
 - チェックボックスとラジオ入力タイプは、デフォルトでラベル要素の *内側* にレンダリングされます。
-  これは、 `Bootstrap <http://getbootstrap.com/>`_ や
-  `Foundation <http://foundation.zurb.com/>`_ のような人気の CSS ライブラリーとの
+  これは、 `Bootstrap <https://getbootstrap.com/>`_ や
+  `Foundation <https://foundation.zurb.com/>`_ のような人気の CSS ライブラリーとの
   互換性を高めることに役立ちます。
 - テンプレートタグは、すべてキャメルバックです。3.0 より前のタグ
   ``formstart`` 、 ``formend`` 、 ``hiddenblock`` と ``inputsubmit`` が
@@ -1067,10 +1067,10 @@ CacheHelper は削除されました。それが提供するキャッシュ機�
 これらの制限は、すべての再構築が必要であることを意味していました。
 エッジサイド・インクルードは、CacheHelper 機能を実装するための標準的な方法になります。
 しかし、PHP で `エッジサイド・インクルード
-<http://en.wikipedia.org/wiki/Edge_Side_Includes>`_ を実装することは、
+<https://en.wikipedia.org/wiki/Edge_Side_Includes>`_ を実装することは、
 多くの制限およびエッジケースがあります。出来損ないのソリューションを構築する代わりに、
-開発者が必要とする `Varnish <http://varnish-cache.org>`_ や
-`Squid <http://squid-cache.org>`_ を使ったすべてのレスポンスのキャッシュをお勧めします。
+開発者が必要とする `Varnish <https://varnish-cache.org>`_ や
+`Squid <https://squid-cache.org>`_ を使ったすべてのレスポンスのキャッシュをお勧めします。
 
 I18n
 ====

@@ -138,7 +138,7 @@ PSR-7 Requests and Responses
 ============================
 
 Middleware and the new HTTP stack are built on top of the `PSR-7 Request
-& Response Interfaces <http://www.php-fig.org/psr/psr-7/>`__. While all
+& Response Interfaces <https://www.php-fig.org/psr/psr-7/>`__. While all
 middleware will be exposed to these interfaces, your controllers, components,
 and views will *not*.
 

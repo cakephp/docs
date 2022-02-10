@@ -54,7 +54,7 @@ IRC 聊天频道
 
 官方论坛
 ========
-`CakePHP 官方论坛 <http://discourse.cakephp.org>`_
+`CakePHP 官方论坛 <https://discourse.cakephp.org>`_
 
 官方论坛提供了一个平台，让我们可以提问，提建议以及谈论任何有关 CakePHP 话题。加入这个论坛，你可以迅速地找到答案，也可以帮助其他人。
 
@@ -71,7 +71,7 @@ Stackoverflow
 巴西
 ----
 
-- `巴西 CakePHP 社区 <http://cakephp-br.org>`_
+- `巴西 CakePHP 社区 <https://cakephp-br.org>`_
 
 丹麦
 ----
@@ -81,7 +81,7 @@ Stackoverflow
 法国
 ----
 
-- `法国 CakePHP 社区 <http://cakephp-fr.org>`_
+- `法国 CakePHP 社区 <https://cakephp-fr.org>`_
 
 德国
 ----
@@ -92,7 +92,7 @@ Stackoverflow
 伊朗
 ----
 
-- `伊朗 CakePHP 社区 <http://cakephp.ir>`_
+- `伊朗 CakePHP 社区 <https://cakephp.ir>`_
 
 荷兰
 ----
@@ -108,19 +108,19 @@ Stackoverflow
 葡萄牙语
 --------
 
-- `葡萄牙 CakePHP Google Group <http://groups.google.com/group/cakephp-pt>`_
+- `葡萄牙 CakePHP Google Group <https://groups.google.com/group/cakephp-pt>`_
 
 西班牙语
 --------
 
 - `西班牙 CakePHP Slack 频道 <https://cakesf.slack.com/messages/spanish/>`_
 - `西班牙 CakePHP IRC 频道 <irc://irc.freenode.net/cakephp-es>`_
-- `西班牙 CakePHP Google Group <http://groups.google.com/group/cakephp-esp>`_
+- `西班牙 CakePHP Google Group <https://groups.google.com/group/cakephp-esp>`_
 
 中国
 ----
 
-- `中国社区 <http://cakephpchina.com/>`_
+- `中国社区 <https://cakephpchina.com/>`_
 
 
 .. meta::

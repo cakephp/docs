@@ -2,7 +2,7 @@
 #####################
 
 Разработчики CakePHP будут использовать руководство по стилю кодирования `PSR-2
-<http://www.php-fig.org/psr/psr-2/>`_ в дополнение к следующим правилам
+<https://www.php-fig.org/psr/psr-2/>`_ в дополнение к следующим правилам
 стандартов кодирования.
 
 Рекомендуется, чтобы и другие, разработчики использовали данные стандарты.
@@ -274,7 +274,7 @@ IDE полностью понимающим, как работают все кл
 -----------------------------
 
 Определение анонимных функций следует из `PSR-2
-<http://www.php-fig.org/psr/psr-2/>`_ руководства по стилю кодирования, где они
+<https://www.php-fig.org/psr/psr-2/>`_ руководства по стилю кодирования, где они
 объявленны пробелом после ключевого слова `function`, и пробелом до и после
 ключевого слова `use`::
 
@@ -299,20 +299,20 @@ IDE полностью понимающим, как работают все кл
 Все комментарии должны быть написаны на английском языке и должны четко описывать
 прокомментированный блок кода.
 
-Комментарии могут включать следующие теги `phpDocumentor <http://phpdoc.org>`_:
+Комментарии могут включать следующие теги `phpDocumentor <https://phpdoc.org>`_:
 
-*  `@author <http://phpdoc.org/docs/latest/references/phpdoc/tags/author.html>`_
-*  `@copyright <http://phpdoc.org/docs/latest/references/phpdoc/tags/copyright.html>`_
-*  `@deprecated <http://phpdoc.org/docs/latest/references/phpdoc/tags/deprecated.html>`_
+*  `@author <https://phpdoc.org/docs/latest/references/phpdoc/tags/author.html>`_
+*  `@copyright <https://phpdoc.org/docs/latest/references/phpdoc/tags/copyright.html>`_
+*  `@deprecated <https://phpdoc.org/docs/latest/references/phpdoc/tags/deprecated.html>`_
    Использование формата ``@version <vector> <description>``, где ``version``
    и ``description`` являются обязательными. Версия относится к той, которая уже устарела.
-*  `@example <http://phpdoc.org/docs/latest/references/phpdoc/tags/example.html>`_
-*  `@ignore <http://phpdoc.org/docs/latest/references/phpdoc/tags/ignore.html>`_
-*  `@internal <http://phpdoc.org/docs/latest/references/phpdoc/tags/internal.html>`_
-*  `@link <http://phpdoc.org/docs/latest/references/phpdoc/tags/link.html>`_
-*  `@see <http://phpdoc.org/docs/latest/references/phpdoc/tags/see.html>`_
-*  `@since <http://phpdoc.org/docs/latest/references/phpdoc/tags/since.html>`_
-*  `@version <http://phpdoc.org/docs/latest/references/phpdoc/tags/version.html>`_
+*  `@example <https://phpdoc.org/docs/latest/references/phpdoc/tags/example.html>`_
+*  `@ignore <https://phpdoc.org/docs/latest/references/phpdoc/tags/ignore.html>`_
+*  `@internal <https://phpdoc.org/docs/latest/references/phpdoc/tags/internal.html>`_
+*  `@link <https://phpdoc.org/docs/latest/references/phpdoc/tags/link.html>`_
+*  `@see <https://phpdoc.org/docs/latest/references/phpdoc/tags/see.html>`_
+*  `@since <https://phpdoc.org/docs/latest/references/phpdoc/tags/since.html>`_
+*  `@version <https://phpdoc.org/docs/latest/references/phpdoc/tags/version.html>`_
 
 Теги PhpDoc очень похожи на теги JavaDoc в Java. Теги обрабатываются только в том случае, если
 они являются первыми в строке DocBlock, например::
@@ -412,7 +412,7 @@ callable
     require_once $class;
 
 При включении файлов с классами или библиотеками используйте вегда только функцию
-`require\_once <http://php.net/require_once>`_.
+`require\_once <https://php.net/require_once>`_.
 
 PHP теги
 ========

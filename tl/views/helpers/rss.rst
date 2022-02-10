@@ -187,7 +187,7 @@ in RSS format. Once you have all this setup, you can test your RSS feed by going
 to your site ``/posts/index.rss`` and you will see your new feed. It is always
 important that you validate your RSS feed before making it live. This can be
 done by visiting sites that validate the XML such as Feed Validator or the w3c
-site at http://validator.w3.org/feed/.
+site at https://validator.w3.org/feed/.
 
 .. note::
 

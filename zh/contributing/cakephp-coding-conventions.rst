@@ -235,20 +235,20 @@ CakePHP 开发人员将使用下面的编码规范。
 
 所有的注释都应该是英文, 并且应该清楚地描述被注释的代码段。
 
-注释可以包括以下`phpDocumentor <http://phpdoc.org>`_标签:
+注释可以包括以下`phpDocumentor <https://phpdoc.org>`_标签:
 
-*  `@author <http://phpdoc.org/docs/latest/references/phpdoc/tags/author.html>`_
-*  `@copyright <http://phpdoc.org/docs/latest/references/phpdoc/tags/copyright.html>`_
-*  `@deprecated <http://phpdoc.org/docs/latest/references/phpdoc/tags/deprecated.html>`_
+*  `@author <https://phpdoc.org/docs/latest/references/phpdoc/tags/author.html>`_
+*  `@copyright <https://phpdoc.org/docs/latest/references/phpdoc/tags/copyright.html>`_
+*  `@deprecated <https://phpdoc.org/docs/latest/references/phpdoc/tags/deprecated.html>`_
    使用格式 ``@version <vector> <description>`` ，其中 ``version``和``description``
    是必须的。
-*  `@example <http://phpdoc.org/docs/latest/references/phpdoc/tags/example.html>`_
-*  `@ignore <http://phpdoc.org/docs/latest/references/phpdoc/tags/ignore.html>`_
-*  `@internal <http://phpdoc.org/docs/latest/references/phpdoc/tags/internal.html>`_
-*  `@link <http://phpdoc.org/docs/latest/references/phpdoc/tags/link.html>`_
-*  `@see <http://phpdoc.org/docs/latest/references/phpdoc/tags/see.html>`_
-*  `@since <http://phpdoc.org/docs/latest/references/phpdoc/tags/since.html>`_
-*  `@version <http://phpdoc.org/docs/latest/references/phpdoc/tags/version.html>`_
+*  `@example <https://phpdoc.org/docs/latest/references/phpdoc/tags/example.html>`_
+*  `@ignore <https://phpdoc.org/docs/latest/references/phpdoc/tags/ignore.html>`_
+*  `@internal <https://phpdoc.org/docs/latest/references/phpdoc/tags/internal.html>`_
+*  `@link <https://phpdoc.org/docs/latest/references/phpdoc/tags/link.html>`_
+*  `@see <https://phpdoc.org/docs/latest/references/phpdoc/tags/see.html>`_
+*  `@since <https://phpdoc.org/docs/latest/references/phpdoc/tags/since.html>`_
+*  `@version <https://phpdoc.org/docs/latest/references/phpdoc/tags/version.html>`_
 
 PhpDoc 标签非常类似于 Java 中的 JavaDoc 标签。标签只有出现在文档块(*DocBlock*)行
 的开头才会起作用, 例如::
@@ -344,7 +344,7 @@ callable
     require_once $class;
 
 当包括类或者库的文件时, 总是只使用
-`require\_once <http://php.net/require_once>`_ 函数。
+`require\_once <https://php.net/require_once>`_ 函数。
 
 PHP 标签
 ========

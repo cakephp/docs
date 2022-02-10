@@ -2,7 +2,7 @@
 ################
 
 CakePHP の開発者はコーディング規約として下記のルールに加え、 `PSR-2 coding style guide
-<http://www.php-fig.org/psr/psr-2/>`_ にも従って頂くことになります。
+<https://www.php-fig.org/psr/psr-2/>`_ にも従って頂くことになります。
 
 その他の CakePHP プラグイン等 (訳注:原文 *CakeIngredients* 、ケーキの材料のこと)
 の開発でも同じ規約に従うことが推奨されます。
@@ -299,7 +299,7 @@ false を、関数呼び出しが成功したかどうかを判定できるよ�
 ------------------------
 
 無名関数の定義は `PSR-2
-<http://www.php-fig.org/psr/psr-2/>`_ コーディングスタイルガイドに従ってください。
+<https://www.php-fig.org/psr/psr-2/>`_ コーディングスタイルガイドに従ってください。
 そこでは `function` キーワードの後ろに空白１つ、 `use` キーワードの前後に空白１つずつが
 必要であると宣言されています。 ::
 
@@ -322,20 +322,20 @@ false を、関数呼び出しが成功したかどうかを判定できるよ�
 
 全てのコメントは英語で書かれ、コードのコメントブロックを明確な方法で記述する必要があります。
 
-コメントは以下の `phpDocumentor <http://phpdoc.org>`_ タグを含めることができます。
+コメントは以下の `phpDocumentor <https://phpdoc.org>`_ タグを含めることができます。
 
-*  `@author <http://phpdoc.org/docs/latest/references/phpdoc/tags/author.html>`_
-*  `@copyright <http://phpdoc.org/docs/latest/references/phpdoc/tags/copyright.html>`_
-*  `@deprecated <http://phpdoc.org/docs/latest/references/phpdoc/tags/deprecated.html>`_
+*  `@author <https://phpdoc.org/docs/latest/references/phpdoc/tags/author.html>`_
+*  `@copyright <https://phpdoc.org/docs/latest/references/phpdoc/tags/copyright.html>`_
+*  `@deprecated <https://phpdoc.org/docs/latest/references/phpdoc/tags/deprecated.html>`_
    ``@version <vector> <description>`` 形式を使用して、 ``version`` と ``description``
    は必須です。バージョンは非推奨のバージョンを示します。
-*  `@example <http://phpdoc.org/docs/latest/references/phpdoc/tags/example.html>`_
-*  `@ignore <http://phpdoc.org/docs/latest/references/phpdoc/tags/ignore.html>`_
-*  `@internal <http://phpdoc.org/docs/latest/references/phpdoc/tags/internal.html>`_
-*  `@link <http://phpdoc.org/docs/latest/references/phpdoc/tags/link.html>`_
-*  `@see <http://phpdoc.org/docs/latest/references/phpdoc/tags/see.html>`_
-*  `@since <http://phpdoc.org/docs/latest/references/phpdoc/tags/since.html>`_
-*  `@version <http://phpdoc.org/docs/latest/references/phpdoc/tags/version.html>`_
+*  `@example <https://phpdoc.org/docs/latest/references/phpdoc/tags/example.html>`_
+*  `@ignore <https://phpdoc.org/docs/latest/references/phpdoc/tags/ignore.html>`_
+*  `@internal <https://phpdoc.org/docs/latest/references/phpdoc/tags/internal.html>`_
+*  `@link <https://phpdoc.org/docs/latest/references/phpdoc/tags/link.html>`_
+*  `@see <https://phpdoc.org/docs/latest/references/phpdoc/tags/see.html>`_
+*  `@since <https://phpdoc.org/docs/latest/references/phpdoc/tags/since.html>`_
+*  `@version <https://phpdoc.org/docs/latest/references/phpdoc/tags/version.html>`_
 
 PhpDoc タグは Java の JavaDoc タグによく似ています。
 タグはドキュメントブロックの行の最初のもののみ処理されます。
@@ -433,7 +433,7 @@ callable
     require_once $class;
 
 クラスまたはライブラリーを伴うファイルを読み込む場合、
-`require\_once <http://php.net/require_once>`_
+`require\_once <https://php.net/require_once>`_
 関数のみを常に使用してください。
 
 PHP タグ

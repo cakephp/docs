@@ -222,7 +222,7 @@ Environment Variables
 
 Many modern cloud providers, like Heroku, let you define environment
 variables for configuration data. You can configure your CakePHP through
-environment variables in the `12factor app style <http://12factor.net/>`_.
+environment variables in the `12factor app style <https://12factor.net/>`_.
 Environment variables allow your application to require less state making your
 application easier to manage when it is deployed across a number of
 environments.
@@ -375,7 +375,7 @@ CakePHP comes with two built-in configuration file engines.
 :php:class:`Cake\\Core\\Configure\\Engine\\PhpConfig` is able to read PHP config
 files, in the same format that Configure has historically read.
 :php:class:`Cake\\Core\\Configure\\Engine\\IniConfig` is able to read ini config
-files.  See the `PHP documentation <http://php.net/parse_ini_file>`_ for more
+files.  See the `PHP documentation <https://php.net/parse_ini_file>`_ for more
 information on the specifics of ini files.  To use a core config engine, you'll
 need to attach it to Configure using :php:meth:`Configure::config()`::
 

@@ -27,8 +27,8 @@ CakePHP の修正に取りかかる前に自分の環境を整えることをお
 
 CakePHP のソースコードの clone を GitHub から取得してください。
 
-* `GitHub <http://github.com>`_ アカウントを持っていないなら、作成してください。
-* `CakePHP リポジトリー <http://github.com/cakephp/cakephp>`_ の **Fork**
+* `GitHub <https://github.com>`_ アカウントを持っていないなら、作成してください。
+* `CakePHP リポジトリー <https://github.com/cakephp/cakephp>`_ の **Fork**
   ボタンをクリックして Fork してください。
 
 Fork できたら、Fork したものを自分のローカルマシンへと clone してください。 ::
@@ -130,9 +130,9 @@ Pull Request を作る際には、ベースとなるブランチが正しく選�
 
     あなたが貢献したすべてのコードは MIT License に基づき CakePHP にライセンスされることを
     覚えておいてください。 `Cake Software Foundation
-    <http://cakefoundation.org/pages/about>`_ がすべての貢献されたコードの所有者になります。
+    <https://cakefoundation.org/pages/about>`_ がすべての貢献されたコードの所有者になります。
     貢献する人は `CakePHP Community Guidelines
-    <http://community.cakephp.org/guidelines>`_ に従うようお願いします。
+    <https://community.cakephp.org/guidelines>`_ に従うようお願いします。
 
 メンテナンス・ブランチへとマージされたすべてのバグ修正は、
 コアチームにより定期的に次期リリースにもマージされます。

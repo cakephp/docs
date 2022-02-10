@@ -2,7 +2,7 @@ Estándares de codificación
 ##########################
 
 Los desarrolladores de CakePHP deberán utilizar la `Guia de estilo de codificación PSR-2
-<http://www.php-fig.org/psr/psr-2/>`_ además de las siguientes normas como estándares
+<https://www.php-fig.org/psr/psr-2/>`_ además de las siguientes normas como estándares
 de codificación.
 
 Es recomendable que otos *CakeIngredients* que se desarrollen sigan los mismos
@@ -279,7 +279,7 @@ Funciones anónimas (``Closures``)
 ---------------------------------
 
 Para definir funciones anónimas sigue la guía de estilo de código
-`PSR-2 <http://www.php-fig.org/psr/psr-2/>`_ , donde se declaran con un espacio
+`PSR-2 <https://www.php-fig.org/psr/psr-2/>`_ , donde se declaran con un espacio
 después de la palabra ``function`` y antes y después de la palabra ``use``::
 
     $closure = function ($arg1, $arg2) use ($var1, $var2) {
@@ -304,20 +304,20 @@ Todos los comentarios deberán ir escritos en inglés y describir de un modo cla
 el bloque de código comentado.
 
 Los comentarios pueden incluir las siguientes etiquetas de
-`phpDocumentor <http://phpdoc.org>`_:
+`phpDocumentor <https://phpdoc.org>`_:
 
-*  `@author <http://phpdoc.org/docs/latest/references/phpdoc/tags/author.html>`_
-*  `@copyright <http://phpdoc.org/docs/latest/references/phpdoc/tags/copyright.html>`_
-*  `@deprecated <http://phpdoc.org/docs/latest/references/phpdoc/tags/deprecated.html>`_
+*  `@author <https://phpdoc.org/docs/latest/references/phpdoc/tags/author.html>`_
+*  `@copyright <https://phpdoc.org/docs/latest/references/phpdoc/tags/copyright.html>`_
+*  `@deprecated <https://phpdoc.org/docs/latest/references/phpdoc/tags/deprecated.html>`_
    Usando el formato ``@version <vector> <description>``, donde ``version``
    y ``description`` son obligatorios.
-*  `@example <http://phpdoc.org/docs/latest/references/phpdoc/tags/example.html>`_
-*  `@ignore <http://phpdoc.org/docs/latest/references/phpdoc/tags/ignore.html>`_
-*  `@internal <http://phpdoc.org/docs/latest/references/phpdoc/tags/internal.html>`_
-*  `@link <http://phpdoc.org/docs/latest/references/phpdoc/tags/link.html>`_
-*  `@see <http://phpdoc.org/docs/latest/references/phpdoc/tags/see.html>`_
-*  `@since <http://phpdoc.org/docs/latest/references/phpdoc/tags/since.html>`_
-*  `@version <http://phpdoc.org/docs/latest/references/phpdoc/tags/version.html>`_
+*  `@example <https://phpdoc.org/docs/latest/references/phpdoc/tags/example.html>`_
+*  `@ignore <https://phpdoc.org/docs/latest/references/phpdoc/tags/ignore.html>`_
+*  `@internal <https://phpdoc.org/docs/latest/references/phpdoc/tags/internal.html>`_
+*  `@link <https://phpdoc.org/docs/latest/references/phpdoc/tags/link.html>`_
+*  `@see <https://phpdoc.org/docs/latest/references/phpdoc/tags/see.html>`_
+*  `@since <https://phpdoc.org/docs/latest/references/phpdoc/tags/since.html>`_
+*  `@version <https://phpdoc.org/docs/latest/references/phpdoc/tags/version.html>`_
 
 Las etiquetas PhpDoc son muy similares a las etiquetas JavaDoc en Java. Las etiquetas
 solo son procesadas si son el primer elemento en una línea DocBlock, por ejemplo::
@@ -417,7 +417,7 @@ Incluir archivos
     require_once $class;
 
 Cuando se incluyan archivos con clases o librerías usa siempre y únicamente la
-función `require\_once <http://php.net/require_once>`_.
+función `require\_once <https://php.net/require_once>`_.
 
 Etiquetas PHP
 =============

@@ -23,7 +23,7 @@ namespace, when plugins are loaded.
 Installing a Plugin With Composer
 =================================
 
-Many plugins are available on `Packagist <http://packagist.org>`_
+Many plugins are available on `Packagist <https://packagist.org>`_
 and can be installed with ``Composer``. To install DebugKit, you
 would do the following::
 

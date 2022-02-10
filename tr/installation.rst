@@ -34,7 +34,7 @@ CakePHP'yi kurmak
 =================
 
 CakePHP resmi olarak desteklenen kurulum aracı olarak PHP 5.3+
-için bağımlılık yönetici aracı olan `Composer <http://getcomposer.org>`
+için bağımlılık yönetici aracı olan `Composer <https://getcomposer.org>`
 kullanmaktadır.
 
 İlk olarak eğer yapmadıysanız, Composer'i indirip kurmalısınız. Eğer
@@ -208,7 +208,7 @@ First look at your httpd.conf. (Make sure you are editing the system
 httpd.conf rather than a user- or site-specific httpd.conf.)
 
 These files can vary between different distributions and Apache versions.  You
-may also take a look at http://wiki.apache.org/httpd/DistrosDefaultLayout for
+may also take a look at https://wiki.apache.org/httpd/DistrosDefaultLayout for
 further information.
 
 #. Make sure that an .htaccess override is allowed and that
@@ -283,7 +283,7 @@ further information.
        </Directory>
 
    On macOS, another solution is to use the tool
-   `virtualhostx <http://clickontyler.com/virtualhostx/>`_
+   `virtualhostx <https://clickontyler.com/virtualhostx/>`_
    to make a Virtual Host to point to your folder.
 
    For many hosting services (GoDaddy, 1and1), your web server is
@@ -375,8 +375,8 @@ add-ons that can add this support, you can also import htaccess
 rules into IIS to use CakePHP's native rewrites. To do this, follow
 these steps:
 
-#. Use `Microsoft's Web Platform Installer <http://www.microsoft.com/web/downloads/platform.aspx>`_ to install the URL
-   `Rewrite Module 2.0 <http://www.iis.net/downloads/microsoft/url-rewrite>`_ or download it directly (`32-bit <http://www.microsoft.com/en-us/download/details.aspx?id=5747>`_ / `64-bit <http://www.microsoft.com/en-us/download/details.aspx?id=7435>`_).
+#. Use `Microsoft's Web Platform Installer <https://www.microsoft.com/web/downloads/platform.aspx>`_ to install the URL
+   `Rewrite Module 2.0 <https://www.iis.net/downloads/microsoft/url-rewrite>`_ or download it directly (`32-bit <https://www.microsoft.com/en-us/download/details.aspx?id=5747>`_ / `64-bit <https://www.microsoft.com/en-us/download/details.aspx?id=7435>`_).
 #. Create a new file called web.config in your CakePHP root folder.
 #. Using Notepad or any XML-safe editor, copy the following
    code into your new web.config file::
@@ -434,8 +434,8 @@ This will make your URLs look like
 www.example.com/index.php/controllername/actionname/param rather
 than www.example.com/controllername/actionname/param.
 
-.. _GitHub: http://github.com/cakephp/cakephp
-.. _Composer: http://getcomposer.org
+.. _GitHub: https://github.com/cakephp/cakephp
+.. _Composer: https://getcomposer.org
 
 .. meta::
     :title lang=tr: Installation
