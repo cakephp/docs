@@ -96,6 +96,8 @@ Exception handling offers several ways to tailor how exceptions are handled.  Ea
 approach gives you different amounts of control over the exception handling
 process.
 
+#. *Listen to events* This allows you to be notified through CakePHP events when
+   errors and exceptions have been handled.
 #. *Custom error templates* This allows you to change the rendered view
    templates as you would any other template in your application.
 #. *Custom ErrorController* This allows you to control how exception
@@ -104,6 +106,26 @@ process.
    pages and logging are performed.
 #. *Create & register your own error handler* This gives you complete
    control over how errors & exceptions are handled, logged and rendered.
+
+Listen to Events
+================
+
+The ``ErrorTrap`` and ``ExceptionTrap`` handlers will trigger CakePHP events
+when they handle errors. You can listen to the ``Error.handled`` event to be
+notified of PHP errors. The ``Exception.handled`` event is dispatched when an
+exception is handled::
+
+    $errorTrap = new ErrorTrap(Configure::read('Error'));
+    $errorTrap->getEventManager()->on(
+        'Error.handled',
+        function (EventInterface $event, PhpError $error) {
+            // do your thing
+        }
+    );
+
+.. versionadded:: 4.4.0
+    Error and Exception events were added.
+
 
 .. _error-views:
 
