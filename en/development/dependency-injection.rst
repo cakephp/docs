@@ -1,10 +1,6 @@
 Dependency Injection
 ####################
 
-.. warning::
-    The Dependency Injection container is an experimental feature that is not
-    API stable yet.
-
 The CakePHP service container enables you to manage class dependencies for your
 application services through dependency injection. Dependency injection
 automatically "injects" an object's dependencies via the constructor without
@@ -34,6 +30,12 @@ A short example would be::
         }
     }
 
+    // In src/Application.php
+    public function services(ContainerInterface $container): void
+    {
+        $container->add(UsersService::class);
+    }
+
 In this example, the ``UsersController::ssoCallback()`` action needs to fetch
 a user from a Single-Sign-On provider and ensure it exists in the local
 database. Because this service is injected into our controller, we can easily
@@ -48,33 +50,33 @@ Here is an example of an injected service inside a command::
         /** @var UsersService */
         public $users;
 
-        public function __construct(UsersService $users) 
+        public function __construct(UsersService $users)
         {
             parent::__construct();
             $this->users = $users;
         }
 
-        public function execute( Arguments $args, ConsoleIo $io ) 
+        public function execute( Arguments $args, ConsoleIo $io )
         {
             $valid = $this->users->check('all');
         }
-    
+
     }
-    
+
     // In src/Application.php
-    public function services( ContainerInterface $container ): void 
+    public function services( ContainerInterface $container ): void
     {
         $container
             ->add(CheckUsersCommand::class)
             ->addArgument(UsersService::class);
+        $container->add(UsersService::class);
     }
-    
-The injection process is a bit different here. Instead of adding the 
+
+The injection process is a bit different here. Instead of adding the
 ``UsersService`` to the container we first have to add the Command as
 a whole to the Container and add the ``UsersService`` as an argument.
-With that you can then access that service inside the constructor 
+With that you can then access that service inside the constructor
 of the command.
-
 
 Adding Services
 ===============
@@ -185,7 +187,7 @@ injectable configuration reader::
 
     use Cake\Core\ServiceConfig;
 
-    // Use a shared instance 
+    // Use a shared instance
     $container->share(ServiceConfig::class);
 
 The ``ServiceConfig`` class provides a read-only view of all the data available
@@ -287,3 +289,24 @@ stubs::
 Any defined mocks will be replaced in your application's container during
 testing, and automatically injected into your controllers and commands. Mocks
 are cleaned up at the end of each test.
+
+Auto Wiring
+===============
+
+Auto Wiring is turned off by default. To enable it::
+
+    // In src/Application.php
+    public function services(ContainerInterface $container): void
+    {
+        $container->delegate(
+            new \League\Container\ReflectionContainer()
+        );
+    }
+
+While your dependencies will now be resolved automatically, this approach will not cache resolutions which can be detrimental to performance. To enable caching::
+
+    $container->delegate(
+        new \League\Container\ReflectionContainer(true) // or consider using the value of Configure::read('debug')
+    );
+
+Read more about auto wiring in the `PHP League Container documentation <https://container.thephpleague.com/4.x/auto-wiring/>`_.

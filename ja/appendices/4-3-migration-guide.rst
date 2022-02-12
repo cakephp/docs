@@ -16,7 +16,7 @@ CakePHP 4.3.0にアップグレードするには、次の Composer コマンド
 
 4.3では、いくつかの非推奨機能が導入されています。
 これらの機能はすべて 4.x の間は継続されますが、5.0 で削除されます。
-非推奨機能の更新を自動化するには、`upgrade tool <upgrade-tool-use>` を使用します。::
+非推奨機能の更新を自動化するには、 :ref:`upgrade tool <upgrade-tool-use>` を使用します。::
 
     bin/cake upgrade rector --rules cakephp43 <path/to/app/src>
 
@@ -24,7 +24,7 @@ CakePHP 4.3.0にアップグレードするには、次の Composer コマンド
     これはCakePHP 4.3の変更点のみを更新します。CakePHP 4.2の変更を最初に適用していることを確認してください。
 
 新しい設定オプションが追加され、パスごとに非推奨を無効にすることができるようになりました。
-詳細は `deprecation-warnings` を参照してください。
+詳細は :ref:`deprecation-warnings` を参照してください。
 
 Connection
 ----------
@@ -42,7 +42,7 @@ Database
 --------
 
 - 可変のdatetimeクラスを ``DateTimeType`` やその他の時間関連の型クラスで使用することは、非推奨となります。
-  そのため、他の型クラスのメソッドである ``DatetimeType::useMutable()``, ``DatetimeType::useImmutable()`` や
+  そのため、他の型クラスのメソッドである ``DateTimeType::useMutable()``, ``DateTimeType::useImmutable()`` や
   同様のメソッドは非推奨となります。
 - ``DriverInterface`` で定義された機能定数を受け付ける ``DriverInterface::supports()`` を採用している
   ``DriverInterface::supportsQuoting()`` および ``DriverInterface::supportSavepoints()`` は現在、非推奨となっています。
@@ -90,9 +90,9 @@ ORM
 - バリデータオブジェクトを ``Table::save()`` の ``validate`` オプションに渡すことは、非推奨です。
   バリデーターはテーブルクラス内で定義するか、代わりに ``setValidator()`` を使用してください。
 - ``Association::setName()`` は非推奨です。
-  アソシエーションの名前は、アソシエーションが の時に定義しなければなりません。
+  アソシエーション名は、アソシエーションが存在するときに定義されるべきです。
 - ``QueryExpression::addCase()`` は非推奨です。代わりに ``case()`` を使用してください。
-  また、 ``[['value' => 'literal']`` および ``[['column' => 'identifier']`` の構文は、新しい流暢なケースビルダーではサポートされていません。
+  また、 ``['value' => 'literal']`` および ``['column' => 'identifier']`` の構文は、新しい流暢なケースビルダーではサポートされていません。
 
 Routing
 -------
@@ -217,7 +217,7 @@ Controller
 ----------
 
 - ``Controller::middleware()`` が追加され、単一のコントローラに対してのみミドルウェアを定義することができるようになりました。
-  詳しくは `controller-middleware` をご覧ください。
+  詳しくは :ref:`controller-middleware` をご覧ください。
 - コントローラでは、アクションパラメータに ``float``, ``int``, ``bool``, ``array`` のいずれかの型宣言をサポートするようになりました。
   ブール型で渡されるパラメータは、 ``0`` か ``1`` のどちらかでなければなりません。
 
@@ -241,10 +241,10 @@ Database
 * ログに記録されるクエリは、postgres、sqlite、mysql の各ドライバで
   ``TRUE`` と ``FALSE`` を使用するようになりました。
   これにより、クエリをコピーして対話型プロンプトで実行することが容易になりました。
-* ``DatetimeType`` では、リクエストデータをユーザーのタイムゾーンから
+* ``DateTimeType`` では、リクエストデータをユーザーのタイムゾーンから
   アプリケーションのタイムゾーンに変換できるようになりました。
-  詳しくは `converting-request-data-from-user-timezone` をご覧ください。
-* ``JsonType::setEncodingOptions()``が追加されました。
+  詳しくは :ref:`converting-request-data-from-user-timezone` をご覧ください。
+* ``JsonType::setEncodingOptions()`` が追加されました。
   このメソッドでは、データを永続化する際にORMがJSONをシリアライズする際の
   ``json_encode()`` オプションを定義することができます。
 * すべての機能チェックをひとつの関数にまとめた ``DriverInterface::sets()`` を追加しました。
@@ -279,7 +279,7 @@ Log
 
 - ログエンジンは、書き込む前にメッセージ文字列をフォーマットするためにフォーマッタを使用するようになりました。
   これは ``formatter`` 設定オプションで設定できます。
-  詳細は `logging-formatters` のセクションを参照してください。
+  詳細は :ref:`logging-formatters` のセクションを参照してください。
 - ``JsonFormatter`` が追加され、任意のログエンジンの ``formatter`` オプションとして設定できるようになりました。
 
 ORM
@@ -304,7 +304,7 @@ TestSuite
 - ``IntegrationTestTrait::enableCsrfToken()`` において、
   カスタムのCSRFクッキー/セッションキー名を使用できるようになりました。
 - HTTPモックを簡単に書けるように ``HttpClientTrait`` を追加しました。
-  詳細は `httpclient-testing` を参照してください。
+  詳細は :ref:`httpclient-testing` を参照してください。
 - 新しいフィクスチャシステムが導入されました。
   このフィクスチャシステムはスキーマとデータを分離し、既存のマイグレーションを再利用してテストスキーマを定義することができます。
   アップグレードの方法は :doc:`./fixture-upgrade` ガイドで説明しています。

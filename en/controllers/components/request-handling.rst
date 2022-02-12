@@ -3,6 +3,10 @@ Request Handling
 
 .. php:class:: RequestHandlerComponent(ComponentCollection $collection, array $config = [])
 
+.. deprecated:: 4.4.0
+    The ``RequestHandlerComponent`` is deprecated. See the
+   :doc:`/appendices/4-4-migration-guide` for how to upgrade your application.
+
 The Request Handler component is used in CakePHP to obtain additional
 information about the HTTP requests that are made to your application. You can
 use it to see what content types clients prefer, automatically parse request
@@ -167,6 +171,10 @@ automatically by using the ``viewClassMap`` setting::
             ]
         ]);
     }
+
+.. deprecated:: 4.4.0
+    Instead of defining ``viewClassMap`` you should use
+    :ref:`controller-viewclasses` instead.
 
 .. meta::
     :title lang=en: Request Handling

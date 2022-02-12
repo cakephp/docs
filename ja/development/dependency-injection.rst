@@ -1,9 +1,6 @@
 依存性の注入(DI)
 ####################
 
-.. warning::
-    DIコンテナはAPIがまだ安定していない実験的な特徴になります。
-
 CakePHPのサービスコンテナは依存性の注入(DI)によりアプリケーションのサービスのためのクラス依存性を管理できます。
 DIは手動でインスタンス化することなく、自動でコンストラクタを通してオブジェクトの依存性を"注入"します。
 
@@ -41,21 +38,21 @@ CakePHPはコントローラーでアクションを呼ぶ際サービスコン�
         /** @var UsersService */
         public $users;
 
-        public function __construct(UsersService $users) 
+        public function __construct(UsersService $users)
         {
             parent::__construct();
             $this->users = $users;
         }
 
-        public function execute( Arguments $args, ConsoleIo $io ) 
+        public function execute( Arguments $args, ConsoleIo $io )
         {
             $valid = $this->users->check('all');
         }
-    
+
     }
-    
+
     // In src/Application.php
-    public function services( ContainerInterface $container ): void 
+    public function services( ContainerInterface $container ): void
     {
         $container
             ->add(CheckUsersCommand::class)

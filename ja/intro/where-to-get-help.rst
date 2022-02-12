@@ -107,7 +107,7 @@ Stack Overflow の既存ユーザーが質問を見つけやすくするため�
 Iranian
 -------
 
-- `Iranian CakePHP Community <http://cakephp.ir>`_
+- `Iranian CakePHP Community <https://cakephp.ir>`_
 
 Dutch
 -----

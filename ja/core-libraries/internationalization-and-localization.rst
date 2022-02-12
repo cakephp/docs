@@ -580,24 +580,23 @@ ORM で返されるデフォルトの日付では結果は ``Cake\I18n\Time`` �
 
 .. _converting-request-data-from-user-timezone:
 
-Converting Request Data from the User's Timezone
-------------------------------------------------
+リクエストデータをユーザーのタイムゾーンから変換する
+----------------------------------------------------
 
-When handling data from users in different timezones you will need to convert
-the datetimes in request data into your application's timezone. You can use
-``setUserTimezone()`` from a controller or :doc:`/controllers/middleware` to
-make this process simpler::
+様々なタイムゾーンのユーザーからのデータを扱う場合には、
+リクエストデータにおける日時をアプリケーションのタイムゾーンへ変換する必要が出てきます。
+この処理を簡単にするために、
+コントローラーもしくは :doc:`/controllers/middleware` の ``setUserTimezone()`` を使うことができます::
 
-    // Set the user's timezone
+    // ユーザーのタイムゾーンを設定する
     TypeFactory::build('datetime')->setUserTimezone($user->timezone);
 
-Once set, when your application creates or updates entities from request data,
-the ORM will automatically convert datetime values from the user's timezone into
-your application's timezone. This ensures that your application is always
-working in the timezone defined in ``App.defaultTimezone``.
+いったん設定をすると、アプリケーションがリクエストデータからエンティティーを作成もしくは更新をする時に、
+ORM が日時の値をユーザーのタイムゾーンからアプリケーションのタイムゾーンへ自動で変換します。
+これは、常にアプリケーションが ``App.defaultTimezone`` で定義されたタイムゾーンで動作することを保証します。
 
-If your application handles datetime information in a number of actions you can
-use a middleware to define both timezone conversion and locale parsing::
+あなたのアプリケーションが様々なアクションにおける日時の情報を扱う場合、
+ミドルウェアを使ってタイムゾーンの変換とロケールのパースの両方を設定することができます::
 
     namespace App\Middleware;
 
@@ -613,8 +612,8 @@ use a middleware to define both timezone conversion and locale parsing::
             ServerRequestInterface $request,
             RequestHandlerInterface $handler
         ): ResponseInterface {
-            // Get the user from the request.
-            // This example assumes your user entity has a timezone attribute.
+            // リクエストからユーザーを取得
+            // この例では、ユーザーエンティティーにタイムゾーン属性があるものと仮定
             $user = $request->getAttribute('identity');
             if ($user) {
                 TypeFactory::build('datetime')
@@ -627,7 +626,7 @@ use a middleware to define both timezone conversion and locale parsing::
     }
 
 .. versionadded:: 4.3.0
-    The ``setUserTimezone()`` method was added.
+    ``setUserTimezone()`` メソッドが追加されました。
 
 自動でリクエストデータに基づいたロケールを選択する
 ==================================================
@@ -651,10 +650,11 @@ use a middleware to define both timezone conversion and locale parsing::
 自動的に設定します。どのロケールが自動で使われるかを制限するロケールリストオプションを使用することが
 できます。
 
-Translate Content/Entities
-==========================
+コンテンツ／エンティティーの翻訳
+================================
 
-If you want to translate content/entities then you should look at the :doc:`Translate Behavior </orm/behaviors/translate>`.
+コンテンツ／エンティティーを翻訳したい場合には、
+:doc:`Translate Behavior </orm/behaviors/translate>` をご覧ください。
 
 .. meta::
    :title lang=ja: 国際化と地域化
