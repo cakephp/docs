@@ -219,9 +219,9 @@ Enlaces externos
 
 Los enlaces a documentos externos pueden hacerse de la siguiente manera::
 
-    `Enlace externo a php.net <http://php.net>`_
+    `Enlace externo a php.net <https://php.net>`_
 
-El resultado debería verse así: `Enlace externo a php.net <http://php.net>`_
+El resultado debería verse así: `Enlace externo a php.net <https://php.net>`_
 
 Enlaces a otras páginas
 ~~~~~~~~~~~~~~~~~~~~~~~

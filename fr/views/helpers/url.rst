@@ -45,7 +45,7 @@ URL avec une extension::
 
 URL (commençant par '/') avec le chemin complet::
 
-    echo $this->Url->build('/posts', true);
+    echo $this->Url->build('/posts', ['fullBase' => true]);
 
     // Affiche
     http://somedomain.com/posts

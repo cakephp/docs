@@ -49,7 +49,7 @@ Arquivos de Idiomas
 
 Traduções podem ser disponibilizados usando arquivos de idiomas armazenados na
 aplicação. O formato padrão para arquivos de tradução do CakePHP é o formato
-`Gettext <http://en.wikipedia.org/wiki/Gettext>`_. Os arquivos precisam ser
+`Gettext <https://en.wikipedia.org/wiki/Gettext>`_. Os arquivos precisam ser
 colocado dentro do Diretório **resources/locales/** e dentro deste diretório, deve
 haver uma subpasta para cada idioma, por exemplo::
 
@@ -203,7 +203,7 @@ adequadamente::
     __("This variable ''{0}'' be replaced.", 'will');
 
 Estas funções tiram vantagem do
-`UTI MessageFormatter <http://php.net/manual/en/messageformatter.format.php>`_
+`UTI MessageFormatter <https://php.net/manual/en/messageformatter.format.php>`_
 para que possa traduzir mensagens e localizar datas, números e moeda, ao mesmo
 tempo::
 
@@ -342,7 +342,7 @@ Você pode fazer::
     zero{No Results} one{One result} few{...} many{...} other{...}
 
 Certifique-se de ler a
-`Language Plural Rules Guide <http://www.unicode.org/cldr/charts/latest/supplemental/language_plural_rules.html>`_
+`Language Plural Rules Guide <https://www.unicode.org/cldr/charts/latest/supplemental/language_plural_rules.html>`_
 para obter uma visão completa dos aliases que você pode usar para cada idioma.
 
 Usando Gettext para Seleção de Plural

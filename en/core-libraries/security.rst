@@ -20,7 +20,7 @@ Encrypt ``$text`` using AES-256. The ``$key`` should be a value with a
 lots of variance in the data much like a good password. The returned result
 will be the encrypted value with an HMAC checksum.
 
-The `openssl <http://php.net/openssl>`_ extension is required for encrypting/decrypting.
+The `openssl <https://php.net/openssl>`_ extension is required for encrypting/decrypting.
 
 An example use would be::
 

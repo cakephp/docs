@@ -2,7 +2,7 @@ Testing
 #######
 
 CakePHP fournit un support de test intégré compréhensible. CakePHP permet
-l'intégration de `PHPUnit <http://phpunit.de>`_. En plus de toutes les
+l'intégration de `PHPUnit <https://phpunit.de>`_. En plus de toutes les
 fonctionnalités offertes par PHPUnit, CakePHP offre quelques fonctionnalités
 supplémentaires pour faciliter le test. Cette section va couvrir l'installation
 de PHPUnit, comment commencer avec le Test Unitaire, et comment vous pouvez
@@ -15,8 +15,8 @@ CakePHP utilise PHPUnit comme framework de test sous-jacent. PHPUnit est le
 standard de-facto pour le test unitaire dans PHP. Il offre un ensemble de
 fonctionnalités profondes et puissantes pour s'assurer que votre code fait ce
 que vous pensez qu'il doit faire. PHPUnit peut être installé avec le `PHAR
-package <http://phpunit.de/#download>`__ ou avec
-`Composer <http://getcomposer.org>`_.
+package <https://phpunit.de/#download>`__ ou avec
+`Composer <https://getcomposer.org>`_.
 
 Installer PHPUnit avec Composer
 -------------------------------
@@ -58,7 +58,7 @@ lancer vos tests:
           phpunit --version
 
     Référez vous à la documentation de PHPUnit pour les instructions concernant
-    `l'installation globale du PHAR PHPUnit sur Windows <http://phpunit.de/manual/current/en/installation.html#installation.phar.windows>`__.
+    `l'installation globale du PHAR PHPUnit sur Windows <https://phpunit.de/manual/current/en/installation.html#installation.phar.windows>`__.
 
 Tester la Configuration de la Base de Données
 =============================================
@@ -863,7 +863,7 @@ maintenant à ceci::
         {
             $query = $this->Articles->find('published')->all();
             $this->assertInstanceOf('Cake\ORM\Query', $query);
-            $result = $query->hydrate(false)->toArray();
+            $result = $query->enableHydration(false)->toArray();
             $expected = [
                 ['id' => 1, 'title' => 'First Article'],
                 ['id' => 2, 'title' => 'Second Article'],
@@ -1134,7 +1134,7 @@ permettra de simuler les en-têtes d'une demande d'authentification réelle.
 
 Lorsque vous testez l'authentification simple (Basic) ou de type "Digest", vous
 pouvez ajouter les variables d'environnement que PHP crée
-`<http://php.net/manual/fr/features.http-auth.php> `_ automatiquement.
+`<https://php.net/manual/fr/features.http-auth.php> `_ automatiquement.
 Ces variables d'environnement utilisées dans l'adaptateur d'authentification sont
 décrites dans: ref: `basic-authentication` ::
 

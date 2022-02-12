@@ -510,7 +510,7 @@ Will output:
 You can append the script tag to a specific block using the ``block``
 option::
 
-    echo $this->Html->script('wysiwyg', ['block' => 'scriptBottom']);
+    $this->Html->script('wysiwyg', ['block' => 'scriptBottom']);
 
 In your layout you can output all the script tags added to 'scriptBottom'::
 

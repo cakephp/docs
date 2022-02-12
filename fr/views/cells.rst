@@ -254,3 +254,23 @@ favoris d'un utilisateur::
 
 La cell ci-dessus va paginer le model ``Messages`` en utilisant les
 :ref:`paramètres de pagination 'scopés' <paginating-multiple-queries>`.
+
+Utiliser des Helpers dans une Cell
+==================================
+
+Les cells ont leur propre contexte et leur propre instance View, mais les
+helpers chargés dans ``AppView::initialize()`` restent chargés comme d'habitude.
+
+Pour charger un Helper spécifique uniquement pour une Cell spécifique, procédez
+de la façon suivante::
+
+    namespace App\View\Cell;
+
+    use Cake\View\Cell;
+
+    class FavoritesCell extends Cell
+    {
+        public function initialize(): void {
+            $this->viewBuilder()->addHelper('MonHelperPersonnalise');
+        }
+    }

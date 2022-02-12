@@ -83,8 +83,7 @@ UNIX タイムスタンプとして解釈されます。
 操作
 ====
 
-Remember, ``FrozenTime`` instance always return a new instance from setters
-instead of modifying itself::
+``FrozenTime`` インスタンスは、それ自体を変更するのではなく、常にセッターから新しいインスタンスを返すことを忘れないでください。 ::
 
     $time = FrozenTime::now();
 
@@ -107,8 +106,7 @@ PHP のビルトインの ``DateTime`` クラスで提供されているメソ�
     // Outputs '2021-01-31 22:11:30'
     echo $time->i18nFormat('yyyy-MM-dd HH:mm:ss');
 
-You can create another instance with modified dates, through subtraction and
-addition of their components::
+コンポーネントの減算と加算により、日付が変更された別のインスタンスを作成できます。 ::
 
     $time = FrozenTime::create(2021, 1, 31, 22, 11, 30);
     $newTime = $time->subDays(5)
@@ -122,7 +120,7 @@ addition of their components::
     // Outputs '2/26/21, 8:11 PM'
     echo $newTime;
 
-You can get the internal components of a date by accessing its properties::
+プロパティにアクセスすることで、日付の内部コンポーネントを取得できます。 ::
 
     $time = FrozenTime::create(2021, 1, 31, 22, 11, 30);
     echo $time->year; // 2021
@@ -155,7 +153,7 @@ You can get the internal components of a date by accessing its properties::
     このメソッドは静的に呼び出されなくてはなりません。
 
 .. versionchanged:: 4.1.0
-    The ``callable`` parameter type was added.
+    ``callable`` パラメータタイプが追加されました。
 
 
 .. php:method:: i18nFormat($format = null, $timezone = null, $locale = null)
@@ -182,7 +180,7 @@ CakePHP は snap を作成します。 ::
 
 文字列が表示される希望のフォーマットを特定することも可能です。
 この関数に第1引数として `IntlDateFormatter 定数
-<http://www.php.net/manual/ja/class.intldateformatter.php>`_ を渡したり、
+<https://www.php.net/manual/ja/class.intldateformatter.php>`_ を渡したり、
 あるいは以下のリソースで指定されている ICU の日付フルフォーマット文字列を渡すことができます:
 https://unicode-org.github.io/icu/userguide/format_parse/datetime/#datetime-format-syntax.
 
@@ -205,7 +203,7 @@ https://unicode-org.github.io/icu/userguide/format_parse/datetime/#datetime-form
 
 .. note::
    IntlDateFormatter::FULL のような文字列定数のために Intl は ICU ライブラリーを使用します。
-   そのライブラリーは、 CLDR (http://cldr.unicode.org/) からデータを取り入れています。
+   そのライブラリーは、 CLDR (https://cldr.unicode.org/) からデータを取り入れています。
    ライブラリーのバージョンは、 PHP のインストールにとても依存し、バージョンにより異なる結果を返します。
 
 .. php:method:: nice()
@@ -237,7 +235,7 @@ https://unicode-org.github.io/icu/userguide/format_parse/datetime/#datetime-form
 --------------------------------------------------
 
 ``nice`` や ``i18nFormat`` を利用している際に表示される日付のデフォルトのロケールは、
-`intl.default_locale <http://www.php.net/manual/en/intl.configuration.php#ini.intl.default-locale>`_ の指令です。
+`intl.default_locale <https://www.php.net/manual/en/intl.configuration.php#ini.intl.default-locale>`_ の指令です。
 しかしながら、このデフォルト値は実行時にも変更できます。 ::
 
     Time::setDefaultLocale('es-ES'); // 可変の DateTime 用
@@ -333,8 +331,7 @@ https://unicode-org.github.io/icu/userguide/format_parse/datetime/#datetime-form
 
 .. php:method:: isWithinNext($interval)
 
-You can see if a ``FrozenTime`` instance falls within a given range using
-``wasWithinLast()`` and ``isWithinNext()``::
+``wasWithinLast()`` および ``isWithinNext()`` を使用して ``FrozenTime`` インスタンスが特定の範囲内にあるかどうかを確認できます。 ::
 
     $time = new FrozenTime('+3 days');
 
@@ -346,7 +343,7 @@ You can see if a ``FrozenTime`` instance falls within a given range using
 
 .. php:method:: wasWithinLast($interval)
 
-You can also compare a ``FrozenTime`` instance within a range in the past::
+過去の範囲内の ``FrozenTime`` インスタンスと比較することもできます。 ::
 
     $time = new FrozenTime('-72 hours');
 
@@ -366,10 +363,9 @@ FrozenDate
 
 .. php:class: FrozenDate
 
-The immutable ``FrozenDate`` class in CakePHP implements the same API and methods as
-:php:class:`Cake\\I18n\\FrozenTime` does. The main difference between ``FrozenTime`` and
-``FrozenDate`` is that ``FrozenDate`` does not track time components.
-As an example::
+CakePHP の不変の ``FrozenDate`` クラスは :php:class:`Cake\\I18n\\FrozenTime` と同じAPIとメソッドを実装しています。
+``FrozenTime`` と ``FrozenDate`` の主な違いは、 ``FrozenDate`` が時間コンポーネントを追跡しないことです。
+以下のコードをご覧ください。 ::
 
     use Cake\I18n\FrozenDate;
     $date = new FrozenDate('2021-01-31');
@@ -387,7 +383,7 @@ As an example::
     echo $newDate->format('Y-m-d H:i:s');
 
 
-Attempts to modify the timezone on a ``FrozenDate`` instance are also ignored::
+``FrozenDate`` インスタンスのタイムゾーンを変更する試みも無視されます。 ::
 
     use Cake\I18n\FrozenDate;
     $date = new FrozenDate('2021-01-31', new \DateTimeZone('America/New_York'));
@@ -452,7 +448,7 @@ CakePHP は、変更可能な仲間と同じインターフェイスを実装す
 ==========================
 
 CakePHP はすべての有効な PHP タイムゾーンをサポートしています。サポートされるタイムゾーンの一覧は、
-`このページをご覧ください <http://php.net/manual/ja/timezones.php>`_ 。
+`このページをご覧ください <https://php.net/manual/ja/timezones.php>`_ 。
 
 .. meta::
     :title lang=ja: Time

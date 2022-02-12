@@ -279,7 +279,7 @@ Funciones anónimas (``Closures``)
 ---------------------------------
 
 Para definir funciones anónimas sigue la guía de estilo de código
-`PSR-12 <http://www.php-fig.org/psr/psr-12/>`_ , donde se declaran con un espacio
+`PSR-12 <https://www.php-fig.org/psr/psr-12/>`_ , donde se declaran con un espacio
 después de la palabra ``function`` y antes y después de la palabra ``use``::
 
     $closure = function ($arg1, $arg2) use ($var1, $var2) {
@@ -304,7 +304,7 @@ Todos los comentarios deberán ir escritos en inglés y describir de un modo cla
 el bloque de código comentado.
 
 Los comentarios pueden incluir las siguientes etiquetas de
-`phpDocumentor <http://phpdoc.org>`_:
+`phpDocumentor <https://phpdoc.org>`_:
 
 *  `@deprecated <https://docs.phpdoc.org/latest/guide/references/phpdoc/tags/deprecated.html>`_
    Usando el formato ``@version <vector> <description>``, donde ``version``
@@ -415,7 +415,7 @@ Incluir archivos
     require_once $class;
 
 Cuando se incluyan archivos con clases o librerías usa siempre y únicamente la
-función `require\_once <http://php.net/require_once>`_.
+función `require\_once <https://php.net/require_once>`_.
 
 Etiquetas PHP
 =============

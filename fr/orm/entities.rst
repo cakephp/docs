@@ -68,9 +68,9 @@ La méthode recommandée pour récupérer une nouvelle entity est d'appeler
 
     use Cake\ORM\Locator\LocatorAwareTrait;
 
-    $article = $this->getTableLocator()->newEmptyEntity();
+    $article = $this->fetchTable(Articles)->newEmptyEntity();
 
-    $article = $this->getTableLocator()->newEntity([
+    $article = $this->fetchTable(Articles)->newEntity([
         'id' => 1,
         'title' => 'New Article',
         'created' => new DateTime('now')
@@ -79,6 +79,12 @@ La méthode recommandée pour récupérer une nouvelle entity est d'appeler
 ``$article`` sera une instance de ``App\Model\Entity\Article``, ou une instance
 de la classe par défaut ``Cake\ORM\Entity`` si vous n'avez pas créé la classe
 ``Article``.
+
+.. note::
+
+    Avant CakePHP 4.3, il fallait utiliser
+    ``$this->getTableLocator->get('Articles')`` pour obtenir une instance de la
+    table.
 
 Accéder aux Données de l'Entity
 ===============================

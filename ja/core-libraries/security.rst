@@ -19,13 +19,13 @@
 沢山の分散された値であるべきです。返却される結果は HMAC チェックサム（checksum）つきの
 暗号化された値となります。
 
-このメソッドは、 `openssl <http://php.net/openssl>`_ か
-`mcrypt <http://php.net/mcrypt>`_ のいずれかを利用し、
+このメソッドは、 `openssl <https://php.net/openssl>`_ か
+`mcrypt <https://php.net/mcrypt>`_ のいずれかを利用し、
 あなたのシステムで有効であることが基準になります。
 いずれかの実装で暗号化されたデータは、もう一方の実装に移植できます。
 
 .. warning::
-    `mcrypt <http://php.net/mcrypt>`_ 拡張は、PHP7.1 で非推奨になりました。
+    `mcrypt <https://php.net/mcrypt>`_ 拡張は、PHP7.1 で非推奨になりました。
 
 このメソッドは **決して** パスワードの保存に使ってはいけません。代わりに一方通行の
 ハッシュ化メソッド :php:meth:`~Cake\\Utility\\Security::hash()` を利用すべきです。

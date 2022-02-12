@@ -22,7 +22,7 @@ contribute any additions, deletions, or corrections to the documentation.
 
     - `PDF <../_downloads/en/CakePHPCookbook.pdf>`_
     - `EPUB <../_downloads/en/CakePHP.epub>`_
-    - `Original Source <http://github.com/cakephp/docs>`_
+    - `Original Source <https://github.com/cakephp/docs>`_
 
 Getting Help
 ============

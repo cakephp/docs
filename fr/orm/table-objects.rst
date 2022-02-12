@@ -14,7 +14,7 @@ CakePHP va générer une instance Table à utiliser pour vous.
 
 Avant d'essayer d'utiliser les objets Table et l'ORM, vous devriez vous assurer
 que vous avez configuré votre
-:ref:`connection à la base de données <database-configuration>`.
+:ref:`connexion à la base de données <database-configuration>`.
 
 Utilisation Basique
 ===================
@@ -51,14 +51,11 @@ spécifier la table en utilisant la méthode ``setTable()``::
         public function initialize(array $config): void
         {
             $this->setTable('my_table');
-
-            // Avant 3.4.0
-            $this->table('my_table');
         }
 
     }
 
-Aucune convention d'inflection ne sera appliquée quand on spécifie une table.
+Aucune convention d'inflexion ne sera appliquée quand on spécifie une table.
 Par convention, l'ORM s'attend aussi à ce que chaque table ait une clé primaire
 avec le nom de ``id``. Si vous avez besoin de modifier ceci, vous pouvez
 utiliser la méthode ``setPrimaryKey()``::
@@ -72,9 +69,6 @@ utiliser la méthode ``setPrimaryKey()``::
         public function initialize(array $config): void
         {
             $this->setPrimaryKey('my_id');
-
-            // Avant 3.4.0
-            $this->primaryKey('my_id');
         }
     }
 
@@ -93,9 +87,6 @@ utiliser la méthode ``setEntityClass()`` pour changer les choses::
         public function initialize(array $config): void
         {
             $this->setEntityClass('App\Model\Entity\PO');
-
-            // Avant 3.4.0
-            $this->entityClass('App\Model\Entity\PO');
         }
     }
 
@@ -109,18 +100,15 @@ Obtenir les Instances d'une Classe Table
 
 Avant de pouvoir requêter sur une table, vous aurez besoin d'obtenir une
 instance de la table. Vous pouvez faire ceci en utilisant la classe
-``TableRegistry``::
+``TableLocator``::
 
-    // Dans un controller ou dans une méthode de table.
-    use Cake\ORM\TableRegistry;
+    // Dans un controller
+    $articles = $this->getTableLocator()->get('Articles');
 
-    // Prior to 3.6 use TableRegistry::get('Articles')
-    $articles = TableRegistry::getTableLocator()->get('Articles');
-
-La classe TableRegistry fournit les divers dépendances pour construire la table,
+Le TableLocator fournit les diverses dépendances pour construire la table,
 et maintient un registre de toutes les instances de table construites,
 facilitant la construction de relations et la configuration l'ORM. Regardez
-:ref:`table-registry-usage` pour plus d'informations.
+:ref:`table-locator-usage` pour plus d'informations.
 
 Si votre classe table est dans un plugin, assurez-vous d'utiliser le bon nom
 pour votre classe table. Ne pas le faire peut entraîner des résultats non voulus
@@ -129,12 +117,10 @@ une classe par défaut est utilisée à la place de votre classe souhaitée. Pou
 charger correctement les classes table de votre plugin, utilisez ce qui suit::
 
     // Table de plugin
-    // Prior to 3.6 use TableRegistry::get('PluginName.Articles')
-    $articlesTable = TableRegistry::getTableLocator()->get('PluginName.Articles');
+    $articlesTable = $this->getTableLocator()->get('PluginName.Articles');
 
     // Table de plugin préfixé par Vendor
-    // Prior to 3.6 use TableRegistry::get('VendorName/PluginName.Articles')
-    $articlesTable = TableRegistry::getTableLocator()->get('VendorName/PluginName.Articles');
+    $articlesTable = $this->getTableLocator()->get('VendorName/PluginName.Articles');
 
 .. _table-callbacks:
 
@@ -142,27 +128,44 @@ Callbacks du Cycle de Vie
 =========================
 
 Comme vous l'avez vu ci-dessus les objets table déclenchent un certain nombre
-d'events. Les events sont des hook utiles si vous souhaitez et ajouter de la
-logique dans l'ORM sans faire de sous-classe ou sans surcharger les
-méthodes. Les écouteurs d'event peuvent être définis dans les classes
-table ou behavior. Vous pouvez aussi utiliser un gestionnaire d'event
-de table pour lier les écouteurs dedans.
+d'events. Les events sont utiles si vous souhaitez ajouter de la logique dans
+l'ORM sans faire de sous-classe et sans réécrire les méthodes. Les écouteurs
+(*listeners*) d'events peuvent être définis dans les classes de table ou de
+behavior. Vous pouvez aussi utiliser le gestionnaire d'events d'une table pour y
+lier des écouteurs dedans.
 
-Lors de l'utilisation des méthodes callback des behaviors attachés dans la
-méthode ``initialize()`` va voir ses écouteurs lancés **avant** que les
+Lors de l'utilisation des méthodes de callback, les behaviors attachés dans la
+méthode ``initialize()`` déclencheront leurs écouteurs **avant** que les
 méthodes de callback de la table ne soient déclenchées. Ceci suit la même
-séquence que les controllers & les components.
+séquence que les controllers et les components.
 
-Pour ajouter un écouteur d'event à une classe Table ou un Behavior,
-implémentez simplement les signatures de méthode comme décrit ci-dessus.
+Pour ajouter un écouteur d'events à une classe Table ou à un Behavior,
+implémentez simplement les signatures de méthodes comme décrit ci-dessus.
 Consultez les :doc:`/core-libraries/events` pour avoir plus de détails sur la
-façon d'utiliser le sous-système d'events.
+façon d'utiliser le sous-système d'events::
+
+    // Dans un controller
+    $articles->save($article, ['variablePerso1' => 'votreValeur1']);
+    
+    // Dans ArticlesTable.php
+    public function afterSave(Event $event, EntityInterface $entity, ArrayObject $options)
+    {
+        $variablePerso = $options['variablePerso1']; // 'votreValeur1'
+        $options['variablePerso2'] = 'votreValeur2';    
+    }  
+    
+    public function afterSaveCommit(Event $event, EntityInterface $entity, ArrayObject $options)
+    {
+        $variablePerso = $options['variablePerso1']; // 'votreValeur1'
+        $variablePerso = $options['variablePerso2']; // 'votreValeur2'
+    }
 
 Liste des Events
 ----------------
 
 * ``Model.initialize``
 * ``Model.beforeMarshal``
+* ``Model.afterMarshal``
 * ``Model.beforeFind``
 * ``Model.buildValidator``
 * ``Model.buildRules``
@@ -178,10 +181,10 @@ Liste des Events
 initialize
 ----------
 
-.. php:method:: initialize(Event $event, ArrayObject $data, ArrayObject $options)
+.. php:method:: initialize(EventInterface $event, ArrayObject $data, ArrayObject $options)
 
 L'event ``Model.initialize`` est déclenché après que les méthodes de
-constructeur et initialize sont appelées. Les classes ``Table`` n'écoutent pas
+constructeur et initialize ont été appelées. Les classes ``Table`` n'écoutent pas
 cet event par défaut, et utilisent plutôt la méthode hook ``initialize``.
 
 Pour répondre à l'event ``Model.initialize``, vous pouvez créer une classe
@@ -192,9 +195,9 @@ Pour répondre à l'event ``Model.initialize``, vous pouvez créer une classe
     {
         public function implementedEvents()
         {
-            return array(
+            return [
                 'Model.initialize' => 'initializeEvent',
-            );
+            ];
         }
         public function initializeEvent($event): void
         {
@@ -203,7 +206,7 @@ Pour répondre à l'event ``Model.initialize``, vous pouvez créer une classe
         }
     }
 
-et attacher l'écouteur à ``EventManager`` comme ce qui suit::
+et attacher l'écouteur au ``EventManager`` ainsi::
 
     use Cake\Event\EventManager;
     $listener = new ModelInitializeListener();
@@ -214,16 +217,26 @@ Ceci va appeler ``initializeEvent`` quand une classe ``Table`` est construite.
 beforeMarshal
 -------------
 
-.. php:method:: beforeMarshal(Event $event, ArrayObject $data, ArrayObject $options)
+.. php:method:: beforeMarshal(EventInterface $event, ArrayObject $data, ArrayObject $options)
 
-L'event ``Model.beforeMarshal`` est déclenché avant que les données de request
+L'event ``Model.beforeMarshal`` est déclenché avant que les données de requête
 ne soient converties en entities. Consultez la documentation
 :ref:`before-marshal` pour plus d'informations.
+
+afterMarshal
+------------
+
+.. php:method:: afterMarshal(EventInterface $event, EntityInterface $entity, ArrayObject $data, ArrayObject $options)
+
+L'event ``Model.afterMarshal`` est déclenché après que les données de requête
+ont été converties en entities.Les gestionnaires d'events obtiendront les
+entities converties, les données originales de la requête et les options
+fournies à ``patchEntity()`` ou ``newEntity()``.
 
 beforeFind
 ----------
 
-.. php:method:: beforeFind(Event $event, Query $query, ArrayObject $options, $primary)
+.. php:method:: beforeFind(EventInterface $event, Query $query, ArrayObject $options, $primary)
 
 L'event ``Model.beforeFind`` est lancé avant chaque opération find. En
 arrêtant l'événement et en alimentant la requête avec un jeu de résultats
@@ -248,21 +261,21 @@ priorités par défaut), et la requête renverra le jeu de résultats vide qui a
 
 Tout changement fait à l'instance ``$query`` sera retenu pour le reste du find.
 Le paramètre ``$primary`` indique si oui ou non ceci est la requête racine ou
-une requête associée. Toutes les associations participant à une requête vont
-avoir un event ``Model.beforeFind`` déclenché. Pour les associations qui
-utilisent les joins, une requête factice sera fournie. Dans votre écouteur
+une requête associée. Un event ``Model.beforeFind`` sera déclenché dans toutes
+les associations participant à la requête. Pour les associations qui
+utilisent des jointures, une requête factice sera fournie. Dans votre écouteur
 d'event, vous pouvez définir des champs supplémentaires, des conditions, des
-joins ou des formateurs de résultat. Ces options/fonctionnalités seront copiées
-dans la requête racine.
+jointures ou des formateurs de résultat. Ces options/fonctionnalités seront
+copiées dans la requête racine.
 
 Dans les versions précédentes de CakePHP, il y avait un callback ``afterFind``,
-ceci a été remplacé par les fonctionnalités de :ref:`map-reduce` et les
+qui a été remplacé par les fonctionnalités de :ref:`map-reduce` et les
 constructeurs d'entity.
 
 buildValidator
 --------------
 
-.. php:method:: buildValidator(Event $event, Validator $validator, $name)
+.. php:method:: buildValidator(EventInterface $event, Validator $validator, $name)
 
 L'event ``Model.buildValidator`` est déclenché lorsque le validator ``$name``
 est créé. Les behaviors peuvent utiliser ce hook pour ajouter des méthodes
@@ -271,7 +284,7 @@ de validation.
 buildRules
 ----------
 
-.. php:method:: buildRules(Event $event, RulesChecker $rules)
+.. php:method:: buildRules(EventInterface $event, RulesChecker $rules)
 
 L'event ``Model.buildRules`` est déclenché après qu'une instance de règles a été
 créée et après que la méthode ``buildRules()`` de la table a été appelée.
@@ -279,7 +292,7 @@ créée et après que la méthode ``buildRules()`` de la table a été appelée.
 beforeRules
 -----------
 
-.. php:method:: beforeRules(Event $event, EntityInterface $entity, ArrayObject $options, $operation)
+.. php:method:: beforeRules(EventInterface $event, EntityInterface $entity, ArrayObject $options, $operation)
 
 L'event ``Model.beforeRules`` est déclenché avant que les règles n'aient été
 appliquées à une entity. En stoppant cet event, vous pouvez retourner la valeur
@@ -288,7 +301,7 @@ finale de l'opération de vérification des règles.
 afterRules
 ----------
 
-.. php:method:: afterRules(Event $event, EntityInterface $entity, ArrayObject $options, $result, $operation)
+.. php:method:: afterRules(EventInterface $event, EntityInterface $entity, ArrayObject $options, $result, $operation)
 
 L'event ``Model.afterRules`` est déclenché après que les règles soient
 appliquées à une entity. En stoppant cet event, vous pouvez retourner la valeur
@@ -297,7 +310,7 @@ finale de l'opération de vérification des règles.
 beforeSave
 ----------
 
-.. php:method:: beforeSave(Event $event, EntityInterface $entity, ArrayObject $options)
+.. php:method:: beforeSave(EventInterface $event, EntityInterface $entity, ArrayObject $options)
 
 L'event ``Model.beforeSave`` est déclenché avant que chaque entity ne soit
 sauvegardée. Stopper cet event va annuler l'opération de sauvegarde. Quand
@@ -307,7 +320,7 @@ La manière de stopper un event est documentée :ref:`ici <stopping-events>`.
 afterSave
 ---------
 
-.. php:method:: afterSave(Event $event, EntityInterface $entity, ArrayObject $options)
+.. php:method:: afterSave(EventInterface $event, EntityInterface $entity, ArrayObject $options)
 
 L'event ``Model.afterSave`` est déclenché après qu'une entity ne soit
 sauvegardée.
@@ -315,7 +328,7 @@ sauvegardée.
 afterSaveCommit
 ---------------
 
-.. php:method:: afterSaveCommit(Event $event, EntityInterface $entity, ArrayObject $options)
+.. php:method:: afterSaveCommit(EventInterface $event, EntityInterface $entity, ArrayObject $options)
 
 L'event ``Model.afterSaveCommit`` est lancé après que la transaction, dans
 laquelle l'opération de sauvegarde est fournie, a été committée. Il est aussi
@@ -327,24 +340,23 @@ n'est pas déclenché si une transaction est démarrée avant l'appel de save.
 beforeDelete
 ------------
 
-.. php:method:: beforeDelete(Event $event, EntityInterface $entity, ArrayObject $options)
+.. php:method:: beforeDelete(EventInterface $event, EntityInterface $entity, ArrayObject $options)
 
 L'event ``Model.beforeDelete`` est déclenché avant qu'une entity ne soit
 supprimée. En stoppant cet event, vous allez annuler l'opération de
 suppression. Quand l'event est stoppé le résultat de l'event sera retourné.
-La manière de stopper un event est documentée :ref:`ici <stopping-events>`.
 
 afterDelete
 -----------
 
-.. php:method:: afterDelete(Event $event, EntityInterface $entity, ArrayObject $options)
+.. php:method:: afterDelete(EventInterface $event, EntityInterface $entity, ArrayObject $options)
 
 L'event ``Model.afterDelete`` est déclenché après qu'une entity a été supprimée.
 
 afterDeleteCommit
 -----------------
 
-.. php:method:: afterDeleteCommit(Event $event, EntityInterface $entity, ArrayObject $options)
+.. php:method:: afterDeleteCommit(EventInterface $event, EntityInterface $entity, ArrayObject $options)
 
 L'event ``Model.afterDeleteCommit`` est lancé après que la transaction, dans
 laquelle l'opération de sauvegarde est fournie, a été committée. Il est aussi
@@ -352,6 +364,65 @@ déclenché pour des suppressions non atomic, quand les opérations sur la base 
 données sont implicitement committées. L'event est décenché seulement pour
 la table primaire sur laquelle ``delete()`` est directement appelée. L'event
 n'est pas déclenché si une transaction est démarrée avant l'appel de delete.
+
+Stopper des Events de Table
+---------------------------
+Pour empêcher la sauvegarde de se poursuivre, arrêtez simplement la propagation
+de l'event dans votre callback::
+
+    public function beforeSave(EventInterface $event, EntityInterface $entity, ArrayObject $options)
+    {
+        if (...) {
+            $event->stopPropagation();
+            $event->setResult(false);
+            return;
+        }
+        ...
+    }
+
+Alternativement, vous pouvez aussi renvoyer false depuis votre callback. Cela a
+le même effet d'arrêt de la propagation.
+
+Priorités de Callbacks
+----------------------
+
+Quand vous utilisez des events sur vos tables et vos behaviors, ayez en tête la
+priorité et l'ordre dans lequel les écouteurs sont attachés. Les events des
+behaviors sont attachés avant ceux des tables. Avec les priorités par défaut,
+cela signifie que les callbacks de behaviors seront déclenchés **avant** l'event
+de la table ayant le même nom.
+
+À titre d'exemple, si votre Table utilise ``TreeBehavior``, la méthode
+``TreeBehavior::beforeDelete()`` sera appelée avant la méthode
+``beforeDelete()`` de votre table, et ne pourra pas travailler avec les nœuds
+enfantsde l'enregistrement qui est en train d'être supprimé dans la méthode de
+votre Table.
+
+Vous avez plusieurs façons de gérer les priorités d'events:
+
+#. Changez la priorité des écouteurs d'un Behavior en utilisant l'option
+   ``priority``. Cela modifiera la priorité de **toutes** les méthodes de
+   callback dans le Behavior::
+
+        // Dans la méthode initialize() d'une Table
+        $this->addBehavior('Tree', [
+            // La valeur par défaut est 10, et les écouteurs sont déclenchés de
+            // la plus faible valeur de priorité à la plus haute.
+            'priority' => 2,
+        ]);
+
+#. Modifiez la priorité dans votre classe ``Table`` en utilisant la méthode
+   ``Model.implementedEvents()``. Cela vous permet d'assigner une priorité
+   différente pour chaque fonction de callback::
+
+        // Dans une classe Table.
+        public function implementedEvents()
+        {
+            $events = parent::implementedEvents();
+            $events['Model.beforeDelete'] = [
+                'callable' => 'beforeDelete',
+                'priority' => 3
+            ];
 
 Behaviors
 =========
@@ -363,7 +434,7 @@ Behaviors
 Les Behaviors fournissent un moyen de créer des parties de logique
 réutilisables horizontalement liées aux classes table. Vous vous demandez
 peut-être pourquoi les behaviors sont des classes classiques et non des
-traits. La première raison est les écouteurs d'event. Alors que les traits
+traits. La raison principale est les écouteurs d'event. Alors que les traits
 permettent de réutiliser des parties de logique, ils compliqueraient la
 liaison des events.
 
@@ -417,8 +488,8 @@ Configurer les Connexions
 
 Par défaut, toutes les instances de table utilisent la connexion à la base
 de données ``default``. Si votre application utilise plusieurs connexions à la
-base de données, vous voudrez peut-être configurer quelles tables utilisent
-quelles connexions. C'est avec la méthode ``defaultConnectionName()``::
+base de données, vous voudrez peut-être configurer quelle table utilise
+quelle connexion. C'est le rôle de la méthode ``defaultConnectionName()``::
 
     namespace App\Model\Table;
 
@@ -426,7 +497,7 @@ quelles connexions. C'est avec la méthode ``defaultConnectionName()``::
 
     class ArticlesTable extends Table
     {
-        public static function defaultConnectionName() {
+        public static function defaultConnectionName(): string {
             return 'replica_db';
         }
     }
@@ -436,26 +507,27 @@ quelles connexions. C'est avec la méthode ``defaultConnectionName()``::
     La méthode ``defaultConnectionName()`` **doit** être statique.
 
 .. _table-registry-usage:
+.. _table-locator-usage:
 
-Utiliser le TableRegistry
-=========================
+Utiliser le TableLocator
+========================
 
-.. php:class:: TableRegistry
+.. php:class:: TableLocator
 
-Comme nous l'avons vu précédemment, la classe TableRegistry fournit un
+Comme nous l'avons vu précédemment, la classe TableLocator fournit un
 registre/fabrique facile d'utilisation pour accéder aux instances des tables
 de vos applications. Elle fournit aussi quelques autres fonctionnalités utiles.
 
 Configurer les Objets Table
 ---------------------------
 
-.. php:staticmethod:: get($alias, $config)
+.. php:method:: get($alias, $config)
 
 Lors du chargement des tables à partir du registry, vous pouvez personnaliser
 leurs dépendances, ou utiliser les objets factices en fournissant un tableau
 ``$options``::
 
-    $articles = TableRegistry::getTableLocator()->get('Articles', [
+    $articles = FactoryLocator::get('Table')->get('Articles', [
         'className' => 'App\Custom\ArticlesTable',
         'table' => 'my_articles',
         'connection' => $connectionObject,
@@ -466,7 +538,7 @@ leurs dépendances, ou utiliser les objets factices en fournissant un tableau
     ]);
 
 Remarquez les paramètres de configurations de la connexion et du schéma, ils
-ne sont pas des valeurs de type string mais des objets. La connection va
+ne sont pas des valeurs de type string mais des objets. La connexion va
 prendre un objet ``Cake\Database\Connection`` et un schéma
 ``Cake\Database\Schema\Collection``.
 
@@ -476,10 +548,10 @@ prendre un objet ``Cake\Database\Connection`` et un schéma
     ``initialize()``, ces valeurs vont écraser celles fournies au registre.
 
 Vous pouvez aussi pré-configurer le registre en utilisant la méthode
-``config()``. Les données de configuration sont stockées *par alias*, et peuvent
+``setConfig()``. Les données de configuration sont stockées *par alias*, et peuvent
 être surchargées par une méthode ``initialize()`` de l'objet::
 
-    TableRegistry::config('Users', ['table' => 'my_users']);
+    FactoryLocator::get('Table')->setConfig('Users', ['table' => 'my_users']);
 
 .. note::
 
@@ -490,13 +562,13 @@ Vous pouvez aussi pré-configurer le registre en utilisant la méthode
 Vider le Registre
 -----------------
 
-.. php:staticmethod:: clear()
+.. php:method:: clear()
 
 Pendant les cas de test, vous voudrez vider le registre. Faire ceci est souvent
 utile quand vous utilisez les objets factices, ou modifiez les dépendances d'une
 table::
 
-    TableRegistry::clear();
+    FactoryLocator::get('Table')->clear();
 
 Configurer le Namespace pour Localiser les Classes de l'ORM
 -----------------------------------------------------------

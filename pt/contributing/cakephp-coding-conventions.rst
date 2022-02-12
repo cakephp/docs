@@ -302,7 +302,7 @@ Todos os comentários devem ser escritos em inglês, e devem de forma clara
 descrever o bloco de código comentado.
 
 Comentários podem incluir as seguintes *tags* do
-`phpDocumentor <http://phpdoc.org>`_:
+`phpDocumentor <https://phpdoc.org>`_:
 
 *  `@deprecated <https://docs.phpdoc.org/latest/guide/references/phpdoc/tags/deprecated.html>`_
    Usando o formato ``@version <vector> <description>``, onde ``version`` e
@@ -414,7 +414,7 @@ parênteses::
     require_once $class;
 
 Ao incluir arquivos com classes ou bibliotecas, use sempre e apenas a função
-`require\_once <http://php.net/require_once>`_.
+`require\_once <https://php.net/require_once>`_.
 
 Tags do PHP
 ===========

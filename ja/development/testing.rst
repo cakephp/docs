@@ -1,14 +1,14 @@
 テスト
 #######
 
-CakePHP には `PHPUnit <http://phpunit.de>`_ をベースとした高度なインテグレーションが組み込まれており、PHPUnit 本体が持つ機能に加えて、CakePHPでテストをスマートに管理するための便利な拡張機能を備えています。このセクションでは、PHPUnit のインストールからユニットテストの
+CakePHP には `PHPUnit <https://phpunit.de>`_ をベースとした高度なインテグレーションが組み込まれており、PHPUnit 本体が持つ機能に加えて、CakePHPでテストをスマートに管理するための便利な拡張機能を備えています。このセクションでは、PHPUnit のインストールからユニットテストの
 始め方、そしてCakePHP が提供する拡張機能について説明します。
 
 PHPUnit のインストール
 ======================
 
 CakePHP のテストフレームワークは PHPUnit をベースとしています。PHPUnit は PHP ユニットテストフレームワークのデファクトスタンダードであり、思いどおりのコードを安全に書くための豊富な機能を提供します。
-PHPUnit は `Composer <http://getcomposer.org>`_ または `PHAR パッケージ <http://phpunit.de/#download>`__ 
+PHPUnit は `Composer <https://getcomposer.org>`_ または `PHAR パッケージ <https://phpunit.de/#download>`__
 のいずれかを使用してインストールできます。
 
 Composer による PHPUnit のインストール
@@ -48,7 +48,7 @@ PHAR ファイルを使用する場合
           sudo mv phpunit.phar /usr/local/bin/phpunit
           phpunit --version
 
-    `Windows 上で PHPUnit の PHAR をグローバルにインストールする方法 <http://phpunit.de/manual/current/ja/installation.html#installation.phar.windows>`__
+    `Windows 上で PHPUnit の PHAR をグローバルにインストールする方法 <https://phpunit.de/manual/current/ja/installation.html#installation.phar.windows>`__
     に関する手順については、PHPUnit のドキュメントを参照してください。
 
 テスト用データベースのセットアップ
@@ -1005,7 +1005,7 @@ Basic 認証のようなステートレス認証を使用する API をテスト
 リクエストヘッダーをシミュレートする環境変数やヘッダーを注入するためにリクエストを設定できます。
 
 Basic または Digest 認証をテストする際、自動的に
-`PHP が作成する <http://php.net/manual/ja/features.http-auth.php>`_
+`PHP が作成する <https://php.net/manual/ja/features.http-auth.php>`_
 環境変数を追加できます。これらの環境変数は、 :ref:`basic-authentication` に概説されている
 認証アダプター内で使用されます。 ::
 

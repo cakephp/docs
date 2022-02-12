@@ -31,14 +31,14 @@ champs que vous souhaitez valider::
 
     $validator
         ->requirePresence('title')
-        ->notEmpty('title', 'Please fill this field')
+        ->notEmptyString('title', 'Please fill this field')
         ->add('title', [
             'length' => [
                 'rule' => ['minLength', 10],
                 'message' => 'Titles need to be at least 10 characters long',
             ]
         ])
-        ->allowEmpty('published')
+        ->allowEmptyString('published')
         ->add('published', 'boolean', [
             'rule' => 'boolean'
         ])

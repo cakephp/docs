@@ -247,7 +247,7 @@ created earlier.
 After saving our new article we use FlashComponent's ``success()`` method to set
 a message into the session. The ``success`` method is provided using PHP's
 `magic method features
-<http://php.net/manual/en/language.oop5.overloading.php#object.call>`_.  Flash
+<https://php.net/manual/en/language.oop5.overloading.php#object.call>`_.  Flash
 messages will be displayed on the next page after redirecting. In our layout we have
 ``<?= $this->Flash->render() ?>`` which displays flash messages and clears the
 corresponding session variable. Finally, after saving is complete, we use
@@ -371,8 +371,8 @@ the appropriate error page.
 
 Next the action checks whether the request is either a POST or a PUT request. If
 it is, then we use the POST/PUT data to update our article entity by using the
-``patchEntity()`` method.  Finally, we call ``save()`` set the appropriate flash
-message and either redirect or display validation errors.
+``patchEntity()`` method.  Finally, we call ``save()``, set the appropriate flash
+message, and either redirect or display validation errors.
 
 Create Edit Template
 ====================

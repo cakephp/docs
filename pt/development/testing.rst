@@ -2,7 +2,7 @@
 #######
 
 O CakePHP vem com suporte interno para testes e integração para o `PHPUnit
-<http://phpunit.de>`_. Em adição aos recursos oferecidos pelo PHPUnit, o CakePHP
+<https://phpunit.de>`_. Em adição aos recursos oferecidos pelo PHPUnit, o CakePHP
 oferece alguns recursos adicionais para fazer testes mais facilmente. Esta seção
 abordará a instalação do PHPUnit, começando com testes unitários e como você
 pode usar as extensões que o CakePHP oferece.
@@ -14,7 +14,7 @@ O CakePHP usa o PHPUnit como framework de teste básico. O PHPUnit é um padrão
 para testes unitários em PHP. Ele oferece um profundo e poderoso conjunto de
 recursos para você ter certeza que o seu código faz o que você acha que ele faz.
 O PHPUnit pode ser instalado usando o `PHAR package
-<http://phpunit.de/#download>`__ ou `Composer <http://getcomposer.org>`_.
+<https://phpunit.de/#download>`__ ou `Composer <https://getcomposer.org>`_.
 
 Instalando o PHPUnit com Composer
 ---------------------------------
@@ -49,7 +49,7 @@ executar seus testes::
 
     Por favor, consulte a documentação do PHPUnit para instruções sobre `como
     instalar globalmente o PHPUnit PHAR em sistemas Windows
-    <http://phpunit.de/manual/current/en/installation.html#installation.phar.windows>`__.
+    <https://phpunit.de/manual/current/en/installation.html#installation.phar.windows>`__.
 
 Configuração do banco de dados de teste
 =======================================
@@ -964,7 +964,7 @@ pode configurar a solicitação para injetar condições do ambiente ou cabeçal
 simulam cabeçalhos de solicitação de autenticação reais.
 
 Ao testar a autenticação Básica ou Digest, você pode adicionar as variáveis de
-ambiente que o `PHP cria <http://php.net/manual/en/features.http-auth.php>`
+ambiente que o `PHP cria <https://php.net/manual/en/features.http-auth.php>`
 automaticamente. Essas variáveis de ambiente usadas no adaptador de autenticação
 descritas em :ref:`basic-authentication`::
 
@@ -1898,7 +1898,7 @@ gerar esqueletos de teste para o código que escreveu, poderá usar o ``bake``:
 Integração com Jenkins
 ======================
 
-O `Jenkins <http://jenkins-ci.org>`_ é um servidor de integração contínua, que
+O `Jenkins <https://jenkins-ci.org>`_ é um servidor de integração contínua, que
 pode ajudá-lo a automatizar a execução dos seus casos de teste. Isso ajuda a
 garantir que todos os seus testes permaneçam aprovados e seu aplicativo esteja
 sempre pronto.
@@ -1906,7 +1906,7 @@ sempre pronto.
 A integração de um aplicativo CakePHP com o Jenkins é bastante direta. O seguinte
 pressupõe que você já instalou o Jenkins no sistema \*nix e pode administrá-lo.
 Você também sabe como criar jobs e executar builds. Se você não tiver certeza
-disso, consulte a `documentação de Jenkins <http://jenkins-ci.org/>`.
+disso, consulte a `documentação de Jenkins <https://jenkins-ci.org/>`.
 
 Criando um Trabalho
 -------------------

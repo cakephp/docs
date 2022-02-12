@@ -45,7 +45,7 @@ CakePHP はデフォルトで一つの設定ファイルからなりますが、
 ========
 
 例えば Heroku のように、多くの現代的なクラウド事業者では、設定データのために環境変数を定義できます。
-`12factor app style <http://12factor.net/>`_ の環境変数を通して CakePHP を設定することができます。
+`12factor app style <https://12factor.net/>`_ の環境変数を通して CakePHP を設定することができます。
 環境変数を使用すると、アプリケーションの状態を少なくして、
 多くの環境にデプロイされたアプリケーションの管理が容易になります。
 
@@ -147,7 +147,7 @@ Asset.timestamp
 Asset.cacheTime
     アセットのキャッシュ時間を設定します。 アセットのための HTTP ヘッダー ``Cache-Control`` の
     ``max-age`` と HTTP ヘッダーの ``Expire`` の時間を決定します。
-    php の `strtotime 関数 <http://php.net/manual/ja/function.strtotime.php>`_
+    php の `strtotime 関数 <https://php.net/manual/ja/function.strtotime.php>`_
     の書式を設定できます。デフォルトは ``+1 day`` です。
 
 CDNの利用
@@ -398,7 +398,7 @@ CakePHP は 2 つの組み込み設定ファイルエンジンを搭載してい
 :php:class:`Cake\\Core\\Configure\\Engine\\PhpConfig` は
 Configure が昔から読んできた同じフォーマットで PHP の設定ファイル形式を読み込むことができます。
 :php:class:`Cake\\Core\\Configure\\Engine\\IniConfig` は ini 設定ファイル形式を読み込めます。
-詳細な ini ファイルの仕様は `PHP マニュアル <http://php.net/parse_ini_file>`_ を参照してください。
+詳細な ini ファイルの仕様は `PHP マニュアル <https://php.net/parse_ini_file>`_ を参照してください。
 コアの設定エンジンを利用するにあたり、Configure に :php:meth:`Configure::config()`
 を設定する必要があります。 ::
 

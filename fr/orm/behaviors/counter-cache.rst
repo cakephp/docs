@@ -33,16 +33,29 @@ pour chaque article avec ce qui suit::
         }
     }
 
+.. note::
+
+    Il doit y avoir une colonne ``comment_count`` dans la table ``articles``.
+
 La configuration de CounterCache doit être composée de noms de relations et
 de la configuration spécifique pour cette relation.
 
+Comme vous le voyez, il faut ajouter le behavior "de l'autre côté" de
+l'association dans laquelle vous voulez que le champ soit mis à jour. Dans cet
+exemple, le behavior est ajouté dans la table ``CommentsTable`` bien qu'il
+actualise le champ ``comment_count`` dans la table ``ArticlesTable``.
+
 La valeur du compteur sera mise à jour à chaque fois qu'une entity est
 sauvegardée ou supprimée. Le compteur **ne va pas** être mis à jour lorsque
-vous utilisez ``updateAll()`` ou ``deleteAll()``, ou que vous executez du SQL
-que vous avez écrit.
+vous
 
-Usage Avancée
-=============
+- sauvegardez une entity sans changer ses données,
+- ou utilisez ``updateAll()``,
+- ou utilisez ``deleteAll()``,
+- ou exécutez du SQL que vous avez écrit vous-même.
+
+Usage Avancé
+============
 
 Si vous avez besoin de garder un compteur mis en cache pour moins que tous les
 enregistrements liés, vous pouvez fournir des conditions supplémentaires ou
@@ -112,8 +125,29 @@ compteur à stocker::
     ajouter le behavior CounterCache à la ``CommentsTable`` pour pouvoir
     générer ``comment_count`` pour la table Articles.
 
-    Il est cependant possible de le faire fonctionner pour les associations
-    ``belongsToMany``. Vous devez activer le comportement CounterCache dans
-    une table ``through`` personnalisée configurée en tant qu'option
-    d'association. Référez-vous à la configuration des tables de jointure en
-    :ref:`utilisant l'option 'through' <using-the-through-option>`.
+Utilisation avec Belongs To Many
+=================================
+
+Il est possible d'utiliser le behavior CounterCache dans une association
+``belongsToMany``.
+Avant tout, vous devez ajouter les options ``through`` et ``cascadeCallbacks``
+à l'association ``belongsToMany``::
+
+    'through'          => 'CommentsArticles',
+    'cascadeCallbacks' => true
+
+Consultez également :ref:`using-the-through-option` pour savoir comment
+configurer une jointure de table personnalisée.
+``CommentsArticles`` est le nom de la classe de la table de jointure. Si vous ne
+l'avez pas, vous pouvez la créer avec l'outil bake en ligne de commande.
+
+Dans ce ``src/Model/Table/CommentsArticlesTable.php``, ajoutez ensuite le
+behavior avec le code décrit plus haut.::
+
+    $this->addBehavior('CounterCache', [
+        'Articles' => [ 'comments_count' ],
+    ]);
+
+Pour finir, supprimez tous les caches avec ``bin/cake cache clear_all`` et
+faites l'essai.
+

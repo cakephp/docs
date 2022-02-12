@@ -9,7 +9,7 @@ fazer *download* dos arquivos -- O botão "IMPROVE THIS DOC" presente na lateral
 direita em qualquer página vai direcioná-lo para o editor online do Github.
 
 A documentação do CakePHP é
-`continuamente integrada <http://en.wikipedia.org/wiki/Continuous_integration>`_,
+`continuamente integrada <https://en.wikipedia.org/wiki/Continuous_integration>`_,
 sendo assim, você pode checar o status de
 `várias builds <https://ci.cakephp.org>`_ no servidor Jenkins a qualquer momento.
 
@@ -96,7 +96,7 @@ Dicas para tradutores
 - Não submeta traduções incompletas.
 - Não edite uma seção com alterações pendentes.
 - Não use
-  `Entidades HTML <http://en.wikipedia.org/wiki/List_of_XML_and_HTML_character_entity_references>`_
+  `Entidades HTML <https://en.wikipedia.org/wiki/List_of_XML_and_HTML_character_entity_references>`_
   para caracteres acentuados, o manual usa UTF-8.
 - Não faça alterações significativas na marcação (HTML) ou adicione novo
   conteúdo.
@@ -107,7 +107,7 @@ Guia de formatação para documentação
 ====================================
 
 A nova documentação do CakePHP é escrita com
-`ReST <http://en.wikipedia.org/wiki/ReStructuredText>`_. ReST
+`ReST <https://en.wikipedia.org/wiki/ReStructuredText>`_. ReST
 (*Re Structured Text*) é uma sintaxe de marcação de texto simples, semelhante a
 *markdown* ou *textfile*. Para manter a consistência, recomenda-se que ao
 adicionar conteúdo à documentação do CakePHP, você siga as diretrizes aqui
@@ -223,9 +223,9 @@ Links externos
 
 *Links* para documentos externos podem ser feitos desta forma::
 
-    `Link externo para php.net <http://php.net>`_
+    `Link externo para php.net <https://php.net>`_
 
-O link resultante ficaria assim: `Link externo para php.net <http://php.net>`_
+O link resultante ficaria assim: `Link externo para php.net <https://php.net>`_
 
 Links para outras páginas
 ~~~~~~~~~~~~~~~~~~~~~~~~~

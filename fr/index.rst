@@ -24,7 +24,7 @@ la documentation.
 
     - `PDF <../_downloads/fr/CakePHPCookbook.pdf>`_.
     - `EPUB <../_downloads/fr/CakePHP.epub>`_.
-    - `Source originale <http://github.com/cakephp/docs>`_.
+    - `Source originale <https://github.com/cakephp/docs>`_.
 
 Obtenir de l'Aide
 =================

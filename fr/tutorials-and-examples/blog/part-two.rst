@@ -349,7 +349,7 @@ les afficher si vous voulez voir à quoi cela ressemble.
 Nous utilisons les méthodes ``success()`` et ``error()`` de FlashComponent pour
 définir un message dans une variable de session. Ces méthodes sont fournies via
 la `méthode magique _call()
-<http://php.net/manual/fr/language.oop5.overloading.php#object.call>`_
+<https://php.net/manual/fr/language.oop5.overloading.php#object.call>`_
 de PHP. Les messages Flash seront affichés dans la page juste après la
 redirection. Dans le layout, nous avons ``<?= $this->Flash->render() ?>`` qui
 permet d'afficher le message et d'effacer la variable correspondante. La méthode

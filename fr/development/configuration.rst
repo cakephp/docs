@@ -55,7 +55,7 @@ Variables d'Environnement
 
 Beaucoup de fournisseurs de cloud, comme Heroku, vous permettent de définir des
 variables pour les données de configuration. Vous pouvez configurer CakePHP
-via des variables d'environnement à la manière `12factor app <http://12factor.net/>`_.
+via des variables d'environnement à la manière `12factor app <https://12factor.net/>`_.
 Les variables d'environnement permettent à votre application d'avoir besoin de moins
 d'états, facilitant la gestion de votre application lors de déploiements sur
 plusieurs environnements.
@@ -180,7 +180,7 @@ Asset.cacheTime
     Fixe la valeur de la mise en cache des ressources (assets). Elle détermine la valeur du
     header http ``Cache-Control`` ``max-age``, ansi que du header http ``Expire`` pour les ressources.
     Cela peut-être tout ce que votre version de `la fonction strtotime
-    <http://php.net/manual/en/function.strtotime.php>`_ de php accepte.
+    <https://php.net/manual/en/function.strtotime.php>`_ de php accepte.
     La valeur par défaut est ``+1 day``.
 
 Utilisation d'un CDN
@@ -448,7 +448,7 @@ CakePHP est fourni avec deux lecteurs de fichiers de configuration intégrés.
 fichiers de config de PHP, dans le même format dans lequel Configure a lu
 historiquement. :php:class:`Cake\\Core\\Configure\\Engine\\IniConfig` est
 capable de lire les fichiers de config ini du cœur.
-Regardez la `documentation PHP <http://php.net/parse_ini_file>`_
+Regardez la `documentation PHP <https://php.net/parse_ini_file>`_
 pour plus d'informations sur les spécificités des fichiers ini. Pour utiliser un
 lecteur de config du cœur, vous aurez besoin de l'attacher à Configure en
 utilisant :php:meth:`Configure::config()`::

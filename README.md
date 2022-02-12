@@ -92,14 +92,6 @@ make epub
 make epub-en
 ```
 
-##### Populate the search index: #####
-```bash
-make populate-index
-```
-
-This will generate all the documentation in an HTML form. Other output such as
-'htmlhelp' are not fully complete at this time.
-
 After making changes to the documentation, you can build the HTML version of the
 docs by using `make html` again.  This will build only the HTML files that have
 had changes made to them.
@@ -152,5 +144,5 @@ Making Search Work Locally
 * Modify `searchUrl` in `themes/cakephp/static/app.js` to point at the
   baseurl for your docs_search clone.
 * Start elasticsearch with the default configuration.
-* Populate the search index using `make populate-index`.
+* Populate the search using tooling found in the [cakephp docs builder](https://github.com/cakephp/docs-builder) project.
 * You should now be able to search the docs using elasticsearch.
