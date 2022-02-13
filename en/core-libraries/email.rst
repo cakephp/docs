@@ -631,6 +631,9 @@ Assertion methods
 
 The ``Cake\TestSuite\EmailTrait`` trait provides the following assertions::
 
+    // Reset the state of TestEmailTransport
+    $this->cleanupEmailTrait();
+
     // Asserts an expected number of emails were sent
     $this->assertMailCount($count);
 
