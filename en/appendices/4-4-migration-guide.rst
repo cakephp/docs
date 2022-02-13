@@ -45,10 +45,6 @@ handling framework. To upgrade to the new system you can replace the usage of
     (new ErrorTrap(Configure::read('Error')))->register();
     (new ExceptionTrap(Configure::read('Error')))->register();
 
-Previously, ``E_USER_ERROR`` would have a best effort attempt at rendering
-a full page error screen. Under the new ``ErrorTrap`` implementation user-land
-errors are treated as non-halting and handled like warnings and notices are.
-
 See the :doc:`/development/errors` for more detailed documentation.
 
 RequestHandlerComponent
