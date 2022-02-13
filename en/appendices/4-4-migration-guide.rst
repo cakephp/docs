@@ -45,6 +45,10 @@ handling framework. To upgrade to the new system you can replace the usage of
     (new ErrorTrap(Configure::read('Error')))->register();
     (new ExceptionTrap(Configure::read('Error')))->register();
 
+Previously, ``E_USER_ERROR`` would have a best effort attempt at rendering
+a full page error screen. Under the new ``ErrorTrap`` implementation user-land
+errors are treated as non-halting and handled like warnings and notices are.
+
 See the :doc:`/development/errors` for more detailed documentation.
 
 RequestHandlerComponent
@@ -108,6 +112,12 @@ Database
 * The ``QueryExpression::case()`` builder now supports inferring the type
   from expressions passed to ``then()`` and ``else()`` that implement
   ``\Cake\Database\TypedResultInterface``.
+
+Error
+-----
+
+* ``ErrorTrap`` and ``ExceptionTrap`` were added. These classes form the
+  foundation of an updated error handling system for applications.
 
 Http
 ----
