@@ -30,6 +30,23 @@ features::
 A new configuration option has been added to disable deprecations on a path by
 path basis. See :ref:`deprecation-warnings` for more information.
 
+ErrorHandler & ConsoleErrorHandler
+----------------------------------
+
+The ``ErrorHandler`` and ``ConsoleErrorHandler`` classes are now deprecated.
+They have been replaced by the new ``ExceptionTrap`` and ``ErrorTrap`` classes.
+The trap classes provide a more extensible and consistent error & exception
+handling framework. To upgrade to the new system you can replace the usage of
+``ErrorHandler`` and ``ConsoleErrorHandler`` with::
+
+    use Cake\Error\ErrorTrap;
+    use Cake\Error\ExceptionTrap;
+
+    (new ErrorTrap(Configure::read('Error')))->register();
+    (new ExceptionTrap(Configure::read('Error')))->register();
+
+See the :doc:`/development/errors` for more detailed documentation.
+
 RequestHandlerComponent
 ------------------------
 
@@ -91,6 +108,12 @@ Database
 * The ``QueryExpression::case()`` builder now supports inferring the type
   from expressions passed to ``then()`` and ``else()`` that implement
   ``\Cake\Database\TypedResultInterface``.
+
+Error
+-----
+
+* ``ErrorTrap`` and ``ExceptionTrap`` were added. These classes form the
+  foundation of an updated error handling system for applications.
 
 Http
 ----
