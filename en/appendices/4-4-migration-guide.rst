@@ -92,6 +92,11 @@ Command
 
 * ``bin/cake routes`` now highlights collisions in route templates.
 
+Database
+--------
+
+* ``Sqlite`` driver now adds 'RETURNING *' epilog to insert statements with version 3.35 or newer.
+
 Controller
 ----------
 
