@@ -297,7 +297,7 @@ commandes. Les Mocks sont supprimés à la fin de chaque test.
 Auto Wiring
 ===========
 
-L'autowWiring est désactivé par défaut. Pour l'activer::
+L'auto Wiring est désactivé par défaut. Pour l'activer::
 
     // Dans src/Application.php
     public function services(ContainerInterface $container): void
