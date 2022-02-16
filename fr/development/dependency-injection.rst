@@ -307,6 +307,13 @@ L'auto Wiring est désactivé par défaut. Pour l'activer::
         );
     }
 
-À présent, vos dépendances sont résolues automatiquement. Pour en savoir plus
-sur l'auto wiring, consultez la
+À présent, vos dépendances sont résolues automatiquement. Cette approche ne
+mettra pas les résolutions en cache les résolutions, au détriment de la
+performance. Pour activer la mise en cache::
+
+    $container->delegate(
+        new \League\Container\ReflectionContainer(true) // ou utilisez la valeur de Configure::read('debug') 
+    );
+
+Pour en savoir plus sur l'auto wiring, consultez la
 `PHP League Container documentation <https://container.thephpleague.com/4.x/auto-wiring/>`.
