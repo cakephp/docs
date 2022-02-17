@@ -60,7 +60,7 @@ be removed in 5.0.
 - Replace ``prefers()`` with ``ContentTypeNegotiation``. See :ref:`controller-viewclasses`.
 - Replace ``renderAs()`` with controller content negotiation features on
   ``Controller``.
-- Replace ``checkHttpCache`` option with ``CheckHttpCacheComponent``.
+- Replace ``checkHttpCache`` option with :doc:`/controllers/components/chech-http-cache``.
 - Use :ref:`controller-viewclasses` instead of defining view class mappings in
   ``RequestHandlerComponent``.
 
