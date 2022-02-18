@@ -95,7 +95,8 @@ Command
 Database
 --------
 
-* ``Sqlite`` driver now adds 'RETURNING *' epilog to insert statements with version 3.35 or newer.
+* ``Sqlite`` driver now adds ``RETURNING *`` to the ``epilog`` to insert
+  statements with version 3.35 or newer.
 
 Controller
 ----------
