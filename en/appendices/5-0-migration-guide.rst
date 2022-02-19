@@ -63,6 +63,7 @@ Core
 Database
 --------
 
+- ``Query::execute()`` no longer runs results decorator callbacks. You must use ``Query::all()`` instead.
 - ``getMaxAliasLength()`` and ``getConnectionRetries()`` were added
   to ``DriverInterface``.
 - ``TableSchemaAwareInterface`` was removed.
@@ -116,3 +117,8 @@ View
 
 New Features
 ============
+
+Database
+--------
+
+- ``Query::all()`` was added which runs result decorator callbacks and returns a result set for select queries.
