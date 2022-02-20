@@ -1,7 +1,7 @@
 Deployment
 ##########
 
-Once your is ready to be deployed there are a few things you should do.
+Once your app is ready to be deployed there are a few things you should do.
 
 Moving files
 ============
