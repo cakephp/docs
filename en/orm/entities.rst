@@ -93,7 +93,7 @@ will access the data in an entity using object notation::
 
 You can also use the ``get()`` and ``set()`` methods.
 
-.. php:method:: set($field = null, $value = null)
+.. php:method:: set($field, $value = null, array $options = [])
 
 .. php:method:: get($field)
 
