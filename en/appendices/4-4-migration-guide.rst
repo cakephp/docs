@@ -64,11 +64,19 @@ be removed in 5.0.
 - Use :ref:`controller-viewclasses` instead of defining view class mappings in
   ``RequestHandlerComponent``.
 
+ORM
+---
+
+- ``SaveOptionsBuilder`` was deprecated. Use a normal array for options instead.
+
 Behavior Changes
 ================
 
 While the following changes do not change the signature of any methods they do
 change the semantics or behavior of methods.
+
+Routing
+-------
 
 * ``Router::parseRequest()`` now raises ``BadRequestException`` instead of
   ``InvalidArgumentException`` when an invalid HTTP method is used by a client.
