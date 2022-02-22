@@ -60,7 +60,7 @@ be removed in 5.0.
 - Replace ``prefers()`` with ``ContentTypeNegotiation``. See :ref:`controller-viewclasses`.
 - Replace ``renderAs()`` with controller content negotiation features on
   ``Controller``.
-- Replace ``checkHttpCache`` option with ``CheckHttpCacheComponent``.
+- Replace ``checkHttpCache`` option with :doc:`/controllers/components/check-http-cache`.
 - Use :ref:`controller-viewclasses` instead of defining view class mappings in
   ``RequestHandlerComponent``.
 
@@ -95,7 +95,8 @@ Command
 Database
 --------
 
-* ``Sqlite`` driver now adds 'RETURNING *' epilog to insert statements with version 3.35 or newer.
+* ``Sqlite`` driver now adds ``RETURNING *`` to the ``epilog`` to insert
+  statements with version 3.35 or newer.
 
 Controller
 ----------
