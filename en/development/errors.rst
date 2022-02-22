@@ -111,17 +111,21 @@ Listen to Events
 ================
 
 The ``ErrorTrap`` and ``ExceptionTrap`` handlers will trigger CakePHP events
-when they handle errors. You can listen to the ``Error.handled`` event to be
-notified of PHP errors. The ``Exception.handled`` event is dispatched when an
+when they handle errors. You can listen to the ``Error.beforeRender`` event to be
+notified of PHP errors. The ``Exception.beforeRender`` event is dispatched when an
 exception is handled::
 
     $errorTrap = new ErrorTrap(Configure::read('Error'));
     $errorTrap->getEventManager()->on(
-        'Error.handled',
+        'Error.beforeRender',
         function (EventInterface $event, PhpError $error) {
             // do your thing
         }
     );
+
+If your ``Error.beforeRender`` event handler stops the event, error rendering
+will be skipped. You cannot skip rendering a response/output for caught
+exceptions.
 
 .. versionadded:: 4.4.0
     Error and Exception events were added.
