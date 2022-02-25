@@ -386,10 +386,10 @@ fonctions SQL. Par exemple::
         ' - CAT: ',
         'Categories.name' => 'identifier',
         ' - Age: ',
-        $query->func()->dateDiff(
+        $query->func()->dateDiff([
             'NOW()' => 'literal',
             'Articles.created' => 'identifier'
-        )
+        ])
     ]);
     $query->select(['link_title' => $concat]);
 
