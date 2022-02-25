@@ -38,6 +38,10 @@ Changements de comportements
 
 Bien que les changements qui suivent ne changent la signature d'aucune méthode,
 ils en changent la sémantique ou le comportement.
+ 
+* ``Router::parseRequest()`` lève à présent une ``BadRequestException`` au lieu
+  d'une ``InvalidArgumentException`` lorsque le client utilise une méthode HTTP
+  invalide.
 
 Changements entraînant une rupture
 ==================================
