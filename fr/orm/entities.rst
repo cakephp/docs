@@ -99,7 +99,13 @@ en utilisant la notation objet::
     $article->title = 'Ceci est mon premier post';
     echo $article->title;
 
-Vous pouvez aussi utiliser les méthodes ``get()`` et ``set()``::
+Vous pouvez aussi utiliser les méthodes ``get()`` et ``set()``.
+
+.. php:method:: set($field = null, $value = null)
+
+.. php:method:: get($field)
+
+Par exemple::
 
     $article->set('title', 'Ceci est mon premier post');
     echo $article->get('title');
@@ -127,7 +133,7 @@ Vous pouvez vérifier si des champs sont définis dans vos entities avec
     ]);
     $article->has('title'); // true
     $article->has('user_id'); // false
-    $article->has('undefined'); // false.
+    $article->has('undefined'); // false
 
 La méthode ``has()`` va renvoyer ``true`` si un champ est défini est a une
 valeur non null. Vous pouvez utiliser ``isEmpty()`` et ``hasValue()`` pour
@@ -135,13 +141,25 @@ vérifier si un champ contient une valeur 'non-empty'::
 
     $article = new Article([
         'title' => 'Premier post',
-        'user_id' => null
+        'user_id' => null,
+        'text' => '',
+        'links' => []
     ]);
+    $article->has('title'); // true
     $article->isEmpty('title');  // false
     $article->hasValue('title'); // true
-
+ 
+    $article->has('user_id'); // false
     $article->isEmpty('user_id');  // true
     $article->hasValue('user_id'); // false
+ 
+    $article->has('text'); // true
+    $article->isEmpty('text');  // true
+    $article->hasValue('text'); // false
+
+    $article->has('links'); // true
+    $article->isEmpty('links');  // true
+    $article->hasValue('links'); // false
 
 Accesseurs & Mutateurs
 ======================
@@ -150,16 +168,16 @@ En plus de l'interface simple get/set, les entities vous permettent de fournir
 des méthodes accesseurs et mutateurs. Ces méthodes vous laissent personnaliser
 la façon dont les champs sont lus ou définis.
 
-Les accesseurs utilisent la convention ``_get`` suivi par la version en camel
-case du nom du champ.
+Accesseurs
+----------
 
-.. php:method:: get($field)
+Les accesseurs vous permettent de personnaliser la façon dont les champ sont
+lus. Ils utilisent la convention ``_get(NomDuChamp)`` où ``(NomDuChamp)`` est le
+nom du champ en version CamelCase (plusieurs mots accollés avec la première
+lettre de chacun en majuscule).
 
 Ils reçoivent la valeur basique stockée dans le tableau ``_fields`` pour
-seul argument.
-Les accesseurs seront utilisés lors de la sauvegarde des entities. Faites donc
-attention lorsque vous définissez des méthodes qui formatent les données car ce
-sont ces données formatées qui seront sauvegardées. Par exemple::
+seul argument. Par exemple::
 
     namespace App\Model\Entity;
 
@@ -167,40 +185,44 @@ sont ces données formatées qui seront sauvegardées. Par exemple::
 
     class Article extends Entity
     {
-        protected function _getTitle($title)
+        protected function _getTitre($titre)
         {
-            return ucwords($title);
+            return strtoupper($titre);
         }
     }
 
-Les accesseurs seront utilisés quand vous récupérerez le champ *via* une de
-ces deux manières::
+Cet exemple convertit la valeur du champ ``titre`` en majuscules à chaque fois
+qu'il est lu. Il sera exécuté quand vous récupérerez le champ *via* une de ces
+deux manières::
 
-    echo $article->title;
-    echo $article->get('title');
+    echo $article->titre; // renvoie FOO au lieu de foo
+    echo $article->get('titre'); // renvoie FOO au lieu de foo
 
 .. note::
 
     Le code dans vos accesseurs est exécuté à chaque fois que vous faites
     référence au champ. Vous pouvez utiliser une variable locale de la façon
     suivante pour le mettre en cache si vous réalisez une opération gourmande en
-    ressources: `$myEntityProp = $entity->my_property`.
+    ressources: `$maPropriete = $entity->ma_propriete`.
 
+.. warning::
+
+    Les accesseurs seront utilisés lors de la sauvegarde des entities. Faites
+    donc attention lorsque vous définissez des méthodes qui formatent les
+    données car ce sont ces données formatées qui seront sauvegardées.
+
+Mutateurs
+---------
+ 
 Vous pouvez personnaliser la façon dont les champs sont définis
-en implémentant un mutateur:
-
-.. php:method:: set($field = null, $value = null)
+en implémentant un mutateur. Ils utilisent la convention ``_set(NomDuChamp)`` où
+``(NomDuChamp)`` est le nom du champ en version CamelCase version.
 
 Les méthodes mutateurs doivent toujours retourner la valeur qui doit être
-stockée dans le champ. Comme vous pouvez le voir ci-dessus, vous pouvez aussi
-utiliser les mutateurs pour définir d'autres champs calculés. Quand vous faites
-cela, attention à ne pas introduire de boucles, puisque CakePHP n'empêchera pas
-les méthodes mutateurs de faire des boucles infinies.
-
-Les mutateurs vous permettent de convertir les champs lorsqu'ils sont définis,
-ou de créer des données calculées. Les mutateurs et accesseurs sont appliqués
-quand les champs sont lus en utilisant la notation objet ou en utilisant
-``get()`` et ``set()``. Par exemple::
+stockée dans le champ. Vous pouvez aussi utiliser les mutateurs pour définir les
+valeurs d'autres champs. Quand vous faites cela, attention à ne pas introduire
+de boucles, puisque CakePHP n'empêchera pas les méthodes mutateurs de faire des
+boucles infinies. Par exemple::
 
     namespace App\Model\Entity;
 
@@ -210,18 +232,22 @@ quand les champs sont lus en utilisant la notation objet ou en utilisant
     class Article extends Entity
     {
 
-        protected function _setTitle($title)
+        protected function _setTitre($titre)
         {
-            return Text::slug($title);
+            $this->minuscules = Text::slug($titre);
+
+            return strtouppercase($titre);
         }
 
     }
 
-Les mutateurs seront utilisés lorsque vous définirez une propriété *via* une de
+Cet exemple fait deux choses : il stocke une version modifiée de la valeur
+spécifiée dans le champ ``minuscules`` et stocke une version en majuscules dans
+le champ ``titre``. Il sera executé lorsque vous définirez le champ *via* une de
 ces deux manières::
 
-    $user->title = 'foo' // slug sera aussi défini
-    $user->set('title', 'foo'); // slug sera aussi défini
+    $user->titre = 'foo' // définit le champ minuscules et stocke FOO au lieu de foo
+    $user->set('titre', 'foo'); // définit le champ minuscules et stocke FOO au lieu de foo
 
 .. warning::
 
@@ -259,6 +285,7 @@ Le nom du champ sera le nom de la méthode en minuscules, avec des underscores
 pour séparer les mots (``full_name``)::
 
     echo $user->full_name;
+    echo $user->get('full_name');
 
 Souvenez-vous que les champs virtuels ne peuvent pas être utilisés dans
 les finds. Si vous voulez qu'ils fassent partie des données JSON ou dans des
