@@ -56,6 +56,8 @@ Nouvelles fonctionnalités
 Database
 --------
 
+* Le pilote ``SQLite`` supporte maintenant les base de données partagées en
+  mémoire dans PHP8.1+.
 * ``Query::expr()`` a été ajoutée comme alternative à ``Query::newExpr()``.
 * Le builder ``QueryExpression::case()`` supporte maintenant la détection de
   type à partir d'expressions passées à ``then()`` et ``else()`` qui
