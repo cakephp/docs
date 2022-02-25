@@ -1,6 +1,10 @@
 Injection de Dépendance
 #######################
 
+.. warning::
+    Le conteneur Dependency Injection est une fonctionnalité expérimentale dont
+    l'API n'est pas encore stabilisé.
+
 Le conteneur de services de CakePHP vous permet de gérer les dépendances de
 classes de vos services applicatifs par l'injection de dépendance. L'injection
 de dépendance "injecte" automatiquement les dépendances d'un objet dans son
