@@ -60,3 +60,9 @@ Database
 * Le builder ``QueryExpression::case()`` supporte maintenant la détection de
   type à partir d'expressions passées à ``then()`` et ``else()`` qui
   implémentent ``\Cake\Database\TypedResultInterface``.
+
+Http
+----
+
+* ``HttpsEnforcerMiddleware`` a désormais une option ``hsts`` qui permet de
+  configure le header ``Strict-Transport-Security``.
