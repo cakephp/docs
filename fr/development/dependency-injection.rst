@@ -82,6 +82,7 @@ la commande.
 
 Ajouter des Services
 ====================
+
 Pour disposer de services créés par le conteneur, vous devez lui dire quelles
 classes il peut créer et comment construire ces classes. La définition la plus
 simple se fait par le nom de la classe::
@@ -138,6 +139,12 @@ soit des valeurs primitives::
 
     $container->add(BillingService::class)
         ->addArgument('apiKey');
+
+Vos services peuvent faire référence à la ``ServerRequest`` dans les actions du
+controller car elle sera chargée automatiquement.
+
+.. versionchanged:: 4.4.0
+    La ``$request`` est désormais enregistrée automatiquement.
 
 Ajouter des Services Partagés
 -----------------------------
