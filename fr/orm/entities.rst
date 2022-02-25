@@ -101,7 +101,7 @@ en utilisant la notation objet::
 
 Vous pouvez aussi utiliser les méthodes ``get()`` et ``set()``.
 
-.. php:method:: set($field = null, $value = null)
+.. php:method:: set($field, $value = null, array $options = [])
 
 .. php:method:: get($field)
 
