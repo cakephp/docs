@@ -199,7 +199,7 @@ nécessaire. Notre écouteur ``UserStatistics`` pourrait commencer comme ceci::
         {
             return [
                 // La personnalisation des noms d'événements vous permet de
-                // concevoir correctement votre application.
+                // concevoir au mieux votre application.
                 'Model.Orders.afterPlace' => 'updateBuyStatistic',
             ];
         }
