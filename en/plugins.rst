@@ -297,6 +297,7 @@ like::
     namespace ContactManager;
 
     use Cake\Core\BasePlugin;
+    use Cake\Core\ContainerInterface;
     use Cake\Core\PluginApplicationInterface;
     use Cake\Console\CommandCollection;
     use Cake\Http\MiddlewareQueue;
@@ -331,6 +332,18 @@ like::
             // Add routes.
             // By default will load `config/routes.php` in the plugin.
             parent::routes($routes);
+        }
+
+        /**
+         * Register application container services.
+         *
+         * @param \Cake\Core\ContainerInterface $container The Container to update.
+         * @return void
+         * @link https://book.cakephp.org/4/en/development/dependency-injection.html#dependency-injection
+         */
+        public function services(ContainerInterface $container): void
+        {
+            // Add your services here
         }
     }
 
