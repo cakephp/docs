@@ -434,7 +434,7 @@ Behaviors
 Les Behaviors fournissent un moyen de créer des parties de logique
 réutilisables horizontalement liées aux classes table. Vous vous demandez
 peut-être pourquoi les behaviors sont des classes classiques et non des
-traits. La raison principale est les écouteurs d'event. Alors que les traits
+traits. La raison principale tient aux écouteurs d'event. Alors que les traits
 permettent de réutiliser des parties de logique, ils compliqueraient la
 liaison des events.
 
