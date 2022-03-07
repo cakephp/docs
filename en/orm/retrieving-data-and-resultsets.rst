@@ -1278,7 +1278,7 @@ than 20 times across all articles::
         }
     };
 
-    $articles->find('commonWords')->all()->mapReduce($mapper);
+    $articles->find('commonWords')->mapReduce($mapper)->all();
 
 Removing All Stacked Map-reduce Operations
 ------------------------------------------
