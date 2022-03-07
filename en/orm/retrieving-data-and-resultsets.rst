@@ -1104,8 +1104,8 @@ Finally, we can put these two functions together to do the grouping::
 
     $articlesByStatus = $articles->find()
         ->where(['author_id' => 1])
-        ->all()
-        ->mapReduce($mapper, $reducer);
+        ->mapReduce($mapper, $reducer)
+        ->all();
 
     foreach ($articlesByStatus as $status => $articles) {
         echo sprintf("There are %d %s articles", count($articles), $status);
@@ -1150,8 +1150,8 @@ Finally, we put everything together::
         ->where(['published' => true])
         ->andWhere(['published_date >=' => new DateTime('2014-01-01')])
         ->disableHydration()
-        ->all()
         ->mapReduce($mapper, $reducer)
+        ->all()
         ->toArray();
 
 This could return a very large array if we don't clean stop words, but it could
@@ -1211,8 +1211,8 @@ And we supply our functions to a query::
 
     $fakeFriends = $friends->find()
         ->disableHydration()
-        ->all()
         ->mapReduce($mapper, $reducer)
+        ->all()
         ->toArray();
 
 This would return an array similar to this::
