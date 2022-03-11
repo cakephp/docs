@@ -237,7 +237,7 @@ the view file in **src/Template/Recipes/search.ctp** will be rendered::
     }
 
 Although CakePHP will automatically call it after every action's logic
-(unless you've set ``$this->autoRender`` to ``false``), you can use it to specify
+(unless you've called ``$this->disableAutoRender()``), you can use it to specify
 an alternate view file by specifying a view file name as first argument of
 ``Controller::render()`` method.
 
