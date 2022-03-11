@@ -69,6 +69,13 @@ ORM
 
 - ``SaveOptionsBuilder`` was deprecated. Use a normal array for options instead.
 
+Plugins
+=======
+- Plugin class names now match the plugin name with a "Plugin" suffix. So for
+  for e.g. for a plugin "ADmad/I18n" the plugin class would be ``ADmad\I18n\I18nPlugin``
+  instead of ``ADmad\I18n\Plugin``, as was the case for CakePHP 4.3 and below.
+  The old style name is still supported for backwards compatibility.
+
 Behavior Changes
 ================
 
@@ -136,13 +143,13 @@ Http
   container all the time.
 * ``HttpsEnforcerMiddleware`` now has an ``hsts`` option that allows you to
   configure the ``Strict-Transport-Security`` header.
-  
+
 Mailer
 ------
 
 * ``Mailer`` now accepts a ``autoLayout`` config which disabled auto layout
   in the ``ViewBuilder`` if set to ``false``.
-  
+
 Routing
 -------
 
