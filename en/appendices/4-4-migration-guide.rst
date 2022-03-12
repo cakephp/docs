@@ -71,8 +71,7 @@ ORM
 
 Plugins
 =======
-- Plugin class names now match the plugin name with a "Plugin" suffix. So for
-  for e.g. for a plugin "ADmad/I18n" the plugin class would be ``ADmad\I18n\I18nPlugin``
+- Plugin class names now match the plugin name with a "Plugin" suffix. For example, the plugin class for "ADmad/I18n" would be ``ADmad\I18n\I18nPlugin``
   instead of ``ADmad\I18n\Plugin``, as was the case for CakePHP 4.3 and below.
   The old style name is still supported for backwards compatibility.
 
