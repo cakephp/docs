@@ -7,7 +7,6 @@ Contents
     index
 
 .. toctree::
-    :maxdepth: 3
     :caption: Preface
 
     intro
@@ -18,7 +17,6 @@ Contents
     release-policy
 
 .. toctree::
-    :maxdepth: 3
     :caption: Getting Started
 
     installation
@@ -33,7 +31,6 @@ Contents
     orm
 
 .. toctree::
-    :maxdepth: 3
     :caption: Using CakePHP
 
     core-libraries/caching
@@ -55,7 +52,6 @@ Contents
     core-libraries/validation
 
 .. toctree::
-    :maxdepth: 3
     :caption: Utility Classes
 
     core-libraries/app
@@ -72,7 +68,6 @@ Contents
     core-libraries/xml
 
 .. toctree::
-    :maxdepth: 3
     :caption: Plugins & Packages
 
     standalone-packages
@@ -87,7 +82,6 @@ Contents
     Queue <https://book.cakephp.org/queue/1/en/>
 
 .. toctree::
-    :maxdepth: 3
     :caption: Other
 
     core-libraries/global-constants-and-functions
