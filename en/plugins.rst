@@ -99,7 +99,7 @@ application's ``bootstrap()`` function::
 
     // In src/Application.php
     use Cake\Http\BaseApplication;
-    use ContactManager\Plugin as ContactManagerPlugin;
+    use ContactManager\ContactManagerPlugin;
 
     class Application extends BaseApplication {
         public function bootstrap()
@@ -155,7 +155,7 @@ allow plugin authors to set defaults, which can be configured by you in your
 application::
 
     // In Application::bootstrap()
-    use ContactManager\Plugin as ContactManagerPlugin;
+    use ContactManager\ContactManagerPlugin;
 
     // Disable routes for the ContactManager plugin
     $this->addPlugin(ContactManagerPlugin::class, ['routes' => false]);
@@ -164,7 +164,7 @@ You can configure hooks with array options, or the methods provided by plugin
 classes::
 
     // In Application::bootstrap()
-    use ContactManager\Plugin as ContactManagerPlugin;
+    use ContactManager\ContactManagerPlugin;
 
     // Use the disable/enable to configure hooks.
     $plugin = new ContactManagerPlugin();
@@ -229,7 +229,7 @@ basic directory structure. It should look like this::
         /ContactManager
             /config
             /src
-                /Plugin.php
+                /ContactManagerPlugin.php
                 /Controller
                     /Component
                 /Model
@@ -297,11 +297,12 @@ like::
     namespace ContactManager;
 
     use Cake\Core\BasePlugin;
+    use Cake\Core\ContainerInterface;
     use Cake\Core\PluginApplicationInterface;
     use Cake\Console\CommandCollection;
     use Cake\Http\MiddlewareQueue;
 
-    class Plugin extends BasePlugin
+    class ContactManagerPlugin extends BasePlugin
     {
         public function middleware(MiddlewareQueue $middleware): MiddlewareQueue
         {
@@ -331,6 +332,18 @@ like::
             // Add routes.
             // By default will load `config/routes.php` in the plugin.
             parent::routes($routes);
+        }
+
+        /**
+         * Register application container services.
+         *
+         * @param \Cake\Core\ContainerInterface $container The Container to update.
+         * @return void
+         * @link https://book.cakephp.org/4/en/development/dependency-injection.html#dependency-injection
+         */
+        public function services(ContainerInterface $container): void
+        {
+            // Add your services here
         }
     }
 

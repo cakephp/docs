@@ -360,10 +360,10 @@ safely add user data to SQL functions. For example::
         ' - CAT: ',
         'Categories.name' => 'identifier',
         ' - Age: ',
-        $query->func()->dateDiff(
+        $query->func()->dateDiff([
             'NOW()' => 'literal',
             'Articles.created' => 'identifier'
-        )
+        ])
     ]);
     $query->select(['link_title' => $concat]);
 
@@ -1585,12 +1585,23 @@ results based on the results of other queries::
         ->distinct()
         ->where(['comment LIKE' => '%CakePHP%']);
 
+    // Use a subquery to create conditions
     $query = $articles->find()
         ->where(['id IN' => $matchingComment]);
 
+    // Join the results of a subquery into another query.
+    // Giving the subquery an alias provides a way to reference
+    // results in subquery.
+    $query = $articles->find();
+    $query->from(['matches' => $matchingComment])
+        ->innerJoin(
+            ['Articles' =>  'articles'], 
+            ['Articles.id' => $query->identifier('matches.id') ]
+        );
+
 Subqueries are accepted anywhere a query expression can be used. For example, in
-the ``select()`` and ``join()`` methods. The above example uses a standard
-``Orm\Query`` object that will generate aliases, these aliases can make
+the ``select()``, ``from()`` and ``join()`` methods. The above example uses a standard
+``ORM\Query`` object that will generate aliases, these aliases can make
 referencing results in the outer query more complex. As of 4.2.0 you can use
 ``Table::subquery()`` to create a specialized query instance that will not
 generate aliases::

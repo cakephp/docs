@@ -581,8 +581,8 @@ Check whether a specific language is accepted::
 
 .. _request-cookies:
 
-Cookies
--------
+Reading Cookies
+---------------
 
 Request cookies can be read through a number of methods::
 
@@ -1039,7 +1039,7 @@ the response content, and sends the `304 Not Modified` header::
 .. _response-cookies:
 
 Setting Cookies
-===============
+---------------
 
 Cookies can be added to response using either an array or a :php:class:`Cake\\Http\\Cookie\\Cookie`
 object::

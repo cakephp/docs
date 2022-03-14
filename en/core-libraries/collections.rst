@@ -676,7 +676,7 @@ By default, ``SORT_NUMERIC`` is used::
 Working with Tree Data
 ======================
 
-.. php:method:: nest($idPath, $parentPath)
+.. php:method:: nest($idPath, $parentPath, $nestingKey = 'children')
 
 Not all data is meant to be represented in a linear way. Collections make it
 easier to construct and flatten hierarchical or nested structures. Creating

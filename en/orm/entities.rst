@@ -91,7 +91,13 @@ will access the data in an entity using object notation::
     $article->title = 'This is my first post';
     echo $article->title;
 
-You can also use the ``get()`` and ``set()`` methods::
+You can also use the ``get()`` and ``set()`` methods.
+
+.. php:method:: set($field, $value = null, array $options = [])
+
+.. php:method:: get($field)
+
+For example::
 
     $article->set('title', 'This is my first post');
     echo $article->get('title');
@@ -116,7 +122,7 @@ You can check if fields are defined in your entities with ``has()``::
     ]);
     $article->has('title'); // true
     $article->has('user_id'); // false
-    $article->has('undefined'); // false.
+    $article->has('undefined'); // false
 
 The ``has()`` method will return ``true`` if a field is defined and has
 a non-null value. You can use ``isEmpty()`` and ``hasValue()`` to check if
@@ -124,13 +130,25 @@ a field contains a 'non-empty' value::
 
     $article = new Article([
         'title' => 'First post',
-        'user_id' => null
+        'user_id' => null,
+        'text' => '',
+        'links' => []
     ]);
+    $article->has('title'); // true
     $article->isEmpty('title');  // false
     $article->hasValue('title'); // true
 
+    $article->has('user_id'); // false
     $article->isEmpty('user_id');  // true
     $article->hasValue('user_id'); // false
+
+    $article->has('text'); // true
+    $article->isEmpty('text');  // true
+    $article->hasValue('text'); // false
+
+    $article->has('links'); // true
+    $article->isEmpty('links');  // true
+    $article->hasValue('links'); // false
 
 Accessors & Mutators
 ====================
@@ -139,15 +157,16 @@ In addition to the simple get/set interface, entities allow you to provide
 accessors and mutator methods. These methods let you customize how fields
 are read or set.
 
-Accessors use the convention of ``_get`` followed by the CamelCased version of
-the field name.
+Accessors
+---------
 
-.. php:method:: get($field)
+Accessors let you customize how fields are read. They use the convention of
+``_get(FieldName)`` with ``(FieldName)`` being the CamelCased version (multiple
+words are joined together to a single word with the first letter of each word
+capitalized) of the field name.
 
-They receive the basic value stored in the ``_fields`` array
-as their only argument. Accessors will be used when saving entities, so be
-careful when defining methods that format data, as the formatted data will be
-persisted. For example::
+They receive the basic value stored in the ``_fields`` array as their only
+argument. For example::
 
     namespace App\Model\Entity;
 
@@ -157,14 +176,16 @@ persisted. For example::
     {
         protected function _getTitle($title)
         {
-            return ucwords($title);
+            return strtoupper($title);
         }
     }
 
-The accessor would be run when getting the field through any of these two ways::
+The example above converts the value of the ``title`` field to an uppercase
+version each time it is read. It would be run when getting the field through any
+of these two ways::
 
-    echo $article->title;
-    echo $article->get('title');
+    echo $article->title; // returns FOO instead of foo
+    echo $article->get('title'); // returns FOO instead of foo
 
 .. note::
 
@@ -172,18 +193,22 @@ The accessor would be run when getting the field through any of these two ways::
     use a local variable to cache it if you are performing a resource-intensive
     operation in your accessor like this: `$myEntityProp = $entity->my_property`.
 
-You can customize how fields get set by defining a mutator:
+.. warning::
 
-.. php:method:: set($field = null, $value = null)
+    Accessors will be used when saving entities, so be careful when defining methods
+    that format data, as the formatted data will be persisted.
 
-Mutator methods should always return the value that should be stored in the
-field. As you can see above, you can also use mutators to set other
-calculated fields. When doing this, be careful to not introduce any loops,
-as CakePHP will not prevent infinitely looping mutator methods.
+Mutators
+--------
 
-Mutators allow you to convert fields as they are set, or create calculated
-data. Mutators and accessors are applied when fields are read using property
-access, or using ``get()`` and ``set()``. For example::
+You can customize how fields get set by defining a mutator. They use the
+convention of ``_set(FieldName)`` with ``(FieldName)`` being the CamelCased version
+of the field name.
+
+Mutators should always return the value that should be stored in the field.
+You can also use mutators to set other fields. When doing this,
+be careful to not introduce any loops, as CakePHP will not prevent infinitely
+looping mutator methods. For example::
 
     namespace App\Model\Entity;
 
@@ -194,15 +219,19 @@ access, or using ``get()`` and ``set()``. For example::
     {
         protected function _setTitle($title)
         {
-            return Text::slug($title);
+            $this->slug = Text::slug($title);
+
+            return strtouppercase($title);
         }
     }
 
-The mutator would be run when setting the field through any of these two
-ways::
+The example above is doing two things: It stores a modified version of the
+given value in the ``slug`` field and stores an uppercase version in the
+``title`` field. It would be run when setting the field through
+any of these two ways::
 
-    $user->title = 'foo'; // slug is set as well
-    $user->set('title', 'foo'); // slug is set as well
+    $user->title = 'foo'; // sets slug field and stores FOO instead of foo
+    $user->set('title', 'foo'); // sets slug field and stores FOO instead of foo
 
 .. warning::
 
@@ -235,6 +264,7 @@ You can access virtual fields as if they existed on the entity. The property
 name will be the lower case and underscored version of the method (``full_name``)::
 
     echo $user->full_name;
+    echo $user->get('full_name');
 
 Do bear in mind that virtual fields cannot be used in finds. If you want
 them to be part of JSON or array representations of your entities,
