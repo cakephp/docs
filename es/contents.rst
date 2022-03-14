@@ -7,7 +7,6 @@ Contenidos
    index
 
 .. toctree::
-    :maxdepth: 3
     :caption: Prólogo
 
     intro
@@ -17,7 +16,6 @@ Contenidos
     contributing
 
 .. toctree::
-    :maxdepth: 3
     :caption: Comenzando
 
     installation
@@ -30,7 +28,6 @@ Contenidos
     orm
 
 .. toctree::
-    :maxdepth: 3
     :caption: Usando CakePHP
 
     controllers/components/authentication
@@ -53,7 +50,6 @@ Contenidos
     core-libraries/validation
 
 .. toctree::
-    :maxdepth: 3
     :caption: Clases de utilidad
 
     core-libraries/app
@@ -69,7 +65,6 @@ Contenidos
     core-libraries/xml
 
 .. toctree::
-    :maxdepth: 3
     :caption: Plugins
 
     Bake <https://book.cakephp.org/bake/2/es/>
@@ -79,7 +74,6 @@ Contenidos
     elasticsearch
 
 .. toctree::
-    :maxdepth: 3
     :caption: Otros
 
     core-libraries/global-constants-and-functions
