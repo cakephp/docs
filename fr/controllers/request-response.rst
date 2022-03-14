@@ -599,8 +599,8 @@ Vérifier si une langue spécifique est acceptée::
 
 .. _request-cookies:
 
-Cookies
--------
+Lire des Cookies
+----------------
 
 Les cookies de la requête peuvent être lus à travers plusieurs méthodes::
 
@@ -1079,7 +1079,7 @@ il supprime le contenu de la réponse et envoie l'en-tête `304 Not Modified`::
 .. _response-cookies:
 
 Définir des Cookies
-===================
+-------------------
 
 Des cookies peuvent être ajoutés aux réponses en utilisant soit un tableau, soit
 un objet :php:class:`Cake\\Http\\Cookie\\Cookie`::
