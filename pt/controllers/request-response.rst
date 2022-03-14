@@ -424,8 +424,8 @@ Verifique se um idioma específico é aceito::
 
 .. _request-cookies:
 
-Cookies
--------
+Lendo Cookies
+-------------
 
 Os cookies de solicitação podem ser lidos através de vários métodos::
 
@@ -874,7 +874,7 @@ o conteúdo da resposta e envia o cabeçalho `304 Not Modified`::
 .. _response-cookies:
 
 Configurando Cookies
-====================
+--------------------
 
 Os cookies podem ser adicionados à resposta usando um array ou um objeto :php:class:`Cake\\Http\\Cookie\\Cookie`::
 
