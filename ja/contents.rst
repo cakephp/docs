@@ -7,7 +7,6 @@
     index
 
 .. toctree::
-    :maxdepth: 3
     :caption: はじめに
 
     intro
@@ -18,7 +17,6 @@
     release-policy
 
 .. toctree::
-    :maxdepth: 3
     :caption: CakePHP 入門
 
     installation
@@ -33,7 +31,6 @@
     orm
 
 .. toctree::
-    :maxdepth: 3
     :caption: 一般的なトピック
 
     core-libraries/caching
@@ -55,7 +52,6 @@
     core-libraries/validation
 
 .. toctree::
-    :maxdepth: 3
     :caption: ユーティリティ
 
     core-libraries/app
@@ -72,7 +68,6 @@
     core-libraries/xml
 
 .. toctree::
-    :maxdepth: 3
     :caption: プラグインとパッケージ
 
     standalone-packages
@@ -87,7 +82,6 @@
     Queue <https://book.cakephp.org/queue/1/en/>
 
 .. toctree::
-    :maxdepth: 3
     :caption: その他
 
     core-libraries/global-constants-and-functions
