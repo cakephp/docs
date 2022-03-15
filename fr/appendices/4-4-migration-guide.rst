@@ -33,6 +33,9 @@ Une nouvelle option de configuration a été ajoutée pour désactiver les
 dépéréciations chemin par chemin. Cf. :ref:`deprecation-warnings` pour plus
 d'informations.
 
+* La définition de mappings de classes de vue avec ``RequestHandlerComponent``
+  est dépréciée. Utilisez :ref:`controller-viewclasses` à la place.
+
 Changements de comportements
 ============================
 
@@ -56,6 +59,14 @@ Global
 
 Nouvelles fonctionnalités
 =========================
+
+Controller
+----------
+
+* ``Controller::viewClasses()`` a été ajoutée. Les controllers qui ont besoin de
+  réaliser une négociation de contenu devraient implémenter cette méthode. Les
+  classes de vue à proposer dans cette négociation de contenu devront
+  implémenter la méthode statique ``contentType()``.
 
 Database
 --------

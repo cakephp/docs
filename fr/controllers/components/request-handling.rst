@@ -277,6 +277,10 @@ la configuration ``viewClassMap``::
         ]);
     }
 
+.. deprecated:: 4.4.0
+    Au lieu de définir ``viewClassMap``, vous devriez utiliser
+    :ref:`controller-viewclasses` instead.
+
 .. deprecated:: 3.1.0
     Depuis 3.1.0, la méthode ``viewClassMap()`` est dépréciée. Vous devez
     utiliser ``config()`` pour changer viewClassMap à la volée.
