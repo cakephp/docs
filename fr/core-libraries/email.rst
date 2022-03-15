@@ -127,8 +127,9 @@ sont utilisées:
 - ``'theme'``: Theme utilisé pour le rendu du template. Voir
   ``Email::setTheme()``.
 - ``'layout'``: Si vous utilisez un contenu rendu, définissez le layout à
-  rendre. Si vous voulez rendre un template sans layout, définissez ce champ
-  à null. Regardez ``Email::template()``.
+  rendre. Regardez ``ViewBuilder::setTemplate()``.
+- ``'autoLayout'``: Si vous voulez rendre un template sans layout, définissez ce
+  champ à ``false``. See ``ViewBuilder::disableAutoLayout()``.
 - ``'viewVars'``: Si vous utilisez un contenu rendu, définissez le tableau avec
   les variables devant être rendus dans la vue. Regardez
   ``Email::viewVars()``.
