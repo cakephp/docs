@@ -284,9 +284,8 @@ Hash パス構文
             ]
         */
 
-    You can provide arrays for both ``$keyPath`` and ``$valuePath``. If you do this,
-    the first value will be used as a format string, for values extracted by the
-    other paths::
+    ``$keyPath`` および ``$valuePath`` で配列を指定することができます。これにより、
+    最初の要素で指定した形式に合わせて、その他のパスで指定した値がフォーマットされます。 ::
 
         $result = Hash::combine(
             $a,
