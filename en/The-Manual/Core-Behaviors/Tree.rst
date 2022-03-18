@@ -527,7 +527,7 @@ removeFromTree
 
 Using this method wil either delete or move a node but retain its
 sub-tree, which will be reparented one level higher. It offers more
-control than ```delete()`:doc:`/The-Manual/Developing-with-CakePHP/Models`, which for a model using
+control than :doc:`delete() </The-Manual/Developing-with-CakePHP/Models>`, which for a model using
 the tree behavior will remove the specified node and all of its
 children.
 
