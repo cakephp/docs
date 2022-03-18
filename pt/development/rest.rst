@@ -11,7 +11,7 @@ Embora existam outras soluções, o REST é uma ótima maneira de facilitar
 acesso à lógica que você criou no seu aplicativo. Está
 simples, geralmente baseado em XML (falamos XML simples, nada como um
 Envelope SOAP) e depende de cabeçalhos HTTP para direção. Exposição
-Uma API via REST no CakePHP é simples.    
+Uma API via REST no CakePHP é simples.
 
 A Configuração Simples
 ======================
@@ -22,7 +22,7 @@ A maneira mais rápida de começar a funcionar com o REST é adicionar algumas l
 
     Router::mapResources('recipes');
     Router::parseExtensions();
-    
+
 A primeira linha configura uma série de rotas padrão para acesso REST fácil enquanto
 ``parseExtensions()`` especifica o formato de resultado desejado (por exemplo, xml,
 json, rss). Essas rotas são sensíveis ao método de solicitação HTTP.
@@ -82,7 +82,7 @@ esta::
                 '_serialize' => array('recipe')
             ));
         }
-        
+
         public function add() {
             $this->Recipe->create();
             if ($this->Recipe->save($this->request->data)) {
@@ -221,7 +221,7 @@ opções para um determinado URL. Consulte a seção em :ref:`route-conditions` 
 
 .. versionadded:: 2.5
 
-Você pode fornecer a chave ``connectOptions`` na matriz ``$options` para
+Você pode fornecer a chave ``connectOptions`` na matriz ``$options`` para
 :php:meth:`Router::mapResources()` para fornecer configurações personalizadas usadas por
 :php:meth:`Router::connect()`::
 
