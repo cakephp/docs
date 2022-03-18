@@ -274,6 +274,8 @@ for the rule:
         )
     );
 
+.. _multiple-rules-per-field:
+
 Multiple Rules per Field
 ========================
 
