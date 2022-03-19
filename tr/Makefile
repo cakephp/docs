@@ -41,7 +41,7 @@ clean:
 	-rm -rf $(BUILDDIR)/*
 
 html:
-	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html/$(LANG)
+	$(SPHINXBUILD) -b html -D "exclude_patterns=*-contents.rst" $(ALLSPHINXOPTS) $(BUILDDIR)/html/$(LANG)
 	@echo
 	@echo "Oluşturma bitti. HTML dosyaları $(BUILDDIR)/html/$(LANG) konumunda."
 

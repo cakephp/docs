@@ -7,6 +7,7 @@ Contenu
     index
     topics
     bake
+    bake/development
     bake/usage
     chronos
     debug-kit
@@ -29,6 +30,7 @@ Contenu
 
     installation
     development/configuration
+    development/application
     development/routing
     controllers/request-response
     controllers/middleware
