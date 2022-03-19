@@ -380,9 +380,7 @@ and instead an engine instance is made for each unique key created with
 ``Cache::engine()`` was not needed and was removed. In addition
 ``Cache::isInitialized()`` now checks cache *configuration names*, not
 cache *engine names*. You can still use ``Cache::set()`` or
-``Cache::engine()`` to modify cache configurations. Also checkout the
-:doc:`/New-features-in-CakePHP-1-3` for more
-information on the additional methods added to ``Cache``.
+``Cache::engine()`` to modify cache configurations.
 
 It should be noted that using an app/libs or plugin cache engine for the
 default cache config can cause performance issues as the import that
