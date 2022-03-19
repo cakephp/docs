@@ -1009,9 +1009,9 @@ Shell API
     :param string $text: The text to format
     :param array $options:
 
-        * ``width`` The width to wrap to. Defaults to 72
-        * ``wordWrap`` Only wrap on words breaks (spaces) Defaults to true.
-        * ``indent`` Indent the text with the string provided. Defaults to null.
+    * ``width`` The width to wrap to. Defaults to 72
+    * ``wordWrap`` Only wrap on words breaks (spaces) Defaults to true.
+    * ``indent`` Indent the text with the string provided. Defaults to null.
 
 More topics
 ===========

@@ -1014,9 +1014,9 @@ API du Router
     :param mixed $full: Si (boolean) à true, l'URL entièrement basée sera
         précédée au résultat. Si un tableau accepte les clés suivantes.
 
-           * escape - utilisé quand on fait les URLs intégrées dans les
-             chaînes de requête HTML échappées '&'.
-           * full - Si à true, l'URL de base complète sera précédée.
+    * escape - utilisé quand on fait les URLs intégrées dans les
+      chaînes de requête HTML échappées '&'.
+    * full - Si à true, l'URL de base complète sera précédée.
 
     Génère une URL pour l'action spécfiée. Retourne une URL pointant vers
     une combinaison de controller et d'action. $url peut être:

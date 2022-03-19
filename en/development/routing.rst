@@ -1016,9 +1016,9 @@ Router API
     :param mixed $full: If (boolean) true, the full base URL will be prepended
         to the result. If an array accepts the following keys
 
-           * escape - used when making URLs embedded in HTML escapes query
-             string '&'
-           * full - if true the full base URL will be prepended.
+    * escape - used when making URLs embedded in HTML escapes query
+      string '&'
+    * full - if true the full base URL will be prepended.
 
     Generate a URL for the specified action. Returns a URL pointing
     to a combination of controller and action. $url can be:

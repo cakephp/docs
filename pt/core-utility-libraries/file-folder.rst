@@ -97,8 +97,9 @@ Folder API
 .. php:method:: chmod(string $path, integer $mode = false, boolean $recursive = true, array $exceptions = array())
 
     :rtype: boolean
-     Muda o mode(Permissão) de uma estrutura de diretórios recursivamente. Isso
-     inclui mudança no mode(Permissão) dos arquivos também::
+
+    Muda o mode(Permissão) de uma estrutura de diretórios recursivamente. Isso
+    inclui mudança no mode(Permissão) dos arquivos também::
 
         <?php
         $dir = new Folder();
@@ -189,7 +190,8 @@ Folder API
 .. php:method:: find(string $regexpPattern = '.*', boolean $sort = false)
 
     :rtype: array
-     Retorna um array de todos os arquivos correspondentes no diretório atual::
+
+    Retorna um array de todos os arquivos correspondentes no diretório atual::
 
         <?php
         // Busca todos .png na sua app/webroot/img/ pasta e ordena todos os resultados.
