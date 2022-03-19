@@ -1,7 +1,6 @@
 Contents
 ========
 .. toctree::
-    :maxdepth: 3
 
     index
     The-Manual/Beginning-With-CakePHP
