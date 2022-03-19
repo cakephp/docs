@@ -16,7 +16,6 @@ Contents
    phinx
 
 .. toctree::
-    :maxdepth: 3
     :caption: Preface
 
     intro
@@ -26,7 +25,6 @@ Contents
     contributing
 
 .. toctree::
-    :maxdepth: 3
     :caption: Getting Started
 
     installation
@@ -40,7 +38,6 @@ Contents
     orm
 
 .. toctree::
-    :maxdepth: 3
     :caption: Using CakePHP
 
     core-libraries/caching
@@ -62,7 +59,6 @@ Contents
     core-libraries/validation
 
 .. toctree::
-    :maxdepth: 3
     :caption: Utility Classes
 
     core-libraries/app
@@ -78,7 +74,6 @@ Contents
     core-libraries/xml
 
 .. toctree::
-    :maxdepth: 3
     :caption: Plugins
 
     Authorization <https://book.cakephp.org/authorization/1/en/>
@@ -91,14 +86,12 @@ Contents
     upgrade-tool
 
 .. toctree::
-    :maxdepth: 3
     :caption: Other
 
     core-libraries/global-constants-and-functions
     appendices
 
 .. toctree::
-    :maxdepth: 3
     :caption: Phinx
 
     Phinx <https://book.cakephp.org/phinx/0/en/>

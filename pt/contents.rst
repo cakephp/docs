@@ -16,7 +16,6 @@ Conteúdo
 
 
 .. toctree::
-    :maxdepth: 3
     :caption: Prefácio
 
     intro
@@ -26,7 +25,6 @@ Conteúdo
     contributing
 
 .. toctree::
-    :maxdepth: 3
     :caption: Começando
 
     installation
@@ -39,7 +37,6 @@ Conteúdo
     orm
 
 .. toctree::
-    :maxdepth: 3
     :caption: Using CakePHP
 
     controllers/components/authentication
@@ -62,7 +59,6 @@ Conteúdo
     core-libraries/validation
 
 .. toctree::
-    :maxdepth: 3
     :caption: Classes utilitárias
 
     core-libraries/app
@@ -78,7 +74,6 @@ Conteúdo
     core-libraries/xml
 
 .. toctree::
-    :maxdepth: 3
     :caption: Plugins
 
     Bake <https://book.cakephp.org/bake/1/pt/>
@@ -89,7 +84,6 @@ Conteúdo
     upgrade-tool
 
 .. toctree::
-    :maxdepth: 3
     :caption: Diversos
 
     core-libraries/global-constants-and-functions

@@ -14,7 +14,6 @@
     migrations
 
 .. toctree::
-    :maxdepth: 3
     :caption: Введение
 
     intro
@@ -24,7 +23,6 @@
     contributing
 
 .. toctree::
-    :maxdepth: 3
     :caption: Начало работы
 
     installation
@@ -37,7 +35,6 @@
     orm
 
 .. toctree::
-    :maxdepth: 3
     :caption: Использование CakePHP
 
     controllers/components/authentication
@@ -60,7 +57,6 @@
     core-libraries/validation
 
 .. toctree::
-    :maxdepth: 3
     :caption: Вспомогательные классы
 
     core-libraries/app
@@ -76,7 +72,6 @@
     core-libraries/xml
 
 .. toctree::
-    :maxdepth: 3
     :caption: Плагины
 
     Bake <https://book.cakephp.org/bake/1/ru/>
@@ -87,7 +82,6 @@
     upgrade-tool
 
 .. toctree::
-    :maxdepth: 3
     :caption: Прочее
 
     core-libraries/global-constants-and-functions
