@@ -3,7 +3,7 @@ Modelos
 
 Modelos são classes que formam a camada de negócios de sua aplicação.
 
-Eles devem ser responsáveis ​​pela gestão de quase tudo
+Eles devem ser responsáveis pela gestão de quase tudo
 a respeito de seus dados, a sua validade e suas interações, bem como a evolução
 do fluxo de informações de seu domínio.
 
