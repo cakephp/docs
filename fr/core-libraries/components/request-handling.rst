@@ -50,7 +50,7 @@ contenu que le client accepte. Par exemple::
         public function beforeFilter () {
             if ($this->RequestHandler->accepts('html')) {
                 // Ce code est exécuté uniquement si le client accepte
-                // les réponses HTML (text/html) 
+                // les réponses HTML (text/html)
             } elseif ($this->RequestHandler->accepts('xml')) {
                 // executé seulement si le client accepte seulement
                 // les réponses XML
@@ -182,7 +182,7 @@ corresponde à votre application.
 
     :param string $name: Le nom ou l'extension du fichier (Content-type), par
         ex : html, css, json, xml.
-    :param mixed $type: - Le(s) type(s) mime(s) auquel se réfère Content-type.
+    :param mixed $type: Le(s) type(s) mime(s) auquel se réfère Content-type.
 
     setContent ajoute/définit les Content-types pour le nom précisé.
     Permet aux content-types d'être associés à des alias simplifiés
@@ -241,7 +241,7 @@ corresponde à votre application.
     Change le mode de rendu d'un controller pour le type spécifié.
     Ajoutera aussi le helper approprié au tableau des helpers du controller,
     s'il est disponible et qu'il n'est pas déjà dans le tableau.
-    
+
 .. php:method:: respondAs($type, $options)
 
     :param string $type: nom simplifié du type de contenu à rendre, par
@@ -288,7 +288,7 @@ Vous pouvez mettre en retrait ce contrôle automatique en paramétrant
         'RequestHandler' => array(
             'checkHttpCache' => false
     ));
-    
+
 Utiliser les ViewClasses personnalisées
 =======================================
 
@@ -303,7 +303,7 @@ personnalisées.
 
 .. php:method:: viewClassMap($type, $viewClass)
 
-    :param string|array $type: Le type string ou un tableau map avec le 
+    :param string|array $type: Le type string ou un tableau map avec le
       format ``array('json' => 'MyJson')``.
     :param string $viewClass: La viewClass à utiliser pour le type sans `View`
       en suffixe.

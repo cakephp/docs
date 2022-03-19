@@ -497,16 +497,16 @@ couvrira les méthodes du Helper Html et comment les utiliser.
         les clés `src` et `type`.
     :param array $options: Un tableau d'attributs HTML, et d'options spéciales.
 
-        Options:
+    Options:
 
-        - `type` Type d'éléments média à générer, les valeurs valides sont
-          "audio" ou "video". Si le type n'est pas fourni le type de média se
-          basera sur le mime type du fichier.
-        - `text` Texte à inclure dans la balise vidéo.
-        - `pathPrefix` Préfixe du chemin à utiliser pour les URLs relatives,
-          par défaut à 'files/'.
-        - `fullBase` Si il est fourni l'attribut src prendra l'adresse complète
-          incluant le nom de domaine.
+    - `type` Type d'éléments média à générer, les valeurs valides sont
+      "audio" ou "video". Si le type n'est pas fourni le type de média se
+      basera sur le mime type du fichier.
+    - `text` Texte à inclure dans la balise vidéo.
+    - `pathPrefix` Préfixe du chemin à utiliser pour les URLs relatives,
+      par défaut à 'files/'.
+    - `fullBase` Si il est fourni l'attribut src prendra l'adresse complète
+      incluant le nom de domaine.
 
     .. versionadded:: 2.1
 

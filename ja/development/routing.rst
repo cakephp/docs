@@ -834,7 +834,7 @@ HTTP  302　ステータスを出しながらリダイレクトさせます。
         Router::connect('/:controller/:action/*');
 
     最初のパラメーターはコントローラー名として使われ、二番目はアクション名として使われます。
-    '/\*' 構文 はこのルートを貪欲にして ``/posts/index`` のようなリクエストだけではなく ``/posts/edit/1/foo/bar`` 
+    '/\*' 構文 はこのルートを貪欲にして ``/posts/index`` のようなリクエストだけではなく ``/posts/edit/1/foo/bar``
     のようなリクエストにも一致するようにします。 ::
 
         Router::connect(
@@ -905,9 +905,9 @@ HTTP  302　ステータスを出しながらリダイレクトさせます。
     :param mixed $full: (boolean) true になっていたら、URLフルパスが出力されます。
 		これは以下のキーを受け付けます。
 
-           * escape - used when making URLs embedded in HTML escapes query
-             string '&'
-           * full - true になっていたら、URLフルパスが先頭に追加されて出力されます。
+    * escape - used when making URLs embedded in HTML escapes query
+      string '&'
+    * full - true になっていたら、URLフルパスが先頭に追加されて出力されます。
 
     Generate a URL for the specified action.特定のアクションのためのURLを生成します。
     コントローラー、アクションもしくは $url の組み合わせて表現可能なURLを返します。

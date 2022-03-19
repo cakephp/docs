@@ -136,26 +136,26 @@ automatiqement la sortie dans la vue.
     :param array $options: Le tableau d'options pour ce format. Utilise les
         mêmes clés ``$options`` comme :php:meth:`CakeNumber::currency()`.
 
-        - `before` Symbole de monnaie avant le nombre. False pour aucun.
-        - `after` Symbole de monnaie après le nombre. False pour aucun.
-        - `zero` Le texte à utiliser pour les valeurs à zéro, peut être
-          une chaîne de caractères ou un nombre.
-          ex: 0, 'Free!'
-        - `places` Nombre de décimal à utiliser. ex. 2.
-        - `thousands` Séparateur des milliers. ex: ','.
-        - `decimals` Symbole de Séparateur des décimales. ex: '.'.
-        - `negative` Symbole pour les nombres négatifs. Si égal à '()', le
-          nombre sera entouré avec ( et ).
-        - `escape` La sortie doit-elle être échappée de htmlentity? Par défaut
-          à true.
-        - `wholeSymbol` Chaîne de caractères à utiliser pour tous les nombres.
-          ex: ' dollars'.
-        - `wholePosition` Soit 'before' soit 'after' pour placer le symbole
-          complet.
-        - `fractionSymbol` Chaîne de caractères à utiliser pour les nombres à
-          fraction. ex: ' cents'.
-        - `fractionPosition` Soit 'before' soit 'after' pour placer le symbole
-          de fraction.
+    - `before` Symbole de monnaie avant le nombre. False pour aucun.
+    - `after` Symbole de monnaie après le nombre. False pour aucun.
+    - `zero` Le texte à utiliser pour les valeurs à zéro, peut être
+      une chaîne de caractères ou un nombre.
+      ex: 0, 'Free!'
+    - `places` Nombre de décimal à utiliser. ex. 2.
+    - `thousands` Séparateur des milliers. ex: ','.
+    - `decimals` Symbole de Séparateur des décimales. ex: '.'.
+    - `negative` Symbole pour les nombres négatifs. Si égal à '()', le
+      nombre sera entouré avec ( et ).
+    - `escape` La sortie doit-elle être échappée de htmlentity? Par défaut
+      à true.
+    - `wholeSymbol` Chaîne de caractères à utiliser pour tous les nombres.
+      ex: ' dollars'.
+    - `wholePosition` Soit 'before' soit 'after' pour placer le symbole
+      complet.
+    - `fractionSymbol` Chaîne de caractères à utiliser pour les nombres à
+      fraction. ex: ' cents'.
+    - `fractionPosition` Soit 'before' soit 'after' pour placer le symbole
+      de fraction.
 
     Ajoute le format de monnaie au helper Number. Facilite la réutilisation
     des formats de monnaie. ::

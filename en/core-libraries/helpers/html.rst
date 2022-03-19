@@ -107,7 +107,7 @@ methods of the HtmlHelper and how to use them.
         <link rel="stylesheet" type="text/css" href="/css/menu.css" />
 
     You can include CSS files from any loaded plugin using
-    :term:`plugin syntax`. To include 
+    :term:`plugin syntax`. To include
     ``app/Plugin/DebugKit/webroot/css/toolbar.css`` you could use the following::
 
         echo $this->Html->css('DebugKit.toolbar.css');
@@ -492,16 +492,16 @@ methods of the HtmlHelper and how to use them.
         `src` and `type`.
     :param array $options: Array of HTML attributes, and special options.
 
-        Options:
+    Options:
 
-        - `type` Type of media element to generate, valid values are "audio"
-          or "video". If type is not provided media type is guessed based on
-          file's mime type.
-        - `text` Text to include inside the audio/video tag
-        - `pathPrefix` Path prefix to use for relative URLs, defaults to
-          'files/'
-        - `fullBase` If set to true, the src attribute will get a full address
-          including domain name
+    - `type` Type of media element to generate, valid values are "audio"
+      or "video". If type is not provided media type is guessed based on
+      file's mime type.
+    - `text` Text to include inside the audio/video tag
+    - `pathPrefix` Path prefix to use for relative URLs, defaults to
+      'files/'
+    - `fullBase` If set to true, the src attribute will get a full address
+      including domain name
 
     .. versionadded:: 2.1
 
@@ -684,7 +684,7 @@ methods of the HtmlHelper and how to use them.
         echo $this->fetch('scriptBottom');
 
     You can include script files from any loaded plugin using
-    :term:`plugin syntax`. To include 
+    :term:`plugin syntax`. To include
     ``app/Plugin/DebugKit/webroot/js/toolbar.js`` you could use the following::
 
         echo $this->Html->script('DebugKit.toolbar.js');

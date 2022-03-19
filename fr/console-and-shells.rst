@@ -1085,11 +1085,11 @@ API de Shell
     :param string $text: Le text à formatter.
     :param array $options:
 
-        * ``width`` La largeur à entourer. Par défaut à 72.
-        * ``wordWrap`` Entoure seulement les espaces de mots. Par défaut à
-          true.
-        * ``indent`` Indente le texte avec la chaîne de caractère fournie. Par
-          défaut à null.
+    * ``width`` La largeur à entourer. Par défaut à 72.
+    * ``wordWrap`` Entoure seulement les espaces de mots. Par défaut à
+      true.
+    * ``indent`` Indente le texte avec la chaîne de caractère fournie. Par
+      défaut à null.
 
 Plus de sujets
 ==============

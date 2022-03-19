@@ -466,13 +466,13 @@ HtmlHelper助件的一些方法及如何使用它们。
         是路径字符串或包含键 `src` 和 `type` 的关联数组。
     :param array $options: HTML属性数组，以及特殊选项。
 
-        选项:
+    选项:
 
-        - `type` 要生成的媒体元素的类型，合法值为"audio"或"video"。如果没有提供类
-          型，媒体类型将根据文件的mime类型来推测。
-        - `text` 在audio/video标签内使用的文字
-        - `pathPrefix` 相对路径所使用的路径前缀，默认为'files/'
-        - `fullBase` 如果设置为true，生成的src属性就会是包括域名的完整网址。
+    - `type` 要生成的媒体元素的类型，合法值为"audio"或"video"。如果没有提供类
+      型，媒体类型将根据文件的mime类型来推测。
+    - `text` 在audio/video标签内使用的文字
+    - `pathPrefix` 相对路径所使用的路径前缀，默认为'files/'
+    - `fullBase` 如果设置为true，生成的src属性就会是包括域名的完整网址。
 
     .. versionadded:: 2.1
 
