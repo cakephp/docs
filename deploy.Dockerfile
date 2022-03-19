@@ -24,5 +24,3 @@ COPY --from=builder /data/docs/nginx.conf /etc/nginx/conf.d/default.conf
 # Move built site into place
 RUN mkdir -p /usr/share/nginx/html/ \
  && mv /data/website /usr/share/nginx/html/1.2
-
-CMD ["/data/run.sh"]
