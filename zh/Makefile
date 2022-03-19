@@ -42,7 +42,7 @@ clean:
 	-rm -rf $(BUILDDIR)/*
 
 html:
-	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html/$(LANG)
+	$(SPHINXBUILD) -b html -D "exclude_patterns=*-contents.rst" $(ALLSPHINXOPTS) $(BUILDDIR)/html/$(LANG)
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html/$(LANG)."
 

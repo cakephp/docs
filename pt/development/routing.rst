@@ -5,11 +5,11 @@ Roteamento
 
 .. php:class:: Router
 
-O roteamento fornece ferramentas que mapeiam URLs para ações do controlador. Ao definir rotas, você pode separar como o aplicativo 
+O roteamento fornece ferramentas que mapeiam URLs para ações do controlador. Ao definir rotas, você pode separar como o aplicativo
 é implementado e como os URLs são estruturadas.
 
-O roteamento no CakePHP também abrange a idéia de roteamento reverso, onde uma matriz de parâmetros pode ser transformada em uma 
-string de URL. Ao usar o roteamento reverso, você pode redimensionar a estrutura de URL do seu aplicativo sem precisar atualizar 
+O roteamento no CakePHP também abrange a idéia de roteamento reverso, onde uma matriz de parâmetros pode ser transformada em uma
+string de URL. Ao usar o roteamento reverso, você pode redimensionar a estrutura de URL do seu aplicativo sem precisar atualizar
 todo o seu código.
 
 .. index:: routes.php
@@ -17,7 +17,7 @@ todo o seu código.
 Tour Rápido
 ===========
 
-Esta seção ensinará a você, como exemplo, os usos mais comuns do CakePHP Router. Normalmente, você deseja exibir algo como uma 
+Esta seção ensinará a você, como exemplo, os usos mais comuns do CakePHP Router. Normalmente, você deseja exibir algo como uma
 página de destino e adicionar isso ao seu arquivo **routes.php**::
 
     use Cake\Routing\Router;
@@ -30,17 +30,17 @@ página de destino e adicionar isso ao seu arquivo **routes.php**::
     // Usando o método estático.
     Router::connect('/', ['controller' => 'Articles', 'action' => 'index']);
 
-O ``Router`` fornece duas interfaces para conectar rotas. O método estático é uma interface compatível com versões anteriores, 
+O ``Router`` fornece duas interfaces para conectar rotas. O método estático é uma interface compatível com versões anteriores,
 enquanto os construtores com escopo oferecem uma sintaxe mais concisa ao criar várias rotas e melhor desempenho.
 
-Isso executará o método de índice no ``ArticlesController`` quando a página inicial do seu site for visitada. Às vezes, você 
-precisa de rotas dinâmicas que aceitem vários parâmetros; esse seria o caso, por exemplo, de uma rota para visualizar o conteúdo 
+Isso executará o método de índice no ``ArticlesController`` quando a página inicial do seu site for visitada. Às vezes, você
+precisa de rotas dinâmicas que aceitem vários parâmetros; esse seria o caso, por exemplo, de uma rota para visualizar o conteúdo
 de um artigo::
 
     $routes->connect('/articles/*', ['controller' => 'Articles', 'action' => 'view']);
 
-A rota acima aceitará qualquer URL semelhante a ``/articles/15`` e invocará o método ``view (15)`` no ``ArticlesController``. 
-Porém, isso não impedirá que as pessoas tentem acessar URLs semelhantes a ``/articles/foobar``. Se desejar, você pode restringir 
+A rota acima aceitará qualquer URL semelhante a ``/articles/15`` e invocará o método ``view (15)`` no ``ArticlesController``.
+Porém, isso não impedirá que as pessoas tentem acessar URLs semelhantes a ``/articles/foobar``. Se desejar, você pode restringir
 alguns parâmetros para estar em conformidade com uma expressão regular::
 
     $routes->connect(
@@ -57,8 +57,8 @@ alguns parâmetros para estar em conformidade com uma expressão regular::
         ['id' => '\d+', 'pass' => ['id']]
     )
 
-O exemplo anterior alterou o marcador de estrelas por um novo espaço reservado para ``:id``. O uso de espaços reservados nos 
-permite validar partes da URL; nesse caso, usamos a expressão regular ``\d+`` para que apenas os dígitos correspondam. 
+O exemplo anterior alterou o marcador de estrelas por um novo espaço reservado para ``:id``. O uso de espaços reservados nos
+permite validar partes da URL; nesse caso, usamos a expressão regular ``\d+`` para que apenas os dígitos correspondam.
 Finalmente, pedimos ao roteador para tratar o espaço reservado ``id`` como um argumento de função para o método ``view()``
 especificando a opção ``pass``. Mais sobre o uso dessa opção posteriormente.
 
@@ -241,7 +241,7 @@ Se você precisar de URLs minúsculas e sublinhadas durante a migração de um a
 
 .. note::
 
-    Padrões usados para elementos de rota não devem conter nenhum 
+    Padrões usados para elementos de rota não devem conter nenhum
     grupo de captura. Em caso afirmativo, o roteador não funcionará corretamente.
 
 Uma vez definida essa rota, solicitar ``/apples/5`` chamaria o método ``view()`` de ApplesController. Dentro do método ``view()``, você precisaria acessar o ID passado em ``$this->request->getParam('id')``.
@@ -349,8 +349,8 @@ Ao conectar rotas usando :ref:`route-elements`, você pode querer que elementos 
             '/blog/:id-:slug', // E.g. /blog/3-CakePHP_Rocks
             ['controller' => 'Blogs', 'action' => 'view']
         )
-        // Define os elementos da rota no modelo de rota 
-        // para passar como argumentos de função. O pedido é importante, 
+        // Define os elementos da rota no modelo de rota
+        // para passar como argumentos de função. O pedido é importante,
         // pois isso simplesmente mapeie ":id" para $articleId em sua ação
         ->setPass(['id', 'slug'])
         // Define um padrão que o `id` deve corresponder.
@@ -410,11 +410,12 @@ Se o seu modelo de rota contiver elementos de rota como ``:controller``, você p
 
 .. note::
 
-    Os nomes das rotas devem ser exclusivos em todo o aplicativo. O mesmo 
-    ``_name`` não pode ser usado duas vezes, mesmo que os nomes ocorram dentro de um 
+    Os nomes das rotas devem ser exclusivos em todo o aplicativo. O mesmo
+    ``_name`` não pode ser usado duas vezes, mesmo que os nomes ocorram dentro de um
     escopo de roteamento diferente.
 
-Ao criar rotas nomeadas, você provavelmente desejará seguir algumas convenções para os nomes das rotas. O CakePHP facilita a criação de nomes de rotas, permitindo definir prefixos de nomes em cada escopo:
+Ao criar rotas nomeadas, você provavelmente desejará seguir algumas convenções para os nomes das rotas.
+O CakePHP facilita a criação de nomes de rotas, permitindo definir prefixos de nomes em cada escopo::
 
     Router::scope('/api', ['_namePrefix' => 'api:'], function ($routes) {
         // O nome desta rota será `api:ping`
@@ -434,11 +435,11 @@ Ao criar rotas nomeadas, você provavelmente desejará seguir algumas convençõ
         // Conecta rotas.
     });
 
-Você também pode usar a opção ``_namePrefix`` dentro de escopos aninhados e funciona conforme o esperado:
+Você também pode usar a opção ``_namePrefix`` dentro de escopos aninhados e funciona conforme o esperado::
 
     Router::plugin('Contacts', ['_namePrefix' => 'contacts:'], function ($routes) {
         $routes->scope('/api', ['_namePrefix' => 'api:'], function ($routes) {
-            // O nome desta rota será `contacts:api:ping` 
+            // O nome desta rota será `contacts:api:ping`
             $routes->get('/ping', ['controller' => 'Pings'], 'ping');
         });
     });
@@ -461,12 +462,14 @@ Prefix Routing
 
 .. php:staticmethod:: prefix($name, $callback)
 
-Muitos aplicativos requerem uma seção de administração na qual usuários privilegiados podem fazer alterações. Isso geralmente é feito por meio de uma URL especial, como ``/admin/users/edit/5``. No CakePHP, o roteamento de prefixo pode ser ativado usando o método de escopo ``prefix``:
+Muitos aplicativos requerem uma seção de administração na qual usuários privilegiados podem fazer alterações.
+Isso geralmente é feito por meio de uma URL especial, como ``/admin/users/edit/5``. No CakePHP, o roteamento
+de prefixo pode ser ativado usando o método de escopo ``prefix``::
 
     use Cake\Routing\Route\DashedRoute;
 
     Router::prefix('admin', function ($routes) {
-        // Todas as rotas aqui serão prefixadas com `/ admin` 
+        // Todas as rotas aqui serão prefixadas com `/ admin`
         // e terão o elemento de rota prefix => admin adicionado.
         $routes->fallbacks(DashedRoute::class);
     });
@@ -477,8 +480,8 @@ Os prefixos são mapeados para sub-namespaces no namespace ``Controller`` do seu
 Você pode mapear a URL /admin para sua ação ``index()`` do controlador de páginas usando a seguinte rota::
 
     Router::prefix('admin', function ($routes) {
-        // Como você está no escopo do administrador, 
-        // não é necessário incluir o prefixo /admin 
+        // Como você está no escopo do administrador,
+        // não é necessário incluir o prefixo /admin
         // ou o elemento de rota do administrador.
         $routes->connect('/', ['controller' => 'Pages', 'action' => 'index']);
     });
@@ -486,12 +489,12 @@ Você pode mapear a URL /admin para sua ação ``index()`` do controlador de pá
 Ao criar rotas de prefixo, você pode definir parâmetros de rota adicionais usando o argumento ``$options``::
 
     Router::prefix('admin', ['param' => 'value'], function ($routes) {
-        // As rotas conectadas aqui são prefixadas com '/admin' e 
+        // As rotas conectadas aqui são prefixadas com '/admin' e
         // têm a chave de roteamento 'param' definida.
         $routes->connect('/:controller');
     });
 
-Você também pode definir prefixos dentro dos escopos de plugins:
+Você também pode definir prefixos dentro dos escopos de plugins::
 
     Router::plugin('DebugKit', function ($routes) {
         $routes->prefix('admin', function ($routes) {
@@ -501,7 +504,7 @@ Você também pode definir prefixos dentro dos escopos de plugins:
 
 O exemplo acima criaria um modelo de rota como ``/debug_kit/admin/:controller``. A rota conectada teria os elementos de rota ``plugin`` e ``prefix`` definidos.
 
-Ao definir prefixos, você pode aninhar vários prefixos, se necessário:
+Ao definir prefixos, você pode aninhar vários prefixos, se necessário::
 
     Router::prefix('manager', function ($routes) {
         $routes->prefix('admin', function ($routes) {
@@ -541,15 +544,15 @@ Roteamento de Plugins
 As rotas para :doc:`/plugins` devem ser criadas usando o método ``plugin()``. Este método cria um novo escopo de roteamento para as rotas do plugin::
 
     Router::plugin('DebugKit', function ($routes) {
-        // As rotas conectadas aqui são prefixadas com '/debug_kit' e 
+        // As rotas conectadas aqui são prefixadas com '/debug_kit' e
         // têm o elemento de rota do plug-in definido como 'DebugKit'.
         $routes->connect('/:controller');
     });
 
-Ao criar escopos de plug-in, você pode personalizar o caminho usando a opção ``path``:
+Ao criar escopos de plug-in, você pode personalizar o caminho usando a opção ``path``::
 
     Router::plugin('DebugKit', ['path' => '/debugger'], function ($routes) {
-        // As rotas conectadas aqui são prefixadas com '/debug_kit' e 
+        // As rotas conectadas aqui são prefixadas com '/debug_kit' e
         // têm o elemento de rota do plug-in definido como 'DebugKit'.
         $routes->connect('/:controller');
     });
@@ -574,7 +577,8 @@ Você pode criar links que apontam para um plug-in, adicionando a chave do plug-
         ['plugin' => 'Todo', 'controller' => 'TodoItems', 'action' => 'create']
     );
 
-Por outro lado, se a solicitação ativa for uma solicitação de plug-in e você desejar criar um link que não possua plug-in, faça o seguinte:
+Por outro lado, se a solicitação ativa for uma solicitação de plug-in e você desejar criar um link que
+não possua plug-in, faça o seguinte::
 
     echo $this->Html->link(
         'New todo',
@@ -599,7 +603,7 @@ Por exemplo, se tivéssemos um plugin ``ToDo``, com um controlador ``TodoItems``
 Correspondendo a métodos HTTP específicos
 -----------------------------------------
 
-As rotas podem corresponder a métodos HTTP específicos usando os métodos auxiliares de verbo HTTP:
+As rotas podem corresponder a métodos HTTP específicos usando os métodos auxiliares de verbo HTTP::
 
     Router::scope('/', function($routes) {
         // Esta rota corresponde apenas às solicitações POST.
@@ -608,7 +612,7 @@ As rotas podem corresponder a métodos HTTP específicos usando os métodos auxi
             ['controller' => 'Reviews', 'action' => 'start']
         );
 
-        // Corresponder vários verbos 
+        // Corresponder vários verbos
         // Antes do 3.5, use $options['_method'] para definir o método
         $routes->connect(
             '/reviews/start',
@@ -619,7 +623,9 @@ As rotas podem corresponder a métodos HTTP específicos usando os métodos auxi
         )->setMethods(['POST', 'PUT']);
     });
 
-Você pode combinar vários métodos HTTP usando uma matriz. Como o parâmetro ``_method`` é uma chave de roteamento, ele participa da análise e geração de URLs. Para gerar URLs para rotas específicas de métodos, você precisará incluir a chave ``_method`` ao gerar a URL:
+Você pode combinar vários métodos HTTP usando uma matriz. Como o parâmetro ``_method`` é uma chave
+de roteamento, ele participa da análise e geração de URLs. Para gerar URLs para rotas específicas de
+métodos, você precisará incluir a chave ``_method`` ao gerar a URL::
 
     $url = Router::url([
         'controller' => 'Reviews',
@@ -633,7 +639,7 @@ Nomes de host específicos correspondentes
 As rotas podem usar a opção ``_host`` para corresponder apenas a hosts específicos. Você pode usar o curinga ``*.`` para corresponder a qualquer subdomínio::
 
     Router::scope('/', function($routes) {
-        // Esta rota corresponde apenas a http://images.example.com 
+        // Esta rota corresponde apenas a http://images.example.com
         // Antes da versão 3.5, use a opção _host
         $routes->connect(
             '/images/default-logo.png',
@@ -647,7 +653,9 @@ As rotas podem usar a opção ``_host`` para corresponder apenas a hosts especí
         )->setHost('*.example.com');
     });
 
-A opção ``_host`` também é usada na geração de URL. Se a opção ``_host`` especificar um domínio exato, esse domínio será incluído no URL gerado. No entanto, se você usar um curinga, precisará fornecer o parâmetro ``_host`` ao gerar URLs:
+A opção ``_host`` também é usada na geração de URL. Se a opção ``_host`` especificar um domínio exato,
+esse domínio será incluído no URL gerado. No entanto, se você usar um curinga, precisará fornecer o
+parâmetro ``_host`` ao gerar URLs::
 
     // Se você tem esta rota
     $routes->connect(
@@ -673,8 +681,8 @@ Extensões de arquivo de roteamento
 
 .. php:staticmethod:: extensions(string|array|null $extensions, $merge = true)
 
-Para lidar com diferentes extensões de arquivo com suas rotas, você pode definir extensões 
-em nível global e de escopo. A definição de extensões globais 
+Para lidar com diferentes extensões de arquivo com suas rotas, você pode definir extensões
+em nível global e de escopo. A definição de extensões globais
 pode ser obtida através do método estático :php:meth:`Router::extensions()` dos roteadores::
 
     Router::extensions(['json', 'xml']);
@@ -690,19 +698,19 @@ Para restringir extensões a escopos específicos, você pode defini-las usando 
     });
 
 
-Isso habilitará as extensões nomeadas para todas as rotas que estão sendo conectadas esse escopo 
-**após** a chamada de ``setExtensions()``, incluindo aqueles que estão sendo conectado em escopos 
-aninhados. Semelhante ao método global :php:meth:`Router::extensions()`, 
+Isso habilitará as extensões nomeadas para todas as rotas que estão sendo conectadas esse escopo
+**após** a chamada de ``setExtensions()``, incluindo aqueles que estão sendo conectado em escopos
+aninhados. Semelhante ao método global :php:meth:`Router::extensions()`,
 quaisquer rotas conectadas antes da chamada não herdarão as extensões.
 
 .. note::
-    
-    A configuração das extensões deve ser a primeira coisa que você faz em um escopo, pois as extensões 
+
+    A configuração das extensões deve ser a primeira coisa que você faz em um escopo, pois as extensões
     serão aplicadas apenas às rotas conectadas **depois** que as extensões forem definidas.
 
     Lembre-se também de que escopos reabertos **não** herdarão extensões definidas em escopos abertos anteriormente.
 
-Ao usar extensões, você diz ao roteador para remover as extensões de arquivo correspondentes e analisar o que resta. 
+Ao usar extensões, você diz ao roteador para remover as extensões de arquivo correspondentes e analisar o que resta.
 Se você deseja criar uma URL como /page/title-of-page.html, crie sua rota usando::
 
     Router::scope('/page', function ($routes) {
@@ -721,7 +729,7 @@ Para criar links que mapeiam de volta para as rotas, basta usar::
         ['controller' => 'Pages', 'action' => 'view', 'title' => 'super-article', '_ext' => 'html']
     );
 
-As extensões de arquivo são usadas por :doc:`/controllers/components/request-handling` para fazer a troca 
+As extensões de arquivo são usadas por :doc:`/controllers/components/request-handling` para fazer a troca
 automática de exibição com base nos tipos de conteúdo.
 
 .. _connecting-scoped-middleware:
@@ -729,8 +737,8 @@ automática de exibição com base nos tipos de conteúdo.
 Conectando Middleware com Escopo
 --------------------------------
 
-Embora o Middleware possa ser aplicado a todo o aplicativo, a aplicação do middleware a escopos de roteamento 
-específicos oferece mais flexibilidade, pois você pode aplicar o middleware apenas onde for necessário, permitindo 
+Embora o Middleware possa ser aplicado a todo o aplicativo, a aplicação do middleware a escopos de roteamento
+específicos oferece mais flexibilidade, pois você pode aplicar o middleware apenas onde for necessário, permitindo
 que o middleware não se preocupe com como/onde está sendo aplicado.
 
 Antes que o middleware possa ser aplicado a um escopo, ele precisa ser registrado na coleção de rotas::
@@ -762,7 +770,7 @@ Nas situações em que você tem escopos aninhados, os escopos internos herdarã
         });
     });
 
-No exemplo acima, as rotas definidas em ``/v1`` terão os middlewares 'ratelimit', 'auth.api' e 'v1compat' aplicados. 
+No exemplo acima, as rotas definidas em ``/v1`` terão os middlewares 'ratelimit', 'auth.api' e 'v1compat' aplicados.
 Se você reabrir um escopo, o middleware aplicado às rotas em cada escopo será isolado::
 
     $routes->scope('/blog', function ($routes) {
@@ -773,13 +781,13 @@ Se você reabrir um escopo, o middleware aplicado às rotas em cada escopo será
         // Conecte as ações públicas para o blog aqui.
     });
 
-No exemplo acima, os dois usos do escopo ``/blog`` não compartilham middleware. No entanto, esses dois escopos 
+No exemplo acima, os dois usos do escopo ``/blog`` não compartilham middleware. No entanto, esses dois escopos
 herdarão o middleware definido em seus escopos anexos.
 
 Agrupando Middlewares
 ---------------------
 
-Para ajudar a manter o seu código de rota :abbr:`DRY (Do not Repeat Yourself)` o middleware pode ser combinado em grupos. 
+Para ajudar a manter o seu código de rota :abbr:`DRY (Do not Repeat Yourself)` o middleware pode ser combinado em grupos.
 Uma vez que grupos combinados podem ser aplicados, como o middleware::
 
     $routes->registerMiddleware('cookie', new EncryptedCookieMiddleware());
@@ -798,8 +806,8 @@ Uma vez que grupos combinados podem ser aplicados, como o middleware::
 Criando rotas RESTful
 =====================
 
-O controle de rotas facilita a geração de rotas RESTful para seus controllers. Repousante as rotas são úteis quando você 
-está criando pontos finais da API para sua aplicação. E se queríamos permitir acesso REST a um controlador de receita, 
+O controle de rotas facilita a geração de rotas RESTful para seus controllers. Repousante as rotas são úteis quando você
+está criando pontos finais da API para sua aplicação. E se queríamos permitir acesso REST a um controlador de receita,
 faríamos algo como esta::
 
     // no arquivo config/routes.php...
@@ -810,7 +818,7 @@ faríamos algo como esta::
         $routes->resources('Recipes');
     });
 
-A primeira linha configura uma série de rotas padrão para REST, de fácil acesso onde o método especifica o formato de resultado 
+A primeira linha configura uma série de rotas padrão para REST, de fácil acesso onde o método especifica o formato de resultado
 desejado (por exemplo, xml, json, rss). Essas rotas são sensíveis ao método de solicitação HTTP.
 
 =========== ===================== ==============================
@@ -829,20 +837,20 @@ PATCH       /recipes/123.format   RecipesController::edit(123)
 DELETE      /recipes/123.format   RecipesController::delete(123)
 =========== ===================== ==============================
 
-A classe CakePHP Router usa uma série de indicadores diferentes para detectar o método HTTP que está sendo usado. 
+A classe CakePHP Router usa uma série de indicadores diferentes para detectar o método HTTP que está sendo usado.
 Aqui estão em ordem de preferência:
 
 #. A váriavel ``_method`` POST
 #. O ``X_HTTP_METHOD_OVERRIDE``
 #. O cabeçalho ``REQUEST_METHOD``
 
-A váriavel ``_method`` POST é útil na quando há um navegador como cliente REST (ou qualquer outra coisa que possa fazer POST). 
+A váriavel ``_method`` POST é útil na quando há um navegador como cliente REST (ou qualquer outra coisa que possa fazer POST).
 Basta definir o valor do ``\_method`` para o nome do método de solicitação HTTP que você deseja emular.
 
 Criando rotas de recursos aninhados
 -----------------------------------
 
-Depois de conectar recursos em um escopo, você também pode conectar rotas para sub-recursos. As rotas de sub-recursos serão 
+Depois de conectar recursos em um escopo, você também pode conectar rotas para sub-recursos. As rotas de sub-recursos serão
 precedidas pelo nome do recurso original e um parâmetro ``id``. Por exemplo::
 
     Router::scope('/api', function ($routes) {
@@ -860,7 +868,7 @@ Você pode obter o ``article_id`` em ``CommentsController`` por::
 
     $this->request->getParam('article_id');
 
-Por padrão, as rotas de recursos são mapeadas para o mesmo prefixo que o escopo que contém. Se você tiver controladores 
+Por padrão, as rotas de recursos são mapeadas para o mesmo prefixo que o escopo que contém. Se você tiver controladores
 de recursos aninhados e não aninhados, poderá usar um controlador diferente em cada contexto usando prefixos::
 
     Router::scope('/api', function ($routes) {
@@ -869,13 +877,13 @@ de recursos aninhados e não aninhados, poderá usar um controlador diferente em
         });
     });
 
-A descrição acima mapeia o recurso 'Comments' para ``App\Controller\Articles\CommentsController``. Ter controladores 
-separados permite manter a lógica do controlador mais simples. Os prefixos criados dessa maneira são compatíveis com 
+A descrição acima mapeia o recurso 'Comments' para ``App\Controller\Articles\CommentsController``. Ter controladores
+separados permite manter a lógica do controlador mais simples. Os prefixos criados dessa maneira são compatíveis com
 :ref:`prefix-routing`.
 
 .. note::
 
-    Embora você possa aninhar recursos tão profundamente quanto necessário, não é recomendável 
+    Embora você possa aninhar recursos tão profundamente quanto necessário, não é recomendável
     aninhar mais de 2 recursos juntos.
 
 .. versionadded:: 3.3
@@ -884,20 +892,20 @@ separados permite manter a lógica do controlador mais simples. Os prefixos cria
 Limitando as rotas criadas
 --------------------------
 
-Por padrão, o CakePHP conectará seis rotas para cada recurso. Se você deseja conectar apenas rotas de recursos 
+Por padrão, o CakePHP conectará seis rotas para cada recurso. Se você deseja conectar apenas rotas de recursos
 específicos, use a opção ``only``::
 
     $routes->resources('Articles', [
         'only' => ['index', 'view']
     ]);
 
-Criaria rotas de recurso somente leitura. Os nomes das rotas são ``create``, 
+Criaria rotas de recurso somente leitura. Os nomes das rotas são ``create``,
 ``update``, ``view``, ``index`` e ``delete``
 
 Alterando as ações usadas no controlador
 ----------------------------------------
 
-Pode ser necessário alterar os nomes de ação do controlador usados ao conectar rotas. Por exemplo, 
+Pode ser necessário alterar os nomes de ação do controlador usados ao conectar rotas. Por exemplo,
 se sua ação ``edit()`` é chamada ``put()``, você pode usar a chave ``actions`` para renomear as ações usadas::
 
     $routes->resources('Articles', [
@@ -922,8 +930,8 @@ Você pode mapear métodos de recursos adicionais usando a opção ``map``::
      ]);
      // Isso conectaria a /articles/deleteAll
 
-Além das rotas padrão, isso também conectaria uma rota para `/articles/delete_all`. Por padrão, o 
-segmento do caminho corresponderá ao nome da chave. Você pode usar a chave 'path' dentro da definição 
+Além das rotas padrão, isso também conectaria uma rota para `/articles/delete_all`. Por padrão, o
+segmento do caminho corresponderá ao nome da chave. Você pode usar a chave 'path' dentro da definição
 de recurso para personalizar o nome do caminho::
 
     $routes->resources('Articles', [
@@ -944,7 +952,7 @@ Se você definir 'only' e 'map', verifique se seus métodos mapeados também est
 Classes de rota personalizadas para rotas de recursos
 -----------------------------------------------------
 
-Você pode fornecer a chave ``connectOptions`` na matriz ``$options`` para ``resources()`` para 
+Você pode fornecer a chave ``connectOptions`` na matriz ``$options`` para ``resources()`` para
 fornecer configurações personalizadas usadas por ``connect()``::
 
     Router::scope('/', function ($routes) {
@@ -958,10 +966,10 @@ fornecer configurações personalizadas usadas por ``connect()``::
 Inflexão de URL para rotas de recursos
 --------------------------------------
 
-Por padrão, os fragmentos de URL dos controladores com várias palavras são a forma sublinhada do nome do 
+Por padrão, os fragmentos de URL dos controladores com várias palavras são a forma sublinhada do nome do
 controlador. Por exemplo, fragmento de URL do ``BlogPostsController`` seria **/blog_posts**.
 
-Você pode especificar um tipo de inflexão alternativo usando a opção ``inflect``:
+Você pode especificar um tipo de inflexão alternativo usando a opção ``inflect``::
 
     Router::scope('/', function ($routes) {
         $routes->resources('BlogPosts', [
@@ -972,15 +980,15 @@ Você pode especificar um tipo de inflexão alternativo usando a opção ``infle
 O exemplo acima irá gerar URLs com estilo semelhantes a: **/blog-posts**.
 
 .. note::
-    
-    A partir do CakePHP 3.1, o esqueleto oficial do aplicativo usa ``DashedRoute`` como sua classe de 
-    rota padrão. Recomenda-se o uso da opção ``'inflect' => 'dasherize'`` ao conectar rotas de recursos 
+
+    A partir do CakePHP 3.1, o esqueleto oficial do aplicativo usa ``DashedRoute`` como sua classe de
+    rota padrão. Recomenda-se o uso da opção ``'inflect' => 'dasherize'`` ao conectar rotas de recursos
     para garantir a consistência da URL
 
 Alterando o elemento de caminho
 -------------------------------
 
-Por padrão, as rotas de recursos usam um formulário flexionado do nome do recurso para o segmento de URL. 
+Por padrão, as rotas de recursos usam um formulário flexionado do nome do recurso para o segmento de URL.
 Você pode definir um segmento de URL personalizado com a opção ``path``::
 
     Router::scope('/', function ($routes) {
@@ -999,11 +1007,11 @@ Passando Argumentos
 Os argumentos passados são argumentos adicionais ou segmentos de caminho que são usados ao fazer uma solicitação. Eles são
 frequentemente usados para passar parâmetros para os métodos do seu controlador::
 
-     http://localhost/calendars/view/recent/mark
+    http://localhost/calendars/view/recent/mark
 
-No exemplo acima, os argumentos ``recent`` e ``mark`` são passados para ``CalendarsController::view()``. Os argumentos passados 
-são fornecidos aos seus controladores de três maneiras. Primeiro, como argumentos para o método de ação chamado, segundo, eles 
-estão disponíveis em ``$this->request->getParam('pass')`` como uma matriz numerada indexada. Ao usar rotas personalizadas, você 
+No exemplo acima, os argumentos ``recent`` e ``mark`` são passados para ``CalendarsController::view()``. Os argumentos passados
+são fornecidos aos seus controladores de três maneiras. Primeiro, como argumentos para o método de ação chamado, segundo, eles
+estão disponíveis em ``$this->request->getParam('pass')`` como uma matriz numerada indexada. Ao usar rotas personalizadas, você
 pode forçar parâmetros específicos para entrar e os argumentos passados também.
 
 Se você visitar o URL mencionado anteriormente, e teve uma ação de controlador que se parecia com::
@@ -1024,8 +1032,8 @@ Você obteria a seguinte saída::
         [1] => mark
     )
 
-Esses mesmos dados também estão disponíveis em ``$this->request->getParam('pass')`` em seus controladores, 
-views e auxiliares. Os valores na matriz de ``pass`` são indexados numericamente com base na ordem em que 
+Esses mesmos dados também estão disponíveis em ``$this->request->getParam('pass')`` em seus controladores,
+views e auxiliares. Os valores na matriz de ``pass`` são indexados numericamente com base na ordem em que
 aparecem no URL chamado::
 
     debug($this->request->getParam('pass'));
@@ -1038,7 +1046,7 @@ Qualquer um dos itens acima produziria::
         [1] => mark
     )
 
-Ao gerar URLs, usando a :term: `routing array`, você adiciona argumentos 
+Ao gerar URLs, usando a :term: `routing array`, você adiciona argumentos
 passados como valores sem chaves de string na matriz::
 
     ['controller' => 'Articles', 'action' => 'view', 5]
@@ -1050,15 +1058,15 @@ Gerando URLs
 
 .. php:staticmethod:: url($url = null, $full = false)
 
-Gerar URLs ou roteamento reverso é um recurso do CakePHP que é usado para permitir que você altere sua estrutura de 
-URLs sem precisar modificar todo o seu código. Usando :term:`routing arrays <routing array>` para definir seus URLs, 
+Gerar URLs ou roteamento reverso é um recurso do CakePHP que é usado para permitir que você altere sua estrutura de
+URLs sem precisar modificar todo o seu código. Usando :term:`routing arrays <routing array>` para definir seus URLs,
 você poderá configurar rotas posteriormente e os URLs gerados serão atualizados automaticamente.
 
 Se você criar URLs usando strings como::
 
     $this->Html->link('View', '/articles/view/' . $id);
 
-E depois decida que ``/articles`` deve realmente ser chamado de 'posts', você precisará passar por 
+E depois decida que ``/articles`` deve realmente ser chamado de 'posts', você precisará passar por
 todo o aplicativo renomeando URLs. No entanto, se você definiu seu link como::
 
     $this->Html->link(
@@ -1066,7 +1074,7 @@ todo o aplicativo renomeando URLs. No entanto, se você definiu seu link como::
         ['controller' => 'Articles', 'action' => 'view', $id]
     );
 
-Então, quando você decidiu alterar seus URLs, pode fazê-lo definindo uma rota. Isso alteraria o mapeamento de URLs 
+Então, quando você decidiu alterar seus URLs, pode fazê-lo definindo uma rota. Isso alteraria o mapeamento de URLs
 recebidos, bem como os URLs gerados.
 
 Ao usar URLs de matriz, você pode definir parâmetros de sequência de consulta e fragmentos de documento usando chaves especiais::
@@ -1081,14 +1089,14 @@ Ao usar URLs de matriz, você pode definir parâmetros de sequência de consulta
     // Irá gerar uma URL como.
     /articles/index?page=1#top
 
-O roteador também converterá quaisquer parâmetros desconhecidos em uma matriz de roteamento em parâmetros de querystring. 
+O roteador também converterá quaisquer parâmetros desconhecidos em uma matriz de roteamento em parâmetros de querystring.
 O ``?`` É oferecido para compatibilidade com versões anteriores do CakePHP.
 
 Você também pode usar qualquer um dos elementos de rota especiais ao gerar URLs:
 
 * ``_ext`` Usado para :ref:`file-extensions` roteamento.
-* ``_base`` define como ``false`` para remover o caminho base da URL gerada. 
-Se seu aplicativo não estiver no diretório raiz, isso poderá ser usado para 
+* ``_base`` define como ``false`` para remover o caminho base da URL gerada.
+Se seu aplicativo não estiver no diretório raiz, isso poderá ser usado para
 gerar URLs que são 'relativos ao cake'.
 * ``_scheme`` Configure para criar links em diferentes esquemas, como ``webcal`` ou ``ftp``. O padrão é o esquema atual.
 * ``_host`` Defina o host a ser usado para o link. O padrão é o host atual.
@@ -1103,12 +1111,12 @@ gerar URLs que são 'relativos ao cake'.
 Rotas de redirecionamento
 =========================
 
-O roteamento de redirecionamento permite emitir redirecionamentos de status HTTP 30x para rotas de entrada e 
-apontá-los para URLs diferentes. Isso é útil quando você deseja informar aos aplicativos clientes que um recurso 
+O roteamento de redirecionamento permite emitir redirecionamentos de status HTTP 30x para rotas de entrada e
+apontá-los para URLs diferentes. Isso é útil quando você deseja informar aos aplicativos clientes que um recurso
 foi movido e não deseja expor dois URLs para o mesmo conteúdo.
 
-As rotas de redirecionamento são diferentes das rotas normais, pois executam um redirecionamento de cabeçalho real se 
-uma correspondência for encontrada. O redirecionamento pode ocorrer para um destino dentro do seu aplicativo ou para 
+As rotas de redirecionamento são diferentes das rotas normais, pois executam um redirecionamento de cabeçalho real se
+uma correspondência for encontrada. O redirecionamento pode ocorrer para um destino dentro do seu aplicativo ou para
 um local externo::
 
     Router::scope('/', function ($routes) {
@@ -1116,13 +1124,13 @@ um local externo::
             '/home/*',
             ['controller' => 'Articles', 'action' => 'view'],
             ['persist' => true]
-            // Ou ['persist' => ['id']] para roteamento padrão em que 
+            // Ou ['persist' => ['id']] para roteamento padrão em que
             // a ação de exibição espera o $id como argumento.
         );
     })
 
-Redireciona ``/home/*`` para ``/articles/view`` e passa os parâmetros para ``/articles/view``. O uso de uma 
-matriz como destino de redirecionamento permite usar outras rotas para definir para onde uma string de URL 
+Redireciona ``/home/*`` para ``/articles/view`` e passa os parâmetros para ``/articles/view``. O uso de uma
+matriz como destino de redirecionamento permite usar outras rotas para definir para onde uma string de URL
 deve ser redirecionada. Você pode redirecionar para locais externos usando URLs de string como destino::
 
     Router::scope('/', function ($routes) {
@@ -1136,17 +1144,17 @@ Isso redirecionaria ``/articles/*`` para ``http://google.com`` com um status HTT
 Classes de rota personalizadas
 ==============================
 
-As classes de rota personalizadas permitem estender e alterar como rotas individuais analisam solicitações e 
+As classes de rota personalizadas permitem estender e alterar como rotas individuais analisam solicitações e
 manipulam o roteamento reverso. As classes de rota têm algumas convenções:
 
 * As classes de rota devem ser encontradas no espaço de nome ``Routing\\Route`` do seu aplicativo ou plugin.
 * As classes de rota devem estender :php:class:`Cake\\Routing\\Route`.
 * As classes de rota devem implementar os métodos ``match()`` e/ou ``parse()``.
 
-O método ``parse()`` é usado para analisar uma URL recebida. Ele deve gerar uma matriz de parâmetros de solicitação 
+O método ``parse()`` é usado para analisar uma URL recebida. Ele deve gerar uma matriz de parâmetros de solicitação
 que podem ser resolvidos em um controlador e ação. Retorne ``false`` deste método para indicar uma falha na correspondência.
 
-O método ``match()`` é usado para corresponder a uma matriz de parâmetros de URL e criar uma URL de string. Se os 
+O método ``match()`` é usado para corresponder a uma matriz de parâmetros de URL e criar uma URL de string. Se os
 parâmetros de URL não corresponderem à rota, ``false`` deve ser retornado.
 
 Você pode usar uma classe de rota personalizada ao fazer uma rota usando a opção ``routeClass``::
@@ -1167,7 +1175,7 @@ Você pode usar uma classe de rota personalizada ao fazer uma rota usando a opç
         );
     });
 
-Esta rota criaria uma instância de ``SlugRoute`` e permitiria a você implementar a manipulação de parâmetros 
+Esta rota criaria uma instância de ``SlugRoute`` e permitiria a você implementar a manipulação de parâmetros
 personalizados. Você pode usar as classes de rota do plugin usando standard:term:`sintaxe plugin`.
 
 Classe de rota padrão
@@ -1175,15 +1183,15 @@ Classe de rota padrão
 
 .. php:staticmethod:: defaultRouteClass($routeClass = null)
 
-Se você deseja usar uma classe de rota alternativa para todas as suas rotas além do padrão ``Route``, 
-pode fazê-lo chamando ``Router::defaultRouteClass()`` antes de configurar qualquer rota e evitar especificar 
+Se você deseja usar uma classe de rota alternativa para todas as suas rotas além do padrão ``Route``,
+pode fazê-lo chamando ``Router::defaultRouteClass()`` antes de configurar qualquer rota e evitar especificar
 a opção ``routeClass`` para cada rota. Por exemplo, usando::
 
     use Cake\Routing\Route\InflectedRoute;
 
     Router::defaultRouteClass(InflectedRoute::class);
 
-fará com que todas as rotas conectadas depois disso usem a classe de rota ``InflectedRoute``. Chamar o método 
+fará com que todas as rotas conectadas depois disso usem a classe de rota ``InflectedRoute``. Chamar o método
 sem um argumento retornará a classe de rota padrão atual.
 
 Método de fallbacks
@@ -1197,8 +1205,8 @@ provided the class returned by ``Router::defaultRouteClass()`` is used.
 
 Calling fallbacks like so
 
-O método de fallbacks é um atalho simples para definir rotas padrão. O método usa a classe de roteamento 
-passada para as regras definidas ou, se nenhuma classe for fornecida, a classe retornada por 
+O método de fallbacks é um atalho simples para definir rotas padrão. O método usa a classe de roteamento
+passada para as regras definidas ou, se nenhuma classe for fornecida, a classe retornada por
 ``Router::defaultRouteClass()`` será usada.
 
 Chamando fallbacks assim::
@@ -1215,14 +1223,14 @@ Chamando fallbacks assim::
     $routes->connect('/:controller/:action/*', [], ['routeClass' => DashedRoute::class]);
 
 .. note::
-    
-    O uso da classe de rota padrão (``Route``) com fallbacks ou qualquer rota 
+
+    O uso da classe de rota padrão (``Route``) com fallbacks ou qualquer rota
     com elementos de rota ``:plugin`` e/ou ``:controller`` resultará em uma URL inconsistente
 
 Criando parâmetros de URL persistentes
 ======================================
 
-Você pode se conectar ao processo de geração de URL usando as funções de filtro de URL. As funções de filtro são 
+Você pode se conectar ao processo de geração de URL usando as funções de filtro de URL. As funções de filtro são
 chamadas *antes* dos URLs corresponderem às rotas, permitindo preparar os URLs antes do roteamento.
 
 As funções de filtro de retorno de chamada devem esperar os seguintes parâmetros:
@@ -1269,10 +1277,10 @@ nisso::
 Manipulando parâmetros nomeados em URLs
 =======================================
 
-Embora os parâmetros nomeados tenham sido removidos no CakePHP 3.0, os aplicativos podem ter URLs publicados que os 
+Embora os parâmetros nomeados tenham sido removidos no CakePHP 3.0, os aplicativos podem ter URLs publicados que os
 contêm. Você pode continuar aceitando URLs contendo parâmetros nomeados.
 
-No método ``beforeFilter()`` do seu controlador, você pode chamar ``parseNamedParams()`` para extrair 
+No método ``beforeFilter()`` do seu controlador, você pode chamar ``parseNamedParams()`` para extrair
 qualquer parâmetro nomeado dos argumentos passados::
 
     public function beforeFilter(Event $event)
@@ -1281,8 +1289,8 @@ qualquer parâmetro nomeado dos argumentos passados::
         Router::parseNamedParams($this->request);
     }
 
-Isso preencherá ``$this->request->getParam('named')`` com quaisquer parâmetros nomeados encontrados nos 
-argumentos passados. Qualquer argumento passado que foi interpretado como um parâmetro nomeado será removido da 
+Isso preencherá ``$this->request->getParam('named')`` com quaisquer parâmetros nomeados encontrados nos
+argumentos passados. Qualquer argumento passado que foi interpretado como um parâmetro nomeado será removido da
 lista de argumentos passados.
 
 .. toctree::

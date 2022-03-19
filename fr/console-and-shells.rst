@@ -1330,6 +1330,18 @@ lequel vous souhaitez envoyer l'email en faisant::
 Cela suppose que les ID du message généré sont valides et correspondent au
 domaine duquel les emails sont envoyés.
 
+Commandes
+=========
+
+.. toctree::
+    :maxdepth: 1
+
+    console-and-shells/commands
+    console-and-shells/input-output
+    console-and-shells/option-parsers
+    console-and-shells/helpers
+    console-and-shells/cron-jobs
+
 Plus de sujets
 ==============
 

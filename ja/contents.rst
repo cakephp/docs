@@ -16,7 +16,6 @@
     phinx
 
 .. toctree::
-    :maxdepth: 3
     :caption: はじめに
 
     intro
@@ -26,7 +25,6 @@
     contributing
 
 .. toctree::
-    :maxdepth: 3
     :caption: 入門
 
     installation
@@ -40,7 +38,6 @@
     orm
 
 .. toctree::
-    :maxdepth: 3
     :caption: 一般的なトピック
 
     core-libraries/caching
@@ -62,7 +59,6 @@
     core-libraries/validation
 
 .. toctree::
-    :maxdepth: 3
     :caption: ユーティリティ
 
     core-libraries/app
@@ -78,7 +74,6 @@
     core-libraries/xml
 
 .. toctree::
-    :maxdepth: 3
     :caption: プラグイン
 
     Authorization <https://book.cakephp.org/authorization/1/>
@@ -91,14 +86,12 @@
     upgrade-tool
 
 .. toctree::
-    :maxdepth: 3
     :caption: その他
 
     core-libraries/global-constants-and-functions
     appendices
 
 .. toctree::
-    :maxdepth: 3
     :caption: Phinx
 
     Phinx <https://book.cakephp.org/phinx/0/ja/>

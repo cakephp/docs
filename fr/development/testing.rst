@@ -730,7 +730,7 @@ Fixture Factories
 Le nombre et la taille de vos fixtures vont croissantes avec la taille votre application. Il est possible qu'à
 un certain point, vous ne soyez plus en mesure les maintenir.
 
-Le `fixture factories plugin<https://github.com/vierge-noire/cakephp-fixture-factories>`_ propose une
+Le `fixture factories plugin <https://github.com/vierge-noire/cakephp-fixture-factories>`_ propose une
 alternative efficace pour des applications de taille moyenne et plus.
 
 Le plugin utilise son propre `phpunit listener <https://github.com/vierge-noire/cakephp-test-suite-light>`_,

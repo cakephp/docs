@@ -7,6 +7,7 @@ Contenu
     index
     topics
     bake
+    bake/development
     bake/usage
     chronos
     debug-kit
@@ -16,7 +17,6 @@ Contenu
 
 
 .. toctree::
-    :maxdepth: 3
     :caption: Préface
 
     intro
@@ -26,11 +26,11 @@ Contenu
     contributing
 
 .. toctree::
-    :maxdepth: 3
     :caption: Pour Commencer
 
     installation
     development/configuration
+    development/application
     development/routing
     controllers/request-response
     controllers/middleware
@@ -39,7 +39,6 @@ Contenu
     orm
 
 .. toctree::
-    :maxdepth: 3
     :caption: Généralités
 
     controllers/components/authentication
@@ -62,7 +61,6 @@ Contenu
     core-libraries/validation
 
 .. toctree::
-    :maxdepth: 3
     :caption: Utilitaires
 
     core-libraries/app
@@ -78,7 +76,6 @@ Contenu
     core-libraries/xml
 
 .. toctree::
-    :maxdepth: 3
     :caption: Plugins
 
     Bake <https://book.cakephp.org/bake/1/fr/>
@@ -89,14 +86,12 @@ Contenu
     upgrade-tool
 
 .. toctree::
-    :maxdepth: 3
     :caption: Divers
 
     core-libraries/global-constants-and-functions
     appendices
 
 .. toctree::
-    :maxdepth: 3
     :caption: Phinx
 
     Phinx <https://book.cakephp.org/phinx/0/fr/>
