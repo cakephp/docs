@@ -100,18 +100,6 @@ Routing
 * ``Router::parseRequest()`` now raises ``BadRequestException`` instead of
   ``InvalidArgumentException`` when an invalid HTTP method is used by a client.
 
-Breaking Changes
-================
-
-Behind the API, some breaking changes are necessary moving forward.
-They usually only affect tests.
-
-Global
-------
-
-* Increased minimum requirement to PHP 7.4.
-
-
 New Features
 ============
 
