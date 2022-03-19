@@ -4,7 +4,7 @@
 CakePHP 4.4 is an API compatible upgrade from 4.0. This page outlines the
 deprecations and features added in 4.4.
 
-Upgrading to 4.3.0
+Upgrading to 4.4.0
 ==================
 
 You can can use composer to upgrade to CakePHP 4.4.0::
