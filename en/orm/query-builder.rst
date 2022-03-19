@@ -561,7 +561,7 @@ automatically produce an ``if .. then .. else`` statement::
     #   WHEN population = 0 THEN 'DESERTED' ELSE 'INHABITED' END
 
 Fetching Arrays Instead of Entities
-----------------------------------
+-----------------------------------
 
 While ORMs and object result sets are powerful, creating entities is sometimes
 unnecessary. For example, when accessing aggregated data, building an Entity may

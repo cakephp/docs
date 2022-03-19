@@ -399,7 +399,7 @@ a tabela é criada (quais campos fazem parte da tabela) e quais registros serão
 preenchidos inicialmente na tabela. Vamos criar nosso primeiro fixture, que
 será usado para testar nosso próprio modelo de artigo. Crie um arquivo chamado
 **ArticlesFixture.php** no seu diretório **tests/Fixture**, com o seguinte
-conteúdo:
+conteúdo::
 
     namespace App\Test\Fixture;
 
@@ -507,7 +507,7 @@ Como os registros de uma fixture são declarados como uma propriedade de classe,
 você não pode usar funções ou outros dados dinâmicos para definir fixtures.
 Para resolver esse problema, você pode definir ``$records`` na função ``init()`` de sua
 fixture. Por exemplo, se você quiser que todos os carimbos de data e hora criados e modificados
-reflitam a data de hoje, faça o seguinte:
+reflitam a data de hoje, faça o seguinte::
 
     namespace App\Test\Fixture;
 
@@ -1799,7 +1799,7 @@ Descomente a seguinte linha no seu arquivo **config/bootstrap.php**::
 
     //Configure::load('app_local', 'default');
 
-Ao criar um arquivo **app_local.php **, você tem uma maneira fácil de definir
+Ao criar um arquivo **app_local.php**, você tem uma maneira fácil de definir
 configurações específicas do Jenkins. Você pode usar esse mesmo arquivo de
 configuração para substituir qualquer outro arquivo de configuração necessário
 no Jenkins.
@@ -1840,5 +1840,6 @@ faça as alterações necessárias para obter uma compilação de aprovação.
 
 .. meta::
     :title lang=pt-br: Testando
-    :keywords lang=pt-br: phpunit,teste banco de dados, configuraçãode de banco de dados,teste de banco de dados,teste publico,
-    teste framework,executando um,configuração de teste,padrão de fato,pear,runners,array,banco de dados,cakephp,php,integração
+    :keywords lang=pt-br: phpunit,teste banco de dados, configuraçãode de banco de dados,teste de banco de dados,
+        teste publico, teste framework,executando um,configuração de teste,padrão de fato,pear,runners,array,
+        banco de dados,cakephp,php,integração
