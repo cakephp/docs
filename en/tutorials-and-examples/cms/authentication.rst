@@ -263,8 +263,8 @@ configuration in AppController::
     If you don't have a user with a hashed password yet, comment the
     ``$this->loadComponent('Authentication.Authentication')`` line in your
     AppController and all other lines where Authentication is used. Then go to
-    ``/users/add`` to create a new user picking email and password. Make sure to
-    uncomment the lines we just temporarily commented!
+    ``/users/add`` to create a new user picking email and password. Afterward,
+    make sure to uncomment the lines we just temporarily commented!
 
 Try it out by visiting ``/articles/add`` before logging in! Since this action is not
 allowed, you will be redirected to the login page. After logging in
