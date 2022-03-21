@@ -88,6 +88,12 @@ clean-website:
 build/html/%/_static:
 	mkdir -p build/html/$*/_static
 
+build/html/%/_static/css: build/html/%/_static
+	mkdir -p build/html/$*/_static/css
+
+build/html/%/_static/js: build/html/%/_static
+	mkdir -p build/html/$*/_static/js
+
 CSS_FILES = $(THEME_DIR)/themes/cakephp/static/css/fonts.css \
   $(THEME_DIR)/themes/cakephp/static/css/bootstrap.min.css \
   $(THEME_DIR)/themes/cakephp/static/css/font-awesome.min.css \
@@ -108,10 +114,10 @@ JS_FILES = $(THEME_DIR)/themes/cakephp/static/js/vendor.js \
   $(THEME_DIR)/themes/cakephp/static/js/mega-menu.js \
   $(THEME_DIR)/themes/cakephp/static/js/header.js \
   $(THEME_DIR)/themes/cakephp/static/js/search.js \
-  $(THEME_DIR)/themes/cakephp/static/js/search.messages.$*.js \
+  $(THEME_DIR)/themes/cakephp/static/js/search.messages.*.js \
   $(THEME_DIR)/themes/cakephp/static/js/inline-search.js \
   $(THEME_DIR)/themes/cakephp/static/js/standalone-search.js
 
-build/html/%/_static/js/dist.js: build/html/%/_static $(JS_FILES)
+build/html/%/_static/js/dist.js: build/html/%/_static/js $(JS_FILES)
 	# build js dependencies for distribution into '$@'
 	cat $(JS_FILES) > $@
