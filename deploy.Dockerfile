@@ -14,8 +14,8 @@ FROM markstory/cakephp-docs-builder:runtime as runtime
 
 # Configure search index script
 ENV LANGS="de en ex fr ja pt"
-ENV SEARCH_SOURCE="/data/docs"
-ENV SEARCH_URL_PREFIX="/12"
+ENV SEARCH_SOURCE="/data/docs/build/html"
+ENV SEARCH_URL_PREFIX="/1.2"
 
 COPY --from=builder /data/docs /data/docs
 COPY --from=builder /data/website /data/website
