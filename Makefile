@@ -37,8 +37,8 @@ rebuild-index: $(foreach lang, $(LANGS), rebuild-index-$(lang))
 # Make the HTML version of the documentation with correctly nested language folders.
 html-%:
 	cd $* && make html
-	make build/html/$*/_static/css/app.css
-	make build/html/$*/_static/app.js
+	make build/html/$*/_static/css/dist.css
+	make build/html/$*/_static/js/dist.js
 
 htmlhelp-%:
 	cd $* && make htmlhelp
@@ -88,6 +88,12 @@ clean-website:
 build/html/%/_static:
 	mkdir -p build/html/$*/_static
 
+build/html/%/_static/css: build/html/%/_static
+	mkdir -p build/html/$*/_static/css
+
+build/html/%/_static/js: build/html/%/_static
+	mkdir -p build/html/$*/_static/js
+
 CSS_FILES = $(THEME_DIR)/themes/cakephp/static/css/fonts.css \
   $(THEME_DIR)/themes/cakephp/static/css/bootstrap.min.css \
   $(THEME_DIR)/themes/cakephp/static/css/font-awesome.min.css \
@@ -96,16 +102,22 @@ CSS_FILES = $(THEME_DIR)/themes/cakephp/static/css/fonts.css \
   $(THEME_DIR)/themes/cakephp/static/css/pygments.css \
   $(THEME_DIR)/themes/cakephp/static/css/responsive.css
 
-build/html/%/_static/css/app.css: build/html/%/_static $(CSS_FILES)
-	# echo all dependencies ($$^) into the output ($$@)
+build/html/%/_static/css/dist.css: build/html/%/_static/css $(CSS_FILES)
+	# build css dependencies for distribution into '$@'
 	cat $(CSS_FILES) > $@
 
-JS_FILES = $(THEME_DIR)/themes/cakephp/static/jquery.js \
-  $(THEME_DIR)/themes/cakephp/static/vendor.js \
-  $(THEME_DIR)/themes/cakephp/static/app.js \
-  $(THEME_DIR)/themes/cakephp/static/search.js \
-  $(THEME_DIR)/themes/cakephp/static/typeahead.js
+JS_FILES = $(THEME_DIR)/themes/cakephp/static/js/vendor.js \
+  $(THEME_DIR)/themes/cakephp/static/js/app.js \
+  $(THEME_DIR)/themes/cakephp/static/js/messages.js \
+  $(THEME_DIR)/themes/cakephp/static/js/common.js \
+  $(THEME_DIR)/themes/cakephp/static/js/responsive-menus.js \
+  $(THEME_DIR)/themes/cakephp/static/js/mega-menu.js \
+  $(THEME_DIR)/themes/cakephp/static/js/header.js \
+  $(THEME_DIR)/themes/cakephp/static/js/search.js \
+  $(THEME_DIR)/themes/cakephp/static/js/search.messages.*.js \
+  $(THEME_DIR)/themes/cakephp/static/js/inline-search.js \
+  $(THEME_DIR)/themes/cakephp/static/js/standalone-search.js
 
-build/html/%/_static/app.js: build/html/%/_static $(JS_FILES)
-	# echo all dependencies ($JS_FILES) into the output ($$@)
+build/html/%/_static/js/dist.js: build/html/%/_static/js $(JS_FILES)
+	# build js dependencies for distribution into '$@'
 	cat $(JS_FILES) > $@
