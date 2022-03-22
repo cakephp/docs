@@ -1,1 +1,1 @@
-CakePHP 1.1 docs
+CakePHP 1.1 Docs
