@@ -55,7 +55,15 @@ handling framework. To upgrade to the new system you can replace the usage of
     (new ErrorTrap(Configure::read('Error')))->register();
     (new ExceptionTrap(Configure::read('Error')))->register();
 
-See the :doc:`/development/errors` for more detailed documentation.
+See the :doc:`/development/errors` for more detailed documentation. Additionally
+the following methods related to the deprecated error handling system are
+deprecated:
+
+* ``Debugger::outputError()``
+* ``Debugger::getOutputFormat()``
+* ``Debugger::setOutputFormat()``
+* ``Debugger::addFormat()``
+* ``Debugger::addRenderer()``
 
 RequestHandlerComponent
 ------------------------
@@ -80,7 +88,7 @@ ORM
 - ``SaveOptionsBuilder`` was deprecated. Use a normal array for options instead.
 
 Plugins
-=======
+-------
 
 - Plugin class names now match the plugin name with a "Plugin" suffix. For
   example, the plugin class for "ADmad/I18n" would be ``ADmad\I18n\I18nPlugin``
