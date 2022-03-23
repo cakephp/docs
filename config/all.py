@@ -10,7 +10,7 @@ version = '1.2'
 release = '1.2'
 
 # Search index version
-search_version = '12'
+search_version = '1-2'
 
 version_name = ''
 
