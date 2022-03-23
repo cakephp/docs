@@ -13,7 +13,7 @@ RUN make website DEST="/data/website"
 FROM markstory/cakephp-docs-builder:runtime as runtime
 
 # Configure search index script
-ENV LANGS="de en ex fr ja pt"
+ENV LANGS="de en es fr ja pt"
 ENV SEARCH_SOURCE="/data/docs/build/html"
 ENV SEARCH_URL_PREFIX="/1.3"
 
