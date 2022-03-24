@@ -123,7 +123,8 @@ following configuration keys are used:
 - ``'emailFormat'``: Format of email (html, text or both). See ``Mailer::setEmailFormat()``.
 - ``'transport'``: Transport configuration name. See :ref:`email-transport`.
 - ``'log'``: Log level to log the email headers and message. ``true`` will use
-  LOG_DEBUG. See also :ref:`logging-levels`.
+  LOG_DEBUG. See :ref:`logging-levels`. Note that logs will be emitted under the scope named ``email``.
+  See also :ref:`logging-scopes`.
 - ``'helpers'``: Array of helpers used in the email template.
   ``ViewBuilder::setHelpers()``/``ViewBuilder::addHelpers()``.
 
