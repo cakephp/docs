@@ -299,6 +299,49 @@ Par exemple::
 
 Cela rendrait la vue **plugins/Users/templates/UserDetails/custom_file.php**
 
+.. _controller-viewclasses:
+
+Négociation de Contenu
+======================
+
+Les controllers peuvent définir une liste des classes de vue qu'ils proposent.
+Une fois l'action du controller terminée, CakePHP utilisera cette liste de vues
+pour réaliser une négociation de contenu. Ainsi, votre application peut
+réutiliser la même action de controller pour rendre une vue HTML, ou une réponse
+JSON ou XML. La liste des classes de vue supportées par un controller est
+définie par la méthode ``viewClasses()``::
+
+    namespace App\Controller;
+
+    use Cake\View\JsonView;
+    use Cake\View\XmlView;
+
+    class PostsController extends AppController
+    {
+        public function viewClasses()
+        {
+            return [JsonView::class, XmlView::class];
+        }
+    }
+
+Si aucune autre vue ne peut être sélectionnée d'après l'en-tête ``Accept`` des
+requêtes ou l'extension de routage, la classe basique ``View`` sera
+automatiquement utilisée comme classe de repli. Si votre application a besoin
+d'effectuer une logique différente selon les différents formats de réponse, vous
+pouvez utiliser ``$this->request->is()`` pour construire la logique
+conditionnelle dont vous avez besoin.
+
+
+.. note::
+    Les classes de vue doivent implémenter la méthode statique ``contentType()``
+    pour pouvoir participer à la négociation de contenu.
+
+.. versionadded:: 4.4.0
+    Avant 4.4, vous deviez utiliser
+    :doc:`/controllers/components/request-handling` au lieu de
+    ``viewClasses()``.
+
+
 Rediriger vers d'Autres Pages
 =============================
 
