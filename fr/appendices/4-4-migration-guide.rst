@@ -60,6 +60,12 @@ Global
 Nouvelles fonctionnalités
 =========================
 
+Command
+-------
+
+* ``bin/cake routes`` met maintenant en valeur les collisions dans les templates
+  de routes.
+
 Controller
 ----------
 
@@ -77,6 +83,12 @@ Database
 * Le builder ``QueryExpression::case()`` supporte maintenant la détection de
   type à partir d'expressions passées à ``then()`` et ``else()`` qui
   implémentent ``\Cake\Database\TypedResultInterface``.
+  
+Mailer
+------
+
+* ``Mailer`` accepte à présent une configuration ``autoLayout`` qui, lorsqu'elle
+  est définie à ``false``, désactive l'auto-layout dans le ``ViewBuilder``.
 
 Http
 ----
