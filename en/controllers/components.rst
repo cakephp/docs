@@ -17,7 +17,6 @@ chapter for each component:
 
     /controllers/components/authentication
     /controllers/components/flash
-    /controllers/components/pagination
     /controllers/components/form-protection
     /controllers/components/check-http-cache
 

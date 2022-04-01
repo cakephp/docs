@@ -111,9 +111,10 @@ as a key in the ``$paginate`` property::
 The values of the ``Articles`` and ``Authors`` keys could contain all the
 properties that a basic ``$paginate`` array would.
 
-Once you have used ``paginate()`` to create results. The controller's request
-will be updated with paging parameters. You can access the pagination metadata
-at ``$this->request->getAttribute('paging')``.
+``Controller::paginate()`` returns an instance of ``Cake\Datasource\Paging\PaginatedResultSet``
+which implements the ``Cake\Datasource\Paging\PaginatedInterface``.
+
+This object contains the paginated records and the paging params.
 
 Simple Pagination
 =================
@@ -279,9 +280,29 @@ block and take appropriate action when a ``NotFoundException`` is caught::
             $this->paginate();
         } catch (NotFoundException $e) {
             // Do something here like redirecting to first or last page.
-            // $this->request->getAttribute('paging') will give you required info.
+            // $e->getPrevious()->getAttributes('pagingParams') will give you required info.
         }
     }
+
+Using a paginator class directly
+================================
+
+You can also use a paginator directly.::
+
+        // Create a paginator
+        $paginator = new \Cake\Datasource\Paginator\Paginator();
+
+        // Paginate the model
+        $results = $paginator->paginate(
+            // Query or table instance which you need to paginate
+            $this->fetchTable('Articles'),
+            // Request params
+            $this->request->getQueryParams(),
+            // Config array having the same structure as options as Controller::$paginate
+            [
+                'finder' => 'latest',
+            ]
+        );
 
 Pagination in the View
 ======================
