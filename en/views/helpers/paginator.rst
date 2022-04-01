@@ -6,11 +6,21 @@ Paginator
 .. php:class:: PaginatorHelper(View $view, array $config = [])
 
 The PaginatorHelper is used to output pagination controls such as page numbers
-and next/previous links. It works in tandem with
-:php:class:`PaginatorComponent`.
+and next/previous links.
 
 See also :doc:`/controllers/pagination` for information on how to
 create paginated datasets and do paginated queries.
+
+Setting the paginated resultset
+-------------------------------
+
+.. php:method:: setPaginated($paginated, $options)
+
+By default the helper uses the first instance of ``Cake\Datasource\Paging\PaginatedInterface``
+it finds in the view variables. (Generally the result of ``Controller::paginate()``).
+
+You can use ``PaginatorHelper::setPaginated()`` to explicity set the paginated
+resultset that the helper should use.
 
 .. _paginator-templates:
 
@@ -121,7 +131,6 @@ Accepted keys for ``$options``:
 
 * ``escape`` Whether you want the contents HTML entity encoded, defaults to
   ``true``.
-* ``model`` The model to use, defaults to :php:meth:`PaginatorHelper::defaultModel()`.
 * ``direction`` The default direction to use when this link isn't active.
 * ``lock`` Lock direction. Will only use the default direction then, defaults to ``false``.
 
@@ -197,8 +206,6 @@ Supported options are:
 
 * ``before`` Content to be inserted before the numbers.
 * ``after`` Content to be inserted after the numbers.
-* ``model`` Model to create numbers for, defaults to
-  :php:meth:`PaginatorHelper::defaultModel()`.
 * ``modulus`` how many numbers to include on either side of the current page,
   defaults to 8.
 * ``first`` Whether you want first links generated, set to an integer to
@@ -243,7 +250,6 @@ pages in the paged data set.
 
     * ``escape`` Whether you want the contents HTML entity encoded,
       defaults to ``true``.
-    * ``model`` The model to use, defaults to :php:meth:`PaginatorHelper::defaultModel()`.
     * ``disabledTitle`` The text to use when the link is disabled. Defaults to
       the ``$title`` parameter.
 
@@ -293,7 +299,6 @@ pages in the paged data set.
 
     The options parameter accepts the following:
 
-    - ``model`` The model to use defaults to :php:meth:`PaginatorHelper::defaultModel()`
     - ``escape`` Whether or not the text should be escaped. Set to ``false`` if your
       content contains HTML.
 
@@ -320,27 +325,27 @@ PaginatorHelper can be used to create pagination link tags in your page
 Checking the Pagination State
 =============================
 
-.. php:method:: current(string $model = null)
+.. php:method:: current()
 
-    Gets the current page of the recordset for the given model::
+    Gets the current page of the recordset::
 
-        // Our URL is: http://example.com/comments/view/page:3
-        echo $this->Paginator->current('Comment');
+        // Our URL is: /comments?page=3
+        echo $this->Paginator->current();
         // Output is 3
 
-.. php:method:: hasNext(string $model = null)
+.. php:method:: hasNext()
 
     Returns ``true`` if the given result set is not at the last page.
 
-.. php:method:: hasPrev(string $model = null)
+.. php:method:: hasPrev()
 
     Returns ``true`` if the given result set is not at the first page.
 
-.. php:method:: hasPage(int $page = 1, string $model = null)
+.. php:method:: hasPage(int $page = 1)
 
     Returns ``true`` if the given result set has the page number given by ``$page``.
 
-.. php:method:: total(string $model = null)
+.. php:method:: total()
 
     Returns the total number of pages for the provided model.
 
@@ -352,7 +357,6 @@ Creating a Page Counter
 Returns a counter string for the paged result set. Using a provided format
 string and a number of options you can create localized and application
 specific indicators of where a user is in the paged data set.
-
 
 Supported formats are 'range', 'pages' and custom. Defaults to pages which would
 output like '1 of 10'. In the custom mode the supplied string is parsed and
@@ -379,14 +383,10 @@ tokens are replaced with actual values. The available tokens are:
 
       echo $this->Paginator->counter('range');
 
-* ``model`` The name of the model being paginated, defaults to
-  :php:meth:`PaginatorHelper::defaultModel()`. This is used in
-  conjunction with the custom string on 'format' option.
-
 Generating Pagination URLs
 ==========================
 
-.. php:method:: generateUrl(array $options = [], $model = null, $full = false)
+.. php:method:: generateUrl(array $options = [], $full = false)
 
 By default returns a full pagination URL string for use in non-standard contexts
 (i.e. JavaScript). ::
@@ -441,9 +441,6 @@ Sets all the options for the PaginatorHelper. Supported options are:
 
 * ``escape`` Defines if the title field for links should be HTML escaped.
   Defaults to ``true``.
-
-* ``model`` The name of the model being paginated, defaults to
-  :php:meth:`PaginatorHelper::defaultModel()`.
 
 Example Usage
 =============
@@ -541,21 +538,12 @@ Paginating Multiple Results
 ===========================
 
 If you are :ref:`paginating multiple queries <paginating-multiple-queries>`
-you'll need to set the ``model`` option when generating pagination related
-elements. You can either use the ``model`` option on every method call you make
-to ``PaginatorHelper``, or use ``options()`` to set the default model::
+you'll need to use ``PaginatorHelper::setPaginated()`` first before calling
+other methods of the helper, so that they generate expected output.
 
-    // Pass the model option
-    echo $this->Paginator->sort('title', ['model' => 'Articles']);
-
-    // Set the default model.
-    $this->Paginator->options(['model' => 'Articles']);
-    echo $this->Paginator->sort('title');
-
-By using the ``model`` option, ``PaginatorHelper`` will automatically use the
-``scope`` defined in when the query was paginated. To set additional URL
-parameters for multiple pagination you can include the scope names in
-``options()``::
+``PaginatorHelper`` will automatically use the ``scope`` defined in when the
+query was paginated. To set additional URL parameters for multiple pagination
+you can include the scope names in ``options()``::
 
     $this->Paginator->options([
         'url' => [
