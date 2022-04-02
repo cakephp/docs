@@ -13,7 +13,7 @@ RUN make website DEST="/data/website"
 FROM markstory/cakephp-docs-builder:runtime as runtime
 
 ENV LANGS="en es fr ja pt"
-ENV SEARCH_SOURCE="/data/docs"
+ENV SEARCH_SOURCE="/data/docs/build/html"
 ENV SEARCH_URL_PREFIX="/4next"
 
 COPY --from=builder /data/docs /data/docs

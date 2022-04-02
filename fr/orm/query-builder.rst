@@ -386,10 +386,10 @@ fonctions SQL. Par exemple::
         ' - CAT: ',
         'Categories.name' => 'identifier',
         ' - Age: ',
-        $query->func()->dateDiff(
+        $query->func()->dateDiff([
             'NOW()' => 'literal',
             'Articles.created' => 'identifier'
-        )
+        ])
     ]);
     $query->select(['link_title' => $concat]);
 
@@ -785,7 +785,7 @@ de conditions::
             'OR' => [['nombre_de_vues' => 2], ['nombre_de_vues' => 3]],
         ]);
 
-Ce qui précède générerait le code SQL::
+Ce qui précède générerait le code SQL:
 
 .. code-block:: sql
 
