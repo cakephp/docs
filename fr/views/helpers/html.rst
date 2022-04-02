@@ -519,7 +519,7 @@ Affichera:
 Vous pouvez insérer dans la balise script un bloc spécifique en
 utilisant l'option ``block``::
 
-    echo $this->Html->script('wysiwyg', ['block' => 'scriptBottom']);
+    $this->Html->script('wysiwyg', ['block' => 'scriptBottom']);
 
 Dans votre layout, vous pouvez afficher toutes les balises script ajoutées
 dans 'scriptBottom'::

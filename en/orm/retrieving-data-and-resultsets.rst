@@ -641,15 +641,13 @@ to ``select()``::
         ->select($articles->Users)
         ->contain(['Users']);
 
-Alternatively, if you have multiple associations, you can use ``enableAutoFields()``::
+Alternatively, you can use ``enableAutoFields()`` in an anonymous function::
 
-    // Select id & title from articles, but all fields off of Users, Comments
-    // and Tags.
-    $query->select(['id', 'title'])
-        ->contain(['Comments', 'Tags'])
-        ->enableAutoFields(true)
+    // Select id & title from articles, but all fields off of Users.
+    $query = $articles->find()
+        ->select(['id', 'title'])
         ->contain(['Users' => function(Query $q) {
-            return $q->autoFields(true);
+            return $q->enableAutoFields();
         }]);
 
 Sorting Contained Associations

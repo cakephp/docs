@@ -1,6 +1,10 @@
 Injection de Dépendance
 #######################
 
+.. warning::
+    Le conteneur Dependency Injection est une fonctionnalité expérimentale dont
+    l'API n'est pas encore stabilisé.
+
 Le conteneur de services de CakePHP vous permet de gérer les dépendances de
 classes de vos services applicatifs par l'injection de dépendance. L'injection
 de dépendance "injecte" automatiquement les dépendances d'un objet dans son
@@ -82,6 +86,7 @@ la commande.
 
 Ajouter des Services
 ====================
+
 Pour disposer de services créés par le conteneur, vous devez lui dire quelles
 classes il peut créer et comment construire ces classes. La définition la plus
 simple se fait par le nom de la classe::
@@ -138,6 +143,12 @@ soit des valeurs primitives::
 
     $container->add(BillingService::class)
         ->addArgument('apiKey');
+
+Vos services peuvent faire référence à la ``ServerRequest`` dans les actions du
+controller car elle sera chargée automatiquement.
+
+.. versionchanged:: 4.4.0
+    La ``$request`` est désormais enregistrée automatiquement.
 
 Ajouter des Services Partagés
 -----------------------------
@@ -297,7 +308,7 @@ commandes. Les Mocks sont supprimés à la fin de chaque test.
 Auto Wiring
 ===========
 
-L'autowWiring est désactivé par défaut. Pour l'activer::
+L'auto Wiring est désactivé par défaut. Pour l'activer::
 
     // Dans src/Application.php
     public function services(ContainerInterface $container): void
@@ -307,6 +318,13 @@ L'autowWiring est désactivé par défaut. Pour l'activer::
         );
     }
 
-À présent, vos dépendances sont résolues automatiquement. Pour en savoir plus
-sur l'auto wiring, consultez la
+À présent, vos dépendances sont résolues automatiquement. Cette approche ne
+mettra pas les résolutions en cache les résolutions, au détriment de la
+performance. Pour activer la mise en cache::
+
+    $container->delegate(
+        new \League\Container\ReflectionContainer(true) // ou utilisez la valeur de Configure::read('debug') 
+    );
+
+Pour en savoir plus sur l'auto wiring, consultez la
 `PHP League Container documentation <https://container.thephpleague.com/4.x/auto-wiring/>`.

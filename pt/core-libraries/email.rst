@@ -120,7 +120,8 @@ necessários. As seguintes chaves de configuração são usadas:
 - ``'emailFormat'``: Formato de email (html, text ou ambos). Veja ``Mailer::setEmailFormat()``.
 - ``'transport'``: Nome da configuração de Transporte. Veja :ref:`email-transport`.
 - ``'log'``: Nível de logs para registrar os cabeçalhos e a mensagem do e-mail. ``true`` usará LOG_DEBUG. 
-  Veja também `logging-levels`.
+  Veja `logging-levels`. Observe que os logs serão emitidos sob o escopo chamado ``email``.
+  Veja também `logging-scopes`.
 - ``'helpers'``: Conjunto de auxiliares usados no template de e-mail. ``ViewBuilder::setHelpers()``.
 
 .. note::
