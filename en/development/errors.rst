@@ -199,7 +199,7 @@ prefix. You could create the following class::
          */
         public function initialize(): void
         {
-            $this->loadComponent('RequestHandler');
+            $this->loadComponent('FormProtection');
         }
 
         /**

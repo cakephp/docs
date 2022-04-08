@@ -282,6 +282,8 @@ This would render **plugins/Users/templates/UserDetails/custom_file.php**
 Content Type Negotiation
 ========================
 
+.. php:method:: viewClasses()
+
 Controllers can define a list of view classes they support. After the
 controller's action is complete CakePHP will use the view list to perform
 content-type negotiation. This enables your application to re-use the same
@@ -296,7 +298,7 @@ define the list of supported view classes for a controller is done with the
 
     class PostsController extends AppController
     {
-        public function viewClasses()
+        public function viewClasses(): array
         {
             return [JsonView::class, XmlView::class];
         }
@@ -312,10 +314,6 @@ perform different logic for different response formats you can use
 .. note::
     View classes must implement the static ``contentType()`` hook method to
     participate in content-type negotiation.
-
-.. versionadded:: 4.4.0
-    Prior to 4.4 you must use :doc:`/controllers/components/request-handling`
-    instead of ``viewClasses()``.
 
 
 Redirecting to Other Pages
