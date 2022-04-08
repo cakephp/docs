@@ -28,7 +28,7 @@ Configuring Components
 
 Many of the core components require configuration. Some examples of components
 requiring configuration are :doc:`/controllers/components/security` and
-:doc:`/controllers/components/request-handling`.  Configuration for these components,
+:doc:`/controllers/components/form-protection`.  Configuration for these components,
 and for components in general, is usually done via ``loadComponent()`` in your
 Controller's ``initialize()`` method or via the ``$components`` array::
 
