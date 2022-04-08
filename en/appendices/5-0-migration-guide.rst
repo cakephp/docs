@@ -59,6 +59,9 @@ Core
 - The dependency on ``league/container`` was updated to ``4.x``. This will
   require the addition of typehints to your ``ServiceProvider`` implementations.
 - ``deprecationWarning()`` now has a ``$vesrion`` parameter.
+- The ``App.uploadedFilesAsObjects`` configuration option has been removed
+  alongside of support for PHP file upload shaped arrays throughout the
+  framework.
 
 Database
 --------
@@ -83,6 +86,13 @@ Filesystem
 
 - The Filesystem package was removed, and ``Filesystem`` class was moved to the Utility package.
 
+Http
+----
+
+- ``ServerRequest`` is no longer compatible with ``files`` as arrays. This
+  behavior has been disabled by default since 4.1.0. The ``files`` data will now
+  always contain ``UploadedFileInterfaces`` objects.
+
 I18n
 ----
 
@@ -106,6 +116,14 @@ ORM
 - ``allowMultipleNulls`` option for ``isUnique`` rule now default to true matching
   the original 3.x behavior.
 
+Validation
+----------
+
+- ``Validation::isEmpty()`` is no longer compatible with file upload shaped
+  arrays. Support for PHP file upload arrays has been removed from
+  ``ServerRequest`` as well so you should not see this as a problem outside of
+  tests.
+
 View
 ----
 
@@ -114,6 +132,8 @@ View
 - ``ViewBuilder::setHelpers()`` parameter ``$merge`` was removed. Use ``ViewBuilder::addHelpers()`` instead.
 - Inside ``View::initialize()``, prefer using ``addHelper()`` instead of ``loadHelper()``.
   All configured helpers will be loaded afterwards, anyway.
+- ``View\Widget\FileWidget`` is no longer compatible with PHP file upload shaped
+  arrays. This is aligned with ``ServerRequest`` and ``Validation`` changes.
 
 New Features
 ============
