@@ -56,7 +56,7 @@ Here is an example of an injected service inside a command::
             $this->users = $users;
         }
 
-        public function execute( Arguments $args, ConsoleIo $io )
+        public function execute(Arguments $args, ConsoleIo $io)
         {
             $valid = $this->users->check('all');
         }
@@ -64,7 +64,7 @@ Here is an example of an injected service inside a command::
     }
 
     // In src/Application.php
-    public function services( ContainerInterface $container ): void
+    public function services(ContainerInterface $container): void
     {
         $container
             ->add(CheckUsersCommand::class)
