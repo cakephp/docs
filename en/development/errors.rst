@@ -193,16 +193,6 @@ prefix. You could create the following class::
     class ErrorController extends AppController
     {
         /**
-         * Initialization hook method.
-         *
-         * @return void
-         */
-        public function initialize(): void
-        {
-            $this->loadComponent('RequestHandler');
-        }
-
-        /**
          * beforeRender callback.
          *
          * @param \Cake\Event\EventInterface $event Event.

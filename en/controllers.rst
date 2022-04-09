@@ -282,6 +282,8 @@ This would render **plugins/Users/templates/UserDetails/custom_file.php**
 Content Type Negotiation
 ========================
 
+.. php:method:: viewClasses()
+
 Controllers can define a list of view classes they support. After the
 controller's action is complete CakePHP will use the view list to perform
 content-type negotiation. This enables your application to re-use the same
