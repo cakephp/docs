@@ -351,8 +351,12 @@ dans vos views. Un exemple simple de l'utilisation de session serait::
 
     // Si vous accédez à la session plusieurs fois,
     // vous voudrez probablement une variable locale.
-    $session = $this->request->session();
+    $session = $this->request->getSession();
     $name = $session->read('User.name');
+
+Dans les helpers, utilisez ``$this->getView()->getRequest()`` pour obtenir
+l'objet request. Dans les components, utilisez
+``$this->getController()->getRequest()``.
 
 Lire & Ecrire les Données de Session
 ====================================

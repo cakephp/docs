@@ -198,6 +198,8 @@ nécessaire. Notre écouteur ``UserStatistics`` pourrait commencer comme ceci::
         public function implementedEvents()
         {
             return [
+                // La personnalisation des noms d'événements vous permet de
+                // concevoir au mieux votre application.
                 'Model.Orders.afterPlace' => 'updateBuyStatistic',
             ];
         }
@@ -228,6 +230,7 @@ pour le faire::
 
     use Cake\Log\Log;
 
+    // Depuis un controller, ou pendant la phase de bootstrap de l'application
     $this->Orders->eventManager()->on('Model.Orders.afterPlace', function ($event) {
         Log::write(
             'info',

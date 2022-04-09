@@ -127,8 +127,9 @@ sont utilisées:
 - ``'theme'``: Theme utilisé pour le rendu du template. Voir
   ``Email::setTheme()``.
 - ``'layout'``: Si vous utilisez un contenu rendu, définissez le layout à
-  rendre. Si vous voulez rendre un template sans layout, définissez ce champ
-  à null. Regardez ``Email::template()``.
+  rendre. Regardez ``ViewBuilder::setTemplate()``.
+- ``'autoLayout'``: Si vous voulez rendre un template sans layout, définissez ce
+  champ à ``false``. See ``ViewBuilder::disableAutoLayout()``.
 - ``'viewVars'``: Si vous utilisez un contenu rendu, définissez le tableau avec
   les variables devant être rendus dans la vue. Regardez
   ``Email::viewVars()``.
@@ -139,7 +140,9 @@ sont utilisées:
 - ``'transport'``: Nom du Transport. Regardez
   :php:meth:`~Cake\\Mailer\\Email::configTransport()`.
 - ``'log'``: Niveau de Log pour connecter les headers de l'email headers et le
-  message. ``true`` va utiliser LOG_DEBUG. Regardez aussi :ref:`logging-levels`.
+  message. ``true`` va utiliser LOG_DEBUG. Regardez :ref:`logging-levels`.
+  Notez que les logs seront émis sous le scope nommé ``email``.
+  Regardez aussi :ref:`logging-scopes`.
 - ``'helpers'``: Tableau de helpers utilisés dans le template email.
   ``ViewBuilder::setHelpers()``/``ViewBuilder::addHelpers()``
 
