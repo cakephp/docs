@@ -612,10 +612,6 @@ Response
 It encapsulates a number of features and functionality for generating HTTP
 responses in your application. It also assists in testing, as it can be
 mocked/stubbed allowing you to inspect headers that will be sent.
-Like :php:class:`Cake\\Http\\ServerRequest`, :php:class:`Cake\\Http\\Response`
-consolidates a number of methods previously found on :php:class:`Controller`,
-:php:class:`RequestHandlerComponent` and :php:class:`Dispatcher`. The old
-methods are deprecated in favour of using :php:class:`Cake\\Http\\Response`.
 
 ``Response`` provides an interface to wrap the common response-related
 tasks such as:
@@ -925,7 +921,7 @@ in order to determine whether it matches a cached resource.
 
 To take advantage of this header, you must either call the
 ``checkNotModified()`` method manually or include the
-:doc:`/controllers/components/request-handling` in your controller::
+:doc:`/controllers/components/check-http-cache` in your controller::
 
     public function index()
     {
@@ -962,7 +958,7 @@ response was modified or not based on their cache.
 
 To take advantage of this header, you must either call the
 ``checkNotModified()`` method manually or include the
-:doc:`/controllers/components/request-handling` in your controller::
+:doc:`/controllers/components/check-http-cache` in your controller::
 
     public function view()
     {

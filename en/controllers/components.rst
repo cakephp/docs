@@ -18,7 +18,6 @@ chapter for each component:
     /controllers/components/authentication
     /controllers/components/flash
     /controllers/components/security
-    /controllers/components/request-handling
     /controllers/components/form-protection
     /controllers/components/check-http-cache
 
@@ -29,7 +28,7 @@ Configuring Components
 
 Many of the core components require configuration. Some examples of components
 requiring configuration are :doc:`/controllers/components/security` and
-:doc:`/controllers/components/request-handling`.  Configuration for these components,
+:doc:`/controllers/components/form-protection`.  Configuration for these components,
 and for components in general, is usually done via ``loadComponent()`` in your
 Controller's ``initialize()`` method or via the ``$components`` array::
 
@@ -38,8 +37,8 @@ Controller's ``initialize()`` method or via the ``$components`` array::
         public function initialize(): void
         {
             parent::initialize();
-            $this->loadComponent('RequestHandler', [
-                'viewClassMap' => ['json' => 'AppJsonView'],
+            $this->loadComponent('FormProtection', [
+                'unlockedActions' => ['index'],
             ]);
             $this->loadComponent('Security', ['blackholeCallback' => 'blackhole']);
         }
@@ -52,14 +51,14 @@ also be expressed as::
 
     public function beforeFilter(EventInterface $event)
     {
-        $this->RequestHandler->setConfig('viewClassMap', ['rss' => 'MyRssView']);
+        $this->FormProtection->setConfig('unlockedActions', ['index']);
     }
 
 Like helpers, components implement ``getConfig()`` and ``setConfig()`` methods
 to read and write configuration data::
 
     // Read config data.
-    $this->RequestHandler->getConfig('viewClassMap');
+    $this->FormProtection->getConfig('unlockedActions');
 
     // Set config
     $this->Csrf->setConfig('cookieName', 'token');
