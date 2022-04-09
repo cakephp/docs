@@ -1,27 +1,35 @@
 JSON and XML views
 ##################
 
-The ``JsonView`` and ``XmlView`` integration with CakePHP's
-:ref:`controller-viewclasses` features and  let you create JSON and XML responses.
+The ``JsonView`` and ``XmlView``
+let you create JSON and XML responses, and integrate with the
+:php:class:`Cake\\Controller\\Component\\RequestHandlerComponent`.
 
-These view classes are most commonly used alongside :php:meth:`\Cake\Controller\Controller::viewClasses()`.
+By enabling ``RequestHandlerComponent`` in your application, and enabling
+support for the ``json`` and/or ``xml`` extensions, you can automatically
+leverage the new view classes. ``JsonView`` and ``XmlView`` will be referred to
+as data views for the rest of this page.
 
 There are two ways you can generate data views. The first is by using the
 ``serialize`` option, and the second is by creating normal template files.
 
-Defining View Classes to Negotiate With
+Enabling Data Views in Your Application
 =======================================
 
-In your ``AppController`` or in an individual controller you can implement the
-``viewClasses()`` method and provide all of the views you want to support::
+Before you can use the data view classes, you'll first need to load the
+:php:class:`Cake\\Controller\\Component\\RequestHandlerComponent` in your
+controller::
 
-    use Cake\View\JsonView;
-    use Cake\View\XmlView;
-
-    public function viewClasses(): array
+    public function initialize(): void
     {
-        return [JsonView::class, XmlView::class];
+        ...
+        $this->loadComponent('RequestHandler');
     }
+
+This can be done in your ``AppController`` and will enable automatic view class
+switching on content types. You can also set the component up with the
+``viewClassMap`` setting, to map types to your custom classes and/or map other
+data types.
 
 You can optionally enable the json and/or xml extensions with
 :ref:`file-extensions`. This will allow you to access the ``JSON``, ``XML`` or
@@ -48,13 +56,12 @@ serialize::
 
     namespace App\Controller;
 
-    use Cake\View\JsonView;
-
     class ArticlesController extends AppController
     {
-        public function viewClasses(): array
+        public function initialize(): void
         {
-            return [JsonView::class];
+            parent::initialize();
+            $this->loadComponent('RequestHandler');
         }
 
         public function index()
@@ -70,13 +77,12 @@ You can also define ``serialize`` as an array of view variables to combine::
 
     namespace App\Controller;
 
-    use Cake\View\JsonView;
-
     class ArticlesController extends AppController
     {
-        public function viewClasses(): array
+        public function initialize(): void
         {
-            return [JsonView::class];
+            parent::initialize();
+            $this->loadComponent('RequestHandler');
         }
 
         public function index()
@@ -194,11 +200,13 @@ response in the function name provided. If you want to use a custom query string
 parameter name instead of "callback" set ``_jsonp`` to required name instead of
 ``true``.
 
-Choosing a View Class
-=====================
+Example Usage
+=============
 
-While you can use the ``viewClasses`` hook method most of the time, if you want
-total control over view class selection you can directly choose the view class::
+While the :doc:`RequestHandlerComponent
+</controllers/components/request-handling>` can automatically set the view based
+on the request content-type or extension, you could also handle view
+mappings in your controller::
 
     // src/Controller/VideosController.php
     namespace App\Controller;

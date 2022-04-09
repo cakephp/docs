@@ -30,6 +30,9 @@ build your own backend. The built-in caching engines are:
 * ``Apcu`` APCu cache uses the PHP `APCu <https://php.net/apcu>`_ extension.
   This extension uses shared memory on the webserver to store objects.
   This makes it very fast, and able to provide atomic read/write features.
+* ``Wincache`` Wincache uses the `Wincache <https://php.net/wincache>`_
+  extension. Wincache is similar to APC in features and performance, but
+  optimized for Windows and IIS.
 * ``Array`` Stores all data in an array. This engine does not provide
   persistent storage and is intended for use in application test suites.
 * ``Null`` The null engine doesn't actually store anything and fails all read
@@ -398,7 +401,7 @@ Clearing Cached Data
 .. php:staticmethod:: clear($config = 'default')
 
 Destroy all cached values for a cache configuration. In engines like: Apcu,
-Memcached, the cache configuration's prefix is used to remove
+Memcached, and Wincache, the cache configuration's prefix is used to remove
 cache entries. Make sure that different cache configurations have different
 prefixes::
 
@@ -407,7 +410,7 @@ prefixes::
 
 .. note::
 
-    Because APCu uses isolated caches for webserver and CLI they
+    Because APCu and Wincache use isolated caches for webserver and CLI they
     have to be cleared separately (CLI cannot clear webserver and vice versa).
 
 Using Cache to Store Counters
@@ -438,7 +441,7 @@ After setting an integer value you can manipulate it using ``increment()`` and
 .. note::
 
     Incrementing and decrementing do not work with FileEngine. You should use
-    APCu, Redis or Memcached instead.
+    APCu, Wincache, Redis or Memcached instead.
 
 Using Cache to Store Common Query Results
 =========================================

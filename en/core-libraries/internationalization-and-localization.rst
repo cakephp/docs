@@ -103,7 +103,7 @@ Extract Pot Files with I18n Shell
 ---------------------------------
 
 To create the pot files from `__()` and other internationalized types of
-messages that can be found in the application code, you can use the i18n command.
+messages that can be found in the application code, you can use the i18n shell.
 Please read the :doc:`following chapter </console-commands/i18n>` to
 learn more.
 

@@ -293,6 +293,38 @@ necessary when dealing with some ISP's::
     // to non-conformant addresses.
     $mailer->setEmailPattern($newPattern);
 
+Sending Messages Quickly
+========================
+
+Sometimes you need a quick way to fire off an email, and you don't necessarily
+want to setup a bunch of configuration ahead of time.
+:php:meth:`Cake\\Mailer\\Email::deliver()` is intended for that purpose.
+
+You can create your configuration using
+:php:meth:`Cake\\Mailer\\Email::config()`, or use an array with all
+options that you need and use the static method ``Email::deliver()``.
+Example::
+
+    Email::deliver('you@example.com', 'Subject', 'Message', ['from' => 'me@example.com']);
+
+This method will send an email to "you@example.com", from "me@example.com" with
+subject "Subject" and content "Message".
+
+The return of ``deliver()`` is a :php:class:`Cake\\Mailer\\Email` instance with all
+configurations set. If you do not want to send the email right away, and wish
+to configure a few things before sending, you can pass the 5th parameter as
+``false``.
+
+The 3rd parameter is the content of message or an array with variables (when
+using rendered content).
+
+The 4th parameter can be an array with the configurations or a string with the
+name of configuration in ``Configure``.
+
+If you want, you can pass the to, subject and message as null and do all
+configurations in the 4th parameter (as array or using ``Configure``).
+Check the list of :ref:`configurations <email-configurations>` to see all accepted configs.
+
 Sending Emails from CLI
 ========================
 
@@ -661,4 +693,4 @@ The ``Cake\TestSuite\EmailTrait`` trait provides the following assertions::
 
 .. meta::
     :title lang=en: Email
-    :keywords lang=en: sending mail,email sender,envelope sender,php class,database configuration,sending emails,commands,smtp,transports,attributes,array,config,flexibility,php email,new email,sending email,models
+    :keywords lang=en: sending mail,email sender,envelope sender,php class,database configuration,sending emails,shells,smtp,transports,attributes,array,config,flexibility,php email,new email,sending email,models

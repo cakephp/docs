@@ -171,7 +171,7 @@ assign a set of information to the view::
     $data = [
         'color' => 'pink',
         'type' => 'sugar',
-        'base_price' => 23.95,
+        'base_price' => 23.95
     ];
 
     // Make $color, $type, and $base_price
@@ -282,8 +282,6 @@ This would render **plugins/Users/templates/UserDetails/custom_file.php**
 Content Type Negotiation
 ========================
 
-.. php:method:: viewClasses()
-
 Controllers can define a list of view classes they support. After the
 controller's action is complete CakePHP will use the view list to perform
 content-type negotiation. This enables your application to re-use the same
@@ -298,7 +296,7 @@ define the list of supported view classes for a controller is done with the
 
     class PostsController extends AppController
     {
-        public function viewClasses(): array
+        public function viewClasses()
         {
             return [JsonView::class, XmlView::class];
         }
@@ -314,6 +312,10 @@ perform different logic for different response formats you can use
 .. note::
     View classes must implement the static ``contentType()`` hook method to
     participate in content-type negotiation.
+
+.. versionadded:: 4.4.0
+    Prior to 4.4 you must use :doc:`/controllers/components/request-handling`
+    instead of ``viewClasses()``.
 
 
 Redirecting to Other Pages
@@ -398,7 +400,7 @@ Paginating a Model
 
 This method is used for paginating results fetched by your models.
 You can specify page sizes, model find conditions and more. See the
-:doc:`pagination <controllers/pagination>` section for more details on
+:doc:`pagination <controllers/components/pagination>` section for more details on
 how to use ``paginate()``.
 
 The ``$paginate`` attribute gives you a way to customize how ``paginate()``
@@ -406,7 +408,7 @@ behaves::
 
     class ArticlesController extends AppController
     {
-        protected array $paginate = [
+        public $paginate = [
             'Articles' => [
                 'conditions' => ['published' => 1]
             ]

@@ -1213,13 +1213,12 @@ JSON is a friendly and common format to use when building a web service.
 Testing the endpoints of your web service is very simple with CakePHP. Let us
 begin with a simple example controller that responds in JSON::
 
-    use Cake\View\JsonView;
-
     class MarkersController extends AppController
     {
-        public function viewClasses(): array
+        public function initialize(): void
         {
-            return [JsonView::class];
+            parent::initialize();
+            $this->loadComponent('RequestHandler');
         }
 
         public function view($id)

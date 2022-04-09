@@ -913,6 +913,9 @@ Then to create links which map back to the routes simply use::
         ['controller' => 'Pages', 'action' => 'view', 'title' => 'super-article', '_ext' => 'html']
     );
 
+File extensions are used by :doc:`/controllers/components/request-handling`
+to do automatic view switching based on content types.
+
 .. _route-scoped-middleware:
 
 Route Scoped Middleware

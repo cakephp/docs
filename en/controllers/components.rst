@@ -18,6 +18,8 @@ chapter for each component:
     /controllers/components/authentication
     /controllers/components/flash
     /controllers/components/security
+    /controllers/components/pagination
+    /controllers/components/request-handling
     /controllers/components/form-protection
     /controllers/components/check-http-cache
 
@@ -28,7 +30,7 @@ Configuring Components
 
 Many of the core components require configuration. Some examples of components
 requiring configuration are :doc:`/controllers/components/security` and
-:doc:`/controllers/components/form-protection`.  Configuration for these components,
+:doc:`/controllers/components/request-handling`.  Configuration for these components,
 and for components in general, is usually done via ``loadComponent()`` in your
 Controller's ``initialize()`` method or via the ``$components`` array::
 
@@ -37,8 +39,8 @@ Controller's ``initialize()`` method or via the ``$components`` array::
         public function initialize(): void
         {
             parent::initialize();
-            $this->loadComponent('FormProtection', [
-                'unlockedActions' => ['index'],
+            $this->loadComponent('RequestHandler', [
+                'viewClassMap' => ['json' => 'AppJsonView'],
             ]);
             $this->loadComponent('Security', ['blackholeCallback' => 'blackhole']);
         }
@@ -51,14 +53,14 @@ also be expressed as::
 
     public function beforeFilter(EventInterface $event)
     {
-        $this->FormProtection->setConfig('unlockedActions', ['index']);
+        $this->RequestHandler->setConfig('viewClassMap', ['rss' => 'MyRssView']);
     }
 
 Like helpers, components implement ``getConfig()`` and ``setConfig()`` methods
 to read and write configuration data::
 
     // Read config data.
-    $this->FormProtection->getConfig('unlockedActions');
+    $this->RequestHandler->getConfig('viewClassMap');
 
     // Set config
     $this->Csrf->setConfig('cookieName', 'token');
@@ -280,11 +282,11 @@ augment the request cycle.
 .. php:method:: beforeFilter(EventInterface $event)
 
     Is called before the controller's
-    beforeFilter() method, but *after* the controller's initialize() method.
+    beforeFilter method, but *after* the controller's initialize() method.
 
 .. php:method:: startup(EventInterface $event)
 
-    Is called after the controller's beforeFilter()
+    Is called after the controller's beforeFilter
     method but before the controller executes the current action
     handler.
 
@@ -293,9 +295,9 @@ augment the request cycle.
     Is called after the controller executes the requested action's logic,
     but before the controller renders views and layout.
 
-.. php:method:: afterFilter(EventInterface $event)
+.. php:method:: shutdown(EventInterface $event)
 
-    Is called during the ``Controller.shutdown`` event, before output is sent to the browser.
+    Is called before output is sent to the browser.
 
 .. php:method:: beforeRedirect(EventInterface $event, $url, Response $response)
 

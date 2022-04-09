@@ -50,6 +50,9 @@ Middleware
     Stores any :doc:`/controllers/middleware` for your application.
 Model
     Contains your application's tables, entities and behaviors.
+Shell
+    Contains shell tasks for your application.
+    For more information see :doc:`/console-commands/shells`.
 View
     Presentational classes are placed here: views, cells, helpers.
 

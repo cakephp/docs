@@ -167,8 +167,8 @@ Sample output for subcommands autocompletion:
 .. code-block:: console
 
     $ bin/cake bake <tab>
-    behavior            helper              command
-    cell                mailer              command_helper
+    behavior            helper              shell
+    cell                mailer              shell_helper
     component           migration           template
     controller          migration_snapshot  test
     fixture             model
