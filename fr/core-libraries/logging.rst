@@ -230,8 +230,6 @@ d'autres données de contexte::
     logger, les messages de tous les ``scopes`` seront capturés. Définir l'option
     à ``false`` captura seulement les messages sans scope.
 
-.. _file-log:
-
 Utilisation de l'Adaptateur FileLog
 ===================================
 

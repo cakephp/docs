@@ -129,7 +129,7 @@ App.fullBaseUrl
     is generated using the ``$_SERVER`` environment. However, you should define it
     manually to optimize performance or if you are concerned about people
     manipulating the ``Host`` header.
-    In a CLI context (from shells) the `fullBaseUrl` cannot be read from $_SERVER,
+    In a CLI context (from command) the `fullBaseUrl` cannot be read from $_SERVER,
     as there is no webserver involved. You do need to specify it yourself if
     you do need to generate URLs from a shell (for example, when sending emails).
 App.imageBaseUrl

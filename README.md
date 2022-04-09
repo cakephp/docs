@@ -10,7 +10,7 @@ online in HTML, PDF and EPUB formats at https://book.cakephp.org.
 Contributing to the documentation is pretty simple. Please read the
 documentation on contributing to the documentation over on [the
 cookbook](https://book.cakephp.org/3/en/contributing/documentation.html) for
-help. You can read all of the documentation within as its just in plain text
+help. You can read all the documentation within as it's just in plain text
 files, marked up with ReST text formatting.
 
 There are two ways for building the documentation: with Docker, or by installing

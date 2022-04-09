@@ -147,8 +147,9 @@ style file upload array::
     $tmpName = $attachment->getStream()->getMetadata('uri');
     $error = $attachment->getError();
 
-Moving the uploaded file from its temporary location to the desired target location, doesn't require manually accessing
-the temporary file, instead it can be easily done by using the objects ``moveTo()`` method::
+Moving the uploaded file from its temporary location to the desired target
+location, doesn't require manually accessing the temporary file, instead it can
+be easily done by using the objects ``moveTo()`` method::
 
     $attachment->moveTo($targetPath);
 
@@ -157,40 +158,6 @@ whether the file is an actual uploaded file, and throw an exception in case
 necessary. In an CLI environment, where the concept of uploading files doesn't
 exist, it will allow to move the file that you've referenced irrespective of its
 origins, which makes testing file uploads possible.
-
-In order to switch back to using file upload arrays instead, set the
-configuration value ``App.uploadedFilesAsObjects`` to ``false``, for example in
-your ``config/app.php`` file::
-
-    return [
-        // ...
-        'App' => [
-            // ...
-            'uploadedFilesAsObjects' => false,
-        ],
-        // ...
-    ];
-
-With the option disabled, the file uploads are represented in the request data as arrays, with a normalized structure
-that remains the same even for nested inputs/names, which is different from how PHP represents them in the ``$_FILES``
-superglobal (refer to `the PHP manual <https://www.php.net/manual/en/features.file-upload.php>`__ for more information),
-ie the ``$attachment`` value would look something like this::
-
-    [
-        'name' => 'attachment.txt',
-        'type' => 'text/plain',
-        'size' => 123,
-        'tmp_name' => '/tmp/hfz6dbn.tmp'
-        'error' => 0
-    ]
-
-.. tip::
-
-    Uploaded files can also be accessed as objects separately from the request data via the
-    :php:meth:`Cake\\Http\\ServerRequest::getUploadedFile()` and
-    :php:meth:`Cake\\Http\\ServerRequest::getUploadedFiles()` methods. These methods will always return objects,
-    irrespectively of the ``App.uploadedFilesAsObjects`` configuration.
-
 
 .. php:method:: getUploadedFile($path)
 
@@ -645,10 +612,6 @@ Response
 It encapsulates a number of features and functionality for generating HTTP
 responses in your application. It also assists in testing, as it can be
 mocked/stubbed allowing you to inspect headers that will be sent.
-Like :php:class:`Cake\\Http\\ServerRequest`, :php:class:`Cake\\Http\\Response`
-consolidates a number of methods previously found on :php:class:`Controller`,
-:php:class:`RequestHandlerComponent` and :php:class:`Dispatcher`. The old
-methods are deprecated in favour of using :php:class:`Cake\\Http\\Response`.
 
 ``Response`` provides an interface to wrap the common response-related
 tasks such as:
@@ -958,7 +921,7 @@ in order to determine whether it matches a cached resource.
 
 To take advantage of this header, you must either call the
 ``checkNotModified()`` method manually or include the
-:doc:`/controllers/components/request-handling` in your controller::
+:doc:`/controllers/components/check-http-cache` in your controller::
 
     public function index()
     {
@@ -995,7 +958,7 @@ response was modified or not based on their cache.
 
 To take advantage of this header, you must either call the
 ``checkNotModified()`` method manually or include the
-:doc:`/controllers/components/request-handling` in your controller::
+:doc:`/controllers/components/check-http-cache` in your controller::
 
     public function view()
     {

@@ -14,7 +14,7 @@ FROM markstory/cakephp-docs-builder:runtime as runtime
 
 ENV LANGS="en es fr ja pt"
 ENV SEARCH_SOURCE="/data/docs/build/html"
-ENV SEARCH_URL_PREFIX="/4.next"
+ENV SEARCH_URL_PREFIX="/5"
 
 COPY --from=builder /data/docs /data/docs
 COPY --from=builder /data/website /data/website

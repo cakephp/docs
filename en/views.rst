@@ -54,7 +54,7 @@ is invoked at the end of a View’s constructor for this kind of use:
         public function initialize(): void
         {
             // Always enable the MyUtils Helper
-            $this->loadHelper('MyUtils');
+            $this->addHelper('MyUtils');
         }
     }
 

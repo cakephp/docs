@@ -43,7 +43,7 @@ Contents
     core-libraries/internationalization-and-localization
     core-libraries/logging
     core-libraries/form
-    controllers/components/pagination
+    controllers/pagination
     plugins
     development/rest
     security
@@ -104,4 +104,4 @@ Contents
 
 .. meta::
     :title lang=en: Contents
-    :keywords lang=en: core libraries,ref search,shells,deployment,appendices,glossary,models
+    :keywords lang=en: core libraries,ref search,commands,deployment,appendices,glossary,models

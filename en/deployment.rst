@@ -106,7 +106,7 @@ your production server once the application is deployed::
 Since handling static assets, such as images, JavaScript and CSS files of
 plugins, through the ``Dispatcher`` is incredibly inefficient, it is strongly
 recommended to symlink them for production. This can be done by using
-the ``plugin`` shell::
+the ``plugin`` command::
 
     bin/cake plugin assets symlink
 

@@ -9,20 +9,21 @@ from cakephpsphinx.config.all import *
 # built documents.
 #
 # The short X.Y version.
-version = '4.x'
+version = '5.x'
 
 # The full version, including alpha/beta/rc tags.
-release = '4.x'
+release = '5.x'
 
 # The search index version.
-search_version = '4-next'
+search_version = '5'
 
 # The marketing diplay name for the book.
-version_name = 'Strawberry'
+version_name = '?'
 
 # Other versions that display in the version picker menu.
 version_list = [
-    {'name': '4.x', 'number': '4', 'current': True, 'title': '4.x Book'},
+    {'name': '5.x', 'number': '5', 'current': True, 'title': '5.x Book'},
+    {'name': '4.x', 'number': '4', 'title': '4.x Book'},
     {'name': '3.x', 'number': '3', 'title': '3.x Book'},
     {'name': '2.x', 'number': '2', 'title': '2.x Book'},
     {'name': '1.3', 'number': '1.3', 'title': '1.3 Book'},
@@ -35,7 +36,7 @@ languages = ['en', 'pt_BR', 'es', 'ja', 'fr']
 
 # The GitHub branch name for this version of the docs
 # for edit links to point at.
-branch = '4.x'
+branch = '5.x'
 
 # Add any paths that contain custom themes here, relative to this directory.
 html_theme_path = []
