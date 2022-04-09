@@ -22,12 +22,13 @@ actions, we can move on to creating the logic in our controller actions. A basic
 controller might look something like this::
 
     // src/Controller/RecipesController.php
+    use Cake\View\JsonView;
+
     class RecipesController extends AppController
     {
-        public function initialize(): void
+        public function viewClasses(): array
         {
-            parent::initialize();
-            $this->loadComponent('RequestHandler');
+            return [JsonView::class];
         }
 
         public function index()
@@ -90,61 +91,30 @@ controller might look something like this::
         }
     }
 
+
 RESTful controllers often use parsed extensions to serve up different views
-based on different kinds of requests. Since we're dealing with REST requests,
-we'll be making XML views. You can make JSON views using CakePHP's built-in
-:doc:`/views/json-and-xml-views`. By using the built in :php:class:`XmlView` we
-can define a ``serialize`` option. This option is used to define which view
-variables ``XmlView`` should serialize into XML.
+based on different kinds of requests. We're defining the content-type based
+views we support in this controller. We're including Cake's ``JsonView``. To
+learn more about it and Xml based views see :doc:`/views/json-and-xml-views`. By
+using  :php:class:`JsonView` we can define a ``serialize`` option. This option
+is used to define which view variables ``JsonView`` should serialize into JSON.
 
-If we wanted to modify the data before it is converted into XML we should not
+If we wanted to modify the data before it is converted into JSON we should not
 define the ``serialize`` option, and instead use template files. We place
-the REST views for our RecipesController inside **templates/Recipes/xml**. We can also use
-the :php:class:`Xml` for low-effort XML output in those views. Here's what
-our index view might look like::
+the REST views for our RecipesController inside **templates/Recipes/json**.
 
-    // templates/Recipes/xml/index.php
-    // Do some formatting and manipulation on
-    // the $recipes array.
-    $xml = Xml::fromArray(['response' => $recipes]);
-    echo $xml->asXML();
+Creating the logic for the edit action requires another step. Because our
+resources are serialized as JSON it would be ergonomic if our requests also
+contained the JSON representation.
 
-When serving up a specific content type using :php:meth:`Cake\\Routing\\Router::extensions()`,
-CakePHP automatically looks for a view helper that matches the type.
-Since we're using XML as the content type, there is no built-in helper,
-however if you were to create one it would automatically be loaded
-for our use in those views.
+In our ``Application`` class ensure the following is present::
 
-The rendered XML will end up looking something like this::
+    $middlewareQueue->add(new BodyParserMiddleware());
 
-    <recipes>
-        <recipe>
-            <id>234</id>
-            <created>2008-06-13</created>
-            <modified>2008-06-14</modified>
-            <author>
-                <id>23423</id>
-                <first_name>Billy</first_name>
-                <last_name>Bob</last_name>
-            </author>
-            <comment>
-                <id>245</id>
-                <body>Yummy yummmy</body>
-            </comment>
-        </recipe>
-        ...
-    </recipes>
-
-Creating the logic for the edit action is a bit trickier, but not by much. Since
-you're providing an API that outputs XML, it's a natural choice to receive XML
-as input. Not to worry, the
-:php:class:`Cake\\Controller\\Component\\RequestHandler` and
-:php:class:`Cake\\Routing\\Router` classes make things much easier. If a POST or
-PUT request has an XML content-type, then the input is run through  CakePHP's
-:php:class:`Xml` class, and the array representation of the data is assigned to
-``$this->request->getData()``.  Because of this feature, handling XML and POST data in
-parallel is seamless: no changes are required to the controller or model code.
-Everything you need should end up in ``$this->request->getData()``.
+This middleware will use the ``content-type`` header to detect the format of
+request data and parse enabled formats. By default only ``JSON`` parsing is
+enabled by default. You can enable XML support by enabling the ``xml``
+constructor option.
 
 Accepting Input in Other Formats
 ================================

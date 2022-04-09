@@ -645,10 +645,6 @@ Response
 It encapsulates a number of features and functionality for generating HTTP
 responses in your application. It also assists in testing, as it can be
 mocked/stubbed allowing you to inspect headers that will be sent.
-Like :php:class:`Cake\\Http\\ServerRequest`, :php:class:`Cake\\Http\\Response`
-consolidates a number of methods previously found on :php:class:`Controller`,
-:php:class:`RequestHandlerComponent` and :php:class:`Dispatcher`. The old
-methods are deprecated in favour of using :php:class:`Cake\\Http\\Response`.
 
 ``Response`` provides an interface to wrap the common response-related
 tasks such as:
