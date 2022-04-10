@@ -34,11 +34,21 @@ duration of 4.x but will be removed in 5.0.
     A new configuration option has been added to disable deprecations on a path by
     path basis. See :ref:`deprecation-warnings` for more information.
 
+Controller
+----------
+
+- The ``paginator`` option for ``Controller::paginate()`` is deprecated. Instead
+  use the ``className`` option.
+- The ``paginator`` option for ``PaginatorComponent`` is deprecated. Instead
+  use the ``className`` option.
+
 Datasource
 ----------
 
 - ``FactoryLocator::add()`` no longer accepts closure factory functions. Instead
   you must pass an instance of the ``LocatorInterface``.
+- ``Cake\Datasource\Paging\Pagintor`` has been renamed to
+  ``Cake\Datasource\Paging\NumericPaginator``.
 
 ErrorHandler & ConsoleErrorHandler
 ----------------------------------
@@ -85,7 +95,7 @@ be removed in 5.0.
 ORM
 ---
 
-- ``SaveOptionsBuilder`` was deprecated. Use a normal array for options instead.
+- ``SaveOptionsBuilder`` was deprecated. Use an array for options instead.
 
 Plugins
 -------
@@ -162,4 +172,5 @@ Mailer
 Routing
 -------
 
-* ``RoutingMiddleware`` now sets the "route" request attribute with the matched ``Route`` instance.
+* ``RoutingMiddleware`` now sets the "route" request attribute with the matched
+  ``Route`` instance.
