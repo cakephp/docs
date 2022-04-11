@@ -206,20 +206,20 @@ Paginating Data inside a Cell
 =============================
 
 Creating a cell that renders a paginated result set can be done by leveraging
-the ``Paginator`` class of the ORM. An example of paginating a user's favorite
+a paginator class of the ORM. An example of paginating a user's favorite
 messages could look like::
 
     namespace App\View\Cell;
 
     use Cake\View\Cell;
-    use Cake\Datasource\Paginator;
+    use Cake\Datasource\NumericPaginator;
 
     class FavoritesCell extends Cell
     {
         public function display($user)
         {
             // Create a paginator
-            $paginator = new Paginator();
+            $paginator = new NumericPaginator();
 
             // Paginate the model
             $results = $paginator->paginate(
@@ -234,6 +234,7 @@ messages could look like::
                 ]
             );
 
+            // Set the paging params as a request attribute for use the PaginatorHelper
             $paging = $paginator->getPagingParams() + (array)$this->request->getAttribute('paging');
             $this->request = $this->request->withAttribute('paging', $paging);
 
@@ -253,7 +254,6 @@ creating a cell object::
     namespace App\View\Cell;
 
     use Cake\View\Cell;
-    use Cake\Datasource\Paginator;
 
     class FavoritesCell extends Cell
     {
