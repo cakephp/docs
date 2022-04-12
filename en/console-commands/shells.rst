@@ -178,14 +178,15 @@ using ``Cake\ORM\Locator\LocatorAwareTrait::fetchTable()``::
     namespace App\Shell;
 
     use Cake\Console\Shell;
+    use Cake\ORM\Locator\LocatorAwareTrait;
 
     class UserShell extends Shell
     {
-        use ModelAwareTrait;
-    
+        use LocatorAwareTrait;
+
         public function show()
         {
-            $usersTable = LocatorAwareTrait::fetchTable('Users');
+            $usersTable = $this->fetchTable('Users');
             if (empty($this->args[0])) {
                 return $this->abort('Please enter a username.');
             }
