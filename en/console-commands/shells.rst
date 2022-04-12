@@ -181,6 +181,8 @@ using ``Cake\ORM\Locator\LocatorAwareTrait::fetchTable()``::
 
     class UserShell extends Shell
     {
+        use ModelAwareTrait;
+    
         public function show()
         {
             $usersTable = LocatorAwareTrait::fetchTable('Users');
