@@ -173,8 +173,7 @@ Using Models in Your Shells
 
 You'll often need access to your application's business logic in shell
 utilities. You can load models in shells, just as you would in a controller
-using ``loadModel()``. The loaded models are set as properties attached to your
-shell::
+using ``Cake\ORM\Locator\LocatorAwareTrait::fetchTable()``::
 
     namespace App\Shell;
 
@@ -182,18 +181,13 @@ shell::
 
     class UserShell extends Shell
     {
-        public function initialize(): void
-        {
-            parent::initialize();
-            $this->loadModel('Users');
-        }
-
         public function show()
         {
+            $usersTable = LocatorAwareTrait::fetchTable('Users');
             if (empty($this->args[0])) {
                 return $this->abort('Please enter a username.');
             }
-            $user = $this->Users->findByUsername($this->args[0])->first();
+            $user = $usersTable->findByUsername($this->args[0])->first();
             $this->out(print_r($user, true));
         }
     }
