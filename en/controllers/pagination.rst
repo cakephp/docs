@@ -1,13 +1,6 @@
 Pagination
 ##########
 
-.. php:namespace:: Cake\Controller\Component
-
-.. php:class:: PaginatorComponent
-
-.. deprecated:: 4.4.0
-    The paginator component is deprecated as of 4.4.0 and will be removed in 5.0.
-
 One of the main obstacles of creating flexible and user-friendly web
 applications is designing an intuitive user interface. Many applications tend to
 grow in size and complexity quickly, and designers and programmers alike find
@@ -19,25 +12,14 @@ part of every application and used to cause many headaches for developers.
 CakePHP eases the burden on the developer by providing a terse way to
 paginate data.
 
-Pagination in CakePHP is offered by a component in the controller. You then use
-:php:class:`~Cake\\View\\Helper\\PaginatorHelper` in your view templates to
-generate pagination controls.
+Pagination in CakePHP controllers is done through the ``paginate()`` method. You
+then use :php:class:`~Cake\\View\\Helper\\PaginatorHelper` in your view templates
+to generate pagination controls.
 
 Basic Usage
 ===========
 
-To paginate a query we first need to load the ``PaginatorComponent``::
-
-    class ArticlesController extends AppController
-    {
-        public function initialize(): void
-        {
-            parent::initialize();
-            $this->loadComponent('Paginator');
-        }
-    }
-
-Once loaded we can paginate an ORM table class or ``Query`` object::
+You can call ``paginate()`` using an ORM table instance or ``Query`` object::
 
     public function index()
     {
@@ -52,7 +34,7 @@ Once loaded we can paginate an ORM table class or ``Query`` object::
 Advanced Usage
 ==============
 
-``PaginatorComponent`` supports more complex use cases by configuring the ``$paginate``
+More complex use cases are supported by configuring the ``$paginate``
 controller property or as the ``$settings`` argument to ``paginate()``. These
 conditions serve as the basis for you pagination queries. They are augmented
 by the ``sort``, ``direction``, ``limit``, and ``page`` parameters passed in
@@ -136,44 +118,23 @@ at ``$this->request->getAttribute('paging')``.
 Simple Pagination
 =================
 
-By default pagination uses a ``count()`` query to calculate the size of the
-result set so that page number links can be rendered. On very large datasets
-this count query can be very expensive. In situations where you only want to
-show 'Next' and 'Previous' links you can use the 'simple' paginator which does
-not do a count query::
+By default ``Controller::paginate()`` uses the ``Cake\Datasource\Paging\NumericPaginator``
+class which does a ``COUNT()`` query to calculate the size of the result set so
+that page number links can be rendered. On very large datasets this count query
+can be very expensive. In situations where you only want to show 'Next' and 'Previous'
+links you can use the 'simple' paginator which does not do a count query::
 
-    public function initialize(): void
+    class ArticlesController extends AppController
     {
-        parent::initialize();
-
-        // Load the paginator component with the simple paginator strategy.
-        $this->loadComponent('Paginator', [
-            'className' => 'Simple',
-        ]);
+        public $paginate = [
+            'className' => 'Simple', // Or use Cake\Datasource\Paging\SimplePaginator::class FQCN
+        ];
     }
 
 When using the ``SimplePaginator`` you will not be able to generate page
 numbers, counter data, links to the last page, or total record count controls.
 
-Using the PaginatorComponent Directly
-=====================================
-
-If you need to paginate data from another component you may want to use the
-``PaginatorComponent`` directly. It features a similar API to the controller
-method::
-
-    $articles = $this->Paginator->paginate($articleTable->find(), $config);
-
-    // Or
-    $articles = $this->Paginator->paginate($articleTable, $config);
-
-The first parameter should be the query object from a find on table object you
-wish to paginate results from. Optionally, you can pass the table object and let
-the query be constructed for you. The second parameter should be the array of
-settings to use for pagination. This array should have the same structure as the
-``$paginate`` property on a controller. When paginating a ``Query`` object, the
-``finder`` option will be ignored. It is assumed that you are passing in
-the query you want paginated.
+.. _paginating-multiple-queries:
 
 Paginating Multiple Queries
 ===========================
@@ -206,19 +167,18 @@ Paginating the Same Model multiple Times
 ----------------------------------------
 
 To paginate the same model multiple times within a single controller action you
-need to define an alias for the model. See :ref:`table-registry-usage` for
-additional details on how to use the table registry::
+need to define an alias for the model.::
 
     // In a controller action
     $this->paginate = [
-        'ArticlesTable' => [
+        'Articles' => [
             'scope' => 'published_articles',
             'limit' => 10,
             'order' => [
                 'id' => 'desc',
             ],
         ],
-        'UnpublishedArticlesTable' => [
+        'UnpublishedArticles' => [
             'scope' => 'unpublished_articles',
             'limit' => 10,
             'order' => [
@@ -233,7 +193,7 @@ additional details on how to use the table registry::
         ])->where(['published' => true])
     );
 
-    // Load an additional table object to allow differentiating in pagination component
+    // Load an additional table object to allow differentiating in paginator
     $unpublishedArticlesTable = $this->fetchTable('UnpublishedArticles', [
         'className' => 'App\Model\Table\ArticlesTable',
         'table' => 'articles',
@@ -245,6 +205,8 @@ additional details on how to use the table registry::
             'scope' => 'unpublished_articles'
         ])->where(['published' => false])
     );
+
+.. _control-which-fields-used-for-ordering:
 
 Control which Fields Used for Ordering
 ======================================
@@ -302,7 +264,7 @@ Additional associations can be loaded to the paginated table by using the
 Out of Range Page Requests
 ==========================
 
-The PaginatorComponent will throw a ``NotFoundException`` when trying to
+``Controller::paginate()`` will throw a ``NotFoundException`` when trying to
 access a non-existent page, i.e. page number requested is greater than total
 page count.
 
@@ -329,4 +291,4 @@ how to create links for pagination navigation.
 
 .. meta::
     :title lang=en: Pagination
-    :keywords lang=en: order array,query conditions,php class,web applications,headaches,obstacles,complexity,programmers,parameters,paginate,designers,cakephp,satisfaction,developers
+    :keywords lang=en: paginate,pagination,paging

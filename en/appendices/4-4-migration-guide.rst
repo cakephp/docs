@@ -20,7 +20,7 @@ Deprecations
 4.4 introduces a few deprecations. All of these features will continue for the
 duration of 4.x but will be removed in 5.0.
 
-.. 
+..
 
     You can use the
     :ref:`upgrade tool <upgrade-tool-use>` to automate updating usage of deprecated
@@ -91,6 +91,13 @@ be removed in 5.0.
 - Replace ``checkHttpCache`` option with :doc:`/controllers/components/check-http-cache`.
 - Use :ref:`controller-viewclasses` instead of defining view class mappings in
   ``RequestHandlerComponent``.
+
+PaginationComponent
+-------------------
+
+The ``PaginationComponent`` is deprecated and will be removed in 5.0.
+Use the ``Controller::$paginate`` property or the ``$settings`` parameter of
+``Controller::paginate()`` method to specify required paging settings.
 
 ORM
 ---
