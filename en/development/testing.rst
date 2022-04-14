@@ -1603,6 +1603,10 @@ Mocking Injected Dependencies
 See :ref:`mocking-services-in-tests` for how to replace services injected with
 the dependency injection container in your integration tests.
 
+Mocking HTTP Client Responses
+=============================
+
+See :ref:`httpclient-testing` to know how to create mock responses to external APIs.
 
 Testing Views
 =============
