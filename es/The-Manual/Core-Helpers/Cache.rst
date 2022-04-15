@@ -51,7 +51,7 @@ funciona bien con los valores por defecto.
 APC
 
 EL motor APC implementa el método `Alternative PHP
-Cache <https://php.net/apc>`_. Asi como XCache, este motor almacena
+Cache <https://www.php.net/manual/book.apcu>`_. Asi como XCache, este motor almacena
 codigo ya compilado de PHP.
 
 XCache
