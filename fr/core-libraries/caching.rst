@@ -24,7 +24,7 @@ votre propre système de mise en cache. Les moteurs de cache intégrés sont:
   grands objets ou des éléments qui sont rarement écrits fonctionne
   bien dans les fichiers. C'est le moteur de Cache par défaut pour 2.3+.
 * ``ApcCache`` Le cache APC utilise l'extension PHP
-  `APC <https://secure.php.net/apc>`_ ou `APCu <https://www.php.net/apcu>`_. Ces extensions
+  `APC <https://www.php.net/manual/book.apcu>`_ ou `APCu <https://www.php.net/apcu>`_. Ces extensions
   utilisent la mémoire partagée du serveur Web pour stocker les objets. Cela le
   rend très rapide, et capable de fournir les fonctionnalités atomiques en
   lecture/écriture. Par défaut CakePHP dans 2.0-2.2 utilisera ce moteur de cache
