@@ -12,7 +12,7 @@ CakePHP 中的缓存主要是由 :php:class:`Cache` 类来帮助（处理）的�
 * ``FileCache`` 文件缓存是使用本地文件的简单缓存。这是最慢的缓存引擎，且没有为
   原子化操作提供那么多功能。不过，既然硬盘存储通常都相当便宜，使用文件存储大的
   对象、或者不经常写的元素，很管用。这是2.3+版本的默认缓存引擎。
-* ``ApcCache`` APC 缓存使用 PHP 的 `APC <https://secure.php.net/apc>`_ 扩展。这个扩展用
+* ``ApcCache`` APC 缓存使用 PHP 的 `APC <https://www.php.net/manual/book.apcu>`_ 扩展。这个扩展用
   网站服务器上的共享内存来保存对象。这使它非常快，而且能够提供原子化的读/写功能。
   默认情况下 CakePHP 2.0-2.2 会使用该缓存引擎，如果可用的话。
 * ``Wincache`` Wincache 使用 `Wincache <https://www.php.net/wincache>`_ 扩展。

@@ -18,7 +18,7 @@ CakePHP のキャッシュは、主に :php:class:`Cache` クラスを使用し�
   しかしながら、ディスクストレージがとても安価なので、まれに書き込まれるような
   大きなオブジェクトや要素の登録にファイルがよく使われます。
   2.3 以降、デフォルトのキャッシュエンジンになりました。
-* ``ApcCache`` APC キャッシュは、PHP の `APC <https://secure.php.net/apc>`_ または
+* ``ApcCache`` APC キャッシュは、PHP の `APC <https://www.php.net/manual/book.apcu>`_ または
   `APCu <https://www.php.net/apcu>`_ 拡張を使用します。
   これらの拡張は、ウェブサーバー中の共有メモリーにオブジェクトを保存します。
   これはとても高速で、アトミックな読み書き機能を利用することができます。
