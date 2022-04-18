@@ -240,6 +240,35 @@ You may need to call other commands from your command. You can use
     parent command's ``ConsoleIo`` instance as the optional 3rd argument to
     avoid a potential "open files" limit that could occur in some environments.
 
+Setting Command Description
+===========================
+
+You may want to set a command description via::
+
+    class UserCommand extends Command
+    {
+        public static function getDescription(): string
+        {
+            return 'My custom description';
+        }
+    }
+
+This will show your description in the Cake CLI::
+
+    bin/cake
+
+    App:
+      - user
+      └─── My custom description
+
+As well as in the help section of your command::
+
+    cake user --help
+    My custom description
+
+    Usage:
+    cake user [-h] [-q] [-v]
+
 .. _console-integration-testing:
 
 Testing Commands
