@@ -645,7 +645,7 @@ use a middleware to define both timezone conversion and locale parsing::
     use Psr\Http\Server\MiddlewareInterface;
     use Psr\Http\Server\RequestHandlerInterface;
 
-    class DatetimeMiddleare implements MiddlewareInterface
+    class DatetimeMiddleware implements MiddlewareInterface
     {
         public function process(
             ServerRequestInterface $request,
