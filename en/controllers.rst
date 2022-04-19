@@ -304,7 +304,7 @@ define the list of supported view classes for a controller is done with the
         }
     }
 
-The basic ``View`` class is automatically used as a fallback
+The application's``View`` class is automatically used as a fallback
 when no other view can be selected based on the
 requests' ``Accept`` header or routing extension. If your application needs to
 perform different logic for different response formats you can use
