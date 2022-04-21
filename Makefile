@@ -1,10 +1,7 @@
 # MakeFile for building all the docs at once.
 # Inspired by the Makefile used by bazaar.
 # https://bazaar.launchpad.net/~bzr-pqm/bzr/2.3/
-
 PYTHON = python3
-ES_HOST =
-ES_HOST_V2 =
 
 .PHONY: all clean html latexpdf epub htmlhelp website website-dirs rebuild-index duplicate-content
 
