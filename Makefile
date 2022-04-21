@@ -36,6 +36,12 @@ htmlhelp: $(foreach lang, $(LANGS), htmlhelp-$(lang))
 server: $(foreach lang, $(LANGS), server-$(lang))
 rebuild-index: $(foreach lang, $(LANGS), rebuild-index-$(lang))
 
+# Overlay the english docs over each translation.
+# Cloning files that don't exist.
+duplicate-content:
+	# copy missing files from english to the translation
+	$(foreach lang, $(LANGS), [ $(lang) != "en" ] && cp -r --no-clobber --update ./en/* ./$(lang)/ || true)
+
 
 # Make the HTML version of the documentation with correctly nested language folders.
 html-%:
