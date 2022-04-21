@@ -6,7 +6,7 @@ PYTHON = python3
 ES_HOST =
 ES_HOST_V2 =
 
-.PHONY: all clean html latexpdf epub htmlhelp website website-dirs rebuild-index
+.PHONY: all clean html latexpdf epub htmlhelp website website-dirs rebuild-index duplicate-content
 
 # Languages that can be built.
 LANGS = en es fr ja pt
@@ -33,7 +33,6 @@ epub: $(foreach lang, $(LANGS), epub-$(lang))
 latex: $(foreach lang, $(PDF_LANGS), latex-$(lang))
 pdf: $(foreach lang, $(PDF_LANGS), pdf-$(lang))
 htmlhelp: $(foreach lang, $(LANGS), htmlhelp-$(lang))
-server: $(foreach lang, $(LANGS), server-$(lang))
 rebuild-index: $(foreach lang, $(LANGS), rebuild-index-$(lang))
 
 # Overlay the english docs over each translation.
@@ -43,8 +42,14 @@ duplicate-content:
 	$(foreach lang, $(LANGS), [ $(lang) != "en" ] && cp -r --no-clobber --update ./en/* ./$(lang)/ || true)
 
 
+# Output generation targets.
+#
+# We deploy three forms of the docs. HTML, ePub and PDF. All three of these
+# formats are bundled together by the `website` target. The `website` result is
+# what we deploy and serve at book.cakephp.org
+#
 # Make the HTML version of the documentation with correctly nested language folders.
-html-%:
+html-%: duplicate-content
 	cd $* && make html SPHINXOPTS="$(SPHINXOPTS)"
 	make build/html/$*/_static/css/dist.css
 	make build/html/$*/_static/js/dist.js
@@ -52,16 +57,16 @@ html-%:
 htmlhelp-%:
 	cd $* && make htmlhelp
 
-epub-%:
+epub-%: duplicate-content
 	cd $* && make epub
 
-latex-%:
+latex-%: duplicate-content
 	cd $* && make latex
 
-pdf-%:
+pdf-%: duplicate-content
 	cd $* && make latexpdf
 
-server-%:
+server-%: duplicate-content
 	cd build/html/$* && python3 -m SimpleHTTPServer
 
 epub-check-%: build/epub/$*
@@ -87,12 +92,23 @@ website: website-dirs html epub pdf
 	# Move PDF files
 	$(foreach lang, $(PDF_LANGS), [ -f build/latex/$(lang)/*.pdf ] && cp -r build/latex/$(lang)/*.pdf $(DEST)/_downloads/$(lang) || true;)
 
+#
+# Cleanup Targets.
+#
 clean:
 	rm -rf build/*
 
 clean-website:
 	rm -rf $(DEST)/*
 
+#
+# Static asset generation.
+#
+# To keep our dependency footprint small. We don't use CSS or JS
+# preprocessors. Instead we use simple file concatenation
+# to join all our sources together. This does result in
+# a slightly less optimized output than a pre-processor
+# would, but keeps the stack for the book very low maintenance.
 build/html/%/_static:
 	mkdir -p build/html/$*/_static
 
