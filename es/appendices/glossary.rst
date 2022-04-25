@@ -3,6 +3,12 @@ Glosario
 
 .. glossary::
 
+    routing array
+        Un array de atributos que son pasados a :php:meth:`Router::url()`.
+        Típicamente se ve algo así::
+
+            ['controller' => 'Posts', 'action' => 'view', 5]
+
     array de rutas
         Un array de atributos que son pasados a :php:meth:`Router::url()`.
         Típicamente se ve algo así::
@@ -25,6 +31,16 @@ Glosario
 
             // Generará
             checked="checked"
+
+    plugin syntax
+        La sintáxis de plugin se refiere a el punto que separa los nombres de clases indicando
+        que la clase es parte de un plugin::
+
+            // El plugin es "DebugKit", y el nombre de la clase es "Toolbar".
+            'DebugKit.Toolbar'
+
+            // El plugin es "AcmeCorp/Tools", y el nombre de clase es "Toolbar".
+            'AcmeCorp/Tools.Toolbar'
 
     Sintaxis de plugin
         La sintáxis de plugin se refiere a el punto que separa los nombres de clases indicando
