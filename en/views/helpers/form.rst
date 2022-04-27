@@ -285,7 +285,7 @@ Output:
 
 .. code-block:: html
 
-    <form method="get" action="http://www.google.com/search">
+    <form method="get" action="https://www.google.com/search">
 
 Use ``'url' => false`` if you don't want to output a URL as the form action.
 
