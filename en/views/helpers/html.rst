@@ -487,13 +487,13 @@ that are not in **webroot/js**::
 
 You can also link to a remote URL::
 
-    echo $this->Html->script('http://code.jquery.com/jquery.min.js');
+    echo $this->Html->script('https://code.jquery.com/jquery.min.js');
 
 Will output:
 
 .. code-block:: html
 
-    <script src="http://code.jquery.com/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery.min.js"></script>
 
 The first parameter can be an array to include multiple files. ::
 
