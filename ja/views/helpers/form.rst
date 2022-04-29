@@ -272,7 +272,7 @@ where request data is retained, you need to put ``context`` first::
 
 .. code-block:: html
 
-    <form method="get" action="http://www.google.com/search">
+    <form method="get" action="https://www.google.com/search">
 
 フォームアクションに URL を出力したくない場合、 ``'url' => false`` を使用してください。
 
@@ -2536,7 +2536,7 @@ autocomplete ウィジェットを作成したい場合、以下を実行でき�
          *
          * @param array $data The data to build an input with.
          * @param \Cake\View\Form\ContextInterface $context The current form context.
-         * 
+         *
          * @return string
          */
         public function render(array $data, ContextInterface $context): string
