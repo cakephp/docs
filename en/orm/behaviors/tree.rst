@@ -95,6 +95,16 @@ in a hierarchy, you can stack the 'threaded' finder::
         echo "{$child->name} has " . count($child->children) . " direct children";
     }
 
+While, if you’re using custom ``parent_id`` you need to pass it in the ‘threaded’ finder option (i.e. ``parentField``) . Read more on the   
+`Finding Threaded Data logic <https://book.cakephp.org/4/en/orm/retrieving-data-and-resultsets.html#finding-threaded-data>`_::
+
+    $children = $categories
+        ->find('children', ['for' => 1])
+        ->find('threaded', [
+            'parentField' => 'my_custom_parent_id'
+        ]);
+        ->toArray();
+
 Traversing threaded results usually requires recursive functions in, but if you
 only require a result set containing a single field from each level so you can
 display a list, in an HTML select for example, it is better to use the
