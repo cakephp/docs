@@ -266,6 +266,7 @@ This will show your description in the Cake CLI::
 As well as in the help section of your command::
 
 ... code-block:: console
+
     cake user --help
     My custom description
 
