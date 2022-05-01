@@ -255,6 +255,7 @@ You may want to set a command description via::
 
 This will show your description in the Cake CLI::
 
+... code-block:: console
     bin/cake
 
     App:
@@ -263,6 +264,7 @@ This will show your description in the Cake CLI::
 
 As well as in the help section of your command::
 
+... code-block:: console
     cake user --help
     My custom description
 
