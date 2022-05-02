@@ -116,6 +116,12 @@ ORM
 - ``allowMultipleNulls`` option for ``isUnique`` rule now default to true matching
   the original 3.x behavior.
 
+TestSuite
+---------
+
+- ``TestSuite`` was removed. Users should use environment variables to customize
+  unit test settings instead.
+
 Validation
 ----------
 
