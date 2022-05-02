@@ -253,9 +253,9 @@ You may want to set a command description via::
         }
     }
 
-This will show your description in the Cake CLI::
+This will show your description in the Cake CLI:
 
-... code-block:: console
+.. code-block:: console
 
     bin/cake
 
@@ -263,9 +263,9 @@ This will show your description in the Cake CLI::
       - user
       └─── My custom description
 
-As well as in the help section of your command::
+As well as in the help section of your command:
 
-... code-block:: console
+.. code-block:: console
 
     cake user --help
     My custom description
