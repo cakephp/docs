@@ -175,3 +175,12 @@ Routing
 
 * ``RoutingMiddleware`` now sets the "route" request attribute with the matched
   ``Route`` instance.
+
+
+View
+----
+
+* ``View::contentType()`` was added. Views should implement this method in order
+  to participate in content-type negotiation.
+* ``View::TYPE_MATCH_ALL`` was added. This special content-type allows you to
+  build fallback views for when content-type negotiation provides no matches.
