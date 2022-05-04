@@ -65,7 +65,7 @@ html_theme = 'cakephp'
 
 # Custom sidebar templates, maps document names to template names.
 html_sidebars = {
- '**' : ['globaltoc.html', 'localtoc.html']
+ '**' : ['globaltoc.html']
 }
 
 
