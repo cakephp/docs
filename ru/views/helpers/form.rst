@@ -257,7 +257,7 @@ FormHelper использует объект ``Entity`` для автомати�
 Или вы можете указать внешний домен::
 
     echo $this->Form->create(null, [
-        'url' => 'http://www.google.com/search',
+        'url' => 'https://www.google.com/search',
         'type' => 'get'
     ]);
 
@@ -265,7 +265,7 @@ FormHelper использует объект ``Entity`` для автомати�
 
 .. code-block:: html
 
-    <form method="get" action="http://www.google.com/search">
+    <form method="get" action="https://www.google.com/search">
 
 Используйте ``'url' => false``, если вы не хотите использовать URL-адрес в качестве экшена формы.
 

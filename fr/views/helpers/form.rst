@@ -279,7 +279,7 @@ Affichera:
 ou pointer vers un domaine extérieur::
 
     echo $this->Form->create(null, [
-        'url' => 'http://www.google.com/search',
+        'url' => 'https://www.google.com/search',
         'type' => 'get'
     ]);
 
@@ -287,7 +287,7 @@ Affichera:
 
 .. code-block:: html
 
-    <form method="get" action="http://www.google.com/search">
+    <form method="get" action="https://www.google.com/search">
 
 Utilisez ``'url' => false`` si vous ne souhaitez pas d'URL en tant qu'action de
 formulaire.

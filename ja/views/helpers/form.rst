@@ -263,7 +263,7 @@ FormHelper の値ソースは、input タグなどの描画される要素がど
 または外部ドメインを指定することができます。 ::
 
     echo $this->Form->create(null, [
-        'url' => 'http://www.google.com/search',
+        'url' => 'https://www.google.com/search',
         'type' => 'get'
     ]);
 
@@ -271,7 +271,7 @@ FormHelper の値ソースは、input タグなどの描画される要素がど
 
 .. code-block:: html
 
-    <form method="get" action="http://www.google.com/search">
+    <form method="get" action="https://www.google.com/search">
 
 フォームアクションに URL を出力したくない場合、 ``'url' => false`` を使用してください。
 
