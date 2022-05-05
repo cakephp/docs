@@ -159,16 +159,16 @@ icon     image/x-icon
     // icon is downloaded by both newer and older browsers
     // which require different rel attribute values.
     <link
-        href="/subdir/favicon.ico" 
-        type="image/x-icon" 
+        href="/subdir/favicon.ico"
+        type="image/x-icon"
         rel="icon"
     />
     <link
-        href="/subdir/favicon.ico" 
-        type="image/x-icon" 
+        href="/subdir/favicon.ico"
+        type="image/x-icon"
         rel="shortcut icon"
     />
-    
+
     <?= $this->Html->meta(
         'Comments',
         '/comments/index.rss',
@@ -512,13 +512,13 @@ that are not in **webroot/js**::
 
 You can also link to a remote URL::
 
-    echo $this->Html->script('http://code.jquery.com/jquery.min.js');
+    echo $this->Html->script('https://code.jquery.com/jquery.min.js');
 
 Will output:
 
 .. code-block:: html
 
-    <script src="http://code.jquery.com/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery.min.js"></script>
 
 The first parameter can be an array to include multiple files. ::
 
