@@ -301,7 +301,7 @@ Affichera:
 
 .. code-block:: html
 
-    <form method="get" action="http://www.google.com/search">
+    <form method="get" action="https://www.google.com/search">
 
 Utilisez ``'url' => false`` si vous ne souhaitez pas d'URL en tant qu'action de
 formulaire.
@@ -1584,7 +1584,7 @@ Ensuite ajoutez l'une des deux lignes dans votre formulaire::
 Pour empêcher le ``submittedfile`` d'être écrasé par un contenu vide, enlevez-le
 de ``$_accessible``. Au choix, vous pouvez aussi retirer sa clé depuis la
 méthode ``beforeMarshal``::
- 
+
     public function beforeMarshal(\Cake\Event\EventInterface $event, \ArrayObject $data, \ArrayObject $options)
     {
        if ($data['submittedfile'] === '') {
@@ -1599,7 +1599,7 @@ utiliser::
 
     $fileobject = $this->request->getData('submittedfile');
     $destination = UPLOAD_DIRECTORY . $fileobject->getClientFilename();
-    
+
     // S'il existe un fichier du même nom, il sera écrasé.
     $fileobject->moveTo($destination);
 
@@ -2535,7 +2535,7 @@ vouliez construire un widget Autocomplete, vous pourriez le faire comme ceci::
          *
          * @param array $data Les données à utiliser pour construire l'input.
          * @param \Cake\View\Form\ContextInterface $context Le contexte courant du formulaire.
-         * 
+         *
          * @return string
          */
         public function render(array $data, ContextInterface $context): string
