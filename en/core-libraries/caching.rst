@@ -378,6 +378,11 @@ object from the store::
     // Remove a key
     Cache::delete('my_key');
 
+As of 4.4.0, the ``RedisEngine`` also provides a ``deleteAsync()`` method
+which uses the ``UNLINK`` operation to remove cache keys::
+
+    Cache::pool('redis')->deleteAsync('my_key');
+
 Deleting Multiple Keys at Once
 ------------------------------
 
@@ -407,6 +412,11 @@ prefixes::
 
     // Will clear all keys.
     Cache::clear();
+
+As of 4.4.0, the ``RedisEngine`` also provides a ``clearBlocking()`` method
+which uses the ``UNLINK`` operation to remove cache keys::
+
+    Cache::pool('redis')->clearBlocking();
 
 .. note::
 
