@@ -496,13 +496,13 @@ tant qu'ils ne se trouvent pas dans ``webroot/js``::
 
 Vous pouvez aussi lier à une URL d'un dépôt distant::
 
-    echo $this->Html->script('http://code.jquery.com/jquery.min.js');
+    echo $this->Html->script('https://code.jquery.com/jquery.min.js');
 
 Affichera:
 
 .. code-block:: html
 
-    <script src="http://code.jquery.com/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery.min.js"></script>
 
 Le premier paramètre peut être un tableau pour inclure des fichiers multiples::
 
