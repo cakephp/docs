@@ -483,13 +483,13 @@ icon     image/x-icon
 
 Вы также можете сослаться на удаленный URL-адрес::
 
-    echo $this->Html->script('http://code.jquery.com/jquery.min.js');
+    echo $this->Html->script('https://code.jquery.com/jquery.min.js');
 
 Получаем:
 
 .. code-block:: html
 
-    <script src="http://code.jquery.com/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery.min.js"></script>
 
 Первым параметром может быть массив для включения нескольких файлов. ::
 
