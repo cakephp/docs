@@ -74,6 +74,8 @@ deprecated:
 * ``Debugger::setOutputFormat()``
 * ``Debugger::addFormat()``
 * ``Debugger::addRenderer()``
+* ``ErrorLoggerInterface::log()``. Implement ``logException()`` instead.
+* ``ErrorLoggerInterface::logMessage()``. Implement ``logError()`` instead.
 
 RequestHandlerComponent
 ------------------------
@@ -161,7 +163,8 @@ Error
 -----
 
 * ``ErrorTrap`` and ``ExceptionTrap`` were added. These classes form the
-  foundation of an updated error handling system for applications.
+  foundation of an updated error handling system for applications. Read more
+  about these classes in :doc:`/development/errors`.
 
 Http
 ----

@@ -306,6 +306,40 @@ logger::
     namespace App\Error;
 
     use Cake\Error\ErrorLoggerInterface;
+    use Cake\Error\PhpError;
+    use Psr\Http\Message\ServerRequestInterface;
+    use Throwable;
+
+    /**
+     * Log errors and unhandled exceptions to `Cake\Log\Log`
+     */
+    class ErrorLogger implements ErrorLoggerInterface
+    {
+        /**
+         * @inheritDoc
+         */
+        public function logError(
+            PhpError $error, 
+            ?ServerRequestInterface $request, 
+            bool $includeTrace = false
+        ): void {
+            // Log PHP Errors
+        }
+
+        public function logException(
+            Throwable $exception, 
+            ?ServerRequestInterface $request, 
+            bool $includeTrace = false
+        ): void {
+            // Log exceptions.
+        }
+    }
+
+Prior to CakePHP 4.4.0, you should implement ``logMessage()`` and ``log()``::
+
+    namespace App\Error;
+
+    use Cake\Error\ErrorLoggerInterface;
     use Psr\Http\Message\ServerRequestInterface;
     use Throwable;
 
@@ -330,6 +364,9 @@ logger::
 
 .. versionadded:: 4.1.0
     ErrorLoggerInterface was added.
+
+.. versionchanged:: 4.4.0
+    ``ErrorLoggerInterface::logException()`` and``ErrorLoggerInterface::logError()`` were added.
 
 
 Custom Error Rendering
