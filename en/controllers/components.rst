@@ -40,7 +40,7 @@ Controller's ``initialize()`` method or via the ``$components`` array::
             $this->loadComponent('FormProtection', [
                 'unlockedActions' => ['index'],
             ]);
-            $this->loadComponent('Security', ['blackholeCallback' => 'blackhole']);
+            $this->loadComponent('Csrf');
         }
 
     }

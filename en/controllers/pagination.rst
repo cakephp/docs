@@ -12,14 +12,14 @@ part of every application and used to cause many headaches for developers.
 CakePHP eases the burden on the developer by providing a terse way to
 paginate data.
 
-Pagination in CakePHP is offered by the ``Controller::paginate()`` method. You then use
-:php:class:`~Cake\\View\\Helper\\PaginatorHelper` in your view templates to
-generate pagination controls.
+Pagination in CakePHP controllers is done through the ``paginate()`` method. You
+then use :php:class:`~Cake\\View\\Helper\\PaginatorHelper` in your view templates
+to generate pagination controls.
 
 Basic Usage
 ===========
 
-You can use the ``paginate()`` method to paginate an ORM table class or ``Query`` object::
+You can call ``paginate()`` using an ORM table instance or ``Query`` object::
 
     public function index()
     {
@@ -34,7 +34,7 @@ You can use the ``paginate()`` method to paginate an ORM table class or ``Query`
 Advanced Usage
 ==============
 
-Paginate supports more complex use cases by configuring the ``$paginate``
+More complex use cases are supported by configuring the ``$paginate``
 controller property or as the ``$settings`` argument to ``paginate()``. These
 conditions serve as the basis for you pagination queries. They are augmented
 by the ``sort``, ``direction``, ``limit``, and ``page`` parameters passed in
@@ -118,16 +118,16 @@ at ``$this->request->getAttribute('paging')``.
 Simple Pagination
 =================
 
-By default pagination uses a ``count()`` query to calculate the size of the
-result set so that page number links can be rendered. On very large datasets
-this count query can be very expensive. In situations where you only want to
-show 'Next' and 'Previous' links you can use the 'simple' paginator which does
-not do a count query::
+By default ``Controller::paginate()`` uses the ``Cake\Datasource\Paging\NumericPaginator``
+class which does a ``COUNT()`` query to calculate the size of the result set so
+that page number links can be rendered. On very large datasets this count query
+can be very expensive. In situations where you only want to show 'Next' and 'Previous'
+links you can use the 'simple' paginator which does not do a count query::
 
     class ArticlesController extends AppController
     {
-        protected array $paginate = [
-            'paginator' => \Cake\Datasource\SimplePaginator::class,
+        public $paginate = [
+            'className' => 'Simple', // Or use Cake\Datasource\Paging\SimplePaginator::class FQCN
         ];
     }
 
@@ -172,14 +172,14 @@ additional details on how to use the table registry::
 
     // In a controller action
     $this->paginate = [
-        'ArticlesTable' => [
+        'Articles' => [
             'scope' => 'published_articles',
             'limit' => 10,
             'order' => [
                 'id' => 'desc',
             ],
         ],
-        'UnpublishedArticlesTable' => [
+        'UnpublishedArticles' => [
             'scope' => 'unpublished_articles',
             'limit' => 10,
             'order' => [
@@ -284,30 +284,6 @@ block and take appropriate action when a ``NotFoundException`` is caught::
         }
     }
 
-Using a paginator class directly
-================================
-
-You can also use a paginator directly.::
-
-        // Create a paginator
-        $paginator = new \Cake\Datasource\Paginator\Paginator();
-
-        // Paginate the model
-        $results = $paginator->paginate(
-            // Query or table instance which you need to paginate
-            $this->fetchTable('Articles'),
-            // Request params
-            $this->request->getQueryParams(),
-            // Config array having the same structure as options as Controller::$paginate
-            [
-                'finder' => 'latest',
-            ]
-        );
-
-        // Set the paging options as request attribute, which are needed by the PaginationHelper
-        $paging = $paginator->getPagingParams() + (array)$this->request->getAttribute('paging');
-        $this->request = $this->request->withAttribute('paging', $paging);
-
 Pagination in the View
 ======================
 
@@ -316,4 +292,4 @@ how to create links for pagination navigation.
 
 .. meta::
     :title lang=en: Pagination
-    :keywords lang=en: order array,query conditions,php class,web applications,headaches,obstacles,complexity,programmers,parameters,paginate,designers,cakephp,satisfaction,developers
+    :keywords lang=en: paginate,pagination,paging

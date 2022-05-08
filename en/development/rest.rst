@@ -91,6 +91,7 @@ controller might look something like this::
         }
     }
 
+
 RESTful controllers often use parsed extensions to serve up different views
 based on different kinds of requests. We're defining the content-type based
 views we support in this controller. We're including Cake's ``JsonView``. To

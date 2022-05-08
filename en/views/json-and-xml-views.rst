@@ -33,6 +33,10 @@ header is used for, selecting which type of format should be rendered to the
 user. An example ``Accept`` format that is used to render ``JSON`` responses is
 ``application/json``.
 
+.. versionchanged:: 4.4.0
+   Prior to 4.4.0, You need to use the ``RequestHandlerComponent`` to do
+   content-type negotitation.
+
 Using Data Views with the Serialize Key
 =======================================
 
@@ -45,6 +49,7 @@ If you need to do any formatting or manipulation of your view variables before
 generating the response, you should use template files. The value of
 ``serialize`` can be either a string or an array of view variables to
 serialize::
+
 
     namespace App\Controller;
 
