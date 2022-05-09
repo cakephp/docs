@@ -128,6 +128,13 @@ Routing
 New Features
 ============
 
+Cache
+-----
+
+* ``RedisEngine`` now supports ``deleteAsync()`` and ``clearBlocking()``
+  methods. These methods use the ``UNLINK`` operation in redis to mark data for
+  removal later by Redis.
+
 Command
 -------
 
