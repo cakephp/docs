@@ -326,8 +326,10 @@ logger::
             // Log PHP Errors
         }
 
+        /**
+         * @inheritDoc
+         */
         public function logException(
-            Throwable $exception, 
             ?ServerRequestInterface $request, 
             bool $includeTrace = false
         ): void {
