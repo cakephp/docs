@@ -264,7 +264,7 @@ where request data is retained, you need to put ``context`` first::
 または外部ドメインを指定することができます。 ::
 
     echo $this->Form->create(null, [
-        'url' => 'http://www.google.com/search',
+        'url' => 'https://www.google.com/search',
         'type' => 'get'
     ]);
 
