@@ -1308,10 +1308,10 @@ URL を生成するときに、特別なルート要素が使用できます。
 文字列 URL を遷移先として使用することで外部にリダイレクトできます。 ::
 
     Router::scope('/', function ($routes) {
-        $routes->redirect('/articles/*', 'http://google.com', ['status' => 302]);
+        $routes->redirect('/articles/*', 'https://google.com', ['status' => 302]);
     });
 
-これは、 ``/articles/*`` から ``http://google.com`` へ HTTP 302 ステータスのリダイレクトをします。
+これは、 ``/articles/*`` から ``https://google.com`` へ HTTP 302 ステータスのリダイレクトをします。
 
 .. _entity-routing:
 

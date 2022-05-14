@@ -1134,10 +1134,10 @@ matriz como destino de redirecionamento permite usar outras rotas para definir p
 deve ser redirecionada. Você pode redirecionar para locais externos usando URLs de string como destino::
 
     Router::scope('/', function ($routes) {
-        $routes->redirect('/articles/*', 'http://google.com', ['status' => 302]);
+        $routes->redirect('/articles/*', 'https://google.com', ['status' => 302]);
     });
 
-Isso redirecionaria ``/articles/*`` para ``http://google.com`` com um status HTTP 302.
+Isso redirecionaria ``/articles/*`` para ``https://google.com`` com um status HTTP 302.
 
 .. _custom-route-classes:
 

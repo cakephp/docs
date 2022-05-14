@@ -1312,10 +1312,10 @@ redirected to. You can redirect to external locations using
 string URLs as the destination::
 
     Router::scope('/', function ($routes) {
-        $routes->redirect('/articles/*', 'http://google.com', ['status' => 302]);
+        $routes->redirect('/articles/*', 'https://google.com', ['status' => 302]);
     });
 
-This would redirect ``/articles/*`` to ``http://google.com`` with a
+This would redirect ``/articles/*`` to ``https://google.com`` with a
 HTTP status of 302.
 
 .. _custom-route-classes:
