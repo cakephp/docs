@@ -1311,7 +1311,7 @@ URL-инфлексия для ресурсных маршрутов
 местоположения, используя строковые URL-адреса в качестве адресата::
 
     Router::scope('/', function ($routes) {
-        $routes->redirect('/articles/*', 'http://google.com', ['status' => 302]);
+        $routes->redirect('/articles/*', 'https://google.com', ['status' => 302]);
     });
 
 Это перенаправит ``/articles/*`` на hat can be resolved i с HTTP-статусом 302.
