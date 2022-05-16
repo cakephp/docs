@@ -281,7 +281,7 @@ a separate directory and install its dependencies:
 
 .. code-block:: bash
 
-    git clone git://github.com/cakephp/debug_kit.git
+    git clone https://github.com/cakephp/debug_kit.git
     cd debug_kit
     php ~/composer.phar install
     php ~/phpunit.phar
