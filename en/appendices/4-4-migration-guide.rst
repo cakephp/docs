@@ -121,6 +121,13 @@ Behavior Changes
 While the following changes do not change the signature of any methods they do
 change the semantics or behavior of methods.
 
+ORM
+---
+
+* ``Table::saveMany()`` now triggers the ``Model.afterSaveCommit`` event with
+  entities that are still 'dirty' and contain the original field values. This
+  aligns the event payload for ``Model.afterSaveCommit`` with ``Table::save()``.
+
 Routing
 -------
 
