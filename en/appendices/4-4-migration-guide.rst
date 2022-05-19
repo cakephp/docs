@@ -193,6 +193,10 @@ Routing
 * ``RoutingMiddleware`` now sets the "route" request attribute with the matched
   ``Route`` instance.
 
+Utility
+-------
+
+- ``Hash::validate()`` was added which allows checking an array against a schema.
 
 View
 ----
