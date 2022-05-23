@@ -653,13 +653,13 @@ methods of the HtmlHelper and how to use them.
 
     You can also link to a remote URL::
 
-        echo $this->Html->script('http://code.jquery.com/jquery.min.js');
+        echo $this->Html->script('https://code.jquery.com/jquery.min.js');
 
     Will output:
 
     .. code-block:: html
 
-        <script type="text/javascript" href="http://code.jquery.com/jquery.min.js">
+        <script type="text/javascript" href="https://code.jquery.com/jquery.min.js">
             </script>
 
     The first parameter can be an array to include multiple files. ::
