@@ -66,7 +66,7 @@ Core
 Database
 --------
 
-- ``Query`` now accepts only ``\Closure`` parameters instead of `callable``. Callables can be converted
+- ``Query`` now accepts only ``\Closure`` parameters instead of ``callable``. Callables can be converted
   to closures using the new first-class array syntax in PHP 8.1.
 - ``Query::execute()`` no longer runs results decorator callbacks. You must use ``Query::all()`` instead.
 - ``getMaxAliasLength()`` and ``getConnectionRetries()`` were added
