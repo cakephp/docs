@@ -615,13 +615,13 @@ HtmlHelper助件的一些方法及如何使用它们。
 
     你也可以链接到远程地址::
 
-        echo $this->Html->script('http://code.jquery.com/jquery.min.js');
+        echo $this->Html->script('https://code.jquery.com/jquery.min.js');
 
     将会输出:
 
     .. code-block:: html
 
-        <script type="text/javascript" href="http://code.jquery.com/jquery.min.js">
+        <script type="text/javascript" href="https://code.jquery.com/jquery.min.js">
             </script>
 
     第一个参数可以是数组，用来引入多个文件。 ::

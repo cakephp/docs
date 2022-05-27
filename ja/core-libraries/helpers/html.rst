@@ -643,13 +643,13 @@ CPU のサイクルを減らすために、ビューをキャッシュするこ�
 
     リモート URL のリンクを指定することもできます。 ::
 
-        echo $this->Html->script('http://code.jquery.com/jquery.min.js');
+        echo $this->Html->script('https://code.jquery.com/jquery.min.js');
 
     出力結果:
 
     .. code-block:: html
 
-        <script type="text/javascript" href="http://code.jquery.com/jquery.min.js"></script>
+        <script type="text/javascript" href="https://code.jquery.com/jquery.min.js"></script>
 
     最初の引数を複数のファイル名を含む配列にすることもできます。 ::
 
