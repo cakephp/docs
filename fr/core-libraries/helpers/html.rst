@@ -660,13 +660,13 @@ couvrira les méthodes du Helper Html et comment les utiliser.
 
     Vous pouvez aussi lier à une URL d'un dépôt distant::
 
-        echo $this->Html->script('http://code.jquery.com/jquery.min.js');
+        echo $this->Html->script('https://code.jquery.com/jquery.min.js');
 
     Affichera:
 
     .. code-block:: html
 
-        <script type="text/javascript" href="http://code.jquery.com/jquery.min.js"></script>
+        <script type="text/javascript" href="https://code.jquery.com/jquery.min.js"></script>
 
     Le premier paramètre peut être un tableau pour inclure des
     fichiers multiples. ::
