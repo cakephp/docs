@@ -43,7 +43,7 @@ To help expedite fixing these tedious changes there is an upgrade CLI tool:
 .. code-block:: console
 
     # Install the upgrade tool
-    git clone git://github.com/cakephp/upgrade
+    git clone https://github.com/cakephp/upgrade
     cd upgrade
     git checkout master
     composer install --no-dev
