@@ -863,9 +863,9 @@ you to use other routes to define where a URL string should be
 redirected to. You can redirect to external locations using
 string URLs as the destination::
 
-    Router::redirect('/posts/*', 'http://google.com', array('status' => 302));
+    Router::redirect('/posts/*', 'https://google.com', array('status' => 302));
 
-This would redirect ``/posts/*`` to ``http://google.com`` with a
+This would redirect ``/posts/*`` to ``https://google.com`` with a
 HTTP status of 302.
 
 .. _disabling-default-routes:
