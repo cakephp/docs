@@ -9,7 +9,7 @@ These view classes are most commonly used alongside :php:meth:`\Cake\Controller\
 There are two ways you can generate data views. The first is by using the
 ``serialize`` option, and the second is by creating normal template files.
 
-Defining View Classes to Negotiate With
+Enabling Data Views in Your Application
 =======================================
 
 In your ``AppController`` or in an individual controller you can implement the

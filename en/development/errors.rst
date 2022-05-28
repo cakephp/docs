@@ -64,7 +64,7 @@ deprecated. We also recommend this system for use in your plugins and
 application code when useful. You can trigger deprecation warnings with
 ``deprecationWarning()``::
 
-    deprecationWarning('5.0', 'The example() method is deprecated. Use getExample() instead.');
+    deprecationWarning('The example() method is deprecated. Use getExample() instead.');
 
 When upgrading CakePHP or plugins you may encounter new deprecation warnings.
 You can temporarily disable deprecation warnings in one of a few ways:
@@ -306,6 +306,42 @@ logger::
     namespace App\Error;
 
     use Cake\Error\ErrorLoggerInterface;
+    use Cake\Error\PhpError;
+    use Psr\Http\Message\ServerRequestInterface;
+    use Throwable;
+
+    /**
+     * Log errors and unhandled exceptions to `Cake\Log\Log`
+     */
+    class ErrorLogger implements ErrorLoggerInterface
+    {
+        /**
+         * @inheritDoc
+         */
+        public function logError(
+            PhpError $error, 
+            ?ServerRequestInterface $request, 
+            bool $includeTrace = false
+        ): void {
+            // Log PHP Errors
+        }
+
+        /**
+         * @inheritDoc
+         */
+        public function logException(
+            ?ServerRequestInterface $request, 
+            bool $includeTrace = false
+        ): void {
+            // Log exceptions.
+        }
+    }
+
+Prior to CakePHP 4.4.0, you should implement ``logMessage()`` and ``log()``::
+
+    namespace App\Error;
+
+    use Cake\Error\ErrorLoggerInterface;
     use Psr\Http\Message\ServerRequestInterface;
     use Throwable;
 
@@ -330,6 +366,9 @@ logger::
 
 .. versionadded:: 4.1.0
     ErrorLoggerInterface was added.
+
+.. versionchanged:: 4.4.0
+    ``ErrorLoggerInterface::logException()`` and``ErrorLoggerInterface::logError()`` were added.
 
 
 Custom Error Rendering
@@ -584,6 +623,18 @@ In addition, CakePHP uses the following exceptions:
 .. php:exception:: ConsoleException
 
     A console library class encounter an error.
+
+.. php:exception:: MissingTaskException
+
+    A configured task could not found.
+
+.. php:exception:: MissingShellException
+
+    The shell class could not be found.
+
+.. php:exception:: MissingShellMethodException
+
+    The chosen shell class has no method of that name.
 
 .. php:namespace:: Cake\Database\Exception
 

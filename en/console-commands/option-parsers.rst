@@ -278,7 +278,7 @@ Getting Help as XML
 -------------------
 
 When building automated tools or development tools that need to interact with
-CakePHP shell commands, it's nice to have help available in a machine parse-able format.
+CakePHP shells, it's nice to have help available in a machine parse-able format.
 By providing the ``xml`` option when requesting help you can have help content
 returned as XML:
 

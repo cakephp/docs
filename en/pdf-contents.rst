@@ -32,7 +32,7 @@ Contents
     core-libraries/internationalization-and-localization
     core-libraries/logging
     core-libraries/form
-    controllers/pagination
+    controllers/components/pagination
     plugins
     development/rest
     security

@@ -307,10 +307,10 @@ Let's start with a very simple command, located in
         }
     }
 
-To write an integration test for this command, we would create a test case in
+To write an integration test for this shell, we would create a test case in
 **tests/TestCase/Command/UpdateTableTest.php** that uses the
-``Cake\TestSuite\ConsoleIntegrationTestTrait`` trait. This command doesn't do much at the
-moment, but let's just test that our command's description is displayed in ``stdout``::
+``Cake\TestSuite\ConsoleIntegrationTestTrait`` trait. This shell doesn't do much at the
+moment, but let's just test that our shell's description is displayed in ``stdout``::
 
     namespace App\Test\TestCase\Command;
 
@@ -372,7 +372,7 @@ conventions. Let's continue by adding more logic to our command::
         }
     }
 
-This is a more complete command that has required options and relevant logic.
+This is a more complete shell that has required options and relevant logic.
 Modify your test case to the following snippet of code::
 
     namespace Cake\Test\TestCase\Command;
@@ -426,7 +426,7 @@ can include options and arguments in your command string.
 Testing Interactive Shells
 --------------------------
 
-Consoles are often interactive. Testing interactive commands with the
+Consoles are often interactive. Testing interactive shells with the
 ``Cake\TestSuite\ConsoleIntegrationTestTrait`` trait only requires passing the
 inputs you expect as the second parameter of ``exec()``. They should be
 included as an array in the order that you expect them.
@@ -515,7 +515,7 @@ our error message was written to ``stderr``.
 Testing the CommandRunner
 -------------------------
 
-To test commands that are dispatched using the ``CommandRunner`` class, enable it
+To test shells that are dispatched using the ``CommandRunner`` class, enable it
 in your test case with the following method::
 
     $this->useCommandRunner();
@@ -526,13 +526,13 @@ Assertion methods
 The ``Cake\TestSuite\ConsoleIntegrationTestTrait`` trait provides a number of
 assertion methods that make help assert against console output::
 
-    // assert that the command exited as success
+    // assert that the shell exited as success
     $this->assertExitSuccess();
 
-    // assert that the command exited as an error
+    // assert that the shell exited as an error
     $this->assertExitError();
 
-    // assert that the command exited with the expected code
+    // assert that the shell exited with the expected code
     $this->assertExitCode($expected);
 
     // assert that stdout contains a string

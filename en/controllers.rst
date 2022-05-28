@@ -171,7 +171,7 @@ assign a set of information to the view::
     $data = [
         'color' => 'pink',
         'type' => 'sugar',
-        'base_price' => 23.95,
+        'base_price' => 23.95
     ];
 
     // Make $color, $type, and $base_price
@@ -298,7 +298,7 @@ define the list of supported view classes for a controller is done with the
 
     class PostsController extends AppController
     {
-        public function viewClasses(): array
+        public function viewClasses()
         {
             return [JsonView::class, XmlView::class];
         }
@@ -314,6 +314,10 @@ conditional logic.
     View classes must implement the static ``contentType()`` hook method to
     participate in content-type negotiation.
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4.next
 Content Type Negotiation Fallbacks
 ==================================
 
@@ -430,7 +434,7 @@ Paginating a Model
 
 This method is used for paginating results fetched by your models.
 You can specify page sizes, model find conditions and more. See the
-:doc:`pagination <controllers/pagination>` section for more details on
+:doc:`pagination <controllers/components/pagination>` section for more details on
 how to use ``paginate()``.
 
 The ``$paginate`` attribute gives you a way to customize how ``paginate()``
@@ -438,7 +442,7 @@ behaves::
 
     class ArticlesController extends AppController
     {
-        protected array $paginate = [
+        public $paginate = [
             'Articles' => [
                 'conditions' => ['published' => 1]
             ]

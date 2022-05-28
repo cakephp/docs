@@ -18,50 +18,12 @@ Translation Strategies
 
 The behavior offers two strategies for how the translations are stored.
 
-1. Shadow table Strategy: This strategy uses a separate "shadow table" for each
-   Table object to store translation of all translated fields of that table.
-   This is the default strategy.
-2. Eav Strategy: This strategy uses a ``i18n`` table where it stores the
+1. Eav Strategy: This strategy uses a ``i18n`` table where it stores the
    translation for each of the fields of any given Table object that it's bound to.
+   This is currently the default strategy used by the behavior.
+2. Shadow table Strategy: This strategy use a separate "shadow table" for each
+   Table object to store translation of all translated fields of that table.
 
-Shadow Table Strategy
-=====================
-
-Let's assume we have an ``articles`` table and we want it's ``title`` and ``body``
-fields to be translated. For that we create a shadow table ``articles_translations``:
-
-.. code-block:: sql
-
-    CREATE TABLE `articles_translations` (
-        `id` int(11) NOT NULL,
-        `locale` varchar(5) NOT NULL,
-        `title` varchar(255) NOT NULL,
-        `body` text NOT NULL,
-        PRIMARY KEY (`id`,`locale`)
-    );
-
-The shadow table needs ``id`` and ``locale`` columns which together
-form the primary key and other columns with same name as primary table which
-need to be translated.
-
-A note on language abbreviations: The Translate Behavior doesn't impose any
-restrictions on the language identifier, the possible values are only restricted
-by the ``locale`` column type/size. ``locale`` is defined as ``varchar(6)`` in
-case you want to use abbreviations like ``es-419`` (Spanish for Latin America,
-language abbreviation with area code `UN M.49
-<https://en.wikipedia.org/wiki/UN_M.49>`_).
-
-.. tip::
-
-    It's wise to use the same language abbreviations as required for
-    :doc:`Internationalization and Localization
-    </core-libraries/internationalization-and-localization>`. Thus you are
-    consistent and switching the language works identical for both, the
-    ``Translate Behaviour`` and ``Internationalization and Localization``.
-
-So it's recommended to use either the two letter ISO code of the language like
-``en``, ``fr``, ``de`` or the full locale name such as ``fr_FR``, ``es_AR``,
-``da_DK`` which contains both the language and the country where it is spoken.
 
 Eav Strategy
 ============
@@ -86,6 +48,46 @@ manually running the following SQL script in your database:
 
 The schema is also available as sql file in **/config/schema/i18n.sql**.
 
+A note on language abbreviations: The Translate Behavior doesn't impose any
+restrictions on the language identifier, the possible values are only restricted
+by the ``locale`` column type/size. ``locale`` is defined as ``varchar(6)`` in
+case you want to use abbreviations like ``es-419`` (Spanish for Latin America,
+language abbreviation with area code `UN M.49
+<https://en.wikipedia.org/wiki/UN_M.49>`_).
+
+.. tip::
+
+    It's wise to use the same language abbreviations as required for
+    :doc:`Internationalization and Localization
+    </core-libraries/internationalization-and-localization>`. Thus you are
+    consistent and switching the language works identical for both, the
+    ``Translate Behaviour`` and ``Internationalization and Localization``.
+
+So it's recommended to use either the two letter ISO code of the language like
+``en``, ``fr``, ``de`` or the full locale name such as ``fr_FR``, ``es_AR``,
+``da_DK`` which contains both the language and the country where it is spoken.
+
+Shadow Table Strategy
+=====================
+
+Let's assume we have an ``articles`` table and we want it's ``title`` and ``body``
+fields to be translated. For that we create a shadow table ``articles_translations``:
+
+.. code-block:: sql
+
+    CREATE TABLE `articles_translations` (
+        `id` int(11) NOT NULL,
+        `locale` varchar(5) NOT NULL,
+        `title` varchar(255) NOT NULL,
+        `body` text NOT NULL,
+        PRIMARY KEY (`id`,`locale`)
+    );
+
+So basically the shadow table needs ``id`` and ``locale`` columns which together
+form the primary key and other columns with same name as primary table which
+need to be translated.
+
+
 Attaching the Translate Behavior to Your Tables
 ===============================================
 
@@ -96,15 +98,16 @@ class::
     {
         public function initialize(array $config): void
         {
-            // By default ShadowTable will be used.
+            // By default Eav strategy will be used.
             $this->addBehavior('Translate', ['fields' => ['title', 'body']]);
         }
     }
 
-For shadow table strategy specifying the ``fields`` key is optional as the
-behavior can infer the fields from the shadow table columns.
+The first thing to note is that you are required to pass the ``fields`` key in
+the configuration array. This list of fields is needed to tell the behavior what
+columns will be able to store translations.
 
-If you want to use the ``EavStrategy`` then you can configure the behavior
+If you want to use the shadow table strategy then you can configure the behavior
 as::
 
     class ArticlesTable extends Table
@@ -112,15 +115,13 @@ as::
         public function initialize(array $config): void
         {
             $this->addBehavior('Translate', [
-                'strategyClass' => \Cake\ORM\Behavior\Translate\EavStrategy::class,
-                'fields' => ['title', 'body'],
+                'strategyClass' => \Cake\ORM\Behavior\Translate\ShadowTableStrategy::class,
             ]);
         }
     }
 
-For ``EavStrategy`` you are required to pass the ``fields`` key in the
-configuration array. This list of fields is needed to tell the behavior what
-columns will be able to store translations.
+For shadow table strategy specifying the ``fields`` key is optional as the
+behavior can infer the fields from the shadow table columns.
 
 By default the locale specified in ``App.defaultLocale`` config is used as default
 locale for the ``TranslateBehavior``. You can override that by setting ``defaultLocale``
@@ -135,6 +136,15 @@ config of the behavior::
             ]);
         }
     }
+
+.. note::
+
+    For historical reasons and to maintain backwards compatibility, by default
+    the ``TranslateBehavior`` uses the ``EavStrategy``. But for new projects it's
+    recommended to use the ``ShadowTableStrategy`` as it's more efficient. You can
+    use ``TranslateBehavior::setDefaultStrategyClass(ShadowTableStrategy::class)``
+    in your ``Application::bootstrap()`` to change the default strategy and avoid
+    having to specify the ``strategyClass`` config each time.
 
 Quick tour
 ==========
@@ -240,6 +250,9 @@ use TranslateBehavior with ``find('list')``::
 
     // Change the locale to french for a single find call
     $data = $this->Articles->find('list', ['locale' => 'fr'])->toArray();
+
+.. versionadded:: 4.1.0
+    The ``locale`` option was added in 4.1.0
 
 Retrieve All Translations For An Entity
 ---------------------------------------

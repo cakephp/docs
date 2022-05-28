@@ -119,7 +119,7 @@ application's ``bootstrap()`` function::
 If you just want to use helpers, behaviors or components from a plugin you do
 not need to load a plugin.
 
-There is also a handy console command to enable the plugin.  Execute the following
+There is also a handy shell command to enable the plugin.  Execute the following
 line:
 
 .. code-block:: console
@@ -668,7 +668,7 @@ Commands
 ========
 
 Plugins can register their commands inside the ``console()`` hook. By default
-all console commands in the plugin are auto-discovered and added to the
+all shells and commands in the plugin are auto-discovered and added to the
 application's command list. Plugin commands are prefixed with the plugin name.
 For example, the ``UserCommand`` provided by the ``ContactManager`` plugin would
 be registered as both ``contact_manager.user`` and ``user``. The un-prefixed

@@ -104,4 +104,4 @@ Contents
 
 .. meta::
     :title lang=en: Contents
-    :keywords lang=en: core libraries,ref search,commands,deployment,appendices,glossary,models
+    :keywords lang=en: core libraries,ref search,shells,deployment,appendices,glossary,models

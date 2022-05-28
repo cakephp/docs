@@ -913,6 +913,9 @@ Then to create links which map back to the routes simply use::
         ['controller' => 'Pages', 'action' => 'view', 'title' => 'super-article', '_ext' => 'html']
     );
 
+File extensions are used by :doc:`/controllers/components/request-handling`
+to do automatic view switching based on content types.
+
 .. _route-scoped-middleware:
 
 Route Scoped Middleware
@@ -1505,10 +1508,10 @@ redirected to. You can redirect to external locations using
 string URLs as the destination::
 
     $routes->scope('/', function (RouteBuilder $routes) {
-        $routes->redirect('/articles/*', 'http://google.com', ['status' => 302]);
+        $routes->redirect('/articles/*', 'https://google.com', ['status' => 302]);
     });
 
-This would redirect ``/articles/*`` to ``http://google.com`` with a
+This would redirect ``/articles/*`` to ``https://google.com`` with a
 HTTP status of 302.
 
 .. _entity-routing:

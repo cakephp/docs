@@ -18,6 +18,8 @@ chapter for each component:
     /controllers/components/authentication
     /controllers/components/flash
     /controllers/components/security
+    /controllers/components/pagination
+    /controllers/components/request-handling
     /controllers/components/form-protection
     /controllers/components/check-http-cache
 
@@ -280,11 +282,11 @@ augment the request cycle.
 .. php:method:: beforeFilter(EventInterface $event)
 
     Is called before the controller's
-    beforeFilter() method, but *after* the controller's initialize() method.
+    beforeFilter method, but *after* the controller's initialize() method.
 
 .. php:method:: startup(EventInterface $event)
 
-    Is called after the controller's beforeFilter()
+    Is called after the controller's beforeFilter
     method but before the controller executes the current action
     handler.
 
@@ -293,9 +295,9 @@ augment the request cycle.
     Is called after the controller executes the requested action's logic,
     but before the controller renders views and layout.
 
-.. php:method:: afterFilter(EventInterface $event)
+.. php:method:: shutdown(EventInterface $event)
 
-    Is called during the ``Controller.shutdown`` event, before output is sent to the browser.
+    Is called before output is sent to the browser.
 
 .. php:method:: beforeRedirect(EventInterface $event, $url, Response $response)
 

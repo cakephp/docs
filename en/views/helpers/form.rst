@@ -277,7 +277,7 @@ Output:
 Or you can point to an external domain::
 
     echo $this->Form->create(null, [
-        'url' => 'http://www.google.com/search',
+        'url' => 'https://www.google.com/search',
         'type' => 'get'
     ]);
 

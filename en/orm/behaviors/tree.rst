@@ -95,6 +95,11 @@ in a hierarchy, you can stack the 'threaded' finder::
         echo "{$child->name} has " . count($child->children) . " direct children";
     }
 
+While, if you’re using custom ``parent_id`` you need to pass it in the 'threaded' finder option (i.e. ``parentField``) . 
+
+.. note::
+    For more information on 'threaded' finder options see :ref:`Finding Threaded Data logic <finding-threaded-data>`
+    
 Traversing threaded results usually requires recursive functions in, but if you
 only require a result set containing a single field from each level so you can
 display a list, in an HTML select for example, it is better to use the

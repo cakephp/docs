@@ -19,8 +19,9 @@ The CakePHP Console uses a dispatcher-type system to load commands, parse
 their arguments and invoke the correct command. While the examples below use
 bash the CakePHP console is compatible with any \*nix shell and windows.
 
-A CakePHP application contains **src/Command** directory that contain its commands.
-It also comes with an executable in the **bin** directory:
+A CakePHP application contains **src/Command**, **src/Shell** and
+**src/Shell/Task** directories that contain its shells and tasks. It also
+comes with an executable in the **bin** directory:
 
 .. code-block:: console
 
@@ -36,17 +37,17 @@ could then run the any of the listed commands by using its name:
 
 .. code-block:: console
 
-    # run server command
+    # run server shell
     bin/cake server
 
-    # run migrations command
+    # run migrations shell
     bin/cake migrations -h
 
     # run bake (with plugin prefix)
     bin/cake bake.bake -h
 
 Plugin commands can be invoked without a plugin prefix if the commands's name
-does not overlap with an application or framework command. In the case that two
+does not overlap with an application or framework shell. In the case that two
 plugins provide a command with the same name, the first loaded plugin will get
 the short alias. You can always use the ``plugin.command`` format to
 unambiguously reference a command.
@@ -151,11 +152,12 @@ CakePHP Provided Commands
     console-commands/routes
     console-commands/server
     console-commands/repl
+    console-commands/shells
 
 Routing in the Console Environment
 ==================================
 
-In command-line interface (CLI), specifically your console commands,
+In command-line interface (CLI), specifically your shells and tasks,
 ``env('HTTP_HOST')`` and other webbrowser specific environment variables are not
 set.
 
@@ -179,4 +181,4 @@ emails are sent from.
 
 .. meta::
     :title lang=en: Shells, Tasks & Console Tools
-    :keywords lang=en: shell scripts,system shell,application classes,background tasks,line script,cron job,request response,system path,acl,new projects,commands,specifics,parameters,i18n,cakephp,directory,maintenance,ideal,applications,mvc
+    :keywords lang=en: shell scripts,system shell,application classes,background tasks,line script,cron job,request response,system path,acl,new projects,shells,specifics,parameters,i18n,cakephp,directory,maintenance,ideal,applications,mvc
