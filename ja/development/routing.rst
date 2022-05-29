@@ -769,9 +769,9 @@ URLを文字列によって以下のように生成します。::
 配列をルートリダイレクト先を表現するために使うことで、文字列のURLがリダイレクトしている先を定義できるようにします。
 文字列のURLで外部にリダイレクトできます。::
 
-    Router::redirect('/posts/*', 'http://google.com', array('status' => 302));
+    Router::redirect('/posts/*', 'https://google.com', array('status' => 302));
 
-これは、 ``/posts/*`` から ``http://google.com`` へwith a
+これは、 ``/posts/*`` から ``https://google.com`` へwith a
 HTTP  302　ステータスを出しながらリダイレクトさせます。
 
 .. _disabling-default-routes:
