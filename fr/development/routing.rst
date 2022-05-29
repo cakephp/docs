@@ -855,9 +855,9 @@ permet d'utiliser d'autres routes pour définir où une chaîne URL devrait êtr
 redirigée. Vous pouvez rediriger vers des localisations externes en utilisant
 les chaînes URLs en destination::
 
-    Router::redirect('/posts/*', 'http://google.com', array('status' => 302));
+    Router::redirect('/posts/*', 'https://google.com', array('status' => 302));
 
-Cela redirigerait ``/posts/*`` vers ``http://google.com`` avec un état statut
+Cela redirigerait ``/posts/*`` vers ``https://google.com`` avec un état statut
 HTTP à 302.
 
 .. _disabling-default-routes:

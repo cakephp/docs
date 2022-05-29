@@ -752,9 +752,9 @@ connectNamed() 方法支持一些选项：
 为重定向目标让你可以使用其它路由来定义字符串网址应该重定向到哪里。你可以使用字符
 串网址作为目标重定向到外部地址::
 
-    Router::redirect('/posts/*', 'http://google.com', array('status' => 302));
+    Router::redirect('/posts/*', 'https://google.com', array('status' => 302));
 
-这会以 HTTP 状态 302 重定向 ``/posts/*`` 到 ``http://google.com``。
+这会以 HTTP 状态 302 重定向 ``/posts/*`` 到 ``https://google.com``。
 
 .. _disabling-default-routes:
 
