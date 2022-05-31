@@ -20,7 +20,7 @@ is any query string parameters, either in string form:
 
     App::import('Core', 'HttpSocket');
     $HttpSocket = new HttpSocket();
-    $results = $HttpSocket->get('http://www.google.com/search', 'q=cakephp');  
+    $results = $HttpSocket->get('https://www.google.com/search', 'q=cakephp');
     //returns html for Google's search results for the query "cakephp"
 
     // Example response array
