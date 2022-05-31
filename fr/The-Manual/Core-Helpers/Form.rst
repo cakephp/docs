@@ -161,12 +161,12 @@ pointer vers un domaine extérieur.
     <form method="post" action="/recettes/ajouter">
      
     <?php echo $form->create(null, array(
-        'url' => 'http://www.google.com/search',
+        'url' => 'https://www.google.com/search',
         'type' => 'get'
     )); ?>
      
     // Affichera :
-    <form method="get" action="http://www.google.com/search">
+    <form method="get" action="https://www.google.com/search">
 
 Regardez aussi la méthode `HtmlHelper::url </fr/view/842/url>`_ pour
 plus d'exemples sur les différent types d'urls.
