@@ -137,6 +137,11 @@ TestSuite
 
   - ``Cake\TestSuite\ContainerStubTrait`` moved to ``Cake\Core\TestSuite\ContainerStubTrait``
 
+- ``HttpClientTrait`` was moved to the http package to allow testing http applications
+  without requiring the full cakephp/cakephp package.
+
+  - ``Cake\TestSuite\HttpClientTrait`` moved to ``Cake\Http\TestSuite\HttpClientTrait``
+
 Behavior Changes
 ================
 
