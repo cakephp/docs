@@ -119,6 +119,23 @@ Plugins
   instead of ``ADmad\I18n\Plugin``, as was the case for CakePHP 4.3 and below.
   The old style name is still supported for backwards compatibility.
 
+TestSuite
+---------
+
+- ``ConsoleIntegrationTestTrait`` was moved to the console package along with
+  dependencies to allow testing console applications without requiring the full
+  cakephp/cakephp package.
+
+  - ``Cake\TestSuite\ConsoleIntegrationTestTrait`` moved to ``Cake\Console\TestSuite\ConsoleIntegrationTestTrait``
+  - ``Cake\TestSuite\Constraint\Console\*`` moved to ``Cake\Console\TestSuite\Constraint\*``
+  - ``Cake\TestSuite\Stub\ConsoleInput`` moved to ``Cake\Console\TestSuite\StubConsoleInput``
+  - ``Cake\TestSuite\Stub\ConsoleOutput`` moved to ``Cake\Console\TestSuite\StubConsoleOutput``
+  - ``Cake\TestSuite\Stub\MissingConsoleInputException`` moved to ``Cake\Console\TestSuite\MissingConsoleInputException``
+
+- ``ContainerStubTrait`` was moved to the core package to allow testing console applications
+  without requiring the full cakephp/cakephp package.
+
+  - ``Cake\TestSuite\ContainerStubTrait`` moved to ``Cake\Core\TestSuite\ContainerStubTrait``
 
 Behavior Changes
 ================
