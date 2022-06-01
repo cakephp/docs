@@ -159,12 +159,12 @@ can point to an external domain.
     <form method="post" action="/recipes/add">
      
     <?php echo $form->create(null, array(
-        'url' => 'http://www.google.com/search',
+        'url' => 'https://www.google.com/search',
         'type' => 'get'
     )); ?>
      
     //Output:
-    <form method="get" action="http://www.google.com/search">
+    <form method="get" action="https://www.google.com/search">
 
 Also check `HtmlHelper::url <https://book.cakephp.org/view/842/url>`_
 method for more examples of different types of urls.
