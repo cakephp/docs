@@ -129,12 +129,12 @@ $options[‘url’]
     <form method="post" action="/recipes/add">
      
     <?php echo $form->create(null, array(
-        'url' => 'http://www.google.com/search',
+        'url' => 'https://www.google.com/search',
         'type' => 'get'
     )); ?>
      
     //出力:
-    <form method="get" action="http://www.google.com/search">
+    <form method="get" action="https://www.google.com/search">
 
 $options[‘default’]
 -------------------

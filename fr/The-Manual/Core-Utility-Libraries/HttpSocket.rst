@@ -21,7 +21,7 @@ n'importe quel paramètre de requête, soit sous la forme d'une chaîne :
 
     App::import('Core', 'HttpSocket');
     $HttpSocket = new HttpSocket();
-    $resultats = $HttpSocket->get('http://www.google.com/search', 'q=cakephp');  
+    $resultats = $HttpSocket->get('https://www.google.com/search', 'q=cakephp');
     //Retourne la version HTML des résultats de recherche Google pour la requête "cakephp"
 
 post
