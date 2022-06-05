@@ -290,10 +290,13 @@ Auto Wiring is turned off by default. To enable it::
     // In src/Application.php
     public function services(ContainerInterface $container): void
     {
+        $container->add(\Cake\Controller\ComponentRegistry::class);
         $container->delegate(
             new \League\Container\ReflectionContainer()
         );
     }
+
+The ``$container->add(\Cake\Controller\ComponentRegistry::class);`` is needed to fix a cyclic dependency between ``ComponentRegistry`` and ``Controller``.
 
 While your dependencies will now be resolved automatically, this approach will not cache resolutions which can be detrimental to performance. To enable caching::
 
