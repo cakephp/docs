@@ -51,7 +51,7 @@ il existe un outil CLI de mise à niveau:
     # Installe l'outil d'upgrade
     git clone https://github.com/cakephp/upgrade
     cd upgrade
-    git checkout master
+    git checkout 4.x
     composer install --no-dev
 
 
