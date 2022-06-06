@@ -214,6 +214,13 @@ Mailer
 * ``Mailer`` now accepts a ``autoLayout`` config which disabled auto layout
   in the ``ViewBuilder`` if set to ``false``.
 
+ORM
+---
+
+* The ``cascadeCallbacks`` option was added to ``TreeBehavior``. When enabled,
+  ``TreeBehavior`` will iterate a ``find()`` result and delete records
+  individually. This enables ORM callbacks to be used when deleting tree nodes.
+
 Routing
 -------
 
