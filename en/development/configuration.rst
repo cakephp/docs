@@ -46,7 +46,7 @@ configuration into multiple files. After creating each of the files in your
 .. _environment-variables:
 
 Environment Variables
-=====================
+---------------------
 
 Many modern cloud providers, like Heroku, let you define environment
 variables for configuration data. You can configure your CakePHP through
