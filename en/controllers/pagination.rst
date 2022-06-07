@@ -61,11 +61,7 @@ a :ref:`custom-find-methods`. You can use your finder in pagination by using the
 
     class ArticlesController extends AppController
     {
-<<<<<<< HEAD
         protected array $paginate = [
-=======
-        public $paginate = [
->>>>>>> 4.next
             'finder' => 'published',
         ];
     }
@@ -106,11 +102,7 @@ as a key in the ``$paginate`` property::
 
     class ArticlesController extends AppController
     {
-<<<<<<< HEAD
         protected array $paginate = [
-=======
-        public $paginate = [
->>>>>>> 4.next
             'Articles' => [],
             'Authors' => [],
         ];
@@ -134,7 +126,7 @@ links you can use the 'simple' paginator which does not do a count query::
 
     class ArticlesController extends AppController
     {
-        public $paginate = [
+        public array $paginate = [
             'className' => 'Simple', // Or use Cake\Datasource\Paging\SimplePaginator::class FQCN
         ];
     }
@@ -152,11 +144,7 @@ You can paginate multiple models in a single controller action, using the
 call to the ``paginate()`` method::
 
     // Paginate property
-<<<<<<< HEAD
     protected array $paginate = [
-=======
-    public $paginate = [
->>>>>>> 4.next
         'Articles' => ['scope' => 'article'],
         'Tags' => ['scope' => 'tag']
     ];
@@ -166,11 +154,7 @@ call to the ``paginate()`` method::
     $tags = $this->paginate($this->Tags, ['scope' => 'tag']);
     $this->set(compact('articles', 'tags'));
 
-<<<<<<< HEAD
 The ``scope`` option will result in the paginator looking in
-=======
-The ``scope`` option will result in ``PaginatorComponent`` looking in
->>>>>>> 4.next
 scoped query string parameters. For example, the following URL could be used to
 paginate both tags and articles at the same time::
 
@@ -183,12 +167,7 @@ Paginating the Same Model multiple Times
 ----------------------------------------
 
 To paginate the same model multiple times within a single controller action you
-<<<<<<< HEAD
-need to define an alias for the model. See :ref:`table-registry-usage` for
-additional details on how to use the table registry::
-=======
 need to define an alias for the model.::
->>>>>>> 4.next
 
     // In a controller action
     $this->paginate = [
@@ -214,11 +193,7 @@ need to define an alias for the model.::
         ])->where(['published' => true])
     );
 
-<<<<<<< HEAD
     // Load an additional table object to allow differentiating in the paginator
-=======
-    // Load an additional table object to allow differentiating in paginator
->>>>>>> 4.next
     $unpublishedArticlesTable = $this->fetchTable('UnpublishedArticles', [
         'className' => 'App\Model\Table\ArticlesTable',
         'table' => 'articles',
@@ -243,11 +218,7 @@ using the ``sortableFields`` option. This option is required when you want to
 sort on any associated data, or computed fields that may be part of your
 pagination query::
 
-<<<<<<< HEAD
     protected array $paginate = [
-=======
-    public $paginate = [
->>>>>>> 4.next
         'sortableFields' => [
             'id', 'title', 'Users.username', 'created'
         ]
@@ -267,11 +238,7 @@ number of rows that can be fetched to 100. If this default is not appropriate
 for your application, you can adjust it as part of the pagination options, for
 example reducing it to ``10``::
 
-<<<<<<< HEAD
     protected array $paginate = [
-=======
-    public $paginate = [
->>>>>>> 4.next
         // Other keys here.
         'maxLimit' => 10
     ];
@@ -297,11 +264,7 @@ Additional associations can be loaded to the paginated table by using the
 Out of Range Page Requests
 ==========================
 
-<<<<<<< HEAD
 The ``paginate()`` method will throw a ``NotFoundException`` when trying to
-=======
-``Controller::paginate()`` will throw a ``NotFoundException`` when trying to
->>>>>>> 4.next
 access a non-existent page, i.e. page number requested is greater than total
 page count.
 

@@ -954,7 +954,7 @@ in order to determine whether it matches a cached resource.
 
 To take advantage of this header, you must either call the
 ``checkNotModified()`` method manually or include the
-:doc:`/controllers/components/request-handling` in your controller::
+:doc:`/controllers/components/check-http-cache` in your controller::
 
     public function index()
     {
@@ -991,7 +991,7 @@ response was modified or not based on their cache.
 
 To take advantage of this header, you must either call the
 ``checkNotModified()`` method manually or include the
-:doc:`/controllers/components/request-handling` in your controller::
+:doc:`/controllers/components/check-http-cache` in your controller::
 
     public function view()
     {

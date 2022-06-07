@@ -314,10 +314,6 @@ conditional logic.
     View classes must implement the static ``contentType()`` hook method to
     participate in content-type negotiation.
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 4.next
 Content Type Negotiation Fallbacks
 ==================================
 
