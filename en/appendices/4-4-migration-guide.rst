@@ -162,6 +162,7 @@ Command
 -------
 
 * ``bin/cake routes`` now highlights collisions in route templates.
+* ``Command::getDescription()`` allows you to set a custom description. See :ref:`console-command-description`
 
 Controller
 ----------
