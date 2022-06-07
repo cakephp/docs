@@ -45,6 +45,8 @@ Cache
 Controller
 ----------
 
+- The method signature for ``Controller::__constructor()`` has changed.
+  So you need to adjust your code accordingly if you are overriding the constructor.
 - After loading components are no longer set as dynamic properties. Instead
   ``Controller`` uses ``__get()`` to provide property access to components. This
   change can impact applications that use ``property_exists()`` on components.
