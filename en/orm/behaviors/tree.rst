@@ -54,7 +54,6 @@ Once added, you can let CakePHP build the internal structure if the table is
 already holding some rows::
 
     // In a controller
-
     $categories = $this->getTableLocator()->get('Categories');
     $categories->recover();
 
@@ -63,6 +62,9 @@ count of descendants it has::
 
     $node = $categories->get(1);
     echo $categories->childCount($node);
+
+Getting direct descendents
+--------------------------
 
 Getting a flat list of the descendants for a node can be done with::
 
@@ -95,15 +97,19 @@ in a hierarchy, you can stack the 'threaded' finder::
         echo "{$child->name} has " . count($child->children) . " direct children";
     }
 
-While, if you’re using custom ``parent_id`` you need to pass it in the 'threaded' finder option (i.e. ``parentField``) . 
+While, if you’re using custom ``parent_id`` you need to pass it in the
+'threaded' finder option (i.e. ``parentField``) . 
 
 .. note::
     For more information on 'threaded' finder options see :ref:`Finding Threaded Data logic <finding-threaded-data>`
-    
+
+Getting formatted tree lists
+----------------------------
+ 
 Traversing threaded results usually requires recursive functions in, but if you
 only require a result set containing a single field from each level so you can
 display a list, in an HTML select for example, it is better to use the
-'treeList' finder::
+``treeList`` finder::
 
     $list = $categories->find('treeList')->toArray();
 
@@ -153,6 +159,9 @@ An example using closure::
         'spacer' => ' '
     ]);
 
+Finding a path or branch in the tree
+------------------------------------
+
 One very common task is to find the tree path from a particular node to the root
 of the tree. This is useful, for example, for adding the breadcrumbs list for
 a menu structure::
@@ -196,7 +205,7 @@ schema, you can provide aliases for them::
     }
 
 Node Level (Depth)
-==================
+------------------
 
 Knowing the depth of tree nodes can be useful when you want to retrieve nodes
 only up to a certain level, for example, when generating menus. You can use the
@@ -210,7 +219,7 @@ If you don't want to cache the level using a db field you can use
 ``TreeBehavior::getLevel()`` method to get level of a node.
 
 Scoping and Multi Trees
-=======================
+-----------------------
 
 Sometimes you want to persist more than one tree structure inside the same
 table, you can achieve that by using the 'scope' configuration. For example, in
@@ -240,10 +249,25 @@ as the scope::
         return $query->where(['country_name' => $country]);
     });
 
+Deletion Behavior
+-----------------
+
+By enabling the ``cascadeCallbacks`` option, ``TreeBehavior`` will load all of
+the entities that are going to be deleted. Once loaded, these entities will be
+deleted individually using ``Table::delete()``. This enables ORM callbacks to be
+fired when tree nodes are deleted::
+
+    $this->addBehavior('Tree', [
+        'cascadeCallbacks' => true,
+    ]);
+
+.. versionadded:: 4.4.0
+    The ``cascadeCallbacks`` option was added.
+
 Recovering with custom sort field
 =================================
 
-By default, recover() sorts the items using the primary key. This works great
+By default, ``recover()`` sorts the items using the primary key. This works great
 if this is a numeric (auto increment) column, but can lead to weird results if you
 use UUIDs.
 
@@ -259,7 +283,7 @@ Saving Hierarchical Data
 
 When using the Tree behavior, you usually don't need to worry about the
 internal representation of the hierarchical structure. The positions where nodes
-are placed in the tree are deduced from the 'parent_id' column in each of your
+are placed in the tree are deduced from the ``parent_id`` column in each of your
 entities::
 
     $aCategory = $categoriesTable->get(10);
@@ -269,7 +293,7 @@ entities::
 Providing inexistent parent ids when saving or attempting to create a loop in
 the tree (making a node child of itself) will throw an exception.
 
-You can make a node a root in the tree by setting the 'parent_id' column to
+You can make a node into a root in the tree by setting the ``parent_id`` column to
 null::
 
     $aCategory = $categoriesTable->get(10);
@@ -297,7 +321,7 @@ immediately superior parent node in the tree::
 
 All children nodes will be kept and a new parent will be assigned to them.
 
-The deletion of a node is based off of the lft and rght values of the entity. This
+The deletion of a node is based off of the ``lft`` and ``rght`` values of the entity. This
 is important to note when looping through the various children of a node for
 conditional deletes::
 
@@ -310,7 +334,10 @@ conditional deletes::
         }
     }
 
-The TreeBehavior reorders the lft and rght values of records in the table when a node
-is deleted. As such, the lft and rght values of the entities inside ``$descendants``
-(saved before the delete operation) will be inaccurate. Entities will have to be loaded
-and modified on the fly to prevent inconsistencies in the table.
+TreeBehavior will reorder the ``lft`` and ``rght`` values of records in the
+table when a node is deleted. 
+
+In our example above, the ``lft`` and ``rght`` values of the entities inside
+``$descendants`` will be inaccurate. You will need to reload existing entity
+objects if you need an accurate shape of the tree.
+

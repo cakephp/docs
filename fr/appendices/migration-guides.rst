@@ -13,3 +13,4 @@ fonctionnalités introduites dans chaque version et le chemin de migration entre
     ./4-1-migration-guide
     ./4-2-migration-guide
     ./4-3-migration-guide
+    ./4-4-migration-guide

@@ -31,6 +31,29 @@ use the ``HttpsEnforcerMiddleware``::
 
 If a non-HTTP request is received that does not use GET a ``BadRequestException`` will be raised.
 
+Adding Strict-Transport-Security
+================================
+
+When your application requires SSL it is a good idea to set the
+``Strict-Transport-Security`` header. This header value is cached in the
+browser, and informs browsers that they should always connect with HTTPS connections.
+You can configure this header with the ``hsts`` option::
+
+    $https = new HttpsEnforcerMiddleware([
+        'hsts' => [
+            // How long the header value should be cached for.
+            'maxAge' => 60 * 60 * 24 * 365,
+            // should this policy apply to subdomains?
+            'includeSubdomains' => true,
+            // Should the header value be cacheable in google's HSTS preload
+            // service? While not part of the spec it is widely implemented.
+            'preload' => true,
+        ],
+    ]);
+
+.. versionadded:: 4.4.0
+    The ``hsts`` option was added.
+
 
 .. meta::
     :title lang=en: HTTPS Enforcer Middleware

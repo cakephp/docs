@@ -114,9 +114,10 @@ following configuration keys are used:
 - ``'template'``: If you are using rendered content, set the template name. See
   ``ViewBuilder::setTemplate()``.
 - ``'theme'``: Theme used when rendering template. See ``ViewBuilder::setTheme()``.
-- ``'layout'``: If you are using rendered content, set the layout to render. If
-  you want to render a template without layout, set this field to null. See
+- ``'layout'``: If you are using rendered content, set the layout to render. See
   ``ViewBuilder::setTemplate()``.
+- ``'autoLayout'``: If you want to render a template without layout, set this field to
+  ``false``. See ``ViewBuilder::disableAutoLayout()``.
 - ``'viewVars'``: If you are using rendered content, set the array with
   variables to be used in the view. See ``Mailer::setViewVars()``.
 - ``'attachments'``: List of files to attach. See ``Mailer::setAttachments()``.

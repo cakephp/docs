@@ -15,7 +15,7 @@ version = '4.x'
 release = '4.x'
 
 # The search index version.
-search_version = '4'
+search_version = '4-next'
 
 # The marketing diplay name for the book.
 version_name = 'Strawberry'
@@ -30,12 +30,15 @@ version_list = [
     {'name': '1.1', 'number': '1.1', 'title': '1.1 Book'},
 ]
 
+# 4.next is a pre-release branch
+is_prerelease = True
+
 # Languages available.
 languages = ['en', 'pt_BR', 'es', 'ja', 'fr']
 
 # The GitHub branch name for this version of the docs
 # for edit links to point at.
-branch = '4.x'
+branch = '4.next'
 
 # Add any paths that contain custom themes here, relative to this directory.
 html_theme_path = []
@@ -106,5 +109,5 @@ epub_tocdepth = 2
 
 rst_epilog = """
 .. |phpversion| replace:: **8.1**
-.. |minphpversion| replace:: 7.2
+.. |minphpversion| replace:: 7.4
 """

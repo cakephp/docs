@@ -80,6 +80,7 @@ of the command.
 
 Adding Services
 ===============
+
 In order to have services created by the container, you need to tell it which
 classes it can create and how to build those classes. The
 simplest definition is via a class name::
@@ -133,6 +134,13 @@ requires. Those dependencies can be either objects or primitive values::
     $container->add(BillingService::class)
         ->addArgument('apiKey');
 
+Your services can depend on ``ServerRequest`` in controller actions as it will
+be added automatically.
+
+
+.. versionchanged:: 4.4.0
+    The ``$request`` is registered automatically now.
+
 Adding Shared Services
 ----------------------
 
@@ -164,7 +172,7 @@ services like in a reporting system::
 
     $container->add(BillingReport::class)->addTag('reports');
     $container->add(UsageReport::class)->addTag('reports');
-
+    
     $container->add(ReportAggregate::class, function () use ($container) {
         return new ReportAggregate($container->get('reports'));
     });

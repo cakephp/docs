@@ -277,6 +277,82 @@ For example::
 
 This would render **plugins/Users/templates/UserDetails/custom_file.php**
 
+.. _controller-viewclasses:
+
+Content Type Negotiation
+========================
+
+.. php:method:: viewClasses()
+
+Controllers can define a list of view classes they support. After the
+controller's action is complete CakePHP will use the view list to perform
+content-type negotiation. This enables your application to re-use the same
+controller action to render an HTML view or render a JSON or XML response. To
+define the list of supported view classes for a controller is done with the
+``viewClasses()`` method::
+
+    namespace App\Controller;
+
+    use Cake\View\JsonView;
+    use Cake\View\XmlView;
+
+    class PostsController extends AppController
+    {
+        public function viewClasses()
+        {
+            return [JsonView::class, XmlView::class];
+        }
+    }
+
+The application's ``View`` class is automatically used as a fallback when no
+other view can be selected based on the requests' ``Accept`` header or routing
+extension. If your application needs to perform different logic for different
+response formats you can use ``$this->request->is()`` to build the required
+conditional logic.
+
+.. note::
+    View classes must implement the static ``contentType()`` hook method to
+    participate in content-type negotiation.
+
+
+Content Type Negotiation Fallbacks
+==================================
+
+If no View can be matched with the request's content type preferences, CakePHP
+will use the base ``View`` class. If you want to require content-type
+negotiation, you can use the ``NegotiationRequiredView`` which sets a 406 status
+code::
+
+    public function viewClasses()
+    {
+        // Require Accept header negotiation or return a 406 response.
+        return [JsonView::class, NegotiationRequiredView::class];
+    }
+
+You can use the ``TYPE_MATCH_ALL`` content type value to build your own fallback
+view logic::
+
+    namespace App\View;
+
+    use Cake\View\View;
+
+    class CustomFallbackView extends View
+    {
+        public static function contentType(): string
+        {
+            return static::TYPE_MATCH_ALL;
+        }
+
+    }
+
+It is important to remember that match-all views are applied only *after*
+content-type negotiation is attempted.
+
+.. versionadded:: 4.4.0
+    Prior to 4.4 you must use :doc:`/controllers/components/request-handling`
+    instead of ``viewClasses()``.
+
+
 Redirecting to Other Pages
 ==========================
 

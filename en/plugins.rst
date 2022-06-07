@@ -99,7 +99,7 @@ application's ``bootstrap()`` function::
 
     // In src/Application.php
     use Cake\Http\BaseApplication;
-    use ContactManager\Plugin as ContactManagerPlugin;
+    use ContactManager\ContactManagerPlugin;
 
     class Application extends BaseApplication {
         public function bootstrap()
@@ -155,7 +155,7 @@ allow plugin authors to set defaults, which can be configured by you in your
 application::
 
     // In Application::bootstrap()
-    use ContactManager\Plugin as ContactManagerPlugin;
+    use ContactManager\ContactManagerPlugin;
 
     // Disable routes for the ContactManager plugin
     $this->addPlugin(ContactManagerPlugin::class, ['routes' => false]);
@@ -164,7 +164,7 @@ You can configure hooks with array options, or the methods provided by plugin
 classes::
 
     // In Application::bootstrap()
-    use ContactManager\Plugin as ContactManagerPlugin;
+    use ContactManager\ContactManagerPlugin;
 
     // Use the disable/enable to configure hooks.
     $plugin = new ContactManagerPlugin();
@@ -229,7 +229,7 @@ basic directory structure. It should look like this::
         /ContactManager
             /config
             /src
-                /Plugin.php
+                /ContactManagerPlugin.php
                 /Controller
                     /Component
                 /Model
@@ -302,7 +302,7 @@ like::
     use Cake\Console\CommandCollection;
     use Cake\Http\MiddlewareQueue;
 
-    class Plugin extends BasePlugin
+    class ContactManagerPlugin extends BasePlugin
     {
         public function middleware(MiddlewareQueue $middleware): MiddlewareQueue
         {
