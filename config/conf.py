@@ -31,7 +31,7 @@ version_list = [
 ]
 
 # 4.next is a pre-release branch
-is_prerelease = True
+is_prerelease = False
 
 # Languages available.
 languages = ['en', 'pt_BR', 'es', 'ja', 'fr']
