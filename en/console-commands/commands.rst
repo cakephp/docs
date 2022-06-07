@@ -240,6 +240,8 @@ You may need to call other commands from your command. You can use
     parent command's ``ConsoleIo`` instance as the optional 3rd argument to
     avoid a potential "open files" limit that could occur in some environments.
 
+.. _console-command-description:
+
 Setting Command Description
 ===========================
 
