@@ -17,9 +17,7 @@ chapter for each component:
 
     /controllers/components/authentication
     /controllers/components/flash
-    /controllers/components/security
     /controllers/components/pagination
-    /controllers/components/request-handling
     /controllers/components/form-protection
     /controllers/components/check-http-cache
 
@@ -28,23 +26,20 @@ chapter for each component:
 Configuring Components
 ======================
 
-Many of the core components require configuration. Some examples of components
-requiring configuration are :doc:`/controllers/components/security` and
-:doc:`/controllers/components/form-protection`.  Configuration for these components,
-and for components in general, is usually done via ``loadComponent()`` in your
-Controller's ``initialize()`` method or via the ``$components`` array::
+Some core components like :doc:`/controllers/components/form-protection` maybe
+need configuration. Component configuration is usually done via ``loadComponent()``
+in your Controller's ``initialize()`` method or via the ``$components`` array::
 
     class PostsController extends AppController
     {
         public function initialize(): void
         {
             parent::initialize();
+
             $this->loadComponent('FormProtection', [
                 'unlockedActions' => ['index'],
             ]);
-            $this->loadComponent('Csrf');
         }
-
     }
 
 You can configure components at runtime using the ``setConfig()`` method. Often,
