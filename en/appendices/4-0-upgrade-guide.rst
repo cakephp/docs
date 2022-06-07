@@ -45,7 +45,7 @@ To help expedite fixing these tedious changes there is an upgrade CLI tool:
     # Install the upgrade tool
     git clone https://github.com/cakephp/upgrade
     cd upgrade
-    git checkout master
+    git checkout 4.x
     composer install --no-dev
 
 With the upgrade tool installed you can now run it on your application or
