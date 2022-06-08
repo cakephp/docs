@@ -64,11 +64,6 @@ deprecated:
 * ``ErrorLoggerInterface::log()``. Implement ``logException()`` instead.
 * ``ErrorLoggerInterface::logMessage()``. Implement ``logError()`` instead.
 
-Event
------
-
-- Associating an array of methods for an event in ``EventListenerInterface::implementedEvents()`` was deprecated.
-
 RequestHandlerComponent
 ------------------------
 
