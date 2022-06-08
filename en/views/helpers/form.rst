@@ -645,6 +645,13 @@ as well as HTML attributes. This subsection will cover the options specific to
   As seen above you can set the error message for each validation
   rule you have in your models. In addition you can provide i18n
   messages for your forms.
+  
+  To disable the HTML entity encoding for error messages only, the ``'escape'``
+  sub key can be used::
+  
+      $this->Form->control('name', [
+          'error' => ['escape' => false],
+      ]);
 
 * ``$options['nestedInput']`` - Used with checkboxes and radio buttons.
   Controls whether the input element is generated
