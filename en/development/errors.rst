@@ -11,9 +11,10 @@ Error & Exception Configuration
 ===============================
 
 Error configuration is done in your application's **config/app.php** file. By
-default CakePHP uses ``Cake\Error\ErrorHandler`` to handle both PHP errors and
-exceptions by default. The error configuration allows you to customize error
-handling for your application. The following options are supported:
+default CakePHP uses ``Cake\Error\ErrorTrap`` and ``Cake\Error\ExceptionTrap``
+to handle both PHP errors and exceptions respectively. The error configuration
+allows you to customize error handling for your application. The following
+options are supported:
 
 * ``errorLevel`` - int - The level of errors you are interested in capturing.
   Use the built-in PHP error constants, and bitmasks to select the level of
@@ -452,7 +453,7 @@ Logging Exceptions
 ------------------
 
 Using the built-in exception handling, you can log all the exceptions that are
-dealt with by ErrorHandler by setting the ``log`` option to ``true`` in your
+dealt with by ErrorTrap by setting the ``log`` option to ``true`` in your
 **config/app.php**. Enabling this will log every exception to
 :php:class:`Cake\\Log\\Log` and the configured loggers.
 
