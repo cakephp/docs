@@ -44,7 +44,7 @@ The ``ErrorHandler`` and ``ConsoleErrorHandler`` classes are now deprecated.
 They have been replaced by the new ``ExceptionTrap`` and ``ErrorTrap`` classes.
 The trap classes provide a more extensible and consistent error & exception
 handling framework. To upgrade to the new system you can replace the usage of
-``ErrorHandler`` and ``ConsoleErrorHandler`` with::
+``ErrorHandler`` and ``ConsoleErrorHandler`` (such as in your ``config/bootstrap.php``) with::
 
     use Cake\Error\ErrorTrap;
     use Cake\Error\ExceptionTrap;
