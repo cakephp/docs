@@ -34,7 +34,7 @@ Datasource
 
 - ``FactoryLocator::add()`` no longer accepts closure factory functions. Instead
   you must pass an instance of the ``LocatorInterface``.
-- ``Cake\Datasource\Paging\Pagintor`` has been renamed to
+- ``Cake\Datasource\Paging\Paginator`` has been renamed to
   ``Cake\Datasource\Paging\NumericPaginator``.
 
 ErrorHandler & ConsoleErrorHandler
