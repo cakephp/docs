@@ -9,7 +9,7 @@ Upgrading to 4.4.0
 
 You can can use composer to upgrade to CakePHP 4.4.0::
 
-    php composer.phar require --update-with-dependencies "cakephp/cakephp:^4.4@RC"
+    php composer.phar require --update-with-dependencies "cakephp/cakephp:^4.4"
 
 .. note::
     CakePHP 4.4 requires PHP 7.4 or greater.
