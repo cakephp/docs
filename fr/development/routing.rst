@@ -1585,10 +1585,10 @@ permet d'utiliser différentes routes pour définir où la chaine URL devrait
 utilisant des chaines URLs pour destination::
 
     $routes->scope('/', function (RouteBuilder $routes) {
-        $routes->redirect('/articles/*', 'http://google.com', ['status' => 302]);
+        $routes->redirect('/articles/*', 'https://google.com', ['status' => 302]);
     });
 
-Cela redirigerait ``/articles/*`` vers ``http://google.com`` avec un statut
+Cela redirigerait ``/articles/*`` vers ``https://google.com`` avec un statut
 HTTP 302.
 
 .. _entity-routing:

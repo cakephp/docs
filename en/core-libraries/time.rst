@@ -497,4 +497,4 @@ and parse localized datetime strings. See the :ref:`parsing-localized-dates`.
 Supported Timezones
 ===================
 
-CakePHP supports all valid PHP timezones. For a list of supported timezones, `see this page <https://php.net/manual/en/timezones.php>`_.
+CakePHP supports all valid PHP timezones. For a list of supported timezones, `see this page <http://php.net/manual/en/timezones.php>`_.

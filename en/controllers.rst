@@ -438,7 +438,7 @@ behaves::
 
     class ArticlesController extends AppController
     {
-        public array $paginate = [
+        protected array $paginate = [
             'Articles' => [
                 'conditions' => ['published' => 1]
             ]
