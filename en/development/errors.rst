@@ -65,7 +65,7 @@ deprecated. We also recommend this system for use in your plugins and
 application code when useful. You can trigger deprecation warnings with
 ``deprecationWarning()``::
 
-    deprecationWarning('The example() method is deprecated. Use getExample() instead.');
+    deprecationWarning('5.0', 'The example() method is deprecated. Use getExample() instead.');
 
 When upgrading CakePHP or plugins you may encounter new deprecation warnings.
 You can temporarily disable deprecation warnings in one of a few ways:
@@ -320,8 +320,8 @@ logger::
          * @inheritDoc
          */
         public function logError(
-            PhpError $error, 
-            ?ServerRequestInterface $request, 
+            PhpError $error,
+            ?ServerRequestInterface $request,
             bool $includeTrace = false
         ): void {
             // Log PHP Errors
@@ -331,7 +331,7 @@ logger::
          * @inheritDoc
          */
         public function logException(
-            ?ServerRequestInterface $request, 
+            ?ServerRequestInterface $request,
             bool $includeTrace = false
         ): void {
             // Log exceptions.
@@ -624,18 +624,6 @@ In addition, CakePHP uses the following exceptions:
 .. php:exception:: ConsoleException
 
     A console library class encounter an error.
-
-.. php:exception:: MissingTaskException
-
-    A configured task could not found.
-
-.. php:exception:: MissingShellException
-
-    The shell class could not be found.
-
-.. php:exception:: MissingShellMethodException
-
-    The chosen shell class has no method of that name.
 
 .. php:namespace:: Cake\Database\Exception
 
