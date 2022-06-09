@@ -96,10 +96,10 @@ methods. An example of both methods is::
       'type' => 'unique',
     ]);
     // Add index
-    $schema->addIndex('slug_title', [
-      'columns' => ['slug', 'title'],
-      'type' => 'index'
-    ]);
+    $schema->addIndex(
+      ['slug', 'title'],
+      ['name' => 'slug_title']
+    );
     // Add a foreign key
     $schema->addConstraint('author_id_idx', [
       'columns' => ['author_id'],
