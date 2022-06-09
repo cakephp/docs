@@ -322,6 +322,8 @@ You can also fetch the label in the list directly using. ::
     // In your finders/controller:
     $query = $authors->find('list'); // Will utilize AuthorsTable::getDisplayField()
 
+.. _finding-threaded-data:
+
 Finding Threaded Data
 =====================
 

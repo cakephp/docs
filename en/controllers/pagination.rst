@@ -127,7 +127,7 @@ links you can use the 'simple' paginator which does not do a count query::
 
     class ArticlesController extends AppController
     {
-        public $paginate = [
+        protected array $paginate = [
             'className' => 'Simple', // Or use Cake\Datasource\Paging\SimplePaginator::class FQCN
         ];
     }
@@ -168,8 +168,7 @@ Paginating the Same Model multiple Times
 ----------------------------------------
 
 To paginate the same model multiple times within a single controller action you
-need to define an alias for the model. See :ref:`table-registry-usage` for
-additional details on how to use the table registry::
+need to define an alias for the model.::
 
     // In a controller action
     $this->paginate = [
@@ -266,7 +265,7 @@ Additional associations can be loaded to the paginated table by using the
 Out of Range Page Requests
 ==========================
 
-The ``paginate()`` method will throw a ``NotFoundException`` when trying to
+``Controller::paginate()`` will throw a ``NotFoundException`` when trying to
 access a non-existent page, i.e. page number requested is greater than total
 page count.
 

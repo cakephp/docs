@@ -293,7 +293,7 @@ Affichera:
 ou pointer vers un domaine extérieur::
 
     echo $this->Form->create(null, [
-        'url' => 'http://www.google.com/search',
+        'url' => 'https://www.google.com/search',
         'type' => 'get'
     ]);
 

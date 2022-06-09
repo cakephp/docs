@@ -45,9 +45,9 @@ CakePHP 4 は、 strict モードを採用し、多くのタイプヒントを�
 .. code-block:: console
 
     # アップグレードツールをインストール
-    git clone git://github.com/cakephp/upgrade
+    git clone https://github.com/cakephp/upgrade
     cd upgrade
-    git checkout master
+    git checkout 4.x
     composer install --no-dev
 
 アップグレードツールをインストールすると、アプリケーションまたはプラグインで実行できるようになります。

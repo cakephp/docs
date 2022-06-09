@@ -28,7 +28,7 @@ CakePHP において、 ``$_SESSION`` の利用は通常避けています。代
 * ``Session.ini`` - 追加のセッション ini セッティングを config に加えることが出来ます。これは
   ``Session.handler`` と合わせて以前のバージョンのカスタムセッションハンドリング機能を置き換えます。
 
-* ``Session.cookie`` - 使用するクッキー名。デフォルトは「CAKEPHP」。
+* ``Session.cookie`` - 使用するクッキー名。デフォルトは、php.iniの、``session.name`` で設定された値です。
 
 * ``Session.cookiePath`` - セッションクッキーを設定するための url パス。
   php.ini の設定 ``session.cookie_path`` にマップします。デフォルトは、アプリのベースパス。
