@@ -26,9 +26,9 @@ CakePHP 4.1.0にアップグレードするには、次の Composer コマンド
 Controller
 ----------
 
-* ``PaginatorComponent`` の ``sortWhitelist`` オプションは非推奨は非推奨になりました。
+* ``PaginatorComponent`` の ``sortWhitelist`` オプションは非推奨になりました。
   代わりに、``sortableFields`` を使用してください。
-* ``PaginatorComponent`` の ``whitelist`` オプションは非推奨は非推奨になりました。
+* ``PaginatorComponent`` の ``whitelist`` オプションは非推奨になりました。
   代わりに、``allowedParameters`` を使用してください。
 
 Database
