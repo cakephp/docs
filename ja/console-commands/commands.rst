@@ -234,6 +234,41 @@ CakePHP には、開発のスピードアップと日常的なタスクの自動
     $command = new OtherCommand($otherArgs);
     $this->executeCommand($command, ['--verbose', 'deploy']);
 
+.. _console-command-description:
+
+コマンド説明文の設定
+===========================
+
+以下のようにコマンドの説明文を設定することができます。::
+
+    class UserCommand extends Command
+    {
+        public static function getDescription(): string
+        {
+            return 'カスタムの説明文';
+        }
+    }
+
+これにより、Cake CLIに説明文が表示されます。:
+
+.. code-block:: console
+
+    bin/cake
+
+    App:
+      - user
+      └─── カスタムの説明文
+
+コマンドのヘルプセクションと同様です。:
+
+.. code-block:: console
+
+    cake user --help
+    カスタムの説明文
+
+    Usage:
+    cake user [-h] [-q] [-v]
+
 .. _console-integration-testing:
 
 コマンドのテスト
