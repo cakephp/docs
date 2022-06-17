@@ -64,7 +64,7 @@ que o CakePHP usa internamente, todos eles também são encontrados nos parâmet
 Parâmetros em URL
 -----------------
 
-.. php:method:: getQuery($name)
+.. php:method:: getQuery($name, $default = null)
 
 Os parâmetros em URL podem ser lidos usando o método ``getQuery()``::
 
