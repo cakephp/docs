@@ -74,7 +74,7 @@ trouver dans les paramètres de routing:
 Accéder aux Paramètres Querystring
 ----------------------------------
 
-.. php:method:: getQuery($name)
+.. php:method:: getQuery($name, $default = null)
 
 Les paramètres Querystring peuvent être lus en utilisant la méthode ``getQuery()``::
 
