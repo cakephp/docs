@@ -62,7 +62,7 @@ CakePHP のリクエストオブジェクトは、入ってきたリクエスト
 クエリー文字列パラメーター
 --------------------------
 
-.. php:method:: getQuery($name)
+.. php:method:: getQuery($name, $default = null)
 
 クエリー文字列パラメーターは、 ``getQuery()`` メソッドを使って読み取ることができます。 ::
 
