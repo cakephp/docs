@@ -92,6 +92,7 @@ be removed in 5.0.
 - Use :ref:`controller-viewclasses` instead of defining view class mappings in
   ``RequestHandlerComponent``.
 
+
 PaginationComponent
 -------------------
 
@@ -111,6 +112,13 @@ Plugins
   example, the plugin class for "ADmad/I18n" would be ``ADmad\I18n\I18nPlugin``
   instead of ``ADmad\I18n\Plugin``, as was the case for CakePHP 4.3 and below.
   The old style name is still supported for backwards compatibility.
+
+Routing
+-------
+
+- Cached route files have been deprecated. There are a number of edge cases
+  that are impossible to resolve with cached routes. Because the feature of
+  cached routes is non-functional for many use cases it will be removed in 5.x
 
 TestSuite
 ---------
