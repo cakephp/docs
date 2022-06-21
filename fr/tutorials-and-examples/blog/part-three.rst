@@ -366,7 +366,7 @@ lorsqu'on va le créer ou le modifier::
                     $this->Flash->success(__('Votre article a été enregistré.'));
                     return $this->redirect(['action' => 'index']);
                 }
-                $this->Flash->error(__("Impossible d'ajouter votre article."));
+                $this->Flash->error(__("Impossible d\'ajouter votre article."));
             }
             $this->set('article', $article);
 

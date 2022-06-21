@@ -389,9 +389,9 @@ Voici le code de notre vue **add**:
         echo $this->Form->create($article);
         echo $this->Form->control('title');
         echo $this->Form->control('body', ['rows' => '3']);
-        echo $this->Form->button(__("Sauvegarder l'article"));
+        echo $this->Form->button(__("Sauvegarder l\'article"));
         echo $this->Form->end();
-    ?>
+    ?>;
 
 Nous utilisons le FormHelper pour générer la balise
 d'ouverture d'un formulaire HTML. Voici le code HTML généré par
