@@ -63,7 +63,7 @@ responsabilité de trouver, sauvegarder et valider toute donnée d'utilisateur::
                 ->notEmpty('role', 'Un rôle est nécessaire')
                 ->add('role', 'inList', [
                     'rule' => ['inList', ['admin', 'author']],
-                    'message' => 'Merci d'entrer un rôle valide'
+                    'message' => 'Merci d\'entrer un rôle valide'
                 ]);
         }
 
@@ -99,10 +99,10 @@ classe obtenue grâce à l'utilitaire de génération de code fourni par CakePHP
             if ($this->request->is('post')) {
                 $user = $this->Users->patchEntity($user, $this->request->getData());
                 if ($this->Users->save($user)) {
-                    $this->Flash->success(__("L'utilisateur a été sauvegardé."));
+                    $this->Flash->success(__("L\'utilisateur a été sauvegardé."));
                     return $this->redirect(['action' => 'add']);
                 }
-                $this->Flash->error(__("Impossible d'ajouter l'utilisateur."));
+                $this->Flash->error(__("Impossible d'ajouter l\'utilisateur."));
             }
             $this->set('user', $user);
         }
@@ -336,7 +336,7 @@ Ajoutez la logique du template pour votre action login::
         <h3>Login</h3>
         <?= $this->Form->create() ?>
         <fieldset>
-            <legend><?= __('Merci d'entrer vos nom d'utilisateur et mot de passe') ?></legend>
+            <legend><?= __('Merci d\'entrer vos nom d'utilisateur et mot de passe') ?></legend>
             <?= $this->Form->control('email', ['required' => true]) ?>
             <?= $this->Form->control('password', ['required' => true]) ?>
         </fieldset>
