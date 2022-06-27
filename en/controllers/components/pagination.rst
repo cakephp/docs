@@ -209,16 +209,16 @@ To paginate the same model multiple times within a single controller action you
 need to define an alias for the model. See :ref:`table-registry-usage` for
 additional details on how to use the table registry::
 
-    // In a controller action
+    // In a controller action, you can set the $this->paginate options for different scopes
     $this->paginate = [
-        'ArticlesTable' => [
+        'Articles' => [
             'scope' => 'published_articles',
             'limit' => 10,
             'order' => [
                 'id' => 'desc',
             ],
         ],
-        'UnpublishedArticlesTable' => [
+        'UnpublishedArticles' => [
             'scope' => 'unpublished_articles',
             'limit' => 10,
             'order' => [
@@ -228,9 +228,7 @@ additional details on how to use the table registry::
     ];
 
     $publishedArticles = $this->paginate(
-        $this->Articles->find('all', [
-            'scope' => 'published_articles'
-        ])->where(['published' => true])
+        $this->Articles->find()->where(['published' => true])
     );
 
     // Load an additional table object to allow differentiating in pagination component
@@ -241,9 +239,21 @@ additional details on how to use the table registry::
     ]);
 
     $unpublishedArticles = $this->paginate(
-        $unpublishedArticlesTable->find('all', [
+        $unpublishedArticlesTable->find()->where(['published' => false])
+    );
+
+Alternatively, you can pass the scope directly into the paginate()::
+
+
+    $publishedArticles = $this->paginate(
+        $this->Articles->find()->where(['published' => true]), [
+            'scope' => 'published_articles'
+        ]
+    );
+    $unpublishedArticles = $this->paginate(
+        $unpublishedArticlesTable->find()->where(['published' => false]), [
             'scope' => 'unpublished_articles'
-        ])->where(['published' => false])
+        ]
     );
 
 Control which Fields Used for Ordering
