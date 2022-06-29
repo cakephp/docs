@@ -226,20 +226,14 @@ Routing Middleware
 ==================
 
 Routing middleware is responsible for applying your application's routes and
-resolving the plugin, controller, and action a request is going to. It can cache
-the route collection used in your application to increase startup time. To
-enable cached routes, provide the desired :ref:`cache configuration
-<cache-configuration>` as a parameter::
+resolving the plugin, controller, and action a request is going to::
 
     // In Application.php
     public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue
     {
         // ...
-        $middlewareQueue->add(new RoutingMiddleware($this, 'routing'));
+        $middlewareQueue->add(new RoutingMiddleware($this));
     }
-
-The above would use the ``routing`` cache engine to store the generated route
-collection.
 
 .. _encrypted-cookie-middleware:
 

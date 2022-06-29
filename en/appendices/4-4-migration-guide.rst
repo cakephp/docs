@@ -20,6 +20,17 @@ Deprecations
 4.4 introduces a few deprecations. All of these features will continue for the
 duration of 4.x but will be removed in 5.0.
 
+You can use the
+:ref:`upgrade tool <upgrade-tool-use>` to automate updating usage of deprecated
+features::
+
+    bin/cake upgrade rector --rules cakephp44 <path/to/app/src>
+
+.. note::
+    This only updates CakePHP 4.4 changes. Make sure you apply CakePHP 4.3 changes first.
+
+A new configuration option has been added to disable deprecations on a path by
+path basis. See :ref:`deprecation-warnings` for more information.
 
 Controller
 ----------
@@ -81,6 +92,7 @@ be removed in 5.0.
 - Use :ref:`controller-viewclasses` instead of defining view class mappings in
   ``RequestHandlerComponent``.
 
+
 PaginationComponent
 -------------------
 
@@ -100,6 +112,13 @@ Plugins
   example, the plugin class for "ADmad/I18n" would be ``ADmad\I18n\I18nPlugin``
   instead of ``ADmad\I18n\Plugin``, as was the case for CakePHP 4.3 and below.
   The old style name is still supported for backwards compatibility.
+
+Routing
+-------
+
+- Cached route files have been deprecated. There are a number of edge cases
+  that are impossible to resolve with cached routes. Because the feature of
+  cached routes is non-functional for many use cases it will be removed in 5.x
 
 TestSuite
 ---------

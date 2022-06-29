@@ -104,10 +104,6 @@ execute until you start fetching rows, convert it to an array, or when the
     // At this point the query has not run.
     $query = $articles->find('all');
 
-    // Iteration will execute the query.
-    foreach ($query->all() as $row) {
-    }
-
     // Calling all() will execute the query
     // and return the result set.
     $results = $query->all();

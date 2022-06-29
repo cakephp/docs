@@ -72,7 +72,7 @@ are also all found in the routing parameters:
 Query String Parameters
 -----------------------
 
-.. php:method:: getQuery($name)
+.. php:method:: getQuery($name, $default = null)
 
 Query string parameters can be read using the ``getQuery()`` method::
 

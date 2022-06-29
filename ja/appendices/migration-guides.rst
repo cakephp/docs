@@ -11,3 +11,4 @@
     ./4-1-migration-guide
     ./4-2-migration-guide
     ./4-3-migration-guide
+    ./4-4-migration-guide

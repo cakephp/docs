@@ -57,12 +57,12 @@ CakePHPはコントローラーでアクションを呼ぶ際サービスコン�
         $container
             ->add(CheckUsersCommand::class)
             ->addArgument(UsersService::class);
+        $container->add(UsersService::class);
     }
 
-注入過程は少し異なります。
-``UsersService`` の代わりにコマンドを始めに追加する必要があります。
-全体としてコマンドにコンテナと ``UsersService`` を引数として与えます。
-そうすることでコマンド内コンストラクタにサービスをアクセスさせることができるのです。
+ここでは、インジェクションの手順が少し異なります。
+``UsersService`` をコンテナに追加するのではなく、まずCommand全体をコンテナに追加し、 ``UsersService`` を引数として追加する必要があります。
+これで、コマンドのコンストラクタ内でそのサービスにアクセスできるようになります。
 
 サービスの追加
 ===============

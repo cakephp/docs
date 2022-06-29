@@ -938,10 +938,8 @@ registered into the route collection::
     use Cake\Http\Middleware\CsrfProtectionMiddleware;
     use Cake\Http\Middleware\EncryptedCookieMiddleware;
 
-    $routes->scope('/', function (RouteBuilder $routes) {
-        $routes->registerMiddleware('csrf', new CsrfProtectionMiddleware());
-        $routes->registerMiddleware('cookies', new EncryptedCookieMiddleware());
-    });
+    $routes->registerMiddleware('csrf', new CsrfProtectionMiddleware());
+    $routes->registerMiddleware('cookies', new EncryptedCookieMiddleware());
 
 Once registered, scoped middleware can be applied to specific
 scopes::
