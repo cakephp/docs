@@ -75,6 +75,8 @@ deprecated:
 * ``ErrorLoggerInterface::log()``. Implement ``logException()`` instead.
 * ``ErrorLoggerInterface::logMessage()``. Implement ``logError()`` instead.
 
+The ``Error.logger`` configure value has been added instead of ``Error.errorLogger``.
+
 RequestHandlerComponent
 ------------------------
 
