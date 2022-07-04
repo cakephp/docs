@@ -34,9 +34,9 @@ options are supported:
 * ``extraFatalErrorMemory`` - int - Set to the number of megabytes to increase
   the memory limit by when a fatal error is encountered. This allows breathing
   room to complete logging or error handling.
-* ``logger`` (prior to 4.4.0 ``errorLogger``) - ``Cake\Error\ErrorLoggerInterface`` - The class responsible
-  for logging errors and unhandled exceptions. Defaults to
-  ``Cake\Error\ErrorLogger``.
+* ``logger`` (prior to 4.4.0 use ``errorLogger``) -
+  ``Cake\Error\ErrorLoggerInterface`` - The class responsible for logging 
+  errors and unhandled exceptions. Defaults to ``Cake\Error\ErrorLogger``.
 * ``errorRenderer`` - ``Cake\Error\ErrorRendererInterface`` - The class responsible
   for rendering errors. Default is chosen based on PHP SAPI.
 * ``ignoredDeprecationPaths`` - array - A list of glob compatible paths that
