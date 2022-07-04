@@ -34,7 +34,7 @@ options are supported:
 * ``extraFatalErrorMemory`` - int - Set to the number of megabytes to increase
   the memory limit by when a fatal error is encountered. This allows breathing
   room to complete logging or error handling.
-* ``errorLogger`` - ``Cake\Error\ErrorLoggerInterface`` - The class responsible
+* ``logger`` (prior to 4.4.0 ``errorLogger``) - ``Cake\Error\ErrorLoggerInterface`` - The class responsible
   for logging errors and unhandled exceptions. Defaults to
   ``Cake\Error\ErrorLogger``.
 * ``errorRenderer`` - ``Cake\Error\ErrorRendererInterface`` - The class responsible
