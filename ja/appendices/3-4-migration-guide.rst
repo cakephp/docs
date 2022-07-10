@@ -50,7 +50,7 @@ PSR-7 スタックによって廃止されているため、 非推奨になり�
 
 * ``Response::header()`` は非推奨です。代わりに ``getHeaderLine()``, ``hasHeader()`` や
   ``Response::getHeader()`` を使用してください。
-* ``Response::body()`` は非推奨です。代わりに ``Response::withBody()`` を使用してください。
+* ``Response::body()`` は非推奨です。代わりに ``Response::withStringBody()`` を使用してください。
 * ``Response::statusCode()`` は非推奨です。
   代わりに ``Response::getStatusCode()`` を使用してください。
 * ``Response::httpCodes()`` このメソッドは使われなくなりました。
