@@ -50,7 +50,7 @@ either overlap the PSR-7 methods, or are made obsolete by the PSR-7 stack:
 
 * ``Response::header()`` is deprecated. Use ``getHeaderLine()``, ``hasHeader()`` or
   ``Response::getHeader()`` instead.
-* ``Response::body()`` is deprecated. Use ``Response::withBody()`` instead.
+* ``Response::body()`` is deprecated. Use ``Response::withStringBody()`` instead.
 * ``Response::statusCode()`` is deprecated. Use ``Response::getStatusCode()`` instead.
 * ``Response::httpCodes()`` This method should no longer be used. CakePHP now supports all
   standards recommended status codes.
