@@ -125,6 +125,7 @@ TestSuite
 
 - ``TestSuite`` was removed. Users should use environment variables to customize
   unit test settings instead.
+- ``TestListenerTrait`` was removed. PHPUnit dropped support for these listeners.
 
 Validation
 ----------
