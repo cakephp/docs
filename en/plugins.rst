@@ -117,7 +117,7 @@ Plugins are loaded in your application's ``bootstrap()`` function::
     }
 
 If you just want to use helpers, behaviors or components from a plugin you do
-not need to explicitly a plugin yet it's recommended to always do so.
+not need to explicitly load a plugin yet it's recommended to always do so.
 
 There is also a handy shell command to enable the plugin.  Execute the following
 line:
