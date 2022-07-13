@@ -93,9 +93,9 @@ Additionally, you will need to tell Composer to refresh its autoloading cache:
 Loading a Plugin
 ================
 
-If you want to use a plugin's routes, console commands, middleware, or event
-listeners you will need to load the plugin. Plugins are loaded in your
-application's ``bootstrap()`` function::
+If you want to use a plugin's routes, console commands, middlewares, event
+listeners, templates or webroot assets you will need to load the plugin. 
+Plugins are loaded in your application's ``bootstrap()`` function::
 
     // In src/Application.php
     use Cake\Http\BaseApplication;
@@ -117,7 +117,7 @@ application's ``bootstrap()`` function::
     }
 
 If you just want to use helpers, behaviors or components from a plugin you do
-not need to load a plugin.
+not need to explicitly load a plugin yet it's recommended to always do so.
 
 There is also a handy shell command to enable the plugin.  Execute the following
 line:
