@@ -44,7 +44,7 @@ You can configure this header with the ``hsts`` option::
             // How long the header value should be cached for.
             'maxAge' => 60 * 60 * 24 * 365,
             // should this policy apply to subdomains?
-            'includeSubdomains' => true,
+            'includeSubDomains' => true,
             // Should the header value be cacheable in google's HSTS preload
             // service? While not part of the spec it is widely implemented.
             'preload' => true,
