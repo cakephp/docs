@@ -12,7 +12,7 @@ some knowledge about git and an existing install of ``git`` and ``composer``
 this process will take care about library dependencies and file and folder
 permissions.
 
-Be aware that when deploying via FTP you will at least have to fix file and
+Be aware that when deploying via FTP you will have to fix file and
 folder permissions.
 
 You can also use this deployment technique to setup a staging or demo-server
@@ -31,8 +31,8 @@ features:
   disabled.
 * Core CakePHP caches duration are defaulted to 365 days, instead of 10 seconds
   as in development.
-* Error views are less informative, and display generic error messages instead
-  of detailed error messages with stack traces.
+* Error views are less informative, and generic error pages are displayed
+  instead of detailed error messages with stack traces.
 * PHP Warnings and Errors are not displayed.
 
 In addition to the above, many plugins and application extensions use ``debug``
@@ -118,6 +118,18 @@ copied instead of being symlinked. You can also explicitly copy the directories
 using::
 
     bin/cake plugin assets copy
+
+CakePHP uses ``assert()`` internally to provide runtime type checking and
+provide better error messages during development. You can have PHP skip these
+assertions by updating your ``php.ini`` to include:
+
+.. code-block:: ini
+   ; Turn off assert() code generation.
+   zend.assertions: -1
+
+Skipping code generation for ``assert()`` will yield faster runtime performance,
+and is recommended for applications that have good test coverage or that are
+using a static analyzer.
 
 Deploying an update
 ===================
