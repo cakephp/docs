@@ -152,11 +152,11 @@ New Features
 Improved type checking
 -----------------------
 
-CakePHP 5.0 leverages the expanded type system feature available in PHP8.1+.
+CakePHP 5 leverages the expanded type system feature available in PHP8.1+.
 CakePHP also uses ``assert()`` to provide improved error messages and additional
-type soundness. In production mode you can configure PHP to skip generating
+type soundness. In production mode, you can configure PHP to not generate
 code for ``assert()`` yielding improved application performance. See the
-:ref:`symlink-assets` for how to do this..
+:ref:`symlink-assets` for how to do this.
 
 Database
 --------

@@ -125,7 +125,7 @@ assertions by updating your ``php.ini`` to include:
 
 .. code-block:: ini
    ; Turn off assert() code generation.
-   zend.assertions: -1
+   zend.assertions = -1
 
 Skipping code generation for ``assert()`` will yield faster runtime performance,
 and is recommended for applications that have good test coverage or that are
