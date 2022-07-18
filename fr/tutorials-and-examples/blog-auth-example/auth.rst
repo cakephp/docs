@@ -99,7 +99,7 @@ classe obtenue grâce à l'utilitaire de génération de code fourni par CakePHP
             if ($this->request->is('post')) {
                 $user = $this->Users->patchEntity($user, $this->request->getData());
                 if ($this->Users->save($user)) {
-                    $this->Flash->success(__("L\'utilisateur a été sauvegardé."));
+                    $this->Flash->success(__("L'utilisateur a été sauvegardé."));
                     return $this->redirect(['action' => 'add']);
                 }
                 $this->Flash->error(__("Impossible d'ajouter l\'utilisateur."));
