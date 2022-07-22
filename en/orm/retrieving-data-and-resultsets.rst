@@ -514,6 +514,12 @@ You can eager load associations as deep as you like::
         'Shops.Managers'
     ]);
 
+Which is equivalent to calling::
+
+    $query = $products->find()->contain([
+        'Shops' => ['Cities.Countries', 'Managers']
+    ]);
+
 You can select fields from all associations with multiple ``contain()``
 statements::
 
