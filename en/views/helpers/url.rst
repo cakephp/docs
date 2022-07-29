@@ -41,6 +41,17 @@ URL with extension::
 
     // Output
     /posts/list.rss
+    
+URL with prefix::
+
+    echo $this->Url->build([
+        'controller' => 'Posts',
+        'action' => 'list',
+        'prefix' => 'Admin',
+    ]);
+
+    // Output
+    /admin/posts/list  
 
 URL (starting with '/') with the full base URL prepended::
 
