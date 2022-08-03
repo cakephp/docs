@@ -210,7 +210,7 @@ Dans votre ``UsersController``, ajoutez le code suivant::
         $this->request->allowMethod(['get', 'post']);
         $result = $this->Authentication->getResult();
         // indépendamment de POST ou GET, rediriger si l'utilisateur est connecté
-        if ($result->isValid()) {
+        if ($result && $result->isValid()) {
             // rediriger vers /articles après la connexion réussie
             $redirect = $this->request->getQuery('redirect', [
                 'controller' => 'Articles',
@@ -286,7 +286,7 @@ Ajoutez l'action de logout à la classe ``UsersController``::
     {
         $result = $this->Authentication->getResult();
         // indépendamment de POST ou GET, rediriger si l'utilisateur est connecté
-        if ($result->isValid()) {
+        if ($result && $result->isValid()) {
             $this->Authentication->logout();
             return $this->redirect(['controller' => 'Users', 'action' => 'login']);
         }
