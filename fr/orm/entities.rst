@@ -68,9 +68,9 @@ La méthode recommandée pour récupérer une nouvelle entity est d'appeler
 
     use Cake\ORM\Locator\LocatorAwareTrait;
 
-    $article = $this->fetchTable(Articles)->newEmptyEntity();
+    $article = $this->fetchTable('Articles')->newEmptyEntity();
 
-    $article = $this->fetchTable(Articles)->newEntity([
+    $article = $this->fetchTable('Articles')->newEntity([
         'id' => 1,
         'title' => 'New Article',
         'created' => new DateTime('now')
