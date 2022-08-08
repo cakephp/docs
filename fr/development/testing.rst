@@ -450,7 +450,7 @@ PHPUnit et votre fichier ``phpunit.xml`` devait contenir:
         <listener
         class="\Cake\TestSuite\Fixture\FixtureInjector">
             <arguments>
-                <object class="\Cake\TestSuite\Fixture\PHPUnitExtension" />
+                <object class="\Cake\TestSuite\Fixture\FixtureManager" />
             </arguments>
         </listener>
     </listeners>
