@@ -1079,15 +1079,12 @@ column Types::
     TypeFactory::map('json', 'Cake\Database\Type\JsonType');
 
     // In src/Model/Table/UsersTable.php
-    use Cake\Database\Schema\TableSchemaInterface;
 
     class UsersTable extends Table
     {
-        protected function _initializeSchema(TableSchemaInterface $schema): TableSchemaInterface
+        public function initialize(): void
         {
-            $schema->setColumnType('preferences', 'json');
-
-            return $schema;
+            $this->getSchema()->setColumnType('preferences', 'json');
         }
     }
 
