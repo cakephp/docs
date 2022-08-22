@@ -174,9 +174,9 @@ argument. For example::
 
     class Article extends Entity
     {
-        protected function _getTitle()
+        protected function _getTitle($title)
         {
-            return strtoupper($this->title);
+            return strtoupper($title);
         }
     }
 
