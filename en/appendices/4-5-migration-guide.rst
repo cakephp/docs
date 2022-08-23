@@ -37,3 +37,11 @@ Http
 
 - Calling ``ServerRequest::is()`` with an unknown detector will now raise an
   exception.
+
+Routing
+-------
+
+- The ``_ssl`` option for ``Router::url()`` has been deprecated. Use ``_https``
+  instead. HTTPs is no longer entirely based on ``ssl``, and this rename aligns
+  the CakePHP parameters with the broader web.
+
