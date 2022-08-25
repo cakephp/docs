@@ -13,7 +13,7 @@ composer を使用して認証プラグインをインストール
 
 .. code-block:: console
 
-    composer require "cakephp/authentication:^2.0"
+    composer require "cakephp/authentication:^2.*"
 
 パスワードハッシュ化の追加
 --------------------------
