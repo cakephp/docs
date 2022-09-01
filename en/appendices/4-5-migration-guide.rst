@@ -38,6 +38,12 @@ Http
 - Calling ``ServerRequest::is()`` with an unknown detector will now raise an
   exception.
 
+ORM
+---
+
+- ``QueryInterface::repository()`` is deprecated. Use ``setRepository()``
+  instead.
+
 Routing
 -------
 
