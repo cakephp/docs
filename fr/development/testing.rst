@@ -1,21 +1,21 @@
 Testing
 #######
 
-CakePHP fournit un support de test intégré compréhensible. CakePHP permet
+CakePHP fournit un support de test intégré complet. CakePHP permet
 l'intégration de `PHPUnit <https://phpunit.de>`_. En plus de toutes les
 fonctionnalités offertes par PHPUnit, CakePHP offre quelques fonctionnalités
 supplémentaires pour faciliter le test. Cette section va couvrir l'installation
-de PHPUnit, comment commencer avec le Test Unitaire, et comment vous pouvez
-utiliser les extensions que CakePHP offre.
+de PHPUnit, comment démarrer avec les Tests Unitaires, et comment utiliser les
+extensions offertes par CakePHP.
 
 Installer PHPUnit
 =================
 
-CakePHP utilise PHPUnit comme framework de test sous-jacent. PHPUnit est le
-standard de-facto pour le test unitaire dans PHP. Il offre un ensemble de
+CakePHP utilise PHPUnit comme framework de test sous-jacent. PHPUnit est *de
+facto* le standard des tests unitaires en PHP. Il offre un ensemble de
 fonctionnalités profondes et puissantes pour s'assurer que votre code fait ce
-que vous pensez qu'il doit faire. PHPUnit peut être installé avec le `PHAR
-package <https://phpunit.de/#download>`__ ou avec
+que vous pensez qu'il fait. PHPUnit peut être installé soit avec le `package PHAR
+<https://phpunit.de/#download>`__, soit avec
 `Composer <https://getcomposer.org>`_.
 
 Installer PHPUnit avec Composer
@@ -27,8 +27,9 @@ Pour installer PHPUnit avec Composer:
 
     $ php composer.phar require --dev phpunit/phpunit:"^8.5"
 
-Ceci va ajouter la dépendance à la section ``require-dev`` de votre
-``composer.json``, et ensuite installer PHPUnit avec vos autres dépendances.
+Cela va ajouter la dépendance à la section ``require-dev`` de votre
+``composer.json``, et ensuite installer PHPUnit au même endroit que vos autres
+dépendances.
 
 Vous pouvez maintenant lancer PHPUnit en utilisant:
 
@@ -63,9 +64,9 @@ lancer vos tests:
 Tester la Configuration de la Base de Données
 =============================================
 
-Souvenez-vous qu'il faut avoir debug activé dans votre fichier
-**config/app_local.php** avant de lancer des tests. Vous devrez aussi vous assurer
-d'ajouter une configuration de base de données ``test`` dans **config/app_local.php**.
+Pensez à activer le débogage dans votre fichier **config/app_local.php** avant
+de lancer des tests. Vous devrez aussi vous assurer d'avoir ajouté une
+configuration de base de données ``test`` dans **config/app_local.php**.
 Cette configuration est utilisée par CakePHP pour les tables de fixture et les
 données::
 
@@ -83,13 +84,14 @@ données::
 .. note::
 
     C'est une bonne idée de faire une base de données de test différente de
-    votre base de données actuelle. Cela évitera toute erreur embarrassante
-    pouvant arriver plus tard.
+    votre base de données actuelle. Cela évitera les erreurs embarrassantes qui
+    ne manqueront pas d'arriver.
 
 Vérifier la Configuration Test
 ==============================
 
-Après avoir installé PHPUnit et configuré la configuration de la base de données de ``test``, vous pouvez vous assurer que vous êtes prêt à écrire et lancer
+Après avoir installé PHPUnit et configuré la configuration de la base de données
+de ``test``, vous pouvez vous assurer que vous êtes prêt à écrire et lancer
 vos propres tests en lançant un de ceux présents dans le cœur:
 
 .. code-block:: console
@@ -100,9 +102,9 @@ vos propres tests en lançant un de ceux présents dans le cœur:
     # Pour un PHPUnit installé avec Composer
     $ vendor/bin/phpunit
 
-Ce qui est au-dessus va lancer tous les tests que vous avez, ou vous indiquer
+Ceci va lancer tous les tests que vous avez, ou vous indiquer
 qu'aucun test n'a été lancé. Pour lancer un test spécifique, vous pouvez fournir
-le chemin au test en paramètre de PHPUnit. Par exemple, si vous aviez un cas
+le chemin du test en paramètre à PHPUnit. Par exemple, si vous aviez un cas
 de test pour la classe ArticlesTable, vous pourriez le lancer avec:
 
 .. code-block:: console
@@ -125,7 +127,7 @@ conventions. En ce qui concerne les tests:
 
 #. Les fichiers PHP contenant les tests doivent être dans votre répertoire
    ``tests/TestCase/[Type]``.
-#. Les noms de ces fichiers doivent finir par **Test.php** plutôt que juste
+#. Les noms de ces fichiers doivent finir par **Test.php** et pas seulement
    **.php**.
 #. Les classes contenant les tests doivent étendre ``Cake\TestSuite\TestCase``,
    ``Cake\TestSuite\IntegrationTestCase`` ou ``\PHPUnit\Framework\TestCase``.
@@ -141,7 +143,7 @@ Créer Votre Premier Cas de Test
 ===============================
 
 Dans l'exemple suivant, nous allons créer un cas de test pour une méthode de
-helper très simple. Le helper que nous allons tester sera le formatage d'une
+helper très simple. Le helper que nous allons tester fomatera une
 barre de progression HTML. Notre helper ressemblera à cela::
 
     namespace App\View\Helper;
@@ -160,11 +162,11 @@ barre de progression HTML. Notre helper ressemblera à cela::
         }
     }
 
-C'est un exemple très simple, mais ce sera utile pour montrer comment vous
-pouvez créer un cas de test simple. Après avoir créé et sauvegardé notre
+C'est un exemple très simple, mais ce sera utile pour montrer comment
+créer un cas de test simple. Après avoir créé et sauvegardé notre
 helper, nous allons créer le fichier de cas de tests dans
 **tests/TestCase/View/Helper/ProgressHelperTest.php**. Dans ce fichier, nous
-allons commencer avec ce qui suit::
+allons commencer avec ceci::
 
     namespace App\Test\TestCase\View\Helper;
 
@@ -188,9 +190,9 @@ allons commencer avec ce qui suit::
 Nous compléterons ce squelette dans une minute. Nous avons ajouté deux méthodes
 pour commencer. Tout d'abord ``setUp()``. Cette méthode est appelée avant chaque
 méthode de *test* dans une classe de cas de test.
-Les méthodes de configuration devraient initialiser les objets souhaités
-pour le test, et faire toute configuration souhaitée. Dans notre configuration
-nous ajouterons ce qui suit::
+Ces méthodes d'initialisation devraient initialiser les objets dont nous aurons
+besoin pour le test, et faire toute configuration nécessaire. Dans notre méthode
+d'initialisation, nous allons ajouter ce code::
 
     public function setUp(): void
     {
@@ -200,11 +202,11 @@ nous ajouterons ce qui suit::
     }
 
 Appeler la méthode parente est importante dans les cas de test, puisque
-``TestCase::setUp()`` fait un certain nombre de choses comme fabriquer les
+``TestCase::setUp()`` fait un certain nombre de choses comme sauvegarder les
 valeurs dans :php:class:`~Cake\\Core\\Configure` et stocker les chemins dans
 :php:class:`~Cake\\Core\\App`.
 
-Ensuite, nous allons remplir les méthodes de test. Nous utiliserons quelques
+Ensuite, nous allons remplir la méthode de test. Nous utiliserons quelques
 assertions pour nous assurer que notre code crée la sortie que nous attendons::
 
     public function testBar(): void
@@ -217,35 +219,35 @@ assertions pour nous assurer que notre code crée la sortie que nous attendons::
         $this->assertStringContainsString('width: 33%', $result);
     }
 
-Le test ci-dessus est simple mais montre le potentiel bénéfique de l'utilisation
+C'est un test simple mais il montre le bénéfice potentiel de l'utilisation
 des cas de test. Nous utilisons ``assertStringContainsString()`` pour nous assurer que notre
 helper retourne une chaîne qui contient le contenu que nous attendons. Si le
 résultat ne contient pas le contenu attendu le test sera un échec, et nous
 savons que notre code est incorrect.
 
 En utilisant les cas de test, vous pouvez décrire la relation entre un ensemble
-d'entrées connues et leur sortie attendue. Cela vous aide à être plus confiant
-sur le code que vous écrivez puisque vous pouvez vérifier que le code que vous
-écrivez remplit les attentes et les assertions que vos tests font. De plus,
-puisque les tests sont du code, ils peuvent être re-lancés dès que vous faîtes
-un changement. Cela évite la création de nouveaux bugs.
+d'entrées connues et leur sortie attendue. Cela vous rend plus confiant dans
+le code que vous écrivez puisque vous pouvez vérifier que le code que vous avez
+déjà écrit remplit les attentes et les assertions vérifiées dans vos tests. De
+plus, puisque les tests sont du code, ils peuvent être re-lancés à chaque
+changement. Cela évite la création de nouveaux bugs.
 
 .. note::
 
     L'EventManager est remis à blanc pour chaque méthode de test. Cela signifie
-    que lorsque vous lancez plusieurs tests ensemble, vous perdez les écouteurs
-    d'events qui ont été enregistrés dans config/bootstrap.php puisque le
-    bootstrap n'est exécuté qu'une seule fois.
+    que lorsque vous lancez plusieurs tests en une fois, vous perdez les
+    écouteurs d'events qui ont été enregistrés dans config/bootstrap.php puisque
+    le bootstrap n'est exécuté qu'une seule fois.
 
 .. _running-tests:
 
 Lancer les Tests
 ================
 
-Une fois que vous avez installé PHPUnit et que quelques cas de tests sont
-écrits, vous pouvez lancer les cas de test très fréquemment. C'est une
-bonne idée de lancer les tests avant de committer tout changement pour aider
-à s'assurer que vous n'avez rien cassé.
+Une fois que vous aurez installé PHPUnit et écrit quelques cas de tests, vous
+voudrez probablement lancer les cas de test très fréquemment. C'est une
+bonne idée de lancer les tests avant de committer chaque changement pour aider
+à vous assurer que vous n'avez rien cassé.
 
 En utilisant ``phpunit``, vous pouvez lancer les tests de votre application.
 Pour lancer vos tests d'application, vous pouvez simplement lancer:
@@ -256,7 +258,8 @@ Pour lancer vos tests d'application, vous pouvez simplement lancer:
 
     php phpunit.phar
 
-Si vous avez cloné la `source de CakePHP à partir de GitHub <https://github.com/cakephp/cakephp>`__
+Si vous avez cloné le `code source de CakePHP à partir de GitHub
+<https://github.com/cakephp/cakephp>`__
 et que vous souhaitez exécuter les tests unitaires de CakePHP, n'oubliez pas
 d'exécuter la commande suivante de ``Composer`` avant de lancer ``phpunit`` pour
 que toutes les dépendances soient installées:
@@ -266,8 +269,8 @@ que toutes les dépendances soient installées:
     composer install
 
 À partir du répertoire racine de votre application. Pour lancer les tests pour
-un plugin qui fait parti de la source de votre application, d'abord faîtes la
-commande ``cd`` vers le répertoire du plugin, ensuite utilisez la commande
+un plugin qui fait partie de la source de votre application, appliquez d'abord
+la commande ``cd`` vers le répertoire du plugin, puis utilisez la commande
 ``phpunit`` qui correspond à la façon dont vous avez installé phpunit:
 
 .. code-block:: console
@@ -288,12 +291,12 @@ projet dans un répertoire séparé et installer ses dépendances:
     php ~/composer.phar install
     php ~/phpunit.phar
 
-Filtrer les Cas de Test (TestCase)
-----------------------------------
+Filtrer les Cas de Test
+-----------------------
 
-Quand vous avez des cas de test plus larges, vous pouvez lancer un
-sous-ensemble de méthodes de test quand vous essayez de travailler sur un
-cas unique d'échec. Avec l'exécuteur CLI vous pouvez utiliser une option pour
+Quand vous avez de nombreux cas de test et que vous travaillez sur un seul test
+qui échoue, vous préférerez lancer seulement une partie des méthodes de test.
+Avec l'exécuteur en ligne de commande vous pouvez utiliser une option pour
 filtrer les méthodes de test:
 
 .. code-block:: console
@@ -306,18 +309,18 @@ casse pour filtrer les méthodes de test à lancer.
 Générer une Couverture de Code (Code Coverage)
 ----------------------------------------------
 
-Vous pouvez générer un rapport de couverture de code en une ligne de
-commande en utilisant les outils de couverture de code intégrés à PHPUnit.
-PHPUnit va générer un ensemble de fichiers en HTML statique contenant les
-résultats de la couverture. Vous pouvez générer une couverture pour un cas de
-test en faisant ce qui suit:
+Vous pouvez générer un rapport de couverture de code depuis la ligne de commande
+en utilisant les outils de couverture de code intégrés à PHPUnit.
+PHPUnit va générer un ensemble de fichiers statiques en HTML contenant les
+résultats de couverture. Vous pouvez générer un rapport de couverture pour un
+seul cas de test de la façon suivante:
 
 .. code-block:: console
 
     $ phpunit --coverage-html webroot/coverage tests/TestCase/Model/Table/ArticlesTableTest
 
-Cela mettra la couverture des résultats dans le répertoire webroot de votre
-application. Vous pourrez voir les résultats en allant à
+Cela placera le résultat de couverture de code dans le répertoire webroot de
+votre application. Vous pourrez voir les résultats en consultant
 ``http://localhost/votre_app/coverage``.
 
 Vous pouvez aussi utiliser ``phpdbg`` pour générer la couverture des résultats à
@@ -331,78 +334,79 @@ des rapports de couverture:
 Combiner les Suites de Test pour les Plugins
 --------------------------------------------
 
-Souvent, votre application sera composé de plusieurs plugins. Dans ces
+Souvent, votre application sera composée de plusieurs plugins. Dans ces
 situations, il peut être assez fastidieux d'effectuer des tests pour chaque
-plugin. Vous pouvez faire des tests pour chaque plugin qui compose votre
-application en ajoutant une section ``<testsuite>`` supplémentaire au fichier
-``phpunit.xml.dist`` de votre application:
+plugin. Vous pouvez faire lancer des tests pour chaque plugin qui compose votre
+application en ajoutant une section ``<testsuite>`` supplémentaire dans le
+fichier ``phpunit.xml.dist`` de votre application:
 
 .. code-block:: xml
 
     <testsuites>
-        <testsuite name="App Test Suite">
+        <testsuite name="app">
             <directory>./tests/TestCase</directory>
         </testsuite>
 
         <!-- Ajouter vos plugins -->
-        <testsuite name="Forum plugin">
-            <directory>./plugins/Forum/tests/TestCase</directory>
+        <testsuite name="forum">
+            <directory>./plugins/Forum/tests/TestCase/</directory>
         </testsuite>
     </testsuites>
 
-Les tests supplémentaires ajoutés à l'élément ``<testsuites>`` seront exécutés
-automatiquement quand quand vous utiliserez ``phpunit``.
+Les suites de tests supplémentaires ajoutées à l'élément ``<testsuites>`` seront
+exécutées automatiquement quand vous utiliserez ``phpunit``.
 
-Si vous utilisez ``<testsuites>`` pour utiliser les fixtures à partir des
-plugins que vous avez installé avec composer, le fichier ``composer.json`` du
-plugin doit ajouter le namespace de la fixture à la section autoload. Exemple::
+Si vous vous servez de ``<testsuites>`` pour utiliser des fixtures à partir de
+plugins que vous avez installés avec composer, le fichier ``composer.json`` du
+plugin doit ajouter le namespace de la fixture dans la section autoload.
+Par exemple::
 
-    "autoload": {
+    "autoload-dev": {
         "psr-4": {
-            "PluginName\\Test\\Fixture\\": "tests\\Fixture"
+            "PluginName\\Test\\Fixture\\": "tests/Fixture/"
         }
     },
 
-Les Callbacks du Cycle de Vie des Cas de Test
-=============================================
+Callbacks du Cycle de Vie des Cas de Test
+=========================================
 
-Les cas de Test ont un certain nombre de callbacks de cycle de vie que vous
-pouvez utiliser quand vous faîtes les tests:
+Les cas de test de nombreux callbacks que vous pouvez utiliser quand pendant les
+tests:
 
 * ``setUp`` est appelé avant chaque méthode de test. Doit être utilisé pour
-  créer les objets qui vont être testés, et initialiser toute donnée pour le
-  test. Toujours se rappeler d'appeler ``parent::setUp()``.
-* ``tearDown`` est appelé après chaque méthode de test. Devrait être utilisé
-  pour nettoyer une fois que le test est terminé. Toujours se rappeler
-  d'appeler ``parent::tearDown()``.
-* ``setupBeforeClass`` est appelé une fois avant que les méthodes de test
-  aient commencées dans un cas. Cette méthode doit être *statique*.
-* ``tearDownAfterClass`` est appelé une fois après que les méthodes de test
-  ont commencé dans un cas. Cette méthode doit être *statique*.
+  créer les objets qui vont être testés, et initialiser les données pour le
+  test. Rappelez-vous de toujours appeler ``parent::setUp()``.
+* ``tearDown`` est appelé après chaque méthode de test. Doit être utilisé pour
+  tout nettoyer une fois que le test est terminé. Rappelez-vous de toujours
+  appeler ``parent::tearDown()``.
+* ``setupBeforeClass`` est appelé une fois dans chaque cas de test avant que les
+  méthodes de test aient démarré. Cette méthode doit être *statique*.
+* ``tearDownAfterClass`` est appelé une fois dans chaque cas de test après que
+  les méthodes de test aient démarré. Cette méthode doit être *statique*.
 
 .. _test-fixtures:
 
 Fixtures
 ========
 
-Quand on teste du code qui dépend de models et d'une base de données, on
-peut utiliser les **fixtures** comme une façon de créer un état initial pour les
-tests de votre application. En utilisant les données de fixture vous réduiser
-les étapes de configuration répétitives dans vos tests. Les fixtures sont bien
-adaptées pour des données communes, ou partagées entre de nombreux tests, voire
-tous. Les données qui ne sont utiles que dans quelques tests devraient plutôt
-être crées dans les tests qui en ont besoin.
+Pour tester du code qui dépend de models et d'une base de données, il est
+possible d'utiliser les **fixtures** comme une façon de créer un état initial
+pour les tests de votre application. En utilisant des données de fixture, vous
+réduisez des étapes de configuration répétitives dans vos tests. Les fixtures
+sont bien adaptées pour des données qui sont communes, ou partagées entre de
+nombreux tests, voire tous. Les données qui ne sont utiles que dans quelques
+tests devraient plutôt être créées dans les tests qui en ont besoin.
 
 CakePHP utilise la connexion nommée ``test`` dans votre fichier de configuration
-**config/app.php**. Si la connexion n'est pas utilisable, une exception
-sera levée et vous ne pourrez pas utiliser les fixtures de la base de données.
+**config/app.php**. Si cette connexion n'est pas utilisable, une exception
+sera levée et vous ne pourrez pas utiliser les fixtures de base de données.
 
-CakePHP effectue ce qui suit pendant le déroulement d'un test:
+CakePHP accomplit les étapes suivantes pendant le déroulement d'un test:
 
-#. Crée les tables pour chacune des fixtures nécessaires.
-#. Remplit les tables avec les données.
-#. Lance les méthodes de test.
-#. Vide les tables de fixture.
+#. Création des tables pour chacune des fixtures nécessaires.
+#. Remplissage des tables avec des données.
+#. Lancement des méthodes de test.
+#. Vidage des tables de fixture.
 
 Le schéma pour les fixtures est créé au début d'un test par des migrations ou un
 dump SQL.
@@ -411,21 +415,22 @@ Connexions de Test
 ------------------
 
 Par défaut, CakePHP va faire un alias pour chaque connexion de votre
-application. Chaque connexion définie dans le bootstrap de votre application qui
-ne commence pas par ``test_``, va avoir un alias avec le prefix ``test_`` créé.
-Les alias de connexion assurent que vous n'utiliserez pas accidentellement la
-mauvaise connexion dans les cas de test. Les alias de connexion sont
-transparents pour le reste de votre application. Par exemple, si vous utilisez
-la connexion 'default', à la place, vous obtiendrez la connexion ``test`` dans
-les cas de test. Si vous utilisez la connexion 'replica', la suite de tests va
-tenter d'utiliser 'test_replica'.
+application. Pour chaque connexion définie dans le bootstrap de votre
+application qui ne commence pas par ``test_``, un alias va être créé avec le
+préfixe ``test_``.
+Le fait d'ajouter des alias de connexions garantit que vous n'utiliserez pas
+accidentellement la mauvaise connexion dans les cas de test. Les alias de
+connexions sont transparents pour le reste de votre application. Par exemple, si
+vous utilisez la connexion 'default', vous obtiendrez à la place la connexion
+``test`` dans les cas de test. Si vous utilisez la connexion 'replica', la suite
+de tests tentera d'utiliser 'test_replica'.
 
 .. _fixture-phpunit-configuration:
 
 Configuration de PHPUnit
 ------------------------
 
-Avant de pouvoir utiliser les fixtures vous devez vous assurer que votre
+Avant d'utiliser les fixtures vous devez vous assurer que votre
 ``phpunit.xml`` contienne l'extension fixture:
 
 .. code-block:: xml
@@ -531,7 +536,7 @@ Gestionnaires d'Etat des Fixtures
 ---------------------------------
 
 Par défaut, CakePHP réinitialise l'état des fixtures à la fin de chaque test en
-tronquant toutes les tabes dans la base de données. Cette opération peut devenir
+tronquant toutes les tables dans la base de données. Cette opération peut devenir
 coûteuse quand votre application grossit. Si vous utilisez
 ``TransactionStrategy``, chaque méthode de test sera lancée à l'intérieur d'une
 transaction suivie d'un rollback à la fin du test. Cela peut améliorer vos
@@ -549,9 +554,8 @@ du test::
     class ArticlesTableTest extends TestCase
     {
         /**
-         * Crée la stratégie de fixation utilisée pour ce cas de test.
-         * Vous pouvez utiliser une classe/un trait de base pour modifier
-         * plusieurs classes.
+         * Crée la stratégie de fixtures utilisée pour ce cas de test.
+         * Vous pouvez utiliser une classe/un trait pour modifier plusieurs classes.
          */
         protected function getFixtureStrategy(): FixtureStrategyInterface
         {
@@ -583,22 +587,22 @@ Créez un fichier nommé **ArticlesFixture.php** dans votre répertoire
 
           public $records = [
               [
-                  'title' => 'First Article',
-                  'body' => 'First Article Body',
+                  'title' => 'Premier Article',
+                  'body' => 'Contenu du premier Article',
                   'published' => '1',
                   'created' => '2007-03-18 10:39:23',
                   'modified' => '2007-03-18 10:41:31'
               ],
               [
-                  'title' => 'Second Article',
-                  'body' => 'Second Article Body',
+                  'title' => 'Deuxième Article',
+                  'body' => 'Contenu du deuxième Article',
                   'published' => '1',
                   'created' => '2007-03-18 10:41:23',
                   'modified' => '2007-03-18 10:43:31'
               ],
               [
-                  'title' => 'Third Article',
-                  'body' => 'Third Article Body',
+                  'title' => 'Troisième Article',
+                  'body' => 'Contenu du troisième Article',
                   'published' => '1',
                   'created' => '2007-03-18 10:43:23',
                   'modified' => '2007-03-18 10:45:31'
@@ -608,25 +612,25 @@ Créez un fichier nommé **ArticlesFixture.php** dans votre répertoire
 
 .. note::
 
-    Il est recommandé de ne pas ajouter manuellement les valeurs aux colonnes
-    qui s'incrémentent automatiquement car cela interfère avec la génération
+    Il est recommandé de ne pas ajouter manuellement des valeurs dans les
+    colonnesavec autoincrément car cela interfère avec la génération
     de séquence dans PostgreSQL et SQLServer.
 
 La propriété ``$connection`` définit la source de données que la fixture
 va utiliser. Si votre application utilise plusieurs sources de données, vous
 devriez faire correspondre les fixtures avec les sources de données du model,
-mais préfixé avec ``test_``.
+en ajoutant le préfixe ``test_``.
 Par exemple, si votre model utilise la source de données ``mydb``, votre
 fixture devra utiliser la source de données ``test_mydb``. Si la connexion
-``test_mydb`` n'existe pas, vos models vont utiliser la source de données
-``test`` par défaut. Les sources de données de fixture doivent être préfixées
-par ``test`` pour réduire la possibilité de trucher accidentellement toutes
-les données de votre application quand vous lancez des tests.
+``test_mydb`` n'existe pas, vos models utiliseront la source de données
+``test`` par défaut. Les sources de données des fixtures doivent être préfixées
+par ``test`` pour réduire la possibilité de tronquer accidentellement toutes
+les données de votre application en lançant vos tests.
 
-Nous pouvons définir un ensemble d'enregistrements qui seront remplis après que
-la table de fixture est créée. Le format est assez simple, ``$records`` est un
-tableau d'enregistrements. Chaque item dans ``$records`` doit être
-un enregistrement (une seule ligne). A l'intérieur de chaque ligne, il doit y
+Nous pouvons définir un ensemble d'enregistrements qui seront insérés après la
+création de la table de fixture. Le format parle de lui-même. ``$records`` est
+un tableau d'enregistrements. Chaque item dans ``$records`` correspond à
+un enregistrement (une seule ligne). À l'intérieur de chaque ligne, il doit y
 avoir un tableau associatif des colonnes et valeurs pour la ligne. Gardez juste
 à l'esprit que tous les enregistrements dans le tableau ``$records`` doivent
 avoir les mêmes clés car les lignes sont insérées en une seule requête SQL.
@@ -654,8 +658,8 @@ méthode ``init()`` des fixtures::
         {
             $this->records = [
                 [
-                    'title' => 'First Article',
-                    'body' => 'First Article Body',
+                    'title' => 'Premier Article',
+                    'body' => 'Contenu du premier Article',
                     'published' => '1',
                     'created' => date('Y-m-d H:i:s'),
                     'modified' => date('Y-m-d H:i:s'),
@@ -669,35 +673,22 @@ méthode ``init()`` des fixtures::
     Quand vous surchargez ``init()``, rappelez-vous juste de toujours appeler
     ``parent::init()``.
 
-Charger les Fixtures dans vos Tests (TestCase)
-----------------------------------------------
+Charger les Fixtures dans vos Tests
+-----------------------------------
 
-Après avoir créé vos fixtures, vous pouvez les utiliser dans vos cas de test.
-Dans chaque cas de test vous devriez charger les fixtures dont vous aurez
-besoin. Vous devriez charger une fixture pour chaque model qui aura une requête
-lancée contre elle. Pour charger les fixtures, vous définissez la propriété
+Une fois que vous avez créé vos fixtures, vous pouvez les utiliser dans vos cas
+de test. Vous devez charger dans chaque cas de test les fixtures dont vous aurez
+besoin. Vous devriez charger une fixture pour chaque model sur lequel une
+requête sera exécutée. Pour charger les fixtures, définissez la propriété
 ``$fixtures`` dans votre model::
 
     class ArticleTest extends TestCase
     {
-        protected $fixtures = ['app.articles', 'app.comments'];
+        protected $fixtures = ['app.Articles', 'app.Comments'];
     }
-
-Ce qui est au-dessus va charger les fixtures d'Article et de Comment à partir
-du répertoire de fixture de l'application. Vous pouvez aussi charger les
-fixtures à partir du cœur de CakePHP ou des plugins::
-
-    class ArticlesTest extends TestCase
-    {
-        public $fixtures = ['plugin.DebugKit.articles', 'plugin.MyVendorName/MyPlugin.messages', 'core.comments'];
-    }
-
-Utiliser le préfixe ``core`` va charger les fixtures à partir de CakePHP, et
-utiliser un nom de plugin en préfixe chargera la fixture à partir d'un plugin
-nommé.
 
 À partir de 4.1.0 vous pouvez utiliser ``getFixtures()`` pour définir votre
-liste de fixtures avec une méthode::
+liste de fixtures depuis une méthode::
 
     public function getFixtures(): array
     {
@@ -705,46 +696,62 @@ liste de fixtures avec une méthode::
             'app.Articles',
             'app.Comments',
         ];
-
     }
 
-Vous pouvez charger les fixtures dans les sous-répertoires.
-Utiliser plusieurs répertoires peut faciliter l'organisation de vos fixtures si
-vous avez une application plus grande. Pour charger les fixtures dans les
-sous-répertoires, incluez simplement le nom du sous-répertoire dans le nom de
-la fixture::
+Ceci va charger les fixtures d'Article et de Comment à partir du répertoire
+Fixture de votre application. Vous pouvez aussi charger des fixtures du cœur de
+CakePHP ou des plugins::
 
-    class ArticlesTableTest extends CakeTestCase
+    class ArticlesTest extends TestCase
     {
-        protected $fixtures = ['app.blog/articles', 'app.blog/comments'];
+        protected $fixtures = [
+            'plugin.DebugKit.Articles',
+            'plugin.MonNomDeVendor/MonPlugin.Messages',
+            'core.Comments'
+        ];
+    }
+
+Utiliser le préfixe ``core`` va charger des fixtures de CakePHP, et utiliser un
+nom de plugin en préfixe chargera la fixture à partir de ce plugin.
+
+Vous pouvez charger les fixtures dans des sous-répertoires. Si votre application
+est volumineuse, il est plus facile d'organiser vos fixtures en utilisant
+plusieurs répertoires. Pour charger des fixtures dans des sous-répertoires,
+incluez simplement le nom du sous-répertoire dans le nom de la fixture::
+
+    class ArticlesTest extends CakeTestCase
+    {
+        protected $fixtures = ['app.Blog/Articles', 'app.Blog/Comments'];
     }
 
 Dans l'exemple ci-dessus, les deux fixtures seront chargées à partir de
-``tests/Fixture/blog/``.
+``tests/Fixture/Blog/``.
 
 Fixture Factories
 -----------------
 
-Le nombre et la taille de vos fixtures vont croissantes avec la taille votre application. Il est possible qu'à
-un certain point, vous ne soyez plus en mesure les maintenir.
+Le nombre et la taille de vos fixtures vont croissant avec la taille votre
+application. Il est possible qu'à un certain point, vous ne soyez plus en mesure
+de les maintenir et de suivre leur contenu.
 
-Le `fixture factories plugin <https://github.com/vierge-noire/cakephp-fixture-factories>`__ propose une
-alternative efficace pour des applications de taille moyenne et plus.
+Le `plugin fixture factories <https://github.com/vierge-noire/cakephp-fixture-factories>`__ propose une
+alternative efficace pour des applications de grande taille.
 
-Le plugin utilise le `test suite light plugin <https://github.com/vierge-noire/cakephp-test-suite-light>`__
-afin de tronquer les tables non vierges avant chaque test.
+Le plugin utilise le `plugin test suite light <https://github.com/vierge-noire/cakephp-test-suite-light>`__
+pour tronquer avant chaque test toutes les tables modifiées.
 
-La commande bake suivante vous assistera pour créer vos factories::
+Cette commande bake vous aidera créer vos factories::
 
     bin/cake bake fixture_factory -h
 
 Une fois vos factories
 `mises en place <https://github.com/vierge-noire/cakephp-fixture-factories/blob/main/docs/factories.md>`__,
-vous voilà équipés pour créer vos fixtures de test à vitesse folle.
+vous voilà équipés pour créer vos fixtures de test à une vitesse folle.
 
-Les intéractions non nécessaires avec la base de donnée ralentissent les tests, ainsi que votre application.
-Il est possible de créer des fixtures sans les insérer. Ceci est utile lorsque vous testez des méthodes
-qui n'intéragissent pas avec la base de donnée::
+Les interactions inutiles avec la base de donnée vont ralentir les tests ainsi
+que votre application.
+Il est possible de créer des fixtures sans les insérer. Ceci est utile lorsque
+vous testez des méthodes qui n'interagissent pas avec la base de donnée::
 
     $article = ArticleFactory::make()->getEntity();
 
@@ -752,20 +759,22 @@ Pour insérer dans la base de donnée::
 
     $article = ArticleFactory::make()->persist();
 
-En supposant que les articles appartiennent à plusieurs auteurs, il est possible de créer 5 articles ayant chacun
-2 auteurs de la manière suivante::
+Les factories peuvent aussi aider à créer des fixtures associées.
+En supposant que les *Articles belongs to many Authors*, il est possible de
+créer 5 articles ayant chacun 2 auteurs de la manière suivante::
 
     $articles = ArticleFactory::make(5)->with('Authors', 2)->getEntities();
 
-Notez que bien que les factories ne nécessitent ni la création, ni la déclaration de fixtures, elles sont
-parfaitement compatibles avec ces dernières. Pour plus de détails,
+Notez que bien que les factories ne nécessitent ni création, ni déclaration de
+fixtures. Elles sont toujours parfaitement compatibles avec les fixtures qui
+viennent de CakePHP. Pour plus de détails,
 rendez-vous `ici <https://github.com/vierge-noire/cakephp-fixture-factories>`_.
 
 Charger des Routes dans les Tests
 ---------------------------------
 
-Si vous testez des mailers, des composants de controllers ou d'autres classes
-qui ont besoin de routes et qui résolvent des URLs, vous aurez besoin de charger
+Si vous testez des mailers, des components de controllers ou d'autres classes
+qui ont besoin de routes et de résoudre des URLs, vous aurez besoin de charger
 des routes. Pendant le ``setUp()`` d'une classe ou pendant les méthodes de tests
 individuelles vous pouvez utiliser ``loadRoutes()`` pour vous assurer que les
 routes de votre application sont chargées::
@@ -778,7 +787,7 @@ routes de votre application sont chargées::
 
 Cette méthode construira une instance de votre ``Application`` et appellera la
 méthode ``routes()`` dessus. Si votre classe ``Application`` a besoin de
-paramètres de constructeur spécialisés, vous pouvez les fournir à
+paramètres spécialisés dans le constructeur, vous pouvez les fournir dans
 ``loadRoutes($constructorArgs)``.
 
 Création de routes dans les tests
@@ -836,11 +845,11 @@ tests::
         // Tester la logique qui nécessite d'avoir chargé Company/Cms.
     }
 
-Tester les Classes Table
-========================
+Tester les Classes De Tables
+============================
 
-Disons que nous avons déjà notre table Articles définie dans
-**src/Model/Table/ArticlesTable.php**, qui ressemble à ceci::
+Supposons que nous avons déjà notre table Articles définie dans
+**src/Model/Table/ArticlesTable.php**, et qu'elle ressemble à ceci::
 
     namespace App\Model\Table;
 
@@ -859,9 +868,8 @@ Disons que nous avons déjà notre table Articles définie dans
         }
     }
 
-Nous voulons maintenant configurer un test qui va tester ce model tout
-en utilisant les Fixtures pour garder nos Tests isolés. Créons  un fichier
-nommé **ArticlesTableTest.php** dans notre répertoire
+Nous voulons maintenant configurer un test qui va tester cette classe de table.
+Créons  un fichier nommé **ArticlesTableTest.php** dans notre répertoire
 **tests/TestCase/Model/Table**, avec le contenu suivant::
 
     namespace App\Test\TestCase\Model\Table;
@@ -871,10 +879,10 @@ nommé **ArticlesTableTest.php** dans notre répertoire
 
     class ArticlesTableTest extends TestCase
     {
-        protected $fixtures = ['app.articles'];
+        protected $fixtures = ['app.Articles'];
     }
 
-Dans notre variable de cas de test ``$fixtures``, nous définissons l'ensemble
+Dans la variable ``$fixtures`` de notre cas de test, nous définissons l'ensemble
 des fixtures que nous utiliserons. Vous devriez vous rappeler d'inclure tous
 les fixtures sur lesquelles des requêtes vont être lancées.
 
@@ -893,7 +901,7 @@ maintenant à ceci::
 
     class ArticlesTableTest extends TestCase
     {
-        protected $fixtures = ['app.articles'];
+        protected $fixtures = ['app.Articles'];
 
         public function setUp(): void
         {
@@ -907,9 +915,9 @@ maintenant à ceci::
             $this->assertInstanceOf('Cake\ORM\Query', $query);
             $result = $query->enableHydration(false)->toArray();
             $expected = [
-                ['id' => 1, 'title' => 'First Article'],
-                ['id' => 2, 'title' => 'Second Article'],
-                ['id' => 3, 'title' => 'Third Article']
+                ['id' => 1, 'title' => 'Premier Article'],
+                ['id' => 2, 'title' => 'Deuxième Article'],
+                ['id' => 3, 'title' => 'Troisième Article']
             ];
 
             $this->assertEquals($expected, $result);
@@ -917,16 +925,16 @@ maintenant à ceci::
     }
 
 Vous pouvez voir que nous avons ajouté une méthode appelée
-``testFindPublished()``. Nous commençons par créer une instance de notre model
-``Article``, et lançons ensuite notre méthode ``published()``. Dans
-``$expected``, nous définissons ce que nous en attendons, ce qui devrait être le
-résultat approprié (que nous connaissons depuis que nous avons défini les
-enregistrements qui sont remplis initialement dans la table articles). Nous
-testons que les résultats correspondent à nos attentes en utilisant la méthode
-``assertEquals()``. Regardez la section sur les :ref:`running-tests` pour plus
-d'informations sur la façon de lancer les cas de test.
+``testFindPublished()``. Nous commençons par créer une instance de notre classe
+``ArticleTable``, et lançons ensuite notre méthode ``find('published')``. Dans
+``$expected``, nous définissons ce qui devrait être le résultat approprié (que
+nous connaissons puisque nous avons défini les enregistrements qui sont remplis
+initialement dans la table articles). Nous testons si les résultats
+correspondent à nos attentes en utilisant la méthode ``assertEquals()``.
+Lisez la section sur les :ref:`running-tests` pour plus d'informations sur la
+façon de lancer les cas de test.
 
-En utilisant les fixture factories, le test se présente ainsi::
+En utilisant les fixture factories, le test se présenterait ainsi::
 
     namespace App\Test\TestCase\Model\Table;
 
@@ -954,16 +962,17 @@ En utilisant les fixture factories, le test se présente ainsi::
         }
     }
 
-Aucune fixture n'est déclarée. Les 5 articles créés n'existeront que pour ce test. La méthode statique ``::find()``
-permet d'explorer la base de donnée sans évènements et sans recours à la table ``ArticlesTable``.
+Aucune fixture n'a besoin d'être déclarée. Les 5 articles créés n'existeront que
+dans ce test. La méthode statique ``::find()`` va requêter la base de donnée
+sans utiliser la table ``ArticlesTable`` ni ses évènements.
 
 Méthodes de Mocking des Models
 ------------------------------
 
-Il y aura des fois où vous voudrez mocker les méthodes sur les models quand vous
-les testez. Vous devrez utiliser ``getMockForModel`` pour créer les mocks de
-test des models. Cela évite des problèmes avec les propriétés réfléchies que
-les mocks normaux ont::
+Il y aura des fois où vous voudrez mocker les méthodes des models quand vous les
+testez. Vous devrez utiliser ``getMockForModel`` pour créer des mocks de test
+des classes de tables. Cela évite des problèmes avec les propriétés réfléchies
+qu'ont les mocks normaux::
 
     public function testSendingEmails(): void
     {
@@ -981,24 +990,23 @@ Dans votre méthode ``tearDown()``, assurez-vous de retirer le mock avec ceci::
 
 .. _integration-testing:
 
-Test d'Intégrations des Controllers
+Tests d'Intégration des Controllers
 ===================================
 
 Alors que vous pouvez tester les controllers de la même manière que les Helpers,
 Models et Components, CakePHP offre une classe spécialisée
-``IntegrationTestCase``. L'utilisation de cette classe en tant que classe de
-base pour les cas de test de votre controller vous permet de mettre en place des
-tests d'intégration pour vos controllers.
+``IntegrationTestCase``. L'utilisation de ce trait dans vos cas de test de vos
+controllers vous offre une interface de test de haut niveau.
 
-Si vous n'êtes pas familier avec les tests d'intégrations, il s'agit d'une
-approche de test qui facilite le test de plusieurs éléments en même temps. Les
-fonctionnalités de test d'intégration dans CakePHP simulent une requête HTTP à
-traiter par votre application. Par exemple, tester vos controllers impactera
-les Models, Components et Helpers qui auraient été invoqués suite à une requête
-HTTP. Cela vous permet d'écrire des tests au plus haut niveau de votre
-application en ayant un impact sur chacun de ses travaux.
+Si vous n'êtes pas familier avec les tests d'intégration, dites-vous qu'il
+s'agit d'une approche de test qui permet de test de plusieurs éléments qui
+fonctionnent de concert. Les fonctionnalités de test d'intégration dans CakePHP
+simulent une requête HTTP à traiter par votre application. Par exemple, tester
+vos controllers impactera également vos components, models et helpers qui
+auraient été invoqués pour traiter la requête HTTP. Cela vous donne un test de
+plus haut niveau sur votre application et tous ses composants.
 
-Disons que vous avez un controller typique ArticlesController, et son model
+Supposons que vous ayez un controller typique ArticlesController, et son model
 correspondant. Le code du controller ressemble à ceci::
 
     namespace App\Controller;
@@ -1019,12 +1027,12 @@ correspondant. Le code du controller ressemble à ceci::
                 }
             }
             if (!empty($short)) {
-                $result = $this->Article->find('all', [
+                $result = $this->Articles->find('all', [
                         'fields' => ['id', 'title']
                     ])
                     ->all();
             } else {
-                $result = $this->Article->find()->all();
+                $result = $this->Articles->find()->all();
             }
 
             $this->set([
@@ -1035,23 +1043,25 @@ correspondant. Le code du controller ressemble à ceci::
     }
 
 Créez un fichier nommé **ArticlesControllerTest.php** dans votre répertoire
-**tests/TestCase/Controller** et mettez ce qui suit à l'intérieur::
+**tests/TestCase/Controller** et mettez-y ce qui suit::
 
     namespace App\Test\TestCase\Controller;
 
     use Cake\TestSuite\IntegrationTestTrait;
-    use Cake\TestSuite\IntegrationTestCase;
+    use Cake\TestSuite\TestCase;
 
-    class ArticlesControllerTest extends IntegrationTestCase
+    class ArticlesControllerTest extends TestCase
     {
-        protected $fixtures = ['app.articles'];
+        use IntegrationTestTrait;
+
+        protected $fixtures = ['app.Articles'];
 
         public function testIndex(): void
         {
             $this->get('/articles');
 
             $this->assertResponseOk();
-            // D'autres asserts.
+            // D'autres assertions.
         }
 
         public function testIndexQueryData(): void
@@ -1059,7 +1069,7 @@ Créez un fichier nommé **ArticlesControllerTest.php** dans votre répertoire
             $this->get('/articles?page=1');
 
             $this->assertResponseOk();
-            // D'autres asserts.
+            // D'autres assertions.
         }
 
         public function testIndexShort(): void
@@ -1068,7 +1078,7 @@ Créez un fichier nommé **ArticlesControllerTest.php** dans votre répertoire
 
             $this->assertResponseOk();
             $this->assertResponseContains('Articles');
-            // D'autres asserts.
+            // D'autres assertions.
         }
 
         public function testIndexPostData(): void
@@ -1076,23 +1086,23 @@ Créez un fichier nommé **ArticlesControllerTest.php** dans votre répertoire
             $data = [
                 'user_id' => 1,
                 'published' => 1,
-                'slug' => 'new-article',
-                'title' => 'New Article',
-                'body' => 'New Body'
+                'slug' => 'nouvel-article',
+                'title' => 'Nouvel Article',
+                'body' => 'Nouveau Contenu'
             ];
             $this->post('/articles', $data);
-            $this->assertResponseSuccess();
 
+            $this->assertResponseSuccess();
             $articles = $this->getTableLocator()->get('Articles');
             $query = $articles->find()->where(['title' => $data['title']]);
             $this->assertEquals(1, $query->count());
         }
     }
 
-Cet exemple montre quelques méthodes d'envoi de requête et quelques
-assertions qu'intègre ``IntegrationTestCase``. Avant de pouvoir utiliser les
-assertions, vous aurez besoin de simuler une requête. Vous pouvez utiliser
-l'une des méthodes suivantes pour simuler une requête:
+Cet exemple montre quelques exemples de méthodes qui envoient des requêtes et
+quelques assertions fournies par ``IntegrationTestTrait``. Avant de pouvoir
+utiliser les assertions, vous aurez besoin de simuler une requête. Vous pouvez
+utiliser l'une des méthodes suivantes pour envoyer une requête:
 
 * ``get()`` Envoie une requête GET.
 * ``post()`` Envoie une requête POST.
@@ -1103,40 +1113,40 @@ l'une des méthodes suivantes pour simuler une requête:
 * ``head()`` Envoie une requête HEAD.
 
 Toutes les méthodes exceptées ``get()`` et ``delete()`` acceptent un second
-paramètre qui vous permet de saisir le corps d'une requête. Après avoir émis
-une requête, vous pouvez utiliser les différentes assertions que fournit
-``IntegrationTestCase`` ou PHPUnit afin de vous assurer que votre requête
-possède de correctes effets secondaires.
+paramètre qui vous permet d'envoyer le corps d'une requête. Après avoir émis
+une requête, vous pouvez utiliser les différentes assertions fournies par
+``IntegrationTestTrait`` ou PHPUnit afin de vous assurer que votre requête a les
+effets attendus.
 
 Configurer la Requête
 ---------------------
 
-La classe ``IntegrationTestCase`` intègre de nombreux helpers pour configurer
-les requêtes que vous allez envoyer à votre controller::
+Le trait ``IntegrationTestTrait`` comporte de nombreux helpers pour configurer
+les requêtes que vous allez envoyer à l'application testée::
 
     // Définit des cookies
-    $this->cookie('name', 'Uncle Bob');
+    $this->cookie('name', 'Oncle Bob');
 
     // Définit des données de session
-    $this->session(['Auth.User.id', 1]);
+    $this->session(['Auth.User.id' => 1]);
 
     // Configure les en-têtes
     $this->configRequest([
         'headers' => ['Accept' => 'application/json']
     ]);
 
-Les états de ces helpers définis par ces méthodes est remis à zéro dans la
+Les états définis par les méthodes de cet utilitaire sont remis à zéro dans la
 méthode ``tearDown()``.
 
 .. _testing-authentication:
 
-Tester des Actions Protégées par AuthComponent
-----------------------------------------------
+Tester Des Actions Qui Nécessitent Une Authentification
+-------------------------------------------------------
 
 Si vous utilisez ``AuthComponent``, vous aurez besoin de simuler les données
 de session utilisées par AuthComponent pour valider l'identité d'un utilisateur.
-Pour ce faire, vous pouvez utiliser les méthodes de helper fournies par
-``IntegrationTestCase``. En admettant que vous ayez un ``ArticlesController``
+Pour ce faire, vous pouvez utiliser les méthodes utilitaires fournies par
+``IntegrationTestTrait``. En admettant que vous ayez un ``ArticlesController``
 qui contient une méthode add, et que cette méthode nécessite une
 authentification, vous pourriez écrire les tests suivants::
 
@@ -1166,19 +1176,18 @@ authentification, vous pourriez écrire les tests suivants::
         // Autres assertions.
     }
 
-Test de l'Authentification stateless (sans état) et des APIs
+Test de l'Authentification Stateless (sans état) et des APIs
 ------------------------------------------------------------
 
-Pour tester les APIs qui utilisent l'authentification stateless, vous pouvez,
-comme pour l'authentification basic, configurer la demande de manière à ce
-qu'elle injecte des variables d'environnement et des headers (en-têtes), ce qui
-permettra de simuler les en-têtes d'une demande d'authentification réelle.
+Pour tester les APIs qui utilisent une authentification stateless, telles que
+l'authentification Basic, vous pouvez configurer la requête de manière à y
+injecter des variables d'environnement et des en-têtes qui vont simuler de
+vraies en-têtes d'authentification.
 
-Lorsque vous testez l'authentification simple (Basic) ou de type "Digest", vous
-pouvez ajouter les variables d'environnement que PHP crée
-`<https://php.net/manual/fr/features.http-auth.php> `_ automatiquement.
-Ces variables d'environnement utilisées dans l'adaptateur d'authentification sont
-décrites dans: ref: `basic-authentication` ::
+Lorsque vous testez les authentifications Basic ou Digest, vous pouvez ajouter
+les variables d'environnement `créées automatiquement par PHP <https://php.net/manual/fr/features.http-auth.php> `_.
+Ces variables d'environnement utilisées dans l'adaptateur d'authentification
+sont décrites dans: ref: `basic-authentication` ::
 
     public function testBasicAuthentication(): void
     {
@@ -1208,15 +1217,15 @@ l'en-tête d'autorisation directement::
         $this->assertResponseOk();
     }
 
-La clé des en-têtes dans ``configRequest()`` peut être utilisée pour configurer
-tout en-tête HTTP supplémentaires nécessaires à une action.
+Vous pouvez utiliser la clé ``headers`` dans ``configRequest()`` pour configurer
+n'importe quelle autre en-tête HTTP dont vous auriez besoin pour cette action.
 
 Tester les Actions Protégées par CsrfComponent ou SecurityComponent
 -------------------------------------------------------------------
 
-Quand vous testez les actions protégées par SecurityComponent ou CsrfComponent,
+Quand vous testez des actions protégées par CsrfComponent ou SecurityComponent,
 vous pouvez activer la génération automatique de token pour vous assurer que vos
-tests ne vont pas être en échec à cause d'un token non présent::
+tests ne vont pas échoué à cause d'un problème de  token::
 
     public function testAdd(): void
     {
@@ -1225,11 +1234,11 @@ tests ne vont pas être en échec à cause d'un token non présent::
         $this->post('/posts/add', ['title' => 'News excitante!']);
     }
 
-Il est aussi important d'activer debug dans les tests qui utilisent les tokens
-pour éviter que le SecurityComponent pense que le token debug est utilisé dans
-un environnement non-debug. Quand vous testez avec d'autres méthodes comme
-``requireSecure()``, vous pouvez utiliser ``configRequest()`` pour définir les
-bonnes variables d'environnement::
+Il est aussi important d'activer le débogage dans les tests qui utilisent des
+tokens pour éviter que le SecurityComponent ne pense que le token de débogage
+est utilisé dans un environnement non-debug. Quand vous faites des tests avec
+d'autres méthodes comme ``requireSecure()``, vous pouvez utiliser
+``configRequest()`` pour définir les bonnes variables d'environnement::
 
     // Fake out SSL connections.
     $this->configRequest([
@@ -1246,12 +1255,12 @@ Test d'intégration sur les middlewares PSR-7
 
 Les tests d'intégration peuvent aussi être utilisés pour tester entièrement vos
 applications PSR-7 et les :doc:`/controllers/middleware`. Par défaut,
-``IntegrationTestCase`` détectera automatiquement la présence d'une classe
+``IntegrationTestTrait`` détectera automatiquement la présence d'une classe
 ``App\Application`` et activera automatiquement les tests d'intégration sur
 votre Application.
 
-Vous pouvez personnaliser le nom de la classe Application utilisé ainsi que les
-arguments du contructeur en utilisant la méthode ``configApplication()``::
+Vous pouvez personnaliser le nom de la classe Application utilisée ainsi que les
+arguments du contructeur, en utilisant la méthode ``configApplication()``::
 
     public function setUp(): void
     {
@@ -1259,52 +1268,70 @@ arguments du contructeur en utilisant la méthode ``configApplication()``::
     }
 
 Vous devriez également faire en sorte d'utiliser :ref:`application-bootstrap`
-pour charger les plugins qui contiennent des événements et des routes. De cette
-manière, vous vous assurez que les événements et les routes seront connectés pour
-chacun de vos "test case".
+pour charger les plugins qui contiennent des événements ou des routes. De cette
+manière, vous vous assurez que les événements et les routes seront connectés
+pour tous vos *test cases*.
 
-Tester avec des cookies chiffrés
---------------------------------
+Tester avec des Cookies Cryptés
+-------------------------------
 
 Si vous utilisez le :ref:`encrypted-cookie-middleware` dans votre application,
 il y a des méthodes pratiques pour définir des cookies chiffrés dans vos
 *test cases*::
 
     // Définit un cookie en utilisant AES et la clé par défaut.
-    $this->cookieEncrypted('my_cookie', 'Some secret values');
+    $this->cookieEncrypted('mon_cookie', 'Des valeurs secrètes');
 
-    // Partons du principe que cette requête modifie le cookie.
+    // Partons du principe que cette action modifie le cookie.
     $this->get('/bookmarks/index');
 
-    $this->assertCookieEncrypted('An updated value', 'my_cookie');
+    $this->assertCookieEncrypted('Une nouvelle valeur', 'mon_cookie');
 
 Tester les Messages Flash
 -------------------------
 
 Si vous souhaitez faire une assertion sur la présence de messages Flash en
-session et pas sur le rendu du HTML, vous pouvez utiliser ``enableRetainFlashMessages()``
-dans vos tests pour que les messages Flash soient conservés dans la session
-pour que vous puissez écrire vos assertions::
+session et pas sur le rendu du HTML, vous pouvez utiliser
+``enableRetainFlashMessages()`` dans vos tests pour que les messages Flash
+soient conservés dans la session et que vous puissez ainsi effectuer vos
+assertions::
 
     // Active la rétention des messages flash plutôt que leur consommation
     $this->enableRetainFlashMessages();
     $this->get('/bookmarks/delete/9999');
 
-    $this->assertSession('That bookmark does not exist', 'Flash.flash.0.message');
+    $this->assertSession("Ce marque-page n'existe pas", 'Flash.flash.0.message');
 
-Tester un controller retournant du JSON
+    // Vérifie un message flash sous la clé 'flash'.
+    $this->assertFlashMessage('Marque-page supprimé', 'flash');
+
+    // Vérifie le deuxième message flash, également sous la clé 'flash'.
+    $this->assertFlashMessageAt(1, 'Marque-page vraiment supprimé');
+
+    // Vérifie un message flash en première position sous la clé 'auth'
+    $this->assertFlashMessageAt(0, "Vous n'avez pas le droit d'entrer dans ce donjon !", 'auth');
+
+    // Vérifie qu'un message flash utilise l'élément error
+    $this->assertFlashElement('Flash/error');
+
+    // Vérifie l'élément du deuxième message flash
+    $this->assertFlashElementAt(1, 'Flash/error')
+
+Tester un Controller Retournant du JSON
 ---------------------------------------
 
-JSON est un format commun à utiliser lors de la conception de web service. Tester les
-points de terminaisons (endpoints) de votre web service est très simple avec CakePHP.
-Commençons avec un simple exemple de controller qui renvoie du JSON::
+JSON est un format commun et agréable à utiliser lors de la conception d'un
+service web. Avec CakePHP, il est très simple de tester les terminaux de votre
+service web. Commençons avec un exemple simple  de controller qui renvoie du
+JSON::
 
+    use Cake\View\JsonView;
+    
     class MarkersController extends AppController
     {
-        public function initialize(): void
+        public function viewClasses(): array
         {
-            parent::initialize();
-            $this->loadComponent('RequestHandler');
+            return [JsonView::class];
         }
 
         public function view($id)
@@ -1320,7 +1347,6 @@ et assurons-nous que le web service répond correctement::
 
     class MarkersControllerTest extends IntegrationTestCase
     {
-
         public function testGet(): void
         {
             $this->configRequest([
@@ -1335,40 +1361,40 @@ et assurons-nous que le web service répond correctement::
                 ['id' => 1, 'lng' => 66, 'lat' => 45],
             ];
             $expected = json_encode($expected, JSON_PRETTY_PRINT);
-            $this->assertEquals($expected, $this->_response->body());
+            $this->assertEquals($expected, (string)$this->_response->getBody());
         }
     }
 
-Nous utilisons l'option ``JSON_PRETTY_PRINT`` car la vue qui retourne la représentation
-JSON intégrée à CakePHP (JsonView) utilise cette option quand le mode ``debug`` est
-activé.
+Nous utilisons l'option ``JSON_PRETTY_PRINT`` car la vue JsonView intégrée à
+CakePHP utilise cette option quand le mode ``debug`` est activé.
 
-Test avec téléchargement de fichiers
-------------------------------------
+Test avec Téléversement de Fichiers
+-----------------------------------
 
-La simulation du téléchargement de fichiers est simple lorsque vous utilisez le
-mode par défaut ":ref:`fichiers téléchargés en tant qu'objets <request-file-uploads>`".
-Vous pouvez simplement créer des instances qui implémentent
+La simulation d'un téléversement de fichiers est enfantine lorsque vous utilisez
+le mode par défaut de
+":ref:`téléversement de fichiers en tant qu'objets <request-file-uploads>`".
+Vous pouvez créer tout simplement des instances qui implémentent
 `\\Psr\\Http\\Message\\UploadedFileInterface <https://www.php-fig.org/psr/psr-7/#16-uploaded-files>`__
 (l'implémentation par défaut actuellement utilisée par CakePHP est
-``\Laminas\Diactoros\UploadedFile``), et les passer dans vos données de demande
-de test. Dans l'environnement CLI, ces objets passeront par défaut les contrôles
-de validation qui testent si le fichier a été téléchargé via HTTP. Il n'en va pas
+``\Laminas\Diactoros\UploadedFile``), et les passer dans les données de vos
+requêtes de test. Dans l'environnement CLI, ces objets passeront par défaut les contrôles
+de validation qui testent si le fichier a été téléversé via HTTP. Il n'en va pas
 de même pour les données de type tableau comme celles que l'on trouve dans
-``$_FILES``, ce contrôle échouerait.
+``$_FILES`` ; ce contrôle échouerait.
 
-Afin de simuler exactement comment les objets de fichiers téléchargés seraient
-présents dans une requête normale, vous devez non seulement les passer dans les
-données de la requête, mais aussi les passer dans la configuration de la requête
-de test via l'option "files". Ce n'est pas techniquement nécessaire, sauf si
-votre code accède aux fichiers téléchargés via les méthodes
+Afin de simuler exactement la façon dont les objets de fichiers téléversés
+seraient présents dans une requête normale, vous devez non seulement les passer
+dans les données de la requête, mais aussi les passer dans la configuration de
+la requête de test via l'option ``files``. Ce n'est toutefois pas techniquement
+nécessaire, sauf si votre code accède aux fichiers téléversés via les méthodes
 :php:meth:`Cake\\Http\\ServerRequest::getUploadedFile()` ou
 :php:meth:`Cake\\Http\\ServerRequest::getUploadedFiles()`.
 
 Supposons que les articles aient une image d'accroche, et une association
-``Articles hasMany Attachments``, le formulaire ressemblerait à quelque chose
-comme ceci en conséquence, où un fichier image, et plusieurs fichiers/attaches
-seraient acceptés::
+``Articles hasMany Attachments``. Le formulaire ressemblerait à quelque chose
+comme ceci en conséquence, où un fichier image et plusieurs fichiers ou pièces
+jointes seraient acceptés::
 
     <?= $this->Form->create($article, ['type' => 'file']) ?>
     <?= $this->Form->control('title') ?>
@@ -1380,16 +1406,16 @@ seraient acceptés::
     <?= $this->Form->button('Submit') ?>
     <?= $this->Form->end() ?>
 
-Le test qui simulerait la demande correspondante pourrait ressembler à ceci::
+Le test qui simulerait la requête correspondante pourrait ressembler à ceci::
 
     public function testAddWithUploads(): void
     {
         $teaserImage = new \Laminas\Diactoros\UploadedFile(
             '/path/to/test/file.jpg', // flux ou chemin d'accès au fichier représentant le fichier temporaire
-            12345,                    // la taille des fichiers en octets
-            \UPLOAD_ERR_OK,           // le statut de téléchargement ou d'erreur
-            'teaser.jpg',             // le nom du fichier tel qu'il a été envoyé par le client
-            'image/jpeg'              // le mimétisme tel qu'envoyé par le client
+            12345,                    // la taille du fichier en octets
+            \UPLOAD_ERR_OK,           // le statut de téléversement ou d'erreur
+            'teaser.jpg',             // le nom du fichier tel qu'il aurait été envoyé par le client
+            'image/jpeg'              // le type mime tel qu'il aurait été envoyé par le client
         );
 
         $textAttachment = new \Laminas\Diactoros\UploadedFile(
@@ -1408,7 +1434,7 @@ Le test qui simulerait la demande correspondante pourrait ressembler à ceci::
             'application/pdf'
         );
 
-        // Ce sont les données accessibles via `$this->request->getUploadedFile()`
+        // Voici les données accessibles via `$this->request->getUploadedFile()`
         // et `$this->request->getUploadedFiles()`.
         $this->configRequest([
             'files' => [
@@ -1424,7 +1450,7 @@ Le test qui simulerait la demande correspondante pourrait ressembler à ceci::
             ],
         ]);
 
-        // Ce sont les données accessibles via `$this->request->getData()`.
+        // Voici les données accessibles via `$this->request->getData()`.
         $postData = [
             'title' => 'Nouvel Article',
             'teaser_image' => $teaserImage,
@@ -1442,7 +1468,7 @@ Le test qui simulerait la demande correspondante pourrait ressembler à ceci::
         $this->post('/articles/add', $postData);
 
         $this->assertResponseOk();
-        $this->assertFlashMessage('L'article a été sauvegardé avec succès');
+        $this->assertFlashMessage("L'article a été sauvegardé avec succès");
         $this->assertFileExists('/path/to/uploads/teaser.jpg');
         $this->assertFileExists('/path/to/uploads/attachment.txt');
         $this->assertFileExists('/path/to/uploads/attachment.pdf');
@@ -1450,11 +1476,11 @@ Le test qui simulerait la demande correspondante pourrait ressembler à ceci::
 
 .. tip::
 
-    Si vous configurez la demande de test avec des fichiers, alors elle *doit*
+    Si vous configurez la requête de test avec des fichiers, alors elle *doit*
     correspondre à la structure de vos données POST (mais n'inclure que les
-    objets de fichiers téléchargés)!
+    objets de fichiers téléversés)!
 
-De même, vous pouvez simuler des `erreurs de téléchargement <https://www.php.net/manual/en/features.file-upload.errors.php>`_
+De même, vous pouvez simuler des `erreurs de téléversement <https://www.php.net/manual/fr/features.file-upload.errors.php>`_
 ou d'autres fichiers invalides qui ne passent pas la validation::
 
     public function testAddWithInvalidUploads(): void
@@ -1503,7 +1529,7 @@ ou d'autres fichiers invalides qui ne passent pas la validation::
             'attachments' => [
                 0 => [
                     'file' => $uploadFailureAttachment,
-                    'description' => 'Pièce jointe de d'échec du téléchargement',
+                    'description' => 'Pièce jointe en échec de téléversement',
                 ],
                 1 => [
                     'file' => $invalidTypeAttachment,
@@ -1514,7 +1540,7 @@ ou d'autres fichiers invalides qui ne passent pas la validation::
         $this->post('/articles/add', $postData);
 
         $this->assertResponseOk();
-        $this->assertFlashMessage("L'article n'a pas pu être sauvé");
+        $this->assertFlashMessage("L'article n'a pas pu être sauvegardé");
         $this->assertResponseContains("Une image d'accroche est nécessaire");
         $this->assertResponseContains('Dépassement de la taille maximale autorisée des fichiers');
         $this->assertResponseContains('Type de fichier non supporté');
@@ -1526,10 +1552,10 @@ ou d'autres fichiers invalides qui ne passent pas la validation::
 Désactiver le Middleware de Gestion d'Erreurs dans les Tests
 ------------------------------------------------------------
 
-Quand vous debuggez des tests qui échouent car l'application a rencontré des
-erreurs, il peut être utile de désactiver temporairement le middleware de gestion
-des erreurs pour permettre aux erreurs de remonter. Vous pouvez utiliser la méthode
-``disableErrorHandlerMiddleware()`` pour permettre ce comportement::
+Quand vous déboguez des tests qui échouent parce que votre application rencontre
+des erreurs, il peut être utile de désactiver temporairement le middleware de
+gestion des erreurs pour permettre aux erreurs de remonter. Pour cela, vous
+pouvez utiliser la méthode ``disableErrorHandlerMiddleware()``::
 
     public function testGetMissing(): void
     {
@@ -1538,14 +1564,14 @@ des erreurs pour permettre aux erreurs de remonter. Vous pouvez utiliser la mét
         $this->assertResponseCode(404);
     }
 
-Dans l'exemple ci-dessus, le test échouera et le message d'exception et le stack-trace
-seront affichés à la place de la page d'erreur de l'application.
+Dans l'exemple ci-dessus, le test échouera et le message d'exception et la
+stack-trace seront affichés à la place de la page d'erreur de l'application.
 
 Méthodes d'Assertion
 --------------------
 
-La classe ``IntegrationTestCase`` vous fournis de nombreuses méthodes
-d'assertions afin de tester plus simplement les réponses. Quelques exemples::
+Le trait ``IntegrationTestTrait`` fournit de nombreuses méthodes
+d'assertions afin de tester les réponses plus simplement. Quelques exemples::
 
     // Vérifie un code de réponse 2xx
     $this->assertResponseOk();
@@ -1581,16 +1607,22 @@ d'assertions afin de tester plus simplement les réponses. Quelques exemples::
     $this->assertResponseEmpty();
 
     // Vérifie le contenu de la réponse
-    $this->assertResponseEquals('Yeah!');
+    $this->assertResponseEquals('Ouais !'); 
+
+    // Vérifie que le contenu de la réponse n'est pas égal à...
+    $this->assertResponseNotEquals('Non !');
 
     // Vérifie un contenu partiel de la réponse
-    $this->assertResponseContains('You won!');
-    $this->assertResponseNotContains('You lost!');
+    $this->assertResponseContains("C'est gagné !");
+    $this->assertResponseNotContains("Encore raté !");
+
+    // Vérifie un fichier renvoyé
+    $this->assertFileResponse('/chemin/absolu/vers/le/fichier.ext');
 
     // Vérifie le layout
     $this->assertLayout('default');
 
-    // Vérifie quel Template a été rendu.
+    // Vérifie quel Template a été rendu (s'il y en a un)
     $this->assertTemplate('index');
 
     // Vérifie les données de la session
@@ -1617,18 +1649,18 @@ En plus des méthodes d'assertion ci-dessus, vous pouvez également utiliser
 toutes les assertions de `TestSuite
 <https://api.cakephp.org/4.x/class-Cake.TestSuite.TestCase.html>`_ et celles
 de
-`PHPUnit <https://phpunit.de/manual/current/en/appendixes.assertions.html>`__.
+`PHPUnit <https://phpunit.de/manual/current/fr/appendixes.assertions.html>`__.
 
 Comparer les Résultats du Test avec un Fichier
 ----------------------------------------------
 
 Pour certains types de test, il peut être plus simple de comparer les résultats
-d'un test avec le contenu d'un fichier - par exemple, quand vous testez la
-sortie rendue d'une view.
+d'un test avec le contenu d'un fichier - par exemple, quand vous testez le
+rendu d'une vue.
 ``StringCompareTrait`` ajoute une méthode d'assertion simple pour cela.
 
-Pour l'utiliser, vous devez inclure un Trait, définir le chemin de base de
-comparaison et appeler ``assertSameAsFile``::
+Pour l'utiliser, vous devez inclure le trait, définir le répertoire contenant le
+fichier servant de base de comparaison et appeler ``assertSameAsFile``::
 
     use Cake\TestSuite\StringCompareTrait;
     use Cake\TestSuite\TestCase;
@@ -1650,13 +1682,13 @@ comparaison et appeler ``assertSameAsFile``::
         }
     }
 
-L'exemple ci-dessus va comparer ``$result`` au contenu du fichier
+Cet exemple va comparer ``$result`` au contenu du fichier
 ``APP/tests/comparisons/example.php``.
 
-Un mécanisme est fourni pour écrire/mettre à jour les fichiers de test, en
+Il existe un mécanisme pour écrire/mettre à jour les fichiers de test, en
 définissant la variable d'environment ``UPDATE_TEST_COMPARISON_FILES``, ce qui
-va créer et/ou mettre à jour les fichiers de comparaison de test au fur et à
-mesure où ils sont rendus:
+va créer et/ou mettre à jour les fichiers de comparaison de test dès qu'ils
+seront référencés:
 
 .. code-block:: console
 
@@ -1677,77 +1709,8 @@ mesure où ils sont rendus:
     #
     #   modified:   tests/comparisons/example.php
 
-Tester avec des Cookies Chiffrés
---------------------------------
-
-Si vous utilisez :php:class:`Cake\\Controller\\Component\\CookieComponent` dans
-vos controllers, vos cookies sont probablement chiffrés. Depuis 3.1.7, CakePHP
-fournit des méthodes pour intéragir avec les cookies chiffrés dans vos cas de
-test::
-
-    // Définit un cookie en utilisant aes et la clé par défaut.
-    $this->cookieEncrypted('my_cookie', 'Some secret values');
-
-    // En supposant que cette action modifie le cookie.
-    $this->get('/bookmarks/index');
-
-    $this->assertCookieEncrypted('Une valeur mise à jour', 'my_cookie');
-
-Tester un Controller dont la Réponse est au format JSON
--------------------------------------------------------
-
-JSON est un format sympa et courant à utiliser quand on construit un service
-web. Tester les endpoints de votre service web est très simple avec CakePHP.
-Commençons par un exemple de controller simple qui répond en JSON::
-
-    class MarkersController extends AppController
-    {
-        public $components = ['RequestHandler'];
-
-        public function view($id)
-        {
-            $marker = $this->Markers->get($id);
-            $this->set([
-                '_serialize' => ['marker'],
-                'marker' => $marker,
-            ]);
-        }
-    }
-
-Maintenant créons un fichier
-**tests/TestCase/Controller/MarkersControllerTest.php** et assurons-nous que
-notre service web retourne une réponse appropriée::
-
-    class MarkersControllerTest extends IntegrationTestCase
-    {
-
-        public function testGet()
-        {
-            $this->configRequest([
-                'headers' => ['Accept' => 'application/json']
-            ]);
-            $result = $this->get('/markers/view/1.json');
-
-            // Vérifie que le code de réponse est 200
-            $this->assertResponseOk();
-
-            $expected = [
-                ['id' => 1, 'lng' => 66, 'lat' => 45],
-            ];
-            $expected = json_encode($expected, JSON_PRETTY_PRINT);
-            $this->assertEquals($expected, $this->_response->body());
-        }
-    }
-
-Nous utilisons l'option ``JSON_PRETTY_PRINT`` comme le fait CakePHP à partir de
-la classe JsonView. Ce dernier utilise cette option quand le mode ``debug`` est
-activé. Vous pouvez utiliser ceci afin que votre test marche dans les deux cas::
-
-    json_encode($data, Configure::read('debug') ? JSON_PRETTY_PRINT : 0);
-
-
-Tests d'Intégration de la Console
-=================================
+Tests d'Intégration en Console
+==============================
 
 Voir la :ref:`console-integration-testing` pour savoir comment tester les
 commandes.
@@ -1758,27 +1721,33 @@ Mocker les Injections de Dépendances
 Voir :ref:`mocking-services-in-tests` pour savoir comment remplacer des services
 injectés avec le conteneur d'injection de dépendances dans vos tests
 d'intégration.
+ 
+Mocker les Réponses du Client HTTP
+==================================
+
+Voir :ref:`httpclient-testing` pour savoir comment créer des mocks de réponses
+vers des API externes.
 
 Tester les Views
 ================
 
-Généralement, la plupart des applications ne va pas directement tester leur
-code HTML. Faire ça donne souvent des résultats fragiles, il est difficile de
-maintenir les suites de test qui sont sujet à se casser. En écrivant des
-tests fonctionnels en utilisant :php:class:`ControllerTestCase`, vous
-pouvez inspecter le contenu de la vue rendue en configurant l'option
-``return`` à 'view'. Alors qu'il est possible de tester le contenu de la vue
-en utilisant ControllerTestCase, un test d'intégration/vue plus robuste
-et maintenable peut être effectué en utilisant des outils comme
+Généralement, la plupart des applications ne vont pas directement tester leur
+code HTML. Le faire donne souvent des suites de tests fragiles, difficiles à
+maintenir et sujettes à se casser. En écrivant des tests fonctionnels avec
+:php:class:`IntegrationTestTrait`, vous pouvez inspecter le contenu de la vue
+rendue en configurant l'option ``return`` à 'view'. Bien qu'il soit possible de
+tester le contenu de la vue en utilisant ``IntegrationTestTrait``, il est aussi
+possible de réaliser des tests d'intégration/de vue plus robustes plus
+maintenables en utilisant des outils comme
 `Selenium webdriver <https://www.selenium.dev/>`_.
 
 Tester les Components
 =====================
 
-Imaginons que nous avons un component appelé PagematronComponent dans notre
-application. Ce component nous aide à paginer la valeur limite à travers tous
-les controllers qui l'utilisent. Voici notre exemple de component localisé dans
-**src/Controller/Component/PagematronComponent.php**::
+Imaginons que nous ayons dans notre application un component appelé
+PagematronComponent. Ce component nous aide à fixer la valeur limite de
+pagination dans tous les controllers qui l'utilisent. Voici notre exemple de
+component situé dans **src/Controller/Component/PagematronComponent.php**::
 
     class PagematronComponent extends Component
     {
@@ -1793,7 +1762,7 @@ les controllers qui l'utilisent. Voici notre exemple de component localisé dans
             }
         }
 
-        public function startup(Event $event)
+        public function startup(EventInterface $event)
         {
             $this->setController($event->getSubject());
         }
@@ -1874,10 +1843,10 @@ dans notre component. Nous créons le fichier
 Tester les Helpers
 ==================
 
-Puisqu'un bon nombre de logique se situe dans les classes Helper, il est
-important de s'assurer que ces classes sont couvertes par des cas de test.
+Puisqu'une bonne quantité de logique se situe dans les classes de helpers, il est
+important de s'assurer que ces classes sont couvertes par des tests.
 
-Tout d'abord, nous créons un exemple de helper à tester.
+Tout d'abord, créons un exemple de helper à tester. Le
 ``CurrencyRendererHelper`` va nous aider à afficher les monnaies dans nos vues
 et pour simplifier, il ne va avoir qu'une méthode ``usd()``::
 
@@ -1894,11 +1863,11 @@ et pour simplifier, il ne va avoir qu'une méthode ``usd()``::
         }
     }
 
-Ici nous définissons la décimale à 2 après la virgule, le séparateur de
-décimal, le séparateur des centaines avec une virgule, et le nombre formaté
-avec la chaîne 'USD' en préfixe.
+Ici nous configurons deux décimales après la virgule, le séparateur décimal est
+un point, le séparateur de milliers est une virgule, et nous plaçons la chaîne
+'USD' en préfixe.
 
-Maintenant nous créons nos tests::
+Maintenant, créons nos tests::
 
     // tests/TestCase/View/Helper/CurrencyRendererHelperTest.php
 
@@ -1913,7 +1882,7 @@ Maintenant nous créons nos tests::
 
         public $helper = null;
 
-        // Nous instancions notre helper
+        // Ici nous instancions notre helper
         public function setUp(): void
         {
             parent::setUp();
@@ -1938,15 +1907,14 @@ Maintenant nous créons nos tests::
         }
     }
 
-Ici nous appelons ``usd()`` avec des paramètres différents et disons à test
-suite de vérifier si les valeurs retournées sont égales à ce que nous en
-attendons.
+Ici nous appelons ``usd()`` avec différents paramètres et demandons à notre test
+de vérifier si les valeurs retournées sont égales à ce que nous attendons.
 
-Sauvegardons cela et exécutons le test. Vous devriez voir une barre verte et
-un message indiquant 1 passé et 4 assertions.
+Sauvegardez cela et exécutez le test. Vous devriez voir une barre verte et
+un message indiquant 1 test passé et 4 assertions.
 
-Lorsque vous testez un Helper qui utilise d'autres Helpers, assurez-vous de
-créer un mock de la méthode ``loadHelpers`` de la classe View.
+Lorsque vous testez un Helper qui utilise d'autres helpers, assurez-vous de
+mocker la méthode ``loadHelpers`` de la classe View.
 
 .. _testing-events:
 
@@ -1954,21 +1922,20 @@ Tester les Events
 =================
 
 Les :doc:`/core-libraries/events` sont un bon moyen pour découpler le code de
-votre application, mais parfois quand nous les testons, nous avons tendance à
-tester les événements dans les cas de test qui éxecutent ces événements. C'est
+votre application. Mais parfois quand vous les testez, vous aurez tendance à
+tester les événements dans les cas de test qui exécutent ces événements. C'est
 une forme supplémentaire de couplage qui peut être évitée en utilisant
 à la place ``assertEventFired`` et ``assertEventFiredWith``.
 
-En poursuivant l'exemple sur les Orders, disons que nous avons les tables
+En poursuivant l'exemple sur les Orders, supposons que nous avons les tables
 suivantes::
 
     class OrdersTable extends Table
     {
-
         public function place($order): bool
         {
             if ($this->save($order)) {
-                // moved cart removal to CartsTable
+                // la suppression du panier a été déplacée dans CartsTable
                 $event = new Event('Model.Order.afterPlace', $this, [
                     'order' => $order
                 ]);
@@ -1981,7 +1948,6 @@ suivantes::
 
     class CartsTable extends Table
     {
-
         public function implementedEvents(): array
         {
             return [
@@ -1999,11 +1965,11 @@ suivantes::
 .. note::
     Pour faire des assertions sur le fait que des événements sont déclenchés,
     vous devez d'abord activer :ref:`tracking-events` sur le gestionnaire
-    d'événements pour lequel vous souhaitez faire des asserts.
+    d'événements sur lequel vous souhaitez faire des assertions.
 
-Pour tester le ``OrdersTable`` du dessus, vous devez activer le tracking dans la
-méthode ``setUp()`` puis vérifier par exemple que l'événement a été déclenché,
-puis que l'entity ``$order`` a été passée dans les données de l'événement::
+Pour tester la ``OrdersTable`` ci-dessus, nous devons activer le tracking dans
+la méthode ``setUp()`` puis vérifier que l'événement a été déclenché, puis que
+l'entity ``$order`` a été passée dans les données de l'événement::
 
     namespace App\Test\TestCase\Model\Table;
 
@@ -2013,8 +1979,7 @@ puis que l'entity ``$order`` a été passée dans les données de l'événement:
 
     class OrdersTableTest extends TestCase
     {
-
-        protected $fixtures = ['app.orders'];
+        protected $fixtures = ['app.Orders'];
 
         public function setUp(): void
         {
@@ -2022,8 +1987,8 @@ puis que l'entity ``$order`` a été passée dans les données de l'événement:
 
             $this->Orders = $this->getTableLocator()->get('Orders');
 
-            // enable event tracking
-            $this->Orders->eventManager()->setEventList(new EventList());
+            // activer le suivi de la trace des événements
+            $this->Orders->getEventManager()->setEventList(new EventList());
         }
 
         public function testPlace(): void
@@ -2036,17 +2001,22 @@ puis que l'entity ``$order`` a été passée dans les données de l'événement:
 
             $this->assertTrue($this->Orders->place($order));
 
-            $this->assertEventFired('Model.Order.afterPlace', $this->Orders->eventManager());
-            $this->assertEventFiredWith('Model.Order.afterPlace', 'order', $order, $this->Orders->eventManager());
+            $this->assertEventFired('Model.Order.afterPlace', $this->Orders->getEventManager());
+            $this->assertEventFiredWith('Model.Order.afterPlace', 'order', $order, $this->Orders->getEventManager());
         }
     }
 
-Par défaut, l'``EventManager`` global est utilisé pour les assertions, donc
-tester les événements globaux ne nécessitent pas de passer le gestionnaire
-d'événements::
+Par défaut, les assertions utilisent l'``EventManager`` global, donc il n'est
+pas nécessaire de passer le gestionnaire d'événements pour tester les événements
+globaux::
 
-    $this->assertEventFired('My.Global.Event');
-    $this->assertEventFiredWith('My.Global.Event', 'user', 1);
+    $this->assertEventFired('Mon.Event.Global');
+    $this->assertEventFiredWith('Mon.Event.Global', 'user', 1);
+
+Testing Email
+=============
+ 
+Consultez :ref:`email-testing` pour savoir comment tester les emails.
 
 Créer des Suites de Test (Test Suites)
 ======================================
@@ -2069,8 +2039,8 @@ votre application. Un exemple simple serait:
 Créer des Tests pour les Plugins
 ================================
 
-Les Tests pour les plugins sont créés dans leur propre répertoire à
-l'intérieur du dossier des plugins::
+Les Tests pour les plugins sont créés dans leur propre répertoire dans le
+dossier des plugins::
 
     /src
     /plugins
@@ -2081,11 +2051,10 @@ l'intérieur du dossier des plugins::
 
 Ils fonctionnent comme des tests normaux mais vous devrez vous souvenir
 d'utiliser les conventions de nommage pour les plugins quand vous importez des
-classes. Ceci est un exemple d'un cas de test pour le model ``BlogPost`` à
-partir du chapitre des plugins de ce manuel. Une différence par rapport aux
-autres test est dans la première ligne où 'Blog.BlogPost' est importé. Vous
-devrez aussi préfixer les fixtures de votre plugin avec
-``plugin.blog.blog_posts``::
+classes. Ceci est un exemple d'un cas de test pour le model ``BlogPost`` tiré du
+chapitre des plugins de ce manuel. Une différence par rapport aux autres tests
+se situe dans la première ligne, où on importe 'Blog.BlogPost'. Vous devrez
+aussi préfixer les fixtures de votre plugin avec ``plugin.Blog.BlogPosts``::
 
     namespace Blog\Test\TestCase\Model\Table;
 
@@ -2096,7 +2065,7 @@ devrez aussi préfixer les fixtures de votre plugin avec
     {
 
         // Fixtures de plugin se trouvant dans /plugins/Blog/tests/Fixture/
-        protected $fixtures = ['plugin.blog.blog_posts'];
+        protected $fixtures = ['plugin.Blog.BlogPosts'];
 
         public function testSomething(): void
         {
@@ -2104,9 +2073,9 @@ devrez aussi préfixer les fixtures de votre plugin avec
         }
     }
 
-Si vous voulez utiliser les fixtures de plugin dans les app tests, vous pouvez
-y faire référence en utilisant la syntaxe ``plugin.pluginName.fixtureName``
-dans le tableau ``$fixtures``.
+Si vous voulez utiliser des fixtures de plugin dans les tests de l'application,
+vous pouvez y faire référence en utilisant la syntaxe
+``plugin.pluginName.fixtureName`` dans le tableau ``$fixtures``.
 
 Avant d'utiliser des fixtures, assurez-vous que le
 :ref:`listener de fixture <fixture-phpunit-configuration>` soit configuré dans
@@ -2116,7 +2085,7 @@ Vérifiez que le code suivant est présent dans votre fichier **composer.json**:
 
     "autoload-dev": {
         "psr-4": {
-            "MyPlugin\\Test\\": "./plugins/MyPlugin/tests"
+            "MonPlugin\\Test\\": "plugins/MonPlugin/tests"
         }
     }
 
@@ -2131,7 +2100,7 @@ Générer des Tests avec Bake
 Si vous utilisez :doc:`bake </bake/usage>` pour générer votre code, il va
 également générer le squelette de vos fichiers de tests. Si vous avez besoin
 de re-générer le squelette de vos fichiers de tests, ou si vous souhaitez
-générer le squelette de test pour le code que vous avez écrit, vous pouvez
+générer le squelette de test pour du code que vous avez écrit, vous pouvez
 utiliser ``bake``:
 
 .. code-block:: console
@@ -2147,9 +2116,14 @@ utiliser ``bake``:
 #. Behavior
 #. Helper
 #. Shell
+#. Task
+#. ShellHelper
 #. Cell
+#. Form
+#. Mailer
+#. Command
 
-``<name>`` doit être le nom de l'objet dont vous voulez générer le squelette de
+Où ``<name>`` est le nom de l'objet dont vous voulez générer le squelette de
 tests.
 
 .. meta::
