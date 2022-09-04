@@ -49,7 +49,7 @@ Vous pouvez faire ceci en utilisant ``get()``::
 
     // Récupère un article unique, et les commentaires liés
     $article = $articles->get($id, [
-        'contain' => ['Commentaires']
+        'contain' => ['Comments']
     ]);
 
 Si l'opération get ne trouve aucun résultat, une
@@ -141,7 +141,7 @@ convertissez en tableau, ou quand la méthode ``all()`` est appelée::
     // Dans un controller ou dans une méthode de table.
     $query = $articles->find('all')
         ->where(['Articles.created >' => new DateTime('-10 days')])
-        ->contain(['Commentaires', 'Auteurs'])
+        ->contain(['Comments', 'Authors'])
         ->limit(10);
 
 Vous pouvez aussi fournir à ``find()`` plusieurs options couramment utilisées.
@@ -150,7 +150,7 @@ Cela peut être utile pour les tests puisqu'il y a peu de méthodes à mocker::
     // Dans un controller ou dans une méthode de table
     $query = $articles->find('all', [
         'conditions' => ['Articles.created >' => new DateTime('-10 days')],
-        'contain' => ['Auteurs', 'Commentaires'],
+        'contain' => ['Authors', 'Comments'],
         'limit' => 10
     ]);
 
@@ -256,7 +256,7 @@ pour configurer le champ à afficher::
 
         public function initialize(array $config): void
         {
-            $this->setDisplayField('libelle');
+            $this->setDisplayField('label');
         }
     }
 
@@ -267,7 +267,7 @@ comme clé et comme valeur respectivement avec les options ``keyField`` et
     // Dans un controller ou dans une méthode de table.
     $query = $articles->find('list', [
         'keyField' => 'slug',
-        'valueField' => 'libelle'
+        'valueField' => 'label'
     ]);
     $data = $query->toArray();
 
@@ -284,8 +284,8 @@ valeurs en sous-groupes, ou que vous voulez construire des elements
     // Dans un controller ou dans une méthode de table.
     $query = $articles->find('list', [
         'keyField' => 'slug',
-        'valueField' => 'libelle',
-        'groupField' => 'auteur_id'
+        'valueField' => 'label',
+        'groupField' => 'author_id'
     ]);
     $data = $query->toArray();
 
@@ -305,8 +305,8 @@ Vous pouvez aussi créer une liste de données à partir d'associations pouvant
 
     $query = $articles->find('list', [
         'keyField' => 'id',
-        'valueField' => 'auteur.nom'
-    ])->contain(['Auteurs']);
+        'valueField' => 'author.name'
+    ])->contain(['Authors']);
 
 Les expressions ``keyField``, ``valueField``, et ``groupField`` font référence
 au chemin des attributs dans les entités, et non sur des colonnes de la base de
@@ -319,33 +319,33 @@ Personnaliser la Sortie Clé-Valeur
 Pour finir, il est possible d'utiliser les closures pour accéder aux méthodes de
 mutation des entities dans vos finds list. ::
 
-    // Dans votre Entity Auteurs, créez un champ virtuel
+    // Dans votre Entity Authors, créez un champ virtuel
     // à utiliser en tant que champ à afficher:
     protected function _getLibelle()
     {
-        return $this->_fields['prenom'] . ' ' . $this->_fields['nom']
+        return $this->_fields['first_name'] . ' ' . $this->_fields['last_name']
           . ' / ' . __('User ID %s', $this->_fields['user_id']);
     }
 
-Cet exemple montre l'utilisation de la méthode accesseur ``_getLibellel()``
-dans l'entity Auteur. ::
+Cet exemple montre l'utilisation de la méthode accesseur ``_getLabel()``
+dans l'entity Author. ::
 
     // Dans vos finders/controller:
     $query = $articles->find('list', [
             'keyField' => 'id',
             'valueField' => function ($article) {
-                return $article->auteur->get('libelle');
+                return $article->author->get('label');
             }
         ])
-        ->contain('Auteurs');
+        ->contain('Authors');
 
 
 Vous pouvez aussi récupérer le libellé directement dans la liste en utilisant. ::
 
-    // Dans AuteursTable::initialize():
-    $this->setDisplayField('libelle'); // Va utiliser Auteur::_getLibelle()
+    // Dans AuthorsTable::initialize():
+    $this->setDisplayField('label'); // Va utiliser Author::_getLabel()
     // Dans vos finders/controller:
-    $query = $auteurs->find('list'); // Va utiliser AuteursTable::getDisplayField()
+    $query = $authors->find('list'); // Va utiliser AuthorsTable::getDisplayField()
 
 Trouver des Données Filées
 ==========================
@@ -400,7 +400,7 @@ les articles d'un certain auteur, nous ferions ceci::
         public function findEcritPar(Query $query, array $options)
         {
             $user = $options['user'];
-            return $query->where(['auteur_id' => $user->id]);
+            return $query->where(['author_id' => $user->id]);
         }
 
     }
@@ -518,60 +518,60 @@ indiquer quelles associations doivent être chargées en eager::
     // Dans un controller ou une méthode de table.
 
     // En option du find()
-    $query = $articles->find('all', ['contain' => ['Auteurs', 'Commentaires']]);
+    $query = $articles->find('all', ['contain' => ['Authors', 'Comments']]);
 
     // En méthode sur un objet query
     $query = $articles->find('all');
-    $query->contain(['Auteurs', 'Commentaires']);
+    $query->contain(['Authors', 'Comments']);
 
 Ceci va charger les auteurs et commentaires liés à chaque article du *result
 set*. Vous pouvez charger des associations imbriquées en utilisant les tableaux
 imbriqués pour définir les associations à charger::
 
     $query = $articles->find()->contain([
-        'Auteurs' => ['Addresses'], 'Commentaires' => ['Auteurs']
+        'Authors' => ['Addresses'], 'Comments' => ['Authors']
     ]);
 
 Au choix, vous pouvez aussi exprimer des associations imbriquées en utilisant la
 notation par points::
 
     $query = $articles->find()->contain([
-        'Auteurs.Addresses',
-        'Commentaires.Auteurs'
+        'Authors.Addresses',
+        'Comments.Authors'
     ]);
 
 Vous pouvez charger les associations en eager aussi profondément que vous le
 souhaitez::
 
     $query = $produits->find()->contain([
-        'Magasins.Villes.Pays',
-        'Magasins.Managers'
+        'Shops.Cities.Countries',
+        'Shops.Managers'
     ]);
 
 Vous pouvez sélectionner des champs de toutes les associations en utilisant
 plusieurs appels à ``contain()``::
 
     $query = $this->find()->select([
-        'Immeubles.id',
-        'Immeubles.titre',
-        'Immeubles.description'
+        'Realestates.id',
+        'Realestates.title',
+        'Realestates.description'
     ])
     ->contain([
-        'ImmeublesAttributs' => [
-            'Attributs' => [
+        'RealestatesAttributes' => [
+            'Attributes' => [
                 'fields' => [
                     // Les champs dépendant d'un alias doivent inclure le préfixe
                     // du modèle dans contain() pour être mappés correctement.
-                    'Attributs__nom' => 'attr_nom'
+                    'Attributes__name' => 'attr_name'
                 ]
             ]
         ]
     ])
     ->contain([
-        'ImmeublesAttributs' => [
+        'RealestatesAttributes' => [
             'fields' => [
-                'ImmeublesAttributs.immeuble_id',
-                'ImmeublesAttributs.valeur'
+                'RealestatesAttributes.realestate_id',
+                'RealestatesAttributes.value'
             ]
         ]
     ])
@@ -581,7 +581,7 @@ Si vous avez besoin de réinitialiser les *contain* sur une requête, vous pouve
 définir le second argument à ``true``::
 
     $query = $articles->find();
-    $query->contain(['Auteurs', 'Commentaires'], true);
+    $query->contain(['Authors', 'Comments'], true);
  
 .. note::
 
@@ -601,18 +601,18 @@ des conditions, passez une fonction anonyme qui reçoit en premier argument la
 query, de type ``\Cake\ORM\Query``::
 
     // Dans un controller ou une méthode de table.
-    $query = $articles->find()->contain('Commentaires', function (Query $q) {
+    $query = $articles->find()->contain('Comments', function (Query $q) {
         return $q
-            ->select(['contenu', 'auteur_id'])
-            ->where(['Commentaires.approuve' => true]);
+            ->select(['contenu', 'author_id'])
+            ->where(['Comments.approved' => true]);
     });
 
 Cela fonctionne aussi pour la pagination au niveau du Controller::
 
     $this->paginate['contain'] = [
-        'Commentaires' => function (Query $query) {
-            return $query->select(['contenu', 'auteur_id'])
-            ->where(['Commentaires.approuve' => true]);
+        'Comments' => function (Query $query) {
+            return $query->select(['body', 'author_id'])
+            ->where(['Comments.approved' => true]);
         }
     ];
 
@@ -626,9 +626,9 @@ Il est aussi possible de restreindre les associations imbriquées en utilisant l
 notation par point::
 
     $query = $articles->find()->contain([
-        'Commentaires',
-        'Auteurs.Profils' => function (Query $q) {
-            return $q->where(['Profils.is_published' => true]);
+        'Comments',
+        'Authors.Profiles' => function (Query $q) {
+            return $q->where(['Profiles.is_published' => true]);
         }
     ]);
 
@@ -641,8 +641,8 @@ vous pouvez les utiliser à l'intérieur de ``contain()``::
 
     // Récupère tous les articles, mais récupère seulement les commentaires qui
     // sont approuvés et populaires.
-    $query = $articles->find()->contain('Commentaires', function ($q) {
-        return $q->find('approuve')->find('populaire');
+    $query = $articles->find()->contain('Comments', function ($q) {
+        return $q->find('approved')->find('popular');
     });
 
 .. note::
@@ -664,7 +664,7 @@ Utilisez l'option ``queryBuilder`` pour personnaliser la requête quand vous
 passez un tableau::
 
     $query = $articles->find()->contain([
-        'Auteurs' => [
+        'Authors' => [
             'foreignKey' => false,
             'queryBuilder' => function (Query $q) {
                 return $q->where(...); // Conditions complètes pour le filtrage
@@ -676,19 +676,19 @@ Si vous avez limité les champs que vous chargez avec ``select()`` mais que
 vous souhaitez aussi charger les champs des associations avec contain,
 vous pouvez passer l'objet association à ``select()``::
 
-    // Sélectionne id & titre de articles, mais aussi tous les champs de Users.
+    // Sélectionne id & title de articles, mais aussi tous les champs de Users.
     $query = $articles->find()
-        ->select(['id', 'titre'])
+        ->select(['id', 'title'])
         ->select($articles->Users)
         ->contain(['Users']);
 
 Autre possibilité, si vous avez des associations multiples, vous pouvez utiliser
 ``enableAutoFields()``::
 
-    // Sélectionne id & titre de articles, mais tous les champs de
-    // Users, Commentaires et Tags.
-    $query->select(['id', 'titre'])
-        ->contain(['Commentaires', 'Tags'])
+    // Sélectionne id & title de articles, mais tous les champs de
+    // Users, Comments et Tags.
+    $query->select(['id', 'title'])
+        ->contain(['Comments', 'Tags'])
         ->enableAutoFields(true)
         ->contain(['Users' => function(Query $q) {
             return $q->autoFields(true);
@@ -701,8 +701,8 @@ Quand vous chargez des associations HasMany et BelongsToMany, vous pouvez
 utiliser l'option ``sort`` pour trier les données dans ces associations::
 
     $query->contain([
-        'Commentaires' => [
-            'sort' => ['Commentaires.created' => 'DESC']
+        'Comments' => [
+            'sort' => ['Comments.created' => 'DESC']
         ]
     ]);
 
@@ -725,14 +725,14 @@ extrêmement simple à faire avec l'ORM de CakePHP::
 
     $query = $articles->find();
     $query->matching('Tags', function ($q) {
-        return $q->where(['Tags.nom' => 'CakePHP']);
+        return $q->where(['Tags.name' => 'CakePHP']);
     });
 
 Vous pouvez aussi appliquer cette stratégie aux associations HasMany. Par
-exemple si 'Auteurs HasMany Articles', vous pouvez trouver tous les auteurs
+exemple si 'Authors HasMany Articles', vous pouvez trouver tous les auteurs
 ayant publié un article récemment en écrivant ceci::
 
-    $query = $auteurs->find();
+    $query = $authors->find();
     $query->matching('Articles', function ($q) {
         return $q->where(['Articles.created >=' => new DateTime('-10 days')]);
     });
@@ -742,8 +742,8 @@ filtrer des associations imbriquées::
 
     // Dans un controller ou une méthode de table.
     $query = $produits->find()->matching(
-        'Magasins.Villes.Pays', function ($q) {
-            return $q->where(['Pays.nom' => 'Japon']);
+        'Shops.Cities.Countries', function ($q) {
+            return $q->where(['Countries.name' => 'Japon']);
         }
     );
 
@@ -751,7 +751,7 @@ filtrer des associations imbriquées::
     // en passant une variable.
     // Utiliser la notation par points plutôt que des appels imbriqués à matching()
     $username = 'markstory';
-    $query = $articles->find()->matching('Commentaires.Users', function ($q) use ($username) {
+    $query = $articles->find()->matching('Comments.Users', function ($q) use ($username) {
         return $q->where(['username' => $username]);
     });
 
@@ -783,7 +783,7 @@ pouvez utiliser ``innerJoinWith()``::
 
     $query = $articles->find();
     $query->innerJoinWith('Tags', function ($q) {
-        return $q->where(['Tags.nom' => 'CakePHP']);
+        return $q->where(['Tags.name' => 'CakePHP']);
     });
 
 La méthode ``innerJoinWith()`` fonctionne de la même manière que ``matching()``,
@@ -791,8 +791,8 @@ ce qui signifie que vous pouvez utiliser la notation par points pour faire des
 jointures pour les associations imbriquées profondément::
 
     $query = $products->find()->innerJoinWith(
-        'Magasins.Villes.Pays', function ($q) {
-            return $q->where(['Pays.nom' => 'Japon']);
+        'Shops.Cities.Countries', function ($q) {
+            return $q->where(['Countries.name' => 'Japon']);
         }
     );
 
@@ -802,7 +802,7 @@ parfaitement combiner ``innerJoinWith()`` et ``contain()``.
 L'exemple ci-dessous filtre les Articles qui ont des Tags spécifiques et charge
 ces Tags::
  
-    $filter = ['Tags.nom' => 'CakePHP'];
+    $filter = ['Tags.name' => 'CakePHP'];
     $query = $articles->find()
         ->distinct($articles->getPrimaryKey())
         ->contain('Tags', function (Query $q) use ($filter) {
@@ -818,8 +818,8 @@ ces Tags::
     pour les noms des champs::
 
         $query
-            ->select(['nom_pays' => 'Pays.nom'])
-            ->innerJoinWith('Pays');
+            ->select(['country_name' => 'Countries.name'])
+            ->innerJoinWith('Countries');
  
     Sinon, vous verrez les données dans ``_matchingData``, comme cela a été
     décrit ci-dessous à propos de ``matching()``. C'est un angle mort de 
@@ -842,7 +842,7 @@ l'association spécifiée::
     $query = $articlesTable
         ->find()
         ->notMatching('Tags', function ($q) {
-            return $q->where(['Tags.nom' => 'ennuyeux']);
+            return $q->where(['Tags.name' => 'ennuyeux']);
         });
 
 L'exemple ci-dessus va trouver tous les articles qui n'ont pas été taggés avec
@@ -850,7 +850,7 @@ le mot ``ennuyeux``. Vous pouvez aussi utiliser cette méthode avec les
 associations HasMany. Vous pouvez, par exemple, trouver tous les auteurs qui
 n'ont publié aucun article dans les 10 derniers jours::
 
-    $query = $auteursTable
+    $query = $authorsTable
         ->find()
         ->notMatching('Articles', function ($q) {
             return $q->where(['Articles.created >=' => new \DateTime('-10 days')]);
@@ -862,7 +862,7 @@ trouver les articles qui n'ont pas été commentés par un utilisateur précis::
 
     $query = $articlesTable
         ->find()
-        ->notMatching('Commentaires.Users', function ($q) {
+        ->notMatching('Comments.Users', function ($q) {
             return $q->where(['username' => 'jose']);
         });
 
@@ -873,10 +873,10 @@ commentaire, mais non commentés par un utilisateur précis::
 
     $query = $articlesTable
         ->find()
-        ->notMatching('Commentaires.Users', function ($q) {
+        ->notMatching('Comments.Users', function ($q) {
             return $q->where(['username' => 'jose']);
         })
-        ->matching('Commentaires');
+        ->matching('Comments');
 
 .. note::
 
@@ -898,8 +898,8 @@ parallèle des données de l'article, vous pouvez utiliser la fonction
 ``leftJoinWith()``::
 
     $query = $articlesTable->find();
-    $query->select(['total_commentaires' => $query->func()->count('Commentaires.id')])
-        ->leftJoinWith('Commentaires')
+    $query->select(['total_comments' => $query->func()->count('Comments.id')])
+        ->leftJoinWith('Comments')
         ->group(['Articles.id'])
         ->enableAutoFields(true);
 
@@ -910,13 +910,13 @@ Le résultat de cette requête contiendra les données de l'article et la propri
 C'est utile par exemple pour rechercher, pour chaque auteur, le nombre
 d'articles taggés avec un certain mot::
 
-    $query = $auteursTable
+    $query = $authorsTable
         ->find()
         ->select(['total_articles' => $query->func()->count('Articles.id')])
         ->leftJoinWith('Articles.Tags', function ($q) {
-            return $q->where(['Tags.nom' => 'redoutable']);
+            return $q->where(['Tags.name' => 'redoutable']);
         })
-        ->group(['Auteurs.id'])
+        ->group(['Authors.id'])
         ->enableAutoFields(true);
 
 Cette fonction ne va charger aucune colonne des associations spécifiées dans les
@@ -936,7 +936,7 @@ et le type de jointure (``joinType``) 'INNER' peuvent être remplacés par
 'select'::
 
     $query = $articles->find()->contain([
-        'Commentaires' => [
+        'Comments' => [
             'strategy' => 'select',
         ]
     ]);
@@ -950,7 +950,7 @@ Habituellement, vous définisser la stratégie d'une association quand vous la
 définissez, dans la méthode ``Table::initialize()``, mais vous pouvez changer
 manuellement la stratégie de façon permanente::
  
-    $articles->Commentaires->setStrategy('select');
+    $articles->Comments->setStrategy('select');
 
 Récupération Avec la Stratégie de Sous-Requête
 ----------------------------------------------
@@ -961,10 +961,10 @@ une fois. Un bon moyen d'optimiser le chargement des associations ``hasMany`` et
 ``belongsToMany`` est d'utiliser la stratégie ``subquery``::
 
     $query = $articles->find()->contain([
-        'Commentaires' => [
+        'Comments' => [
                 'strategy' => 'subquery',
                 'queryBuilder' => function ($q) {
-                    return $q->where(['Commentaires.approuve' => true]);
+                    return $q->where(['Comments.approved' => true]);
                 }
         ]
     ]);
@@ -1066,9 +1066,9 @@ ResultSets::
     });
 
     // Crée un tableau associatif depuis les propriétés du résultat
-    $results = $articles->find()->contain(['Auteurs'])->all();
+    $results = $articles->find()->contain(['Authors'])->all();
 
-    $auteursList = $results->combine('id', 'auteur.nom');
+    $authorsList = $results->combine('id', 'author.name');
 
 Le chapitre :doc:`/core-libraries/collections` comporte plus de détails sur
 ce qu'on peut faire avec les fonctionnalités des collections sur des ResultSets.
@@ -1123,7 +1123,7 @@ paresseusement des données en eager. Vous pouvez charger des associations
 supplémentaires en utilisant ``loadInto()``::
 
     $articles = $this->Articles->find()->all();
-    $withMore = $this->Articles->loadInto($articles, ['Commentaires', 'Users']);
+    $withMore = $this->Articles->loadInto($articles, ['Comments', 'Users']);
 
 Vous pouvez charger en eager des données additionnelles dans une entity unique
 ou une collection d'entities.
@@ -1152,9 +1152,9 @@ données, en second argument la clé d'itération et en troisième elle reçoit 
 instance de la routine ``MapReduce`` en train d'être éxecutée::
 
     $mapper = function ($article, $key, $mapReduce) {
-        $status = 'publié';
-        if ($article->estBrouillon() || $article->estEnRevision()) {
-            $status = 'non publié';
+        $status = 'published';
+        if ($article->isDraft() || $article->isInReview()) {
+            $status = 'unpublished';
         }
         $mapReduce->emitIntermediate($article, $status);
     };
@@ -1181,19 +1181,19 @@ donc nous nous contentons d'émettre (*emit*) les résultats finaux::
 Pour finir, nous pouvons passer ces deux fonctions pour exécuter le
 regroupement::
 
-    $articlesParStatut = $articles->find()
-        ->where(['auteur_id' => 1])
+    $articlesByStatus = $articles->find()
+        ->where(['author_id' => 1])
         ->mapReduce($mapper, $reducer)
         ->all();
 
-    foreach ($articlesParStatut as $statut => $articles) {
-        echo sprintf("Il y a %d articles avec le statut %s", count($articles), $statut);
+    foreach ($articlesByStatus as $status => $articles) {
+        echo sprintf("Il y a %d articles avec le statut %s", count($articles), $status);
     }
 
 Ce qui va afficher la sortie suivante::
 
-    Il y a 4 articles avec le statut publié
-    Il y a 5 articles avec le statut non publié
+    Il y a 4 articles avec le statut published
+    Il y a 5 articles avec le statut unpublished
 
 Bien sûr, ceci est un exemple simple qui pourrait être résolu d'une autre
 façon sans l'aide d'un traitement map-reduce. Maintenant, regardons un autre
@@ -1205,13 +1205,13 @@ des informations sur CakePHP, comme d'habitude nous avons besoin d'une fonction
 mapper::
 
     $mapper = function ($article, $key, $mapReduce) {
-        if (stripos($article['contenu'], 'cakephp') === false) {
+        if (stripos($article['body'], 'cakephp') === false) {
             return;
         }
 
-        $mots = array_map('strtolower', explode(' ', $article['contenu']));
-        foreach ($mots as $mot) {
-            $mapReduce->emitIntermediate($article['id'], $mot);
+        $words = array_map('strtolower', explode(' ', $article['body']));
+        foreach ($words as $word) {
+            $mapReduce->emitIntermediate($article['id'], $word);
         }
     };
 
@@ -1220,14 +1220,14 @@ ensuite coupe le corps en mots individuels. Chaque mot va créer son propre
 ``tas``, où chaque id d'article sera stocké. Maintenant réduisons nos
 résultats pour extraire seulement le décompte du nombre de mots::
 
-    $reducer = function ($occurrences, $mot, $mapReduce) {
-        $mapReduce->emit(count($occurrences), $mot);
+    $reducer = function ($occurrences, $word, $mapReduce) {
+        $mapReduce->emit(count($occurrences), $word);
     }
 
 Pour finir, nous mettons tout ensemble::
 
     $nbMots = $articles->find()
-        ->where(['publie' => true])
+        ->where(['published' => true])
         ->andWhere(['publication_date >=' => new DateTime('2014-01-01')])
         ->disableHydration()
         ->mapReduce($mapper, $reducer)
@@ -1273,17 +1273,17 @@ suivi par d'autres utilisateurs.
 Maintenant, il est temps de la réduire. Pour chaque appel au reducer, il va
 recevoir une liste de followers par utilisateur::
 
-    $reducer = function ($amis, $user, $mr) {
-        $fauxAmis = [];
+    $reducer = function ($friends, $user, $mr) {
+        $fakeFriends = [];
 
-        foreach ($amis as $ami) {
-            if ($ami > 0 && !in_array(-$ami, $amis)) {
-                $fauxAmis[] = $ami;
+        foreach ($friends as $friend) {
+            if ($friend > 0 && !in_array(-$friend, $friends)) {
+                $fakeFriends[] = $friend;
             }
         }
 
-        if ($fauxAmis) {
-            $mr->emit($fauxAmis, $user);
+        if ($fakeFriends) {
+            $mr->emit($fakeFriends, $user);
         }
     };
 
@@ -1306,7 +1306,7 @@ Ce tableau final signifie, par exemple, que l'utilisateur avec l'id
 ``1`` suit les utilisateurs ``2`` et ``4``, mais ceux-ci ne suivent pas
 ``1`` de leur côté.
 
-Stacking Multiple Operations
+Empiler Plusieurs Opérations
 ----------------------------
 
 L'utilisation de `mapReduce` dans une requête ne va pas l'exécuter
@@ -1316,7 +1316,7 @@ Ceci vous permet de continuer à chainer les méthodes et les filtres
 sur la requête même après avoir ajouté une routine map-reduce::
 
     $query = $articles->find()
-        ->where(['publie' => true])
+        ->where(['published' => true])
         ->mapReduce($mapper, $reducer);
 
     // Plus loin dans votre app:
@@ -1325,9 +1325,9 @@ sur la requête même après avoir ajouté une routine map-reduce::
 C'est particulièrement utile pour construire des méthodes finder personnalisées
 comme décrit dans la section :ref:`custom-find-methods`::
 
-    public function findPublie(Query $query, array $options)
+    public function findPublished(Query $query, array $options)
     {
-        return $query->where(['publie' => true]);
+        return $query->where(['published' => true]);
     }
 
     public function findRecent(Query $query, array $options)
@@ -1335,7 +1335,7 @@ comme décrit dans la section :ref:`custom-find-methods`::
         return $query->where(['created >=' => new DateTime('1 day ago')]);
     }
 
-    public function findMotsCourants(Query $query, array $options)
+    public function findCommonWords(Query $query, array $options)
     {
         // Comme dans l'exemple précédent sur la fréquence des mots
         $mapper = ...;
@@ -1344,8 +1344,8 @@ comme décrit dans la section :ref:`custom-find-methods`::
     }
 
     $motsCourant = $articles
-        ->find('motsCourants')
-        ->find('publie')
+        ->find('commonWords')
+        ->find('published')
         ->find('recent');
 
 De plus, il est aussi possible d'empiler plusieurs opérations ``mapReduce``
@@ -1354,13 +1354,13 @@ plus couramment utilisés pour les articles, mais ensuite les filtrer pour
 retourner uniquement les mots qui étaient mentionnés plus de 20 fois tout au
 long des articles::
 
-    $mapper = function ($nb, $mot, $mr) {
-        if ($nb > 20) {
-            $mr->emit($nb, $mot);
+    $mapper = function ($count, $word, $mr) {
+        if ($count > 20) {
+            $mr->emit($count, $word);
         }
     };
 
-    $articles->find('motsCourants')->mapReduce($mapper)->all();
+    $articles->find('commonWords')->mapReduce($mapper)->all();
 
 Retirer Toutes les Opérations Map-reduce Empilées
 -------------------------------------------------

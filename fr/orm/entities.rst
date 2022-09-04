@@ -59,7 +59,7 @@ les données que vous voulez y stocker::
 
     $article = new Article([
         'id' => 1,
-        'titre' => 'Nouvel Article',
+        'title' => 'Nouvel Article',
         'created' => new DateTime('now')
     ]);
 
@@ -96,8 +96,8 @@ en utilisant la notation objet::
     use App\Model\Entity\Article;
 
     $article = new Article;
-    $article->titre = 'Ceci est mon premier post';
-    echo $article->titre;
+    $article->title = 'Ceci est mon premier post';
+    echo $article->title;
 
 Vous pouvez aussi utiliser les méthodes ``get()`` et ``set()``.
 
@@ -128,27 +128,27 @@ Vous pouvez vérifier si des champs sont définis dans vos entities avec
 ``has()``::
 
     $article = new Article([
-        'titre' => 'Premier post',
+        'title' => 'Premier post',
         'user_id' => null
     ]);
-    $article->has('titre'); // true
+    $article->has('title'); // true
     $article->has('user_id'); // false
-    $article->has('indefini'); // false.
+    $article->has('undefined'); // false.
 
 La méthode ``has()`` va renvoyer ``true`` si un champ est défini est a une
 valeur non null. Vous pouvez utiliser ``isEmpty()`` et ``hasValue()`` pour
 vérifier si un champ contient une valeur 'non-empty'::
 
     $article = new Article([
-        'titre' => 'Premier post',
+        'title' => 'Premier post',
         'user_id' => null
         'text' => '',
         'links' => []
     ]);
     ]);
-    $article->has('titre'); // true
-    $article->isEmpty('titre');  // false
-    $article->hasValue('titre'); // true
+    $article->has('title'); // true
+    $article->isEmpty('title');  // false
+    $article->hasValue('title'); // true
 
     $article->has('user_id'); // false
     $article->isEmpty('user_id');  // true
@@ -162,13 +162,13 @@ vérifier si un champ contient une valeur 'non-empty'::
     $article->isEmpty('links');  // true
     $article->hasValue('links'); // false
 
-    $article->has('texte'); // true
-    $article->isEmpty('texte');  // true
-    $article->hasValue('texte'); // false
+    $article->has('text'); // true
+    $article->isEmpty('text');  // true
+    $article->hasValue('text'); // false
 
-    $article->has('liens'); // true
-    $article->isEmpty('liens');  // true
-    $article->hasValue('liens'); // false
+    $article->has('links'); // true
+    $article->isEmpty('links');  // true
+    $article->hasValue('links'); // false
 
 Accesseurs & Mutateurs
 ======================
@@ -194,18 +194,18 @@ seul argument. Par exemple::
 
     class Article extends Entity
     {
-        protected function _getTitre($titre)
+        protected function _getTitle($title)
         {
-            return strtoupper($titre);
+            return strtoupper($title);
         }
     }
 
-Cet exemple convertit en majuscules la valeur du champ ``titre`` à chaque fois
+Cet exemple convertit en majuscules la valeur du champ ``title`` à chaque fois
 qu'il est lu. Il sera exécuté quand vous récupérerez le champ *via* une de
 ces deux manières::
 
-    echo $article->titre; // renvoie FOO au lieu de foo
-    echo $article->get('titre'); // renvoie FOO au lieu de foo
+    echo $article->title; // renvoie FOO au lieu de foo
+    echo $article->get('title'); // renvoie FOO au lieu de foo
 
 .. note::
 
@@ -240,22 +240,22 @@ les méthodes mutateurs de faire des boucles infinies. Par exemple::
 
     class Article extends Entity
     {
-        protected function _setTitre($titre)
+        protected function _setTitle($title)
         {
-            $this->minuscules = Text::slug($titre);
+            $this->slug = Text::slug($title);
 
-            return strtouppercase($titre);
+            return strtouppercase($title);
         }
 
     }
 
 Cet exemple fait deux choses : il stocke une version modifiée de la valeur
-spécifiée dans le champ ``minuscules`` et stocke une version en majuscules dans
+spécifiée dans le champ ``slug`` et stocke une version en majuscules dans
 le champ ``titre``. Il sera executé lorsque vous définirez le champ *via* une de
 ces deux manières::
 
-    $user->titre = 'foo' // définit le champ minuscules et stocke FOO au lieu de foo
-    $user->set('titre', 'foo'); // définit le champ minuscules et stocke FOO au lieu de foo
+    $user->title = 'foo' // définit le champ slug et stocke FOO au lieu de foo
+    $user->set('title', 'foo'); // définit le champ slug et stocke FOO au lieu de foo
 
 .. warning::
 
@@ -271,7 +271,7 @@ Créer des Champs Virtuels
 
 En définissant des accesseurs, vous pouvez fournir un accès à des champs qui
 n'existent pas réellement. Par exemple si votre table users a des champs
-``prenom`` et ``nom_de_famille``, vous pouvez créer une méthode pour le nom
+``first_name`` et ``last_name``, vous pouvez créer une méthode pour le nom
 complet::
 
     namespace App\Model\Entity;
@@ -280,18 +280,18 @@ complet::
 
     class User extends Entity
     {
-        protected function _getNomComplet()
+        protected function _getFullName()
         {
-            return $this->prenom . '  ' . $this->nom_de_famille;
+            return $this->first_name . '  ' . $this->last_name;
         }
     }
 
 Vous pouvez accéder aux champs virtuels comme s'ils existaient sur l'entity.
 Le nom du champ sera le nom de la méthode en minuscules, avec des underscores
-pour séparer les mots (``nom_complet``)::
+pour séparer les mots (``full_name``)::
 
-    echo $user->nom_complet;
-    echo $user->get('nom_complet');
+    echo $user->full_name;
+    echo $user->get('full_name');
 
 Souvenez-vous que les champs virtuels ne peuvent pas être utilisés dans
 les finds. Si vous voulez qu'ils fassent partie des données JSON ou dans des
@@ -308,7 +308,7 @@ modifications dans l'entity. Par exemple, vous pourriez vouloir valider
 uniquement les champs lorsqu'ils ont été modifiés::
 
     // Vérifie si le champ title n'a pas été modifié.
-    $article->isDirty('titre');
+    $article->isDirty('title');
 
 Vous pouvez également marquer un champ comme ayant été modifié. C'est pratique
 lorsque vous ajoutez des données dans des champs contenant un tableau car sinon
@@ -316,8 +316,8 @@ cela ne marque pas automatiquement le champ comme ayant été modifié, seule la
 redéfinition du tableau complet aurait cet effet::
 
     // Ajoute un commentaire et marque le champ comme modifié.
-    $article->commentaires[] = $nouveauCommentaire;
-    $article->setDirty('commentaires', true);
+    $article->comments[] = $nouveauCommentaire;
+    $article->setDirty('comments', true);
 
 De plus, vous pouvez également baser votre code conditionnel sur les valeurs
 initiales des champs en utilisant la méthode ``getOriginal()``. Cette
@@ -338,7 +338,7 @@ utiliser la méthode ``clean()``::
 Lors de la création d'un nouvelle entity, vous pouvez empêcher les champs
 d'être marqués *dirty* en passant une option supplémentaire::
 
-    $article = new Article(['titre' => 'Nouvel Article'], ['markClean' => true]);
+    $article = new Article(['title' => 'Nouvel Article'], ['markClean' => true]);
 
 Pour récupérer la liste des propriétés *dirty* d'une ``Entity``, vous pouvez
 appeler::
@@ -399,8 +399,8 @@ d'indiquer s'ils peuvent être assignés en masse ou non. Les valeurs ``true`` e
     class Article extends Entity
     {
         protected $_accessible = [
-            'titre' => true,
-            'contenu' => true
+            'title' => true,
+            'body' => true
         ];
     }
 
@@ -414,8 +414,8 @@ comportement par défaut si un champ n'est pas nommé spécifiquement::
     class Article extends Entity
     {
         protected $_accessible = [
-            'titre' => true,
-            'contenu' => true,
+            'title' => true,
+            'body' => true,
             '*' => false,
         ];
     }
@@ -430,7 +430,7 @@ pouvez lui spécifier de ne pas se protéger contre l'assignement de masse::
 
     use App\Model\Entity\Article;
 
-    $article = new Article(['id' => 1, 'titre' => 'Foo'], ['guard' => false]);
+    $article = new Article(['id' => 1, 'title' => 'Foo'], ['guard' => false]);
 
 Modifier les Champs Protégés à la Volée
 ---------------------------------------
@@ -441,8 +441,8 @@ méthode ``setAccess()``::
     // Rendre user_id accessible.
     $article->setAccess('user_id', true);
 
-    // Rendre titre protégé.
-    $article->setAccess('titre', false);
+    // Rendre title protégé.
+    $article->setAccess('title', false);
 
 .. note::
 
@@ -518,8 +518,8 @@ Après avoir ajouté le plugin à votre entity, vous pourrez faire ceci::
     $article = $this->Articles->findById($id);
 
     // La propriété commentaires a été chargée en lazy
-    foreach ($article->commentaires as $commentaire) {
-        echo $commentaire->contenu;
+    foreach ($article->comments as $comment) {
+        echo $comment->body;
     }
 
 Créer du Code Réutilisable avec les Traits
@@ -545,7 +545,7 @@ Ce trait pourrait donner des méthodes pour marquer les entities comme
     {
         public function softDelete()
         {
-            $this->set('supprime', true);
+            $this->set('deleted', true);
         }
     }
 
@@ -600,13 +600,13 @@ doivent être exposés::
 
     class User extends Entity
     {
-        protected $_virtual = ['nom_complet'];
+        protected $_virtual = ['full_name'];
     }
 
 Cette liste peut être modifiée à la volée en utilisant la méthode
 ``setVirtual``::
 
-    $user->setVirtual(['nom_complet', 'is_admin']);
+    $user->setVirtual(['full_name', 'is_admin']);
 
 Cacher les Champs
 -----------------
@@ -628,7 +628,7 @@ définition d'une classe entity, définissez quels champs doivent être cachés:
 Cette liste peut être modifiée à la volée en utilisant la méthode
 ``setHidden``::
 
-    $user->setHidden(['password', 'question_de_recuperation']);
+    $user->setHidden(['password', 'recovery_question']);
 
 Stocker des Types Complexes
 ===========================
