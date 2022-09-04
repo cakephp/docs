@@ -360,8 +360,8 @@ methods. Finder methods are the ideal way to package up commonly used queries,
 allowing you to abstract query details into a simple to use method. Finder
 methods are defined by creating methods following the convention of ``findFoo``
 where ``Foo`` is the name of the finder you want to create. For example if we
-wanted to add a finder to our articles table for finding published articles we
-would do the following::
+wanted to add a finder to our articles table for finding articles written by a
+given user, we would do the following::
 
     use Cake\ORM\Query;
     use Cake\ORM\Table;

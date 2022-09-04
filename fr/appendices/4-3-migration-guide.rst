@@ -27,7 +27,7 @@ automatiser la mise à jour des fonctionnalités obsolètes::
     d'appliquer d'abord les modifications de CakePHP 4.2.
 
 Une nouvelle option de configuration a été ajoutée pour désactiver les
-dépéréciations chemin par chemin. Cf. :ref:`deprecation-warnings` pour plus
+dépréciations chemin par chemin. Cf. :ref:`deprecation-warnings` pour plus
 d'informations.
 
 Connection
