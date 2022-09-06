@@ -1059,7 +1059,8 @@ object::
             'path' => '',
             'domain' => '',
             'secure' => false,
-            'http' => false,
+            'httponly' => false,
+            'samesite' => null // Or one of CookieInterface::SAMESITE_* constants
         ]
     ));
 
