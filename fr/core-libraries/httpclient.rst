@@ -492,7 +492,7 @@ option du constructeur::
 Tests
 =====
 
-.. php:trait:: use Cake\Http\TestSuite\HttpClientTrait
+.. php:trait:: Cake\Http\TestSuite\HttpClientTrait
 
 Dans les tests, vous voudrez souvent créer des réponses de mocks vers des API
 externes. Vous pouvez utiliser ``HttpClientTrait`` pour définir des réponses aux
