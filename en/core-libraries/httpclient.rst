@@ -469,13 +469,14 @@ instead. You can force select a transport adapter using a constructor option::
 Testing
 =======
 
-.. php:trait:: Cake\TestSuite\HttpClientTrait
+.. php:trait:: use Cake\Http\TestSuite\HttpClientTrait
+
 
 In tests you will often want to create mock responses to external APIs. You can
 use the ``HttpClientTrait`` to define responses to the requests your application
 is making::
 
-    use Cake\TestSuite\HttpClientTrait;
+    use use Cake\Http\TestSuite\HttpClientTrait;
     use Cake\TestSuite\TestCase;
 
     class CartControllerTests extends TestCase
