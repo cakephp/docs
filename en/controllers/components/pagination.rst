@@ -71,7 +71,7 @@ from the URL::
 While you can include any of the options supported by
 :php:meth:`~Cake\\ORM\\Table::find()` such as ``fields`` in your pagination
 settings. It is cleaner and simpler to bundle your pagination options into
-a :ref:`custom-find-methods`. You can use your finder in pagination by using the
+a :ref:`Custom Find Method<custom-find-methods>`. You can use your finder in pagination by using the
 ``finder`` option::
 
     class ArticlesController extends AppController
