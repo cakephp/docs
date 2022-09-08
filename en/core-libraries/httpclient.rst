@@ -469,8 +469,9 @@ instead. You can force select a transport adapter using a constructor option::
 Testing
 =======
 
-.. php:trait:: Cake\Http\TestSuite\HttpClientTrait
+.. php:namespace:: Cake\Http\TestSuite
 
+.. php:trait:: HttpClientTrait
 
 In tests you will often want to create mock responses to external APIs. You can
 use the ``HttpClientTrait`` to define responses to the requests your application
@@ -503,7 +504,7 @@ There are methods to mock the most commonly used HTTP methods::
     $this->mockClientPut(...);
     $this->mockClientDelete(...);
 
-... php:method:: newClientResponse(int $code = 200, array $headers = [], string $body = '')
+.. php:method:: newClientResponse(int $code = 200, array $headers = [], string $body = '')
 
 As seen above you can use the ``newClientResponse()`` method to create responses
 for the requests your application will make. The headers need to be a list of
