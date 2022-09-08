@@ -363,8 +363,7 @@ conventions. Let's continue by adding more logic to our command::
         public function execute(Arguments $args, ConsoleIo $io)
         {
             $table = $args->getArgument('table');
-            $this->fetchTable($table)->query()
-                ->update()
+            $this->fetchTable($table)->updateQuery()
                 ->set([
                     'modified' => new FrozenTime()
                 ])
@@ -463,8 +462,7 @@ Update the command class to the following::
                 $io->error('You need to be sure.');
                 $this->abort();
             }
-            $this->fetchTable($table)->query()
-                ->update()
+            $this->fetchTable($table)->updateQuery()
                 ->set([
                     'modified' => new FrozenTime()
                 ])

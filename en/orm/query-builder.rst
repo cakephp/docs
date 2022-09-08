@@ -1396,10 +1396,10 @@ some database Drivers (PostgreSQL notably)
 Inserting Data
 ==============
 
-Unlike earlier examples, you should not use ``find()`` to create insert queries.
-Instead, create a new ``Query`` object using ``query()``::
+Unlike earlier examples, you should can't use ``find()`` to create insert queries.
+Instead, create a new ``InsertQuery`` object using ``insertQuery()``::
 
-    $query = $articles->query();
+    $query = $articles->insertQuery();
     $query->insert(['title', 'body'])
         ->values([
             'title' => 'First post',
@@ -1410,7 +1410,7 @@ Instead, create a new ``Query`` object using ``query()``::
 To insert multiple rows with only one query, you can chain the ``values()``
 method as many times as you need::
 
-    $query = $articles->query();
+    $query = $articles->insertQuery();
     $query->insert(['title', 'body'])
         ->values([
             'title' => 'First post',
@@ -1431,7 +1431,7 @@ queries::
         ->select(['title', 'body', 'published'])
         ->where(['id' => 3]);
 
-    $query = $articles->query()
+    $query = $articles->insertQuery()
         ->insert(['title', 'body', 'published'])
         ->values($select)
         ->execute();
@@ -1446,12 +1446,11 @@ queries::
 Updating Data
 =============
 
-As with insert queries, you should not use ``find()`` to create update queries.
-Instead, create new a ``Query`` object using ``query()``::
+As with insert queries, you can't not use ``find()`` to create update queries.
+Instead, create new a ``UpdateQuery`` object using ``updateQuery()``::
 
-    $query = $articles->query();
-    $query->update()
-        ->set(['published' => true])
+    $query = $articles->updateQuery();
+    $query->set(['published' => true])
         ->where(['id' => $id])
         ->execute();
 
@@ -1466,12 +1465,11 @@ Generally, it is easier to update data using entities and
 Deleting Data
 =============
 
-As with insert queries, you should not use ``find()`` to create delete queries.
-Instead, create new a query object using ``query()``::
+As with insert queries, you can't use ``find()`` to create delete queries.
+Instead, create new a query object using ``deleteQuery()``::
 
-    $query = $articles->query();
-    $query->delete()
-        ->where(['id' => $id])
+    $query = $articles->deleteQuery();
+    $query->where(['id' => $id])
         ->execute();
 
 Generally, it is easier to delete data using entities and
@@ -1595,7 +1593,7 @@ results based on the results of other queries::
     $query = $articles->find();
     $query->from(['matches' => $matchingComment])
         ->innerJoin(
-            ['Articles' =>  'articles'], 
+            ['Articles' =>  'articles'],
             ['Articles.id' => $query->identifier('matches.id') ]
         );
 
@@ -1615,9 +1613,6 @@ generate aliases::
 
     $query = $articles->find()
         ->where(['id IN' => $matchingComment]);
-
-.. versionadded:: 4.2.0
-    ``Table::subquery()`` and ``Query::subquery()`` were added.
 
 Adding Locking Statements
 -------------------------
