@@ -445,7 +445,7 @@ You can generate test database schema either via CakePHP's migrations, loading
 a SQL dump file or using another external schema management tool. You should
 create your schema in your application's ``tests/bootstrap.php`` file.
 
-If you use CakePHP's `migrations plugin </migrations>` to manage your
+If you use CakePHP's :doc:`migrations plugin </migrations>` to manage your
 application's schema, you can reuse those migrations to generate your test
 database schema as well::
 
