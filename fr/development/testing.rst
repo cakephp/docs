@@ -468,7 +468,7 @@ de CakePHP, soit en chargeant un fichier de dump SQL, soit en utilisant un autre
 outil externe de gestion de schéma. Vous devez créer votre schéma dans le
 fichier ``tests/bootstrap.php`` de votre application.
 
-Si vous utilisez le `plugin de migrations </migrations>`  de CakePHP pour gérer
+Si vous utilisez le :doc:`plugin de migrations </migrations>`  de CakePHP pour gérer
 les schémas de votre application, vous pouvez tout aussi bien réutiliser ces
 migrations pour générer le schéma de votre base de données de test::
 
