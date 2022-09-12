@@ -431,8 +431,7 @@ Enum Type
 .. php:class:: EnumType
 
 Maps a `BackedEnum <https://www.php.net/manual/en/language.enumerations.backed.php>`_ to a string or integer column.
-To use this type you need to specify which column is associated to which BackedEnum inside the table class.
-::
+To use this type you need to specify which column is associated to which BackedEnum inside the table class::
 
     use \Cake\Database\Type\EnumType;
     use \App\Model\Enum\ArticleStatus;
@@ -443,8 +442,7 @@ To use this type you need to specify which column is associated to which BackedE
         $this->getSchema()->setColumnType('status', EnumType::from(ArticleStatus::class));
     }
 
-Where ``ArticleStatus`` contains something like:
-::
+Where ``ArticleStatus`` contains something like::
 
     namespace App\Model\Enum;
 
