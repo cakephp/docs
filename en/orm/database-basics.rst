@@ -367,6 +367,8 @@ time
     Maps to a ``TIME`` type in all databases.
 json
     Maps to a ``JSON`` type if it's available, otherwise it maps to ``TEXT``.
+enum
+    See :ref:`enum-type`.
 
 These types are used in both the schema reflection features that CakePHP
 provides, and schema generation features CakePHP uses when using test fixtures.
@@ -420,6 +422,35 @@ Can be used to map datetime columns that contain time zones such as
 
     // Overwrite the default datetime type with a more precise one.
     TypeFactory::map('datetime', DateTimeTimezoneType::class);
+
+.. _enum-type:
+
+Enum Type
+---------
+
+.. php:class:: EnumType
+
+Maps a `BackedEnum <https://www.php.net/manual/en/language.enumerations.backed.php>`_ to a string or integer column.
+To use this type you need to specify which column is associated to which BackedEnum inside the table class::
+
+    use \Cake\Database\Type\EnumType;
+    use \App\Model\Enum\ArticleStatus;
+
+    // in src/Model/Table/ArticlesTable.php
+    public function initialize(array $config): void
+    {
+        $this->getSchema()->setColumnType('status', EnumType::from(ArticleStatus::class));
+    }
+
+Where ``ArticleStatus`` contains something like::
+
+    namespace App\Model\Enum;
+
+    enum ArticleStatus: string
+    {
+        case PUBLISHED = 'Y';
+        case UNPUBLISHED = 'N';
+    }
 
 .. _adding-custom-database-types:
 

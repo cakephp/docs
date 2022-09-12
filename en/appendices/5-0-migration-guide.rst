@@ -162,3 +162,4 @@ Database
 --------
 
 - ``Query::all()`` was added which runs result decorator callbacks and returns a result set for select queries.
+- ``EnumType`` was added to allow mapping between PHP backed enums and a string or integer column.
