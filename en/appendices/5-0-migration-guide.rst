@@ -74,6 +74,8 @@ Database
 - ``getMaxAliasLength()`` and ``getConnectionRetries()`` were added
   to ``DriverInterface``.
 - ``TableSchemaAwareInterface`` was removed.
+- Supported drivers now automatically add auto-increment only to integer primary keys named "id" instead
+  of all integer primary keys. Setting 'autoIncrement' to false always disables on all supported drivers.
 
 Datasource
 ----------
