@@ -114,6 +114,7 @@ Log
 ORM
 ---
 
+- Finder arguments are now required to be associative arrays as they were always expected to be.
 - ``TranslateBehavior`` now defaults to the ``ShadowTable`` strategy. If you are
   using the ``Eav`` strategy you will need to update your behavior configuration
   to retain the previous behavior.
