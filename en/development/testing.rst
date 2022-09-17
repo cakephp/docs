@@ -736,6 +736,46 @@ This method will build an instance of your ``Application`` and call the
 ``routes()`` method on it. If your ``Application`` class requires specialized
 constructor parameters you can provide those to ``loadRoutes($constructorArgs)``.
 
+Creating Routes in Tests
+------------------------
+
+Sometimes it may be be necessary to dynamically add routes in tests, for example
+when developing plugins, or applications that are extensible.
+
+Just like loading existing application routes, this can be done during ``setup()``
+of a test method, and/or in the individual test methods themselves::
+
+    use Cake\Routing\Route\DashedRoute;
+    use Cake\Routing\RouteBuilder;
+    use Cake\Routing\Router;
+    use Cake\TestSuite\TestCase;
+
+    class PluginHelperTest extends TestCase
+    {
+        protected RouteBuilder $routeBuilder;
+
+        public function setUp(): void
+        {
+            parent::setUp();
+
+            $this->routeBuilder = Router::createRouteBuilder('/');
+            $this->routeBuilder->scope('/', function (RouteBuilder $routes) {
+                $routes->setRouteClass(DashedRoute::class);
+                $routes->get(
+                    '/test/view/{id}',
+                    ['controller' => 'Tests', 'action' => 'view']
+                );
+                // ...
+            });
+
+            // ...
+        }
+    }
+
+This will create a new route builder instance that will merge connected routes
+into the same route collection used by all other route builder instances that
+may already exist, or are yet to be created in the environment.
+
 Loading Plugins in Tests
 ------------------------
 

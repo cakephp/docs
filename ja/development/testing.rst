@@ -675,6 +675,46 @@ CakePHPコアまたはプラグインからフィクスチャをロードする�
 このメソッドは、 ``Application`` インスタンスの作成と、そのインスタンスでの ``routes()`` メソッドの呼び出しを行ないます。
 この ``Application`` インスタンスのコンストラクタには、 ``loadRoutes($constructorArgs)`` としてパラメータを渡すことができます。
 
+テストにおけるルーティングの作成
+--------------------------------
+
+プラグインや拡張性のあるアプリケーションを開発する場合など、 テスト内で動的にルートを追加することが必要になることがあります。
+例えば、プラグインや拡張性のあるアプリケーションを開発する場合などです。
+
+既存のアプリケーションのルートを読み込むのと同じように、これはテストメソッドの ``setup()`` の中で行うことができます。
+で、あるいは個々のテストメソッド自身で行うことができます。::
+
+    use Cake\Routing\Route\DashedRoute;
+    use Cake\Routing\RouteBuilder;
+    use Cake\Routing\Router;
+    use Cake\TestSuite\TestCase;
+
+    class PluginHelperTest extends TestCase
+    {
+        protected RouteBuilder $routeBuilder;
+
+        public function setUp(): void
+        {
+            parent::setUp();
+
+            $this->routeBuilder = Router::createRouteBuilder('/');
+            $this->routeBuilder->scope('/', function (RouteBuilder $routes) {
+                $routes->setRouteClass(DashedRoute::class);
+                $routes->get(
+                    '/test/view/{id}',
+                    ['controller' => 'Tests', 'action' => 'view']
+                );
+                // ...
+            });
+
+            // ...
+        }
+    }
+
+これは新しいルートビルダのインスタンスを作成し、接続されたルートをマージします。
+を、他のすべてのルートビルダーインスタンスで使われる同じルートコレクションにマージします。
+接続されたルートを、その環境に存在する、あるいはまだ作成されていない他のすべてのルートビルダーインスタンスで使用される同じルートコレクションにマージします。
+
 プラグインをロード
 ------------------------
 
