@@ -2,7 +2,7 @@
 ###################
 
 CakePHP 5.0 contains breaking changes, and is not backwards compatible with 4.x
-releases. Before attempting to upgrade to 5.0, first upgrade to 4.3 and resolve
+releases. Before attempting to upgrade to 5.0, first upgrade to 4.5 and resolve
 all deprecation warnings.
 
 Refer to the :doc:`/appendices/5-0-upgrade-guide` for step by step instructions
@@ -12,7 +12,7 @@ Deprecated Features Removed
 ===========================
 
 All methods, properties and functionality that were emitting deprecation warnings
-as of 4.3 have been removed.
+as of 4.5 have been removed.
 
 Deprecations
 ============
