@@ -14,7 +14,7 @@ Underneath the covers, the query builder uses PDO prepared statements which
 protect against SQL injection attacks.
 
 The SelectQuery Object
-================
+======================
 
 The easiest way to create a ``SelectQuery`` object is to use ``find()`` from a
 ``Table`` object. This method will return an incomplete query ready to be
@@ -150,7 +150,7 @@ For more information on how to customize the fields used for populating the list
 refer to :ref:`table-find-list` section.
 
 Resultset Are Collection Objects
-------------------------------
+--------------------------------
 
 Once you get familiar with the Query object methods, it is strongly encouraged
 that you visit the :doc:`Collection </core-libraries/collections>` section to
@@ -1521,8 +1521,7 @@ Binding values
 --------------
 
 It is possible to protect against many unsafe situations by using bindings.
-Similar to :ref:`binding values to prepared statements <database-basics-binding-values>`,
-values can be bound to queries using the :php:meth:`Cake\\Database\\Query::bind()`
+Values can be bound to queries using the :php:meth:`Cake\\Database\\Query::bind()`
 method.
 
 The following example would be a safe variant of the unsafe, SQL injection prone
