@@ -2,9 +2,9 @@ Query Builder
 #############
 
 
-.. php:namespace:: Cake\ORM
+.. php:namespace:: Cake\ORM\Query\SelectQuery
 
-.. php:class:: Query
+.. php:class:: SelectQuery
 
 The ORM's query builder provides a simple to use fluent interface for creating
 and running queries. By composing queries together, you can create advanced
@@ -13,18 +13,18 @@ queries using unions and subqueries with ease.
 Underneath the covers, the query builder uses PDO prepared statements which
 protect against SQL injection attacks.
 
-The Query Object
+The SelectQuery Object
 ================
 
-The easiest way to create a ``Query`` object is to use ``find()`` from a
+The easiest way to create a ``SelectQuery`` object is to use ``find()`` from a
 ``Table`` object. This method will return an incomplete query ready to be
 modified. You can also use a table's connection object to access the lower level
-Query builder that does not include ORM features, if necessary. See the
+query builder that does not include ORM features, if necessary. See the
 :ref:`database-queries` section for more information::
 
     use Cake\ORM\Locator\LocatorAwareTrait;
 
-    $articles = $this->getTableLocator()->get('Articles');
+    $articles = $this->fetchTable('Articles');
 
     // Start a new query.
     $query = $articles->find();
@@ -43,7 +43,7 @@ Selecting Rows From A Table
 
     use Cake\ORM\Locator\LocatorAwareTrait;
 
-    $query = $this->getTableLocator()->get('Articles')->find();
+    $query = $this->fetchTable('Articles')->find();
 
     foreach ($query->all() as $article) {
         debug($article->title);
@@ -53,14 +53,14 @@ For the remaining examples, assume that ``$articles`` is a
 :php:class:`~Cake\\ORM\\Table`. When inside controllers, you can use
 ``$this->Articles`` instead of ``$articles``.
 
-Almost every method in a ``Query`` object will return the same query, this means
-that ``Query`` objects are lazy, and will not be executed unless you tell them
+Almost every method in a ``SelectQuery`` object will return the same query, this means
+that ``SelectQuery`` objects are lazy, and will not be executed unless you tell them
 to::
 
     $query->where(['id' => 1]); // Return the same query object
     $query->order(['title' => 'DESC']); // Still same object, no SQL executed
 
-You can of course chain the methods you call on Query objects::
+You can of course chain the methods you call on SelectQuery objects::
 
     $query = $articles
         ->find()
@@ -72,7 +72,7 @@ You can of course chain the methods you call on Query objects::
         debug($article->created);
     }
 
-If you try to call ``debug()`` on a Query object, you will see its internal
+If you try to call ``debug()`` on a SelectQuery object, you will see its internal
 state and the SQL that will be executed in the database::
 
     debug($articles->find()->where(['id' => 1]));
@@ -110,9 +110,8 @@ In the above example, ``$resultsIteratorObject`` will be an instance of
 and traversing methods on.
 
 Often, there is no need to call ``all()``, you can simply iterate the
-Query object to get its results. Query objects can also be used directly as the
-result object; trying to iterate the query, calling ``toList()`` or some of the
-methods inherited from :doc:`Collection </core-libraries/collections>`, will
+SelectQuery object to get its results. Query objects can also be used directly as the
+result object; trying to iterate the query, calling ``toList()`` or ``toArray()``, will
 result in the query being executed and results returned to you.
 
 Selecting A Single Row From A Table
@@ -150,13 +149,13 @@ You can also get a key-value list out of a query result::
 For more information on how to customize the fields used for populating the list
 refer to :ref:`table-find-list` section.
 
-Queries Are Collection Objects
+Resultset Are Collection Objects
 ------------------------------
 
 Once you get familiar with the Query object methods, it is strongly encouraged
 that you visit the :doc:`Collection </core-libraries/collections>` section to
-improve your skills in efficiently traversing the results. Query results
-implement the collection interface::
+improve your skills in efficiently traversing the results. The resultset (returned
+by calling the ``SelectQuery``'s ``all()`` method) implements the collection interface::
 
     // Use the combine() method from the collections library
     // This is equivalent to find('list')
@@ -240,10 +239,10 @@ To set some basic conditions you can use the ``where()`` method::
 You can also pass an anonymous function to the ``where()`` method. The passed
 anonymous function will receive an instance of
 ``\Cake\Database\Expression\QueryExpression`` as its first argument, and
-``\Cake\ORM\Query`` as its second::
+``\Cake\ORM\Query\SelectQuery`` as its second::
 
     $query = $articles->find();
-    $query->where(function (QueryExpression $exp, Query $q) {
+    $query->where(function (QueryExpression $exp, SelectQuery $q) {
         return $exp->eq('published', true);
     });
 
@@ -304,7 +303,7 @@ to bind to the arguments and/or the return type, for example::
 
 For details, see the documentation for :php:class:`Cake\\Database\\FunctionsBuilder`.
 
-You can access existing wrappers for several SQL functions through ``Query::func()``:
+You can access existing wrappers for several SQL functions through ``SelectQuery::func()``:
 
 ``rand()``
     Generate a random value between 0 and 1 via SQL.
@@ -431,13 +430,13 @@ To apply ordering, you can use the ``order`` method::
 When calling ``order()`` multiple times on a query, multiple clauses will be
 appended.  However, when using finders you may sometimes need to overwrite the
 ``ORDER BY``.  Set the second parameter of ``order()`` (as well as
-``orderAsc()`` or ``orderDesc()``) to ``Query::OVERWRITE`` or to ``true``::
+``orderAsc()`` or ``orderDesc()``) to ``SelectQuery::OVERWRITE`` or to ``true``::
 
     $query = $articles->find()
         ->order(['title' => 'ASC']);
     // Later, overwrite the ORDER BY clause instead of appending to it.
     $query = $articles->find()
-        ->order(['created' => 'DESC'], Query::OVERWRITE);
+        ->order(['created' => 'DESC'], SelectQuery::OVERWRITE);
 
 The ``orderAsc`` and ``orderDesc`` methods can be used when you need to sort on
 complex expressions::
@@ -451,7 +450,7 @@ complex expressions::
 
 To build complex order clauses, use a Closure to build order expressions::
 
-    $query->orderAsc(function (QueryExpression $exp, Query $query) {
+    $query->orderAsc(function (QueryExpression $exp, SelectQuery $query) {
         return $exp->addCase(...);
     });
 
@@ -618,7 +617,7 @@ If we wanted to classify cities into SMALL, MEDIUM, or LARGE based on population
 size, we could do the following::
 
     $query = $cities->find()
-        ->where(function (QueryExpression $exp, Query $q) {
+        ->where(function (QueryExpression $exp, SelectQuery $q) {
             return $exp->addCase(
                 [
                     $q->newExpr()->lt('population', 100000),
@@ -639,7 +638,7 @@ Any time there are fewer case conditions than values, ``addCase`` will
 automatically produce an ``if .. then .. else`` statement::
 
     $query = $cities->find()
-        ->where(function (QueryExpression $exp, Query $q) {
+        ->where(function (QueryExpression $exp, SelectQuery $q) {
             return $exp->addCase(
                 [
                     $q->newExpr()->eq('population', 0),
@@ -750,7 +749,7 @@ If you'd prefer to avoid deeply nested arrays, you can use the callback form of
 you to use the expression builder interface to build more complex conditions without arrays.
 For example::
 
-    $query = $articles->find()->where(function (QueryExpression $exp, Query $query) {
+    $query = $articles->find()->where(function (QueryExpression $exp, SelectQuery $query) {
         // Use add() to add multiple conditions for the same field.
         $author = $query->newExpr()->or(['author_id' => 3])->add(['author_id' => 2]);
         $published = $query->newExpr()->and(['published' => true, 'view_count' => 10]);
@@ -880,7 +879,7 @@ Which will generate the following SQL looking like:
 It is also possible to build expressions using SQL functions::
 
     $query = $articles->find()
-        ->where(function (QueryExpression $exp, Query $q) {
+        ->where(function (QueryExpression $exp, SelectQuery $q) {
             $year = $q->func()->year([
                 'created' => 'identifier'
             ]);
@@ -906,7 +905,7 @@ conditions:
 - ``eq()`` Creates an equality condition::
 
     $query = $cities->find()
-        ->where(function (QueryExpression $exp, Query $q) {
+        ->where(function (QueryExpression $exp, SelectQuery $q) {
             return $exp->eq('population', '10000');
         });
     # WHERE population = 10000
@@ -914,7 +913,7 @@ conditions:
 - ``notEq()`` Creates an inequality condition::
 
     $query = $cities->find()
-        ->where(function (QueryExpression $exp, Query $q) {
+        ->where(function (QueryExpression $exp, SelectQuery $q) {
             return $exp->notEq('population', '10000');
         });
     # WHERE population != 10000
@@ -922,7 +921,7 @@ conditions:
 - ``like()`` Creates a condition using the ``LIKE`` operator::
 
     $query = $cities->find()
-        ->where(function (QueryExpression $exp, Query $q) {
+        ->where(function (QueryExpression $exp, SelectQuery $q) {
             return $exp->like('name', '%A%');
         });
     # WHERE name LIKE "%A%"
@@ -930,7 +929,7 @@ conditions:
 - ``notLike()`` Creates a negated ``LIKE`` condition::
 
     $query = $cities->find()
-        ->where(function (QueryExpression $exp, Query $q) {
+        ->where(function (QueryExpression $exp, SelectQuery $q) {
             return $exp->notLike('name', '%A%');
         });
     # WHERE name NOT LIKE "%A%"
@@ -938,7 +937,7 @@ conditions:
 - ``in()`` Create a condition using ``IN``::
 
     $query = $cities->find()
-        ->where(function (QueryExpression $exp, Query $q) {
+        ->where(function (QueryExpression $exp, SelectQuery $q) {
             return $exp->in('country_id', ['AFG', 'USA', 'EST']);
         });
     # WHERE country_id IN ('AFG', 'USA', 'EST')
@@ -946,7 +945,7 @@ conditions:
 - ``notIn()`` Create a negated condition using ``IN``::
 
     $query = $cities->find()
-        ->where(function (QueryExpression $exp, Query $q) {
+        ->where(function (QueryExpression $exp, SelectQuery $q) {
             return $exp->notIn('country_id', ['AFG', 'USA', 'EST']);
         });
     # WHERE country_id NOT IN ('AFG', 'USA', 'EST')
@@ -954,7 +953,7 @@ conditions:
 - ``gt()`` Create a ``>`` condition::
 
     $query = $cities->find()
-        ->where(function (QueryExpression $exp, Query $q) {
+        ->where(function (QueryExpression $exp, SelectQuery $q) {
             return $exp->gt('population', '10000');
         });
     # WHERE population > 10000
@@ -962,7 +961,7 @@ conditions:
 - ``gte()`` Create a ``>=`` condition::
 
     $query = $cities->find()
-        ->where(function (QueryExpression $exp, Query $q) {
+        ->where(function (QueryExpression $exp, SelectQuery $q) {
             return $exp->gte('population', '10000');
         });
     # WHERE population >= 10000
@@ -970,7 +969,7 @@ conditions:
 - ``lt()`` Create a ``<`` condition::
 
     $query = $cities->find()
-        ->where(function (QueryExpression $exp, Query $q) {
+        ->where(function (QueryExpression $exp, SelectQuery $q) {
             return $exp->lt('population', '10000');
         });
     # WHERE population < 10000
@@ -978,7 +977,7 @@ conditions:
 - ``lte()`` Create a ``<=`` condition::
 
     $query = $cities->find()
-        ->where(function (QueryExpression $exp, Query $q) {
+        ->where(function (QueryExpression $exp, SelectQuery $q) {
             return $exp->lte('population', '10000');
         });
     # WHERE population <= 10000
@@ -986,7 +985,7 @@ conditions:
 - ``isNull()`` Create an ``IS NULL`` condition::
 
     $query = $cities->find()
-        ->where(function (QueryExpression $exp, Query $q) {
+        ->where(function (QueryExpression $exp, SelectQuery $q) {
             return $exp->isNull('population');
         });
     # WHERE (population) IS NULL
@@ -994,7 +993,7 @@ conditions:
 - ``isNotNull()`` Create a negated ``IS NULL`` condition::
 
     $query = $cities->find()
-        ->where(function (QueryExpression $exp, Query $q) {
+        ->where(function (QueryExpression $exp, SelectQuery $q) {
             return $exp->isNotNull('population');
         });
     # WHERE (population) IS NOT NULL
@@ -1002,7 +1001,7 @@ conditions:
 - ``between()`` Create a ``BETWEEN`` condition::
 
     $query = $cities->find()
-        ->where(function (QueryExpression $exp, Query $q) {
+        ->where(function (QueryExpression $exp, SelectQuery $q) {
             return $exp->between('population', 999, 5000000);
         });
     # WHERE population BETWEEN 999 AND 5000000,
@@ -1011,13 +1010,13 @@ conditions:
 
     $subquery = $cities->find()
         ->select(['id'])
-        ->where(function (QueryExpression $exp, Query $q) {
+        ->where(function (QueryExpression $exp, SelectQuery $q) {
             return $exp->equalFields('countries.id', 'cities.country_id');
         })
         ->andWhere(['population >' => 5000000]);
 
     $query = $countries->find()
-        ->where(function (QueryExpression $exp, Query $q) use ($subquery) {
+        ->where(function (QueryExpression $exp, SelectQuery $q) use ($subquery) {
             return $exp->exists($subquery);
         });
     # WHERE EXISTS (SELECT id FROM cities WHERE countries.id = cities.country_id AND population > 5000000)
@@ -1026,13 +1025,13 @@ conditions:
 
     $subquery = $cities->find()
         ->select(['id'])
-        ->where(function (QueryExpression $exp, Query $q) {
+        ->where(function (QueryExpression $exp, SelectQuery $q) {
             return $exp->equalFields('countries.id', 'cities.country_id');
         })
         ->andWhere(['population >' => 5000000]);
 
     $query = $countries->find()
-        ->where(function (QueryExpression $exp, Query $q) use ($subquery) {
+        ->where(function (QueryExpression $exp, SelectQuery $q) use ($subquery) {
             return $exp->notExists($subquery);
         });
     # WHERE NOT EXISTS (SELECT id FROM cities WHERE countries.id = cities.country_id AND population > 5000000)
@@ -1203,7 +1202,7 @@ clauses, thus the following will return the same result::
     $total = $articles->find()->where(['is_active' => true])->limit(10)->count();
 
 This is useful when you need to know the total result set size in advance,
-without having to construct another ``Query`` object. Likewise, all result
+without having to construct another ``SelectQuery`` object. Likewise, all result
 formatting and map-reduce routines are ignored when using the ``count()``
 method.
 
@@ -1243,7 +1242,7 @@ Caching Loaded Results
 ----------------------
 
 When fetching entities that don't change often you may want to cache the
-results. The ``Query`` class makes this simple::
+results. The ``SelectQuery`` class makes this simple::
 
     $query->cache('recent_articles');
 
@@ -1599,7 +1598,7 @@ results based on the results of other queries::
 
 Subqueries are accepted anywhere a query expression can be used. For example, in
 the ``select()``, ``from()`` and ``join()`` methods. The above example uses a standard
-``ORM\Query`` object that will generate aliases, these aliases can make
+``ORM\Query\SelectQuery`` object that will generate aliases, these aliases can make
 referencing results in the outer query more complex. As of 4.2.0 you can use
 ``Table::subquery()`` to create a specialized query instance that will not
 generate aliases::

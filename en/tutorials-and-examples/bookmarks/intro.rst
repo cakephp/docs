@@ -393,12 +393,12 @@ method has not been implemented yet, so let's do that. In
      * The $query argument is a query builder instance.
      * The $options array will contain the 'tags' option we passed
      * to find('tagged') in our controller action
-     * @param \Cake\ORM\Query $query
+     *
+     * @param \Cake\ORM\Query\SelectQuery $query
      * @param array $options
-     * @return \Cake\ORM\Query
-     *  -Modified query object.
+     * @return \Cake\ORM\Query\SelectQuery Modified query object.
      */
-    public function findTagged(Query $query, array $options)
+    public function findTagged(SelectQuery $query, array $options): SelectQuery
     {
         if (empty($options['tags'])) {
             $bookmarks = $query

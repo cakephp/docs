@@ -116,7 +116,7 @@ a callback function. Your function must return the count value to be stored::
     ]);
 
 Your function can return ``false`` to skip updating the counter column, or
-a ``Query`` object that produced the count value. If you return a ``Query``
+a ``SelectQuery`` object that produced the count value. If you return a ``SelectQuery``
 object, your query will be used as a subquery in the update statement.  The
 ``$table`` parameter refers to the table object holding the behavior (not the
 target relation) for convenience. The callback is invoked at least once with
