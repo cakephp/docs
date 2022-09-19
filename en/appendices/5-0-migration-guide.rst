@@ -2,7 +2,7 @@
 ###################
 
 CakePHP 5.0 contains breaking changes, and is not backwards compatible with 4.x
-releases. Before attempting to upgrade to 5.0, first upgrade to 4.3 and resolve
+releases. Before attempting to upgrade to 5.0, first upgrade to 4.5 and resolve
 all deprecation warnings.
 
 Refer to the :doc:`/appendices/5-0-upgrade-guide` for step by step instructions
@@ -12,7 +12,7 @@ Deprecated Features Removed
 ===========================
 
 All methods, properties and functionality that were emitting deprecation warnings
-as of 4.3 have been removed.
+as of 4.5 have been removed.
 
 Deprecations
 ============
@@ -74,6 +74,8 @@ Database
 - ``getMaxAliasLength()`` and ``getConnectionRetries()`` were added
   to ``DriverInterface``.
 - ``TableSchemaAwareInterface`` was removed.
+- Supported drivers now automatically add auto-increment only to integer primary keys named "id" instead
+  of all integer primary keys. Setting 'autoIncrement' to false always disables on all supported drivers.
 
 Datasource
 ----------
@@ -114,6 +116,7 @@ Log
 ORM
 ---
 
+- Finder arguments are now required to be associative arrays as they were always expected to be.
 - ``TranslateBehavior`` now defaults to the ``ShadowTable`` strategy. If you are
   using the ``Eav`` strategy you will need to update your behavior configuration
   to retain the previous behavior.
@@ -168,3 +171,4 @@ Database
 --------
 
 - ``Query::all()`` was added which runs result decorator callbacks and returns a result set for select queries.
+- ``EnumType`` was added to allow mapping between PHP backed enums and a string or integer column.

@@ -124,6 +124,7 @@ provide better error messages during development. You can have PHP skip these
 assertions by updating your ``php.ini`` to include:
 
 .. code-block:: ini
+
    ; Turn off assert() code generation.
    zend.assertions = -1
 

@@ -23,7 +23,7 @@ are:
 - ``Table::query()`` was deprecated in 4.5.0. Use ``selectQuery()``,
   ``updateQuery()``, ``insertQuery()`` and ``deleteQuery()`` instead.
 
-Upgrade to PHP 8.0
+Upgrade to PHP 8.1
 ==================
 
 If you are not running on **PHP 8.1 or higher**, you will need to upgrade PHP before updating CakePHP.
