@@ -122,12 +122,12 @@ ORM
   to retain the previous behavior.
 - ``allowMultipleNulls`` option for ``isUnique`` rule now default to true matching
   the original 3.x behavior.
-- ``Table::query()`` has been removed. Instead operation focused methods have
-  been added (``updateQuery()``, ``selectQuery()``, ``insertQuery()``,
-  ``deleteQuery()``). These methods return specialized query objects that only
-  contain methods that are relevant to the kind of query being built. This
-  change helps reduce the opportunities for queries to silently do the wrong
-  thing.
+- ``Table::query()`` has been removed in favor of query-type specific functions.
+- ``Table::updateQuery()``, ``Table::selectQuery()``, ``iTable::nsertQuery()``, and `
+  `Table::deleteQuery()``) were added and return the new type-specific query objects below.
+ - ``SelectQuery``, ``InsertQuery``, ``UpdateQuery`` and ``DeleteQuery`` were added
+   which represent only a single type of query and do not allow switching between query types nor
+   calling functions unrelated to the specific query type.
 
 TestSuite
 ---------
