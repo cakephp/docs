@@ -53,3 +53,14 @@ Routing
   instead. HTTPs is no longer entirely based on ``ssl``, and this rename aligns
   the CakePHP parameters with the broader web.
 
+
+New Features
+============
+
+Error
+-----
+
+- The development error page design has been improved. It now renders chained
+  exceptions and makes navigating stack traces easier as each frame can be
+  collapsed individually.
+- Console exception messages now include stack traces for chained exceptions.
