@@ -76,6 +76,7 @@ Database
 - ``TableSchemaAwareInterface`` was removed.
 - Supported drivers now automatically add auto-increment only to integer primary keys named "id" instead
   of all integer primary keys. Setting 'autoIncrement' to false always disables on all supported drivers.
+- ``Driver::quote()`` was removed. Use prepared statements instead.
 
 Datasource
 ----------
