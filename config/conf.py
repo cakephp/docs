@@ -1,3 +1,4 @@
+import os
 # Global configuration information used across all the
 # translations of documentation.
 #
@@ -52,6 +53,9 @@ html_last_updated_fmt = '%b %d, %Y'
 html_sidebars = {
     '**': ['globaltoc.html']
 }
+
+language = os.getenv('LANG') or 'en'
+html_use_opensearch = 'https://book.cakephp.org/3/' + language
 
 # -- Options for LaTeX output ------------------------------------------------
 
