@@ -63,6 +63,9 @@ handling framework. To upgrade to the new system you can replace the usage of
     (new ErrorTrap(Configure::read('Error')))->register();
     (new ExceptionTrap(Configure::read('Error')))->register();
 
+If you have defined the ``Error.errorLogger`` configure value, you will need to
+use ``Error.logger`` instead.
+
 See the :doc:`/development/errors` for more detailed documentation. Additionally
 the following methods related to the deprecated error handling system are
 deprecated:
@@ -74,6 +77,7 @@ deprecated:
 * ``Debugger::addRenderer()``
 * ``ErrorLoggerInterface::log()``. Implement ``logException()`` instead.
 * ``ErrorLoggerInterface::logMessage()``. Implement ``logError()`` instead.
+
 
 RequestHandlerComponent
 ------------------------
@@ -205,6 +209,8 @@ Error
 Http
 ----
 
+* ``Response::checkNotModified()`` was deprecated. 
+  Use ``Response::isNotModified()`` instead.
 * ``BaseApplication::handle()`` now adds the ``$request`` into the service
   container all the time.
 * ``HttpsEnforcerMiddleware`` now has an ``hsts`` option that allows you to

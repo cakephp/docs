@@ -450,7 +450,7 @@ PHPUnit et votre fichier ``phpunit.xml`` devait contenir:
         <listener
         class="\Cake\TestSuite\Fixture\FixtureInjector">
             <arguments>
-                <object class="\Cake\TestSuite\Fixture\PHPUnitExtension" />
+                <object class="\Cake\TestSuite\Fixture\FixtureManager" />
             </arguments>
         </listener>
     </listeners>
@@ -468,7 +468,7 @@ de CakePHP, soit en chargeant un fichier de dump SQL, soit en utilisant un autre
 outil externe de gestion de schéma. Vous devez créer votre schéma dans le
 fichier ``tests/bootstrap.php`` de votre application.
 
-Si vous utilisez le `plugin de migrations </migrations>`  de CakePHP pour gérer
+Si vous utilisez le :doc:`plugin de migrations </migrations>`  de CakePHP pour gérer
 les schémas de votre application, vous pouvez tout aussi bien réutiliser ces
 migrations pour générer le schéma de votre base de données de test::
 
@@ -780,6 +780,48 @@ Cette méthode construira une instance de votre ``Application`` et appellera la
 méthode ``routes()`` dessus. Si votre classe ``Application`` a besoin de
 paramètres de constructeur spécialisés, vous pouvez les fournir à
 ``loadRoutes($constructorArgs)``.
+
+Création de routes dans les tests
+---------------------------------
+
+Parfois, il peut être nécessaire d'ajouter dynamiquement des routes dans les tests,
+par exemple lors du développement de plugins, ou d'applications qui sont extensibles.
+
+Tout comme le chargement de routes d'applications existantes, ceci peut être fait
+pendant ``setup()`` d'une méthode de test, et/ou dans les méthodes de test individuelles
+elles-mêmes::
+
+    use Cake\Routing\Route\DashedRoute;
+    use Cake\Routing\RouteBuilder;
+    use Cake\Routing\Router;
+    use Cake\TestSuite\TestCase;
+
+    class PluginHelperTest extends TestCase
+    {
+        protected RouteBuilder $routeBuilder;
+
+        public function setUp(): void
+        {
+            parent::setUp();
+
+            $this->routeBuilder = Router::createRouteBuilder('/');
+            $this->routeBuilder->scope('/', function (RouteBuilder $routes) {
+                $routes->setRouteClass(DashedRoute::class);
+                $routes->get(
+                    '/test/view/{id}',
+                    ['controller' => 'Tests', 'action' => 'view']
+                );
+                // ...
+            });
+
+            // ...
+        }
+    }
+
+Ceci créera une nouvelle instance de route builder qui fusionnera les routes connectées
+dans la même collection de routes utilisée par toutes les autres instances de route
+builder qui qui peuvent déjà exister, ou qui doivent encore être créées dans
+l'environnement.
 
 Charger des Plugins dans les Tests
 ----------------------------------

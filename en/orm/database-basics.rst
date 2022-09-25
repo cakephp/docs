@@ -506,14 +506,11 @@ database layer to automatically convert JSON data when creating queries. In your
 Table's :ref:`getSchema() method <saving-complex-types>` add the
 following::
 
-    use Cake\Database\Schema\TableSchemaInterface;
-
     class WidgetsTable extends Table
     {
         public function getSchema(): TableSchemaInterface
         {
-            $schema->setColumnType('widget_prefs', 'json');
-            return $schema;
+            $this->getSchema()->setColumnType('widget_prefs', 'json');
         }
     }
 

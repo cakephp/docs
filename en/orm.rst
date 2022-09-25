@@ -1,12 +1,13 @@
 Database Access & ORM
 #####################
 
-In CakePHP working with data through the database is done with two primary object
-types. The first are **repositories** or **table objects**. These objects
-provide access to collections of data. They allow you to save new records,
-modify/delete existing ones, define relations, and perform bulk operations. The
-second type of objects are **entities**. Entities represent individual records
-and allow you to define row/record level behavior & functionality.
+In CakePHP,  working with data through the database is done with two primary object types:
+
+- **Repositories** or **table objects** provide access to collections of data.
+  They allow you to save new records, modify/delete existing ones, define
+  relations, and perform bulk operations.
+- **Entities** represent individual records and allow you to define row/record
+  level behavior & functionality.
 
 These two classes are usually responsible for managing almost everything
 that happens regarding your data, its validity, interactions and evolution
