@@ -212,7 +212,7 @@ messages could look like::
     namespace App\View\Cell;
 
     use Cake\View\Cell;
-    use Cake\Datasource\NumericPaginator;
+    use Cake\Datasource\Paging\NumericPaginator;
 
     class FavoritesCell extends Cell
     {
