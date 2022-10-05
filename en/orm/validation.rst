@@ -638,7 +638,7 @@ Application rules as explained above will be checked whenever ``save()`` or
     // In src/Model/Table/UsersTable.php
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->isUnique('email'));
+        $rules->add($rules->isUnique(['email']));
 
         return $rules;
     }
