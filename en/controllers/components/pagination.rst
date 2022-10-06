@@ -7,6 +7,7 @@ Pagination
 
 .. deprecated:: 4.4.0
     The paginator component is deprecated as of 4.4.0 and will be removed in 5.0.
+    Instead you can use the :php:class:`~Cake\\Datasource\\Paging\\NumericPaginator`
 
 One of the main obstacles of creating flexible and user-friendly web
 applications is designing an intuitive user interface. Many applications tend to
