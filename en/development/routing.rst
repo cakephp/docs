@@ -6,7 +6,7 @@ Routing
 .. php:class:: RouterBuilder
 
 Routing provides you tools that map URLs to controller actions. By defining
-routes, you can separate how your application is implemented from how its URL's
+routes, you can separate how your application is implemented from how its URLs
 are structured.
 
 Routing in CakePHP also encompasses the idea of reverse routing, where an array

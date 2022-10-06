@@ -55,7 +55,7 @@ If your input is invalid, the Xml class will throw an exception::
 .. note::
 
     `DOMDocument <https://php.net/domdocument>`_ and
-    `SimpleXML <https://php.net/simplexml>`_ implement different API's.
+    `SimpleXML <https://php.net/simplexml>`_ implement different APIs.
     Be sure to use the correct methods on the object you request from Xml.
 
 Loading HTML documents
