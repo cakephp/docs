@@ -44,14 +44,14 @@ Then simply type the following line in your terminal from your
 installation directory to install the CakePHP application skeleton
 in the **bookmarker** directory::
 
-    php composer.phar create-project --prefer-dist cakephp/app bookmarker "^3.10"
+    php composer.phar create-project --prefer-dist cakephp/app:"^3.10" bookmarker
 
 If you downloaded and ran the `Composer Windows Installer
 <https://getcomposer.org/Composer-Setup.exe>`_, then type the following line in
 your terminal from your installation directory (ie.
 C:\\wamp\\www\\dev\\cakephp3)::
 
-    composer self-update && composer create-project --prefer-dist cakephp/app bookmarker "^3.10"
+    composer self-update && composer create-project --prefer-dist cakephp/app:"^3.10" bookmarker
 
 The advantage to using Composer is that it will automatically complete some
 important set up tasks, such as setting the correct file permissions and
