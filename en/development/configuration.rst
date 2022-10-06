@@ -164,7 +164,7 @@ Asset.timestamp
 Asset.cacheTime
     Sets the asset cache time. This determines the http header ``Cache-Control``'s
     ``max-age``, and the http header's ``Expire``'s time for assets.
-    This can take anything that you version of php's `strtotime function
+    This can take anything that you version of PHP's `strtotime function
     <https://php.net/manual/en/function.strtotime.php>`_ can take.
     The default is ``+1 day``.
 
