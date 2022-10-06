@@ -82,7 +82,7 @@ command :
 
 .. code-block:: bash
 
-    composer create-project --prefer-dist cakephp/app:^3.9 my_app_name
+    composer create-project --prefer-dist cakephp/app my_app_name "^3.10"
 
 Once Composer finishes downloading the application skeleton and the core CakePHP
 library, you should have a functioning CakePHP application installed via
