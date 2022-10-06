@@ -283,7 +283,7 @@ Writing Multiple Keys at Once
 
 You may find yourself needing to write multiple cache keys at once. While you
 can use multiple calls to ``write()``, ``writeMany()`` allows CakePHP to use
-more efficient storage API's where available. For example using ``writeMany()``
+more efficient storage APIs where available. For example using ``writeMany()``
 save multiple network connections when using Memcached::
 
     $result = Cache::writeMany([
@@ -368,7 +368,7 @@ Reading Multiple Keys at Once
 
 After you've written multiple keys at once, you'll probably want to read them as
 well. While you could use multiple calls to ``read()``, ``readMany()`` allows
-CakePHP to use more efficient storage API's where available. For example using
+CakePHP to use more efficient storage APIs where available. For example using
 ``readMany()`` save multiple network connections when using Memcached::
 
     $result = Cache::readMany([
@@ -396,7 +396,7 @@ Deleting Multiple Keys at Once
 
 After you've written multiple keys at once, you may want to delete them.  While
 you could use multiple calls to ``delete()``, ``deleteMany()`` allows CakePHP to use
-more efficient storage API's where available. For example using ``deleteMany()``
+more efficient storage APIs where available. For example using ``deleteMany()``
 save multiple network connections when using Memcached::
 
     $result = Cache::deleteMany([

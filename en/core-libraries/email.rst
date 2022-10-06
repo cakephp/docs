@@ -440,7 +440,7 @@ Relaxing Address Validation Rules
 
 If you are having validation issues when sending to non-compliant addresses, you
 can relax the pattern used to validate email addresses. This is sometimes
-necessary when dealing with some ISP's::
+necessary when dealing with some ISPs::
 
     $email = new Email('default');
 

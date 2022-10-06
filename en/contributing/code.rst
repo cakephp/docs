@@ -124,7 +124,7 @@ branch, as you cannot edit it once the pull request is created.
   should choose the branch with the next version number. For example if the
   current stable release is ``3.6.0``, the branch accepting new features will
   be ``3.next``.
-* If your change is a breaks existing functionality, or API's then you'll have
+* If your change is a breaks existing functionality, or APIs then you'll have
   to choose then next major release. For example, if the current release is
   ``3.6.0`` then the next time existing behavior can be broken will be in
   ``4.x`` so you should target that branch.
