@@ -39,11 +39,11 @@ installation directory to install the CakePHP application skeleton
 in the directory that you wish to use it with. For this example we will be using
 "blog" but feel free to change it to something else.::
 
-    php composer.phar create-project --prefer-dist cakephp/app:^3.8 blog
+    php composer.phar create-project --prefer-dist cakephp/app blog "^3.10"
 
 In case you've already got composer installed globally, you may instead type::
 
-    composer self-update && composer create-project --prefer-dist cakephp/app:^3.8 blog
+    composer self-update && composer create-project --prefer-dist cakephp/app blog "^3.10"
 
 The advantage to using Composer is that it will automatically complete some
 important set up tasks, such as setting the correct file permissions and
