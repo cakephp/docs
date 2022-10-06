@@ -51,6 +51,7 @@ ORM
 * ``Entity::unsetProperty()`` has been renamed to ``Entity::unset()`` to match
   the other methods.
 * ``TableSchemaInterface::primaryKey()`` has been renamed to ``TableSchemaInterface::getPrimaryKey()``.
+* ``Entity::_properties`` has been renamed to ``Entity::_fields``.
 
 View
 ----
