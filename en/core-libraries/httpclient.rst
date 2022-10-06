@@ -103,7 +103,7 @@ the specific multipart HTTP request you want::
 Sending Request Bodies
 ======================
 
-When dealing with REST API's you often need to send request bodies that are not
+When dealing with REST APIs you often need to send request bodies that are not
 form encoded. Http\\Client exposes this through the type option::
 
     // Send a JSON request body.
@@ -202,7 +202,7 @@ use digest authentication.
 OAuth 1 Authentication
 ----------------------
 
-Many modern web-services require OAuth authentication to access their API's.
+Many modern web-services require OAuth authentication to access their APIs.
 The included OAuth authentication assumes that you already have your consumer
 key and consumer secret::
 

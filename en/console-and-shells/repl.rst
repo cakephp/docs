@@ -37,7 +37,7 @@ REPL::
     //   'plugin' => NULL
     // ]
 
-You can also test generating URL's::
+You can also test generating URLs::
 
     >>> Cake\Routing\Router::url(['controller' => 'Articles', 'action' => 'edit', 99]);
     // '/articles/edit/99'
