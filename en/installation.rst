@@ -82,7 +82,7 @@ command :
 
 .. code-block:: bash
 
-    composer create-project --prefer-dist cakephp/app:^3.9 my_app_name
+    composer create-project --prefer-dist cakephp/app:"^3.10" my_app_name
 
 Once Composer finishes downloading the application skeleton and the core CakePHP
 library, you should have a functioning CakePHP application installed via
@@ -106,11 +106,11 @@ Keeping Up To Date with the Latest CakePHP Changes
 By default this is what your application **composer.json** looks like::
 
     "require": {
-        "cakephp/cakephp": "3.9.*"
+        "cakephp/cakephp": "3.10.*"
     }
 
 Each time you run ``php composer.phar update`` you will receive patch
-releases for this minor version. You can instead change this to ``^3.9`` to
+releases for this minor version. You can instead change this to ``^3.10`` to
 also receive the latest stable minor releases of the ``3.x`` branch.
 
 If you want to stay up to date with the latest unreleased changes in CakePHP,
