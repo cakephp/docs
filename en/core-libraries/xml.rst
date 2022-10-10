@@ -27,10 +27,10 @@ strings::
     </post>';
     $xml = Xml::build($text);
 
-You can also build Xml objects from local files::
+You can also build Xml objects from local files by overriding the default option::
 
     // Local file
-    $xml = Xml::build('/home/awesome/unicorns.xml');
+    $xml = Xml::build('/home/awesome/unicorns.xml', ['readFile' => true]);
 
 You can also build Xml objects using an array::
 
