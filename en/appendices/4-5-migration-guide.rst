@@ -57,6 +57,18 @@ Routing
 New Features
 ============
 
+Database
+--------
+
+- ``ConnectionManager`` now supports read and role connection roles. Roles are determined by
+  the datasource/config name. A read role always has a ":read" suffix and a write role does not.
+- ``ConnectionManager::get()`` now has ``$role`` parameter to find the connection for a role. You
+  can pass any connection name in to find the read or write connection for it.
+- ``Query::useRole()``, ``Query::useReadRole()``, and ``Query::useWriteRole()`` were added to let you
+  switch a query to a specific connection role. This immediately changes the current connection if
+  the current connection role does not match.
+- ``Conection::role()`` was added to return the role of the connection.
+
 Error
 -----
 
