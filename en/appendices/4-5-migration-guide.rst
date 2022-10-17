@@ -64,6 +64,7 @@ Database
   the datasource/config name. A read role always has a ":read" suffix and a write role does not.
 - ``ConnectionManager::get()`` now has ``$role`` parameter to find the connection for a role. You
   can pass any connection name in to find the read or write connection for it.
+- ``ConnectionManager::aliases()`` was added.
 - ``Query::useRole()``, ``Query::useReadRole()``, and ``Query::useWriteRole()`` were added to let you
   switch a query to a specific connection role. This immediately changes the current connection if
   the current connection role does not match.
