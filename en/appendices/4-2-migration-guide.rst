@@ -106,6 +106,7 @@ Validation
 
 - ``Validation::time()`` will now reject a string if minutes are missing. Previously,
   this would accept hours-only digits although the api documentation showed minutes were required.
+- ``Validatior::greaterThanField()``, ``Validatior::lessThanField()``, ``Validatior::lessThanOrEqualToField()`` and ``Validatior::greaterThanOrEqualToField()`` will no longer accept dates due to ``Validation::comparison`` now enforcing numeric values. 
 
 
 Breaking Changes
