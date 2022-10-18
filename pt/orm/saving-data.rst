@@ -640,7 +640,7 @@ controlar as associações que serão mescladas em cada uma das entidades no arr
 .. _before-marshal:
 
 Modificando Dados de Requisição Antes de Construir Entidades
------------------------------------------------------------
+------------------------------------------------------------
 
 Se você precisa modificar dados de requisição antes de converter em entidades, você
 pode usar o evento ``Model.beforeMarshal``. Esse evento deixa você manipular o dados
