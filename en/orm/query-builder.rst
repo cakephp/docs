@@ -271,6 +271,12 @@ purpose::
         ->select(['slug' => $query->func()->concat(['title' => 'identifier', '-', 'id' => 'identifier'])])
         ->select($articlesTable); // Select all fields from articles
 
+You can use ``selectAlso()`` to select all fields on a table and
+*also* select some additional fields::
+
+    $query = $articlesTable->find();
+    $query->selectAlso(['count' => $query->func()->count('*')]);
+
 If you want to select all but a few fields on a table, you can use
 ``selectAllExcept()``::
 
@@ -281,6 +287,10 @@ If you want to select all but a few fields on a table, you can use
 
 You can also pass an ``Association`` object when working with contained
 associations.
+
+.. versionadded:: 4.5.0
+
+    ``Query::selectAlso()`` was added.
 
 .. _using-sql-functions:
 
