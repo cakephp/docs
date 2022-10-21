@@ -45,6 +45,7 @@ ORM
   instead, or re-map columns in ``initialize()``.
 - ``QueryInterface::repository()`` is deprecated. Use ``setRepository()``
   instead.
+- ``Query::selectAlso()`` was added.
 
 Routing
 -------
