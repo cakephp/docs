@@ -20,7 +20,15 @@ Deprecations
 The following is a list of deprecated methods, properties and behaviors. These
 features will continue to function in 5.x and will be removed in 6.0.
 
-n/a
+Database
+--------
+
+- ``Query::order()`` was deprecated. Use ``Query::orderBy()`` instead now that
+  ``Connection`` methods are no longer proxied. This aligns the function name
+  with the SQL statement.
+- ``Query::group()`` was deprecated. Use ``Query::groupBy()`` instead now that
+  ``Connection`` methods are no longer proxied. This aligns the function name
+  with the SQL statement.
 
 Breaking Changes
 ================
@@ -77,6 +85,8 @@ Database
 - Supported drivers now automatically add auto-increment only to integer primary keys named "id" instead
   of all integer primary keys. Setting 'autoIncrement' to false always disables on all supported drivers.
 - ``Driver::quote()`` was removed. Use prepared statements instead.
+- ``Query::orderBy()`` was added to replace ``Query::order()`.
+- ``Query::groupBy()`` was added to replace ``Query::group()``.
 
 Datasource
 ----------
