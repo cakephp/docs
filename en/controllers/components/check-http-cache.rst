@@ -30,7 +30,7 @@ it. The following request headers are used:
 * ``If-Modified-Since`` is compared with the response's ``Last-Modified``
   header.
 
-If response headers match the request header critera, then view rendering is
+If response headers match the request header criteria, then view rendering is
 skipped. This saves your application generating a view, saving bandwidth and
 time. When response headers match, an empty response is returned with a  ``304
 Not Modified`` status code.

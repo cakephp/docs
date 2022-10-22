@@ -121,7 +121,7 @@ must return ``true`` or ``'force'`` for the timestamp to be appended::
     echo $this->Html->meta([
         'rel' => 'preload',
         'href' => $this->Url->assetUrl(
-            '/assets/fonts/yout-font-pack/your-font-name.woff2'
+            '/assets/fonts/your-font-pack/your-font-name.woff2'
         ),
         'as' => 'font',
     ]);
