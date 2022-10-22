@@ -258,6 +258,24 @@ pastry\_stores, and savory\_cakes.
 
         'flags' => [\PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8']
 
+Read and Write Connections
+==========================
+
+Connections can have read and write roles based on naming conventions. Read
+roles are expected to represent read-only replicas and write roles are expected
+to be the default connection and support write operations.
+
+Connections should always have a write role configured. Passing a read-only config
+to ``ConfigurationManager::setConfig()`` without a matching write connection will
+throw an exception.
+
+Read-only roles have a ``:read`` suffix in their name. Write roles are any connection
+without the ``:read`` suffix. ``ConnectionManager::get()`` accepts a role parameter
+to perform the look up based on name and role.
+
+.. versionadded:: 4.5.0
+    Read and write connection roles were added.
+
 .. php:namespace:: Cake\Datasource
 
 Managing Connections
@@ -284,6 +302,19 @@ existing known connection::
     $connection = ConnectionManager::get('default');
 
 Attempting to load connections that do not exist will throw an exception.
+
+You can pass "read" or "write" as the ``$role`` when you want to look up
+the correct connection for that role regardless of the connection name::
+
+    use Cake\Database\Connection;
+    use Cake\Datasource\ConnectionManager;
+
+    $readConnection = ConnectionManager::get('default', true, Connection::READ_ROLE);
+
+If there isn't a read-only connection configured, the write connection will be returned instead.
+
+.. versionadded:: 4.5.0
+    Read and write connection roles were added.
 
 Creating Connections at Runtime
 -------------------------------

@@ -1162,6 +1162,22 @@ expression objects to add snippets of SQL to your queries::
     Using expression objects leaves you vulnerable to SQL injection. You should
     never use untrusted data into expressions.
 
+Using Connection Roles
+-------------------------
+
+If you have configured :ref:`read-and-write-connections` in your application,
+you can have a query run on the ``read`` connection using one of the role
+methods::
+
+    // Run a query on the read connection
+    $query->useReadRole();
+
+    // Run a query on the write connection (default)
+    $query->useWriteRole();
+
+.. versionadded:: 4.5.0
+    Query role methods were added in 4.5.0
+
 Getting Results
 ===============
 
