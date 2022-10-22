@@ -261,16 +261,16 @@ pastry\_stores, and savory\_cakes.
 Read and Write Connections
 ==========================
 
-Connection can have roles based on a naming convention. Read roles are expected
-to represent read-only replicas and write roles are expected to be the
-default connection and support write operations.
+Connections can have read and write roles based on naming conventions. Read
+roles are expected to represent read-only replicas and write roles are expected
+to be the default connection and support write operations.
 
 Connections should always have a write role configured. Passing a read-only config
-to ``ConfigurationManager::setConfig()`` without a matching write config will
+to ``ConfigurationManager::setConfig()`` without a matching write connection will
 throw an exception.
 
-Read-only roles have a ":read" suffix in their name. Write roles are any connection
-without the ":read" suffix. ``ConnectionManager::get()`` accepts a role parameter
+Read-only roles have a ``:read`` suffix in their name. Write roles are any connection
+without the ``:read`` suffix. ``ConnectionManager::get()`` accepts a role parameter
 to perform the look up based on name and role.
 
 .. versionadded:: 4.5.0
