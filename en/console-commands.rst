@@ -46,7 +46,7 @@ could then run the any of the listed commands by using its name:
     # run bake (with plugin prefix)
     bin/cake bake.bake -h
 
-Plugin commands can be invoked without a plugin prefix if the commands's name
+Plugin commands can be invoked without a plugin prefix if the command's name
 does not overlap with an application or framework shell. In the case that two
 plugins provide a command with the same name, the first loaded plugin will get
 the short alias. You can always use the ``plugin.command`` format to
