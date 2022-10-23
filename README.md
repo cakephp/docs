@@ -9,7 +9,7 @@ online in HTML, PDF and EPUB formats at https://book.cakephp.org.
 
 Contributing to the documentation is pretty simple. Please read the
 documentation on contributing to the documentation over on [the
-cookbook](https://book.cakephp.org/3/en/contributing/documentation.html) for
+cookbook](https://book.cakephp.org/4/en/contributing/documentation.html) for
 help. You can read all of the documentation within as its just in plain text
 files, marked up with ReST text formatting.
 
