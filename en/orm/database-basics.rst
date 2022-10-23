@@ -258,6 +258,8 @@ pastry\_stores, and savory\_cakes.
 
         'flags' => [\PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8']
 
+.. _read-and-write-connections:
+
 Read and Write Connections
 ==========================
 
@@ -311,7 +313,8 @@ the correct connection for that role regardless of the connection name::
 
     $readConnection = ConnectionManager::get('default', true, Connection::READ_ROLE);
 
-If there isn't a read-only connection configured, the write connection will be returned instead.
+If there isn't a read-only connection configured, the write connection will be
+returned instead.
 
 .. versionadded:: 4.5.0
     Read and write connection roles were added.
