@@ -62,10 +62,9 @@ It is also possible to use complex data types as arguments::
 
 Instead of writing the SQL manually, you can use the query builder::
 
+    // Prior to 4.5 use $connection->query() instead.
     $results = $connection
-        ->newQuery()
-        ->select('*')
-        ->from('articles')
+        ->selectQuery('*', 'articles')
         ->where(['created >' => new DateTime('1 day ago')], ['created' => 'datetime'])
         ->order(['title' => 'DESC'])
         ->execute()
@@ -796,15 +795,18 @@ abstract type names when creating a query::
         ['date', 'integer']
     );
 
-.. php:method:: newQuery()
+.. php:method:: deleteQuery()
+.. php:method:: insertQuery()
+.. php:method:: selectQuery()
+.. php:method:: updateQuery()
 
-This allows you to use rich data types in your applications and properly convert
+These methods allow you to use rich data types in your applications and properly convert
 them into SQL statements. The last and most flexible way of creating queries is
 to use the :doc:`/orm/query-builder`. This approach allows you to build complex and
 expressive queries without having to use platform specific SQL::
 
-    $query = $connection->newQuery();
-    $query->update('articles')
+    // Prior to 4.5 use $articles->query() instead.
+    $query = $connection->updateQuery('articles')
         ->set(['published' => true])
         ->where(['id' => 2]);
     $statement = $query->execute();
@@ -813,9 +815,9 @@ When using the query builder, no SQL will be sent to the database server until
 the ``execute()`` method is called, or the query is iterated. Iterating a query
 will first execute it and then start iterating over the result set::
 
-    $query = $connection->newQuery();
-    $query->select('*')
-        ->from('articles')
+    // Prior to 4.5 use $articles->query() instead.
+    $query = $connection
+        ->selectQuery('*', 'articles')
         ->where(['published' => true]);
 
     foreach ($query as $row) {
