@@ -32,6 +32,38 @@ features::
 A new configuration option has been added to disable deprecations on a path by
 path basis. See :ref:`deprecation-warnings` for more information.
 
+ORM Query API deprecations
+--------------------------
+
+There are some potentially impactful changes to the ORM coming in 5.x. To make
+querybuilding more typesafe and have fewer silent errors 5.x will be
+transitioning to separate query objects for each type of query. The new classes
+are:
+
+- ``Cake\ORM\Query\DeleteQuery`` Used for building ``delete`` queries.
+- ``Cake\ORM\Query\InsertQuery`` Used for building ``insert`` queries.
+- ``Cake\ORM\Query\SelectQuery`` Used for building ``select`` queries.
+- ``Cake\ORM\Query\UpdateQuery`` Used for building ``update`` queries.
+
+Each of these classes lack methods that don't make sense for that query type.
+For example, ``DeleteQuery`` has no ``select()`` clause, and ``InsertQuery`` has
+no ``limit()`` method. 5.x will also offer new ``*query()`` methods on ``Table``
+to replace ``query()``.
+
+The 4.5 release also introduces these new query classes and methods on
+``Table`` to provide an opt-in upgrade path. In 4.5, the new query classes are
+sub-classes of ``ORM\Query`` and have full backwards compatibility, but they
+also emit deprecations from all methods that will **not** be present in 5.x.
+
+When upgrading you can upgrade to the new query classes by replacing calls to
+``Table::query()``. Replacing it are new methods on ``Table``. The
+``deleteQuery()``, ``insertQuery()``, ``selectQuery()``, ``updateQuery()``
+methods will returrn the new query instances which will emit deprecations if you
+are using the new classes incorrectly.
+
+Our hope is that these methods will allow you to incrementally adopt the new
+APIs that will exist in the future.
+
 Http
 ----
 
@@ -70,6 +102,7 @@ Database
   switch a query to a specific connection role. This immediately changes the current connection if
   the current connection role does not match.
 - ``Conection::role()`` was added to return the role of the connection.
+- New query subclasses, and query methods added to ``Table``.
 
 Error
 -----
