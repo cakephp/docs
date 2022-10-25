@@ -702,16 +702,19 @@ following models::
 The CoursesMemberships join table uniquely identifies a given Student's
 participation on a Course in addition to extra meta-information.
 
-When using a query object with a hasMany through relationship, add contain 
-and matching conditions for the main relationship table into your query object.
-The through table can then be referenced in other conditions such as a where 
-condition by designating the through table name before the field you are 
-filtering on.::
+When using a query object with a BelongsToMany relationship with a ``through``
+model, add contain and matching conditions for the association target table into
+your query object. The ``through`` table can then be referenced in other conditions
+such as a where condition by designating the through table name before the field
+you are filtering on::
 
-    $query = $this->find('list', ['valueField' => 'studentFirstName', 'order' => 'students.id'])
-                        ->contain(['Courses'])
-                        ->matching('Courses')
-                        ->where(['CoursesMemberships.grade' => 'B']);
+    $query = $this->find(
+            'list', 
+            ['valueField' => 'studentFirstName', 'order' => 'students.id']
+        )
+        ->contain(['Courses'])
+        ->matching('Courses')
+        ->where(['CoursesMemberships.grade' => 'B']);
 
 .. _association-finder:
 
