@@ -232,8 +232,8 @@ ORM
 Plugins
 -------
 
-* Plugin classes can now be named to match the plugin name instead of ``Plugin``.
-  For e.g. you should now have ``ADmad\I18n\I18nPlugin`` instead of ``ADmad\I18n\Plugin``.
+* Plugin classes can now be named to match the plugin name instead of just ``Plugin``.
+  For example, you should now use ``ADmad\I18n\I18nPlugin`` instead of ``ADmad\I18n\Plugin``.
 
 Routing
 -------
