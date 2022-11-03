@@ -110,3 +110,10 @@ Error
   exceptions and makes navigating stack traces easier as each frame can be
   collapsed individually.
 - Console exception messages now include stack traces for chained exceptions.
+
+
+View
+----
+
+- ``View::addHelper()`` was added. This method compliments ``addBehavior()`` and
+  ``addComponent()``.
