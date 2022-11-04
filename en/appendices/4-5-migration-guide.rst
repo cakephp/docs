@@ -86,6 +86,10 @@ Routing
   instead. HTTPs is no longer entirely based on ``ssl``, and this rename aligns
   the CakePHP parameters with the broader web.
 
+View
+----
+
+- It is recommended to replace ``loadHelper()`` with new ``addHelper()`` method to add helpers in ``View::initialize()``.
 
 New Features
 ============
