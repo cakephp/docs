@@ -77,6 +77,13 @@ by using the ``finder`` option::
     $article = $articles->get($id, [
         'finder' => 'translations',
     ]);
+    
+    The list of options supported by get() are:
+
+- ``contain`` define the associations to eager load.
+- ``fields`` limit the fields loaded into the entity. Only loading some fields
+  can cause entities to behave incorrectly.
+
 
 Using Finders to Load Data
 ==========================
