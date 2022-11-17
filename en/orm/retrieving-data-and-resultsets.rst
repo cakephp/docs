@@ -77,6 +77,24 @@ by using the ``finder`` option::
     $article = $articles->get($id, [
         'finder' => 'translations',
     ]);
+    
+    The list of options supported by get() are:
+
+-  ``cache`` cache config.
+-  ``cacheKey`` cache key.
+-  ``finder`` custom finder function.
+- ``conditions`` provide conditions for the WHERE clause of your query.
+- ``limit`` Set the number of rows you want.
+- ``offset`` Set the page offset you want. You can also use ``page`` to make
+  the calculation simpler.
+- ``contain`` define the associations to eager load.
+- ``fields`` limit the fields loaded into the entity. Only loading some fields
+  can cause entities to behave incorrectly.
+- ``group`` add a GROUP BY clause to your query. This is useful when using
+  aggregating functions.
+- ``having`` add a HAVING clause to your query.
+- ``join`` define additional custom joins.
+
 
 Using Finders to Load Data
 ==========================
