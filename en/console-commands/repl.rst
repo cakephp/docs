@@ -7,7 +7,7 @@ you explore some CakePHP and your application in an interactive console.
 
 .. note::
 
-    The plugin was shipped with the CakePHP app skelton before 4.3.
+    The plugin was shipped with the CakePHP app skeleton before 4.3.
 
 You can start the interactive console using:
 
