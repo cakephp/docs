@@ -1,6 +1,10 @@
 Console Interactive (REPL)
 ##########################
 
+.. todo::
+
+    REPL is shipped as a plugin since 4.3. Update the translation.
+
 Le squelette de l'application CakePHP intègre un REPL(Read Eval Print Loop
 = Lire Evaluer Afficher Boucler) qui permet l'exploration de CakePHP et
 de votre application avec une console interactive. Vous pouvez commencer la
