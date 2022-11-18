@@ -85,7 +85,7 @@ Database
 - Supported drivers now automatically add auto-increment only to integer primary keys named "id" instead
   of all integer primary keys. Setting 'autoIncrement' to false always disables on all supported drivers.
 - ``Driver::quote()`` was removed. Use prepared statements instead.
-- ``Query::orderBy()`` was added to replace ``Query::order()`.
+- ``Query::orderBy()`` was added to replace ``Query::order()``.
 - ``Query::groupBy()`` was added to replace ``Query::group()``.
 
 Datasource
