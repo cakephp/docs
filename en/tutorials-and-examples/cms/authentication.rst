@@ -131,8 +131,7 @@ Then add the following::
             // ... other middleware added before
             ->add(new RoutingMiddleware($this))
             ->add(new BodyParserMiddleware())
-            // Add the AuthenticationMiddleware. It should be
-            // after routing and body parser.
+            // Add the AuthenticationMiddleware. It should be after routing and body parser.
             ->add(new AuthenticationMiddleware($this));
 
         return $middlewareQueue;
