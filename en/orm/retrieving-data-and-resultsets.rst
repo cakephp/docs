@@ -78,7 +78,7 @@ by using the ``finder`` option::
         'finder' => 'translations',
     ]);
     
-    The list of options supported by get() are:
+The list of options supported by get() are:
 
 -  ``cache`` cache config.
 -  ``cacheKey`` cache key.
