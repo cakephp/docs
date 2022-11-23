@@ -293,7 +293,7 @@ Atomic writes
 
 Using ``Cache::add()`` will let you atomically set a key to a value if the key
 does not already exist in the cache. If the key already exists in the cache
-backend, or the write fails ``add()`` will return ``false``::
+backend or the write fails, ``add()`` will return ``false``::
 
     // Set a key to act as a lock
     $result = Cache::add($lockKey, true);
