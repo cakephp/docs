@@ -286,6 +286,29 @@ save multiple network connections when using Memcached::
     // $result will contain
     ['article-first-post' => true, 'article-first-post-comments' => true]
 
+Atomic writes
+-------------
+
+.. php:staticmethod:: add($key, $value $config = 'default')
+
+Using ``Cache::add()`` will let you atomically set a key to a value if the key
+does not already exist in the cache. If the key already exists in the cache
+backend, or the write fails ``add()`` will return ``false``::
+
+    // Set a key to act as a lock
+    $result = Cache::add($lockKey, true);
+    if (!$result) {
+        return;
+    }
+    // Do an action where there can only be one process active at a time.
+
+    // Remove the lock key.
+    Cache::delete($lockKey);
+
+.. warning::
+
+   File based caching does not support atomic writes.
+
 Read Through Caching
 --------------------
 
