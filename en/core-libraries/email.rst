@@ -650,7 +650,8 @@ The ``Cake\TestSuite\EmailTrait`` trait provides the following assertions::
     $this->assertMailSentTo($address);
 
     // Asserts an email was sent from an address
-    $this->assertMailSentFrom($address);
+    $this->assertMailSentFrom($emailAddress);
+    $this->assertMailSentFrom([$emailAddress => $displayName]);
 
     // Asserts an email contains expected contents
     $this->assertMailContains($contents);
