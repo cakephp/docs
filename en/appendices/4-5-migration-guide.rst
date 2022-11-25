@@ -97,16 +97,11 @@ New Features
 Database
 --------
 
-- ``ConnectionManager`` now supports read and role connection roles. Roles are determined by
-  the datasource/config name. A read role always has a ":read" suffix and a write role does not.
-- ``ConnectionManager::get()`` now has ``$role`` parameter to find the connection for a role. You
-  can pass any connection name in to find the read or write connection for it.
+- ``ConnectionManager`` now supports read and role connection roles. Roles can be configured
+  with ``read`` and ``write`` keys in the connection config that override the shared config.
 - ``ConnectionManager::aliases()`` was added.
-- ``Query::useRole()``, ``Query::useReadRole()``, and ``Query::useWriteRole()`` were added to let you
-  switch a query to a specific connection role. This immediately changes the current connection if
-  the current connection role does not match.
-- ``Conection::role()`` was added to return the role of the connection.
-- New query subclasses, and query methods added to ``Table``.
+- ``SelectQuery::useConnectionRole()``, ``SelectQuery::useReadRole()``, and ``SelectQuery::useWriteRole()``
+  were added to let you switch a query to a specific connection role.
 
 Error
 -----
