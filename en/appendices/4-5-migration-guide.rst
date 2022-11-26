@@ -97,10 +97,10 @@ New Features
 Database
 --------
 
-- ``ConnectionManager`` now supports read and role connection roles. Roles can be configured
+- ``ConnectionManager`` now supports read and write connection roles. Roles can be configured
   with ``read`` and ``write`` keys in the connection config that override the shared config.
 - ``ConnectionManager::aliases()`` was added.
-- ``SelectQuery::useConnectionRole()``, ``SelectQuery::useReadRole()``, and ``SelectQuery::useWriteRole()``
+- ``SelectQuery::setConnectionRole()``, ``SelectQuery::useReadRole()``, and ``SelectQuery::useWriteRole()``
   were added to let you switch a query to a specific connection role.
 
 Error
