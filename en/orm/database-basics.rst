@@ -281,7 +281,7 @@ for both::
         'read' => [
             'host' => 'read-db.example.com',
         ],
-        'read' => [
+        'write' => [
             'host' => 'write-db.example.com',
         ]
     ];
