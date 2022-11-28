@@ -110,6 +110,10 @@ Error
   exceptions and makes navigating stack traces easier as each frame can be
   collapsed individually.
 - Console exception messages now include stack traces for chained exceptions.
+- Listeners of the ``Exception.beforeRender`` event can now replace the trapped
+  exception or override the rendering step by returning a ``Response`` object.
+- Listeners of the ``Error.beforeRender`` event can now replace the rendering
+  step for an error by returning the desired output.
 
 
 View
