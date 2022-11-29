@@ -124,13 +124,24 @@ exception is handled::
         }
     );
 
-If your ``Error.beforeRender`` event handler stops the event, error rendering
-will be skipped. You cannot skip rendering a response/output for caught
-exceptions.
+Within an ``Error.beforeRender`` handler you have a few options:
+
+* Stop the event to prevent rendering.
+* Return a string to skip rendering and use the provided string instead
+
+Within an ``Exception.beforeRender`` handler you have a few options:
+
+* Stop the event to prevent rendering.
+* Set the ``exception`` data attribute with ``setData('exception', $err)``
+  to replace the exception that is being rendered.
+* Return a response from the event listener to skip rendering and use
+  the provided response instead.
 
 .. versionadded:: 4.4.0
     Error and Exception events were added.
 
+.. versionchanged:: 4.5.0
+   The ``beforeRender`` events can now replace exceptions and replace rendering.
 
 .. _error-views:
 
