@@ -126,17 +126,16 @@ exception is handled::
 
 Within an ``Error.beforeRender`` handler you have a few options:
 
-* Stopping the event will prevent rendering.
-* Returning a string value will skip rendering and render the content generated
-  by the listener.
+* Stop the event to prevent rendering.
+* Return a string to skip rendering and use the provided string instead
 
 Within an ``Exception.beforeRender`` handler you have a few options:
 
-* Stopping the event will prevent rendering.
-* Setting the ``exception`` data attribute with ``setData('exception', $err)``
-  will replace the exception that is being rendered.
-* Returning a response from the event listener will skip rendering and use the
-  provided response as the error page.
+* Stop the event to prevent rendering.
+* Set the ``exception`` data attribute with ``setData('exception', $err)``
+  to replace the exception that is being rendered.
+* Return a response from the event listener to skip rendering and use
+  the provided response instead.
 
 .. versionadded:: 4.4.0
     Error and Exception events were added.
