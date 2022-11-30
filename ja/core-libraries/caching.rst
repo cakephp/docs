@@ -273,7 +273,7 @@ CakePHP がより効率的なストレージ API を使用できるようにし�
     ['article-first-post' => true, 'article-first-post-comments' => true]
 
 アトミックな書き込み
--------------
+--------------------
 
 .. php:staticmethod:: add($key, $value $config = 'default')
 
