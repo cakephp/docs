@@ -344,7 +344,7 @@ conventions. Let's continue by adding more logic to our command::
     use Cake\Console\Arguments;
     use Cake\Console\ConsoleIo;
     use Cake\Console\ConsoleOptionParser;
-    use Cake\I18n\FrozenTime;
+    use Cake\I18n\DateTime;
 
     class UpdateTableCommand extends Command
     {
@@ -366,7 +366,7 @@ conventions. Let's continue by adding more logic to our command::
             $this->fetchTable($table)->query()
                 ->update()
                 ->set([
-                    'modified' => new FrozenTime()
+                    'modified' => new DateTime()
                 ])
                 ->execute();
         }
@@ -378,7 +378,7 @@ Modify your test case to the following snippet of code::
     namespace Cake\Test\TestCase\Command;
 
     use Cake\Command\Command;
-    use Cake\I18n\FrozenTime;
+    use Cake\I18n\DateTime;
     use Cake\TestSuite\ConsoleIntegrationTestTrait;
     use Cake\TestSuite\TestCase;
 
@@ -399,8 +399,8 @@ Modify your test case to the following snippet of code::
 
         public function testUpdateModified()
         {
-            $now = new FrozenTime('2017-01-01 00:00:00');
-            FrozenTime::setTestNow($now);
+            $now = new DateTime('2017-01-01 00:00:00');
+            DateTime::setTestNow($now);
 
             $this->loadFixtures('Users');
 
@@ -410,7 +410,7 @@ Modify your test case to the following snippet of code::
             $user = $this->getTableLocator()->get('Users')->get(1);
             $this->assertSame($user->modified->timestamp, $now->timestamp);
 
-            FrozenTime::setTestNow(null);
+            DateTime::setTestNow(null);
         }
     }
 
@@ -440,7 +440,7 @@ Update the command class to the following::
     use Cake\Console\Arguments;
     use Cake\Console\ConsoleIo;
     use Cake\Console\ConsoleOptionParser;
-    use Cake\I18n\FrozenTime;
+    use Cake\I18n\DateTime;
 
     class UpdateTableCommand extends Command
     {
@@ -466,7 +466,7 @@ Update the command class to the following::
             $this->fetchTable($table)->query()
                 ->update()
                 ->set([
-                    'modified' => new FrozenTime()
+                    'modified' => new DateTime()
                 ])
                 ->execute();
         }
@@ -480,8 +480,8 @@ incorrect response. Remove the ``testUpdateModified`` method and, add the follow
 
     public function testUpdateModifiedSure()
     {
-        $now = new FrozenTime('2017-01-01 00:00:00');
-        FrozenTime::setTestNow($now);
+        $now = new DateTime('2017-01-01 00:00:00');
+        DateTime::setTestNow($now);
 
         $this->loadFixtures('Users');
 
@@ -491,7 +491,7 @@ incorrect response. Remove the ``testUpdateModified`` method and, add the follow
         $user = $this->getTableLocator()->get('Users')->get(1);
         $this->assertSame($user->modified->timestamp, $now->timestamp);
 
-        FrozenTime::setTestNow(null);
+        DateTime::setTestNow(null);
     }
 
     public function testUpdateModifiedUnsure()

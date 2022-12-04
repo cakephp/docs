@@ -212,7 +212,7 @@ same time::
 
     echo __(
         'Hi {0}, your balance on the {1,date} is {2,number,currency}',
-        ['Charles', new FrozenTime('2014-01-13 11:12:00'), 1354.37]
+        ['Charles', new DateTime('2014-01-13 11:12:00'), 1354.37]
     );
 
     // Returns
@@ -574,12 +574,12 @@ In order to change how dates and numbers are displayed you just need to change
 the current locale setting and use the right classes::
 
     use Cake\I18n\I18n;
-    use Cake\I18n\Time;
+    use Cake\I18n\DateTime;
     use Cake\I18n\Number;
 
     I18n::setLocale('fr-FR');
 
-    $date = new Time('2015-04-05 23:00:00');
+    $date = new DateTime('2015-04-05 23:00:00');
 
     echo $date; // Displays 05/04/2015 23:00
 
@@ -588,7 +588,7 @@ the current locale setting and use the right classes::
 Make sure you read the :doc:`/core-libraries/time` and :doc:`/core-libraries/number`
 sections to learn more about formatting options.
 
-By default dates returned for the ORM results use the ``Cake\I18n\Time`` class,
+By default dates returned for the ORM results use the ``Cake\I18n\DateTime`` class,
 so displaying them directly in you application will be affected by changing the
 current locale.
 
