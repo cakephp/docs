@@ -12,7 +12,7 @@ CakePHP において、 ``$_SESSION`` の利用は通常避けています。代
 セッションの設定
 ================
 
-セッションの設定は、通常 ``/config/app.php`` で定義されます。
+セッションの設定は、通常 **/config/app.php** で定義されます。
 また、いくつかのオプションが使用可能です:
 
 * ``Session.timeout`` - CakePHP のセッションハンドラがセッションを破棄するまでの時間を
@@ -37,6 +37,18 @@ CakePHP において、 ``$_SESSION`` の利用は通常避けています。代
 ``session.cookie_secure`` が ``true`` です。SSL と 非 SSL の両方のプロトコルで
 アプリケーションを動かす場合、セッション消失の問題が発生するかも知れません。SSL と 非 SSL の
 ドメイン両方でセッションにアクセスする必要がある場合、これを無効にします。 ::
+
+    Configure::write('Session', [
+        'defaults' => 'php',
+        'ini' => [
+            'session.cookie_secure' => false
+        ]
+    ]);
+
+v4.0 以降、CakePHP はセッション Cookie の
+`SameSite <https://owasp.org/www-community/SameSite>`__ 属性をデフォルトで ``Lax`` に設定し、
+CSRF 攻撃から保護することもできるようになりました。
+このデフォルト値は、``session.cookie_samesite`` php.ini config: で変更することができます。 ::
 
     Configure::write('Session', [
         'defaults' => 'php',
@@ -96,7 +108,7 @@ CakePHP にはいくつかビルトインなセッションの設定がありま
     Configure::write('Session', [
         'defaults' => 'php',
         'cookie' => 'my_app',
-        'timeout' => 4320 // 3 days
+        'timeout' => 4320 // 3日間
     ]);
 
 上記は 'php' 設定のタイムアウトとクッキー名を上書きします。ビルトイン設定は:
@@ -206,7 +218,7 @@ ini ディレクティブの設定
         'defaults' => 'php',
         'ini' => [
             'session.cookie_name' => 'MyCookie',
-            'session.cookie_lifetime' => 1800, // Valid for 30 minutes
+            'session.cookie_lifetime' => 1800, // 30分有効
             'session.gc_divisor' => 1000,
             'session.cookie_httponly' => true
         ]
@@ -266,7 +278,7 @@ IO をもたらします。
         // 有効期限切れセッションの削除
         public function gc($expires = null): bool
         {
-            return Cache::clear($this->cacheKey) && parent::gc($expires);
+            return parent::gc($expires);
         }
     }
 
@@ -307,25 +319,41 @@ IO をもたらします。
 * Cells
 * Components
 
-基本的なセッションオブジェクトに加えて、ビューの中でセッションを扱うために
-:php:class:`Cake\\View\\Helper\\SessionHelper` が使用できます。
-基本的なセッションの使用例は以下の通り。 ::
+基本的なセッションの使用例は以下の通りです。 ::
 
-    $name = $this->getRequest()->getSession()->read('User.name');
+    $name = $this->request->getSession()->read('User.name');
 
     // 複数回セッションにアクセスする場合、
     // ローカル変数にしたくなるでしょう。
-    $session = $this->getRequest()->getSession();
-    $name = $session->read('User.name');
+    $session = $this->request->getSession();
+    $name = $session->read('User.name')
+
+ヘルパーでは、 ``$this->getView()->getRequest()`` を使用して、リクエストオブジェクトを取得します。
+コンポーネントでは、 ``$this->getController()->getRequest()`` を使用します。
 
 セッションデータの読込みと書込み
 ====================================
 
-.. php:method:: read($key)
+.. php:method:: read($key, $default = null)
 
 :php:meth:`Hash::extract()` 互換の構文を使ってセッションから値を読込みます。 ::
 
-    $session->read('Config.language');
+    $session->read('Config.language', 'en');
+
+.. versionchanged:: 4.1.0
+    ``default`` パラメータが追加されました。
+
+.. php:method:: readOrFail($key)
+
+Null値でない戻り値に対する便宜的なラッパーと同じです。 ::
+
+    $session->readOrFail('Config.language');
+
+これは、このキーが設定されなければならないことが分かっていて、
+コード自体でその存在を確認する必要がない場合に便利です。
+
+.. versionadded:: 4.1.0
+    ``readOrFail()`` が追加されました。
 
 .. php:method:: write($key, $value)
 
