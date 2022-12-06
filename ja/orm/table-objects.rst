@@ -470,6 +470,7 @@ CakePHP によって提供されるビヘイビアーを含む、ビヘイビア
     ``defaultConnectionName()`` メソッドはスタティックで **なければなりません** 。
 
 .. _table-registry-usage:
+.. _table-locator-usage:
 
 TableLocator の利用
 ===================
