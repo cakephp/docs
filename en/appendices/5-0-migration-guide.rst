@@ -14,22 +14,6 @@ Deprecated Features Removed
 All methods, properties and functionality that were emitting deprecation warnings
 as of 4.5 have been removed.
 
-Deprecations
-============
-
-The following is a list of deprecated methods, properties and behaviors. These
-features will continue to function in 5.x and will be removed in 6.0.
-
-Database
---------
-
-- ``Query::order()`` was deprecated. Use ``Query::orderBy()`` instead now that
-  ``Connection`` methods are no longer proxied. This aligns the function name
-  with the SQL statement.
-- ``Query::group()`` was deprecated. Use ``Query::groupBy()`` instead now that
-  ``Connection`` methods are no longer proxied. This aligns the function name
-  with the SQL statement.
-
 Breaking Changes
 ================
 
@@ -87,6 +71,10 @@ Database
 - ``Driver::quote()`` was removed. Use prepared statements instead.
 - ``Query::orderBy()`` was added to replace ``Query::order()``.
 - ``Query::groupBy()`` was added to replace ``Query::group()``.
+- The ``DateTimeType`` and ``DateType`` now always return immutable objects.
+  Additionally the interface for ``Date`` objects reflects the ``ChronosDate``
+  interface which lacks all of the time related methods that were present in
+  CakePHP 4.x.
 
 Datasource
 ----------
@@ -159,6 +147,23 @@ View
   All configured helpers will be loaded afterwards, anyway.
 - ``View\Widget\FileWidget`` is no longer compatible with PHP file upload shaped
   arrays. This is aligned with ``ServerRequest`` and ``Validation`` changes.
+
+Deprecations
+============
+
+The following is a list of deprecated methods, properties and behaviors. These
+features will continue to function in 5.x and will be removed in 6.0.
+
+Database
+--------
+
+- ``Query::order()`` was deprecated. Use ``Query::orderBy()`` instead now that
+  ``Connection`` methods are no longer proxied. This aligns the function name
+  with the SQL statement.
+- ``Query::group()`` was deprecated. Use ``Query::groupBy()`` instead now that
+  ``Connection`` methods are no longer proxied. This aligns the function name
+  with the SQL statement.
+
 
 New Features
 ============

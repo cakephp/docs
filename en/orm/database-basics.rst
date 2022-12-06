@@ -353,8 +353,8 @@ binary
     Maps to the ``BLOB`` or ``BYTEA`` type provided by the database.
 date
     Maps to a native ``DATE`` column type. The return value of this column
-    type is :php:class:`Cake\\I18n\\Date` which extends the native ``DateTime``
-    class.
+    type is :php:class:`Cake\\I18n\\Date` which emulates the date related
+    methods of PHP's ``DateTime`` class.
 datetime
     See :ref:`datetime-type`.
 datetimefractional
@@ -387,10 +387,10 @@ DateTime Type
 
 .. php:class:: DateTimeType
 
-Maps to a native ``DATETIME`` column type. In PostgreSQL and SQL Server
-this turns into a ``TIMESTAMP`` type. The default return value of this column
-type is :php:class:`Cake\\I18n\\FrozenTime` which extends the built-in
-``DateTimeImmutable`` class and `Chronos <https://github.com/cakephp/chronos>`_.
+Maps to a native ``DATETIME`` column type. In PostgreSQL and SQL Server this
+turns into a ``TIMESTAMP`` type. The default return value of this column type is
+:php:class:`Cake\\I18n\\DateTime` which extends `Chronos
+<https://github.com/cakephp/chronos>`_ and the native ``DateTimeImmutable``.
 
 .. php:method:: setTimezone(string|\DateTimeZone|null $timezone)
 

@@ -1226,7 +1226,7 @@ many rows at once, by assigning the new field values, and conditions for the upd
         $this->updateAll(
             [  // fields
                 'published' => true,
-                'publish_date' => FrozenTime::now()
+                'publish_date' => DateTime::now()
             ],
             [  // conditions
                 'published' => false
