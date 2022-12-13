@@ -121,12 +121,12 @@ You can check if fields are defined in your entities with ``has()``::
         'user_id' => null
     ]);
     $article->has('title'); // true
-    $article->has('user_id'); // false
+    $article->has('user_id'); // true
     $article->has('undefined'); // false
 
-The ``has()`` method will return ``true`` if a field is defined and has
-a non-null value. You can use ``isEmpty()`` and ``hasValue()`` to check if
-a field contains a 'non-empty' value::
+The ``has()`` method will return ``true`` if a field is defined. You can use
+``isEmpty()`` and ``hasValue()`` to check if a field contains a 'non-empty'
+value::
 
     $article = new Article([
         'title' => 'First post',
@@ -149,6 +149,15 @@ a field contains a 'non-empty' value::
     $article->has('links'); // true
     $article->isEmpty('links');  // true
     $article->hasValue('links'); // false
+
+If you often partially load entities you should enable strict-property access
+behavior to ensure you're not using properties that haven't been loaded. On
+a per-entity basis you can enable this behavior::
+
+    $article->requireFieldPresence();
+
+Once enabled, accessing properties that are not defined will raise
+a :php:exc:`Cake\ORM\MissingPropertyException`.
 
 Accessors & Mutators
 ====================
