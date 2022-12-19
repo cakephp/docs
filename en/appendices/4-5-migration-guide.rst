@@ -128,6 +128,11 @@ Error
 - Listeners of the ``Error.beforeRender`` event can now replace the rendering
   step for an error by returning the desired output.
 
+Http
+----
+
+- The ``HttpsEnforcerMiddleware`` now supports a ``trustedProxies`` option that
+  lets you define which proxies your application trusts.
 
 View
 ----
