@@ -52,7 +52,7 @@ Core
 - The function ``getTypeName()`` has been dropped. Use PHP's ``get_debug_type()`` instead.
 - The dependency on ``league/container`` was updated to ``4.x``. This will
   require the addition of typehints to your ``ServiceProvider`` implementations.
-- ``deprecationWarning()`` now has a ``$vesrion`` parameter.
+- ``deprecationWarning()`` now has a ``$version`` parameter.
 - The ``App.uploadedFilesAsObjects`` configuration option has been removed
   alongside of support for PHP file upload shaped arrays throughout the
   framework.
