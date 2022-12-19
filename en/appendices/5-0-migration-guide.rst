@@ -150,6 +150,8 @@ View
   All configured helpers will be loaded afterwards, anyway.
 - ``View\Widget\FileWidget`` is no longer compatible with PHP file upload shaped
   arrays. This is aligned with ``ServerRequest`` and ``Validation`` changes.
+- ``FormHelper`` no longer sets ``autocomplete=off`` on CSRF token fields. This
+  was a workaround for a Safari bug that is no longer relevant.
 
 Deprecations
 ============
