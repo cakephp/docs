@@ -38,27 +38,7 @@ backwards incompatible changes concerning method signatures and file renames.
 To help expedite fixing these tedious changes there is an upgrade CLI tool:
 
 .. warning::
-    The ``file_rename`` command and rector rules for cakephp40, and phpunit80
-    are intended to be run **before** you update your application's dependencies
-    to 5.0. The ``cakephp50`` rector rules will not run correctly if your
-    application already has its dependencies updated to 5.x or PHPUnit9.
-
-.. code-block:: bash
-
-    # Install the upgrade tool
-    git clone git://github.com/cakephp/upgrade
-    cd upgrade
-    git checkout master
-    composer install --no-dev
-
-Applying Rector Refactorings
-----------------------------
-
-Next use the ``rector`` command to automatically fix many deprecated CakePHP and
-PHPUnit method calls. It is important to apply rector **before** you upgrade
-your dependencies::
-
-    bin/cake upgrade rector --rules cakephp50 <path/to/app/src>
+    The upgrade tool for 5.x is not complete yet.
 
 Update CakePHP Dependency
 =========================
