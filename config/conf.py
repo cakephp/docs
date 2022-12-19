@@ -18,7 +18,7 @@ release = '5.x'
 search_version = '5'
 
 # The marketing diplay name for the book.
-version_name = '?'
+version_name = 'Chiffon'
 
 # Other versions that display in the version picker menu.
 version_list = [
