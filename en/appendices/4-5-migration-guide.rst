@@ -107,8 +107,13 @@ Controller
 - ``ComponentRegistry`` is now automatically added to your application's
   :term:`DI container`.
 
+Console
+-------
+
+- Using `--` on the commnad line to separate options and positional arguments is now supported.
+
 Core
------------
+----
 
 - The current container instance is now registered in the :term:`DI container`
   and available as dependency for application services or controllers/commands.
