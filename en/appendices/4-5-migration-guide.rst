@@ -110,7 +110,7 @@ Controller
 Console
 -------
 
-- Using `--` on the commnad line to separate options and positional arguments is now supported.
+- Using ``--`` on the command line to separate options and positional arguments is now supported.
 
 Core
 ----
