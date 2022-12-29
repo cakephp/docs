@@ -146,6 +146,14 @@ Http
 - The ``HttpsEnforcerMiddleware`` now supports a ``trustedProxies`` option that
   lets you define which proxies your application trusts.
 
+TestSuite
+---------
+
+- ``Cake\TestSuite\Fixture\SchemaLoader::loadInternalFile()`` is no longer an
+  internal method. This method is now available to plugin authors as a path to
+  migrate off of defining schema in fixture classes where migrations are not
+  already in use.
+
 View
 ----
 
