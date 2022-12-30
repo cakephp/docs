@@ -321,7 +321,7 @@ HTML リンクを作成するための多目的なメソッドです。
 
     <a href="/pages/home" class="button" target="_blank">Enter</a>
 
-絶対 URL には ``'_full'=>true`` オプションを使用してください。 ::
+絶対URLにするためには ``'_full'=>true`` オプションを使用してください。 ::
 
     echo $this->Html->link(
         'Dashboard',
