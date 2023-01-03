@@ -34,6 +34,11 @@ Cache
 - The ``Wincache`` engine was removed. The wincache extension is not supported
   on PHP 8.
 
+Console
+-------
+
+- ``ConsoleIntegrationTestTrait::useCommandRunner()`` was removed since it's no longer needed.
+
 Controller
 ----------
 
