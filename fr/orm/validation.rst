@@ -418,7 +418,7 @@ correspondante doivent faire partie de la clé primaire.
 Vous pouvez forcer ``existsIn`` à accepter qu'une partie de votre clé étrangère
 composite soit null::
 
-    // Exemple: NodesTable contient une clé primaire composite (id, site_id).
+    // Exemple: NodesTable contient une clé primaire composite (parent_id, site_id).
     // Un "Node" peut faire référence à un Node parent mais ce n'est pas
     // obligatoire. Dans ce dernier cas, parent_id est null.
     // Nous autorisons la validation de cette règle même si les champs qui sont

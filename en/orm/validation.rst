@@ -393,7 +393,7 @@ primary key.
 You can enforce ``existsIn`` to pass when nullable parts of your composite foreign key
 are null::
 
-    // Example: A composite primary key within NodesTable is (id, site_id).
+    // Example: A composite primary key within NodesTable is (parent_id, site_id).
     // A Node may reference a parent Node but does not need to. In latter case, parent_id is null.
     // Allow this rule to pass, even if fields that are nullable, like parent_id, are null:
     $rules->add($rules->existsIn(

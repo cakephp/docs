@@ -378,7 +378,7 @@ CakePHP は、エンティティーが保存される前に適用される「ル
 
 複合外部キーの null が可能な部分が null の時、 ``existsIn`` が通るように強制することができます。 ::
 
-    // 例: NodesTable の複合主キーは (id, site_id) です。
+    // 例: NodesTable の複合主キーは (parent_id, site_id) です。
     // Node は、親 Node を参照しますが、必須ではありません。参照しない場合、parent_id が null になります。
     // たとえ null が可能なフィールド (parent_id のような) が null であっても、このルールが通ることを許可します。
     $rules->add($rules->existsIn(
