@@ -289,9 +289,6 @@ for both::
 You can specify the same value for both ``read`` and ``write`` key without creating
 multiple connections to the database.
 
-.. versionadded:: 4.5.0
-    Read and write connection roles were added.
-
 .. php:namespace:: Cake\Datasource
 
 Managing Connections
@@ -643,9 +640,6 @@ no value for the current database driver:
 - ``length`` The length of a column if available..
 - ``precision`` The precision of the column if available.
 - ``scale`` Can be included for SQLServer connections.
-
-.. versionadded:: 4.3.0
-    ``ColumnSchemaAwareInterface`` was added.
 
 .. _mapping-custom-datatypes-to-sql-expressions:
 

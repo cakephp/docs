@@ -111,9 +111,6 @@ If you want to use route path strings, you can do that using this method::
     echo $this->Url->buildFromPath('MyBackend.Admin/Articles::view', [3]);
     // outputs: /admin/my-backend/articles/view/3
 
-.. versionadded:: 4.1.0
-    ``buildFromPath()`` was added.
-
 URL with asset timestamp wrapped by a ``<link rel="preload"/>``, here pre-loading
 a font. Note: The file must exist and ``Configure::read('Asset.timestamp')``
 must return ``true`` or ``'force'`` for the timestamp to be appended::
@@ -155,10 +152,6 @@ asset cache busting parameters you can use the ``assetUrlClassName`` option::
 
 When using the ``assetUrlClassName`` you must implement the same methods as
 ``Cake\Routing\Asset`` does.
-
-
-.. versionadded:: 4.2.0
-    The ``assetUrlClassName`` option was added.
 
 For further information check
 `Router::url <https://api.cakephp.org/4.x/class-Cake.Routing.Router.html#_url>`_

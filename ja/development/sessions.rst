@@ -340,9 +340,6 @@ IO をもたらします。
 
     $session->read('Config.language', 'en');
 
-.. versionchanged:: 4.1.0
-    ``default`` パラメータが追加されました。
-
 .. php:method:: readOrFail($key)
 
 Null値でない戻り値に対する便宜的なラッパーと同じです。 ::
@@ -351,9 +348,6 @@ Null値でない戻り値に対する便宜的なラッパーと同じです。 
 
 これは、このキーが設定されなければならないことが分かっていて、
 コード自体でその存在を確認する必要がない場合に便利です。
-
-.. versionadded:: 4.1.0
-    ``readOrFail()`` が追加されました。
 
 .. php:method:: write($key, $value)
 

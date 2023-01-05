@@ -12,9 +12,6 @@ remote APIs.
 CakePHP には、リクエストの実行に使用できる基本的ながら強力な HTTP クライアントが含まれています。
 これは、ウェブサービスや、リモート API と通信するための素晴らしい方法です。
 
-.. versionchanged:: 3.3.0
-    3.3.0 より前なら、 ``Cake\Network\Http\Client`` を使用してください。
-
 リクエストの実行
 ================
 
@@ -369,11 +366,6 @@ Client インスタンスに格納されているクッキーは、それ以後�
 
 Response オブジェクトは、レスポンスデータを検査するための多くのメソッドを持ちます。
 
-.. versionchanged:: 3.3.0
-    3.3.0 では、 ``Cake\Http\Client\Response`` は `PSR-7 ResponseInterface
-    <https://www.php-fig.org/psr/psr-7/#3-3-psr-http-message-responseinterface>`__
-    を実装します。
-
 レスポンスボディーの読み込み
 ----------------------------
 
@@ -532,9 +524,6 @@ strings::
         'Connection: close',
     ];
     $response = $this->newClientResponse(200, $headers, $body)
-
-
-.. versionadded:: 4.3.0
 
 .. meta::
     :title lang=ja: HttpClient

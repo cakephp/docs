@@ -338,7 +338,7 @@ ajouter des règles au vérificateur pour une classe Table donnée::
 
 Vos fonctions de règles ont pour paramètres l'Entity à vérifier et un tableau
 d'options. Le tableau d'options va contenir ``errorField``, ``message`` et
-``repository``. L'option ``repository`` va contenir la classe de table à 
+``repository``. L'option ``repository`` va contenir la classe de table à
 laquelle les règles sont attachées. Comme les règles acceptent n'importe quel
 ``callable``, vous pouvez aussi utiliser des fonctions d'instance::
 
@@ -392,10 +392,6 @@ uniques dans les index UNIQUE. Pour simuler cela, définissez les options
         ['username', 'account_id'],
         ['allowMultipleNulls' => true]
     ));
-
-.. versionadded:: 4.2.0
-    L'option ``allowMultipleNulls`` a été ajoutée. Elle existait précédemment
-    dans 3.x, mais était désactivée par défaut.
 
 Règles de Clés Etrangères
 -------------------------
@@ -493,8 +489,6 @@ fonction du mode utilisé::
         'comments',
        'Impossible de supprimer un article qui contient des commentaires.'
     ));
-
-.. versionadded:: 4.0.0
 
 Utiliser les Méthodes Entity en tant que Règles
 -----------------------------------------------
@@ -699,7 +693,7 @@ fois que ``save()`` ou ``delete()`` sont appelées::
     public function buildRules(RulesChecker $rules): RulesChecker
     {
         $rules->add($rules->isUnique(['email']));
-        
+
         return $rules;
     }
 

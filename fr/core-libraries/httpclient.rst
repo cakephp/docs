@@ -325,12 +325,6 @@ cette requête va continuer à utiliser toutes les autres options définies quan
 le client délimité a été créé. Consultez :ref:`http_client_request_options`
 pour plus d'informations sur les options intégrées.
 
-.. versionadded:: 4.2.0
-    ``Client::createFromUrl()`` a été ajoutée.
-
-.. versionchanged:: 4.2.0
-    L'option ``basePath`` a été ajoutée.
-
 Configurer et Gérer les Cookies
 ===============================
 
@@ -538,9 +532,6 @@ en-têtes doivent être une liste de chaînes de caractères::
         'Connection: close',
     ];
     $response = $this->newClientResponse(200, $headers, $body)
-
-
-.. versionadded:: 4.3.0
 
 .. meta::
     :title lang=fr: HttpClient

@@ -370,10 +370,6 @@ To simulate this, set the ``allowMultipleNulls`` options to true::
         ['allowMultipleNulls' => true]
     ));
 
-.. versionadded:: 4.2.0
-    The ``allowMultipleNulls`` option was added. This was previously in 3.x, but
-    it is now disabled by default.
-
 Foreign Key Rules
 -----------------
 
@@ -463,8 +459,6 @@ have related records depending on the mode used::
         'comments',
         'Must have zero comments before deletion.'
     ));
-
-.. versionadded:: 4.0.0
 
 Using Entity Methods as Rules
 -----------------------------

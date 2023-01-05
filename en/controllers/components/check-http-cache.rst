@@ -3,9 +3,6 @@ Checking HTTP Cache
 
 .. php:class:: CheckHttpCacheComponent(ComponentCollection $collection, array $config = [])
 
-.. versionadded:: 4.4.0
-    The ``CheckHttpCacheComponent`` was added.
-
 The HTTP cache validation model is one of the processes used for cache gateways,
 also known as reverse proxies, to determine if they can serve a stored copy of
 a response to the client. Under this model, you mostly save bandwidth, but when

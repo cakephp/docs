@@ -420,9 +420,6 @@ the controller's default one::
         ])
         ->all();
 
-.. versionadded:: 4.3.0
-    ``Controller::fetchTable()`` was added. Prior to 4.3 you need to use ``Controller::loadModel()``.
-
 Paginating a Model
 ==================
 
@@ -548,9 +545,6 @@ controller use the ``middleware()`` method from your controller's
     }
 
 Middleware defined by a controller will be called **before** ``beforeFilter()`` and action methods are called.
-
-.. versionadded:: 4.3.0
-    ``Controller::middleware()`` was added.
 
 More on Controllers
 ===================

@@ -105,9 +105,6 @@ content::
         | Cake Mix |        1.50 |
         +----------+-------------+
 
-.. versionadded:: 4.2.0
-    The ``<text-right>`` formatting tag was added in 4.2.
-
 Progress Helper
 ---------------
 

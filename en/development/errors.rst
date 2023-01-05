@@ -35,7 +35,7 @@ options are supported:
   the memory limit by when a fatal error is encountered. This allows breathing
   room to complete logging or error handling.
 * ``logger`` (prior to 4.4.0 use ``errorLogger``) -
-  ``Cake\Error\ErrorLoggerInterface`` - The class responsible for logging 
+  ``Cake\Error\ErrorLoggerInterface`` - The class responsible for logging
   errors and unhandled exceptions. Defaults to ``Cake\Error\ErrorLogger``.
 * ``errorRenderer`` - ``Cake\Error\ErrorRendererInterface`` - The class responsible
   for rendering errors. Default is chosen based on PHP SAPI.
@@ -85,9 +85,6 @@ You can temporarily disable deprecation warnings in one of a few ways:
    Would ignore all deprecations from your ``Models`` directory and the
    ``Contacts`` plugin in your application.
 
-.. versionadded:: 4.2.0
-    The ``Error.ignoredDeprecationPaths`` option was added.
-
 .. php:class:: ExceptionRenderer(Exception $exception)
 
 Changing Exception Handling
@@ -136,12 +133,6 @@ Within an ``Exception.beforeRender`` handler you have a few options:
   to replace the exception that is being rendered.
 * Return a response from the event listener to skip rendering and use
   the provided response instead.
-
-.. versionadded:: 4.4.0
-    Error and Exception events were added.
-
-.. versionchanged:: 4.5.0
-   The ``beforeRender`` events can now replace exceptions and replace rendering.
 
 .. _error-views:
 
@@ -376,13 +367,6 @@ Prior to CakePHP 4.4.0, you should implement ``logMessage()`` and ``log()``::
         }
     }
 
-.. versionadded:: 4.1.0
-    ErrorLoggerInterface was added.
-
-.. versionchanged:: 4.4.0
-    ``ErrorLoggerInterface::logException()`` and``ErrorLoggerInterface::logError()`` were added.
-
-
 Custom Error Rendering
 ======================
 
@@ -411,9 +395,6 @@ errors you can create a class::
 
 The constructor of your renderer will be passed an array of all the Error
 configuration.
-
-.. versionadded:: 4.4.0
-    ErrorRendererInterface was added.
 
 .. index:: application exceptions
 

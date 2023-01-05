@@ -224,10 +224,6 @@ JsonView/XmlView を利用する場合、カスタムビュークラスでデフ
         ]);
     }
 
-.. deprecated:: 3.1.0
-    3.1.0 から ``viewClassMap()`` メソッドは非推奨です。
-    実行時に viewClassMap を変更するには、 ``config()`` を使用してください。
-
 .. meta::
     :title lang=ja: リクエストハンドリング
     :keywords lang=ja: ハンドラーコンポーネント,javascript ライブラリー,パブリックコンポーネント,null 戻り値,モデルデータ,リクエストデータ,コンテンツタイプ,ファイル拡張子,ajax,meth,配列,結合,cakephp,insight,php

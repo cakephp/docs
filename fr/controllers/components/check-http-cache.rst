@@ -3,9 +3,6 @@ Checking HTTP Cache
 
 .. php:class:: CheckHttpCacheComponent(ComponentCollection $collection, array $config = [])
 
-.. versionadded:: 4.4.0
-    La classe ``CheckHttpCacheComponent`` a été ajoutée.
-
 Le modèle de validation du cache HTTP est un des process utilisés pour les
 passerelles de cache, aussi connues comme mandataires inversés (*reverse
 proxies*), pour déterminer si elles peuvent servir à stocker une copie de la

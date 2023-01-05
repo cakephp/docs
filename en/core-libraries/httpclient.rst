@@ -309,12 +309,6 @@ continue using all the other options defined when the scoped client was created.
 See :ref:`http_client_request_options` for more information on the options
 supported.
 
-.. versionadded:: 4.2.0
-    ``Client::createFromUrl()`` was added.
-
-.. versionchanged:: 4.2.0
-    The ``basePath`` option was added.
-
 Setting and Managing Cookies
 ============================
 
@@ -515,9 +509,6 @@ strings::
         'Connection: close',
     ];
     $response = $this->newClientResponse(200, $headers, $body)
-
-
-.. versionadded:: 4.3.0
 
 .. meta::
     :title lang=en: HttpClient

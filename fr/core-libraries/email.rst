@@ -296,9 +296,6 @@ client:
    fichier en chaîne en utilisant l'option ``data``. Cela vous permet
    d'attacher les fichiers sans avoir besoin de chemins de fichier vers eux.
 
-.. deprecated:: 3.4.0
-    Utilisez ``setAttachments()`` à la place de ``attachments()``.
-
 Utiliser les Transports
 =======================
 

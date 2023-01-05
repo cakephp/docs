@@ -92,9 +92,6 @@ temporairement en utilisant un de ces moyens:
    ignorerait toutes les dépréciations depuis votre répertoire ``Models`` et le
    plugin ``Contacts`` dans votre application.
 
-.. versionadded:: 4.2.0
-    L'option ``Error.ignoredDeprecationPaths`` a été ajoutée.
-
 .. php:class:: ExceptionRenderer(Exception $exception)
 
 Modifier la gestion des exceptions
@@ -447,9 +444,6 @@ logger</em>::
             // Logger les exceptions
         }
     }
-
-.. versionadded:: 4.1.0
-    ErrorLoggerInterface a été ajoutée.
 
 .. index:: application exceptions
 

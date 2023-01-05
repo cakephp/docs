@@ -636,9 +636,6 @@ clés suivantes. Toutes les clés existeront mais seront susceptibles de conteni
 - ``precision`` La précision d'une colonne, si disponible.
 - ``scale`` Peut être inclus pour les connexions SQLServer.
 
-.. versionadded:: 4.3.0
-    ``ColumnSchemaAwareInterface`` a été ajouté.
-
 .. _mapping-custom-datatypes-to-sql-expressions:
 
 Faire correspondre des types de données personnalisés aux expressions SQL

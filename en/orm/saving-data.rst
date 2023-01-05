@@ -662,8 +662,6 @@ validation logic that you cannot easily express through Validator methods::
         }
     }
 
-.. versionadded:: 4.1.0
-
 Validating Data Before Building Entities
 ----------------------------------------
 

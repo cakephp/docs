@@ -702,9 +702,6 @@ horaire et le format localisé::
         }
     }
 
-.. versionadded:: 4.3.0
-    La méthode ``setUserTimezone()`` a été ajoutée.
-
 Sélection Automatique de Locale Basée sur les Données de Requêtes
 =================================================================
 

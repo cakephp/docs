@@ -348,8 +348,6 @@ Lors de la levée d'une ``RedirectException``, vous pouvez inclure des en-têtes
         'Header-Key' => 'value',
     ]);
 
-.. versionadded:: 4.1.0
-
 .. meta::
     :title lang=fr: Components (Composants)
     :keywords lang=fr: tableau controller,librairies du cœur,authentification requêtes,tableau de nom,Liste contrôle accès,public components,controller code,components du cœur,cookiemonster,cookie de connexion,paramètres de configuration,fonctionalité,logic,sessions,cakephp,doc

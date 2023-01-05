@@ -52,8 +52,5 @@ connecter en HTTPS. Vous pouvez configurer ce header avec l'option ``hsts``::
         ],
     ]);
 
-.. versionadded:: 4.4.0
-    L'option ``hsts`` a été ajoutée.
-
  .. meta::
      :title lang=fr: Middleware HTTPS Enforcer

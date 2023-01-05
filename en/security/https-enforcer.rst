@@ -56,13 +56,6 @@ You can configure this header with the ``hsts`` option::
         ],
     ]);
 
-.. versionadded:: 4.4.0
-    The ``hsts`` option was added.
-
-.. versionadded:: 4.5.0
-   The ``trustedProxies`` option was added.
-
-
 .. meta::
     :title lang=en: HTTPS Enforcer Middleware
     :keywords lang=en: security, https, require https

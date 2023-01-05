@@ -553,9 +553,6 @@ To load a SQL dump file you can use the following::
 At the beginning of each test run ``SchemaLoader`` will drop all tables in the
 connection and rebuild tables based on the provided schema file.
 
-.. versionadded:: 4.3.0
-    SchemaLoader was added.
-
 .. _fixture-state-management:
 
 Fixture State Managers
@@ -585,8 +582,6 @@ The fixture state management strategy can be defined within the test case::
             return new TransactionStrategy();
         }
     }
-
-.. versionadded:: 4.3.0
 
 Creating Fixtures
 -----------------
@@ -650,11 +645,6 @@ records. Each item in ``$records`` should be a single row. Inside each row,
 should be an associative array of the columns and values for the row. Just keep
 in mind that each record in the ``$records`` array must have the same keys as
 rows are bulk inserted.
-
-.. versionchanged:: 4.3.0
-
-    Prior to 4.3.0 fixtures would also define the table's schema. You can learn more
-    about :ref:`fixture-schema` if you still need to define schema in your fixtures.
 
 Dynamic Data
 ------------

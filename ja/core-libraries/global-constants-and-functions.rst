@@ -91,10 +91,6 @@ CakePHP アプリケーション内の特定のファイルやディレクトリ
 
 .. php:function:: debug(mixed $var, boolean $showHtml = null, $showFrom = true)
 
-    .. versionchanged:: 3.3.0
-	このメソッドを呼ぶと、渡された ``$var`` を返します。例えば、return 文に
-	このメソッドを置くことができます。
-
     コア ``$debug`` 変数が ``true`` であれば、 ``$var`` が出力されます。
     ``$showHTML`` が ``true`` あるいは ``null`` のままであればデータはブラウザー表示に
     相応しいように描画されます。 ``$showFrom`` が ``false`` にセットされない場合、
@@ -110,17 +106,9 @@ CakePHP アプリケーション内の特定のファイルやディレクトリ
 
 .. php:function:: pr(mixed $var)
 
-    .. versionchanged:: 3.3.0
-	このメソッドを呼ぶと、渡された ``$var`` を返します。例えば、return 文に
-	このメソッドを置くことができます。
-
     出力を ``<pre>`` タグで周りを囲む機能を追加した ``print_r()`` の便利なラッパー。
 
 .. php:function:: pj(mixed $var)
-
-    .. versionchanged:: 3.3.0
-	このメソッドを呼ぶと、渡された ``$var`` を返します。例えば、return 文に
-	このメソッドを置くことができます。
 
     出力を ``<pre>`` タグで周りを囲む機能を追加した JSON 整形表示の便利な関数。
 

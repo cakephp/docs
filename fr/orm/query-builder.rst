@@ -215,7 +215,7 @@ activer les :ref:`logs de requête <database-query-logging>`.
 
 Récupérer vos Données
 =====================
-CakePHP permet de construire simplement des requêtes ``SELECT``. La 
+CakePHP permet de construire simplement des requêtes ``SELECT``. La
 méthode ``select()`` vous permet de ne récupérer que les champs qui vous sont
 nécessaires::
 
@@ -369,9 +369,6 @@ fenêtrage par défaut:
     Renvoie une expression Aggregate pour la fonction SQL ``LAG()``.
 ``lead()``
     Renvoie une expression Aggregate pour la fonction SQL ``LEAD()``.
-
-.. versionadded:: 4.1.0
-    Les fonctions de fenêtrage ont été ajoutées dans 4.1.0
 
 Quand vous fournissez des arguments pour les fonctions SQL, il y a deux types de
 paramètres que vous pouvez utiliser: les arguments littéraux et les paramètres
@@ -622,9 +619,6 @@ Il est également possible créer une variable simple en passant une valeur à
         ->else('N');
 
    # CASE published WHEN true THEN 'Y' ELSE 'N' END;
-
-.. versionchanged:: 4.3.0
-    Ajout du builder fluide ``case()``.
 
 Avant 4.3.0, vous deviez utiliser::
 
@@ -1685,9 +1679,6 @@ une instance de requête spécialisée qui ne générera pas d'alias::
     $query = $articles->find()
         ->where(['id IN' => $matchingComment]);
 
-.. versionadded:: 4.2.0
-    ``Table::subquery()`` et ``Query::subquery()`` ont été ajoutées.
-
 Ajouter des Clauses de Verrouillage
 -----------------------------------
 
@@ -1786,9 +1777,6 @@ reprises, vous pouvez créer des fenêtres nommées en utilisant la méthode
             ->over('article_concerne'),
     ]);
 
-.. versionadded:: 4.1.0
-    Le support des fonctions de fenêtrage a été ajouté.
-
 Common Table Expressions
 ------------------------
 
@@ -1849,9 +1837,6 @@ utiliserions::
             'conditions' => 'commandes_par_client.client_id = Clients.id'
         ]
     ]);
-
-.. versionadded:: 4.1.0
-    Ajout des Common table expressions.
 
 Exécuter des Requêtes Complexes
 -------------------------------

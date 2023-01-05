@@ -336,11 +336,6 @@ conditionnelle dont vous avez besoin.
     Les classes de vue doivent implémenter la méthode statique ``contentType()``
     pour pouvoir participer à la négociation de contenu.
 
-.. versionadded:: 4.4.0
-    Avant 4.4, vous deviez utiliser
-    :doc:`/controllers/components/request-handling` au lieu de
-    ``viewClasses()``.
-
 
 Rediriger vers d'Autres Pages
 =============================
@@ -412,10 +407,6 @@ une table autre que la table par défaut du controller::
         'limit' => 5,
         'order' => 'Articles.created DESC'
     ]);
-
-.. versionadded:: 4.3.0
-    ``Controller::fetchTable()`` a été ajoutée. Avant 4.3, vous deviez utiliser
-    ``Controller::loadModel()``.
 
 Paginer un Modèle
 =================
@@ -546,9 +537,6 @@ depuis l'intérieur de la méthode ``initialize()`` de votre contrôleur::
 
 Les middlewares définis par un contrôleur seront appelés **avant** que
 ``beforeFilter()`` les méthodes d'action ne soient appelées.
-
-.. versionadded:: 4.3.0
-    ``Controller::middleware()`` a été ajoutée.
 
 Plus sur les Controllers
 ========================

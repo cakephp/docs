@@ -146,9 +146,6 @@ implémenter une des méthodes suivantes:
 * ``toArray()``
 * ``__debugInfo()``
 
-.. versionadded:: 4.1.0
-    Les placeholders de logs ont été ajoutés.
-
 .. _logging-levels:
 
 Utiliser les Niveaux
@@ -407,9 +404,6 @@ Pour implémenter votre propre formateur, vous aurez besoin d'étendre
 méthode que vous aurez besoin d'implémenter est
 ``format($level, $message, $context)``, qui est responsable du formatage des
 messages de log.
-
-.. versionadded:: 4.3.0
-    Les formateurs de log ont été ajoutés dans 4.3.0
 
 l'API de Log
 ============

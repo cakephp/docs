@@ -108,9 +108,6 @@ the request data::
     // would use the rules defined by `validationUpdate()`
     $isValid = $form->validate($this->request->getData(), 'update');
 
-.. versionadded:: 4.3.0
-    Using validators other than ``default`` was added.
-
 Setting Form Values
 ===================
 
@@ -160,9 +157,6 @@ or a subset of fields::
         'name' => 'John Doe',
         'email' => 'john.doe@example.com',
     ]);
-
-.. versionadded:: 4.1.0
-    The ``set()`` method was added.
 
 Getting Form Errors
 ===================

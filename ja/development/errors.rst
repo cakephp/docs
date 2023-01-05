@@ -76,9 +76,6 @@ CakePHPまたはプラグインをアップグレードすると、新しい非�
 
    アプリケーションにおける ``Models`` ディレクトリと ``Contacts`` プラグインからのすべての非推奨を無視します。
 
-.. versionadded:: 4.2.0
-    ``Error.ignoredDeprecationPaths`` オプションが追加されました。
-
 .. php:class:: ExceptionRenderer(Exception $exception)
 
 例外処理の変更
@@ -388,9 +385,6 @@ logger::
             // Log exceptions.
         }
     }
-
-.. versionadded:: 4.1.0
-    ErrorLoggerInterface was added.
 
 .. index:: application exceptions
 

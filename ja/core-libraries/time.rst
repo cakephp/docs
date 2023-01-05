@@ -152,9 +152,6 @@ PHP のビルトインの ``DateTime`` クラスで提供されているメソ�
 .. note::
     このメソッドは静的に呼び出されなくてはなりません。
 
-.. versionchanged:: 4.1.0
-    ``callable`` パラメータタイプが追加されました。
-
 
 .. php:method:: i18nFormat($format = null, $timezone = null, $locale = null)
 
