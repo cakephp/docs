@@ -1079,12 +1079,12 @@ column Types::
     TypeFactory::map('json', 'Cake\Database\Type\JsonType');
 
     // In src/Model/Table/UsersTable.php
-    use Cake\Database\Schema\TableSchemaInterface;
 
     class UsersTable extends Table
     {
-        protected function _initializeSchema(TableSchemaInterface $schema): TableSchemaInterface
+        public function getSchema(): TableSchemaInterface
         {
+            $schema = parent::getSchema();
             $schema->setColumnType('preferences', 'json');
 
             return $schema;
@@ -1140,7 +1140,7 @@ If you want to track down the entity that failed to save, you can use the
             echo $e->getEntity();
         }
 
-As this internally perfoms a :php:meth:`Cake\\ORM\\Table::save()` call, all
+As this internally performs a :php:meth:`Cake\\ORM\\Table::save()` call, all
 corresponding save events will be triggered.
 
 Find or Create an Entity
@@ -1260,8 +1260,8 @@ interface as well::
     // Publish all the unpublished articles.
     function publishAllUnpublished()
     {
-        $this->query()
-            ->update()
+        // Prior to 4.5 use $this->query() instead.
+        $this->updateQuery()
             ->set(['published' => true])
             ->where(['published' => false])
             ->execute();

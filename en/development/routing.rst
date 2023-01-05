@@ -6,7 +6,7 @@ Routing
 .. php:class:: RouterBuilder
 
 Routing provides you tools that map URLs to controller actions. By defining
-routes, you can separate how your application is implemented from how its URL's
+routes, you can separate how your application is implemented from how its URLs
 are structured.
 
 Routing in CakePHP also encompasses the idea of reverse routing, where an array
@@ -398,8 +398,8 @@ CakePHP, and should not be used unless you want the special meaning
 * ``_full``  If ``true`` the value of ``App.fullBaseUrl`` mentioned in
   :ref:`general-configuration` will be prepended to generated URLs.
 * ``#`` Allows you to set URL hash fragments.
-* ``_ssl`` Set to ``true`` to convert the generated URL to https or ``false``
-  to force http.
+* ``_https`` Set to ``true`` to convert the generated URL to https or ``false``
+  to force http. Prior to 4.5.0 use ``_ssl``.
 * ``_method`` Define the HTTP verb/method to use. Useful when working with
   :ref:`resource-routes`.
 * ``_name`` Name of route. If you have setup named routes, you can use this key
@@ -517,7 +517,7 @@ Using Named Routes
 
 Sometimes you'll find typing out all the URL parameters for a route too verbose,
 or you'd like to take advantage of the performance improvements that named
-routes have. When connecting routes you can specifiy a ``_name`` option, this
+routes have. When connecting routes you can specify a ``_name`` option, this
 option can be used in reverse routing to identify the route you want to use::
 
     // Connect a route with a name.
@@ -687,10 +687,6 @@ how to build this link using the HTML helper::
         'View Post',
         ['prefix' => false, 'controller' => 'Articles', 'action' => 'view', 5]
     );
-
-.. note::
-
-    You should connect prefix routes *before* you connect fallback routes.
 
 .. index:: plugin routing
 
@@ -935,10 +931,8 @@ registered into the route collection::
     use Cake\Http\Middleware\CsrfProtectionMiddleware;
     use Cake\Http\Middleware\EncryptedCookieMiddleware;
 
-    $routes->scope('/', function (RouteBuilder $routes) {
-        $routes->registerMiddleware('csrf', new CsrfProtectionMiddleware());
-        $routes->registerMiddleware('cookies', new EncryptedCookieMiddleware());
-    });
+    $routes->registerMiddleware('csrf', new CsrfProtectionMiddleware());
+    $routes->registerMiddleware('cookies', new EncryptedCookieMiddleware());
 
 Once registered, scoped middleware can be applied to specific
 scopes::
@@ -1350,8 +1344,8 @@ You can also use any of the special route elements when generating URLs:
 * ``_method`` Define the HTTP verb the URL is for.
 * ``_full``  If ``true`` the value of ``App.fullBaseUrl`` mentioned in
   :ref:`general-configuration` will be prepended to generated URLs.
-* ``_ssl`` Set to ``true`` to convert the generated URL to https or ``false``
-  to force http.
+* ``_https`` Set to ``true`` to convert the generated URL to https or ``false``
+  to force http. Prior to 4.5.0 use ``_ssl``
 * ``_name`` Name of route. If you have setup named routes, you can use this key
   to specify it.
 

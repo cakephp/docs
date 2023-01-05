@@ -105,9 +105,8 @@ element the Xml will fail to generate.
 Using a Data View with Template Files
 =====================================
 
-You should use template files if you need to do some manipulation of your view
-content before creating the final output. For example if we had articles, that had
-a field containing generated HTML, we would probably want to omit that from a
+You should use template files if you need to manipulate your view
+content before creating the final output. For example, if we had articles with a field containing generated HTML, we would probably want to omit that from a
 JSON response. This is a situation where a view file would be useful::
 
     // Controller code
@@ -121,7 +120,7 @@ JSON response. This is a situation where a view file would be useful::
     }
 
     // View code - templates/Articles/json/index.php
-    foreach ($articles as &$article) {
+    foreach ($articles as $article) {
         unset($article->generated_html);
     }
     echo json_encode(compact('articles'));

@@ -1188,14 +1188,16 @@ construire les Types de colonne personnalisés::
     TypeFactory::map('json', 'Cake\Database\Type\JsonType');
 
     // Dans src/Model/Table/UsersTable.php
-    use Cake\Database\Schema\TableSchema;
+    use Cake\Database\Schema\TableSchemaInterface;
 
     class UsersTable extends Table
     {
 
-        protected function _initializeSchema(TableSchema $schema)
+        public function getSchema(): TableSchemaInterface
         {
+            $schema = parent::getSchema();
             $schema->columnType('preferences', 'json');
+
             return $schema;
         }
 

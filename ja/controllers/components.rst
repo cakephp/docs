@@ -20,6 +20,7 @@ CakePHP の中に含まれるコンポーネントの詳細については、各
     /controllers/components/pagination
     /controllers/components/request-handling
     /controllers/components/form-protection
+    /controllers/components/check-http-cache
 
 .. _configuring-components:
 

@@ -492,13 +492,15 @@ option du constructeur::
 Tests
 =====
 
-.. php:trait:: Cake\TestSuite\HttpClientTrait
+.. php:namespace:: Cake\Http\TestSuite
+
+.. php:trait:: HttpClientTrait
 
 Dans les tests, vous voudrez souvent créer des réponses de mocks vers des API
 externes. Vous pouvez utiliser ``HttpClientTrait`` pour définir des réponses aux
 requêtes faites par votre application::
 
-    use Cake\TestSuite\HttpClientTrait;
+    use Cake\Http\TestSuite\HttpClientTrait;
     use Cake\TestSuite\TestCase;
 
     class CartControllerTests extends TestCase
@@ -525,7 +527,7 @@ Il existe des méthodes pour mocker les méthodes HTTP les plus courantes::
     $this->mockClientPut(...);
     $this->mockClientDelete(...);
 
-... php:method:: newClientResponse(int $code = 200, array $headers = [], string $body = '')
+.. php:method:: newClientResponse(int $code = 200, array $headers = [], string $body = '')
 
 Comme vu précédemment, vous pouvez utiliser la méthode ``newClientResponse()``
 pour créer des réponses pour les requêtes que fera votre application. Les

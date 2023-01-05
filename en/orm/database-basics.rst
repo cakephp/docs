@@ -62,10 +62,9 @@ It is also possible to use complex data types as arguments::
 
 Instead of writing the SQL manually, you can use the query builder::
 
+    // Prior to 4.5 use $connection->query() instead.
     $results = $connection
-        ->newQuery()
-        ->select('*')
-        ->from('articles')
+        ->selectQuery('*', 'articles')
         ->where(['created >' => new DateTime('1 day ago')], ['created' => 'datetime'])
         ->order(['title' => 'DESC'])
         ->execute()
@@ -257,6 +256,41 @@ pastry\_stores, and savory\_cakes.
     then you MUST use the ``flags`` config to set your charset encoding. For example::
 
         'flags' => [\PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8']
+
+.. _read-and-write-connections:
+
+Read and Write Connections
+==========================
+
+Connections can have separate read and write roles. Read
+roles are expected to represent read-only replicas and write roles are expected
+to be the default connection and support write operations.
+
+Read roles are configured by providing a ``read`` key in the connection config.
+Write roles are configured by providing a ``write`` key.
+
+Role configurations override the values in the shared connection config. If the read
+and write role configurations are the same, a single connection to the database is used
+for both::
+
+    'default' => [
+        'driver' => 'mysql',
+        'username' => '...',
+        'password' => '...',
+        'database' => '...',
+        'read' => [
+            'host' => 'read-db.example.com',
+        ],
+        'write' => [
+            'host' => 'write-db.example.com',
+        ]
+    ];
+
+You can specify the same value for both ``read`` and ``write`` key without creating
+multiple connections to the database.
+
+.. versionadded:: 4.5.0
+    Read and write connection roles were added.
 
 .. php:namespace:: Cake\Datasource
 
@@ -534,17 +568,14 @@ We then have two ways to use our datatype in our models.
 
 Overwriting the reflected schema with our custom type will enable CakePHP's
 database layer to automatically convert JSON data when creating queries. In your
-Table's :ref:`_initializeSchema() method <saving-complex-types>` add the
+Table's :ref:`getSchema() method <saving-complex-types>` add the
 following::
-
-    use Cake\Database\Schema\TableSchemaInterface;
 
     class WidgetsTable extends Table
     {
-        protected function _initializeSchema(TableSchemaInterface $schema): TableSchemaInterface
+        public function getSchema(): TableSchemaInterface
         {
-            $schema->setColumnType('widget_prefs', 'json');
-            return $schema;
+            $this->getSchema()->setColumnType('widget_prefs', 'json');
         }
     }
 
@@ -796,15 +827,18 @@ abstract type names when creating a query::
         ['date', 'integer']
     );
 
-.. php:method:: newQuery()
+.. php:method:: deleteQuery()
+.. php:method:: insertQuery()
+.. php:method:: selectQuery()
+.. php:method:: updateQuery()
 
-This allows you to use rich data types in your applications and properly convert
+These methods allow you to use rich data types in your applications and properly convert
 them into SQL statements. The last and most flexible way of creating queries is
 to use the :doc:`/orm/query-builder`. This approach allows you to build complex and
 expressive queries without having to use platform specific SQL::
 
-    $query = $connection->newQuery();
-    $query->update('articles')
+    // Prior to 4.5 use $articles->query() instead.
+    $query = $connection->updateQuery('articles')
         ->set(['published' => true])
         ->where(['id' => 2]);
     $statement = $query->execute();
@@ -813,9 +847,9 @@ When using the query builder, no SQL will be sent to the database server until
 the ``execute()`` method is called, or the query is iterated. Iterating a query
 will first execute it and then start iterating over the result set::
 
-    $query = $connection->newQuery();
-    $query->select('*')
-        ->from('articles')
+    // Prior to 4.5 use $articles->query() instead.
+    $query = $connection
+        ->selectQuery('*', 'articles')
         ->where(['published' => true]);
 
     foreach ($query as $row) {

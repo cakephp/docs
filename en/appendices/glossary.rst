@@ -16,9 +16,15 @@ Glossary
         Cross Site Request Forgery. Prevents replay attacks, double
         submissions and forged requests from other domains.
 
+    DI Container
+        In ``Application::services()`` you can configure application services
+        and their dependencies. Application services are automatically injected
+        into Controller actions, and Command Constructors. See
+        :doc:`/development/dependency-injection`.
+
     DSN
         Data Source Name. A connection string format that is formed like a URI.
-        CakePHP supports DSN's for Cache, Database, Log and Email connections.
+        CakePHP supports DSNs for Cache, Database, Log and Email connections.
 
     dot notation
         Dot notation defines an array path, by separating nested levels with ``.``

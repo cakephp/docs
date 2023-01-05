@@ -469,7 +469,7 @@ inserir lógicas em torno do ciclo de vida de uma requisição:
 
     .. note::
 
-        O método beforeFilter() será chamado para ações perdidas.
+        O método beforeFilter() será chamado para ações ausêntes.
 
 .. php:method:: beforeRender(Event $event)
 

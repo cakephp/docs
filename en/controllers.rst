@@ -322,7 +322,7 @@ will use the base ``View`` class. If you want to require content-type
 negotiation, you can use the ``NegotiationRequiredView`` which sets a 406 status
 code::
 
-    public function viewClasses()
+    public function viewClasses(): array
     {
         // Require Accept header negotiation or return a 406 response.
         return [JsonView::class, NegotiationRequiredView::class];

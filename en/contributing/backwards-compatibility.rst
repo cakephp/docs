@@ -197,7 +197,7 @@ Experimental Features
 
 Experimental features are **not included** in the above backwards compatibility
 promises. Experimental features can have breaking changes made in minor releases
-as long as they remain experimental. Experiemental features can be identified by
+as long as they remain experimental. Experimental features can be identified by
 the warning in the book and the usage of ``@experimental`` in the API
 documentation.
 

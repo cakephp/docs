@@ -22,7 +22,13 @@ On each request one Request is created and then passed by reference to the
 various layers of an application that use request data. By default the request
 is assigned to ``$this->request``, and is available in Controllers, Cells, Views
 and Helpers. You can also access it in Components using the controller
-reference. Some of the duties ``ServerRequest`` performs include:
+reference.
+
+.. versionchanged:: 4.4.0
+    The ``ServerRequest`` is available via DI.
+    So you can get it from container or use it as a dependency for your service.
+
+Some of the duties ``ServerRequest`` performs include:
 
 * Processing the GET, POST, and FILES arrays into the data structures you are
   familiar with.
@@ -72,7 +78,7 @@ are also all found in the routing parameters:
 Query String Parameters
 -----------------------
 
-.. php:method:: getQuery($name)
+.. php:method:: getQuery($name, $default = null)
 
 Query string parameters can be read using the ``getQuery()`` method::
 
@@ -1020,7 +1026,8 @@ object::
             'path' => '',
             'domain' => '',
             'secure' => false,
-            'http' => false,
+            'httponly' => false,
+            'samesite' => null // Or one of CookieInterface::SAMESITE_* constants
         ]
     ));
 

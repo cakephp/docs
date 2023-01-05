@@ -94,7 +94,7 @@ controller might look something like this::
 
 RESTful controllers often use parsed extensions to serve up different views
 based on different kinds of requests. We're defining the content-type based
-views we support in this controller. We're including Cake's ``JsonView``. To
+views we support in this controller. We're including CakePHP's ``JsonView``. To
 learn more about it and Xml based views see :doc:`/views/json-and-xml-views`. By
 using  :php:class:`JsonView` we can define a ``serialize`` option. This option
 is used to define which view variables ``JsonView`` should serialize into JSON.

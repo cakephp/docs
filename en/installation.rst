@@ -110,11 +110,11 @@ Keeping Up To Date with the Latest CakePHP Changes
 By default this is what your application **composer.json** looks like::
 
     "require": {
-        "cakephp/cakephp": "4.0.*"
+        "cakephp/cakephp": "4.4.*"
     }
 
 Each time you run ``php composer.phar update`` you will receive patch
-releases for this minor version. You can instead change this to ``^4.0`` to
+releases for this minor version. You can instead change this to ``^4.4`` to
 also receive the latest stable minor releases of the ``4.x`` branch.
 
 Installation using Oven

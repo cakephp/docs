@@ -130,7 +130,8 @@ Then add the following::
         $middlewareQueue
             // ... other middleware added before
             ->add(new RoutingMiddleware($this))
-            // add Authentication after RoutingMiddleware
+            ->add(new BodyParserMiddleware())
+            // Add the AuthenticationMiddleware. It should be after routing and body parser.
             ->add(new AuthenticationMiddleware($this));
 
         return $middlewareQueue;
@@ -205,7 +206,7 @@ In your ``UsersController``, add the following code::
         $this->request->allowMethod(['get', 'post']);
         $result = $this->Authentication->getResult();
         // regardless of POST or GET, redirect if user is logged in
-        if ($result->isValid()) {
+        if ($result && $result->isValid()) {
             // redirect to /articles after login success
             $redirect = $this->request->getQuery('redirect', [
                 'controller' => 'Articles',
@@ -279,7 +280,7 @@ Add the logout action to the ``UsersController`` class::
     {
         $result = $this->Authentication->getResult();
         // regardless of POST or GET, redirect if user is logged in
-        if ($result->isValid()) {
+        if ($result && $result->isValid()) {
             $this->Authentication->logout();
             return $this->redirect(['controller' => 'Users', 'action' => 'login']);
         }

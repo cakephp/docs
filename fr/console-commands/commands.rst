@@ -189,6 +189,62 @@ Vous pouvez passer tout code de sortie souhaité dans ``abort()``.
     Vous pouvez en apprendre plus sur les codes de sortie dans la page sysexit du manuel de la plupart des systèmes
     Unix (``man sysexits``), ou la page d'aide sur les ``Codes de Sortie Système`` dans Windows.
 
+Appeler d'Autres Commandes
+==========================
+
+Vous pouvez avoir besoin d'appeler d'autres commandes depuis votre commande.
+Pour ce faire, utilisez ``executeCommand``::
+
+    // Vous pouvez passer un tableau d'options CLI et d'arguments.
+    $this->executeCommand(OtherCommand::class, ['--verbose', 'deploy']);
+
+    // Possibilité de passer une instance de commande si elle a des arguments de constructeur
+    $command = new OtherCommand($otherArgs);
+    $this->executeCommand($command, ['--verbose', 'deploy']);
+
+.. note::
+
+    QUand vous appelez ``executeCommand()`` dans une boucle, il est recommandé
+    de passer l'instance ``ConsoleIo`` en tant que 3ème argument optionnel dans
+    la commande parente pour éviter une potentielle limite de fichiers ouverts,
+    qui pourrait arriver dans certains environnements.
+
+.. _console-command-description:
+
+Définir une Description de Commande
+===================================
+
+Vous pouvez définir une description de commande via::
+
+    class UserCommand extends Command
+    {
+        public static function getDescription(): string
+        {
+            return 'Ma description personnalisée';
+        }
+    }
+
+Cela affichera votre description dans le CLI Cake:
+
+.. code-block:: console
+
+    bin/cake
+
+    App:
+      - user
+      └─── Ma description personnalisée
+
+Ainsi que dans la section *help* de votre commande:
+
+.. code-block:: console
+
+    cake user --help
+    Ma description personnalisée
+
+    Usage:
+    cake user [-h] [-q] [-v]
+
+
 .. _console-integration-testing:
 
 Tester les Commandes

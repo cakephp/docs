@@ -424,7 +424,7 @@ spécifiquement utiliser leur signification.
 * ``_full`` Si à ``true``, la valeur de ``App.fullBaseUrl`` vue dans
   :ref:`general-configuration` sera ajoutée devant les URL générées.
 * ``#`` Vous permet de définir les fragments de hash d'URL.
-* ``_ssl`` Défini à ``true`` pour convertir l'URL générée à https, ou ``false``
+* ``_https`` Défini à ``true`` pour convertir l'URL générée à https, ou ``false``
   pour forcer http.
 * ``_method`` Definit la méthode HTTP à utiliser. Utile si vous travaillez avec
   :ref:`resource-routes`.
@@ -1423,7 +1423,7 @@ vous générez des URLs:
 * ``_method`` Définit le verbe HTTP à utiliser pour cette URL.
 * ``_full`` Si à ``true``, la valeur de ``App.fullBaseUrl`` vue dans
   :ref:`general-configuration` sera ajoutée devant les URL générées.
-* ``_ssl`` Défini à ``true`` pour convertir l'URL générée à https, ou ``false``
+* ``_https`` Défini à ``true`` pour convertir l'URL générée à https, ou ``false``
   pour forcer http.
 * ``_method`` Definit la méthode HTTP à utiliser. Utile si vous travaillez avec
   :ref:`resource-routes`.

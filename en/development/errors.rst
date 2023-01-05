@@ -34,9 +34,9 @@ options are supported:
 * ``extraFatalErrorMemory`` - int - Set to the number of megabytes to increase
   the memory limit by when a fatal error is encountered. This allows breathing
   room to complete logging or error handling.
-* ``errorLogger`` - ``Cake\Error\ErrorLoggerInterface`` - The class responsible
-  for logging errors and unhandled exceptions. Defaults to
-  ``Cake\Error\ErrorLogger``.
+* ``logger`` (prior to 4.4.0 use ``errorLogger``) -
+  ``Cake\Error\ErrorLoggerInterface`` - The class responsible for logging 
+  errors and unhandled exceptions. Defaults to ``Cake\Error\ErrorLogger``.
 * ``errorRenderer`` - ``Cake\Error\ErrorRendererInterface`` - The class responsible
   for rendering errors. Default is chosen based on PHP SAPI.
 * ``ignoredDeprecationPaths`` - array - A list of glob compatible paths that
@@ -124,13 +124,24 @@ exception is handled::
         }
     );
 
-If your ``Error.beforeRender`` event handler stops the event, error rendering
-will be skipped. You cannot skip rendering a response/output for caught
-exceptions.
+Within an ``Error.beforeRender`` handler you have a few options:
+
+* Stop the event to prevent rendering.
+* Return a string to skip rendering and use the provided string instead
+
+Within an ``Exception.beforeRender`` handler you have a few options:
+
+* Stop the event to prevent rendering.
+* Set the ``exception`` data attribute with ``setData('exception', $err)``
+  to replace the exception that is being rendered.
+* Return a response from the event listener to skip rendering and use
+  the provided response instead.
 
 .. versionadded:: 4.4.0
     Error and Exception events were added.
 
+.. versionchanged:: 4.5.0
+   The ``beforeRender`` events can now replace exceptions and replace rendering.
 
 .. _error-views:
 

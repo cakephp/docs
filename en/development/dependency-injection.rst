@@ -10,7 +10,7 @@ You can use the service container to define 'application services'. These
 classes can use models and interact with other objects like loggers and mailers
 to build re-usable workflows and business logic for your application.
 
-CakePHP will use the service container when calling actions on your controllers
+CakePHP will use the :term:`DI container` when calling actions on your controllers
 and invoking console commands. You can also have dependencies injected into
 controller constructors.
 
@@ -150,7 +150,7 @@ instance, often referred to as a singleton, you can mark a service as 'shared'::
 
     // in your Application::services() method.
 
-    $container->share(BillingService::class);
+    $container->addShared(BillingService::class);
 
 Extending Definitions
 ---------------------
@@ -188,7 +188,7 @@ injectable configuration reader::
     use Cake\Core\ServiceConfig;
 
     // Use a shared instance
-    $container->share(ServiceConfig::class);
+    $container->addShared(ServiceConfig::class);
 
 The ``ServiceConfig`` class provides a read-only view of all the data available
 in ``Configure`` so you don't have to worry about accidentally changing
@@ -304,12 +304,17 @@ Auto Wiring is turned off by default. To enable it::
         );
     }
 
-The ``$container->add(\Cake\Controller\ComponentRegistry::class);`` is needed to fix a cyclic dependency between ``ComponentRegistry`` and ``Controller``.
+The ``$container->add(\Cake\Controller\ComponentRegistry::class);`` is needed to
+fix a cyclic dependency between ``ComponentRegistry`` and ``Controller``.
 
-While your dependencies will now be resolved automatically, this approach will not cache resolutions which can be detrimental to performance. To enable caching::
+While your dependencies will now be resolved automatically, this approach will
+not cache resolutions which can be detrimental to performance. To enable
+caching::
 
     $container->delegate(
-        new \League\Container\ReflectionContainer(true) // or consider using the value of Configure::read('debug')
+         // or consider using the value of Configure::read('debug')
+        new \League\Container\ReflectionContainer(true)
     );
 
-Read more about auto wiring in the `PHP League Container documentation <https://container.thephpleague.com/4.x/auto-wiring/>`_.
+Read more about auto wiring in the `PHP League Container documentation
+<https://container.thephpleague.com/4.x/auto-wiring/>`_.

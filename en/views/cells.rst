@@ -155,7 +155,7 @@ within a cell template if required.
 
     Echoing a cell uses the PHP ``__toString()`` magic method which prevents PHP
     from showing the filename and line number for any fatal errors raised. To
-    obtain a meanful error message, it is recommended to use the
+    obtain a meaningful error message, it is recommended to use the
     ``Cell::render()`` method, for example ``<?= $cell->render() ?>``.
 
 Rendering Alternate Templates
@@ -212,7 +212,7 @@ messages could look like::
     namespace App\View\Cell;
 
     use Cake\View\Cell;
-    use Cake\Datasource\NumericPaginator;
+    use Cake\Datasource\Paging\NumericPaginator;
 
     class FavoritesCell extends Cell
     {

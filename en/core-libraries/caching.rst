@@ -272,7 +272,7 @@ Writing Multiple Keys at Once
 
 You may find yourself needing to write multiple cache keys at once. While you
 can use multiple calls to ``write()``, ``writeMany()`` allows CakePHP to use
-more efficient storage API's where available. For example using ``writeMany()``
+more efficient storage APIs where available. For example using ``writeMany()``
 save multiple network connections when using Memcached::
 
     $result = Cache::writeMany([
@@ -282,6 +282,29 @@ save multiple network connections when using Memcached::
 
     // $result will contain
     ['article-first-post' => true, 'article-first-post-comments' => true]
+
+Atomic writes
+-------------
+
+.. php:staticmethod:: add($key, $value $config = 'default')
+
+Using ``Cache::add()`` will let you atomically set a key to a value if the key
+does not already exist in the cache. If the key already exists in the cache
+backend or the write fails, ``add()`` will return ``false``::
+
+    // Set a key to act as a lock
+    $result = Cache::add($lockKey, true);
+    if (!$result) {
+        return;
+    }
+    // Do an action where there can only be one process active at a time.
+
+    // Remove the lock key.
+    Cache::delete($lockKey);
+
+.. warning::
+
+   File based caching does not support atomic writes.
 
 Read Through Caching
 --------------------
@@ -354,7 +377,7 @@ Reading Multiple Keys at Once
 
 After you've written multiple keys at once, you'll probably want to read them as
 well. While you could use multiple calls to ``read()``, ``readMany()`` allows
-CakePHP to use more efficient storage API's where available. For example using
+CakePHP to use more efficient storage APIs where available. For example using
 ``readMany()`` save multiple network connections when using Memcached::
 
     $result = Cache::readMany([
@@ -387,7 +410,7 @@ Deleting Multiple Keys at Once
 
 After you've written multiple keys at once, you may want to delete them.  While
 you could use multiple calls to ``delete()``, ``deleteMany()`` allows CakePHP to use
-more efficient storage API's where available. For example using ``deleteMany()``
+more efficient storage APIs where available. For example using ``deleteMany()``
 save multiple network connections when using Memcached::
 
     $result = Cache::deleteMany([

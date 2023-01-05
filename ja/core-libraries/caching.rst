@@ -27,7 +27,6 @@ CakePHP には、いくつかのキャッシュエンジンが用意されてい
 * ``Apcu`` APCu キャッシュは、PHP の `APCu <https://php.net/apcu>`_ 拡張を使用します。
   この拡張はオブジェクトを保存するためにウェブサーバー上の共有メモリーを使います。
   これはとても高速で、かつアトミックな読み込み/書き込みの機能を提供することが可能になります。
-  3.6.0 より前は ``ApcuEngine`` は ``ApcEngine`` という名前でした。
 * ``Wincache`` Wincache は `Wincache <https://php.net/wincache>`_ 拡張を使います。
   Wincache は APC と同様の機能とパフォーマンスを持ちますが、Windows と IIS に最適化されています。
 * ``Array`` はすべてのデータを配列に保存します。
@@ -218,9 +217,6 @@ Redis サーバーが予期せず失敗した場合、 ``redis`` キャッシュ
 
 フォールバックがない場合、キャッシュ障害は例外として発生します。
 
-.. versionchanged:: 3.6.0
-    フォールバックは ``false`` で無効化できるようになりました。
-
 設定されたキャッシュエンジンを削除する
 --------------------------------------
 
@@ -276,6 +272,30 @@ CakePHP がより効率的なストレージ API を使用できるようにし�
     // $result は以下を含みます
     ['article-first-post' => true, 'article-first-post-comments' => true]
 
+アトミックな書き込み
+--------------------
+
+.. php:staticmethod:: add($key, $value $config = 'default')
+
+``Cache::add()`` を使用すると、キーがキャッシュに存在しない場合に、
+アトミックにキーを値に設定することができます。
+もし、キーがすでにキャッシュに存在する場合や、書き込みに失敗した場合は、
+``add()`` は ``false`` を返します::
+
+    // キーをロックとして機能するように設定する
+    $result = Cache::add($lockKey, true);
+    if (!$result) {
+        return;
+    }
+    // 一度に1つのプロセスしかアクティブにできないアクションを行う。
+
+    // ロックキーを外す。
+    Cache::delete($lockKey);
+
+.. warning::
+
+   ファイルベースのキャッシュは、アトミックライトをサポートしていません。
+
 Read-through キャッシュ
 -----------------------
 
@@ -313,7 +333,6 @@ Cache を使用すると、Read-through キャッシュを簡単に行うこと�
 例::
 
     $cloud = Cache::read('cloud');
-
     if ($cloud !== null) {
         return $cloud;
     }
@@ -368,6 +387,11 @@ Cache を使用すると、Read-through キャッシュを簡単に行うこと�
     // キーの削除
     Cache::delete('my_key');
 
+4.4.0 以降、 ``RedisEngine`` は ``deleteAsync()`` メソッドも提供し、
+``UNLINK`` オペレーションを使用してキャッシュキーを削除します::
+
+    Cache::pool('redis')->deleteAsync('my_key');
+
 一度に複数のキーの削除
 ----------------------
 
@@ -397,10 +421,10 @@ Cache を使用すると、Read-through キャッシュを簡単に行うこと�
     // すべてのキーをクリアする。
     Cache::clear();
 
-.. php:staticmethod:: gc($config)
+4.4.0 以降では、 ``RedisEngine`` は ``clearBlocking()`` メソッドも提供し、
+``UNLINK`` オペレーションを使ってキャッシュキーを削除します::
 
-キャッシュ設定内のガベージコレクトエントリー。これは主に FileEngine で使用されます。
-キャッシュされたデータを手動で削除する必要のある任意のキャッシュエンジンによって実装される必要があります。
+    Cache::pool('redis')->clearBlocking();
 
 .. note::
 

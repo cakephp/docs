@@ -77,6 +77,24 @@ by using the ``finder`` option::
     $article = $articles->get($id, [
         'finder' => 'translations',
     ]);
+    
+The list of options supported by get() are:
+
+-  ``cache`` cache config.
+-  ``cacheKey`` cache key.
+-  ``finder`` custom finder function.
+- ``conditions`` provide conditions for the WHERE clause of your query.
+- ``limit`` Set the number of rows you want.
+- ``offset`` Set the page offset you want. You can also use ``page`` to make
+  the calculation simpler.
+- ``contain`` define the associations to eager load.
+- ``fields`` limit the fields loaded into the entity. Only loading some fields
+  can cause entities to behave incorrectly.
+- ``group`` add a GROUP BY clause to your query. This is useful when using
+  aggregating functions.
+- ``having`` add a HAVING clause to your query.
+- ``join`` define additional custom joins.
+
 
 Using Finders to Load Data
 ==========================
@@ -103,10 +121,6 @@ execute until you start fetching rows, convert it to an array, or when the
     // Find all the articles.
     // At this point the query has not run.
     $query = $articles->find('all');
-
-    // Iteration will execute the query.
-    foreach ($query->all() as $row) {
-    }
 
     // Calling all() will execute the query
     // and return the result set.
@@ -364,8 +378,8 @@ methods. Finder methods are the ideal way to package up commonly used queries,
 allowing you to abstract query details into a simple to use method. Finder
 methods are defined by creating methods following the convention of ``findFoo``
 where ``Foo`` is the name of the finder you want to create. For example if we
-wanted to add a finder to our articles table for finding published articles we
-would do the following::
+wanted to add a finder to our articles table for finding articles written by a
+given user, we would do the following::
 
     use Cake\ORM\Query;
     use Cake\ORM\Table;
@@ -518,6 +532,12 @@ You can eager load associations as deep as you like::
         'Shops.Managers'
     ]);
 
+Which is equivalent to calling::
+
+    $query = $products->find()->contain([
+        'Shops' => ['Cities.Countries', 'Managers']
+    ]);
+
 You can select fields from all associations with multiple ``contain()``
 statements::
 
@@ -557,7 +577,7 @@ to ``true``::
 
     Association names in ``contain()`` calls should use the same association casing as
     in your association definitions,  not the property name used to hold the association record(s).
-    For example, if you have declared an assocation as ``belongsTo('Users')`` then you must
+    For example, if you have declared an association as ``belongsTo('Users')`` then you must
     use ``contain('Users')`` and not ``contain('users')`` or ``contain('user')``.
 
 
@@ -1111,7 +1131,7 @@ Finally, we can put these two functions together to do the grouping::
         echo sprintf("There are %d %s articles", count($articles), $status);
     }
 
-The above will ouput the following lines::
+The above will output the following lines::
 
     There are 4 published articles
     There are 5 unpublished articles

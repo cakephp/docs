@@ -271,6 +271,12 @@ purpose::
         ->select(['slug' => $query->func()->concat(['title' => 'identifier', '-', 'id' => 'identifier'])])
         ->select($articlesTable); // Select all fields from articles
 
+You can use ``selectAlso()`` to select all fields on a table and
+*also* select some additional fields::
+
+    $query = $articlesTable->find();
+    $query->selectAlso(['count' => $query->func()->count('*')]);
+
 If you want to select all but a few fields on a table, you can use
 ``selectAllExcept()``::
 
@@ -281,6 +287,10 @@ If you want to select all but a few fields on a table, you can use
 
 You can also pass an ``Association`` object when working with contained
 associations.
+
+.. versionadded:: 4.5.0
+
+    ``Query::selectAlso()`` was added.
 
 .. _using-sql-functions:
 
@@ -1152,6 +1162,22 @@ expression objects to add snippets of SQL to your queries::
     Using expression objects leaves you vulnerable to SQL injection. You should
     never use untrusted data into expressions.
 
+Using Connection Roles
+-------------------------
+
+If you have configured :ref:`read-and-write-connections` in your application,
+you can have a query run on the ``read`` connection using one of the role
+methods::
+
+    // Run a query on the read connection
+    $query->useReadRole();
+
+    // Run a query on the write connection (default)
+    $query->useWriteRole();
+
+.. versionadded:: 4.5.0
+    Query role methods were added in 4.5.0
+
 Getting Results
 ===============
 
@@ -1399,8 +1425,9 @@ Inserting Data
 Unlike earlier examples, you should not use ``find()`` to create insert queries.
 Instead, create a new ``Query`` object using ``query()``::
 
-    $query = $articles->query();
-    $query->insert(['title', 'body'])
+    // Prior to 4.5 use $articles->query() instead.
+    $query = $articles->insertQuery()
+        ->insert(['title', 'body'])
         ->values([
             'title' => 'First post',
             'body' => 'Some body text'
@@ -1410,8 +1437,9 @@ Instead, create a new ``Query`` object using ``query()``::
 To insert multiple rows with only one query, you can chain the ``values()``
 method as many times as you need::
 
-    $query = $articles->query();
-    $query->insert(['title', 'body'])
+    // Prior to 4.5 use $articles->query() instead.
+    $query = $articles->insertQuery()
+        ->insert(['title', 'body'])
         ->values([
             'title' => 'First post',
             'body' => 'Some body text'
@@ -1431,7 +1459,8 @@ queries::
         ->select(['title', 'body', 'published'])
         ->where(['id' => 3]);
 
-    $query = $articles->query()
+    // Prior to 4.5 use $articles->query() instead.
+    $query = $articles->insertQuery()
         ->insert(['title', 'body', 'published'])
         ->values($select)
         ->execute();
@@ -1447,10 +1476,10 @@ Updating Data
 =============
 
 As with insert queries, you should not use ``find()`` to create update queries.
-Instead, create new a ``Query`` object using ``query()``::
+Instead, create new a ``Query`` object using ``updateQuery()``::
 
-    $query = $articles->query();
-    $query->update()
+    // Prior to 4.5 use $articles->query() instead.
+    $query = $articles->updateQuery()
         ->set(['published' => true])
         ->where(['id' => $id])
         ->execute();
@@ -1467,10 +1496,10 @@ Deleting Data
 =============
 
 As with insert queries, you should not use ``find()`` to create delete queries.
-Instead, create new a query object using ``query()``::
+Instead, create new a query object using ``deleteQuery()``::
 
-    $query = $articles->query();
-    $query->delete()
+    // Prior to 4.5 use $articles->query() instead.
+    $query = $articles->deleteQuery()
         ->where(['id' => $id])
         ->execute();
 

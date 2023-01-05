@@ -1,3 +1,4 @@
+import os
 # Global configuration information used across all the
 # translations of documentation.
 #
@@ -38,7 +39,11 @@ languages = ['en', 'pt_BR', 'es', 'ja', 'fr']
 
 # The GitHub branch name for this version of the docs
 # for edit links to point at.
+<<<<<<< HEAD
 branch = '5.x'
+=======
+branch = '4.next'
+>>>>>>> 4.next
 
 # Add any paths that contain custom themes here, relative to this directory.
 html_theme_path = []
@@ -52,6 +57,9 @@ html_last_updated_fmt = '%b %d, %Y'
 html_sidebars = {
     '**': ['globaltoc.html']
 }
+
+language = os.getenv('LANG') or 'en'
+html_use_opensearch = 'https://book.cakephp.org/' + version + '/' + language
 
 # -- Options for LaTeX output ------------------------------------------------
 

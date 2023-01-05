@@ -24,9 +24,11 @@ simple Hello world command. In your application's **src/Command** directory crea
 
     class HelloCommand extends Command
     {
-        public function execute(Arguments $args, ConsoleIo $io)
+        public function execute(Arguments $args, ConsoleIo $io): int
         {
             $io->out('Hello world.');
+            
+            return static::CODE_SUCCESS;
         }
     }
 
@@ -63,10 +65,12 @@ command line::
             return $parser;
         }
 
-        public function execute(Arguments $args, ConsoleIo $io)
+        public function execute(Arguments $args, ConsoleIo $io): int
         {
             $name = $args->getArgument('name');
             $io->out("Hello {$name}.");
+            
+            return static::CODE_SUCCESS;
         }
     }
 
@@ -117,13 +121,15 @@ add a ``yell`` option to our ``HelloCommand``::
         return $parser;
     }
 
-    public function execute(Arguments $args, ConsoleIo $io)
+    public function execute(Arguments $args, ConsoleIo $io): int
     {
         $name = $args->getArgument('name');
         if ($args->getOption('yell')) {
             $name = mb_strtoupper($name);
         }
         $io->out("Hello {$name}.");
+        
+        return static::CODE_SUCCESS;
     }
 
 See the :doc:`/console-commands/option-parsers` section for more information.
@@ -167,14 +173,14 @@ using ``$this->fetchTable()`` since command use the ``LocatorAwareTrait``::
             return $parser;
         }
 
-        public function execute(Arguments $args, ConsoleIo $io): ?int
+        public function execute(Arguments $args, ConsoleIo $io): int
         {
             $name = $args->getArgument('name');
             $user = $this->fetchTable()->findByUsername($name)->first();
 
             $io->out(print_r($user, true));
 
-            return null;
+            return static::CODE_SUCCESS;
         }
     }
 
@@ -188,7 +194,7 @@ When your commands hit an unrecoverable error you can use the ``abort()`` method
 to terminate execution::
 
     // ...
-    public function execute(Arguments $args, ConsoleIo $io)
+    public function execute(Arguments $args, ConsoleIo $io): int
     {
         $name = $args->getArgument('name');
         if (strlen($name) < 5) {
@@ -196,17 +202,21 @@ to terminate execution::
             $io->error('Name must be at least 4 characters long.');
             $this->abort();
         }
+        
+        return static::CODE_SUCCESS;
     }
 
 You can also use ``abort()`` on the ``$io`` object to emit a message and code::
 
-    public function execute(Arguments $args, ConsoleIo $io)
+    public function execute(Arguments $args, ConsoleIo $io): int
     {
         $name = $args->getArgument('name');
         if (strlen($name) < 5) {
             // Halt execution, output to stderr, and set exit code to 99
             $io->abort('Name must be at least 4 characters long.', 99);
         }
+        
+        return static::CODE_SUCCESS;
     }
 
 You can pass any desired exit code into ``abort()``.
@@ -360,15 +370,16 @@ conventions. Let's continue by adding more logic to our command::
             return $parser;
         }
 
-        public function execute(Arguments $args, ConsoleIo $io)
+        public function execute(Arguments $args, ConsoleIo $io): int
         {
             $table = $args->getArgument('table');
-            $this->fetchTable($table)->query()
-                ->update()
+            $this->fetchTable($table)->updateQuery()
                 ->set([
                     'modified' => new DateTime()
                 ])
                 ->execute();
+                
+            return static::CODE_SUCCESS;
         }
     }
 
@@ -456,19 +467,21 @@ Update the command class to the following::
             return $parser;
         }
 
-        public function execute(Arguments $args, ConsoleIo $io)
+        public function execute(Arguments $args, ConsoleIo $io): int
         {
             $table = $args->getArgument('table');
             if ($io->ask('Are you sure?', 'n', ['y', 'n']) === 'n') {
                 $io->error('You need to be sure.');
                 $this->abort();
             }
-            $this->fetchTable($table)->query()
-                ->update()
+            // Prior to 4.5 use query() instead.
+            $this->fetchTable($table)->updateQuery()
                 ->set([
                     'modified' => new DateTime()
                 ])
                 ->execute();
+                
+            return static::CODE_SUCCESS;
         }
     }
 

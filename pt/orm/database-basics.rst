@@ -481,16 +481,18 @@ aplicativo, devemos fazer o seguinte::
 Nós podemos então sobrecarregar os dados de schema refletido para usar nosso novo tipo, e
 a camada de banco de dados do CakePHP converterá automaticamente nossos dados JSON ao
 criar consultas. Você pode usar os tipos personalizados que você criou mapeando os tipos
-no seu método :ref:`_initializeSchema() <saving-complex-types>` da Tabela::
+no seu método :ref:`getSchema() <saving-complex-types>` da Tabela::
 
-    use Cake\Database\Schema\TableSchema;
+    use Cake\Database\Schema\TableSchemaInterface;
 
     class WidgetsTable extends Table
     {
 
-        protected function _initializeSchema(TableSchema $schema)
+        public function getSchema(): TableSchemaInterface
         {
+            $schema = parent::getSchema();
             $schema->columnType('widget_prefs', 'json');
+
             return $schema;
         }
 

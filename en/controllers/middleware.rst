@@ -3,7 +3,7 @@ Middleware
 
 Middleware objects give you the ability to 'wrap' your application in re-usable,
 composable layers of Request handling, or response building logic. Visually,
-your application ends up at the center, and middleware is wrapped aroud the app
+your application ends up at the center, and middleware is wrapped around the app
 like an onion. Here we can see an application wrapped with Routes, Assets,
 Exception Handling and CORS header middleware.
 
@@ -50,7 +50,7 @@ CakePHP provides several middleware to handle common tasks in web applications:
   requires HTTPS to be used.
 * :doc:`Cake\Http\Middleware\CsrfProtectionMiddleware </security/csrf>` adds
   double-submit cookie based CSRF protection to your application.
-* :doc:`Cake\Http\Middleware\SessionCsrfProtectionMiddleware </security/csrf>` 
+* :doc:`Cake\Http\Middleware\SessionCsrfProtectionMiddleware </security/csrf>`
   adds session based CSRF protection to your application.
 * :doc:`Cake\Http\Middleware\CspMiddleware </security/content-security-policy>`
   makes it simpler to add Content-Security-Policy headers to your application.
@@ -120,7 +120,7 @@ a variety of operations::
 
 
 If your middleware is only applicable to a subset of routes or individual
-controllers you can use :ref:`Route scoped middleware <route-scoped-middleware>`, 
+controllers you can use :ref:`Route scoped middleware <route-scoped-middleware>`,
 or :ref:`Controller middleware <controller-middleware>`.
 
 Adding Middleware from Plugins
@@ -226,20 +226,14 @@ Routing Middleware
 ==================
 
 Routing middleware is responsible for applying your application's routes and
-resolving the plugin, controller, and action a request is going to. It can cache
-the route collection used in your application to increase startup time. To
-enable cached routes, provide the desired :ref:`cache configuration
-<cache-configuration>` as a parameter::
+resolving the plugin, controller, and action a request is going to::
 
     // In Application.php
     public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue
     {
         // ...
-        $middlewareQueue->add(new RoutingMiddleware($this, 'routing'));
+        $middlewareQueue->add(new RoutingMiddleware($this));
     }
-
-The above would use the ``routing`` cache engine to store the generated route
-collection.
 
 .. _encrypted-cookie-middleware:
 

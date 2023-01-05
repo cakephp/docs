@@ -69,7 +69,7 @@ Le Canal IRC
 
 Si vous êtes paumé, poussez un hurlement sur le canal IRC de CakePHP.
 Une personne de `l\'équipe de développement
-<https://github.com/cakephp?tab=members>`_ s'y trouve habituellement,
+<https://cakephp.org/team>`_ s'y trouve habituellement,
 en particulier durant les heures du jour pour les utilisateurs
 d'Amérique du Nord et du Sud. Nous serions ravis de vous écouter,
 que vous ayez besoin d'un peu d'aide, que vous vouliez trouver des utilisateurs

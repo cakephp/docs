@@ -257,6 +257,79 @@ AJAX 呼び出しではとても有用です。 ::
 
 これは **plugins/Users/templates/UserDetails/custom_file.php** を描画します。
 
+.. _controller-viewclasses:
+
+コンテンツタイプのネゴシエーション
+==================================
+
+.. php:method:: viewClasses()
+
+コントローラは、サポートするビュークラスの一覧を定義することができます。
+コントローラのアクションが完了すると、 CakePHP はビューリストを使用して
+content-typeのネゴシエーション（コンテントタイプの取り決め）を実行します。
+これにより、アプリケーションは同じコントローラアクションを再利用してHTML ビューをレンダリングしたり
+JSONやXML のレスポンスをレンダリングしたりすることができるようになります。
+コントローラにサポートするビュークラスのリストを定義するには、 ``viewClasses()`` メソッドを使用します。::
+
+    namespace App\Controller;
+
+    use Cake\View\JsonView;
+    use Cake\View\XmlView;
+
+    class PostsController extends AppController
+    {
+        public function viewClasses()
+        {
+            return [JsonView::class, XmlView::class];
+        }
+    }
+
+アプリケーションの ``View`` クラスは、リクエストの ``Accept`` ヘッダーやルーティング拡張機能に基づいて、
+他のビューを選択できない場合に自動的にフォールバックとして使用されます。
+もしアプリケーションが異なるレスポンスフォーマットに対して異なるロジックを実行する必要がある場合は、
+``$this->request->is()`` を使用して、必要な条件ロジックを構築することができます。
+
+.. note::
+    ビュークラスがcontent-typeのネゴシエーションに参加するには、
+    静的な ``contentType()`` フックメソッドを実装する必要があります。
+
+
+コンテンツタイプネゴシエーションのフォールバック
+================================================
+
+リクエストのコンテントタイプの設定にマッチする View がない場合、
+CakePHP はベースとなる ``View`` クラスを使用します。
+もし、content-typeのネゴシエーションを要求したい場合は、
+406ステータスコードを設定する ``NegotiationRequiredView`` を使用します。::
+
+    public function viewClasses()
+    {
+        // Acceptヘッダーのネゴシエーションを要求するか、406のレスポンスを返します。
+        return [JsonView::class, NegotiationRequiredView::class];
+    }
+
+``TYPE_MATCH_ALL`` のコンテンツタイプ値を使用して、独自のフォールバックビューロジックを構築することができます::
+
+    namespace App\View;
+
+    use Cake\View\View;
+
+    class CustomFallbackView extends View
+    {
+        public static function contentType(): string
+        {
+            return static::TYPE_MATCH_ALL;
+        }
+
+    }
+
+match-allビューは、content-typeのネゴシエーションが試みられた *後で*
+のみ適用されることを覚えておくことが重要です。
+
+.. versionadded:: 4.4.0
+    4.4 より前のバージョンでは、 ``viewClasses()`` の代わりに
+    :doc:`/controllers/components/request-handling` を使用する必要があります。
+
 他のページへのリダイレクト
 ======================================
 

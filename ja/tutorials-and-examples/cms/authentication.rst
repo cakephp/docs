@@ -194,7 +194,7 @@ POSTされたフォームデータ(存在する場合)も検査し、credentials
         $this->request->allowMethod(['get', 'post']);
         $result = $this->Authentication->getResult();
         // POST, GET を問わず、ユーザーがログインしている場合はリダイレクトします
-        if ($result->isValid()) {
+        if ($result && $result->isValid()) {
             // redirect to /articles after login success
             $redirect = $this->request->getQuery('redirect', [
                 'controller' => 'Articles',
@@ -264,7 +264,7 @@ logout アクションを ``UsersController`` に追加します。::
     {
         $result = $this->Authentication->getResult();
         // POST, GET を問わず、ユーザーがログインしている場合はリダイレクトします
-        if ($result->isValid()) {
+        if ($result && $result->isValid()) {
             $this->Authentication->logout();
             return $this->redirect(['controller' => 'Users', 'action' => 'login']);
         }

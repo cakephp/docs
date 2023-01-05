@@ -21,6 +21,8 @@ le chapitre de chaque component:
     /controllers/components/security
     /controllers/components/pagination
     /controllers/components/request-handling
+    /controllers/components/form-protection
+    /controllers/components/check-http-cache
 
 .. _configuring-components:
 

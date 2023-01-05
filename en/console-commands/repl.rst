@@ -1,9 +1,15 @@
 Interactive Console (REPL)
 ##########################
 
-The CakePHP app skeleton comes with a built in REPL(Read Eval Print Loop) to let
-you explore some CakePHP and your application in an interactive console. You can
-start the interactive console using:
+CakePHP offers
+`REPL(Read Eval Print Loop) plugin <https://github.com/cakephp/repl>`__ to let
+you explore some CakePHP and your application in an interactive console.
+
+.. note::
+
+    The plugin was shipped with the CakePHP app skeleton before 4.3.
+
+You can start the interactive console using:
 
 .. code-block:: console
 
@@ -36,7 +42,7 @@ REPL::
     //   'plugin' => NULL
     // ]
 
-You can also test generating URL's::
+You can also test generating URLs::
 
     >>> Cake\Routing\Router::url(['controller' => 'Articles', 'action' => 'edit', 99]);
     // '/articles/edit/99'

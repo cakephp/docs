@@ -247,8 +247,8 @@ You can attach files to email messages as well. There are a few
 different formats depending on what kind of files you have, and how
 you want the filenames to appear in the recipient's mail client:
 
-1. Array: ``$mailer->setAttachments(['/full/file/path/file.png'])`` will have
-   the same behavior as using a string.
+1. Array: ``$mailer->setAttachments(['/full/file/path/file.png'])`` will
+   attach this file with the name file.png..
 2. Array with key:
    ``$mailer->setAttachments(['photo.png' => '/full/some_hash.png'])`` will
    attach some_hash.png with the name photo.png. The recipient will see
@@ -285,7 +285,7 @@ Relaxing Address Validation Rules
 
 If you are having validation issues when sending to non-compliant addresses, you
 can relax the pattern used to validate email addresses. This is sometimes
-necessary when dealing with some ISP's::
+necessary when dealing with some ISPs::
 
     $mailer = new Mailer('default');
 
@@ -618,7 +618,8 @@ The ``Cake\TestSuite\EmailTrait`` trait provides the following assertions::
     $this->assertMailSentTo($address);
 
     // Asserts an email was sent from an address
-    $this->assertMailSentFrom($address);
+    $this->assertMailSentFrom($emailAddress);
+    $this->assertMailSentFrom([$emailAddress => $displayName]);
 
     // Asserts an email contains expected contents
     $this->assertMailContains($contents);

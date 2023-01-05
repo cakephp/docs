@@ -29,6 +29,11 @@ use the ``HttpsEnforcerMiddleware``::
         'disableOnDebug' => true,
     ]);
 
+    // Only trust HTTP_X_ headers from the listed servers.
+    $https = new HttpsEnforcerMiddleware([
+        'trustProxies' => ['192.168.1.1'],
+    ]);
+
 If a non-HTTP request is received that does not use GET a ``BadRequestException`` will be raised.
 
 Adding Strict-Transport-Security
@@ -44,7 +49,7 @@ You can configure this header with the ``hsts`` option::
             // How long the header value should be cached for.
             'maxAge' => 60 * 60 * 24 * 365,
             // should this policy apply to subdomains?
-            'includeSubdomains' => true,
+            'includeSubDomains' => true,
             // Should the header value be cacheable in google's HSTS preload
             // service? While not part of the spec it is widely implemented.
             'preload' => true,
@@ -53,6 +58,9 @@ You can configure this header with the ``hsts`` option::
 
 .. versionadded:: 4.4.0
     The ``hsts`` option was added.
+
+.. versionadded:: 4.5.0
+   The ``trustedProxies`` option was added.
 
 
 .. meta::
