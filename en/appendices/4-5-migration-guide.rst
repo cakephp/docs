@@ -154,6 +154,12 @@ TestSuite
   migrate off of defining schema in fixture classes where migrations are not
   already in use.
 
+Utility
+-------
+
+- ``Hash::normalize()`` now has a ``$default`` parameter that is used for the
+  value of keys that had numeric keys in the input array.
+
 View
 ----
 
