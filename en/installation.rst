@@ -85,8 +85,7 @@ You can create a new CakePHP application using composer's ``create-project``
 command:
 
 .. code-block:: console
-
-    composer create-project --prefer-dist cakephp/app:~4.0 my_app_name
+    composer create-project --prefer-dist cakephp/app:5.0.0-beta1 my_app_name
 
 Once Composer finishes downloading the application skeleton and the core CakePHP
 library, you should have a functioning CakePHP application installed via
@@ -110,7 +109,7 @@ Keeping Up To Date with the Latest CakePHP Changes
 By default this is what your application **composer.json** looks like::
 
     "require": {
-        "cakephp/cakephp": "4.4.*"
+        "cakephp/cakephp": "5.0.0*"
     }
 
 Each time you run ``php composer.phar update`` you will receive patch
