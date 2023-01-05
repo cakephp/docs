@@ -6,7 +6,7 @@ Routing
 .. php:class:: RouterBuilder
 
 Routing provides you tools that map URLs to controller actions. By defining
-routes, you can separate how your application is implemented from how its URL's
+routes, you can separate how your application is implemented from how its URLs
 are structured.
 
 Routing in CakePHP also encompasses the idea of reverse routing, where an array
@@ -517,7 +517,7 @@ Using Named Routes
 
 Sometimes you'll find typing out all the URL parameters for a route too verbose,
 or you'd like to take advantage of the performance improvements that named
-routes have. When connecting routes you can specifiy a ``_name`` option, this
+routes have. When connecting routes you can specify a ``_name`` option, this
 option can be used in reverse routing to identify the route you want to use::
 
     // Connect a route with a name.

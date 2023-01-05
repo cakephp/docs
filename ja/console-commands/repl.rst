@@ -1,8 +1,13 @@
 インタラクティブ・コンソール (REPL)
 ###################################
 
-CakePHP の app スケルトンは、組み込みの REPL (Read Eval Print Loop) を備えており、
-このことで CakePHP やアプリケーションがインタラクティブ・コンソール内で探索しやすくなります。
+`REPL(Read Eval Print Loop) プラグイン <https://github.com/cakephp/repl>`__ を使う
+ことで CakePHP やアプリケーションがインタラクティブ・コンソール内で探索しやすくなります。
+
+.. note::
+
+    このプラグインは 4.3 以前では CakePHP の app スケルトンに同梱されていました。
+
 以下のようにするとインタラクティブ・コンソールを使い始めることができます。
 
 .. code-block:: console

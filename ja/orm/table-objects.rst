@@ -89,17 +89,15 @@
 --------------------------------------
 
 テーブルにクエリーを実行する前に、テーブルインスタンスを取得する必要があります。
-``TableRegistry`` クラスを使用することで取得できます。 ::
+``TableLocator`` クラスを使用することで取得できます。 ::
 
-    // コントローラーやテーブルのメソッド内で
-    use Cake\ORM\TableRegistry;
+    // コントローラー内で
 
-    // Prior to 3.6 use TableRegistry::get('Articles')
-    $articles = TableRegistry::getTableLocator()->get('Articles');
+    $articles = $this->getTableLocator()->get('Articles');
 
-TableRegistry クラスはテーブルを作るための様々な依存関係を提供します。
+``TableLocator`` はテーブルを作るための様々な依存関係を提供します。
 そして、作成されたすべてのテーブルインスタンスの設定を維持し、リレーションの構築と
-ORM の設定を簡単にしてくれます。詳細は :ref:`table-registry-usage` をご覧ください。
+ORM の設定を簡単にしてくれます。詳細は :ref:`table-locator-usage` をご覧ください。
 
 テーブルクラスがプラグインの中にある場合、あなたのテーブルクラスのために正しい名前を
 必ず使用してください。それに失敗すると、デフォルトのクラスが正しいクラスの代わりに使われてしまい、
@@ -107,12 +105,10 @@ ORM の設定を簡単にしてくれます。詳細は :ref:`table-registry-usa
 正しくロードするために、次のように使用してください。 ::
 
     // プラグインの Table
-    // Prior to 3.6 use TableRegistry::get('PluginName.Articles')
-    $articlesTable = TableRegistry::getTableLocator()->get('PluginName.Articles');
+    $articlesTable = $this->getTableLocator()->get('PluginName.Articles');
 
     // ベンダープレフィックス付きのプラグイン Table
-    // Prior to 3.6 use TableRegistry::get('VendorName/PluginName.Articles')
-    $articlesTable = TableRegistry::getTableLocator()->get('VendorName/PluginName.Articles');
+    $articlesTable = $this->getTableLocator()->get('VendorName/PluginName.Articles');
 
 .. _table-callbacks:
 
@@ -129,7 +125,23 @@ ORM 内でフックしたり、サブクラス化やメソッドをオーバー�
 これは、コントローラーやコンポーネントと同じ流れに従います。
 
 イベントリスナーにテーブルクラスやビヘイビアーを追加するには、単純にメソッド名を以下の様に使います。
-イベントサブシステムの使い方の詳細は :doc:`/core-libraries/events` をご覧ください。
+イベントサブシステムの使い方の詳細は :doc:`/core-libraries/events` をご覧ください。::
+
+    // コントローラー内で
+    $articles->save($article, ['customVariable1' => 'yourValue1']);
+
+    // ArticlesTable.php内で
+    public function afterSave(Event $event, EntityInterface $entity, ArrayObject $options)
+    {
+        $customVariable = $options['customVariable1'];	// 'yourValue1'
+        $options['customVariable2'] = 'yourValue2';
+    }
+
+    public function afterSaveCommit(Event $event, EntityInterface $entity, ArrayObject $options)
+    {
+        $customVariable = $options['customVariable1'];	// 'yourValue1'
+        $customVariable = $options['customVariable2'];	// 'yourValue2'
+    }
 
 イベント一覧
 ------------
@@ -209,8 +221,6 @@ beforeFind
 
 .. php:method:: beforeFind(EventInterface $event, Query $query, ArrayObject $options, $primary)
 
-``Model.beforeFind`` イベントは各 find 操作の前に発行されます。
-
 ``Model.beforeFind`` イベントは、各検索操作の前に発生します。
 イベントを停止し、クエリにカスタム結果セットを渡すことにより、検索操作を完全にバイパスできます。::
 
@@ -225,7 +235,7 @@ beforeFind
         // ...
     }
 
-この例では、関連するテーブルまたはそのアタッチされたビヘイビアーで ``beforeFind``イベントはトリガーされません。
+この例では、関連するテーブルまたはそのアタッチされたビヘイビアーで ``beforeFind`` イベントはトリガーされません。
 ただし、振る舞いイベントは通常、デフォルトの優先順位が与えられているため、以前に呼び出されます。
 クエリは ``Query::setResult()`` を介して渡された空の結果セットを返します。
 
@@ -281,7 +291,6 @@ beforeSave
 ``Model.beforeSave`` イベントはエンティティーが保存する前に発行されます。
 このイベントを止めることによって、保存を停止できます。イベントが停止すると、
 このイベントの結果が返されます。
-イベントを停止する方法は、 :ref:`こちら <stopping-events>` に記載されています。
 
 afterSave
 ---------
@@ -308,7 +317,6 @@ beforeDelete
 ``Model.beforeDelete`` イベントはエンティティーを削除する前に発行されます。
 このイベントを停止することによって、削除を中止できます。イベントが停止すると、
 このイベントの結果が返されます。
-イベントを停止する方法は、 :ref:`こちら <stopping-events>` に記載されています。
 
 afterDelete
 -----------
@@ -348,7 +356,7 @@ Callback priorities
 
 テーブルやビヘイビアでイベントを使用する際には、優先順位とリスナーが付く順番に注意してください。
 ビヘイビアイベントは、テーブルイベントの前にアタッチされます。
-デフォルトの優先順位では、ビヘイビアのコールバックが同名のテーブルイベントの**前**にトリガーされます。
+デフォルトの優先順位では、ビヘイビアのコールバックが同名のテーブルイベントの **前** にトリガーされます。
 
 例えば、テーブルが ``TreeBehavior`` を使用している場合、
 ``TreeBehavior::beforeDelete()`` メソッドは、テーブルの ``beforeDelete()`` メソッドよりも先に呼び出されてしまい、
@@ -356,8 +364,8 @@ Callback priorities
 
 イベントの優先順位を管理するには、いくつかの方法があります:
 
-#. ``priority`` オプションを使って、ビヘイビアのリスナーの**優先度** を変更します。
-   これは、ビヘイビアの**すべての** コールバックメソッドの優先度を変更します。
+#. ``priority`` オプションを使って、ビヘイビアのリスナーの **優先度** を変更します。
+   これは、ビヘイビアの **すべての** コールバックメソッドの優先度を変更します。
 
    Behavior::
 
@@ -368,8 +376,7 @@ Callback priorities
             'priority' => 2,
         ]);
 
-#. テーブルクラスの ``priority`` を変更するには、
-   ``Model.implementedEvents()`` メソッドを使用し、 ``Table`` クラスの ``priority`` を変更します。
+#. ``Model.implementedEvents()`` メソッドを使用し、 ``Table`` クラスの ``priority`` を変更します。
    これにより、コールバック関数ごとに異なる優先度を割り当てることができます::
 
         // In a Table class.
@@ -463,13 +470,14 @@ CakePHP によって提供されるビヘイビアーを含む、ビヘイビア
     ``defaultConnectionName()`` メソッドはスタティックで **なければなりません** 。
 
 .. _table-registry-usage:
+.. _table-locator-usage:
 
-TableRegistry の利用
-====================
+TableLocator の利用
+===================
 
-.. php:class:: TableRegistry
+.. php:class:: TableLocator
 
-これまで見てきたように、TableRegistry クラスは　factory/registry を
+これまで見てきたように、TableLocator クラスは　factory/registry を
 アプリケーションのテーブルインスタンスにアクセスするために使うことを簡単にします。
 これには他にも便利な機能があります。
 
@@ -500,7 +508,7 @@ TableRegistry の利用
     テーブルは ``initialize()`` メソッドで追加の設定を行う場合、それらの値は
     レジストリーの設定を上書きします。
 
-また、事前にレジストリーを ``config()`` メソッドを使って設定できます。
+また、事前にレジストリーを ``setConfig()`` メソッドを使って設定できます。
 設定データは *エイリアスごと* に保存され、オブジェクトの
 ``initialize()`` メソッドで上書きできます。 ::
 
@@ -511,20 +519,15 @@ TableRegistry の利用
     そのエイリアスにアクセスする前か、**最初** のアクセス時だけテーブルの設定が可能です。
     レジストリーが投入された後に設定しても効果がありません。
 
-.. note::
-
-    `Cake\ORM\TableRegistry` のスタティック API は 3.6.0 で非推奨になりました。
-    代わりにテーブルロケーターを直接使用してください。
-
-レジストリーの初期化（追加設定の消去）
+レジストリーの初期化
 --------------------------------------
 
-.. php:staticmethod:: clear()
+.. php:method:: clear()
 
 テストケースで、レジストリーをフラッシュしたいこともあるでしょう。
 モックオブジェクトを使う時やテーブルの依存関係を設定する時に便利です。 ::
 
-    TableRegistry::clear();
+    FactoryLocator::get('Table')->clear();
 
 ORM クラスを配置する名前空間の設定
 -----------------------------------

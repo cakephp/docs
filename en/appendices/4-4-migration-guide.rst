@@ -228,6 +228,12 @@ ORM
 * The ``cascadeCallbacks`` option was added to ``TreeBehavior``. When enabled,
   ``TreeBehavior`` will iterate a ``find()`` result and delete records
   individually. This enables ORM callbacks to be used when deleting tree nodes.
+  
+Plugins
+-------
+
+* Plugin classes can now be named to match the plugin name instead of just ``Plugin``.
+  For example, you should now use ``ADmad\I18n\I18nPlugin`` instead of ``ADmad\I18n\Plugin``.
 
 Routing
 -------

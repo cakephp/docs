@@ -150,7 +150,7 @@ instance, often referred to as a singleton, you can mark a service as 'shared'::
 
     // in your Application::services() method.
 
-    $container->share(BillingService::class);
+    $container->addShared(BillingService::class);
 
 Extending Definitions
 ---------------------
@@ -188,7 +188,7 @@ injectable configuration reader::
     use Cake\Core\ServiceConfig;
 
     // Use a shared instance
-    $container->share(ServiceConfig::class);
+    $container->addShared(ServiceConfig::class);
 
 The ``ServiceConfig`` class provides a read-only view of all the data available
 in ``Configure`` so you don't have to worry about accidentally changing

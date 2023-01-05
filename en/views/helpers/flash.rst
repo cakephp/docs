@@ -35,7 +35,7 @@ You can also override any of the options that were set in FlashComponent::
         'element' => 'success'
     ]);
 
-    // In your template file: Will use great_success.php instead of succcess.php
+    // In your template file: Will use great_success.php instead of success.php
     <?= $this->Flash->render('flash', [
         'element' => 'great_success'
     ]);

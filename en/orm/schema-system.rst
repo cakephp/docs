@@ -156,7 +156,7 @@ Indexes and constraints can be read out of a table object using accessor
 methods. Assuming that ``$schema`` is a populated TableSchema instance you could do the
 following::
 
-    // Get contraints. Will return the
+    // Get constraints. Will return the
     // names of all constraints.
     $constraints = $schema->constraints()
 

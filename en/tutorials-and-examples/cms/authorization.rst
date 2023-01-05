@@ -8,7 +8,7 @@ to ensure that each user only edits the posts they own. We'll use the
 Installing Authorization Plugin
 ================================
 
-Use composer to install the Auhorization Plugin:
+Use composer to install the Authorization Plugin:
 
 .. code-block:: console
 

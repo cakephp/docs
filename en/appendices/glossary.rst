@@ -24,7 +24,7 @@ Glossary
 
     DSN
         Data Source Name. A connection string format that is formed like a URI.
-        CakePHP supports DSN's for Cache, Database, Log and Email connections.
+        CakePHP supports DSNs for Cache, Database, Log and Email connections.
 
     dot notation
         Dot notation defines an array path, by separating nested levels with ``.``

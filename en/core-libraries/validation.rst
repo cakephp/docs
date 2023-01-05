@@ -110,9 +110,7 @@ of data:
 #. ``allowEmptyFile()`` Should be used when you want to accept an array that
    contains an empty uploaded file.
 
-You can also use ``notEmpty()`` to mark a field invalid if any 'empty' value is
-used. In general, it is recommended that you do not use ``notEmpty()`` and use more
-specific validators instead: ``notEmptyString()``, ``notEmptyArray()``, ``notEmptyFile()``, ``notEmptyDate()``, ``notEmptyTime()``, ``notEmptyDateTime()``.
+You also can use following specific validators: ``notEmptyString()``, ``notEmptyArray()``, ``notEmptyFile()``, ``notEmptyDate()``, ``notEmptyTime()``, ``notEmptyDateTime()``.
 
 The ``allowEmpty*`` methods support a ``when`` parameter that allows you to control
 when a field can or cannot be empty:
@@ -265,7 +263,7 @@ whether the value for ``show_profile_picture`` is empty. You could also use the
         'rule' => ['uploadedFile', ['optional' => true]],
     ]);
 
-The ``allowEmpty*``, ``notEmpty()`` and ``requirePresence()`` methods will also
+The ``allowEmpty*``, ``notEmpty*`` and ``requirePresence()`` methods will also
 accept a callback function as their last argument. If present, the callback
 determines whether or not the rule should be applied. For example, a field is
 sometimes allowed to be empty::
@@ -277,7 +275,7 @@ sometimes allowed to be empty::
 Likewise, a field can be required to be populated when certain conditions are
 met::
 
-    $validator->notEmpty('email_frequency', 'This field is required', function ($context) {
+    $validator->notEmptyString('email_frequency', 'This field is required', function ($context) {
         return !empty($context['data']['wants_newsletter']);
     });
 
@@ -529,9 +527,9 @@ sending an email you could do the following::
             'message' => 'E-mail must be valid'
         ])
         ->requirePresence('name')
-        ->notEmpty('name', 'We need your name.')
+        ->notEmptyString('name', 'We need your name.')
         ->requirePresence('comment')
-        ->notEmpty('comment', 'You need to give a comment.');
+        ->notEmptyString('comment', 'You need to give a comment.');
 
     $errors = $validator->validate($this->request->getData());
     if (empty($errors)) {

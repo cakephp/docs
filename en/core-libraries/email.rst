@@ -285,7 +285,7 @@ Relaxing Address Validation Rules
 
 If you are having validation issues when sending to non-compliant addresses, you
 can relax the pattern used to validate email addresses. This is sometimes
-necessary when dealing with some ISP's::
+necessary when dealing with some ISPs::
 
     $mailer = new Mailer('default');
 
@@ -650,7 +650,8 @@ The ``Cake\TestSuite\EmailTrait`` trait provides the following assertions::
     $this->assertMailSentTo($address);
 
     // Asserts an email was sent from an address
-    $this->assertMailSentFrom($address);
+    $this->assertMailSentFrom($emailAddress);
+    $this->assertMailSentFrom([$emailAddress => $displayName]);
 
     // Asserts an email contains expected contents
     $this->assertMailContains($contents);

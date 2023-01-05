@@ -62,7 +62,7 @@ El canal IRC
 -  `#cakephp-fr <irc://irc.freenode.net/cakephp-fr>`_ -- Canal francés.
 
 Si estás atascado, péganos un grito en el canal IRC de CakePHP.
-Alguién del `equipo de desarrollo <https://github.com/cakephp?tab=members>`_
+Alguién del `equipo de desarrollo <https://cakephp.org/team>`_
 está normalmente, especialmente durante las horas de día para usuarios de
 América del Norte y del Sur. Estaremos encantados de escucharte, tanto si
 necesitas ayuda como si quieres encontrar usuarios en tu zona o si quieres
