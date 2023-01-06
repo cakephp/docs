@@ -326,10 +326,6 @@ CakePHP はベースとなる ``View`` クラスを使用します。
 match-allビューは、content-typeのネゴシエーションが試みられた *後で*
 のみ適用されることを覚えておくことが重要です。
 
-.. versionadded:: 4.4.0
-    4.4 より前のバージョンでは、 ``viewClasses()`` の代わりに
-    :doc:`/controllers/components/request-handling` を使用する必要があります。
-
 他のページへのリダイレクト
 ======================================
 
@@ -589,9 +585,6 @@ controller use the ``middleware()`` method from your controller's
     }
 
 Middleware defined by a controller will be called **before** ``beforeFilter()`` and action methods are called.
-
-.. versionadded:: 4.3.0
-    ``Controller::middleware()`` was added.
 
 コントローラーのより詳細
 ========================

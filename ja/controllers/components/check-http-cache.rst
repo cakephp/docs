@@ -3,9 +3,6 @@ HTTPキャッシュの確認
 
 .. php:class:: CheckHttpCacheComponent(ComponentCollection $collection, array $config = [])
 
-.. versionadded:: 4.4.0
-    ``CheckHttpCacheComponent`` が追加されました。
-
 HTTPキャッシュ検証モデルは、リバースプロキシとしても知られるキャッシュゲートウェイが、
 保存されたレスポンスのコピーをクライアントに提供できるかどうかを判断するための処理の1つです。
 このモデルでは、主に帯域幅を節約することができますが、

@@ -522,9 +522,6 @@ Au début du lancement de chaque test, ``SchemaLoader`` supprimera toutes les
 tables dans la connexion et les reconstruira à partir du fichier de schéma
 fourni.
 
-.. versionadded:: 4.3.0
-    SchemaLoader a été ajouté.
-
 .. _fixture-state-management:
 
 Gestionnaires d'Etat des Fixtures
@@ -558,8 +555,6 @@ du test::
             return new TransactionStrategy();
         }
     }
-
-.. versionadded:: 4.3.0
 
 Créer les Fixtures
 ------------------
@@ -630,12 +625,6 @@ un enregistrement (une seule ligne). A l'intérieur de chaque ligne, il doit y
 avoir un tableau associatif des colonnes et valeurs pour la ligne. Gardez juste
 à l'esprit que tous les enregistrements dans le tableau ``$records`` doivent
 avoir les mêmes clés car les lignes sont insérées en une seule requête SQL.
-
-.. versionchanged:: 4.3.0
-
-    Avant 4.3.0 les fixtures définissaient aussi le schéma de la table. Pour en
-    savoir plus, consultez :ref:`fixture-schema` si vous avez encore besoin de
-    définir le schéma dans vos fixtures.
 
 Les Données Dynamiques
 ----------------------

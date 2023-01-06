@@ -107,9 +107,6 @@ the request data::
     // would use the rules defined by `validationUpdate()`
     $isValid = $form->validate($this->request->getData(), 'update');
 
-.. versionadded:: 4.3.0
-    Using validators other than ``default`` was added.
-
 フォーム値の設定
 ================
 
@@ -184,10 +181,6 @@ Validator クラスを使用せずに、コントローラーから各フォー�
     {
         $this->_errors = $errors;
     }
-
-.. versionchanged:: 3.5.1
-    ``setErrors`` をもう指定する必要はありません。これは、利便性のため ``Form``
-    クラスに既に含まれているからです。
 
 バリデータークラスのエラーの返し方にならって、 ``$errors`` はこの形式でなければなりません。 ::
 

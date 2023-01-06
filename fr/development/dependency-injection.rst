@@ -147,9 +147,6 @@ soit des valeurs primitives::
 Vos services peuvent faire référence à la ``ServerRequest`` dans les actions du
 controller car elle sera chargée automatiquement.
 
-.. versionchanged:: 4.4.0
-    La ``$request`` est désormais enregistrée automatiquement.
-
 Ajouter des Services Partagés
 -----------------------------
 
@@ -323,7 +320,7 @@ mettra pas les résolutions en cache les résolutions, au détriment de la
 performance. Pour activer la mise en cache::
 
     $container->delegate(
-        new \League\Container\ReflectionContainer(true) // ou utilisez la valeur de Configure::read('debug') 
+        new \League\Container\ReflectionContainer(true) // ou utilisez la valeur de Configure::read('debug')
     );
 
 Pour en savoir plus sur l'auto wiring, consultez la

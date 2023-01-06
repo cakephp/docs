@@ -353,9 +353,6 @@ When enabled all fields will stop validation on the first failing rule instead
 of checking all possible rules. In this case only a single error message will
 appear under the form field.
 
-.. versionadded::
-    The ``setStopOnFailure()`` method was added in 4.1.6.
-
 .. _adding-validation-providers:
 
 Adding Validation Providers
@@ -565,10 +562,10 @@ following::
 Validating Entity Data
 ======================
 
-Validation is meant for checking request data coming from forms or other user 
+Validation is meant for checking request data coming from forms or other user
 interfaces used to populate the entities.
 
-The request data is validated automatically when using the ``newEntity()``, 
+The request data is validated automatically when using the ``newEntity()``,
 ``newEntities()``, ``patchEntity()`` or ``patchEntities()`` methods of ``Table`` class::
 
     // In the ArticlesController class
@@ -601,9 +598,9 @@ validation sets to apply using the ``options`` parameter::
       ]
     ]);
 
-Apart from validating user provided data maintaining integrity of data regardless 
-where it came from is important. To solve this problem CakePHP offers a second 
-level of validation which is called "application rules". You can read more about 
+Apart from validating user provided data maintaining integrity of data regardless
+where it came from is important. To solve this problem CakePHP offers a second
+level of validation which is called "application rules". You can read more about
 them in the :ref:`Applying Application Rules <application-rules>` section.
 
 Core Validation Rules

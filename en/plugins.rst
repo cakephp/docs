@@ -94,7 +94,7 @@ Loading a Plugin
 ================
 
 If you want to use a plugin's routes, console commands, middlewares, event
-listeners, templates or webroot assets you will need to load the plugin. 
+listeners, templates or webroot assets you will need to load the plugin.
 Plugins are loaded in your application's ``bootstrap()`` function::
 
     // In src/Application.php
@@ -128,9 +128,6 @@ line:
 
 This would update your application's bootstrap method, or put the
 ``$this->addPlugin('ContactManager');`` snippet in the bootstrap for you.
-
-.. versionadded:: 4.1.0
-    The ``addOptionalPlugin()`` method was added.
 
 .. _plugin-configuration:
 

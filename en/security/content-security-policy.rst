@@ -49,9 +49,6 @@ and ``strict-dynamic`` for increased security and easier maintenance::
     ]);
     $middlewareQueue->add($csp);
 
-.. versionadded:: 4.3.0
-    Automatic nonce population was added.
-
 .. meta::
     :title lang=en: Content Security Policy Middleware
     :keywords lang=en: security, content security policy, csp, middleware, cross-site scripting

@@ -337,8 +337,6 @@ When raising a ``RedirectException`` you can include additional headers::
         'Header-Key' => 'value',
     ]);
 
-.. versionadded:: 4.1.0
-
 .. meta::
     :title lang=ja: コンポーネント
     :keywords lang=ja: array controller,core libraries,authentication request,array name,access control lists,public components,controller code,core components,cookiemonster,login cookie,configuration settings,functionality,logic,sessions,cakephp,doc

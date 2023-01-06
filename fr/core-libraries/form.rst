@@ -117,9 +117,6 @@ les données de requête::
     // utiliserait les règles définies par `validationUpdate()`
     $isValid = $form->validate($this->request->getData(), 'update');
 
-.. versionadded:: 4.3.0
-    Ajout de l'utilisation d'autres validators que ``default``.
-
 Définir des Valeurs pour le Formulaire
 ======================================
 

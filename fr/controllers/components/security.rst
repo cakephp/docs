@@ -72,7 +72,7 @@ mise en trou noir (blackhole callback)::
 
 .. note::
 
-    utilisez ``$this->Security->config()`` pour les versions de CakePHP 
+    utilisez ``$this->Security->config()`` pour les versions de CakePHP
     inférieures à 3.4.0.
 
 Le  paramètre ``$type`` peut avoir les valeurs suivantes:
@@ -80,12 +80,6 @@ Le  paramètre ``$type`` peut avoir les valeurs suivantes:
 * 'auth' Indique une erreur de validation de formulaire, ou une incohérence
   controller/action.
 * 'secure' Indique un problème sur la méthode de restriction SSL.
-
-.. versionadded:: cakephp/cakephp 3.2.6
-
-    Depuis la version 3.2.6, un paramètre supplémentaire est inclus dans le callback blackHole, une instance de
-    ``Cake\Controller\Exception\SecurityException`` est incluse dans le deuxième
-    paramètre.
 
 Restreindre les actions aux actions SSL
 =======================================

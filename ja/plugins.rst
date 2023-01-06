@@ -124,9 +124,6 @@ Composer を使ったプラグインのインストール
 これは、アプリケーションの bootstrap メソッドを更新、
 または ``$this->addPlugin('ContactManager');`` を bootstrap に書き込みます。
 
-.. versionadded:: 4.1.0
-    ``addOptionalPlugin()`` が追加されました。
-
 .. _plugin-configuration:
 
 プラグインフックの設定

@@ -44,9 +44,6 @@
     ]);
     $middlewareQueue->add($csp);
 
-.. versionadded:: 4.3.0
-    ナンス自動追加機能が実装されました。
-
 .. meta::
     :title lang=ja: コンテンツセキュリティポリシーミドルウェア
     :keywords lang=ja: security, content security policy, csp, middleware, cross-site scripting

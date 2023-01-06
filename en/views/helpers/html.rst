@@ -399,9 +399,6 @@ If you want to use route path strings, you can do that using this method::
     echo $this->Html->linkFromPath('View', 'MyBackend.Admin/Articles::view', [3]);
     // outputs: <a href="/admin/my-backend/articles/view/3">View</a>
 
-.. versionadded:: 4.1.0
-    ``linkFromPath()`` was added.
-
 Linking to Videos and Audio Files
 ---------------------------------
 

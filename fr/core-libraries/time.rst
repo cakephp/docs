@@ -165,9 +165,6 @@ objet en json::
 .. note::
     Cette méthode doit être appelée statiquement.
 
-.. versionchanged:: 4.1.0
-    Le paramètre ``callable`` a été ajouté.
-
 .. php:method:: i18nFormat($format = null, $timezone = null, $locale = null)
 
 Une chose habituelle à faire avec les instances ``Time`` est d'afficher les

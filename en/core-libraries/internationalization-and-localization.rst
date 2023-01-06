@@ -664,9 +664,6 @@ use a middleware to define both timezone conversion and locale parsing::
         }
     }
 
-.. versionadded:: 4.3.0
-    The ``setUserTimezone()`` method was added.
-
 Automatically Choosing the Locale Based on Request Data
 =======================================================
 

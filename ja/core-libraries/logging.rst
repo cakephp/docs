@@ -157,9 +157,6 @@ CakePHP では 全てのログエンジンにおいて ``Psr\Log\LoggerInterface
 独自のロギングフォーマッターを実装するには ``Cake\Log\Format\AbstractFormatter`` またはそのサブクラスのいずれかを継承する必要があります。
 実装する必要がある主なメソッドは ``format($level, $message, $context)`` で、これはログメッセージの書式設定を担当します。
 
-.. versionadded:: 4.3.0
-    ロギングフォーマッタは4.3.0で追加されました。
-
 .. _file-log:
 
 ``FileLog`` エンジンは次のオプションを受け取ります。

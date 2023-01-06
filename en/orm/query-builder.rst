@@ -288,10 +288,6 @@ If you want to select all but a few fields on a table, you can use
 You can also pass an ``Association`` object when working with contained
 associations.
 
-.. versionadded:: 4.5.0
-
-    ``Query::selectAlso()`` was added.
-
 .. _using-sql-functions:
 
 Using SQL Functions
@@ -355,9 +351,6 @@ These window-only functions contain a window expression by default:
     Returns an Aggregate expression for the ``LAG()`` SQL function.
 ``lead()``
     Returns an Aggregate expression for the ``LEAD()`` SQL function.
-
-.. versionadded:: 4.1.0
-    Window functions were added in 4.1.0
 
 When providing arguments for SQL functions, there are two kinds of parameters
 you can use, literal arguments and bound parameters. Identifier/Literal parameters allow
@@ -596,9 +589,6 @@ Also, it's possible to create the simple variant by passing a value to ``case()`
         ->else('N');
 
     # CASE published WHEN true THEN 'Y' ELSE 'N' END;
-
-.. versionchanged:: 4.3.0
-    The fluent ``case()`` builder method was added.
 
 Prior to 4.3.0, you would need to use::
 
@@ -1175,9 +1165,6 @@ methods::
     // Run a query on the write connection (default)
     $query->useWriteRole();
 
-.. versionadded:: 4.5.0
-    Query role methods were added in 4.5.0
-
 Getting Results
 ===============
 
@@ -1624,7 +1611,7 @@ results based on the results of other queries::
     $query = $articles->find();
     $query->from(['matches' => $matchingComment])
         ->innerJoin(
-            ['Articles' =>  'articles'], 
+            ['Articles' =>  'articles'],
             ['Articles.id' => $query->identifier('matches.id') ]
         );
 
@@ -1644,9 +1631,6 @@ generate aliases::
 
     $query = $articles->find()
         ->where(['id IN' => $matchingComment]);
-
-.. versionadded:: 4.2.0
-    ``Table::subquery()`` and ``Query::subquery()`` were added.
 
 Adding Locking Statements
 -------------------------
@@ -1736,9 +1720,6 @@ named windows using the ``window()`` method::
             ->over('related_article'),
     ]);
 
-.. versionadded:: 4.1.0
-    Window function support was added.
-
 Common Table Expressions
 ------------------------
 
@@ -1797,9 +1778,6 @@ To build that query with the ORM query builder we would use::
             'conditions' => 'orders_per_customer.customer_id = Customers.id'
         ]
     ]);
-
-.. versionadded:: 4.1.0
-    Common table expression support was added.
 
 Executing Complex Queries
 -------------------------

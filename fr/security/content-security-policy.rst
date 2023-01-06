@@ -50,9 +50,6 @@ facile::
     ]);
     $middlewareQueue->add($csp);
 
-.. versionadded:: 4.3.0
-    Le remplissage automatique du nonce a été ajouté.
-
 .. meta::
     :title lang=fr: Middleware Content Security Policy
     :keywords lang=fr: security, content security policy, csp, middleware, cross-site scripting
