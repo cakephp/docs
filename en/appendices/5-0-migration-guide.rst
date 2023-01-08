@@ -80,6 +80,8 @@ Database
   Additionally the interface for ``Date`` objects reflects the ``ChronosDate``
   interface which lacks all of the time related methods that were present in
   CakePHP 4.x.
+- ``SqlDialectTrait`` has been removed and all its functionality has been moved
+  into the ``Driver`` class itself.
 
 Datasource
 ----------
