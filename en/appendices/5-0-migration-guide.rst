@@ -138,6 +138,8 @@ TestSuite
 - ``TestSuite`` was removed. Users should use environment variables to customize
   unit test settings instead.
 - ``TestListenerTrait`` was removed. PHPUnit dropped support for these listeners.
+- ``IntegrationTestTrait::configRequest()`` now merges config when called multiple times
+  instead of replacing the currently present config.
 
 Validation
 ----------
@@ -194,3 +196,8 @@ Database
 
 - ``Query::all()`` was added which runs result decorator callbacks and returns a result set for select queries.
 - ``EnumType`` was added to allow mapping between PHP backed enums and a string or integer column.
+
+TestSuite
+---------
+
+- ``IntegrationTestTrait::requestAsJson()`` has been added to set JSON headers for the next request.
