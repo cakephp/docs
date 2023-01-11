@@ -1094,6 +1094,12 @@ criteria are met:
 #. The request has an ``Origin`` header.
 #. The request's ``Origin`` value matches one of the allowed Origin values.
 
+.. tip::
+
+    CakePHP has no built-in CORS middleware because dealing with CORS requests
+    is very application specific. We recommend you build your own ``CORSMiddleware``
+    if you need one and adjust the response object as desired.
+
 Common Mistakes with Immutable Responses
 ========================================
 
