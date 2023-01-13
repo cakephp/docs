@@ -761,6 +761,9 @@ qui définit des propriétés directement dans des entities::
         // Ajoute des règles de validation
         $rules->add(function($entity) {
             $data = $entity->extract($this->getSchema()->columns(), true);
+            if (!$entity->isNew() && !empty($data)) {
+                $data += $entity->extract((array)$this->getPrimaryKey());
+            }
             $validator = $this->getValidator('default');
             $errors = $validator->validate($data, $entity->isNew());
             $entity->setErrors($errors);
