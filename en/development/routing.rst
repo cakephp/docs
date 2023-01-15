@@ -175,10 +175,10 @@ syntax::
 Some example string targets are::
 
     // Application controller
-    'Bookmarks::view'
+    'Articles::view'
 
     // Application controller with prefix
-    Admin/Bookmarks::view
+    Admin/Articles::view
 
     // Plugin controller
     Cms.Articles::edit

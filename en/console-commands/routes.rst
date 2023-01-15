@@ -19,14 +19,14 @@ You can quickly see how a URL will be parsed using the ``check`` method:
 
 .. code-block:: console
 
-    bin/cake routes check /bookmarks/edit/1
+    bin/cake routes check /articles/edit/1
 
 If your route contains any query string parameters remember to surround the URL
 in quotes:
 
 .. code-block:: console
 
-    bin/cake routes check "/bookmarks/?page=1&sort=title&direction=desc"
+    bin/cake routes check "/articles/?page=1&sort=title&direction=desc"
 
 Testing URL Generation
 ----------------------
@@ -36,5 +36,5 @@ You can see the URL a :term:`routing array` will generate using the
 
 .. code-block:: console
 
-    bin/cake routes generate controller:Bookmarks action:edit 1
+    bin/cake routes generate controller:Articles action:edit 1
 

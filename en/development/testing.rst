@@ -1265,7 +1265,7 @@ test cases::
     $this->cookieEncrypted('my_cookie', 'Some secret values');
 
     // Assume this action modifies the cookie.
-    $this->get('/bookmarks/index');
+    $this->get('/articles/index');
 
     $this->assertCookieEncrypted('An updated value', 'my_cookie');
 
@@ -1278,15 +1278,15 @@ retain flash messages in the session so you can write assertions::
 
     // Enable retention of flash messages instead of consuming them.
     $this->enableRetainFlashMessages();
-    $this->get('/bookmarks/delete/9999');
+    $this->get('/articles/delete/9999');
 
-    $this->assertSession('That bookmark does not exist', 'Flash.flash.0.message');
+    $this->assertSession('That article does not exist', 'Flash.flash.0.message');
 
     // Assert a flash message in the 'flash' key.
-    $this->assertFlashMessage('Bookmark deleted', 'flash');
+    $this->assertFlashMessage('Article deleted', 'flash');
 
     // Assert the second flash message, also  in the 'flash' key.
-    $this->assertFlashMessageAt(1, 'Bookmark really deleted');
+    $this->assertFlashMessageAt(1, 'Article really deleted');
 
     // Assert a flash message in the 'auth' key at the first position
     $this->assertFlashMessageAt(0, 'You are not allowed to enter this dungeon!', 'auth');
