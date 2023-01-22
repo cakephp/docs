@@ -706,8 +706,8 @@ Après avoir exécuté ces lignes, votre résultat devrait ressembler à quelque
 chose comme ceci::
 
     [
-        ['id' => 1, 'title' => 'Premier Article', 'body' => 'Corps de l'article 1' ...],
-        ['id' => 2, 'title' => 'Deuxième Article', 'body' => 'Corps de l'article 2' ...],
+        ['id' => 1, 'title' => 'Premier Article', 'body' => 'Corps de l\'article 1' ...],
+        ['id' => 2, 'title' => 'Deuxième Article', 'body' => 'Corps de l\'article 2' ...],
         ...
     ]
 
