@@ -195,6 +195,7 @@ Database
 --------
 
 - ``Query::all()`` was added which runs result decorator callbacks and returns a result set for select queries.
+- ``Query::comment()`` was added to add a SQL comment to the executed query. This makes it easier to debug queries.
 - ``EnumType`` was added to allow mapping between PHP backed enums and a string or integer column.
 
 TestSuite
