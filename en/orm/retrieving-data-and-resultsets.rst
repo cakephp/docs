@@ -111,8 +111,8 @@ extensible way to find the data you are interested in::
     $query = $articles->find('all');
 
 The return value of any ``find()`` method is always
-a :php:class:`Cake\\ORM\\Query` object. The Query class allows you to further
-refine a query after creating it. Query objects are evaluated lazily, and do not
+a :php:class:`Cake\\ORM\\Query\\SelectQuery` object. The SelectQuery class allows you to further
+refine a query after creating it. SelectQuery objects are evaluated lazily, and do not
 execute until you start fetching rows, convert it to an array, or when the
 ``all()`` method is called::
 
@@ -381,12 +381,12 @@ where ``Foo`` is the name of the finder you want to create. For example if we
 wanted to add a finder to our articles table for finding articles written by a
 given user, we would do the following::
 
-    use Cake\ORM\Query;
+    use Cake\ORM\Query\SelectQuery;
     use Cake\ORM\Table;
 
     class ArticlesTable extends Table
     {
-        public function findOwnedBy(Query $query, array $options)
+        public function findOwnedBy(SelectQuery $query, array $options)
         {
             $user = $options['user'];
             return $query->where(['author_id' => $user->id]);
@@ -586,10 +586,10 @@ Passing Conditions to Contain
 
 When using ``contain()`` you are able to restrict the data returned by the
 associations and filter them by conditions. To specify conditions, pass an anonymous
-function that receives as the first argument a query object, ``\Cake\ORM\Query``::
+function that receives as the first argument a query object, ``\Cake\ORM\Query\SelectQuery``::
 
     // In a controller or table method.
-    $query = $articles->find()->contain('Comments', function (Query $q) {
+    $query = $articles->find()->contain('Comments', function (SelectQuery $q) {
         return $q
             ->select(['body', 'author_id'])
             ->where(['Comments.approved' => true]);
@@ -598,7 +598,7 @@ function that receives as the first argument a query object, ``\Cake\ORM\Query``
 This also works for pagination at the Controller level::
 
     $this->paginate['contain'] = [
-        'Comments' => function (Query $query) {
+        'Comments' => function (SelectQuery $query) {
             return $query->select(['body', 'author_id'])
             ->where(['Comments.approved' => true]);
         }
@@ -614,7 +614,7 @@ notation::
 
     $query = $articles->find()->contain([
         'Comments',
-        'Authors.Profiles' => function (Query $q) {
+        'Authors.Profiles' => function (SelectQuery $q) {
             return $q->where(['Profiles.is_published' => true]);
         }
     ]);
@@ -626,7 +626,7 @@ finders in your associations, you can use them inside ``contain()``::
 
     // Bring all articles, but only bring the comments that are approved and
     // popular.
-    $query = $articles->find()->contain('Comments', function (Query $q) {
+    $query = $articles->find()->contain('Comments', function (SelectQuery $q) {
         return $q->find('approved')->find('popular');
     });
 
@@ -647,7 +647,7 @@ Use the ``queryBuilder`` option to customize the query when using an array::
     $query = $articles->find()->contain([
         'Authors' => [
             'foreignKey' => false,
-            'queryBuilder' => function (Query $q) {
+            'queryBuilder' => function (SelectQuery $q) {
                 return $q->where(...); // Full conditions for filtering
             }
         ]
@@ -668,7 +668,7 @@ Alternatively, you can use ``enableAutoFields()`` in an anonymous function::
     // Select id & title from articles, but all fields off of Users.
     $query = $articles->find()
         ->select(['id', 'title'])
-        ->contain(['Users' => function(Query $q) {
+        ->contain(['Users' => function(SelectQuery $q) {
             return $q->enableAutoFields();
         }]);
 
@@ -769,10 +769,10 @@ The example below matches Articles that have specific Tags and loads the same Ta
     $filter = ['Tags.name' => 'CakePHP'];
     $query = $articles->find()
         ->distinct($articles->getPrimaryKey())
-        ->contain('Tags', function (Query $q) use ($filter) {
+        ->contain('Tags', function (SelectQuery $q) use ($filter) {
             return $q->where($filter);
         })
-        ->innerJoinWith('Tags', function (Query $q) use ($filter) {
+        ->innerJoinWith('Tags', function (SelectQuery $q) use ($filter) {
             return $q->where($filter);
         });
 
@@ -946,7 +946,7 @@ Working with Result Sets
 
 Once a query is executed with ``all()``, you will get an instance of
 :php:class:`Cake\\ORM\\ResultSet`. This object offers powerful ways to manipulate
-the resulting data from your queries. Like Query objects, ResultSets are
+the resulting data from your queries. Like SelectQuery objects, ResultSets are
 a :doc:`Collection </core-libraries/collections>` and you can use any collection
 method on ResultSet objects.
 
@@ -1048,8 +1048,8 @@ a ResultSet::
 Checking if a Query or ResultSet is Empty
 -----------------------------------------
 
-You can use the ``isEmpty()`` method on a Query or ResultSet object to see if it
-has any rows in it. Calling ``isEmpty()`` on a Query object will evaluate the
+You can use the ``isEmpty()`` method on a SelectQuery or ResultSet object to see if it
+has any rows in it. Calling ``isEmpty()`` on a SelectQuery object will evaluate the
 query::
 
     // Check a query.
@@ -1084,7 +1084,7 @@ found in the database. While entities' getter methods can take care of most of
 the virtual field generation or special data formatting, sometimes you
 need to change the data structure in a more fundamental way.
 
-For those cases, the ``Query`` object offers the ``mapReduce()`` method, which
+For those cases, the ``SelectQuery`` object offers the ``mapReduce()`` method, which
 is a way of processing results once they are fetched from the database.
 
 A common example of changing the data structure is grouping results together
@@ -1264,17 +1264,17 @@ even after adding a map-reduce routine::
 This is particularly useful for building custom finder methods as described in the
 :ref:`custom-find-methods` section::
 
-    public function findPublished(Query $query, array $options)
+    public function findPublished(SelectQuery $query, array $options)
     {
         return $query->where(['published' => true]);
     }
 
-    public function findRecent(Query $query, array $options)
+    public function findRecent(SelectQuery $query, array $options)
     {
         return $query->where(['created >=' => new DateTime('1 day ago')]);
     }
 
-    public function findCommonWords(Query $query, array $options)
+    public function findCommonWords(SelectQuery $query, array $options)
     {
         // Same as in the common words example in the previous section
         $mapper = ...;
@@ -1303,7 +1303,7 @@ than 20 times across all articles::
 Removing All Stacked Map-reduce Operations
 ------------------------------------------
 
-Under some circumstances you may want to modify a ``Query`` object so that no
+Under some circumstances you may want to modify a ``SelectQuery`` object so that no
 ``mapReduce`` operations are executed at all. This can be done by
 calling the method with both parameters as null and the third parameter
 (overwrite) as ``true``::
