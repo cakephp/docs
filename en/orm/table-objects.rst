@@ -225,13 +225,13 @@ data and the options provided to the ``patchEntity()`` or ``newEntity()`` call.
 beforeFind
 ----------
 
-.. php:method:: beforeFind(EventInterface $event, Query $query, ArrayObject $options, $primary)
+.. php:method:: beforeFind(EventInterface $event, SelectQuery $query, ArrayObject $options, boolean $primary)
 
 The ``Model.beforeFind`` event is fired before each find operation. By stopping
 the event, and feeding the query with a custom result set, you can bypass the find
 operation entirely::
 
-    public function beforeFind(EventInterface $event, Query $query, ArrayObject $options, $primary)
+    public function beforeFind(EventInterface $event, SelectQuery $query, ArrayObject $options, boolean $primary)
     {
         if (/* ... */) {
             $event->stopPropagation();
@@ -245,7 +245,7 @@ operation entirely::
 In this example, no further ``beforeFind`` events will be triggered on the
 related table or its attached behaviors (though behavior events are usually
 invoked earlier given their default priorities), and the query will return
-the empty result set that was passed via ``Query::setResult()``.
+the empty result set that was passed via ``SelectQuery::setResult()``.
 
 Any changes done to the ``$query`` instance will be retained for the rest
 of the find. The ``$primary`` parameter indicates whether or not this is the root
