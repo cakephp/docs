@@ -235,12 +235,12 @@ method has not been implemented yet, so let's do that. In
 
     // add this use statement right below the namespace declaration to import
     // the Query class
-    use Cake\ORM\Query;
+    use Cake\ORM\Query\SelectQuery;
 
     // The $query argument is a query builder instance.
     // The $options array will contain the 'tags' option we passed
     // to find('tagged') in our controller action.
-    public function findTagged(Query $query, array $options)
+    public function findTagged(SelectQuery $query, array $options)
     {
         $columns = [
             'Articles.id', 'Articles.user_id', 'Articles.title',
