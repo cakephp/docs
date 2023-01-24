@@ -1045,15 +1045,11 @@ a ResultSet::
     // Get the 5th record
     $row = $result->skip(4)->first();
 
-Checking if a Query or ResultSet is Empty
+Checking if ResultSet is Empty
 -----------------------------------------
 
-You can use the ``isEmpty()`` method on a SelectQuery or ResultSet object to see if it
-has any rows in it. Calling ``isEmpty()`` on a SelectQuery object will evaluate the
-query::
-
-    // Check a query.
-    $query->isEmpty();
+You can use the ``isEmpty()`` method on a ResultSet object to see if it
+has any rows in it:
 
     // Check results
     $results = $query->all();
