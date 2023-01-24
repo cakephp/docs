@@ -262,7 +262,7 @@ method has not been implemented yet, so let's do that. In
                 ->where(['Tags.title IN' => $options['tags']]);
         }
 
-        return $query->group(['Articles.id']);
+        return $query->groupBy(['Articles.id']);
     }
 
 We just implemented a :ref:`custom finder method <custom-find-methods>`. This is
