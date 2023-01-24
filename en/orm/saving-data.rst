@@ -1159,8 +1159,8 @@ ideal in scenarios where you need to reduce the chance of duplicate records::
     );
 
 If your find conditions require custom order, associations or conditions, then
-the ``$search`` parameter can be a callable or ``Query`` object. If you use
-a callable, it should take a ``Query`` as its argument.
+the ``$search`` parameter can be a callable or ``SelectQuery`` object. If you use
+a callable, it should take a ``SelectQuery`` as its argument.
 
 The returned entity will have been saved if it was a new record. The supported
 options for this method are:
