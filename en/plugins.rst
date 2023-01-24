@@ -145,6 +145,7 @@ appropriate parts of your application. The hooks are:
   queue.
 * ``console`` Used to add console commands to an application's command
   collection.
+* ``services`` Used to register application container services
 
 When loading plugins you can configure which hooks are enabled. By default
 plugins without a :ref:`plugin-objects` have all hooks disabled. New style plugins
@@ -298,9 +299,14 @@ like::
     use Cake\Core\PluginApplicationInterface;
     use Cake\Console\CommandCollection;
     use Cake\Http\MiddlewareQueue;
+    use Cake\Routing\RouteBuilder;
 
     class ContactManagerPlugin extends BasePlugin
     {
+
+        /**
+         * @inheritDoc
+         */
         public function middleware(MiddlewareQueue $middleware): MiddlewareQueue
         {
             // Add middleware here.
@@ -309,6 +315,9 @@ like::
             return $middleware;
         }
 
+        /**
+         * @inheritDoc
+         */
         public function console(CommandCollection $commands): CommandCollection
         {
             // Add console commands here.
@@ -317,6 +326,9 @@ like::
             return $commands;
         }
 
+        /**
+         * @inheritDoc
+         */
         public function bootstrap(PluginApplicationInterface $app): void
         {
             // Add constants, load configuration defaults.
@@ -324,7 +336,10 @@ like::
             parent::bootstrap($app);
         }
 
-        public function routes($routes): void
+        /**
+         * @inheritDoc
+         */
+        public function routes(RouteBuilder $routes): void
         {
             // Add routes.
             // By default will load `config/routes.php` in the plugin.
