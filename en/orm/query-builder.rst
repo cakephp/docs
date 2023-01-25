@@ -485,7 +485,7 @@ When using aggregate functions like ``count`` and ``sum`` you may want to use
         'count' => $query->func()->count('view_count'),
         'published_date' => 'DATE(created)'
     ])
-    ->group('published_date')
+    ->groupBy('published_date')
     ->having(['count >' => 3]);
 
 Case Statements
@@ -1145,7 +1145,7 @@ expression objects to add snippets of SQL to your queries::
     $query->select(['two' => $expr]);
 
 ``Expression`` objects can be used with any query builder methods like
-``where()``, ``limit()``, ``group()``, ``select()`` and many other methods.
+``where()``, ``limit()``, ``groupBy()``, ``select()`` and many other methods.
 
 .. warning::
 
@@ -1227,7 +1227,7 @@ this query for retrieving article ids and their comments count::
     $query = $articles->find();
     $query->select(['Articles.id', $query->func()->count('Comments.id')])
         ->matching('Comments')
-        ->group(['Articles.id']);
+        ->groupBy(['Articles.id']);
     $total = $query->count();
 
 After counting, the query can still be used for fetching the associated
@@ -1758,7 +1758,7 @@ To build that query with the ORM query builder we would use::
             'order_count' => $q->func()->count('*'),
             'customer_id'
         ])
-        ->group('customer_id');
+        ->groupBy('customer_id');
 
         // Attach the new query to the table expression
         return $cte
