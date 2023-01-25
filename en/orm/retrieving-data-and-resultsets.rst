@@ -77,7 +77,7 @@ by using the ``finder`` option::
     $article = $articles->get($id, [
         'finder' => 'translations',
     ]);
-    
+
 The list of options supported by get() are:
 
 -  ``cache`` cache config.
@@ -861,7 +861,7 @@ data, you can use the ``leftJoinWith()`` function::
     $query = $articlesTable->find();
     $query->select(['total_comments' => $query->func()->count('Comments.id')])
         ->leftJoinWith('Comments')
-        ->group(['Articles.id'])
+        ->groupBy(['Articles.id'])
         ->enableAutoFields(true);
 
 The results for the above query will contain the article data and the
@@ -877,7 +877,7 @@ word, per author::
         ->leftJoinWith('Articles.Tags', function ($q) {
             return $q->where(['Tags.name' => 'awesome']);
         })
-        ->group(['Authors.id'])
+        ->groupBy(['Authors.id'])
         ->enableAutoFields(true);
 
 This function will not load any columns from the specified associations into the
