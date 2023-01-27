@@ -53,7 +53,6 @@ Controller
 Core
 ----
 
-- The ``services()`` method was added to ``PluginInterface``.
 - The function ``getTypeName()`` has been dropped. Use PHP's ``get_debug_type()`` instead.
 - The dependency on ``league/container`` was updated to ``4.x``. This will
   require the addition of typehints to your ``ServiceProvider`` implementations.
@@ -68,11 +67,7 @@ Database
 - ``Query`` now accepts only ``\Closure`` parameters instead of ``callable``. Callables can be converted
   to closures using the new first-class array syntax in PHP 8.1.
 - ``Query::execute()`` no longer runs results decorator callbacks. You must use ``Query::all()`` instead.
-- ``getMaxAliasLength()`` and ``getConnectionRetries()`` were added
-  to ``DriverInterface``.
 - ``TableSchemaAwareInterface`` was removed.
-- Supported drivers now automatically add auto-increment only to integer primary keys named "id" instead
-  of all integer primary keys. Setting 'autoIncrement' to false always disables on all supported drivers.
 - ``Driver::quote()`` was removed. Use prepared statements instead.
 - ``Query::orderBy()`` was added to replace ``Query::order()``.
 - ``Query::groupBy()`` was added to replace ``Query::group()``.
@@ -86,12 +81,13 @@ Database
 Datasource
 ----------
 
-- The ``getAccessible()`` method was added to ``EntityInterface``.
+- The ``getAccessible()`` method was added to ``EntityInterface``. Non-ORM
+  implementations will now need to implement this method.
 
 Event
 -----
 
-- Event payloads must be an array. Other object such as ``ArrayAccess`` are no longer cast to array.
+- Event payloads must be an array. Other object such as ``ArrayAccess`` are no longer cast to array and will raise a ``TypeError`` now.
 
 Filesystem
 ----------
@@ -191,12 +187,21 @@ type soundness. In production mode, you can configure PHP to not generate
 code for ``assert()`` yielding improved application performance. See the
 :ref:`symlink-assets` for how to do this.
 
+Core
+----
+
+- The ``services()`` method was added to ``PluginInterface``.
+
 Database
 --------
 
 - ``Query::all()`` was added which runs result decorator callbacks and returns a result set for select queries.
 - ``Query::comment()`` was added to add a SQL comment to the executed query. This makes it easier to debug queries.
 - ``EnumType`` was added to allow mapping between PHP backed enums and a string or integer column.
+- ``getMaxAliasLength()`` and ``getConnectionRetries()`` were added
+  to ``DriverInterface``.
+- Supported drivers now automatically add auto-increment only to integer primary keys named "id" instead
+  of all integer primary keys. Setting 'autoIncrement' to false always disables on all supported drivers.
 
 TestSuite
 ---------
