@@ -130,9 +130,9 @@ ORM
 - ``Table::query()`` has been removed in favor of query-type specific functions.
 - ``Table::updateQuery()``, ``Table::selectQuery()``, ``Table::insertQuery()``, and `
   `Table::deleteQuery()``) were added and return the new type-specific query objects below.
- - ``SelectQuery``, ``InsertQuery``, ``UpdateQuery`` and ``DeleteQuery`` were added
-   which represent only a single type of query and do not allow switching between query types nor
-   calling functions unrelated to the specific query type.
+- ``SelectQuery``, ``InsertQuery``, ``UpdateQuery`` and ``DeleteQuery`` were added
+  which represent only a single type of query and do not allow switching between query types nor
+  calling functions unrelated to the specific query type.
 
 TestSuite
 ---------
@@ -213,3 +213,4 @@ TestSuite
 ---------
 
 - ``IntegrationTestTrait::requestAsJson()`` has been added to set JSON headers for the next request.
+
