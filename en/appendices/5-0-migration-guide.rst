@@ -37,14 +37,14 @@ Cache
 Auth
 -------
 
-- `Auth` has been removed. Use the `cakephp/authentication <https://book.cakephp.org/authentication/2/en/index.html>`_ and
-  `cakephp/authorization <https://book.cakephp.org/authorization/2/en/index.html>`_ plugins instead.
+- `Auth` has been removed. Use the `cakephp/authentication <https://book.cakephp.org/authentication/2/en/index.html>`__ and
+  `cakephp/authorization <https://book.cakephp.org/authorization/2/en/index.html>`__ plugins instead.
 
 Console
 -------
 
 - ``ConsoleIntegrationTestTrait::useCommandRunner()`` was removed since it's no longer needed.
-- ``Shell`` has been removed and should be replaced with `Command <https://book.cakephp.org/5/en/console-commands/commands.html>`_
+- ``Shell`` has been removed and should be replaced with `Command <https://book.cakephp.org/5/en/console-commands/commands.html>`__
 
 Controller
 ----------
@@ -58,7 +58,7 @@ Controller
   ``shutdown`` to ``afterFilter`` to match the controller one. This makes the callbacks more consistent.
 - ``PaginatorComponent`` has been removed and should be replaced by using
   ``Cake\Datasource\Paging\Paginator`` directly
-- ``RequestHandlerComponent`` has been removed. See the `4.4 migration <https://book.cakephp.org/4/en/appendices/4-4-migration-guide.html#requesthandlercomponent>`_ guide for how to upgrade
+- ``RequestHandlerComponent`` has been removed. See the `4.4 migration <https://book.cakephp.org/4/en/appendices/4-4-migration-guide.html#requesthandlercomponent>`__ guide for how to upgrade
 - ``SecurityComponent`` has been removed. Use ``FormProtectionComponent`` for form tampering protection
   or ``HttpsEnforcerMiddleware`` to enforce use of HTTPS for requests instead.
 
@@ -107,7 +107,7 @@ Event
 Error
 -----
 
-- ``ErrorHandler`` and ``ConsoleErrorHandler`` have been removed. See the `4.4 migration <https://book.cakephp.org/4/en/appendices/4-4-migration-guide.html#errorhandler-consoleerrorhandler>`_ guide for how to upgrade
+- ``ErrorHandler`` and ``ConsoleErrorHandler`` have been removed. See the `4.4 migration <https://book.cakephp.org/4/en/appendices/4-4-migration-guide.html#errorhandler-consoleerrorhandler>`__ guide for how to upgrade
 - ``ExceptionRenderer`` has been removed and should be replaced with ``WebExceptionRenderer``
 - ``ErrorLoggerInterface::log()`` has been removed and should be replaced with ``ErrorLoggerInterface::logException()``
 - ``ErrorLoggerInterface::logMessage()`` has been removed and should be replaced with ``ErrorLoggerInterface::logError()``
@@ -141,7 +141,7 @@ Log
 Mailer
 ---
 
-- ``Email`` has been removed. Use `Mailer <https://book.cakephp.org/5/en/core-libraries/email.html>`_ instead.
+- ``Email`` has been removed. Use `Mailer <https://book.cakephp.org/5/en/core-libraries/email.html>`__ instead.
 
 ORM
 ---
