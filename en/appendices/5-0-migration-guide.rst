@@ -133,6 +133,8 @@ ORM
 - ``SelectQuery``, ``InsertQuery``, ``UpdateQuery`` and ``DeleteQuery`` were added
   which represent only a single type of query and do not allow switching between query types nor
   calling functions unrelated to the specific query type.
+- ``Table::_initializeSchema()`` has been removed and should be replaced by calling
+  ``$this->getSchema()`` inside the ``initialize()`` method.
 
 TestSuite
 ---------
