@@ -34,10 +34,17 @@ Cache
 - The ``Wincache`` engine was removed. The wincache extension is not supported
   on PHP 8.
 
+Auth
+-------
+
+- `Auth` has been removed. Use the `cakephp/authentication <https://book.cakephp.org/authentication/2/en/index.html>`_ and
+  `cakephp/authorization <https://book.cakephp.org/authorization/2/en/index.html>`_ plugins instead.
+
 Console
 -------
 
 - ``ConsoleIntegrationTestTrait::useCommandRunner()`` was removed since it's no longer needed.
+- ``Shell`` has been removed and should be replaced with `Command <https://book.cakephp.org/5/en/console-commands/commands.html>`_
 
 Controller
 ----------
@@ -49,6 +56,11 @@ Controller
   change can impact applications that use ``property_exists()`` on components.
 - The components' ``Controller.shutdown`` event callback has been renamed from
   ``shutdown`` to ``afterFilter`` to match the controller one. This makes the callbacks more consistent.
+- ``PaginatorComponent`` has been removed and should be replaced by using
+  ``Cake\Datasource\Paging\Paginator`` directly
+- ``RequestHandlerComponent`` has been removed. See the `4.4 migration <https://book.cakephp.org/4/en/appendices/4-4-migration-guide.html#requesthandlercomponent>`_ guide for how to upgrade
+- ``SecurityComponent`` has been removed. Use ``FormProtectionComponent`` for form tampering protection
+  or ``HttpsEnforcerMiddleware`` to enforce use of HTTPS for requests instead.
 
 Core
 ----
@@ -60,6 +72,7 @@ Core
 - The ``App.uploadedFilesAsObjects`` configuration option has been removed
   alongside of support for PHP file upload shaped arrays throughout the
   framework.
+- ``ClassLoader`` has been removed. Use composer to generate autoload files instead.
 
 Database
 --------
@@ -77,6 +90,8 @@ Database
   CakePHP 4.x.
 - ``SqlDialectTrait`` has been removed and all its functionality has been moved
   into the ``Driver`` class itself.
+- ``CaseExpression`` has been removed and should be replaced with
+  ``QueryExpression::case()`` or ``CaseStatementExpression``
 
 Datasource
 ----------
@@ -88,6 +103,14 @@ Event
 -----
 
 - Event payloads must be an array. Other object such as ``ArrayAccess`` are no longer cast to array and will raise a ``TypeError`` now.
+
+Error
+-----
+
+- ``ErrorHandler`` and ``ConsoleErrorHandler`` have been removed. See the `4.4 migration <https://book.cakephp.org/4/en/appendices/4-4-migration-guide.html#errorhandler-consoleerrorhandler>`_ guide for how to upgrade
+- ``ExceptionRenderer`` has been removed and should be replaced with ``WebExceptionRenderer``
+- ``ErrorLoggerInterface::log()`` has been removed and should be replaced with ``ErrorLoggerInterface::logException()``
+- ``ErrorLoggerInterface::logMessage()`` has been removed and should be replaced with ``ErrorLoggerInterface::logError()``
 
 Filesystem
 ----------
@@ -115,6 +138,11 @@ Log
 - Log engine config now uses ``null`` instead of ``false`` to disable scopes.
   So instead of ``'scopes' => false`` you need to use ``'scopes' => null`` in your log config.
 
+Mailer
+---
+
+- ``Email`` has been removed. Use `Mailer <https://book.cakephp.org/5/en/core-libraries/email.html>`_ instead.
+
 ORM
 ---
 
@@ -135,6 +163,14 @@ ORM
   calling functions unrelated to the specific query type.
 - ``Table::_initializeSchema()`` has been removed and should be replaced by calling
   ``$this->getSchema()`` inside the ``initialize()`` method.
+- ``SaveOptionsBuilder`` has been removed. Use a normal array for options instead.
+
+Routing
+---------
+
+- Static calls to ``connect``, ``prefix``, ``scope`` and ``plugin`` have been removed and
+  should be replaced by calling their non-static method variants via the RouteBuilder.
+- ``RedirectException`` has been removed. Use ``\Cake\Http\Exception\RedirectException`` instead.
 
 TestSuite
 ---------
