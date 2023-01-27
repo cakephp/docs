@@ -168,8 +168,8 @@ ORM
 Routing
 -------
 
-- Static calls to ``connect``, ``prefix``, ``scope`` and ``plugin`` have been removed and
-  should be replaced by calling their non-static method variants via the RouteBuilder.
+- Static methods ``connect()``, ``prefix()``, ``scope()`` and ``plugin()`` of the ``Router`` have been removed and
+  should be replaced by calling their non-static method variants via the ``RouteBuilder`` instance.
 - ``RedirectException`` has been removed. Use ``\Cake\Http\Exception\RedirectException`` instead.
 
 TestSuite
