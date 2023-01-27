@@ -199,7 +199,7 @@ In the example shown below the query is modified to fetch only required fields
 and add a condition. You must ensure that you select the fields you need to
 authenticate a user, such as ``username`` and ``password``::
 
-    public function findAuth(\Cake\ORM\Query $query, array $options)
+    public function findAuth(\Cake\ORM\Query\SelectQuery $query, array $options)
     {
         $query
             ->select(['id', 'username', 'password'])

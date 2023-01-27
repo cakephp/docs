@@ -155,7 +155,7 @@ behavior should now look like::
 
     class SluggableBehavior extends Behavior
     {
-        protected $_defaultConfig = [
+        protected array $_defaultConfig = [
             'field' => 'title',
             'slug' => 'slug',
             'replacement' => '-',

@@ -946,9 +946,8 @@ Working with Result Sets
 
 Once a query is executed with ``all()``, you will get an instance of
 :php:class:`Cake\\ORM\\ResultSet`. This object offers powerful ways to manipulate
-the resulting data from your queries. Like SelectQuery objects, ResultSets are
-a :doc:`Collection </core-libraries/collections>` and you can use any collection
-method on ResultSet objects.
+the resulting data from your queries. ResultSets are a :doc:`Collection </core-libraries/collections>`
+and you can use any collection method on ResultSet objects.
 
 Result set objects will lazily load rows from the underlying prepared statement.
 By default results will be buffered in memory allowing you to iterate a result
@@ -1045,11 +1044,11 @@ a ResultSet::
     // Get the 5th record
     $row = $result->skip(4)->first();
 
-Checking if ResultSet is Empty
+Checking if a ResultSet is Empty
 -----------------------------------------
 
 You can use the ``isEmpty()`` method on a ResultSet object to see if it
-has any rows in it:
+has any rows in it.::
 
     // Check results
     $results = $query->all();

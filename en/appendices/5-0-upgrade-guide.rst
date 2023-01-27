@@ -6,9 +6,6 @@
 
 First, check that your application is running on latest CakePHP 4.x version.
 
-.. note::
-    The upgrade tool only works on applications running on latest CakePHP 4.x. You cannot run the upgrade tool after updating to CakePHP 5.0.
-
 Fix Deprecation Warnings
 ========================
 
@@ -19,6 +16,12 @@ Once your application is running on latest CakePHP 4.x, enable deprecation warni
     ]
 
 Now that you can see all the warnings, make sure these are fixed before proceding with the upgrade.
+
+Some potentially impactful deprecations you should make sure you have addressed
+are:
+
+- ``Table::query()`` was deprecated in 4.5.0. Use ``selectQuery()``,
+  ``updateQuery()``, ``insertQuery()`` and ``deleteQuery()`` instead.
 
 Upgrade to PHP 8.1
 ==================
@@ -32,6 +35,9 @@ If you are not running on **PHP 8.1 or higher**, you will need to upgrade PHP be
 
 Use the Upgrade Tool
 ====================
+
+.. note::
+    The upgrade tool only works on applications running on latest CakePHP 4.x. You cannot run the upgrade tool after updating to CakePHP 5.0.
 
 Because CakePHP 5 leverages union types and ``mixed``, there are many
 backwards incompatible changes concerning method signatures and file renames.

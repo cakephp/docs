@@ -848,11 +848,11 @@ Let's say we already have our Articles Table class defined in
     namespace App\Model\Table;
 
     use Cake\ORM\Table;
-    use Cake\ORM\Query;
+    use Cake\ORM\Query\SelectQuery;
 
     class ArticlesTable extends Table
     {
-        public function findPublished(Query $query, array $options): Query
+        public function findPublished(SelectQuery $query, array $options): SelectQuery
         {
             $query->where([
                 $this->alias() . '.published' => 1
@@ -904,7 +904,7 @@ now looks like this::
         public function testFindPublished(): void
         {
             $query = $this->Articles->find('published')->all();
-            $this->assertInstanceOf('Cake\ORM\Query', $query);
+            $this->assertInstanceOf('Cake\ORM\Query\SelectQuery', $query);
             $result = $query->enableHydration(false)->toArray();
             $expected = [
                 ['id' => 1, 'title' => 'First Article'],

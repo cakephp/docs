@@ -231,7 +231,7 @@ The ``Model.beforeFind`` event is fired before each find operation. By stopping
 the event, and feeding the query with a custom result set, you can bypass the find
 operation entirely::
 
-    public function beforeFind(EventInterface $event, SelectQuery $query, ArrayObject $options, boolean $primary)
+    public function beforeFind(EventInterface $event, SelectQuery $query, ArrayObject $options, $primary)
     {
         if (/* ... */) {
             $event->stopPropagation();

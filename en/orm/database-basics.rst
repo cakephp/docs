@@ -789,22 +789,18 @@ transactional operations.
 Executing Queries
 -----------------
 
-.. php:method:: query($sql)
+.. php:method:: execute(string $sql, array $params = [], array $types = []): \Cake\Database\StatementInterface
 
 Once you've gotten a connection object, you'll probably want to issue some
 queries with it. CakePHP's database abstraction layer provides wrapper features
 on top of PDO and native drivers. These wrappers provide a similar interface to
 PDO. There are a few different ways you can run queries depending on the type of
 query you need to run and what kind of results you need back. The most basic
-method is ``query()`` which allows you to run already completed SQL queries::
+method is ``execute()`` which allows you to run complet SQL queries::
 
-    $statement = $connection->query('UPDATE articles SET published = 1 WHERE id = 2');
+    $statement = $connection->execute('UPDATE articles SET published = 1 WHERE id = 2');
 
-.. php:method:: execute($sql, $params, $types)
-
-The ``query()`` method does not allow for additional parameters. If you need
-additional parameters you should use the ``execute()`` method, which allows for
-placeholders to be used::
+For parameterized queries use the 2nd argument::
 
     $statement = $connection->execute(
         'UPDATE articles SET published = ? WHERE id = ?',
@@ -821,29 +817,19 @@ abstract type names when creating a query::
         ['date', 'integer']
     );
 
-.. php:method:: deleteQuery()
-.. php:method:: insertQuery()
 .. php:method:: selectQuery()
-.. php:method:: updateQuery()
 
 These methods allow you to use rich data types in your applications and properly convert
 them into SQL statements. The last and most flexible way of creating queries is
 to use the :doc:`/orm/query-builder`. This approach allows you to build complex and
-expressive queries without having to use platform specific SQL::
+expressive queries without having to use platform specific SQL. When using the
+query builder, no SQL will be sent to the database server until the ``execute()``
+method is called, or the query is iterated. Iterating a query will first execute
+it and then start iterating over the result set::
 
-    // Prior to 4.5 use $articles->query() instead.
-    $query = $connection->updateQuery('articles')
-        ->set(['published' => true])
-        ->where(['id' => 2]);
-    $statement = $query->execute();
-
-When using the query builder, no SQL will be sent to the database server until
-the ``execute()`` method is called, or the query is iterated. Iterating a query
-will first execute it and then start iterating over the result set::
-
-    // Prior to 4.5 use $articles->query() instead.
-    $query = $connection
-        ->selectQuery('*', 'articles')
+    $query = $connection->selectQuery();
+    $query->select('*')
+        ->from('articles')
         ->where(['published' => true]);
 
     foreach ($query as $row) {
@@ -852,8 +838,36 @@ will first execute it and then start iterating over the result set::
 
 .. note::
 
-    When you have an instance of :php:class:`Cake\\ORM\\Query` you can use
-    ``all()`` to get the result set for SELECT queries.
+    Instead of iterating the ``$query`` you can also call it's ``all()`` method
+    to get the results.
+
+.. php:method:: updateQuery()
+
+This method provides you a builder for ``UPDATE`` queries::
+
+    $query = $connection->updateQuery('articles')
+        ->set(['published' => true])
+        ->where(['id' => 2]);
+    $statement = $query->execute();
+
+.. php:method:: insertQuery()
+
+This method provides you a builder for ``INSERT`` queries::
+
+    $query = $connection->insertQuery();
+    $query->into('articles')
+        ->columns(['title'])
+        ->values(['1st article']);
+    $statement = $query->execute();
+
+.. php:method:: deleteQuery()
+
+This method provides you a builder for ``DELETE`` queries::
+
+    $query = $connection->deleteQuery();
+    $query->delete('articles')
+        ->where(['id' => 2]);
+    $statement = $query->execute();
 
 Using Transactions
 ------------------
@@ -895,79 +909,13 @@ Interacting with Statements
 When using the lower level database API, you will often encounter statement
 objects. These objects allow you to manipulate the underlying prepared statement
 from the driver. After creating and executing a query object, or using
-``execute()`` you will have a ``StatementDecorator`` instance. It wraps the
-underlying basic statement object and provides a few additional features.
-
-Preparing a Statement
----------------------
-
-You can create a statement object using ``execute()``, or ``prepare()``. The
-``execute()`` method returns a statement with the provided values bound to it.
-While ``prepare()`` returns an incomplete statement::
-
-    // Statements from execute will have values bound to them already.
-    $statement = $connection->execute(
-        'SELECT * FROM articles WHERE published = ?',
-        [true]
-    );
-
-    // Statements from prepare will be parameters for placeholders.
-    // You need to bind parameters before attempting to execute it.
-    $statement = $connection->prepare('SELECT * FROM articles WHERE published = ?');
-
-Once you've prepared a statement you can bind additional data and execute it.
-
-.. _database-basics-binding-values:
-
-Binding Values
---------------
-
-Once you've created a prepared statement, you may need to bind additional data.
-You can bind multiple values at once using the ``bind()`` method, or bind
-individual elements using ``bindValue``::
-
-    $statement = $connection->prepare(
-        'SELECT * FROM articles WHERE published = ? AND created > ?'
-    );
-
-    // Bind multiple values
-    $statement->bind(
-        [true, new DateTime('2013-01-01')],
-        ['boolean', 'date']
-    );
-
-    // Bind a single value
-    $statement->bindValue(1, true, 'boolean');
-    $statement->bindValue(2, new DateTime('2013-01-01'), 'date');
-
-When creating statements you can also use named array keys instead of
-positional ones::
-
-    $statement = $connection->prepare(
-        'SELECT * FROM articles WHERE published = :published AND created > :created'
-    );
-
-    // Bind multiple values
-    $statement->bind(
-        ['published' => true, 'created' => new DateTime('2013-01-01')],
-        ['published' => 'boolean', 'created' => 'date']
-    );
-
-    // Bind a single value
-    $statement->bindValue('published', true, 'boolean');
-    $statement->bindValue('created', new DateTime('2013-01-01'), 'date');
-
-.. warning::
-
-    You cannot mix positional and named array keys in the same statement.
+``execute()`` you will have a ``StatementInterface`` instance.
 
 Executing & Fetching Rows
 -------------------------
 
-After preparing a statement and binding data to it, you can execute it and fetch
-rows. Statements should be executed using the ``execute()`` method. Once
-executed, results can be fetched using ``fetch()``, ``fetchAll()`` or iterating
-the statement::
+Once a query is executed using ``execute()``, results can be fetched using
+``fetch()``, ``fetchAll()``::
 
     $statement->execute();
 
@@ -977,22 +925,11 @@ the statement::
     // Read all rows.
     $rows = $statement->fetchAll('assoc');
 
-    // Read rows through iteration.
-    foreach ($statement as $row) {
-        // Do work
-    }
-
-.. note::
-
-    Reading rows through iteration will fetch rows in 'both' mode. This means
-    you will get both the numerically indexed and associatively indexed results.
-
-Getting Row Counts
-------------------
+Getting affected Row Counts
+---------------------------
 
 After executing a statement, you can fetch the number of affected rows::
 
-    $rowCount = count($statement);
     $rowCount = $statement->rowCount();
 
 Checking Error Codes
@@ -1005,23 +942,13 @@ same way as the ones provided by PDO::
     $code = $statement->errorCode();
     $info = $statement->errorInfo();
 
-.. todo::
-    Possibly document CallbackStatement and BufferedStatement
-
 .. _database-query-logging:
 
 Query Logging
 =============
 
 Query logging can be enabled when configuring your connection by setting the
-``log`` option to ``true``. You can also toggle query logging at runtime, using
-``enableQueryLogging``::
-
-    // Turn query logging on.
-    $connection->enableQueryLogging(true);
-
-    // Turn query logging off
-    $connection->enableQueryLogging(false);
+``log`` option to ``true``.
 
 When query logging is enabled, queries will be logged to
 :php:class:`Cake\\Log\\Log` using the 'debug' level, and the 'queriesLog' scope.
@@ -1124,7 +1051,7 @@ the database name::
 You can now use your connection object to execute queries that create/modify
 databases. For example to create a database::
 
-    $connection->query("CREATE DATABASE IF NOT EXISTS my_database");
+    $connection->execute("CREATE DATABASE IF NOT EXISTS my_database");
 
 .. note::
 

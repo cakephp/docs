@@ -1258,7 +1258,6 @@ interface as well::
     // Publish all the unpublished articles.
     function publishAllUnpublished()
     {
-        // Prior to 4.5 use $this->query() instead.
         $this->updateQuery()
             ->set(['published' => true])
             ->where(['published' => false])

@@ -474,7 +474,6 @@ Update the command class to the following::
                 $io->error('You need to be sure.');
                 $this->abort();
             }
-            // Prior to 4.5 use query() instead.
             $this->fetchTable($table)->updateQuery()
                 ->set([
                     'modified' => new DateTime()

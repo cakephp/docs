@@ -240,7 +240,7 @@ method has not been implemented yet, so let's do that. In
     // The $query argument is a query builder instance.
     // The $options array will contain the 'tags' option we passed
     // to find('tagged') in our controller action.
-    public function findTagged(SelectQuery $query, array $options)
+    public function findTagged(SelectQuery $query, array $options): SelectQuery
     {
         $columns = [
             'Articles.id', 'Articles.user_id', 'Articles.title',
