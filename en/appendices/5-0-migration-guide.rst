@@ -56,8 +56,8 @@ Controller
   change can impact applications that use ``property_exists()`` on components.
 - The components' ``Controller.shutdown`` event callback has been renamed from
   ``shutdown`` to ``afterFilter`` to match the controller one. This makes the callbacks more consistent.
-- ``PaginatorComponent`` has been removed and should be replaced by using
-  ``Cake\Datasource\Paging\Paginator`` directly
+- ``PaginatorComponent`` has been removed and should be replaced by calling ``$this->paginate()`` in your controller or
+  using ``Cake\Datasource\Paging\NumericPaginator`` directly
 - ``RequestHandlerComponent`` has been removed. See the `4.4 migration <https://book.cakephp.org/4/en/appendices/4-4-migration-guide.html#requesthandlercomponent>`__ guide for how to upgrade
 - ``SecurityComponent`` has been removed. Use ``FormProtectionComponent`` for form tampering protection
   or ``HttpsEnforcerMiddleware`` to enforce use of HTTPS for requests instead.
