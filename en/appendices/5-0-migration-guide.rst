@@ -35,7 +35,7 @@ Cache
   on PHP 8.
 
 Auth
--------
+----
 
 - `Auth` has been removed. Use the `cakephp/authentication <https://book.cakephp.org/authentication/2/en/index.html>`__ and
   `cakephp/authorization <https://book.cakephp.org/authorization/2/en/index.html>`__ plugins instead.
@@ -166,7 +166,7 @@ ORM
 - ``SaveOptionsBuilder`` has been removed. Use a normal array for options instead.
 
 Routing
----------
+-------
 
 - Static calls to ``connect``, ``prefix``, ``scope`` and ``plugin`` have been removed and
   should be replaced by calling their non-static method variants via the RouteBuilder.
