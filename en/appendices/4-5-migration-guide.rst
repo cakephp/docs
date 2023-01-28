@@ -146,6 +146,13 @@ Http
 - The ``HttpsEnforcerMiddleware`` now supports a ``trustedProxies`` option that
   lets you define which proxies your application trusts.
 
+I18n
+----
+
+- Plugins can now use multiple domain files for translations. You can load
+  reference additional translation domains with `plugin_name.domain`. For
+  example ``__d('DebugKit.errors', 'oh no')``.
+
 TestSuite
 ---------
 
