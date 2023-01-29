@@ -139,7 +139,7 @@ Log
   So instead of ``'scopes' => false`` you need to use ``'scopes' => null`` in your log config.
 
 Mailer
----
+------
 
 - ``Email`` has been removed. Use `Mailer <https://book.cakephp.org/5/en/core-libraries/email.html>`__ instead.
 
