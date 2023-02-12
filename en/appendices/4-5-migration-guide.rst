@@ -128,6 +128,16 @@ Database
 - ``SelectQuery::setConnectionRole()``, ``SelectQuery::useReadRole()``, and ``SelectQuery::useWriteRole()``
   were added to let you switch a query to a specific connection role.
 
+Datasource
+----------
+
+- ``ModelAwareTrait::loadModel()`` is no longer deprecated. This method is used
+  extensively in user-land applications and had no real replacement. Usage of
+  dynamic-properties & ``loadModel()`` will continue to emit deprecation errors
+  though.
+- ``ModelAwareTrait::fetchModel()`` was added. This method works similar to
+  ``loadModel()`` but does not set the model as an attribute.
+
 Error
 -----
 
