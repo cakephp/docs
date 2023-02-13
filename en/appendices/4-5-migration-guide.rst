@@ -172,3 +172,5 @@ View
 
 - ``View::addHelper()`` was added. This method compliments ``addBehavior()`` and
   ``addComponent()``.
+- ``FormHelper`` now supports a ``requiredClass`` template. This template
+  defines the required classname used when generating controls.
