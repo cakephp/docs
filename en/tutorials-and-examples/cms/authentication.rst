@@ -195,7 +195,7 @@ If you visit your site, you'll get an "infinite redirect loop" so let's fix that
     If your application serves from both SSL and non-SSL protocols, then you might have problems
     with sessions being lost, in case your application is on non-SSL protocol. You need to enable
     access by setting session.cookie_secure to false in your config config/app.php or config/app_local.php. 
-    (See :doc:`CakePHP’s defaults on session.cookie_secure <./development/sessions>`)
+    (See :doc:`CakePHP’s defaults on session.cookie_secure </development/sessions>`)
 
 In your ``UsersController``, add the following code::
 
