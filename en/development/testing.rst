@@ -1275,12 +1275,14 @@ and make sure our web service is returning the proper response::
 
     class MarkersControllerTest extends IntegrationTestCase
     {
+        use IntegrationTestTrait;
+    
         public function testGet(): void
         {
             $this->configRequest([
                 'headers' => ['Accept' => 'application/json']
             ]);
-            $result = $this->get('/markers/view/1.json');
+            $this->get('/markers/view/1.json');
 
             // Check that the response was a 200
             $this->assertResponseOk();
