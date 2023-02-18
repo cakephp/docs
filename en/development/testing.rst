@@ -804,7 +804,7 @@ Let's say we already have our Articles Table class defined in
         public function findPublished(Query $query, array $options): Query
         {
             $query->where([
-                $this->alias() . '.published' => 1
+                $this->getAlias() . '.published' => 1
             ]);
             return $query;
         }
@@ -852,7 +852,7 @@ now looks like this::
 
         public function testFindPublished(): void
         {
-            $query = $this->Articles->find('published')->all();
+            $query = $this->Articles->find('published')->select(['id', 'title']);
             $this->assertInstanceOf('Cake\ORM\Query', $query);
             $result = $query->enableHydration(false)->toArray();
             $expected = [
