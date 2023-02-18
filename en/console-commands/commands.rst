@@ -299,6 +299,10 @@ To get started testing your console application, create a test case that uses th
 ``exec()`` that is used to execute your command. You can pass the same string
 you would use in the CLI to this method.
 
+.. note::
+
+    For CakePHP 4.4 onwards the ``Cake\Console\TestSuite\ConsoleIntegrationTestTrait`` namespace should be used.
+
 Let's start with a very simple command, located in
 **src/Command/UpdateTableCommand.php**::
 
