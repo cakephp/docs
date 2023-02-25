@@ -94,6 +94,11 @@ View
 New Features
 ============
 
+Cache
+-----
+
+- ``Cache::write()`` will now throw an exception on error.
+
 Console
 -------
 
