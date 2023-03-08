@@ -308,11 +308,17 @@ The application's ``View`` class is automatically used as a fallback when no
 other view can be selected based on the requests' ``Accept`` header or routing
 extension. If your application needs to perform different logic for different
 response formats you can use ``$this->request->is()`` to build the required
-conditional logic.
+conditional logic. You can also set your controllers' supported view classes
+using the ``addViewClasses()`` method which will merge the provided views with
+those held in the ``viewClasses`` property.
 
 .. note::
     View classes must implement the static ``contentType()`` hook method to
     participate in content-type negotiation.
+
+
+.. versionadded:: 4.5.0
+    ``addViewClasses()`` was added.
 
 
 Content Type Negotiation Fallbacks

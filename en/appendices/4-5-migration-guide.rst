@@ -111,6 +111,8 @@ Controller
 
 - ``ComponentRegistry`` is now automatically added to your application's
   :term:`DI container`.
+- ``Controller::addViewClasses()`` was added. This method lets you build
+  a controller's view classes programatically.
 
 Console
 -------
