@@ -27,6 +27,7 @@ Global
   to match the docblock annotations, but include fixes for incorrect annotations.
 - Type declarations were added to all class properties where possible. These also include some fixes for
   incorrect annotations.
+- The ``SECOND``, ``MINUTE``, ``HOUR``, ``DAY``,  ``WEEK``, ``MONTH``, ``YEAR`` constants were removed.
 
 Cache
 -----

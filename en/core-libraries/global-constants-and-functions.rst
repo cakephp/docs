@@ -223,34 +223,6 @@ Timing Definition Constants
 
     Unix timestamp in microseconds as a float from when the application started.
 
-.. php:const:: SECOND
-
-    Equals 1
-
-.. php:const:: MINUTE
-
-    Equals 60
-
-.. php:const:: HOUR
-
-    Equals 3600
-
-.. php:const:: DAY
-
-    Equals 86400
-
-.. php:const:: WEEK
-
-    Equals 604800
-
-.. php:const:: MONTH
-
-    Equals 2592000
-
-.. php:const:: YEAR
-
-    Equals 31536000
-
 .. meta::
     :title lang=en: Global Constants and Functions
     :keywords lang=en: internationalization and localization,global constants,example config,array php,convenience functions,core libraries,component classes,optional number,global functions,string string,core classes,format strings,unread messages,placeholders,useful functions,arrays,parameters,existence,translations
