@@ -1,4 +1,4 @@
-FROM markstory/cakephp-docs-builder as builder
+FROM ghcr.io/cakephp/docs-builder as builder
 
 COPY . /data/docs
 COPY requirements.txt /tmp/
@@ -10,7 +10,7 @@ RUN make website DEST="/data/website"
 
 # Create a slim nginx image.
 # Final image doesn't need python or latex
-FROM markstory/cakephp-docs-builder:runtime as runtime
+FROM ghcr.io/cakephp/docs-builder:runtime as runtime
 
 ENV LANGS="en es fr ja pt ru tr zh"
 ENV SEARCH_SOURCE="/data/docs/build/html"
