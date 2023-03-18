@@ -722,7 +722,7 @@ Using Association Finders
 -------------------------
 
 By default associations will load records based on the foreign key columns. If
-you want to define addition conditions for associations you can use
+you want to define additional conditions for associations, you can use
 a ``finder``. When an association is loaded the ORM will use your :ref:`custom
 finder <custom-find-methods>` to load, update, or delete associated records.
 Using finders lets you encapsulate your queries and make them more reusable.
