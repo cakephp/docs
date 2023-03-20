@@ -69,6 +69,8 @@ Http
 
 - Calling ``ServerRequest::is()`` with an unknown detector will now raise an
   exception.
+- HTTP Digest authentication in ``Client`` now supports ``SHA-256``,
+  ``SHA-512-256`` and ``-sess`` algorithms.
 
 ORM
 ---
