@@ -88,6 +88,11 @@ Routing
   instead. HTTPs is no longer entirely based on ``ssl``, and this rename aligns
   the CakePHP parameters with the broader web.
 
+Validation
+----------
+
+- ``Validator::isArray()`` is deprecated. Use ``Validator::array()`` instead.
+
 View
 ----
 
