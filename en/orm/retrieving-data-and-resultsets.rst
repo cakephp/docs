@@ -81,7 +81,7 @@ by using the ``finder`` option::
 The list of options supported by get() are:
 
 -  ``cache`` cache config.
--  ``cacheKey`` cache key.
+-  ``key`` cache key.
 -  ``finder`` custom finder function.
 - ``conditions`` provide conditions for the WHERE clause of your query.
 - ``limit`` Set the number of rows you want.
