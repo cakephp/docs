@@ -28,6 +28,9 @@ Global
 - Type declarations were added to all class properties where possible. These also include some fixes for
   incorrect annotations.
 - The ``SECOND``, ``MINUTE``, ``HOUR``, ``DAY``,  ``WEEK``, ``MONTH``, ``YEAR`` constants were removed.
+- Global functions are now opt-in. If your application uses global function
+  aliases be sure to add ``require CAKE . 'functions.php'`` to you application's
+  ``config/bootstrap.php``.
 
 Cache
 -----

@@ -16,7 +16,15 @@ Global Functions
 
 Here are CakePHP's globally available functions. Most of them are just
 convenience wrappers for other CakePHP functionality, such as debugging and
-translating content.
+translating content. By default only namespaced functions are autoloaded,
+however you can optionally load global aliases by adding::
+
+    require CAKE . 'functions.php';
+
+To your application's ``config/bootstrap.php``. Doing this will load global
+aliases for *all* functions listed below.
+
+.. php:namespace:: Cake\I18n
 
 .. php:function:: \_\_(string $string_id, [$formatArgs])
 
@@ -93,11 +101,15 @@ translating content.
     The context is a unique identifier for the translations string that makes it
     unique within the same domain.
 
+.. php:namespace:: Cake\Collection
+
 .. php:function:: collection(mixed $items)
 
     Convenience wrapper for instantiating a new :php:class:`Cake\\Collection\\Collection`
     object, wrapping the passed argument. The ``$items`` parameter takes either
     a ``Traversable`` object or an array.
+
+.. php:namespace:: Cake\Core
 
 .. php:function:: debug(mixed $var, boolean $showHtml = null, $showFrom = true)
 
