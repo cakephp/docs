@@ -87,6 +87,10 @@ Routing
 - The ``_ssl`` option for ``Router::url()`` has been deprecated. Use ``_https``
   instead. HTTPs is no longer entirely based on ``ssl``, and this rename aligns
   the CakePHP parameters with the broader web.
+- ``Router::routes()`` and ``RouteCollection::routes()`` return routes in
+  a different order than previous versions of CakePHP. If your application
+  uses these methods and then accesses specific indexes you will need to update
+  your code.
 
 Validation
 ----------
@@ -97,6 +101,7 @@ View
 ----
 
 - It is recommended to replace ``loadHelper()`` with new ``addHelper()`` method to add helpers in ``View::initialize()``.
+
 
 New Features
 ============
