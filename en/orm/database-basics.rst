@@ -648,7 +648,7 @@ value object and into SQL expressions::
     {
         public function toPHP($value, DriverInterface $d)
         {
-            return null === $value ? null : Point::parse($value);
+            return $value === null ? null : Point::parse($value);
         }
 
         public function marshal($value)
