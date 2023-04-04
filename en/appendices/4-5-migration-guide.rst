@@ -75,7 +75,7 @@ Http
 Log
 ---
 
-- `FileLog` will now create missing directories even when debug mode is false.
+- ``FileLog`` will now create missing directories even when debug mode is false.
 
 ORM
 ---
