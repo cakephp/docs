@@ -72,6 +72,11 @@ Http
 - HTTP Digest authentication in ``Client`` now supports ``SHA-256``,
   ``SHA-512-256`` and ``-sess`` algorithms.
 
+Log
+---
+
+- `FileLog` will now create missing directories even when debug mode is false.
+
 ORM
 ---
 
