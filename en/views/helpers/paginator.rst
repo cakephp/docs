@@ -365,40 +365,47 @@ Supported formats are 'range', 'pages' and custom. Defaults to pages which would
 output like '1 of 10'. In the custom mode the supplied string is parsed and
 tokens are replaced with actual values. The available tokens are:
 
-  -  ``{{page}}`` - the current page displayed.
-  -  ``{{pages}}`` - total number of pages.
-  -  ``{{current}}`` - current number of records being shown.
-  -  ``{{count}}`` - the total number of records in the result set.
-  -  ``{{start}}`` - number of the first record being displayed.
-  -  ``{{end}}`` - number of the last record being displayed.
-  -  ``{{model}}`` - The pluralized human form of the model name.
-     If your model was 'RecipePage', ``{{model}}`` would be 'recipe pages'.
+-  ``{{page}}`` - the current page displayed.
+-  ``{{pages}}`` - total number of pages.
+-  ``{{current}}`` - current number of records being shown.
+-  ``{{count}}`` - the total number of records in the result set.
+-  ``{{start}}`` - number of the first record being displayed.
+-  ``{{end}}`` - number of the last record being displayed.
+-  ``{{model}}`` - The pluralized human form of the model name.
+   If your model was 'RecipePage', ``{{model}}`` would be 'recipe pages'.
 
-  You could also supply only a string to the counter method using the tokens
-  available. For example::
+You could also supply only a string to the counter method using the tokens
+available. For example::
 
-      echo $this->Paginator->counter(
-          'Page {{page}} of {{pages}}, showing {{current}} records out of
-           {{count}} total, starting on record {{start}}, ending on {{end}}'
-      );
+    echo $this->Paginator->counter(
+        'Page {{page}} of {{pages}}, showing {{current}} records out of
+         {{count}} total, starting on record {{start}}, ending on {{end}}'
+    );
 
-  Setting 'format' to range would output like '1 - 3 of 13'::
+Setting 'format' to range would output like '1 - 3 of 13'::
 
-      echo $this->Paginator->counter('range');
-
-* ``model`` The name of the model being paginated, defaults to
-  :php:meth:`PaginatorHelper::defaultModel()`. This is used in
-  conjunction with the custom string on 'format' option.
+    echo $this->Paginator->counter('range');
 
 Generating Pagination URLs
 ==========================
 
-.. php:method:: generateUrl(array $options = [], $model = null, $full = false)
+.. php:method:: generateUrl(array $options = [], ?string $model = null, array $url = [], array $urlOptions = [])
 
 By default returns a full pagination URL string for use in non-standard contexts
 (i.e. JavaScript). ::
 
-    echo $this->Paginator->generateUrl(['?' => ['sort' => 'title']]);
+    // Generates a URL similar to: /articles?sort=title&page=2
+    echo $this->Paginator->generateUrl(['sort' => 'title']);
+
+    // Generates a URL for a different model
+    echo $this->Paginator->generateUrl(['sort' => 'title'], 'Comments');
+
+    // Generates a URL to a different controller.
+    echo $this->Paginator->generateUrl(
+        ['sort' => 'title'],
+        null,
+        ['controller' => 'Comments']
+    );
 
 Creating a Limit Selectbox Control
 ==================================
