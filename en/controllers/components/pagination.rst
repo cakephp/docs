@@ -149,7 +149,7 @@ not do a count query::
 
         // Load the paginator component with the simple paginator strategy.
         $this->loadComponent('Paginator', [
-            'className' => 'Simple',
+            'paginator' => new \Cake\Datasource\SimplePaginator(),
         ]);
     }
 
