@@ -14,7 +14,7 @@ Use composer to install the Authentication Plugin:
 
 .. code-block:: console
 
-    composer require "cakephp/authentication:^2.0"
+    composer require "cakephp/authentication:^2.4"
 
 
 Adding Password Hashing
