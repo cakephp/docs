@@ -115,7 +115,8 @@ Generates a sorting link. Sets querystring parameters for the sort and
 direction. Links will default to sorting by asc. After the first click, links
 generated with ``sort()`` will handle direction switching automatically.  If the
 resultset is sorted 'asc' by the specified key the returned link will sort by
-'desc'.
+'desc'. Uses the ``sort``, ``sortAsc``, ``sortDesc``, ``sortAscLocked`` and
+``sortDescLocked`` templates.
 
 Accepted keys for ``$options``:
 
@@ -191,7 +192,8 @@ Returns a set of numbers for the paged result set. Uses a modulus to
 decide how many numbers to show on each side of the current page  By default
 8 links on either side of the current page will be created if those pages exist.
 Links will not be generated for pages that do not exist. The current page is
-also not a link.
+also not a link. The ``number``, ``current`` and ``ellipsis`` templates will be
+used.
 
 Supported options are:
 
@@ -237,7 +239,8 @@ pages in the paged data set.
     :param string $title: Title for the link.
     :param mixed $options: Options for pagination link.
 
-    Generates a link to the previous page in a set of paged records.
+    Generates a link to the previous page in a set of paged records. Uses
+    the ``prevActive`` and ``prevDisabled`` templates.
 
     ``$options`` supports the following keys:
 
@@ -273,7 +276,8 @@ pages in the paged data set.
 
     This method is identical to :php:meth:`~PaginatorHelper::prev()` with a few exceptions. It
     creates links pointing to the next page instead of the previous one. It also
-    uses ``next`` as the rel attribute value instead of ``prev``
+    uses ``next`` as the rel attribute value instead of ``prev``. Uses the
+    ``nextActive`` and ``nextDisabled`` templates.
 
 .. php:method:: first($first = '<< first', $options = [])
 
@@ -289,7 +293,8 @@ pages in the paged data set.
         echo $this->Paginator->first(3);
 
     The above will create links for the first 3 pages, once you get to the third or
-    greater page. Prior to that nothing will be output.
+    greater page. Prior to that nothing will be output. Uses the ``first``
+    template.
 
     The options parameter accepts the following:
 
@@ -303,7 +308,7 @@ pages in the paged data set.
     method. It has a few differences though. It will not generate any links if you
     are on the last page for a string values of ``$last``. For an integer value of
     ``$last`` no links will be generated once the user is inside the range of last
-    pages.
+    pages. Uses the ``last`` template.
 
 Creating Header Link Tags
 =========================
@@ -328,6 +333,8 @@ Checking the Pagination State
         echo $this->Paginator->current('Comment');
         // Output is 3
 
+    Uses the ``current`` template.
+
 .. php:method:: hasNext(string $model = null)
 
     Returns ``true`` if the given result set is not at the last page.
@@ -351,47 +358,54 @@ Creating a Page Counter
 
 Returns a counter string for the paged result set. Using a provided format
 string and a number of options you can create localized and application
-specific indicators of where a user is in the paged data set.
-
+specific indicators of where a user is in the paged data set. Uses the
+``counterRange``, and ``counterPages`` templates.
 
 Supported formats are 'range', 'pages' and custom. Defaults to pages which would
 output like '1 of 10'. In the custom mode the supplied string is parsed and
 tokens are replaced with actual values. The available tokens are:
 
-  -  ``{{page}}`` - the current page displayed.
-  -  ``{{pages}}`` - total number of pages.
-  -  ``{{current}}`` - current number of records being shown.
-  -  ``{{count}}`` - the total number of records in the result set.
-  -  ``{{start}}`` - number of the first record being displayed.
-  -  ``{{end}}`` - number of the last record being displayed.
-  -  ``{{model}}`` - The pluralized human form of the model name.
-     If your model was 'RecipePage', ``{{model}}`` would be 'recipe pages'.
+-  ``{{page}}`` - the current page displayed.
+-  ``{{pages}}`` - total number of pages.
+-  ``{{current}}`` - current number of records being shown.
+-  ``{{count}}`` - the total number of records in the result set.
+-  ``{{start}}`` - number of the first record being displayed.
+-  ``{{end}}`` - number of the last record being displayed.
+-  ``{{model}}`` - The pluralized human form of the model name.
+   If your model was 'RecipePage', ``{{model}}`` would be 'recipe pages'.
 
-  You could also supply only a string to the counter method using the tokens
-  available. For example::
+You could also supply only a string to the counter method using the tokens
+available. For example::
 
-      echo $this->Paginator->counter(
-          'Page {{page}} of {{pages}}, showing {{current}} records out of
-           {{count}} total, starting on record {{start}}, ending on {{end}}'
-      );
+    echo $this->Paginator->counter(
+        'Page {{page}} of {{pages}}, showing {{current}} records out of
+         {{count}} total, starting on record {{start}}, ending on {{end}}'
+    );
 
-  Setting 'format' to range would output like '1 - 3 of 13'::
+Setting 'format' to range would output like '1 - 3 of 13'::
 
-      echo $this->Paginator->counter('range');
-
-* ``model`` The name of the model being paginated, defaults to
-  :php:meth:`PaginatorHelper::defaultModel()`. This is used in
-  conjunction with the custom string on 'format' option.
+    echo $this->Paginator->counter('range');
 
 Generating Pagination URLs
 ==========================
 
-.. php:method:: generateUrl(array $options = [], $model = null, $full = false)
+.. php:method:: generateUrl(array $options = [], ?string $model = null, array $url = [], array $urlOptions = [])
 
 By default returns a full pagination URL string for use in non-standard contexts
 (i.e. JavaScript). ::
 
-    echo $this->Paginator->generateUrl(['?' => ['sort' => 'title']]);
+    // Generates a URL similar to: /articles?sort=title&page=2
+    echo $this->Paginator->generateUrl(['sort' => 'title']);
+
+    // Generates a URL for a different model
+    echo $this->Paginator->generateUrl(['sort' => 'title'], 'Comments');
+
+    // Generates a URL to a different controller.
+    echo $this->Paginator->generateUrl(
+        ['sort' => 'title'],
+        null,
+        ['controller' => 'Comments']
+    );
 
 Creating a Limit Selectbox Control
 ==================================

@@ -393,7 +393,7 @@ primary key.
 You can enforce ``existsIn`` to pass when nullable parts of your composite foreign key
 are null::
 
-    // Example: A composite primary key within NodesTable is (id, site_id).
+    // Example: A composite primary key within NodesTable is (parent_id, site_id).
     // A Node may reference a parent Node but does not need to. In latter case, parent_id is null.
     // Allow this rule to pass, even if fields that are nullable, like parent_id, are null:
     $rules->add($rules->existsIn(
@@ -721,6 +721,9 @@ come up when running a CLI script that directly sets properties on entities::
         // Add validation rules
         $rules->add(function($entity) {
             $data = $entity->extract($this->getSchema()->columns(), true);
+            if (!$entity->isNew() && !empty($data)) {
+                $data += $entity->extract((array)$this->getPrimaryKey());
+            }
             $validator = $this->getValidator('default');
             $errors = $validator->validate($data, $entity->isNew());
             $entity->setErrors($errors);

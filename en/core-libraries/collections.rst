@@ -162,8 +162,8 @@ helpful when matching HasMany and BelongsToMany association data::
     ];
 
     $numbers = (new Collection($data))->extract('phone_numbers.{*}.number');
-    $numbers->toList();
-    // Returns ['number-1', 'number-2', 'number-3', 'number-4', 'number-5']
+    $result = $numbers->toList();
+    // $result contains ['number-1', 'number-2', 'number-3', 'number-4', 'number-5']
 
 This last example uses ``toList()`` unlike other examples, which is important
 when we're getting results with possibly duplicate keys. By using ``toList()``
@@ -184,8 +184,9 @@ dot notation paths::
         ['id' => 3, 'name' => 'baz', 'parent' => 'a'],
     ];
     $combined = (new Collection($items))->combine('id', 'name');
-
-    // Result will look like this when converted to array
+    $result = $combined->toArray();
+    
+    // $result contains
     [
         1 => 'foo',
         2 => 'bar',
@@ -195,8 +196,9 @@ dot notation paths::
 You can also optionally use a ``groupPath`` to group results based on a path::
 
     $combined = (new Collection($items))->combine('id', 'name', 'parent');
+    $result = $combined->toArray();
 
-    // Result will look like this when converted to array
+    // $result contains
     [
         'a' => [1 => 'foo', 3 => 'baz'],
         'b' => [2 => 'bar']
@@ -211,8 +213,9 @@ instances by the ORM) you may want to group results by date::
         function ($entity) { return $entity; },
         function ($entity) { return $entity->date->toDateString(); }
     );
-
-    // Result will look like this when converted to array
+     $result = $combined->toArray();
+     
+    // $result contains
     [
         'date string like 2015-05-01' => ['entity1->id' => entity1, 'entity2->id' => entity2, ..., 'entityN->id' => entityN]
         'date string like 2015-06-01' => ['entity1->id' => entity1, 'entity2->id' => entity2, ..., 'entityN->id' => entityN]
@@ -312,8 +315,10 @@ chunking associative arrays::
         'c' => 3,
         'd' => [4, 5]
     ]);
-    $chunked = $collection->chunkWithKeys(2)->toList();
-    // Creates
+    $chunked = $collection->chunkWithKeys(2);
+    $result = $chunked->toList();
+    
+    // $result contains
     [
         ['a' => 1, 'b' => 2],
         ['c' => 3, 'd' => [4, 5]]
@@ -473,7 +478,7 @@ for::
        ['invoice' => ['total' => 200]],
     ];
 
-    // Average: 150
+    // $average contains 150
     $average = (new Collection($items))->avg('invoice.total');
 
 .. php:method:: median($path = null)
@@ -489,7 +494,7 @@ path, or function to extract values to generate the median for::
       ['invoice' => ['total' => 200]],
     ];
 
-    // Median: 333
+    // $median contains 333
     $median = (new Collection($items))->median('invoice.total');
 
 
@@ -509,8 +514,9 @@ share the same value for a property::
     ];
     $collection = new Collection($students);
     $studentsByGrade = $collection->groupBy('grade');
+    $result = $studentsByGrade->toArray();
 
-    // Result will look like this when converted to array:
+    // $result contains
     [
       10 => [
         ['name' => 'Andrew', 'grade' => 10],
@@ -584,8 +590,10 @@ You can also zip multiple collections at once::
     $salaries = [1000, 1500, 2000, 2300];
     $increments = [0, 500, 500, 300];
 
-    $rows = $years->zip($salaries, $increments)->toList();
-    // Returns:
+    $rows = $years->zip($salaries, $increments);
+    $result = $rows->toList();
+    
+    // $result contains
     [
         [2013, 1000, 0],
         [2014, 1500, 500],
@@ -600,16 +608,16 @@ multidimensional arrays::
         2014 => ['jan' => 100, 'feb' => 200],
         2015 => ['jan' => 300, 'feb' => 500],
         2016 => ['jan' => 400, 'feb' => 600],
-    ]
+    ];
 
     // Getting jan and feb data together
 
     $firstYear = new Collection(array_shift($data));
-    $firstYear->zip($data[0], $data[1])->toList();
+    $result = $firstYear->zip($data[0], $data[1])->toList();
 
     // Or $firstYear->zip(...$data) in PHP >= 5.6
 
-    // Returns
+    // $result contains
     [
         [100, 300, 400],
         [200, 500, 600]
@@ -695,9 +703,10 @@ property representing the identifier for the parent item::
         ['id' => 5, 'parent_id' => 6, 'name' => 'Clown Fish'],
         ['id' => 6, 'parent_id' => null, 'name' => 'Fish'],
     ]);
-
-    $collection->nest('id', 'parent_id')->toList();
-    // Returns
+    $nested = $collection->nest('id', 'parent_id');
+    $result = $nested->toList();
+    
+    // $result contains
     [
         [
             'id' => 1,
@@ -734,9 +743,9 @@ collection.
 Taking the input the nested collection built in the previous example, we can
 flatten it::
 
-    $nested->listNested()->toList();
+    $result = $nested->listNested()->toList();
 
-    // Returns
+    // $result contains
     [
         ['id' => 1, 'parent_id' => null, 'name' => 'Birds', 'children' => [...]],
         ['id' => 2, 'parent_id' => 1, 'name' => 'Land Birds'],
@@ -749,25 +758,30 @@ flatten it::
 By default, the tree is traversed from the root to the leaves. You can also
 instruct it to only return the leaf elements in the tree::
 
-    $nested->listNested('leaves')->toList();
+    $result = $nested->listNested('leaves')->toList();
 
-    // Returns
+    // $result contains
     [
-        ['id' => 3, 'parent_id' => 1, 'name' => 'Eagle'],
-        ['id' => 4, 'parent_id' => 1, 'name' => 'Seagull'],
-        ['id' => 5, 'parent_id' => 6, 'name' => 'Clown Fish']
+        ['id' => 2, 'parent_id' => 1, 'name' => 'Land Birds', 'children' => [], ],
+        ['id' => 3, 'parent_id' => 1, 'name' => 'Eagle', 'children' => [], ],
+        ['id' => 4, 'parent_id' => 1, 'name' => 'Seagull', 'children' => [], ],
+        ['id' => 5, 'parent_id' => 6, 'name' => 'Clown Fish', 'children' => [], ],
     ]
+
 
 Once you have converted a tree into a nested list, you can use the ``printer()``
 method to configure how the list output should be formatted::
 
-    $nested->listNested()->printer('name', 'id', '--')->toArray();
+    $result = $nested->listNested()->printer('name', 'id', '--')->toArray();
 
-    // Returns
+    // $result contains
     [
-        3 => 'Eagle',
-        4 => 'Seagull',
-        5 -> '--Clown Fish',
+        1 => 'Birds',
+        2 => '--Land Birds',
+        3 => '--Eagle',
+        4 => '--Seagull',
+        6 => 'Fish',
+        5 => '--Clown Fish',
     ]
 
 The ``printer()`` method also lets you use a callback to generate the keys and
@@ -825,21 +839,22 @@ position, use the ``shuffle``::
 When you transpose a collection, you get a new collection containing a row made
 of the each of the original columns::
 
-     $items = [
+    $items = [
         ['Products', '2012', '2013', '2014'],
         ['Product A', '200', '100', '50'],
         ['Product B', '300', '200', '100'],
         ['Product C', '400', '300', '200'],
-     ]
-     $transpose = (new Collection($items))->transpose()->toList();
+    ];
+    $transpose = (new Collection($items))->transpose();
+    $result = $transpose->toList();
 
-     // Returns
-     [
-         ['Products', 'Product A', 'Product B', 'Product C'],
-         ['2012', '200', '300', '400'],
-         ['2013', '100', '200', '300'],
-         ['2014', '50', '100', '200'],
-     ]
+    // $result contains
+    [
+        ['Products', 'Product A', 'Product B', 'Product C'],
+        ['2012', '200', '300', '400'],
+        ['2013', '100', '200', '300'],
+        ['2014', '50', '100', '200'],
+    ]
 
 Withdrawing Elements
 --------------------
@@ -980,9 +995,9 @@ another collection::
     ];
 
     $merged = (new Collection($users))->insert('skills', $languages);
+    $result = $merged->toArray();
 
-When converted to an array, the ``$merged`` collection will look like this::
-
+    // $result contains
     [
         ['username' => 'mark', 'skills' => ['PHP', 'Python', 'Ruby']],
         ['username' => 'juan', 'skills' => ['Bash', 'PHP', 'Javascript']],
@@ -998,7 +1013,7 @@ the first element of the second collection is merged into the first
 element of the first collection.
 
 If there are not enough elements in the second collection to insert into the
-first one, then the target property will be filled with ``null`` values::
+first one, then the target property will not be present::
 
     $languages = [
         ['PHP', 'Python', 'Ruby'],
@@ -1006,12 +1021,13 @@ first one, then the target property will be filled with ``null`` values::
     ];
 
     $merged = (new Collection($users))->insert('skills', $languages);
+    $result = $merged->toArray();
 
-    // Will yield
+    // $result contains
     [
         ['username' => 'mark', 'skills' => ['PHP', 'Python', 'Ruby']],
         ['username' => 'juan', 'skills' => ['Bash', 'PHP', 'Javascript']],
-        ['username' => 'jose', 'skills' => null]
+        ['username' => 'jose']
     ];
 
 The ``insert()`` method can operate array elements or objects implementing the

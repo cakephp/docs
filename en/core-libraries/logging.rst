@@ -12,7 +12,7 @@ application over time. What search terms are being used? What sorts
 of errors are my users being shown? How often is a particular query
 being executed?
 
-Logging data in CakePHP is done with the ``log()`` function is provided by the
+Logging data in CakePHP is done with the ``log()`` function. It is provided by the
 ``LogTrait``, which is the common ancestor for many CakePHP classes. If the
 context is a CakePHP class (Controller, Component, View,...), you can log your
 data.  You can also use ``Log::write()`` directly.  See :ref:`writing-to-logs`.
@@ -54,7 +54,7 @@ configured using :php:class:`Cake\\Log\\Log`. An example would be::
         'file' => 'error',
     ]);
 
-The above creates two loggers.  One named ``debug`` the other named ``error``.
+The above creates three loggers, named ``info``, ``debug`` and ``error``.
 Each is configured to handle different levels of messages. They also store their
 log messages in separate files, so we can separate debug/notice/info logs
 from more serious errors. See the section on :ref:`logging-levels` for more

@@ -865,7 +865,7 @@ Let's say we already have our Articles Table class defined in
         public function findPublished(Query $query, array $options): Query
         {
             $query->where([
-                $this->alias() . '.published' => 1
+                $this->getAlias() . '.published' => 1
             ]);
             return $query;
         }
@@ -913,7 +913,7 @@ now looks like this::
 
         public function testFindPublished(): void
         {
-            $query = $this->Articles->find('published')->all();
+            $query = $this->Articles->find('published')->select(['id', 'title']);
             $this->assertInstanceOf('Cake\ORM\Query', $query);
             $result = $query->enableHydration(false)->toArray();
             $expected = [
@@ -1336,12 +1336,14 @@ and make sure our web service is returning the proper response::
 
     class MarkersControllerTest extends IntegrationTestCase
     {
+        use IntegrationTestTrait;
+    
         public function testGet(): void
         {
             $this->configRequest([
                 'headers' => ['Accept' => 'application/json']
             ]);
-            $result = $this->get('/markers/view/1.json');
+            $this->get('/markers/view/1.json');
 
             // Check that the response was a 200
             $this->assertResponseOk();

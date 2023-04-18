@@ -158,6 +158,8 @@ FileEngine uses the following engine specific options:
 * ``mask`` The mask used for created files
 * ``path`` Path to where cachefiles should be saved. Defaults to system's temp dir.
 
+.. _caching-redisengine:
+
 RedisEngine Options
 -------------------
 

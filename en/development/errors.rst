@@ -35,7 +35,7 @@ options are supported:
   the memory limit by when a fatal error is encountered. This allows breathing
   room to complete logging or error handling.
 * ``logger`` (prior to 4.4.0 use ``errorLogger``) -
-  ``Cake\Error\ErrorLoggerInterface`` - The class responsible for logging 
+  ``Cake\Error\ErrorLoggerInterface`` - The class responsible for logging
   errors and unhandled exceptions. Defaults to ``Cake\Error\ErrorLogger``.
 * ``errorRenderer`` - ``Cake\Error\ErrorRendererInterface`` - The class responsible
   for rendering errors. Default is chosen based on PHP SAPI.
@@ -161,7 +161,7 @@ error templates will have the following variables available:
 * ``url`` The request URL.
 * ``error`` The exception object.
 
-In debug mode if your error extends ``Cake\Core\Exception\Exception`` the
+In debug mode if your error extends ``Cake\Core\Exception\CakeException`` the
 data returned by ``getAttributes()`` will be exposed as view variables as well.
 
 .. note::
@@ -331,8 +331,8 @@ logger::
          * @inheritDoc
          */
         public function logError(
-            PhpError $error, 
-            ?ServerRequestInterface $request, 
+            PhpError $error,
+            ?ServerRequestInterface $request,
             bool $includeTrace = false
         ): void {
             // Log PHP Errors
@@ -342,7 +342,7 @@ logger::
          * @inheritDoc
          */
         public function logException(
-            ?ServerRequestInterface $request, 
+            ?ServerRequestInterface $request,
             bool $includeTrace = false
         ): void {
             // Log exceptions.
@@ -425,7 +425,7 @@ exceptions <https://php.net/manual/en/spl.exceptions.php>`_, ``Exception``
 itself, or :php:exc:`Cake\\Core\\Exception\\Exception`.
 If your application contained the following exception::
 
-    use Cake\Core\Exception\Exception;
+    use Cake\Core\Exception\CakeException;
 
     class MissingWidgetException extends Exception
     {
@@ -438,12 +438,12 @@ error would be treated as a 500 error and use the **error500** template.
 If your exceptions have a code between ``400`` and ``506`` the exception code
 will be used as the HTTP response code.
 
-The constructor for :php:exc:`Cake\\Core\\Exception\\Exception` allows you to
+The constructor for :php:exc:`Cake\\Core\\Exception\\CakeException` allows you to
 pass in additional data. This additional data is interpolated into the the
 ``_messageTemplate``. This allows you to create data rich exceptions, that
 provide more context around your errors::
 
-    use Cake\Core\Exception\Exception;
+    use Cake\Core\Exception\CakeException;
 
     class MissingWidgetException extends Exception
     {
@@ -459,6 +459,11 @@ provide more context around your errors::
 When rendered, this your view template would have a ``$widget`` variable set. If
 you cast the exception as a string or use its ``getMessage()`` method you will
 get ``Seems that Pointy is missing.``.
+
+.. note::
+
+    Prior to CakePHP 4.2.0 use class ``Cake\Core\Exception\Exception`` instead
+    of ``Cake\Core\Exception\CakeException``
 
 Logging Exceptions
 ------------------
