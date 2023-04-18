@@ -369,7 +369,7 @@ de estado de una respuesta y la devuelve. Deberías devolver la respuesta creada
 por ``redirect()`` para que CakePHP envíe la redirección en vez de completar
 la acción del controlador y renderizar la vista.
 
-Puedes redigir usando los valores :term:`routing array`::
+Puedes redigir usando los valores de un array ordenado::
 
     return $this->redirect([
         'controller' => 'Orders',
@@ -398,9 +398,6 @@ Usando el segundo parámetro puede definir un código de estatus para tu redirec
 
     // Haz un 303 (Ver otro)
     return $this->redirect('/order/confirm', 303);
-
-Mira la sección :ref:`redirect-component-events` para saber como redirigir fuera
-del ciclo de vida del manejador.
 
 Reenviando a un acción en el mismo controlador
 ----------------------------------------------
@@ -441,8 +438,6 @@ Paginación de un modelo
 
 Este método se utiliza para paginar los resultados obtenidos por tus modelos.
 Puedes especificar tamaño de páginas, condiciones de búsqueda del modelo y más.
-Ver la sección :doc:`pagination <controllers/pagination>` para más detalle de como
-usar ``paginate()``.
 
 El atributo ``$paginate`` te da una manera de personalizar cómo ``paginate()`` 
 se comporta::
@@ -504,7 +499,7 @@ eventos relacionados si los métodos son implementados por tus controladores.
         El método beforeFilter() será llamado por acciones faltantes.
     
     Devolver una respuesta del método ``beforeFilter`` no evitará que otros oyentes
-    del mismo evento sean llamados. Debes explícitamente :ref:`parar el evento <stopping-events>`.
+    del mismo evento sean llamados. Debes explícitamente parar el evento.
 
 .. php:method:: beforeRender(EventInterface $event)
 
