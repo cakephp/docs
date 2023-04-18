@@ -1,5 +1,5 @@
 Controladores
-###########
+#############
 
 .. php:namespace:: Cake\Controller
 
@@ -14,8 +14,7 @@ a los modelos correctos y se muestre la respuesta o vista correcta.
 Los controladores se pueden
 considerar como una capa intermedia entre el Modelo y la Vista. Quieres mantener
 tus controladores delgados, y tus modelos gruesos. 
-Esto te ayudará a reutilizar tu código
-y más fácil de probar.
+Esto te ayudará a reutilizar tu código y lo hará mas fácil de probar.
 
 Comúnmente, un controlador se usa para administrar la lógica en torno 
 a un solo modelo. Por
@@ -42,7 +41,7 @@ respuestas.
 
 .. _app-controller:
 
-The App Controller
+El App Controller
 ==================
 
 Como se indicó en la introducción, la clase ``AppController`` es clase padre de 
@@ -76,7 +75,7 @@ que es llamado al final del constructor de un controlador para este tipo de uso:
     {
         public function initialize(): void
         {
-            // Always enable the CSRF component.
+            // Siempre habilita el componente CSRF.
             $this->loadComponent('Csrf');
         }
     }
@@ -112,17 +111,17 @@ RecipesController podría contener las acciones ``view()``, ``share()``, y
     {
         public function view($id)
         {
-            // Action logic goes here.
+            // La lógica de la acción va aquí.
         }
 
         public function share($customerId, $recipeId)
         {
-            // Action logic goes here.
+            // La lógica de la acción va aquí.
         }
 
         public function search($query)
         {
-            // Action logic goes here.
+            // La lógica de la acción va aquí.
         }
     }
 
@@ -149,7 +148,7 @@ Interactuando con vistas
 
 Los controladores interactúan con las vistas de muchas maneras. Primero, los
 controladores son capaces de pasar información a las vistas, usando ``Controller::set()``.
-También puedes decidir que clase de vista usar, y que archivo de vista debería 
+También puedes decidir qué clase de vista usar, y qué archivo de vista debería 
 ser renderizado desde el controlador.
 
 .. _setting-view_variables:
@@ -159,7 +158,7 @@ Configuración de variables de vista
 
 .. php:method:: set(string $var, mixed $value)
 
-EL método ``Controller::set()`` es la manera principal de mandar información 
+El método ``Controller::set()`` es la manera principal de mandar información 
 desde el controlador a la vista. Una vez que hayas utilizado ``Controller::set()``,
 la variable puede ser accedida en tu vista::
 
@@ -182,7 +181,7 @@ información a la vista::
         'base_price' => 23.95
     ];
 
-    // Hace $color, $type, and $base_price
+    // Hace $color, $type, y $base_price
     // disponible para la vista:
 
     $this->set($data);
@@ -195,7 +194,7 @@ Configuración de las opciones de la vista
 -----------------------------------------
 
 Si deseas personalizar la clase vista, las rutas de diseño/plantillas, ayudantes
-o el tema que se usarán para renderiza la vista, puede usar el método ``viewBuilder()``
+o el tema que se usarán para renderizar la vista, puede usar el método ``viewBuilder()``
 para obtener un constructor. Este constructor se puede utilizar para definir
 propiedades de la vista antes de crearlas::
 
@@ -251,7 +250,7 @@ El segundo parámetro ``$layout`` de ``Controller::render()`` te permita especif
 la estructura con la que la vista es renderizada.
 
 Renderizando una plantilla específica
--------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 En tu controlador, puede que quieras renderizar una vista diferente a la que es
 convencional. Puedes hacer esto llamando a ``Controller::render()`` directamente.
@@ -294,9 +293,9 @@ Negociación del tipo de contenido
 .. php:method:: viewClasses()
 
 Los controladores pueden definir una lista de clases de vistas que soportan. 
-Después de que la acción del controlador este completa CakePHP usará la lista de 
+Después de que la acción del controlador este completa, CakePHP usará la lista de 
 vista para realizar negociación del tipo de contenido. Esto permite a tu aplicación
-rehusar la misma acción del controlador para renderizar una vista HTMl o 
+rehusar la misma acción del controlador para renderizar una vista HTML o 
 renderizar una respuesta JSON o XML. Para definir la lista de clases de vista que
 soporta un controlador se utiliza el método ``viewClasses()``::
 
@@ -370,7 +369,7 @@ de estado de una respuesta y la devuelve. Deberías devolver la respuesta creada
 por ``redirect()`` para que CakePHP envíe la redirección en vez de completar
 la acción del controlador y renderizar la vista.
 
-Puedes rerigir usando los valores :term:`routing array`::
+Puedes redigir usando los valores :term:`routing array`::
 
     return $this->redirect([
         'controller' => 'Orders',
@@ -404,16 +403,16 @@ Mira la sección :ref:`redirect-component-events` para saber como redirigir fuer
 del ciclo de vida del manejador.
 
 Reenviando a un acción en el mismo controlador
-==============================================
+----------------------------------------------
 
 .. php:method:: setAction($action, $args...)
 
 Si necesitas reenviar la acción actual a una acción diferente en el *mismo* controlador,
 puedes usar ``Controller::setAction()`` para actualizar el objeto de la solicitud,
-modifica la plantilla de vista que será renderizada y reendía la ejecución a la
+modifica la plantilla de vista que será renderizada y reenvía la ejecución a la
 nombrada acción::
 
-    // Desde una acción de elimincación, puedes renderizar a lista de página
+    // Desde una acción de eliminación, puedes renderizar a lista de página
     // actualizada.
     $this->setAction('index');
 
@@ -474,8 +473,8 @@ que deseas cargar, y cualquier dato de configuración para ellos::
 
 .. _controller-life-cycle:
 
-Devolución del ciclo de vida de la petición
-===========================================
+Callbacks del ciclo de vida de la petición
+=======================================================
 
 Los controladores de CakePHP activan varios eventos/callbacks que puedes usar
 para insertar lógica alrededor del ciclo de vida de la solicitud.
@@ -489,13 +488,14 @@ Lista de eventos
 * ``Controller.beforeRender``
 * ``Controller.shutdown``
 
-Métodos de devolución de llamada del controlador
+Métodos de callback del controlador
 ================================================
 
-Por defecto, los siguientes métodos de devolución de llamada están conectados a 
+Por defecto, los siguientes métodos de callback están conectados a 
 eventos relacionados si los métodos son implementados por tus controladores.
 
 .. php:method:: beforeFilter(EventInterface $event)
+
     Llamado durante el evento ``Controller.initialize`` que ocurre antes de cada
     acción en el controlador. Es un lugar útil para comprobar si hay una sesión 
     activa o inspeccionar los permisos del usuario.
@@ -504,13 +504,13 @@ eventos relacionados si los métodos son implementados por tus controladores.
         El método beforeFilter() será llamado por acciones faltantes.
     
     Devolver una respuesta del método ``beforeFilter`` no evitará que otros oyentes
-    del mismo evento sean llamados. Debes explícitamente :ref:`stop the event <stopping-events>`.
+    del mismo evento sean llamados. Debes explícitamente :ref:`parar el evento <stopping-events>`.
 
 .. php:method:: beforeRender(EventInterface $event)
 
     Llamado durante el evento ``Controller.beforeRender`` que ocurre después 
     de la lógica de acción del controlador, pero antes de que la vista sea renderizada.
-    Esta devolución de llamada no se usa con frecuencia, pero puede ser necesaria
+    Este callback no se usa con frecuencia, pero puede ser necesaria
     si estas llamando :php:meth:`~Cake\\Controller\\Controller::render()` de forma
     manual antes del final de una acción dada.
 
@@ -518,14 +518,14 @@ eventos relacionados si los métodos son implementados por tus controladores.
 
     Llamado durante el evento ``Controller.shutdown`` que se desencadena después
     de cada acción del controlador, y después de que se complete el renderizado.
-    ESte es el último método del controlador para ejecutar.
+    Este es el último método del controlador para ejecutar.
 
 Además de las devoluciones de llamada del ciclo de vida del controlador, 
 :doc:`/controllers/components` también proporciona un conjunto similar de devoluciones
 de llamada.
 
-Recuerda llamar a las devoluciones de llamada de ``AppController`` dentro de las
-devoluciones de llamada del controlador hijo para mejores resultados::
+Recuerda llamar a los callbacks de ``AppController`` dentro de los callbacks
+del controlador hijo para mejores resultados::
 
     //use Cake\Event\EventInterface;
     public function beforeFilter(EventInterface $event)
