@@ -1,4 +1,4 @@
-Controllers
+Controladores
 ###########
 
 .. php:namespace:: Cake\Controller
@@ -507,6 +507,64 @@ eventos relacionados si los métodos son implementados por tus controladores.
     del mismo evento sean llamados. Debes explícitamente :ref:`stop the event <stopping-events>`.
 
 .. php:method:: beforeRender(EventInterface $event)
+
+    Llamado durante el evento ``Controller.beforeRender`` que ocurre después 
+    de la lógica de acción del controlador, pero antes de que la vista sea renderizada.
+    Esta devolución de llamada no se usa con frecuencia, pero puede ser necesaria
+    si estas llamando :php:meth:`~Cake\\Controller\\Controller::render()` de forma
+    manual antes del final de una acción dada.
+
+.. php:method:: afterFilter(EventInterface $event)
+
+    Llamado durante el evento ``Controller.shutdown`` que se desencadena después
+    de cada acción del controlador, y después de que se complete el renderizado.
+    ESte es el último método del controlador para ejecutar.
+
+Además de las devoluciones de llamada del ciclo de vida del controlador, 
+:doc:`/controllers/components` también proporciona un conjunto similar de devoluciones
+de llamada.
+
+Recuerda llamar a las devoluciones de llamada de ``AppController`` dentro de las
+devoluciones de llamada del controlador hijo para mejores resultados::
+
+    //use Cake\Event\EventInterface;
+    public function beforeFilter(EventInterface $event)
+    {
+        parent::beforeFilter($event);
+    }
+
+.. _controller-middleware:
+
+Middleware del controlador
+==========================
+
+.. php:method:: middleware($middleware, array $options = [])
+
+:doc:`Middleware </controllers/middleware>` puede ser definido globalmente, en 
+un ámbito de enrutamiento o dentro de un controlador. Para definir el middleware
+para un controlador en específico usa el método  ``middleware()`` de tu método 
+``initialize()`` del controlador::
+
+    public function initialize(): void
+    {
+        parent::initialize();
+
+        $this->middleware(function ($request, $handler) {
+            // Haz la lógica del middleware.
+
+            // Verifica que devuelves una respuesta o llamas a handle()
+            return $handler->handle($request);
+        });
+    }
+
+El middleware definido por un controlador será llamado **antes** ``beforeFilter()``
+y se llamarán a los métodos de acción.
+
+.. versionadded:: 4.3.0
+    ``Controller::middleware()`` fue agregado.
+
+Más sobre controladores
+===================
 
 .. toctree::
     :maxdepth: 1
