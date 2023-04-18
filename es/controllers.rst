@@ -564,7 +564,7 @@ y se llamarán a los métodos de acción.
     ``Controller::middleware()`` fue agregado.
 
 Más sobre controladores
-===================
+=======================
 
 .. toctree::
     :maxdepth: 1
