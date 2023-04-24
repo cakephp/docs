@@ -161,6 +161,9 @@ Datasource
   though.
 - ``ModelAwareTrait::fetchModel()`` was added. This method works similar to
   ``loadModel()`` but does not set the model as an attribute.
+- ``NumericPaginator`` no longer applies all pagination options as query
+  options. Instead pagination specific options will be unset from the options
+  data that is passed to ORM queries.
 
 Error
 -----
