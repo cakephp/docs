@@ -32,17 +32,17 @@ Global
   aliases be sure to add ``require CAKE . 'functions.php'`` to you application's
   ``config/bootstrap.php``.
 
-Cache
------
-
-- The ``Wincache`` engine was removed. The wincache extension is not supported
-  on PHP 8.
-
 Auth
 ----
 
 - `Auth` has been removed. Use the `cakephp/authentication <https://book.cakephp.org/authentication/2/en/index.html>`__ and
   `cakephp/authorization <https://book.cakephp.org/authorization/2/en/index.html>`__ plugins instead.
+
+Cache
+-----
+
+- The ``Wincache`` engine was removed. The wincache extension is not supported
+  on PHP 8.
 
 Console
 -------
@@ -81,6 +81,11 @@ Core
 Database
 --------
 
+- The ``DateTimeType`` and ``DateType`` now always return immutable objects.
+  Additionally the interface for ``Date`` objects reflects the ``ChronosDate``
+  interface which lacks all of the time related methods that were present in
+  CakePHP 4.x.
+- ``DateType::setLocaleFormat()`` no longer accepts an array.
 - ``Query`` now accepts only ``\Closure`` parameters instead of ``callable``. Callables can be converted
   to closures using the new first-class array syntax in PHP 8.1.
 - ``Query::execute()`` no longer runs results decorator callbacks. You must use ``Query::all()`` instead.
@@ -88,10 +93,6 @@ Database
 - ``Driver::quote()`` was removed. Use prepared statements instead.
 - ``Query::orderBy()`` was added to replace ``Query::order()``.
 - ``Query::groupBy()`` was added to replace ``Query::group()``.
-- The ``DateTimeType`` and ``DateType`` now always return immutable objects.
-  Additionally the interface for ``Date`` objects reflects the ``ChronosDate``
-  interface which lacks all of the time related methods that were present in
-  CakePHP 4.x.
 - ``SqlDialectTrait`` has been removed and all its functionality has been moved
   into the ``Driver`` class itself.
 - ``CaseExpression`` has been removed and should be replaced with
@@ -131,7 +132,11 @@ Http
 I18n
 ----
 
-- `Time` was renamed to `DateTime` to allow for future time-only types.
+- ``Time`` was renamed to `DateTime` to allow for future time-only types.
+- ``Date::parseDateTime()`` was removed.
+- ``Date::parseTime()`` was removed.
+- ``Date::setToStringFormat()`` and ``Date::setJsonEncodeFormat()`` no longer accept an array.
+- ``Date::i18nFormat()`` and ``Date::nice()`` no longer accept a timezone parameter.
 - Translation files for plugins with vendor prefixed names (``FooBar/Awesome``) will now have that
   prefix in the file name, e.g. ``foo_bar_awesome.po`` to avoid collision with a ``awesome.po`` file
   from a corresponding plugin (``Awesome``).
