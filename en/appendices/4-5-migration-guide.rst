@@ -182,6 +182,8 @@ Http
 
 - The ``HttpsEnforcerMiddleware`` now supports a ``trustedProxies`` option that
   lets you define which proxies your application trusts.
+- ``MiddlewareQueue`` can now resolve services from the DI container when
+  creating middleware based on classnames.
 
 I18n
 ----

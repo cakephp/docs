@@ -10,9 +10,12 @@ You can use the service container to define 'application services'. These
 classes can use models and interact with other objects like loggers and mailers
 to build re-usable workflows and business logic for your application.
 
-CakePHP will use the :term:`DI container` when calling actions on your controllers
-and invoking console commands. You can also have dependencies injected into
-controller constructors.
+CakePHP will use the :term:`DI container` in the following situations:
+
+* Constructing controllers.
+* Calling actions on your controllers.
+* Constructing Console Commands.
+* Constructing Middleware by classname.
 
 A short example would be::
 
