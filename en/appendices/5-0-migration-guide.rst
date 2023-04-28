@@ -165,8 +165,8 @@ ORM
 - ``allowMultipleNulls`` option for ``isUnique`` rule now default to true matching
   the original 3.x behavior.
 - ``Table::query()`` has been removed in favor of query-type specific functions.
-- ``Table::updateQuery()``, ``Table::selectQuery()``, ``Table::insertQuery()``, and `
-  `Table::deleteQuery()``) were added and return the new type-specific query objects below.
+- ``Table::updateQuery()``, ``Table::selectQuery()``, ``Table::insertQuery()``, and
+  ``Table::deleteQuery()``) were added and return the new type-specific query objects below.
 - ``SelectQuery``, ``InsertQuery``, ``UpdateQuery`` and ``DeleteQuery`` were added
   which represent only a single type of query and do not allow switching between query types nor
   calling functions unrelated to the specific query type.
@@ -227,6 +227,14 @@ Database
   ``Connection`` methods are no longer proxied. This aligns the function name
   with the SQL statement.
 
+ORM
+---
+
+- Calling ``Table::find()`` with options array is deprecated. Use `named arguments <https://www.php.net/manual/en/functions.arguments.php#functions.named-arguments>`__
+  instead. For e.g. instead of ``find('all', ['conditions' => $array])`` use
+  ``find('all', conditions: $array)``. Similarly for custom finder options, instead
+  of ``find('list', ['valueField' => 'name'])`` use ``find('list', valueField: 'name')``
+  or multiple named arguments like ``find(type: 'list', valueField: 'name', conditions: $array)``.
 
 New Features
 ============
@@ -256,6 +264,42 @@ Database
 - Supported drivers now automatically add auto-increment only to integer primary keys named "id" instead
   of all integer primary keys. Setting 'autoIncrement' to false always disables on all supported drivers.
 
+ORM
+---
+
+- Table finders can now have typed arguments as required instead of an options array.
+  For e.g. a finder for fetching posts by category or user::
+
+    public function findByCategoryOrUser(SelectQuery $query, array $options)
+    {
+        if (isset($options['categoryId'])) {
+            $query->where('category_id' => $options['categoryId']);
+        }
+        if (isset($options['userId'])) {
+            $query->where('user_id' => $options['userId']);
+        }
+
+        return $query;
+    }
+
+  should now be written as::
+
+    public function findByCategoryOrUser(SelectQuery $query, ?int $categoryId = null, ?int $userId = null)
+    {
+        if ($categoryId) {
+            $query->where('category_id' => $categoryId);
+        }
+        if ($userId) {
+            $query->where('user_id' => $userId);
+        }
+
+        return $query;
+    }
+
+  The finder can then be called as ``find('byCategoryOrUser', userId: $somevar)``.
+  You can even include the special named arguments for setting query clauses.
+  ``find('byCategoryOrUser', userId: $somevar, conditions: ['enabled' => true])``.
+
 Http
 ----
 
@@ -267,4 +311,3 @@ TestSuite
 ---------
 
 - ``IntegrationTestTrait::requestAsJson()`` has been added to set JSON headers for the next request.
-
