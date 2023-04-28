@@ -204,14 +204,14 @@ a finder method so we can fetch articles by their slug. Behavior finder
 methods, use the same conventions as :ref:`custom-find-methods` do. Our
 ``find('slug')`` method would look like::
 
-    public function findSlug(SelectQuery $query, array $options)
+    public function findSlug(SelectQuery $query, string $slug): SelectQuery
     {
-        return $query->where(['slug' => $options['slug']]);
+        return $query->where(['slug' => $slug]);
     }
 
 Once our behavior has the above method we can call it::
 
-    $article = $articles->find('slug', ['slug' => $value])->first();
+    $article = $articles->find('slug', slug: $value)->first();
 
 Limiting or Renaming Exposed Finder Methods
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

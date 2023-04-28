@@ -709,8 +709,8 @@ such as a where condition by designating the through table name before the field
 you are filtering on::
 
     $query = $this->find(
-            'list', 
-            ['valueField' => 'studentFirstName', 'order' => 'students.id']
+            'list',
+            valueField: 'studentFirstName', order: 'students.id'
         )
         ->contain(['Courses'])
         ->matching('Courses')

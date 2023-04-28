@@ -191,9 +191,7 @@ add the following::
         $tags = $this->request->getParam('pass');
 
         // Use the ArticlesTable to find tagged articles.
-        $articles = $this->Articles->find('tagged', [
-                'tags' => $tags
-            ])
+        $articles = $this->Articles->find('tagged', tags: $tags)
             ->all();
 
         // Pass variables into the view template context.
@@ -212,9 +210,7 @@ action using PHP's variadic argument::
     public function tags(...$tags)
     {
         // Use the ArticlesTable to find tagged articles.
-        $articles = $this->Articles->find('tagged', [
-                'tags' => $tags
-            ])
+        $articles = $this->Articles->find('tagged', tags: $tags)
             ->all();
 
         // Pass variables into the view template context.
@@ -240,7 +236,7 @@ method has not been implemented yet, so let's do that. In
     // The $query argument is a query builder instance.
     // The $options array will contain the 'tags' option we passed
     // to find('tagged') in our controller action.
-    public function findTagged(SelectQuery $query, array $options): SelectQuery
+    public function findTagged(SelectQuery $query, array $tags = []): SelectQuery
     {
         $columns = [
             'Articles.id', 'Articles.user_id', 'Articles.title',
@@ -252,14 +248,14 @@ method has not been implemented yet, so let's do that. In
             ->select($columns)
             ->distinct($columns);
 
-        if (empty($options['tags'])) {
+        if (empty($tags)) {
             // If there are no tags provided, find articles that have no tags.
             $query->leftJoinWith('Tags')
                 ->where(['Tags.title IS' => null]);
         } else {
             // Find articles that have one or more of the provided tags.
             $query->innerJoinWith('Tags')
-                ->where(['Tags.title IN' => $options['tags']]);
+                ->where(['Tags.title IN' => $tags]);
         }
 
         return $query->groupBy(['Articles.id']);

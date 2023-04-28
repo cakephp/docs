@@ -414,10 +414,10 @@ The ``fetchTable()`` function comes handy when you need to use a table that is n
 the controller's default one::
 
     // In a controller method.
-    $recentArticles = $this->fetchTable('Articles')->find('all', [
-            'limit' => 5,
-            'order' => 'Articles.created DESC'
-        ])
+    $recentArticles = $this->fetchTable('Articles')->find('all',
+            limit: 5,
+            order: 'Articles.created DESC'
+        )
         ->all();
 
 Paginating a Model
