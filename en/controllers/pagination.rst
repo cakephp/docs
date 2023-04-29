@@ -85,7 +85,7 @@ as values for the finder::
             // Our custom finder is called findTagged inside ArticlesTable.php
             // which is why we're using `tagged` as the key.
             // Our finder should look like:
-            // public function findTagged(Query $query, array $options) {
+            // public function findTagged(Query $query, array $tagged = [])
             $settings = [
                 'finder' => [
                     'tagged' => $customFinderOptions
@@ -189,9 +189,8 @@ need to define an alias for the model.::
     ];
 
     $publishedArticles = $this->paginate(
-        $this->Articles->find('all', [
-            'scope' => 'published_articles'
-        ])->where(['published' => true])
+        $this->Articles->find('all', scope: 'published_articles')
+            ->where(['published' => true])
     );
 
     // Load an additional table object to allow differentiating in the paginator
@@ -202,9 +201,8 @@ need to define an alias for the model.::
     ]);
 
     $unpublishedArticles = $this->paginate(
-        $unpublishedArticlesTable->find('all', [
-            'scope' => 'unpublished_articles'
-        ])->where(['published' => false])
+        $unpublishedArticlesTable->find('all', scope: 'unpublished_articles')
+            ->where(['published' => false])
     );
 
 .. _control-which-fields-used-for-ordering:

@@ -834,11 +834,12 @@ Let's say we already have our Articles Table class defined in
 
     class ArticlesTable extends Table
     {
-        public function findPublished(SelectQuery $query, array $options): SelectQuery
+        public function findPublished(SelectQuery $query): SelectQuery
         {
             $query->where([
                 $this->alias() . '.published' => 1
             ]);
+
             return $query;
         }
     }
@@ -997,10 +998,7 @@ controller code looks like::
                 }
             }
             if (!empty($short)) {
-                $result = $this->Articles->find('all', [
-                        'fields' => ['id', 'title']
-                    ])
-                    ->all();
+                $result = $this->Articles->find('all', fields: ['id', 'title'])->all();
             } else {
                 $result = $this->Articles->find()->all();
             }

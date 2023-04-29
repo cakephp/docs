@@ -99,7 +99,7 @@ The list of options supported by get() are:
 Using Finders to Load Data
 ==========================
 
-.. php:method:: find($type, $options = [])
+.. php:method:: find($type, mixed ...$args)
 
 Before you can work with entities, you'll need to load them. The easiest way to
 do this is using the ``find()`` method. The find method provides a short and
@@ -150,13 +150,13 @@ You can also provide many commonly used options to ``find()``. This can help
 with testing as there are fewer methods to mock::
 
     // In a controller or table method.
-    $query = $articles->find('all', [
-        'conditions' => ['Articles.created >' => new DateTime('-10 days')],
-        'contain' => ['Authors', 'Comments'],
-        'limit' => 10
-    ]);
+    $query = $articles->find('all',
+        conditions: ['Articles.created >' => new DateTime('-10 days')],
+        contain: ['Authors', 'Comments'],
+        limit: 10
+    );
 
-The list of options supported by find() are:
+The list of named arguments supported by find() by default are:
 
 - ``conditions`` provide conditions for the WHERE clause of your query.
 - ``limit`` Set the number of rows you want.
@@ -195,9 +195,7 @@ The ``first()`` method allows you to fetch only the first row from a query. If
 the query has not been executed, a ``LIMIT 1`` clause will be applied::
 
     // In a controller or table method.
-    $query = $articles->find('all', [
-        'order' => ['Articles.created' => 'DESC']
-    ]);
+    $query = $articles->find('all', order: ['Articles.created' => 'DESC']);
     $row = $query->first();
 
 This approach replaces ``find('first')`` in previous versions of CakePHP. You
@@ -215,9 +213,7 @@ Once you have created a query object, you can use the ``count()`` method to get
 a result count of that query::
 
     // In a controller or table method.
-    $query = $articles->find('all', [
-        'conditions' => ['Articles.title LIKE' => '%Ovens%']
-    ]);
+    $query = $articles->find('all', conditions: ['Articles.title LIKE' => '%Ovens%']);
     $number = $query->count();
 
 See :ref:`query-count` for additional usage of the ``count()`` method.
@@ -259,10 +255,7 @@ When calling ``list`` you can configure the fields used for the key and value
 with the ``keyField`` and ``valueField`` options respectively::
 
     // In a controller or table method.
-    $query = $articles->find('list', [
-        'keyField' => 'slug',
-        'valueField' => 'label'
-    ]);
+    $query = $articles->find('list', keyField: 'slug', valueField: 'label');
     $data = $query->toArray();
 
     // Data now looks like
@@ -275,11 +268,7 @@ Results can be grouped into nested sets. This is useful when you want
 bucketed sets, or want to build ``<optgroup>`` elements with ``FormHelper``::
 
     // In a controller or table method.
-    $query = $articles->find('list', [
-        'keyField' => 'slug',
-        'valueField' => 'label',
-        'groupField' => 'author_id'
-    ]);
+    $query = $articles->find('list', keyField: 'slug', valueField: 'label', groupField: 'author_id');
     $data = $query->toArray();
 
     // Data now looks like
@@ -295,10 +284,8 @@ bucketed sets, or want to build ``<optgroup>`` elements with ``FormHelper``::
 
 You can also create list data from associations that can be reached with joins::
 
-    $query = $articles->find('list', [
-        'keyField' => 'id',
-        'valueField' => 'author.name'
-    ])->contain(['Authors']);
+    $query = $articles->find('list', keyField: 'id', valueField: 'author.name')
+        ->contain(['Authors']);
 
 The ``keyField``, ``valueField``, and ``groupField`` expression will operate on
 entity attribute paths not the database columns. This means that you can use
@@ -321,12 +308,12 @@ This example shows using the ``_getLabel()`` accessor method from
 the Author entity. ::
 
     // In your finders/controller:
-    $query = $articles->find('list', [
-            'keyField' => 'id',
-            'valueField' => function ($article) {
+    $query = $articles->find('list',
+            keyField: 'id',
+            valueField: function ($article) {
                 return $article->author->get('label');
             }
-        ])
+        )
         ->contain('Authors');
 
 You can also fetch the label in the list directly using. ::
@@ -351,10 +338,10 @@ attribute::
     $query = $comments->find('threaded');
 
     // Expanded default values
-    $query = $comments->find('threaded', [
-        'keyField' => $comments->primaryKey(),
-        'parentField' => 'parent_id'
-    ]);
+    $query = $comments->find('threaded',
+        keyField: $comments->primaryKey(),
+        parentField: 'parent_id'
+    );
     $results = $query->toArray();
 
     echo count($results[0]->children);
@@ -381,19 +368,19 @@ where ``Foo`` is the name of the finder you want to create. For example if we
 wanted to add a finder to our articles table for finding articles written by a
 given user, we would do the following::
 
+    use App\Model\Entity\User;
     use Cake\ORM\Query\SelectQuery;
     use Cake\ORM\Table;
 
     class ArticlesTable extends Table
     {
-        public function findOwnedBy(SelectQuery $query, array $options)
+        public function findOwnedBy(SelectQuery $query, User $user)
         {
-            $user = $options['user'];
             return $query->where(['author_id' => $user->id]);
         }
     }
 
-    $query = $articles->find('ownedBy', ['user' => $userEntity]);
+    $query = $articles->find('ownedBy', user: $userEntity);
 
 Finder methods can modify the query as required, or use the ``$options`` to
 customize the finder operation with relevant application logic. You can also
@@ -408,14 +395,6 @@ methods can also be defined on :doc:`/orm/behaviors`.
 If you need to modify the results after they have been fetched you should use
 a :ref:`map-reduce` function to modify the results. The map reduce features
 replace the 'afterFind' callback found in previous versions of CakePHP.
-
-.. note::
-
-    Passing arguments exposed in the **config** array,
-    ``$products->find('sizes', ['large', 'medium'])``
-    can give unexpected results when chaining
-    custom finders. Always pass options as an associative array,
-    ``$products->find('sizes', ['values' => ['large', 'medium']])``
 
 .. _dynamic-finders:
 
@@ -449,9 +428,7 @@ with custom finders::
 
 The above would translate into the following::
 
-    $users->find('trolls', [
-        'conditions' => ['username' => 'bro']
-    ]);
+    $users->find('trolls', conditions: ['username' => 'bro']);
 
 Once you have a query object from a dynamic finder, you'll need to call
 ``first()`` if you want the first result.
@@ -504,7 +481,7 @@ you state which associations should be eager loaded using the 'contain' method::
     // In a controller or table method.
 
     // As an option to find()
-    $query = $articles->find('all', ['contain' => ['Authors', 'Comments']]);
+    $query = $articles->find('all', contain: ['Authors', 'Comments']);
 
     // As a method on the query object
     $query = $articles->find('all');
@@ -1259,17 +1236,17 @@ even after adding a map-reduce routine::
 This is particularly useful for building custom finder methods as described in the
 :ref:`custom-find-methods` section::
 
-    public function findPublished(SelectQuery $query, array $options)
+    public function findPublished(SelectQuery $query)
     {
         return $query->where(['published' => true]);
     }
 
-    public function findRecent(SelectQuery $query, array $options)
+    public function findRecent(SelectQuery $query)
     {
         return $query->where(['created >=' => new DateTime('1 day ago')]);
     }
 
-    public function findCommonWords(SelectQuery $query, array $options)
+    public function findCommonWords(SelectQuery $query)
     {
         // Same as in the common words example in the previous section
         $mapper = ...;

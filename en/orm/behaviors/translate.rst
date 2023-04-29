@@ -239,7 +239,7 @@ use TranslateBehavior with ``find('list')``::
     [1 => 'Mi primer artículo', 2 => 'El segundo artículo', 15 => 'Otro articulo' ...]
 
     // Change the locale to french for a single find call
-    $data = $this->Articles->find('list', ['locale' => 'fr'])->toArray();
+    $data = $this->Articles->find('list', locale: 'fr')->toArray();
 
 Retrieve All Translations For An Entity
 ---------------------------------------
@@ -290,9 +290,7 @@ Limiting the Translations to be Retrieved
 You can limit the languages that are fetched from the database for a particular
 set of records::
 
-    $results = $this->Articles->find('translations', [
-        'locales' => ['en', 'es']
-    ]);
+    $results = $this->Articles->find('translations', locales: ['en', 'es']);
     $article = $results->first();
     $spanishTranslation = $article->translation('es');
     $englishTranslation = $article->translation('en');
@@ -366,7 +364,7 @@ to call the method on each table, for example::
     $this->Articles->setLocale('es');
     $this->Articles->Categories->setLocale('es');
 
-    $data = $this->Articles->find('all', ['contain' => ['Categories']]);
+    $data = $this->Articles->find('all', contain: ['Categories']);
 
 This example also assumes that ``Categories`` has the TranslateBehavior attached
 to it.

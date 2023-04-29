@@ -68,7 +68,7 @@ Getting direct descendents
 
 Getting a flat list of the descendants for a node can be done with::
 
-    $descendants = $categories->find('children', ['for' => 1]);
+    $descendants = $categories->find('children', for: 1);
 
     foreach ($descendants as $category) {
         echo $category->name . "\n";
@@ -77,7 +77,7 @@ Getting a flat list of the descendants for a node can be done with::
 If you need to pass conditions you do so as per normal::
 
     $descendants = $categories
-        ->find('children', ['for' => 1])
+        ->find('children', for: 1)
         ->where(['name LIKE' => '%Foo%'])
         ->all();
 
@@ -89,7 +89,7 @@ If you instead need a threaded list, where children for each node are nested
 in a hierarchy, you can stack the 'threaded' finder::
 
     $children = $categories
-        ->find('children', ['for' => 1])
+        ->find('children', for: 1)
         ->find('threaded')
         ->toArray();
 
@@ -97,7 +97,7 @@ in a hierarchy, you can stack the 'threaded' finder::
         echo "{$child->name} has " . count($child->children) . " direct children";
     }
 
-While, if you’re using custom ``parent_id`` you need to pass it in the
+While, if you're using custom ``parent_id`` you need to pass it in the
 'threaded' finder option (i.e. ``parentField``) .
 
 .. note::
@@ -143,21 +143,19 @@ The ``treeList`` finder takes a number of options:
 
 An example of all options in use is::
 
-    $query = $categories->find('treeList', [
-        'keyPath' => 'url',
-        'valuePath' => 'id',
-        'spacer' => ' '
-    ]);
+    $query = $categories->find('treeList',
+        keyPath: 'url',
+        valuePath: 'id',
+        spacer: ' '
+    );
 
 An example using closure::
 
-    $query = $categories->find('treeList', [
-        'keyPath' => 'url',
-        'valuePath' => function($entity){
+    $query = $categories->find('treeList',
+        valuePath: function($entity){
             return $entity->url . ' ' . $entity->id
-         },
-        'spacer' => ' '
-    ]);
+        }
+    );
 
 Finding a path or branch in the tree
 ------------------------------------
@@ -167,7 +165,7 @@ of the tree. This is useful, for example, for adding the breadcrumbs list for
 a menu structure::
 
     $nodeId = 5;
-    $crumbs = $categories->find('path', ['for' => $nodeId])->all();
+    $crumbs = $categories->find('path', for: $nodeId)->all();
 
     foreach ($crumbs as $crumb) {
         echo $crumb->name . ' > ';
@@ -322,7 +320,7 @@ The deletion of a node is based off of the ``lft`` and ``rght`` values of the en
 is important to note when looping through the various children of a node for
 conditional deletes::
 
-    $descendants = $teams->find('children', ['for' => 1])->all();
+    $descendants = $teams->find('children', for: 1)->all();
 
     foreach ($descendants as $descendant) {
         $team = $teams->get($descendant->id); // search for the up-to-date entity object
