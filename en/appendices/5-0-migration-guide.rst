@@ -267,8 +267,8 @@ Database
 ORM
 ---
 
-- Table finders can now have typed arguments as required instead of an options array.
-  For e.g. a finder for fetching posts by category or user::
+Table finders can now have typed arguments as required instead of an options array.
+For e.g. a finder for fetching posts by category or user::
 
     public function findByCategoryOrUser(SelectQuery $query, array $options)
     {
@@ -282,7 +282,7 @@ ORM
         return $query;
     }
 
-  should now be written as::
+should now be written as::
 
     public function findByCategoryOrUser(SelectQuery $query, ?int $categoryId = null, ?int $userId = null)
     {
@@ -296,9 +296,9 @@ ORM
         return $query;
     }
 
-  The finder can then be called as ``find('byCategoryOrUser', userId: $somevar)``.
-  You can even include the special named arguments for setting query clauses.
-  ``find('byCategoryOrUser', userId: $somevar, conditions: ['enabled' => true])``.
+The finder can then be called as ``find('byCategoryOrUser', userId: $somevar)``.
+You can even include the special named arguments for setting query clauses.
+``find('byCategoryOrUser', userId: $somevar, conditions: ['enabled' => true])``.
 
 Http
 ----
