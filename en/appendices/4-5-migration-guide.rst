@@ -199,6 +199,7 @@ TestSuite
   internal method. This method is now available to plugin authors as a path to
   migrate off of defining schema in fixture classes where migrations are not
   already in use.
+- ``IntegrationTestTrait::assertCookieIsSet()`` was added.
 
 Utility
 -------

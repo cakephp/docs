@@ -1626,8 +1626,12 @@ make testing responses much simpler. Some examples are::
     $user =  $this->viewVariable('user');
     $this->assertEquals('jose', $user->username);
 
-    // Assert cookies in the response
+    // Assert cookie values in the response
     $this->assertCookie('1', 'thingid');
+
+    // Assert a cookie is or is not present
+    $this->assertCookieIsSet('remember_me');
+    $this->assertCookieNotSet('remember_me');
 
     // Check the content type
     $this->assertContentType('application/json');
