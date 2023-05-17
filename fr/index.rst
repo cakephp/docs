@@ -1,10 +1,10 @@
 Bienvenue
 #########
 
-CakePHP 4 est un framework pour le développement web qui fonctionne avec
+CakePHP 5 est un framework pour le développement web qui fonctionne avec
 PHP |phpversion| (min. PHP |minphpversion|).
 Vous pouvez lire :doc:`CakePHP en un coup d'oeil </intro>` pour avoir une
-introduction aux fondamentaux de CakePHP 4.
+introduction aux fondamentaux de CakePHP 5.
 
 Le livre de cuisine CakePHP est un projet libre et communautaire d'édition de
 la documentation. Remarquez le bouton icone en forme de crayon fixé dans le coin
