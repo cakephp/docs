@@ -221,7 +221,7 @@ looping mutator methods. For example::
         {
             $this->slug = Text::slug($title);
 
-            return strtouppercase($title);
+            return strtoupper($title);
         }
     }
 
