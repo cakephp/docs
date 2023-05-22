@@ -263,7 +263,9 @@ creating a cell object::
 
         public function display($userId)
         {
-            $result = $this->fetchTable('Users')->find('friends', ['for' => $userId])->all();
+            $result = $this->fetchTable('Users')->find('friends', ['for' => $userId])
+                ->limit($this->limit)
+                ->all();
             $this->set('favorites', $result);
         }
     }

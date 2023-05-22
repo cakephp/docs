@@ -214,9 +214,9 @@ the ``fallback`` configuration key::
         'fallback' => 'default',
     ]);
 
-If the Redis server unexpectedly failed, writing to the ``redis`` cache
-configuration would fall back to writing to the ``default`` cache configuration.
-If writing to the ``default`` cache configuration *also* failed in this scenario, the
+If initializing the ``RedisEngine`` instance fails, the ``redis`` cache configuration
+would fall back to using the ``default`` cache configuration. If initializing the
+engine for the ``default`` cache configuration *also* fails, in this scenario the
 engine would fall back once again to the ``NullEngine`` and prevent the application
 from throwing an uncaught exception.
 

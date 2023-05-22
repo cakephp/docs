@@ -361,7 +361,7 @@ Ao converter dados hasMany, você pode desativar a criação de nova entidade, u
 a opção ``onlyIds`. Quando ativada, esta opção restringe transformação de hasMany
 para apenas usar a chave ``_ids`` e ignorar todos os outros dados.
 
-Conventendo Vários Registros
+Convertendo Vários Registros
 ----------------------------
 
 Ao criar formulários que cria/atualiza vários registros ao mesmo tempo, você pode usar
