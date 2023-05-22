@@ -273,10 +273,10 @@ For e.g. a finder for fetching posts by category or user::
     public function findByCategoryOrUser(SelectQuery $query, array $options)
     {
         if (isset($options['categoryId'])) {
-            $query->where('category_id' => $options['categoryId']);
+            $query->where(['category_id' => $options['categoryId']]);
         }
         if (isset($options['userId'])) {
-            $query->where('user_id' => $options['userId']);
+            $query->where(['user_id' => $options['userId']]);
         }
 
         return $query;
@@ -287,10 +287,10 @@ should now be written as::
     public function findByCategoryOrUser(SelectQuery $query, ?int $categoryId = null, ?int $userId = null)
     {
         if ($categoryId) {
-            $query->where('category_id' => $categoryId);
+            $query->where(['category_id' => $categoryId]);
         }
         if ($userId) {
-            $query->where('user_id' => $userId);
+            $query->where(['user_id' => $userId]);
         }
 
         return $query;
