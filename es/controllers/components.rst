@@ -229,10 +229,10 @@ componentes agregándolos a la propiedad `$components`::
 
     class CustomComponent extends Component
     {
-        // The other component your component uses
+        // El otro componente que tu componente usa
         protected $components = ['Existing'];
 
-        // Execute any other additional setup for your component.
+        // Ejecuta cualquier otra configuración adicional para tu componente.
         public function initialize(array $config): void
         {
             $this->Existing->foo();
@@ -257,17 +257,89 @@ componentes agregándolos a la propiedad `$components`::
         }
     }
 
-.. toctree::
-    :maxdepth: 1
+.. note::
 
-    /controllers/components/authentication
-    /controllers/components/cookie
-    /controllers/components/csrf
-    /controllers/components/flash
-    /controllers/components/security
-    /controllers/components/pagination
-    /controllers/components/request-handling
+    A diferencia de un componente incluido en un controlador, no se activarán 
+    devoluciones de llamada en el componente de un componente.
+
+Accediendo al controlador de un componente
+------------------------------------------
+
+Desde dentro de un componente, puedes acceder al controlador actual a través del 
+registro::
+
+    $controller = $this->getController();
+
+Devoluciones de llamadas de componentes
+=======================================
+
+Los componentes también ofrecen algunas devoluciones de llamadas de ciclo de vida
+de las solicitudes que les permiten aumentar el ciclo de solicitud.
+
+.. php:method:: beforeFilter(EventInterface $event)
+
+    Es llamado antes que el método beforeFilter del controlador, pero *después*
+    del método initialize() del controlador.
+
+.. php:method:: startup(EventInterface $event)
+
+    Es llamado después del método beforeFilter del controlador, pero antes de que
+    el controlador ejecute la acción actual del manejador.
+
+.. php:method:: beforeRender(EventInterface $event)
+
+    Es llamado después de que el controlador ejecute la lógica de la acción 
+    solicitada, pero antes de que el controlador renderize las vistas y el diseño.
+
+.. php:method:: shutdown(EventInterface $event)
+
+    Es llamado antes de enviar la salida al navegador.
+
+.. php:method:: beforeRedirect(EventInterface $event, $url, Response $response)
+
+    Es llamado cuando el método de redirección del controlador es llamado pero
+    antes de cualquier otra acción. Si este método devuelve ``false`` el controlador
+    no continuará en redirigir la petición. Los parámetros $url y $response permiten
+    modificar e inspeccionar la ubicación o cualquier otro encabezado en la respuesta.
+
+.. _redirect-component-events:
+
+Usando redireccionamiento en eventos de componentes
+===================================================
+
+Para redirigir desde dentro de un método de devolución de llamada de un componente,
+puedes usar lo siguiente::
+
+    public function beforeFilter(EventInterface $event)
+    {
+        $event->stopPropagation();
+        return $this->getController()->redirect('/');
+    }
+
+Al detener el evento, le haces saber a CakePHP que no quieres ninguna otra devolución
+de llamada de componente para ejecutar, y que el controlador no debe manejar la acción
+más lejos. A partir de 4.1.0 puedes generar una ``RedirectException`` para señalar
+una redirección::
+
+    use Cake\Http\Exception\RedirectException;
+    use Cake\Routing\Router;
+
+    public function beforeFilter(EventInterface $event)
+    {
+        throw new RedirectException(Router::url('/'))
+    }
+
+Generar una excepción detendrá todos los demás detectores de eventos y creará
+una nueva respuesta que no conserva ni hereda ninguno de los encabezados de la respuesta
+actual. Al generar una ``RedirectException`` puedes incluir encabezados adicionales::
+
+    throw new RedirectException(Router::url('/'), 302, [
+        'Header-Key' => 'value',
+    ]);
+
+.. versionadded:: 4.1.0
 
 .. meta::
     :title lang=es: Components
     :keywords lang=es: array controller,core libraries,authentication request,array name,access control lists,public components,controller code,core components,cookiemonster,login cookie,configuration settings,functionality,logic,sessions,cakephp,doc
+
