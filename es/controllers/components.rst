@@ -65,14 +65,14 @@ Al igual que los helpers, componentes implementan los métodos ``getConfig()`` y
     // Escribe los datos de configuración
     $this->Csrf->setConfig('cookieName', 'token');
 
-Como los helpers, los componentes fusionarán automáticamente su propiedad ``$_defaultConfig``
+Al igual que con los helpers, los componentes fusionarán automáticamente su propiedad ``$_defaultConfig``
 con la configuración del controlador para crear la propiedad ``$_config`` que es
 accesible con ``getConfig()`` y ``setConfig()``.
 
 Componentes de alias
 --------------------
 
-Una configuración común para usar es la opción ``className``, que te permite 
+Una configuración común para usar es la opción ``className``, que te permite utilizar
 componentes de alias. Esta característica es útil cuando quieres reemplazar ``$this->Auth``
 u otra referencia común de componente con una implementación personalizada::
 
@@ -125,7 +125,7 @@ Uso de componentes
 Una vez que hayas incluido algunos componentes a tu controlador, usarlos es bastante
 simple. Cada componente que uses se exponen como una propiedad en tu controlador. 
 Si cargaste el :php:class:`Cake\\Controller\\Component\\FlashComponent` en tu controlador,
-puedes acceder a él así::
+puedes acceder a él de esta forma::
 
     class PostsController extends AppController
     {
@@ -340,6 +340,6 @@ actual. Al generar una ``RedirectException`` puedes incluir encabezados adiciona
 .. versionadded:: 4.1.0
 
 .. meta::
-    :title lang=es: Components
+    :title lang=es: Componentes
     :keywords lang=es: array controller,core libraries,authentication request,array name,access control lists,public components,controller code,core components,cookiemonster,login cookie,configuration settings,functionality,logic,sessions,cakephp,doc
 
