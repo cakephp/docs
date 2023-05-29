@@ -3,12 +3,12 @@ Seguridad
 
 .. php:class:: SecurityComponent(ComponentCollection $collection, array $config = [])
 
-El componente de seguridad crea una forma de integrar seguridad más estrechamente
-a tu aplicación. Proporciona métodos para diversas tareas como:
+El componente de seguridad crea una forma de integrar seguridad de forma más estricta
+en tu aplicación. Proporciona métodos para diversas tareas como:
 
 * Restringir qué métodos HTTP acepta tu aplicación.
 * Protección contra manipulación de formularios.
-* Requerir que se utiliza SSL.
+* Requerir que se utilice SSL.
 * Limitación de la comunicación entre controladores.
 
 Como todos los componentes, se configura a través de varios parámetros configurables.
@@ -20,7 +20,7 @@ manipulación de formularios. Los campos token ocultos se insertarán automátic
 en los formularios y serán verificados por el componente de seguridad.
 
 Si estas utilizando las funciones de protección de formularios del componente de 
-seguridad y otros componentes que procesan datos de formularios en sus devoluciones
+seguridad y otros componentes que procesan datos de formularios en tus devoluciones
 de llamada ``startup()``, asegúrate de colocar el componente de seguridad antes de 
 esos componentes en tu método ``initialize()``.
 
@@ -37,7 +37,7 @@ esos componentes en tu método ``initialize()``.
     envíe a la devolución de llamada de blackhole.
 
     Siempre debes verificar el método HTTP que se utiliza antes de ejecutarlo para
-    evitar efectos secundarios. Debes :ref:`check the HTTP method <check-the-request>`
+    evitar efectos secundarios. Debes verificar el método HTTP
     o usar :php:meth:`Cake\\Http\\ServerRequest::allowMethod()` para asegurarte
     de que se utiliza el método HTTP correcto.
 
@@ -64,7 +64,7 @@ proceso blackhole funciona::
     public function blackhole($type, SecurityException $exception)
     {
         if ($exception->getMessage() === 'Request is not SSL and the action is required to be secure') {
-            // Reword the exception message with a translatable string.
+            // Reformule el mensaje de excepción con un string traducible.
             $exception->setMessage(__('Please access the requested page through HTTPS'));
         }
 
@@ -78,23 +78,18 @@ proceso blackhole funciona::
 El parámetro ``$type`` puede tener los siguientes valores:
 
 * 'auth' Indica un error de validación de formulario o un error de discrepancia 
-entre controlador y acción.
+  entre controlador y acción.
 * 'secure' Indica un error de restricción del método SSL.
-
-Restringir acciones a SSL
-=========================
-
-Esta funcionalidad fue eliminada en :ref:`https-enforcer-middleware`.
 
 Prevención de manipulación de formularios
 =========================================
 
-Por defecto, ``SecurityComponent`` evita que los usuarios alteren lso formularios
+Por defecto, ``SecurityComponent`` evita que los usuarios alteren los formularios
 de formas específicas. El ``SecurityComponent`` evitará las siguientes cosas:
 
 * Los campos desconocidos no podrán ser agregados al formulario.
 * Los campos no pueden ser eliminados del formulario.
-* Los valores en las entras ocultas no podrán ser modificadas.
+* Los valores en las entradas ocultas no podrán ser modificadas.
 
 La prevención de este tipo de manipulación se logra trabajando con  ``FormHelper``
 y rastreando qué campos hay en un formulario. También se realiza un seguimiento
@@ -120,7 +115,7 @@ validatePost
 Uso
 ===
 
-La configuración del componente de seguridad generalmente se realizar en las
+La configuración del componente de seguridad generalmente se realiza en las
 devoluciones de llamada ``initialize`` o ``beforeFilter()`` del controlador::
 
     namespace App\Controller;
@@ -157,7 +152,7 @@ Protección CSRF
 CSRF o Cross Site Request Forgery es una vulnerabilidad común en las aplicaciones
 web. Permite a un atacante capturar y reproducir una solicitud anterior, y a veces,
 enviar solicitudes de datos utilizando etiquetas de imagen o recursos en otros
-dominios. Para habilitar las funciones de protección CSRF, usa  :ref:`csrf-middleware`.
+dominios. Para habilitar las funciones de protección CSRF.
 
 Deshabilitar la manipulación de formularios para acciones específicas
 =====================================================================
