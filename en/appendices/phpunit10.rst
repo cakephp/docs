@@ -11,7 +11,9 @@ It is recommended to let PHPUnit update its configuration file via the following
 
   vendor/bin/phpunit --migrate-configuration
 
-``.. note::`` Make sure you are already on PHPUnit 10 via ``vendor/bin/phpunit --version`` before executing this command!
+.. note::
+
+    Make sure you are already on PHPUnit 10 via ``vendor/bin/phpunit --version`` before executing this command!
 
 With this command out of the way your ``phpunit.xml`` already has most of the recommended changes present.
 
