@@ -132,7 +132,8 @@ Http
 I18n
 ----
 
-- ``Time`` was renamed to `DateTime` to allow for future time-only types.
+- ``FrozenDate`` was renamed to `Date` and ``FrozenTime`` was renamed to `DateTime`.
+- ``Time`` now extends ``Cake\Chronos\ChronosTime`` and is therefore immutable.
 - ``Date::parseDateTime()`` was removed.
 - ``Date::parseTime()`` was removed.
 - ``Date::setToStringFormat()`` and ``Date::setJsonEncodeFormat()`` no longer accept an array.
