@@ -187,6 +187,7 @@ TestSuite
 - ``TestSuite`` was removed. Users should use environment variables to customize
   unit test settings instead.
 - ``TestListenerTrait`` was removed. PHPUnit dropped support for these listeners.
+  See :doc:`/appendices/phpunit10`
 - ``IntegrationTestTrait::configRequest()`` now merges config when called multiple times
   instead of replacing the currently present config.
 
