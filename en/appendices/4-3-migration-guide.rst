@@ -86,7 +86,9 @@ ORM
 - ``ModelAwareTrait::loadModel()`` is deprecated. Use the new ``LocatorAwareTrait::fetchTable()`` instead.
   For example, in controllers you can do ``$this->fetchTable()`` to get the default table instance or use
   ``$this->fetchTable('Foos')`` for a non-default table.  You can set the ``LocatorAwareTrait::$defaultTable``
-  property to specify the default table alias for ``fetchTable()``.
+  property to specify the default table alias for ``fetchTable()``. But be aware that
+  ``LocatorAwareTrait::fetchTable()`` does not create a property with the name of the table alias on the
+  calling object, e.g. ``$this->Articles``, as  ``ModelAwareTrait::loadModel()`` does.
 - Query proxying all ``ResultSetInterface`` methods (including ```CollectionInterface```), which forces
   fetching results and calls the proxied method on the results, is now deprecated. An example of the
   deprecated usage is ``$query->combine('id', 'title');``. This should be
