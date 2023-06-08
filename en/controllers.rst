@@ -428,6 +428,11 @@ the controller's default one::
 .. versionadded:: 4.3.0
     ``Controller::fetchTable()`` was added. Prior to 4.3 you need to use ``Controller::loadModel()``.
 
+.. note::
+
+    ``Controller::fetchTable()`` does not create a controller property with the name of the table alias,
+    e.g. ``$this->Articles``, as  ``Controller::loadModel()`` does.
+
 Paginating a Model
 ==================
 
