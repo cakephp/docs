@@ -15,7 +15,7 @@ Once your application is running on latest CakePHP 4.x, enable deprecation warni
         'errorLevel' => E_ALL,
     ]
 
-Now that you can see all the warnings, make sure these are fixed before proceding with the upgrade.
+Now that you can see all the warnings, make sure these are fixed before proceeding with the upgrade.
 
 Some potentially impactful deprecations you should make sure you have addressed
 are:
@@ -43,6 +43,20 @@ Because CakePHP 5 leverages union types and ``mixed``, there are many
 backwards incompatible changes concerning method signatures and file renames.
 To help expedite fixing these tedious changes there is an upgrade CLI tool:
 
+.. code-block:: console
+
+    # Install the upgrade tool
+    git clone https://github.com/cakephp/upgrade
+    cd upgrade
+    git checkout 5.x
+    composer install --no-dev
+
+With the upgrade tool installed you can now run it on your application or
+plugin::
+
+    bin/cake upgrade rector --rules cakephp50 <path/to/app/src>
+    bin/cake upgrade rector --rules chronos3 <path/to/app/src>
+
 .. warning::
     The upgrade tool for 5.x is not complete yet.
 
@@ -54,4 +68,12 @@ composer commands:
 
 .. code-block:: bash
 
+    php composer.phar require --dev --update-with-dependencies "phpunit/phpunit:^10.1"
     php composer.phar require --update-with-dependencies "cakephp/cakephp:5.0.*"
+
+Update app files based upon latest app template
+===============================================
+
+Next, ensure your application has been updated to be based upon the
+latest version of `cakephp/app
+<https://github.com/cakephp/app/blob/5.x/>`__.
