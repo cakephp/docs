@@ -975,7 +975,7 @@ use the ``identifier()`` method::
             return $exp->gt('population', 100000);
         });
 
-You can use identifier on aggregation too::
+You can use ``identifier()`` in comparisons to aggregations too::
 
     $query = $this->Orders->find();
     $query->select(['Customers.customer_name', 'total_orders' => $query->func()->count('Orders.order_id')])
