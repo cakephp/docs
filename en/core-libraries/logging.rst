@@ -227,7 +227,7 @@ If a level is not supplied, :php:const:`LOG_ERR` is used which writes to the
 error log. The default log location is **logs/$level.log**::
 
     // Executing this inside a CakePHP class
-    $this->log('Something didn't work!');
+    $this->log("Something didn't work!");
 
     // Results in this being appended to logs/error.log
     // 2007-11-02 10:22:02 Error: Something didn't work!
