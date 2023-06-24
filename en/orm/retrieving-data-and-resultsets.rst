@@ -1071,6 +1071,15 @@ can load additional associations using ``loadInto()``::
     $articles = $this->Articles->find()->all();
     $withMore = $this->Articles->loadInto($articles, ['Comments', 'Users']);
 
+It is possible to restrict the data returned by the associations and filter them 
+by conditions. To specify conditions, pass an anonymous function that receives 
+as the first argument a query object, ``\Cake\ORM\Query``::
+
+    $user = $this->Users->get($id);
+    $withMore = $this->Users->loadInto($user, ['Posts' => function (Query $query) {
+        return $query->where(['Posts.status' => 'published']);
+    }]);
+
 You can eager load additional data into a single entity, or a collection of
 entities.
 
