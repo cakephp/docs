@@ -1089,6 +1089,23 @@ You can use ``identifier()`` in comparisons to aggregations too::
     To prevent SQL injections, Identifier expressions should never have
     untrusted data passed into them.
 
+Collation
+---------------------------------
+
+In situations that you need to deal with accented characters, multilingual data 
+or case-sensitive comparisons, you can use the ``$collation`` parameter of ``IdentifierExpression`` 
+or ``StringExpression`` to apply a character expression to a certain collation::
+
+    use Cake\Database\Expression\IdentifierExpression;
+
+    $collation = 'Latin1_general_CI_AI'; //sql server example
+    $query = $cities->find()
+        ->where(function (QueryExpression $exp, Query $q) use ($collation) {
+            return $exp->like(new IdentifierExpression('name', $collation), '%São José%');
+        });
+    # WHERE name COLLATE LIKE Latin1_general_CI_AI "%São José%"
+
+
 Automatically Creating IN Clauses
 ---------------------------------
 
