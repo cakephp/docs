@@ -1177,6 +1177,35 @@ expression objects to add snippets of SQL to your queries::
     Using expression objects leaves you vulnerable to SQL injection. You should
     never use untrusted data into expressions.
 
+Expression Conjuction
+-----------------------
+
+It is possible to Changes for changing the conjunction used to join conditions in
+a query expression using the method ``setConjunction``::
+
+    $query = $articles->find();
+    $expr = $query->newExpr(['1','1'])->setConjunction('+');
+    $query->select(['two' => $expr]);
+
+And can be used combined with aggregations too::
+
+    $query = $products->find();
+    $query->select(function ($query) {
+            $stockQuantity = $query->func()->sum('Stocks.quantity');
+            $totalStockValue = $query->func()->sum(
+                    $query->newExpr(['Stocks.quantity', 'Products.unit_price'])
+                        ->setConjunction('*')
+            );
+            return [
+                'Products.name',
+                'stock_quantity' => $stockQuantity,
+                'Products.unit_price',
+                'total_stock_value' => $totalStockValue
+            ];
+        })
+        ->innerJoinWith('Stocks')
+        ->groupBy(['Products.id', 'Products.name', 'Products.unit_price']);
+
 Getting Results
 ===============
 
