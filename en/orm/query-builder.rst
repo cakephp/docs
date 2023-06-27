@@ -1180,8 +1180,8 @@ expression objects to add snippets of SQL to your queries::
 Expression Conjuction
 -----------------------
 
-It is possible to Changes for changing the conjunction used to join conditions in
-a query expression using the method ``setConjunction``::
+It is possible to change the conjunction used to join conditions in a query 
+expression using the method ``setConjunction``::
 
     $query = $articles->find();
     $expr = $query->newExpr(['1','1'])->setConjunction('+');
