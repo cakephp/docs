@@ -97,6 +97,8 @@ Database
   into the ``Driver`` class itself.
 - ``CaseExpression`` has been removed and should be replaced with
   ``QueryExpression::case()`` or ``CaseStatementExpression``
+- ``Connection::connect()`` has been removed. Use
+  ``$connection->getDriver()->connect()`` instead.
 
 Datasource
 ----------
