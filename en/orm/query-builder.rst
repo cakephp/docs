@@ -317,7 +317,9 @@ You can access existing wrappers for several SQL functions through ``Query::func
 ``max()``
     Calculate the max of a column. `Assumes arguments are literal values.`
 ``count()``
-    Calculate the count. `Assumes arguments are literal values.`
+    Calculate the count. `Assumes arguments are literal values.`\
+``cast()``
+    Convert a field or expression from one data type to another.
 ``concat()``
     Concatenate two values together. `Assumes arguments are bound parameters.`
 ``coalesce()``
