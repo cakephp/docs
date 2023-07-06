@@ -94,23 +94,29 @@ Folder API
         $dir = new Folder();
         $dir->chmod('/path/to/folder', 0755, true, ['skip_me.php']);
 
-.. php:method:: copy(array|string $options = [])
+.. php:method:: copy(string $to, array $options = [])
 
-    Recursively copy a directory. The only parameter $options can either
-    be a path into copy to or an array of options::
+    Recursively copy a directory. The parameter $to is the location to copy to. The $options an array of options::
 
         $folder1 = new Folder('/path/to/folder1');
         $folder1->copy('/path/to/folder2');
         // Will put folder1 and all its contents into folder2
 
         $folder = new Folder('/path/to/folder');
-        $folder->copy([
-            'to' => '/path/to/new/folder',
+        $folder->copy('/path/to/new/folder', [
             'from' => '/path/to/copy/from', // Will cause a cd() to occur
             'mode' => 0755,
             'skip' => ['skip-me.php', '.git'],
             'scheme' => Folder::SKIP  // Skip directories/files that already exist.
         ]);
+
+    Available options:
+
+    * ``from`` The directory to copy from, this will cause a cd() to occur, changing the results of pwd().
+    * ``mode`` The mode to copy the files/directories with as integer, e.g. 0775.
+    * ``skip`` Files/directories to skip.
+    * ``scheme`` Folder::MERGE, Folder::OVERWRITE, Folder::SKIP
+    * ``recursive`` Whether to copy recursively or not (default: true - recursive)
 
     There are 3 supported schemes:
 
