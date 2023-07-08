@@ -1,5 +1,5 @@
-Commandes de la Console
-#######################
+Objets Command
+##############
 
 .. php:namespace:: Cake\Console
 .. php:class:: Command
@@ -13,8 +13,9 @@ Créer une Commande
 
 Créons maintenant notre première commande. Pour cet exemple, nous allons créer une commande
 Hello world toute simple. Dans le répertoire **src/Command** de votre application, créez
-**HelloCommand.php**. Mettez dedans le code qui suit::
+**HelloCommand.php**. Mettez-y le code suivant::
 
+    <?php
     namespace App\Command;
 
     use Cake\Command\Command;
@@ -23,14 +24,16 @@ Hello world toute simple. Dans le répertoire **src/Command** de votre applicati
 
     class HelloCommand extends Command
     {
-        public function execute(Arguments $args, ConsoleIo $io)
+        public function execute(Arguments $args, ConsoleIo $io): int
         {
             $io->out('Hello world.');
+            
+            return static::CODE_SUCCESS;
         }
     }
 
 Les classes Command doivent avoir une méthode ``execute()`` qui fait la plus grande partie du travail.
-Cette méthode est appelée quand une commande est appelée. Appelons la première commande de notre
+Cette méthode est appelée quand une commande est lancée. Appelons la première commande de notre
 application, exécutez:
 
 .. code-block:: console
@@ -43,6 +46,7 @@ Vous devriez voir la sortie suivante::
 
 Notre méthode ``execute()`` n'est pas très intéressente, ajoutons des entrées à partir de la ligne de commande::
 
+    <?php
     namespace App\Command;
 
     use Cake\Command\Command;
@@ -52,18 +56,20 @@ Notre méthode ``execute()`` n'est pas très intéressente, ajoutons des entrée
 
     class HelloCommand extends Command
     {
-        public function buildOptionParser(ConsoleOptionParser $parser)
+        protected function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
         {
             $parser->addArgument('name', [
-                'help' => 'What is your name'
+                'help' => 'Quel est votre nom'
             ]);
             return $parser;
         }
 
-        public function execute(Arguments $args, ConsoleIo $io)
+        public function execute(Arguments $args, ConsoleIo $io): int
         {
             $name = $args->getArgument('name');
             $io->out("Hello {$name}.");
+            
+            return static::CODE_SUCCESS;
         }
     }
 
@@ -76,6 +82,21 @@ Après avoir sauvegardé ce fichier, vous devriez pouvoir exécuter la commande 
 
     # Affiche
     Hello jillian
+ 
+Changer le Nom Par Défaut de la Commande
+========================================
+
+CakePHP va s'appuyer sur des conventions pour générer le nom que vos commandes
+utilisent en ligne de commande. Si vous voulez remplacer le nom généré,
+implémentez la méthode ``defaultName()`` dans votre commande::
+
+    public static function defaultName(): string
+    {
+        return 'oh_hi';
+    }
+
+Ceci rendrait ``HelloCommand`` accessible par ``cake oh_hi`` au lieu de
+``cake hello``.
 
 Définir les Arguments et les Options
 ====================================
@@ -85,27 +106,29 @@ pour définir des arguments. Nous pouvons aussi définir des options. Par exempl
 ``yell`` à notre ``HelloCommand``::
 
     // ...
-    public function buildOptionParser(ConsoleOptionParser $parser)
+    protected function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
     {
         $parser
             ->addArgument('name', [
-                'help' => 'What is your name'
+                'help' => 'Quel est votre nom'
             ])
             ->addOption('yell', [
-                'help' => 'Shout the name',
+                'help' => 'Crier le nom',
                 'boolean' => true
             ]);
 
         return $parser;
     }
 
-    public function execute(Arguments $args, ConsoleIo $io)
+    public function execute(Arguments $args, ConsoleIo $io): int
     {
         $name = $args->getArgument('name');
         if ($args->getOption('yell')) {
             $name = mb_strtoupper($name);
         }
         $io->out("Hello {$name}.");
+            
+        return static::CODE_SUCCESS;
     }
 
 Consultez la section :doc:`/console-commands/option-parsers` pour plus d'information.
@@ -113,17 +136,21 @@ Consultez la section :doc:`/console-commands/option-parsers` pour plus d'informa
 Créer une Sortie
 ================
 
-Les commands fournissent une instance ``ConsoleIo`` quand elles sont exécutées. Cet objet vous permet
-d'intéragir avec ``stdout``, ``stderr`` et de créer des fichiers. Consultez la section
-:doc:`/console-commands/input-output` pour plus d'information.
+Les commands reçoivent une instance ``ConsoleIo`` quand elles sont exécutées.
+Cet objet vous permet d'interagir avec ``stdout``, ``stderr`` et de créer des
+fichiers. Consultez la section :doc:`/console-commands/input-output` pour plus
+d'information.
 
 Utiliser les Models dans les Commands
 =====================================
 
-Vous aurez souvent besoin d'accéder à logique applicative dans les commandes console. Vous pouvez charger les models
-dans les commandes, comme vous le feriez dans un controller en utilisant ``loadModel()``. Les models chargés sont définis en
-propriétés attachés à vos commandes::
+Vous aurez souvent besoin d'accéder à logique métier de votre application depuis
+les commandes console. Vous pouvez charger des modèles dans les commandes,
+exactement comme vous le feriez dans un controller en utilisant
+``$this->fetchTable()``, puisque les commandes utilisent ``LocatorAwareTrait``::
 
+    <?php
+    declare(strict types=1);
     namespace App\Command;
 
     use Cake\Command\Command;
@@ -133,42 +160,41 @@ propriétés attachés à vos commandes::
 
     class UserCommand extends Command
     {
-        public function initialize(): void
-        {
-            parent::initialize();
-            $this->loadModel('Users');
-        }
+        // Définit la table par défaut. Cela vous permet d'utiliser `fetchTable()` sans argument.
+        protected $defaultTable = 'Users';
 
-        public function buildOptionParser(ConsoleOptionParser $parser)
+        protected function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
         {
             $parser
                 ->addArgument('name', [
-                    'help' => 'What is your name'
+                    'help' => 'Quel est votre nom'
                 ]);
 
             return $parser;
         }
 
-        public function execute(Arguments $args, ConsoleIo $io)
+        public function execute(Arguments $args, ConsoleIo $io): int
         {
             $name = $args->getArgument('name');
-            $user = $this->Users->findByUsername($name)->first();
+            $user = $this->fetchTable()->findByUsername($name)->first();
 
             $io->out(print_r($user, true));
+
+            return static::CODE_SUCCESS;
         }
     }
 
 La commande ci-dessus va récupérer un utilisateur par son nom d'utilisateur et afficher les informations stockées dans
 la base de données.
 
-Sortir du Code et Arrêter l'Execution
-=====================================
+Codes de Sortie et Arrêter l'Execution
+======================================
 
 Quand vos commandes rencontrent une erreur irrécupérable, vous pouvez utiliser la méthode ``abort()`` pour terminer
 l'exécution::
 
     // ...
-    public function execute(Arguments $args, ConsoleIo $io)
+    public function execute(Arguments $args, ConsoleIo $io): int
     {
         $name = $args->getArgument('name');
         if (strlen($name) < 5) {
@@ -176,18 +202,36 @@ l'exécution::
             $io->error('Name must be at least 4 characters long.');
             $this->abort();
         }
+
+        return static::CODE_SUCCESS;
     }
 
-Vous pouvez passer tout code de sortie souhaité dans ``abort()``.
+Vous pouvez aussi utiliser ``abort()`` sur l'objet ``$io`` pour émettre un
+message et un code::
+
+    public function execute(Arguments $args, ConsoleIo $io): int
+    {
+        $name = $args->getArgument('name');
+        if (strlen($name) < 5) {
+            // Arrête l'exécution, affiche vers stderr, et définit le code de sortie à 99
+            $io->abort('Le nom doit avoir au moins 4 caractères.', 99);
+        }
+        
+        return static::CODE_SUCCESS;
+    }
+
+Vous pouvez passer n'importe quel code de sortie dans ``abort()``.
 
 .. tip::
 
-    Evitez les codes de sortie 64 - 78, car ils ont une signification particulière décrite par
-    ``sysexits.h``. Evitez les codes de sortie au-dessus de 127, car ils sont utilisés pour indiquer une
-    de processus par signal tel que SIGKILL ou SIGSEGV.
+    Évitez les codes de sortie 64 - 78, car ils ont une signification
+    particulière décrite par ``sysexits.h``. Évitez les codes de sortie
+    au-dessus de 127, car ils sont utilisés pour indiquer une sortie de
+    processus par signal tel que SIGKILL ou SIGSEGV.
 
-    Vous pouvez en apprendre plus sur les codes de sortie dans la page sysexit du manuel de la plupart des systèmes
-    Unix (``man sysexits``), ou la page d'aide sur les ``Codes de Sortie Système`` dans Windows.
+    Vous pouvez en savoir plus à propos des codes de sortie sur la manpage de
+    sysexit sur la plupart des systèmes Unix (``man sysexits``), ou la page
+    d'aide ``System Error Codes`` sous Windows.
 
 Appeler d'Autres Commandes
 ==========================
@@ -204,15 +248,15 @@ Pour ce faire, utilisez ``executeCommand``::
 
 .. note::
 
-    QUand vous appelez ``executeCommand()`` dans une boucle, il est recommandé
-    de passer l'instance ``ConsoleIo`` en tant que 3ème argument optionnel dans
-    la commande parente pour éviter une potentielle limite de fichiers ouverts,
-    qui pourrait arriver dans certains environnements.
+    Quand vous appelez ``executeCommand()`` dans une boucle, il est recommandé
+    de passer l'instance ``ConsoleIo`` de la commande parente en 3ème argument
+    optionnel pour éviter une potentielle limite de fichiers ouverts, ce qui
+    pourrait arriver dans certains environnements.
 
 .. _console-command-description:
 
-Définir une Description de Commande
-===================================
+Définir la Description de la Commande
+=====================================
 
 Vous pouvez définir une description de commande via::
 
@@ -224,7 +268,7 @@ Vous pouvez définir une description de commande via::
         }
     }
 
-Cela affichera votre description dans le CLI Cake:
+Cela affichera votre description dans la CLI de Cake:
 
 .. code-block:: console
 
@@ -244,20 +288,25 @@ Ainsi que dans la section *help* de votre commande:
     Usage:
     cake user [-h] [-q] [-v]
 
-
 .. _console-integration-testing:
 
 Tester les Commandes
 ====================
 
-Pour faciliter les tests des applications de console, CakePHP fournit une classe
-``ConsoleIntegrationTestCase`` qui peut être utilisée pour tester les applications console
-et faire des assertions de résultats.
+Pour faciliter les tests des applications de console, CakePHP fournit le trait
+``ConsoleIntegrationTestTrait`` que vous pouvez utiliser pour tester les
+applications console et faire des assertions sur leurs résultats.
 
-Pour commencer à tester votre application console, créez un cas de test qui étend
-``Cake\TestSuite\ConsoleIntegrationTestCase``. cette classe contient une méthode
-``exec()`` qui est utilisée pour exécuter votre commande. Vous pouvez passer la même chaîne à cette méthode
-que ce que vous passeriez dans le CLI.
+Pour commencer à tester votre application de console, créez un cas de test qui
+utilise le trait ``Cake\TestSuite\ConsoleIntegrationTestTrait``. Ce trait
+contient une méthode ``exec()`` qui est utilisée pour exécuter votre commande.
+Vous pouvez y passer la même chaîne que celle que vous passeriez en ligne de
+commande.
+
+.. note::
+
+    Pour CakePHP 4.4 et au-delà, il faut utiliser le namespace de
+    ``Cake\Console\TestSuite\ConsoleIntegrationTestTrait``
 
 Commençons avec une commande très simple qui se trouve dans
 **src/Command/UpdateTableCommand.php**::
@@ -271,26 +320,29 @@ Commençons avec une commande très simple qui se trouve dans
 
     class UpdateTableCommand extends Command
     {
-        public function buildOptionParser(ConsoleOptionParser $parser)
+        protected function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
         {
-            $parser->setDescription('My cool console app');
+            $parser->setDescription('Mon application de console super cool');
 
             return $parser;
         }
     }
 
 Pour écrire un test d'intégration pour ce shell, nous créons un cas de test dans
-**tests/TestCase/Command/UpdateTableCommandTest.php** qui étend
-``Cake\TestSuite\ConsoleIntegrationTestCase``. Ce shell ne fait pas grand chose pour le
+**tests/TestCase/Command/UpdateTableTest.php** qui utilise le trait
+``Cake\TestSuite\ConsoleIntegrationTestTrait``. Ce shell ne fait pas grand chose pour le
 moment, mais testons simplement si la description de notre shell description s'affiche dans ``stdout``::
 
     namespace App\Test\TestCase\Command;
 
-    use Cake\TestSuite\ConsoleIntegrationTestCase;
-
-    class UpdateTableCommandTest extends ConsoleIntegrationTestCase
+    use Cake\TestSuite\ConsoleIntegrationTestTrait;
+    use Cake\TestSuite\TestCase;
+ 
+    class UpdateTableCommandTest extends TestCase
     {
-        public function setUp()
+        user ConsoleIntegrationTestTrait;
+
+        public function setUp(): void
         {
             parent::setUp();
             $this->useCommandRunner();
@@ -299,7 +351,7 @@ moment, mais testons simplement si la description de notre shell description s'a
         public function testDescriptionOutput()
         {
             $this->exec('update_table --help');
-            $this->assertOutputContains('My cool console app');
+            $this->assertOutputContains('Mon application de console super cool');
         }
     }
 
@@ -318,52 +370,55 @@ notre commande::
 
     class UpdateTableCommand extends Command
     {
-        public function buildOptionParser(ConsoleOptionParser $parser)
+        protected function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
         {
             $parser
-                ->setDescription('My cool console app')
+                ->setDescription('Mon application de console super cool')
                 ->addArgument('table', [
-                    'help' => 'Table to update',
+                    'help' => 'Table à mettre à jour',
                     'required' => true
                 ]);
 
             return $parser;
         }
 
-        public function execute(Arguments $args, ConsoleIo $io)
+        public function execute(Arguments $args, ConsoleIo $io): int
         {
             $table = $args->getArgument('table');
-            $this->loadModel($table);
-            $this->{$table}->query()
+            $this->fetchTable($table)->query()
                 ->update()
                 ->set([
                     'modified' => new FrozenTime()
                 ])
                 ->execute();
+
+            return static::CODE_SUCCESS;
         }
     }
 
-C'est un shell plus complet qui a des options obligatoires et de logique associée.
-Modifions notre cas de test pour avoir le bout de code suivant::
+C'est un shell plus complet qui a des options obligatoires et une logique
+associée. Modifions notre cas de test en y intégrant le code suivant::
 
     namespace Cake\Test\TestCase\Command;
 
     use Cake\Command\Command;
     use Cake\I18n\FrozenTime;
-    use Cake\ORM\TableRegistry;
-    use Cake\TestSuite\ConsoleIntegrationTestCase;
+    use Cake\TestSuite\ConsoleIntegrationTestTrait;
+    use Cake\TestSuite\TestCase;
 
-    class UpdateTableCommandTest extends ConsoleIntegrationTestCase
+    class UpdateTableCommandTest extends TestCase
     {
-        public $fixtures = [
-            // assumes you have a UsersFixture
-            'app.users'
+        use ConsoleIntegrationTestTrait;
+
+        protected $fixtures = [
+            // assume que vous avez une UsersFixture
+            'app.Users'
         ];
 
         public function testDescriptionOutput()
         {
             $this->exec('update_table --help');
-            $this->assertOutputContains('My cool console app');
+            $this->assertOutputContains('Mon application de console super cool');
         }
 
         public function testUpdateModified()
@@ -376,17 +431,19 @@ Modifions notre cas de test pour avoir le bout de code suivant::
             $this->exec('update_table Users');
             $this->assertExitCode(Command::CODE_SUCCESS);
 
-            $user = TableRegistry::get('Users')->get(1);
+            $user = $this->getTableLocator()->get('Users')->get(1);
             $this->assertSame($user->modified->timestamp, $now->timestamp);
 
             FrozenTime::setTestNow(null);
         }
     }
 
-Comme vous pouvez le voir dans la méthode ``testUpdateModified``, nous testons que notre commande
-met à jour la table que nous passons en premier argument. Premièrement, nous faisons l'assertion que la commande
-sort avec le bon code de sortie ``0``. Ensuite nous vérifions que notre commande a fait le travail, qui est de mettre
-à jour la table que nous avons fourni et définit la colonne ``modified`` à la date actuelle.
+Comme vous pouvez le voir dans la méthode ``testUpdateModified``, nous testons
+que notre commande met à jour la table que nous passons en premier argument.
+Premièrement, nous faisons l'assertion que la commande se termine avec le bon
+code de sortie ``0``. Ensuite nous vérifions que notre commande a fait le
+travail, qui est de mettre à jour la table que nous avons fournie et d'insérer
+la date et l'heure actuelle dans la colonne ``modified``.
 
 Souvenez-vous que ``exec()`` va prendre la même chaîne que si vous tapiez dans le CLI, donc vous pouvez inclure des options
 et des arguments dans la chaîne de votre commande.
@@ -394,12 +451,13 @@ et des arguments dans la chaîne de votre commande.
 Tester les Shells Interactifs
 -----------------------------
 
-Les consoles sont souvent interactives. Tester les shells intéractifs avec la classe
-``Cake\TestSuite\ConsoleIntegrationTestCase`` nécessite seulement de passer les entrées en deuxième paramètre
-de ``exec()``. Ils doivent être inclus en tableau dans l'ordre dans lequel vous les souhaitez.
+Les consoles sont souvent interactives. Pour tester les shells interactifs avec
+le trait ``Cake\TestSuite\ConsoleIntegrationTestTrait``, vous devez seulement
+passer les entrées attendues en deuxième paramètre de ``exec()``. Ils doivent
+être présentés dans un tableau dans l'ordre dans lequel vous voulez les passer.
 
-Continuons notre exemple de commande, et ajoutons une confirmation intéractive.
-Mettez à jour la classe command avec ce qui suit::
+Continuons notre exemple de commande, et ajoutons une confirmation interactive.
+Mettez à jour la classe de commande de la façon suivante::
 
     namespace App\Command;
 
@@ -411,38 +469,41 @@ Mettez à jour la classe command avec ce qui suit::
 
     class UpdateTableCommand extends Command
     {
-        public function buildOptionParser(ConsoleOptionParser $parser)
+        protected function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
         {
             $parser
-                ->setDescription('My cool console app')
+                ->setDescription('Mon application de console super cool')
                 ->addArgument('table', [
-                    'help' => 'Table to update',
+                    'help' => 'Table à mettre à jour',
                     'required' => true
                 ]);
 
             return $parser;
         }
 
-        public function execute(Arguments $args, ConsoleIo $io)
+        public function execute(Arguments $args, ConsoleIo $io): int
         {
             $table = $args->getArgument('table');
             $this->loadModel($table);
-            if ($io->ask('Are you sure?', 'n', ['y', 'n']) === 'n') {
-                $io->error('You need to be sure.');
+            if ($io->ask('Êtes-vous sûr ?', 'n', ['o', 'n']) === 'n') {
+                $io->error('Vous devez être sûr.');
                 $this->abort();
             }
-            $this->{$table}->query()
+            $this->fetchTable($table)->query()
                 ->update()
                 ->set([
                     'modified' => new FrozenTime()
                 ])
                 ->execute();
+
+            return static::CODE_SUCCESS;
         }
     }
 
-Maintenant que nous avons une sous-commande intéractive, nous pouvons ajouter un cas de test qui vérifie
-que nous recevons les bonnes réponses et un qui vérifie que nous recevons une réponse incorrecte. Retirez la
-méthode ``testUpdateModified`` et ajoutez les méthodes qui suivent dans
+Maintenant que nous avons une sous-commande interactive, nous pouvons ajouter un
+cas de test qui vérifie que nous recevons une réponse positive et un qui vérifie
+que nous recevons une réponse négative. Retirez la méthode
+``testUpdateModified`` et ajoutez les méthodes qui suivent dans
 **tests/TestCase/Command/UpdateTableCommandTest.php**::
 
 
@@ -453,10 +514,10 @@ méthode ``testUpdateModified`` et ajoutez les méthodes qui suivent dans
 
         $this->loadFixtures('Users');
 
-        $this->exec('update_table Users', ['y']);
+        $this->exec('update_table Users', ['o']);
         $this->assertExitCode(Command::CODE_SUCCESS);
 
-        $user = TableRegistry::get('Users')->get(1);
+        $user = $this->getTableLocator()->get('Users')->get(1);
         $this->assertSame($user->modified->timestamp, $now->timestamp);
 
         FrozenTime::setTestNow(null);
@@ -464,47 +525,47 @@ méthode ``testUpdateModified`` et ajoutez les méthodes qui suivent dans
 
     public function testUpdateModifiedUnsure()
     {
-        $user = TableRegistry::get('Users')->get(1);
+        $user = $this->getTableLocator()->get('Users')->get(1);
         $original = $user->modified->timestamp;
 
         $this->exec('my_console best_framework', ['n']);
         $this->assertExitCode(Command::CODE_ERROR);
         $this->assertErrorContains('You need to be sure.');
 
-        $user = TableRegistry::get('Users')->get(1);
+        $user = $this->getTableLocator()->get('Users')->get(1);
         $this->assertSame($original, $user->timestamp);
     }
 
-Dans les premiers cas de test, nous confirmons la question, et les enregistrements sont mis à jour. Dans le deuxième test, nous
+Dans le premier cas de test, nous confirmons la question, et les enregistrements sont mis à jour. Dans le deuxième test, nous
 ne confirmons pas et les enregistrements ne sont pas mis à jour, et nous pouvons vérifier que le message d'erreur a été écrit
 dans ``stderr``.
 
 
-Tester CommandRunner
---------------------
+Tester le CommandRunner
+-----------------------
 
-Pour tester les shells qui sont dispatchés en utilisant la classe ``CommandRunner``, activez la dans vos cas de test
-avec la méthode suivante::
+Pour tester les shells qui sont dispatchés en utilisant la classe
+``CommandRunner``, activez-la dans vos cas de test avec la méthode suivante::
 
     $this->useCommandRunner();
 
 Méthodes d'Assertion
 --------------------
 
-La classe ``Cake\TestSuite\ConsoleIntegrationTestCase`` fournit un certain
-nombre de méthodes d'assertion qui aident à l'assertion de sorties de consoles::
+Le trait ``Cake\TestSuite\ConsoleIntegrationTestTrait`` fournit de nombreuses
+méthodes d'assertion qui aident à vérifier la sortie de la console::
 
-    // assert that the shell exited with the expected code
+    // vérifie que le shell s'est terminé avec le code attendu
     $this->assertExitCode($expected);
 
-    // assert that stdout contains a string
+    // vérifie que stdout contient une chaîne de caractères
     $this->assertOutputContains($expected);
 
-    // assert that stderr contains a string
+    // vérifie que stderr contient une chaîne de caractères
     $this->assertErrorContains($expected);
 
-    // assert that stdout matches a regular expression
+    // vérifie que stdout répond à une expression régulière
     $this->assertOutputRegExp($expected);
 
-    // assert that stderr matches a regular expression
+    // vérifie que stderr répond à une expression régulière
     $this->assertErrorRegExp($expected);
