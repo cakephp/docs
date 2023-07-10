@@ -523,15 +523,6 @@ In the first test case, we confirm the question, and records are updated. In the
 second test we don't confirm and records are not updated, and we can check that
 our error message was written to ``stderr``.
 
-
-Testing the CommandRunner
--------------------------
-
-To test commands that are dispatched using the ``CommandRunner`` class, enable it
-in your test case with the following method::
-
-    $this->useCommandRunner();
-
 Assertion methods
 -----------------
 
@@ -558,3 +549,17 @@ assertion methods that make help assert against console output::
 
     // assert that stderr matches a regular expression
     $this->assertErrorRegExp($expected);
+
+Lifecycle Callbacks
+===================
+
+Like Controllers, Commands offer lifecycle events that allow you to observe
+the framework calling your application code. Commands have:
+
+- ``Command.beforeExecute`` Is called before a command's ``execute()`` method
+  is. The event is passed the ``ConsoleArguments`` parameter as ``args``. This
+  event cannot be stopped or have its result replaced.
+- ``Command.afterExecute`` Is called after a command's ``execute()`` method is
+  complete. The event contains ``ConsoleArguments`` as ``args`` and the command
+  result as ``result``. This event cannot be stopped or have its result
+  replaced.
