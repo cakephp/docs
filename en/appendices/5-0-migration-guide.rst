@@ -49,6 +49,9 @@ Console
 
 - ``ConsoleIntegrationTestTrait::useCommandRunner()`` was removed since it's no longer needed.
 - ``Shell`` has been removed and should be replaced with `Command <https://book.cakephp.org/5/en/console-commands/commands.html>`__
+- ``BaseCommand`` now emits ``Command.beforeExecute`` and
+  ``Command.afterExecute`` events around the command's ``execute()`` method
+  being invoked by the framework.
 
 Controller
 ----------

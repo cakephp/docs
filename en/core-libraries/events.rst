@@ -526,6 +526,7 @@ Additional Reading
 ==================
 
 * :doc:`/orm/behaviors`
+* :doc:`/console-commands/commands`
 * :doc:`/controllers/components`
 * :doc:`/views/helpers`
 * :ref:`testing-events`
