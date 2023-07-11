@@ -461,7 +461,7 @@ Vous pourriez par exemple ajouter ceci à votre ``UserMailer``::
 
 L'objet mailer sera ainsi enregistré en tant qu'écouteur (*listener*)
 d'événement et la méthode ``onRegistration()`` sera appelée chaque fois que
-l'événement ``Model.afterSave`` sera déclenché.
+l'événement ``Model.afterSave`` sera déclenché::
 
     // attache un gestionnaire d'événements sur Users
     $this->Users->getEventManager()->on($this->getMailer('User'));
