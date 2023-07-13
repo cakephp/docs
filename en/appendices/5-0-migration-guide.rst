@@ -99,7 +99,7 @@ Database
 - ``SqlDialectTrait`` has been removed and all its functionality has been moved
   into the ``Driver`` class itself.
 - ``CaseExpression`` has been removed and should be replaced with
-  ``QueryExpression::case()`` or ``CaseStatementExpression``
+  ``QueryExpression::case()`` or ``CaseStatementExpression``.
 - ``Connection::connect()`` has been removed. Use
   ``$connection->getDriver()->connect()`` instead.
 
@@ -117,10 +117,10 @@ Event
 Error
 -----
 
-- ``ErrorHandler`` and ``ConsoleErrorHandler`` have been removed. See the `4.4 migration <https://book.cakephp.org/4/en/appendices/4-4-migration-guide.html#errorhandler-consoleerrorhandler>`__ guide for how to upgrade
-- ``ExceptionRenderer`` has been removed and should be replaced with ``WebExceptionRenderer``
-- ``ErrorLoggerInterface::log()`` has been removed and should be replaced with ``ErrorLoggerInterface::logException()``
-- ``ErrorLoggerInterface::logMessage()`` has been removed and should be replaced with ``ErrorLoggerInterface::logError()``
+- ``ErrorHandler`` and ``ConsoleErrorHandler`` have been removed. See the `4.4 migration <https://book.cakephp.org/4/en/appendices/4-4-migration-guide.html#errorhandler-consoleerrorhandler>`__ guide for how to upgrade.
+- ``ExceptionRenderer`` has been removed and should be replaced with ``WebExceptionRenderer``.
+- ``ErrorLoggerInterface::log()`` has been removed and should be replaced with ``ErrorLoggerInterface::logException()``.
+- ``ErrorLoggerInterface::logMessage()`` has been removed and should be replaced with ``ErrorLoggerInterface::logError()``.
 
 Filesystem
 ----------
@@ -193,7 +193,7 @@ TestSuite
 - ``TestSuite`` was removed. Users should use environment variables to customize
   unit test settings instead.
 - ``TestListenerTrait`` was removed. PHPUnit dropped support for these listeners.
-  See :doc:`/appendices/phpunit10`
+  See :doc:`/appendices/phpunit10`.
 - ``IntegrationTestTrait::configRequest()`` now merges config when called multiple times
   instead of replacing the currently present config.
 
