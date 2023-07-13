@@ -57,7 +57,7 @@ necessary tables:
     VALUES
     (1, 'First Post', 'first-post', 'This is the first post.', 1, NOW(), NOW());
 
-If you are using PostgreSQL, connecting to ``cake_cms`` database and execute the
+If you are using PostgreSQL, connect to the ``cake_cms`` database and execute the
 following SQL instead:
 
 .. code-block:: SQL
@@ -109,14 +109,14 @@ following SQL instead:
 
 
 You may have noticed that the ``articles_tags`` table used a composite primary
-key. CakePHP supports composite primary keys almost everywhere allowing you to
+key. CakePHP supports composite primary keys almost everywhere, allowing you to
 have simpler schemas that don't require additional ``id`` columns.
 
 The table and column names we used were not arbitrary. By using CakePHP's
 :doc:`naming conventions </intro/conventions>`, we can leverage CakePHP more
 effectively and avoid needing to configure the framework. While CakePHP is
 flexible enough to accommodate almost any database schema, adhering to the
-conventions will save you time as you can leverage the convention based defaults
+conventions will save you time as you can leverage the convention-based defaults
 CakePHP provides.
 
 Database Configuration
@@ -149,8 +149,8 @@ might look something like the following::
         // More configuration below.
     ];
 
-Once you've saved your **config/app.php** file, you should see that 'CakePHP is
-able to connect to the database' section have a green chef hat.
+Once you've saved your **config/app.php** file, you should see that the 'CakePHP is
+able to connect to the database' section has a green chef hat.
 
 .. note::
 
@@ -160,10 +160,10 @@ able to connect to the database' section have a green chef hat.
 Creating our First Model
 ========================
 
-Models are the heart of a CakePHP applications. They enable us to read and
+Models are the heart of CakePHP applications. They enable us to read and
 modify our data. They allow us to build relations between our data, validate
-data, and apply application rules. Models build the foundations necessary to
-build our controller actions and templates.
+data, and apply application rules. Models provide the foundation necessary to
+create our controller actions and templates.
 
 CakePHP's models are composed of ``Table`` and ``Entity`` objects. ``Table``
 objects provide access to the collection of entities stored in a specific table.
@@ -185,7 +185,7 @@ this::
         }
     }
 
-We've attached the :doc:`/orm/behaviors/timestamp` behavior which will
+We've attached the :doc:`/orm/behaviors/timestamp` behavior, which will
 automatically populate the ``created`` and ``modified`` columns of our table.
 By naming our Table object ``ArticlesTable``, CakePHP can use naming conventions
 to know that our model uses the ``articles`` table. CakePHP also uses
@@ -200,7 +200,7 @@ conventions to know that the ``id`` column is our table's primary key.
     use the generated model instead.
 
 We'll also create an Entity class for our Articles. Entities represent a single
-record in the database, and provide row level behavior for our data. Our entity
+record in the database and provide row-level behavior for our data. Our entity
 will be saved to **src/Model/Entity/Article.php**. The completed file should
 look like this::
 
@@ -219,10 +219,10 @@ look like this::
         ];
     }
 
-Our entity is quite slim right now, and we've only setup the ``_accessible``
-property which controls how properties can be modified by
+Right now, our entity is quite slim; we've only set up the ``_accessible``
+property, which controls how properties can be modified by
 :ref:`entities-mass-assignment`.
 
-We can't do much with our models right now, so next we'll create our first
+We can't do much with our models yet. Next, we'll create our first
 :doc:`Controller and Template </tutorials-and-examples/cms/articles-controller>` to allow us to interact
 with our model.
