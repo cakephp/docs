@@ -217,7 +217,7 @@ init
     when the connection is created.
 log
     Set to ``true`` to enable query logging. When enabled queries will be logged
-    at a ``debug`` level with the ``queriesLog`` scope.
+    at a ``debug`` level with the ``cake.database.queries`` scope.
 quoteIdentifiers
     Set to ``true`` if you are using reserved words or special characters in
     your table or column names. Enabling this setting will result in queries
@@ -951,7 +951,8 @@ Query logging can be enabled when configuring your connection by setting the
 ``log`` option to ``true``.
 
 When query logging is enabled, queries will be logged to
-:php:class:`Cake\\Log\\Log` using the 'debug' level, and the 'queriesLog' scope.
+:php:class:`Cake\\Log\\Log` using the 'debug' level, and the
+``cake.database.queries`` scope.
 You will need to have a logger configured to capture this level & scope. Logging
 to ``stderr`` can be useful when working on unit tests, and logging to
 files/syslog can be useful when working with web requests::
@@ -962,7 +963,7 @@ files/syslog can be useful when working with web requests::
     Log::setConfig('queries', [
         'className' => 'Console',
         'stream' => 'php://stderr',
-        'scopes' => ['queriesLog']
+        'scopes' => ['cake.database.queries']
     ]);
 
     // File logging
@@ -970,7 +971,7 @@ files/syslog can be useful when working with web requests::
         'className' => 'File',
         'path' => LOGS,
         'file' => 'queries.log',
-        'scopes' => ['queriesLog']
+        'scopes' => ['cake.database.queries']
     ]);
 
 .. note::

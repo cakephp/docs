@@ -232,7 +232,8 @@ init
     como quando a conexão é criada.
 log
     Defina para ``true`` para habilitar o log de query. Quando habilitado, queries
-    serão registradas(logged) em um nível ``debug`` com o escopo `` queriesLog``.
+    serão registradas(logged) em um nível ``debug`` com o escopo ``
+ cake.database.queries``.
 quoteIdentifiers
     Defina para ``true`` se você estiver usando palavras reservadas os caracteres
     especiais nos nomes de suas tabelas ou colunas. Habilitando essa configuração,
@@ -874,7 +875,8 @@ usando o método ``logQueries``::
     $connection->logQueries(false);
 
 Quando o log de consultas está habilitado, as consultas serão logadas em
-:php:class:`Cake\\Log\\Log` usando o nível 'debug', e o escopo 'queriesLog'.
+:php:class:`Cake\\Log\\Log` usando o nível 'debug', e o escopo
+'cake.database.queries'.
 Você precisará ter um logger configurado para capturar esse nível e escopo.
 Logar no ``stderr`` pode ser útil quando se estiver trabalhando com testes
 de unidade e logar em arquivos/syslog pode ser útil ao trabalhar com
@@ -886,7 +888,7 @@ requisições web::
     Log::config('queries', [
         'className' => 'Console',
         'stream' => 'php://stderr',
-        'scopes' => ['queriesLog']
+        'scopes' => ['cake.database.queries']
     ]);
 
     // File logging
@@ -894,7 +896,7 @@ requisições web::
         'className' => 'File',
         'path' => LOGS,
         'file' => 'queries.log',
-        'scopes' => ['queriesLog']
+        'scopes' => ['cake.database.queries']
     ]);
 
 .. note::

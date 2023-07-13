@@ -238,7 +238,7 @@ init
 log
     Défini à ``true`` pour activer les logs des requêtes. Si activé,
     les requêtes seront écrites au niveau ``debug`` avec le scope
-    ``queriesLog``.
+    ``cake.database.queries``.
 quoteIdentifiers
     Défini à ``true`` si vous utilisez des mots réservés ou des caractères
     spéciaux dans les noms de tables ou de colonnes. Si cette option est
@@ -1033,7 +1033,7 @@ log de requêtes à la volée, en utilisant ``enableQueryLogging``::
 
 Quand les logs de requêtes sont activés, les requêtes sont loguées dans
 :php:class:`Cake\\Log\\Log` en utilisant le niveau 'debug', et le scope
-'queriesLog'. Vous aurez besoin d'avoir un logger configuré pour capter
+'cake.database.queries'. Vous aurez besoin d'avoir un logger configuré pour capter
 ce niveau et ce scope. Faire des logs vers ``stderr`` peut être utile lorsque vous
 travaillez sur les tests unitaires, et les logs de fichiers/syslog peuvent être
 utiles lorsque vous travaillez avec des requêtes web::
@@ -1044,7 +1044,7 @@ utiles lorsque vous travaillez avec des requêtes web::
     Log::setConfig('queries', [
         'className' => 'Console',
         'stream' => 'php://stderr',
-        'scopes' => ['queriesLog']
+        'scopes' => ['cake.database.queries']
     ]);
 
     // Logs vers des Fichiers
@@ -1052,7 +1052,7 @@ utiles lorsque vous travaillez avec des requêtes web::
         'className' => 'File',
         'path' => LOGS,
         'file' => 'queries.log',
-        'scopes' => ['queriesLog']
+        'scopes' => ['cake.database.queries']
     ]);
 
 .. note::

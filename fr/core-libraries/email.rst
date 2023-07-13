@@ -141,7 +141,7 @@ sont utilisées:
   :php:meth:`~Cake\\Mailer\\Email::configTransport()`.
 - ``'log'``: Niveau de Log pour connecter les headers de l'email headers et le
   message. ``true`` va utiliser LOG_DEBUG. Regardez :ref:`logging-levels`.
-  Notez que les logs seront émis sous le scope nommé ``email``.
+  Notez que les logs seront émis sous le scope nommé ``cake.mailer``.
   Regardez aussi :ref:`logging-scopes`.
 - ``'helpers'``: Tableau de helpers utilisés dans le template email.
   ``ViewBuilder::setHelpers()``/``ViewBuilder::addHelpers()``

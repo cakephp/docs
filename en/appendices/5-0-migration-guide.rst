@@ -233,6 +233,13 @@ Database
 - ``Query::group()`` was deprecated. Use ``Query::groupBy()`` instead now that
   ``Connection`` methods are no longer proxied. This aligns the function name
   with the SQL statement.
+- The ``queriesLog`` logging scope is deprecated use ``cake.database.queries``
+  instead.
+
+Mailer
+-----
+
+- The ``mail`` logging scope is deprecated use ``cake.mailer`` instead.
 
 ORM
 ---
