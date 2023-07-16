@@ -102,6 +102,7 @@ Database
   ``QueryExpression::case()`` or ``CaseStatementExpression``
 - ``Connection::connect()`` has been removed. Use
   ``$connection->getDriver()->connect()`` instead.
+- ``cake.database.queries`` has been added as an alternative to the ``queriesLog`` scope
 
 Datasource
 ----------
@@ -113,6 +114,7 @@ Event
 -----
 
 - Event payloads must be an array. Other object such as ``ArrayAccess`` are no longer cast to array and will raise a ``TypeError`` now.
+- It is recommended to adjust event handlers to be void methods and use ``$event->setResult()`` instead of returning the result
 
 Error
 -----
@@ -157,6 +159,7 @@ Mailer
 ------
 
 - ``Email`` has been removed. Use `Mailer <https://book.cakephp.org/5/en/core-libraries/email.html>`__ instead.
+- ``cake.mailer`` has been added as an alternative to the ``email`` scope
 
 ORM
 ---
