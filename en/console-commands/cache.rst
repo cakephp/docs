@@ -11,4 +11,4 @@ is available for clearing cached data your application has::
     bin/cake cache clear_all
 
     // Clear one cache group
-    bin/cake cache clear_group <groupname.
+    bin/cake cache clear_group <groupname>
