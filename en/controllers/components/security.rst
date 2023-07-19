@@ -1,6 +1,10 @@
 Security
 ########
 
+.. deprecated:: 4.0.0
+    ``SecurityComponent`` has been deprecated. Use :doc:`/controllers/components/form-protection` instead
+    for form tampering protection or :doc:`/security/https-enforcer` to enforce use of HTTPS (TLS) for requests.
+
 .. php:class:: SecurityComponent(ComponentCollection $collection, array $config = [])
 
 The Security Component creates a way to integrate tighter
