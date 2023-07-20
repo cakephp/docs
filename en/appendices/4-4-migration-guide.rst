@@ -115,7 +115,8 @@ Plugins
 - Plugin class names should now match the plugin name with a "Plugin" suffix. For
   example, the plugin class for ``ADmad/I18n`` plugin would be ``ADmad\I18n\I18nPlugin``
   instead of ``ADmad\I18n\Plugin``, as was the case for CakePHP 4.3 and below.
-  The old style name for existing majors should be kept to avoid BC breaks. So the recommendation is for new plugins or when doing a major upgrade.
+  The old style name for existing majors should be kept to avoid BC breaks. 
+  So the new convention is for new plugins or when doing a new major release.
 
 Routing
 -------
