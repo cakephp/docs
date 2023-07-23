@@ -108,7 +108,9 @@ Datasource
 ----------
 
 - The ``getAccessible()`` method was added to ``EntityInterface``. Non-ORM
-  implementations will now need to implement this method.
+  implementations need to implement this method now.
+- The ``aliasField()`` method was added to ``RepositoryInterface``. Non-ORM
+  implementations need to implement this method now.
 
 Event
 -----
