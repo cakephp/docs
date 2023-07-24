@@ -217,7 +217,7 @@ If you want to control the entire exception rendering and logging process you
 can use the ``Error.exceptionRenderer`` option in **config/app.php** to choose
 a class that will render exception pages. Changing the ExceptionRenderer is
 useful when you want to change the logic used to create an error controller,
-choose the error template, or control how the overall rendering process.
+choose the error template, or control the overall rendering process.
 
 Your custom exception renderer class should be placed in **src/Error**. Let's
 assume our application uses ``App\Exception\MissingWidgetException`` to indicate
