@@ -416,7 +416,7 @@ If your application contained the following exception::
 
     use Cake\Core\Exception\CakeException;
 
-    class MissingWidgetException extends Exception
+    class MissingWidgetException extends CakeException
     {
     }
 
@@ -424,8 +424,9 @@ You could provide nice development errors, by creating
 **templates/Error/missing_widget.php**. When in production mode, the above
 error would be treated as a 500 error and use the **error500** template.
 
-If your exceptions have a code between ``400`` and ``506`` the exception code
-will be used as the HTTP response code.
+Exceptions that subclass ``Cake\Http\Exception\HttpException``, will have their
+error code used as an HTTP status code if the error code is between ``400`` and
+``506``.
 
 The constructor for :php:exc:`Cake\\Core\\Exception\\CakeException` allows you to
 pass in additional data. This additional data is interpolated into the the
