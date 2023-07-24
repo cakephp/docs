@@ -1094,8 +1094,8 @@ You can use ``identifier()`` in comparisons to aggregations too::
 Collation
 ---------------------------------
 
-In situations that you need to deal with accented characters, multilingual data 
-or case-sensitive comparisons, you can use the ``$collation`` parameter of ``IdentifierExpression`` 
+In situations that you need to deal with accented characters, multilingual data
+or case-sensitive comparisons, you can use the ``$collation`` parameter of ``IdentifierExpression``
 or ``StringExpression`` to apply a character expression to a certain collation::
 
     use Cake\Database\Expression\IdentifierExpression;
@@ -1182,7 +1182,7 @@ expression objects to add snippets of SQL to your queries::
 Expression Conjuction
 -----------------------
 
-It is possible to change the conjunction used to join conditions in a query 
+It is possible to change the conjunction used to join conditions in a query
 expression using the method ``setConjunction``::
 
     $query = $articles->find();
@@ -1651,7 +1651,7 @@ results based on the results of other queries::
     $query = $articles->find();
     $query->from(['matches' => $matchingComment])
         ->innerJoin(
-            ['Articles' =>  'articles'], 
+            ['Articles' =>  'articles'],
             ['Articles.id' => $query->identifier('matches.id') ]
         );
 
@@ -1686,6 +1686,8 @@ operations. You can use the ``epilog()`` method for this::
 
 The ``epilog()`` method allows you to append raw SQL to the end of queries. You
 should never put raw user data into ``epilog()``.
+
+.. _query-window-functions:
 
 Window Functions
 ----------------
