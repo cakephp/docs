@@ -7,7 +7,7 @@ But in certain scenarios you only want to show the first few items sorted by e.g
 In general this problem is called the ``greatest-n-per-group`` and here are a few ways how you can
 achieve this behavior.
 
-In the following scenarios lets image a database with a **Articles hasMany Abstracts** schema.
+In the following scenarios lets imagine a database with a **Articles hasMany Abstracts** schema.
 
 .. _a-library-solution:
 
@@ -32,7 +32,7 @@ rather nice way to define ``partitionable`` associations like this ::
 .. tip::
 
     Please make sure your DBMS is supported to do these kind of ``window`` functions in SQL.
-    Check the plugins requirements for further information.
+    Check the plugin's requirements for further information.
 
 
 .. _custom-solutions-on-association-level:
@@ -67,7 +67,7 @@ This will select the top comments via a join query that is based on the max poin
         }
     ]);
 
-this will look something like this::
+The generated query will look something like this::
 
     SELECT
         TopAbstracts.id AS `TopAbstracts__id`, ...
