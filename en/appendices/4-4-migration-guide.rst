@@ -192,6 +192,11 @@ Controller
   need to implement the static method ``contentType()`` to participate in
   content-type negotiation.
 
+Core
+----
+
+* The previously experimental API for the :doc:`/development/dependency-injection` container, introduced in CakePHP 4.2, is now considered stable.
+
 Database
 --------
 
