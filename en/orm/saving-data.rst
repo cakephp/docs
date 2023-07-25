@@ -1036,8 +1036,8 @@ by setting data to the ``_joinData`` property::
     $studentsTable->save($student);
 
 The example above will only work if the property ``_joinData`` is already a
-reference to a Join Table Entity. If this is not your case you can populate
-using the Table to create the entity::
+reference to a Join Table Entity. If you don't already have a ``_joinData``
+entity, you can create one using ``newEntity()``::
 
     $coursesMembershipsTable = $this->getTableLocator()->get('CoursesMemberships');
     $student->courses[0]->_joinData = $coursesMembershipsTable->newEntity([
