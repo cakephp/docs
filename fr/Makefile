@@ -8,13 +8,12 @@ PAPER         =
 BUILDDIR      = ../build
 CONFDIR       = ../config
 PYTHON        = python3
-LANG          = fr
 SPHINX_LANG   = fr
 
 # Internal variables.
 PAPEROPT_a4     = -D latex_paper_size=a4
 PAPEROPT_letter = -D latex_paper_size=letter
-ALLSPHINXOPTS   = -d $(BUILDDIR)/doctrees/$(LANG) -c $(CONFDIR) -D language=$(SPHINX_LANG) $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) .
+ALLSPHINXOPTS   = -d $(BUILDDIR)/doctrees/$(SPHINX_LANG) -c $(CONFDIR) -D language=$(SPHINX_LANG) $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) .
 
 .PHONY: help clean html dirhtml singlehtml pickle json htmlhelp qthelp devhelp epub latex latexpdf text man changes linkcheck doctest
 
@@ -41,9 +40,9 @@ clean:
 	-rm -rf $(BUILDDIR)/*
 
 html:
-	$(SPHINXBUILD) -b html -D "exclude_patterns=*-contents.rst" $(ALLSPHINXOPTS) $(BUILDDIR)/html/$(LANG)
+	$(SPHINXBUILD) -b html -D "exclude_patterns=*-contents.rst" $(ALLSPHINXOPTS) $(BUILDDIR)/html/$(SPHINX_LANG)
 	@echo
-	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html/$(LANG)."
+	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html/$(SPHINX_LANG)."
 
 dirhtml:
 	$(SPHINXBUILD) -b dirhtml $(ALLSPHINXOPTS) $(BUILDDIR)/dirhtml
@@ -66,10 +65,10 @@ json:
 	@echo "Build finished; now you can process the JSON files."
 
 htmlhelp:
-	$(SPHINXBUILD) -b htmlhelp $(ALLSPHINXOPTS) $(BUILDDIR)/htmlhelp/$(LANG)
+	$(SPHINXBUILD) -b htmlhelp $(ALLSPHINXOPTS) $(BUILDDIR)/htmlhelp/$(SPHINX_LANG)
 	@echo
 	@echo "Build finished; now you can run HTML Help Workshop with the" \
-	      ".hhp project file in $(BUILDDIR)/htmlhelp/$(LANG)."
+	      ".hhp project file in $(BUILDDIR)/htmlhelp/$(SPHINX_LANG)."
 
 qthelp:
 	$(SPHINXBUILD) -b qthelp $(ALLSPHINXOPTS) $(BUILDDIR)/qthelp
@@ -90,22 +89,22 @@ devhelp:
 	@echo "# devhelp"
 
 epub:
-	$(SPHINXBUILD) -b epub -D master_doc='epub-contents' $(ALLSPHINXOPTS) $(BUILDDIR)/epub/$(LANG)
+	$(SPHINXBUILD) -b epub -D master_doc='epub-contents' $(ALLSPHINXOPTS) $(BUILDDIR)/epub/$(SPHINX_LANG)
 	@echo
-	@echo "Build finished. The epub file is in $(BUILDDIR)/epub/$(LANG)."
+	@echo "Build finished. The epub file is in $(BUILDDIR)/epub/$(SPHINX_LANG)."
 
 latex:
-	$(SPHINXBUILD) -b latex $(ALLSPHINXOPTS) $(BUILDDIR)/latex/$(LANG)
+	$(SPHINXBUILD) -b latex $(ALLSPHINXOPTS) $(BUILDDIR)/latex/$(SPHINX_LANG)
 	@echo
-	@echo "Build finished; the LaTeX files are in $(BUILDDIR)/latex/$(LANG)."
+	@echo "Build finished; the LaTeX files are in $(BUILDDIR)/latex/$(SPHINX_LANG)."
 	@echo "Run \`make' in that directory to run these through (pdf)latex" \
 	      "(use \`make latexpdf' here to do that automatically)."
 
 latexpdf:
-	$(SPHINXBUILD) -b latex $(ALLSPHINXOPTS) $(BUILDDIR)/latex/$(LANG)
+	$(SPHINXBUILD) -b latex $(ALLSPHINXOPTS) $(BUILDDIR)/latex/$(SPHINX_LANG)
 	@echo "Running LaTeX files through pdflatex..."
-	make -C $(BUILDDIR)/latex/$(LANG) all-pdf
-	@echo "pdflatex finished; the PDF files are in $(BUILDDIR)/latex/$(LANG)."
+	make -C $(BUILDDIR)/latex/$(SPHINX_LANG) all-pdf
+	@echo "pdflatex finished; the PDF files are in $(BUILDDIR)/latex/$(SPHINX_LANG)."
 
 text:
 	$(SPHINXBUILD) -b text $(ALLSPHINXOPTS) $(BUILDDIR)/text
