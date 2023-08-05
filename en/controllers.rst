@@ -428,7 +428,7 @@ set as properties on your controller::
     // Get an ElasticSearch model
     $articles = $this->fetchModel('Articles', 'Elastic');
 
-    // Get a webservices model 
+    // Get a webservices model
     $github = $this->fetchModel('GitHub', 'Webservice');
 
 .. versionadded:: 4.5.0
@@ -448,6 +448,10 @@ the controller's default one::
 .. versionadded:: 4.3.0
     ``Controller::fetchTable()`` was added. Prior to 4.3 you need to use ``Controller::loadModel()``.
 
+.. note::
+
+    ``Controller::fetchTable()`` does not create a proeprty controller property with the name of the table alias,
+    e.g. ``$this->Articles``, as  ``Controller::loadModel()`` does.
 
 Paginating a Model
 ==================

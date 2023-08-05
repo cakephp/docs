@@ -1099,6 +1099,23 @@ only connect specific resource routes you can use the ``only`` option::
 Would create read only resource routes. The route names are ``create``,
 ``update``, ``view``, ``index``, and ``delete``.
 
+The default **route name and controller action used** are as follows:
+
+=========== =======================
+Route name  Controller action used    
+=========== =======================
+create      add      
+----------- -----------------------
+update      edit  
+----------- -----------------------
+view        view      
+----------- -----------------------
+index       index  
+----------- -----------------------
+delete      delete  
+=========== =======================
+
+
 Changing the Controller Actions Used
 ------------------------------------
 

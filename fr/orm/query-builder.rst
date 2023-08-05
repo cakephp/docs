@@ -560,7 +560,7 @@ pourrions le faire ainsi::
     $sizing = $query->newExpr()->case()
         ->when(['population <' => 100000])
         ->then('PETITE')
-        ->when($q->between('population', 100000, 999000))
+        ->when($query->newExpr()->between('population', 100000, 999000))
         ->then('MOYENNE')
         ->when(['population >=' => 999001])
         ->then('GRANDE');

@@ -328,6 +328,8 @@ You can access existing wrappers for several SQL functions through ``Query::func
     Calculate the max of a column. `Assumes arguments are literal values.`
 ``count()``
     Calculate the count. `Assumes arguments are literal values.`
+``cast()``
+    Convert a field or expression from one data type to another.
 ``concat()``
     Concatenate two values together. `Assumes arguments are bound parameters.`
 ``coalesce()``
@@ -538,7 +540,7 @@ following::
     $sizing = $query->newExpr()->case()
         ->when(['population <' => 100000])
         ->then('SMALL')
-        ->when($q->between('population', 100000, 999000))
+        ->when($query->newExpr()->between('population', 100000, 999000))
         ->then('MEDIUM')
         ->when(['population >=' => 999001])
         ->then('LARGE');
@@ -1086,10 +1088,35 @@ use the ``identifier()`` method::
             return $exp->gt('population', 100000);
         });
 
+You can use ``identifier()`` in comparisons to aggregations too::
+
+    $query = $this->Orders->find();
+    $query->select(['Customers.customer_name', 'total_orders' => $query->func()->count('Orders.order_id')])
+        ->contain('Customers')
+        ->group(['Customers.customer_name'])
+        ->having(['total_orders >=' => $query->identifier('Customers.minimum_order_count')]);
+
 .. warning::
 
     To prevent SQL injections, Identifier expressions should never have
     untrusted data passed into them.
+
+Collation
+---------------------------------
+
+In situations that you need to deal with accented characters, multilingual data
+or case-sensitive comparisons, you can use the ``$collation`` parameter of ``IdentifierExpression``
+or ``StringExpression`` to apply a character expression to a certain collation::
+
+    use Cake\Database\Expression\IdentifierExpression;
+
+    $collation = 'Latin1_general_CI_AI'; //sql server example
+    $query = $cities->find()
+        ->where(function (QueryExpression $exp, Query $q) use ($collation) {
+            return $exp->like(new IdentifierExpression('name', $collation), '%São José%');
+        });
+    # WHERE name COLLATE LIKE Latin1_general_CI_AI "%São José%"
+
 
 Automatically Creating IN Clauses
 ---------------------------------
@@ -1163,7 +1190,7 @@ expression objects to add snippets of SQL to your queries::
     never use untrusted data into expressions.
 
 Using Connection Roles
--------------------------
+----------------------
 
 If you have configured :ref:`read-and-write-connections` in your application,
 you can have a query run on the ``read`` connection using one of the role
@@ -1177,6 +1204,35 @@ methods::
 
 .. versionadded:: 4.5.0
     Query role methods were added in 4.5.0
+
+Expression Conjuction
+---------------------
+
+It is possible to change the conjunction used to join conditions in a query
+expression using the method ``setConjunction``::
+
+    $query = $articles->find();
+    $expr = $query->newExpr(['1','1'])->setConjunction('+');
+    $query->select(['two' => $expr]);
+
+And can be used combined with aggregations too::
+
+    $query = $products->find();
+    $query->select(function ($query) {
+            $stockQuantity = $query->func()->sum('Stocks.quantity');
+            $totalStockValue = $query->func()->sum(
+                    $query->newExpr(['Stocks.quantity', 'Products.unit_price'])
+                        ->setConjunction('*')
+            );
+            return [
+                'Products.name',
+                'stock_quantity' => $stockQuantity,
+                'Products.unit_price',
+                'total_stock_value' => $totalStockValue
+            ];
+        })
+        ->innerJoinWith('Stocks')
+        ->groupBy(['Products.id', 'Products.name', 'Products.unit_price']);
 
 Getting Results
 ===============
@@ -1624,7 +1680,7 @@ results based on the results of other queries::
     $query = $articles->find();
     $query->from(['matches' => $matchingComment])
         ->innerJoin(
-            ['Articles' =>  'articles'], 
+            ['Articles' =>  'articles'],
             ['Articles.id' => $query->identifier('matches.id') ]
         );
 

@@ -18,7 +18,7 @@ To upgrade to the new fixture system, you need to make a few updates:
 
    This removes schema management from the test fixture manager. Instead your
    application needs to create/update schema at the beginning of each test run.
-#. Next, update ``tests/boostrap.php`` to create schema. There are a few
+#. Next, update ``tests/bootstrap.php`` to create schema. There are a few
    different ways to create schema. Refer to :ref:`creating-test-database-schema`
    for the methods provided by CakePHP.
 #. Then, remove all the ``$fields`` and ``$import`` properties from your fixtures.

@@ -146,3 +146,4 @@ Making Search Work Locally
 * Start elasticsearch with the default configuration.
 * Populate the search using tooling found in the [cakephp docs builder](https://github.com/cakephp/docs-builder) project.
 * You should now be able to search the docs using elasticsearch.
+
