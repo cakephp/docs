@@ -338,13 +338,9 @@ Checking the Pagination State
         echo $this->Paginator->current();
         // Output is 3
 
-<<<<<<< HEAD
-.. php:method:: hasNext()
-=======
     Uses the ``current`` template.
 
 .. php:method:: hasNext(string $model = null)
->>>>>>> 4.next
 
     Returns ``true`` if the given result set is not at the last page.
 
@@ -367,12 +363,8 @@ Creating a Page Counter
 
 Returns a counter string for the paged result set. Using a provided format
 string and a number of options you can create localized and application
-<<<<<<< HEAD
-specific indicators of where a user is in the paged data set.
-=======
 specific indicators of where a user is in the paged data set. Uses the
 ``counterRange``, and ``counterPages`` templates.
->>>>>>> 4.next
 
 Supported formats are 'range', 'pages' and custom. Defaults to pages which would
 output like '1 of 10'. In the custom mode the supplied string is parsed and
@@ -397,20 +389,12 @@ available. For example::
 
 Setting 'format' to range would output like '1 - 3 of 13'::
 
-<<<<<<< HEAD
-      echo $this->Paginator->counter('range');
-=======
     echo $this->Paginator->counter('range');
->>>>>>> 4.next
 
 Generating Pagination URLs
 ==========================
 
-<<<<<<< HEAD
-.. php:method:: generateUrl(array $options = [], $full = false)
-=======
 .. php:method:: generateUrl(array $options = [], ?string $model = null, array $url = [], array $urlOptions = [])
->>>>>>> 4.next
 
 By default returns a full pagination URL string for use in non-standard contexts
 (i.e. JavaScript). ::
