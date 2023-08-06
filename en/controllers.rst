@@ -316,14 +316,6 @@ those held in the ``viewClasses`` property.
     View classes must implement the static ``contentType()`` hook method to
     participate in content-type negotiation.
 
-<<<<<<< HEAD
-=======
-
-.. versionadded:: 4.5.0
-    ``addViewClasses()`` was added.
-
-
->>>>>>> 4.next
 Content Type Negotiation Fallbacks
 ==================================
 
