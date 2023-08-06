@@ -8,7 +8,7 @@ PAPER         =
 BUILDDIR      = ../build
 CONFDIR       = ../config
 PYTHON        = python3
-SPHINX_LANG   = pt_BB
+SPHINX_LANG   = pt
 
 # Internal variables.
 PAPEROPT_a4     = -D latex_paper_size=a4
