@@ -55,8 +55,8 @@ View
 
 .. note::
 
-    The folders ``Shell`` is not present by default.
-    You can add them when you need them.
+    The folder ``Shell`` is not present by default.
+    You can add it when you need it.
 
 .. meta::
     :title lang=en: CakePHP Folder Structure

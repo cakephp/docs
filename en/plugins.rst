@@ -624,13 +624,13 @@ Linking to Assets in Plugins
 You can use the :term:`plugin syntax` when linking to plugin assets using the
 :php:class:`~Cake\\View\\Helper\\HtmlHelper`'s script, image, or css methods::
 
-    // Generates a URL of /contact-manager/css/styles.css
+    // Generates a URL of /contact_manager/css/styles.css
     echo $this->Html->css('ContactManager.styles');
 
-    // Generates a URL of /contact-manager/js/widget.js
+    // Generates a URL of /contact_manager/js/widget.js
     echo $this->Html->script('ContactManager.widget');
 
-    // Generates a URL of /contact-manager/img/logo.jpg
+    // Generates a URL of /contact_manager/img/logo.jpg
     echo $this->Html->image('ContactManager.logo');
 
 Plugin assets are served using the ``AssetMiddleware`` middleware by default.
@@ -639,7 +639,7 @@ This is only recommended for development. In production you should
 
 If you are not using the helpers, you can prepend /plugin-name/ to the beginning
 of the URL for an asset within that plugin to serve it. Linking to
-'/contact-manager/js/some_file.js' would serve the asset
+'/contact_manager/js/some_file.js' would serve the asset
 **plugins/ContactManager/webroot/js/some_file.js**.
 
 Components, Helpers and Behaviors

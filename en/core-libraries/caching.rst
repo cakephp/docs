@@ -155,6 +155,8 @@ FileEngine uses the following engine specific options:
 * ``mask`` The mask used for created files
 * ``path`` Path to where cachefiles should be saved. Defaults to system's temp dir.
 
+.. _caching-redisengine:
+
 RedisEngine Options
 -------------------
 
@@ -209,9 +211,9 @@ the ``fallback`` configuration key::
         'fallback' => 'default',
     ]);
 
-If the Redis server unexpectedly failed, writing to the ``redis`` cache
-configuration would fall back to writing to the ``default`` cache configuration.
-If writing to the ``default`` cache configuration *also* failed in this scenario, the
+If initializing the ``RedisEngine`` instance fails, the ``redis`` cache configuration
+would fall back to using the ``default`` cache configuration. If initializing the
+engine for the ``default`` cache configuration *also* fails, in this scenario the
 engine would fall back once again to the ``NullEngine`` and prevent the application
 from throwing an uncaught exception.
 
@@ -482,6 +484,9 @@ A perfect example of this are the results from
 :php:meth:`Cake\\ORM\\Table::find()`. The Query object allows you to cache
 results using the ``cache()`` method. See the :ref:`caching-query-results` section
 for more information.
+
+
+.. _cache-groups:
 
 Using Groups
 ============

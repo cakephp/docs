@@ -155,6 +155,15 @@ This method sets the default format used when converting an object to json::
 .. note::
     This method must be called statically.
 
+.. note::
+    Be aware that this is not a PHP Datetime string format! You need to use a
+    ICU date formatting string as specified in the following resource:
+    https://unicode-org.github.io/icu/userguide/format_parse/datetime/#datetime-format-syntax.
+
+.. versionchanged:: 4.1.0
+    The ``callable`` parameter type was added.
+
+
 .. php:method:: i18nFormat($format = null, $timezone = null, $locale = null)
 
 A very common thing to do with ``Time`` instances is to print out formatted
@@ -291,6 +300,11 @@ Likewise, it is possible to alter the default formatting string to be used for
 
 It is recommended to always use the constants instead of directly passing a date
 format string.
+
+.. note::
+    Be aware that this is not a PHP Datetime string format! You need to use a
+    ICU date formatting string as specified in the following resource:
+    https://unicode-org.github.io/icu/userguide/format_parse/datetime/#datetime-format-syntax.
 
 Formatting Relative Times
 -------------------------

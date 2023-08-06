@@ -378,6 +378,7 @@ By default the ``control()`` method will employ the following widget templates::
 
     'inputContainer' => '<div class="input {{type}}{{required}}">{{content}}</div>'
     'input' => '<input type="{{type}}" name="{{name}}"{{attrs}}/>'
+    'requiredClass' => 'required'
 
 In case of validation errors it will also use::
 

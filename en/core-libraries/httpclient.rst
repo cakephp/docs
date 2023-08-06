@@ -203,7 +203,17 @@ An example of basic authentication::
     ]);
 
 By setting the 'type' key to 'digest', you tell the authentication subsystem to
-use digest authentication.
+use digest authentication. Digest authentication supports the following
+algorithms:
+
+* MD5
+* SHA-256
+* SHA-512-256
+* MD5-sess
+* SHA-256-sess
+* SHA-512-256-sess
+
+The algorithm will be automatically chosen based on the server challenge.
 
 OAuth 1 Authentication
 ----------------------

@@ -1,27 +1,30 @@
-Console Commands
-################
+Commandes sur la Console
+########################
 
 .. php:namespace:: Cake\Console
 
-In addition to a web framework, CakePHP also provides a console framework for
-creating command line tools & applications. Console applications are ideal for
-handling a variety of background & maintenance tasks that leverage your existing
-application configuratino, models, plugins and domain logic.
+En plus d'un framework web, CakePHP fournit aussi un framework de console pour
+créer des outils et applications en ligne de commande. Les applications sur
+console sont idéales pour traiter diverses tâches en arrière-plan ou opérations
+de maintenance qui influent sur la configuration existante de votre application,
+vos modèles, plugin et logique de domaine.
 
-CakePHP provides several console tools for interacting with CakePHP features
-like i18n and routing that enable you to introspect your application and
-generate related files.
+CakePHP propose plusieurs outils de console pour interagir avec les
+fonctionnalités de CakePHP telles que l'internationalisation et le routage, qui
+vous permettent d'introspecter votre application et des générer des fichiers
+correspondant.
 
-The CakePHP Console
-===================
+La Console CakePHP
+==================
 
-The CakePHP Console uses a dispatcher-type system to load a commands, parse
-their arguments and invoke the correct command. While the examples below use
-bash the CakePHP console is compatible with any \*nix shell and windows.
+La console CakePHP utilise un système de type dispatcher pour charger des
+commandes, parser leurs arguments et appeler la bonne commande. Les exemples
+qui suivent utilisent bash ; cependant la console CakePHP est compatible avec
+n'importe quel shell \*nix et Windows.
 
-A CakePHP application contains **src/Command**, **src/Shell** and
-**src/Shell/Task** directories that contain its shells and tasks. It also
-comes with an executable in the **bin** directory:
+Une application CakePHP contient les répertoires **src/Command**, **src/Shell**
+et **src/Shell/Task**, qui contiennent ses shells et ses tâches. Elle est aussi
+livrée avec un exécutable dans le répertoire **bin**:
 
 .. code-block:: console
 
@@ -30,104 +33,108 @@ comes with an executable in the **bin** directory:
 
 .. note::
 
-    For Windows, the command needs to be ``bin\cake`` (note the backslash).
+    Pour Windows, il faut taper la commande ``bin\cake`` (notez le backslash).
 
-Running the Console with no arguments will list out available commands. You
-could then run the any of the listed commands by using its name:
+Si vous lancez la Console sans arguments, vous obtiendrez la liste des commandes
+disponibles. Vous pouvez ensuite lancer une de ces commandes en tapant son nom:
 
 .. code-block:: console
 
-    # run server shell
+    # lancer le shell du serveur
     bin/cake server
 
-    # run migrations shell
+    # lancer le shell des migrations
     bin/cake migrations -h
 
-    # run bake (with plugin prefix)
+    # lancer bake (avec un préfixe de plugin)
     bin/cake bake.bake -h
 
-Plugin commands can be invoked without a plugin prefix if the commands's name
-does not overlap with an application or framework shell. In the case that two
-plugins provide a command with the same name, the first loaded plugin will get
-the short alias. You can always use the ``plugin.command`` format to
-unambiguously reference a command.
+Vous pouvez appeler des commandes de plugin sans le préfixe du plugin si le nom
+de la commande n'entre pas en collision avec un shell de l'application ou du
+framework. Dans le cas où deux plugins proposent une commande avec le même nom,
+l'alias court correspondra au plugin chargé en premier. Vous pouvez toujours
+utiliser le format ``plugin.command`` pour faire référence à une commande de
+manière non ambigüe.
 
-Console Applications
-====================
+Applications sur Console
+========================
 
-By default CakePHP will automatically discover all the commands in your
-application and its plugins. You may want to reduce the number of exposed
-commands, when building standalone console applications. You can use your
-``Application``'s ``console()`` hook to limit which commands are exposed and
-rename commands that are exposed::
+Par défaut, CakePHP cherchera automatiquement toutes les commandes dans votre
+application et vos plugins. Quand vous créerez des applications autonoms sur
+console, vous voudrez peut-être restreindre le nombre de commandes accessibles.
+Vous pouvez utiliser le crochet ``console()`` de ``Application`` pour limiter et
+renommer les commandes exposées::
 
-    // in src/Application.php
+    // dans src/Application.php
     namespace App;
 
-    use App\Shell\UserShell;
-    use App\Shell\VersionShell;
+    use App\Command\UserCommand;
+    use App\Command\VersionCommand;
+    use Cake\Console\CommandCollection;
     use Cake\Http\BaseApplication;
 
     class Application extends BaseApplication
     {
-        public function console($commands)
+        public function console(CommandCollection $commands): CommandCollection
         {
-            // Add by classname
+            // Ajouter par nom de classe
             $commands->add('user', UserCommand::class);
 
-            // Add instance
+            // Ajouter une instance
             $commands->add('version', new VersionCommand());
 
             return $commands;
         }
     }
 
-In the above example, the only commands available would be ``help``, ``version``
-and ``user``. See the `plugin-commands` section for how to add commands in
-your plugins.
+Dans cet exemple, seules les commandes ``help``, ``version`` et ``user``
+seraient disponibles. Consultez la section :ref:`plugin-commands` pour savoir
+comment ajouter des commandes dans vos plugins.
 
 .. note::
 
-    When adding multiple commands that use the same Command class, the ``help``
-    command will display the shortest option.
+    Quand vous ajoutez plusieurs commandes qui utilisent la même classe Command,
+    la commande ``help`` affichera l'option la plus courte.
 
 .. _renaming-commands:
 .. index:: nested commands, subcommands
 
-Renaming Commands
-=================
+Renommer des Commandes
+======================
 
-There are cases where you will want to rename commands, to create nested
-commands or subcommands.  While the default auto-discovery of commands will not
-do this, you can register your commands to create any desired naming.
+Dans certains cas, vous aurez besoin de renommer des commandes, ou de créer des
+commandes imbriquées ou des sous-commandes. La découverte automatique des
+commandes ne fera pas cela, cependant vous pouvez déclarer vos commandes pour
+créer la dénomination désirée.
 
-You can customize the command names by defining each command in your plugin::
+Vous pouvez personnaliser les noms de commandes en définissant chaque commande
+dans votre plugin::
 
-    public function console($commands)
+    public function console(CommandCollection $commands): CommandCollection
     {
-        // Add commands with nested naming
+        // Ajouter des commandes avec une dénomintaion imbriquée
         $commands->add('user dump', UserDumpCommand::class);
         $commands->add('user:show', UserShowCommand::class);
 
-        // Rename a command entirely
+        // Renommer entièrement une commande
         $commands->add('lazer', UserDeleteCommand::class);
 
         return $commands;
     }
 
-When overriding the ``console()`` hook in your application, remember to
-call ``$commands->autoDiscover()`` to add commands from CakePHP, your
-application, and plugins.
+Quand vous réécrivez le crochet ``console()`` de votre application, pensez à
+appeler ``$commands->autoDiscover()`` pour ajouter des commandes de CakePHP, de
+votre application, et des plugins.
 
-If you need to rename/remove any attached commands, you can use the
-``Console.buildCommands`` event on your application event manager to modify the
-available commands.
+Si vous avez besoin de renommer ou supprimer une commande attachée, vous pouvez
+utiliser l'événement ``Console.buildCommands`` dans le gestionnaire d'événements
+de votre application  pour modifier les commandes disponibles.
 
-Commands
-========
+Commandes
+=========
 
-See the :doc:`/console-commands/commands` chapter on how to create your first
-command. Then learn more about commands:
+Rendez-vous au chapitre :doc:`/console-commands/commands` pour créer votre
+première commande. Puis, pour en savoir plus sur les commandes:
 
 .. toctree::
     :maxdepth: 1
@@ -137,8 +144,8 @@ command. Then learn more about commands:
     console-commands/option-parsers
     console-commands/cron-jobs
 
-CakePHP Provided Commands
-=========================
+Commandes Fournies par CakePHP
+==============================
 
 .. toctree::
     :maxdepth: 1
@@ -148,36 +155,37 @@ CakePHP Provided Commands
     console-commands/i18n
     console-commands/plugin
     console-commands/schema-cache
-    console-commands/server
-    console-commands/shells
-    console-commands/repl
     console-commands/routes
+    console-commands/server
+    console-commands/repl
+    console-commands/shells
 
-Routing in the Console Environment
-==================================
+Routage dans l'Environnement de la Console
+==========================================
 
-In command-line interface (CLI), specifically your shells and tasks,
-``env('HTTP_HOST')`` and other webbrowser specific environment variables are not
-set.
+En ligne de commande (CLI), et spécifiquement dans vos shells et vos tâches,
+``env('HTTP_HOST')`` et les autres variables d'environnement spécifiques au
+serveur web ne sont pas définies.
 
-If you generate reports or send emails that make use of ``Router::url()`` those
-will contain the default host ``http://localhost/``  and thus resulting in
-invalid URLs. In this case you need to specify the domain manually.
-You can do that using the Configure value ``App.fullBaseUrl`` from your
-bootstrap or config, for example.
+Si vous générez des rapports ou si vous envoyez des mails qui utilisent00
+``Router::url()``, ils contiendront l'hôte par défaut ``http://localhost/``, et
+donc ils produiront des URL invalides. Dans un tel cas, vous devez spécifier le
+domaine manuellement. Vous pouvez utiliser pour cela la valeur
+``App.fullBaseUrl`` de Configure depuis votre bootstrap ou votre configuration,
+par exemple.
 
-For sending emails, you should provide Email class with the host you want to
-send the email with::
+Pour envoyer des mails, vous devrez fournir une classe Email avec l'hôte à
+partir duquel vous voulez envoyer le mail::
 
     use Cake\Mailer\Email;
 
     $email = new Email();
     $email->setDomain('www.example.org');
 
-This asserts that the generated message IDs are valid and fit to the domain the
-emails are sent from.
+Cela suppose que les IDs du message généré soient valides et correspondent au
+domaine à partir duquel les mails sont envoyés.
 
 
 .. meta::
-    :title lang=en: Shells, Tasks & Console Tools
+    :title lang=fr: Shells, Tâches & Outils de Console
     :keywords lang=en: shell scripts,system shell,application classes,background tasks,line script,cron job,request response,system path,acl,new projects,shells,specifics,parameters,i18n,cakephp,directory,maintenance,ideal,applications,mvc

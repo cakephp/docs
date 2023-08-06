@@ -557,7 +557,7 @@ pourrions le faire ainsi::
     $sizing = $query->newExpr()->case()
         ->when(['population <' => 100000])
         ->then('PETITE')
-        ->when($q->between('population', 100000, 999000))
+        ->when($query->newExpr()->between('population', 100000, 999000))
         ->then('MOYENNE')
         ->when(['population >=' => 999001])
         ->then('GRANDE');
@@ -700,8 +700,8 @@ Après avoir exécuté ces lignes, votre résultat devrait ressembler à quelque
 chose comme ceci::
 
     [
-        ['id' => 1, 'title' => 'Premier Article', 'body' => 'Corps de l'article 1' ...],
-        ['id' => 2, 'title' => 'Deuxième Article', 'body' => 'Corps de l'article 2' ...],
+        ['id' => 1, 'title' => 'Premier Article', 'body' => 'Corps de l\'article 1' ...],
+        ['id' => 2, 'title' => 'Deuxième Article', 'body' => 'Corps de l\'article 2' ...],
         ...
     ]
 

@@ -192,6 +192,8 @@ The above will tell Session to use the built-in 'database' defaults, and
 specify that a Table called ``CustomSessions`` will be the delegate for saving
 session information to the database.
 
+.. _sessions-cache-sessions:
+
 Cache Sessions
 --------------
 
@@ -212,6 +214,32 @@ To use Cache based sessions you can configure you Session config like::
 This will configure Session to use the ``CacheSession`` class as the
 delegate for saving the sessions. You can use the 'config' key which cache
 configuration to use. The default cache configuration is ``'default'``.
+
+Session Locking
+---------------
+
+The app skeleton comes preconfigured with a session config like this::
+
+    'Session' => [
+        'defaults' => 'php',
+    ],
+
+This means CakePHP will handle sessions via what is configured in your ``php.ini``.
+In most cases this will be the default configuration so PHP will save any newly
+created session as a file in e.g. ``/var/lib/php/session``
+
+But this also means any computationally heavy task like querying a large dataset
+combined with an active session will **lock that session file** - therefore
+blocking users to e.g. open a second tab of your app to do something else
+in the meantime.
+
+To prevent this behavior you will have to change the way how sessions are being
+handled in CakePHP by using a different session handler like :ref:`sessions-cache-sessions`
+combined with the :ref:`Redis Engine <caching-redisengine>` or another cache engine.
+
+.. tip::
+
+    If you want to read more about Session Locking see `here <https://ma.ttias.be/php-session-locking-prevent-sessions-blocking-in-requests/>`_
 
 Setting ini directives
 ======================

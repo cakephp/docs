@@ -113,7 +113,7 @@ Using this method will throw an
 * application rules checks failed
 * the delete was aborted by a callback.
 
-If you want to track down the entity that failed to save, you can use the
+If you want to track down the entity that failed to delete, you can use the
 :php:meth:`Cake\\ORM\Exception\\PersistenceFailedException::getEntity()` method::
 
         try {

@@ -759,12 +759,12 @@ Attribute Matching Types
             ]
         */
 
-.. php:staticmethod:: normalize(array $data, $assoc = true)
+.. php:staticmethod:: normalize(array $data, $assoc = true, $default = null)
 
     Normalizes an array. If ``$assoc`` is ``true``, the resulting array will be
     normalized to be an associative array. Numeric keys with values, will be
-    converted to string keys with null values. Normalizing an array, makes using
-    the results with :php:meth:`Hash::merge()` easier::
+    converted to string keys with ``$default`` values. Normalizing an array,
+    makes using the results with :php:meth:`Hash::merge()` easier::
 
         $a = ['Tree', 'CounterCache',
             'Upload' => [
@@ -807,6 +807,9 @@ Attribute Matching Types
                 [Transactional] => null
             ]
         */
+
+.. versionchanged:: 4.5.0
+    The ``$default`` parameter was added.
 
 .. php:staticmethod:: nest(array $data, array $options = [])
 
