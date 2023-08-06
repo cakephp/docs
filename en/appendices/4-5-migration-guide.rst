@@ -122,6 +122,9 @@ Console
 - ``ConsoleOptionParser`` now treats all input after a ``--`` as positional
   arguments. This allows console commands to accept positional arguments that
   begin with a ``-`` such as date values like ``-1 day``.
+- ``bin/cake cache clear_group <name>`` was added. This command gives a CLI
+  interface to clearing a specific cache group. See :ref:`cache-groups` for how
+  to use cache groups.
 
 Controller
 ----------

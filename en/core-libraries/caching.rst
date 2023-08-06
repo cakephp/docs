@@ -488,6 +488,9 @@ A perfect example of this are the results from
 results using the ``cache()`` method. See the :ref:`caching-query-results` section
 for more information.
 
+
+.. _cache-groups:
+
 Using Groups
 ============
 
