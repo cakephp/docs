@@ -317,7 +317,7 @@ A similar change has been applied to the ``RepositoryInterface::get()`` method::
 
     public function view(int $id)
     {
-        $entity = $this->Authors->get($id, [
+        $author = $this->Authors->get($id, [
             'contain' => ['Books'],
             'finder' => 'latest'
         ]);
