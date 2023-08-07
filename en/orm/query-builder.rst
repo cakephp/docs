@@ -1212,7 +1212,7 @@ Tuple Comparison
 ----------------
 
 Tuple comparison involves comparing two rows of data (tuples) element by element,
-typically using comparison operators like `<, >, =`::
+typically using comparison operators like ``<, >, =``::
 
     $products->find()
         ->where([
