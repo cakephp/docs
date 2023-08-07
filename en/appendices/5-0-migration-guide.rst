@@ -47,6 +47,7 @@ Cache
 Console
 -------
 
+- ``BaseCommand::__constructor()`` was removed.
 - ``ConsoleIntegrationTestTrait::useCommandRunner()`` was removed since it's no longer needed.
 - ``Shell`` has been removed and should be replaced with `Command <https://book.cakephp.org/5/en/console-commands/commands.html>`__
 - ``BaseCommand`` now emits ``Command.beforeExecute`` and
@@ -311,6 +312,23 @@ should now be written as::
 The finder can then be called as ``find('byCategoryOrUser', userId: $somevar)``.
 You can even include the special named arguments for setting query clauses.
 ``find('byCategoryOrUser', userId: $somevar, conditions: ['enabled' => true])``.
+
+A similar change has been applied to the ``RepositoryInterface::get()`` method::
+
+    public function view(int $id)
+    {
+        $entity = $this->Authors->get($id, [
+            'contain' => ['Books'],
+            'finder' => 'latest'
+        ]);
+    }
+
+should now be written as::
+
+    public function view(int $id)
+    {
+        $entity = $this->Authors->get($id, contain: ['Books'], finder: 'latest');
+    }
 
 Http
 ----
