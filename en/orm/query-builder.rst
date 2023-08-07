@@ -1224,7 +1224,7 @@ typically using comparison operators like ``<, >, =``::
    
     # WHERE (unit_price < 20 OR (unit_price = 20 AND tax_percentage <= 5))
 
-The same result can be achieved using `TupleComparison`::
+The same result can be achieved using ``TupleComparison``::
 
     use Cake\Database\Expression\TupleComparison;
 
