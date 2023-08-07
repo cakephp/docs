@@ -1240,7 +1240,7 @@ The same result can be achieved using ``TupleComparison``::
 
     # WHERE (unit_price, tax_percentage) <= (20, 5))
 
-Tuple Comparison can also be used with `IN` and the result can be transformed 
+Tuple Comparison can also be used with ``IN`` and the result can be transformed 
 even on DBMS that does not natively support it::
 
     $articles->find()
