@@ -327,7 +327,7 @@ should now be written as::
 
     public function view(int $id)
     {
-        $entity = $this->Authors->get($id, contain: ['Books'], finder: 'latest');
+        $author = $this->Authors->get($id, contain: ['Books'], finder: 'latest');
     }
 
 Http
