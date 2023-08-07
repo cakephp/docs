@@ -1256,7 +1256,7 @@ even on DBMS that does not natively support it::
     # WHERE (1) = ( SELECT (1) WHERE ( ( articles.id = : 10 AND articles.author_id = : 10 ) OR ( articles.id = : 30 AND articles.author_id = : 30 ) ) )
 
 .. note::
-    Tuple comparison transform only supports the `IN` and `=` operators
+    Tuple comparison transform only supports the ``IN`` and ``=`` operators
 
 Getting Results
 ===============
