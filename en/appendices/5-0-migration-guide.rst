@@ -44,6 +44,12 @@ Cache
 - The ``Wincache`` engine was removed. The wincache extension is not supported
   on PHP 8.
 
+Collection
+----------
+
+- `Collection::reject()` now defaults to rejecting truthy values which functions as the 
+  inverse of default `filter()` behavior.
+
 Console
 -------
 
