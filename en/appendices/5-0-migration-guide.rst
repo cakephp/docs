@@ -287,7 +287,7 @@ Http
 ----
 
 - Added support for `PSR-17 <https://www.php-fig.org/psr/psr-17/>`__ factories
-  interface. This allows ``cakephp/http`` to provide a client implementations to
+  interface. This allows ``cakephp/http`` to provide a client implementation to
   libraries that allow automatic interface resolution like php-http.
 - Added ``CookieCollection::__get()`` and ``CookieCollection::__isset()`` to add
   ergonomic ways to access cookies without exceptions.
