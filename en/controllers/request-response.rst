@@ -1171,8 +1171,14 @@ contains::
     // Get the number of cookies in the collection
     count($cookies);
 
-    // Get a cookie instance
+    // Get a cookie instance. Will throw an error if the cookie is not found
     $cookie = $cookies->get('remember_me');
+
+    // Get a cookie or null
+    $cookie = $cookies->remember_me;
+
+    // Check if a cookie exists
+    $exists = isset($cookies->remember_me)
 
 Once you have a ``Cookie`` object you can interact with it's state and modify
 it. Keep in mind that cookies are immutable, so you'll need to update the

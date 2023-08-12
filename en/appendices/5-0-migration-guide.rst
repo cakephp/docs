@@ -283,6 +283,15 @@ Database
 - Supported drivers now automatically add auto-increment only to integer primary keys named "id" instead
   of all integer primary keys. Setting 'autoIncrement' to false always disables on all supported drivers.
 
+Http
+----
+
+- Added support for `PSR-17 <https://www.php-fig.org/psr/psr-17/>`__ factories
+  interface. This allows ``cakephp/http`` to provide a client implementations to
+  libraries that allow automatic interface resolution like php-http.
+- Added ``CookieCollection::__get()`` and ``CookieCollection::__isset()`` to add
+  ergonomic ways to access cookies without exceptions.
+
 ORM
 ---
 
@@ -335,13 +344,6 @@ should now be written as::
     {
         $author = $this->Authors->get($id, contain: ['Books'], finder: 'latest');
     }
-
-Http
-----
-
-- Added support for `PSR-17 <https://www.php-fig.org/psr/psr-17/>`__ factories
-  interface. This allows ``cakephp/http`` to provide a client implementations to
-  libraries that allow automatic interface resolution like php-http.
 
 TestSuite
 ---------
