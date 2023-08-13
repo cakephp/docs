@@ -44,12 +44,6 @@ Cache
 - The ``Wincache`` engine was removed. The wincache extension is not supported
   on PHP 8.
 
-Collection
-----------
-
-- `Collection::reject()` now defaults to rejecting truthy values which functions as the 
-  inverse of default `filter()` behavior.
-
 Console
 -------
 
@@ -266,6 +260,13 @@ CakePHP also uses ``assert()`` to provide improved error messages and additional
 type soundness. In production mode, you can configure PHP to not generate
 code for ``assert()`` yielding improved application performance. See the
 :ref:`symlink-assets` for how to do this.
+
+Collection
+----------
+
+- Added ``unique()`` which filters out duplicate value specified by provided callback.
+- ``reject()`` now supports a default callback which filters out truthy values which is
+  the inverse of the default behavior of ``filter()``
 
 Core
 ----
