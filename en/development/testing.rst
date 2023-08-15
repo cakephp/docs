@@ -1150,8 +1150,7 @@ simulate actual authentication request headers.
 
 When testing Basic or Digest Authentication, you can add the environment
 variables that `PHP creates <https://php.net/manual/en/features.http-auth.php>`_
-automatically. These environment variables used in the authentication adapter
-outlined in :ref:`basic-authentication`::
+automatically.::
 
     public function testBasicAuthentication(): void
     {
