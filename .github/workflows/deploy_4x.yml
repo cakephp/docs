@@ -6,6 +6,11 @@ on:
   push:
     branches:
       - 4.x
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/4.x' }}
 
 jobs:
   deploy:
