@@ -20,7 +20,6 @@ Contents
     views
     orm
 
-    controllers/components/authentication
     core-libraries/caching
     bake
     console-commands

@@ -99,7 +99,7 @@ The Plugin will handle the authentication process using 3 different classes:
   this is before your Controllers are processed by the framework, and will pick the
   credentials and process them to check if the user is authenticated.
 
-If you remember, we used :doc:`AuthComponent </controllers/components/authentication>`
+If you remember, we used `AuthComponent`
 before to handle all these steps. Now the logic is divided into specific classes and
 the authentication process happens before your controller layer. First it checks if the user
 is authenticated (based on the configuration you provided) and injects the user and
@@ -195,7 +195,7 @@ If you visit your site, you'll get an "infinite redirect loop" so let's fix that
 
     If your application serves from both SSL and non-SSL protocols, then you might have problems
     with sessions being lost, in case your application is on non-SSL protocol. You need to enable
-    access by setting session.cookie_secure to false in your config config/app.php or config/app_local.php. 
+    access by setting session.cookie_secure to false in your config config/app.php or config/app_local.php.
     (See :doc:`CakePHP’s defaults on session.cookie_secure </development/sessions>`)
 
 In your ``UsersController``, add the following code::

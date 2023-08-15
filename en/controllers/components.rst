@@ -15,7 +15,6 @@ chapter for each component:
 .. toctree::
     :maxdepth: 1
 
-    /controllers/components/authentication
     /controllers/components/flash
     /controllers/components/security
     /controllers/components/form-protection
@@ -72,7 +71,7 @@ Aliasing Components
 
 One common setting to use is the ``className`` option, which allows you to
 alias components. This feature is useful when you want to
-replace ``$this->Auth`` or another common Component reference with a custom
+replace ``$this->Flash`` or another common Component reference with a custom
 implementation::
 
     // src/Controller/PostsController.php
@@ -80,21 +79,21 @@ implementation::
     {
         public function initialize(): void
         {
-            $this->loadComponent('Auth', [
-                'className' => 'MyAuth'
+            $this->loadComponent('Flash', [
+                'className' => 'MyFlash'
             ]);
         }
     }
 
-    // src/Controller/Component/MyAuthComponent.php
-    use Cake\Controller\Component\AuthComponent;
+    // src/Controller/Component/MyFlashComponent.php
+    use Cake\Controller\Component\FlashComponent;
 
-    class MyAuthComponent extends AuthComponent
+    class MyFlashComponent extends FlashComponent
     {
-        // Add your code to override the core AuthComponent
+        // Add your code to override the core FlashComponent
     }
 
-The above would *alias* ``MyAuthComponent`` to ``$this->Auth`` in your
+The above would *alias* ``MyFlashComponent`` to ``$this->Flash`` in your
 controllers.
 
 .. note::
@@ -341,4 +340,4 @@ When raising a ``RedirectException`` you can include additional headers::
 
 .. meta::
     :title lang=en: Components
-    :keywords lang=en: array controller,core libraries,authentication request,array name,access control lists,public components,controller code,core components,cookiemonster,login cookie,configuration settings,functionality,logic,sessions,cakephp,doc
+    :keywords lang=en: array controller,core libraries,array name,access control lists,public components,controller code,core components,cookiemonster,login cookie,configuration settings,functionality,logic,sessions,cakephp,doc

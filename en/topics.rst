@@ -24,7 +24,6 @@ Introduction to all the key parts of CakePHP:
 * :doc:`/core-libraries/form`
 * :doc:`/development/sessions`
 * :doc:`/development/rest`
-* :doc:`/controllers/components/authentication`
 * :doc:`/controllers/pagination`
 * :ref:`csrf-middleware`
 * :doc:`/core-libraries/email`

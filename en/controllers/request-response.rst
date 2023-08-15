@@ -413,7 +413,7 @@ To access the session for a given request use the ``getSession()`` method or use
     $session = $this->request->getSession();
     $session = $this->request->getAttribute('session');
 
-    $userName = $session->read('Auth.User.name');
+    $data = $session->read('sessionKey');
 
 For more information, see the :doc:`/development/sessions` documentation for how
 to use the session object.
