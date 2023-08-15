@@ -5,6 +5,11 @@ on:
   push:
     branches:
       - 5.x
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/5.x' }}
 
 jobs:
   deploy:
