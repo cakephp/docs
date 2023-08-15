@@ -50,13 +50,8 @@ Here is an example of an injected service inside a command::
     // In src/Command/CheckUsersCommand.php
     class CheckUsersCommand extends Command
     {
-        /** @var UsersService */
-        public $users;
-
-        public function __construct(UsersService $users)
+        public function __construct(public UsersService $users)
         {
-            parent::__construct();
-            $this->users = $users;
         }
 
         public function execute(Arguments $args, ConsoleIo $io)
