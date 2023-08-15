@@ -1223,6 +1223,56 @@ And can be used combined with aggregations too::
         ->innerJoinWith('Stocks')
         ->groupBy(['Products.id', 'Products.name', 'Products.unit_price']);
 
+Tuple Comparison
+----------------
+
+Tuple comparison involves comparing two rows of data (tuples) element by element,
+typically using comparison operators like ``<, >, =``::
+
+    $products->find()
+        ->where([
+            'OR' => [
+                ['unit_price <' => 20],
+                ['unit_price' => 20, 'tax_percentage <=' => 5],
+            ]
+        ]);
+   
+    # WHERE (unit_price < 20 OR (unit_price = 20 AND tax_percentage <= 5))
+
+The same result can be achieved using ``TupleComparison``::
+
+    use Cake\Database\Expression\TupleComparison;
+
+    $products->find()
+        ->where(
+            new TupleComparison(
+                ['unit_price', 'tax_percentage'],
+                [20, 5],
+                ['integer', 'integer'], # type of each value
+                '<='
+            )
+        );
+
+    # WHERE (unit_price, tax_percentage) <= (20, 5))
+
+Tuple Comparison can also be used with ``IN`` and the result can be transformed 
+even on DBMS that does not natively support it::
+
+    $articles->find()
+            ->where(
+                new TupleComparison(
+                    ['articles.id', 'articles.author_id'],
+                    [[10, 10], [30, 10]],
+                    ['integer', 'integer'],
+                    'IN'
+                ),
+            );
+
+    # WHERE (1) = ( SELECT (1) WHERE ( ( articles.id = : 10 AND articles.author_id = : 10 ) OR ( articles.id = : 30 AND articles.author_id = : 30 ) ) )
+
+.. note::
+    Tuple comparison transform only supports the ``IN`` and ``=`` operators
+
 Getting Results
 ===============
 
