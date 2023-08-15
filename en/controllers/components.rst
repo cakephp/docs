@@ -17,7 +17,6 @@ chapter for each component:
 
     /controllers/components/authentication
     /controllers/components/flash
-    /controllers/components/security
     /controllers/components/form-protection
     /controllers/components/check-http-cache
 
@@ -26,9 +25,8 @@ chapter for each component:
 Configuring Components
 ======================
 
-Many of the core components require configuration. Some examples of components
-requiring configuration are :doc:`/controllers/components/security` and
-:doc:`/controllers/components/form-protection`.  Configuration for these components,
+Many of the core components require configuration. One example would be
+the :doc:`/controllers/components/form-protection`.  Configuration for these components,
 and for components in general, is usually done via ``loadComponent()`` in your
 Controller's ``initialize()`` method or via the ``$components`` array::
 
