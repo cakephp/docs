@@ -51,7 +51,7 @@ and compare the hash.
 Usage
 =====
 
-Configuring the security component is generally done in the controller's
+Configuring the form protection component is generally done in the controller's
 ``initialize()`` or ``beforeFilter()`` callbacks
 
 Available options are:
@@ -111,7 +111,7 @@ Disabling form tampering for specific actions
 
 There may be cases where you want to disable form tampering prevention for an
 action (ex. AJAX requests).  You may "unlock" these actions by listing them in
-``$this->Security->unlockedActions`` in your ``beforeFilter()``::
+``$this->FormProtection->setConfig('unlockedActions', ['edit']);`` in your ``beforeFilter()``::
 
     namespace App\Controller;
 
