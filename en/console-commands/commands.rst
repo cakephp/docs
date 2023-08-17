@@ -477,7 +477,7 @@ Update the command class to the following::
         public function execute(Arguments $args, ConsoleIo $io): int
         {
             $table = $args->getArgument('table');
-            if ($io->ask('Are you sure?', 'n', ['y', 'n']) === 'n') {
+            if ($io->ask('Are you sure?', 'n', ['y', 'n']) !== 'y') {
                 $io->error('You need to be sure.');
                 $this->abort();
             }
