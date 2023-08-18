@@ -191,11 +191,11 @@ For example, to serialize validation error output of CakePHP entities in a consi
 JSONP Responses
 ---------------
 
-When using ``JsonView`` you can use the special view variable ``_jsonp`` to
+When using ``JsonView`` you can use the special view variable ``jsonp`` to
 enable returning a JSONP response. Setting it to ``true`` makes the view class
 check if query string parameter named "callback" is set and if so wrap the json
 response in the function name provided. If you want to use a custom query string
-parameter name instead of "callback" set ``_jsonp`` to required name instead of
+parameter name instead of "callback" set ``jsonp`` to required name instead of
 ``true``.
 
 Choosing a View Class
