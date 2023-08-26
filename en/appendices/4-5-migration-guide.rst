@@ -80,6 +80,9 @@ Log
 ORM
 ---
 
+- In CakePHP 5 ``EntityTrait::has()`` will return true when an attribute exists
+  and is set to null. To keep the old behavior it is recommended to
+  change ``EntityTrait::has()`` to ``EntityTrait::hasValue()``.
 - ``Table::_initializeSchema()`` is deprecated. Override ``getSchema()``
   instead, or re-map columns in ``initialize()``.
 - ``QueryInterface::repository()`` is deprecated. Use ``setRepository()``
