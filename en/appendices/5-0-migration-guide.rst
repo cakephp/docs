@@ -210,6 +210,9 @@ Validation
   arrays. Support for PHP file upload arrays has been removed from
   ``ServerRequest`` as well so you should not see this as a problem outside of
   tests.
+- Previously, most data validation error messages were simply ``The provided value is invalid``.
+  Now, the data validation error messages are worded more precisely.
+  For example, ``The provided value must be greater than or equal to `5```.
 
 View
 ----
