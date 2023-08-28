@@ -296,6 +296,29 @@ Http
 ORM
 ---
 
+Required Entity Fields
+----------------------
+
+Entities have a new opt-in functionality that allows making entities handle
+properties more strictly. The new behavior is called 'required fields'. When
+enabled, accessing properties that are not defined in the entity will raise
+exceptions. This impacts the following usage::
+
+    $entity->get();
+    $entity->has();
+    $entity->getOriginal();
+    isset($entity->attribute);
+    $entity->attribute;
+
+Fields are considered defined if they pass ``array_key_exists``. This includes
+null values. Because this can be a tedious to enable feature, it was deferred to
+5.0. We'd like any feedback you have on this feature as we're considering making
+this the default behavior in the future.
+
+
+Typed Finder Parameters
+-----------------------
+
 Table finders can now have typed arguments as required instead of an options array.
 For e.g. a finder for fetching posts by category or user::
 
