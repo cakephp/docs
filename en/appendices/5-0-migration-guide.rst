@@ -299,11 +299,10 @@ ORM
 Required Entity Fields
 ----------------------
 
-Entities have a new opt-in functionality that allows making entities 
-handle properties more strictly. The new behavior is called 'required fields'.
-When enabled, accessing properties that
-are not defined in the entity will raise exceptions. This impacts the following
-usage::
+Entities have a new opt-in functionality that allows making entities handle
+properties more strictly. The new behavior is called 'required fields'. When
+enabled, accessing properties that are not defined in the entity will raise
+exceptions. This impacts the following usage::
 
     $entity->get();
     $entity->has();
