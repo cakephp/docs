@@ -27,9 +27,9 @@ CakePHP has a few system requirements:
 While a database engine isn't required, we imagine that most applications will
 utilize one. CakePHP supports a variety of database storage engines:
 
--  MySQL (5.6 or higher)
--  MariaDB (5.6 or higher)
--  PostgreSQL (9.4 or higher)
+-  MySQL (5.7 or higher)
+-  MariaDB (10.1 or higher)
+-  PostgreSQL (9.6 or higher)
 -  Microsoft SQL Server (2012 or higher)
 -  SQLite 3
 

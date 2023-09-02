@@ -31,6 +31,12 @@ Global
 - Global functions are now opt-in. If your application uses global function
   aliases be sure to add ``require CAKE . 'functions.php'`` to you application's
   ``config/bootstrap.php``.
+- The supported database engine versions were updated:
+  -  MySQL (5.7 or higher)
+  -  MariaDB (10.1 or higher)
+  -  PostgreSQL (9.6 or higher)
+  -  Microsoft SQL Server (2012 or higher)
+  -  SQLite 3
 
 Auth
 ----

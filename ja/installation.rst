@@ -34,9 +34,9 @@ CakePHP は nginx や lighttpd や Microsoft IIS のような様々なウェブ�
 これを活用することが想像できます。
 CakePHP は種々のデータベース・ストレージのエンジンをサポートしています：
 
--  MySQL (5.6 以上)
--  MariaDB (5.6 以上)
--  PostgreSQL (9.4 以上)
+-  MySQL (5.7 以上)
+-  MariaDB (10.1 以上)
+-  PostgreSQL (9.6 以上)
 -  Microsoft SQL Server (2012 以上)
 -  SQLite 3
 
