@@ -801,7 +801,7 @@ ORM は、挿入か更新のいずれが実行されるべきかを決定する�
 ドット記法を使うことで、遠くの、または深い入れ子のアソシエーションを
 定義することができます。 ::
 
-    // compaty 、その employees とそれぞれに関連する addresses を保存します。
+    // company 、その employees とそれぞれに関連する addresses を保存します。
     $companies->save($entity, ['associated' => ['Employees.Addresses']]);
 
 さらに、アソシエーションのドット記法はオプションの配列で組み合わせることができます。 ::
