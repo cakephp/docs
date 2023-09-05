@@ -187,6 +187,8 @@ Http
   lets you define which proxies your application trusts.
 - ``MiddlewareQueue`` can now resolve services from the DI container when
   creating middleware based on classnames.
+- ``SessionCsrfMiddleware::replaceToken()`` was added to enable scenarios where
+  CSRF tokens need to be rotated.
 
 I18n
 ----
