@@ -183,6 +183,33 @@ Plugin objects also know their names and path information::
     $path = $plugin->getConfigPath();
     $path = $plugin->getClassPath();
 
+.. _loading-plugins-via-configuration-array:
+
+Loading plugins via configuration array
+=======================================
+
+.. versionadded:: 5.0.0
+
+Alternatively you can also load plugins via adding a ``config/plugins.php``
+to your application with the following content::
+
+    <?php
+    return [
+        'Company/TestPluginThree',
+        'TestPlugin' => ['onlyDebug' => true],
+        'Named' => ['routes' => false],
+    ];
+
+You still have full control over which plugins are loaded in debug and/or
+CLI mode only via the following config values:
+
+- ``onlyDebug``
+- ``onlyCli``
+- ``optional``
+
+The usual plugin hooks ``bootstrap``, ``routes``, ``middleware`` and ``console``
+are available as well.
+
 Using Plugin Classes
 ====================
 

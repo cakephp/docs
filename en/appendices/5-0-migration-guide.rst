@@ -281,6 +281,7 @@ Core
 ----
 
 - The ``services()`` method was added to ``PluginInterface``.
+- ``PluginCollection::addFromConfig()`` has been added to :ref:`simplify plugin loading <loading-plugins-via-configuration-array>`.
 
 Database
 --------
