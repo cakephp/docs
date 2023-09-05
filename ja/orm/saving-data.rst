@@ -711,7 +711,7 @@ CakePHP の検証機能をどう使うかについてより詳しい情報があ
 ``newEntity()`` を使って新しいエンティティーをハイドレートする必要があります。
 例えばこうです。 ::
 
-    // コントローラーのの中で
+    // コントローラーの中で
 
     // Prior to 3.6 use TableRegistry::get('Articles')
     $articles = TableRegistry::getTableLocator()->get('Articles');
