@@ -727,7 +727,7 @@ ORM は、挿入か更新のいずれが実行されるべきかを決定する�
 
     $articles->save($article, ['checkExisting' => false]);
 
-いくつかのエンティティーが読み出した後は、おそらくそれらを変更して、
+いくつかのエンティティーを読み出した後は、おそらくそれらを変更して、
 データベースを更新したいでしょう。これは CakePHP では実に単純な課題です。 ::
 
     // Prior to 3.6 use TableRegistry::get('Articles')
