@@ -71,7 +71,6 @@ apply CSRF to specific groups of routes::
         $routes->applyMiddleware('csrf');
     });
 
-
 Cookie based CSRF middleware options
 ------------------------------------
 
@@ -103,6 +102,13 @@ The available configuration options are:
 When enabled, you can access the current CSRF token on the request object::
 
     $token = $this->request->getAttribute('csrfToken');
+
+Should you need to rotate or replace the session CSRF token you can do so with::
+
+    $this->request = SessionCsrfProtectionMiddleware::replaceToken($this->request);
+
+.. versionadded:: 4.3.0
+    The ``replaceToken`` method was added.
 
 Skipping CSRF checks for specific actions
 -----------------------------------------
