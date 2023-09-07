@@ -205,7 +205,7 @@ ORM
 ---
 
 ``EntityTrait::$_hasAllowsNull`` was added. This property allows you to
-incrementally opt-in to a breaking change present in 5.x for ``EntityTrait::has()``
+incrementally opt-in to a breaking change present in 5.x for ``EntityTrait::has()``.
 When set to true, this property will make ``has()`` and related methods use
 ``array_key_exists`` instead of ``isset`` to decide if fields are 'defined' in an
 entity. This will affect code like::
