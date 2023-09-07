@@ -82,7 +82,7 @@ ORM
 
 - In CakePHP 5 ``EntityTrait::has()`` will return true when an attribute exists
   and is set to null. Depending on your application this can lead to unexpected
-  behavior with your already present code. Use ``EntityTrait::hasValue()`` to
+  behavior with your existing code. Use ``EntityTrait::hasValue()`` to
   check if a field contains a 'non-empty' value.
 - ``Table::_initializeSchema()`` is deprecated. Override ``getSchema()``
   instead, or re-map columns in ``initialize()``.
