@@ -201,6 +201,23 @@ I18n
   reference additional translation domains with `plugin_name.domain`. For
   example ``__d('DebugKit.errors', 'oh no')``.
 
+ORM
+---
+
+``EntityTrait::$_hasAllowsNull`` was added. This property allows you to
+incrementally opt-in to a breaking change present in 5.x for ``EntityTrait::has()``
+When set to true, this property will result in ``has()`` and related methods use
+``array_key_exists`` instead of ``isset`` to decide if fields are 'defined' in an
+entity. The semantic change is that usage like::
+
+    if ($user->has('name')) { 
+        // More logic
+    }
+
+In 4.x this condition would **fail** if ``name`` was ``null``. However, in 5.0,
+this will condition will now **pass**. You can prepare your application for this
+change by incrementally setting ``$_hasAllowsNull``.
+
 TestSuite
 ---------
 
