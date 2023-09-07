@@ -206,9 +206,9 @@ ORM
 
 ``EntityTrait::$_hasAllowsNull`` was added. This property allows you to
 incrementally opt-in to a breaking change present in 5.x for ``EntityTrait::has()``
-When set to true, this property will result in ``has()`` and related methods use
+When set to true, this property will make ``has()`` and related methods use
 ``array_key_exists`` instead of ``isset`` to decide if fields are 'defined' in an
-entity. The semantic change is that usage like::
+entity. This will affect code like::
 
     if ($user->has('name')) { 
         // More logic
