@@ -344,7 +344,7 @@ For e.g. a finder for fetching posts by category or user::
         return $query;
     }
 
-should now be written as::
+can now be written as::
 
     public function findByCategoryOrUser(SelectQuery $query, ?int $categoryId = null, ?int $userId = null)
     {
@@ -372,7 +372,7 @@ A similar change has been applied to the ``RepositoryInterface::get()`` method::
         ]);
     }
 
-should now be written as::
+can now be written as::
 
     public function view(int $id)
     {
