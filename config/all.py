@@ -18,6 +18,7 @@ is_eol = True
 
 # Other versions that display in the version picker menu.
 version_list = [
+    {'name': '5.x', 'number': '5', 'title': '5.x Book'},
     {'name': '4.x', 'number': '4', 'title': '4.x Book'},
     {'name': '3.x', 'number': '3', 'title': '3.x Book'},
     {'name': '2.x', 'number': '2', 'title': '2.x Book'},
