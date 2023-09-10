@@ -1,9 +1,6 @@
 5.0 Upgrade Guide
 #################
 
-.. warning::
-    The upgrade guide for 5.0 is not complete.
-
 First, check that your application is running on latest CakePHP 4.x version.
 
 Fix Deprecation Warnings
@@ -56,9 +53,6 @@ plugin::
 
     bin/cake upgrade rector --rules cakephp50 <path/to/app/src>
     bin/cake upgrade rector --rules chronos3 <path/to/app/src>
-
-.. warning::
-    The upgrade tool for 5.x is not complete yet.
 
 Update CakePHP Dependency
 =========================
