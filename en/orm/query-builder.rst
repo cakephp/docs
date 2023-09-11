@@ -574,7 +574,7 @@ You can create ``if ... then ... else`` conditions by using ``else()``::
     $published = $query->newExpr()
         ->case()
         ->when(['published' => true])
-        ->then('Y');
+        ->then('Y')
         ->else('N');
 
     # CASE WHEN published = true THEN 'Y' ELSE 'N' END;
@@ -584,7 +584,7 @@ Also, it's possible to create the simple variant by passing a value to ``case()`
     $published = $query->newExpr()
         ->case($query->identifier('published'))
         ->when(true)
-        ->then('Y');
+        ->then('Y')
         ->else('N');
 
     # CASE published WHEN true THEN 'Y' ELSE 'N' END;
