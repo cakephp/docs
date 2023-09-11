@@ -1127,13 +1127,11 @@ required authentication, you could write the following tests::
     {
         // Set session data
         $this->session([
-            'Auth' => [
-                'User' => [
-                    'id' => 1,
-                    'username' => 'testing',
-                    // other keys.
-                ]
-            ]
+            'Auth' =>  new User([
+                'id' => 1,
+                'username' => 'testing',
+                // other keys.
+            ])
         ]);
         $this->get('/articles/add');
 
