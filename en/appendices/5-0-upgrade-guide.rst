@@ -57,17 +57,18 @@ plugin::
 Update CakePHP Dependency
 =========================
 
-After applying rector refactorings, upgrade CakePHP and PHPUnit with the following
-composer commands:
+After applying rector refactorings you need to upgrade CakePHP, its plugins, PHPUnit
+and maybe other dependencies in your ``composer.json``.
+This process heavily depends on your application so we recommend you compare your
+``composer.json`` with what is present in `cakephp/app
+<https://github.com/cakephp/app/blob/5.x/composer.json>`__.
 
-.. code-block:: bash
-
-    php composer.phar require --dev --update-with-dependencies "phpunit/phpunit:^10.1"
-    php composer.phar require --update-with-dependencies "cakephp/cakephp:5.0.*"
+After the version strings are adjusted in your ``composer.json`` execute
+``composer update -W`` and check its output.
 
 Update app files based upon latest app template
 ===============================================
 
-Next, ensure your application has been updated to be based upon the
+Next, ensure the rest of your application has been updated to be based upon the
 latest version of `cakephp/app
 <https://github.com/cakephp/app/blob/5.x/>`__.
