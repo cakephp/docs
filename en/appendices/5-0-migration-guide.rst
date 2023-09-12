@@ -176,6 +176,7 @@ ORM
 - ``EntityTrait::has()`` now returns ``true`` when an attribute exists and is
   set to ``null``. In previous versions of CakePHP this would return ``false``.
   See the release notes for 4.5.0 for how to adopt this behavior in 4.x.
+- ``EntityTrait::extractOriginal()`` now returns only existing fields, similar to ``extractOriginalChanged()``.
 - Finder arguments are now required to be associative arrays as they were always expected to be.
 - ``TranslateBehavior`` now defaults to the ``ShadowTable`` strategy. If you are
   using the ``Eav`` strategy you will need to update your behavior configuration
