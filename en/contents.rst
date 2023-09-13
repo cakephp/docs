@@ -71,15 +71,15 @@ Contents
     :caption: Plugins & Packages
 
     standalone-packages
-    Authentication <https://book.cakephp.org/authentication/2/>
-    Authorization <https://book.cakephp.org/authorization/2/>
-    Bake <https://book.cakephp.org/bake/2/>
-    Debug Kit <https://book.cakephp.org/debugkit/4/>
-    Migrations <https://book.cakephp.org/migrations/3/>
-    Elasticsearch <https://book.cakephp.org/elasticsearch/3/en/>
+    Authentication <https://book.cakephp.org/authentication/3/>
+    Authorization <https://book.cakephp.org/authorization/3/>
+    Bake <https://book.cakephp.org/bake/3/>
+    Debug Kit <https://book.cakephp.org/debugkit/5/>
+    Migrations <https://book.cakephp.org/migrations/4/>
+    Elasticsearch <https://book.cakephp.org/elasticsearch/4/>
     Phinx <https://book.cakephp.org/phinx/0/en/>
-    Chronos <https://book.cakephp.org/chronos/2/>
-    Queue <https://book.cakephp.org/queue/1/en/>
+    Chronos <https://book.cakephp.org/chronos/3/>
+    Queue <https://book.cakephp.org/queue/2/>
 
 .. toctree::
     :caption: Other
