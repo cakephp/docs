@@ -254,7 +254,7 @@ custom paths to be used::
 
 .. note::
 
-    In debug mode missing directories will be automatically created to avoid
+    Missing directories will be automatically created to avoid
     unnecessary errors thrown when using the FileEngine.
 
 .. _syslog-log:
