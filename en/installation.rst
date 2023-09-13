@@ -86,13 +86,7 @@ command:
 
 .. code-block:: console
 
-    composer create-project --prefer-dist cakephp/app:5.0.0-beta1 my_app_name
-
-CakePHP 5 is still in beta. While in beta, new projects may require using the 5.x-dev branch instead. Like so:
-
-.. code-block:: console
-
-    composer create-project --prefer-dist cakephp/app:5.x-dev my_app_name
+    composer create-project --prefer-dist cakephp/app:~5.0 my_app_name
 
 Once Composer finishes downloading the application skeleton and the core CakePHP
 library, you should have a functioning CakePHP application installed via
