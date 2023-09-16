@@ -60,6 +60,15 @@ Console
   ``Command.afterExecute`` events around the command's ``execute()`` method
   being invoked by the framework.
 
+Connection
+----------
+
+- ``Connection::prepare()`` has been removed. You can use ``Connection::execute()``
+  instead to execute a SQL query by specifing the SQL string, params and types in a single call.
+- ``Connection::enableQueryLogging()`` has been removed. If you haven't enabled logging
+  through the connection config then you can later set the logger instance for the
+  driver to enable query logging ``$connection->getDriver()->setLogger()``.
+
 Controller
 ----------
 
