@@ -36,6 +36,10 @@ use the ``HttpsEnforcerMiddleware``::
 
 If a non-HTTP request is received that does not use GET a ``BadRequestException`` will be raised.
 
+NOTE: The Strict-Transport-Security header is ignored by the browser when your site has only been 
+accessed using HTTP. Once your site is accessed over HTTPS with no certificate errors, the browser 
+knows your site is HTTPS capable and will honor the Strict-Transport-Security header.
+
 Adding Strict-Transport-Security
 ================================
 
