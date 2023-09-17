@@ -114,7 +114,7 @@ App.base
     The base directory the app resides in. If ``false`` this
     will be auto detected. If not ``false``, ensure your string starts
     with a `/` and does NOT end with a `/`. For example, `/basedir` is a valid
-    App.base. Otherwise, the AuthComponent will not work properly.
+    App.base.
 App.encoding
     Define what encoding your application uses.  This encoding
     is used to generate the charset in the layout, and encode entities.
