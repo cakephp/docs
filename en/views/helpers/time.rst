@@ -43,7 +43,7 @@ ORM returns :php:class:`Cake\\I18n\\Time` instances for every ``timestamp``
 and ``datetime`` column, you can use the methods there to do most tasks.
 For example, to read about the accepted formatting strings take a look at the
 `Cake\\I18n\\Time::i18nFormat()
-<https://api.cakephp.org/4.x/class-Cake.I18n.Time.html#i18nFormat()>`_ method.
+<https://api.cakephp.org/5.x/class-Cake.I18n.Time.html#i18nFormat()>`_ method.
 
 .. meta::
     :title lang=en: TimeHelper

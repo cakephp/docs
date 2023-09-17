@@ -555,12 +555,12 @@ Configuration Engines
 CakePHP provides the ability to load configuration files from a number of
 different sources, and features a pluggable system for `creating your own
 configuration engines
-<https://api.cakephp.org/4.x/interface-Cake.Core.Configure.ConfigEngineInterface.html>`__.
+<https://api.cakephp.org/5.x/interface-Cake.Core.Configure.ConfigEngineInterface.html>`__.
 The built in configuration engines are:
 
-* `JsonConfig <https://api.cakephp.org/4.x/class-Cake.Core.Configure.Engine.JsonConfig.html>`__
-* `IniConfig <https://api.cakephp.org/4.x/class-Cake.Core.Configure.Engine.IniConfig.html>`__
-* `PhpConfig <https://api.cakephp.org/4.x/class-Cake.Core.Configure.Engine.PhpConfig.html>`__
+* `JsonConfig <https://api.cakephp.org/5.x/class-Cake.Core.Configure.Engine.JsonConfig.html>`__
+* `IniConfig <https://api.cakephp.org/5.x/class-Cake.Core.Configure.Engine.IniConfig.html>`__
+* `PhpConfig <https://api.cakephp.org/5.x/class-Cake.Core.Configure.Engine.PhpConfig.html>`__
 
 By default your application will use ``PhpConfig``.
 

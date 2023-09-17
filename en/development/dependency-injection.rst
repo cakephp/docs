@@ -311,4 +311,4 @@ caching::
     );
 
 Read more about auto wiring in the `PHP League Container documentation
-<https://container.thephpleague.com/4.x/auto-wiring/>`_.
+<https://container.thephpleague.com/5.x/auto-wiring/>`_.

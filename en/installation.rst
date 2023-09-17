@@ -114,8 +114,8 @@ By default this is what your application **composer.json** looks like::
     }
 
 Each time you run ``php composer.phar update`` you will receive patch
-releases for this minor version. You can instead change this to ``^4.4`` to
-also receive the latest stable minor releases of the ``4.x`` branch.
+releases for this minor version. You can instead change this to ``^5.0`` to
+also receive the latest stable minor releases of the ``5.x`` branch.
 
 Installation using Oven
 -----------------------

@@ -41,16 +41,16 @@ a following section. The built-in providers map to the following values of
 
 * An ``Entity`` instance or an iterator will map to
   `EntityContext
-  <https://api.cakephp.org/4.x/class-Cake.View.Form.EntityContext.html>`_;
+  <https://api.cakephp.org/5.x/class-Cake.View.Form.EntityContext.html>`_;
   this context class allows FormHelper to work with results from the
   built-in ORM.
 
 * An array containing the ``'schema'`` key, will map to
-  `ArrayContext <https://api.cakephp.org/4.x/class-Cake.View.Form.ArrayContext.html>`_
+  `ArrayContext <https://api.cakephp.org/5.x/class-Cake.View.Form.ArrayContext.html>`_
   which allows you to create simple data structures to build forms against.
 
 * ``null`` will map to
-  `NullContext <https://api.cakephp.org/4.x/class-Cake.View.Form.NullContext.html>`_;
+  `NullContext <https://api.cakephp.org/5.x/class-Cake.View.Form.NullContext.html>`_;
   this context class
   simply satisfies the interface FormHelper requires. This context is useful if
   you want to build a short form that doesn't require ORM persistence.
@@ -332,7 +332,7 @@ While the built-in context classes are intended to cover the basic cases you'll
 encounter you may need to build a new context class if you are using a different
 ORM. In these situations you need to implement the
 `Cake\\View\\Form\\ContextInterface
-<https://api.cakephp.org/4.x/interface-Cake.View.Form.ContextInterface.html>`_ . Once
+<https://api.cakephp.org/5.x/interface-Cake.View.Form.ContextInterface.html>`_ . Once
 you have implemented this interface you can wire your new context into the
 FormHelper. It is often best to do this in a ``View.beforeRender`` event
 listener, or in an application view class::
@@ -661,10 +661,10 @@ as well as HTML attributes. This subsection will cover the options specific to
   As seen above you can set the error message for each validation
   rule you have in your models. In addition you can provide i18n
   messages for your forms.
-  
+
   To disable the HTML entity encoding for error messages only, the ``'escape'``
   sub key can be used::
-  
+
       $this->Form->control('name', [
           'error' => ['escape' => false],
       ]);
@@ -2215,7 +2215,7 @@ List of Templates
 
 The list of default templates, their default format and the variables they
 expect can be found in the
-`FormHelper API documentation <https://api.cakephp.org/4.x/class-Cake.View.Helper.FormHelper.html#%24_defaultConfig>`_.
+`FormHelper API documentation <https://api.cakephp.org/5.x/class-Cake.View.Helper.FormHelper.html#%24_defaultConfig>`_.
 
 Using Distinct Custom Control Containers
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -1605,7 +1605,7 @@ make testing responses much simpler. Some examples are::
 
 In addition to the above assertion methods, you can also use all of the
 assertions in `TestSuite
-<https://api.cakephp.org/4.x/class-Cake.TestSuite.TestCase.html>`_ and those
+<https://api.cakephp.org/5.x/class-Cake.TestSuite.TestCase.html>`_ and those
 found in `PHPUnit
 <https://phpunit.de/manual/current/en/appendixes.assertions.html>`__.
 
