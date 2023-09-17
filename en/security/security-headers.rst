@@ -26,9 +26,9 @@ your application's middleware stack::
 
     $middlewareQueue->add($securityHeaders);
 
-Here's a list of common HTTP headers https://en.wikipedia.org/wiki/List_of_HTTP_header_fields.
-
-And the Mozilla recommended settings https://infosec.mozilla.org/guidelines/web_security.html.
+Here's a list of `common HTTP headers <https://en.wikipedia.org/wiki/List_of_HTTP_header_fields>`__,
+and the Mozilla `recommended settings <https://infosec.mozilla.org/guidelines/web_security.html>`__
+for securing web applications.
 
 .. meta::
    :title lang=en: Security Header Middleware
