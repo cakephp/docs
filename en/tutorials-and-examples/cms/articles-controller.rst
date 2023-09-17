@@ -189,7 +189,7 @@ to be created. Start by creating an ``add()`` action in the
 
         public function index()
         {
-            $articles = $this->Articles->find();
+            $articles = $this->paginate($this->Articles);
             $this->set(compact('articles'));
         }
 
