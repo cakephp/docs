@@ -28,8 +28,8 @@ used to alias objects in a registry.  This allows you to have component names
 that do not reflect the classnames, which can be helpful when extending core
 components::
 
-    $this->Auth = $this->loadComponent('Auth', ['className' => 'MyCustomAuth']);
-    $this->Auth->user(); // Actually using MyCustomAuth::user();
+    $this->Flash = $this->loadComponent('Flash', ['className' => 'MyCustomFlash']);
+    $this->Flash->error(); // Actually using MyCustomFlash::error();
 
 Triggering Callbacks
 ====================
@@ -46,11 +46,11 @@ objects from receiving callbacks. You should use the features in the events syst
 accomplish this now. For example, you could disable component callbacks in the
 following way::
 
-    // Remove Auth from callbacks.
-    $this->getEventManager()->off($this->Auth);
+    // Remove MyComponent from callbacks.
+    $this->getEventManager()->off($this->MyComponent);
 
-    // Re-enable Auth for callbacks.
-    $this->getEventManager()->on($this->Auth);
+    // Re-enable MyComponent for callbacks.
+    $this->getEventManager()->on($this->MyComponent);
 
 .. meta::
     :title lang=en: Object Registry

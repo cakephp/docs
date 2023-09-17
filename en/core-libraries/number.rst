@@ -17,12 +17,13 @@ use the ``Number`` class::
         public function initialize(): void
         {
             parent::initialize();
-            $this->loadComponent('Auth');
+            $this->loadComponent('Authentication.Authentication');
         }
 
         public function afterLogin()
         {
-            $storageUsed = $this->Auth->user('storage_used');
+            $identity = $this->Authentication->getIdentity();
+            $storageUsed = $identity->storage_used;
             if ($storageUsed > 5000000) {
                 // Notify users of quota
                 $this->Flash->success(__('You are using {0} storage', Number::toReadableSize($storageUsed)));
@@ -118,7 +119,7 @@ Getting the Default Currency
 .. php:method:: getDefaultCurrency()
 
 Getter for the default currency. If default currency was set earlier using
-``setDefaultCurrency()``, then that value will be returned. By default, it will 
+``setDefaultCurrency()``, then that value will be returned. By default, it will
 retrieve the ``intl.default_locale`` ini value if set and ``'en_US'`` if not.
 
 Formatting Floating Point Numbers
