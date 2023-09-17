@@ -33,8 +33,7 @@ look like this::
     {
         public function index()
         {
-            $this->loadComponent('Paginator');
-            $articles = $this->Paginator->paginate($this->Articles->find());
+            $articles = $this->paginate($this->Articles);
             $this->set(compact('articles'));
         }
     }
@@ -180,17 +179,9 @@ to be created. Start by creating an ``add()`` action in the
 
     class ArticlesController extends AppController
     {
-        public function initialize(): void
-        {
-            parent::initialize();
-
-            $this->loadComponent('Paginator');
-            $this->loadComponent('Flash'); // Include the FlashComponent
-        }
-
         public function index()
         {
-            $articles = $this->Paginator->paginate($this->Articles->find());
+            $articles = $this->paginate($this->Articles);
             $this->set(compact('articles'));
         }
 
@@ -224,7 +215,7 @@ to be created. Start by creating an ``add()`` action in the
 
     You need to include the :doc:`/controllers/components/flash` component in
     any controller where you will use it. Often it makes sense to include it in
-    your ``AppController``.
+    your ``AppController``, which is there already for this tutorial.
 
 Here's what the ``add()`` action does:
 
