@@ -33,8 +33,7 @@ look like this::
     {
         public function index()
         {
-            $this->set('articles', $this->paginate($this->Articles));
-            $articles = $this->Articles->find();
+            $articles = $this->paginate($this->Articles);
             $this->set(compact('articles'));
         }
     }
