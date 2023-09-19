@@ -15,12 +15,13 @@ use the ``DateTime`` class::
         public function initialize(): void
         {
             parent::initialize();
-            $this->loadComponent('Auth');
+            $this->loadComponent('Authentication.Authentication');
         }
 
         public function afterLogin()
         {
-            $time = new DateTime($this->Auth->user('date_of_birth'));
+            $identity = $this->Authentication->getIdentity();
+            $time = new DateTime($identity->date_of_birth);
             if ($time->isToday()) {
                 // Greet user with a happy birthday message
                 $this->Flash->success(__('Happy birthday to you...'));

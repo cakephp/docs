@@ -441,7 +441,7 @@ Rotating Session Identifiers
 
 .. php:method:: renew()
 
-While ``AuthComponent`` automatically renews the session id when users login and
+While the ``Authentication Plugin`` automatically renews the session id when users login and
 logout, you may need to rotate the session id's manually. To do this use the
 ``renew()`` method::
 
