@@ -97,10 +97,10 @@ be removed in 5.0.
   ``RequestHandlerComponent``.
 
 
-PaginationComponent
--------------------
+PaginatorComponent
+------------------
 
-The ``PaginationComponent`` is deprecated and will be removed in 5.0.
+The ``PaginatorComponent`` is deprecated and will be removed in 5.0.
 Use the ``Controller::$paginate`` property or the ``$settings`` parameter of
 ``Controller::paginate()`` method to specify required paging settings.
 
