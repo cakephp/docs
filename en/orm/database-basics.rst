@@ -508,13 +508,13 @@ class::
 
     namespace App\Database\Type;
 
-    use Cake\Database\DriverInterface;
+    use Cake\Database\Driver;
     use Cake\Database\Type\BaseType;
     use PDO;
 
     class JsonType extends BaseType
     {
-        public function toPHP($value, DriverInterface $driver)
+        public function toPHP(mixed $value, Driver $driver): mixed
         {
             if ($value === null) {
                 return null;
@@ -522,7 +522,7 @@ class::
             return json_decode($value, true);
         }
 
-        public function marshal($value)
+        public function marshal(mixed $value): mixed
         {
             if (is_array($value) || $value === null) {
                 return $value;
@@ -530,12 +530,12 @@ class::
             return json_decode($value, true);
         }
 
-        public function toDatabase($value, DriverInterface $driver)
+        public function toDatabase(mixed $value, Driver $driver): mixed
         {
             return json_encode($value);
         }
 
-        public function toStatement($value, DriverInterface $driver)
+        public function toStatement(mixed $value, Driver $driver): int
         {
             if ($value === null) {
                 return PDO::PARAM_NULL;
@@ -555,7 +555,7 @@ the type mapping. During our application bootstrap we should do the following::
 
     use Cake\Database\TypeFactory;
 
-    TypeFactory::map('json', 'App\Database\Type\JsonType');
+    TypeFactory::map('json', \App\Database\Type\JsonType:class);
 
 We then have two ways to use our datatype in our models.
 
@@ -572,7 +572,7 @@ following::
     {
         public function getSchema(): TableSchemaInterface
         {
-            $this->getSchema()->setColumnType('widget_prefs', 'json');
+            return parent::getSchema()->setColumnType('widget_prefs', 'json');
         }
     }
 
@@ -586,7 +586,7 @@ used::
 
     namespace App\Database\Type;
 
-    use Cake\Database\DriverInterface;
+    use Cake\Database\Driver;
     use Cake\Database\Type\BaseType;
     use Cake\Database\Type\ColumnSchemaAwareInterface;
     use Cake\Database\Schema\TableSchemaInterface;
@@ -606,7 +606,7 @@ used::
         public function getColumnSql(
             TableSchemaInterface $schema,
             string $column,
-            DriverInterface $driver
+            Driver $driver
         ): ?string {
             $data = $schema->getColumn($column);
             $sql = $driver->quoteIdentifier($column);
@@ -625,7 +625,7 @@ used::
          */
         public function convertColumnDefinition(
             array $definition,
-            DriverInterface $driver
+            Driver $driver
         ): ?array {
             return [
                 'type' => $this->_name,
@@ -697,7 +697,7 @@ value object and into SQL expressions::
     namespace App\Database\Type;
 
     use App\Database\Point;
-    use Cake\Database\DriverInterface;
+    use Cake\Database\Driver;
     use Cake\Database\Expression\FunctionExpression;
     use Cake\Database\ExpressionInterface;
     use Cake\Database\Type\BaseType;
@@ -705,12 +705,12 @@ value object and into SQL expressions::
 
     class PointType extends BaseType implements ExpressionTypeInterface
     {
-        public function toPHP($value, DriverInterface $d)
+        public function toPHP($value, Driver $d): mixed
         {
             return $value === null ? null : Point::parse($value);
         }
 
-        public function marshal($value)
+        public function marshal($value): mixed
         {
             if (is_string($value)) {
                 $value = explode(',', $value);
@@ -738,7 +738,7 @@ value object and into SQL expressions::
             // Handle other cases.
         }
 
-        public function toDatabase($value, DriverInterface $driver)
+        public function toDatabase($value, Driver $driver): mixed
         {
             return $value;
         }
