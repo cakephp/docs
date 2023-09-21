@@ -53,7 +53,7 @@ Cache
 Console
 -------
 
-- ``BaseCommand::__constructor()`` was removed.
+- ``BaseCommand::__construct()`` was removed.
 - ``ConsoleIntegrationTestTrait::useCommandRunner()`` was removed since it's no longer needed.
 - ``Shell`` has been removed and should be replaced with `Command <https://book.cakephp.org/5/en/console-commands/commands.html>`__
 - ``BaseCommand`` now emits ``Command.beforeExecute`` and
@@ -72,7 +72,7 @@ Connection
 Controller
 ----------
 
-- The method signature for ``Controller::__constructor()`` has changed.
+- The method signature for ``Controller::__construct()`` has changed.
   So you need to adjust your code accordingly if you are overriding the constructor.
 - After loading components are no longer set as dynamic properties. Instead
   ``Controller`` uses ``__get()`` to provide property access to components. This
