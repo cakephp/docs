@@ -601,7 +601,7 @@ Envoyer des Emails sans utiliser Mailer
 
 Le ``Mailer`` est une classe à haut niveau d'abstraction, qui agit commme un
 pont entre les classes ``Cake\Mailer\Message``, ``Cake\Mailer\Renderer`` et
-``Cake\Mailer\\AbstractTransport`` pour configuer les emails avec une interface
+``Cake\Mailer\AbstractTransport`` pour configuer les emails avec une interface
 fluide.
 
 Si vous voulez, vous pouvez aussi utiliser ces classes directement avec le
