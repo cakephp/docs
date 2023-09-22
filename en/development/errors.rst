@@ -369,7 +369,7 @@ Prior to CakePHP 4.4.0, you should implement ``logMessage()`` and ``log()``::
     ErrorLoggerInterface was added.
 
 .. versionchanged:: 4.4.0
-    ``ErrorLoggerInterface::logException()`` and``ErrorLoggerInterface::logError()`` were added.
+    ``ErrorLoggerInterface::logException()`` and ``ErrorLoggerInterface::logError()`` were added.
 
 
 Custom Error Rendering
