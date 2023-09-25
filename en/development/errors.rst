@@ -379,52 +379,64 @@ internal framework exceptions, there are several
 exceptions for HTTP methods
 
 .. php:exception:: BadRequestException
+    :no-contents-entry:
 
     Used for doing 400 Bad Request error.
 
 .. php:exception:: UnauthorizedException
+    :no-contents-entry:
 
     Used for doing a 401 Unauthorized error.
 
 .. php:exception:: ForbiddenException
+    :no-contents-entry:
 
     Used for doing a 403 Forbidden error.
 
 .. php:exception:: InvalidCsrfTokenException
+    :no-contents-entry:
 
     Used for doing a 403 error caused by an invalid CSRF token.
 
 .. php:exception:: NotFoundException
+    :no-contents-entry:
 
     Used for doing a 404 Not found error.
 
 .. php:exception:: MethodNotAllowedException
+    :no-contents-entry:
 
     Used for doing a 405 Method Not Allowed error.
 
 .. php:exception:: NotAcceptableException
+    :no-contents-entry:
 
     Used for doing a 406 Not Acceptable error.
 
 .. php:exception:: ConflictException
+    :no-contents-entry:
 
     Used for doing a 409 Conflict error.
 
 .. php:exception:: GoneException
+    :no-contents-entry:
 
     Used for doing a 410 Gone error.
 
 For more details on HTTP 4xx error status codes see :rfc:`2616#section-10.4`.
 
 .. php:exception:: InternalErrorException
+    :no-contents-entry:
 
     Used for doing a 500 Internal Server Error.
 
 .. php:exception:: NotImplementedException
+    :no-contents-entry:
 
     Used for doing a 501 Not Implemented Errors.
 
 .. php:exception:: ServiceUnavailableException
+    :no-contents-entry:
 
     Used for doing a 503 Service Unavailable error.
 
@@ -479,82 +491,100 @@ In addition, CakePHP uses the following exceptions:
 .. php:namespace:: Cake\View\Exception
 
 .. php:exception:: MissingViewException
+    :no-contents-entry:
 
     The chosen view class could not be found.
 
 .. php:exception:: MissingTemplateException
+    :no-contents-entry:
 
     The chosen template file could not be found.
 
 .. php:exception:: MissingLayoutException
+    :no-contents-entry:
 
     The chosen layout could not be found.
 
 .. php:exception:: MissingHelperException
+    :no-contents-entry:
 
     The chosen helper could not be found.
 
 .. php:exception:: MissingElementException
+    :no-contents-entry:
 
     The chosen element file could not be found.
 
 .. php:exception:: MissingCellException
+    :no-contents-entry:
 
     The chosen cell class could not be found.
 
 .. php:exception:: MissingCellViewException
+    :no-contents-entry:
 
     The chosen cell view file could not be found.
 
 .. php:namespace:: Cake\Controller\Exception
 
 .. php:exception:: MissingComponentException
+    :no-contents-entry:
 
     A configured component could not be found.
 
 .. php:exception:: MissingActionException
+    :no-contents-entry:
 
     The requested controller action could not be found.
 
 .. php:exception:: PrivateActionException
+    :no-contents-entry:
 
     Accessing private/protected/_ prefixed actions.
 
 .. php:namespace:: Cake\Console\Exception
 
 .. php:exception:: ConsoleException
+    :no-contents-entry:
 
     A console library class encounter an error.
 
 .. php:namespace:: Cake\Database\Exception
 
 .. php:exception:: MissingConnectionException
+    :no-contents-entry:
 
     A model's connection is missing.
 
 .. php:exception:: MissingDriverException
+    :no-contents-entry:
 
     A database driver could not be found.
 
 .. php:exception:: MissingExtensionException
+    :no-contents-entry:
 
     A PHP extension is missing for the database driver.
 
 .. php:namespace:: Cake\ORM\Exception
 
 .. php:exception:: MissingTableException
+    :no-contents-entry:
 
     A model's table could not be found.
 
 .. php:exception:: MissingEntityException
+    :no-contents-entry:
 
     A model's entity could not be found.
 
 .. php:exception:: MissingBehaviorException
+    :no-contents-entry:
 
     A model's behavior could not be found.
 
 .. php:exception:: PersistenceFailedException
+    :no-contents-entry:
 
     An entity couldn't be saved/deleted while using :php:meth:`Cake\\ORM\\Table::saveOrFail()` or
     :php:meth:`Cake\\ORM\\Table::deleteOrFail()`.
@@ -562,6 +592,7 @@ In addition, CakePHP uses the following exceptions:
 .. php:namespace:: Cake\Datasource\Exception
 
 .. php:exception:: RecordNotFoundException
+   :no-contents-entry:
 
    The requested record could not be found. This will also set HTTP response
    headers to 404.
@@ -569,20 +600,19 @@ In addition, CakePHP uses the following exceptions:
 .. php:namespace:: Cake\Routing\Exception
 
 .. php:exception:: MissingControllerException
+    :no-contents-entry:
 
     The requested controller could not be found.
 
 .. php:exception:: MissingRouteException
+    :no-contents-entry:
 
     The requested URL cannot be reverse routed or cannot be parsed.
-
-.. php:exception:: MissingDispatcherFilterException
-
-    The dispatcher filter could not be found.
 
 .. php:namespace:: Cake\Core\Exception
 
 .. php:exception:: Exception
+    :no-contents-entry:
 
     Base exception class in CakePHP. All framework layer exceptions thrown by
     CakePHP will extend this class.
@@ -591,6 +621,7 @@ These exception classes all extend :php:exc:`Exception`.
 By extending Exception, you can create your own 'framework' errors.
 
 .. php:method:: responseHeader($header = null, $value = null)
+    :no-contents-entry:
 
     See :php:func:`Cake\\Network\\Request::header()`
 
