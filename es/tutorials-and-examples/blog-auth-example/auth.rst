@@ -205,7 +205,7 @@ Crea el archivo **src/Model/Entity/User.php** y agrega las siguientes lineas::
     {
 
         // Make all fields mass assignable for now.
-        protected $_accessible = ['*' => true];
+        protected array $_accessible = ['*' => true];
 
         // ...
 

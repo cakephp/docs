@@ -318,7 +318,7 @@ CakePHP は一括代入から保護しません。
 
     class Article extends Entity
     {
-        protected $_accessible = [
+        protected array $_accessible = [
             'title' => true,
             'body' => true
         ];
@@ -333,7 +333,7 @@ CakePHP は一括代入から保護しません。
 
     class Article extends Entity
     {
-        protected $_accessible = [
+        protected array $_accessible = [
             'title' => true,
             'body' => true,
             '*' => false,

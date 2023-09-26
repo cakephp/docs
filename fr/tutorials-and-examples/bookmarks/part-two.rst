@@ -346,7 +346,7 @@ entity, puisque nous voulons la 'sauvegarder' plus tard.
 Dans le fichier **src/Model/Entity/Bookmark.php**, ajoutez ``tag_string`` à
 la propriété ``_accessible`` comme ceci::
 
-    protected $_accessible = [
+    protected array $_accessible = [
         'user_id' => true,
         'title' => true,
         'description' => true,

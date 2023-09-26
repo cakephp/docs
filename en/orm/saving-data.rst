@@ -480,7 +480,7 @@ an important caveat:
 If a Product belongsToMany Tag::
 
     // in the Product Entity
-    protected $_accessible = [
+    protected array $_accessible = [
         // .. other properties
        'tags' => true,
     ];

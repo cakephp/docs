@@ -362,7 +362,7 @@ entidad para poder 'guardarla' más adelante.
 En **src/Model/Entity/Bookmark.php** añade ``tag_string`` a ``$_accessible`` de
 este modo::
 
-    protected $_accessible = [
+    protected array $_accessible = [
         'user_id' => true,
         'title' => true,
         'description' => true,

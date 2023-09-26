@@ -322,7 +322,7 @@ AppController に追加しましょう。 ::
 **src/Model/Entity/Bookmark.php** で ``$_accessible`` に ``tag_string`` を
 このように追加してください。 ::
 
-    protected $_accessible = [
+    protected array $_accessible = [
         'user_id' => true,
         'title' => true,
         'description' => true,

@@ -398,7 +398,7 @@ d'indiquer s'ils peuvent être assignés en masse ou non. Les valeurs ``true`` e
 
     class Article extends Entity
     {
-        protected $_accessible = [
+        protected array $_accessible = [
             'title' => true,
             'body' => true
         ];
@@ -413,7 +413,7 @@ comportement par défaut si un champ n'est pas nommé spécifiquement::
 
     class Article extends Entity
     {
-        protected $_accessible = [
+        protected array $_accessible = [
             'title' => true,
             'body' => true,
             '*' => false,

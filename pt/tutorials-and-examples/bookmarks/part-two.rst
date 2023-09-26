@@ -327,7 +327,7 @@ propriedade ``tag_string`` a lista ``_accessible`` em sua entidade.
 Em **src/Model/Entity/Bookmark.php** adicione o ``tag_string`` ao
 ``_accessible`` desta forma::
 
-    protected $_accessible = [
+    protected array $_accessible = [
         'user_id' => true,
         'title' => true,
         'description' => true,
