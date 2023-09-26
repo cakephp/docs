@@ -484,7 +484,7 @@ hasMany の belongsToMany アソシエーションについても同じことが
 もし、 Product belongsToMany Tag であれば、こうなります。 ::
 
     // Product エンティティーの中で
-    protected $_accessible = [
+    protected array $_accessible = [
         // .. 他のプロパティー
        'tags' => true,
     ];

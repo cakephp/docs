@@ -298,7 +298,7 @@ indicam se um campo pode ou não ser atribuído em massa::
 
     class Article extends Entity
     {
-        protected $_accessible = [
+        protected array $_accessible = [
             'title' => true,
             'body' => true
         ];
@@ -313,7 +313,7 @@ de falbback se um campo não for especificamente nomeado::
 
     class Article extends Entity
     {
-        protected $_accessible = [
+        protected array $_accessible = [
             'title' => true,
             'body' => true,
             '*' => false,

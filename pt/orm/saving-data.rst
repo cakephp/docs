@@ -532,7 +532,7 @@ advertência importante:
 Se um Produto pertence a várias (belongsToMany) Tag::
 
     // Na classe da entidade Product
-    protected $_accessible = [
+    protected array $_accessible = [
         // .. outras propriedades
        'tags' => true,
     ];

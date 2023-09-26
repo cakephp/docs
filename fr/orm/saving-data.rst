@@ -506,7 +506,7 @@ belongsToMany, avec cependant un point d'attention important:
 Si Product belongsToMany Tag::
 
     // Dans l'entity Product
-    protected $_accessible = [
+    protected array $_accessible = [
         // .. autres propriétés
        'tags' => true,
     ];

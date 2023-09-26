@@ -227,7 +227,7 @@ e adicione a seguinte trecho::
     {
 
         // Gera conjunto de todos os campos exceto o com a chave primária.
-        protected $_accessible = [
+        protected array $_accessible = [
             '*' => true,
             'id' => false
         ];

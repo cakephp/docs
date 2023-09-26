@@ -334,7 +334,7 @@ can add a virtual/computed field to the entity. In
     use Cake\Collection\Collection;
 
     // Update the accessible property to contain `tag_string`
-    protected $_accessible = [
+    protected array $_accessible = [
         //other fields...
         'tag_string' => true
     ];

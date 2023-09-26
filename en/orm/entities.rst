@@ -371,7 +371,7 @@ indicate whether a field can or cannot be mass-assigned::
 
     class Article extends Entity
     {
-        protected $_accessible = [
+        protected array $_accessible = [
             'title' => true,
             'body' => true
         ];
@@ -386,7 +386,7 @@ fallback behavior if a field is not specifically named::
 
     class Article extends Entity
     {
-        protected $_accessible = [
+        protected array $_accessible = [
             'title' => true,
             'body' => true,
             '*' => false,
