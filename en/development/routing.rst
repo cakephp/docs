@@ -990,10 +990,9 @@ can::
 RESTful Routing
 ===============
 
-Router helps generate RESTful routes for your controllers. RESTful
-routes are helpful when you are creating API endpoints for your application.  If
-we wanted to allow REST access to a recipe controller, we'd do something like
-this::
+Router helps generate RESTful routes for your controllers. RESTful routes are
+helpful when you are creating API endpoints for your application. If we wanted
+to allow REST access to a recipe controller, we'd do something like this::
 
     // In config/routes.php...
 
@@ -1099,17 +1098,17 @@ Would create read only resource routes. The route names are ``create``,
 The default **route name and controller action used** are as follows:
 
 =========== =======================
-Route name  Controller action used    
+Route name  Controller action used
 =========== =======================
-create      add      
+create      add
 ----------- -----------------------
-update      edit  
+update      edit
 ----------- -----------------------
-view        view      
+view        view
 ----------- -----------------------
-index       index  
+index       index
 ----------- -----------------------
-delete      delete  
+delete      delete
 =========== =======================
 
 
