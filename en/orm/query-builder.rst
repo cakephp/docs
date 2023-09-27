@@ -454,7 +454,7 @@ complex expressions::
 To build complex order clauses, use a Closure to build order expressions::
 
     $query->orderAsc(function (QueryExpression $exp, Query $query) {
-        return $exp->addCase(...);
+        return $exp->case(...);
     });
 
 
@@ -621,7 +621,7 @@ size, we could do the following::
 
     $query = $cities->find()
         ->where(function (QueryExpression $exp, Query $q) {
-            return $exp->addCase(
+            return $exp->case(
                 [
                     $q->newExpr()->lt('population', 100000),
                     $q->newExpr()->between('population', 100000, 999000),
@@ -642,7 +642,7 @@ automatically produce an ``if .. then .. else`` statement::
 
     $query = $cities->find()
         ->where(function (QueryExpression $exp, Query $q) {
-            return $exp->addCase(
+            return $exp->case(
                 [
                     $q->newExpr()->eq('population', 0),
                 ],
