@@ -316,6 +316,7 @@ actions, you can define that logic within ``viewClasses()``::
             // Use a custom CSV view for data exports.
             return [CsvView::class];
         }
+
         return [JsonView::class];
     }
 
