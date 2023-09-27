@@ -108,9 +108,10 @@ Encoding Response Data
 ======================
 
 In the above controller, we're defining a ``viewClasses()`` method. This method
-We're including CakePHP's ``JsonView``. To learn more about it and Xml based
-views see :doc:`/views/json-and-xml-views`. is used by CakePHP to select a view
-class to render a REST response with.
+defines which views your controller has available for content-negotitation.
+We're including CakePHP's ``JsonView`` which enables JSON based responses. To
+learn more about it and Xml based views see :doc:`/views/json-and-xml-views`. is
+used by CakePHP to select a view class to render a REST response with.
 
 Next, we have several methods that expose basic logic to create, edit, view and
 delete recipes. In each of our actions we're using the ``serialize`` option to
