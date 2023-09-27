@@ -26,8 +26,8 @@ You can call ``paginate()`` using an ORM table instance or ``Query`` object::
         // Paginate the ORM table.
         $this->set('articles', $this->paginate($this->Articles));
 
-        // Paginate a partially completed query
-        $query = $this->Articles->find('published');
+        // Paginate a select query
+        $query = $this->Articles->find('published')->contain('Comments');
         $this->set('articles', $this->paginate($query));
     }
 
@@ -53,11 +53,7 @@ from the URL::
 .. tip::
     Default ``order`` options must be defined as an array.
 
-While you can include any of the options supported by
-:php:meth:`~Cake\\ORM\\Table::find()` such as ``fields`` in your pagination
-settings. It is cleaner and simpler to bundle your pagination options into
-a :ref:`custom-find-methods`. You can use your finder in pagination by using the
-``finder`` option::
+You can also use :ref:`custom-find-methods` in pagination by using the ``finder`` option::
 
     class ArticlesController extends AppController
     {
@@ -108,8 +104,8 @@ as a key in the ``$paginate`` property::
         ];
     }
 
-The values of the ``Articles`` and ``Authors`` keys could contain all the
-properties that a basic ``$paginate`` array would.
+The values of the ``Articles`` and ``Authors`` keys could contain all the keys
+that a basic ``$paginate`` array would.
 
 ``Controller::paginate()`` returns an instance of ``Cake\Datasource\Paging\PaginatedResultSet``
 which implements the ``Cake\Datasource\Paging\PaginatedInterface``.
@@ -244,21 +240,6 @@ example reducing it to ``10``::
 
 If the request's limit param is greater than this value, it will be reduced to
 the ``maxLimit`` value.
-
-Joining Additional Associations
-===============================
-
-Additional associations can be loaded to the paginated table by using the
-``contain`` parameter::
-
-    public function index()
-    {
-        $this->paginate = [
-            'contain' => ['Authors', 'Comments']
-        ];
-
-        $this->set('articles', $this->paginate($this->Articles));
-    }
 
 Out of Range Page Requests
 ==========================

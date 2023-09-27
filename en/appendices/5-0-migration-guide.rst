@@ -84,6 +84,11 @@ Controller
 - ``RequestHandlerComponent`` has been removed. See the `4.4 migration <https://book.cakephp.org/4/en/appendices/4-4-migration-guide.html#requesthandlercomponent>`__ guide for how to upgrade
 - ``SecurityComponent`` has been removed. Use ``FormProtectionComponent`` for form tampering protection
   or ``HttpsEnforcerMiddleware`` to enforce use of HTTPS for requests instead.
+- ``Controller::paginate()`` no longer accepts query options like ``contain`` for
+  its ``$settings`` argument. You should instead use the ``finder`` option
+  ``$this->paginate($this->Articles, ['finder' => 'published'])``. Or you can
+  create required select query before hand and then pass it to ``paginate()``
+  ``$query = $this->Articles->find()->where(['is_published' => true]); $this->paginate($query);``.
 
 Core
 ----
