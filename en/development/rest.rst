@@ -95,7 +95,7 @@ serialized when making API responses. We'll connect our controller to the
 application URLs with :ref:`resource-routes`::
 
     // in config/routes.php
-    $routes->scope('/', function (RouteBuilder $routes) {
+    $routes->scope('/', function (RouteBuilder $routes): void {
         $routes->setExtensions(['json']);
         $routes->resources('Recipes');
     });
