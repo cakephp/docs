@@ -17,7 +17,7 @@ Once your application is running on latest CakePHP 3.x, enable deprecation warni
 
 Now that you can see all the warnings, make sure these are fixed before proceeding with the upgrade.
 
-Upgrade to PHP 7.2
+Upgrade to PHP 8.0
 ==================
 
 If you are not running on **PHP 8.0 or higher**, you will need to upgrade PHP before updating CakePHP.
