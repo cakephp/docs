@@ -20,10 +20,10 @@ Now that you can see all the warnings, make sure these are fixed before proceedi
 Upgrade to PHP 7.2
 ==================
 
-If you are not running on **PHP 7.2 or higher**, you will need to upgrade PHP before updating CakePHP.
+If you are not running on **PHP 8.0 or higher**, you will need to upgrade PHP before updating CakePHP.
 
 .. note::
-    CakePHP 4.0 requires **a minimum of PHP 7.2**.
+    Although CakePHP 4.0 requires **a minimum of PHP 7.2**, the upgrade tool requires **a minimum of PHP 8.0**.
 
 .. _upgrade-tool-use:
 
