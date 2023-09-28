@@ -286,10 +286,11 @@ Content Type Negotiation
 
 Controllers can define a list of view classes they support. After the
 controller's action is complete CakePHP will use the view list to perform
-content-type negotiation. This enables your application to re-use the same
-controller action to render an HTML view or render a JSON or XML response. To
-define the list of supported view classes for a controller is done with the
-``viewClasses()`` method::
+content-type negotiation with either :ref:`file-extensions` or ``Content-Type``
+headers. This enables your application to re-use the same controller action to
+render an HTML view or render a JSON or XML response. To define the list of
+supported view classes for a controller is done with the ``viewClasses()``
+method::
 
     namespace App\Controller;
 
@@ -305,10 +306,32 @@ define the list of supported view classes for a controller is done with the
     }
 
 The application's ``View`` class is automatically used as a fallback when no
-other view can be selected based on the requests' ``Accept`` header or routing
-extension. If your application needs to perform different logic for different
-response formats you can use ``$this->request->is()`` to build the required
-conditional logic. You can also set your controllers' supported view classes
+other view can be selected based on the request's ``Accept`` header or routing
+extension. If your application only supports content types for a specific
+actions, you can define that logic within ``viewClasses()``::
+
+    public function viewClasses(): array
+    {
+        if ($this->request->getParam('action') === 'export') {
+            // Use a custom CSV view for data exports.
+            return [CsvView::class];
+        }
+
+        return [JsonView::class];
+    }
+
+If within your controller actions you need to process request or load data
+differently based on the controller action you can use
+:ref:`check-the-request`::
+
+    // In a controller action
+
+    // Load additional data when preparing JSON responses
+    if ($this->request->is('json')) {
+        $query->contain('Authors');
+    }
+
+You can also set your controllers' supported view classes
 using the ``addViewClasses()`` method which will merge the provided views with
 those held in the ``viewClasses`` property.
 

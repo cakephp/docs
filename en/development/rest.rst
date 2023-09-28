@@ -1,24 +1,21 @@
 REST
 ####
 
-Many newer application programmers are realizing the need to open their core
-functionality to a greater audience. Providing unfettered access to your
-core API can help get your platform accepted, and allows for mashups and
-integration with other systems.
+REST is a foundational concept to the open web. CakePHP provides functionality
+to build applications that expose REST APIs with low complexity abstractions and
+interfaces.
 
-While other solutions exist, REST is a great way to provide access to the
-logic you've created in your application. It's simple, usually XML-based (we're
-talking simple XML, nothing like a SOAP envelope), and depends on HTTP headers
-for direction. Exposing an API via REST in CakePHP is simple.
+CakePHP provides methods for exposing your controller actions via HTTP methods,
+and serializing view variables based on content-type negotiation. Content-Type
+negotiation allows clients of your application to send requests with serialize
+data and receive responses with serialized data via the ``Accept`` and
+``Content-Type`` headers, or URL extensions.
 
-The Simple Setup
-================
+Getting Started
+===============
 
-The fastest way to get up and running with REST is to add a few lines to setup
-:ref:`resource routes <resource-routes>` in your config/routes.php file.
-
-Once the router has been set up to map REST requests to certain controller
-actions, we can move on to creating the logic in our controller actions. A basic
+To get started with adding a REST API to your application, we'll first need
+a controller containing actions that we want to expose as an API. A basic
 controller might look something like this::
 
     // src/Controller/RecipesController.php
@@ -91,17 +88,45 @@ controller might look something like this::
         }
     }
 
+In our ``RecipesController``, we have several actions that define the logic
+to create, edit, view and delete recipes. In each of our actions we're using
+the ``serialize`` option to tell CakePHP which view variables should be
+serialized when making API responses. We'll connect our controller to the
+application URLs with :ref:`resource-routes`::
 
-RESTful controllers often use parsed extensions to serve up different views
-based on different kinds of requests. We're defining the content-type based
-views we support in this controller. We're including CakePHP's ``JsonView``. To
-learn more about it and Xml based views see :doc:`/views/json-and-xml-views`. By
-using  :php:class:`JsonView` we can define a ``serialize`` option. This option
-is used to define which view variables ``JsonView`` should serialize into JSON.
+    // in config/routes.php
+    $routes->scope('/', function (RouteBuilder $routes): void {
+        $routes->setExtensions(['json']);
+        $routes->resources('Recipes');
+    });
+
+These routes will enable URLs like ``/recipes.json`` to return a JSON encoded
+response. Clients could also make a request to ``/recipes`` with the
+``Content-Type: application/json`` header as well.
+
+Encoding Response Data
+======================
+
+In the above controller, we're defining a ``viewClasses()`` method. This method
+defines which views your controller has available for content-negotitation.
+We're including CakePHP's ``JsonView`` which enables JSON based responses. To
+learn more about it and Xml based views see :doc:`/views/json-and-xml-views`. is
+used by CakePHP to select a view class to render a REST response with.
+
+Next, we have several methods that expose basic logic to create, edit, view and
+delete recipes. In each of our actions we're using the ``serialize`` option to
+tell CakePHP which view variables should be serialized when making API
+responses.
 
 If we wanted to modify the data before it is converted into JSON we should not
-define the ``serialize`` option, and instead use template files. We place
-the REST views for our RecipesController inside **templates/Recipes/json**.
+define the ``serialize`` option, and instead use template files. We would place
+the REST templates for our RecipesController inside **templates/Recipes/json**.
+
+See the :ref:`controller-viewclasses` for more information on how CakePHP's
+response negotiation functionality.
+
+Parsing Request Bodies
+======================
 
 Creating the logic for the edit action requires another step. Because our
 resources are serialized as JSON it would be ergonomic if our requests also
@@ -114,24 +139,12 @@ In our ``Application`` class ensure the following is present::
 This middleware will use the ``content-type`` header to detect the format of
 request data and parse enabled formats. By default only ``JSON`` parsing is
 enabled by default. You can enable XML support by enabling the ``xml``
-constructor option.
+constructor option. When a request is made with a ``Content-Type`` of
+``application/json``, CakePHP will decode the request data and update the
+request so that ``$request->getData()`` contains the parsed body.
 
-Accepting Input in Other Formats
-================================
-
-Typically REST applications not only output content in alternate data formats,
-but also accept data in different formats. In CakePHP, the
-:php:class:`BodyParserMiddleware` helps facilitate this. By default,
-it will decode any incoming JSON/XML input data for POST/PUT requests
-and supply the array version of that data in ``$this->request->getData()``.
 You can also wire in additional deserializers for alternate formats if you
 need them, using :php:meth:`BodyParserMiddleware::addParser()`.
-
-RESTful Routing
-===============
-
-CakePHP's Router lets you connect RESTful resource routes with a fluent
-interface. See the section on :ref:`resource-routes` for more information.
 
 .. meta::
     :title lang=en: REST
