@@ -313,12 +313,6 @@ CLI で使用するのと同じ文字列を渡すことができます。
     {
         use ConsoleIntegrationTestTrait;
 
-        public function setUp(): void
-        {
-            parent::setUp();
-            $this->useCommandRunner();
-        }
-
         public function testDescriptionOutput()
         {
             $this->exec('update_table --help');
@@ -507,14 +501,6 @@ CLI で使用するのと同じ文字列を渡すことができます。
 最初のテストケースでは、質問を確認し、レコードが更新されます。
 2番目のテストでは確認していませんし、レコードが更新されていないので、
 エラーメッセージが ``stderr`` に書き込まれていることを確認できます。
-
-CommandRunner のテスト
-----------------------
-
-``CommandRunner`` クラスを使ってディスパッチされたシェルをテストするには、
-次のメソッドを使ってテストケースでそれを有効にしてください。 ::
-
-    $this->useCommandRunner();
 
 アサーションメソッド
 ----------------------
