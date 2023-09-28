@@ -342,12 +342,6 @@ moment, mais testons simplement si la description de notre shell description s'a
     {
         user ConsoleIntegrationTestTrait;
 
-        public function setUp(): void
-        {
-            parent::setUp();
-            $this->useCommandRunner();
-        }
-
         public function testDescriptionOutput()
         {
             $this->exec('update_table --help');
@@ -539,15 +533,6 @@ que nous recevons une réponse négative. Retirez la méthode
 Dans le premier cas de test, nous confirmons la question, et les enregistrements sont mis à jour. Dans le deuxième test, nous
 ne confirmons pas et les enregistrements ne sont pas mis à jour, et nous pouvons vérifier que le message d'erreur a été écrit
 dans ``stderr``.
-
-
-Tester le CommandRunner
------------------------
-
-Pour tester les shells qui sont dispatchés en utilisant la classe
-``CommandRunner``, activez-la dans vos cas de test avec la méthode suivante::
-
-    $this->useCommandRunner();
 
 Méthodes d'Assertion
 --------------------

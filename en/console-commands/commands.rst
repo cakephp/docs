@@ -335,12 +335,6 @@ moment, but let's just test that our command's description is displayed in ``std
     {
         use ConsoleIntegrationTestTrait;
 
-        public function setUp(): void
-        {
-            parent::setUp();
-            $this->useCommandRunner();
-        }
-
         public function testDescriptionOutput()
         {
             $this->exec('update_table --help');
