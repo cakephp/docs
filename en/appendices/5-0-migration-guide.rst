@@ -296,7 +296,7 @@ Core
 ----
 
 - The ``services()`` method was added to ``PluginInterface``.
-- ``PluginCollection::addFromConfig()`` has been added to :ref:`simplify plugin loading <loading-plugins-via-configuration-array>`.
+- ``PluginCollection::addFromConfig()`` has been added to :ref:`simplify plugin loading <loading-a-plugin>`.
 
 Database
 --------
@@ -400,3 +400,9 @@ TestSuite
 ---------
 
 - ``IntegrationTestTrait::requestAsJson()`` has been added to set JSON headers for the next request.
+
+Plugin Installer
+----------------
+- The plugin installer has been updated to automatically handle class autoloading
+  for your app plugins. So you can remove the namespace to path mappings for your
+  plugins from your ``composer.json`` and just run ``composer dumpautoload``.
