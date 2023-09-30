@@ -1655,6 +1655,14 @@ Is equivalent to the following explicit calls::
     with ``{plugin}`` and/or ``{controller}`` route elements will result in
     inconsistent URL case.
 
+.. warning::
+    Fallback route templates are very generic and allow URLs to be generated
+    and parsed for controllers & actions that do not exist. Fallback URLs can
+    also introduce ambiguity and duplication in your URLs.
+
+    As your application grows, it is recommended to move away from fallback URLs
+    and explicitly define the routes in your application.
+
 Creating Persistent URL Parameters
 ==================================
 
