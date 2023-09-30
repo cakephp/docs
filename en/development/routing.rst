@@ -1660,7 +1660,7 @@ Is equivalent to the following explicit calls::
     URLs to even non-existent controllers/actions and when reverse routing 
     (generating URL string for URL arrays) generate invalid URLs.
     
-    Hence it's not recommeneded to not use fallback routes in production and
+    Hence it's not recommended to not use fallback routes in production and
     instead connect routes as required using the various other route builder methods.
 
 Creating Persistent URL Parameters
