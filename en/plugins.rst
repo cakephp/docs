@@ -51,27 +51,16 @@ Manually Autoloading Plugin Classes
 If you install your plugins via ``composer`` or ``bake`` you shouldn't need to
 configure class autoloading for your plugins.
 
-If we were installing a plugin named ``MyPlugin`` manually you would need to
-modify your application's **composer.json** file to contain the following
-information:
+If you create a plugin manually under the ``plugins`` folder then will need to
+tell ``composer`` to refresh its autoloading cache:
 
-.. code-block:: json
+.. code-block:: console
 
-    {
-        "autoload": {
-            "psr-4": {
-                "MyPlugin\\": "plugins/MyPlugin/src/"
-            }
-        },
-        "autoload-dev": {
-            "psr-4": {
-                "MyPlugin\\Test\\": "plugins/MyPlugin/tests/"
-            }
-        }
-    }
+    php composer.phar dumpautoload
 
-If you are using vendor namespaces for your plugins, the namespace to path mapping
-should resemble the following:
+If you are using vendor namespaces for your plugins, you'll have to add the
+namespace to path mapping to the ``composer.json`` resembling the following
+before running the above composer command:
 
 .. code-block:: json
 
@@ -79,55 +68,35 @@ should resemble the following:
         "autoload": {
             "psr-4": {
                 "AcmeCorp\\Users\\": "plugins/AcmeCorp/Users/src/",
+            }
+        },
+        "autoload-dev": {
+            "psr-4": {
                 "AcmeCorp\\Users\\Test\\": "plugins/AcmeCorp/Users/tests/"
             }
         }
     }
 
-Additionally, you will need to tell Composer to refresh its autoloading cache:
-
-.. code-block:: console
-
-    php composer.phar dumpautoload
+.. _loading-a-plugin:
 
 Loading a Plugin
 ================
 
 If you want to use a plugin's routes, console commands, middlewares, event
 listeners, templates or webroot assets you will need to load the plugin.
-Plugins are loaded in your application's ``bootstrap()`` function::
-
-    // In src/Application.php
-    use Cake\Http\BaseApplication;
-    use ContactManager\ContactManagerPlugin;
-
-    class Application extends BaseApplication {
-        public function bootstrap()
-        {
-            parent::bootstrap();
-            // Load the contact manager plugin by class name
-            $this->addPlugin(ContactManagerPlugin::class);
-
-            // Load a plugin with a vendor namespace by 'short name'
-            $this->addPlugin('AcmeCorp/ContactManager');
-
-            // Load a dev dependency that will not exist in production builds.
-            $this->addOptionalPlugin('AcmeCorp/ContactManager');
-        }
-    }
 
 If you just want to use helpers, behaviors or components from a plugin you do
 not need to explicitly load a plugin yet it's recommended to always do so.
 
-There is also a handy console command to enable the plugin.  Execute the following
+There is also a handy console command to load the plugin. Execute the following
 line:
 
 .. code-block:: console
 
     bin/cake plugin load ContactManager
 
-This would update your application's bootstrap method, or put the
-``$this->addPlugin('ContactManager');`` snippet in the bootstrap for you.
+This would update the array in your application's ``config/plugins.php`` with
+an entry similar to ``'ContactManager' => []``.
 
 .. _plugin-configuration:
 
@@ -147,16 +116,52 @@ appropriate parts of your application. The hooks are:
   collection.
 * ``services`` Used to register application container services
 
-When loading plugins you can configure which hooks are enabled. By default
-plugins without a :ref:`plugin-objects` have all hooks disabled. New style plugins
-allow plugin authors to set defaults, which can be configured by you in your
-application::
+By default all plugins hooks are enabled. You can disable hooks by using the
+related options of the ``plugin load`` command::
 
-    // In Application::bootstrap()
+.. code-block:: console
+
+    bin/cake plugin load ContactManager --no-routes
+
+This would update the array in your application's ``config/plugins.php`` with
+an entry similar to ``'ContactManager' => ['routes' => false]``.
+
+Plugin Loading Options
+======================
+
+Apart from the options for plugin hooks the ``plugin load`` command has the
+following options to control plugin loading:
+
+- ``--only-debug`` Load the plugin only when debug mode is enabled.
+- ``--only-cli`` Load the plugin only for CLI.
+- ``--optional`` Do not throw an error if the plugin is not available.
+
+Loading plugins through ``Application::bootstrap()``
+====================================================
+
+Apart from the config array in ``config/plugins.php``, plugins can also be
+loaded in your application's ``bootstrap()`` method::
+
+    // In src/Application.php
+    use Cake\Http\BaseApplication;
     use ContactManager\ContactManagerPlugin;
 
-    // Disable routes for the ContactManager plugin
-    $this->addPlugin(ContactManagerPlugin::class, ['routes' => false]);
+    class Application extends BaseApplication
+    {
+        public function bootstrap()
+        {
+            parent::bootstrap();
+
+            // Load the contact manager plugin by class name
+            $this->addPlugin(ContactManagerPlugin::class);
+
+            // Load a plugin with a vendor namespace by 'short name' with options
+            $this->addPlugin('AcmeCorp/ContactManager', ['console' => false]);
+
+            // Load a dev dependency that will not exist in production builds.
+            $this->addOptionalPlugin('AcmeCorp/ContactManager');
+        }
+    }
 
 You can configure hooks with array options, or the methods provided by plugin
 classes::
@@ -182,33 +187,6 @@ Plugin objects also know their names and path information::
     $path = $plugin->getPath();
     $path = $plugin->getConfigPath();
     $path = $plugin->getClassPath();
-
-.. _loading-plugins-via-configuration-array:
-
-Loading plugins via configuration array
-=======================================
-
-.. versionadded:: 5.0.0
-
-Alternatively you can also load plugins via adding a ``config/plugins.php``
-to your application with the following content::
-
-    <?php
-    return [
-        'Company/TestPluginThree',
-        'TestPlugin' => ['onlyDebug' => true],
-        'Named' => ['routes' => false],
-    ];
-
-You still have full control over which plugins are loaded in debug and/or
-CLI mode only via the following config values:
-
-- ``onlyDebug``
-- ``onlyCli``
-- ``optional``
-
-The usual plugin hooks ``bootstrap``, ``routes``, ``middleware`` and ``console``
-are available as well.
 
 Using Plugin Classes
 ====================
@@ -274,7 +252,8 @@ Note the name of the plugin folder, '**ContactManager**'. It is important
 that this folder has the same name as the plugin.
 
 Inside the plugin folder, you'll notice it looks a lot like a CakePHP
-application, and that's basically what it is. You don't have to
+application, and that's basically what it is. Just instead of an ``Application.php``
+you have a ``ContactManagerPlugin.php``. You don't have to
 include any of the folders you are not using. Some plugins might
 only define a Component and a Behavior, and in that case they can completely
 omit the 'templates' directory.
@@ -316,7 +295,7 @@ Plugin Objects
 
 Plugin Objects allow a plugin author to define set-up logic, define default
 hooks, load routes, middleware and console commands. Plugin objects live in
-**src/Plugin.php**. For our ContactManager plugin, our plugin class could look
+**src/<PluginName>Plugin.php**. For our ContactManager plugin, our plugin class could look
 like::
 
     namespace ContactManager;
@@ -378,7 +357,7 @@ like::
          *
          * @param \Cake\Core\ContainerInterface $container The Container to update.
          * @return void
-         * @link https://book.cakephp.org/4/en/development/dependency-injection.html#dependency-injection
+         * @link https://book.cakephp.org/5/en/development/dependency-injection.html#dependency-injection
          */
         public function services(ContainerInterface $container): void
         {
@@ -414,12 +393,6 @@ ContactManager plugin routes, put the following into
 
 The above will connect default routes for your plugin. You can customize this
 file with more specific routes later on.
-
-Before you can access your controllers, you'll need to ensure the plugin is
-loaded and the plugin routes are loaded.  In your **src/Application.php** add
-the following::
-
-    $this->addPlugin('ContactManager', ['routes' => true]);
 
 You can also load plugin routes in your application's routes list. Doing this
 provides you more control on how plugin routes are loaded and allows you to wrap
@@ -493,10 +466,6 @@ also connect routes that use the following pattern::
 
 See the section on :ref:`plugin-configuration` for information on how to load
 plugin specific route files.
-
-For plugins you did not create with bake, you will also need to edit the
-**composer.json** file to add your plugin to the autoload classes, this can be
-done as per the documentation :ref:`autoloading-plugin-classes`.
 
 .. _plugin-models:
 
