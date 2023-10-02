@@ -10,6 +10,8 @@ necessary tables:
 
 .. code-block:: SQL
 
+    CREATE DATABASE cake_cms;
+
     USE cake_cms;
 
     CREATE TABLE users (
