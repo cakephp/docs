@@ -11,6 +11,7 @@ headers to responses:
 * ``X-Download-Options``
 * ``X-Frame-Options``
 * ``Referrer-Policy``
+* ``Permissions-Policy``
 
 This middleware is configured using a fluent interface before it is applied to
 your application's middleware stack::
