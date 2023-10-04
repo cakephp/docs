@@ -123,6 +123,8 @@ Database
   ``QueryExpression::case()`` or ``CaseStatementExpression``
 - ``Connection::connect()`` has been removed. Use
   ``$connection->getDriver()->connect()`` instead.
+- ``Connection::disconnect()`` has been removed. Use
+  ``$connection->getDriver()->disconnect()`` instead.
 - ``cake.database.queries`` has been added as an alternative to the ``queriesLog`` scope
 
 Datasource
