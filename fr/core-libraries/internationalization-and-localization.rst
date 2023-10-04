@@ -45,8 +45,8 @@ Ces fichiers doivent être placés dans **src/Locale/** et dans ce répertoire, 
 devrait y avoir un sous-dossier par langue que l'application doit prendre en
 charge::
 
-    /src
-        /Locale
+    /resources
+        /locales
             /en_US
                 default.po
             /en_GB
@@ -74,8 +74,8 @@ est d'utiliser la version ``under_scored`` du nom du plugin comme domaine de la
 traduction des messages::
 
     MyPlugin
-        /src
-            /Locale
+        /resources
+            /locales
                 /fr
                     my_plugin.po
                 /de
