@@ -170,7 +170,7 @@ implementation::
         public function initialize(): void
         {
             $this->addHelper('Html', [
-                'className' => 'MyHtml'
+                'className' => 'MyHtml',
             ]);
         }
     }

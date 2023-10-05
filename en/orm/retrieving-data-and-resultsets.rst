@@ -42,7 +42,7 @@ viewing entities and their related data. You can do this by using ``get()``::
 
     // Get a single article, and related comments
     $article = $articles->get($id, [
-        'contain' => ['Comments']
+        'contain' => ['Comments'],
     ]);
 
 If the get operation does not find any results a
@@ -529,18 +529,18 @@ statements::
                 'fields' => [
                     // Aliased fields in contain() must include
                     // the model prefix to be mapped correctly.
-                    'Attributes__name' => 'attr_name'
-                ]
-            ]
-        ]
+                    'Attributes__name' => 'attr_name',
+                ],
+            ],
+        ],
     ])
     ->contain([
         'RealestateAttributes' => [
             'fields' => [
                 'RealestateAttributes.realestate_id',
-                'RealestateAttributes.value'
-            ]
-        ]
+                'RealestateAttributes.value',
+            ],
+        ],
     ])
     ->where($condition);
 
@@ -1043,8 +1043,8 @@ can load additional associations using ``loadInto()``::
     $articles = $this->Articles->find()->all();
     $withMore = $this->Articles->loadInto($articles, ['Comments', 'Users']);
 
-It is possible to restrict the data returned by the associations and filter them 
-by conditions. To specify conditions, pass an anonymous function that receives 
+It is possible to restrict the data returned by the associations and filter them
+by conditions. To specify conditions, pass an anonymous function that receives
 as the first argument a query object, ``\Cake\ORM\Query``::
 
     $user = $this->Users->get($id);

@@ -67,22 +67,21 @@ Composer, check out the :doc:`/installation` section.
 Regardless of how you downloaded and installed CakePHP, once your set up is
 completed, your directory setup should look something like the following::
 
-    /cms
-      /bin
-      /config
-      /logs
-      /plugins
-      /resources
-      /src
-      /templates
-      /tests
-      /tmp
-      /vendor
-      /webroot
+    cms/
+      bin/
+      config/
+      logs/
+      plugins/
+      resources/
+      src/
+      templates/
+      tests/
+      tmp/
+      vendor/
+      webroot/
       .editorconfig
       .gitignore
       .htaccess
-      .travis.yml
       composer.json
       index.php
       phpunit.xml.dist

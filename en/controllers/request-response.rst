@@ -653,7 +653,7 @@ are using it.
 Sending Files
 -------------
 
-.. php:method:: withFile($path, $options = [])
+.. php:method:: withFile(string $path, array $options = [])
 
 There are times when you want to send files as responses for your requests.
 You can accomplish that by using :php:meth:`Cake\\Http\\Response::withFile()`::

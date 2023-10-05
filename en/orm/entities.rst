@@ -132,7 +132,7 @@ value::
         'title' => 'First post',
         'user_id' => null,
         'text' => '',
-        'links' => []
+        'links' => [],
     ]);
     $article->has('title'); // true
     $article->isEmpty('title');  // false

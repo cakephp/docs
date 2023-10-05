@@ -151,7 +151,7 @@ prefix::
                 'loc' => Router::url(['controller' => 'Pages', 'action' => 'view', $page->slug, '_full' => true]),
                 'lastmod' => $page->modified->format('Y-m-d'),
                 'changefreq' => 'daily',
-                'priority' => '0.5'
+                'priority' => '0.5',
             ];
         }
 
@@ -162,7 +162,7 @@ prefix::
         $this->set([
             // Define an attribute on the root node.
             '@xmlns' => 'http://www.sitemaps.org/schemas/sitemap/0.9',
-            'url' => $urls
+            'url' => $urls,
         ]);
     }
 

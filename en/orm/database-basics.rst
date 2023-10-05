@@ -128,7 +128,7 @@ like::
             'encoding' => 'utf8mb4',
             'timezone' => 'UTC',
             'cacheMetadata' => true,
-        ]
+        ],
     ],
 
 The above will create a 'default' connection, with the provided parameters. You

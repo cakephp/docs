@@ -269,17 +269,17 @@ paths for these resources. In your **config/app.php** you can set these variable
             'paths' => [
                 'plugins' => [
                     ROOT . DS . 'plugins' . DS,
-                    '/path/to/other/plugins/'
+                    '/path/to/other/plugins/',
                 ],
                 'templates' => [
                     ROOT . DS . 'templates' . DS,
-                    ROOT . DS . 'templates2' . DS
+                    ROOT . DS . 'templates2' . DS,
                 ],
                 'locales' => [
-                    ROOT . DS . 'resources' . DS . 'locales' . DS
-                ]
-            ]
-        ]
+                    ROOT . DS . 'resources' . DS . 'locales' . DS,
+                ],
+            ],
+        ],
     ];
 
 Paths should end with a directory separator, or they will not work properly.

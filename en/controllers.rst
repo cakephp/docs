@@ -476,8 +476,8 @@ behaves::
     {
         protected array $paginate = [
             'Articles' => [
-                'conditions' => ['published' => 1]
-            ]
+                'conditions' => ['published' => 1],
+            ],
         ];
     }
 

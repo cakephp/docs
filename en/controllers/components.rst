@@ -78,7 +78,7 @@ implementation::
         public function initialize(): void
         {
             $this->loadComponent('Flash', [
-                'className' => 'MyFlash'
+                'className' => 'MyFlash',
             ]);
         }
     }
@@ -212,7 +212,7 @@ the Component::
         parent::initialize();
         $this->loadComponent('Math', [
             'precision' => 2,
-            'randomGenerator' => 'srand'
+            'randomGenerator' => 'srand',
         ]);
         $this->loadComponent('Csrf');
     }

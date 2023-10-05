@@ -1151,9 +1151,9 @@ name::
             'updateAll' => [
                 'action' => 'updateAll',
                 'method' => 'PUT',
-                'path' => '/update-many'
+                'path' => '/update-many',
             ],
-        ]
+        ],
     ]);
     // This would connect /articles/update-many
 

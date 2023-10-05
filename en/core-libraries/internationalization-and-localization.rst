@@ -41,14 +41,14 @@ application. The default format for CakePHP translation files is the
 placed under **resources/locales/** and within this directory, there should be a
 subfolder for each language the application needs to support::
 
-    /resources
-        /locales
-            /en_US
+    resources/
+        locales/
+            en_US/
                 default.po
-            /en_GB
+            en_GB/
                 default.po
                 validation.po
-            /es
+            es/
                 default.po
 
 The default domain is 'default', therefore the locale folder should at least
@@ -68,13 +68,13 @@ Plugins can also contain translation files, the convention is to use the
 ``under_scored`` version of the plugin name as the domain for the translation
 messages::
 
-    MyPlugin
-        /resources
-            /locales
-                /fr
+    MyPlugin/
+        resources/
+            locales/
+                fr/
                     my_plugin.po
                     additional.po
-                /de
+                de/
                     my_plugin.po
 
 Translation folders can be the two or three letter ISO code of the language or
@@ -529,8 +529,8 @@ in different contexts::
     [
         'He reads the letter {0}' => [
             'alphabet' => 'Él lee la letra {0}',
-            'written communication' => 'Él lee la carta {0}'
-        ]
+            'written communication' => 'Él lee la carta {0}',
+        ],
     ]
 
 Similarly, you can express Gettext-style plurals using the messages array by
@@ -540,8 +540,8 @@ having a nested array key per plural form::
         'I have read one book' => 'He leído un libro',
         'I have read {0} books' => [
             'He leído un libro',
-            'He leído {0} libros'
-        ]
+            'He leído {0} libros',
+        ],
     ]
 
 Using Different Formatters

@@ -206,7 +206,7 @@ for each different table::
         {
             $this->addBehavior('Translate', [
                 'fields' => ['title', 'body'],
-                'translationTable' => 'ArticlesI18n'
+                'translationTable' => 'ArticlesI18n',
             ]);
         }
     }
@@ -470,7 +470,7 @@ Now, You can populate translations before saving them::
 
     $translations = [
         'fr' => ['title' => "Un article"],
-        'es' => ['title' => 'Un artículo']
+        'es' => ['title' => 'Un artículo'],
     ];
 
     foreach ($translations as $lang => $data) {
@@ -516,7 +516,7 @@ behavior during ``newEntity()`` or ``patchEntity()``::
         {
             $this->addBehavior('Translate', [
                 'fields' => ['title'],
-                'validator' => 'translated'
+                'validator' => 'translated',
             ]);
         }
     }

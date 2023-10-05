@@ -238,7 +238,7 @@ Then add the following::
             'fields' => [
                 'username' => 'email',
                 'password' => 'password',
-            ]
+            ],
         ]);
 
         // Load the authenticators, you want session first

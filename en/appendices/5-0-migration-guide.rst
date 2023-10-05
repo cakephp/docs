@@ -387,7 +387,7 @@ A similar change has been applied to the ``RepositoryInterface::get()`` method::
     {
         $author = $this->Authors->get($id, [
             'contain' => ['Books'],
-            'finder' => 'latest'
+            'finder' => 'latest',
         ]);
     }
 
