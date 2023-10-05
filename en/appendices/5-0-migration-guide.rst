@@ -27,6 +27,15 @@ Global
   to match the docblock annotations, but include fixes for incorrect annotations.
 - Type declarations were added to all class properties where possible. These also include some fixes for
   incorrect annotations.
+- Use of #[\AllowDynamicProperties] removed everywhere. It was used for the following classes:
+  - ``Command/Command``
+  - ``Console/Shell``
+  - ``Controller/Component``
+  - ``Controller/Controller``
+  - ``Mailer/Mailer``
+  - ``View/Cell``
+  - ``View/Helper``
+  - ``View/View``
 - The ``SECOND``, ``MINUTE``, ``HOUR``, ``DAY``,  ``WEEK``, ``MONTH``, ``YEAR`` constants were removed.
 - Global functions are now opt-in. If your application uses global function
   aliases be sure to add ``require CAKE . 'functions.php'`` to you application's
