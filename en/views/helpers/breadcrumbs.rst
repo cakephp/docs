@@ -32,7 +32,7 @@ In addition to adding to the end of the trail, you can do a variety of operation
     // Add multiple crumbs at the end of the trail
     $this->Breadcrumbs->add([
         ['title' => 'Products', 'url' => ['controller' => 'products', 'action' => 'index']],
-        ['title' => 'Product name', 'url' => ['controller' => 'products', 'action' => 'view', 1234]]
+        ['title' => 'Product name', 'url' => ['controller' => 'products', 'action' => 'view', 1234]],
     ]);
 
     // Prepended crumbs will be put at the top of the list
@@ -44,7 +44,7 @@ In addition to adding to the end of the trail, you can do a variety of operation
     // Prepend multiple crumbs at the top of the trail, in the order given
     $this->Breadcrumbs->prepend([
         ['title' => 'Products', 'url' => ['controller' => 'products', 'action' => 'index']],
-        ['title' => 'Product name', 'url' => ['controller' => 'products', 'action' => 'view', 1234]]
+        ['title' => 'Product name', 'url' => ['controller' => 'products', 'action' => 'view', 1234]],
     ]);
 
     // Insert in a specific slot. If the slot is out of
@@ -144,8 +144,8 @@ crumb to the trail::
         ['controller' => 'products', 'action' => 'index'],
         [
             'templateVars' => [
-                'icon' => '<i class="fa fa-money"></i>'
-            ]
+                'icon' => '<i class="fa fa-money"></i>',
+            ],
         ]
     );
 
@@ -167,8 +167,8 @@ rendered as HTML attributes::
             'data-foo' => 'bar',
             'innerAttrs' => [
                 'class' => 'inner-products-crumb',
-                'id' => 'the-products-crumb'
-            ]
+                'id' => 'the-products-crumb',
+            ],
         ]
     );
 

@@ -56,8 +56,8 @@ You can change the default value by setting ``session.cookie_samesite`` php.ini 
     Configure::write('Session', [
         'defaults' => 'php',
         'ini' => [
-            'session.cookie_samesite' => 'Strict'
-        ]
+            'session.cookie_samesite' => 'Strict',
+        ],
     ]);
 
 The session cookie path defaults to app's base path. To change this you can use
@@ -68,8 +68,8 @@ persist across all subdomains you can do::
         'defaults' => 'php',
         'ini' => [
             'session.cookie_path' => '/',
-            'session.cookie_domain' => '.yourdomain.com'
-        ]
+            'session.cookie_domain' => '.yourdomain.com',
+        ],
     ]);
 
 By default PHP sets the session cookie to expire as soon as the browser is
@@ -144,8 +144,8 @@ You can then read those values out from inside your handler::
     'Session' => [
         'handler' => [
             'engine' => 'DatabaseSession',
-            'model' => 'CustomSessions'
-        ]
+            'model' => 'CustomSessions',
+        ],
     ]
 
 The above shows how you could setup the Database session handler with an
@@ -184,8 +184,8 @@ You can also use your own ``Table`` class to handle the saving of the sessions::
         'defaults' => 'database',
         'handler' => [
             'engine' => 'DatabaseSession',
-            'model' => 'CustomSessions'
-        ]
+            'model' => 'CustomSessions',
+        ],
     ]
 
 The above will tell Session to use the built-in 'database' defaults, and
@@ -207,8 +207,8 @@ To use Cache based sessions you can configure you Session config like::
     Configure::write('Session', [
         'defaults' => 'cache',
         'handler' => [
-            'config' => 'session'
-        ]
+            'config' => 'session',
+        ],
     ]);
 
 This will configure Session to use the ``CacheSession`` class as the
@@ -331,8 +331,8 @@ In **config/app.php** make the session block look like::
         'handler' => [
             'engine' => 'ComboSession',
             'model' => 'Session',
-            'cache' => 'apc'
-        ]
+            'cache' => 'apc',
+        ],
     ],
     // Make sure to add a apc cache config
     'Cache' => [

@@ -79,7 +79,7 @@ You can temporarily disable deprecation warnings in one of a few ways:
             'ignoredDeprecationPaths' => [
                 'vendors/company/contacts/*',
                 'src/Models/*',
-            ]
+            ],
         ],
 
    Would ignore all deprecations from your ``Models`` directory and the

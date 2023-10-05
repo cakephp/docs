@@ -234,7 +234,7 @@ After installing your application using one of the methods above into the
 directory of your choosing - we'll assume you chose /cake_install - your
 production setup will look like this on the file system::
 
-    /cake_install/
+    cake_install/
         bin/
         config/
         logs/
@@ -248,7 +248,6 @@ production setup will look like this on the file system::
         webroot/ (this directory is set as DocumentRoot)
         .gitignore
         .htaccess
-        .travis.yml
         composer.json
         index.php
         phpunit.xml.dist

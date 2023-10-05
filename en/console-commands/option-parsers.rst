@@ -74,7 +74,7 @@ If you have an array with multiple arguments you can use
 
     $parser->addArguments([
         'node' => ['help' => 'The node to create', 'required' => true],
-        'parent' => ['help' => 'The parent node', 'required' => true]
+        'parent' => ['help' => 'The parent node', 'required' => true],
     ]);
 
 As with all the builder methods on ConsoleOptionParser, addArguments
@@ -91,7 +91,7 @@ valid choices::
     $parser->addArgument('type', [
         'help' => 'The type of node to interact with.',
         'required' => true,
-        'choices' => ['aro', 'aco']
+        'choices' => ['aro', 'aco'],
     ]);
 
 The above will create an argument that is required and has validation on the
@@ -101,7 +101,7 @@ will be raised and the shell will be stopped.
 Using Options
 =============
 
-.. php:method:: addOption($name, $options = [])
+.. php:method:: addOption($name, array $options = [])
 
 Options or flags are used in command line tools to provide unordered key/value
 arguments for your commands. Options can define both verbose and short aliases.
@@ -154,7 +154,7 @@ to add multiple options at once. ::
 
     $parser->addOptions([
         'node' => ['short' => 'n', 'help' => 'The node to create'],
-        'parent' => ['short' => 'p', 'help' => 'The parent node']
+        'parent' => ['short' => 'p', 'help' => 'The parent node'],
     ]);
 
 As with all the builder methods on ConsoleOptionParser, addOptions can be used
@@ -169,7 +169,7 @@ for an option. All other values will raise an ``InvalidArgumentException``::
 
     $parser->addOption('accept', [
         'help' => 'What version to accept.',
-        'choices' => ['working', 'theirs', 'mine']
+        'choices' => ['working', 'theirs', 'mine'],
     ]);
 
 Using Boolean Options
@@ -204,14 +204,14 @@ subcommand parsers easier, as everything is an array::
             'description' => [
                 __("Use this command to grant ACL permissions. Once executed, the "),
                 __("ARO specified (and its children, if any) will have ALLOW access "),
-                __("to the specified ACO action (and the ACO's children, if any).")
+                __("to the specified ACO action (and the ACO's children, if any)."),
             ],
             'arguments' => [
                 'aro' => ['help' => __('ARO to check.'), 'required' => true],
                 'aco' => ['help' => __('ACO to check.'), 'required' => true],
-                'action' => ['help' => __('Action to check')]
-            ]
-        ]
+                'action' => ['help' => __('Action to check')],
+            ],
+        ],
     ]);
 
 Inside the parser spec, you can define keys for ``arguments``, ``options``,
@@ -232,8 +232,8 @@ use buildFromArray on its own, to build an option parser::
             'arguments' => [
                 'aro' => ['help' => __('ARO to check.'), 'required' => true],
                 'aco' => ['help' => __('ACO to check.'), 'required' => true],
-                'action' => ['help' => __('Action to check')]
-            ]
+                'action' => ['help' => __('Action to check')],
+            ],
         ]);
     }
 

@@ -45,8 +45,8 @@ from the URL::
         protected array $paginate = [
             'limit' => 25,
             'order' => [
-                'Articles.title' => 'asc'
-            ]
+                'Articles.title' => 'asc',
+            ],
         ];
     }
 
@@ -215,8 +215,8 @@ pagination query::
 
     protected array $paginate = [
         'sortableFields' => [
-            'id', 'title', 'Users.username', 'created'
-        ]
+            'id', 'title', 'Users.username', 'created',
+        ],
     ];
 
 Any requests that attempt to sort on fields not in the allowed list will be

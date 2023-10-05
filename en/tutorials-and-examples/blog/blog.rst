@@ -55,16 +55,16 @@ Composer, check out the :doc:`/installation` section.
 Regardless of how you downloaded and installed CakePHP, once your set up is
 completed, your directory setup should look something like the following::
 
-    /cake_install
-        /bin
-        /config
-        /logs
-        /plugins
-        /src
-        /tests
-        /tmp
-        /vendor
-        /webroot
+    cake_install/
+        bin/
+        config/
+        logs/
+        plugins/
+        src/
+        tests/
+        tmp/
+        vendor/
+        webroot/
         .editorconfig
         .gitignore
         .htaccess
@@ -184,7 +184,7 @@ array might look something like the following::
                 'password' => 'AngelF00dC4k3~',
                 'database' => 'cake_blog',
                 'encoding' => 'utf8',
-                'timezone' => 'UTC'
+                'timezone' => 'UTC',
             ],
         ],
         // More configuration below.

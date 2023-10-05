@@ -38,7 +38,7 @@ You can also build Xml objects using an array::
         'post' => [
             'id' => 1,
             'title' => 'Best post',
-            'body' => ' ... '
+            'body' => ' ... ',
         ]
     ];
     $xml = Xml::build($data);
@@ -115,8 +115,8 @@ attributes with ``@``. For value text, use ``@`` as the key::
         'project' => [
             '@id' => 1,
             'name' => 'Name of project, as tag',
-            '@' => 'Value of project'
-        ]
+            '@' => 'Value of project',
+        ],
     ];
     $xmlObject = Xml::fromArray($xmlArray);
     $xmlString = $xmlObject->asXML();
@@ -136,7 +136,7 @@ the samples::
     $xmlArray = [
         'root' => [
             'xmlns:' => 'https://cakephp.org',
-            'child' => 'value'
+            'child' => 'value',
         ]
     ];
     $xml1 = Xml::fromArray($xmlArray);

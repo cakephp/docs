@@ -65,7 +65,7 @@ following::
             'className' => 'File',
             'duration' => '+1 hours',
             'path' => CACHE,
-            'prefix' => 'cake_short_'
+            'prefix' => 'cake_short_',
         ],
         // Using a fully namespaced name.
         'long' => [
@@ -73,7 +73,7 @@ following::
             'duration' => '+1 week',
             'probability' => 100,
             'path' => CACHE . 'long' . DS,
-        ]
+        ],
     ]
     // ...
 
@@ -499,7 +499,7 @@ group. This is possible by declaring the groups in cache configuration::
     Cache::setConfig('site_home', [
         'className' => 'Redis',
         'duration' => '+999 days',
-        'groups' => ['comment', 'article']
+        'groups' => ['comment', 'article'],
     ]);
 
 .. php:method:: clearGroup($group, $config = 'default')

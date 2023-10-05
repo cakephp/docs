@@ -366,7 +366,7 @@ safely add user data to SQL functions. For example::
         ' - Age: ',
         $query->func()->dateDiff([
             'NOW()' => 'literal',
-            'Articles.created' => 'identifier'
+            'Articles.created' => 'identifier',
         ])
     ]);
     $query->select(['link_title' => $concat]);
@@ -1044,7 +1044,7 @@ can may be able to use ``bind()`` to manually bind parameters into conditions::
 
     $query = $cities->find()
         ->where([
-            'start_date BETWEEN :start AND :end'
+            'start_date BETWEEN :start AND :end',
         ])
         ->bind(':start', '2014-01-01', 'date')
         ->bind(':end',   '2014-12-31', 'date');
@@ -1236,7 +1236,7 @@ typically using comparison operators like ``<, >, =``::
                 ['unit_price' => 20, 'tax_percentage <=' => 5],
             ]
         ]);
-   
+
     # WHERE (unit_price < 20 OR (unit_price = 20 AND tax_percentage <= 5))
 
 The same result can be achieved using ``TupleComparison``::
@@ -1255,7 +1255,7 @@ The same result can be achieved using ``TupleComparison``::
 
     # WHERE (unit_price, tax_percentage) <= (20, 5))
 
-Tuple Comparison can also be used with ``IN`` and the result can be transformed 
+Tuple Comparison can also be used with ``IN`` and the result can be transformed
 even on DBMS that does not natively support it::
 
     $articles->find()
@@ -1491,11 +1491,15 @@ SQL. In addition to ``join()`` you can use ``rightJoin()``, ``leftJoin()`` and
     $query->innerJoin(
         ['Authors' => 'authors'],
         [
-        'Authors.promoted' => true,
-        'Authors.created' => new DateTime('-5 days'),
-        'Authors.id = Articles.author_id'
+            'Authors.promoted' => true,
+            'Authors.created' => new DateTime('-5 days'),
+            'Authors.id = Articles.author_id',
         ],
-        ['Authors.promoted' => 'boolean', 'Authors.created' => 'datetime']);
+        [
+            'Authors.promoted' => 'boolean',
+            'Authors.created' => 'datetime',
+        ]
+    );
 
 It should be noted that if you set the ``quoteIdentifiers`` option to ``true`` when
 defining your ``Connection``, join conditions between table fields should be set as follow::
@@ -1506,8 +1510,8 @@ defining your ``Connection``, join conditions between table fields should be set
                 'table' => 'comments',
                 'type' => 'LEFT',
                 'conditions' => [
-                    'c.article_id' => new \Cake\Database\Expression\IdentifierExpression('articles.id')
-                ]
+                    'c.article_id' => new \Cake\Database\Expression\IdentifierExpression('articles.id'),
+                ],
             ],
         ]);
 
@@ -1524,7 +1528,7 @@ Instead, create a new ``InsertQuery`` object using ``insertQuery()``::
     $query->insert(['title', 'body'])
         ->values([
             'title' => 'First post',
-            'body' => 'Some body text'
+            'body' => 'Some body text',
         ])
         ->execute();
 
@@ -1535,11 +1539,11 @@ method as many times as you need::
     $query->insert(['title', 'body'])
         ->values([
             'title' => 'First post',
-            'body' => 'Some body text'
+            'body' => 'Some body text',
         ])
         ->values([
             'title' => 'Second post',
-            'body' => 'Another body text'
+            'body' => 'Another body text',
         ])
         ->execute();
 
@@ -1652,7 +1656,7 @@ example given above::
     $query
         ->where([
             'MATCH (comment) AGAINST (:userData)',
-            'created < NOW() - :moreUserData'
+            'created < NOW() - :moreUserData',
         ])
         ->bind(':userData', $userData, 'string')
         ->bind(':moreUserData', $moreUserData, 'datetime');
@@ -1858,7 +1862,7 @@ To build that query with the ORM query builder we would use::
         $q = $this->Orders->subquery();
         $q->select([
             'order_count' => $q->func()->count('*'),
-            'customer_id'
+            'customer_id',
         ])
         ->groupBy('customer_id');
 
@@ -1877,8 +1881,8 @@ To build that query with the ORM query builder we would use::
         // Define the join with our table expression
         'orders_per_customer' => [
             'table' => 'orders_per_customer',
-            'conditions' => 'orders_per_customer.customer_id = Customers.id'
-        ]
+            'conditions' => 'orders_per_customer.customer_id = Customers.id',
+        ],
     ]);
 
 Executing Complex Queries

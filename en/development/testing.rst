@@ -73,7 +73,7 @@ CakePHP for fixture tables and data::
             'host' => 'dbhost',
             'username' => 'dblogin',
             'password' => 'dbpassword',
-            'database' => 'test_database'
+            'database' => 'test_database',
         ],
     ],
 
@@ -690,7 +690,7 @@ Fixture directory. You can also load fixtures from CakePHP core, or plugins::
         protected $fixtures = [
             'plugin.DebugKit.Articles',
             'plugin.MyVendorName/MyPlugin.Messages',
-            'core.Comments'
+            'core.Comments',
         ];
     }
 

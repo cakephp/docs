@@ -259,8 +259,8 @@ you want the filenames to appear in the recipient's mail client:
         'photo.png' => [
             'file' => '/full/some_hash.png',
             'mimetype' => 'image/png',
-            'contentId' => 'my-unique-id'
-        ]
+            'contentId' => 'my-unique-id',
+        ],
     ]);
 
    The above will attach the file with different mimetype and with custom
@@ -382,7 +382,7 @@ instructions. For example, we could add the following to our ``UserMailer``::
     public function implementedEvents()
     {
         return [
-            'Model.afterSave' => 'onRegistration'
+            'Model.afterSave' => 'onRegistration',
         ];
     }
 
@@ -429,8 +429,8 @@ change the configuration data. An example transport configuration looks like::
             'username' => 'my@gmail.com',
             'password' => 'secret',
             'className' => 'Smtp',
-            'tls' => true
-        ]
+            'tls' => true,
+        ],
     ],
 
 Transports can also be configured at runtime using

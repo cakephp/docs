@@ -26,7 +26,7 @@ Doing requests is simple and straight forward.  Doing a GET request looks like::
 
     // Simple get with querystring & additional headers
     $response = $http->get('http://example.com/search', ['q' => 'widget'], [
-      'headers' => ['X-Requested-With' => 'XMLHttpRequest']
+      'headers' => ['X-Requested-With' => 'XMLHttpRequest'],
     ]);
 
 Doing POST and PUT requests is equally simple::
@@ -35,13 +35,13 @@ Doing POST and PUT requests is equally simple::
     $http = new Client();
     $response = $http->post('http://example.com/posts/add', [
       'title' => 'testing',
-      'body' => 'content in the post'
+      'body' => 'content in the post',
     ]);
 
     // Send a PUT request with application/x-www-form-urlencoded encoded data
     $response = $http->put('http://example.com/posts/add', [
       'title' => 'testing',
-      'body' => 'content in the post'
+      'body' => 'content in the post',
     ]);
 
     // Other methods as well.
@@ -178,7 +178,7 @@ An example of basic authentication::
 
     $http = new Client();
     $response = $http->get('http://example.com/profile/1', [], [
-      'auth' => ['username' => 'mark', 'password' => 'secret']
+      'auth' => ['username' => 'mark', 'password' => 'secret'],
     ]);
 
 By default ``Cake\Http\Client`` will use basic authentication if there is no
@@ -191,15 +191,15 @@ An example of basic authentication::
 
     $http = new Client();
     $response = $http->get('http://example.com/profile/1', [], [
-      'auth' => [
-        'type' => 'digest',
-        'username' => 'mark',
-        'password' => 'secret',
-        'realm' => 'myrealm',
-        'nonce' => 'onetimevalue',
-        'qop' => 1,
-        'opaque' => 'someval'
-      ]
+        'auth' => [
+            'type' => 'digest',
+            'username' => 'mark',
+            'password' => 'secret',
+            'realm' => 'myrealm',
+            'nonce' => 'onetimevalue',
+            'qop' => 1,
+            'opaque' => 'someval',
+        ],
     ]);
 
 By setting the 'type' key to 'digest', you tell the authentication subsystem to
@@ -224,14 +224,14 @@ key and consumer secret::
 
     $http = new Client();
     $response = $http->get('http://example.com/profile/1', [], [
-      'auth' => [
-        'type' => 'oauth',
-        'consumerKey' => 'bigkey',
-        'consumerSecret' => 'secret',
-        'token' => '...',
-        'tokenSecret' => '...',
-        'realm' => 'tickets',
-      ]
+        'auth' => [
+            'type' => 'oauth',
+            'consumerKey' => 'bigkey',
+            'consumerSecret' => 'secret',
+            'token' => '...',
+            'tokenSecret' => '...',
+            'realm' => 'tickets',
+        ],
     ]);
 
 OAuth 2 Authentication
@@ -241,7 +241,7 @@ Because OAuth2 is often a single header, there is not a specialized
 authentication adapter. Instead you can create a client with the access token::
 
     $http = new Client([
-        'headers' => ['Authorization' => 'Bearer ' . $accessToken]
+        'headers' => ['Authorization' => 'Bearer ' . $accessToken],
     ]);
     $response = $http->get('https://example.com/api/profile/1');
 
@@ -254,11 +254,11 @@ Http\\Client will assume Basic authentication, unless the type key is set::
 
     $http = new Client();
     $response = $http->get('http://example.com/test.php', [], [
-      'proxy' => [
-        'username' => 'mark',
-        'password' => 'testing',
-        'proxy' => '127.0.0.1:8080',
-      ]
+        'proxy' => [
+            'username' => 'mark',
+            'password' => 'testing',
+            'proxy' => '127.0.0.1:8080',
+        ],
     ]);
 
 The second proxy parameter must be a string with an IP or a domain without
@@ -278,9 +278,9 @@ tedium, you can create scoped clients::
 
     // Create a scoped client.
     $http = new Client([
-      'host' => 'api.example.com',
-      'scheme' => 'https',
-      'auth' => ['username' => 'mark', 'password' => 'testing']
+        'host' => 'api.example.com',
+        'scheme' => 'https',
+        'auth' => ['username' => 'mark', 'password' => 'testing'],
     ]);
 
     // Do a request to api.example.com
@@ -345,7 +345,7 @@ request's ``$options`` parameters::
 
     // Replace a stored cookie with a custom value.
     $response = $http->get('/changelogs', [], [
-        'cookies' => ['sessionid' => '123abc']
+        'cookies' => ['sessionid' => '123abc'],
     ]);
 
 You can add cookie objects to the client after creating it using the ``addCookie()``
