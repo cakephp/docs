@@ -27,7 +27,7 @@ Global
   to match the docblock annotations, but include fixes for incorrect annotations.
 - Type declarations were added to all class properties where possible. These also include some fixes for
   incorrect annotations.
-- Use of #[\AllowDynamicProperties] removed everywhere. It was used for the following classes:
+- Use of ``#[\AllowDynamicProperties]`` removed everywhere. It was used for the following classes:
   - ``Command/Command``
   - ``Console/Shell``
   - ``Controller/Component``
