@@ -205,7 +205,7 @@ You can also optionally use a ``groupPath`` to group results based on a path::
     ];
 
 Finally you can use *closures* to build keys/values/groups paths dynamically,
-for example when working with entities and dates (converted to ``Cake/Time``
+for example when working with entities and dates (converted to ``I18n\DateTime``
 instances by the ORM) you may want to group results by date::
 
     $combined = (new Collection($entities))->combine(
