@@ -301,6 +301,8 @@ method::
     {
         public function initialize(): void
         {
+            parent::initialize();
+
             $this->addViewClasses([JsonView::class, XmlView::class]);
         }
     }
@@ -347,6 +349,8 @@ code::
 
     public function initialize(): void
     {
+        parent::initialize();
+
         // Require Accept header negotiation or return a 406 response.
         $this->addViewClasses([JsonView::class, NegotiationRequiredView::class]);
     }
