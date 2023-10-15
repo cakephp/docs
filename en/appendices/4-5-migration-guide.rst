@@ -20,9 +20,8 @@ Deprecations
 4.5 introduces a few deprecations. All of these features will continue for the
 duration of 4.x but will be removed in 5.0.
 
-You can use the
-:ref:`upgrade tool <upgrade-tool-use>` to automate updating usage of deprecated
-features::
+You can use the :ref:`upgrade tool <upgrade-tool-use>` to automate updating
+usage of deprecated features::
 
     bin/cake upgrade rector --rules cakephp45 <path/to/app/src>
 
@@ -109,7 +108,8 @@ Validation
 View
 ----
 
-- It is recommended to replace ``loadHelper()`` with new ``addHelper()`` method to add helpers in ``View::initialize()``.
+- It is recommended to replace ``loadHelper()`` with new ``addHelper()`` method
+  to add helpers in ``View::initialize()``.
 
 
 New Features
@@ -153,11 +153,13 @@ Core
 Database
 --------
 
-- ``ConnectionManager`` now supports read and write connection roles. Roles can be configured
-  with ``read`` and ``write`` keys in the connection config that override the shared config.
+- ``ConnectionManager`` now supports read and write connection roles. Roles can
+  be configured with ``read`` and ``write`` keys in the connection config that
+  override the shared config.
 - ``ConnectionManager::aliases()`` was added.
-- ``SelectQuery::setConnectionRole()``, ``SelectQuery::useReadRole()``, and ``SelectQuery::useWriteRole()``
-  were added to let you switch a query to a specific connection role.
+- ``SelectQuery::setConnectionRole()``, ``SelectQuery::useReadRole()``, and
+  ``SelectQuery::useWriteRole()`` were added to let you switch a query to
+  a specific connection role.
 
 Datasource
 ----------
