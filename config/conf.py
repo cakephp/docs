@@ -10,13 +10,13 @@ from cakephpsphinx.config.all import *
 # built documents.
 #
 # The short X.Y version.
-version = '4.next'
+version = '4.x'
 
 # The full version, including alpha/beta/rc tags.
-release = '4.next'
+release = '4.x'
 
 # The search index version.
-search_version = '4-next'
+search_version = '4'
 
 # The marketing diplay name for the book.
 version_name = 'Strawberry'
