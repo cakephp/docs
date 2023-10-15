@@ -83,6 +83,13 @@ called at the beginning of the request process, you can use the
         {
             // Bind the error handler into the middleware queue.
             $middlewareQueue->add(new ErrorHandlerMiddleware());
+
+            // Add middleware by classname.
+            // As of 4.5.0 classname middleware are optionally resolved
+            // using the DI container. If the class is not found in the
+            // container then an instance is created by the middleware queue.
+            $middlewareQueue->add(UserRateLimiting::class);
+
             return $middlewareQueue;
         }
     }

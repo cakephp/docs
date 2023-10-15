@@ -308,11 +308,17 @@ The application's ``View`` class is automatically used as a fallback when no
 other view can be selected based on the requests' ``Accept`` header or routing
 extension. If your application needs to perform different logic for different
 response formats you can use ``$this->request->is()`` to build the required
-conditional logic.
+conditional logic. You can also set your controllers' supported view classes
+using the ``addViewClasses()`` method which will merge the provided views with
+those held in the ``viewClasses`` property.
 
 .. note::
     View classes must implement the static ``contentType()`` hook method to
     participate in content-type negotiation.
+
+
+.. versionadded:: 4.5.0
+    ``addViewClasses()`` was added.
 
 
 Content Type Negotiation Fallbacks
@@ -413,9 +419,23 @@ the named action::
 Loading Additional Models
 =========================
 
+.. php:method:: fetchModel(string $alias, array $config = [])
+
+The ``fetchModel()`` method is useful to load models or ORM tables that
+are not the controller's default. Models retrieved with this method will not be
+set as properties on your controller::
+
+    // Get an ElasticSearch model
+    $articles = $this->fetchModel('Articles', 'Elastic');
+
+    // Get a webservices model
+    $github = $this->fetchModel('GitHub', 'Webservice');
+
+.. versionadded:: 4.5.0
+
 .. php:method:: fetchTable(string $alias, array $config = [])
 
-The ``fetchTable()`` function comes handy when you need to use a table that is not
+The ``fetchTable()`` method comes handy when you need to use an ORM table that is not
 the controller's default one::
 
     // In a controller method.
@@ -430,7 +450,7 @@ the controller's default one::
 
 .. note::
 
-    ``Controller::fetchTable()`` does not create a controller property with the name of the table alias,
+    ``Controller::fetchTable()`` does not create a proeprty controller property with the name of the table alias,
     e.g. ``$this->Articles``, as  ``Controller::loadModel()`` does.
 
 Paginating a Model

@@ -1061,12 +1061,13 @@ belongsToMany アソシエーションのそれぞれのエンティティーは
     TypeFactory::map('json', 'Cake\Database\Type\JsonType');
 
     // src/Model/Table/UsersTable.php の中で
-    use Cake\Database\Schema\TableSchema;
+    use Cake\Database\Schema\TableSchemaInterface;
 
     class UsersTable extends Table
     {
-        protected function _initializeSchema(TableSchema $schema)
+        public function getSchema(): TableSchemaInterface
         {
+            $schema = parent::getSchema();
             $schema->setColumnType('preferences', 'json');
 
             // 3.6 より前では、 ``setColumnType`` の代わりに ``columnType`` を使用してください。

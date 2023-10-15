@@ -479,17 +479,19 @@ Type クラスは次のメソッドを実装することが期待されます。
 
 こうすればスキーマ情報は新しい型で上書きされ、CakePHP のデータベース層は自動的に
 JSON データを変換してクエリーを作成します。
-あなたは Table の :ref:`_initializeSchema() メソッド <saving-complex-types>` で、
+あなたは Table の :ref:`getSchema() メソッド <saving-complex-types>` で、
 新たに作った型のマッピングをすることができます。 ::
 
-    use Cake\Database\Schema\TableSchema;
+    use Cake\Database\Schema\TableSchemaInterface;
 
     class WidgetsTable extends Table
     {
 
-        protected function _initializeSchema(TableSchema $schema)
+        public function getSchema(): TableSchemaInterface
         {
+            $schema = parent::getSchema();
             $schema->columnType('widget_prefs', 'json');
+
             return $schema;
         }
 

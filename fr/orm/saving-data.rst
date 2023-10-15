@@ -377,7 +377,7 @@ vous pouvez utiliser ``saveMany()`` ou ``saveManyOrFail()``::
 
     // Renvoie un booléen pour indiquer si l'opération a réussi
     $articles->saveMany($entities);
- 
+
     // Lève une PersistenceFailedException si l'un des enregistrements échoue
     $articles->saveManyOrFail($entities);
 

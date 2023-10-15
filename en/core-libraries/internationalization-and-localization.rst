@@ -73,6 +73,7 @@ messages::
             /locales
                 /fr
                     my_plugin.po
+                    additional.po
                 /de
                     my_plugin.po
 
@@ -80,7 +81,11 @@ Translation folders can be the two or three letter ISO code of the language or
 the full ICU locale name such as ``fr_FR``, ``es_AR``, ``da_DK`` which contains
 both the language and the country where it is spoken.
 
-See https://www.localeplanet.com/icu/ for the full list.
+See https://www.localeplanet.com/icu/ for the full list of locales.
+
+.. versionchanged:: 4.5.0
+    As of 4.5.0 plugins can contain multiple translation domains. Use
+   ``MyPlugin.additional`` to reference plugin domains.
 
 An example translation file could look like this:
 

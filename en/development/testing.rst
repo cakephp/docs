@@ -438,12 +438,15 @@ The listener is deprecated and you should :doc:`update your fixture configuratio
 
 .. _creating-test-database-schema:
 
-Creating Test Database Schema
+Creating Schema in Tests
 -----------------------------
 
 You can generate test database schema either via CakePHP's migrations, loading
 a SQL dump file or using another external schema management tool. You should
 create your schema in your application's ``tests/bootstrap.php`` file.
+
+Creating Schema with Migrations
+-------------------------------
 
 If you use CakePHP's :doc:`migrations plugin </migrations>` to manage your
 application's schema, you can reuse those migrations to generate your test
@@ -482,6 +485,62 @@ migrations if your current migration head differs from the applied migrations.
 
 You can also configure how migrations should be run in tests in your datasources
 configuration. See the :doc:`migrations docs </migrations>` for more information.
+
+Creating Schema with Abstract Schema
+------------------------------------
+
+For plugins that need to define schema in tests, but don't need or want to have
+dependencies on migrations, you can define schema as a structured array of
+tables. This format is not recommended for application development as it can be
+time-consuming to maintain.
+
+Each table can define ``columns``, ``constraints``, and ``indexes``.
+An example table would be::
+
+     return [
+       'articles' => [
+          'columns' => [
+              'id' => [
+                  'type' => 'integer',
+              ],
+              'author_id' => [
+                  'type' => 'integer',
+                  'null' => true,
+              ],
+              'title' => [
+                  'type' => 'string',
+                  'null' => true,
+              ],
+              'body' => 'text',
+              'published' => [
+                  'type' => 'string',
+                  'length' => 1,
+                  'default' => 'N',
+              ],
+          ],
+          'constraints' => [
+              'primary' => [
+                  'type' => 'primary',
+                  'columns' => [
+                      'id',
+                  ],
+              ],
+          ],
+       ],
+       // More tables.
+    ];
+
+The options available to ``columns``, ``indexes`` and ``constraints`` match the
+attributes that are available in CakePHP's schema reflection APIs. Tables are
+created incrementally and you must take care to ensure that tables are created
+before foreign key references are made. Once you have created your schema file
+you can load it in your ``tests/bootstrap.php`` with::
+
+    $loader = new SchemaLoader();
+    $loader->loadInternalFile($pathToSchemaFile);
+
+Creating Schema with SQL Dump Files
+-----------------------------------
 
 To load a SQL dump file you can use the following::
 
@@ -682,9 +741,10 @@ In the above example, both fixtures would be loaded from
 Fixture Factories
 -----------------
 
-As your application grows, so does the number and the size of your test fixtures. You might find it difficult
-to maintain them and to keep track of their content.
-The `fixture factories plugin <https://github.com/vierge-noire/cakephp-fixture-factories>`_ proposes an
+As your application grows, so does the number and the size of your test
+fixtures. You might find it difficult to maintain them and to keep track of
+their content. The `fixture factories plugin
+<https://github.com/vierge-noire/cakephp-fixture-factories>`_ proposes an
 alternative for large sized applications.
 
 The plugin uses the `test suite light plugin <https://github.com/vierge-noire/cakephp-test-suite-light>`_
@@ -698,9 +758,9 @@ Once your factories are
 `tuned <https://github.com/vierge-noire/cakephp-fixture-factories/blob/main/docs/factories.md>`_,
 you are ready to create test fixtures in no time.
 
-Unnecessary interaction with the database will slow down your tests as well as your application.
-You can create test fixtures without persisting them which can be useful for
-testing methods without DB interaction::
+Unnecessary interaction with the database will slow down your tests as well as
+your application. You can create test fixtures without persisting them which can
+be useful for testing methods without DB interaction::
 
     $article = ArticleFactory::make()->getEntity();
 
@@ -710,16 +770,17 @@ In order to persist::
 
 The factories help creating associated fixtures too.
 Assuming that articles belongs to many authors, we can now, for example,
-create 5 articles each with 2 authors:
+create 5 articles each with 2 authors::
 
-``$articles = ArticleFactory::make(5)->with('Authors', 2)->getEntities();``
+    $articles = ArticleFactory::make(5)->with('Authors', 2)->getEntities();
 
-Note that the fixture factories do not require any fixture creation or declaration. Still, they are fully
-compatible with the fixtures that come with cakephp. You will find additional insights
-and documentation `here <https://github.com/vierge-noire/cakephp-fixture-factories>`_.
+Note that the fixture factories do not require any fixture creation or
+declaration. Still, they are fully compatible with the fixtures that come with
+cakephp. You will find additional insights and documentation `here
+<https://github.com/vierge-noire/cakephp-fixture-factories>`_.
 
 Loading Routes in Tests
------------------------
+=======================
 
 If you are testing mailers, controller components or other classes that require
 routes and resolving URLs, you will need to load routes. During
@@ -1565,8 +1626,12 @@ make testing responses much simpler. Some examples are::
     $user =  $this->viewVariable('user');
     $this->assertEquals('jose', $user->username);
 
-    // Assert cookies in the response
+    // Assert cookie values in the response
     $this->assertCookie('1', 'thingid');
+
+    // Assert a cookie is or is not present
+    $this->assertCookieIsSet('remember_me');
+    $this->assertCookieNotSet('remember_me');
 
     // Check the content type
     $this->assertContentType('application/json');

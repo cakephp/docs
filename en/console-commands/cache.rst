@@ -9,3 +9,6 @@ is available for clearing cached data your application has::
 
     // Clear all cache configs
     bin/cake cache clear_all
+
+    // Clear one cache group
+    bin/cake cache clear_group <groupname>

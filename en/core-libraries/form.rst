@@ -172,7 +172,15 @@ Once a form has been validated you can retrieve the errors from it::
     $errors = $form->getErrors();
     /* $errors contains
     [
-        'email' => ['A valid email address is required']
+        'name' => ['length' => 'Name must be at least two characters long'],
+        'email' => ['format' => 'A valid email address is required'],
+    ]
+    */
+
+    $error = $form->getError('email');
+    /* $error contains
+    [
+        'format' => 'A valid email address is required',
     ]
     */
 

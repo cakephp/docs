@@ -10,13 +10,13 @@ from cakephpsphinx.config.all import *
 # built documents.
 #
 # The short X.Y version.
-version = '4.x'
+version = '4.next'
 
 # The full version, including alpha/beta/rc tags.
-release = '4.x'
+release = '4.next'
 
 # The search index version.
-search_version = '4'
+search_version = '4-next'
 
 # The marketing diplay name for the book.
 version_name = 'Strawberry'
@@ -40,7 +40,7 @@ languages = ['en', 'pt_BR', 'es', 'ja', 'fr']
 
 # The GitHub branch name for this version of the docs
 # for edit links to point at.
-branch = '4.x'
+branch = '4.next'
 
 # Add any paths that contain custom themes here, relative to this directory.
 html_theme_path = []
@@ -56,7 +56,7 @@ html_sidebars = {
 }
 
 language = os.getenv('LANG') or 'en'
-html_use_opensearch = 'https://book.cakephp.org/4/' + language
+html_use_opensearch = 'https://book.cakephp.org/' + version + '/' + language
 
 # -- Options for LaTeX output ------------------------------------------------
 

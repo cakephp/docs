@@ -1094,9 +1094,12 @@ column Types::
 
     class UsersTable extends Table
     {
-        public function initialize(): void
+        public function getSchema(): TableSchemaInterface
         {
-            $this->getSchema()->setColumnType('preferences', 'json');
+            $schema = parent::getSchema();
+            $schema->setColumnType('preferences', 'json');
+
+            return $schema;
         }
     }
 
@@ -1269,8 +1272,8 @@ interface as well::
     // Publish all the unpublished articles.
     function publishAllUnpublished()
     {
-        $this->query()
-            ->update()
+        // Prior to 4.5 use $this->query() instead.
+        $this->updateQuery()
             ->set(['published' => true])
             ->where(['published' => false])
             ->execute();
