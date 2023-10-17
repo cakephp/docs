@@ -1266,7 +1266,7 @@ Creating Select Pickers
 
 .. php:method:: select(string $fieldName, array $options, array $attributes)
 
-* ``$fieldName`` - A field name in the form ``'Modelname.fieldname'``. This
+* ``$fieldName`` - A field name in the form ``'fieldname'`` or ``'related_entity.fieldname'``. This
   will provide the ``name`` attribute of the ``select`` element.
 * ``$options`` - An optional array containing the list of items for the select
   picker. When this array is missing, the method will generate only the
