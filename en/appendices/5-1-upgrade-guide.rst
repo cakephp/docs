@@ -14,3 +14,9 @@ Http
 
 - ``SecurityHeadersMiddleware::setPermissionsPolicy()`` was added. This method
   adds the ability to define ``permissions-policy`` header values.
+
+Validation
+----------
+
+- ``Validation::enum()`` and ``Validator::enum()`` were added. These validation
+  methods simplify validating backed enum values.
