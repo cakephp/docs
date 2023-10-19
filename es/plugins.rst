@@ -482,8 +482,7 @@ Si se omite el prefijo del plugin, el archivo de diseño/vista se ubicará de fo
 
 .. nota::
 
-    Para obtener información sobre cómo usar elementos de un plugin, consulta
-    :ref:`elementos`
+    Para obtener información sobre cómo usar elementos de un plugin, consulta :ref:`elementos`
 
 Sobrescribir Plantillas de Plugin desde dentro de tu Aplicación
 ---------------------------------------------------------------
