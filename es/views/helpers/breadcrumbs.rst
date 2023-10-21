@@ -187,7 +187,7 @@ Esto puede ser útil cuando deseas transformar las migas y sobrescribir la lista
     $this->Breadcrumbs->reset()->add($crumbs);
 
 .. meta::
-    :title lang=en: BreadcrumbsHelper
-    :description lang=en: The role of the BreadcrumbsHelper in CakePHP is provide a way to easily manage breadcrumbs.
-    :keywords lang=en: breadcrumbs helper,cakephp crumbs
+    :title lang=es: BreadcrumbsHelper
+    :description lang=es: El papel del BreadcrumbsHelper en CakePHP es proporcionar una forma sencilla de gestionar las migas de pan.
+    :keywords lang=en: breadcrumbs helper,cakephp migas de pan, migas
 
