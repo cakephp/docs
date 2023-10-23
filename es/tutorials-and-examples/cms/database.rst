@@ -122,7 +122,7 @@ Configuración de la base de datos
 =================================
 
 A continuación, digamos a CakePHP dónde está nuestra base de datos y cómo conectarse a ella. Reemplace
-los valores en el arreglo ``Datasources.default`` en su archivo **config/app.php** con los que aplican
+los valores en el arreglo ``Datasources.default`` en su archivo **config/app_local.php** con los que aplican
 a su configuración. Una arreglo de configuración completo de muestra podría tener el siguiente aspecto::
 
     <?php
@@ -130,30 +130,23 @@ a su configuración. Una arreglo de configuración completo de muestra podría t
         // Más configuración arriba.
         'Datasources' => [
             'default' => [
-                'className' => 'Cake\Database\Connection',
-                // Replace Mysql with Postgres if you are using PostgreSQL
-                'driver' => 'Cake\Database\Driver\Mysql',
-                'persistent' => false,
                 'host' => 'localhost',
                 'username' => 'cakephp',
                 'password' => 'AngelF00dC4k3~',
                 'database' => 'cake_cms',
-                // Comment out the line below if you are using PostgreSQL
-                'encoding' => 'utf8mb4',
-                'timezone' => 'UTC',
-                'cacheMetadata' => true,
+                'url' => env('DATABASE_URL', null),
             ],
         ],
         // Más configuración abajo.
     ];
 
-Una vez que haya guardado su archivo **config/app.php**, debería ver que la sección
+Una vez que haya guardado su archivo **config/app_local.php**, debería ver que la sección
 'CakePHP is able to connect to the database' tiene un gorro de cocinero verde.
 
 .. note::
 
-    Si tiene **config/app_local.php** en la carpeta de su aplicación,
-    este anula la configuración de app.php.
+    El fichero **config/app_local.php** se utiliza para sobreescribir los valores por defecto de la
+    configuración en **config/app.php**. Esto facilita la configuración en los entornos de desarrollo.
 
 Creando nuestro primer modelo
 =============================
@@ -169,7 +162,8 @@ en **src/Model/Table**. El archivo que crearemos se guardará en **src/Model/Tab
 El archivo completo debería verse así::
 
     <?php
-    // src/Model/Table/ArticlesTable.php
+    declare(strict_types=1);
+
     namespace App\Model\Table;
 
     use Cake\ORM\Table;
@@ -178,11 +172,12 @@ El archivo completo debería verse así::
     {
         public function initialize(array $config): void
         {
+            parent::initialize($config);
             $this->addBehavior('Timestamp');
         }
     }
 
-Hemos agregado el comportamiento :doc:`/orm/behaviors/timestamp` que automáticamente 
+Hemos agregado el comportamiento :doc:`/orm/behaviors/timestamp` que automáticamente
 llenará las columnas ``created`` y ``modified`` de nuestra tabla. Al nombrar nuestro
 objeto ``Table`` ``ArticlesTable``, CakePHP puede usar convenciones de nomenclatura
 para saber que nuestro modelo usa la tabla `articles`` de la base de datos. CakePHP
@@ -202,7 +197,8 @@ nuestros datos. Nuestra ``Entity`` se guardará en **src/Model/Entity/Article.ph
 archivo completo debería verse así::
 
     <?php
-    // src/Model/Entity/Article.php
+    declare(strict_types=1);
+
     namespace App\Model\Entity;
 
     use Cake\ORM\Entity;
@@ -210,9 +206,12 @@ archivo completo debería verse así::
     class Article extends Entity
     {
         protected array $_accessible = [
-            '*' => true,
-            'id' => false,
-            'slug' => false,
+            'title' => true,
+            'body' => true,
+            'published' => true,
+            'created' => true,
+            'modified' => true,
+            'users' => true,
         ];
     }
 
