@@ -134,7 +134,7 @@ install the Authentication Plugin:
 
 .. code-block:: console
 
-    composer require "cakephp/authentication:^2.0"
+    php composer.phar require cakephp/authentication
 
 Then add the following to your application's ``bootstrap()`` method::
 
@@ -150,7 +150,7 @@ Next, we'll create the ``User`` entity and add password hashing.  Create the
     // src/Model/Entity/User.php
     namespace App\Model\Entity;
 
-    use Cake\Auth\DefaultPasswordHasher;
+    use Authentication\PasswordHasher\DefaultPasswordHasher;
     use Cake\ORM\Entity;
 
     class User extends Entity
