@@ -73,6 +73,8 @@ También hay un práctico comando de consola para cargar el plugin. Ejecuta la s
 
 Esto actualizaría el array en el archivo ``config/plugins.php`` de tu aplicación con una entrada similar a ``'ContactManager' => []``.
 
+.. _plugin-configuration:
+
 Configuración de Hooks del Plugin
 =================================
 
@@ -395,7 +397,7 @@ Si tu aplicación define prefijos de enrutamiento, el enrutamiento predeterminad
     /{prefix}/{plugin}/{controller}
     /{prefix}/{plugin}/{controller}/{action}
 
-Consulta la sección sobre :ref:`configuracion-de-hooks-del-plugin` para obtener información sobre cómo cargar archivos de rutas específicos del plugin.
+Consulta la sección sobre :ref:`plugin-configuration` para obtener información sobre cómo cargar archivos de rutas específicos del plugin.
 
 .. _plugin-models:
 
@@ -482,7 +484,7 @@ Si se omite el prefijo del plugin, el archivo de diseño/vista se ubicará de fo
 
 .. nota::
 
-    Para obtener información sobre cómo usar elementos de un plugin, consulta :ref:`elementos`
+    Para obtener información sobre cómo usar elementos de un plugin, consulta :ref:`view-elements`
 
 Sobrescribir Plantillas de Plugin desde dentro de tu Aplicación
 ---------------------------------------------------------------
