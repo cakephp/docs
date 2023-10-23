@@ -378,7 +378,7 @@ There are a number of options for ``counter()``. The supported ones are:
      If your model was 'RecipePage', ``{{model}}`` would be 'recipe pages'.
 
   You could also supply only a string to the counter method using the tokens
-  available. For example::
+  available. Doing so can allow for i18n and l10n integration within the paginator. For example::
 
       echo $this->Paginator->counter(
           'Page {{page}} of {{pages}}, showing {{current}} records out of
