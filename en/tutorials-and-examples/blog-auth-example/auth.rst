@@ -134,7 +134,7 @@ install the Authentication Plugin:
 
 .. code-block:: console
 
-    php composer.phar require cakephp/authentication
+    php composer.phar require "cakephp/authentication:^2.0"
 
 Then add the following to your application's ``bootstrap()`` method::
 
