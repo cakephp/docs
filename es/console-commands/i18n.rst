@@ -1,5 +1,5 @@
 Herramienta de internacionalización (i18n)
-#########
+##########################################
 
 Las características i18n de CakePHP usan `archivos po <https://es.wikipedia.org/wiki/Gettext>`_
 como fuente de traducción. Los archivos PO se integran con herramientas de traducción de uso común
@@ -33,7 +33,7 @@ para crear archivos po. Si está creando archivos po manualmente a partir del
 archivo pot, asegúrese de configurar correctamente la línea de encabezado ``Plural-Forms``.
 
 Generando archivos POT para complementos
---------------------------------
+-----------------------------------------
 
 Puede generar un archivo POT para un complemento específico usando:
 

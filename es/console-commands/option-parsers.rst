@@ -1,5 +1,5 @@
 Opcion de analizadores (Parsers)
-##############
+#################################
 
 .. php:namespace:: Cake\Console
 .. php:class:: ConsoleOptionParser
@@ -8,7 +8,7 @@ Las aplicaciones de consola normalmente toman opciones y argumentos como la
 forma principal de obtener información del terminal en sus comandos.
 
 Definición de un OptionParser
-========================
+=============================
 
 Los comandos y shells proporcionan un método de enlace
 ``buildOptionParser($parser)`` que puede utilizar para definir las opciones y
@@ -179,7 +179,7 @@ Usando opciones booleanas
 Las opciones se pueden definir como opciones booleanas, que son útiles cuando
 necesitas crear algunas opciones de bandera. Al igual que las opciones con
 valores predeterminados, las opciones booleanas siempre se incluyen en los
-parámetros analizados. Cuando las banderas están presentes, se establecen 
+parámetros analizados. Cuando las banderas están presentes, se establecen
 ``true``; cuando están ausentes, se establecen en ``false``::
 
     $parser->addOption('verbose', [
@@ -255,7 +255,7 @@ mismo y que las opciones también deben ser compatibles para que funcione. Así
 que no utilices claves para cosas diferentes.
 
 Obtener ayuda de comandos
-=======================
+==========================
 
 Al definir sus opciones y argumentos con el analizador de opciones, CakePHP
 puede generar automáticamente información de ayuda rudimentaria y agregar
@@ -344,7 +344,7 @@ se vería así:
     </shell>
 
 Personalización de salida de la ayuda
-=======================
+=====================================
 
 Puede enriquecer aún más el contenido de ayuda generado agregando una
 descripción y un epílogo.
@@ -364,7 +364,7 @@ Al pasar una matriz o una cadena, puede establecer el valor de la descripción::
     $parser->getDescription();
 
 Establecer el epilogo
---------------
+---------------------
 
 .. php:method:: setEpilog($text)
 

@@ -1,5 +1,5 @@
 Herramienta de completación
-################
+###########################
 
 Trabajar con la consola le brinda al desarrollador muchas posibilidades, pero tener que conocer y escribir
 completamente esos comandos puede resultar tedioso. Especialmente cuando se desarrollan nuevos shells donde
@@ -78,7 +78,7 @@ Guarde el archivo y luego reinicie su consola.
 .. _bash-completion-file-content:
 
 Contenido del archivo de completación de Bash
-----------------------------
+----------------------------------------------
 
 Este es el código que debes colocar dentro del archivo **cake** en la ubicación correcta para obtener el autocompletado al usar la consola CakePHP:
 

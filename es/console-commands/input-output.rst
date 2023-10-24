@@ -1,5 +1,5 @@
 Comandos Entrada/Salida (Input/Output)
-####################
+######################################
 
 .. php:namespace:: Cake\Console
 .. php:class:: ConsoleIo
@@ -10,7 +10,7 @@ leer interactivamente la información de entrada y salida del usuario.
 .. _command-helpers:
 
 Ayudantes de comando (Helpers)
-===============
+==============================
 
 Se puede acceder y utilizar los ayudantes (helpers) de comandos desde cualquier comando::
 
@@ -28,7 +28,7 @@ También puede obtener instancias de ayudantes y llamar a cualquier método púb
     $progress->draw();
 
 Creando ayudantes
-================
+=================
 
 Si bien CakePHP viene con algunos comandos auxiliares, puedes crear más en tu
 aplicación o complementos. Como ejemplo, crearemos un asistente simple para
@@ -185,7 +185,7 @@ con confirmación interactiva::
     $io->createFile('bower.json', $stuff, true);
 
 Creando salidas (Output)
-===============
+========================
 
 .. php:method:out($message, $newlines, $level)
 .. php:method:err($message, $newlines)
@@ -347,7 +347,7 @@ ConsoleOutput, por lo que no es necesario volver a declarar estilos para los
 objetos stdout y stderr.
 
 Desactivar la coloración
-=====================
+=========================
 
 Aunque el color es bonito, puede haber ocasiones en las que desees apagarlo o forzarlo:
 

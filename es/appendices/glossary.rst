@@ -3,8 +3,8 @@ Glosario
 
 .. glossary::
 
-    array de rutas
-        Un array de atributos que son pasados a :php:meth:`Router::url()`.
+    arreglo de enrutamiento
+        Un arreglo de atributos que son pasados a :php:meth:`Router::url()`.
         Típicamente se ve algo así::
 
             ['controller' => 'Posts', 'action' => 'view', 5]

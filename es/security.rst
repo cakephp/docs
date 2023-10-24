@@ -1,22 +1,20 @@
-Security
-########
+Seguridad
+##########
 
-.. note::
-    La documentación no es compatible actualmente con el idioma español en esta página.
-
-    Por favor, siéntase libre de enviarnos un pull request en
-    `Github <https://github.com/cakephp/docs>`_ o utilizar el botón **Improve this Doc** para proponer directamente los cambios.
-
-    Usted puede hacer referencia a la versión en Inglés en el menú de selección superior
-    para obtener información sobre el tema de esta página.
+CakePHP provee algunas herramientas para hacer
+que tu aplicación sea segura. Las siguientes secciones
+cubren estas herramientas:
 
 .. toctree::
     :maxdepth: 1
 
     core-libraries/security
-    controllers/components/csrf
-    controllers/components/security
+    Form Protection Middleware <controllers/components/form-protection>
+    CSRF Protection <security/csrf>
+    Content Security Policy <security/content-security-policy>
+    Security Headers <security/security-headers>
+    HTTPS Enforcer <security/https-enforcer>
 
 .. meta::
-    :title lang=es: Security
+    :title lang=es: Seguridad
     :keywords lang=es: security, csrf, cross site request forgery component

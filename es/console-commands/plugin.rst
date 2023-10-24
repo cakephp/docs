@@ -26,7 +26,7 @@ Esto agregará lo siguiente a su **src/Application.php**::
     $this->addPlugin('MyPlugin');
 
 Descarga de complementos
------------------
+------------------------
 
 Puede descargar un complemento especificando su nombre:
 
@@ -38,7 +38,7 @@ Esto eliminará la línea ``$this->addPlugin('MyPlugin',...)`` de
 **src/Application.php**.
 
 Activos del complemento (Assets)
--------------
+---------------------------------
 
 CakePHP sirve de forma predeterminada recursos de complementos utilizando el
 middleware ``AssetMiddleware``. Si bien esto es una buena conveniencia, se

@@ -222,7 +222,7 @@ Puede pasar cualquier código de salida que desee a ``abort()``.
     los sistemas Unix (``man sysexits``), o en la página de ayuda ``Códigos de error del sistema`` en Windows.
 
 Llamar a otros comandos
-======================
+========================
 
 Es posible que necesite llamar a otros comandos desde tu comando. Puedes usar ``executeCommand`` para hacer eso::
 
@@ -507,7 +507,7 @@ no confirmamos y los registros no se actualizan, y podemos verificar que nuestro
 fue escrito en ``stderr``.
 
 Metodos de aserción
------------------
+-------------------
 
 El rasgo ``Cake\TestSuite\ConsoleIntegrationTestTrait`` proporciona una serie de métodos de aserción
 que ayudan a afirmar contra la salida de la consola::
@@ -534,7 +534,7 @@ que ayudan a afirmar contra la salida de la consola::
     $this->assertErrorRegExp($expected);
 
 Ciclo de vida de las devoluciones de llamada
-===================
+=============================================
 
 Al igual que los controladores, los comandos ofrecen eventos de ciclo de vida que le permiten observar
 el marco que llama al código de su aplicación. Los comandos tienen:

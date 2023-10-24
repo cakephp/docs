@@ -1,5 +1,5 @@
 Herramienta de enrutamiento (Routes)
-###########
+####################################
 
 La herramienta de rutas proporciona una interfaz CLI fácil de usar para probar
 y depurar rutas. Puede usarlo para probar cómo se analizan las rutas y qué
@@ -31,7 +31,7 @@ la URL entre comillas:
 Prueba de generación de URL
 ---------------------------
 
-Puede ver la URL que generará :term:`routing array` usando el método ``generar``:
+Puede ver la URL que generará :term:`arreglo de enrutamiento` usando el método ``generar``:
 
 .. code-block:: console
 

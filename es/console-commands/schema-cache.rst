@@ -1,5 +1,5 @@
 Herramienta de esquemas de caché (Schema Cache)
-#################
+################################################
 
 SchemaCacheShell proporciona una herramienta CLI sencilla para administrar las
 cachés de metadatos de su aplicación. En situaciones de implementación, resulta
