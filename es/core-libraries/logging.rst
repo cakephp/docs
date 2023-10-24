@@ -1,36 +1,40 @@
 Logging
 #######
 
-While CakePHP core Configure Class settings can really help you see
-what's happening under the hood, there are certain times that
-you'll need to log data to the disk in order to find out what's
-going on. With technologies like SOAP, AJAX, and REST APIs, debugging can be
-rather difficult.
+Si bien la configuración de la clase Configure de CakePHP puede ayudarte a ver
+lo que está sucediendo en el sistema, hay momentos en los que necesitarás registrar
+datos en el disco para averiguar lo que está ocurriendo. Con tecnologías como SOAP, AJAX y APIs REST,
+la depuración puede ser bastante difícil.
 
-Logging can also be a way to find out what's been going on in your
-application over time. What search terms are being used? What sorts
-of errors are my users being shown? How often is a particular query
-being executed?
+Logging también puede ser una forma de averiguar lo que ha estado ocurriendo
+en tu aplicación con el tiempo. ¿Qué términos de búsqueda se están utilizando?
+¿Qué tipos de errores están viendo mis usuarios? ¿Con qué frecuencia se ejecuta
+una consulta en particular?
 
 Logging data in CakePHP is done with the ``log()`` function. It is provided by the
 ``LogTrait``, which is the common ancestor for many CakePHP classes. If the
 context is a CakePHP class (Controller, Component, View,...), you can log your
 data.  You can also use ``Log::write()`` directly.  See :ref:`writing-to-logs`.
 
+El registro de datos en CakePHP se realiza con la función "log()". Esta función es proporcionada por el
+"LogTrait", que es el ancestro común de muchas clases de CakePHP. Si el contexto es una clase de CakePHP
+(Controlador, Componente, Vista, etc.), puedes registrar tus datos. También puedes usar "Log::write()"
+directamente. Consulta la sección :ref:`writing-to-logs` para obtener más información.
+
 .. _log-configuration:
 
 Logging Configuration
 =====================
 
-Configuring ``Log`` should be done during your application's bootstrap phase.
-The **config/app.php** file is intended for just this.  You can define
-as many or as few loggers as your application needs.  Loggers should be
-configured using :php:class:`Cake\\Log\\Log`. An example would be::
+La configuración de "Log" debe realizarse durante la fase de arranque de tu aplicación.
+El archivo **config/app.php** está diseñado precisamente para esto. Puedes definir tantos
+``loggers`` como necesite tu aplicación. Los ``loggers`` deben configurarse utilizando la clase
+:php:class:`Cake\\Log\\Log`. Un ejemplo sería::
 
     use Cake\Log\Engine\FileLog;
     use Cake\Log\Log;
 
-    // Classname using logger 'class' constant
+    // Nombre de la clase utilizando la constante 'class' del logger.
     Log::setConfig('info', [
         'className' => FileLog::class,
         'path' => LOGS,
@@ -38,7 +42,7 @@ configured using :php:class:`Cake\\Log\\Log`. An example would be::
         'file' => 'info',
     ]);
 
-    // Short classname
+    // Nombre de clase corto
     Log::setConfig('debug', [
         'className' => 'File',
         'path' => LOGS,
@@ -54,64 +58,63 @@ configured using :php:class:`Cake\\Log\\Log`. An example would be::
         'file' => 'error',
     ]);
 
-The above creates three loggers, named ``info``, ``debug`` and ``error``.
-Each is configured to handle different levels of messages. They also store their
-log messages in separate files, so we can separate debug/notice/info logs
-from more serious errors. See the section on :ref:`logging-levels` for more
-information on the different levels and what they mean.
+Lo anterior crea tres loggers, llamados ``info``, ``debug`` and ``error``.
+Cada uno está configurado para manejar diferentes niveles de mensajes.
+También almacenan sus mensajes de registro en archivos separados, de esta manera,
+podemos separar los registros de depuración/aviso/información de los errores más graves.
+Consulta la sección sobr :ref:`logging-levels` para obtener más información sobre
+los diferentes niveles y lo que significan.
 
-Once a configuration is created you cannot change it. Instead you should drop
-the configuration and re-create it using :php:meth:`Cake\\Log\\Log::drop()` and
+Una vez que se crea una configuración, no se puede cambiar. En su lugar, debes eliminar
+la configuración y volver a crearla utilizando :php:meth:`Cake\\Log\\Log::drop()` y
 :php:meth:`Cake\\Log\\Log::setConfig()`.
 
-It is also possible to create loggers by providing a closure. This is useful
-when you need full control over how the logger object is built. The closure
-has to return the constructed logger instance. For example::
+ambién es posible crear loggers proporcionando un cierre (closure). Esto es útil
+cuando necesitas un control completo sobre cómo se construye el objeto del logger. El cierre
+debe devolver la instancia del logger. Por ejemplo::
 
     Log::setConfig('special', function () {
         return new \Cake\Log\Engine\FileLog(['path' => LOGS, 'file' => 'log']);
     });
 
-Configuration options can also be provided as a :term:`DSN` string. This is
-useful when working with environment variables or :term:`PaaS` providers::
+
+Las opciones de configuración también se pueden proporcionar como una cadena :term:`DSN`. Esto es
+útil cuando se trabaja con variables de entorno o proveedores :term:`PaaS`::
 
     Log::setConfig('error', [
         'url' => 'file:///full/path/to/logs/?levels[]=warning&levels[]=error&file=error',
     ]);
 
 .. warning::
-    If you do not configure logging engines, log messages will not be stored.
+    Si no configuras motores de registro (logging), los mensajes de log no se almacenarán.
 
-Error and Exception Logging
-===========================
+Registro de Errores y Excepciones
+=================================
 
-Errors and Exceptions can also be logged. By configuring the corresponding
-values in your **config/app.php** file.  Errors will be displayed when debug is
-``true`` and logged when debug is ``false``. To log uncaught exceptions, set the
-``log`` option to ``true``. See :doc:`/development/configuration` for more
-information.
+Los errores y excepciones también pueden registrarse configurando los valores correspondientes en tu archivo **config/app.php**.
+Los errores se mostrarán cuando el modo de depuración esté en ``true`` y se registrarán en los archivos de log cuando el modo de depuración esté en ``false``.
+Para registrar excepciones no capturadas, configura la opción ``log`` como ``true``.
+Consulta ::doc:`/development/configuration` para obtener más información.
 
 .. _writing-to-logs:
 
-Writing to Logs
-===============
+Escribiendo en los archivos de Log
+===================================
 
-Writing to the log files can be done in two different ways. The first
-is to use the static :php:meth:`Cake\\Log\\Log::write()` method::
+Escribir en los archivos de registro se puede hacer de dos maneras diferentes. La primera es
+utilizando el método estático ::php:meth:`Cake\\Log\\Log::write()`::
 
     Log::write('debug', 'Something did not work');
 
-The second is to use the ``log()`` shortcut function available on any
-class using the ``LogTrait``. Calling ``log()`` will internally call
-``Log::write()``::
+La segunda opción es utilizar la función de acceso directo ``log()`` disponible en cualquier clase
+que utilice el ``LogTrait``. Llamar a``log()`` llamará internamente a``Log::write()``::
 
-    // Executing this inside a class using LogTrait
+    // Ejecutando esto dentro de una clase que utiliza LogTrait
     $this->log('Something did not work!', 'debug');
 
-All configured log streams are written to sequentially each time
-:php:meth:`Cake\\Log\\Log::write()` is called. If you have not configured any
-logging engines ``log()`` will return ``false`` and no log messages will be
-written.
+Todos los log configurados se escriben secuencialmente cada vez que se llama a
+:php:meth:`Cake\\Log\\Log::write()`. Si no has configurado ningún motor de registro,
+``log()`` devolverá "false" y no se escribirán mensajes de registro.
 
 Using Placeholders in Messages
 ------------------------------
@@ -495,6 +498,6 @@ Use similar methods if you want to configure a different logger for your console
     your application logger. This will prevent duplicate log entries.
 
 .. meta::
-    :title lang=es: Registro (Logging)
+    :title lang=en: Logging
     :description lang=en: Log CakePHP data to the disk to help debug your application over longer periods of time.
     :keywords lang=en: cakephp logging,log errors,debug,logging data,cakelog class,ajax logging,soap logging,debugging,logs
