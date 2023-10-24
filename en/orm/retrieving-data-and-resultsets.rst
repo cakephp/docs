@@ -1053,6 +1053,7 @@ has any rows in it. Calling ``isEmpty()`` on a Query object will evaluate the
 query::
 
     // Check a query.
+    // deprecated from CakePHP 4.3.0
     $query->isEmpty();
 
     // Check results
