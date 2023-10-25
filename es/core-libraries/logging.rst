@@ -112,28 +112,30 @@ que utilice el ``LogTrait``. Llamar a``log()`` llamará internamente a``Log::wri
     // Ejecutando esto dentro de una clase que utiliza LogTrait
     $this->log('Something did not work!', 'debug');
 
-Todos los log configurados se escriben secuencialmente cada vez que se llama a
+Todos los ``log`` configurados se escriben secuencialmente cada vez que se llama a
 :php:meth:`Cake\\Log\\Log::write()`. Si no has configurado ningún motor de registro,
 ``log()`` devolverá "false" y no se escribirán mensajes de registro.
 
-Using Placeholders in Messages
-------------------------------
+Usando marcadores de posición (placeholders) en mensajes
+-----------------------------------------------
 
-If you need to log dynamically defined data, you can use placeholders in your
-log messages and provide an array of key/value pairs in the ``$context``
-parameter::
+Si necesitas registrar datos definidos dinámicamente, puedes utilizar marcadores de posición en tus
+mensajes de registro y proporcionar un array de pares clave/valor en el parámetro ``$context``
+como sigue::
 
-    // Will log `Could not process for userid=1`
-    Log::write('error', 'Could not process for userid={user}', ['user' => $user->id]);
 
-Placeholders that do not have keys defined will not be replaced. If you need to
-use a literal braced word, you must escape the placeholder::
+    // Se registrará `No se pudo procesar para el usuario id = 1`
+    Log::write('error', 'No se pudo procesar para el usuario id ={user}', ['user' => $user->id]);
 
-    // Will log `No {replace}`
+Los marcadores (placeholders) que no tienen claves definidas no serán reemplazados.
+Si necesitas utilizar una palabra entre llaves de forma literal, debes escapar el marcador::
+
+
+    // Se registrará `No {replace}`
     Log::write('error', 'No \\{replace}', ['replace' => 'no']);
 
-If you include objects in your logging placeholders those objects must implement
-one of the following methods:
+Si incluyes objetos en los marcadores, esos objetos deben implementar
+uno de los siguientes métodos:
 
 * ``__toString()``
 * ``toArray()``
@@ -141,49 +143,48 @@ one of the following methods:
 
 .. _logging-levels:
 
-Using Levels
-------------
+Usando Niveles
+---------------
 
-CakePHP supports the standard POSIX set of logging levels. Each level represents
-an increasing level of severity:
+CakePHP admite el conjunto estándar de niveles de registro POSIX. Cada nivel representa un aumento
+en el nivel de gravedad:
 
-* Emergency: system is unusable
-* Alert: action must be taken immediately
-* Critical: critical conditions
-* Error: error conditions
-* Warning: warning conditions
-* Notice: normal but significant condition
-* Info: informational messages
-* Debug: debug-level messages
+* Emergency: el sistema no es utilizable
+* Alert: se debe tomar una acción inmediata
+* Critical: condiciones críticas
+* Error: condiciones de error
+* Warning: condiciones de advertencia
+* Notice: condiciones normales pero significativas
+* Info: mensajes informativos
+* Debug:  mensajes de depuración
 
-You can refer to these levels by name when configuring loggers, and when writing
-log messages. Alternatively, you can use convenience methods like
-:php:meth:`Cake\\Log\\Log::error()` to clearly indicate the logging
-level. Using a level that is not in the above levels will result in an
-exception.
+Puedes hacer referencia a estos niveles por nombre al configurar lo ``loggers`` y al escribir
+mensajes de registro. Alternativamente, puedes utilizar métodos de conveniencia como :
+:php:meth:`Cake\\Log\\Log::error()` para indicar claramente el nivel de registro.
+Utilizar un nivel que no esté en la lista de niveles anteriores resultará en una excepción.
 
 .. note::
-    When ``levels`` is set to an empty value in a logger's configuration, it
-    will take messages of any level.
+    Cuando ``levels`` se establece en un valor vacío en la configuración de un ``logger``,
+    aceptará mensajes de cualquier nivel.
 
 .. _logging-scopes:
 
-Logging Scopes
---------------
+Ámbitos de Registro (scope)
+----------------------------
 
-Often times you'll want to configure different logging behavior for different
-subsystems or parts of your application. Take for example an e-commerce shop.
-You'll probably want to handle logging for orders and payments differently than
-you do other less critical logs.
+En muchas ocasiones, querrás configurar diferentes comportamientos de registro para diferentes
+subsistemas o partes de tu aplicación. Tomemos como ejemplo una tienda en línea.
+Probablemente quieras manejar el registro de pedidos y pagos de manera diferente a como lo haces
+con otros registros menos críticos.
 
-CakePHP exposes this concept as logging scopes. When log messages are written
-you can include a scope name. If there is a configured logger for that scope,
-the log messages will be directed to those loggers. For example::
+CakePHP expone este concepto como ámbitos de registro. Cuando se escriben mensajes de registro,
+puedes incluir un nombre de ámbito ``scope``. Si hay un registrador configurado para ese ámbito,
+los mensajes de registro se dirigirán a esos ``loggers``. Por ejemplo::
 
     use Cake\Log\Engine\FileLog;
 
-    // Configure logs/shops.log to receive all levels, but only
-    // those with `orders` and `payments` scope.
+    // Configura logs/shops.log para recibir todos los niveles, pero solo aquellos con ``scope``
+    // `orders` y `payments`.
     Log::setConfig('shops', [
         'className' => FileLog::class,
         'path' => LOGS,
@@ -192,8 +193,8 @@ the log messages will be directed to those loggers. For example::
         'file' => 'shops.log',
     ]);
 
-    // Configure logs/payments.log to receive all levels, but only
-    // those with `payments` scope.
+    // Configura logs/payments.log para recibir todos los niveles, pero solo aquellos con ``scope``
+    // `payments`.
     Log::setConfig('payments', [
         'className' => FileLog::class,
         'path' => LOGS,
@@ -205,8 +206,8 @@ the log messages will be directed to those loggers. For example::
     Log::warning('this gets written only to shops.log', ['scope' => ['orders']]);
     Log::warning('this gets written to both shops.log and payments.log', ['scope' => ['payments']]);
 
-Scopes can also be passed as a single string or a numerically indexed array.
-Note that using this form will limit the ability to pass more data as context::
+Los ``scopes`` también se pueden pasar como una cadena única o como una matriz indexada numéricamente.
+Ten en cuenta que al usar esta forma, se limitará la capacidad de pasar más datos como contexto::
 
     Log::warning('This is a warning', ['orders']);
     Log::warning('This is a warning', 'payments');
