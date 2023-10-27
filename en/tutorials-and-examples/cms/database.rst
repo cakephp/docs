@@ -130,8 +130,9 @@ with those that apply to your setup. A sample completed configuration array
 might look something like the following::
 
     <?php
+    // config/app_local.php
     return [
-        // Más configuración arriba.
+        // More configuration above.
         'Datasources' => [
             'default' => [
                 'host' => 'localhost',
@@ -141,7 +142,7 @@ might look something like the following::
                 'url' => env('DATABASE_URL', null),
             ],
         ],
-        // Más configuración abajo.
+        // More configuration below.
     ];
 
 Once you've saved your **config/app_local.php** file, you should see that the 'CakePHP is
@@ -167,6 +168,7 @@ to **src/Model/Table/ArticlesTable.php**. The completed file should look like
 this::
 
     <?php
+    // src/Model/Table/ArticlesTable.php
     declare(strict_types=1);
 
     namespace App\Model\Table;
@@ -203,6 +205,8 @@ look like this::
 
     <?php
     // src/Model/Entity/Article.php
+    declare(strict_types=1);
+
     namespace App\Model\Entity;
 
     use Cake\ORM\Entity;

@@ -126,6 +126,7 @@ los valores en el arreglo ``Datasources.default`` en su archivo **config/app_loc
 a su configuración. Una arreglo de configuración completo de muestra podría tener el siguiente aspecto::
 
     <?php
+    // config/app_local.php
     return [
         // Más configuración arriba.
         'Datasources' => [
@@ -162,6 +163,7 @@ en **src/Model/Table**. El archivo que crearemos se guardará en **src/Model/Tab
 El archivo completo debería verse así::
 
     <?php
+    // src/Model/Table/ArticlesTable.php
     declare(strict_types=1);
 
     namespace App\Model\Table;
@@ -197,6 +199,7 @@ nuestros datos. Nuestra ``Entity`` se guardará en **src/Model/Entity/Article.ph
 archivo completo debería verse así::
 
     <?php
+    // src/Model/Entity/Article.php
     declare(strict_types=1);
 
     namespace App\Model\Entity;
