@@ -1,37 +1,36 @@
-5.0 Migration Guide
+5.0 Guía de migración
 ###################
 
-CakePHP 5.0 contains breaking changes, and is not backwards compatible with 4.x
-releases. Before attempting to upgrade to 5.0, first upgrade to 4.5 and resolve
-all deprecation warnings.
+CakePHP 5.0 contiene cambios importantes, y no es compatible con versiones anteriores
+de 4.x. Antes de intentar actualizar a la version 5.0, primero actualice a la version 4.5 y resuelva
+todas las advertencias de obsolescencia.
 
-Refer to the :doc:`/appendices/5-0-upgrade-guide` for step by step instructions
-on how to upgrade to 5.0.
+Consulte :doc:`/appendices/5-0-upgrade-guide` para obtener instrucciones paso a paso de
+como actualizar a la versión 5.0.
 
-Deprecated Features Removed
+Características obsoletas eliminadas
 ===========================
 
-All methods, properties and functionality that were emitting deprecation warnings
-as of 4.5 have been removed.
+Todos los métodos, propiedades y funcionalidades que emitían advertencias de obsolencias
+a partir de la versión 4.5 se han eliminado.
 
-Breaking Changes
+Cambios importantes
 ================
 
-In addition to the removal of deprecated features there have been breaking
-changes made:
+Además de la eliminación de características obsoletas, se han realizado
+cambios importantes:
 
 Global
 ------
 
-- Type declarations were added to all function parameter and returns where possible. These are intended
-  to match the docblock annotations, but include fixes for incorrect annotations.
-- Type declarations were added to all class properties where possible. These also include some fixes for
-  incorrect annotations.
-- The ``SECOND``, ``MINUTE``, ``HOUR``, ``DAY``,  ``WEEK``, ``MONTH``, ``YEAR`` constants were removed.
-- Global functions are now opt-in. If your application uses global function
-  aliases be sure to add ``require CAKE . 'functions.php'`` to you application's
-  ``config/bootstrap.php``.
-- Use of ``#[\AllowDynamicProperties]`` removed everywhere. It was used for the following classes:
+- Se han añadido declaraciones de tipo a todos los parámetros de función y devoluciones siempre que ha sido posible. Estos
+  están pensados para que coincidan con las anotaciones de docblock, pero incluyen correcciones para anotaciones incorrectas.
+- Se han añadido declaraciones de tipo a todas las propiedades de clase siempre que ha sido posible. También se han corregido
+  algunas anotaciones incorrectas.
+- Se han eliminado las constantes ``SECOND``, ``MINUTE``, ``HOUR``, ``DAY``,  ``WEEK``, ``MONTH``, ``YEAR``.
+- Las funciones globales son ahora opcionales. Si tu aplicación utiliza alias de funciones globales, asegúrase
+  de añadir ``require CAKE . 'functions.php'`` al ``config/bootstrap.php`` de tu aplicación.
+- Se ha eliminado el uso de ``#[\AllowDynamicProperties]`` en todas las partes. Se utilizaba para las siguientes clases:
    - ``Command/Command``
    - ``Console/Shell``
    - ``Controller/Component``
@@ -40,135 +39,132 @@ Global
    - ``View/Cell``
    - ``View/Helper``
    - ``View/View``
-- The supported database engine versions were updated:
-   - MySQL (5.7 or higher)
-   - MariaDB (10.1 or higher)
-   - PostgreSQL (9.6 or higher)
-   - Microsoft SQL Server (2012 or higher)
+- Se han actualizado las versiones compatibles del motor de base de datos:
+   - MySQL (5.7 o superior)
+   - MariaDB (10.1 o superior)
+   - PostgreSQL (9.6 o superior)
+   - Microsoft SQL Server (2012 o superior)
    - SQLite 3
 
 Auth
 ----
 
-- `Auth` has been removed. Use the `cakephp/authentication <https://book.cakephp.org/authentication/2/en/index.html>`__ and
-  `cakephp/authorization <https://book.cakephp.org/authorization/2/en/index.html>`__ plugins instead.
+- `Auth` ha sido eliminado. Usa los plugins `cakephp/authentication <https://book.cakephp.org/authentication/2/es/index.html>`__ y
+  `cakephp/authorization <https://book.cakephp.org/authorization/2/es/index.html>`__ en su lugar.
 
 Cache
 -----
 
-- The ``Wincache`` engine was removed. The wincache extension is not supported
-  on PHP 8.
+- El motor ``Wincache`` ha sido eliminado. La extension wincache no es compatible
+  con PHP 8.
 
-Console
+Consola
 -------
 
-- ``BaseCommand::__construct()`` was removed.
-- ``ConsoleIntegrationTestTrait::useCommandRunner()`` was removed since it's no longer needed.
-- ``Shell`` has been removed and should be replaced with `Command <https://book.cakephp.org/5/en/console-commands/commands.html>`__
-- ``BaseCommand`` now emits ``Command.beforeExecute`` and
-  ``Command.afterExecute`` events around the command's ``execute()`` method
-  being invoked by the framework.
+- ``BaseCommand::__construct()`` ha sido eliminado.
+- Se ha eliminado ``ConsoleIntegrationTestTrait::useCommandRunner()`` porque ya no es necesario.
+- ``Shell`` Ha sido eliminado  y debe ser sustituido por `Command <https://book.cakephp.org/5/es/console-commands/commands.html>`__
+- Ahora ``BaseCommand`` emite los eventos ``Command.beforeExecute`` and ``Command.afterExecute``
+  cuando el método ``execute()`` del comando es invocado por el framework.
 
 Connection
 ----------
 
-- ``Connection::prepare()`` has been removed. You can use ``Connection::execute()``
-  instead to execute a SQL query by specifing the SQL string, params and types in a single call.
-- ``Connection::enableQueryLogging()`` has been removed. If you haven't enabled logging
-  through the connection config then you can later set the logger instance for the
-  driver to enable query logging ``$connection->getDriver()->setLogger()``.
+- Se ha elimiando ``Connection::prepare()``. En su lugar, puede utilizar ``Connection::execute()``
+  para ejecutar una consulta SQL especificando en la cadena SQL los parámetros y los tipos en una sola llamada.
+- Se ha eliminado ``Connection::enableQueryLogging()``. Si no ha habilitado el registro
+  a través de la configuración de conexión, puedes configurar más adelante la instancia del registrador para que
+  el controlador habilite el registro de consultas ``$connection->getDriver()->setLogger()``.
 
-Controller
+Controlador
 ----------
 
-- The method signature for ``Controller::__construct()`` has changed.
-  So you need to adjust your code accordingly if you are overriding the constructor.
-- After loading components are no longer set as dynamic properties. Instead
-  ``Controller`` uses ``__get()`` to provide property access to components. This
-  change can impact applications that use ``property_exists()`` on components.
-- The components' ``Controller.shutdown`` event callback has been renamed from
-  ``shutdown`` to ``afterFilter`` to match the controller one. This makes the callbacks more consistent.
-- ``PaginatorComponent`` has been removed and should be replaced by calling ``$this->paginate()`` in your controller or
-  using ``Cake\Datasource\Paging\NumericPaginator`` directly
-- ``RequestHandlerComponent`` has been removed. See the `4.4 migration <https://book.cakephp.org/4/en/appendices/4-4-migration-guide.html#requesthandlercomponent>`__ guide for how to upgrade
-- ``SecurityComponent`` has been removed. Use ``FormProtectionComponent`` for form tampering protection
-  or ``HttpsEnforcerMiddleware`` to enforce use of HTTPS for requests instead.
-- ``Controller::paginate()`` no longer accepts query options like ``contain`` for
-  its ``$settings`` argument. You should instead use the ``finder`` option
-  ``$this->paginate($this->Articles, ['finder' => 'published'])``. Or you can
-  create required select query before hand and then pass it to ``paginate()``
+- La firma del método para ``Controller::__construct()`` ha cambiado.
+  Por lo tanto, tienes que ajustar el código en consecuencia si estás sobreescribiendo el constructor.
+- Después de la carga, los componentes ya no se establecen como propiedades dinámicas. En su lugar
+  ``Controller`` usa ``__get()`` para proporcionar acceso a las propiedades de los componentes. Este
+  cambio puede afectar a las aplicaciones que usan ``property_exists()`` en los componentes.
+- Se ha renombrado la devolución de llamada del evento ``Controller.shutdown`` de los componentes de
+  ``shutdown`` a ``afterFilter`` para que coincida con el del controlador. Esto hace que las devoluciones de llamada
+  sean más coherentes.
+- ``PaginatorComponent`` ha sido eliminado y tienes que reemplazarlo llamando a ``$this->paginate()`` en tu controlador o
+  usando ``Cake\Datasource\Paging\NumericPaginator`` directamente.
+- ``RequestHandlerComponent`` ha sido eliminado. Consulte la guía `4.4 migration <https://book.cakephp.org/4/es/appendices/4-4-migration-guide.html#requesthandlercomponent>`__ para saber como actualizarlo.
+- Se ha eliminado ``SecurityComponent``. Usa ``FormProtectionComponent`` para la protección contra la manipulación de formularios
+  o ``HttpsEnforcerMiddleware`` para forzar el uso de solicitudes HTTPS en su lugar.
+- ``Controller::paginate()`` ya no acepta opciones de consulta como ``contain`` para su
+  argumento ``$settings``. En su lugar debes usar la opción ``finder``
+  ``$this->paginate($this->Articles, ['finder' => 'published'])``. O puede
+  crear la consulta requerida de antemano y luego pasarla a ``paginate()``
   ``$query = $this->Articles->find()->where(['is_published' => true]); $this->paginate($query);``.
 
 Core
 ----
 
-- The function ``getTypeName()`` has been dropped. Use PHP's ``get_debug_type()`` instead.
-- The dependency on ``league/container`` was updated to ``4.x``. This will
-  require the addition of typehints to your ``ServiceProvider`` implementations.
-- ``deprecationWarning()`` now has a ``$version`` parameter.
-- The ``App.uploadedFilesAsObjects`` configuration option has been removed
-  alongside of support for PHP file upload shaped arrays throughout the
-  framework.
-- ``ClassLoader`` has been removed. Use composer to generate autoload files instead.
+- La función ``getTypeName()`` ha sido desechada. En su lugar usa ``get_debug_type()`` de PHP.
+- La dependencia de ``league/container`` se actualizó a ``4.x``. Esto requerirá
+  la adición de typehints a tus implementaciones de ``ServiceProvider``.
+- ``deprecationWarning()`` ahora tiene un parámetro ``$version``.
+- La opción de configuración ``App.uploadedFilesAsObjects`` se ha eliminado
+  junto con el soporte para arrays con forma carga de archivos PHP en todo el framework.
+- ``ClassLoader`` ha sido eliminado. En su lugar, utiliza composer para generar archivos de carga automática.
 
-Database
+Base de datos
 --------
 
-- The ``DateTimeType`` and ``DateType`` now always return immutable objects.
-  Additionally the interface for ``Date`` objects reflects the ``ChronosDate``
-  interface which lacks all of the time related methods that were present in
-  CakePHP 4.x.
-- ``DateType::setLocaleFormat()`` no longer accepts an array.
-- ``Query`` now accepts only ``\Closure`` parameters instead of ``callable``. Callables can be converted
-  to closures using the new first-class array syntax in PHP 8.1.
-- ``Query::execute()`` no longer runs results decorator callbacks. You must use ``Query::all()`` instead.
-- ``TableSchemaAwareInterface`` was removed.
-- ``Driver::quote()`` was removed. Use prepared statements instead.
-- ``Query::orderBy()`` was added to replace ``Query::order()``.
-- ``Query::groupBy()`` was added to replace ``Query::group()``.
-- ``SqlDialectTrait`` has been removed and all its functionality has been moved
-  into the ``Driver`` class itself.
-- ``CaseExpression`` has been removed and should be replaced with
-  ``QueryExpression::case()`` or ``CaseStatementExpression``
-- ``Connection::connect()`` has been removed. Use
-  ``$connection->getDriver()->connect()`` instead.
-- ``Connection::disconnect()`` has been removed. Use
-  ``$connection->getDriver()->disconnect()`` instead.
-- ``cake.database.queries`` has been added as an alternative to the ``queriesLog`` scope
+- ``DateTimeType`` y ``DateType`` ahora siempre devuelven objetos inmutables.
+  Además, la interfaz para los objetos ``Date`` refleja la interfaz ``ChronosDate``
+  que carece de todos los métodos relacionados con el tiempo que estaban presentes en CakePHP 4.x.
+- ``DateType::setLocaleFormat()`` ya no acepta array.
+- ``Query`` ahora solo acepta parámetros ``\Closure`` en lugar de ``callable``. Los callables se pueden convertir
+  a closures usando la nueva sintaxis de array de primera clase de PHP 8.1.
+- ``Query::execute()`` ya no ejecuta los resultados de la devoluciones de llamadas. Debe utilizar ``Query::all()`` en su lugar.
+- ``TableSchemaAwareInterface`` fue eliminado.
+- ``Driver::quote()`` fue eliminado. En su lugar, utiliza declaraciones preparadas.
+- ``Query::orderBy()`` fue añadido para reemplazar ``Query::order()``.
+- ``Query::groupBy()`` fue añadido para reemplazar ``Query::group()``.
+- ``SqlDialectTrait`` se ha eliminado y toda su funcionalidad se ha movido a la propia clase ``Driver``.
+- ``CaseExpression`` ha sido eliminado y debe ser reemplazado por
+  ``QueryExpression::case()`` o ``CaseStatementExpression``
+- ``Connection::connect()`` ha sido eliminado. Usa
+  ``$connection->getDriver()->connect()`` en su lugar.
+- ``Connection::disconnect()`` ha sido eliminado. Usa
+  ``$connection->getDriver()->disconnect()`` en su lugar.
+- ``cake.database.queries`` ha sido añadido como alternativa al scope ``queriesLog``.
 
 Datasource
 ----------
 
-- The ``getAccessible()`` method was added to ``EntityInterface``. Non-ORM
-  implementations need to implement this method now.
-- The ``aliasField()`` method was added to ``RepositoryInterface``. Non-ORM
-  implementations need to implement this method now.
+- El método ``getAccessible()`` ha sido añadido a ``EntityInterface``. Las implementaciones que no son ORM
+  tienen que implementar este método ahora.
+- El método ``aliasField()`` ha sido añadido a ``RepositoryInterface``. Las implementaciones que no son ORM
+  tienen que implementar este método ahora.
 
 Event
 -----
 
-- Event payloads must be an array. Other object such as ``ArrayAccess`` are no longer cast to array and will raise a ``TypeError`` now.
-- It is recommended to adjust event handlers to be void methods and use ``$event->setResult()`` instead of returning the result
+- Las cargas útiles de eventos deben ser un array. Otros objetos como ``ArrayAccess`` ya no se convierten en array y ahora lanzarán un ``TypeError``.
+- Se recomienda ajustar los handlers de eventos para que sean métodos void y usar ``$event->setResult()`` en lugar de devolver el resultado.
 
 Error
 -----
 
-- ``ErrorHandler`` and ``ConsoleErrorHandler`` have been removed. See the `4.4 migration <https://book.cakephp.org/4/en/appendices/4-4-migration-guide.html#errorhandler-consoleerrorhandler>`__ guide for how to upgrade
-- ``ExceptionRenderer`` has been removed and should be replaced with ``WebExceptionRenderer``
-- ``ErrorLoggerInterface::log()`` has been removed and should be replaced with ``ErrorLoggerInterface::logException()``
-- ``ErrorLoggerInterface::logMessage()`` has been removed and should be replaced with ``ErrorLoggerInterface::logError()``
+- ``ErrorHandler`` y ``ConsoleErrorHandler`` han sido eliminados. Consulte la guía `4.4 migration <https://book.cakephp.org/4/es/appendices/4-4-migration-guide.html#errorhandler-consoleerrorhandler>`__ para saber como actualizarlo.
+- ``ExceptionRenderer`` ha sido eliminado y debe ser reemplazado por ``WebExceptionRenderer``
+- ``ErrorLoggerInterface::log()`` ha sido eliminado y debe ser reemplazado por ``ErrorLoggerInterface::logException()``
+- ``ErrorLoggerInterface::logMessage()`` ha sido eliminado y debe ser reemplazado por ``ErrorLoggerInterface::logError()``
 
 Filesystem
 ----------
 
-- The Filesystem package was removed, and ``Filesystem`` class was moved to the Utility package.
+- El paquete de Filesystem ha eliminado, y la clase ``Filesystem`` se ha movido al paquete de Utility.
 
 Http
 ----
 
-- ``ServerRequest`` is no longer compatible with ``files`` as arrays. This
-  behavior has been disabled by default since 4.1.0. The ``files`` data will now
-  always contain ``UploadedFileInterfaces`` objects.
+- ``ServerRequest`` ya no es compatible con ``files`` como arrays. Este
+  behavior se ha deshabilitado de forma predeterminada desde la version 4.1.0. Los datos ``files``
+  ahora siempre contendrán objetos ``UploadedFileInterfaces``.
 
 I18n
 ----

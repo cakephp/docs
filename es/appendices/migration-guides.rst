@@ -2,7 +2,7 @@ Guías de migración
 ################
 
 Las guías de migración contienen información relativa a las nuevas funcionalidades introducidas en
-cada versión y la ruta de migración entre 4.x y 5.x
+cada versión y la manera de migrar entre 4.x y 5.x
 
 .. toctree::
     :maxdepth: 1

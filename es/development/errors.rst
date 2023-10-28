@@ -308,7 +308,7 @@ Excepciones Incorporadas para CakePHP
 ======================================
 
 Excepciones HTTP
----------------
+-----------------
 
 Hay varias excepciones incorporadas en CakePHP, además de las excepciones internas del framework, hay varias
 excepciones para métodos HTTP.

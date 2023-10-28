@@ -1,65 +1,69 @@
-PHPUnit 10 Upgrade
+Actualización a PHPUnit 10
 ##################
 
-With CakePHP 5 the minimum PHPUnit version has changed from ``^8.5 || ^9.3`` to ``^10.1``.
-This introduces a few breaking changes from PHPUnit as well as from CakePHP's side.
+Con CakePHP 5 la version mínima de PHPUnit ha cambiado de ``^8.5 || ^9.3`` a ``^10.1``.
+Esto introduce algunos cambios importantes tanto por parte de PHPUnit como por parte de CakePHP.
 
-phpunit.xml adjustments
+Ajustes de phpunit.xml
 =======================
 
-It is recommended to let PHPUnit update its configuration file via the following command::
+Se recomienda dejar que PHPUnit actualice su archivo de configuración a través del siguiente comando::
 
   vendor/bin/phpunit --migrate-configuration
 
 .. note::
 
-    Make sure you are already on PHPUnit 10 via ``vendor/bin/phpunit --version`` before executing this command!
+    ¡Asegúrese de que ya está en PHPUnit 10 a través de ``vendor/bin/phpunit --version`` antes de ejecutar este comando!
 
-With this command out of the way your ``phpunit.xml`` already has most of the recommended changes present.
+Con este comando ejecutado, tu ``phpunit.xml`` ya tiene la mayoría de los cambios recomendados presentes.
 
-New event system
+Nuevo sistema de eventos
 ----------------
 
-PHPUnit 10 removed the old hook system and introduced a new `Event system
+PHPUnit 10 eliminó el antiguo sistema de hook e introdujo un nuevo `Sistema de eventos
 <https://docs.phpunit.de/en/10.0/extending-phpunit.html#extending-the-test-runner>`_
-which requires the following code in your ``phpunit.xml`` to be adjusted from::
+Lo que requiere que se ajuste el siguiente código en su ``phpunit.xml`` desde::
 
   <extensions>
     <extension class="Cake\TestSuite\Fixture\PHPUnitExtension"/>
   </extensions>
 
-to::
+a::
 
   <extensions>
     <bootstrap class="Cake\TestSuite\Fixture\Extension\PHPUnitExtension"/>
   </extensions>
 
-``->withConsecutive()`` has been removed
+``->withConsecutive()`` ha sido eliminado
 ========================================
 
-You can convert the removed ``->withConsecutive()`` method to a
-working interim solution like you can see here::
+Puedes convertir el metodo ``->withConsecutive()`` eliminado
+en una solución provisional que funcione como puede ver aquí::
 
     ->withConsecutive(['firstCallArg'], ['secondCallArg'])
 
-should be converted to::
+debe convertirse a::
 
     ->with(
         ...self::withConsecutive(['firstCallArg'], ['secondCallArg'])
     )
 
-the static ``self::withConsecutive()`` method has been added via the ``Cake\TestSuite\PHPUnitConsecutiveTrait``
-to the base ``Cake\TestSuite\TestCase`` class so you don't have to manually add that trait to your Testcase classes.
+se ha añadido el método estático ``self::withConsecutive()`` a través del método ``Cake\TestSuite\PHPUnitConsecutiveTrait``
+a la clase base ``Cake\TestSuite\TestCase`` para que no tenga que agregar manualmente este trait a tus clases de TestCase.
 
-data providers have to be static
+los proveedores de datos tienen que ser estáticos
 ================================
 
-If your testcases leverage the data provider feature of PHPUnit then
-you have to adjust your data providers to be static::
+Si tus testcases aprovechan la función de proveedor de datos de PHPUnit entonces
+tienes que ajustar tus proveedores de datos para que sean estáticos::
 
     public function myProvider(): array
 
-should be converted to::
+debe convertirse en::
 
     public static function myProvider(): array
 
+
+.. meta::
+    :title lang=es: Actualización a PHPUnit 10
+    :keywords lang=es: maintenance branch,community interaction,community feature,necessary feature,stable release,ticket system,advanced feature,power users,feature set,chat irc,leading edge,router,new features,members,attempt,development branches,branch development

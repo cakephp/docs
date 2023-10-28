@@ -18,7 +18,7 @@ En CakePHP, el almacenamiento en caché se facilita mediante la clase ``Cache``.
 
 Independientemente del motor de caché que elijas usar, tu aplicación interactúa con :php:class:`Cake\\Cache\\Cache`.
 
-.. _configuracion-caché:
+.. _cache-configuration:
 
 Configuración de los Motores de Caché
 ======================================
@@ -125,7 +125,7 @@ FileEngine utiliza las siguientes opciones específicas del motor:
 - ``mask``: la máscara utilizada para los archivos creados.
 - ``path``: ruta donde deben guardarse los archivos de caché. Por defecto, es el directorio temporal del sistema.
 
-.. _motor-redisengine:
+.. _caching-redisengine:
 
 Opciones del Motor RedisEngine
 ------------------------------

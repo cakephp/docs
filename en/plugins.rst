@@ -117,7 +117,7 @@ appropriate parts of your application. The hooks are:
 * ``services`` Used to register application container services
 
 By default all plugins hooks are enabled. You can disable hooks by using the
-related options of the ``plugin load`` command::
+related options of the ``plugin load`` command:
 
 .. code-block:: console
 
@@ -195,7 +195,7 @@ You can reference a plugin's controllers, models, components, behaviors, and
 helpers by prefixing the name of the plugin.
 
 For example, say you wanted to use the ContactManager plugin's
-ContactInfoHelper to output formatted contact information in
+``ContactInfoHelper`` to output formatted contact information in
 one of your views. In your controller, using ``addHelper()``
 could look like this::
 

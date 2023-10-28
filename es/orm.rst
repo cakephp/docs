@@ -108,4 +108,4 @@ Más información
     orm/associations
     orm/behaviors
     orm/schema-system
-    console-and-shells/orm-cache
+    console-commands/schema-cache
