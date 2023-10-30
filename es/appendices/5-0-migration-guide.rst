@@ -1,5 +1,5 @@
 5.0 Guía de migración
-###################
+#####################
 
 CakePHP 5.0 contiene cambios importantes, y no es compatible con versiones anteriores
 de 4.x. Antes de intentar actualizar a la version 5.0, primero actualice a la version 4.5 y resuelva
@@ -9,13 +9,13 @@ Consulte :doc:`/appendices/5-0-upgrade-guide` para obtener instrucciones paso a 
 como actualizar a la versión 5.0.
 
 Características obsoletas eliminadas
-===========================
+====================================
 
 Todos los métodos, propiedades y funcionalidades que emitían advertencias de obsolencias
 a partir de la versión 4.5 se han eliminado.
 
 Cambios importantes
-================
+===================
 
 Además de la eliminación de características obsoletas, se han realizado
 cambios importantes:
@@ -110,7 +110,7 @@ Core
 - ``ClassLoader`` ha sido eliminado. En su lugar, utiliza composer para generar archivos de carga automática.
 
 Base de datos
---------
+-------------
 
 - ``DateTimeType`` y ``DateType`` ahora siempre devuelven objetos inmutables.
   Además, la interfaz para los objetos ``Date`` refleja la interfaz ``ChronosDate``
@@ -139,7 +139,7 @@ Datasource
   tienen que implementar este método ahora.
 
 Eventos
------
+-------
 
 - Las cargas útiles de eventos deben ser un array. Otros objetos como ``ArrayAccess`` ya no se convierten en array y ahora lanzarán un ``TypeError``.
 - Se recomienda ajustar los handlers de eventos para que sean métodos void y usar ``$event->setResult()`` en lugar de devolver el resultado.
@@ -213,7 +213,7 @@ ORM
 - ``SaveOptionsBuilder`` ha sido eliminado. En su lugar, utilice un array normal para las opciones.
 
 Enrutamiento
--------
+------------
 
 - Los métodos estáticos ``connect()``, ``prefix()``, ``scope()`` y ``plugin()`` del ``Router`` han sido eliminados y
   deben ser reemplazados llamando a sus variantes de método no estáticos a través de la instancia ``RouteBuilder``.
@@ -230,7 +230,7 @@ TestSuite
   veces en lugar de reemplazar la configuración actualmente presente.
 
 Validaciones
-----------
+------------
 
 - ``Validation::isEmpty()`` ya no es compatible con la subida de ficheros en forma
   arrays. El soporte para la subida de ficheros en forma de array también se ha eliminado de
@@ -240,7 +240,7 @@ Validaciones
   Por ejemplo, ``El valor proporcionado debe ser mayor o igual que \`5\```.
 
 Vistas
-----
+------
 
 - Las opciones de ``ViewBuilder`` ahora son verdaderamente asociativas (string keys).
 - ``NumberHelper`` y ``TextHelper`` ya no aceptan la configuración de ``engine``.
@@ -253,13 +253,13 @@ Vistas
   fue una solución para un error de Safari que no es relevante.
 
 Obsolescencias
-============
+==============
 
 A continuación se muestra una lista de métodos, propiedades y comportamientos en desuso. Estas
 características seguirán funcionando en la versión 5.x y se eliminarán en la versión 6.0.
 
 Base de datos
---------
+-------------
 
 - ``Query::order()`` ha quedado obsoleto. Utiliza ``Query::orderBy()`` en su lugar
   ahora que los métodos ``Connection`` ya no son proxy. Esto alinea el nombre de la función
@@ -278,10 +278,10 @@ ORM
   o varios argumentos como ``find(type: 'list', valueField: 'name', conditions: $array)``.
 
 Nuevas características
-============
+======================
 
 Comprobación de tipos mejorada
------------------------
+------------------------------
 
 CakePHP 5 aprovecha la función de sistema de tipos expandidos disponible en PHP 8.1+.
 CakePHP también usa ``assert()`` para proporcionar mensajes de error mejorados y una solidez de tipo adicional.
@@ -289,7 +289,7 @@ En el modo de producción, puede configurar PHP para que no genere código para 
 Consulte :ref:`symlink-assets` para saber cómo hacerlo.
 
 Colecciones
-----------
+-----------
 
 - Se añadió ``unique()`` que filtra el valor duplicado especificado por la devolución de llamada proporcionada.
 - ``reject()`` ahora soporta una devolución de llamada predeterminada que filtra los valores verdaderos,
@@ -302,7 +302,7 @@ Core
 - ``PluginCollection::addFromConfig()`` se ha añadido a :ref:`simplify plugin loading <loading-a-plugin>`.
 
 Base de datos
---------
+-------------
 
 - ``ConnectionManager`` ahora soporta roles de conexión de lectura y escritura. Los roles se pueden configurar
    con claves de ``read`` y ``write`` en la configuración de conexión que anulan la configuración compartida.
@@ -326,7 +326,7 @@ ORM
 ---
 
 Campos de entidad obligatorios
-----------------------
+------------------------------
 
 Las entidades tienen una nueva funcionalidad de opt-in que permite hacer que las entidades manejen
 propiedades de manera más estricta. El nuevo comportamiento se denomina 'required fields'. Cuando
@@ -404,7 +404,7 @@ TestSuite
 - Se ha añadido ``IntegrationTestTrait::requestAsJson()`` para establecer encabezados JSON para la siguiente solicitud.
 
 Instalador de plugins
-----------------
+---------------------
 - El instalador de plugins se ha actualizado para manejar automáticamente la carga automática de clases para los plugins
   de tu aplicación. Por lo tanto, puede eliminar el espacio de nombres para las asignaciones de rutas para
   tus plugins de tu ``composer.json`` y simplemente ejecutar ``composer dumpautoload``.

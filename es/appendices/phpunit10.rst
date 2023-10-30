@@ -1,11 +1,11 @@
 Actualización a PHPUnit 10
-##################
+##########################
 
 Con CakePHP 5 la version mínima de PHPUnit ha cambiado de ``^8.5 || ^9.3`` a ``^10.1``.
 Esto introduce algunos cambios importantes tanto por parte de PHPUnit como por parte de CakePHP.
 
 Ajustes de phpunit.xml
-=======================
+======================
 
 Se recomienda dejar que PHPUnit actualice su archivo de configuración a través del siguiente comando::
 
@@ -18,7 +18,7 @@ Se recomienda dejar que PHPUnit actualice su archivo de configuración a través
 Con este comando ejecutado, tu ``phpunit.xml`` ya tiene la mayoría de los cambios recomendados presentes.
 
 Nuevo sistema de eventos
-----------------
+------------------------
 
 PHPUnit 10 eliminó el antiguo sistema de hook e introdujo un nuevo `Sistema de eventos
 <https://docs.phpunit.de/en/10.0/extending-phpunit.html#extending-the-test-runner>`_
@@ -35,7 +35,7 @@ a::
   </extensions>
 
 ``->withConsecutive()`` ha sido eliminado
-========================================
+=========================================
 
 Puedes convertir el metodo ``->withConsecutive()`` eliminado
 en una solución provisional que funcione como puede ver aquí::
@@ -52,7 +52,7 @@ se ha añadido el método estático ``self::withConsecutive()`` a través del m�
 a la clase base ``Cake\TestSuite\TestCase`` para que no tenga que agregar manualmente este trait a tus clases de TestCase.
 
 los proveedores de datos tienen que ser estáticos
-================================
+=================================================
 
 Si tus testcases aprovechan la función de proveedor de datos de PHPUnit entonces
 tienes que ajustar tus proveedores de datos para que sean estáticos::

@@ -1,10 +1,10 @@
 5.0 Guía de actualización
-#################
+#########################
 
 En primer lugar, compruebe que su aplicación se está ejecutando en la última versión de CakePHP 4.x.
 
 Arreglar avisos de obsolescencia
-========================
+================================
 
 Una vez que su aplicación se ejecuta en la última version de CakePHP 4.x, activar advertencias de obsoletos en **config/app.php**::
 
@@ -21,7 +21,7 @@ son:
   ``updateQuery()``, ``insertQuery()`` and ``deleteQuery()`` instead.
 
 Actualiza a PHP 8.1
-==================
+===================
 
 Si no estas ejecutando en **PHP 8.1 o superior**, tendrás que actualizar PHP antes de actualizar CakePHP.
 
@@ -31,7 +31,7 @@ Si no estas ejecutando en **PHP 8.1 o superior**, tendrás que actualizar PHP an
 .. _upgrade-tool-use:
 
 Usar la herramienta de actualización
-====================
+====================================
 
 .. note::
     La herramienta de actualización sólo funciona en aplicaciones que se ejecutan en cakePHP 4.x. No puedes ejecutar la herramienta de actualización después de actualizar a CakePHP 5.0.
@@ -55,7 +55,7 @@ plugin::
     bin/cake upgrade rector --rules chronos3 <path/to/app/src>
 
 Actualizar dependencias de CakePHP
-=========================
+==================================
 
 Después de aplicar las refactorizaciones de rector necesitas actualizar CakePHP, sus plugins, PHPUnit
 y tal vez otras dependencias en tu ``composer.json``.
@@ -67,7 +67,7 @@ After the version strings are adjusted in your ``composer.json`` execute
 ``composer update -W`` and check its output.
 
 Actualiza los archivos de la aplicación basándose en las últimas plantillas
-===============================================
+===========================================================================
 
 A continuación, asegurate de que el resto de tu aplicación este actualizado basándose en la ultima version de `cakephp/app
 <https://github.com/cakephp/app/blob/5.x/>`__.
