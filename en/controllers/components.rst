@@ -25,7 +25,7 @@ Configuring Components
 ======================
 
 Many of the core components require configuration. One example would be
-the :doc:`/controllers/components/form-protection`.  Configuration for these components,
+the :doc:`/controllers/components/form-protection`. Configuration for these components,
 and for components in general, is usually done via ``loadComponent()`` in your
 Controller's ``initialize()`` method or via the ``$components`` array::
 
@@ -37,9 +37,8 @@ Controller's ``initialize()`` method or via the ``$components`` array::
             $this->loadComponent('FormProtection', [
                 'unlockedActions' => ['index'],
             ]);
-            $this->loadComponent('Csrf');
+            $this->loadComponent('Flash');
         }
-
     }
 
 You can configure components at runtime using the ``setConfig()`` method. Often,
@@ -58,7 +57,7 @@ to read and write configuration data::
     $this->FormProtection->getConfig('unlockedActions');
 
     // Set config
-    $this->Csrf->setConfig('cookieName', 'token');
+    $this->Flash->setConfig('key', 'myFlash');
 
 As with helpers, components will automatically merge their ``$_defaultConfig``
 property with constructor configuration to create the ``$_config`` property
@@ -193,12 +192,12 @@ component, through which we can access an instance of it::
 
     // In a controller
     // Make the new component available at $this->Math,
-    // as well as the standard $this->Csrf
+    // as well as the standard $this->Flash
     public function initialize(): void
     {
         parent::initialize();
         $this->loadComponent('Math');
-        $this->loadComponent('Csrf');
+        $this->loadComponent('Flash');
     }
 
 When including Components in a Controller you can also declare a
@@ -214,7 +213,7 @@ the Component::
             'precision' => 2,
             'randomGenerator' => 'srand',
         ]);
-        $this->loadComponent('Csrf');
+        $this->loadComponent('Flash');
     }
 
 The above would pass the array containing precision and randomGenerator to

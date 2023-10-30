@@ -9,7 +9,7 @@ manera conjunta o separada.
 El objetivo de este artículo es introducirte en los conceptos generales de
 CakePHP y darte un rápido vistazo sobre como esos conceptos están implementados
 en CakePHP. Si estás deseando comenzar un proyecto puedes :doc:`empezar con el tutorial
-</tutorials-and-examples/bookmarks/intro>`, o :doc:`profundizar en la documentación
+</tutorials-and-examples/cms/installation>`, o :doc:`profundizar en la documentación
 </topics>`.
 
 Convenciones sobre configuración
@@ -155,7 +155,7 @@ geniales de CakePHP son:
 * :doc:`Framework para la ejecución de pruebas integrado </development/testing>` para que puedas asegurarte de que tu código funciona perfectamente.
 
 Los siguientes pasos obvios son :doc:`descargar CakePHP </installation>`
-y leer el :doc:`tutorial y crear algo asombroso </tutorials-and-examples/bookmarks/intro>`.
+y leer el :doc:`tutorial y crear algo asombroso </tutorials-and-examples/cms/installation>`.
 
 Lecturas complementarias
 ========================
