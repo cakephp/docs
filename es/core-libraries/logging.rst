@@ -281,6 +281,7 @@ en el archivo **config/bootstrap.php**"::
 
 El arreglo de configuración aceptado para el motor de registro Syslog comprende
 las siguientes claves:
+
 * ``format``: Una cadena de plantilla sprintf con dos marcadores de posición (placeholdes),
   el primero para el nivel de error y el segundo para el mensaje en sí. Esta clave es
   útil para agregar información adicional sobre el servidor o el proceso en el mensaje
