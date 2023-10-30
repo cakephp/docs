@@ -1,5 +1,5 @@
 CMS Tutorial - Tags and Users
-=======
+=============================
 
 .. note::
     La documentación no es compatible actualmente con el idioma español en esta página.

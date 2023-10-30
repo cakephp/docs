@@ -7,7 +7,7 @@ necesitamos no permitir que usuarios no autenticados puedan crear artículos.
 Creando la tabla users y el Controlador
 =======================================
 
-Primero, vamos a crear una tabla en nuestra base de datos para guardar los datos de usuarios::
+Primero, vamos a crear una tabla en nuestra base de datos para guardar los datos de usuarios:
 
 .. code-block:: mysql
 
@@ -105,7 +105,7 @@ de código que están incluidas en CakePHP::
 
 Creamos las vistas para nuestros artículos de la misma forma que el controlador, usando
 las herramientas de generación de código 'bake', lo que nos permite implementar las vistas
-de los usuarios. Para el propósito de este tutorial, mostraremos solamente **add.php**::
+de los usuarios. Para el propósito de este tutorial, mostraremos solamente **add.php**:
 
 .. code-block:: php
 

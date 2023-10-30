@@ -1,5 +1,5 @@
 CMS Tutorial - Authorization
-=======
+============================
 
 .. note::
     La documentación no es compatible actualmente con el idioma español en esta página.
