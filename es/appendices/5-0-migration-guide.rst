@@ -70,7 +70,7 @@ Consola
 Connection
 ----------
 
-- Se ha elimiando ``Connection::prepare()``. En su lugar, puede utilizar ``Connection::execute()``
+- Se ha eliminado ``Connection::prepare()``. En su lugar, puede utilizar ``Connection::execute()``
   para ejecutar una consulta SQL especificando en la cadena SQL los parámetros y los tipos en una sola llamada.
 - Se ha eliminado ``Connection::enableQueryLogging()``. Si no ha habilitado el registro
   a través de la configuración de conexión, puedes configurar más adelante la instancia del registrador para que
@@ -126,10 +126,8 @@ Base de datos
 - ``SqlDialectTrait`` se ha eliminado y toda su funcionalidad se ha movido a la propia clase ``Driver``.
 - ``CaseExpression`` ha sido eliminado y debe ser reemplazado por
   ``QueryExpression::case()`` o ``CaseStatementExpression``
-- ``Connection::connect()`` ha sido eliminado. Usa
-  ``$connection->getDriver()->connect()`` en su lugar.
-- ``Connection::disconnect()`` ha sido eliminado. Usa
-  ``$connection->getDriver()->disconnect()`` en su lugar.
+- ``Connection::connect()`` ha sido eliminado. Usar ``$connection->getDriver()->connect()`` en su lugar.
+- ``Connection::disconnect()`` ha sido eliminado. Usar ``$connection->getDriver()->disconnect()`` en su lugar.
 - ``cake.database.queries`` ha sido añadido como alternativa al scope ``queriesLog``.
 
 Datasource
@@ -140,7 +138,7 @@ Datasource
 - El método ``aliasField()`` ha sido añadido a ``RepositoryInterface``. Las implementaciones que no son ORM
   tienen que implementar este método ahora.
 
-Event
+Eventos
 -----
 
 - Las cargas útiles de eventos deben ser un array. Otros objetos como ``ArrayAccess`` ya no se convierten en array y ahora lanzarán un ``TypeError``.
@@ -157,7 +155,7 @@ Error
 Filesystem
 ----------
 
-- El paquete de Filesystem ha eliminado, y la clase ``Filesystem`` se ha movido al paquete de Utility.
+- El paquete de Filesystem se ha eliminado, y la clase ``Filesystem`` se ha movido al paquete de Utility.
 
 Http
 ----
@@ -169,174 +167,171 @@ Http
 I18n
 ----
 
-- ``FrozenDate`` was renamed to `Date` and ``FrozenTime`` was renamed to `DateTime`.
-- ``Time`` now extends ``Cake\Chronos\ChronosTime`` and is therefore immutable.
-- ``Date::parseDateTime()`` was removed.
-- ``Date::parseTime()`` was removed.
-- ``Date::setToStringFormat()`` and ``Date::setJsonEncodeFormat()`` no longer accept an array.
-- ``Date::i18nFormat()`` and ``Date::nice()`` no longer accept a timezone parameter.
-- Translation files for plugins with vendor prefixed names (``FooBar/Awesome``) will now have that
-  prefix in the file name, e.g. ``foo_bar_awesome.po`` to avoid collision with a ``awesome.po`` file
-  from a corresponding plugin (``Awesome``).
+- Se cambió el nombre de ``FrozenDate`` a `Date` y el de ``FrozenTime`` a `DateTime`.
+- ``Time`` ahora extiende de ``Cake\Chronos\ChronosTime`` y por lo tanto es inmutable.
+- ``Date::parseDateTime()`` ha sido eliminado.
+- ``Date::parseTime()`` ha sido eliminado.
+- ``Date::setToStringFormat()`` y ``Date::setJsonEncodeFormat()`` ya no aceptan un array.
+- ``Date::i18nFormat()`` y ``Date::nice()`` ya no aceptan un parámetro de zona horaria.
+- Los archivos de traducción en la carpeta de vendor con prefijo como (``FooBar/Awesome``) ahora tendrán
+  ese prefijo en el nombre del archivo de traducción, por ejemplo, ``foo_bar_awesome.po`` para evitar colisiones
+  con otro fichero ``awesome.po`` correspondiente con el plugin (``Awesome``).
 
 Log
 ---
 
-- Log engine config now uses ``null`` instead of ``false`` to disable scopes.
-  So instead of ``'scopes' => false`` you need to use ``'scopes' => null`` in your log config.
+- La configuración del motor de registros ahora utiliza ``null`` en lugar de ``false`` para desactivar los scopes.
+  Así que en lugar de ``'scopes' => false`` necesitas usar ``'scopes' => null`` en la configuración de tu log.
 
 Mailer
 ------
 
-- ``Email`` has been removed. Use `Mailer <https://book.cakephp.org/5/en/core-libraries/email.html>`__ instead.
-- ``cake.mailer`` has been added as an alternative to the ``email`` scope
+- Se ha eliminado ``Email``. Usar `Mailer <https://book.cakephp.org/5/en/core-libraries/email.html>`__ en su lugar.
+- ``cake.mailer`` se ha añadido como alternativa al scope ``email``.
 
 ORM
 ---
 
-- ``EntityTrait::has()`` now returns ``true`` when an attribute exists and is
-  set to ``null``. In previous versions of CakePHP this would return ``false``.
-  See the release notes for 4.5.0 for how to adopt this behavior in 4.x.
-- ``EntityTrait::extractOriginal()`` now returns only existing fields, similar to ``extractOriginalChanged()``.
-- Finder arguments are now required to be associative arrays as they were always expected to be.
-- ``TranslateBehavior`` now defaults to the ``ShadowTable`` strategy. If you are
-  using the ``Eav`` strategy you will need to update your behavior configuration
-  to retain the previous behavior.
-- ``allowMultipleNulls`` option for ``isUnique`` rule now default to true matching
-  the original 3.x behavior.
-- ``Table::query()`` has been removed in favor of query-type specific functions.
-- ``Table::updateQuery()``, ``Table::selectQuery()``, ``Table::insertQuery()``, and
-  ``Table::deleteQuery()``) were added and return the new type-specific query objects below.
-- ``SelectQuery``, ``InsertQuery``, ``UpdateQuery`` and ``DeleteQuery`` were added
-  which represent only a single type of query and do not allow switching between query types nor
-  calling functions unrelated to the specific query type.
-- ``Table::_initializeSchema()`` has been removed and should be replaced by calling
-  ``$this->getSchema()`` inside the ``initialize()`` method.
-- ``SaveOptionsBuilder`` has been removed. Use a normal array for options instead.
+- ``EntityTrait::has()`` ahora devuelve ``true`` cuando existe un atributo y se estable
+  en ``null``. En versiones anteriores de CakePHP esto devolvía ``false``.
+  Consulte las notas de la version 4.5.0 para saber como adoptar este comportamiento en 4.x.
+- ``EntityTrait::extractOriginal()`` ahora devuelve solo los campos existentes, similar a ``extractOriginalChanged()``.
+- Ahora se requiere que los argumentos de un `Finder` sean arrays asociativos, como siempre se esperó que fueran.
+- ``TranslateBehavior`` ahora tiene como valor predeterminado la estrategia ``ShadowTable``. Si está
+  utilizando la estrategia ``Eav`` deberá actualizar la configuración de tu behavior para conservar
+  el comportamiento anterior.
+- La opción ``allowMultipleNulls`` para la regla ``isUnique`` ahora es true de forma predeterminada,
+  coincidiendo con el comportamiento original de 3.x.
+- ``Table::query()`` se ha eliminado en favor de funciones específicas de tipo de consulta.
+- ``Table::updateQuery()``, ``Table::selectQuery()``, ``Table::insertQuery()``, y
+  ``Table::deleteQuery()`` se añadieron y ahora devuelven los nuevos objetos de consulta de tipo especifico.
+- Se añadieron ``SelectQuery``, ``InsertQuery``, ``UpdateQuery`` y ``DeleteQuery`` que representan
+  solo un tipo de consulta y no permiten cambiar entre tipos de consulta, sin llamar a funciones no relacionadas
+  con el tipo de consulta especifico.
+- ``Table::_initializeSchema()`` ha sido eliminado y debe ser reemplazado llamando a
+  ``$this->getSchema()`` dentro del método ``initialize()``.
+- ``SaveOptionsBuilder`` ha sido eliminado. En su lugar, utilice un array normal para las opciones.
 
-Routing
+Enrutamiento
 -------
 
-- Static methods ``connect()``, ``prefix()``, ``scope()`` and ``plugin()`` of the ``Router`` have been removed and
-  should be replaced by calling their non-static method variants via the ``RouteBuilder`` instance.
-- ``RedirectException`` has been removed. Use ``\Cake\Http\Exception\RedirectException`` instead.
+- Los métodos estáticos ``connect()``, ``prefix()``, ``scope()`` y ``plugin()`` del ``Router`` han sido eliminados y
+  deben ser reemplazados llamando a sus variantes de método no estáticos a través de la instancia ``RouteBuilder``.
+- ``RedirectException`` ha sido eliminado. Usar ``\Cake\Http\Exception\RedirectException`` en su lugar.
 
 TestSuite
 ---------
 
-- ``TestSuite`` was removed. Users should use environment variables to customize
-  unit test settings instead.
-- ``TestListenerTrait`` was removed. PHPUnit dropped support for these listeners.
-  See :doc:`/appendices/phpunit10`
-- ``IntegrationTestTrait::configRequest()`` now merges config when called multiple times
-  instead of replacing the currently present config.
+- ``TestSuite`` fue eliminado. En su lugar, los usuarios deben usar variables de entorno
+  para personalizar la configuración de las pruebas unitarias.
+- ``TestListenerTrait`` fue eliminado. PHPUnit dejó de dar soporte a estos listeners.
+  Ver documentación :doc:`/appendices/phpunit10`
+- ``IntegrationTestTrait::configRequest()`` ahora fusiona la configuración cuando se llama varias
+  veces en lugar de reemplazar la configuración actualmente presente.
 
-Validation
+Validaciones
 ----------
 
-- ``Validation::isEmpty()`` is no longer compatible with file upload shaped
-  arrays. Support for PHP file upload arrays has been removed from
-  ``ServerRequest`` as well so you should not see this as a problem outside of
-  tests.
-- Previously, most data validation error messages were simply ``The provided value is invalid``.
-  Now, the data validation error messages are worded more precisely.
-  For example, ``The provided value must be greater than or equal to \`5\```.
+- ``Validation::isEmpty()`` ya no es compatible con la subida de ficheros en forma
+  arrays. El soporte para la subida de ficheros en forma de array también se ha eliminado de
+  ``ServerRequest`` por lo que no debería ver esto como un problema fuera de las pruebas.
+- Anteriormente, la mayoría de los mensajes de error de validacion de datos eran simplemente ``El valor proporcionado no es válido``.
+  Ahora, los mensajes de error de validación de datos están redactados con mayor precisión.
+  Por ejemplo, ``El valor proporcionado debe ser mayor o igual que \`5\```.
 
-View
+Vistas
 ----
 
-- ``ViewBuilder`` options are now truly associative (string keys).
-- ``NumberHelper`` and ``TextHelper`` no longer accept an ``engine`` config.
-- ``ViewBuilder::setHelpers()`` parameter ``$merge`` was removed. Use ``ViewBuilder::addHelpers()`` instead.
-- Inside ``View::initialize()``, prefer using ``addHelper()`` instead of ``loadHelper()``.
-  All configured helpers will be loaded afterwards, anyway.
-- ``View\Widget\FileWidget`` is no longer compatible with PHP file upload shaped
-  arrays. This is aligned with ``ServerRequest`` and ``Validation`` changes.
-- ``FormHelper`` no longer sets ``autocomplete=off`` on CSRF token fields. This
-  was a workaround for a Safari bug that is no longer relevant.
+- Las opciones de ``ViewBuilder`` ahora son verdaderamente asociativas (string keys).
+- ``NumberHelper`` y ``TextHelper`` ya no aceptan la configuración de ``engine``.
+- ``ViewBuilder::setHelpers()`` el parámetro  ``$merge`` fue eliminado. Usar ``ViewBuilder::addHelpers()`` en su lugar.
+- Dentro ``View::initialize()``, preferentemente usar ``addHelper()`` en lugar de ``loadHelper()``.
+  De todas formas, todas las configuraciones de helpers se cargarán después.
+- ``View\Widget\FileWidget`` ya no es compatible con la subida de ficheros en forma
+  arrays. Esto esta alineado con los cambios en ``ServerRequest`` y ``Validation``.
+- ``FormHelper`` ya no estable ``autocomplete=off`` en los campos de token CSRF. Esto
+  fue una solución para un error de Safari que no es relevante.
 
-Deprecations
+Obsolescencias
 ============
 
-The following is a list of deprecated methods, properties and behaviors. These
-features will continue to function in 5.x and will be removed in 6.0.
+A continuación se muestra una lista de métodos, propiedades y comportamientos en desuso. Estas
+características seguirán funcionando en la versión 5.x y se eliminarán en la versión 6.0.
 
-Database
+Base de datos
 --------
 
-- ``Query::order()`` was deprecated. Use ``Query::orderBy()`` instead now that
-  ``Connection`` methods are no longer proxied. This aligns the function name
-  with the SQL statement.
-- ``Query::group()`` was deprecated. Use ``Query::groupBy()`` instead now that
-  ``Connection`` methods are no longer proxied. This aligns the function name
-  with the SQL statement.
+- ``Query::order()`` ha quedado obsoleto. Utiliza ``Query::orderBy()`` en su lugar
+  ahora que los métodos ``Connection`` ya no son proxy. Esto alinea el nombre de la función
+  con la instrucción SQL.
+- ``Query::group()`` ha quedado obsoleto. Utiliza ``Query::groupBy()`` en su lugar
+  ahora que los métodos ``Connection`` ya no son proxy. Esto alinea el nombre de la función
+  con la instrucción SQL.
 
 ORM
 ---
 
-- Calling ``Table::find()`` with options array is deprecated. Use `named arguments <https://www.php.net/manual/en/functions.arguments.php#functions.named-arguments>`__
-  instead. For e.g. instead of ``find('all', ['conditions' => $array])`` use
-  ``find('all', conditions: $array)``. Similarly for custom finder options, instead
-  of ``find('list', ['valueField' => 'name'])`` use ``find('list', valueField: 'name')``
-  or multiple named arguments like ``find(type: 'list', valueField: 'name', conditions: $array)``.
+- Llamar a ``Table::find()`` con opciones de array esta obsoleto. Utiliza `named arguments <https://www.php.net/manual/en/functions.arguments.php#functions.named-arguments>`__
+  en su lugar. Por ejemplo,  en lugar de ``find('all', ['conditions' => $array])`` usar
+  ``find('all', conditions: $array)``. De manera similar, para las opciones de finders personalizados, en lugar
+  de ``find('list', ['valueField' => 'name'])`` usar ``find('list', valueField: 'name')``
+  o varios argumentos como ``find(type: 'list', valueField: 'name', conditions: $array)``.
 
-New Features
+Nuevas características
 ============
 
-Improved type checking
+Comprobación de tipos mejorada
 -----------------------
 
-CakePHP 5 leverages the expanded type system feature available in PHP 8.1+.
-CakePHP also uses ``assert()`` to provide improved error messages and additional
-type soundness. In production mode, you can configure PHP to not generate
-code for ``assert()`` yielding improved application performance. See the
-:ref:`symlink-assets` for how to do this.
+CakePHP 5 aprovecha la función de sistema de tipos expandidos disponible en PHP 8.1+.
+CakePHP también usa ``assert()`` para proporcionar mensajes de error mejorados y una solidez de tipo adicional.
+En el modo de producción, puede configurar PHP para que no genere código para ``assert()`` lo que mejora el rendimiento de la aplicación.
+Consulte :ref:`symlink-assets` para saber cómo hacerlo.
 
-Collection
+Colecciones
 ----------
 
-- Added ``unique()`` which filters out duplicate value specified by provided callback.
-- ``reject()`` now supports a default callback which filters out truthy values which is
-  the inverse of the default behavior of ``filter()``
+- Se añadió ``unique()`` que filtra el valor duplicado especificado por la devolución de llamada proporcionada.
+- ``reject()`` ahora soporta una devolución de llamada predeterminada que filtra los valores verdaderos,
+  que es el inverso del comportamiento predeterminado de ``filter()``
 
 Core
 ----
 
-- The ``services()`` method was added to ``PluginInterface``.
-- ``PluginCollection::addFromConfig()`` has been added to :ref:`simplify plugin loading <loading-a-plugin>`.
+- El método ``services()`` se añadió a ``PluginInterface``.
+- ``PluginCollection::addFromConfig()`` se ha añadido a :ref:`simplify plugin loading <loading-a-plugin>`.
 
-Database
+Base de datos
 --------
 
-- ``ConnectionManager`` now supports read and write connection roles. Roles can be configured
-  with ``read`` and ``write`` keys in the connection config that override the shared config.
-- ``Query::all()`` was added which runs result decorator callbacks and returns a result set for select queries.
-- ``Query::comment()`` was added to add a SQL comment to the executed query. This makes it easier to debug queries.
-- ``EnumType`` was added to allow mapping between PHP backed enums and a string or integer column.
-- ``getMaxAliasLength()`` and ``getConnectionRetries()`` were added
-  to ``DriverInterface``.
-- Supported drivers now automatically add auto-increment only to integer primary keys named "id" instead
-  of all integer primary keys. Setting 'autoIncrement' to false always disables on all supported drivers.
+- ``ConnectionManager`` ahora soporta roles de conexión de lectura y escritura. Los roles se pueden configurar
+   con claves de ``read`` y ``write`` en la configuración de conexión que anulan la configuración compartida.
+- Se añadió ``Query::all()`` que ejecuta devoluciones de llamada del decorador de resultados y devuelve un conjunto de resultados para consultas seleccionadas.
+- Se añadió ``Query::comment()`` para agregar un comentario SQL a la consulta ejecutada. Esto facilita la depuración de consultas.
+- ``EnumType`` fue añadido para permitir el mapeo entre enumeraciones respaldadas por PHP y una cadena o columna entera.
+- ``getMaxAliasLength()`` y ``getConnectionRetries()`` se añadieron a ``DriverInterface``.
+- Los drivers compatibles ahora agregan automáticamente el incremento automático solo a las claves primarias enteras denominadas "id"
+  en lugar de a todas las claves primarias enteras. Si se establece 'autoIncrement' en false, siempre se deshabilita en todos los drivers compatibles.
 
 Http
 ----
 
-- Added support for `PSR-17 <https://www.php-fig.org/psr/psr-17/>`__ factories
-  interface. This allows ``cakephp/http`` to provide a client implementation to
-  libraries that allow automatic interface resolution like php-http.
-- Added ``CookieCollection::__get()`` and ``CookieCollection::__isset()`` to add
-  ergonomic ways to access cookies without exceptions.
+- Se ha añadido soporte para 'factories interface' `PSR-17 <https://www.php-fig.org/psr/psr-17/>`__.
+  Esto permite ``cakephp/http`` proporcionar una implementación de cliente a
+  bibliotecas que permiten la resolución automática de interfaces como php-http.
+- Se añadieron ``CookieCollection::__get()`` y ``CookieCollection::__isset()`` para añadir
+  formas ergonómicas de acceder a las cookies sin excepciones.
 
 ORM
 ---
 
-Required Entity Fields
+Campos de entidad obligatorios
 ----------------------
 
-Entities have a new opt-in functionality that allows making entities handle
-properties more strictly. The new behavior is called 'required fields'. When
-enabled, accessing properties that are not defined in the entity will raise
-exceptions. This impacts the following usage::
+Las entidades tienen una nueva funcionalidad de opt-in que permite hacer que las entidades manejen
+propiedades de manera más estricta. El nuevo comportamiento se denomina 'required fields'. Cuando
+es habilitado, el acceso a las propiedades que no están definidas en la entidad generará
+excepciones. Esto afecta a los siguientes usos::
 
     $entity->get();
     $entity->has();
@@ -344,17 +339,17 @@ exceptions. This impacts the following usage::
     isset($entity->attribute);
     $entity->attribute;
 
-Fields are considered defined if they pass ``array_key_exists``. This includes
-null values. Because this can be a tedious to enable feature, it was deferred to
-5.0. We'd like any feedback you have on this feature as we're considering making
-this the default behavior in the future.
+Los campos se consideran definidos si pasan ``array_key_exists``. Esto incluye
+valores nulos. Debido a que esta puede ser una característica tediosa de habilitar, se aplazó a
+5.0. Nos gustaría recibir cualquier comentario que tenga sobre esta función,
+ya que estamos considerando hacer que este sea el comportamiento predeterminado en el futuro.
 
 
 Typed Finder Parameters
 -----------------------
 
-Table finders can now have typed arguments as required instead of an options array.
-For e.g. a finder for fetching posts by category or user::
+Los finders de las tablas ahora pueden tener argumentos escritos según sea necesario en lugar de un array de opciones.
+Por ejemplo, un finder para obtener publicaciones por categoría o usuario::
 
     public function findByCategoryOrUser(SelectQuery $query, array $options)
     {
@@ -368,7 +363,7 @@ For e.g. a finder for fetching posts by category or user::
         return $query;
     }
 
-can now be written as::
+ahora se pueden escribir como::
 
     public function findByCategoryOrUser(SelectQuery $query, ?int $categoryId = null, ?int $userId = null)
     {
@@ -382,11 +377,11 @@ can now be written as::
         return $query;
     }
 
-The finder can then be called as ``find('byCategoryOrUser', userId: $somevar)``.
-You can even include the special named arguments for setting query clauses.
+El finder puede ser llamado como ``find('byCategoryOrUser', userId: $somevar)``.
+Incluso puedes incluir los argumentos con nombre especial para establecer cláusulas de consulta.
 ``find('byCategoryOrUser', userId: $somevar, conditions: ['enabled' => true])``.
 
-A similar change has been applied to the ``RepositoryInterface::get()`` method::
+Un cambio similar se ha aplicado al método ``RepositoryInterface::get()``::
 
     public function view(int $id)
     {
@@ -396,7 +391,7 @@ A similar change has been applied to the ``RepositoryInterface::get()`` method::
         ]);
     }
 
-can now be written as::
+ahora se pueden escribir como::
 
     public function view(int $id)
     {
@@ -406,13 +401,13 @@ can now be written as::
 TestSuite
 ---------
 
-- ``IntegrationTestTrait::requestAsJson()`` has been added to set JSON headers for the next request.
+- Se ha añadido ``IntegrationTestTrait::requestAsJson()`` para establecer encabezados JSON para la siguiente solicitud.
 
-Plugin Installer
+Instalador de plugins
 ----------------
-- The plugin installer has been updated to automatically handle class autoloading
-  for your app plugins. So you can remove the namespace to path mappings for your
-  plugins from your ``composer.json`` and just run ``composer dumpautoload``.
+- El instalador de plugins se ha actualizado para manejar automáticamente la carga automática de clases para los plugins
+  de tu aplicación. Por lo tanto, puede eliminar el espacio de nombres para las asignaciones de rutas para
+  tus plugins de tu ``composer.json`` y simplemente ejecutar ``composer dumpautoload``.
 
 .. meta::
     :title lang=es: 5.0 Guía de migración
