@@ -1,35 +1,30 @@
 Vistas JSON y XML
 #################
 
-JsonView y XmlView le permiten crear respuestas JSON y XML, e integrarse con el
-:php:class:`Cake\\Controller\\Component\\RequestHandlerComponent`.
+La integración de ``JsonView`` y ``XmlView`` con las funcionalidades de :ref:`controller-viewclasses`
+de CakePHP y te permite crear respuestas JSON y XML.
 
-Al habilitar ``RequestHandlerComponent`` en su aplicación y habilitar la
-compatibilidad con las extensiones ``json`` y/o ``xml``, puede aprovechar
-automáticamente las nuevas clases de vista. ``JsonView`` y ``XmlView`` se
-denominarán vistas de datos para el resto de esta página.
+Éstas clases View son usadas de forma mas común junto con :php:meth:`\Cake\Controller\Controller::viewClasses()`.
 
 Hay dos formas de generar vistas de datos. La primera es mediante el uso de
 la opción ``serialize`` y la segunda es mediante la creación de archivos de
 plantilla normales.
 
-Habilitación de vistas de datos en su aplicación
-================================================
+Definiendo clases View pata Negociar
+====================================
 
-Antes de poder usar las clases de vista de datos, primero deberá cargar el
-:php:class:`Cake\\Controller\\Component\\RequestHandlerComponent` en su
-controlador::
+En tu ``AppController`` o en un controlador individual puedes implementar la
+función ``viewClasses()`` y proporcionarle todas las clases View que
+quieras soportar::
 
-    public function initialize(): void
+    use Cake\View\JsonView;
+    use Cake\View\XmlView;
+
+    public function viewClasses(): array
     {
-        ...
-        $this->loadComponent('RequestHandler');
+        return [JsonView::class, XmlView::class];
     }
 
-Esto se puede hacer en su ``AppController`` y habilitará el cambio automático de
-clase de vista en los tipos de contenido. También puede configurar el componente
-con la configuración ``viewClassMap``, para asignar tipos a sus clases
-personalizadas y/o asignar otros tipos de datos.
 
 Opcionalmente, puede habilitar las extensiones json y/o xml con
 `file-extensions`. Esto le permitirá acceder a ``JSON``, ``XML`` o cualquier
@@ -57,19 +52,20 @@ serializar::
 
     namespace App\Controller;
 
+    use Cake\View\JsonView;
+
     class ArticlesController extends AppController
     {
-        public function initialize(): void
+        public function viewClasses(): array
         {
-            parent::initialize();
-            $this->loadComponent('RequestHandler');
+            return [JsonView::class];
         }
 
         public function index()
         {
-            // Set the view vars that have to be serialized.
+            // Asigna las variables a la vista
             $this->set('articles', $this->paginate());
-            // Specify which view vars JsonView should serialize.
+            // Especifica las variables de vista que JsonView deberá serializar
             $this->viewBuilder()->setOption('serialize', 'articles');
         }
     }
@@ -79,19 +75,20 @@ combinar::
 
     namespace App\Controller;
 
+    use Cake\View\JsonView;
+
     class ArticlesController extends AppController
     {
-        public function initialize(): void
+        public function viewClasses(): array
         {
-            parent::initialize();
-            $this->loadComponent('RequestHandler');
+            return [JsonView::class];
         }
 
         public function index()
         {
-            // Some code that created $articles and $comments
+            // Código que crear las variables $articles y $comments
 
-            // Set the view vars that have to be serialized.
+            // Asigna las variables a la vista
             $this->set(compact('articles', 'comments'));
 
             // Specify which view vars JsonView should serialize.
@@ -108,9 +105,9 @@ Sin un solo elemento de nivel superior, el Xml no podrá generarse.
 Uso de una vista de datos con archivos de plantilla
 ===================================================
 
-Debe usar archivos de plantilla si necesita realizar alguna manipulación del
+Debe usar archivos de plantilla si necesita manipular el
 contenido de la vista antes de crear el resultado final. Por ejemplo, si tuviéramos
-artículos que tuvieran un campo que contuviera HTML generado, probablemente
+artículos con un campo que contuviera HTML generado, probablemente
 querríamos omitirlo de una respuesta JSON. Esta es una situación en la que un archivo
 de vista sería útil::
 
@@ -125,7 +122,7 @@ de vista sería útil::
     }
 
     // View code - templates/Articles/json/index.php
-    foreach ($articles as &$article) {
+    foreach ($articles as $article) {
         unset($article->generated_html);
     }
     echo json_encode(compact('articles'));
@@ -162,7 +159,7 @@ mediante el prefijo ``@``::
                 'loc' => Router::url(['controller' => 'Pages', 'action' => 'view', $page->slug, '_full' => true]),
                 'lastmod' => $page->modified->format('Y-m-d'),
                 'changefreq' => 'daily',
-                'priority' => '0.5'
+                'priority' => '0.5',
             ];
         }
 
@@ -173,7 +170,7 @@ mediante el prefijo ``@``::
         $this->set([
             // Define an attribute on the root node.
             '@xmlns' => 'http://www.sitemaps.org/schemas/sitemap/0.9',
-            'url' => $urls
+            'url' => $urls,
         ]);
     }
 
@@ -199,21 +196,20 @@ CakePHP en una forma coherente de JSON::
 Respuestas JSONP
 ----------------
 
-Al utilizar ``JsonView``, puede utilizar la variable de vista especial ``_jsonp``
+Al utilizar ``JsonView``, puede utilizar la variable de vista especial ``jsonp``
 para habilitar la devolución de una respuesta JSONP. Si se establece en ``true`` la
 clase de vista comprueba si se establece el parámetro de string de consulta denominado
 "callback" y, de ser así, envuelve la respuesta json en el nombre de función
 proporcionado. Si desea utilizar un nombre de parámetro de string de consulta
-personalizado en lugar de "callback", establezca ``_jsonp`` al nombre requerido en
+personalizado en lugar de "callback", establezca ``jsonp`` al nombre requerido en
 lugar de ``true.``.
 
-Ejemplo de uso
-==============
+Eligiendo una clase View
+========================
 
-Si bien el :doc:`RequestHandlerComponent
-</controllers/components/request-handling>` puede establecer automáticamente la
-vista en función del tipo de contenido o la extensión de la solicitud, también puede
-controlar las asignaciones de vistas en el controlador::
+Aunque puedes usar la función ``viewClasses`` la mayoría de las veces, si quieres
+un control total sobre la selección de la clase de vista, puedes elegir directamente
+la clase::
 
     // src/Controller/VideosController.php
     namespace App\Controller;
@@ -252,3 +248,7 @@ controlar las asignaciones de vistas en el controlador::
             return $this->response->withDownload('report-' . date('YmdHis') . '.' . $format);
         }
     }
+
+.. meta::
+    :title lang=es: Vistas JSON y XML
+    :keywords lang=es: json,xml,presentation layer,view,ajax,logic,syntax,templates,cakephp

@@ -1,5 +1,5 @@
-Request Handling
-################
+CMS Tutorial - Authentication
+=============================
 
 .. note::
     La documentación no es compatible actualmente con el idioma español en esta página.
@@ -9,7 +9,3 @@ Request Handling
 
     Usted puede hacer referencia a la versión en Inglés en el menú de selección superior
     para obtener información sobre el tema de esta página.
-
-.. meta::
-    :title lang=es: Request Handling
-    :keywords lang=es: handler component,javascript libraries,public components,null returns,model data,request data,content types,file extensions,ajax,meth,content type,array,conjunction,cakephp,insight,php

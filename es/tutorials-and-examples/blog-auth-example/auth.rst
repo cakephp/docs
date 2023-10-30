@@ -1,12 +1,15 @@
 Tutorial Blog - Autenticación y Autorización
 ############################################
 
-Siguiendo con nuestro ejemplo de aplicacion :doc:`/tutorials-and-examples/blog/blog`, imaginá que necesitamos proteger ciertas URLs, dependiendo del usuario logeado. También tenemos otro requisito, permitir que nuestro blog tenga varios autores, cada uno habilitado para crear sus posts, editar y borrarlos a voluntad, evitando que otros autores puedan cambiarlos.
+Siguiendo con nuestro ejemplo de aplicación :doc:`/tutorials-and-examples/blog/blog`, imaginá que
+necesitamos no permitir que usuarios no autenticados puedan crear artículos.
 
-Creando el codigo para usuarios
-===============================
+Creando la tabla users y el Controlador
+=======================================
 
-Primero, vamos a crear una tabla en nuestra base de datos para guardar los datos de usuarios::
+Primero, vamos a crear una tabla en nuestra base de datos para guardar los datos de usuarios:
+
+.. code-block:: mysql
 
     CREATE TABLE users (
         id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -17,9 +20,26 @@ Primero, vamos a crear una tabla en nuestra base de datos para guardar los datos
         modified DATETIME DEFAULT NULL
     );
 
-Siguimos las convenciones de CakePHP para nombrar tablas pero también estamos aprovechando otra convencion: al usar los campos email y password en nuestra tabla CakePHP configurará automáticamente la mayoria de las cosas al momento de implementar el login.
+Si estás usando PostgreSQL, conecta a la base de datos cake_blog y ejecuta el siguiente SQL en su lugar:
 
-El siguiente paso es crear Users table, responsable de buscar, guardar y validar los datos de usuario::
+.. code-block:: SQL
+
+    CREATE TABLE users (
+        id SERIAL PRIMARY KEY,
+        email VARCHAR(255),
+        password VARCHAR(255),
+        role VARCHAR(20),
+        created TIMESTAMP DEFAULT NULL,
+        modified TIMESTAMP DEFAULT NULL
+    );
+
+Seguimos las convenciones de CakePHP para nombrar tablas, pero también
+estamos aprovechando otra convención: al usar los campos email y password
+en nuestra tabla users, CakePHP configurará automáticamente la mayoría de las cosas
+al momento de implementar el login.
+
+El siguiente paso es crear nuestra clase ``UsersTable``, responsable de buscar, guardar
+y validar los datos de usuario::
 
     // src/Model/Table/UsersTable.php
     namespace App\Model\Table;
@@ -29,11 +49,10 @@ El siguiente paso es crear Users table, responsable de buscar, guardar y validar
 
     class UsersTable extends Table
     {
-
-        public function validationDefault(Validator $validator)
+        public function validationDefault(Validator $validator): Validator
         {
             return $validator
-                ->notEmpty('email', 'A email is required')
+                ->notEmpty('email', 'An email is required')
                 ->email('email')
                 ->notEmpty('password', 'A password is required')
                 ->notEmpty('role', 'A role is required')
@@ -45,44 +64,33 @@ El siguiente paso es crear Users table, responsable de buscar, guardar y validar
 
     }
 
-También vamos a crear UsersController; el siguiente contenido fue generado usando baked UsersController con el generador de código incluído con CakePHP::
+También vamos a crear nuestro ``UsersController``. El siguiente contenido se corresponde
+con una clase ``UsersController`` básica "baked" usando las utilidades de generación
+de código que están incluidas en CakePHP::
 
     // src/Controller/UsersController.php
 
     namespace App\Controller;
 
     use App\Controller\AppController;
-    use Cake\Event\Event;
-    // Prior to 3.6 use Cake\Network\Exception\NotFoundException
-    use Cake\Http\Exception\NotFoundException;
+    use Cake\Event\EventInterface;
 
     class UsersController extends AppController
     {
-
-        public function beforeFilter(Event $event)
+        public function index()
         {
-            parent::beforeFilter($event);
-            $this->Auth->allow('add');
-        }
-
-         public function index()
-         {
-            $this->set('users', $this->Users->find('all'));
+            $this->set('users', $this->Users->find()->all());
         }
 
         public function view($id)
         {
-            if (!$id) {
-                throw new NotFoundException(__('Invalid user'));
-            }
-
             $user = $this->Users->get($id);
             $this->set(compact('user'));
         }
 
         public function add()
         {
-            $user = $this->Users->newEntity();
+            $user = $this->Users->newEmptyEntity();
             if ($this->request->is('post')) {
                 $user = $this->Users->patchEntity($user, $this->request->getData());
                 if ($this->Users->save($user)) {
@@ -93,10 +101,11 @@ También vamos a crear UsersController; el siguiente contenido fue generado usan
             }
             $this->set('user', $user);
         }
-
     }
 
-De la misma forma que creamos las vistas para los posts del blog o usando la herramienta de generación de código, creamos las vistas. Para los objetivos de este tutorial, mostraremos solamente add.php:
+Creamos las vistas para nuestros artículos de la misma forma que el controlador, usando
+las herramientas de generación de código 'bake', lo que nos permite implementar las vistas
+de los usuarios. Para el propósito de este tutorial, mostraremos solamente **add.php**:
 
 .. code-block:: php
 
@@ -106,9 +115,9 @@ De la misma forma que creamos las vistas para los posts del blog o usando la her
     <?= $this->Form->create($user) ?>
         <fieldset>
             <legend><?= __('Add User') ?></legend>
-            <?= $this->Form->input('email') ?>
-            <?= $this->Form->input('password') ?>
-            <?= $this->Form->input('role', [
+            <?= $this->Form->control('email') ?>
+            <?= $this->Form->control('password') ?>
+            <?= $this->Form->control('role', [
                 'options' => ['admin' => 'Admin', 'author' => 'Author']
             ]) ?>
        </fieldset>
@@ -116,84 +125,27 @@ De la misma forma que creamos las vistas para los posts del blog o usando la her
     <?= $this->Form->end() ?>
     </div>
 
-Autenticación (login y logout)
-==============================
+Añadiendo Autenticación
+=======================
 
-Ya estamos listos para agregar nuestra autenticación. En CakePHP esto es manejado por :php:class:`Cake\\Controller\\Component\\AuthComponent`, responsable de requerir login para ciertas acciones, de manejar el sign-in y el sign-out y también de autorizar usuarios logeados a ciertas acciones que estan autorizados a utilizar.
+Ya estamos listos para agregar nuestra autenticación. En CakePHP esto es manejado
+por el plugin ``authentication``. Empezaremos instalándolo. Usa composer para
+instalar el plugin:
 
-Para agregar este componente a tú aplicación abre el archivo **src/Controller/AppController.php** y agrega las siguientes lineas::
+.. code-block:: console
 
-    // src/Controller/AppController.php
+    composer require "cakephp/authentication:^2.0"
 
-    namespace App\Controller;
+Luego añade la siguiente línea en la función ``bootstrap()`` del archivo ``Application.php``::
 
-    use Cake\Controller\Controller;
-    use Cake\Event\Event;
+    // in src/Application.php in the bootstrap() method.
+    $this->addPlugin('Authentication');
 
-    class AppController extends Controller
-    {
-        //...
+Añadiendo hashing de contraseña
+===============================
 
-        public function initialize()
-        {
-            $this->loadComponent('Flash');
-            $this->loadComponent('Auth', [
-                'loginRedirect' => [
-                    'controller' => 'Articles',
-                    'action' => 'index'
-                ],
-                'logoutRedirect' => [
-                    'controller' => 'Pages',
-                    'action' => 'display',
-                    'home'
-                ]
-            ]);
-        }
-
-        public function beforeFilter(Event $event)
-        {
-            $this->Auth->allow(['index', 'view', 'display']);
-        }
-        //...
-    }
-
-No hay mucho que configurar, al haber utilizado convenciones para la tabla de usuarios. Simplemente asignamos las URLs que serán cargadas despues del login y del logout, en nuestro caso ``/articles/`` y ``/`` respectivamente.
-
-Lo que hicimos en ``beforeFilter()`` fue decirle al AuthComponent que no requiera login para las acciones index y view en cada controlador.
-Queremos que nuestros visitantes puedan leer y listar las entradas sin registrarse.
-
-Ahora necesitamos poder registrar nuevos usuarios, guardar el nombre de usuario y contraseña, y hashear su contraseña para que no sea guardada como texto plano. Vamos a decirle al AuthComponent que deje usuarios sin autenticar acceder a la funcion add del controlador users e implementemos las acciones de login y logout::
-
-    // src/Controller/UsersController.php
-
-    public function beforeFilter(Event $event)
-    {
-        parent::beforeFilter($event);
-        // Allow users to register and logout.
-        // You should not add the "login" action to allow list. Doing so would
-        // cause problems with normal functioning of AuthComponent.
-        $this->Auth->allow(['add', 'logout']);
-    }
-
-    public function login()
-    {
-        if ($this->request->is('post')) {
-            $user = $this->Auth->identify();
-            if ($user) {
-                $this->Auth->setUser($user);
-                return $this->redirect($this->Auth->redirectUrl());
-            }
-            $this->Flash->error(__('Invalid email or password, try again'));
-        }
-    }
-
-    public function logout()
-    {
-        return $this->redirect($this->Auth->logout());
-    }
-
-El hasheo del password aún no está hecho, necesitamos una clase Entity para nuestra clase User para así manejar esta lógica específica.
-Crea el archivo **src/Model/Entity/User.php** y agrega las siguientes lineas::
+Lo siguiente, creamos la entidad ``User`` y añadimos el hashing del password. Crear el
+archivo de la entidad **src/Model/Entity/User.php** y añade lo siguiente::
 
     // src/Model/Entity/User.php
     namespace App\Model\Entity;
@@ -203,9 +155,11 @@ Crea el archivo **src/Model/Entity/User.php** y agrega las siguientes lineas::
 
     class User extends Entity
     {
-
-        // Make all fields mass assignable for now.
-        protected array $_accessible = ['*' => true];
+        // Make all fields mass assignable except for primary key field "id".
+        protected array $_accessible = [
+            '*' => true,
+            'id' => false
+        ];
 
         // ...
 
@@ -219,141 +173,210 @@ Crea el archivo **src/Model/Entity/User.php** y agrega las siguientes lineas::
         // ...
     }
 
-Ahora cada vez que la propiedad password sea asignada a un usuario, será hasheada usando la clase ``DefaultPasswordHasher``.
-Solamente nos falta un archivo para la vista de la acción login. Abre tu archivo **templates/Users/login.php** y agrega las siguientes
-lineas:
+Ahora, siempre que la propiedad ``password`` es asignada a la entidad User, se
+le aplicara el Hash usando la clase ``DefaultPasswordHasher``.
 
-.. code-block:: php
+Configurando Autenticación
+==========================
 
-    <!-- File: templates/Users/login.php -->
+Ahora es el momento de configurar el plugin Authentication.
+El plugin gestionará el proceso de autenticación usando 3 clases diferentes:
 
-    <div class="users form">
-    <?= $this->Flash->render('auth') ?>
-    <?= $this->Form->create() ?>
-        <fieldset>
-            <legend><?= __('Please enter your email and password') ?></legend>
-            <?= $this->Form->input('email') ?>
-            <?= $this->Form->input('password') ?>
-        </fieldset>
-    <?= $this->Form->button(__('Login')); ?>
-    <?= $this->Form->end() ?>
-    </div>
+* ``Application`` usara el Authentication Middleware y proporciona un
+  AuthenticationService, teniendo todas las configuraciones que queramos para definir
+  como se van a comprobar las credenciales y donde encontrarlas.
+* ``AuthenticationService`` es una clase de utilidad que te permite configurar el
+  proceso de autenticación.
+* ``AuthenticationMiddleware`` será ejecutado como parte de la cola de middleware,
+  esto será antes de que tu controlador sea procesado por el framework, recogerá
+  las credenciales y las procesará para comprobar si el usuario está autenticado.
 
-Ya podés registrar un nuevo usuario accediendo a ``/users/add`` e iniciar sesión con las nuevas credenciales ingresando a ``/users/login``. También al intentar acceder a alguna otra URL que no fue explicitamente autorizada, por ejemplo ``/articles/add``, la aplicación te redireccionará automaticamente al la pagina de login.
+La lógica de autenticación es dividida en clases específicas y el proceso
+se realiza antes de la capa del controlador. Primero, se comprueba si el
+usuario está autenticado (basado en la configuración proporcionada) e inyecta
+el usuario y el resultado de la autenticación en la petición para futura referencia.
 
-Y eso es todo! Se ve demasiado simple para ser verdad. Volvamos un poco para explicar que pasa. La función ``beforeFilter()`` le dice al AuthComponent que no requiera login para la acción ``add()`` asi como para ``index()`` y ``view()``, autorizadas en el ``beforeFilter()`` del AppController.
+En **src/Application.php**, añade los siguientes imports::
 
-La función ``login()`` llama a ``$this->Auth->identify()`` del AuthComponent, y funciona sin ninguna otra configuración ya que seguimos la convención. Es decir, tener un modelo llamado User con los campos email y password, y usar un formulario que hace post a un controlador con los datos del usuario. Esta función devuelve si el login fue exitoso o no, y en caso de que tenga exito redirige a la URL puesta en AppController, dentro de la configuracion del AuthComponent.
+    // In src/Application.php add the following imports
+    use Authentication\AuthenticationService;
+    use Authentication\AuthenticationServiceInterface;
+    use Authentication\AuthenticationServiceProviderInterface;
+    use Authentication\Middleware\AuthenticationMiddleware;
+    use Psr\Http\Message\ServerRequestInterface;
 
-El logout funciona simplemente al acceder a ``/users/logout`` y redirecciona al usuario a la URL configurada.
+Luego implementa el interfaz de autenticación en tu clase Application::
 
-Autorización (quién está autorizado a acceder qué)
-==================================================
-
-Como mencionamos antes, estamos convirtiendo este blog en una herramienta de autoría multiusuario, y para hacer esto necesitamos modificar la tabla de posts para agregar referencia al modelo User::
-
-    ALTER TABLE articles ADD COLUMN user_id INT(11);
-
-También, un pequeño cambio en ArticlesController es necesario para guardar el usuario logeado como referencia en los artículos creados::
-
-    // src/Controller/ArticlesController.php
-
-    public function add()
+    // in src/Application.php
+    class Application extends BaseApplication
+        implements AuthenticationServiceProviderInterface
     {
-        $article = $this->Articles->newEmptyEntity();
-        if ($this->request->is('post')) {
-            $article = $this->Articles->patchEntity($article, $this->request->getData());
-            // Added this line
-            $article->user_id = $this->Auth->user('id');
-            // You could also do the following
-            //$newData = ['user_id' => $this->Auth->user('id')];
-            //$article = $this->Articles->patchEntity($article, $newData);
-            if ($this->Articles->save($article)) {
-                $this->Flash->success(__('Your article has been saved.'));
-                return $this->redirect(['action' => 'index']);
-            }
-            $this->Flash->error(__('Unable to add your article.'));
-        }
-        $this->set('article', $article);
+
+Después añade lo siguiente::
+
+    // src/Application.php
+    public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue
+    {
+        $middlewareQueue
+            // ... other middleware added before
+            ->add(new RoutingMiddleware($this))
+            // add Authentication after RoutingMiddleware
+            ->add(new AuthenticationMiddleware($this));
+
+        return $middlewareQueue;
     }
 
-La función ``user()`` del AuthComponent devuelve datos del usuario actualmente logeado. Usamos este método para agregar datos a la información que será guardada.
+    public function getAuthenticationService(ServerRequestInterface $request): AuthenticationServiceInterface
+    {
+        $authenticationService = new AuthenticationService([
+            'unauthenticatedRedirect' => '/users/login',
+            'queryParam' => 'redirect',
+        ]);
 
-Vamos a prevenir que autores puedan editar o eliminar los artículos de otros autores. La regla básica para nuestra aplicación es que los usuarios admin pueden acceder todas las URL, mientras que los usuarios normales (autores) solamente pueden acceder las acciones permitidas. Abre nuevamente AppController y agregá las siguientes opciones en la configuración del Auth::
+        // Carga los identificadores, asegurando que se comprueban los campos email y password
+        $authenticationService->loadIdentifier('Authentication.Password', [
+            'fields' => [
+                'username' => 'email',
+                'password' => 'password',
+            ],
+        ]);
+
+        // Carga los authenticators, quieres que la sesión comprueba primero
+        $authenticationService->loadAuthenticator('Authentication.Session');
+        // Configure form data check to pick email and password
+        $authenticationService->loadAuthenticator('Authentication.Form', [
+            'fields' => [
+                'username' => 'email',
+                'password' => 'password',
+            ],
+            'loginUrl' => '/users/login',
+        ]);
+
+        return $authenticationService;
+    }
+
+En tu clase ``AppController`` añade el siguiente código::
 
     // src/Controller/AppController.php
-
-    public function initialize()
+    public function initialize(): void
     {
+        parent::initialize();
         $this->loadComponent('Flash');
-        $this->loadComponent('Auth', [
-            'authorize' => ['Controller'], // Added this line
-            'loginRedirect' => [
+
+        // Añade ésta línea para comprobar la autenticación y asegurar tu aplicación
+        $this->loadComponent('Authentication.Authentication');
+
+Ahora, en cada petición, el ``AuthenticationMiddleware`` inspeccionará la sesión
+para comprobar si existe un usuario autenticado. Si estamos cargando la página
+``/users/login``, también inspeccionará los datos del formulario enviado en "post"
+(si hay alguno) para extraer las credenciales. Por defecto las credenciales se
+extraerán de los campos ``email`` y ``password`` de la información del request.
+El resultado de la autenticación será inyectado in un atributo de la petición
+llamado ``authentication``. Puedes inspeccionar el resultado en cualquier momento
+usando ``$this->request->getAttribute('authentication')`` desde la acción de un
+controlador.
+Todas tus páginas serán restringidas ya que ``AuthenticationComponent`` está
+comprobando el resultado en cada petición. Cuando falla al buscar un usuario
+autenticado, redirigirá al usuario a la página ``/users/login``.
+Te en cuenta que en éste punto del tutorial, la aplicación no funcionará ya que
+aún no tenemos la página de login. Si visitas tu aplicación, obtendrás un bucle
+infinito de redirección, asi que, vamos a arreglarlo!
+
+En tu ``UsersController``, añade el siguiente código::
+
+    public function beforeFilter(\Cake\Event\EventInterface $event)
+    {
+        parent::beforeFilter($event);
+        // Configura la acción de login para no requerir autenticación, para
+        // prevenir el bucle infinito de redirección
+        $this->Authentication->addUnauthenticatedActions(['login']);
+    }
+
+    public function login()
+    {
+        $this->request->allowMethod(['get', 'post']);
+        $result = $this->Authentication->getResult();
+        // sin importar si es POST o GET, redirige si el usuario esta autenticado
+        if ($result->isValid()) {
+            // redirige a /articles después de iniciar sesión correctamente
+            $redirect = $this->request->getQuery('redirect', [
                 'controller' => 'Articles',
-                'action' => 'index'
-            ],
-            'logoutRedirect' => [
-                'controller' => 'Pages',
-                'action' => 'display',
-                'home'
-            ]
-        ]);
-    }
+                'action' => 'index',
+            ]);
 
-    public function isAuthorized($user)
-    {
-        // Admin can access every action
-        if (isset($user['role']) && $user['role'] === 'admin') {
-            return true;
+            return $this->redirect($redirect);
         }
-
-        // Default deny
-        return false;
-    }
-
-Hemos creado un mecanismo de autorización muy simple. En este caso, los usuarios con el rol ``admin`` podrán acceder a cualquier URL del sitio cuando esten logeados, pero el resto de los usuarios no podrán hacer más que los usuarios no logeados.
-
-Esto no es exactamente lo que queriamos, por lo que tendremos que agregar mas reglas a nuestro método ``isAuthorized()``. Pero en lugar de hacerlo en AppController, vamos a delegar a cada controlador. Las reglas que vamos a agregar a ArticlesController deberian permitirle a los autores crear artículos, pero prevenir que editen artículos que no le pertenezcan. Abre el archivo ArticlesController.php y agregá las siguientes lineas::
-
-    // src/Controller/ArticlesController.php
-
-    public function isAuthorized($user)
-    {
-        // All registered users can add articles
-        if ($this->request->getParam('action') === 'add') {
-            return true;
+        // muestra los errors si el usuario envió el formulario y fallo la autenticación
+        if ($this->request->is('post') && !$result->isValid()) {
+            $this->Flash->error(__('Invalid email or password'));
         }
-
-        // The owner of an article can edit and delete it
-        if (in_array($this->request->getParam('action'), ['edit', 'delete'])) {
-            $articleId = (int)$this->request->getParam('pass.0');
-            if ($this->Articles->isOwnedBy($articleId, $user['id'])) {
-                return true;
-            }
-        }
-
-        return parent::isAuthorized($user);
     }
 
-Estamos sobreescribiendo el método ``isAuthorized()`` de AppController y comprobando si la clase padre autoriza al usuario. Si no lo hace entonces solamente autorizarlo a acceder a la acción add y condicionalmente acceder a edit y delete. Una última cosa por implementar, decidir si el usuario está autorizador a editar el post o no, estamos llamando la función ``isOwnedBy()`` del modelo Articles. Es en general una buena practica mover la mayor parte de la logica posible hacia los modelos::
+Añade la lógica de la vista para la acción de login::
 
-    // src/Model/Table/ArticlesTable.php
+    <!-- in /templates/Users/login.php -->
+    <div class="users form">
+        <?= $this->Flash->render() ?>
+        <h3>Login</h3>
+        <?= $this->Form->create() ?>
+        <fieldset>
+            <legend><?= __('Please enter your email and password') ?></legend>
+            <?= $this->Form->control('email', ['required' => true]) ?>
+            <?= $this->Form->control('password', ['required' => true]) ?>
+        </fieldset>
+        <?= $this->Form->submit(__('Login')); ?>
+        <?= $this->Form->end() ?>
 
-    public function isOwnedBy($articleId, $userId)
+        <?= $this->Html->link("Add User", ['action' => 'add']) ?>
+    </div>
+
+Ahora la página de login nos permitirá iniciar sesión en la aplicación.
+Compruébalo haciendo una petición a cualquier página de tu aplicación.
+Después de haber sido redirigido a la página ``/users/login``, introduce
+el email y password que usaste previamente para crear el usuario.
+Deberías ser redirigido correctamente después de iniciar sesión.
+
+Necesitamos añadir un par de detalles más para configurar nuestra aplicación.
+Queremos que todas las páginas ``view`` e ``index`` sean accesible sin necesitar
+iniciar sesión, así que añadiremos ésta configuración específica en ``AppController``::
+
+    // en src/Controller/AppController.php
+    public function beforeFilter(\Cake\Event\EventInterface $event)
     {
-        return $this->exists(['id' => $articleId, 'user_id' => $userId]);
+        parent::beforeFilter($event);
+        // para todos los controladores de nuestra aplicación, hacer el index y view
+        // acciones públicas, saltándonos la autenticación
+        $this->Authentication->addUnauthenticatedActions(['index', 'view']);
     }
 
-Esto concluye nuestro simple tutorial de autenticación y autorización. Para proteger el UsersController se puede seguir la misma técnica utilizada para ArticlesController. También es posible implementar una solución mas general en AppController, de acuerdo a tus reglas.
+Terminar sesión
+===============
 
-En caso de necesitar más control, sugerimos leer la guia completa sobre Auth en
-:doc:`/controllers/components/authentication`, donde encontrarás mas información para configurar el componente y crear clases de autorizacion a tú medida.
+Añade la acción ``logout`` a la clase ``UsersController``::
+
+    // en src/Controller/UsersController.php
+    public function logout()
+    {
+        $result = $this->Authentication->getResult();
+        // sin importar si es POST o GET, redirige si el usuario esta autenticado
+        if ($result->isValid()) {
+            $this->Authentication->logout();
+            return $this->redirect(['controller' => 'Users', 'action' => 'login']);
+        }
+    }
+
+Ahora puedes visitar ``/users/logout`` para terminar la sesión. Luego serás
+redirigido a la página de login. Si has llegado tan lejos, felicidades, ahora
+tienes un blog simple que:
+
+* Permite usuarios autenticados crear y editar artículos.
+* Permite usuarios no autenticados ver artículos y etiquetas.
 
 Lectura sugerida
 ----------------
 
 #. :doc:`/bake/usage` Generar código CRUD básico
-#. :doc:`/controllers/components/authentication`: Registro y login de usuarios
+#. `Authentication Plugin </authentication/>`__ documentación.
 
 .. meta::
     :title lang=es: Tutorial Blog - Autenticación y Autorización
