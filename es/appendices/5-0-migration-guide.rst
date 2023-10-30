@@ -77,7 +77,7 @@ Connection
   el controlador habilite el registro de consultas ``$connection->getDriver()->setLogger()``.
 
 Controlador
-----------
+-----------
 
 - La firma del método para ``Controller::__construct()`` ha cambiado.
   Por lo tanto, tienes que ajustar el código en consecuencia si estás sobreescribiendo el constructor.
