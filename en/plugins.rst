@@ -309,7 +309,6 @@ like::
 
     class ContactManagerPlugin extends BasePlugin
     {
-
         /**
          * @inheritDoc
          */

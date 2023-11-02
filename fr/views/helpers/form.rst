@@ -2512,7 +2512,6 @@ vouliez construire un widget Autocomplete, vous pourriez le faire comme ceci::
 
     class AutocompleteWidget implements WidgetInterface
     {
-
         /**
          * StringTemplate instance.
          *

@@ -2478,7 +2478,6 @@ could do the following::
 
     class AutocompleteWidget implements WidgetInterface
     {
-
         /**
          * StringTemplate instance.
          *
