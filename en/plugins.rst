@@ -295,7 +295,7 @@ Plugin Objects
 
 Plugin Objects allow a plugin author to define set-up logic, define default
 hooks, load routes, middleware and console commands. Plugin objects live in
-**src/<PluginName>Plugin.php**. For our ContactManager plugin, our plugin class could look
+**src/{PluginName}Plugin.php**. For our ContactManager plugin, our plugin class could look
 like::
 
     namespace ContactManager;
