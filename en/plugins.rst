@@ -94,7 +94,7 @@ Loading a Plugin
 ================
 
 If you want to use a plugin's routes, console commands, middlewares, event
-listeners, templates or webroot assets you will need to load the plugin. 
+listeners, templates or webroot assets you will need to load the plugin.
 Plugins are loaded in your application's ``bootstrap()`` function::
 
     // In src/Application.php
@@ -291,7 +291,7 @@ Plugin Objects
 
 Plugin Objects allow a plugin author to define set-up logic, define default
 hooks, load routes, middleware and console commands. Plugin objects live in
-**src/Plugin.php**. For our ContactManager plugin, our plugin class could look
+**src/{PluginName}Plugin.php**. For our ContactManager plugin, our plugin class could look
 like::
 
     namespace ContactManager;
