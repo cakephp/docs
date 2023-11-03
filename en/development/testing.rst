@@ -324,12 +324,12 @@ file:
 
     <testsuites>
         <testsuite name="app">
-            <directory>./tests/TestCase/</directory>
+            <directory>tests/TestCase/</directory>
         </testsuite>
 
         <!-- Add your plugin suites -->
         <testsuite name="forum">
-            <directory>./plugins/Forum/tests/TestCase/</directory>
+            <directory>plugins/Forum/tests/TestCase/</directory>
         </testsuite>
     </testsuites>
 
