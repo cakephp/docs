@@ -374,6 +374,22 @@ view logic::
 It is important to remember that match-all views are applied only *after*
 content-type negotiation is attempted.
 
+Using AjaxView
+==============
+
+In applications that use hypermedia or AJAX clients, you often need to render
+view contents without the wrapping layout. You can use the ``AjaxView`` that
+is bundled with the application skeleton::
+
+    // In a controller action, or in beforeRender.
+    if ($this->request->is('ajax')) {
+        $this->viewBuilder()->setClassName('Ajax');
+    }
+
+``AjaxView`` will respond as ``text/html`` and use the ``ajax`` layout.
+Generally this layout is minimal or contains client specific markup. This
+replaces usage of ``RequestHandlerComponent`` automatically using the
+``AjaxView`` in 4.x.
 
 Redirecting to Other Pages
 ==========================
