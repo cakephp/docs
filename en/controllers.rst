@@ -286,7 +286,7 @@ Content Type Negotiation
 
 Controllers can define a list of view classes they support. After the
 controller's action is complete CakePHP will use the view list to perform
-content-type negotiation with either :ref:`file-extensions` or ``Content-Type``
+content-type negotiation with either :ref:`file-extensions` or ``Accept``
 headers. This enables your application to re-use the same controller action to
 render an HTML view or render a JSON or XML response. To define the list of
 supported view classes for a controller is done with the ``addViewClasses()``
