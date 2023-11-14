@@ -96,6 +96,18 @@ be removed in 5.0.
 - Use :ref:`controller-viewclasses` instead of defining view class mappings in
   ``RequestHandlerComponent``.
 
+The automatic view switching for 'ajax' requests offered by
+``RequestHandlerComponent`` is deprecated. Instead you can either
+handle this in a controller action or ``Controller.beforeRender`` callback
+with::
+
+    // In a controller action, or in beforeRender.
+    if ($this->request->is('ajax')) {
+        $this->viewBuilder()->setClassName('Ajax');
+    }
+
+Alternatively, you can have the HTML view class switch to the ``ajax`` layout as
+required in your controller actions or view templates.
 
 PaginatorComponent
 ------------------

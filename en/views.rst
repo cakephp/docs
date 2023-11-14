@@ -117,9 +117,9 @@ Another example, using if/elseif/else. Notice the colons:
      <h3>Hi unknown user</h3>
   <?php endif; ?>
 
-If you'd prefer using a templating language like
-`Twig <https://twig.symfony.com>`_, a subclass of View will bridge your
-templating language and CakePHP.
+If you'd prefer to use a templating language like
+`Twig <https://twig.symfony.com>`_, checkout the `CakePHP Twig Plugin
+<https://github.com/cakephp/twig-view>`__ 
 
 Template files are stored in **templates/**, in a folder named after the
 controller that uses the files, and named after the action it corresponds to.
