@@ -97,7 +97,7 @@ be removed in 5.0.
   ``RequestHandlerComponent``.
 
 The automatic view switching for 'ajax' requests offered by
-``RequestHandlerComponent`` is no longer available. Instead you can either
+``RequestHandlerComponent`` is deprecated. Instead you can either
 handle this in a controller action or ``Controller.beforeRender`` callback
 with::
 
