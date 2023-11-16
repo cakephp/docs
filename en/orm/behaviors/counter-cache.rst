@@ -64,9 +64,9 @@ counter value::
     $this->addBehavior('CounterCache', [
         'Articles' => [
             'comment_count' => [
-                'finder' => 'published'
-            ]
-        ]
+                'finder' => 'published',
+            ],
+        ],
     ]);
 
 If you don't have a custom finder method you can provide an array of conditions
@@ -75,9 +75,9 @@ to find records instead::
     $this->addBehavior('CounterCache', [
         'Articles' => [
             'comment_count' => [
-                'conditions' => ['Comments.spam' => false]
-            ]
-        ]
+                'conditions' => ['Comments.spam' => false],
+            ],
+        ],
     ]);
 
 If you want CounterCache to update multiple fields, for example both showing a
@@ -86,9 +86,9 @@ conditional count and a basic count you can add these fields in the array::
     $this->addBehavior('CounterCache', [
         'Articles' => ['comment_count',
             'published_comment_count' => [
-                'finder' => 'published'
-            ]
-        ]
+                'finder' => 'published',
+            ],
+        ],
     ]);
 
 If you want to calculate the CounterCache field value on your own, you can set
@@ -99,9 +99,9 @@ before::
     $this->addBehavior('CounterCache', [
         'Articles' => [
             'comment_count' => [
-                'ignoreDirty' => true
-            ]
-        ]
+                'ignoreDirty' => true,
+            ],
+        ],
     ]);
 
 Lastly, if a custom finder and conditions are not suitable you can provide
@@ -112,7 +112,7 @@ a callback function. Your function must return the count value to be stored::
             'rating_avg' => function ($event, $entity, $table, $original) {
                 return 4.5;
             }
-        ]
+        ],
     ]);
 
 Your function can return ``false`` to skip updating the counter column, or

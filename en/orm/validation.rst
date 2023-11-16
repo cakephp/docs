@@ -134,20 +134,20 @@ of the associations to be converted::
         'body' => 'The text',
         'user_id' => 1,
         'user' => [
-            'username' => 'mark'
+            'username' => 'mark',
         ],
         'comments' => [
             ['body' => 'First comment'],
             ['body' => 'Second comment'],
-        ]
+        ],
     ];
 
     $article = $articles->patchEntity($article, $data, [
         'validate' => 'update',
         'associated' => [
             'Users' => ['validate' => 'signup'],
-            'Comments' => ['validate' => 'custom']
-        ]
+            'Comments' => ['validate' => 'custom'],
+        ],
     ]);
 
 Combining Validators
@@ -519,7 +519,7 @@ by the ones returned from the rule::
         'ruleName',
         [
             'errorField' => 'length',
-            'message' => 'Generic error message used when `false` is returned'
+            'message' => 'Generic error message used when `false` is returned',
         ]
      );
 
@@ -540,7 +540,7 @@ You may want to re-use custom domain rules. You can do so by creating your own i
     {
         $rules->add(new IsUniqueWithNulls(['parent_id', 'instance_id', 'name']), 'uniqueNamePerParent', [
             'errorField' => 'name',
-            'message' => 'Name must be unique per parent.'
+            'message' => 'Name must be unique per parent.',
         ]);
         return $rules;
     }
@@ -679,7 +679,7 @@ for data transitions generated inside your application::
         };
         $rules->add($check, [
             'errorField' => 'shipping_mode',
-            'message' => 'No free shipping for orders under 100!'
+            'message' => 'No free shipping for orders under 100!',
         ]);
 
         return $rules;
@@ -702,7 +702,7 @@ come up when running a CLI script that directly sets properties on entities::
     {
         $validator->add('email', 'valid_email', [
             'rule' => 'email',
-            'message' => 'Invalid email'
+            'message' => 'Invalid email',
         ]);
 
         // ...

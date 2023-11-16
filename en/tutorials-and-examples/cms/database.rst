@@ -130,34 +130,28 @@ with those that apply to your setup. A sample completed configuration array
 might look something like the following::
 
     <?php
+    // config/app_local.php
     return [
         // More configuration above.
         'Datasources' => [
             'default' => [
-                'className' => 'Cake\Database\Connection',
-                // Replace Mysql with Postgres if you are using PostgreSQL
-                'driver' => 'Cake\Database\Driver\Mysql',
-                'persistent' => false,
                 'host' => 'localhost',
                 'username' => 'cakephp',
                 'password' => 'AngelF00dC4k3~',
                 'database' => 'cake_cms',
-                // Comment out the line below if you are using PostgreSQL
-                'encoding' => 'utf8mb4',
-                'timezone' => 'UTC',
-                'cacheMetadata' => true,
+                'url' => env('DATABASE_URL', null),
             ],
         ],
         // More configuration below.
     ];
 
-Once you've saved your **config/app.php** file, you should see that the 'CakePHP is
+Once you've saved your **config/app_local.php** file, you should see that the 'CakePHP is
 able to connect to the database' section has a green chef hat.
 
 .. note::
 
-    If you have **config/app_local.php** in your app folder, you need to
-    configure your database connection in that file instead.
+    The file **config/app_local.php** in your is a local override of the file **config/app_local.php**
+    used to configure your development environment quickly.
 
 Creating our First Model
 ========================
@@ -175,6 +169,8 @@ this::
 
     <?php
     // src/Model/Table/ArticlesTable.php
+    declare(strict_types=1);
+
     namespace App\Model\Table;
 
     use Cake\ORM\Table;
@@ -183,6 +179,7 @@ this::
     {
         public function initialize(array $config): void
         {
+            parent::initialize($config);
             $this->addBehavior('Timestamp');
         }
     }
@@ -208,6 +205,8 @@ look like this::
 
     <?php
     // src/Model/Entity/Article.php
+    declare(strict_types=1);
+
     namespace App\Model\Entity;
 
     use Cake\ORM\Entity;
@@ -215,9 +214,12 @@ look like this::
     class Article extends Entity
     {
         protected array $_accessible = [
-            '*' => true,
-            'id' => false,
-            'slug' => false,
+            'title' => true,
+            'body' => true,
+            'published' => true,
+            'created' => true,
+            'modified' => true,
+            'users' => true,
         ];
     }
 

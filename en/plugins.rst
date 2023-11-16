@@ -176,7 +176,7 @@ classes::
     $plugin->enable('routes');
     $this->addPlugin($plugin);
 
-Plugin objects also know their names and path information::
+Plugin classes also know their names and path information::
 
     $plugin = new ContactManagerPlugin();
 
@@ -290,12 +290,12 @@ autoloader once you've created your plugin:
 
 .. _plugin-objects:
 
-Plugin Objects
+Plugin Classes
 ==============
 
-Plugin Objects allow a plugin author to define set-up logic, define default
-hooks, load routes, middleware and console commands. Plugin objects live in
-**src/<PluginName>Plugin.php**. For our ContactManager plugin, our plugin class could look
+Plugin classes allow a plugin author to define set-up logic, define default
+hooks, load routes, middleware and console commands. Plugin classes live in
+**src/{PluginName}Plugin.php**. For our ContactManager plugin, our plugin class could look
 like::
 
     namespace ContactManager;
@@ -309,7 +309,6 @@ like::
 
     class ContactManagerPlugin extends BasePlugin
     {
-
         /**
          * @inheritDoc
          */

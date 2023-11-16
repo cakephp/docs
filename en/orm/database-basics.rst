@@ -128,7 +128,7 @@ like::
             'encoding' => 'utf8mb4',
             'timezone' => 'UTC',
             'cacheMetadata' => true,
-        ]
+        ],
     ],
 
 The above will create a 'default' connection, with the provided parameters. You
@@ -756,23 +756,6 @@ The above class does a few interesting things:
 
 Once we've built our custom type, we'll need to :ref:`connect our type
 to our table class <saving-complex-types>`.
-
-.. _immutable-datetime-mapping:
-
-Enabling Immutable DateTime Objects
------------------------------------
-
-Because Date/Time objects are easily mutated in place, CakePHP allows you to
-enable immutable value objects. This is best done in your application's
-**config/bootstrap.php** file::
-
-    TypeFactory::build('datetime')->useImmutable();
-    TypeFactory::build('date')->useImmutable();
-    TypeFactory::build('time')->useImmutable();
-    TypeFactory::build('timestamp')->useImmutable();
-
-.. note::
-    New applications will have immutable objects enabled by default.
 
 Connection Classes
 ==================

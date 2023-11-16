@@ -94,11 +94,11 @@ self-associated tables to create parent-child relationships::
         public function initialize(array $config): void
         {
             $this->hasMany('SubCategories', [
-                'className' => 'Categories'
+                'className' => 'Categories',
             ]);
 
             $this->belongsTo('ParentCategories', [
-                'className' => 'Categories'
+                'className' => 'Categories',
             ]);
         }
     }
@@ -113,10 +113,10 @@ table names indexed by association type as an argument::
         {
            $this->addAssociations([
                'belongsTo' => [
-                   'Users' => ['className' => 'App\Model\Table\UsersTable']
+                   'Users' => ['className' => 'App\Model\Table\UsersTable'],
                ],
                'hasMany' => ['Comments'],
-               'belongsToMany' => ['Tags']
+               'belongsToMany' => ['Tags'],
            ]);
         }
     }
@@ -394,7 +394,7 @@ Sometimes you may want to configure composite keys in your associations::
     $this->hasMany('Comments')
         ->setForeignKey([
             'article_id',
-            'article_hash'
+            'article_hash',
         ]);
 
 Relying on the example above, we have passed an array containing the desired
@@ -407,11 +407,11 @@ manually with ``setBindingKey()``::
     $this->hasMany('Comments')
         ->setForeignKey([
             'article_id',
-            'article_hash'
+            'article_hash',
         ])
         ->setBindingKey([
             'whatever_id',
-            'whatever_hash'
+            'whatever_hash',
         ]);
 
 Like hasOne associations, ``foreignKey`` is in the other (Comments)

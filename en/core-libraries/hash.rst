@@ -388,7 +388,7 @@ Attribute Matching Types
             0 => ['name' => 'main'],
             1 => ['name' => 'about'],
             2 => ['name' => 'contact'],
-            'a' => 'b'
+            'a' => 'b',
         ];
 
         $result = Hash::contains($a, $a);
@@ -538,7 +538,7 @@ Attribute Matching Types
             [
                 'id' => '48c2570e-dfa8-4c32-a35e-0d71cbdd56cb',
                 'name' => 'mysql raleigh-workshop-08 < 2008-09-05.sql ',
-                'description' => 'Importing an sql dump'
+                'description' => 'Importing an sql dump',
             ],
             [
                 'id' => '48c257a8-cf7c-4af2-ac2f-114ecbdd56cb',
@@ -792,7 +792,7 @@ Attribute Matching Types
             'Limit',
             'Bindable',
             'Validator',
-            'Transactional'
+            'Transactional',
         ];
         $result = Hash::normalize($b);
         /* $result now looks like:

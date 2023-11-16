@@ -89,9 +89,9 @@ find メソッドは、あなたが求めるデータを検索するための簡
     // すべての article を検索する
     $query = $articles->find('all');
 
-``find()`` メソッドの戻り値は常に :php:class:`Cake\\ORM\\Query` オブジェクトです。
-Query クラスにより、それの生成後は、クエリーをより精錬することができるようになります。
-Query オブジェクトは怠惰に評価され、行のフェッチ、配列への変換、
+``find()`` メソッドの戻り値は常に :php:class:`Cake\\ORM\\SelectQuery` オブジェクトです。
+SelectQuery クラスにより、それの生成後は、クエリーをより精錬することができるようになります。
+SelectQuery オブジェクトは怠惰に評価され、行のフェッチ、配列への変換、
 もしくは ``all()`` メソッドの呼び出しをするまでは実行されません。 ::
 
     // コントローラーやテーブルのメソッド内で
@@ -349,12 +349,12 @@ finder メソッドは、あなたが作成したい finder の名前が ``Foo``
 例えば、公開された記事を見つけるために articles テーブルに finder を追加したい場合、
 次のようになります。 ::
 
-    use Cake\ORM\Query;
+    use Cake\ORM\SelectQuery;
     use Cake\ORM\Table;
 
     class ArticlesTable extends Table
     {
-        public function findOwnedBy(Query $query, array $options)
+        public function findOwnedBy(SelectQuery $query, array $options)
         {
             $user = $options['user'];
             return $query->where(['author_id' => $user->id]);
@@ -537,11 +537,11 @@ contain に条件を渡す
 
 ``contain()`` を使う際、関連によって返される列を限定し、条件によってフィルターすることができます。
 条件を指定するには、第１引数としてクエリーオブジェクト
-``\Cake\ORM\Query`` を受け取る無名関数を渡します。 ::
+``\Cake\ORM\SelectQuery`` を受け取る無名関数を渡します。 ::
 
     // コントローラーやテーブルのメソッド内で
 
-    $query = $articles->find()->contain('Comments', function (Query $q) {
+    $query = $articles->find()->contain('Comments', function (SelectQuery $q) {
         return $q
             ->select(['body', 'author_id'])
             ->where(['Comments.approved' => true]);
@@ -550,7 +550,7 @@ contain に条件を渡す
 これは、またコントローラーレベルでページネーションが働きます。 ::
 
     $this->paginate['contain'] = [
-        'Comments' => function (Query $query) {
+        'Comments' => function (SelectQuery $query) {
             return $query->select(['body', 'author_id'])
             ->where(['Comments.approved' => true]);
         }
@@ -566,7 +566,7 @@ contain に条件を渡す
 
     $query = $articles->find()->contain([
         'Comments',
-        'Authors.Profiles' => function (Query $q) {
+        'Authors.Profiles' => function (SelectQuery $q) {
             return $q->where(['Profiles.is_published' => true]);
         }
     ]);
@@ -578,7 +578,7 @@ contain に条件を渡す
 それらを使うことができます。 ::
 
     // すべての article を取り出すが、承認され (approved)、人気のある (popular) ものだけに限定する
-    $query = $articles->find()->contain('Comments', function (Query $q) {
+    $query = $articles->find()->contain('Comments', function (SelectQuery $q) {
         return $q->find('approved')->find('popular');
     });
 
@@ -595,7 +595,7 @@ contain に条件を渡す
     $query = $articles->find()->contain([
         'Authors' => [
             'foreignKey' => false,
-            'queryBuilder' => function (Query $q) {
+            'queryBuilder' => function (SelectQuery $q) {
                 return $q->where(...); // フィルターのための完全な条件
             }
         ]
@@ -616,7 +616,7 @@ contain に条件を渡す
     $query->select(['id', 'title'])
         ->contain(['Comments', 'Tags'])
         ->enableAutoFields(true)
-        ->contain(['Users' => function(Query $q) {
+        ->contain(['Users' => function(SelectQuery $q) {
             return $q->autoFields(true);
         }]);
 
@@ -964,14 +964,10 @@ ResultSet から任意の場所を指定して取得する
     // ５番目のレコードを取得する
     $row = $result->skip(4)->first();
 
-Query や ResultSet が空かどうかをチェックする
+ResultSet が空かどうかをチェックする
 ---------------------------------------------
 
-Query や ResultSet オブジェクトの ``isEmpty()`` メソッドを使うことで１行以上あるかどうかを確認できます。
-Query オブジェクトで ``isEmpty()`` メソッドを呼び出した場合はクエリーが評価されます。 ::
-
-    // クエリーをチェックします
-    $query->isEmpty();
+ResultSet オブジェクトの ``isEmpty()`` メソッドを使うことで１行以上あるかどうかを確認できます。 ::
 
     // 結果をチェックします
     $results = $query->all();
@@ -1003,7 +999,7 @@ Query オブジェクトで ``isEmpty()`` メソッドを呼び出した場合�
 ときには、より基本的な方法でデータ構造を変更する必要があることもあります。
 
 このような場合に、データベースからフェッチした後で結果を処理する方法として、
-``Query`` オブジェクトは ``mapReduce()`` を提供します。
+``SelectQuery`` オブジェクトは ``mapReduce()`` を提供します。
 
 データ構造を変更するよくある事例は、結果をとある条件に基いて仕分けするものです。
 このために ``mapReduce()`` 関数を使うことができます。
@@ -1175,17 +1171,17 @@ reducer が呼ばれるごとに、reducer はユーザーごとのフォロワ�
 これは :ref:`custom-find-methods` セクションで説明しているように、
 カスタム Finder メソッドを構築するのに非常に便利です。 ::
 
-    public function findPublished(Query $query, array $options)
+    public function findPublished(SelectQuery $query, array $options)
     {
         return $query->where(['published' => true]);
     }
 
-    public function findRecent(Query $query, array $options)
+    public function findRecent(SelectQuery $query, array $options)
     {
         return $query->where(['created >=' => new DateTime('1 day ago')]);
     }
 
-    public function findCommonWords(Query $query, array $options)
+    public function findCommonWords(SelectQuery $query, array $options)
     {
         // 前のセクションで説明した共通の単語の件と同じもの
         $mapper = ...;
@@ -1213,7 +1209,7 @@ reducer が呼ばれるごとに、reducer はユーザーごとのフォロワ�
 stack されたすべての MapReduce 操作を取り除く
 ---------------------------------------------
 
-ときには ``mapReduce`` 操作をまったく実行させずに ``Query`` オブジェクトを更新したいという
+ときには ``mapReduce`` 操作をまったく実行させずに ``SelectQuery`` オブジェクトを更新したいという
 状況もあるかもしれません。これは両方の引数に null を指定し、第３引数 (overwrite) で ``true``
 を呼び出すことで達成できます。 ::
 

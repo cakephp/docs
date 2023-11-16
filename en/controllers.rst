@@ -282,14 +282,14 @@ This would render **plugins/Users/templates/UserDetails/custom_file.php**
 Content Type Negotiation
 ========================
 
-.. php:method:: viewClasses()
+.. php:method:: addViewClasses()
 
 Controllers can define a list of view classes they support. After the
 controller's action is complete CakePHP will use the view list to perform
-content-type negotiation with either :ref:`file-extensions` or ``Content-Type``
+content-type negotiation with either :ref:`file-extensions` or ``Accept``
 headers. This enables your application to re-use the same controller action to
 render an HTML view or render a JSON or XML response. To define the list of
-supported view classes for a controller is done with the ``viewClasses()``
+supported view classes for a controller is done with the ``addViewClasses()``
 method::
 
     namespace App\Controller;
@@ -299,25 +299,25 @@ method::
 
     class PostsController extends AppController
     {
-        public function viewClasses(): array
+        public function initialize(): void
         {
-            return [JsonView::class, XmlView::class];
+            parent::initialize();
+
+            $this->addViewClasses([JsonView::class, XmlView::class]);
         }
     }
 
 The application's ``View`` class is automatically used as a fallback when no
 other view can be selected based on the request's ``Accept`` header or routing
 extension. If your application only supports content types for a specific
-actions, you can define that logic within ``viewClasses()``::
+actions, you can call ``addClasses()`` within your action too::
 
-    public function viewClasses(): array
+    public function export(): void
     {
-        if ($this->request->getParam('action') === 'export') {
-            // Use a custom CSV view for data exports.
-            return [CsvView::class];
-        }
+        // Use a custom CSV view for data exports.
+        $this->addViewClasses([CsvView::class]);
 
-        return [JsonView::class];
+        // Rest of the action code
     }
 
 If within your controller actions you need to process request or load data
@@ -331,9 +331,9 @@ differently based on the controller action you can use
         $query->contain('Authors');
     }
 
-You can also set your controllers' supported view classes
-using the ``addViewClasses()`` method which will merge the provided views with
-those held in the ``viewClasses`` property.
+In case your app need more complex logic to decide which view classes to use
+then you can override the ``Controller::viewClasses()`` method and return
+an array of view classes as required.
 
 .. note::
     View classes must implement the static ``contentType()`` hook method to
@@ -344,13 +344,15 @@ Content Type Negotiation Fallbacks
 
 If no View can be matched with the request's content type preferences, CakePHP
 will use the base ``View`` class. If you want to require content-type
-negotiation, you can use the ``NegotiationRequiredView`` which sets a 406 status
+negotiation, you can use the ``NegotiationRequiredView`` which sets a ``406`` status
 code::
 
-    public function viewClasses(): array
+    public function initialize(): void
     {
+        parent::initialize();
+
         // Require Accept header negotiation or return a 406 response.
-        return [JsonView::class, NegotiationRequiredView::class];
+        $this->addViewClasses([JsonView::class, NegotiationRequiredView::class]);
     }
 
 You can use the ``TYPE_MATCH_ALL`` content type value to build your own fallback
@@ -372,6 +374,22 @@ view logic::
 It is important to remember that match-all views are applied only *after*
 content-type negotiation is attempted.
 
+Using AjaxView
+==============
+
+In applications that use hypermedia or AJAX clients, you often need to render
+view contents without the wrapping layout. You can use the ``AjaxView`` that
+is bundled with the application skeleton::
+
+    // In a controller action, or in beforeRender.
+    if ($this->request->is('ajax')) {
+        $this->viewBuilder()->setClassName('Ajax');
+    }
+
+``AjaxView`` will respond as ``text/html`` and use the ``ajax`` layout.
+Generally this layout is minimal or contains client specific markup. This
+replaces usage of ``RequestHandlerComponent`` automatically using the
+``AjaxView`` in 4.x.
 
 Redirecting to Other Pages
 ==========================
@@ -476,8 +494,8 @@ behaves::
     {
         protected array $paginate = [
             'Articles' => [
-                'conditions' => ['published' => 1]
-            ]
+                'conditions' => ['published' => 1],
+            ],
         ];
     }
 

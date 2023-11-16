@@ -122,7 +122,7 @@ your helper requires. For example::
         /**
          * @var array<string, mixed>
          */
-        protected $_defaultConfig = [
+        protected array $_defaultConfig = [
             'errorClass' => 'error',
             'templates' => [
                 'label' => '<label for="{{for}}">{{content}}</label>',
@@ -170,7 +170,7 @@ implementation::
         public function initialize(): void
         {
             $this->addHelper('Html', [
-                'className' => 'MyHtml'
+                'className' => 'MyHtml',
             ]);
         }
     }
@@ -268,7 +268,7 @@ just as you would in a controller::
 
     class LinkHelper extends Helper
     {
-        protected $helpers = ['Html'];
+        protected array $helpers = ['Html'];
 
         public function makeEdit($title, $url)
         {
@@ -317,7 +317,7 @@ If you would like to access a View variable inside a helper, you can use
 
     class AwesomeHelper extends Helper
     {
-        public $helpers = ['Html'];
+        public array $helpers = ['Html'];
 
         public function someMethod()
         {

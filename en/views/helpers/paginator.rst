@@ -19,7 +19,7 @@ Setting the paginated resultset
 By default the helper uses the first instance of ``Cake\Datasource\Paging\PaginatedInterface``
 it finds in the view variables. (Generally the result of ``Controller::paginate()``).
 
-You can use ``PaginatorHelper::setPaginated()`` to explicity set the paginated
+You can use ``PaginatorHelper::setPaginated()`` to explicitly set the paginated
 resultset that the helper should use.
 
 .. _paginator-templates:
@@ -573,8 +573,8 @@ you can include the scope names in ``options()``::
             // Additional URL parameters for the 'comments' scope
             'comments' => [
                 'articleId' => 1234,
-            ]
-        ]
+            ],
+        ],
     ]);
 
 .. meta::

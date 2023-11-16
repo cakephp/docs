@@ -150,15 +150,15 @@ helpful when matching HasMany and BelongsToMany association data::
                 ['number' => 'number-1'],
                 ['number' => 'number-2'],
                 ['number' => 'number-3'],
-            ]
+            ],
         ],
         [
             'name' => 'James',
             'phone_numbers' => [
                 ['number' => 'number-4'],
                 ['number' => 'number-5'],
-            ]
-        ]
+            ],
+        ],
     ];
 
     $numbers = (new Collection($data))->extract('phone_numbers.{*}.number');
@@ -185,7 +185,7 @@ dot notation paths::
     ];
     $combined = (new Collection($items))->combine('id', 'name');
     $result = $combined->toArray();
-    
+
     // $result contains
     [
         1 => 'foo',
@@ -205,7 +205,7 @@ You can also optionally use a ``groupPath`` to group results based on a path::
     ];
 
 Finally you can use *closures* to build keys/values/groups paths dynamically,
-for example when working with entities and dates (converted to ``Cake/Time``
+for example when working with entities and dates (converted to ``I18n\DateTime``
 instances by the ORM) you may want to group results by date::
 
     $combined = (new Collection($entities))->combine(
@@ -214,7 +214,7 @@ instances by the ORM) you may want to group results by date::
         function ($entity) { return $entity->date->toDateString(); }
     );
      $result = $combined->toArray();
-     
+
     // $result contains
     [
         'date string like 2015-05-01' => ['entity1->id' => entity1, 'entity2->id' => entity2, ..., 'entityN->id' => entityN]
@@ -317,7 +317,7 @@ chunking associative arrays::
     ]);
     $chunked = $collection->chunkWithKeys(2);
     $result = $chunked->toList();
-    
+
     // $result contains
     [
         ['a' => 1, 'b' => 2],
@@ -592,7 +592,7 @@ You can also zip multiple collections at once::
 
     $rows = $years->zip($salaries, $increments);
     $result = $rows->toList();
-    
+
     // $result contains
     [
         [2013, 1000, 0],
@@ -705,7 +705,7 @@ property representing the identifier for the parent item::
     ]);
     $nested = $collection->nest('id', 'parent_id');
     $result = $nested->toList();
-    
+
     // $result contains
     [
         [
@@ -716,7 +716,7 @@ property representing the identifier for the parent item::
                 ['id' => 2, 'parent_id' => 1, 'name' => 'Land Birds', 'children' => []],
                 ['id' => 3, 'parent_id' => 1, 'name' => 'Eagle', 'children' => []],
                 ['id' => 4, 'parent_id' => 1, 'name' => 'Seagull', 'children' => []],
-            ]
+            ],
         ],
         [
             'id' => 6,
@@ -724,8 +724,8 @@ property representing the identifier for the parent item::
             'name' => 'Fish',
             'children' => [
                 ['id' => 5, 'parent_id' => 6, 'name' => 'Clown Fish', 'children' => []],
-            ]
-        ]
+            ],
+        ],
     ];
 
 Children elements are nested inside the ``children`` property inside each of the

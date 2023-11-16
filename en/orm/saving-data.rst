@@ -150,7 +150,7 @@ request data should resemble::
         'body' => 'Baking with CakePHP makes web development fun!',
         'user_id' => 1,
         'user' => [
-            'username' => 'mark'
+            'username' => 'mark',
         ],
         'comments' => [
             ['body' => 'The CakePHP features are outstanding'],
@@ -174,7 +174,7 @@ associations should be marshalled::
     // New entity with nested associations
     $entity = $articles->newEntity($this->request->getData(), [
         'associated' => [
-            'Tags', 'Comments' => ['associated' => ['Users']]
+            'Tags', 'Comments' => ['associated' => ['Users']],
         ]
     ]);
 
@@ -187,7 +187,7 @@ should be marshalled. Alternatively, you can use dot notation for brevity::
 
     // New entity with nested associations using dot notation
     $entity = $articles->newEntity($this->request->getData(), [
-        'associated' => ['Tags', 'Comments.Users']
+        'associated' => ['Tags', 'Comments.Users'],
     ]);
 
 You may also disable marshalling of possible nested associations like so::
@@ -208,8 +208,8 @@ change the validation set to be used per association::
     $entity = $articles->newEntity($this->request->getData(), [
         'associated' => [
             'Tags' => ['validate' => false],
-            'Comments.Users' => ['validate' => 'signup']
-        ]
+            'Comments.Users' => ['validate' => 'signup'],
+        ],
     ]);
 
 The :ref:`using-different-validators-per-association` chapter has more
@@ -853,8 +853,8 @@ the singular, :ref:`underscored <inflector-methods-summary>` version of the asso
         'title' => 'First Post',
         'user' => [
             'id' => 1,
-            'username' => 'mark'
-        ]
+            'username' => 'mark',
+        ],
     ];
 
     $articles = $this->getTableLocator()->get('Articles');
@@ -875,8 +875,8 @@ singular, :ref:`underscored <inflector-methods-summary>` version of the associat
         'id' => 1,
         'username' => 'cakephp',
         'profile' => [
-            'twitter' => '@cakephp'
-        ]
+            'twitter' => '@cakephp',
+        ],
     ];
 
     $users = $this->getTableLocator()->get('Users');

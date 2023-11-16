@@ -185,7 +185,7 @@ change where ``FormHelper`` reads input data from::
     // Use query string instead of request data:
     echo $this->Form->create($article, [
         'type' => 'get',
-        'valueSources' => ['query', 'context']
+        'valueSources' => ['query', 'context'],
     ]);
 
     // Same effect:
@@ -199,7 +199,7 @@ where request data is retained, you need to put ``context`` first::
 
     // Prioritize context over request data:
     echo $this->Form->create($article,
-        'valueSources' => ['context', 'data']
+        'valueSources' => ['context', 'data'],
     ]);
 
 The value sources will be reset to the default ``['data', 'context']`` when ``end()``
@@ -264,8 +264,8 @@ CakePHP application::
     echo $this->Form->create(null, [
         'url' => [
             'controller' => 'Articles',
-            'action' => 'publish'
-        ]
+            'action' => 'publish',
+        ],
     ]);
 
 Output:
@@ -278,7 +278,7 @@ Or you can point to an external domain::
 
     echo $this->Form->create(null, [
         'url' => 'https://www.google.com/search',
-        'type' => 'get'
+        'type' => 'get',
     ]);
 
 Output:
@@ -298,7 +298,7 @@ action is going to apply. For example, your Users table has specific validation
 rules that only apply when an account is being registered::
 
     echo $this->Form->create($user, [
-        'context' => ['validator' => 'register']
+        'context' => ['validator' => 'register'],
     ]);
 
 The above will use validation rules defined in the ``register`` validator, which
@@ -310,9 +310,9 @@ can define validation rules for each association by using an array::
         'context' => [
             'validator' => [
                 'Users' => 'register',
-                'Comments' => 'default'
-            ]
-        ]
+                'Comments' => 'default',
+            ],
+        ],
     ]);
 
 The above would use ``register`` for the user, and ``default`` for the user's
@@ -924,7 +924,7 @@ methods are described in each method's own section.)
     such as ``date()``, ``time()``, ``dateTime()``::
 
         echo $this->Form->time('close_time', [
-            'value' => '13:30:00'
+            'value' => '13:30:00',
         ]);
 
   .. note::
@@ -1266,7 +1266,7 @@ Creating Select Pickers
 
 .. php:method:: select(string $fieldName, array $options, array $attributes)
 
-* ``$fieldName`` - A field name in the form ``'Modelname.fieldname'``. This
+* ``$fieldName`` - A field name in the form ``'fieldname'`` or ``'related_entity.fieldname'``. This
   will provide the ``name`` attribute of the ``select`` element.
 * ``$options`` - An optional array containing the list of items for the select
   picker. When this array is missing, the method will generate only the
@@ -1356,11 +1356,11 @@ For example::
     $options = [
         'Group 1' => [
             'Value 1' => 'Label 1',
-            'Value 2' => 'Label 2'
+            'Value 2' => 'Label 2',
         ],
         'Group 2' => [
-            'Value 3' => 'Label 3'
-        ]
+            'Value 3' => 'Label 3',
+        ],
     ];
     echo $this->Form->select('field', $options);
 
@@ -2269,7 +2269,7 @@ For example::
 
     // Generate an input and populate the help variable
     echo $this->Form->control('password', [
-        'templateVars' => ['help' => 'At least 8 characters long.']
+        'templateVars' => ['help' => 'At least 8 characters long.'],
     ]);
 
 Output:
@@ -2334,7 +2334,7 @@ You can customize the generated controls by defining additional options in the
 ``$fields`` parameter::
 
     echo $this->Form->controls([
-        'name' => ['label' => 'custom label']
+        'name' => ['label' => 'custom label'],
     ]);
 
 When customizing, ``$fields``, you can use the ``$options`` parameter to
@@ -2344,9 +2344,11 @@ For example::
 
     echo $this->Form->controls(
         [
-            'name' => ['label' => 'custom label']
+            'name' => ['label' => 'custom label'],
         ],
-        ['legend' => 'Update your post']
+        [
+            'legend' => 'Update your post',
+        ]
     );
 
 If you disable the ``fieldset``, the ``legend`` will not print.
@@ -2354,7 +2356,7 @@ If you disable the ``fieldset``, the ``legend`` will not print.
 Creating Controls for a Whole Entity
 ------------------------------------
 
-.. php:method:: allControls(array $fields, $options = [])
+.. php:method:: allControls(array $fields, array $options = [])
 
 * ``$fields`` - Optional. An array of customizations for the fields that will
   be generated. Allows setting custom types, labels and other options.
@@ -2429,8 +2431,8 @@ the following code in your controller::
             'Authors',
             'Authors.Profiles',
             'Tags',
-            'Comments'
-        ]
+            'Comments',
+        ],
     ]);
 
 The above example shows an expanded example for belongs to many associations,
@@ -2476,7 +2478,6 @@ could do the following::
 
     class AutocompleteWidget implements WidgetInterface
     {
-
         /**
          * StringTemplate instance.
          *
@@ -2539,8 +2540,8 @@ a setting::
     // In View class
     $this->loadHelper('Form', [
         'widgets' => [
-            'autocomplete' => ['Autocomplete']
-        ]
+            'autocomplete' => ['Autocomplete'],
+        ],
     ]);
 
 If your widget requires other widgets, you can have FormHelper populate those
@@ -2551,9 +2552,9 @@ dependencies by declaring them::
             'autocomplete' => [
                 'App\View\Widget\AutocompleteWidget',
                 'text',
-                'label'
-            ]
-        ]
+                'label',
+            ],
+        ],
     ]);
 
 In the above example, the ``autocomplete`` widget would depend on the ``text`` and

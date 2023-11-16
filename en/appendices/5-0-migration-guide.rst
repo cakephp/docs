@@ -28,15 +28,21 @@ Global
 - Type declarations were added to all class properties where possible. These also include some fixes for
   incorrect annotations.
 - The ``SECOND``, ``MINUTE``, ``HOUR``, ``DAY``,  ``WEEK``, ``MONTH``, ``YEAR`` constants were removed.
-- Global functions are now opt-in. If your application uses global function
-  aliases be sure to add ``require CAKE . 'functions.php'`` to you application's
-  ``config/bootstrap.php``.
+- Use of ``#[\AllowDynamicProperties]`` removed everywhere. It was used for the following classes:
+   - ``Command/Command``
+   - ``Console/Shell``
+   - ``Controller/Component``
+   - ``Controller/Controller``
+   - ``Mailer/Mailer``
+   - ``View/Cell``
+   - ``View/Helper``
+   - ``View/View``
 - The supported database engine versions were updated:
-  -  MySQL (5.7 or higher)
-  -  MariaDB (10.1 or higher)
-  -  PostgreSQL (9.6 or higher)
-  -  Microsoft SQL Server (2012 or higher)
-  -  SQLite 3
+   - MySQL (5.7 or higher)
+   - MariaDB (10.1 or higher)
+   - PostgreSQL (9.6 or higher)
+   - Microsoft SQL Server (2012 or higher)
+   - SQLite 3
 
 Auth
 ----
@@ -123,6 +129,8 @@ Database
   ``QueryExpression::case()`` or ``CaseStatementExpression``
 - ``Connection::connect()`` has been removed. Use
   ``$connection->getDriver()->connect()`` instead.
+- ``Connection::disconnect()`` has been removed. Use
+  ``$connection->getDriver()->disconnect()`` instead.
 - ``cake.database.queries`` has been added as an alternative to the ``queriesLog`` scope
 
 Datasource
@@ -385,7 +393,7 @@ A similar change has been applied to the ``RepositoryInterface::get()`` method::
     {
         $author = $this->Authors->get($id, [
             'contain' => ['Books'],
-            'finder' => 'latest'
+            'finder' => 'latest',
         ]);
     }
 

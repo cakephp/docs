@@ -57,8 +57,8 @@ An example of using these options::
         'clear' => true,
         'params' => [
             'name' => $user->name,
-            'email' => $user->email
-        ]
+            'email' => $user->email,
+        ],
     ]);
 
     // In your View
