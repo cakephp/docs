@@ -358,6 +358,17 @@ method::
     ]);
     $http->addCookie(new Cookie('session', 'abc123'));
 
+Client Events
+=============
+
+``Client`` will emit events when requests are sent. The
+``HttpClient.beforeSend`` event is fired before a request is sent, and
+``HttpClient.afterSend`` is fired after a request is sent. You can modify the
+request, or set a response in a ``beforeSend`` listener. The ``afterSend`` event
+is triggered for all requests, even those that have their responses set by
+a ``beforeSend`` event.
+
+
 .. _httpclient-response-objects:
 
 Response Objects

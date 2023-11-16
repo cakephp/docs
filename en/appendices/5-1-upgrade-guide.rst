@@ -14,6 +14,9 @@ Http
 
 - ``SecurityHeadersMiddleware::setPermissionsPolicy()`` was added. This method
   adds the ability to define ``permissions-policy`` header values.
+- ``Client`` now emits ``HttpClient.beforeSend`` and ``HttpClient.afterSend``
+  events when requests are sent. You can use these events to perform logging,
+  caching or collect telemetry.
 
 Validation
 ----------
