@@ -10,8 +10,8 @@ respuesta le permite crear respuestas HTTP sin esfuerzo desde sus controladores.
 .. index:: $this->request
 .. _cake-request:
 
-Petición
-========
+Solicitud (Request)
+===================
 
 .. php:class:: ServerRequest
 
@@ -28,13 +28,13 @@ Algunas de las tareas que realiza ``ServerRequest`` incluyen:
   la dirección IP del cliente y los nombres de subdominio/dominio en el servidor en el que se ejecuta su aplicación.
 * Proporcionar acceso a los parámetros de solicitud tanto como índices de matriz como propiedades de objetos.
 
-El objeto de petición de CakePHP implementa `PSR-7 ServerRequestInterface <https://www.php-fig.org/psr/psr-7/>`_, lo que
+El objeto de la solicitud de CakePHP implementa `PSR-7 ServerRequestInterface <https://www.php-fig.org/psr/psr-7/>`_, lo que
 facilita el uso de bibliotecas desde fuera de CakePHP.
 
 .. _request-parameters:
 
-Parámetros de petición
-----------------------
+Parámetros de la solicitud
+--------------------------
 
 La solicitud expone los parámetros de enrutamiento a través del método ``getParam()``::
 
@@ -83,8 +83,8 @@ Si desea acceder a todos los parámetros de consulta, puede utilizar ``getQueryP
 
     $query = $this->request->getQueryParams();
 
-Datos del cuerpo de la petición
--------------------------------
+Datos del cuerpo de la solicitud
+--------------------------------
 
 .. php:method:: getData($name, $default = null)
 
