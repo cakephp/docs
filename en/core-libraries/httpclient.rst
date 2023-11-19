@@ -479,6 +479,59 @@ instead. You can force select a transport adapter using a constructor option::
 
     $client = new Client(['adapter' => Stream::class]);
 
+Events
+======
+
+The HTTP client triggers couple of events before and after sending a request
+which allows you to modify either the request or response or do other tasks like
+caching, logging etc.
+
+HttpClient.beforeSend
+---------------------
+
+    // Somewhere before calling one of the HTTP client's methods which makes a request
+    $http->getEventManager()->on(
+        'HttpClient.beforeSend',
+        function (
+            \Cake\Http\Client\ClientEvent $event,
+            \Cake\Http\Client\Request $request,
+            array $adapterOptions,
+            int $redirects
+        ) {
+            // Modify the request
+            $event->setRequest(....);
+            // Modify the adapter options
+            $event->setAdapterOptions(....);
+
+            // Skip making the actual request by returning a response.
+            // You can use $event->setResult($response) to achieve the same.
+            return new \Cake\Http\Client\Response(body: 'something');
+        }
+    );
+
+HttpClient.afterSend
+---------------------
+
+    // Somewhere before calling one of the HTTP client's methods which makes a request
+    $http->getEventManager()->on(
+        'HttpClient.afterSend',
+        function (
+            \Cake\Http\Client\ClientEvent $event,
+            \Cake\Http\Client\Request $request,
+            array $adapterOptions,
+            int $redirects,
+            bool $requestSent // Indicates whether the request was actually sent
+                              // or response returned from ``beforeSend`` event
+        ) {
+            // Get the response
+            $response = $event->getResponse();
+
+            // Return a new/modified response.
+            // You can use $event->setResult($response) to achieve the same.
+            return new \Cake\Http\Client\Response(body: 'something');
+        }
+    );
+
 .. _httpclient-testing:
 
 Testing
