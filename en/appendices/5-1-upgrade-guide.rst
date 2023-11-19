@@ -6,6 +6,15 @@ and introduces new deprecations. Any functionality deprecated in 5.x will be
 removed in 6.0.0.
 
 
+Deprecations
+============
+
+I18n
+----
+
+- The ``_cake_core_`` cache config key has been renamed to ``_cake_translations_``.
+
+
 New Features
 ============
 
