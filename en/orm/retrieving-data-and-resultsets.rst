@@ -41,9 +41,7 @@ viewing entities and their related data. You can do this by using ``get()``::
     $article = $articles->get($id);
 
     // Get a single article, and related comments
-    $article = $articles->get($id, [
-        'contain' => ['Comments'],
-    ]);
+    $article = $articles->get($id, contain: ['Comments']);
 
 If the get operation does not find any results a
 ``Cake\Datasource\Exception\RecordNotFoundException`` will be raised. You can
@@ -56,27 +54,19 @@ Like ``find()``, ``get()`` also has caching integrated. You can use the
     // In a controller or table method.
 
     // Use any cache config or CacheEngine instance & a generated key
-    $article = $articles->get($id, [
-        'cache' => 'custom',
-    ]);
+    $article = $articles->get($id, cache: 'custom');
 
     // Use any cache config or CacheEngine instance & specific key
-    $article = $articles->get($id, [
-        'cache' => 'custom', 'key' => 'mykey'
-    ]);
+    $article = $articles->get($id, cache: 'custom', key: 'mykey');
 
     // Explicitly disable caching
-    $article = $articles->get($id, [
-        'cache' => false
-    ]);
+    $article = $articles->get($id, cache: false);
 
 Optionally you can ``get()`` an entity using :ref:`custom-find-methods`. For
 example you may want to get all translations for an entity. You can achieve that
 by using the ``finder`` option::
 
-    $article = $articles->get($id, [
-        'finder' => 'translations',
-    ]);
+    $article = $articles->get($id, 'translations');
 
 The list of options supported by get() are:
 
