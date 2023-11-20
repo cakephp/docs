@@ -59,8 +59,8 @@ If you have created a PSR-7 request object you can send it using
         'http://example.com/search',
         ClientRequest::METHOD_GET
     );
-    $client = new Client();
-    $response = $client->sendRequest($request);
+    $http = new Client();
+    $response = $http->sendRequest($request);
 
 Creating Multipart Requests with Files
 ======================================
@@ -477,7 +477,7 @@ instead. You can force select a transport adapter using a constructor option::
 
     use Cake\Http\Client\Adapter\Stream;
 
-    $client = new Client(['adapter' => Stream::class]);
+    $http = new Client(['adapter' => Stream::class]);
 
 Events
 ======
@@ -488,6 +488,8 @@ caching, logging etc.
 
 HttpClient.beforeSend
 ---------------------
+
+::
 
     // Somewhere before calling one of the HTTP client's methods which makes a request
     $http->getEventManager()->on(
@@ -511,6 +513,8 @@ HttpClient.beforeSend
 
 HttpClient.afterSend
 ---------------------
+
+::
 
     // Somewhere before calling one of the HTTP client's methods which makes a request
     $http->getEventManager()->on(
