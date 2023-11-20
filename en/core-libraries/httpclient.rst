@@ -489,6 +489,8 @@ caching, logging etc.
 HttpClient.beforeSend
 ---------------------
 
+::
+
     // Somewhere before calling one of the HTTP client's methods which makes a request
     $http->getEventManager()->on(
         'HttpClient.beforeSend',
@@ -511,6 +513,8 @@ HttpClient.beforeSend
 
 HttpClient.afterSend
 ---------------------
+
+::
 
     // Somewhere before calling one of the HTTP client's methods which makes a request
     $http->getEventManager()->on(
