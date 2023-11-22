@@ -299,7 +299,7 @@ detectores que puedes crear:
 * Comparación basada en opciones: las comparaciones basadas en opciones utilizan una lista de opciones para crear una
   expresión regular. Las llamadas posteriores para agregar un detector de opciones ya definido fusionarán las opciones.
 * Detectores de devolución de llamada: los detectores de devolución de llamada le permiten proporcionar un tipo de
- "callback" para manejar la verificación. La devolución de llamada recibirá el objeto de solicitud como único parámetro.
+  "callback" para manejar la verificación. La devolución de llamada recibirá el objeto de solicitud como único parámetro.
 
 .. php:method:: addDetector($name, $options)
 
@@ -555,7 +555,7 @@ Las solicitudes exponen los datos del archivo cargado en ``getData()`` o ``getUp
     $files[0]->moveTo($targetPath);
 
 Manipulación de URI
------------------
+-------------------
 
 Las solicitudes contienen un objeto URI, que contiene métodos para interactuar con el URI solicitado::
 
