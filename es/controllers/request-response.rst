@@ -46,7 +46,7 @@ Para obtener todos los parámetros de enrutamiento como una matriz, use ``getAtt
 
 Se accede a todos los :ref:`route-elements` a través de esta interfaz.
 
-Además de :ref:`elementos-de-ruta`, a menudo también necesita acceso a :ref:`argumentos-pasados`. Ambos también están
+Además de :ref:`route-elements`, a menudo también necesita acceso a :ref:`passed-arguments`. Ambos también están
 disponibles en el objeto de solicitud:
 
     // Argumentos pasados
@@ -1081,7 +1081,7 @@ Se pueden agregar objetos cookie a las respuestas::
     // Reemplazar toda la colección de cookies
     $response = $this->response->withCookieCollection($cookies);
 
-Las cookies configuradas para las respuestas se pueden cifrar utilizando :ref:`middleware-cookie-encrypted`.
+Las cookies configuradas para las respuestas se pueden cifrar utilizando :ref:`encrypted-cookie-middleware`.
 
 Leyendo Cookies
 ---------------
