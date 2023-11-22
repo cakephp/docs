@@ -971,9 +971,8 @@ local::
 Configuración de encabezados de solicitud de origen cruzado (CORS)
 ==================================================================
 
-El método ``cors()`` se utiliza para definir
-``Control de acceso HTTP <https://developer.mozilla.org/es/docs/Web/HTTP/CORS>`__ encabezados
-relacionados con una interfaz fluida::
+El método ``cors()`` se utiliza para definir `Control de acceso HTTP
+<https://developer.mozilla.org/es/docs/Web/HTTP/CORS>`__ encabezados relacionados con una interfaz fluida::
 
     $this->response = $this->response->cors($this->request)
         ->allowOrigin(['*.cakephp.org'])
