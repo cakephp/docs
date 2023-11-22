@@ -226,7 +226,7 @@ Variables de entorno (de $_SERVER y $_ENV)
 .. php:method:: putenv($key, $value = null)
 
 ``ServerRequest::getEnv()`` es un contenedor para la función global ``getenv()`` y actúa como un captador/establecedor de
-variables de entorno sin tener que modificar los globales ``$_SERVER`` y ``$_ENV` `::
+variables de entorno sin tener que modificar los globales ``$_SERVER`` y ``$_ENV``::
 
     // Obtener el host
     $host = $this->request->getEnv('HTTP_HOST');
@@ -701,9 +701,7 @@ Para establecer una cadena como cuerpo de respuesta, haga lo siguiente:
     $response = $response->withStringBody('My Body');
 
     // Si quieres una respuesta json
-    $response = $response
-        ->withType('application/json')
-        ->withStringBody(json_encode(['Foo' => 'bar']));
+    $response = $response->withType('application/json')->withStringBody(json_encode(['Foo' => 'bar']));
 
 .. php:method:: withBody($body)
 
@@ -815,7 +813,7 @@ encabezado. Establecer una respuesta como privada indica que toda o parte de ell
 aprovechar las cachés compartidas, la directiva de control debe configurarse como pública.
 
 El segundo parámetro de este método se utiliza para especificar una ``max-age`` para el caché, que es el número de
-segundos después de los cuales la respuesta ya no se considera nueva:
+segundos después de los cuales la respuesta ya no se considera nueva::
 
     public function view()
     {
