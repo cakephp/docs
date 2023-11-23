@@ -647,7 +647,7 @@ utilizando el argumento ``$options``::
     });
 
 Los prefijos con varias palabras se convierten de forma predeterminada utilizando la
-inflexión dasherize, es decir, ``MyPrefix`` se asignará a ``my-prefix``en la URL.
+inflexión dasherize, es decir, ``MyPrefix`` se asignará a ``my-prefix`` en la URL.
 Asegúrate de establecer una ruta para dichos prefijos si deseas utilizar un formato
 diferente como, por ejemplo, subrayado::
 
@@ -836,7 +836,7 @@ necesitarás incluir la clave ``_method`` al generar la URL::
     ]);
 
 Coincidencia con Nombres de Dominio Específicos
---------------------------------------------
+-----------------------------------------------
 
 Las rutas pueden utilizar la opción ``_host`` para coincidir sólo con dominios
 específicos. Puedes utilizar el comodín ``*.`` para coincidir con cualquier
@@ -1600,8 +1600,7 @@ Las clases de ruta personalizadas te permiten ampliar y cambiar la forma en que
 las rutas individuales analizan las solicitudes y manejan el enrutamiento inverso.
 Las clases de ruta tienen algunas convenciones:
 
-* Se espera que las clases de ruta se encuentren en el espacio de nombres
-``Routing\\Route`` de tu aplicación o plugin.
+* Se espera que las clases de ruta se encuentren en el espacio de nombres ``Routing\\Route`` de tu aplicación o plugin.
 * Las clases de ruta deben extender :php:class:`Cake\\Routing\\Route\\Route`.
 * Las clases de ruta deben implementar uno o ambos ``match()`` y/o ``parse()``.
 
@@ -1654,7 +1653,7 @@ hará que todas las rutas conectadas después de esto utilicen la clase de ruta
 predeterminada actual.
 
 Método de Respaldo/Alternativas
-------------------
+-------------------------------
 
 .. php:method:: fallbacks($routeClass = null)
 
