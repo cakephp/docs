@@ -283,6 +283,17 @@ block and take appropriate action when a ``NotFoundException`` is caught::
         }
     }
 
+When the page is out of range, the query will be empty. Other possible solution is to check if there is an empty query
+and the selected page is greater than 1, unset the page and redirect to the first page::
+
+    $queryParams = $this->getRequest()->getQueryParams();
+    if ($query->isEmpty() && isset($queryParams['page']) && $queryParams['page'] > 1) {
+        unset($queryParams['page']);
+
+        return $this->redirect(['action' => 'index', '?' => $queryParams]);
+     }
+
+
 Pagination in the View
 ======================
 
