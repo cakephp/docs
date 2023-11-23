@@ -140,7 +140,7 @@ Custom Templates
 ================
 
 The default exception trap renders all uncaught exceptions your application
-raises with the help of ``Cake\Error\WebExceptionRenderer``, and your application's
+raises with the help of ``Cake\Error\Renderer\WebExceptionRenderer``, and your application's
 ``ErrorController``.
 
 The error page views are located at **templates/Error/**. All 4xx errors use
@@ -229,7 +229,7 @@ error pages when this error is handled::
     // In src/Error/AppExceptionRenderer.php
     namespace App\Error;
 
-    use Cake\Error\WebExceptionRenderer;
+    use Cake\Error\Renderer\WebExceptionRenderer;
 
     class AppExceptionRenderer extends WebExceptionRenderer
     {
@@ -259,7 +259,7 @@ additional logic when handling CakePHP errors::
     // In src/Error/AppExceptionRenderer.php
     namespace App\Error;
 
-    use Cake\Error\WebExceptionRenderer;
+    use Cake\Error\Renderer\WebExceptionRenderer;
 
     class AppExceptionRenderer extends WebExceptionRenderer
     {
@@ -281,7 +281,7 @@ override the ``_getController()`` method in your exception renderer::
 
     use App\Controller\SuperCustomErrorController;
     use Cake\Controller\Controller;
-    use Cake\Error\WebExceptionRenderer;
+    use Cake\Error\Renderer\WebExceptionRenderer;
 
     class AppExceptionRenderer extends WebExceptionRenderer
     {

@@ -142,7 +142,7 @@ Configuration du Plugin
 
 Les plugins proposent plusieurs *hooks* permettant à un plugin de s'injecter
 lui-même aux endroits appropriés de votre application. Les *hooks* sont:
- 
+
 * ``bootstrap`` Utilisé pour charger les fichiers de configuration par défaut
   d'un plugin, définir des constantes et d'autres fonctions globales.
 * ``routes`` Utilisé pour charger les routes pour un plugin. Il est déclenché
@@ -293,7 +293,7 @@ re-générer votre autoloader après avoir créé votre plugin:
 
 .. _plugin-objects:
 
-Plugin Objects
+Plugin Classes
 ==============
 
 Les Objets Plugin permettent à un auteur de plugin de spécifier une logique de

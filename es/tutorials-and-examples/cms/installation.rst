@@ -46,7 +46,7 @@ en la carpeta **cms** del directorio de trabajo actual:
 
 .. code-block:: console
 
-    php composer.phar create-project --prefer-dist cakephp/app:4.* cms
+    php composer.phar create-project --prefer-dist cakephp/app:5.* cms
 
 Si ha descargado y ejecutado el `Instalador de Composer de Windows
 <https://getcomposer.org/Composer-Setup.exe>`_, entonces, escriba la siguiente línea en el
@@ -55,7 +55,7 @@ C:\\wamp\\www\\dev):
 
 .. code-block:: console
 
-    composer self-update && composer create-project --prefer-dist cakephp/app:4.* cms
+    composer self-update && composer create-project --prefer-dist cakephp/app:5.* cms
 
 La ventaja de usar Composer es que completará automáticamente algunas
 tareas de configuración importantes, como establecer los permisos de archivo correctos y
@@ -67,24 +67,25 @@ Composer, consulte la sección :doc:`/installation`.
 Independientemente de cómo haya descargado e instalado CakePHP, una vez que la configuración es
 completada, la disposición de su directorio debería ser similar a la siguiente::
 
-    /cms
-     /bin
-     /config
-     /logs
-     /plugins
-     /src
-     /tests
-     /tmp
-     /vendor
-     /webroot
-     .editorconfig
-     .gitignore
-     .htaccess
-     .travis.yml
-     .composer.json
-     index.php
-     phpunit.xml.dist
-     README.md
+    cms/
+      bin/
+      config/
+      logs/
+      plugins/
+      resources/
+      src/
+      templates/
+      tests/
+      tmp/
+      vendor/
+      webroot/
+      .editorconfig
+      .gitignore
+      .htaccess
+      composer.json
+      index.php
+      phpunit.xml.dist
+      README.md
 
 Ahora podría ser un buen momento para aprender un poco sobre cómo funciona la estructura de directorios
 de CakePHP: consulte la sección :doc:`/intro/cakephp-folder-structure`.

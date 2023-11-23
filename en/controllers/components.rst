@@ -233,7 +233,7 @@ You can load other components by adding them to the `$components` property::
     class CustomComponent extends Component
     {
         // The other component your component uses
-        protected $components = ['Existing'];
+        protected array $components = ['Existing'];
 
         // Execute any other additional setup for your component.
         public function initialize(array $config): void
