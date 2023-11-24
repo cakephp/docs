@@ -191,11 +191,13 @@ creating classes and files that you'd need to create anyway.
 +------------+-----------------------------+-------------------------+------------------------------------------------------+
 | Controller | ArticlesController          | MenuLinksController     | Plural, CamelCased, end in Controller                |
 +------------+-----------------------------+-------------------------+------------------------------------------------------+
+| Templates  | Articles/index.php          | MenuLinks/index.php     | View template files are named after                  |
+|            | Articles/add.php            | MenuLinks/add.php       | the controller functions they                        |
+|            | Articles/get_list.php       | MenuLinks/get_list.php  | display, in an underscored form                      |
++------------+-----------------------------+-------------------------+------------------------------------------------------+
 | Behavior   | ArticlesBehavior.php        | MenuLinksBehavior.php   |                                                      |
 +------------+-----------------------------+-------------------------+------------------------------------------------------+
-| View       | ArticlesView.php            | MenuLinksView.php       | View template files are named after                  |
-|            |                             |                         | the controller functions they                        |
-|            |                             |                         | display, in an underscored form                      |
+| View       | ArticlesView.php            | MenuLinksView.php       |                                                      |
 +------------+-----------------------------+-------------------------+------------------------------------------------------+
 | Helper     | ArticlesHelper.php          | MenuLinksHelper.php     |                                                      |
 +------------+-----------------------------+-------------------------+------------------------------------------------------+

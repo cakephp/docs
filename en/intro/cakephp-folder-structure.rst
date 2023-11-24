@@ -55,7 +55,7 @@ View
 
 .. note::
 
-    The folder ``Shell`` is not present by default.
+    The folder ``Command`` is not present by default.
     You can add it when you need it.
 
 .. meta::

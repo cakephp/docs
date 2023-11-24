@@ -22,7 +22,7 @@ Nueva traducción
 ----------------
 
 Nos gustaría poder disponer de traducciones que estén todo lo completas posible.
-Sin embargo hay ocasiones donde un archivo de traducción no está al día, por lo
+Sin embargo, hay ocasiones donde un archivo de traducción no está al día, por lo
 que debes considerar siempre la versión en inglés como la versión acreditada.
 
 Si tu idioma no está entre los disponibles, por favor, contacta con nosotros a
@@ -30,7 +30,7 @@ través de Github y estudiaremos la posibilidad de crear la estructura de archiv
 para ello.
 
 Las siguientes secciones son las primeras que deberías considerar
-traducir ya que estos archivos no cambian a menudo:
+traducir, ya que estos archivos no cambian a menudo:
 
 - index.rst
 - intro.rst
@@ -48,7 +48,7 @@ dichos cambios en los demás idiomas.
 
 Por ejemplo, si se crea un nuevo archivo en inglés en **en/file.rst** tendremos que:
 
-- Añadir el archivo en todos los idiomas: **fr/file.rst**, **zh/file.rst**,...
+- Añadir el archivo en todos los idiomas: **fr/file.rst**, **zh/file.rst**, ...
 - Borrar el contenido pero manteniendo el ``title``, ``meta`` información y
   ``toc-tree`` que pueda haber. Se añadirá la siguiente nota mientras nadie
   traduzca el archivo::
@@ -87,7 +87,7 @@ Consejos para traductores
 - Usa la `Forma informal <https://es.wikipedia.org/wiki/Registro_ling%C3%BC%C3%ADstico>`_.
 - Traduce el título y el contenido a la vez.
 - Compara con la versión en inglés antes de subir una corrección (si corriges
-  algo pero no indicas una referencia tu subida no será aceptada).
+  algo, pero no indicas una referencia tu subida no será aceptada).
 - Si necesitas escribir un término en inglés envuélvelo en etiquetas ``<em>``.
   E.g. "asdf asdf *Controller* asdf" o "asdf asdf Kontroller
   (*Controller*) asfd" como proceda.
@@ -114,7 +114,7 @@ Tamaño de línea
 ---------------
 
 Las líneas de texto deberían medir como máximo 40 caracteres. Las únicas
-excepciones son URLs largas y fragmentos de código.
+excepciones son URL largas y fragmentos de código.
 
 Cabeceras y secciones
 ---------------------
@@ -154,7 +154,7 @@ Marcado en línea
 * Dos acentos graves (*``*): ``texto`` para ejemplos de código.
   Lo usaramos para nombres de opciones de métodos, columnas de tablas,
   objetos (excluyendo la palabra "objeto") y para nombres de métodos y funciones
-  (incluídos los paréntesis )
+  (incluídos los paréntesis)
 
   * ````cascadeCallbacks````, ````true````, ````id````,
     ````PagesController````, ````config()````, etc.
@@ -206,7 +206,7 @@ Pueden crearse listas de definiciones haciendo lo siguiente::
     CakePHP
         Un framework MVC para PHP
 
-Los términos no pueden ocupar más de una línea pero las definiciones pueden
+Los términos no pueden ocupar más de una línea, pero las definiciones pueden
 ocupar más líneas mientras se aniden consistentemente.
 
 Enlaces

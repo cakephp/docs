@@ -1,14 +1,7 @@
-Using CakePHP
-#############
+Usando CakePHP
+###############
 
-.. note::
-    La documentación no es compatible actualmente con el idioma español en esta página.
-
-    Por favor, siéntase libre de enviarnos un pull request en
-    `Github <https://github.com/cakephp/docs>`_ o utilizar el botón **Improve this Doc** para proponer directamente los cambios.
-
-    Usted puede hacer referencia a la versión en Inglés en el menú de selección superior
-    para obtener información sobre el tema de esta página.
+Introducción a las partes principales de CakePHP:
 
 * :doc:`/installation`
 * :doc:`/development/configuration`
@@ -31,15 +24,14 @@ Using CakePHP
 * :doc:`/core-libraries/form`
 * :doc:`/development/sessions`
 * :doc:`/development/rest`
-* :doc:`/controllers/components/authentication`
-* :doc:`/controllers/components/pagination`
-* :doc:`/controllers/components/csrf`
+* :doc:`/controllers/pagination`
+* :ref:`csrf-middleware`
 * :doc:`/core-libraries/email`
 * :doc:`/views/helpers/form`
 * :doc:`/views/helpers/html`
 * :doc:`/core-libraries/validation`
 * :doc:`/development/testing`
 * :doc:`/deployment`
-* :doc:`/console-and-shells`
+* :doc:`/console-commands`
 * :doc:`/contributing`
 * :doc:`/tutorials-and-examples`

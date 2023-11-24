@@ -60,7 +60,7 @@ serialize::
 
         public function index()
         {
-            // Set the view vars that have to be serialized.
+            // Set the view vars
             $this->set('articles', $this->paginate());
             // Specify which view vars JsonView should serialize.
             $this->viewBuilder()->setOption('serialize', 'articles');
@@ -84,7 +84,7 @@ You can also define ``serialize`` as an array of view variables to combine::
         {
             // Some code that created $articles and $comments
 
-            // Set the view vars that have to be serialized.
+            // Set the view vars
             $this->set(compact('articles', 'comments'));
 
             // Specify which view vars JsonView should serialize.
@@ -238,3 +238,6 @@ total control over view class selection you can directly choose the view class::
         }
     }
 
+.. meta::
+    :title lang=en: JSON and XML views
+    :keywords lang=en: json,xml,presentation layer,view,ajax,logic,syntax,templates,cakephp

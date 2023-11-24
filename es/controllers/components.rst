@@ -2,24 +2,20 @@ Componentes
 ###########
 
 Los componentes son paquetes de lógica que se comparten entre los controladores.
-CakePHP viene un con fantástico conjunto de componentes básicos que puedes usar 
+CakePHP viene un con fantástico conjunto de componentes básicos que puedes usar
 para ayudar en varias tareas comunes. También puedes crear tus propios componentes.
 Si te encuentras queriendo copiar y pegar cosas entre componentes, deberías considerar
 crear tu propio componente que contenga la funcionalidad. Crear componentes mantiene
 el código del controlador limpio y te permite rehusar código entre los diferentes
 controladores.
 
-Para más información sobre componentes incluidos en CakePHP, consulte el capítulo 
+Para más información sobre componentes incluidos en CakePHP, consulte el capítulo
 de cada componente:
 
 .. toctree::
     :maxdepth: 1
 
-    /controllers/components/authentication
     /controllers/components/flash
-    /controllers/components/security
-    /controllers/components/pagination
-    /controllers/components/request-handling
     /controllers/components/form-protection
     /controllers/components/check-http-cache
 
@@ -28,9 +24,8 @@ de cada componente:
 Configurando componentes
 ========================
 
-Muchos de los componentes principales requieren configuración. Algunos ejemplos 
-de componentes que requieren configuración son :doc:`/controllers/components/security`
-y :doc:`/controllers/components/form-protection`. La configuración para estos 
+Muchos de los componentes principales requieren configuración. Un ejemplo sería
+:doc:`/controllers/components/form-protection`. La configuración para estos
 componentes, y para los componentes en general, es usualmente hecho a través ``loadComponent()``
 en el método ``initialize()`` del controlador o a través del array ``$components``::
 
@@ -42,9 +37,8 @@ en el método ``initialize()`` del controlador o a través del array ``$componen
             $this->loadComponent('FormProtection', [
                 'unlockedActions' => ['index'],
             ]);
-            $this->loadComponent('Csrf');
+            $this->loadComponent('Flash');
         }
-
     }
 
 También puedes configurar los componentes en tiempo de ejecución usando el método
@@ -56,14 +50,14 @@ Lo anterior podría ser también expresado como::
         $this->FormProtection->setConfig('unlockedActions', ['index']);
     }
 
-Al igual que los helpers, componentes implementan los métodos ``getConfig()`` y
+Al igual que los helpers, los componentes implementan los métodos ``getConfig()`` y
 ``setConfig()`` para leer y escribir los datos de configuración::
 
     // Lee los datos de configuración.
     $this->FormProtection->getConfig('unlockedActions');
 
     // Escribe los datos de configuración
-    $this->Csrf->setConfig('cookieName', 'token');
+    $this->Flash->setConfig('key', 'myFlash');
 
 Al igual que con los helpers, los componentes fusionarán automáticamente su propiedad ``$_defaultConfig``
 con la configuración del controlador para crear la propiedad ``$_config`` que es
@@ -73,7 +67,7 @@ Componentes de alias
 --------------------
 
 Una configuración común para usar es la opción ``className``, que te permite utilizar
-componentes de alias. Esta característica es útil cuando quieres reemplazar ``$this->Auth``
+componentes de alias. Esta característica es útil cuando quieres reemplazar ``$this->Flash``
 u otra referencia común de componente con una implementación personalizada::
 
     // src/Controller/PostsController.php
@@ -81,21 +75,21 @@ u otra referencia común de componente con una implementación personalizada::
     {
         public function initialize(): void
         {
-            $this->loadComponent('Auth', [
-                'className' => 'MyAuth'
+            $this->loadComponent('Flash', [
+                'className' => 'MyFlash'
             ]);
         }
     }
 
-    // src/Controller/Component/MyAuthComponent.php
-    use Cake\Controller\Component\AuthComponent;
+    // src/Controller/Component/MyFlashComponent.php
+    use Cake\Controller\Component\FlashComponent;
 
-    class MyAuthComponent extends AuthComponent
+    class MyFlashComponent extends FlashComponent
     {
-        // Agrega tu código para sobreescribir el AuthComponent principal
+        // Agrega tu código para sobreescribir el FlashComponent principal
     }
 
-Lo de arriba haría *alias* ``MyAuthComponent`` a ``$this->Auth`` en tus controladores.
+Lo de arriba haría *alias* ``MyFlashComponent`` a ``$this->Flash`` en tus controladores.
 
 .. note::
     El alias de un componente reemplaza esa instancia en cualquier lugar donde se
@@ -105,7 +99,7 @@ Carga de componentes sobre la marcha
 ------------------------------------
 
 Es posible que no necesites todos tus componentes disponibles en cada acción del
-controlador. En situaciones como estas, puedes cargar un componente en tiempo de 
+controlador. En situaciones como estas, puedes cargar un componente en tiempo de
 ejecución usando el método ``loadComponent()`` en tu controlador::
 
     // En una acción del controlador
@@ -115,7 +109,7 @@ ejecución usando el método ``loadComponent()`` en tu controlador::
 .. note::
 
     Ten en cuenta que los componentes cargados sobre la marcha no perderán devoluciones
-    de llamadas. Si te basas en que las devoluciones de llamada ``beforeFilter`` o 
+    de llamadas. Si te basas en que las devoluciones de llamada ``beforeFilter`` o
     ``startup`` serán llamadas, necesitarás llamarlas manualmente dependiendo de
     cuándo cargas tu componente.
 
@@ -123,7 +117,7 @@ Uso de componentes
 ==================
 
 Una vez que hayas incluido algunos componentes a tu controlador, usarlos es bastante
-simple. Cada componente que uses se exponen como una propiedad en tu controlador. 
+simple. Cada componente que uses se exponen como una propiedad en tu controlador.
 Si cargaste el :php:class:`Cake\\Controller\\Component\\FlashComponent` en tu controlador,
 puedes acceder a él de esta forma::
 
@@ -150,6 +144,12 @@ puedes acceder a él de esta forma::
     como propiedades, comparten el mismo 'espacio de nombres'. Asegúrate de no
     dar a un componente y un modelo el mismo nombre.
 
+.. warning::
+
+    Los métodos de un componente **no** tienen acceso a :doc:`/development/dependency-injection`
+    como lo tienen los controladores. Usa una clase de servicio dentro de las acciones de tu controlador
+    en lugar de en el componente si necesitas ésta funcionalidad.
+
 .. _creating-a-component:
 
 Creando un componente
@@ -159,7 +159,7 @@ Supongamos que nuestra aplicación necesita realizar una operación matemática 
 en muchas partes diferentes de la aplicación. Podríamos crear un componente para
 albergar esta lógica compartida para su uso en muchos controladores diferentes.
 
-El primer paso es crear un nuevo archivo de componente y clase. Crea el archivo en 
+El primer paso es crear un nuevo archivo de componente y clase. Crea el archivo en
 **src/Controller/Component/MathComponent.php**. La estructura básica para el componente
 debería verse algo como esto::
 
@@ -184,21 +184,21 @@ Incluyendo tu componente en tus controladores
 ---------------------------------------------
 
 Una vez que nuestro componente está terminado, podemos usarlo en los controladores
-de la aplicación cargándolo durante el método ``initialize()`` del controlador. 
-Una vez cargado, el controlador recibirá un nuevo atributo con el nombre del 
+de la aplicación cargándolo durante el método ``initialize()`` del controlador.
+Una vez cargado, el controlador recibirá un nuevo atributo con el nombre del
 componente, a través del cual podemos acceder a una instancia del mismo::
 
     // En un controlador
     // Haz que el nuevo componente esté disponible en $this->Math,
-    // así como el estándar $this->Csrf
+    // así como el estándar $this->Flash
     public function initialize(): void
     {
         parent::initialize();
         $this->loadComponent('Math');
-        $this->loadComponent('Csrf');
+        $this->loadComponent('Flash');
     }
 
-Al incluir componentes en un controlador, también puedes declarar un conjunto de 
+Al incluir componentes en un controlador, también puedes declarar un conjunto de
 parámetros que se pasarán al constructor del componente. Estos parámetros pueden
 ser manejados por el componente::
 
@@ -210,10 +210,10 @@ ser manejados por el componente::
             'precision' => 2,
             'randomGenerator' => 'srand'
         ]);
-        $this->loadComponent('Csrf');
+        $this->loadComponent('Flash');
     }
 
-Lo anterior pasaría el array que contiene precision y randomGenerator a ``MathComponent::initialize()`` 
+Lo anterior pasaría el array que contiene precision y randomGenerator a ``MathComponent::initialize()``
 en el parámetro ``$config``.
 
 Usando otros componentes en tu componente
@@ -259,13 +259,13 @@ componentes agregándolos a la propiedad `$components`::
 
 .. note::
 
-    A diferencia de un componente incluido en un controlador, no se activarán 
+    A diferencia de un componente incluido en un controlador, no se activarán
     devoluciones de llamada en el componente de un componente.
 
 Accediendo al controlador de un componente
 ------------------------------------------
 
-Desde dentro de un componente, puedes acceder al controlador actual a través del 
+Desde dentro de un componente, puedes acceder al controlador actual a través del
 registro::
 
     $controller = $this->getController();
@@ -278,22 +278,22 @@ de las solicitudes que les permiten aumentar el ciclo de solicitud.
 
 .. php:method:: beforeFilter(EventInterface $event)
 
-    Es llamado antes que el método beforeFilter del controlador, pero *después*
+    Es llamado antes que el método beforeFilter() del controlador, pero *después*
     del método initialize() del controlador.
 
 .. php:method:: startup(EventInterface $event)
 
-    Es llamado después del método beforeFilter del controlador, pero antes de que
-    el controlador ejecute la acción actual del manejador.
+    Es llamado después del método beforeFilter() del controlador, pero antes de que
+    el controlador ejecute el "handler" de la acción actual
 
 .. php:method:: beforeRender(EventInterface $event)
 
-    Es llamado después de que el controlador ejecute la lógica de la acción 
+    Es llamado después de que el controlador ejecute la lógica de la acción
     solicitada, pero antes de que el controlador renderize las vistas y el diseño.
 
-.. php:method:: shutdown(EventInterface $event)
+.. php:method:: afterFilter(EventInterface $event)
 
-    Es llamado antes de enviar la salida al navegador.
+    Es llamado durante el evento ``Controller.shutdown``, antes de enviar la salida al navegador.
 
 .. php:method:: beforeRedirect(EventInterface $event, $url, Response $response)
 
@@ -341,5 +341,4 @@ actual. Al generar una ``RedirectException`` puedes incluir encabezados adiciona
 
 .. meta::
     :title lang=es: Componentes
-    :keywords lang=es: array controller,core libraries,authentication request,array name,access control lists,public components,controller code,core components,cookiemonster,login cookie,configuration settings,functionality,logic,sessions,cakephp,doc
-
+    :keywords lang=en: array controller,core libraries,array name,access control lists,public components,controller code,core components,cookiemonster,login cookie,configuration settings,functionality,logic,sessions,cakephp,doc
