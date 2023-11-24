@@ -32,7 +32,7 @@ Clona el código fuente de CakePHP desde GitHub:
 
 * Si no tienes una cuenta de `GitHub <https://github.com>`_  créate una.
 * Haz un *fork* del `repositorio CakePHP <https://github.com/cakephp/cakephp>`_
-  haciendo click en el botón **Fork**.
+  haciendo clic en el botón **Fork**.
 
 Después de haber hecho el fork, clónalo en tu equipo local::
 

@@ -2,7 +2,7 @@ Acceso a la base de datos & ORM
 ###############################
 
 En CakePHP el acceso a la base de datos se hace por medio de dos objetos primarios.
-El primero son **repositories** -repositorios- o **table objects** -objetos de tabla-.
+El primer tipo de objeto son **repositories** -repositorios- o **table objects** -objetos de tabla-.
 Estos objetos proveen acceso a colecciones de datos. Nos permiten guardar nuevos
 registros, modificar y borrar existentes, definir relaciones y realizar operaciones en masa.
 El segundo tipo de objeto son **entities** -entidades-. Las Entidades representan registros
@@ -38,7 +38,7 @@ comenzar a utilizar el ORM. Por ejemplo si quisieramos leer datos de nuestra tab
 
 Como se ve, no es necesario agregar código extra ni ninguna otra configuración, gracias al uso de las convenciones
 de CakePHP. Si quisieramos modificar nuestra clase ArticlesTable para agregar asociaciones o definir métodos
-adicionales deberiamos agregar las siguientes lineas en **src/Model/Table/ArticlesTable.php** ::
+adicionales deberiamos agregar las siguientes líneas en **src/Model/Table/ArticlesTable.php** ::
 
     namespace App\Model\Table;
 
@@ -50,7 +50,7 @@ adicionales deberiamos agregar las siguientes lineas en **src/Model/Table/Articl
     }
 
 Las clases Table usan una version en CamelCase del nombre de la tabla, con el sufijo ``Table``.
-Una vez que tú clase fue creada, puedes obtener una referencia a esta usando :php:class:`~Cake\\ORM\\TableRegistry` como antes::
+Una vez que tu clase fue creada, puedes obtener una referencia a esta usando :php:class:`~Cake\\ORM\\TableRegistry` como antes::
 
     use Cake\ORM\TableRegistry;
 
@@ -59,8 +59,8 @@ Una vez que tú clase fue creada, puedes obtener una referencia a esta usando :p
     $articles = TableRegistry::getTableLocator()->get('Articles');
 
 Ahora que tenemos una clase Table concreta, probablemente querramos usar una clase Entity concreta.
-Las clases Entity permiten definir métodos de acceso y mutación, lógica para registros individuales y mucho mas.
-Comenzaremos agregando las siguientes lineas en **src/Model/Entity/Article.php**::
+Las clases Entity permiten definir métodos de acceso y mutación, lógica para registros individuales y mucho más.
+Comenzaremos agregando las siguientes líneas en **src/Model/Entity/Article.php**::
 
     namespace App\Model\Entity;
 
@@ -89,7 +89,7 @@ carguemos entidades de nuestra base de datos, vamos a obtener instancias de nues
 CakePHP usa convenciones de nombres para asociar las clases Table y Entity. Si necesitas modificar qué entidad utilizada una tabla,
 puedes usar el método ``entityClass()`` para especificar el nombre de una clase.
 
-Vea :doc:`/orm/table-objects` y :doc:`/orm/entities` para mas información sobre como utilizar objetos Table y Entity en su aplicación.
+Vea :doc:`/orm/table-objects` y :doc:`/orm/entities` para más información sobre como utilizar objetos Table y Entity en su aplicación.
 
 Más información
 ===============
@@ -108,4 +108,4 @@ Más información
     orm/associations
     orm/behaviors
     orm/schema-system
-    console-and-shells/orm-cache
+    console-commands/schema-cache

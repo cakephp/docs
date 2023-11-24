@@ -1,0 +1,98 @@
+Herramienta de internacionalización (i18n)
+##########################################
+
+Las características i18n de CakePHP usan `archivos po <https://es.wikipedia.org/wiki/Gettext>`_
+como fuente de traducción. Los archivos PO se integran con herramientas de traducción de uso común
+como `Poedit <https://www.poedit.net/>`_.
+
+Los comandos i18n proporcionan una forma rápida de generar archivos de plantilla po.
+Estos archivos de plantilla luego se pueden entregar a los traductores para que puedan
+traducir los textos en su aplicación. Una vez que haya terminado las traducciones,
+los archivos pueden ser fusionados con traducciones existentes para ayudar a actualizar sus traducciones.
+
+Generando archivos POT
+======================
+
+POT files can be generated for an existing application using the ``extract``
+command. This command will scan your entire application for ``__()`` style
+function calls, and extract the message string. Each unique string in your
+application will be combined into a single POT file:
+
+Los archivos POT se pueden generar para una aplicación existente usando el
+comando ``extract``. Este comando escaneará toda su aplicación en busca de
+llamadas a funciones de estilo ``__()`` y extraerá la cadena del mensaje.
+Cada cadena única en su aplicación se combinará en un único archivo POT:
+
+.. code-block:: console
+
+    bin/cake i18n extract
+
+Lo anterior ejecutará el comando de extracción. El resultado de este comando será
+el archivo **resources/locales/default.pot**. Utilice el archivo pot como plantilla
+para crear archivos po. Si está creando archivos po manualmente a partir del
+archivo pot, asegúrese de configurar correctamente la línea de encabezado ``Plural-Forms``.
+
+Generando archivos POT para complementos
+-----------------------------------------
+
+Puede generar un archivo POT para un complemento específico usando:
+
+.. code-block:: console
+
+    bin/cake i18n extract --plugin <Plugin>
+
+Esto generará los archivos POT necesarios utilizados en los complementos.
+
+Extraer de varias carpetas a la vez
+-----------------------------------
+
+A veces, es posible que necesites extraer textos de más de un directorio de tu
+aplicación. Por ejemplo, si está definiendo algunas cadenas en el directorio
+``config`` de su aplicación, probablemente desee extraer textos de este directorio
+así como del directorio ``src``. Puedes hacerlo usando la opción ``--paths``.
+Se necesita una lista de rutas absolutas separadas por comas para extraer:
+
+.. code-block:: console
+
+    bin/cake i18n extract --paths /var/www/app/config,/var/www/app/src
+
+Excluyendo carpetas
+-------------------
+
+Puede pasar una lista separada por comas de las carpetas que desea excluir.
+Se ignorará cualquier ruta que contenga un segmento de ruta con los valores
+proporcionados:
+
+.. code-block:: console
+
+    bin/cake i18n extract --exclude vendor,tests
+
+Omitir advertencias de sobrescritura para archivos POT existentes
+-----------------------------------------------------------------
+
+Al agregar ``--overwrite``, el script de shell ya no le advertirá si ya existe
+un archivo POT y lo sobrescribirá de forma predeterminada:
+
+.. code-block:: console
+
+    bin/cake i18n extract --overwrite
+
+Extracción de mensajes de las bibliotecas principales de CakePHP
+----------------------------------------------------------------
+
+De forma predeterminada, el script de extracción le preguntará si desea extraer
+los mensajes utilizados en el código de CakePHP.
+Configura ``--extract-core`` en ``yes`` o ``no`` para establecer el comportamiento
+predeterminado:
+
+.. code-block:: console
+
+    bin/cake i18n extract --extract-core yes
+
+    // or
+
+    bin/cake i18n extract --extract-core no
+
+.. meta::
+    :title lang=es: Herramienta de internacionalización (i18n)
+    :keywords lang=es: pot files,locale default,translation tools,message string,app locale,php class,validation,i18n,translations,command,models
