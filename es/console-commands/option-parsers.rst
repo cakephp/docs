@@ -84,7 +84,7 @@ Validación de Argumentos
 ------------------------
 
 Al crear argumentos posicionales, puede utilizar el indicador ``required`` para
-indicar que un argumento debe estar presente cuando se llama a un shell.Además,
+indicar que un argumento debe estar presente cuando se llama a un shell. Además,
 puedes usar ``choices`` para forzar que un argumento provenga de una lista de
 opciones válidas::
 
@@ -363,7 +363,7 @@ Al pasar una matriz o una cadena, puede establecer el valor de la descripción::
     // Leer el valor actual
     $parser->getDescription();
 
-Establecer el epilogo
+Establecer el epílogo
 ---------------------
 
 .. php:method:: setEpilog($text)

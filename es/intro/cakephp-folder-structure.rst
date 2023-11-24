@@ -25,8 +25,8 @@ directorios de primer nivel que deberías ver:
   esta carpeta es normalmente utilizada para almacenar descripciones de modelos
   y a veces información de sesión.
 - La carpeta *vendor* es donde CakePHP y otras dependencias de la aplicación
-  serán instaladas por `Composer <https://getcomposer.org>`_. Editar éstos archivos no es
-  recomendado, ya que Composer sobre escribirá tus cambios en la próxima actualización..
+  serán instaladas por `Composer <https://getcomposer.org>`_. Editar estos archivos no es
+  recomendado, ya que Composer sobreescribirá tus cambios en la próxima actualización.
 - El directorio *webroot* es la raíz de los documentos públicos de tu
   aplicación. Contiene todos los archivos que quieres que sean accesibles
   públicamente.

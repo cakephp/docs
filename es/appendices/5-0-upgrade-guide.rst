@@ -57,10 +57,10 @@ plugin::
 Actualizar dependencias de CakePHP
 ==================================
 
-Después de aplicar las refactorizaciones de rector necesitas actualizar CakePHP, sus plugins, PHPUnit
-y tal vez otras dependencias en tu ``composer.json``.
-Este proceso depende de gran medida de tu aplicación por lo que le recomendamos que compare tu
-``composer.json`` con el que esta presente en `cakephp/app
+Después de aplicar las refactorizaciones de Rector necesitas actualizar CakePHP, sus plugins, PHPUnit
+y tal vez otras dependencias en el ``composer.json``.
+Este proceso depende de gran medida de tu aplicación por lo que te recomendamos que compares el
+``composer.json`` con el que está presente en `cakephp/app
 <https://github.com/cakephp/app/blob/5.x/composer.json>`__.
 
 After the version strings are adjusted in your ``composer.json`` execute
@@ -69,7 +69,7 @@ After the version strings are adjusted in your ``composer.json`` execute
 Actualiza los archivos de la aplicación basándose en las últimas plantillas
 ===========================================================================
 
-A continuación, asegurate de que el resto de tu aplicación este actualizado basándose en la ultima version de `cakephp/app
+A continuación, asegúrate de que el resto de tu aplicación esté actualizado basándose en la última version de `cakephp/app
 <https://github.com/cakephp/app/blob/5.x/>`__.
 
 .. meta::

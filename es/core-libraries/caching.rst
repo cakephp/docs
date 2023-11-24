@@ -249,9 +249,7 @@ ahorras múltiples conexiones de red cuando usas Memcached::
     ]);
 
     // $resultado contendrá
-    ['articulo-primer-post' => true, 'articulo-primer-post-comentarios' =>
-
- true]
+    ['articulo-primer-post' => true, 'articulo-primer-post-comentarios' => true]
 
 Escrituras Atómicas
 -------------------

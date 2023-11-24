@@ -24,7 +24,7 @@ Puedes ver más información aquí: https://es.wikipedia.org/wiki/Cron_(Unix)
 Trabajos cron en hosting compartido
 -----------------------------------
 
-En algunos hosting compartidos ``cd /full/path/to/root && bin/cake mycommand myparam``
+En algunos servidores compartidos ``cd /full/path/to/root && bin/cake mycommand myparam``
 Puede que no funcione. En su lugar puedes usar
 ``php /full/path/to/root/bin/cake.php mycomando myparam``.
 

@@ -43,7 +43,7 @@ Regresará::
 opciones
 --------
 
-Como tercera y última opción, genera opciones para el (sub)comando dado, tal como se establece en getOptionParser.
+Como tercera y última opción, genera opciones para el (sub)comando dado, tal como se establece en ``getOptionParser``.
 (Incluidas las opciones predeterminadas heredadas de Shell).
 Por ejemplo::
 

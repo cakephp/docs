@@ -148,8 +148,8 @@ Formato de Porcentajes
 
 Al igual que :php:meth:`Cake\\I18n\\Number::precision()`, este método formatea un número
 según la precisión proporcionada (donde los números se redondean para cumplir con la
-precisión dada). Este método también expresa el número como un porcentaje
-y agrega la salida con un signo de porcentaje. ::
+precisión dada). Adicionalmente, también expresa el número como un porcentaje
+y agrega un signo de porcentaje a la salida. ::
 
     // Llamado como NumberHelper. Salida: 45.69%
     echo $this->Number->toPercentage(45.691873645);

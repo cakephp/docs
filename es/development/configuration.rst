@@ -136,14 +136,14 @@ A continuación se muestra una descripción de las variables y cómo afectan a t
   - (string) 'force' - Siempre añade la marca de tiempo.
 
 - **Asset.cacheTime**
-  Establece el tiempo de caché del archivo de activo. Esto determina el encabezado ``Cache-Control`` de HTTP's ``max-age`` y el tiempo de ``Expire`` del encabezado de HTTP para los activos. Esto puede tomar cualquier valor que la función `strtotime <https://php.net/manual/es/function.strtotime.php>`_ tu versión de PHP pueda tomar. El valor predeterminado es ``+1 día``.
+  Establece el tiempo de caché del archivo de activo. Esto determina el encabezado ``Cache-Control``, ``max-age`` y el tiempo de ``Expire`` del encabezado de HTTP para los activos. Esto puede tomar cualquier valor que la función `strtotime <https://php.net/manual/es/function.strtotime.php>`_ tu versión de PHP pueda tomar. El valor predeterminado es ``+1 día``.
 
 Usar un CDN
 -----------
 
 Para utilizar un CDN para cargar tus activos estáticos, cambia las variables ``App.imageBaseUrl``, ``App.cssBaseUrl``, ``App.jsBaseUrl`` para que apunten a la URI del CDN, por ejemplo: ``https://micdn.ejemplo.com/`` (nota la barra diagonal al final ``/``).
 
-Todas las imágenes, scripts y estilos cargados a través de HtmlHelper agregarán la ruta absoluta del CDN, coincidiendo con la misma ruta relativa utilizado en la aplicación. Ten en cuenta que hay un caso de uso específico cuando se utilizan activos basados en plugins: los plugins no utilizarán el prefijo del plugin cuando se utiliza una URI absoluta ``...BaseUrl``, por ejemplo, por defecto:
+Todas las imágenes, scripts y estilos cargados a través de HtmlHelper agregarán la ruta absoluta del CDN, coincidiendo con la misma ruta relativa utilizada en la aplicación. Ten en cuenta que hay un caso de uso específico cuando se utilizan activos basados en plugins: los plugins no utilizarán el prefijo del plugin cuando se utiliza una URI absoluta ``...BaseUrl``, por ejemplo, por defecto:
 
 * ``$this->Helper->assetUrl('TestPlugin.logo.png')`` resuelve a ``test_plugin/logo.png``
 

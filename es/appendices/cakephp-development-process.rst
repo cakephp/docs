@@ -12,7 +12,7 @@ Los proyectos de CakePHP en general siguen `semver <https://semver.org/>`__. És
 - Las versiones **A.B.C** son *lanzamientos de parches*. Deben ser compatibles con el lanzamiento de parche anterior. La excepción
   a esta regla es si se descubre un problema de seguridad y la única solución es romper una API existente.
 
-Consulta el :doc:/contributing/backwards-compatibility para ver lo que consideramos como compatible hacia atrás y cambios que rompen la compatibilidad.
+Consulta el :doc:/contributing/backwards-compatibility para ver lo que consideramos como compatible con versiones previas y cambios que rompen la compatibilidad.
 
 Lanzamientos Principales
 =========================

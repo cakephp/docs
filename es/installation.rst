@@ -1,7 +1,7 @@
 Instalación
 ###########
 
-CakePHP se instala rápida y fácilmente. Los requisitos mínimos son
+CakePHP se instala rápida y fácilmente. ¡Los requisitos mínimos son
 un servidor web y una copia de CakePHP, y ya! Aunque este manual se enfoca
 principalmente en configurar Apache (ya que es el más utilizado),
 puedes configurar CakePHP para que corra con una variedad de servidores web
@@ -16,7 +16,7 @@ Requisitos
 - extensión mbstring.
 - extensión intl.
 
-Técnicamente una base de datos no es necesaria, pero imaginamos que la
+Técnicamente, una base de datos no es necesaria, pero imaginamos que la
 mayoría de aplicaciones utiliza alguna. CakePHP soporta una gran variedad
 de sistemas de bases de datos:
 
@@ -96,14 +96,14 @@ Permisos
 
 CakePHP utiliza el directorio **tmp** para varias operaciones. Descripciones de
 Modelos, el caché de las vistas y la información de la sesión son algunos
-ejemplos de lo anterior. El directorio **logs** es utilizado para para escribir
+ejemplos de lo anterior. El directorio **logs** es utilizado para escribir
 ficheros de log por el motor de ``FileLog`` por defecto.
 
 Asegúrate de que los directorios **logs**, **tmp** y todos sus subdirectorios
 tengan permisos de escritura por el usuario del Servidor Web. La instalación
 de CakePHP a través de Composer se encarga de este proceso haciendo que dichos
 directorios tengan los permisos abiertos globalmente con el fin de que puedas
-tener ajustado todo de manera más rápida. Obviamente es recomendable que revises, y
+tener ajustado todo de manera más rápida. Obviamente, es recomendable que revises, y
 modifiques si es necesario, los permisos tras la instalación vía Composer para
 mayor seguridad.
 
@@ -129,10 +129,10 @@ colocarla en el directorio raíz de tu Servidor Web, o tan complejo
 y flexible como lo desees. Esta sección cubrirá los dos tipos
 principales de instalación de CakePHP: Desarrollo y Producción.
 
--  Desarrollo: fácil de arrancar, las URLs de la aplicación incluyen
+-  Desarrollo: fácil de arrancar, las URL de la aplicación incluyen
    el nombre del directorio de la aplicación de CakePHP y es menos segura.
 -  Producción: Requiere tener la habilidad de configurar el directorio raíz
-   del Servidor Web, cuenta con URLs limpias y es bastante segura.
+   del Servidor Web, cuenta con URL limpias y es bastante segura.
 
 Desarrollo
 ==========
@@ -272,7 +272,7 @@ obtener información.
        #    Deny from all
        </Directory>
 
-#. Asegura que tu estás cargando mod\_rewrite correctamente. Debes
+#. Asegura que tú estás cargando mod\_rewrite correctamente. Debes
    ver algo similar a esto:
 
    .. code-block:: apacheconf
@@ -286,8 +286,8 @@ obtener información.
    ajustes estén activados.
 
    Verifica que tus archivos .htaccess está actualmente en directorio
-   correcto. Algunos sistemas operativo tratan los archivos que empiezan
-   con '.' como oculto y por lo tanto no podrás copiarlos.
+   correcto. Algunos sistemas operativos tratan los archivos que empiezan
+   con '.' como ocultos y, por lo tanto, no podrás copiarlos.
 
 #. Asegúrate que tu copia de CakePHP provenga desde la sección descargas del
    sitio o de nuestro repositorio de Git, y han sido desempacados correctamente,
@@ -340,7 +340,7 @@ obtener información.
 
    Para muchos servicios de alojamiento (GoDaddy, 1and1), tu servidor
    web estará actualmente sirviendo desde un directorio de usuario que
-   actualmente usa mod\_rewrite. Si tu estás instalando CakePHP en la carpeta
+   actualmente usa mod\_rewrite. Si tú estás instalando CakePHP en la carpeta
    de usuario (http://example.com/~username/cakephp/), o alguna otra
    estructura de URL que ya utilice mod\_rewrite, necesitarás agregar una
    declaración a los archivos .htaccess que CakePHP usa (.htaccess,
@@ -380,20 +380,20 @@ obtener información.
    Lo anterior simplemente previene que archivos adicionales incorrectos sean enviados
    a index.php en su lugar muestre la página 404 de tu servidor web.
 
-   Adicionalmente puedes crear una página 404 que concuerde, o usar la página 404
+   Adicionalmente, puedes crear una página 404 que concuerde, o usar la página 404
    incluida en CakePHP agregando una directiva ``ErrorDocument``:
 
    .. code-block:: apacheconf
 
        ErrorDocument 404 /404-not-found
 
-nginx
+Nginx
 -----
 
-nginx no hace uso de un archivo .htaccess como Apache, por esto es necesario
-crear la reescritura de URL en la configuraciones de *site-available*. Esto
+Nginx no hace uso de un archivo .htaccess como Apache, por esto es necesario
+crear la reescritura de URL en la configuracion de *sites-available*. Esto
 usualmente se encuentra en ``/etc/nginx/sites-available/your_virtual_host_conf_file``.
-Dependiendo de la configuración, tu necesitarás modificar esto, pero por lo menos,
+Dependiendo de la configuración, necesitarás modificar esto, pero por lo menos,
 necesitas PHP corriendo como una instancia FastCGI:
 
 .. code-block:: nginx
@@ -466,7 +466,7 @@ a www.example.com consulta el enlace de nginx anterior):
 IIS7 (Windows)
 --------------
 
-IIS7 no soporta de manera nativa los archivos .htaccess. Mientras hayan
+IIS7 no soporta de manera nativa los archivos .htaccess. Mientras haya
 *add-ons* que puedan agregar soporte a estos archivos, puedes también importar
 las reglas htaccess en IIS para usar las redirecciones nativas de CakePHP. Para hacer
 esto, sigue los siguientes pasos:
@@ -515,7 +515,7 @@ funcionar correctamente.
 No puedo usar Redireccionamientos de URL
 ----------------------------------------
 
-Si no quieres o no puedes obtener mod\_rewirte (o algun otro modulo
+Si no quieres o no puedes obtener mod\_rewirte (o algún otro módulo
 compatible) en el servidor a correr, necesitarás usar
 el decorador de URL incorporado en CakePHP. En **config/app.php**,
 descomentar la línea para que se vea así::

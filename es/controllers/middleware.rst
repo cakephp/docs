@@ -85,7 +85,7 @@ Puedes usar el objeto ``MiddlewareQueue`` para agregar el middleware::
         }
     }
 
-Adicionalmente, aparte de agregarlo al final de la ``MiddlewareQueue`` tu puedes realizar distintas
+Adicionalmente, aparte de agregarlo al final de la ``MiddlewareQueue``, puedes realizar distintas
 operaciones::
 
         $layer = new \App\Middleware\CustomMiddleware;

@@ -319,7 +319,7 @@ Los Objetos de Plugin permiten a un autor de plugin definir lógica de configura
 Rutas del Plugin
 ================
 
-Los plugins pueden proporcionar archivos de rutas que contienen sus propias rutas. Cada plugin puede contener un archivo **config/routes.php** . Este archivo de rutas se puede cargar cuando se agrega el plugin o en el archivo de rutas de la aplicación. Para crear las rutas del plugin ContactManager, coloca lo siguiente en **plugins/ContactManager/config/routes.php**::
+Los plugins pueden proporcionar archivos de rutas que contienen sus propias rutas. Cada plugin puede contener un archivo **config/routes.php**. Este archivo de rutas se puede cargar cuando se agrega el plugin o en el archivo de rutas de la aplicación. Para crear las rutas del plugin ContactManager, coloca lo siguiente en **plugins/ContactManager/config/routes.php**::
 
     <?php
     use Cake\Routing\Route\DashedRoute;
@@ -604,7 +604,7 @@ Publicar tu Plugin
 
 Los plugins de CakePHP deben publicarse en `Packagist <https://packagist.org>`__. De esta manera, otras personas pueden usarlo como dependencia de Composer. También puedes proponer tu plugin a la lista de `awesome-cakephp <https://github.com/FriendsOfCake/awesome-cakephp>`_.
 
-Elige un nombre semánticamente significativo para el nombre del paquete. Idealmente, este debería llevar el prefijo del framework, en este caso "cakephp" como el framework. El nombre del proveedor generalmente será tu nombre de usuario de GitHub. **No** uses el espacio de nombres de CakePHP (cakephp) ya que está reservado para los plugins propiedad de CakePHP. La convención es usar letras minúsculas y guiones como separadores.
+Elige un nombre semánticamente significativo para el nombre del paquete. Idealmente, este debería llevar el prefijo del framework, en este caso "cakephp" como el framework. El nombre del proveedor generalmente será tu nombre de usuario de GitHub. **No** uses el espacio de nombres de CakePHP (cakephp), ya que está reservado para los plugins propiedad de CakePHP. La convención es usar letras minúsculas y guiones como separadores.
 
 Entonces, si creaste un plugin "Logging" con tu cuenta de GitHub "FooBar", un buen nombre sería `foo-bar/cakephp-logging`.
 Y el plugin propiedad de CakePHP llamado "Localized" se puede encontrar bajo `cakephp/localized`, respectivamente.

@@ -23,7 +23,7 @@ Configuración del *IDE*
 Asegúrate de que tu *IDE* haga *trim* por la derecha para que no haya espacios
 al final de las líneas.
 
-La mayoría de los *IDEs* modernos soportan archivos ``.editorconfig``. El
+La mayoría de los *IDE* modernos soportan archivos ``.editorconfig``. El
 esqueleto de aplicación de CakePHP viene con él por defecto y contiene las
 mejores prácticas de forma predeterminada.
 
@@ -51,7 +51,7 @@ O también::
         }
     }
 
-En los casos donde utilices llamadas de funciones que ocupen más de un línea
+En los casos donde utilices llamadas de funciones que ocupen más de una línea
 usa las siguientes guías:
 
 *  El paréntesis de abertura de la llamada de la función deberá ser lo
@@ -138,9 +138,9 @@ Operador ternario
 -----------------
 
 Los operadores ternarios están permitidos cuando toda su declaración cabe en una
-sola línea. Operadores más largos deberán ir dentro dentro de una declaración
+sola línea. Operadores más largos deberán ir dentro de una declaración
 ``if else``. Los operadores ternarios no deberían ir nunca anidados y opcionalmente
-pueden utilizarse paréntesis entorno a las condiciones para dar claridad::
+pueden utilizarse paréntesis alrededor de las condiciones para dar claridad::
 
     // Correcto, sencillo y legible
     $variable = isset($options['variable']) ? $options['variable'] : true;
@@ -172,7 +172,7 @@ Intenta ser siempre lo más estricto posible. Si una comparación no es estricta
 de forma deliberada, puede ser inteligente añadir un comentario para evitar
 confundirla con un error.
 
-Para comprobar si una variables es ``null`` se recomienda utilizar comprobación
+Para comprobar si una variable es ``null`` se recomienda utilizar la comprobación
 estricta::
 
     if ($value === null) {
@@ -378,7 +378,7 @@ object
 resource
     Tipo resource (devuelto por ejemplo por mysql\_connect()).
     Recuerda que cuando especificas el tipo como mixed deberás indicar
-    si es desconocido o cuales son los tipos posibles.
+    si es desconocido o cuáles son los tipos posibles.
 callable
     Función Callable.
 
@@ -388,7 +388,7 @@ Puedes combinar tipos usando el caracter ``|``::
 
 Para más de dos tipos normalmente lo mejor es utilizar ``mixed``.
 
-Cuando se devuelva el propio objeto, p.ej. para encadenar, deberás utilizar
+Cuando se devuelva el propio objeto, por ejemplo para encadenar, deberás utilizar
 ``$this`` en su lugar::
 
     /**
@@ -467,7 +467,7 @@ Los nombres de las clases deberán escribirse en ``CamelCase``, por ejemplo::
 Variables
 ---------
 
-Los nombres de variables deberán ser todo lo descriptibles que puedan pero
+Los nombres de variables deberán ser todo lo descriptibles que puedan, pero
 también lo más corto posible. Se escribirán en minúscula salvo que estén compuestos
 por múltiples palabras, en cuyo caso irán en ``camelBack``. Los nombres de las
 variables que referencien objetos deberán ir asociados de algún modo a la clase
@@ -516,15 +516,15 @@ Tipo
 (bool)
     Cast a boolean.
 (int)
-    Cast a integer.
+    Cast an integer.
 (float)
     Cast a float.
 (string)
     Cast a string.
 (array)
-    Cast a array.
+    Cast an array.
 (object)
-    Cast a object.
+    Cast an object.
 
 Por favor utiliza ``(int)$var`` en lugar de ``intval($var)`` y ``(float)$var``
 en lugar de ``floatval($var)`` cuando aplique.
@@ -611,4 +611,4 @@ por defecto puedes asegurarte de que las claves necesarias están definidas::
 
 .. meta::
     :title lang=es: Estándares de codificación
-    :keywords lang=es: llaves, nivel de tabulación, errores logicos, estructuras de control,expr,estándares de codificación,paréntesis,foreach, legibilidad,moose,nuevas funcionalidades,repositorio,desarrolladores
+    :keywords lang=es: llaves, nivel de tabulación, errores logicos, estructuras de control, expr, estándares de codificación, paréntesis, foreach, legibilidad,moose,nuevas funcionalidades,repositorio,desarrolladores

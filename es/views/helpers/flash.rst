@@ -13,17 +13,17 @@ el directorio **templates/element/flash**.  Puedes notar CakePHP's App
 template viene con tres elementos flash:  **success.php**, **default.php**, and
 **error.php**.
 
-Renderizando Mnesajes Flash
+Renderizando Mensajes Flash
 =============================
 
-Para renderizar un mensaje flash, puedes simplemente utilizar el método FlashHelper's ``render()``
-en tu template default ``templates/layout/default.php``::
+Para renderizar un mensaje flash, puedes simplemente utilizar el método ``render()``
+del FlashHelper en el template default ``templates/layout/default.php``::
 
     <?= $this->Flash->render() ?>
 
-Por defecto, CakePHP utiliza un "flash" key para los mensajes flash messages en la sesión.  Sin embargo, si
+Por defecto, CakePHP utiliza un "flash" key para los mensajes flash messages en la sesión.  Sin embargo,
 si has especificado un "key" al establecer el mensaje flash en
-:doc:`FlashComponent </controllers/components/flash>`, puedes especificar cual "key" de flash renderizar::
+:doc:`FlashComponent </controllers/components/flash>`, puedes especificar cuál "key" de flash renderizar::
 
     <?= $this->Flash->render('other') ?>
 

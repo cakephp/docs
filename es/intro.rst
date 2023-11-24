@@ -134,7 +134,7 @@ siguientes pasos:
 #. Las reglas de rescritura del servidor web envían la petición a **webroot/index.php**.
 #. Tu aplicación es cargada y ligada a un ``HttpServer``.
 #. Se inicializa el ``midleware`` de tu aplicación.
-#. Una petición y respuesta son precesadas a través del ``Middleware PSR-7`` que tu aplicación utiliza. Normalmente esto incluye la captura de errores y enrutamiento.
+#. Una petición y respuesta son precesadas a través del ``Middleware PSR-7`` que tu aplicación utiliza. Normalmente, esto incluye la captura de errores y enrutamiento.
 #. Si no recibe ninguna respuesta del ``middleware`` y la petición contiene información de enrutamiento, se selecciona un controlador y una acción.
 #. La acción del controlador es ejecutada y el controlador interactúa con los Modelos y Componentes necesarios.
 #. El controlador delega la creación de la respuesta a la Vista para generar la salida a partir de los datos del modelo.

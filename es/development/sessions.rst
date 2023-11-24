@@ -92,7 +92,7 @@ Manejadores de Sesiones
 
 Los manejadores de sesiones también se pueden definir en el array de configuración de la sesión. Al definir la clave de configuración 'handler.engine', puedes nombrar la clase o proporcionar una instancia del manejador. La clase/objeto debe implementar la interfaz nativa de PHP ``SessionHandlerInterface``. Implementar esta interfaz permitirá que ``Session`` mapee automáticamente los métodos para el manejador. Tanto los manejadores de sesiones de base de datos como de caché utilizan este método para guardar sesiones. Las configuraciones adicionales
 
- para el manejador deben colocarse dentro del array del manejador. Luego puedes leer esos valores desde dentro de tu manejador::
+Para el manejador deben colocarse dentro del array del manejador. Luego puedes leer esos valores desde dentro de tu manejador::
 
     'Session' => [
         'handler' => [
@@ -173,7 +173,7 @@ En la mayoría de los casos, esta será la configuración predeterminada, por lo
 cualquier sesión recién creada como un archivo en, por ejemplo, ``/var/lib/php/session``.
 
 Pero esto también significa que cualquier tarea computacionalmente intensiva, como consultar un gran
-conjunto de datos combinada con una sesión activa, **bloqueará ese archivo de sesión**, lo que
+conjunto de datos combinado con una sesión activa, **bloqueará ese archivo de sesión**, lo que
 bloqueará a los usuarios para, por ejemplo, abrir una segunda pestaña de tu aplicación para
 hacer algo más mientras tanto.
 

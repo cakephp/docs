@@ -80,13 +80,9 @@ un archivo POT y lo sobrescribirá de forma predeterminada:
 Extracción de mensajes de las bibliotecas principales de CakePHP
 ----------------------------------------------------------------
 
-By default, the extract shell script will ask you if you like to extract
-the messages used in the CakePHP core libraries. Set ``--extract-core`` to yes
-or no to set the default behavior:
-
-orma predeterminada, el script de extracción le preguntará si desea extraer
-los mensajes utilizados en las bibliotecas principales de CakePHP.
-Configure ``--extract-core`` en sí o no para establecer el comportamiento
+De forma predeterminada, el script de extracción le preguntará si desea extraer
+los mensajes utilizados en el código de CakePHP.
+Configura ``--extract-core`` en ``yes`` o ``no`` para establecer el comportamiento
 predeterminado:
 
 .. code-block:: console

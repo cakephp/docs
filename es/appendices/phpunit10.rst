@@ -15,7 +15,7 @@ Se recomienda dejar que PHPUnit actualice su archivo de configuración a través
 
     ¡Asegúrese de que ya está en PHPUnit 10 a través de ``vendor/bin/phpunit --version`` antes de ejecutar este comando!
 
-Con este comando ejecutado, tu ``phpunit.xml`` ya tiene la mayoría de los cambios recomendados presentes.
+Una vez hayas ejecutado este comando, tu ``phpunit.xml`` tendrá mayoría de los cambios recomendados.
 
 Nuevo sistema de eventos
 ------------------------
@@ -51,7 +51,7 @@ debe convertirse a::
 se ha añadido el método estático ``self::withConsecutive()`` a través del método ``Cake\TestSuite\PHPUnitConsecutiveTrait``
 a la clase base ``Cake\TestSuite\TestCase`` para que no tenga que agregar manualmente este trait a tus clases de TestCase.
 
-los proveedores de datos tienen que ser estáticos
+Los proveedores de datos tienen que ser estáticos
 =================================================
 
 Si tus testcases aprovechan la función de proveedor de datos de PHPUnit entonces

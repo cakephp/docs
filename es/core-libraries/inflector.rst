@@ -122,7 +122,7 @@ Generando formas de tabla y nombre de clase
 .. php:staticmethod:: dasherize($dashed)
 .. php:staticmethod:: tableize($camelCase)
 
-Cuando se genera código, o usando las convenciones de CakePHP tu puedes necesitar generar inflecciones para los nombres de tabla o de clase::
+Cuando se genera código, o usando las convenciones de CakePHP, puedes necesitar generar inflecciones para los nombres de tabla o de clase::
 
     // UserProfileSetting
     Inflector::classify('user_profile_settings');
@@ -174,7 +174,7 @@ en tu archivo **config/bootstrap.php**::
 
 Las reglas suministradas se fusionarán en los conjuntos de inflexión respectivos definidos en ``Cake/Utility/Inflector``,
 y las reglas añadidas tendrán prioridad sobre las reglas principales del núcleo. Puedes usar ``Inflector::reset()``
-para eliminar las reglas y restaurar el estado original del Inflector."
+para eliminar las reglas y restaurar el estado original del Inflector.
 
 .. meta::
     :title lang=es: Objeto Inflector

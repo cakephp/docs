@@ -1,29 +1,29 @@
 Herramienta de servidor
 #######################
 
-El ``ServerCommand`` le permite crear un servidor web simple utilizando el
+El ``ServerCommand`` te permite crear un servidor web simple utilizando el
 servidor web PHP integrado. Si bien este servidor *no* está diseñado para uso
 en producción, puede ser útil en el desarrollo cuando desea probar rápidamente
-una idea y no quiere perder tiempo configurando Apache o Nginx. Puede iniciar
-el comando del servidor con:
+una idea y no quiere perder tiempo configurando Apache o Nginx. Puedes iniciar
+el servidor con el comando:
 
 .. code-block:: console
 
     bin/cake server
 
-Debería ver que el servidor arranca y se conecta al puerto 8765. Puede visitar
+Deberías ver que el servidor arranca y se conecta al puerto 8765. Puedes visitar
 el servidor CLI visitando ``http://localhost:8765`` en su navegador web.
-Puede cerrar el servidor presionando ``CTRL-C`` en su terminal.
+Para cerrar el servidor presiona ``CTRL-C`` en tu terminal.
 
 .. note::
 
-    Pruebe ``bin/cake server -H 0.0.0.0`` si no se puede acceder al servidor
+    Prueba ``bin/cake server -H 0.0.0.0`` si no se puede acceder al servidor
     desde otros hosts.
 
 Cambiar el puerto y la raíz del documento
 =========================================
 
-Puede personalizar el puerto y la raíz del documento usando las opciones:
+Puedes personalizar el puerto y el directorio raíz usando las opciones:
 
 .. code-block:: console
 

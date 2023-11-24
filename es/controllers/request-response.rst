@@ -200,7 +200,7 @@ todos los archivos cargados posiblemente existentes::
 
     Los archivos cargados que se agregaron a la solicitud a través de este método *no* estarán disponibles en los datos
     del cuerpo de la solicitud, es decir, no puede recuperarlos a través de
-    :php:meth:`Cake\\Http\\ServerRequest::getData()` ! Si los necesita en los datos de la solicitud (también), entonces 
+    :php:meth:`Cake\\Http\\ServerRequest::getData()` ! Si los necesita en los datos de la solicitud (también), entonces
     debe configurarlos mediante :php:meth:`Cake\\Http\\ServerRequest::withData()` o
     :php:meth:`Cake\\Http\ \ServerRequest::withParsedBody()`.
 
@@ -234,7 +234,7 @@ variables de entorno sin tener que modificar los globales ``$_SERVER`` y ``$_ENV
     // Establecer un valor, generalmente útil en las pruebas.
     $this->request->withEnv('REQUEST_METHOD', 'POST');
 
-Para acceder a todas las variables de entorno en una solicitud utilice ``getServerParams()``::
+Para acceder a todas las variables de entorno en una solicitud, utilice ``getServerParams()``::
 
     $env = $this->request->getServerParams();
 

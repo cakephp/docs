@@ -20,7 +20,7 @@ Vistazo rápido
 ==============
 
 Esta sección te enseñará los usos más comunes del enrutamiento en CakePHP con
-ejemplos. Normalmente deseas mostrar algo como una página de destino, por lo que
+ejemplos. Normalmente, deseas mostrar algo como una página de destino, por lo que
 tendrás que añadir esto a tu archivo **config/routes.php**::
 
     /** @var \Cake\Routing\RouteBuilder $routes */
@@ -191,7 +191,7 @@ Algunos ejemplos de destino de cadena son::
     // Controlador de plugin con prefijo
     Vendor/Cms.Management/Admin/Articles::view
 
-Anteriormente usamos el asterisco final (``/*``) para capturar segmentos de ruta adicionales,
+Anteriormente, usamos el asterisco final (``/*``) para capturar segmentos de ruta adicionales,
 también está el doble asterisco final (``/**``). Utilizando el doble asterisco final,
 capturará el resto de una URL como un único argumento. Esto es útil cuando se desea
 utilizar un argumento que incluye ``/``::
@@ -557,7 +557,7 @@ proporcionarlos como parte de las opciones de ``Router::url()``.
     dentro de un alcance de enrutamiento diferente.
 
 Al crear rutas con nombre, probablemente querrás ceñirte a algunas convenciones
-par alos nombres de las rutas. CakePHP facilita la creación de nombres de rutas
+para los nombres de las rutas. CakePHP facilita la creación de nombres de rutas
 al permitir definir prefijos de nombres en cada ámbito::
 
     $routes->scope('/api', ['_namePrefix' => 'api:'], function (RouteBuilder $routes) {
@@ -683,7 +683,7 @@ El prefijo actual estará disponible desde los métodos del controlador a travé
 
 Cuando usamos rutas de prefijo es importante configurar la opción ``prefix`` y
 utilizar el mismo formato CamelCased que se utiliza in el método ``prefix()``.
-A continuación se explico cómo crear este enlace utilizando el helper HTML::
+A continuación se explica cómo crear este enlace utilizando el helper HTML::
 
     // Ve a una ruta de prefijo
     echo $this->Html->link(
@@ -1002,7 +1002,7 @@ Enrutamiento RESTful
 
 El enrutador ayuda a generar rutas RESTful para tus controladores. Las rutas RESTful
 son útiles cuando estás creando API endpoints para tus aplicaciones. Si quisiéramos
-permitir el accesos REST a un controlador de recetas, haríamos algo como esto::
+permitir el acceso REST a un controlador de recetas, haríamos algo como esto::
 
     // En config/routes.php...
 
@@ -1047,7 +1047,7 @@ Las fuentes en orden de preferencia son:
 
 La variable POST ``_method`` es útil para utilizar un navegador como
 cliente REST (o cualquier otra cosa que pueda realizar POST).
-Simplemente establece el valor de ``_method()`` con el nombre del
+Simplemente, establece el valor de ``_method()`` con el nombre del
 método de la solicitud HTTP que deseas emular.
 
 Crear Rutas de Recursos Anidadas
@@ -1083,7 +1083,7 @@ utilizar un controlador diferente en cada contexto mediante el uso de prefijos::
         });
     });
 
-Lo anterior asignará el recursos 'Comments' a
+Lo anterior asignará el recurso 'Comments' a
 ``App\Controller\Articles\CommentsController``. Tener controladores separados
 te permite mantener la lógica del controlador más simple. Los prefijos creados de
 esta manera son compatibles con :ref:`prefix-routing`.
@@ -1096,7 +1096,7 @@ esta manera son compatibles con :ref:`prefix-routing`.
 Limitar las Rutas Creadas
 -------------------------
 
-Por defecto, CakePHP conectará 6 rutas para cada recursos. Si deseas conectar
+Por defecto, CakePHP conectará 6 rutas para cada recurso. Si deseas conectar
 sólo rutas de recursos específicas podrás utilizar la opción ``only``::
 
     $routes->resources('Articles', [
@@ -1342,7 +1342,7 @@ Proporcionará enrutamiento inverso cuando la url de destino esté bien definida
         ['controller' => 'Articles', 'action' => 'view', $id]
     );
 
-También es útil cuando el destino es desconocido pero sigue un patrón bien definido::
+También es útil cuando el destino es desconocido, pero sigue un patrón bien definido::
 
     $this->Html->link(
         'View',
@@ -1392,9 +1392,9 @@ donde la URL actual con algunas modificaciones es la base para el destino y los
 elementos de la URL actual son impredecibles.
 
 Como ejemplo, imagina un blog que permite a los usuarios crear **Articles** y
-**Comments**, y marcar ambos como *published* o  *draft*. Ambas URL de la página index
-puedes incluir el id de usuario. La URL de **Comments** también puede incluir un
-id de article para identificar a qué artículo se refiere el comentario.
+**Comments**, y marcar ambos como *published* o *draft*. Ambas URL de la página index
+pueden incluir el ID del usuario. La URL de **Comments** también puede incluir el
+ID de un **Article** para identificar a qué artículo se refieren los comentarios.
 
 Aquí están las url para este escenario::
 
@@ -1535,7 +1535,7 @@ ubicación externa::
 Redirige ``/home/*`` a ``/articles/view`` y pasa los parámetros a
 ``/articles/view``. El uso de una matriz como destino de
 redireccionamiento te permite utilizar otras rutas para definir
-hacia dónde se debe dirigir un cadena de URL. Puedes redirigir a
+hacia dónde se debe dirigir una cadena de URL. Puedes redirigir a
 ubicaciones externas utilizando una cadena de URL como destino::
 
     $routes->scope('/', function (RouteBuilder $routes) {
@@ -1553,7 +1553,7 @@ Enrutamiento de Entidades
 El enrutamiento de entidades te permite utilizar una entidad, una matriz o un objeto
 que implemente ``ArrayAccess`` como una fuente de parámetros de enrutamiento. Esto
 te permite refactorizar rutas fácilmente y generar URL con menos código. Por ejemplo,
-si comienzas con un ruta similar a::
+si comienzas con una ruta similar a::
 
     $routes->get(
         '/view/{id}',
@@ -1609,7 +1609,7 @@ una matriz de parámetros de solicitud que pueda resolverse en un controlador
 y acción. Este método devuelve ``null`` para indicar un error de coincidencia.
 
 El método ``match()`` se utiliza para hacer coincidir una matriz de parámetros
-de URL y crear una cadena de URL. Si los parámertos de la URL no coinciden, de
+de URL y crear una cadena de URL. Si los parámertos de la URL no coinciden, se
 debe devolver la ruta ``false``.
 
 Puedes utilizar una clase de ruta personalizada al realizar una ruta utilizando
@@ -1648,7 +1648,7 @@ antes de configurar cualquier ruta y evitar tener que especificar la opción
 
     $routes->setRouteClass(DashedRoute::class);
 
-hará que todas las rutas conectadas después de esto utilicen la clase de ruta
+Hará que todas las rutas conectadas después de esto utilicen la clase de ruta
 ``DashedRoute``. Llamando al método sin un argumento devolverá la clase de ruta
 predeterminada actual.
 
@@ -1736,7 +1736,7 @@ Esto alterará la siguiente ruta::
 
     Router::url(['plugin' => 'MyPlugin', 'controller' => 'Languages', 'action' => 'view', 'es']);
 
-en esto::
+En esto::
 
     Router::url(['plugin' => 'MyPlugin', 'controller' => 'Locations', 'action' => 'index', 'language' => 'es']);
 

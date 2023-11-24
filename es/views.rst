@@ -56,7 +56,7 @@ Plantillas de Vista
 
 La capa de vista de CakePHP es la forma en que te comunicas con tus usuarios. La mayor parte del tiempo, tus vistas estarán renderizando documentos HTML/XHTML para los navegadores, pero también podrías necesitar responder a una aplicación remota a través de JSON o generar un archivo CSV para un usuario.
 
-Los archivos de plantilla de CakePHP son archivos PHP regulares y utilizan la `sintaxis PHP alternativa <https://php.net/manual/en/control-structures.alternative-syntax.php>`_ para las estructuras de control y la salida. Estos archivos contienen la lógica necesaria para preparar los datos recibidos del controlador en un formato de presentación que está listo para tu audiencia."
+Los archivos de plantilla de CakePHP son archivos PHP regulares y utilizan la `sintaxis PHP alternativa <https://php.net/manual/en/control-structures.alternative-syntax.php>`_ para las estructuras de control y la salida. Estos archivos contienen la lógica necesaria para preparar los datos recibidos del controlador en un formato de presentación que está listo para tu audiencia.
 
 Alternativas de impresion
 -------------------------
@@ -119,7 +119,7 @@ parte tiene usos distintos y se cubrirán en este capítulo:
   construir formularios, funcionalidades AJAX, paginar datos de modelos o servir feeds RSS.
 - **cells**: estas clases proporcionan características similares a un controlador para
   crear componentes de interfaz de usuario autosuficientes. Consulta la :doc:`/views/cells`
-  documentación para obtener más información."
+  documentación para obtener más información.
 
 Variables de Vista
 ------------------

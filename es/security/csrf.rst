@@ -148,7 +148,7 @@ a través del atributo del objeto de Request llamado ``csrfToken``. Usar la cook
 cuando tu código JavaScript reside en archivos separados de las plantillas de vista de CakePHP,
 y cuando ya tienes funcionalidad para analizar cookies mediante JavaScript.
 
-Si tienes archivos JavaScript separados pero no quieres ocuparte de manejar cookies,
+Si tienes archivos JavaScript separados, pero no quieres ocuparte de manejar cookies;
 podrías, por ejemplo, configurar el token en una variable global de JavaScript en tu diseño, mediante
 la definición de un bloque de script como este::
 
@@ -164,7 +164,7 @@ Otra alternativa sería poner el token en una metaetiqueta personalizada como es
 
     echo $this->Html->meta('csrfToken', $this->request->getAttribute('csrfToken'));
 
-que luego se podría acceder en tus scripts buscando el elemento ``meta`` con
+Que luego se podría acceder en tus scripts buscando el elemento ``meta`` con
 el nombre ``csrfToken``, que podría ser tan simple como esto cuando se usa jQuery::
 
     var csrfToken = $('meta[name="csrfToken"]').attr('content');

@@ -3,7 +3,7 @@ Logging
 
 Si bien la configuración de la clase Configure de CakePHP puede ayudarte a ver
 lo que está sucediendo en el sistema, hay momentos en los que necesitarás registrar
-datos en el disco para averiguar lo que está ocurriendo. Con tecnologías como SOAP, AJAX y APIs REST,
+datos en el disco para averiguar lo que está ocurriendo. Con tecnologías como SOAP, AJAX y API REST,
 la depuración puede ser bastante difícil.
 
 Logging también puede ser una forma de averiguar lo que ha estado ocurriendo
@@ -69,7 +69,7 @@ Una vez que se crea una configuración, no se puede cambiar. En su lugar, debes 
 la configuración y volver a crearla utilizando :php:meth:`Cake\\Log\\Log::drop()` y
 :php:meth:`Cake\\Log\\Log::setConfig()`.
 
-ambién es posible crear loggers proporcionando un cierre (closure). Esto es útil
+También es posible crear loggers proporcionando un cierre (closure). Esto es útil
 cuando necesitas un control completo sobre cómo se construye el objeto del logger. El cierre
 debe devolver la instancia del logger. Por ejemplo::
 
@@ -174,7 +174,7 @@ Utilizar un nivel que no esté en la lista de niveles anteriores resultará en u
 
 En muchas ocasiones, querrás configurar diferentes comportamientos de registro para diferentes
 subsistemas o partes de tu aplicación. Tomemos como ejemplo una tienda en línea.
-Probablemente quieras manejar el registro de pedidos y pagos de manera diferente a como lo haces
+Probablemente, quieras manejar el registro de pedidos y pagos de manera diferente a como lo haces
 con otros registros menos críticos.
 
 CakePHP expone este concepto como ámbitos de registro. Cuando se escriben mensajes de registro,
@@ -273,7 +273,7 @@ utilizar un almacenamiento completamente diferente para tus registros.
 Usar syslog es prácticamente como usar el motor de registro de archivos predeterminado, simplemente
 necesitas especificar ``Syslog`` como el motor a utilizar para el registro de logs. El siguiente
 fragmento de configuración reemplazará el ``logger`` predeterminado con syslog, esto se debe hacer
-en el archivo **config/bootstrap.php**"::
+en el archivo **config/bootstrap.php**::
 
     Log::setConfig('default', [
         'engine' => 'Syslog'

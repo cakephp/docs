@@ -18,7 +18,7 @@ La Console CakePHP utiliza un sistema de tipo `dispatcher` para cargar comandos,
 argumentos e invocar el comando correcto. Aunque los ejemplos a continuación usan bash, el
 console de CakePHP es compatible con cualquier shell de Unix (\*nix) y Windows.
 
-Una aplicación CakePHP tiene un directorio **src/Command** que contiene sus comandos. Tambien incluye
+Una aplicación CakePHP tiene un directorio **src/Command** que contiene sus comandos. También incluye
 un ejecutable en el directorio **bin**
 
 .. code-block:: console
@@ -30,7 +30,7 @@ un ejecutable en el directorio **bin**
 
     Para Windows, el comando es ``bin\cake`` (note el `backslash`)
 
-Ejecutar la console sin argumentos listará todos los comandos disponibles. Tu
+Ejecutar la console sin argumentos listará todos los comandos disponibles. Tú
 puedes, de esta manera, ejecutar cualquiera de los comandos listados usando su nombre:
 
 .. code-block:: console
@@ -92,7 +92,7 @@ Revisa la sección :ref:`plugin-commands` sobre como agregar comandos en los `pl
 Renombrando Comandos
 ====================
 
-Hay casos en los cuáles querrás renombrar comandos para crear comandos anidados o subcomandos. Mientras que
+Hay casos en los cuales querrás renombrar comandos para crear comandos anidados o subcomandos. Mientras que
 el descubrimiento automático de comandos no hará esto, tu pueds registrar tus comandos para darles el nombre
 que desees.
 

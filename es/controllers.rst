@@ -14,7 +14,7 @@ a los modelos correctos y se muestre la respuesta o vista correcta.
 Los controladores se pueden
 considerar como una capa intermedia entre el Modelo y la Vista. Quieres mantener
 tus controladores delgados, y tus modelos gruesos.
-Esto te ayudará a reutilizar tu código y lo hará mas fácil de probar.
+Esto te ayudará a reutilizar tu código y lo hará más fácil de probar.
 
 Comúnmente, un controlador se usa para administrar la lógica en torno
 a un solo modelo. Por

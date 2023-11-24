@@ -63,7 +63,7 @@ Consola
 
 - ``BaseCommand::__construct()`` ha sido eliminado.
 - Se ha eliminado ``ConsoleIntegrationTestTrait::useCommandRunner()`` porque ya no es necesario.
-- ``Shell`` Ha sido eliminado  y debe ser sustituido por `Command <https://book.cakephp.org/5/es/console-commands/commands.html>`__
+- ``Shell`` Ha sido eliminado y debe ser sustituido por `Command <https://book.cakephp.org/5/es/console-commands/commands.html>`__
 - Ahora ``BaseCommand`` emite los eventos ``Command.beforeExecute`` and ``Command.afterExecute``
   cuando el método ``execute()`` del comando es invocado por el framework.
 
@@ -118,7 +118,7 @@ Base de datos
 - ``DateType::setLocaleFormat()`` ya no acepta array.
 - ``Query`` ahora solo acepta parámetros ``\Closure`` en lugar de ``callable``. Los callables se pueden convertir
   a closures usando la nueva sintaxis de array de primera clase de PHP 8.1.
-- ``Query::execute()`` ya no ejecuta los resultados de la devoluciones de llamadas. Debe utilizar ``Query::all()`` en su lugar.
+- ``Query::execute()`` ya no ejecuta el resultado de la ejeción de la consulta. Debe utilizar ``Query::all()`` en su lugar.
 - ``TableSchemaAwareInterface`` fue eliminado.
 - ``Driver::quote()`` fue eliminado. En su lugar, utiliza declaraciones preparadas.
 - ``Query::orderBy()`` fue añadido para reemplazar ``Query::order()``.
@@ -168,7 +168,7 @@ I18n
 ----
 
 - Se cambió el nombre de ``FrozenDate`` a `Date` y el de ``FrozenTime`` a `DateTime`.
-- ``Time`` ahora extiende de ``Cake\Chronos\ChronosTime`` y por lo tanto es inmutable.
+- ``Time`` ahora extiende de ``Cake\Chronos\ChronosTime`` y. por lo tanto, es inmutable.
 - ``Date::parseDateTime()`` ha sido eliminado.
 - ``Date::parseTime()`` ha sido eliminado.
 - ``Date::setToStringFormat()`` y ``Date::setJsonEncodeFormat()`` ya no aceptan un array.
@@ -192,7 +192,7 @@ Mailer
 ORM
 ---
 
-- ``EntityTrait::has()`` ahora devuelve ``true`` cuando existe un atributo y se estable
+- ``EntityTrait::has()`` ahora devuelve ``true`` cuando existe un atributo y es estable
   en ``null``. En versiones anteriores de CakePHP esto devolvía ``false``.
   Consulte las notas de la version 4.5.0 para saber como adoptar este comportamiento en 4.x.
 - ``EntityTrait::extractOriginal()`` ahora devuelve solo los campos existentes, similar a ``extractOriginalChanged()``.
@@ -204,7 +204,7 @@ ORM
   coincidiendo con el comportamiento original de 3.x.
 - ``Table::query()`` se ha eliminado en favor de funciones específicas de tipo de consulta.
 - ``Table::updateQuery()``, ``Table::selectQuery()``, ``Table::insertQuery()``, y
-  ``Table::deleteQuery()`` se añadieron y ahora devuelven los nuevos objetos de consulta de tipo especifico.
+  ``Table::deleteQuery()`` se añadieron y ahora devuelven los nuevos objetos de consulta de tipo específico.
 - Se añadieron ``SelectQuery``, ``InsertQuery``, ``UpdateQuery`` y ``DeleteQuery`` que representan
   solo un tipo de consulta y no permiten cambiar entre tipos de consulta, sin llamar a funciones no relacionadas
   con el tipo de consulta especifico.
@@ -248,7 +248,7 @@ Vistas
 - Dentro ``View::initialize()``, preferentemente usar ``addHelper()`` en lugar de ``loadHelper()``.
   De todas formas, todas las configuraciones de helpers se cargarán después.
 - ``View\Widget\FileWidget`` ya no es compatible con la subida de ficheros en forma
-  arrays. Esto esta alineado con los cambios en ``ServerRequest`` y ``Validation``.
+  arrays. Esto está alineado con los cambios en ``ServerRequest`` y ``Validation``.
 - ``FormHelper`` ya no estable ``autocomplete=off`` en los campos de token CSRF. Esto
   fue una solución para un error de Safari que no es relevante.
 
@@ -271,8 +271,8 @@ Base de datos
 ORM
 ---
 
-- Llamar a ``Table::find()`` con opciones de array esta obsoleto. Utiliza `named arguments <https://www.php.net/manual/en/functions.arguments.php#functions.named-arguments>`__
-  en su lugar. Por ejemplo,  en lugar de ``find('all', ['conditions' => $array])`` usar
+- Llamar a ``Table::find()`` con opciones de array está obsoleto. Utiliza `named arguments <https://www.php.net/manual/en/functions.arguments.php#functions.named-arguments>`__
+  en su lugar. Por ejemplo, en lugar de ``find('all', ['conditions' => $array])`` usar
   ``find('all', conditions: $array)``. De manera similar, para las opciones de finders personalizados, en lugar
   de ``find('list', ['valueField' => 'name'])`` usar ``find('list', valueField: 'name')``
   o varios argumentos como ``find(type: 'list', valueField: 'name', conditions: $array)``.
@@ -311,7 +311,7 @@ Base de datos
 - ``EnumType`` fue añadido para permitir el mapeo entre enumeraciones respaldadas por PHP y una cadena o columna entera.
 - ``getMaxAliasLength()`` y ``getConnectionRetries()`` se añadieron a ``DriverInterface``.
 - Los drivers compatibles ahora agregan automáticamente el incremento automático solo a las claves primarias enteras denominadas "id"
-  en lugar de a todas las claves primarias enteras. Si se establece 'autoIncrement' en false, siempre se deshabilita en todos los drivers compatibles.
+  en lugar de a todas las claves primarias enteras. Si se establece 'autoIncrement' como false, siempre se deshabilita en todos los drivers compatibles.
 
 Http
 ----
@@ -363,7 +363,7 @@ Por ejemplo, un finder para obtener publicaciones por categoría o usuario::
         return $query;
     }
 
-ahora se pueden escribir como::
+Ahora se pueden escribir como::
 
     public function findByCategoryOrUser(SelectQuery $query, ?int $categoryId = null, ?int $userId = null)
     {
@@ -391,7 +391,7 @@ Un cambio similar se ha aplicado al método ``RepositoryInterface::get()``::
         ]);
     }
 
-ahora se pueden escribir como::
+Ahora se pueden escribir como::
 
     public function view(int $id)
     {
@@ -406,8 +406,8 @@ TestSuite
 Instalador de plugins
 ---------------------
 - El instalador de plugins se ha actualizado para manejar automáticamente la carga automática de clases para los plugins
-  de tu aplicación. Por lo tanto, puede eliminar el espacio de nombres para las asignaciones de rutas para
-  tus plugins de tu ``composer.json`` y simplemente ejecutar ``composer dumpautoload``.
+  de tu aplicación. Por lo tanto, puedes eliminar el espacio de nombres para las asignaciones de rutas de
+  tus plugins del ``composer.json`` y simplemente ejecutar ``composer dumpautoload``.
 
 .. meta::
     :title lang=es: 5.0 Guía de migración

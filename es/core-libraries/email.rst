@@ -366,10 +366,6 @@ Ahora puedes registrar el mailer como un oyente de eventos y el método `onRegis
     // Adjuntar al gestor de eventos de Usuarios
     $this->Users->getEventManager()->on($this->getMailer('User'));
 
-:: note ::
-
-    Para obtener información sobre cómo registrar objetos oyentes de eventos, consulta la documentación de :ref:`registro-de-oyentes-de-eventos`.
-
 .. _email-transport:
 
 Configuración de Transportes
@@ -434,15 +430,15 @@ Para configurar tu mailer para usar un transporte específico, puedes usar el m�
     // Usa un objeto construido.
     $mailer->setTransport(new \Cake\Mailer\Transport\DebugTransport());
 
-:: warning ::
+.. warning ::
 
     Deberás tener habilitado el acceso para aplicaciones menos seguras en tu cuenta de Google para que funcione:
     `Permitir que aplicaciones menos seguras accedan a tu cuenta <https://support.google.com/accounts/answer/6010255>`__.
 
-:: note ::
+.. note ::
     `Configuración SMTP de Gmail <https://support.google.com/a/answer/176600?hl=es>`__.
 
-:: note ::
+.. note ::
     Para usar SSL + SMTP, necesitarás tener SSL configurado en tu instalación de PHP.
 
 También se pueden proporcionar opciones de configuración como una cadena :term:`DSN`. Esto es útil cuando trabajas con variables de entorno o proveedores de :term:`PaaS`::
