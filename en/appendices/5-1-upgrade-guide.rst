@@ -27,6 +27,11 @@ I18n
 New Features
 ============
 
+Console
+-------
+
+- ``Arguments::getBooleanOption()`` and ``Arguments::getMultipleOption()`` were added.
+
 Http
 ----
 
