@@ -186,18 +186,18 @@ If you want to break different addresses into multiple associations, you can do 
     {
         public function initialize(array $config): void
         {
-            $this->hasOne('HomeAddress', [
+            $this->hasOne('HomeAddresses', [
                     'className' => 'Addresses'
                 ])
                 ->setProperty('home_address')
-                ->setConditions(['HomeAddress.label' => 'Home'])
+                ->setConditions(['HomeAddresses.label' => 'Home'])
                 ->setDependent(true);
 
-            $this->hasOne('WorkAddress', [
+            $this->hasOne('WorkAddresses', [
                     'className' => 'Addresses'
                 ])
                 ->setProperty('work_address')
-                ->setConditions(['WorkAddress.label' => 'Work'])
+                ->setConditions(['WorkAddresses.label' => 'Work'])
                 ->setDependent(true);
         }
     }
@@ -205,7 +205,7 @@ If you want to break different addresses into multiple associations, you can do 
 .. note::
 
     If a column is shared by multiple hasOne associations, you must qualify it with the association alias.
-    In the above example, the 'label' column is qualified with the 'HomeAddress' and 'WorkAddress' aliases.
+    In the above example, the 'label' column is qualified with the 'HomeAddresses' and 'WorkAddresses' aliases.
 
 Possible keys for hasOne association arrays include:
 
