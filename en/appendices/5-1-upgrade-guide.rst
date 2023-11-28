@@ -46,3 +46,9 @@ Validation
 
 - ``Validation::enum()`` and ``Validator::enum()`` were added. These validation
   methods simplify validating backed enum values.
+
+View
+----
+
+- View cells now emit events around their actions ``Cell.beforeAction`` and
+  ``Cell.afterAction``.

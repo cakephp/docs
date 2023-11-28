@@ -298,3 +298,13 @@ Loading a specific Helper just for a specific cell can be done via the following
         }
     }
 
+
+Cell Events
+===========
+
+Cells trigger the following events around the cell action:
+
+* ``Cell.beforeAction``
+* ``Cell.afterAction``
+
+.. versionadded:: 5.1.0
