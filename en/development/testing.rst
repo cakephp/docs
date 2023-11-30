@@ -111,7 +111,7 @@ and number passed.
 
 .. note::
 
-    If you are on a Windows system you probably won't see any colours.
+    If you are on a Windows system you probably won't see any colors.
 
 Test Case Conventions
 =====================
