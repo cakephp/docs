@@ -1904,6 +1904,8 @@ To build that query with the ORM query builder we would use::
         ]
     ]);
 
+If you need to build a recursive query (`WITH RECURSIVE …`), chain `->recursive()` onto `return $cte`.
+
 .. versionadded:: 4.1.0
     Common table expression support was added.
 
