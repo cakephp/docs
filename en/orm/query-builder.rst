@@ -1885,7 +1885,7 @@ To build that query with the ORM query builder we would use::
         ],
     ]);
 
-If you need to build a recursive query (`WITH RECURSIVE …`), chain `->recursive()` onto `return $cte`.
+If you need to build a recursive query (``WITH RECURSIVE …``), chain ``->recursive()`` onto ``return $cte``.
 
 Executing Complex Queries
 -------------------------
