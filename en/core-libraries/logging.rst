@@ -416,9 +416,13 @@ You use ``setupLog()`` to define the log messages you wish to capture and
 perform assertions on. After logs have been emitted you can make assertions on
 the contents of logs, or the absence of them:
 
-* ``assertLogMessage(string $level, string $expectedMessage, ?string $scope = null, string $failMsg = '')`` Assert that a log message was found.
-* ``assertLogMessageContains(string $level, string $expectedMessage, ?string $scope = null, string $failMsg = '')`` Assert that a log message contains the substring.
-* ``assertLogAbsent(string $level, ?string $failMsg = '')`` Assert that no log messages of the given level were captured.
+* ``assertLogMessage(string $level, string $expectedMessage, ?string $scope
+  = null, string $failMsg = '')`` Assert that a log message was found.
+* ``assertLogMessageContains(string $level, string $expectedMessage, ?string
+  $scope = null, string $failMsg = '')`` Assert that a log message contains the
+  substring.
+* ``assertLogAbsent(string $level, ?string $failMsg = '')`` Assert that no log
+  messages of the given level were captured.
 
 The ``LogTestTrait`` will automatically clean up any loggers that were
 configured.
