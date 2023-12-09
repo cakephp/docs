@@ -295,7 +295,7 @@ following keys:
   used. See ``syslog`` documentation for more options
 
 Creating Log Engines
-=====================
+====================
 
 Log engines can be part of your application, or part of
 plugins. If for example you had a database logger called
@@ -347,7 +347,7 @@ interface as it only requires you to implement the ``log()`` method.
 .. _logging-formatters:
 
 Logging Formatters
-------------------
+==================
 
 Logging formatters allow you to control how log messages are formatted
 independent of the storage engine. Each core provided logging engine comes with
@@ -377,6 +377,51 @@ To implement your own logging formatter you need to extend
 ``Cake\Log\Format\AbstractFormatter`` or one of its subclasses. The primary
 method you need to implement is ``format($level, $message, $context)`` which is
 responsible for formatting log messages.
+
+.. _log-testing:
+
+Testing Logs
+============
+
+To test logging, add ``Cake\TestSuite\LogTestTrait`` to your test case. The
+``LogTestTrait`` uses PHPUnit hooks to attach log engines that intercept the log
+messages your application is making. Once you have captured logs you can perform
+assertions on log messages your application is emitting. For example::
+
+    namespace App\Test\TestCase\Controller;
+
+    use Cake\TestSuite\LogTestTrait;
+    use Cake\TestSuite\TestCase;
+
+    class UsersControllerTest extends TestCase
+    {
+        use LogTestTrait;
+
+        public function setUp(): void
+        {
+            parent::setUp();
+            $this->setupLog([
+                'error' => ['scopes' => ['app.security']]
+            ]);
+        }
+
+        public function testResetPassword()
+        {
+            $this->post('/users/resetpassword', ['email' => 'bob@example.com']);
+            $this->assertLogMessageContains('info', 'bob@example.com reset password', 'app.security');
+        }
+    }
+
+You use ``setupLog()`` to define the log messages you wish to capture and
+perform assertions on. After logs have been emitted you can make assertions on
+the contents of logs, or the absence of them:
+
+* ``assertLogMessage(string $level, string $expectedMessage, ?string $scope = null, string $failMsg = '')`` Assert that a log message was found.
+* ``assertLogMessageContains(string $level, string $expectedMessage, ?string $scope = null, string $failMsg = '')`` Assert that a log message contains the substring.
+* ``assertLogAbsent(string $level, ?string $failMsg = '')`` Assert that no log messages of the given level were captured.
+
+The ``LogTestTrait`` will automatically clean up any loggers that were
+configured.
 
 Log API
 =======

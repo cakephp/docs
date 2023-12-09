@@ -41,6 +41,12 @@ Http
   events when requests are sent. You can use these events to perform logging,
   caching or collect telemetry.
 
+TestSuite
+---------
+
+- ``LogTestTrait`` was added. This new trait makes it easy to capture logs in
+  your tests and make assertions on the presence or absence of log messages.
+
 Validation
 ----------
 

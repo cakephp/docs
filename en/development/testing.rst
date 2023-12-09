@@ -1885,6 +1885,11 @@ Testing Email
 
 See :ref:`email-testing` for information on testing email.
 
+Testing Logging
+===============
+
+See :ref:`log-testing` for information on testing log messages.
+
 Creating Test Suites
 ====================
 
