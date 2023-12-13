@@ -267,75 +267,76 @@ Finalmente, es posible utilizar una configuración regional diferente para mostr
 Estableciendo la Configuración Regional y la Cadena de Formato Predeterminada
 --------------------------------------------------------------------------------
 
-The default locale in which dates are displayed when using ``nice``
-``i18nFormat`` is taken from the directive
+La configuración regional predeterminada en la que se muestran las fechas al utilizar ``nice``
+``i18nFormat`` se toma de la directiva
 `intl.default_locale <https://www.php.net/manual/en/intl.configuration.php#ini.intl.default-locale>`_.
-You can, however, modify this default at runtime::
+Sin embargo, puedes modificar este valor predeterminado en tiempo de ejecución::
 
     DateTime::setDefaultLocale('es-ES');
     Date::setDefaultLocale('es-ES');
 
-    // Outputs '31 ene. 2021 22:11'
+    // Salida '31 ene. 2021 22:11'
     echo $time->nice();
 
-From now on, datetimes will be displayed in the Spanish preferred format unless
-a different locale is specified directly in the formatting method.
+A partir de ahora, las fechas y horas se mostrarán en el formato preferido en español,
+a menos que se especifique una configuración regional diferente directamente en el
+método de formato.
 
-Likewise, it is possible to alter the default formatting string to be used for
-``i18nFormat``::
+De manera similar, es posible modificar la cadena de formato predeterminada que se
+utilizará para ``i18nFormat``::
 
-    DateTime::setToStringFormat(\IntlDateFormatter::SHORT); // For any DateTime
-    Date::setToStringFormat(\IntlDateFormatter::SHORT); // For any Date
+    DateTime::setToStringFormat(\IntlDateFormatter::SHORT); // Para cualquier DateTime
+    Date::setToStringFormat(\IntlDateFormatter::SHORT); // Para cualquier Date
 
-    // The same method exists on Date, and DateTime
+    // El mismo método existe en Date y DateTim
     DateTime::setToStringFormat([
         \IntlDateFormatter::FULL,
         \IntlDateFormatter::SHORT
     ]);
-    // Outputs 'Sunday, January 31, 2021 at 10:11 PM'
+    // Salida 'Sunday, January 31, 2021 at 10:11 PM'
     echo $time;
 
-    // The same method exists on Date and DateTime
+    // El mismo método existe en Date y DateTime
     DateTime::setToStringFormat("EEEE, MMMM dd, yyyy 'at' KK:mm:ss a");
     // Outputs 'Sunday, January 31, 2021 at 10:11:30 PM'
     echo $time;
 
-It is recommended to always use the constants instead of directly passing a date
-format string.
+Se recomienda siempre utilizar las constantes en lugar de pasar
+directamente una cadena de formato de fecha.
 
 .. note::
-    Be aware that this is not a PHP Datetime string format! You need to use a
-    ICU date formatting string as specified in the following resource:
+    Ten en cuenta que este no es un formato de cadena de fecha y hora de PHP. Necesitas
+    utilizar una cadena de formato de fecha ICU, como se especifica en el siguiente recurso:
     https://unicode-org.github.io/icu/userguide/format_parse/datetime/#datetime-format-syntax.
 
-Formatting Relative Times
--------------------------
+Formato de tiempos relativo
+------------------------------
 
 .. php:method:: timeAgoInWords(array $options = [])
 
-Often it is useful to print times relative to the present::
+A menudo es útil imprimir tiempos en relación con el presente::
 
     $time = new DateTime('Jan 31, 2021');
-    // On June 12, 2021, this would output '4 months, 1 week, 6 days ago'
+    // En June 12, 2021, Esto imprimiría '4 months, 1 week, 6 days ago'
     echo $time->timeAgoInWords(
         ['format' => 'MMM d, YYY', 'end' => '+1 year']
     );
 
-The ``end`` option lets you define at which point after which relative times
-should be formatted using the ``format`` option. The ``accuracy`` option lets
-us control what level of detail should be used for each interval range::
+La opción ``end`` te permite definir después de cuánto tiempo deben formatearse los
+tiempos relativos utilizando la opción ``format``. La opción ``accuracy`` nos permite
+controlar qué nivel de detalle se debe utilizar para cada intervalo::
 
-    // Outputs '4 months ago'
+    // Salida '4 months ago'
     echo $time->timeAgoInWords([
         'accuracy' => ['month' => 'month'],
         'end' => '1 year'
     ]);
 
-By setting ``accuracy`` to a string, you can specify what is the maximum level
-of detail you want output::
+Al establecer ``accuracy`` en una cadena, puedes especificar cuál es el nivel máximo de
+detalle que deseas en la salida::
 
     $time = new DateTime('+23 hours');
-    // Outputs 'in about a day'
+    // Salida 'en aproximadamente un día77'
     echo $time->timeAgoInWords([
         'accuracy' => 'day'
     ]);
@@ -345,22 +346,22 @@ Conversion
 
 .. php:method:: toQuarter()
 
-Once created, you can convert ``DateTime`` instances into timestamps or quarter
-values::
+Una vez creadas, puedes convertir las instancias de ``DateTime`` en marcas de tiempo o
+valores de trimestre::
 
     $time = new DateTime('2021-01-31');
-    echo $time->toQuarter();  // Outputs '1'
-    echo $time->toUnixString();  // Outputs '1612069200'
+    echo $time->toQuarter();  // Salida '1'
+    echo $time->toUnixString();  // Salida '1612069200'
 
-Comparing With the Present
-==========================
+Comparando con el presente
+============================
 
 .. php:method:: isYesterday()
 .. php:method:: isThisWeek()
 .. php:method:: isThisMonth()
 .. php:method:: isThisYear()
 
-You can compare a ``DateTime`` instance with the present in a variety of ways::
+Puedes comparar una instancia de ``DateTime`` con el presente de diversas maneras::
 
     $time = new DateTime('+3 days');
 
@@ -369,38 +370,38 @@ You can compare a ``DateTime`` instance with the present in a variety of ways::
     debug($time->isThisMonth());
     debug($time->isThisYear());
 
-Each of the above methods will return ``true``/``false`` based on whether or
-not the ``DateTime`` instance matches the present.
+Cada uno de los métodos anteriores devolverá true/false según si la instancia de
+``DateTime`` coincide o no con el presente.
 
-Comparing With Intervals
-========================
+Comparando con intervalos
+==========================
 
 .. php:method:: isWithinNext($interval)
 
-You can see if a ``DateTime`` instance falls within a given range using
-``wasWithinLast()`` and ``isWithinNext()``::
+Puedes ver si una instancia de ``DateTime`` cae dentro de un rango dado utilizando
+``wasWithinLast()`` e ``isWithinNext()``::
 
     $time = new DateTime('+3 days');
 
-    // Within 2 days. Outputs 'false'
+    // Dentro de 2 días. Salida 'false'
     debug($time->isWithinNext('2 days'));
 
-    // Within 2 next weeks. Outputs 'true'
+    // Dentro de las próximas 2 semanas. Salida 'true'
     debug($time->isWithinNext('2 weeks'));
 
 .. php:method:: wasWithinLast($interval)
 
-You can also compare a ``DateTime`` instance within a range in the past::
+También puedes comparar una instancia de ``DateTime`` dentro de un rango en el pasado::
 
     $time = new DateTime('-72 hours');
 
-    // Within past 2 days. Outputs 'false'
+    // Dentro de los últimos 2 días. Salida 'false'
     debug($time->wasWithinLast('2 days'));
 
-    // Within past 3 days. Outputs 'true'
+    // Dentro de los últimos 3 días. Salida 'true'
     debug($time->wasWithinLast('3 days'));
 
-    // Within past 2 weeks. Outputs 'true'
+    // Dentro de las últimas 2 semanas. Salida 'true'
     debug($time->wasWithinLast('2 weeks'));
 
 .. end-time
@@ -410,96 +411,98 @@ Date
 
 .. php:class: Date
 
-The immutable ``Date`` class in CakePHP implements a similar API and methods as
-:php:class:`Cake\\I18n\\DateTime` does. The main difference between ``DateTime``
-and ``Date`` is that ``Date`` does not track time components. As an example::
+La clase inmutable ``Date`` en CakePHP implementa una API y métodos similares a los
+que tiene :php:class:`Cake\\I18n\\DateTime`. La principal diferencia entre ``DateTime``
+y ``Date`` es que ``Date`` no realiza un seguimiento de los componentes de tiempo.
+Como ejemplo::
 
     use Cake\I18n\Date;
 
     $date = new Date('2021-01-31');
 
     $newDate = $date->modify('+2 hours');
-    // Outputs '2021-01-31 00:00:00'
+    // Salida '2021-01-31 00:00:00'
     echo $newDate->format('Y-m-d H:i:s');
 
     $newDate = $date->addHours(36);
-    // Outputs '2021-01-31 00:00:00'
+    // Salida '2021-01-31 00:00:00'
     echo $newDate->format('Y-m-d H:i:s');
 
     $newDate = $date->addDays(10);
-    // Outputs '2021-02-10 00:00:00'
+    // Salida '2021-02-10 00:00:00'
     echo $newDate->format('Y-m-d H:i:s');
 
 
-Attempts to modify the timezone on a ``Date`` instance are also ignored::
+
+Los intentos de modificar la zona horaria en una instancia de ``Date`` también son ignorados::
 
     use Cake\I18n\Date;
     $date = new Date('2021-01-31', new \DateTimeZone('America/New_York'));
     $newDate = $date->setTimezone(new \DateTimeZone('Europe/Berlin'));
 
-    // Outputs 'America/New_York'
+    // Salida 'America/New_York'
     echo $newDate->format('e');
 
 .. _mutable-time:
 
-Mutable Dates and Times
-=======================
+Fechas y horas mutables"
+==========================
 
 .. php:class:: Time
 .. php:class:: Date
 
-CakePHP uses mutable date and time classes that implement the same interface
-as their immutable siblings. Immutable objects are useful when you want to prevent
-accidental changes to data, or when you want to avoid order based dependency
-issues. Take the following code::
+CakePHP utiliza clases mutables de fecha y hora que implementan la misma interfaz que sus
+contrapartes inmutables. Los objetos inmutables son útiles cuando deseas evitar cambios
+accidentales en los datos o cuando quieres evitar problemas de dependencia basados en el
+orden. Observa el siguiente código::
 
     use Cake\I18n\Time;
     $time = new Time('2015-06-15 08:23:45');
     $time->modify('+2 hours');
 
-    // This method also modifies the $time instance
+    //  Este método también modifica la instancia $time
     $this->someOtherFunction($time);
 
-    // Output here is unknown.
+    // La salida aquí es desconocida.
     echo $time->format('Y-m-d H:i:s');
 
-If the method call was re-ordered, or if ``someOtherFunction`` changed the
-output could be unexpected. The mutability of our object creates temporal
-coupling. If we were to use immutable objects, we could avoid this issue::
+Si la llamada al método fuera reordenada o si someOtherFunction cambiara, la salida
+podría ser inesperada. La mutabilidad de nuestro objeto crea un acoplamiento temporal.
+Si usáramos objetos inmutables, podríamos evitar este problema::
 
     use Cake\I18n\DateTime;
     $time = new DateTime('2015-06-15 08:23:45');
     $time = $time->modify('+2 hours');
 
-    // This method's modifications don't change $time
+    // Las modificaciones de este método no cambian $time
     $this->someOtherFunction($time);
 
-    // Output here is known.
+    // La salida aquí es conocida.
     echo $time->format('Y-m-d H:i:s');
 
-Immutable dates and times are useful in entities as they prevent
-accidental modifications, and force changes to be explicit. Using
-immutable objects helps the ORM to more easily track changes, and ensure that
-date and datetime columns are persisted correctly::
+Las fechas y horas inmutables son útiles en entidades, ya que evitan modificaciones
+accidentales y obligan a que los cambios sean explícitos. Utilizar objetos inmutables
+ayuda al ORM a realizar un seguimiento de los cambios de manera más sencilla y garantiza
+que las columnas de fecha y hora se persistan correctamente::
 
-    // This change will be lost when the article is saved.
+    // Este cambio se perderá cuando el artículo se guarde.
     $article->updated->modify('+1 hour');
 
-    // By replacing the time object the property will be saved.
+    // Al reemplazar el objeto de tiempo, la propiedad se guardará.
     $article->updated = $article->updated->modify('+1 hour');
 
-Accepting Localized Request Data
-================================
+Aceptando datos de solicitud localizados
+==========================================
 
-When creating text inputs that manipulate dates, you'll probably want to accept
-and parse localized datetime strings. See the :ref:`parsing-localized-dates`.
+Al crear entradas de texto que manipulan fechas, probablemente querrás aceptar y analizar
+cadenas de fecha y hora localizadas. Consulta la :ref:`parsing-localized-dates`.
 
 .. meta::
     :title lang=en: Time
-    :description lang=en: Time class helps you format time and test time.
-    :keywords lang=en: time,format time,timezone,unix epoch,time strings,time zone offset,utc,gmt
+    :description lang=es: La clase Time te ayuda a dar formato a la hora y a probar la hora.
+    :keywords lang=es: time,format time,timezone,unix epoch,time strings,time zone offset,utc,gmt, zona horaria, tiempo
 
-Supported Timezones
-===================
+Zonas horarias admitidas
+===========================
 
-CakePHP supports all valid PHP timezones. For a list of supported timezones, `see this page <https://php.net/manual/en/timezones.php>`_.
+CakePHP admite todas las zonas horarias válidas de PHP. Para obtener una lista de zonas horarias admitidas, `consulta esta página <https://php.net/manual/en/timezones.php>`_.
