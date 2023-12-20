@@ -150,7 +150,7 @@ able to connect to the database' section has a green chef hat.
 
 .. note::
 
-    The file **config/app_local.php** in your is a local override of the file **config/app_local.php**
+    The file **config/app_local.php** is a local override of the file **config/app.php**
     used to configure your development environment quickly.
 
 Creating our First Model
