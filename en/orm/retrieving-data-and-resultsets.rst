@@ -918,24 +918,7 @@ and you can use any collection method on ResultSet objects.
 
 Result set objects will lazily load rows from the underlying prepared statement.
 By default results will be buffered in memory allowing you to iterate a result
-set multiple times, or cache and iterate the results. If you need work with
-a data set that does not fit into memory you can disable buffering on the query
-to stream results::
-
-    $query->disableBufferedResults();
-
-Turning buffering off has a few caveats:
-
-#. You will not be able to iterate a result set more than once.
-#. You will also not be able to iterate & cache the results.
-#. Buffering cannot be disabled for queries that eager load hasMany or
-   belongsToMany associations, as these association types require eagerly
-   loading all results so that dependent queries can be generated.
-
-.. warning::
-
-    Streaming results will still allocate memory for the entire results when
-    using PostgreSQL and SQL Server. This is due to limitations in PDO.
+set multiple times, or cache and iterate the results.
 
 Result sets allow you to cache/serialize or JSON encode results for API
 results::
