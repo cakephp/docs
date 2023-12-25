@@ -14,8 +14,7 @@ Here's what you'll need:
    ``pdo_mysql`` enabled in PHP.
 #. Basic PHP knowledge.
 
-Before starting you should make sure that you have got an up to date PHP
-version:
+Before starting you should make sure that you're using a supported PHP version:
 
 .. code-block:: console
 
@@ -65,12 +64,12 @@ There are other ways to install CakePHP. If you cannot or don't want to use
 Composer, check out the :doc:`/installation` section.
 
 Regardless of how you downloaded and installed CakePHP, once your set up is
-completed, your directory setup should look something like the following::
+completed, your directory setup should look like the following, though other
+files may also be present::
 
     cms/
       bin/
       config/
-      logs/
       plugins/
       resources/
       src/
@@ -79,12 +78,8 @@ completed, your directory setup should look something like the following::
       tmp/
       vendor/
       webroot/
-      .editorconfig
-      .gitignore
-      .htaccess
       composer.json
       index.php
-      phpunit.xml.dist
       README.md
 
 Now might be a good time to learn a bit about how CakePHP's directory structure
@@ -92,6 +87,13 @@ works: check out the :doc:`/intro/cakephp-folder-structure` section.
 
 If you get lost during this tutorial, you can see the finished result `on GitHub
 <https://github.com/cakephp/cms-tutorial>`_.
+
+.. tip::
+
+    The ``bin/cake`` console utility can build most of the classes and data
+    tables in this tutorial automatically. However, we recommend following along
+    with the manual code examples to understand how the pieces fit together and
+    how to add your application logic.
 
 Checking our Installation
 =========================
@@ -115,4 +117,4 @@ bullet points should be green chef hats other than CakePHP being able to connect
 your database. If not, you may need to install additional PHP extensions, or set
 directory permissions.
 
-Next, we will build our :doc:`Database and create our first model </tutorials-and-examples/cms/database>`.
+Next, we will build our :doc:`Database</tutorials-and-examples/cms/database>`.
