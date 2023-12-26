@@ -547,5 +547,15 @@ that uses JavaScript to do a POST request deleting our article.
     JavaScript confirmation dialog before they attempt to delete an
     article.
 
-With a basic articles management setup, we'll create the  :doc:`basic actions
+.. tip::
+
+    The ``ArticlesController`` can also be built with ``bake``:
+
+    .. code-block:: console
+
+        /bin/cake bake controller articles
+
+    However, this does not build the **templates/Articles/*.php** files.
+
+With a basic articles management setup, we'll create the :doc:`basic actions
 for our Tags and Users tables </tutorials-and-examples/cms/tags-and-users>`.
