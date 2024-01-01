@@ -479,8 +479,8 @@ Where ``ArticleStatus`` contains something like::
 
     enum ArticleStatus: string
     {
-        case PUBLISHED = 'Y';
-        case UNPUBLISHED = 'N';
+        case Published = 'Y';
+        case Unpublished = 'N';
     }
 
 .. _adding-custom-database-types:
