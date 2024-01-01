@@ -485,6 +485,12 @@ Where ``ArticleStatus`` contains something like::
 
 .. _adding-custom-database-types:
 
+Recommendation: Use a tinyint/smallint type here.
+
+Conventions for enums:
+- The case is ``CamelCase``.
+- Use `{Entity}{ColumnName}` as enum name to auto-map during baking to your baked (form) fields.
+
 Adding Custom Types
 -------------------
 
