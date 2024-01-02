@@ -132,6 +132,7 @@ Database
 - ``Connection::disconnect()`` has been removed. Use
   ``$connection->getDriver()->disconnect()`` instead.
 - ``cake.database.queries`` has been added as an alternative to the ``queriesLog`` scope
+- The ability to enable/disable ResultSet buffering has been removed. Results are always buffered.
 
 Datasource
 ----------

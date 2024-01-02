@@ -3,8 +3,8 @@ Glosario
 
 .. glossary::
 
-    array de rutas
-        Un array de atributos que son pasados a :php:meth:`Router::url()`.
+    arreglo de enrutamiento
+        Un arreglo de atributos que son pasados a :php:meth:`Router::url()`.
         Típicamente se ve algo así::
 
             ['controller' => 'Posts', 'action' => 'view', 5]
@@ -85,4 +85,4 @@ Glosario
 
 .. meta::
     :title lang=es: Glosario
-    :keywords lang=en: html attributes,array class,array controller,glossary glossary,target blank,dot notation,routing configuration,forgery,replay,router,syntax,config,submissions
+    :keywords lang=en: html attributes,array class,array controller,glossary,target blank,dot notation,routing configuration,forgery,replay,router,syntax,config,submissions

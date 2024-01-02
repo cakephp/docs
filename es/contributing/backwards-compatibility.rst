@@ -8,7 +8,7 @@ versiones ``major``. Puedes familiarizarte con el `versionado semántico
 de CakePHP. Pero resumiendo, el versionado semántico significa que sólo las
 liberaciones de versiones ``major`` (tales como 2.0, 3.0, 4.0) pueden romper la
 compatibilidad hacia atrás. Las liberaciones ``minor`` (tales como 2.1, 3.1, 3.2)
-pueden introducir nuevas funcionalidades pero no pueden romper la compatibilidad.
+pueden introducir nuevas funcionalidades, pero no pueden romper la compatibilidad.
 Los lanzamientos de correcciones de errores (tales como 3.0.1) no añaden nuevas
 funcionaliades, sólo correcciones de errores o mejoras de rendimiento.
 
@@ -42,7 +42,7 @@ Interfaces
 
 Con excepción de las liberaciones ``major``, las interfaces que provee CakePHP
 **no** tendrán ningún cambio en los métodos existentes. Podrán añadirse nuevos
-métodos pero no habrá cambios en los ya existentes.
+métodos, pero no habrá cambios en los ya existentes.
 
 Clases
 ------
@@ -62,7 +62,7 @@ defecto, pero si sobreescribes métodos con una firma diferente puedes encontrar
 ``fatal errors``. Los métodos con nuevos argumentos estarán documentados en las
 guías de migración..
 
-La siguiente tabla esboza varios casos de uso y que compatibilidad puedes esperar
+La siguiente tabla esboza varios casos de uso y qué compatibilidad puedes esperar
 de CakePHP:
 
 +---------------------------------------+--------------------------+

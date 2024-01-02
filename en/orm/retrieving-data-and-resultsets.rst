@@ -41,9 +41,7 @@ viewing entities and their related data. You can do this by using ``get()``::
     $article = $articles->get($id);
 
     // Get a single article, and related comments
-    $article = $articles->get($id, [
-        'contain' => ['Comments'],
-    ]);
+    $article = $articles->get($id, contain: ['Comments']);
 
 If the get operation does not find any results a
 ``Cake\Datasource\Exception\RecordNotFoundException`` will be raised. You can
@@ -56,27 +54,19 @@ Like ``find()``, ``get()`` also has caching integrated. You can use the
     // In a controller or table method.
 
     // Use any cache config or CacheEngine instance & a generated key
-    $article = $articles->get($id, [
-        'cache' => 'custom',
-    ]);
+    $article = $articles->get($id, cache: 'custom');
 
     // Use any cache config or CacheEngine instance & specific key
-    $article = $articles->get($id, [
-        'cache' => 'custom', 'key' => 'mykey'
-    ]);
+    $article = $articles->get($id, cache: 'custom', key: 'mykey');
 
     // Explicitly disable caching
-    $article = $articles->get($id, [
-        'cache' => false
-    ]);
+    $article = $articles->get($id, cache: false);
 
 Optionally you can ``get()`` an entity using :ref:`custom-find-methods`. For
 example you may want to get all translations for an entity. You can achieve that
 by using the ``finder`` option::
 
-    $article = $articles->get($id, [
-        'finder' => 'translations',
-    ]);
+    $article = $articles->get($id, 'translations');
 
 The list of options supported by get() are:
 
@@ -928,24 +918,7 @@ and you can use any collection method on ResultSet objects.
 
 Result set objects will lazily load rows from the underlying prepared statement.
 By default results will be buffered in memory allowing you to iterate a result
-set multiple times, or cache and iterate the results. If you need work with
-a data set that does not fit into memory you can disable buffering on the query
-to stream results::
-
-    $query->disableBufferedResults();
-
-Turning buffering off has a few caveats:
-
-#. You will not be able to iterate a result set more than once.
-#. You will also not be able to iterate & cache the results.
-#. Buffering cannot be disabled for queries that eager load hasMany or
-   belongsToMany associations, as these association types require eagerly
-   loading all results so that dependent queries can be generated.
-
-.. warning::
-
-    Streaming results will still allocate memory for the entire results when
-    using PostgreSQL and SQL Server. This is due to limitations in PDO.
+set multiple times, or cache and iterate the results.
 
 Result sets allow you to cache/serialize or JSON encode results for API
 results::

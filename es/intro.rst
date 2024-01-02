@@ -9,7 +9,7 @@ manera conjunta o separada.
 El objetivo de este artículo es introducirte en los conceptos generales de
 CakePHP y darte un rápido vistazo sobre como esos conceptos están implementados
 en CakePHP. Si estás deseando comenzar un proyecto puedes :doc:`empezar con el tutorial
-</tutorials-and-examples/bookmarks/intro>`, o :doc:`profundizar en la documentación
+</tutorials-and-examples/cms/installation>`, o :doc:`profundizar en la documentación
 </topics>`.
 
 Convenciones sobre configuración
@@ -34,15 +34,14 @@ relacionadas con el manejo de datos.
 En el caso de una red social la capa modelo se encargaría de tareas como guardar
 los datos del usuario, las asociaciones de amigos, almacenar y obtener fotos,
 buscar sugerencias de amistad, etc. Los objetos modelo serían "Amigo",
-"Usuario", "Comentario" o "Foto". Si quisieramos obtener más datos de nuestra
+"Usuario", "Comentario" o "Foto". Si quisiéramos obtener más datos de nuestra
 tabla ``usuarios`` podríamos hacer lo siguiente::
 
-    use Cake\ORM\TableRegistry;
+    use Cake\ORM\Locator\LocatorAwareTrait;
 
-    // Prior to 3.6 use TableRegistry::get('Usuarios')
-    $usuarios = TableRegistry::getTableLocator()->get('Usuarios');
-    $query = $usuarios->find();
-    foreach ($query as $row) {
+    $usuarios = $this->getTableLocator()->get('Usuarios');
+    $resultset = $usuarios->find()->all();
+    foreach ($resultset as $row) {
         echo $row->nombreusuario;
     }
 
@@ -53,10 +52,9 @@ usará clases estándar para tablas y clases de entidad que no hayan sido defini
 Si queremos crear un nuevo usuario y guardarlo (con validaciones) podríamos hacer
 algo como::
 
-    use Cake\ORM\TableRegistry;
+    use Cake\ORM\Locator\LocatorAwareTrait;
 
-    // Prior to 3.6 use TableRegistry::get('Usuarios')
-    $usuarios = TableRegistry::getTableLocator()->get('Usuarios');
+    $usuarios = $this->getTableLocator()->get('Usuarios');
     $usuario = $usuarios->newEntity(['email' => 'mark@example.com']);
     $usuarios->save($usuario);
 
@@ -101,7 +99,7 @@ el registro de un usuario sería::
 
     public function add()
     {
-        $usuario = $this->Usuarios->newEntity();
+        $usuario = $this->Usuarios->newEmptyEntity();
         if ($this->request->is('post')) {
             $usuario = $this->Usuarios->patchEntity($usuario, $this->request->getData());
             if ($this->Usuarios->save($usuario, ['validate' => 'registration'])) {
@@ -127,7 +125,7 @@ como funciona el ciclo de una petición:
 
 .. figure:: /_static/img/typical-cake-request.png
    :align: center
-   :alt: Diagrama de flujo mostrando una petición tipica de CakePHP
+   :alt: Diagrama de flujo mostrando una petición típica de CakePHP
 
 El ciclo de petición típico de CakePHP comienza con un usuario solicitando una
 página o recurso en tu aplicación. A un alto nivel cada petición sigue los
@@ -136,7 +134,7 @@ siguientes pasos:
 #. Las reglas de rescritura del servidor web envían la petición a **webroot/index.php**.
 #. Tu aplicación es cargada y ligada a un ``HttpServer``.
 #. Se inicializa el ``midleware`` de tu aplicación.
-#. Una petición y respuesta son precesadas a través del ``Middleware PSR-7`` que tu aplicación utiliza. Normalmente esto incluye la captura de errores y enrutamiento.
+#. Una petición y respuesta son precesadas a través del ``Middleware PSR-7`` que tu aplicación utiliza. Normalmente, esto incluye la captura de errores y enrutamiento.
 #. Si no recibe ninguna respuesta del ``middleware`` y la petición contiene información de enrutamiento, se selecciona un controlador y una acción.
 #. La acción del controlador es ejecutada y el controlador interactúa con los Modelos y Componentes necesarios.
 #. El controlador delega la creación de la respuesta a la Vista para generar la salida a partir de los datos del modelo.
@@ -157,7 +155,7 @@ geniales de CakePHP son:
 * :doc:`Framework para la ejecución de pruebas integrado </development/testing>` para que puedas asegurarte de que tu código funciona perfectamente.
 
 Los siguientes pasos obvios son :doc:`descargar CakePHP </installation>`
-y leer el :doc:`tutorial y crear algo asombroso </tutorials-and-examples/bookmarks/intro>`.
+y leer el :doc:`tutorial y crear algo asombroso </tutorials-and-examples/cms/installation>`.
 
 Lecturas complementarias
 ========================
@@ -171,4 +169,4 @@ Lecturas complementarias
 
 .. meta::
     :title lang=es: Empezando
-    :keywords lang=es: estructura de carpetas,nombres de tablas,petición inicial,tabla de base de datos,estructura orgaizativa,rst,nombres de archivo,convenciones,mvc,web página,sit
+    :keywords lang=es: estructura de carpetas,nombres de tablas,petición inicial,tabla de base de datos,estructura organizativa,rst,nombres de archivo,convenciones,mvc,web página,sit

@@ -1,14 +1,14 @@
 :orphan:
 
-Contents
-########
+Contenidos
+##########
 
 .. toctree::
     :maxdepth: 3
 
     intro
     quickstart
-    appendices/4-0-migration-guide
+    appendices/migration-guides
     tutorials-and-examples
     contributing
 
@@ -20,10 +20,9 @@ Contents
     views
     orm
 
-    controllers/components/authentication
-    bake
     core-libraries/caching
-    console-and-shells
+    bake
+    console-commands
     development/debugging
     deployment
     core-libraries/email
@@ -32,7 +31,7 @@ Contents
     core-libraries/internationalization-and-localization
     core-libraries/logging
     core-libraries/form
-    controllers/components/pagination
+    controllers/pagination
     plugins
     development/rest
     security
@@ -42,7 +41,6 @@ Contents
 
     core-libraries/app
     core-libraries/collections
-    core-libraries/file-folder
     core-libraries/hash
     core-libraries/httpclient
     core-libraries/inflector
@@ -53,12 +51,14 @@ Contents
     core-libraries/xml
 
     core-libraries/global-constants-and-functions
+    chronos
     debug-kit
     migrations
+    elasticsearch
     appendices
 
 .. todolist::
 
 .. meta::
-    :title lang=es: Contents
-    :keywords lang=es: core libraries,ref search,shells,deployment,appendices,glossary,models
+    :title lang=es: Contenidos
+    :keywords lang=en: core libraries,ref search,commands,deployment,appendices,glossary,models

@@ -195,7 +195,7 @@ Writing to ``stdout`` and ``stderr`` is another common operation in CakePHP::
     $io->err('Error message');
 
 In addition to vanilla output methods, CakePHP provides wrapper methods that
-style output with appropriate ANSI colours::
+style output with appropriate ANSI colors::
 
     // Green text on stdout
     $io->success('Success message');
@@ -307,9 +307,9 @@ new output style you could do::
     $io->setStyle('flashy', ['text' => 'magenta', 'blink' => true]);
 
 This would then allow you to use a ``<flashy>`` tag in your shell output, and if
-ansi colours are enabled, the following would be rendered as blinking magenta
+ansi colors are enabled, the following would be rendered as blinking magenta
 text ``$this->out('<flashy>Whoooa</flashy> Something went wrong');``. When
-defining styles you can use the following colours for the ``text`` and
+defining styles you can use the following colors for the ``text`` and
 ``background`` attributes:
 
 * black
@@ -332,10 +332,10 @@ truthy value enables them.
 Adding a style makes it available on all instances of ConsoleOutput as well,
 so you don't have to redeclare styles for both stdout and stderr objects.
 
-Turning Off Colouring
-=====================
+Turning Off Coloring
+====================
 
-Although colouring is pretty, there may be times when you want to turn it off,
+Although coloring is pretty, there may be times when you want to turn it off,
 or force it on::
 
     $io->outputAs(ConsoleOutput::RAW);
@@ -350,6 +350,6 @@ no styling is done at all. There are three modes you can use.
   This is a good mode to use if you are outputting XML or, want to debug why
   your styling isn't working.
 
-By default on \*nix systems ConsoleOutput objects default to colour output.
+By default on \*nix systems ConsoleOutput objects default to color output.
 On Windows systems, plain output is the default unless the ``ANSICON``
 environment variable is present.

@@ -68,8 +68,8 @@ is invoked at the end of a Controller's constructor for this kind of use::
     {
         public function initialize(): void
         {
-            // Always enable the CSRF component.
-            $this->loadComponent('Csrf');
+            // Always enable the FormProtection component.
+            $this->loadComponent('FormProtection');
         }
     }
 
@@ -320,8 +320,8 @@ actions, you can call ``addClasses()`` within your action too::
         // Rest of the action code
     }
 
-If within your controller actions you need to process request or load data
-differently based on the controller action you can use
+If within your controller actions you need to process the request or load data
+differently based on the content type you can use
 :ref:`check-the-request`::
 
     // In a controller action
@@ -510,7 +510,7 @@ want loaded, and any configuration data for them::
     public function initialize(): void
     {
         parent::initialize();
-        $this->loadComponent('Csrf');
+        $this->loadComponent('Flash');
         $this->loadComponent('Comments', Configure::read('Comments'));
     }
 
