@@ -15,8 +15,10 @@ Session Configuration
 Session configuration is generally defined in **/config/app.php**. The available
 options are:
 
-* ``Session.timeout`` - The number of *minutes* before CakePHP's session
-  handler expires the session.
+* ``Session.timeout`` - The number of *minutes* a session can remain 'idle'. If
+  no request is received for ``timeout`` minutes, CakePHP's session
+  handler will expire the session. You can set this option to ``0`` to disable
+  server side idle timeouts.
 
 * ``Session.defaults`` - Allows you to use the built-in default session
   configurations as a base for your session configuration. See below for the
@@ -49,7 +51,7 @@ this::
         ]
     ]);
 
-As of v4.0 CakePHP also sets the `SameSite <https://owasp.org/www-community/SameSite>`__ attribute to ``Lax``
+CakePHP also sets the `SameSite <https://owasp.org/www-community/SameSite>`__ attribute to ``Lax``
 by default for session cookies, which helps protect against CSRF attacks.
 You can change the default value by setting ``session.cookie_samesite`` php.ini config::
 
@@ -80,8 +82,7 @@ configured using::
     Configure::write('Session', [
         'defaults' => 'php',
         'ini' => [
-            // Invalidate the cookie after 30 minutes without visiting
-            // any page on the site.
+            // Invalidate the cookie after 30 minutes
             'session.cookie_lifetime' => 1800
         ]
     ]);
@@ -93,7 +94,7 @@ client reports, you should use ``Session.timeout``.
 
 Please note that ``Session.timeout`` corresponds to the total time of
 inactivity for a user (i.e. the time without visiting any page where the session
-is used), and does not limit the total amount of minutes a user can stay
+is used), and does not limit the total amount of minutes a user can stay active
 on the site.
 
 Built-in Session Handlers & Configuration
