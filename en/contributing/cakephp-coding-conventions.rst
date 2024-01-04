@@ -569,6 +569,17 @@ underscore character, for example::
 
     define('LONG_NAMED_CONSTANT', 2);
 
+Enums
+-----
+
+Enum cases are defined in ``CamelCase`` style::
+
+    enum ArticleStatus: string
+    {
+        case Published = 'Y';
+        case NotPublishedYet = 'N';
+    }
+
 Careful when using empty()/isset()
 ==================================
 

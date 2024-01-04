@@ -114,6 +114,10 @@ Entity class names are singular CamelCased and have no suffix. ``User``,
 matching the ``users``, ``menu_links`` and ``user_favorite_pages``
 tables respectively.
 
+Enum class names should use a ``{Entity}{Column}`` convention, and enum cases
+should use CamelCased names.
+
+
 View Conventions
 ================
 
