@@ -571,6 +571,7 @@ underscore character, for example::
 
 Enums
 -----
+
 Enum cases are defined in ``CamelCase`` style::
 
     enum ArticleStatus: string

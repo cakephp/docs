@@ -483,13 +483,13 @@ Where ``ArticleStatus`` contains something like::
         case Unpublished = 'N';
     }
 
+CakePHP recommends a few conventions for enums:
+
+- Enum classnames should follow ``{Entity}{ColumnName}`` style to enable
+  detection while running bake and to aid with project consistency.
+- Enum cases should use CamelCase style.
+
 .. _adding-custom-database-types:
-
-Recommendation: Use a tinyint/smallint type here.
-
-Conventions for enums:
-- The case is ``CamelCase``.
-- Use `{Entity}{ColumnName}` as enum name to auto-map during baking to your baked (form) fields.
 
 Adding Custom Types
 -------------------
