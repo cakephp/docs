@@ -100,6 +100,25 @@ If you want to access all the query parameters you can use
 
     $query = $this->request->getQueryParams();
 
+You can use the casting utility functions to provide typesafe access to request
+data and other input::
+
+    use function Cake\Core\toBool;
+    use function Cake\Core\toInt;
+    use function Cake\Core\toString;
+
+    // $active is bool|null.
+    $active = toBool($this->request->getQuery('active'));
+
+    // $page is int|null.
+    $page = toInt($this->request->getQuery('page'));
+
+    // $query is string|null.
+    $query = toString($this->request->getQuery('query'));
+
+.. versionadded:: 5.1.0
+    Casting functions were added.
+
 Request Body Data
 -----------------
 
