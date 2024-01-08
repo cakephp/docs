@@ -9,7 +9,7 @@ Upgrading to 4.5.0
 
 You can can use composer to upgrade to CakePHP 4.5.0::
 
-    php composer.phar require --update-with-dependencies "cakephp/cakephp:^4.5"
+    php composer.phar require --update-with-dependencies "cakephp/cakephp:4.5.x"
 
 .. note::
     CakePHP 4.5 requires PHP 7.4 or greater.
