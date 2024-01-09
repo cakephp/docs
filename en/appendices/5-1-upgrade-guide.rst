@@ -35,9 +35,8 @@ Console
 Core
 ----
 
-- The ``toString``, ``toInt``, ``toBool`` were added. These methods give you
-  a typesafe way to cast request data or other input. Should casting not
-  succeed, ``null`` will be returned.
+- The ``toString``, ``toInt``, ``toBool`` functions were added. They give you
+  a typesafe way to cast request data or other input and return ``null`` when conversion fails.
 
 Http
 ----
