@@ -36,6 +36,11 @@ Core
 - ``Cake\Core\Exception\Exception`` was renamed to
   ``Cake\Core\Exception\CakeException``.
 
+Controller
+----------
+
+- ``Controller::setAction()`` is deprecated. Either update your code to use
+  redirects, or call the required action as a method.
 
 Database
 --------
@@ -106,9 +111,9 @@ Validation
 
 - ``Validation::time()`` will now reject a string if minutes are missing. Previously,
   this would accept hours-only digits although the api documentation showed minutes were required.
-- ``Validation::comparison()`` (and as a result other comparison methods which use it) 
-  now only work for numeric string. Earlier it relied on pretty brittle behavior 
-  of casting any given value to float for comparison which could lead of incorrect 
+- ``Validation::comparison()`` (and as a result other comparison methods which use it)
+  now only work for numeric string. Earlier it relied on pretty brittle behavior
+  of casting any given value to float for comparison which could lead of incorrect
   results for non-numeric strings.
 
 Breaking Changes

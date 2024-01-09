@@ -432,6 +432,10 @@ the named action::
     // list page.
     $this->setAction('index');
 
+
+.. deprecated:: 4.2.0
+    Use redirects or call the other action as a method.
+
 Loading Additional Models
 =========================
 
