@@ -32,6 +32,12 @@ Console
 
 - ``Arguments::getBooleanOption()`` and ``Arguments::getMultipleOption()`` were added.
 
+Core
+----
+
+- The ``toString``, ``toInt``, ``toBool`` functions were added. They give you
+  a typesafe way to cast request data or other input and return ``null`` when conversion fails.
+
 Http
 ----
 
