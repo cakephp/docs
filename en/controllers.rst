@@ -434,20 +434,6 @@ By using the second parameter you can define a status code for your redirect::
 See the :ref:`redirect-component-events` section for how to redirect out of
 a life-cycle handler.
 
-Forwarding to an Action on the Same Controller
-----------------------------------------------
-
-.. php:method:: setAction($action, $args...)
-
-If you need to forward the current action to a different action on the *same*
-controller, you can use ``Controller::setAction()`` to update the request
-object, modify the view template that will be rendered and forward execution to
-the named action::
-
-    // From a delete action, you can render the updated
-    // list page.
-    $this->setAction('index');
-
 Loading Additional Models
 =========================
 
