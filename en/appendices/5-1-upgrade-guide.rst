@@ -46,6 +46,10 @@ Http
 - ``Client`` now emits ``HttpClient.beforeSend`` and ``HttpClient.afterSend``
   events when requests are sent. You can use these events to perform logging,
   caching or collect telemetry.
+- ``Http\Server::terminate()`` was added. This method triggers the
+  ``Server.terminate`` event which can be used to run logic after the response
+  has been sent in fastcgi environments. In other environments the
+  ``Server.terminate`` event runs *before* the response has been sent.
 
 TestSuite
 ---------

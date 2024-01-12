@@ -1059,7 +1059,7 @@ will make the browser remove its local cookie::
 .. _cors-headers:
 
 Setting Cross Origin Request Headers (CORS)
-===========================================
+-------------------------------------------
 
 The ``cors()`` method is used to define `HTTP Access Control
 <https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS>`__
@@ -1085,6 +1085,27 @@ criteria are met:
     CakePHP has no built-in CORS middleware because dealing with CORS requests
     is very application specific. We recommend you build your own ``CORSMiddleware``
     if you need one and adjust the response object as desired.
+
+Running logic after the Response has been sent
+----------------------------------------------
+
+In fastcgi based environments you can listen to the ``Server.terminate`` event
+to run logic **after** the response has been sent to the client. Make sure your
+application's **webroot/index.php** contains the following::
+
+    $app = new Application(dirname(__DIR__) . '/config'))
+    $server = new Server($app);
+
+    $response = $server->run(ServerRequest::fromGlobals());
+    $server->emit($response);
+    $request = $app->getContainer()->get(ServerRequest::class);
+    $server->terminate($request, $response);
+
+.. warning::
+   In non fastcgi environments the ``Server.terminate`` event is fired before
+   the response is sent.
+
+.. versionadded:: 5.1.0
 
 Common Mistakes with Immutable Responses
 ========================================
