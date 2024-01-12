@@ -1074,11 +1074,12 @@ In fastcgi based environments you can listen to the ``Server.terminate`` event
 to run logic **after** the response has been sent to the client. Make sure your
 application's **webroot/index.php** contains the following::
 
-    $server = new Server(new Application(dirname(__DIR__) . '/config'));
+    $app = new Application(dirname(__DIR__) . '/config'))
+    $server = new Server($app);
 
-    $request = ServerRequest::fromGlobals();
-    $response = $server->run($request);
+    $response = $server->run(ServerRequest::fromGlobals());
     $server->emit($response);
+    $request = $app->getContainer()->get(ServerRequest::class);
     $server->terminate($request, $response);
 
 .. warning::
