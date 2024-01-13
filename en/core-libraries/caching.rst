@@ -169,6 +169,13 @@ RedisEngine uses the following engine specific options:
 * ``persistent`` Should a persistent connection be made to Redis.
 * ``timeout`` Connection timeout for Redis.
 * ``unix_socket`` Path to a unix socket for Redis.
+* ``tls`` Connect to redis over TLS.
+* ``ssl_key`` The ssl private key used for TLS connections.
+* ``ssl_ca`` The ssl certificate authority file for TLS connections.
+* ``ssl_cert`` The ssl certificate used for TLS connections.
+
+.. versionadded:: 5.1.0
+    TLS connections were added in 5.1
 
 MemcacheEngine Options
 ----------------------
