@@ -27,6 +27,12 @@ I18n
 New Features
 ============
 
+Command
+-------
+
+- ``bin/cake plugin list`` now includes the current version number for each
+  plugin if available.
+
 Console
 -------
 
