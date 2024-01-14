@@ -37,8 +37,8 @@ Cache
 Command
 -------
 
-- ``bin/cake plugin list`` now includes the current version number for each
-  plugin if available.
+- ``bin/cake plugin list`` has been added to list all available plugins,
+  their load configuration and version.
 
 Console
 -------
@@ -48,6 +48,7 @@ Console
 Core
 ----
 
+- ``PluginConfig`` was added. Use this class to get all available plugins, their load config and versions.
 - The ``toString``, ``toInt``, ``toBool`` functions were added. They give you
   a typesafe way to cast request data or other input and return ``null`` when conversion fails.
 
