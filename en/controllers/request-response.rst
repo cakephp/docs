@@ -1090,16 +1090,10 @@ Running logic after the Response has been sent
 ----------------------------------------------
 
 In fastcgi based environments you can listen to the ``Server.terminate`` event
-to run logic **after** the response has been sent to the client. Make sure your
-application's **webroot/index.php** contains the following::
-
-    $app = new Application(dirname(__DIR__) . '/config'))
-    $server = new Server($app);
-
-    $response = $server->run(ServerRequest::fromGlobals());
-    $server->emit($response);
-    $request = $app->getContainer()->get(ServerRequest::class);
-    $server->terminate($request, $response);
+to run logic **after** the response has been sent to the client. The
+``terminate`` event will be passed a ``request`` and ``response``. The
+``request`` is fetched from the applications' DI container, or from
+``Router::getRequest()`` if the DI container does not have a request registered.
 
 .. warning::
    In non fastcgi environments the ``Server.terminate`` event is fired before
