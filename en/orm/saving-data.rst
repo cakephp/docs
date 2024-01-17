@@ -443,6 +443,8 @@ merge deeper to deeper levels, you can use the third parameter of the method::
 
     // In a controller.
     $associated = ['Tags', 'Comments.Users'];
+    // or
+    $associated = ['Tags', 'Comments' => ['associated' => ['Users']]];
     $article = $articles->get(1, ['contain' => $associated]);
     $articles->patchEntity($article, $this->request->getData(), [
         'associated' => $associated,
