@@ -434,22 +434,8 @@ By using the second parameter you can define a status code for your redirect::
 See the :ref:`redirect-component-events` section for how to redirect out of
 a life-cycle handler.
 
-Loading Additional Models
-=========================
-
-.. php:method:: fetchModel(string $alias, array $config = [])
-
-The ``fetchModel()`` method is useful to load models or ORM tables that
-are not the controller's default. Models retrieved with this method will not be
-set as properties on your controller::
-
-    // Get an ElasticSearch model
-    $articles = $this->fetchModel('Articles', 'Elastic');
-
-    // Get a webservices model
-    $github = $this->fetchModel('GitHub', 'Webservice');
-
-.. versionadded:: 4.5.0
+Loading Additional Tables/Models
+================================
 
 .. php:method:: fetchTable(string $alias, array $config = [])
 
@@ -462,6 +448,25 @@ the controller's default one::
             order: 'Articles.created DESC'
         )
         ->all();
+
+.. php:method:: fetchModel(string $alias, array $config = [])
+
+The ``fetchModel()`` method is useful to load non ORM models or ORM tables that
+are not the controller's default::
+
+    // ModelAwareTrait need to be explicity added to your controler first for fetchModel() to work.
+    use ModelAwareTrait;
+
+    // Get an ElasticSearch model
+    $articles = $this->fetchModel('Articles', 'Elastic');
+
+    // Get a webservices model
+    $github = $this->fetchModel('GitHub', 'Webservice');
+
+    // If you skip the 2nd argument it will by default try to load a ORM table.
+    $authors = $this->fetchModel('Authors');
+
+.. versionadded:: 4.5.0
 
 Paginating a Model
 ==================
