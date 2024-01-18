@@ -449,7 +449,7 @@ the controller's default one::
         )
         ->all();
 
-.. php:method:: fetchModel(string $alias, array $config = [])
+.. php:method:: fetchModel(string|null $modelClass = null, string|null $modelType = null)
 
 The ``fetchModel()`` method is useful to load non ORM models or ORM tables that
 are not the controller's default::
