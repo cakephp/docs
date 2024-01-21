@@ -23,3 +23,16 @@ Cache
 - ``RedisEngine`` now supports a ``tls`` option that enables connecting to redis
   over a TLS connection. You can use the ``ssl_ca``, ``ssl_cert`` and
   ``ssl_key`` options to define the TLS context for redis.
+
+I18n
+----
+
+- ``Number::formatter()`` and ``currency()`` now accept a ``roundingMode``
+  option to override how rounding is done.
+
+
+View
+----
+
+- ``NumberHelper::format()`` now accepts a ``roundingMode`` option to override how
+  rounding is done.
