@@ -65,6 +65,12 @@ Http
   has been sent in fastcgi environments. In other environments the
   ``Server.terminate`` event runs *before* the response has been sent.
 
+I18n
+----
+
+- ``Number::formatter()`` and ``currency()`` now accept a ``roundingMode``
+  option to override how rounding is done.
+
 TestSuite
 ---------
 
@@ -84,3 +90,5 @@ View
 
 - View cells now emit events around their actions ``Cell.beforeAction`` and
   ``Cell.afterAction``.
+- ``NumberHelper::format()`` now accepts a ``roundingMode`` option to override how
+  rounding is done.
