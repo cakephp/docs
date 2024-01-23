@@ -56,6 +56,12 @@ Cache
 - The ``Wincache`` engine was removed. The wincache extension is not supported
   on PHP 8.
 
+Collection
+----------
+
+- `combine()` now throws an exception if the key path or group path doesn't exist or contains a null value.
+  This matches the behavior of `indexBy()` and `groupBy()`.
+
 Console
 -------
 
