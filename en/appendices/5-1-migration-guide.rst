@@ -1,5 +1,5 @@
-5.1 Upgrade Guide
-#################
+5.1 Migration Guide
+###################
 
 The 5.1.0 release is a backwards compatible with 5.0. It adds new functionality
 and introduces new deprecations. Any functionality deprecated in 5.x will be

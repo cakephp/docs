@@ -9,4 +9,5 @@ each version and the migration path between 4.x and 5.x.
 
     ./5-0-upgrade-guide
     ./5-0-migration-guide
+    ./5-1-migration-guide
     ./phpunit10
