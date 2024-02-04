@@ -1814,12 +1814,12 @@ error messages per field.
 
 Example::
 
-    // If in TicketsTable you have a 'notEmpty' validation rule:
+    // If in TicketsTable you have a 'notEmptyString' validation rule:
     public function validationDefault(Validator $validator): Validator
     {
         $validator
             ->requirePresence('ticket', 'create')
-            ->notEmpty('ticket');
+            ->notEmptyString('ticket');
     }
 
     // And inside templates/Tickets/add.php you have:
