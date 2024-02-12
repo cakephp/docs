@@ -1123,7 +1123,7 @@ use the ``IS`` operator to automatically create the correct expression::
     $query = $categories->find()
         ->where(['parent_id IS' => $parentId]);
 
-The above will create ``parent_id = :c1`` or ``parent_id IS NULL`` depending on
+The above will generate``parent_id = :c1`` or ``parent_id IS NULL`` depending on
 the type of ``$parentId``
 
 Automatic IS NOT NULL Creation
@@ -1135,7 +1135,7 @@ can use the ``IS NOT`` operator to automatically create the correct expression::
     $query = $categories->find()
         ->where(['parent_id IS NOT' => $parentId]);
 
-The above will create ``parent_id != :c1`` or ``parent_id IS NOT NULL``
+The above will generate``parent_id != :c1`` or ``parent_id IS NOT NULL``
 depending on the type of ``$parentId``
 
 
