@@ -59,7 +59,7 @@ In other contexts, you can use the ``LocatorAwareTrait`` which add accessor meth
 
     public function someMethod()
     {
-        $articles = $this->getTableLocator()->get('Articles');
+        $articles = $this->fetchTable('Articles');
         // more code.
     }
 
@@ -88,7 +88,7 @@ load entities from the database we'll get instances of our new Article class::
 
     use Cake\ORM\Locator\LocatorAwareTrait;
 
-    $articles = $this->getTableLocator()->get('Articles');
+    $articles = $this->fetchTable('Articles');
     $resultset = $articles->find()->all();
 
     foreach ($resultset as $row) {
@@ -113,11 +113,11 @@ More Information
     orm/query-builder
     orm/table-objects
     orm/entities
+    orm/associations
     orm/retrieving-data-and-resultsets
     orm/validation
     orm/saving-data
     orm/deleting-data
-    orm/associations
     orm/behaviors
     orm/schema-system
     console-commands/schema-cache

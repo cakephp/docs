@@ -96,7 +96,7 @@ can do this by using the ``TableLocator`` class::
 
     // In a controller
 
-    $articles = $this->getTableLocator()->get('Articles');
+    $articles = $this->fetchTable('Articles');
 
 ``TableLocator`` provides the various dependencies for constructing
 a table, and maintains a registry of all the constructed table instances making
@@ -109,10 +109,10 @@ being triggered as a default class is used instead of your actual class. To
 correctly load plugin table classes use the following::
 
     // Plugin table
-    $articlesTable = $this->getTableLocator()->get('PluginName.Articles');
+    $articlesTable = $this->fetchTable('PluginName.Articles');
 
     // Vendor prefixed plugin table
-    $articlesTable = $this->getTableLocator()->get('VendorName/PluginName.Articles');
+    $articlesTable = $this->fetchTable('VendorName/PluginName.Articles');
 
 .. _table-callbacks:
 
