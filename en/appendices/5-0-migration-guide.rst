@@ -42,7 +42,7 @@ Global
    - MariaDB (10.1 or higher)
    - PostgreSQL (9.6 or higher)
    - Microsoft SQL Server (2012 or higher)
-   - SQLite 3
+   - SQLite 3 (3.16 or higher)
 
 Auth
 ----
