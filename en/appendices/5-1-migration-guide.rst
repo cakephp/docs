@@ -14,6 +14,8 @@ Behavior Changes
   are using ``aria-required`` attribute in styling or scripting you'll need to
   update your application.
 
+- Text Utility and TextHelper methods around truncation and maximum length are using
+  a UTF-8 character for ``ellipsis`` instead of ``...`` legacy characters.
 
 Deprecations
 ============
@@ -92,3 +94,11 @@ View
   ``Cell.afterAction``.
 - ``NumberHelper::format()`` now accepts a ``roundingMode`` option to override how
   rounding is done.
+
+Helpers
+-------
+
+- ``TextHelper::autoLinkUrls()`` has options added for better link label printing:
+  * ``stripProtocol``: Strips ``http://`` and ``https://`` from the beginning of the link. Default off.
+  * ``maxLength``: The maximum length of the link label. Default off.
+  * ``ellipsis``: The string to append to the end of the link label. Defaults to UTF8 version.
