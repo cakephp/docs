@@ -56,6 +56,11 @@ are linked appropriately given the supplied ``$options``.
 This method automatically escapes its input. Use the ``escape``
 option to disable this if necessary.
 
+Further options:
+  * ``stripProtocol``: Strips ``http://`` and ``https://`` from the beginning of the link label. Default off.
+  * ``maxLength``: The maximum length of the link label. Default off.
+  * ``ellipsis``: The string to append to the end of the link label. Defaults to UTF8 version.
+
 Converting Text into Paragraphs
 ===============================
 
