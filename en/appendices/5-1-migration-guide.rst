@@ -13,9 +13,9 @@ Behavior Changes
   is redundant on these elements and generates HTML validation warnings. If you
   are using ``aria-required`` attribute in styling or scripting you'll need to
   update your application.
-
-- Text Utility and TextHelper methods around truncation and maximum length are using
-  a UTF-8 character for ``ellipsis`` instead of ``...`` legacy characters.
+- ``Text`` Utility and ``TextHelper`` methods around truncation and maximum
+  length are using a UTF-8 character for ``ellipsis`` instead of ``...`` legacy
+  characters.
 
 Deprecations
 ============
@@ -53,6 +53,13 @@ Core
 - ``PluginConfig`` was added. Use this class to get all available plugins, their load config and versions.
 - The ``toString``, ``toInt``, ``toBool`` functions were added. They give you
   a typesafe way to cast request data or other input and return ``null`` when conversion fails.
+
+Database
+--------
+
+- ``Database\Driver`` now raises ``Cake\Database\Exception\QueryException`` when
+  PDO errors are encountered. This wrapper extends ``PDOException`` and exposes
+  the query that failed in a typesafe way.
 
 Http
 ----
