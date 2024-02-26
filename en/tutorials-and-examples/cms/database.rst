@@ -169,6 +169,13 @@ don't become obstacles.
     bin/cake bake migration CreateArticlesTags article_id:integer:primary tag_id:integer:primary created modified
 
 .. note::
+    You may need to edit the above bake commands using mac zsh shell the brackets in::
+
+        slug:string[191] 
+    possibly need to be escaped. Edit to::
+
+        slug:string\[191\]
+
     Some adjustments to the generated code might be necessary. For example, the
     composite primary key on ``articles_tags`` will be set to auto-increment
     both columns::
