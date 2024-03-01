@@ -299,7 +299,7 @@ Core
 ----
 
 - The ``services()`` method was added to ``PluginInterface``.
-- ``PluginCollection::addFromConfig()`` has been added to :ref:`simplify plugin loading <loading-a-plugin>`.
+- ``PluginCollection::addFromConfig()`` has been added to :ref:`プラグインの読み込み <loading-a-plugin>`.
 
 Database
 --------
