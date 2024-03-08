@@ -97,6 +97,7 @@ The easiest way is to either call the ``all()`` or ``toList()`` methods::
     $resultsArray = $articles
         ->find()
         ->where(['id >' => 1])
+        ->all()
         ->toList();
 
     foreach ($resultsArray as $article) {
