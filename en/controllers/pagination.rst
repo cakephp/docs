@@ -269,7 +269,7 @@ Using a paginator class directly
 You can also use a paginator directly.::
 
         // Create a paginator
-        $paginator = new \Cake\Datasource\Paginator\Paginator();
+        $paginator = new \Cake\Datasource\Paginator\NumericPaginator();
 
         // Paginate the model
         $results = $paginator->paginate(
