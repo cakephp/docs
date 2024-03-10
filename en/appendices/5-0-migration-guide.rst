@@ -59,8 +59,8 @@ Cache
 Collection
 ----------
 
-- `combine()` now throws an exception if the key path or group path doesn't exist or contains a null value.
-  This matches the behavior of `indexBy()` and `groupBy()`.
+- ``combine()`` now throws an exception if the key path or group path doesn't exist or contains a null value.
+  This matches the behavior of ``indexBy()`` and ``groupBy()``.
 
 Console
 -------
