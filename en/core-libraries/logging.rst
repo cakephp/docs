@@ -408,14 +408,14 @@ the CakePHP loggers, it is easy to use in your application as the default
 logger.
 
 After installing Monolog using composer, configure the logger using the
-``Log::config()`` method::
+``Log::setConfig()`` method::
 
     // config/bootstrap.php
 
     use Monolog\Logger;
     use Monolog\Handler\StreamHandler;
 
-    Log::config('default', function () {
+    Log::setConfig('default', function () {
         $log = new Logger('app');
         $log->pushHandler(new StreamHandler('path/to/your/combined.log'));
         return $log;
@@ -432,7 +432,7 @@ Use similar methods if you want to configure a different logger for your console
     use Monolog\Logger;
     use Monolog\Handler\StreamHandler;
 
-    Log::config('default', function () {
+    Log::setConfig('default', function () {
         $log = new Logger('cli');
         $log->pushHandler(new StreamHandler('path/to/your/combined-cli.log'));
         return $log;
