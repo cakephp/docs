@@ -1680,14 +1680,13 @@ correctly by the ``adjust()`` method in our component. We create the file
         public function setUp(): void
         {
             parent::setUp();
-            // Setup our component and fake test controller
+            // Setup our component and provide it a basic controller.
+            // If your component relies on Application features, use AppController.
             $request = new ServerRequest();
             $response = new Response();
-            $this->controller = $this->getMockBuilder('Cake\Controller\Controller')
-                ->setConstructorArgs([$request, $response])
-                ->setMethods(null)
-                ->getMock();
+            $this->controller = new Controller($request);
             $registry = new ComponentRegistry($this->controller);
+
             $this->component = new PagematronComponent($registry);
             $event = new Event('Controller.startup', $this->controller);
             $this->component->startup($event);
