@@ -1,65 +1,61 @@
-PHPUnit 10 Upgrade
-##################
+PHPUnit 10 へのアップグレード
+##############################
 
-With CakePHP 5 the minimum PHPUnit version has changed from ``^8.5 || ^9.3`` to ``^10.1``.
-This introduces a few breaking changes from PHPUnit as well as from CakePHP's side.
+CakePHP 5 では、PHPUnit の最低バージョンが ``^8.5 || ^9.3`` から ``^10.1`` に変更されました。
+この文書は、PHPUnit や CakePHP 由来の、いくつかの破壊的変更を紹介するものです。
 
-phpunit.xml adjustments
+phpunit.xml の調整
 =======================
 
-It is recommended to let PHPUnit update its configuration file via the following command::
+PHPUnitの設定ファイルを、以下のコマンドで更新することが推奨されます::
 
   vendor/bin/phpunit --migrate-configuration
 
 .. note::
 
-    Make sure you are already on PHPUnit 10 via ``vendor/bin/phpunit --version`` before executing this command!
+    上記のコマンドを実行する前に、 ``vendor/bin/phpunit --version`` を実行して PHPUnit 10 が実行されていることを確認して下さい。
 
-With this command out of the way your ``phpunit.xml`` already has most of the recommended changes present.
+このコマンド（訳注 : ``vendor/bin/phpunit --migrate-configuration`` のこと）を実行することによって、お手元のプロジェクトの ``phpunit.xml`` ファイルには推奨される変更が適用された状態になります。
 
-New event system
-----------------
+新しいイベントシステム
+----------------------
 
-PHPUnit 10 removed the old hook system and introduced a new `Event system
-<https://docs.phpunit.de/en/10.0/extending-phpunit.html#extending-the-test-runner>`_
-which requires the following code in your ``phpunit.xml`` to be adjusted from::
+PHPUnit 10 は、古い hook の仕組みを削除した上で、新しい `イベントシステム <https://docs.phpunit.de/en/10.5/extending-phpunit.html#extending-the-test-runner>`_ が導入されました。
+ここでは、以下に示すような ``phpunit.xml`` は…::
 
   <extensions>
     <extension class="Cake\TestSuite\Fixture\PHPUnitExtension"/>
   </extensions>
 
-to::
+次のように調整されます::
 
   <extensions>
     <bootstrap class="Cake\TestSuite\Fixture\Extension\PHPUnitExtension"/>
   </extensions>
 
-``->withConsecutive()`` has been removed
+``->withConsecutive()`` の削除
 ========================================
 
-You can convert the removed ``->withConsecutive()`` method to a
-working interim solution like you can see here::
+削除されたメソッド ``->withConsecutive()`` は、応急措置的に置き換え可能です。例えば以下のコードは::
 
     ->withConsecutive(['firstCallArg'], ['secondCallArg'])
 
-should be converted to::
+次のように置き換えられます::
 
     ->with(
         ...self::withConsecutive(['firstCallArg'], ['secondCallArg'])
     )
 
-the static ``self::withConsecutive()`` method has been added via the ``Cake\TestSuite\PHPUnitConsecutiveTrait``
-to the base ``Cake\TestSuite\TestCase`` class so you don't have to manually add that trait to your Testcase classes.
+``Cake\TestSuite\TestCase`` クラスには、 ``Cake\TestSuite\PHPUnitConsecutiveTrait`` 経由で、静的メソッド ``self::withConsecutive()`` が追加されました。なので、Testcase のクラスに手動で trait を仕込む必要はありません。
 
-data providers have to be static
+data provider は static に
 ================================
 
-If your testcases leverage the data provider feature of PHPUnit then
-you have to adjust your data providers to be static::
+お手元のプロジェクトのテストケースにおいて、PHPUnitの data provider 機能を活用している場合、それを static にする必要があります。例えば以下のコードは::
 
     public function myProvider(): array
 
-should be converted to::
+次のように置き換えて下さい::
 
     public static function myProvider(): array
 

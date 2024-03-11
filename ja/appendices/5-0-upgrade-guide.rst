@@ -1,44 +1,41 @@
-5.0 Upgrade Guide
-#################
+5.0 アップグレードガイド
+#########################
 
-First, check that your application is running on latest CakePHP 4.x version.
+まず始めに、お手元のアプリケーションが CakePHP 4.x の最新バージョンで動作していることを確認して下さい。
 
-Fix Deprecation Warnings
+非推奨警告の対応
 ========================
 
-Once your application is running on latest CakePHP 4.x, enable deprecation warnings in **config/app.php**::
+CakePHP 4.x の最新バージョンで動作していることが確認できたら **config/app.php** の設定を変更して、非推奨警告を有効にします::
 
     'Error' => [
         'errorLevel' => E_ALL,
     ]
 
-Now that you can see all the warnings, make sure these are fixed before proceeding with the upgrade.
+これによって全ての警告が見えるようになります。アップグレードの作業を始める前に確実にこれを済ませておいて下さい。
 
-Some potentially impactful deprecations you should make sure you have addressed
-are:
+いくつか、影響の大きな非推奨項目があります。
 
-- ``Table::query()`` was deprecated in 4.5.0. Use ``selectQuery()``,
-  ``updateQuery()``, ``insertQuery()`` and ``deleteQuery()`` instead.
+- ``Table::query()`` は 4.5.0 で非推奨となりました。代わりに ``selectQuery()``, ``updateQuery()``, ``insertQuery()``, ``deleteQuery()`` を使用して下さい。
 
-Upgrade to PHP 8.1
-==================
+PHP 8.1 にアップグレード
+==========================
 
-If you are not running on **PHP 8.1 or higher**, you will need to upgrade PHP before updating CakePHP.
+もしもPHPのバージョンが **8.1 または それ以上** ではない場合、CakePHPのアップデートをする前にPHPのアップグレードをして下さい。
 
 .. note::
-    CakePHP 5.0 requires **a minimum of PHP 8.1**.
+    CakePHP 5.0 の実行には **最低でも PHP 8.1** が必要です。
 
 .. _upgrade-tool-use:
 
-Use the Upgrade Tool
-====================
+アップグレード・ツール の利用
+=============================
 
 .. note::
-    The upgrade tool only works on applications running on latest CakePHP 4.x. You cannot run the upgrade tool after updating to CakePHP 5.0.
+    このアップグレード・ツールは、最新の CakePHP 4.x でのみ実行可能です。CakePHP を 5.0 にした後では実行することはできません。
 
-Because CakePHP 5 leverages union types and ``mixed``, there are many
-backwards incompatible changes concerning method signatures and file renames.
-To help expedite fixing these tedious changes there is an upgrade CLI tool:
+CakePHP 5 では、union型 や ``mixed`` 型を有効活用するので、メソッドのシグネチャやファイル名などで、後方互換性を持たない変更が多く含まれます。
+つまらない仕事をさっさと片付けるために、アップグレード用の CLI ツールを利用して下さい。
 
 .. code-block:: console
 
@@ -48,27 +45,20 @@ To help expedite fixing these tedious changes there is an upgrade CLI tool:
     git checkout 5.x
     composer install --no-dev
 
-With the upgrade tool installed you can now run it on your application or
-plugin::
+このアップグレードツールがインストールされると、お手元のアプリケーションやプラグインにおいて実行可能となります::
 
-    bin/cake upgrade rector --rules cakephp50 <path/to/app/src>
-    bin/cake upgrade rector --rules chronos3 <path/to/app/src>
+    bin/cake upgrade rector --rules cakephp50 <app/src へのパス>
+    bin/cake upgrade rector --rules chronos3 <app/src へのパス>
 
-Update CakePHP Dependency
-=========================
+CakePHPの依存関係の更新
+===========================
 
-After applying rector refactorings you need to upgrade CakePHP, its plugins, PHPUnit
-and maybe other dependencies in your ``composer.json``.
-This process heavily depends on your application so we recommend you compare your
-``composer.json`` with what is present in `cakephp/app
-<https://github.com/cakephp/app/blob/5.x/composer.json>`__.
+ツールでのアップグレードが完了した後には、 ``composer.json`` に示されている、CakePHPやそのプラグイン、PHPUnit、そしてその他の多くの依存関係をアップグレードしましょう。
+この作業の内容は、お手元のアプリケーションの状況によって変わりますので、 ``composer.json`` ファイルを、お手元のアプリケーションのものと、 CakePHP 5.x のアプリのテンプレート `cakephp/app <https://github.com/cakephp/app/blob/5.x/composer.json>`__ とで見比べると良いでしょう。
 
-After the version strings are adjusted in your ``composer.json`` execute
-``composer update -W`` and check its output.
+``composer.json`` のバージョンが調整されたら、 ``composer update -W`` を実行して、結果を確認しましょう。
 
-Update app files based upon latest app template
-===============================================
+アプリのファイルを、アプリのテンプレートに沿って更新
+=====================================================
 
-Next, ensure the rest of your application has been updated to be based upon the
-latest version of `cakephp/app
-<https://github.com/cakephp/app/blob/5.x/>`__.
+次に、アプリケーションの他のファイルについても、アプリのテンプレート `cakephp/app <https://github.com/cakephp/app/blob/5.x/>`__ を見て、必要なアップデートを施します。

@@ -77,262 +77,199 @@ Controller
 
 - ``Controller::__construct()`` は削除されました。サブクラスでoverrideしていた場合は、コードの調整をお願いします。
 - Component は、 Controller の読み込み後に dynamic property として設定されることは無くなりました。代わりに Controller は ``__get()`` を用いて Component へのアクセスを提供します。この変更は、 Component の存在有無を ``property_exists()`` でチェックしているアプリケーションに影響を与えます。
-- The components' ``Controller.shutdown`` event callback has been renamed from
-  ``shutdown`` to ``afterFilter`` to match the controller one. This makes the callbacks more consistent.
-- ``PaginatorComponent`` has been removed and should be replaced by calling ``$this->paginate()`` in your controller or
-  using ``Cake\Datasource\Paging\NumericPaginator`` directly
-- ``RequestHandlerComponent`` has been removed. See the `4.4 migration <https://book.cakephp.org/4/en/appendices/4-4-migration-guide.html#requesthandlercomponent>`__ guide for how to upgrade
-- ``SecurityComponent`` has been removed. Use ``FormProtectionComponent`` for form tampering protection
-  or ``HttpsEnforcerMiddleware`` to enforce use of HTTPS for requests instead.
-- ``Controller::paginate()`` no longer accepts query options like ``contain`` for
-  its ``$settings`` argument. You should instead use the ``finder`` option
-  ``$this->paginate($this->Articles, ['finder' => 'published'])``. Or you can
-  create required select query before hand and then pass it to ``paginate()``
-  ``$query = $this->Articles->find()->where(['is_published' => true]); $this->paginate($query);``.
+- Component が発行していた ``Controller.shutdown`` イベントは、 ``shutdown`` から ``afterFilter`` に名称変更されました。Controller に合わせるためです。これにより callback はより首尾一貫したものとなります。
+- ``PaginatorComponent`` は削除されました。代わりに、 Controller で ``$this->paginate()`` を呼び出すか、直接 ``Cake\Datasource\Paging\NumericPaginator`` を用いて下さい。
+- ``RequestHandlerComponent`` は削除されました。アップグレード方法は `4.4 移行ガイド <https://book.cakephp.org/4/ja/appendices/4-4-migration-guide.html#requesthandlercomponent>`__ を参照して下さい。
+- ``SecurityComponent`` は削除されました。代わりに ``FormProtectionComponent`` で耐タンパ性を得たり、 ``HttpsEnforcerMiddleware`` を使って HTTPS を強制したりして下さい。
+- ``Controller::paginate()`` は、その引数 ``$settings`` において ``contain`` オプション等を受け付けなくなりました。代わりに ``finder`` オプションを使って ``$this->paginate($this->Articles, ['finder' => 'published'])`` などとして下さい。事前にクエリを組み立てておいてそれを ``paginate()`` に渡すこともできます。例えば ``$query = $this->Articles->find()->where(['is_published' => true]); $this->paginate($query);`` となります。
 
 Core
 ----
 
-- The function ``getTypeName()`` has been dropped. Use PHP's ``get_debug_type()`` instead.
-- The dependency on ``league/container`` was updated to ``4.x``. This will
-  require the addition of typehints to your ``ServiceProvider`` implementations.
-- ``deprecationWarning()`` now has a ``$version`` parameter.
-- The ``App.uploadedFilesAsObjects`` configuration option has been removed
-  alongside of support for PHP file upload shaped arrays throughout the
-  framework.
-- ``ClassLoader`` has been removed. Use composer to generate autoload files instead.
+- 関数 ``getTypeName()`` は削除されました。代わりに、PHPの ``get_debug_type()`` をお使い下さい。
+- 依存ライブラリ ``league/container`` は ``4.x`` に更新されました。これによって ``ServiceProvider`` の実装には追加の型ヒントが必要となります。
+- ``deprecationWarning()`` には引数 ``$version`` が追加されました。
+- ``App.uploadedFilesAsObjects`` オプションは、PHPそのもののファイルアップロードにおける array 生成に倣い、削除されました。
+- ``ClassLoader`` は削除されました。代わりに Composer の autoload の仕組みをお使い下さい。
 
 Database
 --------
 
-- The ``DateTimeType`` and ``DateType`` now always return immutable objects.
-  Additionally the interface for ``Date`` objects reflects the ``ChronosDate``
-  interface which lacks all of the time related methods that were present in
-  CakePHP 4.x.
-- ``DateType::setLocaleFormat()`` no longer accepts an array.
-- ``Query`` now accepts only ``\Closure`` parameters instead of ``callable``. Callables can be converted
-  to closures using the new first-class array syntax in PHP 8.1.
-- ``Query::execute()`` no longer runs results decorator callbacks. You must use ``Query::all()`` instead.
-- ``TableSchemaAwareInterface`` was removed.
-- ``Driver::quote()`` was removed. Use prepared statements instead.
-- ``Query::orderBy()`` was added to replace ``Query::order()``.
-- ``Query::groupBy()`` was added to replace ``Query::group()``.
-- ``SqlDialectTrait`` has been removed and all its functionality has been moved
-  into the ``Driver`` class itself.
-- ``CaseExpression`` has been removed and should be replaced with
-  ``QueryExpression::case()`` or ``CaseStatementExpression``
-- ``Connection::connect()`` has been removed. Use
-  ``$connection->getDriver()->connect()`` instead.
-- ``Connection::disconnect()`` has been removed. Use
-  ``$connection->getDriver()->disconnect()`` instead.
-- ``cake.database.queries`` has been added as an alternative to the ``queriesLog`` scope
-- The ability to enable/disable ResultSet buffering has been removed. Results are always buffered.
+- ``DateTimeType`` および ``DateType`` は、常に変更不可能(immutable)なオブジェクトを返すようになりました。また、 ``Date`` オブジェクトの interface は ``ChronosDate`` の interface を反映するようになり、CakePHP 4.x で存在した時刻関連のメソッドが無くなりました。
+- ``DateType::setLocaleFormat()`` は array を受け付けないようになりました。
+- ``Query`` は ``callable`` ではなく ``\Closure`` なパラメータのみを受け付けるようになりました。 callable なオブジェクトは PHP 8.1 で導入された、第一級 callable の記法で書き換え可能です。（訳注 : `PHPのマニュアル 「第一級callableを生成する記法」 <https://www.php.net/manual/ja/functions.first_class_callable_syntax.php>`_ ）
+- ``Query::execute()`` は、結果を整形するコールバックを呼ばないようになりました。代わりに ``Query::all()`` をお使い下さい。
+- ``TableSchemaAwareInterface`` は削除されました。
+- ``Driver::quote()`` は削除されました。代わりに prepared statement をお使い下さい。
+- ``Query::orderBy()`` は ``Query::order()`` の代わりに追加されました。
+- ``Query::groupBy()`` は ``Query::group()`` の代わりに追加されました。
+- ``SqlDialectTrait`` は削除されました。ここで提供されていた全ての機能は ``Driver`` クラスそのものに実装されました。
+- ``CaseExpression`` は削除されました。代わりに ``QueryExpression::case()`` または ``CaseStatementExpression`` をお使い下さい。
+- ``Connection::connect()`` は削除されました。代わりに ``$connection->getDriver()->connect()`` をお使い下さい。
+- ``Connection::disconnect()`` は削除されました。代わりに ``$connection->getDriver()->disconnect()`` をお使い下さい。
+- クエリのログの scope として ``queriesLog`` だけではなく ``cake.database.queries`` も使えるようになりました。
+- 結果セットのバッファリングを有効化・無効化する機能は削除されました。常にバッファリングされます。
 
 Datasource
 ----------
 
-- The ``getAccessible()`` method was added to ``EntityInterface``. Non-ORM
-  implementations need to implement this method now.
-- The ``aliasField()`` method was added to ``RepositoryInterface``. Non-ORM
-  implementations need to implement this method now.
+- ``getAccessible()`` メソッドが ``EntityInterface`` に追加されました。ORM外でこの interface を実装している場合は、このメソッドも実装する必要があります。
+- ``aliasField()`` メソッドが ``RepositoryInterface`` に追加されました。ORM外でこの interface を実装している場合は、このメソッドも実装する必要があります。
 
 Event
 -----
 
-- Event payloads must be an array. Other object such as ``ArrayAccess`` are no longer cast to array and will raise a ``TypeError`` now.
-- It is recommended to adjust event handlers to be void methods and use ``$event->setResult()`` instead of returning the result
+- Event に載せるデータ(payload) は、配列である必要があります。配列ではないオブジェクト、例えば ``ArrayAccess`` は array へのキャストで失敗して ``TypeError`` を出すようになります。
+- イベントハンドラは void メソッドとして実装し、結果は返り値として返却するのではなく ``$event->setResult()`` に渡す方法が推奨されます。
 
 Error
 -----
 
-- ``ErrorHandler`` and ``ConsoleErrorHandler`` have been removed. See the `4.4 migration <https://book.cakephp.org/4/en/appendices/4-4-migration-guide.html#errorhandler-consoleerrorhandler>`__ guide for how to upgrade
-- ``ExceptionRenderer`` has been removed and should be replaced with ``WebExceptionRenderer``
-- ``ErrorLoggerInterface::log()`` has been removed and should be replaced with ``ErrorLoggerInterface::logException()``
-- ``ErrorLoggerInterface::logMessage()`` has been removed and should be replaced with ``ErrorLoggerInterface::logError()``
+- ``ErrorHandler`` および ``ConsoleErrorHandler`` は削除されました。対応方法は `4.4 移行ガイド <https://book.cakephp.org/4/ja/appendices/4-4-migration-guide.html#errorhandler-consoleerrorhandler>`__ をご覧下さい。
+- ``ExceptionRenderer`` は削除されました。代わりに ``WebExceptionRenderer`` をお使い下さい。
+- ``ErrorLoggerInterface::log()`` は削除されました。代わりに ``ErrorLoggerInterface::logException()`` をお使い下さい。
+- ``ErrorLoggerInterface::logMessage()`` は削除されました。代わりに ``ErrorLoggerInterface::logError()`` をお使い下さい。
 
 Filesystem
 ----------
 
-- The Filesystem package was removed, and ``Filesystem`` class was moved to the Utility package.
+- Filesystem というパッケージは削除されました。 ``Filesystem`` というクラスは Utility のパッケージに移動されました。
 
 Http
 ----
 
-- ``ServerRequest`` is no longer compatible with ``files`` as arrays. This
-  behavior has been disabled by default since 4.1.0. The ``files`` data will now
-  always contain ``UploadedFileInterfaces`` objects.
+- ``ServerRequest`` の ``files`` は、 array とは互換性は無くなりました。この挙動は 4.1.0 でデフォルトでは停止されていました。この ``files`` は常に ``UploadedFileInterfaces`` オブジェクトを持つようになります。
 
 I18n
 ----
 
-- ``FrozenDate`` was renamed to `Date` and ``FrozenTime`` was renamed to `DateTime`.
-- ``Time`` now extends ``Cake\Chronos\ChronosTime`` and is therefore immutable.
-- ``Date::parseDateTime()`` was removed.
-- ``Date::parseTime()`` was removed.
-- ``Date::setToStringFormat()`` and ``Date::setJsonEncodeFormat()`` no longer accept an array.
-- ``Date::i18nFormat()`` and ``Date::nice()`` no longer accept a timezone parameter.
-- Translation files for plugins with vendor prefixed names (``FooBar/Awesome``) will now have that
-  prefix in the file name, e.g. ``foo_bar_awesome.po`` to avoid collision with a ``awesome.po`` file
-  from a corresponding plugin (``Awesome``).
+- ``FrozenDate`` は `Date` に名称変更され、また ``FrozenTime`` も `DateTime` に名称変更されました。
+- ``Time`` は ``Cake\Chronos\ChronosTime`` を継承するようになりました。その結果として変更不可能(immutable)になりました。
+- ``Date::parseDateTime()`` は削除されました。
+- ``Date::parseTime()`` は削除されました。
+- ``Date::setToStringFormat()`` および ``Date::setJsonEncodeFormat()`` は、配列を受け付けないようになりました。
+- ``Date::i18nFormat()`` および ``Date::nice()`` は、タイムゾーンの引数を受け付けないようになりました。
+- ベンダ名が接頭辞に付いたプラグイン（例えば ``FooBar/Awesome``）への翻訳ファイルは、接頭辞を含むファイル名として下さい（例えば ``foo_bar_awesome.po``）。これは、同名の接頭辞無しのプラグイン（例えば ``Awesome``）の翻訳ファイル（この例では ``awesome.po``）との衝突を避けるためのものです。
 
 Log
 ---
 
-- Log engine config now uses ``null`` instead of ``false`` to disable scopes.
-  So instead of ``'scopes' => false`` you need to use ``'scopes' => null`` in your log config.
+- Logエンジンの設定において、特定のスコープを無効化する際には ``false`` ではなくて ``null`` を用いるようになりました。設定ファイルにおいて ``'scopes' => false`` となっている箇所は ``'scopes' => null`` と書き換えて下さい。
 
 Mailer
 ------
 
-- ``Email`` has been removed. Use `Mailer <https://book.cakephp.org/5/en/core-libraries/email.html>`__ instead.
-- ``cake.mailer`` has been added as an alternative to the ``email`` scope
+- ``Email`` は削除されました。代わりに `Mailer <https://book.cakephp.org/5/ja/core-libraries/email.html>`__ をお使い下さい。
+- ログのスコープとして ``email`` の代わりに ``cake.mailer`` も指定できるようになりました。
 
 ORM
 ---
 
-- ``EntityTrait::has()`` now returns ``true`` when an attribute exists and is
-  set to ``null``. In previous versions of CakePHP this would return ``false``.
-  See the release notes for 4.5.0 for how to adopt this behavior in 4.x.
-- ``EntityTrait::extractOriginal()`` now returns only existing fields, similar to ``extractOriginalChanged()``.
-- Finder arguments are now required to be associative arrays as they were always expected to be.
-- ``TranslateBehavior`` now defaults to the ``ShadowTable`` strategy. If you are
-  using the ``Eav`` strategy you will need to update your behavior configuration
-  to retain the previous behavior.
-- ``allowMultipleNulls`` option for ``isUnique`` rule now default to true matching
-  the original 3.x behavior.
-- ``Table::query()`` has been removed in favor of query-type specific functions.
-- ``Table::updateQuery()``, ``Table::selectQuery()``, ``Table::insertQuery()``, and
-  ``Table::deleteQuery()``) were added and return the new type-specific query objects below.
-- ``SelectQuery``, ``InsertQuery``, ``UpdateQuery`` and ``DeleteQuery`` were added
-  which represent only a single type of query and do not allow switching between query types nor
-  calling functions unrelated to the specific query type.
-- ``Table::_initializeSchema()`` has been removed and should be replaced by calling
-  ``$this->getSchema()`` inside the ``initialize()`` method.
-- ``SaveOptionsBuilder`` has been removed. Use a normal array for options instead.
+- ``EntityTrait::has()`` は、属性が存在してその値が ``null`` である場合、 ``true`` を返すようになりました。過去のCakePHPのバージョンにおいては ``false`` を返していました。4.x の挙動が必要な場合の対応方法は、4.5.0 のリリースノートを参照して下さい。（訳注 : 4.5のリリースノートは日本語には翻訳されていません。 `英語版の 4.5 の Migration Guide <https://book.cakephp.org/4/en/appendices/4-5-migration-guide.html#orm>`_ の中では ``EntityTrait::hasValue()`` を使うように案内されています。）
+- ``EntityTrait::extractOriginal()`` は ``extractOriginalChanged()`` と同様に、存在するフィールドのみを返すようになりました。
+- Finder の引数は連想配列である必要があります。過去にはこれは推奨事項という位置付けでした。
+- ``TranslateBehavior`` はデフォルトでは ``ShadowTable`` ストラテジを採用するようになりました。もしも ``Eav`` ストラテジを利用中で、その挙動を維持する必要があるのならば、設定を変更する必要があります。
+- ``isUnique`` ルールの ``allowMultipleNulls`` オプションは、デフォルトではtrueとなり、本来の 3.x の挙動に合致するようになりました。
+- ``Table::query()`` は、後述のクエリタイプごとのメソッドが提供されたことに伴い、削除されました。（訳注 : 5.0.5 時点においては実際には削除されておらず、 ``Table::query()`` は ``Table::selectQuery()`` を呼び出しているようです。）
+- ``Table::updateQuery()``, ``Table::selectQuery()``, ``Table::insertQuery()``, ``Table::deleteQuery()`` の4つのメソッドが追加されました。これらは以下に示すクエリタイプごとのオブジェクトを返します。
+- ``SelectQuery``, ``InsertQuery``, ``UpdateQuery``, ``DeleteQuery`` の4つの型が追加されました。クエリのタイプが型として指定されることで、クエリタイプが変更されたり、無関係な別のクエリタイプの関数を呼んだりするのを防ぐようになりました。
+- ``Table::_initializeSchema()`` は削除されました。代わりに ``initialize()`` の中で ``$this->getSchema()`` を呼んで下さい。
+- ``SaveOptionsBuilder`` は削除されました。通常の配列をお使い下さい。
 
 Routing
 -------
 
-- Static methods ``connect()``, ``prefix()``, ``scope()`` and ``plugin()`` of the ``Router`` have been removed and
-  should be replaced by calling their non-static method variants via the ``RouteBuilder`` instance.
-- ``RedirectException`` has been removed. Use ``\Cake\Http\Exception\RedirectException`` instead.
+- ``Router`` のstaticメソッドの ``connect()``, ``prefix()``, ``scope()``, ``plugin()`` は削除されました。代わりに ``RouteBuilder`` のインスタンスのメソッドをお使い下さい。
+- ``RedirectException`` は削除されました。代わりに ``\Cake\Http\Exception\RedirectException`` をお使い下さい。
 
 TestSuite
 ---------
 
-- ``TestSuite`` was removed. Users should use environment variables to customize
-  unit test settings instead.
-- ``TestListenerTrait`` was removed. PHPUnit dropped support for these listeners.
-  See :doc:`/appendices/phpunit10`
-- ``IntegrationTestTrait::configRequest()`` now merges config when called multiple times
-  instead of replacing the currently present config.
+- ``TestSuite`` は削除されました。単体テストの設定をカスタマイズするには、環境変数を使って下さい。
+- ``TestListenerTrait`` は削除されました。PHPUnitがこれらの listener のサポートを打ち切ったためです。詳細は :doc:`/appendices/phpunit10` を参照して下さい。
+- ``IntegrationTestTrait::configRequest()`` が複数回呼ばれた際、設定を上書きするのではなく merge するようになりました。
 
 Validation
 ----------
 
-- ``Validation::isEmpty()`` is no longer compatible with file upload shaped
-  arrays. Support for PHP file upload arrays has been removed from
-  ``ServerRequest`` as well so you should not see this as a problem outside of
-  tests.
-- Previously, most data validation error messages were simply ``The provided value is invalid``.
-  Now, the data validation error messages are worded more precisely.
-  For example, ``The provided value must be greater than or equal to \`5\```.
+- ``Validation::isEmpty()`` は、ファイルアップロードの配列には対応しないようになりました。PHPのファイルアップロードの配列への対応は ``ServerRequest`` からも削除されていますので、この問題はテストの外側の問題だとは捉えないようにして下さい。
+- 以前は、ほとんどの validation エラーの文言は ``The provided value is invalid`` という単純なものでした。今では例えば ``The provided value must be greater than or equal to \`5\`` のように、もう少し詳細に言及するようになりました。
 
 View
 ----
 
-- ``ViewBuilder`` options are now truly associative (string keys).
-- ``NumberHelper`` and ``TextHelper`` no longer accept an ``engine`` config.
-- ``ViewBuilder::setHelpers()`` parameter ``$merge`` was removed. Use ``ViewBuilder::addHelpers()`` instead.
-- Inside ``View::initialize()``, prefer using ``addHelper()`` instead of ``loadHelper()``.
-  All configured helpers will be loaded afterwards, anyway.
-- ``View\Widget\FileWidget`` is no longer compatible with PHP file upload shaped
-  arrays. This is aligned with ``ServerRequest`` and ``Validation`` changes.
-- ``FormHelper`` no longer sets ``autocomplete=off`` on CSRF token fields. This
-  was a workaround for a Safari bug that is no longer relevant.
+- ``ViewBuilder`` のオプションは、本当の意味で連想配列となりました（stringのキーを用います）。
+- ``NumberHelper`` および ``TextHelper`` は ``engine`` 設定を受け付けないようになりました。
+- ``ViewBuilder::setHelpers()`` のパラメータ ``$merge`` は削除されました。代わりに ``ViewBuilder::addHelpers()`` をお使い下さい。
+- ``View::initialize()`` の中では、 ``loadHelper()`` よりも ``addHelper()`` の方が望ましいようになりました。設定されたヘルパーはいずれにせよ後で読み込まれます。
+- ``View\Widget\FileWidget`` は、PHPのファイルアップロードの配列とは互換性が無くなりました。この変更は ``ServerRequest`` や ``Validation`` と同じ趣旨のものです。
+- ``FormHelper`` は、CSRF対策トークンのフィールドでは ``autocomplete=off`` を設定しないようになりました。これはSafariのバグへの応急措置として設定されましたが、今ではもう関係はありません。
 
-Deprecations
+非推奨
 ============
 
-The following is a list of deprecated methods, properties and behaviors. These
-features will continue to function in 5.x and will be removed in 6.0.
+以下は非推奨となったメソッド、プロパティ、挙動の一覧です。これらの機能は 5.x では動作し続けますが、 6.0 では削除される予定です。
 
 Database
 --------
 
-- ``Query::order()`` was deprecated. Use ``Query::orderBy()`` instead now that
-  ``Connection`` methods are no longer proxied. This aligns the function name
-  with the SQL statement.
-- ``Query::group()`` was deprecated. Use ``Query::groupBy()`` instead now that
-  ``Connection`` methods are no longer proxied. This aligns the function name
-  with the SQL statement.
+- ``Query::order()`` は非推奨となりました。代わりに ``Query::orderBy()`` をお使い下さい。この変更はSQL文の機能名称に合わせたものになります。
+- ``Query::group()`` は非推奨となりました。代わりに ``Query::groupBy()`` をお使い下さい。この変更はSQL文の機能名称に合わせたものになります。
 
 ORM
 ---
 
-- Calling ``Table::find()`` with options array is deprecated. Use `named arguments <https://www.php.net/manual/en/functions.arguments.php#functions.named-arguments>`__
-  instead. For e.g. instead of ``find('all', ['conditions' => $array])`` use
-  ``find('all', conditions: $array)``. Similarly for custom finder options, instead
-  of ``find('list', ['valueField' => 'name'])`` use ``find('list', valueField: 'name')``
-  or multiple named arguments like ``find(type: 'list', valueField: 'name', conditions: $array)``.
+- ``Table::find()`` のオプションを配列で指定することは非推奨となりました。代わりに `名前付き引数 <https://www.php.net/manual/ja/functions.arguments.php#functions.named-arguments>`__ を使用して下さい。例えば ``find('all', ['conditions' => $array])`` の代わりに ``find('all', conditions: $array)`` です。カスタムの finder オプションについても同様に ``find('list', ['valueField' => 'name'])`` の代わりに ``find('list', valueField: 'name')`` を使用して下さい。複数の名前付き引数の場合は例えば ``find(type: 'list', valueField: 'name', conditions: $array)`` となります。
 
-New Features
+新機能
 ============
 
-Improved type checking
+進化した型チェック
 -----------------------
 
-CakePHP 5 leverages the expanded type system feature available in PHP 8.1+.
-CakePHP also uses ``assert()`` to provide improved error messages and additional
-type soundness. In production mode, you can configure PHP to not generate
-code for ``assert()`` yielding improved application performance. See the
-:ref:`symlink-assets` for how to do this.
+CakePHP 5 は、PHP 8.1 以上で有効な型システムを活用します。
+CakePHPは ``assert()`` を使うことによっても、詳細なエラーメッセージや、型の安全性を提供します。
+本番運用モードにおいては、 ``assert()`` でのコード生成を停止させてパフォーマンスを向上させることができます。
+この方法については :ref:`symlink-assets` を参照して下さい。（訳注 : このリンク先は、2024年3月時点ではまだ翻訳されていません。 `英語版 <https://book.cakephp.org/5/en/deployment.html#symlink-assets>`__ で ``zend.assertions`` を設定している箇所を参照して下さい。）
 
 Collection
 ----------
 
-- Added ``unique()`` which filters out duplicate value specified by provided callback.
-- ``reject()`` now supports a default callback which filters out truthy values which is
-  the inverse of the default behavior of ``filter()``
+- コールバック関数を用いて重複した値を除去するメソッド ``unique()`` が追加されました。
+- ``reject()`` は、trueっぽい値のみを除外するデフォルトのコールバック関数が利用可能になりました。これは ``filter()`` のデフォルトの挙動の真逆となります。
 
 Core
 ----
 
-- The ``services()`` method was added to ``PluginInterface``.
-- ``PluginCollection::addFromConfig()`` has been added to :ref:`プラグインの読み込み <loading-a-plugin>`.
+- ``PluginInterface`` には ``services()`` メソッドが追加されました。
+- :ref:`プラグインの読み込み <loading-a-plugin>` に ``PluginCollection::addFromConfig()`` が追加されました。
 
 Database
 --------
 
-- ``ConnectionManager`` now supports read and write connection roles. Roles can be configured
-  with ``read`` and ``write`` keys in the connection config that override the shared config.
-- ``Query::all()`` was added which runs result decorator callbacks and returns a result set for select queries.
-- ``Query::comment()`` was added to add a SQL comment to the executed query. This makes it easier to debug queries.
-- ``EnumType`` was added to allow mapping between PHP backed enums and a string or integer column.
-- ``getMaxAliasLength()`` and ``getConnectionRetries()`` were added
-  to ``DriverInterface``.
-- Supported drivers now automatically add auto-increment only to integer primary keys named "id" instead
-  of all integer primary keys. Setting 'autoIncrement' to false always disables on all supported drivers.
+- ``ConnectionManager``は read / write の接続ロールをサポートしました。データベース接続設定において ``read`` や ``write`` のキーで指定した設定項目によって共通の設定項目を上書きすることで、接続ロールを構成することができます。
+- 結果セットを整形するコールバックを実行できるメソッド ``Query::all()`` が追加されました。
+- SQLにコメントを追加するメソッド ``Query::comment()`` が追加されました。これによりクエリのデバッグが楽になります。
+- PHPの enum と、データベースの string や integer 型との間の橋渡しをする ``EnumType`` が追加されました。
+- ``DriverInterface`` に ``getMaxAliasLength()`` と ``getConnectionRetries()`` が追加されました。
+- 以前は integer 型の主キー全てに自動的に auto-increment 指定を入れていましたが、 "id" という名前の integer 型の主キーにのみこの動作をするようになりました。 'autoIncrement' を false に設定することで、この挙動を無効にできます。
 
 Http
 ----
 
-- Added support for `PSR-17 <https://www.php-fig.org/psr/psr-17/>`__ factories
-  interface. This allows ``cakephp/http`` to provide a client implementation to
-  libraries that allow automatic interface resolution like php-http.
-- Added ``CookieCollection::__get()`` and ``CookieCollection::__isset()`` to add
-  ergonomic ways to access cookies without exceptions.
+- `PSR-17 <https://www.php-fig.org/psr/psr-17/>`__ factory interface への対応が追加されました。これによって ``cakephp/http`` パッケージは、 php-http のように自動で interface resolution を有効にするライブラリに対してclient実装を提供できるようになりました。
+- 例外を発することなく便利に cookie を操作できる方法として ``CookieCollection::__get()`` と ``CookieCollection::__isset()`` が追加されました。
 
 ORM
 ---
 
-Required Entity Fields
+必須フィールド
 ----------------------
 
-Entities have a new opt-in functionality that allows making entities handle
-properties more strictly. The new behavior is called 'required fields'. When
-enabled, accessing properties that are not defined in the entity will raise
-exceptions. This impacts the following usage::
+モデルのエンティティには opt-in 方式で利用可能な新しい機能、より厳格なプロパティ操作、が追加されました。
+この新しい機能は「必須フィールド」と呼ばれます。
+有効化されると、エンティティで定義されていないプロパティにアクセスした場合に例外が発生します。
+これは以下のようなコードに影響を与えます::
 
     $entity->get();
     $entity->has();
@@ -340,17 +277,16 @@ exceptions. This impacts the following usage::
     isset($entity->attribute);
     $entity->attribute;
 
-Fields are considered defined if they pass ``array_key_exists``. This includes
-null values. Because this can be a tedious to enable feature, it was deferred to
-5.0. We'd like any feedback you have on this feature as we're considering making
-this the default behavior in the future.
+フィールドは ``array_key_exists`` が true を返す場合に「定義されている」と判断されます。
+これは null 値も含まれます。
+この機能はうんざりするようなものであるかもしれないので、5.0 まで導入が延期されてきました。
+将来はこれをデフォルトでオンにしようと検討していますが、フィードバックがあればぜひお知らせ下さい。
 
-
-Typed Finder Parameters
+型付きFinderパラメータ
 -----------------------
 
-Table finders can now have typed arguments as required instead of an options array.
-For e.g. a finder for fetching posts by category or user::
+テーブルの finder のパラメータは必須のものにすることができるようになりました。
+例えばブログ記事の投稿をカテゴリまたはユーザで検索するメソッドは、以前はこのようなコードになりました::
 
     public function findByCategoryOrUser(SelectQuery $query, array $options)
     {
@@ -364,7 +300,7 @@ For e.g. a finder for fetching posts by category or user::
         return $query;
     }
 
-can now be written as::
+これが今では次のように書くことができます::
 
     public function findByCategoryOrUser(SelectQuery $query, ?int $categoryId = null, ?int $userId = null)
     {
@@ -378,11 +314,10 @@ can now be written as::
         return $query;
     }
 
-The finder can then be called as ``find('byCategoryOrUser', userId: $somevar)``.
-You can even include the special named arguments for setting query clauses.
-``find('byCategoryOrUser', userId: $somevar, conditions: ['enabled' => true])``.
+この finder を呼び出す際は ``find('byCategoryOrUser', userId: $somevar)`` と書くことができます。
+さらに、特別な名前付き引数を用いて、条件を追加することもできます。例えば ``find('byCategoryOrUser', userId: $somevar, conditions: ['enabled' => true])`` のようになります。
 
-A similar change has been applied to the ``RepositoryInterface::get()`` method::
+同様の変更が ``RepositoryInterface::get()`` にも追加されました::
 
     public function view(int $id)
     {
@@ -392,7 +327,7 @@ A similar change has been applied to the ``RepositoryInterface::get()`` method::
         ]);
     }
 
-can now be written as::
+以前は上記のようなコードでしたが、今後は以下のようにも書けます::
 
     public function view(int $id)
     {
@@ -402,10 +337,8 @@ can now be written as::
 TestSuite
 ---------
 
-- ``IntegrationTestTrait::requestAsJson()`` has been added to set JSON headers for the next request.
+- Integrationテストにおいて、次に発行するリクエストのヘッダに、JSON でやり取りする趣旨のヘッダを付与するメソッド ``IntegrationTestTrait::requestAsJson()`` が追加されました。
 
 Plugin Installer
 ----------------
-- The plugin installer has been updated to automatically handle class autoloading
-  for your app plugins. So you can remove the namespace to path mappings for your
-  plugins from your ``composer.json`` and just run ``composer dumpautoload``.
+- プラグインのインストーラが更新されて、プラグインのクラスの autoload を自動的に制御するようになりました。 ``composer.json`` から、名前空間とパスの対応関係マップを削除して、 ``composer dumpautoload`` を実行することでもプラグインを動作させられます。
