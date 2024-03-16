@@ -32,6 +32,7 @@ jobs:
 
     - name: Install packages
       run: |
+        sudo apt update
         sudo apt install texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended texlive-lang-all
 
     - name: Build Docs
