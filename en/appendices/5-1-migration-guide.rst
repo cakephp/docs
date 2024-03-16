@@ -17,6 +17,9 @@ Behavior Changes
 - Text Utility and TextHelper methods around truncation and maximum length are using
   a UTF-8 character for ``ellipsis`` instead of ``...`` legacy characters.
 
+- ``TableSchema::setColumnType()`` now throws an exception if the specified column
+  does not exist.
+
 Deprecations
 ============
 
