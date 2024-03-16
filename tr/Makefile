@@ -8,13 +8,12 @@ PAPER         =
 BUILDDIR      = ../build
 CONFDIR       = ../config
 PYTHON        = python3
-LANG          = tr
 SPHINX_LANG   = tr
 
 # Internal variables.
 PAPEROPT_a4     = -D latex_paper_size=a4
 PAPEROPT_letter = -D latex_paper_size=letter
-ALLSPHINXOPTS   = -d $(BUILDDIR)/doctrees/$(LANG) -c $(CONFDIR) -D language=$(SPHINX_LANG) $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) .
+ALLSPHINXOPTS   = -d $(BUILDDIR)/doctrees/$(SPHINX_LANG) -c $(CONFDIR) -D language=$(SPHINX_LANG) $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) .
 
 .PHONY: help clean html dirhtml singlehtml pickle json htmlhelp qthelp devhelp epub latex latexpdf text man changes linkcheck doctest
 
@@ -41,9 +40,9 @@ clean:
 	-rm -rf $(BUILDDIR)/*
 
 html:
-	$(SPHINXBUILD) -b html -D "exclude_patterns=*-contents.rst" $(ALLSPHINXOPTS) $(BUILDDIR)/html/$(LANG)
+	$(SPHINXBUILD) -b html -D "exclude_patterns=*-contents.rst" $(ALLSPHINXOPTS) $(BUILDDIR)/html/$(SPHINX_LANG)
 	@echo
-	@echo "Oluşturma bitti. HTML dosyaları $(BUILDDIR)/html/$(LANG) konumunda."
+	@echo "Oluşturma bitti. HTML dosyaları $(BUILDDIR)/html/$(SPHINX_LANG) konumunda."
 
 dirhtml:
 	$(SPHINXBUILD) -b dirhtml $(ALLSPHINXOPTS) $(BUILDDIR)/dirhtml
@@ -66,9 +65,9 @@ json:
 	@echo "Oluşturma bitti; şimdi JSON doyalarını işleyebilirsiniz."
 
 htmlhelp:
-	$(SPHINXBUILD) -b htmlhelp $(ALLSPHINXOPTS) $(BUILDDIR)/htmlhelp/$(LANG)
+	$(SPHINXBUILD) -b htmlhelp $(ALLSPHINXOPTS) $(BUILDDIR)/htmlhelp/$(SPHINX_LANG)
 	@echo
-	@echo "Oluşturma bitti; HTML Help Workshop'u $(BUILDDIR)/htmlhelp/$(LANG) konumundaki" \
+	@echo "Oluşturma bitti; HTML Help Workshop'u $(BUILDDIR)/htmlhelp/$(SPHINX_LANG) konumundaki" \
 	      ".hhp proje dosyası ile çalıştırabilisiniz."
 
 qthelp:
@@ -90,22 +89,22 @@ devhelp:
 	@echo "# devhelp"
 
 epub:
-	$(SPHINXBUILD) -b epub -D master_doc='epub-contents' $(ALLSPHINXOPTS) $(BUILDDIR)/epub/$(LANG)
+	$(SPHINXBUILD) -b epub -D master_doc='epub-contents' $(ALLSPHINXOPTS) $(BUILDDIR)/epub/$(SPHINX_LANG)
 	@echo
-	@echo "Oluşturma bitti. epub dosyasyı $(BUILDDIR)/epub/$(LANG) konumunda"
+	@echo "Oluşturma bitti. epub dosyasyı $(BUILDDIR)/epub/$(SPHINX_LANG) konumunda"
 
 latex:
-	$(SPHINXBUILD) -b latex $(ALLSPHINXOPTS) $(BUILDDIR)/latex/$(LANG)
+	$(SPHINXBUILD) -b latex $(ALLSPHINXOPTS) $(BUILDDIR)/latex/$(SPHINX_LANG)
 	@echo
-	@echo "Oluşturma bitti; LaTeX dosyaları $(BUILDDIR)/latex/$(LANG) konumunda."
+	@echo "Oluşturma bitti; LaTeX dosyaları $(BUILDDIR)/latex/$(SPHINX_LANG) konumunda."
 	@echo "Dizinde (pdf)latex ile kullanmak için \`make' komutunu çalıştırın." \
 	      "İşlemi otomatik olarak yapmak için ( \`make latexpdf' kullanın)."
 
 latexpdf:
-	$(SPHINXBUILD) -b latex $(ALLSPHINXOPTS) $(BUILDDIR)/latex/$(LANG)
+	$(SPHINXBUILD) -b latex $(ALLSPHINXOPTS) $(BUILDDIR)/latex/$(SPHINX_LANG)
 	@echo "LaTeX dosyaları pdflatex ile çalıştırılıyor..."
-	make -C $(BUILDDIR)/latex/$(LANG) all-pdf
-	@echo "pdflatex bitti; PDF dosyaları $(BUILDDIR)/latex/$(LANG) konumunda."
+	make -C $(BUILDDIR)/latex/$(SPHINX_LANG) all-pdf
+	@echo "pdflatex bitti; PDF dosyaları $(BUILDDIR)/latex/$(SPHINX_LANG) konumunda."
 
 text:
 	$(SPHINXBUILD) -b text $(ALLSPHINXOPTS) $(BUILDDIR)/text
