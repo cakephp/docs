@@ -20,6 +20,9 @@ Behavior Changes
 - ``TableSchema::setColumnType()`` now throws an exception if the specified column
   does not exist.
 
+- ``PluginCollection::addPlugin()`` now throws an exception if a plugin of the same
+  name is already added.
+
 Deprecations
 ============
 
