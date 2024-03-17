@@ -92,6 +92,8 @@ Validation
 
 - ``Validation::enum()`` and ``Validator::enum()`` were added. These validation
   methods simplify validating backed enum values.
+- ``Validation::enumOnly()`` and ``Validation::enumExcept()`` were added to check for specific cases
+  and further simplify validating backed enum values.
 
 View
 ----
