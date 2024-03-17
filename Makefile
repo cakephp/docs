@@ -17,6 +17,7 @@ PDF_LANGS = en es fr pt
 DEST = website
 
 EPUB_ARGS =
+SPHINXOPTS =
 
 # Get path to theme directory to build static assets.
 THEME_DIR = $(shell python3 -c 'import os, cakephpsphinx; print(os.path.abspath(os.path.dirname(cakephpsphinx.__file__)))')
@@ -32,14 +33,13 @@ epub: $(foreach lang, $(LANGS), epub-$(lang))
 latex: $(foreach lang, $(PDF_LANGS), latex-$(lang))
 pdf: $(foreach lang, $(PDF_LANGS), pdf-$(lang))
 htmlhelp: $(foreach lang, $(LANGS), htmlhelp-$(lang))
-populate-index: $(foreach lang, $(LANGS), populate-index-$(lang))
 server: $(foreach lang, $(LANGS), server-$(lang))
 rebuild-index: $(foreach lang, $(LANGS), rebuild-index-$(lang))
 
 
 # Make the HTML version of the documentation with correctly nested language folders.
 html-%:
-	cd $* && make html
+	cd $* && make html SPHINXOPTS="$(SPHINXOPTS)"
 	make build/html/$*/_static/css/dist.css
 	make build/html/$*/_static/js/dist.js
 
@@ -57,13 +57,6 @@ pdf-%:
 
 server-%:
 	cd build/html/$* && python3 -m SimpleHTTPServer
-
-populate-index-%:
-	php scripts/populate_search_index.php --lang="$*" --host="$(ES_HOST_V2)"
-
-rebuild-index-%:
-	curl -XDELETE $(ES_HOST)/documentation/3-0-$*
-	php scripts/populate_search_index.php $* $(ES_HOST)
 
 epub-check-%: build/epub/$*
 	java -jar /epubcheck/epubcheck.jar build/epub/$*/CakePHP.epub $(EPUB_ARGS)
