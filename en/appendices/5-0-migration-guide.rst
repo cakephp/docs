@@ -42,7 +42,7 @@ Global
    - MariaDB (10.1 or higher)
    - PostgreSQL (9.6 or higher)
    - Microsoft SQL Server (2012 or higher)
-   - SQLite 3
+   - SQLite 3 (3.16 or higher)
 
 Auth
 ----
@@ -55,6 +55,12 @@ Cache
 
 - The ``Wincache`` engine was removed. The wincache extension is not supported
   on PHP 8.
+
+Collection
+----------
+
+- ``combine()`` now throws an exception if the key path or group path doesn't exist or contains a null value.
+  This matches the behavior of ``indexBy()`` and ``groupBy()``.
 
 Console
 -------

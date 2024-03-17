@@ -97,6 +97,7 @@ The easiest way is to either call the ``all()`` or ``toList()`` methods::
     $resultsArray = $articles
         ->find()
         ->where(['id >' => 1])
+        ->all()
         ->toList();
 
     foreach ($resultsArray as $article) {
@@ -590,27 +591,6 @@ Also, it's possible to create the simple variant by passing a value to ``case()`
         ->else('N');
 
     # CASE published WHEN true THEN 'Y' ELSE 'N' END;
-
-Prior to 4.3.0, you would need to use::
-
-    $query = $articles->find();
-    $publishedCase = $query->newExpr()
-        ->addCase(
-            $query->newExpr()->add(['published' => 'Y']),
-            1,
-            'integer'
-        );
-    $unpublishedCase = $query->newExpr()
-        ->addCase(
-            $query->newExpr()->add(['published' => 'N']),
-            1,
-            'integer'
-        );
-
-    $query->select([
-        'number_published' => $query->func()->count($publishedCase),
-        'number_unpublished' => $query->func()->count($unpublishedCase)
-    ]);
 
 The ``addCase`` function can also chain together multiple statements to create
 ``if .. then .. [elseif .. then .. ] [ .. else ]`` logic inside your SQL.
@@ -1144,7 +1124,7 @@ use the ``IS`` operator to automatically create the correct expression::
     $query = $categories->find()
         ->where(['parent_id IS' => $parentId]);
 
-The above will create ``parent_id` = :c1`` or ``parent_id IS NULL`` depending on
+The above will generate``parent_id = :c1`` or ``parent_id IS NULL`` depending on
 the type of ``$parentId``
 
 Automatic IS NOT NULL Creation
@@ -1156,7 +1136,7 @@ can use the ``IS NOT`` operator to automatically create the correct expression::
     $query = $categories->find()
         ->where(['parent_id IS NOT' => $parentId]);
 
-The above will create ``parent_id` != :c1`` or ``parent_id IS NOT NULL``
+The above will generate``parent_id != :c1`` or ``parent_id IS NOT NULL``
 depending on the type of ``$parentId``
 
 

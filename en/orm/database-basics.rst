@@ -479,9 +479,15 @@ Where ``ArticleStatus`` contains something like::
 
     enum ArticleStatus: string
     {
-        case PUBLISHED = 'Y';
-        case UNPUBLISHED = 'N';
+        case Published = 'Y';
+        case Unpublished = 'N';
     }
+
+CakePHP recommends a few conventions for enums:
+
+- Enum classnames should follow ``{Entity}{ColumnName}`` style to enable
+  detection while running bake and to aid with project consistency.
+- Enum cases should use CamelCase style.
 
 .. _adding-custom-database-types:
 

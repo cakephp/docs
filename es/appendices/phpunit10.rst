@@ -21,7 +21,7 @@ Nuevo sistema de eventos
 ------------------------
 
 PHPUnit 10 eliminó el antiguo sistema de hook e introdujo un nuevo `Sistema de eventos
-<https://docs.phpunit.de/en/10.0/extending-phpunit.html#extending-the-test-runner>`_
+<https://docs.phpunit.de/en/10.5/extending-phpunit.html#extending-the-test-runner>`_
 Lo que requiere que se ajuste el siguiente código en su ``phpunit.xml`` desde::
 
   <extensions>

@@ -117,3 +117,7 @@ rst_epilog = """
 """
 
 # todo_include_todos = True
+
+# turn off contents entries for classes/functions
+# generally we add titles for methods and classes instead.
+toc_object_entries = False

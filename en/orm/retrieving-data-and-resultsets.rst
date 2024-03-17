@@ -19,7 +19,7 @@ be more complicated than in previous CakePHP versions. There are now various
 ways to inspect the data returned by the ORM.
 
 - ``debug($query)`` Shows the SQL and bound parameters, does not show results.
-- ``sql($query)`` Shows the final rendered SQL, but only when having DebugKit installed.
+- ``sql($query)`` Shows the final rendered SQL when DebugKit is installed.
 - ``debug($query->all())`` Shows the ResultSet properties (not the results).
 - ``debug($query->toList())`` Show results in an array.
 - ``debug(iterator_to_array($query))`` Shows query results in an array format.
@@ -136,8 +136,7 @@ execute until you start fetching rows, convert it to an array, or when the
         ->contain(['Comments', 'Authors'])
         ->limit(10);
 
-You can also provide many commonly used options to ``find()``. This can help
-with testing as there are fewer methods to mock::
+You can also provide many commonly used options to ``find()``::
 
     // In a controller or table method.
     $query = $articles->find('all',

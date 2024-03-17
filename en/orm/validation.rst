@@ -269,14 +269,14 @@ network.
 
 These types of rules are often referred to as 'domain rules' or 'application
 rules'. CakePHP exposes this concept through 'RulesCheckers' which are applied
-before entities are persisted. Some example domain rules are:
+before entities are persisted. Some example application rules are:
 
 * Ensuring email uniqueness
 * State transitions or workflow steps, for example, updating an invoice's status.
 * Preventing the modification of soft deleted items.
 * Enforcing usage/rate limit caps.
 
-Domain rules are checked when calling the Table ``save()`` and ``delete()`` methods.
+Application rules are checked when calling the Table ``save()`` and ``delete()`` methods.
 
 .. _creating-a-rules-checker:
 
