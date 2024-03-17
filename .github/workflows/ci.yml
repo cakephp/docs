@@ -16,7 +16,6 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.9]
         doc-type: ['HTML', 'EPUB', 'PDF']
 
     steps:
@@ -24,12 +23,7 @@ jobs:
 
     - uses: actions/setup-python@v5
       with:
-        fetch-depth: 1
-
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v2
-      with:
-        python-version: ${{ matrix.python-version }}
+        python-version: 3.11
 
     - name: Install dependencies
       run: |
