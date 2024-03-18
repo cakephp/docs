@@ -59,6 +59,7 @@ Core
 - ``PluginConfig`` was added. Use this class to get all available plugins, their load config and versions.
 - The ``toString``, ``toInt``, ``toBool`` functions were added. They give you
   a typesafe way to cast request data or other input and return ``null`` when conversion fails.
+- ``pathCombine()`` was added to help build paths without worrying about duplicate and trailing slashes.
 
 Http
 ----
