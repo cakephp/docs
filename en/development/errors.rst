@@ -447,7 +447,7 @@ provide more context around your errors::
 
     use Cake\Core\Exception\CakeException;
 
-    class MissingWidgetException extends Exception
+    class MissingWidgetException extends CakeException
     {
         // Context data is interpolated into this format string.
         protected $_messageTemplate = 'Seems that %s is missing.';
