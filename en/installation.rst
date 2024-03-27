@@ -125,19 +125,36 @@ Be aware that this is not recommended, as your application can break when the ne
 version is released. Additionally, composer does not cache development
 branches, so it slows down consecutive composer installs/updates.
 
-Installation using Oven
+Installation using DDEV
 -----------------------
 
-Another quick way to install CakePHP is via `Oven <https://github.com/CakeDC/oven>`_.
-It is a small PHP script which checks the necessary system requirements,
-and creates a new CakePHP application.
+Another quick way to install CakePHP is via `DDEV <https://ddev.com/>`_.
+It is an open source tool for launching local web development environments.
+
+If you want to configure a new project, you just need::
+
+    mkdir my-cakephp-app
+    cd my-cakephp-app
+    ddev config --project-type=cakephp --docroot=webroot --php-version 7.4
+    ddev composer create --prefer-dist cakephp/app:"^3.10"
+    ddev launch
+
+If you have an existing project::
+
+    git clone <your-cakephp-repo>
+    cd <your-cakephp-project>
+    ddev config --project-type=cakephp --docroot=webroot --php-version 7.4
+    ddev composer install
+    ddev launch
+
+Please check `DDEV Docs <https://ddev.readthedocs.io/>`_ for details on how to install / update DDEV.
 
 .. note::
 
     IMPORTANT: This is not a deployment script. It is aimed to help developers
-    install CakePHP for the first time and set up a development environment
-    quickly. Production environments should consider several other factors, like
-    file permissions, virtualhost configuration, etc.
+    to set up a development environment quickly. It is not intended for
+    production environments.
+
 
 Permissions
 ===========
