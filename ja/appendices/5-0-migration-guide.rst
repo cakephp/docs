@@ -54,8 +54,8 @@ Cache
 Collection
 ----------
 
-- `combine()` は、指定した key path や group path が存在しないまたは null 値の場合に、例外を投げるようになりました。
-  この挙動は、 `indexBy()` や `groupBy()` と同じです。
+- ``combine()`` は、指定した key path や group path が存在しないまたは null 値の場合に、例外を投げるようになりました。
+  この挙動は、 ``indexBy()`` や ``groupBy()`` と同じです。
 
 Console
 -------
