@@ -91,6 +91,36 @@ Donde ``<branch>`` es el nombre del branch que quieres seguir. Cada vez que
 ejecutes ``php composer.phar update`` recibirás las últimas actualizaciones del
 branch seleccionado.
 
+Instalación usando DDEV
+-----------------------
+
+Otra manera rápida de instalar CakePHP es via `DDEV <https://ddev.com/>`_.
+DDEV es una herramienta de código abierto para lanzar ambientes de desarrollo web en local.
+
+Si quieres configurar un nuevo proyecto, sólo necesitas ejecutar::
+
+    mkdir my-cakephp-app
+    cd my-cakephp-app
+    ddev config --project-type=cakephp --docroot=webroot
+    ddev composer create --prefer-dist cakephp/app:~4.0
+    ddev launch
+
+Si tienes un proyecto existente::
+
+    git clone <your-cakephp-repo>
+    cd <your-cakephp-project>
+    ddev config --project-type=cakephp --docroot=webroot
+    ddev composer install
+    ddev launch
+
+Por favor revisa la `Documentación de DDEV <https://ddev.readthedocs.io/>`_ para más detalles de cómo instalar / actualizar DDEV.
+
+.. note::
+
+    IMPORTANTE: Ésto no es un script de despliegue. Su objetivo es ayudar desarrolladores a
+    configurar ambientes de desarrollo rápidamente. En ningún caso su intención es que sea utilizado
+    en ambientes de producción.
+
 Permisos
 ========
 
