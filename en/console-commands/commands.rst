@@ -482,7 +482,7 @@ Update the command class to the following::
         }
     }
 
-Now that we have an interactive subcommand, we can add a test case that tests
+Now that we have an interactive command, we can add a test case that tests
 that we receive the proper response, and one that tests that we receive an
 incorrect response. Remove the ``testUpdateModified`` method and, add the following methods to
 **tests/TestCase/Command/UpdateTableCommandTest.php**::

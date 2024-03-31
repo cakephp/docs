@@ -4,22 +4,19 @@
 ここでは、各バージョンで導入された新機能に関する情報と、
 バージョン間の移行手順を解説します。
 
-4.x 移行ガイド
+5.x 移行ガイド
 ==============
 
 .. toctree::
     :maxdepth: 1
 
-    appendices/4-0-migration-guide
-    appendices/4-1-migration-guide
-    appendices/4-2-migration-guide
-    appendices/4-3-migration-guide
-    appendices/fixture-upgrade
+    appendices/5-0-upgrade-guide
+    appendices/5-0-migration-guide
 
 後方互換性の補完
 ================
 
-3.x の挙動に関する対応が必要な場合、または段階的な移行に関する助けが必要な場合、
+4.x の挙動に関する対応が必要な場合、または段階的な移行に関する助けが必要な場合、
 `Shim プラグイン <https://github.com/dereuromark/cakephp-shim>`__ を確認してください。
 後方互換性を損なう変更を移行するのに役立ちます。
 

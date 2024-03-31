@@ -68,6 +68,9 @@ Console
 - ``BaseCommand::__construct()`` was removed.
 - ``ConsoleIntegrationTestTrait::useCommandRunner()`` was removed since it's no longer needed.
 - ``Shell`` has been removed and should be replaced with `Command <https://book.cakephp.org/5/en/console-commands/commands.html>`__
+- ``ConsoleOptionParser::addSubcommand()`` was removed alongside the removal of
+  ``Shell``. Subcommands should be replaced with ``Command`` classes that
+  implement ``Command::defaultName()`` to define the necessary command name.
 - ``BaseCommand`` now emits ``Command.beforeExecute`` and
   ``Command.afterExecute`` events around the command's ``execute()`` method
   being invoked by the framework.

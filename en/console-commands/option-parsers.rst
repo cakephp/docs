@@ -194,32 +194,12 @@ Building a ConsoleOptionParser from an Array
 
 .. php:method:: buildFromArray($spec)
 
-As previously mentioned, when creating subcommand option parsers, you can define
-the parser spec as an array for that method. This can help make building
-subcommand parsers easier, as everything is an array::
-
-    $parser->addSubcommand('check', [
-        'help' => __('Check the permissions between an ACO and ARO.'),
-        'parser' => [
-            'description' => [
-                __("Use this command to grant ACL permissions. Once executed, the "),
-                __("ARO specified (and its children, if any) will have ALLOW access "),
-                __("to the specified ACO action (and the ACO's children, if any)."),
-            ],
-            'arguments' => [
-                'aro' => ['help' => __('ARO to check.'), 'required' => true],
-                'aco' => ['help' => __('ACO to check.'), 'required' => true],
-                'action' => ['help' => __('Action to check')],
-            ],
-        ],
-    ]);
-
-Inside the parser spec, you can define keys for ``arguments``, ``options``,
-``description`` and ``epilog``. You cannot define ``subcommands`` inside an
-array style builder. The values for arguments, and options, should follow the
-format that :php:func:`Cake\\Console\\ConsoleOptionParser::addArguments()` and
+Option parsers can also be defined as arrays. Within the array, you can define
+keys for ``arguments``, ``options``, ``description`` and ``epilog``.  The values
+for arguments, and options, should follow the format that
+:php:func:`Cake\\Console\\ConsoleOptionParser::addArguments()` and
 :php:func:`Cake\\Console\\ConsoleOptionParser::addOptions()` use. You can also
-use buildFromArray on its own, to build an option parser::
+use ``buildFromArray`` on its own, to build an option parser::
 
     public function getOptionParser()
     {
@@ -287,8 +267,8 @@ returned as XML:
     cake bake --help xml
     cake bake -h xml
 
-The above would return an XML document with the generated help, options,
-arguments and subcommands for the selected shell. A sample XML document would
+The above would return an XML document with the generated help, options, and
+arguments for the selected shell. A sample XML document would
 look like:
 
 .. code-block:: xml
