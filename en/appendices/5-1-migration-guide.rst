@@ -23,6 +23,9 @@ Behavior Changes
 - ``PluginCollection::addPlugin()`` now throws an exception if a plugin of the same
   name is already added.
 
+- ``TestCase::loadPlugins()`` will now clear out any previously loaded plugins. So
+  you must specify all plugins required for any subsequent tests.
+
 Deprecations
 ============
 
