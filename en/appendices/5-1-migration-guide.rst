@@ -64,6 +64,13 @@ Core
   a typesafe way to cast request data or other input and return ``null`` when conversion fails.
 - ``pathCombine()`` was added to help build paths without worrying about duplicate and trailing slashes.
 
+Datasource
+----------
+
+- ``RulesChecker::remove()``, ``removeCreate()``, ``removeUpdate()``, and
+  ``removeDelete()`` methods were added. These methods allow you to remove rules
+  by name.
+
 Http
 ----
 
