@@ -742,3 +742,22 @@ The same result can be expected when using ``newEntity()`` or
 
     $userEntity = $usersTable->newEntity(['email' => 'not an email!!']);
     $userEntity->getError('email'); // Invalid email
+
+Removing Rules
+--------------
+
+If you need to remove rules from a ``RulesChecker`` use a remove method::
+
+    // Remove a general rule by name
+    $rules->remove('ruleName');
+
+    // Remove a create rule
+    $rules->removeCreate('ruleName');
+
+    // Remove an update rule
+    $rules->removeUpdate('ruleName');
+
+    // Remove a delete rule
+    $rules->removeDelete('ruleName');
+
+.. versionadded:: 5.1.0
