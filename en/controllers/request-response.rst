@@ -413,10 +413,10 @@ There are several built-in detectors that you can use:
   X-Requested-With = XMLHttpRequest.
 * ``is('ssl')`` Check to see whether the request is via SSL.
 * ``is('flash')`` Check to see whether the request has a User-Agent of Flash.
-* ``is('json')`` Check to see whether the request has 'json' extension and
-  accept 'application/json' mimetype.
-* ``is('xml')`` Check to see whether the request has 'xml' extension and accept
-  'application/xml' or 'text/xml' mimetype.
+* ``is('json')`` Check to see whether the request URL has 'json' extension or the 
+  `Accept` header is set to 'application/json'.
+* ``is('xml')`` Check to see whether the request URL has 'xml' extension or the `Accept` header is set to
+  'application/xml' or 'text/xml'.
 
 ``ServerRequest`` also includes methods like
 :php:meth:`Cake\\Http\\ServerRequest::domain()`,
