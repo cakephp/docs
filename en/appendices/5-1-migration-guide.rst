@@ -64,6 +64,12 @@ Core
   a typesafe way to cast request data or other input and return ``null`` when conversion fails.
 - ``pathCombine()`` was added to help build paths without worrying about duplicate and trailing slashes.
 
+Database
+--------
+
+- ``SelectQuery::__debugInfo()`` now includes which connection role the query
+  is for.
+
 Datasource
 ----------
 
