@@ -9,7 +9,7 @@ Behavior Changes
 ================
 
 - Connection now creats unique read and write drivers if the keys ``read`` or 
-  ``write` are present in the config regardless of values.
+  ``write`` are present in the config regardless of values.
 - FormHelper no longer generates ``aria-required`` attributes on input elements
   that also have the ``required`` attribute set. The ``aria-required`` attribute
   is redundant on these elements and generates HTML validation warnings. If you
@@ -52,6 +52,7 @@ Command
 
 - ``bin/cake plugin list`` has been added to list all available plugins,
   their load configuration and version.
+- Optional ``Command`` arguments can now have a ``default`` value.
 
 Console
 -------
