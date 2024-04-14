@@ -24,6 +24,11 @@ Cache
   over a TLS connection. You can use the ``ssl_ca``, ``ssl_cert`` and
   ``ssl_key`` options to define the TLS context for redis.
 
+Console
+-------
+
+- Optional ``Command`` arguments can now have a ``default`` value.
+
 I18n
 ----
 
