@@ -113,6 +113,8 @@ CakePHP のモデルは ``Table`` と ``Entity`` オブジェクトで構成さ�
 
     <?php
     // src/Model/Table/ArticlesTable.php
+    declare(strict_types=1);
+
     namespace App\Model\Table;
 
     use Cake\ORM\Table;
@@ -121,6 +123,7 @@ CakePHP のモデルは ``Table`` と ``Entity`` オブジェクトで構成さ�
     {
         public function initialize(array $config) : void
         {
+            parent::initialize($config)
             $this->addBehavior('Timestamp');
         }
     }
@@ -152,9 +155,12 @@ Table オブジェクトを ``ArticlesTable`` と名付けることで、CakePHP
     class Article extends Entity
     {
         protected array $_accessible = [
-            '*' => true,
-            'id' => false,
-            'slug' => false,
+            'title' => true,
+            'body' => true,
+            'published' => true,
+            'created' => true,
+            'modified' => true,
+            'users' => true,
         ];
     }
 
