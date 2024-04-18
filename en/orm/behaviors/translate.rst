@@ -35,8 +35,8 @@ fields to be translated. For that we create a shadow table ``articles_translatio
     CREATE TABLE `articles_translations` (
         `id` int(11) NOT NULL,
         `locale` varchar(5) NOT NULL,
-        `title` varchar(255) NOT NULL,
-        `body` text NOT NULL,
+        `title` varchar(255),
+        `body` text,
         PRIMARY KEY (`id`,`locale`)
     );
 
