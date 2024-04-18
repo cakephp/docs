@@ -32,8 +32,7 @@ CMS チュートリアル - Articles コントローラーの作成
     {
         public function index()
         {
-            $this->loadComponent('Paginator');
-            $articles = $this->Paginator->paginate($this->Articles->find());
+            $articles = $this->paginate($this->Articles);
             $this->set(compact('articles'));
         }
     }
