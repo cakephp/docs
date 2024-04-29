@@ -488,6 +488,9 @@ CakePHP recommends a few conventions for enums:
 - Enum classnames should follow ``{Entity}{ColumnName}`` style to enable
   detection while running bake and to aid with project consistency.
 - Enum cases should use CamelCase style.
+- Enums should implement the ``Cake\Database\Type\EnumLabelInterface`` to
+  improve compatibility with bake, and ``FormHelper``.
+
 
 .. _adding-custom-database-types:
 
