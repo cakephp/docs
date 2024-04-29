@@ -8,7 +8,7 @@ removed in 6.0.0.
 Behavior Changes
 ================
 
-- Connection now creats unique read and write drivers if the keys ``read`` or 
+- Connection now creats unique read and write drivers if the keys ``read`` or
   ``write`` are present in the config regardless of values.
 - FormHelper no longer generates ``aria-required`` attributes on input elements
   that also have the ``required`` attribute set. The ``aria-required`` attribute
@@ -106,6 +106,11 @@ TestSuite
   its methods were updated to be static.
 - ``LogTestTrait`` was added. This new trait makes it easy to capture logs in
   your tests and make assertions on the presence or absence of log messages.
+
+Utility
+-------
+
+- ``Hash::insert()`` and ``Hash::remove()`` now accept ``ArrayAccess`` objects along with ``array`` data.
 
 Validation
 ----------
