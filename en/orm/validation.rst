@@ -534,6 +534,7 @@ Creating Custom re-usable Rules
 
 You may want to re-use custom domain rules. You can do so by creating your own invokable rule::
 
+    // Using a custom rule of the application
     use App\ORM\Rule\IsUniqueWithNulls;
     // ...
     public function buildRules(RulesChecker $rules): RulesChecker
