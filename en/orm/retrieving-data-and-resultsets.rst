@@ -648,7 +648,7 @@ Use the ``queryBuilder`` option to customize the query when using an array::
         'Authors' => [
             'foreignKey' => false,
             'queryBuilder' => function (Query $q) {
-                return $q->where(...); // Full conditions for filtering
+                return $q->where(/* ... */); // Full conditions for filtering
             }
         ]
     ]);

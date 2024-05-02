@@ -666,7 +666,7 @@ criam novos objetos de expressão que mudam **como** as condições são combina
 segundo tipo de métodos são **condições**. As condições são adicionadas a uma expressão
 em que são alinhadas com o combinador atual.
 
-Por exemplo, chamar ``$exp->and_(...)`` criará um novo objeto ``Expression`` que
+Por exemplo, chamar ``$exp->and_(/* ... */)`` criará um novo objeto ``Expression`` que
 combina todas as condições que ele contém com ``AND``. Enquanto ``$exp->or_()`` criará
 um novo objeto ``Expression`` que combina todas as condições adicionadas a ele
 com ``OR``. Um exemplo de adição de condições com um objeto ``Expression`` seria::

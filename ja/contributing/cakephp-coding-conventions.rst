@@ -254,7 +254,7 @@ false を、関数呼び出しが成功したかどうかを判定できるよ�
     {
         ...
         if (!$success) {
-            throw new RuntimeException(...);
+            throw new RuntimeException(/* ... */);
         }
 
         ...
