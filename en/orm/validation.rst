@@ -580,7 +580,7 @@ those rules into re-usable classes::
 
     $rules->add(new CustomRule(...), 'ruleName');
 
-By creating custom rule classes you can keep your code DRY and tests your domain
+By creating custom rule classes you can keep your code DRY and test your domain
 rules in isolation.
 
 Disabling Rules
