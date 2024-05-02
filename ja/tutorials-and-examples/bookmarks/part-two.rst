@@ -61,6 +61,7 @@ AppController に追加しましょう。 ::
             $user = $this->Auth->identify();
             if ($user) {
                 $this->Auth->setUser($user);
+
                 return $this->redirect($this->Auth->redirectUrl());
             }
             $this->Flash->error('あなたのユーザー名またはパスワードが不正です。');
@@ -104,6 +105,7 @@ AppController に追加しましょう。 ::
     public function logout()
     {
         $this->Flash->success('ログアウトしました。');
+
         return $this->redirect($this->Auth->logout());
     }
 
@@ -231,6 +233,7 @@ AppController に追加しましょう。 ::
             $bookmark->user_id = $this->Auth->user('id');
             if ($this->Bookmarks->save($bookmark)) {
                 $this->Flash->success('ブックマークを保存しました。');
+
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error('ブックマークは保存できませんでした。もう一度お試しください。');
@@ -254,6 +257,7 @@ AppController に追加しましょう。 ::
             $bookmark->user_id = $this->Auth->user('id');
             if ($this->Bookmarks->save($bookmark)) {
                 $this->Flash->success('ブックマークを保存しました。');
+
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error('ブックマークは保存できませんでした。もう一度お試しください。');
@@ -312,6 +316,7 @@ AppController に追加しましょう。 ::
         $str = $tags->reduce(function ($string, $tag) {
             return $string . $tag->title . ', ';
         }, '');
+
         return trim($str, ', ');
     }
 

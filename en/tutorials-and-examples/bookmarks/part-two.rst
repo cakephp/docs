@@ -63,6 +63,7 @@ not written that code yet. So let's create the login action::
             $user = $this->Auth->identify();
             if ($user) {
                 $this->Auth->setUser($user);
+
                 return $this->redirect($this->Auth->redirectUrl());
             }
             $this->Flash->error('Your username or password is incorrect.');
@@ -102,6 +103,7 @@ well. Again, in the ``UsersController``, add the following code::
     public function logout()
     {
         $this->Flash->success('You are now logged out.');
+
         return $this->redirect($this->Auth->logout());
     }
 
@@ -234,6 +236,7 @@ like::
             $bookmark->user_id = $this->Auth->user('id');
             if ($this->Bookmarks->save($bookmark)) {
                 $this->Flash->success('The bookmark has been saved.');
+
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error('The bookmark could not be saved. Please, try again.');
@@ -258,6 +261,7 @@ edit form and action. Your ``edit()`` action from
             $bookmark->user_id = $this->Auth->user('id');
             if ($this->Bookmarks->save($bookmark)) {
                 $this->Flash->success('The bookmark has been saved.');
+
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error('The bookmark could not be saved. Please, try again.');
@@ -317,6 +321,7 @@ can add a virtual/computed field to the entity. In
         $str = $tags->reduce(function ($string, $tag) {
             return $string . $tag->title . ', ';
         }, '');
+
         return trim($str, ', ');
     }
 

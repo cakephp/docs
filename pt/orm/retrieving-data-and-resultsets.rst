@@ -347,6 +347,7 @@ Neste exemplo mostramos como encontrarmos um artigo quando este estiver publicad
         public function findOwnedBy(Query $query, array $options)
         {
             $user = $options['user'];
+
             return $query->where(['author_id' => $user->id]);
         }
 
@@ -1188,6 +1189,7 @@ This is particularly useful for building custom finder methods as described in t
         // Same as in the common words example in the previous section
         $mapper = ...;
         $reducer = ...;
+
         return $query->mapReduce($mapper, $reducer);
     }
 

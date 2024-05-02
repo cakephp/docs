@@ -140,12 +140,14 @@ public メソッドのうち頭に _ が付かないものは、コマンドラ�
     public function getOptionParser()
     {
         $parser = parent::getOptionParser();
+
         $parser->addSubcommand('sound', [
             // コマンド一覧のヘルプテキストを提供
             'help' => 'Execute The Sound Task.',
             // オプションパーサーを互いにリンク
             'parser' => $this->Sound->getOptionParser(),
         ]);
+
         return $parser;
     }
 

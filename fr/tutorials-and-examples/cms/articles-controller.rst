@@ -217,6 +217,7 @@ la création d'articles. Commencez par créer une action ``add()`` dans le
 
                 if ($this->Articles->save($article)) {
                     $this->Flash->success(__('Votre article a été sauvegardé.'));
+
                     return $this->redirect(['action' => 'index']);
                 }
                 $this->Flash->error(__('Impossible d\'ajouter votre article.'));
@@ -367,6 +368,7 @@ dans votre ``ArticlesController``::
             $this->Articles->patchEntity($article, $this->request->getData());
             if ($this->Articles->save($article)) {
                 $this->Flash->success(__('Votre article a été mis à jour.'));
+
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('Impossible de mettre à jour l\'article.'));
@@ -501,6 +503,7 @@ Commencez par créer une action ``delete()`` dans ``ArticlesController``::
         $article = $this->Articles->findBySlug($slug)->firstOrFail();
         if ($this->Articles->delete($article)) {
             $this->Flash->success(__('L\'article {0} a été supprimé.', $article->title));
+
             return $this->redirect(['action' => 'index']);
         }
     }

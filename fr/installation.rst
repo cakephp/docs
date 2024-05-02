@@ -477,6 +477,7 @@ Un exemple de la directive server est le suivant:
         listen   80;
         listen   [::]:80;
         server_name www.example.com;
+
         return 301 http://example.com$request_uri;
     }
 

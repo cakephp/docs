@@ -176,6 +176,7 @@ você também pode fazer em um objeto Query::
         ->order(['title' => 'DESC'])
         ->map(function ($row) { // map() é um método de coleção, ele executa a consulta
             $row->trimmedTitle = trim($row->title);
+
             return $row;
         })
         ->combine('id', 'trimmedTitle') // combine() é outro método de coleção
@@ -573,6 +574,7 @@ um formatador de resultados::
     $query->formatResults(function (\Cake\Collection\CollectionInterface $results) {
         return $results->map(function ($row) {
             $row['age'] = $row['birth_date']->diff(new \DateTime)->y;
+
             return $row;
         });
     });
@@ -594,6 +596,7 @@ funcionaria conforme o esperado::
         return $q->formatResults(function (\Cake\Collection\CollectionInterface $authors) {
             return $authors->map(function ($author) {
                 $author['age'] = $author['birth_date']->diff(new \DateTime)->y;
+
                 return $author;
             });
         });
@@ -705,6 +708,7 @@ No entanto, se quisermos usar as condições ``AND`` e ``OR``, poderíamos fazer
         ->where(function (QueryExpression $exp) {
             $orConditions = $exp->or_(['author_id' => 2])
                 ->eq('author_id', 5);
+
             return $exp
                 ->add($orConditions)
                 ->eq('published', true)
@@ -731,6 +735,7 @@ Muitas vezes, é mais fácil ler do que encadear métodos::
                 return $or->eq('author_id', 2)
                     ->eq('author_id', 5);
             });
+
             return $exp
                 ->not($orConditions)
                 ->lte('view_count', 10);
@@ -742,6 +747,7 @@ Você pode negar sub-expressões usando ``not()``::
         ->where(function (QueryExpression $exp) {
             $orConditions = $exp->or_(['author_id' => 2])
                 ->eq('author_id', 5);
+
             return $exp
                 ->not($orConditions)
                 ->lte('view_count', 10);
@@ -764,6 +770,7 @@ Também é possível construir expressões usando as funções SQL::
             $year = $q->func()->year([
                 'created' => 'identifier'
             ]);
+
             return $exp
                 ->gte($year, 2014)
                 ->eq('published', true);

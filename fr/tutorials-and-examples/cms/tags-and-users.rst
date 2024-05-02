@@ -85,6 +85,7 @@ l'action ``add`` pour qu'elle ressemble à ceci::
 
                 if ($this->Articles->save($article)) {
                     $this->Flash->success(__('Votre article a été sauvegardé.'));
+
                     return $this->redirect(['action' => 'index']);
                 }
                 $this->Flash->error(__('Impossible de sauvegarder l\'article.'));
@@ -127,6 +128,7 @@ maintenant ressembler à ceci::
             $this->Articles->patchEntity($article, $this->request->getData());
             if ($this->Articles->save($article)) {
                 $this->Flash->success(__('Votre article a été modifié.'));
+
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('Impossible de mettre à jour votre article.'));
@@ -360,6 +362,7 @@ entity, nous ajoutons un champ virtuel/pré-calculé pour l'entity. Dans
         $str = $tags->reduce(function ($string, $tag) {
             return $string . $tag->title . ', ';
         }, '');
+
         return trim($str, ', ');
     }
 

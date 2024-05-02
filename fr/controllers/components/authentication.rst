@@ -247,6 +247,7 @@ connexion pourrait ressembler à cela::
             $user = $this->Auth->identify();
             if ($user) {
                 $this->Auth->setUser($user);
+
                 return $this->redirect($this->Auth->redirectUrl());
             } else {
                 $this->Flash->error(__("Nom d'utilisateur ou mot de passe incorrect"));
@@ -476,6 +477,7 @@ colonne séparée du mot de passe standard hashé::
                 $entity->plain_password,
                 env('SERVER_NAME')
             );
+
             return true;
         }
     }
@@ -773,6 +775,7 @@ utilisateur que vous voulez pour la 'connexion'::
         $user = $this->Users->newEntity($this->request->getData());
         if ($this->Users->save($user)) {
             $this->Auth->setUser($user->toArray());
+
             return $this->redirect([
                 'controller' => 'Users',
                 'action' => 'home'

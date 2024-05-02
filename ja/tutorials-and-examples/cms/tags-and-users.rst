@@ -79,6 +79,7 @@ ArticlesTable の ``initialize`` メソッドに以下を追加することで�
 
                 if ($this->Articles->save($article)) {
                     $this->Flash->success(__('Your article has been saved.'));
+
                     return $this->redirect(['action' => 'index']);
                 }
                 $this->Flash->error(__('Unable to add your article.'));

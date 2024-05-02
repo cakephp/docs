@@ -147,6 +147,7 @@ Our helper looks like::
         public function bar($value)
         {
             $width = round($value / 100, 2) * 100;
+
             return sprintf(
                 '<div class="progress-container">
                     <div class="progress-bar" style="width: %s%%"></div>
@@ -867,6 +868,7 @@ Let's say we already have our Articles Table class defined in
             $query->where([
                 $this->getAlias() . '.published' => 1
             ]);
+
             return $query;
         }
     }
@@ -1337,7 +1339,7 @@ and make sure our web service is returning the proper response::
     class MarkersControllerTest extends IntegrationTestCase
     {
         use IntegrationTestTrait;
-    
+
         public function testGet(): void
         {
             $this->configRequest([
@@ -1921,6 +1923,7 @@ Expanding on the Orders example, say we have the following tables::
                     'order' => $order
                 ]);
                 $this->getEventManager()->dispatch($event);
+
                 return true;
             }
             return false;

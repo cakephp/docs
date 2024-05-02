@@ -66,6 +66,7 @@ Então, vamos criar a ação de login::
             $user = $this->Auth->identify();
             if ($user) {
                 $this->Auth->setUser($user);
+
                 return $this->redirect($this->Auth->redirectUrl());
             }
             $this->Flash->error('Your username or password is incorrect.');
@@ -103,6 +104,7 @@ fornecer uma maneira de encerrar a sessão também. Mais uma vez, no
     public function logout()
     {
         $this->Flash->success('You are now logged out.');
+
         return $this->redirect($this->Auth->logout());
     }
 
@@ -236,6 +238,7 @@ Com isso removido, nós também vamos atualizar o método add::
             $bookmark->user_id = $this->Auth->user('id');
             if ($this->Bookmarks->save($bookmark)) {
                 $this->Flash->success('The bookmark has been saved.');
+
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error('The bookmark could not be saved. Please, try again.');
@@ -245,7 +248,7 @@ Com isso removido, nós também vamos atualizar o método add::
     }
 
 Ao definir a propriedade da entidade com os dados da sessão, nós removemos
-qualquer possibilidade do user modificar algo que não pertenca a ele. 
+qualquer possibilidade do user modificar algo que não pertenca a ele.
 Nós vamos fazer o mesmo para o formulário edit e action edit. Sua
 ação edit deve ficar assim::
 
@@ -259,6 +262,7 @@ ação edit deve ficar assim::
             $bookmark->user_id = $this->Auth->user('id');
             if ($this->Bookmarks->save($bookmark)) {
                 $this->Flash->success('The bookmark has been saved.');
+
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error('The bookmark could not be saved. Please, try again.');
@@ -317,6 +321,7 @@ entidade. Em **src/Model/Entity/Bookmark.php** adicione o seguinte::
         $str = $tags->reduce(function ($string, $tag) {
             return $string . $tag->title . ', ';
         }, '');
+
         return trim($str, ', ');
     }
 

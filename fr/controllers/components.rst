@@ -144,6 +144,7 @@ vous pouvez y accéder comme ceci::
         {
             if ($this->Post->delete($this->request->getData('Post.id')) {
                 $this->Flash->success('Publication effacée.');
+
                 return $this->redirect(['action' => 'index']);
             }
         }
@@ -324,6 +325,7 @@ Pour rediriger à partir d'une méthode de rappel de composant, vous pouvez util
     public function beforeFilter(EventInterface $event)
     {
         $event->stopPropagation();
+
         return $this->getController()->redirect('/');
     }
 

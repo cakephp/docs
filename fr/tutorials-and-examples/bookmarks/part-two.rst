@@ -69,6 +69,7 @@ nous n'avons pas encore écrit ce code. Créons donc l'action login::
             $user = $this->Auth->identify();
             if ($user) {
                 $this->Auth->setUser($user);
+
                 return $this->redirect($this->Auth->redirectUrl());
             }
             $this->Flash->error('Votre username ou mot de passe est incorrect.');
@@ -110,6 +111,7 @@ probablement fournir un moyen de se déconnecter. Encore une fois, dans
     public function logout()
     {
         $this->Flash->success('Vous êtes maintenant déconnecté.');
+
         return $this->redirect($this->Auth->logout());
     }
 
@@ -247,6 +249,7 @@ ressembler à ceci::
             $bookmark->user_id = $this->Auth->user('id');
             if ($this->Bookmarks->save($bookmark)) {
                 $this->Flash->success('Le bookmark a été sauvegardé.');
+
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error('Le bookmark ne peut être sauvegardé. Merci de réessayer.');
@@ -272,6 +275,7 @@ ceci::
             $bookmark->user_id = $this->Auth->user('id');
             if ($this->Bookmarks->save($bookmark)) {
                 $this->Flash->success('Le bookmark a été sauvegardé.');
+
                 return $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->error('Le bookmark ne peut être sauvegardé. Merci de réessayer.');
@@ -335,6 +339,7 @@ pouvons ajouter un champ virtuel/calculé à l'entity. Dans
         $str = $tags->reduce(function ($string, $tag) {
             return $string . $tag->title . ', ';
         }, '');
+
         return trim($str, ', ');
     }
 

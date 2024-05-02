@@ -65,6 +65,7 @@ o Model Orders limpo você poderia usar eventos::
                     'order' => $order
                 ]);
                 $this->eventManager()->dispatch($event);
+
                 return true;
             }
             return false;
@@ -453,6 +454,7 @@ diretamente ou retornando o valor no próprio callback::
     {
         // ...
         $alteredData = $event->getData('order') + $moreData;
+
         return $alteredData;
     }
     // Outro callback

@@ -77,7 +77,7 @@ by using the ``finder`` option::
     $article = $articles->get($id, [
         'finder' => 'translations',
     ]);
-    
+
 The list of options supported by get() are:
 
 -  ``cache`` cache config.
@@ -389,6 +389,7 @@ given user, we would do the following::
         public function findOwnedBy(Query $query, array $options)
         {
             $user = $options['user'];
+
             return $query->where(['author_id' => $user->id]);
         }
     }
@@ -1071,8 +1072,8 @@ can load additional associations using ``loadInto()``::
     $articles = $this->Articles->find()->all();
     $withMore = $this->Articles->loadInto($articles, ['Comments', 'Users']);
 
-It is possible to restrict the data returned by the associations and filter them 
-by conditions. To specify conditions, pass an anonymous function that receives 
+It is possible to restrict the data returned by the associations and filter them
+by conditions. To specify conditions, pass an anonymous function that receives
 as the first argument a query object, ``\Cake\ORM\Query``::
 
     $user = $this->Users->get($id);
@@ -1288,6 +1289,7 @@ This is particularly useful for building custom finder methods as described in t
         // Same as in the common words example in the previous section
         $mapper = ...;
         $reducer = ...;
+
         return $query->mapReduce($mapper, $reducer);
     }
 

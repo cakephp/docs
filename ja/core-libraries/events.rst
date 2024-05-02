@@ -437,6 +437,7 @@ DOM イベントのように、追加のリスナーへ通知されることを�
     {
         // ...
         $alteredData = $event->getData('order') + $moreData;
+
         return $alteredData;
     }
 

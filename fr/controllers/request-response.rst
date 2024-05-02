@@ -712,6 +712,7 @@ Vous pouvez accomplir cela en utilisant :php:meth:`Cake\\Http\\Response::withFil
     {
         $file = $this->Attachments->getFile($id);
         $response = $this->response->withFile($file['path']);
+
         // Renvoie la réponse pour empêcher le contrôleur d'essayer
         // de rendre une vue
         return $response;
