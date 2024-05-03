@@ -169,7 +169,8 @@ implement the collection interface::
         ->all()
         ->map(function ($row) {
             $row->trimmedTitle = trim($row->title);
-            return $row;
+
+           return $row;
         })
         ->combine('id', 'trimmedTitle') // combine() is another collection method
         ->toArray(); // Also a collections library method
@@ -699,6 +700,7 @@ of people, you could calculate their age with a result formatter::
     $query->formatResults(function (\Cake\Collection\CollectionInterface $results) {
         return $results->map(function ($row) {
             $row['age'] = $row['birth_date']->diff(new \DateTime)->y;
+
             return $row;
         });
     });
@@ -720,6 +722,7 @@ expect::
         return $q->formatResults(function (\Cake\Collection\CollectionInterface $authors) {
             return $authors->map(function ($author) {
                 $author['age'] = $author['birth_date']->diff(new \DateTime)->y;
+
                 return $author;
             });
         });
@@ -834,6 +837,7 @@ following::
         ->where(function (QueryExpression $exp) {
             $orConditions = $exp->or(['author_id' => 2])
                 ->eq('author_id', 5);
+
             return $exp
                 ->add($orConditions)
                 ->eq('published', true)
@@ -862,6 +866,7 @@ the method chaining::
                 return $or->eq('author_id', 2)
                     ->eq('author_id', 5);
             });
+
             return $exp
                 ->not($orConditions)
                 ->lte('view_count', 10);
@@ -873,6 +878,7 @@ You can negate sub-expressions using ``not()``::
         ->where(function (QueryExpression $exp) {
             $orConditions = $exp->or(['author_id' => 2])
                 ->eq('author_id', 5);
+
             return $exp
                 ->not($orConditions)
                 ->lte('view_count', 10);
@@ -896,6 +902,7 @@ It is also possible to build expressions using SQL functions::
             $year = $q->func()->year([
                 'created' => 'identifier'
             ]);
+
             return $exp
                 ->gte($year, 2014)
                 ->eq('published', true);
@@ -1224,6 +1231,7 @@ And can be used combined with aggregations too::
                     $query->newExpr(['Stocks.quantity', 'Products.unit_price'])
                         ->setConjunction('*')
             );
+
             return [
                 'Products.name',
                 'stock_quantity' => $stockQuantity,

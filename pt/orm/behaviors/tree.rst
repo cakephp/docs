@@ -187,6 +187,7 @@ Opcionalmente, você pode ter um controle mais refinado do escopo passando um cl
 
     $this->behaviors()->Tree->config('scope', function ($query) {
         $country = $this->getConfigureContry(); // uma função inventada
+
         return $query->where(['country_name' => $country]);
     });
 

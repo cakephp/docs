@@ -633,6 +633,7 @@ Attribute Matching Types
         public function noop(array $array)
         {
             // Do stuff to array and return the result
+
             return $array;
         }
 

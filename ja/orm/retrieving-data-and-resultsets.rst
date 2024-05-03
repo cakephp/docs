@@ -357,6 +357,7 @@ fineder メソッドは、あなたが作成したい finder の名前が ``Foo`
         public function findOwnedBy(Query $query, array $options)
         {
             $user = $options['user'];
+
             return $query->where(['author_id' => $user->id]);
         }
     }
@@ -1190,6 +1191,7 @@ reducer が呼ばれるごとに、reducer はユーザーごとのフォロワ�
         // 前のセクションで説明した共通の単語の件と同じもの
         $mapper = ...;
         $reducer = ...;
+
         return $query->mapReduce($mapper, $reducer);
     }
 

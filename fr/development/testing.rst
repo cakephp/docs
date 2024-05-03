@@ -155,6 +155,7 @@ barre de progression HTML. Notre helper ressemblera à cela::
         public function bar($value)
         {
             $width = round($value / 100, 2) * 100;
+
             return sprintf(
                 '<div class="progress-container">
                     <div class="progress-bar" style="width: %s%%"></div>
@@ -864,6 +865,7 @@ Supposons que nous avons déjà notre table Articles définie dans
             $query->where([
                 $this->alias() . '.published' => 1
             ]);
+
             return $query;
         }
     }
@@ -1326,7 +1328,7 @@ service web. Commençons avec un exemple simple  de controller qui renvoie du
 JSON::
 
     use Cake\View\JsonView;
-    
+
     class MarkersController extends AppController
     {
         public function viewClasses(): array
@@ -1607,7 +1609,7 @@ d'assertions afin de tester les réponses plus simplement. Quelques exemples::
     $this->assertResponseEmpty();
 
     // Vérifie le contenu de la réponse
-    $this->assertResponseEquals('Ouais !'); 
+    $this->assertResponseEquals('Ouais !');
 
     // Vérifie que le contenu de la réponse n'est pas égal à...
     $this->assertResponseNotEquals('Non !');
@@ -1721,7 +1723,7 @@ Mocker les Injections de Dépendances
 Voir :ref:`mocking-services-in-tests` pour savoir comment remplacer des services
 injectés avec le conteneur d'injection de dépendances dans vos tests
 d'intégration.
- 
+
 Mocker les Réponses du Client HTTP
 ==================================
 
@@ -1940,6 +1942,7 @@ suivantes::
                     'order' => $order
                 ]);
                 $this->getEventManager()->dispatch($event);
+
                 return true;
             }
             return false;
@@ -2015,7 +2018,7 @@ globaux::
 
 Testing Email
 =============
- 
+
 Consultez :ref:`email-testing` pour savoir comment tester les emails.
 
 Créer des Suites de Test (Test Suites)

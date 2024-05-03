@@ -113,6 +113,7 @@ CakePHP ではデータの検証には二つの段階があります:
             $validator
                 ->notEmptyString('title', __('タイトルを設定してください'))
                 ->notEmptyString('body', __('本文は必須です'));
+
             return $validator;
         }
     }
@@ -207,6 +208,7 @@ CakePHP ではデータの検証には二つの段階があります:
                     'message' => __('有効な権限を指定する必要があります'),
                     'provider' => 'table',
                 ]);
+
             return $validator;
         }
 

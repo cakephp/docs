@@ -449,6 +449,7 @@ A sample of the server directive is as follows:
         listen   80;
         listen   [::]:80;
         server_name www.example.com;
+
         return 301 http://example.com$request_uri;
     }
 

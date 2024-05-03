@@ -2543,6 +2543,7 @@ vouliez construire un widget Autocomplete, vous pourriez le faire comme ceci::
             $data += [
                 'name' => '',
             ];
+
             return $this->_templates->format('autocomplete', [
                 'name' => $data['name'],
                 'attrs' => $this->_templates->formatAttributes($data, ['name'])

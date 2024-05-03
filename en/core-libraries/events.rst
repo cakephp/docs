@@ -61,10 +61,12 @@ has been created. To keep your Orders model clean you could use events::
         {
             if ($this->save($order)) {
                 $this->Cart->remove($order);
+
                 $event = new Event('Order.afterPlace', $this, [
                     'order' => $order
                 ]);
                 $this->getEventManager()->dispatch($event);
+
                 return true;
             }
             return false;
@@ -456,6 +458,7 @@ directly or returning the value in the callback itself::
     {
         // ...
         $alteredData = $event->getData('order') + $moreData;
+
         return $alteredData;
     }
 
