@@ -8,23 +8,22 @@ removed in 6.0.0.
 Behavior Changes
 ================
 
-- Connection now creats unique read and write drivers if the keys ``read`` or
+- Connection now creates unique read and write drivers if the keys ``read`` or
   ``write`` are present in the config regardless of values.
 - FormHelper no longer generates ``aria-required`` attributes on input elements
   that also have the ``required`` attribute set. The ``aria-required`` attribute
   is redundant on these elements and generates HTML validation warnings. If you
   are using ``aria-required`` attribute in styling or scripting you'll need to
   update your application.
-
+- Adding associations with duplicate names will now raise exceptions. You can
+  use ``$table->associations()->has()`` to conditionally define associations if
+  required.
 - Text Utility and TextHelper methods around truncation and maximum length are using
   a UTF-8 character for ``ellipsis`` instead of ``...`` legacy characters.
-
 - ``TableSchema::setColumnType()`` now throws an exception if the specified column
   does not exist.
-
 - ``PluginCollection::addPlugin()`` now throws an exception if a plugin of the same
   name is already added.
-
 - ``TestCase::loadPlugins()`` will now clear out any previously loaded plugins. So
   you must specify all plugins required for any subsequent tests.
 
