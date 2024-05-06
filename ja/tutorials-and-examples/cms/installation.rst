@@ -42,7 +42,7 @@ cURL がインストールされていたら、次のように実行するのが
 
 .. code-block:: console
 
-    php composer.phar create-project --prefer-dist cakephp/app:5.* cms
+    php composer.phar create-project --prefer-dist cakephp/app:5 cms
 
 `Composer Windows Installer <https://getcomposer.org/Composer-Setup.exe>`_
 をダウンロードして実行した場合、インストールディレクトリー (例えば、 C:\\wamp\\www\\dev\\cakephp3)
