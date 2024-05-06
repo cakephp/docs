@@ -668,7 +668,7 @@ passez un tableau::
         'Authors' => [
             'foreignKey' => false,
             'queryBuilder' => function (Query $q) {
-                return $q->where(...); // Conditions complètes pour le filtrage
+                return $q->where(/* ... */); // Conditions complètes pour le filtrage
             }
         ]
     ]);

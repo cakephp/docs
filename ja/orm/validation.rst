@@ -568,7 +568,7 @@ CakePHP は、エンティティーが保存される前に適用される「ル
     // カスタムルールの追加
     use App\Model\Rule\CustomRule;
 
-    $rules->add(new CustomRule(...), 'ruleName');
+    $rules->add(new CustomRule(/* ... */), 'ruleName');
 
 カスタムルールクラスを作ることでコードを *重複がない状態*
 (訳注：DRY = Don't Repeat Yourself の訳)
@@ -612,7 +612,7 @@ CakePHP の ORM は検証に二層のアプローチを使う点がユニーク�
 
     public function validationCustomName($validator)
     {
-        $validator->add(...);
+        $validator->add(/* ... */);
         return $validator;
     }
 

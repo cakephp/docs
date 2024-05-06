@@ -619,7 +619,7 @@ utile de packager ces règles dans des classes réutilisables::
     // Ajouter la règle personnalisée
     use App\Model\Rule\CustomRule;
 
-    $rules->add(new CustomRule(...), 'ruleName');
+    $rules->add(new CustomRule(/* ... */), 'ruleName');
 
 En ajoutant des classes de règles personnalisées, vous pouvez garder votre code
 DRY et tester vos règles de domaine isolément.
