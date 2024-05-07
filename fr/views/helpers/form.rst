@@ -1847,12 +1847,12 @@ plusieurs messages d'erreur pour un seul champ.
 
 Exemple::
 
-    // Si vous avez une règle de validation 'notEmpty' dans TicketsTable:
+    // Si vous avez une règle de validation 'notEmptyString' dans TicketsTable:
     public function validationDefault(Validator $validator): Validator
     {
         $validator
             ->requirePresence('ticket', 'create')
-            ->notEmpty('ticket');
+            ->notEmptyString('ticket');
     }
 
     // Et dans templates/Tickets/add.php vous avez:
