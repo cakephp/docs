@@ -57,6 +57,8 @@ Console
 -------
 
 - ``Arguments::getBooleanOption()`` and ``Arguments::getMultipleOption()`` were added.
+- ``Arguments::hasArgument()`` and ``getArgument()`` will now raise an exception
+  if an unknown argument name is provided. This helps prevent mixing up option/argument names.
 
 Core
 ----
