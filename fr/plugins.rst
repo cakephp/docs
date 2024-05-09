@@ -142,7 +142,7 @@ Configuration du Plugin
 
 Les plugins proposent plusieurs *hooks* permettant à un plugin de s'injecter
 lui-même aux endroits appropriés de votre application. Les *hooks* sont:
- 
+
 * ``bootstrap`` Utilisé pour charger les fichiers de configuration par défaut
   d'un plugin, définir des constantes et d'autres fonctions globales.
 * ``routes`` Utilisé pour charger les routes pour un plugin. Il est déclenché
@@ -299,7 +299,7 @@ Plugin Objects
 Les Objets Plugin permettent à un auteur de plugin de spécifier une logique de
 démarrage, de définire des *hooks* par défaut, de charger des routes, un
 middleware ou des commandes de console. Les objets Plugin se trouvent dans
-**src/Plugin.php**. Pour notre plugin ContactManager, notre classe de plugin
+**src/{PluginName}Plugin.php**. Pour notre plugin ContactManager, notre classe de plugin
 pourrait ressembler à::
 
     namespace ContactManager;
