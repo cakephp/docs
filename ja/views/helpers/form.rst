@@ -1877,12 +1877,12 @@ FormHelper は、フィールドエラーを簡単にチェックしたり、必
 
 例::
 
-    // TicketsTable に 'notEmpty' 検証ルールがある場合:
+    // TicketsTable に 'notEmptyString' 検証ルールがある場合:
     public function validationDefault(Validator $validator)
     {
         $validator
             ->requirePresence('ticket', 'create')
-            ->notEmpty('ticket');
+            ->notEmptyString('ticket');
     }
 
     // そして、 templates/Tickets/add.php の中が次のような場合:
