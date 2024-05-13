@@ -46,9 +46,9 @@ Faire des requêtes POST et PUT est tout aussi simple::
     ]);
 
     // Autres méthodes.
-    $http->delete(...);
-    $http->head(...);
-    $http->patch(...);
+    $http->delete(/* ... */);
+    $http->head(/* ... */);
+    $http->patch(/* ... */);
 
 Si vous avez créé un objet de requêtes PSR-7, vous pouvez l'envoyer avec
 ``sendRequest()``::
@@ -515,11 +515,11 @@ requêtes faites par votre application::
 
 Il existe des méthodes pour mocker les méthodes HTTP les plus courantes::
 
-    $this->mockClientGet(...);
-    $this->mockClientPatch(...);
-    $this->mockClientPost(...);
-    $this->mockClientPut(...);
-    $this->mockClientDelete(...);
+    $this->mockClientGet(/* ... */);
+    $this->mockClientPatch(/* ... */);
+    $this->mockClientPost(/* ... */);
+    $this->mockClientPut(/* ... */);
+    $this->mockClientDelete(/* ... */);
 
 .. php:method:: newClientResponse(int $code = 200, array $headers = [], string $body = '')
 

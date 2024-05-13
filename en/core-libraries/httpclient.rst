@@ -45,9 +45,9 @@ Doing POST and PUT requests is equally simple::
     ]);
 
     // Other methods as well.
-    $http->delete(...);
-    $http->head(...);
-    $http->patch(...);
+    $http->delete(/* ... */);
+    $http->head(/* ... */);
+    $http->patch(/* ... */);
 
 If you have created a PSR-7 request object you can send it using
 ``sendRequest()``::
@@ -502,11 +502,11 @@ is making::
 
 There are methods to mock the most commonly used HTTP methods::
 
-    $this->mockClientGet(...);
-    $this->mockClientPatch(...);
-    $this->mockClientPost(...);
-    $this->mockClientPut(...);
-    $this->mockClientDelete(...);
+    $this->mockClientGet(/* ... */);
+    $this->mockClientPatch(/* ... */);
+    $this->mockClientPost(/* ... */);
+    $this->mockClientPut(/* ... */);
+    $this->mockClientDelete(/* ... */);
 
 .. php:method:: newClientResponse(int $code = 200, array $headers = [], string $body = '')
 

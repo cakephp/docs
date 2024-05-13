@@ -457,7 +457,7 @@ complex expressions::
 To build complex order clauses, use a Closure to build order expressions::
 
     $query->orderAsc(function (QueryExpression $exp, SelectQuery $query) {
-        return $exp->addCase(...);
+        return $exp->addCase(/* ... */);
     });
 
 

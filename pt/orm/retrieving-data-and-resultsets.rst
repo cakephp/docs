@@ -568,7 +568,7 @@ case you should use an array passing ``foreignKey`` and ``queryBuilder``::
         'Authors' => [
             'foreignKey' => false,
             'queryBuilder' => function ($q) {
-                return $q->where(...); // Full conditions for filtering
+                return $q->where(/* ... */); // Full conditions for filtering
             }
         ]
     ]);

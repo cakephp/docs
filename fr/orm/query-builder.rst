@@ -478,7 +478,7 @@ des expressions complexes::
 Pour construire des clauses de tri complexes, utilisez une Closure::
 
     $query->orderAsc(function (QueryExpression $exp, Query $query) {
-        return $exp->addCase(...);
+        return $exp->addCase(/* ... */);
      });
 
 Limiter les Résultats
