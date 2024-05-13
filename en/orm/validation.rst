@@ -578,7 +578,7 @@ those rules into re-usable classes::
     // Add the custom rule
     use App\Model\Rule\CustomRule;
 
-    $rules->add(new CustomRule(...), 'ruleName');
+    $rules->add(new CustomRule(/* ... */), 'ruleName');
 
 By creating custom rule classes you can keep your code DRY and test your domain
 rules in isolation.

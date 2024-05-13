@@ -597,7 +597,7 @@ contain に条件を渡す
         'Authors' => [
             'foreignKey' => false,
             'queryBuilder' => function (SelectQuery $q) {
-                return $q->where(...); // フィルターのための完全な条件
+                return $q->where(/* ... */); // フィルターのための完全な条件
             }
         ]
     ]);

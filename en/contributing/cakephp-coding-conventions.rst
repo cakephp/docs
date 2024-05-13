@@ -265,7 +265,7 @@ Try to avoid unnecessary nesting by bailing early::
     {
         ...
         if (!$success) {
-            throw new RuntimeException(...);
+            throw new RuntimeException(/* ... */);
         }
 
         ...
