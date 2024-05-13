@@ -289,6 +289,7 @@ conditions only::
         if (isset($context['data']['action'])) {
             return $context['data']['action'] === 'subscribe';
         }
+
         return false;
     });
     $validator->requirePresence('email');

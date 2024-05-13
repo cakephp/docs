@@ -221,6 +221,7 @@ SSL 暗号化しないアプリケーションにもふさわしいものです�
             $user = $this->Auth->identify();
             if ($user) {
                 $this->Auth->setUser($user);
+
                 return $this->redirect($this->Auth->redirectUrl());
             } else {
                 $this->Flash->error(__('Username or password is incorrect'));
@@ -303,6 +304,7 @@ AuthComponent がユーザーレコードの格納にセッションを使用し
         if (empty($username) || empty($pass)) {
             return false;
         }
+
         return $this->_findUser($username, $pass);
     }
 
@@ -368,6 +370,7 @@ CakePHP のライブラリーを使用してランダムにこれらの API ト�
                 // トークンを Bcrypt で暗号化
                 $entity->api_key = $hasher->hash($entity->api_key_plain);
             }
+
             return true;
         }
     }
@@ -427,6 +430,7 @@ CakePHP のライブラリーを使用してランダムにこれらの API ト�
                 $entity->plain_password,
                 env('SERVER_NAME')
             );
+
             return true;
         }
     }
@@ -674,6 +678,7 @@ CakePHP は、1つのアルゴリズムから別のユーザーのパスワー�
                     $user->password = $this->request->getData('password');
                     $this->Users->save($user);
                 }
+
                 return $this->redirect($this->Auth->redirectUrl());
             }
             ...
@@ -697,6 +702,7 @@ CakePHP は、1つのアルゴリズムから別のユーザーのパスワー�
         $user = $this->Users->newEntity($this->request->getData());
         if ($this->Users->save($user)) {
             $this->Auth->setUser($user->toArray());
+
             return $this->redirect([
                 'controller' => 'Users',
                 'action' => 'home'

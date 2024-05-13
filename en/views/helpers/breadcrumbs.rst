@@ -186,6 +186,7 @@ when you want to transform the crumbs and overwrite the list::
     $crumbs = $this->Breadcrumbs->getCrumbs();
     $crumbs = collection($crumbs)->map(function ($crumb) {
         $crumb['options']['class'] = 'breadcrumb-item';
+
         return $crumb;
     })->toArray();
 

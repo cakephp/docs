@@ -62,6 +62,7 @@ command line::
             $parser->addArgument('name', [
                 'help' => 'What is your name',
             ]);
+
             return $parser;
         }
 

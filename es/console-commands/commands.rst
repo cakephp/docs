@@ -58,6 +58,7 @@ Nuestro método ``execute()`` no es muy interesante, leamos algunas entradas des
             $parser->addArgument('name', [
                 'help' => 'What is your name',
             ]);
+
             return $parser;
         }
 

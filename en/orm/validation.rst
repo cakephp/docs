@@ -112,6 +112,7 @@ used. An example validator for our articles table would be::
             $validator
                 ->notEmptyString('title', __('You need to provide a title'))
                 ->notEmptyString('body', __('A body is required'));
+
             return $validator;
         }
     }
@@ -173,6 +174,7 @@ construction process into multiple reusable steps::
         $validator = $this->validationDefault($validator);
 
         $validator->add('password', 'length', ['rule' => ['lengthBetween', 8, 100]]);
+
         return $validator;
     }
 
@@ -207,6 +209,7 @@ a validation rule::
                     'message' => __('You need to provide a valid role'),
                     'provider' => 'table',
                 ]);
+
             return $validator;
         }
 
@@ -224,6 +227,7 @@ You can also use closures for validation rules::
             if ($value > 1) {
                 return true;
             }
+
             return 'Not a good value.';
         }
     ]);
@@ -543,6 +547,7 @@ You may want to re-use custom domain rules. You can do so by creating your own i
             'errorField' => 'name',
             'message' => 'Name must be unique per parent.',
         ]);
+
         return $rules;
     }
 

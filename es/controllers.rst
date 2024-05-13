@@ -407,6 +407,7 @@ Puedes redigir usando los valores de un array ordenado::
 O usando una URL relativa o absoluta::
 
     return $this->redirect('/orders/confirm');
+
     return $this->redirect('http://www.example.com');
 
 O la referencia de la página::

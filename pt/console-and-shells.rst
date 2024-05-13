@@ -516,6 +516,7 @@ série de chamadas de métodos::
             'short' => 'm',
             'help' => __('The specific method you want help on.')
         ])->description(__('Lookup doc block comments for classes in CakePHP.'));
+
         return $parser;
     }
 

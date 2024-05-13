@@ -428,6 +428,7 @@ Composer を使って Monolog をインストールしたら、
     Log::setConfig('default', function () {
         $log = new Logger('app');
         $log->pushHandler(new StreamHandler('path/to/your/combined.log'));
+
         return $log;
     });
 
@@ -445,6 +446,7 @@ Composer を使って Monolog をインストールしたら、
     Log::setConfig('default', function () {
         $log = new Logger('cli');
         $log->pushHandler(new StreamHandler('path/to/your/combined-cli.log'));
+
         return $log;
     });
 
