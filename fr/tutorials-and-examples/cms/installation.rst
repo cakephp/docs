@@ -45,7 +45,7 @@ d'application CakePHP dans le dossier **cms** du dossier courant:
 
 .. code-block:: console
 
-    php composer.phar create-project --prefer-dist cakephp/app:4.* cms
+    php composer.phar create-project --prefer-dist cakephp/app:5.* cms
 
 Si vous avez téléchargé et utilisé `l'Installer de Composer pour Windows
 <https://getcomposer.org/Composer-Setup.exe>`_, tapez la commande suivante dans
