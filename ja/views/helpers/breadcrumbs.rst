@@ -176,6 +176,7 @@ BreadcrumbsHelper は内部で ``StringTemplateTrait`` を使用しています�
     $crumbs = $this->Breadcrumbs->getCrumbs();
     $crumbs = collection($crumbs)->map(function ($crumb) {
         $crumb['options']['class'] = 'breadcrumb-item';
+
         return $crumb;
     })->toArray();
 

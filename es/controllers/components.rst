@@ -133,6 +133,7 @@ puedes acceder a él de esta forma::
         {
             if ($this->Post->delete($this->request->getData('Post.id')) {
                 $this->Flash->success('Post deleted.');
+
                 return $this->redirect(['action' => 'index']);
             }
         }
@@ -313,6 +314,7 @@ puedes usar lo siguiente::
     public function beforeFilter(EventInterface $event)
     {
         $event->stopPropagation();
+
         return $this->getController()->redirect('/');
     }
 

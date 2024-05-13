@@ -343,6 +343,7 @@ match-allビューは、content-typeのネゴシエーションが試みられ�
                 ['controller' => 'Orders', 'action' => 'thanks']
             );
         }
+
         return $this->redirect(
             ['controller' => 'Orders', 'action' => 'confirm']
         );
@@ -355,6 +356,7 @@ match-allビューは、content-typeのネゴシエーションが試みられ�
 $url 引数に相対 URL または絶対 URL を指定することもできます。 ::
 
     return $this->redirect('/orders/thanks');
+
     return $this->redirect('http://www.example.com');
 
 アクションにデータを渡すこともできます。 ::

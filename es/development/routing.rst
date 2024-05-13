@@ -1711,6 +1711,7 @@ Los filtros de URL te permiten implementar funciones como parámetros persistent
         if ($request->getParam('lang') && !isset($params['lang'])) {
             $params['lang'] = $request->getParam('lang');
         }
+
         return $params;
     });
 
@@ -1729,6 +1730,7 @@ Otro caso de uso es cambiar una determinada ruta en tiempo de ejecución
             $params['language'] = $params[0];
             unset($params[0]);
         }
+
         return $params;
     });
 

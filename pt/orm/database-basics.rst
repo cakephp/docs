@@ -443,6 +443,7 @@ poderíamos fazer a seguinte classe de tipo::
             if ($value === null) {
                 return null;
             }
+
             return json_decode($value, true);
         }
 
@@ -451,6 +452,7 @@ poderíamos fazer a seguinte classe de tipo::
             if (is_array($value) || $value === null) {
                 return $value;
             }
+
             return json_decode($value, true);
         }
 
@@ -464,6 +466,7 @@ poderíamos fazer a seguinte classe de tipo::
             if ($value === null) {
                 return PDO::PARAM_NULL;
             }
+
             return PDO::PARAM_STR;
         }
 
@@ -575,6 +578,7 @@ mapear dados nesse objeto de valor e em expressões SQL::
             if (is_array($value)) {
                 return new Point($value[0], $value[1]);
             }
+
             return null;
         }
 

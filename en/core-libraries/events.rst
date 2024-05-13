@@ -65,8 +65,10 @@ has been created. To keep your Orders model clean you could use events::
                     'order' => $order
                 ]);
                 $this->getEventManager()->dispatch($event);
+
                 return true;
             }
+
             return false;
         }
     }
@@ -456,6 +458,7 @@ directly or returning the value in the callback itself::
     {
         // ...
         $alteredData = $event->getData('order') + $moreData;
+
         return $alteredData;
     }
 

@@ -81,6 +81,7 @@ CakePHP にバンドルされているコード生成ユーティリティを利
                 $user = $this->Users->patchEntity($user, $this->request->getData());
                 if ($this->Users->save($user)) {
                     $this->Flash->success(__('The user has been saved.'));
+
                     return $this->redirect(['action' => 'add']);
                 }
                 $this->Flash->error(__('Unable to add the user.'));
@@ -342,6 +343,7 @@ composerを使ってAuthenticationプラグインをインストールします�
         // POSTやGETに関係なく、ユーザーがログインしていればリダイレクトします
         if ($result->isValid()) {
             $this->Authentication->logout();
+
             return $this->redirect(['controller' => 'Users', 'action' => 'login']);
         }
     }

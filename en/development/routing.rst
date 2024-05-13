@@ -1683,6 +1683,7 @@ URL filters allow you to implement features like persistent parameters::
         if ($request->getParam('lang') && !isset($params['lang'])) {
             $params['lang'] = $request->getParam('lang');
         }
+
         return $params;
     });
 
@@ -1701,6 +1702,7 @@ example)::
             $params['language'] = $params[0];
             unset($params[0]);
         }
+
         return $params;
     });
 
