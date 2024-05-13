@@ -284,7 +284,7 @@ Plugin オブジェクト
 
 Plugin オブジェクトを使用すると、プラグイン作成者は設定ロジックを定義し、
 デフォルトのフックを定義し、ルート、ミドルウェア、およびコンソールコマンドをロードできます。
-Plugin オブジェクトは、 **src/Plugin.php** にあります。
+Plugin オブジェクトは、 **src/{PluginName}Plugin.php** にあります。
 ContactManager プラグイン の場合、 plugin クラスは、次のようになります。 ::
 
     namespace ContactManager;
