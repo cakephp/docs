@@ -417,6 +417,7 @@ You can redirect using :term:`routing array` values::
 Or using a relative or absolute URL::
 
     return $this->redirect('/orders/confirm');
+
     return $this->redirect('http://www.example.com');
 
 Or to the referer page::

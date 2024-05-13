@@ -76,8 +76,10 @@ garder votre model Orders propre, vous pouvez utiliser les événements::
                     'order' => $order
                 ]);
                 $this->getEventManager()->dispatch($event);
+
                 return true;
             }
+
             return false;
         }
     }
@@ -493,6 +495,7 @@ callback elle-même::
     {
         // ...
         $alteredData = $event->getData('order') + $moreData;
+
         return $alteredData;
     }
 

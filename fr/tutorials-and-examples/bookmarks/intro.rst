@@ -272,6 +272,7 @@ dans une de vos entities. Ajoutons un setter pour le mot de passe. Dans
         protected function _setPassword($value)
         {
             $hasher = new DefaultPasswordHasher();
+
             return $hasher->hash($value);
         }
     }

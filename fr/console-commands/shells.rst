@@ -152,6 +152,7 @@ Also, the task name must be added as a sub-command to the Shell's OptionParser::
             // Link the option parsers together.
             'parser' => $this->Sound->getOptionParser(),
         ]);
+
         return $parser;
     }
 

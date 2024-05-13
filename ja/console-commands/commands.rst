@@ -62,6 +62,7 @@ CakePHP には、開発のスピードアップと日常的なタスクの自動
             $parser->addArgument('name', [
                 'help' => 'What is your name'
             ]);
+
             return $parser;
         }
 

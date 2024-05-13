@@ -400,6 +400,7 @@ les articles d'un certain auteur, nous ferions ceci::
         public function findEcritPar(Query $query, array $options)
         {
             $user = $options['user'];
+
             return $query->where(['author_id' => $user->id]);
         }
 
@@ -1050,6 +1051,7 @@ exécutant::
         if (!in_array($value, $output)) {
             $output[] = $value;
         }
+
         return $output;
     };
 
@@ -1340,6 +1342,7 @@ comme décrit dans la section :ref:`custom-find-methods`::
         // Comme dans l'exemple précédent sur la fréquence des mots
         $mapper = ...;
         $reducer = ...;
+
         return $query->mapReduce($mapper, $reducer);
     }
 

@@ -203,6 +203,7 @@ to be created. Start by creating an ``add()`` action in the
 
                 if ($this->Articles->save($article)) {
                     $this->Flash->success(__('Your article has been saved.'));
+
                     return $this->redirect(['action' => 'index']);
                 }
                 $this->Flash->error(__('Unable to add your article.'));
@@ -347,6 +348,7 @@ now. Add the following action to your ``ArticlesController``::
             $this->Articles->patchEntity($article, $this->request->getData());
             if ($this->Articles->save($article)) {
                 $this->Flash->success(__('Your article has been updated.'));
+
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('Unable to update your article.'));
@@ -479,6 +481,7 @@ Next, let's make a way for users to delete articles. Start with a
         $article = $this->Articles->findBySlug($slug)->firstOrFail();
         if ($this->Articles->delete($article)) {
             $this->Flash->success(__('The {0} article has been deleted.', $article->title));
+
             return $this->redirect(['action' => 'index']);
         }
     }

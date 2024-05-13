@@ -195,6 +195,7 @@ de l'évènement dans votre callback::
     {
         if (...) {
             $event->stopPropagation();
+
             return;
         }
         $this->slug($entity);

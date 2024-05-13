@@ -95,6 +95,7 @@ de código que están incluidas en CakePHP::
                 $user = $this->Users->patchEntity($user, $this->request->getData());
                 if ($this->Users->save($user)) {
                     $this->Flash->success(__('The user has been saved.'));
+
                     return $this->redirect(['action' => 'add']);
                 }
                 $this->Flash->error(__('Unable to add the user.'));
@@ -361,6 +362,7 @@ Añade la acción ``logout`` a la clase ``UsersController``::
         // sin importar si es POST o GET, redirige si el usuario esta autenticado
         if ($result->isValid()) {
             $this->Authentication->logout();
+
             return $this->redirect(['controller' => 'Users', 'action' => 'login']);
         }
     }

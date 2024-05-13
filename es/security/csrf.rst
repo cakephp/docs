@@ -36,6 +36,7 @@ La protección CSRF se puede aplicar a toda tu aplicación o a ámbitos de enrut
         $csrf = new SessionCsrfProtectionMiddleware($opciones);
 
         $middlewareQueue->add($csrf);
+
         return $middlewareQueue;
     }
 

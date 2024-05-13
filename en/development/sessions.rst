@@ -297,6 +297,7 @@ something like::
             if ($result) {
                 return $result;
             }
+
             return parent::read($id);
         }
 
@@ -304,6 +305,7 @@ something like::
         public function write($id, $data): bool
         {
             Cache::write($id, $data, $this->cacheKey);
+
             return parent::write($id, $data);
         }
 
@@ -311,6 +313,7 @@ something like::
         public function destroy($id): bool
         {
             Cache::delete($id, $this->cacheKey);
+
             return parent::destroy($id);
         }
 

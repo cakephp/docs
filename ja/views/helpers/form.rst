@@ -2540,6 +2540,7 @@ autocomplete ウィジェットを作成したい場合、以下を実行でき�
             $data += [
                 'name' => '',
             ];
+
             return $this->_templates->format('autocomplete', [
                 'name' => $data['name'],
                 'attrs' => $this->_templates->formatAttributes($data, ['name'])

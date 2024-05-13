@@ -947,6 +947,7 @@ extract a list of unique tags on a collection of articles by running::
         if (!in_array($value, $output)) {
             $output[] = $value;
         }
+
         return $output;
     };
 
@@ -1232,6 +1233,7 @@ This is particularly useful for building custom finder methods as described in t
         // Same as in the common words example in the previous section
         $mapper = ...;
         $reducer = ...;
+
         return $query->mapReduce($mapper, $reducer);
     }
 

@@ -85,6 +85,7 @@ articles. First, update the ``add`` action to look like::
 
                 if ($this->Articles->save($article)) {
                     $this->Flash->success(__('Your article has been saved.'));
+
                     return $this->redirect(['action' => 'index']);
                 }
                 $this->Flash->error(__('Unable to add your article.'));
@@ -125,6 +126,7 @@ edit method should now look like::
             $this->Articles->patchEntity($article, $this->request->getData());
             if ($this->Articles->save($article)) {
                 $this->Flash->success(__('Your article has been updated.'));
+
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('Unable to update your article.'));
@@ -351,6 +353,7 @@ can add a virtual/computed field to the entity. In
         $str = $tags->reduce(function ($string, $tag) {
             return $string . $tag->title . ', ';
         }, '');
+
         return trim($str, ', ');
     }
 
@@ -437,6 +440,7 @@ to **src/Model/Table/ArticlesTable.php**::
         foreach ($newTags as $tag) {
             $out[] = $this->Tags->newEntity(['title' => $tag]);
         }
+
         return $out;
     }
 

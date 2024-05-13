@@ -363,6 +363,7 @@ vous pouvez rediriger en utilisant les valeurs du :term:`tableau de routing`::
 Ou utiliser une URL relative ou absolue::
 
     return $this->redirect('/orders/confirm');
+
     return $this->redirect('http://www.example.com');
 
 Ou rediriger vers l'URL appelante (referer)::

@@ -288,6 +288,7 @@ Ajoutez l'action de logout à la classe ``UsersController``::
         // indépendamment de POST ou GET, rediriger si l'utilisateur est connecté
         if ($result && $result->isValid()) {
             $this->Authentication->logout();
+
             return $this->redirect(['controller' => 'Users', 'action' => 'login']);
         }
     }

@@ -503,6 +503,7 @@ type JSON, nous pourrions créer la classe de type suivante::
             if ($value === null) {
                 return null;
             }
+
             return json_decode($value, true);
         }
 
@@ -511,6 +512,7 @@ type JSON, nous pourrions créer la classe de type suivante::
             if (is_array($value) || $value === null) {
                 return $value;
             }
+
             return json_decode($value, true);
         }
 
@@ -524,6 +526,7 @@ type JSON, nous pourrions créer la classe de type suivante::
             if ($value === null) {
                 return PDO::PARAM_NULL;
             }
+
             return PDO::PARAM_STR;
         }
 
@@ -609,6 +612,7 @@ spécifique::
             if (isset($data['null') && $data['null'] === false) {
                 $sql .= ' NOT NULL';
             }
+
             return $sql;
         }
 
@@ -714,6 +718,7 @@ faire correspondre les données dans cet objet et les expressions SQL::
             if (is_array($value)) {
                 return new Point($value[0], $value[1]);
             }
+
             return null;
         }
 
