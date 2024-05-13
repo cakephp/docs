@@ -251,6 +251,7 @@ A classe deve se parecer com::
             if ($result) {
                 return $result;
             }
+
             return parent::read($id);
         }
 

@@ -572,6 +572,7 @@ CakePHP はフォーマッタ関数が適切なスコープになるよう保証
         return $q->formatResults(function (\Cake\Collection\CollectionInterface $authors) {
             return $authors->map(function ($author) {
                 $author['age'] = $author['birth_date']->diff(new \DateTime)->y;
+
                 return $author;
             });
         });

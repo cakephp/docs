@@ -303,6 +303,7 @@ caso de falha. ::
         if (empty($username) || empty($pass)) {
             return false;
         }
+
         return $this->_findUser($username, $pass);
     }
 
@@ -370,6 +371,7 @@ do CakePHP::
                 // possa verificá-lo durante o login.
                 $entity->api_key = $hasher->hash($entity->api_key_plain);
             }
+
             return true;
         }
     }
@@ -695,6 +697,7 @@ a função de login de acordo::
                     $user->password = $this->request->getData('password');
                     $this->Users->save($user);
                 }
+
                 return $this->redirect($this->Auth->redirectUrl());
             }
             ...

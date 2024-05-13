@@ -262,6 +262,7 @@ categories の index テンプレートファイルでは、categories を一覧
             } else {
                 $this->Flash->error('The category could not be moved up. Please, try again.');
             }
+
             return $this->redirect($this->referer(['action' => 'index']));
         }
 
@@ -274,6 +275,7 @@ categories の index テンプレートファイルでは、categories を一覧
             } else {
                 $this->Flash->error('The category could not be moved down. Please, try again.');
             }
+
             return $this->redirect($this->referer(['action' => 'index']));
         }
     }

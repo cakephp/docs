@@ -63,8 +63,10 @@ CakePHP は、jQuery などの一般的な JavaScript フレームワークに�
                     'order' => $order
                 ]);
                 $this->getEventManager()->dispatch($event);
+
                 return true;
             }
+
             return false;
         }
     }

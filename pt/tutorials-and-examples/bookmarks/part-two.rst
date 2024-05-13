@@ -202,6 +202,7 @@ para os bookmarks. Em seu ``BookmarksController`` adicione o seguinte::
         if ($bookmark->user_id == $user['id']) {
             return true;
         }
+
         return parent::isAuthorized($user);
     }
 
@@ -389,6 +390,7 @@ entidades relacionadas. Adicione o seguinte em
         foreach ($new as $tag) {
             $out[] = $this->Tags->newEntity(['title' => $tag]);
         }
+
         return $out;
     }
 

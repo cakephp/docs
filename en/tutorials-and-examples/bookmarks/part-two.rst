@@ -202,6 +202,7 @@ sense. First, we'll add the authorization logic for bookmarks. In your
         if ($bookmark->user_id == $user['id']) {
             return true;
         }
+
         return parent::isAuthorized($user);
     }
 
@@ -396,6 +397,7 @@ to **src/Model/Table/BookmarksTable.php**::
         foreach ($newTags as $tag) {
             $out[] = $this->Tags->newEntity(['title' => $tag]);
         }
+
         return $out;
     }
 

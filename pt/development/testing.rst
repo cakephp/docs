@@ -1712,6 +1712,7 @@ Expandindo no exemplo Orders, digamos que temos as seguintes tabelas::
 
                 return true;
             }
+
             return false;
         }
     }

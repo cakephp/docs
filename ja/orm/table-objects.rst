@@ -344,6 +344,7 @@ Stopping Table Events
         if (...) {
             $event->stopPropagation();
             $event->setResult(false);
+
             return;
         }
         ...

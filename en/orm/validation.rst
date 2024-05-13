@@ -227,6 +227,7 @@ You can also use closures for validation rules::
             if ($value > 1) {
                 return true;
             }
+
             return 'Not a good value.';
         }
     ]);

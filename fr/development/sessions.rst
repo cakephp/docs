@@ -280,6 +280,7 @@ devrait ressembler à::
             if ($result) {
                 return $result;
             }
+
             return parent::read($id);
         }
 

@@ -258,6 +258,7 @@ IO をもたらします。
             if ($result) {
                 return $result;
             }
+
             return parent::read($id);
         }
 

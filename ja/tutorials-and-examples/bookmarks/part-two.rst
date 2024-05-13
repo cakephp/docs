@@ -200,6 +200,7 @@ AppController に追加しましょう。 ::
         if ($bookmark->user_id == $user['id']) {
             return true;
         }
+
         return parent::isAuthorized($user);
     }
 
@@ -389,6 +390,7 @@ AppController に追加しましょう。 ::
         foreach ($newTags as $tag) {
             $out[] = $this->Tags->newEntity(['title' => $tag]);
         }
+
         return $out;
     }
 

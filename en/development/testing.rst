@@ -1926,6 +1926,7 @@ Expanding on the Orders example, say we have the following tables::
 
                 return true;
             }
+
             return false;
         }
     }

@@ -921,6 +921,7 @@ serialize が簡単にできるだけでなく、結果セットは 'Collection'
         if (!in_array($value, $output)) {
             $output[] = $value;
         }
+
         return $output;
     };
 

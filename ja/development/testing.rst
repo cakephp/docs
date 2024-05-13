@@ -1769,8 +1769,10 @@ Orders を例に詳しく説明します。以下のテーブルを持ってい�
                     'order' => $order
                 ]);
                 $this->getEventManager()->dispatch($event);
+
                 return true;
             }
+
             return false;
         }
     }

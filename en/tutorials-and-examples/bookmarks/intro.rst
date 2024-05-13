@@ -414,6 +414,7 @@ method has not been implemented yet, so let's do that. In
                 ->where(['Tags.title IN ' => $options['tags']])
                 ->group(['Bookmarks.id']);
         }
+
         return $query;
     }
 

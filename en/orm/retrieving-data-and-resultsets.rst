@@ -1000,6 +1000,7 @@ extract a list of unique tags on a collection of articles by running::
         if (!in_array($value, $output)) {
             $output[] = $value;
         }
+
         return $output;
     };
 

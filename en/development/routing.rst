@@ -1102,17 +1102,17 @@ Would create read only resource routes. The route names are ``create``,
 The default **route name and controller action used** are as follows:
 
 =========== =======================
-Route name  Controller action used    
+Route name  Controller action used
 =========== =======================
-create      add      
+create      add
 ----------- -----------------------
-update      edit  
+update      edit
 ----------- -----------------------
-view        view      
+view        view
 ----------- -----------------------
-index       index  
+index       index
 ----------- -----------------------
-delete      delete  
+delete      delete
 =========== =======================
 
 
@@ -1679,6 +1679,7 @@ URL filters allow you to implement features like persistent parameters::
         if ($request->getParam('lang') && !isset($params['lang'])) {
             $params['lang'] = $request->getParam('lang');
         }
+
         return $params;
     });
 
@@ -1697,6 +1698,7 @@ example)::
             $params['language'] = $params[0];
             unset($params[0]);
         }
+
         return $params;
     });
 

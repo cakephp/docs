@@ -225,6 +225,7 @@ En tu ``BookmarksController`` añade lo siguiente::
         if ($bookmark->user_id == $user['id']) {
             return true;
         }
+
         return parent::isAuthorized($user);
     }
 
@@ -433,6 +434,7 @@ Añade el siguiente código a **src/Model/Table/BookmarksTable.php**::
         foreach ($newTags as $tag) {
             $out[] = $this->Tags->newEntity(['title' => $tag]);
         }
+
         return $out;
     }
 

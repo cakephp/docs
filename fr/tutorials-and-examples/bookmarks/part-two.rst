@@ -214,6 +214,7 @@ les bookmarks. Dans notre ``BookmarksController``, ajoutez ce qui suit::
         if ($bookmark->user_id == $user['id']) {
             return true;
         }
+
         return parent::isAuthorized($user);
     }
 
@@ -415,6 +416,7 @@ chaîne de tag et trouver/construire les entities liées. Ajoutez ce qui suit da
         foreach ($newTags as $tag) {
             $out[] = $this->Tags->newEntity(['title' => $tag]);
         }
+
         return $out;
     }
 

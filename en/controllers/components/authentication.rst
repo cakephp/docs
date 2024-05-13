@@ -316,6 +316,7 @@ an array of user information on the success or ``false`` on failure. ::
         if (empty($username) || empty($pass)) {
             return false;
         }
+
         return $this->_findUser($username, $pass);
     }
 
@@ -382,6 +383,7 @@ generate these API tokens randomly using libraries from CakePHP::
                 // it during login.
                 $entity->api_key = $hasher->hash($entity->api_key_plain);
             }
+
             return true;
         }
     }
@@ -699,6 +701,7 @@ function accordingly::
                     $user->password = $this->request->getData('password');
                     $this->Users->save($user);
                 }
+
                 return $this->redirect($this->Auth->redirectUrl());
             }
             ...

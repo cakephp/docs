@@ -69,6 +69,7 @@ has been created. To keep your Orders model clean you could use events::
 
                 return true;
             }
+
             return false;
         }
     }

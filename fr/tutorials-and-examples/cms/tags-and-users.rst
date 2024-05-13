@@ -454,6 +454,7 @@ trouver/construire les entities correspondantes. Ajoutez le code suivant à
         foreach ($newTags as $tag) {
             $out[] = $this->Tags->newEntity(['title' => $tag]);
         }
+
         return $out;
     }
 

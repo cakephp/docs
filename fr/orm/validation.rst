@@ -240,6 +240,7 @@ Vous pouvez également utiliser des closures en tant que règles de validation::
             if ($value > 1) {
                 return true;
             }
+
             return 'Valeur incorrecte.';
         }
     ]);

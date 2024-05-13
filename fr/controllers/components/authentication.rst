@@ -341,6 +341,7 @@ en cas d'échec::
         if (empty($username) || empty($pass)) {
             return false;
         }
+
         return $this->_findUser($username, $pass);
     }
 
@@ -411,6 +412,7 @@ de façon aléatoire ces tokens d'API en utilisant les libraries de CakePHP::
                 // it during login.
                 $entity->api_key = $hasher->hash($entity->api_key_plain);
             }
+
             return true;
         }
     }
@@ -750,6 +752,7 @@ pouvez changer la fonction login selon::
                     $user->password = $this->request->getData('password');
                     $this->Users->save($user);
                 }
+
                 return $this->redirect($this->Auth->redirectUrl());
             }
             ...

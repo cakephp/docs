@@ -491,6 +491,7 @@ class::
             if ($value === null) {
                 return null;
             }
+
             return json_decode($value, true);
         }
 
@@ -499,6 +500,7 @@ class::
             if (is_array($value) || $value === null) {
                 return $value;
             }
+
             return json_decode($value, true);
         }
 
@@ -512,6 +514,7 @@ class::
             if ($value === null) {
                 return PDO::PARAM_NULL;
             }
+
             return PDO::PARAM_STR;
         }
     }
@@ -586,6 +589,7 @@ used::
             if (isset($data['null') && $data['null'] === false) {
                 $sql .= ' NOT NULL';
             }
+
             return $sql;
         }
 
@@ -693,6 +697,7 @@ value object and into SQL expressions::
             if (is_array($value)) {
                 return new Point($value[0], $value[1]);
             }
+
             return null;
         }
 

@@ -1286,6 +1286,7 @@ Os filtros de URL permitem implementar recursos como parâmetros persistentes::
         if ($request->getParam('lang') && !isset($params['lang'])) {
             $params['lang'] = $request->getParam('lang');
         }
+
         return $params;
     });
 
@@ -1303,6 +1304,7 @@ Outro caso de uso está mudando uma determinada rota no tempo de execução (rot
             $params['language'] = $params[0];
             unset($params[0]);
         }
+
         return $params;
     });
 

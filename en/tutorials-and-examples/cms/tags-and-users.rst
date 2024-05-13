@@ -444,6 +444,7 @@ to **src/Model/Table/ArticlesTable.php**::
         foreach ($newTags as $tag) {
             $out[] = $this->Tags->newEntity(['title' => $tag]);
         }
+
         return $out;
     }
 

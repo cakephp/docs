@@ -1051,6 +1051,7 @@ exécutant::
         if (!in_array($value, $output)) {
             $output[] = $value;
         }
+
         return $output;
     };
 

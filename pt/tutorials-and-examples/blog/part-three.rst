@@ -267,6 +267,7 @@ moveUp() e moveDown() para ser capaz de reordenar as categorias na árvore:
             } else {
                 $this->Flash->error('The category could not be moved up. Please, try again.');
             }
+
             return $this->redirect($this->referer(['action' => 'index']));
         }
 
@@ -279,6 +280,7 @@ moveUp() e moveDown() para ser capaz de reordenar as categorias na árvore:
             } else {
                 $this->Flash->error('The category could not be moved down. Please, try again.');
             }
+
             return $this->redirect($this->referer(['action' => 'index']));
         }
     }

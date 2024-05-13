@@ -277,6 +277,7 @@ catégories dans l'arbre::
             } else {
                 $this->Flash->error("La catégorie n'a pas pu être remontée. Veuillez réessayer.");
             }
+
             return $this->redirect($this->referer(['action' => 'index']));
         }
 
@@ -289,6 +290,7 @@ catégories dans l'arbre::
             } else {
                 $this->Flash->error("La catégorie n'a pas pu être descendue. Veuillez réessayer.");
             }
+
             return $this->redirect($this->referer(['action' => 'index']));
         }
     }
