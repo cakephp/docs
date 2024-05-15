@@ -100,6 +100,7 @@ La façon la plus simple est d'appeler les méthodes ``all()`` ou ``toArray()``:
     $resultsArray = $articles
         ->find()
         ->where(['id >' => 1])
+        ->all()
         ->toList();
 
     foreach ($resultsArray as $article) {

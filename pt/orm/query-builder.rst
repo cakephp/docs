@@ -103,6 +103,7 @@ A maneira mais fácil é chamar os métodos ``all()`` ou ``toList()``::
     $resultsArray = $articles
         ->find()
         ->where(['id >' => 1])
+        ->all()
         ->toList();
 
     foreach ($resultsArray as $article) {

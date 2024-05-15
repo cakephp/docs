@@ -94,6 +94,7 @@ SQL が出力されます。 ::
     $resultsArray = $articles
         ->find()
         ->where(['id >' => 1])
+        ->all()
         ->toList();
 
     foreach ($resultsArray as $article) {
