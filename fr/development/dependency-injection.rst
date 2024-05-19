@@ -157,7 +157,7 @@ comme 'partagé'::
 
     // dans votre méthode Application::services()
 
-    $container->share(BillingService::class);
+    $container->addShared(BillingService::class);
 
 Étendre des Définitions
 -----------------------
@@ -197,7 +197,7 @@ injectable::
     use Cake\Core\ServiceConfig;
 
     // Utilisez une instance partagée
-    $container->share(ServiceConfig::class);
+    $container->addShared(ServiceConfig::class);
 
 La classe ``ServiceConfig`` fournit une vue en lecture seule de toutes les
 données disponibles dans ``Configure``, ainsi vous n'avez pas à vous soucier
