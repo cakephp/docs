@@ -148,6 +148,19 @@ progress bar as necessary::
     $progress->increment(4);
     $progress->draw();
 
+Banner Helper
+-------------
+
+The ``BannerHelper`` can be used to format one or more lines of text into
+a banner with a background and horizontal padding::
+
+    $io->helper('Banner')
+        ->withPadding(5)
+        ->withStyle('success.bg')
+        ->output(['Work complete']);
+
+.. versionadded:: 5.1.0
+   The ``BannerHelper`` was added in 5.1
 
 Getting User Input
 ==================
@@ -300,6 +313,10 @@ are several built-in styles, and you can create more. The built-in ones are
 * ``info`` Informational messages. Cyan text.
 * ``comment`` Additional text. Blue text.
 * ``question`` Text that is a question, added automatically by shell.
+* ``info.bg`` White background with cyan text.
+* ``warning.bg`` Yellow background with black text.
+* ``error.bg`` Red background with black text.
+* ``success.bg`` Green background with black text.
 
 You can create additional styles using ``$io->setStyle()``. To declare a
 new output style you could do::
@@ -331,6 +348,9 @@ truthy value enables them.
 
 Adding a style makes it available on all instances of ConsoleOutput as well,
 so you don't have to redeclare styles for both stdout and stderr objects.
+
+.. versionchanged:: 5.1.0
+    The ``info.bg``, ``warning.bg``, ``error.bg``, and ``success.bg`` were added.
 
 Turning Off Coloring
 ====================

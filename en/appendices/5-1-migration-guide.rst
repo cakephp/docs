@@ -52,6 +52,10 @@ Command
 - ``bin/cake plugin list`` has been added to list all available plugins,
   their load configuration and version.
 - Optional ``Command`` arguments can now have a ``default`` value.
+- ``BannerHelper`` was added. This command helper can format text as a banner
+  with a coloured background and padding.
+- Additional default styles for ``info.bg``, ``warning.bg``, ``error.bg`` and
+  ``success.bg`` were added to ``ConsoleOutput``.
 
 Console
 -------
