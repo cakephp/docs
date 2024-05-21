@@ -125,7 +125,7 @@ CakePHPはコントローラーでアクションを呼ぶ際サービスコン�
 
     // あなたのApplication::services()メソッド内で
 
-    $container->share(BillingService::class);
+    $container->addShared(BillingService::class);
 
 定義の拡張
 ---------------------
@@ -163,7 +163,7 @@ CakePHPはコントローラーでアクションを呼ぶ際サービスコン�
     use Cake\Core\ServiceConfig;
 
     // シェアされたインスタンスを使用する
-    $container->share(ServiceConfig::class);
+    $container->addShared(ServiceConfig::class);
 
 ``ServiceConfig`` クラスは ``Configure`` で利用可能な全データのread-onlyな一覧を提供します。
 なので、誤って設定が変わる心配はありません。
