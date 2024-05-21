@@ -1,15 +1,15 @@
 ---
-name: 'deploy_5.x'
+name: 'deploy_5.next'
 
 on:
   push:
     branches:
-      - 5.x
+      - 5.next
   workflow_dispatch:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: ${{ github.ref != 'refs/heads/5.x' }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/5.next' }}
 
 jobs:
   deploy:
@@ -23,6 +23,6 @@ jobs:
       - name: Push to dokku
         uses: dokku/github-action@master
         with:
-          git_remote_url: 'ssh://dokku@apps.cakephp.org:22/book-5'
+          git_remote_url: 'ssh://dokku@apps.cakephp.org:22/book-5next'
           git_push_flags: '-f'
           ssh_private_key: ${{ secrets.DOKKU_SSH_PRIVATE_KEY }}
