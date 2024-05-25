@@ -138,7 +138,7 @@ value::
     $article->isEmpty('title');  // false
     $article->hasValue('title'); // true
 
-    $article->has('user_id'); // false
+    $article->has('user_id'); // true
     $article->isEmpty('user_id');  // true
     $article->hasValue('user_id'); // false
 
