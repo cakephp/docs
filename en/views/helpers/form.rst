@@ -2018,12 +2018,12 @@ Closing the Form
 
 * ``$secureAttributes`` - Optional. Allows you to provide secure attributes
   which will be passed as HTML attributes into the hidden input elements
-  generated for the SecurityComponent.
+  generated for the FormProtectionComponent.
 
 The ``end()`` method closes and completes a form. Often, ``end()`` will only
 output a closing form tag, but using ``end()`` is a good practice as it
 enables FormHelper to insert the hidden form elements that
-:php:class:`Cake\\Controller\\Component\\SecurityComponent` requires:
+:php:class:`Cake\\Controller\\Component\\FormProtection` requires:
 
 .. code-block:: php
 
