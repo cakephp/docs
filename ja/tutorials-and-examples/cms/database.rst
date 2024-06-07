@@ -77,8 +77,8 @@ CMS チュートリアル - データベース作成
         // 上には他の設定があります
         'Datasources' => [
             'default' => [
-                'className' => 'Cake\Database\Connection',
-                'driver' => 'Cake\Database\Driver\Mysql',
+                'className' => Connection::class,
+                'driver' => Mysql::class,
                 'persistent' => false,
                 'host' => 'localhost',
                 'username' => 'cakephp',
