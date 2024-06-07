@@ -37,9 +37,9 @@ CMS チュートリアル - Articles コントローラーの作成
         }
     }
 
-``ArticlesController`` の ``index()`` 関数を定義することで、ユーザーは、
+``ArticlesController`` の ``index()`` メソッドを定義することで、ユーザーは、
 **www.example.com/articles/index** をリクエストすることで、そこにあるロジックに
-アクセスできるようになります。同様に、 ``foobar()`` という関数を定義した場合、
+アクセスできるようになります。同様に、 ``foobar()`` というメソッドを定義した場合、
 ユーザーはそのメソッドに **www.example.com/articles/foobar** で、アクセスできます。
 特定の URL を取得できるように、コントローラーとアクションの名前を付けたいという
 誘惑に駆られるかもしれません。その誘惑に抗ってください。代わりに、 :doc:`/intro/conventions`
