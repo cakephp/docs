@@ -539,7 +539,7 @@ Il est aussi possible de trier une colonne basée sur des associations:
            <?php foreach ($recipes as $recipe): ?>
         <tr>
             <td><?= h($recipe->title) ?> </td>
-            <td><?= h($recipe->name) ?> </td>
+            <td><?= h($recipe->author->name) ?> </td>
         </tr>
         <?php endforeach; ?>
     </table>

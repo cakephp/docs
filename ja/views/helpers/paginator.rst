@@ -493,7 +493,7 @@ PaginatorHelperのすべてのオプションを設定します。サポート�
            <?php foreach ($recipes as $recipe): ?>
         <tr>
             <td><?= h($recipe->title) ?> </td>
-            <td><?= h($recipe->name) ?> </td>
+            <td><?= h($recipe->author->name) ?> </td>
         </tr>
         <?php endforeach; ?>
     </table>
@@ -503,16 +503,16 @@ PaginatorHelperのすべてのオプションを設定します。サポート�
     関連するモデルでカラムをソートするには、 ``PaginationComponent::paginate``
     プロパティーで設定する必要があります。上記の例を使用すると、
     ページ制御を処理するコントローラーは、次のように ``sortWhitelist`` キーを設定する必要があります。
-    
+
     .. code-block:: php
-    
+
         $this->paginate = [
             'sortWhitelist' => [
                 'Posts.title',
                 'Authors.name',
             ],
         ];
-        
+
     ``sortWhitelist`` オプションの使い方の詳細については、
     :ref:`control-which-fields-used-for-ordering` をご覧ください。
 
