@@ -851,7 +851,7 @@ subdominio::
 
         // Esta ruta sólo coincide en http://*.example.com
         $routes->connect(
-            '/images/old-log.png',
+            '/images/old-logo.png',
             ['controller' => 'Images', 'action' => 'oldLogo']
         )->setHost('*.example.com');
     });
@@ -863,7 +863,7 @@ generada. Sin embargo, si utilizas un comodín, tendrás que indicar el parámet
 
     // Si tienes esta ruta
     $routes->connect(
-        '/images/old-log.png',
+        '/images/old-logo.png',
         ['controller' => 'Images', 'action' => 'oldLogo']
     )->setHost('images.example.com');
 

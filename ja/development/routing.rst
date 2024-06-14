@@ -781,7 +781,7 @@ SEO に親和性があるルーティング
 
         // このルートは http://*.example.com のみマッチします。
         $routes->connect(
-            '/images/old-log.png',
+            '/images/old-logo.png',
             ['controller' => 'Images', 'action' => 'oldLogo']
         )->setHost('*.example.com');
     });
@@ -792,7 +792,7 @@ SEO に親和性があるルーティング
 
     // このルートを持つ場合、
     $routes->connect(
-        '/images/old-log.png',
+        '/images/old-logo.png',
         ['controller' => 'Images', 'action' => 'oldLogo']
     )->setHost('images.example.com');
 

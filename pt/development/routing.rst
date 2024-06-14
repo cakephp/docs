@@ -699,7 +699,7 @@ pode usar o curinga ``*.`` para corresponder a qualquer subdomínio::
 
         // Esta rota corresponde apenas a http://*.example.com
         $routes->connect(
-            '/images/old-log.png',
+            '/images/old-logo.png',
             ['controller' => 'Images', 'action' => 'oldLogo']
         )->setHost('*.example.com');
     });
@@ -710,7 +710,7 @@ curinga, precisará fornecer o parâmetro ``_host`` ao gerar URLs::
 
     // Se você tem esta rota
     $routes->connect(
-        '/images/old-log.png',
+        '/images/old-logo.png',
         ['controller' => 'Images', 'action' => 'oldLogo']
     )->setHost('images.example.com');
 
