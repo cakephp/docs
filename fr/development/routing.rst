@@ -887,7 +887,7 @@ n'importe quelle sous-domaine::
 
         // Cette route matchera sur tous les sous-domaines http://*.example.com
         $routes->connect(
-            '/images/old-log.png',
+            '/images/old-logo.png',
             ['controller' => 'Images', 'action' => 'oldLogo']
         )->setHost('*.example.com');
     });
@@ -899,7 +899,7 @@ paramètre lors de la génération d'URL::
 
     // Si vous avez cette route
     $routes->connect(
-        '/images/old-log.png',
+        '/images/old-logo.png',
         ['controller' => 'Images', 'action' => 'oldLogo']
     )->setHost('images.example.com');
 
