@@ -1,10 +1,6 @@
 ページネーション
 #################
 
-.. php:namespace:: Cake\Controller\Component
-
-.. php:class:: PaginatorComponent
-
 フレキシブルでかつユーザーフレンドリーなウェブアプリケーションを作成する際の主たる障害の
 一つとなるのが、直感的なユーザーインターフェイスです。多くのアプリケーションはすぐに巨大となり
 かつ複雑になり、デザイナーやプログラマーは、何百件、何千件ものレコードが表示されることに
@@ -23,17 +19,6 @@ CakePHP におけるページネーションは、コントローラーにおけ
 基本的な使用方法
 ================
 
-クエリをページ分割するには、まず ``PaginatorComponent`` をロードする必要があります。 ::
-
-    class ArticlesController extends AppController
-    {
-        public function initialize(): void
-        {
-            parent::initialize();
-            $this->loadComponent('Paginator');
-        }
-    }
-
 一度ロードされれば、ORMテーブルクラスや ``Query`` オブジェクトをページ分割することができます。 ::
 
     public function index()
@@ -42,14 +27,14 @@ CakePHP におけるページネーションは、コントローラーにおけ
         $this->set('articles', $this->paginate($this->Articles));
 
         // 部分的に完了したクエリをページ分割する
-        $query = $this->Articles->find('published');
+        $query = $this->Articles->find('published')->contain('Comments');
         $this->set('articles', $this->paginate($query));
     }
 
 高度な使用方法
 ==============
 
-``PaginatorComponent`` は、 ``$paginate`` のコントローラプロパティや ``paginate()`` の引数
+``$paginate`` のコントローラプロパティや ``paginate()`` の引数
 ``$settings`` として設定することで、より複雑なユースケースをサポートしています。
 これらの条件はページ分割クエリの基礎となります。
 これらの条件は URLから渡される ``sort``, ``direction``, ``limit``, ``page``
@@ -57,26 +42,24 @@ CakePHP におけるページネーションは、コントローラーにおけ
 
     class ArticlesController extends AppController
     {
-        public $paginate = [
+        protected array $paginate = [
             'limit' => 25,
             'order' => [
-                'Articles.title' => 'asc'
-            ]
+                'Articles.title' => 'asc',
+            ],
         ];
     }
 
 .. tip::
     デフォルトの ``order`` オプションは配列として定義されていなければなりません。
 
-:php:meth:`~Cake\\ORM\\Table::find()` でサポートされているオプションのいずれかを
-ページ分割の設定に含めることができます。
 ページネーションオプションを :ref:`custom-find-methods` にバンドルする方が
 すっきりしていてシンプルです。
 ``finder`` オプションを使用することで、ページ分割の際にファインダーを使用することができます。 ::
 
     class ArticlesController extends AppController
     {
-        public $paginate = [
+        protected array $paginate = [
             'finder' => 'published',
         ];
     }
@@ -114,7 +97,7 @@ CakePHP におけるページネーションは、コントローラーにおけ
 
     class ArticlesController extends AppController
     {
-        public $paginate = [
+        protected array $paginate = [
             'Articles' => [],
             'Authors' => [],
         ];
@@ -136,38 +119,15 @@ CakePHP におけるページネーションは、コントローラーにおけ
 'Next' と 'Previous' リンクだけを表示したい場合は、カウントクエリを行わない
 'simple' paginator を使うことができます。 ::
 
-    public function initialize(): void
+    class ArticlesController extends AppController
     {
-        parent::initialize();
-
-        // Load the paginator component with the simple paginator strategy.
-        $this->loadComponent('Paginator', [
-            'paginator' => new \Cake\Datasource\SimplePaginator(),
-        ]);
+        protected array $paginate = [
+            'className' => 'Simple', // Or use Cake\Datasource\Paging\SimplePaginator::class FQCN
+        ];
     }
 
 ``SimplePaginator`` を使っている場合、ページ番号やカウンターデータ、最後のページへのリンク、
 総レコード数のコントロールを生成することはできません。
-
-PaginatorComponent を直接使用する
-=================================
-
-他のコンポーネントからデータをページ分割する必要がある場合は
-``PaginatorComponent`` を直接使うと良いでしょう。
-``PaginatorComponent`` はコントローラメソッドと似たようなAPIを持っています。　::
-
-    $articles = $this->Paginator->paginate($articleTable->find(), $config);
-
-    // または
-    $articles = $this->Paginator->paginate($articleTable, $config);
-
-最初のパラメータは、ページ分割したいテーブルオブジェクトの検索結果からの
-クエリオブジェクトでなければなりません。
-オプションで、テーブルオブジェクトを渡してクエリを作成することもできます。
-2番目のパラメータは、ページ分割に使用する設定の配列です。
-この配列はコントローラの ``$paginate`` プロパティと同じ構造でなければなりません。
-``Query`` オブジェクトをページ分割する際には、 ``finder`` オプションは無視されます。
-これは、ページ分割したいクエリを渡していることを前提としています。
 
 .. _paginating-multiple-queries:
 
@@ -179,7 +139,7 @@ PaginatorComponent を直接使用する
 ページ分割することができます。 ::
 
     // ページ分割するプロパティ
-    public $paginate = [
+    protected array $paginate = [
         'Articles' => ['scope' => 'article'],
         'Tags' => ['scope' => 'tag']
     ];
@@ -207,14 +167,14 @@ PaginatorComponent を直接使用する
 
     // コントローラーアクションにおいて
     $this->paginate = [
-        'ArticlesTable' => [
+        'Articles' => [
             'scope' => 'published_articles',
             'limit' => 10,
             'order' => [
                 'id' => 'desc',
             ],
         ],
-        'UnpublishedArticlesTable' => [
+        'UnpublishedArticles' => [
             'scope' => 'unpublished_articles',
             'limit' => 10,
             'order' => [
@@ -224,9 +184,8 @@ PaginatorComponent を直接使用する
     ];
 
     $publishedArticles = $this->paginate(
-        $this->Articles->find('all', [
-            'scope' => 'published_articles'
-        ])->where(['published' => true])
+        $this->Articles->find('all', scope: 'published_articles')
+            ->where(['published' => true])
     );
 
     // ページ分割コンポーネントで差別化できるようにテーブルオブジェクトを追加登録します。
@@ -237,9 +196,8 @@ PaginatorComponent を直接使用する
     ]);
 
     $unpublishedArticles = $this->paginate(
-        $unpublishedArticlesTable->find('all', [
-            'scope' => 'unpublished_articles'
-        ])->where(['published' => false])
+        $unpublishedArticlesTable->find('all', scope: 'unpublished_articles')
+            ->where(['published' => false])
     );
 
 .. _control-which-fields-used-for-ordering:
@@ -253,10 +211,10 @@ PaginatorComponent を直接使用する
 ソートできるフィールドのホワイトリストを ``sortableFields`` オプションを使って設定することができます。
 このオプションは関連するデータやページ分割クエリの一部である計算フィールドをソートしたい場合に必要です。 ::
 
-    public $paginate = [
+    protected array $paginate = [
         'sortableFields' => [
-            'id', 'title', 'Users.username', 'created'
-        ]
+            'id', 'title', 'Users.username', 'created',
+        ],
     ];
 
 ホワイトリストにないフィールドでソートしようとするリクエストは無視されます。
@@ -271,31 +229,17 @@ PaginatorComponent を直接使用する
 もしこのデフォルト値がアプリケーションにとって適切でない場合は、
 ページ分割オプションの一部として調整することができます。 ::
 
-    public $paginate = [
-        // 他のキーはこちら
+    protected array $paginate = [
+        // Other keys here.
         'maxLimit' => 10
     ];
 
 リクエストのリミットパラメータがこの値よりも大きければ、 ``maxLimit`` の値まで減らされます。
 
-追加の関連付けへのジョイン
-===============================
-
-追加の関連付けをページ分割されたテーブルにロードするには、 ``contain`` パラメータを使用します。 ::
-
-    public function index()
-    {
-        $this->paginate = [
-            'contain' => ['Authors', 'Comments']
-        ];
-
-        $this->set('articles', $this->paginate($this->Articles));
-    }
-
 範囲外のページ要求
 ==================
 
-PaginatorComponent は、存在しないページにアクセスしようとすると ``NotFoundException``` をスローします。
+``Controller::paginate()`` は、存在しないページにアクセスしようとすると ``NotFoundException``` をスローします。
 
 そのため、通常のエラーページをレンダリングさせるか、 try catch ブロックを使用して
 ``NotFoundException`` が発生した場合に適切な処理を行うことができます。 ::
@@ -308,9 +252,29 @@ PaginatorComponent は、存在しないページにアクセスしようとす�
             $this->paginate();
         } catch (NotFoundException $e) {
             // 最初のページや最後のページにリダイレクトするようにします。
-            // $this->request->getAttribute('page')を指定すると、必要な情報が得られます。
+            // $e->getPrevious()->getAttributes('pagingParams')を指定すると、必要な情報が得られます。
         }
     }
+
+paginatorクラスを直接利用する
+================================
+
+paginatorクラスを直接利用することも可能です。 ::
+
+        // paginatorのインスタンスを生成する
+        $paginator = new \Cake\Datasource\Paginator\NumericPaginator();
+
+        // モデルをページネーションする
+        $results = $paginator->paginate(
+            // ページ分割が必要なクエリまたはテーブルインスタンス
+            $this->fetchTable('Articles'),
+            // リクエストパラメーター
+            $this->request->getQueryParams(),
+            // Config array having the same structure as options as Controller::$paginate
+            [
+                'finder' => 'latest',
+            ]
+        );
 
 ビューのページネーション
 ========================
@@ -318,7 +282,6 @@ PaginatorComponent は、存在しないページにアクセスしようとす�
 ページネーションナビゲーションのリンクの作り方は、 :php:class:`~Cake\\View\\Helper\PaginatorHelper`
 のドキュメントを確認してください。
 
-..
-    meta::
+.. meta::
     :title lang=ja: ページネーション
-    :keywords lang=ja: order array,query conditions,php class,web applications,headaches,obstacles,complexity,programmers,parameters,paginate,designers,cakephp,satisfaction,developers
+    :keywords lang=ja: paginate,pagination,paging

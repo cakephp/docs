@@ -442,7 +442,7 @@ CakePHP のコントローラーに紐づけることができます。 ::
 
 このメソッドはモデルから取得した結果をページ分けするために使われます。
 ページサイズやモデルの検索条件などを指定できます。
-`paginate()` のより詳しい使い方は :doc:`ページネーション <controllers/components/pagination>`
+`paginate()` のより詳しい使い方は :doc:`ページネーション <controllers/pagination>`
 の章を参照してください。
 
 ``$paginate`` 属性は ``paginate()`` がどうふるまうかを簡単にカスタマイズする方法を提供します。 ::

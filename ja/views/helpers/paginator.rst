@@ -10,7 +10,7 @@ PaginatorHelper は、ページ番号や次ページへ／前ページへのリ�
 と連携して機能します。
 
 ページ制御を組み込んだデータセットの作成や、ページ制御関連のクエリーについての詳細は
-:doc:`/controllers/components/pagination` を参照してください。
+:doc:`/controllers/pagination` を参照してください。
 
 .. _paginator-templates:
 
