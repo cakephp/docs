@@ -182,13 +182,12 @@ view テンプレートの作成
         {
             parent::initialize();
 
-            $this->loadComponent('Paginator');
             $this->loadComponent('Flash'); // FlashComponent をインクルード
         }
 
         public function index()
         {
-            $articles = $this->Paginator->paginate($this->Articles->find());
+            $articles = $this->paginate($this->Articles->find());
             $this->set(compact('articles'));
         }
 
