@@ -43,7 +43,6 @@
     core-libraries/internationalization-and-localization
     core-libraries/logging
     core-libraries/form
-    controllers/components/pagination
     plugins
     development/rest
     security
