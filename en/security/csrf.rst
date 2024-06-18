@@ -57,6 +57,7 @@ apply CSRF to specific groups of routes::
 
     // in src/Application.php
     use Cake\Http\Middleware\CsrfProtectionMiddleware;
+    use Cake\Routing\RouteBuilder;
 
     public function routes(RouteBuilder $routes) : void
     {
