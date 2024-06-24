@@ -26,6 +26,10 @@ Behavior Changes
   name is already added.
 - ``TestCase::loadPlugins()`` will now clear out any previously loaded plugins. So
   you must specify all plugins required for any subsequent tests.
+- The hashing algorithm for ``Cache`` configurations that use ``groups``. Any
+  keys will have new group prefix hashes generated which will cause cache
+  misses. Consider an incremental deploy to avoid operating on an entirely cold
+  cache.
 
 Deprecations
 ============
