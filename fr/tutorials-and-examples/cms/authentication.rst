@@ -64,6 +64,7 @@ le code suivant::
             if (strlen($password) > 0) {
                 return (new DefaultPasswordHasher())->hash($password);
             }
+            return null;
         }
     }
 
