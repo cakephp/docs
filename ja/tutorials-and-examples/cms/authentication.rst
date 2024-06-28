@@ -55,6 +55,7 @@ ArticlesController と同様に、手動、もしくは bake シェルを使用�
             if (strlen($password) > 0) {
                 return (new DefaultPasswordHasher())->hash($password);
             }
+            return null;
         }
     }
 
