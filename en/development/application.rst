@@ -63,6 +63,19 @@ global event listeners::
             // Call the parent to `require_once` config/bootstrap.php
             parent::bootstrap();
 
+            // CakePHP has the ability to fallback to using the `Cake\ORM\Table`
+            // class to represent your database tables when a related class is
+            // not created for that table. But using this "auto-tables" feature
+            // can make debugging more difficult in some scenarios. So we disable
+            // this feature except for the CLI environment (since the classes
+            // would not be present when using the `bake` code generation tool).
+            if (PHP_SAPI !== 'cli') {
+                FactoryLocator::add(
+                    'Table',
+                    (new TableLocator())->allowFallbackClass(false)
+                );
+            }
+
             // Load MyPlugin
             $this->addPlugin('MyPlugin');
         }
@@ -74,4 +87,4 @@ each test method.
 
 .. meta::
     :title lang=en: CakePHP Application
-    :keywords lang=en: http, middleware, psr-7, events, plugins, application, baseapplication
+    :keywords lang=en: http, middleware, psr-7, events, plugins, application, baseapplication,auto tables,auto-tables,generic table,class
