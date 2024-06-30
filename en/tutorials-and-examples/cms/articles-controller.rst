@@ -137,7 +137,7 @@ While this is a simple action, we've used some powerful CakePHP features. We
 start our action off by using ``findBySlug()`` which is
 a :ref:`Dynamic Finder <dynamic-finders>`. This method allows us to create a basic query that
 finds articles by a given slug. We then use ``firstOrFail()`` to either fetch
-the first record, or throw a ``NotFoundException``.
+the first record, or throw a ``\Cake\Datasource\Exception\RecordNotFoundException``.
 
 Our action takes a ``$slug`` parameter, but where does that parameter come from?
 If a user requests ``/articles/view/first-post``, then the value 'first-post' is
@@ -359,7 +359,7 @@ now. Add the following action to your ``ArticlesController``::
 
 This action first ensures that the user has tried to access an existing record.
 If they haven't passed in an ``$slug`` parameter, or the article does not exist,
-a ``NotFoundException`` will be thrown, and the CakePHP ErrorHandler will render
+a ``RecordNotFoundException`` will be thrown, and the CakePHP ErrorHandler will render
 the appropriate error page.
 
 Next the action checks whether the request is either a POST or a PUT request. If
