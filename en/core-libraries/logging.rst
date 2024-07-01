@@ -514,6 +514,7 @@ After installing Monolog using composer, configure the logger using the
     Log::setConfig('default', function () {
         $log = new Logger('app');
         $log->pushHandler(new StreamHandler('path/to/your/combined.log'));
+
         return $log;
     });
 
@@ -531,6 +532,7 @@ Use similar methods if you want to configure a different logger for your console
     Log::setConfig('default', function () {
         $log = new Logger('cli');
         $log->pushHandler(new StreamHandler('path/to/your/combined-cli.log'));
+
         return $log;
     });
 

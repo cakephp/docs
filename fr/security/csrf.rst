@@ -50,6 +50,7 @@ de votre Application, vous protégez toutes les actions de l'application::
         $csrf = new SessionCsrfProtectionMiddleware($options);
 
         $middlewareQueue->add($csrf);
+
         return $middlewareQueue;
     }
 
@@ -58,6 +59,7 @@ l'utilisation de CSRF à certains groupes de routes::
 
     // dans src/Application.php
     use Cake\Http\Middleware\CsrfProtectionMiddleware;
+    use Cake\Routing\RouteBuilder;
 
     public function routes(RouteBuilder $routes) : void
     {

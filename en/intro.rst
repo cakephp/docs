@@ -37,7 +37,7 @@ The model objects can be thought of as "Friend", "User", "Comment", or
 
     use Cake\ORM\Locator\LocatorAwareTrait;
 
-    $users = $this->getTableLocator()->get('Users');
+    $users = $this->fetchTable('Users');
     $resultset = $users->find()->all();
     foreach ($resultset as $row) {
         echo $row->username;
@@ -52,7 +52,7 @@ something like::
 
     use Cake\ORM\Locator\LocatorAwareTrait;
 
-    $users = $this->getTableLocator()->get('Users');
+    $users = $this->fetchTable('Users');
     $user = $users->newEntity(['email' => 'mark@example.com']);
     $users->save($user);
 
@@ -67,7 +67,7 @@ For example, the view could use model data to render an HTML view template conta
 or a XML formatted result for others to consume::
 
     // In a view template file, we'll render an 'element' for each user.
-    <?php foreach ($users as $user): ?>
+    <?php foreach ($resultset as $user): ?>
         <li class="user">
             <?= $this->element('user_info', ['user' => $user]) ?>
         </li>

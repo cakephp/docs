@@ -355,6 +355,7 @@ To prevent the save from continuing, simply stop event propagation in your callb
         if (...) {
             $event->stopPropagation();
             $event->setResult(false);
+
             return;
         }
         ...

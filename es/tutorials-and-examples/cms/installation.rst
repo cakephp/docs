@@ -46,7 +46,7 @@ en la carpeta **cms** del directorio de trabajo actual:
 
 .. code-block:: console
 
-    php composer.phar create-project --prefer-dist cakephp/app:5.* cms
+    php composer.phar create-project --prefer-dist cakephp/app:5 cms
 
 Si ha descargado y ejecutado el `Instalador de Composer de Windows
 <https://getcomposer.org/Composer-Setup.exe>`_, entonces, escriba la siguiente línea en el

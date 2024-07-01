@@ -431,6 +431,7 @@ aplicação::
         public function read($key)
         {
             $xml = Xml::build($this->_path . $key . '.xml');
+
             return Xml::toArray($xml);
         }
 

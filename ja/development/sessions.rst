@@ -258,6 +258,7 @@ IO をもたらします。
             if ($result) {
                 return $result;
             }
+
             return parent::read($id);
         }
 
@@ -265,6 +266,7 @@ IO をもたらします。
         public function write($id, $data): bool
         {
             Cache::write($id, $data, $this->cacheKey);
+
             return parent::write($id, $data);
         }
 
@@ -272,6 +274,7 @@ IO をもたらします。
         public function destroy($id): bool
         {
             Cache::delete($id, $this->cacheKey);
+
             return parent::destroy($id);
         }
 

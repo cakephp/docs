@@ -357,6 +357,7 @@ finder メソッドは、あなたが作成したい finder の名前が ``Foo``
         public function findOwnedBy(SelectQuery $query, array $options)
         {
             $user = $options['user'];
+
             return $query->where(['author_id' => $user->id]);
         }
     }
@@ -596,7 +597,7 @@ contain に条件を渡す
         'Authors' => [
             'foreignKey' => false,
             'queryBuilder' => function (SelectQuery $q) {
-                return $q->where(...); // フィルターのための完全な条件
+                return $q->where(/* ... */); // フィルターのための完全な条件
             }
         ]
     ]);
@@ -920,6 +921,7 @@ serialize が簡単にできるだけでなく、結果セットは 'Collection'
         if (!in_array($value, $output)) {
             $output[] = $value;
         }
+
         return $output;
     };
 
@@ -1186,6 +1188,7 @@ reducer が呼ばれるごとに、reducer はユーザーごとのフォロワ�
         // 前のセクションで説明した共通の単語の件と同じもの
         $mapper = ...;
         $reducer = ...;
+
         return $query->mapReduce($mapper, $reducer);
     }
 

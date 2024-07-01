@@ -55,6 +55,7 @@ ArticlesController と同様に、手動、もしくは bake シェルを使用�
             if (strlen($password) > 0) {
                 return (new DefaultPasswordHasher())->hash($password);
             }
+            return null;
         }
     }
 
@@ -266,6 +267,7 @@ logout アクションを ``UsersController`` に追加します。::
         // POST, GET を問わず、ユーザーがログインしている場合はリダイレクトします
         if ($result && $result->isValid()) {
             $this->Authentication->logout();
+
             return $this->redirect(['controller' => 'Users', 'action' => 'login']);
         }
     }

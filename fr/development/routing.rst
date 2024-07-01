@@ -887,7 +887,7 @@ n'importe quelle sous-domaine::
 
         // Cette route matchera sur tous les sous-domaines http://*.example.com
         $routes->connect(
-            '/images/old-log.png',
+            '/images/old-logo.png',
             ['controller' => 'Images', 'action' => 'oldLogo']
         )->setHost('*.example.com');
     });
@@ -899,7 +899,7 @@ paramètre lors de la génération d'URL::
 
     // Si vous avez cette route
     $routes->connect(
-        '/images/old-log.png',
+        '/images/old-logo.png',
         ['controller' => 'Images', 'action' => 'oldLogo']
     )->setHost('images.example.com');
 
@@ -1756,6 +1756,7 @@ l'utilisation de paramètres d'URL persistants::
         if ($request->getParam('lang') && !isset($params['lang'])) {
             $params['lang'] = $request->getParam('lang');
         }
+
         return $params;
     });
 
@@ -1775,6 +1776,7 @@ Un autre cas lorsque l'on souhaite changer une route en particulier à la volée
             $params['language'] = $params[0];
             unset($params[0]);
         }
+
         return $params;
     });
 

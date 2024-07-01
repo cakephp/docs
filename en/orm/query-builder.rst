@@ -58,7 +58,7 @@ that ``SelectQuery`` objects are lazy, and will not be executed unless you tell 
 to::
 
     $query->where(['id' => 1]); // Return the same query object
-    $query->order(['title' => 'DESC']); // Still same object, no SQL executed
+    $query->orderBy(['title' => 'DESC']); // Still same object, no SQL executed
 
 You can of course chain the methods you call on SelectQuery objects::
 
@@ -66,7 +66,7 @@ You can of course chain the methods you call on SelectQuery objects::
         ->find()
         ->select(['id', 'name'])
         ->where(['id !=' => 1])
-        ->order(['created' => 'DESC']);
+        ->orderBy(['created' => 'DESC']);
 
     foreach ($query->all() as $article) {
         debug($article->created);
@@ -165,10 +165,11 @@ by calling the ``SelectQuery``'s ``all()`` method) implements the collection int
     // An advanced example
     $results = $articles->find()
         ->where(['id >' => 1])
-        ->order(['title' => 'DESC'])
+        ->orderBy(['title' => 'DESC'])
         ->all()
         ->map(function ($row) {
             $row->trimmedTitle = trim($row->title);
+
             return $row;
         })
         ->combine('id', 'trimmedTitle') // combine() is another collection method
@@ -431,20 +432,20 @@ Ordering Results
 To apply ordering, you can use the ``order`` method::
 
     $query = $articles->find()
-        ->order(['title' => 'ASC', 'id' => 'ASC']);
+        ->orderBy(['title' => 'ASC', 'id' => 'ASC']);
 
-When calling ``order()`` multiple times on a query, multiple clauses will be
+When calling ``orderBy()`` multiple times on a query, multiple clauses will be
 appended.  However, when using finders you may sometimes need to overwrite the
-``ORDER BY``.  Set the second parameter of ``order()`` (as well as
-``orderAsc()`` or ``orderDesc()``) to ``SelectQuery::OVERWRITE`` or to ``true``::
+``ORDER BY``.  Set the second parameter of ``orderBy()`` (as well as
+``orderByAsc()`` or ``orderByDesc()``) to ``SelectQuery::OVERWRITE`` or to ``true``::
 
     $query = $articles->find()
-        ->order(['title' => 'ASC']);
+        ->orderBy(['title' => 'ASC']);
     // Later, overwrite the ORDER BY clause instead of appending to it.
     $query = $articles->find()
-        ->order(['created' => 'DESC'], SelectQuery::OVERWRITE);
+        ->orderBy(['created' => 'DESC'], SelectQuery::OVERWRITE);
 
-The ``orderAsc`` and ``orderDesc`` methods can be used when you need to sort on
+The ``orderByAsc`` and ``orderByDesc`` methods can be used when you need to sort on
 complex expressions::
 
     $query = $articles->find();
@@ -452,12 +453,12 @@ complex expressions::
         'title' => 'identifier',
         'synopsis' => 'identifier'
     ]);
-    $query->orderAsc($concat);
+    $query->orderByAsc($concat);
 
 To build complex order clauses, use a Closure to build order expressions::
 
-    $query->orderAsc(function (QueryExpression $exp, SelectQuery $query) {
-        return $exp->addCase(...);
+    $query->orderByAsc(function (QueryExpression $exp, SelectQuery $query) {
+        return $exp->addCase(/* ... */);
     });
 
 
@@ -668,6 +669,7 @@ of people, you could calculate their age with a result formatter::
     $query->formatResults(function (\Cake\Collection\CollectionInterface $results) {
         return $results->map(function ($row) {
             $row['age'] = $row['birth_date']->diff(new \DateTime)->y;
+
             return $row;
         });
     });
@@ -689,6 +691,7 @@ expect::
         return $q->formatResults(function (\Cake\Collection\CollectionInterface $authors) {
             return $authors->map(function ($author) {
                 $author['age'] = $author['birth_date']->diff(new \DateTime)->y;
+
                 return $author;
             });
         });
@@ -803,6 +806,7 @@ following::
         ->where(function (QueryExpression $exp) {
             $orConditions = $exp->or(['author_id' => 2])
                 ->eq('author_id', 5);
+
             return $exp
                 ->add($orConditions)
                 ->eq('published', true)
@@ -831,6 +835,7 @@ the method chaining::
                 return $or->eq('author_id', 2)
                     ->eq('author_id', 5);
             });
+
             return $exp
                 ->not($orConditions)
                 ->lte('view_count', 10);
@@ -842,6 +847,7 @@ You can negate sub-expressions using ``not()``::
         ->where(function (QueryExpression $exp) {
             $orConditions = $exp->or(['author_id' => 2])
                 ->eq('author_id', 5);
+
             return $exp
                 ->not($orConditions)
                 ->lte('view_count', 10);
@@ -865,6 +871,7 @@ It is also possible to build expressions using SQL functions::
             $year = $q->func()->year([
                 'created' => 'identifier'
             ]);
+
             return $exp
                 ->gte($year, 2014)
                 ->eq('published', true);
@@ -1062,7 +1069,7 @@ You can use ``identifier()`` in comparisons to aggregations too::
     $query = $this->Orders->find();
     $query->select(['Customers.customer_name', 'total_orders' => $query->func()->count('Orders.order_id')])
         ->contain('Customers')
-        ->group(['Customers.customer_name'])
+        ->groupBy(['Customers.customer_name'])
         ->having(['total_orders >=' => $query->identifier('Customers.minimum_order_count')]);
 
 .. warning::
@@ -1193,6 +1200,7 @@ And can be used combined with aggregations too::
                     $query->newExpr(['Stocks.quantity', 'Products.unit_price'])
                         ->setConjunction('*')
             );
+
             return [
                 'Products.name',
                 'stock_quantity' => $stockQuantity,
@@ -1773,14 +1781,14 @@ through ``FunctionsBuilder::aggregate()``.
 These are the most commonly supported window features. Most features are provided
 by ``AggregateExpresion``, but make sure you follow your database documentation on use and restrictions.
 
-- ``order($fields)`` Order the aggregate group the same as a query ORDER BY.
+- ``orderBy($fields)`` Order the aggregate group the same as a query ORDER BY.
 - ``partition($expressions)`` Add one or more partitions to the window based on column
   names.
 - ``rows($start, $end)`` Define a offset of rows that precede and/or follow the
   current row that should be included in the aggregate function.
 - ``range($start, $end)`` Define a range of row values that precede and/or follow
   the current row that should be included in the aggregate function. This
-  evaluates values based on the ``order()`` field.
+  evaluates values based on the ``orderBy()`` field.
 
 If you need to re-use the same window expression multiple times you can create
 named windows using the ``window()`` method::

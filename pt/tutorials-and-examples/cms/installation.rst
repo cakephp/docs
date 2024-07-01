@@ -48,7 +48,7 @@ esqueleto da aplicação do CakePHP no diretório **cms**. ::
 
 .. code-block:: console
 
-    php composer.phar create-project --prefer-dist cakephp/app:4.* cms
+    php composer.phar create-project --prefer-dist cakephp/app:5.* cms
 
 Caso você tenha feito o download e executado o `Instalador para Windows do
 Composer <https://getcomposer.org/Composer-Setup.exe>`_, então digite a linha

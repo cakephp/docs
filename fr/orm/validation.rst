@@ -123,6 +123,7 @@ notre table ``articles``::
             $validator
                 ->notEmptyString('title', __('Vous devez indiquer un titre'))
                 ->notEmptyString('body', __('Un contenu est nécessaire'));
+
             return $validator;
         }
     }
@@ -186,6 +187,7 @@ diviser leur process de construction en petites étapes réutilisables::
         $validator = $this->validationDefault($validator);
 
         $validator->add('password', 'length', ['rule' => ['lengthBetween', 8, 100]]);
+
         return $validator;
     }
 
@@ -220,6 +222,7 @@ l'utiliser comme une règle de validation::
                     'message' => __('Vous devez fournir un rôle valide'),
                     'provider' => 'table',
                 ]);
+
             return $validator;
         }
 
@@ -237,6 +240,7 @@ Vous pouvez également utiliser des closures en tant que règles de validation::
             if ($value > 1) {
                 return true;
             }
+
             return 'Valeur incorrecte.';
         }
     ]);
@@ -579,6 +583,7 @@ le faire en créant votre propre règle invokable::
             'errorField' => 'name',
             'message' => 'Doit être unique pour chaque parent.'
         ]);
+
         return $rules;
     }
 
@@ -610,7 +615,7 @@ utile de packager ces règles dans des classes réutilisables::
     // Ajouter la règle personnalisée
     use App\Model\Rule\CustomRule;
 
-    $rules->add(new CustomRule(...), 'ruleName');
+    $rules->add(new CustomRule(/* ... */), 'ruleName');
 
 En ajoutant des classes de règles personnalisées, vous pouvez garder votre code
 DRY et tester vos règles de domaine isolément.
@@ -723,6 +728,7 @@ pour les transitions de données générées à l'intérieur de l'application::
             'errorField' => 'livraison',
             'message' => 'Pas de frais de port gratuits pour une commande de moins de 100!'
         ]);
+
         return $rules;
     }
 

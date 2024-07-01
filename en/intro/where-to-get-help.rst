@@ -49,21 +49,21 @@ practical examples for function and data member usage for a class. ::
 
     tests/TestCase/
 
-The IRC Channel
-===============
+Slack
+=====
 
-**IRC Channels on irc.freenode.net:**
+`CakePHP Slack Support Channel <https://cakesf.slack.com/messages/german/>`_
 
--  `#cakephp <irc://irc.freenode.net/cakephp>`_ -- General Discussion
--  `#cakephp-docs <irc://irc.freenode.net/cakephp-docs>`_ -- Documentation
--  `#cakephp-bakery <irc://irc.freenode.net/cakephp-bakery>`_ -- Bakery
--  `#cakephp-fr <irc://irc.freenode.net/cakephp-fr>`_ -- French Canal.
-
-If you're stumped, give us a holler in the CakePHP IRC channel.
-Someone from the `development team <https://cakephp.org/team>`_
-is usually there, especially during the daylight hours for North and South
-America users. We'd love to hear from you, whether you need some help, want to
+If you're stumped, give us a holler in the CakePHP Slack support channel.
+We'd love to hear from you, whether you need some help, want to
 find users in your area, or would like to donate your brand new sports car.
+
+Discord
+=======
+
+`CakePHP Discord <https://discord.com/invite/k4trEMPebj>`_
+
+You can also join us on Discord.
 
 .. _cakephp-official-communities:
 
@@ -94,18 +94,13 @@ Danish
 French
 ------
 
-- `French CakePHP Community <https://cakephp-fr.org>`_
+- `French CakePHP Slack Channel <https://cakesf.slack.com/messages/french/>`_
 
 German
 ------
 
 - `German CakePHP Slack Channel <https://cakesf.slack.com/messages/german/>`_
 - `German CakePHP Facebook Group <https://www.facebook.com/groups/146324018754907/>`_
-
-Iranian
--------
-
-- `Iranian CakePHP Community <https://cakephp.ir>`_
 
 Dutch
 -----
@@ -121,16 +116,14 @@ Japanese
 Portuguese
 ----------
 
-- `Portuguese CakePHP Google Group <https://groups.google.com/group/cakephp-pt>`_
+- `Portuguese CakePHP Slack Channel <https://cakesf.slack.com/messages/portuguese/>`_
 
 Spanish
 -------
 
 - `Spanish CakePHP Slack Channel <https://cakesf.slack.com/messages/spanish/>`_
-- `Spanish CakePHP IRC Channel <irc://irc.freenode.net/cakephp-es>`_
-- `Spanish CakePHP Google Group <https://groups.google.com/group/cakephp-esp>`_
 
 .. meta::
     :title lang=en: Where to Get Help
-    :description lang=en: Where to get help with CakePHP: The official CakePHP website, The Cookbook, The Bakery, The API, in the test cases, the IRC channel, The CakePHP Google Group or CakePHP Questions.
+    :description lang=en: Where to get help with CakePHP: The official CakePHP website, The Cookbook, The Bakery, The API, in the test cases, Slack, Discord, CakePHP Questions.
     :keywords lang=en: cakephp,cakephp help,help with cakephp,where to get help,cakephp irc,cakephp questions,cakephp api,cakephp test cases,open source projects,channel irc,code reference,irc channel,developer tools,test case,bakery

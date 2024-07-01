@@ -94,6 +94,7 @@ SQL が出力されます。 ::
     $resultsArray = $articles
         ->find()
         ->where(['id >' => 1])
+        ->all()
         ->toList();
 
     foreach ($resultsArray as $article) {
@@ -168,6 +169,7 @@ Query オブジェクトのメソッドに慣れたら、 :doc:`Collection </cor
         ->map(function ($row) {
         // map() は Collection のメソッドで、クエリーを実行します
             $row->trimmedTitle = trim($row->title);
+
             return $row;
         })
         ->combine('id', 'trimmedTitle') // combine() も Collection のメソッドです
@@ -550,6 +552,7 @@ ORM とオブジェクトの結果セットは強力である一方で、エン�
     $query->formatResults(function (\Cake\Collection\CollectionInterface $results) {
         return $results->map(function ($row) {
             $row['age'] = $row['birth_date']->diff(new \DateTime)->y;
+
             return $row;
         });
     });
@@ -570,6 +573,7 @@ CakePHP はフォーマッタ関数が適切なスコープになるよう保証
         return $q->formatResults(function (\Cake\Collection\CollectionInterface $authors) {
             return $authors->map(function ($author) {
                 $author['age'] = $author['birth_date']->diff(new \DateTime)->y;
+
                 return $author;
             });
         });
@@ -679,6 +683,7 @@ Conditions
         ->where(function (QueryExpression $exp) {
             $orConditions = $exp->or(['author_id' => 2])
                 ->eq('author_id', 5);
+
             return $exp
                 ->add($orConditions)
                 ->eq('published', true)
@@ -706,6 +711,7 @@ Conditions
                 return $or->eq('author_id', 2)
                     ->eq('author_id', 5);
             });
+
             return $exp
                 ->not($orConditions)
                 ->lte('view_count', 10);
@@ -717,6 +723,7 @@ Conditions
         ->where(function (QueryExpression $exp) {
             $orConditions = $exp->or(['author_id' => 2])
                 ->eq('author_id', 5);
+
             return $exp
                 ->not($orConditions)
                 ->lte('view_count', 10);
@@ -740,6 +747,7 @@ SQL 関数を使った式を構築することも可能です。 ::
             $year = $q->func()->year([
                 'created' => 'identifier'
             ]);
+
             return $exp
                 ->gte($year, 2014)
                 ->eq('published', true);

@@ -699,7 +699,7 @@ pode usar o curinga ``*.`` para corresponder a qualquer subdomínio::
 
         // Esta rota corresponde apenas a http://*.example.com
         $routes->connect(
-            '/images/old-log.png',
+            '/images/old-logo.png',
             ['controller' => 'Images', 'action' => 'oldLogo']
         )->setHost('*.example.com');
     });
@@ -710,7 +710,7 @@ curinga, precisará fornecer o parâmetro ``_host`` ao gerar URLs::
 
     // Se você tem esta rota
     $routes->connect(
-        '/images/old-log.png',
+        '/images/old-logo.png',
         ['controller' => 'Images', 'action' => 'oldLogo']
     )->setHost('images.example.com');
 
@@ -1286,6 +1286,7 @@ Os filtros de URL permitem implementar recursos como parâmetros persistentes::
         if ($request->getParam('lang') && !isset($params['lang'])) {
             $params['lang'] = $request->getParam('lang');
         }
+
         return $params;
     });
 
@@ -1303,6 +1304,7 @@ Outro caso de uso está mudando uma determinada rota no tempo de execução (rot
             $params['language'] = $params[0];
             unset($params[0]);
         }
+
         return $params;
     });
 

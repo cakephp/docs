@@ -2051,13 +2051,13 @@ Fermer le Formulaire
 
 * ``$secureAttributes`` - Optionnel. Vous permet de fournir des attributs qui
   seront utilisés comme attributs HTML aux inputs ``hidden`` générés par le
-  ``SecurityComponent``.
+  ``FormProtectionComponent``.
 
 La méthode ``end()`` ferme et complète le marquage du formulaire. Souvent,
 ``end()`` se contente d'afficher la balise fermante du formulaire, mais
 l'utilisation de ``end()`` est une bonne pratique puisqu'elle permet également
 au FormHelper d'ajouter les champs cachées dont le
-:php:class:`Cake\\Controller\\Component\\SecurityComponent` a besoin:
+:php:class:`Cake\\Controller\\Component\\FormProtectionComponent` a besoin:
 
 .. code-block:: php
 
@@ -2542,6 +2542,7 @@ vouliez construire un widget Autocomplete, vous pourriez le faire comme ceci::
             $data += [
                 'name' => '',
             ];
+
             return $this->_templates->format('autocomplete', [
                 'name' => $data['name'],
                 'attrs' => $this->_templates->formatAttributes($data, ['name'])

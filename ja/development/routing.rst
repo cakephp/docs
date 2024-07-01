@@ -781,7 +781,7 @@ SEO に親和性があるルーティング
 
         // このルートは http://*.example.com のみマッチします。
         $routes->connect(
-            '/images/old-log.png',
+            '/images/old-logo.png',
             ['controller' => 'Images', 'action' => 'oldLogo']
         )->setHost('*.example.com');
     });
@@ -792,7 +792,7 @@ SEO に親和性があるルーティング
 
     // このルートを持つ場合、
     $routes->connect(
-        '/images/old-log.png',
+        '/images/old-logo.png',
         ['controller' => 'Images', 'action' => 'oldLogo']
     )->setHost('images.example.com');
 
@@ -1437,6 +1437,7 @@ URL フィルターは永続的なパラメーターなどを簡単に扱う機�
         if ($request->getParam('lang') && !isset($params['lang'])) {
             $params['lang'] = $request->getParam('lang');
         }
+
         return $params;
     });
 
@@ -1454,6 +1455,7 @@ URL フィルターは永続的なパラメーターなどを簡単に扱う機�
             $params['language'] = $params[0];
             unset($params[0]);
         }
+
         return $params;
     });
 

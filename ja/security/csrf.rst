@@ -52,6 +52,7 @@ CSRFプロテクションは、アプリケーション全体、または特定�
         $csrf = new SessionCsrfProtectionMiddleware($options);
 
         $middlewareQueue->add($csrf);
+
         return $middlewareQueue;
     }
 
@@ -59,6 +60,7 @@ CSRFプロテクションは、アプリケーション全体、または特定�
 
     // src/Application.php
     use Cake\Http\Middleware\CsrfProtectionMiddleware;
+    use Cake\Routing\RouteBuilder;
 
     public function routes(RouteBuilder $routes) : void
     {

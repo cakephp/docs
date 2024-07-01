@@ -100,6 +100,7 @@ La façon la plus simple est d'appeler les méthodes ``all()`` ou ``toArray()``:
     $resultsArray = $articles
         ->find()
         ->where(['id >' => 1])
+        ->all()
         ->toList();
 
     foreach ($resultsArray as $article) {
@@ -176,6 +177,7 @@ pouvez aussi le faire avec un objet Query::
         ->order(['title' => 'DESC'])
         ->map(function ($row) { // map() est une méthode de collection, elle exécute la requête
             $row->trimmedTitle = trim($row->title);
+
             return $row;
         })
         ->combine('id', 'trimmedTitle') // combine() est une autre méthode de collection
@@ -478,7 +480,7 @@ des expressions complexes::
 Pour construire des clauses de tri complexes, utilisez une Closure::
 
     $query->orderAsc(function (QueryExpression $exp, Query $query) {
-        return $exp->addCase(...);
+        return $exp->addCase(/* ... */);
      });
 
 Limiter les Résultats
@@ -724,6 +726,7 @@ formatter*)::
     $query->formatResults(function (\Cake\Collection\CollectionInterface $results) {
         return $results->map(function ($row) {
             $row['age'] = $row['date_de_naissance']->diff(new \DateTime)->y;
+
             return $row;
         });
     });
@@ -746,6 +749,7 @@ comme vous pouvez vous y attendre::
         return $q->formatResults(function (\Cake\Collection\CollectionInterface $auteurs) {
             return $auteurs->map(function ($auteur) {
                 $auteur['age'] = $auteur['date_de_naissance']->diff(new \DateTime)->y;
+
                 return $auteur;
             });
         });
@@ -864,6 +868,7 @@ nous pouvons faire ceci::
         ->where(function (QueryExpression $exp) {
             $orConditions = $exp->or(['auteur_id' => 2])
                 ->eq('auteur_id', 5);
+
             return $exp
                 ->add($orConditions)
                 ->eq('published', true)
@@ -892,6 +897,7 @@ chaînage des méthodes::
                 return $or->eq('auteur_id', 2)
                     ->eq('auteur_id', 5);
             });
+
             return $exp
                 ->not($orConditions)
                 ->lte('nombre_de_vues', 10);
@@ -903,6 +909,7 @@ Vous pouvez faire une négation des sous-expressions en utilisant ``not()``::
         ->where(function (QueryExpression $exp) {
             $orConditions = $exp->or(['author_id' => 2])
                 ->eq('author_id', 5);
+
             return $exp
                 ->not($orConditions)
                 ->lte('view_count', 10);
@@ -927,6 +934,7 @@ SQL::
             $year = $q->func()->year([
                 'created' => 'identifier'
             ]);
+
             return $exp
                 ->gte($year, 2014)
                 ->eq('published', true);

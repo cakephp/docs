@@ -147,6 +147,7 @@ Our helper looks like::
         public function bar($value)
         {
             $width = round($value / 100, 2) * 100;
+
             return sprintf(
                 '<div class="progress-container">
                     <div class="progress-bar" style="width: %s%%"></div>
@@ -1810,8 +1811,10 @@ Expanding on the Orders example, say we have the following tables::
                     'order' => $order
                 ]);
                 $this->getEventManager()->dispatch($event);
+
                 return true;
             }
+
             return false;
         }
     }

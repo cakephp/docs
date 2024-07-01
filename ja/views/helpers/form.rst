@@ -2071,12 +2071,12 @@ submit 入力は、基本的なテキストやイメージが必要な場合に�
 
 .. php:method:: end($secureAttributes = [])
 
-* ``$secureAttributes`` - オプション。SecurityComponent 用に生成された非表示の
+* ``$secureAttributes`` - オプション。FormProtectionComponent 用に生成された非表示の
   input 要素に HTML 属性として渡されるセキュアな属性を提供できます。
 
 ``end()`` は、フォームを閉じて完成します。
 多くの場合、 ``end()`` は終了タグだけを出力しますが、 ``end()`` を使うと、
-FormHelper が :php:class:`Cake\\Controller\\Component\\SecurityComponent` に必要な
+FormHelper が :php:class:`Cake\\Controller\\Component\\FormProtectionComponent` に必要な
 hidden フォーム要素を挿入できるようになります。
 
 .. code-block:: php
@@ -2540,6 +2540,7 @@ autocomplete ウィジェットを作成したい場合、以下を実行でき�
             $data += [
                 'name' => '',
             ];
+
             return $this->_templates->format('autocomplete', [
                 'name' => $data['name'],
                 'attrs' => $this->_templates->formatAttributes($data, ['name'])

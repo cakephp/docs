@@ -25,7 +25,7 @@ CakePHP のすべての重要な部分の紹介
 * :doc:`/development/sessions`
 * :doc:`/development/rest`
 * :doc:`/controllers/components/authentication`
-* :doc:`/controllers/components/pagination`
+* :doc:`/controllers/pagination`
 * :ref:`csrf-middleware`
 * :doc:`/core-libraries/email`
 * :doc:`/views/helpers/form`

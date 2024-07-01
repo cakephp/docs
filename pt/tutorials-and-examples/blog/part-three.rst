@@ -267,6 +267,7 @@ moveUp() e moveDown() para ser capaz de reordenar as categorias na árvore:
             } else {
                 $this->Flash->error('The category could not be moved up. Please, try again.');
             }
+
             return $this->redirect($this->referer(['action' => 'index']));
         }
 
@@ -279,6 +280,7 @@ moveUp() e moveDown() para ser capaz de reordenar as categorias na árvore:
             } else {
                 $this->Flash->error('The category could not be moved down. Please, try again.');
             }
+
             return $this->redirect($this->referer(['action' => 'index']));
         }
     }
@@ -356,6 +358,7 @@ ele:
                 $article = $this->Articles->patchEntity($article, $this->request->getData());
                 if ($this->Articles->save($article)) {
                     $this->Flash->success(__('Your article has been saved.'));
+
                     return $this->redirect(['action' => 'index']);
                 }
                 $this->Flash->error(__('Unable to add your article.'));

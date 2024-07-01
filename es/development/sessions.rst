@@ -236,6 +236,7 @@ Primero necesitamos crear nuestra clase personalizada y ponerla en **src/Http/Se
             if ($result) {
                 return $result;
             }
+
             return parent::read($id);
 
 
@@ -245,6 +246,7 @@ Primero necesitamos crear nuestra clase personalizada y ponerla en **src/Http/Se
         public function write($id, $data): bool
         {
             Cache::write($id, $data, $this->cacheKey);
+
             return parent::write($id, $data);
         }
 
@@ -252,6 +254,7 @@ Primero necesitamos crear nuestra clase personalizada y ponerla en **src/Http/Se
         public function destroy($id): bool
         {
             Cache::delete($id, $this->cacheKey);
+
             return parent::destroy($id);
         }
 

@@ -314,6 +314,7 @@ Premièrement, commençons par créer une action ``add()`` dans le
                 $article = $this->Articles->patchEntity($article, $this->request->getData());
                 if ($this->Articles->save($article)) {
                     $this->Flash->success(__('Votre article a été sauvegardé.'));
+
                     return $this->redirect(['action' => 'index']);
                 }
                 $this->Flash->error(__('Impossible d\'ajouter votre article.'));
@@ -487,6 +488,7 @@ devrait ressembler::
             $this->Articles->patchEntity($article, $this->request->getData());
             if ($this->Articles->save($article)) {
                 $this->Flash->success(__('Votre article a été mis à jour.'));
+
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('Impossible de mettre à jour votre article.'));
@@ -580,6 +582,7 @@ Articles (``ArticlesController``)::
         $article = $this->Articles->get($id);
         if ($this->Articles->delete($article)) {
             $this->Flash->success(__("L'article avec l'id: {0} a été supprimé.", h($id)));
+
             return $this->redirect(['action' => 'index']);
         }
     }

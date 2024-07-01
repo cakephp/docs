@@ -63,8 +63,10 @@ CakePHP は、jQuery などの一般的な JavaScript フレームワークに�
                     'order' => $order
                 ]);
                 $this->getEventManager()->dispatch($event);
+
                 return true;
             }
+
             return false;
         }
     }
@@ -434,6 +436,7 @@ DOM イベントのように、追加のリスナーへ通知されることを�
     {
         // ...
         $alteredData = $event->getData('order') + $moreData;
+
         return $alteredData;
     }
 

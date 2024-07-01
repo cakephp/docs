@@ -17,7 +17,6 @@ CakePHP の中に含まれるコンポーネントの詳細については、各
     /controllers/components/authentication
     /controllers/components/flash
     /controllers/components/security
-    /controllers/components/pagination
     /controllers/components/request-handling
     /controllers/components/form-protection
     /controllers/components/check-http-cache
@@ -140,6 +139,7 @@ CakePHP の中に含まれるコンポーネントの詳細については、各
         {
             if ($this->Post->delete($this->request->getData('Post.id')) {
                 $this->Flash->success('Post deleted.');
+
                 return $this->redirect(['action' => 'index']);
             }
         }
@@ -313,6 +313,7 @@ CakePHP の中に含まれるコンポーネントの詳細については、各
     public function beforeFilter(EventInterface $event)
     {
         $event->stopPropagation();
+
         return $this->getController()->redirect('/');
     }
 

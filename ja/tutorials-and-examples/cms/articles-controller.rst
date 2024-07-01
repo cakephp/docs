@@ -20,7 +20,7 @@ CMS チュートリアル - Articles コントローラーの作成
 コントローラーのメソッドです。例えば、ユーザーが **www.example.com/articles/index**
 (**www.example.com/articles** と同じ) をリクエストした場合、CakePHP は、
 ``ArticlesController`` の ``index`` メソッドを呼びます。このメソッドは、モデル層に問い合わせ、
-ビューでテンプレートを描画してレスポンスの準備する必要があります。そのアクションのコードは、
+ビューでテンプレートを描画してレスポンスを準備する必要があります。そのアクションのコードは、
 次のようになります。 ::
 
     <?php
@@ -37,9 +37,9 @@ CMS チュートリアル - Articles コントローラーの作成
         }
     }
 
-``ArticlesController`` の ``index()`` 関数を定義することで、ユーザーは、
+``ArticlesController`` の ``index()`` メソッドを定義することで、ユーザーは、
 **www.example.com/articles/index** をリクエストすることで、そこにあるロジックに
-アクセスできるようになります。同様に、 ``foobar()`` という関数を定義した場合、
+アクセスできるようになります。同様に、 ``foobar()`` というメソッドを定義した場合、
 ユーザーはそのメソッドに **www.example.com/articles/foobar** で、アクセスできます。
 特定の URL を取得できるように、コントローラーとアクションの名前を付けたいという
 誘惑に駆られるかもしれません。その誘惑に抗ってください。代わりに、 :doc:`/intro/conventions`
@@ -181,14 +181,11 @@ view テンプレートの作成
         public function initialize(): void
         {
             parent::initialize();
-
-            $this->loadComponent('Paginator');
-            $this->loadComponent('Flash'); // FlashComponent をインクルード
         }
 
         public function index()
         {
-            $articles = $this->Paginator->paginate($this->Articles->find());
+            $articles = $this->paginate($this->Articles->find());
             $this->set(compact('articles'));
         }
 
@@ -209,6 +206,7 @@ view テンプレートの作成
 
                 if ($this->Articles->save($article)) {
                     $this->Flash->success(__('Your article has been saved.'));
+
                     return $this->redirect(['action' => 'index']);
                 }
                 $this->Flash->error(__('Unable to add your article.'));
@@ -341,6 +339,7 @@ edit アクションの追加
             $this->Articles->patchEntity($article, $this->request->getData());
             if ($this->Articles->save($article)) {
                 $this->Flash->success(__('Your article has been updated.'));
+
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('Unable to update your article.'));
@@ -470,6 +469,7 @@ delete アクションの追加
         $article = $this->Articles->findBySlug($slug)->firstOrFail();
         if ($this->Articles->delete($article)) {
             $this->Flash->success(__('The {0} article has been deleted.', $article->title));
+
             return $this->redirect(['action' => 'index']);
         }
     }

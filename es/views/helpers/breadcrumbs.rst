@@ -181,6 +181,7 @@ Esto puede ser útil cuando deseas transformar las migas y sobrescribir la lista
     $crumbs = $this->Breadcrumbs->getCrumbs();
     $crumbs = collection($crumbs)->map(function ($crumb) {
         $crumb['options']['class'] = 'breadcrumb-item';
+
         return $crumb;
     })->toArray();
 
