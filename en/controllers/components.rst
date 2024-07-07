@@ -183,6 +183,29 @@ component would look something like this::
     All components must extend :php:class:`Cake\\Controller\\Component`. Failing
     to do this will trigger an exception.
 
+Components can use :doc:`/development/dependency-injection` to receive services
+as constructor parameters::
+
+    namespace App\Controller\Component;
+
+    use Cake\Controller\Component;
+    use App\Service\UserService;
+
+    class SsoComponent extends Component
+    {
+        public function __construct(
+            ComponentRegistry $registry,
+            array $config = [],
+            UserService $users
+        ) {
+            parent::__construct($registry, $config);
+            $this->users = $users;
+        }
+    }
+
+.. versionadded: 5.1.0
+   DI container support for Components was added.
+
 Including your Component in your Controllers
 --------------------------------------------
 
