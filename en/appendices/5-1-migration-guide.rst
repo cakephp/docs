@@ -76,6 +76,12 @@ Core
   a typesafe way to cast request data or other input and return ``null`` when conversion fails.
 - ``pathCombine()`` was added to help build paths without worrying about duplicate and trailing slashes.
 
+Controller
+----------
+
+- Components can now use the DI container to have dependencies resolved and
+  provided as constructor parameters just like Controllers and Commands do.
+
 Database
 --------
 
