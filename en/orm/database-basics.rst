@@ -514,7 +514,6 @@ and have values set as text.
 .. versionadded:: 5.1.0
    Geospatial schema types were added.
 
-
 .. _adding-custom-database-types:
 
 Adding Custom Types
