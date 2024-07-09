@@ -85,6 +85,10 @@ Controller
 Database
 --------
 
+- Support for ``point``, ``linestring``, ``polygon`` and ``geometry`` types were
+  added. These types are useful when working with geospatial or cartesian
+  co-ordinates. Sqlite support uses text columns under the hood and lacks
+  functions to manipulate data as geospatial values.
 - ``SelectQuery::__debugInfo()`` now includes which connection role the query
   is for.
 

@@ -400,6 +400,14 @@ json
     Maps to a ``JSON`` type if it's available, otherwise it maps to ``TEXT``.
 enum
     See :ref:`enum-type`.
+geometry
+    Maps to a generic geometry storage type.
+point
+    Maps to a single point in geospatial storage.
+linestring
+    Maps to a single line in geospatial storage.
+polygon
+    Maps to a single polygon in geospatial storage.
 
 These types are used in both the schema reflection features that CakePHP
 provides, and schema generation features CakePHP uses when using test fixtures.
@@ -410,6 +418,10 @@ doing queries. For example a column that is marked as 'datetime' will
 automatically convert input parameters from ``DateTime`` instances into a
 timestamp or formatted datestrings. Likewise, 'binary' columns will accept file
 handles, and generate file handles when reading data.
+
+.. versionchanged:: 5.1.0
+   The ``geometry``, ``point``, ``linestring``, and ``polygon`` types were
+   added.
 
 .. _datetime-type:
 
@@ -491,6 +503,16 @@ CakePHP recommends a few conventions for enums:
 - Enums should implement the ``Cake\Database\Type\EnumLabelInterface`` to
   improve compatibility with bake, and ``FormHelper``.
 
+Geospatial Types
+----------------
+
+The ``geometry``, ``point``, ``linestring``, and ``polygon`` types are also known
+as the "geospatial types". CakePHP offers limited support for geospatial
+columns. Currently they can be defined in migrations, read in schema reflection,
+and have values set as text.
+
+.. versionadded:: 5.1.0
+   Geospatial schema types were added.
 
 .. _adding-custom-database-types:
 
