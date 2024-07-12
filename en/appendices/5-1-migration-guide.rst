@@ -30,6 +30,9 @@ Behavior Changes
   keys will have new group prefix hashes generated which will cause cache
   misses. Consider an incremental deploy to avoid operating on an entirely cold
   cache.
+- ``FormHelper::getFormProtector()`` now returns ``null`` in addition to its
+  previous types. This allows dynamic view code to run with fewer errors and
+  shouldn't impact most applications.
 
 Deprecations
 ============
