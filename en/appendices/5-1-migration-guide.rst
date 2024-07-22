@@ -33,6 +33,8 @@ Behavior Changes
 - ``FormHelper::getFormProtector()`` now returns ``null`` in addition to its
   previous types. This allows dynamic view code to run with fewer errors and
   shouldn't impact most applications.
+- The default value for ``valueSeparator`` in ``Table::findList()`` is now
+  a single space instead of ``;``.
 
 Deprecations
 ============
