@@ -73,6 +73,13 @@ Console
 - ``Arguments::hasArgument()`` and ``getArgument()`` will now raise an exception
   if an unknown argument name is provided. This helps prevent mixing up option/argument names.
 
+
+Controller
+----------
+
+- Components can now use the DI container to have dependencies resolved and
+  provided as constructor parameters just like Controllers and Commands do.
+
 Core
 ----
 
@@ -80,12 +87,6 @@ Core
 - The ``toString``, ``toInt``, ``toBool`` functions were added. They give you
   a typesafe way to cast request data or other input and return ``null`` when conversion fails.
 - ``pathCombine()`` was added to help build paths without worrying about duplicate and trailing slashes.
-
-Controller
-----------
-
-- Components can now use the DI container to have dependencies resolved and
-  provided as constructor parameters just like Controllers and Commands do.
 
 Database
 --------
@@ -103,6 +104,12 @@ Datasource
 - ``RulesChecker::remove()``, ``removeCreate()``, ``removeUpdate()``, and
   ``removeDelete()`` methods were added. These methods allow you to remove rules
   by name.
+
+Error
+-----
+
+- ``ErrorLoggerInterface`` now extends ``Psr\Log\LoggerInterface`` improving
+  interoperability with custom loggers that use PSR-3 traits and interfaces.
 
 Http
 ----
