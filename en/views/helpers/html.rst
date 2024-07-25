@@ -137,14 +137,15 @@ key in the $attributes parameter to ``true``, ie - ``['block' => true]``.
 If you set the "type" attribute using the $attributes parameter,
 CakePHP contains a few shortcuts:
 
-======== ======================
- type     translated value
-======== ======================
-html     text/html
-rss      application/rss+xml
-atom     application/atom+xml
-icon     image/x-icon
-======== ======================
+=========  ======================
+ type       translated value
+=========  ======================
+html       text/html
+rss        application/rss+xml
+atom       application/atom+xml
+icon       image/x-icon
+csrfToken  The current CSRF token
+=========  ======================
 
 .. code-block:: php
 
@@ -214,6 +215,9 @@ In addition to making predefined meta tags, you can create link elements::
 
 Any attributes provided to meta() when called this way will be added to the
 generated link tag.
+
+.. versionchanged:: 5.1.0
+   The ``csrfToken`` type was added.
 
 Linking to Images
 -----------------

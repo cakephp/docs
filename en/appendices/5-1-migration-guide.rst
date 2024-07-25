@@ -166,3 +166,5 @@ Helpers
   * ``stripProtocol``: Strips ``http://`` and ``https://`` from the beginning of the link. Default off.
   * ``maxLength``: The maximum length of the link label. Default off.
   * ``ellipsis``: The string to append to the end of the link label. Defaults to UTF8 version.
+- ``HtmlHelper::meta()`` can now create a meta tag containing the current CSRF
+  token using ``meta('csrfToken')``.
