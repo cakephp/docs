@@ -255,7 +255,7 @@ composerを使ってAuthenticationプラグインをインストールします�
 デフォルトでは、認証情報はリクエストデータの ``email`` と ``password`` フィールドから
 抽出されます。認証結果は ``authentication`` という名前のリクエスト属性に注入されます。
 この結果はいつでもコントローラのアクションから
-``$this->request->getAttribute('authentication')``を使って調べることができます。
+``$this->request->getAttribute('authentication')`` を使って調べることができます。
 すべてのページは ``AuthenticationComponent`` がリクエストごとに結果をチェックしているため、
 制限されてしまいます。認証されたユーザを見つけられなかった場合は ユーザーを ``/users/login``
 のページにリダイレクトします。
