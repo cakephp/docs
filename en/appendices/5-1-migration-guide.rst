@@ -35,6 +35,7 @@ Behavior Changes
   shouldn't impact most applications.
 - The default value for ``valueSeparator`` in ``Table::findList()`` is now
   a single space instead of ``;``.
+- ``ErrorLogger`` uses ``Psr\Log\LogTrait`` now.
 
 Deprecations
 ============
@@ -105,11 +106,6 @@ Datasource
   ``removeDelete()`` methods were added. These methods allow you to remove rules
   by name.
 
-Error
------
-
-- ``ErrorLoggerInterface`` now extends ``Psr\Log\LoggerInterface`` improving
-  interoperability with custom loggers that use PSR-3 traits and interfaces.
 
 Http
 ----
