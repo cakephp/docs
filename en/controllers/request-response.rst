@@ -106,6 +106,8 @@ data and other input::
     use function Cake\Core\toBool;
     use function Cake\Core\toInt;
     use function Cake\Core\toString;
+    use function Cake\I18n\toDate;
+    use function Cake\I18n\toDateTime;
 
     // $active is bool|null.
     $active = toBool($this->request->getQuery('active'));
@@ -115,6 +117,12 @@ data and other input::
 
     // $query is string|null.
     $query = toString($this->request->getQuery('query'));
+
+    // Parse a date based on the format or null
+    $date = toDate($this->request->getQuery('date'), 'Y-m-d');
+
+    // Parse a datetime based on a format or null
+    $date = toDateTime($this->request->getQuery('datetime'), 'Y-m-d H:i:s');
 
 .. versionadded:: 5.1.0
     Casting functions were added.
@@ -413,7 +421,7 @@ There are several built-in detectors that you can use:
   X-Requested-With = XMLHttpRequest.
 * ``is('ssl')`` Check to see whether the request is via SSL.
 * ``is('flash')`` Check to see whether the request has a User-Agent of Flash.
-* ``is('json')`` Check to see whether the request URL has 'json' extension or the 
+* ``is('json')`` Check to see whether the request URL has 'json' extension or the
   `Accept` header is set to 'application/json'.
 * ``is('xml')`` Check to see whether the request URL has 'xml' extension or the `Accept` header is set to
   'application/xml' or 'text/xml'.

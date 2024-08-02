@@ -125,6 +125,9 @@ I18n
 
 - ``Number::formatter()`` and ``currency()`` now accept a ``roundingMode``
   option to override how rounding is done.
+- The ``toDate``, and ``toDateTime`` functions were added. They give you
+  a typesafe way to cast request data or other input and return ``null`` when
+  conversion fails.
 
 TestSuite
 ---------
