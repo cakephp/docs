@@ -637,6 +637,10 @@ the ``$options`` argument::
         $routes->connect('/{controller}');
     });
 
+Note the additional route parameters will be added to all the connected routes defined
+inside the prefix block. You will need to use all the parameters in the url array to 
+build the route later, if you don't use them you'll get a ``MissingRouteException``.
+
 Multi word prefixes are by default converted using dasherize inflection, ie ``MyPrefix``
 would be mapped to ``my-prefix`` in the URL. Make sure to set a path for such prefixes
 if you want to use a different format like for example underscoring::
