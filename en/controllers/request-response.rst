@@ -224,20 +224,24 @@ replace all possibly existing uploaded files::
 PUT, PATCH or DELETE Data
 -------------------------
 
-.. php:method:: input($callback, [$options])
+.. php:method:: getBody()
 
 When building REST services, you often accept request data on ``PUT`` and
 ``DELETE`` requests. Any ``application/x-www-form-urlencoded`` request body data
-will automatically be parsed and set to ``$this->data`` for ``PUT`` and
-``DELETE`` requests. If you are accepting JSON or XML data, see below for how
-you can access those request bodies.
+will automatically be parsed and available via ``$request->getData()`` for ``PUT`` and
+``DELETE`` requests. If you are accepting JSON or XML data, you can
+access the raw data with ``getBody()``::
 
-When accessing the input data, you can decode it with an optional function.
-This is useful when interacting with XML or JSON request body content.
-Additional parameters for the decoding function can be passed as arguments to
-``input()``::
+    // Get the stream wrapper on the request body
+    $body = $request->getBody();
 
-    $jsonData = $this->request->input('json_decode');
+    // Get the request body as a string
+    $bodyString = (string)$request->getBody();
+
+If your requests contain XML or JSON request content, you should consider using
+:ref:`body-parser-middleware` to have CakePHP automatically parse those content
+types making the parsed data available in ``$request->getData()`` and
+``$request->getParsedBody()``.
 
 Environment Variables (from $_SERVER and $_ENV)
 -----------------------------------------------
@@ -394,7 +398,7 @@ There are several built-in detectors that you can use:
   X-Requested-With = XMLHttpRequest.
 * ``is('ssl')`` Check to see whether the request is via SSL.
 * ``is('flash')`` Check to see whether the request has a User-Agent of Flash.
-* ``is('json')`` Check to see whether the request URL has 'json' extension or the 
+* ``is('json')`` Check to see whether the request URL has 'json' extension or the
   `Accept` header is set to 'application/json'.
 * ``is('xml')`` Check to see whether the request URL has 'xml' extension or the `Accept` header is set to
   'application/xml' or 'text/xml'.
