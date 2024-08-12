@@ -54,5 +54,5 @@ principais elementos existentes em uma aplicação construída com o CakePHP:
   lidam com a validação e a lógica de domínio em sua aplicação.
 
 .. meta::
-    :title lang=pt: .. CakePHP Cookbook arquivo mestre de documentação, criado por
-    :keywords lang=pt: modelo de documentos,documentação principal,camada de apresentação,documentação de projeto,guia rápido,código-fonte original,sphinx,liking,cookbook,validade,convenções,validação,cakephp,precisão,armazenamento e recuperação,coração,blog,projeto
+    :title lang=pt: .. CakePHP book arquivo mestre de documentação, criado por
+    :keywords lang=pt: modelo de documentos,documentação principal,camada de apresentação,documentação de projeto,guia rápido,código-fonte original,sphinx,liking,book,validade,convenções,validação,cakephp,precisão,armazenamento e recuperação,coração,blog,projeto
