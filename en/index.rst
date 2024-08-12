@@ -6,7 +6,7 @@ CakePHP 4 is a web development framework running on PHP |phpversion| (min. PHP |
 Read :doc:`CakePHP at a Glance </intro>` to get an introduction to the
 fundamentals of CakePHP.
 
-The CakePHP cookbook is an openly developed and community editable documentation
+The CakePHP book is an openly developed and community editable documentation
 project. Notice the pencil icon button fixated against the right wall; it will
 direct you to the GitHub online editor of the active page, allowing you to
 contribute any additions, deletions, or corrections to the documentation.
@@ -17,7 +17,7 @@ contribute any additions, deletions, or corrections to the documentation.
 
     .. image:: /_static/img/read-the-book.jpg
 
-    Enjoy the CakePHP cookbook almost anywhere. Available as both a PDF and
+    Enjoy the CakePHP book almost anywhere. Available as both a PDF and
     EPUB, you can now read it on more devices, as well as offline.
 
     - `PDF <../_downloads/en/CakePHPBook.pdf>`_
@@ -54,5 +54,5 @@ elements in a CakePHP application:
   validation, and domain logic within your application.
 
 .. meta::
-    :title lang=en: .. CakePHP Cookbook documentation master file, created by
-    :keywords lang=en: doc models,documentation master,presentation layer,documentation project,quickstart,original source,sphinx,liking,cookbook,validity,conventions,validation,cakephp,accuracy,storage and retrieval,heart,blog,project hope
+    :title lang=en: .. CakePHP Book documentation master file, created by
+    :keywords lang=en: doc models,documentation master,presentation layer,documentation project,quickstart,original source,sphinx,liking,book,validity,conventions,validation,cakephp,accuracy,storage and retrieval,heart,blog,project hope
