@@ -20,7 +20,7 @@ correções para a documentação.
     Consulte o *cookbook* do CakePHP praticamente em qualquer lugar. Disponível
     como PDF e EPUB, você pode lê-lo em diversos dispositivos, e também offline.
 
-    - `PDF <../_downloads/pt/CakePHPCookbook.pdf>`_
+    - `PDF <../_downloads/pt/CakePHPBook.pdf>`_
     - `EPUB <../_downloads/pt/CakePHP.epub>`_
     - `Código-fonte Original <https://github.com/cakephp/docs>`_
 
