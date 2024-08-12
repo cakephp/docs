@@ -63,7 +63,7 @@ html_use_opensearch = 'https://book.cakephp.org/' + version + '/' + language
 # (source start file, target name, title, author,
 # documentclass [howto/manual]).
 latex_documents = [
-    ('pdf-contents', 'CakePHPCookbook.tex', u'CakePHP Cookbook Documentation',
+    ('pdf-contents', 'CakePHPBook.tex', u'CakePHP Book',
      u'Cake Software Foundation', 'manual'),
 ]
 
@@ -72,7 +72,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'cakephpcookbook', u'CakePHP Cookbook Documentation',
+    ('index', 'cakephpbook', u'CakePHP Book',
      [u'CakePHP'], 1)
 ]
 
@@ -80,7 +80,7 @@ man_pages = [
 # -- Options for Epub output -------------------------------------------------
 
 # Bibliographic Dublin Core info.
-epub_title = u'CakePHP Cookbook'
+epub_title = u'CakePHP Book'
 epub_author = u'Cake Software Foundation, Inc.'
 epub_publisher = u'Cake Software Foundation, Inc.'
 epub_copyright = u'%d, Cake Software Foundation, Inc.' % datetime.datetime.now().year
@@ -98,7 +98,7 @@ epub_scheme = 'URL'
 epub_identifier = 'https://cakephp.org'
 
 # A unique identification for the text.
-epub_uid = 'cakephpcookbook1393624653'
+epub_uid = 'cakephpbook1393624653'
 
 # A list of files that should not be packed into the epub file.
 epub_exclude_files = [

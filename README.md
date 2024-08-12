@@ -106,7 +106,7 @@ Building the PDF is a non-trivial task.
 2. Run `make latex-en`.
 3. Run `make pdf-en`.
 
-At this point the completed PDF should be in `build/latex/en/CakePHPCookbook.pdf`.
+At this point the completed PDF should be in `build/latex/en/CakePHPBook.pdf`.
 
 Contributing
 ------------

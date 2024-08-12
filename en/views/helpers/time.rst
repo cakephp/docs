@@ -29,7 +29,7 @@ posts using the TimeHelper::
     echo $this->Time->format(
       $post->created,
       \IntlDateFormatter::FULL,
-      null,
+      false,
       $user->time_zone
     );
     // Will display 'Saturday, August 22, 2011 at 11:53:00 PM GMT'

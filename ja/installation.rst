@@ -481,7 +481,7 @@ server ディレクティブの例は、次の通りです。
 
 .. note::
     最近の PHP-FPM の設定では、アドレス 127.0.0.1 の TCP 9000 ポートの代わりに unix php-fpm
-    ソケッットを待ち受けるように設定します。もし、上記の設定で 502 bad gateway エラーになった場合、
+    ソケットを待ち受けるように設定します。もし、上記の設定で 502 bad gateway エラーになった場合、
     TCP ポートの代わりに unix ソケットパスを使用するために ``fastcgi_pass`` を更新してください
     (例: fastcgi_pass unix:/var/run/php/php7.1-fpm.sock;)。
 

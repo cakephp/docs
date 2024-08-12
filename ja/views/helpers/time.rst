@@ -30,7 +30,7 @@ TimeHelper を使って投稿日時を補正することができます。 ::
     echo $this->Time->format(
       $post->created,
       \IntlDateFormatter::FULL,
-      null,
+      false,
       $user->time_zone
     );
     // GMT+0 のユーザーには 'Saturday, August 22, 2011 at 11:53:00 PM GMT' と

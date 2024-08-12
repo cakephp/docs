@@ -31,7 +31,7 @@ pouvons corriger la date et le temps de nos posts en utilisant le TimeHelper::
     echo $this->Time->format(
       $post->created,
       \IntlDateFormatter::FULL,
-      null,
+      false,
       $user->time_zone
     );
     // Affichera 'Saturday, August 22, 2011 at 11:53:00 PM GMT'

@@ -182,6 +182,8 @@ I18n
 
 - ``FrozenDate`` was renamed to `Date` and ``FrozenTime`` was renamed to `DateTime`.
 - ``Time`` now extends ``Cake\Chronos\ChronosTime`` and is therefore immutable.
+- ``Date`` objects do not extend ``DateTimeInterface`` anymore - therefore you can't compare them with ``DateTime`` objects.
+  See the `cakephp/chronos release documentation <https://github.com/cakephp/chronos/releases/tag/3.0.2>`__ for more information.
 - ``Date::parseDateTime()`` was removed.
 - ``Date::parseTime()`` was removed.
 - ``Date::setToStringFormat()`` and ``Date::setJsonEncodeFormat()`` no longer accept an array.
