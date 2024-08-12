@@ -19,7 +19,7 @@ o corrección de la documentación.
     Disfruta del manual de CakePHP en cualquier sitio. Disponible tanto en PDF
     como en EPUB, puedes leerlo en más dispositivos y de manera offline.
 
-    - `PDF <../_downloads/es/CakePHPCookbook.pdf>`_
+    - `PDF <../_downloads/es/CakePHPBook.pdf>`_
     - `EPUB <../_downloads/es/CakePHP.epub>`_
     - `Original Source <https://github.com/cakephp/docs>`_
 
