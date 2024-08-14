@@ -51,5 +51,5 @@ CakePHP クックブックは、オープンに開発されている、コミュ
   バリデーションやあなたのアプリケーションのドメインロジックを処理します。
 
 .. meta::
-    :title lang=ja: .. CakePHP Cookbook documentation master file, created by
-    :keywords lang=ja: doc models,documentation master,presentation layer,documentation project,quickstart,original source,sphinx,liking,cookbook,validity,conventions,validation,cakephp,accuracy,storage and retrieval,heart,blog,project hope
+    :title lang=ja: .. CakePHP Book documentation master file, created by
+    :keywords lang=ja: doc models,documentation master,presentation layer,documentation project,quickstart,original source,sphinx,liking,book,validity,conventions,validation,cakephp,accuracy,storage and retrieval,heart,blog,project hope
