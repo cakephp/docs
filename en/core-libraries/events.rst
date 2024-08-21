@@ -198,6 +198,30 @@ As you can see in the above code, the ``on()`` function will accept instances
 of the ``EventListener`` interface. Internally, the event manager will use
 ``implementedEvents()`` to attach the correct callbacks.
 
+.. versionadded:: 5.1.0
+    The ``events`` hook was added to the ``BaseApplication`` as well as the ``BasePlugin`` class
+
+As of CakePHP 5.1 it is recommended to register event listeners by adding them via the ``events`` hook in your application or plugin class::
+
+    namespace App;
+    
+    use App\Event\UserStatistic;
+    use Cake\Event\EventManagerInterface;
+    use Cake\Http\BaseApplication;
+
+    class Application extends BaseApplication
+    {
+        // The rest of your Application class
+
+        public function events(EventManagerInterface $eventManager): EventManagerInterface
+        {
+            $statistics = new UserStatistic();
+            $eventManager->on($statistics);
+
+            return $eventManager;
+        }
+    }
+
 Registering Anonymous Listeners
 -------------------------------
 
