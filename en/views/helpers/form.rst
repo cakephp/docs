@@ -101,7 +101,7 @@ Output:
 .. code-block:: html
 
     <form method="post" action="/articles/edit/5">
-    <input type="hidden" name="_method" value="PUT" />
+    <input type="hidden" name="_method" value="PUT">
 
 .. note::
 
@@ -377,7 +377,7 @@ methods of FormHelper.
 By default the ``control()`` method will employ the following widget templates::
 
     'inputContainer' => '<div class="input {{type}}{{required}}">{{content}}</div>'
-    'input' => '<input type="{{type}}" name="{{name}}"{{attrs}}/>'
+    'input' => '<input type="{{type}}" name="{{name}}"{{attrs}}>'
     'requiredClass' => 'required'
 
 In case of validation errors it will also use::
@@ -567,11 +567,11 @@ as well as HTML attributes. This subsection will cover the options specific to
 
       <div class="input file">
           <label for="field">Field</label>
-          <input type="file" name="field" value="" id="field" />
+          <input type="file" name="field" value="" id="field">
       </div>
       <div class="input email">
           <label for="email">Email</label>
-          <input type="email" name="email" value="" id="email" />
+          <input type="email" name="email" value="" id="email">
       </div>
 
 * ``$options['label']`` - Either a string caption or an array of
@@ -591,7 +591,7 @@ as well as HTML attributes. This subsection will cover the options specific to
 
       <div class="input">
           <label for="name">The User Alias</label>
-          <input name="name" type="text" value="" id="name" />
+          <input name="name" type="text" value="" id="name">
       </div>
 
   Alternatively, set this key to ``false`` to disable the generation of the
@@ -606,7 +606,7 @@ as well as HTML attributes. This subsection will cover the options specific to
   .. code-block:: html
 
       <div class="input">
-          <input name="name" type="text" value="" id="name" />
+          <input name="name" type="text" value="" id="name">
       </div>
 
   If the label is disabled, and a ``placeholder`` attribute is provided, the
@@ -631,7 +631,7 @@ as well as HTML attributes. This subsection will cover the options specific to
 
       <div class="input">
           <label for="name" class="thingy">The User Alias</label>
-          <input name="name" type="text" value="" id="name" />
+          <input name="name" type="text" value="" id="name">
       </div>
 
 * ``$options['options']`` - You can provide in here an array containing
@@ -830,7 +830,7 @@ Will output:
 
 .. code-block:: html
 
-    <input name="id" type="hidden" />
+    <input name="id" type="hidden">
 
 Creating Textareas
 ------------------
@@ -987,8 +987,8 @@ methods are described in each method's own section.)
 
   .. code-block:: html
 
-      <input type="hidden" name="published" value="0" />
-      <input type="checkbox" name="published" value="1" />
+      <input type="hidden" name="published" value="0">
+      <input type="checkbox" name="published" value="1">
 
   This can be disabled by setting ``'hiddenField'`` to ``false``::
 
@@ -1011,34 +1011,34 @@ methods are described in each method's own section.)
   .. code-block:: html
 
       <h2>Primary Colors</h2>
-      <input type="hidden" name="color" value="0" />
+      <input type="hidden" name="color" value="0">
       <label for="color-red">
-          <input type="checkbox" name="color[]" value="5" id="color-red" />
+          <input type="checkbox" name="color[]" value="5" id="color-red">
           Red
       </label>
 
       <label for="color-blue">
-          <input type="checkbox" name="color[]" value="5" id="color-blue" />
+          <input type="checkbox" name="color[]" value="5" id="color-blue">
           Blue
       </label>
 
       <label for="color-yellow">
-          <input type="checkbox" name="color[]" value="5" id="color-yellow" />
+          <input type="checkbox" name="color[]" value="5" id="color-yellow">
           Yellow
       </label>
 
       <h2>Tertiary Colors</h2>
-      <input type="hidden" name="color" value="0" />
+      <input type="hidden" name="color" value="0">
       <label for="color-green">
-          <input type="checkbox" name="color[]" value="5" id="color-green" />
+          <input type="checkbox" name="color[]" value="5" id="color-green">
           Green
       </label>
       <label for="color-purple">
-          <input type="checkbox" name="color[]" value="5" id="color-purple" />
+          <input type="checkbox" name="color[]" value="5" id="color-purple">
           Purple
       </label>
       <label for="color-orange">
-          <input type="checkbox" name="color[]" value="5" id="color-orange" />
+          <input type="checkbox" name="color[]" value="5" id="color-orange">
           Orange
       </label>
 
@@ -1612,7 +1612,7 @@ Output:
 
 .. code-block:: html
 
-    <input type="datetime-local" name="registered" />
+    <input type="datetime-local" name="registered">
 
 The value for the input can be any valid datetime string or ``DateTime`` instance.
 
@@ -1624,7 +1624,7 @@ Output:
 
 .. code-block:: html
 
-    <input type="datetime-local" name="registered" value="2019-02-08T18:20:10" />
+    <input type="datetime-local" name="registered" value="2019-02-08T18:20:10">
 
 Creating Date Controls
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -1646,7 +1646,7 @@ Output:
 
 .. code-block:: html
 
-    <input type="date" name="registered" />
+    <input type="date" name="registered">
 
 Creating Time Controls
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -1668,7 +1668,7 @@ Output:
 
 .. code-block:: html
 
-    <input type="time" name="released" />
+    <input type="time" name="released">
 
 Creating Month Controls
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -1690,7 +1690,7 @@ Will output:
 
 .. code-block:: html
 
-    <input type="month" name="mob" />
+    <input type="month" name="mob">
 
 Creating Year Controls
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -1877,7 +1877,7 @@ the field's required and notBlank validation rules will be used in lieu of the d
 browser HTML5 required messages. Enabling the option will add the ``onvalid`` and ``oninvalid``
 event attributes to your fields, for example::
 
-    <input type="text" name="field" required onvalid="this.setCustomValidity('')" oninvalid="this.setCustomValidity('Custom notBlank message')" />
+    <input type="text" name="field" required onvalid="this.setCustomValidity('')" oninvalid="this.setCustomValidity('Custom notBlank message')">
 
 If you want to manually set those events with custom JavaScript, you can set the ``autoSetCustomValidity``
 option to ``false`` and use the special ``customValidityMessage`` template variable instead. This
@@ -1917,7 +1917,7 @@ relative to *webroot/img*.
 
 By default it will use the following widget templates::
 
-    'inputSubmit' => '<input type="{{type}}"{{attrs}}/>'
+    'inputSubmit' => '<input type="{{type}}"{{attrs}}>'
     'submitContainer' => '<div class="submit">{{content}}</div>'
 
 **Options for Submit**
