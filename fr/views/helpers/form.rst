@@ -106,7 +106,7 @@ Affichera:
 .. code-block:: html
 
     <form method="post" action="/articles/edit/5">
-    <input type="hidden" name="_method" value="PUT" />
+    <input type="hidden" name="_method" value="PUT">
 
 .. note::
 
@@ -400,7 +400,7 @@ méthodes de FormHelper.
 Par défaut, la méthode ``control()`` utilisera les templates de widget suivant::
 
     'inputContainer' => '<div class="input {{type}}{{required}}">{{content}}</div>'
-    'input' => '<input type="{{type}}" name="{{name}}"{{attrs}}/>'
+    'input' => '<input type="{{type}}" name="{{name}}"{{attrs}}>'
 
 En cas d'erreurs de validation, elle utilisera également::
 
@@ -592,11 +592,11 @@ couvrir les options spécifiques de ``FormHelper::control()``.
 
       <div class="input file">
           <label for="field">Field</label>
-          <input type="file" name="field" value="" id="field" />
+          <input type="file" name="field" value="" id="field">
       </div>
       <div class="input email">
           <label for="email">Email</label>
-          <input type="email" name="email" value="" id="email" />
+          <input type="email" name="email" value="" id="email">
       </div>
 
 * ``$options['label']`` Soit une chaîne qui sera utilisée comme valeur pour
@@ -617,7 +617,7 @@ couvrir les options spécifiques de ``FormHelper::control()``.
 
       <div class="input">
           <label for="name">The User Alias</label>
-          <input name="name" type="text" value="" id="name" />
+          <input name="name" type="text" value="" id="name">
       </div>
 
   Vous pouvez définir cette clé à ``false`` pour désactiver l'affichage de
@@ -631,7 +631,7 @@ couvrir les options spécifiques de ``FormHelper::control()``.
   .. code-block:: html
 
       <div class="input">
-          <input name="name" type="text" value="" id="name" />
+          <input name="name" type="text" value="" id="name">
       </div>
 
   Si le label est désactivé et qu'un attribut ``placeholder`` est fourni,
@@ -656,7 +656,7 @@ couvrir les options spécifiques de ``FormHelper::control()``.
 
       <div class="input">
           <label for="name" class="thingy">The User Alias</label>
-          <input name="name" type="text" value="" id="name" />
+          <input name="name" type="text" value="" id="name">
       </div>
 
 * ``$options['options']`` - Vous pouvez passer à cette option un tableau
@@ -845,7 +845,7 @@ Affichera:
 
 .. code-block:: html
 
-    <input name="id" type="hidden" />
+    <input name="id" type="hidden">
 
 Créer des Textareas
 -------------------
@@ -1000,8 +1000,8 @@ décrites dans les sections dédiées à ces méthodes).
 
   .. code-block:: html
 
-      <input type="hidden" name="published" value="0" />
-      <input type="checkbox" name="published" value="1" />
+      <input type="hidden" name="published" value="0">
+      <input type="checkbox" name="published" value="1">
 
   Ceci peut être désactivé en définissant l'option ``hiddenField`` à ``false``::
 
@@ -1025,34 +1025,34 @@ décrites dans les sections dédiées à ces méthodes).
   .. code-block:: html
 
       <h2>Couleurs primaires</h2>
-      <input type="hidden" name="color" value="0" />
+      <input type="hidden" name="color" value="0">
       <label for="color-red">
-          <input type="checkbox" name="color[]" value="5" id="color-red" />
+          <input type="checkbox" name="color[]" value="5" id="color-red">
           Rouge
       </label>
 
       <label for="color-blue">
-          <input type="checkbox" name="color[]" value="5" id="color-blue" />
+          <input type="checkbox" name="color[]" value="5" id="color-blue">
           Bleu
       </label>
 
       <label for="color-yellow">
-          <input type="checkbox" name="color[]" value="5" id="color-yellow" />
+          <input type="checkbox" name="color[]" value="5" id="color-yellow">
           Jaune
       </label>
 
       <h2>Couleurs tertiaires</h2>
-      <input type="hidden" name="color" value="0" />
+      <input type="hidden" name="color" value="0">
       <label for="color-green">
-          <input type="checkbox" name="color[]" value="5" id="color-green" />
+          <input type="checkbox" name="color[]" value="5" id="color-green">
           Vert
       </label>
       <label for="color-purple">
-          <input type="checkbox" name="color[]" value="5" id="color-purple" />
+          <input type="checkbox" name="color[]" value="5" id="color-purple">
           Magenta
       </label>
       <label for="color-orange">
-          <input type="checkbox" name="color[]" value="5" id="color-orange" />
+          <input type="checkbox" name="color[]" value="5" id="color-orange">
           Orange
       </label>
 
@@ -1714,7 +1714,7 @@ Affichera:
 
 .. code-block:: html
 
-    <input type="month" name="mob" />
+    <input type="month" name="mob">
 
 Créer des Éléments Année
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1950,7 +1950,7 @@ le chemin de l'image sera relatif à *webroot*, sinon, il sera relatif à *webro
 
 Par défaut, les templates de widgets utilisés sont::
 
-    'inputSubmit' => '<input type="{{type}}"{{attrs}}/>'
+    'inputSubmit' => '<input type="{{type}}"{{attrs}}>'
     'submitContainer' => '<div class="submit">{{content}}</div>'
 
 **Options pour les Submit**
