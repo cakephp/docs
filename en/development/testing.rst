@@ -1098,12 +1098,21 @@ to configure the requests you will send to your application under test::
     // Set session data
     $this->session(['Auth.User.id' => 1]);
 
-    // Configure headers
+    // Configure headers and merge with the existing request
     $this->configRequest([
         'headers' => ['Accept' => 'application/json']
     ]);
 
+    // Replace the existing request. Added in 5.1.0
+    $this->replaceRequest([
+        'headers' => ['Accept' => 'application/json']
+    ]);
+
+
 The state set by these helper methods is reset in the ``tearDown()`` method.
+
+.. versionadded:: 5.1.0
+    ``replaceRequest()`` was added.
 
 Testing Actions Protected by CsrfComponent or SecurityComponent
 ---------------------------------------------------------------

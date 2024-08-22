@@ -138,6 +138,7 @@ TestSuite
   its methods were updated to be static.
 - ``LogTestTrait`` was added. This new trait makes it easy to capture logs in
   your tests and make assertions on the presence or absence of log messages.
+- ``IntegrationTestTrait::replaceRequest()`` was added.
 
 Utility
 -------
