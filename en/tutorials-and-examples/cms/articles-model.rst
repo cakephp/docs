@@ -65,6 +65,7 @@ look like this::
             'created' => true,
             'modified' => true,
             'users' => true,
+            'tags' => true,
         ];
     }
 
