@@ -707,6 +707,28 @@ As seen above, the formatters attached to associated query builders are scoped
 to operate only on the data in the association. CakePHP will ensure that
 computed values are inserted into the correct entity.
 
+If you want to replace the results of an association finder with
+``formatResults`` and your replacement data is an associative array, use
+``preserveKeys`` to retain keys when results are mapped to the parent query. For
+example::
+
+    public function findSlugged(SelectQuery $query): SelectQuery
+    {
+        return $query->applyOptions(['preserveKeys' => true])
+            ->formatResults(function ($results) {
+                return $results->indexBy(function ($record) {
+                    return Text::slug($record->name);
+                });
+            });
+    }
+
+The ``preserveKeys`` option can be set as a contain option as well.
+
+.. versionadded:: 5.1.0
+    The ``preserveKeys`` option was added.
+
+
+
 .. _advanced-query-conditions:
 
 Advanced Conditions

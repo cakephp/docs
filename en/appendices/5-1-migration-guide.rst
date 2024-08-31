@@ -131,6 +131,13 @@ I18n
   a typesafe way to cast request data or other input and return ``null`` when
   conversion fails.
 
+ORM
+---
+
+- Setting the ``preserveKeys`` option on association finder queries. This can be
+  used with ``formatResults()`` to replace association finder results with an
+  associative array.
+
 TestSuite
 ---------
 
