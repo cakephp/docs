@@ -89,13 +89,17 @@ composer commands:
     php composer.phar require --dev --update-with-dependencies "phpunit/phpunit:^8.0"
     php composer.phar require --update-with-dependencies "cakephp/cakephp:4.0.*"
 
-Application.php
+Others
 ===============
 
-Next, ensure your ``src/Application.php`` has been updated to have the same
-method signatures as the one found in cakephp/app. You can find the current
-`Application.php
-<https://github.com/cakephp/app/blob/4.x/src/Application.php>`__ on GitHub.
+Next, ensure your files has been updated to have the same
+method signatures as those found in cakephp/app. 
+
+#. ``src/Application.php`` at `Application.php <https://github.com/cakephp/app/blob/4.x/src/Application.php>`__ on GitHub.
+#. ``config/app.php`` at `app.php <https://github.com/cakephp/app/blob/4.x/config/app.php>`__ on GitHub.
+#. ``config/bootstrap.php`` at `bootstrap.php <https://github.com/cakephp/app/blob/4.x/config/bootstrap.php>`__ on GitHub.
+#. ``config/paths.php`` at `paths.php <https://github.com/cakephp/app/blob/4.x/config/paths.php>`__ on GitHub, where ``RESOURCES`` needs to be defined.
+#. ``config/routes.php`` at `routes.php <https://github.com/cakephp/app/blob/4.x/config/routes.php>`__ on GitHub.
 
 If you are providing some kind of REST API, don't forget to include the
 :ref:`body-parser-middleware`. Finally, you should consider upgrading to the new
