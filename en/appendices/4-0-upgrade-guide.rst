@@ -92,7 +92,7 @@ composer commands:
 Others
 ===============
 
-Next, ensure your files has been updated to have the same
+Next, ensure your files have been updated to have the same
 method signatures as those found in cakephp/app. 
 
 #. ``src/Application.php`` at `Application.php <https://github.com/cakephp/app/blob/4.x/src/Application.php>`__ on GitHub.
