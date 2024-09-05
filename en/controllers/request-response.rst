@@ -930,7 +930,7 @@ that uniquely identifies the requested resource, as a checksum does for a file,
 in order to determine whether it matches a cached resource.
 
 To take advantage of this header, you must either call the
-``checkNotModified()`` method manually or include the
+``isNotModified()`` method manually or include the
 :doc:`/controllers/components/check-http-cache` in your controller::
 
     public function index()
@@ -943,7 +943,7 @@ To take advantage of this header, you must either call the
         $checksum = md5(json_encode($articles));
 
         $response = $this->response->withEtag($checksum);
-        if ($response->checkNotModified($this->request)) {
+        if ($response->isNotModified($this->request)) {
             return $response;
         }
 
@@ -967,14 +967,14 @@ last time. Setting this header helps CakePHP tell caching clients whether the
 response was modified or not based on their cache.
 
 To take advantage of this header, you must either call the
-``checkNotModified()`` method manually or include the
+``isNotModified()`` method manually or include the
 :doc:`/controllers/components/check-http-cache` in your controller::
 
     public function view()
     {
         $article = $this->Articles->find()->first();
         $response = $this->response->withModified($article->modified);
-        if ($response->checkNotModified($this->request)) {
+        if ($response->isNotModified($this->request)) {
             return $response;
         }
         $this->response;
@@ -998,14 +998,14 @@ header::
 Sending Not-Modified Responses
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. php:method:: checkNotModified(Request $request)
+.. php:method:: isNotModified(Request $request)
 
 Compares the cache headers for the request object with the cache header from the
 response and determines whether it can still be considered fresh. If so, deletes
 the response content, and sends the `304 Not Modified` header::
 
     // In a controller action.
-    if ($this->response->checkNotModified($this->request)) {
+    if ($this->response->isNotModified($this->request)) {
         return $this->response;
     }
 
