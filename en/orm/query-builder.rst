@@ -1706,6 +1706,34 @@ You can create ``UNION ALL`` queries using the ``unionAll()`` method::
 
     $unpublished->unionAll($inReview);
 
+Intersections
+-------------
+
+Intersections allow you to combine the result sets of two queries together and
+finding results with overlapping results. Intersections are created by composing
+one or more select queries together::
+
+    $inReview = $articles->find()
+        ->where(['need_review' => true]);
+
+    $unpublished = $articles->find()
+        ->where(['published' => false]);
+
+    $unpublished->intersect($inReview);
+
+You can create ``INTERSECT ALL`` queries using the ``intersectAll()`` method::
+
+    $inReview = $articles->find()
+        ->where(['need_review' => true]);
+
+    $unpublished = $articles->find()
+        ->where(['published' => false]);
+
+    $unpublished->intersectAll($inReview);
+
+.. versionadded:: 5.1.0
+    ``intersect()`` and ``intersectAll()`` were added.
+
 Subqueries
 ----------
 

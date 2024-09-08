@@ -36,6 +36,7 @@ Behavior Changes
 - The default value for ``valueSeparator`` in ``Table::findList()`` is now
   a single space instead of ``;``.
 - ``ErrorLogger`` uses ``Psr\Log\LogTrait`` now.
+- ``Database\QueryCompiler::$_orderedUnion`` was removed.
 
 Deprecations
 ============
@@ -100,6 +101,11 @@ Database
   functions to manipulate data as geospatial values.
 - ``SelectQuery::__debugInfo()`` now includes which connection role the query
   is for.
+- ``SelectQuery::intersect()`` and ``SelectQuery::intersectAll()`` were added.
+  These methods enable queries using ``INTERSECT`` and ``INTERSECT ALL``
+  conjunctions to be expressed.
+- New supports features were added for ``intersect``, ``intersect-all`` and
+  ``set-operations-order-by`` features.
 
 Datasource
 ----------
