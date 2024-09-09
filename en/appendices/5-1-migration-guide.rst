@@ -46,6 +46,12 @@ I18n
 
 - The ``_cake_core_`` cache config key has been renamed to ``_cake_translations_``.
 
+Mailer
+------
+
+- ``Mailer::setMessage()`` is deprecated. It has unintuitive behavior and very
+  low usage.
+
 
 New Features
 ============
