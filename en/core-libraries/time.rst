@@ -31,19 +31,18 @@ use the ``DateTime`` class::
 
 Under the hood, CakePHP uses `Chronos <https://github.com/cakephp/chronos>`_
 to power its ``DateTime`` utility. Anything you can do with ``Chronos`` and
-PHP's ``DateTime``, you can do with ``DateTime`` and ``Date``.
+PHP's ``DateTimeImmutable``, you can do with ``DateTime``.
 
 For more details on Chronos please see `the API documentation
-<https://api.cakephp.org/chronos/1.0/>`_.
+<https://api.cakephp.org/chronos/>`_.
 
 .. start-time
 
 Creating DateTime Instances
-=============================
+===========================
 
-``DateTime`` are immutable objects that are useful when you want to prevent
-accidental changes to data, or when you want to avoid order based dependency
-issues.
+``DateTime`` are immutable objects as immutability prevents accidental changes
+to data, and avoids order based dependency issues.
 
 There are a few ways to create ``DateTime`` instances::
 
@@ -407,85 +406,25 @@ You can also compare a ``DateTime`` instance within a range in the past::
 Date
 ====
 
-.. php:class: Date
-
-The immutable ``Date`` class in CakePHP implements a similar API and methods as
-:php:class:`Cake\\I18n\\DateTime` does. The main difference between ``DateTime``
-and ``Date`` is that ``Date`` does not track time components. As an example::
-
-    use Cake\I18n\Date;
-
-    $date = new Date('2021-01-31');
-
-    $newDate = $date->modify('+2 hours');
-    // Outputs '2021-01-31 00:00:00'
-    echo $newDate->format('Y-m-d H:i:s');
-
-    $newDate = $date->addHours(36);
-    // Outputs '2021-01-31 00:00:00'
-    echo $newDate->format('Y-m-d H:i:s');
-
-    $newDate = $date->addDays(10);
-    // Outputs '2021-02-10 00:00:00'
-    echo $newDate->format('Y-m-d H:i:s');
-
-
-Attempts to modify the timezone on a ``Date`` instance are also ignored::
-
-    use Cake\I18n\Date;
-    $date = new Date('2021-01-31', new \DateTimeZone('America/New_York'));
-    $newDate = $date->setTimezone(new \DateTimeZone('Europe/Berlin'));
-
-    // Outputs 'America/New_York'
-    echo $newDate->format('e');
-
-.. _mutable-time:
-
-Mutable Dates and Times
-=======================
-
-.. php:class:: Time
 .. php:class:: Date
 
-CakePHP uses mutable date and time classes that implement the same interface
-as their immutable siblings. Immutable objects are useful when you want to prevent
-accidental changes to data, or when you want to avoid order based dependency
-issues. Take the following code::
+The immutable ``Date`` class in CakePHP represents calendar dates unaffected by
+time and timezones. The ``Date`` class wraps the ``Cake\\Chronos\\ChronosDate`` class.
 
-    use Cake\I18n\Time;
-    $time = new Time('2015-06-15 08:23:45');
-    $time->modify('+2 hours');
+.. note::
 
-    // This method also modifies the $time instance
-    $this->someOtherFunction($time);
+    Unlike the ``DateTime`` class, ``Date`` does not extends the ``DateTimeInterface``.
+    So you cannot cannot directly compare a ``Date`` instance with a ``DateTime`` instance.
+    But you can do comparisons like ``$dateTime->toNative() > $date->toNative()``.
 
-    // Output here is unknown.
-    echo $time->format('Y-m-d H:i:s');
+Time
+====
 
-If the method call was re-ordered, or if ``someOtherFunction`` changed the
-output could be unexpected. The mutability of our object creates temporal
-coupling. If we were to use immutable objects, we could avoid this issue::
+.. php:class:: Time
 
-    use Cake\I18n\DateTime;
-    $time = new DateTime('2015-06-15 08:23:45');
-    $time = $time->modify('+2 hours');
-
-    // This method's modifications don't change $time
-    $this->someOtherFunction($time);
-
-    // Output here is known.
-    echo $time->format('Y-m-d H:i:s');
-
-Immutable dates and times are useful in entities as they prevent
-accidental modifications, and force changes to be explicit. Using
-immutable objects helps the ORM to more easily track changes, and ensure that
-date and datetime columns are persisted correctly::
-
-    // This change will be lost when the article is saved.
-    $article->updated->modify('+1 hour');
-
-    // By replacing the time object the property will be saved.
-    $article->updated = $article->updated->modify('+1 hour');
+The ``Time`` class represents clock times independent of date or time zones
+Similar to the ``DateTime`` and ```Date`` classes, the ``Time`` class is also immutable.
+It wraps the ``Cake\\Chronos\\ChronosTime`` class.
 
 Accepting Localized Request Data
 ================================

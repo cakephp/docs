@@ -995,7 +995,7 @@ correspond à une ressource du cache.
 
 Pour réellement tirer profit de l'utilisation de cet en-tête, vous devez
 soit appeler manuellement la méthode
-``checkNotModified()`` ou inclure le
+``isNotModified()`` ou inclure le
 :doc:`/controllers/components/request-handling` dans votre controlleur::
 
     public function index()
@@ -1008,7 +1008,7 @@ soit appeler manuellement la méthode
         $checksum = md5(json_encode($articles));
 
         $response = $this->response->withEtag($checksum);
-        if ($response->checkNotModified($this->request)) {
+        if ($response->isNotModified($this->request)) {
             return $response;
         }
 
@@ -1034,14 +1034,14 @@ ressource a été modifiée pour la dernière fois. Définir cet en-tête aide C
 leur cache.
 
 Pour réellement tirer profit de l'utilisation de cet en-tête, vous devez soit
-appeler manuellement la méthode ``checkNotModified()`` ou inclure le
+appeler manuellement la méthode ``isNotModified()`` ou inclure le
 :doc:`/controllers/components/request-handling` dans votre controlleur::
 
     public function view()
     {
         $article = $this->Articles->find()->first();
         $response = $this->response->withModified($article->modified);
-        if ($response->checkNotModified($this->request)) {
+        if ($response->isNotModified($this->request)) {
             return $response;
         }
         $this->response;
@@ -1065,14 +1065,14 @@ ressource. Dans ces circonstances, vous pouvez utiliser l'en-tête ``Vary``::
 Envoyer des Réponses Non-Modifiées
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. php:method:: checkNotModified(Request $request)
+.. php:method:: isNotModified(Request $request)
 
 Compare les en-têtes de cache pour l'objet requêté avec l'en-tête du cache de
 la réponse et determine s'il peut toujours être considéré comme à jour. Si oui,
 il supprime le contenu de la réponse et envoie l'en-tête `304 Not Modified`::
 
     // Dans une action de controller.
-    if ($this->response->checkNotModified($this->request)) {
+    if ($this->response->isNotModified($this->request)) {
         return $this->response;
     }
 

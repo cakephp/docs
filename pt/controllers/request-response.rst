@@ -800,14 +800,14 @@ O método ``withEtag()`` (chamado tag de entidade) é uma string que identifica 
 o recurso solicitado, como a soma de verificação de um arquivo, para determinar se ele
 corresponde a um recurso em cache.
 
-Para tirar proveito desse cabeçalho, você deve chamar o método ``checkNotModified()``
+Para tirar proveito desse cabeçalho, você deve chamar o método ``isNotModified()``
 manualmente ou incluir o seguinte :doc:`/controllers/components/request-handling` no seu controlador::
 
     public function index()
     {
         $articles = $this->Articles->find('all');
         $response = $this->response->withEtag($this->Articles->generateHash($articles));
-        if ($response->checkNotModified($this->request)) {
+        if ($response->isNotModified($this->request)) {
             return $response;
         }
         $this->response = $response;
@@ -829,7 +829,7 @@ Além disso, no modelo de validação de cache HTTP, você pode definir o cabeç
 pela última vez. Definir este cabeçalho ajuda o CakePHP a informar aos clientes
 de armazenamento em cache se a resposta foi modificada ou não com base em seu cache.
 
-Para tirar proveito desse cabeçalho, você deve chamar o método ``checkNotModified()``
+Para tirar proveito desse cabeçalho, você deve chamar o método ``isNotModified()``
 manualmente ou incluir o seguinte :doc:`/controllers/components/request-handling`
 no seu controlador::
 
@@ -837,7 +837,7 @@ no seu controlador::
     {
         $article = $this->Articles->find()->first();
         $response = $this->response->withModified($article->modified);
-        if ($response->checkNotModified($this->request)) {
+        if ($response->isNotModified($this->request)) {
             return $response;
         }
         $this->response;
@@ -860,14 +860,14 @@ dependendo do navegador. Nessas circunstâncias, você pode usar o cabeçalho ``
 Enviando Respostas Não Modificadas
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. php:method:: checkNotModified(Request $request)
+.. php:method:: isNotModified(Request $request)
 
 Compara os cabeçalhos de cache do objeto de solicitação com o cabeçalho de cache
 da resposta e determina se ele ainda pode ser considerado novo. Nesse caso, exclui
 o conteúdo da resposta e envia o cabeçalho `304 Not Modified`::
 
     // Em um método do controlador.
-    if ($this->response->checkNotModified($this->request)) {
+    if ($this->response->isNotModified($this->request)) {
         return $this->response;
     }
 

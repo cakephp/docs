@@ -860,7 +860,7 @@ directamente. Esto se usa comúnmente con recursos estáticos como imágenes y o
 El método ``withEtag()`` (llamado etiqueta de entidad) es una cadena que identifica de forma única el recurso solicitado,
 como lo hace una suma de comprobación para un archivo, para determinar si coincide con un recurso almacenado en caché.
 
-Para aprovechar este encabezado, debe llamar al método ``checkNotModified()`` manualmente o incluir
+Para aprovechar este encabezado, debe llamar al método ``isNotModified()`` manualmente o incluir
 :doc:`/controllers/components/check-http-cache` en su controlador::
 
     public function index()
@@ -872,7 +872,7 @@ Para aprovechar este encabezado, debe llamar al método ``checkNotModified()`` m
         $checksum = md5(json_encode($articles));
 
         $response = $this->response->withEtag($checksum);
-        if ($response->checkNotModified($this->request)) {
+        if ($response->isNotModified($this->request)) {
             return $response;
         }
 
@@ -894,14 +894,14 @@ Además, bajo el modelo de validación de caché HTTP, puede configurar el encab
 fecha y hora en la que se modificó el recurso por última vez. Configurar este encabezado ayuda a CakePHP a decirle a los
 clientes de almacenamiento en caché si la respuesta se modificó o no según su caché.
 
-Para aprovechar este encabezado, debe llamar al método ``checkNotModified()`` manualmente o incluir
+Para aprovechar este encabezado, debe llamar al método ``isNotModified()`` manualmente o incluir
 :doc:`/controllers/components/check-http-cache` en su controlador::
 
     public function view()
     {
         $article = $this->Articles->find()->first();
         $response = $this->response->withModified($article->modified);
-        if ($response->checkNotModified($this->request)) {
+        if ($response->isNotModified($this->request)) {
             return $response;
         }
         $this->response;
@@ -924,14 +924,14 @@ el encabezado ``Vary``::
 Envío de respuestas no modificadas
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. php:method:: checkNotModified(Request $request)
+.. php:method:: isNotModified(Request $request)
 
 Compara los encabezados de la caché del objeto de solicitud con el encabezado de la caché de la respuesta y determina
 sitodavía se puede considerar nuevo. Si es así, elimina el contenido de la respuesta y envía el encabezado
 `304 Not Modified`::
 
     // En una acción del controlador.
-    if ($this->response->checkNotModified($this->request)) {
+    if ($this->response->isNotModified($this->request)) {
         return $this->response;
     }
 

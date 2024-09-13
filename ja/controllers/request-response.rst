@@ -926,7 +926,7 @@ HTTP におけるキャッシュの検証はコンテンツが定期的に変化
 リソースが一致するかどうかを調べるためにキャッシュはチェックサムを比較するでしょう。
 
 実際にこのヘッダーを使うメリットを得るためには、手動で
-``checkNotModified()`` メソッドを呼び出すかコントローラーに
+``isNotModified()`` メソッドを呼び出すかコントローラーに
 :doc:`/controllers/components/request-handling` を読み込まなければなりません。 ::
 
     public function index()
@@ -938,7 +938,7 @@ HTTP におけるキャッシュの検証はコンテンツが定期的に変化
         $checksum = md5(json_encode($articles));
 
         $response = $this->response->withEtag($checksum);
-        if ($response->checkNotModified($this->request)) {
+        if ($response->isNotModified($this->request)) {
             return $response;
         }
 
@@ -961,14 +961,14 @@ HTTP キャッシュの検証モデルのもとでは、リソースが最後に
 キャッシュしているクライアントにレスポンスが変更されたのかどうかを返答する手助けとなります。
 
 実際にこのヘッダーを使うメリットを得るためには、
-``checkNotModified()`` メソッドを呼び出すかコントローラーに
+``isNotModified()`` メソッドを呼び出すかコントローラーに
 :doc:`/controllers/components/request-handling` を読み込まなければなりません。 ::
 
     public function view()
     {
         $article = $this->Articles->find()->first();
         $response = $this->response->withModified($article->modified);
-        if ($response->checkNotModified($this->request)) {
+        if ($response->isNotModified($this->request)) {
             return $response;
         }
         $this->response;
@@ -991,13 +991,13 @@ Vary ヘッダー
 Not-Modified レスポンスの送信
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. php:method:: checkNotModified(Request $request)
+.. php:method:: isNotModified(Request $request)
 
 リクエストオブジェクトとレスポンスのキャッシュヘッダーを比較し、まだキャッシュが有効かどうかを決定します。
 もしまだ有効な場合、レスポンスのコンテンツは削除され `304 Not Modified` ヘッダーが送られます。 ::
 
     // コントローラーアクションの中で
-    if ($this->response->checkNotModified($this->request)) {
+    if ($this->response->isNotModified($this->request)) {
         return $this->response;
     }
 
