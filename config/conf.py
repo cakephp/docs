@@ -10,13 +10,13 @@ from cakephpsphinx.config.all import *
 # built documents.
 #
 # The short X.Y version.
-version = '5.next'
+version = '5.x'
 
 # The full version, including alpha/beta/rc tags.
-release = '5.next'
+release = '5.x'
 
 # The search index version.
-search_version = '5-next'
+search_version = '5-x'
 
 # The marketing diplay name for the book.
 version_name = 'Chiffon'
@@ -39,7 +39,7 @@ languages = ['en', 'pt_BR', 'es', 'ja', 'fr']
 
 # The GitHub branch name for this version of the docs
 # for edit links to point at.
-branch = '5.next'
+branch = '5.x'
 
 # Add any paths that contain custom themes here, relative to this directory.
 html_theme_path = []
