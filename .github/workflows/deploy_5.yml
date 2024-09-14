@@ -1,0 +1,28 @@
+---
+name: 'deploy_5.x'
+
+on:
+  push:
+    branches:
+      - 5.x
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/5.next' }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cloning repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Push to dokku
+        uses: dokku/github-action@master
+        with:
+          git_remote_url: 'ssh://dokku@apps.cakephp.org:22/book-5'
+          git_push_flags: '-f'
+          ssh_private_key: ${{ secrets.DOKKU_SSH_PRIVATE_KEY }}
