@@ -31,8 +31,8 @@ version_list = [
     {'name': '1.2', 'number': '1.2', 'title': '1.2 Book'},
     {'name': '1.1', 'number': '1.1', 'title': '1.1 Book'},
 ]
-# 5.next is pre-release still.
-is_prerelease = True
+# Enables the 'development version banner'
+is_prerelease = False
 
 # Languages available.
 languages = ['en', 'pt_BR', 'es', 'ja', 'fr']
