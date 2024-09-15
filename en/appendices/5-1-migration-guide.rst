@@ -114,7 +114,7 @@ Database
   ``set-operations-order-by`` features.
 - The ability to fetch records without buffering which existed in 4.x has been restored.
   Methods ``SelectQuery::enableBufferedResults()``, ``SelectQuery::disableBufferedResults()``
-  and ``SelectQuery::isBufferedResultsEnabled()`` has been re-added.
+  and ``SelectQuery::isBufferedResultsEnabled()`` have been re-added.
 
 Datasource
 ----------
