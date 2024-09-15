@@ -112,6 +112,9 @@ Database
   conjunctions to be expressed.
 - New supports features were added for ``intersect``, ``intersect-all`` and
   ``set-operations-order-by`` features.
+- The ability to fetch records without buffering which existed in 4.x has been restored.
+  Methods ``SelectQuery::enableBufferedResults()``, ``SelectQuery::disableBufferedResults()``
+  and ``SelectQuery::isBufferedResultsEnabled()`` have been re-added.
 
 Datasource
 ----------
