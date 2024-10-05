@@ -105,10 +105,10 @@ mais il **sera** supprimé dans 5.0.
   classes de vues dans ``RequestHandlerComponent``.
 
 
-PaginationComponent
--------------------
+PaginatorComponent
+------------------
 
-Le ``PaginationComponent`` est déprécié et sera supprimé dans 5.0. Utilisez la
+Le ``PaginatorComponent`` est déprécié et sera supprimé dans 5.0. Utilisez la
 propriété ``Controller::$paginate`` ou le paramètre ``$settings`` de la méthode
 ``Controller::paginate()`` pour spécifier les réglages de pagination
 nécessaires.
