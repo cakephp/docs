@@ -109,7 +109,7 @@ Component Example
     {
         $container->add(SearchComponent::class)
             ->addArgument(ComponentRegistry::class)
-            ->addArgument(AlfredFTP::class);
+            ->addArgument(UsersService::class);
         $container->add(UsersService::class);
     }
 
