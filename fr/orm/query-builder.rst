@@ -215,7 +215,7 @@ activer les :ref:`logs de requête <database-query-logging>`.
 
 Récupérer vos Données
 =====================
-CakePHP permet de construire simplement des requêtes ``SELECT``. La 
+CakePHP permet de construire simplement des requêtes ``SELECT``. La
 méthode ``select()`` vous permet de ne récupérer que les champs qui vous sont
 nécessaires::
 
@@ -607,7 +607,7 @@ Vous pouvez créer des conditions ``if ... then ... else`` en utilisant
     $published = $query->newExpr()
         ->case()
         ->when(['published' => true])
-        ->then('Y');
+        ->then('Y')
         ->else('N');
 
     # CASE WHEN published = true THEN 'Y' ELSE 'N' END;
