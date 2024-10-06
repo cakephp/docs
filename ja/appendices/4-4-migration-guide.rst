@@ -78,10 +78,10 @@ RequestHandlerComponent
 - ``RequestHandlerComponent`` でビュークラスマッピングを定義する代わりに、 :ref:`controller-viewclasses`
   を使用してください。
 
-PaginationComponent
--------------------
+PaginatorComponent
+------------------
 
-``PaginationComponent`` は非推奨で、5.0で削除される予定です。
+``PaginatorComponent`` は非推奨で、5.0で削除される予定です。
 必要なページング設定を行うには、 ``Controller::$paginate`` プロパティ、
 または ``Controller::paginate()`` メソッドの ``$settings`` パラメータを使用します。
 
