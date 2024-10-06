@@ -147,11 +147,8 @@ in your controller, you could access it like so::
     properties they share the same 'namespace'. Be sure to not give a
     component and a model the same name.
 
-.. warning::
-
-    Component methods **don't** have access to :doc:`/development/dependency-injection`
-    like Controller actions have. Use a service class inside your controller actions
-    instead of a component if you need this functionality.
+.. versionchanged:: 5.1.0
+    Components are able to use :doc:`/development/dependency-injection` to receive services.
 
 .. _creating-a-component:
 
