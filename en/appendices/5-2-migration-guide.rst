@@ -12,3 +12,11 @@ Behavior Changes
   a name that is already defined. This change aims to prevent rules from being
   overwritten by accident.
 
+New Features
+============
+
+Error
+-----
+
+- Custom exceptions can have specific error handling logic defined in
+  ``ErrorController``.

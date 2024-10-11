@@ -210,6 +210,30 @@ prefix. You could create the following class::
 This controller would only be used when an error is encountered in a prefixed
 controller, and allows you to define prefix specific logic/templates as needed.
 
+Exception specific logic
+------------------------
+
+Within your controller you can define public methods to handle custom
+application errors. For example a ``MissingWidgetException`` would be handled by
+a ``missingWidget()`` controller method, and CakePHP would use
+``templates/Error/missing_widget.php`` as the template. For example::
+
+    namespace App\Controller\Admin;
+
+    use App\Controller\AppController;
+    use Cake\Event\EventInterface;
+
+    class ErrorController extends AppController
+    {
+        public function missingWidget(MissingWidgetException $error)
+        {
+            // You can prepare additional template context or trap errors.
+        }
+    }
+
+.. versionadded:: 5.2.0
+    Exception specific controller methods and templates were added.
+
 .. _custom-exceptionrenderer:
 
 Custom ExceptionRenderer
