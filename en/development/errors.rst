@@ -225,7 +225,7 @@ a ``missingWidget()`` controller method, and CakePHP would use
 
     class ErrorController extends AppController
     {
-        public function missingWidget(MissingWidgetException $error)
+        protected function missingWidget(MissingWidgetException $error)
         {
             // You can prepare additional template context or trap errors.
         }
