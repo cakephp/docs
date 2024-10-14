@@ -107,14 +107,17 @@ Plugins offer several hooks that allow a plugin to inject itself into the
 appropriate parts of your application. The hooks are:
 
 * ``bootstrap`` Used to load plugin default configuration files, define
-  constants and other global functions.
+  constants and other global functions. The ``bootstrap`` method is passed the
+  current ``Application`` instance giving you broad access to the DI container
+  and configuration.
 * ``routes`` Used to load routes for a plugin. Fired after application routes
   are loaded.
 * ``middleware`` Used to add plugin middleware to an application's middleware
   queue.
 * ``console`` Used to add console commands to an application's command
   collection.
-* ``services`` Used to register application container services
+* ``services`` Used to register application container service. This is a good
+  opportunity to setup additional objects that need acccess to the container.
 
 By default all plugins hooks are enabled. You can disable hooks by using the
 related options of the ``plugin load`` command:
