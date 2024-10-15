@@ -675,9 +675,8 @@ with content types that are not built into Response, you can map them with
     $this->response = $this->response->withType('vcf');
 
 Usually, you'll want to map additional content types in your controller's
-:php:meth:`~Controller::beforeFilter()` callback, so you can leverage the
-automatic view switching features of :php:class:`RequestHandlerComponent` if you
-are using it.
+:php:meth:`~Controller::beforeFilter()` callback, so you can benefit from
+automatic view switching provided by :ref:`controller-viewclasses`.
 
 .. _cake-response-file:
 
