@@ -15,6 +15,13 @@ Behavior Changes
 New Features
 ============
 
+ORM
+---
+
+- ``CounterCacheBehavior::updateCounterCache()`` has been addded. This method
+  allows you to update the counter cache values for all records of the configured
+  associations.
+
 Error
 -----
 
