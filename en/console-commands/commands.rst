@@ -433,8 +433,8 @@ the ``modified`` column to the current time.
 Remember, ``exec()`` will take the same string you type into your CLI, so you
 can include options and arguments in your command string.
 
-Testing Interactive Shells
---------------------------
+Testing Interactive Commands
+----------------------------
 
 Consoles are often interactive. Testing interactive commands with the
 ``Cake\TestSuite\ConsoleIntegrationTestTrait`` trait only requires passing the

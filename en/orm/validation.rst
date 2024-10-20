@@ -297,7 +297,7 @@ class::
     // In a table class
     public function buildRules(RulesChecker $rules): RulesChecker
     {
-        // Add a rule that is applied for create and update operations
+        // Add a rule that is applied for create, update and delete operations
         $rules->add(function ($entity, $options) {
             // Return a boolean to indicate pass/failure
         }, 'ruleName');
