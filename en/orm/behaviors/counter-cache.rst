@@ -162,3 +162,28 @@ with the same code as described above.::
     ]);
 
 Finally clear all caches with ``bin/cake cache clear_all`` and try it out.
+
+Manually updating counter caches
+================================
+
+.. php:method:: updateCounterCache(?string $assocName = null, int $limit = 100, ?int $page = null): void
+
+The ``updateCounterCache()`` method allows you to update the counter cache values
+for all records of one or all configured associations in batches. This can be useful,
+for example, to update the counter cache after importing data directly into the database.::
+
+    // Update the counter cache for all configured associations
+    $table->updateCounterCache();
+
+    // Update the counter cache for a specific association, 200 records per batch
+    $table->updateCounterCache('Articles', 200);
+
+    // Update only the first page of records
+    $table->updateCounterCache('Articles', page: 1);
+
+.. versionadded:: 5.2.0
+
+.. note::
+
+    This methods won't update the counter cache values for fields which are
+    configured to use a closure to get the count value.
