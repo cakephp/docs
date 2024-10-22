@@ -308,6 +308,17 @@ title, and sometimes assign the title as a view variable in the controller::
     // In view file or layout above $this->fetch('title')
     $this->assign('title', $title);
 
+    // Example where block contents are modified
+    $this->start('test_view_block');
+    echo 'default contents';
+    $this->end();
+    // Output : default contents
+    echo $this->fetch('test_view_block');
+    $this->assign('test_view_block', 'modified contents');
+    // Output : modified contents
+    echo $this->fetch('test_view_block');
+
+
 The ``prepend()`` method allows you to prepend content to an existing block::
 
     // Prepend to sidebar
