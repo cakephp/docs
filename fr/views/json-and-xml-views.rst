@@ -153,6 +153,13 @@ Comme exemple d'utilisation de ``XmlView``, on peut imaginer la génération d'u
 nécessite de changer ``_rootNode`` et de définir des attributs. Les attributs
 sont définis en utilisant le préfixe ``@``::
 
+    use Cake\View\XmlView;
+
+    public function viewClasses(): array
+    {
+        return [XmlView::class];
+    }
+
     public function sitemap()
     {
         $pages = $this->Pages->find()->all();

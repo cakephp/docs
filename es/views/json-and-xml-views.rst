@@ -150,6 +150,13 @@ Un ejemplo de uso de ``XmlView`` sería generar un `sitemap.xml
 que cambie ``rootNode`` y establezca atributos. Los atributos se definen
 mediante el prefijo ``@``::
 
+    use Cake\View\XmlView;
+
+    public function viewClasses(): array
+    {
+        return [XmlView::class];
+    }
+
     public function sitemap()
     {
         $pages = $this->Pages->find()->all();

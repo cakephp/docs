@@ -142,6 +142,13 @@ XmlView クラスは、XML の生成に使用するオプション（例: ``tags
 このドキュメントタイプでは ``rootNode`` を変更し属性を設定する必要があります。
 属性は ``@`` プレフィックスを使用して定義されます。 ::
 
+    use Cake\View\XmlView;
+
+    public function viewClasses(): array
+    {
+        return [XmlView::class];
+    }
+
     public function sitemap()
     {
         $pages = $this->Pages->find()->all();
