@@ -1001,10 +1001,10 @@ cabeçalho de Autorização diretamente::
 A chave de cabeçalhos em ``configRequest()`` pode ser usada para configurar
 qualquer cabeçalho HTTP adicional necessário para uma ação.
 
-Testando Ações Protegidas por CsrfComponent ou SecurityComponent
-----------------------------------------------------------------
+Testando Ações Protegidas por CsrfProtectionMiddleware ou FormProtectionComponent
+---------------------------------------------------------------------------------
 
-Ao testar ações protegidas por SecurityComponent ou CsrfComponent, você pode ativar
+Ao testar ações protegidas por ``CsrfProtectionMiddleware`` ou ``FormProtectionComponent``, você pode ativar
 a geração automática de token para garantir que seus testes não falhem devido a
 incompatibilidades de token::
 
@@ -1016,7 +1016,7 @@ incompatibilidades de token::
     }
 
 Também é importante habilitar a depuração em testes que usam tokens para impedir
-que o SecurityComponent pense que o token de depuração está sendo usado em um
+que o ``FormProtectionComponent`` pense que o token de depuração está sendo usado em um
 ambiente sem depuração. Ao testar com outros métodos como ``requireSecure()``,
 você pode usar ``configRequest()`` para definir as variáveis de ambiente corretas::
 
