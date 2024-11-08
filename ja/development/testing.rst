@@ -886,8 +886,6 @@ CakePHP では特別に ``IntegrationTestTrait`` トレイトを提供してい�
 
     class ArticlesController extends AppController
     {
-        public $helpers = ['Form', 'Html'];
-
         public function index($short = null)
         {
             if ($this->request->is('post')) {
@@ -1085,7 +1083,7 @@ OAuth2 のようなその他の認証方法をテストしている場合、Auth
 設定するために使用されます。
 
 CsrfProtectionMiddleware や FormProtectionComponent で保護されたアクションのテスト
----------------------------------------------------------------------------
+-------------------------------------------------------------------------------
 
 ``CsrfProtectionMiddleware`` または ``FormProtectionComponent`` のいずれかで保護されたアクションをテストする場合、
 テストがトークンのミスマッチで失敗しないように自動トークン生成を有効にすることができます。 ::

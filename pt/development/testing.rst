@@ -800,8 +800,6 @@ controlador se parece com::
 
     class ArticlesController extends AppController
     {
-        public $helpers = ['Form', 'Html'];
-
         public function index($short = null)
         {
             if ($this->request->is('post')) {
