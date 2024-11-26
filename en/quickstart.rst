@@ -6,6 +6,7 @@ To start off we'll build a simple Content Management application.
 
 .. include:: /tutorials-and-examples/cms/installation.rst
 .. include:: /tutorials-and-examples/cms/database.rst
+.. include:: /tutorials-and-examples/cms/articles-model.rst
 .. include:: /tutorials-and-examples/cms/articles-controller.rst
 
 .. meta::
