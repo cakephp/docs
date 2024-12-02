@@ -150,12 +150,12 @@ You can also get a key-value list out of a query result::
 For more information on how to customize the fields used for populating the list
 refer to :ref:`table-find-list` section.
 
-Resultset Are Collection Objects
+ResultSet Is A Collection Object
 --------------------------------
 
 Once you get familiar with the Query object methods, it is strongly encouraged
 that you visit the :doc:`Collection </core-libraries/collections>` section to
-improve your skills in efficiently traversing the results. The resultset (returned
+improve your skills in efficiently traversing the results. The ResultSet (returned
 by calling the ``SelectQuery``'s ``all()`` method) implements the collection interface::
 
     // Use the combine() method from the collections library

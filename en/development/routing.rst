@@ -295,7 +295,7 @@ will be treated as part of the parameter::
 
 The above example illustrates how to create a quick way to view
 models from any controller by crafting a URL that looks like
-``/controllername/{id}``. The URL provided to ``connect()`` specifies two
+``/controller-name/{id}``. The URL provided to ``connect()`` specifies two
 route elements: ``{controller}`` and ``{id}``. The ``{controller}`` element
 is a CakePHP default route element, so the router knows how to match and
 identify controller names in URLs. The ``{id}`` element is a custom
