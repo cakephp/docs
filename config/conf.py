@@ -27,6 +27,9 @@ version_name = ''
 # 2.x is out of support
 is_eol = True
 
+# Link to 5x as the canonical docs
+canonical_version = '5'
+
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 exclude_patterns = [
