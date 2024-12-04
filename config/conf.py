@@ -38,6 +38,9 @@ version_list = [
 # Languages available.
 languages = ['en', 'pt_BR', 'es', 'ja', 'fr', 'zh_CN', 'tr', 'ru']
 
+# Link to 5x as the canonical docs
+canonical_version = '5'
+
 # The GitHub branch name for this version of the docs
 # for edit links to point at.
 branch = '3.x'
