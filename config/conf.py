@@ -21,8 +21,8 @@ search_version = '3'
 # The marketing diplay name for the book.
 version_name = 'Red Velvet'
 
-# 3.x only receives security updates.
-is_security = True
+# 3.x is end of life now
+is_eol = True
 
 # Other versions that display in the version picker menu.
 version_list = [
