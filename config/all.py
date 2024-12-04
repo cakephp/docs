@@ -30,6 +30,9 @@ version_list = [
 # Languages available.
 languages = ['de', 'en', 'es', 'fr', 'ja', 'pt_BR']
 
+# Link to 5.x as the canonical version of the docs
+canonical_version = '5'
+
 # Add any paths that contain custom themes here, relative to this directory.
 html_theme_path = []
 html_theme = 'cakephp'
