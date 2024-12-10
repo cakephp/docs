@@ -1,7 +1,7 @@
 Welcome
 #######
 
-CakePHP 5 is a web development framework running on PHP |phpversion| (min. PHP
+CakePHP 6 is a web development framework running on PHP |phpversion| (min. PHP
 |minphpversion|). Read :doc:`CakePHP at a Glance </intro>` to get an
 introduction to the fundamentals of CakePHP.
 
