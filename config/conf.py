@@ -10,20 +10,21 @@ from cakephpsphinx.config.all import *
 # built documents.
 #
 # The short X.Y version.
-version = '5.next'
+version = '6.x'
 
 # The full version, including alpha/beta/rc tags.
-release = '5.next'
+release = '6.x'
 
 # The search index version.
-search_version = '5-next'
+search_version = '6-x'
 
 # The marketing diplay name for the book.
 version_name = 'Chiffon'
 
 # Other versions that display in the version picker menu.
 version_list = [
-    {'name': '5.x', 'number': '5', 'current': True, 'title': '5.x Book'},
+    {'name': '6.x', 'number': '6', 'current': True, 'title': '6.x Book'},
+    {'name': '5.x', 'number': '5', 'title': '5.x Book'},
     {'name': '4.x', 'number': '4', 'title': '4.x Book'},
     {'name': '3.x', 'number': '3', 'title': '3.x Book'},
     {'name': '2.x', 'number': '2', 'title': '2.x Book'},
@@ -39,7 +40,7 @@ languages = ['en', 'pt_BR', 'es', 'ja', 'fr']
 
 # The GitHub branch name for this version of the docs
 # for edit links to point at.
-branch = '5.next'
+branch = '6.x'
 
 # Add any paths that contain custom themes here, relative to this directory.
 html_theme_path = []
@@ -112,8 +113,8 @@ epub_exclude_files = [
 epub_tocdepth = 2
 
 rst_epilog = """
-.. |phpversion| replace:: **8.3**
-.. |minphpversion| replace:: 8.1
+.. |phpversion| replace:: **8.4**
+.. |minphpversion| replace:: 8.4
 """
 
 # todo_include_todos = True
