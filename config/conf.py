@@ -112,7 +112,7 @@ epub_exclude_files = [
 epub_tocdepth = 2
 
 rst_epilog = """
-.. |phpversion| replace:: **8.3**
+.. |phpversion| replace:: **8.4**
 .. |minphpversion| replace:: 8.1
 """
 
