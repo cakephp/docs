@@ -118,7 +118,6 @@ CakePHP やアプリケーションにあるヘルパーを明示的に読み込
         use StringTemplateTrait;
 
         protected $_defaultConfig = [
-            'errorClass' => 'error',
             'templates' => [
                 'label' => '<label for="{{for}}">{{content}}</label>',
             ],
@@ -129,8 +128,8 @@ CakePHP やアプリケーションにあるヘルパーを明示的に読み込
 マージされたデータは、 ``_config`` に設定されます。
 実行時設定を読み取るために ``config()`` メソッドを使用することができます。 ::
 
-    // errorClass 設定オプションを読み込み
-    $class = $this->Awesome->config('errorClass');
+    // autoSetCustomValidity  設定オプションを読み込み
+    $class = $this->Awesome->config('autoSetCustomValidity ');
 
 ヘルパー設定を使用すると、宣言的にヘルパーを設定し、コントローラーロジックから設定ロジックを
 削除することができます。クラス宣言の一部として組み込むことができない設定オプションがある場合は、
