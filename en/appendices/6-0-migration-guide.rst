@@ -8,6 +8,9 @@ deprecation warnings.
 Behavior Changes
 ================
 
+- All datasource connections require the ``username``, ``password`` and
+  ``database`` keys as default values have been removed to prevent accidental
+  privileged user usage.
 - The ``ORM.mapJsonTypeForSqlite`` configuration option has been removed. The
   SQLite adapter will map all columns with ``json`` in their names to the
   ``JsonType`` by default.
