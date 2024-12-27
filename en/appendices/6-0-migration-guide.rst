@@ -14,3 +14,5 @@ Behavior Changes
 - The ``ORM.mapJsonTypeForSqlite`` configuration option has been removed. The
   SQLite adapter will map all columns with ``json`` in their names to the
   ``JsonType`` by default.
+- ``Cake\View\Widget\FileWidget`` was removed as it was redundant. The standard
+  input widget will be used for file inputs in 6.x.
