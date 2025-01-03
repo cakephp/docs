@@ -20,5 +20,5 @@ Behavior Changes
 Breaking Changes
 ================
 - The default placeholder format for ``Text::insert()`` has been changed.
-  They are now of the form ``{foo}`` instead of ``:foo``. You can get the old
+  They now use ``{foo}`` instead of ``:foo``. You can get the old
   behavior by using the ``before`` and ``after`` keys of ``$options``.
