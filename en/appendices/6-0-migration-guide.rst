@@ -16,3 +16,9 @@ Behavior Changes
   ``JsonType`` by default.
 - ``Cake\View\Widget\FileWidget`` was removed as it was redundant. The standard
   input widget will be used for file inputs in 6.x.
+
+Breaking Changes
+================
+- The default placeholder format for ``Text::insert()`` has been changed.
+  They are now of the form ``{foo}`` instead of ``:foo``. You can get the old
+  behavior by using the ``before`` and ``after`` keys of ``$options``.
