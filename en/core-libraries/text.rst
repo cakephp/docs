@@ -129,18 +129,18 @@ The insert method is used to create string templates and to allow for key/value
 replacements::
 
     Text::insert(
-        'My name is :name and I am :age years old.',
+        'My name is {name} and I am {age} years old.',
         ['name' => 'Bob', 'age' => '65']
     );
     // Returns: "My name is Bob and I am 65 years old."
 
 .. php:staticmethod:: cleanInsert($string, $options = [])
 
-Cleans up a ``Text::insert`` formatted string with given ``$options`` depending
+Cleans up a ``Text::insert()`` formatted string with given ``$options`` depending
 on the 'clean' key in ``$options``. The default method used is text but html is
 also available. The goal of this function is to replace all whitespace and
 unneeded markup around placeholders that did not get replaced by
-``Text::insert``.
+``Text::insert()``.
 
 You can use the following options in the options array::
 
