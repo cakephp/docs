@@ -36,7 +36,7 @@ jobs:
     - uses: awalsh128/cache-apt-pkgs-action@v1
       with:
         packages: texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended texlive-lang-all
-        version: 1.0
+        version: ubuntu-24.04
 
     - name: Build Docs
       run: |
