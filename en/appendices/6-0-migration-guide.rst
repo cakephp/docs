@@ -19,6 +19,9 @@ Behavior Changes
 
 Breaking Changes
 ================
+
 - The default placeholder format for ``Text::insert()`` has been changed.
   They now use ``{foo}`` instead of ``:foo``. You can get the old
   behavior by using the ``before`` and ``after`` keys of ``$options``.
+- ``Datasource/Paging/PaginatedInterface`` now extends ``IteratorAggregate``
+  instead of ``Traversable``.
