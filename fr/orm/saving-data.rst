@@ -147,7 +147,7 @@ données de la requête. Vous pouvez convertir une entity unique en utilisant::
 
     Si vous utilisez newEntity() et qu'il manque tout ou partie des nouvelles
     données dans les entities créées, vérifiez que les colonnes que vous voulez
-    modifier sont listées dans la propriété ``$_accessible`` de votre entity.
+    modifier sont listées dans la propriété ``$patchable`` de votre entity.
     Cf. :ref:`entities-mass-assignment`.
 
 Les données de la requête doivent suivre la structure de vos entities. Par
@@ -388,8 +388,8 @@ Changer les Champs Accessibles
 
 Il est également possible d'autoriser ``newEntity()`` à écrire dans des
 champs non accessibles. Par exemple, ``id`` est généralement absent de la
-propriété ``_accessible``. Dans un tel cas, vous pouvez utiliser l'option
-``accessibleFields``. Il pourrait être utile de conserver les ids des entities
+propriété ``patchable``. Dans un tel cas, vous pouvez utiliser l'option
+``patchableFields``. Il pourrait être utile de conserver les ids des entities
 associées::
 
     // Dans un controller.
@@ -400,7 +400,7 @@ associées::
             'Tags', 'Comments' => [
                 'associated' => [
                     'Users' => [
-                        'accessibleFields' => ['id' => true],
+                        'patchableFields' => ['id' => true],
                     ],
                 ],
             ],
@@ -414,7 +414,7 @@ l'entity concernée.
 
     Si vous utilisez newEntity() et qu'il manque dans l'entity tout ou partie
     des données transmises, vérifiez à deux fois que les colonnes
-    que vous souhaitez définir sont listées dans la propriété ``$_accessible``
+    que vous souhaitez définir sont listées dans la propriété ``$patchable``
     de votre entity. Cf. :ref:`entities-mass-assignment`.
 
 Fusionner les Données de la Requête dans les Entities
@@ -506,7 +506,7 @@ belongsToMany, avec cependant un point d'attention important:
 Si Product belongsToMany Tag::
 
     // Dans l'entity Product
-    protected array $_accessible = [
+    protected array $patchable = [
         // .. autres propriétés
        'tags' => true,
     ];

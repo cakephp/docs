@@ -1582,7 +1582,7 @@ Ensuite ajoutez l'une des deux lignes dans votre formulaire::
     À chaque affichage du formulaire, la valeur sera vide.
 
 Pour empêcher le ``submittedfile`` d'être écrasé par un contenu vide, enlevez-le
-de ``$_accessible``. Au choix, vous pouvez aussi retirer sa clé depuis la
+de ``$patchable``. Au choix, vous pouvez aussi retirer sa clé depuis la
 méthode ``beforeMarshal``::
 
     public function beforeMarshal(\Cake\Event\EventInterface $event, \ArrayObject $data, \ArrayObject $options)

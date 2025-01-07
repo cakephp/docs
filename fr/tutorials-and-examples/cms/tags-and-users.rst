@@ -346,7 +346,7 @@ entity, nous ajoutons un champ virtuel/pré-calculé pour l'entity. Dans
     use Cake\Collection\Collection;
 
     // Mettez à jour la propriété accessible pour qu'elle contienne `tag_string`
-    protected array $_accessible = [
+    protected array $patchable = [
         //autres champs...
         'tag_string' => true
     ];

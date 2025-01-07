@@ -229,7 +229,7 @@ e adicione a seguinte trecho::
     {
 
         // Gera conjunto de todos os campos exceto o com a chave primária.
-        protected array $_accessible = [
+        protected array $patchable = [
             '*' => true,
             'id' => false
         ];

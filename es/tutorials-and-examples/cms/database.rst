@@ -208,7 +208,7 @@ archivo completo debería verse así::
 
     class Article extends Entity
     {
-        protected array $_accessible = [
+        protected array $patchable = [
             'title' => true,
             'body' => true,
             'published' => true,
@@ -219,7 +219,7 @@ archivo completo debería verse así::
     }
 
 Nuestra entidad es bastante delgada en este momento, y solo hemos configurado
-la propiedad ``_accessible`` que controla cómo las propiedades pueden ser
+la propiedad ``patchable`` que controla cómo las propiedades pueden ser
 modificadas por `entities-mass-assignment`.
 
 No podemos hacer mucho con nuestros modelos en este momento, así que a continuación

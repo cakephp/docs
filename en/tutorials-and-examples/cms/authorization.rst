@@ -225,7 +225,7 @@ Next we'll update the ``edit`` action. Replace the edit method with the followin
         if ($this->request->is(['post', 'put'])) {
             $this->Articles->patchEntity($article, $this->request->getData(), [
                 // Added: Disable modification of user_id.
-                'accessibleFields' => ['user_id' => false]
+                'patchableFields' => ['user_id' => false]
             ]);
             if ($this->Articles->save($article)) {
                 $this->Flash->success(__('Your article has been updated.'));

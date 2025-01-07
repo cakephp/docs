@@ -166,7 +166,7 @@ suit::
     {
 
         // Rend les champs assignables en masse sauf pour la clé primaire "id".
-        protected array $_accessible = [
+        protected array $patchable = [
             '*' => true,
             'id' => false
         ];

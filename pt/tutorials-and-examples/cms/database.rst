@@ -225,7 +225,7 @@ com este::
 
     class Article extends Entity
     {
-        protected array $_accessible = [
+        protected array $patchable = [
             '*' => true,
             'id' => false,
             'slug' => false,
@@ -233,7 +233,7 @@ com este::
     }
 
 Nossa entidade está bem curta agora, e nós iremos configurar apenas a
-propriedade ``_accessible`` que controla quais propriedades podem ser
+propriedade ``patchable`` que controla quais propriedades podem ser
 modificadas com :ref:`entities-mass-assignment`.
 
 Nós não podemos fazer muito com nossos modelos agora, então a seguir

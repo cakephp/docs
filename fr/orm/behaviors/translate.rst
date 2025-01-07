@@ -471,7 +471,7 @@ avec l'option ``translations`` activée::
 
 Ceci va faire que votre article, les traductions françaises et espagnoles vont
 tous persister. Vous devrez aussi vous souvenir d'ajouter ``_translations``
-dans les champs accessibles ``$_accessible`` de votre entity.
+dans les champs accessibles ``$patchable`` de votre entity.
 
 Valider les Entities Traduites
 ------------------------------

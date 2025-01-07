@@ -139,7 +139,7 @@ one or many entities from request data. You can convert a single entity using::
 
     If you are using newEntity() and the resulting entities are missing some or
     all of the data they were passed, double check that the columns you want to
-    set are listed in the ``$_accessible`` property of your entity. See :ref:`entities-mass-assignment`.
+    set are listed in the ``$patchable`` property of your entity. See :ref:`entities-mass-assignment`.
 
 The request data should follow the structure of your entities. For example if
 you have an article, which belonged to a user, and had many comments, your
@@ -365,8 +365,8 @@ Changing Accessible Fields
 --------------------------
 
 It's also possible to allow ``newEntity()`` to write into non accessible fields.
-For example, ``id`` is usually absent from the ``_accessible`` property.  In
-such case, you can use the ``accessibleFields`` option. It could be useful to
+For example, ``id`` is usually absent from the ``patchable`` property.  In
+such case, you can use the ``patchableFields`` option. It could be useful to
 keep ids of associated entities::
 
     // In a controller
@@ -377,7 +377,7 @@ keep ids of associated entities::
             'Tags', 'Comments' => [
                 'associated' => [
                     'Users' => [
-                        'accessibleFields' => ['id' => true],
+                        'patchableFields' => ['id' => true],
                     ],
                 ],
             ],
@@ -391,7 +391,7 @@ concerned entity.
 
     If you are using newEntity() and the resulting entities are missing some or
     all of the data they were passed, double check that the columns you want to
-    set are listed in the ``$_accessible`` property of your entity. See
+    set are listed in the ``$patchable`` property of your entity. See
     :ref:`entities-mass-assignment`.
 
 Merging Request Data Into Entities
@@ -482,7 +482,7 @@ an important caveat:
 If a Product belongsToMany Tag::
 
     // in the Product Entity
-    protected array $_accessible = [
+    protected array $patchable = [
         // .. other properties
        'tags' => true,
     ];

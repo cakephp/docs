@@ -361,7 +361,7 @@ into an entity allows the user to modify any and all columns. When using
 anonymous entity classes or creating the entity class with the :doc:`/bake`
 CakePHP does not protect against mass-assignment.
 
-The ``_accessible`` property allows you to provide a map of fields and
+The ``patchable`` property allows you to provide a map of fields and
 whether or not they can be mass-assigned. The values ``true`` and ``false``
 indicate whether a field can or cannot be mass-assigned::
 
@@ -371,7 +371,7 @@ indicate whether a field can or cannot be mass-assigned::
 
     class Article extends Entity
     {
-        protected array $_accessible = [
+        protected array $patchable = [
             'title' => true,
             'body' => true
         ];
@@ -386,7 +386,7 @@ fallback behavior if a field is not specifically named::
 
     class Article extends Entity
     {
-        protected array $_accessible = [
+        protected array $patchable = [
             'title' => true,
             'body' => true,
             '*' => false,
@@ -408,14 +408,14 @@ protect itself against mass assignment::
 Modifying the Guarded Fields at Runtime
 ---------------------------------------
 
-You can modify the list of guarded fields at runtime using the ``setAccess()``
+You can modify the list of guarded fields at runtime using the ``setPatchable()``
 method::
 
     // Make user_id accessible.
-    $article->setAccess('user_id', true);
+    $article->setPatchable('user_id', true);
 
     // Make title guarded.
-    $article->setAccess('title', false);
+    $article->setPatchable('title', false);
 
 .. note::
 
