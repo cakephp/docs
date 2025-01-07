@@ -288,7 +288,7 @@ usuário apartir da requisição a uma entidade permite ao usuário modificar to
 quaisquer colunas. Ao usar classes de entidade anônimas ou criar a classe de entidade
 com :doc:`/bake`, o CakePHP não protege contra a atribuição em massa.
 
-A propriedade ``_accessible`` permite que você forneça um mapa de propriedades
+A propriedade ``patchable`` permite que você forneça um mapa de propriedades
 e se elas podem ou não ser atribuídas em massa. Os valores ``true`` e ``false``
 indicam se um campo pode ou não ser atribuído em massa::
 
@@ -298,7 +298,7 @@ indicam se um campo pode ou não ser atribuído em massa::
 
     class Article extends Entity
     {
-        protected array $_accessible = [
+        protected array $patchable = [
             'title' => true,
             'body' => true
         ];
@@ -313,7 +313,7 @@ de falbback se um campo não for especificamente nomeado::
 
     class Article extends Entity
     {
-        protected array $_accessible = [
+        protected array $patchable = [
             'title' => true,
             'body' => true,
             '*' => false,

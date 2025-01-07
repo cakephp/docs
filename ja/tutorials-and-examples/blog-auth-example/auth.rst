@@ -140,7 +140,7 @@ composerを使ってAuthenticationプラグインをインストールします�
     class User extends Entity
     {
         // 主キーフィールドである「id」以外のすべてのフィールドを一括代入可能にします。
-        protected array $_accessible = [
+        protected array $patchable = [
             '*' => true,
             'id' => false
         ];

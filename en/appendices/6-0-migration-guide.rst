@@ -20,8 +20,26 @@ Behavior Changes
 Breaking Changes
 ================
 
+Datasource
+----------
+
+- ``Datasource/Paging/PaginatedInterface`` now extends ``IteratorAggregate``
+  instead of ``Traversable``.
+
+ORM
+---
+
+- The ``_accessible`` property inside Entities has been renamed to ``patchable``
+  to better reflect its purpose.
+- ``setAccess`` method has been renamed to ``setPatchable``.
+- ``getAccessible`` method has been renamed to ``getPatchable``.
+- ``isAccessible`` method has been renamed to ``isPatchable``.
+- The ``accessibleFields`` option used in e.g. ORM Queries has been
+  renamed to ``patchableFields``.
+
+Utility
+-------
+
 - The default placeholder format for ``Text::insert()`` has been changed.
   They now use ``{foo}`` instead of ``:foo``. You can get the old
   behavior by using the ``before`` and ``after`` keys of ``$options``.
-- ``Datasource/Paging/PaginatedInterface`` now extends ``IteratorAggregate``
-  instead of ``Traversable``.

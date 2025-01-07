@@ -328,12 +328,12 @@ entidade. Em **src/Model/Entity/Bookmark.php** adicione o seguinte::
 
 Isso vai nos deixar acessar a propriedade computada ``$bookmark->tag_string``.
 Vamos usar essa propriedade em inputs mais tarde. Lembre-se de adicionar a
-propriedade ``tag_string`` a lista ``_accessible`` em sua entidade.
+propriedade ``tag_string`` a lista ``patchable`` em sua entidade.
 
 Em **src/Model/Entity/Bookmark.php** adicione o ``tag_string`` ao
-``_accessible`` desta forma::
+``patchable`` desta forma::
 
-    protected array $_accessible = [
+    protected array $patchable = [
         'user_id' => true,
         'title' => true,
         'description' => true,

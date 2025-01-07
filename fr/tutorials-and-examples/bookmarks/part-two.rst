@@ -346,13 +346,13 @@ pouvons ajouter un champ virtuel/calculé à l'entity. Dans
 
 Cela nous laissera l'accès à la propriété calculée ``$bookmark->tag_string``.
 Nous utiliserons cette propriété dans controls plus tard. Rappelez-vous
-d'ajouter la propriété ``tag_string`` dans la liste ``_accessible`` de votre
+d'ajouter la propriété ``tag_string`` dans la liste ``patchable`` de votre
 entity, puisque nous voulons la 'sauvegarder' plus tard.
 
 Dans le fichier **src/Model/Entity/Bookmark.php**, ajoutez ``tag_string`` à
-la propriété ``_accessible`` comme ceci::
+la propriété ``patchable`` comme ceci::
 
-    protected array $_accessible = [
+    protected array $patchable = [
         'user_id' => true,
         'title' => true,
         'description' => true,

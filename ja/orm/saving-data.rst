@@ -143,7 +143,7 @@ Table クラスは、リクエストデータを一つまたは複数のエン�
 
     もし newEntity() を使っていて、返されてきたエンティティーが渡したデータのいくつか
     またはすべてを失っている場合は、設定したいカラムがそのエンティティーの
-    ``$_accessible`` プロパティーに列挙されているかをもう一度確認してみてください。
+    ``$patchable`` プロパティーに列挙されているかをもう一度確認してみてください。
     :ref:`entities-mass-assignment` をご覧ください。
 
 リクエストデータはあなたのエンティティーの構造に従っていなければなりません。
@@ -370,8 +370,8 @@ belongsToMany の変換を ``_ids`` キーの使用のみに制限して、他�
 ------------------------------
 
 ``newEntity()`` に、アクセス不可能なフィールドに書き込ませることもできます。
-例えば ``id`` は通常は ``_accessible`` プロパティーから外れます。
-そうした場合には、 ``accessibleFields`` オプションを使うことができます。
+例えば ``id`` は通常は ``patchable`` プロパティーから外れます。
+そうした場合には、 ``patchableFields`` オプションを使うことができます。
 これは関連付けられたエンティティーの ID を維持するために便利かもしれません。 ::
 
     // コントローラーの中で
@@ -382,7 +382,7 @@ belongsToMany の変換を ``_ids`` キーの使用のみに制限して、他�
             'Tags', 'Comments' => [
                 'associated' => [
                     'Users' => [
-                        'accessibleFields' => ['id' => true],
+                        'patchableFields' => ['id' => true],
                     ],
                 ],
             ],
@@ -396,7 +396,7 @@ belongsToMany の変換を ``_ids`` キーの使用のみに制限して、他�
 
     もし newEntity() を使っていて、返されてきたエンティティーが渡したデータのいくつか
     またはすべてを失っている場合は、設定したいカラムがそのエンティティーの
-    ``$_accessible`` プロパティーに列挙されているかをもう一度確認してみてください。
+    ``$patchable`` プロパティーに列挙されているかをもう一度確認してみてください。
     :ref:`entities-mass-assignment` をご覧ください。
 
 リクエストデータをエンティティーにマージ
@@ -484,7 +484,7 @@ hasMany の belongsToMany アソシエーションについても同じことが
 もし、 Product belongsToMany Tag であれば、こうなります。 ::
 
     // Product エンティティーの中で
-    protected array $_accessible = [
+    protected array $patchable = [
         // .. 他のプロパティー
        'tags' => true,
     ];

@@ -154,7 +154,7 @@ Table オブジェクトを ``ArticlesTable`` と名付けることで、CakePHP
 
     class Article extends Entity
     {
-        protected array $_accessible = [
+        protected array $patchable = [
             'title' => true,
             'body' => true,
             'published' => true,
@@ -165,7 +165,7 @@ Table オブジェクトを ``ArticlesTable`` と名付けることで、CakePHP
     }
 
 エンティティーは、今はとてもスリムです。そして、 :ref:`entities-mass-assignment` によって
-どのようにプロパティーを変更できるかを制御するプロパティー ``_accessible`` をセットアップしました。
+どのようにプロパティーを変更できるかを制御するプロパティー ``patchable`` をセットアップしました。
 
 このモデルは、今は動きませんが、次は最初の
 :doc:`コントローラーとテンプレート </tutorials-and-examples/cms/articles-controller>`

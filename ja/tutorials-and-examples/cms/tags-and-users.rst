@@ -322,7 +322,7 @@ CakePHP では、コントローラーのアクションをスリムに保ち、
     use Cake\Collection\Collection;
 
     // アクセス可能なプロパティに `tag_string` を含めるよう更新します
-    protected array $_accessible = [
+    protected array $patchable = [
         // その他のフィールドも追加可能
         'tag_string' => true
     ];

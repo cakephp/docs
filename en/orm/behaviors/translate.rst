@@ -501,7 +501,7 @@ In your controller, you can marshal the data as normal::
 
 This will result in your article, the french and spanish translations all being
 persisted. You'll need to remember to add ``_translations`` into the
-``$_accessible`` fields of your entity as well.
+``$patchable`` fields of your entity as well.
 
 Validating Translated Entities
 ------------------------------

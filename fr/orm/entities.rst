@@ -388,7 +388,7 @@ toutes). Utiliser des classes entity anonymes ou créer des classes entity avec
 la commande :doc:`/bake` de CakePHP ne protège pas contre l'assignement en
 masse.
 
-La propriété ``_accessible`` vous permet de fournir une liste des champs et
+La propriété ``patchable`` vous permet de fournir une liste des champs et
 d'indiquer s'ils peuvent être assignés en masse ou non. Les valeurs ``true`` et
 ``false`` indiquent si un champ peut ou ne peut pas être assigné massivement::
 
@@ -398,7 +398,7 @@ d'indiquer s'ils peuvent être assignés en masse ou non. Les valeurs ``true`` e
 
     class Article extends Entity
     {
-        protected array $_accessible = [
+        protected array $patchable = [
             'title' => true,
             'body' => true
         ];
@@ -413,7 +413,7 @@ comportement par défaut si un champ n'est pas nommé spécifiquement::
 
     class Article extends Entity
     {
-        protected array $_accessible = [
+        protected array $patchable = [
             'title' => true,
             'body' => true,
             '*' => false,
@@ -436,13 +436,13 @@ Modifier les Champs Protégés à la Volée
 ---------------------------------------
 
 Vous pouvez modifier à la volée la liste des champs protégés en utilisant la
-méthode ``setAccess()``::
+méthode ``setPatchable()``::
 
     // Rendre user_id accessible.
-    $article->setAccess('user_id', true);
+    $article->setPatchable('user_id', true);
 
     // Rendre title protégé.
-    $article->setAccess('title', false);
+    $article->setPatchable('title', false);
 
 .. note::
 

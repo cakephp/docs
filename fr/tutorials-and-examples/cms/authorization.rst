@@ -222,7 +222,7 @@ Ensuite nous allons modifier l'action ``edit``. Remplacez la méthode d'édition
         if ($this->request->is(['post', 'put'])) {
             $this->Articles->patchEntity($article, $this->request->getData(), [
                 // Ajout: Empêcher la modification de user_id.
-                'accessibleFields' => ['user_id' => false]
+                'patchableFields' => ['user_id' => false]
             ]);
             if ($this->Articles->save($article)) {
                 $this->Flash->success(__('Votre article a été sauvegardé.'));

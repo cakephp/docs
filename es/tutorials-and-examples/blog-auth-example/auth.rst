@@ -157,7 +157,7 @@ archivo de la entidad **src/Model/Entity/User.php** y añade lo siguiente::
     class User extends Entity
     {
         // Make all fields mass assignable except for primary key field "id".
-        protected array $_accessible = [
+        protected array $patchable = [
             '*' => true,
             'id' => false
         ];

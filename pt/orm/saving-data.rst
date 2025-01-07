@@ -186,7 +186,7 @@ usando::
 
     Se você estiver usando newEntity() e as entidades resultantes estão faltando algum
     ou todos os dados passados, verifique se as colunas que deseja definir estão
-    listadas na propriedade ``$_accessible`` da sua entidade. Consulte :ref:`entities-mass-assignment`.
+    listadas na propriedade ``$patchable`` da sua entidade. Consulte :ref:`entities-mass-assignment`.
 
 Os dados da requisição devem seguir a estrutura de suas entidades. Por exemplo, se você
 tem um artigo, que pertence a um usuário, e tem muitos comentários, os seus dados de
@@ -415,8 +415,8 @@ Alterando Campos Acessíveis
 ---------------------------
 
 Também é possível permitir ``newEntity()`` escrever em campos não acessiveis.
-Por exemplo, ``id`` geralmente está ausente da propriedade ``_accessible``.
-Nesse caso , você pode usar a opção ``accessibleFields``. Isso pode ser útil para
+Por exemplo, ``id`` geralmente está ausente da propriedade ``patchable``.
+Nesse caso , você pode usar a opção ``patchableFields``. Isso pode ser útil para
 manter ids de entidades associadas::
 
     // No controller
@@ -428,7 +428,7 @@ manter ids de entidades associadas::
             'Tags', 'Comments' => [
                 'associated' => [
                     'Users' => [
-                        'accessibleFields' => ['id' => true]
+                        'patchableFields' => ['id' => true]
                     ]
                 ]
             ]
@@ -442,7 +442,7 @@ entidade envolvida.
 
     Se você estiver usando newEntity() e as entidades resultantes estão faltando algum
     ou todos os dados passados, verifique se as colunas que deseja definir estão
-    listadas na propriedade ``$_accessible`` da sua entidade. Consulte :ref:`entities-mass-assignment`.
+    listadas na propriedade ``$patchable`` da sua entidade. Consulte :ref:`entities-mass-assignment`.
 
 Mesclando Dados de Requisição em Entidades
 ------------------------------------------
@@ -532,7 +532,7 @@ advertência importante:
 Se um Produto pertence a várias (belongsToMany) Tag::
 
     // Na classe da entidade Product
-    protected array $_accessible = [
+    protected array $patchable = [
         // .. outras propriedades
        'tags' => true,
     ];
