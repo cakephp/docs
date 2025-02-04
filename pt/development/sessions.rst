@@ -271,7 +271,8 @@ A classe deve se parecer com::
         // Remove sessões expiradas.
         public function gc($expires = null)
         {
-            return Cache::gc($this->cacheKey) && parent::gc($expires);
+            Cache::gc($this->cacheKey);
+            return parent::gc($expires);
         }
     }
 
