@@ -16,6 +16,7 @@ Behavior Changes
   ``JsonType`` by default.
 - ``Cake\View\Widget\FileWidget`` was removed as it was redundant. The standard
   input widget will be used for file inputs in 6.x.
+- ``Text::uuid()`` now generates UUID v7 complaint strings instead of UUID v4.
 
 Breaking Changes
 ================
