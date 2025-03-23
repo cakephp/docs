@@ -40,7 +40,7 @@ languages = ['en', 'pt_BR', 'es', 'ja', 'fr']
 
 # The GitHub branch name for this version of the docs
 # for edit links to point at.
-branch = '4.next'
+branch = '4.x'
 
 # Add any paths that contain custom themes here, relative to this directory.
 html_theme_path = []
