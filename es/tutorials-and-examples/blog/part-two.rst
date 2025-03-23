@@ -269,6 +269,7 @@ ArticlesController::
                 $article = $this->Articles->patchEntity($article, $this->request->getData());
                 if ($this->Articles->save($article)) {
                     $this->Flash->success(__('Your article has been saved.'));
+
                     return $this->redirect(['action' => 'index']);
                 }
                 $this->Flash->error(__('Unable to add your article.'));
@@ -424,6 +425,7 @@ ser la acción ``edit()`` del controlador ``ArticlesController``::
             $this->Articles->patchEntity($article, $this->request->getData());
             if ($this->Articles->save($article)) {
                 $this->Flash->success(__('Tu artículo ha sido actualizado.'));
+
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('Tu artículo no se ha podido actualizar.'));
@@ -512,6 +514,7 @@ Vamos a permitir a los usuarios que borren artículos. Empieza con una acción
         $article = $this->Articles->get($id);
         if ($this->Articles->delete($article)) {
             $this->Flash->success(__('El artículo con id: {0} ha sido eliminado.', h($id)));
+
             return $this->redirect(['action' => 'index']);
         }
     }

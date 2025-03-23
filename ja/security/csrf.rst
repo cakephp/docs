@@ -52,6 +52,7 @@ CSRFプロテクションは、アプリケーション全体、または特定�
         $csrf = new SessionCsrfProtectionMiddleware($options);
 
         $middlewareQueue->add($csrf);
+
         return $middlewareQueue;
     }
 

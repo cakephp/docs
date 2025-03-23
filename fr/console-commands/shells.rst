@@ -146,12 +146,14 @@ Also, the task name must be added as a sub-command to the Shell's OptionParser::
     public function getOptionParser()
     {
         $parser = parent::getOptionParser();
+
         $parser->addSubcommand('sound', [
             // Provide help text for the command list
             'help' => 'Execute The Sound Task.',
             // Link the option parsers together.
             'parser' => $this->Sound->getOptionParser(),
         ]);
+
         return $parser;
     }
 

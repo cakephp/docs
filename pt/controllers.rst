@@ -294,6 +294,7 @@ você pode querer redirecioná-lo para uma tela de recepção. ::
                 ['controller' => 'Orders', 'action' => 'thanks']
             );
         }
+
         return $this->redirect(
             ['controller' => 'Orders', 'action' => 'confirm']
         );
@@ -307,6 +308,7 @@ corrente.
 Você também pode usar uma URL relativa ou absoluta como o parâmetro $url::
 
     return $this->redirect('/orders/thanks');
+
     return $this->redirect('http://www.example.com');
 
 Você também pode passar dados para a action::

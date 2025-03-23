@@ -641,6 +641,7 @@ Les Types d'Attribut Correspondants
         public function noop(array $array)
         {
             // Fait des choses au tableau et retourne les résultats
+
             return $array;
         }
 

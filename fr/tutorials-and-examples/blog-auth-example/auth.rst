@@ -100,6 +100,7 @@ classe obtenue grâce à l'utilitaire de génération de code fourni par CakePHP
                 $user = $this->Users->patchEntity($user, $this->request->getData());
                 if ($this->Users->save($user)) {
                     $this->Flash->success(__("L'utilisateur a été sauvegardé."));
+
                     return $this->redirect(['action' => 'add']);
                 }
                 $this->Flash->error(__("Impossible d'ajouter l\'utilisateur."));
@@ -378,6 +379,7 @@ Ajoutez l'action logout à votre classe ``UsersController``::
         // Qu'on soit en POST ou en GET, rediriger l'utilisateur s'il est déjà connecté
         if ($result->isValid()) {
             $this->Authentication->logout();
+
             return $this->redirect(['controller' => 'Users', 'action' => 'login']);
         }
     }

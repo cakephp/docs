@@ -199,6 +199,7 @@ ExceptionRenderer の変更
         public function missingWidget($error)
         {
             $response = $this->controller->response;
+
             return $response->withStringBody('おっとウィジェットが見つからない！');
         }
     }

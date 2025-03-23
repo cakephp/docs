@@ -194,6 +194,7 @@ complètement réinitialiser la liste::
     $crumbs = $this->Breadcrumbs->getCrumbs();
     $crumbs = collection($crumbs)->map(function ($crumb) {
         $crumb['options']['class'] = 'breadcrumb-item';
+
         return $crumb;
     })->toArray();
 

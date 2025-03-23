@@ -443,6 +443,7 @@ Type クラスは次のメソッドを実装することが期待されます。
             if ($value === null) {
                 return null;
             }
+
             return json_decode($value, true);
         }
 
@@ -451,6 +452,7 @@ Type クラスは次のメソッドを実装することが期待されます。
             if (is_array($value) || $value === null) {
                 return $value;
             }
+
             return json_decode($value, true);
         }
 
@@ -464,6 +466,7 @@ Type クラスは次のメソッドを実装することが期待されます。
             if ($value === null) {
                 return PDO::PARAM_NULL;
             }
+
             return PDO::PARAM_STR;
         }
 
@@ -571,6 +574,7 @@ Type クラスが必要になります。 ::
             if (is_array($value)) {
                 return new Point($value[0], $value[1]);
             }
+
             return null;
         }
 

@@ -280,6 +280,7 @@ devrait ressembler à::
             if ($result) {
                 return $result;
             }
+
             return parent::read($id);
         }
 
@@ -287,6 +288,7 @@ devrait ressembler à::
         public function write($id, $data)
         {
             Cache::write($id, $data, $this->cacheKey);
+
             return parent::write($id, $data);
         }
 
@@ -294,6 +296,7 @@ devrait ressembler à::
         public function destroy($id)
         {
             Cache::delete($id, $this->cacheKey);
+
             return parent::destroy($id);
         }
 

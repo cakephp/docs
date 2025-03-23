@@ -212,6 +212,7 @@ Exemplo de uma definição de método::
         if (expr) {
             declaração;
         }
+
         return $var;
     }
 
@@ -230,6 +231,7 @@ de uma função. Tente fazer suas funções retornarem algo, pelo menos ``true``
         if (!($dnsInfo) || !($dnsInfo['phpType'])) {
             return $this->addError();
         }
+
         return true;
     }
 

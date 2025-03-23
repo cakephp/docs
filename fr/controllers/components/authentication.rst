@@ -247,6 +247,7 @@ connexion pourrait ressembler à cela::
             $user = $this->Auth->identify();
             if ($user) {
                 $this->Auth->setUser($user);
+
                 return $this->redirect($this->Auth->redirectUrl());
             } else {
                 $this->Flash->error(__("Nom d'utilisateur ou mot de passe incorrect"));
@@ -340,6 +341,7 @@ en cas d'échec::
         if (empty($username) || empty($pass)) {
             return false;
         }
+
         return $this->_findUser($username, $pass);
     }
 
@@ -410,6 +412,7 @@ de façon aléatoire ces tokens d'API en utilisant les libraries de CakePHP::
                 // it during login.
                 $entity->api_key = $hasher->hash($entity->api_key_plain);
             }
+
             return true;
         }
     }
@@ -476,6 +479,7 @@ colonne séparée du mot de passe standard hashé::
                 $entity->plain_password,
                 env('SERVER_NAME')
             );
+
             return true;
         }
     }
@@ -748,6 +752,7 @@ pouvez changer la fonction login selon::
                     $user->password = $this->request->getData('password');
                     $this->Users->save($user);
                 }
+
                 return $this->redirect($this->Auth->redirectUrl());
             }
             ...
@@ -773,6 +778,7 @@ utilisateur que vous voulez pour la 'connexion'::
         $user = $this->Users->newEntity($this->request->getData());
         if ($this->Users->save($user)) {
             $this->Auth->setUser($user->toArray());
+
             return $this->redirect([
                 'controller' => 'Users',
                 'action' => 'home'

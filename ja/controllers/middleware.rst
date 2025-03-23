@@ -74,6 +74,7 @@ CakePHP はウェブアプリケーションの一般的なタスクを処理す
         {
             // ミドルウェアのキューにエラーハンドラーを結びつけます。
             $middlewareQueue->add(new ErrorHandlerMiddleware());
+
             return $middlewareQueue;
         }
     }
@@ -110,7 +111,7 @@ CakePHP はウェブアプリケーションの一般的なタスクを処理す
 
 
 If your middleware is only applicable to a subset of routes or individual
-controllers you can use :ref:`Route scoped middleware <route-scoped-middleware>`, 
+controllers you can use :ref:`Route scoped middleware <route-scoped-middleware>`,
 or :ref:`Controller middleware <controller-middleware>`.
 
 プラグインからのミドルウェア追加

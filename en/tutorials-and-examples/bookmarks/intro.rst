@@ -289,6 +289,7 @@ add the following::
         protected function _setPassword($value)
         {
             $hasher = new DefaultPasswordHasher();
+
             return $hasher->hash($value);
         }
     }
@@ -413,6 +414,7 @@ method has not been implemented yet, so let's do that. In
                 ->where(['Tags.title IN ' => $options['tags']])
                 ->group(['Bookmarks.id']);
         }
+
         return $query;
     }
 

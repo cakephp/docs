@@ -210,6 +210,7 @@ view テンプレートの作成
 
                 if ($this->Articles->save($article)) {
                     $this->Flash->success(__('Your article has been saved.'));
+
                     return $this->redirect(['action' => 'index']);
                 }
                 $this->Flash->error(__('Unable to add your article.'));
@@ -342,6 +343,7 @@ edit アクションの追加
             $this->Articles->patchEntity($article, $this->request->getData());
             if ($this->Articles->save($article)) {
                 $this->Flash->success(__('Your article has been updated.'));
+
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('Unable to update your article.'));
@@ -471,6 +473,7 @@ delete アクションの追加
         $article = $this->Articles->findBySlug($slug)->firstOrFail();
         if ($this->Articles->delete($article)) {
             $this->Flash->success(__('The {0} article has been deleted.', $article->title));
+
             return $this->redirect(['action' => 'index']);
         }
     }

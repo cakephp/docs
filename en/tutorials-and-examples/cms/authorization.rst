@@ -201,6 +201,7 @@ logged in user. Replace your add action with the following::
 
             if ($this->Articles->save($article)) {
                 $this->Flash->success(__('Your article has been saved.'));
+
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('Unable to add your article.'));
@@ -228,6 +229,7 @@ Next we'll update the ``edit`` action. Replace the edit method with the followin
             ]);
             if ($this->Articles->save($article)) {
                 $this->Flash->success(__('Your article has been updated.'));
+
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('Unable to update your article.'));

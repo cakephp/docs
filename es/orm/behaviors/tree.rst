@@ -172,6 +172,7 @@ Opcionalmente, puede ejercer un control más riguroso pasando una clausura como 
 
     $this->behaviors()->Tree->config('scope', function ($query) {
         $country = $this->getConfigureContry(); // A made-up function
+
         return $query->where(['country_name' => $country]);
     });
 

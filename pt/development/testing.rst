@@ -137,6 +137,7 @@ que vamos testar estará formatando a barra de progresso HTML. Nosso ajudante se
         public function bar($value)
         {
             $width = round($value / 100, 2) * 100;
+
             return sprintf(
                 '<div class="progress-container">
                     <div class="progress-bar" style="width: %s%%"></div>
@@ -684,6 +685,7 @@ Digamos que já temos nossa classe de tabela de artigos definida em
             $query->where([
                 $this->alias() . '.published' => 1
             ]);
+
             return $query;
         }
     }
@@ -1707,8 +1709,10 @@ Expandindo no exemplo Orders, digamos que temos as seguintes tabelas::
                     'order' => $order
                 ]);
                 $this->eventManager()->dispatch($event);
+
                 return true;
             }
+
             return false;
         }
     }

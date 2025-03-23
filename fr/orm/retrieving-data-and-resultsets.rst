@@ -400,6 +400,7 @@ les articles d'un certain auteur, nous ferions ceci::
         public function findEcritPar(Query $query, array $options)
         {
             $user = $options['user'];
+
             return $query->where(['author_id' => $user->id]);
         }
 
@@ -582,7 +583,7 @@ définir le second argument à ``true``::
 
     $query = $articles->find();
     $query->contain(['Authors', 'Comments'], true);
- 
+
 .. note::
 
     Les noms d'association dans les appels à ``contain()`` doivent respecter la
@@ -667,7 +668,7 @@ passez un tableau::
         'Authors' => [
             'foreignKey' => false,
             'queryBuilder' => function (Query $q) {
-                return $q->where(...); // Conditions complètes pour le filtrage
+                return $q->where(/* ... */); // Conditions complètes pour le filtrage
             }
         ]
     ]);
@@ -801,7 +802,7 @@ l'association et charger d'autres champs de cette même association, vous pouvez
 parfaitement combiner ``innerJoinWith()`` et ``contain()``.
 L'exemple ci-dessous filtre les Articles qui ont des Tags spécifiques et charge
 ces Tags::
- 
+
     $filter = ['Tags.name' => 'CakePHP'];
     $query = $articles->find()
         ->distinct($articles->getPrimaryKey())
@@ -820,9 +821,9 @@ ces Tags::
         $query
             ->select(['country_name' => 'Countries.name'])
             ->innerJoinWith('Countries');
- 
+
     Sinon, vous verrez les données dans ``_matchingData``, comme cela a été
-    décrit ci-dessous à propos de ``matching()``. C'est un angle mort de 
+    décrit ci-dessous à propos de ``matching()``. C'est un angle mort de
     ``matching()``, qui ne sait pas que vous avez sélectionné des champs.
 
 .. warning::
@@ -949,7 +950,7 @@ exemple des tables se trouvant dans deux bases de données différentes.
 Habituellement, vous définisser la stratégie d'une association quand vous la
 définissez, dans la méthode ``Table::initialize()``, mais vous pouvez changer
 manuellement la stratégie de façon permanente::
- 
+
     $articles->Comments->setStrategy('select');
 
 Récupération Avec la Stratégie de Sous-Requête
@@ -1050,6 +1051,7 @@ exécutant::
         if (!in_array($value, $output)) {
             $output[] = $value;
         }
+
         return $output;
     };
 
@@ -1340,6 +1342,7 @@ comme décrit dans la section :ref:`custom-find-methods`::
         // Comme dans l'exemple précédent sur la fréquence des mots
         $mapper = ...;
         $reducer = ...;
+
         return $query->mapReduce($mapper, $reducer);
     }
 

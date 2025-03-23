@@ -156,6 +156,7 @@ ajouter un gestionnaire de CSV pourrait ressembler à ceci::
                 foreach ($rows as &$row) {
                     $row = str_getcsv($row, ',');
                 }
+
                 return $rows;
             };
             $this->loadComponent('RequestHandler', [

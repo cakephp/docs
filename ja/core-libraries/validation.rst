@@ -287,6 +287,7 @@ CakePHPは6つの異なる形状のデータに対して空の値のサポート
         if (isset($context['data']['action'])) {
             return $context['data']['action'] === 'subscribe';
         }
+
         return false;
     });
     $validator->requirePresence('email');

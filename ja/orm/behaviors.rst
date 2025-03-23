@@ -175,6 +175,7 @@ sluggable behavior を作成してみます。
         if (...) {
             $event->stopPropagation();
             $event->setResult(false);
+
             return;
         }
         $this->slug($entity);

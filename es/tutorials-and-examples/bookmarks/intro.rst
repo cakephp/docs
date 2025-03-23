@@ -222,6 +222,7 @@ Añadamos un setter para la contraseña añadiendo el siguiente código en **src
         protected function _setPassword($value)
         {
             $hasher = new DefaultPasswordHasher();
+
             return $hasher->hash($value);
         }
     }

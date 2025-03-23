@@ -198,6 +198,7 @@ l'utilisateur actuellement authentifié. Remplacez l'action ``add`` par le code 
 
             if ($this->Articles->save($article)) {
                 $this->Flash->success(__('Votre article a été enregistré avec succès.'));
+
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('Impossible d\'ajouter votre article.'));
@@ -225,6 +226,7 @@ Ensuite nous allons modifier l'action ``edit``. Remplacez la méthode d'édition
             ]);
             if ($this->Articles->save($article)) {
                 $this->Flash->success(__('Votre article a été sauvegardé.'));
+
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('Impossible de mettre à jour votre article.'));

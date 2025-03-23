@@ -289,6 +289,7 @@ conditions only::
         if (isset($context['data']['action'])) {
             return $context['data']['action'] === 'subscribe';
         }
+
         return false;
     });
     $validator->requirePresence('email');
@@ -565,10 +566,10 @@ following::
 Validating Entity Data
 ======================
 
-Validation is meant for checking request data coming from forms or other user 
+Validation is meant for checking request data coming from forms or other user
 interfaces used to populate the entities.
 
-The request data is validated automatically when using the ``newEntity()``, 
+The request data is validated automatically when using the ``newEntity()``,
 ``newEntities()``, ``patchEntity()`` or ``patchEntities()`` methods of ``Table`` class::
 
     // In the ArticlesController class
@@ -601,9 +602,9 @@ validation sets to apply using the ``options`` parameter::
       ]
     ]);
 
-Apart from validating user provided data maintaining integrity of data regardless 
-where it came from is important. To solve this problem CakePHP offers a second 
-level of validation which is called "application rules". You can read more about 
+Apart from validating user provided data maintaining integrity of data regardless
+where it came from is important. To solve this problem CakePHP offers a second
+level of validation which is called "application rules". You can read more about
 them in the :ref:`Applying Application Rules <application-rules>` section.
 
 Core Validation Rules

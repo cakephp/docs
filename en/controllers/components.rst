@@ -142,6 +142,7 @@ in your controller, you could access it like so::
         {
             if ($this->Post->delete($this->request->getData('Post.id')) {
                 $this->Flash->success('Post deleted.');
+
                 return $this->redirect(['action' => 'index']);
             }
         }
@@ -323,6 +324,7 @@ To redirect from within a component callback method you can use the following::
     public function beforeFilter(EventInterface $event)
     {
         $event->stopPropagation();
+
         return $this->getController()->redirect('/');
     }
 

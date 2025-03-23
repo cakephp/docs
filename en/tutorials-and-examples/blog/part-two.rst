@@ -296,6 +296,7 @@ First, start by creating an ``add()`` action in the
                 $article = $this->Articles->patchEntity($article, $this->request->getData());
                 if ($this->Articles->save($article)) {
                     $this->Flash->success(__('Your article has been saved.'));
+
                     return $this->redirect(['action' => 'index']);
                 }
                 $this->Flash->error(__('Unable to add your article.'));
@@ -459,6 +460,7 @@ like::
             $this->Articles->patchEntity($article, $this->request->getData());
             if ($this->Articles->save($article)) {
                 $this->Flash->success(__('Your article has been updated.'));
+
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('Unable to update your article.'));
@@ -549,6 +551,7 @@ Next, let's make a way for users to delete articles. Start with a
         $article = $this->Articles->get($id);
         if ($this->Articles->delete($article)) {
             $this->Flash->success(__('The article with id: {0} has been deleted.', h($id)));
+
             return $this->redirect(['action' => 'index']);
         }
     }

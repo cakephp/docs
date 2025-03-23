@@ -50,6 +50,7 @@ de votre Application, vous protégez toutes les actions de l'application::
         $csrf = new SessionCsrfProtectionMiddleware($options);
 
         $middlewareQueue->add($csrf);
+
         return $middlewareQueue;
     }
 

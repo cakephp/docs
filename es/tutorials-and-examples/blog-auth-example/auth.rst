@@ -87,6 +87,7 @@ También vamos a crear UsersController; el siguiente contenido fue generado usan
                 $user = $this->Users->patchEntity($user, $this->request->getData());
                 if ($this->Users->save($user)) {
                     $this->Flash->success(__('The user has been saved.'));
+
                     return $this->redirect(['action' => 'add']);
                 }
                 $this->Flash->error(__('Unable to add the user.'));
@@ -181,6 +182,7 @@ Ahora necesitamos poder registrar nuevos usuarios, guardar el nombre de usuario 
             $user = $this->Auth->identify();
             if ($user) {
                 $this->Auth->setUser($user);
+
                 return $this->redirect($this->Auth->redirectUrl());
             }
             $this->Flash->error(__('Invalid email or password, try again'));
@@ -270,6 +272,7 @@ También, un pequeño cambio en ArticlesController es necesario para guardar el 
             //$article = $this->Articles->patchEntity($article, $newData);
             if ($this->Articles->save($article)) {
                 $this->Flash->success(__('Your article has been saved.'));
+
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('Unable to add your article.'));

@@ -45,9 +45,9 @@ Fazer solicitações POST e PUT é igualmente simples::
     ]);
 
     // Outros métodos também.
-    $http->delete(...);
-    $http->head(...);
-    $http->patch(...);
+    $http->delete(/* ... */);
+    $http->head(/* ... */);
+    $http->patch(/* ... */);
 
 Se você criou um objeto de solicitação PSR-7, pode enviá-lo usando
 ``sendRequest()``::

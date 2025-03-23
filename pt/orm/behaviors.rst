@@ -192,6 +192,7 @@ evento em seu callback::
     {
         if (...) {
             $event->stopPropagation();
+
             return;
         }
         $this->slug($entity);

@@ -27,7 +27,7 @@ Hello world toute simple. Dans le répertoire **src/Command** de votre applicati
         public function execute(Arguments $args, ConsoleIo $io): int
         {
             $io->out('Hello world.');
-            
+
             return static::CODE_SUCCESS;
         }
     }
@@ -61,6 +61,7 @@ Notre méthode ``execute()`` n'est pas très intéressente, ajoutons des entrée
             $parser->addArgument('name', [
                 'help' => 'Quel est votre nom'
             ]);
+
             return $parser;
         }
 
@@ -68,7 +69,7 @@ Notre méthode ``execute()`` n'est pas très intéressente, ajoutons des entrée
         {
             $name = $args->getArgument('name');
             $io->out("Hello {$name}.");
-            
+
             return static::CODE_SUCCESS;
         }
     }
@@ -82,7 +83,7 @@ Après avoir sauvegardé ce fichier, vous devriez pouvoir exécuter la commande 
 
     # Affiche
     Hello jillian
- 
+
 Changer le Nom Par Défaut de la Commande
 ========================================
 
@@ -127,7 +128,7 @@ pour définir des arguments. Nous pouvons aussi définir des options. Par exempl
             $name = mb_strtoupper($name);
         }
         $io->out("Hello {$name}.");
-            
+
         return static::CODE_SUCCESS;
     }
 
@@ -216,7 +217,7 @@ message et un code::
             // Arrête l'exécution, affiche vers stderr, et définit le code de sortie à 99
             $io->abort('Le nom doit avoir au moins 4 caractères.', 99);
         }
-        
+
         return static::CODE_SUCCESS;
     }
 
@@ -337,7 +338,7 @@ moment, mais testons simplement si la description de notre shell description s'a
 
     use Cake\TestSuite\ConsoleIntegrationTestTrait;
     use Cake\TestSuite\TestCase;
- 
+
     class UpdateTableCommandTest extends TestCase
     {
         user ConsoleIntegrationTestTrait;

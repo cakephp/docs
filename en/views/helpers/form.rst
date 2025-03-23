@@ -661,10 +661,10 @@ as well as HTML attributes. This subsection will cover the options specific to
   As seen above you can set the error message for each validation
   rule you have in your models. In addition you can provide i18n
   messages for your forms.
-  
+
   To disable the HTML entity encoding for error messages only, the ``'escape'``
   sub key can be used::
-  
+
       $this->Form->control('name', [
           'error' => ['escape' => false],
       ]);
@@ -2507,6 +2507,7 @@ could do the following::
             $data += [
                 'name' => '',
             ];
+
             return $this->_templates->format('autocomplete', [
                 'name' => $data['name'],
                 'attrs' => $this->_templates->formatAttributes($data, ['name'])

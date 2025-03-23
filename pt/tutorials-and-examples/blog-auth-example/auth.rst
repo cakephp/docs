@@ -92,6 +92,7 @@ geração de código ``bake`` fornecido com CakePHP::
                 $user = $this->Users->patchEntity($user, $this->request->getData());
                 if ($this->Users->save($user)) {
                     $this->Flash->success(__('O usuário foi salvo.'));
+
                     return $this->redirect(['action' => 'add']);
                 }
                 $this->Flash->error(__('Não é possível adicionar o usuário.'));
@@ -202,6 +203,7 @@ execute as ações de ``login`` e ``logout``::
             $user = $this->Auth->identify();
             if ($user) {
                 $this->Auth->setUser($user);
+
                 return $this->redirect($this->Auth->redirectUrl());
             }
             $this->Flash->error(__('Usuário ou senha ínvalido, tente novamente'));
@@ -315,6 +317,7 @@ criado::
             //$article = $this->Articles->patchEntity($article, $newData);
             if ($this->Articles->save($article)) {
                 $this->Flash->success(__('Seu artigo foi salvo.'));
+
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('Não foi possível adicionar seu artigo.'));

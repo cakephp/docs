@@ -88,6 +88,7 @@ pour en attacher ::
         {
             // Attache le gestionnaire d'erreur dans la file du middleware
             $middlewareQueue->add(new ErrorHandlerMiddleware());
+
             return $middlewareQueue;
         }
     }
@@ -140,7 +141,7 @@ appliquer un de leurs middlewares dans la file de middlewares de l'application::
     use Cake\Http\MiddlewareQueue;
     use ContactManager\Middleware\ContactManagerContextMiddleware;
 
- 
+
     class Plugin extends BasePlugin
     {
         public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue

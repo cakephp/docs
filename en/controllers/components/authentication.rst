@@ -228,6 +228,7 @@ working with a login form could look like::
             $user = $this->Auth->identify();
             if ($user) {
                 $this->Auth->setUser($user);
+
                 return $this->redirect($this->Auth->redirectUrl());
             } else {
                 $this->Flash->error(__('Username or password is incorrect'));
@@ -315,6 +316,7 @@ an array of user information on the success or ``false`` on failure. ::
         if (empty($username) || empty($pass)) {
             return false;
         }
+
         return $this->_findUser($username, $pass);
     }
 
@@ -381,6 +383,7 @@ generate these API tokens randomly using libraries from CakePHP::
                 // it during login.
                 $entity->api_key = $hasher->hash($entity->api_key_plain);
             }
+
             return true;
         }
     }
@@ -444,6 +447,7 @@ from the normal password hash::
                 $entity->plain_password,
                 env('SERVER_NAME')
             );
+
             return true;
         }
     }
@@ -697,6 +701,7 @@ function accordingly::
                     $user->password = $this->request->getData('password');
                     $this->Users->save($user);
                 }
+
                 return $this->redirect($this->Auth->redirectUrl());
             }
             ...
@@ -721,6 +726,7 @@ calling ``$this->Auth->setUser()`` with the user data you want to 'login'::
         $user = $this->Users->newEntity($this->request->getData());
         if ($this->Users->save($user)) {
             $this->Auth->setUser($user->toArray());
+
             return $this->redirect([
                 'controller' => 'Users',
                 'action' => 'home'

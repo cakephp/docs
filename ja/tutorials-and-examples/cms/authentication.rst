@@ -266,6 +266,7 @@ logout アクションを ``UsersController`` に追加します。::
         // POST, GET を問わず、ユーザーがログインしている場合はリダイレクトします
         if ($result && $result->isValid()) {
             $this->Authentication->logout();
+
             return $this->redirect(['controller' => 'Users', 'action' => 'login']);
         }
     }

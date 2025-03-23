@@ -26,7 +26,7 @@ configuration that doesn't vary across the various environments your application
 is deployed in. The **config/app_local.php** file should contain the
 configuration data that varies between environments and should be managed by
 configuration management, or your deployment tooling. Both of these files reference environment variables
-through the ``env()`` function that enables configuration values to set though
+through the ``env()`` function that enables configuration values to set through
 the server environment.
 
 Loading Additional Configuration Files

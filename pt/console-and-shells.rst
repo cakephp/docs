@@ -494,7 +494,9 @@ facilmente definir múltiplas opções/argumentos de uma vez::
     public function getOptionParser()
     {
         $parser = parent::getOptionParser();
+
         // Configure parser
+
         return $parser;
     }
 
@@ -508,6 +510,7 @@ série de chamadas de métodos::
     public function getOptionParser()
     {
         $parser = parent::getOptionParser();
+
         $parser->addArgument('type', [
             'help' => 'Either a full path or type of class.'
         ])->addArgument('className', [
@@ -516,6 +519,7 @@ série de chamadas de métodos::
             'short' => 'm',
             'help' => __('The specific method you want help on.')
         ])->description(__('Lookup doc block comments for classes in CakePHP.'));
+
         return $parser;
     }
 

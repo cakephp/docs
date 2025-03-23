@@ -280,6 +280,7 @@ Primeiro, comece criando a action ``add()`` no ``ArticlesController``::
                 $article = $this->Articles->patchEntity($article, $this->request->getData());
                 if ($this->Articles->save($article)) {
                     $this->Flash->success(__('Seu artigo foi salvo.'));
+
                     return $this->redirect(['action' => 'index']);
                 }
                 $this->Flash->error(__('Não é possível adicionar o seu artigo.'));
@@ -439,6 +440,7 @@ a action ``edit()`` que deverá ser inserida no ``ArticlesController``::
             $this->Articles->patchEntity($article, $this->request->getData());
             if ($this->Articles->save($article)) {
                 $this->Flash->success(__('Seu artigo foi atualizado.'));
+
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('Seu artigo não pôde ser atualizado.'));
@@ -527,6 +529,7 @@ A seguir, vamos criar uma forma de deletar artigos. Comece com uma action
         $article = $this->Articles->get($id);
         if ($this->Articles->delete($article)) {
             $this->Flash->success(__('O artigo com id: {0} foi deletado.', h($id)));
+
             return $this->redirect(['action' => 'index']);
         }
     }

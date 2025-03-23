@@ -98,14 +98,14 @@ in a hierarchy, you can stack the 'threaded' finder::
     }
 
 While, if you’re using custom ``parent_id`` you need to pass it in the
-'threaded' finder option (i.e. ``parentField``) . 
+'threaded' finder option (i.e. ``parentField``) .
 
 .. note::
     For more information on 'threaded' finder options see :ref:`Finding Threaded Data logic <finding-threaded-data>`
 
 Getting formatted tree lists
 ----------------------------
- 
+
 Traversing threaded results usually requires recursive functions in, but if you
 only require a result set containing a single field from each level so you can
 display a list, in an HTML select for example, it is better to use the
@@ -246,6 +246,7 @@ as the scope::
 
     $this->behaviors()->Tree->setConfig('scope', function ($query) {
         $country = $this->getConfigureContry(); // A made-up function
+
         return $query->where(['country_name' => $country]);
     });
 
@@ -335,7 +336,7 @@ conditional deletes::
     }
 
 TreeBehavior will reorder the ``lft`` and ``rght`` values of records in the
-table when a node is deleted. 
+table when a node is deleted.
 
 In our example above, the ``lft`` and ``rght`` values of the entities inside
 ``$descendants`` will be inaccurate. You will need to reload existing entity

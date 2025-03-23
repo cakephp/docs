@@ -289,6 +289,7 @@ Par exemple::
 
     // Stocke les données en cache
     Cache::write('cloud', $cloud);
+
     return $cloud;
 
 Lire Plusieurs Clés d'un Coup

@@ -277,6 +277,7 @@ catégories dans l'arbre::
             } else {
                 $this->Flash->error("La catégorie n'a pas pu être remontée. Veuillez réessayer.");
             }
+
             return $this->redirect($this->referer(['action' => 'index']));
         }
 
@@ -289,6 +290,7 @@ catégories dans l'arbre::
             } else {
                 $this->Flash->error("La catégorie n'a pas pu être descendue. Veuillez réessayer.");
             }
+
             return $this->redirect($this->referer(['action' => 'index']));
         }
     }
@@ -364,6 +366,7 @@ lorsqu'on va le créer ou le modifier::
                 $article = $this->Articles->patchEntity($article, $this->request->getData());
                 if ($this->Articles->save($article)) {
                     $this->Flash->success(__('Votre article a été enregistré.'));
+
                     return $this->redirect(['action' => 'index']);
                 }
                 $this->Flash->error(__("Impossible d\'ajouter votre article."));

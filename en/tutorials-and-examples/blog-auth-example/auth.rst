@@ -95,6 +95,7 @@ utilities bundled with CakePHP::
                 $user = $this->Users->patchEntity($user, $this->request->getData());
                 if ($this->Users->save($user)) {
                     $this->Flash->success(__('The user has been saved.'));
+
                     return $this->redirect(['action' => 'add']);
                 }
                 $this->Flash->error(__('Unable to add the user.'));
@@ -359,6 +360,7 @@ Add the logout action to the ``UsersController`` class::
         // regardless of POST or GET, redirect if user is logged in
         if ($result->isValid()) {
             $this->Authentication->logout();
+
             return $this->redirect(['controller' => 'Users', 'action' => 'login']);
         }
     }

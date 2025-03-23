@@ -113,6 +113,7 @@ CakePHP ではデータの検証には二つの段階があります:
             $validator
                 ->notEmptyString('title', __('タイトルを設定してください'))
                 ->notEmptyString('body', __('本文は必須です'));
+
             return $validator;
         }
     }
@@ -174,6 +175,7 @@ CakePHP ではデータの検証には二つの段階があります:
         $validator = $this->validationDefault($validator);
 
         $validator->add('password', 'length', ['rule' => ['lengthBetween', 8, 100]]);
+
         return $validator;
     }
 
@@ -207,6 +209,7 @@ CakePHP ではデータの検証には二つの段階があります:
                     'message' => __('有効な権限を指定する必要があります'),
                     'provider' => 'table',
                 ]);
+
             return $validator;
         }
 
@@ -224,6 +227,7 @@ CakePHP ではデータの検証には二つの段階があります:
             if ($value > 1) {
                 return true;
             }
+
             return '適切な値ではありません。';
         }
     ]);
@@ -536,6 +540,7 @@ CakePHP は、エンティティーが保存される前に適用される「ル
             'errorField' => 'name',
             'message' => 'Name must be unique per parent.'
         ]);
+
         return $rules;
     }
 
@@ -566,7 +571,7 @@ CakePHP は、エンティティーが保存される前に適用される「ル
     // カスタムルールの追加
     use App\Model\Rule\CustomRule;
 
-    $rules->add(new CustomRule(...), 'ruleName');
+    $rules->add(new CustomRule(/* ... */), 'ruleName');
 
 カスタムルールクラスを作ることでコードを *重複がない状態*
 (訳注：DRY = Don't Repeat Yourself の訳)
@@ -610,7 +615,8 @@ CakePHP の ORM は検証に二層のアプローチを使う点がユニーク�
 
     public function validationCustomName($validator)
     {
-        $validator->add(...);
+        $validator->add(/* ... */);
+
         return $validator;
     }
 

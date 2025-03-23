@@ -150,6 +150,7 @@ parecer::
                 foreach ($rows as &$row) {
                     $row = str_getcsv($row, ',');
                 }
+
                 return $rows;
             };
             $this->loadComponent('RequestHandler', [

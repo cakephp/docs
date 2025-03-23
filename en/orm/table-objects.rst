@@ -135,20 +135,20 @@ more detail on how to use the events subsystem::
 
     // In a controller
     $articles->save($article, ['customVariable1' => 'yourValue1']);
-    
+
     // In ArticlesTable.php
     public function afterSave(Event $event, EntityInterface $entity, ArrayObject $options)
     {
         $customVariable = $options['customVariable1'];	// 'yourValue1'
-        $options['customVariable2'] = 'yourValue2';	
-    }  
-    
+        $options['customVariable2'] = 'yourValue2';
+    }
+
     public function afterSaveCommit(Event $event, EntityInterface $entity, ArrayObject $options)
     {
         $customVariable = $options['customVariable1'];	// 'yourValue1'
         $customVariable = $options['customVariable2'];	// 'yourValue2'
     }
-    
+
 
 Event List
 ----------
@@ -357,6 +357,7 @@ To prevent the save from continuing, simply stop event propagation in your callb
         if (...) {
             $event->stopPropagation();
             $event->setResult(false);
+
             return;
         }
         ...

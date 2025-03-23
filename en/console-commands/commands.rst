@@ -27,7 +27,7 @@ simple Hello world command. In your application's **src/Command** directory crea
         public function execute(Arguments $args, ConsoleIo $io): int
         {
             $io->out('Hello world.');
-            
+
             return static::CODE_SUCCESS;
         }
     }
@@ -62,6 +62,7 @@ command line::
             $parser->addArgument('name', [
                 'help' => 'What is your name'
             ]);
+
             return $parser;
         }
 
@@ -69,7 +70,7 @@ command line::
         {
             $name = $args->getArgument('name');
             $io->out("Hello {$name}.");
-            
+
             return static::CODE_SUCCESS;
         }
     }
@@ -128,7 +129,7 @@ add a ``yell`` option to our ``HelloCommand``::
             $name = mb_strtoupper($name);
         }
         $io->out("Hello {$name}.");
-        
+
         return static::CODE_SUCCESS;
     }
 
@@ -202,7 +203,7 @@ to terminate execution::
             $io->error('Name must be at least 4 characters long.');
             $this->abort();
         }
-        
+
         return static::CODE_SUCCESS;
     }
 
@@ -215,7 +216,7 @@ You can also use ``abort()`` on the ``$io`` object to emit a message and code::
             // Halt execution, output to stderr, and set exit code to 99
             $io->abort('Name must be at least 4 characters long.', 99);
         }
-        
+
         return static::CODE_SUCCESS;
     }
 
@@ -384,7 +385,7 @@ conventions. Let's continue by adding more logic to our command::
                     'modified' => new FrozenTime()
                 ])
                 ->execute();
-                
+
             return static::CODE_SUCCESS;
         }
     }
@@ -486,7 +487,7 @@ Update the command class to the following::
                     'modified' => new FrozenTime()
                 ])
                 ->execute();
-                
+
             return static::CODE_SUCCESS;
         }
     }

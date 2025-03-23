@@ -146,14 +146,14 @@ façon d'utiliser le sous-système d'events::
 
     // Dans un controller
     $articles->save($article, ['variablePerso1' => 'votreValeur1']);
-    
+
     // Dans ArticlesTable.php
     public function afterSave(Event $event, EntityInterface $entity, ArrayObject $options)
     {
         $variablePerso = $options['variablePerso1']; // 'votreValeur1'
-        $options['variablePerso2'] = 'votreValeur2';    
-    }  
-    
+        $options['variablePerso2'] = 'votreValeur2';
+    }
+
     public function afterSaveCommit(Event $event, EntityInterface $entity, ArrayObject $options)
     {
         $variablePerso = $options['variablePerso1']; // 'votreValeur1'
@@ -375,6 +375,7 @@ de l'event dans votre callback::
         if (...) {
             $event->stopPropagation();
             $event->setResult(false);
+
             return;
         }
         ...

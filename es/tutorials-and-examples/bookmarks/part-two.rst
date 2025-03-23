@@ -71,6 +71,7 @@ así que hagámoslo ahora::
             $user = $this->Auth->identify();
             if ($user) {
                 $this->Auth->setUser($user);
+
                 return $this->redirect($this->Auth->redirectUrl());
             }
             $this->Flash->error('Tu usuario o contraseña es incorrecta.');
@@ -115,6 +116,7 @@ Otra vez en ``UsersController``, añade el siguiente código::
     public function logout()
     {
         $this->Flash->success('Ahora estás deslogueado.');
+
         return $this->redirect($this->Auth->logout());
     }
 
@@ -223,6 +225,7 @@ En tu ``BookmarksController`` añade lo siguiente::
         if ($bookmark->user_id == $user['id']) {
             return true;
         }
+
         return parent::isAuthorized($user);
     }
 
@@ -261,6 +264,7 @@ Con esa parte eliminada actualizaremos la acción ``add()`` de
             $bookmark->user_id = $this->Auth->user('id');
             if ($this->Bookmarks->save($bookmark)) {
                 $this->Flash->success('El favorito se ha guardado.');
+
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error('El favorito podría no haberse guardado. Por favor, inténtalo de nuevo.');
@@ -287,6 +291,7 @@ así::
             $bookmark->user_id = $this->Auth->user('id');
             if ($this->Bookmarks->save($bookmark)) {
                 $this->Flash->success('El favorito se ha guardado.');
+
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error('El favorito podría no haberse guardado. Por favor, inténtalo de nuevo.');
@@ -350,6 +355,7 @@ En **src/Model/Entity/Bookmark.php** añade lo siguiente::
         $str = $tags->reduce(function ($string, $tag) {
             return $string . $tag->title . ', ';
         }, '');
+
         return trim($str, ', ');
     }
 
@@ -428,6 +434,7 @@ Añade el siguiente código a **src/Model/Table/BookmarksTable.php**::
         foreach ($newTags as $tag) {
             $out[] = $this->Tags->newEntity(['title' => $tag]);
         }
+
         return $out;
     }
 
