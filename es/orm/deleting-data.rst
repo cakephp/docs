@@ -6,7 +6,7 @@ Deleting Data
 .. php:class:: Table
     :noindex:
 
-.. php:method:: delete(Entity $entity, $options = [])
+.. php:method:: delete(EntityInterface $entity, array $options = [])
 
 .. note::
     La documentación no es compatible actualmente con el idioma español en esta página.

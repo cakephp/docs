@@ -102,7 +102,7 @@ Données du Corps de la Requête
 .. php:method:: getData($name, $default = null)
 
 Toutes les données POST sont accessibles en utilisant
-:php:meth:`\\Cake\\Http\\ServerRequest::getData()`. Par exemple::
+:php:meth:`Cake\\Http\\ServerRequest::getData()`. Par exemple::
 
     // Un input avec un attribut de nom égal à 'title' est accessible via
     $title = $this->request->getData('title');
@@ -129,7 +129,7 @@ Envoyer des fichiers
 --------------------
 
 Les fichiers téléchargés sont accessibles via les données du corps de la requête, en utilisant
-la méthode :php:meth:`\\Cake\\Http\\ServerRequest::getData()` décrite ci-dessus. Par exemple,
+la méthode :php:meth:`Cake\\Http\\ServerRequest::getData()` décrite ci-dessus. Par exemple,
 un fichier correspondant au nom ``attachment``, peut
 être accédé comme ceci::
 
@@ -191,20 +191,20 @@ c'est-à-dire que la valeur ``$attachment`` ressemblerait à quelque chose comme
 .. tip::
 
     Les fichiers téléchargés sont également accessibles en tant qu'objets séparément des données de requête via les
-    méthodes :php:meth:`\\Cake\\Http\\ServerRequest::getUploadedFile()` et
-    :php:meth:`\\Cake\\Http\\ServerRequest::getUploadedFiles()`. Ces méthodes renverront toujours des objets,
+    méthodes :php:meth:`Cake\\Http\\ServerRequest::getUploadedFile()` et
+    :php:meth:`Cake\\Http\\ServerRequest::getUploadedFiles()`. Ces méthodes renverront toujours des objets,
     indépendamment de la configuration ``App.uploadedFilesAsObjects``.
 
 
 .. php:method:: getUploadedFile($path)
 
 Renvoie le fichier téléchargé à un chemin spécifique. Le chemin utilise la même syntaxe de point (dot) que la
-méthode :php:meth:`\\Cake\\Http\\ServerRequest::getData()`::
+méthode :php:meth:`Cake\\Http\\ServerRequest::getData()`::
 
     $attachment = $this->request->getUploadedFile('attachment');
 
-Contrairement à :php:meth:`\\Cake\\Http\\ServerRequest::getData()`,
-:php:meth:`\\Cake\\Http\\ServerRequest::getUploadedFile()` ne renvoie des données que lorsqu'un téléchargement de fichier
+Contrairement à :php:meth:`Cake\\Http\\ServerRequest::getData()`,
+:php:meth:`Cake\\Http\\ServerRequest::getUploadedFile()` ne renvoie des données que lorsqu'un téléchargement de fichier
 réel existe pour le chemin donné, s'il existe des données de corps de requête régulières, non liées à un fichier,
 correspondant au chemin donné, alors cette méthode retournera ``null``, comme elle le ferait pour tout chemin
 inexistant.
@@ -251,9 +251,9 @@ remplacer tous les fichiers téléchargés éventuellement existants::
 
     Les fichiers téléchargés qui ont été ajoutés à la demande via cette méthode ne seront *pas* disponibles
     dans les données du corps de la requête, c'est-à-dire que vous ne pouvez pas les récupérer via
-    :php:meth:`\\Cake\\Http\\ServerRequest::getData()`! Si vous en avez besoin également dans les données de la requête,
-    vous devez les définir via :php:meth:`\\Cake\\Http\\ServerRequest::withData()` ou
-    :php:meth:`\\Cake\\Http\\ServerRequest::withParsedBody()`.
+    :php:meth:`Cake\\Http\\ServerRequest::getData()`! Si vous en avez besoin également dans les données de la requête,
+    vous devez les définir via :php:meth:`Cake\\Http\\ServerRequest::withData()` ou
+    :php:meth:`Cake\\Http\\ServerRequest::withParsedBody()`.
 
 Accéder aux Données PUT, PATCH ou DELETE
 ----------------------------------------
@@ -349,7 +349,7 @@ spécifique à l'application::
     $isPost = $this->request->is('post');
 
 Vous pouvez aussi étendre les détecteurs de la requête qui sont disponibles, en
-utilisant :php:meth:`\\Cake\\Http\\ServerRequest::addDetector()` pour créer de
+utilisant :php:meth:`Cake\\Http\\ServerRequest::addDetector()` pour créer de
 nouveaux types de détecteurs. Il y a différents types de détecteurs que
 vous pouvez créer:
 
@@ -439,9 +439,9 @@ Il y a plusieurs détecteurs intégrés que vous pouvez utiliser:
   accepte le mimetype 'application/xml' ou 'text/xml'.
 
 ``ServerRequest`` inclut aussi des méthodes comme
-:php:meth:`\\Cake\\Http\\ServerRequest::domain()`,
-:php:meth:`\\Cake\\Http\\ServerRequest::subdomains()`
-et :php:meth:`\\Cake\\Http\\ServerRequest::host()` qui facilitent la vie des
+:php:meth:`Cake\\Http\\ServerRequest::domain()`,
+:php:meth:`Cake\\Http\\ServerRequest::subdomains()`
+et :php:meth:`Cake\\Http\\ServerRequest::host()` qui facilitent la vie des
 applications avec sous-domaines.
 
 
@@ -616,7 +616,7 @@ Les cookies de la requête peuvent être lus à travers plusieurs méthodes::
     // Récupère une instance de CookieCollection
     $cookies = $this->request->getCookieCollection()
 
-Référez-vous à la documentation de :php:class:`\\Cake\\Http\\Cookie\\CookieCollection`
+Référez-vous à la documentation de :php:class:`Cake\\Http\\Cookie\\CookieCollection`
 pour savoir comment travailler avec les collections de cookies.
 
 Fichiers uploadés
@@ -657,17 +657,17 @@ Response
 
 .. php:class:: Response
 
-:php:class:`\\Cake\\Http\\Response` est la classe de réponse par défaut dans
+:php:class:`Cake\\Http\\Response` est la classe de réponse par défaut dans
 CakePHP. Elle encapsule un nombre de fonctionnalités et de caractéristiques
 pour la génération de réponses HTTP dans votre application. Elle aide aussi à
 tester des objets factices (mocks/stubs), vous permettant d'inspecter les
 en-têtes qui vont être envoyés.
-:php:class:`\\Cake\\Http\\ServerRequest`, :php:class:`\\Cake\\Http\\Response`
+:php:class:`Cake\\Http\\ServerRequest`, :php:class:`Cake\\Http\\Response`
 consolide un certain nombre de méthodes qu'on pouvait trouver avant dans
 :php:class:`Controller`,
 :php:class:`RequestHandlerComponent` et :php:class:`Dispatcher`. Les anciennes
 méthodes sont dépréciées en faveur de l'utilisation de
-:php:class:`\\Cake\\Http\\Response`.
+:php:class:`Cake\\Http\\Response`.
 
 ``Response`` fournit une interface pour envelopper les tâches de réponse
 communes liées, telles que:
@@ -683,7 +683,7 @@ Gérer les Types de Contenu
 .. php:method:: withType($contentType = null)
 
 Vous pouvez contrôler le Content-Type des réponses de votre application en
-utilisant :php:meth:`\\Cake\\Http\\Response::withType()`. Si votre application a
+utilisant :php:meth:`Cake\\Http\\Response::withType()`. Si votre application a
 besoin de gérer les types de contenu qui ne sont pas construits dans Response,
 vous pouvez faire correspondre ces types avec ``setTypeMap()`` comme ceci::
 
@@ -706,7 +706,7 @@ Envoyer des fichiers
 .. php:method:: withFile($path, $options = [])
 
 Il y a des moments où vous souhaitez envoyer des fichiers en réponse à vos demandes.
-Vous pouvez accomplir cela en utilisant :php:meth:`\\Cake\\Http\\Response::withFile()`::
+Vous pouvez accomplir cela en utilisant :php:meth:`Cake\\Http\\Response::withFile()`::
 
     public function sendFile($id)
     {
@@ -720,8 +720,8 @@ Vous pouvez accomplir cela en utilisant :php:meth:`\\Cake\\Http\\Response::withF
 Comme indiqué dans l'exemple ci-dessus, vous devez transmettre le chemin du fichier à la méthode.
 CakePHP enverra un en-tête de type de contenu approprié s'il s'agit d'un type de fichier connu répertorié
 dans `Cake\\Http\\Response::$_mimeTypes`. Vous pouvez ajouter de nouveaux types avant d'appeler
-:php:meth:`\\Cake\\Http\\Response::withFile()` en utilisant la méthode
-:php:meth:`\\Cake\\Http\\Response::withType()`.
+:php:meth:`Cake\\Http\\Response::withFile()` en utilisant la méthode
+:php:meth:`Cake\\Http\\Response::withType()`.
 
 Si vous le souhaitez, vous pouvez également forcer le téléchargement d'un fichier
 au lieu de l'afficher dans le navigateur en spécifiant les options::
@@ -778,7 +778,7 @@ Définir les En-têtes
 
 .. php:method:: withHeader($header, $value)
 
-La définition de headers se fait avec la méthode :php:meth:`\\Cake\\Http\\Response::withHeader()`.
+La définition de headers se fait avec la méthode :php:meth:`Cake\\Http\\Response::withHeader()`.
 Comme toutes les méthodes de l'interface PSR-7, cette méthode retourne une
 nouvelle instance avec le nouvel header::
 
@@ -795,7 +795,7 @@ nouvelle instance avec le nouvel header::
 Les headers ne sont pas envoyés dès que vous les définissez. Ils sont stockés
 jusqu'à ce que la réponse soit émise par ``Cake\Http\Server``.
 
-Vous pouvez maintenant utiliser la méthode :php:meth:`\\Cake\\Http\\Response::withLocation()`
+Vous pouvez maintenant utiliser la méthode :php:meth:`Cake\\Http\\Response::withLocation()`
 pour définir ou obtenir directement le header "redirect location".
 
 Définir le Corps de la réponse
@@ -863,7 +863,7 @@ Interagir avec le Cache du Navigateur
 
 Parfois, vous avez besoin de forcer les navigateurs à ne pas mettre en cache les
 résultats de l'action d'un controller.
-:php:meth:`\\Cake\\Http\\Response::withDisabledCache()` est justement prévue pour
+:php:meth:`Cake\\Http\\Response::withDisabledCache()` est justement prévue pour
 cela::
 
     public function index()
@@ -881,7 +881,7 @@ cela::
 .. php:method:: withCache($since, $time = '+1 day')
 
 Vous pouvez aussi dire aux clients que vous voulez qu'ils mettent en cache
-des réponses. En utilisant :php:meth:`\\Cake\\Http\\Response::withCache()`::
+des réponses. En utilisant :php:meth:`Cake\\Http\\Response::withCache()`::
 
     public function index()
     {
@@ -911,7 +911,7 @@ Plutôt que d'avoir à coder la logique de mise en cache et de sa désactivation
 méthodes, l'expiration et la validation qui sont habituellement beaucoup plus
 simples à utiliser.
 
-En dehors de l'utilisation de :php:meth:`\\Cake\\Http\\Response::withCache()`, vous
+En dehors de l'utilisation de :php:meth:`Cake\\Http\\Response::withCache()`, vous
 pouvez également utiliser d'autres méthodes pour régler finement les en-têtes de
 cache HTTP et ainsi tirer profit du cache du navigateur ou du proxy inverse.
 
@@ -1082,7 +1082,7 @@ Définir des Cookies
 -------------------
 
 Des cookies peuvent être ajoutés aux réponses en utilisant soit un tableau, soit
-un objet :php:class:`\\Cake\\Http\\Cookie\\Cookie`::
+un objet :php:class:`Cake\\Http\\Cookie\\Cookie`::
 
     use Cake\Http\Cookie\Cookie;
     use DateTime;

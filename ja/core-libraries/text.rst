@@ -7,7 +7,7 @@ Text
 
 Text クラスは文字列を作ったり操作したりする便利なメソッドを持っており、通常は static にアクセスします。例: ``Text::uuid()``
 
-``View`` の外側で :php:class:`\\Cake\\View\\Helper\\TextHelper` の機能が必要なときは ``Text`` クラスを使ってください。 ::
+``View`` の外側で :php:class:`Cake\\View\\Helper\\TextHelper` の機能が必要なときは ``Text`` クラスを使ってください。 ::
 
     namespace App\Controller;
 

@@ -385,7 +385,7 @@ The ``HtmlHelper`` ties into view blocks, and its ``script()``, ``css()``, and
         </head>
         // Rest of the layout follows
 
-The :php:class:`\\Cake\\View\\Helper\\HtmlHelper` also allows you to control which
+The :php:class:`Cake\\View\\Helper\\HtmlHelper` also allows you to control which
 block the scripts and CSS go to::
 
     // In your view

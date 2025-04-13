@@ -1190,10 +1190,10 @@ n'auraient normalement pas le droit de stocker.
 Strict Saving
 =============
 
-.. php:method:: saveOrFail($entity, $options = [])
+.. php:method:: saveOrFail(EntityInterface $entity, array $options = [])
 
 L'appel à cette méthode lancera une
-:php:exc:`\\Cake\\ORM\\Exception\\PersistenceFailedException` si:
+:php:exc:`Cake\\ORM\\Exception\\PersistenceFailedException` si:
 
 * les règles de validation ont échoué
 * l'entity contient des erreurs
@@ -1218,7 +1218,7 @@ utiliser la méthode :php:meth:`Cake\\ORM\Exception\\PersistenceFailedException:
         }
 
 Dans la mesure où cette méthode utilise la méthode
-:php:meth:`\\Cake\\ORM\\Table::save()`, tous les événements de ``save`` seront
+:php:meth:`Cake\\ORM\\Table::save()`, tous les événements de ``save`` seront
 déclenchés.
 
 Trouver Ou Créer une Entity
@@ -1269,7 +1269,7 @@ données dans l'entity::
 Sauvegarder Plusieurs Entities
 ==============================
 
-.. php:method:: saveMany($entities, $options = [])
+.. php:method:: saveMany(iterable $entities, array $options = [])
 
 Cette méthode vous permet de sauvegarder plusieurs entities de façon atomique.
 ``$entities`` peut être un tableau d'entities créées avec ``newEntities()`` /

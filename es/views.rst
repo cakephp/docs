@@ -342,7 +342,7 @@ El `HtmlHelper` se integra con bloques de vista, y sus métodos `script()`, `css
         </head>
         // El resto del diseño sigue
 
-El :php:class:`\\Cake\\View\\Helper\\HtmlHelper` también te permite controlar a qué bloque van los scripts y el CSS::
+El :php:class:`~Cake\\View\\Helper\\HtmlHelper` también te permite controlar a qué bloque van los scripts y el CSS::
 
     // En tu vista
     $this->Html->script('carousel', ['block' => 'scriptBottom']);

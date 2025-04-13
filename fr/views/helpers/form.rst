@@ -471,9 +471,9 @@ vide. Vous pouvez désactiver les ``required`` automatiques en utilisant l'optio
 Pour empêcher la validation faite par le navigateur pour l'ensemble du
 formulaire, vous pouvez définir l'option ``'formnovalidate' => true`` pour le
 bouton input que vous générez en utilisant
-:php:meth:`\\Cake\\View\\Helper\\FormHelper::submit()` ou définir
+:php:meth:`~Cake\\View\\Helper\\FormHelper::submit()` ou définir
 ``'novalidate' => true`` dans les options pour
-:php:meth:`\\Cake\\View\\Helper\\FormHelper::create()`.
+:php:meth:`~Cake\\View\\Helper\\FormHelper::create()`.
 
 Par exemple, supposons que votre model User intègre les champs pour un
 *username* (varchar), *password* (varchar), *approved* (datetime) et
@@ -536,7 +536,7 @@ données dans un `format CamelCase <https://fr.wikipedia.org/wiki/Camel_case#Var
 
     N'utilisez pas ``FormHelper::control()`` pour générer
     les boutons submit. Utilisez plutôt
-    :php:meth:`\\Cake\\View\\Helper\\FormHelper::submit()`.
+    :php:meth:`~Cake\\View\\Helper\\FormHelper::submit()`.
 
 Conventions de Nommage des Champs
 ---------------------------------
@@ -713,8 +713,8 @@ Générer des Types d'Inputs Spécifiques
 En plus de la méthode générique ``control()``, le ``FormHelper`` a des
 méthodes spécifiques pour générer différents types d'inputs. Ceci peut
 être utilisé pour générer juste un extrait de code input, et combiné avec
-d'autres méthodes comme :php:meth:`\\Cake\\View\\Helper\\FormHelper::label()` et
-:php:meth:`\\Cake\\View\\Helper\\FormHelper::error()` pour générer des layouts
+d'autres méthodes comme :php:meth:`~Cake\\View\\Helper\\FormHelper::label()` et
+:php:meth:`~Cake\\View\\Helper\\FormHelper::error()` pour générer des layouts
 (mise en page) complètement personnalisés.
 
 .. _general-control-options:
@@ -1614,7 +1614,7 @@ utiliser::
 Créer des éléments de formulaire pour les dates et heures
 ---------------------------------------------------------
 
-.. php:method:: dateTime($fieldName, $options = [])
+.. php:method:: dateTime(string $fieldName, array $options = [])
 
 * ``$fieldName`` - Une chaîne qui sera utilisée comme préfixe pour l'attribut
   ``name`` des ``select``.
@@ -1650,7 +1650,7 @@ Affichera:
 Créer des Éléments Date
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-.. php:method:: date($fieldName, $options = [])
+.. php:method:: date(string $fieldName, array $options = [])
 
 * ``$fieldName`` - Une chaîne qui sera utilisée comme préfixe pour l'attribut
   ``name`` des ``select``.
@@ -1673,7 +1673,7 @@ Affichera:
 Créer des Éléments Time
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-.. php:method:: time($fieldName, $options = [])
+.. php:method:: time(string $fieldName, array $options = [])
 
 * ``$fieldName`` - Une chaîne qui sera utilisée comme préfixe pour l'attribut
   ``name`` des ``select``.
@@ -1872,7 +1872,7 @@ votre formulaire affichera:
 
 .. note::
 
-    En utilisant :php:meth:`\\Cake\\View\\Helper\\FormHelper::control()`, les erreurs
+    En utilisant :php:meth:`~Cake\\View\\Helper\\FormHelper::control()`, les erreurs
     sont rendues par défaut, donc vous n'aurez pas besoin d'utiliser ``isFieldError()``
     ou d'appeler ``error()`` manuellement.
 
@@ -2057,7 +2057,7 @@ La méthode ``end()`` ferme et complète le marquage du formulaire. Souvent,
 ``end()`` se contente d'afficher la balise fermante du formulaire, mais
 l'utilisation de ``end()`` est une bonne pratique puisqu'elle permet également
 au FormHelper d'ajouter les champs cachées dont le
-:php:class:`\\Cake\\Controller\\Component\\FormProtectionComponent` a besoin:
+:php:class:`Cake\\Controller\\Component\\FormProtectionComponent` a besoin:
 
 .. code-block:: php
 
@@ -2149,8 +2149,8 @@ Affichera un HTML similaire à:
 
 Dans la mesure où cette méthode crée un élément ``<form>``, ne l'utilisez pas
 à l'intérieur d'un formulaire ouvert. Utilisez plutôt
-:php:meth:`\\Cake\\View\\Helper\\FormHelper::submit()` ou
-:php:meth:`\\Cake\\View\\Helper\\FormHelper::button()`
+:php:meth:`Cake\\View\\Helper\\FormHelper::submit()` ou
+:php:meth:`Cake\\View\\Helper\\FormHelper::button()`
 pour créer des boutons à l'intérieur de formulaires ouvert.
 
 Créer des liens POST
@@ -2200,8 +2200,8 @@ méthode à l'intérieur d'un formulaire existant, vous devez utiliser l'option
 qui peut être affiché en dehors du formulaire principal.
 
 Si vous souhaitez seulement créer un bouton pour soumettre votre formulaire, alors vous
-devriez plutôt utiliser :php:meth:`\\Cake\\View\\Helper\\FormHelper::button()`
-ou :php:meth:`\\Cake\\View\\Helper\\FormHelper::submit()`.
+devriez plutôt utiliser :php:meth:`Cake\\View\\Helper\\FormHelper::button()`
+ou :php:meth:`Cake\\View\\Helper\\FormHelper::submit()`.
 
 .. note::
 
@@ -2352,7 +2352,7 @@ Générer des Formulaires Entiers
 Créer plusieurs éléments (controls)
 -----------------------------------
 
-.. php:method:: controls(array $fields = [], $options = [])
+.. php:method:: controls(array $fields = [], array $options = [])
 
 * ``$fields`` - Un tableau des champs à générer. Permet de définir des types
   personnalisés, des labels et toutes autres options pour chaque champ.
@@ -2626,7 +2626,7 @@ widget en utilisant la méthode magique::
 Travailler avec FormProtectionComponent
 =======================================
 
-:php:meth:`\\Cake\\Controller\\Component\\FormProtectionComponent` offre plusieurs
+:php:meth:`Cake\\Controller\\Component\\FormProtectionComponent` offre plusieurs
 fonctionnalités qui rendent vos formulaires plus sûrs et
 plus sécurisés. En incluant simplement le ``FormProtectionComponent`` dans votre
 controller, vous bénéficierez automatiquement des fonctionnalités de prévention
@@ -2634,7 +2634,7 @@ contre la falsification de formulaires.
 
 Comme mentionné précédemment, lorsque vous utilisez le FormProtectionComponent,
 vous devez toujours fermer vos formulaires en utilisant
-:php:meth:`\\Cake\\View\\Helper\\FormHelper::end()`. Cela assurera que les
+:php:meth:`~Cake\\View\\Helper\\FormHelper::end()`. Cela assurera que les
 inputs spéciales ``_Token`` soient générées.
 
 .. php:method:: unlockField($name)

@@ -54,7 +54,7 @@
 * ``_buildSchema`` は FormHelper が HTML フォームを作成する際に使用する
   スキーマデータを定義するために使います。フィールドの型、長さ、および精度を定義できます。
 * ``validationDefault`` はバリデーターを加えることができる
-  :php:class:`\\Cake\\Validation\\Validator` のインスタンスを受け取ります。
+  :php:class:`Cake\\Validation\\Validator` のインスタンスを受け取ります。
 * ``_execute`` では ``execute()`` が呼ばれ、データが有効な時に望むふるまいを定義します。
 
 もちろん必要に応じて追加の公開メソッドを定義することもできます。

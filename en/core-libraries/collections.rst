@@ -169,7 +169,7 @@ This last example uses ``toList()`` unlike other examples, which is important
 when we're getting results with possibly duplicate keys. By using ``toList()``
 we'll be guaranteed to get all values even if there are duplicate keys.
 
-Unlike :php:meth:`\\Cake\\Utility\\Hash::extract()` this method only supports the
+Unlike :php:meth:`Cake\\Utility\\Hash::extract()` this method only supports the
 ``{*}`` wildcard. All other wildcard and attributes matchers are not supported.
 
 .. php:method:: combine($keyPath, $valuePath, $groupPath = null)

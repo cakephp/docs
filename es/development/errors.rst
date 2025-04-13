@@ -23,7 +23,7 @@ Las siguientes opciones son compatibles:
 * ``exceptionRenderer`` - string - La clase responsable de representar excepciones no capturadas. Si eliges
   una clase personalizada, debes colocar el archivo para esa clase en **src/Error**. Esta clase debe implementar
   un método ``render()``.
-* ``log`` - bool - Cuando es ``true``, las excepciones y sus trazas se registrarán en :php:class:`\\Cake\\Log\\Log`.
+* ``log`` - bool - Cuando es ``true``, las excepciones y sus trazas se registrarán en :php:class:`Cake\\Log\\Log`.
 * ``skipLog`` - array - Un array de nombres de clases de excepción que no deben ser registrados. Esto es útil para
   eliminar mensajes de registro comunes pero poco interesantes, como NotFoundExceptions.
 * ``extraFatalErrorMemory`` - int - Establece el número de megabytes para aumentar el límite de memoria cuando
@@ -293,7 +293,7 @@ Cuando se representa, tu plantilla de vista tendría una variable ``$widget`` es
 Registro de Excepciones
 ------------------------
 
-Usando el manejo de excepciones incorporado, puedes registrar todas las excepciones que son tratadas por ErrorTrap configurando la opción ``log`` en ``true`` en tu **config/app.php**. Al habilitar esto, se registrarán todas las excepciones en :php:class:`\\Cake\\Log\\Log` y en los registradores configurados.
+Usando el manejo de excepciones incorporado, puedes registrar todas las excepciones que son tratadas por ErrorTrap configurando la opción ``log`` en ``true`` en tu **config/app.php**. Al habilitar esto, se registrarán todas las excepciones en :php:class:`Cake\\Log\\Log` y en los registradores configurados.
 
 .. note::
 
@@ -519,8 +519,8 @@ Además, CakePHP utiliza las siguientes excepciones:
 .. php:exception:: PersistenceFailedException
    :nocontentsentry:
 
-    No se pudo guardar/eliminar una entidad al usar :php:meth:`\\Cake\\ORM\\Table::saveOrFail()` o
-    :php:meth:`\\Cake\\ORM\\Table::deleteOrFail()`.
+    No se pudo guardar/eliminar una entidad al usar :php:meth:`Cake\\ORM\\Table::saveOrFail()` o
+    :php:meth:`Cake\\ORM\\Table::deleteOrFail()`.
 
 .. php:namespace:: Cake\Datasource\Exception
 

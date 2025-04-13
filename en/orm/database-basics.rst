@@ -306,7 +306,7 @@ Accessing Connections
 .. php:staticmethod:: get($name)
 
 Once configured connections can be fetched using
-:php:meth:`\\Cake\\Datasource\\ConnectionManager::get()`. This method will
+:php:meth:`Cake\\Datasource\\ConnectionManager::get()`. This method will
 construct and load a connection if it has not been built before, or return the
 existing known connection::
 
@@ -353,6 +353,9 @@ uuid
 binaryuuid
     Maps to the UUID type if the database provides one, otherwise this will
     generate a ``BINARY(16)`` column
+nativeuuid
+    Maps to the UUID type in MySQL with MariaDb. In all other databases,
+    ``nativeuuid`` is an alias for ``uuid``.
 integer
     Maps to the ``INTEGER`` type provided by the database. BIT is not yet supported
     at this moment.
@@ -384,7 +387,7 @@ binary
     Maps to the ``BLOB`` or ``BYTEA`` type provided by the database.
 date
     Maps to a native ``DATE`` column type. The return value of this column
-    type is :php:class:`\\Cake\\I18n\\Date` which emulates the date related
+    type is :php:class:`Cake\\I18n\\Date` which emulates the date related
     methods of PHP's ``DateTime`` class.
 datetime
     See :ref:`datetime-type`.
@@ -423,6 +426,9 @@ handles, and generate file handles when reading data.
    The ``geometry``, ``point``, ``linestring``, and ``polygon`` types were
    added.
 
+.. versionchanged:: 5.2.0
+    The ``nativeuuid`` type was added.
+
 .. _datetime-type:
 
 DateTime Type
@@ -432,7 +438,7 @@ DateTime Type
 
 Maps to a native ``DATETIME`` column type. In PostgreSQL and SQL Server this
 turns into a ``TIMESTAMP`` type. The default return value of this column type is
-:php:class:`\\Cake\\I18n\\DateTime` which extends `Chronos
+:php:class:`Cake\\I18n\\DateTime` which extends `Chronos
 <https://github.com/cakephp/chronos>`_ and the native ``DateTimeImmutable``.
 
 .. php:method:: setTimezone(string|\DateTimeZone|null $timezone)
@@ -534,10 +540,10 @@ implement the following methods:
 * ``marshal``: Marshals flat data into PHP objects.
 
 To fulfill the basic interface, extend :php:class:`Cake\\Database\\Type`.
-For example if we wanted to add a JSON type, we could make the following type
+For example if we wanted to add a PointMutation type, we could make the following type
 class::
 
-    // in src/Database/Type/JsonType.php
+    // in src/Database/Type/PointMutationType.php
 
     namespace App\Database\Type;
 
@@ -545,7 +551,7 @@ class::
     use Cake\Database\Type\BaseType;
     use PDO;
 
-    class JsonType extends BaseType
+    class PointMutationType extends BaseType
     {
         public function toPHP(mixed $value, Driver $driver): mixed
         {
@@ -553,8 +559,7 @@ class::
                 return null;
             }
 
-            return json_decode($value, true);
-        }
+            return $this->pmDecode($valu
 
         public function marshal(mixed $value): mixed
         {
@@ -562,12 +567,12 @@ class::
                 return $value;
             }
 
-            return json_decode($value, true);
+            return $this->pmDecode($value);
         }
 
         public function toDatabase(mixed $value, Driver $driver): mixed
         {
-            return json_encode($value);
+            return sprintf('%d%s>%s', $value['position'], $value['from'], $value['to']);
         }
 
         public function toStatement(mixed $value, Driver $driver): int
@@ -577,6 +582,19 @@ class::
             }
 
             return PDO::PARAM_STR;
+        }
+
+        protected function pmDecode(mixed $value): mixed
+        {
+            if (preg_match('/^(\d+)([a-zA-Z])>([a-zA-Z])$/', $value, $matches)) {
+                return [
+                    'position' => (int) $matches[1],
+                    'from' => $matches[2],
+                    'to' => $matches[3]
+                ];
+            }
+
+            return null;
         }
     }
 
@@ -591,7 +609,8 @@ the type mapping. During our application bootstrap we should do the following::
 
     use Cake\Database\TypeFactory;
 
-    TypeFactory::map('json', \App\Database\Type\JsonType::class);
+    TypeFactory::map('point_mutation', \App\Database\Type\PointMutationType:class);
+
 
 We then have two ways to use our datatype in our models.
 
@@ -600,27 +619,27 @@ We then have two ways to use our datatype in our models.
    and define the SQL column type and reflection logic.
 
 Overwriting the reflected schema with our custom type will enable CakePHP's
-database layer to automatically convert JSON data when creating queries. In your
-Table's :ref:`initialize() method <saving-complex-types>` add the
+database layer to automatically convert PointMutation data when creating queries. In your
+Table's :ref:`getSchema() method <saving-complex-types>` add the
+
 following::
 
     class WidgetsTable extends Table
     {
         public function initialize(array $config): void
         {
-            parent::initialize($config);
+            return parent::getSchema()->setColumnType('mutation', 'point_mutation');
 
-            $this->getSchema()->setColumnType('widget_prefs', 'json');
         }
     }
 
 Implementing ``ColumnSchemaAwareInterface`` gives you more control over
 custom datatypes.  This avoids overwriting schema definitions if your
 datatype has an unambiguous SQL column definition. For example, we could have
-our JSON type be used anytime a ``TEXT`` column with a specific comment is
+our PointMutation type be used anytime a ``TEXT`` column with a specific comment is
 used::
 
-    // in src/Database/Type/JsonType.php
+    // in src/Database/Type/PointMutationType.php
 
     namespace App\Database\Type;
 
@@ -630,7 +649,7 @@ used::
     use Cake\Database\Schema\TableSchemaInterface;
     use PDO;
 
-    class JsonType extends BaseType
+    class PointMutationType extends BaseType
         implements ColumnSchemaAwareInterface
     {
         // other methods from earlier
@@ -649,7 +668,7 @@ used::
             $data = $schema->getColumn($column);
             $sql = $driver->quoteIdentifier($column);
             $sql .= ' JSON';
-            if (isset($data['null') && $data['null'] === false) {
+            if (isset($data['null']) && $data['null'] === false) {
                 $sql .= ' NOT NULL';
             }
 
@@ -685,8 +704,8 @@ no value for the current database driver:
 Mapping Custom Datatypes to SQL Expressions
 -------------------------------------------
 
-The previous example maps a custom datatype for a 'json' column type which is
-easily represented as a string in a SQL statement. Complex SQL data
+The previous example maps a custom datatype for a 'point_mutation' column type
+which is easily represented as a string in a SQL statement. Complex SQL data
 types cannot be represented as strings/integers in SQL queries. When working
 with these datatypes your Type class needs to implement the
 ``Cake\Database\Type\ExpressionTypeInterface`` interface. This interface lets
@@ -974,7 +993,7 @@ Query logging can be enabled when configuring your connection by setting the
 ``log`` option to ``true``.
 
 When query logging is enabled, queries will be logged to
-:php:class:`\\Cake\\Log\\Log` using the 'debug' level, and the 'queriesLog' scope.
+:php:class:`Cake\\Log\\Log` using the 'debug' level, and the 'queriesLog' scope.
 You will need to have a logger configured to capture this level & scope. Logging
 to ``stderr`` can be useful when working on unit tests, and logging to
 files/syslog can be useful when working with web requests::
@@ -1070,17 +1089,19 @@ If you want to create a connection without selecting a database you can omit
 the database name::
 
     $dsn = 'mysql://root:password@localhost/';
+    ConnectionManager::setConfig('setup', ['url' => $dsn]);
 
 You can now use your connection object to execute queries that create/modify
 databases. For example to create a database::
 
+    $connection = ConnectionManager::get('setup');
     $connection->execute("CREATE DATABASE IF NOT EXISTS my_database");
 
 .. note::
 
     When creating a database it is a good idea to set the character set and
-    collation parameters. If these values are missing, the database will set
-    whatever system default values it uses.
+    collation parameters (e.g. ``DEFAULT CHARACTER SET utf8mb4 DEFAULT COLLATE utf8mb4_unicode_ci``). 
+    If these values are missing, the database will set whatever system default values it uses.
 
 .. meta::
     :title lang=en: Database Basics

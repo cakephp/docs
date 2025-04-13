@@ -228,7 +228,7 @@ view テンプレートの作成
 
 全ての CakePHP のリクエストは、 ``$this->request`` を使用してアクセス可能なリクエストオブジェクトを
 含みます。リクエストオブジェクトは、今受信したリクエストに関する情報を含みます。リクエストが HTTP POST
-リクエストであることを確認するために :php:meth:`\\Cake\\Http\\ServerRequest::is()` メソッドを
+リクエストであることを確認するために :php:meth:`Cake\\Http\\ServerRequest::is()` メソッドを
 使用します。
 
 POST データは、 ``$this->request->getData()`` で利用可能です。それがどのような内容かを

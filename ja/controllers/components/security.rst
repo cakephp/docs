@@ -29,15 +29,15 @@ Security コンポーネントのフォーム保護機能と、 ``startup()`` �
     **使わなければなりません** 。また、フィールドの "name" 属性を
     **上書きしてはいけません** 。Security コンポーネントは、FormHelper で作成され、
     管理されるインジケーターを確認します。(これらは
-    :php:meth:`\\Cake\\View\\Helper\\FormHelper::create()` と
-    :php:meth:`\\Cake\\View\\Helper\\FormHelper::end()` の中で作成されます。)
+    :php:meth:`~Cake\\View\\Helper\\FormHelper::create()` と
+    :php:meth:`~Cake\\View\\Helper\\FormHelper::end()` の中で作成されます。)
     例えば JavaScript で無効化・ 削除・新規作成するなどして POST リクエスト中の投稿された
     フィールドを動的に差し替えることは、リクエストが破棄されるきっかけになります。
 
     副作用を避けるために、実行前に使用されている HTTP メソッドを常に確認する必要があります。
     正しい HTTP メソッドが使用されていることを確認するために、
     :ref:`HTTP メソッドをチェックする <check-the-request>` か、
-    :php:meth:`\\Cake\\Http\\ServerRequest::allowMethod()` を使用してください。
+    :php:meth:`~Cake\\Http\\ServerRequest::allowMethod()` を使用してください。
 
 ブラックホールコールバックの処理
 ================================

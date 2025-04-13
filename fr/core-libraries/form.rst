@@ -63,7 +63,7 @@ les formulaires:
   FormHelper pour créer le formulaire HTML. Vous pouvez définir le type de
   champ, la longueur et la précision.
 * ``_buildValidator`` Récupère une instance de
-  :php:class:`\\Cake\\Validation\\Validator` à laquelle vous pouvez attacher des
+  :php:class:`Cake\\Validation\\Validator` à laquelle vous pouvez attacher des
   validateurs.
 * ``_execute`` vous permet de définir le comportement que vous souhaitez lorsque
   ``execute()`` est appelée et que les données sont valides.

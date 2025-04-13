@@ -133,7 +133,7 @@ Request Body Data
 .. php:method:: getData($name, $default = null)
 
 All POST data normally available through PHP's ``$_POST`` global variable can be
-accessed using :php:meth:`\\Cake\\Http\\ServerRequest::getData()`. For example::
+accessed using :php:meth:`Cake\\Http\\ServerRequest::getData()`. For example::
 
     // An input with a name attribute equal to 'title' is accessible at
     $title = $this->request->getData('title');
@@ -160,7 +160,7 @@ If you want to access all the data parameters you can use
 File Uploads
 ------------
 
-Uploaded files can be accessed through the request body data, using the :php:meth:`\\Cake\\Http\\ServerRequest::getData()`
+Uploaded files can be accessed through the request body data, using the :php:meth:`Cake\\Http\\ServerRequest::getData()`
 method described above. For example, a file from an input element with a name attribute of ``attachment``, can
 be accessed like this::
 
@@ -195,11 +195,11 @@ origins, which makes testing file uploads possible.
 .. php:method:: getUploadedFile($path)
 
 Returns the uploaded file at a specific path. The path uses the same dot syntax as the
-:php:meth:`\\Cake\\Http\\ServerRequest::getData()` method::
+:php:meth:`Cake\\Http\\ServerRequest::getData()` method::
 
     $attachment = $this->request->getUploadedFile('attachment');
 
-Unlike :php:meth:`\\Cake\\Http\\ServerRequest::getData()`, :php:meth:`\\Cake\\Http\\ServerRequest::getUploadedFile()` would
+Unlike :php:meth:`Cake\\Http\\ServerRequest::getData()`, :php:meth:`Cake\\Http\\ServerRequest::getUploadedFile()` would
 only return data when an actual file upload exists for the given path, if there is regular, non-file request body data
 present at the given path, then this method will return ``null``, just like it would for any non-existent path.
 
@@ -244,9 +244,9 @@ replace all possibly existing uploaded files::
 .. note::
 
     Uploaded files that have been added to the request via this method, will *not* be available in the request body
-    data, ie you cannot retrieve them via :php:meth:`\\Cake\\Http\\ServerRequest::getData()`! If you need them in the
-    request data (too), then you have to set them via :php:meth:`\\Cake\\Http\\ServerRequest::withData()` or
-    :php:meth:`\\Cake\\Http\\ServerRequest::withParsedBody()`.
+    data, ie you cannot retrieve them via :php:meth:`Cake\\Http\\ServerRequest::getData()`! If you need them in the
+    request data (too), then you have to set them via :php:meth:`Cake\\Http\\ServerRequest::withData()` or
+    :php:meth:`Cake\\Http\\ServerRequest::withParsedBody()`.
 
 PUT, PATCH or DELETE Data
 -------------------------
@@ -345,7 +345,7 @@ conditions, as well as inspect other application specific request criteria::
     $isPost = $this->request->is('post');
 
 You can also extend the request detectors that are available, by using
-:php:meth:`\\Cake\\Http\\ServerRequest::addDetector()` to create new kinds of
+:php:meth:`Cake\\Http\\ServerRequest::addDetector()` to create new kinds of
 detectors. There are different types of detectors that you can create:
 
 * Environment value comparison - Compares a value fetched from :php:func:`env()`
@@ -435,9 +435,9 @@ There are several built-in detectors that you can use:
   'application/xml' or 'text/xml'.
 
 ``ServerRequest`` also includes methods like
-:php:meth:`\\Cake\\Http\\ServerRequest::domain()`,
-:php:meth:`\\Cake\\Http\\ServerRequest::subdomains()` and
-:php:meth:`\\Cake\\Http\\ServerRequest::host()` to make applications that use
+:php:meth:`Cake\\Http\\ServerRequest::domain()`,
+:php:meth:`Cake\\Http\\ServerRequest::subdomains()` and
+:php:meth:`Cake\\Http\\ServerRequest::host()` to make applications that use
 subdomains simpler.
 
 Session Data
@@ -606,7 +606,7 @@ Request cookies can be read through a number of methods::
     // Get a CookieCollection instance
     $cookies = $this->request->getCookieCollection()
 
-See the :php:class:`\\Cake\\Http\\Cookie\\CookieCollection` documentation for how
+See the :php:class:`Cake\\Http\\Cookie\\CookieCollection` documentation for how
 to work with cookie collection.
 
 
@@ -649,7 +649,7 @@ Response
 
 .. php:class:: Response
 
-:php:class:`\\Cake\\Http\\Response` is the default response class in CakePHP.
+:php:class:`Cake\\Http\\Response` is the default response class in CakePHP.
 It encapsulates a number of features and functionality for generating HTTP
 responses in your application. It also assists in testing, as it can be
 mocked/stubbed allowing you to inspect headers that will be sent.
@@ -668,7 +668,7 @@ Dealing with Content Types
 .. php:method:: withType($contentType = null)
 
 You can control the Content-Type of your application's responses with
-:php:meth:`\\Cake\\Http\\Response::withType()`. If your application needs to deal
+:php:meth:`Cake\\Http\\Response::withType()`. If your application needs to deal
 with content types that are not built into Response, you can map them with
 ``setTypeMap()`` as well::
 
@@ -690,7 +690,7 @@ Sending Files
 .. php:method:: withFile(string $path, array $options = [])
 
 There are times when you want to send files as responses for your requests.
-You can accomplish that by using :php:meth:`\\Cake\\Http\\Response::withFile()`::
+You can accomplish that by using :php:meth:`Cake\\Http\\Response::withFile()`::
 
     public function sendFile($id)
     {
@@ -704,8 +704,8 @@ You can accomplish that by using :php:meth:`\\Cake\\Http\\Response::withFile()`:
 As shown in the above example, you must pass the file path to the method.
 CakePHP will send a proper content type header if it's a known file type listed
 in `Cake\\Http\\Response::$_mimeTypes`. You can add new types prior to calling
-:php:meth:`\\Cake\\Http\\Response::withFile()` by using the
-:php:meth:`\\Cake\\Http\\Response::withType()` method.
+:php:meth:`Cake\\Http\\Response::withFile()` by using the
+:php:meth:`Cake\\Http\\Response::withType()` method.
 
 If you want, you can also force a file to be downloaded instead of displayed in
 the browser by specifying the options::
@@ -753,7 +753,7 @@ Setting Headers
 
 .. php:method:: withHeader($header, $value)
 
-Setting headers is done with the :php:meth:`\\Cake\\Http\\Response::withHeader()`
+Setting headers is done with the :php:meth:`Cake\\Http\\Response::withHeader()`
 method. Like all of the PSR-7 interface methods, this method returns a *new*
 instance with the new header::
 
@@ -771,7 +771,7 @@ Headers are not sent when set. Instead, they are held until the response is
 emitted by ``Cake\Http\Server``.
 
 You can now use the convenience method
-:php:meth:`\\Cake\\Http\\Response::withLocation()` to directly set or get the
+:php:meth:`Cake\\Http\\Response::withLocation()` to directly set or get the
 redirect location header.
 
 Setting the Body
@@ -837,7 +837,7 @@ Interacting with Browser Caching
 .. php:method:: withDisabledCache()
 
 You sometimes need to force browsers not to cache the results of a controller
-action. :php:meth:`\\Cake\\Http\\Response::withDisabledCache()` is intended for just
+action. :php:meth:`Cake\\Http\\Response::withDisabledCache()` is intended for just
 that::
 
     public function index()
@@ -854,7 +854,7 @@ that::
 .. php:method:: withCache($since, $time = '+1 day')
 
 You can also tell clients that you want them to cache responses. By using
-:php:meth:`\\Cake\\Http\\Response::withCache()`::
+:php:meth:`Cake\\Http\\Response::withCache()`::
 
     public function index()
     {
@@ -882,7 +882,7 @@ Rather than forcing you to code the logic for caching and for invalidating
 (refreshing) it once the data has changed, HTTP uses two models, expiration and
 validation, which usually are much simpler to use.
 
-Apart from using :php:meth:`\\Cake\\Http\\Response::withCache()`, you can also use
+Apart from using :php:meth:`Cake\\Http\\Response::withCache()`, you can also use
 many other methods to fine-tune HTTP cache headers to take advantage of browser
 or reverse proxy caching.
 
@@ -1044,7 +1044,7 @@ the response content, and sends the `304 Not Modified` header::
 Setting Cookies
 ---------------
 
-Cookies can be added to response using either an array or a :php:class:`\\Cake\\Http\\Cookie\\Cookie`
+Cookies can be added to response using either an array or a :php:class:`Cake\\Http\\Cookie\\Cookie`
 object::
 
     use Cake\Http\Cookie\Cookie;

@@ -269,10 +269,10 @@ Behaviors, can use this hook to add in validation methods.
 buildRules
 ----------
 
-.. php:method:: buildRules(EventInterface $event, RulesChecker $rules)
+.. php:method:: buildRules(RulesChecker $rules): RulesChecker
 
 The ``Model.buildRules`` event is fired after a rules instance has been
-created and after the table's ``buildRules()`` method has been called.
+created and after the ``Table::buildRules()`` method has been called.
 
 beforeRules
 -----------

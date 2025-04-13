@@ -36,7 +36,7 @@
     $result = Security::encrypt($value, $key);
 
 もしあなたが HMAC ソルトを提供しなければ、 ``Security.salt`` の値が利用されます。
-暗号化された値は :php:meth:`\\Cake\\Utility\\Security::decrypt()` を利用して復号できます。
+暗号化された値は :php:meth:`Cake\\Utility\\Security::decrypt()` を利用して復号できます。
 
 すでに暗号化された値を復号します。 ``$key`` と ``$hmacSalt`` のパラメーターは、
 暗号化時に利用された各々の値と一致する必要があり、さもなければ復号は失敗します。

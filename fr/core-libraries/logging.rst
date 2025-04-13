@@ -26,7 +26,7 @@ Configuration des flux d'un log (journal)
 La configuration de ``Log`` doit être faite pendant la phase de bootstrap
 de votre application. Le fichier **config/app.php** est justement prévu pour
 ceci. Vous pouvez définir autant de jounaux que votre application nécessite.
-Les journaux doivent être configurés en utilisant :php:class:`\\Cake\\Log\\Log`.
+Les journaux doivent être configurés en utilisant :php:class:`Cake\\Log\\Log`.
 Un exemple serait::
 
     use Cake\Log\Engine\FileLog;
@@ -106,7 +106,7 @@ Ecrire dans les logs
 ====================
 
 Ecrire dans les fichiers peut être réalisé de deux façons. La première est
-d'utiliser la méthode statique :php:meth:`\\Cake\\Log\\Log::write()`::
+d'utiliser la méthode statique :php:meth:`Cake\\Log\\Log::write()`::
 
     Log::write('debug', 'Quelque chose ne fonctionne pas');
 
@@ -118,7 +118,7 @@ interne ``Log::write()``::
     $this->log("Quelque chose ne fonctionne pas!", 'debug');
 
 Tous les flux de log configurés sont écrits séquentiellement à chaque fois
-que :php:meth:`\\Cake\\Log\\Log::write()` est appelée. Si vous n'avez pas
+que :php:meth:`Cake\\Log\\Log::write()` est appelée. Si vous n'avez pas
 configuré de moteurs de log, ``log()`` va retourner false et aucun
 message de log ne sera écrit.
 

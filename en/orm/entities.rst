@@ -102,12 +102,19 @@ For example::
     $article->set('title', 'This is my first post');
     echo $article->get('title');
 
-When using ``set()`` you can update multiple fields at once using an array::
+.. php:method:: patch(array $fields, array $options = [])
 
-    $article->set([
+Using ``patch()`` you can mass assign multiple fields at once::
+
+    $article->patch([
         'title' => 'My first post',
         'body' => 'It is the best ever!'
     ]);
+
+.. note::
+
+    ``patch()`` is available since CakePHP 5.2.0. Prior to that you should use
+    ``set()`` instead.
 
 .. warning::
 
@@ -432,10 +439,10 @@ Bypassing Field Guarding
 There are some situations when you want to allow mass-assignment to guarded
 fields::
 
-    $article->set($fields, ['guard' => false]);
+    $article->patch($fields, ['guard' => false]);
 
 By setting the ``guard`` option to ``false``, you can ignore the accessible
-field list for a single call to ``set()``.
+field list for a single call to ``patch()``.
 
 Checking if an Entity was Persisted
 -----------------------------------

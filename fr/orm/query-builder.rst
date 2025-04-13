@@ -51,7 +51,7 @@ Récupérer les Lignes d'une Table
     }
 
 Pour les exemples restants, imaginez que ``$articles`` est une
-:php:class:`\\Cake\\ORM\\Table`. Quand vous êtes dans des controllers, vous
+:php:class:`~Cake\\ORM\\Table`. Quand vous êtes dans des controllers, vous
 pouvez utiliser ``$this->Articles`` plutôt que ``$articles``.
 
 Presque toutes les méthodes d'un objet ``Query`` retournent la requête
@@ -1498,7 +1498,7 @@ méthode ``values()`` autant de fois que nécessaire::
         ->execute();
 
 Généralement, il est plus facile d'insérer des données en utilisant les
-entities et :php:meth:`\\Cake\\ORM\\Table::save()`. En composant des requêtes
+entities et :php:meth:`~Cake\\ORM\\Table::save()`. En composant des requêtes
 ``SELECT`` et ``INSERT`` ensemble, vous pouvez créer des requêtes du style
 ``INSERT INTO ... SELECT``::
 
@@ -1552,7 +1552,7 @@ requête en utilisant ``query()``::
         ->execute();
 
 Généralement, il est plus facile de supprimer les données en utilisant les
-entities et :php:meth:`\\Cake\\ORM\\Table::delete()`.
+entities et :php:meth:`~Cake\\ORM\\Table::delete()`.
 
 Prévention des Injections SQL
 =============================

@@ -31,7 +31,7 @@ pour votre application. Les options proposées sont les suivantes:
   vous devrez placer le fichier de cette classe dans le dossier **src/Error**.
   Cette classe doit implémenter une méthode ``render()``.
 * ``log`` - bool - Si ``true``, les exceptions et leur stack traces seront
-  loguées vers :php:class:`\\Cake\\Log\\Log`.
+  loguées vers :php:class:`Cake\\Log\\Log`.
 * ``skipLog`` - array - Un tableau des noms de classe d'exception qui ne
   doivent pas être mises dans des fichiers de log. C'est utile pour supprimer
   les NotFoundExceptions ou toute autre message de log sans intérêt.
@@ -497,7 +497,7 @@ Logger des Exceptions
 Avec la gestion d'erreurs intégrée, vous pouvez faire logger par ErrorHandler
 toutes les exceptions auxquelles vous aurez affaire en définissant l'option
 ``log`` à ``true`` dans votre **config/app.php**. Le fait de l'activer va logger
-toutes les exceptions dans :php:class:`\\Cake\\Log\\Log` et les <em>loggers</em>
+toutes les exceptions dans :php:class:`Cake\\Log\\Log` et les <em>loggers</em>
 configurés.
 
 .. note::
@@ -716,8 +716,8 @@ De plus, CakePHP utilise les exceptions suivantes:
 
 .. php:exception:: PersistenceFailedException
 
-    Une entity n'a pas pu être sauvegardée / supprimée en utilisant :php:meth:`\\Cake\\ORM\\Table::saveOrFail()` ou
-    :php:meth:`\\Cake\\ORM\\Table::deleteOrFail()`
+    Une entity n'a pas pu être sauvegardée / supprimée en utilisant :php:meth:`Cake\\ORM\\Table::saveOrFail()` ou
+    :php:meth:`Cake\\ORM\\Table::deleteOrFail()`
 
 .. php:namespace:: Cake\Datasource\Exception
 

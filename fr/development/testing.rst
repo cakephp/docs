@@ -474,7 +474,7 @@ de CakePHP, soit en chargeant un fichier de dump SQL, soit en utilisant un autre
 outil externe de gestion de schéma. Vous devez créer votre schéma dans le
 fichier ``tests/bootstrap.php`` de votre application.
 
-Si vous utilisez le :doc:`plugin de migrations </migrations>`  de CakePHP pour gérer
+Si vous utilisez le `plugin de migrations <https://book.cakephp.org/migrations>`  de CakePHP pour gérer
 les schémas de votre application, vous pouvez tout aussi bien réutiliser ces
 migrations pour générer le schéma de votre base de données de test::
 
@@ -1377,8 +1377,8 @@ seraient présents dans une requête normale, vous devez non seulement les passe
 dans les données de la requête, mais aussi les passer dans la configuration de
 la requête de test via l'option ``files``. Ce n'est toutefois pas techniquement
 nécessaire, sauf si votre code accède aux fichiers téléversés via les méthodes
-:php:meth:`\\Cake\\Http\\ServerRequest::getUploadedFile()` ou
-:php:meth:`\\Cake\\Http\\ServerRequest::getUploadedFiles()`.
+:php:meth:`Cake\\Http\\ServerRequest::getUploadedFile()` ou
+:php:meth:`Cake\\Http\\ServerRequest::getUploadedFiles()`.
 
 Supposons que les articles aient une image d'accroche, et une association
 ``Articles hasMany Attachments``. Le formulaire ressemblerait à quelque chose

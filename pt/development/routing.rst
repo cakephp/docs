@@ -1188,7 +1188,7 @@ As classes de rota personalizadas permitem estender e alterar como rotas individ
 manipulam o roteamento reverso. As classes de rota têm algumas convenções:
 
 * As classes de rota devem ser encontradas no espaço de nome ``Routing\Route`` do seu aplicativo ou plugin.
-* As classes de rota devem estender :php:class:`\\Cake\\Routing\\Route`.
+* As classes de rota devem estender :php:class:`Cake\\Routing\\Route`.
 * As classes de rota devem implementar os métodos ``match()`` e/ou ``parse()``.
 
 O método ``parse()`` é usado para analisar uma URL recebida. Ele deve gerar uma matriz de parâmetros de solicitação

@@ -273,7 +273,7 @@ BigBoxesTable と、コントローラー BigBoxesController は、全て自動�
 
 .. php:staticmethod:: get($name)
 
-一度設定した接続は、 :php:meth:`\\Cake\\Datasource\\ConnectionManager::get()` を
+一度設定した接続は、 :php:meth:`Cake\\Datasource\\ConnectionManager::get()` を
 使って取り出すことができます。
 このメソッドはすでに確立しているコネクションを返すか、もしまだ接続していないのであれば
 ロードして接続してから返します。 ::
@@ -339,13 +339,13 @@ binary
     データベースによって提供される BLOB 型または BYTEA 型に変換します。
 date
     タイムゾーン情報を持たない DATE 型に変換されます。この型の戻り値は、ネイティブな
-    ``DateTime`` クラスを拡張した :php:class:`\\Cake\\I18n\\Date` です。
+    ``DateTime`` クラスを拡張した :php:class:`Cake\\I18n\\Date` です。
 datetime
     タイムゾーン情報を持たない DATETIME 型に変換されます。
     PostgreSQL と SQL Server では、TIMESTAMP 型に変換されます。
     この型のデフォルトの戻り値は、組込みの ``DateTime`` クラスと
     `Chronos <https://github.com/cakephp/chronos>`_ を拡張した
-    :php:class:`\\Cake\\I18n\\Time` クラスになります。
+    :php:class:`Cake\\I18n\\Time` クラスになります。
 timestamp
     TIMESTAMP 型に変換します。
 time
@@ -878,7 +878,7 @@ SQL 文を準備したら、あなたは追加のデータをバインドし、�
     $connection->enableQueryLogging(false);
 
 クエリーログを有効にしていると、 'debug' レベルで 'queriesLog' スコープで
-:php:class:`\\Cake\\Log\\Log` にクエリーをログ出力します。
+:php:class:`Cake\\Log\\Log` にクエリーをログ出力します。
 あなたはこのレベル・スコープを出力するようにログ設定をする必要があります。
 ``stderr`` にログ出力するのはユニットテストの時に便利で、files/syslog に出力するのは
 Web リクエストの時に便利です。 ::

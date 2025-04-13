@@ -40,7 +40,7 @@ Un exemple d'utilisation serait::
 
 Si vous ne fournissez pas de sel HMAC, la valeur ``Security.salt`` sera
 utilisée. Les valeurs chiffrées peuvent être déchiffrées avec
-:php:meth:`\\Cake\\Utility\\Security::decrypt()`.
+:php:meth:`Cake\\Utility\\Security::decrypt()`.
 
 Déchiffre une valeur chiffrée au préalable. Les paramètres ``$key`` et
 ``$hmacSalt`` doivent correspondre aux valeurs utilisées pour chiffrer ou

@@ -19,8 +19,8 @@ in your ``initialize()`` method.
     your forms. In addition, you must **not** override any of the fields' "name"
     attributes. The FormProtection Component looks for certain indicators that are
     created and managed by the FormHelper (especially those created in
-    :php:meth:`\\Cake\\View\\Helper\\FormHelper::create()` and
-    :php:meth:`\\Cake\\View\\Helper\\FormHelper::end()`).  Dynamically altering
+    :php:meth:`~Cake\\View\\Helper\\FormHelper::create()` and
+    :php:meth:`~Cake\\View\\Helper\\FormHelper::end()`).  Dynamically altering
     the fields that are submitted in a POST request, such as disabling, deleting
     or creating new fields via JavaScript, is likely to cause the form token
     validation to fail.

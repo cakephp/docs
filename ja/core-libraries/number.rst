@@ -100,7 +100,7 @@ $currency の値が ``null`` の場合、デフォルト通貨は :php:meth:`Cak
 
 .. php:method:: defaultCurrency($currency)
 
-デフォルト通貨のための setter/getter です。これによって、常に :php:meth:`\\Cake\\I18n\\Number::currency()` に通貨を渡したり、
+デフォルト通貨のための setter/getter です。これによって、常に :php:meth:`Cake\\I18n\\Number::currency()` に通貨を渡したり、
 他のデフォルトを設定することによって全ての通貨の出力を変更したりする必要がなくなります。
 ``$currency`` に ``false`` が設定された場合、現在格納されている値をクリアします。
 デフォルトでは、設定されていれば ``intl.default_locale`` を取得し、そうでない場合は 'en_US' を設定します。
@@ -134,7 +134,7 @@ $currency の値が ``null`` の場合、デフォルト通貨は :php:meth:`Cak
 |                     | Boolean 値です。少数のパーセンテージに便利です。   |
 +---------------------+----------------------------------------------------+
 
-このメソッドは :php:meth:`\\Cake\\I18n\\Number::precision()` のように、
+このメソッドは :php:meth:`Cake\\I18n\\Number::precision()` のように、
 与えられた精度に応じて(精度を満たすように丸めて)数値をフォーマットします。
 このメソッドはパーセンテージとして数値を表現し、パーセント記号を追加して出力します。 ::
 

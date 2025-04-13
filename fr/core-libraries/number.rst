@@ -108,7 +108,7 @@ Paramétrage de la Devise par Défaut
 .. php:method:: defaultCurrency(string $currency)
 
 Setter/getter pour la monnaie par défaut. Ceci retire la nécessité de
-toujours passer la monnaie à :php:meth:`\\Cake\\I18n\\Number::currency()` et
+toujours passer la monnaie à :php:meth:`Cake\\I18n\\Number::currency()` et
 change toutes les sorties de monnaie en définissant les autres par défaut.
 Si ``$currency`` est ``false``, cela effacera la valeur actuellement
 enregistrée.
@@ -145,7 +145,7 @@ Formatage Des Pourcentages
 |                     | avec décimale.                                     |
 +---------------------+----------------------------------------------------+
 
-Comme :php:meth:`\\Cake\\I18n\\Number::precision()`, cette méthode formate un
+Comme :php:meth:`Cake\\I18n\\Number::precision()`, cette méthode formate un
 nombre selon la précision fournie (où les nombres sont arrondis pour parvenir
 à ce degré de précision). Cette méthode exprime aussi le nombre en tant que
 pourcentage et ajoute un signe de pourcent à la sortie::

@@ -34,7 +34,7 @@ CakePHP はきれいなディスパッチサイクルに使う強固なフィル
 ================
 
 フィルターは **bootstrap.php** で有効にされます。しかし、リクエストが送信される前に
-いつでも簡単に読み込めます。 :php:class:`\\Cake\\Routing\\DispatcherFactory` を使って、
+いつでも簡単に読み込めます。 :php:class:`Cake\\Routing\\DispatcherFactory` を使って、
 フィルターをつけたり外したり出来ます。
 デフォルトでは、 CakePHP のテンプレートは既定で全てのリクエストに対して有効な
 2つのフィルタークラスによってされます。それが、どのように追加されるか見てみましょう。 ::
@@ -129,7 +129,7 @@ CakePHP はきれいなディスパッチサイクルに使う強固なフィル
 ``afterDispatch()`` メソッドを提供します。それらのメソッドはそれぞれ個別に、
 コントローラーが実行された時にその前か後に実行されます。両方のメソッドは、
 ``$data`` プロパティー内で ``ServerRequest`` と ``Response`` (
-:php:class:`\\Cake\\Http\\ServerRequest` と :php:class:`\\Cake\\Http\\Response`
+:php:class:`Cake\\Http\\ServerRequest` と :php:class:`Cake\\Http\\Response`
 インスタンス) オブジェクトを含む :php:class:`Cake\\Event\\Event` オブジェクトを
 受け取ります。
 
@@ -172,7 +172,7 @@ CakePHP はきれいなディスパッチサイクルに使う強固なフィル
 
 このフィルターは１日後に期限が切れるヘッダーをページコントローラーで送るレスポンスに付けて送ります。
 もちろんコントローラーでも同じことが出来ます。 これはただのフィルターができることの例一部です。
-実際は、レスポンスを操作する代わりに、 :php:class:`\\Cake\\Cache\\Cache` でキャッシュして、
+実際は、レスポンスを操作する代わりに、 :php:class:`Cake\\Cache\\Cache` でキャッシュして、
 ``beforeDispatch()`` をコールバックしてレスポンスを制御できます。
 
 強力なディスパッチャーフィルターはアプリを維持するのを難しくする可能性を持っていますが。

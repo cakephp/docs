@@ -204,8 +204,8 @@ ConsoleOptionParser 上のビルダーメソッドと同様に、addOptions も�
 
 パーサーの仕様の中では ``arguments``, ``options``, ``description`` そして ``epilog`` のための
 キーを定義できます。配列形式ビルダーの内部には ``subcommands`` は定義できません。
-引数とオプションの値は、 :php:func:`\\Cake\\Console\\ConsoleOptionParser::addArguments()` や
-:php:func:`\\Cake\\Console\\ConsoleOptionParser::addOptions()` が利用する書式に従ってください。
+引数とオプションの値は、 :php:func:`Cake\\Console\\ConsoleOptionParser::addArguments()` や
+:php:func:`Cake\\Console\\ConsoleOptionParser::addOptions()` が利用する書式に従ってください。
 buildFromArray を単独で使ってオプションパーサーを構築することも可能です。 ::
 
     public function getOptionParser()

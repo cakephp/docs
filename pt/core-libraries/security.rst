@@ -37,7 +37,7 @@ o método de ``hash`` de mão única fornecidos por
 
 Se você não fornecer um ``HMAC salt``, o valor em ``Security.salt`` será usado.
 Os valores criptografados podem ser descriptografados usando
-:php:meth:`\\Cake\\Utility\\Security::decrypt()`.
+:php:meth:`Cake\\Utility\\Security::decrypt()`.
 
 Descriptografando um valor criptografado anteriormente. Os parametros ``$key`` e ``$hmacSalt``
 devem corresponder aos valores utilizados para a criptografia senão o processo falhará.

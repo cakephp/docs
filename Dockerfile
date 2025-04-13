@@ -1,6 +1,6 @@
 FROM debian:bookworm
 
-ENV DEBIAN_FRONTEND noninteractive
+ENV DEBIAN_FRONTEND=noninteractive
 
 LABEL Description="This image is used to create an environment to contribute to the cakephp/docs"
 

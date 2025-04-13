@@ -144,7 +144,6 @@ défaut de toute configuration dont votre helper a besoin. Par exemple::
         use StringTemplateTrait;
 
         protected $_defaultConfig = [
-            'errorClass' => 'error',
             'templates' => [
                 'label' => '<label for="{{for}}">{{content}}</label>',
             ],
@@ -156,8 +155,8 @@ les valeurs par défaut pendant la construction et les données fusionnées sero
 définies à ``_config``. Vous pouvez utiliser la méthode ``config()`` pour lire
 la configuration actuelle::
 
-    // Lit l'option de config errorClass.
-    $class = $this->Awesome->config('errorClass');
+    // Lit l'option de config autoSetCustomValidity .
+    $class = $this->Awesome->config('autoSetCustomValidity ');
 
 L'utilisation de la configuration du helper vous permet de configurer de manière
 déclarative vos helpers et de garder la logique de configuration en dehors des

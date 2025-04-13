@@ -25,7 +25,7 @@ Logging Configuration
 Configuring ``Log`` should be done during your application's bootstrap phase.
 The **config/app.php** file is intended for just this.  You can define
 as many or as few loggers as your application needs.  Loggers should be
-configured using :php:class:`\\Cake\\Log\\Log`. An example would be::
+configured using :php:class:`Cake\\Log\\Log`. An example would be::
 
     use Cake\Log\Engine\FileLog;
     use Cake\Log\Log;
@@ -97,7 +97,7 @@ Writing to Logs
 ===============
 
 Writing to the log files can be done in two different ways. The first
-is to use the static :php:meth:`\\Cake\\Log\\Log::write()` method::
+is to use the static :php:meth:`Cake\\Log\\Log::write()` method::
 
     Log::write('debug', 'Something did not work');
 
@@ -109,7 +109,7 @@ class using the ``LogTrait``. Calling ``log()`` will internally call
     $this->log('Something did not work!', 'debug');
 
 All configured log streams are written to sequentially each time
-:php:meth:`\\Cake\\Log\\Log::write()` is called. If you have not configured any
+:php:meth:`Cake\\Log\\Log::write()` is called. If you have not configured any
 logging engines ``log()`` will return ``false`` and no log messages will be
 written.
 

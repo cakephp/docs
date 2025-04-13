@@ -243,7 +243,7 @@ Voici ce que l'action ``add()`` fait:
 Toutes les requêtes de CakePHP incluent un objet request qui est accessible via
 ``$this->request``. L'objet request contient des informations à propos de la
 requête qui vient d'être reçue. Nous utilisons la méthode
-:php:meth:`\\Cake\\Http\\ServerRequest::is()` pour vérifier que la requête possède
+:php:meth:`Cake\\Http\\ServerRequest::is()` pour vérifier que la requête possède
 bien le verbe HTTP POST.
 
 Les données passées en POST sont disponibles dans ``$this->request->getData()``.

@@ -140,7 +140,7 @@ Criar uma lógica para editar uma action é um pouco mais complicado, mas não m
 que você está fornecendo uma API que emite XML, é uma escolha natural para receber XML
 Como entrada. Não se preocupe, o
 :php:class:`Cake\\Controller\\Component\\RequestHandler` e
-:php:class:`\\Cake\\Routing\\Router` tornam as coisas muito mais fáceis. Se um POST ou
+:php:class:`Cake\\Routing\\Router` tornam as coisas muito mais fáceis. Se um POST ou
 A solicitação PUT tem um tipo de conteúdo XML, então a entrada é executada através do CakePHP's
 :php:class:`Xml`, e a representação da array dos dados é atribuída a
 ``$this->request->getData()``. Devido a essa característica, lidar com dados XML e POST em

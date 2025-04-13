@@ -46,7 +46,7 @@ El App Controller
 
 Como se indicó en la introducción, la clase ``AppController`` es clase padre de
 todos los controladores de tu aplicación.  ``AppController`` extiende de la clase
-:php:class:`\\Cake\\Controller\\Controller` que está incluida en CakePHP.
+:php:class:`Cake\\Controller\\Controller` que está incluida en CakePHP.
 ``AppController`` se define en **src/Controller/AppController.php** como se
 muestra a continuación::
 
@@ -85,7 +85,7 @@ Flujo de solicitud
 ==================
 
 Cuando se realiza una solicitud a una aplicación CakePHP, las clases CakePHP
-:php:class:`\\Cake\\Routing\\Router` y :php:class:`\\Cake\\Routing\\Dispatcher`
+:php:class:`Cake\\Routing\\Router` y :php:class:`Cake\\Routing\\Dispatcher`
 usan :ref:`routes-configuration` para encontrar y crear la instancia correcta
 del controlador. Los datos de la solicitud son encapsulados en un objeto de
 solicitud. CakePHP pone toda la información importante de la solicitud en la
@@ -138,7 +138,7 @@ manualmente. En su lugar, una vez que se ha completado la acción del controlado
 CakePHP se encargará de renderizar y entregar la vista.
 
 Si por algún motivo deseas omitir el comportamiento predeterminado, puedes retornar
-un objeto :php:class:`\\Cake\\Http\\Response` de la acción con la respuesta creada.
+un objeto :php:class:`Cake\\Http\\Response` de la acción con la respuesta creada.
 
 Para que puedas usar un controlador de manera efectiva en tu aplicación,
 cubriremos algunos de los atributos y métodos principales proporcionados por los
@@ -545,7 +545,7 @@ eventos relacionados si los métodos son implementados por tus controladores.
     Llamado durante el evento ``Controller.beforeRender`` que ocurre después
     de la lógica de acción del controlador, pero antes de que la vista sea renderizada.
     Este callback no se usa con frecuencia, pero puede ser necesaria
-    si estas llamando :php:meth:`\\Cake\\Controller\\Controller::render()` de forma
+    si estas llamando :php:meth:`~Cake\\Controller\\Controller::render()` de forma
     manual antes del final de una acción dada.
 
 .. php:method:: afterFilter(EventInterface $event)

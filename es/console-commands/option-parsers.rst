@@ -220,8 +220,8 @@ todo es una matriz::
 Dentro de las especificaciones del analizador, puede definir claves para
 ``arguments``, ``options``, ``description`` y ``epilog``. No se pueden definir
 ``subcommands`` dentro de un generador de estilos de matriz. Los valores de los
-argumentos y las opciones deben seguir el formato :php:func:`\\Cake\\Console\\ConsoleOptionParser::addArguments()` y
-:php:func:`\\Cake\\Console\\ConsoleOptionParser::addOptions( )`. También puede
+argumentos y las opciones deben seguir el formato :php:func:`Cake\\Console\\ConsoleOptionParser::addArguments()` y
+:php:func:`Cake\\Console\\ConsoleOptionParser::addOptions( )`. También puede
 utilizar buildFromArray por sí solo para crear un analizador de opciones::
 
     public function getOptionParser()

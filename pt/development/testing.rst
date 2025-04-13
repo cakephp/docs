@@ -1176,8 +1176,8 @@ presentes num pedido regular, é necessário não só passá-los nos dados do pe
 mas também passá-los para a configuração do pedido de teste através da opção
 ``files``. Mas não é tecnicamente necessário, a menos que o seu código aceda
 aos ficheiros carregados através dos métodos
-:php:meth:`\\Cake\\Http\\ServerRequest::getUploadedFile()` ou
-:php:meth:`\\Cake\\Http\\ServerRequest::getUploadedFiles()`.
+:php:meth:`Cake\\Http\\ServerRequest::getUploadedFile()` ou
+:php:meth:`Cake\\Http\\ServerRequest::getUploadedFiles()`.
 
 Vamos assumir que os artigos têm uma imagem teaser, e uma associação
 ``Articles hasMany Attachments``, o formulário pareceria algo parecido com isto

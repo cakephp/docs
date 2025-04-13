@@ -27,7 +27,7 @@ options are supported:
   exceptions. If you choose a custom class you should place the file for that
   class in **src/Error**. This class needs to implement a ``render()`` method.
 * ``log`` - bool - When ``true``, exceptions + their stack traces will be
-  logged to :php:class:`\\Cake\\Log\\Log`.
+  logged to :php:class:`Cake\\Log\\Log`.
 * ``skipLog`` - array - An array of exception classnames that should not be
   logged. This is useful to remove NotFoundExceptions or other common, but
   uninteresting log messages.
@@ -380,7 +380,7 @@ Logging Exceptions
 Using the built-in exception handling, you can log all the exceptions that are
 dealt with by ErrorTrap by setting the ``log`` option to ``true`` in your
 **config/app.php**. Enabling this will log every exception to
-:php:class:`\\Cake\\Log\\Log` and the configured loggers.
+:php:class:`Cake\\Log\\Log` and the configured loggers.
 
 .. note::
 
@@ -610,8 +610,8 @@ In addition, CakePHP uses the following exceptions:
 .. php:exception:: PersistenceFailedException
    :nocontentsentry:
 
-    An entity couldn't be saved/deleted while using :php:meth:`\\Cake\\ORM\\Table::saveOrFail()` or
-    :php:meth:`\\Cake\\ORM\\Table::deleteOrFail()`.
+    An entity couldn't be saved/deleted while using :php:meth:`Cake\\ORM\\Table::saveOrFail()` or
+    :php:meth:`Cake\\ORM\\Table::deleteOrFail()`.
 
 .. php:namespace:: Cake\Datasource\Exception
 

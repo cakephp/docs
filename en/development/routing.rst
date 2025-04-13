@@ -1467,7 +1467,7 @@ The above methods also accept an array of options as their second parameter:
 
 * ``fullBase`` Append the full URL with domain name.
 * ``pathPrefix`` Path prefix for relative URLs.
-* ``plugin``` You can provide ``false``` to prevent paths from being treated as
+* ``plugin`` You can provide ``false`` to prevent paths from being treated as
   a plugin asset.
 * ``timestamp`` Overrides the value of ``Asset.timestamp`` in Configure.  Set to
   ``false`` to skip timestamp generation.  Set to ``true`` to apply timestamps
@@ -1581,7 +1581,7 @@ requests and handle reverse routing. Route classes have a few conventions:
 
 * Route classes are expected to be found in the ``Routing\Route`` namespace of
   your application or plugin.
-* Route classes should extend :php:class:`\\Cake\\Routing\\Route\\Route`.
+* Route classes should extend :php:class:`Cake\\Routing\\Route\\Route`.
 * Route classes should implement one or both of ``match()`` and/or ``parse()``.
 
 The ``parse()`` method is used to parse an incoming URL. It should generate an

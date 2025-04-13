@@ -31,7 +31,7 @@ An example use would be::
 
 If you do not supply an HMAC salt, the value of ``Security::getSalt()`` will be used.
 Encrypted values can be decrypted using
-:php:meth:`\\Cake\\Utility\\Security::decrypt()`.
+:php:meth:`Cake\\Utility\\Security::decrypt()`.
 
 This method should **never** be used to store passwords.
 

@@ -1601,7 +1601,7 @@ las rutas individuales analizan las solicitudes y manejan el enrutamiento invers
 Las clases de ruta tienen algunas convenciones:
 
 * Se espera que las clases de ruta se encuentren en el espacio de nombres ``Routing\Route`` de tu aplicación o plugin.
-* Las clases de ruta deben extender :php:class:`\\Cake\\Routing\\Route\\Route`.
+* Las clases de ruta deben extender :php:class:`Cake\\Routing\\Route\\Route`.
 * Las clases de ruta deben implementar uno o ambos ``match()`` y/o ``parse()``.
 
 El método ``parse()`` se utiliza para analizar una URL entrante. Debería generar

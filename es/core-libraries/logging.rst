@@ -29,7 +29,7 @@ Logging Configuration
 La configuración de ``Log`` debe realizarse durante la fase de arranque de tu aplicación.
 El archivo **config/app.php** está diseñado precisamente para esto. Puedes definir tantos
 ``loggers`` como necesite tu aplicación. Los ``loggers`` deben configurarse utilizando la clase
-:php:class:`\\Cake\\Log\\Log`. Un ejemplo sería::
+:php:class:`Cake\\Log\\Log`. Un ejemplo sería::
 
     use Cake\Log\Engine\FileLog;
     use Cake\Log\Log;
@@ -102,7 +102,7 @@ Escribiendo en los archivos de Log
 ===================================
 
 Escribir en los archivos de registro se puede hacer de dos maneras diferentes. La primera es
-utilizando el método estático ::php:meth:`\\Cake\\Log\\Log::write()`::
+utilizando el método estático ::php:meth:`Cake\\Log\\Log::write()`::
 
     Log::write('debug', 'Something did not work');
 
@@ -113,7 +113,7 @@ que utilice el ``LogTrait``. Llamar a``log()`` llamará internamente a``Log::wri
     $this->log('Something did not work!', 'debug');
 
 Todos los ``log`` configurados se escriben secuencialmente cada vez que se llama a
-:php:meth:`\\Cake\\Log\\Log::write()`. Si no has configurado ningún motor de registro,
+:php:meth:`Cake\\Log\\Log::write()`. Si no has configurado ningún motor de registro,
 ``log()`` devolverá "false" y no se escribirán mensajes de registro.
 
 Usando marcadores de posición (placeholders) en mensajes

@@ -123,7 +123,6 @@ your helper requires. For example::
          * @var array<string, mixed>
          */
         protected array $_defaultConfig = [
-            'errorClass' => 'error',
             'templates' => [
                 'label' => '<label for="{{for}}">{{content}}</label>',
             ],
@@ -134,8 +133,8 @@ Any configuration provided to your helper's constructor will be merged with the
 default values during construction and the merged data will be set to
 ``_config``. You can use the ``getConfig()`` method to read runtime configuration::
 
-    // Read the errorClass config option.
-    $class = $this->Awesome->getConfig('errorClass');
+    // Read the autoSetCustomValidity config option.
+    $class = $this->Awesome->getConfig('autoSetCustomValidity');
 
 Using helper configuration allows you to declaratively configure your helpers and
 keep configuration logic out of your controller actions. If you have

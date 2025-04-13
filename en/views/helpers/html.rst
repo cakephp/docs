@@ -390,7 +390,7 @@ Will output:
         <img src="/img/recipes/6.jpg" alt="Brownies" />
     </a>
 
-Also check :php:meth:`\\Cake\\View\\Helper\\UrlHelper::build()` method
+Also check :php:meth:`Cake\\View\\Helper\\UrlHelper::build()` method
 for more examples of different types of URLs.
 
 .. php:method:: linkFromPath(string $title, string $path, array $params = [], array $options = [])
@@ -532,7 +532,7 @@ and also wanted to include **webroot/js/Blog.plugins.js**, you would::
 Creating Inline Javascript Blocks
 ---------------------------------
 
-.. php:method:: scriptBlock($code, $options = [])
+.. php:method:: scriptBlock(string $code, array $options = [])
 
 To generate Javascript blocks from PHP view code, you can use one of the script
 block methods. Scripts can either be output in place, or buffered into a block::
@@ -543,7 +543,7 @@ block methods. Scripts can either be output in place, or buffered into a block::
     // Buffer a script block to be output later.
     $this->Html->scriptBlock('alert("hi")', ['block' => true]);
 
-.. php:method:: scriptStart($options = [])
+.. php:method:: scriptStart(array $options = [])
 .. php:method:: scriptEnd()
 
 You can use the ``scriptStart()`` method to create a capturing block that will
@@ -560,6 +560,66 @@ Once you have buffered javascript, you can output it as you would any other
 
     // In your layout
     echo $this->fetch('script');
+
+Creating Javascript Importmap
+-----------------------------
+
+.. php:method:: importmap(array $map, array $options = []): string
+
+Creates an `importmap` script tag for your JavaScript files::
+
+    // In the head tag of your layout
+    echo $this->Html->importmap([
+        'jquery' => 'jquery.js',
+        'wysiwyg' => '/editor/wysiwyg.js'
+    ]);
+
+Will output:
+
+.. code-block:: html
+
+    <script type="importmap">{
+        "imports": {
+            "jquery": "/js/jquery.js",
+            "wysiwyg": "/editor/wysiwyg.js"
+        }
+    }</script>
+
+Generating maps with imports, scopes and integrity::
+
+    echo $this->Html->importmap([
+        'imports' => [
+            'jquery' => 'jquery-3.7.1.min.js',
+            'wysiwyg' => '/editor/wysiwyg.js'
+        ],
+        'scopes' => [
+            'scoped/' => [
+                'foo' => 'inner/foo',
+            ],
+        ],
+        'integrity' => [
+            'jquery' => 'sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=',
+        ],
+    ]);
+
+Will output:
+
+.. code-block:: html
+
+    <script type="importmap">{
+        "imports": {
+            "jquery": "/js/jquery-3.7.1.min.js",
+            "wysiwyg": "/editor/wysiwyg.js"
+        },
+        "scopes": {
+            "scoped/": {
+                "foo": "/js/inner/foo.js"
+            }
+        },
+        "integrity": {
+            "/js/jquery-3.7.1.min.js": "sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+        }
+    }</script>
 
 Creating Nested Lists
 ---------------------

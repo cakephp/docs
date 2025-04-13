@@ -412,9 +412,9 @@ binary
     echo $this->Form->control('title', ['required' => false]);
 
 フォーム全体のブラウザー検証トリガーをスキップするには、
-:php:meth:`\\Cake\\View\\Helper\\FormHelper::submit()` を使って生成する入力ボタンに対して
+:php:meth:`~Cake\\View\\Helper\\FormHelper::submit()` を使って生成する入力ボタンに対して
 ``'formnovalidate' => true`` オプションを設定したり、
-:php:meth:`\\Cake\\View\\Helper\\FormHelper::create()` のオプションで
+:php:meth:`~Cake\\View\\Helper\\FormHelper::create()` のオプションで
 ``'novalidate' => true`` を設定できます。
 
 たとえば、Users モデルに *username* (varchar), *password* (varchar), *approved* (datetime)
@@ -475,7 +475,7 @@ UsersController に以下を追加します。 ::
 .. note::
 
     送信ボタンを生成するために ``FormHelper::control()`` を使用しないでください。
-    代わりに :php:meth:`\\Cake\\View\\Helper\\FormHelper::submit()` を使用してください。
+    代わりに :php:meth:`~Cake\\View\\Helper\\FormHelper::submit()` を使用してください。
 
 フィールドの命名規則
 --------------------
@@ -645,8 +645,8 @@ HTML 属性を受け付けます。以下は ``FormHelper::control()`` で特有
 コントロールタイプを生成するために個別のメソッドがあります。
 これらは、コントロールウィジェットそのものを生成するのに使えますが、
 完全に独自のフォームレイアウトを生成するために
-:php:meth:`\\Cake\\View\\Helper\\FormHelper::label()` や
-:php:meth:`\\Cake\\View\\Helper\\FormHelper::error()` といった
+:php:meth:`~Cake\\View\\Helper\\FormHelper::label()` や
+:php:meth:`~Cake\\View\\Helper\\FormHelper::error()` といった
 他のメソッドを組み合わせることができます。
 
 .. _general-control-options:
@@ -1556,7 +1556,7 @@ CakePHP が Windows サーバー上にインストールされている場合、
 日時入力の作成
 ~~~~~~~~~~~~~~
 
-.. php:method:: dateTime($fieldName, $options = [])
+.. php:method:: dateTime(string $fieldName, array $options = [])
 
 * ``$fieldName`` - ``select`` 要素の HTML ``name`` 属性のプレフィックスとして使用される文字列。
 * ``$options`` - :ref:`general-control-options` または日時特有のオプション (下記参照)、
@@ -1627,7 +1627,7 @@ CakePHP が Windows サーバー上にインストールされている場合、
 日付コントロールの作成
 ~~~~~~~~~~~~~~~~~~~~~~
 
-.. php:method:: date($fieldName, $options = [])
+.. php:method:: date(string $fieldName, array $options = [])
 
 * ``$fieldName`` - ``select`` 要素の HTML ``name`` 属性のプレフィックスとして使用される文字列。
 * ``$options`` - :ref:`general-control-options` 、 :ref:`datetime-options` 、
@@ -1668,7 +1668,7 @@ CakePHP が Windows サーバー上にインストールされている場合、
 時間コントロールの作成
 ~~~~~~~~~~~~~~~~~~~~~~
 
-.. php:method:: time($fieldName, $options = [])
+.. php:method:: time(string $fieldName, array $options = [])
 
 * ``$fieldName`` - ``select`` 要素の HTML ``name`` 属性のプレフィックスとして使用される文字列。
 * ``$options`` - :ref:`general-control-options` 、 :ref:`datetime-options` 、
@@ -1898,7 +1898,7 @@ FormHelper は、フィールドエラーを簡単にチェックしたり、必
 
 .. note::
 
-    :php:meth:`\\Cake\\View\\Helper\\FormHelper::control()` を使用している時、
+    :php:meth:`~Cake\\View\\Helper\\FormHelper::control()` を使用している時、
     デフォルトではエラーは描画されますので、 ``isFieldError()`` を使用したり、
     手動で ``error()`` を呼び出す必要はありません。
 
@@ -2076,7 +2076,7 @@ submit 入力は、基本的なテキストやイメージが必要な場合に�
 
 ``end()`` は、フォームを閉じて完成します。
 多くの場合、 ``end()`` は終了タグだけを出力しますが、 ``end()`` を使うと、
-FormHelper が :php:class:`\\Cake\\Controller\\Component\\FormProtectionComponent` に必要な
+FormHelper が :php:class:`Cake\\Controller\\Component\\FormProtectionComponent` に必要な
 hidden フォーム要素を挿入できるようになります。
 
 .. code-block:: php
@@ -2159,8 +2159,8 @@ POST ボタンの作成
 
 このメソッドは ``form`` 要素を作成します。
 なので、開かれたフォームの中でこのメソッドを使用しないでください。
-代わりに :php:meth:`\\Cake\\View\\Helper\\FormHelper::submit()` または
-:php:meth:`\\Cake\\View\\Helper\\FormHelper::button()` を使用して、
+代わりに :php:meth:`Cake\\View\\Helper\\FormHelper::submit()` または
+:php:meth:`Cake\\View\\Helper\\FormHelper::button()` を使用して、
 開かれたフォームの中でボタンを作成してください。
 
 POST リンクの作成
@@ -2198,8 +2198,8 @@ HTML リンクを作成しますが、指定した方法 (デフォルトは POS
 :ref:`ビューブロック <view-blocks>` に設定されるようにする必要があります。
 
 あなたが探しているものがフォームを送信するボタンであれば、代わりに
-:php:meth:`\\Cake\\View\\Helper\\FormHelper::button()` または
-:php:meth:`\\Cake\\View\\Helper\\FormHelper::submit()` を使用してください。
+:php:meth:`Cake\\View\\Helper\\FormHelper::button()` または
+:php:meth:`Cake\\View\\Helper\\FormHelper::submit()` を使用してください。
 
 .. note::
 
@@ -2348,7 +2348,7 @@ CakePHP の多くのヘルパーと同じように、FormHelper は、
 複数のコントロールの作成
 ------------------------
 
-.. php:method:: controls(array $fields = [], $options = [])
+.. php:method:: controls(array $fields = [], array $options = [])
 
 * ``$fields`` - 生成するフィールドの配列。指定した各フィールドのカスタムタイプ、
   ラベル、その他のオプションを設定できます。
@@ -2616,13 +2616,13 @@ autocomplete ウィジェットが作成されると、 ``text`` と ``label``
 FormProtectionComponent との連携
 ================================
 
-:php:meth:`\\Cake\\Controller\\Component\\FormProtectionComponent` には、
+:php:meth:`Cake\\Controller\\Component\\FormProtectionComponent` には、
 フォームをより安全で安全にするためのいくつかの機能があります。
 コントローラーに ``FormProtectionComponent`` を含めるだけで、
 フォームの改ざん防止機能が自動的に有効になります。
 
 FormProtectionComponent を利用する際は、前述のようにフォームを閉じる際は、
-必ず :php:meth:`\\Cake\\View\\Helper\\FormHelper::end()` を使う必要があります。
+必ず :php:meth:`~Cake\\View\\Helper\\FormHelper::end()` を使う必要があります。
 これにより特別な ``_Token`` 入力が生成されます。
 
 .. php:method:: unlockField($name)

@@ -913,7 +913,7 @@ replace
 
 ``dirty()`` の呼び出しがないと、更新された comments は保存されません。
 
-既存のレコードでアソシエーションの新しいエンティティを作成する場合、
+既存のレコードでアソシエーションの新しいエンティティーを作成する場合、
 最初に対応するプロパティを初期化する必要があります。 ::
 
     $mentor->students = [];
@@ -1095,10 +1095,10 @@ belongsToMany アソシエーションのそれぞれのエンティティーは
 厳密な保存
 =============
 
-.. php:method:: saveOrFail($entity, $options = [])
+.. php:method:: saveOrFail(EntityInterface $entity, array $options = [])
 
 このメソッドを使用すると、次の条件で
-:php:exc:`\\Cake\\ORM\\Exception\\PersistenceFailedException` を投げます。
+:php:exc:`Cake\\ORM\\Exception\\PersistenceFailedException` を投げます。
 
 * アプリケーションルールのチェックに失敗した場合
 * エンティティーにエラーが含まれている場合
@@ -1122,13 +1122,13 @@ belongsToMany アソシエーションのそれぞれのエンティティーは
             echo $e->getEntity();
         }
 
-これは内部的に :php:meth:`\\Cake\\ORM\\Table::save()`
+これは内部的に :php:meth:`Cake\\ORM\\Table::save()`
 コールを実行するので、対応するすべての保存イベントはトリガーされます。
 
 複数のエンティティーの保存
 ==========================
 
-.. php:method:: saveMany($entities, $options = [])
+.. php:method:: saveMany(iterable $entities, array $options = [])
 
 このメソッドを使うと、複数のエンティティーを自動で保存することができます。 ``$entities`` は
 ``newEntities()`` / ``patchEntities()`` で作成されたエンティティーの配列です。

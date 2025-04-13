@@ -87,7 +87,7 @@ query プロパティーに直接アクセスするか、エラーが発生し�
 
 .. php:method:: getData($name, $default = null)
 
-すべての POST データは :php:meth:`\\Cake\\Http\\ServerRequest::getData()` を使ってアクセスされます。
+すべての POST データは :php:meth:`Cake\\Http\\ServerRequest::getData()` を使ってアクセスされます。
 フォームデータが ``data`` 接頭辞を含んでいる場合、接頭辞は取り除かれるでしょう。例えば ::
 
     // name 属性が 'MyModel[title]' の入力は次のようにアクセスします。
@@ -114,7 +114,7 @@ query プロパティーに直接アクセスするか、エラーが発生し�
 ファイルのアップロード
 ----------------------
 
-アップロードしたファイルは、上で説明した :php:meth:`\\Cake\\Http\\ServerRequest::getData()`
+アップロードしたファイルは、上で説明した :php:meth:`Cake\\Http\\ServerRequest::getData()`
 メソッドを使用して、リクエスト内容のデータからアクセスすることができます。
 例えば、name属性が ``attachment`` であるinput要素のファイルは、以下のようにアクセスできます。 ::
 
@@ -177,19 +177,19 @@ HTTP環境では、 ``moveTo()`` メソッドはファイルが実際にアッ�
 .. tip::
 
     アップロードされたファイルは、リクエストデータとは別のオブジェクトとして
-    :php:meth:`\\Cake\\Http\\ServerRequest::getUploadedFile()` と
-    :php:meth:`\\Cake\\Http\\ServerRequest::getUploadedFiles()` メソッドを使用しています。
+    :php:meth:`Cake\\Http\\ServerRequest::getUploadedFile()` と
+    :php:meth:`Cake\\Http\\ServerRequest::getUploadedFiles()` メソッドを使用しています。
     これらのメソッドは ``App.uploadedFilesAsObjects`` の設定に関係なく、常にオブジェクトを返します。
 
 
 .. php:method:: getUploadedFile($path)
 
 アップロードされたファイルの特定のパスで返します。
-パスは :php:meth:`\\Cake\\Http\\ServerRequest::getData()` メソッドと同じドット構文を使用します。 ::
+パスは :php:meth:`Cake\\Http\\ServerRequest::getData()` メソッドと同じドット構文を使用します。 ::
 
     $attachment = $this->request->getUploadedFile('attachment');
 
-:php:meth:`\\Cake\\Http\\ServerRequest::getData()` と違って、 :php:meth:`\\Cake\\Http\\ServerRequest::getUploadedFile()`
+:php:meth:`Cake\\Http\\ServerRequest::getData()` と違って、 :php:meth:`Cake\\Http\\ServerRequest::getUploadedFile()`
 は、実際にアップロードされたファイルが指定されたパスに存在する場合にのみデータを返します。
 通常であれば、ファイルではないリクエストのbodyデータが指定されたパスに存在する場合、このメソッドは ``null`` を返します。
 
@@ -235,9 +235,9 @@ HTTP環境では、 ``moveTo()`` メソッドはファイルが実際にアッ�
 .. note::
 
     このメソッドでリクエストに追加したアップロードファイルは、リクエスト本文では利用 *できません*。
-    すなわち、 :php:meth:`\\Cake\\Http\\ServerRequest::getData()` を経由して受け取ることはできません！
-    リクエストデータに（も）必要な場合は、 :php:meth:`\\Cake\\Http\\ServerRequest::withData()` か
-    :php:meth:`\\Cake\\Http\\ServerRequest::withParsedBody()` を経由して設定する必要があります。
+    すなわち、 :php:meth:`Cake\\Http\\ServerRequest::getData()` を経由して受け取ることはできません！
+    リクエストデータに（も）必要な場合は、 :php:meth:`Cake\\Http\\ServerRequest::withData()` か
+    :php:meth:`Cake\\Http\\ServerRequest::withParsedBody()` を経由して設定する必要があります。
 
 PUT、PATCH または DELETE データ
 -------------------------------
@@ -324,7 +324,7 @@ post 形式でデータを交換することがしばしばあります。 :php:
 
     $isPost = $this->request->is('post');
 
-新しい種類の検出器を作成するために :php:meth:`\\Cake\\Http\\ServerRequest::addDetector()`
+新しい種類の検出器を作成するために :php:meth:`Cake\\Http\\ServerRequest::addDetector()`
 を使用することで利用可能なリクエスト検出器を拡張することができます。4種類の異なる検出器を作成できます。
 
 * 環境変数の比較 - 環境変数の比較、 :php:func:`env()` から取得された値と提供された値が
@@ -408,9 +408,9 @@ post 形式でデータを交換することがしばしばあります。 :php:
   MIME タイプを受付けるかどうかを調べます。
 
 ``ServerRequest`` は、
-:php:meth:`\\Cake\\Http\\ServerRequest::domain()` 、
-:php:meth:`\\Cake\\Http\\ServerRequest::subdomains()` 、
-:php:meth:`\\Cake\\Http\\ServerRequest::host()`
+:php:meth:`Cake\\Http\\ServerRequest::domain()` 、
+:php:meth:`Cake\\Http\\ServerRequest::subdomains()` 、
+:php:meth:`Cake\\Http\\ServerRequest::host()`
 のようにサブドメインでアプリケーションを助けるためのメソッドを含みます。
 
 セッションデータ
@@ -575,7 +575,7 @@ Accept ヘッダーの確認
     // Get a CookieCollection instance
     $cookies = $this->request->getCookieCollection()
 
-クッキーコレクションの操作方法については、 :php:class:`\\Cake\\Http\\Cookie\\CookieCollection`
+クッキーコレクションの操作方法については、 :php:class:`Cake\\Http\\Cookie\\CookieCollection`
 のドキュメントをご覧ください。
 
 
@@ -617,13 +617,13 @@ URIの操作
 
 .. php:class:: Response
 
-:php:class:`\\Cake\\Http\\Response` は、CakePHP のデフォルトのレスポンスクラスです。
+:php:class:`Cake\\Http\\Response` は、CakePHP のデフォルトのレスポンスクラスです。
 いくつかの機能と HTTP レスポンスの生成をカプセル化します。
 また送信予定のヘッダーを調べるためにモックやスタブとしてテストの手助けをします。
-:php:class:`\\Cake\\Http\\ServerRequest` と同様に、 :php:class:`Controller`,
+:php:class:`Cake\\Http\\ServerRequest` と同様に、 :php:class:`Controller`,
 :php:class:`RequestHandlerComponent` 及び :php:class:`Dispatcher` に以前あった多くのメソッドを
-:php:class:`\\Cake\\Http\\Response` が統合します。
-古いメソッドは非推奨になり、 :php:class:`\\Cake\\Http\\Response` の使用を推奨します。
+:php:class:`Cake\\Http\\Response` が統合します。
+古いメソッドは非推奨になり、 :php:class:`Cake\\Http\\Response` の使用を推奨します。
 
 ``Response`` は次のような共通のレスポンスをラップするためのインターフェイスを提供します。
 
@@ -637,7 +637,7 @@ URIの操作
 
 .. php:method:: withType($contentType = null)
 
-:php:meth:`\\Cake\\Http\\Response::withType()` を使用して、アプリケーションのレスポンスの
+:php:meth:`Cake\\Http\\Response::withType()` を使用して、アプリケーションのレスポンスの
 コンテンツタイプを制御することができます。アプリケーションが Response に組み込まれていない
 コンテンツの種類に対処する必要がある場合は、以下のように ``setTypeMap()`` を使って設定することができます。 ::
 
@@ -659,7 +659,7 @@ URIの操作
 .. php:method:: withFile($path, $options = [])
 
 リクエストに対する応答としてファイルを送信する機会があります。
-:php:meth:`\\Cake\\Http\\Response::withFile()` を使用してそれを達成することができます。 ::
+:php:meth:`Cake\\Http\\Response::withFile()` を使用してそれを達成することができます。 ::
 
     public function sendFile($id)
     {
@@ -671,8 +671,8 @@ URIの操作
 
 上記の例のようにメソッドにファイルのパスを渡す必要があります。CakePHP は、
 `Cake\\Http\\Response::$_mimeTypes` に登録された、よく知られるファイルタイプであれば
-正しいコンテンツタイプヘッダーを送ります。 :php:meth:`\\Cake\\Http\\Response::withFile()` を呼ぶ前に
-:php:meth:`\\Cake\\Http\\Response::withType()` メソッドを使って、新しいタイプを追加できます。
+正しいコンテンツタイプヘッダーを送ります。 :php:meth:`Cake\\Http\\Response::withFile()` を呼ぶ前に
+:php:meth:`Cake\\Http\\Response::withType()` メソッドを使って、新しいタイプを追加できます。
 
 もし、あなたが望むなら、 オプションを明記することによって、ブラウザー上に表示する代わりにファイルを
 ダウンロードさせることができます。 ::
@@ -723,7 +723,7 @@ download
 
 .. php:method:: withHeader($header, $value)
 
-ヘッダーの設定は :php:meth:`\\Cake\\Http\\Response::withHeader()` メソッドで行われます。
+ヘッダーの設定は :php:meth:`Cake\\Http\\Response::withHeader()` メソッドで行われます。
 すべての PSR-7 インターフェイスのメソッドと同様に、このメソッドは新しいヘッダーを含む
 *新しい* インスタンスを返します。 ::
 
@@ -740,7 +740,7 @@ download
 セットされた際、ヘッダーは送られません。これらのヘッダーは、 ``Cake\Http\Server`` によって
 レスポンスが実際に送られるまで保持されます。
 
-便利なメソッド :php:meth:`\\Cake\\Http\\Response::withLocation()` を使うと
+便利なメソッド :php:meth:`Cake\\Http\\Response::withLocation()` を使うと
 直接リダイレクトヘッダーの設定や取得ができます。
 
 ボディーの設定
@@ -807,7 +807,7 @@ download
 .. php:method:: withDisableCache()
 
 時々、コントローラーアクションの結果をキャッシュしないようにブラウザーに強制する必要がでてきます。
-:php:meth:`\\Cake\\Http\\Response::withDisableCache()` はそういった目的で使われます。 ::
+:php:meth:`Cake\\Http\\Response::withDisableCache()` はそういった目的で使われます。 ::
 
     public function index()
     {
@@ -823,7 +823,7 @@ download
 .. php:method:: withCache($since, $time = '+1 day')
 
 クライアントにレスポンスをキャッシュして欲しいことを伝えられます。
-:php:meth:`\\Cake\\Http\\Response::withCache()` を使って::
+:php:meth:`Cake\\Http\\Response::withCache()` を使って::
 
     public function index()
     {
@@ -851,7 +851,7 @@ HTTP キャッシュのチューニング
 HTTP は二つのモデル、expiration と validation を使います。これらは大抵の場合、
 自身でキャッシュを管理するよりかなり単純です。
 
-:php:meth:`\\Cake\\Http\\Response::withCache()` と独立して、HTTP キャッシュヘッダーを
+:php:meth:`Cake\\Http\\Response::withCache()` と独立して、HTTP キャッシュヘッダーを
 チューニングするための様々なメソッドが使えます。この点に関して、ブラウザーやリバースプロキシーの
 キャッシュよりも有利だと言えます。
 
@@ -1006,7 +1006,7 @@ Not-Modified レスポンスの送信
 クッキーの設定
 ---------------
 
-クッキーは、配列または :php:class:`\\Cake\\Http\\Cookie\\Cookie` オブジェクトを使って
+クッキーは、配列または :php:class:`Cake\\Http\\Cookie\\Cookie` オブジェクトを使って
 レスポンスに追加することができます。 ::
 
     use Cake\Http\Cookie\Cookie;

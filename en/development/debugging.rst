@@ -201,7 +201,7 @@ Using Logging to Debug
 ======================
 
 Logging messages is another good way to debug applications, and you can use
-:php:class:`\\Cake\\Log\\Log` to do logging in your application. All objects that
+:php:class:`Cake\\Log\\Log` to do logging in your application. All objects that
 use ``LogTrait`` have an instance method ``log()`` which can be used
 to log messages::
 
@@ -209,7 +209,7 @@ to log messages::
 
 The above would write ``Got here`` into the debug log. You can use log entries
 to help debug methods that involve redirects or complicated loops. You can also
-use :php:meth:`\\Cake\\Log\\Log::write()` to write log messages. This method can be called
+use :php:meth:`Cake\\Log\\Log::write()` to write log messages. This method can be called
 statically anywhere in your application one Log has been loaded::
 
     // At the top of the file you want to log in.

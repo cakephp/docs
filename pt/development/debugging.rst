@@ -147,7 +147,7 @@ Usando Logging para Depuração
 =============================
 
 Registrar as mensagens é uma outra boa maneira de se depurar aplicações. Para
-isto, pode ser usada a classe :php:class:`\\Cake\\Log\\Log` para fazer o logging
+isto, pode ser usada a classe :php:class:`Cake\\Log\\Log` para fazer o logging
 na sua aplicação. Todos os objetos que fazem uso de ``LogTrait`` têm um método
 de instanciação ``log()`` que pode ser usado para registrar mensagens::
 
@@ -156,7 +156,7 @@ de instanciação ``log()`` que pode ser usado para registrar mensagens::
 O código acima escreverá ``Cheguei aqui`` no arquivo de registros de depuração
 (debug log). Você pode usar seus registros para auxiliar na depuração de métodos
 que contêm redirecionamentos e laços complicados. Você poderá usar também
-:php:meth:`\\Cake\\Log\\Log::write()` para escrever mensagens nos registros. Esse
+:php:meth:`Cake\\Log\\Log::write()` para escrever mensagens nos registros. Esse
 método pode ser chamado de forma estática em qualquer lugar da sua aplicação,
 pressupondo-se que Log já esteja carregado::
 

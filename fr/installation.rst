@@ -86,7 +86,7 @@ de Composer:
 
 .. code-block:: console
 
-    composer create-project --prefer-dist cakephp/app:~4.0 my_app_name
+    composer create-project --prefer-dist cakephp/app:~5.0 my_app_name
 
 Une fois que Composer a fini le téléchargement du squelette de l'application et
 du cœur de la librairie de CakePHP, vous devriez avoir une application CakePHP
@@ -111,31 +111,13 @@ Rester à jour avec les derniers changements de CakePHP
 Par défaut le **composer.json** de l'application ressemble à cela::
 
    "require": {
-        "cakephp/cakephp": "4.0.*"
+        "cakephp/cakephp": "5.0.*"
     }
 
 A chaque fois que vous exécutez ``php composer.phar update``, vous recevrez
 des correctifs pour cette version mineure. Vous pouvez cependant modifier la
-version de CakePHP en ``^4.0`` pour recevoir également les dernières versions
-mineures stables de la branche ``4.x``.
-
-Installation en utilisant Oven
-------------------------------
-
-Une autre manière rapide d'installer CakePHP est d'utiliser `Oven <https://github.com/CakeDC/oven>`_.
-Il s'agit d'un simple script PHP qui vérifie si vous respectez les
-recommandations systèmes, installe le squelette d'application CakePHP et met
-en place l'environnement de développement.
-
-
-.. note::
-
-    IMPORTANT : Ceci n'est pas un script de déploiement. Il est destiné
-    à aider les développeur à installer CakePHP pour la première fois et
-    à rapidement mettre en place un environnement de développement. Les
-    environnements de production devraient prendre en compte d'autres
-    facteurs comme les permissions de fichiers, les configurations
-    de vhost, etc.
+version de CakePHP en ``^5.0`` pour recevoir également les dernières versions
+mineures stables de la branche ``5.x``.
 
 Permissions
 ===========

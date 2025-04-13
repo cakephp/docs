@@ -136,7 +136,7 @@ CakePHP は自動的にそのタイプに対応するビューヘルパーを探
 edit アクションのロジックを作るのは少しだけトリッキーです。XML 出力 の API を提供する場合、
 入力も XML で受付けるほうが自然です。心配せずとも、
 :php:class:`Cake\\Controller\\Component\\RequestHandler` と
-:php:class:`\\Cake\\Routing\\Router` クラスが取り計らってくれます。
+:php:class:`Cake\\Routing\\Router` クラスが取り計らってくれます。
 POST もしくは PUT リクエストのコンテンツタイプが XML であれば、入力データは CakePHP の
 :php:class:`Xml` クラスに渡され、配列に変換され、 ``$this->request->getData()`` に入ります。
 この機能によって、XML と POST データの処理はシームレスになるのです。コントローラーもモデルも

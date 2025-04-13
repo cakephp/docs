@@ -56,7 +56,7 @@ Selecionando Linhas de uma Tabela
     }
 
 Para os exemplos restantes, suponha que ``$articles`` seja um
-:php:class:`\\Cake\\ORM\\Table`. Quando dentro de controladores,
+:php:class:`~Cake\\ORM\\Table`. Quando dentro de controladores,
 você pode usar ``$this->Articles`` em vez de ``$articles``.
 
 Quase todos os métodos em um objeto ``Query`` retornam a mesma
@@ -1296,7 +1296,7 @@ Para inserir várias linhas com apenas uma consulta, você pode encadear o méto
         ->execute();
 
 Geralmente, é mais fácil inserir dados usando entidades e
-:php:meth:`\\Cake\\ORM\\Table::save()`. Ao compor uma consulta ``SELECT`` e ``INSERT`` juntas,
+:php:meth:`~Cake\\ORM\\Table::save()`. Ao compor uma consulta ``SELECT`` e ``INSERT`` juntas,
 você pode criar consultas de estilo  ``INSERT INTO ... SELECT``
 
     $select = $articles->find()
@@ -1346,10 +1346,10 @@ de exclusão. Em vez disso, crie um novo objeto de consulta usando ``query()``::
         ->execute();
 
 Generally, it is easier to delete data using entities and
-:php:meth:`\\Cake\\ORM\\Table::delete()`.
+:php:meth:`~Cake\\ORM\\Table::delete()`.
 
 Geralmente, é mais fácil excluir dados usando entidades
-e :php:meth:`\\Cake\\ORM\\Table::delete()`.
+e :php:meth:`~Cake\\ORM\\Table::delete()`.
 
 Prevenção de SQL Injection
 ==========================

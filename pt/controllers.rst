@@ -41,7 +41,7 @@ O App Controller
 
 Como mencionado anteriormente, a classe ``AppController`` é a mãe de todos os
 outros controllers da sua aplicação. A própria ``AppController`` é estendida da
-classe :php:class:`\\Cake\\Controller\\Controller` incluída no CakePHP.
+classe :php:class:`Cake\\Controller\\Controller` incluída no CakePHP.
 Assim sendo, ``AppController`` é definida em
 **src/Controller/AppController.php** como a seguir::
 
@@ -90,8 +90,8 @@ Fluxo de requisições
 ====================
 
 Quando uma requisição é feita para uma aplicação CakePHP, a classe
-:php:class:`\\Cake\\Routing\\Router` e a classe
-:php:class:`\\Cake\\Routing\\Dispatcher` usam :ref:`routes-configuration` para
+:php:class:`Cake\\Routing\\Router` e a classe
+:php:class:`Cake\\Routing\\Dispatcher` usam :ref:`routes-configuration` para
 encontrar e criar a instância correta do controller. Os dados da requisição são
 encapsulados em um objeto de requisição. O CakePHP coloca todas as informações
 importantes de uma requisição na propriedade ``$this->request``. Veja a seção
@@ -478,7 +478,7 @@ inserir lógicas em torno do ciclo de vida de uma requisição:
     Chamada após a lógica da action de um controller, mas antes da view ser
     renderizada. Esse callback não é usado frequentemente, mas pode ser
     necessário se você estiver chamando
-    :php:meth:`\\Cake\\Controller\\Controller::render()` manualmente antes do
+    :php:meth:`~Cake\\Controller\\Controller::render()` manualmente antes do
     final de uma determinada action.
 
 .. php:method:: afterFilter()

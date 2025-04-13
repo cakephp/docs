@@ -105,7 +105,7 @@ aliases for *all* functions listed below.
 
 .. php:function:: collection(mixed $items)
 
-    Convenience wrapper for instantiating a new :php:class:`\\Cake\\Collection\\Collection`
+    Convenience wrapper for instantiating a new :php:class:`Cake\\Collection\\Collection`
     object, wrapping the passed argument. The ``$items`` parameter takes either
     a ``Traversable`` object or an array.
 

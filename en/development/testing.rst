@@ -431,7 +431,7 @@ create your schema in your application's ``tests/bootstrap.php`` file.
 Creating Schema with Migrations
 -------------------------------
 
-If you use CakePHP's :doc:`migrations plugin </migrations>` to manage your
+If you use CakePHP's `migrations plugin <https://book.cakephp.org/migrations>`_ to manage your
 application's schema, you can reuse those migrations to generate your test
 database schema as well::
 
@@ -629,6 +629,28 @@ should be an associative array of the columns and values for the row. Just keep
 in mind that each record in the ``$records`` array must have the same keys as
 rows are bulk inserted.
 
+As you evolve your schema your fixture records may accumulate unused or
+unsupported fields. You can enable ``strictFields`` on a fixture to have errors
+raised when a record contains fields that are not defined in the schema::
+
+    namespace App\Test\Fixture;
+
+    use Cake\TestSuite\Fixture\TestFixture;
+
+    class ArticlesFixture extends TestFixture
+    {
+        protected $strictFields = true;
+
+        // rest of fixture
+    }
+
+The ``strictFields`` mode can be useful in catching typos or when you want to
+enforce stricter maintenance of test data.
+
+.. versionadded:: 5.2.0
+    ``TestFixture::$strictFields`` was added.
+
+
 Dynamic Data
 ------------
 
@@ -710,6 +732,17 @@ name::
 
 In the above example, both fixtures would be loaded from
 ``tests/Fixture/Blog/``.
+
+You can also directly include fixtures by FQCN::
+
+    public function getFixtures(): array
+    {
+        return [
+            UsersFixture::class,
+            ArticlesFixture::class,
+        ];
+    }
+
 
 Fixture Factories
 -----------------
@@ -1274,8 +1307,8 @@ In order to simulate exactly how the uploaded file objects would be present on
 a regular request, you not only need to pass them in the request data, but you also
 need to pass them to the test request configuration via the ``files`` option. It's
 not technically necessary though unless your code accesses uploaded files via the
-:php:meth:`\\Cake\\Http\\ServerRequest::getUploadedFile()` or
-:php:meth:`\\Cake\\Http\\ServerRequest::getUploadedFiles()` methods.
+:php:meth:`Cake\\Http\\ServerRequest::getUploadedFile()` or
+:php:meth:`Cake\\Http\\ServerRequest::getUploadedFiles()` methods.
 
 Let's assume articles have a teaser image, and a ``Articles hasMany Attachments``
 association, the form would look like something like this accordingly, where one

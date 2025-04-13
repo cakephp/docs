@@ -212,7 +212,7 @@ afterMarshal
 .. php:method:: afterMarshal(EventInterface $event, EntityInterface $entity, ArrayObject $data, ArrayObject $options)
 
 The ``Model.afterMarshal`` イベントは、リクエストデータがエンティティーに変換された後に発行されます。
-イベントハンドラは、変換されたエンティティ、元のリクエストデータ、および ``patchEntity()`` または ``newEntity()`` 呼び出しに提供されたオプションを取得します。
+イベントハンドラは、変換されたエンティティー、元のリクエストデータ、および ``patchEntity()`` または ``newEntity()`` 呼び出しに提供されたオプションを取得します。
 
 .. versionadded:: 4.1.0
 
@@ -222,7 +222,7 @@ beforeFind
 .. php:method:: beforeFind(EventInterface $event, Query $query, ArrayObject $options, $primary)
 
 ``Model.beforeFind`` イベントは、各検索操作の前に発生します。
-イベントを停止し、クエリにカスタム結果セットを渡すことにより、検索操作を完全にバイパスできます。::
+イベントを停止し、クエリーにカスタム結果セットを渡すことにより、検索操作を完全にバイパスできます。::
 
     public function beforeFind(EventInterface $event, Query $query, ArrayObject $options, $primary)
     {
@@ -237,7 +237,7 @@ beforeFind
 
 この例では、関連するテーブルまたはそのアタッチされたビヘイビアーで ``beforeFind`` イベントはトリガーされません。
 ただし、振る舞いイベントは通常、デフォルトの優先順位が与えられているため、以前に呼び出されます。
-クエリは ``Query::setResult()`` を介して渡された空の結果セットを返します。
+クエリーは ``Query::setResult()`` を介して渡された空の結果セットを返します。
 
 イベントを止めて戻り値を返すことで find を完全にバイパスできます。 ``$query``
 インスタンスに対してなされた全ての変更は find 処理の間

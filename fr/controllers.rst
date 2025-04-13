@@ -41,7 +41,7 @@ Le Controller App
 
 Comme indiqué dans l'introduction, la classe ``AppController`` est la classe
 mère de tous les controllers de votre application. ``AppController`` étend
-elle-même la classe :php:class:`\\Cake\\Controller\\Controller` incluse dans la
+elle-même la classe :php:class:`Cake\\Controller\\Controller` incluse dans la
 librairie du cœur de CakePHP. ``AppController`` est définie dans
 **src/Controller/AppController.php** comme ceci::
 
@@ -90,7 +90,7 @@ Déroulement d'une Requête
 =========================
 
 Quand une requête est faîte dans une application CakePHP, les classes
-:php:class:`\\Cake\\Routing\\Router` et :php:class:`\\Cake\\Routing\\Dispatcher` de
+:php:class:`Cake\\Routing\\Router` et :php:class:`Cake\\Routing\\Dispatcher` de
 CakePHP utilisent la fonctionnalité :ref:`routes-configuration` pour trouver et créer le bon
 controller. La requête de données est encapsulée dans un objet request.
 CakePHP met toutes les informations importantes de la requête dans la
@@ -143,7 +143,7 @@ manuellement. Au lieu de ça, une fois qu'une action du controller est terminée
 CakePHP va gérer le rendu et la livraison de la Vue.
 
 Si pour certaines raisons, vous voulez éviter le comportement par défaut, vous
-pouvez retourner un objet de :php:class:`\\Cake\\Http\\Response` de l'action
+pouvez retourner un objet de :php:class:`Cake\\Http\\Response` de l'action
 avec la response complètement créée.
 
 Afin que vous utilisiez efficacement le controller dans votre propre
@@ -491,7 +491,7 @@ events liés si les méthodes sont implémentées dans vos controllers.
     Cette méthode est appelée pendant l'event ``Controller.beforeRender`` qui
     se produit après l'action du controller mais avant que la vue ne soit
     rendue. Ce callback n'est pas souvent utilisé, mais peut-être nécessaire si
-    vous appelez :php:meth:`\\Cake\\Controller\\Controller::render()` manuellement
+    vous appelez :php:meth:`~Cake\\Controller\\Controller::render()` manuellement
     à la fin d'une action donnée.
 
 .. php:method:: afterFilter(EventInterface $event)

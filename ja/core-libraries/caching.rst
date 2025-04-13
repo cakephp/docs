@@ -34,7 +34,7 @@ CakePHP には、いくつかのキャッシュエンジンが用意されてい
 * ``Null`` nullエンジンは実質何も保存せず、すべての読み込み操作を失敗させます。
 
 あなたが選択したキャッシュエンジンに関わらず、
-アプリケーションは :php:class:`\\Cake\\Cache\\Cache` とやり取りします。
+アプリケーションは :php:class:`Cake\\Cache\\Cache` とやり取りします。
 
 .. _cache-configuration:
 
@@ -105,8 +105,8 @@ DSN を使用するとき、追加のクエリー文字列要素としてパラ�
     $object = new FileEngine($config);
     Cache::setConfig('other', $object);
 
-これらのエンジン設定の名前 ('short' や 'long') は :php:meth:`\\Cake\\Cache\\Cache::write()` と
-:php:meth:`\\Cake\\Cache\\Cache::read()` の ``$config`` パラメーターとして使われます。
+これらのエンジン設定の名前 ('short' や 'long') は :php:meth:`Cake\\Cache\\Cache::write()` と
+:php:meth:`Cake\\Cache\\Cache::read()` の ``$config`` パラメーターとして使われます。
 キャッシュエンジンを設定する場合は、次の構文を使用してクラス名を参照することができます。 ::
 
     // 省略名 (App\ または Cake 名前空間の中)
@@ -223,7 +223,7 @@ Redis サーバーが予期せず失敗した場合、 ``redis`` キャッシュ
 .. php:staticmethod:: drop($key)
 
 一度設定が作成されたら、変更することはできません。代わりに、
-:php:meth:`\\Cake\\Cache\\Cache::drop()` と :php:meth:`\\Cake\\Cache\\Cache::config()`
+:php:meth:`Cake\\Cache\\Cache::drop()` と :php:meth:`Cake\\Cache\\Cache::config()`
 を使用して、設定を削除して再作成する必要があります。キャッシュエンジンを削除すると、設定が削除され、
 アダプターが構築されていれば破棄されます。
 
@@ -464,7 +464,7 @@ Cache クラスは簡単な方法でカウンター値をインクリメント/�
 
 まれにしか変更されない、またはキャッシュに大量の読み込みが行われるような結果をキャッシュすることによって、
 アプリケーションのパフォーマンスを大幅に向上させることができます。
-この完璧な例は、 :php:meth:`\\Cake\\ORM\\Table::find()` の結果です。
+この完璧な例は、 :php:meth:`Cake\\ORM\\Table::find()` の結果です。
 この Query オブジェクトを使用すると、 ``cache()`` メソッドを使用して結果をキャッシュできます。
 詳細は、 :ref:`caching-query-results` セクションを参照してください。
 
@@ -564,7 +564,7 @@ Cache クラスは簡単な方法でカウンター値をインクリメント/�
     ]);
 
 カスタムキャッシュエンジンは、いくつかの抽象メソッドを定義するだけでなく、
-いくつかの初期化メソッドを提供する :php:class:`\\Cake\\Cache\\CacheEngine` を拡張する必要があります。
+いくつかの初期化メソッドを提供する :php:class:`Cake\\Cache\\CacheEngine` を拡張する必要があります。
 
 キャッシュエンジンに必要な API は次のとおりです。
 

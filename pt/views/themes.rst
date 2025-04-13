@@ -49,7 +49,7 @@ e simplesmente substituí-los caso a caso na pasta do seu tema.
 Como os temas são plugins CakePHP padrão, eles podem incluir qualquer ``asset``
 necessário em seu diretório webroot. Isso permite uma fácil embalagem e
 distribuição de temas. Enquanto estiver em desenvolvimento, requisições de ``assets`` do tema serão
-manipuladas por: php:class:`\\Cake\\Routing\\Dispatcher`. Para melhorar o desempenho
+manipuladas por: php:class:`Cake\\Routing\\Dispatcher`. Para melhorar o desempenho
 para ambientes de produção, é recomendável que você :ref:`symlink-assets`.
 
 Todos os ajudantes internos do CakePHP estão cientes de temas e criará o

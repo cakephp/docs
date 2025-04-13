@@ -9,7 +9,7 @@ The Text class includes convenience methods for creating and manipulating
 strings and is normally accessed statically. Example:
 ``Text::uuid()``.
 
-If you need :php:class:`\\Cake\\View\\Helper\\TextHelper` functionalities outside
+If you need :php:class:`Cake\\View\\Helper\\TextHelper` functionalities outside
 of a ``View``, use the ``Text`` class::
 
     namespace App\Controller;
@@ -61,7 +61,7 @@ transliterator identifiers
 Creating URL Safe Strings
 =========================
 
-.. php:staticmethod:: slug($string, $options = [])
+.. php:staticmethod:: slug(string $string, array|string $options = [])
 
 Slug transliterates all characters into ASCII versions and converting unmatched
 characters and spaces to dashes. The slug method expects UTF-8 encoding.
@@ -100,7 +100,7 @@ UUID is a 128-bit string in the format of
 Simple String Parsing
 =====================
 
-.. php:staticmethod:: tokenize($data, $separator = ',', $leftBound = '(', $rightBound = ')')
+.. php:staticmethod:: tokenize(string $data, string $separator = ',', string $leftBound = '(', string $rightBound = ')')
 
 Tokenizes a string using ``$separator``, ignoring any instance of ``$separator``
 that appears between ``$leftBound`` and ``$rightBound``.
@@ -113,7 +113,7 @@ such as tag lists::
     // Result contains
     ['cakephp', "'great framework'", 'php'];
 
-.. php:method:: parseFileSize(string $size, $default)
+.. php:method:: parseFileSize(string $size, mixed $default = false)
 
 This method unformats a number from a human-readable byte size to an integer
 number of bytes::
@@ -123,7 +123,7 @@ number of bytes::
 Formatting Strings
 ==================
 
-.. php:staticmethod:: insert($string, $data, $options = [])
+.. php:staticmethod:: insert(string $str, array $data, array $options = [])
 
 The insert method is used to create string templates and to allow for key/value
 replacements::
@@ -134,7 +134,7 @@ replacements::
     );
     // Returns: "My name is Bob and I am 65 years old."
 
-.. php:staticmethod:: cleanInsert($string, $options = [])
+.. php:staticmethod:: cleanInsert(string $str, array $options)
 
 Cleans up a ``Text::insert()`` formatted string with given ``$options`` depending
 on the 'clean' key in ``$options``. The default method used is text but html is
@@ -155,7 +155,7 @@ You can use the following options in the options array::
 Wrapping Text
 =============
 
-.. php:staticmethod:: wrap($text, $options = [])
+.. php:staticmethod:: wrap(string $text, array|int $options = [])
 
 Wraps a block of text to a set width and indents blocks as well.
 Can intelligently wrap text so words are not sliced across lines::
@@ -175,7 +175,7 @@ supported options are:
 * ``indent`` The character to indent lines with. Defaults to ''.
 * ``indentAt`` The line number to start indenting text. Defaults to 0.
 
-.. php:staticmethod:: wrapBlock($text, $options = [])
+.. php:staticmethod:: wrapBlock(string $text, array|int $options = [])
 
 If you need to ensure that the total width of the generated block won't
 exceed a certain length even with internal indentation, you need to use
@@ -200,9 +200,9 @@ text for the console for example. It accepts the same options as ``wrap()``::
 Highlighting Substrings
 =======================
 
-.. php:method:: highlight(string $haystack, string $needle, array $options = [] )
+.. php:method:: highlight(string $text, array|string $phrase, array $options = [])
 
-Highlights ``$needle`` in ``$haystack`` using the ``$options['format']`` string
+Highlights ``$phrase`` in ``$text`` using the ``$options['format']`` string
 specified or a default string.
 
 Options:
@@ -234,20 +234,13 @@ Output:
 
 .. code-block: html
 
-    Highlights $needle in $haystack <span class="highlight">using</span> the
+    Highlights $phrase in $text <span class="highlight">using</span> the
     $options['format'] string specified  or a default string.
-
-Removing Links
-==============
-
-.. php:method:: stripLinks($text)
-
-Strips the supplied ``$text`` of any HTML links.
 
 Truncating Text
 ===============
 
-.. php:method:: truncate(string $text, int $length = 100, array $options)
+.. php:method:: truncate(string $text, int $length = 100, array $options = [])
 
 If ``$text`` is longer than ``$length``, this method truncates it at ``$length``
 and adds a suffix consisting of ``'ellipsis'``, if defined. If ``'exact'`` is
@@ -295,7 +288,7 @@ Output::
 Truncating the Tail of a String
 ===============================
 
-.. php:method:: tail(string $text, int $length = 100, array $options)
+.. php:method:: tail(string $text, int $length = 100, array $options = [])
 
 If ``$text`` is longer than ``$length``, this method removes an initial
 substring with length consisting of the difference and prepends a prefix
@@ -345,9 +338,9 @@ Output::
 Extracting an Excerpt
 =====================
 
-.. php:method:: excerpt(string $haystack, string $needle, integer $radius=100, string $ellipsis="...")
+.. php:method:: excerpt(string $text, string $phrase, int $radius = 100, string $ellipsis = '…')
 
-Extracts an excerpt from ``$haystack`` surrounding the ``$needle`` with a number
+Extracts an excerpt from ``$text`` surrounding the ``$phrase`` with a number
 of characters on each side determined by ``$radius``, and prefix/suffix with
 ``$ellipsis``. This method is especially handy for search results. The query
 string or keywords can be shown within the resulting document. ::
@@ -368,7 +361,7 @@ Output::
 Converting an Array to Sentence Form
 ====================================
 
-.. php:method:: toList(array $list, $and='and', $separator=', ')
+.. php:method:: toList(array $list, ?string $and = null, $separator = ', ')
 
 Creates a comma-separated list where the last two items are joined with 'and'::
 

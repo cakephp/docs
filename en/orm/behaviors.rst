@@ -86,11 +86,15 @@ Our new behavior doesn't do much of anything right now. Next, we'll add a mixin
 method and an event listener so that when we save entities we can automatically
 slug a field.
 
-Defining Mixin Methods
-----------------------
+Calling behavior methods
+------------------------
 
-Any public method defined on a behavior will be added as a 'mixin' method on the
-table object it is attached to. If you attach two behaviors that provide the
+Public methods on behaviors can be called as normal methods::
+
+    $articles->getBehavior('Sluggable')->slug($value);
+
+Public methods defined on behaviors are also added as 'mixin' methods on the
+table object they are attached to. If you attach two behaviors that provide the
 same methods an exception will be raised. If a behavior provides the same method
 as a table class, the behavior method will not be callable from the table.
 Behavior mixin methods will receive the exact same arguments that are provided
@@ -104,7 +108,10 @@ method::
 
 It could be invoked using::
 
-    $slug = $articles->slug('My article name');
+    $slug = $articles->slug('My article');
+
+.. deprecated:: 5.3.0
+    Calling behavior methods as mixin methods is deprecated
 
 Limiting or Renaming Exposed Mixin Methods
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

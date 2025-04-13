@@ -163,7 +163,7 @@ Usando El Registro Para Depurar
 ===============================
 
 Registrar mensajes es otra buena manera de depurar aplicaciones, puedes usar
-:php:class:`\\Cake\\Log\\Log` para hacer registros en tu aplicación. Todos los
+:php:class:`Cake\\Log\\Log` para hacer registros en tu aplicación. Todos los
 objetos que usen ``LogTrait`` tienen una instancia del método ``log()`` que
 puede ser usado para registrar mensajes::
 
@@ -171,7 +171,7 @@ puede ser usado para registrar mensajes::
 
 Lo anterior escribiría ``Llegó aquí`` en el registro de depuración. Puedes usar
 entradas de registro para ayudar a los métodos de depuración que involucran redireccionamientos
-o búcles complejos. También puedes usar :php:meth:`\\Cake\\Log\\Log::write()` para
+o búcles complejos. También puedes usar :php:meth:`Cake\\Log\\Log::write()` para
 escribir mensajes de registro. Este método puede ser llamado estáticamente en
 cualquier lugar de tu aplicación que un Log haya sido cargado::
 

@@ -1649,7 +1649,7 @@ inversé. Les classes de route suivent quelques conventions:
 
 * Les classes de Route doivent se trouver dans le namespace ``Routing\Route``
   de votre application ou plugin.
-* Les classes de Route doivent étendre :php:class:`\\Cake\\Routing\\Route\\Route`.
+* Les classes de Route doivent étendre :php:class:`Cake\\Routing\\Route\\Route`.
 * Les classes de Route doivent implémenter au moins un des méthodes ``match()``
   et/ou ``parse()``.
 

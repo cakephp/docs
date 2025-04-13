@@ -208,8 +208,8 @@ Building a ConsoleOptionParser from an Array
 Option parsers can also be defined as arrays. Within the array, you can define
 keys for ``arguments``, ``options``, ``description`` and ``epilog``.  The values
 for arguments, and options, should follow the format that
-:php:func:`\\Cake\\Console\\ConsoleOptionParser::addArguments()` and
-:php:func:`\\Cake\\Console\\ConsoleOptionParser::addOptions()` use. You can also
+:php:func:`Cake\\Console\\ConsoleOptionParser::addArguments()` and
+:php:func:`Cake\\Console\\ConsoleOptionParser::addOptions()` use. You can also
 use ``buildFromArray`` on its own, to build an option parser::
 
     public function getOptionParser()

@@ -30,14 +30,14 @@ de Segurança antes desses componentes no método ``initialize()``.
     formulários. Além disso, você não deve substituir nenhum dos atributos "name" dos
     campos. O componente de segurança procura determinados indicadores criados e
     gerenciados pelo FormHelper (especialmente aqueles criados em
-    :php:meth:`\\Cake\\View\\Helper\\FormHelper::create()` e :php:meth:`\\Cake\\View\\Helper\\FormHelper::end()`).
+    :php:meth:`~Cake\\View\\Helper\\FormHelper::create()` e :php:meth:`~Cake\\View\\Helper\\FormHelper::end()`).
     Alterar dinamicamente os campos que são enviados em uma solicitação POST (por exemplo,
     desativar, excluir ou criar novos campos via JavaScript) provavelmente fará com
     que a solicitação seja enviada como retorno a um blackhole.
 
     Você sempre deve verificar o método HTTP que está sendo usado antes da execução
     para evitar efeitos colaterais. Você deve :ref:`check the HTTP method <check-the-request>`
-    ou usar :php:meth:`\\Cake\\Http\\ServerRequest::allowMethod()` para garantir que
+    ou usar :php:meth:`Cake\\Http\\ServerRequest::allowMethod()` para garantir que
     o método HTTP correto seja usado.
 
 Como Lidar com Retornos de Chamada Blackhole

@@ -89,7 +89,7 @@ Aqui estão as funções disponíveis globalmente no CakePHP. A maioria delas s�
 .. php:function:: collection(mixed $items)
 
     *Wrapper* de conveniência para instanciar um novo objeto
-    :php:class:`\\Cake\\Collection\\Collection`, re-passando o devido argumento.
+    :php:class:`Cake\\Collection\\Collection`, re-passando o devido argumento.
     O parâmetro ``$items`` recebe tanto um objeto ``Traversable`` quanto um
     *array*.
 

@@ -114,7 +114,6 @@ Por defecto, todas las opciones de configuración se fusionarán con la propieda
          * @var array<string, mixed>
          */
         protected $_defaultConfig = [
-            'errorClass' => 'error',
             'templates' => [
                 'label' => '<label for="{{for}}">{{content}}</label>',
             ],
@@ -123,8 +122,8 @@ Por defecto, todas las opciones de configuración se fusionarán con la propieda
 
 Cualquier configuración proporcionada al constructor de tu helper se fusionará con los valores por defecto durante la construcción y los datos fusionados se establecerán en ``_config``. Puedes utilizar el método ``getConfig()`` para leer la configuración en tiempo de ejecución::
 
-    // Lee la opción de configuración errorClass.
-    $class = $this->Awesome->getConfig('errorClass');
+    // Lee la opción de configuración autoSetCustomValidity .
+    $class = $this->Awesome->getConfig('autoSetCustomValidity ');
 
 Usar la configuración del helper te permite configurar declarativamente tus helpers y mantener la lógica de configuración fuera de las acciones de tu controlador. Si tienes opciones de configuración que no se pueden incluir como parte de una declaración de clase, puedes configurarlas en el callback ``beforeRender`` de tu controlador::
 

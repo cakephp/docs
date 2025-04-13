@@ -50,7 +50,7 @@ Selecting Rows From A Table
     }
 
 For the remaining examples, assume that ``$articles`` is a
-:php:class:`\\Cake\\ORM\\Table`. When inside controllers, you can use
+:php:class:`~Cake\\ORM\\Table`. When inside controllers, you can use
 ``$this->Articles`` instead of ``$articles``.
 
 Almost every method in a ``SelectQuery`` object will return the same query, this means
@@ -1558,7 +1558,7 @@ method as many times as you need::
         ->execute();
 
 Generally, it is easier to insert data using entities and
-:php:meth:`\\Cake\\ORM\\Table::save()`. By composing a ``SELECT`` and
+:php:meth:`~Cake\\ORM\\Table::save()`. By composing a ``SELECT`` and
 ``INSERT`` query together, you can create ``INSERT INTO ... SELECT`` style
 queries::
 
@@ -1608,7 +1608,7 @@ Instead, create new a query object using ``deleteQuery()``::
         ->execute();
 
 Generally, it is easier to delete data using entities and
-:php:meth:`\\Cake\\ORM\\Table::delete()`.
+:php:meth:`~Cake\\ORM\\Table::delete()`.
 
 SQL Injection Prevention
 ========================

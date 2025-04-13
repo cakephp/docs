@@ -527,11 +527,28 @@ by the ones returned from the rule::
         ]
      );
 
+As of 5.2.0, you can also provide a ``Closure`` for the ``message`` key. When
+the validation rule fails, you can create dynamic error messages based on the
+entity and options::
+
+    $rules->add(
+        $rules->existsIn('article_id', 'Articles'),
+        'article_exists',
+        [
+            'message' => function ($entity, $options) {
+                return sprintf(
+                    'Article with ID %s does not exist',
+                    $entity->article_id
+                );
+            }
+        ]
+    );
+
 .. note::
 
     Note that in order for the returned message to be actually used, you *must* also supply the
     ``errorField`` option, otherwise the rule will just silently fail to pass, ie without an
-    error message being set on the entity!
+    error message being set on the entity.
 
 Creating Custom re-usable Rules
 -------------------------------

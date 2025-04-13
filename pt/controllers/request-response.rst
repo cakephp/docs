@@ -91,7 +91,7 @@ Dados do Corpo da Requisição
 
 .. php:method:: getData($name, $default = null)
 
-Todos os dados do POST podem ser acessados usando :php:meth:`\\Cake\\Http\\ServerRequest::getData()`.
+Todos os dados do POST podem ser acessados usando :php:meth:`Cake\\Http\\ServerRequest::getData()`.
 Qualquer dado de formulário que contenha um prefixo ``data`` terá esse prefixo de dados removido.
 Por exemplo::
 
@@ -195,7 +195,7 @@ de solicitação específicos do aplicativo::
     $isPost = $this->request->is('post');
 
 Você também pode estender os detectores de solicitação disponíveis, usando
-:php:meth:`\\Cake\\Http\\ServerRequest::addDetector()` para criar
+:php:meth:`Cake\\Http\\ServerRequest::addDetector()` para criar
 novos tipos de detectores. Existem quatro tipos diferentes de detectores
 que você pode criar:
 
@@ -249,9 +249,9 @@ Alguns exemplos seriam::
     );
 
 ``Request`` também inclui métodos como
-:php:meth:`\\Cake\\Http\\ServerRequest::domain()`,
-:php:meth:`\\Cake\\Http\\ServerRequest::subdomains()` e
-:php:meth:`\\Cake\\Http\\ServerRequest::host()` para ajudar aplicativos com subdomínios,
+:php:meth:`Cake\\Http\\ServerRequest::domain()`,
+:php:meth:`Cake\\Http\\ServerRequest::subdomains()` e
+:php:meth:`Cake\\Http\\ServerRequest::host()` para ajudar aplicativos com subdomínios,
 tenha uma vida um pouco mais fácil.
 
 Existem vários detectores embutidos que você pode usar:
@@ -441,7 +441,7 @@ Os cookies de solicitação podem ser lidos através de vários métodos::
     // Obter uma instância CookieCollection
     $cookies = $this->request->getCookieCollection()
 
-Consulte a documentação :php:class:`\\Cake\\Http\\Cookie\\CookieCollection`
+Consulte a documentação :php:class:`Cake\\Http\\Cookie\\CookieCollection`
 para saber como trabalhar com a coleção de cookies.
 
 Arquivos Enviados
@@ -482,14 +482,14 @@ Resposta
 
 .. php:class:: Response
 
-:php:class:`\\Cake\\Http\\Response` é a classe de resposta padrão no CakePHP.
+:php:class:`Cake\\Http\\Response` é a classe de resposta padrão no CakePHP.
 Ele encapsula vários recursos e funcionalidades para gerar respostas HTTP em
 seu aplicativo. Também auxilia nos testes, pois pode ser simulado/esboçado,
 permitindo que você inspecione os cabeçalhos que serão enviados. Como
-:php:class:`\\Cake\\Http\\ServerRequest`, :php:class:`\\Cake\\Http\\Response`
+:php:class:`Cake\\Http\\ServerRequest`, :php:class:`Cake\\Http\\Response`
 consolida uma série de métodos encontrados anteriormente em :php:class:`Controller`,
 :php:class:`RequestHandlerComponent` e :php:class:`Dispatcher`. Os métodos
-antigos são preteridos no uso de :php:class:`\\Cake\\Http\\Response`.
+antigos são preteridos no uso de :php:class:`Cake\\Http\\Response`.
 
 ``Response`` fornece uma interface para agrupar tarefas comuns
 relacionadas à resposta, como:
@@ -505,7 +505,7 @@ Lidando com Tipos de Conteúdo
 .. php:method:: withType($contentType = null)
 
 Você pode controlar o tipo de conteúdo das respostas do seu aplicativo com
-:php:meth:`\\Cake\\Http\\Response::withType()`. Se seu aplicativo precisar
+:php:meth:`Cake\\Http\\Response::withType()`. Se seu aplicativo precisar
 lidar com tipos de conteúdo que não estão embutidos no Response, você pode
 mapeá-los com ``type()`` também::
 
@@ -528,7 +528,7 @@ Enviando Arquivos
 .. php:method:: withFile($path, $options = [])
 
 Há momentos em que você deseja enviar arquivos como respostas para suas
-solicitações. Você pode fazer isso usando :php:meth:`\\Cake\\Http\\Response::withFile()`::
+solicitações. Você pode fazer isso usando :php:meth:`Cake\\Http\\Response::withFile()`::
 
     public function sendFile($id)
     {
@@ -542,8 +542,8 @@ solicitações. Você pode fazer isso usando :php:meth:`\\Cake\\Http\\Response::
 Como mostrado no exemplo acima, você deve passar o caminho do arquivo para o
 método. O CakePHP enviará um cabeçalho de tipo de conteúdo adequado se for um
 tipo de arquivo conhecido listado em `Cake\\Http\\Response::$_mimeTypes`.
-Você pode adicionar novos tipos antes de chamar :php:meth:`\\Cake\\Http\\Response::withFile()`
-usando o método :php:meth:`\\Cake\\Http\\Response::withType()`.
+Você pode adicionar novos tipos antes de chamar :php:meth:`Cake\\Http\\Response::withFile()`
+usando o método :php:meth:`Cake\\Http\\Response::withType()`.
 
 Se desejar, você também pode forçar o download de um arquivo em vez de ser
 exibido no navegador, especificando as opções::
@@ -598,7 +598,7 @@ Definindo Cabeçalhos
 
 .. php:method:: withHeader($header, $value)
 
-A configuração dos cabeçalhos é feita com o método :php:meth:`\\Cake\\Http\\Response::withHeader()`.
+A configuração dos cabeçalhos é feita com o método :php:meth:`Cake\\Http\\Response::withHeader()`.
 Como todos os métodos de interface PSR-7, esse método retorna uma instância *new* com o novo cabeçalho::
 
     // Adicionar/substituir um cabeçalho
@@ -614,7 +614,7 @@ Como todos os métodos de interface PSR-7, esse método retorna uma instância *
 Os cabeçalhos não são enviados quando definidos. Em vez disso, eles são mantidos
 até que a resposta seja emitida por ``Cake\Http\Server``.
 
-Agora você pode usar o método conveniente :php:meth:`\\Cake\\Http\\Response::withLocation()`
+Agora você pode usar o método conveniente :php:meth:`Cake\\Http\\Response::withLocation()`
 para definir diretamente ou obter o cabeçalho do local de redirecionamento.
 
 Definindo o Corpo
@@ -680,7 +680,7 @@ Interagindo com o Cache do Navegador
 .. php:method:: withDisabledCache()
 
 Às vezes, você precisa forçar os navegadores a não armazenar em cache os resultados
-de uma ação do controlador. :php:meth:`\\Cake\\Http\\Response::withDisabledCache()`
+de uma ação do controlador. :php:meth:`Cake\\Http\\Response::withDisabledCache()`
 é destinado apenas para isso::
 
     public function index()
@@ -697,7 +697,7 @@ de uma ação do controlador. :php:meth:`\\Cake\\Http\\Response::withDisabledCac
 .. php:method:: withCache($since, $time = '+1 day')
 
 Você também pode dizer aos clientes que deseja que eles armazenem respostas em cache.
-Usando :php:meth:`\\Cake\\Http\\Response::withCache()`::
+Usando :php:meth:`Cake\\Http\\Response::withCache()`::
 
     public function index()
     {
@@ -725,7 +725,7 @@ Em vez de forçar você a codificar a lógica para armazenar em cache e invalid�
 (atualizando) depois que os dados forem alterados, o HTTP usa dois modelos, expiração
 e validação, que geralmente são muito mais simples de usar.
 
-Além de usar :php:meth:`\\Cake\\Http\\Response::withCache()`, você também pode usar
+Além de usar :php:meth:`Cake\\Http\\Response::withCache()`, você também pode usar
 muitos outros métodos para ajustar os cabeçalhos de cache HTTP para tirar proveito
 do cache do navegador ou do proxy reverso.
 
@@ -876,7 +876,7 @@ o conteúdo da resposta e envia o cabeçalho `304 Not Modified`::
 Configurando Cookies
 --------------------
 
-Os cookies podem ser adicionados à resposta usando um array ou um objeto :php:class:`\\Cake\\Http\\Cookie\\Cookie`::
+Os cookies podem ser adicionados à resposta usando um array ou um objeto :php:class:`Cake\\Http\\Cookie\\Cookie`::
 
     use Cake\Http\Cookie\Cookie;
     use DateTime;

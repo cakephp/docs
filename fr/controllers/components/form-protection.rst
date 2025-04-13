@@ -22,8 +22,8 @@ avant ceux-ci dans votre méthode ``initialize()``.
     réécrire les attributs "name" des champs. Le Component FormProtection
     observe certains indicateurs créés et gérés par le FormHelper (en
     particulier ceux qui sont créés dans
-    :php:meth:`\\Cake\\View\\Helper\\FormHelper::create()` et
-    :php:meth:`\\Cake\\View\\Helper\\FormHelper::end()`). L'altération dynamique
+    :php:meth:`~Cake\\View\\Helper\\FormHelper::create()` et
+    :php:meth:`~Cake\\View\\Helper\\FormHelper::end()`). L'altération dynamique
     des champs soumis dans une requête POST (par exemple désactiver, supprimer
     ou créer de nouveaux champs via JavaScript) est susceptible d'entraîner
     l'échec de validation du jeton de formulaire.

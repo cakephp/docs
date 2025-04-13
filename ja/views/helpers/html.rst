@@ -403,7 +403,7 @@ HTML リンクを作成するための多目的なメソッドです。
     </a>
 
 また、さまざまな種類の URL の例については、
-:php:meth:`\\Cake\\View\\Helper\\UrlHelper::build()` メソッドをチェックしてください。
+:php:meth:`Cake\\View\\Helper\\UrlHelper::build()` メソッドをチェックしてください。
 
 動画と音声ファイルのリンク
 --------------------------
@@ -525,7 +525,7 @@ script タグの配列を使用すると、生成されたすべての script �
 インライン Javascript ブロックの作成
 ------------------------------------
 
-.. php:method:: scriptBlock($code, $options = [])
+.. php:method:: scriptBlock(string $code, array $options = [])
 
 PHP ビューコードから Javascript ブロックを生成するには、スクリプトブロックメソッドの1つを使用できます。
 スクリプトは、その場所で出力することも、ブロックにバッファリングすることもできます。 ::
@@ -536,7 +536,7 @@ PHP ビューコードから Javascript ブロックを生成するには、ス�
     // 後で出力するスクリプトブロックをバッファリング
     $this->Html->scriptBlock('alert("hi")', ['block' => true]);
 
-.. php:method:: scriptStart($options = [])
+.. php:method:: scriptStart(array $options = [])
 .. php:method:: scriptEnd()
 
 ``scriptStart()`` メソッドを使って、 ``<script>`` タグに出力するキャプチャーブロックを作成することができます。
@@ -816,7 +816,7 @@ HTML パラメーターを使用することができ、 特別なオプショ�
         'Home'
     );
 
-このメソッドはリストとその要素を生成するために :php:class:`\\Cake\\View\\Helper\\HtmlHelper::tag()`
+このメソッドはリストとその要素を生成するために :php:class:`Cake\\View\\Helper\\HtmlHelper::tag()`
 を使います。 :php:meth:`~Cake\\View\\Helper\\HtmlHelper::getCrumbs()` と同様に動作するので、
 全てのパンくずに追加されたオプションを使用できます。 ``$startText`` パラメーターを使って、
 最初のパンくずのリンクやテキストを提供することができます。

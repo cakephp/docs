@@ -360,7 +360,7 @@ fetch を使うとブロックが存在するかどうかによってブロッ�
         </head>
         // 残りのレイアウトが続きます
 
-:php:class:`\\Cake\\View\\Helper\\HtmlHelper` はスクリプトや CSS が入るブロックを
+:php:class:`Cake\\View\\Helper\\HtmlHelper` はスクリプトや CSS が入るブロックを
 制御することもできます。 ::
 
     // ビューファイルの中で

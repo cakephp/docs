@@ -6,7 +6,7 @@ Excluindo Dados
 .. php:class:: Table
     :noindex:
 
-.. php:method:: delete(Entity $entity, $options = [])
+.. php:method:: delete(EntityInterface $entity, array $options = [])
 
 Depois que você carregou uma entidade, você pode excluir ela chamando o
 o método delete da tabela de origem::
@@ -39,7 +39,7 @@ Exclusão em Cascata
 Ao excluir entidades, os dados associados também podem ser excluídos. Se suas
 associações HasOne e HasMany estão configurados como ``dependent``, as operações
 de exclusão serão 'cascate' para essas entidades também. Por padrão entidades
-em tabelas associadas são removidas usando :php:meth:`\\Cake\\ORM\\Table::deleteAll()`.
+em tabelas associadas são removidas usando :php:meth:`Cake\\ORM\\Table::deleteAll()`.
 Você pode optar que o ORM carregue as entidades relacionadas, para então
 excluir individualmente, definindo a opção ``cascadeCallbacks`` como ``true``::
 
@@ -66,7 +66,7 @@ Nesses casos, é mais eficiente usar uma exclusão em massa para remover várias
 linhas de uma vez só::
 
     // Exclui todos oss spam
-    function destroySpam()
+    public function destroySpam()
     {
         return $this->deleteAll(['is_spam' => true]);
     }
@@ -83,10 +83,10 @@ excluídas.
 Exclusões Estrita
 -----------------
 
-.. php:method:: deleteOrFail($entity, $options = [])
+.. php:method:: deleteOrFail(EntityInterface $entity, array $options = [])
 
 Usar esse método lançará uma
-:php:exc:`\\Cake\\ORM\\Exception\\PersistenceFailedException` se:
+:php:exc:`Cake\\ORM\\Exception\\PersistenceFailedException` se:
 
 * a entidade é nova
 * a entidade não tem valor de chave primária
@@ -102,5 +102,5 @@ Se você deseja rastrear a entidade que falhou ao salvar, você pode usar o mét
             echo $e->getEntity();
         }
 
-Como isso executa internamente uma chamada ao :php:meth:`\\Cake\\ORM\\Table::delete()`, todos eventos de exclusão
+Como isso executa internamente uma chamada ao :php:meth:`Cake\\ORM\\Table::delete()`, todos eventos de exclusão
 correspondentes serão disparados.

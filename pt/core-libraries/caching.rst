@@ -37,7 +37,7 @@ seu próprio back-end. Os mecanismos de armazenamento em cache integrados são:
 * ``Null`` O mecanismo nulo não armazena nada e falha em todas as operações de leitura.
 
 Independentemente do CacheEngine que você escolher, seu aplicativo interage com
-:php:class:`\\Cake\\Cache\\Cache`.
+:php:class:`Cake\\Cache\\Cache`.
 
 .. _cache-configuration:
 
@@ -110,7 +110,7 @@ Você também pode configurar os mecanismos de cache em tempo de execução::
     Cache::setConfig('other', $object);
 
 O nome dessas configurações de mecanismo ('curto' e 'longo') é usado como o parâmetro ``$config``
-para :php:meth:`\\Cake\\Cache\\Cache::write()` e :php:meth:`\\Cake\\Cache\\Cache::read()`. Ao configurar
+para :php:meth:`Cake\\Cache\\Cache::write()` e :php:meth:`Cake\\Cache\\Cache::read()`. Ao configurar
 mecanismos de cache, você pode consultar o nome da classe usando as seguintes sintaxes::
 
     // Nome curto (in App\ or Cake namespaces)
@@ -230,8 +230,8 @@ Remoção de Mecanismos de Cache Configurados
 .. php:staticmethod:: drop($key)
 
 Depois que uma configuração é criada, você não pode alterá-la. Em vez disso, você
-deve descartar a configuração e recriá-la usando :php:meth:`\\Cake\\Cache\\Cache::drop()` e
-:php:meth:`\\Cake\\Cache\\Cache::setConfig()`. Descartar um mecanismo de cache
+deve descartar a configuração e recriá-la usando :php:meth:`Cake\\Cache\\Cache::drop()` e
+:php:meth:`Cake\\Cache\\Cache::setConfig()`. Descartar um mecanismo de cache
 removerá a configuração e destruirá o adaptador, se ele tiver sido construído.
 
 Gravando em um Cache
@@ -448,7 +448,7 @@ Usando o Cache para Armazenar Resultados Comuns de Consulta
 
 Você pode melhorar bastante o desempenho do seu aplicativo colocando resultados
 que raramente mudam ou estão sujeitos a leituras pesadas no cache. Um exemplo
-perfeito disso são os resultados de :php:meth:`\\Cake\\ORM\\Table::find()`. O objeto
+perfeito disso são os resultados de :php:meth:`Cake\\ORM\\Table::find()`. O objeto
 Query permite armazenar resultados em cache usando o método ``cache()``. Veja a seção
 :ref:`caching-query-results` para mais informações.
 
@@ -551,7 +551,7 @@ As configurações de cache dos plugins precisam usar a sintaxe de pontos do plu
         // ...
     ]);
 
-Os mecanismos de cache personalizado devem estender :php:class:`\\Cake\\Cache\\CacheEngine`,
+Os mecanismos de cache personalizado devem estender :php:class:`Cake\\Cache\\CacheEngine`,
 que define vários métodos abstratos, além de fornecer alguns métodos de inicialização.
 
 A API necessária para um CacheEngine é

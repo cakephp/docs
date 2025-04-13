@@ -6,7 +6,7 @@ Deleting Data
 .. php:class:: Table
     :noindex:
 
-.. php:method:: delete(Entity $entity, $options = [])
+.. php:method:: delete(EntityInterface $entity, array $options = [])
 
 Once you've loaded an entity you can delete it by calling the originating
 table's delete method::
@@ -45,7 +45,7 @@ Cascading Deletes
 When deleting entities, associated data can also be deleted. If your HasOne and
 HasMany associations are configured as ``dependent``, delete operations will
 'cascade' to those entities as well. By default entities in associated tables
-are removed using :php:meth:`\\Cake\\ORM\\Table::deleteAll()`. You can elect to
+are removed using :php:meth:`Cake\\ORM\\Table::deleteAll()`. You can elect to
 have the ORM load related entities, and delete them individually by setting the
 ``cascadeCallbacks`` option to ``true``. A sample HasMany association with both
 these options enabled would be::
@@ -65,7 +65,7 @@ these options enabled would be::
 Bulk Deletes
 ------------
 
-.. php:method:: deleteMany($entities, $options = [])
+.. php:method:: deleteMany(iterable $entities, array $options = [])
 
 If you have an array of entities you want to delete you can use ``deleteMany()``
 to delete them in a single transaction::
@@ -86,7 +86,7 @@ In these cases it is more performant to use a bulk-delete to remove many rows at
 once::
 
     // Delete all the spam
-    function destroySpam()
+    public function destroySpam()
     {
         return $this->deleteAll(['is_spam' => true]);
     }
@@ -103,10 +103,10 @@ function returns the number of deleted records as an integer.
 Strict Deletes
 --------------
 
-.. php:method:: deleteOrFail($entity, $options = [])
+.. php:method:: deleteOrFail(EntityInterface $entity, array $options = [])
 
 Using this method will throw an
-:php:exc:`\\Cake\\ORM\\Exception\\PersistenceFailedException` if:
+:php:exc:`Cake\\ORM\\Exception\\PersistenceFailedException` if:
 
 * the entity is new
 * the entity has no primary key value
@@ -122,5 +122,5 @@ If you want to track down the entity that failed to delete, you can use the
             echo $e->getEntity();
         }
 
-As this internally performs a :php:meth:`\\Cake\\ORM\\Table::delete()` call, all
+As this internally performs a :php:meth:`Cake\\ORM\\Table::delete()` call, all
 corresponding delete events will be triggered.

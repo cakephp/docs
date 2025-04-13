@@ -34,8 +34,8 @@ avant ces components dans la méthode ``initialize()``.
     surcharger **aucun** des attributs des champs ' "name". Le component
     Security regarde certains indicateurs qui sont créés et gérés par le Helper
     form. (spécialement ceux créés dans
-    :php:meth:`\\Cake\\View\\Helper\\FormHelper::create()`) et
-    :php:meth:`\\Cake\\View\\Helper\\FormHelper::end()`). La modification
+    :php:meth:`~Cake\\View\\Helper\\FormHelper::create()`) et
+    :php:meth:`~Cake\\View\\Helper\\FormHelper::end()`). La modification
     dynamique des champs qui lui sont soumis dans une requête POST (ex.
     désactiver, effacer, créer des nouveaux champs via Javascript) est
     susceptible de déclencher un black-holing (envoi dans le trou noir) de la
@@ -43,7 +43,7 @@ avant ces components dans la méthode ``initialize()``.
 
     Vous devez toujours vérifier les méthodes HTTP utilisées avant d'exécuter
     d'autre code. Vous devez :ref:`vérifier la méthode HTTP <check-the-request>`
-    ou utiliser :php:meth:`\\Cake\\Http\\ServerRequest::allowMethod()` pour vous
+    ou utiliser :php:meth:`Cake\\Http\\ServerRequest::allowMethod()` pour vous
     assurer que la bonne méthode HTTP est utilisée.
 
 Gestion des callbacks Blackhole

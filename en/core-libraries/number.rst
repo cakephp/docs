@@ -109,7 +109,7 @@ Setting the Default Currency
 .. php:method:: setDefaultCurrency($currency)
 
 Setter for the default currency. This removes the need to always pass the
-currency to :php:meth:`\\Cake\\I18n\\Number::currency()` and change all
+currency to :php:meth:`Cake\\I18n\\Number::currency()` and change all
 currency outputs by setting other default. If ``$currency`` is set to ``null``,
 it will clear the currently stored value.
 
@@ -152,7 +152,7 @@ Formatting Percentages
 |                     | multiplied by 100. Useful for decimal percentages. |
 +---------------------+----------------------------------------------------+
 
-Like :php:meth:`\\Cake\\I18n\\Number::precision()`, this method formats a number
+Like :php:meth:`Cake\\I18n\\Number::precision()`, this method formats a number
 according to the supplied precision (where numbers are rounded to meet the
 given precision). This method also expresses the number as a percentage
 and appends the output with a percent sign. ::

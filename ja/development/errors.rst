@@ -24,8 +24,8 @@ CakePHP は PHP エラーと例外の両方を処理するために ``Cake\Error
 * ``exceptionRenderer`` - string - キャッチされなかった例外を描画する役目を担うクラス。
   もしもカスタムクラスを選択する場合は **src/Error** 中にそのクラスのファイルを置くべきです。
   このクラスは ``render()`` メソッドを実装する必要があります。
-* ``log`` - bool - ``true`` の時、 :php:class:`\\Cake\\Log\\Log` によって例外と
-  そのスタックトレースが  :php:class:`\\Cake\\Log\\Log` に記録されます。
+* ``log`` - bool - ``true`` の時、 :php:class:`Cake\\Log\\Log` によって例外と
+  そのスタックトレースが  :php:class:`Cake\\Log\\Log` に記録されます。
 * ``skipLog`` - array - ログに記録されるべきではない例外クラス名の配列。
   これは NotFoundException や他のありふれた、でもログにはメッセージを残したくない例外を
   除外するのに役立ちます。
@@ -435,7 +435,7 @@ logger::
 
 組み込みの例外処理を使うと、 **config/app.php** 中で ``log`` オプションに ``true`` を設定することで
 ErrorHandler によって対処されるすべての例外をログに記録することができます。
-これを有効にすることで :php:class:`\\Cake\\Log\\Log` と設定済みのロガーに各例外の記録が残るでしょう。
+これを有効にすることで :php:class:`Cake\\Log\\Log` と設定済みのロガーに各例外の記録が残るでしょう。
 
 .. note::
 
@@ -643,8 +643,8 @@ HTTP 関連の例外を投げることができます。例::
 
 .. php:exception:: PersistenceFailedException
 
-    :php:meth:`\\Cake\\ORM\\Table::saveOrFail()` や
-    :php:meth:`\\Cake\\ORM\\Table::deleteOrFail()` を使用しましたが、
+    :php:meth:`Cake\\ORM\\Table::saveOrFail()` や
+    :php:meth:`Cake\\ORM\\Table::deleteOrFail()` を使用しましたが、
     エンティティーは、保存/削除されませんでした。
 
 .. php:namespace:: Cake\Datasource\Exception

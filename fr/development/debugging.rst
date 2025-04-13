@@ -162,7 +162,7 @@ Utiliser les Logs pour Debugger
 ===============================
 
 Logger des messages est une autre bonne façon de debugger les applications,
-et vous pouvez utiliser :php:class:`\\Cake\\Log\\Log` pour faire le logging dans
+et vous pouvez utiliser :php:class:`Cake\\Log\\Log` pour faire le logging dans
 votre application. Tous les objets qui utilisent  ``LogTrait`` ont une méthode
 d'instanciation ``log()`` qui peut être utilisée pour logger les messages::
 
@@ -171,7 +171,7 @@ d'instanciation ``log()`` qui peut être utilisée pour logger les messages::
 Ce qui est au-dessus écrit ``Got here`` dans le log de debug. Vous pouvez
 utiliser les logs (log entries) pour faciliter le debug des méthodes qui
 impliquent des redirections ou des boucles compliquées. Vous pouvez aussi
-utiliser :php:meth:`\\Cake\\Log\\Log::write()`` pour écrire les messages de log.
+utiliser :php:meth:`Cake\\Log\\Log::write()`` pour écrire les messages de log.
 Cette méthode peut être appelée statiquement partout dans votre application où
 Log a été chargée::
 

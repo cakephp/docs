@@ -39,7 +39,7 @@ The App Controller
 
 As stated in the introduction, the ``AppController`` class is the parent class
 to all of your application's controllers.  ``AppController`` itself extends the
-:php:class:`\\Cake\\Controller\\Controller` class included in CakePHP.
+:php:class:`Cake\\Controller\\Controller` class included in CakePHP.
 ``AppController`` is defined in **src/Controller/AppController.php** as
 follows::
 
@@ -77,7 +77,7 @@ Request Flow
 ============
 
 When a request is made to a CakePHP application, CakePHP's
-:php:class:`\\Cake\\Routing\\Router` and :php:class:`\\Cake\\Routing\\Dispatcher`
+:php:class:`Cake\\Routing\\Router` and :php:class:`Cake\\Routing\\Dispatcher`
 classes use :ref:`routes-configuration` to find and create the correct
 controller instance. The request data is encapsulated in a request object.
 CakePHP puts all of the important request information into the ``$this->request``
@@ -130,7 +130,7 @@ once a controller action has completed, CakePHP will handle rendering and
 delivering the View.
 
 If for some reason you'd like to skip the default behavior, you can return a
-:php:class:`\\Cake\\Http\\Response` object from the action with the fully
+:php:class:`Cake\\Http\\Response` object from the action with the fully
 created response.
 
 In order for you to use a controller effectively in your own application, we'll
@@ -548,7 +548,7 @@ methods are implemented by your controllers
     Called during the ``Controller.beforeRender`` event which occurs after
     controller action logic, but before the view is rendered. This callback is
     not used often, but may be needed if you are calling
-    :php:meth:`\\Cake\\Controller\\Controller::render()` manually before the end
+    :php:meth:`Cake\\Controller\\Controller::render()` manually before the end
     of a given action.
 
 .. php:method:: afterFilter(EventInterface $event)

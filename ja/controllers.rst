@@ -34,7 +34,7 @@ AppController
 
 冒頭で述べたように、 ``AppController`` クラスはアプリケーションのすべてのコントローラーの
 親クラスとなります。 ``AppController`` はそれ自身、CakePHP のコアライブラリーに含まれる
-:php:class:`\\Cake\\Controller\\Controller` クラスを継承しています。
+:php:class:`Cake\\Controller\\Controller` クラスを継承しています。
 ``AppController`` は **src/Controller/AppController.php** に次のように定義されます。 ::
 
     namespace App\Controller;
@@ -70,8 +70,8 @@ AppController
 リクエストの流れ
 ================
 
-CakePHP アプリケーションへのリクエストが生じると、 CakePHP の :php:class:`\\Cake\\Routing\\Router`
-と :php:class:`\\Cake\\Routing\\Dispatcher` クラスは正しいコントローラーを見つけて、
+CakePHP アプリケーションへのリクエストが生じると、 CakePHP の :php:class:`Cake\\Routing\\Router`
+と :php:class:`Cake\\Routing\\Dispatcher` クラスは正しいコントローラーを見つけて、
 インスタンスを作成するために :ref:`routes-configuration` を使用します。
 リクエストデータはリクエストオブジェトの中にカプセル化されています。
 CakePHP はすべての重要なリクエスト情報を ``$this->request`` プロパティーの中に格納します。
@@ -119,7 +119,7 @@ CakePHP の規約に従うと、手動でビューを描画したり生成した
 代わりに、コントローラーのアクションが完了すると、CakePHP はビューの描画と送信をします。
 
 もし何らかの理由でデフォルトの動作をスキップさせたければ、完全にレスポンスを作成して、
-アクションから :php:class:`\\Cake\\Http\\Response` オブジェクトを返すこともできます。
+アクションから :php:class:`Cake\\Http\\Response` オブジェクトを返すこともできます。
 
 アプリケーションでコントローラーを効率的に使うために、CakePHP のコントローラーから提供される
 いくつかのコアな属性やメソッドを説明しましょう。
@@ -264,12 +264,12 @@ AJAX 呼び出しではとても有用です。 ::
 
 .. php:method:: viewClasses()
 
-コントローラは、サポートするビュークラスの一覧を定義することができます。
-コントローラのアクションが完了すると、 CakePHP はビューリストを使用して
+コントローラーは、サポートするビュークラスの一覧を定義することができます。
+コントローラーのアクションが完了すると、 CakePHP はビューリストを使用して
 content-typeのネゴシエーション（コンテントタイプの取り決め）を実行します。
-これにより、アプリケーションは同じコントローラアクションを再利用してHTML ビューをレンダリングしたり
+これにより、アプリケーションは同じコントローラーアクションを再利用してHTML ビューをレンダリングしたり
 JSONやXML のレスポンスをレンダリングしたりすることができるようになります。
-コントローラにサポートするビュークラスのリストを定義するには、 ``viewClasses()`` メソッドを使用します。::
+コントローラーにサポートするビュークラスのリストを定義するには、 ``viewClasses()`` メソッドを使用します。::
 
     namespace App\Controller;
 
@@ -541,7 +541,7 @@ CakePHP のコントローラーはリクエストのライフサイクル周り
     コントローラーのアクションロジックの後、ビューが描画される前に発動する
     ``Controller.beforeRender`` イベント中に呼ばれます。
     このコールバックはそれほど使われませんが、もしアクション終了前に
-    :php:meth:`\\Cake\\Controller\\Controller::render()` を手動で呼んでいれば
+    :php:meth:`~Cake\\Controller\\Controller::render()` を手動で呼んでいれば
     必要になるかもしれません。
 
 .. php:method:: afterFilter(EventInterface $event)

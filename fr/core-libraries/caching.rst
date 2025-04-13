@@ -44,7 +44,7 @@ votre propre système de mise en cache. Les moteurs de cache intégrés sont:
   opérations atomiques.
 
 Quelque soit le moteur de cache que vous choisirez d'utiliser, votre
-application interagit avec :php:class:`\\Cake\\Cache\\Cache` de manière cohérente.
+application interagit avec :php:class:`Cake\\Cache\\Cache` de manière cohérente.
 Cela signifie que vous pouvez aisément permuter les moteurs de cache en fonction
 de l'évolution de votre application.
 
@@ -133,8 +133,8 @@ Vous pouvez également configurer les moteurs de cache pendant l'exécution::
 En insérant le code ci-dessus dans votre **config/app.php** vous
 aurez deux configurations de cache supplémentaires. Le nom de ces
 configurations 'short' ou 'long' est utilisé comme paramètre ``$config``
-pour :php:meth:`\\Cake\\Cache\\Cache::write()` et
-:php:meth:`\\Cake\\Cache\\Cache::read()`. Lors de la configuration des moteurs
+pour :php:meth:`Cake\\Cache\\Cache::write()` et
+:php:meth:`Cake\\Cache\\Cache::read()`. Lors de la configuration des moteurs
 de cache, vous pouvez vous référer au nom de la classe en utilisant les
 syntaxes suivantes:
 
@@ -189,8 +189,8 @@ Suppression de Configuration de Cache
 
 Une fois la configuration créée, vous ne pouvez pas la changer. Au lieu de
 cela, vous devriez supprimer la configuration et la re-créer à l'aide de
-:php:meth:`\\Cake\\Cache\\Cache::drop()` et
-:php:meth:`\\Cake\\Cache\\Cache::config()`.
+:php:meth:`Cake\\Cache\\Cache::drop()` et
+:php:meth:`Cake\\Cache\\Cache::config()`.
 Supprimer un moteur de cache va supprimer la configuration et détruire
 l'adaptateur s'il a été construit.
 
@@ -407,7 +407,7 @@ Vous pouvez considérablement améliorer les performances de votre application e
 mettant dans le cache les résultats qui changent rarement, ou qui sont soumis à
 de nombreuses lectures.
 Un exemple parfait serait les résultats de
-:php:meth:`\\Cake\\ORM\\Table::find()`. l'objet Query vous permet de mettre les
+:php:meth:`Cake\\ORM\\Table::find()`. l'objet Query vous permet de mettre les
 résultats en cache en utilisant la méthode ``cache``. Voir la section
 :ref:`mettre les résultats de requête en cache <caching-query-results>` pour
 plus d'information.
@@ -518,7 +518,7 @@ notation par points de plugin::
     ]);
 
 Les moteurs de cache personnalisés doivent étendre
-:php:class:`\\Cake\\Cache\\CacheEngine` qui définit un certain nombre de méthodes
+:php:class:`Cake\\Cache\\CacheEngine` qui définit un certain nombre de méthodes
 d'abstraction ainsi que quelques méthodes d'initialisation.
 
 L'API requise pour CacheEngine est

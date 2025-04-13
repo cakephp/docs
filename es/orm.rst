@@ -50,7 +50,7 @@ adicionales deberiamos agregar las siguientes líneas en **src/Model/Table/Artic
     }
 
 Las clases Table usan una version en CamelCase del nombre de la tabla, con el sufijo ``Table``.
-Una vez que tu clase fue creada, puedes obtener una referencia a esta usando :php:class:`\\Cake\\ORM\\TableRegistry` como antes::
+Una vez que tu clase fue creada, puedes obtener una referencia a esta usando :php:class:`~Cake\\ORM\\TableRegistry` como antes::
 
     use Cake\ORM\TableRegistry;
 

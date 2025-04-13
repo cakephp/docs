@@ -104,7 +104,7 @@ Configurar la Moneda Predeterminada
 .. php:method:: setDefaultCurrency($currency)
 
 Configura la moneda predeterminada. Esto evita la necesidad de pasar siempre la
-moneda a :php:meth:`\\Cake\\I18n\\Number::currency()` y cambiar todas las
+moneda a :php:meth:`Cake\\I18n\\Number::currency()` y cambiar todas las
 salidas de moneda configurando otro valor predeterminado. Si ``$currency`` se establece en ``null``,
 se eliminará el valor almacenado actualmente.
 
@@ -146,7 +146,7 @@ Formato de Porcentajes
 |                     | decimales.                                         |
 +---------------------+----------------------------------------------------+
 
-Al igual que :php:meth:`\\Cake\\I18n\\Number::precision()`, este método formatea un número
+Al igual que :php:meth:`Cake\\I18n\\Number::precision()`, este método formatea un número
 según la precisión proporcionada (donde los números se redondean para cumplir con la
 precisión dada). Adicionalmente, también expresa el número como un porcentaje
 y agrega un signo de porcentaje a la salida. ::

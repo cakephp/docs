@@ -140,7 +140,7 @@ El XML procesado terminará pareciéndose a esto::
 Crear la lógica para la acción de edición es un poco más complicado, pero no mucho.
 Ya que se está proporcionando una API que genera XML como salida, es una opción natural
 recibir XML como entrada. No te preocupes, las clases :php:class:`Cake\\Controller\\Component\\RequestHandler`
-y :php:class:`\\Cake\\Routing\\Router` hacen las cosas mucho más fáciles. Si un POST o
+y :php:class:`Cake\\Routing\\Router` hacen las cosas mucho más fáciles. Si un POST o
 una solicitud PUT tiene un tipo de contenido XML, entonces la entrada se ejecuta a través de la clase de CakePHP
 :php:class:`Xml`, y la representación del arreglo de los datos se asigna a ``$this->request->getData()``.
 Debido a esta característica, el manejo de datos XML y POST se hace en continuamente en paralelo: no se

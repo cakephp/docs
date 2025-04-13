@@ -47,7 +47,7 @@ SQL インジェクション攻撃から守っています。
         debug($article->title);
     }
 
-以降の例では ``$articles`` は :php:class:`\\Cake\\ORM\\Table` であると想定します。
+以降の例では ``$articles`` は :php:class:`~Cake\\ORM\\Table` であると想定します。
 なお、コントローラーの中では ``$articles`` の代わりに ``$this->Articles`` を使うことができます。
 
 ``Query`` オブジェクトのほとんどのメソッドが自分自身のクエリーオブジェクトを返します。
@@ -1270,7 +1270,7 @@ join を作成する際には ``join()`` だけでなく、``rightJoin()``、 ``
         ])
         ->execute();
 
-通常は、エンティティーを使い、 :php:meth:`\\Cake\\ORM\\Table::save()` でデータを
+通常は、エンティティーを使い、 :php:meth:`~Cake\\ORM\\Table::save()` でデータを
 insert するほうが簡単です。また、``SELECT`` と ``INSERT`` を一緒に構築すれば、
 ``INSERT INTO ... SELECT`` スタイルのクエリーを作成することができます。 ::
 
@@ -1321,7 +1321,7 @@ update するほうが簡単です。
         ->where(['id' => $id])
         ->execute();
 
-通常は、エンティティーを使い、 :php:meth:`\\Cake\\ORM\\Table::delete()` でデータを
+通常は、エンティティーを使い、 :php:meth:`~Cake\\ORM\\Table::delete()` でデータを
 delete するほうが簡単です。
 
 SQL インジェクションを防止する

@@ -110,7 +110,7 @@ Definição da moeda padrão
 .. php:method:: setDefaultCurrency($currency)
 
 Atribui a moeda padrão. Isso elimina a necessidade de sempre passar a moeda
-para :php:meth:`\\Cake\\I18n\\Number::currency()` e alterar todas as saídas de
+para :php:meth:`Cake\\I18n\\Number::currency()` e alterar todas as saídas de
 moeda definindo outro padrão. Se ``$currency`` atribuído o valor ``null``,
 ele apagará o valor armazenado no momento.
 
@@ -152,7 +152,7 @@ Formatação de Porcentagens
 |                     | multiplicado por 100. Útil para porcentagens decimais. |
 +---------------------+--------------------------------------------------------+
 
-Da mesma forma :php:meth:`\\Cake\\I18n\\Number::precision()`, ste método formata um
+Da mesma forma :php:meth:`Cake\\I18n\\Number::precision()`, ste método formata um
 número de acordo com a precisão fornecida (onde os números são arredondados para
 atender à precisão fornecida). Este método também expressa o número como uma
 porcentagem e anexa a saída com um sinal de porcentagem. ::

@@ -36,7 +36,7 @@ build your own backend. The built-in caching engines are:
   operations.
 
 Regardless of the CacheEngine you choose to use, your application interacts with
-:php:class:`\\Cake\\Cache\\Cache`.
+:php:class:`Cake\\Cache\\Cache`.
 
 .. _cache-configuration:
 
@@ -110,8 +110,8 @@ You can also configure Cache engines at runtime::
     Cache::setConfig('other', $object);
 
 The name of these engine configurations ('short' and 'long') are used as the ``$config``
-parameter for :php:meth:`\\Cake\\Cache\\Cache::write()` and
-:php:meth:`\\Cake\\Cache\\Cache::read()`. When configuring cache engines you can
+parameter for :php:meth:`Cake\\Cache\\Cache::write()` and
+:php:meth:`Cake\\Cache\\Cache::read()`. When configuring cache engines you can
 refer to the class name using the following syntaxes::
 
     // Short name (in App\ or Cake namespaces)
@@ -243,8 +243,8 @@ Removing Configured Cache Engines
 .. php:staticmethod:: drop($key)
 
 Once a configuration is created you cannot change it. Instead you should drop
-the configuration and re-create it using :php:meth:`\\Cake\\Cache\\Cache::drop()` and
-:php:meth:`\\Cake\\Cache\\Cache::setConfig()`. Dropping a cache engine will remove
+the configuration and re-create it using :php:meth:`Cake\\Cache\\Cache::drop()` and
+:php:meth:`Cake\\Cache\\Cache::setConfig()`. Dropping a cache engine will remove
 the config and destroy the adapter if it was constructed.
 
 Writing to a Cache
@@ -488,7 +488,7 @@ Using Cache to Store Common Query Results
 You can greatly improve the performance of your application by putting results
 that infrequently change, or that are subject to heavy reads into the cache.
 A perfect example of this are the results from
-:php:meth:`\\Cake\\ORM\\Table::find()`. The Query object allows you to cache
+:php:meth:`Cake\\ORM\\Table::find()`. The Query object allows you to cache
 results using the ``cache()`` method. See the :ref:`caching-query-results` section
 for more information.
 
@@ -594,7 +594,7 @@ dot syntax::
         // ...
     ]);
 
-Custom Cache engines must extend :php:class:`\\Cake\\Cache\\CacheEngine` which
+Custom Cache engines must extend :php:class:`Cake\\Cache\\CacheEngine` which
 defines a number of abstract methods as well as provides a few initialization
 methods.
 

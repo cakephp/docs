@@ -275,7 +275,7 @@ Acessando Conexões
 .. php:staticmethod:: get($name)
 
 Uma vez configurada, as conexões podem ser obtidas usando
-:php:meth:`\\Cake\\Datasource\\ConnectionManager::get()`. Este método irá construir
+:php:meth:`Cake\\Datasource\\ConnectionManager::get()`. Este método irá construir
 e carregar uma conexão se não tiver sido construído antes ou retornar a conexão
 conhecida existente::
 
@@ -336,12 +336,12 @@ binary
     Mapeia para os tipos BLOB ou BYTEA fornecido pelo banco de dados.
 date
     Mapeia para o tipo de coluna DATE de fuso horario nativo. O valor de retorno
-    desse tipo de coluna é :php:class:`\\Cake\\I18n\\Date` que estende a classe
+    desse tipo de coluna é :php:class:`Cake\\I18n\\Date` que estende a classe
     nativa ``DateTime``.
 datetime
     Mapeia para o tipo de coluna DATETIME de fuso horario nativo. No PostgreSQL
     e no SQL Server, isso se transforma em um tipo TIMESTAMP. O valor de retorno
-    padrão desse tipo de coluna é :php:class:`\\Cake\\I18n\\Date` que estende a classe
+    padrão desse tipo de coluna é :php:class:`Cake\\I18n\\Date` que estende a classe
     nativa ``DateTime`` e `Chronos <https://github.com/cakephp/chronos>`_.
 timestamp
     Mapeia para o tipo TIMESTAMP.
@@ -878,7 +878,7 @@ usando o método ``logQueries``::
     $connection->logQueries(false);
 
 Quando o log de consultas está habilitado, as consultas serão logadas em
-:php:class:`\\Cake\\Log\\Log` usando o nível 'debug', e o escopo 'queriesLog'.
+:php:class:`Cake\\Log\\Log` usando o nível 'debug', e o escopo 'queriesLog'.
 Você precisará ter um logger configurado para capturar esse nível e escopo.
 Logar no ``stderr`` pode ser útil quando se estiver trabalhando com testes
 de unidade e logar em arquivos/syslog pode ser útil ao trabalhar com

@@ -266,7 +266,7 @@ Primero necesitamos crear nuestra clase personalizada y ponerla en **src/Http/Se
     }
 
 Nuestra clase extiende el ``DatabaseSession`` incorporado para no tener que duplicar toda su lógica y comportamiento. Envolvemos
-cada operación con una operación de :php:class:`\\Cake\\Cache\\Cache`. Esto nos permite obtener sesiones de la caché rápida y no
+cada operación con una operación de :php:class:`Cake\\Cache\\Cache`. Esto nos permite obtener sesiones de la caché rápida y no
 tener que preocuparnos por lo que sucede cuando llenamos la caché. En **config/app.php** haz que el bloque de sesión se vea así::
 
     'Session' => [

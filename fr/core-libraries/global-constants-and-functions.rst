@@ -95,7 +95,7 @@ la traduction de contenu.
 
 .. php:function:: collection(mixed $items)
 
-    Vous permet d'instancier un objet :php:class:`\\Cake\\Collection\\Collection`
+    Vous permet d'instancier un objet :php:class:`Cake\\Collection\\Collection`
     et wrap l'argument passé. le paramètre ``$items`` accepte soit un objet
     ``Traversable`` soit un tableau.
 

@@ -498,7 +498,7 @@ les règles pour le mode 'create' mode. Si vous voulez appliquer les règles
     :php:meth:`~Cake\\ORM\\Table::newEntities()`,
     :php:meth:`~Cake\\ORM\\Table::patchEntity()`,
     :php:meth:`~Cake\\ORM\\Table::patchEntities()` or
-    :php:meth:`\\Cake\\ORM\\Table::save()` puisqu'elles ont été créées pour cela.
+    :php:meth:`~Cake\\ORM\\Table::save()` puisqu'elles ont été créées pour cela.
 
 Valider les Entities
 ====================

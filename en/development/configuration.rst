@@ -26,7 +26,7 @@ configuration that doesn't vary across the various environments your application
 is deployed in. The **config/app_local.php** file should contain the
 configuration data that varies between environments and should be managed by
 configuration management, or your deployment tooling. Both of these files reference environment variables
-through the ``env()`` function that enables configuration values to set though
+through the ``env()`` function that enables configuration values to set through
 the server environment.
 
 Loading Additional Configuration Files
@@ -362,7 +362,7 @@ If ``$key`` is left null, all values in Configure will be returned.
 
 .. php:staticmethod:: readOrFail($key)
 
-Reads configuration data just like :php:meth:`\\Cake\\Core\\Configure::read()`
+Reads configuration data just like :php:meth:`Cake\\Core\\Configure::read()`
 but expects to find a key/value pair. In case the requested pair does not
 exist, a :php:class:`RuntimeException` will be thrown::
 
@@ -402,7 +402,7 @@ combine reading and deleting values in a single operation.
 
 .. php:staticmethod:: consumeOrFail($key)
 
-Consumes configuration data just like :php:meth:`\\Cake\\Core\\Configure::consume()`
+Consumes configuration data just like :php:meth:`Cake\\Core\\Configure::consume()`
 but expects to find a key/value pair. In case the requested pair does not
 exist, a :php:class:`RuntimeException` will be thrown::
 

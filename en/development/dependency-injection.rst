@@ -202,7 +202,7 @@ elsewhere::
 Tagging Services
 ----------------
 
-By tagging services you can get have all of those services resolved at the same
+By tagging services you can get all of those services resolved at the same
 time. This can be used to build services that combine collections of other
 services like in a reporting system::
 

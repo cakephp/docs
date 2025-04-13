@@ -16,7 +16,7 @@ En CakePHP, el almacenamiento en caché se facilita mediante la clase ``Cache``.
 - ``Array``: almacena todos los datos en una matriz. Este motor no proporciona almacenamiento persistente y está destinado a su uso en suites de pruebas de aplicaciones.
 - ``Null``: el motor nulo en realidad no almacena nada y falla en todas las operaciones de lectura.
 
-Independientemente del motor de caché que elijas usar, tu aplicación interactúa con :php:class:`\\Cake\\Cache\\Cache`.
+Independientemente del motor de caché que elijas usar, tu aplicación interactúa con :php:class:`Cake\\Cache\\Cache`.
 
 .. _cache-configuration:
 
@@ -83,8 +83,8 @@ También puedes configurar los motores de caché en tiempo de ejecución::
     Cache::setConfig('otro', $objeto);
 
 Los nombres de estas configuraciones de motor ('short' y 'long') se utilizan como el parámetro ``$config``
-para :php:meth:`\\Cake\\Cache\\Cache::write()` y
-:php:meth:`\\Cake\\Cache\\Cache::read()`. Al configurar los motores de caché, puedes
+para :php:meth:`Cake\\Cache\\Cache::write()` y
+:php:meth:`Cake\\Cache\\Cache::read()`. Al configurar los motores de caché, puedes
 referenciar el nombre de la clase utilizando las siguientes sintaxis::
 
     // Nombre corto (en App\ o en los espacios de nombres de Cake)
@@ -203,8 +203,8 @@ Eliminación de Motores de Caché Configurados
 .. php:staticmethod:: drop($clave)
 
 Una vez que se crea una configuración, no puedes cambiarla. En su lugar, debes eliminar
-la configuración y volver a crearla usando :php:meth:`\\Cake\\Cache\\Cache::drop()` y
-:php:meth:`\\Cake\\Cache\\Cache::setConfig()`. Eliminar un motor de caché eliminará
+la configuración y volver a crearla usando :php:meth:`Cake\\Cache\\Cache::drop()` y
+:php:meth:`Cake\\Cache\\Cache::setConfig()`. Eliminar un motor de caché eliminará
 la configuración y destruirá el adaptador si se construyó.
 
 Escritura en Caché
@@ -443,7 +443,7 @@ Utilizando la Caché para Almacenar Resultados Comunes de Consultas
 
 Puedes mejorar significativamente el rendimiento de tu aplicación almacenando en caché los resultados
 que rara vez cambian o que están sujetos a lecturas frecuentes. Un ejemplo perfecto de esto son los resultados de
-:php:meth:`\\Cake\\ORM\\Table::find()`. El objeto de consulta te permite almacenar en caché
+:php:meth:`Cake\\ORM\\Table::find()`. El objeto de consulta te permite almacenar en caché
 los resultados utilizando el método ``cache()``. Consulta la sección :ref:`caching-query-results`
 para obtener más información.
 
@@ -529,7 +529,7 @@ Puedes proporcionar motores de ``Cache`` personalizados en ``App\Cache\Engine``,
         // ...
     ]);
 
-Los motores de caché personalizados deben extender :php:class:`\\Cake\\Cache\\CacheEngine`, que define varios métodos abstractos y también proporciona algunos métodos de inicialización.
+Los motores de caché personalizados deben extender :php:class:`Cake\\Cache\\CacheEngine`, que define varios métodos abstractos y también proporciona algunos métodos de inicialización.
 
 La API requerida para un CacheEngine es
 

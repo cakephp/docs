@@ -62,7 +62,7 @@ abertura ``<?php``::
 
 Classes de tabela usam a versão CamelCased do nome da tabela com o sufixo
 ``Table`` como o nome da classe. Uma vez que sua classe fora criada, você recebe
-uma referência para esta utilizando o :php:class:`\\Cake\\ORM\\TableRegistry`
+uma referência para esta utilizando o :php:class:`~Cake\\ORM\\TableRegistry`
 como antes::
 
     use Cake\ORM\TableRegistry;

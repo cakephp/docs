@@ -167,7 +167,7 @@ importante quando estamos obtendo resultados com chaves possivelmente duplicadas
 Ao usar ``toList()``, garantimos a obtenção de todos os valores, mesmo que haja
 chaves duplicadas.
 
-Ao contrário de :php:meth:`\\Cake\\Utility\\Hash::extract()` este método suporta
+Ao contrário de :php:meth:`Cake\\Utility\\Hash::extract()` este método suporta
 apenas o curinga ``{*}``. Todos os outros correspondentes de curinga e atributos
 não são suportados.
 
