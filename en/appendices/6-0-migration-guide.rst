@@ -26,6 +26,7 @@ Datasource
 
 - ``Datasource/Paging/PaginatedInterface`` now extends ``IteratorAggregate``
   instead of ``Traversable``.
+- ``EntityTrait::isEmpty()`` has been dropped in favor of ``hasValue()``.
 
 ORM
 ---
