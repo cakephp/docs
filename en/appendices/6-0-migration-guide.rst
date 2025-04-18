@@ -27,6 +27,12 @@ Datasource
 - ``Datasource/Paging/PaginatedInterface`` now extends ``IteratorAggregate``
   instead of ``Traversable``.
 
+Http
+----
+
+- Using `$request->getParam('?')` to get the query params is no longer possible.
+  Use `$request->getQueryParams()` instead.
+
 ORM
 ---
 
