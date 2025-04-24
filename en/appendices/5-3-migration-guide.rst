@@ -42,4 +42,7 @@ ORM
 New Features
 ============
 
-TODO
+Valiation
+---------
+
+- ``ipOrRange()`` validation has has been added to check for an IP or a range (subnet).
