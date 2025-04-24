@@ -132,7 +132,7 @@ You can check if fields are defined in your entities with ``has()``::
     $article->has('undefined'); // false
 
 The ``has()`` method will return ``true`` if a field is defined. You can use
-``isEmpty()`` and ``hasValue()`` to check if a field contains a 'non-empty'
+``hasValue()`` to check if a field contains a 'non-empty'
 value::
 
     $article = new Article([
@@ -142,19 +142,15 @@ value::
         'links' => [],
     ]);
     $article->has('title'); // true
-    $article->isEmpty('title');  // false
     $article->hasValue('title'); // true
 
     $article->has('user_id'); // true
-    $article->isEmpty('user_id');  // true
     $article->hasValue('user_id'); // false
 
     $article->has('text'); // true
-    $article->isEmpty('text');  // true
     $article->hasValue('text'); // false
 
     $article->has('links'); // true
-    $article->isEmpty('links');  // true
     $article->hasValue('links'); // false
 
 If you often partially load entities you should enable strict-property access
