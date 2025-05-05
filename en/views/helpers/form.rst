@@ -2204,7 +2204,7 @@ Displaying validation messages in HTML5 validity messages
 .. versionadded:: 3.7.0
 
 If the ``autoSetCustomValidity`` FormHelper option is set to ``true``, error messages for
-the field's required and notBlank validation rules will be used in lieu of the default
+the field's required and notBlank validation rules will be used instead of the default
 browser HTML5 required messages. Enabling the option will add the ``onvalid`` and ``oninvalid``
 event attributes to your fields, for example::
 
