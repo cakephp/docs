@@ -132,8 +132,7 @@ You can check if fields are defined in your entities with ``has()``::
     $article->has('undefined'); // false
 
 The ``has()`` method will return ``true`` if a field is defined. You can use
-``hasValue()`` to check if a field contains a 'non-empty'
-value::
+``hasValue()`` to check if a field contains a 'non-empty' value::
 
     $article = new Article([
         'title' => 'First post',
@@ -567,7 +566,7 @@ field that should be exposed::
 
     class User extends Entity
     {
-        protected $_virtual = ['full_name'];
+        protected array $_virtual = ['full_name'];
     }
 
 This list can be modified at runtime using the ``setVirtual()`` method::

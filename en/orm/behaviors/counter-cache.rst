@@ -173,13 +173,13 @@ for all records of one or all configured associations in batches. This can be us
 for example, to update the counter cache after importing data directly into the database.::
 
     // Update the counter cache for all configured associations
-    $table->updateCounterCache();
+    $table->getBehavior('CounterCache')->updateCounterCache();
 
     // Update the counter cache for a specific association, 200 records per batch
-    $table->updateCounterCache('Articles', 200);
+    $table->getBehavior('CounterCache')->updateCounterCache('Articles', 200);
 
     // Update only the first page of records
-    $table->updateCounterCache('Articles', page: 1);
+    $table->getBehavior('CounterCache')->updateCounterCache('Articles', page: 1);
 
 .. versionadded:: 5.2.0
 

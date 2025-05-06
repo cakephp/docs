@@ -350,7 +350,7 @@ modifying the application's state. For these scenarios use the behavior's
     I18n::setLocale('en'); // reset for illustration
 
     // specific locale.
-    $this->Articles->setLocale('es');
+    $this->Articles->getBehavior('Translate')->setLocale('es');
 
     $article = $this->Articles->get(12);
     echo $article->title; // Echoes 'Un Artículo', yay piece of cake!
@@ -361,8 +361,8 @@ to call the method on each table, for example::
 
     I18n::setLocale('en'); // reset for illustration
 
-    $this->Articles->setLocale('es');
-    $this->Articles->Categories->setLocale('es');
+    $this->Articles->getBehavior('Translate')->setLocale('es');
+    $this->Articles->Categories->getBehavior('Translate')->setLocale('es');
 
     $data = $this->Articles->find('all', contain: ['Categories']);
 
@@ -375,9 +375,9 @@ Querying Translated Fields
 TranslateBehavior does not substitute find conditions by default. You need to use
 ``translationField()`` method to compose find conditions on translated fields::
 
-    $this->Articles->setLocale('es');
+    $this->Articles->getBehavior('Translate')->setLocale('es');
     $query = $this->Articles->find()->where([
-        $this->Articles->translationField('title') => 'Otro Título'
+        $this->Articles->getBehavior('Translate')->translationField('title') => 'Otro Título'
     ]);
 
 Saving in Another Language
@@ -442,7 +442,7 @@ default language directly to the table::
 
     $article->title = 'Mi Primer Artículo';
 
-    $this->Articles->setLocale('es');
+    $this->Articles->getBehavior('Translate')->setLocale('es');
     $this->Articles->save($article);
 
 Setting the language directly in the table is useful when you need to both

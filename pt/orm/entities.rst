@@ -496,9 +496,7 @@ virtuais que devem ser expostas::
 
     class User extends Entity
     {
-
-        protected $_virtual = ['full_name'];
-
+        protected array $_virtual = ['full_name'];
     }
 
 Esta lista pode ser modificada em tempo de execução usando o método

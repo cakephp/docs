@@ -510,7 +510,7 @@ An example table would be::
               ],
           ],
        ],
-       // More tables.
+       // More tables
     ];
 
 The options available to ``columns``, ``indexes`` and ``constraints`` match the
@@ -535,36 +535,6 @@ To load a SQL dump file you can use the following::
 
 At the beginning of each test run ``SchemaLoader`` will drop all tables in the
 connection and rebuild tables based on the provided schema file.
-
-.. _fixture-state-management:
-
-Fixture State Managers
-----------------------
-
-By default CakePHP resets fixture state at the end of each test by truncating
-all the tables in the database. This operation can become expensive as your
-application grows. By using ``TransactionStrategy`` each test method will be run
-inside a transaction that is rolled back at the end of the test. This can yield
-improved performance but requires your tests not heavily rely on static fixture
-data, as auto-increment values are not reset before each test.
-
-The fixture state management strategy can be defined within the test case::
-
-    use Cake\TestSuite\TestCase;
-    use Cake\TestSuite\Fixture\FixtureStrategyInterface;
-    use Cake\TestSuite\Fixture\TransactionStrategy;
-
-    class ArticlesTableTest extends TestCase
-    {
-        /**
-         * Create the fixtures strategy used for this test case.
-         * You can use a base class/trait to change multiple classes.
-         */
-        protected function getFixtureStrategy(): FixtureStrategyInterface
-        {
-            return new TransactionStrategy();
-        }
-    }
 
 Creating Fixtures
 -----------------
@@ -743,6 +713,46 @@ You can also directly include fixtures by FQCN::
         ];
     }
 
+
+
+.. _fixture-state-management:
+
+Fixture State Managers
+----------------------
+
+By default CakePHP resets fixture state at the end of each test by truncating
+all the tables in the database. This operation can become expensive as your
+application grows. By using ``TransactionStrategy`` each test method will be run
+inside a transaction that is rolled back at the end of the test. This can yield
+improved performance but requires your tests not heavily rely on static fixture
+data, as auto-increment values are not reset before each test.
+
+The fixture state management strategy can be defined within the test case::
+
+    use Cake\TestSuite\TestCase;
+    use Cake\TestSuite\Fixture\FixtureStrategyInterface;
+    use Cake\TestSuite\Fixture\TransactionStrategy;
+
+    class ArticlesTableTest extends TestCase
+    {
+        /**
+         * Create the fixtures strategy used for this test case.
+         * You can use a base class/trait to change multiple classes.
+         */
+        protected function getFixtureStrategy(): FixtureStrategyInterface
+        {
+            return new TransactionStrategy();
+        }
+    }
+
+To switch out the general default strategy, use Configure key ``TestSuite.fixtureStrategy`` in your ``app.php``::
+
+    'TestSuite' => [
+        'fixtureStrategy' => \Cake\TestSuite\Fixture\TransactionStrategy::class,
+    ],
+
+
+The recommended strategy for medium and large applications is the ``TransactionStrategy``, as using rollbacks to undo changes from tests is simpler to maintain, and reduces the chances of cross-contamination and side-effects between tests.
 
 Fixture Factories
 -----------------

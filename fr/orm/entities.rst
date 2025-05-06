@@ -136,7 +136,7 @@ Vous pouvez vérifier si des champs sont définis dans vos entities avec
     $article->has('undefined'); // false.
 
 La méthode ``has()`` va renvoyer ``true`` si un champ est défini est a une
-valeur non null. Vous pouvez utiliser ``isEmpty()`` et ``hasValue()`` pour
+valeur non null. Vous pouvez utiliser ``hasValue()`` pour
 vérifier si un champ contient une valeur 'non-empty'::
 
     $article = new Article([
@@ -147,27 +147,21 @@ vérifier si un champ contient une valeur 'non-empty'::
     ]);
     ]);
     $article->has('title'); // true
-    $article->isEmpty('title');  // false
     $article->hasValue('title'); // true
 
     $article->has('user_id'); // true
-    $article->isEmpty('user_id');  // true
     $article->hasValue('user_id'); // false
 
     $article->has('text'); // true
-    $article->isEmpty('text');  // true
     $article->hasValue('text'); // false
 
     $article->has('links'); // true
-    $article->isEmpty('links');  // true
     $article->hasValue('links'); // false
 
     $article->has('text'); // true
-    $article->isEmpty('text');  // true
     $article->hasValue('text'); // false
 
     $article->has('links'); // true
-    $article->isEmpty('links');  // true
     $article->hasValue('links'); // false
 
 Accesseurs & Mutateurs
@@ -600,7 +594,7 @@ doivent être exposés::
 
     class User extends Entity
     {
-        protected $_virtual = ['full_name'];
+        protected array $_virtual = ['full_name'];
     }
 
 Cette liste peut être modifiée à la volée en utilisant la méthode
