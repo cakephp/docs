@@ -51,3 +51,13 @@ Utility
 - The default placeholder format for ``Text::insert()`` has been changed.
   They now use ``{foo}`` instead of ``:foo``. You can get the old
   behavior by using the ``before`` and ``after`` keys of ``$options``.
+
+View
+----
+
+- ``'escape'``/``'escapeTitle'`` keys have now been separated cleanly into ``escape`` for escaping content/labels, and
+  ``'escapeAttributes'`` for HTML attributes respectively. They also don't overlap anymore, so if you need to prevent escaping
+  on content and attributes, make sure to set them both to false.
+- ``title`` has been renamed to ``content`` in scopes where this is not an attribute, but content or label element, specifically:
+  ``'item'``/``itemWithoutLink`` breadcrumb templates.
+- ``multicheckboxTitle`` template of FormHelper is now ``multicheckboxLabel``.
