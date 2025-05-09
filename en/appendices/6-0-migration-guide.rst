@@ -26,6 +26,13 @@ Datasource
 
 - ``Datasource/Paging/PaginatedInterface`` now extends ``IteratorAggregate``
   instead of ``Traversable``.
+- ``EntityTrait::isEmpty()`` has been dropped in favor of ``hasValue()``.
+
+Http
+----
+
+- Using `$request->getParam('?')` to get the query params is no longer possible.
+  Use `$request->getQueryParams()` instead.
 
 ORM
 ---

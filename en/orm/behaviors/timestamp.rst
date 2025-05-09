@@ -65,10 +65,10 @@ changing any other properties. This is sometimes referred to as 'touching'
 a record. In CakePHP you can use the ``touch()`` method to do exactly this::
 
     // Touch based on the Model.beforeSave event.
-    $articles->touch($article);
+    $articles->getBehavior('Timestamp')->touch($article);
 
     // Touch based on a specific event.
-    $orders->touch($order, 'Orders.completed');
+    $orders->getBehavior('Timestamp')->touch($order, 'Orders.completed');
 
 After you have saved the entity, the field is updated.
 

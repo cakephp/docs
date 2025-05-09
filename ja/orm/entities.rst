@@ -109,17 +109,14 @@ CakePHP の ORM を使うためにエンティティークラスを生成する�
     $article->has('undefined'); // false.
 
 ``has()`` メソッドは、プロパティが定義されていてヌル以外の値を持つ場合、 ``true`` を返します。
-``isEmpty()`` と ``hasValue()`` を使って、プロパティに '空でない' 値が含まれているかどうかを
+``hasValue()`` を使って、プロパティに '空でない' 値が含まれているかどうかを
 調べることができます。 ::
 
     $article = new Article([
         'title' => 'First post',
         'user_id' => null
     ]);
-    $article->isEmpty('title');  // false
     $article->hasValue('title'); // true
-
-    $article->isEmpty('user_id');  // true
     $article->hasValue('user_id'); // false
 
 アクセサーとミューテーター
@@ -502,7 +499,7 @@ CakePHP では以下のように簡単にできます。 ::
 
     class User extends Entity
     {
-        protected $_virtual = ['full_name'];
+        protected array $_virtual = ['full_name'];
     }
 
 実行時に ``setVirtual()`` を使うことでこのリストを変更できます。 ::
