@@ -17,6 +17,8 @@ Behavior Changes
 - ``Cake\View\Widget\FileWidget`` was removed as it was redundant. The standard
   input widget will be used for file inputs in 6.x.
 - ``Text::uuid()`` now generates UUID v7 complaint strings instead of UUID v4.
+- ``Cake\Event\Event::getSubject()`` can now return ``null`` if the event has no
+  subject instead of throwing an exception.
 
 Breaking Changes
 ================
