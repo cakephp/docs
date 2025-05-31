@@ -59,8 +59,14 @@ Database
 --------
 
 - Added ``Query::hint()`` which accepts an engine-specific optimizer hint.
-- Added ``Query::getDriver()`` helper which returns the ``Driver`` for the current connection 
+- Added ``Query::getDriver()`` helper which returns the ``Driver`` for the current connection
   role by default.
+
+Mailer
+------
+
+- Added ``Message::addAttachment()`` for adding attachments to a message. Like
+  other message methods, it can be accessed via the ``Mailer`` instance as ``$mailer->addAttachment()``.
 
 Routing
 -------
