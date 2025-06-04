@@ -23,6 +23,55 @@ Behavior Changes
 Breaking Changes
 ================
 
+Renamed Methods
+---------------
+
+Methods starting with a ``_`` have been renamed to **remove the leading underscore**.
+You can find a full list of adjusted methods in the `cakephp/upgrade tool
+<https://github.com/cakephp/upgrade/blob/6.x/config/rector/sets/cakephp60.php>`_.
+
+Some methods have also been renamed to better reflect their purpose. These are:
+
+* ``Cake\Console\ConsoleOutput``
+    - ``_write()`` has been renamed to ``writeStream()``
+* ``Cake\Form\Form``
+    - ``_execute()`` has been renamed to ``process()``
+* ``Cake\Http\Client``
+    - ``_sendRequest()`` has been renamed to ``processRequest()``
+* ``Cake\Http\ServerRequest``
+    - ``_is()`` has been renamed to ``isType()``
+* ``Cake\Http\Client\Adapter\Stream``
+    - ``_send()`` has been renamed to ``processRequest()``
+* ``Cake\I18n\DateFormatTrait``
+    - ``_parseDateTime()`` has been renamed to ``processDateTime()``
+* ``Cake\Mailer\Transport\SmtpTransport``
+    - ``_connect()`` has been renamed to ``connectSmtp()``
+    - ``_disconnect()`` has been renamed to ``disconnectSmtp()``
+* ``Cake\ORM\Table``
+    - ``_saveMany()`` has been renamed to ``doSaveMany()``
+    - ``_deleteMany()`` has been renamed to ``doDeleteMany()``
+* ``Cake\ORM\Behavior\TreeBehavior``
+    - ``_moveUp()`` has been renamed to ``doMoveUp()``
+    - ``_moveDown()`` has been renamed to ``doMoveDown()``
+    - ``_removeFromTree()`` has been renamed to ``doRemoveFromTree()``
+* ``Cake\ORM\Association\HasMany``
+    - ``_unlink()`` has been renamed to ``doUnlink()``
+* ``Cake\ORM\Query\SelectQuery``
+    - ``_decorateResults()`` has been renamed to ``ormDecorateResults()``
+    - ``_execute()`` has been renamed to ``ormExecute()``
+* ``Cake\Utility\Hash``
+    - ``_filter()`` has been renamed to ``doFilter()``
+    - ``_merge()`` has been renamed to ``doMerge()``
+* ``Cake\Utility\Text``
+    - ``_wordWrap()`` has been renamed to ``doWordWrap()``
+* ``Cake\Utility\Xml``
+    - ``_fromArray()`` has been renamed to ``doFromArray()``
+    - ``_toArray()`` has been renamed to ``doToArray()``
+* ``Cake\View\View``
+    - ``_render()`` has been renamed to ``renderFile()``
+* ``Cake\View\Helper\PaginatorHelper``
+    - ``_numbers()`` has been renamed to ``buildNumbers()``
+
 Datasource
 ----------
 
