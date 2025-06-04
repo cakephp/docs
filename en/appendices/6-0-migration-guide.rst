@@ -35,6 +35,8 @@ Http
 
 - Using `$request->getParam('?')` to get the query params is no longer possible.
   Use `$request->getQueryParams()` instead.
+- The methods ``_getCookies()``, ``_getJson()``, ``_getXml()``, ``_getHeaders()``
+  and ``_getBody()`` have been removed. Use/Overwrite their non-prefixed public alternative instead.
 
 ORM
 ---
