@@ -471,7 +471,7 @@ the controller's default one::
 
 .. note::
 
-    ``Controller::fetchTable()`` does not create a proeprty controller property with the name of the table alias,
+    ``Controller::fetchTable()`` does not create a property controller property with the name of the table alias,
     e.g. ``$this->Articles``, as  ``Controller::loadModel()`` does.
 
 Paginating a Model
