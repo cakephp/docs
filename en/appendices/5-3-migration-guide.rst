@@ -84,7 +84,7 @@ Database
 I18n
 ----
 
-- Added ``DAteTimePeriod`` which wraps a PHP ``DAtePeriod`` adn returns ``DateTime``
+- Added ``DAteTimePeriod`` which wraps a php ``DatePeriod`` and returns ``DateTime``
   instances when iterating.
 
 Mailer
