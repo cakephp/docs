@@ -81,6 +81,12 @@ Database
 - Added support for ``inet``, ``cidr`` and ``macaddr`` network column types to
   postgres driver.
 
+I18n
+----
+
+- Added ``DAteTimePeriod`` which wraps a PHP ``DAtePeriod`` adn returns ``DateTime``
+  instances when iterating.
+
 Mailer
 ------
 
