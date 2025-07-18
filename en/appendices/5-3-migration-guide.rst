@@ -22,6 +22,12 @@ Database
 - ``Query::with()`` now accepts an array of expressions to align with other query clauses. This also
    allows clearing the expressions with an empty array.
 
+Validation
+----------
+
+- The signature of ``Validator::validate(array $data, bool $newRecord = true, array $context = [])`` has now a additional third parameter ``$context``.
+  It can be used to pass necessary context into the validation when marshalling.
+
 View
 ----
 
