@@ -106,6 +106,8 @@ Validation
 ----------
 
 - ``ipOrRange()`` validation has has been added to check for an IP or a range (subnet).
+- When validating within CakePHP marshalling context, the entity will be passed into the ``context`` argument for use inside custom validation rules.
+  This can be useful when patching partially and then needing to get that data from the entity instead of the passed data.
 
 TestSuite
 ---------
