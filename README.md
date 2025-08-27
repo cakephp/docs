@@ -1,11 +1,6 @@
 Documentação do CakePHP 5.x
 =====================
 
-[![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgreen.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
-[![Build Status](https://github.com/cakephp/docs/actions/workflows/ci.yml/badge.svg?branch=4.x)](https://github.com/cakephp/docs/actions/workflows/ci.yml)
-
----
-
 ## Objetivo
 
 - Traduzir para português e atualizar os exemplos de código da documentação oficial do CakePHP 5.x
@@ -59,7 +54,7 @@ php -S localhost:8020
 
 ---
 
-## Status
+## Status (122 arquivos)
 
 Arquivo | Status | Finalizado
 -- | -- | --
