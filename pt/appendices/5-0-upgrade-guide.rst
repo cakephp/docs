@@ -1,44 +1,46 @@
-5.0 Upgrade Guide
-#################
+5.0 Guia de atualização
+#######################
 
-First, check that your application is running on latest CakePHP 4.x version.
+Primeiro, verifique se seu aplicativo está sendo executado na versão mais recente do CakePHP 4.x.
 
-Fix Deprecation Warnings
-========================
+Corrigir Avisos de Descontinuação
+=================================
 
-Once your application is running on latest CakePHP 4.x, enable deprecation warnings in **config/app.php**::
+Depois que seu aplicativo estiver sendo executado na versão mais recente do CakePHP 4.x, 
+habilite os avisos de descontinuação em **config/app.php**::
 
     'Error' => [
         'errorLevel' => E_ALL,
     ]
 
-Now that you can see all the warnings, make sure these are fixed before proceeding with the upgrade.
+Agora que você pode ver todos os avisos, certifique-se de que eles sejam corrigidos antes de prosseguir com a atualização.
 
-Some potentially impactful deprecations you should make sure you have addressed
-are:
+Algumas descontinuações potencialmente impactantes que você deve ter certeza de ter abordado
+são:
 
-- ``Table::query()`` was deprecated in 4.5.0. Use ``selectQuery()``,
-  ``updateQuery()``, ``insertQuery()`` and ``deleteQuery()`` instead.
+- ``Table::query()`` foi descontinuado na versão 4.5.0. Em vez disso, use ``selectQuery()``,
+  ``updateQuery()``, ``insertQuery()`` e ``deleteQuery()``.
 
-Upgrade to PHP 8.1
-==================
+Atualizar para PHP 8.1
+======================
 
-If you are not running on **PHP 8.1 or higher**, you will need to upgrade PHP before updating CakePHP.
+Se você não estiver usando **PHP 8.1 ou superior**, será necessário atualizar o PHP antes de atualizar o CakePHP.
 
 .. note::
-    CakePHP 5.0 requires **a minimum of PHP 8.1**.
+    O CakePHP 5.0 requer **no mínimo PHP 8.1**.
 
 .. _upgrade-tool-use:
 
-Use the Upgrade Tool
-====================
+Use a Ferramenta de Atualização
+===============================
 
 .. note::
-    The upgrade tool only works on applications running on latest CakePHP 4.x. You cannot run the upgrade tool after updating to CakePHP 5.0.
+    A ferramenta de atualização só funciona em aplicativos que executam a versão mais recente do CakePHP 4.x. 
+    Você não pode executar a ferramenta de atualização após atualizar para o CakePHP 5.0.
 
-Because CakePHP 5 leverages union types and ``mixed``, there are many
-backwards incompatible changes concerning method signatures and file renames.
-To help expedite fixing these tedious changes there is an upgrade CLI tool:
+Como o CakePHP 5 utiliza tipos de união e ``mixed``, há muitas
+mudanças incompatíveis com versões anteriores relacionadas a assinaturas de métodos e renomeação de arquivos.
+Para ajudar a agilizar a correção dessas mudanças tediosas, existe uma ferramenta de CLI de atualização:
 
 .. code-block:: console
 
@@ -48,27 +50,27 @@ To help expedite fixing these tedious changes there is an upgrade CLI tool:
     git checkout 5.x
     composer install --no-dev
 
-With the upgrade tool installed you can now run it on your application or
+Com a ferramenta de atualização instalada, você pode executá-la em seu aplicativo ou
 plugin::
 
     bin/cake upgrade rector --rules cakephp50 <path/to/app/src>
     bin/cake upgrade rector --rules chronos3 <path/to/app/src>
 
-Update CakePHP Dependency
-=========================
+Atualizar Dependência do CakePHP
+================================
 
-After applying rector refactorings you need to upgrade CakePHP, its plugins, PHPUnit
-and maybe other dependencies in your ``composer.json``.
-This process heavily depends on your application so we recommend you compare your
-``composer.json`` with what is present in `cakephp/app
+Após aplicar as refatorações do rector, você precisa atualizar o CakePHP, seus plugins, o PHPUnit
+e talvez outras dependências no seu ``composer.json``.
+Este processo depende muito da sua aplicação, por isso recomendamos que você compare o seu
+``composer.json`` com o que está presente em `cakephp/app
 <https://github.com/cakephp/app/blob/5.x/composer.json>`__.
 
-After the version strings are adjusted in your ``composer.json`` execute
-``composer update -W`` and check its output.
+Após as strings de versão serem ajustadas em seu ``composer.json``, execute
+``composer update -W`` e verifique sua saída.
 
-Update app files based upon latest app template
-===============================================
+Atualizar arquivos do aplicativo com base no modelo de aplicativo mais recente
+==============================================================================
 
-Next, ensure the rest of your application has been updated to be based upon the
-latest version of `cakephp/app
+Em seguida, certifique-se de que o restante do seu aplicativo foi atualizado para se basear na
+versão mais recente de `cakephp/app
 <https://github.com/cakephp/app/blob/5.x/>`__.
