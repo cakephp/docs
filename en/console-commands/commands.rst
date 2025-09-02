@@ -147,7 +147,6 @@ provide 'macros' for output generation.  See the
 :doc:`/console-commands/input-output` section for more information.
 
 
-
 Using Models in Commands
 ========================
 
