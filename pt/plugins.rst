@@ -44,6 +44,8 @@ plugins quando são carregados com ``load ()`` ou ``loadAll ()``. Você geralmen
 não precisará editar este arquivo à mão, com Composer e ``plugin-installer``
 O pacote o gerenciará para você.
 
+.. _loading-a-plugin:
+
 Carregando um Plugin
 ====================
 
