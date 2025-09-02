@@ -1,8 +1,8 @@
-Migration Guides
-################
+Guias de Migração
+#################
 
-Migration guides contain information regarding the new features introduced in
-each version and the migration path between 5.x minor releases.
+Os guias de migração contêm informações sobre os novos recursos introduzidos em
+cada versão e o caminho de migração entre as versões secundárias 5.x.
 
 .. toctree::
     :maxdepth: 1
