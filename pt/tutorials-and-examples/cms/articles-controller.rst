@@ -1,11 +1,12 @@
-CMS Tutorial - Creating the Articles Controller
-###############################################
+CMS Tutorial - Criando o Controller Articles
+############################################
 
-With our model created, we need a controller for our articles. Controllers in
-CakePHP handle HTTP requests and execute business logic contained in model
-methods, to prepare the response. We'll place this new controller in a file
-called **ArticlesController.php** inside the **src/Controller** directory.
-Here's what the basic controller should look like::
+Com nosso modelo criado, precisamos de um controller para nossos artigos. 
+Os controllers no CakePHP lidam com requisições HTTP e executam a lógica 
+de negócios contida nos métodos do modelo para preparar a resposta. 
+Colocaremos esse novo controlador em um arquivo chamado **ArticlesController.php** 
+dentro do diretório **src/Controller**.
+Veja como o controller básico deve se parecer::
 
     <?php
     // src/Controller/ArticlesController.php
@@ -16,13 +17,13 @@ Here's what the basic controller should look like::
     {
     }
 
-Now, let's add an action to our controller. Actions are controller methods that
-have routes connected to them. For example, when a user requests
-**www.example.com/articles/index** (which is also the same as
-**www.example.com/articles**), CakePHP will call the ``index`` method of your
-``ArticlesController``. This method should query the model layer, and prepare
-a response by rendering a Template in the View. The code for that action would
-look like this::
+Agora, vamos adicionar uma ação ao nosso controller. Ações são métodos do controller que
+possuem rotas conectadas a eles. Por exemplo, quando um usuário solicita
+**www.example.com/articles/index** (que também é o mesmo que
+**www.example.com/articles**), o CakePHP chamará o método ``index`` do seu
+``ArticlesController``. Este método deve consultar a camada do modelo e preparar
+uma resposta renderizando um Template na View. O código para essa ação ficaria
+assim::
 
     <?php
     // src/Controller/ArticlesController.php
@@ -38,41 +39,41 @@ look like this::
         }
     }
 
-By defining function ``index()`` in our ``ArticlesController``, users can now
-access the logic there by requesting **www.example.com/articles/index**.
-Similarly, if we were to define a function called ``foobar()``, users would be
-able to access that at **www.example.com/articles/foobar**. You may be tempted
-to name your controllers and actions in a way that allows you to obtain specific
-URLs. Resist that temptation. Instead, follow the :doc:`/intro/conventions`
-creating readable, meaningful action names. You can then use
-:doc:`/development/routing` to connect the URLs you want to the actions you've
-created.
+Ao definir a função ``index()`` em nosso ``ArticlesController``, os usuários agora podem
+acessar a lógica solicitando **www.example.com/articles/index**.
+Da mesma forma, se definíssemos uma função chamada ``foobar()``, os usuários poderiam
+acessá-la em **www.example.com/articles/foobar**. Você pode se sentir tentado
+a nomear seus controllers e ações de uma forma que permita obter URLs
+específicas. Resista a essa tentação. Em vez disso, siga o :doc:`/intro/conventions`
+para criar nomes de ações legíveis e significativos. Você pode então usar
+:doc:`/development/routing` para conectar as URLs desejadas às ações que você
+criou.
 
-Our controller action is very simple. It fetches a paginated set of articles
-from the database, using the Articles Model that is automatically loaded via naming
-conventions. It then uses ``set()`` to pass the articles into the Template (which
-we'll create soon). CakePHP will automatically render the template after our
-controller action completes.
+Nossa ação do controller é muito simples. Ela busca um conjunto paginado de artigos
+do banco de dados, usando o Modelo de Artigos que é carregado automaticamente por meio de convenções
+de nomenclatura. Em seguida, ela usa ``set()`` para passar os artigos para o Modelo (que
+criaremos em breve). O CakePHP renderizará o modelo automaticamente após a conclusão da nossa
+ação do controlador.
 
-Create the Article List Template
-================================
+Crie o Template de Lista de Artigos
+===================================
 
-Now that we have our controller pulling data from the model, and preparing our
-view context, let's create a view template for our index action.
+Agora que nosso controller extrai dados do modelo e prepara nosso
+contexto de visualização, vamos criar um modelo de visualização para nossa ação de índice.
 
-CakePHP view templates are presentation-flavored PHP code that is inserted inside
-the application's layout. While we'll be creating HTML here, Views can also
-generate JSON, CSV or even binary files like PDFs.
+Os templates de visualização do CakePHP são códigos PHP com características de apresentação que são inseridos
+dentro do layout do aplicativo. Embora criemos HTML aqui, as visualizações também podem
+gerar arquivos JSON, CSV ou até mesmo binários, como PDFs.
 
-A layout is presentation code that is wrapped around a view. Layout files
-contain common site elements like headers, footers and navigation elements. Your
-application can have multiple layouts, and you can switch between them, but for
-now, let's just use the default layout.
+Um layout é um código de apresentação que envolve uma visualização. Arquivos de layout
+contêm elementos comuns do site, como cabeçalhos, rodapés e elementos de navegação. Seu
+aplicativo pode ter vários layouts, e você pode alternar entre eles, mas,
+por enquanto, vamos usar apenas o layout padrão.
 
-CakePHP's template files are stored in **templates** inside a folder
-named after the controller they correspond to. So we'll have to create
-a folder named 'Articles' in this case. Add the following code to your
-application:
+Os arquivos de template do CakePHP são armazenados em **templates** dentro de uma pasta
+correspondente ao controller. Portanto, teremos que criar
+uma pasta chamada 'Articles' neste caso. Adicione o seguinte código à sua
+aplicação:
 
 .. code-block:: php
 
@@ -85,7 +86,7 @@ application:
             <th>Created</th>
         </tr>
 
-        <!-- Here is where we iterate through our $articles query object, printing out article info -->
+        <!-- É aqui que iteramos em nosso objeto de consulta $articles, imprimindo informações do artigo -->
 
         <?php foreach ($articles as $article): ?>
         <tr>
@@ -99,33 +100,33 @@ application:
         <?php endforeach; ?>
     </table>
 
-In the last section we assigned the 'articles' variable to the view using
-``set()``. Variables passed into the view are available in the view templates as
-local variables which we used in the above code.
+Na última seção, atribuímos a variável 'articles' à visualização usando
+``set()``. As variáveis ​​passadas para a visualização estão disponíveis nos modelos de visualização como
+variáveis ​​locais que usamos no código acima.
 
-You might have noticed the use of an object called ``$this->Html``.  This is an
-instance of the CakePHP :doc:`HtmlHelper </views/helpers/html>`.  CakePHP comes
-with a set of view helpers that make tasks like creating links, forms, and
-pagination buttons. You can learn more about :doc:`/views/helpers` in their
-chapter, but what's important to note here is that the ``link()`` method will
-generate an HTML link with the given link text (the first parameter) and URL
-(the second parameter).
+Você deve ter notado o uso de um objeto chamado ``$this->Html``. Esta é uma
+instância do CakePHP :doc:`HtmlHelper </views/helpers/html>`. O CakePHP vem
+com um conjunto de assistentes de visualização que realizam tarefas como criar links, formulários e
+botões de paginação. Você pode aprender mais sobre :doc:`/views/helpers` no
+capítulo deles, mas o importante a ser observado aqui é que o método ``link()`` irá
+gerar um link HTML com o texto do link fornecido (o primeiro parâmetro) e a URL
+(o segundo parâmetro).
 
-When specifying URLs in CakePHP, it is recommended that you use arrays or
-:ref:`named routes <named-routes>`. These syntaxes allow you to
-leverage the reverse routing features CakePHP offers.
+Ao especificar URLs no CakePHP, é recomendável usar arrays ou
+:ref:`rotas nomeadas <named-routes>`. Essas sintaxes permitem que você
+aproveite os recursos de roteamento reverso oferecidos pelo CakePHP.
 
-At this point, you should be able to point your browser to
-**http://localhost:8765/articles/index**. You should see your list view,
-correctly formatted with the title and table listing of the articles.
+Neste ponto, você deve conseguir acessar seu navegador em
+**http://localhost:8765/articles/index**. Você deverá ver sua visualização de lista,
+formatada corretamente com o título e a lista de artigos na tabela.
 
-Create the View Action
-======================
+Criando a Ação de Visualização
+==============================
 
-If you were to click one of the 'view' links in our Articles list page, you'd
-see an error page saying that action hasn't been implemented. Lets fix that now::
+Se você clicar em um dos links "visualizar" na nossa página de lista de artigos,
+verá uma página de erro informando que a ação não foi implementada. Vamos corrigir isso agora::
 
-    // Add to existing src/Controller/ArticlesController.php file
+    // Adicione ao arquivo existente src/Controller/ArticlesController.php
 
     public function view($slug = null)
     {
@@ -133,22 +134,22 @@ see an error page saying that action hasn't been implemented. Lets fix that now:
         $this->set(compact('article'));
     }
 
-While this is a simple action, we've used some powerful CakePHP features. We
-start our action off by using ``findBySlug()`` which is
-a :ref:`Dynamic Finder <dynamic-finders>`. This method allows us to create a basic query that
-finds articles by a given slug. We then use ``firstOrFail()`` to either fetch
-the first record, or throw a ``\Cake\Datasource\Exception\RecordNotFoundException``.
+Embora esta seja uma ação simples, utilizamos alguns recursos poderosos do CakePHP.
+Iniciamos nossa ação usando ``findBySlug()``, que é
+um :ref:`Dynamic Finder <dynamic-finders>`. Este método nos permite criar uma consulta básica que
+encontra artigos de um determinado slug. Em seguida, usamos ``firstOrFail()`` para buscar
+o primeiro registro ou lançar uma ``\Cake\Datasource\Exception\RecordNotFoundException``.
 
-Our action takes a ``$slug`` parameter, but where does that parameter come from?
-If a user requests ``/articles/view/first-post``, then the value 'first-post' is
-passed as ``$slug`` by CakePHP's routing and dispatching layers.  If we
-reload our browser with our new action saved, we'd see another CakePHP error
-page telling us we're missing a view template; let's fix that.
+Nossa ação recebe um parâmetro ``$slug``, mas de onde vem esse parâmetro?
+Se um usuário solicitar ``/articles/view/first-post``, o valor 'first-post' será
+passado como ``$slug`` pelas camadas de roteamento e despacho do CakePHP. Se
+recarregarmos nosso navegador com nossa nova ação salva, veremos outra página de erro do CakePHP
+nos informando que falta um modelo de visualização; vamos corrigir isso.
 
-Create the View Template
-========================
+Criando o Template View 
+=======================
 
-Let's create the view for our new 'view' action and place it in
+Vamos criar a visualização para nossa nova ação 'view' e colocá-la em
 **templates/Articles/view.php**
 
 .. code-block:: php
@@ -160,16 +161,16 @@ Let's create the view for our new 'view' action and place it in
     <p><small>Created: <?= $article->created->format(DATE_RFC850) ?></small></p>
     <p><?= $this->Html->link('Edit', ['action' => 'edit', $article->slug]) ?></p>
 
-You can verify that this is working by trying the links at ``/articles/index`` or
-manually requesting an article by accessing URLs like
+Você pode verificar se isso está funcionando tentando os links em ``/articles/index`` ou
+solicitando manualmente um artigo acessando URLs como
 ``/articles/view/first-post``.
 
-Adding Articles
-===============
+Adicionando Artigos
+===================
 
-With the basic read views created, we need to make it possible for new articles
-to be created. Start by creating an ``add()`` action in the
-``ArticlesController``. Our controller should now look like::
+Com as views de leitura básicas criadas, precisamos possibilitar a criação de novos artigos.
+Comece criando uma ação ``add()`` no
+``ArticlesController``. Nosso controller agora deve se parecer com::
 
     <?php
     // src/Controller/ArticlesController.php
@@ -197,16 +198,16 @@ to be created. Start by creating an ``add()`` action in the
             if ($this->request->is('post')) {
                 $article = $this->Articles->patchEntity($article, $this->request->getData());
 
-                // Hardcoding the user_id is temporary, and will be removed later
-                // when we build authentication out.
+                // A codificação do user_id é temporária e será removida posteriormente
+                // quando construirmos a autenticação.
                 $article->user_id = 1;
 
                 if ($this->Articles->save($article)) {
-                    $this->Flash->success(__('Your article has been saved.'));
+                    $this->Flash->success(__('Seu artigo foi salvo.'));
 
                     return $this->redirect(['action' => 'index']);
                 }
-                $this->Flash->error(__('Unable to add your article.'));
+                $this->Flash->error(__('Não é possível adicionar seu artigo.'));
             }
             $this->set('article', $article);
         }
@@ -214,46 +215,45 @@ to be created. Start by creating an ``add()`` action in the
 
 .. note::
 
-    You need to include the :doc:`/controllers/components/flash` component in
-    any controller where you will use it. Often it makes sense to include it in
-    your ``AppController``, which is there already for this tutorial.
+    Você precisa incluir o componente :doc:`/controllers/components/flash` em
+    qualquer controlador onde for usá-lo. Muitas vezes, faz sentido incluí-lo em
+    seu ``AppController``, que já está lá para este tutorial.
 
-Here's what the ``add()`` action does:
+Veja o que a ação ``add()`` faz:
 
-* If the HTTP method of the request was POST, try to save the data using the Articles model.
-* If for some reason it doesn't save, just render the view. This gives us a
-  chance to show the user validation errors or other warnings.
+* Se o método HTTP da solicitação for POST, tente salvar os dados usando o modelo Articles.
+* Se, por algum motivo, não for possível salvar, basta renderizar a visualização. Isso nos dá a chance de mostrar ao usuário erros de validação ou outros avisos.
 
-Every CakePHP request includes a request object which is accessible using
-``$this->request``. The request object contains information regarding the
-request that was just received. We use the
-:php:meth:`Cake\\Http\\ServerRequest::is()` method to check that the request
-is a HTTP POST request.
+Cada requisição do CakePHP inclui um objeto de requisição que pode ser acessado usando
+``$this->request``. O objeto de requisição contém informações sobre a
+requisição que acabou de ser recebida. Usamos o método
+:php:meth:`Cake\\Http\\ServerRequest::is()` para verificar se a requisição
+é uma requisição HTTP POST.
 
-Our POST data is available in ``$this->request->getData()``. You can use the
-:php:func:`pr()` or :php:func:`debug()` functions to print it out if you want to
-see what it looks like. To save our data, we first 'marshal' the POST data into
-an Article Entity. The Entity is then persisted using the ArticlesTable we
-created earlier.
+Nossos dados POST estão disponíveis em ``$this->request->getData()``. Você pode usar as funções
+:php:func:`pr()` ou :php:func:`debug()` para imprimi-los, se quiser
+ver como ficam. Para salvar nossos dados, primeiro 'marshal' os dados POST em
+uma Entidade de Artigo. A Entidade é então persistida usando a Tabela de Artigos que
+criamos anteriormente.
 
-After saving our new article we use FlashComponent's ``success()`` method to set
-a message into the session. The ``success`` method is provided using PHP's
-`magic method features
-<https://php.net/manual/en/language.oop5.overloading.php#object.call>`_.  Flash
-messages will be displayed on the next page after redirecting. In our layout we have
-``<?= $this->Flash->render() ?>`` which displays flash messages and clears the
-corresponding session variable. Finally, after saving is complete, we use
-:php:meth:`Cake\\Controller\\Controller::redirect` to send the user back to the
-articles list. The param ``['action' => 'index']`` translates to URL
-``/articles`` i.e the index action of the ``ArticlesController``. You can refer
-to :php:func:`Cake\\Routing\\Router::url()` function on the `API
-<https://api.cakephp.org>`_ to see the formats in which you can specify a URL
-for various CakePHP functions.
+Após salvar nosso novo artigo, usamos o método ``success()`` do FlashComponent para definir
+uma mensagem na sessão. O método ``success`` é fornecido usando os
+`recursos do método mágico do PHP
+<https://php.net/manual/en/language.oop5.overloading.php#object.call>`_. As mensagens em Flash 
+serão exibidas na próxima página após o redirecionamento. Em nosso layout, temos
+``<?= $this->Flash->render() ?>``, que exibe mensagens em Flash e limpa a
+variável de sessão correspondente. Finalmente, após a conclusão do salvamento, usamos
+:php:meth:`Cake\\Controller\\Controller::redirect` para enviar o usuário de volta à
+lista de artigos. O parâmetro ``['action' => 'index']`` traduz para a URL
+``/articles``, ou seja, a ação de índice do ``ArticlesController``. Você pode consultar
+a função :php:func:`Cake\\Routing\\Router::url()` na `API
+<https://api.cakephp.org>`_ para ver os formatos nos quais você pode especificar uma URL
+para várias funções do CakePHP.
 
-Create Add Template
-===================
+Criando o Template Add
+======================
 
-Here's our add view template:
+Aqui está nosso template de visualização para 'add':
 
 .. code-block:: php
 
@@ -262,47 +262,47 @@ Here's our add view template:
     <h1>Add Article</h1>
     <?php
         echo $this->Form->create($article);
-        // Hard code the user for now.
+        // Codifique o usuário por enquanto.
         echo $this->Form->control('user_id', ['type' => 'hidden', 'value' => 1]);
         echo $this->Form->control('title');
         echo $this->Form->control('body', ['rows' => '3']);
-        echo $this->Form->button(__('Save Article'));
+        echo $this->Form->button(__('Salvar Artigo'));
         echo $this->Form->end();
     ?>
 
-We use the FormHelper to generate the opening tag for an HTML
-form. Here's the HTML that ``$this->Form->create()`` generates:
+Usamos o FormHelper para gerar a tag de abertura para um formulário HTML.
+Aqui está o HTML que ``$this->Form->create()`` gera:
 
 .. code-block:: html
 
     <form method="post" action="/articles/add">
 
-Because we called ``create()`` without a URL option, ``FormHelper`` assumes we
-want the form to submit back to the current action.
+Como chamamos ``create()`` sem uma opção de URL, ``FormHelper`` assume que
+queremos que o formulário seja enviado de volta para a ação atual.
 
-The ``$this->Form->control()`` method is used to create form elements
-of the same name. The first parameter tells CakePHP which field
-they correspond to, and the second parameter allows you to specify
-a wide array of options - in this case, the number of rows for the
-textarea. There's a bit of introspection and conventions used here. The
-``control()`` will output different form elements based on the model
-field specified, and use inflection to generate the label text. You can
-customize the label, the input or any other aspect of the form controls using
-options. The ``$this->Form->end()`` call closes the form.
+O método ``$this->Form->control()`` é usado para criar elementos de formulário
+com o mesmo nome. O primeiro parâmetro informa ao CakePHP a qual campo
+eles correspondem, e o segundo parâmetro permite especificar
+uma ampla gama de opções - neste caso, o número de linhas para a
+textarea. Há um pouco de introspecção e convenções usadas aqui. O método ``control()`` 
+gerará diferentes elementos de formulário com base no campo
+do modelo especificado e usará a inflexão para gerar o texto do rótulo(label). Você pode
+personalizar o rótulo(label), a entrada ou qualquer outro aspecto dos controles do formulário usando
+opções. A chamada ``$this->Form->end()`` fecha o formulário.
 
-Now let's go back and update our **templates/Articles/index.php**
-view to include a new "Add Article" link. Before the ``<table>``, add
-the following line::
+Agora, vamos voltar e atualizar nossa view **templates/Articles/index.php**
+para incluir um novo link "Adicionar Artigo". Antes de ``<table>``, adicione
+a seguinte linha::
 
-    <?= $this->Html->link('Add Article', ['action' => 'add']) ?>
+    <?= $this->Html->link('Adicionar Artigo', ['action' => 'add']) ?>
 
-Adding Simple Slug Generation
-=============================
+Adicionando Geração Simples de Slug
+===================================
 
-If we were to save an Article right now, saving would fail as we are not
-creating a slug attribute, and the column is ``NOT NULL``. Slug values are
-typically a URL-safe version of an article's title. We can use the
-:ref:`beforeSave() callback <table-callbacks>` of the ORM to populate our slug::
+Se salvássemos um artigo agora, o salvamento falharia, pois não estamos
+criando um atributo slug e a coluna é ``NOT NULL``. Valores slug são
+tipicamente uma versão segura para URL do título de um artigo. Podemos usar o retorno de chamada
+:ref:`beforeSave() <table-callbacks>` do ORM para preencher nosso slug::
 
     <?php
     // in src/Model/Table/ArticlesTable.php
@@ -314,29 +314,29 @@ typically a URL-safe version of an article's title. We can use the
     // the EventInterface class
     use Cake\Event\EventInterface;
 
-    // Add the following method.
+    // Adicione o seguinte método.
 
     public function beforeSave(EventInterface $event, $entity, $options): void
     {
         if ($entity->isNew() && !$entity->slug) {
             $sluggedTitle = Text::slug($entity->title);
-            // trim slug to maximum length defined in schema
+            // aparar o slug até o comprimento máximo definido no esquema
             $entity->slug = substr($sluggedTitle, 0, 191);
         }
     }
 
-This code is simple, and doesn't take into account duplicate slugs. But we'll
-fix that later on.
+Este código é simples e não leva em conta slugs duplicados. Mas vamos
+consertar isso mais tarde.
 
-Add Edit Action
-===============
+Adicionar Ação de Edição
+========================
 
-Our application can now save articles, but we can't edit them. Lets rectify that
-now. Add the following action to your ``ArticlesController``::
+Nossa aplicação agora pode salvar artigos, mas não podemos editá-los. Vamos corrigir isso
+agora. Adicione a seguinte ação ao seu ``ArticlesController``::
 
     // in src/Controller/ArticlesController.php
 
-    // Add the following method.
+    // Adicione o seguinte método.
 
     public function edit($slug)
     {
@@ -347,30 +347,30 @@ now. Add the following action to your ``ArticlesController``::
         if ($this->request->is(['post', 'put'])) {
             $this->Articles->patchEntity($article, $this->request->getData());
             if ($this->Articles->save($article)) {
-                $this->Flash->success(__('Your article has been updated.'));
+                $this->Flash->success(__('Seu artigo foi atualizado.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('Unable to update your article.'));
+            $this->Flash->error(__('Não é possível atualizar seu artigo.'));
         }
 
         $this->set('article', $article);
     }
 
-This action first ensures that the user has tried to access an existing record.
-If they haven't passed in an ``$slug`` parameter, or the article does not exist,
-a ``RecordNotFoundException`` will be thrown, and the CakePHP ErrorHandler will render
-the appropriate error page.
+Esta ação primeiro garante que o usuário tentou acessar um registro existente.
+Se o parâmetro ``$slug`` não tiver sido passado ou o artigo não existir,
+uma ``RecordNotFoundException`` será lançada e o ErrorHandler do CakePHP renderizará
+a página de erro apropriada.
 
-Next the action checks whether the request is either a POST or a PUT request. If
-it is, then we use the POST/PUT data to update our article entity by using the
-``patchEntity()`` method.  Finally, we call ``save()``, set the appropriate flash
-message, and either redirect or display validation errors.
+Em seguida, a ação verifica se a solicitação é uma solicitação POST ou PUT. Se for, 
+usamos os dados POST/PUT para atualizar nossa entidade de artigo usando o método
+``patchEntity()``. Por fim, chamamos ``save()``, definimos a mensagem flash apropriada
+e redirecionamos ou exibimos os erros de validação.
 
-Create Edit Template
-====================
+Criando o Template Edit
+=======================
 
-The edit template should look like this:
+O template de edição deve ficar assim:
 
 .. code-block:: php
 
@@ -382,15 +382,15 @@ The edit template should look like this:
         echo $this->Form->control('user_id', ['type' => 'hidden']);
         echo $this->Form->control('title');
         echo $this->Form->control('body', ['rows' => '3']);
-        echo $this->Form->button(__('Save Article'));
+        echo $this->Form->button(__('Salvar Artigo'));
         echo $this->Form->end();
     ?>
 
-This template outputs the edit form (with the values populated), along
-with any necessary validation error messages.
+Este modelo exibe o formulário de edição (com os valores preenchidos), juntamente
+com quaisquer mensagens de erro de validação necessárias.
 
-You can now update your index view with links to edit specific
-articles:
+Agora você pode atualizar sua visualização de índice com links para editar artigos
+específicos:
 
 .. code-block:: php
 
@@ -405,7 +405,7 @@ articles:
             <th>Action</th>
         </tr>
 
-    <!-- Here's where we iterate through our $articles query object, printing out article info -->
+    <!-- É aqui que iteramos em nosso objeto de consulta $articles, imprimindo informações do artigo -->
 
     <?php foreach ($articles as $article): ?>
         <tr>
@@ -423,19 +423,19 @@ articles:
 
     </table>
 
-Update Validation Rules for Articles
-====================================
+Atualizar Regras de Validação para Artigos
+==========================================
 
-Up until this point our Articles had no input validation done. Lets fix that by
-using :ref:`a validator <validating-request-data>`::
+Até este ponto, nossos artigos não tiveram nenhuma validação de entrada realizada. Vamos corrigir isso
+usando :ref:`um validador <validating-request-data>`::
 
     // src/Model/Table/ArticlesTable.php
 
-    // add this use statement right below the namespace declaration to import
-    // the Validator class
+    // adicione esta instrução use logo abaixo da declaração do namespace para importar
+    // a classe Validator
     use Cake\Validation\Validator;
 
-    // Add the following method.
+    // Adicione o seguinte método.
     public function validationDefault(Validator $validator): Validator
     {
         $validator
@@ -449,30 +449,30 @@ using :ref:`a validator <validating-request-data>`::
         return $validator;
     }
 
-The ``validationDefault()`` method tells CakePHP how to validate your data when
-the ``save()`` method is called. Here, we've specified that both the title, and
-body fields must not be empty, and have certain length constraints.
+O método ``validationDefault()`` informa ao CakePHP como validar seus dados quando
+o método ``save()`` é chamado. Aqui, especificamos que os campos ``title`` e ``body`` 
+não devem estar vazios e têm certas restrições de comprimento.
 
-CakePHP's validation engine is powerful and flexible. It provides a suite of
-frequently used rules for tasks like email addresses, IP addresses etc. and the
-flexibility for adding your own validation rules. For more information on that
-setup, check the :doc:`/core-libraries/validation` documentation.
+O mecanismo de validação do CakePHP é poderoso e flexível. Ele oferece um conjunto de
+regras frequentemente usadas para tarefas como endereços de e-mail, endereços IP, etc., além da
+flexibilidade para adicionar suas próprias regras de validação. Para mais informações sobre essa
+configuração, consulte a documentação :doc:`/core-libraries/validation`.
 
-Now that your validation rules are in place, use the app to try to add
-an article with an empty title or body to see how it works.  Since we've used the
-:php:meth:`Cake\\View\\Helper\\FormHelper::control()` method of the FormHelper to
-create our form elements, our validation error messages will be shown
-automatically.
+Agora que suas regras de validação estão definidas, use o aplicativo para tentar adicionar
+um artigo com título ou corpo vazio para ver como funciona. Como usamos o método
+:php:meth:`Cake\\View\\Helper\\FormHelper::control()` do FormHelper para
+criar nossos elementos de formulário, nossas mensagens de erro de validação serão exibidas
+automaticamente.
 
-Add Delete Action
-=================
+Adicionar Ação de Delete
+=========================
 
-Next, let's make a way for users to delete articles. Start with a
-``delete()`` action in the ``ArticlesController``::
+Em seguida, vamos criar uma maneira para os usuários excluírem artigos. Comece com uma ação
+``delete()`` no ``ArticlesController``::
 
     // src/Controller/ArticlesController.php
 
-    // Add the following method.
+    // Adicione o seguinte método.
 
     public function delete($slug)
     {
@@ -480,37 +480,37 @@ Next, let's make a way for users to delete articles. Start with a
 
         $article = $this->Articles->findBySlug($slug)->firstOrFail();
         if ($this->Articles->delete($article)) {
-            $this->Flash->success(__('The {0} article has been deleted.', $article->title));
+            $this->Flash->success(__('O artigo {0} foi excluído.', $article->title));
 
             return $this->redirect(['action' => 'index']);
         }
     }
 
-This logic deletes the article specified by ``$slug``, and uses
-``$this->Flash->success()`` to show the user a confirmation
-message after redirecting them to ``/articles``. If the user attempts to
-delete an article using a GET request, ``allowMethod()`` will throw an exception.
-Uncaught exceptions are captured by CakePHP's exception handler, and a nice
-error page is displayed. There are many built-in
-:doc:`Exceptions </development/errors>` that can be used to indicate the various
-HTTP errors your application might need to generate.
+Esta lógica exclui o artigo especificado por ``$slug`` e usa
+``$this->Flash->success()`` para mostrar ao usuário uma mensagem de confirmação
+após redirecioná-lo para ``/articles``. Se o usuário tentar
+excluir um artigo usando uma requisição GET, ``allowMethod()`` lançará uma exceção.
+Exceções não capturadas são capturadas pelo manipulador de exceções do CakePHP e uma bela
+página de erro é exibida. Há muitas
+:doc:`Exceções </development/errors>` integradas que podem ser usadas para indicar os vários
+erros HTTP que seu aplicativo pode precisar gerar.
 
 .. warning::
 
-    Allowing content to be deleted using GET requests is *very* dangerous, as web
-    crawlers could accidentally delete all your content. That is why we used
-    ``allowMethod()`` in our controller.
+    Permitir que conteúdo seja excluído usando solicitações GET é *muito* perigoso, pois rastreadores
+    da web podem excluir acidentalmente todo o seu conteúdo. É por isso que usamos
+    ``allowMethod()`` em nosso controlador.
 
-Because we're only executing logic and redirecting to another action, this
-action has no template. You might want to update your index template with links
-that allow users to delete articles:
+Como estamos apenas executando a lógica e redirecionando para outra ação, esta
+ação não tem modelo. Você pode querer atualizar seu modelo de índice com links
+que permitam aos usuários excluir artigos:
 
 .. code-block:: php
 
     <!-- File: templates/Articles/index.php  (delete links added) -->
 
     <h1>Articles</h1>
-    <p><?= $this->Html->link("Add Article", ['action' => 'add']) ?></p>
+    <p><?= $this->Html->link("Adicionar Artigo", ['action' => 'add']) ?></p>
     <table>
         <tr>
             <th>Title</th>
@@ -518,7 +518,7 @@ that allow users to delete articles:
             <th>Action</th>
         </tr>
 
-    <!-- Here's where we iterate through our $articles query object, printing out article info -->
+    <!-- É aqui que iteramos em nosso objeto de consulta $articles, imprimindo informações do artigo -->
 
     <?php foreach ($articles as $article): ?>
         <tr>
@@ -531,7 +531,7 @@ that allow users to delete articles:
             <td>
                 <?= $this->Html->link('Edit', ['action' => 'edit', $article->slug]) ?>
                 <?= $this->Form->deleteLink(
-                    'Delete',
+                    'Deletar',
                     ['action' => 'delete', $article->slug],
                     ['confirm' => 'Are you sure?'])
                 ?>
@@ -541,25 +541,25 @@ that allow users to delete articles:
 
     </table>
 
-Using :php:meth:`~Cake\\View\\Helper\\FormHelper::deleteLink()` will create a link
-that uses JavaScript to do a DELETE request deleting our article.
-Prior to CakePHP 5.2 you need to use ``postLink()`` instead.
+Usar :php:meth:`~Cake\\View\\Helper\\FormHelper::deleteLink()` criará um link
+que usa JavaScript para fazer uma solicitação DELETE, excluindo nosso artigo.
+Anterior ao CakePHP 5.2, você precisa usar ``postLink()``.
 
 .. note::
 
-    This view code also uses the ``FormHelper`` to prompt the user with a
-    JavaScript confirmation dialog before they attempt to delete an
-    article.
+    Este código de visualização também usa o ``FormHelper`` para exibir ao usuário uma
+    caixa de diálogo de confirmação em JavaScript antes que ele tente excluir um
+    artigo.
 
 .. tip::
 
-    The ``ArticlesController`` can also be built with ``bake``:
+    O ``ArticlesController`` também pode ser construído com ``bake``:
 
     .. code-block:: console
 
         /bin/cake bake controller articles
 
-    However, this does not build the **templates/Articles/*.php** files.
+    Entretanto, isso não cria os arquivos **templates/Articles/*.php**.
 
-With a basic articles management setup, we'll create the :doc:`basic actions
-for our Tags and Users tables </tutorials-and-examples/cms/tags-and-users>`.
+Com uma configuração básica de gerenciamento de artigos, criaremos as :doc:`ações básicas
+para nossas tabelas de Tags e Usuários </tutorials-and-examples/cms/tags-and-users>`.
