@@ -400,7 +400,7 @@ Paginando um model
 Este método é usado para fazer a paginação dos resultados retornados por
 seus models. Você pode especificar o tamanho da página (quantos resultados
 serão retornados), as condições de busca e outros parâmetros. Veja a seção
-:doc:`pagination <controllers/components/pagination>` para mais detalhes
+:doc:`pagination <controllers/pagination>` para mais detalhes
 sobre como usar o método ``paginate()``
 
 O atributo paginate lhe oferece uma forma fácil de customizar como

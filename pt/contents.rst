@@ -11,9 +11,10 @@ Conteúdo
 
     intro
     quickstart
-    appendices/4-0-migration-guide
+    appendices/migration-guides
     tutorials-and-examples
     contributing
+    release-policy
 
 .. toctree::
     :caption: Começando
@@ -21,6 +22,7 @@ Conteúdo
     installation
     development/configuration
     development/application
+    development/dependency-injection
     development/routing
     controllers/request-response
     controllers/middleware
@@ -31,9 +33,8 @@ Conteúdo
 .. toctree::
     :caption: Using CakePHP
 
-    controllers/components/authentication
     core-libraries/caching
-    console-and-shells
+    console-commands
     development/debugging
     deployment
     core-libraries/email
@@ -42,7 +43,7 @@ Conteúdo
     core-libraries/internationalization-and-localization
     core-libraries/logging
     core-libraries/form
-    controllers/components/pagination
+    controllers/pagination
     plugins
     development/rest
     security
@@ -55,24 +56,29 @@ Conteúdo
 
     core-libraries/app
     core-libraries/collections
-    core-libraries/file-folder
     core-libraries/hash
     core-libraries/httpclient
     core-libraries/inflector
     core-libraries/number
+    core-libraries/plugin
     core-libraries/registry-objects
     core-libraries/text
     core-libraries/time
     core-libraries/xml
 
 .. toctree::
-    :caption: Plugins
+    :caption: Plugins e Pacotes
 
-    Bake <https://book.cakephp.org/bake/1/pt/>
-    chronos <https://book.cakephp.org/chronos/1/pt/>
-    Debug Kit <https://book.cakephp.org/debugkit/3/pt/>
-    Migrations <https://book.cakephp.org/migrations/3/pt/>
-    Elasticsearch <https://book.cakephp.org/elasticsearch/3/pt/>
+    standalone-packages
+    Authentication <https://book.cakephp.org/authentication/3/>
+    Authorization <https://book.cakephp.org/authorization/3/>
+    Bake <https://book.cakephp.org/bake/3/>
+    Debug Kit <https://book.cakephp.org/debugkit/5/>
+    Migrations <https://book.cakephp.org/migrations/4/>
+    Elasticsearch <https://book.cakephp.org/elasticsearch/4/>
+    Phinx <https://book.cakephp.org/phinx/0/en/>
+    Chronos <https://book.cakephp.org/chronos/3/>
+    Queue <https://book.cakephp.org/queue/2/>
 
 .. toctree::
     :caption: Diversos
@@ -85,15 +91,16 @@ Conteúdo
 
     topics
     chronos
+    debug-kit
+    elasticsearch
     bake
     bake/development
     bake/usage
-    debug-kit
-    elasticsearch
     migrations
+    phinx
 
 .. todolist::
 
 .. meta::
     :title lang=pt: Conteúdo
-    :keywords lang=pt: bibliotecas do core,busca,filtro,índice,shells,deployment,apêndices,glossário,models,lib
+    :keywords lang=pt: bibliotecas do core,busca,comandos,deployment,apêndices,glossário,models

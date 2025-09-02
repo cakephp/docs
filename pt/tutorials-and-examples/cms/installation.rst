@@ -33,7 +33,7 @@ A maneira mais fácil de instalar o CakePHP é usando Composer, um gerenciador
 de dependências para o PHP. Se trata de uma forma simples de instalar o
 CakePHP a partir de seu terminal ou prompt de comando. Primeiro, você
 precisa baixar e instalar o Composer, caso você já não o tenha. Se possuir
-instalado o programa *cURL*, basta executar o seguinte comando::
+instalado o programa *cURL*, basta executar o seguinte comando:
 
 .. code-block:: console
 
@@ -44,11 +44,11 @@ Você também pode baixar o arquivo ``composer.phar`` do
 
 Em seguida, basta digitar a seguinte linha de comando no seu terminal a partir
 do diretório onde se localiza o arquivo ``composer.phar`` para instalar o
-esqueleto da aplicação do CakePHP no diretório **cms**. ::
+esqueleto da aplicação do CakePHP no diretório **cms**. :
 
 .. code-block:: console
 
-    php composer.phar create-project --prefer-dist cakephp/app:5.* cms
+    php composer.phar create-project --prefer-dist cakephp/app:5 cms
 
 Caso você tenha feito o download e executado o `Instalador para Windows do
 Composer <https://getcomposer.org/Composer-Setup.exe>`_, então digite a linha
@@ -57,7 +57,7 @@ C:\\wamp\\www\\dev):
 
 .. code-block:: console
 
-    composer self-update && composer create-project --prefer-dist cakephp/app:4.* cms
+    composer self-update && composer create-project --prefer-dist cakephp/app:5.* cms
 
 A vantagem de usar o Composer é que ele irá completar automaticamente um conjunto
 importante de tarefas, como configurar corretamente as permissões de pastas
@@ -96,6 +96,13 @@ do CakePHP funciona: Confira a seção :doc:`/intro/cakephp-folder-structure`.
 Caso tenha dificuldades durante este tutorial, você pode ver o resultado final no
 `GitHub <https://github.com/cakephp/cms-tutorial>`_.
 
+.. tip::
+
+    O utilitário de console ``bin/cake`` pode construir a maioria das classes e tabelas de dados
+    deste tutorial automaticamente. No entanto, recomendamos acompanhar
+    os exemplos de código manual para entender como as peças se encaixam e
+    como adicionar a lógica da sua aplicação.
+
 Verificando sua Instalação
 ==========================
 
@@ -119,4 +126,4 @@ tópicos devem ter chapéus de chef verdes, exceto diz sobre o CakePHP estar apt
 seu banco de dados. Caso contrário, voc%e pode precisar instalar alguma extensão PHP ou
 definir permissão de diretórios.
 
-A seguir, nós iremos construir o :doc:`Banco de Dados e criar nosso primeiro modelo </tutorials-and-examples/cms/database>`.
+A seguir, nós iremos construir o :doc:`Banco de Dados </tutorials-and-examples/cms/database>`.

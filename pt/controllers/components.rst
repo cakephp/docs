@@ -17,7 +17,7 @@ capítulo para cada componente:
     /controllers/components/authentication
     /controllers/components/flash
     /controllers/components/security
-    /controllers/components/pagination
+    /controllers/pagination
     /controllers/components/request-handling
 
 .. _configuring-components:

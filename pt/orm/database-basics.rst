@@ -967,7 +967,7 @@ com o método ``cacheMetadata()``::
     $connection->cacheMetadata('orm_metadata');
 
 O CakePHP também inclui uma ferramenta CLI para gerenciar caches de metadados.
-Confira o capítulo :doc:`/console-and-shells/orm-cache` para obter mais informações.
+Confira o capítulo :doc:`/console-commands/schema-cache` para obter mais informações.
 
 Criando Banco de Dados
 ======================

@@ -76,6 +76,8 @@ nomes de classes e de seus arquivos:
 Cada arquivo deveria estar localizado no diretório/namespace apropriado de sua
 aplicação.
 
+.. _model-and-database-conventions:
+
 Convenções para Banco de Dados
 ==============================
 

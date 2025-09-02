@@ -37,9 +37,9 @@ Você notará alguns diretórios principais:
   como os dados serão armazenados depende da configuração do CakePHP, mas esse
   diretório é comumente usado para armazenar descrições de modelos e algumas
   vezes informação de sessão.
-- O diretório *vendor* será onde o CakePHP e outras dependências da aplicação
-  serão instalados. Faça uma nota pessoal para **não** editar arquivos deste
-  diretório. Nós não podemos ajudar se você tivé-lo feito.
+- O diretório *vendor* é onde o CakePHP e outras dependências do aplicativo serão
+  instaladas pelo `Composer <https://getcomposer.org>`_. Editar esses arquivos não é
+  aconselhável, pois o Composer substituirá suas alterações na próxima atualização.
 - O diretório *webroot* será a raíz pública de documentos da sua aplicação. Ele
   contem todos os arquivos que você gostaria que fossem públicos.
 
@@ -53,20 +53,24 @@ O diretório src
 O diretório *src* do CakePHP é onde você fará a maior parte do desenvolvimento
 de sua aplicação. Vamos ver mais de perto a estrutura de pastas dentro de *src*.
 
+Command
+    Contém os comandos de console para sua aplicação. Consulte
+    :doc:`/console-commands/commands` para saber mais.
 Console
-    Contém os comandos e tarefas de console para sua aplicação.
-    Para mais informações veja :doc:`/console-and-shells`.
+    Contém o script de instalação executado pelo Composer.
 Controller
-    Contém os controllers de sua aplicação e seus componentes.
-Locale
-    Armazena arquivos textuais para internacionalização.
+    Contém os :doc:`/controllers` de sua aplicação e seus componentes.
+Middleware
+    Armazena qualquer :doc:`/controllers/middleware` para seu aplicativo.
 Model
     Contém as tables, entities e behaviors de sua aplicação.
 View
     Classes de apresentação são alocadas aqui: cells, helpers, e arquivos view.
-Template
-    Arquivos de apresentação são alocados aqui: elements, páginas de erro,
-    layouts, e templates view.
+
+.. note::
+
+    A pasta ``Command`` não está presente por padrão.
+    Você pode adicioná-la quando precisar.
 
 .. meta::
     :title lang=pt: Estrutura de pastas do CakePHP
