@@ -1,69 +1,69 @@
-Release Policy
-##############
+Política de Lançamento
+######################
 
-CakePHP follows Semantic Versioning for all releases. This follows the versioning
-convention of **major.minor.patch**.
+O CakePHP segue o Versionamento Semântico para todos os lançamentos. Isso segue a convenção de versionamento
+de **major.minor.patch**.
 
-The development team tries to guarantee each release follow the restrictions and
-and guarantees below.
+A equipe de desenvolvimento tenta garantir que cada lançamento siga as restrições e
+garantias abaixo.
 
-Major Releases
---------------
+Lançamentos Principais
+----------------------
 
-Major releases are generally not backwards compatible. Although CakePHP tries
-to not change many large features in major releases, there are API changes.
+Lançamentos principais geralmente não são compatíveis com versões anteriores. Embora o CakePHP tente
+não alterar muitos recursos importantes em lançamentos principais, há mudanças na API.
 
-Changes in major release can include almost anything but are always used to
-remove deprecated features and update interfaces.
+As mudanças em lançamentos principais podem incluir quase tudo, mas são sempre usadas para
+remover recursos obsoletos e atualizar interfaces.
 
-Any behavior changes that are not backwards compatible are made in major changes.
+Quaisquer mudanças de comportamento que não sejam compatíveis com versões anteriores são feitas em mudanças principais.
 
-Each major release typically comes with an upgrade guide and many automatic
-code upgrades using rector.
+Cada lançamento principal normalmente vem com um guia de atualização e muitas atualizações
+de código automáticas usando o rector.
 
-Minor Releases
---------------
+Lançamentos Menores
+-------------------
 
-Minor release are generally backwards compatible with the previous minor and patch
-release.
+Lançamentos menores geralmente são compatíveis com versões anteriores com o lançamento menor e o patch
+anteriores.
 
-Features might be deprecated, but they are never removed in a minor release.
+Recursos podem ser descontinuados, mas nunca são removidos em uma versão menor.
 
-Interfaces are not changed, but annotations might be added for new methods exposed
-in implementations provided by CakePHP.
+As interfaces não são alteradas, mas anotações podem ser adicionadas para novos métodos expostos
+em implementações fornecidas pelo CakePHP.
 
-New features are usually only added in minor releases so users can follow migration
-notes. New features can also include new exceptions thrown when behavior is fixed
-or bugs are reported.
+Novos recursos geralmente são adicionados apenas em versões menores para que os usuários possam acompanhar as notas de migração.
+Novos recursos também podem incluir novas exceções lançadas quando o comportamento é corrigido
+ou bugs são relatados.
 
-Behavior changes that require documentation are made in minor releases, but these are
-still typically backwards compatible. Some exceptions can be made if the issue is severe.
+Mudanças de comportamento que exigem documentação são feitas em versões menores, mas estas
+ainda são normalmente compatíveis com versões anteriores. Algumas exceções podem ser feitas se o problema for grave.
 
 .. note:
-    Minor releases are also known as point releases.
-    
-Patch Releases
+    Versões menores também são conhecidas como versões pontuais.
+
+Versões de Patch
 ----------------
 
-Patch releases are always backwards compatible. Only changes that fix broken features
-are made.
+Versões de patch são sempre compatíveis com versões anteriores. Somente alterações que corrigem recursos quebrados
+são feitas.
 
-Typically, users should be able to rely on patch releases not changing behavior except
-to fix an issue.
+Normalmente, os usuários devem poder confiar que as versões de patch não alteram o comportamento, exceto
+para corrigir um problema.
 
-Issues that change long-standing behavior are typically not in patch releases. These are
-considered behavior changes and will go into either minor or major releases so users can
-migrate.
+Problemas que alteram comportamentos antigos normalmente não estão em versões de patch. Estas são
+consideradas mudanças de comportamento e serão incluídas em versões menores ou maiores para que os usuários possam
+migrar.
 
 .. note:
-    Patch releases are also known as bug fix releases.
+    Lançamentos de patches também são conhecidos como lançamentos de correção de bugs.
 
-Experimental Features
----------------------
+Recursos Experimentais
+----------------------
 
-When a new feature is added where the API is still changing, it can be marked **experimental**.
+Quando um novo recurso é adicionado onde a API ainda está mudando, ele pode ser marcado como **experimental**.
 
-Experimental features should follow the same minor and bug fix release convention. However,
-API changes can go into minor releases which might significantly change behavior.
+Recursos experimentais devem seguir a mesma convenção de lançamentos menores e de correção de bugs. No entanto,
+alterações na API podem ser incluídas em lançamentos menores, o que pode alterar significativamente o comportamento.
 
-Users should always expect an API to change before experimental features are fully released.
+Os usuários devem sempre esperar que uma API mude antes que os recursos experimentais sejam totalmente lançados.
