@@ -13,7 +13,7 @@ ambiente. Você vai precisar do seguinte *software*:
 
 * Git
 * PHP |minphpversion| ou maior
-* PHPUnit 3.7.0 ou maior
+* PHPUnit 5.7.0 ou maior
 
 Defina suas informações de usuário com seu nome e endereço de email::
 
@@ -129,12 +129,12 @@ Ao fazer *pull requests* você deve ter certeza que selecionou o *branch* corret
   atual, escolhe o *branch* **master** como seu alvo.
 * Se sua alteração for uma **feature**, então você deve escolher o *branch*
   referente ao próximo número de versão. Por exemplo, se o *branch* atual
-  estável for ``3.2.10``, o *branch* a receber novas funcionalidades será o
-  ``3.next``.
+  estável for ``4.0.0``, o *branch* a receber novas funcionalidades será o
+  ``4.next``.
 * Se sua alteração quebra funcionalidades existentes, ou API's, então você
   deverá escolher o próximo *major release*. Por exemplo, se o branch estável
-  atual for ``3.2.2``, então a versão na qual o comportamento pode ser quebrado
-  será na versão ``4.x``.
+  atual for ``4.0.0``, então a versão na qual o comportamento pode ser quebrado
+  será na versão ``5.x``.
 
 .. note::
 
