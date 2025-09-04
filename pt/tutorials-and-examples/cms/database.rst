@@ -1,5 +1,5 @@
-Tutorial - Gerenciador de Conteúdo - Criando o Banco de Dados
-#############################################################
+CMS Tutorial - Criando o Banco de Dados
+#######################################
 
 Agora que temos o CakePHP instalado, vamos configurar o banco de dados para nossa
 aplicação :abbr:`CMS (Sistema Gerenciador de Conteúdo)`. Se você ainda não tiver
