@@ -1,69 +1,67 @@
-CMS Tutorial - Tags and Users
+CMS Tutorial - Tags e Users
 #############################
 
-With the basic article creation functionality built, we need to enable multiple
-authors to work in our CMS. Previously, we built all the models, views and
-controllers by hand. This time around we're going to use
-:doc:`/bake` to create our skeleton code. Bake is a powerful
-code generation :abbr:`CLI (Command Line Interface)` tool that leverages the
-conventions CakePHP uses to create skeleton :abbr:`CRUD (Create, Read, Update,
-Delete)` applications very efficiently. We're going to use ``bake`` to build our
-users code:
+Com a funcionalidade básica de criação de artigos construída, precisamos permitir que múltiplos 
+autores trabalhem em nosso CMS. Anteriormente, construíamos todos os models, views e 
+controllers manualmente. Desta vez, usaremos o Bake para criar nosso esqueleto de código. 
+O Bake é uma poderosa ferramenta de geração de código CLI (Interface de Linha de Comando) 
+que utiliza as convenções que o CakePHP usa para criar esqueletos de aplicações CRUD (Criar, Ler, Atualizar,
+Excluir) de forma muito eficiente. Usaremos o Bake para construir o código dos nossos usuários:
 
 .. code-block:: console
 
     cd /path/to/our/app
 
-    # You can overwrite any existing files.
+    # Você pode substituir qualquer arquivo existente.
     bin/cake bake model users
     bin/cake bake controller users
     bin/cake bake template users
 
-These 3 commands will generate:
+Estes 3 comandos gerarão:
 
-* The Table, Entity, Fixture files.
-* The Controller
-* The CRUD templates.
-* Test cases for each generated class.
+* Os arquivos de Tabela, Entidade e Fixture.
+* O Controller
+* Os templates CRUD.
+* Casos de teste para cada classe gerada.
 
-Bake will also use the CakePHP conventions to infer the associations, and
-validation your models have.
+O Bake também usará as convenções do CakePHP para inferir as associações e
+a validação que seus modelos possuem.
 
-Adding Tagging to Articles
-==========================
+Adicionando Tags aos Artigos
+============================
 
-With multiple users able to access our small :abbr:`CMS` it would be nice to
-have a way to categorize our content. We'll use tags and tagging to allow users
-to create free-form categories and labels for their content. Again, we'll use
-``bake`` to quickly generate some skeleton code for our application:
+Com vários usuários acessando nosso pequeno :abbr:`CMS`, seria ótimo
+ter uma maneira de categorizar nosso conteúdo. Usaremos tags e marcação para permitir que os usuários
+criem categorias e rótulos livres para seu conteúdo. Novamente, usaremos
+``bake`` para gerar rapidamente um esqueleto de código para nossa aplicação:
 
 .. code-block:: console
 
-    # Generate all the code at once.
+    # Gere todo o código de uma só vez.
     bin/cake bake all tags
 
-Once you have the scaffold code created, create a few sample tags by going to
+Após criar o código do scaffold, crie algumas tags de exemplo acessando
 **http://localhost:8765/tags/add**.
 
-Now that we have a Tags table, we can create an association between Articles and
-Tags. We can do so by adding the following to the ``initialize`` method on the
+Agora que temos uma tabela de Tags, podemos criar uma associação entre Artigos e
+Tags. Podemos fazer isso adicionando o seguinte ao método ``initialize`` na
 ``ArticlesTable``::
 
     public function initialize(array $config): void
     {
         $this->addBehavior('Timestamp');
-        $this->belongsToMany('Tags'); // Add this line
+        $this->belongsToMany('Tags'); // Adicione esta linha
     }
 
-This association will work with this simple definition because we followed
-CakePHP conventions when creating our tables. For more information, read
+Esta associação funcionará com esta definição simples porque seguimos as convenções 
+do CakePHP ao criar nossas tabelas. Para mais informações, leia
 :doc:`/orm/associations`.
 
-Updating Articles to Enable Tagging
-===================================
+Atualizando Artigos para Habilitar o Tagueamento
+================================================
 
-Now that our application has tags, we need to enable users to tag their
-articles. First, update the ``add`` action to look like::
+Agora que nosso aplicativo possui tags, precisamos permitir que os usuários marquem seus
+artigos. Primeiro, atualize a ação ``add`` para que fique assim::
 
     <?php
     // in src/Controller/ArticlesController.php
@@ -79,42 +77,42 @@ articles. First, update the ``add`` action to look like::
             if ($this->request->is('post')) {
                 $article = $this->Articles->patchEntity($article, $this->request->getData());
 
-                // Hardcoding the user_id is temporary, and will be removed later
-                // when we build authentication out.
+                // A codificação do user_id é temporária e será removida posteriormente
+                // quando construirmos a autenticação.
                 $article->user_id = 1;
 
                 if ($this->Articles->save($article)) {
-                    $this->Flash->success(__('Your article has been saved.'));
+                    $this->Flash->success(__('Seu artigo foi salvo.'));
 
                     return $this->redirect(['action' => 'index']);
                 }
-                $this->Flash->error(__('Unable to add your article.'));
+                $this->Flash->error(__('Não é possível adicionar seu artigo.'));
             }
-            // Get a list of tags.
+            // Obtenha uma lista de tags.
             $tags = $this->Articles->Tags->find('list')->all();
 
-            // Set tags to the view context
+            // Definir tags para o contexto de visualização
             $this->set('tags', $tags);
 
             $this->set('article', $article);
         }
 
-        // Other actions
+        // Outras ações
     }
 
-The added lines load a list of tags as an associative array of ``id => title``.
-This format will let us create a new tag input in our template.
-Add the following to the PHP block of controls in **templates/Articles/add.php**::
+As linhas adicionadas carregam uma lista de tags como um array associativo de ``id => title``.
+Este formato nos permitirá criar uma nova entrada de tag em nosso modelo.
+Adicione o seguinte ao bloco de controles PHP em **templates/Articles/add.php**::
 
     echo $this->Form->control('tags._ids', ['options' => $tags]);
 
-This will render a multiple select element that uses the ``$tags`` variable to
-generate the select box options. You should now create a couple new articles
-that have tags, as in the following section we'll be adding the ability to find
-articles by tags.
+Isso renderizará um elemento de seleção múltipla que usa a variável ``$tags`` para
+gerar as opções da caixa de seleção. Agora você deve criar alguns novos artigos
+com tags, pois na seção a seguir adicionaremos a capacidade de encontrar
+artigos por tags.
 
-You should also update the ``edit`` method to allow adding or editing tags. The
-edit method should now look like::
+Você também deve atualizar o método ``edit`` para permitir a adição ou edição de tags. O método
+edit agora deve se parecer com::
 
     public function edit($slug)
     {
@@ -125,37 +123,37 @@ edit method should now look like::
         if ($this->request->is(['post', 'put'])) {
             $this->Articles->patchEntity($article, $this->request->getData());
             if ($this->Articles->save($article)) {
-                $this->Flash->success(__('Your article has been updated.'));
+                $this->Flash->success(__('Seu artigo foi atualizado.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('Unable to update your article.'));
+            $this->Flash->error(__('Não é possível atualizar seu artigo.'));
         }
 
-        // Get a list of tags.
+        // Obtenha uma lista de tags.
         $tags = $this->Articles->Tags->find('list')->all();
 
-        // Set tags to the view context
+        // Definir tags para o contexto de visualização
         $this->set('tags', $tags);
 
         $this->set('article', $article);
     }
 
-Remember to add the new tags multiple select control we added to the **add.php**
-template to the **templates/Articles/edit.php** template as well.
+Lembre-se de adicionar o novo controle de seleção múltipla de tags que adicionamos ao template **add.php**
+também ao template **templates/Articles/edit.php**.
 
-Finding Articles By Tags
-========================
+Encontrar Artigos por Tags
+==========================
 
-Once users have categorized their content, they will want to find that content
-by the tags they used. For this feature we'll implement a route, controller
-action, and finder method to search through articles by tag.
+Depois que os usuários categorizarem seu conteúdo, eles desejarão encontrá-lo
+pelas tags que usaram. Para este recurso, implementaremos uma rota, uma ação
+do controller e um método finder para pesquisar artigos por tag.
 
-Ideally, we'd have a URL that looks like
-**http://localhost:8765/articles/tagged/funny/cat/gifs**. This would let us
-find all the articles that have the 'funny', 'cat' or 'gifs' tags. Before we
-can implement this, we'll add a new route. Your **config/routes.php** (with
-the baked comments removed) should look like::
+O ideal seria ter uma URL semelhante a
+**http://localhost:8765/articles/tagged/funny/cat/gifs**. Isso nos permitiria
+encontrar todos os artigos que possuem as tags 'engraçado', 'gato' ou 'gifs'. Antes de
+implementarmos isso, adicionaremos uma nova rota. Seu **config/routes.php** (com
+os comentários removidos) deve se parecer com::
 
     <?php
     use Cake\Routing\Route\DashedRoute;
@@ -167,10 +165,10 @@ the baked comments removed) should look like::
         $builder->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
         $builder->connect('/pages/*', ['controller' => 'Pages', 'action' => 'display']);
 
-        // Add this
-        // New route we're adding for our tagged action.
-        // The trailing `*` tells CakePHP that this action has
-        // passed parameters.
+        // Adicione isto
+        // Nova rota que estamos adicionando para nossa ação marcada.
+        // O `*` final informa ao CakePHP que esta ação tem
+        // parâmetros passados.
         $builder->scope('/articles', function (RouteBuilder $builder) {
             $builder->connect('/tagged/*', ['controller' => 'Articles', 'action' => 'tags']);
         });
@@ -178,66 +176,65 @@ the baked comments removed) should look like::
         $builder->fallbacks();
     });
 
-The above defines a new 'route' which connects the **/articles/tagged/** path,
-to ``ArticlesController::tags()``. By defining routes, you can isolate how your
-URLs look, from how they are implemented. If we were to visit
-**http://localhost:8765/articles/tagged**, we would see a helpful error page
-from CakePHP informing you that the controller action does not exist. Let's
-implement that missing method now. In **src/Controller/ArticlesController.php**
-add the following::
+O exemplo acima define uma nova 'rota' que conecta o caminho **/articles/tagged/**
+a ``ArticlesController::tags()``. Ao definir rotas, você pode isolar a aparência das suas
+URLs de como elas são implementadas. Se visitássemos
+**http://localhost:8765/articles/tagged**, veríamos uma página de erro útil
+do CakePHP informando que a ação do controlador não existe. Vamos
+implementar esse método ausente agora. Em **src/Controller/ArticlesController.php**
+adicione o seguinte::
 
     public function tags()
     {
-        // The 'pass' key is provided by CakePHP and contains all
-        // the passed URL path segments in the request.
+        // A chave 'pass' é fornecida pelo CakePHP e contém todos os
+        // segmentos de caminho de URL passados ​​na solicitação.
         $tags = $this->request->getParam('pass');
 
-        // Use the ArticlesTable to find tagged articles.
+        // Use a ArticlesTable para encontrar artigos marcados.
         $articles = $this->Articles->find('tagged', tags: $tags)
             ->all();
 
-        // Pass variables into the view template context.
+        // Passe variáveis ​​para o contexto do template de visualização.
         $this->set([
             'articles' => $articles,
             'tags' => $tags
         ]);
     }
 
-To access other parts of the request data, consult the :ref:`cake-request`
-section.
+Para acessar outras partes dos dados da solicitação, consulte a seção :ref:`cake-request`.
 
-Since passed arguments are passed as method parameters, you could also write the
-action using PHP's variadic argument::
+Como os argumentos passados ​​são passados ​​como parâmetros do método, você também pode escrever a
+ação usando o argumento variável do PHP::
 
     public function tags(...$tags)
     {
-        // Use the ArticlesTable to find tagged articles.
+        // Use a ArticlesTable para encontrar artigos marcados.
         $articles = $this->Articles->find('tagged', tags: $tags)
             ->all();
 
-        // Pass variables into the view template context.
+        // Passe variáveis ​​para o contexto do template de visualização.
         $this->set([
             'articles' => $articles,
             'tags' => $tags
         ]);
     }
 
-Creating the Finder Method
---------------------------
+Criando o Método Finder
+-----------------------
 
-In CakePHP we like to keep our controller actions slim, and put most of our
-application's logic in the model layer. If you were to visit the
-**/articles/tagged** URL now you would see an error that the ``findTagged()``
-method has not been implemented yet, so let's do that. In
-**src/Model/Table/ArticlesTable.php** add the following::
+No CakePHP, gostamos de manter as ações do nosso controller enxutas e colocar a maior parte da lógica da nossa
+aplicação na camada de modelo. Se você acessasse a URL
+**/articles/tagged** agora, veria um erro informando que o método ``findTagged()``
+ainda não foi implementado, então vamos fazer isso. Em
+**src/Model/Table/ArticlesTable.php** adicione o seguinte::
 
-    // add this use statement right below the namespace declaration to import
-    // the Query class
+    // adicione esta instrução use logo abaixo da declaração de namespace para importar
+    // a classe Query
     use Cake\ORM\Query\SelectQuery;
 
-    // The $query argument is a query builder instance.
-    // The $options array will contain the 'tags' option we passed
-    // to find('tagged') in our controller action.
+    // O argumento $query é uma instância do construtor de consultas.
+    // O array $options conterá a opção 'tags' que passamos
+    // para find('tagged') em nossa ação do controlador.
     public function findTagged(SelectQuery $query, array $tags = []): SelectQuery
     {
         $columns = [
@@ -251,11 +248,11 @@ method has not been implemented yet, so let's do that. In
             ->distinct($columns);
 
         if (empty($tags)) {
-            // If there are no tags provided, find articles that have no tags.
+            // Se não houver tags fornecidas, localize artigos que não tenham tags.
             $query->leftJoinWith('Tags')
                 ->where(['Tags.title IS' => null]);
         } else {
-            // Find articles that have one or more of the provided tags.
+            // Encontre artigos que tenham uma ou mais das tags fornecidas.
             $query->innerJoinWith('Tags')
                 ->where(['Tags.title IN' => $tags]);
         }
@@ -263,21 +260,21 @@ method has not been implemented yet, so let's do that. In
         return $query->groupBy(['Articles.id']);
     }
 
-We just implemented a :ref:`custom finder method <custom-find-methods>`. This is
-a very powerful concept in CakePHP that allows you to package up re-usable
-queries. Finder methods always get a :doc:`/orm/query-builder` object and an
-array of options as parameters. Finders can manipulate the query and add any
-required conditions or criteria. When complete, finder methods must return
-a modified query object. In our finder we've leveraged the ``distinct()`` and
-``leftJoin()`` methods which allow us to find distinct articles that have
-a 'matching' tag.
+Acabamos de implementar um :ref:`método localizador personalizado <custom-find-methods>`. Este é
+um conceito muito poderoso no CakePHP que permite empacotar consultas
+reutilizáveis. Os métodos localizadores sempre recebem um objeto :doc:`/orm/query-builder` e um
+array de opções como parâmetros. Os localizadores podem manipular a consulta e adicionar quaisquer
+condições ou critérios necessários. Quando concluídos, os métodos localizadores devem retornar
+um objeto de consulta modificado. Em nosso localizador, utilizamos os métodos ``distinct()`` e
+``leftJoin()``, que nos permitem encontrar artigos distintos que tenham
+uma tag 'matching'.
 
-Creating the View
------------------
+Criando a Visualização
+----------------------
 
-Now if you visit the **/articles/tagged** URL again, CakePHP will show a new error
-letting you know that you have not made a view file. Next, let's build the
-view file for our ``tags()`` action::
+Agora, se você visitar a URL **/articles/tagged** novamente, o CakePHP mostrará um novo erro
+informando que você não criou um arquivo de visualização. Em seguida, vamos construir o
+arquivo de visualização para nossa ação ``tags()``::
 
     <!-- In templates/Articles/tags.php -->
     <h1>
@@ -288,7 +285,7 @@ view file for our ``tags()`` action::
     <section>
     <?php foreach ($articles as $article): ?>
         <article>
-            <!-- Use the HtmlHelper to create a link -->
+            <!-- Use o HtmlHelper para criar um link -->
             <h4><?= $this->Html->link(
                 $article->title,
                 ['controller' => 'Articles', 'action' => 'view', $article->slug]
@@ -298,46 +295,45 @@ view file for our ``tags()`` action::
     <?php endforeach; ?>
     </section>
 
-In the above code we use the :doc:`/views/helpers/html` and
-:doc:`/views/helpers/text` helpers to assist in generating our view output. We
-also use the :php:func:`h` shortcut function to HTML encode output. You should
-remember to always use ``h()`` when outputting data to prevent HTML injection
-issues.
+No código acima, usamos os auxiliares :doc:`/views/helpers/html` e
+:doc:`/views/helpers/text` para auxiliar na geração da saída da nossa view.
+Também usamos a função de atalho :php:func:`h` para codificar a saída em HTML. Você deve
+lembrar-se de sempre usar ``h()`` ao gerar dados para evitar problemas de injeção de HTML.
 
-The **tags.php** file we just created follows the CakePHP conventions for view
-template files. The convention is to have the template use the lower case and
-underscored version of the controller action name.
+O arquivo **tags.php** que acabamos de criar segue as convenções do CakePHP para arquivos de template de view.
+A convenção é que o template use a versão em letras minúsculas e
+sublinhada do nome da ação do controller.
 
-You may notice that we were able to use the ``$tags`` and ``$articles``
-variables in our view template. When we use the ``set()`` method in our
-controller, we set specific variables to be sent to the view. The View will make
-all passed variables available in the template scope as local variables.
+Você pode notar que conseguimos usar as variáveis ​​``$tags`` e ``$articles``
+em nosso template de view. Quando usamos o método ``set()`` em nosso
+controller, definimos variáveis ​​específicas a serem enviadas para a view. A View tornará
+todas as variáveis ​​passadas disponíveis no escopo do template como variáveis ​​locais.
 
-You should now be able to visit the **/articles/tagged/funny** URL and see all
-the articles tagged with 'funny'.
+Agora você poderá visitar a URL **/articles/tagged/funny** e ver todos
+os artigos marcados com 'funny'.
 
-Improving the Tagging Experience
-================================
+Melhorando a Experiência de Tagueamento
+=======================================
 
-Right now, adding new tags is a cumbersome process, as authors need to
-pre-create all the tags they want to use. We can improve the tag selection UI by
-using a comma separated text field. This will let us give a better experience to
-our users, and use some more great features in the ORM.
+No momento, adicionar novas tags é um processo trabalhoso, pois os autores precisam
+pré-criar todas as tags que desejam usar. Podemos melhorar a interface de seleção de tags
+usando um campo de texto separado por vírgula. Isso nos permitirá oferecer uma experiência melhor aos
+nossos usuários e usar mais alguns recursos excelentes do ORM.
 
-Adding a Computed Field
------------------------
+Adicionando um Campo Computado
+------------------------------
 
-Because we'll want a simple way to access the formatted tags for an entity, we
-can add a virtual/computed field to the entity. In
-**src/Model/Entity/Article.php** add the following::
+Como queremos uma maneira simples de acessar as tags formatadas de uma entidade,
+podemos adicionar um campo virtual/computado à entidade. Em
+**src/Model/Entity/Article.php**, adicione o seguinte::
 
-    // add this use statement right below the namespace declaration to import
-    // the Collection class
+    // adicione esta instrução use logo abaixo da declaração de namespace para importar
+    // a classe Collection
     use Cake\Collection\Collection;
 
-    // Update the accessible property to contain `tag_string`
+    // Atualiza a propriedade acessível para conter `tag_string`
     protected array $_accessible = [
-        //other fields...
+        //outros campos...
         'tag_string' => true
     ];
 
@@ -357,35 +353,35 @@ can add a virtual/computed field to the entity. In
         return trim($str, ', ');
     }
 
-This will let us access the ``$article->tag_string`` computed property. We'll
-use this property in controls later on.
+Isso nos permitirá acessar a propriedade computada ``$article->tag_string``. 
+Usaremos essa propriedade em controles posteriormente.
 
-Updating the Views
-------------------
+Atualizando as Views
+--------------------
 
-With the entity updated we can add a new control for our tags. In
-**templates/Articles/add.php** and **templates/Articles/edit.php**,
-replace the existing ``tags._ids`` control with the following::
+Com a entidade atualizada, podemos adicionar um novo controle para nossas tags. Em
+**templates/Articles/add.php** e **templates/Articles/edit.php**,
+substitua o controle ``tags._ids`` existente pelo seguinte::
 
     echo $this->Form->control('tag_string', ['type' => 'text']);
 
-We'll also need to update the article view template. In
-**templates/Articles/view.php** add the line as shown::
+Também precisaremos atualizar o template de visualização do artigo. Em
+**templates/Articles/view.php**, adicione a linha conforme mostrado::
 
     <!-- File: templates/Articles/view.php -->
 
     <h1><?= h($article->title) ?></h1>
     <p><?= h($article->body) ?></p>
-    // Add the following line
+    // Adicione a seguinte linha
     <p><b>Tags:</b> <?= h($article->tag_string) ?></p>
 
-You should also update the view method to allow retrieving existing tags::
+Você também deve atualizar o método de visualização para permitir a recuperação de tags existentes::
 
     // src/Controller/ArticlesController.php file
 
     public function view($slug = null)
     {
-       // Update retrieving tags with contain()
+       // Atualizar a recuperação de tags com contain()
        $article = $this->Articles
             ->findBySlug($slug)
             ->contain('Tags')
@@ -393,14 +389,14 @@ You should also update the view method to allow retrieving existing tags::
         $this->set(compact('article'));
     }
 
-Persisting the Tag String
--------------------------
+Persistindo a Sequência de Tags
+-------------------------------
 
-Now that we can view existing tags as a string, we'll want to save that data as
-well. Because we marked the ``tag_string`` as accessible, the ORM will copy that
-data from the request into our entity. We can use a ``beforeSave()`` hook method
-to parse the tag string and find/build the related entities. Add the following
-to **src/Model/Table/ArticlesTable.php**::
+Agora que podemos visualizar as tags existentes como uma string, também queremos salvar esses dados. 
+Como marcamos a ``tag_string`` como acessível, o ORM copiará esses dados da solicitação para a nossa 
+entidade. Podemos usar um método de gancho ``beforeSave()``
+para analisar a string da tag e encontrar/construir as entidades relacionadas. Adicione o seguinte
+a **src/Model/Table/ArticlesTable.php**::
 
     public function beforeSave(EventInterface $event, $entity, $options): void
     {
@@ -408,16 +404,16 @@ to **src/Model/Table/ArticlesTable.php**::
             $entity->tags = $this->_buildTags($entity->tag_string);
         }
 
-        // Other code
+        // Outro código
     }
 
     protected function _buildTags($tagString)
     {
         // Trim tags
         $newTags = array_map('trim', explode(',', $tagString));
-        // Remove all empty tags
+        // Removendo todas as tags vazias
         $newTags = array_filter($newTags);
-        // Reduce duplicated tags
+        // Removendo tags duplicadas
         $newTags = array_unique($newTags);
 
         $out = [];
@@ -425,18 +421,18 @@ to **src/Model/Table/ArticlesTable.php**::
             ->where(['Tags.title IN' => $newTags])
             ->all();
 
-        // Remove existing tags from the list of new tags.
+        // Remova as tags existentes da lista de novas tags.
         foreach ($tags->extract('title') as $existing) {
             $index = array_search($existing, $newTags);
             if ($index !== false) {
                 unset($newTags[$index]);
             }
         }
-        // Add existing tags.
+        // Adicionando tags existentes.
         foreach ($tags as $tag) {
             $out[] = $tag;
         }
-        // Add new tags.
+        // Adicionando novas tags.
         foreach ($newTags as $tag) {
             $out[] = $this->Tags->newEntity(['title' => $tag]);
         }
@@ -444,43 +440,43 @@ to **src/Model/Table/ArticlesTable.php**::
         return $out;
     }
 
-If you now create or edit articles, you should be able to save tags as a comma
-separated list of tags, and have the tags and linking records automatically
-created.
+Se você agora cria ou edita artigos, poderá salvar tags como uma lista de tags
+separadas por vírgulas e ter as tags e os registros de vinculação
+criados automaticamente.
 
-While this code is a bit more complicated than what we've done so far, it helps
-to showcase how powerful the ORM in CakePHP is. You can manipulate query
-results using the :doc:`/core-libraries/collections` methods, and handle
-scenarios where you are creating entities on the fly with ease.
+Embora este código seja um pouco mais complexo do que o que fizemos até agora, ele ajuda
+a demonstrar o quão poderoso é o ORM no CakePHP. Você pode manipular resultados de consulta
+usando os métodos :doc:`/core-libraries/collections` e lidar
+com cenários em que você cria entidades dinamicamente com facilidade.
 
-Auto-populating the Tag String
-==============================
+Preenchimento Automático da Sequência de Tags
+=============================================
 
-Before we finish up, we'll need a mechanism that will load the associated tags
-(if any) whenever we load an article.
+Antes de terminarmos, precisaremos de um mecanismo que carregue as tags associadas
+(se houver) sempre que carregarmos um artigo.
 
-In your **src/Model/Table/ArticlesTable.php**, change::
+Em seu **src/Model/Table/ArticlesTable.php**, altere::
 
     public function initialize(array $config): void
     {
         $this->addBehavior('Timestamp');
-        // Change this line
+        // Altere essa linha
         $this->belongsToMany('Tags', [
             'joinTable' => 'articles_tags',
             'dependent' => true
         ]);
     }
 
-This will tell the Articles table model that there is a join table associated
-with tags.  The 'dependent' option tells the table to delete any associated
-records from the join table if an article is deleted.
+Isso informará ao modelo de tabela "Articles" que há uma tabela de junção associada
+com tags. A opção "dependent" informa à tabela para excluir quaisquer registros
+associados da tabela de junção se um artigo for excluído.
 
-Lastly, update the findBySlug() method calls in
+Por fim, atualize as chamadas do método findBySlug() em
 **src/Controller/ArticlesController.php**::
 
     public function edit($slug)
     {
-        // Update this line
+        // Atualize está linha
         $article = $this->Articles
             ->findBySlug($slug)
             ->contain('Tags')
@@ -490,7 +486,7 @@ Lastly, update the findBySlug() method calls in
 
     public function view($slug = null)
     {
-        // Update this line
+        // Atualize está linha
         $article = $this->Articles
             ->findBySlug($slug)
             ->contain('Tags')
@@ -498,8 +494,8 @@ Lastly, update the findBySlug() method calls in
         $this->set(compact('article'));
     }
 
-The ``contain()`` method tells the ``ArticlesTable`` object to also populate the
-Tags association when the article is loaded. Now when tag_string is called for
-an Article entity, there will be data present to create the string!
+O método ``contain()`` informa ao objeto ``ArticlesTable`` para também preencher a
+associação Tags quando o artigo for carregado. Agora, quando tag_string for chamada para
+uma entidade Article, haverá dados presentes para criar a string!
 
-Next we'll be adding :doc:`authentication </tutorials-and-examples/cms/authentication>`.
+Em seguida, adicionaremos :doc:`authentication </tutorials-and-examples/cms/authentication>`.
