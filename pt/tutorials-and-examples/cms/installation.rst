@@ -1,5 +1,5 @@
-Tutorial - Gerenciador de Conteúdo
-##################################
+CMS Tutorial - Gerenciador de Conteúdo
+######################################
 
 Este tutorial irá orientá-lo através da criação de uma simples aplicação do
 tipo :abbr:`CMS (Sistema Gerenciador de Conteúdo)`. Para começar, nós iremos
