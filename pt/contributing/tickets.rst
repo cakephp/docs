@@ -20,10 +20,10 @@ ajudam a criar relatórios de erro melhores:
   seja corrigido.
 * **Faça**: Dê o máximo de detalhes sobre o seu ambiente: (SO, versão do PHP,
   versão do CakePHP).
-* **Não faça**: Não use o sistema de *tickets* para sanar dúvidas. O canal de
-  IRC #cakephp na `Freenode <https://webchat.freenode.net>`__ possui muitos
-  desenvolvedores dispníveis para ajudar a responder suas dúvidas. Também dê uma
-  olhada no `Stack Overflow <https://stackoverflow.com/questions/tagged/cakephp>`__.
+* **Não faça**: Por favor, não use o sistema de *tickets* para fazer perguntas de suporte. Tanto o canal de suporte no
+  `CakePHP Slack workspace <https://cakesf.herokuapp.com>`__ quanto o canal IRC #cakephp no `Freenode <https://webchat.freenode.net>`__ têm muitos
+  desenvolvedores disponíveis para ajudar a responder às suas perguntas. Consulte também o
+  `Stack Overflow <https://stackoverflow.com/questions/tagged/cakephp>`__ ou o `fórum oficial do CakePHP <https://discourse.cakephp.org>`__.
 
 Reportando problemas de segurança
 =================================
