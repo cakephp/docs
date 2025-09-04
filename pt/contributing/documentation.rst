@@ -10,8 +10,7 @@ direita em qualquer página vai direcioná-lo para o editor online do Github.
 
 A documentação do CakePHP é
 `continuamente integrada <https://en.wikipedia.org/wiki/Continuous_integration>`_,
-sendo assim, você pode checar o status de
-`várias builds <https://ci.cakephp.org>`_ no servidor Jenkins a qualquer momento.
+e implantada após cada pull request ser mesclada.
 
 Traduções
 =========
@@ -53,8 +52,8 @@ Por exemplo, se um novo arquivo é criado em **en/file.rst**, nós devemos:
   elementos ``toc-tree``. A nota a seguir será adicionada até que alguém traduza
   o arquivo::
 
-    File Title
-    ##########
+    Título do Arquivo
+    #################
 
     .. note::
         Atualmente, a documentação desta página não é suportada em português.
@@ -70,9 +69,8 @@ Por exemplo, se um novo arquivo é criado em **en/file.rst**, nós devemos:
     .. toctree::
         :maxdepth: 1
 
-        toc-file-x
-        toc-file-y
-        toc-file-z
+        one-toc-file
+        other-toc-file
 
     .. meta::
         :title lang=pt: Título do arquivo
