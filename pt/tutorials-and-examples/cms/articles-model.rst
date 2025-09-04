@@ -1,4 +1,4 @@
-Tutorial CMS - Criando nosso primeiro Modelo
+CMS Tutorial - Criando nosso primeiro Modelo
 ############################################
 
 Os modelos são o coração das aplicações CakePHP. Eles nos permitem ler e
