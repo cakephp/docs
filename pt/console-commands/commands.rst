@@ -565,9 +565,9 @@ Assim como os Controllers, os Comandos oferecem eventos de ciclo de vida que per
 o framework chamando o código da sua aplicação. Os Comandos possuem:
 
 - ``Command.beforeExecute`` É chamado antes do método ``execute()`` de um comando.
-O evento recebe o parâmetro ``ConsoleArguments`` como ``args``. Este
-evento não pode ser interrompido ou ter seu resultado substituído.
+    O evento recebe o parâmetro ``ConsoleArguments`` como ``args``. Este
+    evento não pode ser interrompido ou ter seu resultado substituído.
 - ``Command.afterExecute`` É chamado após o método ``execute()`` de um comando ser
-concluído. O evento contém ``ConsoleArguments`` como ``args`` e o resultado
-do comando como ``result``. Este evento não pode ser interrompido ou ter seu resultado
-substituído.
+    concluído. O evento contém ``ConsoleArguments`` como ``args`` e o resultado
+    do comando como ``result``. Este evento não pode ser interrompido ou ter seu resultado
+    substituído.
