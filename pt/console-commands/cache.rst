@@ -1,14 +1,14 @@
-Cache Tool
-##########
+Ferramenta de Cache
+###################
 
-To help you better manage cached data from a CLI environment, a console command
-is available for clearing cached data your application has::
+Para ajudá-lo a gerenciar melhor os dados armazenados em cache de um ambiente CLI, um comando de console
+está disponível para limpar os dados armazenados em cache do seu aplicativo::
 
-    // Clear one cache config
+    // Limpar uma configuração de cache
     bin/cake cache clear <configname>
 
-    // Clear all cache configs
+    // Limpar todas as configurações de cache
     bin/cake cache clear_all
 
-    // Clear one cache group
+    // Limpar um grupo de cache
     bin/cake cache clear_group <groupname>
