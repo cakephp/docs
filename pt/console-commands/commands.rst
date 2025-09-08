@@ -1,19 +1,19 @@
-Command Objects
-###############
+Objetos de Comando
+##################
 
 .. php:namespace:: Cake\Console
 .. php:class:: Command
 
-CakePHP comes with a number of built-in commands for speeding up your
-development, and automating routine tasks. You can use these same libraries to
-create commands for your application and plugins.
+O CakePHP vem com uma série de comandos integrados para acelerar seu
+desenvolvimento e automatizar tarefas rotineiras. Você pode usar essas mesmas bibliotecas para
+criar comandos para sua aplicação e plugins.
 
-Creating a Command
+Criando um Comando
 ==================
 
-Let's create our first Command. For this example, we'll create a
-simple Hello world command. In your application's **src/Command** directory create
-**HelloCommand.php**. Put the following code inside it::
+Vamos criar nosso primeiro Comando. Para este exemplo, criaremos um
+comando simples "Olá, mundo". No diretório **src/Command** do seu aplicativo, crie
+**HelloCommand.php**. Insira o seguinte código dentro dele::
 
     <?php
     namespace App\Command;
@@ -26,26 +26,26 @@ simple Hello world command. In your application's **src/Command** directory crea
     {
         public function execute(Arguments $args, ConsoleIo $io): int
         {
-            $io->out('Hello world.');
+            $io->out('Olá, mundo.');
 
             return static::CODE_SUCCESS;
         }
     }
 
-Command classes must implement an ``execute()`` method that does the bulk of
-their work. This method is called when a command is invoked. Lets call our first
-command application directory, run:
+As classes de comando devem implementar um método ``execute()`` que realiza a maior parte
+do seu trabalho. Este método é chamado quando um comando é invocado. Vamos chamar nosso primeiro
+diretório de aplicativo de comando, execute:
 
 .. code-block:: console
 
     bin/cake hello
 
-You should see the following output::
+Você deverá ver a seguinte saída::
 
-    Hello world.
+    Olá, mundo.
 
-Our ``execute()`` method isn't very interesting let's read some input from the
-command line::
+Nosso método ``execute()`` não é muito interessante, vamos ler algumas entradas da
+linha de comando::
 
     <?php
     namespace App\Command;
@@ -76,7 +76,7 @@ command line::
     }
 
 
-After saving this file, you should be able to run the following command:
+Depois de salvar este arquivo, você poderá executar o seguinte comando:
 
 .. code-block:: console
 
@@ -85,27 +85,26 @@ After saving this file, you should be able to run the following command:
     # Outputs
     Hello jillian
 
-Changing the Default Command Name
-=================================
+Alterando o Nome do Comando Padrão
+==================================
 
-CakePHP will use conventions to generate the name your commands use on the
-command line. If you want to overwrite the generated name implement the
-``defaultName()`` method in your command::
+O CakePHP usará convenções para gerar o nome que seus comandos usarão na
+linha de comando. Se você quiser sobrescrever o nome gerado, implemente o método
+``defaultName()`` no seu comando::
 
     public static function defaultName(): string
     {
         return 'oh_hi';
     }
 
-The above would make our ``HelloCommand`` accessible by ``cake oh_hi`` instead
-of ``cake hello``.
+O comando acima tornaria nosso ``HelloCommand`` acessível por ``cake oh_hi`` em vez de ``cake hello``.
 
-Defining Arguments and Options
-==============================
+Definindo Argumentos e Opções
+=============================
 
-As we saw in the last example, we can use the ``buildOptionParser()`` hook
-method to define arguments. We can also define options. For example, we could
-add a ``yell`` option to our ``HelloCommand``::
+Como vimos no último exemplo, podemos usar o método de gancho ``buildOptionParser()``
+para definir argumentos. Também podemos definir opções. Por exemplo, poderíamos
+adicionar uma opção ``yell`` ao nosso ``HelloCommand``::
 
     // ...
     protected function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
@@ -133,21 +132,21 @@ add a ``yell`` option to our ``HelloCommand``::
         return static::CODE_SUCCESS;
     }
 
-See the :doc:`/console-commands/option-parsers` section for more information.
+Veja a seção :doc:`/console-commands/option-parsers` para mais informações.
 
-Creating Output
-===============
+Criando saída
+=============
 
-Commands are provided a ``ConsoleIo`` instance when executed. This object allows
-you to interact with ``stdout``, ``stderr`` and create files.  See the
-:doc:`/console-commands/input-output` section for more information.
+Os comandos recebem uma instância ``ConsoleIo`` quando executados. Este objeto permite
+que você interaja com ``stdout``, ``stderr`` e crie arquivos. Consulte a seção
+:doc:`/console-commands/input-output` para obter mais informações.
 
-Using Models in Commands
-========================
+Usando Modelos em Comandos
+==========================
 
-You'll often need access to your application's business logic in console
-commands.  You can load models in commands, just as you would in a controller
-using ``$this->fetchTable()`` since command use the ``LocatorAwareTrait``::
+Frequentemente, você precisará acessar a lógica de negócios do seu aplicativo em comandos
+de console. Você pode carregar modelos em comandos, assim como faria em um controller
+usando ``$this->fetchTable()``, já que o comando usa o ``LocatorAwareTrait``::
 
     <?php
     declare(strict_types=1);
@@ -161,7 +160,7 @@ using ``$this->fetchTable()`` since command use the ``LocatorAwareTrait``::
 
     class UserCommand extends Command
     {
-        // Define the default table. This allows you to use `fetchTable()` without any argument.
+        // Defina a tabela padrão. Isso permite que você use `fetchTable()` sem nenhum argumento.
         protected $defaultTable = 'Users';
 
         protected function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
@@ -185,86 +184,86 @@ using ``$this->fetchTable()`` since command use the ``LocatorAwareTrait``::
         }
     }
 
-The above command, will fetch a user by username and display the information
-stored in the database.
+O comando acima buscará um usuário pelo nome de usuário e exibirá as informações
+armazenadas no banco de dados.
 
-Exit Codes and Stopping Execution
-=================================
+Códigos de Saída e Interrupção da Execução
+==========================================
 
-When your commands hit an unrecoverable error you can use the ``abort()`` method
-to terminate execution::
+Quando seus comandos apresentam um erro irrecuperável, você pode usar o método ``abort()``
+para encerrar a execução::
 
     // ...
     public function execute(Arguments $args, ConsoleIo $io): int
     {
         $name = $args->getArgument('name');
         if (strlen($name) < 5) {
-            // Halt execution, output to stderr, and set exit code to 1
-            $io->error('Name must be at least 4 characters long.');
+            // Interrompa a execução, envie para stderr e defina o código de saída como 1
+            $io->error('O nome deve ter pelo menos 4 caracteres.');
             $this->abort();
         }
 
         return static::CODE_SUCCESS;
     }
 
-You can also use ``abort()`` on the ``$io`` object to emit a message and code::
+Você também pode usar ``abort()`` no objeto ``$io`` para emitir uma mensagem e código::
 
     public function execute(Arguments $args, ConsoleIo $io): int
     {
         $name = $args->getArgument('name');
         if (strlen($name) < 5) {
-            // Halt execution, output to stderr, and set exit code to 99
-            $io->abort('Name must be at least 4 characters long.', 99);
+            // Interrompa a execução, envie para stderr e defina o código de saída como 99
+            $io->abort('O nome deve ter pelo menos 4 caracteres.', 99);
         }
 
         return static::CODE_SUCCESS;
     }
 
-You can pass any desired exit code into ``abort()``.
+Você pode passar qualquer código de saída desejado para ``abort()``.
 
 .. tip::
 
-    Avoid exit codes 64 - 78, as they have specific meanings described by
-    ``sysexits.h``. Avoid exit codes above 127, as these are used to indicate
-    process exit by signal, such as SIGKILL or SIGSEGV.
+    Evite os códigos de saída 64 a 78, pois eles têm significados específicos descritos por
+    ``sysexits.h``. Evite códigos de saída acima de 127, pois eles são usados ​​para indicar
+    a saída do processo por sinal, como SIGKILL ou SIGSEGV.
 
-    You can read more about conventional exit codes in the sysexit manual page
-    on most Unix systems (``man sysexits``), or the ``System Error Codes`` help
-    page in Windows.
+    Você pode ler mais sobre códigos de saída convencionais na página do manual do sysexit
+    na maioria dos sistemas Unix (``man sysexits``) ou na página de ajuda ``Códigos de Erro do Sistema``
+    no Windows.
 
-Calling other Commands
-======================
+Chamando Outros Comandos
+========================
 
-You may need to call other commands from your command. You can use
-``executeCommand`` to do that::
+Você pode precisar chamar outros comandos a partir do seu comando. Você pode usar
+``executeCommand`` para fazer isso::
 
-    // You can pass an array of CLI options and arguments.
+    // Você pode passar uma série de opções e argumentos da CLI.
     $this->executeCommand(OtherCommand::class, ['--verbose', 'deploy']);
 
-    // Can pass an instance of the command if it has constructor args
+    // Pode passar uma instância do comando se ele tiver argumentos de construtor
     $command = new OtherCommand($otherArgs);
     $this->executeCommand($command, ['--verbose', 'deploy']);
 
 .. note::
 
-    When calling ``executeCommand()`` in a loop, it is recommended to pass in the
-    parent command's ``ConsoleIo`` instance as the optional 3rd argument to
-    avoid a potential "open files" limit that could occur in some environments.
+    Ao chamar ``executeCommand()`` em um loop, é recomendável passar a instância ``ConsoleIo`` 
+    do comando pai como o terceiro argumento opcional para
+    evitar um potencial limite de "arquivos abertos" que pode ocorrer em alguns ambientes.
 
-Setting Command Description
-===========================
+Descrição do Comando de Configuração
+====================================
 
-You may want to set a command description via::
+Você pode querer definir uma descrição de comando via::
 
     class UserCommand extends Command
     {
         public static function getDescription(): string
         {
-            return 'My custom description';
+            return 'Minha descrição personalizada';
         }
     }
 
-This will show your description in the Cake CLI:
+Isso mostrará sua descrição no Cake CLI:
 
 .. code-block:: console
 
@@ -272,33 +271,33 @@ This will show your description in the Cake CLI:
 
     App:
       - user
-      └─── My custom description
+      └─── Minha descrição personalizada
 
-As well as in the help section of your command:
+Bem como na seção de ajuda do seu comando:
 
 .. code-block:: console
 
     cake user --help
-    My custom description
+    Minha descrição personalizada
 
     Usage:
     cake user [-h] [-q] [-v]
 
 .. _console-integration-testing:
 
-Testing Commands
-================
+Comandos de Teste
+=================
 
-To make testing console applications easier, CakePHP comes with a
-``ConsoleIntegrationTestTrait`` trait that can be used to test console applications
-and assert against their results.
+Para facilitar o teste de aplicações de console, o CakePHP vem com um trait
+``ConsoleIntegrationTestTrait`` que pode ser usado para testar aplicações de console
+e validar seus resultados.
 
-To get started testing your console application, create a test case that uses the
-``Cake\TestSuite\ConsoleIntegrationTestTrait`` trait. This trait contains a method
-``exec()`` that is used to execute your command. You can pass the same string
-you would use in the CLI to this method.
+Para começar a testar sua aplicação de console, crie um caso de teste que use o trait
+``Cake\TestSuite\ConsoleIntegrationTestTrait``. Este trait contém um método
+``exec()`` que é usado para executar seu comando. Você pode passar a mesma string
+que usaria na CLI para este método.
 
-Let's start with a very simple command, located in
+Vamos começar com um comando bem simples, localizado em
 **src/Command/UpdateTableCommand.php**::
 
     namespace App\Command;
@@ -312,16 +311,16 @@ Let's start with a very simple command, located in
     {
         protected function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
         {
-            $parser->setDescription('My cool console app');
+            $parser->setDescription('Meu aplicativo legal de console');
 
             return $parser;
         }
     }
 
-To write an integration test for this command, we would create a test case in
-**tests/TestCase/Command/UpdateTableTest.php** that uses the
-``Cake\TestSuite\ConsoleIntegrationTestTrait`` trait. This command doesn't do much at the
-moment, but let's just test that our command's description is displayed in ``stdout``::
+Para escrever um teste de integração para este comando, criaríamos um caso de teste em
+**tests/TestCase/Command/UpdateTableTest.php** que usa a trait
+``Cake\TestSuite\ConsoleIntegrationTestTrait``. Este comando não faz muita coisa no
+momento, mas vamos apenas testar se a descrição do nosso comando é exibida em ``stdout``::
 
     namespace App\Test\TestCase\Command;
 
@@ -335,13 +334,13 @@ moment, but let's just test that our command's description is displayed in ``std
         public function testDescriptionOutput()
         {
             $this->exec('update_table --help');
-            $this->assertOutputContains('My cool console app');
+            $this->assertOutputContains('Meu aplicativo legal de console');
         }
     }
 
-Our test passes! While this is very trivial example, it shows that creating an
-integration test case for console applications can follow command line
-conventions. Let's continue by adding more logic to our command::
+Nosso teste passou! Embora este seja um exemplo bastante trivial, ele mostra que a criação de um
+caso de teste de integração para aplicativos de console pode seguir as convenções
+da linha de comando. Vamos continuar adicionando mais lógica ao nosso comando::
 
     namespace App\Command;
 
@@ -356,9 +355,9 @@ conventions. Let's continue by adding more logic to our command::
         protected function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
         {
             $parser
-                ->setDescription('My cool console app')
+                ->setDescription('Meu aplicativo legal de console')
                 ->addArgument('table', [
-                    'help' => 'Table to update',
+                    'help' => 'Tabela para atualizar',
                     'required' => true
                 ]);
 
@@ -378,8 +377,8 @@ conventions. Let's continue by adding more logic to our command::
         }
     }
 
-This is a more complete command that has required options and relevant logic.
-Modify your test case to the following snippet of code::
+Este é um comando mais completo que possui as opções necessárias e a lógica relevante.
+Modifique seu caso de teste para o seguinte trecho de código::
 
     namespace Cake\Test\TestCase\Command;
 
@@ -393,14 +392,14 @@ Modify your test case to the following snippet of code::
         use ConsoleIntegrationTestTrait;
 
         protected $fixtures = [
-            // assumes you have a UsersFixture
+            // assume que você tem um UsersFixture
             'app.Users',
         ];
 
         public function testDescriptionOutput()
         {
             $this->exec('update_table --help');
-            $this->assertOutputContains('My cool console app');
+            $this->assertOutputContains('Meu aplicativo legal de console');
         }
 
         public function testUpdateModified()
@@ -420,25 +419,25 @@ Modify your test case to the following snippet of code::
         }
     }
 
-As you can see from the ``testUpdateModified`` method, we are testing that our
-command updates the table that we are passing as the first argument. First, we
-assert that the command exited with the proper status code, ``0``. Then we check
-that our command did its work, that is, updated the table we provided and set
-the ``modified`` column to the current time.
+Como você pode ver no método ``testUpdateModified``, estamos testando se nosso
+comando atualiza a tabela que estamos passando como primeiro argumento. Primeiro,
+afirmamos que o comando saiu com o código de status correto, ``0``. Em seguida, verificamos
+se nosso comando fez seu trabalho, ou seja, atualizou a tabela que fornecemos e definiu
+a coluna ``modified`` para a hora atual.
 
-Remember, ``exec()`` will take the same string you type into your CLI, so you
-can include options and arguments in your command string.
+Lembre-se de que ``exec()`` receberá a mesma string que você digitar na sua CLI, para que você
+possa incluir opções e argumentos na sua string de comando.
 
-Testing Interactive Commands
-----------------------------
+Testando Comandos Interativos
+-----------------------------
 
-Consoles are often interactive. Testing interactive commands with the
-``Cake\TestSuite\ConsoleIntegrationTestTrait`` trait only requires passing the
-inputs you expect as the second parameter of ``exec()``. They should be
-included as an array in the order that you expect them.
+Consoles costumam ser interativos. Testar comandos interativos com a característica 
+``Cake\TestSuite\ConsoleIntegrationTestTrait`` requer apenas a passagem das
+entradas esperadas como o segundo parâmetro de ``exec()``. Elas devem ser
+incluídas como um array na ordem em que você as espera.
 
-Continuing with our example command, let's add an interactive confirmation.
-Update the command class to the following::
+Continuando com nosso comando de exemplo, vamos adicionar uma confirmação interativa.
+Atualize a classe de comando para o seguinte::
 
     namespace App\Command;
 
@@ -453,9 +452,9 @@ Update the command class to the following::
         protected function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
         {
             $parser
-                ->setDescription('My cool console app')
+                ->setDescription('Meu aplicativo legal de console')
                 ->addArgument('table', [
-                    'help' => 'Table to update',
+                    'help' => 'Tabela para atualizar',
                     'required' => true
                 ]);
 
@@ -465,8 +464,8 @@ Update the command class to the following::
         public function execute(Arguments $args, ConsoleIo $io): int
         {
             $table = $args->getArgument('table');
-            if ($io->ask('Are you sure?', 'n', ['y', 'n']) !== 'y') {
-                $io->error('You need to be sure.');
+            if ($io->ask('Tem certeza?', 'n', ['y', 'n']) !== 'y') {
+                $io->error('Você precisa ter certeza.');
                 $this->abort();
             }
             $this->fetchTable($table)->updateQuery()
@@ -479,9 +478,9 @@ Update the command class to the following::
         }
     }
 
-Now that we have an interactive command, we can add a test case that tests
-that we receive the proper response, and one that tests that we receive an
-incorrect response. Remove the ``testUpdateModified`` method and, add the following methods to
+Agora que temos um comando interativo, podemos adicionar um caso de teste que testa
+se recebemos a resposta correta e outro que testa se recebemos uma
+resposta incorreta. Remova o método ``testUpdateModified`` e adicione os seguintes métodos a
 **tests/TestCase/Command/UpdateTableCommandTest.php**::
 
 
@@ -514,61 +513,61 @@ incorrect response. Remove the ``testUpdateModified`` method and, add the follow
         $this->assertSame($original, $user->timestamp);
     }
 
-In the first test case, we confirm the question, and records are updated. In the
-second test we don't confirm and records are not updated, and we can check that
-our error message was written to ``stderr``.
+No primeiro caso de teste, confirmamos a pergunta e os registros são atualizados. No
+segundo teste, não confirmamos e os registros não são atualizados, e podemos verificar se
+nossa mensagem de erro foi escrita em ``stderr``.
 
-Assertion methods
------------------
+Métodos de Asserção
+-------------------
 
-The ``Cake\TestSuite\ConsoleIntegrationTestTrait`` trait provides a number of
-assertion methods that make help assert against console output::
+O atributo ``Cake\TestSuite\ConsoleIntegrationTestTrait`` fornece uma série de
+métodos de asserção que ajudam a fazer a asserção na saída do console::
 
-    // assert that the command exited as success
+    // afirmar que o comando saiu como sucesso
     $this->assertExitSuccess();
 
-    // assert that the command exited as an error
+    // afirmar que o comando saiu como um erro
     $this->assertExitError();
 
-    // assert that the command exited with the expected code
+    // afirmar que o comando saiu com o código esperado
     $this->assertExitCode($expected);
 
-    // assert that stdout contains a string
+    // afirmar que stdout contém uma string
     $this->assertOutputContains($expected);
 
-    // assert that stderr contains a string
+    // afirmar que stderr contém uma string
     $this->assertErrorContains($expected);
 
-    // assert that stdout matches a regular expression
+    // afirmar que stdout corresponde a uma expressão regular
     $this->assertOutputRegExp($expected);
 
-    // assert that stderr matches a regular expression
+    // afirmar que stderr corresponde a uma expressão regular
     $this->assertErrorRegExp($expected);
 
 Debug Helpers
 -------------
 
-You can use ``debugOutput()`` to output the exit code, stdout and stderr of the
-last run command::
+Você pode usar ``debugOutput()`` para gerar o código de saída, stdout e stderr do
+último comando executado::
 
     $this->exec('update_table Users');
     $this->assertExitCode(Command::CODE_SUCCESS);
     $this->debugOutput();
 
 .. versionadded:: 4.2.0
-   The ``debugOutput()`` method was added.
+   O método ``debugOutput()`` foi adicionado.
 
 
-Lifecycle Callbacks
-===================
+Retornos de Ciclo de Vida
+=========================
 
-Like Controllers, Commands offer lifecycle events that allow you to observe
-the framework calling your application code. Commands have:
+Assim como os Controllers, os Comandos oferecem eventos de ciclo de vida que permitem observar
+o framework chamando o código da sua aplicação. Os Comandos possuem:
 
-- ``Command.beforeExecute`` Is called before a command's ``execute()`` method
-  is. The event is passed the ``ConsoleArguments`` parameter as ``args``. This
-  event cannot be stopped or have its result replaced.
-- ``Command.afterExecute`` Is called after a command's ``execute()`` method is
-  complete. The event contains ``ConsoleArguments`` as ``args`` and the command
-  result as ``result``. This event cannot be stopped or have its result
-  replaced.
+- ``Command.beforeExecute`` É chamado antes do método ``execute()`` de um comando.
+O evento recebe o parâmetro ``ConsoleArguments`` como ``args``. Este
+evento não pode ser interrompido ou ter seu resultado substituído.
+- ``Command.afterExecute`` É chamado após o método ``execute()`` de um comando ser
+concluído. O evento contém ``ConsoleArguments`` como ``args`` e o resultado
+do comando como ``result``. Este evento não pode ser interrompido ou ter seu resultado
+substituído.
