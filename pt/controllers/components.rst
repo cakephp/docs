@@ -99,7 +99,7 @@ controllers.
     que o componente seja usado, inclusive dentro de outros componentes.
 
 Carregando Componentes em Rempo Real
------------------------------
+------------------------------------
 
 Você pode não precisar de todos os seus componentes disponíveis em todas as ações do controller.
 Em situações como essa, você pode carregar um componente em tempo de execução usando o método
