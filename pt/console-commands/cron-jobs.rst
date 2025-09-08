@@ -1,43 +1,43 @@
-Running Shells as Cron Jobs
-###########################
+Executando Shells como Cronjobs
+###############################
 
-A common thing to do with a shell is making it run as a cronjob to
-clean up the database once in a while or send newsletters. This is
-trivial to setup, for example::
+Uma coisa comum a se fazer com um shell é executá-lo como um cronjob para
+limpar o banco de dados de vez em quando ou enviar newsletters. Isso é
+trivial de configurar, por exemplo::
 
       */5  *    *    *    *  cd /full/path/to/root && bin/cake myshell myparam
-    # *    *    *    *    *  command to execute
+    # *    *    *    *    *  comando para executar
     # │    │    │    │    │
     # │    │    │    │    │
-    # │    │    │    │    \───── day of week (0 - 6) (0 to 6 are Sunday to Saturday,
-    # |    |    |    |           or use names)
-    # │    │    │    \────────── month (1 - 12)
-    # │    │    \─────────────── day of month (1 - 31)
-    # │    \──────────────────── hour (0 - 23)
-    # \───────────────────────── min (0 - 59)
+    # │    │    │    │    \───── dia da semana (0 - 6) (0 a 6 são de domingo a sábado,
+    # |    |    |    |           ou usar nomes)
+    # │    │    │    \────────── mês (1 - 12)
+    # │    │    \─────────────── dia do mês (1 - 31)
+    # │    \──────────────────── hora (0 - 23)
+    # \───────────────────────── minuto (0 - 59)
 
-You can see more info here: https://en.wikipedia.org/wiki/Cron
+Você pode ver mais informações aqui: https://en.wikipedia.org/wiki/Cron
 
 .. tip::
 
-    Use ``-q`` (or `--quiet`) to silence any output for cronjobs.
+    Use ``-q`` (ou `--quiet`) para silenciar qualquer saída de cronjobs.
 
-Cron Jobs on Shared Hosting
----------------------------
+Tarefas Cron em Hospedagem Compartilhada
+----------------------------------------
 
-On some shared hostings ``cd /full/path/to/root && bin/cake mycommand myparam``
-might not work. Instead you can use
+Em algumas hospedagens compartilhadas, ``cd /full/path/to/root && bin/cake mycommand myparam``
+pode não funcionar. Em vez disso, você pode usar
 ``php /full/path/to/root/bin/cake.php mycommand myparam``.
 
 .. note::
 
-    register_argc_argv has to be turned on by including ``register_argc_argv
-    = 1`` in your php.ini.  If you cannot change register_argc_argv globally,
-    you can tell the cron job to use your own configuration by
-    specifying it with ``-d register_argc_argv=1`` parameter. Example: ``php
+    register_argc_argv precisa ser ativado incluindo ``register_argc_argv
+    = 1`` no seu php.ini. Se você não puder alterar register_argc_argv globalmente,
+    você pode instruir o cron job a usar sua própria configuração
+    especificando-a com o parâmetro ``-d register_argc_argv=1``. Exemplo: ``php
     -d register_argc_argv=1 /full/path/to/root/bin/cake.php myshell
     myparam``
 
 .. meta::
-    :title lang=en: Running Shells as cronjobs
-    :keywords lang=en: cronjob,bash script,crontab
+    :title lang=pt: Executando Shells como cronjobs
+    :keywords lang=pt: cronjob,bash script,crontab
