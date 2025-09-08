@@ -167,7 +167,7 @@ usando ``$this->fetchTable()``, já que o comando usa o ``LocatorAwareTrait``::
         {
             $parser
                 ->addArgument('name', [
-                    'help' => 'What is your name'
+                    'help' => 'Qual o seu nome'
                 ]);
 
             return $parser;
