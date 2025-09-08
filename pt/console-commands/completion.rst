@@ -1,54 +1,54 @@
-Completion Tool
-################
+Ferramenta de Conclusão
+#######################
 
-Working with the console gives the developer a lot of possibilities but having
-to completely know and write those commands can be tedious. Especially when
-developing new shells where the commands differ per minute iteration. The
-Completion Shells aids in this matter by providing an API to write completion
-scripts for shells like bash, zsh, fish etc.
+Trabalhar com o console oferece muitas possibilidades ao desenvolvedor, mas ter
+que conhecer e escrever completamente esses comandos pode ser tedioso. Especialmente ao
+desenvolver novos shells, onde os comandos diferem a cada minuto de iteração. Os
+Shells de Conclusão auxiliam nessa questão, fornecendo uma API para escrever scripts de conclusão
+para shells como bash, zsh, fish etc.
 
-Sub Commands
+Sub Comandos
 ============
 
-The Completion Shell consists of a number of sub commands to assist the
-developer creating its completion script. Each for a different step in the
-autocompletion process.
+O Shell de Conclusão consiste em vários subcomandos para auxiliar o
+desenvolvedor na criação do seu script de conclusão. Cada um para uma etapa diferente no
+processo de conclusão automática.
 
-Commands
+Comandos
 --------
 
-For the first step commands outputs the available Shell Commands, including
-plugin name when applicable. (All returned possibilities, for this and the other
-sub commands, are separated by a space.) For example::
+Para o primeiro passo, os comandos geram os Comandos Shell disponíveis, incluindo
+o nome do plugin, quando aplicável. (Todas as possibilidades retornadas, para este e os outros
+subcomandos, são separadas por um espaço.) Por exemplo::
 
     bin/cake Completion commands
 
 Returns::
 
-    acl api bake command_list completion console i18n schema server test testsuite upgrade
+    acl api bake command_list conclusão console i18n esquema servidor teste suíte de testes atualização
 
-Your completion script can select the relevant commands from that list to
-continue with. (For this and the following sub commands.)
+Seu script de conclusão pode selecionar os comandos relevantes dessa lista para
+continuar. (Para este e os subcomandos seguintes.)
 
-subCommands
+subComandos
 -----------
 
-Once the preferred command has been chosen subCommands comes in as the second
-step and outputs the possible sub command for the given shell command. For
-example::
+Uma vez escolhido o comando preferido, o comando subComandos entra como a segunda
+etapa e gera o possível subcomando para o comando shell fornecido. Por
+exemplo::
 
     bin/cake Completion subcommands bake
 
 Returns::
 
-    controller db_config fixture model plugin project test view
+    controller db_config modelo de fixação plugin projeto teste visualização
 
-options
--------
+opções
+------
 
-As the third and final options outputs options for the given (sub) command as
-set in getOptionParser. (Including the default options inherited from Shell.)
-For example::
+Como a terceira e última opção, são geradas opções para o (sub)comando fornecido, conforme
+definido em getOptionParser. (Incluindo as opções padrão herdadas do Shell.)
+Por exemplo::
 
     bin/cake Completion options bake
 
@@ -56,41 +56,41 @@ Returns::
 
     --help -h --verbose -v --quiet -q --everything --connection -c --force -f --plugin -p --prefix --theme -t
 
-You can also pass an additional argument being the shell sub-command : it will
-output the specific options of this sub-command.
+Você também pode passar um argumento adicional, que é o subcomando do shell: ele irá
+exibir as opções específicas deste subcomando.
 
-How to enable Bash autocompletion for the CakePHP Console
-=========================================================
+Como Habilitar o Preenchimento Automático do Bash para o Console CakePHP
+========================================================================
 
-First, make sure the **bash-completion** library is installed. If not, you do it
-with the following command::
+Primeiro, certifique-se de que a biblioteca **bash-completion** esteja instalada. Caso contrário, faça isso
+com o seguinte comando::
 
     apt-get install bash-completion
 
-Create a file named **cake** in **/etc/bash_completion.d/** and put the
-:ref:`bash-completion-file-content` inside it.
+Crie um arquivo chamado **cake** em **/etc/bash_completion.d/** e insira o
+:ref:`bash-completion-file-content` dentro dele.
 
-Save the file, then restart your console.
+Salve o arquivo e reinicie o console.
 
 .. note::
 
-    If you are using MacOS X, you can install the **bash-completion** library
-    using **homebrew** with the command ``brew install bash-completion``.
-    The target directory for the **cake** file will be
+    Se estiver usando o MacOS X, você pode instalar a biblioteca **bash-completion**
+    usando o **homebrew** com o comando ``brew install bash-completion``.
+    O diretório de destino para o arquivo **cake** será
     **/usr/local/etc/bash_completion.d/**.
 
 .. _bash-completion-file-content:
 
-Bash Completion file content
-----------------------------
+Conteúdo do arquivo Bash Conclusão
+----------------------------------
 
-This is the code you need to put inside the **cake** file in the correct location
-in order to get autocompletion when using the CakePHP console:
+Este é o código que você precisa inserir dentro do arquivo **cake** no local correto
+para obter o preenchimento automático ao usar o console do CakePHP:
 
 .. code-block:: bash
 
     #
-    # Bash completion file for CakePHP console
+    # Arquivo de conclusão Bash para console CakePHP
     #
 
     _cake()
@@ -141,17 +141,17 @@ in order to get autocompletion when using the CakePHP console:
 
     complete -F _cake cake bin/cake
 
-Using autocompletion
+Usando autoconclusão
 ====================
 
-Once enabled, the autocompletion can be used the same way than for other
-built-in commands, using the **TAB** key.
-Three type of autocompletion are provided. The following output are from a fresh CakePHP install.
+Uma vez habilitado, a autoconclusão pode ser usado da mesma forma que para outros
+comandos integrados, usando a tecla **TAB**.
+São fornecidos três tipos de autoconclusão. A saída a seguir é de uma instalação recente do CakePHP.
 
-Commands
+Comandos
 --------
 
-Sample output for commands autocompletion:
+Exemplo de saída para comandos de autoconclusão:
 
 .. code-block:: console
 
@@ -162,7 +162,7 @@ Sample output for commands autocompletion:
 Subcommands
 -----------
 
-Sample output for subcommands autocompletion:
+Exemplo de saída para subcomandos de autoconclusão:
 
 .. code-block:: console
 
@@ -174,10 +174,10 @@ Sample output for subcommands autocompletion:
     fixture             model
     form                plugin
 
-Options
--------
+Opções
+------
 
-Sample output for subcommands options autocompletion:
+Exemplo de saída para subcomandos de autoconclusão:
 
 .. code-block:: console
 
