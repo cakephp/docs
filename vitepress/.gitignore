@@ -1,5 +1,4 @@
 node_modules
-package-lock.json
 .vitepress/cache
 
 # We don't need to built files
