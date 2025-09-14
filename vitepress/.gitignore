@@ -1,0 +1,15 @@
+node_modules
+package-lock.json
+.vitepress/cache
+
+# We don't need to built files
+dist
+
+# Ignore generated markdown files
+markdown/**/*.md
+
+# Ignore static files from generation process
+markdown/**/_static
+
+# Make an exception for the index file
+!markdown/index.md
