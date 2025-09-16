@@ -584,12 +584,13 @@ class like so::
     $isCakeBakeShellRunning = (PHP_SAPI === 'cli' && isset($argv[1]) && $argv[1] === 'bake');
     if (!$isCakeBakeShellRunning) {
         EventManager::instance()->on('Model.initialize', function($event) {
+            /** @var \Cake\ORM\Table $subject */
             $subject = $event->getSubject();
             if (get_class($subject) === 'Cake\ORM\Table') {
-                $msg = sprintf(
+                $message = sprintf(
                     'Missing table class or incorrect alias when registering table class for database table %s.',
                     $subject->getTable());
-                throw new InternalErrorException($msg);
+                throw new InternalErrorException($message);
             }
         });
     }
