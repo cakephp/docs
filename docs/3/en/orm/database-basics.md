@@ -137,7 +137,7 @@ $connection->delete('articles', ['id' => 10]);
 
 By convention database connections are configured in **config/app.php**. The
 connection information defined in this file is fed into
-`Cake\\Datasource\\ConnectionManager` creating the connection configuration
+`Cake\Datasource\ConnectionManager` creating the connection configuration
 your application will be using. Sample connection information can be found in
 **config/app.default.php**. A sample connection configuration would look
 like:
@@ -160,7 +160,7 @@ like:
 The above will create a 'default' connection, with the provided parameters. You
 can define as many connections as you want in your configuration file. You can
 also define additional connections at runtime using
-`Cake\\Datasource\\ConnectionManager::config()`. An example of that
+`Cake\Datasource\ConnectionManager::config()`. An example of that
 would be:
 
 ``` php
@@ -306,7 +306,7 @@ references to existing connections.
 ### Accessing Connections
 
 Once configured connections can be fetched using
-`Cake\\Datasource\\ConnectionManager::get()`. This method will
+`Cake\Datasource\ConnectionManager::get()`. This method will
 construct and load a connection if it has not been built before, or return the
 existing known connection:
 
@@ -385,13 +385,13 @@ Maps to the `BLOB` or `BYTEA` type provided by the database.
 
 date  
 Maps to a timezone naive `DATE` column type. The return value of this column
-type is `Cake\\I18n\\Date` which extends the native `DateTime`
+type is `Cake\I18n\Date` which extends the native `DateTime`
 class.
 
 datetime  
 Maps to a timezone naive `DATETIME` column type. In PostgreSQL, and SQL Server
 this turns into a `TIMESTAMP` type. The default return value of this column
-type is `Cake\\I18n\\Time` which extends the built-in
+type is `Cake\I18n\Time` which extends the built-in
 `DateTime` class and [Chronos](https://github.com/cakephp/chronos).
 
 timestamp  
@@ -449,7 +449,7 @@ implement the following methods:
 - `marshal`: Marshals flat data into PHP objects.
 
 An easy way to fulfill the basic interface is to extend
-`Cake\\Database\\Type`. For example if we wanted to add a JSON type,
+`Cake\Database\Type`. For example if we wanted to add a JSON type,
 we could make the following type class:
 
 ``` php
@@ -754,7 +754,7 @@ foreach ($query as $row) {
 ```
 
 > [!NOTE]
-> When you have an instance of `Cake\\ORM\\Query` you can use
+> When you have an instance of `Cake\ORM\Query` you can use
 > `all()` to get the result set for SELECT queries.
 
 ### Using Transactions
@@ -938,7 +938,7 @@ $connection->enableQueryLogging(false);
 ```
 
 When query logging is enabled, queries will be logged to
-`Cake\\Log\\Log` using the 'debug' level, and the 'queriesLog' scope.
+`Cake\Log\Log` using the 'debug' level, and the 'queriesLog' scope.
 You will need to have a logger configured to capture this level & scope. Logging
 to `stderr` can be useful when working on unit tests, and logging to
 files/syslog can be useful when working with web requests:

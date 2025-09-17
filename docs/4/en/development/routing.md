@@ -162,7 +162,7 @@ $routes->connect(
 
 The first parameter is used to tell the router what sort of URL you're trying to
 control. The URL is a normal slash delimited string, but can also contain
-a wildcard (\*) or [Route Elements](../development/tmp.Fq1ybMoZlE#route-elements). Using a wildcard tells the router
+a wildcard (\*) or [Route Elements](../development/configuration#route-elements). Using a wildcard tells the router
 that you are willing to accept any additional arguments supplied. Routes without
 a \* only match the exact template pattern supplied.
 
@@ -255,11 +255,11 @@ $routes->connect(
 
 This is telling the Router that any URL beginning with `/cooks/` should be
 sent to the `UsersController`. The action called will depend on the value of
-the `{action}` parameter. By using [Route Elements](../development/tmp.Fq1ybMoZlE#route-elements), you can create
+the `{action}` parameter. By using [Route Elements](../development/configuration#route-elements), you can create
 variable routes, that accept user input or variables. The above route also uses
 the greedy star. The greedy star indicates that this route should accept any
 additional positional arguments given. These arguments will be made available in
-the [Passed Arguments](../development/tmp.Fq1ybMoZlE#passed-arguments) array.
+the [Passed Arguments](../development/configuration#passed-arguments) array.
 
 When generating URLs, routes are used too. Using
 `['controller' => 'Users', 'action' => 'some-action', 5]` as
@@ -300,7 +300,7 @@ will go to the 'update' action. There are HTTP helper methods for:
 - HEAD
 
 All of these methods return the route instance allowing you to leverage the
-[fluent setters](../development/tmp.Fq1ybMoZlE#route-fluent-methods) to further configure your route.
+[fluent setters](../development/configuration#route-fluent-methods) to further configure your route.
 
 <a id="route-elements"></a>
 
@@ -427,8 +427,8 @@ CakePHP, and should not be used unless you want the special meaning
 - `controller` Used to name the controller for a route.
 - `action` Used to name the controller action for a route.
 - `plugin` Used to name the plugin a controller is located in.
-- `prefix` Used for [Prefix Routing](../development/tmp.Fq1ybMoZlE#prefix-routing)
-- `_ext` Used for [File extentions routing](../development/tmp.Fq1ybMoZlE#file-extensions).
+- `prefix` Used for [Prefix Routing](../development/configuration#prefix-routing)
+- `_ext` Used for [File extentions routing](../development/configuration#file-extensions).
 - `_base` Set to `false` to remove the base path from the generated URL. If
   your application is not in the root directory, this can be used to generate
   URLs that are 'cake relative'.
@@ -442,7 +442,7 @@ CakePHP, and should not be used unless you want the special meaning
 - `_https` Set to `true` to convert the generated URL to https or `false`
   to force http. Prior to 4.5.0 use `_ssl`.
 - `_method` Define the HTTP verb/method to use. Useful when working with
-  [Resource Routes](../development/tmp.Fq1ybMoZlE#resource-routes).
+  [Resource Routes](../development/configuration#resource-routes).
 - `_name` Name of route. If you have setup named routes, you can use this key
   to specify it.
 
@@ -484,7 +484,7 @@ $routes->connect(
 
 ### Passing Parameters to Action
 
-When connecting routes using [Route Elements](../development/tmp.Fq1ybMoZlE#route-elements) you may want to have routed
+When connecting routes using [Route Elements](../development/configuration#route-elements) you may want to have routed
 elements be passed arguments instead. The `pass` option indicates which route
 elements should also be made available as arguments passed into the controller
 functions:
@@ -778,7 +778,7 @@ echo $this->Html->link(
 );
 ```
 
-This would link to a controller with the namespace `App\\Controller\\Admin\\MyPrefix` and the file path
+This would link to a controller with the namespace `App\Controller\Admin\MyPrefix` and the file path
 `src/Controller/Admin/MyPrefix/TodoItemsController.php`.
 
 > [!NOTE]
@@ -955,7 +955,7 @@ file extensions
 ### Routing File Extensions
 
 To handle different file extensions in your URLs, you can define the extensions
-using the `Cake\\Routing\\RouteBuilder::setExtensions()` method:
+using the `Cake\Routing\RouteBuilder::setExtensions()` method:
 
 ``` php
 $routes->scope('/', function (RouteBuilder $routes) {
@@ -1178,7 +1178,7 @@ $routes->scope('/api', function (RouteBuilder $routes) {
 The above would map the 'Comments' resource to the
 `App\Controller\Articles\CommentsController`. Having separate controllers lets
 you keep your controller logic simpler. The prefixes created this way are
-compatible with [Prefix Routing](../development/tmp.Fq1ybMoZlE#prefix-routing).
+compatible with [Prefix Routing](../development/configuration#prefix-routing).
 
 > [!NOTE]
 > While you can nest resources as deeply as you require, it is not recommended
@@ -1453,7 +1453,7 @@ $this->Html->link(
 );
 ```
 
-Elements with numeric keys are treated as [Passed Arguments](../development/tmp.Fq1ybMoZlE#passed-arguments).
+Elements with numeric keys are treated as [Passed Arguments](../development/configuration#passed-arguments).
 
 When using routing arrays, you can define both query string parameters and
 document fragments using special keys:
@@ -1472,7 +1472,7 @@ $routes->url([
 
 You can also use any of the special route elements when generating URLs:
 
-- `_ext` Used for [File Extensions](../development/tmp.Fq1ybMoZlE#file-extensions) routing.
+- `_ext` Used for [File Extensions](../development/configuration#file-extensions) routing.
 - `_base` Set to `false` to remove the base path from the generated URL. If
   your application is not in the root directory, this can be used to generate
   URLs that are 'cake relative'.
@@ -1712,9 +1712,9 @@ provided entity.
 Custom route classes allow you to extend and change how individual routes parse
 requests and handle reverse routing. Route classes have a few conventions:
 
-- Route classes are expected to be found in the `Routing\\Route` namespace of
+- Route classes are expected to be found in the `Routing\Route` namespace of
   your application or plugin.
-- Route classes should extend `Cake\\Routing\\Route\\Route`.
+- Route classes should extend `Cake\Routing\Route\Route`.
 - Route classes should implement one or both of `match()` and/or `parse()`.
 
 The `parse()` method is used to parse an incoming URL. It should generate an

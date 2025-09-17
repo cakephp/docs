@@ -50,7 +50,7 @@ foreach ($query as $article) {
 ```
 
 For the remaining examples, assume that `$articles` is a
-`~Cake\\ORM\\Table`. When inside controllers, you can use
+`Cake\ORM\Table`. When inside controllers, you can use
 `$this->Articles` instead of `$articles`.
 
 Almost every method in a `Query` object will return the same query, this means
@@ -267,7 +267,7 @@ $query->where(function (QueryExpression $exp, Query $q) {
 });
 ```
 
-See the [Advanced Query Conditions](../orm/tmp.9GpJu2x9oq#advanced-query-conditions) section to find out how to construct
+See the [Advanced Query Conditions](../orm/validation#advanced-query-conditions) section to find out how to construct
 more complex `WHERE` conditions.
 
 ### Selecting Specific Fields
@@ -1082,7 +1082,7 @@ $query->where(['Categories.parent_id != Parents.id']);
 
 > [!WARNING]
 > The field names used in expressions, and SQL snippets should **never**
-> contain untrusted content. See the [Using Sql Functions](../orm/tmp.9GpJu2x9oq#using-sql-functions) section for
+> contain untrusted content. See the [Using Sql Functions](../orm/validation#using-sql-functions) section for
 > how to safely include unsafe data into function calls.
 
 ### Using Identifiers in Expressions
@@ -1927,7 +1927,7 @@ $query->insert(['title', 'body'])
 ```
 
 Generally, it is easier to insert data using entities and
-`~Cake\\ORM\\Table::save()`. By composing a `SELECT` and
+`Cake\ORM\Table::save()`. By composing a `SELECT` and
 `INSERT` query together, you can create `INSERT INTO ... SELECT` style
 queries:
 
@@ -1963,7 +1963,7 @@ $query->update()
 ```
 
 Generally, it is easier to update data using entities and
-`~Cake\\ORM\\Table::patchEntity()`.
+`Cake\ORM\Table::patchEntity()`.
 
 > [!NOTE]
 > Updating records with the query builder will not trigger events such as
@@ -1983,7 +1983,7 @@ $query->delete()
 ```
 
 Generally, it is easier to delete data using entities and
-`~Cake\\ORM\\Table::delete()`.
+`Cake\ORM\Table::delete()`.
 
 ## SQL Injection Prevention
 
@@ -2039,7 +2039,7 @@ $query->select(['two' => $expr]);
 
 It is possible to protect against many unsafe situations by using bindings.
 Similar to [binding values to prepared statements](../orm/database-basics#database-basics-binding-values),
-values can be bound to queries using the `Cake\\Database\\Query::bind()`
+values can be bound to queries using the `Cake\Database\Query::bind()`
 method.
 
 The following example would be a safe variant of the unsafe, SQL injection prone
@@ -2056,7 +2056,7 @@ $query
 ```
 
 > [!NOTE]
-> Unlike `Cake\\Database\\StatementInterface::bindValue()`,
+> Unlike `Cake\Database\StatementInterface::bindValue()`,
 > `Query::bind()` requires to pass the named placeholders including the
 > colon!
 

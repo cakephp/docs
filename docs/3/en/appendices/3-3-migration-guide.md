@@ -22,9 +22,9 @@ changes and improvements made in 3.3.
   instead.
 - `RequestActionTrait` has been deprecated. Refactor your code to use
   [View Cells](../views/cells) instead.
-- `Cake\\Utility\\Crypto\\Mcrypt` engine has been deprecated as the `mcrypt`
+- `Cake\Utility\Crypto\Mcrypt` engine has been deprecated as the `mcrypt`
   extension is deprecated in PHP 7.1. Use the `openssl` and
-  `Cake\\Utility\\Crypto\\Openssl` instead.
+  `Cake\Utility\Crypto\Openssl` instead.
 
 ## Behavior Changes
 

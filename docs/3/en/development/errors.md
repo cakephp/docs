@@ -24,7 +24,7 @@ handling for your application. The following options are supported:
   exceptions. If you choose a custom class you should place the file for that
   class in **src/Error**. This class needs to implement a `render()` method.
 - `log` - bool - When `true`, exceptions + their stack traces will be
-  logged to `Cake\\Log\\Log`.
+  logged to `Cake\Log\Log`.
 - `skipLog` - array - An array of exception classnames that should not be
   logged. This is useful to remove NotFoundExceptions or other common, but
   uninteresting log messages.
@@ -312,7 +312,7 @@ application exceptions
 
 You can create your own application exceptions using any of the built in [SPL
 exceptions](https://php.net/manual/en/spl.exceptions.php), `Exception`
-itself, or `Cake\\Core\\Exception\\Exception`.
+itself, or `Cake\Core\Exception\Exception`.
 If your application contained the following exception:
 
 ``` php
@@ -330,7 +330,7 @@ error would be treated as a 500 error and use the **error500** template.
 If your exceptions have a code between `400` and `506` the exception code
 will be used as the HTTP response code.
 
-The constructor for `Cake\\Core\\Exception\\Exception` allows you to
+The constructor for `Cake\Core\Exception\Exception` allows you to
 pass in additional data. This additional data is interpolated into the the
 `_messageTemplate`. This allows you to create data rich exceptions, that
 provide more context around your errors:
@@ -359,7 +359,7 @@ get `Seems that Pointy is missing.`.
 Using the built-in exception handling, you can log all the exceptions that are
 dealt with by ErrorHandler by setting the `log` option to `true` in your
 **config/app.php**. Enabling this will log every exception to
-`Cake\\Log\\Log` and the configured loggers.
+`Cake\Log\Log` and the configured loggers.
 
 > [!NOTE]
 > If you are using a custom exception handler this setting will have
@@ -524,8 +524,8 @@ In addition, CakePHP uses the following exceptions:
 >
 > A model's behavior could not be found.
 >
-> An entity couldn't be saved/deleted while using `Cake\\ORM\\Table::saveOrFail()` or
-> `Cake\\ORM\\Table::deleteOrFail()`.
+> An entity couldn't be saved/deleted while using `Cake\ORM\Table::saveOrFail()` or
+> `Cake\ORM\Table::deleteOrFail()`.
 >
 > <div class="versionadded">
 >

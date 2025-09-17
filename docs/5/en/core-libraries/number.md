@@ -81,7 +81,7 @@ output. The following options are available:
                     with the international currency code.              |
 
 If `$currency` value is `null`, the default currency will be retrieved from
-`Cake\\I18n\\Number::defaultCurrency()`. To format currencies in an
+`Cake\I18n\Number::defaultCurrency()`. To format currencies in an
 accounting format you should set the currency format:
 
 ``` css
@@ -93,7 +93,7 @@ Number::setDefaultCurrencyFormat(Number::FORMAT_CURRENCY_ACCOUNTING);
 `method` Cake\\I18n\\Number::**setDefaultCurrency**($currency)
 
 Setter for the default currency. This removes the need to always pass the
-currency to `Cake\\I18n\\Number::currency()` and change all
+currency to `Cake\I18n\Number::currency()` and change all
 currency outputs by setting other default. If `$currency` is set to `null`,
 it will clear the currently stored value.
 
@@ -133,7 +133,7 @@ echo Number::precision(456.91873645, 2);
 | multiply | Boolean to indicate whether the value has to be    
             multiplied by 100. Useful for decimal percentages.  |
 
-Like `Cake\\I18n\\Number::precision()`, this method formats a number
+Like `Cake\I18n\Number::precision()`, this method formats a number
 according to the supplied precision (where numbers are rounded to meet the
 given precision). This method also expresses the number as a percentage
 and appends the output with a percent sign. :

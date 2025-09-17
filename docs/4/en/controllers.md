@@ -35,7 +35,7 @@ well.
 
 As stated in the introduction, the `AppController` class is the parent class
 to all of your application's controllers. `AppController` itself extends the
-`Cake\\Controller\\Controller` class included in CakePHP.
+`Cake\Controller\Controller` class included in CakePHP.
 `AppController` is defined in **src/Controller/AppController.php** as
 follows:
 
@@ -76,7 +76,7 @@ class AppController extends Controller
 ## Request Flow
 
 When a request is made to a CakePHP application, CakePHP's
-`Cake\\Routing\\Router` and `Cake\\Routing\\Dispatcher`
+`Cake\Routing\Router` and `Cake\Routing\Dispatcher`
 classes use [Routes Configuration](development/routing#routes-configuration) to find and create the correct
 controller instance. The request data is encapsulated in a request object.
 CakePHP puts all of the important request information into the `$this->request`
@@ -128,7 +128,7 @@ once a controller action has completed, CakePHP will handle rendering and
 delivering the View.
 
 If for some reason you'd like to skip the default behavior, you can return a
-`Cake\\Http\\Response` object from the action with the fully
+`Cake\Http\Response` object from the action with the fully
 created response.
 
 In order for you to use a controller effectively in your own application, we'll

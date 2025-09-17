@@ -14,7 +14,7 @@ being executed?
 Logging data in CakePHP is done with the `log()` function. It is provided by the
 `LogTrait`, which is the common ancestor for many CakePHP classes. If the
 context is a CakePHP class (Controller, Component, View,...), you can log your
-data. You can also use `Log::write()` directly. See [Writing To Logs](#writing-to-logs).
+data. You can also use `Log::write()` directly. See [Writing To Logs](../core-libraries/logging#writing-to-logs).
 
 <a id="log-configuration"></a>
 
@@ -23,7 +23,7 @@ data. You can also use `Log::write()` directly. See [Writing To Logs](#writing-t
 Configuring `Log` should be done during your application's bootstrap phase.
 The **config/app.php** file is intended for just this. You can define
 as many or as few loggers as your application needs. Loggers should be
-configured using `Cake\\Log\\Log`. An example would be:
+configured using `Cake\Log\Log`. An example would be:
 
 ``` php
 use Cake\Log\Engine\FileLog;
@@ -57,12 +57,12 @@ Log::setConfig('error', [
 The above creates three loggers, named `info`, `debug` and `error`.
 Each is configured to handle different levels of messages. They also store their
 log messages in separate files, so we can separate debug/notice/info logs
-from more serious errors. See the section on [Logging Levels](#logging-levels) for more
+from more serious errors. See the section on [Logging Levels](../core-libraries/logging#logging-levels) for more
 information on the different levels and what they mean.
 
 Once a configuration is created you cannot change it. Instead you should drop
-the configuration and re-create it using `Cake\\Log\\Log::drop()` and
-`Cake\\Log\\Log::setConfig()`.
+the configuration and re-create it using `Cake\Log\Log::drop()` and
+`Cake\Log\Log::setConfig()`.
 
 It is also possible to create loggers by providing a closure. This is useful
 when you need full control over how the logger object is built. The closure
@@ -99,7 +99,7 @@ information.
 ## Writing to Logs
 
 Writing to the log files can be done in two different ways. The first
-is to use the static `Cake\\Log\\Log::write()` method:
+is to use the static `Cake\Log\Log::write()` method:
 
 ``` css
 Log::write('debug', 'Something did not work');
@@ -115,7 +115,7 @@ $this->log('Something did not work!', 'debug');
 ```
 
 All configured log streams are written to sequentially each time
-`Cake\\Log\\Log::write()` is called. If you have not configured any
+`Cake\Log\Log::write()` is called. If you have not configured any
 logging engines `log()` will return `false` and no log messages will be
 written.
 
@@ -166,7 +166,7 @@ an increasing level of severity:
 
 You can refer to these levels by name when configuring loggers, and when writing
 log messages. Alternatively, you can use convenience methods like
-`Cake\\Log\\Log::error()` to clearly indicate the logging
+`Cake\Log\Log::error()` to clearly indicate the logging
 level. Using a level that is not in the above levels will result in an
 exception.
 
@@ -303,7 +303,7 @@ following keys:
   logged message. For example: `%s - Web Server 1 - %s` will look like
   `error - Web Server 1 - An error occurred in this request` after
   replacing the placeholders. This option is deprecated. You should use
-  [Logging Formatters](#logging-formatters) instead.
+  [Logging Formatters](../core-libraries/logging#logging-formatters) instead.
 - `prefix`: An string that will be prefixed to every logged message.
 - `flag`: An integer flag to be used for opening the connection to the
   logger, by default `LOG_ODELAY` will be used. See `openlog` documentation
@@ -318,7 +318,7 @@ plugins. If for example you had a database logger called
 `DatabaseLog`. As part of your application it would be placed in
 **src/Log/Engine/DatabaseLog.php**. As part of a plugin it would be placed in
 **plugins/LoggingPack/src/Log/Engine/DatabaseLog.php**. To configure log
-engine you should use `Cake\\Log\\Log::setConfig()`. For example
+engine you should use `Cake\Log\Log::setConfig()`. For example
 configuring our DatabaseLog would look like:
 
     // For src/Log

@@ -107,8 +107,8 @@ access that at www.example.com/articles/foobar.
 
 The single instruction in the action uses `set()` to pass resultset
 from the controller to the view (which we'll create next). The `find()` method
-of the `ArticlesTable` object returns an instance of `Cake\\ORM\\Query` and
-calling its `all()` method returns as instance of `Cake\\Collection\\CollectionInterface`
+of the `ArticlesTable` object returns an instance of `Cake\ORM\Query` and
+calling its `all()` method returns as instance of `Cake\Collection\CollectionInterface`
 which is set as a view variable called 'articles'.
 
 > [!NOTE]
@@ -176,7 +176,7 @@ nice table, our view code might look something like this:
 Hopefully this should look somewhat simple.
 
 You might have noticed the use of an object called `$this->Html`. This is an
-instance of the CakePHP `Cake\\View\\Helper\\HtmlHelper` class.
+instance of the CakePHP `Cake\View\Helper\HtmlHelper` class.
 CakePHP comes with a set of view helpers that make things like linking, form
 output a snap. You can learn more about how to use them in
 [Helpers](../../views/helpers), but what's important to note here is that the `link()`
@@ -316,7 +316,7 @@ chance to show the user validation errors or other warnings.
 Every CakePHP request includes a `ServerRequest` object which is accessible using
 `$this->request`. The request object contains useful information regarding the
 request that was just received, and can be used to control the flow of your
-application. In this case, we use the `Cake\\Http\\ServerRequest::is()`
+application. In this case, we use the `Cake\Http\ServerRequest::is()`
 method to check that the request is a HTTP POST request.
 
 When a user uses a form to POST data to your application, that
@@ -330,10 +330,10 @@ features](https://php.net/manual/en/language.oop5.overloading.php#object.call).
 Flash messages will be displayed on the page after redirection. In the layout we
 have `<?= $this->Flash->render() ?>` which displays the message and clears the
 corresponding session variable. The controller's
-`Cake\\Controller\\Controller::redirect` function redirects to another
+`Cake\Controller\Controller::redirect` function redirects to another
 URL. The param `['action' => 'index']` translates to URL /articles i.e the
 index action of the `ArticlesController`. You can refer to
-`Cake\\Routing\\Router::url()` function on the [API](https://api.cakephp.org) to see the formats in which you can specify a URL for
+`Cake\Routing\Router::url()` function on the [API](https://api.cakephp.org) to see the formats in which you can specify a URL for
 various CakePHP functions.
 
 Calling the `save()` method will check for validation errors and
@@ -348,7 +348,7 @@ validation routines. CakePHP makes it easier and faster.
 
 To take advantage of the validation features, you'll need to use CakePHP's
 [Form](../../views/helpers/form) helper in your views. The
-`Cake\\View\\Helper\\FormHelper` is available by default to all views
+`Cake\View\Helper\FormHelper` is available by default to all views
 at `$this->Form`.
 
 Here's our add view:
@@ -439,7 +439,7 @@ setup, check the [Validation](../../core-libraries/validation) documentation.
 
 Now that your validation rules are in place, use the app to try to add
 an article with an empty title or body to see how it works. Since we've used the
-`Cake\\View\\Helper\\FormHelper::control()` method of the FormHelper to
+`Cake\View\Helper\FormHelper::control()` method of the FormHelper to
 create our form elements, our validation error messages will be shown
 automatically.
 
@@ -609,7 +609,7 @@ links that allow users to delete articles, however:
 </table>
 ```
 
-Using `~Cake\\View\\Helper\\FormHelper::postLink()` will create a link
+Using `Cake\View\Helper\FormHelper::postLink()` will create a link
 that uses JavaScript to do a POST request deleting our article.
 
 > [!WARNING]

@@ -44,7 +44,7 @@ The `$options` parameter supports the following options:
 When deleting entities, associated data can also be deleted. If your HasOne and
 HasMany associations are configured as `dependent`, delete operations will
 'cascade' to those entities as well. By default entities in associated tables
-are removed using `Cake\\ORM\\Table::deleteAll()`. You can elect to
+are removed using `Cake\ORM\Table::deleteAll()`. You can elect to
 have the ORM load related entities, and delete them individually by setting the
 `cascadeCallbacks` option to `true`. A sample HasMany association with both
 these options enabled would be:
@@ -107,7 +107,7 @@ function returns the number of deleted records as an integer.
 `method` Cake\\ORM\\Table::**deleteOrFail**(EntityInterface $entity, array $options = [])
 
 Using this method will throw an
-`Cake\\ORM\\Exception\\PersistenceFailedException` if:
+`Cake\ORM\Exception\PersistenceFailedException` if:
 
 - the entity is new
 - the entity has no primary key value
@@ -115,7 +115,7 @@ Using this method will throw an
 - the delete was aborted by a callback.
 
 If you want to track down the entity that failed to delete, you can use the
-`Cake\\ORM\Exception\\PersistenceFailedException::getEntity()` method:
+`Cake\ORM\Exception\PersistenceFailedException::getEntity()` method:
 
 ``` php
 try {
@@ -125,5 +125,5 @@ try {
 }
 ```
 
-As this internally performs a `Cake\\ORM\\Table::delete()` call, all
+As this internally performs a `Cake\ORM\Table::delete()` call, all
 corresponding delete events will be triggered.

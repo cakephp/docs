@@ -29,7 +29,7 @@ Router::extensions('rss');
 ```
 
 In the call above we've activated the .rss extension. When using
-`Cake\\Routing\\Router::extensions()` you can pass a string or an
+`Cake\Routing\Router::extensions()` you can pass a string or an
 array of extensions as first argument. This will activate each
 extension/content-type for use in your application. Now when the address
 `articles.rss` is requested you will get an XML version of
@@ -52,11 +52,11 @@ public function initialize()
 Before we can make an RSS version of our `articles` index action we need to get a few
 things in order. It may be tempting to put the channel metadata in the
 controller action and pass it to your view using the
-`Cake\\Controller\\Controller::set()` method but this is
+`Cake\Controller\Controller::set()` method but this is
 inappropriate. That information can also go in the view. That will come later
 though, for now if you have a different set of logic for the data used to make
 the RSS feed and the data for the HTML view you can use the
-`Cake\\Controller\\Component\\RequestHandler::isRss()` method,
+`Cake\Controller\Component\RequestHandler::isRss()` method,
 otherwise your controller can stay the same:
 
 ``` php
@@ -122,8 +122,8 @@ are below.
 Our view, located at **src/Template/Articles/rss/index.ctp**, begins by setting the
 `$documentData` and `$channelData` variables for the layout, these contain
 all the metadata for our RSS feed. This is done by using the
-`Cake\\View\\View::set()` method which is analogous to the
-`Cake\\Controller\\Controller::set()` method. Here though we are
+`Cake\View\View::set()` method which is analogous to the
+`Cake\Controller\Controller::set()` method. Here though we are
 passing the channel's metadata back to the layout:
 
 ``` php

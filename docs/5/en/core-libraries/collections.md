@@ -42,7 +42,7 @@ $collectionB = collection($items);
 The benefit of the helper method is that it is easier to chain off of than
 `(new Collection($items))`.
 
-The `~Cake\\Collection\\CollectionTrait` allows you to integrate
+The `Cake\Collection\CollectionTrait` allows you to integrate
 collection-like features into any `Traversable` object you have in your
 application as well.
 
@@ -177,7 +177,7 @@ This last example uses `toList()` unlike other examples, which is important
 when we're getting results with possibly duplicate keys. By using `toList()`
 we'll be guaranteed to get all values even if there are duplicate keys.
 
-Unlike `Cake\\Utility\\Hash::extract()` this method only supports the
+Unlike `Cake\Utility\Hash::extract()` this method only supports the
 `{*}` wildcard. All other wildcard and attributes matchers are not supported.
 
 `method` Cake\\Collection\\Collection::**combine**($keyPath, $valuePath, $groupPath = null)

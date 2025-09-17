@@ -79,7 +79,7 @@ aliases for *all* functions listed below.
 > The context is a unique identifier for the translations string that makes it
 > unique within the same domain.
 >
-> Convenience wrapper for instantiating a new `Cake\\Collection\\Collection`
+> Convenience wrapper for instantiating a new `Cake\Collection\Collection`
 > object, wrapping the passed argument. The `$items` parameter takes either
 > a `Traversable` object or an array.
 >

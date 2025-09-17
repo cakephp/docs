@@ -15,7 +15,7 @@ Logging data in CakePHP is easy - the log() function is provided by the
 `LogTrait`, which is the common ancestor for many CakePHP classes. If
 the context is a CakePHP class (Controller, Component, View,...),
 you can log your data. You can also use `Log::write()` directly.
-See [Writing To Logs](../core-libraries/tmp.DHYyikHgSR#writing-to-logs).
+See [Writing To Logs](../core-libraries/validation#writing-to-logs).
 
 <a id="log-configuration"></a>
 
@@ -24,7 +24,7 @@ See [Writing To Logs](../core-libraries/tmp.DHYyikHgSR#writing-to-logs).
 Configuring `Log` should be done during your application's bootstrap phase.
 The **config/app.php** file is intended for just this. You can define
 as many or as few loggers as your application needs. Loggers should be
-configured using `Cake\\Log\\Log`. An example would be:
+configured using `Cake\Log\Log`. An example would be:
 
 ``` php
 use Cake\Log\Log;
@@ -49,12 +49,12 @@ Log::config('error', [
 The above creates two loggers. One named `debug` the other named `error`.
 Each is configured to handle different levels of messages. They also store their
 log messages in separate files, so it's easy to separate debug/notice/info logs
-from more serious errors. See the section on [Logging Levels](../core-libraries/tmp.DHYyikHgSR#logging-levels) for more
+from more serious errors. See the section on [Logging Levels](../core-libraries/validation#logging-levels) for more
 information on the different levels and what they mean.
 
 Once a configuration is created you cannot change it. Instead you should drop
-the configuration and re-create it using `Cake\\Log\\Log::drop()` and
-`Cake\\Log\\Log::config()`.
+the configuration and re-create it using `Cake\Log\Log::drop()` and
+`Cake\Log\Log::config()`.
 
 It is also possible to create loggers by providing a closure. This is useful
 when you need full control over how the logger object is built. The closure
@@ -85,7 +85,7 @@ plugins. If for example you had a database logger called
 `DatabaseLog`. As part of your application it would be placed in
 **src/Log/Engine/DatabaseLog.php**. As part of a plugin it would be placed in
 **plugins/LoggingPack/src/Log/Engine/DatabaseLog.php**. To configure log
-adapters you should use `Cake\\Log\\Log::config()`. For example
+adapters you should use `Cake\Log\Log::config()`. For example
 configuring our DatabaseLog would look like:
 
     // For src/Log
@@ -165,9 +165,9 @@ option to `true`. See [Configuration](../development/configuration) for more inf
 ## Interacting with Log Streams
 
 You can introspect the configured streams with
-`Cake\\Log\\Log::configured()`. The return of `configured()` is an
+`Cake\Log\Log::configured()`. The return of `configured()` is an
 array of all the currently configured streams. You can remove
-streams using `Cake\\Log\\Log::drop()`. Once a log stream has been
+streams using `Cake\Log\Log::drop()`. Once a log stream has been
 dropped it will no longer receive messages.
 
 ## Using the FileLog Adapter
@@ -244,7 +244,7 @@ following keys:
 ## Writing to Logs
 
 Writing to the log files can be done in 2 different ways. The first
-is to use the static `Cake\\Log\\Log::write()` method:
+is to use the static `Cake\Log\Log::write()` method:
 
 ``` css
 Log::write('debug', 'Something did not work');
@@ -260,7 +260,7 @@ $this->log("Something did not work!", 'debug');
 ```
 
 All configured log streams are written to sequentially each time
-`Cake\\Log\\Log::write()` is called. If you have not configured any
+`Cake\Log\Log::write()` is called. If you have not configured any
 logging adapters `log()` will return `false` and no log messages will be
 written.
 
@@ -282,7 +282,7 @@ an increasing level of severity:
 
 You can refer to these levels by name when configuring loggers, and when writing
 log messages. Alternatively, you can use convenience methods like
-`Cake\\Log\\Log::error()` to clearly indicate the logging
+`Cake\Log\Log::error()` to clearly indicate the logging
 level. Using a level that is not in the above levels will result in an
 exception.
 

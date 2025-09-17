@@ -197,7 +197,7 @@ CakePHP sets up a few providers:
 
 1.  Methods on the table class or its behaviors are available on the `table`
     provider.
-2.  The core `~Cake\\Validation\\Validation` class is setup as the
+2.  The core `Cake\Validation\Validation` class is setup as the
     `default` provider.
 
 When a validation rule is created you can name the provider of that rule. For

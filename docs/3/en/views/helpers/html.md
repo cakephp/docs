@@ -445,7 +445,7 @@ Will output:
 </a>
 ```
 
-Also check `Cake\\View\\Helper\\UrlHelper::build()` method
+Also check `Cake\View\Helper\UrlHelper::build()` method
 for more examples of different types of URLs.
 
 ### Linking to Videos and Audio Files
@@ -917,10 +917,10 @@ echo $this->Html->getCrumbList(
 );
 ```
 
-This method uses `Cake\\View\\Helper\\HtmlHelper::tag()` to generate
+This method uses `Cake\View\Helper\HtmlHelper::tag()` to generate
 list and its elements. Works similar to
-`~Cake\\View\\Helper\\HtmlHelper::getCrumbs()`, so it uses options
+`Cake\View\Helper\HtmlHelper::getCrumbs()`, so it uses options
 which every crumb was added with. You can use the `$startText` parameter to
 provide the first breadcrumb link/text. This is useful when you always want to
 include a root link. This option works the same as the `$startText` option for
-`~Cake\\View\\Helper\\HtmlHelper::getCrumbs()`.
+`Cake\View\Helper\HtmlHelper::getCrumbs()`.

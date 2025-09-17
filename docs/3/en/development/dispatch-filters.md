@@ -46,7 +46,7 @@ features that all applications are likely to need. The built-in filters are:
 
 Filters are usually enabled in your application's **bootstrap.php** file, but
 you could load them any time before the request is dispatched. Adding
-and removing filters is done through `Cake\\Routing\\DispatcherFactory`. By
+and removing filters is done through `Cake\Routing\DispatcherFactory`. By
 default, the CakePHP application template comes with a couple filter classes
 already enabled for all requests; let's take a look at how they are added:
 
@@ -149,9 +149,9 @@ classes in CakePHP, dispatcher filters have a few conventions:
 `DispatcherFilter` exposes two methods that can be overridden in subclasses,
 they are `beforeDispatch()` and `afterDispatch()`. These methods are
 executed before or after any controller is executed respectively. Both methods
-receive a `Cake\\Event\\Event` object containing the `ServerRequest` and
-`Response` objects (`Cake\\Http\\ServerRequest` and
-`Cake\\Http\\Response` instances) inside the `$data` property.
+receive a `Cake\Event\Event` object containing the `ServerRequest` and
+`Response` objects (`Cake\Http\ServerRequest` and
+`Cake\Http\Response` instances) inside the `$data` property.
 
 While our filter was pretty simple, there are a few other interesting things we
 can do in filter methods. By returning an `Response` object, you can
@@ -194,7 +194,7 @@ This filter will send a expiration header to 1 day in the future for
 all responses produced by the pages controller. You could of course do the same
 in the controller, this is just an example of what could be done with filters.
 For instance, instead of altering the response, you could cache it using
-`Cake\\Cache\\Cache` and serve the response from the `beforeDispatch()`
+`Cake\Cache\Cache` and serve the response from the `beforeDispatch()`
 callback.
 
 While powerful, dispatcher filters have the potential to make your application

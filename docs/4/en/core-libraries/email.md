@@ -126,7 +126,7 @@ following configuration keys are used:
   variables to be used in the view. See `Mailer::setViewVars()`.
 - `'attachments'`: List of files to attach. See `Mailer::setAttachments()`.
 - `'emailFormat'`: Format of email (html, text or both). See `Mailer::setEmailFormat()`.
-- `'transport'`: Transport configuration name. See [Email Transport](../core-libraries/tmp.9jZLc5C2pQ#email-transport).
+- `'transport'`: Transport configuration name. See [Email Transport](../core-libraries/validation#email-transport).
 - `'log'`: Log level to log the email headers and message. `true` will use
   LOG_DEBUG. See [Logging Levels](../core-libraries/logging#logging-levels). Note that logs will be emitted under the scope named `email`.
   See also [Logging Scopes](../core-libraries/logging#logging-scopes).
@@ -316,10 +316,10 @@ $mailer->setEmailPattern($newPattern);
 
 Sometimes you need a quick way to fire off an email, and you don't necessarily
 want to setup a bunch of configuration ahead of time.
-`Cake\\Mailer\\Email::deliver()` is intended for that purpose.
+`Cake\Mailer\Email::deliver()` is intended for that purpose.
 
 You can create your configuration using
-`Cake\\Mailer\\Email::config()`, or use an array with all
+`Cake\Mailer\Email::config()`, or use an array with all
 options that you need and use the static method `Email::deliver()`.
 Example:
 
@@ -330,7 +330,7 @@ Email::deliver('you@example.com', 'Subject', 'Message', ['from' => 'me@example.c
 This method will send an email to "<you@example.com>", from "<me@example.com>" with
 subject "Subject" and content "Message".
 
-The return of `deliver()` is a `Cake\\Mailer\\Email` instance with all
+The return of `deliver()` is a `Cake\Mailer\Email` instance with all
 configurations set. If you do not want to send the email right away, and wish
 to configure a few things before sending, you can pass the 5th parameter as
 `false`.
@@ -343,7 +343,7 @@ name of configuration in `Configure`.
 
 If you want, you can pass the to, subject and message as null and do all
 configurations in the 4th parameter (as array or using `Configure`).
-Check the list of [configurations](../core-libraries/tmp.9jZLc5C2pQ#email-configurations) to see all accepted configs.
+Check the list of [configurations](../core-libraries/validation#email-configurations) to see all accepted configs.
 
 ## Sending Emails from CLI
 
@@ -527,7 +527,7 @@ TransportFactory::setConfig('gmail', [
 The above configuration would enable TLS communication for email messages.
 
 To configure your mailer to use a specific transport you can use
-`Cake\\Mailer\\Mailer::setTransport()` method or have the transport
+`Cake\Mailer\Mailer::setTransport()` method or have the transport
 in your configuration:
 
 ``` php

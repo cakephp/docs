@@ -21,7 +21,7 @@ encrypted in one implementation is portable to the other.
 
 This method should **never** be used to store passwords. Instead you should use
 the one way hashing methods provided by
-`~Cake\\Utility\\Security::hash()`. An example use would be:
+`Cake\Utility\Security::hash()`. An example use would be:
 
 ``` php
 // Assuming key is stored somewhere it can be re-used for
@@ -32,7 +32,7 @@ $result = Security::encrypt($value, $key);
 
 If you do not supply an HMAC salt, the `Security.salt` value will be used.
 Encrypted values can be decrypted using
-`Cake\\Utility\\Security::decrypt()`.
+`Cake\Utility\Security::decrypt()`.
 
 Decrypt a previously encrypted value. The `$key` and `$hmacSalt`
 parameters must match the values used to encrypt or decryption will fail. An

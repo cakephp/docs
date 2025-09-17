@@ -198,8 +198,8 @@ public function setUp()
 
 Calling the parent method is important in test cases, as `TestCase::setUp()`
 does a number things like backing up the values in
-`~Cake\\Core\\Configure` and, storing the paths in
-`~Cake\\Core\\App`.
+`Cake\Core\Configure` and, storing the paths in
+`Cake\Core\App`.
 
 Next, we'll fill out the test method. We'll use some assertions to ensure that
 our code creates the output we expect:
@@ -498,7 +498,7 @@ all your application's data when running tests.
 
 We use `$fields` to specify which fields will be part of this table, and how
 they are defined. The format used to define these fields is the same used with
-`Cake\\Database\\Schema\\Table`. The keys available for table
+`Cake\Database\Schema\Table`. The keys available for table
 definition are:
 
 type  
@@ -713,8 +713,8 @@ Using the `core` prefix will load fixtures from CakePHP, and using a plugin
 name as the prefix, will load the fixture from the named plugin.
 
 You can control when your fixtures are loaded by setting
-`Cake\\TestSuite\\TestCase::$autoFixtures` to `false` and later load
-them using `Cake\\TestSuite\\TestCase::loadFixtures()`:
+`Cake\TestSuite\TestCase::$autoFixtures` to `false` and later load
+them using `Cake\TestSuite\TestCase::loadFixtures()`:
 
 ``` php
 class ArticlesTest extends TestCase
@@ -878,7 +878,7 @@ creating an instance of our `ArticlesTable` class, and then run our
 `find('published')` method. In `$expected` we set what we expect should be
 the proper result (that we know since we have defined which records are
 initially populated to the article table.) We test that the result equals our
-expectation by using the `assertEquals()` method. See the [Running Tests](../development/tmp.qtES9yBlzm#running-tests)
+expectation by using the `assertEquals()` method. See the [Running Tests](../development/configuration#running-tests)
 section for more information on how to run your test case.
 
 Using the fixture factories, the test would now look like this:
@@ -1304,7 +1304,7 @@ PSR-7 Middleware and the `useHttpServer()` method were added in 3.3.0.
 
 ### Testing with Encrypted Cookies
 
-If you use the `Cake\\Controller\\Component\\CookieComponent` in your
+If you use the `Cake\Controller\Component\CookieComponent` in your
 controllers, your cookies are likely encrypted. As of 3.1.7, CakePHP provides
 helper methods for interacting with encrypted cookies in your test cases:
 
@@ -1958,7 +1958,7 @@ reference them using `plugin.pluginName.fixtureName` syntax in the
 directories you can use the following: `plugin.vendorName/pluginName.folderName/fixtureName`.
 
 Before you can use fixtures you should ensure you have the [fixture
-listener](../development/tmp.qtES9yBlzm#fixture-phpunit-configuration) configured in your `phpunit.xml`
+listener](../development/configuration#fixture-phpunit-configuration) configured in your `phpunit.xml`
 file. You should also ensure that your fixtures are loadable. Ensure the
 following is present in your **composer.json** file:
 

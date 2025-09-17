@@ -2,7 +2,7 @@
 
 The `JsonView` and `XmlView`
 let you create JSON and XML responses, and integrate with the
-`Cake\\Controller\\Component\\RequestHandlerComponent`.
+`Cake\Controller\Component\RequestHandlerComponent`.
 
 By enabling `RequestHandlerComponent` in your application, and enabling
 support for the `json` and/or `xml` extensions, you can automatically
@@ -15,7 +15,7 @@ There are two ways you can generate data views. The first is by using the
 ## Enabling Data Views in Your Application
 
 Before you can use the data view classes, you'll first need to load the
-`Cake\\Controller\\Component\\RequestHandlerComponent` in your
+`Cake\Controller\Component\RequestHandlerComponent` in your
 controller:
 
 ``` php

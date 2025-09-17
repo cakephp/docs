@@ -223,8 +223,8 @@ included its default value would be `false`, and when defined it will be
 Option parsers can also be defined as arrays. Within the array, you can define
 keys for `arguments`, `options`, `description` and `epilog`. The values
 for arguments, and options, should follow the format that
-`Cake\\Console\\ConsoleOptionParser::addArguments()` and
-`Cake\\Console\\ConsoleOptionParser::addOptions()` use. You can also
+`Cake\Console\ConsoleOptionParser::addArguments()` and
+`Cake\Console\ConsoleOptionParser::addOptions()` use. You can also
 use `buildFromArray` on its own, to build an option parser:
 
 ``` php

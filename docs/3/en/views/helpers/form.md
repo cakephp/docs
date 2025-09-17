@@ -451,7 +451,7 @@ echo $this->Form->control('title', ['required' => false]);
 
 To skip browser validation triggering for the whole form you can set option
 `'formnovalidate' => true` for the input button you generate using
-`~Cake\\View\\Helper\\FormHelper::submit()` or set `'novalidate' => true` in options for `~Cake\\View\\Helper\\FormHelper::create()`.
+`Cake\View\Helper\FormHelper::submit()` or set `'novalidate' => true` in options for `Cake\View\Helper\FormHelper::create()`.
 
 For example, let's assume that your Users model includes fields for a
 *username* (varchar), *password* (varchar), *approved* (datetime) and
@@ -528,7 +528,7 @@ $this->set('userGroups', $this->UserGroups->find('list'));
 
 > [!NOTE]
 > You should not use `FormHelper::control()` to generate submit buttons. Use
-> `~Cake\\View\\Helper\\FormHelper::submit()` instead.
+> `Cake\View\Helper\FormHelper::submit()` instead.
 
 ### Field Naming Conventions
 
@@ -722,8 +722,8 @@ as well as HTML attributes. This subsection will cover the options specific to
 In addition to the generic `control()` method, `FormHelper` has specific
 methods for generating a number of different types of controls. These can be used
 to generate just the control widget itself, and combined with other methods like
-`~Cake\\View\\Helper\\FormHelper::label()` and
-`~Cake\\View\\Helper\\FormHelper::error()` to generate fully custom
+`Cake\View\Helper\FormHelper::label()` and
+`Cake\View\Helper\FormHelper::error()` to generate fully custom
 form layouts.
 
 <a id="general-control-options"></a>
@@ -2258,7 +2258,7 @@ for the *Ticket* field, your form would output:
 ```
 
 > [!NOTE]
-> When using `~Cake\\View\\Helper\\FormHelper::control()`, errors are
+> When using `Cake\View\Helper\FormHelper::control()`, errors are
 > rendered by default, so you don't need to use `isFieldError()` or call
 > `error()` manually.
 
@@ -2442,7 +2442,7 @@ echo $this->Form->button('<em>Submit Form</em>', [
 The `end()` method closes and completes a form. Often, `end()` will only
 output a closing form tag, but using `end()` is a good practice as it
 enables FormHelper to insert the hidden form elements that
-`Cake\\Controller\\Component\\SecurityComponent` requires:
+`Cake\Controller\Component\SecurityComponent` requires:
 
 ``` php
 <?= $this->Form->create(); ?>
@@ -2474,7 +2474,7 @@ Will output:
 
 > [!NOTE]
 > If you are using
-> `Cake\\Controller\\Component\\SecurityComponent` in your
+> `Cake\Controller\Component\SecurityComponent` in your
 > application you should always end your forms with `end()`.
 
 ## Creating Standalone Buttons and POST Links
@@ -2528,8 +2528,8 @@ Will output HTML similar to:
 
 Since this method generates a `form` element, do not use this method in an
 already opened form. Instead use
-`Cake\\View\\Helper\\FormHelper::submit()`
-or `Cake\\View\\Helper\\FormHelper::button()` to create buttons
+`Cake\View\Helper\FormHelper::submit()`
+or `Cake\View\Helper\FormHelper::button()` to create buttons
 inside opened forms.
 
 ### Creating POST Links
@@ -2574,8 +2574,8 @@ new form is being set to a [view block](../../../views#view-blocks) that can be
 rendered outside of the main form.
 
 If all you are looking for is a button to submit your form, then you should
-use `Cake\\View\\Helper\\FormHelper::button()` or
-`Cake\\View\\Helper\\FormHelper::submit()` instead.
+use `Cake\View\Helper\FormHelper::button()` or
+`Cake\View\Helper\FormHelper::submit()` instead.
 
 > [!NOTE]
 > Be careful to not put a postLink inside an open form. Instead use the
@@ -2898,7 +2898,7 @@ implementation as well.
 ### Building a Widget Class
 
 Widget classes have a very simple required interface. They must implement the
-`Cake\\View\\Widget\\WidgetInterface`. This interface requires
+`Cake\View\Widget\WidgetInterface`. This interface requires
 the `render(array $data)` and `secureFields(array $data)` methods to be
 implemented. The `render()` method expects an array of data to build the
 widget and is expected to return a string of HTML for the widget.
@@ -3023,13 +3023,13 @@ echo $this->Form->autocomplete('search', $options);
 
 ## Working with SecurityComponent
 
-`Cake\\Controller\\Component\\SecurityComponent` offers several
+`Cake\Controller\Component\SecurityComponent` offers several
 features that make your forms safer and more secure. By simply including the
 `SecurityComponent` in your controller, you'll automatically benefit from
 form tampering-prevention features.
 
 As mentioned previously when using SecurityComponent, you should always close
-your forms using `~Cake\\View\\Helper\\FormHelper::end()`. This will
+your forms using `Cake\View\Helper\FormHelper::end()`. This will
 ensure that the special `_Token` inputs are generated.
 
 `method` Cake\\View\\Helper\\FormHelper::**unlockField**($name)

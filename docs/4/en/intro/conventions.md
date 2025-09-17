@@ -95,7 +95,7 @@ keys, you should create a concrete entity/table class for the table.
 
 In addition to using an auto-incrementing integer as primary keys, you can also
 use UUID columns. CakePHP will create UUID values automatically using
-(`Cake\\Utility\\Text::uuid()`) whenever you save new records using
+(`Cake\Utility\Text::uuid()`) whenever you save new records using
 the `Table::save()` method.
 
 ## Model Conventions
@@ -123,7 +123,7 @@ The basic pattern is
 > By default CakePHP uses English inflections. If you have database
 > tables/columns that use another language, you will need to add inflection
 > rules (from singular to plural and vice-versa). You can use
-> `Cake\\Utility\\Inflector` to define your custom inflection
+> `Cake\Utility\Inflector` to define your custom inflection
 > rules. See the documentation about [Inflector](../core-libraries/inflector) for more
 > information.
 
@@ -221,7 +221,7 @@ the foreign key would be <code>menu_link_id</code>.</td>
 <td>In addition to using an auto-incrementing integer as
 primary keys, you can also use UUID columns.
 CakePHP will create UUID values automatically
-using (<code class="interpreted-text" role="php:meth">Cake\\Utility\\Text::uuid()</code>)
+using (<code class="interpreted-text" role="php:meth">Cake\Utility\Text::uuid()</code>)
 whenever you save new records using the
 <code>Table::save()</code> method.</td>
 </tr>

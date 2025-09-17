@@ -187,8 +187,8 @@ public function setUp(): void
 
 Calling the parent method is important in test cases, as `TestCase::setUp()`
 does a number things like backing up the values in
-`~Cake\\Core\\Configure` and, storing the paths in
-`~Cake\\Core\\App`.
+`Cake\Core\Configure` and, storing the paths in
+`Cake\Core\App`.
 
 Next, we'll fill out the test method. We'll use some assertions to ensure that
 our code creates the output we expect:
@@ -965,7 +965,7 @@ creating an instance of our `ArticlesTable` class, and then run our
 `find('published')` method. In `$expected` we set what we expect should be
 the proper result (that we know since we have defined which records are
 initially populated to the article table.) We test that the result equals our
-expectation by using the `assertEquals()` method. See the [Running Tests](../development/testing#running-tests)
+expectation by using the `assertEquals()` method. See the [Running Tests](../development/configuration#running-tests)
 section for more information on how to run your test case.
 
 Using the fixture factories, the test would now look like this:
@@ -1356,8 +1356,8 @@ In order to simulate exactly how the uploaded file objects would be present on
 a regular request, you not only need to pass them in the request data, but you also
 need to pass them to the test request configuration via the `files` option. It's
 not technically necessary though unless your code accesses uploaded files via the
-`Cake\\Http\\ServerRequest::getUploadedFile()` or
-`Cake\\Http\\ServerRequest::getUploadedFiles()` methods.
+`Cake\Http\ServerRequest::getUploadedFile()` or
+`Cake\Http\ServerRequest::getUploadedFiles()` methods.
 
 Let's assume articles have a teaser image, and a `Articles hasMany Attachments`
 association, the form would look like something like this accordingly, where one
@@ -2054,7 +2054,7 @@ reference them using `plugin.pluginName.fixtureName` syntax in the
 directories you can use the following: `plugin.vendorName/pluginName.folderName/fixtureName`.
 
 Before you can use fixtures you should ensure you have the [fixture
-listener](../development/testing#fixture-phpunit-configuration) configured in your `phpunit.xml`
+listener](../development/configuration#fixture-phpunit-configuration) configured in your `phpunit.xml`
 file. You should also ensure that your fixtures are loadable. Ensure the
 following is present in your **composer.json** file:
 

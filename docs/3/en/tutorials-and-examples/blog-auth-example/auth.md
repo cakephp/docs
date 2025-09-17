@@ -126,7 +126,7 @@ tutorial, we will show just the add.ctp:
 ## Authentication (Login and Logout)
 
 We're now ready to add our authentication layer. In CakePHP this is handled by
-the `Cake\\Controller\\Component\\AuthComponent`, a class responsible
+the `Cake\Controller\Component\AuthComponent`, a class responsible
 for requiring login for certain actions, handling user login and logout, and
 also authorizing logged-in users to the actions they are allowed to reach.
 

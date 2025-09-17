@@ -395,7 +395,7 @@ echo $time->wasWithinLast('2 weeks');
 </div>
 
 The `Date` class in CakePHP implements the same API and methods as
-`Cake\\I18n\\Time` does. The main difference between `Time` and
+`Cake\I18n\Time` does. The main difference between `Time` and
 `Date` is that `Date` does not track time components, and is always in UTC.
 As an example:
 

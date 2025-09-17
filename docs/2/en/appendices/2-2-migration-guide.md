@@ -208,7 +208,7 @@ does. See the [Hash](../core-utility-libraries/hash) page for more detail.
   [Dispatcher Filters](../development/dispatch-filters)
 - With the addition of [Dispatcher Filters](../development/dispatch-filters) you'll need to
   update `app/Config/bootstrap.php`. See
-  [Required Steps To Upgrade 2 2](../appendices/2-2-migration-guide#required-steps-to-upgrade-2-2).
+  [Required Steps To Upgrade 2 2](#required-steps-to-upgrade-2-2).
 
 ### Router
 
@@ -245,7 +245,7 @@ name and deletes all entries labeled with the same string.
 ## Log
 
 Changes in `CakeLog` now require, some additional configuration in
-your `app/Config/bootstrap.php`. See [Required Steps To Upgrade 2 2](../appendices/2-2-migration-guide#required-steps-to-upgrade-2-2),
+your `app/Config/bootstrap.php`. See [Required Steps To Upgrade 2 2](#required-steps-to-upgrade-2-2),
 and [Logging](../core-libraries/logging).
 
 - The `CakeLog` class now accepts the same log levels as defined in

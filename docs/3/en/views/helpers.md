@@ -234,7 +234,7 @@ access any loaded helper using `$this->{$helperName}`.
 ### Loading Helpers On The Fly
 
 There may be situations where you need to dynamically load a helper from inside
-a view. You can use the view's `Cake\\View\\HelperRegistry` to
+a view. You can use the view's `Cake\View\HelperRegistry` to
 do this:
 
 ``` php
@@ -249,7 +249,7 @@ supports the registry API used elsewhere in CakePHP.
 ## Callback Methods
 
 Helpers feature several callbacks that allow you to augment the view rendering
-process. See the [Helper Api](../views/helpers#helper-api) and the
+process. See the [Helper Api](#helper-api) and the
 [Events System](../core-libraries/events) documentation for more information.
 
 ## Creating Helpers
