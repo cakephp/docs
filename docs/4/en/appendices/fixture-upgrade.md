@@ -44,7 +44,7 @@ the default prior to 4.3.0.
 
 We use `$fields` to specify which fields will be part of this table, and how
 they are defined. The format used to define these fields is the same used with
-`Cake\\Database\\Schema\\Table`. The keys available for table
+`Cake\Database\Schema\Table`. The keys available for table
 definition are:
 
 type  

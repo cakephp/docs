@@ -117,7 +117,7 @@ $xml = Xml::fromArray(['response' => $recipes]);
 echo $xml->asXML();
 ```
 
-When serving up a specific content type using `Cake\\Routing\\Router::extensions()`,
+When serving up a specific content type using `Cake\Routing\Router::extensions()`,
 CakePHP automatically looks for a view helper that matches the type.
 Since we're using XML as the content type, there is no built-in helper,
 however if you were to create one it would automatically be loaded
@@ -148,8 +148,8 @@ The rendered XML will end up looking something like this:
 Creating the logic for the edit action is a bit trickier, but not by much. Since
 you're providing an API that outputs XML, it's a natural choice to receive XML
 as input. Not to worry, the
-`Cake\\Controller\\Component\\RequestHandler` and
-`Cake\\Routing\\Router` classes make things much easier. If a POST or
+`Cake\Controller\Component\RequestHandler` and
+`Cake\Routing\Router` classes make things much easier. If a POST or
 PUT request has an XML content-type, then the input is run through CakePHP's
 `Xml` class, and the array representation of the data is assigned to
 `$this->request->getData()`. Because of this feature, handling XML and POST data in

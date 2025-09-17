@@ -186,7 +186,7 @@ appropriate parts of your application. The hooks are:
   collection.
 
 When loading plugins you can configure which hooks are enabled. By default
-plugins without a [Plugin Objects](tmp.MdTas7IsIA#plugin-objects) have all hooks disabled. New style plugins
+plugins without a [Plugin Objects](#plugin-objects) have all hooks disabled. New style plugins
 allow plugin authors to set defaults, which can be configured by you in your
 appliation:
 
@@ -585,12 +585,12 @@ also connect routes that use the following pattern:
     /:prefix/:plugin/:controller
     /:prefix/:plugin/:controller/:action
 
-See the section on [Plugin Configuration](tmp.MdTas7IsIA#plugin-configuration) for information on how to load
+See the section on [Plugin Configuration](#plugin-configuration) for information on how to load
 plugin specific route files.
 
 For plugins you did not create with bake, you will also need to edit the
 **composer.json** file to add your plugin to the autoload classes, this can be
-done as per the documentation [Autoloading Plugin Classes](tmp.MdTas7IsIA#autoloading-plugin-classes).
+done as per the documentation [Autoloading Plugin Classes](#autoloading-plugin-classes).
 
 <a id="plugin-models"></a>
 
@@ -752,7 +752,7 @@ You may put any type of file in any directory, just like a regular webroot.
 ### Linking to Assets in Plugins
 
 You can use the `plugin syntax` when linking to plugin assets using the
-`~Cake\\View\\Helper\\HtmlHelper`'s script, image, or css methods:
+`Cake\View\Helper\HtmlHelper`'s script, image, or css methods:
 
 ``` php
 // Generates a URL of /contact_manager/css/styles.css

@@ -229,8 +229,8 @@ $parser->addSubcommand('check', [
 Inside the parser spec, you can define keys for `arguments`, `options`,
 `description` and `epilog`. You cannot define `subcommands` inside an
 array style builder. The values for arguments, and options, should follow the
-format that `Cake\\Console\\ConsoleOptionParser::addArguments()` and
-`Cake\\Console\\ConsoleOptionParser::addOptions()` use. You can also
+format that `Cake\Console\ConsoleOptionParser::addArguments()` and
+`Cake\Console\ConsoleOptionParser::addOptions()` use. You can also
 use buildFromArray on its own, to build an option parser:
 
 ``` php
@@ -438,7 +438,7 @@ When defining a subcommand you can use the following options:
   create method specific option parsers. When help is generated for a
   subcommand, if a parser is present it will be used. You can also supply the
   parser as an array that is compatible with
-  `Cake\\Console\\ConsoleOptionParser::buildFromArray()`
+  `Cake\Console\ConsoleOptionParser::buildFromArray()`
 
 Adding subcommands can be done as part of a fluent method chain.
 

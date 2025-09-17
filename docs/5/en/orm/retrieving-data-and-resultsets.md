@@ -102,7 +102,7 @@ $query = $articles->find('all');
 ```
 
 The return value of any `find()` method is always
-a `Cake\\ORM\\Query\\SelectQuery` object. The SelectQuery class allows you to further
+a `Cake\ORM\Query\SelectQuery` object. The SelectQuery class allows you to further
 refine a query after creating it. SelectQuery objects are evaluated lazily, and do not
 execute until you start fetching rows, convert it to an array, or when the
 `all()` method is called:
@@ -991,7 +991,7 @@ sections for more information.
 ## Working with Result Sets
 
 Once a query is executed with `all()`, you will get an instance of
-`Cake\\ORM\\ResultSet`. This object offers powerful ways to manipulate
+`Cake\ORM\ResultSet`. This object offers powerful ways to manipulate
 the resulting data from your queries. ResultSets are a [Collection](../core-libraries/collections)
 and you can use any collection method on ResultSet objects.
 

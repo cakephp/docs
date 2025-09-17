@@ -121,7 +121,7 @@ $time = $this->OneTimer->getTime();
 
 Once you've included some components in your controller, using them is pretty
 simple. Each component you use is exposed as a property on your controller. If
-you had loaded up the `Cake\\Controller\\Component\\FlashComponent`
+you had loaded up the `Cake\Controller\Component\FlashComponent`
 in your controller, you could access it like so:
 
 ``` php
@@ -182,7 +182,7 @@ class MathComponent extends Component
 ```
 
 > [!NOTE]
-> All components must extend `Cake\\Controller\\Component`. Failing
+> All components must extend `Cake\Controller\Component`. Failing
 > to do this will trigger an exception.
 
 Components can use [Dependency Injection](../development/dependency-injection) to receive services

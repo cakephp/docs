@@ -66,7 +66,7 @@ public function someMethod()
 }
 ```
 
-Within a static method you can use the `~Cake\\Datasource\\FactoryLocator`
+Within a static method you can use the `Cake\Datasource\FactoryLocator`
 to get the table locator:
 
 ``` php

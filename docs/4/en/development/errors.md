@@ -16,7 +16,7 @@ options are supported:
 
 - `errorLevel` - int - The level of errors you are interested in capturing.
   Use the built-in PHP error constants, and bitmasks to select the level of
-  error you are interested in. See [Deprecation Warnings](../development/tmp.smMTEZt2wd#deprecation-warnings) to disable
+  error you are interested in. See [Deprecation Warnings](../development/configuration#deprecation-warnings) to disable
   deprecation warnings.
 - `trace` - bool - Include stack traces for errors in log files. Stack
   traces will be included in the log after each error. This is helpful for
@@ -25,7 +25,7 @@ options are supported:
   exceptions. If you choose a custom class you should place the file for that
   class in **src/Error**. This class needs to implement a `render()` method.
 - `log` - bool - When `true`, exceptions + their stack traces will be
-  logged to `Cake\\Log\\Log`.
+  logged to `Cake\Log\Log`.
 - `skipLog` - array - An array of exception classnames that should not be
   logged. This is useful to remove NotFoundExceptions or other common, but
   uninteresting log messages.
@@ -453,7 +453,7 @@ application exceptions
 
 You can create your own application exceptions using any of the built in [SPL
 exceptions](https://php.net/manual/en/spl.exceptions.php), `Exception`
-itself, or `Cake\\Core\\Exception\\Exception`.
+itself, or `Cake\Core\Exception\Exception`.
 If your application contained the following exception:
 
 ``` php
@@ -472,7 +472,7 @@ Exceptions that subclass `Cake\Http\Exception\HttpException`, will have their
 error code used as an HTTP status code if the error code is between `400` and
 `506`.
 
-The constructor for `Cake\\Core\\Exception\\CakeException` allows you to
+The constructor for `Cake\Core\Exception\CakeException` allows you to
 pass in additional data. This additional data is interpolated into the the
 `_messageTemplate`. This allows you to create data rich exceptions, that
 provide more context around your errors:
@@ -505,7 +505,7 @@ get `Seems that Pointy is missing.`.
 Using the built-in exception handling, you can log all the exceptions that are
 dealt with by ErrorTrap by setting the `log` option to `true` in your
 **config/app.php**. Enabling this will log every exception to
-`Cake\\Log\\Log` and the configured loggers.
+`Cake\Log\Log` and the configured loggers.
 
 > [!NOTE]
 > If you are using a custom exception handler this setting will have
@@ -637,8 +637,8 @@ In addition, CakePHP uses the following exceptions:
 >
 > A model's behavior could not be found.
 >
-> An entity couldn't be saved/deleted while using `Cake\\ORM\\Table::saveOrFail()` or
-> `Cake\\ORM\\Table::deleteOrFail()`.
+> An entity couldn't be saved/deleted while using `Cake\ORM\Table::saveOrFail()` or
+> `Cake\ORM\Table::deleteOrFail()`.
 >
 > The requested record could not be found. This will also set HTTP response
 > headers to 404.

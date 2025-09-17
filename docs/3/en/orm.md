@@ -65,7 +65,7 @@ class ArticlesTable extends Table
 
 Table classes use the CamelCased version of the table name with the `Table`
 suffix as the class name. Once your class has been created you get a reference
-to it using the `~Cake\\ORM\\Locator\\TableLocator` through `~Cake\\ORM\\TableRegistry` as before:
+to it using the `Cake\ORM\Locator\TableLocator` through `Cake\ORM\TableRegistry` as before:
 
 ``` php
 use Cake\ORM\TableRegistry;

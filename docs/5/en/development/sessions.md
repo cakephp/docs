@@ -239,7 +239,7 @@ blocking users to e.g. open a second tab of your app to do something else
 in the meantime.
 
 To prevent this behavior you will have to change the way how sessions are being
-handled in CakePHP by using a different session handler like [Sessions Cache Sessions](../development/tmp.PQb9aTbfwZ#sessions-cache-sessions)
+handled in CakePHP by using a different session handler like [Sessions Cache Sessions](../development/configuration#sessions-cache-sessions)
 combined with the [Redis Engine](../core-libraries/caching#caching-redisengine) or another cache engine.
 
 > [!TIP]
@@ -331,7 +331,7 @@ class ComboSession extends DatabaseSession
 
 Our class extends the built-in `DatabaseSession` so we don't have to duplicate
 all of its logic and behavior. We wrap each operation with
-a `Cake\\Cache\\Cache` operation. This lets us fetch sessions from
+a `Cake\Cache\Cache` operation. This lets us fetch sessions from
 the fast cache, and not have to worry about what happens when we fill the cache.
 In **config/app.php** make the session block look like:
 

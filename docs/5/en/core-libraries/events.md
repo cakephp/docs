@@ -97,7 +97,7 @@ In addition to instance level event managers, CakePHP provides a global event
 manager that allows you to listen to any event fired in an application. This is
 useful when attaching listeners to a specific instance might be cumbersome or
 difficult. The global manager is a singleton instance of
-`Cake\\Event\\EventManager`. Listeners attached to the global
+`Cake\Event\EventManager`. Listeners attached to the global
 dispatcher will be fired before instance listeners at the same priority. You can
 access the global manager using a static method:
 
@@ -117,7 +117,7 @@ event object is usually required in any function that gets attached globally in
 order to prevent some bugs. Remember that with the flexibility of using the
 global manager, some additional complexity is incurred.
 
-`Cake\\Event\\EventManager::dispatch()` method accepts the event
+`Cake\Event\EventManager::dispatch()` method accepts the event
 object as an argument and notifies all listener and callbacks passing this
 object along. The listeners will handle all the extra logic around the
 `afterPlace` event, you can log the time, send emails, update user statistics
@@ -130,7 +130,7 @@ the need.
 
 To keep a list of events that are fired on a particular `EventManager`, you
 can enable event tracking. To do so, simply attach an
-`Cake\\Event\\EventList` to the manager:
+`Cake\Event\EventList` to the manager:
 
 ``` php
 EventManager::instance()->setEventList(new EventList());
@@ -144,7 +144,7 @@ $firstEvent = $eventsFired[0];
 ```
 
 Tracking can be disabled by removing the event list or calling
-`Cake\\Event\\EventManager::trackEvents(false)`.
+`Cake\Event\EventManager::trackEvents(false)`.
 
 ## Core Events
 
@@ -251,7 +251,7 @@ public function events(EventManagerInterface $eventManager): EventManagerInterfa
 ## Registering Listeners
 
 Listeners are the preferred way to register callbacks for an event. This is done
-by implementing the `Cake\\Event\\EventListenerInterface` interface
+by implementing the `Cake\Event\EventListenerInterface` interface
 in any class you wish to register some callbacks. Classes implementing it need
 to provide the `implementedEvents()` method. This method must return an
 associative array with all event names that the class will handle.
@@ -491,8 +491,8 @@ order.
 ## Dispatching Events
 
 Once you have obtained an instance of an event manager you can dispatch events
-using `~Cake\\Event\\EventManager::dispatch()`. This method takes an
-instance of the `Cake\\Event\\Event` class. Let's look at dispatching
+using `Cake\Event\EventManager::dispatch()`. This method takes an
+instance of the `Cake\Event\Event` class. Let's look at dispatching
 an event:
 
 ``` php
@@ -504,7 +504,7 @@ $event = new Event('Order.afterPlace', $this, [
 $this->getEventManager()->dispatch($event);
 ```
 
-`Cake\\Event\\Event` accepts 3 arguments in its constructor. The
+`Cake\Event\Event` accepts 3 arguments in its constructor. The
 first one is the event name, you should try to keep this name as unique as
 possible, while making it readable. We suggest a convention as follows:
 `Layer.eventName` for general events happening at a layer level (for example,
@@ -523,7 +523,7 @@ Finally, the third argument is any additional event data. This can be any data
 you consider useful to pass around so listeners can act upon it. While this can
 be an argument of any type, we recommend passing an associative array.
 
-The `~Cake\\Event\\EventManager::dispatch()` method accepts an event
+The `Cake\Event\EventManager::dispatch()` method accepts an event
 object as an argument and notifies all subscribed listeners.
 
 <a id="stopping-events"></a>
@@ -629,7 +629,7 @@ kept the same and modifications are shared across all callback calls.
 ### Removing Callbacks and Listeners
 
 If for any reason you want to remove any callback from the event manager just
-call the `Cake\\Event\\EventManager::off()` method using as
+call the `Cake\Event\EventManager::off()` method using as
 arguments the first two parameters you used for attaching it:
 
 ``` php

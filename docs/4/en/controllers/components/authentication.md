@@ -1056,7 +1056,7 @@ Controller actions for which user validation is not required.
 authenticate  
 Set to an array of Authentication objects you want to use when
 logging users in. There are several core authentication objects;
-see the section on [Authentication Objects](../../../controllers/components/authentication#authentication-objects).
+see the section on [Authentication Objects](#authentication-objects).
 
 authError  
 Error to display when user attempts to access an object or action to which
@@ -1068,7 +1068,7 @@ value to boolean `false`.
 authorize  
 Set to an array of Authorization objects you want to use when
 authorizing users on each request; see the section on
-[Authorization Objects](../../../controllers/components/authentication#authorization-objects).
+[Authorization Objects](#authorization-objects).
 
 flash  
 Settings to use when Auth needs to do a flash message with

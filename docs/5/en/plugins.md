@@ -668,7 +668,7 @@ You may put any type of file in any directory, just like a regular webroot.
 ### Linking to Assets in Plugins
 
 You can use the `plugin syntax` when linking to plugin assets using the
-`~Cake\\View\\Helper\\HtmlHelper`'s script, image, or css methods:
+`Cake\View\Helper\HtmlHelper`'s script, image, or css methods:
 
 ``` php
 // Generates a URL of /contact_manager/css/styles.css

@@ -122,7 +122,7 @@ $connection->delete('articles', ['id' => 10]);
 
 By convention database connections are configured in **config/app.php**. The
 connection information defined in this file is fed into
-`Cake\\Datasource\\ConnectionManager` creating the connection configuration
+`Cake\Datasource\ConnectionManager` creating the connection configuration
 your application will be using. Sample connection information can be found in
 **config/app.default.php**. A sample connection configuration would look
 like:
@@ -145,7 +145,7 @@ like:
 The above will create a 'default' connection, with the provided parameters. You
 can define as many connections as you want in your configuration file. You can
 also define additional connections at runtime using
-`Cake\\Datasource\\ConnectionManager::setConfig()`. An example of that
+`Cake\Datasource\ConnectionManager::setConfig()`. An example of that
 would be:
 
 ``` php
@@ -266,7 +266,7 @@ cacheMetadata
 Either boolean `true`, or a string containing the cache configuration to
 store meta data in. Having metadata caching disabled by setting it to `false`
 is not advised and can result in very poor performance. See the
-[Database Metadata Cache](../orm/database-basics#database-metadata-cache) section for more information.
+[Database Metadata Cache](../orm/validation#database-metadata-cache) section for more information.
 
 mask  
 Set the permissions on the generated database file. (Only supported by SQLite)
@@ -341,7 +341,7 @@ references to existing connections.
 ### Accessing Connections
 
 Once configured connections can be fetched using
-`Cake\\Datasource\\ConnectionManager::get()`. This method will
+`Cake\Datasource\ConnectionManager::get()`. This method will
 construct and load a connection if it has not been built before, or return the
 existing known connection:
 
@@ -363,7 +363,7 @@ ConnectionManager::setConfig('my_connection', $config);
 $connection = ConnectionManager::get('my_connection');
 ```
 
-See the [Database Configuration](../orm/database-basics#database-configuration) for more information on the configuration
+See the [Database Configuration](../orm/validation#database-configuration) for more information on the configuration
 data used when creating connections.
 
 ## Data Types
@@ -430,14 +430,14 @@ Maps to the `BLOB` or `BYTEA` type provided by the database.
 
 date  
 Maps to a native `DATE` column type. The return value of this column
-type is `Cake\\I18n\\Date` which extends the native `DateTime`
+type is `Cake\I18n\Date` which extends the native `DateTime`
 class.
 
 datetime  
-See [Datetime Type](../orm/database-basics#datetime-type).
+See [Datetime Type](../orm/validation#datetime-type).
 
 datetimefractional  
-See [Datetime Type](../orm/database-basics#datetime-type).
+See [Datetime Type](../orm/validation#datetime-type).
 
 timestamp  
 Maps to the `TIMESTAMP` type.
@@ -469,7 +469,7 @@ handles, and generate file handles when reading data.
 
 Maps to a native `DATETIME` column type. In PostgreSQL and SQL Server
 this turns into a `TIMESTAMP` type. The default return value of this column
-type is `Cake\\I18n\\FrozenTime` which extends the built-in
+type is `Cake\I18n\FrozenTime` which extends the built-in
 `DateTimeImmutable` class and [Chronos](https://github.com/cakephp/chronos).
 
 `method` Cake\\Database\\DateTimeType::**setTimezone**(string|\\DateTimeZone|null $timezone)
@@ -522,7 +522,7 @@ implement the following methods:
 - `toStatement`: Casts given value to its Statement equivalent.
 - `marshal`: Marshals flat data into PHP objects.
 
-To fulfill the basic interface, extend `Cake\\Database\\Type`.
+To fulfill the basic interface, extend `Cake\Database\Type`.
 For example if we wanted to add a JSON type, we could make the following type
 class:
 
@@ -907,7 +907,7 @@ foreach ($query as $row) {
 ```
 
 > [!NOTE]
-> When you have an instance of `Cake\\ORM\\Query` you can use
+> When you have an instance of `Cake\ORM\Query` you can use
 > `all()` to get the result set for SELECT queries.
 
 ### Using Transactions
@@ -1090,7 +1090,7 @@ $connection->enableQueryLogging(false);
 ```
 
 When query logging is enabled, queries will be logged to
-`Cake\\Log\\Log` using the 'debug' level, and the 'queriesLog' scope.
+`Cake\Log\Log` using the 'debug' level, and the 'queriesLog' scope.
 You will need to have a logger configured to capture this level & scope. Logging
 to `stderr` can be useful when working on unit tests, and logging to
 files/syslog can be useful when working with web requests:
@@ -1132,7 +1132,7 @@ reason for this is identifier quoting has a few drawbacks:
 
 If you are using a legacy schema that requires identifier quoting you can enable
 it using the `quoteIdentifiers` setting in your
-[Database Configuration](../orm/database-basics#database-configuration). You can also enable this feature at runtime:
+[Database Configuration](../orm/validation#database-configuration). You can also enable this feature at runtime:
 
 ``` php
 $connection->getDriver()->enableAutoQuoting();

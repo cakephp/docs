@@ -234,7 +234,7 @@ This would render `app/Plugin/Users/View/UserDetails/custom_file.ctp`
 
 ### Callbacks
 
-In addition to the [Controller Life Cycle](tmp.DfPNW5Gjol#controller-life-cycle),
+In addition to the [Controller Life Cycle](#controller-life-cycle),
 CakePHP also supports callbacks related to scaffolding.
 
 `method` Controller::**beforeScaffold**($method)

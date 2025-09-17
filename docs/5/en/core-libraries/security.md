@@ -25,7 +25,7 @@ $result = Security::encrypt($value, $key);
 
 If you do not supply an HMAC salt, the value of `Security::getSalt()` will be used.
 Encrypted values can be decrypted using
-`Cake\\Utility\\Security::decrypt()`.
+`Cake\Utility\Security::decrypt()`.
 
 This method should **never** be used to store passwords.
 

@@ -425,7 +425,7 @@ Will output:
 </a>
 ```
 
-Also check `Cake\\View\\Helper\\UrlHelper::build()` method
+Also check `Cake\View\Helper\UrlHelper::build()` method
 for more examples of different types of URLs.
 
 `method` Cake\\View\\Helper\\HtmlHelper::**linkFromPath**(string $title, string $path, array $params = [], array $options = [])

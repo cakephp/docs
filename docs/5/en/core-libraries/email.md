@@ -126,7 +126,7 @@ following configuration keys are used:
   variables to be used in the view. See `Mailer::setViewVars()`.
 - `'attachments'`: List of files to attach. See `Mailer::setAttachments()`.
 - `'emailFormat'`: Format of email (html, text or both). See `Mailer::setEmailFormat()`.
-- `'transport'`: Transport configuration name. See [Email Transport](../core-libraries/tmp.EtbKQmFyRq#email-transport).
+- `'transport'`: Transport configuration name. See [Email Transport](../core-libraries/validation#email-transport).
 - `'log'`: Log level to log the email headers and message. `true` will use
   LOG_DEBUG. See [Logging Levels](../core-libraries/logging#logging-levels). Note that logs will be emitted under the scope named `email`.
   See also [Logging Scopes](../core-libraries/logging#logging-scopes).
@@ -494,7 +494,7 @@ TransportFactory::setConfig('gmail', [
 The above configuration would enable TLS communication for email messages.
 
 To configure your mailer to use a specific transport you can use
-`Cake\\Mailer\\Mailer::setTransport()` method or have the transport
+`Cake\Mailer\Mailer::setTransport()` method or have the transport
 in your configuration:
 
 ``` php

@@ -23,7 +23,7 @@ configuration
 Configuration is generally stored in either PHP or INI files, and loaded during
 the application bootstrap. CakePHP comes with one configuration file by default,
 but if required you can add additional configuration files and load them in
-your application's bootstrap code. `Cake\\Core\\Configure` is used
+your application's bootstrap code. `Cake\Core\Configure` is used
 for global configuration, and classes like `Cache` provide `setConfig()`
 methods to make configuration simple and transparent.
 
@@ -365,7 +365,7 @@ back:
 
 If `$key` is left null, all values in Configure will be returned.
 
-Reads configuration data just like `Cake\\Core\\Configure::read`
+Reads configuration data just like `Cake\Core\Configure::read`
 but expects to find a key/value pair. In case the requested pair does not
 exist, a `RuntimeException` will be thrown:
 
@@ -400,7 +400,7 @@ Configure::delete('Company.name');
 Read and delete a key from Configure. This is useful when you want to
 combine reading and deleting values in a single operation.
 
-Consumes configuration data just like `Cake\\Core\\Configure::consume`
+Consumes configuration data just like `Cake\Core\Configure::consume`
 but expects to find a key/value pair. In case the requested pair does not
 exist, a `RuntimeException` will be thrown:
 
@@ -417,9 +417,9 @@ Configure::consumeOrFail('Company');
 ## Reading and writing configuration files
 
 CakePHP comes with two built-in configuration file engines.
-`Cake\\Core\\Configure\\Engine\\PhpConfig` is able to read PHP config
+`Cake\Core\Configure\Engine\PhpConfig` is able to read PHP config
 files, in the same format that Configure has historically read.
-`Cake\\Core\\Configure\\Engine\\IniConfig` is able to read ini config
+`Cake\Core\Configure\Engine\IniConfig` is able to read ini config
 files. See the [PHP documentation](https://php.net/parse_ini_file) for more
 information on the specifics of ini files. To use a core config engine, you'll
 need to attach it to Configure using `Configure::config()`:
@@ -498,9 +498,9 @@ will not ever overwrite the existing configuration.
 Dumps all or some of the data in Configure into a file or storage system
 supported by a config engine. The serialization format is decided by the config
 engine attached as \$config. For example, if the 'default' engine is
-a `Cake\\Core\\Configure\\Engine\\PhpConfig`, the generated file will be
+a `Cake\Core\Configure\Engine\PhpConfig`, the generated file will be
 a PHP configuration file loadable by the
-`Cake\\Core\\Configure\\Engine\\PhpConfig`
+`Cake\Core\Configure\Engine\PhpConfig`
 
 Given that the 'default' engine is an instance of PhpConfig.
 Save all data in Configure to the file \`my_config.php\`:

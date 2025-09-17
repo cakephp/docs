@@ -12,7 +12,7 @@ CakePHP eases the burden on the developer by providing a terse way to
 paginate data.
 
 Pagination in CakePHP controllers is done through the `paginate()` method. You
-then use `~Cake\\View\\Helper\\PaginatorHelper` in your view templates
+then use `Cake\View\Helper\PaginatorHelper` in your view templates
 to generate pagination controls.
 
 ## Basic Usage
@@ -301,5 +301,5 @@ $results = $paginator->paginate(
 
 ## Pagination in the View
 
-Check the `~Cake\\View\\Helper\\PaginatorHelper` documentation for
+Check the `Cake\View\Helper\PaginatorHelper` documentation for
 how to create links for pagination navigation.

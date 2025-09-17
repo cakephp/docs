@@ -6,17 +6,17 @@ attacker to capture and replay a previous request, and sometimes submit data
 requests using image tags or resources on other domains.
 
 The CsrfComponent works by setting a cookie to the user's browser. When forms
-are created with the `Cake\\View\\Helper\\FormHelper`, a hidden field
+are created with the `Cake\View\Helper\FormHelper`, a hidden field
 is added containing the CSRF token. During the `Controller.startup` event, if
 the request is a POST, PUT, DELETE, PATCH request the component will compare the
 request data & cookie value. If either is missing or the two values mismatch the
 component will throw a
-`Cake\\Network\\Exception\\InvalidCsrfTokenException`.
+`Cake\Network\Exception\InvalidCsrfTokenException`.
 
 > [!NOTE]
 > You should always verify the HTTP method being used before executing to avoid
 > side-effects. You should [check the HTTP method](../../../controllers/request-response#check-the-request) or
-> use `Cake\\Http\\ServerRequest::allowMethod()` to ensure the correct
+> use `Cake\Http\ServerRequest::allowMethod()` to ensure the correct
 > HTTP method is used.
 
 <div class="versionadded">
@@ -24,8 +24,8 @@ component will throw a
 3.1
 
 The exception type changed from
-`Cake\\Network\\Exception\\ForbiddenException` to
-`Cake\\Network\\Exception\\InvalidCsrfTokenException`.
+`Cake\Network\Exception\ForbiddenException` to
+`Cake\Network\Exception\InvalidCsrfTokenException`.
 
 </div>
 

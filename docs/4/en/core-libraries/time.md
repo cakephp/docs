@@ -448,7 +448,7 @@ debug($time->wasWithinLast('2 weeks'));
 ## FrozenDate
 
 The immutable `FrozenDate` class in CakePHP implements the same API and methods as
-`Cake\\I18n\\FrozenTime` does. The main difference between `FrozenTime` and
+`Cake\I18n\FrozenTime` does. The main difference between `FrozenTime` and
 `FrozenDate` is that `FrozenDate` does not track time components.
 As an example:
 

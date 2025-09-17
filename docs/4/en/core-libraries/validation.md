@@ -383,7 +383,7 @@ The `Validator`, `ValidationSet` and `ValidationRule` classes do not
 provide any validation methods themselves. Validation rules come from
 'providers'. You can bind any number of providers to a Validator object.
 Validator instances come with a 'default' provider setup automatically. The
-default provider is mapped to the `~Cake\\Validation\\Validation`
+default provider is mapped to the `Cake\Validation\Validation`
 class. This makes it simple to use the methods on that class as validation
 rules. When using Validators and the ORM together, additional providers are
 configured for the table and entity objects. You can use the `setProvider()`
@@ -591,10 +591,10 @@ if (empty($errors)) {
 
 > [!NOTE]
 > If you need to validate entities you should use methods like
-> `~Cake\\ORM\\Table::newEntity()`,
-> `~Cake\\ORM\\Table::newEntities()`,
-> `~Cake\\ORM\\Table::patchEntity()`,
-> `~Cake\\ORM\\Table::patchEntities()`
+> `Cake\ORM\Table::newEntity()`,
+> `Cake\ORM\Table::newEntities()`,
+> `Cake\ORM\Table::patchEntity()`,
+> `Cake\ORM\Table::patchEntities()`
 > as they are designed for that.
 
 ## Validating Entity Data

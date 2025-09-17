@@ -649,7 +649,7 @@ Here's what the `add()` action does:
 Every CakePHP request includes a request object which is accessible using
 `$this->request`. The request object contains information regarding the
 request that was just received. We use the
-`Cake\\Http\\ServerRequest::is()` method to check that the request
+`Cake\Http\ServerRequest::is()` method to check that the request
 is a HTTP POST request.
 
 Our POST data is available in `$this->request->getData()`. You can use the
@@ -664,10 +664,10 @@ a message into the session. The `success` method is provided using PHP's
 messages will be displayed on the next page after redirecting. In our layout we have
 `<?= $this->Flash->render() ?>` which displays flash messages and clears the
 corresponding session variable. Finally, after saving is complete, we use
-`Cake\\Controller\\Controller::redirect` to send the user back to the
+`Cake\Controller\Controller::redirect` to send the user back to the
 articles list. The param `['action' => 'index']` translates to URL
 `/articles` i.e the index action of the `ArticlesController`. You can refer
-to `Cake\\Routing\\Router::url()` function on the [API](https://api.cakephp.org) to see the formats in which you can specify a URL
+to `Cake\Routing\Router::url()` function on the [API](https://api.cakephp.org) to see the formats in which you can specify a URL
 for various CakePHP functions.
 
 ### Create Add Template
@@ -883,7 +883,7 @@ setup, check the [Validation](core-libraries/validation) documentation.
 
 Now that your validation rules are in place, use the app to try to add
 an article with an empty title or body to see how it works. Since we've used the
-`Cake\\View\\Helper\\FormHelper::control()` method of the FormHelper to
+`Cake\View\Helper\FormHelper::control()` method of the FormHelper to
 create our form elements, our validation error messages will be shown
 automatically.
 
@@ -964,7 +964,7 @@ that allow users to delete articles:
 </table>
 ```
 
-Using `~Cake\\View\\Helper\\FormHelper::deleteLink()` will create a link
+Using `Cake\View\Helper\FormHelper::deleteLink()` will create a link
 that uses JavaScript to do a DELETE request deleting our article.
 Prior to CakePHP 5.2 you need to use `postLink()` instead.
 
