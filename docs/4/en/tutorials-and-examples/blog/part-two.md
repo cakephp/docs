@@ -188,7 +188,7 @@ array format. This is explained in more detail in the section on
 Routes. Using the array format for URLs allows you to take
 advantage of CakePHP's reverse routing capabilities. You can also
 specify URLs relative to the base of the application in the form of
-`/controller/action/param1/param2` or use [named routes](../../../development/routing#named-routes).
+`/controller/action/param1/param2` or use [named routes](../../development/routing#named-routes).
 
 At this point, you should be able to point your browser to
 <http://www.example.com/articles/index>. You should see your view,
@@ -630,7 +630,7 @@ specific actions. So we'll just make a quick change to routes in
 this tutorial.
 
 For more information on advanced routing techniques, see
-[Routes Configuration](../../../development/routing#routes-configuration).
+[Routes Configuration](../../development/routing#routes-configuration).
 
 By default, CakePHP responds to a request for the root of your site
 (for example, <http://www.example.com>) using its `PagesController`, rendering
@@ -684,8 +684,8 @@ If you need help, there are many ways to get the help you need - please see the
 
 These are common tasks people learning CakePHP usually want to study next:
 
-1.  [View Layouts](../../../views#view-layouts): Customizing your website layout
-2.  [View Elements](../../../views#view-elements): Including and reusing view snippets
+1.  [View Layouts](../../views#view-layouts): Customizing your website layout
+2.  [View Elements](../../views#view-elements): Including and reusing view snippets
 3.  [Code Generation with Bake](../../bake/usage): Generating basic CRUD code
 4.  [Blog Tutorial - Authentication](../../tutorials-and-examples/blog-auth-example/auth): User authentication
     and authorization tutorial

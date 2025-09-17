@@ -62,7 +62,7 @@ chapter:
 </div>
 
 View extending allows you to wrap one view in another. Combining this with
-[view blocks](#view-blocks) gives you a powerful way to keep your views
+[view blocks](getting-started#view-blocks) gives you a powerful way to keep your views
 `DRY`. For example, your application has a sidebar that needs to change
 depending on the specific view being rendered. By extending a common view file,
 you can avoid repeating the common markup for your sidebar, and only define the

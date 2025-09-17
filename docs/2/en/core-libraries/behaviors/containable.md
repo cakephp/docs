@@ -16,7 +16,7 @@ altering the associations of your models. It does this by using
 the supplied containments to generate a series of `bindModel` and
 `unbindModel` calls. Since Containable only modifies existing relationships it
 will not allow you to restrict results by distant associations. Instead
-you should refer to [Joining Tables](../../../models/associations-linking-models-together#joining-tables).
+you should refer to [Joining Tables](../../models/associations-linking-models-together#joining-tables).
 
 To use the new behavior, you can add it to the \$actsAs property of
 your model:
@@ -341,7 +341,7 @@ $this->Comment->find('all', array(
 ));
 ```
 
-Additional filtering can be performed by supplying the standard [Model Find](../../../models/retrieving-your-data#model-find) options:
+Additional filtering can be performed by supplying the standard [Model Find](../../models/retrieving-your-data#model-find) options:
 
 ``` php
 $this->Post->find('all', array('contain' => array(
@@ -453,7 +453,7 @@ By including the 'contain' parameter in the `$paginate` property
 it will apply to both the find('count') and the find('all') done on
 the model.
 
-See the section [Using Containable](#using-containable) for further details.
+See the section [Using Containable](../../core-libraries/behaviors/containable#using-containable) for further details.
 
 Here's an example of how to contain associations when paginating:
 
@@ -468,7 +468,7 @@ $users = $this->paginate('User');
 
 > [!NOTE]
 > If you contained the associations through the model instead,
-> it will not honor Containable's [recursive option](#containablebehavior-options).
+> it will not honor Containable's [recursive option](../../core-libraries/behaviors/containable#containablebehavior-options).
 > So if you set recursive to -1 for example for the model, it won't work:
 >
 > ``` php

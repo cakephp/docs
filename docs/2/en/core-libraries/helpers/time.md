@@ -250,7 +250,7 @@ Formatting
 > Returns a formatted date string, given either a UNIX timestamp or a
 > valid strtotime() date string. It take in account the default date
 > format for the current language if a LC_TIME file is used. For more info
-> about LC_TIME file check [here](../../../core-libraries/internationalization-and-localization#lc-time).
+> about LC_TIME file check [here](../../core-libraries/internationalization-and-localization#lc-time).
 >
 > <div class="versionchanged">
 >

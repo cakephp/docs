@@ -13,7 +13,7 @@ You can can use composer to upgrade to CakePHP 4.3.0:
 
 4.3 introduces a few deprecations. All of these features will continue for the
 duration of 4.x but will be removed in 5.0. You can use the
-[upgrade tool](#upgrade-tool-use) to automate updating usage of deprecated
+[upgrade tool](../appendices/4-0-upgrade-guide#upgrade-tool-use) to automate updating usage of deprecated
 features:
 
     bin/cake upgrade rector --rules cakephp43 <path/to/app/src>

@@ -1,7 +1,7 @@
 # Welcome
 
-CakePHP 5 is a web development framework running on PHP 8.4 (min. PHP
-8.1). Read [CakePHP at a Glance](intro) to get an
+CakePHP 5 is a web development framework running on PHP |phpversion| (min. PHP
+|minphpversion|). Read [CakePHP at a Glance](intro) to get an
 introduction to the fundamentals of CakePHP.
 
 The CakePHP book is an openly developed and community editable documentation

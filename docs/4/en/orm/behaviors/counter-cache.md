@@ -144,7 +144,7 @@ First, you need to add the `through` and `cascadeCallbacks` options to the
     'through'          => 'CommentsArticles',
     'cascadeCallbacks' => true
 
-Also see [Using The Through Option](../../../orm/associations#using-the-through-option) how to configure a custom join table.
+Also see [Using The Through Option](../../orm/associations#using-the-through-option) how to configure a custom join table.
 
 The `CommentsArticles` is the name of the junction table classname.
 If you don't have it you should create it with the bake CLI tool.

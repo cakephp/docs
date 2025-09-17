@@ -1187,7 +1187,7 @@ $this->response->cookie('remember', [
 ]);
 ```
 
-See the [Creating Cookies](#creating-cookies) section for how to use the cookie object. You
+See the [Creating Cookies](../controllers/pages-controller#creating-cookies) section for how to use the cookie object. You
 can use `withExpiredCookie()` to send an expired cookie in the response. This
 will make the browser remove its local cookie:
 

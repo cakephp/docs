@@ -72,7 +72,7 @@ class ArticlesController extends AppController
 While you can include any of the options supported by
 `Cake\ORM\Table::find()` such as `fields` in your pagination
 settings. It is cleaner and simpler to bundle your pagination options into
-a [Custom Find Method](../../../orm/retrieving-data-and-resultsets#custom-find-methods). You can use your finder in pagination by using the
+a [Custom Find Method](../../orm/retrieving-data-and-resultsets#custom-find-methods). You can use your finder in pagination by using the
 `finder` option:
 
 ``` php
@@ -215,7 +215,7 @@ paginate both tags and articles at the same time:
 
     /dashboard?article[page]=1&tag[page]=3
 
-See the [Paginator Helper Multiple](../../../views/helpers/paginator#paginator-helper-multiple) section for how to generate scoped HTML
+See the [Paginator Helper Multiple](../../views/helpers/paginator#paginator-helper-multiple) section for how to generate scoped HTML
 elements and URLs for pagination.
 
 <div class="versionadded">
@@ -228,7 +228,7 @@ Multiple Pagination was added in 3.3.0
 ### Paginating the Same Model multiple Times
 
 To paginate the same model multiple times within a single controller action you
-need to define an alias for the model. See [Table Registry Usage](../../../orm/table-objects#table-registry-usage) for
+need to define an alias for the model. See [Table Registry Usage](../../orm/table-objects#table-registry-usage) for
 additional details on how to use the table registry:
 
 ``` php

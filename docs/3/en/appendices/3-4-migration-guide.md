@@ -79,7 +79,7 @@ deprecated and immutable variants are now recommended:
 - `Response::file()` would become `Response::withFile()`
 - `Response::download()` would become `Response::withDownload()`
 
-Please see the [Adopting Immutable Responses](#adopting-immutable-responses) section for more information
+Please see the [Adopting Immutable Responses](../appendices/3-4-migration-guide#adopting-immutable-responses) section for more information
 before updating your code as using responses through the immutable methods will
 require additional changes.
 

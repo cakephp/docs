@@ -49,7 +49,7 @@ the client and its request.
 ## Automatically Decoding Request Data
 
 This feature has been removed from `RequestHandlerComponent` in 4.0. You
-should use [Body Parser Middleware](../../../controllers/middleware#body-parser-middleware) instead.
+should use [Body Parser Middleware](../../controllers/middleware#body-parser-middleware) instead.
 
 ## Checking Content-Type Preferences
 
@@ -156,6 +156,6 @@ public function initialize(): void
 
 4.4.0
 Instead of defining `viewClassMap` you should use
-[Controller Viewclasses](../../../controllers#controller-viewclasses) instead.
+[Controller Viewclasses](../../controllers#controller-viewclasses) instead.
 
 </div>

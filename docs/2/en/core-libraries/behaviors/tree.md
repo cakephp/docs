@@ -404,7 +404,7 @@ the order of Friends will be Gwendolyn, Gerald.
 
 Using this method will either delete or move a node but retain its
 sub-tree, which will be reparented one level higher. It offers more
-control than [Model Delete](../../../models/deleting-data#model-delete), which for a model
+control than [Model Delete](../../models/deleting-data#model-delete), which for a model
 using the tree behavior will remove the specified node and all of
 its children.
 

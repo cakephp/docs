@@ -1272,7 +1272,7 @@ public function setUp()
 After enabling the PSR-7 mode, and possibly configuring your application class,
 you can use the remaining `IntegrationTestTrait` features as normal.
 
-You should also take care to try and use [Application Bootstrap](#application-bootstrap) to load
+You should also take care to try and use [Application Bootstrap](../development/configuration#application-bootstrap) to load
 any plugins containing events/routes. Doing so will ensure that your
 events/routes are connected for each test case. Alternatively if you wish to
 load plugins manually in a test you can use the `loadPlugins()` method:

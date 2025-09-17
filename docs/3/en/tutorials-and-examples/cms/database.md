@@ -166,7 +166,7 @@ class Article extends Entity
 
 Our entity is quite slim right now, and we've only setup the `_accessible`
 property which controls how properties can be modified by
-[Entities Mass Assignment](../../../orm/entities#entities-mass-assignment).
+[Entities Mass Assignment](../../orm/entities#entities-mass-assignment).
 
 We can't do much with our models right now, so next we'll create our first
 [Controller and Template](../../tutorials-and-examples/cms/articles-controller) to allow us to interact

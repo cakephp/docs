@@ -15,7 +15,7 @@ component will throw a
 
 > [!NOTE]
 > You should always verify the HTTP method being used before executing to avoid
-> side-effects. You should [check the HTTP method](../../../controllers/request-response#check-the-request) or
+> side-effects. You should [check the HTTP method](../../controllers/request-response#check-the-request) or
 > use `Cake\Http\ServerRequest::allowMethod()` to ensure the correct
 > HTTP method is used.
 
@@ -32,7 +32,7 @@ The exception type changed from
 <div class="deprecated">
 
 3.5.0
-You should use [Csrf Middleware](../../../controllers/middleware#csrf-middleware) instead of
+You should use [Csrf Middleware](../../controllers/middleware#csrf-middleware) instead of
 `CsrfComponent`.
 
 </div>

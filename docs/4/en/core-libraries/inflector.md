@@ -40,7 +40,7 @@ when provided a multi-word argument:
 ## Creating Plural & Singular Forms
 
 Both `pluralize` and `singularize()` work on most English nouns. If you need
-to support other languages, you can use [Inflection Configuration](../core-libraries/validation#inflection-configuration) to
+to support other languages, you can use [Inflection Configuration](../core-libraries/inflector#inflection-configuration) to
 customize the rules used:
 
     // Apples

@@ -233,7 +233,7 @@ HTML attributes. The following will cover the options specific to
 
 - `$options['type']` You can force the type of an input, overriding model
   introspection, by specifying a type. In addition to the field types found in
-  the [Automagic Form Elements](#automagic-form-elements), you can also create 'file', 'password',
+  the [Automagic Form Elements](../../core-libraries/helpers/number#automagic-form-elements), you can also create 'file', 'password',
   and any type supported by HTML5:
 
   ``` php

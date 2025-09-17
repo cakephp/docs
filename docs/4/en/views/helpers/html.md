@@ -610,7 +610,7 @@ $this->Html->scriptEnd();
 ```
 
 Once you have buffered javascript, you can output it as you would any other
-[View Block](../../../views#view-blocks):
+[View Block](../../views#view-blocks):
 
 ``` php
 // In your layout

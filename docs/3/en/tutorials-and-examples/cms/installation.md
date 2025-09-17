@@ -20,8 +20,8 @@ version:
 php -v
 ```
 
-You should at least have got installed PHP 8.1 (CLI) or higher.
-Your webserver's PHP version must also be of 8.1 or higher, and
+You should at least have got installed PHP |minphpversion| (CLI) or higher.
+Your webserver's PHP version must also be of |minphpversion| or higher, and
 should be the same version your command line interface (CLI) PHP is.
 
 ## Getting CakePHP

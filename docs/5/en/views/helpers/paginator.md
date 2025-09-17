@@ -454,7 +454,7 @@ It is also possible to sort a column based on associations:
 > ```
 >
 > For more information on using the `sortableFields` option, please see
-> [Control Which Fields Used For Ordering](../../../controllers/pagination#control-which-fields-used-for-ordering).
+> [Control Which Fields Used For Ordering](../../controllers/pagination#control-which-fields-used-for-ordering).
 
 The final ingredient to pagination display in views is the addition of page
 navigation, also supplied by the PaginationHelper:
@@ -485,7 +485,7 @@ markers:
 
 ### Paginating Multiple Results
 
-If you are [paginating multiple queries](../../../controllers/pagination#paginating-multiple-queries)
+If you are [paginating multiple queries](../../controllers/pagination#paginating-multiple-queries)
 you'll need to use `PaginatorHelper::setPaginated()` first before calling
 other methods of the helper, so that they generate expected output.
 

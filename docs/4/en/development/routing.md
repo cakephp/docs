@@ -437,7 +437,7 @@ CakePHP, and should not be used unless you want the special meaning
 - `_host` Set the host to use for the link. Defaults to the current host.
 - `_port` Set the port if you need to create links on non-standard ports.
 - `_full` If `true` the value of `App.fullBaseUrl` mentioned in
-  [General Configuration](#general-configuration) will be prepended to generated URLs.
+  [General Configuration](../development/configuration#general-configuration) will be prepended to generated URLs.
 - `#` Allows you to set URL hash fragments.
 - `_https` Set to `true` to convert the generated URL to https or `false`
   to force http. Prior to 4.5.0 use `_ssl`.
@@ -1482,7 +1482,7 @@ You can also use any of the special route elements when generating URLs:
 - `_port` Set the port if you need to create links on non-standard ports.
 - `_method` Define the HTTP verb the URL is for.
 - `_full` If `true` the value of `App.fullBaseUrl` mentioned in
-  [General Configuration](#general-configuration) will be prepended to generated URLs.
+  [General Configuration](../development/configuration#general-configuration) will be prepended to generated URLs.
 - `_https` Set to `true` to convert the generated URL to https or `false`
   to force http. Prior to 4.5.0 use `_ssl`
 - `_name` Name of route. If you have setup named routes, you can use this key

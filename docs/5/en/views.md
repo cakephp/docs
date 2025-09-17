@@ -144,7 +144,7 @@ Any variables you set in your controller with `set()` will be available in
 both the view and the layout your action renders. In addition, any set variables
 will also be available in any element. If you need to pass additional variables
 from the view to the layout you can either call `set()` in the view template,
-or use [View Blocks](#view-blocks).
+or use [View Blocks](standalone-packages#view-blocks).
 
 You should remember to **always** escape any user data before outputting it as
 CakePHP does not automatically escape output. You can escape user content with
@@ -177,7 +177,7 @@ contain the value 'posts'.
 ### Extending Views
 
 View extending allows you to wrap one view in another. Combining this with
-[view blocks](#view-blocks) gives you a powerful way to keep your views
+[view blocks](standalone-packages#view-blocks) gives you a powerful way to keep your views
 `DRY`. For example, your application has a sidebar that needs to change
 depending on the specific view being rendered. By extending a common view file,
 you can avoid repeating the common markup for your sidebar, and only define the

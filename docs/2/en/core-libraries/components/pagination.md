@@ -143,7 +143,7 @@ public function list_recipes() {
 
 If you're not able to use the standard find options to create the query you need
 to display your data, there are a few options. You can use a
-[custom find type](../../../models/retrieving-your-data#model-custom-find). You can also implement the
+[custom find type](../../models/retrieving-your-data#model-custom-find). You can also implement the
 `paginate()` and `paginateCount()` methods on your model, or include them in
 a behavior attached to your model. Behaviors implementing `paginate` and/or
 `paginateCount` should implement the method signatures defined below with the
@@ -378,7 +378,7 @@ public function index() {
 
 It's very easy to incorporate AJAX functionality into pagination.
 Using the `JsHelper` and `RequestHandlerComponent` you can
-easily add AJAX pagination to your application. See [Ajax Pagination](../../../core-libraries/helpers/js#ajax-pagination) for
+easily add AJAX pagination to your application. See [Ajax Pagination](../../core-libraries/helpers/js#ajax-pagination) for
 more information.
 
 ## Pagination in the view

@@ -121,7 +121,7 @@ As of 3.1.0 the `addInputType()` method is deprecated. You should use
 <div class="versionchanged">
 
 3.6.0
-You should prefer using [Body Parser Middleware](../../../controllers/middleware#body-parser-middleware) instead of
+You should prefer using [Body Parser Middleware](../../controllers/middleware#body-parser-middleware) instead of
 RequestHandlerComponent.
 
 </div>

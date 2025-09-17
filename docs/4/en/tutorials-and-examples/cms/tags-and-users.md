@@ -213,7 +213,7 @@ public function tags()
 }
 ```
 
-To access other parts of the request data, consult the [Cake Request](../../../controllers/request-response#cake-request)
+To access other parts of the request data, consult the [Cake Request](../../controllers/request-response#cake-request)
 section.
 
 Since passed arguments are passed as method parameters, you could also write the
@@ -278,7 +278,7 @@ public function findTagged(Query $query, array $options)
 }
 ```
 
-We just implemented a [custom finder method](../../../orm/retrieving-data-and-resultsets#custom-find-methods). This is
+We just implemented a [custom finder method](../../orm/retrieving-data-and-resultsets#custom-find-methods). This is
 a very powerful concept in CakePHP that allows you to package up re-usable
 queries. Finder methods always get a [Query Builder](../../orm/query-builder) object and an
 array of options as parameters. Finders can manipulate the query and add any

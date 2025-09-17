@@ -277,7 +277,7 @@ public function initialize(array $config): void
 ## Applying Application Rules
 
 While basic data validation is done when [request data is converted into
-entities](#validating-request-data), many applications also have more complex
+entities](../orm/validation#validating-request-data), many applications also have more complex
 validation that should only be applied after basic validation has completed.
 
 Where validation ensures the form or syntax of your data is correct, rules
@@ -533,8 +533,8 @@ $rules->add(function ($entity, $options) use($rules) {
 
 ### Conditional/Dynamic Error Messages
 
-Rules, being it [custom callables](#creating-a-rules-checker), or
-[rule objects](#creating-custom-rule-objects), can either return a boolean, indicating
+Rules, being it [custom callables](../orm/validation#creating-a-rules-checker), or
+[rule objects](../orm/validation#creating-custom-rule-objects), can either return a boolean, indicating
 whether they passed, or they can return a string, which means that the rule did not pass,
 and that the returned string should be used as the error message.
 

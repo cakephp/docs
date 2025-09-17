@@ -122,7 +122,7 @@ when a field can or cannot be empty:
 - `update` The field can be empty when validating an **update**
   operation.
 - A callback that returns `true` or `false` to indicate whether a field is
-  allowed to be empty. See the [Conditional Validation](#conditional-validation) section for examples on
+  allowed to be empty. See the [Conditional Validation](../core-libraries/validation#conditional-validation) section for examples on
   how to use this parameter.
 
 An example of these methods in action is:
@@ -202,15 +202,15 @@ containing data related to the validation process:
 
 Closures should return boolean true if the validation passes. If it fails,
 return boolean false or for a custom error message return a string, see the
-[Conditional/Dynamic Error Messages](#dynamic_validation_error_messages)
+[Conditional/Dynamic Error Messages](../core-libraries/validation#dynamic_validation_error_messages)
 section for further details.
 
 <a id="dynamic_validation_error_messages"></a>
 
 ### Conditional/Dynamic Error Messages
 
-Validation rule methods, being it [custom callables](#custom-validation-rules),
-or [methods supplied by providers](#adding-validation-providers), can either
+Validation rule methods, being it [custom callables](../core-libraries/validation#custom-validation-rules),
+or [methods supplied by providers](../core-libraries/validation#adding-validation-providers), can either
 return a boolean, indicating whether the validation succeeded, or they can return
 a string, which means that the validation failed, and that the returned string
 should be used as the error message.

@@ -35,7 +35,7 @@ components in your `initialize()` method.
 > send to the blackhole callback.
 >
 > You should always verify the HTTP method being used before executing to avoid
-> side-effects. You should [check the HTTP method](../../../controllers/request-response#check-the-request) or
+> side-effects. You should [check the HTTP method](../../controllers/request-response#check-the-request) or
 > use `Cake\Http\ServerRequest::allowMethod()` to ensure the correct
 > HTTP method is used.
 

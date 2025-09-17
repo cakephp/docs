@@ -62,7 +62,7 @@ with the following command:
     apt-get install bash-completion
 
 Create a file named **cake** in **/etc/bash_completion.d/** and put the
-[Bash Completion File Content](#bash-completion-file-content) inside it.
+[Bash Completion File Content](../console-and-shells/orm-cache#bash-completion-file-content) inside it.
 
 Save the file, then restart your console.
 

@@ -15,7 +15,7 @@ $result = $this->Articles->delete($entity);
 
 When deleting entities a few things happen:
 
-1.  The [delete rules](#application-rules) will be applied. If the rules
+1.  The [delete rules](../orm/validation#application-rules) will be applied. If the rules
     fail, deletion will be prevented.
 2.  The `Model.beforeDelete` event is triggered. If this event is stopped, the
     delete will be aborted and the event's result will be returned.

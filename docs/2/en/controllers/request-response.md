@@ -339,7 +339,7 @@ instead of `CakeResponse`. You can also replace the response
 instance by setting `$this->response` in your controllers. Overriding the
 response object is handy during testing, as it allows you to stub
 out the methods that interact with `~CakeResponse::header()`. See the section on
-[Cakeresponse Testing](#cakeresponse-testing) for more information.
+[Cakeresponse Testing](../controllers/scaffolding#cakeresponse-testing) for more information.
 
 ## Dealing with content types
 

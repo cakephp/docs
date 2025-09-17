@@ -150,7 +150,7 @@ the associative array into an element for each key value pair.
 > [!NOTE]
 > You will need to modify the \$link variable as appropriate to
 > your application. You might also want to use a
-> [virtual field](../../../orm/entities#entities-virtual-fields) in your Entity.
+> [virtual field](../../orm/entities#entities-virtual-fields) in your Entity.
 
 ``` php
 foreach ($articles as $article) {

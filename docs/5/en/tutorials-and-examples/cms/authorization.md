@@ -257,7 +257,7 @@ public function edit($slug)
 ```
 
 Here we're modifying which properties can be mass-assigned, via the options
-for `patchEntity()`. See the [Changing Accessible Fields](../../../orm/saving-data#changing-accessible-fields) section for
+for `patchEntity()`. See the [Changing Accessible Fields](../../orm/saving-data#changing-accessible-fields) section for
 more information. Remember to remove the `user_id` control from
 **templates/Articles/edit.php** as we no longer need it.
 

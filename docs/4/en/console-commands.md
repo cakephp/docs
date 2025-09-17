@@ -110,7 +110,7 @@ public function console(CommandCollection $commands): CommandCollection
 ```
 
 When overriding the `console()` hook in your application, remember to
-call `$commands->autoDiscover()` to add commands from CakePHP, your
+call `$commands->addMany($commands->autoDiscover())` to add commands from CakePHP, your
 application, and plugins.
 
 If you need to rename/remove any attached commands, you can use the

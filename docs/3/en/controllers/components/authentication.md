@@ -1064,7 +1064,7 @@ Controller actions for which user validation is not required.
 authenticate  
 Set to an array of Authentication objects you want to use when
 logging users in. There are several core authentication objects;
-see the section on [Authentication Objects](#authentication-objects).
+see the section on [Authentication Objects](../../controllers/components/cookie#authentication-objects).
 
 authError  
 Error to display when user attempts to access an object or action to which
@@ -1076,7 +1076,7 @@ value to boolean `false`.
 authorize  
 Set to an array of Authorization objects you want to use when
 authorizing users on each request; see the section on
-[Authorization Objects](#authorization-objects).
+[Authorization Objects](../../controllers/components/cookie#authorization-objects).
 
 flash  
 Settings to use when Auth needs to do a flash message with
@@ -1134,5 +1134,5 @@ Without a parameter, the full configuration will be returned.
 
 ## Testing Actions Protected By AuthComponent
 
-See the [Testing Authentication](../../../development/testing#testing-authentication) section for tips on how to test controller
+See the [Testing Authentication](../../development/testing#testing-authentication) section for tips on how to test controller
 actions that are protected by `AuthComponent`.

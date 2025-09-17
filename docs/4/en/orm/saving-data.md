@@ -163,7 +163,7 @@ $data = [
 ```
 
 By default, the `newEntity()` method validates the data that gets passed to
-it, as explained in the [Validating Request Data](#validating-request-data) section. If you wish to
+it, as explained in the [Validating Request Data](../orm/validation#validating-request-data) section. If you wish to
 bypass data validation pass the `'validate' => false` option:
 
 ``` php
@@ -226,7 +226,7 @@ $entity = $articles->newEntity($this->request->getData(), [
 ]);
 ```
 
-The [Using Different Validators Per Association](#using-different-validators-per-association) chapter has more
+The [Using Different Validators Per Association](../orm/validation#using-different-validators-per-association) chapter has more
 information on how to use different validators for associated marshalling.
 
 The following diagram gives an overview of what happens inside the
@@ -446,7 +446,7 @@ $articles->save($article);
 
 Similar to `newEntity()`, the `patchEntity` method will validate the data
 before it is copied to the entity. The mechanism is explained in the
-[Validating Request Data](#validating-request-data) section. If you wish to disable validation while
+[Validating Request Data](../orm/validation#validating-request-data) section. If you wish to disable validation while
 patching an entity, pass the `validate` option as follows:
 
 ``` php
@@ -813,7 +813,7 @@ $article->title = 'My new title';
 $articles->save($article);
 ```
 
-When saving, CakePHP will [apply your rules](#application-rules), and wrap
+When saving, CakePHP will [apply your rules](../orm/validation#application-rules), and wrap
 the save operation in a database transaction. It will also only update
 properties that have changed. The above `save()` call would generate SQL
 like:
@@ -853,7 +853,7 @@ The following diagram illustrates the above process:
 <img src="/save-cycle.png" alt="/_static/img/save-cycle.png" />
 </figure>
 
-See the [Application Rules](#application-rules) section for more information on creating and
+See the [Application Rules](../orm/validation#application-rules) section for more information on creating and
 using rules.
 
 > [!WARNING]
@@ -1044,7 +1044,7 @@ When converting request data into entities, the `newEntity()` and
 `newEntities()` methods will handle both arrays of properties, as well as a
 list of ids at the `_ids` key. Using the `_ids` key makes it possible to building a
 select box or checkbox based form controls for belongs to many associations. See
-the [Converting Request Data](../orm/saving-data#converting-request-data) section for more information.
+the [Converting Request Data](../orm/validation#converting-request-data) section for more information.
 
 When saving belongsToMany associations, you have the choice between two saving
 strategies:

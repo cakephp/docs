@@ -658,7 +658,7 @@ specific actions. So we'll just make a quick change to routes in
 this tutorial.
 
 For more information on advanced routing techniques, see
-[Routes Configuration](../../../development/routing#routes-configuration).
+[Routes Configuration](../../development/routing#routes-configuration).
 
 By default, CakePHP responds to a request for the root of your site
 (e.g., <http://www.example.com>) using its PagesController, rendering
@@ -716,8 +716,8 @@ Welcome to CakePHP!
 
 These are common tasks people learning CakePHP usually want to study next:
 
-1.  [View Layouts](../../../views#view-layouts): Customizing your website layout
-2.  [View Elements](../../../views#view-elements): Including and reusing view snippets
+1.  [View Layouts](../../views#view-layouts): Customizing your website layout
+2.  [View Elements](../../views#view-elements): Including and reusing view snippets
 3.  [Scaffolding](../../controllers/scaffolding): Prototyping before creating code
 4.  [Code Generation with Bake](../../console-and-shells/code-generation-with-bake): Generating basic CRUD code
 5.  [Simple Authentication and Authorization Application](../../tutorials-and-examples/blog-auth-example/auth): User authentication and authorization tutorial

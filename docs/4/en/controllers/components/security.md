@@ -43,7 +43,7 @@ components in your `initialize()` method.
 > send to the blackhole callback.
 >
 > You should always verify the HTTP method being used before executing to avoid
-> side-effects. You should [check the HTTP method](../../../controllers/request-response#check-the-request) or
+> side-effects. You should [check the HTTP method](../../controllers/request-response#check-the-request) or
 > use `Cake\Http\ServerRequest::allowMethod()` to ensure the correct
 > HTTP method is used.
 
@@ -91,7 +91,7 @@ The `$type` parameter can have the following values:
 
 ## Restrict Actions to SSL
 
-This functionality was removed into [Https Enforcer Middleware](../../../security/https-enforcer#https-enforcer-middleware).
+This functionality was removed into [Https Enforcer Middleware](../../security/https-enforcer#https-enforcer-middleware).
 
 ## Form Tampering Prevention
 
@@ -164,7 +164,7 @@ CSRF or Cross Site Request Forgery is a common vulnerability in web
 applications. It allows an attacker to capture and replay a previous request,
 and sometimes submit data requests using image tags or resources on other
 domains. To enable CSRF protection features use the
-[Csrf Middleware](../../../security/csrf#csrf-middleware).
+[Csrf Middleware](../../security/csrf#csrf-middleware).
 
 ## Disabling Form Tampering for Specific Actions
 

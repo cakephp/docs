@@ -10,7 +10,7 @@ Here's what you'll need:
     though the instructions for using other servers should be very
     similar. We might have to play a little with the server
     configuration, but most folks can get CakePHP up and running without
-    any configuration at all. Make sure you have PHP 8.1 or greater, and
+    any configuration at all. Make sure you have PHP |minphpversion| or greater, and
     that the `mbstring` and `intl` extensions are enabled in PHP.
 2.  A database server. We're going to be using MySQL server in this
     tutorial. You'll need to know enough about SQL in order to create a
@@ -215,7 +215,7 @@ it's not guessable:
 Occasionally new users will run into mod_rewrite issues. For example
 if the CakePHP welcome page looks a little funny (no images or CSS styles).
 This probably means mod_rewrite is not functioning on your system. Please refer
-to the [Url Rewriting](../../../installation#url-rewriting) section to help resolve any issues you are having.
+to the [Url Rewriting](../../installation#url-rewriting) section to help resolve any issues you are having.
 
 Now continue to [Blog Tutorial - Part 2](../../tutorials-and-examples/blog/part-two) to start building
 your first CakePHP application.

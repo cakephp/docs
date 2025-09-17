@@ -20,8 +20,8 @@ version:
 php -v
 ```
 
-You should at least have got installed PHP 8.1 (CLI) or higher.
-Your webserver's PHP version must also be of 8.1 or higher, and should best be
+You should at least have got installed PHP |minphpversion| (CLI) or higher.
+Your webserver's PHP version must also be of |minphpversion| or higher, and should best be
 the same version your command line interface (CLI) PHP version is of.
 If you'd like to see the completed application, checkout [cakephp/bookmarker](https://github.com/cakephp/bookmarker-tutorial). Let's get started!
 
@@ -370,7 +370,7 @@ public function tags()
 }
 ```
 
-To access other parts of the request data, consult the [Cake Request](../../../controllers/request-response#cake-request)
+To access other parts of the request data, consult the [Cake Request](../../controllers/request-response#cake-request)
 section.
 
 ### Creating the Finder Method
@@ -411,7 +411,7 @@ public function findTagged(Query $query, array $options)
 }
 ```
 
-We just implemented a [custom finder method](../../../orm/retrieving-data-and-resultsets#custom-find-methods). This is
+We just implemented a [custom finder method](../../orm/retrieving-data-and-resultsets#custom-find-methods). This is
 a very powerful concept in CakePHP that allows you to package up re-usable
 queries. Finder methods always get a [Query Builder](../../orm/query-builder) object and an
 array of options as parameters. Finders can manipulate the query and add any

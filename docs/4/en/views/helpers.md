@@ -232,7 +232,7 @@ supports the registry API used elsewhere in CakePHP.
 ## Callback Methods
 
 Helpers feature several callbacks that allow you to augment the view rendering
-process. See the [Helper Api](#helper-api) and the
+process. See the [Helper Api](../views/helpers#helper-api) and the
 [Events System](../core-libraries/events) documentation for more information.
 
 ## Creating Helpers

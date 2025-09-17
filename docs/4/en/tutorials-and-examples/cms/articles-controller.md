@@ -115,7 +115,7 @@ generate an HTML link with the given link text (the first parameter) and URL
 (the second parameter).
 
 When specifying URLs in CakePHP, it is recommended that you use arrays or
-[named routes](../../../development/routing#named-routes). These syntaxes allow you to
+[named routes](../../development/routing#named-routes). These syntaxes allow you to
 leverage the reverse routing features CakePHP offers.
 
 At this point, you should be able to point your browser to
@@ -139,7 +139,7 @@ public function view($slug = null)
 
 While this is a simple action, we've used some powerful CakePHP features. We
 start our action off by using `findBySlug()` which is
-a [Dynamic Finder](../../../orm/retrieving-data-and-resultsets#dynamic-finders). This method allows us to create a basic query that
+a [Dynamic Finder](../../orm/retrieving-data-and-resultsets#dynamic-finders). This method allows us to create a basic query that
 finds articles by a given slug. We then use `firstOrFail()` to either fetch
 the first record, or throw a `NotFoundException`.
 
@@ -311,7 +311,7 @@ the following line:
 If we were to save an Article right now, saving would fail as we are not
 creating a slug attribute, and the column is `NOT NULL`. Slug values are
 typically a URL-safe version of an article's title. We can use the
-[beforeSave() callback](../../../orm/table-objects#table-callbacks) of the ORM to populate our slug:
+[beforeSave() callback](../../orm/table-objects#table-callbacks) of the ORM to populate our slug:
 
 ``` php
 <?php
@@ -437,7 +437,7 @@ articles:
 ## Update Validation Rules for Articles
 
 Up until this point our Articles had no input validation done. Lets fix that by
-using [a validator](../../../orm/validation#validating-request-data):
+using [a validator](../../orm/validation#validating-request-data):
 
 ``` php
 // src/Model/Table/ArticlesTable.php

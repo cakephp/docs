@@ -845,7 +845,7 @@ and authentication mechanics in CakePHP.
 >
 > Set to an array of Authentication objects you want to use when
 > logging users in. There are several core authentication objects,
-> see the section on [Authentication Objects](#authentication-objects).
+> see the section on [Authentication Objects](../../core-libraries/components/authentication#authentication-objects).
 >
 > Error to display when user attempts to access an object or action to which
 > they do not have access.
@@ -860,7 +860,7 @@ and authentication mechanics in CakePHP.
 >
 > Set to an array of Authorization objects you want to use when
 > authorizing users on each request, see the section on
-> [Authorization Objects](#authorization-objects).
+> [Authorization Objects](../../core-libraries/components/authentication#authorization-objects).
 >
 > Other components utilized by AuthComponent
 >
