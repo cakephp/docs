@@ -21,6 +21,9 @@ COPY . .
 # Install vitepress deps
 RUN npm ci
 
+# Increase max-old-space-size to avoid memory issues during build
+ENV NODE_OPTIONS="--max-old-space-size=8192"
+
 # Build VitePress site
 RUN npm run docs:build
 
