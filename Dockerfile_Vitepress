@@ -18,11 +18,7 @@ RUN apk add --no-cache git
 WORKDIR /app
 COPY . .
 
-# TODO: Copy built files
-#COPY --from=converter /tmp /app/vitepress/markdown/en
-
 # Install vitepress deps
-WORKDIR /app/vitepress
 RUN npm ci
 
 # Build VitePress site
