@@ -1,8 +1,9 @@
 # Project specific files #
 ##########################
-*.pyc
-/build
-*/_build/*
+.vitepress/dist
+.vitepress/cache
+.vitepress/.temp
+/node_modules/
 
 # IDE and editor specific files #
 #################################

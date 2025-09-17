@@ -1,0 +1,78 @@
+/* CakePHP Theme Customization */
+
+:root {
+  /* CakePHP Brand Colors */
+  --vp-c-brand-1: #d33c43;
+  --vp-c-brand-2: #b8292f;
+  --vp-c-brand-3: #a2252a;
+  --vp-c-brand-soft: rgba(211, 60, 67, 0.14);
+  
+  /* Custom accent colors */
+  --vp-c-red-1: #d33c43;
+  --vp-c-red-2: #b8292f;
+  --vp-c-red-3: #a2252a;
+}
+
+/* Dark theme adjustments */
+.dark {
+  --vp-c-brand-1: #f56565;
+  --vp-c-brand-2: #d33c43;
+  --vp-c-brand-3: #b8292f;
+  --vp-c-brand-soft: rgba(245, 101, 101, 0.16);
+}
+
+/* Custom styling for the navbar */
+.VPNavBar .title {
+  font-weight: 700;
+  color: var(--vp-c-brand-1);
+}
+
+/* Custom styling for the hero section */
+.VPHero .name {
+  background: linear-gradient(120deg, #d33c43 30%, #f56565);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Sidebar customization */
+.VPSidebar {
+  --vp-sidebar-width: 280px;
+}
+
+.VPSidebarItem.level-0 .text {
+  font-weight: 600;
+}
+
+/* Code blocks */
+div[class*="language-"] {
+  border-radius: 8px;
+}
+
+/* Custom button styling */
+.VPButton.brand {
+  background-color: var(--vp-c-brand-1);
+  border-color: var(--vp-c-brand-1);
+}
+
+.VPButton.brand:hover {
+  background-color: var(--vp-c-brand-2);
+  border-color: var(--vp-c-brand-2);
+}
+
+/* Footer customization */
+.VPFooter {
+  border-top: 1px solid var(--vp-c-divider);
+}
+
+/* Custom styling for tables */
+.vp-doc table {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Search box customization */
+.VPNavBarSearch {
+  flex-grow: 0;
+  padding-left: 24px;
+}

@@ -34,7 +34,7 @@ RUN npm run docs:build
 FROM nginx:1.27-alpine AS runner
 
 # Copy built files
-COPY --from=builder /app/vitepress/dist /usr/share/nginx/html
+COPY --from=builder /app/.vitepress/dist /usr/share/nginx/html
 
 # Expose port
 EXPOSE 80
