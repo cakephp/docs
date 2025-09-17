@@ -24,7 +24,5 @@ jobs:
         with:
           branch: '5.x-vitepress'
           git_remote_url: 'ssh://dokku@apps.cakephp.org:22/book-vitepress'
-          git_push_flags: '-f -vvv'
+          git_push_flags: '-f'
           ssh_private_key: ${{ secrets.DOKKU_SSH_PRIVATE_KEY }}
-          # enable shell trace mode
-          trace: '1'
