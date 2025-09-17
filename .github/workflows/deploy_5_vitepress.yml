@@ -22,6 +22,7 @@ jobs:
       - name: Push to dokku
         uses: dokku/github-action@master
         with:
+          branch: '5.x-vitepress'
           git_remote_url: 'ssh://dokku@apps.cakephp.org:22/book-vitepress'
           git_push_flags: '-f -vvv'
           ssh_private_key: ${{ secrets.DOKKU_SSH_PRIVATE_KEY }}
