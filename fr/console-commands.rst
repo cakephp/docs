@@ -123,7 +123,7 @@ dans votre plugin::
     }
 
 Quand vous réécrivez le crochet ``console()`` de votre application, pensez à
-appeler ``$commands->autoDiscover()`` pour ajouter des commandes de CakePHP, de
+appeler ``$commands->addMany($commands->autoDiscover())`` pour ajouter des commandes de CakePHP, de
 votre application, et des plugins.
 
 Si vous avez besoin de renommer ou supprimer une commande attachée, vous pouvez
