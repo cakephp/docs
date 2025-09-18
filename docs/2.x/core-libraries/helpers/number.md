@@ -8,16 +8,9 @@ to format currency, percentages, data sizes, format numbers to
 specific precisions and also to give you more flexibility with
 formatting numbers.
 
-<div class="versionchanged">
-
-2.1
-`NumberHelper` have been refactored into `CakeNumber` class to
-allow easier use outside of the `View` layer.
-Within a view, these methods are accessible via the `NumberHelper`
-class and you can call it as you would call a normal helper method:
-`$this->Number->method($args);`.
-
-</div>
+::: info Changed in version 2.1
+`NumberHelper` have been refactored into `CakeNumber` class toallow easier use outside of the `View` layer.Within a view, these methods are accessible via the `NumberHelper`class and you can call it as you would call a normal helper method:`$this->Number->method($args);`.
+:::
 
 All of these functions return the formatted number; They do not
 automatically echo the output into the view.
@@ -97,12 +90,9 @@ automatically echo the output into the view.
 > echo CakeNumber::currency('1234.56', 'FOO');
 > ```
 >
-> <div class="versionchanged">
->
-> 2.4
+> ::: info Changed in version 2.4
 > The `fractionExponent` option was added.
->
-> </div>
+> :::
 
 > param string \$currency  
 > Set a known currency for `CakeNumber::currency()`.

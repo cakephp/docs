@@ -88,19 +88,12 @@ $debug = env('APP_DEBUG', false);
 The second value passed to the env function is the default value. This value
 will be used if no environment variable exists for the given key.
 
-<div class="versionchanged">
-
-3.5.0
+::: info Changed in version 3.5.0
 dotenv library support was added to the application skeleton.
-
-</div>
-
-<div class="versionchanged">
-
-3.5.1
+:::
+::: info Changed in version 3.5.1
 dotenv library support is now opt in. You must uncomment the appropriate block of code in `config/bootstrap.php`
-
-</div>
+:::
 
 ### General Configuration
 
@@ -194,13 +187,9 @@ using proper helpers. Valid values:
 - (bool) `true` - Appends the timestamp when debug is `true`
 - (string) 'force' - Always appends the timestamp.
 
-<div class="versionchanged">
-
-3.6.0
-As of 3.6.0, you can override this global setting when linking assets
-using the `timestamp` option.
-
-</div>
+::: info Changed in version 3.6.0
+As of 3.6.0, you can override this global setting when linking assetsusing the `timestamp` option.
+:::
 
 Asset.cacheTime  
 Sets the asset cache time. This determines the http header `Cache-Control`'s
@@ -384,12 +373,9 @@ back:
 
 If `$key` is left null, all values in Configure will be returned.
 
-<div class="versionchanged">
-
-3.5.0
+::: info Changed in version 3.5.0
 The `$default` parameter was added in 3.5.0
-
-</div>
+:::
 
 Reads configuration data just like `Cake\Core\Configure::read`
 but expects to find a key/value pair. In case the requested pair does not

@@ -663,12 +663,9 @@ $published = $query->newExpr()
 # CASE published WHEN true THEN 'Y' ELSE 'N' END;
 ```
 
-<div class="versionchanged">
-
-4.3.0
+::: info Changed in version 4.3.0
 The fluent `case()` builder method was added.
-
-</div>
+:::
 
 Prior to 4.3.0, you would need to use:
 

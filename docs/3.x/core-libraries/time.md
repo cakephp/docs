@@ -142,12 +142,9 @@ FrozenDate::setJsonEncodeFormat(static function($time) {
 > [!NOTE]
 > This method must be called statically.
 
-<div class="versionchanged">
-
-3.9.0
+::: info Changed in version 3.9.0
 The `callable` parameter type was added.
-
-</div>
+:::
 
 `method` Cake\\I18n\\Time::**i18nFormat**($format = null, $timezone = null, $locale = null)
 

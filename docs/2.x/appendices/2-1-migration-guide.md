@@ -59,12 +59,9 @@ or update your webservers URL re-writing scheme to match the changes done in
 
 ### CakeSession
 
-<div class="versionchanged">
-
-2.1.1
+::: info Changed in version 2.1.1
 CakeSession no longer sets the P3P header, as this is the responsibility of your application.
-
-</div>
+:::
 
 ## Behaviors
 

@@ -235,11 +235,8 @@ $this->log("Something did not work!", 'debug');
 All configured log streams are sequentially written to each time
 `CakeLog::write()` is called.
 
-<div class="versionchanged">
-
-2.5
-
-</div>
+::: info Changed in version 2.5
+:::
 
 CakeLog does not auto-configure itself anymore. As a result, log files will not be
 auto-created anymore if no stream is listening.

@@ -308,12 +308,9 @@ given by `~Controller::$helpers` to the view as an object reference variable
 > `false` to not load any models at all. Even those defined in the
 > `AppController`.
 >
-> <div class="versionchanged">
->
-> 2.1
+> ::: info Changed in version 2.1
 > `~Controller::$uses` now has a new default value, it also handles `false` differently.
->
-> </div>
+> :::
 >
 > The `HtmlHelper`, `FormHelper`, and `SessionHelper` are available by
 > default, as is the `SessionComponent`. But if you choose to define

@@ -6,12 +6,9 @@ CakePHP includes a basic but powerful HTTP client which can be used for
 making requests. It is a great way to communicate with webservices, and
 remote APIs.
 
-<div class="versionchanged">
-
-3.3.0
+::: info Changed in version 3.3.0
 Prior to 3.3.0 you should use `Cake\Network\Http\Client`.
-
-</div>
+:::
 
 ## Doing Requests
 
@@ -362,13 +359,9 @@ $http->addCookie(new Cookie('session', 'abc123'));
 
 Response objects have a number of methods for inspecting the response data.
 
-<div class="versionchanged">
-
-3.3.0
-As of 3.3.0 `Cake\Http\Client\Response` implements the [PSR-7
-ResponseInterface](https://www.php-fig.org/psr/psr-7/#3-3-psr-http-message-responseinterface).
-
-</div>
+::: info Changed in version 3.3.0
+As of 3.3.0 `Cake\Http\Client\Response` implements the .
+:::
 
 ### Reading Response Bodies
 

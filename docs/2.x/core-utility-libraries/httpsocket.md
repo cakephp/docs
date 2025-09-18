@@ -177,13 +177,9 @@ $http = new HttpSocket();
 $http->responseClass = 'YourResponse';
 ```
 
-<div class="versionchanged">
-
-2.3
-As of 2.3.0 you should extend `HttpSocketResponse` instead. This
-avoids a common issue with the HTTP PECL extension.
-
-</div>
+::: info Changed in version 2.3
+As of 2.3.0 you should extend `HttpSocketResponse` instead. Thisavoids a common issue with the HTTP PECL extension.
+:::
 
 ### Downloading the results
 

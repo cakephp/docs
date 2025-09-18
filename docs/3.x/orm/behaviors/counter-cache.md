@@ -129,9 +129,6 @@ then updates the counter of the *previously* associated item.
 > option to true. See how to configure a custom join table
 > [Using The Through Option](../../orm/associations#using-the-through-option).
 
-<div class="versionchanged">
-
-3.6.0
+::: info Changed in version 3.6.0
 Returning `false` to skip updates was added.
-
-</div>
+:::

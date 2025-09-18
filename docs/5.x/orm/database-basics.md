@@ -476,21 +476,12 @@ automatically convert input parameters from `DateTime` instances into a
 timestamp or formatted datestrings. Likewise, 'binary' columns will accept file
 handles, and generate file handles when reading data.
 
-<div class="versionchanged">
-
-5.1.0
-The `geometry`, `point`, `linestring`, and `polygon` types were
-added.
-
-</div>
-
-<div class="versionchanged">
-
-5.2.0
+::: info Changed in version 5.1.0
+The `geometry`, `point`, `linestring`, and `polygon` types wereadded.
+:::
+::: info Changed in version 5.2.0
 The `nativeuuid` type was added.
-
-</div>
-
+:::
 <a id="datetime-type"></a>
 
 ### DateTime Type

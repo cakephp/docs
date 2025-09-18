@@ -249,12 +249,9 @@ protected $_schema = array(
 );
 ```
 
-<div class="versionchanged">
-
-2.10.0
+::: info Changed in version 2.10.0
 The `smallinteger` and `tinyinteger` types were added in 2.10.0
-
-</div>
+:::
 
 ## validate
 

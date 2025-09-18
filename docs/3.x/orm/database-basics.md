@@ -414,27 +414,15 @@ automatically convert input parameters from `DateTime` instances into a
 timestamp or formatted datestrings. Likewise, 'binary' columns will accept file
 handles, and generate file handles when reading data.
 
-<div class="versionchanged">
-
-3.3.0
+::: info Changed in version 3.3.0
 The `json` type was added.
-
-</div>
-
-<div class="versionchanged">
-
-3.5.0
+:::
+::: info Changed in version 3.5.0
 The `smallinteger` and `tinyinteger` types were added.
-
-</div>
-
-<div class="versionchanged">
-
-3.6.0
+:::
+::: info Changed in version 3.6.0
 The `binaryuuid` type was added.
-
-</div>
-
+:::
 <a id="adding-custom-database-types"></a>
 
 ### Adding Custom Types

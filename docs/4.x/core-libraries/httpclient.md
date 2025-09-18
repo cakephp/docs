@@ -336,13 +336,9 @@ supported.
 ::: info Added in version 4.2.0
 `Client::createFromUrl()` was added.
 :::
-
-<div class="versionchanged">
-
-4.2.0
+::: info Changed in version 4.2.0
 The `basePath` option was added.
-
-</div>
+:::
 
 ## Setting and Managing Cookies
 

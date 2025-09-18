@@ -119,13 +119,9 @@ There are a number of options for create():
   Also check `HtmlHelper::url()` method for more examples of
   different types of URLs.
 
-  <div class="versionchanged">
-
-  2.8.0
-
+  ::: info Changed in version 2.8.0
   Use `'url' => false` if you don’t want to output a URL as the form action.
-
-  </div>
+  :::
 
 - `$options['default']` If 'default' has been set to boolean false, the form's
   submit action is changed so that pressing the submit button does not submit

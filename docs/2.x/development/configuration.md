@@ -110,13 +110,9 @@ An array of key/value pairs that should be sent to the database server as
 `SET` commands when the connection is created. This option is only
 supported by the Mysql, Postgres, and Sqlserver datasources at this time.
 
-<div class="versionchanged">
-
-2.4
-The `settings`, `ssl_key`, `ssl_cert` and `ssl_ca` keys
-was added in 2.4.
-
-</div>
+::: info Changed in version 2.4
+The `settings`, `ssl_key`, `ssl_cert` and `ssl_ca` keyswas added in 2.4.
+:::
 
 > [!NOTE]
 > The prefix setting is for tables, **not** models. For example, if

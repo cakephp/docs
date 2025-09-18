@@ -269,13 +269,9 @@ directory you can do the following to run tests:
 > good idea to use the `--stderr` option. This will fix issues with tests
 > failing because of headers_sent warnings.
 
-<div class="versionchanged">
-
-2.1
-The `test` shell was added in 2.1. The 2.0 `testsuite` shell is still
-available but the new syntax is preferred.
-
-</div>
+::: info Changed in version 2.1
+The `test` shell was added in 2.1. The 2.0 `testsuite` shell is stillavailable but the new syntax is preferred.
+:::
 
 You can also run `test` shell in the project root directory. This shows you a
 full list of all the tests that you currently have. You can then freely choose
@@ -657,12 +653,9 @@ class ArticleTest extends CakeTestCase {
 In the above example, both fixtures would be loaded from
 `App/Test/Fixture/blog/`.
 
-<div class="versionchanged">
-
-2.5
+::: info Changed in version 2.5
 As of 2.5.0 you can load fixtures in subdirectories.
-
-</div>
+:::
 
 ## Testing Models
 

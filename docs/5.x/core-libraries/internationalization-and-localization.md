@@ -84,13 +84,9 @@ both the language and the country where it is spoken.
 
 See <https://www.localeplanet.com/icu/> for the full list of locales.
 
-<div class="versionchanged">
-
-4.5.0
-As of 4.5.0 plugins can contain multiple translation domains. Use
-`MyPlugin.additional` to reference plugin domains.
-
-</div>
+::: info Changed in version 4.5.0
+As of 4.5.0 plugins can contain multiple translation domains. Use`MyPlugin.additional` to reference plugin domains.
+:::
 
 An example translation file could look like this:
 

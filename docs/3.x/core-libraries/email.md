@@ -112,13 +112,9 @@ $email->profile(['from' => 'me@example.org', 'transport' => 'my_custom']);
 $email = new Email(['from' => 'me@example.org', 'transport' => 'my_custom']);
 ```
 
-<div class="versionchanged">
-
-3.1
-The `default` email profile is automatically set when an `Email`
-instance is created.
-
-</div>
+::: info Changed in version 3.1
+The `default` email profile is automatically set when an `Email`instance is created.
+:::
 
 <div class="deprecated">
 

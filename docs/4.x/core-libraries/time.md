@@ -170,12 +170,9 @@ FrozenDate::setJsonEncodeFormat(static function($time) {
 > ICU date formatting string as specified in the following resource:
 > <https://unicode-org.github.io/icu/userguide/format_parse/datetime/#datetime-format-syntax>.
 
-<div class="versionchanged">
-
-4.1.0
+::: info Changed in version 4.1.0
 The `callable` parameter type was added.
-
-</div>
+:::
 
 `method` Cake\\I18n\\FrozenTime::**i18nFormat**($format = null, $timezone = null, $locale = null)
 

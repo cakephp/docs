@@ -55,12 +55,9 @@ $ cake bake plugin plugin_name
 $ cake bake all
 ```
 
-<div class="versionchanged">
-
-2.5
-Test files produced by `bake test` include calls to [PHPunit's markTestIncomplete()](https://phpunit.de/manual/3.7/en/incomplete-and-skipped-tests.html) to draw attention to empty test methods. Before 2.5, empty tests pass silently.
-
-</div>
+::: info Changed in version 2.5
+Test files produced by `bake test` include calls to  to draw attention to empty test methods. Before 2.5, empty tests pass silently.
+:::
 
 ## Modify default HTML produced by "baked" templates
 

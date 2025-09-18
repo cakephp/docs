@@ -11,14 +11,9 @@ When you "bake" an app using CakePHP's console utility the Pages Controller is
 created in your `app/Controller/` folder. You can also copy the file from
 `lib/Cake/Console/Templates/skel/Controller/PagesController.php`.
 
-<div class="versionchanged">
-
-2.1
-With CakePHP 2.0 the Pages Controller was part of `lib/Cake`. Since 2.1
-the Pages Controller is no longer part of the core but ships in the app
-folder.
-
-</div>
+::: info Changed in version 2.1
+With CakePHP 2.0 the Pages Controller was part of `lib/Cake`. Since 2.1the Pages Controller is no longer part of the core but ships in the appfolder.
+:::
 
 > [!WARNING]
 > Do not directly modify ANY file under the `lib/Cake` folder to avoid

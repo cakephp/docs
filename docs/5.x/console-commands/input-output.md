@@ -376,12 +376,9 @@ truthy value enables them.
 Adding a style makes it available on all instances of ConsoleOutput as well,
 so you don't have to redeclare styles for both stdout and stderr objects.
 
-<div class="versionchanged">
-
-5.1.0
+::: info Changed in version 5.1.0
 The `info.bg`, `warning.bg`, `error.bg`, and `success.bg` were added.
-
-</div>
+:::
 
 ## Turning Off Coloring
 

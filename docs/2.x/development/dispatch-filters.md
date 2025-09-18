@@ -126,12 +126,9 @@ parameters that are passed to the dispatch filter. By default the base class
 will assign these settings to the `$settings` property after merging them with
 the defaults in the class.
 
-<div class="versionchanged">
-
-2.5
+::: info Changed in version 2.5
 You can now provide constructor settings to dispatch filters in 2.5.
-
-</div>
+:::
 
 ## Filter Classes
 

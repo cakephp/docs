@@ -604,11 +604,8 @@ class AppModel extends Model {
 ?>
 ```
 
-<div class="versionchanged">
-
-2.2
-
-</div>
+::: info Changed in version 2.2
+:::
 
 You no longer need to override `_findCount` for fixing incorrect count results.
 The `'before'` state of your custom finder will now be called again with

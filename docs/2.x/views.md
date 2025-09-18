@@ -249,12 +249,9 @@ states. You can provide a default value using the second argument:
 </div>
 ```
 
-<div class="versionchanged">
-
-2.3
+::: info Changed in version 2.3
 The `$default` argument was added in 2.3.
-
-</div>
+:::
 
 ### Using blocks for script and CSS files
 
@@ -624,13 +621,9 @@ echo $this->element('Contacts.helpbox');
 
 are equivalent and will result in the same element being rendered.
 
-<div class="versionchanged">
-
-2.1
-The `$options[plugin]` option was deprecated and support for
-`Plugin.element` was added.
-
-</div>
+::: info Changed in version 2.1
+The `$options[plugin]` option was deprecated and support for`Plugin.element` was added.
+:::
 
 ## Creating your own view classes
 

@@ -454,14 +454,9 @@ $this->SomeModel->saveAll($data, array(
 The fieldList will be an array of model aliases as keys and arrays with fields
 as values. The model names are not nested like in the data to be saved.
 
-<div class="versionchanged">
-
-2.1
-`Model::saveAll()` and friends now support passing the <span class="title-ref">fieldList</span> for multiple models.
-
-You can now save deeper associated data as well with setting `$options['deep'] = true;`
-
-</div>
+::: info Changed in version 2.1
+`Model::saveAll()` and friends now support passing the  for multiple models.You can now save deeper associated data as well with setting `$options['deep'] = true;`
+:::
 
 ## Model::saveAll(array \$data = null, array \$options = array())
 

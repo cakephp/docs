@@ -778,14 +778,9 @@ In addition to the above options, you can mixin any HTML attribute you wish to
 use. Any non-special option name will be treated as an HTML attribute, and
 applied to the generated HTML control element.
 
-<div class="versionchanged">
-
-3.3.0
-As of 3.3.0, FormHelper will automatically use any default values defined
-in your database schema. You can disable this behavior by setting
-the `schemaDefault` option to `false`.
-
-</div>
+::: info Changed in version 3.3.0
+As of 3.3.0, FormHelper will automatically use any default values definedin your database schema. You can disable this behavior by settingthe `schemaDefault` option to `false`.
+:::
 
 ## Creating Input Elements
 
@@ -1310,13 +1305,9 @@ Will output:
 If the `label` key is used on an option, the attributes in
 `$attributes['label']` will be ignored.
 
-<div class="versionchanged">
-
-3.8.0
+::: info Changed in version 3.8.0
 The `label` key in complex options was added.
-
-</div>
-
+:::
 <a id="create-select-picker"></a>
 
 #### Creating Select Pickers

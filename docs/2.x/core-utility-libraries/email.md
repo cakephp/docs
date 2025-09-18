@@ -345,19 +345,12 @@ you want the filenames to appear in the recipient's mail client:
     a string using the `data` option. This allows you to attach files without
     needing file paths to them.
 
-<div class="versionchanged">
-
-2.3
+::: info Changed in version 2.3
 The `contentDisposition` option was added.
-
-</div>
-
-<div class="versionchanged">
-
-2.4
+:::
+::: info Changed in version 2.4
 The `data` option was added.
-
-</div>
+:::
 
 ### Using transports
 
@@ -454,13 +447,9 @@ Check the list of [configurations](#email-configurations) to see all accepted co
 
 ## Sending emails from CLI
 
-<div class="versionchanged">
-
-2.2
-
+::: info Changed in version 2.2
 The `domain()` method was added in 2.2
-
-</div>
+:::
 
 When sending emails within a CLI script (Shells, Tasks, ...) you should manually
 set the domain name for CakeEmail to use. The domain name is used as the host

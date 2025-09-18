@@ -148,13 +148,9 @@ class PostsController extends AppController
 > properties they share the same 'namespace'. Be sure to not give a
 > component and a model the same name.
 
-<div class="versionchanged">
-
-5.1.0
-Components are able to use [Dependency Injection](../development/dependency-injection) to receive services.
-
-</div>
-
+::: info Changed in version 5.1.0
+Components are able to use  to receive services.
+:::
 <a id="creating-a-component"></a>
 
 ## Creating a Component

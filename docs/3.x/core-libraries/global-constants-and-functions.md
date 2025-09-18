@@ -74,13 +74,9 @@ translating content.
 > object, wrapping the passed argument. The `$items` parameter takes either
 > a `Traversable` object or an array.
 >
-> <div class="versionchanged">
->
-> 3.3.0
-> Calling this method will return passed `$var`, so that you can, for instance,
-> place it in return statements.
->
-> </div>
+> ::: info Changed in version 3.3.0
+> Calling this method will return passed `$var`, so that you can, for instance,place it in return statements.
+> :::
 >
 > If the core `$debug` variable is `true`, `$var` is printed out.
 > If `$showHTML` is `true` or left as `null`, the data is rendered to be
@@ -93,36 +89,25 @@ translating content.
 > If `$showHTML` is `true` or left as `null`, the data is rendered to be
 > browser-friendly. Also see [Debugging](../development/debugging)
 >
-> <div class="versionchanged">
->
-> 3.3.0
-> Calling this method will return passed `$var`, so that you can, for instance,
-> place it in return statements.
->
-> </div>
+> ::: info Changed in version 3.3.0
+> Calling this method will return passed `$var`, so that you can, for instance,place it in return statements.
+> :::
 >
 > Convenience wrapper for `print_r()`, with the addition of
 > wrapping `<pre>` tags around the output.
 >
-> <div class="versionchanged">
->
-> 3.3.0
-> Calling this method will return passed `$var`, so that you can, for instance,
-> place it in return statements.
->
-> </div>
+> ::: info Changed in version 3.3.0
+> Calling this method will return passed `$var`, so that you can, for instance,place it in return statements.
+> :::
 >
 > JSON pretty print convenience function, with the addition of
 > wrapping `<pre>` tags around the output.
 >
 > It is meant for debugging the JSON representation of objects and arrays.
 >
-> <div class="versionchanged">
->
-> 3.1.1
+> ::: info Changed in version 3.1.1
 > The `$default` parameter has been added.
->
-> </div>
+> :::
 >
 > Gets an environment variable from available sources. Used as a backup if
 > `$_SERVER` or `$_ENV` are disabled.

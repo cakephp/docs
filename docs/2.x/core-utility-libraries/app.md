@@ -166,12 +166,9 @@ from:
 > App::build(array('View/Helper' => array('/full/path/to/View/Helper/')));
 > ```
 >
-> <div class="versionchanged">
->
-> 2.0
+> ::: info Changed in version 2.0
 > `App::build()` will not merge app paths with core paths anymore.
->
-> </div>
+> :::
 
 <a id="app-build-register"></a>
 
@@ -192,12 +189,9 @@ The `%s` in newly registered packages will be replaced with the
 packages. Once packages are registered, you can use `App::build()` to
 append/prepend/reset paths like any other package.
 
-<div class="versionchanged">
-
-2.1
+::: info Changed in version 2.1
 Registering packages was added in 2.1
-
-</div>
+:::
 
 ## Finding which objects CakePHP knows about
 
@@ -221,11 +215,8 @@ Registering packages was added in 2.1
 >     // returns array('MyPluginPost', 'MyPluginComment');
 >     App::objects('MyPlugin.Model');
 >
-> <div class="versionchanged">
->
-> 2.0
->
-> </div>
+> ::: info Changed in version 2.0
+> :::
 >
 > 1.  Returns `array()` instead of false for empty results or invalid types
 > 2.  Does not return core objects anymore, `App::objects('core')` will
@@ -281,11 +272,8 @@ Registering packages was added in 2.1
 > loaded using App::uses() referring to the correct package. This change has provided large
 > performance gains to the framework.**
 >
-> <div class="versionchanged">
->
-> 2.0
->
-> </div>
+> ::: info Changed in version 2.0
+> :::
 >
 > - The method no longer looks for classes recursively, it strictly uses the values for the
 >   paths defined in `App::build()`

@@ -232,13 +232,9 @@ When there is no fallback cache failures will be raised as exceptions.
 ::: info Added in version 3.5.0
 Cache engine fallbacks were added.
 :::
-
-<div class="versionchanged">
-
-3.6.0
+::: info Changed in version 3.6.0
 Fallbacks can now be disabled via `false`
-
-</div>
+:::
 
 ### Removing Configured Cache Engines
 

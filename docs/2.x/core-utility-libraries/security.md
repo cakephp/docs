@@ -166,12 +166,9 @@ hashing and encrypting data.
 > cost and salt values, allowing the generated hash to return the same
 > resulting hash, given the same input value.
 >
-> <div class="versionchanged">
->
-> 2.3
+> ::: info Changed in version 2.3
 > Support for bcrypt was added in 2.3
->
-> </div>
+> :::
 >
 > rtype  
 > void

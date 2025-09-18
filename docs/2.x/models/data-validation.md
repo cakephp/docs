@@ -211,12 +211,9 @@ validation will fail if the field is not present in the dataset,
 but may (depending on the rule) succeed if the value submitted is
 empty ('').
 
-<div class="versionchanged">
-
-2.1
+::: info Changed in version 2.1
 Support for `create` and `update` were added.
-
-</div>
+:::
 
 ### allowEmpty
 
@@ -814,12 +811,9 @@ with usage examples.
 > supply a given format. The more work you can do for your users, the
 > better.
 >
-> <div class="versionchanged">
->
-> 2.4
+> ::: info Changed in version 2.4
 > The `ym` and `y` formats were added.
->
-> </div>
+> :::
 >
 > This rule ensures that the data is a valid datetime format. A
 > parameter (which can be an array) can be passed to specify the format

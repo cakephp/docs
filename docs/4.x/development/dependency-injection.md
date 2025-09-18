@@ -152,12 +152,9 @@ $container->add(BillingService::class)
 Your services can depend on `ServerRequest` in controller actions as it will
 be added automatically.
 
-<div class="versionchanged">
-
-4.4.0
+::: info Changed in version 4.4.0
 The `$request` is registered automatically now.
-
-</div>
+:::
 
 ### Adding Shared Services
 

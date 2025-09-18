@@ -390,12 +390,9 @@ compatible syntax:
 $session->read('Config.language', 'en');
 ```
 
-<div class="versionchanged">
-
-4.1.0
+::: info Changed in version 4.1.0
 The `default` parameter was added.
-
-</div>
+:::
 
 `method` Session::**readOrFail**($key)
 

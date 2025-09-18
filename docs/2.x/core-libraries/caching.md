@@ -36,21 +36,12 @@ to implement your own caching systems. The built-in caching engines are:
   extension (2.2.3 minimum). Redis provides a fast and persistent cache system
   similar to memcached, also provides atomic operations.
 
-<div class="versionchanged">
-
-2.3
-FileEngine is always the default cache engine. In the past a number of people
-had difficulty setting up and deploying APC correctly both in CLI + web.
-Using files should make setting up CakePHP simpler for new developers.
-
-</div>
-
-<div class="versionchanged">
-
-2.5
+::: info Changed in version 2.3
+FileEngine is always the default cache engine. In the past a number of peoplehad difficulty setting up and deploying APC correctly both in CLI + web.Using files should make setting up CakePHP simpler for new developers.
+:::
+::: info Changed in version 2.5
 The Memcached engine was added. And the Memcache engine was deprecated.
-
-</div>
+:::
 
 Regardless of the CacheEngine you choose to use, your application interacts with
 `Cache` in a consistent manner. This means you can easily swap cache engines

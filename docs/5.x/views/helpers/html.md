@@ -226,12 +226,9 @@ In addition to making predefined meta tags, you can create link elements:
 Any attributes provided to meta() when called this way will be added to the
 generated link tag.
 
-<div class="versionchanged">
-
-5.1.0
+::: info Changed in version 5.1.0
 The `csrfToken` type was added.
-
-</div>
+:::
 
 ### Linking to Images
 

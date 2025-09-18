@@ -8,16 +8,9 @@ creating excerpts of text around chosen words or phrases,
 highlighting key words in blocks of text, and gracefully
 truncating long stretches of text.
 
-<div class="versionchanged">
-
-2.1
-Several `TextHelper` methods have been moved into the `String`
-class to allow easier use outside of the `View` layer.
-Within a view, these methods are accessible via the <span class="title-ref">TextHelper</span>
-class. You can call one as you would call a normal helper method:
-`$this->Text->method($args);`.
-
-</div>
+::: info Changed in version 2.1
+Several `TextHelper` methods have been moved into the `String`class to allow easier use outside of the `View` layer.Within a view, these methods are accessible via the class. You can call one as you would call a normal helper method:`$this->Text->method($args);`.
+:::
 
 `method` TextHelper::**autoLinkEmails**(string $text, array $options=array())
 
@@ -128,12 +121,9 @@ class. You can call one as you would call a normal helper method:
 >
 >     The killer crept...
 
-<div class="versionchanged">
-
-2.3
+::: info Changed in version 2.3
 `ending` has been replaced by `ellipsis`. `ending` is still used in 2.2.1
-
-</div>
+:::
 
 > param string \$text  
 > The text to truncate.

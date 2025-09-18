@@ -31,13 +31,9 @@ default.
 Output from this function is only shown if the core debug variable
 has been set to a value greater than 0.
 
-<div class="versionchanged">
-
-2.1
-The output of `debug()` more resembles `var_dump()`, and uses
-`Debugger` internally.
-
-</div>
+::: info Changed in version 2.1
+The output of `debug()` more resembles `var_dump()`, and uses`Debugger` internally.
+:::
 
 ## Debugger Class
 
@@ -96,20 +92,12 @@ set to a value greater than 0.
 > Car::stop()
 > ```
 >
-> <div class="versionchanged">
->
-> 2.1
-> In 2.1 forward the output was updated for readability. See
-> `Debugger::exportVar()`
->
-> </div>
->
-> <div class="versionchanged">
->
-> 2.5.0
+> ::: info Changed in version 2.1
+> In 2.1 forward the output was updated for readability. See`Debugger::exportVar()`
+> :::
+> ::: info Changed in version 2.5.0
 > The `depth` parameter was added.
->
-> </div>
+> :::
 >
 > Creates a detailed stack trace log at the time of invocation. The
 > log() method prints out data similar to that done by
@@ -117,12 +105,9 @@ set to a value greater than 0.
 > buffer. Note your app/tmp directory (and its contents) must be
 > writable by the web server for log() to work correctly.
 >
-> <div class="versionchanged">
->
-> 2.5.0
+> ::: info Changed in version 2.5.0
 > The `depth` parameter was added.
->
-> </div>
+> :::
 >
 > Returns the current stack trace. Each line of the trace includes
 > the calling method, including which file and line the call
@@ -174,12 +159,9 @@ set to a value greater than 0.
 > variable conversions, and can be used in your own Debuggers as
 > well.
 >
-> <div class="versionchanged">
->
-> 2.1
+> ::: info Changed in version 2.1
 > This function generates different output in 2.1 forward.
->
-> </div>
+> :::
 >
 > Replace the CakePHP Debugger with a new instance.
 >
