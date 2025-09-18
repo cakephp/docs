@@ -156,7 +156,7 @@ single value or an array. The specified 'rule' may be the name of a
 method in your model, a method of the core Validation class, or a
 regular expression. For more information on the rules available by
 default, see
-[Core Validation Rules](../models/data-validation#core-validation-rules).
+[Core Validation Rules](#core-validation-rules).
 
 If the rule does not require any parameters, 'rule' can be a single
 value e.g. :

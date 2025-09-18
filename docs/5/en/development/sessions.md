@@ -239,7 +239,7 @@ blocking users to e.g. open a second tab of your app to do something else
 in the meantime.
 
 To prevent this behavior you will have to change the way how sessions are being
-handled in CakePHP by using a different session handler like [Sessions Cache Sessions](../development/configuration#sessions-cache-sessions)
+handled in CakePHP by using a different session handler like [Sessions Cache Sessions](#sessions-cache-sessions)
 combined with the [Redis Engine](../core-libraries/caching#caching-redisengine) or another cache engine.
 
 > [!TIP]

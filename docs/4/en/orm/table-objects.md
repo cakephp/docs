@@ -104,7 +104,7 @@ $articles = $this->getTableLocator()->get('Articles');
 `TableLocator` provides the various dependencies for constructing
 a table, and maintains a registry of all the constructed table instances making
 it easier to build relations and configure the ORM. See
-[Table Locator Usage](../orm/table-objects#table-locator-usage) for more information.
+[Table Locator Usage](#table-locator-usage) for more information.
 
 If your table class is in a plugin, be sure to use the correct name for your
 table class. Failing to do so can result in validation rules, or callbacks not

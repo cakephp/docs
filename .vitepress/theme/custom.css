@@ -1,6 +1,7 @@
 /* CakePHP Theme Customization */
-
 :root {
+    --vp-font-family-base: 'Raleway', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+
     /* CakePHP Brand Colors - Official Red */
     --vp-c-brand-1: #d33c43;
     --vp-c-brand-2: #c8363d;

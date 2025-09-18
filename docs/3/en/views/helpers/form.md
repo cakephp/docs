@@ -350,7 +350,7 @@ return an object. If there is no match return null.
 
 - `$fieldName` - A field name in the form `'Modelname.fieldname'`.
 - `$options` - An optional array that can include both
-  [Control Specific Options](../../views/helpers/number#control-specific-options), and options of the other methods (which
+  [Control Specific Options](#control-specific-options), and options of the other methods (which
   `control()` employs internally to generate various HTML elements) as
   well as any valid HTML attributes.
 
@@ -484,7 +484,7 @@ echo $this->Form->control('birth_dt', [
 ]);
 ```
 
-Besides the specific [Control Specific Options](../../views/helpers/number#control-specific-options),
+Besides the specific [Control Specific Options](#control-specific-options),
 you also can specify any option accepted by corresponding specific method
 for the chosen (or inferred by CakePHP)
 control type and any HTML attribute (for instance `onfocus`).
@@ -548,7 +548,7 @@ Any dots in your field names will be converted into nested request data. For
 example, if you created a field with a name `0.comments.body` you would get
 a name attribute that looks like `0[comments][body]`. This convention makes it
 easy to save data with the ORM. Details for the various association types can
-be found in the [Associated Form Inputs](../../views/helpers/number#associated-form-inputs) section.
+be found in the [Associated Form Inputs](#associated-form-inputs) section.
 
 When creating datetime related controls, FormHelper will append a field-suffix.
 You may notice additional fields named `year`, `month`, `day`, `hour`,
@@ -567,7 +567,7 @@ as well as HTML attributes. This subsection will cover the options specific to
 
 - `$options['type']` - A string that specifies the widget type
   to be generated. In addition to the field types found in the
-  [Automagic Form Elements](../../views/helpers/number#automagic-form-elements), you can also create `'file'`,
+  [Automagic Form Elements](#automagic-form-elements), you can also create `'file'`,
   `'password'`, and any other type supported by HTML5. By specifying a
   `'type'` you will force the type of the generated control, overriding model
   introspection. Defaults to `null`.
@@ -593,7 +593,7 @@ as well as HTML attributes. This subsection will cover the options specific to
   ```
 
 - `$options['label']` - Either a string caption or an array of
-  [options for the label](../../views/helpers/number#create-label). You can set this key to the
+  [options for the label](#create-label). You can set this key to the
   string you would like to be displayed within the label that usually
   accompanies the `input` HTML element. Defaults to `null`.
 
@@ -658,7 +658,7 @@ as well as HTML attributes. This subsection will cover the options specific to
 - `$options['options']` - You can provide in here an array containing
   the elements to be generated for widgets such as `radio` or `select`,
   which require an array of items as an argument (see
-  [Create Radio Button](../../views/helpers/number#create-radio-button) and [Create Select Picker](../../views/helpers/number#create-select-picker) for more details).
+  [Create Radio Button](#create-radio-button) and [Create Select Picker](#create-select-picker) for more details).
   Defaults to `null`.
 
 - `$options['error']` - Using this key allows you to override the default
@@ -705,7 +705,7 @@ as well as HTML attributes. This subsection will cover the options specific to
   On the other hand you can set this to `true` for any control type to force the
   generated input element inside the label. If you change this for radio buttons
   then you need to also modify the default
-  [radioWrapper](../../views/helpers/number#create-radio-button) template. Depending on the generated
+  [radioWrapper](#create-radio-button) template. Depending on the generated
   control type it defaults to `true` or `false`.
 
 - `$options['templates']` - The templates you want to use for this input. Any
@@ -804,7 +804,7 @@ however, this parameter is used primarily to specify HTML tag attributes
 
 - `$name` - A field name in the form `'Modelname.fieldname'`.
 - `$options` - An optional array including any of the
-  [General Control Options](../../views/helpers/number#general-control-options) as well as any valid HTML attributes.
+  [General Control Options](#general-control-options) as well as any valid HTML attributes.
 
 Creates a simple `input` HTML element of `text` type.
 
@@ -826,7 +826,7 @@ Will output:
 
 - `$fieldName` - A field name in the form `'Modelname.fieldname'`.
 - `$options` - An optional array including any of the
-  [General Control Options](../../views/helpers/number#general-control-options) as well as any valid HTML attributes.
+  [General Control Options](#general-control-options) as well as any valid HTML attributes.
 
 Creates a simple `input` element of `password` type.
 
@@ -848,7 +848,7 @@ Will output:
 
 - `$fieldName` - A field name in the form `'Modelname.fieldname'`.
 - `$options` - An optional array including any of the
-  [General Control Options](../../views/helpers/number#general-control-options) as well as any valid HTML attributes.
+  [General Control Options](#general-control-options) as well as any valid HTML attributes.
 
 Creates a hidden form input.
 
@@ -870,7 +870,7 @@ Will output:
 
 - `$fieldName` - A field name in the form `'Modelname.fieldname'`.
 - `$options` - An optional array including any of the
-  [General Control Options](../../views/helpers/number#general-control-options), of the specific textarea options (see below)
+  [General Control Options](#general-control-options), of the specific textarea options (see below)
   as well as any valid HTML attributes.
 
 Creates a textarea control field. The default widget template used is:
@@ -904,7 +904,7 @@ Example:
 
 **Options for Textarea**
 
-In addition to the [General Control Options](../../views/helpers/number#general-control-options), `textarea()` supports a
+In addition to the [General Control Options](#general-control-options), `textarea()` supports a
 couple of specific options:
 
 - `'escape'` - Determines whether or not the contents of the textarea should
@@ -1126,7 +1126,7 @@ $options = $examples->map(function ($value, $key) {
 
 - `$fieldName` - A field name in the form `'Modelname.fieldname'`.
 - `$options` - An optional array including any of the
-  [General Control Options](../../views/helpers/number#general-control-options), or of the [Checkbox Radio Select Options](../../views/helpers/number#checkbox-radio-select-options)
+  [General Control Options](#general-control-options), or of the [Checkbox Radio Select Options](#checkbox-radio-select-options)
   above, of the checkbox-specific options (see below), as well as any valid
   HTML attributes.
 
@@ -1201,7 +1201,7 @@ Will output:
   the hidden input (if `'hiddenField'` is `true`) or no element at all
   (if `'hiddenField'` is `false`).
 - `$attributes` - An optional array including any of the
-  [General Control Options](../../views/helpers/number#general-control-options), or of the [Checkbox Radio Select Options](../../views/helpers/number#checkbox-radio-select-options),
+  [General Control Options](#general-control-options), or of the [Checkbox Radio Select Options](#checkbox-radio-select-options),
   of the radio button specific attributes (see below), as well as any valid
   HTML attributes.
 
@@ -1332,7 +1332,7 @@ The `label` key in complex options was added.
   picker. When this array is missing, the method will generate only the
   empty `select` HTML element without any `option` elements inside it.
 - `$attributes` - An optional array including any of the
-  [General Control Options](../../views/helpers/number#general-control-options), or of the [Checkbox Radio Select Options](../../views/helpers/number#checkbox-radio-select-options),
+  [General Control Options](#general-control-options), or of the [Checkbox Radio Select Options](#checkbox-radio-select-options),
   or of the select-specific attributes (see below), as well as any valid
   HTML attributes.
 
@@ -1606,7 +1606,7 @@ certain behaviors of the `select()` method.
 
 - `$fieldName` - A field name in the form `'Modelname.fieldname'`.
 - `$options` - An optional array including any of the
-  [General Control Options](../../views/helpers/number#general-control-options) as well as any valid HTML attributes.
+  [General Control Options](#general-control-options) as well as any valid HTML attributes.
 
 Creates a file upload field in the form.
 The widget template used by default is:
@@ -1753,7 +1753,7 @@ These options are concerning the time-related methods - `hour()`,
 - `$fieldName` - A string that will be used as a prefix for the HTML `name`
   attribute of the `select` elements.
 - `$options` - An optional array including any of the
-  [General Control Options](../../views/helpers/number#general-control-options), or specific datetime options (see above),
+  [General Control Options](#general-control-options), or specific datetime options (see above),
   as well as any valid HTML attributes.
 
 Creates a set of `select` elements for date and time.
@@ -1850,8 +1850,8 @@ Which would create the following two select pickers:
 - `$fieldName` - A field name that will be used as a prefix for the HTML
   `name` attribute of the `select` elements.
 - `$options` - An optional array including any of the
-  [General Control Options](../../views/helpers/number#general-control-options), of the [Datetime Options](../../views/helpers/number#datetime-options), any applicable
-  [Time Options](../../views/helpers/number#time-options), as well as any valid HTML attributes.
+  [General Control Options](#general-control-options), of the [Datetime Options](#datetime-options), any applicable
+  [Time Options](#time-options), as well as any valid HTML attributes.
 
 Creates, by default, three select pickers populated with values for:
 year (4 digits), month (full English name) and day (numeric), respectively.
@@ -1906,8 +1906,8 @@ Output:
 - `$fieldName` - A field name that will be used as a prefix for the HTML
   `name` attribute of the `select` elements.
 - `$options` - An optional array including any of the
-  [General Control Options](../../views/helpers/number#general-control-options), of the [Datetime Options](../../views/helpers/number#datetime-options), any applicable
-  [Time Options](../../views/helpers/number#time-options), as well as any valid HTML attributes.
+  [General Control Options](#general-control-options), of the [Datetime Options](#datetime-options), any applicable
+  [Time Options](#time-options), as well as any valid HTML attributes.
 
 Creates, by default, two `select` elements (`hour` and `minute`) populated
 with values for 24 hours and 60 minutes, respectively.
@@ -1958,8 +1958,8 @@ Which would create the following two select pickers:
 - `$fieldName` - A field name that will be used as a prefix for the HTML
   `name` attribute of the `select` element.
 - `$options` - An optional array including any of the
-  [General Control Options](../../views/helpers/number#general-control-options), of the [Datetime Options](../../views/helpers/number#datetime-options), any applicable
-  [Date Options](../../views/helpers/number#date-options), as well as any valid HTML attributes.
+  [General Control Options](#general-control-options), of the [Datetime Options](#datetime-options), any applicable
+  [Date Options](#date-options), as well as any valid HTML attributes.
 
 Creates a `select` element populated with the years from `minYear`
 to `maxYear` (when these options are provided) or else with values starting
@@ -2003,8 +2003,8 @@ If it was 2009, you would get the following:
 - `$fieldName` - A field name that will be used as a prefix for the HTML
   `name` attribute of the `select` element.
 - `$attributes` - An optional array including any of the
-  [General Control Options](../../views/helpers/number#general-control-options), of the [Datetime Options](../../views/helpers/number#datetime-options), any applicable
-  [Date Options](../../views/helpers/number#date-options), as well as any valid HTML attributes.
+  [General Control Options](#general-control-options), of the [Datetime Options](#datetime-options), any applicable
+  [Date Options](#date-options), as well as any valid HTML attributes.
 
 Creates a `select` element populated with month names.
 
@@ -2055,8 +2055,8 @@ echo $this->Form->month('mob', ['monthNames' => false]);
 - `$fieldName` - A field name that will be used as a prefix for the HTML
   `name` attribute of the `select` element.
 - `$attributes` - An optional array including any of the
-  [General Control Options](../../views/helpers/number#general-control-options), of the [Datetime Options](../../views/helpers/number#datetime-options), any applicable
-  [Date Options](../../views/helpers/number#date-options), as well as any valid HTML attributes.
+  [General Control Options](#general-control-options), of the [Datetime Options](#datetime-options), any applicable
+  [Date Options](#date-options), as well as any valid HTML attributes.
 
 Creates a `select` element populated with the (numerical) days of the
 month.
@@ -2091,8 +2091,8 @@ Will output:
 - `$fieldName` - A field name that will be used as a prefix for the HTML
   `name` attribute of the `select` element.
 - `$attributes` - An optional array including any of the
-  [General Control Options](../../views/helpers/number#general-control-options), of the [Datetime Options](../../views/helpers/number#datetime-options), any applicable
-  [Time Options](../../views/helpers/number#time-options), as well as any valid HTML attributes.
+  [General Control Options](#general-control-options), of the [Datetime Options](#datetime-options), any applicable
+  [Time Options](#time-options), as well as any valid HTML attributes.
 
 Creates a `select` element populated with the hours of the day.
 
@@ -2114,8 +2114,8 @@ echo $this->Form->hour('created', [
 - `$fieldName` - A field name that will be used as a prefix for the HTML
   `name` attribute of the `select` element.
 - `$attributes` - An optional array including any of the
-  [General Control Options](../../views/helpers/number#general-control-options), of the [Datetime Options](../../views/helpers/number#datetime-options), any applicable
-  [Time Options](../../views/helpers/number#time-options), as well as any valid HTML attributes.
+  [General Control Options](#general-control-options), of the [Datetime Options](#datetime-options), any applicable
+  [Time Options](#time-options), as well as any valid HTML attributes.
 
 Creates a `select` element populated with values for the minutes of the hour.
 You can create a select picker that only contains specific values by using the
@@ -2151,7 +2151,7 @@ This would output:
 - `$fieldName` - A field name that will be used as a prefix for the HTML
   `name` attribute of the `select` element.
 - `$attributes` - An optional array including any of the
-  [General Control Options](../../views/helpers/number#general-control-options) as well as any valid HTML attributes.
+  [General Control Options](#general-control-options) as well as any valid HTML attributes.
 
 Creates a `select` element populated with 'am' and 'pm'. This is useful when
 the hour format is set to `12` instead of `24`, as it allows to specify the
@@ -2166,7 +2166,7 @@ period of the day to which the hour belongs.
 - `$fieldName` - A field name in the form `'Modelname.fieldname'`.
 - `$text` - An optional string providing the label caption text.
 - `$options` - Optional. Array containing any of the
-  [General Control Options](../../views/helpers/number#general-control-options) as well as any valid HTML attributes.
+  [General Control Options](#general-control-options) as well as any valid HTML attributes.
 
 Creates a `label` element. The argument `$fieldName` is used for generating
 the HTML `for` attribute of the element; if `$text` is undefined,
@@ -2327,7 +2327,7 @@ You could then use JavaScript to set the `onvalid` and `oninvalid` events as you
 - `$caption` - An optional string providing the button's text caption or a
   path to an image. Defaults to `'Submit'`.
 - `$options` - An optional array including any of the
-  [General Control Options](../../views/helpers/number#general-control-options), or of the specific submit options (see below)
+  [General Control Options](#general-control-options), or of the specific submit options (see below)
   as well as any valid HTML attributes.
 
 Creates an `input` element of `submit` type, with `$caption` as value.
@@ -2385,7 +2385,7 @@ more complex button content you should use `button()`.
 
 - `$title` - Mandatory string providing the button's text caption.
 - `$options` - An optional array including any of the
-  [General Control Options](../../views/helpers/number#general-control-options), or of the specific button options (see below)
+  [General Control Options](#general-control-options), or of the specific button options (see below)
   as well as any valid HTML attributes.
 
 Creates an HTML button with the specified title and a default type
@@ -2487,7 +2487,7 @@ Will output:
   not HTML encoded.
 - `$url` - The URL of the form provided as a string or as array.
 - `$options` - An optional array including any of the
-  [General Control Options](../../views/helpers/number#general-control-options), or of the specific options (see below) as well
+  [General Control Options](#general-control-options), or of the specific options (see below) as well
   as any valid HTML attributes.
 
 Creates a `<button>` tag with a surrounding `<form>` element that submits
@@ -2541,7 +2541,7 @@ inside opened forms.
 - `$url` - Optional. String or array which contains the URL
   of the form (Cake-relative or external URL starting with `http://`).
 - `$options` - An optional array including any of the
-  [General Control Options](../../views/helpers/number#general-control-options), or of the specific options (see below) as well
+  [General Control Options](#general-control-options), or of the specific options (see below) as well
   as any valid HTML attributes.
 
 Creates an HTML link, but accesses the URL using the method you specify
@@ -2952,7 +2952,7 @@ $this->Form->setTemplates([
 ]);
 ```
 
-For more information on string templates, see [Customizing Templates](../../views/helpers/number#customizing-templates).
+For more information on string templates, see [Customizing Templates](#customizing-templates).
 
 ### Using Widgets
 

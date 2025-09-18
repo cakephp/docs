@@ -16,7 +16,7 @@ options are supported:
 
 - `errorLevel` - int - The level of errors you are interested in capturing.
   Use the built-in PHP error constants, and bitmasks to select the level of
-  error you are interested in. See [Deprecation Warnings](../development/errors#deprecation-warnings) to disable
+  error you are interested in. See [Deprecation Warnings](#deprecation-warnings) to disable
   deprecation warnings.
 - `trace` - bool - Include stack traces for errors in log files. Stack
   traces will be included in the log after each error. This is helpful for

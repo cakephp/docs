@@ -69,7 +69,7 @@ $article = $articles->get($id, [
 ]);
 ```
 
-Optionally you can `get()` an entity using [Custom Find Methods](../orm/retrieving-data-and-resultsets#custom-find-methods). For
+Optionally you can `get()` an entity using [Custom Find Methods](#custom-find-methods). For
 example you may want to get all translations for an entity. You can achieve that
 by using the `finder` option:
 
@@ -166,7 +166,7 @@ Any options that are not in this list will be passed to beforeFind listeners
 where they can be used to modify the query object. You can use the
 `getOptions()` method on a query object to retrieve the options used. While
 you can pass query objects to your controllers, we recommend that you package
-your queries up as [Custom Find Methods](../orm/retrieving-data-and-resultsets#custom-find-methods) instead. Using custom finder
+your queries up as [Custom Find Methods](#custom-find-methods) instead. Using custom finder
 methods will let you re-use your queries and make testing easier.
 
 By default queries and result sets will return [Entities](../orm/entities) objects. You
@@ -417,7 +417,7 @@ While all the examples so far have shown finder methods on table classes, finder
 methods can also be defined on [Behaviors](../orm/behaviors).
 
 If you need to modify the results after they have been fetched you should use
-a [Map Reduce](../orm/retrieving-data-and-resultsets#map-reduce) function to modify the results. The map reduce features
+a [Map Reduce](#map-reduce) function to modify the results. The map reduce features
 replace the 'afterFind' callback found in previous versions of CakePHP.
 
 > [!NOTE]
@@ -456,7 +456,7 @@ $query = $users->findAllByUsernameOrEmail('joebob', 'joe@example.com');
 
 While you can use either `OR` or `AND` conditions, you cannot combine the
 two in a single dynamic finder. Other query options like `contain` are also
-not supported with dynamic finders. You should use [Custom Find Methods](../orm/retrieving-data-and-resultsets#custom-find-methods) to
+not supported with dynamic finders. You should use [Custom Find Methods](#custom-find-methods) to
 encapsulate more complex queries. Lastly, you can also combine dynamic finders
 with custom finders:
 
@@ -492,12 +492,12 @@ You should use `contain()` when you want to load the primary model, and its
 associated data. While `contain()` will let you apply additional conditions to
 the loaded associations, you cannot constrain the primary model based on the
 associations. For more details on the `contain()`, look at
-[Eager Loading Associations](../orm/retrieving-data-and-resultsets#eager-loading-associations).
+[Eager Loading Associations](#eager-loading-associations).
 
 You should use `matching()` when you want to restrict the primary model based
 on associations. For example, you want to load all the articles that have
 a specific tag on them. For more details on the `matching()`, look at
-[Filtering By Associated Data](../orm/retrieving-data-and-resultsets#filtering-by-associated-data).
+[Filtering By Associated Data](#filtering-by-associated-data).
 
 If you prefer to use join functions, you can look at
 [Adding Joins](../orm/query-builder#adding-joins) for more information.
@@ -640,7 +640,7 @@ $query = $articles->find()->contain([
 
 In the above example, you'll still get authors even if they don't have
 a published profile. To only get authors with a published profile use
-[matching()](../orm/retrieving-data-and-resultsets#filtering-by-associated-data). If you have defined custom
+[matching()](#filtering-by-associated-data). If you have defined custom
 finders in your associations, you can use them inside `contain()`:
 
 ``` php
@@ -1036,7 +1036,7 @@ $articles->Comments->strategy('subquery');
 
 While CakePHP makes it easy to eager load your associations, there may be cases
 where you need to lazy-load associations. You should refer to the
-[Lazy Load Associations](../orm/entities#lazy-load-associations) and [Loading Additional Associations](../orm/retrieving-data-and-resultsets#loading-additional-associations)
+[Lazy Load Associations](../orm/entities#lazy-load-associations) and [Loading Additional Associations](#loading-additional-associations)
 sections for more information.
 
 ## Working with Result Sets
@@ -1390,7 +1390,7 @@ $query->where(['created >=' => new DateTime('1 day ago')]);
 ```
 
 This is particularly useful for building custom finder methods as described in the
-[Custom Find Methods](../orm/retrieving-data-and-resultsets#custom-find-methods) section:
+[Custom Find Methods](#custom-find-methods) section:
 
 ``` php
 public function findPublished(Query $query, array $options)

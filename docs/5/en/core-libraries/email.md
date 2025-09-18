@@ -126,7 +126,7 @@ following configuration keys are used:
   variables to be used in the view. See `Mailer::setViewVars()`.
 - `'attachments'`: List of files to attach. See `Mailer::setAttachments()`.
 - `'emailFormat'`: Format of email (html, text or both). See `Mailer::setEmailFormat()`.
-- `'transport'`: Transport configuration name. See [Email Transport](../core-libraries/validation#email-transport).
+- `'transport'`: Transport configuration name. See [Email Transport](#email-transport).
 - `'log'`: Log level to log the email headers and message. `true` will use
   LOG_DEBUG. See [Logging Levels](../core-libraries/logging#logging-levels). Note that logs will be emitted under the scope named `email`.
   See also [Logging Scopes](../core-libraries/logging#logging-scopes).

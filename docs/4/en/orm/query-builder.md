@@ -265,7 +265,7 @@ $query->where(function (QueryExpression $exp, Query $q) {
 });
 ```
 
-See the [Advanced Query Conditions](../orm/query-builder#advanced-query-conditions) section to find out how to construct
+See the [Advanced Query Conditions](#advanced-query-conditions) section to find out how to construct
 more complex `WHERE` conditions.
 
 ### Selecting Specific Fields
@@ -1209,7 +1209,7 @@ $query->where(['Categories.parent_id != Parents.id']);
 > [!WARNING]
 > The field names used in expressions, and SQL snippets should **never**
 > contain untrusted content as you will create SQL Injection vectors. See the
-> [Using Sql Functions](../orm/query-builder#using-sql-functions) section for how to safely include unsafe data
+> [Using Sql Functions](#using-sql-functions) section for how to safely include unsafe data
 > into function calls.
 
 ### Using Identifiers in Expressions

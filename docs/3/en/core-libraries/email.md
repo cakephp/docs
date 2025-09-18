@@ -543,7 +543,7 @@ name of configuration in `Configure`.
 
 If you want, you can pass the to, subject and message as null and do all
 configurations in the 4th parameter (as array or using `Configure`).
-Check the list of [configurations](../core-libraries/email#email-configurations) to see all accepted configs.
+Check the list of [configurations](#email-configurations) to see all accepted configs.
 
 ## Sending Emails from CLI
 

@@ -49,7 +49,7 @@ $ Console/cake
 
 It's often wise to add the core cake executable to your system path
 so you can use the cake command anywhere. This comes in handy when you are
-creating new projects. See [Adding Cake To Your Path](getting-started#adding-cake-to-your-path) for how to make `cake`
+creating new projects. See [Adding Cake To Your Path](#adding-cake-to-your-path) for how to make `cake`
 available systemwide.
 
 Running the Console with no arguments produces this help message:

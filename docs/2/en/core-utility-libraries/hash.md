@@ -111,7 +111,7 @@ rtype
 array
 
 `Hash::extract()` supports all expression, and matcher components of
-[Hash Path Syntax](../core-utility-libraries/number#hash-path-syntax). You can use extract to retrieve data from arrays,
+[Hash Path Syntax](#hash-path-syntax). You can use extract to retrieve data from arrays,
 along arbitrary paths quickly without having to loop through the data
 structures. Instead you use path expressions to qualify which elements you
 want returned :
@@ -689,7 +689,7 @@ will get the extracted values as the first argument.
 rtype  
 array
 
-Sorts an array by any value, determined by a [Hash Path Syntax](../core-utility-libraries/number#hash-path-syntax)
+Sorts an array by any value, determined by a [Hash Path Syntax](#hash-path-syntax)
 Only expression elements are supported by this method:
 
 ``` php

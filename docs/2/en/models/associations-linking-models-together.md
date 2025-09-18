@@ -330,7 +330,7 @@ Possible keys for belongsTo association arrays include:
   whenever you do a `save()` or `delete()`. If it's a string, then it's the
   field name to use. The value in the counter field represents the
   number of related rows. You can also specify multiple counter caches
-  by defining an array. See [Multiple Countercache](../models/associations-linking-models-together#multiple-counterCache).
+  by defining an array. See [Multiple Countercache](#multiple-counterCache).
 - **counterScope**: Optional conditions array to use for updating
   counter cache field.
 
@@ -769,7 +769,7 @@ like to fetch Recipe data when using the Ingredient model.
 > HABTM data is treated like a complete set. Each time a new data association is added,
 > the complete set of associated rows in the database is dropped and created again so you
 > will always need to pass the whole data set for saving. For an alternative to using
-> HABTM, see [Hasmany Through](../models/associations-linking-models-together#hasMany-through).
+> HABTM, see [Hasmany Through](#hasMany-through).
 
 > [!TIP]
 > For more information on saving HABTM objects, see [Saving Habtm](../models/saving-your-data#saving-habtm)
@@ -808,7 +808,7 @@ the columns as it is not replaced in the new insert.
 
 You can set the `unique` setting to `keepExisting` to circumvent
 losing extra data during the save operation. See `unique`
-key in [HABTM association arrays](../models/associations-linking-models-together#ref-habtm-arrays).
+key in [HABTM association arrays](#ref-habtm-arrays).
 
 </div>
 

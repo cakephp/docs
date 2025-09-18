@@ -745,7 +745,7 @@ creating an instance of our `Article` model, and then run our `published()`
 method. In `$expected` we set what we expect should be the proper result (that
 we know since we have defined which records are initially populated to the
 article table.) We test that the result equals our expectation by using the
-`assertEquals` method. See the [Running Tests](../development/testing#running-tests) section for more
+`assertEquals` method. See the [Running Tests](#running-tests) section for more
 information on how to run your test case.
 
 > [!NOTE]

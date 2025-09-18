@@ -146,7 +146,7 @@ $this->OneTimer->getTime();
 ## Component Callbacks
 
 Components also offer a few request life-cycle callbacks that allow them
-to augment the request cycle. See the base [Component Api](../controllers/components#component-api) for
+to augment the request cycle. See the base [Component Api](#component-api) for
 more information on the callbacks components offer.
 
 <a id="creating-a-component"></a>

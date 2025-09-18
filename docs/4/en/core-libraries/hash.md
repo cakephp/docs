@@ -59,7 +59,7 @@ elements, you can use attribute matching with certain methods. They are `extract
 > a matching path is not found the default value will be returned.
 >
 > `Hash::extract()` supports all expression, and matcher components of
-> [Hash Path Syntax](../core-libraries/hash#hash-path-syntax). You can use extract to retrieve data from arrays
+> [Hash Path Syntax](#hash-path-syntax). You can use extract to retrieve data from arrays
 > or object implementing `ArrayAccess` interface, along arbitrary paths
 > quickly without having to loop through the data structures. Instead you
 > use path expressions to qualify which elements you want returned :
@@ -642,7 +642,7 @@ elements, you can use attribute matching with certain methods. They are `extract
 > */
 > ```
 >
-> Sorts an array by any value, determined by a [Hash Path Syntax](../core-libraries/hash#hash-path-syntax)
+> Sorts an array by any value, determined by a [Hash Path Syntax](#hash-path-syntax)
 > Only expression elements are supported by this method:
 >
 > ``` php

@@ -7,7 +7,7 @@ There are four ways to install a CakePHP plugin:
 - As Git Submodule
 - By Git Cloning
 
-But don't forget to [Enable Plugins](../plugins/how-to-install-plugins#enable-plugins) afterwards.
+But don't forget to [Enable Plugins](#enable-plugins) afterwards.
 
 ## Manually
 

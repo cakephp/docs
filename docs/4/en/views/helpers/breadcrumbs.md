@@ -14,7 +14,7 @@ arguments:
 - **url** A string or an array of parameters that will be given to the
   [Url](../../views/helpers/url)
 - **options** An array of attributes for the `item` and `itemWithoutLink`
-  templates. See the section about [defining attributes for the item](../../views/helpers/breadcrumbs#defining_attributes_item) for more information.
+  templates. See the section about [defining attributes for the item](#defining_attributes_item) for more information.
 
 In addition to adding to the end of the trail, you can do a variety of operations:
 

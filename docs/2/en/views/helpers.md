@@ -152,7 +152,7 @@ supports the collection API used elsewhere in CakePHP.
 ## Callback methods
 
 Helpers feature several callbacks that allow you to augment the
-view rendering process. See the [Helper Api](../views/helpers#helper-api) and the
+view rendering process. See the [Helper Api](#helper-api) and the
 [Collections](../core-libraries/collections) documentation for more information.
 
 ## Creating Helpers
@@ -178,7 +178,7 @@ actual PHP class file would look something like this:
 
 > [!NOTE]
 > Helpers must extend either `AppHelper` or `Helper` or implement all the callbacks
-> in the [Helper Api](../views/helpers#helper-api).
+> in the [Helper Api](#helper-api).
 
 ### Including other Helpers
 

@@ -256,7 +256,7 @@ name will be the lower case and underscored version of the method (`full_name`):
 
 Do bear in mind that virtual fields cannot be used in finds. If you want
 them to be part of JSON or array representations of your entities,
-see [Exposing Virtual Fields](../orm/validation#exposing-virtual-fields).
+see [Exposing Virtual Fields](#exposing-virtual-fields).
 
 ## Checking if an Entity Has Been Modified
 

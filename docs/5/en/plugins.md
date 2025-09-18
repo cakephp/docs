@@ -474,7 +474,7 @@ also connect routes that use the following pattern:
     /{prefix}/{plugin}/{controller}
     /{prefix}/{plugin}/{controller}/{action}
 
-See the section on [Plugin Configuration](plugins#plugin-configuration) for information on how to load
+See the section on [Plugin Configuration](#plugin-configuration) for information on how to load
 plugin specific route files.
 
 <a id="plugin-models"></a>

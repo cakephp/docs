@@ -16,7 +16,7 @@ Logging data in CakePHP is easy - the log() function is a part of
 the Object class, which is the common ancestor for almost all
 CakePHP classes. If the context is a CakePHP class (Model,
 Controller, Component... almost anything), you can log your data.
-You can also use `CakeLog::write()` directly. See [Writing To Logs](../core-libraries/logging#writing-to-logs)
+You can also use `CakeLog::write()` directly. See [Writing To Logs](#writing-to-logs)
 
 ## Creating and configuring log streams
 

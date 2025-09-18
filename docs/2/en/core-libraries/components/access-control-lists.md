@@ -366,7 +366,7 @@ been crafting would look in INI syntax:
     allow = salted_pork
 
 Now that you've got your permissions defined via the INI mechanism,
-you can skip to [the section on checking permissions](../../core-libraries/components/access-control-lists#checking-permissions)
+you can skip to [the section on checking permissions](#checking-permissions)
 using the ACL component. Alternatively, you can keep reading to see how
 you would define the same permissions using a database ACL.
 

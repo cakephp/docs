@@ -167,7 +167,7 @@ addition request information. The following keys can be used in `$options`:
 
 The options parameter is always the 3rd parameter in each of the HTTP methods.
 They can also be used when constructing `Client` to create
-[scoped clients](../core-libraries/validation#http_client_scoped_client).
+[scoped clients](#http_client_scoped_client).
 
 ## Authentication
 
@@ -330,7 +330,7 @@ $response = $http->get('http://foo.com/test.php');
 
 The above will replace the domain, scheme, and port. However, this request will
 continue using all the other options defined when the scoped client was created.
-See [Http Client Request Options](../core-libraries/validation#http_client_request_options) for more information on the options
+See [Http Client Request Options](#http_client_request_options) for more information on the options
 supported.
 
 <div class="versionadded">

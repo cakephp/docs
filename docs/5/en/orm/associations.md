@@ -472,7 +472,7 @@ Possible keys for hasMany association arrays include:
   records not in the current set will be removed. If the foreign key is a nullable
   column or if `dependent` is true records will be orphaned.
 - **finder**: The finder method to use when loading associated records. See the
-  [Association Finder](../orm/validation#association-finder) section for more information.
+  [Association Finder](#association-finder) section for more information.
 
 Once this association has been defined, find operations on the Articles table
 can contain the Comment records if they exist:
@@ -629,7 +629,7 @@ Possible keys for belongsToMany association arrays include:
   do a wipe and replace to create the links between the passed entities when
   saving.
 - **finder**: The finder method to use when loading associated records. See the
-  [Association Finder](../orm/validation#association-finder) section for more information.
+  [Association Finder](#association-finder) section for more information.
 
 Once this association has been defined, find operations on the Articles table can
 contain the Tag records if they exist:

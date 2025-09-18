@@ -266,7 +266,7 @@ cacheMetadata
 Either boolean `true`, or a string containing the cache configuration to
 store meta data in. Having metadata caching disabled by setting it to `false`
 is not advised and can result in very poor performance. See the
-[Database Metadata Cache](../orm/database-basics#database-metadata-cache) section for more information.
+[Database Metadata Cache](#database-metadata-cache) section for more information.
 
 mask  
 Set the permissions on the generated database file. (Only supported by SQLite)
@@ -363,7 +363,7 @@ ConnectionManager::setConfig('my_connection', $config);
 $connection = ConnectionManager::get('my_connection');
 ```
 
-See the [Database Configuration](../orm/database-basics#database-configuration) for more information on the configuration
+See the [Database Configuration](#database-configuration) for more information on the configuration
 data used when creating connections.
 
 ## Data Types
@@ -434,10 +434,10 @@ type is `Cake\I18n\Date` which extends the native `DateTime`
 class.
 
 datetime  
-See [Datetime Type](../orm/database-basics#datetime-type).
+See [Datetime Type](#datetime-type).
 
 datetimefractional  
-See [Datetime Type](../orm/database-basics#datetime-type).
+See [Datetime Type](#datetime-type).
 
 timestamp  
 Maps to the `TIMESTAMP` type.
@@ -1132,7 +1132,7 @@ reason for this is identifier quoting has a few drawbacks:
 
 If you are using a legacy schema that requires identifier quoting you can enable
 it using the `quoteIdentifiers` setting in your
-[Database Configuration](../orm/database-basics#database-configuration). You can also enable this feature at runtime:
+[Database Configuration](#database-configuration). You can also enable this feature at runtime:
 
 ``` php
 $connection->getDriver()->enableAutoQuoting();
