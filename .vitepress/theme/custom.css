@@ -1,5 +1,7 @@
 /* CakePHP Theme Customization */
 :root {
+    --cake-color-link: #2D7EA4;
+
     --vp-font-family-base: 'Raleway', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 
     /* CakePHP Brand Colors - Official Red */
@@ -31,4 +33,8 @@
 
 .dark .VPHero .VPImage {
     filter: drop-shadow(-2px 4px 15px rgba(211, 60, 67, 0.2));
+}
+
+.vp-doc a {
+    color: var(--cake-color-link);
 }
