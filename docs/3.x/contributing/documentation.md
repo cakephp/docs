@@ -411,13 +411,9 @@ All admonitions are made the same:
 > [!WARNING]
 > It could be dangerous.
 
-<div class="versionadded">
-
-2.6.3
-
+::: info Added in version 2.6.3
 This awesome feature was added on version 2.6.3
-
-</div>
+:::
 
 <div class="deprecated">
 

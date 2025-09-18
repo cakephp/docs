@@ -32,16 +32,9 @@ use the `set()` method:
 $this->Flash->set('This is a message');
 ```
 
-<div class="versionadded">
-
-3.1
-
-Flash messages now stack. Successive calls to `set()` or `__call()` with
-the same key will append the messages in the `$_SESSION`. If you want to
-keep the old behavior (one message even after consecutive calls), set the
-`clear` parameter to `true` when configuring the Component.
-
-</div>
+::: info Added in version 3.1
+Flash messages now stack. Successive calls to `set()` or `__call()` withthe same key will append the messages in the `$_SESSION`. If you want tokeep the old behavior (one message even after consecutive calls), set the`clear` parameter to `true` when configuring the Component.
+:::
 
 FlashComponent's `__call()` and `set()` methods optionally take a second
 parameter, an array of options:
@@ -53,14 +46,9 @@ parameter, an array of options:
 - `params` An optional array of keys/values to make available as variables
   within an element.
 
-<div class="versionadded">
-
-3.1
-
-A new key `clear` was added. This key expects a `bool` and allows you
-to delete all messages in the current stack and start a new one.
-
-</div>
+::: info Added in version 3.1
+A new key `clear` was added. This key expects a `bool` and allows youto delete all messages in the current stack and start a new one.
+:::
 
 An example of using these options:
 
@@ -105,11 +93,8 @@ message.
 
 ## HTML in Flash Messages
 
-<div class="versionadded">
-
-3.3.3
-
-</div>
+::: info Added in version 3.3.3
+:::
 
 It is possible to output HTML in flash messages by using the `'escape'` option
 key:

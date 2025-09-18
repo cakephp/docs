@@ -153,11 +153,8 @@ Valid values:
 
 ### Getting form values from the query string
 
-<div class="versionadded">
-
-3.4.0
-
-</div>
+::: info Added in version 3.4.0
+:::
 
 A FormHelper's values sources define where its rendered elements, such as
 input-tags, receive their values from.
@@ -2289,11 +2286,8 @@ if ($this->Form->isFieldError('gender')) {
 
 ### Displaying validation messages in HTML5 validity messages
 
-<div class="versionadded">
-
-3.7.0
-
-</div>
+::: info Added in version 3.7.0
+:::
 
 If the `autoSetCustomValidity` FormHelper option is set to `true`, error messages for
 the field's required and notBlank validation rules will be used instead of the default
@@ -2704,12 +2698,9 @@ Output:
 </div>
 ```
 
-<div class="versionadded">
-
-3.1
+::: info Added in version 3.1
 The templateVars option was added in 3.1.0
-
-</div>
+:::
 
 ### Moving Checkboxes & Radios Outside of a Label
 

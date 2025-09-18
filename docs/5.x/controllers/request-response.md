@@ -141,12 +141,9 @@ $date = toDate($this->request->getQuery('date'), 'Y-m-d');
 $date = toDateTime($this->request->getQuery('datetime'), 'Y-m-d H:i:s');
 ```
 
-<div class="versionadded">
-
-5.1.0
+::: info Added in version 5.1.0
 Casting functions were added.
-
-</div>
+:::
 
 ### Request Body Data
 
@@ -1336,11 +1333,8 @@ to run logic **after** the response has been sent to the client. The
 > In non fastcgi environments the `Server.terminate` event is fired before
 > the response is sent.
 
-<div class="versionadded">
-
-5.1.0
-
-</div>
+::: info Added in version 5.1.0
+:::
 
 ## Common Mistakes with Immutable Responses
 

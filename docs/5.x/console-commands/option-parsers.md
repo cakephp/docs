@@ -67,12 +67,9 @@ Arguments that have been marked as required will throw an exception when
 parsing the command if they have been omitted. So you don't have to
 handle that in your shell.
 
-<div class="versionadded">
-
-5.2.0
+::: info Added in version 5.2.0
 The `separator` option was added.
-
-</div>
+:::
 
 ### Adding Multiple Arguments
 
@@ -161,12 +158,9 @@ of the option:
   values are valid. An exception will be raised when parse() encounters an
   invalid value.
 
-<div class="versionadded">
-
-5.2.0
+::: info Added in version 5.2.0
 The `separator` option was added.
-
-</div>
+:::
 
 ### Adding Multiple Options
 

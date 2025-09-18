@@ -122,11 +122,8 @@ $foo = $this->request->data('Value.that.does.not.exist');
 
 ## Accessing PUT or POST data
 
-<div class="versionadded">
-
-2.2
-
-</div>
+::: info Added in version 2.2
+:::
 
 When building REST services, you often accept request data on `PUT` and
 `DELETE` requests. As of 2.2, any `application/x-www-form-urlencoded`
@@ -440,11 +437,8 @@ values, just as regular header calls do. Headers are not sent when
 `CakeResponse::header()` is called; instead they are buffered
 until the response is actually sent.
 
-<div class="versionadded">
-
-2.4
-
-</div>
+::: info Added in version 2.4
+:::
 
 You can now use the convenience method `CakeResponse::location()` to directly set or get
 the redirect location header.
@@ -500,11 +494,8 @@ proxy caching.
 
 ### The Cache Control header
 
-<div class="versionadded">
-
-2.1
-
-</div>
+::: info Added in version 2.1
+:::
 
 Used under the expiration model, this header contains multiple indicators
 that can change the way browsers or proxies use the cached content. A
@@ -543,11 +534,8 @@ the `Cache-Control` header.
 
 ### The Expiration header
 
-<div class="versionadded">
-
-2.1
-
-</div>
+::: info Added in version 2.1
+:::
 
 You can set the `Expires` header to a date and time after which the response is
 no longer considered fresh. This header can be set using the
@@ -564,11 +552,8 @@ This method also accepts a `DateTime` instance or any string that can be parsed 
 
 ### The Etag header
 
-<div class="versionadded">
-
-2.1
-
-</div>
+::: info Added in version 2.1
+:::
 
 Cache validation in HTTP is often used when content is constantly changing, and
 asks the application to only generate the response contents if the cache is no
@@ -598,11 +583,8 @@ public function index() {
 
 ### The Last Modified header
 
-<div class="versionadded">
-
-2.1
-
-</div>
+::: info Added in version 2.1
+:::
 
 Under the HTTP cache validation model, you can also set the `Last-Modified`
 header to indicate the date and time at which the resource was modified for the

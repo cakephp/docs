@@ -714,11 +714,8 @@ public function afterMarshal(
 }
 ```
 
-<div class="versionadded">
-
-4.1.0
-
-</div>
+::: info Added in version 4.1.0
+:::
 
 ### Validating Data Before Building Entities
 

@@ -198,12 +198,9 @@ public function events(EventManagerInterface $eventManager): EventManagerInterfa
 
 ### `Command.beforeExecute` & `Command.afterExecute`
 
-<div class="versionadded">
-
-5.0.0
+::: info Added in version 5.0.0
 The `Command.beforeExecute` & `Command.afterExecute` events were added in 5.0
-
-</div>
+:::
 
 The `Command.beforeExecute` & `Command.afterExecute` events are triggered before and after
 a command has been executed. Both events contain the `args` which are passed to the command
@@ -293,12 +290,9 @@ As you can see in the above code, the `on()` function will accept instances
 of the `EventListener` interface. Internally, the event manager will use
 `implementedEvents()` to attach the correct callbacks.
 
-<div class="versionadded">
-
-5.1.0
+::: info Added in version 5.1.0
 The `events` hook was added to the `BaseApplication` as well as the `BasePlugin` class
-
-</div>
+:::
 
 As of CakePHP 5.1 it is recommended to register event listeners by adding them via the `events` hook in your application or plugin class:
 

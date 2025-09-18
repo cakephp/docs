@@ -105,12 +105,9 @@ Formatting
 >
 > </div>
 >
-> <div class="versionadded">
->
-> 2.2
+> ::: info Added in version 2.2
 > `$dateString` parameter now also accepts a DateTime object.
->
-> </div>
+> :::
 
 > rtype  
 > string
@@ -138,12 +135,9 @@ Formatting
 >
 > </div>
 >
-> <div class="versionadded">
->
-> 2.2
+> ::: info Added in version 2.2
 > `$dateString` parameter now also accepts a DateTime object.
->
-> </div>
+> :::
 
 > rtype  
 > string
@@ -188,12 +182,9 @@ Formatting
 >
 > </div>
 >
-> <div class="versionadded">
->
-> 2.2
+> ::: info Added in version 2.2
 > `$date` parameter now also accepts a DateTime object.
->
-> </div>
+> :::
 
 > rtype  
 > string
@@ -222,12 +213,9 @@ Formatting
 >
 > </div>
 >
-> <div class="versionadded">
->
-> 2.2
+> ::: info Added in version 2.2
 > `$dateString` parameter now also accepts a DateTime object.
->
-> </div>
+> :::
 
 > rtype  
 > integer
@@ -300,12 +288,9 @@ Formatting
 >
 > </div>
 >
-> <div class="versionadded">
->
-> 2.2
+> ::: info Added in version 2.2
 > `$dateString` parameter now also accepts a DateTime object.
->
-> </div>
+> :::
 
 > rtype  
 > integer
@@ -375,12 +360,9 @@ Formatting
 >
 > </div>
 >
-> <div class="versionadded">
->
-> 2.2
+> ::: info Added in version 2.2
 > `$dateString` parameter now also accepts a DateTime object.
->
-> </div>
+> :::
 
 > rtype  
 > string
@@ -394,12 +376,9 @@ Formatting
 >
 > </div>
 >
-> <div class="versionadded">
->
-> 2.2
+> ::: info Added in version 2.2
 > `$dateString` parameter now also accepts a DateTime object.
->
-> </div>
+> :::
 
 > rtype  
 > mixed
@@ -429,19 +408,12 @@ Formatting
 > $arr = CakeTime::toQuarter('Aug 22, 2011', true);
 > ```
 >
-> <div class="versionadded">
->
-> 2.2
+> ::: info Added in version 2.2
 > `$dateString` parameter now also accepts a DateTime object.
->
-> </div>
->
-> <div class="versionadded">
->
-> 2.4
+> :::
+> ::: info Added in version 2.4
 > The new option parameters `relativeString` (defaults to `%s ago`) and
->
-> </div>
+> :::
 >
 > > > > `absoluteString` (defaults to `on %s`) to allow customization of the resulting
 > >
@@ -460,12 +432,9 @@ Formatting
 >
 > </div>
 >
-> <div class="versionadded">
->
-> 2.2
+> ::: info Added in version 2.2
 > `$dateString` parameter now also accepts a DateTime object.
->
-> </div>
+> :::
 
 > rtype  
 > integer
@@ -479,43 +448,30 @@ Formatting
 >
 > </div>
 >
-> <div class="versionadded">
->
-> 2.2
+> ::: info Added in version 2.2
 > `$dateString` parameter now also accepts a DateTime object.
->
-> </div>
+> :::
 
 > rtype  
 > mixed
 >
-> <div class="versionadded">
->
-> 2.2
+> ::: info Added in version 2.2
 > Returns a formatted date in server's timezone.
->
-> </div>
+> :::
 
 > rtype  
 > DateTimeZone
 >
-> <div class="versionadded">
->
-> 2.2
-> Returns a timezone object from a string or the user's timezone object. If the function is called
-> without a parameter it tries to get timezone from 'Config.timezone' configuration variable.
->
-> </div>
+> ::: info Added in version 2.2
+> Returns a timezone object from a string or the user's timezone object. If the function is calledwithout a parameter it tries to get timezone from 'Config.timezone' configuration variable.
+> :::
 
 > rtype  
 > array
 >
-> <div class="versionadded">
->
-> 2.2
+> ::: info Added in version 2.2
 > Returns a list of timezone identifiers.
->
-> </div>
+> :::
 >
 > <div class="versionchanged">
 >
@@ -527,17 +483,11 @@ Formatting
 
 ## Testing Time
 
-> <div class="versionadded">
->
-> 2.4
->
-> </div>
+> ::: info Added in version 2.4
+> :::
 
-> <div class="versionadded">
->
-> 2.4
->
-> </div>
+> ::: info Added in version 2.4
+> :::
 
 > <div class="versionchanged">
 >
@@ -546,12 +496,9 @@ Formatting
 >
 > </div>
 >
-> <div class="versionadded">
->
-> 2.2
+> ::: info Added in version 2.2
 > `$dateString` parameter now also accepts a DateTime object.
->
-> </div>
+> :::
 >
 > All of the above functions return true or false when passed a date
 > string. `wasWithinLast` takes an additional `$timeInterval`

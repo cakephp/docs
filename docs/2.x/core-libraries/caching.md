@@ -104,14 +104,9 @@ parameter for `Cache::write()` and `Cache::read()`, e.g. `Cache::read('my_data',
 > When using the FileEngine you might need to use the `mask` option to
 > ensure cache files are made with the correct permissions.
 
-<div class="versionadded">
-
-2.4
-
-In debug mode missing directories will now be automatically created to avoid unnecessary
-errors thrown when using the FileEngine.
-
-</div>
+::: info Added in version 2.4
+In debug mode missing directories will now be automatically created to avoid unnecessaryerrors thrown when using the FileEngine.
+:::
 
 ## Creating a storage engine for Cache
 
@@ -234,11 +229,8 @@ Cache::increment('initial_count');
 
 ## Using groups
 
-<div class="versionadded">
-
-2.2
-
-</div>
+::: info Added in version 2.2
+:::
 
 Sometimes you will want to mark multiple cache entries to belong to a certain
 group or namespace. This is a common requirement for mass-invalidating keys
@@ -272,11 +264,8 @@ public function afterSave($created, $options = array()) {
 }
 ```
 
-<div class="versionadded">
-
-2.4
-
-</div>
+::: info Added in version 2.4
+:::
 
 `Cache::groupConfigs()` can be used to retrieve mapping between
 group and configurations, i.e.: having the same group:

@@ -323,12 +323,9 @@ for both:
 You can specify the same value for both `read` and `write` key without creating
 multiple connections to the database.
 
-<div class="versionadded">
-
-4.5.0
+::: info Added in version 4.5.0
 Read and write connection roles were added.
-
-</div>
+:::
 
 ## Managing Connections
 
@@ -674,13 +671,9 @@ no value for the current database driver:
 - `precision` The precision of the column if available.
 - `scale` Can be included for SQLServer connections.
 
-<div class="versionadded">
-
-4.3.0
+::: info Added in version 4.3.0
 `ColumnSchemaAwareInterface` was added.
-
-</div>
-
+:::
 <a id="mapping-custom-datatypes-to-sql-expressions"></a>
 
 ### Mapping Custom Datatypes to SQL Expressions

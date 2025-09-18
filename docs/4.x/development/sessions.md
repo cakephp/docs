@@ -408,12 +408,9 @@ $session->readOrFail('Config.language');
 This is useful, when you know this key has to be set and you don't want to have to check
 for the existence in code itself.
 
-<div class="versionadded">
-
-4.1.0
+::: info Added in version 4.1.0
 The `readOrFail()` was added.
-
-</div>
+:::
 
 `method` Session::**write**($key, $value)
 

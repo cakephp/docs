@@ -50,9 +50,6 @@ $csp = new CspMiddleware($policy, [
 $middlewareQueue->add($csp);
 ```
 
-<div class="versionadded">
-
-4.3.0
+::: info Added in version 4.3.0
 Automatic nonce population was added.
-
-</div>
+:::

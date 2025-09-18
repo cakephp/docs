@@ -315,12 +315,9 @@ $result = $articles->patchEntity($entity, $data, [
 When used, this option restricts belongsToMany association marshalling to only
 use the `_ids` data.
 
-<div class="versionadded">
-
-3.1.0
+::: info Added in version 3.1.0
 The `onlyIds` option was added in 3.1.0
-
-</div>
+:::
 
 ### Converting HasMany Data
 
@@ -358,12 +355,9 @@ When converting hasMany data, you can disable the new entity creation, by using
 the `onlyIds` option. When enabled, this option restricts hasMany marshalling
 to only use the `_ids` key and ignore all other data.
 
-<div class="versionadded">
-
-3.1.0
+::: info Added in version 3.1.0
 The `onlyIds` option was added in 3.1.0
-
-</div>
+:::
 
 ### Converting Multiple Records
 
@@ -1260,11 +1254,8 @@ try {
 As this internally perfoms a `Cake\ORM\Table::save()` call, all
 corresponding save events will be triggered.
 
-<div class="versionadded">
-
-3.4.1
-
-</div>
+::: info Added in version 3.4.1
+:::
 
 ## Find or Create an Entity
 
@@ -1323,11 +1314,8 @@ $result = $articles->saveMany($entities);
 
 The result will be updated entities on success or `false` on failure.
 
-<div class="versionadded">
-
-3.2.8
-
-</div>
+::: info Added in version 3.2.8
+:::
 
 ## Bulk Updates
 

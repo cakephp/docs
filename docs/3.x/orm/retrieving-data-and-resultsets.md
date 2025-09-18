@@ -697,12 +697,9 @@ $query->select(['id', 'title'])
     }]);
 ```
 
-<div class="versionadded">
-
-3.1
+::: info Added in version 3.1
 Selecting columns via an association object was added in 3.1
-
-</div>
+:::
 
 ### Sorting Contained Associations
 
@@ -833,12 +830,9 @@ $query = $articles->find()
 > This will produce multiple `INNER JOIN` statements and might not create the query you
 > expected.
 
-<div class="versionadded">
-
-3.1
-<Query::innerJoinWith>() was added in 3.1
-
-</div>
+::: info Added in version 3.1
+() was added in 3.1
+:::
 
 ### Using notMatching
 
@@ -903,12 +897,9 @@ $query = $articlesTable
 Keep in mind that contrary to the `matching()` function, `notMatching()`
 will not add any data to the `_matchingData` property in the results.
 
-<div class="versionadded">
-
-3.1
-<Query::notMatching>() was added in 3.1
-
-</div>
+::: info Added in version 3.1
+() was added in 3.1
+:::
 
 ### Using leftJoinWith
 
@@ -946,12 +937,9 @@ $query = $authorsTable
 This function will not load any columns from the specified associations into the
 result set.
 
-<div class="versionadded">
-
-3.1
-<Query::leftJoinWith>() was added in 3.1
-
-</div>
+::: info Added in version 3.1
+() was added in 3.1
+:::
 
 ## Changing Fetching Strategies
 

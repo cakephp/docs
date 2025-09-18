@@ -2,11 +2,8 @@
 
 `class` Cake\\View\\Helper\\**BreadcrumbsHelper**(View $view, array $config = [])
 
-<div class="versionadded">
-
-3.3.6
-
-</div>
+::: info Added in version 3.3.6
+:::
 
 BreadcrumbsHelper provides a way to easily deal with the creation and rendering
 of a breadcrumbs trail for your app.
@@ -203,9 +200,6 @@ $crumbs = collection($crumbs)->map(function ($crumb) {
 $this->Breadcrumbs->reset()->add($crumbs);
 ```
 
-<div class="versionadded">
-
-3.4.0
+::: info Added in version 3.4.0
 The `reset()` method was added in 3.4.0
-
-</div>
+:::

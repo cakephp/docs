@@ -227,11 +227,8 @@ The `Model.afterMarshal` event is fired after request data is converted
 into entities. Event handlers will get the converted entities, original request
 data and the options provided to the `patchEntity()` or `newEntity()` call.
 
-<div class="versionadded">
-
-4.1.0
-
-</div>
+::: info Added in version 4.1.0
+:::
 
 ### beforeFind
 

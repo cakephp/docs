@@ -20,12 +20,9 @@ class UsersController extends AppController {
 }
 ```
 
-<div class="versionadded">
-
-2.1
+::: info Added in version 2.1
 `CakeTime` has been factored out from `TimeHelper`.
-
-</div>
+:::
 
 ## Formatting
 

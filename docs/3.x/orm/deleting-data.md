@@ -105,8 +105,5 @@ try {
 As this internally performs a `Cake\ORM\Table::delete()` call, all
 corresponding delete events will be triggered.
 
-<div class="versionadded">
-
-3.4.1
-
-</div>
+::: info Added in version 3.4.1
+:::

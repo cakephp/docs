@@ -307,12 +307,9 @@ $this->reset('sidebar');
 $this->assign('sidebar', '');
 ```
 
-<div class="versionadded">
-
-3.2
+::: info Added in version 3.2
 View::reset() was added in 3.2
-
-</div>
+:::
 
 Assigning a block's content is often useful when you want to convert a view
 variable into a block. For example, you may want to use a block for the page
@@ -695,11 +692,8 @@ echo $this->element('Contacts.sidebar/helpbox');
 
 ### Routing prefix and Elements
 
-<div class="versionadded">
-
-3.0.1
-
-</div>
+::: info Added in version 3.0.1
+:::
 
 If you have a Routing prefix configured, the Element path resolution can switch
 to a prefix location, as Layouts and action View do.

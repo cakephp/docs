@@ -151,12 +151,9 @@ $firstEvent = $eventsFired[0];
 Tracking can be disabled by removing the event list or calling
 `Cake\Event\EventList::trackEvents(false)`.
 
-<div class="versionadded">
-
-3.2.11
+::: info Added in version 3.2.11
 Event tracking and `Cake\Event\EventList` were added.
-
-</div>
+:::
 
 ## Core Events
 
@@ -301,15 +298,9 @@ if (!empty($events)) {
 > [!NOTE]
 > The pattern passed to the `matchingListeners` method is case sensitive.
 
-<div class="versionadded">
-
-3.2.3
-
-The `matchingListeners` method returns an array of events matching
-a search pattern.
-
-</div>
-
+::: info Added in version 3.2.3
+The `matchingListeners` method returns an array of events matchinga search pattern.
+:::
 <a id="event-priorities"></a>
 
 ### Establishing Priorities

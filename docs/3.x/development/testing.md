@@ -124,14 +124,9 @@ tests:
     assertion) should begin with `test`, as in `testPublished()`.
     You can also use the `@test` annotation to mark methods as test methods.
 
-<div class="versionadded">
-
-3.4.1
-Support for PHPUnit 6 was addded. If you're using a PHPUnit version lower
-than 5.7.0, your tests classes should either extends CakePHP's classes or
-`PHPUnit_Framework_TestCase`.
-
-</div>
+::: info Added in version 3.4.1
+Support for PHPUnit 6 was addded. If you're using a PHPUnit version lowerthan 5.7.0, your tests classes should either extends CakePHP's classes or`PHPUnit_Framework_TestCase`.
+:::
 
 ## Creating Your First Test Case
 
@@ -615,11 +610,8 @@ class ArticlesFixture extends TestFixture
 }
 ```
 
-<div class="versionadded">
-
-3.1.7
-
-</div>
+::: info Added in version 3.1.7
+:::
 
 Usually, you have a Table class along with your fixture, as well. You can also
 use that to retrieve the table name:
@@ -950,13 +942,9 @@ and Components, CakePHP offers a specialized `IntegrationTestTrait` trait.
 Using this trait in your controller test cases allows you to
 test controllers from a high level.
 
-<div class="versionadded">
-
-3.7.0
-
+::: info Added in version 3.7.0
 The `IntegrationTestCase` class was moved into the `IntegrationTestTrait` trait.
-
-</div>
+:::
 
 If you are unfamiliar with integration testing, it is a testing approach that
 makes it easy to test multiple units in concert. The integration testing
@@ -1080,12 +1068,9 @@ that allows you to send a request body. After dispatching a request you can use
 the various assertions provided by `IntegrationTestTrait` or PHPUnit to
 ensure your request had the correct side-effects.
 
-<div class="versionadded">
-
-3.5.0
+::: info Added in version 3.5.0
 `options()` and `head()` were added in 3.5.0.
-
-</div>
+:::
 
 ### Setting up the Request
 
@@ -1225,20 +1210,12 @@ If your action requires unlocked fields you can declare them with
 $this->setUnlockedFields(['dynamic_field']);
 ```
 
-<div class="versionadded">
-
-3.1.2
-The `enableCsrfToken()` and `enableSecurityToken()` methods were added
-in 3.1.2
-
-</div>
-
-<div class="versionadded">
-
-3.8.3
+::: info Added in version 3.1.2
+The `enableCsrfToken()` and `enableSecurityToken()` methods were addedin 3.1.2
+:::
+::: info Added in version 3.8.3
 The `setUnlockedFields()` method was added.
-
-</div>
+:::
 
 ### Integration Testing PSR-7 Middleware
 
@@ -1295,12 +1272,9 @@ public function testRouteCount()
 }
 ```
 
-<div class="versionadded">
-
-3.3.0
+::: info Added in version 3.3.0
 PSR-7 Middleware and the `useHttpServer()` method were added in 3.3.0.
-
-</div>
+:::
 
 ### Testing with Encrypted Cookies
 
@@ -1318,13 +1292,9 @@ $this->get('/bookmarks/index');
 $this->assertCookieEncrypted('An updated value', 'my_cookie');
 ```
 
-<div class="versionadded">
-
-3.1.7
-
+::: info Added in version 3.1.7
 `assertCookieEncrypted` and `cookieEncrypted` were added in 3.1.7.
-
-</div>
+:::
 
 ### Testing Flash Messages
 
@@ -1361,19 +1331,12 @@ $this->assertFlashElement('Flash/error');
 $this->assertFlashElementAt(1, 'Flash/error');
 ```
 
-<div class="versionadded">
-
-3.4.7
+::: info Added in version 3.4.7
 `enableRetainFlashMessages()` was added in 3.4.7
-
-</div>
-
-<div class="versionadded">
-
-3.7.0
+:::
+::: info Added in version 3.7.0
 Flash message assertions were added.
-
-</div>
+:::
 
 ### Testing a JSON Responding Controller
 
@@ -1449,11 +1412,8 @@ In the above example, the test would fail and the underlying exception message
 and stack trace would be displayed instead of the rendered error page being
 checked.
 
-<div class="versionadded">
-
-3.5.0
-
-</div>
+::: info Added in version 3.5.0
+:::
 
 ### Assertion methods
 
@@ -1886,14 +1846,9 @@ $this->assertEventFired('My.Global.Event');
 $this->assertEventFiredWith('My.Global.Event', 'user', 1);
 ```
 
-<div class="versionadded">
-
-3.2.11
-
-Event tracking, `assertEventFired()`, and `assertEventFiredWith` were
-added.
-
-</div>
+::: info Added in version 3.2.11
+Event tracking, `assertEventFired()`, and `assertEventFiredWith` wereadded.
+:::
 
 ## Testing Email
 

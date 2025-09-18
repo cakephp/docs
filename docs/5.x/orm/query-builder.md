@@ -797,13 +797,9 @@ public function findSlugged(SelectQuery $query): SelectQuery
 
 The `preserveKeys` option can be set as a contain option as well.
 
-<div class="versionadded">
-
-5.1.0
+::: info Added in version 5.1.0
 The `preserveKeys` option was added.
-
-</div>
-
+:::
 <a id="advanced-query-conditions"></a>
 
 ## Advanced Conditions
@@ -1328,12 +1324,9 @@ $query->useReadRole();
 $query->useWriteRole();
 ```
 
-<div class="versionadded">
-
-4.5.0
+::: info Added in version 4.5.0
 Query role methods were added in 4.5.0
-
-</div>
+:::
 
 ### Expression Conjuction
 
@@ -2329,12 +2322,9 @@ $unpublished = $articles->find()
 $unpublished->intersectAll($inReview);
 ```
 
-<div class="versionadded">
-
-5.1.0
+::: info Added in version 5.1.0
 `intersect()` and `intersectAll()` were added.
-
-</div>
+:::
 
 ### Subqueries
 

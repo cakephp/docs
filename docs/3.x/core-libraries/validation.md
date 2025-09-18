@@ -93,12 +93,9 @@ $validator->requirePresence([
 ]);
 ```
 
-<div class="versionadded">
-
-3.3.0
+::: info Added in version 3.3.0
 `requirePresence()` accepts an array of fields as of 3.3.0
-
-</div>
+:::
 
 ### Allowing Empty Fields
 
@@ -163,13 +160,9 @@ $validator
 See the [Validator API documentation](https://api.cakephp.org/3.x/class-Cake.Validation.Validator.html) for the
 full set of validator methods.
 
-<div class="versionadded">
-
-3.2
+::: info Added in version 3.2
 Rule building methods were added in 3.2.0
-
-</div>
-
+:::
 <a id="custom-validation-rules"></a>
 
 ### Using Custom Validation Rules
@@ -357,12 +350,9 @@ following keys:
 - `field` The current field being validated.
 - `providers` The validation providers attached to the current validator.
 
-<div class="versionadded">
-
-3.1.1
+::: info Added in version 3.1.1
 The callable support for `requirePresence()` was added in 3.1.1
-
-</div>
+:::
 
 ### Marking Rules as the Last to Run
 
@@ -444,11 +434,8 @@ Validator::addDefaultProvider('custom', 'App\Model\Validation');
 > therefore **config/bootstrap.php** is the best place to set up your
 > default providers.
 
-<div class="versionadded">
-
-3.5.0
-
-</div>
+::: info Added in version 3.5.0
+:::
 
 You can use the [Localized plugin](https://github.com/cakephp/localized) to
 get providers based on countries. With this plugin, you'll be able to validate
@@ -489,11 +476,8 @@ There are a few methods that are common to all classes, defined through the
 
 ### Nesting Validators
 
-<div class="versionadded">
-
-3.0.5
-
-</div>
+::: info Added in version 3.0.5
+:::
 
 When validating [Modelless Forms](../core-libraries/form) with nested data, or when working
 with models that contain array data types, it is necessary to validate the
@@ -544,13 +528,9 @@ $validator->addNestedMany(
 
 The error message for a nested validator can be found in the `_nested` key.
 
-<div class="versionadded">
-
-3.6.0
+::: info Added in version 3.6.0
 message and conditions for nested validators were added.
-
-</div>
-
+:::
 <a id="reusable-validators"></a>
 
 ### Creating Reusable Validators

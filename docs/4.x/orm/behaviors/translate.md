@@ -257,12 +257,9 @@ $data = $this->Articles->find('list')->toArray();
 $data = $this->Articles->find('list', ['locale' => 'fr'])->toArray();
 ```
 
-<div class="versionadded">
-
-4.1.0
+::: info Added in version 4.1.0
 The `locale` option was added in 4.1.0
-
-</div>
+:::
 
 ### Retrieve All Translations For An Entity
 

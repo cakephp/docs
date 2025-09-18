@@ -41,13 +41,9 @@ Configure::write('Dispatcher.filters', array(
 ));
 ```
 
-<div class="versionadded">
-
-2.3
-If you have a setup with multiple domains or languages you can use
-<span class="title-ref">Configure::write('Cache.viewPrefix', 'YOURPREFIX');</span> to store the view cache files prefixed.
-
-</div>
+::: info Added in version 2.3
+If you have a setup with multiple domains or languages you can use to store the view cache files prefixed.
+:::
 
 ### Additional configuration options
 

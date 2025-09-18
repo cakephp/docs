@@ -1,10 +1,7 @@
 # Completion Shell
 
-<div class="versionadded">
-
-2.5
-
-</div>
+::: info Added in version 2.5
+:::
 
 Working with the console gives the developer a lot of possibilities but having
 to completely know and write those commands can be tedious. Especially when

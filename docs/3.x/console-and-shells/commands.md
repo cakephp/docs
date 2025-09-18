@@ -6,12 +6,9 @@ CakePHP comes with a number of built-in commands for speeding up your
 development, and automating routine tasks. You can use these same libraries to
 create commands for your application and plugins.
 
-<div class="versionadded">
-
-3.6.0
+::: info Added in version 3.6.0
 Commands were added to replace Shells long term. Shells & Tasks have several shortcomings that are hard to correct without breaking compatibility.
-
-</div>
+:::
 
 ## Creating a Command
 
@@ -230,12 +227,9 @@ You can pass any desired exit code into `abort()`.
 > on most Unix systems (`man sysexits`), or the `System Error Codes` help
 > page in Windows.
 
-<div class="versionadded">
-
-3.9.0
+::: info Added in version 3.9.0
 `ConsoleIo::abort()` was added.
-
-</div>
+:::
 
 ## Calling other Commands
 
@@ -251,12 +245,9 @@ $command = new OtherCommand($otherArgs);
 $this->executeCommand($command, ['--verbose', 'deploy']);
 ```
 
-<div class="versionadded">
-
-3.8.0
+::: info Added in version 3.8.0
 `executeCommand()` was added.
-
-</div>
+:::
 
 > [!NOTE]
 > When calling `executeCommand()` in a loop, it is recommended to pass in the
@@ -271,21 +262,12 @@ To make testing console applications easier, CakePHP comes with a
 `ConsoleIntegrationTestTrait` trait that can be used to test console applications
 and assert against their results.
 
-<div class="versionadded">
-
-3.5.0
-
+::: info Added in version 3.5.0
 The `ConsoleIntegrationTestCase` was added.
-
-</div>
-
-<div class="versionadded">
-
-3.7.0
-
+:::
+::: info Added in version 3.7.0
 The `ConsoleIntegrationTestCase` class was moved into the `ConsoleIntegrationTestTrait` trait.
-
-</div>
+:::
 
 To get started testing your console application, create a test case that uses the
 `Cake\TestSuite\ConsoleIntegrationTestTrait` trait. This trait contains a method
@@ -542,13 +524,9 @@ in your test case with the following method:
 $this->useCommandRunner();
 ```
 
-<div class="versionadded">
-
-3.5.0
-
+::: info Added in version 3.5.0
 The `CommandRunner` class was added.
-
-</div>
+:::
 
 ### Assertion methods
 

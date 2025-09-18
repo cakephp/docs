@@ -324,12 +324,9 @@ those held in the `viewClasses` property.
 > View classes must implement the static `contentType()` hook method to
 > participate in content-type negotiation.
 
-<div class="versionadded">
-
-4.5.0
+::: info Added in version 4.5.0
 `addViewClasses()` was added.
-
-</div>
+:::
 
 ## Content Type Negotiation Fallbacks
 
@@ -367,13 +364,9 @@ class CustomFallbackView extends View
 It is important to remember that match-all views are applied only *after*
 content-type negotiation is attempted.
 
-<div class="versionadded">
-
-4.4.0
-Prior to 4.4 you must use [Request Handling](controllers/components/request-handling)
-instead of `viewClasses()`.
-
-</div>
+::: info Added in version 4.4.0
+Prior to 4.4 you must use instead of `viewClasses()`.
+:::
 
 ## Using AjaxView
 
@@ -482,11 +475,8 @@ $articles = $this->fetchModel('Articles', 'Elastic');
 $github = $this->fetchModel('GitHub', 'Webservice');
 ```
 
-<div class="versionadded">
-
-4.5.0
-
-</div>
+::: info Added in version 4.5.0
+:::
 
 `method` Cake\\Controller\\Controller::**fetchTable**(string $alias, array $config = [])
 
@@ -502,12 +492,9 @@ $recentArticles = $this->fetchTable('Articles')->find('all', [
     ->all();
 ```
 
-<div class="versionadded">
-
-4.3.0
+::: info Added in version 4.3.0
 `Controller::fetchTable()` was added. Prior to 4.3 you need to use `Controller::loadModel()`.
-
-</div>
+:::
 
 > [!NOTE]
 > `Controller::fetchTable()` does not create a property controller property with the name of the table alias,
@@ -619,12 +606,9 @@ public function initialize(): void
 
 Middleware defined by a controller will be called **before** `beforeFilter()` and action methods are called.
 
-<div class="versionadded">
-
-4.3.0
+::: info Added in version 4.3.0
 `Controller::middleware()` was added.
-
-</div>
+:::
 
 ## More on Controllers
 

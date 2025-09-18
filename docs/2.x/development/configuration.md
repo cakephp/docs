@@ -647,12 +647,9 @@ Configure::dump('error.php', 'default', array('Error', 'Exception'));
 `Configure::dump()` can be used to either modify or overwrite
 configuration files that are readable with `Configure::load()`
 
-<div class="versionadded">
-
-2.2
+::: info Added in version 2.2
 `Configure::dump()` was added in 2.2.
-
-</div>
+:::
 
 ### Storing runtime configuration
 
@@ -753,16 +750,9 @@ that the resource named `$key` contains.
 
 `method` Configure::**dump**($key, $data)
 
-<div class="versionadded">
-
-2.3
-`ConfigReaderInterface::dump()` was added in 2.3.
-
-Thrown when errors occur when loading/storing/restoring configuration data.
-`ConfigReaderInterface` implementations should throw this
-exception when they encounter an error.
-
-</div>
+::: info Added in version 2.3
+`ConfigReaderInterface::dump()` was added in 2.3.Thrown when errors occur when loading/storing/restoring configuration data.`ConfigReaderInterface` implementations should throw thisexception when they encounter an error.
+:::
 
 ### Built-in Configuration readers
 

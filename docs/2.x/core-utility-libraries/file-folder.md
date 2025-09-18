@@ -200,11 +200,9 @@ The current file's absolute path.
 
 `method` File::**write**(string $data, string $mode = 'w', boolean$force = false)
 
-<div class="versionadded">
-
-2.1 `File::mime()`
-
-</div>
+::: info Added in version 2.1
+`File::mime()`
+:::
 
 `method` File::**mime**()
 

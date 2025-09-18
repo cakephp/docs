@@ -601,11 +601,8 @@ Example output:
 
 ## Node Level (Depth)
 
-<div class="versionadded">
-
-2.7
-
-</div>
+::: info Added in version 2.7
+:::
 
 Knowing the depth of tree nodes can be useful when you want to retrieve nodes
 only upto a certain level for e.g. when generating menus. You can use the
@@ -619,11 +616,8 @@ public $actsAs = array('Tree' => array(
 
 `method` TreeBehavior::**getLevel**($id)
 
-<div class="versionadded">
-
-2.7
-
-</div>
+::: info Added in version 2.7
+:::
 
 If you are not caching the level of nodes using the `level` option in settings,
 you can use this method to get level of a particular node.

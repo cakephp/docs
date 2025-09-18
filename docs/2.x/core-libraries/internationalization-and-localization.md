@@ -160,11 +160,8 @@ Configure::write('I18n.preferApp', true);
 
 It defaults to `false`.
 
-<div class="versionadded">
-
-2.6
-
-</div>
+::: info Added in version 2.6
+:::
 
 ## Localization in CakePHP
 

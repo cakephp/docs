@@ -126,13 +126,9 @@ bin/cake plugin load ContactManager
 This would update your application's bootstrap method, or put the
 `$this->addPlugin('ContactManager');` snippet in the bootstrap for you.
 
-<div class="versionadded">
-
-4.1.0
+::: info Added in version 4.1.0
 The `addOptionalPlugin()` method was added.
-
-</div>
-
+:::
 <a id="plugin-configuration"></a>
 
 ## Plugin Hook Configuration

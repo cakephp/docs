@@ -158,11 +158,8 @@ class. You can call one as you would call a normal helper method:
 >         'exact' => true
 >     )
 >
-> <div class="versionadded">
->
-> 2.3
->
-> </div>
+> ::: info Added in version 2.3
+> :::
 >
 > Example:
 >

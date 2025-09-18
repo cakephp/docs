@@ -258,12 +258,9 @@ class FavoritesCell extends Cell
 The above cell would paginate the `Messages` model using [scoped
 pagination parameters](../controllers/components/pagination#paginating-multiple-queries).
 
-<div class="versionadded">
-
-3.5.0
+::: info Added in version 3.5.0
 `Cake\Datasource\Paginator` was added in 3.5.0.
-
-</div>
+:::
 
 ## Cell Options
 

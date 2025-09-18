@@ -36,12 +36,9 @@ you to take full control over the exception handling process, while changing
 the renderer allows you to easily change the output type/contents, as well as
 add in application specific exception handling.
 
-<div class="versionadded">
-
-2.2
+::: info Added in version 2.2
 The `Exception.consoleHandler` option was added in 2.2.
-
-</div>
+:::
 
 ## Exception classes
 
@@ -101,15 +98,9 @@ These exception classes all extend `CakeException`.
 By extending CakeException, you can create your own 'framework' errors.
 All of the standard Exceptions that CakePHP will throw also extend CakeException.
 
-<div class="versionadded">
-
-2.3
-CakeBaseException was added
-
-Base exception class in CakePHP.
-All CakeExceptions and HttpExceptions above extend this class.
-
-</div>
+::: info Added in version 2.3
+CakeBaseException was addedBase exception class in CakePHP.All CakeExceptions and HttpExceptions above extend this class.
+:::
 
 `method` Class::**responseHeader**($header = null, $value = null)
 

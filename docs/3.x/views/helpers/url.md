@@ -113,19 +113,12 @@ echo $this->Html->meta([
 ]);
 ```
 
-<div class="versionadded">
-
-3.3.5
+::: info Added in version 3.3.5
 `build()` accepts an array as the 2nd argument as of 3.3.5
-
-</div>
-
-<div class="versionadded">
-
-3.6.0
+:::
+::: info Added in version 3.6.0
 The `timestamp` option was added to `build()`.
-
-</div>
+:::
 
 If you are generating URLs for CSS, Javascript or image files there are helper
 methods for each of these asset types:
@@ -147,19 +140,12 @@ $this->Url->css('app.css', ['timestamp' => 'force']);
 $this->Url->css('app.css', ['timestamp' => false]);
 ```
 
-<div class="versionadded">
-
-3.2.4
+::: info Added in version 3.2.4
 The asset helper methods were added in 3.2.4.
-
-</div>
-
-<div class="versionadded">
-
-3.6.0
+:::
+::: info Added in version 3.6.0
 The `timestamp` option was added to asset helper methods.
-
-</div>
+:::
 
 For further information check
 [Router::url](https://api.cakephp.org/3.x/class-Cake.Routing.Router.html#_url)

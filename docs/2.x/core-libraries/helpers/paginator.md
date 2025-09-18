@@ -30,13 +30,9 @@ Accepted keys for `$options`:
 
 - `lock` Lock direction. Will only use the default direction then, defaults to false.
 
-  <div class="versionadded">
-
-  2.5
-  You can now set the lock option to true in order to lock the sorting direction into the
-  specified direction.
-
-  </div>
+  ::: info Added in version 2.5
+  You can now set the lock option to true in order to lock the sorting direction into thespecified direction.
+  :::
 
 Assuming you are paginating some posts, and are on page one:
 
@@ -170,19 +166,12 @@ include links to the first 2 and last 2 pages in the paged results:
 echo $this->Paginator->numbers(array('first' => 2, 'last' => 2));
 ```
 
-<div class="versionadded">
-
-2.1
+::: info Added in version 2.1
 The `currentClass` option was added in 2.1.
-
-</div>
-
-<div class="versionadded">
-
-2.3
+:::
+::: info Added in version 2.3
 The `currentTag` option was added in 2.3.
-
-</div>
+:::
 
 ## Creating jump links
 
@@ -451,18 +440,12 @@ echo $this->Paginator->counter(array(
 
 `method` PaginatorHelper::**param**(string $key, string $model = null)
 
-<div class="versionadded">
-
-2.4
+::: info Added in version 2.4
 The `param()` method was added in 2.4.
-
-</div>
+:::
 
 `method` PaginatorHelper::**meta**(array $options = array())
 
-<div class="versionadded">
-
-2.6
+::: info Added in version 2.6
 The `meta()` method was added in 2.6.
-
-</div>
+:::

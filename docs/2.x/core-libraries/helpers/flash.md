@@ -2,11 +2,9 @@
 
 `class` **FlashHelper**(View $view, array $config = array())
 
-<div class="versionadded">
-
-2.7.0 in replacement of `SessionHelper::flash()`
-
-</div>
+::: info Added in version 2.7.0
+in replacement of `SessionHelper::flash()`
+:::
 
 FlashHelper provides a way to render flash messages that were set in
 `$_SESSION` by [FlashComponent](../../core-libraries/components/flash).
@@ -55,15 +53,9 @@ $this->Flash->set('The user has been saved.', array(
 > any request or user data in your flash messages, you should escape it
 > with `h` when formatting your messages.
 
-<div class="versionadded">
-
-2.10.0
-
-[Flash](../../core-libraries/components/flash) stacks messages as of 2.10.0. If you set
-multiple flash messages, when you call `render()`, each message will be
-rendered in its own element, in the order the messages were set.
-
-</div>
+::: info Added in version 2.10.0
+stacks messages as of 2.10.0. If you setmultiple flash messages, when you call `render()`, each message will berendered in its own element, in the order the messages were set.
+:::
 
 For more information about the available array options, please refer to the
 [FlashComponent](../../core-libraries/components/flash) section.

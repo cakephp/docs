@@ -512,12 +512,9 @@ I18n::config('_fallback', function ($domain, $locale) {
 });
 ```
 
-<div class="versionadded">
-
-3.4.0
+::: info Added in version 3.4.0
 Replacing the `_fallback` loader was added in 3.4.0
-
-</div>
+:::
 
 ### Plurals and Context in Custom Translators
 

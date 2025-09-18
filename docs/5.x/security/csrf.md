@@ -111,12 +111,9 @@ Should you need to rotate or replace the session CSRF token you can do so with:
 $this->request = SessionCsrfProtectionMiddleware::replaceToken($this->request);
 ```
 
-<div class="versionadded">
-
-4.3.0
+::: info Added in version 4.3.0
 The `replaceToken` method was added.
-
-</div>
+:::
 
 ### Skipping CSRF checks for specific actions
 

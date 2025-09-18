@@ -283,12 +283,9 @@ $this->addBehavior('Tree', [
 ]);
 ```
 
-<div class="versionadded">
-
-4.4.0
+::: info Added in version 4.4.0
 The `cascadeCallbacks` option was added.
-
-</div>
+:::
 
 ## Recovering with custom sort field
 

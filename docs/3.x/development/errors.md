@@ -146,12 +146,9 @@ class ErrorController extends AppController
 This controller would only be used when an error is encountered in a prefixed
 controller, and allows you to define prefix specific logic/templates as needed.
 
-<div class="versionadded">
-
-3.7.0
+::: info Added in version 3.7.0
 Prefixed error controllers were added.
-
-</div>
+:::
 
 ## Change the ExceptionRenderer
 
@@ -381,43 +378,9 @@ exceptions for HTTP methods
 >
 > Used for doing a 403 Forbidden error.
 
-<div class="versionadded">
-
-3.1
-
-InvalidCsrfTokenException has been added.
-
-Used for doing a 403 error caused by an invalid CSRF token.
-
-Used for doing a 404 Not found error.
-
-Used for doing a 405 Method Not Allowed error.
-
-Used for doing a 406 Not Acceptable error.
-
-<div class="versionadded">
-
-3.1.7 NotAcceptableException has been added.
-
-</div>
-
-Used for doing a 409 Conflict error.
-
-<div class="versionadded">
-
-3.1.7 ConflictException has been added.
-
-</div>
-
-Used for doing a 410 Gone error.
-
-<div class="versionadded">
-
-3.1.7 GoneException has been added.
-
-</div>
-
-</div>
+::: info Added in version 3.1
+InvalidCsrfTokenException has been added.Used for doing a 403 error caused by an invalid CSRF token.Used for doing a 404 Not found error.Used for doing a 405 Method Not Allowed error.Used for doing a 406 Not Acceptable error.Used for doing a 409 Conflict error.Used for doing a 410 Gone error.
+:::
 
 For more details on HTTP 4xx error status codes see `2616#section-10.4`.
 
@@ -427,11 +390,9 @@ For more details on HTTP 4xx error status codes see `2616#section-10.4`.
 >
 > Used for doing a 503 Service Unavailable error.
 >
-> <div class="versionadded">
->
-> 3.1.7 Service Unavailable has been added.
->
-> </div>
+> ::: info Added in version 3.1.7
+> Service Unavailable has been added.
+> :::
 
 For more details on HTTP 5xx error status codes see `2616#section-10.5`.
 
@@ -527,11 +488,9 @@ In addition, CakePHP uses the following exceptions:
 > An entity couldn't be saved/deleted while using `Cake\ORM\Table::saveOrFail()` or
 > `Cake\ORM\Table::deleteOrFail()`.
 >
-> <div class="versionadded">
->
-> 3.4.1 PersistenceFailedException has been added.
->
-> </div>
+> ::: info Added in version 3.4.1
+> PersistenceFailedException has been added.
+> :::
 >
 > The requested record could not be found. This will also set HTTP response
 > headers to 404.

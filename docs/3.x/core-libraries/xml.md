@@ -71,11 +71,8 @@ $html = Xml::loadHtml($htmlString, ['return' => 'domdocument']);
 By default entity loading and huge document parsing are disabled. These modes
 can be enabled with the `loadEntities` and `parseHuge` options respectively.
 
-<div class="versionadded">
-
-3.7.0
-
-</div>
+::: info Added in version 3.7.0
+:::
 
 ## Transforming a XML String in Array
 

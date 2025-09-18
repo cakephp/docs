@@ -30,12 +30,9 @@ update your `bootstrap_cli.php` with:
     bin/cake plugin load --cli MyPlugin
     bin/cake plugin unload --cli MyPlugin
 
-<div class="versionadded">
-
-3.4.0
+::: info Added in version 3.4.0
 As of 3.4.0 the `--cli` option is supported
-
-</div>
+:::
 
 ## Unloading Plugins
 

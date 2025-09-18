@@ -109,12 +109,9 @@ If you want to access all the query parameters you can use
 $query = $this->request->getQueryParams();
 ```
 
-<div class="versionadded">
-
-3.4.0
+::: info Added in version 3.4.0
 `getQueryParams()` and `getQuery()` were added in 3.4.0
-
-</div>
+:::
 
 ### Request Body Data
 
@@ -178,12 +175,9 @@ enable this behavior, set the configuration value `App.uploadedFilesAsObjects` t
 In the above example, `$attachment` would then hold an object, in the current implementation it would by default be an
 instance of `\Zend\Diactoros\UploadedFile`.
 
-<div class="versionadded">
-
-3.9.0
+::: info Added in version 3.9.0
 Support for uploaded files as objects in the request data was added in version 3.9.0
-
-</div>
+:::
 
 Furthermore uploaded files can be accessed as objects separately from the request data via the
 `Cake\Http\ServerRequest::getUploadedFile()` and
@@ -292,12 +286,9 @@ To access all the environment variables in a request use `getServerParams()`:
 $env = $this->request->getServerParams();
 ```
 
-<div class="versionadded">
-
-3.4.0
+::: info Added in version 3.4.0
 `getServerParams()` was added in 3.4.0
-
-</div>
+:::
 
 ### XML or JSON Data
 
@@ -455,12 +446,9 @@ There are several built-in detectors that you can use:
 - `is('xml')` Check to see whether the request has 'xml' extension and accept
   'application/xml' or 'text/xml' mimetype.
 
-<div class="versionadded">
-
-3.3.0
+::: info Added in version 3.3.0
 Detectors can take additional parameters as of 3.3.0.
-
-</div>
+:::
 
 `ServerRequest` also includes methods like
 `Cake\Http\ServerRequest::domain()`,
@@ -601,12 +589,9 @@ After proxies are trusted `clientIp()` will use the first IP address in the
 `X-Forwarded-For` header providing it is the only value that isn't from a trusted
 proxy.
 
-<div class="versionadded">
-
-3.7.0
+::: info Added in version 3.7.0
 `setTrustedProxies()` was added.
-
-</div>
+:::
 
 ### Checking Accept Headers
 
@@ -667,12 +652,9 @@ $cookies = $this->request->getCookieCollection()
 See the `Cake\Http\Cookie\CookieCollection` documentation for how
 to work with cookie collection.
 
-<div class="versionadded">
-
-3.5.0
+::: info Added in version 3.5.0
 `ServerRequest::getCookieCollection()` was added in 3.5.0
-
-</div>
+:::
 
 <div class="index">
 
@@ -867,12 +849,9 @@ $response = $response->withType('application/json')
     ->withStringBody(json_encode(['Foo' => 'bar']));
 ```
 
-<div class="versionadded">
-
-3.4.3
+::: info Added in version 3.4.3
 `withStringBody()` was added in 3.4.3
-
-</div>
+:::
 
 `method` Cake\\Http\\Response::**withBody**($body)
 
@@ -1220,12 +1199,9 @@ criteria are met:
 1.  The request has an `Origin` header.
 2.  The request's `Origin` value matches one of the allowed Origin values.
 
-<div class="versionadded">
-
-3.2
+::: info Added in version 3.2
 The `CorsBuilder` was added in 3.2
-
-</div>
+:::
 
 ## Common Mistakes with Immutable Responses
 
@@ -1324,12 +1300,9 @@ $response = $this->response->withCookieCollection($cookies);
 Cookies set to responses can be encrypted using the
 [Encrypted Cookie Middleware](../controllers/middleware#encrypted-cookie-middleware).
 
-<div class="versionadded">
-
-3.8.0
+::: info Added in version 3.8.0
 `Response::withCookieCollection()` was added.
-
-</div>
+:::
 
 ### Reading Cookies
 
@@ -1363,9 +1336,6 @@ $cookie->isHttpOnly();
 $cookie->isSecure();
 ```
 
-<div class="versionadded">
-
-3.5.0
+::: info Added in version 3.5.0
 `CookieCollection` and `Cookie` were added in 3.5.0.
-
-</div>
+:::

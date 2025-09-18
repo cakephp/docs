@@ -347,12 +347,9 @@ $chunked = $collection->chunkWithKeys(2)->toList();
 ]
 ```
 
-<div class="versionadded">
-
-3.4.0
+::: info Added in version 3.4.0
 `chunkWithKeys()` was added in 3.4.0
-
-</div>
+:::
 
 ## Filtering
 
@@ -535,11 +532,8 @@ $items = [
 $average = (new Collection($items))->avg('invoice.total');
 ```
 
-<div class="versionadded">
-
-3.5.0
-
-</div>
+::: info Added in version 3.5.0
+:::
 
 `method` Cake\\Collection\\Collection::**median**($matcher = null)
 
@@ -559,11 +553,8 @@ $items = [
 $median = (new Collection($items))->median('invoice.total');
 ```
 
-<div class="versionadded">
-
-3.5.0
-
-</div>
+::: info Added in version 3.5.0
+:::
 
 ### Grouping and Counting
 
@@ -952,12 +943,9 @@ $transpose = (new Collection($items))->transpose()->toList();
 ]
 ```
 
-<div class="versionadded">
-
-3.3.0
+::: info Added in version 3.3.0
 `Collection::transpose()` was added in 3.3.0.
-
-</div>
+:::
 
 ### Withdrawing Elements
 
@@ -1057,12 +1045,9 @@ $cakephpTweets = new Collection($tweets);
 $myTimeline = $cakephpTweets->appendItem($newTweet, 99);
 ```
 
-<div class="versionadded">
-
-3.6.0
+::: info Added in version 3.6.0
 appendItem() was added.
-
-</div>
+:::
 
 `method` Cake\\Collection\\Collection::**prepend**(array|Traversable $items)
 
@@ -1074,12 +1059,9 @@ $cakephpTweets = new Collection($tweets);
 $myTimeline = $cakephpTweets->prepend($phpTweets);
 ```
 
-<div class="versionadded">
-
-3.6.0
+::: info Added in version 3.6.0
 prepend() was added.
-
-</div>
+:::
 
 `method` Cake\\Collection\\Collection::**prependItem**($value, $key)
 
@@ -1092,12 +1074,9 @@ $cakephpTweets = new Collection($tweets);
 $myTimeline = $cakephpTweets->prependItem($newTweet, 99);
 ```
 
-<div class="versionadded">
-
-3.6.0
+::: info Added in version 3.6.0
 prependItem() was added.
-
-</div>
+:::
 
 > [!WARNING]
 > When appending from different sources, you can expect some keys from both
@@ -1329,12 +1308,9 @@ $olderThan30 = ...
 Now, when both collections are iterated, they will only call the
 extracting operation once.
 
-<div class="versionadded">
-
-3.5.0
+::: info Added in version 3.5.0
 Collections initialized with an array are no longer iterated lazily in order to improve performance.
-
-</div>
+:::
 
 ### Making Collections Rewindable
 

@@ -89,11 +89,8 @@ record to the database.
 This method can be used to reset model state and clear out any unsaved data and
 validation errors.
 
-<div class="versionadded">
-
-2.4
-
-</div>
+::: info Added in version 2.4
+:::
 
 ## Model::save(array \$data = null, boolean \$validate = true, array \$fieldList = array())
 

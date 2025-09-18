@@ -261,8 +261,5 @@ You may "unlock" these actions by listing them in `$this->Security->unlockedActi
 `beforeFilter`. The `unlockedActions` property will **not** effect other
 features of `SecurityComponent`.
 
-<div class="versionadded">
-
-2.3
-
-</div>
+::: info Added in version 2.3
+:::

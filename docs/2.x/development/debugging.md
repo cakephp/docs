@@ -185,11 +185,8 @@ set to a value greater than 0.
 >
 > Get the type of a variable. Objects will return their class name
 >
-> <div class="versionadded">
->
-> 2.1
->
-> </div>
+> ::: info Added in version 2.1
+> :::
 
 ## Using Logging to debug
 

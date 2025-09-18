@@ -191,11 +191,8 @@ $table->updateCounterCache('Articles', 200);
 $table->updateCounterCache('Articles', page: 1);
 ```
 
-<div class="versionadded">
-
-5.2.0
-
-</div>
+::: info Added in version 5.2.0
+:::
 
 > [!NOTE]
 > This methods won't update the counter cache values for fields which are

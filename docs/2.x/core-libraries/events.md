@@ -1,10 +1,7 @@
 # Events System
 
-<div class="versionadded">
-
-2.1
-
-</div>
+::: info Added in version 2.1
+:::
 
 Creating maintainable applications is both a science and an art. It is
 well-known that a key for having good quality code is making your objects

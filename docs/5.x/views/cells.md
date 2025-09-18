@@ -317,8 +317,5 @@ Cells trigger the following events around the cell action:
 - `Cell.beforeAction`
 - `Cell.afterAction`
 
-<div class="versionadded">
-
-5.1.0
-
-</div>
+::: info Added in version 5.1.0
+:::

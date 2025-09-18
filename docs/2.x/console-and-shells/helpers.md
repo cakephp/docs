@@ -1,11 +1,8 @@
 # Shell Helpers
 
-<div class="versionadded">
-
-2.8
+::: info Added in version 2.8
 Shell Helpers were added in 2.8.0
-
-</div>
+:::
 
 Shell Helpers let you package up complex output generation code. Shell
 Helpers can be accessed and used from any shell or task:

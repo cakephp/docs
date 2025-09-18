@@ -351,13 +351,9 @@ $http = new Client([
 $http->addCookie(new Cookie('session', 'abc123'));
 ```
 
-<div class="versionadded">
-
-3.5.0
+::: info Added in version 3.5.0
 `addCookie()` was added in 3.5.0
-
-</div>
-
+:::
 <a id="httpclient-response-objects"></a>
 
 ## Response Objects

@@ -100,12 +100,9 @@ class Post extends AppModel {
 }
 ```
 
-<div class="versionadded">
-
-2.10.0
+::: info Added in version 2.10.0
 The `joinType` option was added in 2.10.0
-
-</div>
+:::
 
 ## Conclusion
 

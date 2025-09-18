@@ -109,29 +109,20 @@ support the following configuration keys.
   If you want to use this option, you'll need to make sure your model has the
   containable behavior attached.
 
-  <div class="versionadded">
-
-  2.2
-
-  </div>
+  ::: info Added in version 2.2
+  :::
 
 - `passwordHasher` Password hasher class. Defaults to `Simple`.
 
-  <div class="versionadded">
-
-  2.4
-
-  </div>
+  ::: info Added in version 2.4
+  :::
 
 - `userFields` The list of fields to fetch from the `userModel`. This option
   is helpful when you have a wide user table and do not need all the columns in
   the session. By default all fields are fetched.
 
-  <div class="versionadded">
-
-  2.6
-
-  </div>
+  ::: info Added in version 2.6
+  :::
 
 To configure different fields for user in `$components` array:
 
@@ -933,11 +924,8 @@ and authentication mechanics in CakePHP.
 
 `method` AuthComponent::**redirectUrl**($url = null)
 
-<div class="versionadded">
-
-2.3
-
-</div>
+::: info Added in version 2.3
+:::
 
 `method` AuthComponent::**shutdown**($Controller)
 

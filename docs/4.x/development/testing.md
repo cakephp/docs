@@ -548,13 +548,9 @@ use Cake\TestSuite\Fixture\SchemaLoader;
 At the beginning of each test run `SchemaLoader` will drop all tables in the
 connection and rebuild tables based on the provided schema file.
 
-<div class="versionadded">
-
-4.3.0
+::: info Added in version 4.3.0
 SchemaLoader was added.
-
-</div>
-
+:::
 <a id="fixture-state-management"></a>
 
 ### Fixture State Managers
@@ -586,11 +582,8 @@ class ArticlesTableTest extends TestCase
 }
 ```
 
-<div class="versionadded">
-
-4.3.0
-
-</div>
+::: info Added in version 4.3.0
+:::
 
 ### Creating Fixtures
 

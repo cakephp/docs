@@ -504,12 +504,9 @@ use Cake\Database\Type;
 Type::map('json', 'App\Database\Type\JsonType');
 ```
 
-<div class="versionadded">
-
-3.3.0
+::: info Added in version 3.3.0
 The JsonType described in this example was added to the core.
-
-</div>
+:::
 
 We can then overload the reflected schema data to use our new type, and
 CakePHP's database layer will automatically convert our JSON data when creating
@@ -534,12 +531,9 @@ class WidgetsTable extends Table
 
 ### Mapping Custom Datatypes to SQL Expressions
 
-<div class="versionadded">
-
-3.3.0
+::: info Added in version 3.3.0
 Support for mapping custom data types to SQL expressions was added in 3.3.0.
-
-</div>
+:::
 
 The previous example maps a custom datatype for a 'json' column type which is
 easily represented as a string in a SQL statement. Complex SQL data
@@ -651,12 +645,9 @@ to our table class](../orm/saving-data#saving-complex-types).
 
 ### Enabling Immutable DateTime Objects
 
-<div class="versionadded">
-
-3.2
+::: info Added in version 3.2
 Immutable date/time objects were added in 3.2.
-
-</div>
+:::
 
 Because Date/Time objects are easily mutated in place, CakePHP allows you to
 enable immutable value objects. This is best done in your application's

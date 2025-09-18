@@ -111,12 +111,9 @@ $isValid = $form->validate($this->request->getData());
 $isValid = $form->validate($this->request->getData(), 'update');
 ```
 
-<div class="versionadded">
-
-4.3.0
+::: info Added in version 4.3.0
 Using validators other than `default` was added.
-
-</div>
+:::
 
 ## Setting Form Values
 
@@ -171,12 +168,9 @@ $contact->set([
 ]);
 ```
 
-<div class="versionadded">
-
-4.1.0
+::: info Added in version 4.1.0
 The `set()` method was added.
-
-</div>
+:::
 
 ## Getting Form Errors
 

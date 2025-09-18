@@ -1170,13 +1170,9 @@ $this->belongsToMany('Courses')
 When a junction property is set, the new junction property name must be used to
 manipulate entities, marshall request data, and create form fields.
 
-<div class="versionadded">
-
-5.2.0
+::: info Added in version 5.2.0
 Custom junction property names were added.
-
-</div>
-
+:::
 <a id="saving-complex-types"></a>
 
 ### Saving Complex Types
@@ -1302,12 +1298,9 @@ options for this method are:
 - `defaults` Set to `false` to not set `$search` properties into the
   created entity.
 
-<div class="versionadded">
-
-5.2.0
+::: info Added in version 5.2.0
 Support for `$callback` as an array of data was added.
-
-</div>
+:::
 
 ## Creating with an existing primary key
 

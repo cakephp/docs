@@ -228,13 +228,9 @@ class ErrorController extends AppController
 }
 ```
 
-<div class="versionadded">
-
-5.2.0
+::: info Added in version 5.2.0
 Exception specific controller methods and templates were added.
-
-</div>
-
+:::
 <a id="custom-exceptionrenderer"></a>
 
 ## Custom ExceptionRenderer

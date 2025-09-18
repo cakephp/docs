@@ -123,12 +123,9 @@ echo $this->Url->buildFromPath('MyBackend.Admin/Articles::view', [3]);
 // outputs: /admin/my-backend/articles/view/3
 ```
 
-<div class="versionadded">
-
-4.1.0
+::: info Added in version 4.1.0
 `buildFromPath()` was added.
-
-</div>
+:::
 
 URL with asset timestamp wrapped by a `<link rel="preload"/>`, here pre-loading
 a font. Note: The file must exist and `Configure::read('Asset.timestamp')`
@@ -177,12 +174,9 @@ $this->loadHelper('Url', ['assetUrlClassName' => AppAsset::class]);
 When using the `assetUrlClassName` you must implement the same methods as
 `Cake\Routing\Asset` does.
 
-<div class="versionadded">
-
-4.2.0
+::: info Added in version 4.2.0
 The `assetUrlClassName` option was added.
-
-</div>
+:::
 
 For further information check
 [Router::url](https://api.cakephp.org/4.x/class-Cake.Routing.Router.html#_url)

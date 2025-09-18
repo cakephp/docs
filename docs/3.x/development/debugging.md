@@ -21,27 +21,17 @@ default.
 Output from this function is only shown if the core `$debug` variable
 has been set to `true`.
 
-<div class="versionadded">
-
-3.3.0
-
-Calling this method will return passed `$var`, so that you can, for instance,
-place it in return statements, for example:
-
-    return debug($data); // will return $data in any case.
-
-</div>
+::: info Added in version 3.3.0
+Calling this method will return passed `$var`, so that you can, for instance,place it in return statements, for example:
+:::
 
 Also see `dd()`, `pr()` and `pj()`.
 
 The `stackTrace()` function is available globally, and allows you to output
 a stack trace wherever the function is called.
 
-<div class="versionadded">
-
-3.1
-
-</div>
+::: info Added in version 3.1
+:::
 
 If you have [Psysh](https://psysh.org/) installed you can use this
 function in CLI enviroments to open an interactive console with the current
@@ -105,13 +95,9 @@ Debugger::setOutputMask([
 ]);
 ```
 
-<div class="versionadded">
-
-3.4.0
-
+::: info Added in version 3.4.0
 Output masking was added in 3.4.0
-
-</div>
+:::
 
 ## Logging With Stack Traces
 

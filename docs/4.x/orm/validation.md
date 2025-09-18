@@ -399,13 +399,9 @@ $rules->add($rules->isUnique(
 ));
 ```
 
-<div class="versionadded">
-
-4.2.0
-The `allowMultipleNulls` option was added. This was previously in 3.x, but
-it is now disabled by default.
-
-</div>
+::: info Added in version 4.2.0
+The `allowMultipleNulls` option was added. This was previously in 3.x, butit is now disabled by default.
+:::
 
 ### Foreign Key Rules
 
@@ -508,11 +504,8 @@ $rules->addDelete($rules->isNotLinkedTo(
 ));
 ```
 
-<div class="versionadded">
-
-4.0.0
-
-</div>
+::: info Added in version 4.0.0
+:::
 
 ### Using Entity Methods as Rules
 

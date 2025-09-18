@@ -21,12 +21,9 @@ class UsersController extends AppController {
 }
 ```
 
-<div class="versionadded">
-
-2.1
+::: info Added in version 2.1
 `CakeNumber` has been factored out from `NumberHelper`.
-
-</div>
+:::
 
 All of these functions return the formatted number; They do not
 automatically echo the output into the view.

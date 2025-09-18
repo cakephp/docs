@@ -613,12 +613,9 @@ class ArticlesFixture extends TestFixture
 The `strictFields` mode can be useful in catching typos or when you want to
 enforce stricter maintenance of test data.
 
-<div class="versionadded">
-
-5.2.0
+::: info Added in version 5.2.0
 `TestFixture::$strictFields` was added.
-
-</div>
+:::
 
 ### Dynamic Data
 
@@ -1177,12 +1174,9 @@ $this->replaceRequest([
 
 The state set by these helper methods is reset in the `tearDown()` method.
 
-<div class="versionadded">
-
-5.1.0
+::: info Added in version 5.1.0
 `replaceRequest()` was added.
-
-</div>
+:::
 
 ### Testing Actions Protected by CsrfProtectionMiddleware or FormProtectionComponent
 

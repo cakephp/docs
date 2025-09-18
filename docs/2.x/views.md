@@ -55,11 +55,8 @@ chapter:
 
 ### Extending Views
 
-<div class="versionadded">
-
-2.1
-
-</div>
+::: info Added in version 2.1
+:::
 
 View extending allows you to wrap one view in another. Combining this with
 [view blocks](#view-blocks) gives you a powerful way to keep your views
@@ -138,11 +135,8 @@ as the `content` block.
 
 ## Using view blocks
 
-<div class="versionadded">
-
-2.1
-
-</div>
+::: info Added in version 2.1
+:::
 
 View blocks replace `$scripts_for_layout` and provide a flexible API that
 allows you to define slots or blocks in your views/layouts that will be defined
@@ -210,12 +204,9 @@ In the above example, the `navbar` block will only contain the content added
 in the first section. Since the block was defined in the child view, the
 default content with the `<p>` tag will be discarded.
 
-<div class="versionadded">
-
-2.3
+::: info Added in version 2.3
 `startIfEmpty()` and `prepend()` were added in 2.3
-
-</div>
+:::
 
 > [!NOTE]
 > You should avoid using `content` as a block name. This is used by CakePHP
@@ -223,11 +214,8 @@ default content with the `<p>` tag will be discarded.
 
 ### Displaying blocks
 
-<div class="versionadded">
-
-2.1
-
-</div>
+::: info Added in version 2.1
+:::
 
 You can display blocks using the `fetch()` method. `fetch()` will safely
 output a block, returning '' if a block does not exist:
@@ -270,11 +258,8 @@ The `$default` argument was added in 2.3.
 
 ### Using blocks for script and CSS files
 
-<div class="versionadded">
-
-2.1
-
-</div>
+::: info Added in version 2.1
+:::
 
 Blocks replace the deprecated `$scripts_for_layout` layout variable. Instead
 you should use blocks. The `HtmlHelper` ties into view blocks, and
@@ -434,11 +419,8 @@ and easy way to serve up content that isn't text/html.
 
 ### Using layouts from plugins
 
-<div class="versionadded">
-
-2.1
-
-</div>
+::: info Added in version 2.1
+:::
 
 If you want to use a layout that exists in a plugin, you can use
 `plugin syntax`. For example, to use the contact layout from the

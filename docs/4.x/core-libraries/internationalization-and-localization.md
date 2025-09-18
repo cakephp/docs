@@ -683,12 +683,9 @@ class DatetimeMiddleware implements MiddlewareInterface
 }
 ```
 
-<div class="versionadded">
-
-4.3.0
+::: info Added in version 4.3.0
 The `setUserTimezone()` method was added.
-
-</div>
+:::
 
 ## Automatically Choosing the Locale Based on Request Data
 

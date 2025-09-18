@@ -139,13 +139,9 @@ Router::connect(
 The incoming URL of `/pages/the-example-/-and-proof` would result in a single
 passed argument of `the-example-/-and-proof`.
 
-<div class="versionadded">
-
-2.1
-
+::: info Added in version 2.1
 The trailing double star was added in 2.1.
-
-</div>
+:::
 
 You can use the second parameter of `Router::connect()`
 to provide any routing parameters that are composed of the default values

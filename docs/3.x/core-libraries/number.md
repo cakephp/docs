@@ -87,12 +87,9 @@ accounting format you should set the currency format:
 Number::setDefaultCurrencyFormat(Number::FORMAT_CURRENCY_ACCOUNTING);
 ```
 
-<div class="versionadded">
-
-3.9.0
+::: info Added in version 3.9.0
 Formatting currency as accounting values was added.
-
-</div>
+:::
 
 ## Setting the Default Currency
 

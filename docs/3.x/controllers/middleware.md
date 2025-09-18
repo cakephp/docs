@@ -329,12 +329,9 @@ public function middleware($middlewareQueue)
 The above would use the `routing` cache engine to store the generated route
 collection.
 
-<div class="versionadded">
-
-3.6.0
+::: info Added in version 3.6.0
 Route caching was added in 3.6.0
-
-</div>
+:::
 
 ## Content Security Policy Header Middleware
 
@@ -365,13 +362,9 @@ $csp = new CspMiddleware([
 $middlewareQueue->add($csp);
 ```
 
-<div class="versionadded">
-
-3.9.0
+::: info Added in version 3.9.0
 CspMiddleware was added.
-
-</div>
-
+:::
 <a id="security-header-middleware"></a>
 
 ## Security Header Middleware
@@ -404,13 +397,9 @@ $securityHeaders
 $middlewareQueue->add($securityHeaders);
 ```
 
-<div class="versionadded">
-
-3.5.0
+::: info Added in version 3.5.0
 The `SecurityHeadersMiddleware` was added in 3.5.0
-
-</div>
-
+:::
 <a id="encrypted-cookie-middleware"></a>
 
 ## Encrypted Cookie Middleware
@@ -439,13 +428,9 @@ $middlewareQueue->add($cookies);
 The encryption algorithms and padding style used by the cookie middleware are
 backwards compatible with `CookieComponent` from earlier versions of CakePHP.
 
-<div class="versionadded">
-
-3.5.0
+::: info Added in version 3.5.0
 The `EncryptedCookieMiddleware` was added in 3.5.0
-
-</div>
-
+:::
 <a id="csrf-middleware"></a>
 
 ## Cross Site Request Forgery (CSRF) Middleware
@@ -539,12 +524,9 @@ public function middleware($middlewareQueue) {
 }
 ```
 
-<div class="versionadded">
-
-3.5.0
+::: info Added in version 3.5.0
 The `CsrfProtectionMiddleware` was added in 3.5.0
-
-</div>
+:::
 
 > [!NOTE]
 > You should apply the CSRF protection middleware only for URLs which handle stateful
@@ -602,9 +584,6 @@ $bodies->addParser(['text/csv'], function ($body) {
 });
 ```
 
-<div class="versionadded">
-
-3.6.0
+::: info Added in version 3.6.0
 The `BodyParserMiddleware` was added in 3.6.0
-
-</div>
+:::

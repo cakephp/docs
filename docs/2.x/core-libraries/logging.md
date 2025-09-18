@@ -76,11 +76,8 @@ own types by using them when you call `CakeLog::write`.
 
 <div id="file-log">
 
-<div class="versionadded">
-
-2.4
-
-</div>
+::: info Added in version 2.4
+:::
 
 </div>
 
@@ -179,11 +176,8 @@ CakeLog::config('custom_path', array(
 
 ## Logging to Syslog
 
-<div class="versionadded">
-
-2.4
-
-</div>
+::: info Added in version 2.4
+:::
 
 In production environments it is highly recommended that you setup your system to
 use syslog instead of the files logger. This will perform much better as all
@@ -263,11 +257,8 @@ CakeLog::config('default', array(
 
 ## Logging Scopes
 
-<div class="versionadded">
-
-2.2
-
-</div>
+::: info Added in version 2.2
+:::
 
 Often times you'll want to configure different logging behavior for different
 subsystems or parts of your application. Take for example an e-commerce shop;
@@ -311,91 +302,14 @@ In order for scopes to work, you **must** do a few things:
 
 `class` **CakeLog**
 
-<div class="versionadded">
-
-2.2 Log levels and scopes
-
-Call this method without arguments, eg: `CakeLog::levels()` to
-obtain current level configuration.
-
-To append the additional levels 'user0' and 'user1' to the default
-log levels use:
-
-``` css
-CakeLog::levels(array('user0', 'user1'));
-// or
-CakeLog::levels(array('user0', 'user1'), true);
-```
-
-Calling `CakeLog::levels()` will result in:
-
-    array(
-        0 => 'emergency',
-        1 => 'alert',
-        // ...
-        8 => 'user0',
-        9 => 'user1',
-    );
-
-To set/replace an existing configuration, pass an array with the second
-argument set to false:
-
-``` css
-CakeLog::levels(array('user0', 'user1'), false);
-```
-
-Calling `CakeLog::levels()` will result in:
-
-    array(
-        0 => 'user0',
-        1 => 'user1',
-    );
-
-returns  
-An array of the default log levels values.
-
-Resets log levels to their original values:
-
-    array(
-        'emergency' => LOG_EMERG,
-        'alert'     => LOG_ALERT,
-        'critical'  => LOG_CRIT,
-        'error'     => LOG_ERR,
-        'warning'   => LOG_WARNING,
-        'notice'    => LOG_NOTICE,
-        'info'      => LOG_INFO,
-        'debug'     => LOG_DEBUG,
-    );
-
-returns  
-boolean
-
-Checks whether `$streamName` has been enabled.
-
-returns  
-void
-
-Enable the stream `$streamName`.
-
-returns  
-void
-
-Disable the stream `$streamName`.
-
-returns  
-Instance of `BaseLog` or `false` if not found.
-
-Gets `$streamName` from the active streams.
-
-</div>
+::: info Added in version 2.2
+Log levels and scopesCall this method without arguments, eg: `CakeLog::levels()` toobtain current level configuration.To append the additional levels 'user0' and 'user1' to the defaultlog levels use:Calling `CakeLog::levels()` will result in:To set/replace an existing configuration, pass an array with the secondargument set to false:Calling `CakeLog::levels()` will result in:Resets log levels to their original values:Checks whether `$streamName` has been enabled.Enable the stream `$streamName`.Disable the stream `$streamName`.Gets `$streamName` from the active streams.
+:::
 
 ### Convenience methods
 
-<div class="versionadded">
-
-2.2
-
-</div>
+::: info Added in version 2.2
+:::
 
 The following convenience methods were added to log `$message` with the
 appropriate log level.

@@ -2,11 +2,8 @@
 
 `class` **Hash**
 
-<div class="versionadded">
-
-2.2
-
-</div>
+::: info Added in version 2.2
+:::
 
 Array management, if done right, can be a very powerful and useful
 tool for building smarter, more optimized code. CakePHP offers a
@@ -729,13 +726,9 @@ can be one of the following values:
   sort `foo10` below `foo2` as an example. Natural sorting
   requires PHP 5.4 or greater.
 
-<div class="versionadded">
-
-2.8
-The `$type` option now supports an array and the `ignoreCase` option
-enabled case-insensitive sorting.
-
-</div>
+::: info Added in version 2.8
+The `$type` option now supports an array and the `ignoreCase` optionenabled case-insensitive sorting.
+:::
 
 rtype  
 array

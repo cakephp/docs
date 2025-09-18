@@ -111,12 +111,9 @@ $io->helper('Table')->output($data);
 +----------+-------------+
 ```
 
-<div class="versionadded">
-
-4.2.0
+::: info Added in version 4.2.0
 The `<text-right>` formatting tag was added in 4.2.
-
-</div>
+:::
 
 ### Progress Helper
 

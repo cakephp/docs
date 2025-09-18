@@ -207,12 +207,9 @@ $this->viewBuilder()
 The above shows how you can load custom helpers, set the theme and use a custom
 view class.
 
-<div class="versionadded">
-
-3.1
+::: info Added in version 3.1
 ViewBuilder was added in 3.1
-
-</div>
+:::
 
 ### Rendering a View
 

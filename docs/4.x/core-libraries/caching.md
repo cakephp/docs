@@ -173,12 +173,9 @@ RedisEngine uses the following engine specific options:
 - `ssl_ca` The ssl certificate authority file for TLS connections.
 - `ssl_cert` The ssl certificate used for TLS connections.
 
-<div class="versionadded">
-
-4.6.0
+::: info Added in version 4.6.0
 TLS connections were added in 4.6
-
-</div>
+:::
 
 ### MemcacheEngine Options
 

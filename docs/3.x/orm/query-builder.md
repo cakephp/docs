@@ -293,12 +293,9 @@ $query
     ->select($articlesTable); // Select all fields from articles
 ```
 
-<div class="versionadded">
-
-3.1
+::: info Added in version 3.1
 Passing a table object to select() was added in 3.1.
-
-</div>
+:::
 
 If you want to select all but a few fields on a table, you can use
 `selectAllExcept()`:
@@ -313,13 +310,9 @@ $query->selectAllExcept($articlesTable, ['published']);
 You can also pass an `Association` object when working with contained
 associations.
 
-<div class="versionadded">
-
-3.6.0
+::: info Added in version 3.6.0
 The `selectAllExcept()` method was added.
-
-</div>
-
+:::
 <a id="using-sql-functions"></a>
 
 ### Using SQL Functions
@@ -378,21 +371,12 @@ Add the time unit to the date expression.
 `dayOfWeek()`  
 Returns a FunctionExpression representing a call to SQL WEEKDAY function.
 
-<div class="versionadded">
-
-3.1
-
+::: info Added in version 3.1
 `extract()`, `dateAdd()` and `dayOfWeek()` methods have been added.
-
-</div>
-
-<div class="versionadded">
-
-3.7
-
+:::
+::: info Added in version 3.7
 `rand()` was added.
-
-</div>
+:::
 
 #### Function Arguments
 
@@ -509,12 +493,9 @@ $query->orderAsc(function (QueryExpression $exp, Query $query) {
 });
 ```
 
-<div class="versionadded">
-
-3.9.0
+::: info Added in version 3.9.0
 Using a closure with `orderDesc` and `orderAsc` was added in 3.9.0.
-
-</div>
+:::
 
 ### Limiting Results
 
@@ -1114,13 +1095,9 @@ $query->select(['Customers.customer_name', 'total_orders' => $query->func()->cou
 > To prevent SQL injections, Identifier expressions should never have
 > untrusted data passed into them.
 
-<div class="versionadded">
-
-3.6.0
-
+::: info Added in version 3.6.0
 `Query::identifier()` was added in 3.6.0
-
-</div>
+:::
 
 ### Automatically Creating IN Clauses
 
@@ -1542,12 +1519,9 @@ $query->select(['id', 'title'])
     }]);
 ```
 
-<div class="versionadded">
-
-3.1
+::: info Added in version 3.1
 Selecting columns via an association object was added in 3.1
-
-</div>
+:::
 
 ### Sorting Contained Associations
 
@@ -1676,12 +1650,9 @@ $query = $articles->find()
 > This will produce multiple `INNER JOIN` statements and might not create the query you
 > expected.
 
-<div class="versionadded">
-
-3.1
-<Query::innerJoinWith>() was added in 3.1
-
-</div>
+::: info Added in version 3.1
+() was added in 3.1
+:::
 
 ### Using notMatching
 
@@ -1746,12 +1717,9 @@ $query = $articlesTable
 Keep in mind that contrary to the `matching()` function, `notMatching()`
 will not add any data to the `_matchingData` property in the results.
 
-<div class="versionadded">
-
-3.1
-<Query::notMatching>() was added in 3.1
-
-</div>
+::: info Added in version 3.1
+() was added in 3.1
+:::
 
 ### Using leftJoinWith
 
@@ -1789,13 +1757,9 @@ $query = $authorsTable
 This function will not load any columns from the specified associations into the
 result set.
 
-<div class="versionadded">
-
-3.1
-<Query::leftJoinWith>() was added in 3.1
-
-</div>
-
+::: info Added in version 3.1
+() was added in 3.1
+:::
 <a id="adding-joins"></a>
 
 ### Adding Joins

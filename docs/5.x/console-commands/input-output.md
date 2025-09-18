@@ -175,12 +175,9 @@ $io->helper('Banner')
     ->output(['Work complete']);
 ```
 
-<div class="versionadded">
-
-5.1.0
+::: info Added in version 5.1.0
 The `BannerHelper` was added in 5.1
-
-</div>
+:::
 
 ## Getting User Input
 

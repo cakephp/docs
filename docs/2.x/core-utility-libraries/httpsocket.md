@@ -147,12 +147,9 @@ $socket = new HttpSocket(array(
 Would allow self-signed certificates for all requests made with the created
 socket.
 
-<div class="versionadded">
-
-2.3
+::: info Added in version 2.3
 SSL certificate validation was added in 2.3.
-
-</div>
+:::
 
 ### Creating a custom response class
 

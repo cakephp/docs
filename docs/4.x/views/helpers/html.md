@@ -432,12 +432,9 @@ echo $this->Html->linkFromPath('View', 'MyBackend.Admin/Articles::view', [3]);
 // outputs: <a href="/admin/my-backend/articles/view/3">View</a>
 ```
 
-<div class="versionadded">
-
-4.1.0
+::: info Added in version 4.1.0
 `linkFromPath()` was added.
-
-</div>
+:::
 
 ### Linking to Videos and Audio Files
 

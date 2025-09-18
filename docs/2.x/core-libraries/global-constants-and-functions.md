@@ -231,11 +231,8 @@ Most of the following constants refer to paths in your application.
 > >
 > > Path to the app/Config directory.
 > >
-> > <div class="versionadded">
-> >
-> > 2.10.0
-> >
-> > </div>
+> > ::: info Added in version 2.10.0
+> > :::
 >
 > Path to the root directory with ending directory slash.
 >

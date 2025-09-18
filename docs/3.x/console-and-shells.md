@@ -148,12 +148,9 @@ your plugins.
 > When adding multiple commands that use the same Command class, the `help`
 > command will display the shortest option.
 
-<div class="versionadded">
-
-3.5.0
+::: info Added in version 3.5.0
 The `console` hook was added.
-
-</div>
+:::
 
 ## Renaming Commands
 

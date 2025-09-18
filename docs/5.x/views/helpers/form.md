@@ -2285,12 +2285,9 @@ Creates an HTML link, but accesses the URL using the method you specify
 ?>
 ```
 
-<div class="versionadded">
-
-5.2.0
+::: info Added in version 5.2.0
 The `deleteLink` method was added.
-
-</div>
+:::
 
 ## Customizing the Templates FormHelper Uses
 

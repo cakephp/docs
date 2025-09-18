@@ -20,8 +20,5 @@ bin/cake counter_cache --assoc Comments --limit 100 --page 2 Articles
 When `limit` and `page` are used, records will be ordered by the table's
 primary key.
 
-<div class="versionadded">
-
-5.2.0
-
-</div>
+::: info Added in version 5.2.0
+:::

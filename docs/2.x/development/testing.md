@@ -770,12 +770,9 @@ public function testSendingEmails() {
 }
 ```
 
-<div class="versionadded">
-
-2.3
+::: info Added in version 2.3
 CakeTestCase::getMockForModel() was added in 2.3.
-
-</div>
+:::
 
 ## Testing Controllers
 

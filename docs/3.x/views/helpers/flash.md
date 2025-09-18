@@ -46,27 +46,17 @@ $this->Flash->set('The user has been saved.', [
 > When building custom flash message templates, be sure to properly HTML
 > encode any user data. CakePHP won't escape flash message parameters for you.
 
-<div class="versionadded">
-
-3.1
-
-The [FlashComponent](../../controllers/components/flash) now
-stacks messages. If you set multiple flash messages, when you call
-`render()`, each message will be rendered in its own elements, in the
-order they were set.
-
-</div>
+::: info Added in version 3.1
+The  nowstacks messages. If you set multiple flash messages, when you call`render()`, each message will be rendered in its own elements, in theorder they were set.
+:::
 
 For more information about the available array options, please refer to the
 [FlashComponent](../../controllers/components/flash) section.
 
 ## Routing Prefix and Flash Messages
 
-<div class="versionadded">
-
-3.0.1
-
-</div>
+::: info Added in version 3.0.1
+:::
 
 If you have a Routing prefix configured, you can now have your Flash elements
 stored in **src/Template/{Prefix}/Element/Flash**. This way, you can have

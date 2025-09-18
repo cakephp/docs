@@ -320,12 +320,9 @@ public function buildMarshalMap($marshaller, $map, $options)
 The `TranslateBehavior` has a non-trivial implementation of this interface
 that you might want to refer to.
 
-<div class="versionadded">
-
-3.3.0
+::: info Added in version 3.3.0
 The ability for behaviors to participate in marshalling was added in 3.3.0
-
-</div>
+:::
 
 ## Removing Loaded Behaviors
 

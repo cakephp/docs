@@ -492,11 +492,8 @@ want to.
 
 ### Adding new validation rules
 
-<div class="versionadded">
-
-2.2
-
-</div>
+::: info Added in version 2.2
+:::
 
 The `ModelValidator` objects allows several ways for adding new fields to the
 set. The first one is using the `add` method:
@@ -558,11 +555,8 @@ $validator['username'] = array(
 
 ### Modifying current validation rules
 
-<div class="versionadded">
-
-2.2
-
-</div>
+::: info Added in version 2.2
+:::
 
 Modifying current validation rules is also possible using the validator object,
 there are several ways in which you can alter current rules, append methods to a
@@ -616,11 +610,8 @@ $validator['username']['unique']->message = 'Name already taken';
 
 ### Removing rules from the set
 
-<div class="versionadded">
-
-2.2
-
-</div>
+::: info Added in version 2.2
+:::
 
 It is possible to both completely remove all rules for a field and to delete a
 single rule in a field's rule set:
@@ -936,12 +927,9 @@ with usage examples.
 > );
 > ```
 >
-> <div class="versionadded">
->
-> 2.3
+> ::: info Added in version 2.3
 > This method was added in 2.3
->
-> </div>
+> :::
 >
 > This rule will ensure that the value is in a given set. It needs an
 > array of values. The field is valid if the field's value matches

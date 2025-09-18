@@ -369,12 +369,9 @@ When enabled all fields will stop validation on the first failing rule instead
 of checking all possible rules. In this case only a single error message will
 appear under the form field.
 
-<div class="versionadded">
-
-The `setStopOnFailure()` method was added in 4.1.6.
-
-</div>
-
+::: info Added in version 4.1.6.
+The `setStopOnFailure()` method was added in
+:::
 <a id="adding-validation-providers"></a>
 
 ### Adding Validation Providers

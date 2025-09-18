@@ -261,13 +261,9 @@ echo $this->Paginator->meta();
 echo $this->Paginator->meta(['first' => true, 'last' => true]);
 ```
 
-<div class="versionadded">
-
-3.4.0
-
+::: info Added in version 3.4.0
 The `first` and `last` options were added in 3.4.0
-
-</div>
+:::
 
 ## Checking the Pagination State
 
@@ -357,12 +353,9 @@ echo $this->Paginator->limitControl([25 => 25, 50 => 50], $user->perPage);
 
 The generated form and control will automatically submit on change.
 
-<div class="versionadded">
-
-3.5.0
+::: info Added in version 3.5.0
 The `limitControl()` method was added in 3.5.0
-
-</div>
+:::
 
 ## Configuring Pagination Options
 
@@ -515,9 +508,6 @@ echo $this->Paginator->sort('title');
 By using the `model` option, `PaginatorHelper` will automatically use the
 `scope` defined in when the query was paginated.
 
-<div class="versionadded">
-
-3.3.0
+::: info Added in version 3.3.0
 Multiple Pagination was added in 3.3.0
-
-</div>
+:::

@@ -617,13 +617,9 @@ as the "geospatial types". CakePHP offers limited support for geospatial
 columns. Currently they can be defined in migrations, read in schema reflection,
 and have values set as text.
 
-<div class="versionadded">
-
-5.1.0
+::: info Added in version 5.1.0
 Geospatial schema types were added.
-
-</div>
-
+:::
 <a id="adding-custom-database-types"></a>
 
 ### Adding Custom Types

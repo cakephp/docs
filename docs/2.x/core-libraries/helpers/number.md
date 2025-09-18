@@ -110,11 +110,9 @@ automatically echo the output into the view.
 > Setter/getter for default currency. This removes the need always passing the
 > currency to `CakeNumber::currency()` and change all currency outputs by setting other default.
 >
-> <div class="versionadded">
->
-> 2.3 This method was added in 2.3
->
-> </div>
+> ::: info Added in version 2.3
+> This method was added in 2.3
+> :::
 
 > param string \$formatName  
 > The format name to be used in the future
@@ -217,12 +215,9 @@ automatically echo the output into the view.
 > ));
 > ```
 >
-> <div class="versionadded">
->
-> 2.4
+> ::: info Added in version 2.4
 > The `$options` argument with the `multiply` option was added.
->
-> </div>
+> :::
 
 > param string \$size  
 > The formatted human readable value.
@@ -230,12 +225,9 @@ automatically echo the output into the view.
 > This method unformats a number from a human readable byte size
 > to an integer number of bytes.
 >
-> <div class="versionadded">
->
-> 2.3
+> ::: info Added in version 2.3
 > This method was added in 2.3
->
-> </div>
+> :::
 
 > param string \$dataSize  
 > The number of bytes to make readable.
@@ -364,12 +356,9 @@ automatically echo the output into the view.
 > // output '+123,456.79'
 > ```
 >
-> <div class="versionadded">
->
-> 2.3
+> ::: info Added in version 2.3
 > This method was added in 2.3
->
-> </div>
+> :::
 
 > [!WARNING]
 > Since 2.4 the symbols are now UTF-8. Please see the migration guide for details if you run a

@@ -137,12 +137,9 @@ $article->isEmpty('user_id');  // true
 $article->hasValue('user_id'); // false
 ```
 
-<div class="versionadded">
-
-3.6.0
+::: info Added in version 3.6.0
 The `hasValue()` and `isEmpty()` methods were added in 3.6.0
-
-</div>
+:::
 
 ## Accessors & Mutators
 
@@ -315,20 +312,12 @@ To get a list of all dirty fields of an `Entity` you may call:
 $dirtyFields = $entity->getDirty();
 ```
 
-<div class="versionadded">
-
-3.4.3
-
+::: info Added in version 3.4.3
 `getDirty()` has been added.
-
-</div>
-
-<div class="versionadded">
-
-3.5.0
+:::
+::: info Added in version 3.5.0
 `isDirty()`, `setDirty()` were added.
-
-</div>
+:::
 
 ## Validation Errors
 
@@ -368,13 +357,9 @@ $user->setErrors([
 $user->errors('password', ['Password is required.']);
 ```
 
-<div class="versionadded">
-
-3.7.0
+::: info Added in version 3.7.0
 `hasErrors()` was added.
-
-</div>
-
+:::
 <a id="entities-mass-assignment"></a>
 
 ## Mass Assignment

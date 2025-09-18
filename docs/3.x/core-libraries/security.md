@@ -110,20 +110,14 @@ data from one of the following sources:
 If neither source is available a warning will be emitted and an unsafe value
 will be used for backwards compatibility reasons.
 
-<div class="versionadded">
-
-3.2.3
+::: info Added in version 3.2.3
 The randomBytes method was added.
-
-</div>
+:::
 
 Get a random string `$length` long from a secure random source. This method
 draws from the same random source as `randomBytes()` and will encode the data
 as a hexadecimal string.
 
-<div class="versionadded">
-
-3.6.0
+::: info Added in version 3.6.0
 The randomString method was added.
-
-</div>
+:::

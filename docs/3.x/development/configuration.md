@@ -177,13 +177,9 @@ or arrays (`false`). This option is being treated as disabled by default.
 See the [File Uploads section](../controllers/request-response#request-file-uploads) in the Request &
 Response Objects chapter for more information.
 
-<div class="versionadded">
-
-3.9.0
-Support for uploaded files as objects in the request data was added in
-version 3.9.0
-
-</div>
+::: info Added in version 3.9.0
+Support for uploaded files as objects in the request data was added inversion 3.9.0
+:::
 
 Security.salt  
 A random string used in hashing. This value is also used as the
@@ -409,12 +405,9 @@ Configure::readOrFail('Company');
 ['name' => 'Pizza, Inc.', 'slogan' => 'Pizza for your body and soul'];
 ```
 
-<div class="versionadded">
-
-3.1.7
+::: info Added in version 3.1.7
 `Configure::readOrFail()` was added in 3.1.7
-
-</div>
+:::
 
 ### Checking to see if Configuration Data is Defined
 
@@ -451,12 +444,9 @@ Configure::consumeOrFail('Company');
 ['name' => 'Pizza, Inc.', 'slogan' => 'Pizza for your body and soul'];
 ```
 
-<div class="versionadded">
-
-3.6.0
+::: info Added in version 3.6.0
 `Configure::readOrFail()` was added in 3.6.0
-
-</div>
+:::
 
 ## Reading and writing configuration files
 

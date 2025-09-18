@@ -152,13 +152,9 @@ class EmailConfig {
 
 The above configuration would enable STARTTLS communication for email messages.
 
-<div class="versionadded">
-
-2.3
+::: info Added in version 2.3
 Support for TLS delivery was added in 2.3
-
-</div>
-
+:::
 <a id="email-configurations"></a>
 
 ### Configurations
@@ -421,11 +417,8 @@ $email = new CakeEmail('default');
 $email->emailPattern($newPattern);
 ```
 
-<div class="versionadded">
-
-2.4
-
-</div>
+::: info Added in version 2.4
+:::
 
 ## Sending messages quickly
 

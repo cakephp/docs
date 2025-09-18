@@ -573,12 +573,9 @@ $this->assertExitCode(Command::CODE_SUCCESS);
 $this->debugOutput();
 ```
 
-<div class="versionadded">
-
-4.2.0
+::: info Added in version 4.2.0
 The `debugOutput()` method was added.
-
-</div>
+:::
 
 ## Lifecycle Callbacks
 

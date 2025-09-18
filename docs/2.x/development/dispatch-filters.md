@@ -1,10 +1,7 @@
 # Dispatcher Filters
 
-<div class="versionadded">
-
-2.2
-
-</div>
+::: info Added in version 2.2
+:::
 
 There are several reasons to want a piece of code to be run before any
 controller code is executed or right before the response is sent to the client,

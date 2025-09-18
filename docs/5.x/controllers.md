@@ -493,11 +493,8 @@ $github = $this->fetchModel('GitHub', 'Webservice');
 $authors = $this->fetchModel('Authors');
 ```
 
-<div class="versionadded">
-
-4.5.0
-
-</div>
+::: info Added in version 4.5.0
+:::
 
 ## Paginating a Model
 

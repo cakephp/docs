@@ -28,12 +28,9 @@ if ($article->getErrors()) {
 }
 ```
 
-<div class="versionadded">
-
-3.4.0
+::: info Added in version 3.4.0
 The `getErrors()` function was added.
-
-</div>
+:::
 
 When building an entity with validation enabled the following occurs:
 
@@ -448,12 +445,9 @@ $rules->add($rules->existsIn(
 ));
 ```
 
-<div class="versionadded">
-
-3.3.0
+::: info Added in version 3.3.0
 The `allowNullableNulls` and `allowMultipleNulls` options were added.
-
-</div>
+:::
 
 ### Association Count Rules
 
@@ -485,12 +479,9 @@ Note that `validCount` returns `false` if the property is not countable or does 
 $rules->add($rules->validCount('tags', 0, '<=', 'You must not have any tags'));
 ```
 
-<div class="versionadded">
-
-3.3.0
+::: info Added in version 3.3.0
 The `validCount()` method was added in 3.3.0.
-
-</div>
+:::
 
 ### Using Entity Methods as Rules
 

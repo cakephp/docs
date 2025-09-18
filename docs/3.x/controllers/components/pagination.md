@@ -160,12 +160,9 @@ public function initialize()
 When using the `SimplePaginator` you will not be able to generate page
 numbers, counter data, links to the last page, or total record count controls.
 
-<div class="versionadded">
-
-3.9.0
+::: info Added in version 3.9.0
 SimplePaginator was added.
-
-</div>
+:::
 
 ## Using the PaginatorComponent Directly
 
@@ -218,12 +215,9 @@ paginate both tags and articles at the same time:
 See the [Paginator Helper Multiple](../../views/helpers/paginator#paginator-helper-multiple) section for how to generate scoped HTML
 elements and URLs for pagination.
 
-<div class="versionadded">
-
-3.3.0
+::: info Added in version 3.3.0
 Multiple Pagination was added in 3.3.0
-
-</div>
+:::
 
 ### Paginating the Same Model multiple Times
 

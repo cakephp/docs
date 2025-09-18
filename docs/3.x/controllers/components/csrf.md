@@ -19,15 +19,9 @@ component will throw a
 > use `Cake\Http\ServerRequest::allowMethod()` to ensure the correct
 > HTTP method is used.
 
-<div class="versionadded">
-
-3.1
-
-The exception type changed from
-`Cake\Network\Exception\ForbiddenException` to
-`Cake\Network\Exception\InvalidCsrfTokenException`.
-
-</div>
+::: info Added in version 3.1
+The exception type changed from`Cake\Network\Exception\ForbiddenException` to`Cake\Network\Exception\InvalidCsrfTokenException`.
+:::
 
 <div class="deprecated">
 

@@ -337,8 +337,5 @@ When raising a `RedirectException` you can include additional headers:
         'Header-Key' => 'value',
     ]);
 
-<div class="versionadded">
-
-4.1.0
-
-</div>
+::: info Added in version 4.1.0
+:::

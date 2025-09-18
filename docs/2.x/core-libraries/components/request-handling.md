@@ -89,11 +89,8 @@ application.
 
 ## Taking advantage of HTTP cache validation
 
-<div class="versionadded">
-
-2.1
-
-</div>
+::: info Added in version 2.1
+:::
 
 The HTTP cache validation model is one of the processes used for cache
 gateways, also known as reverse proxies, to determine if they can serve a
@@ -122,11 +119,8 @@ public $components = array(
 
 ## Using custom ViewClasses
 
-<div class="versionadded">
-
-2.3
-
-</div>
+::: info Added in version 2.3
+:::
 
 When using JsonView/XmlView you might want to override the default serialization
 with a custom View class, or add View classes for other types.

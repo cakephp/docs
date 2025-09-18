@@ -843,8 +843,5 @@ $rules->removeUpdate('ruleName');
 $rules->removeDelete('ruleName');
 ```
 
-<div class="versionadded">
-
-5.1.0
-
-</div>
+::: info Added in version 5.1.0
+:::
