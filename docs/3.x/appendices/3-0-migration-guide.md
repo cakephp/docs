@@ -76,7 +76,7 @@ your **app.php** config file as well as any usage of `Configure::read('App.wwwRo
 CakePHP 3.0 features a new ORM that has been re-built from the ground up. The
 new ORM is significantly different and incompatible with the previous one.
 Upgrading to the new ORM will require extensive changes in any application that
-is being upgraded. See the new [Orm](../orm) documentation for information on how
+is being upgraded. See the new [Database Access & ORM](../orm) documentation for information on how
 to use the new ORM.
 
 ## Basics
@@ -352,7 +352,7 @@ means if your application used `Dispatcher.filters`, you should now use
 
 In addition to configuration changes, dispatcher filters have had some
 conventions updated, and features added. See the
-[Dispatch Filters](../development/dispatch-filters) documentation for more information.
+[Dispatcher Filters](../development/dispatch-filters) documentation for more information.
 
 ### FilterAssetFilter
 
@@ -603,7 +603,7 @@ value.
 ## Model
 
 The Model layer in 2.x has been entirely re-written and replaced. You should
-review the [Orm Migration](../appendices/orm-migration) for information on how to use the
+review the [New ORM Upgrade Guide](../appendices/orm-migration) for information on how to use the
 new ORM.
 
 - The `Model` class has been removed.

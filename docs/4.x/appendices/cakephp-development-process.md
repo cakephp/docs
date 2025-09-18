@@ -12,7 +12,7 @@ CakePHP projects broadly follow [semver](https://semver.org/). This means that:
   with the previous patch release. The exception to this rule is if a security
   issue is discovered and the only solution is to break an existing API.
 
-See the [Backwards Compatibility](../contributing/backwards-compatibility) for what we consider to be
+See the [Backwards Compatibility Guide](../contributing/backwards-compatibility) for what we consider to be
 backwards compatible and a breaking changes.
 
 ## Major Releases

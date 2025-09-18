@@ -25,7 +25,7 @@ the changes and improvements made in 3.1.
 ### Shell Helpers Added
 
 - Console applications can now create helper classes that encapsulate re-usable
-  blocks of output logic. See the [Helpers](../console-and-shells/helpers) section
+  blocks of output logic. See the [Shell Helpers](../console-and-shells/helpers) section
   for more information.
 
 ### RoutesShell

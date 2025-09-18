@@ -390,5 +390,5 @@ blog that:
 
 ### Suggested Follow-up Reading
 
-1.  [Usage](../../bake/usage) Generating basic CRUD code
+1.  [Code Generation with Bake](../../bake/usage) Generating basic CRUD code
 2.  [Authentication Plugin](/authentication/) documentation.

@@ -709,7 +709,7 @@ Now that you've created a basic CakePHP application, you're ready for
 the real thing. Start your own project and read the rest of the
 [Cookbook](../../index) and [API](https://api.cakephp.org).
 
-If you need help, there are many ways to get the help you need - please see the [Where To Get Help](../../cakephp-overview/where-to-get-help) page.
+If you need help, there are many ways to get the help you need - please see the [Where to Get Help](../../cakephp-overview/where-to-get-help) page.
 Welcome to CakePHP!
 
 ### Suggested Follow-up Reading
@@ -719,5 +719,5 @@ These are common tasks people learning CakePHP usually want to study next:
 1.  [View Layouts](../../views#view-layouts): Customizing your website layout
 2.  [View Elements](../../views#view-elements): Including and reusing view snippets
 3.  [Scaffolding](../../controllers/scaffolding): Prototyping before creating code
-4.  [Code Generation With Bake](../../console-and-shells/code-generation-with-bake): Generating basic CRUD code
-5.  [Auth](../../tutorials-and-examples/blog-auth-example/auth): User authentication and authorization tutorial
+4.  [Code Generation with Bake](../../console-and-shells/code-generation-with-bake): Generating basic CRUD code
+5.  [Simple Authentication and Authorization Application](../../tutorials-and-examples/blog-auth-example/auth): User authentication and authorization tutorial

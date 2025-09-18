@@ -62,7 +62,7 @@ use Cake\Error\ExceptionTrap;
 If you have defined the `Error.errorLogger` configure value, you will need to
 use `Error.logger` instead.
 
-See the [Errors](../development/errors) for more detailed documentation. Additionally
+See the [Error & Exception Handling](../development/errors) for more detailed documentation. Additionally
 the following methods related to the deprecated error handling system are
 deprecated:
 
@@ -86,7 +86,7 @@ be removed in 5.0.
 - Replace `prefers()` with `ContentTypeNegotiation`. See [Controller Viewclasses](../controllers#controller-viewclasses).
 - Replace `renderAs()` with controller content negotiation features on
   `Controller`.
-- Replace `checkHttpCache` option with [Check Http Cache](../controllers/components/check-http-cache).
+- Replace `checkHttpCache` option with [Checking HTTP Cache](../controllers/components/check-http-cache).
 - Use [Controller Viewclasses](../controllers#controller-viewclasses) instead of defining view class mappings in
   `RequestHandlerComponent`.
 
@@ -200,7 +200,7 @@ change the semantics or behavior of methods.
 
 - `ErrorTrap` and `ExceptionTrap` were added. These classes form the
   foundation of an updated error handling system for applications. Read more
-  about these classes in [Errors](../development/errors).
+  about these classes in [Error & Exception Handling](../development/errors).
 
 ### Http
 

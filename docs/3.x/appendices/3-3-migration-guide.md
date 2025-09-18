@@ -21,7 +21,7 @@ changes and improvements made in 3.3.
 - Dispatcher Filters are now deprecated. Use [Middleware](../controllers/middleware)
   instead.
 - `RequestActionTrait` has been deprecated. Refactor your code to use
-  [Cells](../views/cells) instead.
+  [View Cells](../views/cells) instead.
 - `Cake\Utility\Crypto\Mcrypt` engine has been deprecated as the `mcrypt`
   extension is deprecated in PHP 7.1. Use the `openssl` and
   `Cake\Utility\Crypto\Openssl` instead.

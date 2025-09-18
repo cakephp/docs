@@ -25,7 +25,7 @@ Here's what you'll need:
     done, the better: but fear not if you're a procedural fan.
 4.  Finally, you'll need a basic knowledge of the MVC programming pattern.
     A quick overview can be found in
-    [Understanding Model View Controller](../../cakephp-overview/understanding-model-view-controller). Don't worry,
+    [Understanding Model-View-Controller](../../cakephp-overview/understanding-model-view-controller). Don't worry,
     it's only half a page or so.
 
 Let's get started!
@@ -58,7 +58,7 @@ something like the following:
 
 Now might be a good time to learn a bit about how CakePHP's directory
 structure works: check out the
-[Cakephp Folder Structure](../../getting-started/cakephp-folder-structure) section.
+[CakePHP Folder Structure](../../getting-started/cakephp-folder-structure) section.
 
 ### Tmp directory permissions
 
@@ -105,12 +105,12 @@ statements into your database:
 The choices on table and column names are not arbitrary. If you
 follow CakePHP's database naming conventions, and CakePHP's class naming
 conventions (both outlined in
-[Cakephp Conventions](../../getting-started/cakephp-conventions)), you'll be able to take
+[CakePHP Conventions](../../getting-started/cakephp-conventions)), you'll be able to take
 advantage of a lot of free functionality and avoid configuration.
 CakePHP is flexible enough to accommodate even the worst legacy
 database schema, but adhering to convention will save you time.
 
-Check out [Cakephp Conventions](../../getting-started/cakephp-conventions) for more
+Check out [CakePHP Conventions](../../getting-started/cakephp-conventions) for more
 information, but suffice it to say that naming our table 'posts'
 automatically hooks it to our Post model, and having fields called
 'modified' and 'created' will be automagically managed by CakePHP.
@@ -188,6 +188,6 @@ it probably means mod_rewrite is not functioning on your system. Please refer
 to one of the sections below about URL rewriting for your webserver to get
 you up and running:
 
-- [Url Rewriting](../../installation/url-rewriting)
+- [URL Rewriting](../../installation/url-rewriting)
 
-Now continue to [Part Two](../../tutorials-and-examples/blog/part-two) to start building your first CakePHP application.
+Now continue to [Blog Tutorial - Adding a layer](../../tutorials-and-examples/blog/part-two) to start building your first CakePHP application.

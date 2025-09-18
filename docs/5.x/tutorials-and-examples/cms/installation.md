@@ -80,7 +80,7 @@ files may also be present:
       README.md
 
 Now might be a good time to learn a bit about how CakePHP's directory structure
-works: check out the [Cakephp Folder Structure](../../intro/cakephp-folder-structure) section.
+works: check out the [CakePHP Folder Structure](../../intro/cakephp-folder-structure) section.
 
 If you get lost during this tutorial, you can see the finished result [on GitHub](https://github.com/cakephp/cms-tutorial).
 

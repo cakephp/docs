@@ -176,7 +176,7 @@ behavior that may affect your application:
 A new way to build CLI tools has been added. Shells & Tasks have several
 shortcomings that are hard to correct without breaking compatibility.
 `Cake\Console\Command` will replace `Shell` long term as the recommended way
-to build console applications. See the [Commands](../console-and-shells/commands)
+to build console applications. See the [Console Commands](../console-and-shells/commands)
 section for more information.
 
 - `ConsoleOptionParse::enableSubcommandSort()` was added. This method allows

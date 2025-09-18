@@ -381,7 +381,7 @@ and what they do.
 
 ## More on controllers
 
-- [Request Response](controllers/request-response)
+- [Request and Response objects](controllers/request-response)
 - [Scaffolding](controllers/scaffolding)
-- [Pages Controller](controllers/pages-controller)
+- [The Pages Controller](controllers/pages-controller)
 - [Components](controllers/components)

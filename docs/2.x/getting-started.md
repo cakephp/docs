@@ -42,7 +42,7 @@ Here's what you'll need:
     done, the better: but fear not if you're a procedural fan.
 4.  Finally, you'll need a basic knowledge of the MVC programming pattern.
     A quick overview can be found in
-    [Understanding Model View Controller](cakephp-overview/understanding-model-view-controller). Don't worry,
+    [Understanding Model-View-Controller](cakephp-overview/understanding-model-view-controller). Don't worry,
     it's only half a page or so.
 
 Let's get started!
@@ -75,7 +75,7 @@ something like the following:
 
 Now might be a good time to learn a bit about how CakePHP's directory
 structure works: check out the
-[Cakephp Folder Structure](getting-started/cakephp-folder-structure) section.
+[CakePHP Folder Structure](getting-started/cakephp-folder-structure) section.
 
 #### Tmp directory permissions
 
@@ -122,12 +122,12 @@ statements into your database:
 The choices on table and column names are not arbitrary. If you
 follow CakePHP's database naming conventions, and CakePHP's class naming
 conventions (both outlined in
-[Cakephp Conventions](getting-started/cakephp-conventions)), you'll be able to take
+[CakePHP Conventions](getting-started/cakephp-conventions)), you'll be able to take
 advantage of a lot of free functionality and avoid configuration.
 CakePHP is flexible enough to accommodate even the worst legacy
 database schema, but adhering to convention will save you time.
 
-Check out [Cakephp Conventions](getting-started/cakephp-conventions) for more
+Check out [CakePHP Conventions](getting-started/cakephp-conventions) for more
 information, but suffice it to say that naming our table 'posts'
 automatically hooks it to our Post model, and having fields called
 'modified' and 'created' will be automagically managed by CakePHP.
@@ -205,9 +205,9 @@ it probably means mod_rewrite is not functioning on your system. Please refer
 to one of the sections below about URL rewriting for your webserver to get
 you up and running:
 
-- [Url Rewriting](installation/url-rewriting)
+- [URL Rewriting](installation/url-rewriting)
 
-Now continue to [Part Two](tutorials-and-examples/blog/part-two) to start building your first CakePHP application.
+Now continue to [Blog Tutorial - Adding a layer](tutorials-and-examples/blog/part-two) to start building your first CakePHP application.
 
 ## Blog Tutorial - Adding a layer
 
@@ -920,7 +920,7 @@ Now that you've created a basic CakePHP application, you're ready for
 the real thing. Start your own project and read the rest of the
 [Cookbook](index) and [API](https://api.cakephp.org).
 
-If you need help, there are many ways to get the help you need - please see the [Where To Get Help](cakephp-overview/where-to-get-help) page.
+If you need help, there are many ways to get the help you need - please see the [Where to Get Help](cakephp-overview/where-to-get-help) page.
 Welcome to CakePHP!
 
 #### Suggested Follow-up Reading
@@ -930,12 +930,12 @@ These are common tasks people learning CakePHP usually want to study next:
 1.  [View Layouts](views#view-layouts): Customizing your website layout
 2.  [View Elements](views#view-elements): Including and reusing view snippets
 3.  [Scaffolding](controllers/scaffolding): Prototyping before creating code
-4.  [Code Generation With Bake](console-and-shells/code-generation-with-bake): Generating basic CRUD code
-5.  [Auth](tutorials-and-examples/blog-auth-example/auth): User authentication and authorization tutorial
+4.  [Code Generation with Bake](console-and-shells/code-generation-with-bake): Generating basic CRUD code
+5.  [Simple Authentication and Authorization Application](tutorials-and-examples/blog-auth-example/auth): User authentication and authorization tutorial
 
 ### Additional Reading
 
-- [A Typical Cakephp Request](getting-started/a-typical-cakephp-request)
-- [Cakephp Conventions](getting-started/cakephp-conventions)
-- [Cakephp Folder Structure](getting-started/cakephp-folder-structure)
-- [Cakephp Structure](getting-started/cakephp-structure)
+- [A Typical CakePHP Request](getting-started/a-typical-cakephp-request)
+- [CakePHP Conventions](getting-started/cakephp-conventions)
+- [CakePHP Folder Structure](getting-started/cakephp-folder-structure)
+- [CakePHP Structure](getting-started/cakephp-structure)

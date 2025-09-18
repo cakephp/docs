@@ -66,7 +66,7 @@ If you're throwing your application out into the wild, it's a good idea to make
 sure it doesn't have any obvious leaks:
 
 - Ensure you are using the [Csrf Middleware](security/csrf#csrf-middleware) component or middleware.
-- You may want to enable the [Form Protection](controllers/components/form-protection) component.
+- You may want to enable the [Form Protection Component](controllers/components/form-protection) component.
   It can help prevent several types of form tampering and reduce the possibility
   of mass-assignment issues.
 - Ensure your models have the correct [Validation](core-libraries/validation) rules
@@ -136,5 +136,5 @@ are:
 1.  Install dependencies with `composer install`. Avoid using `composer update` when doing deploys as you could get unexpected versions of packages.
 2.  Run database [migrations](/migrations/) with either the Migrations plugin
     or another tool.
-3.  Clear model schema cache with `bin/cake schema_cache clear`. The [Schema Cache](console-commands/schema-cache)
+3.  Clear model schema cache with `bin/cake schema_cache clear`. The [Schema Cache Tool](console-commands/schema-cache)
     has more information on this command.

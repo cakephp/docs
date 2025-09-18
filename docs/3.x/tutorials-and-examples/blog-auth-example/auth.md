@@ -442,10 +442,10 @@ You could also be more creative and code something more general in AppController
 on your own rules.
 
 Should you need more control, we suggest you read the complete Auth guide in the
-[Authentication](../../controllers/components/authentication) section where you will find more
+[AuthComponent](../../controllers/components/authentication) section where you will find more
 about configuring the component, creating custom Authorization classes, and much more.
 
 ### Suggested Follow-up Reading
 
-1.  [Usage](../../bake/usage) Generating basic CRUD code
-2.  [Authentication](../../controllers/components/authentication): User registration and login
+1.  [Code Generation with Bake](../../bake/usage) Generating basic CRUD code
+2.  [AuthComponent](../../controllers/components/authentication): User registration and login

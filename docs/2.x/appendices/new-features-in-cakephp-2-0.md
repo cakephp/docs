@@ -134,7 +134,7 @@ values from configure, instead of just the debug value.
 
 ### Error and exception handling
 
-CakePHP 2.0 has had [Exceptions](../development/exceptions) and [Errors](../development/errors)
+CakePHP 2.0 has had [Exceptions](../development/exceptions) and [Error Handling](../development/errors)
 handling rebuilt, to be more flexible and give more power to developers.
 
 ### String::wrap()

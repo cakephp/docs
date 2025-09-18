@@ -4,7 +4,7 @@ orphan
 
 - [Getting Started](getting-started)
 - [Installation](installation)
-- [Cakephp Overview](cakephp-overview)
+- [CakePHP Overview](cakephp-overview)
 - [Controllers](controllers)
 - [Views](views)
 - [Models](models)

@@ -400,7 +400,7 @@ bin/cake bake controller --plugin ContactManager Contacts
 ```
 
 Please refer to the chapter
-[Usage](bake/usage) if you
+[Code Generation with Bake](bake/usage) if you
 have any problems with using the command line. Be sure to re-generate your
 autoloader once you've created your plugin:
 

@@ -8,8 +8,8 @@ Alternatively, you can refer to the non-official CakePHP plugin repository
 [Bakery](https://bakery.cakephp.org/) for existing applications
 and components.
 
-- [Blog](tutorials-and-examples/blog/blog)
-- [Part Two](tutorials-and-examples/blog/part-two)
-- [Auth](tutorials-and-examples/blog-auth-example/auth)
-- [Simple Acl Controlled Application](tutorials-and-examples/simple-acl-controlled-application/simple-acl-controlled-application)
-- [Part Two](tutorials-and-examples/simple-acl-controlled-application/part-two)
+- [Blog Tutorial](tutorials-and-examples/blog/blog)
+- [Blog Tutorial - Adding a layer](tutorials-and-examples/blog/part-two)
+- [Simple Authentication and Authorization Application](tutorials-and-examples/blog-auth-example/auth)
+- [Simple Acl controlled Application](tutorials-and-examples/simple-acl-controlled-application/simple-acl-controlled-application)
+- [Simple Acl controlled Application - part 2](tutorials-and-examples/simple-acl-controlled-application/part-two)

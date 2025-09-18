@@ -2,8 +2,8 @@
 
 ### Preface
 
-- [Intro](intro)
-- [Quickstart](quickstart)
+- [CakePHP at a Glance](intro)
+- [Quick Start Guide](quickstart)
 - [3.x Migration Guide](appendices/3-x-migration-guide)
 - [Tutorials & Examples](tutorials-and-examples)
 - [Contributing](contributing)
@@ -14,11 +14,11 @@
 - [Configuration](development/configuration)
 - [Application](development/application)
 - [Routing](development/routing)
-- [Request Response](controllers/request-response)
+- [Request & Response Objects](controllers/request-response)
 - [Middleware](controllers/middleware)
 - [Controllers](controllers)
 - [Views](views)
-- [Orm](orm)
+- [Database Access & ORM](orm)
 
 ### Using CakePHP
 
@@ -27,14 +27,14 @@
 - [Debugging](development/debugging)
 - [Deployment](deployment)
 - [Email](core-libraries/email)
-- [Errors](development/errors)
+- [Error & Exception Handling](development/errors)
 - [Events System](core-libraries/events)
 - [Internationalization & Localization](core-libraries/internationalization-and-localization)
 - [Logging](core-libraries/logging)
 - [Modelless Forms](core-libraries/form)
 - [Pagination](controllers/components/pagination)
 - [Plugins](plugins)
-- [Rest](development/rest)
+- [REST](development/rest)
 - [Security](security)
 - [Sessions](development/sessions)
 - [Testing](development/testing)

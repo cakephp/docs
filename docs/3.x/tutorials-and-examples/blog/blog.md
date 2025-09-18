@@ -74,7 +74,7 @@ completed, your directory setup should look something like the following:
 
 Now might be a good time to learn a bit about how CakePHP's directory
 structure works: check out the
-[Cakephp Folder Structure](../../intro/cakephp-folder-structure) section.
+[CakePHP Folder Structure](../../intro/cakephp-folder-structure) section.
 
 ## Directory Permissions on tmp and logs
 
@@ -130,12 +130,12 @@ INSERT INTO articles (title,body,created)
 The choices on table and column names are not arbitrary. If you
 follow CakePHP's database naming conventions, and CakePHP's class naming
 conventions (both outlined in
-[Conventions](../../intro/conventions)), you'll be able to take
+[CakePHP Conventions](../../intro/conventions)), you'll be able to take
 advantage of a lot of free functionality and avoid configuration.
 CakePHP is flexible enough to accommodate even inconsistent legacy
 database schemas, but adhering to the conventions will save you time.
 
-Check out [Conventions](../../intro/conventions) for more
+Check out [CakePHP Conventions](../../intro/conventions) for more
 information, but it's suffice to say that naming our table 'articles'
 automatically hooks it to our Articles model, and having fields called
 'modified' and 'created' will be automatically managed by CakePHP.
@@ -201,5 +201,5 @@ if the CakePHP welcome page looks a little funny (no images or CSS styles).
 This probably means mod_rewrite is not functioning on your system. Please refer
 to the [Url Rewriting](../../installation#url-rewriting) section to help resolve any issues you are having.
 
-Now continue to [Part Two](../../tutorials-and-examples/blog/part-two) to start building
+Now continue to [Blog Tutorial - Part 2](../../tutorials-and-examples/blog/part-two) to start building
 your first CakePHP application.

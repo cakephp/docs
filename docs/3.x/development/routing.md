@@ -1800,4 +1800,4 @@ This will populate `$this->request->getParam('named')` with any named parameters
 found in the passed arguments. Any passed argument that was interpreted as a
 named parameter, will be removed from the list of passed arguments.
 
-- [Dispatch Filters](../development/dispatch-filters)
+- [Dispatcher Filters](../development/dispatch-filters)

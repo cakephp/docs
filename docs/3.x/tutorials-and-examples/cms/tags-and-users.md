@@ -3,7 +3,7 @@
 With the basic article creation functionality built, we need to enable multiple
 authors to work in our CMS. Previously, we built all the models, views and
 controllers by hand. This time around we're going to use
-[Bake](../../bake) to create our skeleton code. Bake is a powerful
+[Bake Console](../../bake) to create our skeleton code. Bake is a powerful
 code generation `CLI (Command Line Interface)` tool that leverages the
 conventions CakePHP uses to create skeleton `CRUD (Create, Read, Update,
 Delete)` applications very efficiently. We're going to use `bake` to build our
@@ -56,7 +56,7 @@ public function initialize(array $config)
 
 This association will work with this simple definition because we followed
 CakePHP conventions when creating our tables. For more information, read
-[Associations](../../orm/associations).
+[Associations - Linking Tables Together](../../orm/associations).
 
 ## Updating Articles to Enable Tagging
 

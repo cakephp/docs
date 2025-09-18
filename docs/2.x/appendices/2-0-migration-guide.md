@@ -311,7 +311,7 @@ the [Authentication](../core-libraries/components/authentication) guide.
 ### EmailComponent
 
 The EmailComponent has been deprecated and has created a new library class to
-send e-mails. See [Email](../core-utility-libraries/email) Email changes for more details.
+send e-mails. See [CakeEmail](../core-utility-libraries/email) Email changes for more details.
 
 ### SessionComponent
 
@@ -333,7 +333,7 @@ CakePHP 2.0.
 The error handling implementation has dramatically changed in 2.0. Exceptions
 have been introduced throughout the framework, and error handling has been
 updated to offer more control and flexibility. You can read more in the
-[Exceptions](../development/exceptions) and [Errors](../development/errors) section.
+[Exceptions](../development/exceptions) and [Error Handling](../development/errors) section.
 
 ## Lib classes
 

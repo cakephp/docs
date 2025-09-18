@@ -221,7 +221,7 @@ stored in the database.
 ## Shell Helpers
 
 If you have complex output generation logic, you can use
-[Helpers](../console-and-shells/helpers) to encapsulate this logic in a re-usable way.
+[Shell Helpers](../console-and-shells/helpers) to encapsulate this logic in a re-usable way.
 
 <a id="invoking-other-shells-from-your-shell"></a>
 

@@ -630,5 +630,5 @@ Middleware defined by a controller will be called **before** `beforeFilter()` an
 
 ## More on Controllers
 
-- [Pages Controller](controllers/pages-controller)
+- [The Pages Controller](controllers/pages-controller)
 - [Components](controllers/components)

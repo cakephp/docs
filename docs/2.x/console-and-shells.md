@@ -915,12 +915,12 @@ This asserts that the generated message IDs are valid and fit to the domain the 
 
 ## More topics
 
-- [Helpers](console-and-shells/helpers)
-- [Cron Jobs](console-and-shells/cron-jobs)
+- [Shell Helpers](console-and-shells/helpers)
+- [Running Shells as cronjobs](console-and-shells/cron-jobs)
 - [Completion Shell](console-and-shells/completion-shell)
-- [Code Generation With Bake](console-and-shells/code-generation-with-bake)
-- [Schema Management And Migrations](console-and-shells/schema-management-and-migrations)
-- [I18n Shell](console-and-shells/i18n-shell)
-- [Acl Shell](console-and-shells/acl-shell)
-- [Testsuite Shell](console-and-shells/testsuite-shell)
-- [Upgrade Shell](console-and-shells/upgrade-shell)
+- [Code Generation with Bake](console-and-shells/code-generation-with-bake)
+- [Schema management and migrations](console-and-shells/schema-management-and-migrations)
+- [I18N shell](console-and-shells/i18n-shell)
+- [ACL Shell](console-and-shells/acl-shell)
+- [Test shell](console-and-shells/testsuite-shell)
+- [The upgrade shell will do most of the work to upgrade your CakePHP application](console-and-shells/upgrade-shell)

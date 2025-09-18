@@ -248,7 +248,7 @@ The old testsuite shell and its syntax are still available.
 Two new view classes have been added to CakePHP. A new `JsonView`
 and `XmlView` allow you to easily generate XML and JSON views. You
 can learn more about these classes in the section on
-[Json And Xml Views](../views/json-and-xml-views)
+[JSON and XML views](../views/json-and-xml-views)
 
 ### Extending views
 

@@ -427,7 +427,7 @@ class ReviewsTable extends Table
 As you can see from the example above each of the association types uses
 a method to create the association. One other difference is that
 `hasAndBelongsToMany` has been renamed to `belongsToMany`. To find out more
-about creating associations in 3.0 see the section on [Associations](../orm/associations).
+about creating associations in 3.0 see the section on [Associations - Linking Tables Together](../orm/associations).
 
 Another welcome improvement to CakePHP is the ability to create your own
 association classes. If you have association types that are not covered by the

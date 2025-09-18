@@ -1352,7 +1352,7 @@ When the results for a cached query are fetched the following happens:
 The builder can help you retrieve data from multiple tables at the same time
 with the minimum amount of queries possible. To be able to fetch associated
 data, you first need to setup associations between the tables as described in
-the [Associations](../orm/associations) section. This technique of combining queries
+the [Associations - Linking Tables Together](../orm/associations) section. This technique of combining queries
 to fetch associated data from other tables is called **eager loading**.
 
 Eager loading helps avoid many of the potential performance problems

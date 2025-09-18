@@ -41,7 +41,7 @@ be used in the `ArticlesController`, and will be tied to a database table called
 > ArticleTable.php), CakePHP will not recognize any of your settings and will
 > use the generated model instead.
 
-For more on models, such as callbacks, and validation, check out the [Orm](../../orm)
+For more on models, such as callbacks, and validation, check out the [Database Access & ORM](../../orm)
 chapter of the Manual.
 
 > [!NOTE]
@@ -51,7 +51,7 @@ chapter of the Manual.
 >
 >     bin/cake bake model Articles
 
-For more on bake and its code generation features please visit [Usage](../../bake/usage).
+For more on bake and its code generation features please visit [Code Generation with Bake](../../bake/usage).
 
 ## Create the Articles Controller
 
@@ -101,7 +101,7 @@ access that at www.example.com/articles/foobar.
 > [!WARNING]
 > You may be tempted to name your controllers and actions a certain
 > way to obtain a certain URL. Resist that temptation. Follow
-> [Conventions](../../intro/conventions) (capitalization, plural names, etc.) and create
+> [CakePHP Conventions](../../intro/conventions) (capitalization, plural names, etc.) and create
 > readable, understandable action names. You can map URLs to your code using
 > [Routing](../../development/routing) covered later on.
 
@@ -117,7 +117,7 @@ the `find('all')` method of the `ArticlesTable` object.
 >
 >     bin/cake bake controller Articles
 
-For more on bake and its code generation features please visit [Usage](../../bake/usage).
+For more on bake and its code generation features please visit [Code Generation with Bake](../../bake/usage).
 
 To learn more about CakePHP's controllers, check out the
 [Controllers](../../controllers) chapter.
@@ -671,12 +671,12 @@ here for simplicity's sake. Use the rest of this manual as a guide
 for building more feature-rich applications.
 
 Now that you've created a basic CakePHP application, you can either continue to
-[Part Three](../../tutorials-and-examples/blog/part-three), or start your own project. You
-can also peruse the [Topics](../../topics) or [API](https://api.cakephp.org) to
+[Blog Tutorial - Part 3](../../tutorials-and-examples/blog/part-three), or start your own project. You
+can also peruse the [Using CakePHP](../../topics) or [API](https://api.cakephp.org) to
 learn more about CakePHP.
 
 If you need help, there are many ways to get the help you need - please see the
-[Where To Get Help](../../intro/where-to-get-help) page. Welcome to CakePHP!
+[Where to Get Help](../../intro/where-to-get-help) page. Welcome to CakePHP!
 
 ### Suggested Follow-up Reading
 
@@ -684,6 +684,6 @@ These are common tasks people learning CakePHP usually want to study next:
 
 1.  [View Layouts](../../views#view-layouts): Customizing your website layout
 2.  [View Elements](../../views#view-elements): Including and reusing view snippets
-3.  [Usage](../../bake/usage): Generating basic CRUD code
-4.  [Auth](../../tutorials-and-examples/blog-auth-example/auth): User authentication
+3.  [Code Generation with Bake](../../bake/usage): Generating basic CRUD code
+4.  [Blog Tutorial - Authentication and Authorization](../../tutorials-and-examples/blog-auth-example/auth): User authentication
     and authorization tutorial

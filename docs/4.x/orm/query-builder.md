@@ -1597,7 +1597,7 @@ When the results for a cached query are fetched the following happens:
 The builder can help you retrieve data from multiple tables at the same time
 with the minimum amount of queries possible. To be able to fetch associated
 data, you first need to setup associations between the tables as described in
-the [Associations](../orm/associations) section. This technique of combining queries
+the [Associations - Linking Tables Together](../orm/associations) section. This technique of combining queries
 to fetch associated data from other tables is called **eager loading**.
 
 Eager loading helps avoid many of the potential performance problems
@@ -1759,7 +1759,7 @@ $query = $articles->find()->contain('Comments', function (Query $q) {
 
 You can control more than just the query clauses used by `contain()`. If you pass an array
 with the association, you can override the `foreignKey`, `joinType` and `strategy`.
-See [Associations](../orm/associations) for details on the default value and options for each association
+See [Associations - Linking Tables Together](../orm/associations) for details on the default value and options for each association
 type.
 
 You can pass `false` as the new `foreignKey` to disable foreign key constraints entirely.

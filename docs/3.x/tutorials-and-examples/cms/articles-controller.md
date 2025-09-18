@@ -47,7 +47,7 @@ access the logic there by requesting **www.example.com/articles/index**.
 Similarly, if we were to define a function called `foobar()`, users would be
 able to access that at **www.example.com/articles/foobar**. You may be tempted
 to name your controllers and actions in a way that allows you to obtain specific
-URLs. Resist that temptation. Instead, follow the [Conventions](../../intro/conventions)
+URLs. Resist that temptation. Instead, follow the [CakePHP Conventions](../../intro/conventions)
 creating readable, meaningful action names. You can then use
 [Routing](../../development/routing) to connect the URLs you want to the actions you've
 created.

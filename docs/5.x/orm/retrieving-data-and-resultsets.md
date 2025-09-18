@@ -662,7 +662,7 @@ $query = $articles->find()->contain('Comments', function (SelectQuery $q) {
 
 You can control more than just the query clauses used by `contain()`. If you pass an array
 with the association, you can override the `foreignKey`, `joinType` and `strategy`.
-See [Associations](../orm/associations) for details on the default value and options for each association
+See [Associations - Linking Tables Together](../orm/associations) for details on the default value and options for each association
 type.
 
 You can pass `false` as the new `foreignKey` to disable foreign key constraints entirely.

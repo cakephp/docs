@@ -8,7 +8,7 @@ There are a few things you should do when deploying a CakePHP application.
 If you're throwing your application out into the wild, it's a good idea to make
 sure it doesn't have any leaks. Check the [Security](core-libraries/components/security-component) to guard against
 CSRF attacks, form field tampering, and others. Doing [Data Validation](models/data-validation), and/or
-[Sanitize](core-utility-libraries/sanitize) is also a great idea, for protecting your
+[Data Sanitization](core-utility-libraries/sanitize) is also a great idea, for protecting your
 database and also against XSS attacks. Check that only your `webroot` directory
 is publicly visible, and that your secrets (such as your app salt and
 any security keys) are private and unique as well!
@@ -20,7 +20,7 @@ keeping your code secure and your application safer. CakePHP applications
 should have the document root set to the application's `app/webroot`. This
 makes the application and configuration files inaccessible through a URL.
 Setting the document root is different for different webservers. See the
-[Url Rewriting](installation/url-rewriting) documentation for webserver specific
+[URL Rewriting](installation/url-rewriting) documentation for webserver specific
 information.
 
 In all cases you will want to set the virtual host/domain's document to be

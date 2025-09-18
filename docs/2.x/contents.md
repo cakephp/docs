@@ -1,9 +1,9 @@
 # Contents
 
-- [Index](index)
+- [Welcome](index)
 - [Installation](installation)
 - [Getting Started](getting-started)
-- [Cakephp Overview](cakephp-overview)
+- [CakePHP Overview](cakephp-overview)
 - [Controllers](controllers)
 - [Views](views)
 - [Models](models)

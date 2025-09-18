@@ -533,5 +533,5 @@ public function beforeFilter(Event $event)
 
 ## More on Controllers
 
-- [Pages Controller](controllers/pages-controller)
+- [The Pages Controller](controllers/pages-controller)
 - [Components](controllers/components)

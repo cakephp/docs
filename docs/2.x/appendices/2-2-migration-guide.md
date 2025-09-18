@@ -205,8 +205,8 @@ does. See the [Hash](../core-utility-libraries/hash) page for more detail.
 - Event listeners can now be attached to the dispatcher calls, those will have
   the ability to change the request information or the response before it is
   sent to the client. Check the full documentation for this new features in
-  [Dispatch Filters](../development/dispatch-filters)
-- With the addition of [Dispatch Filters](../development/dispatch-filters) you'll need to
+  [Dispatcher Filters](../development/dispatch-filters)
+- With the addition of [Dispatcher Filters](../development/dispatch-filters) you'll need to
   update `app/Config/bootstrap.php`. See
   [Required Steps To Upgrade 2 2](#required-steps-to-upgrade-2-2).
 

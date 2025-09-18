@@ -429,4 +429,4 @@ improvements by leveraging the FormHelper and ORM capabilities.
 
 Thanks for taking the time to explore CakePHP. Next, you can complete the
 [Blog Tutorial](../../tutorials-and-examples/blog/blog), learn more about the
-[Orm](../../orm), or you can peruse the [Topics](../../topics).
+[Database Access & ORM](../../orm), or you can peruse the [Using CakePHP](../../topics).

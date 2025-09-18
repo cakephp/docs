@@ -63,7 +63,7 @@ changes made:
 
 - `BaseCommand::__construct()` was removed.
 - `ConsoleIntegrationTestTrait::useCommandRunner()` was removed since it's no longer needed.
-- `Shell` has been removed and should be replaced with [Command](https://book.cakephp.org/5.x/en/console-commands/commands.html)
+- `Shell` has been removed and should be replaced with [Command](https://book.cakephp.org/5/en/console-commands/commands.html)
 - `ConsoleOptionParser::addSubcommand()` was removed alongside the removal of
   `Shell`. Subcommands should be replaced with `Command` classes that
   implement `Command::defaultName()` to define the necessary command name.
@@ -185,7 +185,7 @@ changes made:
 
 ### Mailer
 
-- `Email` has been removed. Use [Mailer](https://book.cakephp.org/5.x/en/core-libraries/email.html) instead.
+- `Email` has been removed. Use [Mailer](https://book.cakephp.org/5/en/core-libraries/email.html) instead.
 - `cake.mailer` has been added as an alternative to the `email` scope
 
 ### ORM

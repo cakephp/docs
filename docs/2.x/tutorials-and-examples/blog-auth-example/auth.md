@@ -453,5 +453,5 @@ about configuring the component, creating custom Authorization classes, and much
 
 ### Suggested Follow-up Reading
 
-1.  [Code Generation With Bake](../../console-and-shells/code-generation-with-bake) Generating basic CRUD code
+1.  [Code Generation with Bake](../../console-and-shells/code-generation-with-bake) Generating basic CRUD code
 2.  [Authentication](../../core-libraries/components/authentication): User registration and login

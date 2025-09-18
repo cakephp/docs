@@ -284,7 +284,7 @@ bin/cake bake controller --plugin ContactManager Contacts
 ```
 
 Please refer to the chapter
-[Usage](bake/usage) if you
+[Code Generation with Bake](bake/usage) if you
 have any problems with using the command line. Be sure to re-generate your
 autoloader once you've created your plugin:
 
@@ -360,7 +360,7 @@ class ContactManagerPlugin extends BasePlugin
      *
      * @param \Cake\Core\ContainerInterface $container The Container to update.
      * @return void
-     * @link https://book.cakephp.org/5.x/en/development/dependency-injection.html#dependency-injection
+     * @link https://book.cakephp.org/5/en/development/dependency-injection.html#dependency-injection
      */
     public function services(ContainerInterface $container): void
     {

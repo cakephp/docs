@@ -2,8 +2,8 @@
 
 ### Preface
 
-- [Intro](intro)
-- [Quickstart](quickstart)
+- [CakePHP at a Glance](intro)
+- [Quick Start Guide](quickstart)
 - [Migration Guides](appendices/migration-guides)
 - [Tutorials & Examples](tutorials-and-examples)
 - [Contributing](contributing)
@@ -16,11 +16,11 @@
 - [Application](development/application)
 - [Dependency Injection](development/dependency-injection)
 - [Routing](development/routing)
-- [Request Response](controllers/request-response)
+- [Request & Response Objects](controllers/request-response)
 - [Middleware](controllers/middleware)
 - [Controllers](controllers)
 - [Views](views)
-- [Orm](orm)
+- [Database Access & ORM](orm)
 
 ### Using CakePHP
 
@@ -29,14 +29,14 @@
 - [Debugging](development/debugging)
 - [Deployment](deployment)
 - [Mailer](core-libraries/email)
-- [Errors](development/errors)
+- [Error & Exception Handling](development/errors)
 - [Events System](core-libraries/events)
 - [Internationalization & Localization](core-libraries/internationalization-and-localization)
 - [Logging](core-libraries/logging)
 - [Modelless Forms](core-libraries/form)
 - [Pagination](controllers/pagination)
 - [Plugins](plugins)
-- [Rest](development/rest)
+- [REST](development/rest)
 - [Security](security)
 - [Sessions](development/sessions)
 - [Testing](development/testing)
@@ -62,7 +62,7 @@
 - [Authentication](https://book.cakephp.org/authentication/3/)
 - [Authorization](https://book.cakephp.org/authorization/3/)
 - [Bake](https://book.cakephp.org/bake/3/)
-- [Debug Kit](https://book.cakephp.org/debugkit/5.x/)
+- [Debug Kit](https://book.cakephp.org/debugkit/5/)
 - [Migrations](https://book.cakephp.org/migrations/4/)
 - [Elasticsearch](https://book.cakephp.org/elasticsearch/4/)
 - [Phinx](https://book.cakephp.org/phinx/0/en/)

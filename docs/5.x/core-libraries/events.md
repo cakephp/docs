@@ -667,7 +667,7 @@ events can make debugging harder and require additional integration testing.
 ## Additional Reading
 
 - [Behaviors](../orm/behaviors)
-- [Commands](../console-commands/commands)
+- [Command Objects](../console-commands/commands)
 - [Components](../controllers/components)
 - [Helpers](../views/helpers)
 - [Testing Events](../development/testing#testing-events)

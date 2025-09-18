@@ -126,7 +126,7 @@ was added in 2.4.
 > 'prefix\_'.
 
 At this point, you might want to take a look at the
-[Cakephp Conventions](../getting-started/cakephp-conventions). The correct
+[CakePHP Conventions](../getting-started/cakephp-conventions). The correct
 naming for your tables (and the addition of some columns) can score
 you some free functionality and help you avoid configuration. For
 example, if you name your database table big_boxes, your model

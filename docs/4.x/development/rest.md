@@ -94,7 +94,7 @@ class RecipesController extends AppController
 RESTful controllers often use parsed extensions to serve up different views
 based on different kinds of requests. We're defining the content-type based
 views we support in this controller. We're including CakePHP's `JsonView`. To
-learn more about it and Xml based views see [Json And Xml Views](../views/json-and-xml-views). By
+learn more about it and Xml based views see [JSON and XML views](../views/json-and-xml-views). By
 using `JsonView` we can define a `serialize` option. This option
 is used to define which view variables `JsonView` should serialize into JSON.
 

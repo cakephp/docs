@@ -49,7 +49,7 @@ development. Let's look a little closer at the folders inside
 
 Command  
 Contains your application's console commands. See
-[Commands](../console-commands/commands) to learn more.
+[Command Objects](../console-commands/commands) to learn more.
 
 Console  
 Contains the installation script executed by Composer.

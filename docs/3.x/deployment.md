@@ -60,7 +60,7 @@ return [
 If you're throwing your application out into the wild, it's a good idea to make
 sure it doesn't have any obvious leaks:
 
-- Ensure you are using the [Csrf](controllers/components/csrf) component or middleware.
+- Ensure you are using the [Cross Site Request Forgery](controllers/components/csrf) component or middleware.
 - You may want to enable the [Security](controllers/components/security) component.
   It can help prevent several types of form tampering and reduce the possibility
   of mass-assignment issues.
@@ -118,4 +118,4 @@ using:
 
 ## Deploying an update
 
-After deployment of an update you might also want to run `bin/cake schema_cache clear`, part of the [Schema Cache](console-and-shells/schema-cache) shell.
+After deployment of an update you might also want to run `bin/cake schema_cache clear`, part of the [Schema Cache Shell](console-and-shells/schema-cache) shell.
