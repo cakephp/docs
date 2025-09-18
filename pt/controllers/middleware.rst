@@ -25,30 +25,36 @@ resposta PSR-7. O CakePHP também suporta o padrão PSR-15 para manipuladores de
 servidor, para que você possa usar qualquer middleware compatível com PSR-15 disponível em
 `The Packagist <https://packagist.org>`_.
 
-Middleware em CakePHP
+Middleware no CakePHP
 =====================
 
 O CakePHP fornece vários middlewares para lidar com tarefas comuns em aplicativos da web:
 
-* ``Cake\Error\Middleware\ErrorHandlerMiddleware`` intercepta exceções do middleware
-  empacotado e renderiza uma página de erro usando o manipulador de
-  exceção :doc:`/development/errors`.
-* ``Cake\Routing\AssetMiddleware`` verifica se a solicitação está se referindo a um tema ou
-  arquivo estático do plug-in, como CSS, JavaScript ou arquivo de imagem armazenado na pasta
-  raiz da web de um plug-in ou na pasta correspondente a um Tema.
-* ``Cake\Routing\Middleware\RoutingMiddleware`` usa o ``Router`` para analisar a URL
-  recebida e atribuir parâmetros de roteamento à solicitação.
-* ``Cake\I18n\Middleware\LocaleSelectorMiddleware`` habilita a troca automática de idioma no
-  cabeçalho ``Accept-Language`` enviado pelo navegador.
-* ``Cake\Http\Middleware\SecurityHeadersMiddleware`` facilita adicionar cabeçalhos relacionados
-  à segurança como ``X-Frame-Options`` às respostas.
-* ``Cake\Http\Middleware\EncryptedCookieMiddleware`` oferece a capacidade de manipular cookies
-  criptografados, caso você precise manipular cookies com dados ofuscados.
-* ``Cake\Http\Middleware\CsrfProtectionMiddleware`` adiciona proteção CSRF ao seu aplicativo.
-* ``Cake\Http\Middleware\BodyParserMiddleware`` permite decodificar JSON, XML e outros corpos
-  de solicitação codificados com base no cabeçalho ``Content-Type``.
-* ``Cake\Http\Middleware\CspMiddleware`` simplifica a adição de cabeçalhos de política de
-  segurança de conteúdo ao seu aplicativo.
+* ``Cake\Error\Middleware\ErrorHandlerMiddleware`` captura exceções do middleware encapsulado e renderiza 
+    uma página de erro usando o manipulador de exceções :doc:`/development/errors`.
+* ``Cake\Routing\AssetMiddleware`` verifica se a solicitação está se referindo a um
+    arquivo de recursos de tema ou plugin, como um arquivo CSS, JavaScript ou de imagem armazenado
+    na pasta webroot de um plugin ou na pasta correspondente de um tema.
+* ``Cake\Routing\Middleware\RoutingMiddleware`` usa o ``Router`` para analisar a
+    URL de entrada e atribuir parâmetros de roteamento à solicitação.
+* ``Cake\I18n\Middleware\LocaleSelectorMiddleware`` permite a troca automática de idioma
+    a partir do cabeçalho ``Accept-Language`` enviado pelo navegador.
+* ``Cake\Http\Middleware\EncryptedCookieMiddleware`` permite que você
+    manipule cookies criptografados caso precise manipular cookies com
+    dados ofuscados.
+* ``Cake\Http\Middleware\BodyParserMiddleware`` permite decodificar JSON, XML
+    e outros corpos de solicitação codificados com base no cabeçalho ``Content-Type``.
+* :doc:`Cake\Http\Middleware\HttpsEnforcerMiddleware </security/https-enforcer>`
+    requer o uso de HTTPS.
+* :doc:`Cake\Http\Middleware\CsrfProtectionMiddleware </security/csrf>` adiciona
+    proteção CSRF baseada em cookie de envio duplo ao seu aplicativo.
+* :doc:`Cake\Http\Middleware\SessionCsrfProtectionMiddleware </security/csrf>`
+    adiciona proteção CSRF baseada em sessão ao seu aplicativo.
+* :doc:`Cake\Http\Middleware\CspMiddleware </security/content-security-policy>`
+    simplifica a adição de cabeçalhos Content-Security-Policy ao seu aplicativo.
+* :doc:`Cake\Http\Middleware\SecurityHeadersMiddleware </security/security-headers>`
+    possibilita a adição de cabeçalhos relacionados à segurança, como ``X-Frame-Options``, a
+    respostas.
 
 .. _using-middleware:
 
@@ -72,12 +78,18 @@ middleware::
 
     class Application extends BaseApplication
     {
-        public function middleware(MiddlewareQueue $middlwareQueue): MiddlewareQueue
+        public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue
         {
-            // Vincule o manipulador de erros à fila do middleware.
+            // Vincule o handler de erros à fila do middleware.
             $middlewareQueue->add(new ErrorHandlerMiddleware(Configure::read('Error'), $this));
 
-            return $middlwareQueue;
+            // Adicionar middleware por nome de classe.
+            // A partir da versão 4.5.0, o middleware de nome de classe é resolvido opcionalmente
+            // usando o contêiner DI. Se a classe não for encontrada no
+            // contêiner, uma instância será criada pela fila de middleware.
+            $middlewareQueue->add(UserRateLimiting::class);
+
+            return $middlewareQueue;
         }
     }
 
@@ -111,9 +123,9 @@ Além de adicionar ao final do ``MiddlewareQueue``, você pode executar várias 
             $layer
         );
 
-Além de aplicar o middleware a todo o aplicativo, você pode aplicar o
-middleware a conjuntos específicos de rotas usando
-:ref:`Scope Middleware <connecting-scoped-middleware>`.
+Se o seu middleware for aplicável apenas a um subconjunto de rotas ou controllers
+individuais, você pode usar :ref:`Middleware com escopo de rota <route-scoped-middleware>`,
+ou :ref:`Middleware do controller <controller-middleware>`.
 
 Adicionando Middleware a partir de Plugins
 ------------------------------------------
@@ -218,80 +230,15 @@ aplicativo::
 Roteamento de Middleware
 ========================
 
-O middleware de roteamento é responsável por aplicar as rotas no seu aplicativo e
-resolver o: plug-in, o controlador e a ação que uma solicitação está pedindo.
-Ele pode armazenar em cache a coleção de rotas usada no seu aplicativo para aumentar o
-tempo de inicialização. Para habilitar o cache de rotas em, forneça o
-:ref:`cache configuration <cache-configuration>` desejado como um parâmetro::
+O middleware de roteamento é responsável por aplicar as rotas da sua aplicação e
+resolver o plugin, o controller e a ação para a qual uma solicitação será enviada::
 
-    // Em Application.php
-    public function middleware(MiddlewareQueue $middlwareQueue): MiddlewareQueue
+    // In Application.php
+    public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue
     {
         // ...
-        $middlwareQueue->add(new RoutingMiddleware($this, 'routing'));
+        $middlewareQueue->add(new RoutingMiddleware($this));
     }
-
-O exemplo acima usaria o mecanismo de cache ``routing`` para armazenar a coleção
-de rotas gerada.
-
-.. _security-header-middleware:
-
-Middleware de Cabeçalho de Segurança
-====================================
-
-A camada ``Security Headers Middleware`` facilita a aplicação de cabeçalhos
-relacionados à segurança em seu aplicativo. Depois de configurado, o middleware
-pode aplicar os seguintes cabeçalhos às respostas:
-
-* ``X-Content-Type-Options``
-* ``X-Download-Options``
-* ``X-Frame-Options``
-* ``X-Permitted-Cross-Domain-Policies``
-* ``Referrer-Policy``
-
-Esse middleware é configurado usando uma interface simples antes de ser aplicado à
-pilha de middleware do seu aplicativo::
-
-    use Cake\Http\Middleware\SecurityHeadersMiddleware;
-
-    $securityHeaders = new SecurityHeadersMiddleware();
-    $securityHeaders
-        ->setCrossDomainPolicy()
-        ->setReferrerPolicy()
-        ->setXFrameOptions()
-        ->setXssProtection()
-        ->noOpen()
-        ->noSniff();
-
-    $middlwareQueue->add($securityHeaders);
-
-Middleware do Cabeçalho da Política de Segurança de Conteúdo
-============================================================
-
-O ``CspMiddleware`` facilita a adição de cabeçalhos referente a política de segurança de
-conteúdo em seu aplicativo. Antes de usá-lo, você deve instalar o ``paragonie/csp-builder``:
-
-.. code-block::bash
-
-    composer require paragonie/csp-builder
-
-Você pode configurar o middleware usando uma matriz ou passando um
-objeto ``CSPBuilder`` integrado::
-
-    use Cake\Http\Middleware\CspMiddleware;
-
-    $csp = new CspMiddleware([
-        'script-src' => [
-            'allow' => [
-                'https://www.google-analytics.com',
-            ],
-            'self' => true,
-            'unsafe-inline' => false,
-            'unsafe-eval' => false,
-        ],
-    ]);
-
-    $middlewareQueue->add($csp);
 
 .. _encrypted-cookie-middleware:
 
@@ -320,100 +267,6 @@ OpenSSL usando AES::
 
 Os algoritmos de criptografia e o estilo de preenchimento usados pelo middleware
 do cookie são compatíveis com o ``CookieComponent`` de versões anteriores do CakePHP.
-
-.. _csrf-middleware:
-
-Falsificação de Solicitação entre Sites (CSRF) Middleware
-=========================================================
-
-A proteção CSRF pode ser aplicada a todo o aplicativo ou a escopos de roteamento específicos.
-
-.. note::
-
-    Você não pode usar as duas abordagens a seguir juntas; deve escolher apenas uma.
-    Se você usar as duas abordagens juntas, ocorrerá um erro de incompatibilidade de
-    token CSRF em cada solicitação `PUT` e` POST`
-
-Ao aplicar o ``CsrfProtectionMiddleware`` à pilha de middleware do Aplicativo,
-você protege todas as ações no aplicativo::
-
-    // Em src/Application.php
-    use Cake\Http\Middleware\CsrfProtectionMiddleware;
-
-    public function middleware($middlwareQueue) {
-        $options = [
-            // ...
-        ];
-        $csrf = new CsrfProtectionMiddleware($options);
-
-        $middlwareQueue->add($csrf);
-
-        return $middlwareQueue;
-    }
-
-Ao aplicar o ``CsrfProtectionMiddleware`` aos escopos de roteamento, você pode
-incluir ou excluir grupos de rotas específicos::
-
-    // Em src/Application.php
-    use Cake\Http\Middleware\CsrfProtectionMiddleware;
-
-    public function routes($routes) {
-        $options = [
-            // ...
-        ];
-        $routes->registerMiddleware('csrf', new CsrfProtectionMiddleware($options));
-        parent::routes($routes);
-    }
-
-    // Em config/routes.php
-    Router::scope('/', function (RouteBuilder $routes) {
-        $routes->applyMiddleware('csrf');
-    });
-
-
-As opções podem ser passadas para o construtor do middleware.
-As opções de configuração disponíveis são:
-
-- ``cookieName`` O nome do cookie a ser enviado. O padrão é `` csrfToken``.
-- ``expiry`` Quanto tempo o token CSRF deve durar. O padrão é a sessão do navegador.
-- ``secure`` Se o cookie será ou não definido com o sinalizador Secure. Isso é,
-    o cookie será definido apenas em uma conexão HTTPS e qualquer tentativa no
-  HTTP normal falhará. O padrão é ``false``.
-- ``httpOnly`` Se o cookie será ou não definido com o sinalizador HttpOnly. O padrão é ``false``.
-- ``field`` O campo do formulário a ser verificado. O padrão é ``_csrfToken``.
-  Alterar isso também exigirá a configuração do FormHelper.
-
-Quando ativado, você pode acessar o token CSRF atual no objeto de solicitação::
-
-    $token = $this->request->getParam('_csrfToken');
-
-.. note::
-
-    Você deve aplicar o middleware de proteção CSRF apenas para URLs que manipulam solicitações
-    com estado usando cookies/sessão. Solicitações sem estado, por ex. ao desenvolver uma API,
-    não são afetados pelo CSRF; portanto, o middleware não precisa ser aplicado a essas URLs.
-
-Integração com FormHelper
--------------------------
-
-O ``CsrfProtectionMiddleware`` se integra perfeitamente ao ``FormHelper``. Cada vez
-que você cria um formulário com ``FormHelper``, ele insere um campo oculto que contém o token CSRF.
-
-.. note::
-
-    Ao usar a proteção CSRF, você sempre deve iniciar seus formulários com o ``FormHelper``.
-    Caso contrário, será necessário criar manualmente entradas ocultas em cada um dos seus formulários.
-
-Solicitações de Proteção CSRF e AJAX
-------------------------------------
-
-Além de solicitar parâmetros de dados, os tokens CSRF podem ser enviados por meio
-de um cabeçalho especial ``X-CSRF-Token``. O uso de um cabeçalho geralmente facilita
-a integração de um token CSRF com aplicativos pesados de JavaScript ou endpoints de API
-baseados em XML/JSON.
-
-O token CSRF pode ser obtido através do cookie ``csrfToken``.
-
 
 .. _body-parser-middleware:
 
