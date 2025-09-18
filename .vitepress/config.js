@@ -19,12 +19,15 @@ export default defineConfig({
         ['link', { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' }],
         ['link', { href: 'https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap', rel: 'stylesheet' }],
     ],
+    rewrites: {
+        ':version/:slug*': ':version/:slug*'        
+    },
     themeConfig: {
         logo: '/logo.svg',
         nav: [
-            { text: 'Guide', link: '/5/en/intro' },
+            { text: 'Guide', link: '/5.x/intro' },
             { text: 'API', link: 'https://api.cakephp.org/' },
-            { text: 'Documentation', link: '/5/en/' },
+            { text: 'Documentation', link: '/5.x/' },
             {
                 component: 'VersionDropdown',
             }
@@ -40,7 +43,7 @@ export default defineConfig({
             options: {
                 async _render(src, env, md) {
                     const versioninfo = getVersionByPath(env.relativePath)
-                    if (!env.relativePath.startsWith(versioninfo.version + '/en')) return ''
+                    if (!env.relativePath.startsWith(versioninfo.version)) return ''
                     const html = await md.render(src, env)
                     return html
                 }
@@ -60,13 +63,6 @@ export default defineConfig({
                 dateStyle: 'full',
                 timeStyle: 'medium'
             }
-        }
-    },
-    locales: {
-        root: {
-            label: 'English',
-            lang: 'en',
-            link: '/5/en/'
         }
     },
     build: {
