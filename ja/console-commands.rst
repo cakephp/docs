@@ -117,7 +117,7 @@ CakePHPアプリケーションには、シェルとタスクを含む **src/Com
     }
 
 アプリケーションの ``console()`` フックを上書きする場合、
-``$commands->autoDiscover()`` を呼び出して、CakePHP、アプリケーション、
+``$commands->addMany($commands->autoDiscover())`` を呼び出して、CakePHP、アプリケーション、
 およびプラグインからコマンドを追加することを忘れないでください。
 
 添付されているコマンドの名前を変更したい・削除する必要がある場合は、
