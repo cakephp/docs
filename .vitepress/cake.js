@@ -1,12 +1,12 @@
 /**
- * CakePHP Documentation Helper Functions
- *
- * Helper functions for managing CakePHP documentation versions,
- * navigation, and locale-specific operations.
- *
- * Configuration arrays (versions, supportedLocales, etc.) are now located
- * in ./cake/config.js for better organization and easier maintenance.
- */
+* CakePHP Documentation Helper Functions
+*
+* Helper functions for managing CakePHP documentation versions,
+* navigation, and locale-specific operations.
+*
+* Configuration arrays (versions, supportedLocales, etc.) are now located
+* in ./cake/config.js for better organization and easier maintenance.
+*/
 
 // Import configuration from separate config file
 import {
