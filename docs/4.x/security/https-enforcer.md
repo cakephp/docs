@@ -61,6 +61,7 @@ $https = new HttpsEnforcerMiddleware([
 ::: info Added in version 4.4.0
 The `hsts` option was added.
 :::
+
 ::: info Added in version 4.5.0
 The `trustedProxies` option was added.
 :::

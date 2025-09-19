@@ -313,6 +313,7 @@ associations.
 ::: info Added in version 3.6.0
 The `selectAllExcept()` method was added.
 :::
+
 <a id="using-sql-functions"></a>
 
 ### Using SQL Functions
@@ -374,6 +375,7 @@ Returns a FunctionExpression representing a call to SQL WEEKDAY function.
 ::: info Added in version 3.1
 `extract()`, `dateAdd()` and `dayOfWeek()` methods have been added.
 :::
+
 ::: info Added in version 3.7
 `rand()` was added.
 :::
@@ -1760,6 +1762,7 @@ result set.
 ::: info Added in version 3.1
 () was added in 3.1
 :::
+
 <a id="adding-joins"></a>
 
 ### Adding Joins

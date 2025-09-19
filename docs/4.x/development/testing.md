@@ -551,6 +551,7 @@ connection and rebuild tables based on the provided schema file.
 ::: info Added in version 4.3.0
 SchemaLoader was added.
 :::
+
 <a id="fixture-state-management"></a>
 
 ### Fixture State Managers

@@ -90,6 +90,7 @@ hashing and encrypting data.
 >
 > ::: info Added in version 2.5
 > :::
+>
 > ::: info Added in version 2.10.8
 > Set `Security.useOpenSsl` to use OpenSSL instead of the deprecated `mcrypt` extension.
 > :::
@@ -121,6 +122,7 @@ hashing and encrypting data.
 >
 > ::: info Added in version 2.5
 > :::
+>
 > ::: info Added in version 2.10.8
 > Set `Security.useOpenSsl` to use OpenSSL instead of the deprecated `mcrypt` extension.
 > :::

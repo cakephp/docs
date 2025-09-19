@@ -417,12 +417,15 @@ handles, and generate file handles when reading data.
 ::: info Changed in version 3.3.0
 The `json` type was added.
 :::
+
 ::: info Changed in version 3.5.0
 The `smallinteger` and `tinyinteger` types were added.
 :::
+
 ::: info Changed in version 3.6.0
 The `binaryuuid` type was added.
 :::
+
 <a id="adding-custom-database-types"></a>
 
 ### Adding Custom Types

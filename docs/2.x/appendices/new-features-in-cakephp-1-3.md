@@ -439,7 +439,7 @@ know how to import libs files with unique names.
 Now you can use locale definition files for the LC_TIME category
 to retrieve date and time preferences for a specific language. Just
 use any POSIX compliant locale definition file and store it at
-app/locale/*language*/ (do not create a folder for the category
+app/locale/\*language\*/ (do not create a folder for the category
 LC_TIME, just put the file in there).
 
 For example, if you have access to a machine running debian or

@@ -479,9 +479,11 @@ handles, and generate file handles when reading data.
 ::: info Changed in version 5.1.0
 The `geometry`, `point`, `linestring`, and `polygon` types wereadded.
 :::
+
 ::: info Changed in version 5.2.0
 The `nativeuuid` type was added.
 :::
+
 <a id="datetime-type"></a>
 
 ### DateTime Type
@@ -611,6 +613,7 @@ and have values set as text.
 ::: info Added in version 5.1.0
 Geospatial schema types were added.
 :::
+
 <a id="adding-custom-database-types"></a>
 
 ### Adding Custom Types

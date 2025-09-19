@@ -231,6 +231,7 @@ class ErrorController extends AppController
 ::: info Added in version 5.2.0
 Exception specific controller methods and templates were added.
 :::
+
 <a id="custom-exceptionrenderer"></a>
 
 ## Custom ExceptionRenderer

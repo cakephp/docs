@@ -1,6 +1,5 @@
 import { defineConfig } from 'vitepress'
 import { generateSidebars } from './sidebar.js'
-import { getVersionByPath } from './cake.js'
 import { versionReplacer } from './plugins/version-replacer.js'
 
 export default defineConfig({
@@ -20,18 +19,10 @@ export default defineConfig({
         ['link', { href: 'https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap', rel: 'stylesheet' }],
     ],
     rewrites: {
-        ':version/:slug*': ':version/:slug*'        
+        ':version/:slug*': ':version/:slug*'
     },
     themeConfig: {
         logo: '/logo.svg',
-        nav: [
-            { text: 'Guide', link: '/5.x/intro' },
-            { text: 'API', link: 'https://api.cakephp.org/' },
-            { text: 'Documentation', link: '/5.x/' },
-            {
-                component: 'VersionDropdown',
-            }
-        ],
         sidebar: generateSidebars(),
         socialLinks: [
             { icon: 'github', link: 'https://github.com/cakephp/cakephp' },
@@ -42,15 +33,17 @@ export default defineConfig({
             provider: 'local',
             options: {
                 async _render(src, env, md) {
-                    const versioninfo = getVersionByPath(env.relativePath)
-                    if (!env.relativePath.startsWith(versioninfo.version)) return ''
-                    const html = await md.render(src, env)
-                    return html
+                    if (env.relativePath.startsWith('5.x') || env.relativePath.startsWith('ja/5.x')) {
+                        const html = await md.render(src, env)
+                        return html
+                    }
+
+                    return '';
                 }
             }
         },
         editLink: {
-            pattern: 'https://github.com/cakephp/docs/edit/5.x/en/:path',
+            pattern: 'https://github.com/cakephp/docs/edit/:path',
             text: 'Edit this page on GitHub'
         },
         footer: {
@@ -78,6 +71,42 @@ export default defineConfig({
         lineNumbers: true,
         config: (md) => {
             md.use(versionReplacer)
+        }
+    },
+    locales: {
+        root: {
+            label: 'English',
+            lang: 'en',
+            themeConfig: {
+                nav: [
+                    { text: 'Guide', link: '/5.x/intro' },
+                    { text: 'API', link: 'https://api.cakephp.org/' },
+                    { text: 'Documentation', link: '/5.x/' },
+                    {
+                        component: 'VersionDropdown',
+                    }
+                ],
+            }
+        },
+        ja: {
+            label: 'Japanese',
+            lang: 'ja',
+            link: '/ja/',
+            themeConfig: {
+                nav: [
+                    { text: 'ガイド', link: '/ja/5.x/intro' },
+                    { text: 'API', link: 'https://api.cakephp.org/' },
+                    { text: 'ドキュメント', link: '/ja/5.x/' },
+                    {
+                        component: 'VersionDropdown',
+                    }
+                ],
+                sidebar: generateSidebars(),
+                editLink: {
+                    pattern: 'https://github.com/cakephp/docs/edit/:path',
+                    text: 'GitHub でこのページを編集'
+                }
+            }
         }
     }
 })

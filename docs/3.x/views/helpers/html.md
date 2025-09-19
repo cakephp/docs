@@ -892,7 +892,7 @@ $this->Html->addCrumb('Users', '/users');
 $this->Html->addCrumb('Add User', ['controller' => 'Users', 'action' => 'add']);
 ```
 
-This will add the output of "**Home \> Users \> Add User**" in your layout where
+This will add the output of "\*\*Home \> Users \> Add User\*\*" in your layout where
 `getCrumbs` was added.
 
 You can also fetch the crumbs formatted inside an HTML list:

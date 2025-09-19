@@ -169,6 +169,7 @@ echo $this->Paginator->numbers(array('first' => 2, 'last' => 2));
 ::: info Added in version 2.1
 The `currentClass` option was added in 2.1.
 :::
+
 ::: info Added in version 2.3
 The `currentTag` option was added in 2.3.
 :::

@@ -301,6 +301,7 @@ if (!empty($events)) {
 ::: info Added in version 3.2.3
 The `matchingListeners` method returns an array of events matchinga search pattern.
 :::
+
 <a id="event-priorities"></a>
 
 ### Establishing Priorities

@@ -351,6 +351,7 @@ $http->addCookie(new Cookie('session', 'abc123'));
 ::: info Added in version 3.5.0
 `addCookie()` was added in 3.5.0
 :::
+
 <a id="httpclient-response-objects"></a>
 
 ## Response Objects

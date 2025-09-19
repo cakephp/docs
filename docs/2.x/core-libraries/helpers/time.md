@@ -91,6 +91,7 @@ Formatting
 > ::: info Changed in version 2.2
 > `$timezone` parameter replaces `$userOffset` parameter used in 2.1 and below.
 > :::
+>
 > ::: info Added in version 2.2
 > `$dateString` parameter now also accepts a DateTime object.
 > :::
@@ -117,6 +118,7 @@ Formatting
 > ::: info Changed in version 2.2
 > `$timezone` parameter replaces `$userOffset` parameter used in 2.1 and below.
 > :::
+>
 > ::: info Added in version 2.2
 > `$dateString` parameter now also accepts a DateTime object.
 > :::
@@ -158,6 +160,7 @@ Formatting
 > ::: info Changed in version 2.2
 > `$format` and `$date` parameters are in opposite order as used in 2.1 and below.`$timezone` parameter replaces `$userOffset` parameter used in 2.1 and below.`$default` parameter replaces `$invalid` parameter used in 2.1 and below.
 > :::
+>
 > ::: info Added in version 2.2
 > `$date` parameter now also accepts a DateTime object.
 > :::
@@ -185,6 +188,7 @@ Formatting
 > ::: info Changed in version 2.2
 > `$timezone` parameter replaces `$userOffset` parameter used in 2.1 and below.
 > :::
+>
 > ::: info Added in version 2.2
 > `$dateString` parameter now also accepts a DateTime object.
 > :::
@@ -253,6 +257,7 @@ Formatting
 > ::: info Changed in version 2.2
 > `$timezone` parameter replaces `$userOffset` parameter used in 2.1 and below.
 > :::
+>
 > ::: info Added in version 2.2
 > `$dateString` parameter now also accepts a DateTime object.
 > :::
@@ -321,6 +326,7 @@ Formatting
 > ::: info Changed in version 2.2
 > The `accuracy` option was added.
 > :::
+>
 > ::: info Added in version 2.2
 > `$dateString` parameter now also accepts a DateTime object.
 > :::
@@ -333,6 +339,7 @@ Formatting
 > ::: info Changed in version 2.2
 > `$timezone` parameter replaces `$userOffset` parameter used in 2.1 and below.
 > :::
+>
 > ::: info Added in version 2.2
 > `$dateString` parameter now also accepts a DateTime object.
 > :::
@@ -368,6 +375,7 @@ Formatting
 > ::: info Added in version 2.2
 > `$dateString` parameter now also accepts a DateTime object.
 > :::
+>
 > ::: info Added in version 2.4
 > The new option parameters `relativeString` (defaults to `%s ago`) and
 > :::
@@ -385,6 +393,7 @@ Formatting
 > ::: info Changed in version 2.2
 > `$timezone` parameter replaces `$userOffset` parameter used in 2.1 and below.
 > :::
+>
 > ::: info Added in version 2.2
 > `$dateString` parameter now also accepts a DateTime object.
 > :::
@@ -397,6 +406,7 @@ Formatting
 > ::: info Changed in version 2.2
 > `$timezone` parameter replaces `$userOffset` parameter used in 2.1 and below.
 > :::
+>
 > ::: info Added in version 2.2
 > `$dateString` parameter now also accepts a DateTime object.
 > :::
@@ -421,6 +431,7 @@ Formatting
 > ::: info Added in version 2.2
 > Returns a list of timezone identifiers.
 > :::
+>
 > ::: info Changed in version 2.8
 > `$options` now accepts array with `group`, `abbr`, `before`, and `after` keys.Specify `abbr => true` will append the timezone abbreviation in the `<option>` text.
 > :::
@@ -436,6 +447,7 @@ Formatting
 > ::: info Changed in version 2.2
 > `$timezone` parameter replaces `$userOffset` parameter used in 2.1 and below.
 > :::
+>
 > ::: info Added in version 2.2
 > `$dateString` parameter now also accepts a DateTime object.
 > :::

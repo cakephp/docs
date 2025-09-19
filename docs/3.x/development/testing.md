@@ -1213,6 +1213,7 @@ $this->setUnlockedFields(['dynamic_field']);
 ::: info Added in version 3.1.2
 The `enableCsrfToken()` and `enableSecurityToken()` methods were addedin 3.1.2
 :::
+
 ::: info Added in version 3.8.3
 The `setUnlockedFields()` method was added.
 :::
@@ -1334,6 +1335,7 @@ $this->assertFlashElementAt(1, 'Flash/error');
 ::: info Added in version 3.4.7
 `enableRetainFlashMessages()` was added in 3.4.7
 :::
+
 ::: info Added in version 3.7.0
 Flash message assertions were added.
 :::

@@ -1308,6 +1308,7 @@ If the `label` key is used on an option, the attributes in
 ::: info Changed in version 3.8.0
 The `label` key in complex options was added.
 :::
+
 <a id="create-select-picker"></a>
 
 #### Creating Select Pickers

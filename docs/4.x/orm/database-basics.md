@@ -674,6 +674,7 @@ no value for the current database driver:
 ::: info Added in version 4.3.0
 `ColumnSchemaAwareInterface` was added.
 :::
+
 <a id="mapping-custom-datatypes-to-sql-expressions"></a>
 
 ### Mapping Custom Datatypes to SQL Expressions

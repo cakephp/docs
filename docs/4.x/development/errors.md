@@ -136,9 +136,11 @@ Within an `Exception.beforeRender` handler you have a few options:
 ::: info Added in version 4.4.0
 Error and Exception events were added.
 :::
+
 ::: info Changed in version 4.5.0
 The `beforeRender` events can now replace exceptions and replace rendering.
 :::
+
 <a id="error-views"></a>
 
 ## Custom Error Templates
@@ -384,6 +386,7 @@ class ErrorLogger implements ErrorLoggerInterface
 ::: info Added in version 4.1.0
 ErrorLoggerInterface was added.
 :::
+
 ::: info Changed in version 4.4.0
 `ErrorLoggerInterface::logException()` and `ErrorLoggerInterface::logError()` were added.
 :::

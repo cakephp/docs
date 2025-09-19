@@ -95,6 +95,7 @@ set to a value greater than 0.
 > ::: info Changed in version 2.1
 > In 2.1 forward the output was updated for readability. See`Debugger::exportVar()`
 > :::
+>
 > ::: info Changed in version 2.5.0
 > The `depth` parameter was added.
 > :::

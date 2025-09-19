@@ -155,6 +155,7 @@ The above configuration would enable STARTTLS communication for email messages.
 ::: info Added in version 2.3
 Support for TLS delivery was added in 2.3
 :::
+
 <a id="email-configurations"></a>
 
 ### Configurations
@@ -348,6 +349,7 @@ you want the filenames to appear in the recipient's mail client:
 ::: info Changed in version 2.3
 The `contentDisposition` option was added.
 :::
+
 ::: info Changed in version 2.4
 The `data` option was added.
 :::

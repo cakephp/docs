@@ -129,6 +129,7 @@ This would update your application's bootstrap method, or put the
 ::: info Added in version 4.1.0
 The `addOptionalPlugin()` method was added.
 :::
+
 <a id="plugin-configuration"></a>
 
 ## Plugin Hook Configuration
@@ -251,7 +252,7 @@ basic directory structure. It should look like this:
                 /Fixture
             /webroot
 
-Note the name of the plugin folder, '**ContactManager**'. It is important
+Note the name of the plugin folder, '\*\*ContactManager\*\*'. It is important
 that this folder has the same name as the plugin.
 
 Inside the plugin folder, you'll notice it looks a lot like a CakePHP

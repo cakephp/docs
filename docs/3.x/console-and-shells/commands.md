@@ -265,6 +265,7 @@ and assert against their results.
 ::: info Added in version 3.5.0
 The `ConsoleIntegrationTestCase` was added.
 :::
+
 ::: info Added in version 3.7.0
 The `ConsoleIntegrationTestCase` class was moved into the `ConsoleIntegrationTestTrait` trait.
 :::

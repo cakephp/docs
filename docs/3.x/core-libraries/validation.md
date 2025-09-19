@@ -163,6 +163,7 @@ full set of validator methods.
 ::: info Added in version 3.2
 Rule building methods were added in 3.2.0
 :::
+
 <a id="custom-validation-rules"></a>
 
 ### Using Custom Validation Rules
@@ -531,6 +532,7 @@ The error message for a nested validator can be found in the `_nested` key.
 ::: info Added in version 3.6.0
 message and conditions for nested validators were added.
 :::
+
 <a id="reusable-validators"></a>
 
 ### Creating Reusable Validators

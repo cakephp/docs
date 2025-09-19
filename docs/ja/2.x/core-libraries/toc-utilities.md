@@ -1,0 +1,18 @@
+# ユーティリティ
+
+- [Caching](../caching)
+- [Email](../../core-utility-libraries/email)
+- [File Folder](../../core-utility-libraries/file-folder)
+- [Hash](../../core-utility-libraries/hash)
+- [Httpsocket](../../core-utility-libraries/httpsocket)
+- [Inflector](../../core-utility-libraries/inflector)
+- [Internationalization And Localization](../internationalization-and-localization)
+- [Logging](../logging)
+- [Number](../../core-utility-libraries/number)
+- [Router](../../core-utility-libraries/router)
+- [Sanitize](../../core-utility-libraries/sanitize)
+- [Security](../../core-utility-libraries/security)
+- [Set](../../core-utility-libraries/set)
+- [String](../../core-utility-libraries/string)
+- [Time](../../core-utility-libraries/time)
+- [Xml](../../core-utility-libraries/xml)

@@ -1173,6 +1173,7 @@ manipulate entities, marshall request data, and create form fields.
 ::: info Added in version 5.2.0
 Custom junction property names were added.
 :::
+
 <a id="saving-complex-types"></a>
 
 ### Saving Complex Types

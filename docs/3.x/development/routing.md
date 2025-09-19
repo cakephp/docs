@@ -321,6 +321,7 @@ All of these methods return the route instance allowing you to leverage the
 ::: info Added in version 3.5.0
 The HTTP verb helper methods were added.
 :::
+
 <a id="route-elements"></a>
 
 ### Route Elements
@@ -1138,6 +1139,7 @@ $routes->applyMiddleware('web');
 ::: info Added in version 3.5.0
 Scoped middleware & middleware groups were added in 3.5.0
 :::
+
 <a id="resource-routes"></a>
 
 ## RESTful Routing
@@ -1596,6 +1598,7 @@ provided entity.
 ::: info Added in version 3.6.0
 Entity routing was added in 3.6.0
 :::
+
 <a id="custom-route-classes"></a>
 
 ## Custom Route Classes

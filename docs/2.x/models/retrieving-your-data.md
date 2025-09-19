@@ -44,6 +44,7 @@ If your `find()` operation fails to match any records, you will get an empty arr
 ::: info Added in version 2.10.0
 The `having` and `lock` options were added.
 :::
+
 <a id="model-find-first"></a>
 
 ## find('first')

@@ -22,19 +22,19 @@ allows you to define how the CookieComponent works.
 <col style="width: 61%" />
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th>Cookie variable</th>
 <th>default</th>
 <th>description</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td>string $name</td>
 <td>'CakeCookie'</td>
 <td>The name of the cookie.</td>
 </tr>
-<tr class="even">
+<tr>
 <td>string $key</td>
 <td>null</td>
 <td><p>This string is used to encrypt
@@ -43,14 +43,14 @@ The string should be random and difficult to guess.</p>
 <p>When using rijndael or aes encryption, this value
 must be longer than 32 bytes.</p></td>
 </tr>
-<tr class="odd">
+<tr>
 <td>string $domain</td>
 <td>''</td>
 <td>The domain name allowed to access the cookie. For
 example, use '.yourdomain.com' to allow access from
 all your subdomains.</td>
 </tr>
-<tr class="even">
+<tr>
 <td>int or string
 $time</td>
 <td>'5 Days'</td>
@@ -61,7 +61,7 @@ the browser is closed. If a string is set, this will
 be interpreted with PHP function strtotime(). You can
 set this directly within the write() method.</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>string $path</td>
 <td>'/'</td>
 <td>The server path on which the cookie will be applied.
@@ -71,7 +71,7 @@ sub-directories of your domain, such as /foo/bar. The
 default value is the entire domain. You can set this
 directly within the write() method.</td>
 </tr>
-<tr class="even">
+<tr>
 <td>boolean $secure</td>
 <td>false</td>
 <td>Indicates that the cookie should only be transmitted
@@ -80,7 +80,7 @@ cookie will only be set if a secure connection
 exists. You can set this directly within the write()
 method.</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>boolean
 $httpOnly</td>
 <td>false</td>

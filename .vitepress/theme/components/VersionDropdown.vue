@@ -1,13 +1,26 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue'
-import { useRoute, withBase } from 'vitepress'
-import { getVersionNavItems, getVersionByPath, getVersionLabel } from '../../cake.js'
+import { useRoute, useData, withBase } from 'vitepress'
+import { getVersionNavItems, getVersionByPath, getVersionLabel, isLocaleSupported } from '../../cake.js'
 
 const route = useRoute()
+const { localeIndex, site } = useData()
 const isOpen = ref(false)
 
-// Get version navigation items from centralized config
-const versionNavItems = getVersionNavItems()
+// Get current locale from VitePress's locale system
+const currentLocale = computed(() => {
+  // localeIndex gives us the current locale (e.g., 'ja', 'root' for English)
+  // Convert 'root' to 'en' for our system
+  const locale = localeIndex.value === 'root' ? 'en' : localeIndex.value
+
+  // Fallback to 'en' if locale is not supported by our version system
+  return isLocaleSupported(locale) ? locale : 'en'
+})
+
+// Get version navigation items for current locale
+const versionNavItems = computed(() => {
+  return getVersionNavItems(currentLocale.value)
+})
 
 const currentPath = computed(() => {
   const version = getVersionByPath(route.path)
@@ -50,9 +63,9 @@ onUnmounted(() => {
     </button>
     <ul v-show="isOpen" class="nav-dropdown-links">
       <li v-for="version in versionNavItems" :key="version.path">
-        <a 
-          :href="withBase(version.link)" 
-          :class="{ active: version.path === currentPath }"
+        <a
+          :href="withBase(version.link)"
+          :class="{ active: withBase(version.path) === currentPath }"
           @click="closeDropdown"
         >
           {{ version.text }}

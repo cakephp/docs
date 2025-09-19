@@ -70,7 +70,7 @@ this information were stored in a table, it might look like this:
 
 <table>
 <thead>
-<tr class="header">
+<tr>
 <th>x</th>
 <th>Weapons</th>
 <th>The Ring</th>
@@ -80,7 +80,7 @@ this information were stored in a table, it might look like this:
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td>Gandalf</td>
 <td></td>
 <td></td>
@@ -88,7 +88,7 @@ this information were stored in a table, it might look like this:
 <td>Allow</td>
 <td>Allow</td>
 </tr>
-<tr class="even">
+<tr>
 <td><p>--------Aragorn</p></td>
 <td><p>--------Allow</p></td>
 <td><hr /></td>
@@ -96,7 +96,7 @@ this information were stored in a table, it might look like this:
 <td><p>----------Allow</p></td>
 <td><p>-------Allow</p></td>
 </tr>
-<tr class="odd">
+<tr>
 <td><p>--------Bilbo</p></td>
 <td><hr /></td>
 <td><hr /></td>
@@ -104,7 +104,7 @@ this information were stored in a table, it might look like this:
 <td><hr /></td>
 <td><p>-------Allow</p></td>
 </tr>
-<tr class="even">
+<tr>
 <td><p>--------Frodo</p></td>
 <td><hr /></td>
 <td><p>---------Allow</p></td>
@@ -112,7 +112,7 @@ this information were stored in a table, it might look like this:
 <td><hr /></td>
 <td><p>-------Allow</p></td>
 </tr>
-<tr class="odd">
+<tr>
 <td><p>--------Gollum</p></td>
 <td><hr /></td>
 <td><hr /></td>
@@ -120,7 +120,7 @@ this information were stored in a table, it might look like this:
 <td><hr /></td>
 <td><hr /></td>
 </tr>
-<tr class="even">
+<tr>
 <td><p>--------Legolas</p></td>
 <td><p>--------Allow</p></td>
 <td><hr /></td>
@@ -128,7 +128,7 @@ this information were stored in a table, it might look like this:
 <td><p>----------Allow</p></td>
 <td><p>-------Allow</p></td>
 </tr>
-<tr class="odd">
+<tr>
 <td><p>--------Gimli</p></td>
 <td><p>--------Allow</p></td>
 <td><hr /></td>
@@ -136,7 +136,7 @@ this information were stored in a table, it might look like this:
 <td><hr /></td>
 <td><hr /></td>
 </tr>
-<tr class="even">
+<tr>
 <td><p>--------Pippin</p></td>
 <td><hr /></td>
 <td><hr /></td>
@@ -144,7 +144,7 @@ this information were stored in a table, it might look like this:
 <td><p>----------Allow</p></td>
 <td><p>-------Allow</p></td>
 </tr>
-<tr class="odd">
+<tr>
 <td><p>--------Merry</p></td>
 <td><hr /></td>
 <td><hr /></td>

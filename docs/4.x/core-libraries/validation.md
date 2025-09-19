@@ -372,6 +372,7 @@ appear under the form field.
 ::: info Added in version 4.1.6.
 The `setStopOnFailure()` method was added in
 :::
+
 <a id="adding-validation-providers"></a>
 
 ### Adding Validation Providers

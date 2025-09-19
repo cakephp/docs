@@ -253,7 +253,7 @@ basic directory structure. It should look like this:
                 /Fixture
             /webroot
 
-Note the name of the plugin folder, '**ContactManager**'. It is important
+Note the name of the plugin folder, '\*\*ContactManager\*\*'. It is important
 that this folder has the same name as the plugin.
 
 Inside the plugin folder, you'll notice it looks a lot like a CakePHP

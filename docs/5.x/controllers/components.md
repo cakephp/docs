@@ -151,6 +151,7 @@ class PostsController extends AppController
 ::: info Changed in version 5.1.0
 Components are able to use  to receive services.
 :::
+
 <a id="creating-a-component"></a>
 
 ## Creating a Component

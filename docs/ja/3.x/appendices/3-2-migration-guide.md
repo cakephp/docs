@@ -1,0 +1,150 @@
+# 3.2 移行ガイド
+
+CakePHP 3.2 は、3.1 の API の完全上位互換です。
+このページでは、3.2 の変更と改善についてのアウトラインを紹介します。
+
+## PHP 5.5 以上が必要
+
+CakePHP 3.2 には、少なくとも PHP 5.5.9 が必要です。PHP 5.5 を採用することにより、
+我々はより良い日付と時刻のライブラリーを提供することができ、パスワードの互換ライブラリーの
+依存関係を削除できます。
+
+## 非推奨
+
+CakePHP を改善し続けていますので、一部の機能は、より良いソリューションに置き換えられて、
+非推奨になりました。非推奨の機能は 4.0 になるまで削除されません。
+
+- `Shell::error()` は非推奨です。それはメッセージ出力と実行停止の両方を示すことが
+  不明確だからです。代わりに `Shell::abort()` を使用してください。
+- `Cake\Database\Expression\QueryExpression::type()` は非推奨です。
+  代わりに `tieWith()` を使用してください。
+- `Cake\Database\Type\DateTimeType::$dateTimeClass` は非推奨です。代わりに
+  DateTimeType::useMutable() または DateTimeType::useImmutable() を使用してくだい。
+- `Cake\Database\Type\DateType::$dateTimeClass` は非推奨です。代わりに
+  `DateTimeType::useMutable()` または `DateTimeType::useImmutable()`
+  を使用してくだい。
+- `Cake\ORM\ResultSet::_calculateTypeMap()` は使用されず、非推奨です。
+- `Cake\ORM\ResultSet::_castValues()` は使用されず、非推奨です。
+- `FormHelper::create()` の `action` キーは非推奨です。
+  直接 `url` キーを使用する必要があります。
+
+### 非推奨の警告を無効化
+
+アップグレード時に、いくつかの非推奨の警告が発生することがあります。これらの警告は、
+CakePHP 4.xで削除されるメソッド、オプションや機能によって出力されますが、
+3.x の間は存在し続けます。発生した非推奨の問題に取り組むことをお勧めしますが、
+それは常に可能であるとは限りません。非推奨通知の修正を延期したい場合、
+**config/app.php** でそれらを無効にすることができます。 :
+
+    'Error' => [
+        'errorLevel' => E_ALL & ~E_DEPRECATED & ~E_USER_DEPRECATED,
+    ]
+
+上記のエラーレベルは、CakePHP からの非推奨の警告を抑制します。
+
+## 新機能
+
+### Carbon を Chronos に置換
+
+Carbon ライブラリーは、 [cakephp/chronos](../chronos) に置き換えられました。
+この新しいライブラリーは、依存関係を持たない Carbon のフォークです。カレンダーの
+date オブジェクトや、イミュータブル版 の date と datetime オブジェクトを提供しています。
+
+### 新しい Date オブジェクト
+
+`Date` クラスを使用すると、明確に PHP オブジェクトと `DATE` カラムを
+マッピングすることができます。Date インスタンスは常に `00:00:00 UTC`
+に自分の時間を固定します。デフォルトで、ORM は、`DATE` カラムのマッピング時には
+`Date` インスタンスを作成します。
+
+### 新しいイミュータブルな Date と Time オブジェクト
+
+`FrozenTime` および `FrozenDate` クラスが追加されました。
+これらのクラスは `Time` オブジェクトが持っているのと同じ API を提供しています。
+凍結された (frozen) クラスは `Time` と `Date` のイミュータブルな日付と時刻を提供します。
+イミュータブルオブジェクトを使用することによって、意図しない内容の変更を防止することができます。
+インスタンスの内容を変更する代わりに、変更メソッドは *新しい* インスタンスを返します。 :
+
+``` php
+use Cake\I18n\FrozenTime;
+
+$time = new FrozenTime('2016-01-01 12:23:32');
+$newTime = $time->modify('+1 day');
+```
+
+上記のコードの `$time` と `$newTime` は異なるオブジェクトです。 `$newTime`
+が変更された値を持っていながら、 `$time` オブジェクトは、元の値を保持します。
+詳細は、 [Immutable Time](../core-libraries/time#immutable-time) セクションをご覧ください。3.2 では、ORM は
+イミュータブルオブジェクトと date/datetime カラムをマッピングすることができます。
+詳細は、 [Immutable Datetime Mapping](../orm/database-basics#immutable-datetime-mapping) セクションをご覧ください。
+
+### CorsBuilder の追加
+
+クロスオリジン・リクエスト（CORS）に関連するヘッダーをより簡単に設定するために、
+`CorsBuilder` が新たに追加されました。このクラスを使用すると、流れるような
+インターフェイスで CORS 関連のヘッダーを定義することができます。
+詳細は、 [Cors Headers](../controllers/request-response#cors-headers) をご覧ください。
+
+### RedirectRoute はリダイレクトの例外を発生
+
+`Router::redirect()` は、リダイレクト条件に達した時に
+`Cake\Network\Routing\RedirectException` を発生させます。この例外は、
+ルーティングフィルターによってキャッチされ、レスポンスに変換されます。これにより、
+`response->send()` への呼び出しを置き換え、ディスパッチャーフィルターが
+リダイレクトのレスポンスに作用することができます。
+
+### ORM の改善
+
+- 同じアソシエーションが複数含まれていても期待通りに動作し、クエリービルダー機能が格納されます。
+- ファンクション表現が結果を正しくキャストするようになりました。
+  `$query->func()->current_date()` のような表現は、datetime インスタンスを
+  返すことを意味します。
+- バリデーションに失敗したフィールドのデータは、 `invalid()` メソッドを介して
+  エンティティーにアクセスすることができます。
+- エンティティーのアクセサーメソッドの検索は、キャッシュされパフォーマンスが向上しています。
+
+### Validator API の改善
+
+Validator オブジェクトには、いつかの新しいメソッドが追加され、バリデータの構築が
+冗長ではなくなりました。たとえば、 username フィールドにバリデーションルールを追加するには、
+以下のようにします。 :
+
+``` php
+$validator->email('username')
+    ->ascii('username')
+    ->lengthBetween('username', [4, 8]);
+```
+
+### コンソールの改善
+
+- `Shell::info()`, `Shell::warn()` と `Shell::success()` が追加されました。
+  これらのヘルパーメソッドにより、一般によく使用される書式を簡潔に使用できるようになりました。
+- `Cake\Console\Exception\StopException` が追加されました。
+- `error()` を置き換えるために `Shell::abort()` が追加されました。
+
+### StopException の追加
+
+`Shell::_stop()` と `Shell::error()` は `exit()` を呼びません。
+代わりに `Cake\Console\Exception\StopException` を発生させます。
+これらのメソッドが呼ばれて、あなたのシェルやタスクが `\Exception` をキャッチしている場合、
+`StopException` をキャッチしないように、その catch ブロックを更新する必要があります。
+`exit()` を呼び出さないことで、テストシェルが容易になり、必要なモックが少なくて済みます。
+
+### ヘルパーの initialize() の追加
+
+ヘルパーは、 他のクラスタイプのように `initialize(array $config)` フックメソッドを
+実装することができます。
+
+### 致命的なエラーメモリー制限処理
+
+新しい設定オプション `Error.extraFatalErrorMemory` により致命的なエラーが発生した場合の
+メモリーの上限を数メガバイト増加させることができます。これによりログ出力を完了させたり
+エラーハンドリングするだけの余裕ができます。
+
+## 移行手順
+
+### setToStringFormat() の更新
+
+CakePHP 3.2 以前での Time::setToStringFormat() の使用は、Date オブジェクトにも働きました。
+アップグレードした後でも、フォーマットされた日付を表示するには、Date::setToStringFormat()
+を追加する必要があります。

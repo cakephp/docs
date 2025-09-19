@@ -365,6 +365,7 @@ $middlewareQueue->add($csp);
 ::: info Added in version 3.9.0
 CspMiddleware was added.
 :::
+
 <a id="security-header-middleware"></a>
 
 ## Security Header Middleware
@@ -400,6 +401,7 @@ $middlewareQueue->add($securityHeaders);
 ::: info Added in version 3.5.0
 The `SecurityHeadersMiddleware` was added in 3.5.0
 :::
+
 <a id="encrypted-cookie-middleware"></a>
 
 ## Encrypted Cookie Middleware
@@ -431,6 +433,7 @@ backwards compatible with `CookieComponent` from earlier versions of CakePHP.
 ::: info Added in version 3.5.0
 The `EncryptedCookieMiddleware` was added in 3.5.0
 :::
+
 <a id="csrf-middleware"></a>
 
 ## Cross Site Request Forgery (CSRF) Middleware

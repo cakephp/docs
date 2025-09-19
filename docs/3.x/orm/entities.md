@@ -315,6 +315,7 @@ $dirtyFields = $entity->getDirty();
 ::: info Added in version 3.4.3
 `getDirty()` has been added.
 :::
+
 ::: info Added in version 3.5.0
 `isDirty()`, `setDirty()` were added.
 :::
@@ -360,6 +361,7 @@ $user->errors('password', ['Password is required.']);
 ::: info Added in version 3.7.0
 `hasErrors()` was added.
 :::
+
 <a id="entities-mass-assignment"></a>
 
 ## Mass Assignment

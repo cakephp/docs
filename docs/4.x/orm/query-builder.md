@@ -315,6 +315,7 @@ associations.
 ::: info Added in version 4.5.0
 `Query::selectAlso()` was added.
 :::
+
 <a id="using-sql-functions"></a>
 
 ### Using SQL Functions

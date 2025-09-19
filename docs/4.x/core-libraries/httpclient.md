@@ -336,6 +336,7 @@ supported.
 ::: info Added in version 4.2.0
 `Client::createFromUrl()` was added.
 :::
+
 ::: info Changed in version 4.2.0
 The `basePath` option was added.
 :::

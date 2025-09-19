@@ -1,72 +1,61 @@
 /**
- * CakePHP Documentation Configuration
- * 
- * Centralized configuration for CakePHP documentation versions,
- * navigation, and other CakePHP-specific settings.
+ * CakePHP Documentation Helper Functions
+ *
+ * Helper functions for managing CakePHP documentation versions,
+ * navigation, and locale-specific operations.
+ *
+ * Configuration arrays (versions, supportedLocales, etc.) are now located
+ * in ./cake/config.js for better organization and easier maintenance.
  */
 
-// Version configuration
-export const versions = [
-  {
-    version: '5',
-    label: '5.x',
-    displayName: '5.x (Current)',
-    path: '/5.x/',
-    publicPath: '/5.x/',  // Current version uses clean URLs
-    isCurrentVersion: true,
-    sidebarFile: 'sidebar-5.json',
-    phpVersion: '8.4',
-    minPhpVersion: '8.1'
-  },
-  {
-    version: '4',
-    label: '4.x', 
-    displayName: '4.x',
-    path: '/4.x/',
-    publicPath: '/4.x/',
-    isCurrentVersion: false,
-    sidebarFile: 'sidebar-4.json',
-    phpVersion: '8.2',
-    minPhpVersion: '7.4'
-  },
-  {
-    version: '3',
-    label: '3.x',
-    displayName: '3.x', 
-    path: '/3.x/',
-    publicPath: '/3.x/',
-    isCurrentVersion: false,
-    sidebarFile: 'sidebar-3.json',
-    phpVersion: '7.4',
-    minPhpVersion: '5.6'
-  },
-  {
-    version: '2',
-    label: '2.x',
-    displayName: '2.x',
-    path: '/2.x/',
-    publicPath: '/2.x/',
-    isCurrentVersion: false,
-    sidebarFile: 'sidebar-2.json',
-    phpVersion: '5.3',
-    minPhpVersion: '5.2.8'
-  }
-]
+// Import configuration from separate config file
+import {
+  supportedLocales,
+  versions,
+  localizedVersions,
+  sidebarConfig
+} from './cake/config.js'
+
+// Re-export configuration for backward compatibility
+export { supportedLocales, versions, localizedVersions, sidebarConfig }
 
 // Helper functions for version management
-export function getCurrentVersion() {
-  return versions.find(v => v.isCurrentVersion)
+export function getCurrentVersion(locale = 'en') {
+  const versionList = getVersionsByLocale(locale)
+  return versionList.find(v => v.isCurrentVersion)
+}
+
+export function getVersionsByLocale(locale = 'en') {
+  // Return English versions by default
+  if (locale === 'en') {
+    return versions
+  }
+
+  // Check if we have localized versions for this locale
+  if (localizedVersions[locale]) {
+    return localizedVersions[locale]
+  }
+
+  // Fallback to English versions if locale not found
+  return versions
 }
 
 export function getVersionByPath(path) {
-  // Check for version-specific paths first
-  for (const version of versions) {
+  // Detect locale from path
+  const locale = detectLocaleFromPath(path)
+
+  // Get version list for detected locale
+  const versionList = getVersionsByLocale(locale)
+
+  // Check for version-specific paths in the detected locale
+  for (const version of versionList) {
     if (path.startsWith(version.publicPath)) {
       return version
     }
   }
-  // Default to current version for /en/ paths
-  return getCurrentVersion()
+
+  // Default to current version for the detected locale
+  return getCurrentVersion(locale)
 }
 
 export function getVersionLabel(path) {
@@ -74,13 +63,15 @@ export function getVersionLabel(path) {
   return version ? version.label : versions[0].label
 }
 
-export function getAllVersionPaths() {
-  return versions.map(v => v.publicPath)
+export function getAllVersionPaths(locale = 'en') {
+  const versionList = getVersionsByLocale(locale)
+  return versionList.map(v => v.publicPath)
 }
 
 // Navigation configuration for version dropdown
-export function getVersionNavItems() {
-  return versions.map(version => ({
+export function getVersionNavItems(locale = 'en') {
+  const versionList = getVersionsByLocale(locale)
+  return versionList.map(version => ({
     text: version.displayName,
     link: version.publicPath,
     path: version.publicPath,
@@ -88,27 +79,40 @@ export function getVersionNavItems() {
   }))
 }
 
-// Sidebar configuration
-export const sidebarConfig = {
-  baseDir: 'cake',
-  updateLinksForCurrentVersion: true
+
+// Helper function to get supported locales
+export function getSupportedLocales() {
+  return supportedLocales
 }
 
-// Site configuration
-export const siteConfig = {
-  title: 'CakePHP',
-  description: 'CakePHP Documentation - The rapid development PHP framework',
-  currentVersionEditPattern: 'https://github.com/cakephp/docs/edit/5.x/en/:path'
+// Helper function to check if a locale is supported
+export function isLocaleSupported(locale) {
+  return supportedLocales.includes(locale)
+}
+
+// Helper function to detect locale from path
+export function detectLocaleFromPath(path) {
+  // Check each supported locale (excluding 'en' which is the default)
+  for (const locale of supportedLocales) {
+    if (locale !== 'en' && path.startsWith(`/${locale}/`)) {
+      return locale
+    }
+  }
+  // Default to 'en' if no locale prefix found
+  return 'en'
 }
 
 // Export everything as default for convenience
 export default {
   versions,
   getCurrentVersion,
-  getVersionByPath, 
+  getVersionByPath,
   getVersionLabel,
   getAllVersionPaths,
   getVersionNavItems,
-  sidebarConfig,
-  siteConfig
+  supportedLocales,
+  getSupportedLocales,
+  isLocaleSupported,
+  detectLocaleFromPath,
+  sidebarConfig
 }

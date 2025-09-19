@@ -144,6 +144,7 @@ one of the following methods:
 ::: info Added in version 4.1.0
 Logging placeholders were added.
 :::
+
 <a id="logging-levels"></a>
 
 ### Using Levels

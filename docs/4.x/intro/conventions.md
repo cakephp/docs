@@ -200,7 +200,7 @@ is to use lowercase letters and dashes as separator. |
 <col style="width: 77%" />
 </colgroup>
 <tbody>
-<tr class="odd">
+<tr>
 <td><p>Foreign keys</p>
 <p>hasMany
 belongsTo/
@@ -211,12 +211,12 @@ BelongsToMany</p></td>
 Users hasMany Articles, <code>articles</code> table will refer
 to the <code>users</code> table via a <code>user_id</code> foreign key.</td>
 </tr>
-<tr class="even">
+<tr>
 <td>Multiple Words</td>
 <td><code>menu_links</code> whose name contains multiple words,
 the foreign key would be <code>menu_link_id</code>.</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>Auto Increment</td>
 <td>In addition to using an auto-incrementing integer as
 primary keys, you can also use UUID columns.
@@ -225,7 +225,7 @@ using (<code class="interpreted-text" role="php:meth">Cake\Utility\Text::uuid()<
 whenever you save new records using the
 <code>Table::save()</code> method.</td>
 </tr>
-<tr class="even">
+<tr>
 <td>Join tables</td>
 <td>Should be named after the model tables they will join
 or the bake command won't work, arranged in alphabetical

@@ -116,6 +116,7 @@ echo $this->Html->meta([
 ::: info Added in version 3.3.5
 `build()` accepts an array as the 2nd argument as of 3.3.5
 :::
+
 ::: info Added in version 3.6.0
 The `timestamp` option was added to `build()`.
 :::
@@ -143,6 +144,7 @@ $this->Url->css('app.css', ['timestamp' => false]);
 ::: info Added in version 3.2.4
 The asset helper methods were added in 3.2.4.
 :::
+
 ::: info Added in version 3.6.0
 The `timestamp` option was added to asset helper methods.
 :::

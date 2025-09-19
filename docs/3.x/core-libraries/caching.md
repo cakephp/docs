@@ -40,6 +40,7 @@ Regardless of the CacheEngine you choose to use, your application interacts with
 ::: info Added in version 3.7.0
 The `Array` engine was added.
 :::
+
 <a id="cache-configuration"></a>
 
 ## Configuring Cache Engines
@@ -232,6 +233,7 @@ When there is no fallback cache failures will be raised as exceptions.
 ::: info Added in version 3.5.0
 Cache engine fallbacks were added.
 :::
+
 ::: info Changed in version 3.6.0
 Fallbacks can now be disabled via `false`
 :::
