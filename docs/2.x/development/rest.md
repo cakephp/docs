@@ -32,19 +32,14 @@ The first line sets up a number of default routes for easy REST access while
 `parseExtensions()` method specifies the desired result format (e.g. xml,
 json, rss). These routes are HTTP Request Method sensitive.
 
-| HTTP format | URL format            | Controller action invoked      |
-|-------------|-----------------------|--------------------------------|
-| GET         | /recipes.format       | RecipesController::index()     |
-| ----------- | --------------------- | ------------------------------ |
-| GET         | /recipes/123.format   | RecipesController::view(123)   |
-| ----------- | --------------------- | ------------------------------ |
-| POST        | /recipes.format       | RecipesController::add()       |
-| ----------- | --------------------- | ------------------------------ |
-| POST        | /recipes/123.format   | RecipesController::edit(123)   |
-| ----------- | --------------------- | ------------------------------ |
-| PUT         | /recipes/123.format   | RecipesController::edit(123)   |
-| ----------- | --------------------- | ------------------------------ |
-| DELETE      | /recipes/123.format   | RecipesController::delete(123) |
+| HTTP format | URL format          | Controller action invoked      |
+|-------------|---------------------|--------------------------------|
+| GET         | /recipes.format     | RecipesController::index()     |
+| GET         | /recipes/123.format | RecipesController::view(123)   |
+| POST        | /recipes.format     | RecipesController::add()       |
+| POST        | /recipes/123.format | RecipesController::edit(123)   |
+| PUT         | /recipes/123.format | RecipesController::edit(123)   |
+| DELETE      | /recipes/123.format | RecipesController::delete(123) |
 
 CakePHP's Router class uses a number of different indicators to
 detect the HTTP method being used. Here they are in order of

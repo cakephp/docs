@@ -226,13 +226,11 @@ Fellowship-\>Hobbits-\>Pippin. Then we see the different permissions
 that reside at each of those points, and use the most specific
 permission relating to Pippin and the Ale.
 
-| ARO Node                | Permission Info  | Result                  |
-|-------------------------|------------------|-------------------------|
-| Fellowship of the Ring  | Deny all         | Denying access to ale.  |
-| ----------------------- | ---------------- | ----------------------- |
-| Hobbits                 | Allow 'ale'      | Allowing access to ale! |
-| ----------------------- | ---------------- | ----------------------- |
-| Pippin                  | --               | Still allowing ale!     |
+| ARO Node               | Permission Info | Result                  |
+|------------------------|-----------------|-------------------------|
+| Fellowship of the Ring | Deny all        | Denying access to ale.  |
+| Hobbits                | Allow 'ale'     | Allowing access to ale! |
+| Pippin                 | --              | Still allowing ale!     |
 
 > [!NOTE]
 > Since the 'Pippin' node in the ACL tree doesn't specifically deny
@@ -274,13 +272,11 @@ exception: Merry. To see whether Merry can access the Ale, we'd find his
 path in the tree: Fellowship-\>Hobbits-\>Merry. Then we'd work our way down,
 keeping track of ale-related permissions:
 
-| ARO Node                | Permission Info  | Result                  |
-|-------------------------|------------------|-------------------------|
-| Fellowship of the Ring  | Deny all         | Denying access to ale.  |
-| ----------------------- | ---------------- | ----------------------- |
-| Hobbits                 | Allow 'ale'      | Allowing access to ale! |
-| ----------------------- | ---------------- | ----------------------- |
-| Merry                   | Deny Ale         | Denying ale.            |
+| ARO Node               | Permission Info | Result                  |
+|------------------------|-----------------|-------------------------|
+| Fellowship of the Ring | Deny all        | Denying access to ale.  |
+| Hobbits                | Allow 'ale'     | Allowing access to ale! |
+| Merry                  | Deny Ale        | Denying ale.            |
 
 ## Defining Permissions: CakePHP's INI-based ACL
 

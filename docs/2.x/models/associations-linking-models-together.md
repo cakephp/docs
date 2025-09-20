@@ -29,11 +29,8 @@ belongsTo, and hasAndBelongsToMany (HABTM).
 | Relationship | Association Type | Example |
 |----|----|----|
 | one to one | hasOne | A user has one profile. |
-| ------------- | --------------------- | --------------------------------------- |
 | one to many | hasMany | A user can have multiple recipes. |
-| ------------- | --------------------- | --------------------------------------- |
 | many to one | belongsTo | Many recipes belong to a user. |
-| ------------- | --------------------- | --------------------------------------- |
 | many to many | hasAndBelongsToMany | Recipes have, and belong to, many ingredients. |
 
 To further clarify which way around the associations are defined in the models:
@@ -161,13 +158,11 @@ table will contain a field called user_id. The basic pattern is:
 
 **hasOne:** the *other* model contains the foreign key.
 
-| Relation             | Schema             |
-|----------------------|--------------------|
-| Apple hasOne Banana  | bananas.apple_id   |
-| -------------------- | ------------------ |
-| User hasOne Profile  | profiles.user_id   |
-| -------------------- | ------------------ |
-| Doctor hasOne Mentor | mentors.doctor_id  |
+| Relation             | Schema            |
+|----------------------|-------------------|
+| Apple hasOne Banana  | bananas.apple_id  |
+| User hasOne Profile  | profiles.user_id  |
+| Doctor hasOne Mentor | mentors.doctor_id |
 
 > [!NOTE]
 > It is not mandatory to follow CakePHP conventions. You can easily override
@@ -269,13 +264,11 @@ follow this convention:
 
 **belongsTo:** the *current* model contains the foreign key.
 
-| Relation                | Schema             |
-|-------------------------|--------------------|
-| Banana belongsTo Apple  | bananas.apple_id   |
-| ----------------------- | ------------------ |
-| Profile belongsTo User  | profiles.user_id   |
-| ----------------------- | ------------------ |
-| Mentor belongsTo Doctor | mentors.doctor_id  |
+| Relation                | Schema            |
+|-------------------------|-------------------|
+| Banana belongsTo Apple  | bananas.apple_id  |
+| Profile belongsTo User  | profiles.user_id  |
+| Mentor belongsTo Doctor | mentors.doctor_id |
 
 > [!TIP]
 > If a model(table) contains a foreign key, it belongsTo the other
@@ -377,12 +370,10 @@ table and name it `image_comment_count`.
 
 Here are some more examples:
 
-| Model | Associated Model | Example |
-|----|----|----|
-| User | Image | users.image_count |
-| ---------- | ----------------------- | ----------------------------------------- |
-| Image | ImageComment | images.image_comment_count |
-| ---------- | ----------------------- | ----------------------------------------- |
+| Model     | Associated Model | Example                               |
+|-----------|------------------|---------------------------------------|
+| User      | Image            | users.image_count                     |
+| Image     | ImageComment     | images.image_comment_count            |
 | BlogEntry | BlogEntryComment | blog_entries.blog_entry_comment_count |
 
 Once you have added the counter field, you are good to go. Activate
@@ -434,13 +425,11 @@ relation. It is also possible to define a `counterScope` for each `counterCache`
 Assuming you have a `User` model and a `Message` model, and you want to be able
 to count the amount of read and unread messages for each user.
 
-| Model | Field | Description |
-|----|----|----|
-| User | users.messages_read | Count read `Message` |
-| --------- | ---------------------- | ------------------------------------------- |
-| User | users.messages_unread | Count unread `Message` |
-| --------- | ---------------------- | ------------------------------------------- |
-| Message | messages.is_read | Determines if a `Message` is read or not. |
+| Model   | Field                 | Description                               |
+|---------|-----------------------|-------------------------------------------|
+| User    | users.messages_read   | Count read `Message`                      |
+| User    | users.messages_unread | Count unread `Message`                    |
+| Message | messages.is_read      | Determines if a `Message` is read or not. |
 
 With this setup, your `belongsTo` would look like this:
 
@@ -468,13 +457,11 @@ this convention:
 
 **hasMany:** the *other* model contains the foreign key.
 
-| Relation                | Schema             |
-|-------------------------|--------------------|
-| User hasMany Comment    | Comment.user_id    |
-| ----------------------- | ------------------ |
-| Cake hasMany Virtue     | Virtue.cake_id     |
-| ----------------------- | ------------------ |
-| Product hasMany Option  | Option.product_id  |
+| Relation               | Schema            |
+|------------------------|-------------------|
+| User hasMany Comment   | Comment.user_id   |
+| Cake hasMany Virtue    | Virtue.cake_id    |
+| Product hasMany Option | Option.product_id |
 
 We can define the hasMany association in our User model at
 /app/Model/User.php using the string syntax as follows:
@@ -619,9 +606,7 @@ names.
 | Relationship | HABTM Table Fields |
 |----|----|
 | Recipe HABTM Ingredient | **ingredients_recipes**.id, **ingredients_recipes**.ingredient_id, **ingredients_recipes**.recipe_id |
-| ------------------------- | ---------------------------------------------------------------- |
 | Cake HABTM Fan | **cakes_fans**.id, **cakes_fans**.cake_id, **cakes_fans**.fan_id |
-| ------------------------- | ---------------------------------------------------------------- |
 | Foo HABTM Bar | **bars_foos**.id, **bars_foos**.foo_id, **bars_foos**.bar_id |
 
 > [!NOTE]

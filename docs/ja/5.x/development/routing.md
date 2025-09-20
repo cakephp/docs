@@ -1039,19 +1039,14 @@ $routes->scope('/', function (RouteBuilder $routes) {
 アクセス対象のメソッドには、最終的に受け取りたいフォーマット (例えば xml, json, rss) の指定が
 必要です。これらのルートは、HTTP リクエストメソッドに対応しています。
 
-| HTTP format | URL.format            | 対応するコントローラーアクション |
-|-------------|-----------------------|----------------------------------|
-| GET         | /recipes.format       | RecipesController::index()       |
-| ----------- | --------------------- | ------------------------------   |
-| GET         | /recipes/123.format   | RecipesController::view(123)     |
-| ----------- | --------------------- | ------------------------------   |
-| POST        | /recipes.format       | RecipesController::add()         |
-| ----------- | --------------------- | ------------------------------   |
-| PUT         | /recipes/123.format   | RecipesController::edit(123)     |
-| ----------- | --------------------- | ------------------------------   |
-| PATCH       | /recipes/123.format   | RecipesController::edit(123)     |
-| ----------- | --------------------- | ------------------------------   |
-| DELETE      | /recipes/123.format   | RecipesController::delete(123)   |
+| HTTP format | URL.format          | 対応するコントローラーアクション |
+|-------------|---------------------|----------------------------------|
+| GET         | /recipes.format     | RecipesController::index()       |
+| GET         | /recipes/123.format | RecipesController::view(123)     |
+| POST        | /recipes.format     | RecipesController::add()         |
+| PUT         | /recipes/123.format | RecipesController::edit(123)     |
+| PATCH       | /recipes/123.format | RecipesController::edit(123)     |
+| DELETE      | /recipes/123.format | RecipesController::delete(123)   |
 
 使用されている HTTP メソッドは、いくつかの異なるソースから検出されます。
 優先順位の順のソースは次のとおりです。

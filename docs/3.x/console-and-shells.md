@@ -198,11 +198,11 @@ command. Then learn more about commands:
 - [Cache Shell](console-and-shells/cache)
 - [I18N Shell](console-and-shells/i18n-shell)
 - [Completion Shell](console-and-shells/completion-shell)
-- [The plugin shell allows you to load and unload plugins via the command prompt.](console-and-shells/plugin-shell)
+- [Plugin Shell](console-and-shells/plugin-shell)
 - [Routes Shell](console-and-shells/routes-shell)
 - [Schema Cache Shell](console-and-shells/schema-cache)
 - [Server Shell](console-and-shells/server-shell)
-- [The upgrade shell will do most of the work to upgrade your CakePHP application](console-and-shells/upgrade-shell)
+- [Upgrade Shell](console-and-shells/upgrade-shell)
 - [Shells](console-and-shells/shells)
 - [Interactive Console (REPL)](console-and-shells/repl)
 

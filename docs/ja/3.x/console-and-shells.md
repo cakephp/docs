@@ -199,7 +199,7 @@ CakePHP からコマンドを追加するために `$commands->autoDiscover()` �
 - [Routes Shell](console-and-shells/routes-shell)
 - [スキーマキャッシュシェル](console-and-shells/schema-cache)
 - [Server Shell](console-and-shells/server-shell)
-- [アプリケーションをアップグレードする方法に関するすべての情報を取得するために、](console-and-shells/upgrade-shell)
+- [Upgrade Shell](console-and-shells/upgrade-shell)
 - [シェル](console-and-shells/shells)
 - [インタラクティブ・コンソール (REPL)](console-and-shells/repl)
 

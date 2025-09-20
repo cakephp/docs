@@ -4,7 +4,7 @@
 
 4.0.0
 `SecurityComponent` has been deprecated. Use [FormProtection](../../controllers/components/form-protection) instead
-for form tampering protection or [Https Enforcer](../../security/https-enforcer) to enforce use of HTTPS (TLS) for requests.
+for form tampering protection or [HTTPS Enforcer Middleware](../../security/https-enforcer) to enforce use of HTTPS (TLS) for requests.
 
 </div>
 

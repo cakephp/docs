@@ -923,4 +923,4 @@ This asserts that the generated message IDs are valid and fit to the domain the 
 - [I18N shell](console-and-shells/i18n-shell)
 - [ACL Shell](console-and-shells/acl-shell)
 - [Test shell](console-and-shells/testsuite-shell)
-- [The upgrade shell will do most of the work to upgrade your CakePHP application](console-and-shells/upgrade-shell)
+- [Upgrade shell](console-and-shells/upgrade-shell)

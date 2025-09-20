@@ -5,15 +5,12 @@ a natural process. For example, an article may have many comments, and belong to
 an author. Authors may have many articles and comments. The four association
 types in CakePHP are: hasOne, hasMany, belongsTo, and belongsToMany.
 
-| Relationship | Association Type | Example |
-|----|----|----|
-| one to one | hasOne | A user has one profile. |
-| ------------- | --------------------- | --------------------------------------- |
-| one to many | hasMany | A user can have multiple articles. |
-| ------------- | --------------------- | --------------------------------------- |
-| many to one | belongsTo | Many articles belong to a user. |
-| ------------- | --------------------- | --------------------------------------- |
-| many to many | belongsToMany | Tags belong to many articles. |
+| Relationship | Association Type | Example                            |
+|--------------|------------------|------------------------------------|
+| one to one   | hasOne           | A user has one profile.            |
+| one to many  | hasMany          | A user can have multiple articles. |
+| many to one  | belongsTo        | Many articles belong to a user.    |
+| many to many | belongsToMany    | Tags belong to many articles.      |
 
 Associations are defined during the `initialize()` method of your table
 object. Methods matching the association type allow you to define the
@@ -149,11 +146,10 @@ called 'user_id'. The basic pattern is:
 
 **hasOne:** the *other* model contains the foreign key.
 
-| Relation               | Schema             |
-|------------------------|--------------------|
-| Users hasOne Addresses | addresses.user_id  |
-| ---------------------- | ------------------ |
-| Doctors hasOne Mentors | mentors.doctor_id  |
+| Relation               | Schema            |
+|------------------------|-------------------|
+| Users hasOne Addresses | addresses.user_id |
+| Doctors hasOne Mentors | mentors.doctor_id |
 
 > [!NOTE]
 > It is not mandatory to follow CakePHP conventions, you can override the name
@@ -282,11 +278,10 @@ convention:
 
 **belongsTo:** the *current* model contains the foreign key.
 
-| Relation                  | Schema             |
-|---------------------------|--------------------|
-| Addresses belongsTo Users | addresses.user_id  |
-| ------------------------- | ------------------ |
-| Mentors belongsTo Doctors | mentors.doctor_id  |
+| Relation                  | Schema            |
+|---------------------------|-------------------|
+| Addresses belongsTo Users | addresses.user_id |
+| Mentors belongsTo Doctors | mentors.doctor_id |
 
 > [!TIP]
 > If a table contains a foreign key, it belongs to the other table.
@@ -371,13 +366,11 @@ convention:
 
 **hasMany:** the *other* model contains the foreign key.
 
-| Relation                   | Schema               |
-|----------------------------|----------------------|
-| Articles hasMany Comments  | Comments.article_id  |
-| -------------------------- | -------------------- |
-| Products hasMany Options   | Options.product_id   |
-| -------------------------- | -------------------- |
-| Doctors hasMany Patients   | Patients.doctor_id   |
+| Relation                  | Schema              |
+|---------------------------|---------------------|
+| Articles hasMany Comments | Comments.article_id |
+| Products hasMany Options  | Options.product_id  |
+| Doctors hasMany Patients  | Patients.doctor_id  |
 
 We can define the hasMany association in our Articles model as follows:
 
@@ -540,7 +533,6 @@ names.
 | Relationship | Join Table Fields |
 |----|----|
 | Articles belongsToMany Tags | articles_tags.id, articles_tags.tag_id, articles_tags.article_id |
-| ------------------------------ | ---------------------------------------------------------------- |
 | Patients belongsToMany Doctors | doctors_patients.id, doctors_patients.doctor_id,
 doctors_patients.patient_id. |
 
