@@ -5,9 +5,12 @@
       "collapsed": false,
       "items": [
         { "text": "Installation", "link": "/2.x/installation" },
+        { "text": "Advanced Installation", "link": "/2.x/installation/advanced-installation" },
+        { "text": "URL Rewriting", "link": "/2.x/installation/url-rewriting" },
         { "text": "Getting Started", "link": "/2.x/getting-started" },
         { "text": "A Typical CakePHP Request", "link": "/2.x/getting-started/a-typical-cakephp-request" },
         { "text": "CakePHP Conventions", "link": "/2.x/getting-started/cakephp-conventions" },
+        { "text": "CakePHP Folder Structure", "link": "/2.x/getting-started/cakephp-folder-structure" },
         { "text": "CakePHP Structure", "link": "/2.x/getting-started/cakephp-structure" }
       ]
     },
@@ -16,17 +19,8 @@
       "collapsed": true,
       "items": [
         { "text": "CakePHP Overview", "link": "/2.x/cakephp-overview" },
-        { "text": "What's new in CakePHP 2.0", "link": "/2.x/cakephp-overview/new-features-in-cakephp-2-0" },
-        { "text": "What's new in CakePHP 2.1", "link": "/2.x/cakephp-overview/new-features-in-cakephp-2-1" },
-        { "text": "What's new in CakePHP 2.2", "link": "/2.x/cakephp-overview/new-features-in-cakephp-2-2" },
-        { "text": "What's new in CakePHP 2.3", "link": "/2.x/cakephp-overview/new-features-in-cakephp-2-3" },
-        { "text": "What's new in CakePHP 2.4", "link": "/2.x/cakephp-overview/new-features-in-cakephp-2-4" },
-        { "text": "What's new in CakePHP 2.5", "link": "/2.x/cakephp-overview/new-features-in-cakephp-2-5" },
-        { "text": "What's new in CakePHP 2.6", "link": "/2.x/cakephp-overview/new-features-in-cakephp-2-6" },
-        { "text": "What's new in CakePHP 2.7", "link": "/2.x/cakephp-overview/new-features-in-cakephp-2-7" },
-        { "text": "What's new in CakePHP 2.8", "link": "/2.x/cakephp-overview/new-features-in-cakephp-2-8" },
-        { "text": "What's new in CakePHP 2.9", "link": "/2.x/cakephp-overview/new-features-in-cakephp-2-9" },
-        { "text": "What's new in CakePHP 2.10", "link": "/2.x/cakephp-overview/new-features-in-cakephp-2-10" },
+        { "text": "What is CakePHP? Why Use it?", "link": "/2.x/cakephp-overview/what-is-cakephp-why-use-it" },
+        { "text": "Understanding Model-View-Controller", "link": "/2.x/cakephp-overview/understanding-model-view-controller" },
         { "text": "Where to Get Help", "link": "/2.x/cakephp-overview/where-to-get-help" }
       ]
     },
@@ -35,19 +29,10 @@
       "collapsed": true,
       "items": [
         { "text": "Controllers", "link": "/2.x/controllers" },
+        { "text": "Request & Response", "link": "/2.x/controllers/request-response" },
         { "text": "Pages Controller", "link": "/2.x/controllers/pages-controller" },
-        { "text": "Components", "collapsed": true, "items": [
-          { "text": "Components", "link": "/2.x/controllers/components" },
-          { "text": "Access Control Lists", "link": "/2.x/controllers/components/access-control-lists" },
-          { "text": "Authentication", "link": "/2.x/controllers/components/authentication" },
-          { "text": "Cookie", "link": "/2.x/controllers/components/cookie" },
-          { "text": "Email", "link": "/2.x/controllers/components/email" },
-          { "text": "Pagination", "link": "/2.x/controllers/components/pagination" },
-          { "text": "Request Handling", "link": "/2.x/controllers/components/request-handling" },
-          { "text": "Security", "link": "/2.x/controllers/components/security" },
-          { "text": "Sessions", "link": "/2.x/controllers/components/sessions" }
-        ]},
-        { "text": "Scaffolding", "link": "/2.x/controllers/scaffolding" }
+        { "text": "Scaffolding", "link": "/2.x/controllers/scaffolding" },
+        { "text": "Components", "link": "/2.x/controllers/components" }
       ]
     },
     {
@@ -55,21 +40,10 @@
       "collapsed": true,
       "items": [
         { "text": "Views", "link": "/2.x/views" },
-        { "text": "Media Views", "link": "/2.x/views/media-views" },
+        { "text": "Media View", "link": "/2.x/views/media-view" },
+        { "text": "JSON and XML Views", "link": "/2.x/views/json-and-xml-views" },
         { "text": "Themes", "link": "/2.x/views/themes" },
-        { "text": "Helpers", "collapsed": true, "items": [
-          { "text": "Helpers", "link": "/2.x/views/helpers" },
-          { "text": "Cache", "link": "/2.x/views/helpers/cache" },
-          { "text": "Form", "link": "/2.x/views/helpers/form" },
-          { "text": "HTML", "link": "/2.x/views/helpers/html" },
-          { "text": "Js", "link": "/2.x/views/helpers/js" },
-          { "text": "Number", "link": "/2.x/views/helpers/number" },
-          { "text": "Paginator", "link": "/2.x/views/helpers/paginator" },
-          { "text": "RSS", "link": "/2.x/views/helpers/rss" },
-          { "text": "Session", "link": "/2.x/views/helpers/session" },
-          { "text": "Text", "link": "/2.x/views/helpers/text" },
-          { "text": "Time", "link": "/2.x/views/helpers/time" }
-        ]}
+        { "text": "Helpers", "link": "/2.x/views/helpers" }
       ]
     },
     {
@@ -82,6 +56,7 @@
         { "text": "Saving Your Data", "link": "/2.x/models/saving-your-data" },
         { "text": "Deleting Data", "link": "/2.x/models/deleting-data" },
         { "text": "Data Validation", "link": "/2.x/models/data-validation" },
+        { "text": "Validating Data from the Controller", "link": "/2.x/models/data-validation/validating-data-from-the-controller" },
         { "text": "Callback Methods", "link": "/2.x/models/callback-methods" },
         { "text": "Behaviors", "link": "/2.x/models/behaviors" },
         { "text": "Datasources", "link": "/2.x/models/datasources" },
@@ -96,6 +71,12 @@
       "collapsed": true,
       "items": [
         { "text": "Core Libraries", "link": "/2.x/core-libraries" },
+        { "text": "Caching", "link": "/2.x/core-libraries/caching" },
+        { "text": "Collections", "link": "/2.x/core-libraries/collections" },
+        { "text": "Events", "link": "/2.x/core-libraries/events" },
+        { "text": "Global Constants and Functions", "link": "/2.x/core-libraries/global-constants-and-functions" },
+        { "text": "Internationalization and Localization", "link": "/2.x/core-libraries/internationalization-and-localization" },
+        { "text": "Logging", "link": "/2.x/core-libraries/logging" },
         { "text": "Behaviors", "collapsed": true, "items": [
           { "text": "ACL", "link": "/2.x/core-libraries/behaviors/acl" },
           { "text": "Containable", "link": "/2.x/core-libraries/behaviors/containable" },
@@ -106,14 +87,15 @@
           { "text": "Access Control Lists", "link": "/2.x/core-libraries/components/access-control-lists" },
           { "text": "Authentication", "link": "/2.x/core-libraries/components/authentication" },
           { "text": "Cookie", "link": "/2.x/core-libraries/components/cookie" },
-          { "text": "Email", "link": "/2.x/core-libraries/components/email" },
+          { "text": "Flash", "link": "/2.x/core-libraries/components/flash" },
           { "text": "Pagination", "link": "/2.x/core-libraries/components/pagination" },
           { "text": "Request Handling", "link": "/2.x/core-libraries/components/request-handling" },
-          { "text": "Security", "link": "/2.x/core-libraries/components/security" },
+          { "text": "Security Component", "link": "/2.x/core-libraries/components/security-component" },
           { "text": "Sessions", "link": "/2.x/core-libraries/components/sessions" }
         ]},
         { "text": "Helpers", "collapsed": true, "items": [
           { "text": "Cache", "link": "/2.x/core-libraries/helpers/cache" },
+          { "text": "Flash", "link": "/2.x/core-libraries/helpers/flash" },
           { "text": "Form", "link": "/2.x/core-libraries/helpers/form" },
           { "text": "HTML", "link": "/2.x/core-libraries/helpers/html" },
           { "text": "Js", "link": "/2.x/core-libraries/helpers/js" },
@@ -123,28 +105,27 @@
           { "text": "Session", "link": "/2.x/core-libraries/helpers/session" },
           { "text": "Text", "link": "/2.x/core-libraries/helpers/text" },
           { "text": "Time", "link": "/2.x/core-libraries/helpers/time" }
-        ]},
-        { "text": "Utilities", "collapsed": true, "items": [
-          { "text": "App", "link": "/2.x/core-utility-libraries/app" },
-          { "text": "Cache", "link": "/2.x/core-utility-libraries/cache" },
-          { "text": "Configure", "link": "/2.x/core-utility-libraries/configure" },
-          { "text": "Debugger", "link": "/2.x/core-utility-libraries/debugger" },
-          { "text": "Email", "link": "/2.x/core-utility-libraries/email" },
-          { "text": "File & Folder", "link": "/2.x/core-utility-libraries/file-folder" },
-          { "text": "Hash", "link": "/2.x/core-utility-libraries/hash" },
-          { "text": "HTTP Socket", "link": "/2.x/core-utility-libraries/httpsocket" },
-          { "text": "Inflector", "link": "/2.x/core-utility-libraries/inflector" },
-          { "text": "Internationalization & Localization", "link": "/2.x/core-utility-libraries/internationalization-and-localization" },
-          { "text": "Logging", "link": "/2.x/core-utility-libraries/logging" },
-          { "text": "Number", "link": "/2.x/core-utility-libraries/number" },
-          { "text": "Sanitize", "link": "/2.x/core-utility-libraries/sanitize" },
-          { "text": "Security", "link": "/2.x/core-utility-libraries/security" },
-          { "text": "Set", "link": "/2.x/core-utility-libraries/set" },
-          { "text": "String", "link": "/2.x/core-utility-libraries/string" },
-          { "text": "Time", "link": "/2.x/core-utility-libraries/time" },
-          { "text": "Validation", "link": "/2.x/core-utility-libraries/validation" },
-          { "text": "XML", "link": "/2.x/core-utility-libraries/xml" }
         ]}
+      ]
+    },
+    {
+      "text": "Core Utility Libraries",
+      "collapsed": true,
+      "items": [
+        { "text": "App", "link": "/2.x/core-utility-libraries/app" },
+        { "text": "Email", "link": "/2.x/core-utility-libraries/email" },
+        { "text": "File & Folder", "link": "/2.x/core-utility-libraries/file-folder" },
+        { "text": "Hash", "link": "/2.x/core-utility-libraries/hash" },
+        { "text": "HTTP Socket", "link": "/2.x/core-utility-libraries/httpsocket" },
+        { "text": "Inflector", "link": "/2.x/core-utility-libraries/inflector" },
+        { "text": "Number", "link": "/2.x/core-utility-libraries/number" },
+        { "text": "Router", "link": "/2.x/core-utility-libraries/router" },
+        { "text": "Sanitize", "link": "/2.x/core-utility-libraries/sanitize" },
+        { "text": "Security", "link": "/2.x/core-utility-libraries/security" },
+        { "text": "Set", "link": "/2.x/core-utility-libraries/set" },
+        { "text": "String", "link": "/2.x/core-utility-libraries/string" },
+        { "text": "Time", "link": "/2.x/core-utility-libraries/time" },
+        { "text": "XML", "link": "/2.x/core-utility-libraries/xml" }
       ]
     },
     {
@@ -155,8 +136,11 @@
         { "text": "Code Generation with Bake", "link": "/2.x/console-and-shells/code-generation-with-bake" },
         { "text": "Schema Management and Migrations", "link": "/2.x/console-and-shells/schema-management-and-migrations" },
         { "text": "Acl Shell", "link": "/2.x/console-and-shells/acl-shell" },
+        { "text": "Completion Shell", "link": "/2.x/console-and-shells/completion-shell" },
+        { "text": "Cron Jobs", "link": "/2.x/console-and-shells/cron-jobs" },
+        { "text": "Helpers", "link": "/2.x/console-and-shells/helpers" },
         { "text": "I18n Shell", "link": "/2.x/console-and-shells/i18n-shell" },
-        { "text": "Test Shell", "link": "/2.x/console-and-shells/test-shell" },
+        { "text": "TestSuite Shell", "link": "/2.x/console-and-shells/testsuite-shell" },
         { "text": "Upgrade Shell", "link": "/2.x/console-and-shells/upgrade-shell" }
       ]
     },
@@ -167,6 +151,7 @@
         { "text": "Development", "link": "/2.x/development" },
         { "text": "Configuration", "link": "/2.x/development/configuration" },
         { "text": "Routing", "link": "/2.x/development/routing" },
+        { "text": "Sessions", "link": "/2.x/development/sessions" },
         { "text": "Dispatcher Filters", "link": "/2.x/development/dispatch-filters" },
         { "text": "Exceptions", "link": "/2.x/development/exceptions" },
         { "text": "Error Handling", "link": "/2.x/development/errors" },
@@ -182,11 +167,25 @@
         { "text": "Tutorials & Examples", "link": "/2.x/tutorials-and-examples" },
         { "text": "Blog Tutorial", "collapsed": true, "items": [
           { "text": "Blog Tutorial", "link": "/2.x/tutorials-and-examples/blog/blog" },
-          { "text": "Adding a Layer", "link": "/2.x/tutorials-and-examples/blog/adding-a-layer" },
           { "text": "Part Two", "link": "/2.x/tutorials-and-examples/blog/part-two" }
         ]},
-        { "text": "Simple Authentication and Authorization Application", "link": "/2.x/tutorials-and-examples/simple-acl-controlled-application" },
-        { "text": "Simple Authentication Application", "link": "/2.x/tutorials-and-examples/simple-authentication-and-authorization-application" }
+        { "text": "Blog Auth Example", "collapsed": true, "items": [
+          { "text": "Auth", "link": "/2.x/tutorials-and-examples/blog-auth-example/auth" }
+        ]},
+        { "text": "Simple ACL controlled Application", "collapsed": true, "items": [
+          { "text": "Part One", "link": "/2.x/tutorials-and-examples/simple-acl-controlled-application/simple-acl-controlled-application" },
+          { "text": "Part Two", "link": "/2.x/tutorials-and-examples/simple-acl-controlled-application/part-two" }
+        ]}
+      ]
+    },
+    {
+      "text": "Plugins",
+      "collapsed": true,
+      "items": [
+        { "text": "Plugins", "link": "/2.x/plugins" },
+        { "text": "How to Create Plugins", "link": "/2.x/plugins/how-to-create-plugins" },
+        { "text": "How to Install Plugins", "link": "/2.x/plugins/how-to-install-plugins" },
+        { "text": "How to Use Plugins", "link": "/2.x/plugins/how-to-use-plugins" }
       ]
     },
     {
@@ -198,7 +197,8 @@
         { "text": "Tickets", "link": "/2.x/contributing/tickets" },
         { "text": "Code", "link": "/2.x/contributing/code" },
         { "text": "CakePHP Coding Conventions", "link": "/2.x/contributing/cakephp-coding-conventions" },
-        { "text": "Backwards Compatibility", "link": "/2.x/contributing/backwards-compatibility" }
+        { "text": "Backwards Compatibility", "link": "/2.x/contributing/backwards-compatibility" },
+        { "text": "CakePHP Development Process", "link": "/2.x/contributing/cakephp-development-process" }
       ]
     },
     {
@@ -217,7 +217,11 @@
         { "text": "Migration from 2.7 to 2.8", "link": "/2.x/appendices/2-8-migration-guide" },
         { "text": "Migration from 2.8 to 2.9", "link": "/2.x/appendices/2-9-migration-guide" },
         { "text": "Migration from 2.9 to 2.10", "link": "/2.x/appendices/2-10-migration-guide" },
-        { "text": "General Information", "link": "/2.x/appendices/general-information" },
+        { "text": "Migrating from CakePHP 1.2 to 1.3", "link": "/2.x/appendices/migrating-from-cakephp-1-2-to-1-3" },
+        { "text": "New Features in CakePHP 1.3", "link": "/2.x/appendices/new-features-in-cakephp-1-3" },
+        { "text": "New Features in CakePHP 2.0", "link": "/2.x/appendices/new-features-in-cakephp-2-0" },
+        { "text": "New Features in CakePHP 2.1", "link": "/2.x/appendices/new-features-in-cakephp-2-1" },
+        { "text": "PHPUnit Migration Hints", "link": "/2.x/appendices/phpunit-migration-hints" },
         { "text": "Glossary", "link": "/2.x/appendices/glossary" }
       ]
     },
@@ -225,7 +229,6 @@
       "text": "Additional Topics",
       "collapsed": true,
       "items": [
-        { "text": "Plugins", "link": "/2.x/plugins" },
         { "text": "Deployment", "link": "/2.x/deployment" }
       ]
     }

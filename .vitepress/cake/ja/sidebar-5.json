@@ -17,6 +17,18 @@
       "collapsed": true,
       "items": [
         { "text": "概要", "link": "/ja/5.x/tutorials-and-examples" },
+        { "text": "ブログチュートリアル", "collapsed": true, "items": [
+          { "text": "ブログチュートリアル", "link": "/ja/5.x/tutorials-and-examples/blog/blog" },
+          { "text": "パート2", "link": "/ja/5.x/tutorials-and-examples/blog/part-two" },
+          { "text": "パート3", "link": "/ja/5.x/tutorials-and-examples/blog/part-three" }
+        ]},
+        { "text": "ブログ認証サンプル", "collapsed": true, "items": [
+          { "text": "認証", "link": "/ja/5.x/tutorials-and-examples/blog-auth-example/auth" }
+        ]},
+        { "text": "ブックマークチュートリアル", "collapsed": true, "items": [
+          { "text": "イントロダクション", "link": "/ja/5.x/tutorials-and-examples/bookmarks/intro" },
+          { "text": "パート2", "link": "/ja/5.x/tutorials-and-examples/bookmarks/part-two" }
+        ]},
         { "text": "CMS チュートリアル", "collapsed": true, "items": [
           { "text": "インストール", "link": "/ja/5.x/tutorials-and-examples/cms/installation" },
           { "text": "データベース", "link": "/ja/5.x/tutorials-and-examples/cms/database" },

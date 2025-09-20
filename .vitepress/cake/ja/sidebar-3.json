@@ -22,6 +22,13 @@
           { "text": "パート 2", "link": "/ja/3.x/tutorials-and-examples/blog/part-two" },
           { "text": "パート 3", "link": "/ja/3.x/tutorials-and-examples/blog/part-three" }
         ]},
+        { "text": "ブログ認証サンプル", "collapsed": true, "items": [
+          { "text": "認証", "link": "/ja/3.x/tutorials-and-examples/blog-auth-example/auth" }
+        ]},
+        { "text": "ブックマークチュートリアル", "collapsed": true, "items": [
+          { "text": "イントロダクション", "link": "/ja/3.x/tutorials-and-examples/bookmarks/intro" },
+          { "text": "パート2", "link": "/ja/3.x/tutorials-and-examples/bookmarks/part-two" }
+        ]},
         { "text": "CMS チュートリアル", "collapsed": true, "items": [
           { "text": "インストール", "link": "/ja/3.x/tutorials-and-examples/cms/installation" },
           { "text": "データベース", "link": "/ja/3.x/tutorials-and-examples/cms/database" },
@@ -134,9 +141,17 @@
         { "text": "入力出力", "link": "/ja/3.x/console-and-shells/input-output" },
         { "text": "オプションパーサー", "link": "/ja/3.x/console-and-shells/option-parsers" },
         { "text": "キャッシュ", "link": "/ja/3.x/console-and-shells/cache" },
+        { "text": "補完シェル", "link": "/ja/3.x/console-and-shells/completion-shell" },
         { "text": "クロンジョブ", "link": "/ja/3.x/console-and-shells/cron-jobs" },
+        { "text": "ヘルパー", "link": "/ja/3.x/console-and-shells/helpers" },
+        { "text": "i18nシェル", "link": "/ja/3.x/console-and-shells/i18n-shell" },
+        { "text": "ORMキャッシュ", "link": "/ja/3.x/console-and-shells/orm-cache" },
+        { "text": "プラグインシェル", "link": "/ja/3.x/console-and-shells/plugin-shell" },
         { "text": "REPL", "link": "/ja/3.x/console-and-shells/repl" },
+        { "text": "ルートシェル", "link": "/ja/3.x/console-and-shells/routes-shell" },
         { "text": "スキーマキャッシュ", "link": "/ja/3.x/console-and-shells/schema-cache" },
+        { "text": "サーバーシェル", "link": "/ja/3.x/console-and-shells/server-shell" },
+        { "text": "シェル", "link": "/ja/3.x/console-and-shells/shells" },
         { "text": "アップグレードシェル", "link": "/ja/3.x/console-and-shells/upgrade-shell" }
       ]
     },
@@ -190,6 +205,7 @@
         { "text": "3.7 移行ガイド", "link": "/ja/3.x/appendices/3-7-migration-guide" },
         { "text": "3.8 移行ガイド", "link": "/ja/3.x/appendices/3-8-migration-guide" },
         { "text": "3.9 移行ガイド", "link": "/ja/3.x/appendices/3-9-migration-guide" },
+        { "text": "ORM移行", "link": "/ja/3.x/appendices/orm-migration" },
         { "text": "CakePHP 開発プロセス", "link": "/ja/3.x/appendices/cakephp-development-process" },
         { "text": "用語集", "link": "/ja/3.x/appendices/glossary" }
       ]
@@ -201,7 +217,12 @@
         { "text": "プラグイン", "link": "/ja/3.x/plugins" },
         { "text": "デプロイメント", "link": "/ja/3.x/deployment" },
         { "text": "トピック", "link": "/ja/3.x/topics" },
-        { "text": "アップグレードツール", "link": "/ja/3.x/upgrade-tool" }
+        { "text": "アップグレードツール", "link": "/ja/3.x/upgrade-tool" },
+        { "text": "Chronos", "link": "/ja/3.x/chronos" },
+        { "text": "Debug Kit", "link": "/ja/3.x/debug-kit" },
+        { "text": "Elasticsearch", "link": "/ja/3.x/elasticsearch" },
+        { "text": "マイグレーション", "link": "/ja/3.x/migrations" },
+        { "text": "Phinx", "link": "/ja/3.x/phinx" }
       ]
     }
   ]

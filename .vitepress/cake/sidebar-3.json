@@ -22,13 +22,19 @@
           { "text": "Part 2", "link": "/3.x/tutorials-and-examples/blog/part-two" },
           { "text": "Part 3", "link": "/3.x/tutorials-and-examples/blog/part-three" }
         ]},
+        { "text": "Blog Auth Example", "collapsed": true, "items": [
+          { "text": "Auth", "link": "/3.x/tutorials-and-examples/blog-auth-example/auth" }
+        ]},
+        { "text": "Bookmarks Tutorial", "collapsed": true, "items": [
+          { "text": "Introduction", "link": "/3.x/tutorials-and-examples/bookmarks/intro" },
+          { "text": "Part Two", "link": "/3.x/tutorials-and-examples/bookmarks/part-two" }
+        ]},
         { "text": "CMS Tutorial", "collapsed": true, "items": [
           { "text": "Installation", "link": "/3.x/tutorials-and-examples/cms/installation" },
           { "text": "Database", "link": "/3.x/tutorials-and-examples/cms/database" },
           { "text": "Articles Controller", "link": "/3.x/tutorials-and-examples/cms/articles-controller" },
           { "text": "Tags and Users", "link": "/3.x/tutorials-and-examples/cms/tags-and-users" },
-          { "text": "Authentication", "link": "/3.x/tutorials-and-examples/cms/authentication" },
-          { "text": "Authorization", "link": "/3.x/tutorials-and-examples/cms/authorization" }
+          { "text": "Authentication", "link": "/3.x/tutorials-and-examples/cms/authentication" }
         ]}
       ]
     },
@@ -135,15 +141,17 @@
         { "text": "Input Output", "link": "/3.x/console-and-shells/input-output" },
         { "text": "Option Parsers", "link": "/3.x/console-and-shells/option-parsers" },
         { "text": "Cache", "link": "/3.x/console-and-shells/cache" },
-        { "text": "Completion", "link": "/3.x/console-and-shells/completion" },
-        { "text": "Counter Cache", "link": "/3.x/console-and-shells/counter-cache" },
+        { "text": "Completion Shell", "link": "/3.x/console-and-shells/completion-shell" },
         { "text": "Cron Jobs", "link": "/3.x/console-and-shells/cron-jobs" },
-        { "text": "I18n", "link": "/3.x/console-and-shells/i18n" },
-        { "text": "Plugin", "link": "/3.x/console-and-shells/plugin" },
+        { "text": "Helpers", "link": "/3.x/console-and-shells/helpers" },
+        { "text": "I18n Shell", "link": "/3.x/console-and-shells/i18n-shell" },
+        { "text": "ORM Cache", "link": "/3.x/console-and-shells/orm-cache" },
+        { "text": "Plugin Shell", "link": "/3.x/console-and-shells/plugin-shell" },
         { "text": "REPL", "link": "/3.x/console-and-shells/repl" },
-        { "text": "Routes", "link": "/3.x/console-and-shells/routes" },
+        { "text": "Routes Shell", "link": "/3.x/console-and-shells/routes-shell" },
         { "text": "Schema Cache", "link": "/3.x/console-and-shells/schema-cache" },
-        { "text": "Server", "link": "/3.x/console-and-shells/server" },
+        { "text": "Server Shell", "link": "/3.x/console-and-shells/server-shell" },
+        { "text": "Shells", "link": "/3.x/console-and-shells/shells" },
         { "text": "Upgrade Shell", "link": "/3.x/console-and-shells/upgrade-shell" }
       ]
     },
@@ -198,8 +206,8 @@
         { "text": "3.8 Migration Guide", "link": "/3.x/appendices/3-8-migration-guide" },
         { "text": "3.9 Migration Guide", "link": "/3.x/appendices/3-9-migration-guide" },
         { "text": "3.10 Migration Guide", "link": "/3.x/appendices/3-10-migration-guide" },
+        { "text": "ORM Migration", "link": "/3.x/appendices/orm-migration" },
         { "text": "CakePHP Development Process", "link": "/3.x/appendices/cakephp-development-process" },
-        { "text": "General Information", "link": "/3.x/appendices/general-information" },
         { "text": "Glossary", "link": "/3.x/appendices/glossary" }
       ]
     },
@@ -210,7 +218,12 @@
         { "text": "Plugins", "link": "/3.x/plugins" },
         { "text": "Deployment", "link": "/3.x/deployment" },
         { "text": "Topics", "link": "/3.x/topics" },
-        { "text": "Upgrade Tool", "link": "/3.x/upgrade-tool" }
+        { "text": "Upgrade Tool", "link": "/3.x/upgrade-tool" },
+        { "text": "Chronos", "link": "/3.x/chronos" },
+        { "text": "Debug Kit", "link": "/3.x/debug-kit" },
+        { "text": "Elasticsearch", "link": "/3.x/elasticsearch" },
+        { "text": "Migrations", "link": "/3.x/migrations" },
+        { "text": "Phinx", "link": "/3.x/phinx" }
       ]
     }
   ]

@@ -17,6 +17,18 @@
       "collapsed": true,
       "items": [
         { "text": "概要", "link": "/ja/4.x/tutorials-and-examples" },
+        { "text": "ブログチュートリアル", "collapsed": true, "items": [
+          { "text": "ブログチュートリアル", "link": "/ja/4.x/tutorials-and-examples/blog/blog" },
+          { "text": "パート2", "link": "/ja/4.x/tutorials-and-examples/blog/part-two" },
+          { "text": "パート3", "link": "/ja/4.x/tutorials-and-examples/blog/part-three" }
+        ]},
+        { "text": "ブログ認証サンプル", "collapsed": true, "items": [
+          { "text": "認証", "link": "/ja/4.x/tutorials-and-examples/blog-auth-example/auth" }
+        ]},
+        { "text": "ブックマークチュートリアル", "collapsed": true, "items": [
+          { "text": "イントロダクション", "link": "/ja/4.x/tutorials-and-examples/bookmarks/intro" },
+          { "text": "パート2", "link": "/ja/4.x/tutorials-and-examples/bookmarks/part-two" }
+        ]},
         { "text": "CMS チュートリアル", "collapsed": true, "items": [
           { "text": "インストール", "link": "/ja/4.x/tutorials-and-examples/cms/installation" },
           { "text": "データベース", "link": "/ja/4.x/tutorials-and-examples/cms/database" },
@@ -38,6 +50,7 @@
         { "text": "コンポーネント", "collapsed": true, "items": [
           { "text": "コンポーネント", "link": "/ja/4.x/controllers/components" },
           { "text": "認証", "link": "/ja/4.x/controllers/components/authentication" },
+          { "text": "HTTP キャッシュチェック", "link": "/ja/4.x/controllers/components/check-http-cache" },
           { "text": "フラッシュ", "link": "/ja/4.x/controllers/components/flash" },
           { "text": "フォーム保護", "link": "/ja/4.x/controllers/components/form-protection" },
           { "text": "ページネーション", "link": "/ja/4.x/controllers/components/pagination" },
@@ -135,7 +148,8 @@
         { "text": "REPL", "link": "/ja/4.x/console-commands/repl" },
         { "text": "ルート", "link": "/ja/4.x/console-commands/routes" },
         { "text": "スキーマキャッシュ", "link": "/ja/4.x/console-commands/schema-cache" },
-        { "text": "サーバー", "link": "/ja/4.x/console-commands/server" }
+        { "text": "サーバー", "link": "/ja/4.x/console-commands/server" },
+        { "text": "シェル", "link": "/ja/4.x/console-commands/shells" }
       ]
     },
     {
@@ -192,10 +206,12 @@
         { "text": "付録", "link": "/ja/4.x/appendices" },
         { "text": "移行ガイド", "link": "/ja/4.x/appendices/migration-guides" },
         { "text": "4.0 移行ガイド", "link": "/ja/4.x/appendices/4-0-migration-guide" },
+        { "text": "4.0 アップグレードガイド", "link": "/ja/4.x/appendices/4-0-upgrade-guide" },
         { "text": "4.1 移行ガイド", "link": "/ja/4.x/appendices/4-1-migration-guide" },
         { "text": "4.2 移行ガイド", "link": "/ja/4.x/appendices/4-2-migration-guide" },
         { "text": "4.3 移行ガイド", "link": "/ja/4.x/appendices/4-3-migration-guide" },
         { "text": "4.4 移行ガイド", "link": "/ja/4.x/appendices/4-4-migration-guide" },
+        { "text": "フィクスチャアップグレード", "link": "/ja/4.x/appendices/fixture-upgrade" },
         { "text": "CakePHP 開発プロセス", "link": "/ja/4.x/appendices/cakephp-development-process" },
         { "text": "用語集", "link": "/ja/4.x/appendices/glossary" }
       ]
