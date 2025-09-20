@@ -132,14 +132,9 @@ $articlesTable = TableRegistry::getTableLocator()->get('PluginName.Articles');
 $articlesTable = TableRegistry::getTableLocator()->get('VendorName/PluginName.Articles');
 ```
 
-<div class="deprecated">
-
-3.6.0
-The static methods on `TableRegistry` have been replaced by
-`TableLocator`. You can get the TableLocator from TableRegistry using
-`TableRegistry::getTableLocator()`.
-
-</div>
+::: info Deprecated in version 3.6.0
+The static methods on `TableRegistry` have been replaced by`TableLocator`. You can get the TableLocator from TableRegistry using`TableRegistry::getTableLocator()`.
+:::
 
 <a id="table-callbacks"></a>
 

@@ -7,13 +7,9 @@ makes it easier to manipulate cookies, and automatically encrypt cookie data.
 Cookies added through CookieComponent will only be sent if the controller action
 completes.
 
-<div class="deprecated">
-
-3.5.0
-Cookies are available in the `ServerRequest` see [Request Cookies](../../controllers/request-response#request-cookies).
-For encrypted cookies see the [Encrypted Cookie Middleware](../../controllers/middleware#encrypted-cookie-middleware).
-
-</div>
+::: info Deprecated in version 3.5.0
+Cookies are available in the `ServerRequest` see .For encrypted cookies see the .
+:::
 
 ## Configuring Cookies
 

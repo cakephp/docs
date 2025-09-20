@@ -899,19 +899,13 @@ and authentication mechanics in CakePHP.
 
 `method` AuthComponent::**mapActions**($map = array())
 
-<div class="deprecated">
-
-2.4
-
-</div>
+::: info Deprecated in version 2.4
+:::
 
 `method` AuthComponent::**redirect**($url = null)
 
-<div class="deprecated">
-
-2.3
-
-</div>
+::: info Deprecated in version 2.3
+:::
 
 `method` AuthComponent::**redirectUrl**($url = null)
 

@@ -519,13 +519,9 @@ class RecipesController extends AppController
 `FormHelper` を、あるいは `AppController` で宣言されている他のクラスを、
 再度宣言する必要はありません。
 
-<div class="deprecated">
-
-3.0
-コントローラーからのヘルパーの読み込みは後方互換のために提供しています。
-ヘルパーをどう読み込むかについては [Configuring Helpers](views/helpers#configuring-helpers) を参照してください。
-
-</div>
+::: info Deprecated in version 3.0
+コントローラーからのヘルパーの読み込みは後方互換のために提供しています。ヘルパーをどう読み込むかについては  を参照してください。
+:::
 
 ## リクエストライフサイクルコールバック
 

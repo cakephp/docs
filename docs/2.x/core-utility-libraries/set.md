@@ -10,13 +10,9 @@ to do just that.
 CakePHP's Set class can be called from any model or controller in
 the same way Inflector is called. Example: `Set::combine()`.
 
-<div class="deprecated">
-
-2.2
-The Set class has been deprecated in 2.2 in favour of the `Hash`
-class. It offers a more consistent interface and API.
-
-</div>
+::: info Deprecated in version 2.2
+The Set class has been deprecated in 2.2 in favour of the `Hash`class. It offers a more consistent interface and API.
+:::
 
 ## Set-compatible Path syntax
 

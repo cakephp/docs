@@ -8,13 +8,9 @@ CakePHPは、上記を可能にする非常に便利な静的ユーティリテ�
 CakePHsのSetクラスはどのモデルやコントローラからも、Inflectorを呼ぶのと同じ方法で呼び出すことができます。
 例: `Set::combine()`
 
-<div class="deprecated">
-
-2.2
-Set クラスは `Hash` クラスにその役割を譲り2.2で非推奨となりました。
-Hashクラスはより一貫性を持つインターフェイスとAPIを提供します。
-
-</div>
+::: info Deprecated in version 2.2
+Set クラスは `Hash` クラスにその役割を譲り2.2で非推奨となりました。Hashクラスはより一貫性を持つインターフェイスとAPIを提供します。
+:::
 
 ## Set互換のパス記法
 

@@ -43,13 +43,9 @@ $email->to('test@example.com', 'ToTest Example');
 // メールの To 受信者は test@example.com
 ```
 
-<div class="deprecated">
-
-3.4.0
-代わりに `setFrom()` 、 `setTo()` 、 `setCc()` 、 `setBcc()`
-そして、 `setSubject()` を使用してください。
-
-</div>
+::: info Deprecated in version 3.4.0
+代わりに `setFrom()` 、 `setTo()` 、 `setCc()` 、 `setBcc()`そして、 `setSubject()` を使用してください。
+:::
 
 ### 送り主の選択
 
@@ -65,12 +61,9 @@ $email->sender('app@example.com', 'MyApp emailer');
 > 別の人の代わりにメール送信するときに送り主 (envelope sender) をセットするのは良い考えです。
 > これは、配信失敗に関するメッセージの受信を防ぐことができます。
 
-<div class="deprecated">
-
-3.4.0
+::: info Deprecated in version 3.4.0
 代わりに `setSender()` を使用してください。
-
-</div>
+:::
 
 ## 設定
 
@@ -109,12 +102,9 @@ $email = new Email(['from' => 'me@example.org', 'transport' => 'my_custom']);
 `Email` インスタンスが作成された時に `default` メールプロファイルが自動的に設定されます。
 :::
 
-<div class="deprecated">
-
-3.4.0
+::: info Deprecated in version 3.4.0
 `profile()` の代わりに `setProfile()` を使用してください。
-
-</div>
+:::
 
 ### トランスポートの設定
 
@@ -184,12 +174,9 @@ Email::configTransport('default', [
 DSN 文字列を使用するときは、クエリー文字列引数として任意の追加のパラメーターやオプションを
 定義することができます。
 
-<div class="deprecated">
-
-3.4.0
+::: info Deprecated in version 3.4.0
 `configTransport()` の代わりに `setConfigTransport()` を使用してください。
-
-</div>
+:::
 
 設定が完了すると、トランスポートを変更することはできません。
 トランスポートを変更するためには、まずこれを取り消してから再設定する必要があります。
@@ -243,12 +230,9 @@ DSN 文字列を使用するときは、クエリー文字列引数として任�
 
 `Email::headers()` と `Email::addHeaders()` を参照してください。
 
-<div class="deprecated">
-
-3.4.0
+::: info Deprecated in version 3.4.0
 `headers()` の代わりに `setHeaders()` を使用してください。
-
-</div>
+:::
 
 ## テンプレートメールの送信
 
@@ -339,14 +323,9 @@ $email->theme('TestTheme');
 テンプレートファイルは、以下のパスで作成する必要があります:
 **src/Template/Plugin/TestTheme/Plugin/Blog/Email/text/new_comment.ctp**
 
-<div class="deprecated">
-
-3.4.0
-`template()` の代わりに `setTemplate()` を使用してください。
-`template()` のレイアウトの引数の代わりに `setLayout()` を使用してください。
-`theme()` の代わりに `setTheme()` を使用してください。
-
-</div>
+::: info Deprecated in version 3.4.0
+`template()` の代わりに `setTemplate()` を使用してください。`template()` のレイアウトの引数の代わりに `setLayout()` を使用してください。`theme()` の代わりに `setTheme()` を使用してください。
+:::
 
 ## 添付ファイルの送信
 
@@ -393,12 +372,9 @@ $email->theme('TestTheme');
     ファイル本文を文字列として添付することができます。これは、ファイルパスを指定せずに
     添付することができます。
 
-<div class="deprecated">
-
-3.4.0
+::: info Deprecated in version 3.4.0
 `attachments()` の代わりに `setAttachments()` を使用してください。
-
-</div>
+:::
 
 ## トランスポートの使用
 
@@ -419,12 +395,9 @@ $transport = new DebugTransport();
 $email->transport($transport);
 ```
 
-<div class="deprecated">
-
-3.4.0
+::: info Deprecated in version 3.4.0
 `transport()` の代わりに `setTransport()` を使用してください。
-
-</div>
+:::
 
 ### 独自のトランスポートの作成
 
@@ -479,12 +452,9 @@ $email = new Email('default');
 $email->emailPattern($newPattern);
 ```
 
-<div class="deprecated">
-
-3.4.0
+::: info Deprecated in version 3.4.0
 `emailPattern()` の代わりに `setEmailPattern()` を使用してください。
-
-</div>
+:::
 
 ## メッセージの即時送信
 
@@ -528,12 +498,9 @@ $email->domain('www.example.org');
 
 正しいメッセージ ID は、迷惑メールフォルダーへ振り分けられることを防ぐのに役立ちます。
 
-<div class="deprecated">
-
-3.4.0
+::: info Deprecated in version 3.4.0
 `domain()` の代わりに `setDomain()` を使用してください。
-
-</div>
+:::
 
 ## 再利用可能なメールの作成
 

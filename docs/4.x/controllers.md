@@ -454,12 +454,9 @@ the named action:
 $this->setAction('index');
 ```
 
-<div class="deprecated">
-
-4.2.0
+::: info Deprecated in version 4.2.0
 Use redirects or call the other action as a method.
-
-</div>
+:::
 
 ## Loading Additional Models
 

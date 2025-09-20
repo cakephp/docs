@@ -1,12 +1,8 @@
 # Dispatcher Filters
 
-<div class="deprecated">
-
-3.3.0
-As of 3.3.0 Dispatcher Filters are deprecated. You should use
-[Middleware](../controllers/middleware) instead now.
-
-</div>
+::: info Deprecated in version 3.3.0
+As of 3.3.0 Dispatcher Filters are deprecated. You should use instead now.
+:::
 
 There are several reasons to want a piece of code to be run before any
 controller code is executed or right before the response is sent to the client,

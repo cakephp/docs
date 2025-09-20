@@ -4,12 +4,9 @@
 
 The RssHelper makes generating XML for [RSS feeds](https://en.wikipedia.org/wiki/RSS) easy.
 
-<div class="deprecated">
-
-3.5.0
+::: info Deprecated in version 3.5.0
 RssHelper is deprecated as of 3.5.0, and will be removed in 4.0.0
-
-</div>
+:::
 
 ## Creating an RSS Feed with the RssHelper
 

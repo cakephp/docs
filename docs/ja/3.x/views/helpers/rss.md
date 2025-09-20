@@ -4,12 +4,9 @@
 
 RssHelper は [RSS feeds](https://en.wikipedia.org/wiki/RSS) である XML の作成が簡単にできます。
 
-<div class="deprecated">
-
-3.5.0
+::: info Deprecated in version 3.5.0
 RssHelper は 3.5.0 から非推奨になり、4.0.0 で削除されます。
-
-</div>
+:::
 
 ## RssHelper で RSS フィードを生成
 

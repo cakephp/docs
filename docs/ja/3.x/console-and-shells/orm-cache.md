@@ -1,8 +1,5 @@
 # ORM キャッシュシェル
 
-<div class="deprecated">
-
-3.6.0
-OrmCacheShell は [スキーマキャッシュシェル](../console-and-shells/schema-cache) に置き換えられました。
-
-</div>
+::: info Deprecated in version 3.6.0
+OrmCacheShell は  に置き換えられました。
+:::

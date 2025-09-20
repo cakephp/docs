@@ -773,12 +773,9 @@ privileges.
 The `fieldList` options is also accepted by the `newEntity()`,
 `newEntities()` and `patchEntities()` methods.
 
-<div class="deprecated">
-
-3.4.0
+::: info Deprecated in version 3.4.0
 Use `fields` instead of `fieldList`.
-
-</div>
+:::
 
 <a id="saving-entities"></a>
 

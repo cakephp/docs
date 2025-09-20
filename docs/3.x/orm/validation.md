@@ -260,12 +260,9 @@ $defaultValidator = $usersTable->validator('default');
 $hardenedValidator = $usersTable->validator('hardened');
 ```
 
-<div class="deprecated">
-
-3.5.0
+::: info Deprecated in version 3.5.0
 `validator()` is deprecated. Use `getValidator()` instead.
-
-</div>
+:::
 
 ## Default Validator Class
 

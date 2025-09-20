@@ -259,12 +259,9 @@ $defaultValidator = $usersTable->validator('default');
 $hardenedValidator = $usersTable->validator('hardened');
 ```
 
-<div class="deprecated">
-
-3.5.0
+::: info Deprecated in version 3.5.0
 `validator()` は非推奨です。代わりに `getValidator()` を使用してください。
-
-</div>
+:::
 
 ## 既定のバリデータクラス
 

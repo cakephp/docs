@@ -44,14 +44,9 @@ $email->to('test@example.com', 'ToTest Example');
 // The email's To recipient is: test@example.com
 ```
 
-<div class="deprecated">
-
-3.4.0
-Use `setFrom()`, `setTo()`, `setCc()` , `setBcc()` and
-`setSubject()` instead of `from()`, `to()`, `cc()`, `bcc()` and
-`subject()`
-
-</div>
+::: info Deprecated in version 3.4.0
+Use `setFrom()`, `setTo()`, `setCc()` , `setBcc()` and`setSubject()` instead of `from()`, `to()`, `cc()`, `bcc()` and`subject()`
+:::
 
 ### Choosing the Sender
 
@@ -68,12 +63,9 @@ $email->sender('app@example.com', 'MyApp emailer');
 > person's behalf. This prevents them from getting any messages about
 > deliverability.
 
-<div class="deprecated">
-
-3.4.0
+::: info Deprecated in version 3.4.0
 Use `setSender()` instead.
-
-</div>
+:::
 
 <a id="email-configuration"></a>
 
@@ -116,12 +108,9 @@ $email = new Email(['from' => 'me@example.org', 'transport' => 'my_custom']);
 The `default` email profile is automatically set when an `Email`instance is created.
 :::
 
-<div class="deprecated">
-
-3.4.0
+::: info Deprecated in version 3.4.0
 Use `setProfile()` instead of `profile()`.
-
-</div>
+:::
 
 ### Configuring Transports
 
@@ -260,12 +249,9 @@ to use Email, do not forget to put the `X-` prefix in your headers.
 
 See `Email::headers()` and `Email::addHeaders()`
 
-<div class="deprecated">
-
-3.4.0
+::: info Deprecated in version 3.4.0
 Use `setHeaders()` instead of `headers()`.
-
-</div>
+:::
 
 ## Sending Templated Emails
 
@@ -360,14 +346,9 @@ modifying the Blog plugin. The template file needs to be created in the
 following path:
 **src/Template/Plugin/TestTheme/Plugin/Blog/Email/text/new_comment.ctp**.
 
-<div class="deprecated">
-
-3.4.0
-Use `viewBuilder()->setTemplate()` instead of `template()`. Use
-`viewBuilder()->setLayout()` instead of the layout argument of
-`template()`. Use `viewBuilder()->setTheme()` instead of `theme()`.
-
-</div>
+::: info Deprecated in version 3.4.0
+Use `viewBuilder()->setTemplate()` instead of `template()`. Use`viewBuilder()->setLayout()` instead of the layout argument of`template()`. Use `viewBuilder()->setTheme()` instead of `theme()`.
+:::
 
 ## Sending Attachments
 
@@ -415,12 +396,9 @@ you want the filenames to appear in the recipient's mail client:
     a string using the `data` option. This allows you to attach files without
     needing file paths to them.
 
-<div class="deprecated">
-
-3.4.0
+::: info Deprecated in version 3.4.0
 Use `setAttachments()` instead of `attachments()`.
-
-</div>
+:::
 
 ## Using Transports
 
@@ -441,12 +419,9 @@ $transport = new DebugTransport();
 $email->transport($transport);
 ```
 
-<div class="deprecated">
-
-3.4.0
+::: info Deprecated in version 3.4.0
 Use `setTransport()` instead of `transport()`.
-
-</div>
+:::
 
 ### Creating Custom Transports
 
@@ -501,12 +476,9 @@ $email = new Email('default');
 $email->emailPattern($newPattern);
 ```
 
-<div class="deprecated">
-
-3.4.0
+::: info Deprecated in version 3.4.0
 Use `setEmailPattern()` instead of `emailPattern()`.
-
-</div>
+:::
 
 ## Sending Messages Quickly
 
@@ -555,12 +527,9 @@ $email->domain('www.example.org');
 
 A valid message id can help to prevent emails ending up in spam folders.
 
-<div class="deprecated">
-
-3.4.0
+::: info Deprecated in version 3.4.0
 Use `setDomain()` instead of `domain()`.
-
-</div>
+:::
 
 ## Creating Reusable Emails
 

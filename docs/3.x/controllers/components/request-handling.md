@@ -110,13 +110,9 @@ $this->RequestHandler->config('inputTypeMap.json', ['json_decode', true]);
 The above will make `$this->request->getData()` an array of the JSON input data,
 without the additional `true` you'd get a set of `stdClass` objects.
 
-<div class="deprecated">
-
-3.1.0
-As of 3.1.0 the `addInputType()` method is deprecated. You should use
-`config()` to add input types at runtime.
-
-</div>
+::: info Deprecated in version 3.1.0
+As of 3.1.0 the `addInputType()` method is deprecated. You should use`config()` to add input types at runtime.
+:::
 
 ::: info Changed in version 3.6.0
 You should prefer using  instead ofRequestHandlerComponent.
@@ -223,10 +219,6 @@ public function initialize()
 }
 ```
 
-<div class="deprecated">
-
-3.1.0
-As of 3.1.0 the `viewClassMap()` method is deprecated. You should use
-`config()` to change the viewClassMap at runtime.
-
-</div>
+::: info Deprecated in version 3.1.0
+As of 3.1.0 the `viewClassMap()` method is deprecated. You should use`config()` to change the viewClassMap at runtime.
+:::

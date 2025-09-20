@@ -431,10 +431,6 @@ This text is not part of the note.
 This awesome feature was added in version 4.0.0
 :::
 
-<div class="deprecated">
-
-4.0.1
-
+::: info Deprecated in version 4.0.1
 This old feature was deprecated on version 4.0.1
-
-</div>
+:::

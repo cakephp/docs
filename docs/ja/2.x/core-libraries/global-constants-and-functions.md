@@ -216,65 +216,44 @@ CakePHP アプリケーション内の特定のファイルやディレクトリ
 >
 > 公開 CSS ディレクトリへのパス。
 >
-> <div class="deprecated">
->
-> 2.4
->
-> </div>
+> ::: info Deprecated in version 2.4
+> :::
 >
 > CSS ファイル・ディレクトリへのウェブパス。
 >
-> <div class="deprecated">
->
-> 2.4
+> ::: info Deprecated in version 2.4
 > 代わりに設定値の `App.cssBaseUrl` を使用して下さい。
->
-> </div>
+> :::
 >
 > PHP の DIRECTORY_SEPARATOR (Linux の場合は / Windows の場合は \\ のショートカット。
 >
 > `https://example.com` のような完全な URL プリフィクス。
 >
-> <div class="deprecated">
->
-> 2.4
+> ::: info Deprecated in version 2.4
 > この定数は非推奨です。代わりに `Router::fullBaseUrl()` を使用してください。
->
-> </div>
+> :::
 >
 > 画像の公開ディレクトリへのパス。
 >
-> <div class="deprecated">
->
-> 2.4
->
-> </div>
+> ::: info Deprecated in version 2.4
+> :::
 >
 > 画像の公開ディレクトリへのウェブパス。
 >
-> <div class="deprecated">
->
-> 2.4
+> ::: info Deprecated in version 2.4
 > 代わりに設定値の `App.imageBaseUrl` を使用してください。
->
-> </div>
+> :::
 >
 > JavaScript の公開ディレクトリへのパス。
 >
-> <div class="deprecated">
->
-> 2.4
->
-> </div>
+> ::: info Deprecated in version 2.4
+> :::
 >
 > JavaScript の公開ディレクトリへのウェブパス。
 >
-> <div class="deprecated">
->
-> 2.4
+> ::: info Deprecated in version 2.4
 > 代わりに設定値の `App.jsBaseUrl` を使用してください。
->
-> </div>
+> :::
 >
 > ログディレクトリへのパス。
 >

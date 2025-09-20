@@ -652,13 +652,9 @@ MethodNotAllowedException the rfc2616 says:
 
 ## Creating your Own Error Handler
 
-<div class="deprecated">
-
-4.4.0
-`ErrorHandler` has been deprecated. Use `ErrorTrap` or `ExceptionTrap`
-instead.
-
-</div>
+::: info Deprecated in version 4.4.0
+`ErrorHandler` has been deprecated. Use `ErrorTrap` or `ExceptionTrap`instead.
+:::
 
 By replacing the error handler you can customize how PHP errors and exceptions
 that are not caught by middleware are handled. Error handlers are different for

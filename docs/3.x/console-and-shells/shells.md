@@ -2,13 +2,9 @@
 
 `class` Cake\\Console\\**Shell**
 
-<div class="deprecated">
-
-3.6.0
-Shells are deprecated as of 3.6.0, but will not be removed until 5.x.
-Use [Console Commands](../console-and-shells/commands) instead.
-
-</div>
+::: info Deprecated in version 3.6.0
+Shells are deprecated as of 3.6.0, but will not be removed until 5.x.Use  instead.
+:::
 
 ## Creating a Shell
 

@@ -2,12 +2,9 @@
 
 `class` **MediaView**
 
-<div class="deprecated">
-
-2.3
-Use [Cake Response File](../controllers/request-response#cake-response-file) instead.
-
-</div>
+::: info Deprecated in version 2.3
+Use  instead.
+:::
 
 Media views allow you to send binary files to the user. For example, you may
 wish to have a directory of files outside of the webroot to prevent users from

@@ -2,13 +2,9 @@
 
 `class` Cake\\Console\\**Shell**
 
-<div class="deprecated">
-
-3.6.0
-Shell は 3.6.0 で非推奨ですが、 5.x までは削除されません。
-代わりに [コンソールコマンド](../console-and-shells/commands) を使用してください。
-
-</div>
+::: info Deprecated in version 3.6.0
+Shell は 3.6.0 で非推奨ですが、 5.x までは削除されません。代わりに  を使用してください。
+:::
 
 ## シェルの作成
 

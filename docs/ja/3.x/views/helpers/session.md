@@ -2,14 +2,9 @@
 
 `class` Cake\\View\\Helper\\**SessionHelper**(View $view, array $config = [])
 
-<div class="deprecated">
-
-3.0.0
-SessionHelper は 3.x で非推奨になりました。代わりに、
-[FlashHelper](../../views/helpers/flash) を使用するか、
-[セッションオブジェクトへアクセス](../../development/sessions#accessing-session-object) する必要があります。
-
-</div>
+::: info Deprecated in version 3.0.0
+SessionHelper は 3.x で非推奨になりました。代わりに、 を使用するか、 する必要があります。
+:::
 
 SessionHelper は Session オブジェクトのほとんどの機能を複製し、ビューで利用できるようにします。
 

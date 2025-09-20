@@ -240,65 +240,44 @@ Most of the following constants refer to paths in your application.
 >
 > > Path to the public CSS directory.
 > >
-> > <div class="deprecated">
-> >
-> > 2.4
-> >
-> > </div>
+> > ::: info Deprecated in version 2.4
+> > :::
 > >
 > > Web path to the CSS files directory.
 > >
-> > <div class="deprecated">
-> >
-> > 2.4
+> > ::: info Deprecated in version 2.4
 > > Use config value `App.cssBaseUrl` instead.
-> >
-> > </div>
+> > :::
 > >
 > > Short for PHP's DIRECTORY_SEPARATOR, which is / on Linux and \\ on Windows.
 > >
 > > Full URL prefix. Such as `https://example.com`
 > >
-> > <div class="deprecated">
-> >
-> > 2.4
+> > ::: info Deprecated in version 2.4
 > > This constant is deprecated, you should use `Router::fullBaseUrl()` instead.
-> >
-> > </div>
+> > :::
 > >
 > > Path to the public images directory.
 > >
-> > <div class="deprecated">
-> >
-> > 2.4
-> >
-> > </div>
+> > ::: info Deprecated in version 2.4
+> > :::
 > >
 > > Web path to the public images directory.
 > >
-> > <div class="deprecated">
-> >
-> > 2.4
+> > ::: info Deprecated in version 2.4
 > > Use config value `App.imageBaseUrl` instead.
-> >
-> > </div>
+> > :::
 > >
 > > Path to the public JavaScript directory.
 > >
-> > <div class="deprecated">
-> >
-> > 2.4
-> >
-> > </div>
+> > ::: info Deprecated in version 2.4
+> > :::
 > >
 > > Web path to the js files directory.
 > >
-> > <div class="deprecated">
-> >
-> > 2.4
+> > ::: info Deprecated in version 2.4
 > > Use config value `App.jsBaseUrl` instead.
-> >
-> > </div>
+> > :::
 > >
 > > Path to the logs directory.
 > >

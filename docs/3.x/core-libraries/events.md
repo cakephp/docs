@@ -71,12 +71,9 @@ class OrdersTable extends Table
 }
 ```
 
-<div class="deprecated">
-
-3.5.0
+::: info Deprecated in version 3.5.0
 Use `getEventManager()` instead.
-
-</div>
+:::
 
 The above code allows you to notify the other parts of the application
 that an order has been created. You can then do tasks like send email

@@ -2,13 +2,9 @@
 
 `class` **RequestHandlerComponent**(ComponentCollection $collection, array $config = [])
 
-<div class="deprecated">
-
-4.4.0
-The `RequestHandlerComponent` is deprecated. See the
-[4.4 Migration Guide](../../appendices/4-4-migration-guide) for how to upgrade your application.
-
-</div>
+::: info Deprecated in version 4.4.0
+The `RequestHandlerComponent` is deprecated. See the for how to upgrade your application.
+:::
 
 The Request Handler component is used in CakePHP to obtain additional
 information about the HTTP requests that are made to your application. You can
@@ -152,10 +148,6 @@ public function initialize(): void
 }
 ```
 
-<div class="deprecated">
-
-4.4.0
-Instead of defining `viewClassMap` you should use
-[Controller Viewclasses](../../controllers#controller-viewclasses) instead.
-
-</div>
+::: info Deprecated in version 4.4.0
+Instead of defining `viewClassMap` you should use instead.
+:::

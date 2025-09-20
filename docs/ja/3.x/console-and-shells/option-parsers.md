@@ -414,10 +414,6 @@ $parser->addSubcommand('model', [
 複数語のサブコマンドを追加する際、キャメルバック (camelBacked) 形式に加えて`スネークケース (snake_cake)` を使ってこれらのコマンドを呼び出すことができます。
 :::
 
-<div class="deprecated">
-
-3.6.0
-サブコマンドは非推奨です。代わりに [ネストされたコマンド](../console-and-shells#renaming-commands)
-を使用してください。
-
-</div>
+::: info Deprecated in version 3.6.0
+サブコマンドは非推奨です。代わりに を使用してください。
+:::

@@ -737,12 +737,9 @@ $this->save($entity);
 `fieldList` オプションは `newEntity()` 、 `newEntities()`
 および `patchEntities()` メソッドでも受け入れられます。
 
-<div class="deprecated">
-
-3.4.0
+::: info Deprecated in version 3.4.0
 `fieldList` の代わりに `fields` を使用してください。
-
-</div>
+:::
 
 ## エンティティーの保存
 

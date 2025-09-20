@@ -1,11 +1,8 @@
 # Scaffolding
 
-<div class="deprecated">
-
-2.5
+::: info Deprecated in version 2.5
 Dynamic scaffolding will be removed and replaced in 3.0
-
-</div>
+:::
 
 Application scaffolding is a technique that allows a developer to
 define and create a basic application that can create, retrieve,

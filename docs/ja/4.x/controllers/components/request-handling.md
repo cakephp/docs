@@ -160,10 +160,6 @@ public function initialize(): void
 }
 ```
 
-<div class="deprecated">
-
-3.1.0
-3.1.0 から `viewClassMap()` メソッドは非推奨です。
-実行時に viewClassMap を変更するには、 `config()` を使用してください。
-
-</div>
+::: info Deprecated in version 3.1.0
+3.1.0 から `viewClassMap()` メソッドは非推奨です。実行時に viewClassMap を変更するには、 `config()` を使用してください。
+:::

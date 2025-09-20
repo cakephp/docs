@@ -6,15 +6,9 @@ The CakeText class includes convenience methods for creating and
 manipulating strings and is normally accessed statically. Example:
 `CakeText::uuid()`.
 
-<div class="deprecated">
-
-2.7
-The `String` class was deprecated in 2.7 in favour of the
-`CakeText` class. While the `String` class is still available
-for backwards compatibility, using `CakeText` is recommended as it offers
-compatibility with PHP7 and HHVM.
-
-</div>
+::: info Deprecated in version 2.7
+The `String` class was deprecated in 2.7 in favour of the`CakeText` class. While the `String` class is still availablefor backwards compatibility, using `CakeText` is recommended as it offerscompatibility with PHP7 and HHVM.
+:::
 
 If you need `TextHelper` functionalities outside of a `View`,
 use the `CakeText` class:

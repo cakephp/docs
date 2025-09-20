@@ -23,13 +23,9 @@ component will throw a
 The exception type changed from`Cake\Network\Exception\ForbiddenException` to`Cake\Network\Exception\InvalidCsrfTokenException`.
 :::
 
-<div class="deprecated">
-
-3.5.0
-You should use [Csrf Middleware](../../controllers/middleware#csrf-middleware) instead of
-`CsrfComponent`.
-
-</div>
+::: info Deprecated in version 3.5.0
+You should use  instead of`CsrfComponent`.
+:::
 
 ## Using the CsrfComponent
 

@@ -422,10 +422,6 @@ sphinx の警告 (*Admonitions*) は、まさにそのために使われます�
 バージョン 2.6.3 で素晴らしい機能が追加されました。
 :::
 
-<div class="deprecated">
-
-2.6.3
-
+::: info Deprecated in version 2.6.3
 バージョン 2.6.3 で古い機能は非推奨になりました。
-
-</div>
+:::

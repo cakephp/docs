@@ -69,12 +69,9 @@ class OrdersTable extends Table
 }
 ```
 
-<div class="deprecated">
-
-3.5.0
+::: info Deprecated in version 3.5.0
 代わりに `getEventManager()` を使用してください。
-
-</div>
+:::
 
 上記のコードは、注文が作成されていることをアプリケーションの別のパーツに通知することを簡単にできます。
 例えば、メール通知の送信、在庫の更新、ログに関する分析、その他のタスクのような関心ごとに注目した

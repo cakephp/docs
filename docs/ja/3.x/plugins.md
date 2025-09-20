@@ -88,12 +88,9 @@ php composer.phar dumpautoload
 Plugin::load('ContactManager', ['autoload' => true]);
 ```
 
-<div class="deprecated">
-
-3.7.0
+::: info Deprecated in version 3.7.0
 Plugin::load() と `autoload` オプションは非推奨です。
-
-</div>
+:::
 
 > [!NOTE]
 > 重要: `autoload` オプションは `addPlugin()` では使用できません。代わりに `composer dumpautoload` を使用してください。
@@ -279,12 +276,9 @@ Plugin::load('AcmeCorp/Users');
 ほとんどのプラグインで、設定するための正確な手続きとデータベースのセットアップするための方法が、
 ドキュメントに書かれています。他よりセットアップが必要なものもあります。
 
-<div class="deprecated">
-
-3.7.0
+::: info Deprecated in version 3.7.0
 Plugin::load() と Plugin::loadAll() は非推奨です。
-
-</div>
+:::
 
 ## プラグインの利用
 

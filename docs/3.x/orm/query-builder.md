@@ -714,14 +714,9 @@ The above would generate SQL like:
 SELECT * FROM articles WHERE author_id = 3 AND (view_count = 2 OR view_count = 3)
 ```
 
-<div class="deprecated">
-
-3.5.0
-`Query::orWhere()` creates hard to predict SQL based on the current query state.
-Use `Query::where()` instead as it has more predictable and easier
-to understand behavior.
-
-</div>
+::: info Deprecated in version 3.5.0
+`Query::orWhere()` creates hard to predict SQL based on the current query state.Use `Query::where()` instead as it has more predictable and easierto understand behavior.
+:::
 
 If you'd prefer to avoid deeply nested arrays, you can use the callback form of
 `where()` to build your queries. The callback accepts a QueryExpression which allows

@@ -93,12 +93,9 @@ autoloading with `Plugin`:
 Plugin::load('ContactManager', ['autoload' => true]);
 ```
 
-<div class="deprecated">
-
-3.7.0
+::: info Deprecated in version 3.7.0
 Plugin::load() and `autoload` option are deprecated.
-
-</div>
+:::
 
 > [!NOTE]
 > IMPORTANT: `autoload` option is not available on `addPlugin()`, you should use `composer dumpautoload` instead.
@@ -297,12 +294,9 @@ This will ensure that classnames are resolved properly when using
 Most plugins will indicate the proper procedure for configuring them and setting
 up the database in their documentation.
 
-<div class="deprecated">
-
-3.7.0
+::: info Deprecated in version 3.7.0
 Plugin::load() and Plugin::loadAll() are deprecated.
-
-</div>
+:::
 
 ## Using Plugin Classes
 

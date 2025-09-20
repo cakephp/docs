@@ -429,10 +429,6 @@ sphinx の勧告 (*Admonitions*) は、まさにそのために使われます�
 すごい機能がバージョン 4.0.0 で追加されました。
 :::
 
-<div class="deprecated">
-
-4.0.1
-
+::: info Deprecated in version 4.0.1
 この古い機能はバージョン 4.0.1 で撤廃されます。
-
-</div>
+:::
