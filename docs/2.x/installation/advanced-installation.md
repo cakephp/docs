@@ -104,10 +104,12 @@ By default `bake` will hard-code `CAKE_CORE_INCLUDE_PATH`. To
 make your application more portable you should modify `webroot/index.php`,
 changing `CAKE_CORE_INCLUDE_PATH` to be a relative path:
 
-    define(
-        'CAKE_CORE_INCLUDE_PATH',
-        ROOT . DS . APP_DIR . DS . 'Vendor' . DS . 'cakephp' . DS . 'cakephp' . DS . 'lib'
-    );
+``` text
+define(
+    'CAKE_CORE_INCLUDE_PATH',
+    ROOT . DS . APP_DIR . DS . 'Vendor' . DS . 'cakephp' . DS . 'cakephp' . DS . 'lib'
+);
+```
 
 > [!NOTE]
 > If you are planning to create unit tests for your application you'll also
@@ -117,14 +119,16 @@ If you're installing any other libraries with Composer, you'll need to setup
 the autoloader, and work around an issue in Composer's autoloader. In your
 `Config/bootstrap.php` file add the following:
 
-    // Load Composer autoload.
-    require APP . 'Vendor/autoload.php';
+``` text
+// Load Composer autoload.
+require APP . 'Vendor/autoload.php';
 
-    // Remove and re-prepend CakePHP's autoloader as Composer thinks it is the
-    // most important.
-    // See: http://goo.gl/kKVJO7
-    spl_autoload_unregister(array('App', 'load'));
-    spl_autoload_register(array('App', 'load'), true, true);
+// Remove and re-prepend CakePHP's autoloader as Composer thinks it is the
+// most important.
+// See: http://goo.gl/kKVJO7
+spl_autoload_unregister(array('App', 'load'));
+spl_autoload_register(array('App', 'load'), true, true);
+```
 
 You should now have a functioning CakePHP application installed via Composer. Be
 sure to keep the composer.json and composer.lock file with the rest of your
@@ -177,19 +181,21 @@ Given this type of setup, I would need to edit my webroot/index.php file (which
 will end up at /var/www/mysite/index.php, in this example) to look like the
 following:
 
-    // /app/webroot/index.php (partial, comments removed)
+``` text
+// /app/webroot/index.php (partial, comments removed)
 
-    if (!defined('ROOT')) {
-        define('ROOT', DS . 'home' . DS . 'me');
-    }
+if (!defined('ROOT')) {
+    define('ROOT', DS . 'home' . DS . 'me');
+}
 
-    if (!defined('APP_DIR')) {
-        define ('APP_DIR', 'myapp');
-    }
+if (!defined('APP_DIR')) {
+    define ('APP_DIR', 'myapp');
+}
 
-    if (!defined('CAKE_CORE_INCLUDE_PATH')) {
-        define('CAKE_CORE_INCLUDE_PATH', DS . 'usr' . DS . 'lib');
-    }
+if (!defined('CAKE_CORE_INCLUDE_PATH')) {
+    define('CAKE_CORE_INCLUDE_PATH', DS . 'usr' . DS . 'lib');
+}
+```
 
 It is recommended to use the `DS` constant rather than slashes to delimit file
 paths. This prevents any missing file errors you might get as a result of using

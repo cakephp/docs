@@ -38,9 +38,11 @@ recommend addressing deprecation issues as they are encountered, that is not
 always possible. If you'd like to defer fixing deprecation notices, you can
 disable them in your **config/app.php**:
 
-    'Error' => [
-        'errorLevel' => E_ALL & ~E_DEPRECATED & ~E_USER_DEPRECATED,
-    ]
+``` text
+'Error' => [
+    'errorLevel' => E_ALL & ~E_DEPRECATED & ~E_USER_DEPRECATED,
+]
+```
 
 The above error level will suppress deprecation warnings from CakePHP.
 

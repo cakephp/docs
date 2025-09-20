@@ -57,9 +57,11 @@ the `2.3` branch as the base for your branch. If your change is a bug fix
 for the current stable release, you should use the `master` branch. This
 makes merging your changes in later much simpler:
 
-    # fixing a bug on 2.3
-    git fetch upstream
-    git checkout -b ticket-1234 upstream/2.3
+``` text
+# fixing a bug on 2.3
+git fetch upstream
+git checkout -b ticket-1234 upstream/2.3
+```
 
 > [!TIP]
 > Use a descriptive name for your branch, referencing the ticket or feature
@@ -78,11 +80,13 @@ following:
 Once your changes are done and you're ready for them to be merged into CakePHP,
 you'll want to update your branch:
 
-    git checkout 2.3
-    git fetch upstream
-    git merge upstream/2.3
-    git checkout <branch_name>
-    git rebase 2.3
+``` text
+git checkout 2.3
+git fetch upstream
+git merge upstream/2.3
+git checkout <branch_name>
+git rebase 2.3
+```
 
 This will fetch + merge in any changes that have happened in CakePHP since you
 started. It will then rebase - or replay your changes on top of the current
@@ -90,13 +94,17 @@ code. You might encounter a conflict during the `rebase`. If the rebase
 quits early you can see which files are conflicted/un-merged with `git status`.
 Resolve each conflict, and then continue the rebase:
 
-    git add <filename> # do this for each conflicted file.
-    git rebase --continue
+``` text
+git add <filename> # do this for each conflicted file.
+git rebase --continue
+```
 
 Check that all your tests continue to pass. Then push your branch to your
 fork:
 
-    git push origin <branch-name>
+``` text
+git push origin <branch-name>
+```
 
 Once your branch is on GitHub, you can submit a pull request on GitHub.
 

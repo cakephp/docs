@@ -11,9 +11,11 @@ Session ヘルパーと Session コンポーネントの大きな違いはヘル
 Session コンポーネントと同じく、データは
 `ドット記法` の配列構造で読み込みます:
 
-    array('User' => array(
-        'username' => 'super@example.com'
-    ));
+``` text
+array('User' => array(
+    'username' => 'super@example.com'
+));
+```
 
 ご覧の配列構造には、ノードに `User.username` といった形で、ドット
 (.) で表された入れ子配列でアクセスします。

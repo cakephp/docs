@@ -62,7 +62,7 @@ debug/notice/info のログをより深刻なエラーから分離するのが�
 クロージャーこれはロガーオブジェクトがどのように構築されるかを完全に制御する必要がある時に役立ちます。
 クロージャーは構築されたロガーのインスタンスを返さなければなりません。例えば:
 
-``` css
+``` php
 Log::setConfig('special', function () {
     return new \Cake\Log\Engine\FileLog(['path' => LOGS, 'file' => 'log']);
 });
@@ -71,7 +71,7 @@ Log::setConfig('special', function () {
 設定オプションは `DSN` の文字列で渡すことも可能です。これは環境変数や `PaaS`
 プロバイダーを扱っている時に役立ちます。 :
 
-``` css
+``` php
 Log::setConfig('error', [
     'url' => 'file:///full/path/to/logs/?levels[]=warning&levels[]=error&file=error',
 ]);
@@ -89,19 +89,21 @@ Log::setConfig('error', [
 また、ログエンジンの設定は `Cake\Log\Log::setConfig()` を使う必要があります。
 例えば DatabaseLog の設定はこのようになります。 :
 
-    // src/Log 用
-    Log::setConfig('otherFile', [
-        'className' => 'Database',
-        'model' => 'LogEntry',
-        // ...
-    ]);
+``` php
+// src/Log 用
+Log::setConfig('otherFile', [
+    'className' => 'Database',
+    'model' => 'LogEntry',
+    // ...
+]);
 
-    // LoggingPack というプラグイン用
-    Log::setConfig('otherFile', [
-        'className' => 'LoggingPack.Database',
-        'model' => 'LogEntry',
-        // ...
-    ]);
+// LoggingPack というプラグイン用
+Log::setConfig('otherFile', [
+    'className' => 'LoggingPack.Database',
+    'model' => 'LogEntry',
+    // ...
+]);
+```
 
 ログエンジンを設定する時、 `className` パラメーターは、ログハンドラーを配置しロードするために使用されます。
 その他の設定プロパティーの全ては、ログエンジンのコンストラクターに配列として渡されます。 :
@@ -223,7 +225,7 @@ $this->log("何かがうまくいかなかった！");
 ロガーの設定により、追加/代替の FileLog の場所を設定できます。FileLog は、独自のパスを使用するために
 `path` を設定できます。 :
 
-``` css
+``` php
 Log::setConfig('custom_path', [
     'className' => 'File',
     'path' => '/path/to/custom/place/'
@@ -244,7 +246,7 @@ syslog を使うためには、デフォルトの FileLog エンジンを使う�
 ロギングに使用するエンジンとして Syslog を指定する必要があります。下記の設定は、デフォルトのロガーを
 `Syslog` に置き換えるものです。これは、 **bootstrap.php** ファイルで設定します。 :
 
-``` css
+``` php
 Log::setConfig('default', [
     'engine' => 'Syslog'
 ]);
@@ -269,7 +271,7 @@ Syslog ロギングエンジンのための設定配列は、以下のキーを�
 ログファイルへの書き込みは、２つの方法があります。１つは、
 静的な `Cake\Log\Log::write()` メソッドを使用することです。 :
 
-``` css
+``` php
 Log::write('debug', '何かがうまくいかなかった');
 ```
 
@@ -316,33 +318,35 @@ CakePHP は、このコンセプトをロギングスコープで実現します
 スコープ名を指定できます。そのスコープとして設定されたロガーがある場合、ログメッセージは
 これらのロガーに向けられます。例:
 
-    // すべてのレベルを受け取るように、 logs/shops.log を設定。
-    // スコープは `orders` と `payments` のみ
-    Log::setConfig('shops', [
-        'className' => 'File',
-        'path' => LOGS,
-        'levels' => [],
-        'scopes' => ['orders', 'payments'],
-        'file' => 'shops.log',
-    ]);
+``` php
+// すべてのレベルを受け取るように、 logs/shops.log を設定。
+// スコープは `orders` と `payments` のみ
+Log::setConfig('shops', [
+    'className' => 'File',
+    'path' => LOGS,
+    'levels' => [],
+    'scopes' => ['orders', 'payments'],
+    'file' => 'shops.log',
+]);
 
-    // すべてのレベルを受け取るように、 logs/payments.log を設定。
-    // スコープは `payments` のみ
-    Log::setConfig('payments', [
-        'className' => 'File',
-        'path' => LOGS,
-        'levels' => [],
-        'scopes' => ['payments'],
-        'file' => 'payments.log',
-    ]);
+// すべてのレベルを受け取るように、 logs/payments.log を設定。
+// スコープは `payments` のみ
+Log::setConfig('payments', [
+    'className' => 'File',
+    'path' => LOGS,
+    'levels' => [],
+    'scopes' => ['payments'],
+    'file' => 'payments.log',
+]);
 
-    Log::warning('これは、 shops.log のみに書かれます', ['scope' => ['orders']]);
-    Log::warning('これは、 shops.log と payments.log の両方に書かれます', ['scope' => ['payments']]);
+Log::warning('これは、 shops.log のみに書かれます', ['scope' => ['orders']]);
+Log::warning('これは、 shops.log と payments.log の両方に書かれます', ['scope' => ['payments']]);
+```
 
 スコープは単一の文字列もしくは数値インデックス配列として渡すことができます。
 コンテキストとしてより多くのデータを渡す機能が、この形式を使用すると制限されることに注意してください。 :
 
-``` css
+``` php
 Log::warning('これは警告です', ['orders']);
 Log::warning('これは警告です', 'payments');
 ```

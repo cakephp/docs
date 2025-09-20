@@ -449,4 +449,6 @@ TableRegistry::clear();
 
 は、次のように設定されます。 :
 
-    Cake\Core\Configure::write('App.namespace', 'App\My\Namespace');
+``` php
+Cake\Core\Configure::write('App.namespace', 'App\My\Namespace');
+```

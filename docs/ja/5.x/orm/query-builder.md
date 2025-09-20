@@ -581,11 +581,13 @@ $result = $query->toList(); // クエリーを実行し、配列を返す
 
 これらの行を実行した後、結果はこのようになります。 :
 
-    [
-        ['id' => 1, 'title' => 'First Article', 'body' => 'Article 1 body' ...],
-        ['id' => 2, 'title' => 'Second Article', 'body' => 'Article 2 body' ...],
-        ...
-    ]
+``` php
+[
+    ['id' => 1, 'title' => 'First Article', 'body' => 'Article 1 body' ...],
+    ['id' => 2, 'title' => 'Second Article', 'body' => 'Article 2 body' ...],
+    ...
+]
+```
 
 ### 計算フィールドを追加する
 

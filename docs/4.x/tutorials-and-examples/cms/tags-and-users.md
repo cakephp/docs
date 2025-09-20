@@ -389,12 +389,14 @@ echo $this->Form->control('tag_string', ['type' => 'text']);
 We'll also need to update the article view template. In
 **templates/Articles/view.php** add the line as shown:
 
-    <!-- File: templates/Articles/view.php -->
+``` text
+<!-- File: templates/Articles/view.php -->
 
-    <h1><?= h($article->title) ?></h1>
-    <p><?= h($article->body) ?></p>
-    // Add the following line
-    <p><b>Tags:</b> <?= h($article->tag_string) ?></p>
+<h1><?= h($article->title) ?></h1>
+<p><?= h($article->body) ?></p>
+// Add the following line
+<p><b>Tags:</b> <?= h($article->tag_string) ?></p>
+```
 
 You should also update the view method to allow retrieving existing tags:
 

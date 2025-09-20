@@ -12,7 +12,7 @@ CakePHP はまた、HTTP エラーで使うことのできる数多くの例外�
 
 例外の設定として使えるキーがいくつかあります:
 
-``` css
+``` php
 Configure::write('Exception', array(
     'handler' => 'ErrorHandler::handleException',
     'renderer' => 'ExceptionRenderer',
@@ -218,7 +218,9 @@ throw new MissingWidgetException(array('widget' => 'Pointy'));
 
 例外を生成する際にコードを変えることで、独自の HTTP ステータスコードを作成することができます:
 
-    throw new MissingWidgetHelperException('それはここではありません', 501);
+``` text
+throw new MissingWidgetHelperException('それはここではありません', 501);
+```
 
 上記ではレスポンスコード `501` を作成します。好きな HTTP ステータスコードを使うことができます。
 開発モードで、あなたの例外が特にテンプレートを持っておらず、 `500` 以上のコードを使うなら、
@@ -276,15 +278,17 @@ Configure::write('Exception.handler', function ($error) {
 独自の例外ハンドラを作成することで、アプリケーション例外についての独自のエラーハンドリングを
 提供することができます。例外ハンドラとして提供されるメソッド内で、下記のようにすることができます:
 
-    // app/Lib/AppErrorHandler.php の中で
-    class AppErrorHandler {
-        public static function handleException($error) {
-            if ($error instanceof MissingWidgetException) {
-                return self::handleMissingWidget($error);
-            }
-            // その他、各種処理
+``` php
+// app/Lib/AppErrorHandler.php の中で
+class AppErrorHandler {
+    public static function handleException($error) {
+        if ($error instanceof MissingWidgetException) {
+            return self::handleMissingWidget($error);
         }
+        // その他、各種処理
     }
+}
+```
 
 <div class="index">
 
@@ -319,14 +323,16 @@ Lib のパスの中にある、 `Error` ディレクトリ内に置いてくだ�
 独自の例外レンダリングクラスの中であなたはアプリケーション固有のエラーに特化したハンドリングを
 提供することができます:
 
-    // app/Lib/Error/AppExceptionRenderer.php の中で
-    App::uses('ExceptionRenderer', 'Error');
+``` php
+// app/Lib/Error/AppExceptionRenderer.php の中で
+App::uses('ExceptionRenderer', 'Error');
 
-    class AppExceptionRenderer extends ExceptionRenderer {
-        public function missingWidget($error) {
-            echo 'おっと、widget が見つかりません！';
-        }
+class AppExceptionRenderer extends ExceptionRenderer {
+    public function missingWidget($error) {
+        echo 'おっと、widget が見つかりません！';
     }
+}
+```
 
 上記の例では、`MissingWidgetException` 型のすべての例外をハンドリングし、
 独自の表示／ハンドリングロジックをそれら例外のために提供できます。

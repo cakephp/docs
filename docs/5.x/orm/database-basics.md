@@ -127,20 +127,22 @@ your application will be using. Sample connection information can be found in
 **config/app.default.php**. A sample connection configuration would look
 like:
 
-    'Datasources' => [
-        'default' => [
-            'className' => 'Cake\Database\Connection',
-            'driver' => 'Cake\Database\Driver\Mysql',
-            'persistent' => false,
-            'host' => 'localhost',
-            'username' => 'my_app',
-            'password' => 'secret',
-            'database' => 'my_app',
-            'encoding' => 'utf8mb4',
-            'timezone' => 'UTC',
-            'cacheMetadata' => true,
-        ],
+``` php
+'Datasources' => [
+    'default' => [
+        'className' => 'Cake\Database\Connection',
+        'driver' => 'Cake\Database\Driver\Mysql',
+        'persistent' => false,
+        'host' => 'localhost',
+        'username' => 'my_app',
+        'password' => 'secret',
+        'database' => 'my_app',
+        'encoding' => 'utf8mb4',
+        'timezone' => 'UTC',
+        'cacheMetadata' => true,
     ],
+],
+```
 
 The above will create a 'default' connection, with the provided parameters. You
 can define as many connections as you want in your configuration file. You can
@@ -290,7 +292,9 @@ pastry_stores, and savory_cakes.
 > If your MySQL server is configured with `skip-character-set-client-handshake`
 > then you MUST use the `flags` config to set your charset encoding. For example:
 >
->     'flags' => [\PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8']
+> ``` text
+> 'flags' => [\PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8']
+> ```
 
 <a id="read-and-write-connections"></a>
 
@@ -307,18 +311,20 @@ Role configurations override the values in the shared connection config. If the 
 and write role configurations are the same, a single connection to the database is used
 for both:
 
-    'default' => [
-        'driver' => 'mysql',
-        'username' => '...',
-        'password' => '...',
-        'database' => '...',
-        'read' => [
-            'host' => 'read-db.example.com',
-        ],
-        'write' => [
-            'host' => 'write-db.example.com',
-        ]
-    ];
+``` text
+'default' => [
+    'driver' => 'mysql',
+    'username' => '...',
+    'password' => '...',
+    'database' => '...',
+    'read' => [
+        'host' => 'read-db.example.com',
+    ],
+    'write' => [
+        'host' => 'write-db.example.com',
+    ]
+];
+```
 
 You can specify the same value for both `read` and `write` key without creating
 multiple connections to the database.
@@ -589,11 +595,13 @@ enum ArticleStatus: string implements EnumLabelInterface
 This can be useful if you want to use your enums in `FormHelper` select
 inputs. You can use [bake](/bake) to generate an enum class:
 
-    # generate an enum class with two cases and stored as an integer
-    bin/cake bake enum UserStatus inactive:0,active:1 -i
+``` text
+# generate an enum class with two cases and stored as an integer
+bin/cake bake enum UserStatus inactive:0,active:1 -i
 
-    # generate an enum class with two cases as a string
-    bin/cake bake enum UserStatus published:Y,unpublished:N
+# generate an enum class with two cases as a string
+bin/cake bake enum UserStatus published:Y,unpublished:N
+```
 
 CakePHP recommends a few conventions for enums:
 
@@ -1172,14 +1180,16 @@ metadata is stored in the `_cake_model_` cache configuration. You can define
 a custom cache configuration using the `cacheMetatdata` option in your
 datasource configuration:
 
-    'Datasources' => [
-        'default' => [
-            // Other keys go here.
+``` text
+'Datasources' => [
+    'default' => [
+        // Other keys go here.
 
-            // Use the 'orm_metadata' cache config for metadata.
-            'cacheMetadata' => 'orm_metadata',
-        ]
-    ],
+        // Use the 'orm_metadata' cache config for metadata.
+        'cacheMetadata' => 'orm_metadata',
+    ]
+],
+```
 
 You can also configure the metadata caching at runtime with the
 `cacheMetadata()` method:

@@ -23,11 +23,13 @@ One tab will be used for indentation.
 
 So, indentation should look like this:
 
-    // base level
-        // level 1
-            // level 2
-        // level 1
-    // base level
+``` text
+// base level
+    // level 1
+        // level 2
+    // level 1
+// base level
+```
 
 Or:
 
@@ -82,13 +84,15 @@ In short:
 Control structures are for example "`if`", "`for`", "`foreach`",
 "`while`", "`switch`" etc. Below, an example with "`if`":
 
-    if ((expr_1) || (expr_2)) {
-        // action_1;
-    } elseif (!(expr_3) && (expr_4)) {
-        // action_2;
-    } else {
-        // default_action;
-    }
+``` text
+if ((expr_1) || (expr_2)) {
+    // action_1;
+} elseif (!(expr_3) && (expr_4)) {
+    // action_2;
+} else {
+    // default_action;
+}
+```
 
 - In the control structures there should be 1 (one) space before the
   first parenthesis and 1 (one) space between the last parenthesis and
@@ -245,28 +249,32 @@ There are spaces on both side of the equals sign.
 
 Arguments that expect objects or arrays can be typehinted:
 
-    /**
-     * Some method description.
-     *
-     * @param Model $Model The model to use.
-     * @param array $array Some array value.
-     * @param bool $boolean Some boolean value.
-     */
-    public function foo(Model $Model, array $array, $boolean) {
-    }
+``` php
+/**
+ * Some method description.
+ *
+ * @param Model $Model The model to use.
+ * @param array $array Some array value.
+ * @param bool $boolean Some boolean value.
+ */
+public function foo(Model $Model, array $array, $boolean) {
+}
+```
 
 Here `$Model` must be an instance of `Model` and `$array` must be an `array`.
 
 Note that if you want to allow `$array` to be also an instance of `ArrayObject`
 you should not typehint as `array` accepts only the primitive type:
 
-    /**
-     * Some method description.
-     *
-     * @param array|ArrayObject $array Some array value.
-     */
-    public function foo($array) {
-    }
+``` php
+/**
+ * Some method description.
+ *
+ * @param array|ArrayObject $array Some array value.
+ */
+public function foo($array) {
+}
+```
 
 ## Method Chaining
 
@@ -318,19 +326,21 @@ The included [phpDocumentor](https://phpdoc.org) tags are:
 
 Class DocBlocks should look like this:
 
-    /**
-     * Short description of the class.
-     *
-     * Long description of class.
-     * Can use multiple lines.
-     *
-     * @deprecated 3.0.0 Deprecated in 2.6.0. Will be removed in 3.0.0. Use Bar instead.
-     * @see Bar
-     * @link https://book.cakephp.org/2.0/en/foo.html
-     */
-    class Foo {
+``` php
+/**
+ * Short description of the class.
+ *
+ * Long description of class.
+ * Can use multiple lines.
+ *
+ * @deprecated 3.0.0 Deprecated in 2.6.0. Will be removed in 3.0.0. Use Bar instead.
+ * @see Bar
+ * @link https://book.cakephp.org/2.0/en/foo.html
+ */
+class Foo {
 
-    }
+}
+```
 
 Class DocBlocks may contain the following [phpDocumentor](https://phpdoc.org) tags:
 
@@ -452,26 +462,30 @@ For more than two types it is usually best to just use `mixed`.
 
 When returning the object itself, e.g. for chaining, one should use `$this` instead:
 
-    /**
-     * Foo function.
-     *
-     * @return $this
-     */
-    public function foo() {
-        return $this;
-    }
+``` php
+/**
+ * Foo function.
+ *
+ * @return $this
+ */
+public function foo() {
+    return $this;
+}
+```
 
 ## Including Files
 
 `include`, `require`, `include_once` and `require_once` do not have parentheses:
 
-    // wrong = parentheses
-    require_once('ClassFileName.php');
-    require_once ($class);
+``` text
+// wrong = parentheses
+require_once('ClassFileName.php');
+require_once ($class);
 
-    // good = no parentheses
-    require_once 'ClassFileName.php';
-    require_once $class;
+// good = no parentheses
+require_once 'ClassFileName.php';
+require_once $class;
+```
 
 When including files with classes or libraries, use only and always the
 [require_once](https://www.php.net/require_once) function.
@@ -486,7 +500,7 @@ Always use long tags (`<?php ?>`) Instead of short tags (`<? ?>`).
 
 Write all functions in camelBack:
 
-``` php
+``` javascript
 function longFunctionName() {
 }
 ```
@@ -596,9 +610,13 @@ Please use `(int)$var` instead of `intval($var)` and `(float)$var` instead of `f
 
 Constants should be defined in capital letters:
 
-    define('CONSTANT', 1);
+``` text
+define('CONSTANT', 1);
+```
 
 If a constant name consists of multiple words, they should be separated
 by an underscore character, for example:
 
-    define('LONG_NAMED_CONSTANT', 2);
+``` text
+define('LONG_NAMED_CONSTANT', 2);
+```

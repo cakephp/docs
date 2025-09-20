@@ -18,11 +18,15 @@ CakePHP アプリケーション内の特定のファイルやディレクトリ
 > `$string_id` で翻訳時の ID を定めます。
 > その文字列内のプレースホルダーを置き換えるための、追加の引数を供給できます。 :
 >
->     __('You have {0} unread messages', $number);
+> ``` text
+> __('You have {0} unread messages', $number);
+> ```
 >
 > また、置換する名前インデックス配列を指定できます。 :
 >
->     __('You have {unread} unread messages', ['unread' => $number]);
+> ``` text
+> __('You have {unread} unread messages', ['unread' => $number]);
+> ```
 >
 > > [!NOTE]
 > > より詳しい情報は

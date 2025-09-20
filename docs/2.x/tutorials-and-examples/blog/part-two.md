@@ -104,44 +104,46 @@ Remember how in the last section we assigned the 'posts' variable
 to the view using the `set()` method? That would pass data
 to the view that would look something like this:
 
-    // print_r($posts) output:
+``` text
+// print_r($posts) output:
 
-    Array
-    (
-        [0] => Array
-            (
-                [Post] => Array
-                    (
-                        [id] => 1
-                        [title] => The title
-                        [body] => This is the post body.
-                        [created] => 2008-02-13 18:34:55
-                        [modified] =>
-                    )
-            )
-        [1] => Array
-            (
-                [Post] => Array
-                    (
-                        [id] => 2
-                        [title] => A title once again
-                        [body] => And the post body follows.
-                        [created] => 2008-02-13 18:34:56
-                        [modified] =>
-                    )
-            )
-        [2] => Array
-            (
-                [Post] => Array
-                    (
-                        [id] => 3
-                        [title] => Title strikes back
-                        [body] => This is really exciting! Not.
-                        [created] => 2008-02-13 18:34:57
-                        [modified] =>
-                    )
-            )
-    )
+Array
+(
+    [0] => Array
+        (
+            [Post] => Array
+                (
+                    [id] => 1
+                    [title] => The title
+                    [body] => This is the post body.
+                    [created] => 2008-02-13 18:34:55
+                    [modified] =>
+                )
+        )
+    [1] => Array
+        (
+            [Post] => Array
+                (
+                    [id] => 2
+                    [title] => A title once again
+                    [body] => And the post body follows.
+                    [created] => 2008-02-13 18:34:56
+                    [modified] =>
+                )
+        )
+    [2] => Array
+        (
+            [Post] => Array
+                (
+                    [id] => 3
+                    [title] => Title strikes back
+                    [body] => This is really exciting! Not.
+                    [created] => 2008-02-13 18:34:57
+                    [modified] =>
+                )
+        )
+)
+```
 
 CakePHP's view files are stored in `/app/View` inside a folder
 named after the controller to which they correspond. (We'll have to create
@@ -680,7 +682,7 @@ This line connects the URL '/' with the default CakePHP home page.
 We want it to connect with our own controller, so replace that line
 with this one:
 
-``` css
+``` php
 Router::connect('/', array('controller' => 'posts', 'action' => 'index'));
 ```
 

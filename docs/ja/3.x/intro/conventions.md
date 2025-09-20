@@ -142,10 +142,12 @@ CakePHP 所有のプラグインに予約されているため、ベンダー名
 を **使用しない** でください。
 規約では、小文字の文字とダッシュを区切り記号として使用します。 :
 
-    // 悪い例
-    cakephp/foo-bar
+``` text
+// 悪い例
+cakephp/foo-bar
 
-    // 良い例
-    your-name/cakephp-foo-bar
+// 良い例
+your-name/cakephp-foo-bar
+```
 
 詳しくは [awesome list recommendations](https://github.com/FriendsOfCake/awesome-cakephp/blob/master/CONTRIBUTING.md#tips-for-creating-cakephp-plugins) をご覧ください。

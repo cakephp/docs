@@ -59,28 +59,30 @@ Using multiple engine configurations also lets you incrementally change the
 storage as needed. For example in your **config/app.php** you could put the
 following:
 
-    // ...
-    'Cache' => [
-        'short' => [
-            'className' => 'File',
-            'duration' => '+1 hours',
-            'path' => CACHE,
-            'prefix' => 'cake_short_'
-        ],
-        // Using a fully namespaced name.
-        'long' => [
-            'className' => 'Cake\Cache\Engine\FileEngine',
-            'duration' => '+1 week',
-            'probability' => 100,
-            'path' => CACHE . 'long' . DS,
-        ]
+``` php
+// ...
+'Cache' => [
+    'short' => [
+        'className' => 'File',
+        'duration' => '+1 hours',
+        'path' => CACHE,
+        'prefix' => 'cake_short_'
+    ],
+    // Using a fully namespaced name.
+    'long' => [
+        'className' => 'Cake\Cache\Engine\FileEngine',
+        'duration' => '+1 week',
+        'probability' => 100,
+        'path' => CACHE . 'long' . DS,
     ]
-    // ...
+]
+// ...
+```
 
 Configuration options can also be provided as a `DSN` string. This is
 useful when working with environment variables or `PaaS` providers:
 
-``` css
+``` php
 Cache::config('short', [
     'url' => 'memcached://user:password@cache-host/?timeout=3600&prefix=myapp_',
 ]);
@@ -198,7 +200,7 @@ cache failure.
 You can configure Cache configurations to fall back to a specified config using
 the `fallback` configuration key:
 
-``` css
+``` php
 Cache::config('redis', [
     'className' => 'Redis',
     'duration' => '+1 hours',
@@ -217,7 +219,7 @@ from throwing an uncaught exception.
 
 You can turn off cache fallbacks with `false`:
 
-``` css
+``` php
 Cache::config('redis', [
     'className' => 'Redis',
     'duration' => '+1 hours',
@@ -374,8 +376,10 @@ $result = Cache::readMany([
 `Cache::delete()` will allow you to completely remove a cached
 object from the store:
 
-    // Remove a key
-    Cache::delete('my_key');
+``` php
+// Remove a key
+Cache::delete('my_key');
+```
 
 ### Deleting Multiple Keys at Once
 
@@ -400,11 +404,13 @@ Memcached, and Wincache, the cache configuration's prefix is used to remove
 cache entries. Make sure that different cache configurations have different
 prefixes:
 
-    // Will only clear expired keys.
-    Cache::clear(true);
+``` php
+// Will only clear expired keys.
+Cache::clear(true);
 
-    // Will clear all keys.
-    Cache::clear(false);
+// Will clear all keys.
+Cache::clear(false);
+```
 
 Garbage collects entries in the cache configuration. This is primarily
 used by FileEngine. It should be implemented by any Cache engine
@@ -426,7 +432,7 @@ lower the value by one, resulting in an incorrect value.
 After setting an integer value you can manipulate it using `increment()` and
 `decrement()`:
 
-``` css
+``` php
 Cache::write('initial_count', 10);
 
 // Later on
@@ -456,7 +462,7 @@ group or namespace. This is a common requirement for mass-invalidating keys
 whenever some information changes that is shared among all entries in the same
 group. This is possible by declaring the groups in cache configuration:
 
-``` css
+``` php
 Cache::config('site_home', [
     'className' => 'Redis',
     'duration' => '+999 days',
@@ -516,15 +522,19 @@ You may need to disable all Cache read & writes when trying to figure out cache
 expiration related issues. You can do this using `enable()` and
 `disable()`:
 
-    // Disable all cache reads, and cache writes.
-    Cache::disable();
+``` php
+// Disable all cache reads, and cache writes.
+Cache::disable();
+```
 
 Once disabled, all reads and writes will return `null`.
 
 Once disabled, you can use `enable()` to re-enable caching:
 
-    // Re-enable all cache reads, and cache writes.
-    Cache::enable();
+``` php
+// Re-enable all cache reads, and cache writes.
+Cache::enable();
+```
 
 If you need to check on the state of Cache, you can use `enabled()`.
 
@@ -538,7 +548,7 @@ Or in **plugins/MyPlugin/src/Cache/Engine/MyCustomCacheEngine.php** as
 part of a plugin. Cache configs from plugins need to use the plugin
 dot syntax:
 
-``` css
+``` php
 Cache::config('custom', [
     'className' => 'MyPlugin.MyCustomCache',
     // ...

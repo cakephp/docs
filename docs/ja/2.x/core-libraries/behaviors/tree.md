@@ -522,12 +522,14 @@ $this->Category->recover('tree');
 `$options` は、全ての追加パラメータの設定に使用され、デフォルトでは
 以下の利用可能なキーを持ち、それらは全てオプションです。 :
 
-    array(
-        'id' => null,
-        'field' => $model->displayField,
-        'order' => 'ASC',
-        'verify' => true
-    )
+``` text
+array(
+    'id' => null,
+    'field' => $model->displayField,
+    'order' => 'ASC',
+    'verify' => true
+)
+```
 
 `method` TreeBehavior::**verify**()
 
@@ -548,33 +550,35 @@ $this->Category->verify();
 
 出力結果:
 
-    Array
-    (
-        [0] => Array
-            (
-                [0] => node
-                [1] => 3
-                [2] => left and right values identical
-            )
-        [1] => Array
-            (
-                [0] => node
-                [1] => 2
-                [2] => The parent node 999 doesn't exist
-            )
-        [10] => Array
-            (
-                [0] => index
-                [1] => 123
-                [2] => missing
-            )
-        [99] => Array
-            (
-                [0] => node
-                [1] => 163
-                [2] => left greater than right
-            )
-    )
+``` text
+Array
+(
+    [0] => Array
+        (
+            [0] => node
+            [1] => 3
+            [2] => left and right values identical
+        )
+    [1] => Array
+        (
+            [0] => node
+            [1] => 2
+            [2] => The parent node 999 doesn't exist
+        )
+    [10] => Array
+        (
+            [0] => index
+            [1] => 123
+            [2] => missing
+        )
+    [99] => Array
+        (
+            [0] => node
+            [1] => 163
+            [2] => left greater than right
+        )
+)
+```
 
 ## ノードレベル (深さ)
 

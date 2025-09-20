@@ -3,8 +3,10 @@
 CLI 環境でキャッシュデータをよりよく管理するために、コンソールコマンドで、
 あなたのアプリケーションが持つキャッシュデータの消去ができます。 :
 
-    // 特定の設定のキャッシュをクリア
-    bin/cake cache clear <configname>
+``` text
+// 特定の設定のキャッシュをクリア
+bin/cake cache clear <configname>
 
-    // すべての設定のキャッシュをクリア
-    bin/cake cache clear_all
+// すべての設定のキャッシュをクリア
+bin/cake cache clear_all
+```

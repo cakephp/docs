@@ -81,12 +81,14 @@ Loading classes in plugins works much the same as loading app and
 core classes except you must specify the plugin you are loading
 from:
 
-    // Load the class Comment in app/Plugin/PluginName/Model/Comment.php
-    App::uses('Comment', 'PluginName.Model');
+``` php
+// Load the class Comment in app/Plugin/PluginName/Model/Comment.php
+App::uses('Comment', 'PluginName.Model');
 
-    // Load the class CommentComponent in
-    // app/Plugin/PluginName/Controller/Component/CommentComponent.php
-    App::uses('CommentComponent', 'PluginName.Controller/Component');
+// Load the class CommentComponent in
+// app/Plugin/PluginName/Controller/Component/CommentComponent.php
+App::uses('CommentComponent', 'PluginName.Controller/Component');
+```
 
 ## Finding paths to packages using App::path()
 
@@ -95,14 +97,18 @@ from:
 >
 > Used to read information stored path:
 >
->     // return the model paths in your application
->     App::path('Model');
+> ``` php
+> // return the model paths in your application
+> App::path('Model');
+> ```
 >
 > This can be done for all packages that are apart of your application. You
 > can also fetch paths for a plugin:
 >
->     // return the component paths in DebugKit
->     App::path('Component', 'DebugKit');
+> ``` php
+> // return the component paths in DebugKit
+> App::path('Component', 'DebugKit');
+> ```
 >
 > rtype  
 > array
@@ -116,8 +122,10 @@ from:
 >
 > Used for finding the path to a package inside CakePHP:
 >
->     // Get the path to Cache engines.
->     App::core('Cache/Engine');
+> ``` php
+> // Get the path to Cache engines.
+> App::core('Cache/Engine');
+> ```
 >
 > rtype  
 > string
@@ -140,23 +148,25 @@ from:
 >
 > Usage:
 >
->     //will setup a new search path for the Model package
->     App::build(array('Model' => array('/a/full/path/to/models/')));
+> ``` php
+> //will setup a new search path for the Model package
+> App::build(array('Model' => array('/a/full/path/to/models/')));
 >
->     //will setup the path as the only valid path for searching models
->     App::build(array('Model' => array('/path/to/models/')), App::RESET);
+> //will setup the path as the only valid path for searching models
+> App::build(array('Model' => array('/path/to/models/')), App::RESET);
 >
->     //will setup multiple search paths for helpers
->     App::build(array(
->         'View/Helper' => array('/path/to/helpers/', '/another/path/')
->     ));
+> //will setup multiple search paths for helpers
+> App::build(array(
+>     'View/Helper' => array('/path/to/helpers/', '/another/path/')
+> ));
+> ```
 >
 > If reset is set to true, all loaded plugins will be forgotten and they will
 > be needed to be loaded again.
 >
 > Examples:
 >
-> ``` css
+> ``` php
 > App::build(array('controllers' => array('/full/path/to/controllers/')));
 > //becomes
 > App::build(array('Controller' => array('/full/path/to/Controller/')));
@@ -178,7 +188,7 @@ from:
 when you want to add new top level packages or, sub-packages to your
 application:
 
-``` css
+``` php
 App::build(array(
     'Service' => array('%s' . 'Service' . DS)
 ), App::REGISTER);
@@ -204,16 +214,20 @@ Registering packages was added in 2.1
 >
 > Example usage:
 >
->     //returns array('DebugKit', 'Blog', 'User');
->     App::objects('plugin');
+> ``` php
+> //returns array('DebugKit', 'Blog', 'User');
+> App::objects('plugin');
 >
->     //returns array('PagesController', 'BlogController');
->     App::objects('Controller');
+> //returns array('PagesController', 'BlogController');
+> App::objects('Controller');
+> ```
 >
 > You can also search only within a plugin's objects by using the plugin dot syntax. :
 >
->     // returns array('MyPluginPost', 'MyPluginComment');
->     App::objects('MyPlugin.Model');
+> ``` php
+> // returns array('MyPluginPost', 'MyPluginComment');
+> App::objects('MyPlugin.Model');
+> ```
 >
 > ::: info Changed in version 2.0
 > :::
@@ -308,16 +322,20 @@ instead of the built-in core ones.
 You can use `App::uses()` to load classes in vendors directories. It follows
 the same conventions as loading other files:
 
-    // Load the class Geshi in app/Vendor/Geshi.php
-    App::uses('Geshi', 'Vendor');
+``` php
+// Load the class Geshi in app/Vendor/Geshi.php
+App::uses('Geshi', 'Vendor');
+```
 
 To load classes in subdirectories, you'll need to add those paths
 with `App::build()`:
 
-    // Load the class ClassInSomePackage in
-    // app/Vendor/SomePackage/ClassInSomePackage.php
-    App::build(array('Vendor' => array(APP . 'Vendor' . DS . 'SomePackage' . DS)));
-    App::uses('ClassInSomePackage', 'Vendor');
+``` php
+// Load the class ClassInSomePackage in
+// app/Vendor/SomePackage/ClassInSomePackage.php
+App::build(array('Vendor' => array(APP . 'Vendor' . DS . 'SomePackage' . DS)));
+App::uses('ClassInSomePackage', 'Vendor');
+```
 
 Your vendor files may not follow conventions, have a class that differs from
 the file name or does not contain classes. You can load those files using
@@ -327,7 +345,7 @@ any of the vendor folders.
 
 To load **app/Vendor/geshi.php**:
 
-``` css
+``` php
 App::import('Vendor', 'geshi');
 ```
 
@@ -337,19 +355,19 @@ App::import('Vendor', 'geshi');
 
 To load **app/Vendor/flickr/flickr.php**:
 
-``` css
+``` php
 App::import('Vendor', 'flickr', array('file' => 'flickr/flickr.php'));
 ```
 
 To load **app/Vendor/some.name.php**:
 
-``` css
+``` php
 App::import('Vendor', 'SomeName', array('file' => 'some.name.php'));
 ```
 
 To load **app/Vendor/services/well.named.php**:
 
-``` css
+``` php
 App::import(
     'Vendor',
     'WellNamed',
@@ -359,7 +377,7 @@ App::import(
 
 To load **app/Plugin/Awesome/Vendor/services/well.named.php**:
 
-``` css
+``` php
 App::import(
     'Vendor',
     'Awesome.WellNamed',
@@ -369,7 +387,7 @@ App::import(
 
 To load **app/Plugin/Awesome/Vendor/Folder/Foo.php**:
 
-``` css
+``` php
 App::import(
     'Vendor',
     'Awesome.Foo',
@@ -381,7 +399,7 @@ directory. CakePHP will automatically find it.
 
 To load **vendors/vendorName/libFile.php**:
 
-``` css
+``` php
 App::import(
     'Vendor',
     'aUniqueIdentifier',

@@ -114,10 +114,12 @@ use Psr\Http\Message\ServerRequestInterface;
 
 Then implement the authentication interface on your `Application` class:
 
-    // in src/Application.php
-    class Application extends BaseApplication
-        implements AuthenticationServiceProviderInterface
-    {
+``` php
+// in src/Application.php
+class Application extends BaseApplication
+    implements AuthenticationServiceProviderInterface
+{
+```
 
 Then add the following:
 

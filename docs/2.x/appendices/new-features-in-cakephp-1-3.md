@@ -125,7 +125,7 @@ as an app/libs. Or in `$plugin/libs/cache/my_custom_cache.php` as
 part of a plugin. Cache configs from plugins need to use the plugin
 dot syntax:
 
-``` css
+``` php
 Cache::config('custom', array(
     'engine' => 'CachePack.MyCustomCache',
     ...
@@ -411,13 +411,13 @@ vendors. This allows you to separate your organization's internal
 libraries from vendor libraries. `App::import()` has also been
 updated to import from libs directories:
 
-``` css
+``` php
 App::import('Lib', 'ImageManipulation'); //imports app/libs/image_manipulation.php
 ```
 
 You can also import libs files from plugins:
 
-``` css
+``` php
 App::import('Lib', 'Geocoding.Geocode'); //imports app/plugins/geocoding/libs/geocode.php
 ```
 

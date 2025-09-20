@@ -307,7 +307,9 @@ and password fields.
 > If you are using Apache with FastCGI-PHP you might need to add this line
 > to your **.htaccess** file in webroot:
 >
->     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization},L]
+> ``` text
+> RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization},L]
+> ```
 
 On each request, these values, `PHP_AUTH_USER` and `PHP_AUTH_PW`, are used to
 re-identify the user and ensure they are the valid user. As with authentication

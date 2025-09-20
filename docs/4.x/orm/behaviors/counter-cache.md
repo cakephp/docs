@@ -141,8 +141,10 @@ It is possible to use the CounterCache behavior in a `belongsToMany` association
 First, you need to add the `through` and `cascadeCallbacks` options to the
 `belongsToMany` association:
 
-    'through'          => 'CommentsArticles',
-    'cascadeCallbacks' => true
+``` text
+'through'          => 'CommentsArticles',
+'cascadeCallbacks' => true
+```
 
 Also see [Using The Through Option](../../orm/associations#using-the-through-option) how to configure a custom join table.
 

@@ -96,21 +96,23 @@ name. Returning to our online bakery example, our RecipesController might contai
 `view()`, `share()`, and `search()` actions. The controller would be found
 in `/app/Controller/RecipesController.php` and contain:
 
-    # /app/Controller/RecipesController.php
+``` php
+# /app/Controller/RecipesController.php
 
-    class RecipesController extends AppController {
-        public function view($id) {
-            //action logic goes here..
-        }
-
-        public function share($customerId, $recipeId) {
-            //action logic goes here..
-        }
-
-        public function search($query) {
-            //action logic goes here..
-        }
+class RecipesController extends AppController {
+    public function view($id) {
+        //action logic goes here..
     }
+
+    public function share($customerId, $recipeId) {
+        //action logic goes here..
+    }
+
+    public function search($query) {
+        //action logic goes here..
+    }
+}
+```
 
 The view files for these actions would be `app/View/Recipes/view.ctp`,
 `app/View/Recipes/share.ctp`, and `app/View/Recipes/search.ctp`. The

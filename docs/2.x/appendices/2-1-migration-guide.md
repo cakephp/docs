@@ -9,25 +9,27 @@ These classes are now required to be part of the app directory, as they were
 removed from the CakePHP core. If you do not already have these classes, you
 can use the following while upgrading:
 
-    // app/View/Helper/AppHelper.php
-    App::uses('Helper', 'View');
-    class AppHelper extends Helper {
-    }
+``` php
+// app/View/Helper/AppHelper.php
+App::uses('Helper', 'View');
+class AppHelper extends Helper {
+}
 
-    // app/Model/AppModel.php
-    App::uses('Model', 'Model');
-    class AppModel extends Model {
-    }
+// app/Model/AppModel.php
+App::uses('Model', 'Model');
+class AppModel extends Model {
+}
 
-    // app/Controller/AppController.php
-    App::uses('Controller', 'Controller');
-    class AppController extends Controller {
-    }
+// app/Controller/AppController.php
+App::uses('Controller', 'Controller');
+class AppController extends Controller {
+}
 
-    // app/Console/Command/AppShell.php
-    App::uses('Shell', 'Console');
-    class AppShell extends Shell {
-    }
+// app/Console/Command/AppShell.php
+App::uses('Shell', 'Console');
+class AppShell extends Shell {
+}
+```
 
 If your application already has these files/classes you don't need to do
 anything.

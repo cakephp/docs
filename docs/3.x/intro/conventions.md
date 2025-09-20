@@ -134,11 +134,13 @@ Do **not** use the CakePHP namespace (cakephp) as vendor name as this is
 reserved to CakePHP owned plugins. The convention is to use lowercase letters
 and dashes as separator:
 
-    // Bad
-    cakephp/foo-bar
+``` text
+// Bad
+cakephp/foo-bar
 
-    // Good
-    your-name/cakephp-foo-bar
+// Good
+your-name/cakephp-foo-bar
+```
 
 ## Summarized
 

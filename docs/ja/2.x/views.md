@@ -432,8 +432,10 @@ echo $this->element('helpbox', array(
 (ビューファイルにおけるコントローラの `Controller::set()` メソッドと同様の動作です。)
 上記の例では `/app/View/Elements/helpbox.ctp` の中で `$helptext` 変数が使えます。 :
 
-    // app/View/Elements/helpbox.ctp の内部
-    echo $helptext; //"Oh, this text is very helpful." と出力されます
+``` text
+// app/View/Elements/helpbox.ctp の内部
+echo $helptext; //"Oh, this text is very helpful." と出力されます
+```
 
 `View::element()` メソッドは、エレメントのためのオプションをサポートしています。
 サポートされるオプションは、'cache' と 'callbacks' です。例えば:

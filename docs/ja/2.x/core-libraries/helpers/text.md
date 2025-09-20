@@ -82,11 +82,13 @@ TextHelper は、ビューの中でテキストを作成する際に便利で使
 > `$options` は、どんな拡張パラメータでも利用できるように使われますが、
 > デフォルトでは次のオプションのみが利用できます。 :
 >
->     array(
->         'ellipsis' => '...',
->         'exact' => true,
->         'html' => false
->     )
+> ``` text
+> array(
+>     'ellipsis' => '...',
+>     'exact' => true,
+>     'html' => false
+> )
+> ```
 >
 > 例:
 >
@@ -137,10 +139,12 @@ TextHelper は、ビューの中でテキストを作成する際に便利で使
 > `$options` は、どんな拡張パラメータでも利用できるように使われますが、
 > デフォルトでは次のオプションのみが利用できます。 :
 >
->     array(
->         'ellipsis' => '...',
->         'exact' => true
->     )
+> ``` text
+> array(
+>     'ellipsis' => '...',
+>     'exact' => true
+> )
+> ```
 >
 > ::: info Added in version 2.3
 > :::

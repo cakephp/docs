@@ -89,10 +89,12 @@ Hello jillian
 このコマンド名を上書きする場合は、
 コマンドの `defaultName()` メソッドを用います。:
 
-    public static function defaultName(): string
-    {
-        return 'oh_hi';
-    }
+``` text
+public static function defaultName(): string
+{
+    return 'oh_hi';
+}
+```
 
 上記のように書くことで、 `HelloCommand` コマンドは
 `cake hello` ではなく `cake oh_hi` として

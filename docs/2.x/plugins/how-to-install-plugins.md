@@ -74,7 +74,7 @@ Plugins need to be loaded manually in `app/Config/bootstrap.php`.
 
 You can either load one by one or all of them in a single call:
 
-``` css
+``` php
 CakePlugin::loadAll(); // Loads all plugins at once
 CakePlugin::load('ContactManager'); // Loads a single plugin
 ```

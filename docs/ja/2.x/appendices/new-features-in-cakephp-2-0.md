@@ -138,12 +138,14 @@ CakePHP 2.0は [例外(Exception)](../development/exceptions) と [エラーハ�
 `debug()` はコンソールでHTMLを吐き出さないようになりました。
 代わりに以下のような出力をします:
 
-    ########## DEBUG ##########
-    Array
-    (
-        [0] => test
-    )
-    ###########################
+``` text
+########## DEBUG ##########
+Array
+(
+    [0] => test
+)
+###########################
+```
 
 これはコマンドラインでの `debug()` の可読性を向上させるでしょう。
 
@@ -163,7 +165,7 @@ CakePHP 2.0は [例外(Exception)](../development/exceptions) と [エラーハ�
 これはCakePHPのRESTスタイルのエンドポイントのサポートを拡張します。
 この機能を使うには、まず `app/Config/routes.php` で拡張子を有効にしてください。
 
-``` css
+``` php
 Router::parseExtensions('json', 'xml');
 ```
 

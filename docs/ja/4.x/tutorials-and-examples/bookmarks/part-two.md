@@ -152,7 +152,9 @@ public function isAuthorized($user)
 
 また、 `AppController` の `Auth` の設定を以下のように追加します。 :
 
-    'authorize' => 'Controller',
+``` text
+'authorize' => 'Controller',
+```
 
 `initialize()` メソッドはこのようになります。 :
 

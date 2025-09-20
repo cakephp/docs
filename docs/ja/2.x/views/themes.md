@@ -51,7 +51,9 @@ Themed フォルダの中にテーマ名のフォルダを作成して下さい�
 
 新しいテーマの webroot を使うには:
 
-    app/View/Themed/<themeName>/webroot<path_to_file>
+``` text
+app/View/Themed/<themeName>/webroot<path_to_file>
+```
 
 のようなディレクトリをテーマの中に作成して下さい。ディスパッチャはビューパスから
 正しいテーマのアセットの検索をハンドリングします。

@@ -150,40 +150,42 @@ class Post extends AppModel {
 With this setup the result of `$this->Post->find()` should look
 something like this:
 
-    Array
-    (
-         [Post] => Array
-             (
-                 [id] => 1
-                 [title] => Beispiel Eintrag
-                 [body] => lorem ipsum...
-                 [locale] => de_de
-             )
+``` text
+Array
+(
+     [Post] => Array
+         (
+             [id] => 1
+             [title] => Beispiel Eintrag
+             [body] => lorem ipsum...
+             [locale] => de_de
+         )
 
-         [titleTranslation] => Array
-             (
-                 [0] => Array
-                     (
-                         [id] => 1
-                         [locale] => en_us
-                         [model] => Post
-                         [foreign_key] => 1
-                         [field] => title
-                         [content] => Example entry
-                     )
+     [titleTranslation] => Array
+         (
+             [0] => Array
+                 (
+                     [id] => 1
+                     [locale] => en_us
+                     [model] => Post
+                     [foreign_key] => 1
+                     [field] => title
+                     [content] => Example entry
+                 )
 
-                 [1] => Array
-                     (
-                         [id] => 2
-                         [locale] => de_de
-                         [model] => Post
-                         [foreign_key] => 1
-                         [field] => title
-                         [content] => Beispiel Eintrag
-                     )
+             [1] => Array
+                 (
+                     [id] => 2
+                     [locale] => de_de
+                     [model] => Post
+                     [foreign_key] => 1
+                     [field] => title
+                     [content] => Beispiel Eintrag
+                 )
 
-             )
-    )
+         )
+)
+```
 
 > [!NOTE]
 > The model record contains a *virtual* field called
@@ -214,40 +216,42 @@ $this->Post->find('all', array('recursive' => 1));
 With this setup the result of your find() should look something
 like this:
 
-    Array
-    (
-         [Post] => Array
-             (
-                 [id] => 1
-                 [title] => Beispiel Eintrag
-                 [body] => lorem ipsum...
-                 [locale] => de_de
-             )
+``` text
+Array
+(
+     [Post] => Array
+         (
+             [id] => 1
+             [title] => Beispiel Eintrag
+             [body] => lorem ipsum...
+             [locale] => de_de
+         )
 
-         [titleTranslation] => Array
-             (
-                 [0] => Array
-                     (
-                         [id] => 1
-                         [locale] => en_us
-                         [model] => Post
-                         [foreign_key] => 1
-                         [field] => title
-                         [content] => Example entry
-                     )
+     [titleTranslation] => Array
+         (
+             [0] => Array
+                 (
+                     [id] => 1
+                     [locale] => en_us
+                     [model] => Post
+                     [foreign_key] => 1
+                     [field] => title
+                     [content] => Example entry
+                 )
 
-                 [1] => Array
-                     (
-                         [id] => 2
-                         [locale] => de_de
-                         [model] => Post
-                         [foreign_key] => 1
-                         [field] => title
-                         [content] => Beispiel Eintrag
-                     )
+             [1] => Array
+                 (
+                     [id] => 2
+                     [locale] => de_de
+                     [model] => Post
+                     [foreign_key] => 1
+                     [field] => title
+                     [content] => Beispiel Eintrag
+                 )
 
-             )
-    )
+         )
+)
+```
 
 ## Saving in another language
 

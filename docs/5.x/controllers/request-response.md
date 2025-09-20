@@ -236,11 +236,13 @@ present at the given path, then this method will return `null`, just like it wou
 Returns all uploaded files in a normalized array structure. For the above example with the file input name of
 `attachment`, the structure would look like:
 
-    [
-          'attachment' => object(Laminas\Diactoros\UploadedFile) {
-              // ...
-          }
-    ]
+``` php
+[
+      'attachment' => object(Laminas\Diactoros\UploadedFile) {
+          // ...
+      }
+]
+```
 
 `method` Cake\\Http\\ServerRequest::**withUploadedFiles**(array $files)
 

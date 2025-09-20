@@ -49,30 +49,32 @@ For example, if a new English file is created in **en/file.rst**, we should:
   eventual `toc-tree` elements. The following note will be added while nobody
   has translated the file:
 
-      File Title
-      ##########
+  ``` text
+  File Title
+  ##########
 
-      .. note::
-          The documentation is not currently supported in XX language for this
-          page.
+  .. note::
+      The documentation is not currently supported in XX language for this
+      page.
 
-          Please feel free to send us a pull request on
-          `Github <https://github.com/cakephp/docs>`_ or use the **Improve This Doc**
-          button to directly propose your changes.
+      Please feel free to send us a pull request on
+      `Github <https://github.com/cakephp/docs>`_ or use the **Improve This Doc**
+      button to directly propose your changes.
 
-          You can refer to the English version in the select top menu to have
-          information about this page's topic.
+      You can refer to the English version in the select top menu to have
+      information about this page's topic.
 
-      // If toc-tree elements are in the English version
-      .. toctree::
-          :maxdepth: 1
+  // If toc-tree elements are in the English version
+  .. toctree::
+      :maxdepth: 1
 
-          one-toc-file
-          other-toc-file
+      one-toc-file
+      other-toc-file
 
-      .. meta::
-          :title lang=xx: File Title
-          :keywords lang=xx: title, description,...
+  .. meta::
+      :title lang=xx: File Title
+      :keywords lang=xx: title, description,...
+  ```
 
 ### Translator tips
 
@@ -202,7 +204,9 @@ There are several kinds of links, each with their own uses.
 
 Links to external documents can be done with the following:
 
-    `External Link to php.net <https://php.net>`_
+``` text
+`External Link to php.net <https://php.net>`_
+```
 
 The resulting link would look like this: [External Link to php.net](https://php.net)
 
@@ -268,24 +272,28 @@ Each directive populates the index, and or the namespace index.
 > Describes a class. Methods, attributes, and constants belonging to the class
 > should be inside this directive's body:
 >
->     .. php:class:: MyClass
+> ``` text
+> .. php:class:: MyClass
 >
->         Class description
+>     Class description
 >
->        .. php:method:: method($argument)
+>    .. php:method:: method($argument)
 >
->        Method description
+>    Method description
+> ```
 >
 > Attributes, methods and constants don't need to be nested. They can also just
 > follow the class declaration:
 >
->     .. php:class:: MyClass
+> ``` text
+> .. php:class:: MyClass
 >
->         Text about the class
+>     Text about the class
 >
->     .. php:method:: methodName()
+> .. php:method:: methodName()
 >
->         Text about the method
+>     Text about the method
+> ```
 >
 > <div class="seealso">
 >
@@ -295,14 +303,16 @@ Each directive populates the index, and or the namespace index.
 
 > Describe a class method, its arguments, return value, and exceptions:
 >
->     .. php:method:: instanceMethod($one, $two)
+> ``` text
+> .. php:method:: instanceMethod($one, $two)
 >
->         :param string $one: The first parameter.
->         :param string $two: The second parameter.
->         :returns: An array of stuff.
->         :throws: InvalidArgumentException
+>     :param string $one: The first parameter.
+>     :param string $two: The second parameter.
+>     :returns: An array of stuff.
+>     :throws: InvalidArgumentException
 >
->        This is an instance method.
+>    This is an instance method.
+> ```
 
 > Describe a static method, its arguments, return value and exceptions,
 > see `php:method` for options.
@@ -344,12 +354,16 @@ matching directive is found:
 
 > Reference a method of a class. This role supports both kinds of methods:
 >
->     :php:meth:`DateTime::setDate`
->     :php:meth:`Classname::staticMethod`
+> ``` text
+> :php:meth:`DateTime::setDate`
+> :php:meth:`Classname::staticMethod`
+> ```
 
 > Reference a property on an object:
 >
->     :php:attr:`ClassName::$propertyName`
+> ``` text
+> :php:attr:`ClassName::$propertyName`
+> ```
 
 > Reference an exception.
 
@@ -393,12 +407,14 @@ that. There are fives kinds of admonitions.
 
 All admonitions are made the same:
 
-    .. note::
+``` text
+.. note::
 
-        Indented and preceded and followed by a blank line. Just like a
-        paragraph.
+    Indented and preceded and followed by a blank line. Just like a
+    paragraph.
 
-    This text is not part of the note.
+This text is not part of the note.
+```
 
 #### Samples
 

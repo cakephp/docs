@@ -6,41 +6,49 @@ routing array
 An array of attributes that are passed to `Router::url()`.
 They typically look like:
 
-    array('controller' => 'posts', 'action' => 'view', 5)
+``` text
+array('controller' => 'posts', 'action' => 'view', 5)
+```
 
 Or a more complex example:
 
-    array(
-        'subdomain' => 'dev',
-        'plugin' => 'account',
-        'prefix' => 'admin',
-        'controller' => 'profiles',
-        'action' => 'edit',
-        10257
-        '#' => 'email',
-        '?' => array(
-            'reset' => true,
-        ),
-        'full_base' => true,
-    )
+``` text
+array(
+    'subdomain' => 'dev',
+    'plugin' => 'account',
+    'prefix' => 'admin',
+    'controller' => 'profiles',
+    'action' => 'edit',
+    10257
+    '#' => 'email',
+    '?' => array(
+        'reset' => true,
+    ),
+    'full_base' => true,
+)
+```
 
 HTML attributes  
 An array of key =\> values that are composed into HTML attributes. For example:
 
-    // Given
-    array('class' => 'my-class', 'target' => '_blank')
+``` text
+// Given
+array('class' => 'my-class', 'target' => '_blank')
 
-    // Would generate
-    class="my-class" target="_blank"
+// Would generate
+class="my-class" target="_blank"
+```
 
 If an option can be minimized or accepts it's name as the value, then `true`
 can be used:
 
-    // Given
-    array('checked' => true)
+``` text
+// Given
+array('checked' => true)
 
-    // Would generate
-    checked="checked"
+// Would generate
+checked="checked"
+```
 
 plugin syntax  
 Plugin syntax refers to the dot separated class name indicating classes
@@ -55,13 +63,15 @@ For example:
 
 Would point to the following value:
 
-    array(
-        'Asset' => array(
-            'filter' => array(
-                'css' => 'got me'
-            )
+``` text
+array(
+    'Asset' => array(
+        'filter' => array(
+            'css' => 'got me'
         )
     )
+)
+```
 
 CSRF  
 Cross Site Request Forgery. Prevents replay attacks, double

@@ -107,10 +107,12 @@ php composer.phar require --update-with-dependencies "cakephp/cakephp:3.6.*"
 新しい方法の採用に取り組んでいる間、非推奨警告を無効にすることができます。
 **config/app.php** の中で `Error.errorLevel` を設定できます。 :
 
-    // config/app.php の中で
-    'Error' => [
-        'errorLevel' => E_ALL ^ E_USER_DEPRECATED
-    ]
+``` text
+// config/app.php の中で
+'Error' => [
+    'errorLevel' => E_ALL ^ E_USER_DEPRECATED
+]
+```
 
 非推奨警告が解消された後は、エラーレベルを `E_ALL` に設定して、
 非推奨のメソッドの今後の使用を防ぐことができます。

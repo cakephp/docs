@@ -103,24 +103,30 @@ Also all shell/task now extend AppShell. You can have your custom AppShell.php a
 
 If you want to echo the result of the translation, use:
 
-    echo __('My Message');
+``` text
+echo __('My Message');
+```
 
 This change includes all shortcut translation methods:
 
-    __()
-    __n()
-    __d()
-    __dn()
-    __dc()
-    __dcn()
-    __c()
+``` text
+__()
+__n()
+__d()
+__dn()
+__dc()
+__dcn()
+__c()
+```
 
 Alongside this, if you pass additional parameters, the translation will call
 [sprintf](https://www.php.net/manual/en/function.sprintf.php) with these
 parameters before returning. For example:
 
-    // Will return something like "Called: MyClass:myMethod"
-    echo __('Called: %s:%s', $className, $methodName);
+``` text
+// Will return something like "Called: MyClass:myMethod"
+echo __('Called: %s:%s', $className, $methodName);
+```
 
 It is valid for all shortcut translation methods.
 
@@ -407,7 +413,7 @@ Although there has been a huge refactoring in how the classes are loaded, in ver
 few occasions you will need to change your application code to respect the way you were
 used to doing it. The biggest change is the introduction of a new method:
 
-``` css
+``` php
 App::uses('AuthComponent', 'Controller/Component');
 ```
 
@@ -422,7 +428,7 @@ is used for the first time it will be located.
 Some examples on using `App::uses()` when migrating from
 `App::import()`:
 
-``` css
+``` php
 App::import('Controller', 'Pages');
 // becomes
 App::uses('PagesController', 'Controller');
@@ -448,7 +454,7 @@ All classes that were loaded in the past using `App::import('Core', $class);`
 will need to be loaded using `App::uses()` referring to the correct package.
 See the API to locate the classes in their new folders. Some examples:
 
-``` css
+``` php
 App::import('Core', 'CakeRoute');
 // becomes
 App::uses('CakeRoute', 'Routing/Route');
@@ -474,7 +480,7 @@ fetch the class in the exact package in which you told it to find it.
 
 Examples:
 
-``` css
+``` php
 App::build(array('controllers' => array('/full/path/to/controllers')));
 //becomes
 App::build(array('Controller' => array('/full/path/to/Controller')));
@@ -503,7 +509,7 @@ App::build(array('View/Helper' => array('/full/path/to/View/Helper')));
   \$config parameter equal to the config name you want the operation to occur
   on.
 
-``` css
+``` php
 Cache::config('something');
 Cache::write('key', $value);
 
@@ -539,7 +545,7 @@ Cache::write('key', $value, 'something');
   `index` action is given a short route. If you wish to continue using short
   routes, you can add a route like:
 
-  ``` css
+  ``` php
   Router::connect(
     '/users/:action',
     array('controller' => 'users', 'plugin' => 'users')
@@ -550,7 +556,9 @@ Cache::write('key', $value, 'something');
 
 Your app/Config/routes.php file needs to be updated adding this line at the bottom of the file:
 
-    require CAKE . 'Config' . DS . 'routes.php';
+``` text
+require CAKE . 'Config' . DS . 'routes.php';
+```
 
 This is needed in order to generate the default routes for your application. If you do not wish to have such routes,
 or want to implement your own standard you can include your own file with custom router rules.
@@ -974,14 +982,18 @@ supports all the command line options supported by PHPUnit.
 Model relationships are now lazy loaded. You can run into a situation where
 assigning a value to a nonexistent model property will throw errors:
 
-    $Post->inexistentProperty[] = 'value';
+``` text
+$Post->inexistentProperty[] = 'value';
+```
 
 will throw the error "Notice: Indirect modification of overloaded property
 \$inexistentProperty has no effect". Assigning an initial value to the property
 solves the issue:
 
-    $Post->nonexistentProperty = array();
-    $Post->nonexistentProperty[] = 'value';
+``` text
+$Post->nonexistentProperty = array();
+$Post->nonexistentProperty[] = 'value';
+```
 
 Or just declare the property in the model class:
 

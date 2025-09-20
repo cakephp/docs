@@ -26,7 +26,7 @@ CakePHP にはデフォルトで２つのフィルタークラスが備わって
 リクエストですでに有効になっています。ここでは、それらがどのように追加
 されているのかを見てみましょう。:
 
-``` css
+``` php
 Configure::write('Dispatcher.filters', array(
     'AssetDispatcher',
     'CacheDispatcher'
@@ -53,7 +53,7 @@ Configure::write('Dispatcher.filters', array(
 順番に実行されます。さらに、特殊な `DispatcherFilter` クラスとは関係ない
 フィルターを接続するための別の方法もあります。:
 
-``` css
+``` php
 Configure::write('Dispatcher.filters', array(
     'my-filter' => array(
         'callable' => array($classInstance, 'methodName'),
@@ -69,7 +69,7 @@ Configure::write('Dispatcher.filters', array(
 見てもらえず、クラス名として扱われます。ただし PHP 5.3 以降を使っている
 場合は、無名関数であればもちろんフィルターとして指定可能です。:
 
-``` css
+``` php
 Configure::write('Dispatcher.filters', array(
    'my-filter' => array('callable' => function($event) {...}, 'on' => 'before'),
    // さらにフィルターを記載可能
@@ -86,7 +86,7 @@ Configure::write('Dispatcher.filters', array(
 すべてのフィルータの実行より前に実行させたければ、必要に応じてより小さな
 数値を指定してください。:
 
-``` css
+``` php
 Configure::write('Dispatcher.filters', array(
    'my-filter' => array(
         'callable' => function($event) {...},
@@ -108,7 +108,7 @@ Configure::write('Dispatcher.filters', array(
 実装される予定です。またついに、CakePHP のプラグイン機能を使ってプラグイン
 の中にあるフィルターの定義ができるようになりました。:
 
-``` css
+``` php
 Configure::write('Dispatcher.filters', array(
     'MyPlugin.MyFilter',
 ));
@@ -122,7 +122,7 @@ Configure::write('Dispatcher.filters', array(
 あなたが作成したディスパッチフィルタークラスのコンストラクターに
 パラメーターや設定を渡す必要がある場合、設定を配列として渡します。:
 
-``` css
+``` php
 Configure::write('Dispatcher.filters', array(
     'MyAssetFilter' => array('service' => 'google.com')
 ));

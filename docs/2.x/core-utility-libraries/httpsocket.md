@@ -156,7 +156,7 @@ SSL certificate validation was added in 2.3.
 You can create your own response class to use with HttpSocket. You could create
 the file `app/Lib/Network/Http/YourResponse.php` with the content:
 
-``` css
+``` php
 App::uses('HttpResponse', 'Network/Http');
 
 class YourResponse extends HttpResponse {

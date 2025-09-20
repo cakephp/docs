@@ -128,16 +128,18 @@ $xmlString = $xmlObject->asXML();
 持つものでなければなりません。この条件を満たさない場合、
 Xml クラスは例外をスローします。以下は正しくない例です。 :
 
-    // 数値のキーを用いたトップレベル要素
-    array(
-        array('key' => 'value')
-    );
+``` text
+// 数値のキーを用いたトップレベル要素
+array(
+    array('key' => 'value')
+);
 
-    // トップレベルに複数の要素がある
-    array(
-        'key1' => 'first value',
-        'key2' => 'other value'
-    );
+// トップレベルに複数の要素がある
+array(
+    'key1' => 'first value',
+    'key2' => 'other value'
+);
+```
 
 > [!WARNING]
 > 既定のフォーマットオプションは <span class="title-ref">attributes</span> から <span class="title-ref">tags</span> に変更されました。

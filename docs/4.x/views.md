@@ -583,8 +583,10 @@ the parameter array (in the same way that `Controller::set()` in the
 controller works with template files). In the above example, the
 **templates/element/helpbox.php** file can use the `$helptext` variable:
 
-    // Inside templates/element/helpbox.php
-    echo $helptext; // Outputs `Oh, this text is very helpful.`
+``` text
+// Inside templates/element/helpbox.php
+echo $helptext; // Outputs `Oh, this text is very helpful.`
+```
 
 Keep in mind that in those view vars are merged with the view vars from the view
 itself. So all view vars set using `Controller::set()` in the controller and

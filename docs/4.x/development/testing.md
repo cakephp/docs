@@ -60,16 +60,18 @@ any tests. Before running any tests you should be sure to add a `test`
 datasource configuration to **config/app_local.php**. This configuration is used by
 CakePHP for fixture tables and data:
 
-    'Datasources' => [
-        'test' => [
-            'datasource' => 'Cake\Database\Driver\Mysql',
-            'persistent' => false,
-            'host' => 'dbhost',
-            'username' => 'dblogin',
-            'password' => 'dbpassword',
-            'database' => 'test_database'
-        ],
+``` php
+'Datasources' => [
+    'test' => [
+        'datasource' => 'Cake\Database\Driver\Mysql',
+        'persistent' => false,
+        'host' => 'dbhost',
+        'username' => 'dblogin',
+        'password' => 'dbpassword',
+        'database' => 'test_database'
     ],
+],
+```
 
 > [!NOTE]
 > It's a good idea to make the test database and your actual database
@@ -489,38 +491,40 @@ time-consuming to maintain.
 Each table can define `columns`, `constraints`, and `indexes`.
 An example table would be:
 
-    return [
-      'articles' => [
-         'columns' => [
-             'id' => [
-                 'type' => 'integer',
-             ],
-             'author_id' => [
-                 'type' => 'integer',
-                 'null' => true,
-             ],
-             'title' => [
-                 'type' => 'string',
-                 'null' => true,
-             ],
-             'body' => 'text',
-             'published' => [
-                 'type' => 'string',
-                 'length' => 1,
-                 'default' => 'N',
+``` text
+return [
+  'articles' => [
+     'columns' => [
+         'id' => [
+             'type' => 'integer',
+         ],
+         'author_id' => [
+             'type' => 'integer',
+             'null' => true,
+         ],
+         'title' => [
+             'type' => 'string',
+             'null' => true,
+         ],
+         'body' => 'text',
+         'published' => [
+             'type' => 'string',
+             'length' => 1,
+             'default' => 'N',
+         ],
+     ],
+     'constraints' => [
+         'primary' => [
+             'type' => 'primary',
+             'columns' => [
+                 'id',
              ],
          ],
-         'constraints' => [
-             'primary' => [
-                 'type' => 'primary',
-                 'columns' => [
-                     'id',
-                 ],
-             ],
-         ],
-      ],
-      // More tables.
-    ];
+     ],
+  ],
+  // More tables.
+];
+```
 
 The options available to `columns`, `indexes` and `constraints` match the
 attributes that are available in CakePHP's schema reflection APIs. Tables are

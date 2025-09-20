@@ -109,10 +109,12 @@ CakePHP, but updating your code will likely be an incremental process. You can
 disable deprecation warnings while you work towards adopting the new methods. In
 your **config/app.php** you can set `Error.errorLevel`:
 
-    // in config/app.php
-    'Error' => [
-        'errorLevel' => E_ALL ^ E_USER_DEPRECATED
-    ]
+``` text
+// in config/app.php
+'Error' => [
+    'errorLevel' => E_ALL ^ E_USER_DEPRECATED
+]
+```
 
 Once you have no remaining deprecation warnings you can set your error level to
 `E_ALL` to help prevent future use of deprecated methods.

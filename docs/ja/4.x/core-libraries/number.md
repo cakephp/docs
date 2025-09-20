@@ -225,19 +225,21 @@ echo Number::format('123456.7890', [
 
 例:
 
-    echo Number::ordinal(1);
-    // 出力 '1st'
+``` text
+echo Number::ordinal(1);
+// 出力 '1st'
 
-    echo Number::ordinal(2);
-    // 出力 '2nd'
+echo Number::ordinal(2);
+// 出力 '2nd'
 
-    echo Number::ordinal(2, [
-        'locale' => 'fr_FR'
-    ]);
-    // 出力 '2e'
+echo Number::ordinal(2, [
+    'locale' => 'fr_FR'
+]);
+// 出力 '2e'
 
-    echo Number::ordinal(410);
-    // 出力 '410th'
+echo Number::ordinal(410);
+// 出力 '410th'
+```
 
 ## 差分フォーマット
 

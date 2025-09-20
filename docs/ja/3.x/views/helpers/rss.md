@@ -23,7 +23,7 @@ CakePHP で `articles/index` の XML/RSS バージョンがすぐに作成でき
 最初に拡張子パースを有効にします。これは **config/routes.php** で行います。
 :
 
-``` css
+``` php
 Router::extensions('rss');
 ```
 

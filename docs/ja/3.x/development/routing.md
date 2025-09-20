@@ -200,21 +200,25 @@ $routes->connect('/admin/cms/articles', 'Cms.Admin/Articles::index');
 ルートの宛先をコンパクトに定義する方法を提供します。
 文字列ターゲットの構文は次のとおりです。 :
 
-    [Plugin].[Prefix]/[Controller]::[action]
+``` text
+[Plugin].[Prefix]/[Controller]::[action]
+```
 
 いくつかの文字列ターゲットの例です。 :
 
-    // アプリケーションのコントローラー
-    'Bookmarks::view'
+``` text
+// アプリケーションのコントローラー
+'Bookmarks::view'
 
-    // プレフィックス付きのアプリケーションコントローラー
-    Admin/Bookmarks::view
+// プレフィックス付きのアプリケーションコントローラー
+Admin/Bookmarks::view
 
-    // プラグインのコントローラー
-    Cms.Articles::edit
+// プラグインのコントローラー
+Cms.Articles::edit
 
-    // プレフィックス付きのプラグインコントローラー
-    Vendor/Cms.Management/Admin/Articles::view
+// プレフィックス付きのプラグインコントローラー
+Vendor/Cms.Management/Admin/Articles::view
+```
 
 ::: info Added in version 3.6.0
 文字列ベースのルートターゲットが追加されました。
@@ -914,7 +918,7 @@ file extensions
 拡張子を定義できます。グローバルな拡張子を定義するには、スタティックな
 `Router::extensions()` メソッドを介して保存できます。 :
 
-``` css
+``` php
 Router::extensions(['json', 'xml']);
 // ...
 ```
@@ -1292,11 +1296,13 @@ class CalendarsController extends AppController
 
 次の出力を得ます。 :
 
-    Array
-    (
-        [0] => recent
-        [1] => mark
-    )
+``` text
+Array
+(
+    [0] => recent
+    [1] => mark
+)
+```
 
 コントローラーとビューとヘルパーの `$this->request->getParam('pass')` でも、
 これと同じデータが利用可能です。pass 配列中の値は、
@@ -1308,16 +1314,20 @@ debug($this->request->getParam('pass'));
 
 上記の出力は以下になります。 :
 
-    Array
-    (
-        [0] => recent
-        [1] => mark
-    )
+``` text
+Array
+(
+    [0] => recent
+    [1] => mark
+)
+```
 
 `ルーティング配列` を使って URL を生成するとき、配列に文字列キーなしの値として
 引数を加えます。 :
 
-    ['controller' => 'Articles', 'action' => 'view', 5]
+``` php
+['controller' => 'Articles', 'action' => 'view', 5]
+```
 
 `5` は引数として渡されるときには数字キーを持ちます。
 
@@ -1349,7 +1359,7 @@ $this->Html->link(
 URL 配列を使うとき、特別なキーを使用して、文字列パラメーターによるクエリーと
 ドキュメントフラグメントを定義できます。 :
 
-``` css
+``` php
 Router::url([
     'controller' => 'Articles',
     'action' => 'index',
@@ -1431,8 +1441,10 @@ $routes->get(
 
 次のようにして、このルートへの URL を生成できます。 :
 
-    // $article は、ローカルスコープ内のエンティティーです。
-    Router::url(['_name' => 'articles:view', 'id' => $article->id]);
+``` php
+// $article は、ローカルスコープ内のエンティティーです。
+Router::url(['_name' => 'articles:view', 'id' => $article->id]);
+```
 
 後で、SEO 目的のために URL に記事のスラッグを付加したくなることもあるでしょう。これを行うには、
 `articles:view` ルートへの URL を生成しているところを全て更新する必要があります。
@@ -1456,7 +1468,7 @@ $routes->get(
 
 これで、 `_entity` キーを使って URL を生成することができます。 :
 
-``` css
+``` php
 Router::url(['_name' => 'articles:view', '_entity' => $article]);
 ```
 
@@ -1580,7 +1592,7 @@ Router::addUrlFilter(function ($params, $request) {
 
 別のユースケースでは、実行時に特定のルートを変更しています。 (プラグインルートの例) :
 
-``` css
+``` php
 Router::addUrlFilter(function ($params, $request) {
     if (empty($params['plugin']) || $params['plugin'] !== 'MyPlugin' || empty($params['controller'])) {
         return $params;
@@ -1597,13 +1609,13 @@ Router::addUrlFilter(function ($params, $request) {
 
 これは以下のルートを :
 
-``` css
+``` php
 Router::url(['plugin' => 'MyPlugin', 'controller' => 'Languages', 'action' => 'view', 'es']);
 ```
 
 このように置き換えます。 :
 
-``` css
+``` php
 Router::url(['plugin' => 'MyPlugin', 'controller' => 'Locations', 'action' => 'index', 'language' => 'es']);
 ```
 

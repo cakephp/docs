@@ -58,9 +58,11 @@ CakePHP は、幾つかの操作のために `app/tmp` ディレクトリを使�
 一般的な課題として、app/tmp ディレクトリとサブディレクトリは、ウェブサーバとコマンドラインユーザの両方で書き込み権限が必要なことがあります。
 UNIXシステム上で ウェブサーバユーザとコマンドラインユーザが異なる場合、パーミッションのプロパティ設定を確保するために、あなたのプロジェクト内で一度だけ以下のコマンドを実行してください。 :
 
-    HTTPDUSER=`ps aux | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1`
-    setfacl -R -m u:${HTTPDUSER}:rwx app/tmp
-    setfacl -R -d -m u:${HTTPDUSER}:rwx app/tmp
+``` text
+HTTPDUSER=`ps aux | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1`
+setfacl -R -m u:${HTTPDUSER}:rwx app/tmp
+setfacl -R -d -m u:${HTTPDUSER}:rwx app/tmp
+```
 
 ## 設定
 
@@ -106,7 +108,9 @@ CakePHP のアーカイブを `/var/www/html` に展開してください。
 このコマンドを実行すると、CakePHP のファイルが `/home/mark/projects` ディレクトリの中に複製されます。gitを使用したくない場合は、zip形式でのダウンロードも可能で、残りの手順も同じです。次は、 `php.ini` を探して編集する必要があります。\*nix系のシステムならたいていは
 `/etc/php.ini` にあります。もしくは `php -i` コマンドを実行して 'Loaded Configuration File' を確認してください。ini ファイルを見つけたら、 `include_path` の設定を変更して `/home/mark/projects/cakephp/lib` が含まれるようにしてください。例としては次のようになります。 :
 
-    include_path = .:/home/mark/projects/cakephp/lib:/usr/local/php/lib/php
+``` text
+include_path = .:/home/mark/projects/cakephp/lib:/usr/local/php/lib/php
+```
 
 ウェブサーバを再起動した後、 `phpinfo()` で変更が反映されているのを確認してください。
 
@@ -126,15 +130,17 @@ CakePHP のアーカイブを好きなディレクトリに展開してくださ
 この例において、CakePHP をインストールすると決めたディレクトリは /cake_install であると仮定します。
 ファイルシステム上の運用向けの設定は次のようになります :
 
-    /cake_install/
-        app/
-            webroot/ (このディレクトリを ``DocumentRoot`` ディレクティブとしてセットします)
-        lib/
-        plugins/
-        vendors/
-        .htaccess
-        index.php
-        README
+``` text
+/cake_install/
+    app/
+        webroot/ (このディレクトリを ``DocumentRoot`` ディレクティブとしてセットします)
+    lib/
+    plugins/
+    vendors/
+    .htaccess
+    index.php
+    README
+```
 
 Apache を使用する場合は、そのドメインの `DocumentRoot` ディレクティブを次のように設定してください :
 
@@ -160,8 +166,10 @@ Apache を使用する場合は、そのドメインの `DocumentRoot` ディレ
 動きませんか？
 もし PHP のタイムゾーンに関連するエラーが出るなら、 `app/Config/core.php` の中のとある一行のコメントを外してください :
 
-    /**
-     * Uncomment this line and correct your server timezone to fix
-     * any date & time related errors.
-     */
-        date_default_timezone_set('UTC');
+``` text
+/**
+ * Uncomment this line and correct your server timezone to fix
+ * any date & time related errors.
+ */
+    date_default_timezone_set('UTC');
+```

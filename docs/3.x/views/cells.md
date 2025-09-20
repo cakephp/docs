@@ -77,10 +77,12 @@ very much like a controller would. We can use the `loadModel()` and `set()`
 methods just like we would in a controller. In our template file, add the
 following:
 
-    <!-- src/Template/Cell/Inbox/display.ctp -->
-    <div class="notification-icon">
-        You have <?= $unread_count ?> unread messages.
-    </div>
+``` text
+<!-- src/Template/Cell/Inbox/display.ctp -->
+<div class="notification-icon">
+    You have <?= $unread_count ?> unread messages.
+</div>
+```
 
 > [!NOTE]
 > Cell templates have an isolated scope that does not share the same View

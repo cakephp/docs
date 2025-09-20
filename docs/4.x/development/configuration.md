@@ -277,24 +277,26 @@ Since plugins, view templates and locales are not classes, they cannot have an
 autoloader configured. CakePHP provides three Configure variables to setup additional
 paths for these resources. In your **config/app.php** you can set these variables:
 
-    return [
-        // More configuration
-        'App' => [
-            'paths' => [
-                'plugins' => [
-                    ROOT . DS . 'plugins' . DS,
-                    '/path/to/other/plugins/'
-                ],
-                'templates' => [
-                    ROOT . DS . 'templates' . DS,
-                    ROOT . DS . 'templates2' . DS
-                ],
-                'locales' => [
-                    ROOT . DS . 'resources' . DS . 'locales' . DS
-                ]
+``` text
+return [
+    // More configuration
+    'App' => [
+        'paths' => [
+            'plugins' => [
+                ROOT . DS . 'plugins' . DS,
+                '/path/to/other/plugins/'
+            ],
+            'templates' => [
+                ROOT . DS . 'templates' . DS,
+                ROOT . DS . 'templates2' . DS
+            ],
+            'locales' => [
+                ROOT . DS . 'resources' . DS . 'locales' . DS
             ]
         ]
-    ];
+    ]
+];
+```
 
 Paths should end with a directory separator, or they will not work properly.
 
@@ -319,7 +321,7 @@ won't end up breaking the MVC structure CakePHP provides.
 
 Use `write()` to store data in the application's configuration:
 
-``` css
+``` php
 Configure::write('Company.name', 'Pizza, Inc.');
 Configure::write('Company.slogan', 'Pizza for your body and soul');
 ```
@@ -330,7 +332,7 @@ Configure::write('Company.slogan', 'Pizza for your body and soul');
 
 The above example could also be written in a single call:
 
-``` css
+``` php
 Configure::write('Company', [
     'name' => 'Pizza, Inc.',
     'slogan' => 'Pizza for your body and soul'
@@ -350,18 +352,20 @@ Used to read configuration data from the application. If a key is supplied, the
 data is returned. Using our examples from write() above, we can read that data
 back:
 
-    // Returns 'Pizza Inc.'
-    Configure::read('Company.name');
+``` php
+// Returns 'Pizza Inc.'
+Configure::read('Company.name');
 
-    // Returns 'Pizza for your body and soul'
-    Configure::read('Company.slogan');
+// Returns 'Pizza for your body and soul'
+Configure::read('Company.slogan');
 
-    Configure::read('Company');
-    // Returns:
-    ['name' => 'Pizza, Inc.', 'slogan' => 'Pizza for your body and soul'];
+Configure::read('Company');
+// Returns:
+['name' => 'Pizza, Inc.', 'slogan' => 'Pizza for your body and soul'];
 
-    // Returns 'fallback' as Company.nope is undefined.
-    Configure::read('Company.nope', 'fallback');
+// Returns 'fallback' as Company.nope is undefined.
+Configure::read('Company.nope', 'fallback');
+```
 
 If `$key` is left null, all values in Configure will be returned.
 
@@ -369,7 +373,7 @@ Reads configuration data just like `Cake\Core\Configure::read`
 but expects to find a key/value pair. In case the requested pair does not
 exist, a `RuntimeException` will be thrown:
 
-``` css
+``` php
 Configure::readOrFail('Company.name');    // Yields: 'Pizza, Inc.'
 Configure::readOrFail('Company.geolocation');  // Will throw an exception
 
@@ -391,7 +395,7 @@ $exists = Configure::check('Company.name');
 
 Used to delete information from the application's configuration:
 
-``` css
+``` php
 Configure::delete('Company.name');
 ```
 
@@ -404,7 +408,7 @@ Consumes configuration data just like `Cake\Core\Configure::consume`
 but expects to find a key/value pair. In case the requested pair does not
 exist, a `RuntimeException` will be thrown:
 
-``` css
+``` php
 Configure::consumeOrFail('Company.name');    // Yields: 'Pizza, Inc.'
 Configure::consumeOrFail('Company.geolocation');  // Will throw an exception
 
@@ -439,17 +443,19 @@ kinds or sources of configuration files. You can interact with attached engines
 using a few other methods on Configure. To check which engine aliases are
 attached you can use `Configure::configured()`:
 
-    // Get the array of aliases for attached engines.
-    Configure::configured();
+``` php
+// Get the array of aliases for attached engines.
+Configure::configured();
 
-    // Check if a specific engine is attached
-    Configure::configured('default');
+// Check if a specific engine is attached
+Configure::configured('default');
+```
 
 You can also remove attached engines. `Configure::drop('default')`
 would remove the default engine alias. Any future attempts to load configuration
 files with that engine would fail:
 
-``` css
+``` php
 Configure::drop('default');
 ```
 
@@ -460,8 +466,10 @@ Configure::drop('default');
 Once you've attached a config engine to Configure you can load configuration
 files:
 
-    // Load my_file.php using the 'default' engine object.
-    Configure::load('my_file', 'default');
+``` php
+// Load my_file.php using the 'default' engine object.
+Configure::load('my_file', 'default');
+```
 
 Loaded configuration files merge their data with the existing runtime
 configuration in Configure. This allows you to overwrite and add new values into
@@ -472,7 +480,9 @@ will not ever overwrite the existing configuration.
 > When merging configuration files with <span class="title-ref">\$merge = true</span>, dot notation in keys is
 > not expanded:
 >
->     // config1.php
+> ``` text
+> // config1.php
+> ```
 >
 > 'Key1' =\> \[  
 > 'Key2' =\> \[  
@@ -505,13 +515,13 @@ a PHP configuration file loadable by the
 Given that the 'default' engine is an instance of PhpConfig.
 Save all data in Configure to the file \`my_config.php\`:
 
-``` css
+``` php
 Configure::dump('my_config', 'default');
 ```
 
 Save only the error handling configuration:
 
-``` css
+``` php
 Configure::dump('error', 'default', ['Error', 'Exception']);
 ```
 
@@ -525,8 +535,10 @@ Since configure only remembers values for the current request, you will
 need to store any modified configuration information if you want to
 use it in subsequent requests:
 
-    // Store the current configuration in the 'user_1234' key in the 'default' cache.
-    Configure::store('user_1234', 'default');
+``` php
+// Store the current configuration in the 'user_1234' key in the 'default' cache.
+Configure::store('user_1234', 'default');
+```
 
 Stored configuration data is persisted in the named cache configuration. See the
 [Caching](../core-libraries/caching) documentation for more information on caching.
@@ -536,8 +548,10 @@ Stored configuration data is persisted in the named cache configuration. See the
 Once you've stored runtime configuration, you'll probably need to restore it
 so you can access it again. `Configure::restore()` does exactly that:
 
-    // Restore runtime configuration from the cache.
-    Configure::restore('user_1234', 'default');
+``` php
+// Restore runtime configuration from the cache.
+Configure::restore('user_1234', 'default');
+```
 
 When restoring configuration information it's important to restore it with
 the same key, and cache configuration as was used to store it. Restored

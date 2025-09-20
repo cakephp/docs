@@ -200,10 +200,12 @@ As shown in the example above, event listeners are conventionally placed in
 listener classes. It is also recommended that you attach global listeners during
 your application bootstrap process:
 
-    // In app/Config/bootstrap.php
+``` text
+// In app/Config/bootstrap.php
 
-    // Load the global event listeners.
-    require_once APP . 'Config' . DS . 'events.php'
+// Load the global event listeners.
+require_once APP . 'Config' . DS . 'events.php'
+```
 
 An example events bootstrap file for our cart application could look like:
 

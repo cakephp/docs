@@ -32,14 +32,16 @@ To be able to work with PHP 7, it is required to install the version 5, and you'
 the autoloader, and work around an issue in Composer's autoloader. In your
 `Config/bootstrap.php` file add the following:
 
-    // Load Composer autoload.
-    require APP . 'Vendor/autoload.php';
+``` text
+// Load Composer autoload.
+require APP . 'Vendor/autoload.php';
 
-    // Remove and re-prepend CakePHP's autoloader as Composer thinks it is the
-    // most important.
-    // See: http://goo.gl/kKVJO7
-    spl_autoload_unregister(array('App', 'load'));
-    spl_autoload_register(array('App', 'load'), true, true);
+// Remove and re-prepend CakePHP's autoloader as Composer thinks it is the
+// most important.
+// See: http://goo.gl/kKVJO7
+spl_autoload_unregister(array('App', 'load'));
+spl_autoload_register(array('App', 'load'), true, true);
+```
 
 ### Install via .phar Package
 
@@ -149,7 +151,7 @@ a simple test case. After creating and saving our helper, we'll create the test
 case file in `app/Test/Case/View/Helper/ProgressHelperTest.php`. In that file
 we'll start with the following:
 
-``` css
+``` php
 App::uses('Controller', 'Controller');
 App::uses('View', 'View');
 App::uses('ProgressHelper', 'View/Helper');
@@ -255,14 +257,16 @@ plugin tests easily using the test shell. It accepts all the arguments you would
 expect to find on the normal PHPUnit command line tool as well. From your app
 directory you can do the following to run tests:
 
-    # Run a model tests in the app
-    ./Console/cake test app Model/Article
+``` text
+# Run a model tests in the app
+./Console/cake test app Model/Article
 
-    # Run a component test in a plugin
-    ./Console/cake test DebugKit Controller/Component/ToolbarComponent
+# Run a component test in a plugin
+./Console/cake test DebugKit Controller/Component/ToolbarComponent
 
-    # Run the configure class test in CakePHP
-    ./Console/cake test core Core/Configure
+# Run the configure class test in CakePHP
+./Console/cake test core Core/Configure
+```
 
 > [!NOTE]
 > If you are running tests that interact with the session it's generally a
@@ -277,11 +281,13 @@ You can also run `test` shell in the project root directory. This shows you a
 full list of all the tests that you currently have. You can then freely choose
 what test(s) to run:
 
-    # Run test in project root directory for application folder called app
-    lib/Cake/Console/cake test app
+``` text
+# Run test in project root directory for application folder called app
+lib/Cake/Console/cake test app
 
-    # Run test in project root directory for an application in ./myapp
-    lib/Cake/Console/cake test --app myapp app
+# Run test in project root directory for an application in ./myapp
+lib/Cake/Console/cake test --app myapp app
+```
 
 #### Filtering test cases
 
@@ -1210,12 +1216,14 @@ First we create an example helper to test. The `CurrencyRendererHelper` will
 help us display currencies in our views and for simplicity only has one method
 `usd()`.
 
-    // app/View/Helper/CurrencyRendererHelper.php
-    class CurrencyRendererHelper extends AppHelper {
-        public function usd($amount) {
-            return 'USD ' . number_format($amount, 2, '.', ',');
-        }
+``` php
+// app/View/Helper/CurrencyRendererHelper.php
+class CurrencyRendererHelper extends AppHelper {
+    public function usd($amount) {
+        return 'USD ' . number_format($amount, 2, '.', ',');
     }
+}
+```
 
 Here we set the decimal places to 2, decimal separator to dot, thousands
 separator to comma, and prefix the formatted number with 'USD' string.
@@ -1398,7 +1406,9 @@ well. This insulates you from chained failures, where one broken build causes
 others to fail. Add another *shell script step* to the build that contains the
 following:
 
-    mysql -u jenkins -pcakephp_jenkins -e 'DROP DATABASE IF EXISTS jenkins_test; CREATE DATABASE jenkins_test';
+``` text
+mysql -u jenkins -pcakephp_jenkins -e 'DROP DATABASE IF EXISTS jenkins_test; CREATE DATABASE jenkins_test';
+```
 
 ### Add your tests
 

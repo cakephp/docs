@@ -6,40 +6,48 @@
 `Router::url()` に渡される属性の配列。
 典型的には以下のようになります:
 
-    array('controller' => 'posts', 'action' => 'view', 5)
+``` text
+array('controller' => 'posts', 'action' => 'view', 5)
+```
 
 また、より複雑な例は:
 
-    array(
-        'subdomain' => 'dev',
-        'plugin' => 'account',
-        'prefix' => 'admin',
-        'controller' => 'profiles',
-        'action' => 'edit',
-        10257
-        '#' => 'email',
-        '?' => array(
-            'reset' => true,
-        ),
-        'full_base' => true,
-    )
+``` text
+array(
+    'subdomain' => 'dev',
+    'plugin' => 'account',
+    'prefix' => 'admin',
+    'controller' => 'profiles',
+    'action' => 'edit',
+    10257
+    '#' => 'email',
+    '?' => array(
+        'reset' => true,
+    ),
+    'full_base' => true,
+)
+```
 
 HTML属性  
 HTMLの属性を構成するキー =\> 値の配列。例:
 
-    // これを与えると
-    array('class' => 'my-class', 'target' => '_blank')
+``` text
+// これを与えると
+array('class' => 'my-class', 'target' => '_blank')
 
-    // これが生成される
-    class="my-class" target="_blank"
+// これが生成される
+class="my-class" target="_blank"
+```
 
 オプションが最小化できるか、名前そのもが値として許可される場合は、 `true` が利用できます:
 
-    // これを与えると
-    array('checked' => true)
+``` text
+// これを与えると
+array('checked' => true)
 
-    // これが生成される
-    checked="checked"
+// これが生成される
+checked="checked"
+```
 
 プラグイン記法  
 プラグイン記法はドットで区切られたクラス名で、クラスがプラグインの一部であることを指定しています。
@@ -53,13 +61,15 @@ HTMLの属性を構成するキー =\> 値の配列。例:
 
 は以下の値を指し示すことでしょう:
 
-    array(
-        'Asset' => array(
-            'filter' => array(
-                'css' => 'got me'
-            )
+``` text
+array(
+    'Asset' => array(
+        'filter' => array(
+            'css' => 'got me'
         )
     )
+)
+```
 
 CSRF  
 クロスサイトリクエストフォージェリ(*Cross Site Request Forgery*)。

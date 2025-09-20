@@ -59,7 +59,9 @@ deprecated. We also recommend this system for use in your plugins and
 application code when useful. You can trigger deprecation warnings with
 `deprecationWarning()`:
 
-    deprecationWarning('5.0', 'The example() method is deprecated. Use getExample() instead.');
+``` text
+deprecationWarning('5.0', 'The example() method is deprecated. Use getExample() instead.');
+```
 
 When upgrading CakePHP or plugins you may encounter new deprecation warnings.
 You can temporarily disable deprecation warnings in one of a few ways:
@@ -70,12 +72,14 @@ You can temporarily disable deprecation warnings in one of a few ways:
 2.  Using the `Error.ignoredDeprecationPaths` configuration option to ignore
     deprecations with glob compatible expressions. For example:
 
-        'Error' => [
-            'ignoredDeprecationPaths' => [
-                'vendors/company/contacts/*',
-                'src/Models/*',
-            ],
+    ``` text
+    'Error' => [
+        'ignoredDeprecationPaths' => [
+            'vendors/company/contacts/*',
+            'src/Models/*',
         ],
+    ],
+    ```
 
     Would ignore all deprecations from your `Models` directory and the
     `Contacts` plugin in your application.

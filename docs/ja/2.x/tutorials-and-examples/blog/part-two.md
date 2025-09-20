@@ -95,44 +95,46 @@ CakePHP のビュー (*view*) は、アプリケーションのレイアウト (
 一つ前のセクションの `set()` メソッドによって、ビューから「posts」変数が使えるように
 割り当てたのを覚えていますか。ビューに渡されたデータは次のようなものになっています:
 
-    // print_r($posts) の出力:
+``` text
+// print_r($posts) の出力:
 
-    Array
-    (
-        [0] => Array
-            (
-                [Post] => Array
-                    (
-                        [id] => 1
-                        [title] => タイトル
-                        [body] => これは、記事の本文です。
-                        [created] => 2008-02-13 18:34:55
-                        [modified] =>
-                    )
-            )
-        [1] => Array
-            (
-                [Post] => Array
-                    (
-                        [id] => 2
-                        [title] => またタイトル
-                        [body] => そこに本文が続きます。
-                        [created] => 2008-02-13 18:34:56
-                        [modified] =>
-                    )
-            )
-        [2] => Array
-            (
-                [Post] => Array
-                    (
-                        [id] => 3
-                        [title] => タイトルの逆襲
-                        [body] => こりゃ本当にわくわくする！うそ。
-                        [created] => 2008-02-13 18:34:57
-                        [modified] =>
-                    )
-            )
-    )
+Array
+(
+    [0] => Array
+        (
+            [Post] => Array
+                (
+                    [id] => 1
+                    [title] => タイトル
+                    [body] => これは、記事の本文です。
+                    [created] => 2008-02-13 18:34:55
+                    [modified] =>
+                )
+        )
+    [1] => Array
+        (
+            [Post] => Array
+                (
+                    [id] => 2
+                    [title] => またタイトル
+                    [body] => そこに本文が続きます。
+                    [created] => 2008-02-13 18:34:56
+                    [modified] =>
+                )
+        )
+    [2] => Array
+        (
+            [Post] => Array
+                (
+                    [id] => 3
+                    [title] => タイトルの逆襲
+                    [body] => こりゃ本当にわくわくする！うそ。
+                    [created] => 2008-02-13 18:34:57
+                    [modified] =>
+                )
+        )
+)
+```
 
 CakePHP のビューファイルは、 `/app/View` の中の、コントローラ名に対応するフォルダの中に
 保存されています (この場合は、「Posts」というフォルダを作成します)。
@@ -640,7 +642,7 @@ Router::connect(
 この行は、「/」という URL をデフォルトの CakePHP のホームページに接続します。
 これを、自分のコントローラに接続させるために、次のような行を追加してください:
 
-``` css
+``` php
 Router::connect('/', array('controller' => 'posts', 'action' => 'index'));
 ```
 

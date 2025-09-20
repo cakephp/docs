@@ -106,11 +106,13 @@ details.
 To help you better manage cached data from the CLI environment, a shell command
 has been added that exposes methods for clearing cached data:
 
-    // Clear one cache config
-    bin/cake cache clear <configname>
+``` text
+// Clear one cache config
+bin/cake cache clear <configname>
 
-    // Clear all cache configs
-    bin/cake cache clear_all
+// Clear all cache configs
+bin/cake cache clear_all
+```
 
 ## FormHelper
 

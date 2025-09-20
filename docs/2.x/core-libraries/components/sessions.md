@@ -21,9 +21,11 @@ It should be noted that Array structures can be created in the
 Session by using `dot notation`. So `User.username` would
 reference the following:
 
-    array('User' => array(
-        'username' => 'clark-kent@dailyplanet.com'
-    ));
+``` text
+array('User' => array(
+    'username' => 'clark-kent@dailyplanet.com'
+));
+```
 
 Dots are used to indicate nested arrays. This notation is used for
 all Session component methods wherever a name/key is used.

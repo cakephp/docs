@@ -71,21 +71,23 @@ also lets you incrementally change the storage as needed.
 
 Example:
 
-    // Cache configuration for data that can be cached for a short time only.
-    Cache::config('short', array(
-        'engine' => 'File',
-        'duration' => '+1 hours',
-        'path' => CACHE,
-        'prefix' => 'cake_short_'
-    ));
+``` php
+// Cache configuration for data that can be cached for a short time only.
+Cache::config('short', array(
+    'engine' => 'File',
+    'duration' => '+1 hours',
+    'path' => CACHE,
+    'prefix' => 'cake_short_'
+));
 
-    // Cache configuration for data that can be cached for a long time.
-    Cache::config('long', array(
-        'engine' => 'File',
-        'duration' => '+1 week',
-        'probability' => 100,
-        'path' => CACHE . 'long' . DS,
-    ));
+// Cache configuration for data that can be cached for a long time.
+Cache::config('long', array(
+    'engine' => 'File',
+    'duration' => '+1 week',
+    'probability' => 100,
+    'path' => CACHE . 'long' . DS,
+));
+```
 
 By placing the above code in your `app/Config/bootstrap.php` you will
 have two additional Cache configurations. The name of these
@@ -111,7 +113,7 @@ as an app/libs or in `$plugin/Lib/Cache/Engine/MyCustomCacheEngine.php` as
 part of a plugin. Cache configs from plugins need to use the plugin
 dot syntax. :
 
-``` css
+``` php
 Cache::config('custom', array(
     'engine' => 'CachePack.MyCustomCache',
     // ...
@@ -205,7 +207,7 @@ resulting in an incorrect value.
 After setting an integer value, you can manipulate it using
 `Cache::increment()` and `Cache::decrement()`:
 
-``` css
+``` php
 Cache::write('initial_count', 10);
 
 // Later on
@@ -229,7 +231,7 @@ group or namespace. This is a common requirement for mass-invalidating keys
 whenever some information changes that is shared among all entries in the same
 group. This is possible by declaring the groups in cache configuration:
 
-``` css
+``` php
 Cache::config('site_home', array(
     'engine' => 'Redis',
     'duration' => '+999 days',

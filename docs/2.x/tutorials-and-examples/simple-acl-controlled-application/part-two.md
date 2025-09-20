@@ -16,9 +16,11 @@ First grab a copy of the plugin and unzipped or clone it using git into
 <span class="title-ref">app/Plugin/AclExtras</span>. Then activate the plugin in your <span class="title-ref">app/Config/boostrap.php</span>
 file as shown below:
 
-    //app/Config/boostrap.php
-    // ...
-    CakePlugin::load('AclExtras');
+``` php
+//app/Config/boostrap.php
+// ...
+CakePlugin::load('AclExtras');
+```
 
 Finally execute the following command in the CakePHP console:
 

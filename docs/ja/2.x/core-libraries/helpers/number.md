@@ -129,19 +129,21 @@ NumberHelper は、ビューの中で一般的な書式で数値を表示する�
 >
 > 追加されたフォーマットは、以下のデフォルトとマージされます。 :
 >
->     array(
->         'wholeSymbol'      => '',
->         'wholePosition'    => 'before',
->         'fractionSymbol'   => false,
->         'fractionPosition' => 'after',
->         'zero'             => 0,
->         'places'           => 2,
->         'thousands'        => ',',
->         'decimals'         => '.',
->         'negative'         => '()',
->         'escape'           => true,
->         'fractionExponent' => 2
->     )
+> ``` text
+> array(
+>     'wholeSymbol'      => '',
+>     'wholePosition'    => 'before',
+>     'fractionSymbol'   => false,
+>     'fractionPosition' => 'after',
+>     'zero'             => 0,
+>     'places'           => 2,
+>     'thousands'        => ',',
+>     'decimals'         => '.',
+>     'negative'         => '()',
+>     'escape'           => true,
+>     'fractionExponent' => 2
+> )
+> ```
 
 > param float \$number  
 > 変換する値

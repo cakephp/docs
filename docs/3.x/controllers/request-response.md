@@ -150,27 +150,31 @@ even for nested inputs/names, which is different from how PHP represents them in
 [the PHP manual](https://www.php.net/manual/en/features.file-upload.php) for more information), ie the
 `$attachment` value would look something like this:
 
-    [
-        'name' => 'attachment.txt',
-        'type' => 'text/plain',
-        'size' => 123,
-        'tmp_name' => '/tmp/hfz6dbn.tmp'
-        'error' => 0
-    ]
+``` php
+[
+    'name' => 'attachment.txt',
+    'type' => 'text/plain',
+    'size' => 123,
+    'tmp_name' => '/tmp/hfz6dbn.tmp'
+    'error' => 0
+]
+```
 
 Alternatively it's possible to have CakePHP provide the uploads in the request data as objects that implement
 [\Psr\Http\Message\UploadedFileInterface](https://www.php-fig.org/psr/psr-7/#16-uploaded-files). In order to
 enable this behavior, set the configuration value `App.uploadedFilesAsObjects` to `true`, for example in your
 `config/app.php` file:
 
-    return [
+``` text
+return [
+    // ...
+    'App' => [
         // ...
-        'App' => [
-            // ...
-            'uploadedFilesAsObjects' => true,
-        ],
-        // ...
-    ];
+        'uploadedFilesAsObjects' => true,
+    ],
+    // ...
+];
+```
 
 In the above example, `$attachment` would then hold an object, in the current implementation it would by default be an
 instance of `\Zend\Diactoros\UploadedFile`.
@@ -202,13 +206,15 @@ present at the given path, then this method will return `null`, just like it wou
 Returns all uploaded files in a normalized array structure. For the above example with the file input name of
 `MyModel[attachment]`, the structure would look like:
 
-    [
-        'MyModel' => [
-            'attachment' => object(Zend\Diactoros\UploadedFile) {
-                // ...
-            }
-        ]
+``` php
+[
+    'MyModel' => [
+        'attachment' => object(Zend\Diactoros\UploadedFile) {
+            // ...
+        }
     ]
+]
+```
 
 `method` Cake\\Http\\ServerRequest::**withUploadedFiles**(array $files)
 

@@ -21,8 +21,10 @@ $linkedText = $this->Text->autoLinkEmails($myText);
 
 出力:
 
-    For more information regarding our world-famous pastries and desserts,
-    contact <a href="mailto:info@example.com">info@example.com</a>
+``` text
+For more information regarding our world-famous pastries and desserts,
+contact <a href="mailto:info@example.com">info@example.com</a>
+```
 
 このメソッドは自動的に入力をエスケープします。これを無効にする必要がある場合には、 `escape` オプションを使用します。
 

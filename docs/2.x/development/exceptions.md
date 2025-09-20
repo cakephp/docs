@@ -12,7 +12,7 @@ errors. See the section on [Built In Exceptions](#built-in-exceptions) for more 
 
 There are a few keys available for configuring exceptions:
 
-``` css
+``` php
 Configure::write('Exception', array(
     'handler' => 'ErrorHandler::handleException',
     'renderer' => 'ExceptionRenderer',
@@ -230,7 +230,9 @@ your own rich development errors, just like CakePHP uses internally.
 You can create custom HTTP status codes by changing the code used when
 creating an exception:
 
-    throw new MissingWidgetHelperException('Its not here', 501);
+``` text
+throw new MissingWidgetHelperException('Its not here', 501);
+```
 
 Will create a `501` response code, you can use any HTTP status code
 you want. In development, if your exception doesn't have a specific
@@ -294,15 +296,17 @@ By creating a custom exception handler you can provide custom error handling for
 application exceptions. In the method provided as the exception handler you
 could do the following:
 
-    // in app/Lib/AppErrorHandler.php
-    class AppErrorHandler {
-        public static function handleException($error) {
-            if ($error instanceof MissingWidgetException) {
-                return self::handleMissingWidget($error);
-            }
-            // do other stuff.
+``` php
+// in app/Lib/AppErrorHandler.php
+class AppErrorHandler {
+    public static function handleException($error) {
+        if ($error instanceof MissingWidgetException) {
+            return self::handleMissingWidget($error);
         }
+        // do other stuff.
     }
+}
+```
 
 <div class="index">
 
@@ -335,14 +339,16 @@ renderer class should be placed in `app/Lib/Error`. Or an `Error`
 directory in any bootstrapped Lib path. In a custom exception rendering class
 you can provide specialized handling for application specific errors:
 
-    // in app/Lib/Error/AppExceptionRenderer.php
-    App::uses('ExceptionRenderer', 'Error');
+``` php
+// in app/Lib/Error/AppExceptionRenderer.php
+App::uses('ExceptionRenderer', 'Error');
 
-    class AppExceptionRenderer extends ExceptionRenderer {
-        public function missingWidget($error) {
-            echo 'Oops that widget is missing!';
-        }
+class AppExceptionRenderer extends ExceptionRenderer {
+    public function missingWidget($error) {
+        echo 'Oops that widget is missing!';
     }
+}
+```
 
 The above would handle any exceptions of the type `MissingWidgetException`,
 and allow you to provide custom display/handling logic for those application

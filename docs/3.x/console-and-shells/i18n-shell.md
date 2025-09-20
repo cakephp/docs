@@ -27,7 +27,9 @@ correctly set the `Plural-Forms` header line.
 
 You can generate a POT file for a specific plugin using:
 
-    bin/cake i18n extract --plugin <Plugin>
+``` text
+bin/cake i18n extract --plugin <Plugin>
+```
 
 This will generate the required POT files used in the plugins.
 

@@ -22,9 +22,11 @@ to the session.
 As with the session object, data is read by using
 `dot notation` array structures:
 
-    ['User' => [
-        'username' => 'super@example.com'
-    ]];
+``` php
+['User' => [
+    'username' => 'super@example.com'
+]];
+```
 
 Given the previous array structure, the node would be accessed by
 `User.username`, with the dot indicating the nested array. This

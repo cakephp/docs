@@ -151,23 +151,25 @@ values in the `Datasources.default` array in the **config/app.php** file
 with those that apply to your setup. A sample completed configuration
 array might look something like the following:
 
-    return [
-        // More configuration above.
-        'Datasources' => [
-            'default' => [
-                'className' => 'Cake\Database\Connection',
-                'driver' => 'Cake\Database\Driver\Mysql',
-                'persistent' => false,
-                'host' => 'localhost',
-                'username' => 'cake_blog',
-                'password' => 'AngelF00dC4k3~',
-                'database' => 'cake_blog',
-                'encoding' => 'utf8',
-                'timezone' => 'UTC'
-            ],
+``` php
+return [
+    // More configuration above.
+    'Datasources' => [
+        'default' => [
+            'className' => 'Cake\Database\Connection',
+            'driver' => 'Cake\Database\Driver\Mysql',
+            'persistent' => false,
+            'host' => 'localhost',
+            'username' => 'cake_blog',
+            'password' => 'AngelF00dC4k3~',
+            'database' => 'cake_blog',
+            'encoding' => 'utf8',
+            'timezone' => 'UTC'
         ],
-        // More configuration below.
-    ];
+    ],
+    // More configuration below.
+];
+```
 
 Once you've saved your **config/app.php** file, you should be able to open
 your browser and see the CakePHP welcome page. It should also tell
@@ -190,9 +192,11 @@ care of for you during the install. Else you'd need to change the default salt v
 by editing **config/app.php**. It doesn't matter much what the new value is, as long as
 it's not guessable:
 
-    'Security' => [
-        'salt' => 'something long and containing lots of different values.',
-    ],
+``` text
+'Security' => [
+    'salt' => 'something long and containing lots of different values.',
+],
+```
 
 ## A Note on mod_rewrite
 

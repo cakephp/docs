@@ -45,30 +45,32 @@ CakePHP のドキュメントは、
 - `title` と `meta` 情報と最後に `toc-tree` 要素を保ったままで、内容を削除します。
   誰かがファイルを翻訳するまでは、以下の注意書きが追加されます:
 
-      File Title
-      ##########
+  ``` text
+  File Title
+  ##########
 
-      .. note::
-          The documentation is not currently supported in XX language for this
-          page.
+  .. note::
+      The documentation is not currently supported in XX language for this
+      page.
 
-          Please feel free to send us a pull request on
-          `Github <https://github.com/cakephp/docs>`_ or use the **Improve This Doc**
-          button to directly propose your changes.
+      Please feel free to send us a pull request on
+      `Github <https://github.com/cakephp/docs>`_ or use the **Improve This Doc**
+      button to directly propose your changes.
 
-          You can refer to the English version in the select top menu to have
-          information about this page's topic.
+      You can refer to the English version in the select top menu to have
+      information about this page's topic.
 
-      // toc-tree 要素が英語版にある場合
-      .. toctree::
-          :maxdepth: 1
+  // toc-tree 要素が英語版にある場合
+  .. toctree::
+      :maxdepth: 1
 
-          one-toc-file
-          other-toc-file
+      one-toc-file
+      other-toc-file
 
-      .. meta::
-          :title lang=xx: File Title
-          :keywords lang=xx: title, description,...
+  .. meta::
+      :title lang=xx: File Title
+      :keywords lang=xx: title, description,...
+  ```
 
 ### 翻訳者 tips
 
@@ -155,15 +157,17 @@ ReST (Re Structured Text) は markdown や textile と同様のプレーンテ�
 順番なしのリストは単一のアスタリスクと空白から始まる行によって示されます。
 順番がついたリストは同様に数字、または `#` で自動的なナンバリングがなされます:
 
-    * これは中黒 (*bullet*) です
-    * これも同じです。しかしこの行は
-      2 行あります。
+``` text
+* これは中黒 (*bullet*) です
+* これも同じです。しかしこの行は
+  2 行あります。
 
-    1. 一番目の行
-    2. 二番目の行
+1. 一番目の行
+2. 二番目の行
 
-    #. 自動的なナンバリング
-    #. は時間の節約をもたらします。
+#. 自動的なナンバリング
+#. は時間の節約をもたらします。
+```
 
 インデントされたリストも、セクションをインデントし、空行で区切ることによって作成できます:
 
@@ -193,7 +197,9 @@ ReST (Re Structured Text) は markdown や textile と同様のプレーンテ�
 
 外部のドキュメントへのリンクは以下のようにできます:
 
-    `外部リンク <http://example.com>`_
+``` text
+`外部リンク <http://example.com>`_
+```
 
 以上のものは <http://example.com> に向けてのリンクを生成します。
 
@@ -259,24 +265,28 @@ CakePHP のドキュメントは [phpdomain](https://pypi.python.org/pypi/sphinx
 > クラスを記述します。
 > クラスに属するメソッド、属性、定数はこのディレクティブの本文の中にある必要があります:
 >
->     .. php:class:: MyClass
+> ``` text
+> .. php:class:: MyClass
 >
->         クラスの説明
+>     クラスの説明
 >
->        .. php:method:: method($argument)
+>    .. php:method:: method($argument)
 >
->        メソッドの説明
+>    メソッドの説明
+> ```
 >
 > 属性、メソッド、定数はネストする必要はありません。
 > これらは単にクラス定義の後につけることができます:
 >
->     .. php:class:: MyClass
+> ``` text
+> .. php:class:: MyClass
 >
->         クラスについての文
+>     クラスについての文
 >
->     .. php:method:: methodName()
+> .. php:method:: methodName()
 >
->         メソッドについての文
+>     メソッドについての文
+> ```
 >
 > <div class="seealso">
 >
@@ -286,14 +296,16 @@ CakePHP のドキュメントは [phpdomain](https://pypi.python.org/pypi/sphinx
 
 > クラスのメソッドと、その引数、返り値、例外を記述します:
 >
->     .. php:method:: instanceMethod($one, $two)
+> ``` text
+> .. php:method:: instanceMethod($one, $two)
 >
->         :param string $one: 第一引数。
->         :param string $two: 第二引数。
->         :returns: なんらかの配列。
->         :throws: InvalidArgumentException
+>     :param string $one: 第一引数。
+>     :param string $two: 第二引数。
+>     :returns: なんらかの配列。
+>     :throws: InvalidArgumentException
 >
->        これはインスタンスメソッドです。
+>    これはインスタンスメソッドです。
+> ```
 
 > 静的なメソッド、その引数、返り値、例外を記述します。
 > オプションは `php:method` を見てください。
@@ -326,7 +338,9 @@ CakePHP のドキュメントは [phpdomain](https://pypi.python.org/pypi/sphinx
 > グローバル定数、またはクラス定数のどちらかを参照します。
 > クラス定数はそのクラスが先に付けられる必要があります:
 >
->     DateTimeは :php:const:`DateTime::ATOM` 定数を持ちます。
+> ``` text
+> DateTimeは :php:const:`DateTime::ATOM` 定数を持ちます。
+> ```
 
 > 名前でクラスを参照します:
 >
@@ -335,12 +349,16 @@ CakePHP のドキュメントは [phpdomain](https://pypi.python.org/pypi/sphinx
 > クラスのメソッドを参照します。
 > このロールは両方の種類のメソッドをサポートします:
 >
->     :php:meth:`DateTime::setDate`
->     :php:meth:`Classname::staticMethod`
+> ``` text
+> :php:meth:`DateTime::setDate`
+> :php:meth:`Classname::staticMethod`
+> ```
 
 > オブジェクトの属性を参照します:
 >
->     :php:attr:`ClassName::$propertyName`
+> ``` text
+> :php:attr:`ClassName::$propertyName`
+> ```
 
 > 例外を参照します。
 
@@ -349,13 +367,15 @@ CakePHP のドキュメントは [phpdomain](https://pypi.python.org/pypi/sphinx
 段落の終わりの `::` を用いて、リテラルコードブロックを生成します。
 リテラルブロックはインデントされる必要があり、各段落のように単一の行で区切られる必要があります:
 
-    これは段落です::
+``` text
+これは段落です::
 
-        while ($i--) {
-            doStuff()
-        }
+    while ($i--) {
+        doStuff()
+    }
 
-    これは普通のテキストの再開です。
+これは普通のテキストの再開です。
+```
 
 リテラルテキストは変更やフォーマットがされず、1レベル分のインデントが削除されたものが残ります。
 
@@ -378,12 +398,14 @@ sphinx の警告 (*Admonitions*) は、まさにそのために使われます�
 
 全ての警告は同じようになります:
 
-    .. note::
+``` text
+.. note::
 
-        インデントされ空の行に挟まれます。
-        段落と一緒です。
+    インデントされ空の行に挟まれます。
+    段落と一緒です。
 
-    この文はnoteの一部ではありません。
+この文はnoteの一部ではありません。
+```
 
 #### サンプル
 

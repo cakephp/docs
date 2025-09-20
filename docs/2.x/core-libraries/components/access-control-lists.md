@@ -291,13 +291,15 @@ By default, CakePHP's ACL is database-driven. To enable INI-based
 ACL, you'll need to tell CakePHP what system you're using by
 updating the following lines in app/Config/core.php:
 
-    // Change these lines:
-    Configure::write('Acl.classname', 'DbAcl');
-    Configure::write('Acl.database', 'default');
+``` php
+// Change these lines:
+Configure::write('Acl.classname', 'DbAcl');
+Configure::write('Acl.database', 'default');
 
-    // to look like this:
-    Configure::write('Acl.classname', 'IniAcl');
-    //Configure::write('Acl.database', 'default');
+// to look like this:
+Configure::write('Acl.classname', 'IniAcl');
+//Configure::write('Acl.database', 'default');
+```
 
 ARO/ACO permissions are specified in **/app/Config/acl.ini.php**.
 The basic idea is that AROs are specified in an INI section that
@@ -313,53 +315,55 @@ deny properties.
 As an example, let's see how the Fellowship ARO structure we've
 been crafting would look in INI syntax:
 
-    ;-------------------------------------
-    ; AROs
-    ;-------------------------------------
-    [aragorn]
-    groups = warriors
-    allow = diplomacy
+``` text
+;-------------------------------------
+; AROs
+;-------------------------------------
+[aragorn]
+groups = warriors
+allow = diplomacy
 
-    [legolas]
-    groups = warriors
+[legolas]
+groups = warriors
 
-    [gimli]
-    groups = warriors
+[gimli]
+groups = warriors
 
-    [gandalf]
-    groups = wizards
+[gandalf]
+groups = wizards
 
-    [frodo]
-    groups = hobbits
-    allow = ring
+[frodo]
+groups = hobbits
+allow = ring
 
-    [bilbo]
-    groups = hobbits
+[bilbo]
+groups = hobbits
 
-    [merry]
-    groups = hobbits
-    deny = ale
+[merry]
+groups = hobbits
+deny = ale
 
-    [pippin]
-    groups = hobbits
+[pippin]
+groups = hobbits
 
-    [gollum]
-    groups = visitors
+[gollum]
+groups = visitors
 
-    ;-------------------------------------
-    ; ARO Groups
-    ;-------------------------------------
-    [warriors]
-    allow = weapons, ale, salted_pork
+;-------------------------------------
+; ARO Groups
+;-------------------------------------
+[warriors]
+allow = weapons, ale, salted_pork
 
-    [wizards]
-    allow = salted_pork, diplomacy, ale
+[wizards]
+allow = salted_pork, diplomacy, ale
 
-    [hobbits]
-    allow = ale
+[hobbits]
+allow = ale
 
-    [visitors]
-    allow = salted_pork
+[visitors]
+allow = salted_pork
+```
 
 Now that you've got your permissions defined via the INI mechanism,
 you can skip to [the section on checking permissions](#checking-permissions)
@@ -394,34 +398,36 @@ Running this command will drop and re-create the tables necessary
 to store ACO and ARO information in tree format. The output of the
 console application should look something like the following:
 
-    ---------------------------------------------------------------
-    Cake Schema Shell
-    ---------------------------------------------------------------
+``` text
+---------------------------------------------------------------
+Cake Schema Shell
+---------------------------------------------------------------
 
-    The following tables will be dropped.
-    acos
-    aros
-    aros_acos
+The following tables will be dropped.
+acos
+aros
+aros_acos
 
-    Are you sure you want to drop the tables? (y/n)
-    [n] > y
-    Dropping tables.
-    acos updated.
-    aros updated.
-    aros_acos updated.
+Are you sure you want to drop the tables? (y/n)
+[n] > y
+Dropping tables.
+acos updated.
+aros updated.
+aros_acos updated.
 
-    The following tables will be created.
-    acos
-    aros
-    aros_acos
+The following tables will be created.
+acos
+aros
+aros_acos
 
-    Are you sure you want to create the tables? (y/n)
-    [y] > y
-    Creating tables.
-    acos updated.
-    aros updated.
-    aros_acos updated.
-    End create.
+Are you sure you want to create the tables? (y/n)
+[y] > y
+Creating tables.
+acos updated.
+aros updated.
+aros_acos updated.
+End create.
+```
 
 > [!NOTE]
 > This replaces an older deprecated command, "initdb".

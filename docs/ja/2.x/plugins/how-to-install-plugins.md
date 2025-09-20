@@ -73,7 +73,7 @@ app フォルダ内で以下のコマンドを実行してください。 :
 
 一つずつロードするか、もしくは一度に全てをロードすることができます。 :
 
-``` css
+``` php
 CakePlugin::loadAll(); // Loads all plugins at once
 CakePlugin::load('ContactManager'); // Loads a single plugin
 ```

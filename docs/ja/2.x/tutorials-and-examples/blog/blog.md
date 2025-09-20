@@ -77,22 +77,24 @@ $ chown -R www-data app/tmp
 作成しておいてください。このページでは、投稿記事を保存するためのテーブルをひとつ作成します。
 次の SQL をデータベースで実行してください。 :
 
-    /* まず、posts テーブルを作成します: */
-    CREATE TABLE posts (
-        id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-        title VARCHAR(50),
-        body TEXT,
-        created DATETIME DEFAULT NULL,
-        modified DATETIME DEFAULT NULL
-    );
+``` text
+/* まず、posts テーブルを作成します: */
+CREATE TABLE posts (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(50),
+    body TEXT,
+    created DATETIME DEFAULT NULL,
+    modified DATETIME DEFAULT NULL
+);
 
-    /* それから、テスト用に記事をいくつか入れておきます: */
-    INSERT INTO posts (title,body,created)
-        VALUES ('タイトル', 'これは、記事の本文です。', NOW());
-    INSERT INTO posts (title,body,created)
-        VALUES ('またタイトル', 'そこに本文が続きます。', NOW());
-    INSERT INTO posts (title,body,created)
-        VALUES ('タイトルの逆襲', 'こりゃ本当にわくわくする！うそ。', NOW());
+/* それから、テスト用に記事をいくつか入れておきます: */
+INSERT INTO posts (title,body,created)
+    VALUES ('タイトル', 'これは、記事の本文です。', NOW());
+INSERT INTO posts (title,body,created)
+    VALUES ('またタイトル', 'そこに本文が続きます。', NOW());
+INSERT INTO posts (title,body,created)
+    VALUES ('タイトルの逆襲', 'こりゃ本当にわくわくする！うそ。', NOW());
+```
 
 テーブル名とフィールド名は適当に選んだわけではありません。CakePHP のデータベース命名規約と
 クラスの命名規約に従っておくと、（どちらも、
@@ -150,19 +152,23 @@ welcome ページを見てください。データベース接続のファイル
 編集し、デフォルトの `Security.salt` の値を変更してください。
 この値は、ランダムで長い文字列にします。そうすることで推測がより困難になります。 :
 
-    /**
-     * A random string used in security hashing methods.
-     */
-    Configure::write('Security.salt', 'pl345e-P45s_7h3*S@l7!');
+``` php
+/**
+ * A random string used in security hashing methods.
+ */
+Configure::write('Security.salt', 'pl345e-P45s_7h3*S@l7!');
+```
 
 サイファシード(*cipher seed*) は暗号化・復号化のための文字列です。
 `/app/Config/core.php` を編集して `Security.cipherSeed` をデフォルト値から
 変更してください。この値は、大きくてランダムな整数でなければなりません:
 
-    /**
-     * A random numeric string (digits only) used to encrypt/decrypt strings.
-     */
-    Configure::write('Security.cipherSeed', '7485712659625147843639846751');
+``` php
+/**
+ * A random numeric string (digits only) used to encrypt/decrypt strings.
+ */
+Configure::write('Security.cipherSeed', '7485712659625147843639846751');
+```
 
 ## mod_rewrite について
 

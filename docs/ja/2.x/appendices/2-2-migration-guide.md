@@ -6,29 +6,33 @@ CakePHP 2.2 は、2.0/2.1 の API の完全上位互換です。 このページ
 
 CakePHP2.2 にアップグレードする際には、 `app/Config/bootstrap.php` ファイルに新しい設定項目を追加する必要があります。この追加設定は、2.1.xと同じような振舞いをする設定です :
 
-    // アセットプラグイン、キャッシュヘルパープラグインの
-    // ディスパッチャーフィルターを有効化
-    Configure::write('Dispatcher.filters', array(
-        'AssetDispatcher',
-        'CacheDispatcher'
-    ));
+``` php
+// アセットプラグイン、キャッシュヘルパープラグインの
+// ディスパッチャーフィルターを有効化
+Configure::write('Dispatcher.filters', array(
+    'AssetDispatcher',
+    'CacheDispatcher'
+));
 
-    // ログ設定の追加
-    CakeLog::config('debug', array(
-        'engine' => 'FileLog',
-        'types' => array('notice', 'info', 'debug'),
-        'file' => 'debug',
-    ));
-    CakeLog::config('error', array(
-        'engine' => 'FileLog',
-        'types' => array('warning', 'error', 'critical', 'alert', 'emergency'),
-        'file' => 'error',
-    ));
+// ログ設定の追加
+CakeLog::config('debug', array(
+    'engine' => 'FileLog',
+    'types' => array('notice', 'info', 'debug'),
+    'file' => 'debug',
+));
+CakeLog::config('error', array(
+    'engine' => 'FileLog',
+    'types' => array('warning', 'error', 'critical', 'alert', 'emergency'),
+    'file' => 'error',
+));
+```
 
 また、 `app/Config/core.php` ファイルも修正が必要です。
 定数 `LOG_ERROR` に `LOG_ERR` の値で定義してください。 :
 
-    define('LOG_ERROR', LOG_ERR);
+``` text
+define('LOG_ERROR', LOG_ERR);
+```
 
 `Model::validateAssociated()` もしくは `Model::saveAssociated()` を利用していて、プライマリモデルでバリデーションが失敗した場合、関連モデルのバリデーションエラーもそのまま残ります。
 `Model::$validationErrors` プロパティに常に全てのエラー情報が格納されます。2.1のテストケースでこれらを扱っていた場合、この変更を反映する必要があります。
@@ -200,7 +204,7 @@ CakePHP2.2 にアップグレードする際には、 `app/Config/bootstrap.php`
 これにより、グループ単位で一度に同一ラベルのキャッシュを消すなどの処理が簡単になります。
 グループはキャッシュエンジン生成時の設定のものが定義されます :
 
-``` css
+``` php
 Cache::config(array(
     'engine' => 'Redis',
     ...

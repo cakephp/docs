@@ -424,9 +424,11 @@ Localized プラグインは、バリデーションのための国の２文字�
 [ValidationInterface インターフェイス](https://github.com/cakephp/localized/blob/master/src/Validation/ValidationInterface.php)
 によって定義されたすべてのクラスに共通する幾つかのメソッドがあります。 :
 
-    電話番号のチェックのための phone()
-    郵便番号のチェックのための postal()
-    国が定めた個人 ID のチェックのための personId()
+``` text
+電話番号のチェックのための phone()
+郵便番号のチェックのための postal()
+国が定めた個人 ID のチェックのための personId()
+```
 
 ### バリデーターをネストする
 

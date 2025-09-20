@@ -14,11 +14,13 @@ SchemaCacheShell は単純なアプリケーションのメタデータキャッ
 加えて、キャッシュデータを作るために、SchemaCacheShell をキャッシュされた
 メタデータを削除するために使えます。:
 
-    # 全メタデータの消去
-    bin/cake schema_cache clear
+``` text
+# 全メタデータの消去
+bin/cake schema_cache clear
 
-    # 一つのテーブルだけ消去
-    bin/cake schema_cache clear articles
+# 一つのテーブルだけ消去
+bin/cake schema_cache clear articles
+```
 
 > [!NOTE]
 > 3.6 より前は、 `schema_cache` の代わりに `orm_cache` を使ってください。

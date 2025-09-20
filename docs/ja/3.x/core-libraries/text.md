@@ -46,11 +46,13 @@ ICU のトランスリテレーション識別子は基本的に `<元のスク�
 [ここ](https://unicode-org.github.io/icu/userguide/transforms/general/#transliterator-identifiers)
 を参照してください。 :
 
-    // apple puree
-    Text::transliterate('apple purée');
+``` text
+// apple puree
+Text::transliterate('apple purée');
 
-    // Ubermensch (ラテン文字だけを変換する)
-    Text::transliterate('Übérmensch', 'Latin-ASCII;');
+// Ubermensch (ラテン文字だけを変換する)
+Text::transliterate('Übérmensch', 'Latin-ASCII;');
+```
 
 ## URL に安全な文字列の作成
 
@@ -71,14 +73,16 @@ slug をコントロールするオプション配列を渡すことができま
 - `preserve` 保持したい特定の非単語文字。デフォルトは `null` 。  
   たとえば、このオプションに '.' をセットすることでクリーンなファイル名を生成することができます。 :
 
-      // apple-puree
-      Text::slug('apple purée');
+  ``` text
+  // apple-puree
+  Text::slug('apple purée');
 
-      // apple_puree
-      Text::slug('apple purée', '_');
+  // apple_puree
+  Text::slug('apple purée', '_');
 
-      // foo-bar.tar.gz
-      Text::slug('foo bar.tar.gz', ['preserve' => '.']);
+  // foo-bar.tar.gz
+  Text::slug('foo bar.tar.gz', ['preserve' => '.']);
+  ```
 
 ## UUID の生成
 
@@ -213,8 +217,10 @@ echo Text::highlight(
 
 出力:
 
-    $options['format'] で指定された文字列か、デフォルトの文字列を<span class="highlight">使って</span>
-    $haystack 中の $needle をハイライトします。
+``` text
+$options['format'] で指定された文字列か、デフォルトの文字列を<span class="highlight">使って</span>
+$haystack 中の $needle をハイライトします。
+```
 
 ## リンク除去
 
@@ -233,11 +239,13 @@ echo Text::highlight(
 
 `$options` はすべての追加パラメーターを渡すのに使われ、下記のようなキーがデフォルトになっており、すべてが省略可能です。 :
 
-    [
-        'ellipsis' => '...',
-        'exact' => true,
-        'html' => false
-    ]
+``` php
+[
+    'ellipsis' => '...',
+    'exact' => true,
+    'html' => false
+]
+```
 
 例:
 
@@ -279,10 +287,12 @@ echo Text::truncate(
 
 `$options` はすべての追加パラメーターを渡すのに使われ、下記のようなキーがデフォルトになっており、すべてが省略可能です。 :
 
-    [
-        'ellipsis' => '...',
-        'exact' => true
-    ]
+``` php
+[
+    'ellipsis' => '...',
+    'exact' => true
+]
+```
 
 例:
 

@@ -143,7 +143,7 @@ SQLServer, Postgres,MySQL といった、それぞれのデータベースベン
 bootstrap.php の中で `App::build()` を使うと、CakePHP
 がクラスを検索する際の追加パスを定義できます:
 
-``` css
+``` php
 App::build(array(
     'Model' => array(
         '/path/to/models',
@@ -287,7 +287,7 @@ App.baseUrl
 URL のしくみを使うことになります。 `/app/Config/core.php`
 で以下のような行のコメントを外して有効にしてください:
 
-``` css
+``` php
 Configure::write('App.baseUrl', env('SCRIPT_NAME'));
 ```
 
@@ -466,7 +466,7 @@ CakePHP の Configure クラスは、アプリケーションや実行時固有�
 このクラスは、あなたのアプリケーション中の静的なコンテキストにおいて、
 いかなるところからでも呼び出せるようになっています:
 
-``` css
+``` php
 Configure::read('debug');
 
 
@@ -566,7 +566,7 @@ Configure も歴史的にこれと同じフォーマットのファイルを読�
 コアの設定ファイルリーダーを使うには、そのファイルを
 `Configure::config()` で Configure に接続してください。:
 
-``` css
+``` php
 App::uses('PhpReader', 'Configure');
 // app/Config から設定ファイルを読み込む
 Configure::config('default', new PhpReader());
@@ -582,11 +582,13 @@ Configure に複数のリーダーを接続することができます。それ�
 `Configure::configured()` を使って接続されている
 リーダーの別名を取得できます:
 
-    // 接続されたリーダーの別名の配列を取得する
-    Configure::configured();
+``` php
+// 接続されたリーダーの別名の配列を取得する
+Configure::configured();
 
-    // 特定のリーダーが接続されているかをチェック
-    Configure::configured('default');
+// 特定のリーダーが接続されているかをチェック
+Configure::configured('default');
+```
 
 接続されているリーダーを取り外すこともできます。
 `Configure::drop('default')` はデフォルトリーダーの別名を
@@ -607,8 +609,10 @@ Configure に複数のリーダーを接続することができます。それ�
 
 Configure に設定リーダーを接続して、設定ファイルを読み込みます:
 
-    // リーダーオブジェクト 'default' を使って my_file.php をロードする
-    Configure::load('my_file', 'default');
+``` php
+// リーダーオブジェクト 'default' を使って my_file.php をロードする
+Configure::load('my_file', 'default');
+```
 
 ロードされた設定ファイルは、そのデータを Configure にある既存の
 実行時設定とマージします。また、既存の実行時設定を上書きして
@@ -637,13 +641,13 @@ Configure にある全部または一部のデータをダンプして、ファ�
 'default' リーダーは PhpReader のインスタンスを使い、 Configure
 にあるすべてのデータを <span class="title-ref">my_config.php</span> というファイルに保存します。:
 
-``` css
+``` php
 Configure::dump('my_config.php', 'default');
 ```
 
 エラーハンドラー設定だけを保存します。:
 
-``` css
+``` php
 Configure::dump('error.php', 'default', array('Error', 'Exception'));
 ```
 
@@ -671,8 +675,10 @@ configure は現在のリクエストの値しか記憶しないので、何ら�
 値を後続するリクエストでも使いたい場合は、それらを保存しておく
 必要があります。:
 
-    // 'default' キャッシュにある 'user_1234' キーの中の現在の設定を保存する
-    Configure::store('user_1234', 'default');
+``` php
+// 'default' キャッシュにある 'user_1234' キーの中の現在の設定を保存する
+Configure::store('user_1234', 'default');
+```
 
 保存された設定データは `Cache` クラス内で永続的データになります。
 これにより、 `Cache` が扱えるストレージエンジンにおいて、
@@ -689,8 +695,10 @@ configure は現在のリクエストの値しか記憶しないので、何ら�
 実行時設定を保存した後は、おそらくそこに再度アクセスして値を取り出す
 ことになります。これは `Configure::restore()` により行います。:
 
-    // キャッシュから実行時設定を取り出す
-    Configure::restore('user_1234', 'default');
+``` php
+// キャッシュから実行時設定を取り出す
+Configure::restore('user_1234', 'default');
+```
 
 設定情報を取り出す際は、保存した時に使ったものと同じキャッシュから、
 同じキーを使って取り出すことが重要です。取り出された情報は、
@@ -733,7 +741,7 @@ class XmlReader implements ConfigReaderInterface {
 あなたの `app/Config/bootstrap.php` でこのリーダーを接続して
 利用できます:
 
-``` css
+``` php
 App::uses('XmlReader', 'Configure');
 Configure::config('xml', new XmlReader());
 ...

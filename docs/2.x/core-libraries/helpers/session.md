@@ -13,9 +13,11 @@ to the session.
 As with the Session Component, data is read by using
 `dot notation` array structures:
 
-    array('User' => array(
-        'username' => 'super@example.com'
-    ));
+``` text
+array('User' => array(
+    'username' => 'super@example.com'
+));
+```
 
 Given the previous array structure, the node would be accessed by
 `User.username`, with the dot indicating the nested array. This

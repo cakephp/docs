@@ -517,17 +517,19 @@ CakePHP が定めた規約に従っている場合は、識別子を引用符で
 識別子のクォートを有効にする必要があります。
 必要な場合は、接続を設定するときに識別子のクォートを有効にすることができます。 :
 
-    // config/app.php 内で
-    'Datasources' => [
-        'default' => [
-            'className' => 'Cake\Database\Driver\Mysql',
-            'username' => 'root',
-            'password' => 'super_secret',
-            'host' => 'localhost',
-            'database' => 'cakephp',
-            'quoteIdentifiers' => true
-        ]
-    ],
+``` php
+// config/app.php 内で
+'Datasources' => [
+    'default' => [
+        'className' => 'Cake\Database\Driver\Mysql',
+        'username' => 'root',
+        'password' => 'super_secret',
+        'host' => 'localhost',
+        'database' => 'cakephp',
+        'quoteIdentifiers' => true
+    ]
+],
+```
 
 > [!NOTE]
 > `QueryExpression` オブジェクト内の識別子は、引用符で囲まれず、手動でクォートするか

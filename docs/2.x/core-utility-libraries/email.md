@@ -15,7 +15,7 @@ email instead of using the provided SMTP and Mail transports.
 
 First of all, you should ensure the class is loaded using `App::uses()`:
 
-``` css
+``` php
 App::uses('CakeEmail', 'Network/Email');
 ```
 
@@ -369,7 +369,7 @@ systems (like SwiftMailer). To create your transport, first create the file
 `app/Lib/Network/Email/ExampleTransport.php` (where Example is the name of your
 transport). To start off your file should look like:
 
-``` css
+``` php
 App::uses('AbstractTransport', 'Network/Email');
 
 class ExampleTransport extends AbstractTransport {

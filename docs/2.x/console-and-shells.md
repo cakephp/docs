@@ -131,7 +131,9 @@ If you are on Windows Vista or 7, you should follow the steps below.
 
 5.  Add the `cake` install path string followed by a semi colon. Result example:
 
-        %SystemRoot%\system32;%SystemRoot%;C:\xampp\htdocs\cakephp\lib\Cake\Console;
+    ``` php
+    %SystemRoot%\system32;%SystemRoot%;C:\xampp\htdocs\cakephp\lib\Cake\Console;
+    ```
 
 6.  Click Ok and `cake` should work anywhere.
 

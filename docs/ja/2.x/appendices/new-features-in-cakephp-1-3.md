@@ -113,7 +113,7 @@ Cache アダプタは cache ディレクトリに置く必要があります。 
 `$plugin/libs/cache/my_custom_cache.php` のどちらかに置くことになります。
 プラグインのキャッシュ設定は、ドットを使った文法を使う必要があります。
 
-``` css
+``` php
 Cache::config('custom', array(
     'engine' => 'CachePack.MyCustomCache',
     ...
@@ -381,13 +381,13 @@ Libs ディレクトリは、サードパーティ、外部ベンダからのラ
 分割することを可能にします。また、 `App::import()` は libs ディレクトリからもインポート
 できるように更新されました。
 
-``` css
+``` php
 App::import('Lib', 'ImageManipulation'); // app/libs/image_manipulation.php をインポートする
 ```
 
 プラグインからも libs のファイルをインポートできます
 
-``` css
+``` php
 App::import('Lib', 'Geocoding.Geocode'); // app/plugins/geocoding/libs/geocode.php をインポートする
 ```
 

@@ -211,7 +211,9 @@ public function setErrors($errors)
 According to how the validator class would have returned the errors, `$errors`
 must be in this format:
 
-    ['fieldName' => ['validatorName' => 'The error message to display']]
+``` php
+['fieldName' => ['validatorName' => 'The error message to display']]
+```
 
 Now you will be able to invalidate form fields by setting the fieldName, then
 set the error messages:

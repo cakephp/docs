@@ -49,9 +49,11 @@ public function initialize()
 テンプレートが、主となるアプリケーションのものでもプラグインのものでも、
 テンプレートファイルは次のようになります。 :
 
-    return [
-        'number' => '<a href="{{url}}">{{text}}</a>',
-    ];
+``` text
+return [
+    'number' => '<a href="{{url}}">{{text}}</a>',
+];
+```
 
 ### 実行時にテンプレートを変更する
 

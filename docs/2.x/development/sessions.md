@@ -45,7 +45,7 @@ non-SSL protocols, then you might have problems with sessions being lost. If
 you need access to the session on both SSL and non-SSL domains you will want to
 disable this:
 
-``` css
+``` php
 Configure::write('Session', array(
     'defaults' => 'php',
     'ini' => array(
@@ -57,7 +57,7 @@ Configure::write('Session', array(
 Session cookie paths default to `/` in 2.0, to change this you can use the
 `session.cookie_path` ini flag to the directory path of your application:
 
-``` css
+``` php
 Configure::write('Session', array(
     'defaults' => 'php',
     'ini' => array(
@@ -71,7 +71,7 @@ session.gc_maxlifetime can override your setting for timeout. The default is
 24 minutes. Change this in your ini settings to get it to match longer
 sessions:
 
-``` css
+``` php
 Configure::write('Session', array(
     'defaults' => 'php',
     'timeout' => 2160, // 36 hours
@@ -89,7 +89,7 @@ custom solution. To use defaults, simply set the 'defaults' key to the name of
 the default you want to use. You can then override any sub setting by declaring
 it in your Session config:
 
-``` css
+``` php
 Configure::write('Session', array(
     'defaults' => 'php'
 ));
@@ -98,7 +98,7 @@ Configure::write('Session', array(
 The above will use the built-in 'php' session configuration. You could augment
 part or all of it by doing the following:
 
-``` css
+``` php
 Configure::write('Session', array(
     'defaults' => 'php',
     'cookie' => 'my_app',
@@ -124,7 +124,7 @@ object you want to use for session saving. There are two ways to use the
 'handler'. The first is to provide an array with 5 callables. These callables
 are then applied to `session_set_save_handler`:
 
-``` css
+``` php
 Configure::write('Session', array(
     'userAgent' => false,
     'cookie' => 'my_cookie',
@@ -171,7 +171,7 @@ The changes in session configuration change how you define database sessions.
 Most of the time you will only need to set `Session.handler.model` in your
 configuration as well as choose the database defaults:
 
-``` css
+``` php
 Configure::write('Session', array(
     'defaults' => 'database',
     'handler' => array(
@@ -187,7 +187,7 @@ session information to the database.
 If you do not need a fully custom session handler, but still require
 database-backed session storage, you can simplify the above code to:
 
-``` css
+``` php
 Configure::write('Session', array(
     'defaults' => 'database'
 ));
@@ -221,7 +221,7 @@ start to expire as records are evicted.
 
 To use Cache based sessions you can configure you Session config like:
 
-``` css
+``` php
 Configure::write('Session', array(
     'defaults' => 'cache',
     'handler' => array(
@@ -243,7 +243,7 @@ configurations, as well as custom ones. The `ini` key in the session settings,
 allows you to specify individual configuration values. For example you can use
 it to control settings like `session.gc_divisor`:
 
-``` css
+``` php
 Configure::write('Session', array(
     'defaults' => 'php',
     'ini' => array(
@@ -310,7 +310,7 @@ operation. This lets us fetch sessions from the fast cache, and not have to
 worry about what happens when we fill the cache. Using this session handler is
 also easy. In your `core.php` make the session block look like the following:
 
-``` css
+``` php
 Configure::write('Session', array(
     'defaults' => 'database',
     'handler' => array(

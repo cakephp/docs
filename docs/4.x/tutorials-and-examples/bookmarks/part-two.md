@@ -154,7 +154,9 @@ public function isAuthorized($user)
 Also, add the following to the configuration for `Auth` in your
 `AppController`:
 
-    'authorize' => 'Controller',
+``` text
+'authorize' => 'Controller',
+```
 
 Your `initialize()` method should now look like:
 

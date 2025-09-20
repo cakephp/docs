@@ -26,13 +26,15 @@ DSN
 
 は以下の値を指し示します。 :
 
-    [
-        'Cache' => [
-            'default' => [
-                'engine' => 'File'
-            ]
+``` php
+[
+    'Cache' => [
+        'default' => [
+            'engine' => 'File'
         ]
     ]
+]
+```
 
 DRY  
 同じことを繰り返さない (Don’t repeat yourself)。これはあらゆる情報の繰り返しを
@@ -46,20 +48,24 @@ DRY
 HTML属性  
 HTML の属性を構成するキー =\> 値の配列。例:
 
-    // これを与えると
-    ['class' => 'my-class', 'target' => '_blank']
+``` text
+// これを与えると
+['class' => 'my-class', 'target' => '_blank']
 
-    // これが生成される
-    class="my-class" _target="blank"
+// これが生成される
+class="my-class" _target="blank"
+```
 
 オプションが最小化できるか、名前そのものが値として許可される場合は、
 `true` が利用できます。 :
 
-    // これを与えると
-    ['checked' => true]
+``` text
+// これを与えると
+['checked' => true]
 
-    // これが生成される
-    checked="checked"
+// これが生成される
+checked="checked"
+```
 
 PaaS  
 Platform as a Service の略。クラウドベースのホスティング、データベース、
@@ -70,11 +76,13 @@ PagodaBox などです。
 プラグイン記法はドットで区切られたクラス名で、クラスがプラグインの一部であることを
 指定しています。 :
 
-    // プラグインは "DebugKit", クラス名は "Toolbar".
-    'DebugKit.Toolbar'
+``` text
+// プラグインは "DebugKit", クラス名は "Toolbar".
+'DebugKit.Toolbar'
 
-    // プラグインは "AcmeCorp/Tools", クラス名は "Toolbar".
-    'AcmeCorp/Tools.Toolbar'
+// プラグインは "AcmeCorp/Tools", クラス名は "Toolbar".
+'AcmeCorp/Tools.Toolbar'
+```
 
 プロパティー
 ORM エンティティーにマップされたカラムを参照するときに使用されます。
@@ -89,6 +97,8 @@ routes.php
 `Router::url()` に渡される属性の配列。
 典型的には以下のようになります。 :
 
-    ['controller' => 'Posts', 'action' => 'view', 5]
+``` php
+['controller' => 'Posts', 'action' => 'view', 5]
+```
 
 </div>

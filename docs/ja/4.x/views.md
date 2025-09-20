@@ -537,8 +537,10 @@ echo $this->element('helpbox', [
 `Controller::set()` メソッドと同様の動作です。)
 上記の例では **templates/element/helpbox.php** の中で `$helptext` 変数が使えます。 :
 
-    // templates/element/helpbox.php の中で
-    echo $helptext; // 出力 "おお、このテキストはとても役に立つ。"
+``` text
+// templates/element/helpbox.php の中で
+echo $helptext; // 出力 "おお、このテキストはとても役に立つ。"
+```
 
 `View::element()` メソッドは、エレメントのためのオプションもサポートしています。
 サポートされるオプションは、 'cache' と 'callbacks' です。例えば:

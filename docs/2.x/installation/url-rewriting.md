@@ -17,19 +17,21 @@ You may also take a look at <https://wiki.apache.org/httpd/DistrosDefaultLayout>
     AllowOverride is set to All for the correct DocumentRoot. You
     should see something similar to:
 
-        # Each directory to which Apache has access can be configured with respect
-        # to which services and features are allowed and/or disabled in that
-        # directory (and its subdirectories).
-        #
-        # First, we configure the "default" to be a very restrictive set of
-        # features.
-        #
-        <Directory />
-            Options FollowSymLinks
-            AllowOverride All
-        #    Order deny,allow
-        #    Deny from all
-        </Directory>
+    ``` text
+    # Each directory to which Apache has access can be configured with respect
+    # to which services and features are allowed and/or disabled in that
+    # directory (and its subdirectories).
+    #
+    # First, we configure the "default" to be a very restrictive set of
+    # features.
+    #
+    <Directory />
+        Options FollowSymLinks
+        AllowOverride All
+    #    Order deny,allow
+    #    Deny from all
+    </Directory>
+    ```
 
     For users having apache 2.4 and above, you need to modify the configuration
     file for your `httpd.conf` or virtual host configuration to look like the
@@ -210,14 +212,16 @@ If for some exotic reason you cannot change your root directory and need to run
 your project from a subfolder like example.com/subfolder/, you will have to
 inject "/webroot" in each request.
 
-    location ~ ^/(subfolder)/(.*)? {
-       index  index.php;
+``` text
+location ~ ^/(subfolder)/(.*)? {
+   index  index.php;
 
-       set $new_uri /$1/webroot/$2;
-       try_files $new_uri $new_uri/ /$1/index.php?$args;
+   set $new_uri /$1/webroot/$2;
+   try_files $new_uri $new_uri/ /$1/index.php?$args;
 
-       ... php handling ...
-    }
+   ... php handling ...
+}
+```
 
 > [!NOTE]
 > Recent configuration of PHP-FPM is set to listen to php-fpm socket instead of TCP port 9000 on address 127.0.0.1. If you get 502 bad gateway error from above configuration, try replacing fastcgi_pass from TCP port to socket path (eg: fastcgi_pass unix:/var/run/php5-fpm.sock;).
@@ -278,9 +282,11 @@ correctly.
 Lighttpd does not support .htaccess functions, so you can remove all .htaccess files.
 In the lighttpd configuration, make sure you've activated "mod_rewrite". Add a line:
 
-    url.rewrite-if-not-file =(
-        "^([^\?]*)(\?(.+))?$" => "/index.php?url=$1&$3"
-    )
+``` text
+url.rewrite-if-not-file =(
+    "^([^\?]*)(\?(.+))?$" => "/index.php?url=$1&$3"
+)
+```
 
 ## URL rewrite rules for Hiawatha
 

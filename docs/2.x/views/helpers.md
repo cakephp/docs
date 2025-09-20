@@ -167,14 +167,16 @@ CakePHP's existing helper structure, you'll need to create a new
 class in `/app/View/Helper`. Let's call our helper LinkHelper. The
 actual PHP class file would look something like this:
 
-    /* /app/View/Helper/LinkHelper.php */
-    App::uses('AppHelper', 'View/Helper');
+``` php
+/* /app/View/Helper/LinkHelper.php */
+App::uses('AppHelper', 'View/Helper');
 
-    class LinkHelper extends AppHelper {
-        public function makeEdit($title, $url) {
-            // Logic to create specially formatted link goes here...
-        }
+class LinkHelper extends AppHelper {
+    public function makeEdit($title, $url) {
+        // Logic to create specially formatted link goes here...
     }
+}
+```
 
 > [!NOTE]
 > Helpers must extend either `AppHelper` or `Helper` or implement all the callbacks
@@ -234,7 +236,7 @@ extend AppModel and controllers extend AppController). To create
 functionality that would be available to all helpers, create
 `/app/View/Helper/AppHelper.php`:
 
-``` css
+``` php
 App::uses('Helper', 'View');
 
 class AppHelper extends Helper {

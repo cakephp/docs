@@ -84,7 +84,7 @@ php composer.phar dumpautoload
 もしあなたが何らかの理由で Composer を使う事ができないのなら、 `Plugin` を使って
 自動読み込みを行うこともできます。 :
 
-``` css
+``` php
 Plugin::load('ContactManager', ['autoload' => true]);
 ```
 
@@ -127,13 +127,15 @@ class Application extends BaseApplication {
 
 3.6.0 より前の場合、 `Plugin::load()` を使ってください。 :
 
-    // config/bootstrap.php の中で
+``` php
+// config/bootstrap.php の中で
 
-    // 特定のプラグインを読み込みます。
-    Plugin::load('ContactManager');
+// 特定のプラグインを読み込みます。
+Plugin::load('ContactManager');
 
-    // ベンダーの名前空間の特定のプラグインを読み込みます。
-    Plugin::load('AcmeCorp/ContactManager');
+// ベンダーの名前空間の特定のプラグインを読み込みます。
+Plugin::load('AcmeCorp/ContactManager');
+```
 
 また、プラグインを有効にする便利なシェルコマンドがあります。次の行を実行してください。
 
@@ -211,23 +213,27 @@ $path = $plugin->getClassPath();
 3.6.0 より前は、 `bootstrap` と `routs` フックを有効にする必要があります。
 古いスタイルのプラグインは、 `middleware` と `console` フックはサポートしません。 :
 
-    // config/bootstrap.php の中、
-    // または Application::bootstrap() の中で
+``` php
+// config/bootstrap.php の中、
+// または Application::bootstrap() の中で
 
-    // loadAll() を使用
-    Plugin::loadAll([
-        'Blog' => ['routes' => true],
-        'ContactManager' => ['bootstrap' => true],
-        'WebmasterTools' => ['bootstrap' => true, 'routes' => true],
-    ]);
+// loadAll() を使用
+Plugin::loadAll([
+    'Blog' => ['routes' => true],
+    'ContactManager' => ['bootstrap' => true],
+    'WebmasterTools' => ['bootstrap' => true, 'routes' => true],
+]);
+```
 
 また、プラグインを個別に読み込むことができます。 :
 
-    // blog を読み込み、routes をインクルード
-    Plugin::load('Blog', ['routes' => true]);
+``` php
+// blog を読み込み、routes をインクルード
+Plugin::load('Blog', ['routes' => true]);
 
-    // 設定と初期化を行う bootstrap をインクルード
-    Plugin::load('ContactManager', ['bootstrap' => true]);
+// 設定と初期化を行う bootstrap をインクルード
+Plugin::load('ContactManager', ['bootstrap' => true]);
+```
 
 この設定スタイルは、プラグインの設定やルートを手動で `include()` や
 `require()` する必要がなく、自動で正しい時間と正しい場所で読み込まれます。
@@ -237,7 +243,7 @@ $path = $plugin->getClassPath();
 次の例は、全てのプラグインの bootstrap を読み込み、
 それに加えて Blog プラグインの routes を読み込みます。 :
 
-``` css
+``` php
 Plugin::loadAll([
     ['bootstrap' => true],
     'Blog' => ['routes' => true]
@@ -247,7 +253,7 @@ Plugin::loadAll([
 プラグインで指定された全てのファイルが実際に存在しないと、PHP が読み込めないファイルごとに
 警告を出します。この潜在的な警告は、 `ignoreMissing` オプションを使用して避けることができます。 :
 
-``` css
+``` php
 Plugin::loadAll([
     ['ignoreMissing' => true, 'bootstrap' => true],
     'Blog' => ['routes' => true]
@@ -257,14 +263,14 @@ Plugin::loadAll([
 プラグインを読み込むとき、プラグイン名は名前空間名と一致すべきです。
 例えば、最上位の名前空間が `Users` のプラグインがあるなら、このように読み込みます。 :
 
-``` css
+``` php
 Plugin::load('User');
 ```
 
 もしあなたが `AcmeCorp/Users` といったように、ベンダー名を最上位の名前空間名に
 したいのなら、このようにプラグインを読み込みます。 :
 
-``` css
+``` php
 Plugin::load('AcmeCorp/Users');
 ```
 
@@ -512,11 +518,13 @@ Contact モデルが定義されていないためです。
 もしあなたのアプリケーションが、CakePHP の提供するデフォルトルーティングを含むなら、
 あなたのプラグインコントローラーへは下記のような URL でアクセスできます。 :
 
-    // プラグインコントローラーの index にアクセスする
-    /contact-manager/contacts
+``` text
+// プラグインコントローラーの index にアクセスする
+/contact-manager/contacts
 
-    // プラグインコントローラーのそれぞれのアクションにアクセスする
-    /contact-manager/contacts/view/1
+// プラグインコントローラーのそれぞれのアクションにアクセスする
+/contact-manager/contacts/view/1
+```
 
 もしあなたのアプリケーションでルーティングプレフィックスを定義しているなら、
 CakePHP のデフォルトルーティングは下記の書式でルーティングします。 :
@@ -618,10 +626,12 @@ $this->loadModel('ContactsMangager.Contacts');
 我々の ContactManager プラグインでは `ContactsController::index()` アクションに
 ビューが必要ですから、このような内容になります。 :
 
-    // plugins/ContactManager/src/Template/Contacts/index.ctp:
-    <h1>連絡先</h1>
-    <p>ソート可能なあなたの連絡先一覧は次のとおりです</p>
-    <!-- ソート可能な連絡先一覧はこちら....-->
+``` text
+// plugins/ContactManager/src/Template/Contacts/index.ctp:
+<h1>連絡先</h1>
+<p>ソート可能なあなたの連絡先一覧は次のとおりです</p>
+<!-- ソート可能な連絡先一覧はこちら....-->
+```
 
 プラグインは独自のレイアウトを提供することができます。
 プラグインレイアウトを追加するためには、テンプレートファイルを

@@ -136,19 +136,21 @@ automatically echo the output into the view.
 >
 > Added formats are merged with the following defaults:
 >
->     array(
->         'wholeSymbol'      => '',
->         'wholePosition'    => 'before',
->         'fractionSymbol'   => false,
->         'fractionPosition' => 'after',
->         'zero'             => 0,
->         'places'           => 2,
->         'thousands'        => ',',
->         'decimals'         => '.',
->         'negative'         => '()',
->         'escape'           => true,
->         'fractionExponent' => 2
->     )
+> ``` text
+> array(
+>     'wholeSymbol'      => '',
+>     'wholePosition'    => 'before',
+>     'fractionSymbol'   => false,
+>     'fractionPosition' => 'after',
+>     'zero'             => 0,
+>     'places'           => 2,
+>     'thousands'        => ',',
+>     'decimals'         => '.',
+>     'negative'         => '()',
+>     'escape'           => true,
+>     'fractionExponent' => 2
+> )
+> ```
 
 > param float \$number  
 > The value to covert

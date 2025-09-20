@@ -14,7 +14,7 @@
 
 まず最初に、 `App::uses()` を使って、クラスがロードできるようにします。 :
 
-``` css
+``` php
 App::uses('CakeEmail', 'Network/Email');
 ```
 
@@ -365,7 +365,7 @@ SwiftMailer のような他のメールシステムを使うために独自の�
 `app/Lib/Network/Email/ExampleTransport.php` ファイルを作成してください。
 作成開始時点のファイルは以下のようになります。 :
 
-``` css
+``` php
 App::uses('AbstractTransport', 'Network/Email');
 
 class ExampleTransport extends AbstractTransport {

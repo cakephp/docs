@@ -95,25 +95,27 @@ name. Returning to our online bakery example, our RecipesController might contai
 `view()`, `share()`, and `search()` actions. The controller would be found
 in **src/Controller/RecipesController.php** and contain:
 
-    // src/Controller/RecipesController.php
+``` php
+// src/Controller/RecipesController.php
 
-    class RecipesController extends AppController
+class RecipesController extends AppController
+{
+    public function view($id)
     {
-        public function view($id)
-        {
-            // Action logic goes here.
-        }
-
-        public function share($customerId, $recipeId)
-        {
-            // Action logic goes here.
-        }
-
-        public function search($query)
-        {
-            // Action logic goes here.
-        }
+        // Action logic goes here.
     }
+
+    public function share($customerId, $recipeId)
+    {
+        // Action logic goes here.
+    }
+
+    public function search($query)
+    {
+        // Action logic goes here.
+    }
+}
+```
 
 The template files for these actions would be **templates/Recipes/view.php**,
 **templates/Recipes/share.php**, and **templates/Recipes/search.php**. The

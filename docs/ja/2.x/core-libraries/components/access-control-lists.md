@@ -295,13 +295,15 @@ INI ベースの ACL を有効にする場合は、app/Config/core.php にある
 以下の行を更新することで、CakePHP にどのシステムを使っている
 のかを知らせてやる必要があります。 :
 
-    // これらの行を:
-    Configure::write('Acl.classname', 'DbAcl');
-    Configure::write('Acl.database', 'default');
+``` php
+// これらの行を:
+Configure::write('Acl.classname', 'DbAcl');
+Configure::write('Acl.database', 'default');
 
-    // このように変更します:
-    Configure::write('Acl.classname', 'IniAcl');
-    //Configure::write('Acl.database', 'default');
+// このように変更します:
+Configure::write('Acl.classname', 'IniAcl');
+//Configure::write('Acl.database', 'default');
+```
 
 ARO/ACO のパーミッションは **/app/Config/acl.ini.php** の中で
 指定されています。基本的な考え方として、ARO は INI セクション
@@ -318,53 +320,55 @@ ACO は INI セクションで指定され、プロパティは allow と deny
 例として、私たちが作ってきた 指輪の仲間 ARO 構造を見てみると、
 このような INI の書式になります:
 
-    ;-------------------------------------
-    ; AROs
-    ;-------------------------------------
-    [aragorn]
-    groups = 戦士たち
-    allow = 外交交渉権
+``` text
+;-------------------------------------
+; AROs
+;-------------------------------------
+[aragorn]
+groups = 戦士たち
+allow = 外交交渉権
 
-    [legolas]
-    groups = 戦士たち
+[legolas]
+groups = 戦士たち
 
-    [gimli]
-    groups = 戦士たち
+[gimli]
+groups = 戦士たち
 
-    [gandalf]
-    groups = 魔法使い
+[gandalf]
+groups = 魔法使い
 
-    [frodo]
-    groups = ホビット族
-    allow = 指輪
+[frodo]
+groups = ホビット族
+allow = 指輪
 
-    [bilbo]
-    groups = ホビット族
+[bilbo]
+groups = ホビット族
 
-    [merry]
-    groups = ホビット族
-    deny = ビール
+[merry]
+groups = ホビット族
+deny = ビール
 
-    [pippin]
-    groups = ホビット族
+[pippin]
+groups = ホビット族
 
-    [gollum]
-    groups = 訪問者
+[gollum]
+groups = 訪問者
 
-    ;-------------------------------------
-    ; ARO Groups
-    ;-------------------------------------
-    [戦士たち]
-    allow = 武器, ビール, 塩漬け豚
+;-------------------------------------
+; ARO Groups
+;-------------------------------------
+[戦士たち]
+allow = 武器, ビール, 塩漬け豚
 
-    [魔法使い]
-    allow = 塩漬け豚, 外交交渉権, ビール
+[魔法使い]
+allow = 塩漬け豚, 外交交渉権, ビール
 
-    [ホビット族]
-    allow = ビール
+[ホビット族]
+allow = ビール
 
-    [訪問者]
-    allow = 塩漬け豚
+[訪問者]
+allow = 塩漬け豚
+```
 
 INI メカニズムを通してパーミッションを定義することができたので、
 ACL コンポーネントを使って
@@ -401,34 +405,36 @@ $ cake schema create DbAcl
 必要なテーブルを削除して再作成します。コンソール・アプリケーション
 の出力は以下のようになります:
 
-    ---------------------------------------------------------------
-    Cake Schema Shell
-    ---------------------------------------------------------------
+``` text
+---------------------------------------------------------------
+Cake Schema Shell
+---------------------------------------------------------------
 
-    The following tables will be dropped.
-    acos
-    aros
-    aros_acos
+The following tables will be dropped.
+acos
+aros
+aros_acos
 
-    Are you sure you want to drop the tables? (y/n)
-    [n] > y
-    Dropping tables.
-    acos updated.
-    aros updated.
-    aros_acos updated.
+Are you sure you want to drop the tables? (y/n)
+[n] > y
+Dropping tables.
+acos updated.
+aros updated.
+aros_acos updated.
 
-    The following tables will be created.
-    acos
-    aros
-    aros_acos
+The following tables will be created.
+acos
+aros
+aros_acos
 
-    Are you sure you want to create the tables? (y/n)
-    [y] > y
-    Creating tables.
-    acos updated.
-    aros updated.
-    aros_acos updated.
-    End create.
+Are you sure you want to create the tables? (y/n)
+[y] > y
+Creating tables.
+acos updated.
+aros updated.
+aros_acos updated.
+End create.
+```
 
 > [!NOTE]
 > これは、以前使われていて廃止された "initdb" というコマンドに

@@ -33,13 +33,15 @@ For example:
 
 Would point to the following value:
 
-    [
-        'Cache' => [
-            'default' => [
-                'engine' => 'File'
-            ]
+``` php
+[
+    'Cache' => [
+        'default' => [
+            'engine' => 'File'
         ]
     ]
+]
+```
 
 DRY  
 Don't repeat yourself. Is a principle of software development aimed at
@@ -54,20 +56,24 @@ columns. Often used in conjunction with the FormHelper.
 HTML attributes  
 An array of key =\> values that are composed into HTML attributes. For example:
 
-    // Given
-    ['class' => 'my-class', 'target' => '_blank']
+``` text
+// Given
+['class' => 'my-class', 'target' => '_blank']
 
-    // Would generate
-    class="my-class" target="_blank"
+// Would generate
+class="my-class" target="_blank"
+```
 
 If an option can be minimized or accepts its name as the value, then `true`
 can be used:
 
-    // Given
-    ['checked' => true]
+``` text
+// Given
+['checked' => true]
 
-    // Would generate
-    checked="checked"
+// Would generate
+checked="checked"
+```
 
 PaaS  
 Platform as a Service. Platform as a Service providers will provide
@@ -81,11 +87,13 @@ plugin syntax
 Plugin syntax refers to the dot separated class name indicating classes
 are part of a plugin:
 
-    // The plugin is "DebugKit", and the class name is "Toolbar".
-    'DebugKit.Toolbar'
+``` text
+// The plugin is "DebugKit", and the class name is "Toolbar".
+'DebugKit.Toolbar'
 
-    // The plugin is "AcmeCorp/Tools", and the class name is "Toolbar".
-    'AcmeCorp/Tools.Toolbar'
+// The plugin is "AcmeCorp/Tools", and the class name is "Toolbar".
+'AcmeCorp/Tools.Toolbar'
+```
 
 routes.php  
 A file in `config` directory that contains routing configuration.
@@ -97,6 +105,8 @@ routing array
 An array of attributes that are passed to `Router::url()`.
 They typically look like:
 
-    ['controller' => 'Posts', 'action' => 'view', 5]
+``` php
+['controller' => 'Posts', 'action' => 'view', 5]
+```
 
 </div>

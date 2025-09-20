@@ -143,7 +143,7 @@ $this->OneTimer->getTime();
 `/app/Controller/Component/MathComponent.php` にファイルを作成して下さい。
 コンポーネントの基本構造は以下のようになります。 :
 
-``` css
+``` php
 App::uses('Component', 'Controller');
 class MathComponent extends Component {
     public function doComplexOperation($amount1, $amount2) {

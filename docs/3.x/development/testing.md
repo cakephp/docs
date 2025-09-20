@@ -63,16 +63,18 @@ any tests. Before running any tests you should be sure to add a `test`
 datasource configuration to **config/app.php**. This configuration is used by
 CakePHP for fixture tables and data:
 
-    'Datasources' => [
-        'test' => [
-            'datasource' => 'Cake\Database\Driver\Mysql',
-            'persistent' => false,
-            'host' => 'dbhost',
-            'username' => 'dblogin',
-            'password' => 'dbpassword',
-            'database' => 'test_database'
-        ],
+``` php
+'Datasources' => [
+    'test' => [
+        'datasource' => 'Cake\Database\Driver\Mysql',
+        'persistent' => false,
+        'host' => 'dbhost',
+        'username' => 'dblogin',
+        'password' => 'dbpassword',
+        'database' => 'test_database'
     ],
+],
+```
 
 > [!NOTE]
 > It's a good idea to make the test database and your actual database
@@ -2004,7 +2006,9 @@ CONFIG
 
 Then uncomment the following line in your **config/bootstrap.php** file:
 
-    //Configure::load('app_local', 'default');
+``` php
+//Configure::load('app_local', 'default');
+```
 
 By creating an **app_local.php** file, you have an easy way to define
 configuration specific to Jenkins. You can use this same configuration file to

@@ -9,10 +9,12 @@
 
 まず、非推奨警告の表示を有効にします。 :
 
-    // config/app.php
-    'Error' => [
-        'errorLevel' => E_ALL,
-    ]
+``` text
+// config/app.php
+'Error' => [
+    'errorLevel' => E_ALL,
+]
+```
 
 次に、アプリケーションとそのプラグインが発行する非推奨の警告を修正していきます。
 
@@ -64,14 +66,18 @@ bin/cake upgrade file_rename templates <path/to/app>
 次に、 `rector` コマンドを使用して、非推奨となった多くの CakePHP および PHPUnit のメソッドコールを
 自動的に修正します。依存関係をアップグレードする **前** に、 rector を適用することが重要です。 :
 
-    bin/cake upgrade rector --rules phpunit80 <path/to/app/tests>
-    bin/cake upgrade rector --rules cakephp40 <path/to/app/src>
+``` text
+bin/cake upgrade rector --rules phpunit80 <path/to/app/tests>
+bin/cake upgrade rector --rules cakephp40 <path/to/app/src>
+```
 
 アップグレードツールを使用して、CakePHPのマイナーバージョンごとに新しいrectorルールを
 適用することもできます。:
 
-    # Run the rector rules for the 4.0 -> 4.1 upgrade.
-    bin/cake upgrade rector --rules cakephp41 <path/to/app/src>
+``` text
+# Run the rector rules for the 4.0 -> 4.1 upgrade.
+bin/cake upgrade rector --rules cakephp41 <path/to/app/src>
+```
 
 ## CakePHP の依存関係をアップデートする
 

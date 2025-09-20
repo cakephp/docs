@@ -149,7 +149,7 @@ SSL 証明書の検証は、 2.3 で追加されました。
 HttpSocket で使用する独自のレスポンスクラスを作成することができます。以下の内容で
 `app/Lib/Network/Http/YourResponse.php` というファイルを作ることができました。 :
 
-``` css
+``` php
 App::uses('HttpResponse', 'Network/Http');
 
 class YourResponse extends HttpResponse {

@@ -29,9 +29,11 @@ features that all applications are likely to need. The built-in filters are:
   plugin's webroot folder or the corresponding one for a Theme. It will serve the
   file accordingly if found, stopping the rest of the dispatching cycle:
 
-      // Use options to set cacheTime for your static assets
-      // If not set, this defaults to +1 hour
-      DispatcherFactory::add('Asset', ['cacheTime' => '+24 hours']);
+  ``` text
+  // Use options to set cacheTime for your static assets
+  // If not set, this defaults to +1 hour
+  DispatcherFactory::add('Asset', ['cacheTime' => '+24 hours']);
+  ```
 
 - `RoutingFilter` applies application routing rules to the request URL.
   Populates `$request->getParam()` with the results of routing.

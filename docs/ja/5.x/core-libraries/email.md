@@ -443,22 +443,24 @@ PHP の `mail()` 関数や SMTP サーバーでメッセージを送信したり
 単純に設定データを変更できるのでデプロイが簡単になります。
 トランスポートの設定例は、次のようになります。 :
 
-    // config/app.php の中で
-    'EmailTransport' => [
-        // Mail構成の例
-        'default' => [
-            'className' => 'Mail',
-        ],
-        // SMTP構成の例
-        'gmail' => [
-            'host' => 'smtp.gmail.com',
-            'port' => 587,
-            'username' => 'my@gmail.com',
-            'password' => 'secret',
-            'className' => 'Smtp',
-            'tls' => true
-        ]
+``` text
+// config/app.php の中で
+'EmailTransport' => [
+    // Mail構成の例
+    'default' => [
+        'className' => 'Mail',
     ],
+    // SMTP構成の例
+    'gmail' => [
+        'host' => 'smtp.gmail.com',
+        'port' => 587,
+        'username' => 'my@gmail.com',
+        'password' => 'secret',
+        'className' => 'Smtp',
+        'tls' => true
+    ]
+],
+```
 
 `TransportFactory::setConfig()` を利用して設定することもできます。:
 

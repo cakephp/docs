@@ -474,22 +474,24 @@ is useful for debugging. Configuring transports allows you to keep configuration
 data out of your application code and makes deployment simpler as you can simply
 change the configuration data. An example transport configuration looks like:
 
-    // In config/app.php
-    'EmailTransport' => [
-        // Sample Mail configuration
-        'default' => [
-            'className' => 'Mail',
-        ],
-        // Sample SMTP configuration
-        'gmail' => [
-            'host' => 'smtp.gmail.com',
-            'port' => 587,
-            'username' => 'my@gmail.com',
-            'password' => 'secret',
-            'className' => 'Smtp',
-            'tls' => true
-        ]
+``` text
+// In config/app.php
+'EmailTransport' => [
+    // Sample Mail configuration
+    'default' => [
+        'className' => 'Mail',
     ],
+    // Sample SMTP configuration
+    'gmail' => [
+        'host' => 'smtp.gmail.com',
+        'port' => 587,
+        'username' => 'my@gmail.com',
+        'password' => 'secret',
+        'className' => 'Smtp',
+        'tls' => true
+    ]
+],
+```
 
 Transports can also be configured at runtime using
 `TransportFactory::setConfig()`:

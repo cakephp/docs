@@ -99,10 +99,12 @@ $ Vendor/bin/cake bake project <path to project>
 アプリケーションの移植性を高めるためには、 `webroot/index.php` を修正し、
 `CAKE_CORE_INCLUDE_PATH` を相対パスに変更しましょう。 :
 
-    define(
-        'CAKE_CORE_INCLUDE_PATH',
-        ROOT . DS . APP_DIR . DS . 'Vendor' . DS . 'cakephp' . DS . 'cakephp' . DS . 'lib'
-    );
+``` text
+define(
+    'CAKE_CORE_INCLUDE_PATH',
+    ROOT . DS . APP_DIR . DS . 'Vendor' . DS . 'cakephp' . DS . 'cakephp' . DS . 'lib'
+);
+```
 
 > [!NOTE]
 > もし、あなたのアプリケーションのためにユニットテストを作成する予定があるなら、
@@ -112,13 +114,15 @@ Composer で他のライブラリをインストールしている場合は、
 オートローダーを設定して composer のオートローダーで起こる問題を回避してください。
 `Config/bootstrap.php` ファイルに次の行を追加します。 :
 
-    // Composer の autoload を読み込み
-    require APP . 'Vendor/autoload.php';
+``` text
+// Composer の autoload を読み込み
+require APP . 'Vendor/autoload.php';
 
-    // CakePHP のオートローダーをいったん削除し、Composer より先に評価されるように先頭に追加する
-    // http://goo.gl/kKVJO7 を参照
-    spl_autoload_unregister(array('App', 'load'));
-    spl_autoload_register(array('App', 'load'), true, true);
+// CakePHP のオートローダーをいったん削除し、Composer より先に評価されるように先頭に追加する
+// http://goo.gl/kKVJO7 を参照
+spl_autoload_unregister(array('App', 'load'));
+spl_autoload_register(array('App', 'load'), true, true);
+```
 
 これで、Composer でインストールした CakePHP が機能する CakePHP アプリケーションができました。
 ソースコードの残りの部分と composer.json と composer.lock ファイルを保存しておいてください。
@@ -159,19 +163,21 @@ CakePHP を次のような条件で動作させたいとします:
 
 このようなセットアップの場合には、 webroot/index.php ファイル（つまり、この例では /var/www/mysite/index.php）が次のようになるよう、編集します。 :
 
-    // /app/webroot/index.php (一部分。コメントは取り除いてあります。)
+``` text
+// /app/webroot/index.php (一部分。コメントは取り除いてあります。)
 
-    if (!defined('ROOT')) {
-        define('ROOT', DS . 'home' . DS . 'me');
-    }
+if (!defined('ROOT')) {
+    define('ROOT', DS . 'home' . DS . 'me');
+}
 
-    if (!defined('APP_DIR')) {
-        define ('APP_DIR', 'myapp');
-    }
+if (!defined('APP_DIR')) {
+    define ('APP_DIR', 'myapp');
+}
 
-    if (!defined('CAKE_CORE_INCLUDE_PATH')) {
-        define('CAKE_CORE_INCLUDE_PATH', DS . 'usr' . DS . 'lib');
-    }
+if (!defined('CAKE_CORE_INCLUDE_PATH')) {
+    define('CAKE_CORE_INCLUDE_PATH', DS . 'usr' . DS . 'lib');
+}
+```
 
 ファイルパスの区切り文字には、スラッシュではなく `DS` 定数を使うのがオススメです。
 こうしておくと、間違った区切り文字による、ファイルが無いというエラーを防ぐことができ、コードをさまざまなプラットフォームで動くようにすることができます。

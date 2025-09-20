@@ -20,21 +20,23 @@ Keep in mind that `$type` is case-sensitive. Using an upper case character
 and has the following possible keys by default, all of which are
 optional:
 
-    array(
-        'conditions' => array('Model.field' => $thisValue), // array of conditions
-        'recursive' => 1, // int
-        // array of field names
-        'fields' => array('Model.field1', 'DISTINCT Model.field2'),
-        // string or array defining order
-        'order' => array('Model.created', 'Model.field3 DESC'),
-        'group' => array('Model.field'), // fields to GROUP BY
-        'limit' => n, // int
-        'page' => n, // int
-        'offset' => n, // int
-        'callbacks' => true, // other possible values are false, 'before', 'after'
-        'having' => array('COUNT(Model.field) >' => 1), // array of HAVING conditions
-        'lock' => true, // Enable FOR UPDATE locking
-    )
+``` text
+array(
+    'conditions' => array('Model.field' => $thisValue), // array of conditions
+    'recursive' => 1, // int
+    // array of field names
+    'fields' => array('Model.field1', 'DISTINCT Model.field2'),
+    // string or array defining order
+    'order' => array('Model.created', 'Model.field3 DESC'),
+    'group' => array('Model.field'), // fields to GROUP BY
+    'limit' => n, // int
+    'page' => n, // int
+    'offset' => n, // int
+    'callbacks' => true, // other possible values are false, 'before', 'after'
+    'having' => array('COUNT(Model.field) >' => 1), // array of HAVING conditions
+    'lock' => true, // Enable FOR UPDATE locking
+)
+```
 
 It's also possible to add and use other parameters. Some types of `find()`
 and behaviors make use of this ability, and your own model methods can, too.
@@ -71,24 +73,26 @@ In the first example, no parameters at all are passed to find, so
 no conditions or sort order will be used. The format
 returned from `find('first')` call is of the form:
 
-    Array
-    (
-        [ModelName] => Array
-            (
-                [id] => 83
-                [field1] => value1
-                [field2] => value2
-                [field3] => value3
-            )
+``` text
+Array
+(
+    [ModelName] => Array
+        (
+            [id] => 83
+            [field1] => value1
+            [field2] => value2
+            [field3] => value3
+        )
 
-        [AssociatedModelName] => Array
-            (
-                [id] => 1
-                [field1] => value1
-                [field2] => value2
-                [field3] => value3
-            )
-    )
+    [AssociatedModelName] => Array
+        (
+            [id] => 1
+            [field1] => value1
+            [field2] => value2
+            [field3] => value3
+        )
+)
+```
 
 <a id="model-find-count"></a>
 
@@ -150,28 +154,30 @@ public function some_function() {
 The results of a call to `find('all')` will be of the following
 form:
 
-    Array
-    (
-        [0] => Array
-            (
-                [ModelName] => Array
-                    (
-                        [id] => 83
-                        [field1] => value1
-                        [field2] => value2
-                        [field3] => value3
-                    )
+``` text
+Array
+(
+    [0] => Array
+        (
+            [ModelName] => Array
+                (
+                    [id] => 83
+                    [field1] => value1
+                    [field2] => value2
+                    [field3] => value3
+                )
 
-                [AssociatedModelName] => Array
-                    (
-                        [id] => 1
-                        [field1] => value1
-                        [field2] => value2
-                        [field3] => value3
-                    )
+            [AssociatedModelName] => Array
+                (
+                    [id] => 1
+                    [field1] => value1
+                    [field2] => value2
+                    [field3] => value3
+                )
 
-            )
-    )
+        )
+)
+```
 
 <a id="model-find-list"></a>
 
@@ -206,16 +212,18 @@ public function some_function() {
 The results of a call to `find('list')` will be in the following
 form:
 
-    Array
-    (
-        //[id] => 'displayValue',
-        [1] => 'displayValue1',
-        [2] => 'displayValue2',
-        [4] => 'displayValue4',
-        [5] => 'displayValue5',
-        [6] => 'displayValue6',
-        [3] => 'displayValue3',
-    )
+``` text
+Array
+(
+    //[id] => 'displayValue',
+    [1] => 'displayValue1',
+    [2] => 'displayValue2',
+    [4] => 'displayValue4',
+    [5] => 'displayValue5',
+    [6] => 'displayValue6',
+    [3] => 'displayValue3',
+)
+```
 
 When calling `find('list')`, the `fields` passed are used to
 determine what should be used as the array key and value, and
@@ -311,56 +319,58 @@ In the above code example, `$allCategories` will contain a nested
 array representing the whole category structure. The results of a
 call to `find('threaded')` will be of the following form:
 
-    Array
+``` text
+Array
+(
+    [0] => Array
     (
-        [0] => Array
+        [ModelName] => Array
         (
-            [ModelName] => Array
-            (
-                [id] => 83
-                [parent_id] => null
-                [field1] => value1
-                [field2] => value2
-                [field3] => value3
-            )
+            [id] => 83
+            [parent_id] => null
+            [field1] => value1
+            [field2] => value2
+            [field3] => value3
+        )
 
-            [AssociatedModelName] => Array
-            (
-                [id] => 1
-                [field1] => value1
-                [field2] => value2
-                [field3] => value3
-            )
+        [AssociatedModelName] => Array
+        (
+            [id] => 1
+            [field1] => value1
+            [field2] => value2
+            [field3] => value3
+        )
 
-            [children] => Array
+        [children] => Array
+        (
+            [0] => Array
             (
-                [0] => Array
+                [ModelName] => Array
                 (
-                    [ModelName] => Array
-                    (
-                        [id] => 42
-                        [parent_id] => 83
-                        [field1] => value1
-                        [field2] => value2
-                        [field3] => value3
-                    )
-
-                    [AssociatedModelName] => Array
-                    (
-                        [id] => 2
-                        [field1] => value1
-                        [field2] => value2
-                        [field3] => value3
-                    )
-
-                    [children] => Array
-                    (
-                    )
+                    [id] => 42
+                    [parent_id] => 83
+                    [field1] => value1
+                    [field2] => value2
+                    [field3] => value3
                 )
-                ...
+
+                [AssociatedModelName] => Array
+                (
+                    [id] => 2
+                    [field1] => value1
+                    [field2] => value2
+                    [field3] => value3
+                )
+
+                [children] => Array
+                (
+                )
             )
+            ...
         )
     )
+)
+```
 
 The order in which results appear can be changed, as it is influenced by the
 order of processing. For example, if `'order' => 'name ASC'` is
@@ -406,43 +416,45 @@ allowed as with any other find. (For example: If your model acts as
 containable, then you can specify 'contain' in `$params`.) The
 result returned from a `find('neighbors')` call is in the form:
 
-    Array
+``` text
+Array
+(
+    [prev] => Array
     (
-        [prev] => Array
+        [ModelName] => Array
         (
-            [ModelName] => Array
-            (
-                [id] => 2
-                [field1] => value1
-                [field2] => value2
-                ...
-            )
-            [AssociatedModelName] => Array
-            (
-                [id] => 151
-                [field1] => value1
-                [field2] => value2
-                ...
-            )
+            [id] => 2
+            [field1] => value1
+            [field2] => value2
+            ...
         )
-        [next] => Array
+        [AssociatedModelName] => Array
         (
-            [ModelName] => Array
-            (
-                [id] => 4
-                [field1] => value1
-                [field2] => value2
-                ...
-            )
-            [AssociatedModelName] => Array
-            (
-                [id] => 122
-                [field1] => value1
-                [field2] => value2
-                ...
-            )
+            [id] => 151
+            [field1] => value1
+            [field2] => value2
+            ...
         )
     )
+    [next] => Array
+    (
+        [ModelName] => Array
+        (
+            [id] => 4
+            [field1] => value1
+            [field2] => value2
+            ...
+        )
+        [AssociatedModelName] => Array
+        (
+            [id] => 122
+            [field1] => value1
+            [field2] => value2
+            ...
+        )
+    )
+)
+```
 
 > [!NOTE]
 > Note how the result always contains only two root elements: prev
@@ -721,26 +733,28 @@ $this->Picture->query("SELECT * FROM pictures LIMIT 2;");
 
 might return:
 
-    Array
+``` text
+Array
+(
+    [0] => Array
     (
-        [0] => Array
+        [pictures] => Array
         (
-            [pictures] => Array
-            (
-                [id] => 1304
-                [user_id] => 759
-            )
-        )
-
-        [1] => Array
-        (
-            [pictures] => Array
-            (
-                [id] => 1305
-                [user_id] => 759
-            )
+            [id] => 1304
+            [user_id] => 759
         )
     )
+
+    [1] => Array
+    (
+        [pictures] => Array
+        (
+            [id] => 1305
+            [user_id] => 759
+        )
+    )
+)
+```
 
 To use the model name as the array key, and get a result consistent
 with that returned by the Find methods, the query can be
@@ -752,26 +766,28 @@ $this->Picture->query("SELECT * FROM pictures AS Picture LIMIT 2;");
 
 which returns:
 
-    Array
+``` text
+Array
+(
+    [0] => Array
     (
-        [0] => Array
+        [Picture] => Array
         (
-            [Picture] => Array
-            (
-                [id] => 1304
-                [user_id] => 759
-            )
-        )
-
-        [1] => Array
-        (
-            [Picture] => Array
-            (
-                [id] => 1305
-                [user_id] => 759
-            )
+            [id] => 1304
+            [user_id] => 759
         )
     )
+
+    [1] => Array
+    (
+        [Picture] => Array
+        (
+            [id] => 1305
+            [user_id] => 759
+        )
+    )
+)
+```
 
 > [!NOTE]
 > This syntax and the corresponding array structure is valid for
@@ -866,7 +882,9 @@ What about other types of matches? These are equally simple. Let's
 say we wanted to find all the posts where the title is not "This is
 a post":
 
-    array("Post.title !=" => "This is a post")
+``` text
+array("Post.title !=" => "This is a post")
+```
 
 Notice the `'!='` that follows the field name. CakePHP can parse out
 any valid SQL comparison operator, including match expressions
@@ -875,30 +893,38 @@ field name and the operator. The one exception here is `IN`
 (...)-style matches. Let's say you wanted to find posts where the
 title was in a given set of values:
 
-    array(
-        "Post.title" => array("First post", "Second post", "Third post")
-    )
+``` text
+array(
+    "Post.title" => array("First post", "Second post", "Third post")
+)
+```
 
 To do a `NOT IN` (...) match to find posts where the title is not in
 the given set of values, do the following:
 
-    array(
-        "NOT" => array(
-            "Post.title" => array("First post", "Second post", "Third post")
-        )
+``` text
+array(
+    "NOT" => array(
+        "Post.title" => array("First post", "Second post", "Third post")
     )
+)
+```
 
 Adding additional filters to the conditions is as simple as adding
 additional key/value pairs to the array:
 
-    array (
-        "Post.title" => array("First post", "Second post", "Third post"),
-        "Post.created >" => date('Y-m-d', strtotime("-2 weeks"))
-    )
+``` text
+array (
+    "Post.title" => array("First post", "Second post", "Third post"),
+    "Post.created >" => date('Y-m-d', strtotime("-2 weeks"))
+)
+```
 
 You can also create finds that compare two fields in the database:
 
-    array("Post.created = Post.modified")
+``` text
+array("Post.created = Post.modified")
+```
 
 The above example will return posts where the created date is
 equal to the modified date (that is, it will return posts that have never
@@ -908,10 +934,12 @@ Remember that if you find yourself unable to form a `WHERE` clause in
 this method (for example, boolean operations), you can always specify it as
 a string like:
 
-    array(
-        'Model.field & 8 = 1',
-        // other conditions as usual
-    )
+``` text
+array(
+    'Model.field & 8 = 1',
+    // other conditions as usual
+)
+```
 
 By default, CakePHP joins multiple conditions with boolean `AND`.
 This means the snippet below would only match posts that have
@@ -919,10 +947,12 @@ been created in the past two weeks, and have a title that matches
 one in the given set. However, we could just as easily find posts
 that match either condition:
 
-    array("OR" => array(
-        "Post.title" => array("First post", "Second post", "Third post"),
-        "Post.created >" => date('Y-m-d', strtotime("-2 weeks"))
-    ))
+``` text
+array("OR" => array(
+    "Post.title" => array("First post", "Second post", "Third post"),
+    "Post.created >" => date('Y-m-d', strtotime("-2 weeks"))
+))
+```
 
 CakePHP accepts all valid SQL boolean operations, including `AND`, `OR`,
 `NOT`, `XOR`, etc., and they can be upper or lower case, whichever you
@@ -932,22 +962,26 @@ say you wanted to find all the posts that contained a certain
 keyword ("magic") or were created in the past two weeks, but you
 wanted to restrict your search to posts written by Bob:
 
-    array(
-        "Author.name" => "Bob",
-        "OR" => array(
-            "Post.title LIKE" => "%magic%",
-            "Post.created >" => date('Y-m-d', strtotime("-2 weeks"))
-        )
+``` text
+array(
+    "Author.name" => "Bob",
+    "OR" => array(
+        "Post.title LIKE" => "%magic%",
+        "Post.created >" => date('Y-m-d', strtotime("-2 weeks"))
     )
+)
+```
 
 If you need to set multiple conditions on the same field, like when
 you want to do a `LIKE` search with multiple terms, you can do so by
 using conditions similar to:
 
-    array('OR' => array(
-        array('Post.title LIKE' => '%one%'),
-        array('Post.title LIKE' => '%two%')
-    ))
+``` text
+array('OR' => array(
+    array('Post.title LIKE' => '%one%'),
+    array('Post.title LIKE' => '%two%')
+))
+```
 
 The wildcard operators `ILIKE` and `RLIKE` (`RLIKE` since version 2.6) are
 also available.
@@ -955,14 +989,18 @@ also available.
 CakePHP can also check for null fields. In this example, the query
 will return records where the post title is not null:
 
-    array("NOT" => array(
-            "Post.title" => null
-        )
+``` text
+array("NOT" => array(
+        "Post.title" => null
     )
+)
+```
 
 To handle `BETWEEN` queries, you can use the following:
 
-    array('Post.read_count BETWEEN ? AND ?' => array(1, 10))
+``` text
+array('Post.read_count BETWEEN ? AND ?' => array(1, 10))
+```
 
 > [!NOTE]
 > CakePHP will quote the numeric values depending on the field
@@ -970,59 +1008,67 @@ To handle `BETWEEN` queries, you can use the following:
 
 How about `GROUP BY`?:
 
-    array(
-        'fields' => array(
-            'Product.type',
-            'MIN(Product.price) as price'
-        ),
-        'group' => 'Product.type'
-    )
+``` text
+array(
+    'fields' => array(
+        'Product.type',
+        'MIN(Product.price) as price'
+    ),
+    'group' => 'Product.type'
+)
+```
 
 The data returned for this would be in the following format:
 
-    Array
+``` text
+Array
+(
+    [0] => Array
     (
+        [Product] => Array
+        (
+            [type] => Clothing
+        )
         [0] => Array
         (
-            [Product] => Array
-            (
-                [type] => Clothing
-            )
-            [0] => Array
-            (
-                [price] => 32
-            )
+            [price] => 32
         )
-        [1] => Array
-        ...
+    )
+    [1] => Array
+    ...
+```
 
 A quick example of doing a `DISTINCT` query. You can use other
 operators, such as `MIN()`, `MAX()`, etc., in a similar fashion:
 
-    array(
-        'fields' => array('DISTINCT (User.name) AS my_column_name'),
-        'order' =>array('User.id DESC')
-    )
+``` text
+array(
+    'fields' => array('DISTINCT (User.name) AS my_column_name'),
+    'order' =>array('User.id DESC')
+)
+```
 
 You can create very complex conditions by nesting multiple
 condition arrays:
 
-    array(
-        'OR' => array(
-            array('Company.name' => 'Future Holdings'),
-            array('Company.city' => 'CA')
-        ),
-        'AND' => array(
-            array(
-                'OR' => array(
-                    array('Company.status' => 'active'),
-                    'NOT' => array(
-                        array('Company.status' => array('inactive', 'suspended'))
-                    )
+``` text
+array(
+    'OR' => array(
+        array('Company.name' => 'Future Holdings'),
+        array('Company.city' => 'CA')
+    ),
+    'AND' => array(
+        array(
+            'OR' => array(
+                array('Company.status' => 'active'),
+                'NOT' => array(
+                    array('Company.status' => array('inactive', 'suspended'))
                 )
             )
         )
     )
+)
+```
 
 which produces the following SQL:
 

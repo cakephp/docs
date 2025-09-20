@@ -136,20 +136,22 @@ $connection->delete('articles', ['id' => 10]);
 サンプルとなる接続情報が **config/app.default.php** にあります。
 サンプルの接続設定は、次のようになります。 :
 
-    'Datasources' => [
-        'default' => [
-            'className' => 'Cake\Database\Connection',
-            'driver' => 'Cake\Database\Driver\Mysql',
-            'persistent' => false,
-            'host' => 'localhost',
-            'username' => 'my_app',
-            'password' => 'secret',
-            'database' => 'my_app',
-            'encoding' => 'utf8',
-            'timezone' => 'UTC',
-            'cacheMetadata' => true,
-        ]
-    ],
+``` php
+'Datasources' => [
+    'default' => [
+        'className' => 'Cake\Database\Connection',
+        'driver' => 'Cake\Database\Driver\Mysql',
+        'persistent' => false,
+        'host' => 'localhost',
+        'username' => 'my_app',
+        'password' => 'secret',
+        'database' => 'my_app',
+        'encoding' => 'utf8',
+        'timezone' => 'UTC',
+        'cacheMetadata' => true,
+    ]
+],
+```
 
 上記は指定されたパラメーターを持つ 'default' 接続を生成します。
 あなたは設定ファイルに必要な数だけ接続を定義することができます。
@@ -951,14 +953,16 @@ CakePHP の ORM は、あなたのアプリケーションのスキーマ、イ�
 あなたはデータベース設定の `cacheMetatdata` オプションを使って
 カスタムキャッシュ設定を定義することができます。 :
 
-    'Datasources' => [
-        'default' => [
-            // その他のキーはここに書く
+``` text
+'Datasources' => [
+    'default' => [
+        // その他のキーはここに書く
 
-            // メタデータのキャッシュ設定に'orm_metadata'を使用
-            'cacheMetadata' => 'orm_metadata',
-        ]
-    ],
+        // メタデータのキャッシュ設定に'orm_metadata'を使用
+        'cacheMetadata' => 'orm_metadata',
+    ]
+],
+```
 
 実行時に `cacheMetadata()` メソッドを使ってメタデータのキャッシュを
 設定することもできます。 :

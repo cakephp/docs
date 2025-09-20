@@ -23,11 +23,13 @@ CakePHP の開発者は以下のコーディング規約を使います。
 
 従って、インデントはこのようになります。 :
 
-    // 基本レベル
-        // レベル1
-            // レベル2
-        // レベル1
-    // 基本レベル
+``` text
+// 基本レベル
+    // レベル1
+        // レベル2
+    // レベル1
+// 基本レベル
+```
 
 または、 :
 
@@ -82,13 +84,15 @@ $matches = array_intersect_key(
 制御構造は例えば "`if`"、"`for`"、"`foreach`"、"`while`"、"`switch`"などです。
 下記に、 "`if`" の例を示します。 :
 
-    if ((expr_1) || (expr_2)) {
-        // action_1;
-    } elseif (!(expr_3) && (expr_4)) {
-        // action_2;
-    } else {
-        // default_action;
-    }
+``` text
+if ((expr_1) || (expr_2)) {
+    // action_1;
+} elseif (!(expr_3) && (expr_4)) {
+    // action_2;
+} else {
+    // default_action;
+}
+```
 
 - 制御構造では1個の空白が最初の丸括弧の前に、1個の空白が最後の丸括弧と開き中括弧の間にある必要があります。
 - 制御構造では、必要でなくとも常に中括弧を使います。
@@ -235,28 +239,32 @@ public function connection($dns, $persistent = false) {
 オブジェクトや配列を期待する引数はタイプヒンティングを指定することができます。
 しかしながらタイプヒンティングはコストフリーではないので、public メソッドにだけ指定します。 :
 
-    /**
-     * メソッドの説明。
-     *
-     * @param Model $Model 使用するモデル。
-     * @param array $array 配列。
-     * @param boolean $boolean 真偽値。
-     */
-    public function foo(Model $Model, array $array, $boolean) {
-    }
+``` php
+/**
+ * メソッドの説明。
+ *
+ * @param Model $Model 使用するモデル。
+ * @param array $array 配列。
+ * @param boolean $boolean 真偽値。
+ */
+public function foo(Model $Model, array $array, $boolean) {
+}
+```
 
 ここで `$Model` は `Model` のインスタンスで、また `$array` は `array` でなければなりません。
 
 ちなみに、もし `$array` が `ArrayObject` のインスタンスでも受け付けるようにしたい場合は、
 `array` のタイプヒントを指定してプリミティブ型だけを受け入れるようにするべきではありません。:
 
-    /**
-     * メソッドの説明。
-     *
-     * @param array|ArrayObject $array 配列。
-     */
-    public function foo($array) {
-    }
+``` php
+/**
+ * メソッドの説明。
+ *
+ * @param array|ArrayObject $array 配列。
+ */
+public function foo($array) {
+}
+```
 
 ## メソッドチェーン
 
@@ -307,19 +315,21 @@ $email->from('foo@example.com')
 
 クラスのドキュメントブロックは以下の通り:
 
-    /**
-     * Short description of the class.
-     *
-     * Long description of class.
-     * Can use multiple lines.
-     *
-     * @deprecated 3.0.0 Deprecated in 2.6.0. Will be removed in 3.0.0. Use Bar instead.
-     * @see Bar
-     * @link https://book.cakephp.org/2.0/en/foo.html
-     */
-    class Foo {
+``` php
+/**
+ * Short description of the class.
+ *
+ * Long description of class.
+ * Can use multiple lines.
+ *
+ * @deprecated 3.0.0 Deprecated in 2.6.0. Will be removed in 3.0.0. Use Bar instead.
+ * @see Bar
+ * @link https://book.cakephp.org/2.0/en/foo.html
+ */
+class Foo {
 
-    }
+}
+```
 
 クラスのドキュメントブロックは、以下の [phpDocumentor](https://phpdoc.org) タグを
 含めることができます。
@@ -443,26 +453,30 @@ callable
 
 チェーンのように自分自身のオブジェクトを返すような場合は代わりに `$this` を使ってください。 :
 
-    /**
-     * Foo function.
-     *
-     * @return $this
-     */
-    public function foo() {
-        return $this;
-    }
+``` php
+/**
+ * Foo function.
+ *
+ * @return $this
+ */
+public function foo() {
+    return $this;
+}
+```
 
 ## ファイルの読み込み
 
 `include` 、 `require` 、 `include_once` そして `require_once` は括弧を付けません。 :
 
-    // 間違い = 括弧あり
-    require_once('ClassFileName.php');
-    require_once ($class);
+``` text
+// 間違い = 括弧あり
+require_once('ClassFileName.php');
+require_once ($class);
 
-    // よろしい = 括弧なし
-    require_once 'ClassFileName.php';
-    require_once $class;
+// よろしい = 括弧なし
+require_once 'ClassFileName.php';
+require_once $class;
+```
 
 クラスまたはライブラリを伴うファイルを読み込む場合、
 [require_once](https://www.php.net/require_once)
@@ -478,7 +492,7 @@ callable
 
 全ての関数はキャメルバックで書いてください。 :
 
-``` php
+``` javascript
 function longFunctionName() {
 }
 ```
@@ -588,9 +602,13 @@ object にキャスト。
 
 定数は大文字で定義する必要があります。 :
 
-    define('CONSTANT', 1);
+``` text
+define('CONSTANT', 1);
+```
 
 もし定数の名前が複数の単語でできている場合は、アンダースコア文字によって分割する必要があります。
 例:
 
-    define('LONG_NAMED_CONSTANT', 2);
+``` text
+define('LONG_NAMED_CONSTANT', 2);
+```

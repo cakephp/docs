@@ -9,9 +9,11 @@ First, check that your application is running on latest CakePHP 3.x version.
 
 Once your application is running on latest CakePHP 3.x, enable deprecation warnings in **config/app.php**:
 
-    'Error' => [
-        'errorLevel' => E_ALL,
-    ]
+``` text
+'Error' => [
+    'errorLevel' => E_ALL,
+]
+```
 
 Now that you can see all the warnings, make sure these are fixed before proceeding with the upgrade.
 
@@ -64,14 +66,18 @@ Next use the `rector` command to automatically fix many deprecated CakePHP and
 PHPUnit method calls. It is important to apply rector **before** you upgrade
 your dependencies:
 
-    bin/cake upgrade rector --rules phpunit80 <path/to/app/tests>
-    bin/cake upgrade rector --rules cakephp40 <path/to/app/src>
+``` text
+bin/cake upgrade rector --rules phpunit80 <path/to/app/tests>
+bin/cake upgrade rector --rules cakephp40 <path/to/app/src>
+```
 
 You can also use the upgrade tool to apply new rector rules for each minor
 version of CakePHP:
 
-    # Run the rector rules for the 4.0 -> 4.1 upgrade.
-    bin/cake upgrade rector --rules cakephp41 <path/to/app/src>
+``` text
+# Run the rector rules for the 4.0 -> 4.1 upgrade.
+bin/cake upgrade rector --rules cakephp41 <path/to/app/src>
+```
 
 ## Update CakePHP Dependency
 

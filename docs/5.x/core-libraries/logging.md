@@ -68,7 +68,7 @@ It is also possible to create loggers by providing a closure. This is useful
 when you need full control over how the logger object is built. The closure
 has to return the constructed logger instance. For example:
 
-``` css
+``` php
 Log::setConfig('special', function () {
     return new \Cake\Log\Engine\FileLog(['path' => LOGS, 'file' => 'log']);
 });
@@ -77,7 +77,7 @@ Log::setConfig('special', function () {
 Configuration options can also be provided as a `DSN` string. This is
 useful when working with environment variables or `PaaS` providers:
 
-``` css
+``` php
 Log::setConfig('error', [
     'url' => 'file:///full/path/to/logs/?levels[]=warning&levels[]=error&file=error',
 ]);
@@ -101,7 +101,7 @@ information.
 Writing to the log files can be done in two different ways. The first
 is to use the static `Cake\Log\Log::write()` method:
 
-``` css
+``` php
 Log::write('debug', 'Something did not work');
 ```
 
@@ -125,14 +125,18 @@ If you need to log dynamically defined data, you can use placeholders in your
 log messages and provide an array of key/value pairs in the `$context`
 parameter:
 
-    // Will log `Could not process for userid=1`
-    Log::write('error', 'Could not process for userid={user}', ['user' => $user->id]);
+``` php
+// Will log `Could not process for userid=1`
+Log::write('error', 'Could not process for userid={user}', ['user' => $user->id]);
+```
 
 Placeholders that do not have keys defined will not be replaced. If you need to
 use a literal braced word, you must escape the placeholder:
 
-    // Will log `No {replace}`
-    Log::write('error', 'No \\{replace}', ['replace' => 'no']);
+``` php
+// Will log `No {replace}`
+Log::write('error', 'No \\{replace}', ['replace' => 'no']);
+```
 
 If you include objects in your logging placeholders those objects must implement
 one of the following methods:
@@ -210,7 +214,7 @@ Log::warning('this gets written to both shops.log and payments.log', ['scope' =>
 Scopes can also be passed as a single string or a numerically indexed array.
 Note that using this form will limit the ability to pass more data as context:
 
-``` css
+``` php
 Log::warning('This is a warning', ['orders']);
 Log::warning('This is a warning', 'payments');
 ```
@@ -244,7 +248,7 @@ You can configure additional/alternate FileLog locations when configuring
 a logger. FileLog accepts a `path` which allows for
 custom paths to be used:
 
-``` css
+``` php
 Log::setConfig('custom_path', [
     'className' => 'File',
     'path' => '/path/to/custom/place/'
@@ -281,7 +285,7 @@ to specify `Syslog` as the engine to be used for logging. The following
 configuration snippet will replace the default logger with syslog, this should
 be done in the **config/bootstrap.php** file:
 
-``` css
+``` php
 Log::setConfig('default', [
     'engine' => 'Syslog'
 ]);
@@ -314,19 +318,21 @@ plugins. If for example you had a database logger called
 engine you should use `Cake\Log\Log::setConfig()`. For example
 configuring our DatabaseLog would look like:
 
-    // For src/Log
-    Log::setConfig('otherFile', [
-        'className' => 'Database',
-        'model' => 'LogEntry',
-        // ...
-    ]);
+``` php
+// For src/Log
+Log::setConfig('otherFile', [
+    'className' => 'Database',
+    'model' => 'LogEntry',
+    // ...
+]);
 
-    // For plugin called LoggingPack
-    Log::setConfig('otherFile', [
-        'className' => 'LoggingPack.Database',
-        'model' => 'LogEntry',
-        // ...
-    ]);
+// For plugin called LoggingPack
+Log::setConfig('otherFile', [
+    'className' => 'LoggingPack.Database',
+    'model' => 'LogEntry',
+    // ...
+]);
+```
 
 When configuring a log engine the `className` parameter is used to
 locate and load the log handler. All of the other configuration

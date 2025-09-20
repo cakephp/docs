@@ -89,7 +89,7 @@ php composer.phar dumpautoload
 If you are unable to use Composer for any reason, you can also configure
 autoloading with `Plugin`:
 
-``` css
+``` php
 Plugin::load('ContactManager', ['autoload' => true]);
 ```
 
@@ -226,23 +226,27 @@ $path = $plugin->getClassPath();
 Prior to 3.6.0, you will need to enable the `bootstrap` and `routes` hooks.
 Old style plugins do not support `middleware` and `console` hooks:
 
-    // In config/bootstrap.php,
-    // or in Application::bootstrap()
+``` php
+// In config/bootstrap.php,
+// or in Application::bootstrap()
 
-    // Using loadAll()
-    Plugin::loadAll([
-        'Blog' => ['routes' => true],
-        'ContactManager' => ['bootstrap' => true],
-        'WebmasterTools' => ['bootstrap' => true, 'routes' => true],
-    ]);
+// Using loadAll()
+Plugin::loadAll([
+    'Blog' => ['routes' => true],
+    'ContactManager' => ['bootstrap' => true],
+    'WebmasterTools' => ['bootstrap' => true, 'routes' => true],
+]);
+```
 
 Or you can load the plugins individually:
 
-    // Loading just the blog and include routes
-    Plugin::load('Blog', ['routes' => true]);
+``` php
+// Loading just the blog and include routes
+Plugin::load('Blog', ['routes' => true]);
 
-    // Include bootstrap configuration/initializer file.
-    Plugin::load('ContactManager', ['bootstrap' => true]);
+// Include bootstrap configuration/initializer file.
+Plugin::load('ContactManager', ['bootstrap' => true]);
+```
 
 With either approach you no longer need to manually `include()` or
 `require()` a plugin's configuration or routes file -- it happens
@@ -254,7 +258,7 @@ apply to every plugin that doesn't have a more specific configuration.
 The following example will load the bootstrap file from all plugins, and
 additionally the routes from the Blog plugin:
 
-``` css
+``` php
 Plugin::loadAll([
     ['bootstrap' => true],
     'Blog' => ['routes' => true]
@@ -265,7 +269,7 @@ Note that all files specified should actually exist in the configured
 plugin(s) or PHP will give warnings for each file it cannot load. You can avoid
 potential warnings by using the `ignoreMissing` option:
 
-``` css
+``` php
 Plugin::loadAll([
     ['ignoreMissing' => true, 'bootstrap' => true],
     'Blog' => ['routes' => true]
@@ -276,14 +280,14 @@ When loading plugins, the plugin name used should match the namespace. For
 example, if you have a plugin with top level namespace `Users` you would load
 it using:
 
-``` css
+``` php
 Plugin::load('User');
 ```
 
 If you prefer to have your vendor name as top level and have a namespace like
 `AcmeCorp/Users`, then you would load the plugin as:
 
-``` css
+``` php
 Plugin::load('AcmeCorp/Users');
 ```
 
@@ -561,11 +565,13 @@ because we don't have a Contact model defined yet.
 If your application includes the default routing CakePHP provides you will be
 able to access your plugin controllers using URLs like:
 
-    // Access the index route of a plugin controller.
-    /contact-manager/contacts
+``` text
+// Access the index route of a plugin controller.
+/contact-manager/contacts
 
-    // Any action on a plugin controller.
-    /contact-manager/contacts/view/1
+// Any action on a plugin controller.
+/contact-manager/contacts/view/1
+```
 
 If your application defines routing prefixes, CakePHP's default routing will
 also connect routes that use the following pattern:
@@ -670,10 +676,12 @@ right folder inside of the `plugins/[PluginName]/src/Template/` folder. For our
 ContactManager plugin, we'll need a view for our `ContactsController::index()`
 action, so let's include that as well:
 
-    // plugins/ContactManager/src/Template/Contacts/index.ctp:
-    <h1>Contacts</h1>
-    <p>Following is a sortable list of your contacts</p>
-    <!-- A sortable list of contacts would go here....-->
+``` text
+// plugins/ContactManager/src/Template/Contacts/index.ctp:
+<h1>Contacts</h1>
+<p>Following is a sortable list of your contacts</p>
+<!-- A sortable list of contacts would go here....-->
+```
 
 Plugins can provide their own layouts. To add plugin layouts, place your template files inside
 `plugins/[PluginName]/src/Template/Layout`. To use a plugin layout in your controller

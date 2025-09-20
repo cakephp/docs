@@ -125,40 +125,42 @@ class Post extends AppModel {
 このようにセットアップすると、 `$this->Post->find()` の結果は次のようになります。
 :
 
-    Array
-    (
-         [Post] => Array
-             (
-                 [id] => 1
-                 [title] => Beispiel Eintrag
-                 [body] => lorem ipsum...
-                 [locale] => de_de
-             )
+``` text
+Array
+(
+     [Post] => Array
+         (
+             [id] => 1
+             [title] => Beispiel Eintrag
+             [body] => lorem ipsum...
+             [locale] => de_de
+         )
 
-         [titleTranslation] => Array
-             (
-                 [0] => Array
-                     (
-                         [id] => 1
-                         [locale] => en_us
-                         [model] => Post
-                         [foreign_key] => 1
-                         [field] => title
-                         [content] => Example entry
-                     )
+     [titleTranslation] => Array
+         (
+             [0] => Array
+                 (
+                     [id] => 1
+                     [locale] => en_us
+                     [model] => Post
+                     [foreign_key] => 1
+                     [field] => title
+                     [content] => Example entry
+                 )
 
-                 [1] => Array
-                     (
-                         [id] => 2
-                         [locale] => de_de
-                         [model] => Post
-                         [foreign_key] => 1
-                         [field] => title
-                         [content] => Beispiel Eintrag
-                     )
+             [1] => Array
+                 (
+                     [id] => 2
+                     [locale] => de_de
+                     [model] => Post
+                     [foreign_key] => 1
+                     [field] => title
+                     [content] => Beispiel Eintrag
+                 )
 
-             )
-    )
+         )
+)
+```
 
 > [!NOTE]
 > モデルのレコードは「locale」という *バーチャル* フィールドを含みます。
@@ -186,40 +188,42 @@ $this->Post->find('all', array('recursive' => 1));
 
 このようにセットアップすると、find() の結果は次のようになります。 :
 
-    Array
-    (
-         [Post] => Array
-             (
-                 [id] => 1
-                 [title] => Beispiel Eintrag
-                 [body] => lorem ipsum...
-                 [locale] => de_de
-             )
+``` text
+Array
+(
+     [Post] => Array
+         (
+             [id] => 1
+             [title] => Beispiel Eintrag
+             [body] => lorem ipsum...
+             [locale] => de_de
+         )
 
-         [titleTranslation] => Array
-             (
-                 [0] => Array
-                     (
-                         [id] => 1
-                         [locale] => en_us
-                         [model] => Post
-                         [foreign_key] => 1
-                         [field] => title
-                         [content] => Example entry
-                     )
+     [titleTranslation] => Array
+         (
+             [0] => Array
+                 (
+                     [id] => 1
+                     [locale] => en_us
+                     [model] => Post
+                     [foreign_key] => 1
+                     [field] => title
+                     [content] => Example entry
+                 )
 
-                 [1] => Array
-                     (
-                         [id] => 2
-                         [locale] => de_de
-                         [model] => Post
-                         [foreign_key] => 1
-                         [field] => title
-                         [content] => Beispiel Eintrag
-                     )
+             [1] => Array
+                 (
+                     [id] => 2
+                     [locale] => de_de
+                     [model] => Post
+                     [foreign_key] => 1
+                     [field] => title
+                     [content] => Beispiel Eintrag
+                 )
 
-             )
-    )
+         )
+)
+```
 
 ## 別の言語で保存する
 

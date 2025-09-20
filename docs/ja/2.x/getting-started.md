@@ -90,22 +90,24 @@ $ chown -R www-data app/tmp
 作成しておいてください。このページでは、投稿記事を保存するためのテーブルをひとつ作成します。
 次の SQL をデータベースで実行してください。 :
 
-    /* まず、posts テーブルを作成します: */
-    CREATE TABLE posts (
-        id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-        title VARCHAR(50),
-        body TEXT,
-        created DATETIME DEFAULT NULL,
-        modified DATETIME DEFAULT NULL
-    );
+``` text
+/* まず、posts テーブルを作成します: */
+CREATE TABLE posts (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(50),
+    body TEXT,
+    created DATETIME DEFAULT NULL,
+    modified DATETIME DEFAULT NULL
+);
 
-    /* それから、テスト用に記事をいくつか入れておきます: */
-    INSERT INTO posts (title,body,created)
-        VALUES ('タイトル', 'これは、記事の本文です。', NOW());
-    INSERT INTO posts (title,body,created)
-        VALUES ('またタイトル', 'そこに本文が続きます。', NOW());
-    INSERT INTO posts (title,body,created)
-        VALUES ('タイトルの逆襲', 'こりゃ本当にわくわくする！うそ。', NOW());
+/* それから、テスト用に記事をいくつか入れておきます: */
+INSERT INTO posts (title,body,created)
+    VALUES ('タイトル', 'これは、記事の本文です。', NOW());
+INSERT INTO posts (title,body,created)
+    VALUES ('またタイトル', 'そこに本文が続きます。', NOW());
+INSERT INTO posts (title,body,created)
+    VALUES ('タイトルの逆襲', 'こりゃ本当にわくわくする！うそ。', NOW());
+```
 
 テーブル名とフィールド名は適当に選んだわけではありません。CakePHP のデータベース命名規約と
 クラスの命名規約に従っておくと、（どちらも、
@@ -163,19 +165,23 @@ welcome ページを見てください。データベース接続のファイル
 編集し、デフォルトの `Security.salt` の値を変更してください。
 この値は、ランダムで長い文字列にします。そうすることで推測がより困難になります。 :
 
-    /**
-     * A random string used in security hashing methods.
-     */
-    Configure::write('Security.salt', 'pl345e-P45s_7h3*S@l7!');
+``` php
+/**
+ * A random string used in security hashing methods.
+ */
+Configure::write('Security.salt', 'pl345e-P45s_7h3*S@l7!');
+```
 
 サイファシード(*cipher seed*) は暗号化・復号化のための文字列です。
 `/app/Config/core.php` を編集して `Security.cipherSeed` をデフォルト値から
 変更してください。この値は、大きくてランダムな整数でなければなりません:
 
-    /**
-     * A random numeric string (digits only) used to encrypt/decrypt strings.
-     */
-    Configure::write('Security.cipherSeed', '7485712659625147843639846751');
+``` php
+/**
+ * A random numeric string (digits only) used to encrypt/decrypt strings.
+ */
+Configure::write('Security.cipherSeed', '7485712659625147843639846751');
+```
 
 ### mod_rewrite について
 
@@ -287,44 +293,46 @@ CakePHP のビュー (*view*) は、アプリケーションのレイアウト (
 一つ前のセクションの `set()` メソッドによって、ビューから「posts」変数が使えるように
 割り当てたのを覚えていますか。ビューに渡されたデータは次のようなものになっています:
 
-    // print_r($posts) の出力:
+``` text
+// print_r($posts) の出力:
 
-    Array
-    (
-        [0] => Array
-            (
-                [Post] => Array
-                    (
-                        [id] => 1
-                        [title] => タイトル
-                        [body] => これは、記事の本文です。
-                        [created] => 2008-02-13 18:34:55
-                        [modified] =>
-                    )
-            )
-        [1] => Array
-            (
-                [Post] => Array
-                    (
-                        [id] => 2
-                        [title] => またタイトル
-                        [body] => そこに本文が続きます。
-                        [created] => 2008-02-13 18:34:56
-                        [modified] =>
-                    )
-            )
-        [2] => Array
-            (
-                [Post] => Array
-                    (
-                        [id] => 3
-                        [title] => タイトルの逆襲
-                        [body] => こりゃ本当にわくわくする！うそ。
-                        [created] => 2008-02-13 18:34:57
-                        [modified] =>
-                    )
-            )
-    )
+Array
+(
+    [0] => Array
+        (
+            [Post] => Array
+                (
+                    [id] => 1
+                    [title] => タイトル
+                    [body] => これは、記事の本文です。
+                    [created] => 2008-02-13 18:34:55
+                    [modified] =>
+                )
+        )
+    [1] => Array
+        (
+            [Post] => Array
+                (
+                    [id] => 2
+                    [title] => またタイトル
+                    [body] => そこに本文が続きます。
+                    [created] => 2008-02-13 18:34:56
+                    [modified] =>
+                )
+        )
+    [2] => Array
+        (
+            [Post] => Array
+                (
+                    [id] => 3
+                    [title] => タイトルの逆襲
+                    [body] => こりゃ本当にわくわくする！うそ。
+                    [created] => 2008-02-13 18:34:57
+                    [modified] =>
+                )
+        )
+)
+```
 
 CakePHP のビューファイルは、 `/app/View` の中の、コントローラ名に対応するフォルダの中に
 保存されています (この場合は、「Posts」というフォルダを作成します)。
@@ -832,7 +840,7 @@ Router::connect(
 この行は、「/」という URL をデフォルトの CakePHP のホームページに接続します。
 これを、自分のコントローラに接続させるために、次のような行を追加してください:
 
-``` css
+``` php
 Router::connect('/', array('controller' => 'posts', 'action' => 'index'));
 ```
 

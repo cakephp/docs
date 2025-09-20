@@ -120,26 +120,28 @@ $this->Post->find('all', array('contain' => false));
 
 Having done that, you end up with something a lot more concise:
 
-    [0] => Array
-            (
-                [Post] => Array
-                    (
-                        [id] => 1
-                        [title] => First article
-                        [content] => aaa
-                        [created] => 2008-05-18 00:00:00
-                    )
-            )
-    [1] => Array
-            (
-                [Post] => Array
-                    (
-                        [id] => 2
-                        [title] => Second article
-                        [content] => bbb
-                        [created] => 2008-05-19 00:00:00
-                    )
-            )
+``` text
+[0] => Array
+        (
+            [Post] => Array
+                (
+                    [id] => 1
+                    [title] => First article
+                    [content] => aaa
+                    [created] => 2008-05-18 00:00:00
+                )
+        )
+[1] => Array
+        (
+            [Post] => Array
+                (
+                    [id] => 2
+                    [title] => Second article
+                    [content] => bbb
+                    [created] => 2008-05-19 00:00:00
+                )
+        )
+```
 
 This sort of help isn't new: in fact, you can do that without the
 `ContainableBehavior` doing something like this:
@@ -198,31 +200,33 @@ Here, we've told Containable to give us our post information, and
 just the author field of the associated Comment model. The output
 of the find call might look something like this:
 
-    [0] => Array
-            (
-                [Post] => Array
-                    (
-                        [id] => 1
-                        [title] => First article
-                        [content] => aaa
-                        [created] => 2008-05-18 00:00:00
-                    )
-                [Comment] => Array
-                    (
-                        [0] => Array
-                            (
-                                [author] => Daniel
-                                [post_id] => 1
-                            )
-                        [1] => Array
-                            (
-                                [author] => Sam
-                                [post_id] => 1
-                            )
-                    )
-            )
-    [1] => Array
-            (...
+``` text
+[0] => Array
+        (
+            [Post] => Array
+                (
+                    [id] => 1
+                    [title] => First article
+                    [content] => aaa
+                    [created] => 2008-05-18 00:00:00
+                )
+            [Comment] => Array
+                (
+                    [0] => Array
+                        (
+                            [author] => Daniel
+                            [post_id] => 1
+                        )
+                    [1] => Array
+                        (
+                            [author] => Sam
+                            [post_id] => 1
+                        )
+                )
+        )
+[1] => Array
+        (...
+```
 
 As you can see, the Comment arrays only contain the author field
 (plus the post_id which is needed by CakePHP to map the results).
@@ -242,94 +246,98 @@ $this->Post->find('all', array('contain' => 'Comment.author = "Daniel"'));
 This gives us a result that gives us posts with comments authored
 by Daniel:
 
-    [0] => Array
-            (
-                [Post] => Array
-                    (
-                        [id] => 1
-                        [title] => First article
-                        [content] => aaa
-                        [created] => 2008-05-18 00:00:00
-                    )
-                [Comment] => Array
-                    (
-                        [0] => Array
-                            (
-                                [id] => 1
-                                [post_id] => 1
-                                [author] => Daniel
-                                [email] => dan@example.com
-                                [website] => http://example.com
-                                [comment] => First comment
-                                [created] => 2008-05-18 00:00:00
-                            )
-                    )
-            )
+``` text
+[0] => Array
+        (
+            [Post] => Array
+                (
+                    [id] => 1
+                    [title] => First article
+                    [content] => aaa
+                    [created] => 2008-05-18 00:00:00
+                )
+            [Comment] => Array
+                (
+                    [0] => Array
+                        (
+                            [id] => 1
+                            [post_id] => 1
+                            [author] => Daniel
+                            [email] => dan@example.com
+                            [website] => http://example.com
+                            [comment] => First comment
+                            [created] => 2008-05-18 00:00:00
+                        )
+                )
+        )
+```
 
 There is an important caveat to using Containable when filtering on a deeper association. In the previous example,
 assume you had 3 posts in your database and Daniel had commented on 2 of those posts. The operation
 \$this-\>Post-\>find('all', array('contain' =\> 'Comment.author = "Daniel"')); would return ALL 3 posts, not
 just the 2 posts that Daniel had commented on. It won't return all comments however, just comments by Daniel. :
 
-    [0] => Array
-            (
-                [Post] => Array
-                    (
-                        [id] => 1
-                        [title] => First article
-                        [content] => aaa
-                        [created] => 2008-05-18 00:00:00
-                    )
-                [Comment] => Array
-                    (
-                        [0] => Array
-                            (
-                                [id] => 1
-                                [post_id] => 1
-                                [author] => Daniel
-                                [email] => dan@example.com
-                                [website] => http://example.com
-                                [comment] => First comment
-                                [created] => 2008-05-18 00:00:00
-                            )
-                    )
-            )
-    [1] => Array
-            (
-                [Post] => Array
-                    (
-                        [id] => 2
-                        [title] => Second article
-                        [content] => bbb
-                        [created] => 2008-05-18 00:00:00
-                    )
-                [Comment] => Array
-                    (
-                    )
-            )
-    [2] => Array
-            (
-                [Post] => Array
-                    (
-                        [id] => 3
-                        [title] => Third article
-                        [content] => ccc
-                        [created] => 2008-05-18 00:00:00
-                    )
-                [Comment] => Array
-                    (
-                        [0] => Array
-                            (
-                                [id] => 22
-                                [post_id] => 3
-                                [author] => Daniel
-                                [email] => dan@example.com
-                                [website] => http://example.com
-                                [comment] => Another comment
-                                [created] => 2008-05-18 00:00:00
-                            )
-                    )
-            )
+``` text
+[0] => Array
+        (
+            [Post] => Array
+                (
+                    [id] => 1
+                    [title] => First article
+                    [content] => aaa
+                    [created] => 2008-05-18 00:00:00
+                )
+            [Comment] => Array
+                (
+                    [0] => Array
+                        (
+                            [id] => 1
+                            [post_id] => 1
+                            [author] => Daniel
+                            [email] => dan@example.com
+                            [website] => http://example.com
+                            [comment] => First comment
+                            [created] => 2008-05-18 00:00:00
+                        )
+                )
+        )
+[1] => Array
+        (
+            [Post] => Array
+                (
+                    [id] => 2
+                    [title] => Second article
+                    [content] => bbb
+                    [created] => 2008-05-18 00:00:00
+                )
+            [Comment] => Array
+                (
+                )
+        )
+[2] => Array
+        (
+            [Post] => Array
+                (
+                    [id] => 3
+                    [title] => Third article
+                    [content] => ccc
+                    [created] => 2008-05-18 00:00:00
+                )
+            [Comment] => Array
+                (
+                    [0] => Array
+                        (
+                            [id] => 22
+                            [post_id] => 3
+                            [author] => Daniel
+                            [email] => dan@example.com
+                            [website] => http://example.com
+                            [comment] => Another comment
+                            [created] => 2008-05-18 00:00:00
+                        )
+                )
+        )
+```
 
 If you want to filter the posts by the comments, so that posts without a comment by Daniel won't be
 returned, the easiest way is to find all the comments by Daniel and contain the Posts. :
@@ -357,10 +365,12 @@ got deep and complex model relationships.
 
 Let's consider the following model associations:
 
-    User->Profile
-    User->Account->AccountSummary
-    User->Post->PostAttachment->PostAttachmentHistory->HistoryNotes
-    User->Post->Tag
+``` text
+User->Profile
+User->Account->AccountSummary
+User->Post->PostAttachment->PostAttachmentHistory->HistoryNotes
+User->Post->Tag
+```
 
 This is how we retrieve the above associations with Containable:
 

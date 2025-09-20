@@ -96,16 +96,18 @@ Your array must have only one element in the "top level" and it can not be
 numeric. If the array is not in this format, Xml will throw an exception.
 Examples of invalid arrays:
 
-    // Top level with numeric key
-    [
-        ['key' => 'value']
-    ];
+``` text
+// Top level with numeric key
+[
+    ['key' => 'value']
+];
 
-    // Multiple keys in top level
-    [
-        'key1' => 'first value',
-        'key2' => 'other value'
-    ];
+// Multiple keys in top level
+[
+    'key1' => 'first value',
+    'key2' => 'other value'
+];
+```
 
 By default array values will be output as XML tags. If you want to define
 attributes or text values you can prefix the keys that are supposed to be

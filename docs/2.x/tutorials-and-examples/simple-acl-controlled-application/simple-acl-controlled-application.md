@@ -316,17 +316,19 @@ use easy passwords so you don't forget. If you do a
 `SELECT * FROM aros;` from a MySQL prompt you should get
 something like the following:
 
-    +----+-----------+-------+-------------+-------+------+------+
-    | id | parent_id | model | foreign_key | alias | lft  | rght |
-    +----+-----------+-------+-------------+-------+------+------+
-    |  1 |      NULL | Group |           1 | NULL  |    1 |    4 |
-    |  2 |      NULL | Group |           2 | NULL  |    5 |    8 |
-    |  3 |      NULL | Group |           3 | NULL  |    9 |   12 |
-    |  4 |         1 | User  |           1 | NULL  |    2 |    3 |
-    |  5 |         2 | User  |           2 | NULL  |    6 |    7 |
-    |  6 |         3 | User  |           3 | NULL  |   10 |   11 |
-    +----+-----------+-------+-------------+-------+------+------+
-    6 rows in set (0.00 sec)
+``` text
++----+-----------+-------+-------------+-------+------+------+
+| id | parent_id | model | foreign_key | alias | lft  | rght |
++----+-----------+-------+-------------+-------+------+------+
+|  1 |      NULL | Group |           1 | NULL  |    1 |    4 |
+|  2 |      NULL | Group |           2 | NULL  |    5 |    8 |
+|  3 |      NULL | Group |           3 | NULL  |    9 |   12 |
+|  4 |         1 | User  |           1 | NULL  |    2 |    3 |
+|  5 |         2 | User  |           2 | NULL  |    6 |    7 |
+|  6 |         3 | User  |           3 | NULL  |   10 |   11 |
++----+-----------+-------+-------------+-------+------+------+
+6 rows in set (0.00 sec)
+```
 
 This shows us that we have 3 groups and 3 users. The users are
 nested inside the groups, which means we can set permissions on a
@@ -356,14 +358,16 @@ Note: Every user has to have `group_id` assigned for this to work.
 
 Now the `aros` table will look like this:
 
-    +----+-----------+-------+-------------+-------+------+------+
-    | id | parent_id | model | foreign_key | alias | lft  | rght |
-    +----+-----------+-------+-------------+-------+------+------+
-    |  1 |      NULL | Group |           1 | NULL  |    1 |    2 |
-    |  2 |      NULL | Group |           2 | NULL  |    3 |    4 |
-    |  3 |      NULL | Group |           3 | NULL  |    5 |    6 |
-    +----+-----------+-------+-------------+-------+------+------+
-    3 rows in set (0.00 sec)
+``` text
++----+-----------+-------+-------------+-------+------+------+
+| id | parent_id | model | foreign_key | alias | lft  | rght |
++----+-----------+-------+-------------+-------+------+------+
+|  1 |      NULL | Group |           1 | NULL  |    1 |    2 |
+|  2 |      NULL | Group |           2 | NULL  |    3 |    4 |
+|  3 |      NULL | Group |           3 | NULL  |    5 |    6 |
++----+-----------+-------+-------------+-------+------+------+
+3 rows in set (0.00 sec)
+```
 
 Note: If you have followed the tutorial up to this point you need to drop your tables, including `aros`, `groups` and `users`, and create the groups and users again from scratch in order to get the `aros` table seen above.
 

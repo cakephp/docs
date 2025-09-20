@@ -6,9 +6,11 @@
 
 CakePHP 4.x の最新バージョンで動作していることが確認できたら **config/app.php** の設定を変更して、非推奨警告を有効にします:
 
-    'Error' => [
-        'errorLevel' => E_ALL,
-    ]
+``` text
+'Error' => [
+    'errorLevel' => E_ALL,
+]
+```
 
 これによって全ての警告が見えるようになります。アップグレードの作業を始める前に確実にこれを済ませておいて下さい。
 
@@ -41,8 +43,10 @@ composer install --no-dev
 
 このアップグレードツールがインストールされると、お手元のアプリケーションやプラグインにおいて実行可能となります:
 
-    bin/cake upgrade rector --rules cakephp50 <app/src へのパス>
-    bin/cake upgrade rector --rules chronos3 <app/src へのパス>
+``` text
+bin/cake upgrade rector --rules cakephp50 <app/src へのパス>
+bin/cake upgrade rector --rules chronos3 <app/src へのパス>
+```
 
 ## CakePHPの依存関係の更新
 

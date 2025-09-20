@@ -78,12 +78,14 @@ CakePHP のフレームワークのほぼすべてのクラスは、あなた独
 プラグインからのクラスのローディングは、ロード元になるプラグインを指定する以外は、app や
 core のクラスのローディングとまったく同じように動作します:
 
-    // app/Plugin/PluginName/Model/Comment.php にある Comment クラスをロードする
-    App::uses('Comment', 'PluginName.Model');
+``` php
+// app/Plugin/PluginName/Model/Comment.php にある Comment クラスをロードする
+App::uses('Comment', 'PluginName.Model');
 
-    // app/Plugin/PluginName/Controller/Component/CommentComponent.php にある
-    // CommentComponent クラスをロードする
-    App::uses('CommentComponent', 'PluginName.Controller/Component');
+// app/Plugin/PluginName/Controller/Component/CommentComponent.php にある
+// CommentComponent クラスをロードする
+App::uses('CommentComponent', 'PluginName.Controller/Component');
+```
 
 ## App::path() を用いたパッケージへのパスの探索
 
@@ -92,14 +94,18 @@ core のクラスのローディングとまったく同じように動作しま
 >
 > 保存されたパス情報を読み込むために用いる:
 >
->     // アプリケーション内のモデルのパスが返る
->     App::path('Model');
+> ``` php
+> // アプリケーション内のモデルのパスが返る
+> App::path('Model');
+> ```
 >
 > アプリケーション内のすべてのパッケージに対してこれを実行できます。
 > プラグインに対するパスを取得することもできます:
 >
->     // DebugKit 内のコンポーネントのパスが返る
->     App::path('Component', 'DebugKit');
+> ``` php
+> // DebugKit 内のコンポーネントのパスが返る
+> App::path('Component', 'DebugKit');
+> ```
 >
 > rtype  
 > array
@@ -113,8 +119,10 @@ core のクラスのローディングとまったく同じように動作しま
 >
 > CakePHP 内部のパッケージのパスを見つけるために用いられます:
 >
->     // Cache エンジンへのパスを取得する
->     App::core('Cache/Engine');
+> ``` php
+> // Cache エンジンへのパスを取得する
+> App::core('Cache/Engine');
+> ```
 >
 > rtype  
 > string
@@ -135,23 +143,25 @@ core のクラスのローディングとまったく同じように動作しま
 >
 > 使い方:
 >
->     //Model パッケージのための新しい探索パスがセットアップされます
->     App::build(array('Model' => array('/a/full/path/to/models/')));
+> ``` php
+> //Model パッケージのための新しい探索パスがセットアップされます
+> App::build(array('Model' => array('/a/full/path/to/models/')));
 >
->     //このパスはモデルを探索するための唯一正しいパスとしてセットアップされます
->     App::build(array('Model' => array('/path/to/models/')), App::RESET);
+> //このパスはモデルを探索するための唯一正しいパスとしてセットアップされます
+> App::build(array('Model' => array('/path/to/models/')), App::RESET);
 >
->     //ヘルパーの複数の探索パスがセットアップされます
->     App::build(array(
->         'View/Helper' => array('/path/to/helpers/', '/another/path/')
->     ));
+> //ヘルパーの複数の探索パスがセットアップされます
+> App::build(array(
+>     'View/Helper' => array('/path/to/helpers/', '/another/path/')
+> ));
+> ```
 >
 > reset が true に設定されている場合、ロードされたすべてのプラグインは忘れ去られ、
 > それらは再びロードされる必要があります。
 >
 > 例:
 >
-> ``` css
+> ``` php
 > App::build(array('controllers' => array('/full/path/to/controllers/')));
 > //このようになりました
 > App::build(array('Controller' => array('/full/path/to/Controller/')));
@@ -170,7 +180,7 @@ core のクラスのローディングとまったく同じように動作しま
 `App::build()` は新しいパッケージの場所を追加するために用いられます。
 アプリケーションに新しいトップレベルのパッケージや、サブパッケージを追加したい場合に便利です:
 
-``` css
+``` php
 App::build(array(
     'Service' => array('%s' . 'Service' . DS)
 ), App::REGISTER);
@@ -194,16 +204,20 @@ App::build(array(
 >
 > 使用例:
 >
->     //returns array('DebugKit', 'Blog', 'User');
->     App::objects('plugin');
+> ``` php
+> //returns array('DebugKit', 'Blog', 'User');
+> App::objects('plugin');
 >
->     //returns array('PagesController', 'BlogController');
->     App::objects('Controller');
+> //returns array('PagesController', 'BlogController');
+> App::objects('Controller');
+> ```
 >
 > プラグインドット記法を用いることで、そのプラグイン内においてのオブジェクトを探すこともできます:
 >
->     // returns array('MyPluginPost', 'MyPluginComment');
->     App::objects('MyPlugin.Model');
+> ``` php
+> // returns array('MyPluginPost', 'MyPluginComment');
+> App::objects('MyPlugin.Model');
+> ```
 >
 > ::: info Changed in version 2.0
 > :::
@@ -291,15 +305,19 @@ App::build(array(
 `App::uses()` をベンダーのディレクトリ内のクラスをロードするのに使うことが出来ます。
 これは他のファイルを読み込むのと同じ規則に従います:
 
-    // app/Vendor/Geshi.php 内の Geshi クラスをロードする
-    App::uses('Geshi', 'Vendor');
+``` php
+// app/Vendor/Geshi.php 内の Geshi クラスをロードする
+App::uses('Geshi', 'Vendor');
+```
 
 サブディレクトリ内のクラスをロードするには、それらのパスを `App::build()` で追加する必要があります:
 
-    // app/Vendor/SomePackage/ClassInSomePackage.php 内の
-    // ClassInSomePackage クラスをロードする
-    App::build(array('Vendor' => array(APP . 'Vendor' . DS . 'SomePackage' . DS)));
-    App::uses('ClassInSomePackage', 'Vendor');
+``` php
+// app/Vendor/SomePackage/ClassInSomePackage.php 内の
+// ClassInSomePackage クラスをロードする
+App::build(array('Vendor' => array(APP . 'Vendor' . DS . 'SomePackage' . DS)));
+App::uses('ClassInSomePackage', 'Vendor');
+```
 
 ベンダーのファイルは、規則に従っていなかったり、ファイル名と異なるクラスを持っていたり、
 クラスを含んでないかもしれません。それらのファイルは `App::import()` を使用して読み込むことができます。
@@ -308,7 +326,7 @@ App::build(array(
 
 **app/Vendor/geshi.php** をロードする:
 
-``` css
+``` php
 App::import('Vendor', 'geshi');
 ```
 
@@ -317,19 +335,19 @@ App::import('Vendor', 'geshi');
 
 **app/Vendor/flickr/flickr.php** をロードする:
 
-``` css
+``` php
 App::import('Vendor', 'flickr', array('file' => 'flickr/flickr.php'));
 ```
 
 **app/Vendor/some.name.php** をロードする:
 
-``` css
+``` php
 App::import('Vendor', 'SomeName', array('file' => 'some.name.php'));
 ```
 
 **app/Vendor/services/well.named.php** をロードする:
 
-``` css
+``` php
 App::import(
     'Vendor',
     'WellNamed',
@@ -339,7 +357,7 @@ App::import(
 
 **app/Plugin/Awesome/Vendor/services/well.named.php** をロードする:
 
-``` css
+``` php
 App::import(
     'Vendor',
     'Awesome.WellNamed',
@@ -349,7 +367,7 @@ App::import(
 
 **app/Plugin/Awesome/Vendor/Folder/Foo.php** をロードする:
 
-``` css
+``` php
 App::import(
     'Vendor',
     'Awesome.Foo',
@@ -361,7 +379,7 @@ CakePHP は自動的にそれを見出します。
 
 **vendors/vendorName/libFile.php** をロードする:
 
-``` css
+``` php
 App::import(
     'Vendor',
     'aUniqueIdentifier',

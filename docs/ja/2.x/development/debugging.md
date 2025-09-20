@@ -103,14 +103,16 @@ Debugger を使用する際にはまず、Configure::read('debug') に 0 より�
 > 現在のスタックトレースを返します。トレースの各行には、呼び出しているメソッド、
 > どこから呼ばれたかというファイルと行番号が含まれています:
 >
->     //PostsController::index() の中で
->     pr(Debugger::trace());
+> ``` text
+> //PostsController::index() の中で
+> pr(Debugger::trace());
 >
->     //出力
->     PostsController::index() - APP/Controller/DownloadsController.php, line 48
->     Dispatcher::_invoke() - CORE/lib/Cake/Routing/Dispatcher.php, line 265
->     Dispatcher::dispatch() - CORE/lib/Cake/Routing/Dispatcher.php, line 237
->     [main] - APP/webroot/index.php, line 84
+> //出力
+> PostsController::index() - APP/Controller/DownloadsController.php, line 48
+> Dispatcher::_invoke() - CORE/lib/Cake/Routing/Dispatcher.php, line 265
+> Dispatcher::dispatch() - CORE/lib/Cake/Routing/Dispatcher.php, line 237
+> [main] - APP/webroot/index.php, line 84
+> ```
 >
 > 上記では、コントローラのアクション内で Debugger::trace() を呼ぶことで、スタックトレースを
 > 生成しています。スタックトレースは下から上へと読み、現在走っている関数（スタックフレーム）の
@@ -171,11 +173,13 @@ $this->log('通ったよ', 'debug');
 使うことで、ログメッセージを書きだすことも可能です。このメソッドは CakeLog がロードされているなら
 static にあなたのアプリケーション内のどこからでも呼び出すことができるのです:
 
-    // app/Config/bootstrap.php の中で
-    App::uses('CakeLog', 'Log');
+``` php
+// app/Config/bootstrap.php の中で
+App::uses('CakeLog', 'Log');
 
-    // あなたのアプリケーションのどこからでも
-    CakeLog::write('debug', '通ったよ');
+// あなたのアプリケーションのどこからでも
+CakeLog::write('debug', '通ったよ');
+```
 
 ## Debug Kit
 

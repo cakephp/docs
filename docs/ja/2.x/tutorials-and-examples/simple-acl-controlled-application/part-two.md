@@ -14,9 +14,11 @@
 複製 (*clone*) してください。次に、次に示すように <span class="title-ref">app/Config/boostrap.php</span>
 ファイル中でプラグインを有効にしてください:
 
-    //app/Config/boostrap.php
-    // ...
-    CakePlugin::load('AclExtras');
+``` php
+//app/Config/boostrap.php
+// ...
+CakePlugin::load('AclExtras');
+```
 
 最後に CakePHP のコンソールで以下のコマンドを実行してください:
 

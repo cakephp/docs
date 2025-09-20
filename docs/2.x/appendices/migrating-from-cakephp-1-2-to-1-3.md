@@ -39,7 +39,7 @@ There is a new way to add those paths. As of 1.3 RC1 the
 `$pluginPaths` variables will no longer work. You must use
 `App::build()` to modify paths.
 
-``` css
+``` php
 App::build(array(
     'plugins' => array(
       '/full/path/to/plugins/',
@@ -281,18 +281,20 @@ routes in 1.3 do not require additional routes to be declared
 manually. All prefix routes will be generated automatically. To
 update simply change your core.php:
 
-    //from:
-    Configure::write('Routing.admin', 'admin');
+``` php
+//from:
+Configure::write('Routing.admin', 'admin');
 
-    //to:
-    Configure::write('Routing.prefixes', array('admin'));
+//to:
+Configure::write('Routing.prefixes', array('admin'));
+```
 
 See the New features guide for more information on using prefix
 routes. A small change has also been done to routing params. Routed
 params should now only consist of alphanumeric chars, - and \_ or
 `/[A-Z0-9-_+]+/`:
 
-``` css
+``` php
 Router::connect('/:$%@#param/:action/*', array(...)); // BAD
 Router::connect('/:can/:anybody/:see/:m-3/*', array(...)); //Acceptable
 ```
@@ -304,7 +306,7 @@ problematic and buggy even with the existing code base. First path
 segments using full regular expressions was removed. You can no
 longer create routes like:
 
-``` css
+``` php
 Router::connect(
   '/([0-9]+)-p-(.*)/',
   array('controller' => 'products', 'action' => 'show')
@@ -317,7 +319,7 @@ you use route parameters with capture patterns. Next mid-route
 greedy star support has been removed. It was previously possible to
 use a greedy star in the middle of a route:
 
-``` css
+``` php
 Router::connect(
     '/pages/*/:event',
     array('controller' => 'pages', 'action' => 'display'),

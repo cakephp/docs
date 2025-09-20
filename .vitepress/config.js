@@ -61,7 +61,7 @@ export default defineConfig({
     },
     footer: {
       message: 'Released under the MIT License.',
-      copyright: 'Copyright © 2005-2024 The CakePHP Team'
+      copyright: 'Copyright © Cake Software Foundation, Inc. All rights reserved.'
     },
     lastUpdated: {
       text: 'Updated at',

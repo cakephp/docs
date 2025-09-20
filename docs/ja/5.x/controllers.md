@@ -86,25 +86,27 @@ RecipesController は `view()` ・ `share()` ・ `search()` アクションを�
 このコントローラーは **src/Controller/RecipesController.php** にあり、
 次のようなコードになっています。 :
 
-    // src/Controller/RecipesController.php
+``` php
+// src/Controller/RecipesController.php
 
-    class RecipesController extends AppController
+class RecipesController extends AppController
+{
+    public function view($id)
     {
-        public function view($id)
-        {
-            // アクションの処理をここで行います。
-        }
-
-        public function share($customerId, $recipeId)
-        {
-            // アクションの処理をここで行います。
-        }
-
-        public function search($query)
-        {
-            // アクションの処理をここで行います。
-        }
+        // アクションの処理をここで行います。
     }
+
+    public function share($customerId, $recipeId)
+    {
+        // アクションの処理をここで行います。
+    }
+
+    public function search($query)
+    {
+        // アクションの処理をここで行います。
+    }
+}
+```
 
 これらのアクションのテンプレートファイルは **templates/Recipes/view.php** 、
 **templates/Recipes/share.php** 、そして **templates/Recipes/search.php** になります。

@@ -46,14 +46,18 @@ pot ファイル自身は、 CakePHP では使用しません。それらのフ�
 [po ファイル](https://en.wikipedia.org/wiki/Gettext) を作成したり更新するための
 テンプレートです。CakePHP は、以下の場所にある po ファイルを参照します。 :
 
-    /app/Locale/<locale>/LC_MESSAGES/<domain>.po
+``` text
+/app/Locale/<locale>/LC_MESSAGES/<domain>.po
+```
 
 デフォルトのドメインは 'default' です。従って、あなたのロケールフォルダは、
 以下のようになります。 :
 
-    /app/Locale/eng/LC_MESSAGES/default.po (英語)
-    /app/Locale/fra/LC_MESSAGES/default.po (フランス語)
-    /app/Locale/por/LC_MESSAGES/default.po (ポルトガル語)
+``` text
+/app/Locale/eng/LC_MESSAGES/default.po (英語)
+/app/Locale/fra/LC_MESSAGES/default.po (フランス語)
+/app/Locale/por/LC_MESSAGES/default.po (ポルトガル語)
+```
 
 po ファイルの作成や編集は、あなたの好きなエディタを使用することは、 **お勧めしません** 。
 最初に po ファイルを作成するときは、 pot ファイルを適切な場所にコピーし、
@@ -104,8 +108,10 @@ LC_TIME ファイルを使用します。
 
 それぞれのロケールディレクトリ直下に LC_TIME ファイルを配置します。 :
 
-    /app/Locale/fra/LC_TIME (フランス語)
-    /app/Locale/por/LC_TIME (ポルトガル語)
+``` text
+/app/Locale/fra/LC_TIME (フランス語)
+/app/Locale/por/LC_TIME (ポルトガル語)
+```
 
 いくつかの主要な言語のこれらのファイルは、公式の
 [Localized](https://github.com/cakephp/localized) リポジトリをご覧ください。
@@ -117,20 +123,26 @@ LC_TIME ファイルを使用します。
 <span class="title-ref">\_\_()</span> や <span class="title-ref">\_\_n()</span> の代わりに <span class="title-ref">\_\_d()</span> や <span class="title-ref">\_\_dn()</span> を使用してください。"d" はドメインを
 意味します。 'DebugKit' というプラグインを使う際、以下のように記述します。 :
 
-    __d('debug_kit', 'My example text');
+``` text
+__d('debug_kit', 'My example text');
+```
 
 アンダースコア構文を使用することが重要です。そうしなければ、
 CakePHP があなたの翻訳ファイルを見つけられません。
 
 上記の例のためのあなたの翻訳ファイルは、以下の様になります。 :
 
-    /app/Plugin/DebugKit/Locale/<locale>/LC_MESSAGES/<domain>.po
+``` text
+/app/Plugin/DebugKit/Locale/<locale>/LC_MESSAGES/<domain>.po
+```
 
 そして、他の言語の場合は、 :
 
-    /app/Plugin/DebugKit/Locale/eng/LC_MESSAGES/debug_kit.po (英語)
-    /app/Plugin/DebugKit/Locale/fra/LC_MESSAGES/debug_kit.po (フランス語)
-    /app/Plugin/DebugKit/Locale/por/LC_MESSAGES/debug_kit.po (ポルトガル語)
+``` text
+/app/Plugin/DebugKit/Locale/eng/LC_MESSAGES/debug_kit.po (英語)
+/app/Plugin/DebugKit/Locale/fra/LC_MESSAGES/debug_kit.po (フランス語)
+/app/Plugin/DebugKit/Locale/por/LC_MESSAGES/debug_kit.po (ポルトガル語)
+```
 
 CakePHP が翻訳ドメインと比較のためにプラグイン名を小文字化してアンダースコア区切りにして
 使用します。もし、与えられた翻訳ファイルにマッチする場合、プラグインの中を参照します。
@@ -140,7 +152,7 @@ CakePHP が翻訳ドメインと比較のためにプラグイン名を小文字
 Configure の `I18n.preferApp` 値は、翻訳の順番を制御するのに使用します。
 bootstrap で true にセットすると、プラグインの翻訳よりアプリケーションの翻訳を優先します。 :
 
-``` css
+``` php
 Configure::write('I18n.preferApp', true);
 ```
 
@@ -153,7 +165,7 @@ Configure::write('I18n.preferApp', true);
 
 あなたのアプリケーションの言語の変更や設定をするために必要なことは、以下の通りです。 :
 
-``` css
+``` php
 Configure::write('Config.language', 'fra');
 ```
 
@@ -242,4 +254,6 @@ class User extends AppModel {
 
 以下のように内部的に呼びだされます。 :
 
-    __d('validation', 'Username should be between %d and %d characters', array(2, 10));
+``` text
+__d('validation', 'Username should be between %d and %d characters', array(2, 10));
+```

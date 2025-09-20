@@ -229,7 +229,7 @@ Basic／ダイジェストオーセンティケータだけを使っているな
 `app/Controller/Component/Auth/OpenidAuthenticate.php` の中で次のように記述することが
 できます。 :
 
-``` css
+``` php
 App::uses('BaseAuthenticate', 'Controller/Component/Auth');
 
 class OpenidAuthenticate extends BaseAuthenticate {
@@ -463,7 +463,7 @@ class User extends AppModel {
 抽象メソッドの `hash()` と `check()` を実装する必要があります。
 `app/Controller/Component/Auth/CustomPasswordHasher.php` に次のように記述します。 :
 
-``` css
+``` php
 App::uses('AbstractPasswordHasher', 'Controller/Component/Auth');
 
 class CustomPasswordHasher extends AbstractPasswordHasher {
@@ -613,7 +613,7 @@ $this->Auth->authorize = array(
 オブジェクトを作成したいのだとしたら、 `app/Controller/Component/Auth/LdapAuthorize.php`
 の中で次のように記述することができます。 :
 
-``` css
+``` php
 App::uses('BaseAuthorize', 'Controller/Component/Auth');
 
 class LdapAuthorize extends BaseAuthorize {

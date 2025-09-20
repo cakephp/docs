@@ -132,7 +132,9 @@ Windows Vista もしくは 7 をお使いの場合は、以下の手順に従っ
 
 5.  `cake` のインストールパス文字列を;で区切って追加します。その結果は以下のようになります。 :
 
-        %SystemRoot%\system32;%SystemRoot%;C:\xampp\htdocs\cakephp\Cake\lib\Console;
+    ``` php
+    %SystemRoot%\system32;%SystemRoot%;C:\xampp\htdocs\cakephp\Cake\lib\Console;
+    ```
 
 6.  これで Ok をクリックすれば、 `cake` がどこからでも動くようになるはずです。
 

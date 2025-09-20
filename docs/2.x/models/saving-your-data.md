@@ -4,14 +4,16 @@ CakePHP makes saving model data a snap. Data ready to be saved
 should be passed to the model's `save()` method using the
 following basic format:
 
-    Array
+``` text
+Array
+(
+    [ModelName] => Array
     (
-        [ModelName] => Array
-        (
-            [fieldname1] => 'value'
-            [fieldname2] => 'value'
-        )
+        [fieldname1] => 'value'
+        [fieldname2] => 'value'
     )
+)
+```
 
 Most of the time you won't even need to worry about this format:
 CakePHP's `FormHelper`, and model find methods all
@@ -621,26 +623,28 @@ class CourseMembershipsController extends AppController {
 
 The data array will look like this when submitted. :
 
-    Array
+``` text
+Array
+(
+    [Student] => Array
     (
-        [Student] => Array
-        (
-            [first_name] => Joe
-            [last_name] => Bloggs
-        )
-
-        [Course] => Array
-        (
-            [name] => Cake
-        )
-
-        [CourseMembership] => Array
-        (
-            [days_attended] => 5
-            [grade] => A
-        )
-
+        [first_name] => Joe
+        [last_name] => Bloggs
     )
+
+    [Course] => Array
+    (
+        [name] => Cake
+    )
+
+    [CourseMembership] => Array
+    (
+        [days_attended] => 5
+        [grade] => A
+    )
+
+)
+```
 
 CakePHP will happily be able to save the lot together and assign
 the foreign keys of the Student and Course into CourseMembership
@@ -648,33 +652,35 @@ with a <span class="title-ref">saveAssociated</span> call with this data structu
 action of our CourseMembershipsController the data structure
 received now from a find('all') is:
 
-    Array
+``` text
+Array
+(
+    [0] => Array
     (
-        [0] => Array
+        [CourseMembership] => Array
         (
-            [CourseMembership] => Array
-            (
-                [id] => 1
-                [student_id] => 1
-                [course_id] => 1
-                [days_attended] => 5
-                [grade] => A
-            )
+            [id] => 1
+            [student_id] => 1
+            [course_id] => 1
+            [days_attended] => 5
+            [grade] => A
+        )
 
-            [Student] => Array
-            (
-                [id] => 1
-                [first_name] => Joe
-                [last_name] => Bloggs
-            )
+        [Student] => Array
+        (
+            [id] => 1
+            [first_name] => Joe
+            [last_name] => Bloggs
+        )
 
-            [Course] => Array
-            (
-                [id] => 1
-                [name] => Cake
-            )
+        [Course] => Array
+        (
+            [id] => 1
+            [name] => Cake
         )
     )
+)
+```
 
 There are of course many ways to work with a join model. The
 version above assumes you want to save everything at-once. There
@@ -716,24 +722,26 @@ then the two meta-fields for the CourseMembership, e.g. :
 
 And the resultant POST:
 
-    Array
+``` text
+Array
+(
+    [Student] => Array
     (
-        [Student] => Array
-        (
-            [id] => 1
-        )
-
-        [Course] => Array
-        (
-            [id] => 1
-        )
-
-        [CourseMembership] => Array
-        (
-            [days_attended] => 10
-            [grade] => 5
-        )
+        [id] => 1
     )
+
+    [Course] => Array
+    (
+        [id] => 1
+    )
+
+    [CourseMembership] => Array
+    (
+        [days_attended] => 10
+        [grade] => 5
+    )
+)
+```
 
 Again CakePHP is good to us and pulls the Student id and Course id
 into the CourseMembership with the <span class="title-ref">saveAssociated</span>.
@@ -749,69 +757,73 @@ ID of the associated model. Once that's done, you just call the
 correctly. An example of the required format for the data array
 passed to `save()` for the Tag model is shown below:
 
-    Array
-    (
-        [Recipe] => Array
-            (
-                [id] => 42
-            )
-        [Tag] => Array
-            (
-                [name] => Italian
-            )
-    )
+``` text
+Array
+(
+    [Recipe] => Array
+        (
+            [id] => 42
+        )
+    [Tag] => Array
+        (
+            [name] => Italian
+        )
+)
+```
 
 You can also use this format to save several records and their
 HABTM associations with `saveAll()`, using an array like the
 following:
 
-    Array
-    (
-        [0] => Array
-            (
-                [Recipe] => Array
-                    (
-                        [id] => 42
-                    )
-                [Tag] => Array
-                    (
-                        [name] => Italian
-                    )
-            )
-        [1] => Array
-            (
-                [Recipe] => Array
-                    (
-                        [id] => 43
-                    )
-                [Tag] => Array
-                    (
-                        [name] => Pasta
-                    )
-            )
-        [2] => Array
-            (
-                [Recipe] => Array
-                    (
-                        [id] => 51
-                    )
-                [Tag] => Array
-                    (
-                        [name] => Mexican
-                    )
-            )
-        [3] => Array
-            (
-                [Recipe] => Array
-                    (
-                        [id] => 17
-                    )
-                [Tag] => Array
-                    (
-                        [name] => American (new)
-                    )
-            )
-    )
+``` text
+Array
+(
+    [0] => Array
+        (
+            [Recipe] => Array
+                (
+                    [id] => 42
+                )
+            [Tag] => Array
+                (
+                    [name] => Italian
+                )
+        )
+    [1] => Array
+        (
+            [Recipe] => Array
+                (
+                    [id] => 43
+                )
+            [Tag] => Array
+                (
+                    [name] => Pasta
+                )
+        )
+    [2] => Array
+        (
+            [Recipe] => Array
+                (
+                    [id] => 51
+                )
+            [Tag] => Array
+                (
+                    [name] => Mexican
+                )
+        )
+    [3] => Array
+        (
+            [Recipe] => Array
+                (
+                    [id] => 17
+                )
+            [Tag] => Array
+                (
+                    [name] => American (new)
+                )
+        )
+)
+```
 
 Passing the above array to `saveAll()` will create the contained tags,
 each associated with their respective recipes.
@@ -821,53 +833,55 @@ You need to pass the associated HABTM data in the following HABTM array format. 
 you only need to pass in the id's of the associated HABTM model however it needs
 to be nested again:
 
-    Array
-    (
-        [0] => Array
-            (
-                [Post] => Array
-                    (
-                        [title] => 'Saving HABTM arrays'
-                    )
-                [Tag] => Array
-                    (
-                        [Tag] => Array(1, 2, 5, 9)
-                    )
-            )
-        [1] => Array
-            (
-                [Post] => Array
-                    (
-                        [title] => 'Dr Who\'s Name is Revealed'
-                    )
-                [Tag] => Array
-                    (
-                        [Tag] => Array(7, 9, 15, 19)
-                    )
-            )
-        [2] => Array
-            (
-                [Post] => Array
-                    (
-                        [title] => 'I Came, I Saw and I Conquered'
-                    )
-                [Tag] => Array
-                    (
-                        [Tag] => Array(11, 12, 15, 19)
-                    )
-            )
-        [3] => Array
-            (
-                [Post] => Array
-                    (
-                        [title] => 'Simplicity is the Ultimate Sophistication'
-                    )
-                [Tag] => Array
-                    (
-                        [Tag] => Array(12, 22, 25, 29)
-                    )
-            )
-    )
+``` text
+Array
+(
+    [0] => Array
+        (
+            [Post] => Array
+                (
+                    [title] => 'Saving HABTM arrays'
+                )
+            [Tag] => Array
+                (
+                    [Tag] => Array(1, 2, 5, 9)
+                )
+        )
+    [1] => Array
+        (
+            [Post] => Array
+                (
+                    [title] => 'Dr Who\'s Name is Revealed'
+                )
+            [Tag] => Array
+                (
+                    [Tag] => Array(7, 9, 15, 19)
+                )
+        )
+    [2] => Array
+        (
+            [Post] => Array
+                (
+                    [title] => 'I Came, I Saw and I Conquered'
+                )
+            [Tag] => Array
+                (
+                    [Tag] => Array(11, 12, 15, 19)
+                )
+        )
+    [3] => Array
+        (
+            [Post] => Array
+                (
+                    [title] => 'Simplicity is the Ultimate Sophistication'
+                )
+            [Tag] => Array
+                (
+                    [Tag] => Array(12, 22, 25, 29)
+                )
+        )
+)
+```
 
 Passing the above array to `saveAll($data, array('deep' => true))`
 will populate the posts_tags join table with the Tag to Post associations.

@@ -472,8 +472,10 @@ members of the parameter array (in the same way that
 above example, the `/app/View/Elements/helpbox.ctp` file can use the
 `$helptext` variable:
 
-    // Inside app/View/Elements/helpbox.ctp
-    echo $helptext; // Outputs "Oh, this text is very helpful."
+``` text
+// Inside app/View/Elements/helpbox.ctp
+echo $helptext; // Outputs "Oh, this text is very helpful."
+```
 
 The `View::element()` method also supports options for the element.
 The options supported are 'cache' and 'callbacks'. An example:

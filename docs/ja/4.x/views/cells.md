@@ -75,10 +75,12 @@ class InboxCell extends Cell
 や `set()` メソッドを使うことができます。テンプレートファイルの中に、
 以下を追加します。 :
 
-    <!-- templates/cell/Inbox/display.php -->
-    <div class="notification-icon">
-        未読メッセージが <?= $unread_count ?> 件あります。
-    </div>
+``` text
+<!-- templates/cell/Inbox/display.php -->
+<div class="notification-icon">
+    未読メッセージが <?= $unread_count ?> 件あります。
+</div>
+```
 
 > [!NOTE]
 > セルのテンプレートは分離したスコープを持っていて、現在のコントローラーのアクション

@@ -128,11 +128,13 @@ If you want to configure a new project, you just need:
 
 If you have an existing project:
 
-    git clone <your-cakephp-repo>
-    cd <your-cakephp-project>
-    ddev config --project-type=cakephp --docroot=webroot
-    ddev composer install
-    ddev launch
+``` text
+git clone <your-cakephp-repo>
+cd <your-cakephp-project>
+ddev config --project-type=cakephp --docroot=webroot
+ddev composer install
+ddev launch
+```
 
 Please check [DDEV Docs](https://ddev.readthedocs.io/) for details on how to install / update DDEV.
 
@@ -239,24 +241,26 @@ After installing your application using one of the methods above into the
 directory of your choosing - we'll assume you chose /cake_install - your
 production setup will look like this on the file system:
 
-    cake_install/
-        bin/
-        config/
-        logs/
-        plugins/
-        resources/
-        src/
-        templates/
-        tests/
-        tmp/
-        vendor/
-        webroot/ (this directory is set as DocumentRoot)
-        .gitignore
-        .htaccess
-        composer.json
-        index.php
-        phpunit.xml.dist
-        README.md
+``` text
+cake_install/
+    bin/
+    config/
+    logs/
+    plugins/
+    resources/
+    src/
+    templates/
+    tests/
+    tmp/
+    vendor/
+    webroot/ (this directory is set as DocumentRoot)
+    .gitignore
+    .htaccess
+    composer.json
+    index.php
+    phpunit.xml.dist
+    README.md
+```
 
 Developers using Apache should set the `DocumentRoot` directive for the domain
 to:
@@ -628,10 +632,12 @@ If you don't want or can't get mod_rewrite (or some other compatible module)
 running on your server, you will need to use CakePHP's built in pretty URLs.
 In **config/app.php**, uncomment the line that looks like:
 
-    'App' => [
-        // ...
-        // 'baseUrl' => env('SCRIPT_NAME'),
-    ]
+``` text
+'App' => [
+    // ...
+    // 'baseUrl' => env('SCRIPT_NAME'),
+]
+```
 
 Also remove these .htaccess files:
 

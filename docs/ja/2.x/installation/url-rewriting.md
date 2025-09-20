@@ -16,19 +16,21 @@ httpd.conf を見てください（ユーザーやサイト独自の httpd.conf 
     AllowOverride が All に設定されていることを確かめてください。
     以下のようなものになるはずです。 :
 
-        # Each directory to which Apache has access can be configured with respect
-        # to which services and features are allowed and/or disabled in that
-        # directory (and its subdirectories).
-        #
-        # First, we configure the "default" to be a very restrictive set of
-        # features.
-        #
-        <Directory />
-            Options FollowSymLinks
-            AllowOverride All
-        #    Order deny,allow
-        #    Deny from all
-        </Directory>
+    ``` text
+    # Each directory to which Apache has access can be configured with respect
+    # to which services and features are allowed and/or disabled in that
+    # directory (and its subdirectories).
+    #
+    # First, we configure the "default" to be a very restrictive set of
+    # features.
+    #
+    <Directory />
+        Options FollowSymLinks
+        AllowOverride All
+    #    Order deny,allow
+    #    Deny from all
+    </Directory>
+    ```
 
     Apache 2.4 以上の場合、 `httpd.conf` やバーチャルホストの設定を以下のように
     更新する必要があります。 :
@@ -206,14 +208,16 @@ server {
 サブフォルダ以下でプロジェクトを実行する必要があるなら、全てのリクエストに "/webroot" を
 追加しなければなりません。
 
-    location ~ ^/(subfolder)/(.*)? {
-       index  index.php;
+``` text
+location ~ ^/(subfolder)/(.*)? {
+   index  index.php;
 
-       set $new_uri /$1/webroot/$2;
-       try_files $new_uri $new_uri/ /$1/index.php?$args;
+   set $new_uri /$1/webroot/$2;
+   try_files $new_uri $new_uri/ /$1/index.php?$args;
 
-       ... php handling ...
-    }
+   ... php handling ...
+}
+```
 
 > [!NOTE]
 > PHP-FPM の最近の設定は、IP アドレス 127.0.0.1 の 9000 番 TCP ポートの代わりに
@@ -280,9 +284,11 @@ lighttpd は .htaccess 機能をサポートしていません。
 lighttpd の設定において「mod_rewrite」の機能がアクティブになっていることを確認し、
 次の行を追記して下さい。
 
-    url.rewrite-if-not-file =(
-        "^([^\?]*)(\?(.+))?$" => "/index.php?url=$1&$3"
-    )
+``` text
+url.rewrite-if-not-file =(
+    "^([^\?]*)(\?(.+))?$" => "/index.php?url=$1&$3"
+)
+```
 
 ## Hiawatha での URL 書き換え規則
 

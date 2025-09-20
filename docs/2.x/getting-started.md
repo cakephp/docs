@@ -102,22 +102,24 @@ a single table to store our posts. We'll also throw in a few posts
 right now to use for testing purposes. Execute the following SQL
 statements into your database:
 
-    /* First, create our posts table: */
-    CREATE TABLE posts (
-        id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-        title VARCHAR(50),
-        body TEXT,
-        created DATETIME DEFAULT NULL,
-        modified DATETIME DEFAULT NULL
-    );
+``` text
+/* First, create our posts table: */
+CREATE TABLE posts (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(50),
+    body TEXT,
+    created DATETIME DEFAULT NULL,
+    modified DATETIME DEFAULT NULL
+);
 
-    /* Then insert some posts for testing: */
-    INSERT INTO posts (title, body, created)
-        VALUES ('The title', 'This is the post body.', NOW());
-    INSERT INTO posts (title, body, created)
-        VALUES ('A title once again', 'And the post body follows.', NOW());
-    INSERT INTO posts (title, body, created)
-        VALUES ('Title strikes back', 'This is really exciting! Not.', NOW());
+/* Then insert some posts for testing: */
+INSERT INTO posts (title, body, created)
+    VALUES ('The title', 'This is the post body.', NOW());
+INSERT INTO posts (title, body, created)
+    VALUES ('A title once again', 'And the post body follows.', NOW());
+INSERT INTO posts (title, body, created)
+    VALUES ('Title strikes back', 'This is really exciting! Not.', NOW());
+```
 
 The choices on table and column names are not arbitrary. If you
 follow CakePHP's database naming conventions, and CakePHP's class naming
@@ -183,19 +185,23 @@ The security salt is used for generating hashes. Change the default
 `Security.salt` value in `/app/Config/core.php`. The replacement value
 should be long, hard to guess and be as random as you can make it:
 
-    /**
-     * A random string used in security hashing methods.
-     */
-    Configure::write('Security.salt', 'pl345e-P45s_7h3*S@l7!');
+``` php
+/**
+ * A random string used in security hashing methods.
+ */
+Configure::write('Security.salt', 'pl345e-P45s_7h3*S@l7!');
+```
 
 The cipher seed is used for encrypt/decrypt strings. Change the default
 `Security.cipherSeed` value by editing `/app/Config/core.php`. The
 replacement value should be a large random integer:
 
-    /**
-     * A random numeric string (digits only) used to encrypt/decrypt strings.
-     */
-    Configure::write('Security.cipherSeed', '7485712659625147843639846751');
+``` php
+/**
+ * A random numeric string (digits only) used to encrypt/decrypt strings.
+ */
+Configure::write('Security.cipherSeed', '7485712659625147843639846751');
+```
 
 ### A Note on mod_rewrite
 
@@ -315,44 +321,46 @@ Remember how in the last section we assigned the 'posts' variable
 to the view using the `set()` method? That would pass data
 to the view that would look something like this:
 
-    // print_r($posts) output:
+``` text
+// print_r($posts) output:
 
-    Array
-    (
-        [0] => Array
-            (
-                [Post] => Array
-                    (
-                        [id] => 1
-                        [title] => The title
-                        [body] => This is the post body.
-                        [created] => 2008-02-13 18:34:55
-                        [modified] =>
-                    )
-            )
-        [1] => Array
-            (
-                [Post] => Array
-                    (
-                        [id] => 2
-                        [title] => A title once again
-                        [body] => And the post body follows.
-                        [created] => 2008-02-13 18:34:56
-                        [modified] =>
-                    )
-            )
-        [2] => Array
-            (
-                [Post] => Array
-                    (
-                        [id] => 3
-                        [title] => Title strikes back
-                        [body] => This is really exciting! Not.
-                        [created] => 2008-02-13 18:34:57
-                        [modified] =>
-                    )
-            )
-    )
+Array
+(
+    [0] => Array
+        (
+            [Post] => Array
+                (
+                    [id] => 1
+                    [title] => The title
+                    [body] => This is the post body.
+                    [created] => 2008-02-13 18:34:55
+                    [modified] =>
+                )
+        )
+    [1] => Array
+        (
+            [Post] => Array
+                (
+                    [id] => 2
+                    [title] => A title once again
+                    [body] => And the post body follows.
+                    [created] => 2008-02-13 18:34:56
+                    [modified] =>
+                )
+        )
+    [2] => Array
+        (
+            [Post] => Array
+                (
+                    [id] => 3
+                    [title] => Title strikes back
+                    [body] => This is really exciting! Not.
+                    [created] => 2008-02-13 18:34:57
+                    [modified] =>
+                )
+        )
+)
+```
 
 CakePHP's view files are stored in `/app/View` inside a folder
 named after the controller to which they correspond. (We'll have to create
@@ -891,7 +899,7 @@ This line connects the URL '/' with the default CakePHP home page.
 We want it to connect with our own controller, so replace that line
 with this one:
 
-``` css
+``` php
 Router::connect('/', array('controller' => 'posts', 'action' => 'index'));
 ```
 

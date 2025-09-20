@@ -54,8 +54,10 @@ CakeSchema callbacks. Every schema file is generated with a
 The `$event` param holds an array with two keys. One to tell if a
 table is being dropped or created and another for errors. Examples:
 
-    array('drop' => 'posts', 'errors' => null)
-    array('create' => 'posts', 'errors' => null)
+``` text
+array('drop' => 'posts', 'errors' => null)
+array('create' => 'posts', 'errors' => null)
+```
 
 Adding data to a posts table for example would like this:
 
@@ -177,13 +179,15 @@ the following attributes.
 
 Example column:
 
-    'id' => array(
-        'type' => 'integer',
-        'null' => false,
-        'default' => null,
-        'length' => 10,
-        'key' => 'primary'
-     ),
+``` text
+'id' => array(
+    'type' => 'integer',
+    'null' => false,
+    'default' => null,
+    'length' => 10,
+    'key' => 'primary'
+ ),
+```
 
 key  
 The `primary` key defines the primary key index.
@@ -230,24 +234,28 @@ This is either a single column name or an array of columns.
 
 e.g. Single :
 
-    'indexes' => array(
-        'PRIMARY' => array(
-            'column' => 'id',
-            'unique' => 1
-        )
+``` text
+'indexes' => array(
+    'PRIMARY' => array(
+        'column' => 'id',
+        'unique' => 1
     )
+)
+```
 
 e.g. Multiple :
 
-    'indexes' => array(
-        'AB_KEY' => array(
-            'column' => array(
-                'a_id',
-                'b_id'
-            ),
-            'unique' => 1
-        )
+``` text
+'indexes' => array(
+    'AB_KEY' => array(
+        'column' => array(
+            'a_id',
+            'b_id'
+        ),
+        'unique' => 1
     )
+)
+```
 
 unique  
 If the index is unique, set this to 1, otherwise 0.
@@ -319,12 +327,14 @@ $ Console/cake schema generate
 
 Will bring up the following choices:
 
-    Generating Schema...
-    Schema file exists.
-     [O]verwrite
-     [S]napshot
-     [Q]uit
-    Would you like to do? (o/s/q)
+``` text
+Generating Schema...
+Schema file exists.
+ [O]verwrite
+ [S]napshot
+ [Q]uit
+Would you like to do? (o/s/q)
+```
 
 Choosing \[s\] (snapshot) will create an incremented schema.php. So
 if you have schema.php, it will create schema_2.php and so on. You
@@ -406,8 +416,10 @@ $ Console/cake schema update
 
 Will bring up the following choices:
 
-    The following statements will run.
-    ALTER TABLE `roles`
-    DROP `position`;
-    Are you sure you want to alter the tables? (y/n)
-    [n] >
+``` text
+The following statements will run.
+ALTER TABLE `roles`
+DROP `position`;
+Are you sure you want to alter the tables? (y/n)
+[n] >
+```

@@ -49,11 +49,13 @@ debug の無効化は以下の種々のものごとに変更を与えます:
 
 そうすると `core.php` デバッグレベルを動的に設定できます。 :
 
-    if (getenv('CAKEPHP_DEBUG')) {
-        Configure::write('debug', 2);
-    } else {
-        Configure::write('debug', 0);
-    }
+``` php
+if (getenv('CAKEPHP_DEBUG')) {
+    Configure::write('debug', 2);
+} else {
+    Configure::write('debug', 0);
+}
+```
 
 ## アプリケーションのパフォーマンスの向上
 

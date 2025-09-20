@@ -91,10 +91,12 @@ CakePHP will use conventions to generate the name your commands use on the
 command line. If you want to overwrite the generated name implement the
 `defaultName()` method in your command:
 
-    public static function defaultName(): string
-    {
-        return 'oh_hi';
-    }
+``` text
+public static function defaultName(): string
+{
+    return 'oh_hi';
+}
+```
 
 The above would make our `HelloCommand` accessible by `cake oh_hi` instead
 of `cake hello`.

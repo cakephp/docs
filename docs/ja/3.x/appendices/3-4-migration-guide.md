@@ -373,12 +373,14 @@ public function beforeRender($event)
 コントローラーの保護に役立ちます。メソッドを公開する必要がある場合は、
 `use` ステートメントを次のように更新する必要があります。 :
 
-    use CellTrait {
-        cell as public;
-    }
-    use MailerAwareTrait {
-        getMailer as public;
-    }
+``` text
+use CellTrait {
+    cell as public;
+}
+use MailerAwareTrait {
+    getMailer as public;
+}
+```
 
 ## Collection
 

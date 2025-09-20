@@ -371,12 +371,14 @@ echo $this->Form->control('tag_string', ['type' => 'text']);
 また、記事のビューテンプレートを更新する必要があります。
 **/templates/Articles/view.php** に以下の行を追加してください。 :
 
-    <!-- File: templates/Articles/view.php -->
+``` text
+<!-- File: templates/Articles/view.php -->
 
-    <h1><?= h($article->title) ?></h1>
-    <p><?= h($article->body) ?></p>
-    // 以下の行を追加
-    <p><b>Tags:</b> <?= h($article->tag_string) ?></p>
+<h1><?= h($article->title) ?></h1>
+<p><?= h($article->body) ?></p>
+// 以下の行を追加
+<p><b>Tags:</b> <?= h($article->tag_string) ?></p>
+```
 
 また、既存のタグを取得できるようにviewメソッドを更新する必要があります。 :
 

@@ -5,11 +5,13 @@ Aclシェル はACLデータベースのレコードの管理や確認をする�
 
 Aclシェルのサブコマンドはたいてい、 aco/aro ノードへの参照を伴います。ノードには２つの「形式」があるためシェルにも２種類の記述方法が存在します。 :
 
-    # モデル + 外部キーによる参照
-    ./Console/cake acl view aro Model.1
+``` text
+# モデル + 外部キーによる参照
+./Console/cake acl view aro Model.1
 
-    # エイリアスパスによる参照
-    ./Console/cake acl view aco root/controllers
+# エイリアスパスによる参照
+./Console/cake acl view aco root/controllers
+```
 
 `.` はレコードによる参照を表し、 `/` はエイリアスパスを表します。
 

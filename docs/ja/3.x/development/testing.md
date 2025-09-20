@@ -58,16 +58,18 @@ php phpunit.phar
 忘れないでください。テストを実行する前に **config/app.php** に `test` データソース設定を
 追加する必要があります。この設定は、CakePHP でフィクスチャーのテーブルとデータのために使用されます。 :
 
-    'Datasources' => [
-        'test' => [
-            'datasource' => 'Cake\Database\Driver\Mysql',
-            'persistent' => false,
-            'host' => 'dbhost',
-            'username' => 'dblogin',
-            'password' => 'dbpassword',
-            'database' => 'test_database'
-        ],
+``` php
+'Datasources' => [
+    'test' => [
+        'datasource' => 'Cake\Database\Driver\Mysql',
+        'persistent' => false,
+        'host' => 'dbhost',
+        'username' => 'dblogin',
+        'password' => 'dbpassword',
+        'database' => 'test_database'
     ],
+],
+```
 
 > [!NOTE]
 > テストデータベースは実際のデータベースとは別のデータベースを作成することをお勧めします。
@@ -1714,15 +1716,17 @@ class BlogPostsTableTest extends TestCase
 フィクスチャーを使用する前に、あなたの `phpunit.xml` に、フィクスチャーのリスナーが含まれていることを
 ダブルチェックする必要があります。 :
 
-    <!-- フィクスチャーのためのリスナーのセットアップ -->
-    <listeners>
-        <listener
-        class="\Cake\TestSuite\Fixture\FixtureInjector">
-            <arguments>
-                <object class="\Cake\TestSuite\Fixture\FixtureManager" />
-            </arguments>
-        </listener>
-    </listeners>
+``` php
+<!-- フィクスチャーのためのリスナーのセットアップ -->
+<listeners>
+    <listener
+    class="\Cake\TestSuite\Fixture\FixtureInjector">
+        <arguments>
+            <object class="\Cake\TestSuite\Fixture\FixtureManager" />
+        </arguments>
+    </listener>
+</listeners>
+```
 
 また、フィクスチャーがロード可能であることを確認する必要があります。次のように **composer.json**
 ファイル内に存在することを確認してください。 :
@@ -1804,7 +1808,9 @@ CONFIG
 
 **config/bootstrap.php** ファイルの中の以下の行のコメントを外してください。 :
 
-    //Configure::load('app_local', 'default');
+``` php
+//Configure::load('app_local', 'default');
+```
 
 **app_local.php** ファイルを作成することにより、Jenkins に特有の設定を簡単に定義できます。
 あなたは Jenkins 上で必要な任意の他の設定ファイルを上書きするために、この同じ設定ファイルを

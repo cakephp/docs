@@ -245,7 +245,7 @@ to create an OpenID authentication object. In
 `app/Controller/Component/Auth/OpenidAuthenticate.php` you could put the
 following:
 
-``` css
+``` php
 App::uses('BaseAuthenticate', 'Controller/Component/Auth');
 
 class OpenidAuthenticate extends BaseAuthenticate {
@@ -491,7 +491,7 @@ class and need to implement the abstract methods `hash()` and `check()`.
 In `app/Controller/Component/Auth/CustomPasswordHasher.php` you could put the
 following:
 
-``` css
+``` php
 App::uses('AbstractPasswordHasher', 'Controller/Component/Auth');
 
 class CustomPasswordHasher extends AbstractPasswordHasher {
@@ -650,7 +650,7 @@ create an LDAP authorize object. In
 `app/Controller/Component/Auth/LdapAuthorize.php` you could put the
 following:
 
-``` css
+``` php
 App::uses('BaseAuthorize', 'Controller/Component/Auth');
 
 class LdapAuthorize extends BaseAuthorize {

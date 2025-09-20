@@ -45,8 +45,10 @@ Both `pluralize` and `singularize()` work on most English nouns. If you need
 to support other languages, you can use [Inflection Configuration](#inflection-configuration) to
 customize the rules used:
 
-    // Apples
-    echo Inflector::pluralize('Apple');
+``` text
+// Apples
+echo Inflector::pluralize('Apple');
+```
 
 > [!NOTE]
 > `pluralize()` may not always correctly convert a noun that is already in its plural form.
@@ -63,11 +65,13 @@ echo Inflector::singularize('People');
 
 These methods are useful when creating class names, or property names:
 
-    // ApplePie
-    Inflector::camelize('Apple_pie')
+``` text
+// ApplePie
+Inflector::camelize('Apple_pie')
 
-    // apple_pie
-    Inflector::underscore('ApplePie');
+// apple_pie
+Inflector::underscore('ApplePie');
+```
 
 It should be noted that underscore will only convert camelCase formatted words.
 Words that contains spaces will be lower-cased, but will not contain an
@@ -78,38 +82,46 @@ underscore.
 This method is useful when converting underscored forms into "Title Case" forms
 for human readable values:
 
-    // Apple Pie
-    Inflector::humanize('apple_pie');
+``` text
+// Apple Pie
+Inflector::humanize('apple_pie');
+```
 
 ## Creating Table and Class Name Forms
 
 When generating code, or using CakePHP's conventions you may need to inflect
 table names or class names:
 
-    // UserProfileSetting
-    Inflector::classify('user_profile_settings');
+``` text
+// UserProfileSetting
+Inflector::classify('user_profile_settings');
 
-    // user-profile-setting
-    Inflector::dasherize('UserProfileSetting');
+// user-profile-setting
+Inflector::dasherize('UserProfileSetting');
 
-    // user_profile_settings
-    Inflector::tableize('UserProfileSetting');
+// user_profile_settings
+Inflector::tableize('UserProfileSetting');
+```
 
 ## Creating Variable Names
 
 Variable names are often useful when doing meta-programming tasks that involve
 generating code or doing work based on conventions:
 
-    // applePie
-    Inflector::variable('apple_pie');
+``` text
+// applePie
+Inflector::variable('apple_pie');
+```
 
 ## Creating URL Safe Strings
 
 Slug converts special characters into latin versions and converting unmatched
 characters and spaces to dashes. The slug method expects UTF-8 encoding:
 
-    // apple-puree
-    Inflector::slug('apple purée');
+``` text
+// apple-puree
+Inflector::slug('apple purée');
+```
 
 > [!NOTE]
 > `Inflector::slug()` has been deprecated since 3.2.7. Use `Text::slug()`

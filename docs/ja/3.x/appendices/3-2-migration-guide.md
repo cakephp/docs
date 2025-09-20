@@ -36,9 +36,11 @@ CakePHP 4.xで削除されるメソッド、オプションや機能によって
 それは常に可能であるとは限りません。非推奨通知の修正を延期したい場合、
 **config/app.php** でそれらを無効にすることができます。 :
 
-    'Error' => [
-        'errorLevel' => E_ALL & ~E_DEPRECATED & ~E_USER_DEPRECATED,
-    ]
+``` text
+'Error' => [
+    'errorLevel' => E_ALL & ~E_DEPRECATED & ~E_USER_DEPRECATED,
+]
+```
 
 上記のエラーレベルは、CakePHP からの非推奨の警告を抑制します。
 

@@ -249,7 +249,9 @@ class User extends Entity
 You can access virtual fields as if they existed on the entity. The property
 name will be the lower case and underscored version of the method (`full_name`):
 
-    echo $user->full_name;
+``` text
+echo $user->full_name;
+```
 
 Do bear in mind that virtual fields cannot be used in finds. If you want
 them to be part of JSON or array representations of your entities,

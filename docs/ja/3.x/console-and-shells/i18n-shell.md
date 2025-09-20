@@ -26,7 +26,9 @@ i18n シェルは、素早く容易に po テンプレートファイルを生�
 
 特定のプラグインで使用される POT ファイルを生成することができます。 :
 
-    bin/cake i18n extract --plugin <Plugin>
+``` text
+bin/cake i18n extract --plugin <Plugin>
+```
 
 これにより、プラグインで使用される必要な POT ファイルが生成されます。
 

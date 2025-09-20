@@ -816,7 +816,9 @@ $query = $articles->find()
 > If you use `innerJoinWith()` and want to `select()` fields from that association,
 > you need to use an alias for the field:
 >
->     $query
+> ``` text
+> $query
+> ```
 >
 > > -\>select(\['country_name' =\> 'Countries.name'\])
 > > -\>innerJoinWith('Countries');
@@ -1287,13 +1289,15 @@ $wordCount = $articles->find()
 This could return a very large array if we don't clean stop words, but it could
 look something like this:
 
-    [
-        'cakephp' => 100,
-        'awesome' => 39,
-        'impressive' => 57,
-        'outstanding' => 10,
-        'mind-blowing' => 83
-    ]
+``` php
+[
+    'cakephp' => 100,
+    'awesome' => 39,
+    'impressive' => 57,
+    'outstanding' => 10,
+    'mind-blowing' => 83
+]
+```
 
 One last example and you will be a map-reduce expert. Imagine you have
 a `friends` table and you want to find "fake friends" in our database, or
@@ -1309,15 +1313,17 @@ $mapper = function ($rel, $key, $mr) {
 
 The intermediate array will be like the following:
 
-    [
-        1 => [2, 3, 4, 5, -3, -5],
-        2 => [-1],
-        3 => [-1, 1, 6],
-        4 => [-1],
-        5 => [-1, 1],
-        6 => [-3],
-        ...
-    ]
+``` text
+[
+    1 => [2, 3, 4, 5, -3, -5],
+    2 => [-1],
+    3 => [-1, 1, 6],
+    4 => [-1],
+    5 => [-1, 1],
+    6 => [-3],
+    ...
+]
+```
 
 Positive numbers mean that a user, indicated with the first-level key, is
 following them, and negative numbers mean that the user is followed by them.
@@ -1352,11 +1358,13 @@ $fakeFriends = $friends->find()
 
 This would return an array similar to this:
 
-    [
-        1 => [2, 4],
-        3 => [6]
-        ...
-    ]
+``` text
+[
+    1 => [2, 4],
+    3 => [6]
+    ...
+]
+```
 
 The resulting array means, for example, that user with id `1` follows users
 `2` and `4`, but those do not follow `1` back.

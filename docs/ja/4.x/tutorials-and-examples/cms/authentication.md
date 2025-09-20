@@ -106,10 +106,12 @@ use Psr\Http\Message\ServerRequestInterface;
 
 次に `Application` クラスに認証インターフェースを実装します:
 
-    // in src/Application.php
-    class Application extends BaseApplication
-        implements AuthenticationServiceProviderInterface
-    {
+``` php
+// in src/Application.php
+class Application extends BaseApplication
+    implements AuthenticationServiceProviderInterface
+{
+```
 
 次に以下を追加します:
 

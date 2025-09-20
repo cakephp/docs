@@ -12,7 +12,7 @@ To upgrade to the new fixture system, you need to make a few updates:
 
 2.  Add the following to your `phpunit.xml`:
 
-    ``` html
+    ``` php
     <extensions>
         <extension class="\Cake\TestSuite\Fixture\PHPUnitExtension" />
     </extensions>

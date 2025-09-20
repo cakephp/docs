@@ -540,4 +540,6 @@ set a namespace with the `Cake\Core\Configure::write` method. As an example:
 
 Would be configured with:
 
-    Cake\Core\Configure::write('App.namespace', 'App\My\Namespace');
+``` php
+Cake\Core\Configure::write('App.namespace', 'App\My\Namespace');
+```

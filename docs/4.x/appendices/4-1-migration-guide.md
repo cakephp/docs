@@ -16,7 +16,9 @@ duration of 4.x but will be removed in 5.0. You can use the
 [upgrade tool](../appendices/4-0-upgrade-guide#upgrade-tool-use) to automate updating deprecated
 features:
 
-    bin/cake upgrade rector --rules cakephp41 <path/to/app/src>
+``` text
+bin/cake upgrade rector --rules cakephp41 <path/to/app/src>
+```
 
 > [!NOTE]
 > This only updates CakePHP 4.1 changes. Make sure you apply CakePHP 4.0 changes first.

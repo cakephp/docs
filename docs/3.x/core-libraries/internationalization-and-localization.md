@@ -103,11 +103,13 @@ learn more.
 The default locale can be set in your **config/app.php** file by setting
 `App.defaultLocale`:
 
-    'App' => [
-        ...
-        'defaultLocale' => env('APP_DEFAULT_LOCALE', 'en_US'),
-        ...
-    ]
+``` text
+'App' => [
+    ...
+    'defaultLocale' => env('APP_DEFAULT_LOCALE', 'en_US'),
+    ...
+]
+```
 
 This will control several aspects of the application, including the default
 translations language, the date format, number format and currency whenever any
@@ -134,13 +136,17 @@ application. The most frequently used one is `__()`. This function
 is used to retrieve a single translation message or return the same string if no
 translation was found:
 
-    echo __('Popular Articles');
+``` text
+echo __('Popular Articles');
+```
 
 If you need to group your messages, for example, translations inside a plugin,
 you can use the `__d()` function to fetch messages from another
 domain:
 
-    echo __d('my_plugin', 'Trending right now');
+``` text
+echo __d('my_plugin', 'Trending right now');
+```
 
 > [!NOTE]
 > If you want to translate your plugins and they're namespaced, you must name
@@ -153,9 +159,11 @@ This can happen if two strings are identical but refer to different things. For
 example, 'letter' has multiple meanings in English. To solve that problem, you
 can use the `__x()` function:
 
-    echo __x('written communication', 'He read the first letter');
+``` text
+echo __x('written communication', 'He read the first letter');
 
-    echo __x('alphabet learning', 'He read the first letter');
+echo __x('alphabet learning', 'He read the first letter');
+```
 
 The first argument is the context of the message and the second is the message
 to be translated.
@@ -171,57 +179,71 @@ msgstr "Er las den ersten Brief"
 Translation functions allow you to interpolate variables into the messages using
 special markers defined in the message itself or in the translated string:
 
-    echo __("Hello, my name is {0}, I'm {1} years old", ['Sara', 12]);
+``` text
+echo __("Hello, my name is {0}, I'm {1} years old", ['Sara', 12]);
+```
 
 Markers are numeric, and correspond to the keys in the passed array. You can
 also pass variables as independent arguments to the function:
 
-    echo __("Small step for {0}, Big leap for {1}", 'Man', 'Humanity');
+``` text
+echo __("Small step for {0}, Big leap for {1}", 'Man', 'Humanity');
+```
 
 All translation functions support placeholder replacements:
 
-    __d('validation', 'The field {0} cannot be left empty', 'Name');
+``` text
+__d('validation', 'The field {0} cannot be left empty', 'Name');
 
-    __x('alphabet', 'He read the letter {0}', 'Z');
+__x('alphabet', 'He read the letter {0}', 'Z');
+```
 
 The `'` (single quote) character acts as an escape code in translation
 messages. Any variables between single quotes will not be replaced and is
 treated as literal text. For example:
 
-    __("This variable '{0}' be replaced.", 'will not');
+``` text
+__("This variable '{0}' be replaced.", 'will not');
+```
 
 By using two adjacent quotes your variables will be replaced properly:
 
-    __("This variable ''{0}'' be replaced.", 'will');
+``` text
+__("This variable ''{0}'' be replaced.", 'will');
+```
 
 These functions take advantage of the
 [ICU MessageFormatter](https://php.net/manual/en/messageformatter.format.php)
 so you can translate messages and localize dates, numbers and currency at the
 same time:
 
-    echo __(
-        'Hi {0}, your balance on the {1,date} is {2,number,currency}',
-        ['Charles', new FrozenTime('2014-01-13 11:12:00'), 1354.37]
-    );
+``` text
+echo __(
+    'Hi {0}, your balance on the {1,date} is {2,number,currency}',
+    ['Charles', new FrozenTime('2014-01-13 11:12:00'), 1354.37]
+);
 
-    // Returns
-    Hi Charles, your balance on the Jan 13, 2014, 11:12 AM is $ 1,354.37
+// Returns
+Hi Charles, your balance on the Jan 13, 2014, 11:12 AM is $ 1,354.37
+```
 
 Numbers in placeholders can be formatted as well with fine grain control of the
 output:
 
-    echo __(
-        'You have traveled {0,number} kilometers in {1,number,integer} weeks',
-        [5423.344, 5.1]
-    );
+``` text
+echo __(
+    'You have traveled {0,number} kilometers in {1,number,integer} weeks',
+    [5423.344, 5.1]
+);
 
-    // Returns
-    You have traveled 5,423.34 kilometers in 5 weeks
+// Returns
+You have traveled 5,423.34 kilometers in 5 weeks
 
-    echo __('There are {0,number,#,###} people on earth', 6.1 * pow(10, 8));
+echo __('There are {0,number,#,###} people on earth', 6.1 * pow(10, 8));
 
-    // Returns
-    There are 6,100,000,000 people on earth
+// Returns
+There are 6,100,000,000 people on earth
+```
 
 This is the list of formatter specifiers you can put after the word `number`:
 
@@ -273,23 +295,27 @@ msgstr "{placeholder,plural,=0{Ningún resultado} =1{1 resultado} other{{1} resu
 And in the application use the following code to output either of the
 translations for such string:
 
-    __('{0,plural,=0{No records found }=1{Found 1 record} other{Found # records}}', [0]);
+``` text
+__('{0,plural,=0{No records found }=1{Found 1 record} other{Found # records}}', [0]);
 
-    // Returns "Ningún resultado" as the argument {0} is 0
+// Returns "Ningún resultado" as the argument {0} is 0
 
-    __('{0,plural,=0{No records found} =1{Found 1 record} other{Found # records}}', [1]);
+__('{0,plural,=0{No records found} =1{Found 1 record} other{Found # records}}', [1]);
 
-    // Returns "1 resultado" because the argument {0} is 1
+// Returns "1 resultado" because the argument {0} is 1
 
-    __('{placeholder,plural,=0{No records found} =1{Found 1 record} other{Found {1} records}}', [0, 'many', 'placeholder' => 2])
+__('{placeholder,plural,=0{No records found} =1{Found 1 record} other{Found {1} records}}', [0, 'many', 'placeholder' => 2])
 
-    // Returns "many resultados" because the argument {placeholder} is 2 and
-    // argument {1} is 'many'
+// Returns "many resultados" because the argument {placeholder} is 2 and
+// argument {1} is 'many'
+```
 
 A closer look to the format we just used will make it evident how messages are
 built:
 
-    { [count placeholder],plural, case1{message} case2{message} case3{...} ... }
+``` text
+{ [count placeholder],plural, case1{message} case2{message} case3{...} ... }
+```
 
 The `[count placeholder]` can be the array key number of any of the variables
 you pass to the translation function. It will be used for selecting the correct
@@ -308,9 +334,11 @@ msgstr "{0,plural,=0{Ningún resultado} =1{1 resultado} other{{1} resultados}}"
 
 Then use the new string in your code:
 
-    __('search.results', [2, 2]);
+``` text
+__('search.results', [2, 2]);
 
-    // Returns: "2 resultados"
+// Returns: "2 resultados"
+```
 
 The latter version has the downside that there is a need to have a translation
 messages file even for the default language, but has the advantage that it makes
@@ -322,7 +350,9 @@ languages like Arabic require a different plural when you refer
 to few things and other plural form for many things. In those cases you can
 use the ICU matching aliases. Instead of writing:
 
-    =0{No results} =1{...} other{...}
+``` text
+=0{No results} =1{...} other{...}
+```
 
 You can do:
 
@@ -410,9 +440,11 @@ minimum that is required for creating a translator is that the loader function
 should return a `Aura\Intl\Package` object. Once the code is in place you can
 use the translation functions as usual:
 
-    // Prior to 3.5 use I18n::locale()
-    I18n::setLocale('fr_FR');
-    __d('animals', 'Dog'); // Returns "Chien"
+``` text
+// Prior to 3.5 use I18n::locale()
+I18n::setLocale('fr_FR');
+__d('animals', 'Dog'); // Returns "Chien"
+```
 
 As you see, `Package` objects take translation messages as an array. You can
 pass the `setMessages()` method however you like: with inline code, including
@@ -420,15 +452,17 @@ another file, calling another function, etc. CakePHP provides a few loader
 functions you can reuse if you just need to change where messages are loaded.
 For example, you can still use **.po** files, but loaded from another location:
 
-    use Cake\I18n\MessagesFileLoader as Loader;
+``` php
+use Cake\I18n\MessagesFileLoader as Loader;
 
-    // Load messages from src/Locale/folder/sub_folder/filename.po
-    // Prior to 3.5 use translator()
-    I18n::setTranslator(
-        'animals',
-        new Loader('filename', 'folder/sub_folder', 'po'),
-        'fr_FR'
-    );
+// Load messages from src/Locale/folder/sub_folder/filename.po
+// Prior to 3.5 use translator()
+I18n::setTranslator(
+    'animals',
+    new Loader('filename', 'folder/sub_folder', 'po'),
+    'fr_FR'
+);
+```
 
 ### Creating Message Parsers
 
@@ -461,14 +495,16 @@ Bird: Oiseau
 
 And finally, configure the translation loader for the domain and locale:
 
-    use Cake\I18n\MessagesFileLoader as Loader;
+``` php
+use Cake\I18n\MessagesFileLoader as Loader;
 
-    // Prior to 3.5 use translator()
-    I18n::setTranslator(
-        'animals',
-        new Loader('animals', 'fr_FR', 'yaml'),
-        'fr_FR'
-    );
+// Prior to 3.5 use translator()
+I18n::setTranslator(
+    'animals',
+    new Loader('animals', 'fr_FR', 'yaml'),
+    'fr_FR'
+);
+```
 
 <a id="creating-generic-translators"></a>
 
@@ -523,23 +559,27 @@ to store messages under different domains or to trigger Gettext-style plural
 selection. The following is an example of storing translations for the same key
 in different contexts:
 
-    [
-        'He reads the letter {0}' => [
-            'alphabet' => 'Él lee la letra {0}',
-            'written communication' => 'Él lee la carta {0}'
-        ]
+``` php
+[
+    'He reads the letter {0}' => [
+        'alphabet' => 'Él lee la letra {0}',
+        'written communication' => 'Él lee la carta {0}'
     ]
+]
+```
 
 Similarly, you can express Gettext-style plurals using the messages array by
 having a nested array key per plural form:
 
-    [
-        'I have read one book' => 'He leído un libro',
-        'I have read {0} books' => [
-            'He leído un libro',
-            'He leído {0} libros'
-        ]
+``` php
+[
+    'I have read one book' => 'He leído un libro',
+    'I have read {0} books' => [
+        'He leído un libro',
+        'He leído {0} libros'
     ]
+]
+```
 
 ### Using Different Formatters
 
@@ -551,12 +591,16 @@ variables in translation messages and selecting the correct plural form.
 If you're dealing with a legacy application, or you don't need the power offered
 by the ICU message formatting, CakePHP also provides the `sprintf` formatter:
 
-    return Package('sprintf', 'fallback_domain', $messages);
+``` text
+return Package('sprintf', 'fallback_domain', $messages);
+```
 
 The messages to be translated will be passed to the `sprintf()` function for
 interpolating the variables:
 
-    __('Hello, my name is %s and I am %d years old', 'José', 29);
+``` text
+__('Hello, my name is %s and I am %d years old', 'José', 29);
+```
 
 It is possible to set the default formatter for all translators created by
 CakePHP before they are used for the first time. This does not include manually

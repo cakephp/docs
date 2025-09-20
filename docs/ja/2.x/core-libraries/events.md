@@ -193,10 +193,12 @@ $this->Order->getEventManager()->attach($statistics);
 この規約に従うことで、リスナークラスの設置が容易になります。また、アプリケーションの
 ブートストラッププロセスの間にグローバルリスナーのアタッチを推奨します。 :
 
-    // In app/Config/bootstrap.php
+``` text
+// In app/Config/bootstrap.php
 
-    // Load the global event listeners.
-    require_once APP . 'Config' . DS . 'events.php'
+// Load the global event listeners.
+require_once APP . 'Config' . DS . 'events.php'
+```
 
 カートアプリのイベントのブートストラップファイルの例は以下の通りです。 :
 

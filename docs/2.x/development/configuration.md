@@ -148,7 +148,7 @@ these additional classes into view.
 By using `App::build()` in bootstrap.php we can define additional
 paths where CakePHP will look for classes:
 
-``` css
+``` php
 App::build(array(
     'Model' => array(
         '/path/to/models',
@@ -291,7 +291,7 @@ compatible module) up and running on your server, you'll need to
 use CakePHP's built-in pretty URLs. In `/app/Config/core.php`,
 uncomment the line that looks like:
 
-``` css
+``` php
 Configure::write('App.baseUrl', env('SCRIPT_NAME'));
 ```
 
@@ -454,7 +454,7 @@ won't end up breaking the MVC structure we've set in place.
 This class can be called from
 anywhere within your application, in a static context:
 
-``` css
+``` php
 Configure::read('debug');
 
 
@@ -560,7 +560,7 @@ for more information on the specifics of ini files.
 To use a core config reader, you'll need to attach it to Configure
 using `Configure::config()`:
 
-``` css
+``` php
 App::uses('PhpReader', 'Configure');
 // Read config files from app/Config
 Configure::config('default', new PhpReader());
@@ -575,11 +575,13 @@ different types of sources. You can interact with attached readers
 using a few other methods on Configure. To see which reader
 aliases are attached you can use `Configure::configured()`:
 
-    // Get the array of aliases for attached readers.
-    Configure::configured();
+``` php
+// Get the array of aliases for attached readers.
+Configure::configured();
 
-    // Check if a specific reader is attached
-    Configure::configured('default');
+// Check if a specific reader is attached
+Configure::configured('default');
+```
 
 You can also remove attached readers. `Configure::drop('default')`
 would remove the default reader alias. Any future attempts to load configuration
@@ -601,8 +603,10 @@ files with that reader would fail.
 
 Once you've attached a config reader to Configure you can load configuration files:
 
-    // Load my_file.php using the 'default' reader object.
-    Configure::load('my_file', 'default');
+``` php
+// Load my_file.php using the 'default' reader object.
+Configure::load('my_file', 'default');
+```
 
 Loaded configuration files merge their data with the existing runtime configuration
 in Configure. This allows you to overwrite and add new values
@@ -630,13 +634,13 @@ configuration file loadable by the `PhpReader`
 Given that the 'default' reader is an instance of PhpReader.
 Save all data in Configure to the file \`my_config.php\`:
 
-``` css
+``` php
 Configure::dump('my_config.php', 'default');
 ```
 
 Save only the error handling configuration:
 
-``` css
+``` php
 Configure::dump('error.php', 'default', array('Error', 'Exception'));
 ```
 
@@ -665,8 +669,10 @@ Since configure only remembers values for the current request, you will
 need to store any modified configuration information if you want to
 use it in subsequent requests:
 
-    // Store the current configuration in the 'user_1234' key in the 'default' cache.
-    Configure::store('user_1234', 'default');
+``` php
+// Store the current configuration in the 'user_1234' key in the 'default' cache.
+Configure::store('user_1234', 'default');
+```
 
 Stored configuration data is persisted in the `Cache` class. This allows
 you to store Configuration information in any storage engine that `Cache` can talk to.
@@ -682,8 +688,10 @@ you to store Configuration information in any storage engine that `Cache` can ta
 Once you've stored runtime configuration, you'll probably need to restore it
 so you can access it again. `Configure::restore()` does exactly that:
 
-    // restore runtime configuration from the cache.
-    Configure::restore('user_1234', 'default');
+``` php
+// restore runtime configuration from the cache.
+Configure::restore('user_1234', 'default');
+```
 
 When restoring configuration information it's important to restore it with
 the same key, and cache configuration as was used to store it. Restored
@@ -723,7 +731,7 @@ class MyXmlReader implements ConfigReaderInterface {
 
 In your `app/Config/bootstrap.php` you could attach this reader and use it:
 
-``` css
+``` php
 App::uses('MyXmlReader', 'Configure');
 Configure::config('xml', new MyXmlReader());
 ...

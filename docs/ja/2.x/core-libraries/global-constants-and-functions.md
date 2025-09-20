@@ -19,7 +19,9 @@ CakePHP アプリケーション内の特定のファイルやディレクトリ
 > `sprintf()` 関数でのフォーマット文字列としてあつかわれます。
 > その文字列内のプレースホルダーを置き換えるための、追加の引数を供給できます:
 >
->     __('You have %s unread messages', h($number));
+> ``` text
+> __('You have %s unread messages', h($number));
+> ```
 >
 > > [!NOTE]
 > > より詳しい情報は

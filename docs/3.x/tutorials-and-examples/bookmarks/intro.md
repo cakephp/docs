@@ -162,24 +162,26 @@ values in the `Datasources.default` array in the **config/app.php** file
 with those that apply to your setup. A sample completed configuration
 array might look something like the following:
 
-    return [
-        // More configuration above.
-        'Datasources' => [
-            'default' => [
-                'className' => 'Cake\Database\Connection',
-                'driver' => 'Cake\Database\Driver\Mysql',
-                'persistent' => false,
-                'host' => 'localhost',
-                'username' => 'cakephp',
-                'password' => 'AngelF00dC4k3~',
-                'database' => 'cake_bookmarks',
-                'encoding' => 'utf8',
-                'timezone' => 'UTC',
-                'cacheMetadata' => true,
-            ],
+``` php
+return [
+    // More configuration above.
+    'Datasources' => [
+        'default' => [
+            'className' => 'Cake\Database\Connection',
+            'driver' => 'Cake\Database\Driver\Mysql',
+            'persistent' => false,
+            'host' => 'localhost',
+            'username' => 'cakephp',
+            'password' => 'AngelF00dC4k3~',
+            'database' => 'cake_bookmarks',
+            'encoding' => 'utf8',
+            'timezone' => 'UTC',
+            'cacheMetadata' => true,
         ],
-        // More configuration below.
-    ];
+    ],
+    // More configuration below.
+];
+```
 
 Once you've saved your **config/app.php** file, you should see that 'CakePHP is
 able to connect to the database' section have a checkmark.
@@ -194,10 +196,12 @@ Because our database is following the CakePHP conventions, we can use the
 [bake console](../../bake/usage) application to quickly generate a basic
 application. In your command line run the following commands:
 
-    // On Windows you'll need to use bin\cake instead.
-    bin/cake bake all users
-    bin/cake bake all bookmarks
-    bin/cake bake all tags
+``` text
+// On Windows you'll need to use bin\cake instead.
+bin/cake bake all users
+bin/cake bake all bookmarks
+bin/cake bake all tags
+```
 
 This will generate the controllers, models, views, their corresponding test
 cases, and fixtures for our users, bookmarks and tags resources. If you've

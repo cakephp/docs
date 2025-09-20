@@ -23,10 +23,12 @@ and other routes which would override the routes.
 If we wanted to allow REST access to a recipe database, we'd do
 something like this:
 
-    //In app/Config/routes.php...
+``` php
+//In app/Config/routes.php...
 
-    Router::mapResources('recipes');
-    Router::parseExtensions();
+Router::mapResources('recipes');
+Router::parseExtensions();
+```
 
 The first line sets up a number of default routes for easy REST access while
 `parseExtensions()` method specifies the desired result format (e.g. xml,
@@ -196,7 +198,7 @@ using `Router::resourceMap()`. This method allows you to set the
 default routes that get set with `Router::mapResources()`. When using
 this method you need to set *all* the defaults you want to use:
 
-``` css
+``` php
 Router::resourceMap(array(
     array('action' => 'index', 'method' => 'GET', 'id' => false),
     array('action' => 'view', 'method' => 'GET', 'id' => true),
@@ -226,7 +228,7 @@ You can provide `connectOptions` key in the `$options` array for
 `Router::mapResources()` to provide custom setting used by
 `Router::connect()`:
 
-``` css
+``` php
 Router::mapResources('books', array(
     'connectOptions' => array(
         'routeClass' => 'ApiRoute',

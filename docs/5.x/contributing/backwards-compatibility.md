@@ -123,12 +123,14 @@ locate code that needs to be updated before it breaks. If you wish to disable
 runtime warnings you can do so using the `Error.errorLevel` configuration
 value:
 
-    // in config/app.php
-    // ...
-    'Error' => [
-        'errorLevel' => E_ALL ^ E_USER_DEPRECATED,
-    ]
-    // ...
+``` text
+// in config/app.php
+// ...
+'Error' => [
+    'errorLevel' => E_ALL ^ E_USER_DEPRECATED,
+]
+// ...
+```
 
 Will disable runtime deprecation warnings.
 

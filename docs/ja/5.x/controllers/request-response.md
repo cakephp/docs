@@ -170,14 +170,16 @@ HTTP環境では、 `moveTo()` メソッドはファイルが実際にアップ�
 設定値 `App.uploadedFilesAsObjects` を `false` に設定してください。
 例えば、 `config/app.php` で以下のように設定します。 :
 
-    return [
+``` text
+return [
+    // ...
+    'App' => [
         // ...
-        'App' => [
-            // ...
-            'uploadedFilesAsObjects' => false,
-        ],
-        // ...
-    ];
+        'uploadedFilesAsObjects' => false,
+    ],
+    // ...
+];
+```
 
 このオプションを無効にすると、ファイルのアップロードはリクエストデータの中で配列として表現されます。
 それは、ネストされた入力/名前があっても変わらない正規化された構造を持っています。
@@ -185,13 +187,15 @@ HTTP環境では、 `moveTo()` メソッドはファイルが実際にアップ�
 (詳細は [PHPマニュアル](https://www.php.net/manual/en/features.file-upload.php) を参照してください)。
 つまり、 `$attachment` の値は次のようになります。 :
 
-    [
-        'name' => 'attachment.txt',
-        'type' => 'text/plain',
-        'size' => 123,
-        'tmp_name' => '/tmp/hfz6dbn.tmp'
-        'error' => 0
-    ]
+``` php
+[
+    'name' => 'attachment.txt',
+    'type' => 'text/plain',
+    'size' => 123,
+    'tmp_name' => '/tmp/hfz6dbn.tmp'
+    'error' => 0
+]
+```
 
 > [!TIP]
 > アップロードされたファイルは、リクエストデータとは別のオブジェクトとして
@@ -217,11 +221,13 @@ $attachment = $this->request->getUploadedFile('attachment');
 アップロードされたすべてのファイルを正規化された配列構造で返します。
 上の例では、ファイルの入力名が `attachment` の場合、構造は次のようになります。 :
 
-    [
-          'attachment' => object(Laminas\Diactoros\UploadedFile) {
-              // ...
-          }
-    ]
+``` php
+[
+      'attachment' => object(Laminas\Diactoros\UploadedFile) {
+          // ...
+      }
+]
+```
 
 `method` Cake\\Http\\ServerRequest::**withUploadedFiles**(array $files)
 

@@ -12,7 +12,7 @@ certain plugins.
 
 No problem:
 
-``` css
+``` php
 CakePlugin::loadAll(array(
     'Blog' => array('routes' => true),
     'ContactManager' => array('bootstrap' => true),
@@ -31,7 +31,7 @@ every plugin that doesn't have a more specific configuration.
 
 Load the bootstrap file from all plugins, and additionally the routes from the Blog plugin:
 
-``` css
+``` php
 CakePlugin::loadAll(array(
     array('bootstrap' => true),
     'Blog' => array('routes' => true)
@@ -46,10 +46,12 @@ CakePHP 2.3.0 added an `ignoreMissing` option, that allows you to ignore any
 missing routes and bootstrap files when loading plugins. You can shorten the
 code needed to load all plugins using this:
 
-    // Loads all plugins including any possible routes and bootstrap files
-    CakePlugin::loadAll(array(
-        array('routes' => true, 'bootstrap' => true, 'ignoreMissing' => true)
-    ));
+``` php
+// Loads all plugins including any possible routes and bootstrap files
+CakePlugin::loadAll(array(
+    array('routes' => true, 'bootstrap' => true, 'ignoreMissing' => true)
+));
+```
 
 Some plugins additionally need to create one or more tables in your database. In
 those cases, they will often include a schema file which you can
@@ -66,7 +68,7 @@ plugins will require more setup than others.
 If you like to load more than one bootstrap file for a plugin. You can specify
 an array of files for the bootstrap configuration key:
 
-``` css
+``` php
 CakePlugin::loadAll(array(
     'Blog' => array(
         'bootstrap' => array(

@@ -113,11 +113,13 @@ CLI 環境でキャッシュデータをよりよく管理するために、
 シェルコマンドで、キャッシュデータを消去するための方法が
 追加されました。 :
 
-    // 一つの設定のキャッシュをクリア
-    bin/cake cache clear <configname>
+``` text
+// 一つの設定のキャッシュをクリア
+bin/cake cache clear <configname>
 
-    // すべての設定のキャッシュをクリア
-    bin/cake cache clear_all
+// すべての設定のキャッシュをクリア
+bin/cake cache clear_all
+```
 
 ## FormHelper
 

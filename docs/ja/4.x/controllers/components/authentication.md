@@ -294,7 +294,9 @@ AuthComponent がユーザーレコードの格納にセッションを使用し
 > 読み込まれたかどうかをチェックしてください。もし Apache で FastCGI-PHP を使用している場合は、
 > webroot 内の **.htaccess** ファイルに次の行を追加する必要があるかもしれません。 :
 >
->     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization},L]
+> ``` text
+> RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization},L]
+> ```
 
 リクエストごとに、それらの値 (`PHP_AUTH_USER` と `PHP_AUTH_PW`) を再度ユーザーを
 識別するために使い、正規のユーザーであることを確認します。認証オブジェクトの `authenticate()`

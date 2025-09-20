@@ -103,11 +103,13 @@ i18n シェルを利用できます。より知りたい場合は、 [次の章]
 デフォルトのロケールは **config/app.php** ファイルの `App.defaultLocale`
 を以下のようにすることで設定できます。 :
 
-    'App' => [
-        ...
-        'defaultLocale' => env('APP_DEFAULT_LOCALE', 'en_US'),
-        ...
-    ]
+``` text
+'App' => [
+    ...
+    'defaultLocale' => env('APP_DEFAULT_LOCALE', 'en_US'),
+    ...
+]
+```
 
 これは、CakePHP が提供している地域化のライブラリーを使うと示されている場合いつでも、
 デフォルトの翻訳言語、日付のフォーマット、番号のフォーマットおよび通貨を含む、
@@ -131,12 +133,16 @@ CakePHP はアプリケーションを国際化する手助けになるさまざ
 最も頻繁に使われているものとして `__()` があります。
 この機能は一つの翻訳メッセージを引き出すか、見つからなかった場合は同じ文字列を返します。 :
 
-    echo __('Popular Articles');
+``` text
+echo __('Popular Articles');
+```
 
 もし、プラグインの中などで、メッセージをまとめる必要がある場合は、
 別のドメインからメッセージを取ってくるのに `__d()` が利用できます。 :
 
-    echo __d('my_plugin', 'Trending right now');
+``` text
+echo __d('my_plugin', 'Trending right now');
+```
 
 > [!NOTE]
 > もし、名前空間付きのプラグインを翻訳したい場合、ドメイン文字列には `Namespace/PluginName`
@@ -148,9 +154,11 @@ CakePHP はアプリケーションを国際化する手助けになるさまざ
 例えば、英語では 'letter' という単語は複数の意味を持ちます。この問題を解決するために
 `__x()` を利用することができます。 :
 
-    echo __x('written communication', 'He read the first letter');
+``` text
+echo __x('written communication', 'He read the first letter');
 
-    echo __x('alphabet learning', 'He read the first letter');
+echo __x('alphabet learning', 'He read the first letter');
+```
 
 第1引数はメッセージの文脈を示し、第2引数は翻訳されるべきメッセージです。
 
@@ -165,53 +173,67 @@ msgstr "彼は最初の手紙を読みました"
 翻訳関数を利用すると、メッセージの中あるいは翻訳された文字列の中で定義された特別なマーカーを
 用いているメッセージの中で変数を補完することができます。 :
 
-    echo __("Hello, my name is {0}, I'm {1} years old", ['Sara', 12]);
+``` text
+echo __("Hello, my name is {0}, I'm {1} years old", ['Sara', 12]);
+```
 
 マーカーは数値で、渡された配列のキーに対応します。関数に独立した引数として変数を渡すことも可能です。 :
 
-    echo __("Small step for {0}, Big leap for {1}", 'Man', 'Humanity');
+``` text
+echo __("Small step for {0}, Big leap for {1}", 'Man', 'Humanity');
+```
 
 あらゆる翻訳関数はプレースホルダーの置き換えに対応しています。 :
 
-    __d('validation', 'The field {0} cannot be left empty', 'Name');
+``` text
+__d('validation', 'The field {0} cannot be left empty', 'Name');
 
-    __x('alphabet', 'He read the letter {0}', 'Z');
+__x('alphabet', 'He read the letter {0}', 'Z');
+```
 
 `'` (シングルクオーテーション) は、翻訳メッセージの中ではエスケープコードとして扱われます。
 シングルクオーテーションの間の変数は、置き換えられませんし、文字通りのテキストとして扱われます。
 例えば、 :
 
-    __("This variable '{0}' be replaced.", 'will not');
+``` text
+__("This variable '{0}' be replaced.", 'will not');
+```
 
 変数の中で2つ連続してクオーテーションを用いると適切に置き換えられます。 :
 
-    __("This variable ''{0}'' be replaced.", 'will');
+``` text
+__("This variable ''{0}'' be replaced.", 'will');
+```
 
 これらの関数は [ICU MessageFormatter](https://php.net/manual/ja/messageformatter.format.php)
 を活用しています。そのためメッセージと地域化された日付や番号、通貨とを同時に翻訳することが可能です。 :
 
-    echo __(
-        'Hi {0}, your balance on the {1,date} is {2,number,currency}',
-        ['Charles', new FrozenTime('2014-01-13 11:12:00'), 1354.37]
-    );
+``` text
+echo __(
+    'Hi {0}, your balance on the {1,date} is {2,number,currency}',
+    ['Charles', new FrozenTime('2014-01-13 11:12:00'), 1354.37]
+);
 
-    // 結果
-    Hi Charles, your balance on the Jan 13, 2014, 11:12 AM is $ 1,354.37
+// 結果
+Hi Charles, your balance on the Jan 13, 2014, 11:12 AM is $ 1,354.37
+```
 
 プレースホルダーの中の数字は、出力のきめ細やかなコントロールによって、同様にフォーマットされます。 :
 
-    echo __(
-        'You have traveled {0,number} kilometers in {1,number,integer} weeks',
-        [5423.344, 5.1]
-    );
+``` text
+echo __(
+    'You have traveled {0,number} kilometers in {1,number,integer} weeks',
+    [5423.344, 5.1]
+);
 
-    // 結果
-    You have traveled 5,423.34 kilometers in 5 weeks
+// 結果
+You have traveled 5,423.34 kilometers in 5 weeks
 
-    echo __('There are {0,number,#,###} people on earth', 6.1 * pow(10, 8));
+echo __('There are {0,number,#,###} people on earth', 6.1 * pow(10, 8));
 
-    // 結果
-    There are 6,100,000,000 people on earth
+// 結果
+There are 6,100,000,000 people on earth
+```
 
 以下は、 `number` という言葉の後に続けられるフォーマット修飾子のリストです:
 
@@ -259,22 +281,26 @@ msgstr "{placeholder,plural,=0{Ningún resultado} =1{1 resultado} other{{1} resu
 そしてアプリケーション内では、このような文字列の翻訳のどちらかを出力するために、以下のようなコードを
 使ってください。 :
 
-    __('{0,plural,=0{No records found }=1{Found 1 record} other{Found # records}}', [0]);
+``` text
+__('{0,plural,=0{No records found }=1{Found 1 record} other{Found # records}}', [0]);
 
-    // 引数 {0} を 0 として "Ningún resultado" を返します。
+// 引数 {0} を 0 として "Ningún resultado" を返します。
 
-    __('{0,plural,=0{No records found} =1{Found 1 record} other{Found # records}}', [1]);
+__('{0,plural,=0{No records found} =1{Found 1 record} other{Found # records}}', [1]);
 
-    // 引数 {0} は 1 なので "1 resultado" を返します。
+// 引数 {0} は 1 なので "1 resultado" を返します。
 
-    __('{placeholder,plural,=0{No records found} =1{Found 1 record} other{Found {1} records}}', [0, 'many', 'placeholder' => 2])
+__('{placeholder,plural,=0{No records found} =1{Found 1 record} other{Found {1} records}}', [0, 'many', 'placeholder' => 2])
 
-    // 引数 {placeholder} は 2 で、引数 {1} は 'many' なので
-    // "many resultados" を返します。
+// 引数 {placeholder} は 2 で、引数 {1} は 'many' なので
+// "many resultados" を返します。
+```
 
 いま利用したフォーマットをよくみると、どのようにメッセージが構築されているのかがはっきりするでしょう。 :
 
-    { [count placeholder],plural, case1{message} case2{message} case3{...} ... }
+``` text
+{ [count placeholder],plural, case1{message} case2{message} case3{...} ... }
+```
 
 この `[count placeholder]` は翻訳関数にわたす変数の配列の key の番号です。
 正しい複数形を選択するのに使われます。
@@ -291,9 +317,11 @@ msgstr "{0,plural,=0{Ningún resultado} =1{1 resultado} other{{1} resultados}}"
 
 この場合は新しい文字列を使います。 :
 
-    __('search.results', [2, 2]);
+``` text
+__('search.results', [2, 2]);
 
-    // 戻り値: "2 resultados"
+// 戻り値: "2 resultados"
+```
 
 後者のバージョンでは、デフォルトの言語でさえも翻訳ファイルが必要になるという欠点がありますが、
 コードの可読性が上がり、複雑な複数形の選択文字列が翻訳ファイルに入らないという利点もあります。
@@ -302,7 +330,9 @@ msgstr "{0,plural,=0{Ningún resultado} =1{1 resultado} other{{1} resultados}}"
 少ないものの複数形と多いものの複数形が異なります。
 このような場合は ICU のマッチングエイリアスを利用できます。以下のように書く代わりに:
 
-    =0{No results} =1{...} other{...}
+``` text
+=0{No results} =1{...} other{...}
+```
 
 以下のようにすることができます。 :
 
@@ -395,14 +425,16 @@ __d('animals', 'Dog'); // "Chien" を返す
 変える必要がある場合に、使いまわせるいくつかのローダー機能を提供しています。例えば、
 **.po** ファイルを利用しているのに、他の場所から読み込みたい場合は、 :
 
-    use Cake\I18n\MessagesFileLoader as Loader;
+``` php
+use Cake\I18n\MessagesFileLoader as Loader;
 
-    // Load messages from resources/locales/folder/sub_folder/filename.po からメッセージをロード
-    I18n::setTranslator(
-        'animals',
-        new Loader('filename', 'folder/sub_folder', 'po'),
-        'fr_FR'
-    );
+// Load messages from resources/locales/folder/sub_folder/filename.po からメッセージをロード
+I18n::setTranslator(
+    'animals',
+    new Loader('filename', 'folder/sub_folder', 'po'),
+    'fr_FR'
+);
+```
 
 のようになります。
 
@@ -435,13 +467,15 @@ Bird: Oiseau
 
 最後に、翻訳を読み込むドメインと場所を設定します。 :
 
-    use Cake\I18n\MessagesFileLoader as Loader;
+``` php
+use Cake\I18n\MessagesFileLoader as Loader;
 
-    I18n::setTranslator(
-        'animals',
-        new Loader('animals', 'fr_FR', 'yaml'),
-        'fr_FR'
-    );
+I18n::setTranslator(
+    'animals',
+    new Loader('animals', 'fr_FR', 'yaml'),
+    'fr_FR'
+);
+```
 
 ### 包括的な翻訳機構を作成する
 
@@ -487,23 +521,27 @@ I18n::config('_fallback', function ($domain, $locale) {
 指示をだす、または、Gettext の複数形選択のきっかけとなるために作成されます。
 以下は、異なる文脈において同じキーを翻訳に設置する例です。 :
 
-    [
-        'He reads the letter {0}' => [
-            'alphabet' => 'Él lee la letra {0}',
-            'written communication' => 'Él lee la carta {0}'
-        ]
+``` php
+[
+    'He reads the letter {0}' => [
+        'alphabet' => 'Él lee la letra {0}',
+        'written communication' => 'Él lee la carta {0}'
     ]
+]
+```
 
 同様にして、メッセージの配列で用いられているGettextの複数形を、複数形ごとのキーを用いて
 ネストされた配列で表現することもできます。 :
 
-    [
-        'I have read one book' => 'He leído un libro',
-        'I have read {0} books' => [
-            'He leído un libro',
-            'He leído {0} libros'
-        ]
+``` php
+[
+    'I have read one book' => 'He leído un libro',
+    'I have read {0} books' => [
+        'He leído un libro',
+        'He leído {0} libros'
     ]
+]
+```
 
 ### 異なるフォーマット機構を使う
 
@@ -514,11 +552,15 @@ I18n::config('_fallback', function ($domain, $locale) {
 もし、レガシーなアプリケーションを扱っている、あるいは ICU メッセージフォーマットが提供している機能が
 必要ない場合、CakePHP は `sprinf` フォーマット機構も提供しています。 :
 
-    return Package('sprintf', 'fallback_domain', $messages);
+``` text
+return Package('sprintf', 'fallback_domain', $messages);
+```
 
 翻訳されるメッセージは `sprintf()` 関数に引数を入れて引き渡されます。 :
 
-    __('Hello, my name is %s and I am %d years old', 'José', 29);
+``` text
+__('Hello, my name is %s and I am %d years old', 'José', 29);
+```
 
 デフォルトのフォーマット機構を最初に使われる以前の CakePHP に作成されたすべての翻訳機構に
 設置することができます。

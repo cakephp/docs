@@ -48,11 +48,13 @@ multiple conversion pairs separated by `;`. You can find more info about
 transliterator identifiers
 [here](https://unicode-org.github.io/icu/userguide/transforms/general/#transliterator-identifiers):
 
-    // apple puree
-    Text::transliterate('apple purée');
+``` text
+// apple puree
+Text::transliterate('apple purée');
 
-    // Ubermensch (only latin characters are transliterated)
-    Text::transliterate('Übérmensch', 'Latin-ASCII;');
+// Ubermensch (only latin characters are transliterated)
+Text::transliterate('Übérmensch', 'Latin-ASCII;');
+```
 
 ## Creating URL Safe Strings
 
@@ -72,14 +74,16 @@ options are:
 - `preserve` Specific non-word character to preserve. Defaults to `null`.
   For example, this option can be set to '.' to generate clean file names:
 
-      // apple-puree
-      Text::slug('apple purée');
+  ``` text
+  // apple-puree
+  Text::slug('apple purée');
 
-      // apple_puree
-      Text::slug('apple purée', '_');
+  // apple_puree
+  Text::slug('apple purée', '_');
 
-      // foo-bar.tar.gz
-      Text::slug('foo bar.tar.gz', ['preserve' => '.']);
+  // foo-bar.tar.gz
+  Text::slug('foo bar.tar.gz', ['preserve' => '.']);
+  ```
 
 ## Generating UUIDs
 
@@ -246,11 +250,13 @@ HTML tags will be respected and will not be cut off.
 `$options` is used to pass all extra parameters, and has the following
 possible keys by default, all of which are optional:
 
-    [
-        'ellipsis' => '...',
-        'exact' => true,
-        'html' => false
-    ]
+``` php
+[
+    'ellipsis' => '...',
+    'exact' => true,
+    'html' => false
+]
+```
 
 Example:
 
@@ -295,10 +301,12 @@ truncation would otherwise take place.
 `$options` is used to pass all extra parameters, and has the following
 possible keys by default, all of which are optional:
 
-    [
-        'ellipsis' => '...',
-        'exact' => true
-    ]
+``` php
+[
+    'ellipsis' => '...',
+    'exact' => true
+]
+```
 
 Example:
 

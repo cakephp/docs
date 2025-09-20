@@ -343,12 +343,16 @@ $this->Form->addContextProvider('myprovider', function ($request, $data) {
 
 デフォルトでは、 `control()` メソッドは、次のウィジェットテンプレートを使用します。 :
 
-    'inputContainer' => '<div class="input {{type}}{{required}}">{{content}}</div>'
-    'input' => '<input type="{{type}}" name="{{name}}"{{attrs}}/>'
+``` text
+'inputContainer' => '<div class="input {{type}}{{required}}">{{content}}</div>'
+'input' => '<input type="{{type}}" name="{{name}}"{{attrs}}/>'
+```
 
 検証エラーが発生した場合は、以下も使われます。 :
 
-    'inputContainerError' => '<div class="input {{type}}{{required}} error">{{content}}{{error}}</div>'
+``` text
+'inputContainerError' => '<div class="input {{type}}{{required}} error">{{content}}{{error}}</div>'
+```
 
 作成されたコントロールの型（生成された要素タイプを指定する追加のオプションを指定しない場合）は、
 モデルの内部で推測され、列のデータ型に依存します。
@@ -817,7 +821,9 @@ echo $this->Form->hidden('id');
 
 textarea コントロールフィールドを作成します。使用されるデフォルトのウィジェットテンプレートは、 :
 
-    'textarea' => '<textarea name="{{name}}"{{attrs}}>{{value}}</textarea>'
+``` text
+'textarea' => '<textarea name="{{name}}"{{attrs}}>{{value}}</textarea>'
+```
 
 例:
 
@@ -1062,7 +1068,9 @@ $options = $examples->map(function ($value, $key) {
 
 `checkbox` フォーム要素を作成します。使用されるウィジェットテンプレートは、 :
 
-    'checkbox' => '<input type="checkbox" name="{{name}}" value="{{value}}"{{attrs}}>'
+``` text
+'checkbox' => '<input type="checkbox" name="{{name}}" value="{{value}}"{{attrs}}>'
+```
 
 **チェックボックスのオプション**
 
@@ -1130,8 +1138,10 @@ echo $this->Form->checkbox('done', ['hiddenField' => false]);
 
 radio ボタン入力を作成します。使用されるデフォルトのウィジェットテンプレートは、 :
 
-    'radio' => '<input type="radio" name="{{name}}" value="{{value}}"{{attrs}}>'
-    'radioWrapper' => '{{label}}'
+``` text
+'radio' => '<input type="radio" name="{{name}}" value="{{value}}"{{attrs}}>'
+'radioWrapper' => '{{label}}'
+```
 
 **ラジオボタンの属性**
 
@@ -1222,13 +1232,17 @@ echo $this->Form->radio(
 
 デフォルトでは、 `select` は次のウィジェットテンプレートを使用します。 :
 
-    'select' => '<select name="{{name}}"{{attrs}}>{{content}}</select>'
-    'option' => '<option value="{{value}}"{{attrs}}>{{text}}</option>'
+``` text
+'select' => '<select name="{{name}}"{{attrs}}>{{content}}</select>'
+'option' => '<option value="{{value}}"{{attrs}}>{{text}}</option>'
+```
 
 以下も使用します。 :
 
-    'optgroup' => '<optgroup label="{{label}}"{{attrs}}>{{content}}</optgroup>'
-    'selectMultiple' => '<select name="{{name}}[]" multiple="multiple"{{attrs}}>{{content}}</select>'
+``` text
+'optgroup' => '<optgroup label="{{label}}"{{attrs}}>{{content}}</optgroup>'
+'selectMultiple' => '<select name="{{name}}[]" multiple="multiple"{{attrs}}>{{content}}</select>'
+```
 
 **選択ピッカーの属性**
 
@@ -1484,7 +1498,9 @@ echo $this->Form->select('field', $options);
 フォームの中にファイルアップロードフィールドを作成します。
 デフォルトで使用されるウィジェットテンプレートは:
 
-    'file' => '<input type="file" name="{{name}}"{{attrs}}>'
+``` text
+'file' => '<input type="file" name="{{name}}"{{attrs}}>'
+```
 
 フォームにファイルアップロードフィールドを追加するためには、まずフォームの enctype に
 `'multipart/form-data'` がセットされていることを確認してください。
@@ -1616,7 +1632,9 @@ $this->request->data['submittedfile']
 コントロールの順序、およびコントロール間の要素/内容を制御するには、 `dateWidget`
 テンプレートを上書きします。デフォルトで `dateWidget` テンプレートは:
 
-    {{year}}{{month}}{{day}}{{hour}}{{minute}}{{second}}{{meridian}}
+``` text
+{{year}}{{month}}{{day}}{{hour}}{{minute}}{{second}}{{meridian}}
+```
 
 オプションを指定せずにメソッドを呼び出すと、デフォルトでは、年（4桁）、月（英語の完全名）、
 曜日（数値）、時間（数値）、分（数値）の5つの選択ピッカーが生成されます。
@@ -1922,9 +1940,11 @@ FormHelper は、フィールドエラーを簡単にチェックしたり、必
 
 次のテンプレートウィジェットを使います。 :
 
-    'error' => '<div class="error-message">{{content}}</div>'
-    'errorList' => '<ul>{{content}}</ul>'
-    'errorItem' => '<li>{{text}}</li>'
+``` text
+'error' => '<div class="error-message">{{content}}</div>'
+'errorList' => '<ul>{{content}}</ul>'
+'errorItem' => '<li>{{text}}</li>'
+```
 
 `'errorList'` と `'errorItem'` テンプレートは、１つのフィールドに複数の
 エラーメッセージを書式化するために使用されます。
@@ -2007,13 +2027,15 @@ notBlank バリデーションメッセージに対するエラーメッセー�
 代わりに 特別な `customValidityMessage` テンプレート変数を使用することができます。
 このテンプレート変数はフィールドが必須の場合に追加されます。 :
 
-    // テンプレート例
-    [
-        'input' => '<input type="{{type}}" name="{{name}}" data-error-message="{{customValidityMessage}}" {{attrs}}/>',
-    ]
+``` text
+// テンプレート例
+[
+    'input' => '<input type="{{type}}" name="{{name}}" data-error-message="{{customValidityMessage}}" {{attrs}}/>',
+]
 
-    // このような input が作成されます
-    <input type="text" name="field" required data-error-message="Custom notBlank message" />
+// このような input が作成されます
+<input type="text" name="field" required data-error-message="Custom notBlank message" />
+```
 
 それから Javascript を使って `onvalid` と `oninvalid` イベントを好きなように設定できます。
 
@@ -2036,8 +2058,10 @@ notBlank バリデーションメッセージに対するエラーメッセー�
 
 デフォルトで次のウィジェットテンプレートを使用します。 :
 
-    'inputSubmit' => '<input type="{{type}}"{{attrs}}/>'
-    'submitContainer' => '<div class="submit">{{content}}</div>'
+``` text
+'inputSubmit' => '<input type="{{type}}"{{attrs}}/>'
+'submitContainer' => '<div class="submit">{{content}}</div>'
+```
 
 **Submit のオプション**
 
@@ -2279,10 +2303,12 @@ $this->loadHelper('Form', [
 これは、 **config/app_form.php** の中のタグを読み込みます。
 このファイルには、名前で索引付けされたテンプレートの配列が含まれている必要があります。 :
 
-    // config/app_form.php の中で
-    return [
-        'inputContainer' => '<div class="form-control">{{content}}</div>',
-    ];
+``` text
+// config/app_form.php の中で
+return [
+    'inputContainer' => '<div class="form-control">{{content}}</div>',
+];
+```
 
 定義したテンプレートは、ヘルパーに含まれるデフォルトのテンプレートを置き換えます。
 置き換えられていないテンプレートは引き続きデフォルト値を使用します。

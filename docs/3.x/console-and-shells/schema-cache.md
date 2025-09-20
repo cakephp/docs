@@ -16,11 +16,13 @@ providing its name:
 In addition to building cached data, you can use the SchemaCacheShell to remove
 cached metadata as well:
 
-    # Clear all metadata
-    bin/cake schema_cache clear
+``` text
+# Clear all metadata
+bin/cake schema_cache clear
 
-    # Clear a single table
-    bin/cake schema_cache clear articles
+# Clear a single table
+bin/cake schema_cache clear articles
+```
 
 > [!NOTE]
 > Prior to 3.6 you should use `orm_cache` instead of `schema_cache`.

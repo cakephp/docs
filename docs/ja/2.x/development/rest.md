@@ -20,10 +20,12 @@ Router オブジェクトは、 `mapResources()` というメソッドを提供�
 routes をオーバーライドする他の routes よりも前に呼び出す必要があります。
 例えば、レシピ (recipe) データベースにアクセスする REST は、下記のようにします :
 
-    //In app/Config/routes.php...
+``` php
+//In app/Config/routes.php...
 
-    Router::mapResources('recipes');
-    Router::parseExtensions();
+Router::mapResources('recipes');
+Router::parseExtensions();
+```
 
 最初の行は、簡単に REST アクセス可能にするために、いくつかのデフォルトルートをセットしています。
 `parseExtensions()` メソッドで、最終的に受け取りたいフォーマット (例えば xml, json, rss) の
@@ -184,7 +186,7 @@ CakePHP では、 `RequestHandlerComponent` クラスが助けてくれます。
 によって定義が適用されます。
 このメソッドを利用する場合は、 *全ての* デフォルト定義を記載しておく必要があります。
 
-``` css
+``` php
 Router::resourceMap(array(
     array('action' => 'index', 'method' => 'GET', 'id' => false),
     array('action' => 'view', 'method' => 'GET', 'id' => true),
@@ -211,7 +213,7 @@ Router::resourceMap(array(
 `Router::mapResources()` の `$options` 配列の `connectOptions`
 キーで `Router::connect()`\` を使った設定ができます。 :
 
-``` css
+``` php
 Router::mapResources('books', array(
     'connectOptions' => array(
         'routeClass' => 'ApiRoute',

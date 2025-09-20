@@ -32,15 +32,19 @@
 > アプリケーションの AppController と AppModel を継承します。
 > ContacktManager の例ではこうなります。
 
-    // /app/Plugin/ContactManager/Controller/ContactManagerAppController.php の中で
+``` php
+// /app/Plugin/ContactManager/Controller/ContactManagerAppController.php の中で
 
-    class ContactManagerAppController extends AppController {
-    }
+class ContactManagerAppController extends AppController {
+}
+```
 
-    // /app/Plugin/ContactManager/Model/ContactManagerAppModel.php の中で
+``` php
+// /app/Plugin/ContactManager/Model/ContactManagerAppModel.php の中で
 
-    class ContactManagerAppModel extends AppModel {
-    }
+class ContactManagerAppModel extends AppModel {
+}
+```
 
 もしこれらの特別なクラスの定義を忘れると、”Missing Controller” エラーがでます。
 
@@ -108,10 +112,12 @@ class ContactsController extends ContactManagerAppController {
 プラグインのモデルは /app/Plugin/ContactManager/Model に設置されます。
 プラグインの ContactsController は既に定義してあるので、そのモデルを作成します。 :
 
-    // /app/Plugin/ContactManager/Model/Contact.php の中で
+``` php
+// /app/Plugin/ContactManager/Model/Contact.php の中で
 
-    class Contact extends ContactManagerAppModel {
-    }
+class Contact extends ContactManagerAppModel {
+}
+```
 
 /contact_manager/contacts に（contacts テーブルがある状態で）
 今アクセスすると、“Missing View” エラーが発生します。 次にこれを作ります。
@@ -151,10 +157,12 @@ class Contact extends ContactManagerAppModel {
 ContactManager プラグインでは、ContactsController::index()
 アクションのビューが必要になるので、 このような内容になります。 :
 
-    <!-- /app/Plugin/ContactManager/View/Contacts/index.ctp: -->
-    <h1>Contacts</h1>
-    <p>Following is a sortable list of your contacts</p>
-    <!-- A sortable list of contacts would go here....-->
+``` text
+<!-- /app/Plugin/ContactManager/View/Contacts/index.ctp: -->
+<h1>Contacts</h1>
+<p>Following is a sortable list of your contacts</p>
+<!-- A sortable list of contacts would go here....-->
+```
 
 > [!NOTE]
 > プラグインからのエレメントの使い方に関する情報は、 [View Elements](../views#view-elements)
@@ -240,9 +248,11 @@ public $components = array('ContactManager.Example');
 > AppHelper を探すヘルパーを作った場合、自動で利用は出来ません。
 > Uses に定義する必要があります。:
 >
->     // Declare use of AppHelper for your Plugin's Helper
+> ``` php
+> // Declare use of AppHelper for your Plugin's Helper
 >
->     App::uses('AppHelper', 'View/Helper');
+> App::uses('AppHelper', 'View/Helper');
+> ```
 
 ## プラグインの拡張
 

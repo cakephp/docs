@@ -20,11 +20,15 @@ translating content.
 > `$string_id` identifies the ID for a translation. You can supply
 > additional arguments to replace placeholders in your string:
 >
->     __('You have {0} unread messages', $number);
+> ``` text
+> __('You have {0} unread messages', $number);
+> ```
 >
 > You can also provide a name-indexed array of replacements:
 >
->     __('You have {unread} unread messages', ['unread' => $number]);
+> ``` text
+> __('You have {unread} unread messages', ['unread' => $number]);
+> ```
 >
 > > [!NOTE]
 > > Check out the

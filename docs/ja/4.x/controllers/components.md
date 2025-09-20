@@ -321,9 +321,11 @@ Raising an exception will halt all other event listeners and create a new
 response that doesn't retain or inherit any of the current response's headers.
 When raising a `RedirectException` you can include additional headers:
 
-    throw new RedirectException(Router::url('/'), 302, [
-        'Header-Key' => 'value',
-    ]);
+``` php
+throw new RedirectException(Router::url('/'), 302, [
+    'Header-Key' => 'value',
+]);
+```
 
 ::: info Added in version 4.1.0
 :::

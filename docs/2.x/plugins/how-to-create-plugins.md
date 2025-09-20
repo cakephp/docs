@@ -34,15 +34,19 @@ application can, such as Config, Console, Lib, webroot, etc.
 > parent application's AppController and AppModel. Here's what they
 > should look like for our ContactManager example:
 
-    // In /app/Plugin/ContactManager/Controller/ContactManagerAppController.php
+``` php
+// In /app/Plugin/ContactManager/Controller/ContactManagerAppController.php
 
-    class ContactManagerAppController extends AppController {
-    }
+class ContactManagerAppController extends AppController {
+}
+```
 
-    // In /app/Plugin/ContactManager/Model/ContactManagerAppModel.php
+``` php
+// In /app/Plugin/ContactManager/Model/ContactManagerAppModel.php
 
-    class ContactManagerAppModel extends AppModel {
-    }
+class ContactManagerAppModel extends AppModel {
+}
+```
 
 If you forgot to define these special classes, CakePHP will hand
 you "Missing Controller" errors until you've done so.
@@ -120,10 +124,12 @@ Models for the plugin are stored in /app/Plugin/ContactManager/Model.
 We've already defined a ContactsController for this plugin, so let's
 create the model for that controller, called Contact:
 
-    // In /app/Plugin/ContactManager/Model/Contact.php
+``` php
+// In /app/Plugin/ContactManager/Model/Contact.php
 
-    class Contact extends ContactManagerAppModel {
-    }
+class Contact extends ContactManagerAppModel {
+}
+```
 
 Visiting /contact_manager/contacts now (given you've got a table in your
 database called 'contacts') should give us a "Missing View" error.
@@ -166,10 +172,12 @@ folder. For our ContactManager plugin, we'll need a view for our
 ContactsController::index() action, so let's include that as
 well:
 
-    <!-- /app/Plugin/ContactManager/View/Contacts/index.ctp: -->
-    <h1>Contacts</h1>
-    <p>Following is a sortable list of your contacts</p>
-    <!-- A sortable list of contacts would go here....-->
+``` text
+<!-- /app/Plugin/ContactManager/View/Contacts/index.ctp: -->
+<h1>Contacts</h1>
+<p>Following is a sortable list of your contacts</p>
+<!-- A sortable list of contacts would go here....-->
+```
 
 > [!NOTE]
 > For information on how to use elements from a plugin, look up
@@ -263,9 +271,11 @@ The same technique applies to Helpers and Behaviors.
 > When creating Helpers you may find AppHelper is not automatically
 > available. You should declare the resources you need with Uses:
 >
->     // Declare use of AppHelper for your Plugin's Helper
+> ``` php
+> // Declare use of AppHelper for your Plugin's Helper
 >
->     App::uses('AppHelper', 'View/Helper');
+> App::uses('AppHelper', 'View/Helper');
+> ```
 
 ## Expand Your Plugin
 

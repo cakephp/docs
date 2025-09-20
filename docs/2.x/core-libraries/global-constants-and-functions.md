@@ -24,7 +24,9 @@ such as debugging and translating content.
 > `sprintf()`. You can supply additional arguments to replace
 > placeholders in your string:
 >
->     __('You have %s unread messages', h($number));
+> ``` text
+> __('You have %s unread messages', h($number));
+> ```
 >
 > > [!NOTE]
 > > Check out the

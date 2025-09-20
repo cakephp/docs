@@ -51,9 +51,11 @@ public function initialize(): void
 Whether your templates are in the primary application or a plugin, your
 templates file should look something like:
 
-    return [
-        'number' => '<a href="{{url}}">{{text}}</a>',
-    ];
+``` text
+return [
+    'number' => '<a href="{{url}}">{{text}}</a>',
+];
+```
 
 ### Changing Templates at Run-time
 

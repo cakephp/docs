@@ -162,7 +162,7 @@ The first step is to create a new component file and class. Create
 the file in `app/Controller/Component/MathComponent.php`. The basic
 structure for the component would look something like this:
 
-``` css
+``` php
 App::uses('Component', 'Controller');
 
 class MathComponent extends Component {

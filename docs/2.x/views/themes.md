@@ -52,7 +52,9 @@ the application's webroot. See below for more information.
 
 To use the new theme webroot create directories like:
 
-    app/View/Themed/<themeName>/webroot<path_to_file>
+``` text
+app/View/Themed/<themeName>/webroot<path_to_file>
+```
 
 in your theme. The Dispatcher will handle finding the correct theme assets in
 your view paths.

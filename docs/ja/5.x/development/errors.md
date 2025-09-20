@@ -51,7 +51,9 @@ CakePHPは、非推奨の警告を使用して、機能が非推奨になった�
 また、このシステムをプラグインやアプリケーションコードで使用することをお勧めします。
 `deprecationWarning()` を使用して非推奨の警告をトリガーできます。 :
 
-    deprecationWarning('The example() method is deprecated. Use getExample() instead.');
+``` text
+deprecationWarning('The example() method is deprecated. Use getExample() instead.');
+```
 
 CakePHPまたはプラグインをアップグレードすると、新しい非推奨の警告が表示される場合があります。
 いくつかの方法のいずれかで、非推奨の警告を一時的に無効にすることができます。
@@ -61,12 +63,14 @@ CakePHPまたはプラグインをアップグレードすると、新しい非�
 2.  `Error.ignoredDeprecationPaths` 設定オプションを使用して、glob互換の表現で非推奨を無視します。
     以下をご覧ください。 :
 
-        'Error' => [
-            'ignoredDeprecationPaths' => [
-                'vendors/company/contacts/*',
-                'src/Models/*',
-            ]
-        ],
+    ``` text
+    'Error' => [
+        'ignoredDeprecationPaths' => [
+            'vendors/company/contacts/*',
+            'src/Models/*',
+        ]
+    ],
+    ```
 
     アプリケーションにおける `Models` ディレクトリと `Contacts` プラグインからのすべての非推奨を無視します。
 

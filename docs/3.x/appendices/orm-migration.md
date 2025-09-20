@@ -531,17 +531,19 @@ you are using column names or table names that contain special characters or are
 reserved words. If required, you can enable identifier quoting when configuring
 a connection:
 
-    // In config/app.php
-    'Datasources' => [
-        'default' => [
-            'className' => 'Cake\Database\Driver\Mysql',
-            'username' => 'root',
-            'password' => 'super_secret',
-            'host' => 'localhost',
-            'database' => 'cakephp',
-            'quoteIdentifiers' => true,
-        ]
-    ],
+``` php
+// In config/app.php
+'Datasources' => [
+    'default' => [
+        'className' => 'Cake\Database\Driver\Mysql',
+        'username' => 'root',
+        'password' => 'super_secret',
+        'host' => 'localhost',
+        'database' => 'cakephp',
+        'quoteIdentifiers' => true,
+    ]
+],
+```
 
 > [!NOTE]
 > Identifiers in `QueryExpression` objects will not be quoted, and you will

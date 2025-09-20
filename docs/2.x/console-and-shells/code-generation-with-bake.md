@@ -23,22 +23,24 @@ a Database Configuration file, if you haven't created one already.
 After you've created a Database Configuration file, running Bake
 will present you with the following options:
 
-    ---------------------------------------------------------------
-    App : app
-    Path: /path-to/project/app
-    ---------------------------------------------------------------
-    Interactive Bake Shell
-    ---------------------------------------------------------------
-    [D]atabase Configuration
-    [M]odel
-    [V]iew
-    [C]ontroller
-    [P]roject
-    [F]ixture
-    [T]est case
-    [Q]uit
-    What would you like to Bake? (D/M/V/C/P/F/T/Q)
-    >
+``` text
+---------------------------------------------------------------
+App : app
+Path: /path-to/project/app
+---------------------------------------------------------------
+Interactive Bake Shell
+---------------------------------------------------------------
+[D]atabase Configuration
+[M]odel
+[V]iew
+[C]ontroller
+[P]roject
+[F]ixture
+[T]est case
+[Q]uit
+What would you like to Bake? (D/M/V/C/P/F/T/Q)
+>
+```
 
 Alternatively, you can run any of these commands directly from the
 command line:

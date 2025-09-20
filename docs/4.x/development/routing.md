@@ -196,21 +196,25 @@ The above example also illustrates string targets. String targets provide
 a compact way to define a route's destination. String targets have the following
 syntax:
 
-    [Plugin].[Prefix]/[Controller]::[action]
+``` text
+[Plugin].[Prefix]/[Controller]::[action]
+```
 
 Some example string targets are:
 
-    // Application controller
-    'Bookmarks::view'
+``` text
+// Application controller
+'Bookmarks::view'
 
-    // Application controller with prefix
-    Admin/Bookmarks::view
+// Application controller with prefix
+Admin/Bookmarks::view
 
-    // Plugin controller
-    Cms.Articles::edit
+// Plugin controller
+Cms.Articles::edit
 
-    // Prefixed plugin controller
-    Vendor/Cms.Management/Admin/Articles::view
+// Prefixed plugin controller
+Vendor/Cms.Management/Admin/Articles::view
+```
 
 Earlier we used the greedy star (`/*`) to capture additional path segments,
 there is also the trailing star (`/**`). Using a trailing double star,
@@ -544,11 +548,13 @@ echo $this->Html->link('CakePHP Rocks', [
 We talked about string targets above. The same also works for URL generation using
 `Router::pathUrl()`:
 
-    echo Router::pathUrl('Articles::index');
-    // outputs: /articles
+``` php
+echo Router::pathUrl('Articles::index');
+// outputs: /articles
 
-    echo Router::pathUrl('MyBackend.Admin/Articles::view', [3]);
-    // outputs: /admin/my-backend/articles/view/3
+echo Router::pathUrl('MyBackend.Admin/Articles::view', [3]);
+// outputs: /admin/my-backend/articles/view/3
+```
 
 > [!TIP]
 > IDE support for Path Routing autocomplete can be enabled with [CakePHP IdeHelper Plugin](https://github.com/dereuromark/cakephp-ide-helper).
@@ -1149,8 +1155,10 @@ $routes->scope('/api', function (RouteBuilder $routes) {
 Will generate resource routes for both `articles` and `comments`. The
 comments routes will look like:
 
-    /api/articles/{article_id}/comments
-    /api/articles/{article_id}/comments/{id}
+``` text
+/api/articles/{article_id}/comments
+/api/articles/{article_id}/comments/{id}
+```
 
 You can get the `article_id` in `CommentsController` by:
 
@@ -1350,11 +1358,13 @@ class CalendarsController extends AppController
 
 You would get the following output:
 
-    Array
-    (
-        [0] => recent
-        [1] => mark
-    )
+``` text
+Array
+(
+    [0] => recent
+    [1] => mark
+)
+```
 
 This same data is also available at `$this->request->getParam('pass')` in your
 controllers, views, and helpers. The values in the pass array are numerically
@@ -1366,16 +1376,20 @@ debug($this->request->getParam('pass'));
 
 Either of the above would output:
 
-    Array
-    (
-        [0] => recent
-        [1] => mark
-    )
+``` text
+Array
+(
+    [0] => recent
+    [1] => mark
+)
+```
 
 When generating URLs, using a `routing array` you add passed
 arguments as values without string keys in the array:
 
-    ['controller' => 'Articles', 'action' => 'view', 5]
+``` php
+['controller' => 'Articles', 'action' => 'view', 5]
+```
 
 Since `5` has a numeric key, it is treated as a passed argument.
 
@@ -1664,8 +1678,10 @@ $routes->get(
 
 You can generate URLs to this route using:
 
-    // $article is an entity in the local scope.
-    Router::url(['_name' => 'articles:view', 'id' => $article->id]);
+``` php
+// $article is an entity in the local scope.
+Router::url(['_name' => 'articles:view', 'id' => $article->id]);
+```
 
 Later on, you may want to expose the article slug in the URL for SEO purposes.
 In order to do this you would need to update everywhere you generate a URL to
@@ -1689,7 +1705,7 @@ $routes->get(
 
 Now we can generate URLs using the `_entity` key:
 
-``` css
+``` php
 Router::url(['_name' => 'articles:view', '_entity' => $article]);
 ```
 
@@ -1816,7 +1832,7 @@ Filter functions are applied in the order they are connected.
 Another use case is changing a certain route on runtime (plugin routes for
 example):
 
-``` css
+``` php
 Router::addUrlFilter(function (array $params, ServerRequest $request) {
     if (empty($params['plugin']) || $params['plugin'] !== 'MyPlugin' || empty($params['controller'])) {
         return $params;
@@ -1834,13 +1850,13 @@ Router::addUrlFilter(function (array $params, ServerRequest $request) {
 
 This will alter the following route:
 
-``` css
+``` php
 Router::url(['plugin' => 'MyPlugin', 'controller' => 'Languages', 'action' => 'view', 'es']);
 ```
 
 into this:
 
-``` css
+``` php
 Router::url(['plugin' => 'MyPlugin', 'controller' => 'Locations', 'action' => 'index', 'language' => 'es']);
 ```
 

@@ -29,19 +29,23 @@ Path: /Users/mark/projects/cakephp-app/src/
 
 アプリケーションが自動実行されたら、REPL を利用してルーティングを試すこともできます。 :
 
-    >>> Cake\Routing\Router::parse('/articles/view/1');
-    // [
-    //   'controller' => 'Articles',
-    //   'action' => 'view',
-    //   'pass' => [
-    //     0 => '1'
-    //   ],
-    //   'plugin' => NULL
-    // ]
+``` php
+>>> Cake\Routing\Router::parse('/articles/view/1');
+// [
+//   'controller' => 'Articles',
+//   'action' => 'view',
+//   'pass' => [
+//     0 => '1'
+//   ],
+//   'plugin' => NULL
+// ]
+```
 
 URL 生成を試すこともできます。 :
 
-    >>> Cake\Routing\Router::url(['controller' => 'Articles', 'action' => 'edit', 99]);
-    // '/articles/edit/99'
+``` php
+>>> Cake\Routing\Router::url(['controller' => 'Articles', 'action' => 'edit', 99]);
+// '/articles/edit/99'
+```
 
 REPL を終了するには、 `CTRL-C` を使用するか、あるいは `exit` と入力してください。

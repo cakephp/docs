@@ -21,21 +21,23 @@ find はデータ取得のための、非常に多機能でとても良く働い
 デフォルトでは以下のキーのパラメータを渡すことができます。これらキーの指定は
 任意です。 :
 
-    array(
-        'conditions' => array('Model.field' => $thisValue), // 検索条件の配列
-        'recursive' => 1, // int
-        // フィールド名の配列
-        'fields' => array('Model.field1', 'DISTINCT Model.field2'),
-        // 並び順を文字列または配列で指定
-        'order' => array('Model.created', 'Model.field3 DESC'),
-        'group' => array('Model.field'), // GROUP BYのフィールド
-        'limit' => n, // int
-        'page' => n, // int
-        'offset' => n, // int
-        'callbacks' => true, // falseの他に'before'、'after'を指定できます
-        'having' => array('COUNT(Model.field) >' => 1), // HAVING 条件の配列
-        'lock' => true, // FOR UPDATE ロックを有効にします
-    )
+``` text
+array(
+    'conditions' => array('Model.field' => $thisValue), // 検索条件の配列
+    'recursive' => 1, // int
+    // フィールド名の配列
+    'fields' => array('Model.field1', 'DISTINCT Model.field2'),
+    // 並び順を文字列または配列で指定
+    'order' => array('Model.created', 'Model.field3 DESC'),
+    'group' => array('Model.field'), // GROUP BYのフィールド
+    'limit' => n, // int
+    'page' => n, // int
+    'offset' => n, // int
+    'callbacks' => true, // falseの他に'before'、'after'を指定できます
+    'having' => array('COUNT(Model.field) >' => 1), // HAVING 条件の配列
+    'lock' => true, // FOR UPDATE ロックを有効にします
+)
+```
 
 これ以外のパラメータを追加したり使用することが可能です。いくつかの `find()` のタイプとビヘイビアは、
 この機能を使用します。そして、あなた自身のモデルのメソッドでも可能です。
@@ -70,24 +72,26 @@ public function some_function() {
 1行目のサンプルは、パラメータを渡していません。すなわち、検索条件の指定もソートの指定も
 されないということです。 `find('first')` の戻り値はこのような形式になっています。 :
 
-    Array
-    (
-        [ModelName] => Array
-            (
-                [id] => 83
-                [field1] => value1
-                [field2] => value2
-                [field3] => value3
-            )
+``` text
+Array
+(
+    [ModelName] => Array
+        (
+            [id] => 83
+            [field1] => value1
+            [field2] => value2
+            [field3] => value3
+        )
 
-        [AssociatedModelName] => Array
-            (
-                [id] => 1
-                [field1] => value1
-                [field2] => value2
-                [field3] => value3
-            )
-    )
+    [AssociatedModelName] => Array
+        (
+            [id] => 1
+            [field1] => value1
+            [field2] => value2
+            [field3] => value3
+        )
+)
+```
 
 <a id="model-find-count"></a>
 
@@ -144,28 +148,30 @@ public function some_function() {
 
 `find('all')` を呼び出すと、その戻り値は以下のような形式となります。 :
 
-    Array
-    (
-        [0] => Array
-            (
-                [ModelName] => Array
-                    (
-                        [id] => 83
-                        [field1] => value1
-                        [field2] => value2
-                        [field3] => value3
-                    )
+``` text
+Array
+(
+    [0] => Array
+        (
+            [ModelName] => Array
+                (
+                    [id] => 83
+                    [field1] => value1
+                    [field2] => value2
+                    [field3] => value3
+                )
 
-                [AssociatedModelName] => Array
-                    (
-                        [id] => 1
-                        [field1] => value1
-                        [field2] => value2
-                        [field3] => value3
-                    )
+            [AssociatedModelName] => Array
+                (
+                    [id] => 1
+                    [field1] => value1
+                    [field2] => value2
+                    [field3] => value3
+                )
 
-            )
-    )
+        )
+)
+```
 
 <a id="model-find-list"></a>
 
@@ -198,16 +204,18 @@ public function some_function() {
 
 `find('list')` を呼び出すと、その戻り値は以下のような形式となります。 :
 
-    Array
-    (
-        //[id] => 'displayValue',
-        [1] => 'displayValue1',
-        [2] => 'displayValue2',
-        [4] => 'displayValue4',
-        [5] => 'displayValue5',
-        [6] => 'displayValue6',
-        [3] => 'displayValue3',
-    )
+``` text
+Array
+(
+    //[id] => 'displayValue',
+    [1] => 'displayValue1',
+    [2] => 'displayValue2',
+    [4] => 'displayValue4',
+    [5] => 'displayValue5',
+    [6] => 'displayValue6',
+    [3] => 'displayValue3',
+)
+```
 
 `fields` キーを渡して `find('list')` 呼び出せば、どのフィールドを検索結果の
 配列の添字として使うのかを指定でき、必要に応じて結果をグループ化してくれます。
@@ -297,56 +305,58 @@ public function some_function() {
 上記サンプルでは、 `$allCategories` は全体のカテゴリ構造を表す、入れ子になった配列が
 格納されています。 `find('threaded')` を呼び出すと、戻り値は次のような形式となります。 :
 
-    Array
+``` text
+Array
+(
+    [0] => Array
     (
-        [0] => Array
+        [ModelName] => Array
         (
-            [ModelName] => Array
-            (
-                [id] => 83
-                [parent_id] => null
-                [field1] => value1
-                [field2] => value2
-                [field3] => value3
-            )
+            [id] => 83
+            [parent_id] => null
+            [field1] => value1
+            [field2] => value2
+            [field3] => value3
+        )
 
-            [AssociatedModelName] => Array
-            (
-                [id] => 1
-                [field1] => value1
-                [field2] => value2
-                [field3] => value3
-            )
+        [AssociatedModelName] => Array
+        (
+            [id] => 1
+            [field1] => value1
+            [field2] => value2
+            [field3] => value3
+        )
 
-            [children] => Array
+        [children] => Array
+        (
+            [0] => Array
             (
-                [0] => Array
+                [ModelName] => Array
                 (
-                    [ModelName] => Array
-                    (
-                        [id] => 42
-                        [parent_id] => 83
-                        [field1] => value1
-                        [field2] => value2
-                        [field3] => value3
-                    )
-
-                    [AssociatedModelName] => Array
-                    (
-                        [id] => 2
-                        [field1] => value1
-                        [field2] => value2
-                        [field3] => value3
-                    )
-
-                    [children] => Array
-                    (
-                    )
+                    [id] => 42
+                    [parent_id] => 83
+                    [field1] => value1
+                    [field2] => value2
+                    [field3] => value3
                 )
-                ...
+
+                [AssociatedModelName] => Array
+                (
+                    [id] => 2
+                    [field1] => value1
+                    [field2] => value2
+                    [field3] => value3
+                )
+
+                [children] => Array
+                (
+                )
             )
+            ...
         )
     )
+)
+```
 
 結果の表示順は、並べ替えることができます。
 たとえば、 `'order' => 'name ASC'` が `find('threaded')` に渡された場合、
@@ -389,43 +399,45 @@ public function some_function() {
 Containable ビヘイビアを利用していれば、 `$params` に 'contain' を指定できます。)
 `find('neighbors')` を呼び出すと、戻り値は以下の様な形式となります。
 
-    Array
+``` text
+Array
+(
+    [prev] => Array
     (
-        [prev] => Array
+        [ModelName] => Array
         (
-            [ModelName] => Array
-            (
-                [id] => 2
-                [field1] => value1
-                [field2] => value2
-                ...
-            )
-            [AssociatedModelName] => Array
-            (
-                [id] => 151
-                [field1] => value1
-                [field2] => value2
-                ...
-            )
+            [id] => 2
+            [field1] => value1
+            [field2] => value2
+            ...
         )
-        [next] => Array
+        [AssociatedModelName] => Array
         (
-            [ModelName] => Array
-            (
-                [id] => 4
-                [field1] => value1
-                [field2] => value2
-                ...
-            )
-            [AssociatedModelName] => Array
-            (
-                [id] => 122
-                [field1] => value1
-                [field2] => value2
-                ...
-            )
+            [id] => 151
+            [field1] => value1
+            [field2] => value2
+            ...
         )
     )
+    [next] => Array
+    (
+        [ModelName] => Array
+        (
+            [id] => 4
+            [field1] => value1
+            [field2] => value2
+            ...
+        )
+        [AssociatedModelName] => Array
+        (
+            [id] => 122
+            [field1] => value1
+            [field2] => value2
+            ...
+        )
+    )
+)
+```
 
 > [!NOTE]
 > 結果には、常に2つのルート要素 (prev と next) が含まれることになります。
@@ -685,26 +697,28 @@ $this->Picture->query("SELECT * FROM pictures LIMIT 2;");
 
 これは、以下の様な配列を返します。 :
 
-    Array
+``` text
+Array
+(
+    [0] => Array
     (
-        [0] => Array
+        [pictures] => Array
         (
-            [pictures] => Array
-            (
-                [id] => 1304
-                [user_id] => 759
-            )
-        )
-
-        [1] => Array
-        (
-            [pictures] => Array
-            (
-                [id] => 1305
-                [user_id] => 759
-            )
+            [id] => 1304
+            [user_id] => 759
         )
     )
+
+    [1] => Array
+    (
+        [pictures] => Array
+        (
+            [id] => 1305
+            [user_id] => 759
+        )
+    )
+)
+```
 
 find メソッドと同じように、戻り値の配列のキーにモデル名を使うためには、
 次のようにクエリを書き換えます。 :
@@ -715,26 +729,28 @@ $this->Picture->query("SELECT * FROM pictures AS Picture LIMIT 2;");
 
 すると以下の様な配列となります。 :
 
-    Array
+``` text
+Array
+(
+    [0] => Array
     (
-        [0] => Array
+        [Picture] => Array
         (
-            [Picture] => Array
-            (
-                [id] => 1304
-                [user_id] => 759
-            )
-        )
-
-        [1] => Array
-        (
-            [Picture] => Array
-            (
-                [id] => 1305
-                [user_id] => 759
-            )
+            [id] => 1304
+            [user_id] => 759
         )
     )
+
+    [1] => Array
+    (
+        [Picture] => Array
+        (
+            [id] => 1305
+            [user_id] => 759
+        )
+    )
+)
+```
 
 > [!NOTE]
 > この SQL 構文とそれに対応する配列の構造は、MySQL のみで有効です。
@@ -817,7 +833,9 @@ $this->Post->find('first', array('conditions' => $conditions));
 否定や比較などはどうするのでしょうか？とてもシンプルです。
 "This is a post" 以外の投稿データを取得したい場合は以下のようにします。 :
 
-    array("Post.title !=" => "This is a post")
+``` text
+array("Post.title !=" => "This is a post")
+```
 
 フィールド名の前に `'!='` があるのがわかると思います。
 演算子とフィールド名の間にスペース名をいれていれば、 `LIKE` や `BETWEEN` 、`REGEX` 、
@@ -825,28 +843,36 @@ $this->Post->find('first', array('conditions' => $conditions));
 ただ、例外として `IN` (...) の場合は違います。
 `IN` を使って、リストから投稿タイトルを検索したい場合は以下のようにします。 :
 
-    array(
-        "Post.title" => array("First post", "Second post", "Third post")
-    )
+``` text
+array(
+    "Post.title" => array("First post", "Second post", "Third post")
+)
+```
 
 `NOT IN` (...) でリストに含まれない投稿タイトルを検索した場合は以下のようにします。 :
 
-    array(
-        "NOT" => array(
-            "Post.title" => array("First post", "Second post", "Third post")
-        )
+``` text
+array(
+    "NOT" => array(
+        "Post.title" => array("First post", "Second post", "Third post")
     )
+)
+```
 
 検索条件に新しい条件を追加したければ、キーと値のペアを配列に追加するだけです。 :
 
-    array (
-        "Post.title" => array("First post", "Second post", "Third post"),
-        "Post.created >" => date('Y-m-d', strtotime("-2 weeks"))
-    )
+``` text
+array (
+    "Post.title" => array("First post", "Second post", "Third post"),
+    "Post.created >" => date('Y-m-d', strtotime("-2 weeks"))
+)
+```
 
 データベースの2つのフィールドを比較する条件を指定することもできます。 :
 
-    array("Post.created = Post.modified")
+``` text
+array("Post.created = Post.modified")
+```
 
 上記サンプルは、作成日と変更日が同じ投稿データ
 (つまりまだ編集されていない投稿)を返します。
@@ -854,20 +880,24 @@ $this->Post->find('first', array('conditions' => $conditions));
 この方法で `WHERE` 句に指定できないようなものは、文字列で以下のようにして
 指定できます。 :
 
-    array(
-        'Model.field & 8 = 1',
-        // キーと値のペアでは指定できないような条件
-    )
+``` text
+array(
+    'Model.field & 8 = 1',
+    // キーと値のペアでは指定できないような条件
+)
+```
 
 デフォルトでは、CakePHP は `AND` で複数の条件をつなげます。
 つまりこれは、3つ上のサンプルコードでは、過去2週間の内に作られた投稿で、かつ
 指定されたリストに含まれるタイトルの投稿だけが取得されます。
 ただ、どちらかの条件にマッチする投稿を取得したいこともあるでしょう。 :
 
-    array("OR" => array(
-        "Post.title" => array("First post", "Second post", "Third post"),
-        "Post.created >" => date('Y-m-d', strtotime("-2 weeks"))
-    ))
+``` text
+array("OR" => array(
+    "Post.title" => array("First post", "Second post", "Third post"),
+    "Post.created >" => date('Y-m-d', strtotime("-2 weeks"))
+))
+```
 
 CakePHP は `AND` 、 `OR` 、 `NOT` 、 `XOR` (大文字、小文字は区別しません)などの、
 有効な SQL の論理演算子は全て受け取れます。
@@ -876,92 +906,108 @@ CakePHP は `AND` 、 `OR` 、 `NOT` 、 `XOR` (大文字、小文字は区別�
 この時、特定のキーワード "magic" を含むか、もしくは過去2週間の間に投稿されて、かつ
 Bob が書いた投稿、に制限して取得したい場合、次のようにします。 :
 
-    array(
-        "Author.name" => "Bob",
-        "OR" => array(
-            "Post.title LIKE" => "%magic%",
-            "Post.created >" => date('Y-m-d', strtotime("-2 weeks"))
-        )
+``` text
+array(
+    "Author.name" => "Bob",
+    "OR" => array(
+        "Post.title LIKE" => "%magic%",
+        "Post.created >" => date('Y-m-d', strtotime("-2 weeks"))
     )
+)
+```
 
 同じフィールドに対して複数の `LIKE` 条件を指定したい場合は、
 同じように以下のように条件を指定します。 :
 
-    array('OR' => array(
-        array('Post.title LIKE' => '%one%'),
-        array('Post.title LIKE' => '%two%')
-    ))
+``` text
+array('OR' => array(
+    array('Post.title LIKE' => '%one%'),
+    array('Post.title LIKE' => '%two%')
+))
+```
 
 ワイルドカード演算子 `ILIKE` と `RLIKE` (`RLIKE` は 2.6 以降) も利用可能です。
 
 CakePHP は null も受け入れることができます。次のクエリは、
 投稿のタイトルが NOT NULL である投稿を返します。 :
 
-    array("NOT" => array(
-            "Post.title" => null
-        )
+``` text
+array("NOT" => array(
+        "Post.title" => null
     )
+)
+```
 
 `BETWEEN` は、以下のように出来ます。 :
 
-    array('Post.read_count BETWEEN ? AND ?' => array(1,10))
+``` text
+array('Post.read_count BETWEEN ? AND ?' => array(1,10))
+```
 
 > [!NOTE]
 > CakePHP はデータベースのフィールドの型によって、数値でもクォートで囲みます。
 
 `GROUP BY` は？ :
 
-    array(
-        'fields' => array(
-            'Product.type',
-            'MIN(Product.price) as price'
-        ),
-        'group' => 'Product.type'
-    )
+``` text
+array(
+    'fields' => array(
+        'Product.type',
+        'MIN(Product.price) as price'
+    ),
+    'group' => 'Product.type'
+)
+```
 
 この時の戻り値の配列は、次のような形式です。 :
 
-    Array
+``` text
+Array
+(
+    [0] => Array
     (
+        [Product] => Array
+        (
+            [type] => Clothing
+        )
         [0] => Array
         (
-            [Product] => Array
-            (
-                [type] => Clothing
-            )
-            [0] => Array
-            (
-                [price] => 32
-            )
+            [price] => 32
         )
-        [1] => Array
-        ...
+    )
+    [1] => Array
+    ...
+```
 
 以下は `DISTINCT` のサンプルです。他にも `MIN()` や `MAX()` なども同じように使えます。 :
 
-    array(
-        'fields' => array('DISTINCT (User.name) AS my_column_name'),
-        'order' = >array('User.id DESC')
-    )
+``` text
+array(
+    'fields' => array('DISTINCT (User.name) AS my_column_name'),
+    'order' = >array('User.id DESC')
+)
+```
 
 とても複雑な検索条件も、複数の配列をネストすることで実現可能です。 :
 
-    array(
-        'OR' => array(
-            array('Company.name' => 'Future Holdings'),
-            array('Company.city' => 'CA')
-        ),
-        'AND' => array(
-            array(
-                'OR' => array(
-                    array('Company.status' => 'active'),
-                    'NOT' => array(
-                        array('Company.status' => array('inactive', 'suspended'))
-                    )
+``` text
+array(
+    'OR' => array(
+        array('Company.name' => 'Future Holdings'),
+        array('Company.city' => 'CA')
+    ),
+    'AND' => array(
+        array(
+            'OR' => array(
+                array('Company.status' => 'active'),
+                'NOT' => array(
+                    array('Company.status' => array('inactive', 'suspended'))
                 )
             )
         )
     )
+)
+```
 
 上記サンプルは次のような SQL を生成します。 :
 

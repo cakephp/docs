@@ -58,16 +58,18 @@ php phpunit.phar
 忘れないでください。テストを実行する前に **config/app.php** に `test` データソース設定を
 追加する必要があります。この設定は、CakePHP でフィクスチャーのテーブルとデータのために使用されます。 :
 
-    'Datasources' => [
-        'test' => [
-            'datasource' => 'Cake\Database\Driver\Mysql',
-            'persistent' => false,
-            'host' => 'dbhost',
-            'username' => 'dblogin',
-            'password' => 'dbpassword',
-            'database' => 'test_database'
-        ],
+``` php
+'Datasources' => [
+    'test' => [
+        'datasource' => 'Cake\Database\Driver\Mysql',
+        'persistent' => false,
+        'host' => 'dbhost',
+        'username' => 'dblogin',
+        'password' => 'dbpassword',
+        'database' => 'test_database'
     ],
+],
+```
 
 > [!NOTE]
 > トラブルを防ぐため、テストデータベースはメインのデータベースとは別に用意することをお勧めします。

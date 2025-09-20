@@ -140,23 +140,25 @@ CakePHP はレガシーなデータベーススキーマに対応できるくら
 ファイルの中の `Datasources.default` 配列の値を置き換えてください。
 完全な設定配列の例は、以下のようになります。 :
 
-    return [
-        // More configuration above.
-        'Datasources' => [
-            'default' => [
-                'className' => 'Cake\Database\Connection',
-                'driver' => 'Cake\Database\Driver\Mysql',
-                'persistent' => false,
-                'host' => 'localhost',
-                'username' => 'cake_blog',
-                'password' => 'AngelF00dC4k3~',
-                'database' => 'cake_blog',
-                'encoding' => 'utf8',
-                'timezone' => 'UTC',
-            ],
+``` php
+return [
+    // More configuration above.
+    'Datasources' => [
+        'default' => [
+            'className' => 'Cake\Database\Connection',
+            'driver' => 'Cake\Database\Driver\Mysql',
+            'persistent' => false,
+            'host' => 'localhost',
+            'username' => 'cake_blog',
+            'password' => 'AngelF00dC4k3~',
+            'database' => 'cake_blog',
+            'encoding' => 'utf8',
+            'timezone' => 'UTC',
         ],
-        // More configuration below.
-    ];
+    ],
+    // More configuration below.
+];
+```
 
 **config/app.php** を保存すると、ブラウザーでウェルカムページが表示されるはずです。
 データベースへの接続ファイルがみつかり、CakePHPがデータベースにきちんと接続されていることをも示しています。
@@ -174,9 +176,11 @@ CakePHP はレガシーなデータベーススキーマに対応できるくら
 編集し、デフォルトの `Security.salt` の値を変更してください。
 この値は、ランダムで長い文字列にします。そうすることで推測がより困難になります。 :
 
-    'Security' => [
-       'salt' => 'something long and containing lots of different values.',
-    ],
+``` text
+'Security' => [
+   'salt' => 'something long and containing lots of different values.',
+],
+```
 
 ## mod_rewrite について
 

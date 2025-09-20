@@ -971,8 +971,10 @@ browser accepted language nor by having the `Config.language` value set in the
 browser session. You can, however, use a dispatcher filter to get automatic
 language switching from the `Accept-Language` header sent by the browser:
 
-    // In config/bootstrap.php
-    DispatcherFactory::addFilter('LocaleSelector');
+``` text
+// In config/bootstrap.php
+DispatcherFactory::addFilter('LocaleSelector');
+```
 
 There is no built-in replacement for automatically selecting the language by
 setting a value in the user session.
@@ -981,11 +983,13 @@ The default formatting function for translated messages is no longer
 `sprintf`, but the more advanced and feature rich `MessageFormatter` class.
 In general you can rewrite placeholders in messages as follows:
 
-    // Before:
-    __('Today is a %s day in %s', 'Sunny', 'Spain');
+``` text
+// Before:
+__('Today is a %s day in %s', 'Sunny', 'Spain');
 
-    // After:
-    __('Today is a {0} day in {1}', 'Sunny', 'Spain');
+// After:
+__('Today is a {0} day in {1}', 'Sunny', 'Spain');
+```
 
 You can avoid rewriting your messages by using the old `sprintf` formatter:
 
@@ -997,11 +1001,13 @@ Additionally, the `Config.language` value was removed and it can no longer be
 used to control the current language of the application. Instead, you can use
 the `I18n` class:
 
-    // Before
-    Configure::write('Config.language', 'fr_FR');
+``` php
+// Before
+Configure::write('Config.language', 'fr_FR');
 
-    // Now
-    I18n::setLocale('en_US');
+// Now
+I18n::setLocale('en_US');
+```
 
 - The methods below have been moved:
 
@@ -1070,18 +1076,20 @@ The folder and file classes have been renamed:
   of regular expressions, transliterations use simple string replacement. This
   yielded significant performance improvements:
 
-      // Instead of
-      Inflector::rules('transliteration', [
-          '/ä|æ/' => 'ae',
-          '/å/' => 'aa'
-      ]);
+  ``` text
+  // Instead of
+  Inflector::rules('transliteration', [
+      '/ä|æ/' => 'ae',
+      '/å/' => 'aa'
+  ]);
 
-      // You should use
-      Inflector::rules('transliteration', [
-          'ä' => 'ae',
-          'æ' => 'ae',
-          'å' => 'aa'
-      ]);
+  // You should use
+  Inflector::rules('transliteration', [
+      'ä' => 'ae',
+      'æ' => 'ae',
+      'å' => 'aa'
+  ]);
+  ```
 
 - Separate set of uninflected and irregular rules for pluralization and
   singularization have been removed. Instead we now have a common list for each.

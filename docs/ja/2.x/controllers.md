@@ -85,21 +85,23 @@ CakePHP は規約に従って、アクション名のビューを描画します
 含まれています。このコントローラは `/app/Controller/RecipesController.php` にあり、
 次のようなコードになっています。 :
 
-    # /app/Controller/RecipesController.php
+``` php
+# /app/Controller/RecipesController.php
 
-    class RecipesController extends AppController {
-        public function view($id) {
-            //action logic goes here..
-        }
-
-        public function share($customerId, $recipeId) {
-            //action logic goes here..
-        }
-
-        public function search($query) {
-            //action logic goes here..
-        }
+class RecipesController extends AppController {
+    public function view($id) {
+        //action logic goes here..
     }
+
+    public function share($customerId, $recipeId) {
+        //action logic goes here..
+    }
+
+    public function search($query) {
+        //action logic goes here..
+    }
+}
+```
 
 これらのアクションのビューは `app/View/Recipes/view.ctp` 、
 `app/View/Recipes/share.ctp` 、 `app/View/Recipes/search.ctp` にあります。

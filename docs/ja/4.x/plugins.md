@@ -423,17 +423,21 @@ Contact モデルが定義されていないためです。
 もしあなたのアプリケーションが、CakePHP の提供するデフォルトルーティングを含むなら、
 あなたのプラグインコントローラーへは下記のような URL でアクセスできます。 :
 
-    // プラグインコントローラーの index にアクセスする
-    /contact-manager/contacts
+``` text
+// プラグインコントローラーの index にアクセスする
+/contact-manager/contacts
 
-    // プラグインコントローラーのそれぞれのアクションにアクセスする
-    /contact-manager/contacts/view/1
+// プラグインコントローラーのそれぞれのアクションにアクセスする
+/contact-manager/contacts/view/1
+```
 
 もしあなたのアプリケーションでルーティングプレフィックスを定義しているなら、
 CakePHP のデフォルトルーティングは下記の書式でルーティングします。 :
 
-    /{prefix}/{plugin}/{controller}
-    /{prefix}/{plugin}/{controller}/{action}
+``` text
+/{prefix}/{plugin}/{controller}
+/{prefix}/{plugin}/{controller}/{action}
+```
 
 特定ファイルにルーティングするようなプラグインの読み込み方法については、
 [Plugin Configuration](#plugin-configuration) のセクションをご覧ください。
@@ -522,10 +526,12 @@ $contacts = $this->fetchTable('ContactManager.Contacts');
 我々の ContactManager プラグインでは `ContactsController::index()` アクションに
 ビューが必要ですから、このような内容になります。 :
 
-    // plugins/ContactManager/templates/Contacts/index.php:
-    <h1>連絡先</h1>
-    <p>ソート可能なあなたの連絡先一覧は次のとおりです</p>
-    <!-- ソート可能な連絡先一覧はこちら....-->
+``` text
+// plugins/ContactManager/templates/Contacts/index.php:
+<h1>連絡先</h1>
+<p>ソート可能なあなたの連絡先一覧は次のとおりです</p>
+<!-- ソート可能な連絡先一覧はこちら....-->
+```
 
 プラグインは独自のレイアウトを提供することができます。
 プラグインレイアウトを追加するためには、テンプレートファイルを

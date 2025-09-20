@@ -15,7 +15,9 @@ CakePHP 4.1.0にアップグレードするには、次の Composer コマンド
 これらの機能はすべて 4.x の間は継続されますが、5.0 で削除されます。
 非推奨機能の更新を自動化するには、\`upgrade tool \<upgrade-tool-use\>\` を使用します。:
 
-    bin/cake upgrade rector --rules cakephp41 <path/to/app/src>
+``` text
+bin/cake upgrade rector --rules cakephp41 <path/to/app/src>
+```
 
 > [!NOTE]
 > これはCakePHP 4.1の変更点のみを更新します。CakePHP 4.0の変更を最初に適用していることを確認してください。

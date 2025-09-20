@@ -75,9 +75,11 @@ your web server user is different from your command line user, you can run the
 following commands just once in your project to ensure that permissions will be
 setup properly:
 
-    HTTPDUSER=`ps aux | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1`
-    setfacl -R -m u:${HTTPDUSER}:rwx app/tmp
-    setfacl -R -d -m u:${HTTPDUSER}:rwx app/tmp
+``` text
+HTTPDUSER=`ps aux | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1`
+setfacl -R -m u:${HTTPDUSER}:rwx app/tmp
+setfacl -R -d -m u:${HTTPDUSER}:rwx app/tmp
+```
 
 ## Setup
 
@@ -136,7 +138,9 @@ systems this is often in `/etc/php.ini`, but using `php -i` and looking for
 the correct ini file, modify the `include_path` configuration to include
 `/home/mark/projects/cakephp/lib`. An example would look like:
 
-    include_path = .:/home/mark/projects/cakephp/lib:/usr/local/php/lib/php
+``` text
+include_path = .:/home/mark/projects/cakephp/lib:/usr/local/php/lib/php
+```
 
 After restarting your webserver, you should see the changes reflected in
 `phpinfo()`.
@@ -159,16 +163,18 @@ Unpack the contents of the CakePHP archive into a directory of your choice. For
 the purposes of this example, we assume you chose to install CakePHP into
 /cake_install. Your production setup will look like this on the filesystem:
 
-    /cake_install/
-        app/
-            webroot/ (this directory is set as the ``DocumentRoot``
-             directive)
-        lib/
-        plugins/
-        vendors/
-        .htaccess
-        index.php
-        README
+``` text
+/cake_install/
+    app/
+        webroot/ (this directory is set as the ``DocumentRoot``
+         directive)
+    lib/
+    plugins/
+    vendors/
+    .htaccess
+    index.php
+    README
+```
 
 Developers using Apache should set the `DocumentRoot` directive for the domain
 to:
@@ -196,8 +202,10 @@ Congratulations! You are ready to [create your first CakePHP application](gettin
 Not working? If you're getting timezone related errors from PHP uncomment one
 line in `app/Config/core.php`:
 
-    /**
-     * Uncomment this line and correct your server timezone to fix
-     * any date & time related errors.
-     */
-        date_default_timezone_set('UTC');
+``` text
+/**
+ * Uncomment this line and correct your server timezone to fix
+ * any date & time related errors.
+ */
+    date_default_timezone_set('UTC');
+```

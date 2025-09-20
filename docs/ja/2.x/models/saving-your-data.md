@@ -3,14 +3,16 @@
 CakePHP はモデルのデータを簡単に保存できます。保存するデータは、
 モデルの `save()` メソッドに、以下の形式の配列で渡されます。 :
 
-    Array
+``` text
+Array
+(
+    [ModelName] => Array
     (
-        [ModelName] => Array
-        (
-            [fieldname1] => 'value'
-            [fieldname2] => 'value'
-        )
+        [fieldname1] => 'value'
+        [fieldname2] => 'value'
     )
+)
+```
 
 ほとんどの場合、このような形式を意識することはありません。
 CakePHP の `FormHelper` やモデルの find メソッドは
@@ -595,59 +597,63 @@ class CourseMembershipsController extends AppController {
 
 このコードで、データをサブミットした時、以下のような配列が渡ってきます。 :
 
-    Array
+``` text
+Array
+(
+    [Student] => Array
     (
-        [Student] => Array
-        (
-            [first_name] => Joe
-            [last_name] => Bloggs
-        )
-
-        [Course] => Array
-        (
-            [name] => Cake
-        )
-
-        [CourseMembership] => Array
-        (
-            [days_attended] => 5
-            [grade] => A
-        )
-
+        [first_name] => Joe
+        [last_name] => Bloggs
     )
+
+    [Course] => Array
+    (
+        [name] => Cake
+    )
+
+    [CourseMembership] => Array
+    (
+        [days_attended] => 5
+        [grade] => A
+    )
+
+)
+```
 
 CakePHP はこれらの配列を <span class="title-ref">saveAssociated</span> に渡すことで、各モデルのデータを同時に保存し、
 CourseMembership モデルに対して Student と Course を外部キーとして割り当てることができます。
 CourseMembershipsController の index アクションが実行されると、そこの find('all') で
 以下のような構造のデータが取得できます。 :
 
-    Array
+``` text
+Array
+(
+    [0] => Array
     (
-        [0] => Array
+        [CourseMembership] => Array
         (
-            [CourseMembership] => Array
-            (
-                [id] => 1
-                [student_id] => 1
-                [course_id] => 1
-                [days_attended] => 5
-                [grade] => A
-            )
+            [id] => 1
+            [student_id] => 1
+            [course_id] => 1
+            [days_attended] => 5
+            [grade] => A
+        )
 
-            [Student] => Array
-            (
-                [id] => 1
-                [first_name] => Joe
-                [last_name] => Bloggs
-            )
+        [Student] => Array
+        (
+            [id] => 1
+            [first_name] => Joe
+            [last_name] => Bloggs
+        )
 
-            [Course] => Array
-            (
-                [id] => 1
-                [name] => Cake
-            )
+        [Course] => Array
+        (
+            [id] => 1
+            [name] => Cake
         )
     )
+)
+```
 
 もちろん結合されたモデルを処理する方法は他にもあります。
 このやり方は一度に全てを保存したい時に使うものです。
@@ -689,24 +695,26 @@ Student と Course をそれぞれ別々に作りたい場合もあるでしょ�
 
 POST されると以下のようなデータが渡ってきます。 :
 
-    Array
+``` text
+Array
+(
+    [Student] => Array
     (
-        [Student] => Array
-        (
-            [id] => 1
-        )
-
-        [Course] => Array
-        (
-            [id] => 1
-        )
-
-        [CourseMembership] => Array
-        (
-            [days_attended] => 10
-            [grade] => 5
-        )
+        [id] => 1
     )
+
+    [Course] => Array
+    (
+        [id] => 1
+    )
+
+    [CourseMembership] => Array
+    (
+        [days_attended] => 10
+        [grade] => 5
+    )
+)
+```
 
 このデータを使えば <span class="title-ref">saveAssociated</span> は Student の ID と Course の ID を
 CourseMembership モデルに保存してくれます。
@@ -719,68 +727,72 @@ hasOne, belongsTo, hasMany のアソシエーションがあるモデルの保�
 あとは勝手にアソシエーションモデルと繋げてくれます。
 Tag モデルの `save()` に対しては、以下のような形式のデータを渡します。 :
 
-    Array
-    (
-        [Recipe] => Array
-            (
-                [id] => 42
-            )
-        [Tag] => Array
-            (
-                [name] => Italian
-            )
-    )
+``` text
+Array
+(
+    [Recipe] => Array
+        (
+            [id] => 42
+        )
+    [Tag] => Array
+        (
+            [name] => Italian
+        )
+)
+```
 
 以下のような配列を使えば、 `saveAll()` で HABTM アソシエーションに対して
 複数のレコードを保存するのにも使えます。 :
 
-    Array
-    (
-        [0] => Array
-            (
-                [Recipe] => Array
-                    (
-                        [id] => 42
-                    )
-                [Tag] => Array
-                    (
-                        [name] => Italian
-                    )
-            )
-        [1] => Array
-            (
-                [Recipe] => Array
-                    (
-                        [id] => 42
-                    )
-                [Tag] => Array
-                    (
-                        [name] => Pasta
-                    )
-            )
-        [2] => Array
-            (
-                [Recipe] => Array
-                    (
-                        [id] => 51
-                    )
-                [Tag] => Array
-                    (
-                        [name] => Mexican
-                    )
-            )
-        [3] => Array
-            (
-                [Recipe] => Array
-                    (
-                        [id] => 17
-                    )
-                [Tag] => Array
-                    (
-                        [name] => American (new)
-                    )
-            )
-    )
+``` text
+Array
+(
+    [0] => Array
+        (
+            [Recipe] => Array
+                (
+                    [id] => 42
+                )
+            [Tag] => Array
+                (
+                    [name] => Italian
+                )
+        )
+    [1] => Array
+        (
+            [Recipe] => Array
+                (
+                    [id] => 42
+                )
+            [Tag] => Array
+                (
+                    [name] => Pasta
+                )
+        )
+    [2] => Array
+        (
+            [Recipe] => Array
+                (
+                    [id] => 51
+                )
+            [Tag] => Array
+                (
+                    [name] => Mexican
+                )
+        )
+    [3] => Array
+        (
+            [Recipe] => Array
+                (
+                    [id] => 17
+                )
+            [Tag] => Array
+                (
+                    [name] => American (new)
+                )
+        )
+)
+```
 
 上記の配列を `saveAll()` に渡せば、それぞれの関連する Recipe に
 Tag を含むデータが生成されます。
@@ -790,53 +802,55 @@ Tag を含むデータが生成されます。
 唯一の関連する HABTM モデルの id を設定する必要があることに注意してください。
 しかし、再びネストする必要があります。 :
 
-    Array
-    (
-        [0] => Array
-            (
-                [Post] => Array
-                    (
-                        [title] => 'Saving HABTM arrays'
-                    )
-                [Tag] => Array
-                    (
-                        [Tag] => Array(1, 2, 5, 9)
-                    )
-            )
-        [1] => Array
-            (
-                [Post] => Array
-                    (
-                        [title] => 'Dr Who\'s Name is Revealed'
-                    )
-                [Tag] => Array
-                    (
-                        [Tag] => Array(7, 9, 15, 19)
-                    )
-            )
-        [2] => Array
-            (
-                [Post] => Array
-                    (
-                        [title] => 'I Came, I Saw and I Conquered'
-                    )
-                [Tag] => Array
-                    (
-                        [Tag] => Array(11, 12, 15, 19)
-                    )
-            )
-        [3] => Array
-            (
-                [Post] => Array
-                    (
-                        [title] => 'Simplicity is the Ultimate Sophistication'
-                    )
-                [Tag] => Array
-                    (
-                        [Tag] => Array(12, 22, 25, 29)
-                    )
-            )
-    )
+``` text
+Array
+(
+    [0] => Array
+        (
+            [Post] => Array
+                (
+                    [title] => 'Saving HABTM arrays'
+                )
+            [Tag] => Array
+                (
+                    [Tag] => Array(1, 2, 5, 9)
+                )
+        )
+    [1] => Array
+        (
+            [Post] => Array
+                (
+                    [title] => 'Dr Who\'s Name is Revealed'
+                )
+            [Tag] => Array
+                (
+                    [Tag] => Array(7, 9, 15, 19)
+                )
+        )
+    [2] => Array
+        (
+            [Post] => Array
+                (
+                    [title] => 'I Came, I Saw and I Conquered'
+                )
+            [Tag] => Array
+                (
+                    [Tag] => Array(11, 12, 15, 19)
+                )
+        )
+    [3] => Array
+        (
+            [Post] => Array
+                (
+                    [title] => 'Simplicity is the Ultimate Sophistication'
+                )
+            [Tag] => Array
+                (
+                    [Tag] => Array(12, 22, 25, 29)
+                )
+        )
+)
+```
 
 `saveAll($data, array('deep' => true))` に上記の配列を渡すことで、
 Post に対する Tag のアソシエーションをもつ posts_tags 結合テーブルに登録します。

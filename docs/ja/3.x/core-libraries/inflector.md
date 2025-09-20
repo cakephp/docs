@@ -42,8 +42,10 @@ Inflector の組み込みメソッドの簡単な概要と、複数単語の引�
 もし、他の言語の対応が必要な場合、 使用するルールをカスタマイズするために
 [Inflection Configuration](#inflection-configuration) を使用することができます。 :
 
-    // Apples
-    echo Inflector::pluralize('Apple');
+``` text
+// Apples
+echo Inflector::pluralize('Apple');
+```
 
 > [!NOTE]
 > `pluralize()` は、すでに複数形の名詞をいつも正しく変換できるわけではありません。
@@ -60,11 +62,13 @@ echo Inflector::singularize('People');
 
 これらのメソッドは、クラス名やプロパティー名を作成する時便利です。 :
 
-    // ApplePie
-    Inflector::camelize('Apple_pie')
+``` text
+// ApplePie
+Inflector::camelize('Apple_pie')
 
-    // apple_pie
-    Inflector::underscore('ApplePie');
+// apple_pie
+Inflector::underscore('ApplePie');
+```
 
 underscore メソッドは、 キャメルケース形式の単語のみ変換することに注意してください。
 スペースを含む単語は、小文字になりますが、アンダースコアーは含まれません。
@@ -74,38 +78,46 @@ underscore メソッドは、 キャメルケース形式の単語のみ変換�
 このメソッドは、アンダースコアー形式を人間が読みやすい値
 「タイトルケース」形式に変換する時に便利です。 :
 
-    // Apple Pie
-    Inflector::humanize('apple_pie');
+``` text
+// Apple Pie
+Inflector::humanize('apple_pie');
+```
 
 ## テーブル名やクラス名の作成
 
 コードの生成や CakePHP の規約を使用する時、テーブル名やクラス名に加工するために
 必要になります。 :
 
-    // UserProfileSetting
-    Inflector::classify('user_profile_settings');
+``` text
+// UserProfileSetting
+Inflector::classify('user_profile_settings');
 
-    // user-profile-setting
-    Inflector::dasherize('UserProfileSetting');
+// user-profile-setting
+Inflector::dasherize('UserProfileSetting');
 
-    // user_profile_settings
-    Inflector::tableize('UserProfileSetting');
+// user_profile_settings
+Inflector::tableize('UserProfileSetting');
+```
 
 ## 変数名の作成
 
 規約をもとにしたコード生成や仕事をするのに必要なメタプログログラミングの作業を行う時に、
 変数名はしばしば役に立ちます。 :
 
-    // applePie
-    Inflector::variable('apple_pie');
+``` text
+// applePie
+Inflector::variable('apple_pie');
+```
 
 ## URL セーフな文字列
 
 slug は特殊文字をラテン文字に変換したり、スペースをアンダースコアーに変換します。
 slug は UTF-8 を前提とします。 :
 
-    // apple-puree
-    Inflector::slug('apple purée');
+``` text
+// apple-puree
+Inflector::slug('apple purée');
+```
 
 ## Inflection の設定
 

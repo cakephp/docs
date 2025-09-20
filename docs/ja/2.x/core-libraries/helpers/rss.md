@@ -15,7 +15,7 @@ CakePHP で posts/index の xml/rss バージョンはすぐに作成できま�
 公開して実行する前にいくつか行う必要があります。最初に parseExtensions を
 有効にします。これは `app/Config/routes.php` で行います。 :
 
-``` css
+``` php
 Router::parseExtensions('rss');
 ```
 

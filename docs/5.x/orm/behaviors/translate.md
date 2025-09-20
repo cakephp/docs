@@ -139,8 +139,10 @@ same API to manage translations.
 Now, select a language to be used for retrieving entities by changing
 the application language, which will affect all translations:
 
-    // In the Articles controller. Change the locale to Spanish, for example
-    I18n::setLocale('es');
+``` text
+// In the Articles controller. Change the locale to Spanish, for example
+I18n::setLocale('es');
+```
 
 Then, get an existing entity:
 
@@ -265,14 +267,16 @@ In the example above you will get a list of entities back that have a
 `_translations` property set. This property will contain a list of translation
 data entities. For example the following properties would be accessible:
 
-    // Outputs 'en'
-    echo $article->_translations['en']->locale;
+``` text
+// Outputs 'en'
+echo $article->_translations['en']->locale;
 
-    // Outputs 'title'
-    echo $article->_translations['en']->field;
+// Outputs 'title'
+echo $article->_translations['en']->field;
 
-    // Outputs 'My awesome post!'
-    echo $article->_translations['en']->body;
+// Outputs 'My awesome post!'
+echo $article->_translations['en']->body;
+```
 
 A more elegant way for dealing with this data is by adding a trait to the entity
 class that is used for your table:
@@ -447,11 +451,13 @@ After the entity has been saved, the translated field will be persisted as well,
 one thing to note is that values from the default language that were not
 overridden will be preserved:
 
-    // Outputs 'This is the content'
-    echo $article->body;
+``` text
+// Outputs 'This is the content'
+echo $article->body;
 
-    // Outputs 'Mi primer Artículo'
-    echo $article->title;
+// Outputs 'Mi primer Artículo'
+echo $article->title;
+```
 
 Once you override the value, the translation for that field will be saved and
 can be retrieved as usual:

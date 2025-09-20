@@ -9,25 +9,27 @@ CakePHP 2.1 は、2.0 の API の完全上位互換です。
 のコアからは削除されています。もし、これらのクラスを利用していなかった
 場合は、次のような方法でアップグレードすることができます。:
 
-    // app/View/Helper/AppHelper.php
-    App::uses('Helper', 'View');
-    class AppHelper extends Helper {
-    }
+``` php
+// app/View/Helper/AppHelper.php
+App::uses('Helper', 'View');
+class AppHelper extends Helper {
+}
 
-    // app/Model/AppModel.php
-    App::uses('Model', 'Model');
-    class AppModel extends Model {
-    }
+// app/Model/AppModel.php
+App::uses('Model', 'Model');
+class AppModel extends Model {
+}
 
-    // app/Controller/AppController.php
-    App::uses('Controller', 'Controller');
-    class AppController extends Controller {
-    }
+// app/Controller/AppController.php
+App::uses('Controller', 'Controller');
+class AppController extends Controller {
+}
 
-    // app/Console/Command/AppShell.php
-    App::uses('Shell', 'Console');
-    class AppShell extends Shell {
-    }
+// app/Console/Command/AppShell.php
+App::uses('Shell', 'Console');
+class AppShell extends Shell {
+}
+```
 
 もし、あなたのアプリケーションが既にこれらのファイルやクラスを利用して
 いた場合には、特に何もする必要はありません。

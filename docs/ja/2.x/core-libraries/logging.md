@@ -22,19 +22,21 @@ CakePHP でデータのロギングは簡単です。 log() 関数が Object ク
 に配置されます。 `CakeLog` は `CakeLog::config()` を呼ぶことで、ログストリームを
 設定するためにロードを試みます。 DatabaseLog を設定するためには、以下のようにします。 :
 
-    // app/Lib 用
-    CakeLog::config('otherFile', array(
-        'engine' => 'Database',
-        'model' => 'LogEntry',
-        // ...
-    ));
+``` php
+// app/Lib 用
+CakeLog::config('otherFile', array(
+    'engine' => 'Database',
+    'model' => 'LogEntry',
+    // ...
+));
 
-    // LoggingPack というプラグイン用
-    CakeLog::config('otherFile', array(
-        'engine' => 'LoggingPack.Database',
-        'model' => 'LogEntry',
-        // ...
-    ));
+// LoggingPack というプラグイン用
+CakeLog::config('otherFile', array(
+    'engine' => 'LoggingPack.Database',
+    'model' => 'LogEntry',
+    // ...
+));
+```
 
 ログストリームを設定する時、 `engine` パラメータは、ログハンドラを配置、
 ロードするために使用され、その他の設定プロパティの全ては、ログストリームの
@@ -138,11 +140,13 @@ $this->log("何か動かないよ！");
 第一引数に独自のログ名を指定できます。デフォルトの組み込み FileLog クラスは、
 このログ名を書き込みたいログファイルとして扱います。 :
 
-    // 静的に呼び出し
-    CakeLog::write('activity', '活動記録としての特別なメッセージ');
+``` php
+// 静的に呼び出し
+CakeLog::write('activity', '活動記録としての特別なメッセージ');
 
-    // (error.log ではなく) app/tmp/logs/activity.log に追記された結果
-    // 2007-11-02 10:22:02 Activity: 活動記録としての特別なメッセージ
+// (error.log ではなく) app/tmp/logs/activity.log に追記された結果
+// 2007-11-02 10:22:02 Activity: 活動記録としての特別なメッセージ
+```
 
 設定されたディレクトリは、ウェブサーバユーザー権限で正しくロギングできるように
 書き込み可能にしなければなりません。
@@ -150,7 +154,7 @@ $this->log("何か動かないよ！");
 `CakeLog::config()` を使うと別の FileLog 出力先を設定できます。
 FileLog は、独自のパスを使用するために `path` を設定できます。 :
 
-``` css
+``` php
 CakeLog::config('custom_path', array(
     'engine' => 'File',
     'path' => '/path/to/custom/place/'
@@ -172,7 +176,7 @@ syslog を使うためには、デフォルトの FileLog エンジンを使う�
 デフォルトのロガーを syslog に置き換えるものです。これは、 <span class="title-ref">bootstrap.php</span> ファイルで
 設定します。 :
 
-``` css
+``` php
 CakeLog::config('default', array(
     'engine' => 'Syslog'
 ));
@@ -196,7 +200,7 @@ Syslog ロギングエンジンのための設定配列は、以下のキーを�
 ログファイルへの書き込みは、２つの方法があります。１つは、
 静的な `CakeLog::write()` メソッドを使用することです。 :
 
-``` css
+``` php
 CakeLog::write('debug', '何か動作しなかった');
 ```
 
@@ -219,7 +223,7 @@ CakeLog は、自身では何も自動設定されません。結果として、
 最低限一つ、 `default` のストリームを用意してください。通常、 `app/tmp/logs/`
 に出力するためには、コアの `FileLog` クラスをセットするだけで可能です。 :
 
-``` css
+``` php
 CakeLog::config('default', array(
     'engine' => 'File'
 ));
@@ -239,26 +243,28 @@ CakePHP は、このコンセプトをロギングスコープで実現します
 これらのロガーに向けられます。ログメッセージが未設定のスコープへ書かれた場合、
 そのメッセージのレベルを制御するロガーがメッセージを記録します。 例:
 
-    // ２つの設定されたタイプ(ログレベル) を受け取るように、 tmp/logs/shop.log を設定。
-    // スコープは `orders` と `payments`
-    CakeLog::config('shop', array(
-        'engine' => 'FileLog',
-        'types' => array('warning', 'error'),
-        'scopes' => array('orders', 'payments'),
-        'file' => 'shop.log',
-    ));
+``` php
+// ２つの設定されたタイプ(ログレベル) を受け取るように、 tmp/logs/shop.log を設定。
+// スコープは `orders` と `payments`
+CakeLog::config('shop', array(
+    'engine' => 'FileLog',
+    'types' => array('warning', 'error'),
+    'scopes' => array('orders', 'payments'),
+    'file' => 'shop.log',
+));
 
-    // ２つの設定されたタイプ(ログレベル) を受け取るように、 tmp/logs/payments.log を設定。
-    // スコープは `payments` のみ
-    CakeLog::config('payments', array(
-        'engine' => 'SyslogLog',
-        'types' => array('info', 'error', 'warning'),
-        'scopes' => array('payments')
-    ));
+// ２つの設定されたタイプ(ログレベル) を受け取るように、 tmp/logs/payments.log を設定。
+// スコープは `payments` のみ
+CakeLog::config('payments', array(
+    'engine' => 'SyslogLog',
+    'types' => array('info', 'error', 'warning'),
+    'scopes' => array('payments')
+));
 
-    CakeLog::warning('これは、 shop のストリームにのみ書かれます', 'orders');
-    CakeLog::warning('これは、 shop と payments の両ストリームに書かれます', 'payments');
-    CakeLog::warning('これは、 shop と payments の両ストリームに書かれます', 'unknown');
+CakeLog::warning('これは、 shop のストリームにのみ書かれます', 'orders');
+CakeLog::warning('これは、 shop と payments の両ストリームに書かれます', 'payments');
+CakeLog::warning('これは、 shop と payments の両ストリームに書かれます', 'unknown');
+```
 
 スコープを動作させるためには、いくつか **しなければならない** ことがあります。
 

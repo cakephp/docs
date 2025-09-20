@@ -208,14 +208,16 @@ $article = $this->Articles->find('translations')->first();
 このプロパティーは、翻訳データエンティティーのリストが含まれます。
 たとえば、次のプロパティーがアクセス可能になります。 :
 
-    // 出力結果 'en'
-    echo $article->_translations['en']->locale;
+``` text
+// 出力結果 'en'
+echo $article->_translations['en']->locale;
 
-    // 出力結果 'title'
-    echo $article->_translations['en']->field;
+// 出力結果 'title'
+echo $article->_translations['en']->field;
 
-    // 出力結果 'My awesome post!'
-    echo $article->_translations['en']->body;
+// 出力結果 'My awesome post!'
+echo $article->_translations['en']->body;
+```
 
 このデータを扱うためのよりエレガントな方法は、
 テーブルに使用されるエンティティークラスにトレイトを追加することです。 :
@@ -391,11 +393,13 @@ $this->Articles->save($article);
 エンティティーが保存された後、翻訳されたフィールドも同様に永続化されますが、
 もう１つの注意点は、デフォルトの言語の値は上書きされずに保存されることです。 :
 
-    // 出力結果 'This is the content'
-    echo $article->body;
+``` text
+// 出力結果 'This is the content'
+echo $article->body;
 
-    // 出力結果 'Mi primer Artículo'
-    echo $article->title;
+// 出力結果 'Mi primer Artículo'
+echo $article->title;
+```
 
 一度、値を上書きすると、そのフィールドの翻訳が保存され、通常通りに取得することができます。 :
 

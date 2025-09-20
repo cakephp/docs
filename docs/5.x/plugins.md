@@ -462,17 +462,21 @@ because we don't have a Contact model defined yet.
 If your application includes the default routing CakePHP provides you will be
 able to access your plugin controllers using URLs like:
 
-    // Access the index route of a plugin controller.
-    /contact-manager/contacts
+``` text
+// Access the index route of a plugin controller.
+/contact-manager/contacts
 
-    // Any action on a plugin controller.
-    /contact-manager/contacts/view/1
+// Any action on a plugin controller.
+/contact-manager/contacts/view/1
+```
 
 If your application defines routing prefixes, CakePHP's default routing will
 also connect routes that use the following pattern:
 
-    /{prefix}/{plugin}/{controller}
-    /{prefix}/{plugin}/{controller}/{action}
+``` text
+/{prefix}/{plugin}/{controller}
+/{prefix}/{plugin}/{controller}/{action}
+```
 
 See the section on [Plugin Configuration](#plugin-configuration) for information on how to load
 plugin specific route files.
@@ -561,10 +565,12 @@ right folder inside of the `plugins/[PluginName]/templates/` folder. For our
 ContactManager plugin, we'll need a view for our `ContactsController::index()`
 action, so let's include that as well:
 
-    // plugins/ContactManager/templates/Contacts/index.php:
-    <h1>Contacts</h1>
-    <p>Following is a sortable list of your contacts</p>
-    <!-- A sortable list of contacts would go here....-->
+``` text
+// plugins/ContactManager/templates/Contacts/index.php:
+<h1>Contacts</h1>
+<p>Following is a sortable list of your contacts</p>
+<!-- A sortable list of contacts would go here....-->
+```
 
 Plugins can provide their own layouts. To add plugin layouts, place your template files inside
 `plugins/[PluginName]/templates/layout`. To use a plugin layout in your controller

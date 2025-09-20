@@ -241,23 +241,25 @@ Apache ウェブサーバーでこの方法を使う場合は、 `DocumentRoot` 
 「/cake_install」を指定したとしましょう）にアプリケーションをインストールしたら、
 あなたのファイルシステムには下記のような環境ができているでしょう。 :
 
-    /cake_install/
-        bin/
-        config/
-        logs/
-        plugins/
-        src/
-        tests/
-        tmp/
-        vendor/
-        webroot/ (このディレクトリーが DocumentRoot になります)
-        .gitignore
-        .htaccess
-        .travis.yml
-        composer.json
-        index.php
-        phpunit.xml.dist
-        README.md
+``` text
+/cake_install/
+    bin/
+    config/
+    logs/
+    plugins/
+    src/
+    tests/
+    tmp/
+    vendor/
+    webroot/ (このディレクトリーが DocumentRoot になります)
+    .gitignore
+    .htaccess
+    .travis.yml
+    composer.json
+    index.php
+    phpunit.xml.dist
+    README.md
+```
 
 Apache を利用している開発者は、当該ドメインの `DocumentRoot` ディレクティブに
 下記のように指定します。
@@ -533,10 +535,12 @@ CakePHP のリンク、CSS、JavaScript、再ルーティング (rerouting) は�
 使えない場合は、 CakePHP の組み込みのままの URL を使う必要があります。
 **config/app.php** の下記のコメントを解除します。 :
 
-    'App' => [
-        // ...
-        // 'baseUrl' => env('SCRIPT_NAME'),
-    ]
+``` text
+'App' => [
+    // ...
+    // 'baseUrl' => env('SCRIPT_NAME'),
+]
+```
 
 そして、下記の .htaccess ファイルを削除します。 :
 

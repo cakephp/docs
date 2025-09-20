@@ -19,7 +19,7 @@ With this command out of the way your `phpunit.xml` already has most of the reco
 PHPUnit 10 removed the old hook system and introduced a new [Event system](https://docs.phpunit.de/en/10.5/extending-phpunit.html#extending-the-test-runner)
 which requires the following code in your `phpunit.xml` to be adjusted from:
 
-``` html
+``` php
 <extensions>
   <extension class="Cake\TestSuite\Fixture\PHPUnitExtension"/>
 </extensions>
@@ -27,7 +27,7 @@ which requires the following code in your `phpunit.xml` to be adjusted from:
 
 to:
 
-``` html
+``` php
 <extensions>
   <bootstrap class="Cake\TestSuite\Fixture\Extension\PHPUnitExtension"/>
 </extensions>
@@ -64,4 +64,6 @@ public function myProvider(): array
 
 should be converted to:
 
-    public static function myProvider(): array
+``` text
+public static function myProvider(): array
+```

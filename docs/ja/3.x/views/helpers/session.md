@@ -18,9 +18,11 @@ SessionHelper と Session オブジェクトの主な違いは、
 
 Session オブジェクトと同様に、データは `ドット記法` 配列構造を使用して読み取られます。 :
 
-    ['User' => [
-        'username' => 'super@example.com'
-    ]];
+``` php
+['User' => [
+    'username' => 'super@example.com'
+]];
+```
 
 上記の配列構造では、ノードは `User.username` によってアクセスされ、ドットはネストされた配列を示します。
 この記法は、 `$key` が使用されている、すべての SessionHelper メソッドで使用されます。

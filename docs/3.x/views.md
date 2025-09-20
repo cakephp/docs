@@ -581,8 +581,10 @@ Inside the element file, all the passed variables are available as members of
 the parameter array. In the above example, the
 **src/Template/Element/helpbox.ctp** file can use the `$helptext` variable:
 
-    // Inside src/Template/Element/helpbox.ctp
-    echo $helptext; // Outputs "Oh, this text is very helpful."
+``` text
+// Inside src/Template/Element/helpbox.ctp
+echo $helptext; // Outputs "Oh, this text is very helpful."
+```
 
 Keep in mind that in those view vars are merged with the view vars from the view
 itself. So all view vars set using `Controller::set()` in the controller and

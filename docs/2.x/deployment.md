@@ -56,11 +56,13 @@ For example, you can set an environment variable in your Apache configuration:
 
 And then you can set the debug level dynamically in `core.php`:
 
-    if (getenv('CAKEPHP_DEBUG')) {
-        Configure::write('debug', 2);
-    } else {
-        Configure::write('debug', 0);
-    }
+``` php
+if (getenv('CAKEPHP_DEBUG')) {
+    Configure::write('debug', 2);
+} else {
+    Configure::write('debug', 0);
+}
+```
 
 ## Improve your application's performance
 

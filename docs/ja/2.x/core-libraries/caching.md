@@ -69,7 +69,7 @@ Cache クラスの設定は、どこでもできます。しかし、一般的�
 
 例:
 
-``` css
+``` php
 Cache::config('short', array(
     'engine' => 'File',
     'duration' => '+1 hours',
@@ -109,7 +109,7 @@ Cache::config('long', array(
 `$plugin/Lib/Cache/Engine/MyCustomCacheEngine.php` に配置されます。
 プラグインの Cache 設定は、ドット記法を使用する必要があります。 :
 
-``` css
+``` php
 Cache::config('custom', array(
     'engine' => 'CachePack.MyCustomCache',
     // ...
@@ -199,7 +199,7 @@ Cache クラスは、簡単な方法で、アトミックにカウンターの�
 整数値をセットした後、 `Cache::increment()` と
 `Cache::decrement()` を使って操作できます。 :
 
-``` css
+``` php
 Cache::write('initial_count', 10);
 
 // Later on
@@ -223,7 +223,7 @@ Cache::increment('initial_count');
 全体を無効化するキーが必要になります。これには、キャッシュの設定内で groups を宣言することで
 可能になります。 :
 
-``` css
+``` php
 Cache::config('site_home', array(
     'engine' => 'Redis',
     'duration' => '+999 days',

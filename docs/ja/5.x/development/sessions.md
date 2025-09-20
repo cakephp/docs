@@ -29,7 +29,7 @@ CakePHP において、 `$_SESSION` の利用は通常避けています。代�
 アプリケーションを動かす場合、セッション消失の問題が発生するかも知れません。SSL と 非 SSL の
 ドメイン両方でセッションにアクセスする必要がある場合、これを無効にします。 :
 
-``` css
+``` php
 Configure::write('Session', [
     'defaults' => 'php',
     'ini' => [
@@ -43,7 +43,7 @@ v4.0 以降、CakePHP はセッション Cookie の
 CSRF 攻撃から保護することもできるようになりました。
 このデフォルト値は、`session.cookie_samesite` php.ini config: で変更することができます。 :
 
-``` css
+``` php
 Configure::write('Session', [
     'defaults' => 'php',
     'ini' => [
@@ -56,7 +56,7 @@ Configure::write('Session', [
 変更するためには、 `session.cookie_path` ini の値を使用できます。例えば、
 すべてのサブドメインにまたがってセッションを永続化させたい場合、以下のようにします。 :
 
-``` css
+``` php
 Configure::write('Session', [
     'defaults' => 'php',
     'ini' => [
@@ -70,7 +70,7 @@ Configure::write('Session', [
 すぐに有効期限切れになるセッションクッキーを設定します。クッキーのタイムアウトは
 `session.cookie_lifetime` ini の値で制御します。以下のように設定できます。 :
 
-``` css
+``` php
 Configure::write('Session', [
     'defaults' => 'php',
     'ini' => [
@@ -96,7 +96,7 @@ CakePHP にはいくつかビルトインなセッションの設定がありま
 単純に 'defaults' キーに使用したいデフォルト名をセットします。セッション config で宣言をすれば
 サブセッティングだけを上書きすることも出来ます。 :
 
-``` css
+``` php
 Configure::write('Session', [
     'defaults' => 'php'
 ]);
@@ -105,7 +105,7 @@ Configure::write('Session', [
 上記はビルトインの 'php' 設定を使用します。下記のように全てまたは部分的に
 設定を上書きすることも出来ます。 :
 
-``` css
+``` php
 Configure::write('Session', [
     'defaults' => 'php',
     'cookie' => 'my_app',
@@ -131,12 +131,14 @@ Configure::write('Session', [
 セッションに保存する際にこのメソッドを使用します。ハンドラーのための追加の設定は、
 handler 配列内に配置されます。ハンドラー内からこれらの値を読むことができます。 :
 
-    'Session' => [
-        'handler' => [
-            'engine' => 'DatabaseSession',
-            'model' => 'CustomSessions'
-        ]
+``` text
+'Session' => [
+    'handler' => [
+        'engine' => 'DatabaseSession',
+        'model' => 'CustomSessions'
     ]
+]
+```
 
 上記は、どのようにアプリケーションのモデルを使ってデータベースセッションハンドラーを
 設定できるかを示しています。クラス名をあなたの handler.engine に使用した時、
@@ -152,9 +154,11 @@ CakePHP は、 `Http\Session` 名前空間内にクラスがあることを期�
 もし、セッションデータを保存するためにデータベースを使用する必要がある場合、
 以下のように設定してください。 :
 
-    'Session' => [
-        'defaults' => 'database'
-    ]
+``` text
+'Session' => [
+    'defaults' => 'database'
+]
+```
 
 この設定は、以下の項目を持つデータベーステーブルが必要になります。 :
 
@@ -174,13 +178,15 @@ CREATE TABLE `sessions` (
 
 セッションの保存を処理するための独自の `Table` クラスを使用することもできます。 :
 
-    'Session' => [
-        'defaults' => 'database',
-        'handler' => [
-            'engine' => 'DatabaseSession',
-            'model' => 'CustomSessions'
-        ]
+``` text
+'Session' => [
+    'defaults' => 'database',
+    'handler' => [
+        'engine' => 'DatabaseSession',
+        'model' => 'CustomSessions'
     ]
+]
+```
 
 上記は、 Session にビルドインの 'database' の defaults を使用することを伝え、
 データベースにセッション情報を保存するために `CustomSessions` と呼ばれる Table に
@@ -195,7 +201,7 @@ APCu または Memcached のように格納することを可能にします。�
 
 キャッシュベースのセッションを使うために Session の config を以下のように設定します。 :
 
-``` css
+``` php
 Configure::write('Session', [
     'defaults' => 'cache',
     'handler' => [
@@ -216,7 +222,7 @@ Configure::write('Session', [
 `ini` キーで、個別の設定値を指定することが可能です。例えば `session.gc_divisor` のような
 セッティングをコントロールするのに使えます。 :
 
-``` css
+``` php
 Configure::write('Session', [
     'defaults' => 'php',
     'ini' => [
@@ -296,18 +302,20 @@ class ComboSession extends DatabaseSession
 キャッシュ限度の考慮を不要にしています。このセッションハンドラーを使うのもまた簡単です。
 **app.php** のセッションブロックを以下のように設定します。 :
 
-    'Session' => [
-        'defaults' => 'database',
-        'handler' => [
-            'engine' => 'ComboSession',
-            'model' => 'Session',
-            'cache' => 'apc'
-        ]
-    ],
-    // apc キャッシュ config を追加すること
-    'Cache' => [
-        'apc' => ['engine' => 'Apc']
+``` text
+'Session' => [
+    'defaults' => 'database',
+    'handler' => [
+        'engine' => 'ComboSession',
+        'model' => 'Session',
+        'cache' => 'apc'
     ]
+],
+// apc キャッシュ config を追加すること
+'Cache' => [
+    'apc' => ['engine' => 'Apc']
+]
+```
 
 これでアプリケーションはカスタムセッションハンドラーを使ったセッションデータの読み書きを行います。
 

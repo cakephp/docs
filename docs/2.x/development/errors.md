@@ -17,7 +17,7 @@ any PHP error. [Exceptions](../development/exceptions) are handled separately.
 The callback can be any PHP callable, including an anonymous function. The
 default error handling configuration looks like:
 
-``` css
+``` php
 Configure::write('Error', array(
     'handler' => 'ErrorHandler::handleError',
     'level' => E_ALL & ~E_DEPRECATED,

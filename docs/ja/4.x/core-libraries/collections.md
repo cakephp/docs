@@ -1056,11 +1056,13 @@ $merged = (new Collection($users))->insert('skills', $languages);
 
 配列に変換すると、 `$merged` コレクションは、次のようになります。 :
 
-    [
-        ['username' => 'mark', 'skills' => ['PHP', 'Python', 'Ruby']],
-        ['username' => 'juan', 'skills' => ['Bash', 'PHP', 'Javascript']],
-        ['username' => 'jose', 'skills' => ['Javascript', 'Prolog']]
-    ];
+``` php
+[
+    ['username' => 'mark', 'skills' => ['PHP', 'Python', 'Ruby']],
+    ['username' => 'juan', 'skills' => ['Bash', 'PHP', 'Javascript']],
+    ['username' => 'jose', 'skills' => ['Javascript', 'Prolog']]
+];
+```
 
 `insert()` メソッドの最初のパラメーターは、要素がその位置に挿入することができるように示した
 プロパティーのドット区切りのパスです。第２引数は、コレクションオブジェクトに変換することができるものです。

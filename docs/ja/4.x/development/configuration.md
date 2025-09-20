@@ -252,24 +252,26 @@ CakePHP のセッション操作の設定は [セッションの設定](../devel
 CakePHP はこれらのリソースの追加パスをセットアップするための 3 つの Configure 変数を提供します。
 **config/app.php** の中でこれらの変数をセットできます。 :
 
-    return [
-        // 他の設定
-        'App' => [
-            'paths' => [
-                'plugins' => [
-                    ROOT . DS . 'plugins' . DS,
-                    '/path/to/other/plugins/'
-                ],
-                'templates' => [
-                    ROOT . DS . 'templates' . DS,
-                    ROOT . DS . 'templates2' . DS
-                ],
-                'locales' => [
-                    ROOT . DS . 'resources' . DS . 'locales' . DS
-                ]
+``` text
+return [
+    // 他の設定
+    'App' => [
+        'paths' => [
+            'plugins' => [
+                ROOT . DS . 'plugins' . DS,
+                '/path/to/other/plugins/'
+            ],
+            'templates' => [
+                ROOT . DS . 'templates' . DS,
+                ROOT . DS . 'templates2' . DS
+            ],
+            'locales' => [
+                ROOT . DS . 'resources' . DS . 'locales' . DS
             ]
         ]
-    ];
+    ]
+];
+```
 
 パスはディレクトリーセパレーター付きで終了し、そうでないと適切に動作しないです。
 
@@ -292,7 +294,7 @@ MVC デザインパターンを破壊する誘惑に気をつけてください�
 
 `write()` を利用してアプリケーションの設定にデータを保存します。 :
 
-``` css
+``` php
 Configure::write('Company.name','Pizza, Inc.');
 Configure::write('Company.slogan','Pizza for your body and soul');
 ```
@@ -302,7 +304,7 @@ Configure::write('Company.slogan','Pizza for your body and soul');
 
 上記の例は一度の呼び出しでも記述できます。 :
 
-``` css
+``` php
 Configure::write('Company', [
     'name' => 'Pizza, Inc.',
     'slogan' => 'Pizza for your body and soul'
@@ -321,18 +323,20 @@ Configure::write('Company', [
 アプリケーションから設定データを読み込むために利用されます。もしキーが指定されれば、
 そのデータが返却されます。上記の write() の例を取り上げると、以下のようにデータを読み込みます。 :
 
-    // 'Pizza Inc.' を返します
-    Configure::read('Company.name');
+``` php
+// 'Pizza Inc.' を返します
+Configure::read('Company.name');
 
-    // 'Pizza for your body and soul' を返します
-    Configure::read('Company.slogan');
+// 'Pizza for your body and soul' を返します
+Configure::read('Company.slogan');
 
-    Configure::read('Company');
-    // 戻り値:
-    ['name' => 'Pizza, Inc.', 'slogan' => 'Pizza for your body and soul'];
+Configure::read('Company');
+// 戻り値:
+['name' => 'Pizza, Inc.', 'slogan' => 'Pizza for your body and soul'];
 
-    // Company.nope は定義されていないので 'fallback' を返します
-    Configure::read('Company.nope', 'fallback');
+// Company.nope は定義されていないので 'fallback' を返します
+Configure::read('Company.nope', 'fallback');
+```
 
 もし `$key` が null のままだと、Configure のすべての値が返却されます。
 
@@ -340,7 +344,7 @@ Configure::write('Company', [
 一方で key/value ペアを検索することを期待します。要求されたペアが存在しない場合、
 `RuntimeException` が投げられます。 :
 
-``` css
+``` php
 Configure::readOrFail('Company.name');    // 出力: 'Pizza, Inc.'
 Configure::readOrFail('Company.geolocation');  // 例外を投げる
 
@@ -362,7 +366,7 @@ $exists = Configure::check('Company.name');
 
 アプリケーションの設定から情報を削除するために利用されます。 :
 
-``` css
+``` php
 Configure::delete('Company.name');
 ```
 
@@ -375,7 +379,7 @@ Configure からキーの読み込みと削除を行います。
 一方でキーと値のペアが見つかることを期待します。要求されたペアが存在しない場合、
 `RuntimeException` が投げられます。 :
 
-``` css
+``` php
 Configure::consumeOrFail('Company.name');    // 出力: 'Pizza, Inc.'
 Configure::consumeOrFail('Company.geolocation');  // 例外を投げる
 
@@ -410,17 +414,19 @@ Configure::config('default', new PhpConfig('/path/to/your/config/files/'));
 どのエンジンのエイリアスが設定されているかチェックするには、 `Configure::configured()`
 が利用できます。 :
 
-    // 配置されたエンジンのエイリアスの配列を取得する
-    Configure::configured();
+``` php
+// 配置されたエンジンのエイリアスの配列を取得する
+Configure::configured();
 
-    // 特定のエンジンが配置されているかチェックする
-    Configure::configured('default');
+// 特定のエンジンが配置されているかチェックする
+Configure::configured('default');
+```
 
 配置されたエンジンを取り除くことができます。
 `Configure::drop('default')` は default のエンジンエイリアスを取り除きます。
 この先、そのエンジンを使って設定ファイルを読み込もうとする試みは失敗します。 :
 
-``` css
+``` php
 Configure::drop('default');
 ```
 
@@ -428,8 +434,10 @@ Configure::drop('default');
 
 一旦設定エンジンに Configure を設定すると、設定ファイルを読み込むことができます。 :
 
-    // 'default' エンジンオブジェクトを使用して my_file.php を読み込む
-    Configure::load('my_file', 'default');
+``` php
+// 'default' エンジンオブジェクトを使用して my_file.php を読み込む
+Configure::load('my_file', 'default');
+```
 
 読み込まれた設定ファイルは、自身のデータを Configure 内に存在している実行時の設定とマージします。
 これは存在している実行時の設定へ値の上書きや新規追加を可能とします。
@@ -447,13 +455,13 @@ Configure::drop('default');
 'default' エンジンは PhpConfig のインスタンスとして考えられます。
 Configure の全てのデータを <span class="title-ref">my_config.php</span> に保存します。 :
 
-``` css
+``` php
 Configure::dump('my_config', 'default');
 ```
 
 エラーハンドリング設定のみ保存します。 :
 
-``` css
+``` php
 Configure::dump('error', 'default', ['Error', 'Exception']);
 ```
 
@@ -466,8 +474,10 @@ Configure::dump('error', 'default', ['Error', 'Exception']);
 設定は現在のリクエストのみ値を記憶するので、
 もしその後のリクエストで編集された設定情報を利用したければ、それを保存する必要があります。 :
 
-    // 現在の設定を 'user_1234' キーに 'default' キャッシュとして保存
-    Configure::store('user_1234', 'default');
+``` php
+// 現在の設定を 'user_1234' キーに 'default' キャッシュとして保存
+Configure::store('user_1234', 'default');
+```
 
 保存された設定データはその名前のキャッシュ設定で存続します。
 キャッシュに関するより詳しい情報は [キャッシュ](../core-libraries/caching) を参照してください。
@@ -477,8 +487,10 @@ Configure::dump('error', 'default', ['Error', 'Exception']);
 実行時の設定を保存すると、おそらくそれを復元して、再びそれにアクセスする必要があります。
 `Configure::restore()` がちょうどそれに該当します。 :
 
-    // キャッシュから実行時の設定を復元する
-    Configure::restore('user_1234', 'default');
+``` php
+// キャッシュから実行時の設定を復元する
+Configure::restore('user_1234', 'default');
+```
 
 設定情報を復元する場合、それを保存する時に使われたのと同じ鍵、
 およびキャッシュ設定で復元することが重要です。

@@ -162,33 +162,35 @@ $data = $this->Paginator->paginate();
 
 次のようなものを返すでしょう。 :
 
-    Array
-    (
-        [0] => Array
-            (
-                [Products] => Array
-                    (
-                        [id] => 1234,
-                        [description] => 'テキストなどなど...',
-                    )
-                 [ProductsItems] => Array
-                     (
-                         [Total] => 25
-                     )
-            )
-         [1] => Array
-            (
-                [Products] => Array
-                    (
-                        [id] => 4321,
-                        [description] => 'テキスト 2 などなど...',
-                    )
-                 [ProductsItems] => Array
-                     (
-                         [Total] => 50
-                     )
-            )
-     )
+``` text
+Array
+(
+    [0] => Array
+        (
+            [Products] => Array
+                (
+                    [id] => 1234,
+                    [description] => 'テキストなどなど...',
+                )
+             [ProductsItems] => Array
+                 (
+                     [Total] => 25
+                 )
+        )
+     [1] => Array
+        (
+            [Products] => Array
+                (
+                    [id] => 4321,
+                    [description] => 'テキスト 2 などなど...',
+                )
+             [ProductsItems] => Array
+                 (
+                     [Total] => 50
+                 )
+        )
+ )
+```
 
 ## SQL クエリ内でのバーチャルフィールドの利用
 
@@ -210,20 +212,22 @@ $this->Timelog->query(
 
 戻り値はこのようになります。 :
 
-    Array
-    (
-        [0] => Array
-            (
-                [Timelog] => Array
-                    (
-                        [project_id] => 1234
-                    )
-                 [0] => Array
-                     (
-                         [TotalHours] => 25.5
-                     )
-            )
-     )
+``` text
+Array
+(
+    [0] => Array
+        (
+            [Timelog] => Array
+                (
+                    [project_id] => 1234
+                )
+             [0] => Array
+                 (
+                     [TotalHours] => 25.5
+                 )
+        )
+ )
+```
 
 もし TotalHours を Timelog 配列にグループ化したい場合、集計カラムのためのバーチャルフィールドを
 指定する必要があります。
@@ -253,17 +257,19 @@ $this->Timelog->query(
 
 バーチャルフィールドを設定した後クエリを再度実行すると、きれいな値のグループになるはずです。 :
 
-    Array
-    (
-        [0] => Array
-            (
-                [Timelog] => Array
-                    (
-                        [project_id] => 1234
-                        [TotalHours] => 25.5
-                    )
-            )
-    )
+``` text
+Array
+(
+    [0] => Array
+        (
+            [Timelog] => Array
+                (
+                    [project_id] => 1234
+                    [TotalHours] => 25.5
+                )
+        )
+)
+```
 
 ## バーチャルフィールドの制限
 

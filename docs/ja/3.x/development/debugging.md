@@ -31,8 +31,10 @@ CakePHP はデバッグ作業やあなたのアプリケーション内部で何
 もし [Psysh](https://psysh.org/) をインストールしている場合、この関数を
 CLI 環境で使用することで現在のローカルスコープで対話型コンソールを開くことができます。 :
 
-    // 実行したいコード
-    eval(breakpoint());
+``` text
+// 実行したいコード
+eval(breakpoint());
+```
 
 開いた対話型コンソールでローカル変数のチェックや他のコードの実行をすることができます。
 対話型デバッガーを終了して元の処理に戻りたい時は `quit` か `q` を入力してください。
@@ -105,14 +107,16 @@ Debugger::setOutputMask([
 現在のスタックトレースを返します。トレースの各行には、呼び出しているメソッド、
 どこから呼ばれたかというファイルと行番号が含まれています。 :
 
-    // PostsController::index() の中で
-    pr(Debugger::trace());
+``` text
+// PostsController::index() の中で
+pr(Debugger::trace());
 
-    // 出力
-    PostsController::index() - APP/Controller/DownloadsController.php, line 48
-    Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 265
-    Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 237
-    [main] - APP/webroot/index.php, line 84
+// 出力
+PostsController::index() - APP/Controller/DownloadsController.php, line 48
+Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 265
+Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 237
+[main] - APP/webroot/index.php, line 84
+```
 
 上記では、コントローラーのアクション内で `Debugger::trace()` を呼ぶことで、
 スタックトレースを生成しています。

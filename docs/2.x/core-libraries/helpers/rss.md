@@ -16,7 +16,7 @@ Before we jump too far ahead trying to get our webservice up and
 running we need to do a few things. First parseExtensions needs to
 be activated, this is done in `app/Config/routes.php`:
 
-``` css
+``` php
 Router::parseExtensions('rss');
 ```
 

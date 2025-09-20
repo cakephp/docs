@@ -131,7 +131,7 @@ class ProgressHelper extends AppHelper {
 ヘルパーを作成し、保存したら、 `app/Test/Case/View/Helper/ProgressHelperTest.php`
 にテストケースのファイルを作成します。このファイルにまず、以下のように書き込みます。 :
 
-``` css
+``` php
 App::uses('Controller', 'Controller');
 App::uses('View', 'View');
 App::uses('ProgressHelper', 'View/Helper');
@@ -227,14 +227,16 @@ CakePHP はテストを実行するために `test` シェルを提供します�
 また、コマンドラインから通常どおり PHPUnit を使う際に利用できる引数をすべて使うことができます。
 `App` ディレクトリから以下のようなコマンドを打つことでテストを実行できます。 :
 
-    # アプリのモデルのテストを実行する
-    ./Console/cake test app Model/Article
+``` text
+# アプリのモデルのテストを実行する
+./Console/cake test app Model/Article
 
-    # プラグインのコンポーネントのテストを実行する
-    ./Console/cake test DebugKit Controller/Component/ToolbarComponent
+# プラグインのコンポーネントのテストを実行する
+./Console/cake test DebugKit Controller/Component/ToolbarComponent
 
-    # CakePHP の Configue クラスのテストを実行する
-    ./Console/cake test core Core/Configure
+# CakePHP の Configue クラスのテストを実行する
+./Console/cake test core Core/Configure
+```
 
 > [!NOTE]
 > セッションと相互作用するテストを実行するときは、基本的に `--stderr` オプションを使うように
@@ -248,11 +250,13 @@ CakePHP はテストを実行するために `test` シェルを提供します�
 `test` シェルはプロジェクトのルートディレクトリからも実行できます。このときは今実行できるす
 べてのテストのリストを見ることができます。どちらのテストを実行するかは自由に選ぶことができます。 :
 
-    # プロジェクトのルートディレクトリでアプリのテストケースを実行する
-    lib/Cake/Console/cake test app
+``` text
+# プロジェクトのルートディレクトリでアプリのテストケースを実行する
+lib/Cake/Console/cake test app
 
-    # プロジェクトのルートディレクトリで ./myapp のアプリケーションのテストを実行する
-    lib/Cake/Console/cake test --app myapp app
+# プロジェクトのルートディレクトリで ./myapp のアプリケーションのテストを実行する
+lib/Cake/Console/cake test --app myapp app
+```
 
 #### テストケースのフィルタリング
 
@@ -1152,12 +1156,14 @@ class PagematronComponentTest extends CakeTestCase {
 はじめに、テストのための例として、ヘルパーを作成します。 `CurrencyRendererHelper` は、
 ビューで通貨の表示を補助するための、 `usd()` という唯一の単純なメソッドを持っています。 :
 
-    // app/View/Helper/CurrencyRendererHelper.php
-    class CurrencyRendererHelper extends AppHelper {
-        public function usd($amount) {
-            return 'USD ' . number_format($amount, 2, '.', ',');
-        }
+``` php
+// app/View/Helper/CurrencyRendererHelper.php
+class CurrencyRendererHelper extends AppHelper {
+    public function usd($amount) {
+        return 'USD ' . number_format($amount, 2, '.', ',');
     }
+}
+```
 
 このメソッドは、小数点以下2桁を表示し、小数点としてドット、3桁ごとの区切りとして
 カンマを使用するフォーマットで数字を表し、さらに 'USD' という文字列を数字の先頭に置きます。
@@ -1331,7 +1337,9 @@ DATABASE_PHP
 
 さらに以下の *シェルスクリプトの実行* をビルドに加えてください。 :
 
-    mysql -u jenkins -pcakephp_jenkins -e 'DROP DATABASE IF EXISTS jenkins_test; CREATE DATABASE jenkins_test';
+``` text
+mysql -u jenkins -pcakephp_jenkins -e 'DROP DATABASE IF EXISTS jenkins_test; CREATE DATABASE jenkins_test';
+```
 
 ### テストの追加
 

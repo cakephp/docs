@@ -471,9 +471,11 @@ validation, like en, fr, de.
 There are a few methods that are common to all classes, defined through the
 [ValidationInterface interface](https://github.com/cakephp/localized/blob/master/src/Validation/ValidationInterface.php):
 
-    phone() to check a phone number
-    postal() to check a postal code
-    personId() to check a country specific person ID
+``` text
+phone() to check a phone number
+postal() to check a postal code
+personId() to check a country specific person ID
+```
 
 ### Nesting Validators
 

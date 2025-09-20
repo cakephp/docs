@@ -750,11 +750,13 @@ $result = $query->toList(); // Execute the query and return the array
 
 After executing those lines, your result should look similar to this:
 
-    [
-        ['id' => 1, 'title' => 'First Article', 'body' => 'Article 1 body' ...],
-        ['id' => 2, 'title' => 'Second Article', 'body' => 'Article 2 body' ...],
-        ...
-    ]
+``` php
+[
+    ['id' => 1, 'title' => 'First Article', 'body' => 'Article 1 body' ...],
+    ['id' => 2, 'title' => 'Second Article', 'body' => 'Article 2 body' ...],
+    ...
+]
+```
 
 <a id="format-results"></a>
 
@@ -1898,7 +1900,9 @@ $query = $articles->find()
 > If you use `innerJoinWith()` and want to `select()` fields from that association,
 > you need to use an alias for the field:
 >
->     $query
+> ``` text
+> $query
+> ```
 >
 > > -\>select(\['country_name' =\> 'Countries.name'\])
 > > -\>innerJoinWith('Countries');

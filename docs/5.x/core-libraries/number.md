@@ -251,19 +251,21 @@ This method will output an ordinal number.
 
 Examples:
 
-    echo Number::ordinal(1);
-    // Output '1st'
+``` text
+echo Number::ordinal(1);
+// Output '1st'
 
-    echo Number::ordinal(2);
-    // Output '2nd'
+echo Number::ordinal(2);
+// Output '2nd'
 
-    echo Number::ordinal(2, [
-        'locale' => 'fr_FR'
-    ]);
-    // Output '2e'
+echo Number::ordinal(2, [
+    'locale' => 'fr_FR'
+]);
+// Output '2e'
 
-    echo Number::ordinal(410);
-    // Output '410th'
+echo Number::ordinal(410);
+// Output '410th'
+```
 
 ## Format Differences
 

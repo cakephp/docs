@@ -24,7 +24,7 @@ special key `Dispatcher.filters`. By default CakePHP comes with a couple filter
 classes already enabled for all requests, let's take a look at how they are
 added:
 
-``` css
+``` php
 Configure::write('Dispatcher.filters', array(
     'AssetDispatcher',
     'CacheDispatcher'
@@ -49,7 +49,7 @@ You can add your own class names to the list of filters, and they will get
 executed in the order they were defined. There is also an alternative way for
 attaching filters that do not involve the special `DispatcherFilter` classes:
 
-``` css
+``` php
 Configure::write('Dispatcher.filters', array(
     'my-filter' => array(
         'callable' => array($classInstance, 'methodName'),
@@ -64,7 +64,7 @@ type, as you may remember, a <span class="title-ref">callback</span> is anything
 be treated as a class name, not as a possible function name. This of course
 gives the ability to PHP 5.3 users to attach anonymous functions as filters:
 
-``` css
+``` php
 Configure::write('Dispatcher.filters', array(
    'my-filter' => array('callable' => function($event) {...}, 'on' => 'before'),
    //more filters here
@@ -80,7 +80,7 @@ a default of `10` is selected for you
 As all filters will have default priority `10`, should you want to run a filter before
 any other in the list, select lower priority numbers as needed:
 
-``` css
+``` php
 Configure::write('Dispatcher.filters', array(
    'my-filter' => array(
         'callable' => function($event) {...},
@@ -102,7 +102,7 @@ there is no option to define priority in-line, we will get into that soon.
 Finally, CakePHP's plugin notation can be used to define filters located in
 plugins:
 
-``` css
+``` php
 Configure::write('Dispatcher.filters', array(
     'MyPlugin.MyFilter',
 ));
@@ -115,7 +115,7 @@ use built-in full page caching, or just implement your own.
 If you need to pass constructor parameters or settings to you dispatch filter
 classes you can do that by providing an array of settings:
 
-``` css
+``` php
 Configure::write('Dispatcher.filters', array(
     'MyAssetFilter' => array('service' => 'google.com')
 ));

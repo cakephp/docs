@@ -17,9 +17,11 @@ SessionComponent はセッション情報を伝えあうために使われます
 覚えておきたいことは、 `ドット記法` により配列構造で作成可能ということです。
 そのため `User.username` は、次のような値が参照されます。 :
 
-    array('User' => array(
-        'username' => 'clark-kent@dailyplanet.com'
-    ));
+``` text
+array('User' => array(
+    'username' => 'clark-kent@dailyplanet.com'
+));
+```
 
 ドット (.) は、多次元配列のために使われます。
 この表記は、SessionComponent 内で使用されるどの name/key においても使われます。

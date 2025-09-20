@@ -1001,8 +1001,10 @@ CacheHelper は削除されました。それが提供するキャッシュ機�
 しかしながら、ブラウザーによって送信された `Accept-Language` ヘッダーから自動言語切り替えを
 取得するには、ディスパッチャーのフィルターを使用することができます。 :
 
-    // In config/bootstrap.php
-    DispatcherFactory::addFilter('LocaleSelector');
+``` text
+// In config/bootstrap.php
+DispatcherFactory::addFilter('LocaleSelector');
+```
 
 自動的にユーザーセッションに値を設定することで言語を選択するための組み込みの置換はありません。
 
@@ -1010,11 +1012,13 @@ CacheHelper は削除されました。それが提供するキャッシュ機�
 より高度で機能豊富な `MessageFormatter` クラスです。
 一般的に、次のようにメッセージ内のプレースホルダーを書き換えることができます。 :
 
-    // Before:
-    __('Today is a %s day in %s', 'Sunny', 'Spain');
+``` text
+// Before:
+__('Today is a %s day in %s', 'Sunny', 'Spain');
 
-    // After:
-    __('Today is a {0} day in {1}', 'Sunny', 'Spain');
+// After:
+__('Today is a {0} day in {1}', 'Sunny', 'Spain');
+```
 
 古い `sprintf` フォーマッタを使用して、あなたのメッセージの書き換えを避けることができます。 :
 
@@ -1026,11 +1030,13 @@ I18n::defaultFormatter('sprintf');
 制御するために使用することができません。
 代わりに、 `I18n` クラスを使用することができます。 :
 
-    // Before
-    Configure::write('Config.language', 'fr_FR');
+``` php
+// Before
+Configure::write('Config.language', 'fr_FR');
 
-    // Now
-    I18n::setLocale('en_US');
+// Now
+I18n::setLocale('en_US');
+```
 
 - 以下のメソッドが移動されました：
 
@@ -1102,18 +1108,20 @@ Set クラスは、削除されました。代わりに Hash クラスを使用�
   正規表現の代わりに、文字変換は単純な文字列の置換を使用しています。
   これは、大幅なパフォーマンス向上をもたらした。 :
 
-      // 以下の代わりに
-      Inflector::rules('transliteration', [
-          '/ä|æ/' => 'ae',
-          '/å/' => 'aa'
-      ]);
+  ``` text
+  // 以下の代わりに
+  Inflector::rules('transliteration', [
+      '/ä|æ/' => 'ae',
+      '/å/' => 'aa'
+  ]);
 
-      // 以下を使用してください。
-      Inflector::rules('transliteration', [
-          'ä' => 'ae',
-          'æ' => 'ae',
-          'å' => 'aa'
-      ]);
+  // 以下を使用してください。
+  Inflector::rules('transliteration', [
+      'ä' => 'ae',
+      'æ' => 'ae',
+      'å' => 'aa'
+  ]);
+  ```
 
 - 複数形と単数化のための語尾変化無し・不規則変化の規則の別々のセットが削除されました。
   代わりに、それぞれのための共通のリストを持っています。

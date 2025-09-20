@@ -24,7 +24,7 @@ Before we jump too far ahead trying to get our webservice up and running we need
 to do a few things. First extensions parsing needs to be activated, this is done in
 **config/routes.php**:
 
-``` css
+``` php
 Router::extensions('rss');
 ```
 

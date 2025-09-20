@@ -9,17 +9,19 @@ App クラスはリソースの位置とパスの管理を担当します。
 この方法は CakePHP 全体でクラス名を解決するために使われます。
 CakePHP が使用する短い形式の名前を解決し、完全解決されたクラス名を返します。 :
 
-    // 短いクラス名を名前空間とサフィックスで解決します。
-    App::className('Auth', 'Controller/Component', 'Component');
-    // Cake\Controller\Component\AuthComponent を返します
+``` php
+// 短いクラス名を名前空間とサフィックスで解決します。
+App::className('Auth', 'Controller/Component', 'Component');
+// Cake\Controller\Component\AuthComponent を返します
 
-    // プラグイン名を解決します。
-    App::className('DebugKit.Toolbar', 'Controller/Component', 'Component');
-    // Returns DebugKit\Controller\Component\ToolbarComponent
+// プラグイン名を解決します。
+App::className('DebugKit.Toolbar', 'Controller/Component', 'Component');
+// Returns DebugKit\Controller\Component\ToolbarComponent
 
-    // \を含む名前はそのまま返されます。
-    App::className('App\Cache\ComboCache');
-    // App\Cache\ComboCache を返します。
+// \を含む名前はそのまま返されます。
+App::className('App\Cache\ComboCache');
+// App\Cache\ComboCache を返します。
+```
 
 クラスを解決する時、 `App` 名前空間による解決が試みられ、
 もしそのクラスが存在しなければ `Cake` 名前空間による解決が行われます。
@@ -29,8 +31,10 @@ CakePHP が使用する短い形式の名前を解決し、完全解決された
 
 The method returns paths set using `App.paths` app config:
 
-    // Get the templates path set using ``App.paths.templates`` app config.
-    App::path('templates');
+``` php
+// Get the templates path set using ``App.paths.templates`` app config.
+App::path('templates');
+```
 
 The same way you can retrieve paths for `locales`, `plugins`.
 
@@ -38,8 +42,10 @@ The same way you can retrieve paths for `locales`, `plugins`.
 
 規約上のパスについて位置を得るために使われます。 :
 
-    // アプリケーション中の Controller/ までのパスを得ます
-    App::classPath('Controller');
+``` php
+// アプリケーション中の Controller/ までのパスを得ます
+App::classPath('Controller');
+```
 
 これはアプリケーションを構成するすべての名前空間に対して行うことができます。
 
@@ -48,8 +54,10 @@ The same way you can retrieve paths for `locales`, `plugins`.
 
 CakePHP 内部のパッケージのパスを検索するために使われます。 :
 
-    // Cache エンジンのパスを得ます
-    App::core('Cache/Engine');
+``` php
+// Cache エンジンのパスを得ます
+App::core('Cache/Engine');
+```
 
 ## テーマの検出
 

@@ -35,7 +35,7 @@ class PostsController extends AppController {
 
 You will also need to add the CacheDispatcher to your dispatcher filters in your bootstrap:
 
-``` css
+``` php
 Configure::write('Dispatcher.filters', array(
     'CacheDispatcher'
 ));

@@ -55,14 +55,18 @@ templates used to create or update your
 the translations. CakePHP will look for your po files in the following
 location:
 
-    /app/Locale/<locale>/LC_MESSAGES/<domain>.po
+``` text
+/app/Locale/<locale>/LC_MESSAGES/<domain>.po
+```
 
 The default domain is 'default', therefore your locale folder would
 look something like this:
 
-    /app/Locale/eng/LC_MESSAGES/default.po (English)
-    /app/Locale/fra/LC_MESSAGES/default.po (French)
-    /app/Locale/por/LC_MESSAGES/default.po (Portuguese)
+``` text
+/app/Locale/eng/LC_MESSAGES/default.po (English)
+/app/Locale/fra/LC_MESSAGES/default.po (French)
+/app/Locale/por/LC_MESSAGES/default.po (Portuguese)
+```
 
 To create or edit your po files it's recommended that you do *not*
 use your favorite editor. To create a po file for the first time it
@@ -116,8 +120,10 @@ use these LC_TIME files.
 
 Just place LC_TIME file in its respective locale directory:
 
-    /app/Locale/fra/LC_TIME (French)
-    /app/Locale/por/LC_TIME (Portuguese)
+``` text
+/app/Locale/fra/LC_TIME (French)
+/app/Locale/por/LC_TIME (Portuguese)
+```
 
 You can find these files for few popular languages from the official [Localized](https://github.com/cakephp/localized)
 repo.
@@ -130,20 +136,26 @@ follow a few conventions.
 Instead of <span class="title-ref">\_\_()</span> and <span class="title-ref">\_\_n()</span> you will have to use <span class="title-ref">\_\_d()</span> and <span class="title-ref">\_\_dn()</span>. The D means
 domain. So if you have a plugin called 'DebugKit' you would have to do this:
 
-    __d('debug_kit', 'My example text');
+``` text
+__d('debug_kit', 'My example text');
+```
 
 Using the underscored syntax is important, if you don't use it CakePHP won't
 find your translation file.
 
 Your translation file for this example should go into:
 
-    /app/Plugin/DebugKit/Locale/<locale>/LC_MESSAGES/<domain>.po
+``` text
+/app/Plugin/DebugKit/Locale/<locale>/LC_MESSAGES/<domain>.po
+```
 
 And for other languages than the default:
 
-    /app/Plugin/DebugKit/Locale/eng/LC_MESSAGES/debug_kit.po (English)
-    /app/Plugin/DebugKit/Locale/fra/LC_MESSAGES/debug_kit.po (French)
-    /app/Plugin/DebugKit/Locale/por/LC_MESSAGES/debug_kit.po (Portuguese)
+``` text
+/app/Plugin/DebugKit/Locale/eng/LC_MESSAGES/debug_kit.po (English)
+/app/Plugin/DebugKit/Locale/fra/LC_MESSAGES/debug_kit.po (French)
+/app/Plugin/DebugKit/Locale/por/LC_MESSAGES/debug_kit.po (Portuguese)
+```
 
 The reason for that is that CakePHP will use the lower cased and underscored
 plugin name to compare it to the translation domain and is going to look into
@@ -154,7 +166,7 @@ the plugin if there is a match for the given translation file.
 The Configure value `I18n.preferApp` can be used to control the order of translations.
 If set to true in bootstrap it will prefer the app translations over any plugins' ones:
 
-``` css
+``` php
 Configure::write('I18n.preferApp', true);
 ```
 
@@ -168,7 +180,7 @@ It defaults to `false`.
 To change or set the language for your application, all you need to
 do is the following:
 
-``` css
+``` php
 Configure::write('Config.language', 'fra');
 ```
 
@@ -265,4 +277,6 @@ class User extends AppModel {
 
 Which will do the following internal call:
 
-    __d('validation', 'Username should be between %d and %d characters', array(2, 10));
+``` text
+__d('validation', 'Username should be between %d and %d characters', array(2, 10));
+```

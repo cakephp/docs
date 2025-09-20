@@ -11,7 +11,7 @@ bootstrap ファイルを定義しながら、全てのプラグインを自動�
 
 大丈夫です:
 
-``` css
+``` php
 CakePlugin::loadAll(array(
     'Blog' => array('routes' => true),
     'ContactManager' => array('bootstrap' => true),
@@ -30,7 +30,7 @@ require() する必要はありません。適切なタイミングと場所で�
 全てのプラグインの bootstrap ファイルをロードして、さらに Blog プラグインの routes ファイルを
 ロード:
 
-``` css
+``` php
 CakePlugin::loadAll(array(
     array('bootstrap' => true),
     'Blog' => array('routes' => true)
@@ -45,10 +45,12 @@ CakePHP 2.3.0 は、プラグインをロードする時に、routes ファイ�
 なくても無視することができる `ignoreMissing` オプションを追加しました。
 以下のように全てのプラグインをロードするために必要なコードが短くできます。 :
 
-    // Loads all plugins including any possible routes and bootstrap files
-    CakePlugin::loadAll(array(
-        array('routes' => true, 'bootstrap' => true, 'ignoreMissing' => true)
-    ));
+``` php
+// Loads all plugins including any possible routes and bootstrap files
+CakePlugin::loadAll(array(
+    array('routes' => true, 'bootstrap' => true, 'ignoreMissing' => true)
+));
+```
 
 さらに、いくつかのプラグインでは、あなたのデータベースに一つ以上のテーブルを
 作成する必要があります。これらの場合に、しばしば、以下のような cake シェルから呼び出す
@@ -64,7 +66,7 @@ schema ファイルを用意しています。 :
 もし、一つのプラグインで一つ以上の bootstrap ファイルをロードしたい場合、
 bootstrap 設定キーに複数ファイルの配列を設定します。 :
 
-``` css
+``` php
 CakePlugin::loadAll(array(
     'Blog' => array(
         'bootstrap' => array(

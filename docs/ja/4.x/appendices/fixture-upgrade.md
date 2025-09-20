@@ -12,7 +12,7 @@
 
 2.  次の内容を `phpunit.xml` に追加します:
 
-    ``` html
+    ``` php
     <extensions>
         <extension class="\Cake\TestSuite\Fixture\PHPUnitExtension" />
     </extensions>

@@ -47,8 +47,10 @@ filename.sql を省略すると、SQL のダンプはコンソールへ出力さ
 `$event` パラメータは2つのキーを持つ配列です。１つはテーブルを削除するのか
 作成するのかを示すパラメータで、もう１つはエラーに関するパラメータです。例を示します。 :
 
-    array('drop' => 'posts', 'errors' => null)
-    array('create' => 'posts', 'errors' => null)
+``` text
+array('drop' => 'posts', 'errors' => null)
+array('create' => 'posts', 'errors' => null)
+```
 
 データを posts テーブルへ加える例は以下のようになります。 :
 
@@ -170,13 +172,15 @@ CakeSchema はまた、 `tableParameters` をサポートします。
 
 カラムの例 :
 
-    'id' => array(
-        'type' => 'integer',
-        'null' => false,
-        'default' => null,
-        'length' => 10,
-        'key' => 'primary'
-     ),
+``` text
+'id' => array(
+    'type' => 'integer',
+    'null' => false,
+    'default' => null,
+    'length' => 10,
+    'key' => 'primary'
+ ),
+```
 
 key  
 `primary` キーは、主キーインデックスを定義します。
@@ -223,24 +227,28 @@ column
 
 単一の場合 :
 
-    'indexes' => array(
-        'PRIMARY' => array(
-            'column' => 'id',
-            'unique' => 1
-        )
+``` text
+'indexes' => array(
+    'PRIMARY' => array(
+        'column' => 'id',
+        'unique' => 1
     )
+)
+```
 
 複数の場合 :
 
-    'indexes' => array(
-        'AB_KEY' => array(
-            'column' => array(
-                'a_id',
-                'b_id'
-            ),
-            'unique' => 1
-        )
+``` text
+'indexes' => array(
+    'AB_KEY' => array(
+        'column' => array(
+            'a_id',
+            'b_id'
+        ),
+        'unique' => 1
     )
+)
+```
 
 unique  
 ユニークインデックスなら 1、そうでなければ 0。
@@ -310,12 +318,14 @@ $ Console/cake schema generate
 
 実行すると、次の選択肢が表示されるはずです。 :
 
-    Generating Schema...
-    Schema file exists.
-     [O]verwrite
-     [S]napshot
-     [Q]uit
-    Would you like to do? (o/s/q)
+``` text
+Generating Schema...
+Schema file exists.
+ [O]verwrite
+ [S]napshot
+ [Q]uit
+Would you like to do? (o/s/q)
+```
 
 \[s\] (snapshot) を選択すると、変更分を反映した schema.php が生成されるでしょう。
 もし schema.php があれば、schema_2.php あるいは同様のファイルが生成されるはずです。
@@ -389,8 +399,10 @@ $ Console/cake schema update
 
 上のコマンドを実行すると、以下の選択肢が表示されるはずです。 :
 
-    The following statements will run.
-    ALTER TABLE `roles`
-    DROP `position`;
-    Are you sure you want to alter the tables? (y/n)
-    [n] >
+``` text
+The following statements will run.
+ALTER TABLE `roles`
+DROP `position`;
+Are you sure you want to alter the tables? (y/n)
+[n] >
+```

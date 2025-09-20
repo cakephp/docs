@@ -85,22 +85,24 @@ a single table to store our posts. We'll also throw in a few posts
 right now to use for testing purposes. Execute the following SQL
 statements into your database:
 
-    /* First, create our posts table: */
-    CREATE TABLE posts (
-        id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-        title VARCHAR(50),
-        body TEXT,
-        created DATETIME DEFAULT NULL,
-        modified DATETIME DEFAULT NULL
-    );
+``` text
+/* First, create our posts table: */
+CREATE TABLE posts (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(50),
+    body TEXT,
+    created DATETIME DEFAULT NULL,
+    modified DATETIME DEFAULT NULL
+);
 
-    /* Then insert some posts for testing: */
-    INSERT INTO posts (title, body, created)
-        VALUES ('The title', 'This is the post body.', NOW());
-    INSERT INTO posts (title, body, created)
-        VALUES ('A title once again', 'And the post body follows.', NOW());
-    INSERT INTO posts (title, body, created)
-        VALUES ('Title strikes back', 'This is really exciting! Not.', NOW());
+/* Then insert some posts for testing: */
+INSERT INTO posts (title, body, created)
+    VALUES ('The title', 'This is the post body.', NOW());
+INSERT INTO posts (title, body, created)
+    VALUES ('A title once again', 'And the post body follows.', NOW());
+INSERT INTO posts (title, body, created)
+    VALUES ('Title strikes back', 'This is really exciting! Not.', NOW());
+```
 
 The choices on table and column names are not arbitrary. If you
 follow CakePHP's database naming conventions, and CakePHP's class naming
@@ -166,19 +168,23 @@ The security salt is used for generating hashes. Change the default
 `Security.salt` value in `/app/Config/core.php`. The replacement value
 should be long, hard to guess and be as random as you can make it:
 
-    /**
-     * A random string used in security hashing methods.
-     */
-    Configure::write('Security.salt', 'pl345e-P45s_7h3*S@l7!');
+``` php
+/**
+ * A random string used in security hashing methods.
+ */
+Configure::write('Security.salt', 'pl345e-P45s_7h3*S@l7!');
+```
 
 The cipher seed is used for encrypt/decrypt strings. Change the default
 `Security.cipherSeed` value by editing `/app/Config/core.php`. The
 replacement value should be a large random integer:
 
-    /**
-     * A random numeric string (digits only) used to encrypt/decrypt strings.
-     */
-    Configure::write('Security.cipherSeed', '7485712659625147843639846751');
+``` php
+/**
+ * A random numeric string (digits only) used to encrypt/decrypt strings.
+ */
+Configure::write('Security.cipherSeed', '7485712659625147843639846751');
+```
 
 ## A Note on mod_rewrite
 

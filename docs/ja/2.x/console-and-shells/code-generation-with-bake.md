@@ -20,22 +20,24 @@ cake スクリプトは PHP CLI (command line interface) で実行されます�
 
 データベース設定ファイルを作ったあと、Bake を実行すると次のようなオプションが表示されます。
 
-    ---------------------------------------------------------------
-    App : app
-    Path: /path-to/project/app
-    ---------------------------------------------------------------
-    Interactive Bake Shell
-    ---------------------------------------------------------------
-    [D]atabase Configuration
-    [M]odel
-    [V]iew
-    [C]ontroller
-    [P]roject
-    [F]ixture
-    [T]est case
-    [Q]uit
-    What would you like to Bake? (D/M/V/C/P/F/T/Q)
-    >
+``` text
+---------------------------------------------------------------
+App : app
+Path: /path-to/project/app
+---------------------------------------------------------------
+Interactive Bake Shell
+---------------------------------------------------------------
+[D]atabase Configuration
+[M]odel
+[V]iew
+[C]ontroller
+[P]roject
+[F]ixture
+[T]est case
+[Q]uit
+What would you like to Bake? (D/M/V/C/P/F/T/Q)
+>
+```
 
 代わりに、次のようにコマンドラインから直接これらのコマンドを実行することが出来ます。 :
 

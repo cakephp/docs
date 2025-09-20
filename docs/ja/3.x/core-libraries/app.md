@@ -9,17 +9,19 @@ App クラスはリソースの位置とパスの管理を担当します。
 この方法は CakePHP 全体でクラス名を解決するために使われます。
 CakePHP が使用する短い形式の名前を解決し、完全解決されたクラス名を返します。 :
 
-    // 短いクラス名を名前空間とサフィックスで解決します。
-    App::classname('Auth', 'Controller/Component', 'Component');
-    // Cake\Controller\Component\AuthComponent を返します
+``` php
+// 短いクラス名を名前空間とサフィックスで解決します。
+App::classname('Auth', 'Controller/Component', 'Component');
+// Cake\Controller\Component\AuthComponent を返します
 
-    // プラグイン名を解決します。
-    App::classname('DebugKit.Toolbar', 'Controller/Component', 'Component');
-    // Returns DebugKit\Controller\Component\ToolbarComponent
+// プラグイン名を解決します。
+App::classname('DebugKit.Toolbar', 'Controller/Component', 'Component');
+// Returns DebugKit\Controller\Component\ToolbarComponent
 
-    // \を含む名前はそのまま返されます。
-    App::classname('App\Cache\ComboCache');
-    // App\Cache\ComboCache を返します。
+// \を含む名前はそのまま返されます。
+App::classname('App\Cache\ComboCache');
+// App\Cache\ComboCache を返します。
+```
 
 クラスを解決する時、 `App` 名前空間による解決が試みられ、
 もしそのクラスが存在しなければ `Cake` 名前空間による解決が行われます。
@@ -29,22 +31,28 @@ CakePHP が使用する短い形式の名前を解決し、完全解決された
 
 規約上のパスについて位置を得るために使われます。 :
 
-    // あなたのアプリケーション中の Controller/ までのパスを得ます
-    App::path('Controller');
+``` php
+// あなたのアプリケーション中の Controller/ までのパスを得ます
+App::path('Controller');
+```
 
 これはアプリケーションを構成するすべての名前空間に対して行うことができます。
 プラグインに対しても取得できます。 :
 
-    // DebugKit 中のコンポーネントのパスを返します
-    App::path('Component', 'DebugKit');
+``` php
+// DebugKit 中のコンポーネントのパスを返します
+App::path('Component', 'DebugKit');
+```
 
 `App::path()` は既定のパスのみを返し、
 オートローダーに設定された追加のパスに関するいかなる情報も返しません。
 
 CakePHP 内部のパッケージのパスを検索するために使われます。 :
 
-    // Cache エンジンのパスを得ます
-    App::core('Cache/Engine');
+``` php
+// Cache エンジンのパスを得ます
+App::core('Cache/Engine');
+```
 
 ## プラグインの検出
 

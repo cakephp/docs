@@ -120,12 +120,14 @@ CakePHP をより良くする手助けをしようという場合、機能の追
 実行時エラーは、コードが壊れる前に更新する必要があるコードを見つけるのに役立ちます。
 実行時の警告を無効にするには、 `Error.errorLevel` 設定値を使用します。 :
 
-    // config/app.php の中で
-    // ...
-    'Error' => [
-        'errorLevel' => E_ALL ^ E_USER_DEPRECATED,
-    ]
-    // ...
+``` text
+// config/app.php の中で
+// ...
+'Error' => [
+    'errorLevel' => E_ALL ^ E_USER_DEPRECATED,
+]
+// ...
+```
 
 これで、実行時の非推奨警告を無効にします。
 

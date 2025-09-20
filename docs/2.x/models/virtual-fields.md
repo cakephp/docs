@@ -172,33 +172,35 @@ $data = $this->Paginator->paginate();
 
 would return something like this:
 
-    Array
-    (
-        [0] => Array
-            (
-                [Products] => Array
-                    (
-                        [id] => 1234,
-                        [description] => 'Text bla bla...',
-                    )
-                 [ProductsItems] => Array
-                     (
-                         [Total] => 25
-                     )
-            )
-         [1] => Array
-            (
-                [Products] => Array
-                    (
-                        [id] => 4321,
-                        [description] => 'Text 2 bla bla...',
-                    )
-                 [ProductsItems] => Array
-                     (
-                         [Total] => 50
-                     )
-            )
-     )
+``` text
+Array
+(
+    [0] => Array
+        (
+            [Products] => Array
+                (
+                    [id] => 1234,
+                    [description] => 'Text bla bla...',
+                )
+             [ProductsItems] => Array
+                 (
+                     [Total] => 25
+                 )
+        )
+     [1] => Array
+        (
+            [Products] => Array
+                (
+                    [id] => 4321,
+                    [description] => 'Text 2 bla bla...',
+                )
+             [ProductsItems] => Array
+                 (
+                     [Total] => 50
+                 )
+        )
+ )
+```
 
 ## Virtual fields in SQL queries
 
@@ -220,20 +222,22 @@ $this->Timelog->query(
 
 would return something like this:
 
-    Array
-    (
-        [0] => Array
-            (
-                [Timelog] => Array
-                    (
-                        [project_id] => 1234
-                    )
-                 [0] => Array
-                     (
-                         [TotalHours] => 25.5
-                     )
-            )
-     )
+``` text
+Array
+(
+    [0] => Array
+        (
+            [Timelog] => Array
+                (
+                    [project_id] => 1234
+                )
+             [0] => Array
+                 (
+                     [TotalHours] => 25.5
+                 )
+        )
+ )
+```
 
 If we want to group TotalHours into our Timelog array we should specify a
 virtual field for our aggregate column. We can add this new virtual field on
@@ -264,17 +268,19 @@ $this->Timelog->query(
 Running the query again after specifying the virtual field should result in a
 cleaner grouping of values:
 
-    Array
-    (
-        [0] => Array
-            (
-                [Timelog] => Array
-                    (
-                        [project_id] => 1234
-                        [TotalHours] => 25.5
-                    )
-            )
-    )
+``` text
+Array
+(
+    [0] => Array
+        (
+            [Timelog] => Array
+                (
+                    [project_id] => 1234
+                    [TotalHours] => 25.5
+                )
+        )
+)
+```
 
 ## Limitations of virtualFields
 

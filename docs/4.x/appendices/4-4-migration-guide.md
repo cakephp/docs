@@ -21,7 +21,9 @@ You can use the
 [upgrade tool](../appendices/4-0-upgrade-guide#upgrade-tool-use) to automate updating usage of deprecated
 features:
 
-    bin/cake upgrade rector --rules cakephp44 <path/to/app/src>
+``` text
+bin/cake upgrade rector --rules cakephp44 <path/to/app/src>
+```
 
 > [!NOTE]
 > This only updates CakePHP 4.4 changes. Make sure you apply CakePHP 4.3 changes first.

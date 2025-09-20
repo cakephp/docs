@@ -156,14 +156,16 @@ CakePHP の他の箇所でも使われているコレクション API をサポ�
 これから作るヘルパーを LinkHelper と呼ぶことにしましょう。実際の PHP クラスファイルは
 このようになるでしょう。 :
 
-    /* /app/View/Helper/LinkHelper.php */
-    App::uses('AppHelper', 'View/Helper');
+``` php
+/* /app/View/Helper/LinkHelper.php */
+App::uses('AppHelper', 'View/Helper');
 
-    class LinkHelper extends AppHelper {
-        public function makeEdit($title, $url) {
-            // 特別に整形されたリンクを作るためのロジックはここ...
-        }
+class LinkHelper extends AppHelper {
+    public function makeEdit($title, $url) {
+        // 特別に整形されたリンクを作るためのロジックはここ...
     }
+}
+```
 
 > [!NOTE]
 > ヘルパーは `AppHelper` または `Helper` を継承するか
@@ -220,7 +222,7 @@ class PostsController extends AppController {
 AppController を継承するのと同じように）継承します。すべてのヘルパーで利用できる機能を
 作成するためには、 `/app/View/Helper/AppHelper.php` を作成して下さい。 :
 
-``` css
+``` php
 App::uses('Helper', 'View');
 
 class AppHelper extends Helper {

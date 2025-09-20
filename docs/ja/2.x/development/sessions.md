@@ -40,7 +40,7 @@ CakePHP のデフォルトは、アプリケーションが SSL プロトコル�
 SSL と SSL 以外のドメイン両方でセッションにアクセスする必要がある場合、
 これを無効にします:
 
-``` css
+``` php
 Configure::write('Session', array(
     'defaults' => 'php',
     'ini' => array(
@@ -53,7 +53,7 @@ Configure::write('Session', array(
 `session.cookie_path` ini フラグにアプリケーションのディレクトリパス
 を指定することが出来ます:
 
-``` css
+``` php
 Configure::write('Session', array(
     'defaults' => 'php',
     'ini' => array(
@@ -66,7 +66,7 @@ Configure::write('Session', array(
 タイムアウトの設定を上書きすることができます。デフォルトは、24 分です。
 より長いセッションに合わせるために ini 設定を変更してください:
 
-``` css
+``` php
 Configure::write('Session', array(
     'defaults' => 'php',
     'timeout' => 2160, // 36 hours
@@ -84,7 +84,7 @@ CakePHP にはいくつかビルトインなセッションの設定がありま
 'defaults' キーに使用したいデフォルト名をセットします。セッション
 config で宣言をすればサブセッティングだけを上書きすることも出来ます:
 
-``` css
+``` php
 Configure::write('Session', array(
     'defaults' => 'php'
 ));
@@ -93,7 +93,7 @@ Configure::write('Session', array(
 上記はビルトインの 'php' 設定を使用します。下記のように全てまたは部分的に
 設定を上書きすることも出来ます:
 
-``` css
+``` php
 Configure::write('Session', array(
     'defaults' => 'php',
     'cookie' => 'my_app',
@@ -116,7 +116,7 @@ Configure::write('Session', array(
 'handler' の使用には二つの方法があります。一つ目は 5 つの呼び出し可能な (callable) 配列を
 一つ用意する方法です。これは都度 `session_set_save_handler` に適用されます:
 
-``` css
+``` php
 Configure::write('Session', array(
     'userAgent' => false,
     'cookie' => 'my_cookie',
@@ -164,7 +164,7 @@ Configure::write('Session', array(
 変更しました。ここではデータベースのデフォルトを選ぶように、ほとんどは
 設定の中の `Session.handler.model` をセットするだけです:
 
-``` css
+``` php
 Configure::write('Session', array(
     'defaults' => 'database',
     'handler' => array(
@@ -179,7 +179,7 @@ Configure::write('Session', array(
 完全に独自のセッションハンドラーは必要ないけれど、データベースのセッションストレージが
 必要な場合、以下のコードのように単純化できます。 :
 
-``` css
+``` php
 Configure::write('Session', array(
     'defaults' => 'database'
 ));
@@ -211,7 +211,7 @@ $ Console/cake schema create sessions
 
 セッションを元としたキャッシュを使うためセッション config を以下のように設定します:
 
-``` css
+``` php
 Configure::write('Session', array(
     'defaults' => 'cache',
     'handler' => array(
@@ -233,7 +233,7 @@ Configure::write('Session', array(
 することが可能です。例えば `session.gc_divisor` のような設定を
 コントロールするのに使えます:
 
-``` css
+``` php
 Configure::write('Session', array(
     'defaults' => 'php',
     'ini' => array(
@@ -300,7 +300,7 @@ class ComboSession extends DatabaseSession implements CakeSessionHandlerInterfac
 キャッシュ限度の考慮を不要にしています。このセッションハンドラーを使うのもまた簡単です。
 `core.php` のセッションブロックを以下のように設定します:
 
-``` css
+``` php
 Configure::write('Session', array(
     'defaults' => 'database',
     'handler' => array(

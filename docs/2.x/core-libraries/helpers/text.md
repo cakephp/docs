@@ -86,11 +86,13 @@ Several `TextHelper` methods have been moved into the `String`class to allow eas
 > `$options` is used to pass all extra parameters, and has the
 > following possible keys by default, all of which are optional:
 >
->     array(
->         'ellipsis' => '...',
->         'exact' => true,
->         'html' => false
->     )
+> ``` text
+> array(
+>     'ellipsis' => '...',
+>     'exact' => true,
+>     'html' => false
+> )
+> ```
 >
 > Example:
 >
@@ -143,10 +145,12 @@ Several `TextHelper` methods have been moved into the `String`class to allow eas
 > `$options` is used to pass all extra parameters, and has the
 > following possible keys by default, all of which are optional:
 >
->     array(
->         'ellipsis' => '...',
->         'exact' => true
->     )
+> ``` text
+> array(
+>     'ellipsis' => '...',
+>     'exact' => true
+> )
+> ```
 >
 > ::: info Added in version 2.3
 > :::

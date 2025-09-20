@@ -122,8 +122,10 @@ echo $now->timezone; // America/New_York
 
 日付を編集する際に、直接これらのプロパティーを指定することもできます。 :
 
-    $time->year = 2015;
-    $time->timezone = 'Europe/Paris';
+``` text
+$time->year = 2015;
+$time->timezone = 'Europe/Paris';
+```
 
 ## フォーマットする
 

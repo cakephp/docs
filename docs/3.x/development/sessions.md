@@ -34,7 +34,7 @@ protocols, then you might have problems with sessions being lost. If you need
 access to the session on both SSL and non-SSL domains you will want to disable
 this:
 
-``` css
+``` php
 Configure::write('Session', [
     'defaults' => 'php',
     'ini' => [
@@ -47,7 +47,7 @@ The session cookie path defaults to app's base path. To change this you can use
 the `session.cookie_path` ini value. For example if you want your session to
 persist across all subdomains you can do:
 
-``` css
+``` php
 Configure::write('Session', [
     'defaults' => 'php',
     'ini' => [
@@ -62,7 +62,7 @@ closed, regardless of the configured `Session.timeout` value. The cookie
 timeout is controlled by the `session.cookie_lifetime` ini value and can be
 configured using:
 
-``` css
+``` php
 Configure::write('Session', [
     'defaults' => 'php',
     'ini' => [
@@ -91,7 +91,7 @@ custom solution. To use defaults, simply set the 'defaults' key to the name of
 the default you want to use. You can then override any sub setting by declaring
 it in your Session config:
 
-``` css
+``` php
 Configure::write('Session', [
     'defaults' => 'php'
 ]);
@@ -100,7 +100,7 @@ Configure::write('Session', [
 The above will use the built-in 'php' session configuration. You could augment
 part or all of it by doing the following:
 
-``` css
+``` php
 Configure::write('Session', [
     'defaults' => 'php',
     'cookie' => 'my_app',
@@ -130,12 +130,14 @@ Cache and Database session handlers use this method for saving sessions.
 Additional settings for the handler should be placed inside the handler array.
 You can then read those values out from inside your handler:
 
-    'Session' => [
-        'handler' => [
-            'engine' => 'DatabaseSession',
-            'model' => 'CustomSessions'
-        ]
+``` text
+'Session' => [
+    'handler' => [
+        'engine' => 'DatabaseSession',
+        'model' => 'CustomSessions'
     ]
+]
+```
 
 The above shows how you could setup the Database session handler with an
 application model. When using class names as your handler.engine, CakePHP will
@@ -153,9 +155,11 @@ from inside plugins. By setting the engine to `MyPlugin.PluginSessionHandler`.
 
 If you need to use a database to store your session data, configure as follows:
 
-    'Session' => [
-        'defaults' => 'database'
-    ]
+``` text
+'Session' => [
+    'defaults' => 'database'
+]
+```
 
 This configuration requires a database table, having this schema:
 
@@ -174,13 +178,15 @@ You can find a copy of the schema for the sessions table in the [application ske
 
 You can also use your own `Table` class to handle the saving of the sessions:
 
-    'Session' => [
-        'defaults' => 'database',
-        'handler' => [
-            'engine' => 'DatabaseSession',
-            'model' => 'CustomSessions'
-        ]
+``` text
+'Session' => [
+    'defaults' => 'database',
+    'handler' => [
+        'engine' => 'DatabaseSession',
+        'model' => 'CustomSessions'
     ]
+]
+```
 
 The above will tell Session to use the built-in 'database' defaults, and
 specify that a Table called `CustomSessions` will be the delegate for saving
@@ -195,7 +201,7 @@ start to expire as records are evicted.
 
 To use Cache based sessions you can configure you Session config like:
 
-``` css
+``` php
 Configure::write('Session', [
     'defaults' => 'cache',
     'handler' => [
@@ -217,7 +223,7 @@ configurations, as well as custom ones. The `ini` key in the session settings,
 allows you to specify individual configuration values. For example you can use
 it to control settings like `session.gc_divisor`:
 
-``` css
+``` php
 Configure::write('Session', [
     'defaults' => 'php',
     'ini' => [
@@ -297,18 +303,20 @@ the fast cache, and not have to worry about what happens when we fill the cache.
 Using this session handler is also easy. In your **app.php** make the session
 block look like the following:
 
-    'Session' => [
-        'defaults' => 'database',
-        'handler' => [
-            'engine' => 'ComboSession',
-            'model' => 'Session',
-            'cache' => 'apc'
-        ]
-    ],
-    // Make sure to add a apc cache config
-    'Cache' => [
-        'apc' => ['engine' => 'Apc']
+``` text
+'Session' => [
+    'defaults' => 'database',
+    'handler' => [
+        'engine' => 'ComboSession',
+        'model' => 'Session',
+        'cache' => 'apc'
     ]
+],
+// Make sure to add a apc cache config
+'Cache' => [
+    'apc' => ['engine' => 'Apc']
+]
+```
 
 Now our application will start using our custom session handler for reading and
 writing session data.

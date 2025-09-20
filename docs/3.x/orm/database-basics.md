@@ -142,20 +142,22 @@ your application will be using. Sample connection information can be found in
 **config/app.default.php**. A sample connection configuration would look
 like:
 
-    'Datasources' => [
-        'default' => [
-            'className' => 'Cake\Database\Connection',
-            'driver' => 'Cake\Database\Driver\Mysql',
-            'persistent' => false,
-            'host' => 'localhost',
-            'username' => 'my_app',
-            'password' => 'secret',
-            'database' => 'my_app',
-            'encoding' => 'utf8mb4',
-            'timezone' => 'UTC',
-            'cacheMetadata' => true,
-        ]
-    ],
+``` php
+'Datasources' => [
+    'default' => [
+        'className' => 'Cake\Database\Connection',
+        'driver' => 'Cake\Database\Driver\Mysql',
+        'persistent' => false,
+        'host' => 'localhost',
+        'username' => 'my_app',
+        'password' => 'secret',
+        'database' => 'my_app',
+        'encoding' => 'utf8mb4',
+        'timezone' => 'UTC',
+        'cacheMetadata' => true,
+    ]
+],
+```
 
 The above will create a 'default' connection, with the provided parameters. You
 can define as many connections as you want in your configuration file. You can
@@ -985,14 +987,16 @@ metadata is stored in the `_cake_model_` cache configuration. You can define
 a custom cache configuration using the `cacheMetatdata` option in your
 datasource configuration:
 
-    'Datasources' => [
-        'default' => [
-            // Other keys go here.
+``` text
+'Datasources' => [
+    'default' => [
+        // Other keys go here.
 
-            // Use the 'orm_metadata' cache config for metadata.
-            'cacheMetadata' => 'orm_metadata',
-        ]
-    ],
+        // Use the 'orm_metadata' cache config for metadata.
+        'cacheMetadata' => 'orm_metadata',
+    ]
+],
+```
 
 You can also configure the metadata caching at runtime with the
 `cacheMetadata()` method:

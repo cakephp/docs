@@ -154,24 +154,26 @@ CREATE TABLE bookmarks_tags (
 ファイルの中の `Datasources.default` 配列の値を置き換えてください。
 完全な設定配列の例は、以下のようになります。 :
 
-    return [
-        // More configuration above.
-        'Datasources' => [
-            'default' => [
-                'className' => 'Cake\Database\Connection',
-                'driver' => 'Cake\Database\Driver\Mysql',
-                'persistent' => false,
-                'host' => 'localhost',
-                'username' => 'cakephp',
-                'password' => 'AngelF00dC4k3~',
-                'database' => 'cake_bookmarks',
-                'encoding' => 'utf8',
-                'timezone' => 'UTC',
-                'cacheMetadata' => true,
-            ],
+``` php
+return [
+    // More configuration above.
+    'Datasources' => [
+        'default' => [
+            'className' => 'Cake\Database\Connection',
+            'driver' => 'Cake\Database\Driver\Mysql',
+            'persistent' => false,
+            'host' => 'localhost',
+            'username' => 'cakephp',
+            'password' => 'AngelF00dC4k3~',
+            'database' => 'cake_bookmarks',
+            'encoding' => 'utf8',
+            'timezone' => 'UTC',
+            'cacheMetadata' => true,
         ],
-        // More configuration below.
-    ];
+    ],
+    // More configuration below.
+];
+```
 
 １度 **config/app.php** ファイルを保存して、 'CakePHP is able to connect to the database'
 がチェック済みであることを確認してください。
@@ -185,10 +187,12 @@ CREATE TABLE bookmarks_tags (
 素早く生成するために [bake コンソール](../../bake/usage) アプリケーションが使用できます。
 コマンドライン上で、以下のコマンドを実行してください。 :
 
-    // Windows 上では、代わりに bin\cake を使用する必要があります。
-    bin/cake bake all users
-    bin/cake bake all bookmarks
-    bin/cake bake all tags
+``` text
+// Windows 上では、代わりに bin\cake を使用する必要があります。
+bin/cake bake all users
+bin/cake bake all bookmarks
+bin/cake bake all tags
+```
 
 これは、 users、 bookmarks、 tags リソースのためのコントローラー、モデル、ビュー、
 それらに対応するテストケース、フィクスチャーを生成します。あなたのサーバーが停止している場合、

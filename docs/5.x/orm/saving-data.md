@@ -564,14 +564,16 @@ $articles->save($entity);
 At the end, if the entity is converted back to an array you will obtain the
 following result:
 
-    [
-        'title' => 'My title',
-        'body' => 'The text',
-        'comments' => [
-            ['body' => 'Changed comment', 'id' => 1],
-            ['body' => 'A new comment'],
-        ],
-    ];
+``` php
+[
+    'title' => 'My title',
+    'body' => 'The text',
+    'comments' => [
+        ['body' => 'Changed comment', 'id' => 1],
+        ['body' => 'A new comment'],
+    ],
+];
+```
 
 As you can see, the comment with id 2 is no longer there, as it could not be
 matched to anything in the `$newData` array. This happens because CakePHP is
@@ -1010,7 +1012,9 @@ If you are creating a new entity, and want to add existing records to a has
 many/belongs to many association you need to initialize the association property
 first:
 
-    $article->comments = [];
+``` text
+$article->comments = [];
+```
 
 Without initialization calling `$article->comments[] = $comment;` will have no effect.
 

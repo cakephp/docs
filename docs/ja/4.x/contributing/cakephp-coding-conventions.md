@@ -31,11 +31,13 @@ IDE との互換性を最大限にしたい場合、 [IdeHelper](https://github.
 
 従って、インデントはこのようになります。 :
 
-    // 基本レベル
-        // レベル1
-            // レベル2
-        // レベル1
-    // 基本レベル
+``` text
+// 基本レベル
+    // レベル1
+        // レベル2
+    // レベル1
+// 基本レベル
+```
 
 または:
 
@@ -92,13 +94,15 @@ $matches = array_intersect_key(
 制御構造は例えば "`if`"、"`for`"、"`foreach`"、"`while`"、"`switch`"などです。
 下記に、 "`if`" の例を示します。 :
 
-    if ((expr_1) || (expr_2)) {
-        // action_1;
-    } elseif (!(expr_3) && (expr_4)) {
-        // action_2;
-    } else {
-        // default_action;
-    }
+``` text
+if ((expr_1) || (expr_2)) {
+    // action_1;
+} elseif (!(expr_3) && (expr_4)) {
+    // action_2;
+} else {
+    // default_action;
+}
+```
 
 - 制御構造では1個の空白が最初の丸括弧の前に、1個の空白が最後の丸括弧と開き中括弧の間にある必要があります。
 - 制御構造では、必要でなくとも常に中括弧を使います。
@@ -274,17 +278,19 @@ public function check(array $data)
 オブジェクトや配列を期待する引数はタイプヒンティングを指定することができます。
 しかしながらタイプヒンティングはコストフリーではないので、public メソッドにだけ指定します。 :
 
-    /**
-     * メソッドの説明。
-     *
-     * @param \Cake\ORM\Table $table 使用するテーブルクラス
-     * @param array $array 配列。
-     * @param callable $callback コールバック。
-     * @param bool $boolean 真偽値。
-     */
-    public function foo(Table $table, array $array, callable $callback, $boolean)
-    {
-    }
+``` php
+/**
+ * メソッドの説明。
+ *
+ * @param \Cake\ORM\Table $table 使用するテーブルクラス
+ * @param array $array 配列。
+ * @param callable $callback コールバック。
+ * @param bool $boolean 真偽値。
+ */
+public function foo(Table $table, array $array, callable $callback, $boolean)
+{
+}
+```
 
 ここで `$table` は `\Cake\ORM\Table` のインスタンスで、また `$array` は `array`
 でなければならず、 `$callback` は `callback` (有効なコールバック) 型でなければなりません。
@@ -292,14 +298,16 @@ public function check(array $data)
 ちなみに、もし `$array` が `\ArrayObject` のインスタンスでも受け付けるようにしたい場合は、
 `array` のタイプヒントを指定してプリミティブ型だけを受け入れるようにするべきではありません。 :
 
-    /**
-     * メソッドの説明。
-     *
-     * @param array|\ArrayObject $array 配列。
-     */
-    public function foo($array)
-    {
-    }
+``` php
+/**
+ * メソッドの説明。
+ *
+ * @param array|\ArrayObject $array 配列。
+ */
+public function foo($array)
+{
+}
+```
 
 ### 無名関数 (クロージャー)
 
@@ -345,32 +353,36 @@ PhpDoc タグは Java の JavaDoc タグによく似ています。
 タグはドキュメントブロックの行の最初のもののみ処理されます。
 例:
 
-    /**
-     * タグの例。
-     *
-     * @author このタグは解析されますが、この @version は無視されます
-     * @version 1.0 このタグも解析されます
-     */
+``` text
+/**
+ * タグの例。
+ *
+ * @author このタグは解析されますが、この @version は無視されます
+ * @version 1.0 このタグも解析されます
+ */
+```
 
-    /**
-     * インライン phpDoc タグの例。
-     *
-     * この関数は世界征服のために foo() を使って身を粉にして働きます。
-     *
-     * @return void
-     */
-    function bar()
-    {
-    }
+``` text
+/**
+ * インライン phpDoc タグの例。
+ *
+ * この関数は世界征服のために foo() を使って身を粉にして働きます。
+ *
+ * @return void
+ */
+function bar()
+{
+}
 
-    /**
-     * Foo function.
-     *
-     * @return void
-     */
-    function foo()
-    {
-    }
+/**
+ * Foo function.
+ *
+ * @return void
+ */
+function foo()
+{
+}
+```
 
 ファイルの最初のブロック以外のコメントブロックは、常に新しい行を先に置く必要があります。
 
@@ -420,27 +432,31 @@ callable
 
 チェーンのように自分自身のオブジェクトを返すような場合は代わりに `$this` を使ってください。 :
 
-    /**
-     * Foo function.
-     *
-     * @return $this
-     */
-    public function foo()
-    {
-        return $this;
-    }
+``` php
+/**
+ * Foo function.
+ *
+ * @return $this
+ */
+public function foo()
+{
+    return $this;
+}
+```
 
 ## ファイルの読み込み
 
 `include` 、 `require` 、 `include_once` そして `require_once` は括弧を付けないようにしてください。 :
 
-    // 間違い = 括弧あり
-    require_once('ClassFileName.php');
-    require_once ($class);
+``` text
+// 間違い = 括弧あり
+require_once('ClassFileName.php');
+require_once ($class);
 
-    // よろしい = 括弧なし
-    require_once 'ClassFileName.php';
-    require_once $class;
+// よろしい = 括弧なし
+require_once 'ClassFileName.php';
+require_once $class;
+```
 
 クラスまたはライブラリーを伴うファイルを読み込む場合、
 [require_once](https://php.net/require_once)
@@ -456,11 +472,13 @@ callable
 テンプレートファイルの中でEchoの短縮記法を `<?php echo` の代わりに使ってください。開始タグ、
 空白１つ、 変数もしくは `echo` とその引数、半角１つ、閉じタグのように記述してください。 :
 
-    // NG = セミコロンがあり、空白もない
-    <td><?=$name;?></td>
+``` text
+// NG = セミコロンがあり、空白もない
+<td><?=$name;?></td>
 
-    // OK = 空白があり、セミコロンもない
-    <td><?= $name ?></td>
+// OK = 空白があり、セミコロンもない
+<td><?= $name ?></td>
+```
 
 PHP 5.4 以降、ショート Echo タグ (`<?=`) は、前述の 'ショートタグ' とは別物として扱われます。
 ini ディレクティブの `short_open_tag` 設定にかかわらず、常に有効です。
@@ -471,7 +489,7 @@ ini ディレクティブの `short_open_tag` 設定にかかわらず、常に�
 
 全ての関数はキャメルバックで書いてください。 :
 
-``` php
+``` javascript
 function longFunctionName()
 {
 }
@@ -555,12 +573,16 @@ object にキャスト。
 
 定数は大文字で定義する必要があります。 :
 
-    define('CONSTANT', 1);
+``` text
+define('CONSTANT', 1);
+```
 
 もし定数の名前が複数の単語でできている場合は、アンダースコアー文字によって分割する必要があります。
 例:
 
-    define('LONG_NAMED_CONSTANT', 2);
+``` text
+define('LONG_NAMED_CONSTANT', 2);
+```
 
 ## empty()/isset() の使用に注意
 

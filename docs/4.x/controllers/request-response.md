@@ -191,27 +191,31 @@ In order to switch back to using file upload arrays instead, set the
 configuration value `App.uploadedFilesAsObjects` to `false`, for example in
 your `config/app.php` file:
 
-    return [
+``` text
+return [
+    // ...
+    'App' => [
         // ...
-        'App' => [
-            // ...
-            'uploadedFilesAsObjects' => false,
-        ],
-        // ...
-    ];
+        'uploadedFilesAsObjects' => false,
+    ],
+    // ...
+];
+```
 
 With the option disabled, the file uploads are represented in the request data as arrays, with a normalized structure
 that remains the same even for nested inputs/names, which is different from how PHP represents them in the `$_FILES`
 superglobal (refer to [the PHP manual](https://www.php.net/manual/en/features.file-upload.php) for more information),
 ie the `$attachment` value would look something like this:
 
-    [
-        'name' => 'attachment.txt',
-        'type' => 'text/plain',
-        'size' => 123,
-        'tmp_name' => '/tmp/hfz6dbn.tmp'
-        'error' => 0
-    ]
+``` php
+[
+    'name' => 'attachment.txt',
+    'type' => 'text/plain',
+    'size' => 123,
+    'tmp_name' => '/tmp/hfz6dbn.tmp'
+    'error' => 0
+]
+```
 
 > [!TIP]
 > Uploaded files can also be accessed as objects separately from the request data via the
@@ -237,11 +241,13 @@ present at the given path, then this method will return `null`, just like it wou
 Returns all uploaded files in a normalized array structure. For the above example with the file input name of
 `attachment`, the structure would look like:
 
-    [
-          'attachment' => object(Laminas\Diactoros\UploadedFile) {
-              // ...
-          }
-    ]
+``` php
+[
+      'attachment' => object(Laminas\Diactoros\UploadedFile) {
+          // ...
+      }
+]
+```
 
 `method` Cake\\Http\\ServerRequest::**withUploadedFiles**(array $files)
 

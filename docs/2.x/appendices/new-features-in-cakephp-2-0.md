@@ -147,12 +147,14 @@ text easier. It's used in Shells whenever you use `Shell::wrapText()`.
 `debug()` no longer outputs HTML in the console. Instead it makes
 output like the following:
 
-    ########## DEBUG ##########
-    Array
-    (
-        [0] => test
-    )
-    ###########################
+``` text
+########## DEBUG ##########
+Array
+(
+    [0] => test
+)
+###########################
+```
 
 This should improve readability of `debug()` on the command line.
 
@@ -175,7 +177,7 @@ enabled in :php:class\`Router\`, `RequestHandler` will treat it the
 same an extension. This expands CakePHP's support for REST style endpoints. To
 use this feature start off by enabling extensions in `app/Config/routes.php`:
 
-``` css
+``` php
 Router::parseExtensions('json', 'xml');
 ```
 

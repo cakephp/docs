@@ -32,11 +32,13 @@ Four spaces will be used for indentation.
 
 So, indentation should look like this:
 
-    // base level
-        // level 1
-            // level 2
-        // level 1
-    // base level
+``` text
+// base level
+    // level 1
+        // level 2
+    // level 1
+// base level
+```
 
 Or:
 
@@ -96,13 +98,15 @@ In short:
 Control structures are for example "`if`", "`for`", "`foreach`",
 "`while`", "`switch`" etc. Below, an example with "`if`":
 
-    if ((expr_1) || (expr_2)) {
-        // action_1;
-    } elseif (!(expr_3) && (expr_4)) {
-        // action_2;
-    } else {
-        // default_action;
-    }
+``` text
+if ((expr_1) || (expr_2)) {
+    // action_1;
+} elseif (!(expr_3) && (expr_4)) {
+    // action_2;
+} else {
+    // default_action;
+}
+```
 
 - In the control structures there should be 1 (one) space before the first
   parenthesis and 1 (one) space between the last parenthesis and the opening
@@ -286,17 +290,19 @@ This helps to keep the logic sequential which improves readability.
 Arguments that expect objects, arrays or callbacks (callable) can be typehinted.
 We only typehint public methods, though, as typehinting is not cost-free:
 
-    /**
-     * Some method description.
-     *
-     * @param \Cake\ORM\Table $table The table class to use.
-     * @param array $array Some array value.
-     * @param callable $callback Some callback.
-     * @param bool $boolean Some boolean value.
-     */
-    public function foo(Table $table, array $array, callable $callback, $boolean)
-    {
-    }
+``` php
+/**
+ * Some method description.
+ *
+ * @param \Cake\ORM\Table $table The table class to use.
+ * @param array $array Some array value.
+ * @param callable $callback Some callback.
+ * @param bool $boolean Some boolean value.
+ */
+public function foo(Table $table, array $array, callable $callback, $boolean)
+{
+}
+```
 
 Here `$table` must be an instance of `\Cake\ORM\Table`, `$array` must be
 an `array` and `$callback` must be of type `callable` (a valid callback).
@@ -305,14 +311,16 @@ Note that if you want to allow `$array` to be also an instance of
 `\ArrayObject` you should not typehint as `array` accepts only the primitive
 type:
 
-    /**
-     * Some method description.
-     *
-     * @param array|\ArrayObject $array Some array value.
-     */
-    public function foo($array)
-    {
-    }
+``` php
+/**
+ * Some method description.
+ *
+ * @param array|\ArrayObject $array Some array value.
+ */
+public function foo($array)
+{
+}
+```
 
 ### Anonymous Functions (Closures)
 
@@ -360,32 +368,36 @@ tags:
 PhpDoc tags are very much like JavaDoc tags in Java. Tags are only processed if
 they are the first thing in a DocBlock line, for example:
 
-    /**
-     * Tag example.
-     *
-     * @author this tag is parsed, but this @version is ignored
-     * @version 1.0 this tag is also parsed
-     */
+``` text
+/**
+ * Tag example.
+ *
+ * @author this tag is parsed, but this @version is ignored
+ * @version 1.0 this tag is also parsed
+ */
+```
 
-    /**
-     * Example of inline phpDoc tags.
-     *
-     * This function works hard with foo() to rule the world.
-     *
-     * @return void
-     */
-    function bar()
-    {
-    }
+``` text
+/**
+ * Example of inline phpDoc tags.
+ *
+ * This function works hard with foo() to rule the world.
+ *
+ * @return void
+ */
+function bar()
+{
+}
 
-    /**
-     * Foo function.
-     *
-     * @return void
-     */
-    function foo()
-    {
-    }
+/**
+ * Foo function.
+ *
+ * @return void
+ */
+function foo()
+{
+}
+```
 
 Comment blocks, with the exception of the first block in a file, should always
 be preceded by a newline.
@@ -438,28 +450,32 @@ For more than two types it is usually best to just use `mixed`.
 When returning the object itself (for example, for chaining), one should use `$this`
 instead:
 
-    /**
-     * Foo function.
-     *
-     * @return $this
-     */
-    public function foo()
-    {
-        return $this;
-    }
+``` php
+/**
+ * Foo function.
+ *
+ * @return $this
+ */
+public function foo()
+{
+    return $this;
+}
+```
 
 ## Including Files
 
 `include`, `require`, `include_once` and `require_once` do not have
 parentheses:
 
-    // wrong = parentheses
-    require_once('ClassFileName.php');
-    require_once ($class);
+``` text
+// wrong = parentheses
+require_once('ClassFileName.php');
+require_once ($class);
 
-    // good = no parentheses
-    require_once 'ClassFileName.php';
-    require_once $class;
+// good = no parentheses
+require_once 'ClassFileName.php';
+require_once $class;
+```
 
 When including files with classes or libraries, use only and always the
 [require_once](https://php.net/require_once) function.
@@ -475,11 +491,13 @@ The short echo should be used in template files in place of `<?php echo`. It
 should be immediately followed by a single space, the variable or function value
 to `echo`, a single space, and the php closing tag:
 
-    // wrong = semicolon, no spaces
-    <td><?=$name;?></td>
+``` text
+// wrong = semicolon, no spaces
+<td><?=$name;?></td>
 
-    // good = spaces, no semicolon
-    <td><?= $name ?></td>
+// good = spaces, no semicolon
+<td><?= $name ?></td>
+```
 
 As of PHP 5.4 the short echo tag (`<?=`) is no longer to be consider a 'short
 tag' is always available regardless of the `short_open_tag` ini directive.
@@ -490,7 +508,7 @@ tag' is always available regardless of the `short_open_tag` ini directive.
 
 Write all functions in camelBack:
 
-``` php
+``` javascript
 function longFunctionName()
 {
 }
@@ -576,12 +594,16 @@ of `floatval($var)` when applicable.
 
 Constants should be defined in capital letters:
 
-    define('CONSTANT', 1);
+``` text
+define('CONSTANT', 1);
+```
 
 If a constant name consists of multiple words, they should be separated by an
 underscore character, for example:
 
-    define('LONG_NAMED_CONSTANT', 2);
+``` text
+define('LONG_NAMED_CONSTANT', 2);
+```
 
 ## Careful when using empty()/isset()
 

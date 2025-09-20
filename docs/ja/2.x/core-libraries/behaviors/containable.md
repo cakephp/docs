@@ -111,26 +111,28 @@ $this->Post->find('all', array('contain' => false));
 
 この実行結果として、より簡潔なデータを取得できます。 :
 
-    [0] => Array
-            (
-                [Post] => Array
-                    (
-                        [id] => 1
-                        [title] => First article
-                        [content] => aaa
-                        [created] => 2008-05-18 00:00:00
-                    )
-            )
-    [1] => Array
-            (
-                [Post] => Array
-                    (
-                        [id] => 2
-                        [title] => Second article
-                        [content] => bbb
-                        [created] => 2008-05-19 00:00:00
-                    )
-            )
+``` text
+[0] => Array
+        (
+            [Post] => Array
+                (
+                    [id] => 1
+                    [title] => First article
+                    [content] => aaa
+                    [created] => 2008-05-18 00:00:00
+                )
+        )
+[1] => Array
+        (
+            [Post] => Array
+                (
+                    [id] => 2
+                    [title] => Second article
+                    [content] => bbb
+                    [created] => 2008-05-19 00:00:00
+                )
+        )
+```
 
 この類の呼び出しの補助機能は特に目新しいものではありません。実際のところ、これは
 `ContainableBehavior` を使わずとも次のようにすることで行うことができます。 :
@@ -187,31 +189,33 @@ $this->Post->find('all', array('contain' => 'Comment.author'));
 関連付いた Comment モデルのうち author フィールドだけを取得する方法を説明しました。
 find() による出力は、次のようになるでしょう。 :
 
-    [0] => Array
-            (
-                [Post] => Array
-                    (
-                        [id] => 1
-                        [title] => First article
-                        [content] => aaa
-                        [created] => 2008-05-18 00:00:00
-                    )
-                [Comment] => Array
-                    (
-                        [0] => Array
-                            (
-                                [author] => Daniel
-                                [post_id] => 1
-                            )
-                        [1] => Array
-                            (
-                                [author] => Sam
-                                [post_id] => 1
-                            )
-                    )
-            )
-    [1] => Array
-            (...
+``` text
+[0] => Array
+        (
+            [Post] => Array
+                (
+                    [id] => 1
+                    [title] => First article
+                    [content] => aaa
+                    [created] => 2008-05-18 00:00:00
+                )
+            [Comment] => Array
+                (
+                    [0] => Array
+                        (
+                            [author] => Daniel
+                            [post_id] => 1
+                        )
+                    [1] => Array
+                        (
+                            [author] => Sam
+                            [post_id] => 1
+                        )
+                )
+        )
+[1] => Array
+        (...
+```
 
 Comment 配列に author フィールドだけが含まれていることが確認できると思います。
 ただし、 CakePHP が結果をマップするために必要な post_id は含まれます。
@@ -230,29 +234,31 @@ $this->Post->find('all', array('contain' => 'Comment.author = "Daniel"'));
 
 これにより、投稿 (*post*) とダニエルによるコメントを取得できます。 :
 
-    [0] => Array
-            (
-                [Post] => Array
-                    (
-                        [id] => 1
-                        [title] => First article
-                        [content] => aaa
-                        [created] => 2008-05-18 00:00:00
-                    )
-                [Comment] => Array
-                    (
-                        [0] => Array
-                            (
-                                [id] => 1
-                                [post_id] => 1
-                                [author] => Daniel
-                                [email] => dan@example.com
-                                [website] => http://example.com
-                                [comment] => First comment
-                                [created] => 2008-05-18 00:00:00
-                            )
-                    )
-            )
+``` text
+[0] => Array
+        (
+            [Post] => Array
+                (
+                    [id] => 1
+                    [title] => First article
+                    [content] => aaa
+                    [created] => 2008-05-18 00:00:00
+                )
+            [Comment] => Array
+                (
+                    [0] => Array
+                        (
+                            [id] => 1
+                            [post_id] => 1
+                            [author] => Daniel
+                            [email] => dan@example.com
+                            [website] => http://example.com
+                            [comment] => First comment
+                            [created] => 2008-05-18 00:00:00
+                        )
+                )
+        )
+```
 
 深いアソシエーションのフィルタリングでの Containable の使用には重要な注意があります。
 前の例で、データベース中に３つの投稿があり、ダニエルがこれらの投稿の２つにコメントした
@@ -261,65 +267,67 @@ $this->Post->find('all', array('contain' => 'Comment.author = "Daniel"'));
 は、ダニエルがコメントした２つの投稿ではなく、全部で３つの投稿を返します。
 ダニエルによるコメントを返して欲しいのあって、全ての投稿を返したくはありません。 :
 
-    [0] => Array
-            (
-                [Post] => Array
-                    (
-                        [id] => 1
-                        [title] => First article
-                        [content] => aaa
-                        [created] => 2008-05-18 00:00:00
-                    )
-                [Comment] => Array
-                    (
-                        [0] => Array
-                            (
-                                [id] => 1
-                                [post_id] => 1
-                                [author] => Daniel
-                                [email] => dan@example.com
-                                [website] => http://example.com
-                                [comment] => First comment
-                                [created] => 2008-05-18 00:00:00
-                            )
-                    )
-            )
-    [1] => Array
-            (
-                [Post] => Array
-                    (
-                        [id] => 2
-                        [title] => Second article
-                        [content] => bbb
-                        [created] => 2008-05-18 00:00:00
-                    )
-                [Comment] => Array
-                    (
-                    )
-            )
-    [2] => Array
-            (
-                [Post] => Array
-                    (
-                        [id] => 3
-                        [title] => Third article
-                        [content] => ccc
-                        [created] => 2008-05-18 00:00:00
-                    )
-                [Comment] => Array
-                    (
-                        [0] => Array
-                            (
-                                [id] => 22
-                                [post_id] => 3
-                                [author] => Daniel
-                                [email] => dan@example.com
-                                [website] => http://example.com
-                                [comment] => Another comment
-                                [created] => 2008-05-18 00:00:00
-                            )
-                    )
-            )
+``` text
+[0] => Array
+        (
+            [Post] => Array
+                (
+                    [id] => 1
+                    [title] => First article
+                    [content] => aaa
+                    [created] => 2008-05-18 00:00:00
+                )
+            [Comment] => Array
+                (
+                    [0] => Array
+                        (
+                            [id] => 1
+                            [post_id] => 1
+                            [author] => Daniel
+                            [email] => dan@example.com
+                            [website] => http://example.com
+                            [comment] => First comment
+                            [created] => 2008-05-18 00:00:00
+                        )
+                )
+        )
+[1] => Array
+        (
+            [Post] => Array
+                (
+                    [id] => 2
+                    [title] => Second article
+                    [content] => bbb
+                    [created] => 2008-05-18 00:00:00
+                )
+            [Comment] => Array
+                (
+                )
+        )
+[2] => Array
+        (
+            [Post] => Array
+                (
+                    [id] => 3
+                    [title] => Third article
+                    [content] => ccc
+                    [created] => 2008-05-18 00:00:00
+                )
+            [Comment] => Array
+                (
+                    [0] => Array
+                        (
+                            [id] => 22
+                            [post_id] => 3
+                            [author] => Daniel
+                            [email] => dan@example.com
+                            [website] => http://example.com
+                            [comment] => Another comment
+                            [created] => 2008-05-18 00:00:00
+                        )
+                )
+        )
+```
 
 コメントによって投稿をフィルタリングしたい場合、例えばダニエルによってコメントされた
 投稿のみを取得したいなら、最も簡単な方法は、ダニエルによってコメントされた全ての
@@ -349,10 +357,12 @@ $this->Post->find('all', array('contain' => array(
 
 モデル間のアソシエーションは次のようになっているとします。 :
 
-    User->Profile
-    User->Account->AccountSummary
-    User->Post->PostAttachment->PostAttachmentHistory->HistoryNotes
-    User->Post->Tag
+``` text
+User->Profile
+User->Account->AccountSummary
+User->Post->PostAttachment->PostAttachmentHistory->HistoryNotes
+User->Post->Tag
+```
 
 上記のアソシエーションにおいて Containable を使った検索は次のように行います。 :
 

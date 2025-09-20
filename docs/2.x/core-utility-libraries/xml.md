@@ -126,16 +126,18 @@ Your array must have only one element in the "top level" and it can not be
 numeric. If the array is not in this format, Xml will throw an Exception.
 Examples of invalid arrays:
 
-    // Top level with numeric key
-    array(
-        array('key' => 'value')
-    );
+``` text
+// Top level with numeric key
+array(
+    array('key' => 'value')
+);
 
-    // Multiple keys in top level
-    array(
-        'key1' => 'first value',
-        'key2' => 'other value'
-    );
+// Multiple keys in top level
+array(
+    'key1' => 'first value',
+    'key2' => 'other value'
+);
+```
 
 > [!WARNING]
 > The default format option was changed from <span class="title-ref">attributes</span> to <span class="title-ref">tags</span>. This was

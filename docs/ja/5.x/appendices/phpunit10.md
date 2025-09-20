@@ -19,7 +19,7 @@ PHPUnitの設定ファイルを、以下のコマンドで更新することが�
 PHPUnit 10 は、古い hook の仕組みを削除した上で、新しい [イベントシステム](https://docs.phpunit.de/en/10.5/extending-phpunit.html#extending-the-test-runner) が導入されました。
 ここでは、以下に示すような `phpunit.xml` は…:
 
-``` html
+``` php
 <extensions>
   <extension class="Cake\TestSuite\Fixture\PHPUnitExtension"/>
 </extensions>
@@ -27,7 +27,7 @@ PHPUnit 10 は、古い hook の仕組みを削除した上で、新しい [イ�
 
 次のように調整されます:
 
-``` html
+``` php
 <extensions>
   <bootstrap class="Cake\TestSuite\Fixture\Extension\PHPUnitExtension"/>
 </extensions>
@@ -61,4 +61,6 @@ public function myProvider(): array
 
 次のように置き換えて下さい:
 
-    public static function myProvider(): array
+``` text
+public static function myProvider(): array
+```

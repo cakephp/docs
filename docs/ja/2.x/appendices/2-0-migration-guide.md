@@ -88,23 +88,29 @@ PHP 5.3が名前空間のサポートをしていることから、このPHPバ�
 
 翻訳の結果を表示させたい場合は:
 
-    echo __('My Message');
+``` text
+echo __('My Message');
+```
 
 としてください。この変更は全ての翻訳のショートカット関数を含みます:
 
-    __()
-    __n()
-    __d()
-    __dn()
-    __dc()
-    __dcn()
-    __c()
+``` text
+__()
+__n()
+__d()
+__dn()
+__dc()
+__dcn()
+__c()
+```
 
 これに併せて、オプションパラメータを渡しているなら、翻訳はパラメータを用いて [sprintf](https://www.php.net/manual/ja/function.sprintf.php) を値を返す前に呼び出します。
 以下は一例です:
 
-    // "Called: MyClass:myMethod" のようなものを返す
-    echo __('Called: %s:%s', $className, $methodName);
+``` text
+// "Called: MyClass:myMethod" のようなものを返す
+echo __('Called: %s:%s', $className, $methodName);
+```
 
 これは全てのショートカット翻訳メソッドに関して同じことが言えます。
 
@@ -383,7 +389,7 @@ Appクラスは以下のプロパティを失いました。
 クラスの読み込み方が大きく書き直されましたが、手慣れた方法を尊重するためにアプリケーションのコードを変更する必要が稀にあります。
 最も大きな変更は新しいメソッドが導入されたことです:
 
-``` css
+``` php
 App::uses('AuthComponent', 'Controller/Component');
 ```
 
@@ -395,7 +401,7 @@ CakePHP 1.3の `App::import()` との主な違いは、前者が実際にクラ�
 
 `App::import()` から移行し `App::uses()` を使用するいくつかの例を挙げます:
 
-``` css
+``` php
 App::import('Controller', 'Pages');
 // は次のようになる
 App::uses('PagesController', 'Controller');
@@ -420,7 +426,7 @@ App::uses('MongoDbSource', 'MongoDb.Model/Datasource');
 以前 `App::import('Core', $class);` を用いて読み込んでいたすべてのクラスは、正しいパッケージを参照する `App::uses()` を用いて読み込む必要があります。
 APIを見て新しいフォルダでクラスを探索するようにしてください。いくつか例を挙げます:
 
-``` css
+``` php
 App::import('Core', 'CakeRoute');
 // は次のようになる
 App::uses('CakeRoute', 'Routing/Route');
@@ -444,7 +450,7 @@ App::uses('HttpSocket', 'Network/Http');
 
 例:
 
-``` css
+``` php
 App::build(array('controllers' => array('/full/path/to/controllers')));
 // は次のようになる
 App::build(array('Controller' => array('/full/path/to/Controller')));
@@ -470,7 +476,7 @@ App::build(array('View/Helper' => array('/full/path/to/View/Helper')));
 - Cacheは最後に設定されたエンジンの名前を保有しないようになりました。
   これはエンジンを指定する操作をしたいときは、\$configパラメータが指定したい設定名と同一でなければいけないということを意味します。
 
-``` css
+``` php
 Cache::config('something');
 Cache::write('key', $value);
 
@@ -502,7 +508,7 @@ Cache::write('key', $value, 'something');
   2.0では、 `index` アクションのみがショートカットルートとして与えられます。
   引き続きショートカットを利用したいと思う方は、以下のようにルートを追加できます:
 
-  ``` css
+  ``` php
   Router::connect(
     '/users/:action',
     array('controller' => 'users', 'plugin' => 'users')
@@ -513,7 +519,9 @@ Cache::write('key', $value, 'something');
 
 app/Config/routes.phpファイルは以下の行をファイルの後方に追加するように更新する必要があります:
 
-    require CAKE . 'Config' . DS . 'routes.php';
+``` text
+require CAKE . 'Config' . DS . 'routes.php';
+```
 
 これはアプリケーションのデフォルトのルートを生成するために必要となります。
 このようなルートを望まない、または独自の標準を実装したいなら、独自のルーティングルールを記述したファイルを読み込むようにすることができるでしょう。
@@ -891,13 +899,17 @@ PHPUnitによって全てのコマンドラインオプションがサポート�
 関連モデルは遅延読み込みが為されるようになりました。
 存在しないモデルのプロパティに値を割り当てようとすると、エラーを投げるような事態を垣間見ることが出来るでしょう:
 
-    $Post->inexistentProperty[] = 'value';
+``` text
+$Post->inexistentProperty[] = 'value';
+```
 
 上記は「注意：オーバーロードされた（訳注：PHPのオーバーロードのこと）プロパティの\$inexistentPropertyへの間接的な変更は効果がありません。」(*Notice: Indirect modification of overloaded property \$inexistentProperty has no effect*)というエラーを投げることでしょう。
 以下のように、プロパティに初期値を与えることによってこの問題を解決できます:
 
-    $Post->nonexistentProperty = array();
-    $Post->nonexistentProperty[] = 'value';
+``` text
+$Post->nonexistentProperty = array();
+$Post->nonexistentProperty[] = 'value';
+```
 
 また、以下のようにモデルのクラスにプロパティを定義するだけでも解決できます:
 

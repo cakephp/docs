@@ -110,12 +110,14 @@ BreadcrumbsHelper は内部で `StringTemplateTrait` を使用しています。
 これは、簡単に様々な HTML 文字列の出力をカスタマイズすることができます。
 次のデフォルトの定義では、4つのテンプレートが含まれます。 :
 
-    [
-        'wrapper' => '<ul{{attrs}}>{{content}}</ul>',
-        'item' => '<li{{attrs}}><a href="{{url}}"{{innerAttrs}}>{{title}}</a></li>{{separator}}',
-        'itemWithoutLink' => '<li{{attrs}}><span{{innerAttrs}}>{{title}}</span></li>{{separator}}',
-        'separator' => '<li{{attrs}}><span{{innerAttrs}}>{{separator}}</span></li>'
-    ]
+``` php
+[
+    'wrapper' => '<ul{{attrs}}>{{content}}</ul>',
+    'item' => '<li{{attrs}}><a href="{{url}}"{{innerAttrs}}>{{title}}</a></li>{{separator}}',
+    'itemWithoutLink' => '<li{{attrs}}><span{{innerAttrs}}>{{title}}</span></li>{{separator}}',
+    'separator' => '<li{{attrs}}><span{{innerAttrs}}>{{separator}}</span></li>'
+]
+```
 
 `StringTemplateTrait` の `template()` メソッドを使用すると簡単にカスタマイズすることができます。 :
 
