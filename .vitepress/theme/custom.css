@@ -1,6 +1,7 @@
 /* CakePHP Theme Customization */
 :root {
     --cake-color-link: #2D7EA4;
+    --cake-color-progress: #d33c43;
 
     --vp-font-family-base: 'Raleway', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 
@@ -14,6 +15,7 @@
     --vp-c-red-1: #d33c43;
     --vp-c-red-2: #c8363d;
     --vp-c-red-3: #b02e34;
+
 }
 
 /* Dark theme adjustments */

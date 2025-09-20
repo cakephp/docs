@@ -12,7 +12,7 @@
     before = () => { visible.value = true }
     after = () => {
       // Small delay to ensure rendering is done
-      setTimeout(() => { visible.value = false }, 10)
+      setTimeout(() => { visible.value = false }, 100)
     }
     router.onBeforeRouteChange = before
     router.onAfterRouteChange = after
@@ -20,10 +20,10 @@
 
   onUnmounted(() => {
     if (router.onBeforeRouteChange === before) {
-      router.onBeforeRouteChange = null
+      router.onBeforeRouteChange = undefined
     }
     if (router.onAfterRouteChange === after) {
-      router.onAfterRouteChange = null
+      router.onAfterRouteChange = undefined
     }
   })
 </script>
@@ -31,32 +31,70 @@
 <template>
   <transition name="fade">
     <div v-if="visible" class="page-loader">
-      <div class="loader-spinner"></div>
+      <div class="page-loader-bar"></div>
     </div>
   </transition>
 </template>
 
 <style scoped>
-  .page-loader {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.3);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-  }
+.page-loader-bar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 2px;
+  background-clip: padding-box;
+  overflow: hidden;
+  z-index: 1000;
+}
 
-  .loader-spinner {
-    width: 48px;
-    height: 48px;
-    border: 4px solid #ccc;
-    border-top-color: var(--vp-c-brand-1);
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-  }
+.page-loader-bar::before,
+.page-loader-bar::after {
+  content: "";
+  position: absolute;
+  will-change: left, right;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  background-color: var(--cake-color-progress);
+}
 
-  @keyframes spin {
-    to { transform: rotate(360deg); }
+.page-loader-bar::before {
+  animation: indeterminate 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
+}
+
+.page-loader-bar::after {
+  content: "";
+  animation: indeterminate-short 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
+  animation-delay: 1.15s;
+}
+
+@keyframes indeterminate {
+  0% {
+    left: -35%;
+    right: 100%;
   }
+  60% {
+    left: 100%;
+    right: -90%;
+  }
+  100% {
+    left: 100%;
+    right: -90%;
+  }
+}
+
+@keyframes indeterminate-short {
+  0% {
+    left: -200%;
+    right: 100%;
+  }
+  60% {
+    left: 107%;
+    right: -8%;
+  }
+  100% {
+    left: 107%;
+    right: -8%;
+  }
+}
 </style>
