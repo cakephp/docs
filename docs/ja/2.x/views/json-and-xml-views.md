@@ -23,7 +23,7 @@ CakePHP 2.1 には新しい二つのビュークラスがあります。 `XmlVie
     `viewClassMap` 設定でコンポーネントをセットすることができます。
 
 ::: info Added in version 2.3
-`RequestHandlerComponent::viewClassMap()` メソッドは、ビュークラスとタイプをマッピングするために追加されました。viewClassMap 設定は、以前のバージョンでは動作しません。
+`RequestHandlerComponent::viewClassMap()` メソッドは、 ビュークラスとタイプをマッピングするために追加されました。 viewClassMap 設定は、以前のバージョンでは動作しません。
 :::
 
 `Router::parseExtensions('json');` をルータファイルに追加すると、 `.json` 拡張子の

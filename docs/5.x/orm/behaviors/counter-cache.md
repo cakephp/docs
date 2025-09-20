@@ -136,7 +136,7 @@ then updates the counter of the *previously* associated item.
 > Articles table.
 
 ::: info Changed in version 5.1.2
-As of CakePHP 5.1.2, the counter cache values are updated using a singlequery using sub-queries, instead of separate queries, to fetch the count andupdate a record. If required you can disable the use of sub-queries bysetting  key to  in the config
+As of CakePHP 5.1.2, the counter cache values are updated using a single query using sub-queries, instead of separate queries, to fetch the count and update a record. If required you can disable the use of sub-queries by setting useSubQuery key to false in the config ['Articles' => ['comment_count' => ['useSubQuery' => false]]
 :::
 
 ## Belongs to many Usage

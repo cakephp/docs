@@ -411,9 +411,9 @@ $parser->addSubcommand('model', [
 サブコマンドの追加は、強力なメソッドチェーンの一部として使えます。
 
 ::: info Changed in version 3.5.0
-複数語のサブコマンドを追加する際、キャメルバック (camelBacked) 形式に加えて`スネークケース (snake_cake)` を使ってこれらのコマンドを呼び出すことができます。
+複数語のサブコマンドを追加する際、キャメルバック (camelBacked) 形式に加えて `スネークケース (snake_cake)` を使ってこれらのコマンドを呼び出すことができます。
 :::
 
 ::: info Deprecated in version 3.6.0
-サブコマンドは非推奨です。代わりに を使用してください。
+サブコマンドは非推奨です。代わりに [ネストされたコマンド](../console-and-shells#renaming-commands) を使用してください。
 :::

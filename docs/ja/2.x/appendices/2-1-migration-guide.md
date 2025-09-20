@@ -65,7 +65,7 @@ app/Controller ディレクトリへコピーする必要があります。
 ### CakeSession
 
 ::: info Changed in version 2.1.1
-CakeSession は P3P ヘッダをセットしなくなりました。このことは、あなたのアプリケーションの動作に変化でる場合があります。
+CakeSession は P3P ヘッダをセットしなくなりました。このことは、あな たのアプリケーションの動作に変化でる場合があります。
 :::
 
 ## ビヘイビア

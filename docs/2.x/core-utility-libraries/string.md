@@ -7,7 +7,7 @@ manipulating strings and is normally accessed statically. Example:
 `CakeText::uuid()`.
 
 ::: info Deprecated in version 2.7
-The `String` class was deprecated in 2.7 in favour of the`CakeText` class. While the `String` class is still availablefor backwards compatibility, using `CakeText` is recommended as it offerscompatibility with PHP7 and HHVM.
+The `String` class was deprecated in 2.7 in favour of the `CakeText` class. While the `String` class is still available for backwards compatibility, using `CakeText` is recommended as it offers compatibility with PHP7 and HHVM.
 :::
 
 If you need `TextHelper` functionalities outside of a `View`,
@@ -30,7 +30,7 @@ class UsersController extends AppController {
 ```
 
 ::: info Changed in version 2.1
-Several methods from `TextHelper` have been moved to`CakeText` class.The UUID method is used to generate unique identifiers as per`4122`. The UUID is a128bit string in the format of485fc381-e790-47a3-9794-1337c0a8fe68.Tokenizes a string using `$separator`, ignoring any instance of`$separator` that appears between `$leftBound` and `$rightBound`.This method can be useful when splitting up data in that has regularformatting such as tag lists:The insert method is used to create string templates and to allowfor key/value replacements:Cleans up a `CakeText::insert` formatted string with given $optionsdepending on the 'clean' key in $options. The default method usedis text but html is also available. The goal of this function is toreplace all whitespace and unneeded markup around placeholders thatdid not get replaced by Set::insert.You can use the following options in the options array:Wraps a block of text to a set width, and indent blocks as well.Can intelligently wrap text so words are not sliced across lines:You can provide an array of options that control how wrapping is done. Thesupported options are:
+Several methods from `TextHelper` have been moved to `CakeText` class.The UUID method is used to generate unique identifiers as per `4122`. The UUID is a 128bit string in the format of 485fc381-e790-47a3-9794-1337c0a8fe68.Tokenizes a string using `$separator`, ignoring any instance of `$separator` that appears between `$leftBound` and `$rightBound`.This method can be useful when splitting up data in that has regular formatting such as tag lists:The insert method is used to create string templates and to allow for key/value replacements:Cleans up a `CakeText::insert` formatted string with given $options depending on the 'clean' key in $options. The default method used is text but html is also available. The goal of this function is to replace all whitespace and unneeded markup around placeholders that did not get replaced by Set::insert.You can use the following options in the options array:Wraps a block of text to a set width, and indent blocks as well. Can intelligently wrap text so words are not sliced across lines:You can provide an array of options that control how wrapping is done. The supported options are:
 :::
 
 `method` CakeText::**highlight**(string $haystack, string $needle, array $options = array() )

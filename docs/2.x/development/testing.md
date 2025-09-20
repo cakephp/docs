@@ -274,7 +274,7 @@ directory you can do the following to run tests:
 > failing because of headers_sent warnings.
 
 ::: info Changed in version 2.1
-The `test` shell was added in 2.1. The 2.0 `testsuite` shell is stillavailable but the new syntax is preferred.
+The `test` shell was added in 2.1. The 2.0 `testsuite` shell is still available but the new syntax is preferred.
 :::
 
 You can also run `test` shell in the project root directory. This shows you a

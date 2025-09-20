@@ -8,7 +8,7 @@ TextHelper は、ビューの中でテキストを作成する際に便利で使
 テキストの余分な部分の削除を手伝います。
 
 ::: info Changed in version 2.1
-`TextHelper` のいくつかのメソッドは、 `View` レイヤーの外でも使用できるように`String` クラスに移動しました。ビューの中でこれらのメソッドは クラスを経由してアクセス可能です。普通のヘルパーメソッドを呼ぶのと同様に`$this->Text->method($args);` のように利用できます。
+`TextHelper` のいくつかのメソッドは、 `View` レイヤーの外でも使用できるように `String` クラスに移動しました。ビューの中でこれらのメソッドは TextHelper クラスを経由してアクセス可能です。普通のヘルパーメソッドを呼ぶのと同様に `$this->Text->method($args);` のように利用できます。
 :::
 
 `method` TextHelper::**autoLinkEmails**(string $text, array $options=array())

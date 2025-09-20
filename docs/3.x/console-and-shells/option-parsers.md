@@ -398,7 +398,7 @@ $parser->getEpilog();
 `method` Cake\\Console\\ConsoleOptionParser::**addSubcommand**($name, $options = [])
 
 ::: info Deprecated in version 3.6.0
-Subcommands are deprecated. Instead use .
+Subcommands are deprecated. Instead use [nested commands](../console-and-shells#renaming-commands).
 :::
 
 Console applications are often made of subcommands, and these subcommands may
@@ -440,5 +440,5 @@ When defining a subcommand you can use the following options:
 Adding subcommands can be done as part of a fluent method chain.
 
 ::: info Changed in version 3.5.0
-When adding multi-word subcommands you can now invoke those commands using`snake_case` in addition to the camelBacked form.
+When adding multi-word subcommands you can now invoke those commands using `snake_case` in addition to the camelBacked form.
 :::

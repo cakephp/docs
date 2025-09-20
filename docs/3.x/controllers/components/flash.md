@@ -33,7 +33,7 @@ $this->Flash->set('This is a message');
 ```
 
 ::: info Added in version 3.1
-Flash messages now stack. Successive calls to `set()` or `__call()` withthe same key will append the messages in the `$_SESSION`. If you want tokeep the old behavior (one message even after consecutive calls), set the`clear` parameter to `true` when configuring the Component.
+Flash messages now stack. Successive calls to `set()` or `__call()` with the same key will append the messages in the `$_SESSION`. If you want to keep the old behavior (one message even after consecutive calls), set the `clear` parameter to `true` when configuring the Component.
 :::
 
 FlashComponent's `__call()` and `set()` methods optionally take a second
@@ -47,7 +47,7 @@ parameter, an array of options:
   within an element.
 
 ::: info Added in version 3.1
-A new key `clear` was added. This key expects a `bool` and allows youto delete all messages in the current stack and start a new one.
+A new key `clear` was added. This key expects a `bool` and allows you to delete all messages in the current stack and start a new one.
 :::
 
 An example of using these options:

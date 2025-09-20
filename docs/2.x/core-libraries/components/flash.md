@@ -24,7 +24,7 @@ $this->Flash->set('This is a message');
 ```
 
 ::: info Added in version 2.10.0
-Flash messages now stack. Successive calls to `set()` or `__call()` withthe same key will append the messages in the `$_SESSION`. If you want tokeep the old behavior (one message even after consecutive calls), set the`clear` option to true when setting messages.
+Flash messages now stack. Successive calls to `set()` or `__call()` with the same key will append the messages in the `$_SESSION`. If you want to keep the old behavior (one message even after consecutive calls), set the `clear` option to true when setting messages.
 :::
 
 To create custom Flash elements, FlashComponent's `__call` magic

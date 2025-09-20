@@ -9,7 +9,7 @@ Time ヘルパーには時間に関する情報を手早く処理するための
 2.  時間を調べることができます。ただし時間を変えることはできません。
 
 ::: info Changed in version 2.1
-`TimeHelper` は `CakeTime` クラスに含まれるようにリファクタリングされました。これにより、ビューの外からでもより簡単に使えるようになりました。ビューで使う際は  クラスからこれらのメソッドを使うことができます。また、通常のヘルパーメソッドのように `$this->Time->method($args);` と呼び出すこともできます。
+`TimeHelper` は `CakeTime` クラスに含まれるようにリファクタリングされました。 これにより、ビューの外からでもより簡単に使えるようになりました。 ビューで使う際は TimeHelper クラスからこれらのメソッドを使うことができます。 また、通常のヘルパーメソッドのように `$this->Time->method($args);` と 呼び出すこともできます。
 :::
 
 ## ヘルパーの使い方
@@ -59,7 +59,7 @@ Time ヘルパーのメソッドは多くが \$timezone パラメーターを持
 > ```
 >
 > ::: info Changed in version 2.2
-> `$timezone` パラメータは、2.1 以前で使用されていた `$userOffset` パラメータを置き換えました。
+> `$timezone` パラメータは、2.1 以前で使用されていた `$userOffset` パラメータを 置き換えました。
 > :::
 
 > rtype  
@@ -86,7 +86,7 @@ Time ヘルパーのメソッドは多くが \$timezone パラメーターを持
 > ```
 >
 > ::: info Changed in version 2.2
-> `$timezone` パラメータは、2.1 以前で使用されていた `$userOffset` パラメータを置き換えました。
+> `$timezone` パラメータは、2.1 以前で使用されていた `$userOffset` パラメータを 置き換えました。
 > :::
 >
 > ::: info Added in version 2.2
@@ -112,7 +112,7 @@ Time ヘルパーのメソッドは多くが \$timezone パラメーターを持
 > ```
 >
 > ::: info Changed in version 2.2
-> `$timezone` パラメータは、2.1 以前で使用されていた `$userOffset` パラメータを置き換えました。
+> `$timezone` パラメータは、2.1 以前で使用されていた `$userOffset` パラメータを 置き換えました。
 > :::
 >
 > ::: info Added in version 2.2
@@ -153,7 +153,7 @@ Time ヘルパーのメソッドは多くが \$timezone パラメーターを持
 > ```
 >
 > ::: info Changed in version 2.2
-> `$format` と `$date` パラメータは、2.1 以前とは順番が逆になりました。`$timezone` パラメータは、2.1 以前に使用されていた `$userOffset` パラメータを置き換えました。`$default` パラメータは、2.1 以前に使用されていた `$invalid` パラメータを置き換えました。
+> `$format` と `$date` パラメータは、2.1 以前とは順番が逆になりました。 `$timezone` パラメータは、2.1 以前に使用されていた `$userOffset` パラメータを置き換えました。 `$default` パラメータは、2.1 以前に使用されていた `$invalid` パラメータを置き換えました。
 > :::
 >
 > ::: info Added in version 2.2
@@ -181,7 +181,7 @@ Time ヘルパーのメソッドは多くが \$timezone パラメーターを持
 > ```
 >
 > ::: info Changed in version 2.2
-> `$timezone` パラメータは、2.1 以前で使用されていた `$userOffset` パラメータを置き換えました。
+> `$timezone` パラメータは、2.1 以前で使用されていた `$userOffset` パラメータを 置き換えました。
 > :::
 >
 > ::: info Added in version 2.2
@@ -212,7 +212,7 @@ Time ヘルパーのメソッドは多くが \$timezone パラメーターを持
 > ご覧ください。
 >
 > ::: info Changed in version 2.2
-> `$timezone` パラメータは、2.1 以前で使用されていた `$userOffset` パラメータを置き換えました。
+> `$timezone` パラメータは、2.1 以前で使用されていた `$userOffset` パラメータを 置き換えました。
 > :::
 
 > rtype  
@@ -249,7 +249,7 @@ Time ヘルパーのメソッドは多くが \$timezone パラメーターを持
 > ```
 >
 > ::: info Changed in version 2.2
-> `$timezone` パラメータは、2.1 以前で使用されていた `$userOffset` パラメータを置き換えました。
+> `$timezone` パラメータは、2.1 以前で使用されていた `$userOffset` パラメータを 置き換えました。
 > :::
 >
 > ::: info Added in version 2.2
@@ -331,7 +331,7 @@ Time ヘルパーのメソッドは多くが \$timezone パラメーターを持
 > 日時を文字列で "2008-01-12T00:00:00Z" のように、 Atom 形式で返します。
 >
 > ::: info Changed in version 2.2
-> `$timezone` パラメータは、2.1 以前で使用されていた `$userOffset` パラメータを置き換えました。
+> `$timezone` パラメータは、2.1 以前で使用されていた `$userOffset` パラメータを 置き換えました。
 > :::
 >
 > ::: info Added in version 2.2
@@ -370,7 +370,7 @@ Time ヘルパーのメソッドは多くが \$timezone パラメーターを持
 > :::
 >
 > ::: info Added in version 2.4
-> 新しいオプションパラメータ `relativeString` (デフォルトでは `%s ago`) と`absoluteString` (デフォルトでは `on %s`) は、出力結果の文字列をカスタマイズするために追加されました。
+> 新しいオプションパラメータ `relativeString` (デフォルトでは `%s ago`) と `absoluteString` (デフォルトでは `on %s`) は、出力結果の文字列をカスタマイズするために 追加されました。
 > :::
 
 > rtype  
@@ -380,7 +380,7 @@ Time ヘルパーのメソッドは多くが \$timezone パラメーターを持
 > RSS 形式で返します。
 >
 > ::: info Changed in version 2.2
-> `$timezone` パラメータは、2.1 以前で使用されていた `$userOffset` パラメータを置き換えました。
+> `$timezone` パラメータは、2.1 以前で使用されていた `$userOffset` パラメータを 置き換えました。
 > :::
 >
 > ::: info Added in version 2.2
@@ -393,7 +393,7 @@ Time ヘルパーのメソッドは多くが \$timezone パラメーターを持
 > fromString メソッドのラッパーです。
 >
 > ::: info Changed in version 2.2
-> `$timezone` パラメータは、2.1 以前で使用されていた `$userOffset` パラメータを置き換えました。
+> `$timezone` パラメータは、2.1 以前で使用されていた `$userOffset` パラメータを 置き換えました。
 > :::
 >
 > ::: info Added in version 2.2
@@ -411,7 +411,7 @@ Time ヘルパーのメソッドは多くが \$timezone パラメーターを持
 > DateTimeZone
 >
 > ::: info Added in version 2.2
-> 文字列またはユーザーのタイムゾーンオブジェクトからタイムゾーンオブジェクトを返します。もし、パラメータなしで関数が呼ばれた場合、 'Config.timezone' 設定値からタイムゾーンの取得を試みます。
+> 文字列またはユーザーのタイムゾーンオブジェクトからタイムゾーンオブジェクトを返します。 もし、パラメータなしで関数が呼ばれた場合、 'Config.timezone' 設定値からタイムゾーンの取得を 試みます。
 > :::
 
 > rtype  
@@ -422,7 +422,7 @@ Time ヘルパーのメソッドは多くが \$timezone パラメーターを持
 > :::
 >
 > ::: info Changed in version 2.8
-> `$options` は、 `group`, `abbr`, `before`, `after` キーを持つ配列を受け付けます。`abbr => true` を指定すると、 `<option>` テキストにタイムゾーンの省略形が追加されます。
+> `$options` は、 `group`, `abbr`, `before`, `after` キーを持つ配列を受け付けます。 `abbr => true` を指定すると、 `<option>` テキストにタイムゾーンの省略形が追加されます。
 > :::
 
 ## 時間のテスト
@@ -434,7 +434,7 @@ Time ヘルパーのメソッドは多くが \$timezone パラメーターを持
 > :::
 
 > ::: info Changed in version 2.2
-> `$timezone` パラメータは、2.1 以前で使用されていた `$userOffset` パラメータを置き換えました。
+> `$timezone` パラメータは、2.1 以前で使用されていた `$userOffset` パラメータを 置き換えました。
 > :::
 >
 > ::: info Added in version 2.2

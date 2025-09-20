@@ -140,7 +140,7 @@ class UsersController extends AppController {
 ```
 
 ::: info Changed in version 2.5
-Since 2.5, use `CakeRequest::allowMethod()` instead of`CakeRequest::onlyAllow()` (deprecated).
+Since 2.5, use `CakeRequest::allowMethod()` instead of `CakeRequest::onlyAllow()` (deprecated).
 :::
 
 In the same way we created the views for our blog posts or by using the code

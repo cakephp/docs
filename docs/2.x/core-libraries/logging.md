@@ -306,7 +306,7 @@ In order for scopes to work, you **must** do a few things:
 `class` **CakeLog**
 
 ::: info Added in version 2.2
-Log levels and scopesCall this method without arguments, eg: `CakeLog::levels()` toobtain current level configuration.To append the additional levels 'user0' and 'user1' to the defaultlog levels use:Calling `CakeLog::levels()` will result in:To set/replace an existing configuration, pass an array with the secondargument set to false:Calling `CakeLog::levels()` will result in:Resets log levels to their original values:Checks whether `$streamName` has been enabled.Enable the stream `$streamName`.Disable the stream `$streamName`.Gets `$streamName` from the active streams.
+Log levels and scopesCall this method without arguments, eg: `CakeLog::levels()` to obtain current level configuration.To append the additional levels 'user0' and 'user1' to the default log levels use:Calling `CakeLog::levels()` will result in:To set/replace an existing configuration, pass an array with the second argument set to false:Calling `CakeLog::levels()` will result in:Resets log levels to their original values:Checks whether `$streamName` has been enabled.Enable the stream `$streamName`.Disable the stream `$streamName`.Gets `$streamName` from the active streams.
 :::
 
 ### Convenience methods

@@ -26,7 +26,7 @@ and Helpers. You can also access it in Components using the controller
 reference.
 
 ::: info Changed in version 4.4.0
-The `ServerRequest` is available via DI.So you can get it from container or use it as a dependency for your service.
+The `ServerRequest` is available via DI. So you can get it from container or use it as a dependency for your service.
 :::
 
 Some of the duties `ServerRequest` performs include:

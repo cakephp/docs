@@ -653,7 +653,7 @@ MethodNotAllowedException the rfc2616 says:
 ## Creating your Own Error Handler
 
 ::: info Deprecated in version 4.4.0
-`ErrorHandler` has been deprecated. Use `ErrorTrap` or `ExceptionTrap`instead.
+`ErrorHandler` has been deprecated. Use `ErrorTrap` or `ExceptionTrap` instead.
 :::
 
 By replacing the error handler you can customize how PHP errors and exceptions

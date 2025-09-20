@@ -3,7 +3,7 @@
 `class` **MediaView**
 
 ::: info Deprecated in version 2.3
-Use  instead.
+Use [Cake Response File](../controllers/request-response#cake-response-file) instead.
 :::
 
 Media views allow you to send binary files to the user. For example, you may

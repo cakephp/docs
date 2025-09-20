@@ -3,7 +3,7 @@
 `class` Cake\\Controller\\Component\\**PaginatorComponent**
 
 ::: info Deprecated in version 4.4.0
-The paginator component is deprecated as of 4.4.0 and will be removed in 5.0.You can use pagination from controllers as explained
+The paginator component is deprecated as of 4.4.0 and will be removed in 5.0. You can use pagination from controllers as explained [here](../../controllers/pagination)
 :::
 
 One of the main obstacles of creating flexible and user-friendly web

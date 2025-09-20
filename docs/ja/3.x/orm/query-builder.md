@@ -283,7 +283,7 @@ $query = $articles->find()
 ```
 
 ::: info Added in version 3.0.12
-複合的な式でソートする必要があるなら `order` に加えて、 `orderAsc` と `orderDesc`メソッドが使えます。 :
+複合的な式でソートする必要があるなら `order` に加えて、 `orderAsc` と `orderDesc` メソッドが使えます。 :
 :::
 
 行の数を制限したり、行のオフセットをセットするためには、 `limit()` と `page()`
@@ -704,7 +704,7 @@ AND view_count > 10)
 ```
 
 ::: info Deprecated in version 3.5.0
-3.5.0 以降、 `orWhere()` メソッドは非推奨です。このメソッドは、現在のクエリー状態に基づいてSQL を予測するのを困難にします。代わりに `where()` を使用してください。振る舞いが、より予測しやすく理解しやすくなります。
+3.5.0 以降、 `orWhere()` メソッドは非推奨です。このメソッドは、現在のクエリー状態に基づいて SQL を予測するのを困難にします。代わりに `where()` を使用してください。振る舞いが、 より予測しやすく理解しやすくなります。
 :::
 
 ただし、 `AND` と `OR` の両方を使いたいなら、次のようにすることもできます。 :
@@ -1494,7 +1494,7 @@ $query = $products->find()->innerJoinWith(
 違いは結果セットに追加のカラムが追加されず、 `_matchingData` プロパティーがセットされないことだけです。
 
 ::: info Added in version 3.1
-() は 3.1 で追加されました。
+[Query::innerJoinWith](Query::innerJoinWith)() は 3.1 で追加されました。
 :::
 
 ### notMatching を使う
@@ -1558,7 +1558,7 @@ $query = $articlesTable
 `_matchingData` プロパティーに追加しないということを覚えておいてください。
 
 ::: info Added in version 3.1
-() は 3.1 で追加されました。
+[Query::notMatching](Query::notMatching)() は 3.1 で追加されました。
 :::
 
 ### leftJoinWith を使う
@@ -1595,7 +1595,7 @@ $query = $authorsTable
 この関数は指定した関連からいずれのカラムも結果セットへとロードしません。
 
 ::: info Added in version 3.1
-() は 3.1 で追加されました。
+[Query::leftJoinWith](Query::leftJoinWith)() は 3.1 で追加されました。
 :::
 
 ### Join を追加する

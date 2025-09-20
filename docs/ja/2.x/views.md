@@ -576,7 +576,7 @@ echo $this->element('Contacts.helpbox');
 これらは同じエレメントの描画結果が得られます。
 
 ::: info Changed in version 2.1
-`$options[plugin]` オプションは非推奨となり、代わりに`Plugin.element` が追加されました。
+`$options[plugin]` オプションは非推奨となり、代わりに `Plugin.element` が追加されました。
 :::
 
 ## 独自 View クラスの作成

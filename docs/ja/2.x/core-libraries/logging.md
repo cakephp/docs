@@ -277,7 +277,7 @@ CakeLog::warning('これは、 shop と payments の両ストリームに書か�
 `class` **CakeLog**
 
 ::: info Added in version 2.2
-ログレベルとスコープ現在のレベルの設定を取得するために、引数なしでこのメソッドを読びます。例： `CakeLog::levels()` 。デフォルトで 'user0' と 'user1' という追加のレベルを追加するために、ログレベルを使用します。 :`CakeLog::levels()` を呼ぶと結果は:既存の設定を置き換えるために、第二引数に false をセットしてください。 :`CakeLog::levels()` を呼ぶと結果は:独自の値にログレベルをリセットします。 :`$streamName` が有効かどうかをチェック。`$streamName` ストリームを有効化。`$streamName` ストリームを無効化。`$streamName` に該当するストリームを取得します。
+ログレベルとスコープ現在のレベルの設定を取得するために、引数なしでこのメソッドを読びます。 例： `CakeLog::levels()` 。デフォルトで 'user0' と 'user1' という追加のレベルを追加するために、 ログレベルを使用します。 :`CakeLog::levels()` を呼ぶと結果は:既存の設定を置き換えるために、第二引数に false をセットしてください。 :`CakeLog::levels()` を呼ぶと結果は:独自の値にログレベルをリセットします。 :`$streamName` が有効かどうかをチェック。`$streamName` ストリームを有効化。`$streamName` ストリームを無効化。`$streamName` に該当するストリームを取得します。
 :::
 
 ### 便利メソッド

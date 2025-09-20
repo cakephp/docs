@@ -483,7 +483,7 @@ timestamp or formatted datestrings. Likewise, 'binary' columns will accept file
 handles, and generate file handles when reading data.
 
 ::: info Changed in version 5.1.0
-The `geometry`, `point`, `linestring`, and `polygon` types wereadded.
+The `geometry`, `point`, `linestring`, and `polygon` types were added.
 :::
 
 ::: info Changed in version 5.2.0

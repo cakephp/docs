@@ -171,7 +171,7 @@ $http->responseClass = 'YourResponse';
 ```
 
 ::: info Changed in version 2.3
-2.3.0 以降、 `HttpSocketResponse` を継承すべきです。これは、HTTP PECL 拡張の一般的な問題を回避します。
+2.3.0 以降、 `HttpSocketResponse` を継承すべきです。これは、 HTTP PECL 拡張の一般的な問題を回避します。
 :::
 
 ### 結果のダウンロード

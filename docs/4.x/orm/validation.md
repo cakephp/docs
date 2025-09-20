@@ -400,7 +400,7 @@ $rules->add($rules->isUnique(
 ```
 
 ::: info Added in version 4.2.0
-The `allowMultipleNulls` option was added. This was previously in 3.x, butit is now disabled by default.
+The `allowMultipleNulls` option was added. This was previously in 3.x, but it is now disabled by default.
 :::
 
 ### Foreign Key Rules

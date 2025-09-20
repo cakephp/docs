@@ -8,7 +8,7 @@ Cookies added through CookieComponent will only be sent if the controller action
 completes.
 
 ::: info Deprecated in version 3.5.0
-Cookies are available in the `ServerRequest` see .For encrypted cookies see the .
+Cookies are available in the `ServerRequest` see [Request Cookies](../../controllers/request-response#request-cookies). For encrypted cookies see the [Encrypted Cookie Middleware](../../controllers/middleware#encrypted-cookie-middleware).
 :::
 
 ## Configuring Cookies

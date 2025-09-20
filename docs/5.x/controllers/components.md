@@ -149,7 +149,7 @@ class PostsController extends AppController
 > component and a model the same name.
 
 ::: info Changed in version 5.1.0
-Components are able to use  to receive services.
+Components are able to use [Dependency Injection](../development/dependency-injection) to receive services.
 :::
 
 <a id="creating-a-component"></a>

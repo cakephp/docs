@@ -382,7 +382,7 @@ $http->addCookie(new Cookie('session', 'abc123'));
 Response オブジェクトは、レスポンスデータを検査するための多くのメソッドを持ちます。
 
 ::: info Changed in version 3.3.0
-3.3.0 では、 `Cake\Http\Client\Response` は を実装します。
+3.3.0 では、 `Cake\Http\Client\Response` は [PSR-7 ResponseInterface](https://www.php-fig.org/psr/psr-7/#3-3-psr-http-message-responseinterface) を実装します。
 :::
 
 ### レスポンスボディーの読み込み

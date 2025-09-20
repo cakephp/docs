@@ -79,7 +79,7 @@ translating content.
 > a `Traversable` object or an array.
 >
 > ::: info Changed in version 3.3.0
-> Calling this method will return passed `$var`, so that you can, for instance,place it in return statements.
+> Calling this method will return passed `$var`, so that you can, for instance, place it in return statements.
 > :::
 >
 > If the core `$debug` variable is `true`, `$var` is printed out.
@@ -94,14 +94,14 @@ translating content.
 > browser-friendly. Also see [Debugging](../development/debugging)
 >
 > ::: info Changed in version 3.3.0
-> Calling this method will return passed `$var`, so that you can, for instance,place it in return statements.
+> Calling this method will return passed `$var`, so that you can, for instance, place it in return statements.
 > :::
 >
 > Convenience wrapper for `print_r()`, with the addition of
 > wrapping `<pre>` tags around the output.
 >
 > ::: info Changed in version 3.3.0
-> Calling this method will return passed `$var`, so that you can, for instance,place it in return statements.
+> Calling this method will return passed `$var`, so that you can, for instance, place it in return statements.
 > :::
 >
 > JSON pretty print convenience function, with the addition of

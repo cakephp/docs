@@ -483,7 +483,7 @@ therefore it is not necessary (for example) to redeclare the
 `FormHelper`, or anything that is declared in your `AppController`.
 
 ::: info Deprecated in version 3.0
-Loading Helpers from the controller is provided for backwards compatibilityreasons. You should see  for how to load helpers.
+Loading Helpers from the controller is provided for backwards compatibility reasons. You should see [Configuring Helpers](views/helpers#configuring-helpers) for how to load helpers.
 :::
 
 <a id="controller-life-cycle"></a>

@@ -9,7 +9,7 @@
 なります。
 
 ::: info Deprecated in version 4.0.0
-AuthComponent は 4.0.0 では非推奨になり、と  プラグインに置き換えられます。
+AuthComponent は 4.0.0 では非推奨になり、 [authorization](https://book.cakephp.org/authorization/) と [authentication](https://book.cakephp.org/authentication/) プラグインに 置き換えられます。
 :::
 
 ## 以降を読む前に

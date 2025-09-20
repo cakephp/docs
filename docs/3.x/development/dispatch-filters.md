@@ -1,7 +1,7 @@
 # Dispatcher Filters
 
 ::: info Deprecated in version 3.3.0
-As of 3.3.0 Dispatcher Filters are deprecated. You should use instead now.
+As of 3.3.0 Dispatcher Filters are deprecated. You should use [Middleware](../controllers/middleware) instead now.
 :::
 
 There are several reasons to want a piece of code to be run before any

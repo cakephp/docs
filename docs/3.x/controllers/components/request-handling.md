@@ -111,11 +111,11 @@ The above will make `$this->request->getData()` an array of the JSON input data,
 without the additional `true` you'd get a set of `stdClass` objects.
 
 ::: info Deprecated in version 3.1.0
-As of 3.1.0 the `addInputType()` method is deprecated. You should use`config()` to add input types at runtime.
+As of 3.1.0 the `addInputType()` method is deprecated. You should use `config()` to add input types at runtime.
 :::
 
 ::: info Changed in version 3.6.0
-You should prefer using  instead ofRequestHandlerComponent.
+You should prefer using [Body Parser Middleware](../../controllers/middleware#body-parser-middleware) instead of RequestHandlerComponent.
 :::
 
 ## Checking Content-Type Preferences
@@ -220,5 +220,5 @@ public function initialize()
 ```
 
 ::: info Deprecated in version 3.1.0
-As of 3.1.0 the `viewClassMap()` method is deprecated. You should use`config()` to change the viewClassMap at runtime.
+As of 3.1.0 the `viewClassMap()` method is deprecated. You should use `config()` to change the viewClassMap at runtime.
 :::

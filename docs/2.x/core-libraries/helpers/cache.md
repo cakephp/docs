@@ -42,7 +42,7 @@ Configure::write('Dispatcher.filters', array(
 ```
 
 ::: info Added in version 2.3
-If you have a setup with multiple domains or languages you can use to store the view cache files prefixed.
+If you have a setup with multiple domains or languages you can use Configure::write('Cache.viewPrefix', 'YOURPREFIX'); to store the view cache files prefixed.
 :::
 
 ### Additional configuration options

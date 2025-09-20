@@ -34,7 +34,7 @@ user. An example `Accept` format that is used to render `JSON` responses is
 `application/json`.
 
 ::: info Changed in version 4.4.0
-Prior to 4.4.0, You need to use the `RequestHandlerComponent` to docontent-type negotitation.
+Prior to 4.4.0, You need to use the `RequestHandlerComponent` to do content-type negotitation.
 :::
 
 ## Using Data Views with the Serialize Key

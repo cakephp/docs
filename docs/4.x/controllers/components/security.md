@@ -1,7 +1,7 @@
 # Security
 
 ::: info Deprecated in version 4.0.0
-`SecurityComponent` has been deprecated. Use  insteadfor form tampering protection or  to enforce use of HTTPS (TLS) for requests.
+`SecurityComponent` has been deprecated. Use [FormProtection](../../controllers/components/form-protection) instead for form tampering protection or [HTTPS Enforcer Middleware](../../security/https-enforcer) to enforce use of HTTPS (TLS) for requests.
 :::
 
 `class` **SecurityComponent**(ComponentCollection $collection, array $config = [])

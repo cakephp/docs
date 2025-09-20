@@ -135,7 +135,7 @@ class UsersController extends AppController {
 ```
 
 ::: info Changed in version 2.5
-2.5 から、 `CakeRequest::onlyAllow()` (非推奨) の代わりに`CakeRequest::allowMethod()` を使用してください。
+2.5 から、 `CakeRequest::onlyAllow()` (非推奨) の代わりに `CakeRequest::allowMethod()` を使用してください。
 :::
 
 以前ビューを作成した方法と同様に、またはコード生成ツールを用いて、ビューを実装します。

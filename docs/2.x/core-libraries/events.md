@@ -113,7 +113,7 @@ order to prevent some bugs. Remember that with the flexibility of using the
 global manager, some additional complexity is incurred.
 
 ::: info Changed in version 2.5
-Prior to 2.5, listeners on the global manager were kept in a separate listand fired  instance listeners are. After 2.5, global and instancelisteners are fired in priority order.
+Prior to 2.5, listeners on the global manager were kept in a separate list and fired **before** instance listeners are. After 2.5, global and instance listeners are fired in priority order.
 :::
 
 ## Dispatching Events

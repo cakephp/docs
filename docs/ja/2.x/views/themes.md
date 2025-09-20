@@ -11,7 +11,7 @@ class ExampleController extends AppController {
 ```
 
 ::: info Changed in version 2.1
-バージョン 2.1 より前では、 `$this->viewClass = 'Theme'` という設定が必要でした。2.1 ではこの設定は不要になり、通常の `View` クラスがテーマをサポートします。
+バージョン 2.1 より前では、 `$this->viewClass = 'Theme'` という設定が必要でした。 2.1 ではこの設定は不要になり、通常の `View` クラスがテーマをサポートします。
 :::
 
 またテーマの設定や変更はアクション、または `beforeFilter` や `beforeRender`

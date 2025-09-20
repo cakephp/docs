@@ -9,7 +9,7 @@ CakePHsのSetクラスはどのモデルやコントローラからも、Inflect
 例: `Set::combine()`
 
 ::: info Deprecated in version 2.2
-Set クラスは `Hash` クラスにその役割を譲り2.2で非推奨となりました。Hashクラスはより一貫性を持つインターフェイスとAPIを提供します。
+Set クラスは `Hash` クラスにその役割を譲り2.2で非推奨となりました。 Hashクラスはより一貫性を持つインターフェイスとAPIを提供します。
 :::
 
 ## Set互換のパス記法

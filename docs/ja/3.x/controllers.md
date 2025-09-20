@@ -456,7 +456,7 @@ class RecipesController extends AppController
 再度宣言する必要はありません。
 
 ::: info Deprecated in version 3.0
-コントローラーからのヘルパーの読み込みは後方互換のために提供しています。ヘルパーをどう読み込むかについては  を参照してください。
+コントローラーからのヘルパーの読み込みは後方互換のために提供しています。 ヘルパーをどう読み込むかについては [Configuring Helpers](views/helpers#configuring-helpers) を参照してください。
 :::
 
 ## リクエストライフサイクルコールバック

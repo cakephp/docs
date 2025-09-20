@@ -521,5 +521,5 @@ The above will use the validator created by `validationTranslated` to
 validated translated entities.
 
 ::: info Added in version 3.3.0
-Validating translated entities, and streamlined translation saving was addedin 3.3.0
+Validating translated entities, and streamlined translation saving was added in 3.3.0
 :::

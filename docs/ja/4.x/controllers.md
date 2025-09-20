@@ -334,7 +334,7 @@ match-allビューは、content-typeのネゴシエーションが試みられ�
 のみ適用されることを覚えておくことが重要です。
 
 ::: info Added in version 4.4.0
-4.4 より前のバージョンでは、 `viewClasses()` の代わりに を使用する必要があります。
+4.4 より前のバージョンでは、 `viewClasses()` の代わりに [リクエストハンドリング](controllers/components/request-handling) を使用する必要があります。
 :::
 
 ## 他のページへのリダイレクト
@@ -520,7 +520,7 @@ class RecipesController extends AppController
 再度宣言する必要はありません。
 
 ::: info Deprecated in version 3.0
-コントローラーからのヘルパーの読み込みは後方互換のために提供しています。ヘルパーをどう読み込むかについては  を参照してください。
+コントローラーからのヘルパーの読み込みは後方互換のために提供しています。 ヘルパーをどう読み込むかについては [Configuring Helpers](views/helpers#configuring-helpers) を参照してください。
 :::
 
 ## リクエストライフサイクルコールバック

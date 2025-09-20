@@ -76,7 +76,7 @@ There are a number of options for create():
   ```
 
   ::: info Deprecated in version 2.8.0
-  The `$options['action']` option was deprecated as of 2.8.0.Use the `$options['url']` and `$options['id']` options instead.
+  The `$options['action']` option was deprecated as of 2.8.0. Use the `$options['url']` and `$options['id']` options instead.
   :::
 
 - `$options['url']` If the desired form action isn't in the current

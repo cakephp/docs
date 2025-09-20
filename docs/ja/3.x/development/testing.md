@@ -119,7 +119,7 @@ CakePHP におけるほとんどのことがそうであるように、テスト
     マークすることでテストメソッドとすることもできます。
 
 ::: info Added in version 3.4.1
-PHPUnit 6 のサポートが追加されました。5.7.0 より低いバージョンの PHPUnit を使用する場合、テストケースは CakePHP のクラスまたは `PHPUnit_Framework_TestCase` を継承してください。
+PHPUnit 6 のサポートが追加されました。5.7.0 より低いバージョンの PHPUnit を 使用する場合、テストケースは CakePHP のクラスまたは `PHPUnit_Framework_TestCase` を 継承してください。
 :::
 
 ## 最初のテストケース作成
@@ -1650,7 +1650,7 @@ $this->assertEventFiredWith('My.Global.Event', 'user', 1);
 ```
 
 ::: info Added in version 3.2.11
-イベントトラッキングと `assertEventFired()` と `assertEventFiredWith` は追加されました。
+イベントトラッキングと `assertEventFired()` と `assertEventFiredWith` は 追加されました。
 :::
 
 ## メールのテスト

@@ -833,7 +833,7 @@ $query = $articles->find()
 > expected.
 
 ::: info Added in version 3.1
-() was added in 3.1
+[Query::innerJoinWith](Query::innerJoinWith)() was added in 3.1
 :::
 
 ### Using notMatching
@@ -900,7 +900,7 @@ Keep in mind that contrary to the `matching()` function, `notMatching()`
 will not add any data to the `_matchingData` property in the results.
 
 ::: info Added in version 3.1
-() was added in 3.1
+[Query::notMatching](Query::notMatching)() was added in 3.1
 :::
 
 ### Using leftJoinWith
@@ -940,7 +940,7 @@ This function will not load any columns from the specified associations into the
 result set.
 
 ::: info Added in version 3.1
-() was added in 3.1
+[Query::leftJoinWith](Query::leftJoinWith)() was added in 3.1
 :::
 
 ## Changing Fetching Strategies

@@ -654,7 +654,7 @@ in mind that each record in the `$records` array must have the same keys as
 rows are bulk inserted.
 
 ::: info Changed in version 4.3.0
-Prior to 4.3.0 fixtures would also define the table's schema. You can learn moreabout  if you still need to define schema in your fixtures.
+Prior to 4.3.0 fixtures would also define the table's schema. You can learn more about [Fixture Schema](../appendices/fixture-upgrade#fixture-schema) if you still need to define schema in your fixtures.
 :::
 
 ### Dynamic Data

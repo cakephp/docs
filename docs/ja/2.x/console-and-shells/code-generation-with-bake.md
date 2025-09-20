@@ -54,7 +54,7 @@ $ cake bake all
 ```
 
 ::: info Changed in version 2.5
-`bake test` で作成されたテストファイルは、空のテストメソッドであることを注意するために  の呼び出しを含みます。2.5 より前には、空のテストは暗黙のうちにパスしていました。
+`bake test` で作成されたテストファイルは、空のテストメソッドであることを注意するために [PHPunit の markTestIncomplete()](https://phpunit.de/manual/3.7/ja/incomplete-and-skipped-tests.html) の呼び出しを含みます。2.5 より前には、空のテストは暗黙のうちにパスしていました。
 :::
 
 ## bakeテンプレートから生成されるデフォルトのHTMLを変更する

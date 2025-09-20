@@ -44,7 +44,7 @@ $email->to('test@example.com', 'ToTest Example');
 ```
 
 ::: info Deprecated in version 3.4.0
-代わりに `setFrom()` 、 `setTo()` 、 `setCc()` 、 `setBcc()`そして、 `setSubject()` を使用してください。
+代わりに `setFrom()` 、 `setTo()` 、 `setCc()` 、 `setBcc()` そして、 `setSubject()` を使用してください。
 :::
 
 ### 送り主の選択
@@ -324,7 +324,7 @@ $email->theme('TestTheme');
 **src/Template/Plugin/TestTheme/Plugin/Blog/Email/text/new_comment.ctp**
 
 ::: info Deprecated in version 3.4.0
-`template()` の代わりに `setTemplate()` を使用してください。`template()` のレイアウトの引数の代わりに `setLayout()` を使用してください。`theme()` の代わりに `setTheme()` を使用してください。
+`template()` の代わりに `setTemplate()` を使用してください。 `template()` のレイアウトの引数の代わりに `setLayout()` を使用してください。 `theme()` の代わりに `setTheme()` を使用してください。
 :::
 
 ## 添付ファイルの送信

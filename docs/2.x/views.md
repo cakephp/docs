@@ -624,7 +624,7 @@ echo $this->element('Contacts.helpbox');
 are equivalent and will result in the same element being rendered.
 
 ::: info Changed in version 2.1
-The `$options[plugin]` option was deprecated and support for`Plugin.element` was added.
+The `$options[plugin]` option was deprecated and support for `Plugin.element` was added.
 :::
 
 ## Creating your own view classes

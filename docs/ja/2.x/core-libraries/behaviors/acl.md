@@ -39,7 +39,7 @@ $this->Post->Behaviors->load('Acl', array('type' => 'controlled'));
 ```
 
 ::: info Changed in version 2.1
-AppModel に AclBehavior を安全にアタッチできるようになりました。Aco, Aro や AclNode は、無限ループが発生するため AppModel の代わりに Model を継承します。もし、あなたのアプリケーションが、何らかの理由で AppModel を継承したモデルに依存している場合、AclNode をコピーし、AppModel を再び継承してください。
+AppModel に AclBehavior を安全にアタッチできるようになりました。Aco, Aro や AclNode は、 無限ループが発生するため AppModel の代わりに Model を継承します。 もし、あなたのアプリケーションが、何らかの理由で AppModel を継承したモデルに依存している場合、 AclNode をコピーし、AppModel を再び継承してください。
 :::
 
 ## AclBehavior の使用

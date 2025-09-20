@@ -793,5 +793,5 @@ elements, you can use attribute matching with certain methods. They are `extract
 > ```
 
 ::: info Changed in version 4.5.0
-The `$default` parameter was added.Takes a flat array set, and creates a nested, or threaded data structure.For example, if you had the following array of data:
+The `$default` parameter was added.Takes a flat array set, and creates a nested, or threaded data structure.**Options:**For example, if you had the following array of data:
 :::

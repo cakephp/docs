@@ -367,7 +367,7 @@ It is important to remember that match-all views are applied only *after*
 content-type negotiation is attempted.
 
 ::: info Added in version 4.4.0
-Prior to 4.4 you must use instead of `viewClasses()`.
+Prior to 4.4 you must use [Request Handling](controllers/components/request-handling) instead of `viewClasses()`.
 :::
 
 ## Using AjaxView

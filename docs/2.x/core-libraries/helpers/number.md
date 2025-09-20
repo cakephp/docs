@@ -9,7 +9,7 @@ specific precisions and also to give you more flexibility with
 formatting numbers.
 
 ::: info Changed in version 2.1
-`NumberHelper` have been refactored into `CakeNumber` class toallow easier use outside of the `View` layer.Within a view, these methods are accessible via the `NumberHelper`class and you can call it as you would call a normal helper method:`$this->Number->method($args);`.
+`NumberHelper` have been refactored into `CakeNumber` class to allow easier use outside of the `View` layer. Within a view, these methods are accessible via the `NumberHelper` class and you can call it as you would call a normal helper method: `$this->Number->method($args);`.
 :::
 
 All of these functions return the formatted number; They do not

@@ -99,7 +99,7 @@ By extending CakeException, you can create your own 'framework' errors.
 All of the standard Exceptions that CakePHP will throw also extend CakeException.
 
 ::: info Added in version 2.3
-CakeBaseException was addedBase exception class in CakePHP.All CakeExceptions and HttpExceptions above extend this class.
+CakeBaseException was addedBase exception class in CakePHP. All CakeExceptions and HttpExceptions above extend this class.
 :::
 
 `method` Class::**responseHeader**($header = null, $value = null)

@@ -296,7 +296,7 @@ if (!empty($events)) {
 > The pattern passed to the `matchingListeners` method is case sensitive.
 
 ::: info Added in version 3.2.3
-The `matchingListeners` method returns an array of events matchinga search pattern.
+The `matchingListeners` method returns an array of events matching a search pattern.
 :::
 
 <a id="event-priorities"></a>

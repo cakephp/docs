@@ -3,7 +3,7 @@
 `class` Cake\\Console\\**Shell**
 
 ::: info Deprecated in version 3.6.0
-Shells are deprecated as of 3.6.0, but will not be removed until 5.x.Use  instead.
+Shells are deprecated as of 3.6.0, but will not be removed until 5.x. Use [Console Commands](../console-and-shells/commands) instead.
 :::
 
 ## Creating a Shell
@@ -350,7 +350,7 @@ if (!$user) {
 ```
 
 ::: info Added in version 3.2
-The abort() method was added in 3.2. In prior versions you can use`error()` to output a message and stop execution.
+The abort() method was added in 3.2. In prior versions you can use `error()` to output a message and stop execution.
 :::
 
 ## Status and Error Codes

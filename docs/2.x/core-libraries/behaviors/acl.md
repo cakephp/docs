@@ -42,7 +42,7 @@ $this->Post->Behaviors->load('Acl', array('type' => 'controlled'));
 ```
 
 ::: info Changed in version 2.1
-You can now safely attach AclBehavior to AppModel. Aco, Aro and AclNodenow extend Model instead of AppModel, which would cause an infinite loop.If your application depends on having those models to extend AppModel for some reason,then copy AclNode to your application and have it extend AppModel again.
+You can now safely attach AclBehavior to AppModel. Aco, Aro and AclNode now extend Model instead of AppModel, which would cause an infinite loop. If your application depends on having those models to extend AppModel for some reason, then copy AclNode to your application and have it extend AppModel again.
 :::
 
 ## Using the AclBehavior

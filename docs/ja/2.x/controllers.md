@@ -286,7 +286,7 @@ class PostsController extends AppController {
 > `AppController` で定義されていたとしてもモデルがロードされなくなります。
 >
 > ::: info Changed in version 2.1
-> `~Controller::$uses` は新しい値を持ちます。それは、 `false` とは違った扱いになります。
+> `~Controller::$uses` は新しい値を持ちます。 それは、 `false` とは違った扱いになります。
 > :::
 >
 > `SessionComponent` と同様に、`HtmlHelper` 、

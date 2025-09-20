@@ -788,7 +788,7 @@ the association is deleted first. You would lose the extra data in
 the columns as it is not replaced in the new insert.
 
 ::: info Changed in version 2.1
-You can set the `unique` setting to `keepExisting` to circumventlosing extra data during the save operation. See `unique`key in .
+You can set the `unique` setting to `keepExisting` to circumvent losing extra data during the save operation. See `unique` key in [HABTM association arrays](#ref-habtm-arrays).
 :::
 
 The way to implement our requirement is to use a **join model**,

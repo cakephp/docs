@@ -93,7 +93,7 @@ CakeException を継承することで、独自の 'フレームワーク' エ�
 CakePHP が投げる標準的な例外もすべて、CakeException を継承しています。
 
 ::: info Added in version 2.3
-CakeBaseException が追加されました。CakePHP での例外の基底クラスです。前述の CakeExceptions と HttpExceptions はすべて、このクラスを継承しています。
+CakeBaseException が追加されました。CakePHP での例外の基底クラスです。 前述の CakeExceptions と HttpExceptions はすべて、このクラスを継承しています。
 :::
 
 `method` Class::**responseHeader**($header = null, $value = null)

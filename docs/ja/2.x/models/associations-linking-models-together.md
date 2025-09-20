@@ -739,7 +739,7 @@ Course (授業) は Student (生徒) に取られています。これは単純�
 外部キー ID 以外の追加フィールドのデータが失われてしまいます。
 
 ::: info Changed in version 2.1
-`unique` に `keepExisting` を指定すれば、追加フィールドのデータを失うことなく保存できます。 `unique` キーについては を参照してください。
+`unique` に `keepExisting` を指定すれば、追加フィールドの データを失うことなく保存できます。 `unique` キーについては [HABTM association arrays](#ref-habtm-arrays) を参照してください。
 :::
 
 これは、 **モデルの結合** もしくは **hasMany through** アソシエーションを

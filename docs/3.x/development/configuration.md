@@ -172,7 +172,7 @@ See the [File Uploads section](../controllers/request-response#request-file-uplo
 Response Objects chapter for more information.
 
 ::: info Added in version 3.9.0
-Support for uploaded files as objects in the request data was added inversion 3.9.0
+Support for uploaded files as objects in the request data was added in version 3.9.0
 :::
 
 Security.salt  
@@ -189,7 +189,7 @@ using proper helpers. Valid values:
 - (string) 'force' - Always appends the timestamp.
 
 ::: info Changed in version 3.6.0
-As of 3.6.0, you can override this global setting when linking assetsusing the `timestamp` option.
+As of 3.6.0, you can override this global setting when linking assets using the `timestamp` option.
 :::
 
 Asset.cacheTime  

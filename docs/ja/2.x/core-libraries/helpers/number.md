@@ -7,7 +7,7 @@ NumberHelper は、ビューの中で一般的な書式で数値を表示する�
 指定した精度に整えられた数値へのフォーマットや、他にもより柔軟に数値のフォーマットを行います。
 
 ::: info Changed in version 2.1
-`NumberHelper` は、 `View` レイヤーの外でも簡単に使えるように `CakeNumber`クラスにリファクタリングされました。ビューの中で、これらのメソッドは `NumberHelper` クラスを経由してアクセス可能です。通常のヘルパーメソッドを呼ぶように呼び出せます:`$this->Number->method($args);` 。
+`NumberHelper` は、 `View` レイヤーの外でも簡単に使えるように `CakeNumber` クラスにリファクタリングされました。ビューの中で、これらのメソッドは `NumberHelper` クラスを経由して アクセス可能です。通常のヘルパーメソッドを呼ぶように呼び出せます: `$this->Number->method($args);` 。
 :::
 
 以下の全ての関数は、整形された数値を返します。

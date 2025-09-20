@@ -107,7 +107,7 @@ settings
 サポートです。
 
 ::: info Changed in version 2.4
-`settings`, `ssl_key`, `ssl_cert`, `ssl_ca` キーは2.4 で追加されました。
+`settings`, `ssl_key`, `ssl_cert`, `ssl_ca` キーは 2.4 で追加されました。
 :::
 
 > [!NOTE]
@@ -760,7 +760,7 @@ Configure::load('my_xml');
 `method` Configure::**dump**($key)
 
 ::: info Added in version 2.3
-`ConfigReaderInterface::dump()` は 2.3 で追加されました。設定データをロード／保存／復元する際にエラーが発生すると、この例外が投げられます。エラーが発生した場合、`ConfigReaderInterface` の実装はこのエラーをスロー(throw)しなければなりません。
+`ConfigReaderInterface::dump()` は 2.3 で追加されました。設定データをロード／保存／復元する際にエラーが発生すると、 この例外が投げられます。エラーが発生した場合、 `ConfigReaderInterface` の実装はこのエラーを スロー(throw)しなければなりません。
 :::
 
 ### ビルトインの設定リーダー

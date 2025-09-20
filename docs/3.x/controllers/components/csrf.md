@@ -20,11 +20,11 @@ component will throw a
 > HTTP method is used.
 
 ::: info Added in version 3.1
-The exception type changed from`Cake\Network\Exception\ForbiddenException` to`Cake\Network\Exception\InvalidCsrfTokenException`.
+The exception type changed from `Cake\Network\Exception\ForbiddenException` to `Cake\Network\Exception\InvalidCsrfTokenException`.
 :::
 
 ::: info Deprecated in version 3.5.0
-You should use  instead of`CsrfComponent`.
+You should use [Csrf Middleware](../../controllers/middleware#csrf-middleware) instead of `CsrfComponent`.
 :::
 
 ## Using the CsrfComponent

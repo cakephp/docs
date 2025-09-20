@@ -783,7 +783,7 @@ use. Any non-special option name will be treated as an HTML attribute, and
 applied to the generated HTML control element.
 
 ::: info Changed in version 3.3.0
-As of 3.3.0, FormHelper will automatically use any default values definedin your database schema. You can disable this behavior by settingthe `schemaDefault` option to `false`.
+As of 3.3.0, FormHelper will automatically use any default values defined in your database schema. You can disable this behavior by setting the `schemaDefault` option to `false`.
 :::
 
 ## Creating Input Elements

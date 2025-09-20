@@ -771,7 +771,7 @@ $query = $products->find()->innerJoinWith(
 違いは結果セットに追加のカラムが追加されず、 `_matchingData` プロパティーがセットされないことだけです。
 
 ::: info Added in version 3.1
-() は 3.1 で追加されました。
+[Query::innerJoinWith](Query::innerJoinWith)() は 3.1 で追加されました。
 :::
 
 ### notMatching を使う
@@ -835,7 +835,7 @@ $query = $articlesTable
 `_matchingData` プロパティーに追加しないということを覚えておいてください。
 
 ::: info Added in version 3.1
-() は 3.1 で追加されました。
+[Query::notMatching](Query::notMatching)() は 3.1 で追加されました。
 :::
 
 ### leftJoinWith を使う
@@ -872,7 +872,7 @@ $query = $authorsTable
 この関数は指定した関連からいずれのカラムも結果セットへとロードしません。
 
 ::: info Added in version 3.1
-() は 3.1 で追加されました。
+[Query::leftJoinWith](Query::leftJoinWith)() は 3.1 で追加されました。
 :::
 
 ## フェッチの戦略の変更する

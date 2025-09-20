@@ -37,7 +37,7 @@ to implement your own caching systems. The built-in caching engines are:
   similar to memcached, also provides atomic operations.
 
 ::: info Changed in version 2.3
-FileEngine is always the default cache engine. In the past a number of peoplehad difficulty setting up and deploying APC correctly both in CLI + web.Using files should make setting up CakePHP simpler for new developers.
+FileEngine is always the default cache engine. In the past a number of people had difficulty setting up and deploying APC correctly both in CLI + web. Using files should make setting up CakePHP simpler for new developers.
 :::
 
 ::: info Changed in version 2.5
@@ -99,7 +99,7 @@ parameter for `Cache::write()` and `Cache::read()`, e.g. `Cache::read('my_data',
 > ensure cache files are made with the correct permissions.
 
 ::: info Added in version 2.4
-In debug mode missing directories will now be automatically created to avoid unnecessaryerrors thrown when using the FileEngine.
+In debug mode missing directories will now be automatically created to avoid unnecessary errors thrown when using the FileEngine.
 :::
 
 ## Creating a storage engine for Cache

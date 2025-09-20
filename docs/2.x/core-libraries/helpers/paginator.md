@@ -31,7 +31,7 @@ Accepted keys for `$options`:
 - `lock` Lock direction. Will only use the default direction then, defaults to false.
 
   ::: info Added in version 2.5
-  You can now set the lock option to true in order to lock the sorting direction into thespecified direction.
+  You can now set the lock option to true in order to lock the sorting direction into the specified direction.
   :::
 
 Assuming you are paginating some posts, and are on page one:
@@ -183,7 +183,7 @@ pages in the paged data set.
 `method` PaginatorHelper::**prev**($title = '<< Previous', $options = array(), $disabledTitle = null, $disabledOptions = array())
 
 ::: info Changed in version 2.3
-For methods: `PaginatorHelper::prev()` and `PaginatorHelper::next()` itis now possible to set the `tag` option to `false` to disable thewrapper. New options `disabledTag` has been added.If you leave the `$disabledOptions` empty the `$options` parameter willbe used. This can save some additional typing if both sets of options arethe same.
+For methods: `PaginatorHelper::prev()` and `PaginatorHelper::next()` it is now possible to set the `tag` option to `false` to disable the wrapper. New options `disabledTag` has been added.If you leave the `$disabledOptions` empty the `$options` parameter will be used. This can save some additional typing if both sets of options are the same.
 :::
 
 `method` PaginatorHelper::**next**($title = 'Next >>', $options = array(), $disabledTitle = null, $disabledOptions = array())

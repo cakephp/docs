@@ -3,7 +3,7 @@
 `class` Cake\\Console\\**Shell**
 
 ::: info Deprecated in version 3.6.0
-Shell は 3.6.0 で非推奨ですが、 5.x までは削除されません。代わりに  を使用してください。
+Shell は 3.6.0 で非推奨ですが、 5.x までは削除されません。 代わりに [コマンドオブジェクト](../console-commands/commands) を使用してください。
 :::
 
 ## シェルの作成

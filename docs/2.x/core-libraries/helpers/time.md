@@ -10,7 +10,7 @@ Time Helper has two main tasks that it can perform:
 2.  It can test time (but cannot bend time, sorry).
 
 ::: info Changed in version 2.1
-`TimeHelper` has been refactored into the `CakeTime` class to alloweasier use outside of the `View` layer.Within a view, these methods are accessible via the class and you can call it as you would call a normal helper method:`$this->Time->method($args);`.
+`TimeHelper` has been refactored into the `CakeTime` class to allow easier use outside of the `View` layer. Within a view, these methods are accessible via the TimeHelper class and you can call it as you would call a normal helper method: `$this->Time->method($args);`.
 :::
 
 ## Using the Helper
@@ -158,7 +158,7 @@ Formatting
 > ```
 >
 > ::: info Changed in version 2.2
-> `$format` and `$date` parameters are in opposite order as used in 2.1 and below.`$timezone` parameter replaces `$userOffset` parameter used in 2.1 and below.`$default` parameter replaces `$invalid` parameter used in 2.1 and below.
+> `$format` and `$date` parameters are in opposite order as used in 2.1 and below. `$timezone` parameter replaces `$userOffset` parameter used in 2.1 and below. `$default` parameter replaces `$invalid` parameter used in 2.1 and below.
 > :::
 >
 > ::: info Added in version 2.2
@@ -424,7 +424,7 @@ Formatting
 > DateTimeZone
 >
 > ::: info Added in version 2.2
-> Returns a timezone object from a string or the user's timezone object. If the function is calledwithout a parameter it tries to get timezone from 'Config.timezone' configuration variable.
+> Returns a timezone object from a string or the user's timezone object. If the function is called without a parameter it tries to get timezone from 'Config.timezone' configuration variable.
 > :::
 
 > rtype  
@@ -435,7 +435,7 @@ Formatting
 > :::
 >
 > ::: info Changed in version 2.8
-> `$options` now accepts array with `group`, `abbr`, `before`, and `after` keys.Specify `abbr => true` will append the timezone abbreviation in the `<option>` text.
+> `$options` now accepts array with `group`, `abbr`, `before`, and `after` keys. Specify `abbr => true` will append the timezone abbreviation in the `<option>` text.
 > :::
 
 ## Testing Time

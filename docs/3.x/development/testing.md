@@ -127,7 +127,7 @@ tests:
     You can also use the `@test` annotation to mark methods as test methods.
 
 ::: info Added in version 3.4.1
-Support for PHPUnit 6 was addded. If you're using a PHPUnit version lowerthan 5.7.0, your tests classes should either extends CakePHP's classes or`PHPUnit_Framework_TestCase`.
+Support for PHPUnit 6 was addded. If you're using a PHPUnit version lower than 5.7.0, your tests classes should either extends CakePHP's classes or `PHPUnit_Framework_TestCase`.
 :::
 
 ## Creating Your First Test Case
@@ -1213,7 +1213,7 @@ $this->setUnlockedFields(['dynamic_field']);
 ```
 
 ::: info Added in version 3.1.2
-The `enableCsrfToken()` and `enableSecurityToken()` methods were addedin 3.1.2
+The `enableCsrfToken()` and `enableSecurityToken()` methods were added in 3.1.2
 :::
 
 ::: info Added in version 3.8.3
@@ -1851,7 +1851,7 @@ $this->assertEventFiredWith('My.Global.Event', 'user', 1);
 ```
 
 ::: info Added in version 3.2.11
-Event tracking, `assertEventFired()`, and `assertEventFiredWith` wereadded.
+Event tracking, `assertEventFired()`, and `assertEventFiredWith` were added.
 :::
 
 ## Testing Email

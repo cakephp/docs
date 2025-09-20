@@ -85,7 +85,7 @@
 > :::
 >
 > ::: info Added in version 2.10.8
-> 非推奨な `mcrypt` 拡張の代わりに `Security.useOpenSsl` を設定してOpenSSL を利用してください。
+> 非推奨な `mcrypt` 拡張の代わりに `Security.useOpenSsl` を設定して OpenSSL を利用してください。
 > :::
 >
 > param string \$cipher  
@@ -115,7 +115,7 @@
 > :::
 >
 > ::: info Added in version 2.10.8
-> 非推奨な `mcrypt` 拡張の代わりに `Security.useOpenSsl` を設定してOpenSSL を利用してください。
+> 非推奨な `mcrypt` 拡張の代わりに `Security.useOpenSsl` を設定して OpenSSL を利用してください。
 > :::
 >
 > rtype  

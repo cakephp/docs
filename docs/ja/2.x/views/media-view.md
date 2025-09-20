@@ -3,7 +3,7 @@
 `class` **MediaView**
 
 ::: info Deprecated in version 2.3
-代わりに  を使用してください。
+代わりに [Cake Response File](../controllers/request-response#cake-response-file) を使用してください。
 :::
 
 メディアビューを使うとユーザにバイナリーファイルを送ることができます。例えば、

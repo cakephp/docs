@@ -25,7 +25,7 @@ Before you can use the data view classes, you'll need to do a bit of setup:
     to map types to your custom classes and/or map other data types.
 
 ::: info Added in version 2.3
-`RequestHandlerComponent::viewClassMap()` method has been added to map types to viewClasses.The viewClassMap setting will not work on earlier versions.
+`RequestHandlerComponent::viewClassMap()` method has been added to map types to viewClasses. The viewClassMap setting will not work on earlier versions.
 :::
 
 After adding `Router::parseExtensions('json');` to your routes file, CakePHP

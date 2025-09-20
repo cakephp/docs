@@ -185,7 +185,7 @@ public function setErrors($errors)
 ```
 
 ::: info Changed in version 3.5.1
-`setErrors` をもう指定する必要はありません。これは、利便性のため `Form`クラスに既に含まれているからです。
+`setErrors` をもう指定する必要はありません。これは、利便性のため `Form` クラスに既に含まれているからです。
 :::
 
 バリデータークラスのエラーの返し方にならって、 `$errors` はこの形式でなければなりません。 :

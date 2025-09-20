@@ -103,7 +103,7 @@ $this->RequestHandler->config('inputTypeMap.json', ['json_decode', true]);
 `stdClass` オブジェクトで取得したい場合は、引数の `true` なしになります。
 
 ::: info Deprecated in version 3.1.0
-3.1.0 から `addInputType()` メソッドは非推奨です。実行時に入力タイプを追加するには、 `config()` を使用してください。
+3.1.0 から `addInputType()` メソッドは非推奨です。 実行時に入力タイプを追加するには、 `config()` を使用してください。
 :::
 
 ## コンテンツタイプの設定を確認
@@ -203,5 +203,5 @@ public function initialize()
 ```
 
 ::: info Deprecated in version 3.1.0
-3.1.0 から `viewClassMap()` メソッドは非推奨です。実行時に viewClassMap を変更するには、 `config()` を使用してください。
+3.1.0 から `viewClassMap()` メソッドは非推奨です。 実行時に viewClassMap を変更するには、 `config()` を使用してください。
 :::

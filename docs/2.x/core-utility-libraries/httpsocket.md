@@ -178,7 +178,7 @@ $http->responseClass = 'YourResponse';
 ```
 
 ::: info Changed in version 2.3
-As of 2.3.0 you should extend `HttpSocketResponse` instead. Thisavoids a common issue with the HTTP PECL extension.
+As of 2.3.0 you should extend `HttpSocketResponse` instead. This avoids a common issue with the HTTP PECL extension.
 :::
 
 ### Downloading the results

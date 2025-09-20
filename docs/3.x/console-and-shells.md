@@ -44,7 +44,7 @@ $ bin/cake
 > For Windows, the command needs to be `bin\cake` (note the backslash).
 
 ::: info Deprecated in version 3.6.0
-Shells are deprecated as of 3.6.0, but will not be removed until 5.x.Use  instead.
+Shells are deprecated as of 3.6.0, but will not be removed until 5.x. Use [Console Commands](console-and-shells/commands) instead.
 :::
 
 Running the Console with no arguments produces this help message:

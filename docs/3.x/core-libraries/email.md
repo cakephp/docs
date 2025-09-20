@@ -45,7 +45,7 @@ $email->to('test@example.com', 'ToTest Example');
 ```
 
 ::: info Deprecated in version 3.4.0
-Use `setFrom()`, `setTo()`, `setCc()` , `setBcc()` and`setSubject()` instead of `from()`, `to()`, `cc()`, `bcc()` and`subject()`
+Use `setFrom()`, `setTo()`, `setCc()` , `setBcc()` and `setSubject()` instead of `from()`, `to()`, `cc()`, `bcc()` and `subject()`
 :::
 
 ### Choosing the Sender
@@ -105,7 +105,7 @@ $email = new Email(['from' => 'me@example.org', 'transport' => 'my_custom']);
 ```
 
 ::: info Changed in version 3.1
-The `default` email profile is automatically set when an `Email`instance is created.
+The `default` email profile is automatically set when an `Email` instance is created.
 :::
 
 ::: info Deprecated in version 3.4.0
@@ -347,7 +347,7 @@ following path:
 **src/Template/Plugin/TestTheme/Plugin/Blog/Email/text/new_comment.ctp**.
 
 ::: info Deprecated in version 3.4.0
-Use `viewBuilder()->setTemplate()` instead of `template()`. Use`viewBuilder()->setLayout()` instead of the layout argument of`template()`. Use `viewBuilder()->setTheme()` instead of `theme()`.
+Use `viewBuilder()->setTemplate()` instead of `template()`. Use `viewBuilder()->setLayout()` instead of the layout argument of `template()`. Use `viewBuilder()->setTheme()` instead of `theme()`.
 :::
 
 ## Sending Attachments

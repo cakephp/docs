@@ -70,7 +70,7 @@ public function blackhole($type)
 - 'secure' は、SSL メソッド制限の失敗を示します。
 
 ::: info Added in version 3.2.6
-cakephp/cakephp v3.2.6 では、追加のパラメーターが blackHole コールバックに含まれます。`Cake\Controller\Exception\SecurityException` のインスタンスが、２番目のパラメーターに含まれます。
+cakephp/cakephp v3.2.6 では、追加のパラメーターが blackHole コールバックに含まれます。 `Cake\Controller\Exception\SecurityException` のインスタンスが、 ２番目のパラメーターに含まれます。
 :::
 
 ## アクションを SSL 通信に限定

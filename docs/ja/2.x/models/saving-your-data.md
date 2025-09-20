@@ -446,7 +446,7 @@ fieldList はキーにモデルのエイリアスを、値にフィールドの�
 モデル名はネストしません。
 
 ::: info Changed in version 2.1
-`Model::saveAll()` とそれに関連するメソッドは、複数モデルに対応する  を受け取ることができるようになりました。`$options['deep'] = true` とすることで、2階層以上のデータを保存できるようになりました。
+`Model::saveAll()` とそれに関連するメソッドは、複数モデルに対応する fieldList を 受け取ることができるようになりました。`$options['deep'] = true` とすることで、2階層以上のデータを保存できるようになりました。
 :::
 
 ## Model::saveAll(array \$data = null, array \$options = array())

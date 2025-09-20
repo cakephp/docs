@@ -41,7 +41,7 @@ Configure::write('Dispatcher.filters', array(
 ```
 
 ::: info Added in version 2.3
-もし、複数ドメインまたは言語で設定するのであれば、プレフィックス付きのビューキャッシュファイルに保存するために  を使用できます。
+もし、複数ドメインまたは言語で設定するのであれば、プレフィックス付きのビューキャッシュファイルに 保存するために Configure::write('Cache.viewPrefix', 'YOURPREFIX'); を使用できます。
 :::
 
 ### 環境設定オプションを追加する

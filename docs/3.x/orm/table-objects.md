@@ -133,7 +133,7 @@ $articlesTable = TableRegistry::getTableLocator()->get('VendorName/PluginName.Ar
 ```
 
 ::: info Deprecated in version 3.6.0
-The static methods on `TableRegistry` have been replaced by`TableLocator`. You can get the TableLocator from TableRegistry using`TableRegistry::getTableLocator()`.
+The static methods on `TableRegistry` have been replaced by `TableLocator`. You can get the TableLocator from TableRegistry using `TableRegistry::getTableLocator()`.
 :::
 
 <a id="table-callbacks"></a>

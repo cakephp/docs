@@ -51,7 +51,7 @@ Configure::write('Error', array(
 :::
 
 ::: info Changed in version 2.2
-`Error.handler` と `Error.consoleHandler` は fatal なエラーコードも受け取ることになります。デフォルトの振る舞いは（`debug` が無効なら） internal server error のページを表示するか、もしくは、（`debug` が有効なら）エラーメッセージ、ファイル名、行番号を伴ったページを表示するというものです。
+`Error.handler` と `Error.consoleHandler` は fatal なエラーコードも受け取ることに なります。デフォルトの振る舞いは（`debug` が無効なら） internal server error のページを 表示するか、もしくは、（`debug` が有効なら）エラーメッセージ、ファイル名、行番号を伴った ページを表示するというものです。
 :::
 
 ## 独自のエラーハンドラを作成する

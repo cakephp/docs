@@ -9,7 +9,7 @@ authentication objects and authorization objects to create flexible
 ways of identifying and checking user authorization.
 
 ::: info Deprecated in version 4.0.0
-The AuthComponent is deprecated as of 4.0.0 and will be replaced by theand  plugins.
+The AuthComponent is deprecated as of 4.0.0 and will be replaced by the [authorization](https://book.cakephp.org/authorization/) and [authentication](https://book.cakephp.org/authentication/) plugins.
 :::
 
 <a id="authentication-objects"></a>

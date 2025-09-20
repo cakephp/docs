@@ -33,7 +33,7 @@
   デフォルトのソート順にのみ適用されます。デフォルトは false 。
 
   ::: info Added in version 2.5
-  lock オプションを true にすることで、ソート順を指定されたものに固定できるようになりました。
+  lock オプションを true にすることで、 ソート順を指定されたものに固定できるようになりました。
   :::
 
 ここで複数の投稿 (*post*) をページ制御していて、今１ページ目にいるとすると:
@@ -183,7 +183,7 @@ echo $this->Paginator->numbers(array('first' => 2, 'last' => 2));
 `method` PaginatorHelper::**prev**($title = '<< Previous', $options = array(), $disabledTitle = null, $disabledOptions = array())
 
 ::: info Changed in version 2.3
-`PaginatorHelper::prev()` と `PaginatorHelper::next()`メソッドについて、 `tag` オプションを `false` にすることでラッパーを無効にすることができますが、2.3 から新しい `disabledTag` が追加されました。`$disabledOptions` が無指定の場合 `$options` パラメーターが使われます。これで、どちらも同じ値を指定する場合のタイピング量が減らせます。
+`PaginatorHelper::prev()` と `PaginatorHelper::next()` メソッドについて、 `tag` オプションを `false` にすることで ラッパーを無効にすることができますが、2.3 から新しい `disabledTag` が 追加されました。`$disabledOptions` が無指定の場合 `$options` パラメーターが使われます。 これで、どちらも同じ値を指定する場合のタイピング量が減らせます。
 :::
 
 `method` PaginatorHelper::**next**($title = 'Next >>', $options = array(), $disabledTitle = null, $disabledOptions = array())

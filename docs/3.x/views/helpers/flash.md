@@ -47,7 +47,7 @@ $this->Flash->set('The user has been saved.', [
 > encode any user data. CakePHP won't escape flash message parameters for you.
 
 ::: info Added in version 3.1
-The  nowstacks messages. If you set multiple flash messages, when you call`render()`, each message will be rendered in its own elements, in theorder they were set.
+The [FlashComponent](../../controllers/components/flash) now stacks messages. If you set multiple flash messages, when you call `render()`, each message will be rendered in its own elements, in the order they were set.
 :::
 
 For more information about the available array options, please refer to the

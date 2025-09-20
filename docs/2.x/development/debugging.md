@@ -32,7 +32,7 @@ Output from this function is only shown if the core debug variable
 has been set to a value greater than 0.
 
 ::: info Changed in version 2.1
-The output of `debug()` more resembles `var_dump()`, and uses`Debugger` internally.
+The output of `debug()` more resembles `var_dump()`, and uses `Debugger` internally.
 :::
 
 ## Debugger Class
@@ -93,7 +93,7 @@ set to a value greater than 0.
 > ```
 >
 > ::: info Changed in version 2.1
-> In 2.1 forward the output was updated for readability. See`Debugger::exportVar()`
+> In 2.1 forward the output was updated for readability. See `Debugger::exportVar()`
 > :::
 >
 > ::: info Changed in version 2.5.0

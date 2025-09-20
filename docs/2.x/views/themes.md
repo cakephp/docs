@@ -13,7 +13,7 @@ class ExampleController extends AppController {
 ```
 
 ::: info Changed in version 2.1
-Versions previous to 2.1 required setting the `$this->viewClass = 'Theme'`.2.1 removes this requirement as the normal `View` class supports themes
+Versions previous to 2.1 required setting the `$this->viewClass = 'Theme'`. 2.1 removes this requirement as the normal `View` class supports themes
 :::
 
 You can also set or change the theme name within an action or within the

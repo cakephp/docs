@@ -54,7 +54,7 @@ $this->Flash->set('The user has been saved.', array(
 > with `h` when formatting your messages.
 
 ::: info Added in version 2.10.0
-stacks messages as of 2.10.0. If you setmultiple flash messages, when you call `render()`, each message will berendered in its own element, in the order the messages were set.
+[Flash](../../core-libraries/components/flash) stacks messages as of 2.10.0. If you set multiple flash messages, when you call `render()`, each message will be rendered in its own element, in the order the messages were set.
 :::
 
 For more information about the available array options, please refer to the
