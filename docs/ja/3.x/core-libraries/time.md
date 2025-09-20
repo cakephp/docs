@@ -132,7 +132,7 @@ $time->timezone = 'Europe/Paris';
 このメソッドは、オブジェクトを json 形式に変換するときに使われる
 デフォルトのフォーマットをセットします。 :
 
-``` css
+``` php
 Time::setJsonEncodeFormat('yyyy-MM-dd HH:mm:ss');  // 可変の DateTime 用
 FrozenTime::setJsonEncodeFormat('yyyy-MM-dd HH:mm:ss');  // 不変の DateTime 用
 Date::setJsonEncodeFormat('yyyy-MM-dd HH:mm:ss');  // 可変の Date 用
@@ -238,7 +238,7 @@ echo $now->nice('Europe/Paris', 'fr-FR');
 [intl.default_locale](https://www.php.net/manual/en/intl.configuration.php#ini.intl.default-locale) の指令です。
 しかしながら、このデフォルト値は実行時にも変更できます。 :
 
-``` css
+``` php
 Time::setDefaultLocale('es-ES'); // 可変の DateTime 用
 FrozenTime::setDefaultLocale('es-ES'); // 不変の DateTime 用
 Date::setDefaultLocale('es-ES'); // 可変の Date 用
@@ -250,7 +250,7 @@ FrozenDate::setDefaultLocale('es-ES'); // 不変の Date 用
 
 同様に、 `i18nFormat` を利用することでデフォルトのフォーマット文字列を変更できます。 :
 
-``` css
+``` php
 Time::setToStringFormat(\IntlDateFormatter::SHORT); // 可変の DateTime 用
 FrozenTime::setToStringFormat(\IntlDateFormatter::SHORT); // 不変の DateTime 用
 Date::setToStringFormat(\IntlDateFormatter::SHORT); // 可変の Date 用

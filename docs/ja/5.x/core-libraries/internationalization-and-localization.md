@@ -414,7 +414,7 @@ I18n::setTranslator('animals', function () {
 見つかります。翻訳機構を作成するのに最低限必要なのは、ローダー機能が `Aura\Intl\Package`
 オブジェクトを返すことです。一旦コードを置けば、翻訳機能は以下のように利用できるでしょう。 :
 
-``` css
+``` php
 I18n::setLocale('fr_FR');
 __d('animals', 'Dog'); // "Chien" を返す
 ```
@@ -509,7 +509,7 @@ I18n::config('default', function ($domain, $locale) {
 特定のローダーが設定されていない全てのパッケージで、パッケージをロードする方法を変更したい場合、
 `_fallback` パッケージを使用することによって、代替パッケージローダーに置き換えることができます。 :
 
-``` css
+``` php
 I18n::config('_fallback', function ($domain, $locale) {
     // パッケージを生成するカスタムコードはこちら。
 });
@@ -567,7 +567,7 @@ __('Hello, my name is %s and I am %d years old', 'José', 29);
 
 これは、 `translator()` や `config()` メソッドを使って手で作成された翻訳機構を含みません。 :
 
-``` css
+``` php
 I18n::defaultFormatter('sprintf');
 ```
 

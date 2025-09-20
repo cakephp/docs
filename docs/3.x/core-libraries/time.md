@@ -246,7 +246,7 @@ The default locale in which dates are displayed when using `nice`
 [intl.default_locale](https://www.php.net/manual/en/intl.configuration.php#ini.intl.default-locale).
 You can, however, modify this default at runtime:
 
-``` css
+``` php
 Time::setDefaultLocale('es-ES'); // For any mutable DateTime
 FrozenTime::setDefaultLocale('es-ES'); // For any immutable DateTime
 Date::setDefaultLocale('es-ES'); // For any mutable Date
@@ -259,7 +259,7 @@ a different locale is specified directly in the formatting method.
 Likewise, it is possible to alter the default formatting string to be used for
 `i18nFormat`:
 
-``` css
+``` php
 Time::setToStringFormat(\IntlDateFormatter::SHORT); // For any mutable DateTime
 FrozenTime::setToStringFormat(\IntlDateFormatter::SHORT); // For any immutable DateTime
 Date::setToStringFormat(\IntlDateFormatter::SHORT); // For any mutable Date

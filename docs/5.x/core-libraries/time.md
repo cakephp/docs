@@ -301,7 +301,7 @@ a different locale is specified directly in the formatting method.
 Likewise, it is possible to alter the default formatting string to be used for
 `i18nFormat`:
 
-``` css
+``` php
 DateTime::setToStringFormat(\IntlDateFormatter::SHORT); // For any DateTime
 Date::setToStringFormat(\IntlDateFormatter::SHORT); // For any Date
 

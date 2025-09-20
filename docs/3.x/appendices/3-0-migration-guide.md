@@ -993,7 +993,7 @@ __('Today is a {0} day in {1}', 'Sunny', 'Spain');
 
 You can avoid rewriting your messages by using the old `sprintf` formatter:
 
-``` css
+``` php
 I18n::defaultFormatter('sprintf');
 ```
 
@@ -1076,7 +1076,7 @@ The folder and file classes have been renamed:
   of regular expressions, transliterations use simple string replacement. This
   yielded significant performance improvements:
 
-  ``` text
+  ``` php
   // Instead of
   Inflector::rules('transliteration', [
       '/ä|æ/' => 'ae',
@@ -1156,7 +1156,7 @@ help of the `intl` extension.
 
 In general, expressions looking like this:
 
-``` css
+``` php
 CakeTime::aMethod($date);
 ```
 

@@ -93,7 +93,7 @@ App::build(array(
 不必要なファイルの読み込みをしていた `inflections.php` は削除され、関連した機能は柔軟性を増強するため、メソッドに書き直されています。
 今やカスタム *inflections* を読み込むためには、 `Inflector::rules()` を使います。 :
 
-``` css
+``` php
 Inflector::rules('singular', array(
     'rules' => array(
       '/^(bil)er$/i' => '\1',

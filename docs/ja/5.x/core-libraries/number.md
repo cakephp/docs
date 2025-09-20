@@ -225,7 +225,7 @@ echo Number::format('123456.7890', [
 
 例:
 
-``` text
+``` php
 echo Number::ordinal(1);
 // 出力 '1st'
 
@@ -298,7 +298,7 @@ echo Number::formatDelta('123456.7890', [
 
 例:
 
-``` css
+``` php
 Number::config('en_IN', \NumberFormatter::CURRENCY, [
     'pattern' => '#,##,##0'
 ]);

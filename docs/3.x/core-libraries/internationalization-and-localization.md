@@ -440,7 +440,7 @@ minimum that is required for creating a translator is that the loader function
 should return a `Aura\Intl\Package` object. Once the code is in place you can
 use the translation functions as usual:
 
-``` text
+``` php
 // Prior to 3.5 use I18n::locale()
 I18n::setLocale('fr_FR');
 __d('animals', 'Dog'); // Returns "Chien"
@@ -542,7 +542,7 @@ If you'd like to change how packages are loaded for all packages, that don't
 have specific loaders set you can replace the fallback package loader by using
 the `_fallback` package:
 
-``` css
+``` php
 I18n::config('_fallback', function ($domain, $locale) {
     // Custom code that yields a package here.
 });
@@ -606,7 +606,7 @@ It is possible to set the default formatter for all translators created by
 CakePHP before they are used for the first time. This does not include manually
 created translators using the `setTranslator()` and `config()` methods:
 
-``` css
+``` php
 I18n::defaultFormatter('sprintf');
 ```
 

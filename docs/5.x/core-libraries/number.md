@@ -84,7 +84,7 @@ If `$currency` value is `null`, the default currency will be retrieved from
 `Cake\I18n\Number::defaultCurrency()`. To format currencies in an
 accounting format you should set the currency format:
 
-``` css
+``` php
 Number::setDefaultCurrencyFormat(Number::FORMAT_CURRENCY_ACCOUNTING);
 ```
 
@@ -251,7 +251,7 @@ This method will output an ordinal number.
 
 Examples:
 
-``` text
+``` php
 echo Number::ordinal(1);
 // Output '1st'
 
@@ -326,7 +326,7 @@ to various methods.
 
 Example:
 
-``` css
+``` php
 Number::config('en_IN', \NumberFormatter::CURRENCY, [
     'pattern' => '#,##,##0'
 ]);

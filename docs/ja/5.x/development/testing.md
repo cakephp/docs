@@ -874,7 +874,7 @@ public function testSendingEmails(): void
 
 `tearDown()` メソッドの中でモックを削除してください。 :
 
-``` css
+``` php
 TableRegistry::clear();
 ```
 

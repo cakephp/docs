@@ -48,7 +48,7 @@ multiple conversion pairs separated by `;`. You can find more info about
 transliterator identifiers
 [here](https://unicode-org.github.io/icu/userguide/transforms/general/#transliterator-identifiers):
 
-``` text
+``` php
 // apple puree
 Text::transliterate('apple purée');
 
@@ -74,7 +74,7 @@ options are:
 - `preserve` Specific non-word character to preserve. Defaults to `null`.
   For e.g. this option can be set to '.' to generate clean file names:
 
-  ``` text
+  ``` php
   // apple-puree
   Text::slug('apple purée');
 
@@ -91,7 +91,7 @@ The UUID method is used to generate unique identifiers as per `4122`. The
 UUID is a 128-bit string in the format of
 `485fc381-e790-47a3-9794-1337c0a8fe68`. :
 
-``` css
+``` php
 Text::uuid(); // 485fc381-e790-47a3-9794-1337c0a8fe68
 ```
 
@@ -124,7 +124,7 @@ $int = Text::parseFileSize('2GB');
 The insert method is used to create string templates and to allow for key/value
 replacements:
 
-``` css
+``` php
 Text::insert(
     'My name is :name and I am :age years old.',
     ['name' => 'Bob', 'age' => '65']

@@ -412,7 +412,7 @@ $articles = TableRegistry::getTableLocator()->get('Articles', [
 設定データは *エイリアスごと* に保存され、オブジェクトの
 `initialize()` メソッドで上書きできます。 :
 
-``` css
+``` php
 TableRegistry::config('Users', ['table' => 'my_users']);
 ```
 
@@ -429,7 +429,7 @@ TableRegistry::config('Users', ['table' => 'my_users']);
 テストケースで、レジストリーをフラッシュしたいこともあるでしょう。
 モックオブジェクトを使う時やテーブルの依存関係を設定する時に便利です。 :
 
-``` css
+``` php
 TableRegistry::clear();
 ```
 

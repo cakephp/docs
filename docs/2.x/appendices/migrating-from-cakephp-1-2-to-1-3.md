@@ -106,7 +106,7 @@ hit, and the related features have been refactored into a method to
 increase their flexibility. You now use `Inflector::rules()` to
 load custom inflections:
 
-``` css
+``` php
 Inflector::rules('singular', array(
     'rules' => array(
       '/^(bil)er$/i' => '\1',

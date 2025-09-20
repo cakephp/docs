@@ -790,7 +790,7 @@ CakePHP はそれぞれの部品を関連付けるにあたり、それぞれの
 カスタム inflection をロードするには `app/Config/bootstrap.php`
 ファイルの中に `Inflector::rules()` を書きます。:
 
-``` css
+``` php
 Inflector::rules('singular', array(
     'rules' => array(
         '/^(bil)er$/i' => '\1',
@@ -803,7 +803,7 @@ Inflector::rules('singular', array(
 
 または:
 
-``` css
+``` php
 Inflector::rules('plural', array('irregular' => array('phylum' => 'phyla')));
 ```
 

@@ -46,7 +46,7 @@ ICU のトランスリテレーション識別子は基本的に `<元のスク�
 [ここ](https://unicode-org.github.io/icu/userguide/transforms/general/#transliterator-identifiers)
 を参照してください。 :
 
-``` text
+``` php
 // apple puree
 Text::transliterate('apple purée');
 
@@ -73,7 +73,7 @@ slug をコントロールするオプション配列を渡すことができま
 - `preserve` 保持したい特定の非単語文字。デフォルトは `null` 。  
   たとえば、このオプションに '.' をセットすることでクリーンなファイル名を生成することができます。 :
 
-  ``` text
+  ``` php
   // apple-puree
   Text::slug('apple purée');
 
@@ -89,7 +89,7 @@ slug をコントロールするオプション配列を渡すことができま
 UUID メソッドは `4122` 準拠のユニークな識別子を生成するのに使います。
 UUID は `485fc381-e790-47a3-9794-1337c0a8fe68` というフォーマットの 128 ビットの文字列です。 :
 
-``` css
+``` php
 Text::uuid(); // 485fc381-e790-47a3-9794-1337c0a8fe68
 ```
 
@@ -118,7 +118,7 @@ $int = Text::parseFileSize('2GB');
 
 insert メソッドは文字列テンプレートを作り、key/value で置き換えるのに使います。 :
 
-``` css
+``` php
 Text::insert(
     'My name is :name and I am :age years old.',
     ['name' => 'Bob', 'age' => '65']

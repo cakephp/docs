@@ -931,7 +931,7 @@ public function testSendingEmails()
 
 In your `tearDown()` method be sure to remove the mock with:
 
-``` css
+``` php
 TableRegistry::clear();
 ```
 

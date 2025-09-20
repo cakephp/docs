@@ -316,7 +316,7 @@ Formatting
 > Use the 'accuracy' option to determine how precise the output should be.
 > You can use this to limit the output:
 >
-> ``` text
+> ``` php
 > // If $timestamp is 1 month, 1 week, 5 days and 6 hours ago
 > echo CakeTime::timeAgoInWords($timestamp, array(
 >     'accuracy' => array('month' => 'month'),

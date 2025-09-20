@@ -43,7 +43,7 @@ Both `pluralize` and `singularize()` work on most English nouns. If you need
 to support other languages, you can use [Inflection Configuration](#inflection-configuration) to
 customize the rules used:
 
-``` text
+``` php
 // Apples
 echo Inflector::pluralize('Apple');
 ```
@@ -63,7 +63,7 @@ echo Inflector::singularize('People');
 
 These methods are useful when creating class names, or property names:
 
-``` text
+``` php
 // ApplePie
 Inflector::camelize('Apple_pie')
 
@@ -80,7 +80,7 @@ underscore.
 This method is useful when converting underscored forms into "Title Case" forms
 for human readable values:
 
-``` text
+``` php
 // Apple Pie
 Inflector::humanize('apple_pie');
 ```
@@ -90,7 +90,7 @@ Inflector::humanize('apple_pie');
 When generating code, or using CakePHP's conventions you may need to inflect
 table names or class names:
 
-``` text
+``` php
 // UserProfileSetting
 Inflector::classify('user_profile_settings');
 
@@ -106,7 +106,7 @@ Inflector::tableize('UserProfileSetting');
 Variable names are often useful when doing meta-programming tasks that involve
 generating code or doing work based on conventions:
 
-``` text
+``` php
 // applePie
 Inflector::variable('apple_pie');
 ```
@@ -132,7 +132,7 @@ special cases.
 Define new inflection and transliteration rules for Inflector to use. Often,
 this method is used in your **config/bootstrap.php**:
 
-``` css
+``` php
 Inflector::rules('singular', ['/^(bil)er$/i' => '\1', '/^(inflec|contribu)tors$/i' => '\1ta']);
 Inflector::rules('uninflected', ['singulars']);
 Inflector::rules('irregular', ['phylum' => 'phyla']); // The key is singular form, value is plural form

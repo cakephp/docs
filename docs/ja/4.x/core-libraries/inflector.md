@@ -40,7 +40,7 @@ Inflector の組み込みメソッドの簡単な概要と、複数単語の引�
 もし、他の言語の対応が必要な場合、 使用するルールをカスタマイズするために
 [Inflection Configuration](#inflection-configuration) を使用することができます。 :
 
-``` text
+``` php
 // Apples
 echo Inflector::pluralize('Apple');
 ```
@@ -60,7 +60,7 @@ echo Inflector::singularize('People');
 
 これらのメソッドは、クラス名やプロパティー名を作成する時便利です。 :
 
-``` text
+``` php
 // ApplePie
 Inflector::camelize('Apple_pie')
 
@@ -76,7 +76,7 @@ underscore メソッドは、 キャメルケース形式の単語のみ変換�
 このメソッドは、アンダースコアー形式を人間が読みやすい値
 「タイトルケース」形式に変換する時に便利です。 :
 
-``` text
+``` php
 // Apple Pie
 Inflector::humanize('apple_pie');
 ```
@@ -86,7 +86,7 @@ Inflector::humanize('apple_pie');
 コードの生成や CakePHP の規約を使用する時、テーブル名やクラス名に加工するために
 必要になります。 :
 
-``` text
+``` php
 // UserProfileSetting
 Inflector::classify('user_profile_settings');
 
@@ -102,7 +102,7 @@ Inflector::tableize('UserProfileSetting');
 規約をもとにしたコード生成や仕事をするのに必要なメタプログログラミングの作業を行う時に、
 変数名はしばしば役に立ちます。 :
 
-``` text
+``` php
 // applePie
 Inflector::variable('apple_pie');
 ```
@@ -124,7 +124,7 @@ CakePHP に特別なケースを伝えることができます。
 Inflector で使用する新しい変換・翻訳の規則を定義します。しばしば、
 このメソッドは、 **config/bootstrap.php** 内で使用されます。 :
 
-``` css
+``` php
 Inflector::rules('singular', ['/^(bil)er$/i' => '\1', '/^(inflec|contribu)tors$/i' => '\1ta']);
 Inflector::rules('uninflected', ['singulars']);
 Inflector::rules('irregular', ['phylum' => 'phyla']); // キーは単数形、値は複数形

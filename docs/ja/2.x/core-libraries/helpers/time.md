@@ -308,7 +308,7 @@ Time ヘルパーのメソッドは多くが \$timezone パラメーターを持
 > どのくらい精度で出力するかを指定するために 'accuracy' オプションを使用してください。
 > 出力を制限するためにこれを使用できます。 :
 >
-> ``` text
+> ``` php
 > // $timestamp が '1 month, 1 week, 5 days and 6 hours ago' の場合
 > echo CakeTime::timeAgoInWords($timestamp, array(
 >     'accuracy' => array('month' => 'month'),

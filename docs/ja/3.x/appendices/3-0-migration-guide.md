@@ -1022,7 +1022,7 @@ __('Today is a {0} day in {1}', 'Sunny', 'Spain');
 
 古い `sprintf` フォーマッタを使用して、あなたのメッセージの書き換えを避けることができます。 :
 
-``` css
+``` php
 I18n::defaultFormatter('sprintf');
 ```
 
@@ -1108,7 +1108,7 @@ Set クラスは、削除されました。代わりに Hash クラスを使用�
   正規表現の代わりに、文字変換は単純な文字列の置換を使用しています。
   これは、大幅なパフォーマンス向上をもたらした。 :
 
-  ``` text
+  ``` php
   // 以下の代わりに
   Inflector::rules('transliteration', [
       '/ä|æ/' => 'ae',
@@ -1191,7 +1191,7 @@ Time はもう static メソッドのコレクションではありません、�
 
 一般的には、このような式は:
 
-``` css
+``` php
 CakeTime::aMethod($date);
 ```
 

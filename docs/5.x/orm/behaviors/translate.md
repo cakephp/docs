@@ -139,7 +139,7 @@ same API to manage translations.
 Now, select a language to be used for retrieving entities by changing
 the application language, which will affect all translations:
 
-``` text
+``` php
 // In the Articles controller. Change the locale to Spanish, for example
 I18n::setLocale('es');
 ```

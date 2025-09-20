@@ -786,7 +786,7 @@ special cases.
 You can use `Inflector::rules()` in the file
 `app/Config/bootstrap.php` to load custom inflections:
 
-``` css
+``` php
 Inflector::rules('singular', array(
     'rules' => array(
         '/^(bil)er$/i' => '\1',
@@ -799,7 +799,7 @@ Inflector::rules('singular', array(
 
 or:
 
-``` css
+``` php
 Inflector::rules('plural', array('irregular' => array('phylum' => 'phyla')));
 ```
 
