@@ -12,7 +12,7 @@ import { getVersionByPath } from '../cake.js'
 * @param {Object} options - plugin options
 * @returns {void}
 */
-export function versionReplacer(md, options = {}) {
+export function versionReplacer(md, _options = {}) {
   // Store original render method
   const originalRender = md.render.bind(md)
 

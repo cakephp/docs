@@ -12,7 +12,7 @@
     before = () => { visible.value = true }
     after = () => {
       // Small delay to ensure rendering is done
-      setTimeout(() => { visible.value = false }, 100)
+      setTimeout(() => { visible.value = false }, 50)
     }
     router.onBeforeRouteChange = before
     router.onAfterRouteChange = after

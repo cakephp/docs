@@ -16,9 +16,6 @@ import {
   sidebarConfig
 } from './cake/config.js'
 
-// Re-export configuration for backward compatibility
-export { supportedLocales, versions, localizedVersions, sidebarConfig }
-
 // Helper functions for version management
 export function getCurrentVersion(locale = 'en') {
   const versionList = getVersionsByLocale(locale)
@@ -26,17 +23,14 @@ export function getCurrentVersion(locale = 'en') {
 }
 
 export function getVersionsByLocale(locale = 'en') {
-  // Return English versions by default
   if (locale === 'en') {
     return versions
   }
 
-  // Check if we have localized versions for this locale
   if (localizedVersions[locale]) {
     return localizedVersions[locale]
   }
 
-  // Fallback to English versions if locale not found
   return versions
 }
 
@@ -44,17 +38,14 @@ export function getVersionByPath(path) {
   // Detect locale from path
   const locale = detectLocaleFromPath(path)
 
-  // Get version list for detected locale
   const versionList = getVersionsByLocale(locale)
 
-  // Check for version-specific paths in the detected locale
   for (const version of versionList) {
     if (path.startsWith(version.publicPath)) {
       return version
     }
   }
 
-  // Default to current version for the detected locale
   return getCurrentVersion(locale)
 }
 
@@ -68,17 +59,56 @@ export function getAllVersionPaths(locale = 'en') {
   return versionList.map(v => v.publicPath)
 }
 
-// Navigation configuration for version dropdown
-export function getVersionNavItems(locale = 'en') {
-  const versionList = getVersionsByLocale(locale)
-  return versionList.map(version => ({
-    text: version.displayName,
-    link: version.publicPath,
-    path: version.publicPath,
-    version: version.version
-  }))
+export function convertPathToVersion(currentPath, targetVersion, locale = 'en') {
+  const currentLocale = detectLocaleFromPath(currentPath)
+  const currentVersionObj = getVersionByPath(currentPath)
+
+  if (currentVersionObj.version === targetVersion) {
+    return currentPath
+  }
+
+  const versionList = getVersionsByLocale(currentLocale)
+  const targetVersionObj = versionList.find(v => v.version === targetVersion)
+
+  if (!targetVersionObj) {
+    return locale === 'en' ? `/${targetVersion}.x/` : `/${locale}/${targetVersion}.x/`
+  }
+
+  let relativePath = currentPath
+  if (relativePath.startsWith(currentVersionObj.publicPath)) {
+    relativePath = relativePath.substring(currentVersionObj.publicPath.length)
+  }
+
+  if (!relativePath || relativePath === '' || relativePath === '/') {
+    return targetVersionObj.publicPath
+  }
+
+  let targetPath = targetVersionObj.publicPath
+  if (!targetPath.endsWith('/')) {
+    targetPath += '/'
+  }
+  if (relativePath.startsWith('/')) {
+    relativePath = relativePath.substring(1)
+  }
+
+  return targetPath + relativePath
 }
 
+export function getVersionNavItems(locale = 'en', currentPath = null) {
+  const versionList = getVersionsByLocale(locale)
+  return versionList.map(version => {
+    const link = currentPath
+      ? convertPathToVersion(currentPath, version.version, locale)
+      : version.publicPath
+
+    return {
+      text: version.displayName,
+      link: link,
+      path: version.publicPath,
+      version: version.version
+    }
+  })
+}
 
 // Helper function to get supported locales
 export function getSupportedLocales() {
@@ -98,7 +128,7 @@ export function detectLocaleFromPath(path) {
       return locale
     }
   }
-  // Default to 'en' if no locale prefix found
+
   return 'en'
 }
 

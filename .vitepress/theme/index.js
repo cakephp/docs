@@ -6,7 +6,7 @@ import { h } from "vue";
 
 export default {
   extends: DefaultTheme,
-  enhanceApp({ app, router, siteData }) {
+  enhanceApp({ app, _router, _siteData }) {
     app.component('VersionDropdown', VersionDropdown)
   },
   Layout() {

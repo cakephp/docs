@@ -7,7 +7,8 @@
 import { readFileSync } from 'fs'
 import { fileURLToPath } from 'url'
 import { dirname, join } from 'path'
-import { versions, getCurrentVersion, sidebarConfig, localizedVersions, getVersionsByLocale } from './cake.js'
+import { versions, sidebarConfig, localizedVersions } from './cake/config.js'
+import { getVersionsByLocale } from './cake.js'
 
 // Get current directory for JSON imports
 const __filename = fileURLToPath(import.meta.url)

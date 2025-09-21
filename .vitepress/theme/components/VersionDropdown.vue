@@ -1,25 +1,23 @@
 <script setup>
-import { ref, computed, onMounted, onUnmounted } from 'vue'
-import { useRoute, useData, withBase } from 'vitepress'
+import { ref, computed, onMounted, onUnmounted, nextTick } from 'vue'
+import { useRoute, useRouter, useData, withBase } from 'vitepress'
 import { getVersionNavItems, getVersionByPath, getVersionLabel, isLocaleSupported } from '../../cake.js'
 
 const route = useRoute()
-const { localeIndex, site } = useData()
+const router = useRouter()
+const { localeIndex } = useData()
 const isOpen = ref(false)
+const pendingVersionNavigation = ref(null)
 
 // Get current locale from VitePress's locale system
 const currentLocale = computed(() => {
-  // localeIndex gives us the current locale (e.g., 'ja', 'root' for English)
-  // Convert 'root' to 'en' for our system
   const locale = localeIndex.value === 'root' ? 'en' : localeIndex.value
-
-  // Fallback to 'en' if locale is not supported by our version system
   return isLocaleSupported(locale) ? locale : 'en'
 })
 
 // Get version navigation items for current locale
 const versionNavItems = computed(() => {
-  return getVersionNavItems(currentLocale.value)
+  return getVersionNavItems(currentLocale.value, route.path)
 })
 
 const currentPath = computed(() => {
@@ -39,15 +37,57 @@ const closeDropdown = () => {
   isOpen.value = false
 }
 
-// Close dropdown when clicking outside
+const handleVersionClick = (version, event) => {
+  closeDropdown()
+
+  pendingVersionNavigation.value = {
+    fallbackPath: version.path,
+    targetPath: version.link
+  }
+}
+
 const handleClickOutside = (event) => {
   if (!event.target.closest('.version-dropdown')) {
     closeDropdown()
   }
 }
 
+// Check for 404 after route changes
+const check404AndFallback = () => {
+  if (!pendingVersionNavigation.value) return
+
+  setTimeout(() => {
+    const is404 = document.title.includes('404') ||
+                  document.querySelector('.not-found') ||
+                  document.querySelector('[class*="404"]') ||
+                  route.path.includes('404')
+
+    if (is404) {
+      router.go(pendingVersionNavigation.value.fallbackPath)
+    }
+
+    pendingVersionNavigation.value = null
+  }, 10)
+}
+
 onMounted(() => {
   document.addEventListener('click', handleClickOutside)
+
+  // Store the existing onAfterRouteChange handler
+  const originalOnAfterRouteChange = router.onAfterRouteChange
+
+  // Add our logic to the existing hook
+  router.onAfterRouteChange = () => {
+    // Call the original handler first
+    if (originalOnAfterRouteChange) {
+      originalOnAfterRouteChange()
+    }
+
+    // Then check for 404s
+    if (pendingVersionNavigation.value) {
+      check404AndFallback()
+    }
+  }
 })
 
 onUnmounted(() => {
@@ -66,7 +106,7 @@ onUnmounted(() => {
         <a
         :href="withBase(version.link)"
         :class="{ active: withBase(version.path) === currentPath }"
-        @click="closeDropdown"
+        @click="handleVersionClick(version, $event)"
         >
         {{ version.text }}
       </a>
