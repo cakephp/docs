@@ -13,7 +13,7 @@
     "docs:dev": "vitepress dev",
     "docs:build": "vitepress build",
     "docs:preview": "vitepress preview",
-    "lint": "eslint .vitepress/**/*.js validate-sidebar.js",
-    "lint:fix": "eslint .vitepress/**/*.js validate-sidebar.js --fix"
+    "lint": "eslint .vitepress/ validate-sidebar.js",
+    "lint:fix": "eslint .vitepress/ validate-sidebar.js --fix"
   }
 }

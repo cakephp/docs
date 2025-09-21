@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, onMounted, onUnmounted, nextTick } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useRoute, useRouter, useData, withBase } from 'vitepress'
 import { getVersionNavItems, getVersionByPath, getVersionLabel, isLocaleSupported } from '../../cake.js'
 
@@ -37,7 +37,7 @@ const closeDropdown = () => {
   isOpen.value = false
 }
 
-const handleVersionClick = (version, event) => {
+const handleVersionClick = (version, _event) => {
   closeDropdown()
 
   pendingVersionNavigation.value = {
@@ -97,22 +97,35 @@ onUnmounted(() => {
 
 <template>
   <div class="version-dropdown">
-    <button class="nav-dropdown-link" @click="toggleDropdown" :aria-expanded="isOpen">
+    <button
+      class="nav-dropdown-link"
+      :aria-expanded="isOpen"
+      @click="toggleDropdown"
+    >
       {{ currentVersionText }}
-      <span class="dropdown-arrow" :class="{ open: isOpen }">▼</span>
+      <span
+        class="dropdown-arrow"
+        :class="{ open: isOpen }"
+      >▼</span>
     </button>
-    <ul v-show="isOpen" class="nav-dropdown-links">
-      <li v-for="version in versionNavItems" :key="version.path">
+    <ul
+      v-show="isOpen"
+      class="nav-dropdown-links"
+    >
+      <li
+        v-for="version in versionNavItems"
+        :key="version.path"
+      >
         <a
-        :href="withBase(version.link)"
-        :class="{ active: withBase(version.path) === currentPath }"
-        @click="handleVersionClick(version, $event)"
+          :href="withBase(version.link)"
+          :class="{ active: withBase(version.path) === currentPath }"
+          @click="handleVersionClick(version, $event)"
         >
-        {{ version.text }}
-      </a>
-    </li>
-  </ul>
-</div>
+          {{ version.text }}
+        </a>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <style scoped>

@@ -5,8 +5,8 @@
   const visible = ref(false)
   const router = useRouter()
 
-  let before: (() => void) | null = null
-  let after: (() => void) | null = null
+  let before = null
+  let after = null
 
   onMounted(() => {
     before = () => { visible.value = true }
@@ -30,8 +30,11 @@
 
 <template>
   <transition name="fade">
-    <div v-if="visible" class="page-loader">
-      <div class="page-loader-bar"></div>
+    <div
+      v-if="visible"
+      class="page-loader"
+    >
+      <div class="page-loader-bar" />
     </div>
   </transition>
 </template>
