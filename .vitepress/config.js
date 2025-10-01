@@ -41,7 +41,9 @@ export default defineConfig({
     socialLinks: [
       { icon: 'github', link: 'https://github.com/cakephp/cakephp' },
     ],
-
+    outline: {
+      level: [2, 3],
+    },
     // Let's only index latest version in search to speed up indexing.
     search: {
       provider: 'local',

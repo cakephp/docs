@@ -1,229 +1,531 @@
 {
-  "/ja/3.x/": [
-    {
-      "text": "はじめに",
-      "collapsed": false,
-      "items": [
-        { "text": "インストール", "link": "/ja/3.x/installation" },
-        { "text": "クイックスタート", "link": "/ja/3.x/quickstart" },
-        { "text": "イントロダクション", "link": "/ja/3.x/intro" },
-        { "text": "規約", "link": "/ja/3.x/intro/conventions" },
-        { "text": "CakePHP フォルダ構造", "link": "/ja/3.x/intro/cakephp-folder-structure" },
-        { "text": "ヘルプの取得", "link": "/ja/3.x/intro/where-to-get-help" }
-      ]
-    },
-    {
-      "text": "チュートリアル & 例",
-      "collapsed": true,
-      "items": [
-        { "text": "概要", "link": "/ja/3.x/tutorials-and-examples" },
-        { "text": "ブログチュートリアル", "collapsed": true, "items": [
-          { "text": "パート 1", "link": "/ja/3.x/tutorials-and-examples/blog/blog" },
-          { "text": "パート 2", "link": "/ja/3.x/tutorials-and-examples/blog/part-two" },
-          { "text": "パート 3", "link": "/ja/3.x/tutorials-and-examples/blog/part-three" }
-        ]},
-        { "text": "ブログ認証サンプル", "collapsed": true, "items": [
-          { "text": "認証", "link": "/ja/3.x/tutorials-and-examples/blog-auth-example/auth" }
-        ]},
-        { "text": "ブックマークチュートリアル", "collapsed": true, "items": [
-          { "text": "イントロダクション", "link": "/ja/3.x/tutorials-and-examples/bookmarks/intro" },
-          { "text": "パート2", "link": "/ja/3.x/tutorials-and-examples/bookmarks/part-two" }
-        ]},
-        { "text": "CMS チュートリアル", "collapsed": true, "items": [
-          { "text": "インストール", "link": "/ja/3.x/tutorials-and-examples/cms/installation" },
-          { "text": "データベース", "link": "/ja/3.x/tutorials-and-examples/cms/database" },
-          { "text": "記事コントローラー", "link": "/ja/3.x/tutorials-and-examples/cms/articles-controller" },
-          { "text": "タグとユーザー", "link": "/ja/3.x/tutorials-and-examples/cms/tags-and-users" },
-          { "text": "認証", "link": "/ja/3.x/tutorials-and-examples/cms/authentication" }
-        ]}
-      ]
-    },
-    {
-      "text": "コントローラー",
-      "collapsed": true,
-      "items": [
-        { "text": "コントローラー", "link": "/ja/3.x/controllers" },
-        { "text": "リクエスト & レスポンス", "link": "/ja/3.x/controllers/request-response" },
-        { "text": "ミドルウェア", "link": "/ja/3.x/controllers/middleware" },
-        { "text": "ページコントローラー", "link": "/ja/3.x/controllers/pages-controller" },
-        { "text": "コンポーネント", "collapsed": true, "items": [
-          { "text": "コンポーネント", "link": "/ja/3.x/controllers/components" },
-          { "text": "認証", "link": "/ja/3.x/controllers/components/authentication" },
-          { "text": "クッキー", "link": "/ja/3.x/controllers/components/cookie" },
-          { "text": "CSRF", "link": "/ja/3.x/controllers/components/csrf" },
-          { "text": "フラッシュ", "link": "/ja/3.x/controllers/components/flash" },
-          { "text": "ページネーション", "link": "/ja/3.x/controllers/components/pagination" },
-          { "text": "リクエストハンドリング", "link": "/ja/3.x/controllers/components/request-handling" },
-          { "text": "セキュリティ", "link": "/ja/3.x/controllers/components/security" }
-        ]}
-      ]
-    },
-    {
-      "text": "ビュー",
-      "collapsed": true,
-      "items": [
-        { "text": "ビュー", "link": "/ja/3.x/views" },
-        { "text": "セル", "link": "/ja/3.x/views/cells" },
-        { "text": "JSON と XML ビュー", "link": "/ja/3.x/views/json-and-xml-views" },
-        { "text": "テーマ", "link": "/ja/3.x/views/themes" },
-        { "text": "ヘルパー", "collapsed": true, "items": [
-          { "text": "ヘルパー", "link": "/ja/3.x/views/helpers" },
-          { "text": "パンくずリスト", "link": "/ja/3.x/views/helpers/breadcrumbs" },
-          { "text": "フラッシュ", "link": "/ja/3.x/views/helpers/flash" },
-          { "text": "フォーム", "link": "/ja/3.x/views/helpers/form" },
-          { "text": "HTML", "link": "/ja/3.x/views/helpers/html" },
-          { "text": "数値", "link": "/ja/3.x/views/helpers/number" },
-          { "text": "ページネーター", "link": "/ja/3.x/views/helpers/paginator" },
-          { "text": "RSS", "link": "/ja/3.x/views/helpers/rss" },
-          { "text": "セッション", "link": "/ja/3.x/views/helpers/session" },
-          { "text": "テキスト", "link": "/ja/3.x/views/helpers/text" },
-          { "text": "時間", "link": "/ja/3.x/views/helpers/time" },
-          { "text": "URL", "link": "/ja/3.x/views/helpers/url" }
-        ]}
-      ]
-    },
-    {
-      "text": "ORM",
-      "collapsed": true,
-      "items": [
-        { "text": "ORM", "link": "/ja/3.x/orm" },
-        { "text": "データベース基礎", "link": "/ja/3.x/orm/database-basics" },
-        { "text": "クエリビルダー", "link": "/ja/3.x/orm/query-builder" },
-        { "text": "テーブルオブジェクト", "link": "/ja/3.x/orm/table-objects" },
-        { "text": "エンティティ", "link": "/ja/3.x/orm/entities" },
-        { "text": "アソシエーション", "link": "/ja/3.x/orm/associations" },
-        { "text": "データの取得と結果セット", "link": "/ja/3.x/orm/retrieving-data-and-resultsets" },
-        { "text": "データの保存", "link": "/ja/3.x/orm/saving-data" },
-        { "text": "データの削除", "link": "/ja/3.x/orm/deleting-data" },
-        { "text": "バリデーション", "link": "/ja/3.x/orm/validation" },
-        { "text": "スキーマシステム", "link": "/ja/3.x/orm/schema-system" },
-        { "text": "ビヘイビア", "collapsed": true, "items": [
-          { "text": "ビヘイビア", "link": "/ja/3.x/orm/behaviors" },
-          { "text": "カウンターキャッシュ", "link": "/ja/3.x/orm/behaviors/counter-cache" },
-          { "text": "タイムスタンプ", "link": "/ja/3.x/orm/behaviors/timestamp" },
-          { "text": "翻訳", "link": "/ja/3.x/orm/behaviors/translate" },
-          { "text": "ツリー", "link": "/ja/3.x/orm/behaviors/tree" }
-        ]}
-      ]
-    },
-    {
-      "text": "コアライブラリ",
-      "collapsed": true,
-      "items": [
-        { "text": "アプリ", "link": "/ja/3.x/core-libraries/app" },
-        { "text": "キャッシュ", "link": "/ja/3.x/core-libraries/caching" },
-        { "text": "コレクション", "link": "/ja/3.x/core-libraries/collections" },
-        { "text": "メール", "link": "/ja/3.x/core-libraries/email" },
-        { "text": "イベント", "link": "/ja/3.x/core-libraries/events" },
-        { "text": "ファイル & フォルダ", "link": "/ja/3.x/core-libraries/file-folder" },
-        { "text": "フォーム", "link": "/ja/3.x/core-libraries/form" },
-        { "text": "グローバル定数と関数", "link": "/ja/3.x/core-libraries/global-constants-and-functions" },
-        { "text": "ハッシュ", "link": "/ja/3.x/core-libraries/hash" },
-        { "text": "HTTP クライアント", "link": "/ja/3.x/core-libraries/httpclient" },
-        { "text": "インフレクター", "link": "/ja/3.x/core-libraries/inflector" },
-        { "text": "国際化とローカライゼーション", "link": "/ja/3.x/core-libraries/internationalization-and-localization" },
-        { "text": "ログ", "link": "/ja/3.x/core-libraries/logging" },
-        { "text": "数値", "link": "/ja/3.x/core-libraries/number" },
-        { "text": "レジストリオブジェクト", "link": "/ja/3.x/core-libraries/registry-objects" },
-        { "text": "セキュリティ", "link": "/ja/3.x/core-libraries/security" },
-        { "text": "テキスト", "link": "/ja/3.x/core-libraries/text" },
-        { "text": "時間", "link": "/ja/3.x/core-libraries/time" },
-        { "text": "バリデーション", "link": "/ja/3.x/core-libraries/validation" },
-        { "text": "XML", "link": "/ja/3.x/core-libraries/xml" }
-      ]
-    },
-    {
-      "text": "コンソール & シェル",
-      "collapsed": true,
-      "items": [
-        { "text": "コンソールツール、シェル & タスク", "link": "/ja/3.x/console-and-shells" },
-        { "text": "コマンド", "link": "/ja/3.x/console-and-shells/commands" },
-        { "text": "入力出力", "link": "/ja/3.x/console-and-shells/input-output" },
-        { "text": "オプションパーサー", "link": "/ja/3.x/console-and-shells/option-parsers" },
-        { "text": "キャッシュ", "link": "/ja/3.x/console-and-shells/cache" },
-        { "text": "補完シェル", "link": "/ja/3.x/console-and-shells/completion-shell" },
-        { "text": "クロンジョブ", "link": "/ja/3.x/console-and-shells/cron-jobs" },
-        { "text": "ヘルパー", "link": "/ja/3.x/console-and-shells/helpers" },
-        { "text": "i18nシェル", "link": "/ja/3.x/console-and-shells/i18n-shell" },
-        { "text": "ORMキャッシュ", "link": "/ja/3.x/console-and-shells/orm-cache" },
-        { "text": "プラグインシェル", "link": "/ja/3.x/console-and-shells/plugin-shell" },
-        { "text": "REPL", "link": "/ja/3.x/console-and-shells/repl" },
-        { "text": "ルートシェル", "link": "/ja/3.x/console-and-shells/routes-shell" },
-        { "text": "スキーマキャッシュ", "link": "/ja/3.x/console-and-shells/schema-cache" },
-        { "text": "サーバーシェル", "link": "/ja/3.x/console-and-shells/server-shell" },
-        { "text": "シェル", "link": "/ja/3.x/console-and-shells/shells" },
-        { "text": "アップグレードシェル", "link": "/ja/3.x/console-and-shells/upgrade-shell" }
-      ]
-    },
-    {
-      "text": "開発",
-      "collapsed": true,
-      "items": [
-        { "text": "アプリケーション", "link": "/ja/3.x/development/application" },
-        { "text": "設定", "link": "/ja/3.x/development/configuration" },
-        { "text": "ルーティング", "link": "/ja/3.x/development/routing" },
-        { "text": "セッション", "link": "/ja/3.x/development/sessions" },
-        { "text": "デバッグ", "link": "/ja/3.x/development/debugging" },
-        { "text": "ディスパッチフィルター", "link": "/ja/3.x/development/dispatch-filters" },
-        { "text": "エラー", "link": "/ja/3.x/development/errors" },
-        { "text": "REST", "link": "/ja/3.x/development/rest" },
-        { "text": "テスト", "link": "/ja/3.x/development/testing" }
-      ]
-    },
-    {
-      "text": "セキュリティ",
-      "collapsed": true,
-      "items": [
-        { "text": "セキュリティ", "link": "/ja/3.x/security" }
-      ]
-    },
-    {
-      "text": "貢献",
-      "collapsed": true,
-      "items": [
-        { "text": "貢献", "link": "/ja/3.x/contributing" },
-        { "text": "後方互換性", "link": "/ja/3.x/contributing/backwards-compatibility" },
-        { "text": "CakePHP コーディング規約", "link": "/ja/3.x/contributing/cakephp-coding-conventions" },
-        { "text": "コード", "link": "/ja/3.x/contributing/code" },
-        { "text": "ドキュメント", "link": "/ja/3.x/contributing/documentation" },
-        { "text": "チケット", "link": "/ja/3.x/contributing/tickets" }
-      ]
-    },
-    {
-      "text": "付録",
-      "collapsed": true,
-      "items": [
-        { "text": "付録", "link": "/ja/3.x/appendices" },
-        { "text": "3.x 移行ガイド", "link": "/ja/3.x/appendices/3-x-migration-guide" },
-        { "text": "3.0 移行ガイド", "link": "/ja/3.x/appendices/3-0-migration-guide" },
-        { "text": "3.1 移行ガイド", "link": "/ja/3.x/appendices/3-1-migration-guide" },
-        { "text": "3.2 移行ガイド", "link": "/ja/3.x/appendices/3-2-migration-guide" },
-        { "text": "3.3 移行ガイド", "link": "/ja/3.x/appendices/3-3-migration-guide" },
-        { "text": "3.4 移行ガイド", "link": "/ja/3.x/appendices/3-4-migration-guide" },
-        { "text": "3.5 移行ガイド", "link": "/ja/3.x/appendices/3-5-migration-guide" },
-        { "text": "3.6 移行ガイド", "link": "/ja/3.x/appendices/3-6-migration-guide" },
-        { "text": "3.7 移行ガイド", "link": "/ja/3.x/appendices/3-7-migration-guide" },
-        { "text": "3.8 移行ガイド", "link": "/ja/3.x/appendices/3-8-migration-guide" },
-        { "text": "3.9 移行ガイド", "link": "/ja/3.x/appendices/3-9-migration-guide" },
-        { "text": "ORM移行", "link": "/ja/3.x/appendices/orm-migration" },
-        { "text": "CakePHP 開発プロセス", "link": "/ja/3.x/appendices/cakephp-development-process" },
-        { "text": "用語集", "link": "/ja/3.x/appendices/glossary" }
-      ]
-    },
-    {
-      "text": "追加トピック",
-      "collapsed": true,
-      "items": [
-        { "text": "プラグイン", "link": "/ja/3.x/plugins" },
-        { "text": "デプロイメント", "link": "/ja/3.x/deployment" },
-        { "text": "トピック", "link": "/ja/3.x/topics" },
-        { "text": "アップグレードツール", "link": "/ja/3.x/upgrade-tool" },
-        { "text": "Chronos", "link": "/ja/3.x/chronos" },
-        { "text": "Debug Kit", "link": "/ja/3.x/debug-kit" },
-        { "text": "Elasticsearch", "link": "/ja/3.x/elasticsearch" },
-        { "text": "マイグレーション", "link": "/ja/3.x/migrations" },
-        { "text": "Phinx", "link": "/ja/3.x/phinx" }
-      ]
-    }
-  ]
+    "/ja/3.x/": [
+        {
+            "text": "はじめに",
+            "collapsed": false,
+            "items": [
+                { "text": "インストール", "link": "/ja/3.x/installation" },
+                { "text": "クイックスタート", "link": "/ja/3.x/quickstart" },
+                { "text": "イントロダクション", "link": "/ja/3.x/intro" },
+                { "text": "規約", "link": "/ja/3.x/intro/conventions" },
+                {
+                    "text": "CakePHP フォルダ構造",
+                    "link": "/ja/3.x/intro/cakephp-folder-structure"
+                },
+                {
+                    "text": "ヘルプの取得",
+                    "link": "/ja/3.x/intro/where-to-get-help"
+                }
+            ]
+        },
+        {
+            "text": "チュートリアル & 例",
+            "collapsed": true,
+            "items": [
+                { "text": "概要", "link": "/ja/3.x/tutorials-and-examples" },
+                {
+                    "text": "ブログチュートリアル",
+                    "collapsed": true,
+                    "items": [
+                        {
+                            "text": "パート 1",
+                            "link": "/ja/3.x/tutorials-and-examples/blog/blog"
+                        },
+                        {
+                            "text": "パート 2",
+                            "link": "/ja/3.x/tutorials-and-examples/blog/part-two"
+                        },
+                        {
+                            "text": "パート 3",
+                            "link": "/ja/3.x/tutorials-and-examples/blog/part-three"
+                        }
+                    ]
+                },
+                {
+                    "text": "ブログ認証サンプル",
+                    "collapsed": true,
+                    "items": [
+                        {
+                            "text": "認証",
+                            "link": "/ja/3.x/tutorials-and-examples/blog-auth-example/auth"
+                        }
+                    ]
+                },
+                {
+                    "text": "ブックマークチュートリアル",
+                    "collapsed": true,
+                    "items": [
+                        {
+                            "text": "イントロダクション",
+                            "link": "/ja/3.x/tutorials-and-examples/bookmarks/intro"
+                        },
+                        {
+                            "text": "パート2",
+                            "link": "/ja/3.x/tutorials-and-examples/bookmarks/part-two"
+                        }
+                    ]
+                },
+                {
+                    "text": "CMS チュートリアル",
+                    "collapsed": true,
+                    "items": [
+                        {
+                            "text": "インストール",
+                            "link": "/ja/3.x/tutorials-and-examples/cms/installation"
+                        },
+                        {
+                            "text": "データベース",
+                            "link": "/ja/3.x/tutorials-and-examples/cms/database"
+                        },
+                        {
+                            "text": "記事コントローラー",
+                            "link": "/ja/3.x/tutorials-and-examples/cms/articles-controller"
+                        },
+                        {
+                            "text": "タグとユーザー",
+                            "link": "/ja/3.x/tutorials-and-examples/cms/tags-and-users"
+                        },
+                        {
+                            "text": "認証",
+                            "link": "/ja/3.x/tutorials-and-examples/cms/authentication"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "text": "コントローラー",
+            "collapsed": true,
+            "items": [
+                { "text": "コントローラー", "link": "/ja/3.x/controllers" },
+                {
+                    "text": "リクエスト & レスポンス",
+                    "link": "/ja/3.x/controllers/request-response"
+                },
+                {
+                    "text": "ミドルウェア",
+                    "link": "/ja/3.x/controllers/middleware"
+                },
+                {
+                    "text": "ページコントローラー",
+                    "link": "/ja/3.x/controllers/pages-controller"
+                },
+                {
+                    "text": "コンポーネント",
+                    "collapsed": true,
+                    "items": [
+                        {
+                            "text": "コンポーネント",
+                            "link": "/ja/3.x/controllers/components"
+                        },
+                        {
+                            "text": "認証",
+                            "link": "/ja/3.x/controllers/components/authentication"
+                        },
+                        {
+                            "text": "クッキー",
+                            "link": "/ja/3.x/controllers/components/cookie"
+                        },
+                        {
+                            "text": "CSRF",
+                            "link": "/ja/3.x/controllers/components/csrf"
+                        },
+                        {
+                            "text": "フラッシュ",
+                            "link": "/ja/3.x/controllers/components/flash"
+                        },
+                        {
+                            "text": "ページネーション",
+                            "link": "/ja/3.x/controllers/components/pagination"
+                        },
+                        {
+                            "text": "リクエストハンドリング",
+                            "link": "/ja/3.x/controllers/components/request-handling"
+                        },
+                        {
+                            "text": "セキュリティ",
+                            "link": "/ja/3.x/controllers/components/security"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "text": "ビュー",
+            "collapsed": true,
+            "items": [
+                { "text": "ビュー", "link": "/ja/3.x/views" },
+                { "text": "セル", "link": "/ja/3.x/views/cells" },
+                {
+                    "text": "JSON と XML ビュー",
+                    "link": "/ja/3.x/views/json-and-xml-views"
+                },
+                { "text": "テーマ", "link": "/ja/3.x/views/themes" },
+                {
+                    "text": "ヘルパー",
+                    "collapsed": true,
+                    "items": [
+                        { "text": "ヘルパー", "link": "/ja/3.x/views/helpers" },
+                        {
+                            "text": "パンくずリスト",
+                            "link": "/ja/3.x/views/helpers/breadcrumbs"
+                        },
+                        {
+                            "text": "フラッシュ",
+                            "link": "/ja/3.x/views/helpers/flash"
+                        },
+                        {
+                            "text": "フォーム",
+                            "link": "/ja/3.x/views/helpers/form"
+                        },
+                        {
+                            "text": "HTML",
+                            "link": "/ja/3.x/views/helpers/html"
+                        },
+                        {
+                            "text": "数値",
+                            "link": "/ja/3.x/views/helpers/number"
+                        },
+                        {
+                            "text": "ページネーター",
+                            "link": "/ja/3.x/views/helpers/paginator"
+                        },
+                        { "text": "RSS", "link": "/ja/3.x/views/helpers/rss" },
+                        {
+                            "text": "セッション",
+                            "link": "/ja/3.x/views/helpers/session"
+                        },
+                        {
+                            "text": "テキスト",
+                            "link": "/ja/3.x/views/helpers/text"
+                        },
+                        {
+                            "text": "時間",
+                            "link": "/ja/3.x/views/helpers/time"
+                        },
+                        { "text": "URL", "link": "/ja/3.x/views/helpers/url" }
+                    ]
+                }
+            ]
+        },
+        {
+            "text": "ORM",
+            "collapsed": true,
+            "items": [
+                { "text": "ORM", "link": "/ja/3.x/orm" },
+                {
+                    "text": "データベース基礎",
+                    "link": "/ja/3.x/orm/database-basics"
+                },
+                {
+                    "text": "クエリビルダー",
+                    "link": "/ja/3.x/orm/query-builder"
+                },
+                {
+                    "text": "テーブルオブジェクト",
+                    "link": "/ja/3.x/orm/table-objects"
+                },
+                { "text": "エンティティ", "link": "/ja/3.x/orm/entities" },
+                {
+                    "text": "アソシエーション",
+                    "link": "/ja/3.x/orm/associations"
+                },
+                {
+                    "text": "データの取得と結果セット",
+                    "link": "/ja/3.x/orm/retrieving-data-and-resultsets"
+                },
+                { "text": "データの保存", "link": "/ja/3.x/orm/saving-data" },
+                { "text": "データの削除", "link": "/ja/3.x/orm/deleting-data" },
+                { "text": "バリデーション", "link": "/ja/3.x/orm/validation" },
+                {
+                    "text": "スキーマシステム",
+                    "link": "/ja/3.x/orm/schema-system"
+                },
+                {
+                    "text": "ビヘイビア",
+                    "collapsed": true,
+                    "items": [
+                        {
+                            "text": "ビヘイビア",
+                            "link": "/ja/3.x/orm/behaviors"
+                        },
+                        {
+                            "text": "カウンターキャッシュ",
+                            "link": "/ja/3.x/orm/behaviors/counter-cache"
+                        },
+                        {
+                            "text": "タイムスタンプ",
+                            "link": "/ja/3.x/orm/behaviors/timestamp"
+                        },
+                        {
+                            "text": "翻訳",
+                            "link": "/ja/3.x/orm/behaviors/translate"
+                        },
+                        {
+                            "text": "ツリー",
+                            "link": "/ja/3.x/orm/behaviors/tree"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "text": "コアライブラリ",
+            "collapsed": true,
+            "items": [
+                { "text": "アプリ", "link": "/ja/3.x/core-libraries/app" },
+                {
+                    "text": "キャッシュ",
+                    "link": "/ja/3.x/core-libraries/caching"
+                },
+                {
+                    "text": "コレクション",
+                    "link": "/ja/3.x/core-libraries/collections"
+                },
+                { "text": "メール", "link": "/ja/3.x/core-libraries/email" },
+                { "text": "イベント", "link": "/ja/3.x/core-libraries/events" },
+                {
+                    "text": "ファイル & フォルダ",
+                    "link": "/ja/3.x/core-libraries/file-folder"
+                },
+                { "text": "フォーム", "link": "/ja/3.x/core-libraries/form" },
+                {
+                    "text": "グローバル定数と関数",
+                    "link": "/ja/3.x/core-libraries/global-constants-and-functions"
+                },
+                { "text": "ハッシュ", "link": "/ja/3.x/core-libraries/hash" },
+                {
+                    "text": "HTTP クライアント",
+                    "link": "/ja/3.x/core-libraries/httpclient"
+                },
+                {
+                    "text": "インフレクター",
+                    "link": "/ja/3.x/core-libraries/inflector"
+                },
+                {
+                    "text": "国際化とローカライゼーション",
+                    "link": "/ja/3.x/core-libraries/internationalization-and-localization"
+                },
+                { "text": "ログ", "link": "/ja/3.x/core-libraries/logging" },
+                { "text": "数値", "link": "/ja/3.x/core-libraries/number" },
+                {
+                    "text": "レジストリオブジェクト",
+                    "link": "/ja/3.x/core-libraries/registry-objects"
+                },
+                {
+                    "text": "セキュリティ",
+                    "link": "/ja/3.x/core-libraries/security"
+                },
+                { "text": "テキスト", "link": "/ja/3.x/core-libraries/text" },
+                { "text": "時間", "link": "/ja/3.x/core-libraries/time" },
+                {
+                    "text": "バリデーション",
+                    "link": "/ja/3.x/core-libraries/validation"
+                },
+                { "text": "XML", "link": "/ja/3.x/core-libraries/xml" }
+            ]
+        },
+        {
+            "text": "コンソール & シェル",
+            "collapsed": true,
+            "items": [
+                {
+                    "text": "コンソールツール、シェル & タスク",
+                    "link": "/ja/3.x/console-and-shells"
+                },
+                {
+                    "text": "コマンド",
+                    "link": "/ja/3.x/console-and-shells/commands"
+                },
+                {
+                    "text": "入力出力",
+                    "link": "/ja/3.x/console-and-shells/input-output"
+                },
+                {
+                    "text": "オプションパーサー",
+                    "link": "/ja/3.x/console-and-shells/option-parsers"
+                },
+                {
+                    "text": "キャッシュ",
+                    "link": "/ja/3.x/console-and-shells/cache"
+                },
+                {
+                    "text": "補完シェル",
+                    "link": "/ja/3.x/console-and-shells/completion-shell"
+                },
+                {
+                    "text": "クロンジョブ",
+                    "link": "/ja/3.x/console-and-shells/cron-jobs"
+                },
+                {
+                    "text": "ヘルパー",
+                    "link": "/ja/3.x/console-and-shells/helpers"
+                },
+                {
+                    "text": "i18nシェル",
+                    "link": "/ja/3.x/console-and-shells/i18n-shell"
+                },
+                {
+                    "text": "ORMキャッシュ",
+                    "link": "/ja/3.x/console-and-shells/orm-cache"
+                },
+                {
+                    "text": "プラグインシェル",
+                    "link": "/ja/3.x/console-and-shells/plugin-shell"
+                },
+                { "text": "REPL", "link": "/ja/3.x/console-and-shells/repl" },
+                {
+                    "text": "ルートシェル",
+                    "link": "/ja/3.x/console-and-shells/routes-shell"
+                },
+                {
+                    "text": "スキーマキャッシュ",
+                    "link": "/ja/3.x/console-and-shells/schema-cache"
+                },
+                {
+                    "text": "サーバーシェル",
+                    "link": "/ja/3.x/console-and-shells/server-shell"
+                },
+                {
+                    "text": "シェル",
+                    "link": "/ja/3.x/console-and-shells/shells"
+                },
+                {
+                    "text": "アップグレードシェル",
+                    "link": "/ja/3.x/console-and-shells/upgrade-shell"
+                }
+            ]
+        },
+        {
+            "text": "開発",
+            "collapsed": true,
+            "items": [
+                {
+                    "text": "アプリケーション",
+                    "link": "/ja/3.x/development/application"
+                },
+                { "text": "設定", "link": "/ja/3.x/development/configuration" },
+                {
+                    "text": "ルーティング",
+                    "link": "/ja/3.x/development/routing"
+                },
+                {
+                    "text": "セッション",
+                    "link": "/ja/3.x/development/sessions"
+                },
+                { "text": "デバッグ", "link": "/ja/3.x/development/debugging" },
+                {
+                    "text": "ディスパッチフィルター",
+                    "link": "/ja/3.x/development/dispatch-filters"
+                },
+                { "text": "エラー", "link": "/ja/3.x/development/errors" },
+                { "text": "REST", "link": "/ja/3.x/development/rest" },
+                { "text": "テスト", "link": "/ja/3.x/development/testing" }
+            ]
+        },
+        {
+            "text": "セキュリティ",
+            "collapsed": true,
+            "items": [{ "text": "セキュリティ", "link": "/ja/3.x/security" }]
+        },
+        {
+            "text": "貢献",
+            "collapsed": true,
+            "items": [
+                { "text": "貢献", "link": "/ja/3.x/contributing" },
+                {
+                    "text": "後方互換性",
+                    "link": "/ja/3.x/contributing/backwards-compatibility"
+                },
+                {
+                    "text": "CakePHP コーディング規約",
+                    "link": "/ja/3.x/contributing/cakephp-coding-conventions"
+                },
+                { "text": "コード", "link": "/ja/3.x/contributing/code" },
+                {
+                    "text": "ドキュメント",
+                    "link": "/ja/3.x/contributing/documentation"
+                },
+                { "text": "チケット", "link": "/ja/3.x/contributing/tickets" }
+            ]
+        },
+        {
+            "text": "付録",
+            "collapsed": true,
+            "items": [
+                { "text": "付録", "link": "/ja/3.x/appendices" },
+                {
+                    "text": "3.x 移行ガイド",
+                    "link": "/ja/3.x/appendices/3-x-migration-guide"
+                },
+                {
+                    "text": "3.0 移行ガイド",
+                    "link": "/ja/3.x/appendices/3-0-migration-guide"
+                },
+                {
+                    "text": "3.1 移行ガイド",
+                    "link": "/ja/3.x/appendices/3-1-migration-guide"
+                },
+                {
+                    "text": "3.2 移行ガイド",
+                    "link": "/ja/3.x/appendices/3-2-migration-guide"
+                },
+                {
+                    "text": "3.3 移行ガイド",
+                    "link": "/ja/3.x/appendices/3-3-migration-guide"
+                },
+                {
+                    "text": "3.4 移行ガイド",
+                    "link": "/ja/3.x/appendices/3-4-migration-guide"
+                },
+                {
+                    "text": "3.5 移行ガイド",
+                    "link": "/ja/3.x/appendices/3-5-migration-guide"
+                },
+                {
+                    "text": "3.6 移行ガイド",
+                    "link": "/ja/3.x/appendices/3-6-migration-guide"
+                },
+                {
+                    "text": "3.7 移行ガイド",
+                    "link": "/ja/3.x/appendices/3-7-migration-guide"
+                },
+                {
+                    "text": "3.8 移行ガイド",
+                    "link": "/ja/3.x/appendices/3-8-migration-guide"
+                },
+                {
+                    "text": "3.9 移行ガイド",
+                    "link": "/ja/3.x/appendices/3-9-migration-guide"
+                },
+                {
+                    "text": "ORM移行",
+                    "link": "/ja/3.x/appendices/orm-migration"
+                },
+                {
+                    "text": "CakePHP 開発プロセス",
+                    "link": "/ja/3.x/appendices/cakephp-development-process"
+                },
+                { "text": "用語集", "link": "/ja/3.x/appendices/glossary" }
+            ]
+        },
+        {
+            "text": "追加トピック",
+            "collapsed": true,
+            "items": [
+                { "text": "プラグイン", "link": "/ja/3.x/plugins" },
+                { "text": "デプロイメント", "link": "/ja/3.x/deployment" },
+                { "text": "トピック", "link": "/ja/3.x/topics" },
+                {
+                    "text": "アップグレードツール",
+                    "link": "/ja/3.x/upgrade-tool"
+                },
+                { "text": "Chronos", "link": "/ja/3.x/chronos" },
+                { "text": "Debug Kit", "link": "/ja/3.x/debug-kit" },
+                { "text": "Elasticsearch", "link": "/ja/3.x/elasticsearch" },
+                { "text": "マイグレーション", "link": "/ja/3.x/migrations" },
+                { "text": "Phinx", "link": "/ja/3.x/phinx" }
+            ]
+        }
+    ]
 }
