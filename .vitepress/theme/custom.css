@@ -14,17 +14,21 @@
 
 /* Theme Variables */
 :root {
+  --cake-red-500: #d33c43;
+  --cake-red-700: #c8363d;
+  --cake-red-900: #b02e34;
+
   --cake-color-link: #2d7ea4;
-  --cake-color-progress: #d33c43;
+  --cake-color-progress: var(--cake-red-500);
   --vp-font-family-base: "IBM Plex Sans", Helvetica, Arial, sans-serif;
   --vp-font-family-body: "IBM Plex Sans", Helvetica, Arial, sans-serif;
-  --vp-c-brand-1: #d33c43;
-  --vp-c-brand-2: #c8363d;
-  --vp-c-brand-3: #b02e34;
+  --vp-c-brand-1: var(--cake-red-500);
+  --vp-c-brand-2: var(--cake-red-700);
+  --vp-c-brand-3: var(--cake-red-900);
   --vp-c-brand-soft: rgba(211, 60, 67, 0.14);
-  --vp-c-red-1: #d33c43;
-  --vp-c-red-2: #c8363d;
-  --vp-c-red-3: #b02e34;
+  --vp-c-red-1: var(--cake-red-500);
+  --vp-c-red-2: var(--cake-red-700);
+  --vp-c-red-3: var(--cake-red-900);
   --vp-custom-block-tip-bg: #d9edf7;
   --vp-custom-block-note-bg: #fcf8e3;
   --vp-custom-block-warning-bg: #f2dede;
@@ -35,8 +39,8 @@
 /* Dark Theme */
 .dark {
   --vp-c-brand-1: #ff6b6b;
-  --vp-c-brand-2: #d33c43;
-  --vp-c-brand-3: #c8363d;
+  --vp-c-brand-2: var(--cake-red-500);
+  --vp-c-brand-3: var(--cake-red-700);
   --vp-c-brand-soft: rgba(255, 107, 107, 0.16);
   --vp-c-bg: #1a1a1a;
   --vp-sidebar-bg-color: #0f0f0f;
@@ -100,17 +104,14 @@
   color: #e2c99c;
 }
 
-.custom-block.warning .custom-block-title:before,
-.custom-block.deprecated .custom-block-title:before {
-  color: #e0b9b9;
-}
-
 .custom-block.warning .custom-block-title:before {
   content: "W";
+  color: #e0b9b9;
 }
 
 .custom-block.deprecated .custom-block-title:before {
   content: "H";
+  color: #e0b9b9;
 }
 
 .custom-block.info .custom-block-title:before {
