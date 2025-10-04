@@ -50,6 +50,9 @@
 .VPHero .VPImage {
   filter: drop-shadow(-2px 4px 15px rgba(64, 64, 64, 0.3));
 }
+.VPNavBar .VPImage {
+  margin-left: 8px;
+}
 
 .dark .VPHero .VPImage {
   filter: drop-shadow(-2px 4px 15px rgba(211, 60, 67, 0.2));
