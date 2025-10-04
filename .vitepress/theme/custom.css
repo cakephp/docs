@@ -57,6 +57,17 @@
 .VPNavBar .VPImage {
   margin-left: 8px;
 }
+.VPNavBar .wrapper {
+  background: var(--vp-c-bg);
+  border-bottom: 2px solid var(--vp-c-border);
+}
+.VPNavBar .title {
+  border: 0;
+}
+/* Hide the divider line underneath the navbar on the right side */
+.VPNavBar .divider-line {
+  display: none;
+}
 
 .dark .VPHero .VPImage {
   filter: drop-shadow(-2px 4px 15px rgba(211, 60, 67, 0.2));
