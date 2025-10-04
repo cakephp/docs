@@ -260,7 +260,7 @@ class PostsController extends AppController
 {
     public function my_action()
     {
-        $this->render('custom_file');
+        return $this->render('custom_file');
     }
 }
 ```
@@ -279,7 +279,7 @@ class PostsController extends AppController
 {
     public function myAction()
     {
-        $this->render('Users.UserDetails/custom_file');
+        return $this->render('Users.UserDetails/custom_file');
     }
 }
 ```
