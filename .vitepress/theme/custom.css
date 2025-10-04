@@ -59,7 +59,7 @@
 }
 .VPNavBar .wrapper {
   background: var(--vp-c-bg);
-  border-bottom: 2px solid var(--vp-c-border);
+  border-bottom: 1px solid var(--vp-c-border);
 }
 .VPNavBar .title {
   border: 0;
