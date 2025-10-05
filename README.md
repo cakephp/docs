@@ -5,7 +5,7 @@ CakePHP Documentation
 [![Build Status](https://github.com/cakephp/docs/actions/workflows/ci.yml/badge.svg?branch=4.x)](https://github.com/cakephp/docs/actions/workflows/ci.yml)
 
 This is the official documentation for the CakePHP project. It is available
-online in HTML, PDF and EPUB formats at https://book.cakephp.org.
+online in HTML, PDF and EPUB formats at https://book.cakephp.org. Test
 
 Contributing to the documentation is pretty simple. Please read the
 documentation on contributing to the documentation over on [the
