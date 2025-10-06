@@ -273,7 +273,7 @@ a separate directory and install its dependencies:
     git clone git://github.com/cakephp/debug_kit.git
     cd debug_kit
     php ~/composer.phar install
-    php ~/phpunit.phar
+    vendor/bin/phpunit
 
 Filtering Test Cases
 --------------------

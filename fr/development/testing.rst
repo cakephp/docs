@@ -290,7 +290,7 @@ projet dans un répertoire séparé et installer ses dépendances:
     git clone git://github.com/cakephp/debug_kit.git
     cd debug_kit
     php ~/composer.phar install
-    php ~/phpunit.phar
+    vendor/bin/phpunit
 
 Filtrer les Cas de Test
 -----------------------

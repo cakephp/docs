@@ -139,8 +139,13 @@ Creating Output
 ===============
 
 Commands are provided a ``ConsoleIo`` instance when executed. This object allows
-you to interact with ``stdout``, ``stderr`` and create files.  See the
+you to interact with :php:meth:`~Cake\\Console\\ConsoleIo::out()` and
+:php:meth:`~Cake\\Console\\ConsoleIo::err()` to emit on ``stdout``, and
+``stderr``. Files can be created with overwrite confirmation with
+:php:meth:`~Cake\\Console\\ConsoleIo::createFile()``.  :ref:`command-helpers`
+provide 'macros' for output generation.  See the
 :doc:`/console-commands/input-output` section for more information.
+
 
 Using Models in Commands
 ========================

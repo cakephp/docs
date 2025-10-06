@@ -254,7 +254,7 @@ tenha chamado ``Controller::render()``, CakePHP não tentará re-renderizar a vi
     {
         public function my_action()
         {
-            $this->render('custom_file');
+            return $this->render('custom_file');
         }
     }
 

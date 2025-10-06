@@ -12,7 +12,10 @@ interactively read user input and output information to the user.
 Command Helpers
 ===============
 
-Command Helpers can be accessed and used from any command::
+Formatting console output can be tedious and lead to maintenance issues. To
+enable better re-use and testability of console formatting code, CakePHP command
+helpers provide 'macros' for console formatting logic. Command Helpers can be
+accessed and used from any command::
 
     // Output some data as a table.
     $io->helper('Table')->output($data);
@@ -20,7 +23,8 @@ Command Helpers can be accessed and used from any command::
     // Get a helper from a plugin.
     $io->helper('Plugin.HelperName')->output($data);
 
-You can also get instances of helpers and call any public methods on them::
+You can also get instances of helpers and call any public methods, to manipulate
+state and generate updated output::
 
     // Get and use the Progress Helper.
     $progress = $io->helper('Progress');

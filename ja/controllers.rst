@@ -234,7 +234,7 @@ AJAX 呼び出しではとても有用です。 ::
     {
         public function my_action()
         {
-            $this->render('custom_file');
+            return $this->render('custom_file');
         }
     }
 
@@ -251,7 +251,7 @@ AJAX 呼び出しではとても有用です。 ::
     {
         public function myAction()
         {
-            $this->render('Users.UserDetails/custom_file');
+            return $this->render('Users.UserDetails/custom_file');
         }
     }
 

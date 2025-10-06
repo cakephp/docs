@@ -49,7 +49,7 @@ CakePHP proporciona varios middleware para manejar tareas comunes en aplicacione
     encriptadas en caso de que necesite manipular las cookies con datos confusos.
 * ``Cake\Http\Middleware\CsrfProtectionMiddleware`` agrega protección CSRF a su aplicación.
 * ``Cake\Http\Middleware\BodyParserMiddleware`` le permite decodificar JSON, XML y otros cuerpos
-    de solicitud codificados basados ​​en ``Content-Type`` del encabezado.
+    de solicitud codificados basados en ``Content-Type`` del encabezado.
 
 .. _using-middleware:
 
