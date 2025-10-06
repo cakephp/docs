@@ -1,28 +1,28 @@
-Server Tool
-###########
+Ferramenta de Servidor
+######################
 
-The ``ServerCommand`` lets you stand up a simple webserver using the built in PHP
-webserver. While this server is *not* intended for production use it can
-be handy in development when you want to quickly try an idea out and don't want
-to spend time configuring Apache or Nginx. You can start the server command with:
+O ``ServerCommand`` permite que você inicie um servidor web simples usando o servidor web
+integrado do PHP. Embora este servidor *não* seja destinado ao uso em produção, ele pode
+ser útil no desenvolvimento quando você quiser testar rapidamente uma ideia e não quiser
+gastar tempo configurando o Apache ou Nginx. Você pode iniciar o comando do servidor com:
 
 .. code-block:: console
 
     bin/cake server
 
-You should see the server boot up and attach to port 8765. You can visit the
-CLI server by visiting ``http://localhost:8765``
-in your web-browser. You can close the server by pressing ``CTRL-C`` in your
+Você deve ver o servidor inicializar e se conectar à porta 8765. Você pode visitar o
+servidor CLI visitando ``http://localhost:8765``
+em seu navegador web. Você pode fechar o servidor pressionando ``CTRL-C`` em seu
 terminal.
 
 .. note::
 
-    Try ``bin/cake server -H 0.0.0.0`` if the server is unreachable from other hosts.
+    Tente ``bin/cake server -H 0.0.0.0`` se o servidor estiver inacessível de outros hosts.
 
-Changing the Port and Document Root
-===================================
+Alterando a Porta e o Document Root
+====================================
 
-You can customize the port and document root using options:
+Você pode personalizar a porta e o document root usando opções:
 
 .. code-block:: console
 

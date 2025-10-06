@@ -22,6 +22,8 @@ também exibe a linha e o arquivo de onde a mesma foi chamada.
 A saída da função somente é exibida caso a variável ``$debug`` do core esteja
 definida com o valor ``true``.
 
+Veja também ``dd()``, ``pr()`` e ``pj()``.
+
 .. php:function:: stackTrace()
 
 A função ``stackTrace()`` é uma função de escopo global, função esta que permite
@@ -47,8 +49,20 @@ Usando a Classe Debugger
 
 .. php:class:: Debugger
 
-Para usar o depurador, assegure que ``Configure::read('debug')`` esteja definida
-como ``true``.
+Para usar o depurador, primeiro assegure que ``Configure::read('debug')`` esteja definida
+como ``true``. Você pode usar ``filter_var(env('DEBUG', true),
+FILTER_VALIDATE_BOOLEAN),`` no arquivo **config/app.php** para garantir que ``debug``
+seja um booleano.
+
+As seguintes opções de configuração podem ser definidas em **config/app.php** para mudar como
+o ``Debugger`` se comporta:
+
+- ``Debugger.editor`` Escolha qual formato de URL de editor você deseja usar.
+  Por padrão atom, emacs, macvim, phpstorm, sublime, textmate e vscode estão
+  disponíveis. Você pode adicionar formatos de link de editor adicionais usando
+  :php:meth:`Debugger::addEditor()` durante o bootstrap da sua aplicação.
+- ``Debugger.outputMask`` Um mapeamento de ``key`` para valores de ``replacement`` que
+  o ``Debugger`` deve substituir em dados despejados e logs gerados pelo ``Debugger``.
 
 Valores de saída
 ================
@@ -81,6 +95,21 @@ métodos (caso existam) da variável fornecida no primeiro parâmetro::
         model => 'Camry'
         mileage => (int)15000
     }
+
+Mascarando Dados
+----------------
+
+Ao despejar dados com ``Debugger`` ou renderizar páginas de erro, você pode querer
+ocultar chaves sensíveis como senhas ou chaves de API. No seu **config/bootstrap.php**
+você pode mascarar chaves específicas::
+
+    Debugger::setOutputMask([
+        'password' => 'xxxxx',
+        'awsKey' => 'yyyyy',
+    ]);
+
+A partir da versão 4.1.0 você pode usar o valor de configuração ``Debugger.outputMask`` para definir
+máscaras de saída.
 
 Criando Logs com Pilha de Execução
 ==================================
@@ -143,6 +172,26 @@ você esteja criando suas próprias mensagens de erros e registros de logs.
 Obtém o tipo da variável. Caso seja um objeto, o retorno do método será o nome
 de sua classe
 
+Integração com Editor
+=====================
+
+Páginas de exceção e erro podem conter URLs que abrem diretamente no seu editor ou
+IDE. O CakePHP vem com formatos de URL para vários editores populares, e você pode adicionar
+formatos de editor adicionais, se necessário, durante o bootstrap da aplicação::
+
+    // Gerar links para vscode.
+    Debugger::setEditor('vscode')
+
+    // Adicionar um formato customizado
+    // Strings de formato terão os placeholders {file} e {line}
+    // substituídos.
+    Debugger::addEditor('custom', 'thing://open={file}&line={line}');
+
+    // Você também pode usar um closure para gerar URLs
+    Debugger::addEditor('custom', function ($file, $line) {
+        return "thing://open={$file}&line={$line}";
+    });
+
 Usando Logging para Depuração
 =============================
 
@@ -169,11 +218,11 @@ pressupondo-se que Log já esteja carregado::
 Debug Kit
 =========
 
-O DebugKit é um plugin composto por ótimas ferramentas de depuração. Uma dessas
-ferramentas é uma toolbar renderizada em HTML, na qual é possível visualizar uma
-grande quantidade de informações sobre sua aplicação e a atual requisição
-realizada pela mesma. Veja no capítulo :doc:`/debug-kit` como instalar e usar o
-DebugKit.
+O DebugKit é um plugin que fornece uma série de boas ferramentas de depuração. Ele
+fornece principalmente uma toolbar no HTML renderizado, que oferece uma grande
+quantidade de informações sobre sua aplicação e a requisição atual. Veja a `Documentação
+do DebugKit <https://book.cakephp.org/debugkit/>`__ para saber como instalar e usar
+o DebugKit.
 
 .. meta::
     :title lang=pt: Depuração

@@ -1,55 +1,89 @@
-Aplicação
-#########
+Application
+###########
 
-O ``Application`` é o coração do seu aplicativo. Ele controla como seu aplicativo está configurado e quais plugins, 
-middleware, rotas e comandos de console estão incluídos.
+A ``Application`` é o coração da sua aplicação. Ela controla
+como sua aplicação é configurada, e quais plugins, middleware, comandos
+de console e rotas são incluídos.
 
-Você pode encontrar sua classe ``Application`` em **src/Application.php**. Por padrão, ele será bem simples e definirá apenas 
-alguns padrões. :doc:`/controllers/middleware`. Os aplicativos podem definir os seguintes métodos de gancho:
+Você pode encontrar sua classe ``Application`` em **src/Application.php**. Por padrão
+ela será bem simples e apenas definirá alguns :doc:`/controllers/middleware` padrão.
+As aplicações podem definir os seguintes métodos de gancho:
 
-* ``bootstrap`` usado para carregar :doc:`arquivos de configuração</development/configuration>`, 
-  define constantes e outras funções globais. Por padrão, isso inclui **config/bootstrap.php**. Este é o lugar ideal para
-  carregar :doc:`/plugins` e :doc:`ouvintes de eventos </core-libraries/events>`.
-* ``routes`` usado para carregar :doc:`routes </development/routing>`. Por padrão isso inclui **config/routes.php**.
-* ``middleware`` usado para adicionar :doc:`middleware </controllers/middleware>` em sua aplicação.
-* ``console`` usado para adicionar :doc:`console commands </console-and-shells>` em sua aplicação. 
-  Por padrão, isso vai automaticamente descobrir shells e comandos em sua aplicação e também todos os plugins.
+* ``bootstrap`` Usado para carregar :doc:`arquivos de configuração
+  </development/configuration>`, definir constantes e outras funções globais.
+  Por padrão isso incluirá **config/bootstrap.php**. Este é o lugar ideal
+  para carregar :doc:`/plugins` e :doc:`ouvintes de eventos </core-libraries/events>` globais.
+* ``routes`` Usado para carregar :doc:`routes </development/routing>`. Por padrão isso
+  incluirá **config/routes.php**.
+* ``middleware`` Usado para adicionar :doc:`middleware </controllers/middleware>` à sua aplicação.
+* ``console`` Usado para adicionar :doc:`comandos de console </console-commands>` à sua
+  aplicação. Por padrão isso descobrirá automaticamente comandos de console em
+  sua aplicação e todos os plugins.
 
-.. _adding-http-stack:
+Inicializando sua Aplicação
+===========================
 
-Adicionando a nova pilha HTTP a um aplicativo existente
-=======================================================
+Se você tiver necessidades de configuração adicionais, você deve adicioná-las ao
+arquivo **config/bootstrap.php** da sua aplicação. Este arquivo é incluído antes de cada
+requisição e comando CLI.
 
-O uso da classe ``Application`` e do HTTP Middleware em um aplicativo existente requer algumas alterações no seu código.
+Este arquivo é ideal para várias tarefas comuns de inicialização:
 
-#. Primeiro atualize seu arquivo **webroot/index.php**. Copie e cole o conteúdo do arquivo de `app
-   skeleton <https://github.com/cakephp/app/tree/master/webroot/index.php>`__.
-#. Crie uma classe ``Application``. Veja a seção :ref:`using-middleware`
-    acima para saber como fazer isso. Ou copie o exemplo no `app skeleton 
-    <https://github.com/cakephp/app/tree/master/src/Application.php>`__.
-#. Crie **config/requirements.php** se não existir e adicione o conteúdo de `app skeleton <https://github.com/cakephp/app/blob/master/config/requirements.php>`__.
-#. Adicione a ``cake_routes`` uma definição de cache em **config/app.php**, se ainda não estiver lá.
-#. Atualize o arquivo **config/bootstrap.php** e **config/bootstrap_cli.php** de acordo com `app_skeleton <https://github.com/cakephp/app/tree/master/config/bootstrap.php>`__,
-   tomando cuidado para preservar quaisquer adições e alterações específicas de seu aplicativo. 
-   As atualizações do bootstrap.php incluem:
-   
-   * Desabilitar o cache ``_cake_routes_`` em modo de desenvolvimento
-   * Remover a seção de requerimentos (agora em **config/requirements.php**)
-   * Remover o carregamento do plugin DebugKit (agora em **src/Application.php**)
-   * Remover a importação de **autoload.php** (agora em **webroot/index.php**)
-   * Remover a referência ``DispatcherFactory``
-#. Atualize o conteúdo dos arquivos em **bin** . Substitua os arquivos pelas versões do `app skeleton
-   <https://github.com/cakephp/app/tree/master/bin>`__.
-#. Se você estiver usando o ``CsrfProtectionMiddleware`` certifique-se de remover
-   ``CsrfComponent`` de seus controladores.
+- Definir funções de conveniência.
+- Declarar constantes.
+- Definir configuração de cache.
+- Definir configuração de logging.
+- Carregar inflexões personalizadas.
+- Carregar arquivos de configuração.
 
-Após a conclusão dessas etapas, você estará pronto para começar a reimplementar qualquer filtro de 
-aplicativo/plug-in como middleware HTTP.
+Pode ser tentador colocar funções de formatação lá para usá-las em
+seus controllers. Como você verá nas seções :doc:`/controllers` e :doc:`/views`
+existem maneiras melhores de adicionar lógica personalizada à sua aplicação.
 
-Se você estiver executando testes, também precisará atualizar seu arquivo 
-**tests/bootstrap.php** copiando o conteúdo do arquivo de `app skeleton
-<https://github.com/cakephp/app/tree/master/tests/bootstrap.php>`_.
+.. _application-bootstrap:
+
+Application::bootstrap()
+------------------------
+
+Além do arquivo **config/bootstrap.php** que deve ser usado para
+configurar preocupações de baixo nível da sua aplicação, você também pode usar o
+método de gancho ``Application::bootstrap()`` para carregar/inicializar plugins e anexar
+ouvintes de eventos globais::
+
+    // in src/Application.php
+    namespace App;
+
+    use Cake\Http\BaseApplication;
+
+    class Application extends BaseApplication
+    {
+        public function bootstrap()
+        {
+            // Call the parent to `require_once` config/bootstrap.php
+            parent::bootstrap();
+
+            // CakePHP has the ability to fallback to using the `Cake\ORM\Table`
+            // class to represent your database tables when a related class is
+            // not created for that table. But using this "auto-tables" feature
+            // can make debugging more difficult in some scenarios. So we disable
+            // this feature except for the CLI environment (since the classes
+            // would not be present when using the `bake` code generation tool).
+            if (PHP_SAPI !== 'cli') {
+                FactoryLocator::add(
+                    'Table',
+                    (new TableLocator())->allowFallbackClass(false)
+                );
+            }
+
+            // Load MyPlugin
+            $this->addPlugin('MyPlugin');
+        }
+    }
+
+Carregar plugins e eventos em ``Application::bootstrap()`` torna
+:ref:`integration-testing` mais fácil, pois eventos e rotas serão reprocessados em
+cada método de teste.
 
 .. meta::
     :title lang=en: CakePHP Application
-    :keywords lang=en: http, middleware, psr-7, events, plugins, application, baseapplication
+    :keywords lang=en: http, middleware, psr-7, events, plugins, application, baseapplication,auto tables,auto-tables,generic table,class

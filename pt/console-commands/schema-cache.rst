@@ -1,25 +1,25 @@
-Schema Cache Tool
-#################
+Ferramenta de Cache de Schema
+##############################
 
-The SchemaCacheCommand provides a simple CLI tool for managing your application's
-metadata caches. In deployment situations it is helpful to rebuild the metadata
-cache in-place without clearing the existing cache data. You can do this by
-running:
+O SchemaCacheCommand fornece uma ferramenta CLI simples para gerenciar os
+caches de metadados da sua aplicação. Em situações de implantação, é útil reconstruir o cache de metadados
+no local sem limpar os dados de cache existentes. Você pode fazer isso
+executando:
 
 .. code-block:: console
 
     bin/cake schema_cache build --connection default
 
-This will rebuild the metadata cache for all tables on the ``default``
-connection. If you only need to rebuild a single table you can do that by
-providing its name:
+Isso reconstruirá o cache de metadados para todas as tabelas na conexão ``default``.
+Se você precisar reconstruir apenas uma única tabela, pode fazer isso
+fornecendo seu nome:
 
 .. code-block:: console
 
     bin/cake schema_cache build --connection default articles
 
-In addition to building cached data, you can use the SchemaCacheShell to remove
-cached metadata as well:
+Além de construir dados em cache, você pode usar o SchemaCacheShell para remover
+metadados em cache também:
 
 .. code-block:: console
 

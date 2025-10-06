@@ -29,12 +29,9 @@ seu próprio back-end. Os mecanismos de armazenamento em cache integrados são:
 * ``Apcu`` O cache do APCu usa a extensão PHP `APCu <https://php.net/apcu>`_. Essa
   extensão usa memória compartilhada no servidor da web para armazenar objetos.
   Isso o torna muito rápido e capaz de fornecer recursos atômicos de leitura/gravação.
-* ``Wincache`` O Wincache usa a extensão `Wincache <https://php.net/wincache>`_.
-  O Wincache é semelhante ao APC em recursos e desempenho, mas otimizado para
-  Windows e IIS.
-* ``Array`` Armazena todos os dados em uma matriz. Esse mecanismo não fornece
-  armazenamento persistente e deve ser usado em conjuntos de testes de aplicativos.
-* ``Null`` O mecanismo nulo não armazena nada e falha em todas as operações de leitura.
+* ``Array`` Armazena todos os dados em um array. Esse mecanismo não fornece
+  armazenamento persistente e é destinado ao uso em conjuntos de testes de aplicativos.
+* ``Null`` O mecanismo nulo não armazena nada realmente e falha em todas as operações de leitura.
 
 Independentemente do CacheEngine que você escolher, seu aplicativo interage com
 :php:class:`Cake\\Cache\\Cache`.
@@ -155,6 +152,8 @@ O ``FileEngine`` usa as seguintes opções específicas do mecanismo:
 * ``path`` Caminho para onde os arquivos de cache devem ser salvos. O padrão
    é o diretório temporário do sistema.
 
+.. _caching-redisengine:
+
 Opções RedisEngine
 ------------------
 
@@ -166,7 +165,14 @@ O RedisEngine usa as seguintes opções específicas do mecanismo:
 * ``password`` Senha do servidor Redis.
 * ``persistent`` Uma conexão persistente deve ser feita com Redis.
 * ``timeout`` Tempo limite de conexão para Redis.
-* ``unix_socket`` Caminho para um soquete unix para Redist.
+* ``unix_socket`` Caminho para um soquete unix para Redis.
+* ``tls`` Conectar ao Redis por TLS.
+* ``ssl_key`` A chave privada ssl usada para conexões TLS.
+* ``ssl_ca`` O arquivo de autoridade de certificação ssl para conexões TLS.
+* ``ssl_cert`` O certificado ssl usado para conexões TLS.
+
+.. versionadded:: 5.1.0
+    Conexões TLS foram adicionadas na versão 5.1
 
 Opções do MemcacheEngine
 ------------------------
@@ -180,6 +186,8 @@ Opções do MemcacheEngine
   igbinary e json. Ao lado do php, a extensão memcached deve ser compilada com o suporte serializador apropriado.
 - ``servers`` Cadeia ou matriz de servidores com cache de memória. Se for um array,
   o MemcacheEngine os usará como um pool.
+- ``duration`` Esteja ciente de que qualquer duração maior que 30 dias será tratada como um
+  valor de tempo Unix real, em vez de um deslocamento do tempo atual.
 - ``options`` Opções adicionais para o cliente memcached. Deve ser uma matriz de opção => valor.
   Use as constantes ``\Memcached::OPT_*`` como chaves.
 
@@ -247,7 +255,8 @@ será usado. ``Cache::write()`` pode armazenar qualquer tipo
 de objeto e é ideal para armazenar resultados de descobertas de
 modelos::
 
-    if (($posts = Cache::read('posts')) === false) {
+    $posts = Cache::read('posts');
+    if ($posts === null) {
         $posts = $someService->getAllPosts();
         Cache::write('posts', $posts);
     }
@@ -279,8 +288,31 @@ usando ``writeMany()`` salve várias conexões de rede ao usar o Memcached::
     // $result poderá conter
     ['article-first-post' => true, 'article-first-post-comments' => true]
 
+Gravações Atômicas
+------------------
+
+.. php:staticmethod:: add($key, $value $config = 'default')
+
+Usar ``Cache::add()`` permitirá que você defina atomicamente uma chave para um valor,
+se a chave ainda não existir no cache. Se a chave já existir no backend do cache
+ou a gravação falhar, ``add()`` retornará ``false``::
+
+    // Definir uma chave para atuar como um bloqueio
+    $result = Cache::add($lockKey, true);
+    if (!$result) {
+        return;
+    }
+    // Executar uma ação onde pode haver apenas um processo ativo por vez.
+
+    // Remover a chave de bloqueio.
+    Cache::delete($lockKey);
+
+.. warning::
+
+   O cache baseado em arquivo não suporta gravações atômicas.
+
 Armazenamento em Cache de Leitura
----------------------------------
+----------------------------------
 
 .. php:staticmethod:: remember($key, $callable, $config = 'default')
 
@@ -309,18 +341,17 @@ Lendo de um Cache
 ``Cache::read()`` é usado para ler o valor em cache armazenado em ``$key``
 do ``$config``. Se ``$config`` for nulo, a configuração padrão será usada.
 ``Cache::read()`` retornará o valor em cache se for um cache válido ou
-``false`` se o cache expirou ou não existe. O conteúdo do cache pode ser
-avaliado como falso, portanto, use os operadores de comparação estritos:
-``===`` ou ``!==``.
+``null`` se o cache expirou ou não existe. Use os operadores de comparação
+estritos ``===`` ou ``!==`` para verificar o sucesso da operação ``Cache::read()``.
 
 Por exemplo::
 
     $cloud = Cache::read('cloud');
-    if ($cloud !== false) {
+    if ($cloud !== null) {
         return $cloud;
     }
 
-    // Gere dados na nuvem
+    // Gerar dados na nuvem
     // ...
 
     // Armazenar dados no cache
@@ -333,17 +364,14 @@ poderá especificá-la nas chamadas ``Cache::read()`` e ``Cache::write()``,
 conforme abaixo::
 
     // Leia a chave "cloud", mas a partir da configuração curta em vez do padrão
-
     $cloud = Cache::read('cloud', 'short');
-    if ($cloud !== false) {
-        return $cloud;
+    if ($cloud === null) {
+        // Gerar dados na nuvem
+        // ...
+
+        // Armazene dados no cache, usando a configuração de cache "short" em vez do padrão
+        Cache::write('cloud', $cloud, 'short');
     }
-
-    // Gere dados na nuvem
-    // ...
-
-    // Armazene dados no cache, usando a configuração de cache "short" em vez do padrão
-    Cache::write('cloud', $cloud, 'short');
 
     return $cloud;
 
@@ -374,6 +402,11 @@ Exclusão de um Cache
     // Remove uma chave
     Cache::delete('my_key');
 
+A partir da versão 4.4.0, o ``RedisEngine`` também fornece um método ``deleteAsync()``
+que usa a operação ``UNLINK`` para remover chaves de cache::
+
+    Cache::pool('redis')->deleteAsync('my_key');
+
 Exclusão de Várias Chaves de uma só Vez
 ---------------------------------------
 
@@ -395,22 +428,24 @@ de rede ao usar o Memcached::
 Limpando Dados em Cache
 =======================
 
-.. php:staticmethod:: clear($check, $config = 'default')
+.. php:staticmethod:: clear($config = 'default')
 
 Destrua todos os valores em cache para uma configuração de cache. Em mecanismos
-como: Apcu, Memcached e Wincache, o prefixo da configuração do cache é usado
+como: Apcu e Memcached, o prefixo da configuração do cache é usado
 para remover as entradas do cache. Verifique se diferentes configurações de
 cache têm prefixos diferentes::
 
-    // Limpa apenas as chaves expiradas.
-    Cache::clear(true);
-
     // Limpará todas as chaves.
-    Cache::clear(false);
+    Cache::clear();
+
+A partir da versão 4.4.0, o ``RedisEngine`` também fornece um método ``clearBlocking()``
+que usa a operação ``UNLINK`` para remover chaves de cache::
+
+    Cache::pool('redis')->clearBlocking();
 
 .. note::
 
-    Como o APCu e o Wincache usam caches isolados para servidor da web e CLI,
+    Como o APCu usa caches isolados para servidor da web e CLI,
     eles devem ser limpos separadamente (a CLI não pode limpar o servidor da web e vice-versa).
 
 Usando Cache para Armazenar Contadores
@@ -441,7 +476,7 @@ Depois de definir um valor inteiro, você pode manipulá-lo usando ``increment()
 .. note::
 
     Incrementar e decrementar não funcionam com o ``FileEngine``.
-    Você deve usar APCu, Wincache, Redis ou Memcached.
+    Você deve usar APCu, Redis ou Memcached.
 
 Usando o Cache para Armazenar Resultados Comuns de Consulta
 ===========================================================
@@ -451,6 +486,9 @@ que raramente mudam ou estão sujeitos a leituras pesadas no cache. Um exemplo
 perfeito disso são os resultados de :php:meth:`Cake\\ORM\\Table::find()`. O objeto
 Query permite armazenar resultados em cache usando o método ``cache()``. Veja a seção
 :ref:`caching-query-results` para mais informações.
+
+
+.. _cache-groups:
 
 Usando Grupos
 =============

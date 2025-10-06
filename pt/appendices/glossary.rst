@@ -78,8 +78,8 @@ Glossário
     propriedades
         Usado ao referenciar colunas mapeadas em uma entidade ORM.
 
-    sintaxe plugin
-        Sintaxe plugin refere-se ao nome da classe separado por pontos, indicando que as classes
+    sintaxe de plugin
+        Sintaxe de plugin refere-se ao nome da classe separado por pontos, indicando que as classes
         fazem parte de um plugin::
 
             // O plugin é "DebugKit" e o nome da classe é "Toolbar".

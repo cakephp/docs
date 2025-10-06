@@ -1,60 +1,60 @@
 .. _plugin-shell:
 
-Plugin Tool
-###########
+Ferramenta de Plugin
+####################
 
-The plugin tool allows you to load and unload plugins via the command prompt.
-If you need help, run:
+A ferramenta de plugin permite carregar e descarregar plugins via prompt de comando.
+Se você precisar de ajuda, execute:
 
 .. code-block:: console
 
     bin/cake plugin --help
 
-Loading Plugins
----------------
+Carregando Plugins
+------------------
 
-Via the ``Load`` task you are able to load plugins in your
-**config/bootstrap.php**. You can do this by running:
+Através da tarefa ``Load`` você pode carregar plugins em seu
+**config/bootstrap.php**. Você pode fazer isso executando:
 
 .. code-block:: console
 
     bin/cake plugin load MyPlugin
 
-This will add the following to your **src/Application.php**::
+Isso adicionará o seguinte ao seu **src/Application.php**::
 
     // In the bootstrap method add:
     $this->addPlugin('MyPlugin');
 
 
-Unloading Plugins
------------------
+Descarregando Plugins
+---------------------
 
-You can unload a plugin by specifying its name:
+Você pode descarregar um plugin especificando seu nome:
 
 .. code-block:: console
 
     bin/cake plugin unload MyPlugin
 
-This will remove the line ``$this->addPlugin('MyPlugin',...)`` from
+Isso removerá a linha ``$this->addPlugin('MyPlugin',...)`` de
 **src/Application.php**.
 
-Plugin Assets
--------------
+Assets de Plugin
+----------------
 
-CakePHP by default serves plugins assets using the ``AssetMiddleware`` middleware.
-While this is a good convenience, it is recommended to symlink / copy
-the plugin assets under app's webroot so that they can be directly served by the
-web server without invoking PHP. You can do this by running:
+O CakePHP por padrão serve assets de plugins usando o middleware ``AssetMiddleware``.
+Embora isso seja conveniente, é recomendado criar um link simbólico / copiar
+os assets do plugin para o webroot da aplicação para que eles possam ser servidos diretamente pelo
+servidor web sem invocar o PHP. Você pode fazer isso executando:
 
 .. code-block:: console
 
     bin/cake plugin assets symlink
 
-Running the above command will symlink all plugins assets under app's webroot.
-On Windows, which doesn't support symlinks, the assets will be copied in
-respective folders instead of being symlinked.
+Executar o comando acima criará links simbólicos de todos os assets de plugins no webroot da aplicação.
+No Windows, que não suporta links simbólicos, os assets serão copiados nas
+respectivas pastas em vez de serem vinculados simbolicamente.
 
-You can symlink assets of one particular plugin by specifying its name:
+Você pode criar links simbólicos de assets de um plugin específico especificando seu nome:
 
 .. code-block:: console
 

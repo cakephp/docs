@@ -355,8 +355,7 @@ Neste exemplo mostramos como encontrarmos um artigo quando este estiver publicad
 
     // No controller ou table.
 
-    // Prior to 3.6 use TableRegistry::get('Articles')
-    $articles = TableRegistry::getTableLocator()->get('Articles');
+        $articles = $this->fetchTable('Articles');
     $query = $articles->find('ownedBy', ['user' => $userEntity]);
     //Retorne todos os artigos, quero que seja de meu usuário, porém somente os já publicados.
 
@@ -367,8 +366,7 @@ tem ambas as buscas 'published' e 'recent', poderia fazer assim::
 
     // No controller ou table.
 
-    // Prior to 3.6 use TableRegistry::get('Articles')
-    $articles = TableRegistry::getTableLocator()->get('Articles');
+        $articles = $this->fetchTable('Articles');
     $query = $articles->find('published')->find('recent');
     //Busque todos os artigos, dentre eles encontre os publicados, e retorne somente os recentes.
 
@@ -393,8 +391,7 @@ Por exemplo, se você quer buscar usuários por seu nome gostará de::
 
     // Na tabela
 
-    // Prior to 3.6 use TableRegistry::get('Users')
-    $users = TableRegistry::getTableLocator()->get('Users');
+    $users = $this->fetchTable('Users');
     // Duas chamadas também iguais.
     $query = $users->findByUsername('joebob');
     $query = $users->findAllByUsername('joebob');
@@ -917,8 +914,7 @@ articles by running::
 
     // In a controller or table method.
 
-    // Prior to 3.6 use TableRegistry::get('Articles')
-    $articles = TableRegistry::getTableLocator()->get('Articles');
+        $articles = $this->fetchTable('Articles');
     $query = $articles->find()->contain(['Tags']);
 
     $reducer = function ($output, $value) {
@@ -942,8 +938,7 @@ Some other examples of the collection methods being used with result sets are::
 
     // Create an associative array from result properties
 
-    // Prior to 3.6 use TableRegistry::get('Articles')
-    $articles = TableRegistry::getTableLocator()->get('Articles');
+        $articles = $this->fetchTable('Articles');
     $results = $articles->find()->contain(['Authors'])->all();
 
     $authorList = $results->combine('id', 'author.name');
@@ -1175,17 +1170,17 @@ even after adding a map-reduce routine::
 This is particularly useful for building custom finder methods as described in the
 :ref:`custom-find-methods` section::
 
-    public function findPublished(Query $query, array $options)
+    public function findPublished(SelectQuery $query)
     {
         return $query->where(['published' => true]);
     }
 
-    public function findRecent(Query $query, array $options)
+    public function findRecent(SelectQuery $query)
     {
         return $query->where(['created >=' => new DateTime('1 day ago')]);
     }
 
-    public function findCommonWords(Query $query, array $options)
+    public function findCommonWords(SelectQuery $query)
     {
         // Same as in the common words example in the previous section
         $mapper = ...;
@@ -1210,12 +1205,12 @@ than 20 times across all articles::
         }
     };
 
-    $articles->find('commonWords')->mapReduce($mapper);
+    $articles->find('commonWords')->mapReduce($mapper)->all();
 
 Removing All Stacked Map-reduce Operations
 ------------------------------------------
 
-Under some circumstances you may want to modify a ``Query`` object so that no
+Under some circumstances you may want to modify a ``SelectQuery`` object so that no
 ``mapReduce`` operations are executed at all. This can be done by
 calling the method with both parameters as null and the third parameter
 (overwrite) as ``true``::

@@ -22,17 +22,16 @@ Inserindo Dados
 A maneira mais fácil de inserir dados no banco de dados é criando uma nova entidade
 e passando ela pro método ``save()`` na classe ``Table``::
 
-    use Cake\ORM\TableRegistry;
+    use Cake\ORM\Locator\LocatorAwareTrait;
 
-    // Prior to 3.6 use TableRegistry::get('Articles')
-    $articlesTable = TableRegistry::getTableLocator()->get('Articles');
-    $article = $articlesTable->newEntity();
+    $articlesTable = $this->fetchTable('Articles');
+    $article = $articlesTable->newEmptyEntity();
 
     $article->title = 'A New Article';
     $article->body = 'This is the body of the article';
 
     if ($articlesTable->save($article)) {
-        // The $article entity contains the id now
+        // A entidade $article agora contém o id
         $id = $article->id;
     }
 
@@ -42,11 +41,8 @@ Atualizando Dados
 Atualizar seus dados é igualmente fácil, e o método ``save()`` também é usado para
 esse propósito::
 
-    use Cake\ORM\TableRegistry;
-
-    // Prior to 3.6 use TableRegistry::get('Articles')
-    $articlesTable = TableRegistry::getTableLocator()->get('Articles');
-    $article = $articlesTable->get(12); // Return article with id 12
+    $articlesTable = $this->fetchTable('Articles');
+    $article = $articlesTable->get(12); // Retorna artigo com id 12
 
     $article->title = 'CakePHP is THE best PHP framework!';
     $articlesTable->save($article);
@@ -60,8 +56,7 @@ Salvando com Associações
 
 Por padrão o método ``save()`` também salvará associações de um nível::
 
-    // Prior to 3.6 use TableRegistry::get('Articles')
-    $articlesTable = TableRegistry::getTableLocator()->get('Articles');
+    $articlesTable = $this->fetchTable('Articles');
     $author = $articlesTable->Authors->findByUserName('mark')->first();
 
     $article = $articlesTable->newEntity();
@@ -176,8 +171,7 @@ usando::
 
     //No controller
 
-    // Prior to 3.6 use TableRegistry::get('Articles')
-    $articles = TableRegistry::getTableLocator()->get('Articles');
+    $articles = $this->fetchTable('Articles');
 
     // Valida e converte em um objeto do tipo Entity
     $entity = $articles->newEntity($this->request->getData());
@@ -216,8 +210,7 @@ quais associações devem ser convertidas::
 
     // No controller
 
-    // Prior to 3.6 use TableRegistry::get('Articles')
-    $articles = TableRegistry::getTableLocator()->get('Articles');
+    $articles = $this->fetchTable('Articles');
 
     // Nova entidade com associações aninhadas
     $entity = $articles->newEntity($this->request->getData(), [
@@ -232,8 +225,7 @@ ser convertidos. Alternativamente, você pode usar a notação de ponto
 
     // No controller
 
-    // Prior to 3.6 use TableRegistry::get('Articles')
-    $articles = TableRegistry::getTableLocator()->get('Articles');
+    $articles = $this->fetchTable('Articles');
 
     // Nova entidade com associações aninhada usando notação de ponto
     $entity = $articles->newEntity($this->request->getData(), [
@@ -251,8 +243,7 @@ contrário. Você também pode alterar o conjunto de validação a ser usada por
 
     // No controller
 
-    // Prior to 3.6 use TableRegistry::get('Articles')
-    $articles = TableRegistry::getTableLocator()->get('Articles');
+    $articles = $this->fetchTable('Articles');
 
     // Pular validação na associação de Tags e
     // Definino 'signup' como método de validação para Comments.Users
@@ -369,8 +360,7 @@ o método ``newEntities()``::
 
     // No controller.
 
-    // Prior to 3.6 use TableRegistry::get('Articles')
-    $articles = TableRegistry::getTableLocator()->get('Articles');
+    $articles = $this->fetchTable('Articles');
     $entities = $articles->newEntities($this->request->getData());
 
 Nessa situação, os dados de requisição para vários artigos devem parecer com::
@@ -421,8 +411,7 @@ manter ids de entidades associadas::
 
     // No controller
 
-    // Prior to 3.6 use TableRegistry::get('Articles')
-    $articles = TableRegistry::getTableLocator()->get('Articles');
+    $articles = $this->fetchTable('Articles');
     $entity = $articles->newEntity($this->request->getData(), [
         'associated' => [
             'Tags', 'Comments' => [
@@ -455,8 +444,7 @@ Você pode mesclar um array de dados bruto em uma entidade existente usando o m�
 
     // No controller.
 
-    // Prior to 3.6 use TableRegistry::get('Articles')
-    $articles = TableRegistry::getTableLocator()->get('Articles');
+    $articles = $this->fetchTable('Articles');
     $article = $articles->get(1);
     $articles->patchEntity($article, $this->request->getData());
     $articles->save($article);
@@ -471,8 +459,7 @@ o opção ``validate`` assim::
 
     // No controller.
 
-    // Prior to 3.6 use TableRegistry::get('Articles')
-    $articles = TableRegistry::getTableLocator()->get('Articles');
+    $articles = $this->fetchTable('Articles');
     $article = $articles->get(1);
     $articles->patchEntity($article, $data, ['validate' => false]);
 
@@ -595,8 +582,7 @@ de lote para esses que não estão na lista::
 
     // Num controller.
 
-    // Prior to 3.6 use TableRegistry::get('Comments')
-    $comments = TableRegistry::getTableLocator()->get('Comments');
+    $comments = $this->fetchTable('Comments');
     $present = (new Collection($entity->comments))->extract('id')->filter()->toArray();
     $comments->deleteAll([
         'article_id' => $article->id,
@@ -613,8 +599,7 @@ faltam no array das entidades originais serão removidas e não estarão present
 
     // Num controller.
 
-    // Prior to 3.6 use TableRegistry::get('Articles')
-    $articles = TableRegistry::getTableLocator()->get('Articles');
+    $articles = $this->fetchTable('Articles');
     $list = $articles->find('popular')->toArray();
     $patched = $articles->patchEntities($list, $this->request->getData());
     foreach ($patched as $entity) {
@@ -754,8 +739,7 @@ uma nova entidade usando ``newEntity()`` para passar no ``save()``. Por exemplo:
 
     // Num controller
 
-    // Prior to 3.6 use TableRegistry::get('Articles')
-    $articles = TableRegistry::getTableLocator()->get('Articles');
+    $articles = $this->fetchTable('Articles');
     $article = $articles->newEntity($this->request->getData());
     if ($articles->save($article)) {
         // ...
@@ -771,8 +755,7 @@ informando a opção ``'checkExisting' => false`` no argumento ``$options``::
 Uma vez, que você carregou algumas entidades, você provavelmente desejará modificar elas e
 atualizar em seu banco de dados. Este é um exercício bem simples no CakePHP::
 
-    // Prior to 3.6 use TableRegistry::get('Articles')
-    $articles = TableRegistry::getTableLocator()->get('Articles');
+    $articles = $this->fetchTable('Articles');
     $article = $articles->find('all')->where(['id' => 2])->first();
 
     $article->title = 'My new title';
@@ -888,8 +871,7 @@ Por exemplo::
         ]
     ];
 
-    // Prior to 3.6 use TableRegistry::get('Articles')
-    $articles = TableRegistry::getTableLocator()->get('Articles');
+    $articles = $this->fetchTable('Articles');
     $article = $articles->newEntity($data, [
         'associated' => ['Users']
     ]);
@@ -935,8 +917,7 @@ Por exemplo::
         ]
     ];
 
-    // Prior to 3.6 use TableRegistry::get('Articles')
-    $articles = TableRegistry::getTableLocator()->get('Articles');
+    $articles = $this->fetchTable('Articles');
     $article = $articles->newEntity($data, [
         'associated' => ['Comments']
     ]);
@@ -982,8 +963,7 @@ Por exemplo::
         ]
     ];
 
-    // Prior to 3.6 use TableRegistry::get('Articles')
-    $articles = TableRegistry::getTableLocator()->get('Articles');
+    $articles = $this->fetchTable('Articles');
     $article = $articles->newEntity($data, [
         'associated' => ['Tags']
     ]);
@@ -1174,6 +1154,60 @@ Se você quiser rastrear a entidade que falhou ao salvar, você pode usar o mét
 Como isso executa internamente uma chamada ao  :php:meth:`Cake\\ORM\\Table::save()`,
 todos eventos de save correspondentes serão disparados.
 
+Encontrar ou Criar uma Entidade
+================================
+
+.. php:method:: findOrCreate($search, $callback = null, $options = [])
+
+Encontre um registro existente com base em ``$search`` ou crie um novo registro usando as
+propriedades em ``$search`` e chamando o ``$callback`` opcional. Este método é
+ideal em cenários onde você precisa reduzir a chance de registros duplicados::
+
+    $record = $table->findOrCreate(
+        ['email' => 'bobbi@example.com'],
+        function ($entity) use ($otherData) {
+            // Chamado apenas quando um novo registro é criado.
+            $entity->name = $otherData['name'];
+        }
+    );
+
+A partir da versão 5.2.0, você pode fornecer um array de dados para definir na entidade quando ela for
+criada::
+
+    $otherData = ['name' => 'bobbi'];
+    $record = $table->findOrCreate(
+        ['email' => 'bobbi@example.com'],
+        $otherData,
+    );
+
+Se suas condições de busca exigirem ordem personalizada, associações ou condições, então
+o parâmetro ``$search`` pode ser um callable ou objeto ``SelectQuery``. Se você usar
+um callable, ele deve receber um ``SelectQuery`` como argumento.
+
+A entidade retornada terá sido salva se for um novo registro. As opções
+suportadas para este método são:
+
+* ``atomic`` A operação de busca e salvamento deve ser feita dentro de uma transação.
+* ``defaults`` Defina como ``false`` para não definir as propriedades de ``$search`` na
+  entidade criada.
+
+.. versionadded:: 5.2.0
+    Suporte para ``$callback`` como um array de dados foi adicionado.
+
+Criando com uma Chave Primária Existente
+=========================================
+
+Ao lidar com chaves primárias UUID, você geralmente quer fornecer um valor gerado externamente, e não ter
+um identificador gerado para você.
+
+Nesse caso, certifique-se de não passar a chave primária como parte dos dados marshalled.
+Em vez disso, atribua a chave primária e depois faça o patch dos dados restantes da entidade::
+
+    $record = $table->newEmptyEntity();
+    $record->id = $existingUuid;
+    $record = $table->patchEntity($record, $existingData);
+    $table->saveOrFail($record);
+
 Salvando Várias Entidades
 =========================
 
@@ -1194,8 +1228,7 @@ podem ser um array de entidades criadas usando ``newEntities()`` / ``patchEntiti
         ],
     ];
 
-    // Prior to 3.6 use TableRegistry::get('Articles')
-    $articles = TableRegistry::getTableLocator()->get('Articles');
+    $articles = $this->fetchTable('Articles');
     $entities = $articles->newEntities($data);
     $result = $articles->saveMany($entities);
 

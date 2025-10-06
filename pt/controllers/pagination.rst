@@ -1,44 +1,44 @@
-Pagination
+Paginação
 ##########
 
-One of the main obstacles of creating flexible and user-friendly web
-applications is designing an intuitive user interface. Many applications tend to
-grow in size and complexity quickly, and designers and programmers alike find
-they are unable to cope with displaying hundreds or thousands of records.
-Refactoring takes time, and performance and user satisfaction can suffer.
+Um dos principais obstáculos na criação de aplicações web flexíveis e amigáveis
+é o design de uma interface de usuário intuitiva. Muitas aplicações tendem a
+crescer rapidamente em tamanho e complexidade, e designers e programadores acabam
+descobrindo que não conseguem lidar com a exibição de centenas ou milhares de registros.
+A refatoração leva tempo, e o desempenho e a satisfação do usuário podem sofrer.
 
-Displaying a reasonable number of records per page has always been a critical
-part of every application and used to cause many headaches for developers.
-CakePHP eases the burden on the developer by providing a terse way to
-paginate data.
+Exibir um número razoável de registros por página sempre foi uma parte crítica
+de todas as aplicações e costumava causar muitas dores de cabeça para os desenvolvedores.
+O CakePHP alivia o fardo do desenvolvedor fornecendo uma maneira concisa de
+paginar dados.
 
-Pagination in CakePHP controllers is done through the ``paginate()`` method. You
-then use :php:class:`~Cake\\View\\Helper\\PaginatorHelper` in your view templates
-to generate pagination controls.
+A paginação nos controllers do CakePHP é feita através do método ``paginate()``. Você
+então usa :php:class:`~Cake\\View\\Helper\\PaginatorHelper` nos seus view templates
+para gerar controles de paginação.
 
-Basic Usage
+Uso Básico
 ===========
 
-You can call ``paginate()`` using an ORM table instance or ``Query`` object::
+Você pode chamar ``paginate()`` usando uma instância de tabela ORM ou objeto ``Query``::
 
     public function index()
     {
-        // Paginate the ORM table.
+        // Paginar a tabela ORM.
         $this->set('articles', $this->paginate($this->Articles));
 
-        // Paginate a select query
+        // Paginar uma query select
         $query = $this->Articles->find('published')->contain('Comments');
         $this->set('articles', $this->paginate($query));
     }
 
-Advanced Usage
+Uso Avançado
 ==============
 
-More complex use cases are supported by configuring the ``$paginate``
-controller property or as the ``$settings`` argument to ``paginate()``. These
-conditions serve as the basis for you pagination queries. They are augmented
-by the ``sort``, ``direction``, ``limit``, and ``page`` parameters passed in
-from the URL::
+Casos de uso mais complexos são suportados através da configuração da propriedade
+``$paginate`` do controller ou como argumento ``$settings`` para ``paginate()``. Essas
+condições servem como base para suas queries de paginação. Elas são aumentadas
+pelos parâmetros ``sort``, ``direction``, ``limit`` e ``page`` passados
+da URL::
 
     class ArticlesController extends AppController
     {
@@ -51,9 +51,9 @@ from the URL::
     }
 
 .. tip::
-    Default ``order`` options must be defined as an array.
+    As opções padrão de ``order`` devem ser definidas como um array.
 
-You can also use :ref:`custom-find-methods` in pagination by using the ``finder`` option::
+Você também pode usar :ref:`custom-find-methods` na paginação usando a opção ``finder``::
 
     class ArticlesController extends AppController
     {
@@ -62,14 +62,14 @@ You can also use :ref:`custom-find-methods` in pagination by using the ``finder`
         ];
     }
 
-Note: This only works with Table as string input in ``$this->paginate('MyTable')``. Once you use ``$this->MyTable->find()`` as input for ``paginate()``, you must directly use that Query object instead.
+Nota: Isso funciona apenas com Table como entrada de string em ``$this->paginate('MyTable')``. Depois de usar ``$this->MyTable->find()`` como entrada para ``paginate()``, você deve usar diretamente esse objeto Query.
 
-If your finder method requires additional options you can pass those
-as values for the finder::
+Se o seu método finder requer opções adicionais, você pode passá-las
+como valores para o finder::
 
     class ArticlesController extends AppController
     {
-        // find articles by tag
+        // encontrar artigos por tag
         public function tags()
         {
             $tags = $this->request->getParam('pass');
@@ -77,12 +77,12 @@ as values for the finder::
             $customFinderOptions = [
                 'tags' => $tags
             ];
-            // We're using the $settings argument to paginate() here.
-            // But the same structure could be used in $this->paginate
+            // Estamos usando o argumento $settings para paginate() aqui.
+            // Mas a mesma estrutura poderia ser usada em $this->paginate
             //
-            // Our custom finder is called findTagged inside ArticlesTable.php
-            // which is why we're using `tagged` as the key.
-            // Our finder should look like:
+            // Nosso finder customizado é chamado findTagged dentro de ArticlesTable.php
+            // que é por isso que estamos usando `tagged` como chave.
+            // Nosso finder deve ser assim:
             // public function findTagged(Query $query, array $tagged = [])
             $settings = [
                 'finder' => [
@@ -94,9 +94,9 @@ as values for the finder::
         }
     }
 
-In addition to defining general pagination values, you can define more than one
-set of pagination defaults in the controller. The name of each model can be used
-as a key in the ``$paginate`` property::
+Além de definir valores gerais de paginação, você pode definir mais de um
+conjunto de padrões de paginação no controller. O nome de cada model pode ser usado
+como uma chave na propriedade ``$paginate``::
 
     class ArticlesController extends AppController
     {
@@ -106,69 +106,69 @@ as a key in the ``$paginate`` property::
         ];
     }
 
-The values of the ``Articles`` and ``Authors`` keys could contain all the keys
-that a basic ``$paginate`` array would.
+Os valores das chaves ``Articles`` e ``Authors`` podem conter todas as chaves
+que um array ``$paginate`` básico conteria.
 
-``Controller::paginate()`` returns an instance of ``Cake\Datasource\Paging\PaginatedResultSet``
-which implements the ``Cake\Datasource\Paging\PaginatedInterface``.
+``Controller::paginate()`` retorna uma instância de ``Cake\Datasource\Paging\PaginatedResultSet``
+que implementa a ``Cake\Datasource\Paging\PaginatedInterface``.
 
-This object contains the paginated records and the paging params.
+Este objeto contém os registros paginados e os parâmetros de paginação.
 
-Simple Pagination
+Paginação Simples
 =================
 
-By default ``Controller::paginate()`` uses the ``Cake\Datasource\Paging\NumericPaginator``
-class which does a ``COUNT()`` query to calculate the size of the result set so
-that page number links can be rendered. On very large datasets this count query
-can be very expensive. In situations where you only want to show 'Next' and 'Previous'
-links you can use the 'simple' paginator which does not do a count query::
+Por padrão, ``Controller::paginate()`` usa a classe ``Cake\Datasource\Paging\NumericPaginator``
+que faz uma query ``COUNT()`` para calcular o tamanho do conjunto de resultados para
+que os links de número de página possam ser renderizados. Em conjuntos de dados muito grandes, essa query de contagem
+pode ser muito cara. Em situações onde você quer mostrar apenas os links 'Próximo' e 'Anterior',
+você pode usar o paginador 'simple' que não faz uma query de contagem::
 
     class ArticlesController extends AppController
     {
         protected array $paginate = [
-            'className' => 'Simple', // Or use Cake\Datasource\Paging\SimplePaginator::class FQCN
+            'className' => 'Simple', // Ou use Cake\Datasource\Paging\SimplePaginator::class FQCN
         ];
     }
 
-When using the ``SimplePaginator`` you will not be able to generate page
-numbers, counter data, links to the last page, or total record count controls.
+Ao usar o ``SimplePaginator``, você não será capaz de gerar números de
+página, dados de contador, links para a última página ou controles de contagem total de registros.
 
 .. _paginating-multiple-queries:
 
-Paginating Multiple Queries
+Paginando Múltiplas Queries
 ===========================
 
-You can paginate multiple models in a single controller action, using the
-``scope`` option both in the controller's ``$paginate`` property and in the
-call to the ``paginate()`` method::
+Você pode paginar múltiplos models em uma única ação de controller, usando a
+opção ``scope`` tanto na propriedade ``$paginate`` do controller quanto na
+chamada ao método ``paginate()``::
 
-    // Paginate property
+    // Propriedade Paginate
     protected array $paginate = [
         'Articles' => ['scope' => 'article'],
         'Tags' => ['scope' => 'tag']
     ];
 
-    // In a controller action
+    // Em uma ação do controller
     $articles = $this->paginate($this->Articles, ['scope' => 'article']);
     $tags = $this->paginate($this->Tags, ['scope' => 'tag']);
     $this->set(compact('articles', 'tags'));
 
-The ``scope`` option will result in the paginator looking in
-scoped query string parameters. For example, the following URL could be used to
-paginate both tags and articles at the same time::
+A opção ``scope`` fará com que o paginador procure por
+parâmetros de query string com escopo. Por exemplo, a seguinte URL poderia ser usada para
+paginar tags e artigos ao mesmo tempo::
 
     /dashboard?article[page]=1&tag[page]=3
 
-See the :ref:`paginator-helper-multiple` section for how to generate scoped HTML
-elements and URLs for pagination.
+Veja a seção :ref:`paginator-helper-multiple` para saber como gerar elementos HTML
+e URLs com escopo para paginação.
 
-Paginating the Same Model multiple Times
-----------------------------------------
+Paginando o Mesmo Model várias vezes
+------------------------------------
 
-To paginate the same model multiple times within a single controller action you
-need to define an alias for the model.::
+Para paginar o mesmo model várias vezes dentro de uma única ação do controller você
+precisa definir um alias para o model.::
 
-    // In a controller action
+    // Em uma ação do controller
     $this->paginate = [
         'Articles' => [
             'scope' => 'published_articles',
@@ -191,7 +191,7 @@ need to define an alias for the model.::
             ->where(['published' => true])
     );
 
-    // Load an additional table object to allow differentiating in the paginator
+    // Carregar um objeto de tabela adicional para permitir a diferenciação no paginador
     $unpublishedArticlesTable = $this->fetchTable('UnpublishedArticles', [
         'className' => 'App\Model\Table\ArticlesTable',
         'table' => 'articles',
@@ -205,15 +205,15 @@ need to define an alias for the model.::
 
 .. _control-which-fields-used-for-ordering:
 
-Control which Fields Used for Ordering
-======================================
+Controlar quais Campos são Usados para Ordenação
+================================================
 
-By default sorting can be done on any non-virtual column a table has. This is
-sometimes undesirable as it allows users to sort on un-indexed columns that can
-be expensive to order by. You can set the allowed list of fields that can be sorted
-using the ``sortableFields`` option. This option is required when you want to
-sort on any associated data, or computed fields that may be part of your
-pagination query::
+Por padrão, a ordenação pode ser feita em qualquer coluna não virtual que uma tabela tenha. Isso às vezes
+é indesejável, pois permite que os usuários ordenem por colunas não indexadas que podem
+ser caras para ordenar. Você pode definir a lista de campos permitidos que podem ser ordenados
+usando a opção ``sortableFields``. Esta opção é necessária quando você deseja
+ordenar por quaisquer dados associados ou campos computados que possam fazer parte da sua
+query de paginação::
 
     protected array $paginate = [
         'sortableFields' => [
@@ -221,37 +221,37 @@ pagination query::
         ],
     ];
 
-Any requests that attempt to sort on fields not in the allowed list will be
-ignored.
+Quaisquer requisições que tentem ordenar por campos que não estão na lista permitida serão
+ignoradas.
 
-Limit the Maximum Number of Rows per Page
-=========================================
+Limitar o Número Máximo de Linhas por Página
+============================================
 
-The number of results that are fetched per page is exposed to the user as the
-``limit`` parameter. It is generally undesirable to allow users to fetch all
-rows in a paginated set. The ``maxLimit`` option asserts that no one can set
-this limit too high from the outside. By default CakePHP limits the maximum
-number of rows that can be fetched to 100. If this default is not appropriate
-for your application, you can adjust it as part of the pagination options, for
-example reducing it to ``10``::
+O número de resultados que são buscados por página é exposto ao usuário como o
+parâmetro ``limit``. Geralmente é indesejável permitir que os usuários busquem todas
+as linhas em um conjunto paginado. A opção ``maxLimit`` garante que ninguém possa definir
+esse limite muito alto de fora. Por padrão, o CakePHP limita o número máximo
+de linhas que podem ser buscadas para 100. Se esse padrão não for apropriado
+para sua aplicação, você pode ajustá-lo como parte das opções de paginação, por
+exemplo, reduzindo-o para ``10``::
 
     protected array $paginate = [
-        // Other keys here.
+        // Outras chaves aqui.
         'maxLimit' => 10
     ];
 
-If the request's limit param is greater than this value, it will be reduced to
-the ``maxLimit`` value.
+Se o parâmetro limit da requisição for maior que este valor, ele será reduzido para
+o valor ``maxLimit``.
 
-Out of Range Page Requests
-==========================
+Requisições de Página Fora do Intervalo
+=======================================
 
-``Controller::paginate()`` will throw a ``NotFoundException`` when trying to
-access a non-existent page, i.e. page number requested is greater than total
-page count.
+``Controller::paginate()`` lançará uma ``NotFoundException`` ao tentar
+acessar uma página inexistente, ou seja, o número da página solicitado é maior que a
+contagem total de páginas.
 
-So you could either let the normal error page be rendered or use a try catch
-block and take appropriate action when a ``NotFoundException`` is caught::
+Então você pode deixar a página de erro normal ser renderizada ou usar um bloco try catch
+e tomar a ação apropriada quando uma ``NotFoundException`` for capturada::
 
     use Cake\Http\Exception\NotFoundException;
 
@@ -260,37 +260,37 @@ block and take appropriate action when a ``NotFoundException`` is caught::
         try {
             $this->paginate();
         } catch (NotFoundException $e) {
-            // Do something here like redirecting to first or last page.
-            // $e->getPrevious()->getAttributes('pagingParams') will give you required info.
+            // Faça algo aqui como redirecionar para a primeira ou última página.
+            // $e->getPrevious()->getAttributes('pagingParams') fornecerá as informações necessárias.
         }
     }
 
-Using a paginator class directly
-================================
+Usando uma classe de paginador diretamente
+==========================================
 
-You can also use a paginator directly.::
+Você também pode usar um paginador diretamente.::
 
-        // Create a paginator
+        // Criar um paginador
         $paginator = new \Cake\Datasource\Paginator\NumericPaginator();
 
-        // Paginate the model
+        // Paginar o model
         $results = $paginator->paginate(
-            // Query or table instance which you need to paginate
+            // Query ou instância de tabela que você precisa paginar
             $this->fetchTable('Articles'),
-            // Request params
+            // Parâmetros da requisição
             $this->request->getQueryParams(),
-            // Config array having the same structure as options as Controller::$paginate
+            // Array de configuração com a mesma estrutura das opções do Controller::$paginate
             [
                 'finder' => 'latest',
             ]
         );
 
-Pagination in the View
+Paginação na View
 ======================
 
-Check the :php:class:`~Cake\\View\\Helper\\PaginatorHelper` documentation for
-how to create links for pagination navigation.
+Verifique a documentação do :php:class:`~Cake\\View\\Helper\\PaginatorHelper` para
+saber como criar links para navegação de paginação.
 
 .. meta::
-    :title lang=en: Pagination
-    :keywords lang=en: paginate,pagination,paging
+    :title lang=pt: Paginação
+    :keywords lang=pt: paginate,pagination,paging

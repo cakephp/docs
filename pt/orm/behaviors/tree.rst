@@ -16,15 +16,15 @@ Requisitos
 
 Esse behavior requer as seguintes colunas na tabela do seu banco de dados:
 
-- ``parent_id`` (nullable) A coluna que contém o ID da linha pai
-- ``lft`` (integer, signed) Usado para manter a estrutura da árvore
-- ``rght`` (integer, signed) Usado para manter a estrutura da árvore
+- ``parent_id`` (nullable) A coluna que contém o ID da linha pai. Esta coluna deve ser indexada.
+- ``lft`` (integer, signed) Usado para manter a estrutura da árvore. Esta coluna deve ser indexada.
+- ``rght`` (integer, signed) Usado para manter a estrutura da árvore.
 
 Você pode configurar o nome desses campos caso precise personalizá-los. Mais informações sobre o significado dos campos e como elas são usadas podem ser encontradas neste artigo que descreve a `lógica do MPTT <https://www.sitepoint.com/hierarchical-data-database-2/>`_
 
 .. warning::
 
-    O TreeBehavior não suporta chaves primárias compostas.
+    O TreeBehavior não suporta chaves primárias compostas neste momento.
 
 Início rápido
 =============
@@ -33,7 +33,7 @@ Você ativa o comportamento da árvore, adicionando-o a tabela que deseja armaze
 
     class CategoriesTable extends Table
     {
-        public function initialize(array $config)
+        public function initialize(array $config): void
         {
             $this->addBehavior('Tree');
         }
@@ -41,14 +41,17 @@ Você ativa o comportamento da árvore, adicionando-o a tabela que deseja armaze
 
 Uma vez adicionado, você pode deixar o CakePHP construir a estrutura interna se a tabela já estiver pronta::
 
-    // Prior to 3.6 use TableRegistry::get('Articles')
-    $categories = TableRegistry::getTableLocator()->get('Categories');
+    // Em um controller
+    $categories = $this->getTableLocator()->get('Categories');
     $categories->recover();
 
 Você pode verificar se funciona, obtendo qualquer linha da tabela e pedindo a contagem de descendentes que ela tem::
 
     $node = $categories->get(1);
     echo $categories->childCount($node);
+
+Obtendo descendentes diretos
+-----------------------------
 
 Obter uma lista simples dos descendentes de um nó é igualmente fácil::
 
@@ -181,14 +184,26 @@ Escopo e Multi Árvores
 
 No exemplo anterior, todas as operações de árvore terão o escopo apenas para as linhas que tem a coluna ``country_name`` definida como 'Brazil'. Você pode mudar o escopo utilizando a função 'config'::
 
-    $this->behaviors()->Tree->config('scope', ['country_name' => 'France']);
+    $this->behaviors()->Tree->setConfig('scope', ['country_name' => 'France']);
 
 Opcionalmente, você pode ter um controle mais refinado do escopo passando um closure como o escopo::
 
-    $this->behaviors()->Tree->config('scope', function ($query) {
+    $this->behaviors()->Tree->setConfig('scope', function ($query) {
         $country = $this->getConfigureContry(); // uma função inventada
         return $query->where(['country_name' => $country]);
     });
+
+Comportamento de Exclusão
+--------------------------
+
+Ao habilitar a opção ``cascadeCallbacks``, ``TreeBehavior`` carregará todas as
+entidades que serão excluídas. Uma vez carregadas, essas entidades serão
+excluídas individualmente usando ``Table::delete()``. Isso permite que callbacks ORM sejam
+disparados quando nós da árvore são excluídos::
+
+    $this->addBehavior('Tree', [
+        'cascadeCallbacks' => true,
+    ]);
 
 Recuperando com campo de classificação personalizada
 ====================================================
@@ -236,15 +251,21 @@ O TreeBehavior cuidará de todas as operações internas de exclusão para você
 
 Todos os nós filhos serão mantidos e um novo pai será atribuído a eles.
 
-A exclusão de um nó é baseada nos valores lft e rght da entidade. Isto é importante quando estamos fazendo um loop através dos filhos de um nó para exclusões condicionais::
+A exclusão de um nó é baseada nos valores ``lft`` e ``rght`` da entidade. Isto é
+importante quando estamos fazendo um loop através dos filhos de um nó para exclusões condicionais::
 
-    $descendants = $teams->find('children', ['for' => 1]);
+    $descendants = $teams->find('children', for: 1)->all();
 
     foreach ($descendants as $descendant) {
-        $team = $teams->get($descendant->id);
+        $team = $teams->get($descendant->id); // busca pelo objeto entidade atualizado
         if ($team->expired) {
-            $teams->delete($team); // a exclusão reordena o lft e o rght no banco de dados
+            $teams->delete($team); // a exclusão reordena o lft e o rght das entradas no banco de dados
         }
     }
 
-O TreeBehavior reordena os valores lft e rght dos registros na tabela quando um nó foi deletado. Como tal, os valores lft e rght das entidades dentro de `` $ descendants`` (salvo antes da operação de exclusão) será impreciso. Entidades terão que ser carregadas e modificadas em tempo real para evitar inconsistências na tabela.
+O TreeBehavior reordena os valores ``lft`` e ``rght`` dos registros na
+tabela quando um nó é deletado.
+
+No nosso exemplo acima, os valores ``lft`` e ``rght`` das entidades dentro de
+``$descendants`` serão imprecisos. Você precisará recarregar os objetos de entidade
+existentes se precisar de uma forma precisa da árvore.

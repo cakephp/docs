@@ -1,123 +1,120 @@
-Guia de retrocompatibilidade
-############################
+Guia de Compatibilidade com Versões Anteriores
+##############################################
 
-Garantir que você possa atualizar suas aplicações facilmente é importante para
-nós. Por esse motivo, apenas quebramos compatibilidade nos *major releases*.
-Você deve estar familiarizado  com
-`versionamento semântico <https://semver.org/>`_, orientação usada em
-todos os projetos do CakePHP. Resumindo, significa que apenas *major releases*
-(tais como 2.0, 3.0, 4.0) podem quebrar retrocompatibilidades. *Minor releases*
-(tais como 2.1, 3.1, 4.1) podem introduzir novos recursos, mas não podem quebrar
-retrocompatibilidades. *Releases* de correção de *bugs* (tais como 2.1.2, 3.0.1)
-não incluem novos recursos, são destinados apenas à correção de erros e melhora
-de desempenho.
+Garantir que você possa atualizar suas aplicações de forma fácil e suave é importante
+para nós. É por isso que só quebramos a compatibilidade em marcos de lançamentos principais.
+Você pode estar familiarizado com `versionamento semântico <https://semver.org/>`_, que é
+a diretriz geral que usamos em todos os projetos CakePHP. Resumindo, versionamento
+semântico significa que apenas lançamentos principais (como 2.0, 3.0, 4.0) podem quebrar
+a compatibilidade com versões anteriores. Lançamentos menores (como 2.1, 3.1, 3.2) podem introduzir novos
+recursos, mas não têm permissão para quebrar a compatibilidade. Lançamentos de correção de bugs (como 2.1.2,
+3.0.1) não adicionam novos recursos, mas corrigem bugs ou melhoram apenas o desempenho.
 
 .. note::
 
-    O CakePHP começou a seguir o versionamento semântico na versão 2.0.0. Essas
-    regras não se aplicam às versões 1.x.
+    Depreciações são removidas com a próxima versão principal do framework.
+    É aconselhável que você se adapte às depreciações conforme são introduzidas para
+    garantir que futuras atualizações sejam mais fáceis.
 
-Para esclarecer que mudanças você pode esperar em cada ciclo de *release*, nós
-temos mais informações detalhadas para desenvolvedores usando o CakePHP, e para
-desenvolvedores trabalhando Não CakePHP que ajudam a definir espectativas do que
-pode ser feito em *minor releases*. *Major releases* podem ter tantas quebras
-quanto forem necessárias.
+Para esclarecer quais mudanças você pode esperar em cada nível de lançamento, temos
+informações mais detalhadas para desenvolvedores usando CakePHP e para desenvolvedores trabalhando no
+CakePHP que ajudam a definir expectativas do que pode ser feito em lançamentos menores. Lançamentos principais
+podem ter tantas mudanças quebradas quanto necessário.
 
-Guia de migração
-================
+Guias de Migração
+=================
 
-Para cada *major* ou *minor releases*, a equipe do CakePHP vai disponibilizar
-um guia de migração. Esses guias explicam os novos recursos e qualquer quebra
-de compatibilidade. Eles podem ser encontrados na seção :doc:`/appendices` do
-manual.
+Para cada lançamento principal e menor, a equipe CakePHP fornecerá um guia de migração.
+Esses guias explicam os novos recursos e quaisquer mudanças quebradas que estão
+em cada lançamento. Eles podem ser encontrados na seção :doc:`/appendices` do
+cookbook.
 
-Usando o CakePHP
-================
+Usando CakePHP
+==============
 
-Se você está construindo sua aplicação com o CakePHP, as orientações a seguir
-vão demonstrar a estabilidade que você pode esperar.
+Se você está construindo sua aplicação com CakePHP, as seguintes diretrizes
+explicam a estabilidade que você pode esperar.
 
 Interfaces
 ----------
 
-Com exceção dos *major releases*, interfaces oferecidas pelo CakePHP **não**
-irão ter alterações em qualquer método. Novos métodos podem ser incluídos, mas
-nenhum método existente será alterado.
+Fora de lançamentos principais, interfaces fornecidas pelo CakePHP **não** terão nenhum
+método existente alterado. Novos métodos podem ser adicionados, mas nenhum método existente será
+alterado.
 
 Classes
 -------
 
-Classes oferecidas pelo CakePHP podem ser construidas e ter seus métodos
-públicos e propriedades usados Não código da aplicação e com exceção de
-*major releases* a retrocompatibilidade é garantida.
+Classes fornecidas pelo CakePHP podem ser construídas e ter seus métodos públicos e
+propriedades usadas por código de aplicação e fora de lançamentos principais a
+compatibilidade com versões anteriores é garantida.
 
 .. note::
 
-    Algumas classes Não CakePHP são marcadas com a *tag* da documentação da API
-    ``@internal``. Essas classes **não** são estáveis e não tem garantias de
-    retrocompatibilidade.
+    Algumas classes no CakePHP são marcadas com a tag de documentação API ``@internal``. Essas
+    classes **não** são estáveis e não têm nenhuma promessa de compatibilidade com versões anteriores.
 
-Em *minor releases*, novos métodos podem ser adicionados a classes, e métodos
-existentes podem passar a receber novos argumentos. Qualquer novo argumento vai
-ter valores padrões, mas se você sobrescrever métodos com uma assinatura
-diferente, é possível que você receba erros fatais. Métodos que recebem novos
-argumentos serão documentados Não guia de migração correspondente ao *release*.
+Em lançamentos menores, novos métodos podem ser adicionados a classes, e métodos existentes podem
+ter novos argumentos adicionados. Quaisquer novos argumentos terão valores padrão, mas se
+você substituiu métodos com uma assinatura diferente, pode ver erros fatais.
+Métodos que tiverem novos argumentos adicionados serão documentados no guia de migração
+para aquele lançamento.
 
-A tabela a seguir descreve quais casos de uso e que tipo de compatibilidade
-você pode esperar do CakePHP.
+A tabela a seguir descreve vários casos de uso e qual compatibilidade você pode
+esperar do CakePHP:
 
 +-------------------------------+--------------------------+
-| Se você...                    | Retrocompatibilidade?    |
+| Se você...                    | Compatibilidade?         |
 +===============================+==========================+
-| Typehint referente à classe   | Sim                      |
+| Typehint contra a classe      | Sim                      |
 +-------------------------------+--------------------------+
-| Criar uma nova instância      | Sim                      |
+| Cria uma nova instância       | Sim                      |
 +-------------------------------+--------------------------+
-| Estender a classe             | Sim                      |
+| Estende a classe              | Sim                      |
 +-------------------------------+--------------------------+
-| Acessar uma propriedade       | Sim                      |
+| Acessa uma propriedade pública| Sim                      |
++-------------------------------+--------------------------+
+| Chama um método público       | Sim                      |
++-------------------------------+--------------------------+
+| **Estende uma classe e...**                              |
++-------------------------------+--------------------------+
+| Substitui uma propriedade     | Sim                      |
 | pública                       |                          |
 +-------------------------------+--------------------------+
-| Chamar um método público      | Sim                      |
-+-------------------------------+--------------------------+
-| **Estender uma classe e...**                             |
-+-------------------------------+--------------------------+
-| Sobrescrever uma              | Sim                      |
-| propriedade pública           |                          |
-+-------------------------------+--------------------------+
-| Acessar uma propriedade       | Não [1]_                 |
+| Acessa uma propriedade        | Não [1]_                 |
 | protegida                     |                          |
 +-------------------------------+--------------------------+
-| Sobrescrever uma              | Não [1]_                 |
-| propriedade protegida         |                          |
+| Substitui uma propriedade     | Não [1]_                 |
+| protegida                     |                          |
 +-------------------------------+--------------------------+
-| Sobrescrever um método        | Não [1]_                 |
+| Substitui um método protegido | Não [1]_                 |
 +-------------------------------+--------------------------+
-| Chamar um método protegido    | Não [1]_                 |
+| Chama um método protegido     | Não [1]_                 |
 +-------------------------------+--------------------------+
-| Adicionar uma propriedade     | Não                      |
+| Adiciona uma propriedade      | Não                      |
 | pública                       |                          |
 +-------------------------------+--------------------------+
-| Adicionar um método público   | Não                      |
+| Adiciona um método público    | Não                      |
 +-------------------------------+--------------------------+
-| Adicionar um argumento        | Não [1]_                 |
-| a um método sobrescrito       |                          |
+| Adiciona um argumento a um    | Não [1]_                 |
+| método substituído            |                          |
 +-------------------------------+--------------------------+
-| Adicinar um valor padrão      | Sim                      |
-| a um argumento de método      |                          |
-| existente                     |                          |
+| Adiciona um valor de argumento| Sim                      |
+| padrão a um argumento de      |                          |
+| método existente              |                          |
 +-------------------------------+--------------------------+
 
 Trabalhando no CakePHP
 ======================
 
-Se você está ajudando a fazer o CakePHP ainda melhor, por favor, siga as
-orientações a seguir quando estiver adicionando/alterando funcionalidades:
+Se você está ajudando a tornar o CakePHP ainda melhor, por favor, mantenha as seguintes diretrizes
+em mente ao adicionar/alterar funcionalidades:
 
-Em um *minor release* você pode:
+Em um lançamento menor você pode:
 
 +-------------------------------+--------------------------+
-| Em um *minor release* você pode...                       |
+| Em um lançamento menor você                              |
+| pode...                       |                          |
 +===============================+==========================+
 | **Classes**                                              |
 +-------------------------------+--------------------------+
@@ -125,20 +122,21 @@ Em um *minor release* você pode:
 +-------------------------------+--------------------------+
 | Remover uma interface         | Não                      |
 +-------------------------------+--------------------------+
-| Remover um trait              | Não                      |
+| Remover uma trait             | Não                      |
 +-------------------------------+--------------------------+
 | Tornar final                  | Não                      |
 +-------------------------------+--------------------------+
-| Tornar abstract               | Não                      |
+| Tornar abstrata               | Não                      |
 +-------------------------------+--------------------------+
-| Trocar o nome                 | Sim [2]_                 |
+| Mudar nome                    | Sim [2]_                 |
 +-------------------------------+--------------------------+
-| **Properties**                                           |
+| **Propriedades**                                         |
 +-------------------------------+--------------------------+
 | Adicionar uma propriedade     | Sim                      |
 | pública                       |                          |
 +-------------------------------+--------------------------+
-| Remove a public property      | Não                      |
+| Remover uma propriedade       | Não                      |
+| pública                       |                          |
 +-------------------------------+--------------------------+
 | Adicionar uma propriedade     | Sim                      |
 | protegida                     |                          |
@@ -152,9 +150,9 @@ Em um *minor release* você pode:
 +-------------------------------+--------------------------+
 | Remover um método público     | Não                      |
 +-------------------------------+--------------------------+
-| Adicionar um método público   | Sim                      |
+| Adicionar um método protegido | Sim                      |
 +-------------------------------+--------------------------+
-| Mover para uma classe parente | Sim                      |
+| Mover para classe pai         | Sim                      |
 +-------------------------------+--------------------------+
 | Remover um método protegido   | Sim [3]_                 |
 +-------------------------------+--------------------------+
@@ -166,17 +164,52 @@ Em um *minor release* você pode:
 | com valor padrão              |                          |
 +-------------------------------+--------------------------+
 | Adicionar um novo argumento   | Não                      |
-| a um método existente.        |                          |
+| obrigatório a um método       |                          |
+| existente                     |                          |
 +-------------------------------+--------------------------+
 | Remover um valor padrão de    | Não                      |
 | um argumento existente        |                          |
 +-------------------------------+--------------------------+
+| Mudar tipo de método para void| Sim                      |
++-------------------------------+--------------------------+
 
-.. [1] Seu código *pode* ser quebrado por *minor releases*. Verifique o guia de
-       migração para mais detalhes.
-.. [2] Você pode mudar o nome de uma classe/método desde que o nome antigo
-       permaneça disponível. Isso normalmente é evitado, a não ser que a
-       renomeação traga algum benefício significante.
-.. [3] Evite sempre que possível. Qualquer remoção precisa ser documentada
-       no guia de migração.
+.. [1] Seu código *pode* ser quebrado por lançamentos menores. Verifique o guia de migração
+       para detalhes.
+.. [2] Você pode mudar um nome de classe/método desde que o nome antigo permaneça
+       disponível. Isso geralmente é evitado a menos que a renomeação tenha benefício
+       significativo.
+.. [3] Evite sempre que possível. Quaisquer remoções precisam ser documentadas no
+       guia de migração.
+
+Depreciações
+============
+
+Em cada lançamento menor, recursos podem ser depreciados. Se recursos forem depreciados,
+documentação da API e avisos em tempo de execução serão adicionados. Erros em tempo de execução ajudam você
+a localizar código que precisa ser atualizado antes de quebrar. Se você deseja desabilitar
+avisos em tempo de execução, pode fazê-lo usando o valor de configuração ``Error.errorLevel``::
+
+    // em config/app.php
+    // ...
+    'Error' => [
+        'errorLevel' => E_ALL ^ E_USER_DEPRECATED,
+    ]
+    // ...
+
+Isso desabilitará avisos de depreciação em tempo de execução.
+
+.. _experimental-features:
+
+Recursos Experimentais
+======================
+
+Recursos experimentais **não estão incluídos** nas promessas de compatibilidade com versões anteriores
+acima. Recursos experimentais podem ter mudanças quebradas feitas em lançamentos menores
+enquanto permanecerem experimentais. Recursos experimentais podem ser identificados pelo
+aviso no livro e pelo uso de ``@experimental`` na documentação
+da API.
+
+Recursos experimentais são destinados a ajudar a coletar feedback sobre como um recurso
+funciona antes de se tornar estável. Uma vez que as interfaces e comportamento tenham sido verificados
+com a comunidade, as flags experimentais serão removidas.
 

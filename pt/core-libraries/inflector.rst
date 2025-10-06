@@ -5,24 +5,25 @@ Inflector
 
 .. php:class:: Inflector
 
-A classe ``Inflector`` recebe uma string e a manipula afim de suportar variações
-de palavas como pluralizações ou CamelCase e normalmente é acessada
+A classe Inflector pega uma string e pode manipulá-la para lidar com variações de palavras
+como pluralização ou camelização e normalmente é acessada
 estaticamente. Exemplo:
 ``Inflector::pluralize('example')`` retorna "examples".
 
-Você pode testar as inflexões em `inflector.cakephp.org
-<https://inflector.cakephp.org/>`_.
+Você pode testar as inflexões online em `inflector.cakephp.org
+<https://inflector.cakephp.org/>`_ ou `sandbox.dereuromark.de
+<https://sandbox.dereuromark.de/sandbox/inflector>`_.
 
 .. _inflector-methods-summary:
 
-Resumo dos métodos de Inflexão e Suas Saídas
-============================================
+Resumo dos Métodos do Inflector e Suas Saídas
+==============================================
 
-Resumo rápido dos métodos embutidos no Inflector e os resultados que produzem
-quando fornecidos um argumento de palavra composta.
+Resumo rápido dos métodos integrados do Inflector e os resultados que eles produzem
+quando fornecido um argumento com várias palavras:
 
 +-------------------+---------------+---------------+
-| Method            | Argument      | Output        |
+| Método            | Argumento     | Saída         |
 +===================+===============+===============+
 | ``pluralize()``   | BigApple      | BigApples     |
 +                   +---------------+---------------+
@@ -60,27 +61,23 @@ quando fornecidos um argumento de palavra composta.
 +                   +---------------+---------------+
 |                   | big apples    | bigApples     |
 +-------------------+---------------+---------------+
-| ``slug()``        | Big Apple     | big-apple     |
-+                   +---------------+---------------+
-|                   | BigApples     | BigApples     |
-+-------------------+---------------+---------------+
 
-Criando as formas singulares e plurais
-======================================
+Criando Formas Plural e Singular
+=================================
 
 .. php:staticmethod:: singularize($singular)
 .. php:staticmethod:: pluralize($singular)
 
-Tanto ``pluralize()`` quanto ``singularize()`` funcionam para a maioria dos
-substantivos do Inglês. Caso seja necessário o suporte para outras línguas,
-você pode usar :ref:`inflection-configuration` para personalizar as regras usadas::
+Tanto ``pluralize`` quanto ``singularize()`` funcionam na maioria dos substantivos em inglês. Se você precisa
+suportar outros idiomas, você pode usar :ref:`inflection-configuration` para
+personalizar as regras usadas::
 
     // Apples
     echo Inflector::pluralize('Apple');
 
 .. note::
-    ``pluralize()`` pode não funcionar corretamente nos casos onde um substantivo já
-    esteja em sua forma plural.
+
+    ``pluralize()`` não deve ser usado em um substantivo que já está em sua forma plural.
 
 .. code-block:: php
 
@@ -88,16 +85,16 @@ você pode usar :ref:`inflection-configuration` para personalizar as regras usad
     echo Inflector::singularize('People');
 
 .. note::
-    ``singularize()`` pode não funcionar corretamente nos casos onde um substantivo já
-    esteja em sua forma singular.
 
-Criando as formas CamelCase e nome_sublinhado
-=============================================
+    ``singularize()`` não deve ser usado em um substantivo que já está em sua forma singular.
+
+Criando Formas CamelCase e under_scored
+========================================
 
 .. php:staticmethod:: camelize($underscored)
 .. php:staticmethod:: underscore($camelCase)
 
-Estes métodos são úteis para a criação de nomes de classe ou de propriedades::
+Esses métodos são úteis ao criar nomes de classes ou nomes de propriedades::
 
     // ApplePie
     Inflector::camelize('Apple_pie')
@@ -105,32 +102,32 @@ Estes métodos são úteis para a criação de nomes de classe ou de propriedade
     // apple_pie
     Inflector::underscore('ApplePie');
 
-É importante ressaltar que ``underscore()`` irá converter apenas palavras formatadas
-em CamelCase. Palavras com espaços serão convertidas para caixa baixa, mas não serão
-separadas por sublinhado.
+Deve-se notar que underscore converterá apenas palavras formatadas em camelCase.
+Palavras que contêm espaços serão colocadas em minúsculas, mas não conterão um
+underscore.
 
-Criando formas legíveis para humanos
-====================================
+Criando Formas Legíveis para Humanos
+=====================================
 
 .. php:staticmethod:: humanize($underscored)
 
-Este método é útil para converter da forma sublinhada para o "Formato Título" para
-a leitura humana::
+Este método é útil ao converter formas com underscore em formas "Title Case"
+para valores legíveis por humanos::
 
     // Apple Pie
     Inflector::humanize('apple_pie');
 
-Criando formatos para nomes de tabelas e classes
-================================================
+Criando Formas de Nome de Tabela e Classe
+==========================================
 
 .. php:staticmethod:: classify($underscored)
 .. php:staticmethod:: dasherize($dashed)
 .. php:staticmethod:: tableize($camelCase)
 
-Ao gerar o código ou usar as convenções do CakePHP, você pode precisar inferir
-os nomes das tabelas ou classes::
+Ao gerar código ou usar as convenções do CakePHP, você pode precisar inflexionar
+nomes de tabelas ou nomes de classes::
 
-    // UserProfileSettings
+    // UserProfileSetting
     Inflector::classify('user_profile_settings');
 
     // user-profile-setting
@@ -139,66 +136,52 @@ os nomes das tabelas ou classes::
     // user_profile_settings
     Inflector::tableize('UserProfileSetting');
 
-Criando nomes de variáveis
-==========================
+Criando Nomes de Variáveis
+===========================
 
 .. php:staticmethod:: variable($underscored)
 
-Nomes de variáveis geralmente são úteis em tarefas de meta-programação que
-involvem a geração de código ou rotinas baseadas em convenções::
+Nomes de variáveis são frequentemente úteis ao fazer tarefas de meta-programação que envolvem
+gerar código ou fazer trabalho baseado em convenções::
 
     // applePie
     Inflector::variable('apple_pie');
 
-Criando strings de URL seguras
-==============================
-
-.. php:staticmethod:: slug($word, $replacement = '-')
-
-``slug()`` converte caracteres especiais em suas versões normais e converte
-os caracteres não encontrados e espaços em traços. O método ``slug()`` espera
-que a codificação seja UTF-8::
-
-    // apple-puree
-    Inflector::slug('apple purée');
-
-.. note::
-    ``Inflector::slug()`` foi depreciado desde a versão 3.2.7. Procure usar ``Text::slug()``
-    de agora em diante.
 
 .. _inflection-configuration:
 
-Configuração da inflexão
-========================
+Configuração de Inflexão
+=========================
 
-As convenções de nomes do CakePHP podem ser bem confortáveis. Você pode nomear sua
-tabela no banco de dados como ``big_boxes``, seu modelo como ``BigBoxes``, seu
-controlador como ``BigBoxesController`` e tudo funcionará automaticamente. O CakePHP
-entrelaça todos estes conceitos através da inflexão das palavras em suas formas
-singulares e plurais.
+As convenções de nomenclatura do CakePHP podem ser realmente boas - você pode nomear sua tabela
+de banco de dados ``big_boxes``, seu modelo ``BigBoxes``, seu controller
+``BigBoxesController``, e tudo funciona junto automaticamente. A
+maneira como o CakePHP sabe como unir as coisas é *inflexionando* as palavras
+entre suas formas singular e plural.
 
-Porém ocasionalmente (especialmente para os nossos amigos não Anglófonos) podem encontrar
-situações onde o infletor do CakePHP (a classe que pluraliza, singulariza, transforma em
-CamelCase e em nome\_sublinhado) não funciona como você gostaria. Caso o CakePHP não
-reconheça seu "quaisquer" ou "lápis", você pode ensiná-lo a entender seus casos especiais.
+Há ocasiões (especialmente para nossos amigos que não falam inglês) em que você
+pode se deparar com situações em que o inflector do CakePHP (a classe que pluraliza,
+singulariza, cameliza e usa under\_scores) pode não funcionar como você gostaria. Se
+o CakePHP não reconhecer seus Foci ou Fish, você pode informar ao CakePHP sobre seus
+casos especiais.
 
-Carregando inflexões personalizadas
------------------------------------
+Carregando Inflexões Personalizadas
+------------------------------------
 
 .. php:staticmethod:: rules($type, $rules, $reset = false)
 
-Define novas inflexões e transliterações para o ``Inflector`` usar. Geralmente este método
-deve ser chamado no seu **config/bootstrap.php**::
+Defina novas regras de inflexão e transliteração para o Inflector usar. Frequentemente,
+este método é usado em seu **config/bootstrap.php**::
 
     Inflector::rules('singular', ['/^(bil)er$/i' => '\1', '/^(inflec|contribu)tors$/i' => '\1ta']);
     Inflector::rules('uninflected', ['singulars']);
-    Inflector::rules('irregular', ['phylum' => 'phyla']); // The key is singular form, value is plural form
+    Inflector::rules('irregular', ['phylum' => 'phyla']); // A chave é a forma singular, o valor é a forma plural
 
-As regras ditadas por este método serão agregadas aos conjuntos de inflexão definidos em ``Cake/Utility/Inflector``,
-onde elas terão prioridade sobre as regras já declaradas por padrão. Você pode usar ``Inflector::reset()``
-para limpar todas as regras e retornar o ``Inflector`` para seu estado original.
+As regras fornecidas serão mescladas nos respectivos conjuntos de inflexão definidos em
+``Cake/Utility/Inflector``, com as regras adicionadas tendo precedência sobre as regras
+principais. Você pode usar ``Inflector::reset()`` para limpar regras e restaurar o
+estado original do Inflector.
 
 .. meta::
     :title lang=pt: Inflector
-    :keywords lang=en: apple orange,word variations,apple pie,person man,latin versions,profile settings,php class,initial state,puree,slug,apples,oranges,user profile,underscore
-    :keywords lang=pt: inflexão, infletor, variações de palavras, caracteres especiais, conversão, sublinhado, variações, plural, pluralização, singular, singularização, regras, urls seguras
+    :keywords lang=pt: apple orange,word variations,apple pie,person man,latin versions,profile settings,php class,initial state,puree,slug,apples,oranges,user profile,underscore

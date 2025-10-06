@@ -1,4 +1,4 @@
 Chronos
-#######
+=======
 
-Esta página foi `movida <https://book.cakephp.org/chronos/1.x/pt/>`__.
+Esta página foi `movida <https://book.cakephp.org/chronos/2.x/en/>`__.

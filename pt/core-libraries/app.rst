@@ -5,86 +5,85 @@ Classe App
 
 .. php:class:: App
 
-A classe App é responsável pela localização dos recursos e pelo gerenciamento de caminhos.
+A classe App é responsável pela localização de recursos e gerenciamento de caminhos.
 
 Encontrando Classes
 ===================
 
-.. php:staticmethod:: classname($name, $type = '', $suffix = '')
+.. php:staticmethod:: className($name, $type = '', $suffix = '')
 
-Este método é usado para resolver nomes de classes no CakePHP. Resolve os 
-nomes abreviados do CakePHP e retorna o nome da classe totalmente resolvido::
+Este método é usado para resolver nomes de classe em todo o CakePHP. Ele resolve
+os nomes abreviados que o CakePHP usa e retorna o nome de classe totalmente resolvido::
 
-    // Resolva um nome de classe curto com o namespace + sufixo.
-    App::classname('Auth', 'Controller/Component', 'Component');
-    // Retorna Cake\Controller\Component\AuthComponent
+    // Resolve a short class name with the namespace + suffix.
+    App::className('Flash', 'Controller/Component', 'Component');
+    // Returns Cake\Controller\Component\FlashComponent
 
-    // Resolve o nome do plugin
-    App::classname('DebugKit.Toolbar', 'Controller/Component', 'Component');
-    // Retorna DebugKit\Controller\Component\ToolbarComponent
+    // Resolve a plugin name.
+    App::className('DebugKit.Toolbar', 'Controller/Component', 'Component');
+    // Returns DebugKit\Controller\Component\ToolbarComponent
 
-    // Os nomes com \ serão retornados inalterados.
-    App::classname('App\Cache\ComboCache');
-    // Retorna App\Cache\ComboCache
+    // Names with \ in them will be returned unaltered.
+    App::className('App\Cache\ComboCache');
+    // Returns App\Cache\ComboCache
 
-Ao resolver as classes, o namespace ``App`` será tentado e, se 
-a classe não existir, o espaço para nome ``Cake`` será tentado. Se ambos 
+Ao resolver classes, o namespace ``App`` será tentado primeiro e, se a
+classe não existir, o namespace ``Cake`` será tentado. Se ambos
 os nomes de classe não existirem, ``false`` será retornado.
 
-Localizando Caminhos para Namespaces
-====================================
+Encontrando Caminhos para Recursos
+===================================
 
-.. php:staticmethod:: path(string $package, string $plugin = null)
+.. php:staticmethod:: path(string $package, ?string $plugin = null)
 
-Usado para obter locais para caminhos com base em convenções::
+O método retorna caminhos definidos usando a configuração da aplicação ``App.paths``::
 
-    // Obtenha o caminho para o Controller / no seu aplicativo
-    App::path('Controller');
+    // Get the templates path set using ``App.paths.templates`` app config.
+    App::path('templates');
 
-Isso pode ser feito para todos os namespaces que fazem parte do seu aplicativo. 
-Você também pode buscar caminhos para um plug-in::
+Da mesma forma, você pode recuperar caminhos para ``locales`` e ``plugins``.
 
-    // Retorna os caminhos do componente no DebugKit
-    App::path('Component', 'DebugKit');
+Encontrando Caminhos para Namespaces
+=====================================
 
-``App::path()`` retornará apenas o caminho padrão e não poderá fornecer 
-informações sobre caminhos adicionais para os quais o carregador automático 
-está configurado.
+.. php:staticmethod:: classPath(string $package, ?string $plugin = null)
+
+Usado para obter localizações de caminhos baseados em convenções::
+
+    // Get the path to Controller/ in your application
+    App::classPath('Controller');
+
+Isso pode ser feito para todos os namespaces que fazem parte da sua aplicação.
+
+``App::classPath()`` retornará apenas o caminho padrão e não será capaz de
+fornecer informações sobre caminhos adicionais configurados no autoloader.
 
 .. php:staticmethod:: core(string $package)
 
 Usado para encontrar o caminho para um pacote dentro do CakePHP::
 
-    // Obtenha o caminho para os mecanismos de cache.
+    // Get the path to Cache engines.
     App::core('Cache/Engine');
 
-Localizando Plugins
-===================
+Localizando Themes
+==================
 
-.. php:staticmethod:: Plugin::path(string $plugin)
+Como os themes são plugins, você pode usar os métodos acima para obter o caminho para
+um theme.
 
-Os plug-ins podem ser localizados com o Plugin. Usar ``Plugin::path('DebugKit');`` 
-por exemplo, fornecerá o caminho completo para o plug-in DebugKit::
+Carregando Arquivos de Vendor
+==============================
 
-    $path = Plugin::path('DebugKit');
+Idealmente, arquivos de vendor devem ser carregados automaticamente com o ``Composer``. Se você tem arquivos
+de vendor que não podem ser carregados automaticamente ou instalados com Composer, você precisará usar
+``require`` para carregá-los.
 
-Localizando Temas
-=================
-
-Como os temas são plugins, você pode usar os métodos acima para obter o caminho para um tema.
-
-Carregando Arquivos do Fornecedor
-=================================
-
-O ideal é que os arquivos do fornecedor sejam carregados automaticamente com 
-o ``Composer``, se você tiver arquivos que não possam ser carregados ou instalados 
-automaticamente com o Composer, será necessário usar o ``require`` para carregá-los.
-
-Se você não conseguir instalar uma biblioteca com o Composer, é melhor instalar cada 
-biblioteca em um diretório, seguindo a convenção do Composer de ``vendor/$author/$ package``. 
-Se você tiver uma biblioteca chamada AcmeLib, poderá instalá-la em ``vendor/Acme/AcmeLib``. 
-Supondo que ele não usasse nomes de classe compatíveis com PSR-0, você poderia carregar 
-automaticamente as classes dentro dele usando ``classmap`` no ``composer.json`` do seu aplicativo::
+Se você não puder instalar uma biblioteca com Composer, é melhor instalar cada biblioteca em
+um diretório seguindo a convenção do Composer de ``vendor/$author/$package``.
+Se você tivesse uma biblioteca chamada AcmeLib, você poderia instalá-la em
+``vendor/Acme/AcmeLib``. Supondo que ela não use nomes de classe compatíveis com PSR-0,
+você poderia carregar automaticamente as classes dentro dela usando ``classmap`` no
+``composer.json`` da sua aplicação::
 
     "autoload": {
         "psr-4": {
@@ -96,9 +95,9 @@ automaticamente as classes dentro dele usando ``classmap`` no ``composer.json`` 
         ]
     }
 
-Se a sua biblioteca de fornecedores não usa classes e, em vez disso, fornece funções, 
-você pode configurar o Composer para carregar esses arquivos no início de cada solicitação 
-usando a estratégia de carregamento automático ``files``::
+Se sua biblioteca de vendor não usa classes e, em vez disso, fornece funções, você
+pode configurar o Composer para carregar esses arquivos no início de cada requisição
+usando a estratégia de autoloading ``files``::
 
     "autoload": {
         "psr-4": {
@@ -110,13 +109,13 @@ usando a estratégia de carregamento automático ``files``::
         ]
     }
 
-Depois de configurar as bibliotecas do fornecedor, você precisará regenerar 
-o carregador automático do seu aplicativo usando::
+Após configurar as bibliotecas de vendor, você precisará regenerar o
+autoloader da sua aplicação usando::
 
     $ php composer.phar dump-autoload
 
-Se você não estiver usando o Composer em seu aplicativo, precisará carregar 
-manualmente todas as bibliotecas de fornecedores.
+Se você não estiver usando Composer na sua aplicação, você precisará
+carregar manualmente todas as bibliotecas de vendor.
 
 .. meta::
     :title lang=pt: Classe App

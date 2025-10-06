@@ -1,54 +1,50 @@
 REST
 ####
 
-Muitos programadores de aplicações mais recentes estão percebendo a necessidade de abrir seu núcleo
-de funcionalidade para uma maior audiência. Fornecer acesso fácil e irrestrito ao seu
-a API principal pode ajudar a aceitar sua plataforma, e permite o mashups e fácil
-integração com outros sistemas.
+REST é um conceito fundamental para a web aberta. O CakePHP fornece funcionalidade
+para construir aplicações que expõem APIs REST com abstrações e interfaces de
+baixa complexidade.
 
-Embora existam outras soluções, o REST é uma ótima maneira de facilitar o acesso
-a lógica que você criou em sua aplicação. É simples, geralmente baseado em XML (nós estamos
-falando XML simples, nada como um envelope SOAP) e depende de cabeçalhos HTTP
-para direção. Expor uma API via REST no CakePHP é simples.
+O CakePHP fornece métodos para expor suas ações de controller através de métodos HTTP,
+e serializar variáveis de view baseadas em negociação de content-type. A negociação
+de Content-Type permite que clientes da sua aplicação enviem requisições com dados
+serializados e recebam respostas com dados serializados através dos cabeçalhos
+``Accept`` e ``Content-Type``, ou extensões de URL.
 
-A Configuração é simples
-========================
+Primeiros Passos
+================
 
-A maneira mais rápida de começar com o REST é adicionar algumas linhas para configurar :ref:`resource routes <resource-routes>` em seu config/routes.php.
-
-Uma vez que o roteador foi configurado para mapear solicitações REST para determinado controller
-as actions, podemos avançar para criar a lógica em nossas actions no controller. Um controller básico pode parecer algo assim::
+Para começar a adicionar uma API REST à sua aplicação, primeiro precisaremos
+de um controller contendo ações que queremos expor como uma API. Um controller
+básico pode se parecer com algo assim::
 
     // src/Controller/RecipesController.php
+    use Cake\View\JsonView;
+
     class RecipesController extends AppController
     {
-
-        public function initialize()
+        public function viewClasses(): array
         {
-            parent::initialize();
-            $this->loadComponent('RequestHandler');
+            return [JsonView::class];
         }
 
         public function index()
         {
-            $recipes = $this->Recipes->find('all');
-            $this->set([
-                'recipes' => $recipes,
-                '_serialize' => ['recipes']
-            ]);
+            $recipes = $this->Recipes->find('all')->all();
+            $this->set('recipes', $recipes);
+            $this->viewBuilder()->setOption('serialize', ['recipes']);
         }
 
         public function view($id)
         {
             $recipe = $this->Recipes->get($id);
-            $this->set([
-                'recipe' => $recipe,
-                '_serialize' => ['recipe']
-            ]);
+            $this->set('recipe', $recipe);
+            $this->viewBuilder()->setOption('serialize', ['recipe']);
         }
 
         public function add()
         {
+            $this->request->allowMethod(['post', 'put']);
             $recipe = $this->Recipes->newEntity($this->request->getData());
             if ($this->Recipes->save($recipe)) {
                 $message = 'Saved';
@@ -58,111 +54,99 @@ as actions, podemos avançar para criar a lógica em nossas actions no controlle
             $this->set([
                 'message' => $message,
                 'recipe' => $recipe,
-                '_serialize' => ['message', 'recipe']
             ]);
+            $this->viewBuilder()->setOption('serialize', ['recipe', 'message']);
         }
 
         public function edit($id)
         {
+            $this->request->allowMethod(['patch', 'post', 'put']);
             $recipe = $this->Recipes->get($id);
-            if ($this->request->is(['post', 'put'])) {
-                $recipe = $this->Recipes->patchEntity($recipe, $this->request->getData());
-                if ($this->Recipes->save($recipe)) {
-                    $message = 'Saved';
-                } else {
-                    $message = 'Error';
-                }
+            $recipe = $this->Recipes->patchEntity($recipe, $this->request->getData());
+            if ($this->Recipes->save($recipe)) {
+                $message = 'Saved';
+            } else {
+                $message = 'Error';
             }
             $this->set([
                 'message' => $message,
-                '_serialize' => ['message']
+                'recipe' => $recipe,
             ]);
+            $this->viewBuilder()->setOption('serialize', ['recipe', 'message']);
         }
 
         public function delete($id)
         {
+            $this->request->allowMethod(['delete']);
             $recipe = $this->Recipes->get($id);
             $message = 'Deleted';
             if (!$this->Recipes->delete($recipe)) {
                 $message = 'Error';
             }
-            $this->set([
-                'message' => $message,
-                '_serialize' => ['message']
-            ]);
+            $this->set('message', $message);
+            $this->viewBuilder()->setOption('serialize', ['message']);
         }
     }
 
-Os controllers RESTful geralmente usam extensões analisadas para exibir diferentes visualizações
-com base em diferentes tipos de requisições. Como estamos lidando com pedidos REST, estaremos fazendo visualizações XML.
-Você pode fazer visualizações JSON usando o CakePHP's para criar :doc:`/views/json-and-xml-views`. Ao usar o buld-in
-:php:class:`XmlView` podemos definir uma variável na view ``_serialize``. A variável de exibição é usada para definir
-quais variáveis de exibição ``XmlView`` devem Serializar em XML ou JSON.
+No nosso ``RecipesController``, temos várias ações que definem a lógica
+para criar, editar, visualizar e excluir receitas. Em cada uma das nossas ações
+estamos usando a opção ``serialize`` para dizer ao CakePHP quais variáveis de
+view devem ser serializadas ao fazer respostas de API. Vamos conectar nosso
+controller às URLs da aplicação com :ref:`resource-routes`::
 
-Se quisermos modificar os dados antes de serem convertidos em XML ou JSON, não devemos
-definir a variável de exibição `` _serialize`` e, em vez disso, use arquivos de template. Colocamos
-as saidas REST para nosso RecipesController dentro de **templates/Recipes/xml**. Nós também podemos usar
-The :php:class:`Xml` para saída XML rápida e fácil::
+    // in config/routes.php
+    $routes->scope('/', function (RouteBuilder $routes): void {
+        $routes->setExtensions(['json']);
+        $routes->resources('Recipes');
+    });
 
-    // templates/Recipes/xml/index.php
-    // Faça alguma formatação e manipulação em
-    // the $recipes array.
-    $xml = Xml::fromArray(['response' => $recipes]);
-    echo $xml->asXML();
+Essas rotas habilitarão URLs como ``/recipes.json`` para retornar uma resposta
+codificada em JSON. Clientes também podem fazer uma requisição para ``/recipes``
+com o cabeçalho ``Content-Type: application/json`` também.
 
-Ao servir um tipo de conteúdo específico usando :php:meth:`Cake\\Routing\\Router::extensions()`,
-CakePHP procura automaticamente um auxiliar de visualização.
-Uma vez que estamos usando o XML como o tipo de conteúdo, não há um helper interno,
-no entanto, se você criasse um, ele seria automaticamente carregado
-Para o nosso uso nessas views.
+Codificando Dados de Resposta
+==============================
 
-O XML renderizado acabará por parecer algo assim::
+No controller acima, estamos definindo um método ``viewClasses()``. Este método
+define quais views seu controller tem disponíveis para negociação de conteúdo.
+Estamos incluindo a ``JsonView`` do CakePHP que habilita respostas baseadas em JSON.
+Para aprender mais sobre isso e views baseadas em Xml veja :doc:`/views/json-and-xml-views`.
+é usado pelo CakePHP para selecionar uma classe de view para renderizar uma resposta REST.
 
-    <recipes>
-        <recipe>
-            <id>234</id>
-            <created>2008-06-13</created>
-            <modified>2008-06-14</modified>
-            <author>
-                <id>23423</id>
-                <first_name>Billy</first_name>
-                <last_name>Bob</last_name>
-            </author>
-            <comment>
-                <id>245</id>
-                <body>Yummy yummmy</body>
-            </comment>
-        </recipe>
-        ...
-    </recipes>
+Em seguida, temos vários métodos que expõem a lógica básica para criar, editar,
+visualizar e excluir receitas. Em cada uma das nossas ações estamos usando a opção
+``serialize`` para dizer ao CakePHP quais variáveis de view devem ser serializadas
+ao fazer respostas de API.
 
-Criar uma lógica para editar uma action é um pouco mais complicado, mas não muito. Desde a
-que você está fornecendo uma API que emite XML, é uma escolha natural para receber XML
-Como entrada. Não se preocupe, o
-:php:class:`Cake\\Controller\\Component\\RequestHandler` e
-:php:class:`Cake\\Routing\\Router` tornam as coisas muito mais fáceis. Se um POST ou
-A solicitação PUT tem um tipo de conteúdo XML, então a entrada é executada através do CakePHP's
-:php:class:`Xml`, e a representação da array dos dados é atribuída a
-``$this->request->getData()``. Devido a essa característica, lidar com dados XML e POST em
-O paralelo é transparente: não são necessárias alterações ao código do controlador ou do modelo.
-Tudo o que você precisa deve terminar em ``$this->request->getData()``.
+Se quiséssemos modificar os dados antes de serem convertidos em JSON, não deveríamos
+definir a opção ``serialize``, e ao invés disso usar arquivos de template. Colocaríamos
+os templates REST para nosso RecipesController dentro de **templates/Recipes/json**.
 
-Aceitando entrada em outros formatos
-====================================
+Veja :ref:`controller-viewclasses` para mais informações sobre como funciona a
+funcionalidade de negociação de resposta do CakePHP.
 
-Normalmente, os aplicativos REST não apenas exibem conteúdo em formatos de dados alternativos,
-Mas também aceitam dados em diferentes formatos. No CakePHP, o
-:php:class:`RequestHandlerComponent` ajuda a facilitar isso. Por padrão,
-Ele decodificará qualquer entrada de dados de entrada JSON/XML para solicitações POST/PUT
-E forneça a versão da array desses dados em ``$this->request->getData()``.
-Você também pode usar desserializadores adicionais para formatos alternativos se você
-Precisa deles, usando :php:meth:`RequestHandler::addInputType()`.
+Analisando Corpos de Requisição
+================================
 
-Roteamento RESTful
-==================
+Criar a lógica para a ação edit requer outro passo. Como nossos recursos são
+serializados como JSON, seria ergonômico se nossas requisições também contivessem
+a representação JSON.
 
-O roteador CakePHP facilita a conexão das rotas de recursos RESTful. Veja a seção :ref:`resource-routes`  para mais informações.
+Na sua classe ``Application`` certifique-se de que o seguinte está presente::
+
+    $middlewareQueue->add(new BodyParserMiddleware());
+
+Este middleware usará o cabeçalho ``content-type`` para detectar o formato dos
+dados da requisição e analisar os formatos habilitados. Por padrão, apenas a
+análise de ``JSON`` está habilitada. Você pode habilitar o suporte a XML
+habilitando a opção de construtor ``xml``. Quando uma requisição é feita com um
+``Content-Type`` de ``application/json``, o CakePHP decodificará os dados da
+requisição e atualizará a requisição para que ``$request->getData()`` contenha
+o corpo analisado.
+
+Você também pode conectar desserializadores adicionais para formatos alternativos
+se precisar deles, usando :php:meth:`BodyParserMiddleware::addParser()`.
 
 .. meta::
-    :title lang=en: REST
-    :keywords lang=en: application programmers,default routes,core functionality,result format,mashups,recipe database,request method,easy access,config,soap,recipes,logic,audience,cakephp,running,api
+    :title lang=pt: REST
+    :keywords lang=pt: application programmers,default routes,core functionality,result format,mashups,recipe database,request method,access,config,soap,recipes,logic,audience,cakephp,running,api

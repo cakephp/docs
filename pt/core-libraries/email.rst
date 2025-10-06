@@ -213,7 +213,7 @@ Ao configurar ajudantes, certifique-se de incluir 'Html' ou ele será removido d
 ajudantes carregados em seu modelo de email.
 
 Se você deseja enviar e-mail usando templates em um plugin, você pode usar a familiar 
-:term:`sintaxe plugin` para fazer isso::
+:term:`sintaxe de plugin` para fazer isso::
 
     $mailer = new Mailer();
     $mailer->viewBuilder()->setTemplate('Blog.new_comment');

@@ -5,94 +5,95 @@ Hash
 
 .. php:class:: Hash
 
-O gerenciamento de matrizes, se feito da maneira certa, pode ser uma 
-ferramenta muito poderosa e útil para construir um código mais inteligente 
-e otimizado. O CakePHP oferece um conjunto muito útil de utilitários estáticos 
-na classe Hash que permitem que você faça exatamente isso.
+O gerenciamento de arrays, se feito corretamente, pode ser uma ferramenta muito poderosa e útil
+para construir código mais inteligente e otimizado. O CakePHP oferece um
+conjunto muito útil de utilitários estáticos na classe Hash que permitem fazer
+exatamente isso.
 
-A classe Hash do CakePHP pode ser chamada de qualquer template ou controlador da 
-mesma forma que o Inflector é chamado. Exemplo: :php:meth:`Hash::combine()`.
+A classe Hash do CakePHP pode ser chamada de qualquer model ou controller da
+mesma forma que Inflector é chamado. Exemplo: :php:meth:`Hash::combine()`.
 
 .. _hash-path-syntax:
 
-Sintaxe do Caminho de Hash
-==========================
+Sintaxe de Caminho do Hash
+===========================
 
-A sintaxe de caminho descrita abaixo é usada por todos os métodos em ``Hash``. 
-Nem todas as partes da sintaxe do caminho estão disponíveis em todos os métodos. 
-Uma expressão de caminho é feita de qualquer número de tokens. Os tokens são compostos 
-por dois grupos. Expressões são usadas para percorrer os dados da matriz, enquanto as
-expressões são usadas para qualificar elementos.
+A sintaxe de caminho descrita abaixo é usada por todos os métodos em ``Hash``. Nem todas
+as partes da sintaxe de caminho estão disponíveis em todos os métodos. Uma expressão de caminho é
+composta por qualquer número de tokens. Tokens são compostos de dois grupos. Expressões
+são usadas para atravessar os dados do array, enquanto matchers são usados para qualificar
+elementos. Você aplica matchers a elementos de expressão.
 
 Tipos de Expressão
-------------------
+-------------------
 
 +--------------------------------+--------------------------------------------+
 | Expressão                      | Definição                                  |
 +================================+============================================+
 | ``{n}``                        | Representa uma chave numérica. Irá         |
-|                                | corresponder a qualquer string ou chave    |
-|                                | numérica                                   |
+|                                | corresponder qualquer chave string ou      |
+|                                | numérica.                                  |
 +--------------------------------+--------------------------------------------+
-| ``{s}``                        | Representa uma string. Irá corresponder a  |
-|                                | qualquer valor de string, incluindo        |
-|                                | valores de string numéricos.               |
+| ``{s}``                        | Representa uma string. Irá corresponder    |
+|                                | qualquer valor string incluindo valores de |
+|                                | string numéricos.                          |
 +--------------------------------+--------------------------------------------+
-| ``{*}``                        | Corresponde a qualquer valor.              |
+| ``{*}``                        | Corresponde qualquer valor.                |
 +--------------------------------+--------------------------------------------+
-| ``Foo``                        | Corresponde às chaves exatamente com o     |
-|                                | mesmo valor.                               |
+| ``Foo``                        | Corresponde chaves com exatamente o mesmo  |
+|                                | valor.                                     |
 +--------------------------------+--------------------------------------------+
 
-Todos os elementos de expressão são suportados por todos os métodos. Além de 
-elementos de expressão, você pode usar a correspondência de atributos com certos 
-métodos. Eles são: ``extract()``, ``combine()``, ``format()``, ``check()``, ``map()``, ``reduce()``,
+Todos os elementos de expressão são suportados por todos os métodos. Além dos elementos de expressão,
+você pode usar correspondência de atributos com certos métodos. Eles são ``extract()``,
+``combine()``, ``format()``, ``check()``, ``map()``, ``reduce()``,
 ``apply()``, ``sort()``, ``insert()``, ``remove()`` e ``nest()``.
 
 Tipos de Correspondência de Atributos
--------------------------------------
+--------------------------------------
 
 +--------------------------------+--------------------------------------------+
-| Expressão                      | Definição                                  |
+| Matcher                        | Definição                                  |
 +================================+============================================+
-| ``[id]``                       | Combine elementos com uma determinada      |
+| ``[id]``                       | Corresponde elementos com uma determinada  |
 |                                | chave de array.                            |
 +--------------------------------+--------------------------------------------+
-| ``[id=2]``                     | Combine elementos com id igual a 2.        |
+| ``[id=2]``                     | Corresponde elementos com id igual a 2.    |
 +--------------------------------+--------------------------------------------+
-| ``[id!=2]``                    | Combine elementos com id diferente de 2.   |
+| ``[id!=2]``                    | Corresponde elementos com id diferente     |
+|                                | de 2.                                      |
 +--------------------------------+--------------------------------------------+
-| ``[id>2]``                     | Combine elementos com id maior que 2.      |
+| ``[id>2]``                     | Corresponde elementos com id maior que 2.  |
 +--------------------------------+--------------------------------------------+
-| ``[id>=2]``                    | Combine elementos com id maior ou          |
+| ``[id>=2]``                    | Corresponde elementos com id maior ou      |
 |                                | igual a 2.                                 |
 +--------------------------------+--------------------------------------------+
-| ``[id<2]``                     | Combine elementos com id menor que 2       |
+| ``[id<2]``                     | Corresponde elementos com id menor que 2   |
 +--------------------------------+--------------------------------------------+
-| ``[id<=2]``                    | Combine elementos com id menor ou          |
+| ``[id<=2]``                    | Corresponde elementos com id menor ou      |
 |                                | igual a 2.                                 |
 +--------------------------------+--------------------------------------------+
-| ``[text=/.../]``               | Combine elementos que possuem valores      |
-|                                | correspondentes à expressão regular        |
-|                                | dentro de ``...``.                         |
+| ``[text=/.../]``               | Corresponde elementos que têm valores      |
+|                                | correspondentes à expressão regular dentro |
+|                                | de ``...``.                                |
 +--------------------------------+--------------------------------------------+
 
 .. php:staticmethod:: get(array|\ArrayAccess $data, $path, $default = null)
 
-    ``get()`` é uma versão simplificada de ``extract()``, ele só suporta expressões 
-    de caminho direto. Caminhos como ``{n}``, ``{s}``, ``{*}`` ou expressões não 
-    são suportados. Use ``get()`` quando quiser exatamente um valor de uma matriz. 
-    Se um caminho correspondente não for encontrado, o valor padrão será retornado.
+    ``get()`` é uma versão simplificada de ``extract()``, suporta apenas
+    expressões de caminho direto. Caminhos com ``{n}``, ``{s}``, ``{*}`` ou matchers não são
+    suportados. Use ``get()`` quando você deseja exatamente um valor de um array. Se
+    um caminho correspondente não for encontrado, o valor padrão será retornado.
 
 .. php:staticmethod:: extract(array|\ArrayAccess $data, $path)
 
-    ``Hash::extract()`` suporta todas as expressões e componentes de correspondência 
-    :ref:`hash-path-syntax`. Você pode usar a extração para recuperar dados de matrizes
-    ou objetos que implementam a interface ``ArrayAccess``, ao longo de caminhos arbitrários 
-    rapidamente, sem ter que percorrer as estruturas de dados. Em vez disso, você usa expressões 
-    de caminho para qualificar quais elementos você deseja que sejam retornados::
+    ``Hash::extract()`` suporta todos os componentes de expressão e matcher de
+    :ref:`hash-path-syntax`. Você pode usar extract para recuperar dados de arrays
+    ou objetos que implementam a interface ``ArrayAccess``, ao longo de caminhos arbitrários
+    rapidamente sem ter que fazer loop pelas estruturas de dados. Em vez disso, você
+    usa expressões de caminho para qualificar quais elementos você deseja retornados::
 
-        // Uso comum:
+        // Uso Comum:
         $users = [
             ['id' => 1, 'name' => 'mark'],
             ['id' => 2, 'name' => 'jane'],
@@ -105,13 +106,13 @@ Tipos de Correspondência de Atributos
 
 .. php:staticmethod:: Hash::insert(array $data, $path, $values = null)
 
-    Insere ``$values`` em uma matriz conforme definido por ``$path``::
+    Insere ``$values`` em um array conforme definido por ``$path``::
 
         $a = [
             'pages' => ['name' => 'page']
         ];
         $result = Hash::insert($a, 'files', ['name' => 'files']);
-        // $result agora parece:
+        // $result agora parece com:
         [
             [pages] => [
                 [name] => page
@@ -121,11 +122,12 @@ Tipos de Correspondência de Atributos
             ]
         ]
 
-    Você pode usar caminhos usando ``{n}``, ``{s}`` e ``{*}`` para inserir dados em vários pontos::
+    Você pode usar caminhos usando ``{n}``, ``{s}`` e ``{*}`` para inserir dados em múltiplos
+    pontos::
 
         $users = Hash::insert($users, '{n}.new', 'value');
 
-    As expressões de atributos funcionam com ``insert()`` também::
+    Matchers de atributos também funcionam com ``insert()``::
 
         $data = [
             0 => ['up' => true, 'Item' => ['id' => 1, 'title' => 'first']],
@@ -135,7 +137,7 @@ Tipos de Correspondência de Atributos
             4 => ['Item' => ['id' => 5, 'title' => 'fifth']],
         ];
         $result = Hash::insert($data, '{n}[up].Item[id=4].new', 9);
-        /* $result agora se parece:
+        /* $result agora parece com:
             [
                 ['up' => true, 'Item' => ['id' => 1, 'title' => 'first']],
                 ['Item' => ['id' => 2, 'title' => 'second']],
@@ -147,14 +149,14 @@ Tipos de Correspondência de Atributos
 
 .. php:staticmethod:: remove(array $data, $path)
 
-    Remove todos os elementos de uma matriz que corresponde a ``$path``. ::
+    Remove todos os elementos de um array que correspondem a ``$path``. ::
 
         $a = [
             'pages' => ['name' => 'page'],
             'files' => ['name' => 'files']
         ];
         $result = Hash::remove($a, 'files');
-        /* $result agora se parece:
+        /* $result agora parece com:
             [
                 [pages] => [
                     [name] => page
@@ -163,8 +165,8 @@ Tipos de Correspondência de Atributos
             ]
         */
 
-    Usando ``{n}``, ``{s}`` e ``{*}`` permitirá que você remova múltiplos valores 
-    de uma vez. Você também pode usar expressões de atributo com ``remove()``::
+    Usar ``{n}``, ``{s}`` e ``{*}`` permitirá que você remova vários valores de uma vez.
+    Você também pode usar matchers de atributos com ``remove()``::
 
         $data = [
             0 => ['clear' => true, 'Item' => ['id' => 1, 'title' => 'first']],
@@ -174,7 +176,7 @@ Tipos de Correspondência de Atributos
             4 => ['Item' => ['id' => 5, 'title' => 'fifth']],
         ];
         $result = Hash::remove($data, '{n}[clear].Item[id=4]');
-        /* $result agora se parece:
+        /* $result agora parece com:
             [
                 ['clear' => true, 'Item' => ['id' => 1, 'title' => 'first']],
                 ['Item' => ['id' => 2, 'title' => 'second']],
@@ -186,11 +188,11 @@ Tipos de Correspondência de Atributos
 
 .. php:staticmethod:: combine(array $data, $keyPath, $valuePath = null, $groupPath = null)
 
-    Cria uma matriz associativa usando um ``$keyPath`` como o caminho para construir 
-    suas chaves, e opcionalmente ``$valuePath`` como o caminho para obter os valores. 
-    Se ``$valuePath`` não for especificado, ou não corresponder a nada, os valores 
-    serão inicializados como nulos. Você pode opcionalmente agrupar os valores pelo 
-    que é obtido ao seguir o caminho especificado em ``$groupPath``.::
+    Cria um array associativo usando um ``$keyPath`` como o caminho para construir suas chaves,
+    e opcionalmente ``$valuePath`` como caminho para obter os valores. Se ``$valuePath`` não for
+    especificado, ou não corresponder a nada, os valores serão inicializados como null.
+    Você pode opcionalmente agrupar os valores pelo que é obtido ao seguir o
+    caminho especificado em ``$groupPath``. ::
 
         $a = [
             [
@@ -216,7 +218,7 @@ Tipos de Correspondência de Atributos
         ];
 
         $result = Hash::combine($a, '{n}.User.id');
-        /* $result agora se parece com:
+        /* $result agora parece com:
             [
                 [2] =>
                 [14] =>
@@ -224,7 +226,7 @@ Tipos de Correspondência de Atributos
         */
 
         $result = Hash::combine($a, '{n}.User.id', '{n}.User.Data.user');
-        /* $result agora se parece com:
+        /* $result agora parece com:
             [
                 [2] => 'mariano.iglesias'
                 [14] => 'phpnut'
@@ -232,7 +234,7 @@ Tipos de Correspondência de Atributos
         */
 
         $result = Hash::combine($a, '{n}.User.id', '{n}.User.Data');
-        /* $result agora se parece com:
+        /* $result agora parece com:
             [
                 [2] => [
                         [user] => mariano.iglesias
@@ -246,7 +248,7 @@ Tipos de Correspondência de Atributos
         */
 
         $result = Hash::combine($a, '{n}.User.id', '{n}.User.Data.name');
-        /* $result agora se parece com:
+        /* $result agora parece com:
             [
                 [2] => Mariano Iglesias
                 [14] => Larry E. Masters
@@ -254,7 +256,7 @@ Tipos de Correspondência de Atributos
         */
 
         $result = Hash::combine($a, '{n}.User.id', '{n}.User.Data', '{n}.User.group_id');
-        /* $result agora se parece com:
+        /* $result agora parece com:
             [
                 [1] => [
                         [2] => [
@@ -272,7 +274,7 @@ Tipos de Correspondência de Atributos
         */
 
         $result = Hash::combine($a, '{n}.User.id', '{n}.User.Data.name', '{n}.User.group_id');
-        /* $result agora se parece com:
+        /* $result agora parece com:
             [
                 [1] => [
                         [2] => Mariano Iglesias
@@ -283,17 +285,17 @@ Tipos de Correspondência de Atributos
             ]
         */
 
-        // A partir de 3.9.0 $keyPath pode ser nulo 
+        // A partir da versão 3.9.0 $keyPath pode ser null
         $result = Hash::combine($a, null, '{n}.User.Data.name');
-        /* $result agora se parece com:
+        /* $result agora parece com:
             [
                 [0] => Mariano Iglesias
                 [1] => Larry E. Masters
             ]
         */
 
-    Você pode fornecer matrizes para ``$keyPath`` e ``$valuePath``. Se você fizer isso, 
-    o primeiro valor será usado com o formato de string, para valores extraídos por 
+    Você pode fornecer arrays para ambos ``$keyPath`` e ``$valuePath``. Se você fizer isso,
+    o primeiro valor será usado como uma string de formato, para valores extraídos pelos
     outros caminhos::
 
         $result = Hash::combine(
@@ -302,7 +304,7 @@ Tipos de Correspondência de Atributos
             ['%s: %s', '{n}.User.Data.user', '{n}.User.Data.name'],
             '{n}.User.group_id'
         );
-        /* $result agora se parece com:
+        /* $result agora parece com:
             [
                 [1] => [
                         [2] => mariano.iglesias: Mariano Iglesias
@@ -318,7 +320,7 @@ Tipos de Correspondência de Atributos
             ['%s: %s', '{n}.User.Data.user', '{n}.User.Data.name'],
             '{n}.User.id'
         );
-        /* $result agora se parece com:
+        /* $result agora parece com:
             [
                 [mariano.iglesias: Mariano Iglesias] => 2
                 [phpnut: Larry E. Masters] => 14
@@ -327,8 +329,8 @@ Tipos de Correspondência de Atributos
 
 .. php:staticmethod:: format(array $data, array $paths, $format)
 
-    Retorna uma série de valores extraídos de uma matriz, formatados 
-    com uma string::
+    Retorna uma série de valores extraídos de um array, formatados com uma
+    string de formato::
 
         $data = [
             [
@@ -380,7 +382,8 @@ Tipos de Correspondência de Atributos
 
 .. php:staticmethod:: contains(array $data, array $needle)
 
-    Determina se um Hash ou matriz contém as chaves e valores exatos de outro::
+    Determina se um Hash ou array contém as chaves e valores exatos
+    de outro::
 
         $a = [
             0 => ['name' => 'main'],
@@ -390,7 +393,7 @@ Tipos de Correspondência de Atributos
             0 => ['name' => 'main'],
             1 => ['name' => 'about'],
             2 => ['name' => 'contact'],
-            'a' => 'b'
+            'a' => 'b',
         ];
 
         $result = Hash::contains($a, $a);
@@ -402,7 +405,7 @@ Tipos de Correspondência de Atributos
 
 .. php:staticmethod:: check(array $data, string $path = null)
 
-    Verifica se um determinado caminho está definido em uma matriz::
+    Verifica se um caminho específico está definido em um array::
 
         $set = [
             'My Index 1' => ['First' => 'The first item']
@@ -438,10 +441,9 @@ Tipos de Correspondência de Atributos
 
 .. php:staticmethod:: filter(array $data, $callback = ['Hash', 'filter'])
 
-    Filtra os elementos vazios da matriz, excluindo '0'. Você também pode 
-    fornecer um ``$callback`` personalizado para filtrar os elementos da matriz. 
-    O retorno de chamada deve retornar ``false`` para remover elementos da matriz
-    resultante::
+    Filtra elementos vazios do array, excluindo '0'. Você também pode fornecer um
+    ``$callback`` personalizado para filtrar os elementos do array. O callback deve
+    retornar ``false`` para remover elementos do array resultante::
 
         $data = [
             '0',
@@ -452,7 +454,7 @@ Tipos de Correspondência de Atributos
         ];
         $res = Hash::filter($data);
 
-        /* $res agora se parece:
+        /* $res agora parece com:
             [
                 [0] => 0
                 [2] => true
@@ -467,7 +469,7 @@ Tipos de Correspondência de Atributos
 
 .. php:staticmethod:: flatten(array $data, string $separator = '.')
 
-    Nivela uma matriz multidimensional em uma única dimensão::
+    Colapsa um array multidimensional em uma única dimensão::
 
         $arr = [
             [
@@ -480,7 +482,7 @@ Tipos de Correspondência de Atributos
             ],
         ];
         $res = Hash::flatten($arr);
-        /* $res now looks like:
+        /* $res agora parece com:
             [
                 [0.Post.id] => 1
                 [0.Post.title] => First Post
@@ -495,7 +497,7 @@ Tipos de Correspondência de Atributos
 
 .. php:staticmethod:: expand(array $data, string $separator = '.')
 
-    Expande uma matriz que foi previamente achatada com 
+    Expande um array que foi previamente achatado com
     :php:meth:`Hash::flatten()`::
 
         $data = [
@@ -509,7 +511,7 @@ Tipos de Correspondência de Atributos
             '1.Author.user' => Crystal,
         ];
         $res = Hash::expand($data);
-        /* $res agora se parece com:
+        /* $res agora parece com:
         [
             [
                 'Post' => ['id' => '1', 'title' => 'First Post'],
@@ -524,16 +526,16 @@ Tipos de Correspondência de Atributos
 
 .. php:staticmethod:: merge(array $data, array $merge[, array $n])
 
-    Esta função pode ser considerada um híbrido entre ``array_merge`` e 
-    ``array_merge_recursive`` do PHP. A diferença entre as duas é que se 
-    uma chave da matriz contém outra matriz, então a função se comporta 
-    recursivamente (ao contrário de ``array_merge``), mas não se comporta 
-    do mesmo jeito para chaves contendo strings (ao contrário de ``array_merge_recursive``).
+    Esta função pode ser pensada como um híbrido entre
+    ``array_merge`` e ``array_merge_recursive`` do PHP. A diferença para os dois
+    é que se uma chave de array contiver outro array, então a função
+    se comporta recursivamente (ao contrário de ``array_merge``), mas não faz isso para chaves
+    contendo strings (ao contrário de ``array_merge_recursive``).
 
     .. note::
 
-        Esta função funcionará com uma quantidade ilimitada de argumentos 
-        e casting de parâmetros primitivos para matrizes.
+        Esta função funcionará com uma quantidade ilimitada de argumentos e
+        converte parâmetros não-array em arrays.
 
     ::
 
@@ -541,7 +543,7 @@ Tipos de Correspondência de Atributos
             [
                 'id' => '48c2570e-dfa8-4c32-a35e-0d71cbdd56cb',
                 'name' => 'mysql raleigh-workshop-08 < 2008-09-05.sql ',
-                'description' => 'Importing an sql dump'
+                'description' => 'Importing an sql dump',
             ],
             [
                 'id' => '48c257a8-cf7c-4af2-ac2f-114ecbdd56cb',
@@ -554,7 +556,7 @@ Tipos de Correspondência de Atributos
         $arrayD = ["cats" => "felines", "dog" => "angry"];
         $res = Hash::merge($array, $arrayB, $arrayC, $arrayD);
 
-        /* $res agora se parece com:
+        /* $res agora parece com:
         [
             [0] => [
                     [id] => 48c2570e-dfa8-4c32-a35e-0d71cbdd56cb
@@ -576,7 +578,7 @@ Tipos de Correspondência de Atributos
 
 .. php:staticmethod:: numeric(array $data)
 
-    Verifica se todos os valores da matriz são numéricas::
+    Verifica se todos os valores no array são numéricos::
 
         $data = ['one'];
         $res = Hash::numeric(array_keys($data));
@@ -588,8 +590,8 @@ Tipos de Correspondência de Atributos
 
 .. php:staticmethod:: dimensions (array $data)
 
-    Conta as dimensões de uma matriz. Este método irá considerar 
-    apenas a dimensão do primeiro elemento na matriz::
+    Conta as dimensões de um array. Este método considerará apenas
+    a dimensão do primeiro elemento no array::
 
         $data = ['one', '2', 'three'];
         $result = Hash::dimensions($data);
@@ -613,8 +615,8 @@ Tipos de Correspondência de Atributos
 
 .. php:staticmethod:: maxDimensions(array $data)
 
-    Semelhante a :php:meth:`~Hash::dimensions()`, no entanto, este método 
-    retorna, o maior número de dimensões de qualquer elemento na matriz::
+    Semelhante a :php:meth:`~Hash::dimensions()`, porém este método retorna
+    o número mais profundo de dimensões de qualquer elemento no array::
 
         $data = ['1' => '1.1', '2', '3' => ['3.1' => '3.1.1']];
         $result = Hash::maxDimensions($data);
@@ -626,29 +628,29 @@ Tipos de Correspondência de Atributos
 
 .. php:staticmethod:: map(array $data, $path, $function)
 
-    Cria uma nova matriz, extraindo ``$path``, e mapeando ``$function`` nos 
-    resultados. Você pode usar expressões e elementos correspondentes com este método::
+    Cria um novo array, extraindo ``$path`` e mapeando ``$function``
+    através dos resultados. Você pode usar elementos de expressão e correspondência com
+    este método::
 
-        // Chame a função noop $this->noop() em cada elemento de $data
+        // Chama a função noop $this->noop() em cada elemento de $data
         $result = Hash::map($data, "{n}", [$this, 'noop']);
 
         public function noop(array $array)
         {
-            // Faça coisas para a matriz e retorne o resultado
+            // Faça algo com o array e retorne o resultado
             return $array;
         }
 
 .. php:staticmethod:: reduce(array $data, $path, $function)
 
-    Cria um único valor, extraindo ``$path``, e reduzindo os resultados extraídos 
-    com ``$function``. Você pode usar expressões e elementos correspondentes com 
-    este método.
+    Cria um único valor, extraindo ``$path`` e reduzindo os resultados extraídos
+    com ``$function``. Você pode usar elementos de expressão e correspondência
+    com este método.
 
 .. php:staticmethod:: apply(array $data, $path, $function)
 
-    Aplique um retorno de chamada a um conjunto de valores extraídos 
-    usando ``$function``. A função obterá os valores extraídos do 
-    primeiro argumento::
+    Aplica um callback a um conjunto de valores extraídos usando ``$function``. A função
+    receberá os valores extraídos como o primeiro argumento::
 
         $data = [
             ['date' => '01-01-2016', 'booked' => true],
@@ -665,8 +667,8 @@ Tipos de Correspondência de Atributos
 
 .. php:staticmethod:: sort(array $data, $path, $dir, $type = 'regular')
 
-    Classifica uma matriz por qualquer valor, determinado por :ref:`hash-path-syntax`
-    Somente elementos de expressão são suportados por este método::
+    Ordena um array por qualquer valor, determinado por uma :ref:`hash-path-syntax`
+    Apenas elementos de expressão são suportados por este método::
 
         $a = [
             0 => ['Person' => ['name' => 'Jeff']],
@@ -688,18 +690,18 @@ Tipos de Correspondência de Atributos
             ]
         */
 
-    ``$dir`` pode ser ``asc`` ou ``desc``. ``$type`` pode 
-    ser um dos seguintes valores:
+    ``$dir`` pode ser ``asc`` ou ``desc``. ``$type``
+    pode ser um dos seguintes valores:
 
-    * ``regular`` para ordenamento padrão
-    * ``numeric`` para classificar valores como seus equivalentes numéricos.
-    * ``string`` para classificar valores como seu valor de string.
-    * ``natural`` para classificar valores de uma forma amigável ao humano. 
-      Classificará ``foo10`` abaixo de ``foo2`` por exemplo.
+    * ``regular`` para ordenação regular.
+    * ``numeric`` para ordenar valores como seus equivalentes numéricos.
+    * ``string`` para ordenar valores como seu valor de string.
+    * ``natural`` para ordenar valores de forma amigável ao usuário. Irá
+      ordenar ``foo10`` abaixo de ``foo2`` como exemplo.
 
 .. php:staticmethod:: diff(array $data, array $compare)
 
-    Calcula a diferença entre duas matrizes::
+    Calcula a diferença entre dois arrays::
 
         $a = [
             0 => ['name' => 'main'],
@@ -722,8 +724,8 @@ Tipos de Correspondência de Atributos
 
 .. php:staticmethod:: mergeDiff(array $data, array $compare)
 
-    Essa função mescla duas matrizes e empurra as diferenças nos 
-    dados para a parte inferior da matriz resultante.
+    Esta função mescla dois arrays e empurra as diferenças nos
+    dados para o final do array resultante.
 
     **Exemplo 1**
     ::
@@ -762,12 +764,12 @@ Tipos de Correspondência de Atributos
             ]
         */
 
-.. php:staticmethod:: normalize(array $data, $assoc = true)
+.. php:staticmethod:: normalize(array $data, $assoc = true, $default = null)
 
-    Normaliza uma matriz. Se ``$assoc`` for ``true``, a matriz resultante 
-    será normalizada para ser uma matriz associativa. Chaves numéricas com 
-    valores serão convertidas em chaves de string com valores nulos. Normalizar 
-    uma matriz torna o uso dos resultados com :php:meth:`Hash::merge()` mais fácil::
+    Normaliza um array. Se ``$assoc`` for ``true``, o array resultante será
+    normalizado para ser um array associativo. Chaves numéricas com valores serão
+    convertidas em chaves string com valores ``$default``. Normalizar um array
+    torna o uso dos resultados com :php:meth:`Hash::merge()` mais fácil::
 
         $a = ['Tree', 'CounterCache',
             'Upload' => [
@@ -795,7 +797,7 @@ Tipos de Correspondência de Atributos
             'Limit',
             'Bindable',
             'Validator',
-            'Transactional'
+            'Transactional',
         ];
         $result = Hash::normalize($b);
         /* $result agora parece com:
@@ -811,21 +813,24 @@ Tipos de Correspondência de Atributos
             ]
         */
 
+.. versionchanged:: 4.5.0
+    O parâmetro ``$default`` foi adicionado.
+
 .. php:staticmethod:: nest(array $data, array $options = [])
 
-    Pega um conjunto de matriz simples e cria uma estrutura de dados aninhada ou encadeada.
+    Pega um conjunto de array plano e cria uma estrutura de dados aninhada ou encadeada.
 
     **Opções:**
 
-    - ``children`` O nome da chave a ser usada no conjunto de resultados para 
-      os valores aninhados. O padrão é 'children'.
-    - ``idPath`` O caminho para uma chave que identifica cada entrada. Deve ser compatível 
-      com :php:meth:`Hash::extract()`. O padrão é ``{n}.$alias.id``
-    - ``parentPath`` O caminho para uma chave que identifica o pai de cada entrada. Deve ser compatível com 
-      :php:meth:`Hash::extract()`. O padrão é ``{n}.$alias.parent_id``
-    - ``root`` O id do resultado desejado mais alto.
+    - ``children`` O nome da chave a ser usado no conjunto de resultados para filhos. Padrão
+      é 'children'.
+    - ``idPath`` O caminho para uma chave que identifica cada entrada. Deve ser
+      compatível com :php:meth:`Hash::extract()`. Padrão é ``{n}.$alias.id``
+    - ``parentPath`` O caminho para uma chave que identifica o pai de cada entrada.
+      Deve ser compatível com :php:meth:`Hash::extract()`. Padrão é ``{n}.$alias.parent_id``
+    - ``root`` O id do resultado de nível superior desejado.
 
-    Por exemplo, se você tivesse a seguinte matriz de dados::
+    Por exemplo, se você tivesse o seguinte array de dados::
 
         $data = [
             ['ThreadPost' => ['id' => 1, 'parent_id' => null]],
@@ -884,4 +889,4 @@ Tipos de Correspondência de Atributos
 
 .. meta::
     :title lang=pt: Hash
-    :keywords lang=pt: matriz matriz,caminho de matriz,nome da matriz,chave numerica,expressao regular,configuracao de resultado,nome de pessoas,brackets,sintaxe,cakephp,elementos,php,definir caminho
+    :keywords lang=pt: array array,path array,array name,chave numérica,expressão regular,conjunto de resultados,nome de pessoa,colchetes,sintaxe,cakephp,elementos,php,definir caminho

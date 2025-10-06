@@ -1,17 +1,17 @@
-Option Parsers
-##############
+Analisadores de Opções
+######################
 
 .. php:namespace:: Cake\Console
 .. php:class:: ConsoleOptionParser
 
-Console applications typically take options and arguments as the primary way to
-get information from the terminal into your commands.
+As aplicações de console normalmente recebem opções e argumentos como a principal forma de
+obter informações do terminal para seus comandos.
 
-Defining an OptionParser
-========================
+Definindo um OptionParser
+=========================
 
-Commands and Shells provide a ``buildOptionParser($parser)`` hook method that
-you can use to define the options and arguments for your commands::
+Os Comandos e Shells fornecem um método hook ``buildOptionParser($parser)`` que
+você pode usar para definir as opções e argumentos para seus comandos::
 
     protected function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
     {
@@ -21,8 +21,8 @@ you can use to define the options and arguments for your commands::
         return $parser;
     }
 
-Shell classes use the ``getOptionParser()`` hook method to define their option
-parser::
+As classes Shell usam o método hook ``getOptionParser()`` para definir seu
+analisador de opções::
 
     public function getOptionParser()
     {
@@ -36,62 +36,62 @@ parser::
     }
 
 
-Using Arguments
-===============
+Usando Argumentos
+=================
 
 .. php:method:: addArgument($name, $params = [])
 
-Positional arguments are frequently used in command line tools,
-and ``ConsoleOptionParser`` allows you to define positional
-arguments as well as make them required. You can add arguments
-one at a time with ``$parser->addArgument();`` or multiple at once
-with ``$parser->addArguments();``::
+Os argumentos posicionais são frequentemente usados em ferramentas de linha de comando,
+e o ``ConsoleOptionParser`` permite que você defina argumentos
+posicionais e também os torne obrigatórios. Você pode adicionar argumentos
+um de cada vez com ``$parser->addArgument();`` ou múltiplos de uma vez
+com ``$parser->addArguments();``::
 
     $parser->addArgument('model', ['help' => 'The model to bake']);
 
-You can use the following options when creating an argument:
+Você pode usar as seguintes opções ao criar um argumento:
 
-* ``help`` The help text to display for this argument.
-* ``required`` Whether this parameter is required.
-* ``index`` The index for the arg, if left undefined the argument will be put
-  onto the end of the arguments. If you define the same index twice the
-  first option will be overwritten.
-* ``choices`` An array of valid choices for this argument. If left empty all
-  values are valid. An exception will be raised when parse() encounters an
-  invalid value.
-* ``separator`` A character sequence that separates arguments that should be
-  parsed into an array.
+* ``help`` O texto de ajuda a ser exibido para este argumento.
+* ``required`` Se este parâmetro é obrigatório.
+* ``index`` O índice para o argumento, se deixado indefinido o argumento será colocado
+  no final dos argumentos. Se você definir o mesmo índice duas vezes, a
+  primeira opção será sobrescrita.
+* ``choices`` Um array de escolhas válidas para este argumento. Se deixado vazio, todos
+  os valores são válidos. Uma exceção será lançada quando parse() encontrar um
+  valor inválido.
+* ``separator`` Uma sequência de caracteres que separa argumentos que devem ser
+  analisados em um array.
 
-Arguments that have been marked as required will throw an exception when
-parsing the command if they have been omitted. So you don't have to
-handle that in your shell.
+Argumentos que foram marcados como obrigatórios lançarão uma exceção ao
+analisar o comando se tiverem sido omitidos. Portanto, você não precisa
+lidar com isso em seu shell.
 
 .. versionadded:: 5.2.0
-    The ``separator`` option was added.
+    A opção ``separator`` foi adicionada.
 
-Adding Multiple Arguments
--------------------------
+Adicionando Múltiplos Argumentos
+---------------------------------
 
 .. php:method:: addArguments(array $args)
 
-If you have an array with multiple arguments you can use
-``$parser->addArguments()`` to add multiple arguments at once. ::
+Se você tiver um array com múltiplos argumentos, pode usar
+``$parser->addArguments()`` para adicionar múltiplos argumentos de uma vez. ::
 
     $parser->addArguments([
         'node' => ['help' => 'The node to create', 'required' => true],
         'parent' => ['help' => 'The parent node', 'required' => true],
     ]);
 
-As with all the builder methods on ConsoleOptionParser, addArguments
-can be used as part of a fluent method chain.
+Como todos os métodos de construção do ConsoleOptionParser, addArguments
+pode ser usado como parte de uma cadeia de métodos fluente.
 
-Validating Arguments
+Validando Argumentos
 --------------------
 
-When creating positional arguments, you can use the ``required`` flag, to
-indicate that an argument must be present when a shell is called.
-Additionally you can use ``choices`` to force an argument to be from a list of
-valid choices::
+Ao criar argumentos posicionais, você pode usar a flag ``required`` para
+indicar que um argumento deve estar presente quando um shell é chamado.
+Adicionalmente, você pode usar ``choices`` para forçar um argumento a ser de uma lista de
+escolhas válidas::
 
     $parser->addArgument('type', [
         'help' => 'The type of node to interact with.',
@@ -99,19 +99,19 @@ valid choices::
         'choices' => ['aro', 'aco'],
     ]);
 
-The above will create an argument that is required and has validation on the
-input. If the argument is either missing, or has an incorrect value an exception
-will be raised and the shell will be stopped.
+O exemplo acima criará um argumento que é obrigatório e tem validação na
+entrada. Se o argumento estiver ausente ou tiver um valor incorreto, uma exceção
+será lançada e o shell será interrompido.
 
-Using Options
+Usando Opções
 =============
 
 .. php:method:: addOption($name, array $options = [])
 
-Options or flags are used in command line tools to provide unordered key/value
-arguments for your commands. Options can define both verbose and short aliases.
-They can accept a value (e.g ``--connection=default``) or be boolean options
-(e.g ``--verbose``). Options are defined with the ``addOption()`` method::
+As opções ou flags são usadas em ferramentas de linha de comando para fornecer argumentos chave/valor
+não ordenados para seus comandos. As opções podem definir aliases detalhados e curtos.
+Elas podem aceitar um valor (por exemplo, ``--connection=default``) ou serem opções booleanas
+(por exemplo, ``--verbose``). As opções são definidas com o método ``addOption()``::
 
     $parser->addOption('connection', [
         'short' => 'c',
@@ -119,98 +119,98 @@ They can accept a value (e.g ``--connection=default``) or be boolean options
         'default' => 'default',
     ]);
 
-The above would allow you to use either ``cake myshell --connection=other``,
-``cake myshell --connection other``, or ``cake myshell -c other``
-when invoking the shell.
+O exemplo acima permitiria que você usasse ``cake myshell --connection=other``,
+``cake myshell --connection other``, ou ``cake myshell -c other``
+ao invocar o shell.
 
-Boolean switches do not accept or consume values, and their presence just
-enables them in the parsed parameters::
+As chaves booleanas não aceitam ou consomem valores, e sua presença apenas
+as habilita nos parâmetros analisados::
 
     $parser->addOption('no-commit', ['boolean' => true]);
 
-This option when used like ``cake mycommand --no-commit something`` would have
-a value of ``true``, and 'something' would be a treated as a positional
-argument.
+Esta opção, quando usada como ``cake mycommand --no-commit something``, teria
+um valor de ``true``, e 'something' seria tratado como um argumento
+posicional.
 
-When creating options you can use the following options to define the behavior
-of the option:
+Ao criar opções, você pode usar as seguintes opções para definir o comportamento
+da opção:
 
-* ``short`` - The single letter variant for this option, leave undefined for
-  none.
-* ``help`` - Help text for this option. Used when generating help for the
-  option.
-* ``default`` - The default value for this option. If not defined the default
-  will be ``true``.
-* ``boolean`` - The option uses no value, it's just a boolean switch.
-  Defaults to ``false``.
-* ``multiple`` - The option can be provided multiple times. The parsed option
-  will be an array of values when this option is enabled.
-* ``separator`` - A character sequence that the option value is split into an
-  array with.
-* ``choices`` - An array of valid choices for this option. If left empty all
-  values are valid. An exception will be raised when parse() encounters an
-  invalid value.
+* ``short`` - A variante de letra única para esta opção, deixe indefinido para
+  nenhuma.
+* ``help`` - Texto de ajuda para esta opção. Usado ao gerar ajuda para a
+  opção.
+* ``default`` - O valor padrão para esta opção. Se não definido, o padrão
+  será ``true``.
+* ``boolean`` - A opção não usa valor, é apenas uma chave booleana.
+  Padrão é ``false``.
+* ``multiple`` - A opção pode ser fornecida múltiplas vezes. A opção analisada
+  será um array de valores quando esta opção estiver habilitada.
+* ``separator`` - Uma sequência de caracteres pela qual o valor da opção é dividido em um
+  array.
+* ``choices`` - Um array de escolhas válidas para esta opção. Se deixado vazio, todos
+  os valores são válidos. Uma exceção será lançada quando parse() encontrar um
+  valor inválido.
 
 
 .. versionadded:: 5.2.0
-    The ``separator`` option was added.
+    A opção ``separator`` foi adicionada.
 
-Adding Multiple Options
------------------------
+Adicionando Múltiplas Opções
+-----------------------------
 
 .. php:method:: addOptions(array $options)
 
-If you have an array with multiple options you can use ``$parser->addOptions()``
-to add multiple options at once. ::
+Se você tiver um array com múltiplas opções, pode usar ``$parser->addOptions()``
+para adicionar múltiplas opções de uma vez. ::
 
     $parser->addOptions([
         'node' => ['short' => 'n', 'help' => 'The node to create'],
         'parent' => ['short' => 'p', 'help' => 'The parent node'],
     ]);
 
-As with all the builder methods on ConsoleOptionParser, addOptions can be used
-as part of a fluent method chain.
+Como todos os métodos de construção do ConsoleOptionParser, addOptions pode ser usado
+como parte de uma cadeia de métodos fluente.
 
-Validating Options
-------------------
+Validando Opções
+----------------
 
-Options can be provided with a set of choices much like positional arguments
-can be. When an option has defined choices, those are the only valid choices
-for an option. All other values will raise an ``InvalidArgumentException``::
+As opções podem ser fornecidas com um conjunto de escolhas, assim como os argumentos posicionais
+podem ser. Quando uma opção tem escolhas definidas, essas são as únicas escolhas válidas
+para uma opção. Todos os outros valores lançarão uma ``InvalidArgumentException``::
 
     $parser->addOption('accept', [
         'help' => 'What version to accept.',
         'choices' => ['working', 'theirs', 'mine'],
     ]);
 
-Using Boolean Options
----------------------
+Usando Opções Booleanas
+-----------------------
 
-Options can be defined as boolean options, which are useful when you need to
-create some flag options. Like options with defaults, boolean options always
-include themselves into the parsed parameters. When the flags are present they
-are set to ``true``, when they are absent they are set to ``false``::
+As opções podem ser definidas como opções booleanas, que são úteis quando você precisa
+criar algumas opções de flag. Como opções com padrões, as opções booleanas sempre
+se incluem nos parâmetros analisados. Quando as flags estão presentes, elas
+são definidas como ``true``, quando estão ausentes são definidas como ``false``::
 
     $parser->addOption('verbose', [
         'help' => 'Enable verbose output.',
         'boolean' => true
     ]);
 
-The following option would always have a value in the parsed parameter. When not
-included its default value would be ``false``, and when defined it will be
+A opção seguinte sempre terá um valor no parâmetro analisado. Quando não
+incluída, seu valor padrão seria ``false``, e quando definida será
 ``true``.
 
-Building a ConsoleOptionParser from an Array
---------------------------------------------
+Construindo um ConsoleOptionParser a partir de um Array
+--------------------------------------------------------
 
 .. php:method:: buildFromArray($spec)
 
-Option parsers can also be defined as arrays. Within the array, you can define
-keys for ``arguments``, ``options``, ``description`` and ``epilog``.  The values
-for arguments, and options, should follow the format that
-:php:func:`Cake\\Console\\ConsoleOptionParser::addArguments()` and
-:php:func:`Cake\\Console\\ConsoleOptionParser::addOptions()` use. You can also
-use ``buildFromArray`` on its own, to build an option parser::
+Os analisadores de opções também podem ser definidos como arrays. Dentro do array, você pode definir
+chaves para ``arguments``, ``options``, ``description`` e ``epilog``.  Os valores
+para argumentos e opções devem seguir o formato que
+:php:func:`Cake\\Console\\ConsoleOptionParser::addArguments()` e
+:php:func:`Cake\\Console\\ConsoleOptionParser::addOptions()` usam. Você também pode
+usar ``buildFromArray`` por conta própria para construir um analisador de opções::
 
     public function getOptionParser()
     {
@@ -228,59 +228,59 @@ use ``buildFromArray`` on its own, to build an option parser::
         ]);
     }
 
-Merging Option Parsers
-----------------------
+Mesclando Analisadores de Opções
+---------------------------------
 
 .. php:method:: merge($spec)
 
-When building a group command, you maybe want to combine several parsers for
-this::
+Ao construir um comando de grupo, você pode querer combinar vários analisadores para
+isso::
 
     $parser->merge($anotherParser);
 
-Note that the order of arguments for each parser must be the same, and that
-options must also be compatible for it work. So do not use keys for different
-things.
+Note que a ordem dos argumentos para cada analisador deve ser a mesma, e que
+as opções também devem ser compatíveis para funcionar. Portanto, não use chaves para coisas
+diferentes.
 
-Getting Help from Shells
-========================
+Obtendo Ajuda dos Shells
+=========================
 
-By defining your options and arguments with the option parser CakePHP can
-automatically generate rudimentary help information and add a ``--help`` and
-``-h`` to each of your commands. Using one of these options will allow you to
-see the generated help content:
+Ao definir suas opções e argumentos com o analisador de opções, o CakePHP pode
+gerar automaticamente informações de ajuda rudimentares e adicionar ``--help`` e
+``-h`` a cada um dos seus comandos. Usar uma dessas opções permitirá que você
+veja o conteúdo de ajuda gerado:
 
 .. code-block:: console
 
     bin/cake bake --help
     bin/cake bake -h
 
-Would both generate the help for bake. You can also get help for nested
-commands:
+Ambos gerariam a ajuda para bake. Você também pode obter ajuda para comandos
+aninhados:
 
 .. code-block:: console
 
     bin/cake bake model --help
     bin/cake bake model -h
 
-The above would get you the help specific to bake's model command.
+O exemplo acima obteria a ajuda específica para o comando model do bake.
 
-Getting Help as XML
--------------------
+Obtendo Ajuda como XML
+----------------------
 
-When building automated tools or development tools that need to interact with
-CakePHP shell commands, it's nice to have help available in a machine parse-able format.
-By providing the ``xml`` option when requesting help you can have help content
-returned as XML:
+Ao construir ferramentas automatizadas ou ferramentas de desenvolvimento que precisam interagir com
+comandos shell do CakePHP, é bom ter ajuda disponível em um formato analisável por máquina.
+Ao fornecer a opção ``xml`` ao solicitar ajuda, você pode ter o conteúdo de ajuda
+retornado como XML:
 
 .. code-block:: console
 
     cake bake --help xml
     cake bake -h xml
 
-The above would return an XML document with the generated help, options, and
-arguments for the selected shell. A sample XML document would
-look like:
+O exemplo acima retornaria um documento XML com a ajuda gerada, opções e
+argumentos para o shell selecionado. Um documento XML de exemplo
+seria parecido com:
 
 .. code-block:: xml
 
@@ -331,19 +331,19 @@ look like:
         </arguments>
     </shell>
 
-Customizing Help Output
-=======================
+Personalizando a Saída de Ajuda
+================================
 
-You can further enrich the generated help content by adding a description, and
-epilog.
+Você pode enriquecer ainda mais o conteúdo de ajuda gerado adicionando uma descrição e
+epílogo.
 
-Set the Description
+Definir a Descrição
 -------------------
 
 .. php:method:: setDescription($text)
 
-The description displays above the argument and option information. By passing
-in either an array or a string, you can set the value of the description::
+A descrição é exibida acima das informações de argumento e opção. Ao passar
+um array ou uma string, você pode definir o valor da descrição::
 
     // Set multiple lines at once
     $parser->setDescription(['line one', 'line two']);
@@ -351,14 +351,14 @@ in either an array or a string, you can set the value of the description::
     // Read the current value
     $parser->getDescription();
 
-Set the Epilog
---------------
+Definir o Epílogo
+-----------------
 
 .. php:method:: setEpilog($text)
 
-Gets or sets the epilog for the option parser. The epilog is displayed after the
-argument and option information. By passing in either an array or a string, you
-can set the value of the epilog::
+Obtém ou define o epílogo para o analisador de opções. O epílogo é exibido após as
+informações de argumento e opção. Ao passar um array ou uma string, você
+pode definir o valor do epílogo::
 
     // Set multiple lines at once
     $parser->setEpilog(['line one', 'line two']);

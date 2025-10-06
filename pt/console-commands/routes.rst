@@ -1,38 +1,38 @@
-Routes Tool
-###########
+Ferramenta de Rotas
+###################
 
-The routes tool provides a simple to use CLI interface for testing and debugging
-routes. You can use it to test how routes are parsed, and what URLs routing
-parameters will generate.
+A ferramenta de rotas fornece uma interface CLI simples de usar para testar e depurar
+rotas. Você pode usá-la para testar como as rotas são analisadas e quais URLs os parâmetros de
+roteamento irão gerar.
 
-Getting a List of all Routes
-----------------------------
+Obtendo uma Lista de todas as Rotas
+------------------------------------
 
 .. code-block:: console
 
     bin/cake routes
 
-Testing URL parsing
--------------------
+Testando a Análise de URL
+-------------------------
 
-You can quickly see how a URL will be parsed using the ``check`` method:
+Você pode ver rapidamente como uma URL será analisada usando o método ``check``:
 
 .. code-block:: console
 
     bin/cake routes check /articles/edit/1
 
-If your route contains any query string parameters remember to surround the URL
-in quotes:
+Se sua rota contiver parâmetros de query string, lembre-se de colocar a URL
+entre aspas:
 
 .. code-block:: console
 
     bin/cake routes check "/articles/?page=1&sort=title&direction=desc"
 
-Testing URL Generation
-----------------------
+Testando a Geração de URL
+-------------------------
 
-You can see the URL a :term:`routing array` will generate using the
-``generate`` method:
+Você pode ver a URL que um :term:`routing array` irá gerar usando o
+método ``generate``:
 
 .. code-block:: console
 

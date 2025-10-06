@@ -1,35 +1,35 @@
-Acesso a Banco de Dados e ORM
-#############################
+Acesso ao Banco de Dados & ORM
+###############################
 
-No CakePHP, o trabalho com dados por meio do banco de dados é feito com dois tipos principais de objetos:
+No CakePHP, o trabalho com dados através do banco de dados é realizado com dois tipos primários de objetos:
 
 - **Repositórios** ou **objetos de tabela** fornecem acesso a coleções de dados.
-  Eles permitem salvar novos registros, modificar/excluir os existentes, definir
-  relações e executar operações em massa.
-- **Entidades** representam registros individuais e permitem que você defina o comportamento e a funcionalidade
-  em nível de linha/registro.
+  Eles permitem que você salve novos registros, modifique/exclua os existentes, defina
+  relações e execute operações em massa.
+- **Entidades** representam registros individuais e permitem que você defina comportamento e
+  funcionalidade no nível de linha/registro.
 
-Essas duas classes geralmente são responsáveis ​​por gerenciar quase tudo
+Essas duas classes geralmente são responsáveis por gerenciar quase tudo
 que acontece em relação aos seus dados, sua validade, interações e evolução
-do fluxo de trabalho de informações em seu domínio de trabalho.
+do fluxo de informações no seu domínio de trabalho.
 
 O ORM integrado do CakePHP é especializado em bancos de dados relacionais, mas pode ser estendido
-para oferecer suporte a fontes de dados alternativas.
+para suportar fontes de dados alternativas.
 
-O ORM CakePHP utiliza ideias e conceitos dos padrões ActiveRecord e Datamapper.
-O objetivo é criar uma implementação híbrida que combine aspectos de
-ambos os padrões para criar um ORM rápido e fácil de usar.
+O ORM do CakePHP empresta ideias e conceitos tanto do ActiveRecord quanto do Datamapper
+patterns. Ele visa criar uma implementação híbrida que combina aspectos de
+ambos os padrões para criar um ORM rápido e simples de usar.
 
 Antes de começarmos a explorar o ORM, certifique-se de :ref:`configurar suas
 conexões de banco de dados <database-configuration>`.
 
-Exemplo rápido
+Exemplo Rápido
 ==============
 
-Para começar, você não precisa escrever nenhum código. Se você seguiu as
-:ref:`Convenções para Banco de Dados
-<model-and-database-conventions>`, pode simplesmente começar a usar o ORM. Por exemplo,
-se quiséssemos carregar alguns dados da nossa tabela ``articles``, começaríamos
+Para começar você não precisa escrever nenhum código. Se você seguiu as
+:ref:`convenções do CakePHP para suas tabelas de banco de dados
+<model-and-database-conventions>` você pode simplesmente começar a usar o ORM. Por exemplo,
+se quiséssemos carregar alguns dados de nossa tabela ``articles`` começaríamos
 criando nossa classe de tabela ``Articles``. Crie
 **src/Model/Table/ArticlesTable.php** com o seguinte código::
 
@@ -42,7 +42,7 @@ criando nossa classe de tabela ``Articles``. Crie
     {
     }
 
-Então, em um controller ou command, podemos fazer com que o CakePHP crie uma instância para nós::
+Então, em um controller ou comando, podemos fazer com que o CakePHP crie uma instância para nós::
 
     public function someMethod()
     {
@@ -63,15 +63,15 @@ Em outros contextos, você pode usar o ``LocatorAwareTrait`` que adiciona métod
         // mais código.
     }
 
-Dentro de um método estático, você pode usar :php:class:`~Cake\\Datasource\\FactoryLocator`
-para obter o localizador da tabela::
+Dentro de um método estático você pode usar o :php:class:`~Cake\\Datasource\\FactoryLocator`
+para obter o localizador de tabela::
 
     $articles = TableRegistry::getTableLocator()->get('Articles');
 
-As classes de tabela representam **coleções** de **entidades**. Em seguida, vamos criar uma
-classe de entidade para nossos Artigos. As classes de entidade permitem definir métodos de acesso e
-mutadores, definir lógica personalizada para registros individuais e muito mais. Começaremos
-adicionando o seguinte a **src/Model/Entity/Article.php** após a
+Classes de tabela representam **coleções** de **entidades**. Em seguida, vamos criar uma
+classe de entidade para nossos Articles. Classes de entidade permitem que você defina métodos de acesso e
+mutador, defina lógica personalizada para registros individuais e muito mais. Vamos
+começar adicionando o seguinte em **src/Model/Entity/Article.php** após a
 tag de abertura ``<?php``::
 
     namespace App\Model\Entity;
@@ -82,9 +82,9 @@ tag de abertura ``<?php``::
     {
     }
 
-As entidades usam a versão singular CamelCase do nome da tabela como nome
-de classe por padrão. Agora que criamos nossa classe de entidade, quando
-carregarmos entidades do banco de dados, obteremos instâncias da nossa nova classe Article::
+Entidades usam a versão singular CamelCase do nome da tabela como seu nome de classe
+por padrão. Agora que criamos nossa classe de entidade, quando
+carregamos entidades do banco de dados, obteremos instâncias de nossa nova classe Article::
 
     use Cake\ORM\Locator\LocatorAwareTrait;
 
@@ -92,18 +92,18 @@ carregarmos entidades do banco de dados, obteremos instâncias da nossa nova cla
     $resultset = $articles->find()->all();
 
     foreach ($resultset as $row) {
-        // Each row is now an instance of our Article class.
+        // Cada linha agora é uma instância de nossa classe Article.
         echo $row->title;
     }
 
 O CakePHP usa convenções de nomenclatura para vincular as classes Table e Entity. Se
-você precisar personalizar qual entidade uma tabela usa, pode usar o método
-``entityClass()`` para definir um nome de classe específico.
+você precisar personalizar qual entidade uma tabela usa, pode usar o
+método ``entityClass()`` para definir um nome de classe específico.
 
-Consulte os capítulos em :doc:`/orm/table-objects` e :doc:`/orm/entities` para obter mais
-informações sobre como usar objetos de tabela e entidades em seu aplicativo.
+Consulte os capítulos sobre :doc:`/orm/table-objects` e :doc:`/orm/entities` para mais
+informações sobre como usar objetos de tabela e entidades em sua aplicação.
 
-Mais informações
+Mais Informações
 ================
 
 .. toctree::

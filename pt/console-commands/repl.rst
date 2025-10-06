@@ -1,23 +1,23 @@
-Interactive Console (REPL)
-##########################
+Console Interativo (REPL)
+#########################
 
-CakePHP offers
-`REPL(Read Eval Print Loop) plugin <https://github.com/cakephp/repl>`__ to let
-you explore some CakePHP and your application in an interactive console.
+O CakePHP oferece o
+`plugin REPL(Read Eval Print Loop) <https://github.com/cakephp/repl>`__ para permitir
+que você explore o CakePHP e sua aplicação em um console interativo.
 
 .. note::
 
-    The plugin was shipped with the CakePHP app skeleton before 4.3.
+    O plugin era incluído no esqueleto da aplicação CakePHP antes da versão 4.3.
 
-You can start the interactive console using:
+Você pode iniciar o console interativo usando:
 
 .. code-block:: console
 
     bin/cake console
 
-This will bootstrap your application and start an interactive console. At this
-point you can interact with your application code and execute queries using your
-application's models:
+Isso inicializará sua aplicação e iniciará um console interativo. Neste
+ponto você pode interagir com o código da sua aplicação e executar consultas usando os
+models da sua aplicação:
 
 .. code-block:: console
 
@@ -29,7 +29,7 @@ application's models:
     // )
     >>> $articles->find()->all();
 
-Since your application has been bootstrapped you can also test routing using the
+Como sua aplicação foi inicializada, você também pode testar o roteamento usando o
 REPL::
 
     >>> Cake\Routing\Router::parse('/articles/view/1');
@@ -42,9 +42,9 @@ REPL::
     //   'plugin' => NULL
     // ]
 
-You can also test generating URLs::
+Você também pode testar a geração de URLs::
 
     >>> Cake\Routing\Router::url(['controller' => 'Articles', 'action' => 'edit', 99]);
     // '/articles/edit/99'
 
-To quit the REPL you can use ``CTRL-C`` or by typing ``exit``.
+Para sair do REPL você pode usar ``CTRL-C`` ou digitando ``exit``.

@@ -3,24 +3,24 @@ Console Commands
 
 .. php:namespace:: Cake\Console
 
-In addition to a web framework, CakePHP also provides a console framework for
-creating command line tools & applications. Console applications are ideal for
-handling a variety of background & maintenance tasks that leverage your existing
-application configuration, models, plugins and domain logic.
+Além de um framework web, o CakePHP também fornece um framework de console para
+criar ferramentas e aplicações de linha de comando. Aplicações de console são ideais para
+lidar com uma variedade de tarefas de background e manutenção que aproveitam sua
+configuração de aplicação, models, plugins e lógica de domínio existentes.
 
-CakePHP provides several console tools for interacting with CakePHP features
-like i18n and routing that enable you to introspect your application and
-generate related files.
+O CakePHP fornece várias ferramentas de console para interagir com recursos do CakePHP
+como i18n e roteamento que permitem introspectar sua aplicação e
+gerar arquivos relacionados.
 
-The CakePHP Console
-===================
+O Console do CakePHP
+====================
 
-The CakePHP Console uses a dispatcher-type system to load commands, parse
-their arguments and invoke the correct command. While the examples below use
-bash the CakePHP console is compatible with any \*nix shell and windows.
+O Console do CakePHP usa um sistema tipo dispatcher para carregar comandos, analisar
+seus argumentos e invocar o comando correto. Embora os exemplos abaixo usem
+bash, o console do CakePHP é compatível com qualquer shell \*nix e windows.
 
-A CakePHP application contains **src/Command** directory that contain its commands.
-It also comes with an executable in the **bin** directory:
+Uma aplicação CakePHP contém o diretório **src/Command** que contém seus comandos.
+Ela também vem com um executável no diretório **bin**:
 
 .. code-block:: console
 
@@ -29,38 +29,38 @@ It also comes with an executable in the **bin** directory:
 
 .. note::
 
-    For Windows, the command needs to be ``bin\cake`` (note the backslash).
+    Para Windows, o comando precisa ser ``bin\cake`` (observe a barra invertida).
 
-Running the Console with no arguments will list out available commands. You
-could then run the any of the listed commands by using its name:
+Executar o Console sem argumentos listará os comandos disponíveis. Você
+pode então executar qualquer um dos comandos listados usando seu nome:
 
 .. code-block:: console
 
-    # run server command
+    # executar comando server
     bin/cake server
 
-    # run migrations command
+    # executar comando migrations
     bin/cake migrations -h
 
-    # run bake (with plugin prefix)
+    # executar bake (com prefixo de plugin)
     bin/cake bake.bake -h
 
-Plugin commands can be invoked without a plugin prefix if the commands's name
-does not overlap with an application or framework command. In the case that two
-plugins provide a command with the same name, the first loaded plugin will get
-the short alias. You can always use the ``plugin.command`` format to
-unambiguously reference a command.
+Comandos de plugin podem ser invocados sem um prefixo de plugin se o nome do comando
+não sobrepõe um comando da aplicação ou do framework. No caso de dois
+plugins fornecerem um comando com o mesmo nome, o primeiro plugin carregado terá
+o alias curto. Você sempre pode usar o formato ``plugin.command`` para
+referenciar inequivocamente um comando.
 
-Console Applications
-====================
+Aplicações de Console
+======================
 
-By default CakePHP will automatically discover all the commands in your
-application and its plugins. You may want to reduce the number of exposed
-commands, when building standalone console applications. You can use your
-``Application``'s ``console()`` hook to limit which commands are exposed and
-rename commands that are exposed::
+Por padrão, o CakePHP descobrirá automaticamente todos os comandos em sua
+aplicação e seus plugins. Você pode querer reduzir o número de comandos expostos
+ao construir aplicações de console standalone. Você pode usar o hook ``console()``
+da sua ``Application`` para limitar quais comandos são expostos e
+renomear comandos que são expostos::
 
-    // in src/Application.php
+    // em src/Application.php
     namespace App;
 
     use App\Command\UserCommand;
@@ -72,62 +72,62 @@ rename commands that are exposed::
     {
         public function console(CommandCollection $commands): CommandCollection
         {
-            // Add by classname
+            // Adicionar por nome de classe
             $commands->add('user', UserCommand::class);
 
-            // Add instance
+            // Adicionar instância
             $commands->add('version', new VersionCommand());
 
             return $commands;
         }
     }
 
-In the above example, the only commands available would be ``help``, ``version``
-and ``user``. See the :ref:`plugin-commands` section for how to add commands in
-your plugins.
+No exemplo acima, os únicos comandos disponíveis seriam ``help``, ``version``
+e ``user``. Veja a seção :ref:`plugin-commands` para saber como adicionar comandos em
+seus plugins.
 
 .. note::
 
-    When adding multiple commands that use the same Command class, the ``help``
-    command will display the shortest option.
+    Ao adicionar múltiplos comandos que usam a mesma classe Command, o comando ``help``
+    exibirá a opção mais curta.
 
 .. _renaming-commands:
 .. index:: nested commands, subcommands
 
-Renaming Commands
-=================
+Renomeando Comandos
+===================
 
-There are cases where you will want to rename commands, to create nested
-commands or subcommands.  While the default auto-discovery of commands will not
-do this, you can register your commands to create any desired naming.
+Há casos em que você desejará renomear comandos, para criar comandos aninhados
+ou subcomandos. Embora a descoberta automática padrão de comandos não faça
+isso, você pode registrar seus comandos para criar qualquer nomenclatura desejada.
 
-You can customize the command names by defining each command in your plugin::
+Você pode personalizar os nomes dos comandos definindo cada comando em seu plugin::
 
     public function console(CommandCollection $commands): CommandCollection
     {
-        // Add commands with nested naming
+        // Adicionar comandos com nomenclatura aninhada
         $commands->add('user dump', UserDumpCommand::class);
         $commands->add('user:show', UserShowCommand::class);
 
-        // Rename a command entirely
+        // Renomear um comando completamente
         $commands->add('lazer', UserDeleteCommand::class);
 
         return $commands;
     }
 
-When overriding the ``console()`` hook in your application, remember to
-call ``$commands->autoDiscover()`` to add commands from CakePHP, your
-application, and plugins.
+Ao sobrescrever o hook ``console()`` em sua aplicação, lembre-se de
+chamar ``$commands->autoDiscover()`` para adicionar comandos do CakePHP, sua
+aplicação e plugins.
 
-If you need to rename/remove any attached commands, you can use the
-``Console.buildCommands`` event on your application event manager to modify the
-available commands.
+Se você precisar renomear/remover quaisquer comandos anexados, você pode usar o
+evento ``Console.buildCommands`` no gerenciador de eventos da sua aplicação para modificar os
+comandos disponíveis.
 
 Commands
 ========
 
-See the :doc:`/console-commands/commands` chapter on how to create your first
-command. Then learn more about commands:
+Veja o capítulo :doc:`/console-commands/commands` sobre como criar seu primeiro
+comando. Então aprenda mais sobre comandos:
 
 .. toctree::
     :maxdepth: 1
@@ -137,8 +137,8 @@ command. Then learn more about commands:
     console-commands/option-parsers
     console-commands/cron-jobs
 
-CakePHP Provided Commands
-=========================
+Comandos Fornecidos pelo CakePHP
+=================================
 
 .. toctree::
     :maxdepth: 1
@@ -153,31 +153,31 @@ CakePHP Provided Commands
     console-commands/server
     console-commands/repl
 
-Routing in the Console Environment
+Roteamento no Ambiente de Console
 ==================================
 
-In command-line interface (CLI), specifically your console commands,
-``env('HTTP_HOST')`` and other webbrowser specific environment variables are not
-set.
+Na interface de linha de comando (CLI), especificamente seus comandos de console,
+``env('HTTP_HOST')`` e outras variáveis de ambiente específicas do navegador web não são
+definidas.
 
-If you generate reports or send emails that make use of ``Router::url()`` those
-will contain the default host ``http://localhost/``  and thus resulting in
-invalid URLs. In this case you need to specify the domain manually.
-You can do that using the Configure value ``App.fullBaseUrl`` from your
-bootstrap or config, for example.
+Se você gerar relatórios ou enviar e-mails que façam uso de ``Router::url()``, eles
+conterão o host padrão ``http://localhost/`` e, portanto, resultarão em
+URLs inválidas. Neste caso, você precisa especificar o domínio manualmente.
+Você pode fazer isso usando o valor Configure ``App.fullBaseUrl`` do seu
+bootstrap ou config, por exemplo.
 
-For sending emails, you should provide Email class with the host you want to
-send the email with::
+Para enviar e-mails, você deve fornecer à classe Email o host que deseja usar para
+enviar o e-mail::
 
     use Cake\Mailer\Email;
 
     $email = new Email();
     $email->setDomain('www.example.org');
 
-This asserts that the generated message IDs are valid and fit to the domain the
-emails are sent from.
+Isso garante que os IDs de mensagem gerados são válidos e se ajustam ao domínio
+de onde os e-mails são enviados.
 
 
 .. meta::
-    :title lang=en: Shells, Tasks & Console Tools
-    :keywords lang=en: shell scripts,system shell,application classes,background tasks,line script,cron job,request response,system path,acl,new projects,commands,specifics,parameters,i18n,cakephp,directory,maintenance,ideal,applications,mvc
+    :title lang=pt: Shells, Tasks & Console Tools
+    :keywords lang=pt: shell scripts,system shell,application classes,background tasks,line script,cron job,request response,system path,acl,new projects,commands,specifics,parameters,i18n,cakephp,directory,maintenance,ideal,applications,mvc

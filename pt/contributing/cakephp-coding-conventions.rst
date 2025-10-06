@@ -1,30 +1,42 @@
-Padrões de codificação
+Padrões de Codificação
 ######################
 
-Desenvolvedores do CakePHP deverão usar o `guia de codificação
-PSR-12 <https://www.php-fig.org/psr/psr-12/>`_ em adição às regras apresentadas
-a seguir e definidas como padrão.
+Os desenvolvedores do CakePHP utilizarão o `guia de estilo de codificação PSR-12
+<https://www.php-fig.org/psr/psr-12/>`_ além das seguintes regras como
+padrões de codificação.
 
-É recomendado que outros desenvolvedores que optem pelo CakePHP sigam os mesmos
+É recomendado que outros desenvolvedores de CakeIngredients sigam os mesmos
 padrões.
 
 Você pode usar o `CakePHP Code Sniffer
-<https://github.com/cakephp/cakephp-codesniffer>`_ para verificar se o seu
-código segue os padrões estabelecidos.
+<https://github.com/cakephp/cakephp-codesniffer>`_ para verificar se seu código
+segue os padrões exigidos.
 
-Adicionando novos recursos
-==========================
+Adicionando Novos Recursos
+===========================
 
-Nenhum novo recurso deve ser adicionado sem que tenha seus próprios testes
-definidos, que por sua vez, devem estar passando antes que o novo recurso seja
-enviado para o repositório.
+Nenhum novo recurso deve ser adicionado sem ter seus próprios testes – que
+devem ser aprovados antes de serem enviados ao repositório.
+
+Configuração da IDE
+===================
+
+Por favor, certifique-se de que sua IDE está configurada para "aparar à direita" os espaços em branco.
+Não deve haver espaços em branco no final de cada linha.
+
+A maioria das IDEs modernas também suporta um arquivo ``.editorconfig``. O esqueleto
+da aplicação CakePHP vem com ele por padrão. Ele já contém os padrões de boas práticas.
+
+Recomendamos usar o plugin `IdeHelper <https://github.com/dereuromark/cakephp-ide-helper>`_ se você
+deseja maximizar a compatibilidade da IDE. Ele ajudará a manter as anotações atualizadas, o que fará
+a IDE entender completamente como todas as classes funcionam juntas e fornece melhor dicas de tipo e auto-completar.
 
 Indentação
 ==========
 
 Quatro espaços serão usados para indentação.
 
-Então, teremos uma estrutura similar a::
+Portanto, a indentação deve parecer assim::
 
     // nível base
         // nível 1
@@ -35,30 +47,29 @@ Então, teremos uma estrutura similar a::
 Ou::
 
     $booleanVariable = true;
-    $stringVariable = 'jacaré';
+    $stringVariable = 'moose';
     if ($booleanVariable) {
-        echo 'Valor booleano é true';
-        if ($stringVariable === 'jacaré') {
-            echo 'Nós encontramos um jacaré';
+        echo 'Boolean value is true';
+        if ($stringVariable === 'moose') {
+            echo 'We have encountered a moose';
         }
     }
 
-Em situações onde você estiver usando uma função em mais de uma linha, siga
-as seguintes orientações:
+Nos casos em que você está usando uma chamada de função de várias linhas, use as seguintes
+diretrizes:
 
-*  O parêntese de abertura de uma função multi-linha deve ser o último conteúdo
-   da linha.
-*  Apenas um argumento é permitido por linha em uma função multi-linha.
-*  O parêntese de fechamento de uma função multi-linha deve ter uma linha
-   reservada para sí.
+*  O parêntese de abertura de uma chamada de função de várias linhas deve ser o último conteúdo na
+   linha.
+*  Apenas um argumento é permitido por linha em uma chamada de função de várias linhas.
+*  O parêntese de fechamento de uma chamada de função de várias linhas deve estar em uma linha separada.
 
-Um exemplo, ao invés de usar a seguinte formatação::
+Como exemplo, em vez de usar a seguinte formatação::
 
     $matches = array_intersect_key($this->_listeners,
                     array_flip(preg_grep($matchPattern,
                         array_keys($this->_listeners), 0)));
 
-Use esta::
+Use isto em vez disso::
 
     $matches = array_intersect_key(
         $this->_listeners,
@@ -67,118 +78,114 @@ Use esta::
         )
     );
 
-Comprimento da linha
+Comprimento da Linha
 ====================
 
-É recomendado manter as linhas próximas de 100 caracteres no comprimento para
-melhor leitura do código. As linhas não devem ser mais longas que 120
-caracteres.
+É recomendado manter as linhas com aproximadamente 100 caracteres para melhor
+legibilidade do código. Um limite de 80 ou 120 caracteres torna necessário
+distribuir lógica ou expressões complexas por função, bem como dar funções
+e objetos nomes mais curtos e expressivos. As linhas não devem ter
+mais de 120 caracteres.
 
-Resumindo:
+Em resumo:
 
-* 100 caracteres é o limite recomendado.
-* 120 caracteres é o limite máximo.
+* 100 caracteres é o limite suave.
+* 120 caracteres é o limite rígido.
 
-Estruturas de controle
-======================
+Estruturas de Controle
+=======================
 
-Estruturas de controle são por exemplo, "``if``", "``for``", "``foreach``",
-"``while``", "``switch``", etc. A baixo, um exemplo com "``if``"::
+Estruturas de controle são, por exemplo, "``if``", "``for``", "``foreach``",
+"``while``", "``switch``" etc. Abaixo, um exemplo com "``if``"::
 
     if ((expr_1) || (expr_2)) {
-        // ação_1;
+        // action_1;
     } elseif (!(expr_3) && (expr_4)) {
-        // ação_2;
+        // action_2;
     } else {
-        // ação_padrão;
+        // default_action;
     }
 
-*  Nas estruturas de controle deve existir 1 (um) espaço antes do primeiro
-   parêntese e 1 (um) espaço entre o último parêntese e a chave de abertura.
-*  Sempre use chaves nas estruturas de controle, mesmo que não sejam
-   necessárias. Elas melhorar a leitura do código e tendem a causar menos erros
-   lógicos.
-*  A abertura da chave deve ser posicionada na mesma linha que a estrutura de
-   controle. A chave de fechamento deve ser colocada em uma nova linha e ter o
-   mesmo nível de indentação que a estrutura de controle. O conteúdo de dentro
-   das chaves deve começar em uma nova linha e receber um novo nível de
-   indentação.
-*  Atribuições em linha não devem ser usadas dentro de estruturas de controle.
+*  Nas estruturas de controle deve haver 1 (um) espaço antes do primeiro
+   parêntese e 1 (um) espaço entre o último parêntese e o colchete de abertura.
+*  Sempre use chaves nas estruturas de controle, mesmo que não sejam necessárias.
+   Elas aumentam a legibilidade do código e dão menos erros lógicos.
+*  As chaves de abertura devem ser colocadas na mesma linha que a estrutura de
+   controle. As chaves de fechamento devem ser colocadas em novas linhas e devem
+   ter o mesmo nível de indentação que a estrutura de controle. A declaração
+   incluída nas chaves deve começar em uma nova linha, e o código contido
+   nela deve ganhar um novo nível de indentação.
+*  Atribuições inline não devem ser usadas dentro das estruturas de controle.
 
 ::
 
     // errado = sem chaves, declaração mal posicionada
-    if (expr) declaração;
+    if (expr) statement;
 
     // errado = sem chaves
     if (expr)
-        declaração;
+        statement;
 
-    // certo
+    // bom
     if (expr) {
-        declaração;
+        statement;
     }
 
-    // errado = atribuição em linha
+    // errado = atribuição inline
     if ($variable = Class::function()) {
-        declaração;
+        statement;
     }
 
-    // certo
+    // bom
     $variable = Class::function();
     if ($variable) {
-        declaração;
+        statement;
     }
 
-Operadores ternários
---------------------
+Operador Ternário
+-----------------
 
-Operadores ternários são admissíveis quando toda a operação ternária se encaixa
-em uma única linha. Já operações mais longas devem ser divididas em
-declarações ``if else``. Operadores ternários nunca devem ser aninhados.
-Opcionalmente parênteses podem ser usados ao redor da verificação de condição
-ternária para esclarecer a operação::
+Operadores ternários são permitidos quando toda a operação ternária cabe em uma
+linha. Ternários mais longos devem ser divididos em instruções ``if else``. Operadores
+ternários nunca devem ser aninhados. Opcionalmente, parênteses podem ser usados ao redor
+da verificação de condição do ternário para maior clareza::
 
     // Bom, simples e legível
     $variable = isset($options['variable']) ? $options['variable'] : true;
 
-    // Aninhamento é ruim
+    // Ternários aninhados são ruins
     $variable = isset($options['variable']) ? isset($options['othervar']) ? true : false : false;
 
-Arquivos de template
+Arquivos de Template
 --------------------
 
-Em arquivos de *template* (arquivos .php) os desenvolvedores devem usar
-estruturas de controle por palavra-chave. A legibilidade em arquivos de
-*template* complexos é muito melhor dessa forma. As estruturas de controle
-podem tanto estar contidas em grandes blocos de código PHP, ou ainda em *tags*
-PHP separadas::
+Em arquivos de template, os desenvolvedores devem usar estruturas de controle com palavras-chave.
+Estruturas de controle com palavras-chave são mais fáceis de ler em arquivos de template complexos. Estruturas de
+controle podem estar contidas em um bloco PHP maior ou em tags PHP separadas::
 
     <?php
     if ($isAdmin):
-        echo '<p>Você é o usuário administrador.</p>';
+        echo '<p>You are the admin user.</p>';
     endif;
     ?>
-    <p>A seguinte estrutura também é aceitável:</p>
+    <p>The following is also acceptable:</p>
     <?php if ($isAdmin): ?>
-        <p>Você é o usuário administrador.</p>
+        <p>You are the admin user.</p>
     <?php endif; ?>
 
 Comparação
 ==========
 
-Sempre tente ser o mais rigoroso possível. Se uma comparação deliberadamente não
-é estrita, pode ser inteligente comentar sobre isso para evitar confusões
-geradas por falta de informação.
+Sempre tente ser o mais estrito possível. Se um teste não estrito for deliberado,
+pode ser prudente comentá-lo como tal para evitar confundi-lo com um erro.
 
-Para testar se uma variável é nula, é recomendado usar uma verificação
-estrita::
+Para testar se uma variável é null, é recomendado usar uma verificação estrita::
 
     if ($value === null) {
         // ...
     }
 
-O valor a ser verificado deve ser posto do lado direito::
+O valor a ser verificado deve ser colocado no lado direito::
 
     // não recomendado
     if (null === $this->foo()) {
@@ -190,35 +197,33 @@ O valor a ser verificado deve ser posto do lado direito::
         // ...
     }
 
-Chamadas de função
+Chamadas de Função
 ==================
 
-Funções devem ser chamadas sem espaço entre o nome da função e o parêntese
-de abertura. Deve haver um espaço entre cada parâmetro de uma chamada de
-função::
+Funções devem ser chamadas sem espaço entre o nome da função e o
+parêntese de abertura. Deve haver um espaço entre cada parâmetro de uma chamada de função::
 
     $var = foo($bar, $bar2, $bar3);
 
-Como você pode ver a cima, deve haver um espaço em ambos os lados do sinal de
-igual (=).
+Como você pode ver acima, deve haver um espaço em ambos os lados do sinal de igual (=).
 
-Definição de método
-===================
+Definição de Método
+====================
 
 Exemplo de uma definição de método::
 
     public function someFunction($arg1, $arg2 = '')
     {
         if (expr) {
-            declaração;
+            statement;
         }
 
         return $var;
     }
 
-Parâmetros com um valor padrão, devem ser posicionados por último na definição
-de uma função. Tente fazer suas funções retornarem algo, pelo menos ``true`` ou
-``false``, assim pode-se determinar se a chamada de função foi bem-sucedida::
+Parâmetros com um valor padrão devem ser colocados por último na definição da função.
+Tente fazer suas funções retornarem algo, pelo menos ``true`` ou ``false``, para que
+se possa determinar se a chamada da função foi bem-sucedida::
 
     public function connection($dns, $persistent = false)
     {
@@ -235,80 +240,103 @@ de uma função. Tente fazer suas funções retornarem algo, pelo menos ``true``
         return true;
     }
 
-Existem espaços em ambos os lados dos sinais de igual.
+Há espaços em ambos os lados do sinal de igual.
 
-Declaração de tipo
-------------------
+Retorno Antecipado
+==================
 
-Argumentos que esperam objetos, *arrays* ou *callbacks* (válidos) podem ser
-declarados por tipo.
-Nós apenas declaramos métodos públicos, porém, o uso da declaração por tipo não
-é livre de custos::
+Tente evitar aninhamento desnecessário retornando antecipadamente::
+
+    public function run(array $data)
+    {
+        ...
+        if (!$success) {
+            return false;
+        }
+
+        ...
+    }
+
+    public function check(array $data)
+    {
+        ...
+        if (!$success) {
+            throw new RuntimeException(/* ... */);
+        }
+
+        ...
+    }
+
+Isso ajuda a manter a lógica sequencial, o que melhora a legibilidade.
+
+Tipagem
+-------
+
+Argumentos que esperam objetos, arrays ou callbacks (callable) podem ter tipo definido.
+No entanto, apenas tipamos métodos públicos, pois a tipagem não é sem custo::
 
     /**
-     * Descrição do método.
+     * Some method description.
      *
-     * @param \Cake\ORM\Table $table A classe Table a ser usada.
-     * @param array $array Algum valor em formato array.
-     * @param callable $callback Algum callback.
-     * @param bool $boolean Algum valor booleano.
+     * @param \Cake\ORM\Table $table The table class to use.
+     * @param array $array Some array value.
+     * @param callable $callback Some callback.
+     * @param bool $boolean Some boolean value.
      */
     public function foo(Table $table, array $array, callable $callback, $boolean)
     {
     }
 
-Aqui ``$table`` deve ser uma instância de ``\Cake\ORM\Table``, ``$array`` deve
-ser um ``array`` e ``$callback`` deve ser do tipo ``callable`` (um *callback*
-válido).
+Aqui ``$table`` deve ser uma instância de ``\Cake\ORM\Table``, ``$array`` deve ser
+um ``array`` e ``$callback`` deve ser do tipo ``callable`` (um callback válido).
 
-Perceba que se você quiser permitir ``$array`` ser também uma instância de
-``\ArrayObject`` você não deve declará-lo, pois ``array`` aceita apenas o tipo
+Note que se você quiser permitir que ``$array`` também seja uma instância de
+``\ArrayObject``, você não deve definir o tipo como ``array``, pois aceita apenas o tipo
 primitivo::
 
     /**
-     * Descrição do método.
+     * Some method description.
      *
-     * @param array|\ArrayObject $array Algum valor em formato array.
+     * @param array|\ArrayObject $array Some array value.
      */
     public function foo($array)
     {
     }
 
-Funções anônimas (Closures)
----------------------------
+Funções Anônimas (Closures)
+----------------------------
 
-Para se definir funções anônimas, segue-se o estilo de codificação `PSR-12
-<https://www.php-fig.org/psr/psr-12/>`_, onde elas são declaradas com um espaço
-depois da palavra-chave `function`, e um espaço antes e depois da palavra-chave
-`use`::
+Definir funções anônimas segue o `guia de estilo de codificação PSR-12
+<https://www.php-fig.org/psr/psr-12/>`_, onde são
+declaradas com um espaço após a palavra-chave `function` e um espaço antes e depois
+da palavra-chave `use`::
 
     $closure = function ($arg1, $arg2) use ($var1, $var2) {
-        // código
+        // code
     };
 
-Encadeamento de métodos
-=======================
+Encadeamento de Métodos
+========================
 
-Encadeamento de métodos deve ter múltiplos métodos distribuidos em linhas
-separadas e indentados com quatro espaços::
+O encadeamento de métodos deve ter vários métodos distribuídos em linhas separadas e
+indentados com quatro espaços::
 
-    $email->from('foo@exemplo.com')
-        ->to('bar@exemplo.com')
-        ->subject('Uma mensagem legal')
+    $email->from('foo@example.com')
+        ->to('bar@example.com')
+        ->subject('A great message')
         ->send();
 
-Comentando código
+Comentando Código
 =================
 
-Todos os comentários devem ser escritos em inglês, e devem de forma clara
-descrever o bloco de código comentado.
+Todos os comentários devem ser escritos em inglês e devem descrever de forma clara
+o bloco de código comentado.
 
-Comentários podem incluir as seguintes *tags* do
-`phpDocumentor <https://phpdoc.org>`_:
+Os comentários podem incluir as seguintes tags do `phpDocumentor <https://phpdoc.org>`_:
 
 *  `@deprecated <https://docs.phpdoc.org/latest/guide/references/phpdoc/tags/deprecated.html>`_
-   Usando o formato ``@version <vector> <description>``, onde ``version`` e
-   ``description`` são obrigatórios.
+   Usando o formato ``@version <vector> <description>``, onde ``version``
+   e ``description`` são obrigatórios. Version refere-se àquela em que foi descontinuado.
 *  `@example <https://docs.phpdoc.org/latest/guide/references/phpdoc/tags/example.html>`_
 *  `@ignore <https://docs.phpdoc.org/latest/guide/references/phpdoc/tags/ignore.html>`_
 *  `@internal <https://docs.phpdoc.org/latest/guide/references/phpdoc/tags/internal.html>`_
@@ -317,22 +345,22 @@ Comentários podem incluir as seguintes *tags* do
 *  `@since <https://docs.phpdoc.org/latest/guide/references/phpdoc/tags/since.html>`_
 *  `@version <https://docs.phpdoc.org/latest/guide/references/phpdoc/tags/version.html>`_
 
-*Tags* PhpDoc são muito semelhantes a *tags* JavaDoc no Java. *Tags* são apenas
-processadas se forem a primeira coisa numa linha de DocBlock, por exemplo::
+As tags PhpDoc são muito parecidas com as tags JavaDoc em Java. As tags só são processadas se
+forem a primeira coisa em uma linha DocBlock, por exemplo::
 
     /**
-     * Exemplo de tag.
+     * Tag example.
      *
-     * @author essa tag é analisada, mas essa versão é ignorada
-     * @version 1.0 essa tag também é analisada
+     * @author this tag is parsed, but this @version is ignored
+     * @version 1.0 this tag is also parsed
      */
 
 ::
 
     /**
-     * Exemplo de tags phpDoc em linha.
+     * Example of inline phpDoc tags.
      *
-     * Essa função cria planos com foo() para conquistar o mundo.
+     * This function works hard with foo() to rule the world.
      *
      * @return void
      */
@@ -341,7 +369,7 @@ processadas se forem a primeira coisa numa linha de DocBlock, por exemplo::
     }
 
     /**
-     * Função foo.
+     * Foo function.
      *
      * @return void
      */
@@ -349,50 +377,50 @@ processadas se forem a primeira coisa numa linha de DocBlock, por exemplo::
     {
     }
 
-Blocos de comentários, com a exceção do primeiro bloco em um arquivo, devem
-sempre ser precedidos por uma nova linha.
+Blocos de comentários, com exceção do primeiro bloco em um arquivo, devem sempre
+ser precedidos por uma nova linha.
 
-Tipos de variáveis
+Tipos de Variáveis
 ------------------
 
-Tipos de variáveis para serem usadas em DocBlocks:
+Tipos de variáveis para uso em DocBlocks:
 
-Tipo
-    Descrição
+Type
+    Description
 mixed
-    Uma variável com múltiplos tipos ou tipo indefinido.
+    Uma variável com tipo indefinido (ou múltiplo).
 int
-    Variável de tipo *int* (número inteiro).
+    Variável do tipo inteiro (número inteiro).
 float
-    Variável de tipo *float* (número decimal).
+    Tipo float (número com ponto decimal).
 bool
-    Variável de tipo *bool* (lógico, verdadeiro ou falso).
+    Tipo lógico (true ou false).
 string
-    Variável de tipo *string* (qualquer valor dentro de " " ou ' ').
+    Tipo string (qualquer valor entre " " ou ' ').
 null
-    Variável de tipo *null*. Normalmente usada em conjunto com outro tipo.
+    Tipo null. Geralmente usado em conjunto com outro tipo.
 array
-    Variável de tipo *array*.
+    Tipo array.
 object
-    Variável de tipo *object*. Um nome específico de classe deve ser usado, se
-    possível.
+    Tipo objeto. Um nome de classe específico deve ser usado se possível.
 resource
-    Variável de tipo *resource* (retornado de mysql\_connect() por exemplo).
-    Lembre-se que quando você especificar o tipo como *mixed*, você deve indicar
-    se o mesmo é desconhecido, ou quais os tipos possíveis.
+    Tipo resource (retornado por exemplo por mysql\_connect()).
+    Lembre-se de que quando você especifica o tipo como mixed, deve indicar
+    se é desconhecido ou quais são os tipos possíveis.
 callable
-    Variável de tipo função.
+    Função callable.
 
-Você também pode combinar tipos usando o caractere de barra vertical::
+Você também pode combinar tipos usando o caractere pipe::
 
     int|bool
 
-Para mais de dois tipos é melhor usar ``mixed``.
+Para mais de dois tipos, geralmente é melhor usar apenas ``mixed``.
 
-Ao retornar o próprio objeto, e.g. para encadeamento, use ``$this`` ao invés::
+Ao retornar o próprio objeto (por exemplo, para encadeamento), deve-se usar ``$this``
+em vez disso::
 
     /**
-     * Função Foo.
+     * Foo function.
      *
      * @return $this
      */
@@ -401,56 +429,52 @@ Ao retornar o próprio objeto, e.g. para encadeamento, use ``$this`` ao invés::
         return $this;
     }
 
-Incluindo arquivos
+Incluindo Arquivos
 ==================
 
-``include``, ``require``, ``include_once`` e ``require_once`` não tem
+``include``, ``require``, ``include_once`` e ``require_once`` não têm
 parênteses::
 
-    // errado = com parênteses
+    // errado = parênteses
     require_once('ClassFileName.php');
     require_once ($class);
 
-    // certo = sem parênteses
+    // bom = sem parênteses
     require_once 'ClassFileName.php';
     require_once $class;
 
-Ao incluir arquivos com classes ou bibliotecas, use sempre e apenas a função
-`require\_once <https://php.net/require_once>`_.
+Ao incluir arquivos com classes ou bibliotecas, use apenas e sempre a
+função `require\_once <https://php.net/require_once>`_.
 
-Tags do PHP
-===========
+Tags PHP
+========
 
-Use sempre *tags* longas (``<?php ?>``) ao invés de *tags* curtas (``<? ?>``).
-O *short echo* deve ser usado em arquivos de template (**.php**) quando
-apropriado.
+Sempre use tags longas (``<?php ?>``) em vez de tags curtas (``<? ?>``). O echo
+curto deve ser usado em arquivos de template quando apropriado.
 
-Short Echo
+Echo Curto
 ----------
 
-O *short echo* deve ser usado em arquivos de template no lugar de
-``<?php echo``. Deve também, ser imediatamente seguido por um espaço em branco,
-a variável ou função a ser chamada pelo ``echo``, um espaço em branco e a *tag*
-de fechamento do PHP::
+O echo curto deve ser usado em arquivos de template no lugar de ``<?php echo``. Ele
+deve ser imediatamente seguido por um único espaço, a variável ou valor da função
+para ``echo``, um único espaço e a tag de fechamento php::
 
-    // errado = ponto-e-virgula, sem espaços
+    // errado = ponto e vírgula, sem espaços
     <td><?=$name;?></td>
 
-    // certo = sem ponto-e-virgula, com espaços
+    // bom = espaços, sem ponto e vírgula
     <td><?= $name ?></td>
 
-A partir do PHP 5.4 a *tag short echo* (``<?=``) não é mais considerada um
-atalho, estando sempre disponível independentemente da configuração da chave
-``short_open_tag``.
+A partir do PHP 5.4, a tag de echo curto (``<?=``) não é mais considerada uma 'tag
+curta' e está sempre disponível, independentemente da diretiva ini ``short_open_tag``.
 
-Convenção de nomenclatura
-=========================
+Convenção de Nomenclatura
+==========================
 
 Funções
 -------
 
-Escreva todas as funções no padrão "camelBack", isto é, com a letra da primeira palavra
-minúscula e a primeira letra das demais palavras maiúsculas::
+Escreva todas as funções em camelBack::
 
     function longFunctionName()
     {
@@ -459,8 +483,7 @@ minúscula e a primeira letra das demais palavras maiúsculas::
 Classes
 -------
 
-Escreva todas as funções no padrão "CamelCase", isto é, com a primeira letra de
-cada palavra que compõem o nome da classe maiúscula::
+Os nomes de classes devem ser escritos em CamelCase, por exemplo::
 
     class ExampleClass
     {
@@ -469,104 +492,97 @@ cada palavra que compõem o nome da classe maiúscula::
 Variáveis
 ---------
 
-Nomes de variáveis devem ser tanto curtas como descritivas, o quanto possível.
-Todas as variáveis devem começar com letra minúscula e seguir o padrão
-"camelBack" no caso de muitas palavras. Variáveis referenciando objetos devem
-estar de alguma forma associadas à classe indicada. Exemplo::
+Os nomes de variáveis devem ser o mais descritivos possível, mas também o mais curtos
+possível. Todas as variáveis devem começar com uma letra minúscula e devem ser
+escritas em camelBack no caso de múltiplas palavras. Variáveis que referenciam objetos
+devem de alguma forma se associar à classe da qual a variável é um objeto.
+Exemplo::
 
     $user = 'John';
     $users = ['John', 'Hans', 'Arne'];
 
     $dispatcher = new Dispatcher();
 
-Visibilidade
-------------
+Visibilidade de Membros
+------------------------
 
-Use as palavras reservadas do PHP5, *private* e *protected* para indicar métodos
-e variáveis. Adicionalmente, nomes de métodos e variáveis não-públicos começar
-com um *underscore* singular (``_``). Exemplo::
+Use as palavras-chave ``public``, ``protected`` e ``private`` do PHP para métodos e variáveis.
 
-    class A
-    {
-        protected $_iAmAProtectedVariable;
+Endereços de Exemplo
+---------------------
 
-        protected function _iAmAProtectedMethod()
-        {
-           /* ... */
-        }
-
-        private $_iAmAPrivateVariable;
-
-        private function _iAmAPrivateMethod()
-        {
-            /* ... */
-        }
-    }
-
-Endereços para exemplos
------------------------
-
-Para qualquer URL e endereços de email, use "example.com", "example.org" e
+Para todos os endereços de URL e e-mail de exemplo, use "example.com", "example.org" e
 "example.net", por exemplo:
 
 *  Email: someone@example.com
 *  WWW: `http://www.example.com <http://www.example.com>`_
 *  FTP: `ftp://ftp.example.com <ftp://ftp.example.com>`_
 
-O nome de domínio "example.com" foi reservado para isso (see :rfc:`2606`), sendo
-recomendado o seu uso em documentações como exemplos.
+O nome de domínio "example.com" foi reservado para isso (veja :rfc:`2606`) e
+é recomendado para uso em documentação ou como exemplos.
 
 Arquivos
 --------
 
-Nomes de arquivos que não contém classes devem ser em caixa baixa e sublinhados,
+Nomes de arquivos que não contêm classes devem estar em letras minúsculas e sublinhados,
 por exemplo::
 
     long_file_name.php
 
-Moldagem de tipos
+Conversão de Tipo
 -----------------
 
-Para moldagem usamos:
+Para conversão de tipo usamos:
 
-Tipo
-    Descrição
+Type
+    Description
 (bool)
-    Converte para *boolean*.
+    Converter para boolean.
 (int)
-    Converte para *integer*.
+    Converter para integer.
 (float)
-    Converte para *float*.
+    Converter para float.
 (string)
-    Converte para *string*.
+    Converter para string.
 (array)
-    Converte para *array*.
+    Converter para array.
 (object)
-    Converte para *object*.
+    Converter para object.
 
-Por favor use ``(int)$var`` ao invés de ``intval($var)`` e ``(float)$var`` ao
-invés de ``floatval($var)`` quando aplicável.
+Por favor, use ``(int)$var`` em vez de ``intval($var)`` e ``(float)$var`` em vez
+de ``floatval($var)`` quando aplicável.
 
-Constante
----------
+Constantes
+----------
 
-Constantes devem ser definidas em caixa alta::
+Constantes devem ser definidas em letras maiúsculas::
 
     define('CONSTANT', 1);
 
-Se o nome de uma constante consiste de múltiplas palavras, eles devem ser
-separados por um *underscore*, por exemplo::
+Se um nome de constante consiste em várias palavras, elas devem ser separadas por um
+caractere de sublinhado, por exemplo::
 
     define('LONG_NAMED_CONSTANT', 2);
 
-Cuidados usando empty()/isset()
-===============================
+Enums
+-----
 
-Apesar de ``empty()`` ser uma função simples de ser usada, pode mascarar erros e
-causar efeitos não intencionais quando ``'0'`` e ``0`` são retornados. Quando
-variáveis ou propriedades já estão definidas, o uso de ``empty()`` não é
-recomendado. Ao trabalhar com variáveis, é melhor confiar em coerção de tipo
-com booleanos ao invés de ``empty()``::
+Casos de Enum são definidos no estilo ``CamelCase``::
+
+    enum ArticleStatus: string
+    {
+        case Published = 'Y';
+        case NotPublishedYet = 'N';
+    }
+
+Cuidado ao usar empty()/isset()
+================================
+
+Embora ``empty()`` frequentemente pareça correto de usar, pode mascarar erros
+e causar efeitos não intencionais quando ``'0'`` e ``0`` são fornecidos. Quando variáveis ou
+propriedades já estão definidas, o uso de ``empty()`` não é recomendado.
+Ao trabalhar com variáveis, é melhor confiar na coerção de tipo para boolean
+em vez de ``empty()``::
 
     function manipulate($var)
     {
@@ -575,7 +591,7 @@ com booleanos ao invés de ``empty()``::
             // ...
         }
 
-        // Recomendado, use coerção de tipo booleano
+        // Use coerção de tipo boolean
         if (!$var) {
             // ...
         }
@@ -584,16 +600,16 @@ com booleanos ao invés de ``empty()``::
         }
     }
 
-Ao lidar com propriedades definidas, você deve favorecer verificações por
-``null`` sobre verificações por ``empty()``/``isset()``::
+Ao lidar com propriedades definidas, você deve favorecer verificações de ``null`` em vez de
+verificações ``empty()``/``isset()``::
 
     class Thing
     {
-        private $property; // Definida
+        private $property; // Defined
 
         public function readProperty()
         {
-            // Não recomendado já que a propriedade está definida na classe
+            // Não recomendado pois a propriedade está definida na classe
             if (!isset($this->property)) {
                 // ...
             }
@@ -604,13 +620,13 @@ Ao lidar com propriedades definidas, você deve favorecer verificações por
         }
     }
 
-Ao trabalhar com *arrays*, é melhor mesclar valores padronizados ao usar
-verificações por ``empty()``. Assim, você se assegura que as chaves necessárias
-estão definidas::
+Ao trabalhar com arrays, é melhor mesclar em padrões do que usar
+verificações ``empty()``. Ao mesclar em padrões, você pode garantir que as chaves necessárias
+estejam definidas::
 
     function doWork(array $array)
     {
-        // Mescla valores para remover a necessidade de verificações via empty.
+        // Mesclar padrões para remover a necessidade de verificações empty.
         $array += [
             'key' => null,
         ];
@@ -627,5 +643,5 @@ estão definidas::
     }
 
 .. meta::
-    :title lang=pt: Padrões de codificação
-    :keywords lang=pt: indentação,comprimento,linha,funções,classes,métodos,variáveis,propriedades,arquivos,tipos,visibilidade,inclusão,operadores ternários,template,estruturas de controle
+    :title lang=pt: Padrões de Codificação
+    :keywords lang=pt: chaves,nível de indentação,erros lógicos,estruturas de controle,estrutura de controle,expr,padrões de codificação,parêntese,foreach,legibilidade,moose,novos recursos,repositório,desenvolvedores

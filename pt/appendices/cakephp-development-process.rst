@@ -1,53 +1,67 @@
-Processo de desenvolvimento no CakePHP
+Processo de Desenvolvimento do CakePHP
 ######################################
 
-Aqui tentamos explicar o processo utilizado no desenvolvimento com o framework
-CakePHP. Nós dependemos fortemente da interação por tickets e no canal do IRC.
-O IRC é o melhor lugar para encontrar membros do
-`time de desenvolvimento <https://github.com/cakephp?tab=members>`_ e discutir
-idéias, o ultimo código e fazer comentários gerais. Se algo mais formal tem que
-ser proposto ou exite um problema com uma versão, o sistema de tickets é o
-melhor lugar para compartilhar seus pensamentos.
+Os projetos CakePHP seguem amplamente o `semver <https://semver.org/>`__. Isso significa que:
 
-Nós atualmente mantemos 4 versões do CakePHP.
+- As versões são numeradas na forma de **A.B.C**
+- Versões **A** são *versões principais*. Elas contêm mudanças incompatíveis e exigirão
+  quantidades não triviais de trabalho para atualizar de uma versão **A** inferior.
+- Versões **A.B** são *versões de funcionalidades*. Cada versão será compatível com versões
+  anteriores, mas pode introduzir novas depreciações. Se uma mudança incompatível for
+  absolutamente necessária, será anotada no guia de migração para essa versão.
+- Versões **A.B.C** são versões de *correção*. Elas devem ser compatíveis com a versão
+  de correção anterior. A exceção a esta regra é se um problema de segurança for
+  descoberto e a única solução for quebrar uma API existente.
 
-- **versões tageadas** : Versões tageadas são destinadas para produção onde uma
-  estabilidade maior é mais importante do que funcionalidades. Questões sobre
-  versões tageadas serão resolvidas no branch relacionado e serão parte do
-  próximo release.
-- **branch principal** : Esses branches são onde todas as correções são
-  fundidas. Versões estáveis são rotuladas apartir desses branches. ``master`` é
-  o principal branch para a versão atual. ``2.x`` é o branch de manutenção para
-  a versão 2.x. Se você está usando versões estáveis e precisa de correções que
-  não chegaram em uma versão tageada olhe aqui.
-- **desenvolvimento** : O branch de desenvolvimento contém sempre as ultimas
-  correções e funcionalidades. Eles são nomeados pela versão a qual se destinam,
-  ex: *3.next*. Uma vez que estas braches estão estáveis elas são fundidas na
-  branch principal da versão.
-- **branches de funcionalidades** : Branches de funcionalidade contém trabalhos
-  que estão sendo desenvolvidos ou possivelmente instáveis e são recomendadas
-  apenas para usuários avançados interessados e dispostos a contribuir com a
-  comunidade. Branches de funcionalidade são nomeadas pela seguinte convenção
-  *versão-funcionalidade*. Um exemplo seria *3.3-router* Que conteria novas
-  funcionalidades para o Router na 3.3
+Veja :doc:`/contributing/backwards-compatibility` para o que consideramos ser
+compatível com versões anteriores e mudanças incompatíveis.
 
-Esperamos que isso te ajudará a entender que versão é correta pra você.
-Uma vez que escolhida a versão você pode se sentir compelido a reportar um erro
-ou fazer comentários gerais no código.
+Versões Principais
+==================
 
-- Se você está usando uma versão estável ou de manutenção, por favor envie
-  tickets ou discuta conosco no IRC.
-- Se você está usando uma branch de desenvolvimento ou funcionalidade, o
-  primeiro lugar para ir é o IRC. Se você tem um comentário e não consegue
-  entrar no IRC depois de um ou dois dias, envie um ticket.
+Versões principais introduzem novos recursos e podem remover funcionalidades depreciadas em
+uma versão anterior. Essas versões vivem em branches ``next`` que correspondem ao seu
+número de versão, como ``5.next``. Uma vez lançadas, elas são promovidas para ``master``
+e então a branch ``5.next`` é usada para futuras versões de funcionalidades.
 
-Se você encontrar um problema, a melhor resposta é escrever um teste. O melhor
-conselho que podemos oferecer em escrever testes é olhar nos que estão no núcleo
-do projeto.
+Versões de Funcionalidades
+===========================
 
-E sempre, se você tiver alguma questão ou cometários, nos visite no #cakephp no
-irc.freenode.net
+Versões de funcionalidades são onde novos recursos ou extensões para recursos existentes são
+entregues. Cada série de versão que recebe atualizações terá uma branch ``next``. Por
+exemplo ``4.next``. Se você gostaria de contribuir com um novo recurso, por favor, direcione
+para essas branches.
+
+Versões de Correção
+====================
+
+Versões de correção corrigem bugs em código/documentação existente e devem sempre ser
+compatíveis com versões de correção anteriores da mesma versão de funcionalidade. Essas
+versões são criadas a partir das branches estáveis. Branches estáveis são frequentemente nomeadas
+após a série de versão, como ``3.x``.
+
+Cadência de Versões
+===================
+
+- *Versões Principais* são entregues aproximadamente a cada dois a três anos. Esse prazo
+  nos força a ser deliberados e cuidadosos com nossas mudanças incompatíveis e dá
+  tempo para a comunidade acompanhar sem sentir que está sendo deixada para trás.
+- *Versões de Funcionalidades* são entregues a cada cinco a oito meses.
+- *Versões de Correção* são inicialmente entregues a cada duas semanas. À medida que uma versão de funcionalidade
+  amadurece, essa cadência relaxa para um cronograma mensal.
+
+Política de Depreciação
+========================
+
+Antes que um recurso possa ser removido em uma versão principal, ele precisa ser depreciado.
+Quando um comportamento é depreciado na versão **A.x**, ele continuará a funcionar para
+o restante de todas as versões **A.x**. Depreciações são geralmente indicadas via
+avisos do PHP. Você pode habilitar avisos de depreciação adicionando ``E_USER_DEPRECATED`` ao
+valor ``Error.level`` da sua aplicação.
+
+Uma vez depreciado, o comportamento não é removido até a próxima versão principal. Por
+exemplo, comportamento depreciado em ``4.1`` será removido em ``5.0``.
 
 .. meta::
-  :title lang=pt: Processo de desenvolvimento no CakePHP
-  :keywords lang=pt: manutenção, interação com a comunidade, comunidade, funcionalidade, versão estável, ticket, funcionalidade avançada, usuários avançados, irc, desenvolvimento, tentativas
+    :title lang=pt: Processo de Desenvolvimento do CakePHP
+    :keywords lang=pt: branch de manutenção,interação com a comunidade,recurso da comunidade,recurso necessário,versão estável,sistema de tickets,recurso avançado,usuários avançados,conjunto de recursos,chat irc,ponta de lança,router,novos recursos,membros,tentativa,branches de desenvolvimento,desenvolvimento de branch

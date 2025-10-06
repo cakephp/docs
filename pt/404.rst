@@ -1,7 +1,7 @@
 :orphan: True
 
-Página não encontrada
-#####################
+Não Encontrado
+##############
 
-A página que você está procurando não foi encontrada. Tente usar o campo de
-busca para localizar o que você procura.
+A página que você está procurando não pode ser encontrada. Tente usar a barra de pesquisa para encontrar
+o que você está procurando.

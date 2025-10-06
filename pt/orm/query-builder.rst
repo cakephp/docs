@@ -1398,7 +1398,6 @@ Valores de Ligação
 ------------------
 
 É possível proteger contra muitas situações inseguras usando ligações.
-Semelhante a :ref:`vinculando valores a instruções preparadas <database-basics-binding-values>`,
 os valores podem ser vinculados a consultas usando o método :php:meth:`Cake\\Database\\Query::bind()`
 
 O exemplo a seguir seria uma variante segura do exemplo inseguro, propenso a injeção de SQL, dado acima::

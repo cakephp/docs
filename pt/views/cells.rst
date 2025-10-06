@@ -199,3 +199,110 @@ serão usados
     Uma nova instância da ``View`` é usada para cada *cell* e esses novos objetos não
     compartilham o contexto com o *template* principal/*layout*. Cada *cell* é *self-contained*
     e somente tem acesso as variaveis passadas como argumento pelo chamada do método ``View::cell()``.
+
+Paginando Dados dentro de uma Cell
+===================================
+
+Criar uma *cell* que renderiza um conjunto de resultados paginados pode ser feito aproveitando
+uma classe paginadora do ORM. Um exemplo de paginação de mensagens favoritas de um usuário
+poderia ser assim::
+
+    namespace App\View\Cell;
+
+    use Cake\View\Cell;
+    use Cake\Datasource\Paging\NumericPaginator;
+
+    class FavoritesCell extends Cell
+    {
+        public function display($user)
+        {
+            // Cria um paginador
+            $paginator = new NumericPaginator();
+
+            // Pagina o modelo
+            $results = $paginator->paginate(
+                $this->fetchTable('Messages'),
+                $this->request->getQueryParams(),
+                [
+                    // Usa um finder customizado parametrizado.
+                    'finder' => ['favorites' => [$user]],
+
+                    // Usa parâmetros de query string com escopo.
+                    'scope' => 'favorites',
+                ]
+            );
+
+            // Define os parâmetros de paginação como um atributo da requisição para uso do PaginatorHelper
+            $paging = $paginator->getPagingParams() + (array)$this->request->getAttribute('paging');
+            $this->request = $this->request->withAttribute('paging', $paging);
+
+            $this->set('favorites', $results);
+        }
+    }
+
+A *cell* acima paginaria o modelo ``Messages`` usando :ref:`parâmetros de paginação com escopo
+<paginating-multiple-queries>`.
+
+Opções de Cell
+==============
+
+*Cells* podem declarar opções de construtor que são convertidas em propriedades quando
+criamos um objeto *cell*::
+
+    namespace App\View\Cell;
+
+    use Cake\View\Cell;
+
+    class FavoritesCell extends Cell
+    {
+        protected $_validCellOptions = ['limit'];
+
+        protected $limit = 3;
+
+        public function display($userId)
+        {
+            $result = $this->fetchTable('Users')->find('friends', ['for' => $userId])
+                ->limit($this->limit)
+                ->all();
+            $this->set('favorites', $result);
+        }
+    }
+
+Aqui definimos uma propriedade ``$limit`` e adicionamos ``limit`` como uma opção de *cell*.
+Isso nos permitirá definir a opção ao criar a *cell*::
+
+    $cell = $this->cell('Favorites', [$user->id], ['limit' => 10])
+
+As opções de *cell* são úteis quando você deseja dados disponíveis como propriedades permitindo
+que você sobrescreva valores padrão.
+
+Usando Helpers dentro de uma Cell
+==================================
+
+*Cells* têm seu próprio contexto e sua própria instância de View, mas os Helpers carregados dentro da
+sua função ``AppView::initialize()`` ainda são carregados normalmente.
+
+Carregar um Helper específico apenas para uma *cell* específica pode ser feito através do seguinte exemplo::
+
+    namespace App\View\Cell;
+
+    use Cake\View\Cell;
+
+    class FavoritesCell extends Cell
+    {
+        public function initialize(): void
+        {
+            $this->viewBuilder()->addHelper('MyCustomHelper');
+        }
+    }
+
+
+Eventos de Cell
+===============
+
+*Cells* disparam os seguintes eventos em torno da *action* da *cell*:
+
+* ``Cell.beforeAction``
+* ``Cell.afterAction``
+
+.. versionadded:: 5.1.0

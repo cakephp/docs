@@ -31,7 +31,7 @@ Conteúdo
     orm
 
 .. toctree::
-    :caption: Using CakePHP
+    :caption: Usando o CakePHP
 
     core-libraries/caching
     console-commands
@@ -81,7 +81,7 @@ Conteúdo
     Queue <https://book.cakephp.org/queue/2/>
 
 .. toctree::
-    :caption: Diversos
+    :caption: Outros
 
     core-libraries/global-constants-and-functions
     appendices

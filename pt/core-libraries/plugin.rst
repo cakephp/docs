@@ -1,50 +1,50 @@
-Plugin Class
-############
+Classe Plugin
+#############
 
 .. php:namespace:: Cake\Core
 
 .. php:class:: Plugin
 
-The Plugin class is responsible for resource location and path management of plugins.
+A classe Plugin é responsável pela localização de recursos e gerenciamento de caminhos de plugins.
 
-Locating Plugins
-================
+Localizando Plugins
+===================
 
 .. php:staticmethod:: path(string $plugin)
 
-Plugins can be located with Plugin. Using ``Plugin::path('DebugKit');``
-for example, will give you the full path to the DebugKit plugin::
+Plugins podem ser localizados com Plugin. Usar ``Plugin::path('DebugKit');``
+por exemplo, lhe dará o caminho completo para o plugin DebugKit::
 
     $path = Plugin::path('DebugKit');
 
-Check if a Plugin is Loaded
-===========================
+Verificar se um Plugin está Carregado
+======================================
 
-You can check dynamically inside your code if a specific plugin has been loaded::
+Você pode verificar dinamicamente dentro do seu código se um plugin específico foi carregado::
 
     $isLoaded = Plugin::isLoaded('DebugKit');
 
-Use ``Plugin::loaded()`` if you want to get a list of all currently loaded plugins.
+Use ``Plugin::loaded()`` se você quiser obter uma lista de todos os plugins atualmente carregados.
 
-Finding Paths to Namespaces
-===========================
+Encontrando Caminhos para Namespaces
+=====================================
 
 .. php:staticmethod:: classPath(string $plugin)
 
-Used to get the location of the plugin's class files::
+Usado para obter a localização dos arquivos de classe do plugin::
 
     $path = App::classPath('DebugKit');
 
-Finding Paths to Resources
-==========================
+Encontrando Caminhos para Recursos
+===================================
 
 .. php:staticmethod:: templatePath(string $plugin)
 
-The method returns the path to the plugins' templates::
+O método retorna o caminho para os templates do plugin::
 
     $path = Plugin::templatePath('DebugKit');
 
-The same goes for the config path::
+O mesmo vale para o caminho de config::
 
     $path = Plugin::configPath('DebugKit');
 

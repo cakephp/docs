@@ -1,4 +1,4 @@
-Bake Console
+Console Bake
 ############
 
-Esta página foi `movida <https://book.cakephp.org/bake/1.x/pt/>`__.
+Esta página foi `movida <https://book.cakephp.org/bake/2.x/en/index.html>`__.

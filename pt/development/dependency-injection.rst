@@ -1,60 +1,60 @@
-Dependency Injection
-####################
+Injeção de Dependências
+#######################
 
-The CakePHP service container enables you to manage class dependencies for your
-application services through dependency injection. Dependency injection
-automatically "injects" an object's dependencies via the constructor without
-having to manually instantiate them.
+O container de serviços do CakePHP permite que você gerencie dependências de classe para os
+serviços de sua aplicação através da injeção de dependências. A injeção de dependências
+automaticamente "injeta" as dependências de um objeto via construtor sem
+precisar instanciá-las manualmente.
 
-You can use the service container to define 'application services'. These
-classes can use models and interact with other objects like loggers and mailers
-to build re-usable workflows and business logic for your application.
+Você pode usar o container de serviços para definir 'serviços de aplicação'. Essas
+classes podem usar models e interagir com outros objetos como loggers e mailers
+para construir fluxos de trabalho reutilizáveis e lógica de negócios para sua aplicação.
 
-CakePHP will use the :term:`DI container` in the following situations:
+O CakePHP usará o :term:`DI container` nas seguintes situações:
 
-* Constructing controllers.
-* Calling actions on your controllers.
-* Constructing Components.
-* Constructing Console Commands.
-* Constructing Middleware by classname.
+* Construindo controllers.
+* Chamando actions em seus controllers.
+* Construindo Components.
+* Construindo Console Commands.
+* Construindo Middleware por nome de classe.
 
-Controller Example
-==================
+Exemplo de Controller
+=====================
 
 ::
 
-    // In src/Controller/UsersController.php
+    // Em src/Controller/UsersController.php
     class UsersController extends AppController
     {
-        // The $users service will be created via the service container.
+        // O serviço $users será criado via container de serviços.
         public function ssoCallback(UsersService $users)
         {
             if ($this->request->is('post')) {
-                // Use the UsersService to create/get the user from a
-                // Single Signon Provider.
+                // Use o UsersService para criar/obter o usuário de um
+                // Provedor de Single Sign-on.
                 $user = $users->ensureExists($this->request->getData());
             }
         }
     }
 
-    // In src/Application.php
+    // Em src/Application.php
     public function services(ContainerInterface $container): void
     {
         $container->add(UsersService::class);
     }
 
-In this example, the ``UsersController::ssoCallback()`` action needs to fetch
-a user from a Single-Sign-On provider and ensure it exists in the local
-database. Because this service is injected into our controller, we can easily
-swap the implementation out with a mock object or a dummy sub-class when
-testing.
+Neste exemplo, a action ``UsersController::ssoCallback()`` precisa buscar
+um usuário de um provedor de Single-Sign-On e garantir que ele exista no banco de dados
+local. Como este serviço é injetado em nosso controller, podemos facilmente
+trocar a implementação por um objeto mock ou uma subclasse dummy ao
+testar.
 
-Command Example
-===============
+Exemplo de Command
+==================
 
 ::
 
-    // In src/Command/CheckUsersCommand.php
+    // Em src/Command/CheckUsersCommand.php
     use Cake\Console\CommandFactoryInterface;
 
     class CheckUsersCommand extends Command
@@ -71,7 +71,7 @@ Command Example
 
     }
 
-    // In src/Application.php
+    // Em src/Application.php
     public function services(ContainerInterface $container): void
     {
         $container
@@ -81,18 +81,18 @@ Command Example
         $container->add(UsersService::class);
     }
 
-The injection process is a bit different here. Instead of adding the
-``UsersService`` to the container we first have to add the Command as
-a whole to the Container and add the ``UsersService`` as an argument.
-With that you can then access that service inside the constructor
-of the command.
+O processo de injeção é um pouco diferente aqui. Em vez de adicionar o
+``UsersService`` ao container, primeiro temos que adicionar o Command como
+um todo ao Container e adicionar o ``UsersService`` como um argumento.
+Com isso, você pode então acessar esse serviço dentro do construtor
+do command.
 
-Component Example
-=================
+Exemplo de Component
+====================
 
 ::
 
-    // In src/Controller/Component/SearchComponent.php
+    // Em src/Controller/Component/SearchComponent.php
     class SearchComponent extends Component
     {
         public function __construct(
@@ -109,7 +109,7 @@ Component Example
         }
     }
 
-    // In src/Application.php
+    // Em src/Application.php
     public function services(ContainerInterface $container): void
     {
         $container->add(SearchComponent::class)
@@ -118,20 +118,20 @@ Component Example
         $container->add(UsersService::class);
     }
 
-Adding Services
-===============
+Adicionando Serviços
+====================
 
-In order to have services created by the container, you need to tell it which
-classes it can create and how to build those classes. The
-simplest definition is via a class name::
+Para que os serviços sejam criados pelo container, você precisa informar quais
+classes ele pode criar e como construir essas classes. A
+definição mais simples é via um nome de classe::
 
-    // Add a class by its name.
+    // Adicionar uma classe pelo seu nome.
     $container->add(BillingService::class);
 
-Your application and plugins define the services they have in the
-``services()`` hook method::
+Sua aplicação e plugins definem os serviços que possuem no
+método hook ``services()``::
 
-    // in src/Application.php
+    // em src/Application.php
     namespace App;
 
     use App\Service\BillingService;
@@ -146,65 +146,65 @@ Your application and plugins define the services they have in the
         }
     }
 
-You can define implementations for interfaces that your application uses::
+Você pode definir implementações para interfaces que sua aplicação usa::
 
     use App\Service\AuditLogServiceInterface;
     use App\Service\AuditLogService;
 
-    // in your Application::services() method.
+    // no seu método Application::services().
 
-    // Add an implementation for an interface.
+    // Adicionar uma implementação para uma interface.
     $container->add(AuditLogServiceInterface::class, AuditLogService::class);
 
-The container can leverage factory functions to create objects if necessary::
+O container pode aproveitar funções de factory para criar objetos se necessário::
 
     $container->add(AuditLogServiceInterface::class, function (...$args) {
         return new AuditLogService(...$args);
     });
 
-Factory functions will receive all of the resolved dependencies for the class
-as arguments.
+Funções de factory receberão todas as dependências resolvidas para a classe
+como argumentos.
 
-Once you've defined a class, you also need to define the dependencies it
-requires. Those dependencies can be either objects or primitive values::
+Uma vez que você definiu uma classe, você também precisa definir as dependências que ela
+requer. Essas dependências podem ser objetos ou valores primitivos::
 
-    // Add a primitive value like a string, array or number.
+    // Adicionar um valor primitivo como string, array ou número.
     $container->add('apiKey', 'abc123');
 
     $container->add(BillingService::class)
         ->addArgument('apiKey');
 
-Your services can depend on ``ServerRequest`` in controller actions as it will
-be added automatically.
+Seus serviços podem depender de ``ServerRequest`` em actions de controller, pois será
+adicionado automaticamente.
 
-Adding Shared Services
-----------------------
+Adicionando Serviços Compartilhados
+------------------------------------
 
-By default services are not shared. Every object (and dependencies) is created
-each time it is fetched from the container. If you want to re-use a single
-instance, often referred to as a singleton, you can mark a service as 'shared'::
+Por padrão, os serviços não são compartilhados. Cada objeto (e dependências) é criado
+cada vez que é obtido do container. Se você quiser reutilizar uma única
+instância, frequentemente referida como singleton, você pode marcar um serviço como 'compartilhado'::
 
-    // in your Application::services() method.
+    // no seu método Application::services().
 
     $container->addShared(BillingService::class);
 
-Extending Definitions
+Estendendo Definições
 ---------------------
 
-Once a service is defined you can modify or update the service definition by
-extending them. This allows you to add additional arguments to services defined
-elsewhere::
+Uma vez que um serviço é definido, você pode modificar ou atualizar a definição do serviço
+estendendo-o. Isso permite que você adicione argumentos adicionais a serviços definidos
+em outro lugar::
 
-    // Add an argument to a partially defined service elsewhere.
+    // Adicionar um argumento a um serviço parcialmente definido em outro lugar.
     $container->extend(BillingService::class)
         ->addArgument('logLevel');
 
-Tagging Services
-----------------
+Marcando Serviços com Tags
+---------------------------
 
-By tagging services you can get all of those services resolved at the same
-time. This can be used to build services that combine collections of other
-services like in a reporting system::
+Ao marcar serviços com tags, você pode obter todos esses serviços resolvidos ao mesmo
+tempo. Isso pode ser usado para construir serviços que combinam coleções de outros
+serviços, como em um sistema de relatórios::
 
     $container->add(BillingReport::class)->addTag('reports');
     $container->add(UsageReport::class)->addTag('reports');
@@ -213,41 +213,41 @@ services like in a reporting system::
         return new ReportAggregate($container->get('reports'));
     });
 
-Using Configuration Data
-------------------------
+Usando Dados de Configuração
+-----------------------------
 
-Often you'll need configuration data in your services. While you could add
-all the configuration keys your service needs into the container, that can be
-tedious. To make configuration easier to work with CakePHP includes an
-injectable configuration reader::
+Frequentemente você precisará de dados de configuração em seus serviços. Embora você possa adicionar
+todas as chaves de configuração que seu serviço precisa no container, isso pode ser
+tedioso. Para tornar a configuração mais fácil de trabalhar, o CakePHP inclui um
+leitor de configuração injetável::
 
     use Cake\Core\ServiceConfig;
 
-    // Use a shared instance
+    // Use uma instância compartilhada
     $container->addShared(ServiceConfig::class);
 
-The ``ServiceConfig`` class provides a read-only view of all the data available
-in ``Configure`` so you don't have to worry about accidentally changing
-configuration.
+A classe ``ServiceConfig`` fornece uma visualização somente leitura de todos os dados disponíveis
+em ``Configure``, então você não precisa se preocupar em alterar acidentalmente a
+configuração.
 
-Service Providers
-=================
+Provedores de Serviços
+=======================
 
-Service providers allow you to group related services together helping you
-organize your services. Service providers can help increase your application's
-performance as defined services are lazily registered after
-their first use.
+Provedores de serviços permitem que você agrupe serviços relacionados juntos, ajudando-o a
+organizar seus serviços. Provedores de serviços podem ajudar a aumentar o desempenho de sua aplicação,
+pois os serviços definidos são registrados preguiçosamente após
+seu primeiro uso.
 
-Creating Service Providers
---------------------------
+Criando Provedores de Serviços
+-------------------------------
 
-An example ServiceProvider would look like::
+Um exemplo de ServiceProvider seria assim::
 
     namespace App\ServiceProvider;
 
     use Cake\Core\ContainerInterface;
     use Cake\Core\ServiceProvider;
-    // Other imports here.
+    // Outras importações aqui.
 
     class BillingServiceProvider extends ServiceProvider
     {
@@ -263,33 +263,33 @@ An example ServiceProvider would look like::
         }
     }
 
-Service providers use their ``services()`` method to define all the services they
-will provide. Additionally those services  **must be** defined in the ``$provides``
-property. Failing to include a service in the ``$provides`` property will result
-in it not be loadable from the container.
+Provedores de serviços usam seu método ``services()`` para definir todos os serviços que
+irão fornecer. Além disso, esses serviços **devem ser** definidos na propriedade ``$provides``.
+Falhar em incluir um serviço na propriedade ``$provides`` resultará
+em ele não ser carregável do container.
 
-Using Service Providers
------------------------
+Usando Provedores de Serviços
+------------------------------
 
-To load a service provider add it into the container using the
-``addServiceProvider()`` method::
+Para carregar um provedor de serviços, adicione-o ao container usando o
+método ``addServiceProvider()``::
 
-    // in your Application::services() method.
+    // no seu método Application::services().
     $container->addServiceProvider(new BillingServiceProvider());
 
-Bootable ServiceProviders
--------------------------
+ServiceProviders Inicializáveis
+--------------------------------
 
-If your service provider needs to run logic when it is added to the container,
-you can implement the ``bootstrap()`` method. This situation can come up when your
-service provider needs to load additional configuration files, load additional
-service providers or modify a service defined elsewhere in your application. An
-example of a bootable service would be::
+Se seu provedor de serviços precisa executar lógica quando é adicionado ao container,
+você pode implementar o método ``bootstrap()``. Esta situação pode surgir quando seu
+provedor de serviços precisa carregar arquivos de configuração adicionais, carregar provedores de
+serviços adicionais ou modificar um serviço definido em outro lugar em sua aplicação. Um
+exemplo de um serviço inicializável seria::
 
     namespace App\ServiceProvider;
 
     use Cake\Core\ServiceProvider;
-    // Other imports here.
+    // Outras importações aqui.
 
     class BillingServiceProvider extends ServiceProvider
     {
@@ -307,31 +307,31 @@ example of a bootable service would be::
 
 .. _mocking-services-in-tests:
 
-Mocking Services in Tests
-=========================
+Mockando Serviços em Testes
+============================
 
-In tests that use ``ConsoleIntegrationTestTrait`` or ``IntegrationTestTrait``
-you can replace services that are injected via the container with mocks or
+Em testes que usam ``ConsoleIntegrationTestTrait`` ou ``IntegrationTestTrait``
+você pode substituir serviços que são injetados via container por mocks ou
 stubs::
 
-    // In a test method or setup().
+    // Em um método de teste ou setup().
     $this->mockService(StripeService::class, function () {
         return new FakeStripe();
     });
 
-    // If you need to remove a mock
+    // Se você precisa remover um mock
     $this->removeMockService(StripeService::class);
 
-Any defined mocks will be replaced in your application's container during
-testing, and automatically injected into your controllers and commands. Mocks
-are cleaned up at the end of each test.
+Quaisquer mocks definidos serão substituídos no container de sua aplicação durante
+os testes e automaticamente injetados em seus controllers e commands. Mocks
+são limpos no final de cada teste.
 
 Auto Wiring
-===============
+===========
 
-Auto Wiring is turned off by default. To enable it::
+Auto Wiring está desativado por padrão. Para habilitá-lo::
 
-    // In src/Application.php
+    // Em src/Application.php
     public function services(ContainerInterface $container): void
     {
         $container->delegate(
@@ -339,14 +339,14 @@ Auto Wiring is turned off by default. To enable it::
         );
     }
 
-While your dependencies will now be resolved automatically, this approach will
-not cache resolutions which can be detrimental to performance. To enable
-caching::
+Embora suas dependências agora sejam resolvidas automaticamente, esta abordagem não
+armazenará em cache as resoluções, o que pode ser prejudicial ao desempenho. Para habilitar
+o cache::
 
     $container->delegate(
-         // or consider using the value of Configure::read('debug')
+         // ou considere usar o valor de Configure::read('debug')
         new \League\Container\ReflectionContainer(true)
     );
 
-Read more about auto wiring in the `PHP League Container documentation
+Leia mais sobre auto wiring na `documentação do PHP League Container
 <https://container.thephpleague.com/4.x/auto-wiring/>`_.

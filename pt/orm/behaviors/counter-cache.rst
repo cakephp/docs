@@ -113,16 +113,64 @@ com ``true``, o valor de retorno atualizará o contador do item associado *anter
 
 .. note::
 
-    O comportamento do CounterCache funciona apenas para associações ``belongsTo``. 
-    Por exemplo, para "Comentários pertence a artigos", é necessário adicionar o 
-    comportamento do CounterCache ao ``CommentsTable`` para gerar ``comment_count`` 
+    O comportamento do CounterCache funciona apenas para associações ``belongsTo``.
+    Por exemplo, para "Comentários pertence a artigos", é necessário adicionar o
+    comportamento do CounterCache ao ``CommentsTable`` para gerar ``comment_count``
     para a tabela Articles.
-    
-    É possível, no entanto, fazer isso funcionar para associações ``belongsToMany``. 
-    Você precisa habilitar o comportamento do CounterCache em uma tabela personalizada 
-    ``through`` configurada nas opções de associação e definir a opção de configuração 
-    ``cascadeCallbacks`` como true. Veja como configurar uma tabela de junção 
-    personalizada :ref:`using-the-through-option`.
 
-.. versionchanged:: 3.6.0
-    Retornando ``false`` para pular as atualizações foi adicionado.
+.. versionchanged:: 5.1.2
+
+    A partir do CakePHP 5.1.2, os valores do cache de contador são atualizados usando
+    uma única consulta com sub-consultas, em vez de consultas separadas, para buscar
+    a contagem e atualizar um registro. Se necessário, você pode desabilitar o uso de
+    sub-consultas definindo a chave `useSubQuery` como `false` na configuração
+    `['Articles' => ['comment_count' => ['useSubQuery' => false]]`
+
+Uso com Belongs to Many
+========================
+
+É possível usar o comportamento CounterCache em uma associação ``belongsToMany``.
+Primeiro, você precisa adicionar as opções ``through`` e ``cascadeCallbacks`` à
+associação ``belongsToMany``::
+
+    'through'          => 'CommentsArticles',
+    'cascadeCallbacks' => true
+
+Veja também :ref:`using-the-through-option` sobre como configurar uma tabela de junção personalizada.
+
+O ``CommentsArticles`` é o nome da classe da tabela de junção.
+Se você não a tiver, deve criá-la com a ferramenta CLI bake.
+
+Nesta ``src/Model/Table/CommentsArticlesTable.php`` você precisa adicionar o comportamento
+com o mesmo código descrito acima::
+
+    $this->addBehavior('CounterCache', [
+        'Articles' => ['comments_count'],
+    ]);
+
+Finalmente, limpe todos os caches com ``bin/cake cache clear_all`` e teste.
+
+Atualizando manualmente os caches de contador
+==============================================
+
+.. php:method:: updateCounterCache(?string $assocName = null, int $limit = 100, ?int $page = null): void
+
+O método ``updateCounterCache()`` permite atualizar os valores do cache de contador
+para todos os registros de uma ou todas as associações configuradas em lotes. Isso pode ser útil,
+por exemplo, para atualizar o cache de contador após importar dados diretamente no banco de dados::
+
+    // Atualiza o cache de contador para todas as associações configuradas
+    $table->updateCounterCache();
+
+    // Atualiza o cache de contador para uma associação específica, 200 registros por lote
+    $table->updateCounterCache('Articles', 200);
+
+    // Atualiza apenas a primeira página de registros
+    $table->updateCounterCache('Articles', page: 1);
+
+.. versionadded:: 5.2.0
+
+.. note::
+
+    Este método não atualizará os valores do cache de contador para campos que estão
+    configurados para usar um closure para obter o valor da contagem.

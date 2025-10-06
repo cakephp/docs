@@ -204,7 +204,7 @@ poderia ter a seguinte aparência::
     $this->viewBuilder()->addHelper('ContactManager.ContactInfo');
 
 .. note::
-    Este nome de classe separado por pontos é chamado de :term:`sintaxe plugin`.
+    Este nome de classe separado por pontos é chamado de :term:`sintaxe de plugin`.
 
 Você poderá então acessar o ``ContactInfoHelper`` como qualquer outro auxiliar 
 em sua visualização, como::
@@ -531,7 +531,7 @@ do plugin, use a sintaxe alternativa::
     }
 
 Você pode usar ``Cake\ORM\Locator\LocatorAwareTrait`` para carregar suas tabelas de plugins usando a conhecida
-:term:`sintaxe plugin`::
+:term:`sintaxe de plugin`::
 
     // Os controladores já usam LocatorAwareTrait, então você não precisa disso.
     use Cake\ORM\Locator\LocatorAwareTrait;
@@ -562,8 +562,8 @@ Se o prefixo do plugin for omitido, o arquivo de layout/visualização será loc
 Elementos do Plugin
 -------------------
 
-Para renderizar um elemento de um plugin, use o :term:`sintaxe plugin` para referenciar
-um plugin. Você não precisa usar a sintaxe plugin para elementos no plugin ativo no momento.
+Para renderizar um elemento de um plugin, use o :term:`sintaxe de plugin` para referenciar
+um plugin. Você não precisa usar a sintaxe de plugin para elementos no plugin ativo no momento.
 
 Se o elemento não existir no plugin, ele procurará na pasta principal do APP::
 
@@ -649,7 +649,7 @@ Você pode colocar qualquer tipo de arquivo em qualquer diretório, como um webr
 Linkando os Assets no Plugin
 ----------------------------
 
-Você pode usar o plugin :term:`sintaxe plugin` ao vincular aos recursos do plugin usando os 
+Você pode usar o plugin :term:`sintaxe de plugin` ao vincular aos recursos do plugin usando os 
 métodos de script, imagem ou css do :php:class:`~Cake\\View\\Helper\\HtmlHelper`::
 
     // Gera uma URL de /contact_manager/css/styles.css

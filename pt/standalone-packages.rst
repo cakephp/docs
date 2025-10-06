@@ -1,77 +1,77 @@
-Standalone Packages
-###################
+Pacotes Independentes
+#####################
 
-The CakePHP core is split into various standalone packages which can
-used independently.
+O núcleo do CakePHP é dividido em vários pacotes independentes que podem ser
+usados de forma independente.
 
 `ORM <https://github.com/cakephp/orm>`_
 ---------------------------------------
 
-A flexible, lightweight and powerful Object-Relational Mapper for PHP,
-implemented using the DataMapper pattern.
+Um Object-Relational Mapper flexível, leve e poderoso para PHP,
+implementado usando o padrão DataMapper.
 
 `Database <https://github.com/cakephp/database>`_
 -------------------------------------------------
 
-Flexible and powerful Database abstraction library with a familiar PDO-like API.
+Biblioteca de abstração de banco de dados flexível e poderosa com uma API familiar semelhante ao PDO.
 
 `Datasource <https://github.com/cakephp/datasource>`_
 -----------------------------------------------------
 
-Provides connection managing and traits for Entities and Queries that can be
-reused for different datastores.
+Fornece gerenciamento de conexão e traits para Entities e Queries que podem ser
+reutilizados para diferentes datastores.
 
 `HTTP <https://github.com/cakephp/http>`_
 -----------------------------------------
 
-PSR-18, PSR-15 compliant HTTP client and server libraries.
+Bibliotecas de cliente e servidor HTTP compatíveis com PSR-18 e PSR-15.
 
 `Console <https://github.com/cakephp/console>`_
 -----------------------------------------------
 
-A library for building command line applications from a set of commands.
+Uma biblioteca para construir aplicações de linha de comando a partir de um conjunto de comandos.
 
 `Collection <https://github.com/cakephp/collection>`_
 -----------------------------------------------------
 
-A library providing a set of tools to manipulate arrays or Traversable objects.
+Uma biblioteca que fornece um conjunto de ferramentas para manipular arrays ou objetos Traversable.
 
 `I18n <https://github.com/cakephp/i18n>`_
 -----------------------------------------
 
-Provides support for message translation and localization for dates and numbers.
+Fornece suporte para tradução de mensagens e localização de datas e números.
 
 `Cache <https://github.com/cakephp/cache>`_
 -------------------------------------------
 
-PSR-16 compliant caching library with support for multiple caching backends.
+Biblioteca de cache compatível com PSR-16 com suporte para múltiplos backends de cache.
 
 `Log <https://github.com/cakephp/log>`_
 ---------------------------------------
 
-PSR-3 compliant logging library with support for multiple different streams.
+Biblioteca de log compatível com PSR-3 com suporte para múltiplos streams diferentes.
 
 `Event <https://github.com/cakephp/event>`_
 -------------------------------------------
 
-The event dispatcher library.
+A biblioteca de despachante de eventos.
 
 `Utility <https://github.com/cakephp/utility>`_
 -----------------------------------------------
 
-Utility classes such as Inflector, Text, Hash, Security and Xml.
+Classes utilitárias como Inflector, Text, Hash, Security e Xml.
 
 `Validation <https://github.com/cakephp/validation>`_
 -----------------------------------------------------
 
-Validation library from CakePHP.
+Biblioteca de validação do CakePHP.
 
 `Form <https://github.com/cakephp/form>`_
 -----------------------------------------
 
-Form abstraction used to create forms not tied to ORM backed models, or to other
-permanent datastores.
+Abstração de formulário usada para criar formulários não vinculados a models baseados em ORM, ou a outros
+datastores permanentes.
 
 .. meta::
-    :title lang=en: Split Packages
-    :keywords lang=en: packages, cakephp, orm, database, http client, http server, utility, events, log, cache
+    :title lang=pt: Pacotes Divididos
+    :keywords lang=pt: pacotes, cakephp, orm, database, http client, http server, utility, events, log, cache
