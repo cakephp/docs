@@ -254,7 +254,7 @@ have called ``Controller::render()``, CakePHP will not try to re-render the view
     {
         public function my_action()
         {
-            $this->render('custom_file');
+            return $this->render('custom_file');
         }
     }
 
@@ -271,7 +271,7 @@ For example::
     {
         public function myAction()
         {
-            $this->render('Users.UserDetails/custom_file');
+            return $this->render('Users.UserDetails/custom_file');
         }
     }
 

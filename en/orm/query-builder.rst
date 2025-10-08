@@ -337,7 +337,7 @@ You can access existing wrappers for several SQL functions through ``SelectQuery
     Defaults to returning date and time, but accepts 'time' or 'date' to return only
     those values.
 ``extract()``
-    Returns the specified date part from the SQL expression.
+    Returns the specified data part from the SQL expression.
 ``dateAdd()``
     Add the time unit to the date expression.
 ``dayOfWeek()``

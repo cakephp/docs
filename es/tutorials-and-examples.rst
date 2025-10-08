@@ -5,11 +5,6 @@ En esta sección puedes encontrar varias aplicaciones completas construidas en
 CakePHP que te ayudarán a comprender el framework y ver cómo se relacionan todas
 las piezas.
 
-También puedes ver otros ejemplos en:
-`CakePackages <https://plugins.cakephp.org/>`_ y en
-`Bakery <https://bakery.cakephp.org/>`_ encontrarás también componentes listos
-para usar.
-
 .. toctree::
     :maxdepth: 1
 

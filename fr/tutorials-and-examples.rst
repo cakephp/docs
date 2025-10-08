@@ -4,11 +4,6 @@ Tutoriels et exemples
 Dans cette section, vous pourrez découvrir des applications CakePHP
 typiques afin de voir comment toutes les pièces s'assemblent.
 
-Sinon, vous pouvez vous référer au dépôt de plugins non-officiels de CakePHP
-`CakePackages <https://plugins.cakephp.org/>`_ ainsi que la
-`Boulangerie <https://bakery.cakephp.org/>`_ (Bakery) pour des applications
-et components existants.
-
 .. toctree::
     :maxdepth: 1
 

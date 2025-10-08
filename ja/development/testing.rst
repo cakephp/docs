@@ -253,7 +253,7 @@ PHPUnit のインストール方法に合わせて ``phpunit`` コマンドを�
     git clone git://github.com/cakephp/debug_kit.git
     cd debug_kit
     php ~/composer.phar install
-    php ~/phpunit.phar
+    vendor/bin/phpunit
 
 テストケースのフィルタリング
 ----------------------------

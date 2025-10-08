@@ -264,7 +264,7 @@ re-renderizar la vista::
     {
         public function my_action()
         {
-            $this->render('custom_file');
+            return $this->render('custom_file');
         }
     }
 
@@ -280,7 +280,7 @@ También puedes renderizar vistas dentro de plugins usando la siguiente sintaxis
     {
         public function myAction()
         {
-            $this->render('Users.UserDetails/custom_file');
+            return $this->render('Users.UserDetails/custom_file');
         }
     }
 

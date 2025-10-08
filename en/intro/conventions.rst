@@ -19,6 +19,8 @@ a web browser. They are camelBacked. For example the ``/users/view-me`` maps to 
 of the ``UsersController`` out of the box (if one uses default dashed inflection in routing).
 Protected or private methods cannot be accessed with routing.
 
+For inflection of acronyms it is useful to treat them as words, so ``CMS`` would be ``Cms``.
+
 URL Considerations for Controller Names
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
