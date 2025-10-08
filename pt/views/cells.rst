@@ -232,10 +232,6 @@ poderia ser assim::
                 ]
             );
 
-            // Define os parâmetros de paginação como um atributo da requisição para uso do PaginatorHelper
-            $paging = $paginator->getPagingParams() + (array)$this->request->getAttribute('paging');
-            $this->request = $this->request->withAttribute('paging', $paging);
-
             $this->set('favorites', $results);
         }
     }
