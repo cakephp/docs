@@ -1856,10 +1856,11 @@ named windows using the ``window()`` method::
 Common Table Expressions
 ------------------------
 
-Common Table Expressions or CTE are useful when building reporting queries where
-you need to compose the results of several smaller query results together. They
-can serve a similar purpose to database views or subquery results. Common Table
-Expressions differ from derived tables and views in a couple ways:
+`Common Table Expressions or CTE <https://en.wikipedia.org/wiki/Hierarchical_and_recursive_queries_in_SQL#Common_table_expression>`__
+are useful when building reporting queries where you need to compose the results
+of several smaller query results together. They can serve a similar purpose
+to database views or subquery results. Common Table Expressions differ from
+derived tables and views in a couple ways:
 
 #. Unlike views, you don't have to maintain schema for common table expressions.
    The schema is implicitly based on the result set of the table expression.
