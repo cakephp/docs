@@ -227,6 +227,38 @@ ORM
   ``$this->getSchema()`` inside the ``initialize()`` method.
 - ``SaveOptionsBuilder`` has been removed. Use a normal array for options instead.
 
+Known Issues
+------------
+
+**Memory Usage with extract() on Large Result Sets**
+
+When using ``extract()`` on large query results, you may experience higher memory
+usage compared to CakePHP 4.x. The collection iterator may materialize the entire
+result set into memory instead of processing results lazily.
+
+If you encounter memory issues when extracting values from large result sets,
+use one of these workarounds:
+
+**Option 1: Disable hydration and iterate manually**::
+
+    $query = $articles->find()
+        ->select(['id'])
+        ->disableHydration();
+
+    foreach ($query as $row) {
+        $id = $row['id'];
+        // Process each value
+    }
+
+**Option 2: Build your list while iterating**::
+
+    $query = $articles->find()->select(['id', 'title'])->disableHydration();
+
+    $ids = [];
+    foreach ($query as $row) {
+        $ids[] = $row['id'];
+    }
+
 Routing
 -------
 

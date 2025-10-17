@@ -981,6 +981,37 @@ The :doc:`/core-libraries/collections` chapter has more detail on what can be
 done with result sets using the collections features. The :ref:`format-results`
 section show how you can add calculated fields, or replace the result set.
 
+.. warning::
+
+    When working with large datasets, ``extract()`` may materialize the entire
+    result set into memory. If you encounter memory issues with large queries,
+    consider these alternatives:
+
+    **Option 1: Use disableHydration() with manual extraction**::
+
+        $query = $articles->find()
+            ->select(['id'])
+            ->disableHydration();
+
+        foreach ($query as $row) {
+            $id = $row['id'];
+            // Process individual values
+        }
+
+    **Option 2: Select only the fields you need**::
+
+        $query = $articles->find()
+            ->select(['id', 'title'])
+            ->disableHydration();
+
+        $ids = [];
+        foreach ($query as $row) {
+            $ids[] = $row['id'];
+        }
+
+    These approaches avoid loading unnecessary data and provide better memory
+    efficiency for large result sets.
+
 Getting the First & Last Record From a ResultSet
 ------------------------------------------------
 
