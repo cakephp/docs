@@ -77,6 +77,7 @@ Cache
 
 - Added Redis Cluster support to ``RedisEngine``. Configure the ``cluster`` option
   with an array of server addresses to enable cluster mode.
+- Several :ref:`cache-events` were added to allow monitoring the caching behavior.
 
 Command
 -------

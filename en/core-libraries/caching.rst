@@ -673,6 +673,46 @@ The required API for a CacheEngine is
 
     Increment a number under the key and return incremented value
 
+.. _cache-events:
+
+Cache Events
+============
+
+.. versionadded:: 5.3.0
+
+You can add event listeners to the following events:
+
+* ``\Cake\Cache\Event\CacheBeforeGetEvent``
+* ``\Cake\Cache\Event\CacheAfterGetEvent``
+* ``\Cake\Cache\Event\CacheBeforeSetEvent``
+* ``\Cake\Cache\Event\CacheAfterSetEvent``
+* ``\Cake\Cache\Event\CacheBeforeAddEvent``
+* ``\Cake\Cache\Event\CacheAfterAddEvent``
+* ``\Cake\Cache\Event\CacheBeforeDecrementEvent``
+* ``\Cake\Cache\Event\CacheAfterDecrementEvent``
+* ``\Cake\Cache\Event\CacheBeforeDeleteEvent``
+* ``\Cake\Cache\Event\CacheAfterDeleteEvent``
+* ``\Cake\Cache\Event\CacheBeforeIncrementEvent``
+* ``\Cake\Cache\Event\CacheAfterIncrementEvent``
+* ``\Cake\Cache\Event\CacheClearedEvent``
+* ``\Cake\Cache\Event\CacheGroupClearEvent``
+
+an example listener in your ``src/Application.php`` or plugin class would be::
+
+    public function events(EventManagerInterface $eventManager): EventManagerInterface
+    {
+        $eventManager->on(CacheAfterGetEvent::NAME, function (CacheAfterGetEvent $event): void {
+            $key = $event->getKey();
+            $value = $event->getValue();
+            $success = $event->getResult();
+        });
+
+        return $eventManager;
+    }
+
+Different events have different context, so please check the methods inside the custom event class
+if you are looking for certain data.
+
 .. meta::
     :title lang=en: Caching
     :keywords lang=en: uniform api,cache engine,cache system,atomic operations,php class,disk storage,static methods,php extension,consistent manner,similar features,apcu,apc,memcache,queries,cakephp,elements,servers,memory
