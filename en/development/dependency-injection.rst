@@ -61,7 +61,6 @@ Command Example
     {
         public function __construct(protected UsersService $users, ?CommandFactoryInterface $factory = null)
         {
-            parent::__construct($factory);
         }
 
         public function execute(Arguments $args, ConsoleIo $io)
