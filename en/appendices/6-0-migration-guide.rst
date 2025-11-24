@@ -72,6 +72,13 @@ Some methods have also been renamed to better reflect their purpose. These are:
 * ``Cake\View\Helper\PaginatorHelper``
     - ``_numbers()`` has been renamed to ``buildNumbers()``
 
+Event
+-----
+
+- The signature of ``EventManagerInterface::on()`` has changed. The 2nd and 3rd
+  parameters have been swapped. Calls which pass an options array as the 2nd
+  argument will need to be updated to pass it as the 3rd argument instead.
+
 Datasource
 ----------
 
