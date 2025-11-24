@@ -43,8 +43,8 @@ CakePHP 5.0 には、破壊的な変更が含まれており、4.x リリース�
 Auth
 ----
 
-- `Auth` は削除されました。代わりにプラグイン `cakephp/authentication <https://book.cakephp.org/authentication/2/en/index.html>`__ および
-  `cakephp/authorization <https://book.cakephp.org/authorization/2/en/index.html>`__ をお使い下さい。
+- `Auth` は削除されました。代わりに `cakephp/authentication <https://book.cakephp.org/authentication/3/ja/index.html>`__ および
+    `cakephp/authorization <https://book.cakephp.org/authorization/3/ja/index.html>`__ プラグインを使用してください。
 
 Cache
 -----
@@ -63,6 +63,9 @@ Console
 - ``BaseCommand::__construct()`` は削除されました。
 - ``ConsoleIntegrationTestTrait::useCommandRunner()`` は、もはや必要無いため削除されました。
 - ``Shell`` は削除されました。代わりに `Command <https://book.cakephp.org/5/en/console-commands/commands.html>`__ をお使い下さい。
+- ``ConsoleOptionParser::addSubcommand()`` は ``Shell`` の削除とともに削除されました。
+    サブコマンドは ``Command`` クラスで置き換えてください。
+    必要なコマンド名は ``Command::defaultName()`` を実装することで定義できます。
 - ``BaseCommand`` は ``execute()`` メソッドがフレームワークから呼び出される前後に ``Command.beforeExecute`` および
   ``Command.afterExecute`` のイベントを発行するようになりました。
 
@@ -145,6 +148,8 @@ I18n
 
 - ``FrozenDate`` は `Date` に名称変更され、また ``FrozenTime`` も `DateTime` に名称変更されました。
 - ``Time`` は ``Cake\Chronos\ChronosTime`` を継承するようになりました。その結果として変更不可能(immutable)になりました。
+- ``Date`` オブジェクトは ``DateTimeInterface`` を継承しなくなりました。そのため、 ``DateTime`` オブジェクトと比較することはできません。
+    詳細は `cakephp/chronos のリリースドキュメント <https://github.com/cakephp/chronos/releases/tag/3.0.2>`__ を参照してください。
 - ``Date::parseDateTime()`` は削除されました。
 - ``Date::parseTime()`` は削除されました。
 - ``Date::setToStringFormat()`` および ``Date::setJsonEncodeFormat()`` は、配列を受け付けないようになりました。

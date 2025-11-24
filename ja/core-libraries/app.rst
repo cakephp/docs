@@ -16,8 +16,8 @@ App クラスはリソースの位置とパスの管理を担当します。
 CakePHP が使用する短い形式の名前を解決し、完全解決されたクラス名を返します。 ::
 
     // 短いクラス名を名前空間とサフィックスで解決します。
-    App::className('Auth', 'Controller/Component', 'Component');
-    // Cake\Controller\Component\AuthComponent を返します
+    App::className('Flash', 'Controller/Component', 'Component');
+    // Cake\Controller\Component\FlashComponent を返します
 
     // プラグイン名を解決します。
     App::className('DebugKit.Toolbar', 'Controller/Component', 'Component');

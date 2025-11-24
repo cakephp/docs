@@ -97,6 +97,24 @@ UUID is a 128-bit string in the format of
 
     Text::uuid(); // 485fc381-e790-47a3-9794-1337c0a8fe68
 
+.. versionadded:: 5.3.0
+    You can now configure a custom UUID generator using dependency injection.
+
+Starting from CakePHP 5.3.0, you can configure a custom UUID generator by
+setting a closure in your configuration::
+
+    // In your config/app.php or config/bootstrap.php
+    use Cake\Core\Configure;
+    
+    Configure::write('Text.uuidGenerator', function () {
+        // Return your custom UUID string
+        return \MyUuidLibrary::generate();
+    });
+
+This allows you to integrate your own UUID generation strategy or use
+third-party UUID libraries. When a custom generator is configured, it will
+be used instead of the default UUID generation method.
+
 Simple String Parsing
 =====================
 

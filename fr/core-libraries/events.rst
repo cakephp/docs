@@ -160,7 +160,7 @@ Après avoir déclenché un événement sur le gestionnaire, vous pouvez le réc
     $firstEvent = $eventsFired[0];
 
 Le tracking peut être désactivé en retirant la liste d'événements ou en appelant
-:php:meth:`Cake\\Event\\EventList::trackEvents(false)`
+:php:meth:`Cake\\Event\\EventManager::trackEvents(false)`
 
 Events du Cœur
 ==============

@@ -1,14 +1,14 @@
 CakePHP num piscar de olhos
 ###########################
 
-O CakePHP é desenvolvido para tornar tarefas rotineiras do desenvolvimento web 
-mais simples e fáceis. Ao fornecer uma caixa de ferramentas completa para você 
-começar, as várias partes do CakePHP funcionam bem juntas ou separadamente.
+O CakePHP foi projetado para simplificar e facilitar tarefas comuns de desenvolvimento web. 
+Ao fornecer um conjunto de ferramentas completo para você começar, as diversas partes do 
+CakePHP funcionam bem juntas ou separadamente.
 
 O objetivo desta apresentação é introduzir os conceitos gerais presentes no CakePHP
 e lhe dar uma rápida visão geral de como esses conceitos são implementados. Se
-você está ansioso para começar um projeto, você pode :doc:`começar com o tutorial
-</tutorials-and-examples/bookmarks/intro>`, ou
+você está ansioso para começar um projeto, você pode 
+:doc:`começar com o tutorial </tutorials-and-examples/cms/installation>`, ou
 :doc:`mergulhar na documentação</topics>`.
 
 Convenções Sobre Configuração
@@ -36,12 +36,11 @@ objetos de modelo podem ser pensados como "Friend", "User", "Comment", ou
 "Photo". Se nós quiséssemos carregar alguns dados da nossa tabela ``users``
 poderíamos fazer::
 
-    use Cake\ORM\TableRegistry;
+    use Cake\ORM\Locator\LocatorAwareTrait;
 
-    // Prior to 3.6 use TableRegistry::get('Users')
-    $users = TableRegistry::getTableLocator()->get('Users');
-    $query = $users->find();
-    foreach ($query as $row) {
+    $users = $this->fetchTable('Users');
+    $resultset = $users->find()->all();
+    foreach ($resultset as $row) {
         echo $row->username;
     }
 
@@ -52,10 +51,9 @@ utilizar classes padrão para tabelas e entidades que ainda não foram definidas
 Se nós quiséssemos criar um usuário e salvá-lo (com validação) faríamos algo
 assim::
 
-    use Cake\ORM\TableRegistry;
+    use Cake\ORM\Locator\LocatorAwareTrait;
 
-    // Prior to 3.6 use TableRegistry::get('Users')
-    $users = TableRegistry::getTableLocator()->get('Users');
+    $users = $this->fetchTable('Users');
     $user = $users->newEntity(['email' => 'mark@example.com']);
     $users->save($user);
 
@@ -71,10 +69,10 @@ Por exemplo, a view pode usar dados da model para renderizar uma página HTML qu
 os contenha, ou um resultado formatado como XML::
 
     // No arquivo view, nós renderizaremos um 'element' para cada usuário.
-    <?php foreach ($users as $user): ?>
-        <div class="user">
-            <?= $this->element('user', ['user' => $user]) ?>
-        </div>
+    <?php foreach ($resultset as $user): ?>
+        <li class="user">
+            <?= $this->element('user_info', ['user' => $user]) ?>
+        </li>
     <?php endforeach; ?>
 
 A camada View fornece vários pontos de extensão, como :ref:`view-templates`, :ref:`view-elements`
@@ -102,7 +100,7 @@ camada View. Um exemplo de controller para registro de usuário seria::
 
     public function add()
     {
-        $user = $this->Users->newEntity();
+        $user = $this->Users->newEmptyEntity();
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
             if ($this->Users->save($user, ['validate' => 'registration'])) {
@@ -158,12 +156,12 @@ Alguns outros grandes recursos do CakePHP são:
 
 * :doc:`Framework de cache </core-libraries/caching>` que integra com
   Memcached, Redis e outros backends.
-* Poderosas :doc:`ferramentas de geração de código </bake>` para você começar imediatamente.
+* Poderosas :doc:`ferramentas de geração de código </bake/usage>` para você começar imediatamente.
 * :doc:`Framework de teste integrado </development/testing>` para você
   assegurar-se que seu código funciona perfeitamente.
 
 Os próximos passos óbvios são :doc:`baixar o CakePHP </installation>` e ler o
-:doc:`tutorial e construir algo fantástico </tutorials-and-examples/blog/blog>`.
+:doc:`tutorial e construir algo fantástico </tutorials-and-examples/cms/installation>`.
 
 Leitura Adicional
 =================

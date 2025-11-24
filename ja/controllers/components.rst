@@ -14,9 +14,7 @@ CakePHP の中に含まれるコンポーネントの詳細については、各
 .. toctree::
     :maxdepth: 1
 
-    /controllers/components/authentication
     /controllers/components/flash
-    /controllers/components/security
     /controllers/components/request-handling
     /controllers/components/form-protection
     /controllers/components/check-http-cache
@@ -85,15 +83,15 @@ CakePHP の中に含まれるコンポーネントの詳細については、各
         }
     }
 
-    // src/Controller/Component/MyAuthComponent.php
-    use Cake\Controller\Component\AuthComponent;
+    // src/Controller/Component/MyFlashComponent.php
+    use Cake\Controller\Component\FlashComponent;
 
-    class MyAuthComponent extends AuthComponent
+    class MyFlashComponent extends FlashComponent
     {
-        // コア AuthComponent を上書きするコードを追加
+        // Add your code to override the core FlashComponent
     }
 
-上記の例ではコントローラーにて ``MyAuthComponent`` に ``$this->Auth`` という
+上記の例ではコントローラーにて ``MyFlushComponent`` に ``$this->Flash`` という
 *別名* をつけています。
 
 .. note::

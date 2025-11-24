@@ -337,7 +337,7 @@ You can access existing wrappers for several SQL functions through ``SelectQuery
     Defaults to returning date and time, but accepts 'time' or 'date' to return only
     those values.
 ``extract()``
-    Returns the specified date part from the SQL expression.
+    Returns the specified data part from the SQL expression.
 ``dateAdd()``
     Add the time unit to the date expression.
 ``dayOfWeek()``
@@ -511,11 +511,11 @@ If we wished to know how many published articles are in our database, we could u
 To do this with the query builder, we'd use the following code::
 
     $query = $articles->find();
-    $publishedCase = $query->newExpr()
+    $publishedCase = $query->expr()
         ->case()
         ->when(['published' => 'Y'])
         ->then(1);
-    $unpublishedCase = $query->newExpr()
+    $unpublishedCase = $query->expr()
         ->case()
         ->when(['published' => 'N'])
         ->then(1);
@@ -531,10 +531,10 @@ cities into SMALL, MEDIUM, or LARGE based on population size, we could do the
 following::
 
     $query = $cities->find();
-    $sizing = $query->newExpr()->case()
+    $sizing = $query->expr()->case()
         ->when(['population <' => 100000])
         ->then('SMALL')
-        ->when($query->newExpr()->between('population', 100000, 999000))
+        ->when($query->expr()->between('population', 100000, 999000))
         ->then('MEDIUM')
         ->when(['population >=' => 999001])
         ->then('LARGE');
@@ -557,9 +557,9 @@ as it can create SQL injection vulnerabilities::
 For more complex scenarios you can use ``QueryExpression`` objects and bound
 values::
 
-    $userValue = $query->newExpr()
+    $userValue = $query->expr()
         ->case()
-        ->when($query->newExpr('population >= :userData'))
+        ->when($query->expr('population >= :userData'))
         ->then(123, 'integer');
 
     $query->select(['val' => $userValue])
@@ -575,7 +575,7 @@ a different type you can declare the desired type::
 
 You can create ``if ... then ... else`` conditions by using ``else()``::
 
-    $published = $query->newExpr()
+    $published = $query->expr()
         ->case()
         ->when(['published' => true])
         ->then('Y');
@@ -585,7 +585,7 @@ You can create ``if ... then ... else`` conditions by using ``else()``::
 
 Also, it's possible to create the simple variant by passing a value to ``case()``::
 
-    $published = $query->newExpr()
+    $published = $query->expr()
         ->case($query->identifier('published'))
         ->when(true)
         ->then('Y');
@@ -603,9 +603,9 @@ size, we could do the following::
         ->where(function (QueryExpression $exp, SelectQuery $q) {
             return $exp->addCase(
                 [
-                    $q->newExpr()->lt('population', 100000),
-                    $q->newExpr()->between('population', 100000, 999000),
-                    $q->newExpr()->gte('population', 999001),
+                    $q->expr()->lt('population', 100000),
+                    $q->expr()->between('population', 100000, 999000),
+                    $q->expr()->gte('population', 999001),
                 ],
                 ['SMALL',  'MEDIUM', 'LARGE'], # values matching conditions
                 ['string', 'string', 'string'] # type of each value
@@ -624,7 +624,7 @@ automatically produce an ``if .. then .. else`` statement::
         ->where(function (QueryExpression $exp, SelectQuery $q) {
             return $exp->addCase(
                 [
-                    $q->newExpr()->eq('population', 0),
+                    $q->expr()->eq('population', 0),
                 ],
                 ['DESERTED', 'INHABITED'], # values matching conditions
                 ['string', 'string'] # type of each value
@@ -758,12 +758,12 @@ For example::
 
     $query = $articles->find()->where(function (QueryExpression $exp, SelectQuery $query) {
         // Use add() to add multiple conditions for the same field.
-        $author = $query->newExpr()->or(['author_id' => 3])->add(['author_id' => 2]);
-        $published = $query->newExpr()->and(['published' => true, 'view_count' => 10]);
+        $author = $query->expr()->or(['author_id' => 3])->add(['author_id' => 2]);
+        $published = $query->expr()->and(['published' => true, 'view_count' => 10]);
 
         return $exp->or([
             'promoted' => true,
-            $query->newExpr()->and([$author, $published])
+            $query->expr()->and([$author, $published])
         ]);
     });
 
@@ -1176,7 +1176,7 @@ When you cannot construct the SQL you need using the query builder, you can use
 expression objects to add snippets of SQL to your queries::
 
     $query = $articles->find();
-    $expr = $query->newExpr()->add('1 + 1');
+    $expr = $query->expr()->add('1 + 1');
     $query->select(['two' => $expr]);
 
 ``Expression`` objects can be used with any query builder methods like
@@ -1210,7 +1210,7 @@ It is possible to change the conjunction used to join conditions in a query
 expression using the method ``setConjunction``::
 
     $query = $articles->find();
-    $expr = $query->newExpr(['1','1'])->setConjunction('+');
+    $expr = $query->expr(['1','1'])->setConjunction('+');
     $query->select(['two' => $expr]);
 
 And can be used combined with aggregations too::
@@ -1219,7 +1219,7 @@ And can be used combined with aggregations too::
     $query->select(function ($query) {
             $stockQuantity = $query->func()->sum('Stocks.quantity');
             $totalStockValue = $query->func()->sum(
-                    $query->newExpr(['Stocks.quantity', 'Products.unit_price'])
+                    $query->expr(['Stocks.quantity', 'Products.unit_price'])
                         ->setConjunction('*')
             );
 
@@ -1282,6 +1282,20 @@ even on DBMS that does not natively support it::
 
 .. note::
     Tuple comparison transform only supports the ``IN`` and ``=`` operators
+
+Optimizer Hints
+---------------
+
+Optimizer hints allow you to control execution plans at the individual query
+level::
+
+    $query->optimizerHint(['NO_BKA(articles)']);
+
+Optimizer hints are currently only supported by MySQL and Postgres (via an
+extension).
+
+.. versionadded:: 5.3.0
+   ``Query::optimizerHint()`` was added.
 
 Getting Results
 ===============
@@ -1650,7 +1664,7 @@ data::
 
 Raw expressions are never safe::
 
-    $expr = $query->newExpr()->add($userData);
+    $expr = $query->expr()->add($userData);
     $query->select(['two' => $expr]);
 
 Binding values
@@ -1867,10 +1881,11 @@ named windows using the ``window()`` method::
 Common Table Expressions
 ------------------------
 
-Common Table Expressions or CTE are useful when building reporting queries where
-you need to compose the results of several smaller query results together. They
-can serve a similar purpose to database views or subquery results. Common Table
-Expressions differ from derived tables and views in a couple ways:
+`Common Table Expressions or CTE <https://en.wikipedia.org/wiki/Hierarchical_and_recursive_queries_in_SQL#Common_table_expression>`__
+are useful when building reporting queries where you need to compose the results
+of several smaller query results together. They can serve a similar purpose
+to database views or subquery results. Common Table Expressions differ from
+derived tables and views in a couple ways:
 
 #. Unlike views, you don't have to maintain schema for common table expressions.
    The schema is implicitly based on the result set of the table expression.

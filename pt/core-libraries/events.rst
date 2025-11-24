@@ -144,7 +144,7 @@ eventos::
     $firstEvent = $eventsFired[0];
 
 O rastreamento de eventos pode ser desabilitado ao remover a lista de eventos ou
-chamando :php:meth:`Cake\\Event\\EventList::trackEvents(false)`.
+chamando :php:meth:`Cake\\Event\\EventManager::trackEvents(false)`.
 
 Eventos do Core
 ===============

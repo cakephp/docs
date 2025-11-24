@@ -1492,12 +1492,6 @@ CakePHP 3.0 から名前付きパラメーターが削除されたとしても�
 名前付きパラメーターを移します。すべての名前付きパラメーターとして変換された引数は
 渡された引数のリストから除去されます。
 
-.. toctree::
-    :glob:
-    :maxdepth: 1
-
-    /development/dispatch-filters
-
 .. meta::
     :title lang=ja: ルーティング
     :keywords lang=ja: controller actions,default routes,mod rewrite,code index,string url,php class,incoming requests,dispatcher,url url,meth,maps,match,parameters,array,config,cakephp,apache,router

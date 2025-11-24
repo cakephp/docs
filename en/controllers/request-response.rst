@@ -1076,9 +1076,10 @@ will make the browser remove its local cookie::
 Setting Cross Origin Request Headers (CORS)
 -------------------------------------------
 
-The ``cors()`` method is used to define `HTTP Access Control
+The ``cors()`` method returns a ``CorsBuilder`` instance which provides a fluent
+interface for defining `HTTP Access Control
 <https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS>`__
-related headers with a fluent interface::
+related headers::
 
     $this->response = $this->response->cors($this->request)
         ->allowOrigin(['*.cakephp.org'])
@@ -1095,11 +1096,173 @@ criteria are met:
 #. The request has an ``Origin`` header.
 #. The request's ``Origin`` value matches one of the allowed Origin values.
 
-.. tip::
+CorsBuilder Methods
+~~~~~~~~~~~~~~~~~~~
 
-    CakePHP has no built-in CORS middleware because dealing with CORS requests
-    is very application specific. We recommend you build your own ``CORSMiddleware``
-    if you need one and adjust the response object as desired.
+.. php:class:: CorsBuilder
+
+The ``CorsBuilder`` provides the following methods for configuring CORS:
+
+.. php:method:: allowOrigin(array|string $domains)
+
+    Set the list of allowed domains. You can use wildcards ``*.example.com`` to
+    accept subdomains, or ``*`` to allow all domains::
+
+        // Allow a specific domain
+        ->allowOrigin('https://example.com')
+
+        // Allow multiple domains
+        ->allowOrigin(['https://example.com', 'https://app.example.com'])
+
+        // Allow all subdomains
+        ->allowOrigin(['*.example.com'])
+
+        // Allow all origins (use with caution!)
+        ->allowOrigin('*')
+
+.. php:method:: allowMethods(array $methods)
+
+    Set the list of allowed HTTP methods::
+
+        ->allowMethods(['GET', 'POST', 'PUT', 'DELETE'])
+
+.. php:method:: allowHeaders(array $headers)
+
+    Define which headers can be sent in CORS requests::
+
+        ->allowHeaders(['X-CSRF-Token', 'Content-Type', 'Authorization'])
+
+.. php:method:: allowCredentials()
+
+    Enable cookies to be sent in CORS requests. This sets the
+    ``Access-Control-Allow-Credentials`` header to ``true``::
+
+        ->allowCredentials()
+
+.. php:method:: exposeHeaders(array $headers)
+
+    Define which headers the client library/browser can expose to scripting::
+
+        ->exposeHeaders(['X-Total-Count', 'Link'])
+
+.. php:method:: maxAge(string|int $age)
+
+    Define how long preflight OPTIONS requests are valid for (in seconds)::
+
+        ->maxAge(3600) // Cache preflight for 1 hour
+
+.. php:method:: build()
+
+    Apply the configured headers to the response and return it. This must be
+    called to actually apply the CORS headers::
+
+        $response = $corsBuilder->build();
+
+Practical CORS Examples
+~~~~~~~~~~~~~~~~~~~~~~~
+
+Here are some common CORS configurations:
+
+**API accepting requests from a SPA frontend**::
+
+    // In your controller
+    public function beforeFilter(EventInterface $event)
+    {
+        parent::beforeFilter($event);
+
+        if ($this->request->is('options')) {
+            // Handle preflight requests
+            $this->response = $this->response->cors($this->request)
+                ->allowOrigin(['https://app.example.com'])
+                ->allowMethods(['GET', 'POST', 'PUT', 'DELETE'])
+                ->allowHeaders(['Content-Type', 'Authorization'])
+                ->allowCredentials()
+                ->maxAge(86400)
+                ->build();
+            
+            return $this->response;
+        }
+    }
+
+    public function index()
+    {
+        // Apply CORS to regular requests
+        $this->response = $this->response->cors($this->request)
+            ->allowOrigin(['https://app.example.com'])
+            ->allowCredentials()
+            ->build();
+
+        // Your regular controller logic...
+    }
+
+**Public API with relaxed CORS**::
+
+    $this->response = $this->response->cors($this->request)
+        ->allowOrigin('*')
+        ->allowMethods(['GET'])
+        ->exposeHeaders(['X-Total-Count', 'X-Page'])
+        ->maxAge(3600)
+        ->build();
+
+Creating CORS Middleware
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+For consistent CORS handling across your application, create a middleware::
+
+    // src/Middleware/CorsMiddleware.php
+    namespace App\Middleware;
+
+    use Psr\Http\Message\ResponseInterface;
+    use Psr\Http\Message\ServerRequestInterface;
+    use Psr\Http\Server\MiddlewareInterface;
+    use Psr\Http\Server\RequestHandlerInterface;
+
+    class CorsMiddleware implements MiddlewareInterface
+    {
+        public function process(
+            ServerRequestInterface $request,
+            RequestHandlerInterface $handler
+        ): ResponseInterface {
+            // Handle preflight requests
+            if ($request->getMethod() === 'OPTIONS') {
+                $response = new \Cake\Http\Response();
+                $response = $response->cors($request)
+                    ->allowOrigin(['*.myapp.com'])
+                    ->allowMethods(['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'])
+                    ->allowHeaders(['Content-Type', 'Authorization'])
+                    ->allowCredentials()
+                    ->maxAge(3600)
+                    ->build();
+                
+                return $response;
+            }
+
+            $response = $handler->handle($request);
+
+            // Add CORS headers to regular requests
+            return $response->cors($request)
+                ->allowOrigin(['*.myapp.com'])
+                ->allowCredentials()
+                ->build();
+        }
+    }
+
+Then add it to your application middleware stack in ``src/Application.php``::
+
+    public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue
+    {
+        $middlewareQueue
+            // Add CORS middleware early in the stack
+            ->add(new \App\Middleware\CorsMiddleware())
+            // ... other middleware
+            ->add(new ErrorHandlerMiddleware(Configure::read('Error')))
+            ->add(new AssetMiddleware([
+                'cacheTime' => Configure::read('Asset.cacheTime'),
+            ]))
+            ->add(new RoutingMiddleware($this));
+
+        return $middlewareQueue;
+    }
 
 Running logic after the Response has been sent
 ----------------------------------------------

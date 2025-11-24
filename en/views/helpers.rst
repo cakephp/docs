@@ -80,7 +80,7 @@ You can also use your controller's ``beforeRender`` method to add helpers::
 
     class ArticlesController extends AppController
     {
-        public function beforeRender(EventInterface $event)
+        public function beforeRender(EventInterface $event): void
         {
             parent::beforeRender($event);
             $this->viewBuilder()->addHelper('MyHelper');
@@ -143,7 +143,7 @@ you can set those in your controller's beforeRender callback::
 
     class PostsController extends AppController
     {
-        public function beforeRender(EventInterface $event)
+        public function beforeRender(EventInterface $event): void
         {
             parent::beforeRender($event);
             $builder = $this->viewBuilder();

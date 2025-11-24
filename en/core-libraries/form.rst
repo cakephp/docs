@@ -42,7 +42,9 @@ a simple contact form would look like::
             return $validator;
         }
 
-        protected function _execute(array $data): bool
+        // Prior to 5.3.0 This should be
+        // `protected function _execute(array $data): bool`
+        protected function process(array $data): bool
         {
             // Send an email.
             return true;
@@ -55,10 +57,13 @@ In the above example we see the 3 hook methods that forms provide:
   to create an HTML form. You can define field type, length, and precision.
 * ``validationDefault`` Gets a :php:class:`Cake\\Validation\\Validator` instance
   that you can attach validators to.
-* ``_execute`` lets you define the behavior you want to happen when
+* ``process`` lets you define the behavior you want to happen when
   ``execute()`` is called and the data is valid.
 
 You can always define additional public methods as you need as well.
+
+.. versionchanged:: 5.3.0
+   The ``_execute`` method was deprecated, and replaced by ``process``.
 
 Processing Request Data
 =======================
@@ -89,7 +94,7 @@ and validate request data::
     }
 
 In the above example, we use the ``execute()`` method to run our form's
-``_execute()`` method only when the data is valid, and set flash messages
+``process()`` method only when the data is valid, and set flash messages
 accordingly. If we want to use a non-default validation set we can use the
 ``validate`` option::
 

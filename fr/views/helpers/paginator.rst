@@ -552,10 +552,10 @@ l'addition de pages de navigation, aussi fournies par le Helper de Pagination::
 Le texte de sortie de la méthode counter() peut également être personnalisé en
 utilisant des marqueurs spéciaux::
 
-    <?= $this->Paginator->counter([
-        'format' => 'Page {{page}} of {{pages}}, showing {{current}} records out of
-                 {{count}} total, starting on record {{start}}, ending on {{end}}'
-    ]) ?>
+    <?= $this->Paginator->counter(
+        'Page {{page}} of {{pages}}, showing {{current}} records out of
+        {{count}} total, starting on record {{start}}, ending on {{end}}'
+    ) ?>
 
 .. _paginator-helper-multiple:
 

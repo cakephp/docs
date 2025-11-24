@@ -175,7 +175,7 @@ behavior should now look like::
             $entity->set($config['slug'], Text::slug($value, $config['replacement']));
         }
 
-        public function beforeSave(EventInterface $event, EntityInterface $entity, ArrayObject $options)
+        public function beforeSave(EventInterface $event, EntityInterface $entity, ArrayObject $options): void
         {
             $this->slug($entity);
         }
@@ -191,7 +191,7 @@ The above code shows a few interesting features of behaviors:
 
 To prevent the save from continuing, simply stop event propagation in your callback::
 
-    public function beforeSave(EventInterface $event, EntityInterface $entity, ArrayObject $options)
+    public function beforeSave(EventInterface $event, EntityInterface $entity, ArrayObject $options): void
     {
         if (...) {
             $event->stopPropagation();

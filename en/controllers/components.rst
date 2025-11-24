@@ -45,7 +45,7 @@ You can configure components at runtime using the ``setConfig()`` method. Often,
 this is done in your controller's ``beforeFilter()`` method. The above could
 also be expressed as::
 
-    public function beforeFilter(EventInterface $event)
+    public function beforeFilter(EventInterface $event): void
     {
         $this->FormProtection->setConfig('unlockedActions', ['index']);
     }
@@ -190,6 +190,8 @@ as constructor parameters::
 
     class SsoComponent extends Component
     {
+        private Users $users;
+
         public function __construct(
             ComponentRegistry $registry,
             array $config = [],
@@ -335,14 +337,18 @@ Using Redirects in Component Events
 
 To redirect from within a component callback method you can use the following::
 
-    public function beforeFilter(EventInterface $event)
+    public function beforeFilter(EventInterface $event): void
     {
-        $event->stopPropagation();
+        if (...) {
+            $event->setResult($this->getController()->redirect('/'));
 
-        return $this->getController()->redirect('/');
+            return;
+        }
+
+        ...
     }
 
-By stopping the event you let CakePHP know that you don't want any other
+By setting a redirect as event result you let CakePHP know that you don't want any other
 component callbacks to run, and that the controller should not handle the action
 any further. As of 4.1.0 you can raise a ``RedirectException`` to signal
 a redirect::
@@ -350,7 +356,7 @@ a redirect::
     use Cake\Http\Exception\RedirectException;
     use Cake\Routing\Router;
 
-    public function beforeFilter(EventInterface $event)
+    public function beforeFilter(EventInterface $event): void
     {
         throw new RedirectException(Router::url('/'))
     }

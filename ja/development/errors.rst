@@ -664,10 +664,6 @@ HTTP 関連の例外を投げることができます。例::
 
     要求された URL はルーティングの逆引きができないか解析できません。
 
-.. php:exception:: MissingDispatcherFilterException
-
-    ディスパッチャーフィルターが見つかりません。
-
 .. php:namespace:: Cake\Core\Exception
 
 .. php:exception:: Exception

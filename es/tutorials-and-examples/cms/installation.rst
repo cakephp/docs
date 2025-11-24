@@ -46,7 +46,7 @@ en la carpeta **cms** del directorio de trabajo actual:
 
 .. code-block:: console
 
-    php composer.phar create-project --prefer-dist cakephp/app:5 cms
+    php composer.phar create-project cakephp/app:5 cms
 
 Si ha descargado y ejecutado el `Instalador de Composer de Windows
 <https://getcomposer.org/Composer-Setup.exe>`_, entonces, escriba la siguiente línea en el
@@ -55,7 +55,7 @@ C:\\wamp\\www\\dev):
 
 .. code-block:: console
 
-    composer self-update && composer create-project --prefer-dist cakephp/app:5.* cms
+    composer self-update && composer create-project cakephp/app:5.* cms
 
 La ventaja de usar Composer es que completará automáticamente algunas
 tareas de configuración importantes, como establecer los permisos de archivo correctos y

@@ -224,6 +224,109 @@ pagination query::
 Any requests that attempt to sort on fields not in the allowed list will be
 ignored.
 
+Advanced Sorting with SortableFieldsBuilder
+============================================
+
+The ``SortableFieldsBuilder`` provides a powerful way to create user-friendly
+sort URLs while maintaining control over database ordering. Instead of exposing
+raw field names in URLs, you can map friendly keys to complex sorting logic with
+multi-column support and direction control.
+
+Using the Builder
+-----------------
+
+You can configure sortable fields using a callable that receives a
+``SortableFieldsBuilder`` instance::
+
+    use Cake\Datasource\Paging\SortField;
+    use Cake\Datasource\Paging\SortableFieldsBuilder;
+
+    protected array $paginate = [
+        'sortableFields' => function (SortableFieldsBuilder $builder) {
+            return $builder
+                ->add('id', 'Articles.id')
+                ->add('title', 'Articles.title')
+                ->add('username', 'Users.username');
+        },
+    ];
+
+This configuration allows users to sort using friendly keys like ``?sort=username``
+instead of exposing the full field name ``?sort=Users.username``.
+
+Multi-Column Sorting
+--------------------
+
+The builder supports mapping a single sort key to multiple database fields with
+independent direction control. Use the ``SortField`` class to define complex
+sorting::
+
+    use Cake\Datasource\Paging\SortField;
+
+    protected array $paginate = [
+        'sortableFields' => function ($builder) {
+            return $builder
+                ->add('best-deal', [
+                    SortField::desc('in_stock'),
+                    SortField::asc('price'),
+                ])
+                ->add('popularity', [
+                    SortField::desc('view_count'),
+                    SortField::asc('title'),
+                ]);
+        },
+    ];
+
+Now ``?sort=best-deal`` will order by in-stock items first (descending), then by
+price (ascending). When users toggle the direction (e.g., ``?sort=best-deal&direction=asc``),
+all fields in the array will toggle their directions: in_stock becomes ASC and
+price becomes DESC.
+
+Locked Sort Directions
+----------------------
+
+You can lock a sort direction to prevent users from toggling it. This is useful
+when a field should always be sorted in a specific direction::
+
+    protected array $paginate = [
+        'sortableFields' => function ($builder) {
+            return $builder
+                ->add('latest', SortField::desc('created', locked: true))
+                ->add('id', SortField::asc('id', locked: true));
+        },
+    ];
+
+With locked directions, the sort key will always use the specified direction
+regardless of the ``direction`` parameter in the URL.
+
+Combined Sorting Keys
+---------------------
+
+In addition to the traditional ``?sort=field&direction=asc`` format, you can use
+combined sorting keys in URLs::
+
+    // These are equivalent
+    ?sort=title&direction=asc
+    ?sort=title-asc
+
+    // These are equivalent
+    ?sort=price&direction=desc
+    ?sort=price-desc
+
+This provides a cleaner URL format for applications that prefer it.
+
+Simple Array Configuration
+---------------------------
+
+For basic use cases where you just need to allow sorting on specific fields
+without mapping or multi-column support, you can still use the simple array
+format::
+
+    protected array $paginate = [
+        'sortableFields' => [
+            'id', 'title', 'Users.username', 'created',
+        ],
+    ];
+
 Limit the Maximum Number of Rows per Page
 =========================================
 

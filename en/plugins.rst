@@ -560,10 +560,35 @@ you can do the following::
 
 If the plugin prefix is omitted, the layout/view file will be located normally.
 
-.. note::
+Plugin Elements
+---------------
 
-    For information on how to use elements from a plugin, look up
-    :ref:`view-elements`
+To render an element from a plugin, use the :term:`plugin syntax` to reference
+a plugin. You do not need to use plugin syntax for elements in the current active plugin.
+
+If the element doesn't exist in the plugin, it will look in the main APP
+folder::
+
+    echo $this->element('Contacts.helpbox');
+
+If your view is a part of a plugin, you can omit the plugin name. For example,
+if you are in the ``ContactsController`` of the Contacts plugin, the following::
+
+    echo $this->element('helpbox');
+    // and
+    echo $this->element('Contacts.helpbox');
+
+are equivalent and will result in the same element being rendered.
+
+For elements inside subfolder of a plugin
+(for example, **plugins/Contacts/Template/element/sidebar/helpbox.php**), use the
+following::
+
+    echo $this->element('Contacts.sidebar/helpbox');
+
+.. note::
+    See :ref:`view-elements` for more information on rendering elements.
+
 
 Overriding Plugin Templates from Inside Your Application
 --------------------------------------------------------
@@ -578,6 +603,13 @@ Contacts controller you could make the following file::
 
 Creating this file would allow you to override
 **plugins/ContactManager/templates/Contacts/index.php**.
+
+To override plugin elements, create an element with the same name in::
+
+    templates/plugin/ContactManager/element/helpbox.php
+
+This file would override
+**plugins/ContactManager/tempaltes/element/helpbox.ctp**.
 
 If your plugin is in a composer dependency (i.e. 'Company/ContactManager'), the
 path to the 'index' view of the Contacts controller will be::

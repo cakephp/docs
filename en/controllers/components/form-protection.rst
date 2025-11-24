@@ -93,7 +93,7 @@ Disabling form tampering checks
             $this->loadComponent('FormProtection');
         }
 
-        public function beforeFilter(EventInterface $event)
+        public function beforeFilter(EventInterface $event): void
         {
             parent::beforeFilter($event);
 
@@ -126,7 +126,7 @@ action (ex. AJAX requests).  You may "unlock" these actions by listing them in
             $this->loadComponent('FormProtection');
         }
 
-        public function beforeFilter(EventInterface $event)
+        public function beforeFilter(EventInterface $event): void
         {
             parent::beforeFilter($event);
 
@@ -148,7 +148,7 @@ works::
 
     use Cake\Controller\Exception\FormProtectionException;
 
-    public function beforeFilter(EventInterface $event)
+    public function beforeFilter(EventInterface $event): void
     {
         parent::beforeFilter($event);
 

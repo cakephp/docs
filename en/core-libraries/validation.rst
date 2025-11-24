@@ -195,11 +195,16 @@ containing data related to the validation process:
   need to create complex rules by calling multiple providers.
 - **newRecord**: Whether the validation call is for a new record or
   a preexisting one.
+- **entity**: The entity being validated if provided to ``validate()``.
 
 Closures should return boolean true if the validation passes. If it fails,
 return boolean false or for a custom error message return a string, see the
 :ref:`Conditional/Dynamic Error Messages <dynamic_validation_error_messages>`
 section for further details.
+
+.. versionchanged:: 5.3.0
+   The ``entity`` key was added to validation context.
+
 
 .. _dynamic_validation_error_messages:
 

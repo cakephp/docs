@@ -183,7 +183,7 @@ which implements ``EventListenerInterface``::
     use Cake\Event\EventListenerInterface;
     class ModelInitializeListener implements EventListenerInterface
     {
-        public function implementedEvents()
+        public function implementedEvents(): array
         {
             return [
                 'Model.initialize' => 'initializeEvent',
@@ -231,7 +231,7 @@ The ``Model.beforeFind`` event is fired before each find operation. By stopping
 the event, and feeding the query with a custom result set, you can bypass the find
 operation entirely::
 
-    public function beforeFind(EventInterface $event, SelectQuery $query, ArrayObject $options, $primary)
+    public function beforeFind(EventInterface $event, SelectQuery $query, ArrayObject $options, $primary): void
     {
         if (/* ... */) {
             $event->stopPropagation();
@@ -350,7 +350,7 @@ Stopping Table Events
 ---------------------
 To prevent the save from continuing, simply stop event propagation in your callback::
 
-    public function beforeSave(EventInterface $event, EntityInterface $entity, ArrayObject $options)
+    public function beforeSave(EventInterface $event, EntityInterface $entity, ArrayObject $options): void
     {
         if (...) {
             $event->stopPropagation();
@@ -394,7 +394,7 @@ You can manage event priorities in one of a few ways:
    priority per callback-function::
 
         // In a Table class.
-        public function implementedEvents()
+        public function implementedEvents(): array
         {
             $events = parent::implementedEvents();
             $events['Model.beforeDelete'] = [

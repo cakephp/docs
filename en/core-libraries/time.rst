@@ -118,7 +118,7 @@ addition of their components::
     $time = DateTime::create(2021, 1, 31, 22, 11, 30);
     $newTime = $time->subDays(5)
         ->addHours(-2)
-        ->addMonth(1);
+        ->addMonths(1);
     // Outputs '2/26/21, 8:11 PM'
     echo $newTime;
 
@@ -342,6 +342,7 @@ Conversion
 ==========
 
 .. php:method:: toQuarter()
+.. php:method:: toQuarterRange()
 
 Once created, you can convert ``DateTime`` instances into timestamps or quarter
 values::
@@ -349,6 +350,19 @@ values::
     $time = new DateTime('2021-01-31');
     echo $time->toQuarter();  // Outputs '1'
     echo $time->toUnixString();  // Outputs '1612069200'
+
+.. versionadded:: 5.3.0
+    The ``toQuarterRange()`` method was added.
+
+You can also get the date range for a quarter::
+
+    $time = new DateTime('2021-01-31');
+    $range = $time->toQuarterRange();
+    // Outputs ['2021-01-01', '2021-03-31']
+
+    $time = new DateTime('2021-12-25');
+    $range = $time->toQuarterRange();
+    // Outputs ['2021-10-01', '2021-12-31']
 
 Comparing With the Present
 ==========================

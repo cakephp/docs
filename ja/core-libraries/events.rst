@@ -132,7 +132,7 @@ CakePHP の中でイベントはイベントマネージャーに対して動作
     $eventsFired = EventManager::instance()->getEventList();
     $firstEvent = $eventsFired[0];
 
-追跡は、イベントリストを削除したり、 :php:meth:`Cake\\Event\\EventList::trackEvents(false)`
+追跡は、イベントリストを削除したり、 :php:meth:`Cake\\Event\\EventManager::trackEvents(false)`
 を呼ぶことで無効にできます。
 
 コアイベント

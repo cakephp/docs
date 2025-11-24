@@ -236,9 +236,6 @@
                 ]
             );
 
-            $paging = $paginator->getPagingParams() + (array)$this->request->getAttribute('paging');
-            $this->request = $this->request->withAttribute('paging', $paging);
-
             $this->set('favorites', $results);
         }
     }

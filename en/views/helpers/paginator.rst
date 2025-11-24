@@ -430,6 +430,42 @@ Create a dropdown control that changes the ``limit`` query parameter::
 
 The generated form and control will automatically submit on change.
 
+Automatic Limit Generation with Steps
+--------------------------------------
+
+Instead of manually defining limit options, you can use the ``steps`` option to
+automatically generate limits in multiples of a specific value::
+
+    // Generate limits in steps of 10 up to maxLimit
+    echo $this->Paginator->limitControl([], null, ['steps' => 10]);
+    // With maxLimit of 50, this generates: 10, 20, 30, 40, 50
+
+    // Steps of 25 up to maxLimit or 100 (whichever is lower)
+    echo $this->Paginator->limitControl([], null, ['steps' => 25]);
+
+When using ``steps``, you cannot also provide explicit limits in the ``$limits``
+parameter - you must use one or the other.
+
+Respecting maxLimit
+-------------------
+
+The ``limitControl()`` method automatically respects the ``maxLimit`` configuration
+from your paginator settings. Any limit options that exceed the ``maxLimit`` will
+be automatically filtered out::
+
+    // In your controller with maxLimit of 50
+    $this->paginate = [
+        'limit' => 20,
+        'maxLimit' => 50,
+    ];
+
+    // In your template - limits above 50 are filtered out
+    echo $this->Paginator->limitControl([20 => 20, 50 => 50, 100 => 100]);
+    // Only shows: 20, 50
+
+If all default or provided limits exceed the ``maxLimit``, the control will
+automatically use the ``maxLimit`` value as the only available option.
+
 Configuring Pagination Options
 ==============================
 
@@ -546,10 +582,10 @@ navigation, also supplied by the PaginationHelper::
 The wording output by the counter() method can also be customized using special
 markers::
 
-    <?= $this->Paginator->counter([
-        'format' => 'Page {{page}} of {{pages}}, showing {{current}} records out of
-                 {{count}} total, starting on record {{start}}, ending on {{end}}'
-    ]) ?>
+    <?= $this->Paginator->counter(
+        'Page {{page}} of {{pages}}, showing {{current}} records out of
+        {{count}} total, starting on record {{start}}, ending on {{end}}'
+    ) ?>
 
 .. _paginator-helper-multiple:
 

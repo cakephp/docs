@@ -64,16 +64,17 @@ CakePHP はウェブアプリケーションの一般的なタスクを処理す
 
     namespace App;
 
+    use Cake\Core\Configure;
+    use Cake\Error\Middleware\ErrorHandlerMiddleware;
     use Cake\Http\BaseApplication;
     use Cake\Http\MiddlewareQueue;
-    use Cake\Error\Middleware\ErrorHandlerMiddleware;
 
     class Application extends BaseApplication
     {
         public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue
         {
             // ミドルウェアのキューにエラーハンドラーを結びつけます。
-            $middlewareQueue->add(new ErrorHandlerMiddleware());
+            $middlewareQueue->add(new ErrorHandlerMiddleware(Configure::read('Error'), $this));
 
             return $middlewareQueue;
         }

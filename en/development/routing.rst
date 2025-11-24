@@ -440,6 +440,60 @@ of ``connect()``::
     // Set lang to be a persistent parameter
     ->setPersist(['lang']);
 
+Setting Default Options for Routes in a Scope
+----------------------------------------------
+
+You can set default options that will be applied to all routes within a scope
+using the ``setOptions()`` method. This is useful when you want to apply the
+same options (like ``_host``, ``_https``, or ``_port``) to multiple routes
+without repeating them::
+
+    $routes->scope('/api', function (RouteBuilder $routes) {
+        // Set default options for all routes in this scope
+        $routes->setOptions([
+            '_host' => 'api.example.com',
+            '_https' => true
+        ]);
+
+        // These routes will automatically have _host and _https set
+        $routes->get('/users', ['controller' => 'Users', 'action' => 'index']);
+        $routes->get('/posts', ['controller' => 'Posts', 'action' => 'index']);
+    });
+
+Options set via ``setOptions()`` are:
+
+- **Inherited by nested scopes** - Child scopes automatically receive the parent's default options
+- **Overridable on individual routes** - Options passed to ``connect()`` or HTTP verb methods take precedence over defaults
+- **Merged with route-specific options** - Default options are combined with any options you specify on individual routes
+
+Example with nested scopes and overrides::
+
+    $routes->scope('/api', function (RouteBuilder $routes) {
+        $routes->setOptions(['_host' => 'api.example.com']);
+
+        // This route uses the default host
+        $routes->get('/public', ['controller' => 'Public', 'action' => 'index']);
+
+        // This route overrides the default host
+        $routes->get('/internal', [
+            'controller' => 'Internal',
+            'action' => 'index',
+            '_host' => 'internal.example.com'
+        ]);
+
+        // Nested scope inherits the default host
+        $routes->scope('/v2', function (RouteBuilder $routes) {
+            // This also uses api.example.com
+            $routes->get('/users', ['controller' => 'Users', 'action' => 'index']);
+        });
+    });
+
+The ``setOptions()`` method is particularly useful for:
+
+- Setting the same ``_host`` for an entire API scope
+- Enforcing ``_https => true`` for secure sections of your application
+- Configuring ``_port`` for routes that should use non-standard ports
+
 Passing Parameters to Action
 ----------------------------
 

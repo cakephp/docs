@@ -273,7 +273,7 @@ a separate directory and install its dependencies:
     git clone git://github.com/cakephp/debug_kit.git
     cd debug_kit
     php ~/composer.phar install
-    php ~/phpunit.phar
+    vendor/bin/phpunit
 
 Filtering Test Cases
 --------------------
@@ -550,8 +550,19 @@ in your **tests/Fixture** directory, with the following content::
 
     class ArticlesFixture extends TestFixture
     {
-          // Optional. Set this property to load fixtures to a different test datasource
+          // Optional. Set this property to load fixtures
+          // to a different test datasource
           public $connection = 'test';
+
+          // Optional. Lets you define which table alias is used when
+          // reflecting schema and inserting rows. Inferred from the
+          // class name by default. Added in 5.3.0
+          public $tableAlias = 'Articles';
+
+          // Optional. Lets you define the table name for a fixture.
+          // If defined, this table name will be camelized to create
+          // $tableAlias.
+          public $table = 'articles';
 
           public $records = [
               [
@@ -1248,6 +1259,17 @@ retain flash messages in the session so you can write assertions::
     // Assert the second flash message element
     $this->assertFlashElementAt(1, 'Flash/error');
 
+    // Assert a flash message contains a substring (Added in 5.3.0)
+    $this->assertFlashMessageContains('deleted', 'flash');
+
+    // Assert the second flash message contains a substring (Added in 5.3.0)
+    $this->assertFlashMessageContainsAt(1, 'really deleted');
+
+
+.. versionadded:: 5.3.0
+    ``assertFlashMessageContains()`` and ``assertFlashMessageContainsAt()``
+    were added.
+
 Testing a JSON Responding Controller
 ------------------------------------
 
@@ -1519,6 +1541,12 @@ make testing responses much simpler. Some examples are::
     // Check the Location header
     $this->assertRedirect(['controller' => 'Articles', 'action' => 'index']);
 
+    // Check the Location header matches the same previous URL
+    $this->assertRedirectBack();
+
+    // Check the Location header matches the referer URL
+    $this->assertRedirectBackToReferer();
+
     // Check that no Location header has been set
     $this->assertNoRedirect();
 
@@ -1688,12 +1716,12 @@ controllers that use it. Here is our example component located in
             }
         }
 
-        public function startup(EventInterface $event)
+        public function startup(EventInterface $event): void
         {
             $this->setController($event->getSubject());
         }
 
-        public function adjust($length = 'short'): void
+        public function adjust(string $length = 'short'): void
         {
             switch ($length) {
                 case 'long':

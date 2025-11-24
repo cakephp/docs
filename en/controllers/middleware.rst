@@ -73,16 +73,17 @@ called at the beginning of the request process, you can use the
 
     namespace App;
 
+    use Cake\Core\Configure;
+    use Cake\Error\Middleware\ErrorHandlerMiddleware;
     use Cake\Http\BaseApplication;
     use Cake\Http\MiddlewareQueue;
-    use Cake\Error\Middleware\ErrorHandlerMiddleware;
 
     class Application extends BaseApplication
     {
         public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue
         {
             // Bind the error handler into the middleware queue.
-            $middlewareQueue->add(new ErrorHandlerMiddleware());
+            $middlewareQueue->add(new ErrorHandlerMiddleware(Configure::read('Error'), $this));
 
             // Add middleware by classname.
             // As of 4.5.0 classname middleware are optionally resolved

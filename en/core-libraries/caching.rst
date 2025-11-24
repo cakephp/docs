@@ -173,9 +173,32 @@ RedisEngine uses the following engine specific options:
 * ``ssl_key`` The ssl private key used for TLS connections.
 * ``ssl_ca`` The ssl certificate authority file for TLS connections.
 * ``ssl_cert`` The ssl certificate used for TLS connections.
+* ``cluster`` Array of cluster server addresses for Redis Cluster support.
 
 .. versionadded:: 5.1.0
     TLS connections were added in 5.1
+
+.. versionadded:: 5.3.0
+    Redis Cluster support was added in 5.3
+
+Redis Cluster Configuration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+To use Redis Cluster, configure the ``cluster`` option with an array of server addresses::
+
+    Cache::setConfig('redis_cluster', [
+        'className' => 'Redis',
+        'duration' => '+1 hours',
+        'prefix' => 'cake_redis_',
+        'cluster' => [
+            '127.0.0.1:7000',
+            '127.0.0.1:7001',
+            '127.0.0.1:7002',
+        ]
+    ]);
+
+When using Redis Cluster, the ``host`` and ``port`` options are ignored. The engine will
+automatically handle key distribution and failover across the cluster nodes.
 
 MemcacheEngine Options
 ----------------------
@@ -649,6 +672,46 @@ The required API for a CacheEngine is
     :return: Boolean ``true`` on success.
 
     Increment a number under the key and return incremented value
+
+.. _cache-events:
+
+Cache Events
+============
+
+.. versionadded:: 5.3.0
+
+You can add event listeners to the following events:
+
+* ``\Cake\Cache\Event\CacheBeforeGetEvent``
+* ``\Cake\Cache\Event\CacheAfterGetEvent``
+* ``\Cake\Cache\Event\CacheBeforeSetEvent``
+* ``\Cake\Cache\Event\CacheAfterSetEvent``
+* ``\Cake\Cache\Event\CacheBeforeAddEvent``
+* ``\Cake\Cache\Event\CacheAfterAddEvent``
+* ``\Cake\Cache\Event\CacheBeforeDecrementEvent``
+* ``\Cake\Cache\Event\CacheAfterDecrementEvent``
+* ``\Cake\Cache\Event\CacheBeforeDeleteEvent``
+* ``\Cake\Cache\Event\CacheAfterDeleteEvent``
+* ``\Cake\Cache\Event\CacheBeforeIncrementEvent``
+* ``\Cake\Cache\Event\CacheAfterIncrementEvent``
+* ``\Cake\Cache\Event\CacheClearedEvent``
+* ``\Cake\Cache\Event\CacheGroupClearEvent``
+
+an example listener in your ``src/Application.php`` or plugin class would be::
+
+    public function events(EventManagerInterface $eventManager): EventManagerInterface
+    {
+        $eventManager->on(CacheAfterGetEvent::NAME, function (CacheAfterGetEvent $event): void {
+            $key = $event->getKey();
+            $value = $event->getValue();
+            $success = $event->getResult();
+        });
+
+        return $eventManager;
+    }
+
+Different events have different context, so please check the methods inside the custom event class
+if you are looking for certain data.
 
 .. meta::
     :title lang=en: Caching

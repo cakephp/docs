@@ -234,10 +234,6 @@ messages could look like::
                 ]
             );
 
-            // Set the paging params as a request attribute for use the PaginatorHelper
-            $paging = $paginator->getPagingParams() + (array)$this->request->getAttribute('paging');
-            $this->request = $this->request->withAttribute('paging', $paging);
-
             $this->set('favorites', $results);
         }
     }

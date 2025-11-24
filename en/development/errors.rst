@@ -201,7 +201,7 @@ prefix. You could create the following class::
          * @param \Cake\Event\EventInterface $event Event.
          * @return void
          */
-        public function beforeRender(EventInterface $event)
+        public function beforeRender(EventInterface $event): void
         {
             $this->viewBuilder()->setTemplatePath('Error');
         }
@@ -225,7 +225,7 @@ a ``missingWidget()`` controller method, and CakePHP would use
 
     class ErrorController extends AppController
     {
-        protected function missingWidget(MissingWidgetException $error)
+        protected function missingWidget(MissingWidgetException $exception)
         {
             // You can prepare additional template context or trap errors.
         }
@@ -265,11 +265,11 @@ error pages when this error is handled::
         }
     }
 
-    // In config/app.php
-    'Error' => [
-        'exceptionRenderer' => 'App\Error\AppExceptionRenderer',
-        // ...
-    ],
+    // In Application::middleware()
+    $middlewareQueue->add(new ErrorHandlerMiddleware(
+        ['exceptionRenderer' => AppExceptionRenderer::class] + Configure::read('Error'),
+        $this,
+    ));
     // ...
 
 The above would handle our ``MissingWidgetException``,
@@ -315,11 +315,11 @@ override the ``_getController()`` method in your exception renderer::
         }
     }
 
-    // in config/app.php
-    'Error' => [
-        'exceptionRenderer' => 'App\Error\AppExceptionRenderer',
-        // ...
-    ],
+    // In Application::middleware()
+    $middlewareQueue->add(new ErrorHandlerMiddleware(
+        ['exceptionRenderer' => AppExceptionRenderer::class] + Configure::read('Error'),
+        $this,
+    ));
     // ...
 
 

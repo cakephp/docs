@@ -566,7 +566,7 @@ It is possible to set the default formatter for all translators created by
 CakePHP before they are used for the first time. This does not include manually
 created translators using the ``setTranslator()`` and ``config()`` methods::
 
-    I18n::defaultFormatter('sprintf');
+    I18n::setDefaultFormatter('sprintf');
 
 Localizing Dates and Numbers
 ============================

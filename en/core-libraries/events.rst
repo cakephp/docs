@@ -139,7 +139,7 @@ After firing an event on the manager, you can retrieve it from the event list::
     $firstEvent = $eventsFired[0];
 
 Tracking can be disabled by removing the event list or calling
-:php:meth:`Cake\\Event\\EventList::trackEvents(false)`.
+:php:meth:`Cake\\Event\\EventManager::trackEvents(false)`.
 
 Core Events
 ===========
@@ -188,6 +188,50 @@ Or using the ``events`` hook in your Application/Plugin class::
 .. note::
     The ``Server.terminate`` event only works for PHP-FPM implementations which
     support the ``fastcgi_finish_request`` function.
+
+``Command.beforeExecute`` & ``Command.afterExecute``
+----------------------------------------------------
+
+.. versionadded:: 5.0.0
+   The ``Command.beforeExecute`` & ``Command.afterExecute`` events were added in 5.0
+
+The ``Command.beforeExecute`` & ``Command.afterExecute`` events are triggered before and after
+a command has been executed. Both events contain the ``args`` which are passed to the command
+and the ``afterExecute`` event also contains the ``exitCode`` which is returned by the command.
+
+You can listen to this event using an event manager instance::
+
+    use Cake\Event\EventManager;
+
+    EventManager::instance()->on('Command.beforeExecute', function ($event, $args) {
+        $command = $event->getSubject();
+        // Do stuff here
+    });
+
+    EventManager::instance()->on('Command.afterExecute', function ($event, $args, $result) {
+        $command = $event->getSubject();
+        // Do stuff here
+    });
+
+Or using the ``events`` hook in your Application/Plugin class::
+
+    use Cake\Event\EventManagerInterface;
+
+    public function events(EventManagerInterface $eventManager): EventManagerInterface
+    {
+        $eventManager->on('Command.beforeExecute', function ($event, $args) {
+            $command = $event->getSubject();
+            // Do stuff here
+        });
+
+        $eventManager->on('Command.afterExecute', function ($event, $args, $result) {
+            $command = $event->getSubject();
+            // Do stuff here
+        });
+
+        return $eventManager;
+    }
+
 
 .. _registering-event-listeners:
 
@@ -375,7 +419,7 @@ for event listeners::
     // Setting priority for a listener
     class UserStatistic implements EventListenerInterface
     {
-        public function implementedEvents()
+        public function implementedEvents(): array
         {
             return [
                 'Order.afterPlace' => [

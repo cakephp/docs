@@ -267,7 +267,7 @@ em um diretório separado e instalar suas dependências:
     git clone git://github.com/cakephp/debug_kit.git
     cd debug_kit
     php ~/composer.phar install
-    php ~/phpunit.phar
+    vendor/bin/phpunit
 
 Filtrando Casos de Teste
 ------------------------

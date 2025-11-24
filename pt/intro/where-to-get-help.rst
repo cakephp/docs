@@ -52,28 +52,31 @@ e utilização de dados referentes a uma classe.::
 
     tests/TestCase/
 
-O canal de IRC
-==============
+Slack
+=====
 
-**Canal de IRC na irc.freenode.net:**
+`CakePHP Slack Support Channel <https://cakesf.slack.com/messages/german/>`_
 
--  `#cakephp <irc://irc.freenode.net/cakephp>`_ --
-   Discussão geral
--  `#cakephp-docs <irc://irc.freenode.net/cakephp-docs>`_ --
-   Documentação
--  `#cakephp-bakery <irc://irc.freenode.net/cakephp-bakery>`_ --
-   Bakery
--  `#cakephp-fr <irc://irc.freenode.net/cakephp-fr>`_ --
-   Canal francês.
+Se você estiver em dúvida, entre em contato conosco no canal de suporte do CakePHP no Slack.
+Adoraríamos ouvir sua opinião, seja se precisar de ajuda, quiser
+encontrar usuários na sua região ou se quiser doar seu carro esportivo novinho em folha.
 
-Se você está travado, nos faça uma visita no canal de IRC do CakePHP.
-Alguém do `time de desenvolvimento <https://cakephp.org/team>`_
-normalmente está conectado, especiamente nos horários diurnos da América do Sul
-e América do Norte. Nós apreciaríamos ouví-lo se você precisar de ajuda,
-se quiser encontrar usuários da sua área ou ainda se quiser doar seu novo carro
-esporte.
+Discord
+=======
+
+`CakePHP Discord <https://discord.com/invite/k4trEMPebj>`_
+
+Você também pode se juntar a nós no Discord.
 
 .. _cakephp-official-communities:
+
+Fórum Oficial do CakePHP
+========================
+`Fórum Oficial do CakePHP <https://discourse.cakephp.org>`_
+
+Nosso fórum oficial, onde você pode pedir ajuda, sugerir ideias e conversar
+sobre o CakePHP. É o lugar perfeito para encontrar respostas rapidamente e ajudar outras pessoas.
+Junte-se à família CakePHP inscrevendo-se.
 
 Stackoverflow
 =============
@@ -86,9 +89,42 @@ utilizando para permitir que usuários do stackoverflow achem suas questões.
 Onde conseguir ajuda em sua língua
 ==================================
 
+Dinamarquês
+-----------
+
+- `Canal do Slack do CakePHP Dinamarquesa <https://cakesf.slack.com/messages/denmark/>`_
+
 Francês
 -------
-- `Comunidade CakePHP francesa <https://cakephp-fr.org>`_
+
+- `Comunidade CakePHP Francesa <https://cakephp-fr.org>`_
+
+Alemão
+------
+
+- `Canal do Slack do CakePHP Alemã <https://cakesf.slack.com/messages/german/>`_
+- `Grupo alemão do CakePHP no Facebook <https://www.facebook.com/groups/146324018754907/>`_
+
+Holandês
+--------
+
+- `Canal do Slack do CakePHP Holandesa <https://cakesf.slack.com/messages/netherlands/>`_
+
+Japonês
+-------
+
+- `Canal do Slack do CakePHP Japonesa <https://cakesf.slack.com/messages/japanese/>`_
+- `Grupo Japonês do CakePHP no Facebook <https://www.facebook.com/groups/304490963004377/>`_
+
+Português
+---------
+
+- `Canal do Slack do CakePHP Portuguesa <https://cakesf.slack.com/messages/portuguese/>`_
+
+Espanhol
+--------
+
+- `Canal do Slack do CakePHP Espanhola <https://cakesf.slack.com/messages/spanish/>`_
 
 .. meta::
     :title lang=pt: Onde conseguir ajuda

@@ -78,16 +78,17 @@ pour en attacher ::
 
     namespace App;
 
+    use Cake\Core\Configure;
+    use Cake\Error\Middleware\ErrorHandlerMiddleware;
     use Cake\Http\BaseApplication;
     use Cake\Http\MiddlewareQueue;
-    use Cake\Error\Middleware\ErrorHandlerMiddleware;
 
     class Application extends BaseApplication
     {
         public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue
         {
             // Attache le gestionnaire d'erreur dans la file du middleware
-            $middlewareQueue->add(new ErrorHandlerMiddleware());
+            $middlewareQueue->add(new ErrorHandlerMiddleware(Configure::read('Error'), $this));
 
             return $middlewareQueue;
         }
