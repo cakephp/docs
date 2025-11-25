@@ -77,7 +77,8 @@ Event
 
 - The signature of ``EventManagerInterface::on()`` has changed. The 2nd and 3rd
   parameters have been swapped. Calls which pass an options array as the 2nd
-  argument will need to be updated to pass it as the 3rd argument instead.
+  argument will need to be updated to pass it as the 3rd argument instead or 
+  use named parameters.
 
 Datasource
 ----------

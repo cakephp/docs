@@ -412,7 +412,7 @@ for event listeners::
     $callback = [$this, 'doSomething'];
     $this->getEventManager()->on(
         'Order.afterPlace',
-        $callback
+        $callback,
         ['priority' => 2],
     );
 
