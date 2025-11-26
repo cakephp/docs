@@ -29,6 +29,8 @@ Database
    allows clearing the expressions with an empty array.
 
 ORM
+---
+
 - Using ``joinWith()`` now throws an exception when there are conflicting associations. Users would already
   see a SQL error in this situation but without an explanation. Users who add invalid joins but didn't reference them
   in the query might see a new exception when previously the SQL was incorrect but harmless.
