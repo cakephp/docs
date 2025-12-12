@@ -417,7 +417,7 @@ Logging Personnalisé des Erreurs
 Les gestionnaires d'erreurs utilisent des instances de
 ``Cake\Error\ErrorLoggingInterface`` pour créer des messages de log et les
 logger au bon endroit. Vous pouvez remplacer le logger d'erreurs en utilisant la
-propriété de configuration ``Error.errorLogger``. Un exemple d'<em>error
+propriété de configuration ``Error.logger``. Un exemple d'<em>error
 logger</em>::
 
     namespace App\Error;

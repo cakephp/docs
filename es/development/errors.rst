@@ -575,7 +575,7 @@ Registro de Errores Personalizado
 
 Los manejadores de errores utilizan instancias de ``Cake\Error\ErrorLoggingInterface`` para crear
 mensajes de registro y registrarlos en el lugar apropiado. Puedes reemplazar el
-registrador de errores utilizando el valor de configuración ``Error.errorLogger``. Un ejemplo de registrador de errores::
+registrador de errores utilizando el valor de configuración ``Error.logger``. Un ejemplo de registrador de errores::
 
     namespace App\Error;
 
