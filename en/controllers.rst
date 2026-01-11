@@ -625,6 +625,7 @@ More on Controllers
 
     controllers/pages-controller
     controllers/components
+    controllers/middleware/rate-limit
 
 .. meta::
     :title lang=en: Controllers

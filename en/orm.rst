@@ -120,4 +120,3 @@ More Information
     orm/deleting-data
     orm/behaviors
     orm/schema-system
-    console-commands/schema-cache

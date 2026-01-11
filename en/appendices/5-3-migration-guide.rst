@@ -156,7 +156,7 @@ Database
 Error
 -----
 
-- ``Debugger`` now replaces :php:const:``ROOT` with ` the
+- ``Debugger`` now replaces :php:const:`ROOT` with the
   ``Debugger.editorBasePath`` Configure value if defined. This improves
   debugging workflows within containerized environments.
 
