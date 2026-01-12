@@ -430,6 +430,13 @@ Create a dropdown control that changes the ``limit`` query parameter::
 
 The generated form and control will automatically submit on change.
 
+By default ``limitControl()`` preserves existing query parameters as hidden
+fields. You can control this behavior with the ``preserveQuery`` option:
+
+* ``true`` Keep all query parameters (default).
+* ``false`` Do not include any preserved query parameters.
+* ``array`` Only keep the listed top-level keys.
+
 Automatic Limit Generation with Steps
 --------------------------------------
 
