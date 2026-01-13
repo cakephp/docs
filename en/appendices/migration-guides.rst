@@ -34,4 +34,5 @@ to ensure the tool can resolve class names correctly.
     ./5-1-migration-guide
     ./5-2-migration-guide
     ./5-3-migration-guide
+    ./5-4-migration-guide
     ./phpunit10
