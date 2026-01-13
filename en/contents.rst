@@ -56,6 +56,7 @@ Contents
 
     core-libraries/app
     core-libraries/collections
+    core-libraries/filesystem
     core-libraries/hash
     core-libraries/httpclient
     core-libraries/inflector
