@@ -1,0 +1,236 @@
+# 定数および関数
+
+CakePHP を使った皆さんの日常のほとんどの業務ではコアクラスやメソッドを用いることになるでしょうが、
+ちょっとした役に立つ便利なグローバル関数も CakePHP にはたくさんあります。この関数のほとんどは
+CakePHP のクラスと一緒に使うためのもの（モデルやコンポーネントクラスのローディングなど）ですが、
+他の多くは、配列や文字列の扱いを少し楽にしてくれるものです。
+
+また、CakePHP のアプリケーションで利用可能な定数も同時におさえておきましょう。
+これらの定数を用いることはよりスムースなアップグレードの助けになるだけでなく、
+CakePHP アプリケーション内の特定のファイルやディレクトリーを指し示す便利なやり方でもあります。
+
+## グローバル関数
+
+以下、CakePHP の使用可能なグローバル関数です。その多くは、デバッグしたり内容を翻訳したりといった、
+機能的に他の CakePHP の単なる便利なラッパーになっています。
+
+`function` **__(string $string_id, [$formatArgs])**
+
+この関数は CakePHP のアプリケーションでのローカライズを担います。
+`$string_id` で翻訳時の ID を定めます。
+その文字列内のプレースホルダーを置き換えるための、追加の引数を供給できます。 :
+
+``` text
+__('You have {0} unread messages', $number);
+```
+
+また、置換する名前インデックス配列を指定できます。 :
+
+``` text
+__('You have {unread} unread messages', ['unread' => $number]);
+```
+
+> [!NOTE]
+> より詳しい情報は
+> [国際化と地域化](../core-libraries/internationalization-and-localization)
+> のセクションを確認して下さい。
+
+`function` **__d(string $domain, string $msg, mixed $args = null)**
+
+メッセージを一つ取得するために、現在のドメインを変更することが可能です。
+
+プラグインを国際化するときに便利です:
+`echo __d('PluginName', 'This is my plugin');`
+
+`function` **__dn(string $domain, string $singular, string $plural, integer $count, mixed $args = null)**
+
+複数形のメッセージを一つ取得するために、現在のドメインを変更することが可能です。
+`$domain` でドメインを指定し、 `$count` の数を数え、 `$singular` と
+`$plural` に基いて複数形を正しく処理したメッセージを返します。
+
+`function` **__dx(string $domain, string $context, string $msg, mixed $args = null)**
+
+メッセージを一つ取得するために、現在のドメインを変更することが可能です。
+また、あなたがコンテキストを指定することができます。
+
+コンテキストは、同じドメイン内で、
+それがユニークな翻訳文字列の一意の識別子です。
+
+`function` **__dxn(string $domain, string $context, string $singular, string $plural, integer $count, mixed $args = null)**
+
+複数形のメッセージを一つ取得するために、現在のドメインを変更することが可能です。
+また、あなたがコンテキストを指定することができます。
+`$domain` でドメインを指定し、 `$count` の数を数え、 `$singular` と
+`$plural` に基いて複数形を正しく処理したメッセージを返します。
+幾つかの言語が、数に応じた複数形の形式を一つ以上持っています。
+
+コンテキストは、同じドメイン内で、それがユニークな翻訳文字列の一意の識別子です。
+
+`function` **__n(string $singular, string $plural, integer $count, mixed $args = null)**
+
+`$count` の数を数え、 `$singular` と `$plural` に基いて複数形を正しく処理した
+メッセージを返します。幾つかの言語が、数に応じた複数形の形式を一つ以上持っています。
+
+`function` **__x(string $context, string $msg, mixed $args = null)**
+
+コンテキストは、同じドメイン内で、それがユニークな翻訳文字列の一意の識別子です。
+
+`function` **__xn(string $context, string $singular, string $plural, integer $count, mixed $args = null)**
+
+`$count` の数を数え、 `$singular` と `$plural`
+に基いて複数形を正しく処理したメッセージを返します。
+また、あなたがコンテキストを指定することができます。
+幾つかの言語が、数に応じた複数形の形式を一つ以上持っています。
+
+コンテキストは、同じドメイン内で、それがユニークな翻訳文字列の一意の識別子です。
+
+`function` **collection(mixed $items)**
+
+渡された引数をラップする、新しい `Cake\Collection\Collection`
+オブジェクトをインスタンス化するための簡易ラッパー。 `$items` パラメーターは
+`Traversable` オブジェクトまたは配列のいずれかを取ります。
+
+`function` **debug(mixed $var, boolean $showHtml = null, $showFrom = true)**
+
+コア `$debug` 変数が `true` であれば、 `$var` が出力されます。
+`$showHTML` が `true` あるいは `null` のままであればデータはブラウザー表示に
+相応しいように描画されます。 `$showFrom` が `false` にセットされない場合、
+それがコールされた行の情報を伴ってデバッグ情報の出力が始まります。
+[デバッグ](../development/debugging) もご覧ください。
+
+`function` **dd(mixed $var, boolean $showHtml = null)**
+
+`debug()` のように動作しますが、実行を終了します。
+コア `$debug` 変数が `true` であれば、 `$var` が出力されます。
+`$showHTML` が `true` あるいは `null` のままであればデータはブラウザー表示に
+相応しいように描画されます。 [デバッグ](../development/debugging) もご覧ください
+
+`function` **pr(mixed $var)**
+
+出力を `<pre>` タグで周りを囲む機能を追加した `print_r()` の便利なラッパー。
+
+`function` **pj(mixed $var)**
+
+出力を `<pre>` タグで周りを囲む機能を追加した JSON 整形表示の便利な関数。
+
+それは、オブジェクトと配列のJSON 表現をデバッグために意図されています。
+
+`function` **env(string $key, string $default = null)**
+
+可能な限りの環境変数を取得します。仮に `$_SERVER` か `$_ENV` が使用不可の場合には
+バックアップとして用いられます。
+
+この関数はまた、 `PHP_SELF` と `DOCUMENT_ROOT` を、非サポートのサーバー上で
+エミュレートします。これは完全なエミュレーションラッパーなので、 `$_SERVER` や
+`getenv()` の代わりに `env()` を常に用いることは、
+（とりわけあなたがコードを配布する予定なら）とても良い考えです。
+
+`function` **h(string $text, boolean $double = true, string $charset = null)**
+
+`htmlspecialchars()` の便利なラッパー。
+
+`function` **pluginSplit(string $name, boolean $dotAppend = false, string $plugin = null)**
+
+ドット記法されたプラグイン名をプラグインとクラス名に分離します。
+`$name` にドットが含まれない場合、インデックスが 0 の箇所は `null` になります。
+
+一般に `list($plugin, $name) = pluginSplit('Users.User');` のように使われます。
+
+`function` **namespaceSplit(string $class)**
+
+ネームスペースをクラス名から分離します。
+
+一般に `list($namespace, $className) = namespaceSplit('Cake\Core\App');`
+のように使われます。
+
+## コア定義定数
+
+以下のほとんどの定数はあなたのアプリケーション内部のパスへの参照です。
+
+`constant` **APP**
+
+アプリケーションディレクトリーへの絶対パス。末尾にスラッシュが付きます。
+
+`constant` **APP_DIR**
+
+あなたのアプリケーションのディレクトリー名。`app` かも知れません。
+
+`constant` **CACHE**
+
+キャッシュファイルディレクトリーへのパス。
+複数サーバーをセットアップした際のホスト間で共有できます。
+
+`constant` **CAKE**
+
+cake ディレクトリーへのパス。
+
+`constant` **CAKE_CORE_INCLUDE_PATH**
+
+ルートの lib ディレクトリーへのパス。
+
+`constant` **CONFIG**
+
+config ディレクトリーへのパス。
+
+`constant` **CORE_PATH**
+
+ルートディレクトリーへの、末尾にディレクトリースラッシュを付加したパス。
+
+`constant` **DS**
+
+PHP の `DIRECTORY_SEPARATOR` (Linux の場合は `/` Windows の場合は `\`)
+のショートカット。
+
+`constant` **LOGS**
+
+ログディレクトリーへのパス。
+
+`constant` **ROOT**
+
+ルートディレクトリーへのパス。
+
+`constant` **TESTS**
+
+テストディレクトリーへのパス。
+
+`constant` **TMP**
+
+一時ファイルディレクトリーへのパス。
+
+`constant` **WWW_ROOT**
+
+ウェブルートへのフルパス。
+
+## 時間定義定数
+
+`constant` **TIME_START**
+
+アプリケーションが開始された時点の、浮動小数点マイクロ秒での UNIX タイムスタンプ。
+
+`constant` **SECOND**
+
+1 と等しい
+
+`constant` **MINUTE**
+
+60 と等しい
+
+`constant` **HOUR**
+
+3600 と等しい
+
+`constant` **DAY**
+
+86400 と等しい
+
+`constant` **WEEK**
+
+604800 と等しい
+
+`constant` **MONTH**
+
+2592000 と等しい
+
+`constant` **YEAR**
+
+31536000 と等しい
