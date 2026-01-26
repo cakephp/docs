@@ -1,0 +1,662 @@
+# ブログチュートリアル - パート2
+
+## Article モデルの作成
+
+モデルクラスは、CakePHP アプリケーションの基本中の基本 (*bread and butter*) です。
+CakePHP のモデルを作成することで、データベースとやりとりできるようになり、表示 (*view*)、
+追加 (*add*)、編集 (*edit*)、削除 (*delete*) といった操作に必要な土台を
+手に入れることになります。
+
+CakePHP のモデルクラスのファイルは、 `Table` オブジェクトと `Entity` オブジェクトに分離して
+存在します。 `Table` オブジェクトは、特定のテーブルに格納されているエンティティーの集合にアクセスし、
+`src/Model/Table` の中に行きます。 `src/Model/Table/ArticlesTable.php` というファイルを
+作って保存します。完成したファイルは次のようになります。 :
+
+``` php
+// src/Model/Table/ArticlesTable.php
+
+namespace App\Model\Table;
+
+use Cake\ORM\Table;
+
+class ArticlesTable extends Table
+{
+    public function initialize(array $config): void
+    {
+        $this->addBehavior('Timestamp');
+    }
+}
+```
+
+命名規約は、CakePHP では非常に大切です。
+Table オブジェクトを `ArticlesTable` という名前にすることで、CakePHP は自動的に、
+この Table オブジェクトは ArticlesController で使用されるのだろうと解釈します。
+また、 `articles` という名前のデータベーステーブルと結びつけられます。
+
+> [!NOTE]
+> もし一致するファイルが **src/Model/Table** に見つけられなければ、CakePHP は動的に
+> モデルオブジェクトを生成します。これはまた、不意に間違ったファイル名 (例えば、
+> articlestable.php や ArticleTable.php) をつけると、CakePHP はどの設定も認識できず、
+> 代わりに生成されたモデルを使うことになるということも意味します。
+
+コールバック、バリデーションといったモデルの詳細については、
+マニュアルの [データベースアクセス & ORM](../../orm) の章を参照してください。
+
+> [!NOTE]
+> もし、すでに [ブログチュートリアルのパート1](../../tutorials-and-examples/blog/blog)
+> を完了していて `articles` テーブルをブログ用のデータベースに作成してあれば、
+> CakePHP の bake コンソールを活用して `ArticlesTable` モデルを作成することができます。 :
+>
+> ``` bash
+> bin/cake bake model Articles
+> ```
+
+bake とコード生成についての詳細は、 [Bake でコード生成](../../bake/usage) を参照してください。
+
+## Articles コントローラーの作成
+
+次に、投稿記事 (*articles*) に対するコントローラーを作成します。コントローラーとは、
+投稿記事とのすべてのやりとりが発生するところです。
+簡単に言うと、それはモデルとのビジネスロジックを含み、投稿記事に関連する作業を行う場所です。
+この新しいコントローラーは `ArticlesController.php` という名前で、
+`src/Controller` ディレクトリーの中に配置します。基本的なコントローラーは次のようになります。 :
+
+``` php
+// src/Controller/ArticlesController.php
+
+namespace App\Controller;
+
+class ArticlesController extends AppController
+{
+}
+```
+
+では、コントローラーにひとつのアクションを追加してみましょう。アクションは、
+アプリケーションの中のひとつの関数か、インターフェイスをあらわしています。
+例えば、ユーザーが www.example.com/articles/index (www.example.com/articles/ と同じです)
+をリクエストした場合、投稿記事の一覧が表示されると期待するでしょう。
+このアクションのコードは次のようになります。 :
+
+``` php
+// src/Controller/ArticlesController.php
+
+namespace App\Controller;
+
+class ArticlesController extends AppController
+{
+    public function index()
+    {
+        $articles = $this->Articles->find()->all();
+        $this->set(compact('articles'));
+    }
+}
+```
+
+`ArticlesController` の中に `index()` という関数を定義することによって、ユーザーは、
+www.example.com/articles/index というリクエストで、そのロジックにアクセスできるようになります。
+同様に、 `foobar()` という関数を定義すると、ユーザーは、www.example.com/articles/foobar
+でアクセスできるようになります。
+
+> [!WARNING]
+> ある URL にさせたいために、コントローラー名とアクション名をそれに合わせて独自に
+> 命名したくなるかもしれませんが、その誘惑に抵抗してください。[CakePHP の規約](../../intro/conventions)
+> （大文字化、複数形の名前など）に従って、読みやすく、理解しやすいアクション名を
+> 付けるようにしましょう。あとで、[ルーティング](../../development/routing) という機能を使って、URL とコードを
+> 結びつけることができます。
+
+アクションの中にあるひとつの命令が、 `set()` を使って、コントローラーからビュー
+(次に作成します) にデータを渡しています。この行は、`ArticlesTable` オブジェクトの `find('all')`
+メソッドから返ってきた値で、「articles」というビューの変数を設定します。
+
+> [!NOTE]
+> もし、すでに[ブログチュートリアルのパート1](../../tutorials-and-examples/blog/blog)
+> を完了していて `articles` テーブルをブログ用のデータベースに作成してあれば、
+> CakePHP の bake コンソールを活用して `ArticlesController` クラスを作成することができます。 :
+>
+> ``` bash
+> bin/cake bake controller Articles
+> ```
+
+bake とコード生成についての詳細は、 [Bake でコード生成](../../bake/usage) を参照してください。
+
+CakePHP のコントローラーに関する詳細は、 [コントローラー](../../controllers) の章をチェックしてください。
+
+## Article ビューの作成
+
+現在、モデルにはデータが入り、コントローラーにはアプリケーションロジックと流れが定義されています。
+今度は、作成した index アクション用のビューを作成しましょう。
+
+CakePHP のビュー (*view*) は、アプリケーションのレイアウト (*layout*) の内側に
+はめこまれる、データ表示用の断片部品です。たいていのアプリケーションでは、PHP のコードが
+含まれる HTML になりますが、XML、CSV、バイナリのデータにもなりえます。
+
+レイアウト (*layout*) は、ビューを囲む表示用のコードで、独自に定義したり、
+切り替えたりすることも可能ですが、今のところは、デフォルト (*default*) のものを
+使用することにしましょう。
+
+一つ前のセクションの `set()` メソッドによって、ビューから「articles」変数が使えるように
+割り当てたのを覚えていますか。これはクエリーオブジェクトのコレクションを
+`foreach` イテレーションを呼び出した状態でビューに伝えます。
+
+CakePHP のビューファイルは、 `src/Template` の中の、コントローラー名に対応するフォルダーの中に
+保存されています (この場合は、「Articles」というフォルダーを作成します)。
+この投稿記事データをテーブル表示するには、ビューのコードは次のようなものになります。
+
+``` php
+<!-- File: templates/Articles/index.php -->
+
+<h1>Blog articles</h1>
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Title</th>
+        <th>Created</th>
+    </tr>
+
+    <!-- ここから、$articles のクエリーオブジェクトをループして、投稿記事の情報を表示 -->
+
+    <?php foreach ($articles as $article): ?>
+    <tr>
+        <td><?= $article->id ?></td>
+        <td>
+            <?= $this->Html->link($article->title, ['action' => 'view', $article->id]) ?>
+        </td>
+        <td>
+            <?= $article->created->format(DATE_RFC850) ?>
+        </td>
+    </tr>
+    <?php endforeach; ?>
+</table>
+```
+
+シンプルなものであることがお分かりいただけるかと思います。
+
+`$this->Html` というオブジェクトを使っていることに気づいたかもしれません。
+これは、CakePHP の `Cake\View\Helper\HtmlHelper` クラスのインスタンスです。
+CakePHP には一連のビューヘルパーがあり、リンクの作成、フォームの出力などをすぐに使えます。
+使い方の詳細については、 [ヘルパー](../../views/helpers) を参照してください。ここで重要なのは、
+`link()` メソッドが、指定されたタイトル（最初のパラメーター）と
+URL (二つ目のパラメーター) で HTML リンクを生成する、ということです。
+
+CakePHP 内で URL を指定する場合、配列フォーマットの使用が推奨されます。
+これはルーティングの章で詳しく説明されます。URL に配列フォーマットを用いることによって、
+CakePHP のリバースルーティング機能を活用することができます。また、
+/コントローラー/アクション/パラメーター1/パラメーター2
+という形のアプリケーションの基本パスに対する相対パスを単に書くこともできます。
+[named routes](../../development/routing#named-routes) もご参照ください。
+
+この時点で、ブラウザーから <http://www.example.com/articles/index> を開いてみてください。
+タイトルと投稿内容のテーブル一覧がまとめられているビューが表示されるはずです。
+
+ビューの中のリンク (投稿記事のタイトル) は `/articles/view/どれかのID番号` というリンクを表示します。
+もしそういう表示が出ない場合には、何かおかしくなってしまったか、もうすでにあなたが
+その定義作業をしてしまったから（仕事がハヤイ！）か、のどちらかです。
+そうでないなら、これから `ArticlesController` の中に作ってみましょう。 :
+
+``` php
+// src/Controller/ArticlesController.php
+
+namespace App\Controller;
+
+class ArticlesController extends AppController
+{
+
+    public function index()
+    {
+         $this->set('articles', $this->Articles->find('all'));
+    }
+
+    public function view($id = null)
+    {
+        $article = $this->Articles->get($id);
+        $this->set(compact('article'));
+    }
+}
+```
+
+`set()` の呼び出しはもう知っていますね。 `find('all')` の代わりに、
+`get()` を使っていることに注目してください。今回は、ひとつの投稿記事の情報しか
+必要としないからです。
+
+ビューのアクションが、ひとつのパラメーターを取っていることに注意してください。
+それは、これから表示する投稿記事のID番号です。このパラメーターは、リクエストされた
+URL を通して渡されます。ユーザーが、 `/articles/view/3` とリクエストすると、
+「3」という値が `$id` として渡されます。
+
+ユーザーが実在するレコードにアクセスすることを保証するために少しだけエラーチェックを行います。
+Articles テーブルに対して `get()` を用いるとき、存在するレコードにアクセスしています。
+もしリクエスト記事がデータベースに存在しない場合、もしくは id が false の場合、
+`get()` 関数は `NotFoundException` を送出します。
+
+では、新しい「view」アクション用のビューを作って、
+**templates/Articles/view.php** というファイルで保存しましょう。
+
+``` php
+<!-- File: templates/Articles/view.php -->
+
+<h1><?= h($article->title) ?></h1>
+<p><?= h($article->body) ?></p>
+<p><small>Created: <?= $article->created->format(DATE_RFC850) ?></small></p>
+```
+
+`/articles/index` の中にあるリンクをクリックしたり、手動で、 `/articles/view/1`
+にアクセスしたりして、動作することを確認してください。
+
+## 記事の追加
+
+データベースを読み、記事を表示できるようになりました。今度は、新しい投稿が
+できるようにしてみましょう。
+
+まず、 `ArticlesController` の中に、 `add()` アクションを作ります。 :
+
+``` php
+// src/Controller/ArticlesController.php
+
+namespace App\Controller;
+
+use App\Controller\AppController;
+
+class ArticlesController extends AppController
+{
+    public function initialize(): void
+    {
+        parent::initialize();
+
+        $this->loadComponent('Flash'); // Flashコンポーネントを含める
+    }
+
+    public function index()
+    {
+        $this->set('articles', $this->Articles->find()->all());
+    }
+
+    public function view($id)
+    {
+        $article = $this->Articles->get($id);
+        $this->set(compact('article'));
+    }
+
+    public function add()
+    {
+        $article = $this->Articles->newEmptyEntity();
+        if ($this->request->is('post')) {
+            // 3.4.0 より前は $this->request->data() が使われました。
+            $article = $this->Articles->patchEntity($article, $this->request->getData());
+            if ($this->Articles->save($article)) {
+                $this->Flash->success(__('記事が保存されました。'));
+
+                return $this->redirect(['action' => 'index']);
+            }
+            $this->Flash->error(__('記事の保存が出来ませんでした。'));
+        }
+        $this->set('article', $article);
+    }
+}
+```
+
+> [!NOTE]
+> [フラッシュ](../../controllers/components/flash) コンポーネントを使うコントローラーで読み込む必要があります。
+> 必要不可欠なら、 `AppController` で読み込むようにしてください。
+
+`add()` アクションの動作は次のとおりです: もし、リクエストの HTTP メソッドが
+POST なら、Articles モデルを使ってデータの保存を試みます。
+何らかの理由で保存できなかった場合には、単にビューを表示します。
+この時に、ユーザーバリデーションエラーやその他の警告が表示されることになります。
+
+すべての CakePHP のリクエストは `ServerRequest` オブジェクトに格納されており、
+`$this->request` でアクセスできます。リクエストオブジェクトには、受信したリクエストに
+関するいろんな情報が含まれているので、アプリケーションのフローの制御に利用できます。今回は、
+リクエストが HTTP POST かどうかの確認に `Cake\Http\ServerRequest::is()` メソッドを
+使用しています。
+
+ユーザーがフォームを使ってデータを POST した場合、その情報は、 `$this->request->getData()`
+(CakePHP v3.3 以前の場合、 `$this->request->data()` )
+の中に入ってきます。 `pr()` や `debug()` を使うと、
+内容を画面に表示させて、確認することができます。
+
+FlashComponent の `success()` および `error()` メソッドを使って
+セッション変数にメッセージをセットします。これらのメソッドは PHP の [マジックメソッド](https://php.net/manual/en/language.oop5.overloading.php#object.call) を利用しています。
+Flash メッセージはリダイレクト後のページに表示されます。
+レイアウトでは `<?= $this->Flash->render() ?>` を用いてメッセージを表示し、
+対応するセッション変数を削除します。コントローラーの `Cake\Controller\Controller::redirect`
+関数は別の URL にリダイレクトを行います。 `['action' => 'index']` パラメーターは
+/articles、つまり articles コントローラーの index アクションを表す URL に解釈されます。
+多くの CakePHP の関数で指定できるURLのフォーマットについては、
+[API](https://api.cakephp.org) の `Cake\Routing\Router::url()`
+関数を参考にすることができます。
+
+`save()` メソッドを呼ぶと、バリデーションエラーがチェックされ、もしエラーがある場合には
+保存動作を中止します。これらのエラーがどのように扱われるのかは次のセクションで見てみましょう。
+
+## データのバリデーション
+
+CakePHP はフォームの入力バリデーションの退屈さを取り除くのに大いに役立ちます。
+みんな、延々と続くフォームとそのバリデーションルーチンのコーディングは好まないでしょう。
+CakePHP を使うと、その作業を簡単、高速に片付けることができます。
+
+バリデーションの機能を活用するためには、ビューの中で CakePHP の [Form](../../views/helpers/form) を
+使う必要があります。 `Cake\View\Helper\FormHelper` はデフォルトで、
+すべてのビューの中で `$this->Form` としてアクセスできるようになっています。
+
+add のビューは次のようなものになります。
+
+``` php
+<!-- File: templates/Articles/add.php -->
+
+<h1>Add Article</h1>
+<?php
+    echo $this->Form->create($article);
+    echo $this->Form->control('title');
+    echo $this->Form->control('body', ['rows' => '3']);
+    echo $this->Form->button(__('Save Article'));
+    echo $this->Form->end();
+?>
+```
+
+ここで、FormHelper を使って、HTML フォームの開始タグを生成しています。
+`$this->Form->create()` が生成した HTML は次のようになります。
+
+``` html
+<form method="post" action="/articles/add">
+```
+
+`create()` にパラメーターを渡さないで呼ぶと、現在のコントローラーの add() アクション
+(または `id` がフォームデータに含まれる場合 `edit()` アクション) に、
+POST で送るフォームを構築している、と解釈されます。
+
+`$this->Form->control()` メソッドは、同名のフォーム要素を作成するのに使われています。
+最初のパラメーターは、どのフィールドに対応しているのかを CakePHP に教えます。
+２番目のパラメーターは、様々なオプションの配列を指定することができます。
+- この例では、textarea の列の数を指定しています。
+ここではちょっとした内観的で自動的な手法が使われています。
+`control()` は、指定されたモデルのフィールドに基づいて、異なるフォーム要素を出力します。
+
+`$this->Form->end()` の呼び出しで、フォームの終了部分が出力されます。
+hidden の input 要素の出力においては、CSRF/フォーム改ざん防止が有効です。
+
+さて少し戻って、 `templates/Articles/index.php` のビューで「Add Article」というリンクを
+新しく表示するように編集しましょう。 `<table>` の前に、以下の行を追加してください。 :
+
+``` php
+<?= $this->Html->link('Add Article', ['action' => 'add']) ?>
+```
+
+バリデーション要件について、どうやって CakePHP に指示するのだろう、と思ったかもしれません。
+バリデーションのルールは、モデルの中で定義することができます。
+Article モデルを見直して、幾つか修正してみましょう。 :
+
+``` php
+// src/Model/Table/ArticlesTable.php
+
+namespace App\Model\Table;
+
+use Cake\ORM\Table;
+use Cake\Validation\Validator;
+
+class ArticlesTable extends Table
+{
+    public function initialize(array $config): void
+    {
+        $this->addBehavior('Timestamp');
+    }
+
+    public function validationDefault(Validator $validator): Validator
+    {
+        $validator
+            ->notEmptyString('title')
+            ->requirePresence('title', 'create')
+            ->notEmptyString('body')
+            ->requirePresence('body', 'create');
+
+        return $validator;
+    }
+}
+```
+
+`validationDefault()` メソッドを使って `save()` メソッドが呼ばれた時に、
+どうやってバリデートするかを CakePHP に教えます。ここでは、本文とタイトルのフィールドが、
+空ではいけない、そして作成及び編集の際にどちらも必要であるということを設定しています。
+CakePHP のバリデーションエンジンは強力で、
+組み込みのルールがいろいろあります (クレジットカード番号、メールアドレスなど）。
+また柔軟に、独自ルールを作って設定することもできます。この設定に関する詳細は、
+[バリデーション](../../core-libraries/validation) を参照してください。
+
+バリデーションルールを書き込んだので、アプリケーションを動作させて、タイトルと本文を
+空にしたまま、記事を投稿してみてください。 `Cake\View\Helper\FormHelper::control()`
+メソッドを使ってフォーム要素を作成したので、バリデーションエラーのメッセージが自動的に表示されます。
+
+## 投稿記事の編集
+
+それではさっそく投稿記事の編集ができるように作業をしましょう。
+もう CakePHP プロのあなたは、パターンを見つけ出したでしょうか。
+アクションをつくり、それからビューを作る、というパターンです。
+`ArticlesController` の `edit()` アクションはこんな形になります。 :
+
+``` php
+// src/Controller/ArticlesController.php
+
+public function edit($id = null)
+{
+    $article = $this->Articles->get($id);
+    if ($this->request->is(['post', 'put'])) {
+        // 3.4.0 より前は $this->request->data() が使われました。
+        $this->Articles->patchEntity($article, $this->request->getData());
+        if ($this->Articles->save($article)) {
+            $this->Flash->success(__('記事が更新されました。'));
+
+            return $this->redirect(['action' => 'index']);
+        }
+        $this->Flash->error(__('記事の更新が出来ませんでした。'));
+    }
+
+    $this->set('article', $article);
+}
+```
+
+このアクションではまず、ユーザーが実在するレコードにアクセスしようとしていることを確認します。
+もし `$id` パラメーターが渡されてないか、ポストが存在しない場合、
+`NotFoundException` を送出して CakePHP の ErrorHandler に処理を委ねます。
+
+次に、リクエストが POST か PUT であるかをチェックします。もしリクエストが POST か PUT なら、
+`patchEntity()` メソッドを用いてPOST データを記事エンティティーに更新します。
+最終的にテーブルオブジェクトを用いて、エンティティーを保存したり、退けてバリデーションエラーを表示したりします。
+
+edit ビューは以下のようになるでしょう。
+
+``` php
+<!-- File: templates/Articles/edit.php -->
+
+<h1>Edit Article</h1>
+<?php
+    echo $this->Form->create($article);
+    echo $this->Form->control('title');
+    echo $this->Form->control('body', ['rows' => '3']);
+    echo $this->Form->button(__('Save Article'));
+    echo $this->Form->end();
+?>
+```
+
+（値が入力されている場合、）このビューは、編集フォームを出力します。
+必要であれば、バリデーションのエラーメッセージも表示します。
+
+`save()` が呼び出された時、エンティティーの内容によって
+CakePHP は挿入あるいは更新のどちらを生成するかを決定します。
+
+これで、特定の記事をアップデートするためのリンクを index ビューに付けることができます。
+
+``` php
+<!-- File: templates/Articles/index.php  (edit links added) -->
+
+<h1>Blog articles</h1>
+<p><?= $this->Html->link("Add Article", ['action' => 'add']) ?></p>
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Title</th>
+        <th>Created</th>
+        <th>Action</th>
+    </tr>
+
+<!-- $articles クエリーオブジェクトをループして、投稿記事の情報を表示 -->
+
+<?php foreach ($articles as $article): ?>
+    <tr>
+        <td><?= $article->id ?></td>
+        <td>
+            <?= $this->Html->link($article->title, ['action' => 'view', $article->id]) ?>
+        </td>
+        <td>
+            <?= $article->created->format(DATE_RFC850) ?>
+        </td>
+        <td>
+            <?= $this->Html->link('Edit', ['action' => 'edit', $article->id]) ?>
+        </td>
+    </tr>
+<?php endforeach; ?>
+
+</table>
+```
+
+## 投稿記事の削除
+
+次に、ユーザーが投稿記事を削除できるようにする機能を作りましょう。
+`ArticlesController` の `delete()` アクションを作るところから始めます。 :
+
+``` php
+// src/Controller/ArticlesController.php
+
+public function delete($id)
+{
+    $this->request->allowMethod(['post', 'delete']);
+
+    $article = $this->Articles->get($id);
+    if ($this->Articles->delete($article)) {
+        $this->Flash->success(__('ID：{0}の記事が削除されました。', h($id)));
+
+        return $this->redirect(['action' => 'index']);
+    }
+}
+```
+
+このロジックは、 `$id` で指定された記事を削除し、 `$this->Flash->success()`
+を使って、ユーザーに確認メッセージを表示し、それから `/articles` にリダイレクトします。
+ユーザーが GET リクエストを用いて削除を試みようとすると、 `allowMethod()` が例外を投げます。
+捕捉されない例外は CakePHP の例外ハンドラーによって捕まえられ、気の利いたエラーページが
+表示されます。多くの組み込み [Exceptions](../../development/errors) があり、アプリケーションが
+生成することを必要とするであろう様々な HTTP エラーを指し示すのに使われます。
+
+ロジックを実行してリダイレクトするので、このアクションにはビューがありません。
+しかし、index ビューにリンクを付けて、投稿を削除するようにできるでしょう。
+
+``` php
+<!-- File: templates/Articles/index.php (delete links added) -->
+
+<h1>Blog articles</h1>
+<p><?= $this->Html->link('Add Article', ['action' => 'add']) ?></p>
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Title</th>
+        <th>Created</th>
+        <th>Actions</th>
+    </tr>
+
+<!-- ここで $articles クエリーオブジェクトをループして、投稿情報を表示 -->
+
+    <?php foreach ($articles as $article): ?>
+    <tr>
+        <td><?= $article->id ?></td>
+        <td>
+            <?= $this->Html->link($article->title, ['action' => 'view', $article->id]) ?>
+        </td>
+        <td>
+            <?= $article->created->format(DATE_RFC850) ?>
+        </td>
+        <td>
+            <?= $this->Form->postLink(
+                'Delete',
+                ['action' => 'delete', $article->id],
+                ['confirm' => 'Are you sure?'])
+            ?>
+            <?= $this->Html->link('Edit', ['action' => 'edit', $article->id]) ?>
+        </td>
+    </tr>
+    <?php endforeach; ?>
+
+</table>
+```
+
+`Cake\View\Helper\FormHelper::postLink()` を使うと、投稿記事の削除を行う POST
+リクエストをするための JavaScript を使うリンクが生成されます。
+
+> [!WARNING]
+> ウェブクローラーが不意にコンテンツ全てを削除できてしまうので、
+> GETリクエストを用いたコンテンツの削除を許可することは危険です。
+
+> [!NOTE]
+> このビューコードは `FormHelper` を使い、削除する前に、
+> JavaScript による確認ダイアログでユーザーに確認します。
+
+## ルーティング(*Routes*)
+
+CakePHP のデフォルトのルーティングの動作で十分だという人もいます。しかし、ユーザーフレンドリーで
+一般の検索エンジンに対応できるような操作に関心のある開発者であれば、CakePHP の中で、
+URL がどのように特定の関数の呼び出しにマップされるのかを理解したいと思うはずです。
+このチュートリアルでは、routes を簡単に変える方法について扱います。
+
+ルーティングテクニックの応用に関する情報は、 [Routes Configuration](../../development/routing#routes-configuration) を見てください。
+
+今のところ、ユーザーがサイト (たとえば、 <http://www.example.com>) を見に来ると、
+CakePHP は `PagesController` に接続し、「home」というビューを表示するようになっています。
+ではこれを、ルーティングルールを作成して ArticlesController に行くようにしてみましょう。
+
+CakePHP のルーティングは、 **config/routes.php** の中にあります。
+デフォルトのトップページのルートをコメントアウトするか、削除します。
+この行です。
+
+``` php
+$routes->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
+```
+
+この行は、「/」という URL をデフォルトの CakePHP のホームページに接続します。
+これを、自分のコントローラーに接続させるために、次のような行を追加してください。
+
+``` php
+$builder->connect('/', ['controller' => 'Articles', 'action' => 'index']);
+```
+
+これで、「/」でリクエストしてきたユーザーを、ArticlesController の index() アクションに
+接続させることができます。
+
+> [!NOTE]
+> CakePHP は「リバースルーティング」も利用します。
+> 上記のルートが定義されている状態で、配列を期待する関数に
+> `['controller' => 'Articles', 'action' => 'index']`
+> を渡すと、結果のURLは「/」になります。
+> つまり、URL の指定に常に配列を使うということが良策となります。
+> これによりルートが URL の行き先を定義する意味を持ち、
+> リンクが確実に同じ場所を指し示すようになります。
+
+## まとめ
+
+気をつけてほしいのは、このチュートリアルは、非常に基本的な点しか扱っていない、ということです。
+CakePHP には、もっともっと *多くの* 機能があります。シンプルなチュートリアルにするために、
+それらはここでは扱いませんでした。マニュアルの残りの部分をガイドとして使い、
+もっと機能豊かなアプリケーションを作成してください。
+
+基本的なアプリケーションの作成が終わったので [ブログチュートリアル - パート3](../../tutorials-and-examples/blog/part-three)
+に進むか、自分のプロジェクトを始めてください。CakePHP についてさらに学ぶために
+[CakePHP の利用](../../topics) や [API](https://api.cakephp.org) を使いましょう。
+
+もし困ったときは、いろんな方法で助けを得ることができます。
+[情報の探し方](../../intro/where-to-get-help) を見てみてください。
+CakePHP にようこそ！
+
+### お勧めの参考文献
+
+CakePHP を学習する人が次に学びたいと思う共通のタスクがいくつかあります。
+
+1.  [View Layouts](../../views#view-layouts): ウェブサイトのレイアウトをカスタマイズする
+2.  [View Elements](../../views#view-elements): ビューのスニペットを読み込んで再利用する
+3.  [Bake でコード生成](../../bake/usage): 基本的な CRUD コードの生成
+4.  [シンプルな認証と認可のアプリケーション](../../tutorials-and-examples/blog-auth-example/auth): ユーザーの認証と承認のチュートリアル

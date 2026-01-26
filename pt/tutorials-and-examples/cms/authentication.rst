@@ -1,4 +1,0 @@
-CMS Tutorial - Authentication
-#############################
-
-TODO

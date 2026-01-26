@@ -1,0 +1,45 @@
+# Time
+
+`class` Cake\\View\\Helper\\**TimeHelper**(View $view, array $config = [])
+
+TimeHelper には時間に関係のある情報を手早く処理するための2つの役割があります。:
+
+1.  時間文字列のフォーマットを整えることができます。
+2.  時間の判定ができます。
+
+## ヘルパーの使い方
+
+TimeHelper の一般的な使い道は、ユーザーのタイムゾーンに合わせて日付と時刻を
+補正することです。それでは掲示板を例にとりましょう。あなたの掲示板には
+多くのユーザーがいて、世界中のどの地域からでもいつでもメッセージを投稿できます。
+時間を管理する簡単な方法は、すべての日付と時刻を GMT+0 または UTC
+として保存することです。
+アプリケーションのタイムゾーンを確実に GMT+0 に設定するために
+**config/bootstrap.php** の `date_default_timezone_set('UTC');`
+という記述のコメントアウトを解除してください。
+
+次にタイムゾーンのフィールドをユーザーのテーブルに追加して、
+ユーザーがタイムゾーンを設定できるように 必要な修正を加えます。
+これでログインしているユーザーのタイムゾーンが分かるようになり、
+TimeHelper を使って投稿日時を補正することができます。 :
+
+``` php
+echo $this->Time->format(
+  $post->created,
+  \IntlDateFormatter::FULL,
+  false,
+  $user->time_zone
+);
+// GMT+0 のユーザーには 'Saturday, August 22, 2011 at 11:53:00 PM GMT' と
+// 表示されます。
+// GMT-8 のユーザーには 'Saturday, August 22, 2011 at 03:53 PM GMT-8:00' と
+// 表示されます。
+```
+
+TimeHelper のほとんどの機能は、古いバージョンの CakePHP からアップグレードしている
+アプリケーションのための下位互換性のあるインターフェースとして意図されています。
+なぜなら、 ORM は `timestamp` 型と `datetime` 型の列ごとに
+`Cake\I18n\Time` インスタンスを返すので、そのメソッドを使用して
+ほとんどのタスクを実行できるからです。例えば、受け入れられた書式指定文字列について
+読むには、 [Cake\I18n\Time::i18nFormat()](https://api.cakephp.org/4.x/class-Cake.I18n.Time.html#i18nFormat())
+メソッドを見てください。

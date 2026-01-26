@@ -1,0 +1,34 @@
+# Running Shells as Cron Jobs
+
+A common thing to do with a shell is making it run as a cronjob to
+clean up the database once in a while or send newsletters. This is
+trivial to setup, for example:
+
+``` text
+*/5  *    *    *    *  cd /full/path/to/root && bin/cake myshell myparam
+# *    *    *    *    *  command to execute
+# │    │    │    │    │
+# │    │    │    │    │
+# │    │    │    │    \───── day of week (0 - 6) (0 to 6 are Sunday to Saturday,
+# |    |    |    |           or use names)
+# │    │    │    \────────── month (1 - 12)
+# │    │    \─────────────── day of month (1 - 31)
+# │    \──────────────────── hour (0 - 23)
+# \───────────────────────── min (0 - 59)
+```
+
+You can see more info here: <https://en.wikipedia.org/wiki/Cron>
+
+> [!TIP]
+> Use `-q` (or <span class="title-ref">--quiet</span>) to silence any output for cronjobs.
+
+## Cron Jobs on Shared Hosting
+
+On some shared hostings `cd /full/path/to/root && bin/cake mycommand myparam`
+might not work. Instead you can use
+`php /full/path/to/root/bin/cake.php mycommand myparam`.
+
+> [!NOTE]
+> register_argc_argv has to be turned on by including `register_argc_argv = 1` in your php.ini. If you cannot change register_argc_argv globally,
+> you can tell the cron job to use your own configuration by
+> specifying it with `-d register_argc_argv=1` parameter. Example: `php -d register_argc_argv=1 /full/path/to/root/bin/cake.php myshell myparam`
