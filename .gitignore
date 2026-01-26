@@ -1,8 +1,10 @@
 # Project specific files #
 ##########################
-*.pyc
-/build
-*/_build/*
+.vitepress/dist
+.vitepress/cache
+.vitepress/.temp
+/node_modules/
+.temp/
 
 # IDE and editor specific files #
 #################################
@@ -10,6 +12,7 @@
 .idea
 .project
 .vscode
+.zed
 
 # OS generated files #
 ######################
