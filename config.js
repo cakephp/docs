@@ -28,7 +28,7 @@ export default {
       { icon: "github", link: "https://github.com/cakephp/cakephp" },
     ],
     editLink: {
-      pattern: "https://github.com/cakephp/docs-md/edit/5.next/docs/:path",
+      pattern: "https://github.com/cakephp/docs/edit/5.next/docs/:path",
       text: "Edit this page on GitHub",
     },
     sidebar: toc_en,
