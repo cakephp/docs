@@ -1,6 +1,12 @@
 Folder & File
 #############
 
+.. deprecated:: 4.0
+    ``File`` クラスと ``Folder`` は バージョン5.0で削除されます。 
+    ``SplFileInfo`` や ``SplFileObject`` などの SPL クラス、
+    および、``RecursiveDirectoryIterator``, ``RecursiveRegexIterator`` などのような
+    イテレータクラスを使用してください。
+
 .. php:namespace:: Cake\Filesystem
 
 Folder と File ユーティリティは、ファイルの読み書きやフォルダー内のファイル名一覧の取得、

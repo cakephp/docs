@@ -29,23 +29,11 @@ In addition to adding to the end of the trail, you can do a variety of operation
         ['controller' => 'products', 'action' => 'index']
     );
 
-    // Add multiple crumbs at the end of the trail
-    $this->Breadcrumbs->add([
-        ['title' => 'Products', 'url' => ['controller' => 'products', 'action' => 'index']],
-        ['title' => 'Product name', 'url' => ['controller' => 'products', 'action' => 'view', 1234]],
-    ]);
-
     // Prepended crumbs will be put at the top of the list
     $this->Breadcrumbs->prepend(
         'Products',
         ['controller' => 'products', 'action' => 'index']
     );
-
-    // Prepend multiple crumbs at the top of the trail, in the order given
-    $this->Breadcrumbs->prepend([
-        ['title' => 'Products', 'url' => ['controller' => 'products', 'action' => 'index']],
-        ['title' => 'Product name', 'url' => ['controller' => 'products', 'action' => 'view', 1234]],
-    ]);
 
     // Insert in a specific slot. If the slot is out of
     // bounds, an exception will be raised.
@@ -59,8 +47,8 @@ In addition to adding to the end of the trail, you can do a variety of operation
     // If the named crumb title cannot be found,
     // an exception will be raised.
     $this->Breadcrumbs->insertBefore(
-        'A product name', // the title of the crumb to insert before
         'Products',
+        'A product name 1', // the title of the crumb to insert before        
         ['controller' => 'products', 'action' => 'index']
     );
 
@@ -68,10 +56,41 @@ In addition to adding to the end of the trail, you can do a variety of operation
     // If the named crumb title cannot be found,
     // an exception will be raised.
     $this->Breadcrumbs->insertAfter(
-        'A product name', // the title of the crumb to insert after
         'Products',
+        'A product name 2', // the title of the crumb to insert after        
         ['controller' => 'products', 'action' => 'index']
     );
+
+Adding Multiple Crumbs
+----------------------
+
+.. versionadded:: 5.3
+
+You can add or prepend multiple crumbs at once using ``addMany()`` and
+``prependMany()``. These methods accept an array of crumbs and optional shared
+options that apply to all crumbs::
+
+    // Add multiple crumbs at the end of the trail
+    $this->Breadcrumbs->addMany([
+        ['title' => 'Products', 'url' => ['controller' => 'products', 'action' => 'index']],
+        ['title' => 'Product name', 'url' => ['controller' => 'products', 'action' => 'view', 1234]],
+    ]);
+
+    // Prepend multiple crumbs at the top of the trail, in the order given
+    $this->Breadcrumbs->prependMany([
+        ['title' => 'Products', 'url' => ['controller' => 'products', 'action' => 'index']],
+        ['title' => 'Product name', 'url' => ['controller' => 'products', 'action' => 'view', 1234]],
+    ]);
+
+    // Add multiple crumbs with shared options applied to all
+    $this->Breadcrumbs->addMany([
+        ['title' => 'Home', 'url' => '/'],
+        ['title' => 'Products', 'url' => '/products'],
+        ['title' => 'Category'],
+    ], ['class' => 'breadcrumb-item']);
+
+The shared options are merged with any options specified on individual crumbs,
+with individual crumb options taking precedence.
 
 Using these methods gives you the ability to work with CakePHP's 2-step
 rendering process. Since templates and layouts are rendered from the inside out
@@ -190,7 +209,7 @@ when you want to transform the crumbs and overwrite the list::
         return $crumb;
     })->toArray();
 
-    $this->Breadcrumbs->reset()->add($crumbs);
+    $this->Breadcrumbs->reset()->addMany($crumbs);
 
 .. meta::
     :title lang=en: BreadcrumbsHelper

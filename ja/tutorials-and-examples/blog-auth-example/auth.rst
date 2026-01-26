@@ -121,7 +121,7 @@ composerを使ってAuthenticationプラグインをインストールします�
 
 .. code-block:: console
 
-    composer require "cakephp/authentication:^2.0"
+    composer require "cakephp/authentication:^3.0"
 
 
 パスワードハッシュの追加
@@ -134,7 +134,7 @@ composerを使ってAuthenticationプラグインをインストールします�
     // src/Model/Entity/User.php
     namespace App\Model\Entity;
 
-    use Cake\Auth\DefaultPasswordHasher;
+    use Authentication\PasswordHasher\DefaultPasswordHasher;
     use Cake\ORM\Entity;
 
     class User extends Entity
@@ -361,7 +361,6 @@ composerを使ってAuthenticationプラグインをインストールします�
 ------------------------------------
 
 #. :doc:`/bake/usage` 基本的な CRUD コードの生成について
-#. :doc:`/controllers/components/authentication`: ユーザーの登録とログインについて
 
 .. meta::
     :title lang=ja: Simple Authentication Application

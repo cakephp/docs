@@ -1179,8 +1179,8 @@ Here are some common CORS configurations:
                 ->allowCredentials()
                 ->maxAge(86400)
                 ->build();
-            
-            return $this->response;
+
+            $event->setResult($this->response);
         }
     }
 
@@ -1233,7 +1233,7 @@ For consistent CORS handling across your application, create a middleware::
                     ->allowCredentials()
                     ->maxAge(3600)
                     ->build();
-                
+
                 return $response;
             }
 

@@ -653,6 +653,185 @@ After executing those lines, your result should look similar to this::
         ...
     ]
 
+.. _dto-projection:
+
+Projecting Results Into DTOs
+----------------------------
+
+In addition to fetching results as Entity objects or arrays, you can project
+query results directly into Data Transfer Objects (DTOs). DTOs offer several
+advantages:
+
+- **Memory efficiency** - DTOs consume approximately 3x less memory than Entity
+  objects, making them ideal for large result sets.
+- **Type safety** - DTOs provide strong typing and IDE autocompletion support,
+  unlike plain arrays.
+- **Decoupled serialization** - DTOs let you separate your API response
+  structure from your database schema, making it easier to version APIs or
+  expose only specific fields.
+- **Read-only data** - Using ``readonly`` classes ensures data integrity and
+  makes your intent clear.
+
+The ``projectAs()`` method allows you to specify a DTO class that results will
+be hydrated into::
+
+    // Define a DTO class
+    readonly class ArticleDto
+    {
+        public function __construct(
+            public int $id,
+            public string $title,
+            public ?string $body = null,
+        ) {
+        }
+    }
+
+    // Use projectAs() to hydrate results into DTOs
+    $articles = $articlesTable->find()
+        ->select(['id', 'title', 'body'])
+        ->projectAs(ArticleDto::class)
+        ->toArray();
+
+DTO Creation Methods
+^^^^^^^^^^^^^^^^^^^^
+
+CakePHP supports two approaches for creating DTOs:
+
+**Reflection-based constructor mapping** - CakePHP will use reflection to map
+database columns to constructor parameters::
+
+    readonly class ArticleDto
+    {
+        public function __construct(
+            public int $id,
+            public string $title,
+            public ?AuthorDto $author = null,
+        ) {
+        }
+    }
+
+**Factory method pattern** - If your DTO class has a ``createFromArray()``
+static method, CakePHP will use that instead::
+
+    class ArticleDto
+    {
+        public int $id;
+        public string $title;
+
+        public static function createFromArray(
+            array $data,
+            bool $ignoreMissing = false
+        ): self {
+            $dto = new self();
+            $dto->id = $data['id'];
+            $dto->title = $data['title'];
+
+            return $dto;
+        }
+    }
+
+The factory method approach is approximately 2.5x faster than reflection-based
+hydration.
+
+Nested Association DTOs
+^^^^^^^^^^^^^^^^^^^^^^^
+
+You can project associated data into nested DTOs. Use the ``#[CollectionOf]``
+attribute to specify the type of elements in array properties::
+
+    use Cake\ORM\Attribute\CollectionOf;
+
+    readonly class ArticleDto
+    {
+        public function __construct(
+            public int $id,
+            public string $title,
+            public ?AuthorDto $author = null,
+            #[CollectionOf(CommentDto::class)]
+            public array $comments = [],
+        ) {
+        }
+    }
+
+    readonly class AuthorDto
+    {
+        public function __construct(
+            public int $id,
+            public string $name,
+        ) {
+        }
+    }
+
+    readonly class CommentDto
+    {
+        public function __construct(
+            public int $id,
+            public string $body,
+        ) {
+        }
+    }
+
+    // Fetch articles with associations projected into DTOs
+    $articles = $articlesTable->find()
+        ->contain(['Authors', 'Comments'])
+        ->projectAs(ArticleDto::class)
+        ->toArray();
+
+Using DTOs for API Responses
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+DTOs are particularly useful for building API responses where you want to
+control the output structure independently from your database schema. You can
+define a DTO that represents your API contract and include custom serialization
+logic::
+
+    readonly class ArticleApiResponse
+    {
+        public function __construct(
+            public int $id,
+            public string $title,
+            public string $slug,
+            public string $authorName,
+            public string $publishedAt,
+        ) {
+        }
+
+        public static function createFromArray(
+            array $data,
+            bool $ignoreMissing = false
+        ): self {
+            return new self(
+                id: $data['id'],
+                title: $data['title'],
+                slug: Inflector::slug($data['title']),
+                authorName: $data['author']['name'] ?? 'Unknown',
+                publishedAt: $data['created']->format('c'),
+            );
+        }
+    }
+
+    // In your controller
+    $articles = $this->Articles->find()
+        ->contain(['Authors'])
+        ->projectAs(ArticleApiResponse::class)
+        ->toArray();
+
+    return $this->response->withType('application/json')
+        ->withStringBody(json_encode(['articles' => $articles]));
+
+This approach keeps your API response format decoupled from your database
+schema, making it easier to evolve your API without changing your data model.
+
+.. note::
+
+    DTO projection is applied as the final formatting step, after all other
+    formatters and behaviors have processed the results. This ensures
+    compatibility with existing behavior formatters while still providing the
+    benefits of DTOs.
+
+.. versionadded:: 5.3.0
+    The ``projectAs()`` method and ``#[CollectionOf]`` attribute were added.
+
 .. _format-results:
 
 Adding Calculated Fields

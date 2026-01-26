@@ -265,7 +265,7 @@ data from paginated services::
 
     $allPagesItems = $items->toList();
 
-You can use the ``yield`` keyword inside ``unfold()``to return as
+You can use the ``yield`` keyword inside ``unfold()`` to return as
 many elements for each item in the collection as you may need::
 
     $oddNumbers = [1, 3, 5, 7];
