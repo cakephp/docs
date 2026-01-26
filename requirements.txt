@@ -1,4 +1,0 @@
-docutils==0.20.1
-sphinx==7.0.1
-sphinxcontrib-phpdomain==0.11.1
-cakephpsphinx>=0.1.59,<1.0

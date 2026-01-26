@@ -1,4 +1,0 @@
-CMS Authorization
-#################
-
-TODO
