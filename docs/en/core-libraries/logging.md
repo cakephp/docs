@@ -452,11 +452,11 @@ configured.
 
 `static` Cake\\Log\\Log::**setConfig**($key, $config)
 
-param string \$name  
+param string \$name
 Name for the logger being connected, used
 to drop a logger later on.
 
-param array \$config  
+param array \$config
 Array of configuration information and
 constructor arguments for the logger.
 
@@ -467,7 +467,7 @@ more information.
 
 `static` Cake\\Log\\Log::**configured**()
 
-returns  
+returns
 An array of configured loggers.
 
 Get the names of the configured loggers.
@@ -476,7 +476,7 @@ Get the names of the configured loggers.
 
 `static` Cake\\Log\\Log::**drop**($name)
 
-param string \$name  
+param string \$name
 Name of the logger you wish to no longer receive
 messages.
 
@@ -501,35 +501,35 @@ level configuration.
 The following convenience methods were added to log <span class="title-ref">\$message</span> with the
 appropriate log level.
 
-### Log::emergency()
+#### Log::emergency()
 
 `static` Cake\\Log\\Log::**emergency**($message, $scope = [])
 
-### Log::alert()
+#### Log::alert()
 
 `static` Cake\\Log\\Log::**alert**($message, $scope = [])
 
-### Log::critical()
+#### Log::critical()
 
 `static` Cake\\Log\\Log::**critical**($message, $scope = [])
 
-### Log::error()
+#### Log::error()
 
 `static` Cake\\Log\\Log::**error**($message, $scope = [])
 
-### Log::warning()
+#### Log::warning()
 
 `static` Cake\\Log\\Log::**warning**($message, $scope = [])
 
-### Log::notice()
+#### Log::notice()
 
 `static` Cake\\Log\\Log::**notice**($message, $scope = [])
 
-### Log::info()
+#### Log::info()
 
 `static` Cake\\Log\\Log::**info**($message, $scope = [])
 
-### Log::debug()
+#### Log::debug()
 
 `static` Cake\\Log\\Log::**debug**($message, $scope = [])
 
