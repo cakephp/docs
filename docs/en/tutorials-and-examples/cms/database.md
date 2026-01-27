@@ -186,6 +186,10 @@ class ArticlesSeed extends BaseSeed
 
 :::
 
+::: warning Password Security
+The seed data above stores passwords in **plain text** for initial setup purposes only. This is a **security risk** and should **never be used in production**. We will properly implement password hashing when we add [authentication](../../tutorials-and-examples/cms/authentication) later in this tutorial.
+:::
+
 Run the seeders:
 
 ```bash
