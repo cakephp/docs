@@ -342,7 +342,7 @@ class ArticlesController extends AppController
     {
         $articles = $this->Articles->find('all')
             ->where(['published' => true])
-            ->order(['created' => 'DESC']);
+            ->orderBy(['created' => 'DESC']);
         
         $this->set(compact('articles'));
     }
@@ -590,7 +590,7 @@ $popularArticles = $this->Articles->find()
         return $q->where(['Tags.name IN' => ['PHP', 'CakePHP']]);
     })
     ->where(['Articles.published' => true])
-    ->order(['Articles.view_count' => 'DESC'])
+    ->orderBy(['Articles.view_count' => 'DESC'])
     ->limit(10);
 ```
 

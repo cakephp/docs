@@ -74,7 +74,7 @@ Instead of writing the SQL manually, you can use the query builder:
 $results = $connection
     ->selectQuery('*', 'articles')
     ->where(['created >' => new DateTime('1 day ago')], ['created' => 'datetime'])
-    ->order(['title' => 'DESC'])
+    ->orderBy(['title' => 'DESC'])
     ->execute()
     ->fetchAll('assoc');
 ```
