@@ -47,12 +47,16 @@ elements, you can use attribute matching with certain methods. They are `extract
 | `[id<=2]` | Match elements with id less than or equal to 2. |
 | `[text=/.../]` | Match elements that have values matching the regular expression inside `...`. |
 
+### Hash::get()
+
 `static` Cake\\Utility\\Hash::**get**(array|ArrayAccess $data, $path, $default = null)
 
 `get()` is a simplified version of `extract()`, it only supports direct
 path expressions. Paths with `{n}`, `{s}`, `{*}` or matchers are not
 supported. Use `get()` when you want exactly one value out of an array. If
 a matching path is not found the default value will be returned.
+
+### Hash::extract()
 
 `static` Cake\\Utility\\Hash::**extract**(array|ArrayAccess $data, $path)
 
@@ -124,9 +128,11 @@ $result = Hash::insert($data, '{n}[up].Item[id=4].new', 9);
 */
 ```
 
+### Hash::remove()
+
 `static` Cake\\Utility\\Hash::**remove**(array $data, $path)
 
-Removes all elements from an array that match `$path`. :
+Removes all elements from an array that match `$path`:
 
 ``` php
 $a = [
@@ -167,13 +173,15 @@ $result = Hash::remove($data, '{n}[clear].Item[id=4]');
 */
 ```
 
+### Hash::combine()
+
 `static` Cake\\Utility\\Hash::**combine**(array $data, $keyPath, $valuePath = null, $groupPath = null)
 
 Creates an associative array using a `$keyPath` as the path to build its keys,
 and optionally `$valuePath` as path to get the values. If `$valuePath` is not
 specified, or doesn't match anything, values will be initialized to null.
 You can optionally group the values by what is obtained when following the
-path specified in `$groupPath`. :
+path specified in `$groupPath`:
 
 ``` php
 $a = [
@@ -312,6 +320,8 @@ $result = Hash::combine(
 */
 ```
 
+### Hash::format()
+
 `static` Cake\\Utility\\Hash::**format**(array $data, array $paths, $format)
 
 Returns a series of values extracted from an array, formatted with a
@@ -367,6 +377,8 @@ $res = Hash::format($data, ['{n}.Person.first_name', '{n}.Person.something'], '%
 */
 ```
 
+### Hash::contains()
+
 `static` Cake\\Utility\\Hash::**contains**(array $data, array $needle)
 
 Determines if one Hash or array contains the exact keys and values
@@ -391,6 +403,8 @@ $result = Hash::contains($a, $b);
 $result = Hash::contains($b, $a);
 // true
 ```
+
+### Hash::check()
 
 `static` Cake\\Utility\\Hash::**check**(array $data, string $path = null)
 
@@ -430,6 +444,8 @@ $result = Hash::check($set, 'My Index 1.First.Seconds.Third.Fourth');
 // $result == false
 ```
 
+### Hash::filter()
+
 `static` Cake\\Utility\\Hash::**filter**(array $data, $callback = ['Hash', 'filter'])
 
 Filters empty elements out of array, excluding '0'. You can also supply a
@@ -459,6 +475,8 @@ $res = Hash::filter($data);
     ]
 */
 ```
+
+### Hash::flatten()
 
 `static` Cake\\Utility\\Hash::**flatten**(array $data, string $separator = '.')
 
@@ -490,6 +508,8 @@ $res = Hash::flatten($arr);
 */
 ```
 
+### Hash::expand()
+
 `static` Cake\\Utility\\Hash::**expand**(array $data, string $separator = '.')
 
 Expands an array that was previously flattened with
@@ -520,6 +540,8 @@ $res = Hash::expand($data);
 ];
 */
 ```
+
+### Hash::merge()
 
 `static` Cake\\Utility\\Hash::**merge**(array $data, array $merge[, array $n])
 
@@ -572,6 +594,8 @@ $res = Hash::merge($array, $arrayB, $arrayC, $arrayD);
 */
 ```
 
+### Hash::numeric()
+
 `static` Cake\\Utility\\Hash::**numeric**(array $data)
 
 Checks to see if all the values in the array are numeric:
@@ -586,7 +610,9 @@ $res = Hash::numeric($data);
 // $res is false
 ```
 
-`static` Cake\\Utility\\Hash::**dimensions **(array $data)
+### Hash::dimensions()
+
+`static` Cake\\Utility\\Hash::**dimensions**(array $data)
 
 Counts the dimensions of an array. This method will only
 consider the dimension of the first element in the array:
@@ -613,6 +639,8 @@ $result = Hash::dimensions($data);
 // $result == 2
 ```
 
+### Hash::maxDimensions()
+
 `static` Cake\\Utility\\Hash::**maxDimensions**(array $data)
 
 Similar to `~Hash::dimensions()`, however this method returns,
@@ -627,6 +655,8 @@ $data = ['1' => ['1.1' => '1.1.1'], '2', '3' => ['3.1' => ['3.1.1' => '3.1.1.1']
 $result = Hash::maxDimensions($data);
 // $result == 3
 ```
+
+### Hash::map()
 
 `static` Cake\\Utility\\Hash::**map**(array $data, $path, $function)
 
@@ -645,11 +675,15 @@ public function noop(array $array)
 }
 ```
 
+### Hash::reduce()
+
 `static` Cake\\Utility\\Hash::**reduce**(array $data, $path, $function)
 
 Creates a single value, by extracting `$path`, and reducing the extracted
 results with `$function`. You can use both expression and matching elements
 with this method.
+
+### Hash::apply()
 
 `static` Cake\\Utility\\Hash::**apply**(array $data, $path, $function)
 
@@ -670,6 +704,8 @@ $result = Hash::apply($data, '{n}[booked=true].date', 'array_count_values');
     ]
 */
 ```
+
+### Hash::sort()
 
 `static` Cake\\Utility\\Hash::**sort**(array $data, $path, $dir, $type = 'regular')
 
@@ -707,6 +743,8 @@ can be one of the following values:
 - `natural` for sorting values in a human friendly way. Will
   sort `foo10` below `foo2` as an example.
 
+### Hash::diff()
+
 `static` Cake\\Utility\\Hash::**diff**(array $data, array $compare)
 
 Computes the difference between two arrays:
@@ -731,6 +769,8 @@ $result = Hash::diff($a, $b);
     ]
 */
 ```
+
+### Hash::mergeDiff()
 
 `static` Cake\\Utility\\Hash::**mergeDiff**(array $data, array $compare)
 
@@ -777,6 +817,8 @@ $res = Hash::mergeDiff($array1, $array2);
     ]
 */
 ```
+
+### Hash::normalize()
 
 `static` Cake\\Utility\\Hash::**normalize**(array $data, $assoc = true, $default = null)
 
@@ -832,6 +874,8 @@ $result = Hash::normalize($b);
 ::: info Changed in version 4.5.0
 The `$default` parameter was added.
 :::
+
+### Hash::nest()
 
 `static` Cake\\Utility\\Hash::**nest**(array $data, array $options = [])
 
