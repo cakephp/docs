@@ -116,7 +116,11 @@ when provided a multi-word argument:
 
 ## Creating Plural & Singular Forms
 
+### Inflector::singularize()
+
 `static` Cake\\Utility\\Inflector::**singularize**($singular)
+
+### Inflector::pluralize()
 
 `static` Cake\\Utility\\Inflector::**pluralize**($singular)
 
@@ -142,7 +146,11 @@ echo Inflector::singularize('People');
 
 ## Creating CamelCase and under_scored Forms
 
+### Inflector::camelize()
+
 `static` Cake\\Utility\\Inflector::**camelize**($underscored)
+
+### Inflector::underscore()
 
 `static` Cake\\Utility\\Inflector::**underscore**($camelCase)
 
@@ -162,6 +170,8 @@ underscore.
 
 ## Creating Human Readable Forms
 
+### Inflector::humanize()
+
 `static` Cake\\Utility\\Inflector::**humanize**($underscored)
 
 This method is useful when converting underscored forms into "Title Case" forms
@@ -174,9 +184,15 @@ Inflector::humanize('apple_pie');
 
 ## Creating Table and Class Name Forms
 
+### Inflector::classify()
+
 `static` Cake\\Utility\\Inflector::**classify**($underscored)
 
+### Inflector::dasherize()
+
 `static` Cake\\Utility\\Inflector::**dasherize**($dashed)
+
+### Inflector::tableize()
 
 `static` Cake\\Utility\\Inflector::**tableize**($camelCase)
 
@@ -195,6 +211,8 @@ Inflector::tableize('UserProfileSetting');
 ```
 
 ## Creating Variable Names
+
+### Inflector::variable()
 
 `static` Cake\\Utility\\Inflector::**variable**($underscored)
 
@@ -223,6 +241,8 @@ CakePHP won't recognize your Foci or Fish, you can tell CakePHP about your
 special cases.
 
 ### Loading Custom Inflections
+
+### Inflector::rules()
 
 `static` Cake\\Utility\\Inflector::**rules**($type, $rules, $reset = false)
 

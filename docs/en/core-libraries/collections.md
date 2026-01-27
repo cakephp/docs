@@ -68,6 +68,8 @@ application as well.
 
 ## Iterating
 
+### each()
+
 `method` Cake\\Collection\\Collection::**each**($callback)
 
 Collections can be iterated and/or transformed into new collections with the
@@ -83,6 +85,8 @@ $collection = $collection->each(function ($value, $key) {
 
 The return of `each()` will be the collection object. Each will iterate the
 collection immediately applying the callback to each value in the collection.
+
+### map()
 
 `method` Cake\\Collection\\Collection::**map**($callback)
 
@@ -106,6 +110,8 @@ $result = $new->toArray();
 
 The `map()` method will create a new iterator which lazily creates
 the resulting items when iterated.
+
+### extract()
 
 `method` Cake\\Collection\\Collection::**extract**($path)
 
@@ -180,6 +186,8 @@ we'll be guaranteed to get all values even if there are duplicate keys.
 Unlike `Cake\Utility\Hash::extract()` this method only supports the
 `{*}` wildcard. All other wildcard and attributes matchers are not supported.
 
+### combine()
+
 `method` Cake\\Collection\\Collection::**combine**($keyPath, $valuePath, $groupPath = null)
 
 Collections allow you to create a new collection made from keys and values in
@@ -235,6 +243,8 @@ $combined = (new Collection($entities))->combine(
 ]
 ```
 
+### stopWhen()
+
 `method` Cake\\Collection\\Collection::**stopWhen**(callable $c)
 
 You can stop the iteration at any point using the `stopWhen()` method. Calling
@@ -253,6 +263,8 @@ $new = $collection->stopWhen(function ($value, $key) {
 // $result contains [10, 20];
 $result = $new->toList();
 ```
+
+### unfold()
 
 `method` Cake\\Collection\\Collection::**unfold**(callable $callback)
 
@@ -300,6 +312,8 @@ $new = $collection->unfold(function ($oddNumber) {
 $result = $new->toList();
 ```
 
+### chunk()
+
 `method` Cake\\Collection\\Collection::**chunk**($chunkSize)
 
 When dealing with large amounts of items in a collection, it may make sense to
@@ -329,6 +343,8 @@ $collection->map(function ($article) {
     });
 ```
 
+### chunkWithKeys()
+
 `method` Cake\\Collection\\Collection::**chunkWithKeys**($chunkSize)
 
 Much like `chunk()`, `chunkWithKeys()` allows you to slice up
@@ -354,6 +370,8 @@ $result = $chunked->toList();
 
 ## Filtering
 
+### filter()
+
 `method` Cake\\Collection\\Collection::**filter**($callback)
 
 Collections allow you to filter and create new collections based on
@@ -370,6 +388,8 @@ $guys = $collection->filter(function ($person, $key) {
 });
 ```
 
+### reject()
+
 `method` Cake\\Collection\\Collection::**reject**(callable $c)
 
 The inverse of `filter()` is `reject()`. This method does a negative filter,
@@ -381,6 +401,8 @@ $ladies = $collection->reject(function ($person, $key) {
     return $person->gender === 'male';
 });
 ```
+
+### every()
 
 `method` Cake\\Collection\\Collection::**every**($callback)
 
@@ -394,7 +416,11 @@ $allYoungPeople = $collection->every(function ($person) {
 });
 ```
 
+### any()
+
 `method` Cake\\Collection\\Collection::**any**($callback)
+
+### some()
 
 `method` Cake\\Collection\\Collection::**some**($callback)
 
@@ -411,6 +437,8 @@ $hasYoungPeople = $collection->any(function ($person) {
 > [!NOTE]
 > The `some()` method is an alias of `any()`.
 
+### match()
+
 `method` Cake\\Collection\\Collection::**match**($conditions)
 
 If you need to extract a new collection containing only the elements that
@@ -420,6 +448,8 @@ contain a given set of properties, you should use the `match()` method:
 $collection = new Collection($comments);
 $commentsFromMark = $collection->match(['user.name' => 'Mark']);
 ```
+
+### firstMatch()
 
 `method` Cake\\Collection\\Collection::**firstMatch**($conditions)
 
@@ -441,6 +471,8 @@ for different paths, allowing you to express complex conditions to match
 against.
 
 ## Aggregation
+
+### reduce()
 
 `method` Cake\\Collection\\Collection::**reduce**($callback, $initial)
 
@@ -464,6 +496,8 @@ $allTags = $collection->reduce(function ($accumulated, $article) {
     return array_merge($accumulated, $article->tags);
 }, []);
 ```
+
+### min()
 
 `method` Cake\\Collection\\Collection::**min**(string|callable $callback, $type = SORT_NUMERIC)
 
@@ -490,6 +524,8 @@ $personYoungestChild = $collection->min(function ($person) {
 $personWithYoungestDad = $collection->min('dad.age');
 ```
 
+### max()
+
 `method` Cake\\Collection\\Collection::**max**(string|callable $callback, $type = SORT_NUMERIC)
 
 The same can be applied to the `max()` function, which will return a single
@@ -505,6 +541,8 @@ $personOldestChild = $collection->max(function ($person) {
 
 $personWithOldestDad = $collection->max('dad.age');
 ```
+
+### sumOf()
 
 `method` Cake\\Collection\\Collection::**sumOf**($path = null)
 
@@ -522,6 +560,8 @@ $sumOfChildrenAges = $collection->sumOf(function ($person) {
 $sumOfDadAges = $collection->sumOf('dad.age');
 ```
 
+### avg()
+
 `method` Cake\\Collection\\Collection::**avg**($path = null)
 
 Calculate the average value of the elements in the collection. Optionally
@@ -537,6 +577,8 @@ $items = [
 // $average contains 150
 $average = (new Collection($items))->avg('invoice.total');
 ```
+
+### median()
 
 `method` Cake\\Collection\\Collection::**median**($path = null)
 
@@ -557,6 +599,8 @@ $median = (new Collection($items))->median('invoice.total');
 ```
 
 ### Grouping and Counting
+
+### groupBy()
 
 `method` Cake\\Collection\\Collection::**groupBy**($callback)
 
@@ -598,6 +642,8 @@ $classResults = $students->groupBy(function ($student) {
 });
 ```
 
+### countBy()
+
 `method` Cake\\Collection\\Collection::**countBy**($callback)
 
 If you only wish to know the number of occurrences per group, you can do so by
@@ -612,6 +658,8 @@ $classResults = $students->countBy(function ($student) {
 // Result could look like this when converted to array:
 ['approved' => 70, 'denied' => 20]
 ```
+
+### indexBy()
 
 `method` Cake\\Collection\\Collection::**indexBy**($callback)
 
@@ -640,6 +688,8 @@ $filesByHash = $files->indexBy(function ($file) {
     return md5($file);
 });
 ```
+
+### zip()
 
 `method` Cake\\Collection\\Collection::**zip**($items)
 
@@ -697,6 +747,8 @@ $result = $firstYear->zip($data[0], $data[1])->toList();
 ```
 
 ## Sorting
+
+### sortBy()
 
 `method` Cake\\Collection\\Collection::**sortBy**($callback, $order = SORT_DESC, $sort = SORT_NUMERIC)
 
@@ -764,6 +816,8 @@ $sorted = $collection->sortBy('title', SORT_ASC, SORT_NATURAL);
 
 ## Working with Tree Data
 
+### nest()
+
 `method` Cake\\Collection\\Collection::**nest**($idPath, $parentPath, $nestingKey = 'children')
 
 Not all data is meant to be represented in a linear way. Collections make it
@@ -813,6 +867,8 @@ $result = $nested->toList();
 Children elements are nested inside the `children` property inside each of the
 items in the collection. This type of data representation is helpful for
 rendering menus or traversing elements up to certain level in the tree.
+
+### listNested()
 
 `method` Cake\\Collection\\Collection::**listNested**($order = 'desc', $nestingKey = 'children')
 
@@ -887,6 +943,8 @@ $nested->listNested()->printer(
 
 ## Other Methods
 
+### isEmpty()
+
 `method` Cake\\Collection\\Collection::**isEmpty**()
 
 Allows you to see if a collection contains any elements:
@@ -900,6 +958,8 @@ $collection = new Collection([1]);
 // Returns false
 $collection->isEmpty();
 ```
+
+### contains()
 
 `method` Cake\\Collection\\Collection::**contains**($value)
 
@@ -915,6 +975,8 @@ $hasThree = $collection->contains(3);
 Comparisons are performed using the `===` operator. If you wish to do looser
 comparison types you can use the `some()` method.
 
+### shuffle()
+
 `method` Cake\\Collection\\Collection::**shuffle**()
 
 Sometimes you may wish to show a collection of values in a random order. In
@@ -927,6 +989,8 @@ $collection = new Collection(['a' => 1, 'b' => 2, 'c' => 3]);
 // This could return [2, 3, 1]
 $collection->shuffle()->toList();
 ```
+
+### transpose()
 
 `method` Cake\\Collection\\Collection::**transpose**()
 
@@ -954,6 +1018,8 @@ $result = $transpose->toList();
 
 ### Withdrawing Elements
 
+### sample()
+
 `method` Cake\\Collection\\Collection::**sample**($length = 10)
 
 Shuffling a collection is often useful when doing quick statistical analysis.
@@ -973,6 +1039,8 @@ $testSubjects = $collection->sample(20);
 argument. If there are not enough elements in the collection to satisfy the
 sample, the full collection in a random order is returned.
 
+### take()
+
 `method` Cake\\Collection\\Collection::**take**($length, $offset)
 
 Whenever you want to take a slice of a collection use the `take()` function,
@@ -988,6 +1056,8 @@ $nextTopFive = $collection->sortBy('age')->take(5, 4);
 
 Positions are zero-based, therefore the first position number is `0`.
 
+### skip()
+
 `method` Cake\\Collection\\Collection::**skip**($length)
 
 While the second argument of `take()` can help you skip some elements before
@@ -998,6 +1068,8 @@ purpose as a way to take the rest of the elements after a certain position:
 $collection = new Collection([1, 2, 3, 4]);
 $allExceptFirstTwo = $collection->skip(2)->toList(); // [3, 4]
 ```
+
+### first()
 
 `method` Cake\\Collection\\Collection::**first**()
 
@@ -1010,6 +1082,8 @@ $collection = new Collection([5, 4, 3, 2]);
 $collection->first(); // Returns 5
 ```
 
+### last()
+
 `method` Cake\\Collection\\Collection::**last**()
 
 Similarly, you can get the last element of a collection using the `last()`
@@ -1021,6 +1095,8 @@ $collection->last(); // Returns 2
 ```
 
 ### Expanding Collections
+
+### append()
 
 `method` Cake\\Collection\\Collection::**append**(array|Traversable $items)
 
@@ -1039,6 +1115,8 @@ $myTimeline->filter(function ($tweet) {
 });
 ```
 
+### appendItem()
+
 `method` Cake\\Collection\\Collection::**appendItem**($value, $key)
 
 Allows you to append an item with an optional key to the collection. If you
@@ -1050,6 +1128,8 @@ $cakephpTweets = new Collection($tweets);
 $myTimeline = $cakephpTweets->appendItem($newTweet, 99);
 ```
 
+### prepend()
+
 `method` Cake\\Collection\\Collection::**prepend**($items)
 
 The `prepend()` method will return a new collection containing the values from
@@ -1059,6 +1139,8 @@ both sources:
 $cakephpTweets = new Collection($tweets);
 $myTimeline = $cakephpTweets->prepend($phpTweets);
 ```
+
+### prependItem()
 
 `method` Cake\\Collection\\Collection::**prependItem**($value, $key)
 
@@ -1080,6 +1162,8 @@ $myTimeline = $cakephpTweets->prependItem($newTweet, 99);
 > `toList()` in order to drop the keys and preserve all values.
 
 ### Modifiying Elements
+
+### insert()
 
 `method` Cake\\Collection\\Collection::**insert**($path, $items)
 
@@ -1201,6 +1285,8 @@ class TotalOrderCalculator
 $collection->map(new TotalOrderCalculator)
 ```
 
+### through()
+
 `method` Cake\\Collection\\Collection::**through**($callback)
 
 Sometimes a chain of collection method calls can become reusable in other parts
@@ -1239,6 +1325,8 @@ $collection->through(new FinalCheckOutRowProcessor);
 ```
 
 ### Optimizing Collections
+
+### buffered()
 
 `method` Cake\\Collection\\Collection::**buffered**()
 
@@ -1319,6 +1407,8 @@ $rewindable = (new Collection(results()))->buffered();
 ```
 
 ### Cloning Collections
+
+### compile()
 
 `method` Cake\\Collection\\Collection::**compile**($preserveKeys = true)
 

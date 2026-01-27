@@ -39,6 +39,8 @@ Regardless of the CacheEngine you choose to use, your application interacts with
 
 ## Configuring Cache Engines
 
+### Cache::setConfig()
+
 `static` Cake\\Cache\\Cache::**setConfig**($key, $config = null)
 
 Your application can configure any number of 'engines' during its bootstrap
@@ -265,7 +267,7 @@ Cache::setConfig('redis', [
 
 When there is no fallback cache failures will be raised as exceptions.
 
-### Removing Configured Cache Engines
+### Cache::drop()
 
 `static` Cake\\Cache\\Cache::**drop**($key)
 
@@ -275,6 +277,8 @@ the configuration and re-create it using `Cake\Cache\Cache::drop()` and
 the config and destroy the adapter if it was constructed.
 
 ## Writing to a Cache
+
+### Cache::write()
 
 `static` Cake\\Cache\\Cache::**write**($key, $value, $config = 'default')
 
@@ -301,7 +305,7 @@ of trips made to the database to fetch posts.
 > it is better to use the built-in cache capabilities of the Query object
 > as described in the [Caching Query Results](../orm/query-builder#caching-query-results) section
 
-### Writing Multiple Keys at Once
+### Cache::writeMany()
 
 `static` Cake\\Cache\\Cache::**writeMany**($data, $config = 'default')
 
@@ -320,7 +324,7 @@ $result = Cache::writeMany([
 ['article-first-post' => true, 'article-first-post-comments' => true]
 ```
 
-### Atomic writes
+### Cache::add()
 
 `static` Cake\\Cache\\Cache::**add**($key, $value $config = 'default')
 
@@ -343,7 +347,7 @@ Cache::delete($lockKey);
 > [!WARNING]
 > File based caching does not support atomic writes.
 
-### Read Through Caching
+### Cache::remember()
 
 `static` Cake\\Cache\\Cache::**remember**($key, $callable, $config = 'default')
 
@@ -367,6 +371,8 @@ class IssueService
 ```
 
 ## Reading From a Cache
+
+### Cache::read()
 
 `static` Cake\\Cache\\Cache::**read**($key, $config = 'default')
 
@@ -411,7 +417,7 @@ if ($cloud === null) {
 return $cloud;
 ```
 
-### Reading Multiple Keys at Once
+### Cache::readMany()
 
 `static` Cake\\Cache\\Cache::**readMany**($keys, $config = 'default')
 
@@ -431,6 +437,8 @@ $result = Cache::readMany([
 
 ## Deleting From a Cache
 
+### Cache::delete()
+
 `static` Cake\\Cache\\Cache::**delete**($key, $config = 'default')
 
 `Cache::delete()` will allow you to completely remove a cached
@@ -448,7 +456,7 @@ which uses the `UNLINK` operation to remove cache keys:
 Cache::pool('redis')->deleteAsync('my_key');
 ```
 
-### Deleting Multiple Keys at Once
+### Cache::deleteMany()
 
 `static` Cake\\Cache\\Cache::**deleteMany**($keys, $config = 'default')
 
@@ -467,6 +475,8 @@ $result = Cache::deleteMany([
 ```
 
 ## Clearing Cached Data
+
+### Cache::clear()
 
 `static` Cake\\Cache\\Cache::**clear**($config = 'default')
 
@@ -493,7 +503,11 @@ Cache::pool('redis')->clearBlocking();
 
 ## Using Cache to Store Counters
 
+### Cache::increment()
+
 `static` Cake\\Cache\\Cache::**increment**($key, $offset = 1, $config = 'default')
+
+### Cache::decrement()
 
 `static` Cake\\Cache\\Cache::**decrement**($key, $offset = 1, $config = 'default')
 
@@ -547,6 +561,8 @@ Cache::setConfig('site_home', [
 ]);
 ```
 
+### Cache::clearGroup()
+
 `method` Cake\\Cache\\Cache::**clearGroup**($group, $config = 'default')
 
 Let's say you want to store the HTML generated for your homepage in cache, but
@@ -567,6 +583,8 @@ public function afterSave($event, $entity, $options = [])
     }
 }
 ```
+
+### Cache::groupConfigs()
 
 `static` Cake\\Cache\\Cache::**groupConfigs**($group = null)
 
@@ -597,6 +615,8 @@ choose a common prefix for all your configs.
 
 ## Globally Enable or Disable Cache
 
+### Cache::disable()
+
 `static` Cake\\Cache\\Cache::**disable**()
 
 You may need to disable all Cache read & writes when trying to figure out cache
@@ -610,6 +630,8 @@ Cache::disable();
 
 Once disabled, all reads and writes will return `null`.
 
+### Cache::enable()
+
 `static` Cake\\Cache\\Cache::**enable**()
 
 Once disabled, you can use `enable()` to re-enable caching:
@@ -618,6 +640,8 @@ Once disabled, you can use `enable()` to re-enable caching:
 // Re-enable all cache reads, and cache writes.
 Cache::enable();
 ```
+
+### Cache::enabled()
 
 `static` Cake\\Cache\\Cache::**enabled**()
 

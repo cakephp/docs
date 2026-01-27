@@ -448,6 +448,8 @@ configured.
 
 `class` Cake\\Log\\**Log**
 
+### Log::setConfig()
+
 `static` Cake\\Log\\Log::**setConfig**($key, $config)
 
 param string \$name  
@@ -461,6 +463,8 @@ constructor arguments for the logger.
 Get or set the configuration for a Logger. See [Log Configuration](#log-configuration) for
 more information.
 
+### Log::configured()
+
 `static` Cake\\Log\\Log::**configured**()
 
 returns  
@@ -468,11 +472,15 @@ An array of configured loggers.
 
 Get the names of the configured loggers.
 
+### Log::drop()
+
 `static` Cake\\Log\\Log::**drop**($name)
 
 param string \$name  
 Name of the logger you wish to no longer receive
 messages.
+
+### Log::write()
 
 `static` Cake\\Log\\Log::**write**($level, $message, $scope = [])
 
@@ -480,6 +488,8 @@ Write a message into all the configured loggers.
 `$level` indicates the level of log message being created.
 `$message` is the message of the log entry being written to.
 `$scope` is the scope(s) a log message is being created in.
+
+### Log::levels()
 
 `static` Cake\\Log\\Log::**levels**()
 
@@ -491,25 +501,43 @@ level configuration.
 The following convenience methods were added to log <span class="title-ref">\$message</span> with the
 appropriate log level.
 
+### Log::emergency()
+
 `static` Cake\\Log\\Log::**emergency**($message, $scope = [])
+
+### Log::alert()
 
 `static` Cake\\Log\\Log::**alert**($message, $scope = [])
 
+### Log::critical()
+
 `static` Cake\\Log\\Log::**critical**($message, $scope = [])
+
+### Log::error()
 
 `static` Cake\\Log\\Log::**error**($message, $scope = [])
 
+### Log::warning()
+
 `static` Cake\\Log\\Log::**warning**($message, $scope = [])
+
+### Log::notice()
 
 `static` Cake\\Log\\Log::**notice**($message, $scope = [])
 
+### Log::info()
+
 `static` Cake\\Log\\Log::**info**($message, $scope = [])
+
+### Log::debug()
 
 `static` Cake\\Log\\Log::**debug**($message, $scope = [])
 
 ## Logging Trait
 
 > A trait that provides shortcut methods for logging
+
+### Log::log()
 
 `method` Cake\\Log\\Log::**log**($msg, $level = LOG_ERR)
 

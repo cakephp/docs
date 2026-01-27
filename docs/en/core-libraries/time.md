@@ -147,6 +147,8 @@ echo $time->timezoneName; // America/New_York
 
 ## Formatting
 
+### DateTime::setJsonEncodeFormat()
+
 `static` Cake\\I18n\\DateTime::**setJsonEncodeFormat**($format)
 
 This method sets the default format used when converting an object to json:
@@ -174,6 +176,8 @@ Date::setJsonEncodeFormat(static function($time) {
 ::: info Changed in version 4.1.0
 The `callable` parameter type was added.
 :::
+
+### DateTime::i18nFormat()
 
 `method` Cake\\I18n\\DateTime::**i18nFormat**($format = null, $timezone = null, $locale = null)
 
@@ -240,6 +244,8 @@ The following calendar types are supported:
 > For constant strings i.e. IntlDateFormatter::FULL Intl uses ICU library
 > that feeds its data from CLDR (<https://cldr.unicode.org/>) which version
 > may vary depending on PHP installation and give different results.
+
+### DateTime::nice()
 
 `method` Cake\\I18n\\DateTime::**nice**()
 
@@ -333,6 +339,8 @@ format string.
 
 ### Formatting Relative Times
 
+### DateTime::timeAgoInWords()
+
 `method` Cake\\I18n\\DateTime::**timeAgoInWords**(array $options = [])
 
 Often it is useful to print times relative to the present:
@@ -370,7 +378,11 @@ echo $time->timeAgoInWords([
 
 ## Conversion
 
+### DateTime::toQuarter()
+
 `method` Cake\\I18n\\DateTime::**toQuarter**()
+
+### DateTime::toQuarterRange()
 
 `method` Cake\\I18n\\DateTime::**toQuarterRange**()
 
@@ -401,11 +413,19 @@ $range = $time->toQuarterRange();
 
 ## Comparing With the Present
 
+### DateTime::isYesterday()
+
 `method` Cake\\I18n\\DateTime::**isYesterday**()
+
+### DateTime::isThisWeek()
 
 `method` Cake\\I18n\\DateTime::**isThisWeek**()
 
+### DateTime::isThisMonth()
+
 `method` Cake\\I18n\\DateTime::**isThisMonth**()
+
+### DateTime::isThisYear()
 
 `method` Cake\\I18n\\DateTime::**isThisYear**()
 
@@ -425,6 +445,8 @@ not the `DateTime` instance matches the present.
 
 ## Comparing With Intervals
 
+### DateTime::isWithinNext()
+
 `method` Cake\\I18n\\DateTime::**isWithinNext**($interval)
 
 You can see if a `DateTime` instance falls within a given range using
@@ -439,6 +461,8 @@ debug($time->isWithinNext('2 days'));
 // Within 2 next weeks. Outputs 'true'
 debug($time->isWithinNext('2 weeks'));
 ```
+
+### DateTime::wasWithinLast()
 
 `method` Cake\\I18n\\DateTime::**wasWithinLast**($interval)
 

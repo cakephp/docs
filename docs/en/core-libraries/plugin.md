@@ -6,6 +6,8 @@ The Plugin class is responsible for resource location and path management of plu
 
 ## Locating Plugins
 
+### Plugin::path()
+
 `static` Cake\\Core\\Plugin::**path**(string $plugin)
 
 Plugins can be located with Plugin. Using `Plugin::path('DebugKit');`
@@ -27,6 +29,8 @@ Use `Plugin::loaded()` if you want to get a list of all currently loaded plugins
 
 ## Finding Paths to Namespaces
 
+### Plugin::classPath()
+
 `static` Cake\\Core\\Plugin::**classPath**(string $plugin)
 
 Used to get the location of the plugin's class files:
@@ -36,6 +40,8 @@ $path = App::classPath('DebugKit');
 ```
 
 ## Finding Paths to Resources
+
+### Plugin::templatePath()
 
 `static` Cake\\Core\\Plugin::**templatePath**(string $plugin)
 

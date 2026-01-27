@@ -7,6 +7,8 @@ DOMDocument objects, and back into arrays again.
 
 ## Loading XML documents
 
+### Xml::build()
+
 `static` Cake\\Utility\\Xml::**build**($input, array $options = [])
 
 You can load XML-ish data using `Xml::build()`. Depending on your
@@ -74,6 +76,8 @@ By default entity loading and huge document parsing are disabled. These modes
 can be enabled with the `loadEntities` and `parseHuge` options respectively.
 
 ## Transforming a XML String in Array
+
+### Xml::toArray()
 
 `static` Cake\\Utility\\Xml::**toArray**($obj)
 

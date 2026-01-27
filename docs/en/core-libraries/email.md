@@ -255,6 +255,8 @@ following path:
 
 ## Sending Attachments
 
+### Mailer::setAttachments()
+
 `method` Cake\\Mailer\\Mailer::**setAttachments**($attachments)
 
 You can attach files to email messages as well. There are a few
@@ -296,6 +298,8 @@ you want the filenames to appear in the recipient's mail client:
     a string using the `data` option. This allows you to attach files without
     needing file paths to them.
 
+### Mailer::addAttachment()
+
 `method` Cake\\Mailer\\Mailer::**addAttachment**(\\Psr\\Http\\Message\\UploadedFileInterface|string $path, ?string $name, ?string $mimetype, ?string $contentId, ?bool $contentDisposition)
 
 You can also add attachments using the `addAttachment()` method.
@@ -303,6 +307,8 @@ You can also add attachments using the `addAttachment()` method.
 > \$mailer-\>addAttachment('/full/file/path/file.png');
 
 ### Relaxing Address Validation Rules
+
+### Mailer::setEmailPattern()
 
 `method` Cake\\Mailer\\Mailer::**setEmailPattern**($pattern)
 
@@ -537,6 +543,8 @@ TransportFactory::setConfig('default', [
 
 When using a DSN string you can define any additional parameters/options as
 query string arguments.
+
+### Mailer::drop()
 
 `static` Cake\\Mailer\\Mailer::**drop**($key)
 

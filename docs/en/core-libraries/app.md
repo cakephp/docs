@@ -6,6 +6,8 @@ The App class is responsible for resource location and path management.
 
 ## Finding Classes
 
+### App::className()
+
 `static` Cake\\Core\\App::**className**($name, $type = '', $suffix = '')
 
 This method is used to resolve class names throughout CakePHP. It resolves
@@ -31,6 +33,8 @@ class names do not exist, `false` will be returned.
 
 ## Finding Paths to Resources
 
+### App::path()
+
 `static` Cake\\Core\\App::**path**(string $package, ?string $plugin = null)
 
 The method returns paths set using `App.paths` app config:
@@ -43,6 +47,8 @@ App::path('templates');
 The same way you can retrieve paths for `locales`, `plugins`.
 
 ## Finding Paths to Namespaces
+
+### App::classPath()
 
 `static` Cake\\Core\\App::**classPath**(string $package, ?string $plugin = null)
 
@@ -58,6 +64,8 @@ This can be done for all namespaces that are part of your application.
 `App::classPath()` will only return the default path, and will not be able to
 provide any information about additional paths the autoloader is configured
 for.
+
+### App::core()
 
 `static` Cake\\Core\\App::**core**(string $package)
 

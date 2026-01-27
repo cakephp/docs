@@ -37,6 +37,8 @@ automatically echo the output into the view.
 
 ## Formatting Currency Values
 
+### Number::currency()
+
 `method` Cake\\I18n\\Number::**currency**(mixed $value, string $currency = null, array $options = [])
 
 This method is used to display a number in common currency formats
@@ -87,6 +89,8 @@ Number::setDefaultCurrencyFormat(Number::FORMAT_CURRENCY_ACCOUNTING);
 
 ## Setting the Default Currency
 
+### Number::setDefaultCurrency()
+
 `method` Cake\\I18n\\Number::**setDefaultCurrency**($currency)
 
 Setter for the default currency. This removes the need to always pass the
@@ -96,6 +100,8 @@ it will clear the currently stored value.
 
 ## Getting the Default Currency
 
+### Number::getDefaultCurrency()
+
 `method` Cake\\I18n\\Number::**getDefaultCurrency**()
 
 Getter for the default currency. If default currency was set earlier using
@@ -103,6 +109,8 @@ Getter for the default currency. If default currency was set earlier using
 retrieve the `intl.default_locale` ini value if set and `'en_US'` if not.
 
 ## Formatting Floating Point Numbers
+
+### Number::precision()
 
 `method` Cake\\I18n\\Number::**precision**(float $value, int $precision = 3, array $options = [])
 
@@ -122,6 +130,8 @@ echo Number::precision(456.91873645, 2);
 ```
 
 ## Formatting Percentages
+
+### Number::toPercentage()
 
 `method` Cake\\I18n\\Number::**toPercentage**(mixed $value, int $precision = 2, array $options = [])
 
@@ -149,6 +159,8 @@ echo Number::toPercentage(0.45691, 1, [
 
 ## Interacting with Human Readable Values
 
+### Number::toReadableSize()
+
 `method` Cake\\I18n\\Number::**toReadableSize**(string $size)
 
 This method formats data sizes in human readable forms. It provides
@@ -172,6 +184,8 @@ echo Number::toReadableSize(5368709120); // 5 GB
 ```
 
 ## Formatting Numbers
+
+### Number::format()
 
 `method` Cake\\I18n\\Number::**format**(mixed $value, array $options = [])
 
@@ -239,6 +253,8 @@ echo Number::format('123456.7890', [
 // Output '123 456,79 !'
 ```
 
+### Number::ordinal()
+
 `method` Cake\\I18n\\Number::**ordinal**(mixed $value, array $options = [])
 
 This method will output an ordinal number.
@@ -262,6 +278,8 @@ echo Number::ordinal(410);
 ```
 
 ## Format Differences
+
+### Number::formatDelta()
 
 `method` Cake\\I18n\\Number::**formatDelta**(mixed $value, array $options = [])
 
@@ -313,6 +331,8 @@ echo Number::formatDelta('123456.7890', [
 <!-- end-cakenumber -->
 
 ## Configure formatters
+
+### Number::config()
 
 `method` Cake\\I18n\\Number::**config**(string $locale, int $type = NumberFormatter::DECIMAL, array $options = [])
 

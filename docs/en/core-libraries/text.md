@@ -38,6 +38,8 @@ class UsersController extends AppController
 
 ## Convert Strings into ASCII
 
+### Text::transliterate()
+
 `static` Cake\\Utility\\Text::**transliterate**($string, $transliteratorId = null)
 
 Transliterate by default converts all characters in provided string into
@@ -59,6 +61,8 @@ Text::transliterate('Übérmensch', 'Latin-ASCII;');
 ```
 
 ## Creating URL Safe Strings
+
+### Text::slug()
 
 `static` Cake\\Utility\\Text::**slug**(string $string, array|string $options = [])
 
@@ -90,6 +94,8 @@ options are:
   ```
 
 ## Generating UUIDs
+
+### Text::uuid()
 
 `static` Cake\\Utility\\Text::**uuid**()
 
@@ -124,6 +130,8 @@ be used instead of the default UUID generation method.
 
 ## Simple String Parsing
 
+### Text::tokenize()
+
 `static` Cake\\Utility\\Text::**tokenize**(string $data, string $separator = ',', string $leftBound = '(', string $rightBound = ')')
 
 Tokenizes a string using `$separator`, ignoring any instance of `$separator`
@@ -139,6 +147,8 @@ $result = Text::tokenize($data, ' ', "'", "'");
 ['cakephp', "'great framework'", 'php'];
 ```
 
+### Text::parseFileSize()
+
 `method` Cake\\Utility\\Text::**parseFileSize**(string $size, mixed $default = false)
 
 This method unformats a number from a human-readable byte size to an integer
@@ -149,6 +159,8 @@ $int = Text::parseFileSize('2GB');
 ```
 
 ## Formatting Strings
+
+### Text::insert()
 
 `static` Cake\\Utility\\Text::**insert**(string $str, array $data, array $options = [])
 
@@ -162,6 +174,8 @@ Text::insert(
 );
 // Returns: "My name is Bob and I am 65 years old."
 ```
+
+### Text::cleanInsert()
 
 `static` Cake\\Utility\\Text::**cleanInsert**(string $str, array $options)
 
@@ -185,6 +199,8 @@ $options = [
 
 ## Wrapping Text
 
+### Text::wrap()
+
 `static` Cake\\Utility\\Text::**wrap**(string $text, array|int $options = [])
 
 Wraps a block of text to a set width and indents blocks as well.
@@ -206,6 +222,8 @@ supported options are:
 - `wordWrap` Whether or not to wrap whole words. Defaults to `true`.
 - `indent` The character to indent lines with. Defaults to ''.
 - `indentAt` The line number to start indenting text. Defaults to 0.
+
+### Text::wrapBlock()
 
 `static` Cake\\Utility\\Text::**wrapBlock**(string $text, array|int $options = [])
 
@@ -232,6 +250,8 @@ This is the song that
 <!-- start-text -->
 
 ## Highlighting Substrings
+
+### Text::highlight()
 
 `method` Cake\\Utility\\Text::**highlight**(string $text, array|string $phrase, array $options = [])
 
@@ -271,6 +291,8 @@ Output:
 > \$options\['format'\] string specified or a default string.
 
 ## Truncating Text
+
+### Text::truncate()
 
 `method` Cake\\Utility\\Text::**truncate**(string $text, int $length = 100, array $options = [])
 
@@ -322,6 +344,8 @@ Output:
     The killer crept...
 
 ## Truncating the Tail of a String
+
+### Text::tail()
 
 `method` Cake\\Utility\\Text::**tail**(string $text, int $length = 100, array $options = [])
 
@@ -376,6 +400,8 @@ Output:
 
 ## Extracting an Excerpt
 
+### Text::excerpt()
+
 `method` Cake\\Utility\\Text::**excerpt**(string $text, string $phrase, int $radius = 100, string $ellipsis = '…')
 
 Extracts an excerpt from `$text` surrounding the `$phrase` with a number
@@ -399,6 +425,8 @@ Output:
     handy for search results. The query...
 
 ## Converting an Array to Sentence Form
+
+### Text::toList()
 
 `method` Cake\\Utility\\Text::**toList**(array $list, ?string $and = null, $separator = ', ')
 
