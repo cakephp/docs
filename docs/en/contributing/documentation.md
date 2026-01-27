@@ -61,7 +61,7 @@ For example, if a new English file is created in **en/file.md**, we should:
   The documentation is not currently supported in XX language for this page.
 
   Please feel free to send us a pull request on
-  [Github](https://github.com/cakephp/docs) or use the **Edit this page**
+  [GitHub](https://github.com/cakephp/docs) or use the **Edit this page**
   link to directly propose your changes.
 
   You can refer to the English version in the language selector to have
