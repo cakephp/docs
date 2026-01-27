@@ -23,6 +23,9 @@ export default {
   rewrites: {
     "en/:slug*": ":slug*",
   },
+  sitemap: {
+    hostname: "https://book.cakephp.org/6.x/",
+  },
   themeConfig: {
     socialLinks: [
       { icon: "github", link: "https://github.com/cakephp/cakephp" },
