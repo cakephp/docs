@@ -384,7 +384,7 @@ myapp.local {
 
 ## Without URL Rewriting
 
-If you cannot enable URL rewriting, you can use CakePHP's built-in pretty URLs.
+If you cannot enable URL rewriting, you can use CakePHP's built-in non-rewritten `index.php` URLs.
 
 In **config/app.php**, uncomment:
 
