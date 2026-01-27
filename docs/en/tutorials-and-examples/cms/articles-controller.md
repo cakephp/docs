@@ -131,7 +131,7 @@ see an error page saying that action hasn't been implemented. Lets fix that now:
 ``` php {3}
 // Add to existing src/Controller/ArticlesController.php file
 
-public function view(?string $slug = null): void
+public function view(?string $slug): void
 {
     $article = $this->Articles->findBySlug($slug)->firstOrFail();
     $this->set(compact('article'));
