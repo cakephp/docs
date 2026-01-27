@@ -66,9 +66,6 @@ Ready to enhance your CMS? Here are some features you could add next:
 
 - **[Authentication & Authorization](../tutorials-and-examples/cms/authentication)** - Secure your application with user login
 - **[Tags & Categories](../tutorials-and-examples/cms/tags-and-users)** - Add tagging functionality to organize articles
-- **File Uploads** - Allow users to upload images for articles
-- **Search Functionality** - Implement article search
-- **Admin Dashboard** - Create a backend interface
 
 ### Explore CakePHP Features
 
@@ -82,15 +79,4 @@ Dive deeper into CakePHP's powerful features:
 
 ### Get Help & Connect
 
-Join the CakePHP community:
-
-- 💬 **[Forum](https://discourse.cakephp.org/)** - Ask questions and share knowledge
-- 💼 **[Slack](https://cakesf.herokuapp.com/)** - Chat with other developers in real-time
-- 📚 **[API Documentation](https://api.cakephp.org/)** - Detailed reference for all classes
-- 🐛 **[GitHub](https://github.com/cakephp/cakephp)** - Report issues or contribute
-
-::: tip Keep Learning
-The best way to master CakePHP is to keep building. Start your own project or contribute to the ecosystem!
-:::
-
-Happy baking! 🍰
+<!--@include: index.md#get-help-->
