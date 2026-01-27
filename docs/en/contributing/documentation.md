@@ -29,12 +29,14 @@ Github and we will consider creating a skeleton folder for it. The following
 sections are the first one you should consider translating as these
 files don't change often:
 
+```
 - index.md
 - intro.md
 - quickstart.md
 - installation.md
 - /intro folder
 - /tutorials-and-examples folder
+```
 
 ### Reminder for Docs Administrators
 
@@ -324,6 +326,40 @@ class Example
 ```
 ````
 
+**Code Groups**: Display multiple code examples with tabs:
+
+````markdown
+::: code-group
+
+```php [Controller]
+class ArticlesController extends Controller
+{
+    public function index()
+    {
+        $articles = $this->Articles->find('all');
+    }
+}
+```
+
+```php [Model]
+class ArticlesTable extends Table
+{
+    public function initialize(array $config): void
+    {
+        $this->addBehavior('Timestamp');
+    }
+}
+```
+
+```php [Template]
+<?php foreach ($articles as $article): ?>
+    <h2><?= h($article->title) ?></h2>
+<?php endforeach; ?>
+```
+
+:::
+````
+
 ### Admonitions
 
 VitePress provides custom containers for tips, warnings, and other callouts.
@@ -391,3 +427,128 @@ Never store passwords in plain text. Always use proper hashing.
 ::: info New in 5.0.0
 The new ORM improvements provide better type safety.
 :::
+
+## Validating Your Changes
+
+Before submitting a pull request, you should validate your documentation changes to ensure they meet quality standards.
+
+### Installing Validation Tools
+
+You can use `npx` to run the tools without installing them globally, or install them for faster repeated use:
+
+::: code-group
+
+```bash [Using npx (Recommended)]
+# No installation needed - npx downloads and runs the tools
+npx cspell --config .github/cspell.json "docs/en/**/*.md"
+npx markdownlint-cli --config .github/markdownlint.json "docs/en/**/*.md"
+```
+
+```bash [Global Installation]
+# Install globally for faster execution
+npm install -g cspell markdownlint-cli
+
+# Then run without npx
+cspell --config .github/cspell.json "docs/en/**/*.md"
+markdownlint-cli --config .github/markdownlint.json "docs/en/**/*.md"
+```
+
+:::
+
+### Running Spell Check
+
+We use [cspell](https://cspell.org/) to check spelling in documentation. To check your changes:
+
+::: code-group
+
+```bash [Single File]
+# Check a single file
+npx cspell --config .github/cspell.json docs/en/your-file.md
+```
+
+```bash [Directory]
+# Check all files in a directory
+npx cspell --config .github/cspell.json "docs/en/controllers/*.md"
+```
+
+```bash [All Files]
+# Check all documentation recursively
+npx cspell --config .github/cspell.json "docs/**/*.md"
+```
+
+:::
+
+::: tip Adding Technical Terms
+If cspell flags legitimate technical terms (class names, CakePHP-specific terms), add them to the `words` array in [.github/cspell.json](https://github.com/cakephp/docs/blob/5.x/.github/cspell.json).
+:::
+
+### Running Markdown Lint
+
+We use [markdownlint](https://github.com/DavidAnson/markdownlint) to maintain consistent markdown formatting:
+
+::: code-group
+
+```bash [Single File]
+# Check a single file
+npx markdownlint-cli --config .github/markdownlint.json docs/en/your-file.md
+```
+
+```bash [Directory]
+# Check all files in a directory
+npx markdownlint-cli --config .github/markdownlint.json "docs/en/controllers/*.md"
+```
+
+```bash [All Docs]
+# Check all English documentation
+npx markdownlint-cli --config .github/markdownlint.json "docs/en/**/*.md"
+```
+
+```bash [Auto-fix]
+# Automatically fix formatting issues
+npx markdownlint-cli --config .github/markdownlint.json --fix cs/en/**/*.md"
+```
+
+:::
+
+::: warning Auto-fix Limitations
+The `--fix` flag can automatically correct many formatting issues, but not all. Review changes before committing.
+:::
+
+### GitHub Actions Validation
+
+When you submit a pull request, our CI pipeline automatically runs:
+
+1. **JavaScript syntax validation** - Validates `config.js`
+2. **JSON validation** - Validates `toc_*.json` files
+3. **Markdown linting** - Checks all markdown files
+4. **Spell checking** - Scans documentation for typos
+
+::: tip Pre-flight Check
+::: code-group
+
+```bash [Quick Check]
+# Validate markdown and spelling
+npx markdownlint-cli --config .github/markdownlint.json "docs/**/*.md"
+npx cspell --config .github/cspell.json "docs/**/*.md"
+```
+
+```bash [Full Validation]
+# Run all CI checks locally
+npx markdownlint-cli --config .github/markdownlint.json "docs/**/*.md"
+npx cspell --config .github/cspell.json "docs/**/*.md"
+node --check config.js
+jq empty toc_en.json
+```
+
+```bash [Single File]
+# Check your current file before committing
+npx markdownlint-cli --config .github/markdownlint.json docs/en/your-file.md
+npx cspell --config .github/cspell.json docs/en/your-file.md
+```
+
+:::e --check config.js
+jq empty toc_en.json
+```
+:::
+
+If the CI checks fail, review the error messages and fix the issues before requesting a review.
