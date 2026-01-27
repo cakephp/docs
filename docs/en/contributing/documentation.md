@@ -298,7 +298,7 @@ Common language identifiers:
 **Line Highlighting**: Highlight specific lines in code blocks:
 
 ````markdown
-```php{2,4-6}
+```php{3-6}
 class Example
 {
     public function highlighted() // This line is highlighted
