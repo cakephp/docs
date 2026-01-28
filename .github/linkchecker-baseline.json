@@ -1,0 +1,2107 @@
+[
+  {
+    "file": "docs/en/appendices/5-0-migration-guide.md",
+    "link": "../deployment#symlink-assets",
+    "message": "Anchor '#symlink-assets' not found in docs/en/deployment.md"
+  },
+  {
+    "file": "docs/en/appendices/5-1-migration-guide.md",
+    "link": "../core-libraries/events#registering-event-listeners",
+    "message": "Anchor '#registering-event-listeners' not found in docs/en/core-libraries/events.md"
+  },
+  {
+    "file": "docs/en/appendices/5-2-migration-guide.md",
+    "link": "../views/helpers/form#customizing-templates",
+    "message": "Anchor '#customizing-templates' not found in docs/en/views/helpers/form.md"
+  },
+  {
+    "file": "docs/en/appendices/5-3-migration-guide.md",
+    "link": "../orm/query-builder#dto-projection",
+    "message": "Anchor '#dto-projection' not found in docs/en/orm/query-builder.md"
+  },
+  {
+    "file": "docs/en/console-commands.md",
+    "link": "plugins#plugin-commands",
+    "message": "Anchor '#plugin-commands' not found in docs/en/plugins.md"
+  },
+  {
+    "file": "docs/en/contents.md",
+    "link": "intro",
+    "message": "File not found: docs/en/intro/index.md"
+  },
+  {
+    "file": "docs/en/contents.md",
+    "link": "tutorials-and-examples",
+    "message": "File not found: docs/en/tutorials-and-examples/index.md"
+  },
+  {
+    "file": "docs/en/contents.md",
+    "link": "contributing",
+    "message": "File not found: docs/en/contributing/index.md"
+  },
+  {
+    "file": "docs/en/contents.md",
+    "link": "controllers/middleware",
+    "message": "File not found: docs/en/controllers/middleware/index.md"
+  },
+  {
+    "file": "docs/en/contents.md",
+    "link": "controllers",
+    "message": "File not found: docs/en/controllers/index.md"
+  },
+  {
+    "file": "docs/en/contents.md",
+    "link": "views",
+    "message": "File not found: docs/en/views/index.md"
+  },
+  {
+    "file": "docs/en/contents.md",
+    "link": "orm",
+    "message": "File not found: docs/en/orm/index.md"
+  },
+  {
+    "file": "docs/en/contents.md",
+    "link": "console-commands",
+    "message": "File not found: docs/en/console-commands/index.md"
+  },
+  {
+    "file": "docs/en/contents.md",
+    "link": "security",
+    "message": "File not found: docs/en/security/index.md"
+  },
+  {
+    "file": "docs/en/contents.md",
+    "link": "appendices",
+    "message": "File not found: docs/en/appendices/index.md"
+  },
+  {
+    "file": "docs/en/contributing/backwards-compatibility.md",
+    "link": "../appendices",
+    "message": "File not found: docs/en/appendices/index.md"
+  },
+  {
+    "file": "docs/en/contributing/code.md",
+    "link": "../orm/database-basics#database-configuration",
+    "message": "Anchor '#database-configuration' not found in docs/en/orm/database-basics.md"
+  },
+  {
+    "file": "docs/en/contributing/documentation.md",
+    "link": "../path/to/page.md",
+    "message": "File not found: docs/en/path/to/page.md"
+  },
+  {
+    "file": "docs/en/contributing/documentation.md",
+    "link": "./installation.md",
+    "message": "File not found: docs/en/contributing/installation.md"
+  },
+  {
+    "file": "docs/en/contributing/documentation.md",
+    "link": "./controllers/components.md",
+    "message": "File not found: docs/en/contributing/controllers/components.md"
+  },
+  {
+    "file": "docs/en/contributing/documentation.md",
+    "link": "./other-page.md#section-anchor",
+    "message": "File not found: docs/en/contributing/other-page.md"
+  },
+  {
+    "file": "docs/en/controllers.md",
+    "link": "development/routing#routes-configuration",
+    "message": "Anchor '#routes-configuration' not found in docs/en/development/routing.md"
+  },
+  {
+    "file": "docs/en/controllers.md",
+    "link": "controllers/request-response#cake-request",
+    "message": "Anchor '#cake-request' not found in docs/en/controllers/request-response.md"
+  },
+  {
+    "file": "docs/en/controllers.md",
+    "link": "development/routing#file-extensions",
+    "message": "Anchor '#file-extensions' not found in docs/en/development/routing.md"
+  },
+  {
+    "file": "docs/en/controllers.md",
+    "link": "controllers/request-response#check-the-request",
+    "message": "Anchor '#check-the-request' not found in docs/en/controllers/request-response.md"
+  },
+  {
+    "file": "docs/en/controllers.md",
+    "link": "controllers/components#redirect-component-events",
+    "message": "File not found: docs/en/controllers/components/index.md"
+  },
+  {
+    "file": "docs/en/controllers.md",
+    "link": "controllers/components",
+    "message": "File not found: docs/en/controllers/components/index.md"
+  },
+  {
+    "file": "docs/en/controllers.md",
+    "link": "controllers/middleware",
+    "message": "File not found: docs/en/controllers/middleware/index.md"
+  },
+  {
+    "file": "docs/en/controllers.md",
+    "link": "controllers/components",
+    "message": "File not found: docs/en/controllers/components/index.md"
+  },
+  {
+    "file": "docs/en/controllers/middleware.md",
+    "link": "/middleware-setup.png",
+    "message": "File not found: ../../../../../middleware-setup.png.md"
+  },
+  {
+    "file": "docs/en/controllers/middleware.md",
+    "link": "/middleware-request.png",
+    "message": "File not found: ../../../../../middleware-request.png.md"
+  },
+  {
+    "file": "docs/en/controllers/middleware.md",
+    "link": "../controllers#controller-middleware",
+    "message": "File not found: docs/en/controllers/index.md"
+  },
+  {
+    "file": "docs/en/controllers/pagination.md",
+    "link": "../orm/retrieving-data-and-resultsets#custom-find-methods",
+    "message": "Anchor '#custom-find-methods' not found in docs/en/orm/retrieving-data-and-resultsets.md"
+  },
+  {
+    "file": "docs/en/controllers/pagination.md",
+    "link": "../views/helpers/paginator#paginator-helper-multiple",
+    "message": "Anchor '#paginator-helper-multiple' not found in docs/en/views/helpers/paginator.md"
+  },
+  {
+    "file": "docs/en/controllers/request-response.md",
+    "link": "../controllers/middleware#body-parser-middleware",
+    "message": "File not found: docs/en/controllers/middleware/index.md"
+  },
+  {
+    "file": "docs/en/controllers/request-response.md",
+    "link": "../controllers/middleware#body-parser-middleware",
+    "message": "File not found: docs/en/controllers/middleware/index.md"
+  },
+  {
+    "file": "docs/en/controllers/request-response.md",
+    "link": "../controllers#controller-viewclasses",
+    "message": "File not found: docs/en/controllers/index.md"
+  },
+  {
+    "file": "docs/en/controllers/request-response.md",
+    "link": "../controllers/middleware#encrypted-cookie-middleware",
+    "message": "File not found: docs/en/controllers/middleware/index.md"
+  },
+  {
+    "file": "docs/en/core-libraries/caching.md",
+    "link": "../orm/query-builder#caching-query-results",
+    "message": "Anchor '#caching-query-results' not found in docs/en/orm/query-builder.md"
+  },
+  {
+    "file": "docs/en/core-libraries/caching.md",
+    "link": "../orm/query-builder#caching-query-results",
+    "message": "Anchor '#caching-query-results' not found in docs/en/orm/query-builder.md"
+  },
+  {
+    "file": "docs/en/core-libraries/email.md",
+    "link": "../core-libraries/logging#logging-levels",
+    "message": "Anchor '#logging-levels' not found in docs/en/core-libraries/logging.md"
+  },
+  {
+    "file": "docs/en/core-libraries/email.md",
+    "link": "../views",
+    "message": "File not found: docs/en/views/index.md"
+  },
+  {
+    "file": "docs/en/core-libraries/email.md",
+    "link": "../core-libraries/events#registering-event-listeners",
+    "message": "Anchor '#registering-event-listeners' not found in docs/en/core-libraries/events.md"
+  },
+  {
+    "file": "docs/en/core-libraries/events.md",
+    "link": "../orm/table-objects#table-callbacks",
+    "message": "Anchor '#table-callbacks' not found in docs/en/orm/table-objects.md"
+  },
+  {
+    "file": "docs/en/core-libraries/events.md",
+    "link": "../controllers#controller-life-cycle",
+    "message": "File not found: docs/en/controllers/index.md"
+  },
+  {
+    "file": "docs/en/core-libraries/events.md",
+    "link": "../views#view-events",
+    "message": "File not found: docs/en/views/index.md"
+  },
+  {
+    "file": "docs/en/core-libraries/events.md",
+    "link": "../orm/behaviors",
+    "message": "File not found: docs/en/orm/behaviors/index.md"
+  },
+  {
+    "file": "docs/en/core-libraries/events.md",
+    "link": "../controllers/components",
+    "message": "File not found: docs/en/controllers/components/index.md"
+  },
+  {
+    "file": "docs/en/core-libraries/events.md",
+    "link": "../views/helpers",
+    "message": "File not found: docs/en/views/helpers/index.md"
+  },
+  {
+    "file": "docs/en/core-libraries/internationalization-and-localization.md",
+    "link": "../controllers/middleware",
+    "message": "File not found: docs/en/controllers/middleware/index.md"
+  },
+  {
+    "file": "docs/en/core-libraries/internationalization-and-localization.md",
+    "link": "../controllers/middleware",
+    "message": "File not found: docs/en/controllers/middleware/index.md"
+  },
+  {
+    "file": "docs/en/core-libraries/time.md",
+    "link": "../core-libraries/internationalization-and-localization#parsing-localized-dates",
+    "message": "Anchor '#parsing-localized-dates' not found in docs/en/core-libraries/internationalization-and-localization.md"
+  },
+  {
+    "file": "docs/en/core-libraries/validation.md",
+    "link": "../orm/validation#application-rules",
+    "message": "Anchor '#application-rules' not found in docs/en/orm/validation.md"
+  },
+  {
+    "file": "docs/en/deployment.md",
+    "link": "security/csrf#csrf-middleware",
+    "message": "Anchor '#csrf-middleware' not found in docs/en/security/csrf.md"
+  },
+  {
+    "file": "docs/en/deployment.md",
+    "link": "installation#url-rewriting",
+    "message": "Anchor '#url-rewriting' not found in docs/en/installation.md"
+  },
+  {
+    "file": "docs/en/deployment.md",
+    "link": "/migrations/",
+    "message": "File not found: ../../../../../migrations.md"
+  },
+  {
+    "file": "docs/en/development/application.md",
+    "link": "../controllers/middleware",
+    "message": "File not found: docs/en/controllers/middleware/index.md"
+  },
+  {
+    "file": "docs/en/development/application.md",
+    "link": "../controllers/middleware",
+    "message": "File not found: docs/en/controllers/middleware/index.md"
+  },
+  {
+    "file": "docs/en/development/application.md",
+    "link": "../console-commands",
+    "message": "File not found: docs/en/console-commands/index.md"
+  },
+  {
+    "file": "docs/en/development/application.md",
+    "link": "../controllers",
+    "message": "File not found: docs/en/controllers/index.md"
+  },
+  {
+    "file": "docs/en/development/application.md",
+    "link": "../views",
+    "message": "File not found: docs/en/views/index.md"
+  },
+  {
+    "file": "docs/en/development/application.md",
+    "link": "../development/testing#integration-testing",
+    "message": "Anchor '#integration-testing' not found in docs/en/development/testing.md"
+  },
+  {
+    "file": "docs/en/development/configuration.md",
+    "link": "../controllers/request-response#request-file-uploads",
+    "message": "Anchor '#request-file-uploads' not found in docs/en/controllers/request-response.md"
+  },
+  {
+    "file": "docs/en/development/configuration.md",
+    "link": "../orm/database-basics#database-configuration",
+    "message": "Anchor '#database-configuration' not found in docs/en/orm/database-basics.md"
+  },
+  {
+    "file": "docs/en/development/configuration.md",
+    "link": "../core-libraries/caching#cache-configuration",
+    "message": "Anchor '#cache-configuration' not found in docs/en/core-libraries/caching.md"
+  },
+  {
+    "file": "docs/en/development/configuration.md",
+    "link": "../development/errors#error-configuration",
+    "message": "Anchor '#error-configuration' not found in docs/en/development/errors.md"
+  },
+  {
+    "file": "docs/en/development/configuration.md",
+    "link": "../core-libraries/logging#log-configuration",
+    "message": "Anchor '#log-configuration' not found in docs/en/core-libraries/logging.md"
+  },
+  {
+    "file": "docs/en/development/configuration.md",
+    "link": "../core-libraries/email#email-configuration",
+    "message": "Anchor '#email-configuration' not found in docs/en/core-libraries/email.md"
+  },
+  {
+    "file": "docs/en/development/configuration.md",
+    "link": "../development/routing#routes-configuration",
+    "message": "Anchor '#routes-configuration' not found in docs/en/development/routing.md"
+  },
+  {
+    "file": "docs/en/development/rest.md",
+    "link": "../development/routing#resource-routes",
+    "message": "Anchor '#resource-routes' not found in docs/en/development/routing.md"
+  },
+  {
+    "file": "docs/en/development/rest.md",
+    "link": "../controllers#controller-viewclasses",
+    "message": "File not found: docs/en/controllers/index.md"
+  },
+  {
+    "file": "docs/en/development/routing.md",
+    "link": "../controllers/components",
+    "message": "File not found: docs/en/controllers/components/index.md"
+  },
+  {
+    "file": "docs/en/development/routing.md",
+    "link": "../controllers/middleware#routing-middleware",
+    "message": "File not found: docs/en/controllers/middleware/index.md"
+  },
+  {
+    "file": "docs/en/development/routing.md",
+    "link": "../controllers/middleware#routing-middleware",
+    "message": "File not found: docs/en/controllers/middleware/index.md"
+  },
+  {
+    "file": "docs/en/development/sessions.md",
+    "link": "../core-libraries/caching#caching-redisengine",
+    "message": "Anchor '#caching-redisengine' not found in docs/en/core-libraries/caching.md"
+  },
+  {
+    "file": "docs/en/development/testing.md",
+    "link": "../controllers/middleware",
+    "message": "File not found: docs/en/controllers/middleware/index.md"
+  },
+  {
+    "file": "docs/en/development/testing.md",
+    "link": "../development/application#application-bootstrap",
+    "message": "Anchor '#application-bootstrap' not found in docs/en/development/application.md"
+  },
+  {
+    "file": "docs/en/development/testing.md",
+    "link": "../controllers/middleware#encrypted-cookie-middleware",
+    "message": "File not found: docs/en/controllers/middleware/index.md"
+  },
+  {
+    "file": "docs/en/development/testing.md",
+    "link": "../controllers/request-response#request-file-uploads",
+    "message": "Anchor '#request-file-uploads' not found in docs/en/controllers/request-response.md"
+  },
+  {
+    "file": "docs/en/development/testing.md",
+    "link": "../console-commands/commands#console-integration-testing",
+    "message": "Anchor '#console-integration-testing' not found in docs/en/console-commands/commands.md"
+  },
+  {
+    "file": "docs/en/development/testing.md",
+    "link": "../core-libraries/httpclient#httpclient-testing",
+    "message": "Anchor '#httpclient-testing' not found in docs/en/core-libraries/httpclient.md"
+  },
+  {
+    "file": "docs/en/development/testing.md",
+    "link": "../core-libraries/email#email-testing",
+    "message": "Anchor '#email-testing' not found in docs/en/core-libraries/email.md"
+  },
+  {
+    "file": "docs/en/development/testing.md",
+    "link": "../core-libraries/logging#log-testing",
+    "message": "Anchor '#log-testing' not found in docs/en/core-libraries/logging.md"
+  },
+  {
+    "file": "docs/en/epub-contents.md",
+    "link": "intro",
+    "message": "File not found: docs/en/intro/index.md"
+  },
+  {
+    "file": "docs/en/epub-contents.md",
+    "link": "tutorials-and-examples",
+    "message": "File not found: docs/en/tutorials-and-examples/index.md"
+  },
+  {
+    "file": "docs/en/epub-contents.md",
+    "link": "contributing",
+    "message": "File not found: docs/en/contributing/index.md"
+  },
+  {
+    "file": "docs/en/epub-contents.md",
+    "link": "controllers",
+    "message": "File not found: docs/en/controllers/index.md"
+  },
+  {
+    "file": "docs/en/epub-contents.md",
+    "link": "views",
+    "message": "File not found: docs/en/views/index.md"
+  },
+  {
+    "file": "docs/en/epub-contents.md",
+    "link": "orm",
+    "message": "File not found: docs/en/orm/index.md"
+  },
+  {
+    "file": "docs/en/epub-contents.md",
+    "link": "bake",
+    "message": "File not found: docs/en/bake/index.md"
+  },
+  {
+    "file": "docs/en/epub-contents.md",
+    "link": "console-commands",
+    "message": "File not found: docs/en/console-commands/index.md"
+  },
+  {
+    "file": "docs/en/epub-contents.md",
+    "link": "security",
+    "message": "File not found: docs/en/security/index.md"
+  },
+  {
+    "file": "docs/en/epub-contents.md",
+    "link": "appendices",
+    "message": "File not found: docs/en/appendices/index.md"
+  },
+  {
+    "file": "docs/en/index.md",
+    "link": "intro",
+    "message": "File not found: docs/en/intro/index.md"
+  },
+  {
+    "file": "docs/en/index.md",
+    "link": "tutorials-and-examples",
+    "message": "File not found: docs/en/tutorials-and-examples/index.md"
+  },
+  {
+    "file": "docs/en/index.md",
+    "link": "orm",
+    "message": "File not found: docs/en/orm/index.md"
+  },
+  {
+    "file": "docs/en/index.md",
+    "link": "controllers",
+    "message": "File not found: docs/en/controllers/index.md"
+  },
+  {
+    "file": "docs/en/index.md",
+    "link": "views",
+    "message": "File not found: docs/en/views/index.md"
+  },
+  {
+    "file": "docs/en/index.md",
+    "link": "security",
+    "message": "File not found: docs/en/security/index.md"
+  },
+  {
+    "file": "docs/en/index.md",
+    "link": "intro",
+    "message": "File not found: docs/en/intro/index.md"
+  },
+  {
+    "file": "docs/en/installation.md",
+    "link": "tutorials-and-examples",
+    "message": "File not found: docs/en/tutorials-and-examples/index.md"
+  },
+  {
+    "file": "docs/en/intro.md",
+    "link": "views#view-templates",
+    "message": "File not found: docs/en/views/index.md"
+  },
+  {
+    "file": "docs/en/intro.md",
+    "link": "views#view-elements",
+    "message": "File not found: docs/en/views/index.md"
+  },
+  {
+    "file": "docs/en/intro.md",
+    "link": "controllers/middleware",
+    "message": "File not found: docs/en/controllers/middleware/index.md"
+  },
+  {
+    "file": "docs/en/intro/cakephp-folder-structure.md",
+    "link": "../controllers",
+    "message": "File not found: docs/en/controllers/index.md"
+  },
+  {
+    "file": "docs/en/intro/cakephp-folder-structure.md",
+    "link": "../controllers/middleware",
+    "message": "File not found: docs/en/controllers/middleware/index.md"
+  },
+  {
+    "file": "docs/en/intro/conventions.md",
+    "link": "../development/routing#routes-configuration",
+    "message": "Anchor '#routes-configuration' not found in docs/en/development/routing.md"
+  },
+  {
+    "file": "docs/en/orm.md",
+    "link": "orm/database-basics#database-configuration",
+    "message": "Anchor '#database-configuration' not found in docs/en/orm/database-basics.md"
+  },
+  {
+    "file": "docs/en/orm.md",
+    "link": "intro/conventions#model-and-database-conventions",
+    "message": "Anchor '#model-and-database-conventions' not found in docs/en/intro/conventions.md"
+  },
+  {
+    "file": "docs/en/orm.md",
+    "link": "orm/behaviors",
+    "message": "File not found: docs/en/orm/behaviors/index.md"
+  },
+  {
+    "file": "docs/en/orm/associations.md",
+    "link": "../orm/retrieving-data-and-resultsets#custom-find-methods",
+    "message": "Anchor '#custom-find-methods' not found in docs/en/orm/retrieving-data-and-resultsets.md"
+  },
+  {
+    "file": "docs/en/orm/associations.md",
+    "link": "../orm/retrieving-data-and-resultsets#eager-loading-associations",
+    "message": "Anchor '#eager-loading-associations' not found in docs/en/orm/retrieving-data-and-resultsets.md"
+  },
+  {
+    "file": "docs/en/orm/behaviors.md",
+    "link": "../orm/table-objects#table-callbacks",
+    "message": "Anchor '#table-callbacks' not found in docs/en/orm/table-objects.md"
+  },
+  {
+    "file": "docs/en/orm/behaviors.md",
+    "link": "../orm/retrieving-data-and-resultsets#custom-find-methods",
+    "message": "Anchor '#custom-find-methods' not found in docs/en/orm/retrieving-data-and-resultsets.md"
+  },
+  {
+    "file": "docs/en/orm/database-basics.md",
+    "link": "../orm/table-objects#configuring-table-connections",
+    "message": "Anchor '#configuring-table-connections' not found in docs/en/orm/table-objects.md"
+  },
+  {
+    "file": "docs/en/orm/database-basics.md",
+    "link": "/bake",
+    "message": "File not found: ../../../../../bake.md"
+  },
+  {
+    "file": "docs/en/orm/deleting-data.md",
+    "link": "../orm/validation#application-rules",
+    "message": "Anchor '#application-rules' not found in docs/en/orm/validation.md"
+  },
+  {
+    "file": "docs/en/orm/entities.md",
+    "link": "../bake",
+    "message": "File not found: docs/en/bake/index.md"
+  },
+  {
+    "file": "docs/en/orm/query-builder.md",
+    "link": "../orm/database-basics#database-queries",
+    "message": "Anchor '#database-queries' not found in docs/en/orm/database-basics.md"
+  },
+  {
+    "file": "docs/en/orm/query-builder.md",
+    "link": "../orm/retrieving-data-and-resultsets#table-find-list",
+    "message": "Anchor '#table-find-list' not found in docs/en/orm/retrieving-data-and-resultsets.md"
+  },
+  {
+    "file": "docs/en/orm/query-builder.md",
+    "link": "../orm/database-basics#database-query-logging",
+    "message": "Anchor '#database-query-logging' not found in docs/en/orm/database-basics.md"
+  },
+  {
+    "file": "docs/en/orm/query-builder.md",
+    "link": "../orm/retrieving-data-and-resultsets#map-reduce",
+    "message": "Anchor '#map-reduce' not found in docs/en/orm/retrieving-data-and-resultsets.md"
+  },
+  {
+    "file": "docs/en/orm/query-builder.md",
+    "link": "../orm/database-basics#database-data-types",
+    "message": "Anchor '#database-data-types' not found in docs/en/orm/database-basics.md"
+  },
+  {
+    "file": "docs/en/orm/retrieving-data-and-resultsets.md",
+    "link": "../orm/query-builder#query-count",
+    "message": "Anchor '#query-count' not found in docs/en/orm/query-builder.md"
+  },
+  {
+    "file": "docs/en/orm/retrieving-data-and-resultsets.md",
+    "link": "../orm/behaviors",
+    "message": "File not found: docs/en/orm/behaviors/index.md"
+  },
+  {
+    "file": "docs/en/orm/retrieving-data-and-resultsets.md",
+    "link": "../orm/entities#lazy-load-associations",
+    "message": "Anchor '#lazy-load-associations' not found in docs/en/orm/entities.md"
+  },
+  {
+    "file": "docs/en/orm/retrieving-data-and-resultsets.md",
+    "link": "../orm/query-builder#format-results",
+    "message": "Anchor '#format-results' not found in docs/en/orm/query-builder.md"
+  },
+  {
+    "file": "docs/en/orm/saving-data.md",
+    "link": "../orm/entities#entities-mass-assignment",
+    "message": "Anchor '#entities-mass-assignment' not found in docs/en/orm/entities.md"
+  },
+  {
+    "file": "docs/en/orm/saving-data.md",
+    "link": "../orm/validation#validating-request-data",
+    "message": "Anchor '#validating-request-data' not found in docs/en/orm/validation.md"
+  },
+  {
+    "file": "docs/en/orm/saving-data.md",
+    "link": "../orm/validation#using-different-validators-per-association",
+    "message": "Anchor '#using-different-validators-per-association' not found in docs/en/orm/validation.md"
+  },
+  {
+    "file": "docs/en/orm/saving-data.md",
+    "link": "../orm/entities#entities-mass-assignment",
+    "message": "Anchor '#entities-mass-assignment' not found in docs/en/orm/entities.md"
+  },
+  {
+    "file": "docs/en/orm/saving-data.md",
+    "link": "../orm/validation#validating-request-data",
+    "message": "Anchor '#validating-request-data' not found in docs/en/orm/validation.md"
+  },
+  {
+    "file": "docs/en/orm/saving-data.md",
+    "link": "../orm/entities#entities-mass-assignment",
+    "message": "Anchor '#entities-mass-assignment' not found in docs/en/orm/entities.md"
+  },
+  {
+    "file": "docs/en/orm/saving-data.md",
+    "link": "../orm/validation#application-rules",
+    "message": "Anchor '#application-rules' not found in docs/en/orm/validation.md"
+  },
+  {
+    "file": "docs/en/orm/saving-data.md",
+    "link": "../orm/validation#application-rules",
+    "message": "Anchor '#application-rules' not found in docs/en/orm/validation.md"
+  },
+  {
+    "file": "docs/en/orm/saving-data.md",
+    "link": "../views/helpers/form#associated-form-inputs",
+    "message": "Anchor '#associated-form-inputs' not found in docs/en/views/helpers/form.md"
+  },
+  {
+    "file": "docs/en/orm/saving-data.md",
+    "link": "../core-libraries/inflector#inflector-methods-summary",
+    "message": "Anchor '#inflector-methods-summary' not found in docs/en/core-libraries/inflector.md"
+  },
+  {
+    "file": "docs/en/orm/saving-data.md",
+    "link": "../core-libraries/inflector#inflector-methods-summary",
+    "message": "Anchor '#inflector-methods-summary' not found in docs/en/core-libraries/inflector.md"
+  },
+  {
+    "file": "docs/en/orm/saving-data.md",
+    "link": "../core-libraries/inflector#inflector-methods-summary",
+    "message": "Anchor '#inflector-methods-summary' not found in docs/en/core-libraries/inflector.md"
+  },
+  {
+    "file": "docs/en/orm/saving-data.md",
+    "link": "../orm/associations#has-many-associations",
+    "message": "Anchor '#has-many-associations' not found in docs/en/orm/associations.md"
+  },
+  {
+    "file": "docs/en/orm/saving-data.md",
+    "link": "../core-libraries/inflector#inflector-methods-summary",
+    "message": "Anchor '#inflector-methods-summary' not found in docs/en/core-libraries/inflector.md"
+  },
+  {
+    "file": "docs/en/orm/saving-data.md",
+    "link": "../orm/associations#belongs-to-many-associations",
+    "message": "Anchor '#belongs-to-many-associations' not found in docs/en/orm/associations.md"
+  },
+  {
+    "file": "docs/en/orm/saving-data.md",
+    "link": "../views/helpers/form#associated-form-inputs",
+    "message": "Anchor '#associated-form-inputs' not found in docs/en/views/helpers/form.md"
+  },
+  {
+    "file": "docs/en/orm/saving-data.md",
+    "link": "../orm/database-basics#adding-custom-database-types",
+    "message": "Anchor '#adding-custom-database-types' not found in docs/en/orm/database-basics.md"
+  },
+  {
+    "file": "docs/en/orm/saving-data.md",
+    "link": "../orm/query-builder#query-builder-updating-data",
+    "message": "Anchor '#query-builder-updating-data' not found in docs/en/orm/query-builder.md"
+  },
+  {
+    "file": "docs/en/orm/schema-system.md",
+    "link": "../development/testing#test-fixtures",
+    "message": "Anchor '#test-fixtures' not found in docs/en/development/testing.md"
+  },
+  {
+    "file": "docs/en/orm/table-objects.md",
+    "link": "../orm/database-basics#database-configuration",
+    "message": "Anchor '#database-configuration' not found in docs/en/orm/database-basics.md"
+  },
+  {
+    "file": "docs/en/orm/table-objects.md",
+    "link": "../orm/saving-data#before-marshal",
+    "message": "Anchor '#before-marshal' not found in docs/en/orm/saving-data.md"
+  },
+  {
+    "file": "docs/en/orm/table-objects.md",
+    "link": "../orm/retrieving-data-and-resultsets#map-reduce",
+    "message": "Anchor '#map-reduce' not found in docs/en/orm/retrieving-data-and-resultsets.md"
+  },
+  {
+    "file": "docs/en/orm/table-objects.md",
+    "link": "../orm/behaviors",
+    "message": "File not found: docs/en/orm/behaviors/index.md"
+  },
+  {
+    "file": "docs/en/pdf-contents.md",
+    "link": "intro",
+    "message": "File not found: docs/en/intro/index.md"
+  },
+  {
+    "file": "docs/en/pdf-contents.md",
+    "link": "tutorials-and-examples",
+    "message": "File not found: docs/en/tutorials-and-examples/index.md"
+  },
+  {
+    "file": "docs/en/pdf-contents.md",
+    "link": "contributing",
+    "message": "File not found: docs/en/contributing/index.md"
+  },
+  {
+    "file": "docs/en/pdf-contents.md",
+    "link": "controllers",
+    "message": "File not found: docs/en/controllers/index.md"
+  },
+  {
+    "file": "docs/en/pdf-contents.md",
+    "link": "views",
+    "message": "File not found: docs/en/views/index.md"
+  },
+  {
+    "file": "docs/en/pdf-contents.md",
+    "link": "orm",
+    "message": "File not found: docs/en/orm/index.md"
+  },
+  {
+    "file": "docs/en/pdf-contents.md",
+    "link": "bake",
+    "message": "File not found: docs/en/bake/index.md"
+  },
+  {
+    "file": "docs/en/pdf-contents.md",
+    "link": "console-commands",
+    "message": "File not found: docs/en/console-commands/index.md"
+  },
+  {
+    "file": "docs/en/pdf-contents.md",
+    "link": "security",
+    "message": "File not found: docs/en/security/index.md"
+  },
+  {
+    "file": "docs/en/pdf-contents.md",
+    "link": "appendices",
+    "message": "File not found: docs/en/appendices/index.md"
+  },
+  {
+    "file": "docs/en/plugins.md",
+    "link": "views#view-elements",
+    "message": "File not found: docs/en/views/index.md"
+  },
+  {
+    "file": "docs/en/plugins.md",
+    "link": "deployment#symlink-assets",
+    "message": "Anchor '#symlink-assets' not found in docs/en/deployment.md"
+  },
+  {
+    "file": "docs/en/plugins.md",
+    "link": "deployment#symlink-assets",
+    "message": "Anchor '#symlink-assets' not found in docs/en/deployment.md"
+  },
+  {
+    "file": "docs/en/quickstart.md",
+    "link": "../tutorials-and-examples/cms/authentication",
+    "message": "File not found: docs/tutorials-and-examples/cms/authentication.md"
+  },
+  {
+    "file": "docs/en/quickstart.md",
+    "link": "../tutorials-and-examples/cms/tags-and-users",
+    "message": "File not found: docs/tutorials-and-examples/cms/tags-and-users.md"
+  },
+  {
+    "file": "docs/en/quickstart.md",
+    "link": "../orm",
+    "message": "File not found: docs/orm.md"
+  },
+  {
+    "file": "docs/en/quickstart.md",
+    "link": "../core-libraries/validation",
+    "message": "File not found: docs/core-libraries/validation.md"
+  },
+  {
+    "file": "docs/en/quickstart.md",
+    "link": "../security",
+    "message": "File not found: docs/security.md"
+  },
+  {
+    "file": "docs/en/quickstart.md",
+    "link": "../development/testing",
+    "message": "File not found: docs/development/testing.md"
+  },
+  {
+    "file": "docs/en/quickstart.md",
+    "link": "../deployment",
+    "message": "File not found: docs/deployment.md"
+  },
+  {
+    "file": "docs/en/topics.md",
+    "link": "controllers",
+    "message": "File not found: docs/en/controllers/index.md"
+  },
+  {
+    "file": "docs/en/topics.md",
+    "link": "controllers/components",
+    "message": "File not found: docs/en/controllers/components/index.md"
+  },
+  {
+    "file": "docs/en/topics.md",
+    "link": "views",
+    "message": "File not found: docs/en/views/index.md"
+  },
+  {
+    "file": "docs/en/topics.md",
+    "link": "views/helpers",
+    "message": "File not found: docs/en/views/helpers/index.md"
+  },
+  {
+    "file": "docs/en/topics.md",
+    "link": "orm",
+    "message": "File not found: docs/en/orm/index.md"
+  },
+  {
+    "file": "docs/en/topics.md",
+    "link": "security/csrf#csrf-middleware",
+    "message": "Anchor '#csrf-middleware' not found in docs/en/security/csrf.md"
+  },
+  {
+    "file": "docs/en/topics.md",
+    "link": "console-commands",
+    "message": "File not found: docs/en/console-commands/index.md"
+  },
+  {
+    "file": "docs/en/topics.md",
+    "link": "contributing",
+    "message": "File not found: docs/en/contributing/index.md"
+  },
+  {
+    "file": "docs/en/topics.md",
+    "link": "tutorials-and-examples",
+    "message": "File not found: docs/en/tutorials-and-examples/index.md"
+  },
+  {
+    "file": "docs/en/tutorials-and-examples/cms/articles-controller.md",
+    "link": "../../views/helpers",
+    "message": "File not found: docs/en/views/helpers/index.md"
+  },
+  {
+    "file": "docs/en/tutorials-and-examples/cms/articles-controller.md",
+    "link": "../../development/routing#named-routes",
+    "message": "Anchor '#named-routes' not found in docs/en/development/routing.md"
+  },
+  {
+    "file": "docs/en/tutorials-and-examples/cms/articles-controller.md",
+    "link": "../../orm/table-objects#table-callbacks",
+    "message": "Anchor '#table-callbacks' not found in docs/en/orm/table-objects.md"
+  },
+  {
+    "file": "docs/en/tutorials-and-examples/cms/articles-controller.md",
+    "link": "../../orm/validation#validating-request-data",
+    "message": "Anchor '#validating-request-data' not found in docs/en/orm/validation.md"
+  },
+  {
+    "file": "docs/en/tutorials-and-examples/cms/articles-model.md",
+    "link": "../../orm/entities#entities-mass-assignment",
+    "message": "Anchor '#entities-mass-assignment' not found in docs/en/orm/entities.md"
+  },
+  {
+    "file": "docs/en/tutorials-and-examples/cms/authorization.md",
+    "link": "../../orm",
+    "message": "File not found: docs/en/orm/index.md"
+  },
+  {
+    "file": "docs/en/tutorials-and-examples/cms/tags-and-users.md",
+    "link": "../../bake",
+    "message": "File not found: docs/en/bake/index.md"
+  },
+  {
+    "file": "docs/en/tutorials-and-examples/cms/tags-and-users.md",
+    "link": "../../controllers/request-response#cake-request",
+    "message": "Anchor '#cake-request' not found in docs/en/controllers/request-response.md"
+  },
+  {
+    "file": "docs/en/tutorials-and-examples/cms/tags-and-users.md",
+    "link": "../../orm/retrieving-data-and-resultsets#custom-find-methods",
+    "message": "Anchor '#custom-find-methods' not found in docs/en/orm/retrieving-data-and-resultsets.md"
+  },
+  {
+    "file": "docs/en/views.md",
+    "link": "controllers/request-response#cake-response-file",
+    "message": "Anchor '#cake-response-file' not found in docs/en/controllers/request-response.md"
+  },
+  {
+    "file": "docs/en/views.md",
+    "link": "controllers#setting-view_variables",
+    "message": "File not found: docs/en/controllers/index.md"
+  },
+  {
+    "file": "docs/en/views.md",
+    "link": "views/helpers#helper-api",
+    "message": "File not found: docs/en/views/helpers/index.md"
+  },
+  {
+    "file": "docs/en/views.md",
+    "link": "views/helpers",
+    "message": "File not found: docs/en/views/helpers/index.md"
+  },
+  {
+    "file": "docs/en/views/helpers/form.md",
+    "link": "../../views#view-blocks",
+    "message": "File not found: docs/en/views/index.md"
+  },
+  {
+    "file": "docs/en/views/helpers/form.md",
+    "link": "../../views#view-blocks",
+    "message": "File not found: docs/en/views/index.md"
+  },
+  {
+    "file": "docs/en/views/helpers/html.md",
+    "link": "../../views#view-blocks",
+    "message": "File not found: docs/en/views/index.md"
+  },
+  {
+    "file": "docs/en/views/helpers/url.md",
+    "link": "../../views/helpers#aliasing-helpers",
+    "message": "File not found: docs/en/views/helpers/index.md"
+  },
+  {
+    "file": "docs/en/views/json-and-xml-views.md",
+    "link": "../controllers#controller-viewclasses",
+    "message": "File not found: docs/en/controllers/index.md"
+  },
+  {
+    "file": "docs/en/views/json-and-xml-views.md",
+    "link": "../development/routing#file-extensions",
+    "message": "Anchor '#file-extensions' not found in docs/en/development/routing.md"
+  },
+  {
+    "file": "docs/en/views/json-and-xml-views.md",
+    "link": "../development/routing#file-extensions",
+    "message": "Anchor '#file-extensions' not found in docs/en/development/routing.md"
+  },
+  {
+    "file": "docs/en/views/themes.md",
+    "link": "../plugins#plugin-create-your-own",
+    "message": "Anchor '#plugin-create-your-own' not found in docs/en/plugins.md"
+  },
+  {
+    "file": "docs/en/views/themes.md",
+    "link": "../deployment#symlink-assets",
+    "message": "Anchor '#symlink-assets' not found in docs/en/deployment.md"
+  },
+  {
+    "file": "docs/ja/appendices/5-0-migration-guide.md",
+    "link": "../deployment#symlink-assets",
+    "message": "Anchor '#symlink-assets' not found in docs/ja/deployment.md"
+  },
+  {
+    "file": "docs/ja/appendices/5-0-migration-guide.md",
+    "link": "../plugins#loading-a-plugin",
+    "message": "Anchor '#loading-a-plugin' not found in docs/ja/plugins.md"
+  },
+  {
+    "file": "docs/ja/appendices/5-1-migration-guide.md",
+    "link": "../core-libraries/events#registering-event-listeners",
+    "message": "Anchor '#registering-event-listeners' not found in docs/ja/core-libraries/events.md"
+  },
+  {
+    "file": "docs/ja/appendices/5-2-migration-guide.md",
+    "link": "../views/helpers/form#customizing-templates",
+    "message": "Anchor '#customizing-templates' not found in docs/ja/views/helpers/form.md"
+  },
+  {
+    "file": "docs/ja/console-commands.md",
+    "link": "plugins#plugin-commands",
+    "message": "Anchor '#plugin-commands' not found in docs/ja/plugins.md"
+  },
+  {
+    "file": "docs/ja/console-commands/shells.md",
+    "link": "../controllers/components",
+    "message": "File not found: docs/ja/controllers/components/index.md"
+  },
+  {
+    "file": "docs/ja/console-commands/shells.md",
+    "link": "../console-commands/input-output#command-helpers",
+    "message": "Anchor '#command-helpers' not found in docs/ja/console-commands/input-output.md"
+  },
+  {
+    "file": "docs/ja/contents.md",
+    "link": "intro",
+    "message": "File not found: docs/ja/intro/index.md"
+  },
+  {
+    "file": "docs/ja/contents.md",
+    "link": "tutorials-and-examples",
+    "message": "File not found: docs/ja/tutorials-and-examples/index.md"
+  },
+  {
+    "file": "docs/ja/contents.md",
+    "link": "contributing",
+    "message": "File not found: docs/ja/contributing/index.md"
+  },
+  {
+    "file": "docs/ja/contents.md",
+    "link": "controllers",
+    "message": "File not found: docs/ja/controllers/index.md"
+  },
+  {
+    "file": "docs/ja/contents.md",
+    "link": "views",
+    "message": "File not found: docs/ja/views/index.md"
+  },
+  {
+    "file": "docs/ja/contents.md",
+    "link": "orm",
+    "message": "File not found: docs/ja/orm/index.md"
+  },
+  {
+    "file": "docs/ja/contents.md",
+    "link": "console-commands",
+    "message": "File not found: docs/ja/console-commands/index.md"
+  },
+  {
+    "file": "docs/ja/contents.md",
+    "link": "security",
+    "message": "File not found: docs/ja/security/index.md"
+  },
+  {
+    "file": "docs/ja/contents.md",
+    "link": "appendices",
+    "message": "File not found: docs/ja/appendices/index.md"
+  },
+  {
+    "file": "docs/ja/contributing/backwards-compatibility.md",
+    "link": "../appendices",
+    "message": "File not found: docs/ja/appendices/index.md"
+  },
+  {
+    "file": "docs/ja/contributing/code.md",
+    "link": "../orm/database-basics#database-configuration",
+    "message": "Anchor '#database-configuration' not found in docs/ja/orm/database-basics.md"
+  },
+  {
+    "file": "docs/ja/contributing/code.md",
+    "link": "../development/testing#running-tests",
+    "message": "Anchor '#running-tests' not found in docs/ja/development/testing.md"
+  },
+  {
+    "file": "docs/ja/controllers.md",
+    "link": "development/routing#routes-configuration",
+    "message": "Anchor '#routes-configuration' not found in docs/ja/development/routing.md"
+  },
+  {
+    "file": "docs/ja/controllers.md",
+    "link": "controllers/request-response#cake-request",
+    "message": "Anchor '#cake-request' not found in docs/ja/controllers/request-response.md"
+  },
+  {
+    "file": "docs/ja/controllers.md",
+    "link": "controllers/components#configuring-components",
+    "message": "File not found: docs/ja/controllers/components/index.md"
+  },
+  {
+    "file": "docs/ja/controllers.md",
+    "link": "views/helpers#configuring-helpers",
+    "message": "File not found: docs/ja/views/helpers/index.md"
+  },
+  {
+    "file": "docs/ja/controllers.md",
+    "link": "controllers/components",
+    "message": "File not found: docs/ja/controllers/components/index.md"
+  },
+  {
+    "file": "docs/ja/controllers.md",
+    "link": "controllers/components",
+    "message": "File not found: docs/ja/controllers/components/index.md"
+  },
+  {
+    "file": "docs/ja/controllers/components/request-handling.md",
+    "link": "../../controllers/middleware#body-parser-middleware",
+    "message": "Anchor '#body-parser-middleware' not found in docs/ja/controllers/middleware.md"
+  },
+  {
+    "file": "docs/ja/controllers/middleware.md",
+    "link": "/middleware-setup.png",
+    "message": "File not found: ../../../../../middleware-setup.png.md"
+  },
+  {
+    "file": "docs/ja/controllers/middleware.md",
+    "link": "/middleware-request.png",
+    "message": "File not found: ../../../../../middleware-request.png.md"
+  },
+  {
+    "file": "docs/ja/controllers/middleware.md",
+    "link": "../development/routing#route-scoped-middleware",
+    "message": "Anchor '#route-scoped-middleware' not found in docs/ja/development/routing.md"
+  },
+  {
+    "file": "docs/ja/controllers/middleware.md",
+    "link": "../controllers#controller-middleware",
+    "message": "File not found: docs/ja/controllers/index.md"
+  },
+  {
+    "file": "docs/ja/controllers/middleware.md",
+    "link": "../core-libraries/caching#cache-configuration",
+    "message": "Anchor '#cache-configuration' not found in docs/ja/core-libraries/caching.md"
+  },
+  {
+    "file": "docs/ja/controllers/pagination.md",
+    "link": "../orm/retrieving-data-and-resultsets#custom-find-methods",
+    "message": "Anchor '#custom-find-methods' not found in docs/ja/orm/retrieving-data-and-resultsets.md"
+  },
+  {
+    "file": "docs/ja/controllers/pagination.md",
+    "link": "../views/helpers/paginator#paginator-helper-multiple",
+    "message": "Anchor '#paginator-helper-multiple' not found in docs/ja/views/helpers/paginator.md"
+  },
+  {
+    "file": "docs/ja/controllers/pagination.md",
+    "link": "../orm/table-objects#table-registry-usage",
+    "message": "Anchor '#table-registry-usage' not found in docs/ja/orm/table-objects.md"
+  },
+  {
+    "file": "docs/ja/controllers/request-response.md",
+    "link": "../development/routing#route-elements",
+    "message": "Anchor '#route-elements' not found in docs/ja/development/routing.md"
+  },
+  {
+    "file": "docs/ja/controllers/request-response.md",
+    "link": "../development/routing#route-elements",
+    "message": "Anchor '#route-elements' not found in docs/ja/development/routing.md"
+  },
+  {
+    "file": "docs/ja/controllers/request-response.md",
+    "link": "../development/routing#passed-arguments",
+    "message": "Anchor '#passed-arguments' not found in docs/ja/development/routing.md"
+  },
+  {
+    "file": "docs/ja/controllers/request-response.md",
+    "link": "../development/routing#prefix-routing",
+    "message": "Anchor '#prefix-routing' not found in docs/ja/development/routing.md"
+  },
+  {
+    "file": "docs/ja/controllers/request-response.md",
+    "link": "../controllers/middleware#body-parser-middleware",
+    "message": "Anchor '#body-parser-middleware' not found in docs/ja/controllers/middleware.md"
+  },
+  {
+    "file": "docs/ja/controllers/request-response.md",
+    "link": "../controllers/middleware#encrypted-cookie-middleware",
+    "message": "Anchor '#encrypted-cookie-middleware' not found in docs/ja/controllers/middleware.md"
+  },
+  {
+    "file": "docs/ja/core-libraries/caching.md",
+    "link": "../orm/query-builder#caching-query-results",
+    "message": "Anchor '#caching-query-results' not found in docs/ja/orm/query-builder.md"
+  },
+  {
+    "file": "docs/ja/core-libraries/caching.md",
+    "link": "../orm/query-builder#caching-query-results",
+    "message": "Anchor '#caching-query-results' not found in docs/ja/orm/query-builder.md"
+  },
+  {
+    "file": "docs/ja/core-libraries/email.md",
+    "link": "../core-libraries/logging#logging-levels",
+    "message": "Anchor '#logging-levels' not found in docs/ja/core-libraries/logging.md"
+  },
+  {
+    "file": "docs/ja/core-libraries/email.md",
+    "link": "../core-libraries/logging#logging-scopes",
+    "message": "Anchor '#logging-scopes' not found in docs/ja/core-libraries/logging.md"
+  },
+  {
+    "file": "docs/ja/core-libraries/email.md",
+    "link": "../views",
+    "message": "File not found: docs/ja/views/index.md"
+  },
+  {
+    "file": "docs/ja/core-libraries/email.md",
+    "link": "../core-libraries/events#registering-event-listeners",
+    "message": "Anchor '#registering-event-listeners' not found in docs/ja/core-libraries/events.md"
+  },
+  {
+    "file": "docs/ja/core-libraries/events.md",
+    "link": "../orm/table-objects#table-callbacks",
+    "message": "Anchor '#table-callbacks' not found in docs/ja/orm/table-objects.md"
+  },
+  {
+    "file": "docs/ja/core-libraries/events.md",
+    "link": "../controllers#controller-life-cycle",
+    "message": "File not found: docs/ja/controllers/index.md"
+  },
+  {
+    "file": "docs/ja/core-libraries/events.md",
+    "link": "../views#view-events",
+    "message": "File not found: docs/ja/views/index.md"
+  },
+  {
+    "file": "docs/ja/core-libraries/events.md",
+    "link": "../orm/behaviors",
+    "message": "File not found: docs/ja/orm/behaviors/index.md"
+  },
+  {
+    "file": "docs/ja/core-libraries/events.md",
+    "link": "../controllers/components",
+    "message": "File not found: docs/ja/controllers/components/index.md"
+  },
+  {
+    "file": "docs/ja/core-libraries/events.md",
+    "link": "../views/helpers",
+    "message": "File not found: docs/ja/views/helpers/index.md"
+  },
+  {
+    "file": "docs/ja/core-libraries/events.md",
+    "link": "../development/testing#testing-events",
+    "message": "Anchor '#testing-events' not found in docs/ja/development/testing.md"
+  },
+  {
+    "file": "docs/ja/core-libraries/time.md",
+    "link": "../core-libraries/internationalization-and-localization#parsing-localized-dates",
+    "message": "Anchor '#parsing-localized-dates' not found in docs/ja/core-libraries/internationalization-and-localization.md"
+  },
+  {
+    "file": "docs/ja/core-libraries/validation.md",
+    "link": "../orm/validation#application-rules",
+    "message": "Anchor '#application-rules' not found in docs/ja/orm/validation.md"
+  },
+  {
+    "file": "docs/ja/deployment.md",
+    "link": "security/csrf#csrf-middleware",
+    "message": "Anchor '#csrf-middleware' not found in docs/ja/security/csrf.md"
+  },
+  {
+    "file": "docs/ja/deployment.md",
+    "link": "/migrations/",
+    "message": "File not found: ../../../../../migrations.md"
+  },
+  {
+    "file": "docs/ja/development/application.md",
+    "link": "../console-commands",
+    "message": "File not found: docs/ja/console-commands/index.md"
+  },
+  {
+    "file": "docs/ja/development/application.md",
+    "link": "../development/testing#integration-testing",
+    "message": "Anchor '#integration-testing' not found in docs/ja/development/testing.md"
+  },
+  {
+    "file": "docs/ja/development/configuration.md",
+    "link": "../orm/database-basics#database-configuration",
+    "message": "Anchor '#database-configuration' not found in docs/ja/orm/database-basics.md"
+  },
+  {
+    "file": "docs/ja/development/configuration.md",
+    "link": "../core-libraries/caching#cache-configuration",
+    "message": "Anchor '#cache-configuration' not found in docs/ja/core-libraries/caching.md"
+  },
+  {
+    "file": "docs/ja/development/configuration.md",
+    "link": "../development/errors#error-configuration",
+    "message": "Anchor '#error-configuration' not found in docs/ja/development/errors.md"
+  },
+  {
+    "file": "docs/ja/development/configuration.md",
+    "link": "../core-libraries/logging#log-configuration",
+    "message": "Anchor '#log-configuration' not found in docs/ja/core-libraries/logging.md"
+  },
+  {
+    "file": "docs/ja/development/configuration.md",
+    "link": "../core-libraries/email#email-configuration",
+    "message": "Anchor '#email-configuration' not found in docs/ja/core-libraries/email.md"
+  },
+  {
+    "file": "docs/ja/development/configuration.md",
+    "link": "../development/sessions#session-configuration",
+    "message": "Anchor '#session-configuration' not found in docs/ja/development/sessions.md"
+  },
+  {
+    "file": "docs/ja/development/configuration.md",
+    "link": "../development/routing#routes-configuration",
+    "message": "Anchor '#routes-configuration' not found in docs/ja/development/routing.md"
+  },
+  {
+    "file": "docs/ja/development/configuration.md",
+    "link": "../core-libraries/inflector#inflection-configuration",
+    "message": "Anchor '#inflection-configuration' not found in docs/ja/core-libraries/inflector.md"
+  },
+  {
+    "file": "docs/ja/development/errors.md",
+    "link": "../development/routing#prefix-routing",
+    "message": "Anchor '#prefix-routing' not found in docs/ja/development/routing.md"
+  },
+  {
+    "file": "docs/ja/development/rest.md",
+    "link": "../development/routing#resource-routes",
+    "message": "Anchor '#resource-routes' not found in docs/ja/development/routing.md"
+  },
+  {
+    "file": "docs/ja/development/rest.md",
+    "link": "../development/routing#resource-routes",
+    "message": "Anchor '#resource-routes' not found in docs/ja/development/routing.md"
+  },
+  {
+    "file": "docs/ja/development/routing.md",
+    "link": "../controllers/components",
+    "message": "File not found: docs/ja/controllers/components/index.md"
+  },
+  {
+    "file": "docs/ja/development/routing.md",
+    "link": "../plugins#plugin-routes",
+    "message": "Anchor '#plugin-routes' not found in docs/ja/plugins.md"
+  },
+  {
+    "file": "docs/ja/development/routing.md",
+    "link": "../controllers/middleware#routing-middleware",
+    "message": "Anchor '#routing-middleware' not found in docs/ja/controllers/middleware.md"
+  },
+  {
+    "file": "docs/ja/development/routing.md",
+    "link": "../controllers/middleware#routing-middleware",
+    "message": "Anchor '#routing-middleware' not found in docs/ja/controllers/middleware.md"
+  },
+  {
+    "file": "docs/ja/development/testing.md",
+    "link": "../development/application#application-bootstrap",
+    "message": "Anchor '#application-bootstrap' not found in docs/ja/development/application.md"
+  },
+  {
+    "file": "docs/ja/development/testing.md",
+    "link": "../controllers/middleware#encrypted-cookie-middleware",
+    "message": "Anchor '#encrypted-cookie-middleware' not found in docs/ja/controllers/middleware.md"
+  },
+  {
+    "file": "docs/ja/development/testing.md",
+    "link": "../controllers/request-response#request-file-uploads",
+    "message": "Anchor '#request-file-uploads' not found in docs/ja/controllers/request-response.md"
+  },
+  {
+    "file": "docs/ja/development/testing.md",
+    "link": "../console-commands/commands#console-integration-testing",
+    "message": "Anchor '#console-integration-testing' not found in docs/ja/console-commands/commands.md"
+  },
+  {
+    "file": "docs/ja/development/testing.md",
+    "link": "../development/dependency-injection#mocking-services-in-tests",
+    "message": "Anchor '#mocking-services-in-tests' not found in docs/ja/development/dependency-injection.md"
+  },
+  {
+    "file": "docs/ja/development/testing.md",
+    "link": "../core-libraries/events#tracking-events",
+    "message": "Anchor '#tracking-events' not found in docs/ja/core-libraries/events.md"
+  },
+  {
+    "file": "docs/ja/development/testing.md",
+    "link": "../core-libraries/email#email-testing",
+    "message": "Anchor '#email-testing' not found in docs/ja/core-libraries/email.md"
+  },
+  {
+    "file": "docs/ja/epub-contents.md",
+    "link": "intro",
+    "message": "File not found: docs/ja/intro/index.md"
+  },
+  {
+    "file": "docs/ja/epub-contents.md",
+    "link": "tutorials-and-examples",
+    "message": "File not found: docs/ja/tutorials-and-examples/index.md"
+  },
+  {
+    "file": "docs/ja/epub-contents.md",
+    "link": "contributing",
+    "message": "File not found: docs/ja/contributing/index.md"
+  },
+  {
+    "file": "docs/ja/epub-contents.md",
+    "link": "controllers",
+    "message": "File not found: docs/ja/controllers/index.md"
+  },
+  {
+    "file": "docs/ja/epub-contents.md",
+    "link": "views",
+    "message": "File not found: docs/ja/views/index.md"
+  },
+  {
+    "file": "docs/ja/epub-contents.md",
+    "link": "orm",
+    "message": "File not found: docs/ja/orm/index.md"
+  },
+  {
+    "file": "docs/ja/epub-contents.md",
+    "link": "bake",
+    "message": "File not found: docs/ja/bake/index.md"
+  },
+  {
+    "file": "docs/ja/epub-contents.md",
+    "link": "console-commands",
+    "message": "File not found: docs/ja/console-commands/index.md"
+  },
+  {
+    "file": "docs/ja/epub-contents.md",
+    "link": "controllers/components/pagination",
+    "message": "File not found: docs/ja/controllers/components/pagination.md"
+  },
+  {
+    "file": "docs/ja/epub-contents.md",
+    "link": "security",
+    "message": "File not found: docs/ja/security/index.md"
+  },
+  {
+    "file": "docs/ja/epub-contents.md",
+    "link": "appendices",
+    "message": "File not found: docs/ja/appendices/index.md"
+  },
+  {
+    "file": "docs/ja/index.md",
+    "link": "intro",
+    "message": "File not found: docs/ja/intro/index.md"
+  },
+  {
+    "file": "docs/ja/index.md",
+    "link": "/read-the-book.jpg",
+    "message": "File not found: ../../../../../read-the-book.jpg.md"
+  },
+  {
+    "file": "docs/ja/index.md",
+    "link": "../_downloads/en/CakePHPBook.pdf",
+    "message": "File not found: docs/_downloads/en/CakePHPBook.pdf.md"
+  },
+  {
+    "file": "docs/ja/index.md",
+    "link": "../_downloads/ja/CakePHP.epub",
+    "message": "File not found: docs/_downloads/ja/CakePHP.epub.md"
+  },
+  {
+    "file": "docs/ja/index.md",
+    "link": "intro#request-cycle",
+    "message": "File not found: docs/ja/intro/index.md"
+  },
+  {
+    "file": "docs/ja/index.md",
+    "link": "controllers",
+    "message": "File not found: docs/ja/controllers/index.md"
+  },
+  {
+    "file": "docs/ja/index.md",
+    "link": "views",
+    "message": "File not found: docs/ja/views/index.md"
+  },
+  {
+    "file": "docs/ja/index.md",
+    "link": "orm",
+    "message": "File not found: docs/ja/orm/index.md"
+  },
+  {
+    "file": "docs/ja/intro.md",
+    "link": "views#view-templates",
+    "message": "File not found: docs/ja/views/index.md"
+  },
+  {
+    "file": "docs/ja/intro.md",
+    "link": "views#view-elements",
+    "message": "File not found: docs/ja/views/index.md"
+  },
+  {
+    "file": "docs/ja/intro/cakephp-folder-structure.md",
+    "link": "../controllers",
+    "message": "File not found: docs/ja/controllers/index.md"
+  },
+  {
+    "file": "docs/ja/intro/conventions.md",
+    "link": "../development/routing#routes-configuration",
+    "message": "Anchor '#routes-configuration' not found in docs/ja/development/routing.md"
+  },
+  {
+    "file": "docs/ja/intro/where-to-get-help.md",
+    "link": "irc://irc.freenode.net/cakephp",
+    "message": "File not found: docs/ja/intro/irc:/irc.freenode.net/cakephp.md"
+  },
+  {
+    "file": "docs/ja/intro/where-to-get-help.md",
+    "link": "irc://irc.freenode.net/cakephp-docs",
+    "message": "File not found: docs/ja/intro/irc:/irc.freenode.net/cakephp-docs.md"
+  },
+  {
+    "file": "docs/ja/intro/where-to-get-help.md",
+    "link": "irc://irc.freenode.net/cakephp-bakery",
+    "message": "File not found: docs/ja/intro/irc:/irc.freenode.net/cakephp-bakery.md"
+  },
+  {
+    "file": "docs/ja/intro/where-to-get-help.md",
+    "link": "irc://irc.freenode.net/cakephp-fr",
+    "message": "File not found: docs/ja/intro/irc:/irc.freenode.net/cakephp-fr.md"
+  },
+  {
+    "file": "docs/ja/intro/where-to-get-help.md",
+    "link": "irc://irc.freenode.net/cakephp-es",
+    "message": "File not found: docs/ja/intro/irc:/irc.freenode.net/cakephp-es.md"
+  },
+  {
+    "file": "docs/ja/orm.md",
+    "link": "orm/database-basics#database-configuration",
+    "message": "Anchor '#database-configuration' not found in docs/ja/orm/database-basics.md"
+  },
+  {
+    "file": "docs/ja/orm.md",
+    "link": "intro/conventions#model-and-database-conventions",
+    "message": "Anchor '#model-and-database-conventions' not found in docs/ja/intro/conventions.md"
+  },
+  {
+    "file": "docs/ja/orm.md",
+    "link": "orm/behaviors",
+    "message": "File not found: docs/ja/orm/behaviors/index.md"
+  },
+  {
+    "file": "docs/ja/orm/associations.md",
+    "link": "../orm/retrieving-data-and-resultsets#custom-find-methods",
+    "message": "Anchor '#custom-find-methods' not found in docs/ja/orm/retrieving-data-and-resultsets.md"
+  },
+  {
+    "file": "docs/ja/orm/associations.md",
+    "link": "../orm/retrieving-data-and-resultsets#eager-loading-associations",
+    "message": "Anchor '#eager-loading-associations' not found in docs/ja/orm/retrieving-data-and-resultsets.md"
+  },
+  {
+    "file": "docs/ja/orm/behaviors.md",
+    "link": "../orm/table-objects#table-callbacks",
+    "message": "Anchor '#table-callbacks' not found in docs/ja/orm/table-objects.md"
+  },
+  {
+    "file": "docs/ja/orm/behaviors.md",
+    "link": "../orm/retrieving-data-and-resultsets#custom-find-methods",
+    "message": "Anchor '#custom-find-methods' not found in docs/ja/orm/retrieving-data-and-resultsets.md"
+  },
+  {
+    "file": "docs/ja/orm/behaviors/counter-cache.md",
+    "link": "../../orm/associations#using-the-through-option",
+    "message": "Anchor '#using-the-through-option' not found in docs/ja/orm/associations.md"
+  },
+  {
+    "file": "docs/ja/orm/database-basics.md",
+    "link": "../orm/table-objects#configuring-table-connections",
+    "message": "Anchor '#configuring-table-connections' not found in docs/ja/orm/table-objects.md"
+  },
+  {
+    "file": "docs/ja/orm/database-basics.md",
+    "link": "../orm/saving-data#saving-complex-types",
+    "message": "Anchor '#saving-complex-types' not found in docs/ja/orm/saving-data.md"
+  },
+  {
+    "file": "docs/ja/orm/database-basics.md",
+    "link": "../orm/saving-data#saving-complex-types",
+    "message": "Anchor '#saving-complex-types' not found in docs/ja/orm/saving-data.md"
+  },
+  {
+    "file": "docs/ja/orm/deleting-data.md",
+    "link": "../orm/validation#application-rules",
+    "message": "Anchor '#application-rules' not found in docs/ja/orm/validation.md"
+  },
+  {
+    "file": "docs/ja/orm/entities.md",
+    "link": "../orm/saving-data#saving-entities",
+    "message": "Anchor '#saving-entities' not found in docs/ja/orm/saving-data.md"
+  },
+  {
+    "file": "docs/ja/orm/entities.md",
+    "link": "../bake",
+    "message": "File not found: docs/ja/bake/index.md"
+  },
+  {
+    "file": "docs/ja/orm/entities.md",
+    "link": "../orm/saving-data#changing-accessible-fields",
+    "message": "Anchor '#changing-accessible-fields' not found in docs/ja/orm/saving-data.md"
+  },
+  {
+    "file": "docs/ja/orm/entities.md",
+    "link": "../orm/saving-data#saving-complex-types",
+    "message": "Anchor '#saving-complex-types' not found in docs/ja/orm/saving-data.md"
+  },
+  {
+    "file": "docs/ja/orm/query-builder.md",
+    "link": "../orm/database-basics#database-queries",
+    "message": "Anchor '#database-queries' not found in docs/ja/orm/database-basics.md"
+  },
+  {
+    "file": "docs/ja/orm/query-builder.md",
+    "link": "../orm/retrieving-data-and-resultsets#table-find-list",
+    "message": "Anchor '#table-find-list' not found in docs/ja/orm/retrieving-data-and-resultsets.md"
+  },
+  {
+    "file": "docs/ja/orm/query-builder.md",
+    "link": "../orm/database-basics#database-query-logging",
+    "message": "Anchor '#database-query-logging' not found in docs/ja/orm/database-basics.md"
+  },
+  {
+    "file": "docs/ja/orm/query-builder.md",
+    "link": "../orm/retrieving-data-and-resultsets#map-reduce",
+    "message": "Anchor '#map-reduce' not found in docs/ja/orm/retrieving-data-and-resultsets.md"
+  },
+  {
+    "file": "docs/ja/orm/query-builder.md",
+    "link": "../orm/database-basics#database-data-types",
+    "message": "Anchor '#database-data-types' not found in docs/ja/orm/database-basics.md"
+  },
+  {
+    "file": "docs/ja/orm/query-builder.md",
+    "link": "../orm/database-basics#database-basics-binding-values",
+    "message": "Anchor '#database-basics-binding-values' not found in docs/ja/orm/database-basics.md"
+  },
+  {
+    "file": "docs/ja/orm/query-builder.md",
+    "link": "../orm/database-basics#running-select-statements",
+    "message": "Anchor '#running-select-statements' not found in docs/ja/orm/database-basics.md"
+  },
+  {
+    "file": "docs/ja/orm/retrieving-data-and-resultsets.md",
+    "link": "../orm/query-builder#query-count",
+    "message": "Anchor '#query-count' not found in docs/ja/orm/query-builder.md"
+  },
+  {
+    "file": "docs/ja/orm/retrieving-data-and-resultsets.md",
+    "link": "../orm/behaviors",
+    "message": "File not found: docs/ja/orm/behaviors/index.md"
+  },
+  {
+    "file": "docs/ja/orm/retrieving-data-and-resultsets.md",
+    "link": "../orm/query-builder#adding-joins",
+    "message": "Anchor '#adding-joins' not found in docs/ja/orm/query-builder.md"
+  },
+  {
+    "file": "docs/ja/orm/retrieving-data-and-resultsets.md",
+    "link": "../orm/entities#lazy-load-associations",
+    "message": "Anchor '#lazy-load-associations' not found in docs/ja/orm/entities.md"
+  },
+  {
+    "file": "docs/ja/orm/retrieving-data-and-resultsets.md",
+    "link": "../orm/query-builder#format-results",
+    "message": "Anchor '#format-results' not found in docs/ja/orm/query-builder.md"
+  },
+  {
+    "file": "docs/ja/orm/saving-data.md",
+    "link": "../orm/entities#entities-mass-assignment",
+    "message": "Anchor '#entities-mass-assignment' not found in docs/ja/orm/entities.md"
+  },
+  {
+    "file": "docs/ja/orm/saving-data.md",
+    "link": "../orm/validation#validating-request-data",
+    "message": "Anchor '#validating-request-data' not found in docs/ja/orm/validation.md"
+  },
+  {
+    "file": "docs/ja/orm/saving-data.md",
+    "link": "../orm/validation#using-different-validators-per-association",
+    "message": "Anchor '#using-different-validators-per-association' not found in docs/ja/orm/validation.md"
+  },
+  {
+    "file": "docs/ja/orm/saving-data.md",
+    "link": "../orm/entities#entities-mass-assignment",
+    "message": "Anchor '#entities-mass-assignment' not found in docs/ja/orm/entities.md"
+  },
+  {
+    "file": "docs/ja/orm/saving-data.md",
+    "link": "../orm/validation#validating-request-data",
+    "message": "Anchor '#validating-request-data' not found in docs/ja/orm/validation.md"
+  },
+  {
+    "file": "docs/ja/orm/saving-data.md",
+    "link": "../orm/entities#entities-mass-assignment",
+    "message": "Anchor '#entities-mass-assignment' not found in docs/ja/orm/entities.md"
+  },
+  {
+    "file": "docs/ja/orm/saving-data.md",
+    "link": "../orm/validation#application-rules",
+    "message": "Anchor '#application-rules' not found in docs/ja/orm/validation.md"
+  },
+  {
+    "file": "docs/ja/orm/saving-data.md",
+    "link": "../orm/validation#application-rules",
+    "message": "Anchor '#application-rules' not found in docs/ja/orm/validation.md"
+  },
+  {
+    "file": "docs/ja/orm/saving-data.md",
+    "link": "../views/helpers/form#associated-form-inputs",
+    "message": "Anchor '#associated-form-inputs' not found in docs/ja/views/helpers/form.md"
+  },
+  {
+    "file": "docs/ja/orm/saving-data.md",
+    "link": "../core-libraries/inflector#inflector-methods-summary",
+    "message": "Anchor '#inflector-methods-summary' not found in docs/ja/core-libraries/inflector.md"
+  },
+  {
+    "file": "docs/ja/orm/saving-data.md",
+    "link": "../core-libraries/inflector#inflector-methods-summary",
+    "message": "Anchor '#inflector-methods-summary' not found in docs/ja/core-libraries/inflector.md"
+  },
+  {
+    "file": "docs/ja/orm/saving-data.md",
+    "link": "../core-libraries/inflector#inflector-methods-summary",
+    "message": "Anchor '#inflector-methods-summary' not found in docs/ja/core-libraries/inflector.md"
+  },
+  {
+    "file": "docs/ja/orm/saving-data.md",
+    "link": "../orm/associations#has-many-associations",
+    "message": "Anchor '#has-many-associations' not found in docs/ja/orm/associations.md"
+  },
+  {
+    "file": "docs/ja/orm/saving-data.md",
+    "link": "../core-libraries/inflector#inflector-methods-summary",
+    "message": "Anchor '#inflector-methods-summary' not found in docs/ja/core-libraries/inflector.md"
+  },
+  {
+    "file": "docs/ja/orm/saving-data.md",
+    "link": "../orm/associations#belongs-to-many-associations",
+    "message": "Anchor '#belongs-to-many-associations' not found in docs/ja/orm/associations.md"
+  },
+  {
+    "file": "docs/ja/orm/saving-data.md",
+    "link": "../views/helpers/form#associated-form-inputs",
+    "message": "Anchor '#associated-form-inputs' not found in docs/ja/views/helpers/form.md"
+  },
+  {
+    "file": "docs/ja/orm/saving-data.md",
+    "link": "../orm/database-basics#adding-custom-database-types",
+    "message": "Anchor '#adding-custom-database-types' not found in docs/ja/orm/database-basics.md"
+  },
+  {
+    "file": "docs/ja/orm/saving-data.md",
+    "link": "../orm/query-builder#query-builder-updating-data",
+    "message": "Anchor '#query-builder-updating-data' not found in docs/ja/orm/query-builder.md"
+  },
+  {
+    "file": "docs/ja/orm/schema-system.md",
+    "link": "../development/testing#test-fixtures",
+    "message": "Anchor '#test-fixtures' not found in docs/ja/development/testing.md"
+  },
+  {
+    "file": "docs/ja/orm/table-objects.md",
+    "link": "../orm/database-basics#database-configuration",
+    "message": "Anchor '#database-configuration' not found in docs/ja/orm/database-basics.md"
+  },
+  {
+    "file": "docs/ja/orm/table-objects.md",
+    "link": "../orm/saving-data#before-marshal",
+    "message": "Anchor '#before-marshal' not found in docs/ja/orm/saving-data.md"
+  },
+  {
+    "file": "docs/ja/orm/table-objects.md",
+    "link": "../orm/retrieving-data-and-resultsets#map-reduce",
+    "message": "Anchor '#map-reduce' not found in docs/ja/orm/retrieving-data-and-resultsets.md"
+  },
+  {
+    "file": "docs/ja/orm/table-objects.md",
+    "link": "../orm/behaviors",
+    "message": "File not found: docs/ja/orm/behaviors/index.md"
+  },
+  {
+    "file": "docs/ja/orm/validation.md",
+    "link": "../core-libraries/validation#creating-validators",
+    "message": "Anchor '#creating-validators' not found in docs/ja/core-libraries/validation.md"
+  },
+  {
+    "file": "docs/ja/pdf-contents.md",
+    "link": "intro",
+    "message": "File not found: docs/ja/intro/index.md"
+  },
+  {
+    "file": "docs/ja/pdf-contents.md",
+    "link": "tutorials-and-examples",
+    "message": "File not found: docs/ja/tutorials-and-examples/index.md"
+  },
+  {
+    "file": "docs/ja/pdf-contents.md",
+    "link": "contributing",
+    "message": "File not found: docs/ja/contributing/index.md"
+  },
+  {
+    "file": "docs/ja/pdf-contents.md",
+    "link": "controllers",
+    "message": "File not found: docs/ja/controllers/index.md"
+  },
+  {
+    "file": "docs/ja/pdf-contents.md",
+    "link": "views",
+    "message": "File not found: docs/ja/views/index.md"
+  },
+  {
+    "file": "docs/ja/pdf-contents.md",
+    "link": "orm",
+    "message": "File not found: docs/ja/orm/index.md"
+  },
+  {
+    "file": "docs/ja/pdf-contents.md",
+    "link": "bake",
+    "message": "File not found: docs/ja/bake/index.md"
+  },
+  {
+    "file": "docs/ja/pdf-contents.md",
+    "link": "console-commands",
+    "message": "File not found: docs/ja/console-commands/index.md"
+  },
+  {
+    "file": "docs/ja/pdf-contents.md",
+    "link": "controllers/components/pagination",
+    "message": "File not found: docs/ja/controllers/components/pagination.md"
+  },
+  {
+    "file": "docs/ja/pdf-contents.md",
+    "link": "security",
+    "message": "File not found: docs/ja/security/index.md"
+  },
+  {
+    "file": "docs/ja/pdf-contents.md",
+    "link": "appendices",
+    "message": "File not found: docs/ja/appendices/index.md"
+  },
+  {
+    "file": "docs/ja/plugins.md",
+    "link": "views#view-elements",
+    "message": "File not found: docs/ja/views/index.md"
+  },
+  {
+    "file": "docs/ja/plugins.md",
+    "link": "deployment#symlink-assets",
+    "message": "Anchor '#symlink-assets' not found in docs/ja/deployment.md"
+  },
+  {
+    "file": "docs/ja/plugins.md",
+    "link": "deployment#symlink-assets",
+    "message": "Anchor '#symlink-assets' not found in docs/ja/deployment.md"
+  },
+  {
+    "file": "docs/ja/topics.md",
+    "link": "controllers",
+    "message": "File not found: docs/ja/controllers/index.md"
+  },
+  {
+    "file": "docs/ja/topics.md",
+    "link": "controllers/components",
+    "message": "File not found: docs/ja/controllers/components/index.md"
+  },
+  {
+    "file": "docs/ja/topics.md",
+    "link": "views",
+    "message": "File not found: docs/ja/views/index.md"
+  },
+  {
+    "file": "docs/ja/topics.md",
+    "link": "views/helpers",
+    "message": "File not found: docs/ja/views/helpers/index.md"
+  },
+  {
+    "file": "docs/ja/topics.md",
+    "link": "orm",
+    "message": "File not found: docs/ja/orm/index.md"
+  },
+  {
+    "file": "docs/ja/topics.md",
+    "link": "security/csrf#csrf-middleware",
+    "message": "Anchor '#csrf-middleware' not found in docs/ja/security/csrf.md"
+  },
+  {
+    "file": "docs/ja/topics.md",
+    "link": "console-commands",
+    "message": "File not found: docs/ja/console-commands/index.md"
+  },
+  {
+    "file": "docs/ja/topics.md",
+    "link": "contributing",
+    "message": "File not found: docs/ja/contributing/index.md"
+  },
+  {
+    "file": "docs/ja/topics.md",
+    "link": "tutorials-and-examples",
+    "message": "File not found: docs/ja/tutorials-and-examples/index.md"
+  },
+  {
+    "file": "docs/ja/tutorials-and-examples/blog/part-two.md",
+    "link": "../../orm",
+    "message": "File not found: docs/ja/orm/index.md"
+  },
+  {
+    "file": "docs/ja/tutorials-and-examples/blog/part-two.md",
+    "link": "../../controllers",
+    "message": "File not found: docs/ja/controllers/index.md"
+  },
+  {
+    "file": "docs/ja/tutorials-and-examples/blog/part-two.md",
+    "link": "../../views/helpers",
+    "message": "File not found: docs/ja/views/helpers/index.md"
+  },
+  {
+    "file": "docs/ja/tutorials-and-examples/blog/part-two.md",
+    "link": "../../development/routing#named-routes",
+    "message": "Anchor '#named-routes' not found in docs/ja/development/routing.md"
+  },
+  {
+    "file": "docs/ja/tutorials-and-examples/blog/part-two.md",
+    "link": "../../development/routing#routes-configuration",
+    "message": "Anchor '#routes-configuration' not found in docs/ja/development/routing.md"
+  },
+  {
+    "file": "docs/ja/tutorials-and-examples/blog/part-two.md",
+    "link": "../../views#view-layouts",
+    "message": "File not found: docs/ja/views/index.md"
+  },
+  {
+    "file": "docs/ja/tutorials-and-examples/blog/part-two.md",
+    "link": "../../views#view-elements",
+    "message": "File not found: docs/ja/views/index.md"
+  },
+  {
+    "file": "docs/ja/tutorials-and-examples/bookmarks/intro.md",
+    "link": "../../controllers/request-response#cake-request",
+    "message": "Anchor '#cake-request' not found in docs/ja/controllers/request-response.md"
+  },
+  {
+    "file": "docs/ja/tutorials-and-examples/bookmarks/intro.md",
+    "link": "../../orm/retrieving-data-and-resultsets#custom-find-methods",
+    "message": "Anchor '#custom-find-methods' not found in docs/ja/orm/retrieving-data-and-resultsets.md"
+  },
+  {
+    "file": "docs/ja/tutorials-and-examples/bookmarks/part-two.md",
+    "link": "../../controllers/components",
+    "message": "File not found: docs/ja/controllers/components/index.md"
+  },
+  {
+    "file": "docs/ja/tutorials-and-examples/bookmarks/part-two.md",
+    "link": "../../orm",
+    "message": "File not found: docs/ja/orm/index.md"
+  },
+  {
+    "file": "docs/ja/tutorials-and-examples/cms/articles-controller.md",
+    "link": "../../views/helpers",
+    "message": "File not found: docs/ja/views/helpers/index.md"
+  },
+  {
+    "file": "docs/ja/tutorials-and-examples/cms/articles-controller.md",
+    "link": "../../development/routing#named-routes",
+    "message": "Anchor '#named-routes' not found in docs/ja/development/routing.md"
+  },
+  {
+    "file": "docs/ja/tutorials-and-examples/cms/articles-controller.md",
+    "link": "../../orm/retrieving-data-and-resultsets#dynamic-finders",
+    "message": "Anchor '#dynamic-finders' not found in docs/ja/orm/retrieving-data-and-resultsets.md"
+  },
+  {
+    "file": "docs/ja/tutorials-and-examples/cms/articles-controller.md",
+    "link": "../../orm/table-objects#table-callbacks",
+    "message": "Anchor '#table-callbacks' not found in docs/ja/orm/table-objects.md"
+  },
+  {
+    "file": "docs/ja/tutorials-and-examples/cms/articles-controller.md",
+    "link": "../../orm/validation#validating-request-data",
+    "message": "Anchor '#validating-request-data' not found in docs/ja/orm/validation.md"
+  },
+  {
+    "file": "docs/ja/tutorials-and-examples/cms/database.md",
+    "link": "../../orm/entities#entities-mass-assignment",
+    "message": "Anchor '#entities-mass-assignment' not found in docs/ja/orm/entities.md"
+  },
+  {
+    "file": "docs/ja/tutorials-and-examples/cms/tags-and-users.md",
+    "link": "../../bake",
+    "message": "File not found: docs/ja/bake/index.md"
+  },
+  {
+    "file": "docs/ja/tutorials-and-examples/cms/tags-and-users.md",
+    "link": "../../controllers/request-response#cake-request",
+    "message": "Anchor '#cake-request' not found in docs/ja/controllers/request-response.md"
+  },
+  {
+    "file": "docs/ja/tutorials-and-examples/cms/tags-and-users.md",
+    "link": "../../orm/retrieving-data-and-resultsets#custom-find-methods",
+    "message": "Anchor '#custom-find-methods' not found in docs/ja/orm/retrieving-data-and-resultsets.md"
+  },
+  {
+    "file": "docs/ja/views.md",
+    "link": "controllers/request-response#cake-response-file",
+    "message": "Anchor '#cake-response-file' not found in docs/ja/controllers/request-response.md"
+  },
+  {
+    "file": "docs/ja/views.md",
+    "link": "controllers#setting-view_variables",
+    "message": "File not found: docs/ja/controllers/index.md"
+  },
+  {
+    "file": "docs/ja/views.md",
+    "link": "views/helpers#helper-api",
+    "message": "File not found: docs/ja/views/helpers/index.md"
+  },
+  {
+    "file": "docs/ja/views.md",
+    "link": "views/helpers",
+    "message": "File not found: docs/ja/views/helpers/index.md"
+  },
+  {
+    "file": "docs/ja/views/cells.md",
+    "link": "../controllers/pagination#paginating-multiple-queries",
+    "message": "Anchor '#paginating-multiple-queries' not found in docs/ja/controllers/pagination.md"
+  },
+  {
+    "file": "docs/ja/views/helpers/form.md",
+    "link": "../../core-libraries/validation#creating-validators",
+    "message": "Anchor '#creating-validators' not found in docs/ja/core-libraries/validation.md"
+  },
+  {
+    "file": "docs/ja/views/helpers/form.md",
+    "link": "../../views#view-blocks",
+    "message": "File not found: docs/ja/views/index.md"
+  },
+  {
+    "file": "docs/ja/views/helpers/form.md",
+    "link": "../../views#view-blocks",
+    "message": "File not found: docs/ja/views/index.md"
+  },
+  {
+    "file": "docs/ja/views/helpers/html.md",
+    "link": "../../views#view-blocks",
+    "message": "File not found: docs/ja/views/index.md"
+  },
+  {
+    "file": "docs/ja/views/helpers/paginator.md",
+    "link": "../../controllers/pagination#control-which-fields-used-for-ordering",
+    "message": "Anchor '#control-which-fields-used-for-ordering' not found in docs/ja/controllers/pagination.md"
+  },
+  {
+    "file": "docs/ja/views/helpers/paginator.md",
+    "link": "../../controllers/pagination#paginating-multiple-queries",
+    "message": "Anchor '#paginating-multiple-queries' not found in docs/ja/controllers/pagination.md"
+  },
+  {
+    "file": "docs/ja/views/helpers/url.md",
+    "link": "../../views/helpers#aliasing-helpers",
+    "message": "File not found: docs/ja/views/helpers/index.md"
+  },
+  {
+    "file": "docs/ja/views/json-and-xml-views.md",
+    "link": "../development/routing#file-extensions",
+    "message": "Anchor '#file-extensions' not found in docs/ja/development/routing.md"
+  },
+  {
+    "file": "docs/ja/views/json-and-xml-views.md",
+    "link": "../development/routing#file-extensions",
+    "message": "Anchor '#file-extensions' not found in docs/ja/development/routing.md"
+  },
+  {
+    "file": "docs/ja/views/themes.md",
+    "link": "../plugins#plugin-create-your-own",
+    "message": "Anchor '#plugin-create-your-own' not found in docs/ja/plugins.md"
+  },
+  {
+    "file": "docs/ja/views/themes.md",
+    "link": "../deployment#symlink-assets",
+    "message": "Anchor '#symlink-assets' not found in docs/ja/deployment.md"
+  }
+]
