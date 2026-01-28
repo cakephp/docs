@@ -386,10 +386,11 @@ FROM dunglas/frankenphp
 # Copy your CakePHP application
 COPY . /app
 
-# Set working directory
-WORKDIR /app/webroot
+# FrankenPHP defaults to /app/public as document root.
+# CakePHP uses webroot/ instead, so override it:
+ENV SERVER_ROOT=/app/webroot
 
-# Install dependencies if needed
+# Install dependencies (composer.json lives in /app)
 RUN composer install --no-dev --optimize-autoloader
 
 # Build and run:
@@ -420,6 +421,14 @@ myapp.local {
 }
 ```
 
+:::
+
+::: tip Local Development
+For local development, you can use the built-in CakePHP development server with FrankenPHP support:
+```bash
+bin/cake server --frankenphp
+```
+This requires the `frankenphp` binary to be available in your `PATH`.
 :::
 
 ::: info Why FrankenPHP?
