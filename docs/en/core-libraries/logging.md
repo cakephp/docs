@@ -450,7 +450,7 @@ configured.
 
 ### Log::setConfig()
 
-`static` Cake\\Log\\Log::**setConfig**($key, $config): void
+`static` Cake\\Log\\Log::**setConfig**(array|string $key, $config = null): void
 
 param string \$name
 Name for the logger being connected, used
@@ -474,7 +474,7 @@ Get the names of the configured loggers.
 
 ### Log::drop()
 
-`static` Cake\\Log\\Log::**drop**($name): bool
+`static` Cake\\Log\\Log::**drop**(string $name): bool
 
 param string \$name
 Name of the logger you wish to no longer receive
@@ -482,7 +482,7 @@ messages.
 
 ### Log::write()
 
-`static` Cake\\Log\\Log::**write**($level, $message, $context = []): bool
+`static` Cake\\Log\\Log::**write**(string|int $level, Stringable|string $message, array|string $context = []): bool
 
 Write a message into all the configured loggers.
 `$level` indicates the level of log message being created.
@@ -503,35 +503,35 @@ appropriate log level.
 
 #### Log::emergency()
 
-`static` Cake\\Log\\Log::**emergency**($message, $context = []): bool
+`static` Cake\\Log\\Log::**emergency**(Stringable|string $message, array|string $context = []): bool
 
 #### Log::alert()
 
-`static` Cake\\Log\\Log::**alert**($message, $context = []): bool
+`static` Cake\\Log\\Log::**alert**(Stringable|string $message, array|string $context = []): bool
 
 #### Log::critical()
 
-`static` Cake\\Log\\Log::**critical**($message, $context = []): bool
+`static` Cake\\Log\\Log::**critical**(Stringable|string $message, array|string $context = []): bool
 
 #### Log::error()
 
-`static` Cake\\Log\\Log::**error**($message, $context = []): bool
+`static` Cake\\Log\\Log::**error**(Stringable|string $message, array|string $context = []): bool
 
 #### Log::warning()
 
-`static` Cake\\Log\\Log::**warning**($message, $context = []): bool
+`static` Cake\\Log\\Log::**warning**(Stringable|string $message, array|string $context = []): bool
 
 #### Log::notice()
 
-`static` Cake\\Log\\Log::**notice**($message, $context = []): bool
+`static` Cake\\Log\\Log::**notice**(Stringable|string $message, array|string $context = []): bool
 
 #### Log::info()
 
-`static` Cake\\Log\\Log::**info**($message, $context = []): bool
+`static` Cake\\Log\\Log::**info**(Stringable|string $message, array|string $context = []): bool
 
 #### Log::debug()
 
-`static` Cake\\Log\\Log::**debug**($message, $context = []): bool
+`static` Cake\\Log\\Log::**debug**(Stringable|string $message, array|string $context = []): bool
 
 ## Logging Trait
 

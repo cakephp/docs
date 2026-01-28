@@ -49,7 +49,7 @@ elements, you can use attribute matching with certain methods. They are `extract
 
 ### Hash::get()
 
-`static` Cake\\Utility\\Hash::**get**(array|ArrayAccess $data, $path, $default = null): mixed
+`static` Cake\\Utility\\Hash::**get**(ArrayAccess|array $data, array|string|int|null $path, mixed $default = null): mixed
 
 `get()` is a simplified version of `extract()`, it only supports direct
 path expressions. Paths with `{n}`, `{s}`, `{*}` or matchers are not
@@ -58,7 +58,7 @@ a matching path is not found the default value will be returned.
 
 ### Hash::extract()
 
-`static` Cake\\Utility\\Hash::**extract**(array|ArrayAccess $data, $path): ArrayAccess|array
+`static` Cake\\Utility\\Hash::**extract**(ArrayAccess|array $data, string $path): ArrayAccess|array
 
 `Hash::extract()` supports all expression, and matcher components of
 [Hash Path Syntax](#hash-path-syntax). You can use extract to retrieve data from arrays
@@ -79,7 +79,7 @@ $results = Hash::extract($users, '{n}.id');
 // [1,2,3,4];
 ```
 
-`static` Hash::**insert**(array $data, $path, $values = null): ArrayAccess|array
+`static` Cake\\Utility\\Hash::**insert**(ArrayAccess|array $data, string $path, mixed $values = null): ArrayAccess|array
 
 Inserts `$values` into an array as defined by `$path`:
 
@@ -130,7 +130,7 @@ $result = Hash::insert($data, '{n}[up].Item[id=4].new', 9);
 
 ### Hash::remove()
 
-`static` Cake\\Utility\\Hash::**remove**(array $data, $path): ArrayAccess|array
+`static` Cake\\Utility\\Hash::**remove**(ArrayAccess|array $data, string $path): ArrayAccess|array
 
 Removes all elements from an array that match `$path`:
 
@@ -175,7 +175,7 @@ $result = Hash::remove($data, '{n}[clear].Item[id=4]');
 
 ### Hash::combine()
 
-`static` Cake\\Utility\\Hash::**combine**(array $data, $keyPath, $valuePath = null, $groupPath = null): array
+`static` Cake\\Utility\\Hash::**combine**(array $data, array|string|null $keyPath, array|string|null $valuePath = null, ?string $groupPath = null): array
 
 Creates an associative array using a `$keyPath` as the path to build its keys,
 and optionally `$valuePath` as path to get the values. If `$valuePath` is not
@@ -322,7 +322,7 @@ $result = Hash::combine(
 
 ### Hash::format()
 
-`static` Cake\\Utility\\Hash::**format**(array $data, array $paths, $format): array|null
+`static` Cake\\Utility\\Hash::**format**(array $data, array $paths, string $format): ?array
 
 Returns a series of values extracted from an array, formatted with a
 format string:
@@ -446,7 +446,7 @@ $result = Hash::check($set, 'My Index 1.First.Seconds.Third.Fourth');
 
 ### Hash::filter()
 
-`static` Cake\\Utility\\Hash::**filter**(array $data, $callback = null): array
+`static` Cake\\Utility\\Hash::**filter**(array $data, ?callable $callback = null): array
 
 Filters empty elements out of array, excluding '0'. You can also supply a
 custom `$callback` to filter the array elements. The callback should
@@ -658,7 +658,7 @@ $result = Hash::maxDimensions($data);
 
 ### Hash::map()
 
-`static` Cake\\Utility\\Hash::**map**(array $data, $path, $function): array
+`static` Cake\\Utility\\Hash::**map**(array $data, string $path, callable $function): array
 
 Creates a new array, by extracting `$path`, and mapping `$function`
 across the results. You can use both expression and matching elements with
@@ -677,7 +677,7 @@ public function noop(array $array)
 
 ### Hash::reduce()
 
-`static` Cake\\Utility\\Hash::**reduce**(array $data, $path, $function): mixed
+`static` Cake\\Utility\\Hash::**reduce**(array $data, string $path, callable $function): mixed
 
 Creates a single value, by extracting `$path`, and reducing the extracted
 results with `$function`. You can use both expression and matching elements
@@ -685,7 +685,7 @@ with this method.
 
 ### Hash::apply()
 
-`static` Cake\\Utility\\Hash::**apply**(array $data, $path, $function): mixed
+`static` Cake\\Utility\\Hash::**apply**(array $data, string $path, callable $function): mixed
 
 Apply a callback to a set of extracted values using `$function`. The function
 will get the extracted values as the first argument:
@@ -707,7 +707,7 @@ $result = Hash::apply($data, '{n}[booked=true].date', 'array_count_values');
 
 ### Hash::sort()
 
-`static` Cake\\Utility\\Hash::**sort**(array $data, $path, $dir, $type = 'regular'): array
+`static` Cake\\Utility\\Hash::**sort**(array $data, string $path, string|int $dir = 'asc', array|string $type = 'regular'): array
 
 Sorts an array by any value, determined by a [Hash Path Syntax](#hash-path-syntax)
 Only expression elements are supported by this method:
@@ -820,7 +820,7 @@ $res = Hash::mergeDiff($array1, $array2);
 
 ### Hash::normalize()
 
-`static` Cake\\Utility\\Hash::**normalize**(array $data, $assoc = true, $default = null): array
+`static` Cake\\Utility\\Hash::**normalize**(array $data, bool $assoc = true, mixed $default = null): array
 
 Normalizes an array. If `$assoc` is `true`, the resulting array will be
 normalized to be an associative array. Numeric keys with values, will be
