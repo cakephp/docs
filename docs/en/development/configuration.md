@@ -158,7 +158,7 @@ a `CDN` you should set this value to the CDN's location.
 
 App.paths  
 Configure paths for non class based resources. Supports the
-`plugins`, `templates`, `locales` subkeys, which allow the definition
+`plugins/`, `templates/`, `locales/` subkeys, which allow the definition
 of paths for plugins, view templates and locale files respectively.
 
 App.uploadedFilesAsObjects  

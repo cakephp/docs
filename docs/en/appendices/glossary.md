@@ -96,7 +96,7 @@ are part of a plugin:
 ```
 
 routes.php  
-A file in `config` directory that contains routing configuration.
+A file in `config/` directory that contains routing configuration.
 This file is included before each request is processed.
 It should connect all the routes your application needs so
 requests can be routed to the correct controller + action.
