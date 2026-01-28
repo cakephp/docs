@@ -146,14 +146,34 @@ Ensure **logs** and **tmp** (including all subdirectories) are writable by your 
 
 ### Quick Setup (Unix/Linux/macOS)
 
-If your web server and CLI users differ, run these commands once:
+If your web server and CLI users differ, set permissions for the directories:
 
-```bash
-# Auto-detect web server user and set permissions
+::: code-group
+
+```bash [Linux with ACL]
+# Auto-detect web server user and set permissions using ACL
 HTTPDUSER=`ps aux | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1`
 setfacl -R -m u:${HTTPDUSER}:rwx tmp logs
 setfacl -R -d -m u:${HTTPDUSER}:rwx tmp logs
 ```
+
+```bash [macOS / Without ACL]
+# Auto-detect web server user and set permissions using chmod
+HTTPDUSER=`ps aux | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1`
+sudo chown -R $(whoami):${HTTPDUSER} tmp logs
+sudo chmod -R 775 tmp logs
+```
+
+```bash [Simple Alternative]
+# If auto-detection doesn't work, use broader permissions
+chmod -R 777 tmp logs
+```
+
+:::
+
+::: warning macOS Note
+macOS does not include `setfacl` by default. Use the chmod method or install ACL tools via Homebrew: `brew install acl`
+:::
 
 ### Make Console Executable
 
