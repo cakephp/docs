@@ -76,10 +76,10 @@ composer --version
 
 :::
 
-::: tip Stay Updated
+::: tip Version Constraints
 Your `composer.json` version constraint controls updates:
-- `"cakephp/cakephp": "5.0.*"` - Patch releases only
-- `"cakephp/cakephp": "^5.0"` - Minor + patch releases (recommended)
+- `"cakephp/cakephp": "5.0.*"` - Patch releases only (recommended)
+- `"cakephp/cakephp": "^5.0"` - Minor + patch releases (may require config changes)
 :::
 
 ### Method 2: DDEV (Fast Setup)
