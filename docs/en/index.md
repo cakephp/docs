@@ -1,8 +1,8 @@
 # Welcome
 
-> [!WARNING]
-> This version of the documentation is for CakePHP 2.x. Go [here for the
-> CakePHP 3.x documentation](https://book.cakephp.org/3.0/).
+::: warning Unsupported Version
+You are viewing documentation for an **unsupported version** of CakePHP. For the most recent stable version, please visit the [official documentation](https://book.cakephp.org/).
+:::
 
 The CakePHP cookbook is an openly developed and community editable documentation
 project. We hope to maintain a high level of quality, validity and accuracy for
