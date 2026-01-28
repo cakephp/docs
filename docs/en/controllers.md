@@ -204,7 +204,7 @@ view class.
 
 ### Rendering a View
 
-`method` Cake\\Controller\\Controller::**render**(string $view, string $layout)
+`method` Cake\\Controller\\Controller::**render**(string $view, string $layout): Response
 
 The `Controller::render()` method is automatically called at the end of each requested
 controller action. This method performs all the view logic (using the data
@@ -411,7 +411,7 @@ replaces usage of `RequestHandlerComponent` automatically using the
 
 ## Redirecting to Other Pages
 
-`method` Cake\\Controller\\Controller::**redirect**(string|array $url, integer $status)
+`method` Cake\\Controller\\Controller::**redirect**(string|array $url, integer $status): Response|null
 
 The `redirect()` method adds a `Location` header and sets the status code of
 a response and returns it. You should return the response created by
@@ -502,7 +502,7 @@ $authors = $this->fetchModel('Authors');
 
 ## Paginating a Model
 
-`method` Cake\\Controller\\Controller::**paginate**()
+`method` Cake\\Controller\\Controller::**paginate**(): PaginatedInterface
 
 This method is used for paginating results fetched by your models.
 You can specify page sizes, model find conditions and more. See the
@@ -525,7 +525,7 @@ class ArticlesController extends AppController
 
 ## Configuring Components to Load
 
-`method` Cake\\Controller\\Controller::**loadComponent**($name, $config = [])
+`method` Cake\\Controller\\Controller::**loadComponent**($name, $config = []): Component
 
 In your Controller's `initialize()` method you can define any components you
 want loaded, and any configuration data for them:

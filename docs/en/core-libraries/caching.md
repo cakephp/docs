@@ -419,7 +419,7 @@ return $cloud;
 
 ### Cache::readMany()
 
-`static` Cake\\Cache\\Cache::**readMany**($keys, $config = 'default')
+`static` Cake\\Cache\\Cache::**readMany**($keys, $config = 'default'): iterable
 
 After you've written multiple keys at once, you'll probably want to read them as
 well. While you could use multiple calls to `read()`, `readMany()` allows

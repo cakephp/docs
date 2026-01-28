@@ -66,7 +66,7 @@ $this->hasMany('Comments', [
 
 ## Bulk Deletes
 
-`method` Cake\\ORM\\Table::**deleteMany**(iterable $entities, array $options = [])
+`method` Cake\\ORM\\Table::**deleteMany**(iterable $entities, array $options = []): iterable|false
 
 If you have an array of entities you want to delete you can use `deleteMany()`
 to delete them in a single transaction:

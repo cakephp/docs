@@ -218,7 +218,7 @@ necessary. In an CLI environment, where the concept of uploading files doesn't
 exist, it will allow to move the file that you've referenced irrespective of its
 origins, which makes testing file uploads possible.
 
-`method` Cake\\Http\\ServerRequest::**getUploadedFile**($path)
+`method` Cake\\Http\\ServerRequest::**getUploadedFile**($path): UploadedFileInterface|null
 
 Returns the uploaded file at a specific path. The path uses the same dot syntax as the
 `Cake\Http\ServerRequest::getData()` method:
@@ -281,7 +281,7 @@ $this->request = $this->request->withUploadedFiles($files);
 
 ### PUT, PATCH or DELETE Data
 
-`method` Cake\\Http\\ServerRequest::**getBody**()
+`method` Cake\\Http\\ServerRequest::**getBody**(): StreamInterface
 
 When building REST services, you often accept request data on `PUT` and
 `DELETE` requests. Any `application/x-www-form-urlencoded` request body data
@@ -1205,7 +1205,7 @@ The `CorsBuilder` provides the following methods for configuring CORS:
 
 `method` Cake\\Http\\CorsBuilder::**maxAge**(string|int $age)
 
-`method` Cake\\Http\\CorsBuilder::**build**()
+`method` Cake\\Http\\CorsBuilder::**build**(): ResponseInterface
 
 #### Practical CORS Examples
 

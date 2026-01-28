@@ -795,7 +795,7 @@ The `strictFields` option was added in 5.3.0.
 
 ## Saving Entities
 
-`method` Cake\\ORM\\Table::**save**(Entity $entity, array $options = [])
+`method` Cake\\ORM\\Table::**save**(Entity $entity, array $options = []): EntityInterface|false
 
 When saving request data to your database you need to first hydrate a new entity
 using `newEntity()` for passing into `save()`. For example:
@@ -1253,7 +1253,7 @@ would not normally be able to.
 
 ## Strict Saving
 
-`method` Cake\\ORM\\Table::**saveOrFail**(EntityInterface $entity, array $options = [])
+`method` Cake\\ORM\\Table::**saveOrFail**(EntityInterface $entity, array $options = []): EntityInterface
 
 Using this method will throw an
 `Cake\ORM\Exception\PersistenceFailedException` if:
@@ -1285,7 +1285,7 @@ corresponding save events will be triggered.
 
 ## Find or Create an Entity
 
-`method` Cake\\ORM\\Table::**findOrCreate**($search, $callback = null, $options = [])
+`method` Cake\\ORM\\Table::**findOrCreate**($search, $callback = null, $options = []): EntityInterface
 
 Find an existing record based on `$search` or create a new record using the
 properties in `$search` and calling the optional `$callback`. This method is
@@ -1344,7 +1344,7 @@ $table->saveOrFail($record);
 
 ## Saving Multiple Entities
 
-`method` Cake\\ORM\\Table::**saveMany**(iterable $entities, array $options = [])
+`method` Cake\\ORM\\Table::**saveMany**(iterable $entities, array $options = []): iterable|false
 
 Using this method you can save multiple entities atomically. `$entities` can
 be an array of entities created using `newEntities()` / `patchEntities()`.

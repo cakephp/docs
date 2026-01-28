@@ -58,7 +58,7 @@ a matching path is not found the default value will be returned.
 
 ### Hash::extract()
 
-`static` Cake\\Utility\\Hash::**extract**(array|ArrayAccess $data, $path)
+`static` Cake\\Utility\\Hash::**extract**(array|ArrayAccess $data, $path): ArrayAccess|array
 
 `Hash::extract()` supports all expression, and matcher components of
 [Hash Path Syntax](#hash-path-syntax). You can use extract to retrieve data from arrays
@@ -130,7 +130,7 @@ $result = Hash::insert($data, '{n}[up].Item[id=4].new', 9);
 
 ### Hash::remove()
 
-`static` Cake\\Utility\\Hash::**remove**(array $data, $path)
+`static` Cake\\Utility\\Hash::**remove**(array $data, $path): ArrayAccess|array
 
 Removes all elements from an array that match `$path`:
 

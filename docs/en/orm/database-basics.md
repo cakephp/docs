@@ -339,7 +339,7 @@ references to existing connections.
 
 ### Accessing Connections
 
-`static` Cake\\Datasource\\ConnectionManager::**get**($name)
+`static` Cake\\Datasource\\ConnectionManager::**get**($name): ConnectionInterface
 
 Once configured connections can be fetched using
 `Cake\Datasource\ConnectionManager::get()`. This method will
@@ -956,7 +956,7 @@ transactional operations.
 
 ### Executing Queries
 
-`method` Cake\\Database\\Connection::**execute(string $sql, array $params = [], array $types = []): \\Cake\\Database\\StatementInterface**()
+`method` Cake\\Database\\Connection::**execute**(string $sql, array $params = [], array $types = []): StatementInterface
 
 Once you've gotten a connection object, you'll probably want to issue some
 queries with it. CakePHP's database abstraction layer provides wrapper features
@@ -990,7 +990,7 @@ $statement = $connection->execute(
 );
 ```
 
-`method` Cake\\Database\\Connection::**selectQuery**()
+`method` Cake\\Database\\Connection::**selectQuery**(): SelectQuery
 
 These methods allow you to use rich data types in your applications and properly convert
 them into SQL statements. The last and most flexible way of creating queries is
@@ -1015,7 +1015,7 @@ foreach ($query as $row) {
 > Instead of iterating the `$query` you can also call it's `all()` method
 > to get the results.
 
-`method` Cake\\Database\\Connection::**updateQuery**()
+`method` Cake\\Database\\Connection::**updateQuery**(): UpdateQuery
 
 This method provides you a builder for `UPDATE` queries:
 
@@ -1026,7 +1026,7 @@ $query = $connection->updateQuery('articles')
 $statement = $query->execute();
 ```
 
-`method` Cake\\Database\\Connection::**insertQuery**()
+`method` Cake\\Database\\Connection::**insertQuery**(): InsertQuery
 
 This method provides you a builder for `INSERT` queries:
 
@@ -1038,7 +1038,7 @@ $query->into('articles')
 $statement = $query->execute();
 ```
 
-`method` Cake\\Database\\Connection::**deleteQuery**()
+`method` Cake\\Database\\Connection::**deleteQuery**(): DeleteQuery
 
 This method provides you a builder for `DELETE` queries:
 

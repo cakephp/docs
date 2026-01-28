@@ -25,7 +25,7 @@ ways to inspect the data returned by the ORM.
 
 ## Getting a Single Entity by Primary Key
 
-`method` Cake\\ORM\\Table::**get**(mixed $primaryKey, array|string $finder = 'all', CacheInterface|string|null $cache = null, Closure|string|null $cacheKey = null, mixed ...$args)
+`method` Cake\\ORM\\Table::**get**(mixed $primaryKey, array|string $finder = 'all', CacheInterface|string|null $cache = null, Closure|string|null $cacheKey = null, mixed ...$args): EntityInterface
 
 It is often convenient to load a single entity from the database when editing or
 viewing entities and their related data. You can do this by using `get()`:
@@ -79,7 +79,7 @@ The parameters supported by `get()` are:
 
 ## Using Finders to Load Data
 
-`method` Cake\\ORM\\Table::**find**(string $type = 'all', mixed ...$args)
+`method` Cake\\ORM\\Table::**find**(string $type = 'all', mixed ...$args): SelectQuery
 
 Before you can work with entities, you'll need to load them. The easiest way to
 do this is using the `find()` method. The find method provides a short and

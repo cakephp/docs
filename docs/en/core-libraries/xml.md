@@ -9,7 +9,7 @@ DOMDocument objects, and back into arrays again.
 
 ### Xml::build()
 
-`static` Cake\\Utility\\Xml::**build**($input, array $options = [])
+`static` Cake\\Utility\\Xml::**build**($input, array $options = []): SimpleXMLElement|DOMDocument
 
 You can load XML-ish data using `Xml::build()`. Depending on your
 `$options` parameter, this method will return a SimpleXMLElement (default)
