@@ -413,6 +413,10 @@
               "link": "/appendices/5-3-migration-guide"
             },
             {
+              "text": "5.4 Migration Guide",
+              "link": "/appendices/5-4-migration-guide"
+            },
+            {
               "text": "CakePHP Development Process",
               "link": "/appendices/cakephp-development-process"
             },
