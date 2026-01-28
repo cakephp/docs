@@ -377,24 +377,24 @@ does not implement any of the callback methods.
 
 #### beforeRenderFile()
 
-`method` Helper::**beforeRenderFile**(EventInterface $event, $viewFile)
+`method` Helper::**beforeRenderFile**(EventInterface $event, $viewFile): void
 
 #### afterRenderFile()
 
-`method` Helper::**afterRenderFile**(EventInterface $event, $viewFile, $content)
+`method` Helper::**afterRenderFile**(EventInterface $event, $viewFile, $content): void
 
 #### beforeRender()
 
-`method` Helper::**beforeRender**(EventInterface $event, $viewFile)
+`method` Helper::**beforeRender**(EventInterface $event, $viewFile): void
 
 #### afterRender()
 
-`method` Helper::**afterRender**(EventInterface $event, $viewFile)
+`method` Helper::**afterRender**(EventInterface $event, $viewFile): void
 
 #### beforeLayout()
 
-`method` Helper::**beforeLayout**(EventInterface $event, $layoutFile)
+`method` Helper::**beforeLayout**(EventInterface $event, $layoutFile): void
 
 #### afterLayout()
 
-`method` Helper::**afterLayout**(EventInterface $event, $layoutFile)
+`method` Helper::**afterLayout**(EventInterface $event, $layoutFile): void

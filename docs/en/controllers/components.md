@@ -306,15 +306,15 @@ $controller = $this->getController();
 Components also offer a few request life-cycle callbacks that allow them to
 augment the request cycle.
 
-`method` Class::**beforeFilter**(EventInterface $event)
+`method` Class::**beforeFilter**(EventInterface $event): void
 
-`method` Class::**startup**(EventInterface $event)
+`method` Class::**startup**(EventInterface $event): void
 
-`method` Class::**beforeRender**(EventInterface $event)
+`method` Class::**beforeRender**(EventInterface $event): void
 
-`method` Class::**afterFilter**(EventInterface $event)
+`method` Class::**afterFilter**(EventInterface $event): void
 
-`method` Class::**beforeRedirect**(EventInterface $event, $url, Response $response)
+`method` Class::**beforeRedirect**(EventInterface $event, $url, Response $response): void
 
 <a id="redirect-component-events"></a>
 
