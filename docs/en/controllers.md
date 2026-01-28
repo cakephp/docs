@@ -525,7 +525,7 @@ class ArticlesController extends AppController
 
 ## Configuring Components to Load
 
-`method` Cake\\Controller\\Controller::**loadComponent**($name, $config = []): Component
+`method` Cake\\Controller\\Controller::**loadComponent**(string $name, array $config = []): Component
 
 In your Controller's `initialize()` method you can define any components you
 want loaded, and any configuration data for them:
@@ -612,7 +612,7 @@ As of 4.1.0 you can also raise a `RedirectException` to signal a redirect.
 
 ## Controller Middleware
 
-`method` Cake\\Controller\\Controller::**middleware**($middleware, array $options = []): void
+`method` Cake\\Controller\\Controller::**middleware**(MiddlewareInterface|Closure|string $middleware, array $options = []): void
 
 [Middleware](controllers/middleware) can be defined globally, in
 a routing scope or within a controller. To define middleware for a specific

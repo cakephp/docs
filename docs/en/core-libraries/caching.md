@@ -41,7 +41,7 @@ Regardless of the CacheEngine you choose to use, your application interacts with
 
 ### Cache::setConfig()
 
-`static` Cake\\Cache\\Cache::**setConfig**($key, $config = null): void
+`static` Cake\\Cache\\Cache::**setConfig**(array|string $key, $config = null): void
 
 Your application can configure any number of 'engines' during its bootstrap
 process. Cache engine configurations are defined in **config/app.php**.
@@ -269,7 +269,7 @@ When there is no fallback cache failures will be raised as exceptions.
 
 ### Cache::drop()
 
-`static` Cake\\Cache\\Cache::**drop**($key): bool
+`static` Cake\\Cache\\Cache::**drop**(string $key): bool
 
 Once a configuration is created you cannot change it. Instead you should drop
 the configuration and re-create it using `Cake\Cache\Cache::drop()` and
@@ -280,7 +280,7 @@ the config and destroy the adapter if it was constructed.
 
 ### Cache::write()
 
-`static` Cake\\Cache\\Cache::**write**($key, $value, $config = 'default'): bool
+`static` Cake\\Cache\\Cache::**write**(string $key, mixed $value, string $config = 'default'): bool
 
 `Cache::write()` will write a \$value to the Cache. You can read or
 delete this value later by referring to it by `$key`. You may
@@ -307,7 +307,7 @@ of trips made to the database to fetch posts.
 
 ### Cache::writeMany()
 
-`static` Cake\\Cache\\Cache::**writeMany**($data, $config = 'default'): bool
+`static` Cake\\Cache\\Cache::**writeMany**(iterable $data, string $config = 'default'): bool
 
 You may find yourself needing to write multiple cache keys at once. While you
 can use multiple calls to `write()`, `writeMany()` allows CakePHP to use
@@ -349,7 +349,7 @@ Cache::delete($lockKey);
 
 ### Cache::remember()
 
-`static` Cake\\Cache\\Cache::**remember**($key, $callable, $config = 'default'): mixed
+`static` Cake\\Cache\\Cache::**remember**(string $key, Closure $callable, string $config = 'default'): mixed
 
 Cache helps with read-through caching. If the named cache key exists,
 it will be returned. If the key does not exist, the callable will be invoked
@@ -374,7 +374,7 @@ class IssueService
 
 ### Cache::read()
 
-`static` Cake\\Cache\\Cache::**read**($key, $config = 'default'): mixed
+`static` Cake\\Cache\\Cache::**read**(string $key, string $config = 'default'): mixed
 
 `Cache::read()` is used to read the cached value stored under
 `$key` from the `$config`. If `$config` is null the default
@@ -419,7 +419,7 @@ return $cloud;
 
 ### Cache::readMany()
 
-`static` Cake\\Cache\\Cache::**readMany**($keys, $config = 'default'): iterable
+`static` Cake\\Cache\\Cache::**readMany**(iterable $keys, string $config = 'default'): iterable
 
 After you've written multiple keys at once, you'll probably want to read them as
 well. While you could use multiple calls to `read()`, `readMany()` allows
@@ -439,7 +439,7 @@ $result = Cache::readMany([
 
 ### Cache::delete()
 
-`static` Cake\\Cache\\Cache::**delete**($key, $config = 'default'): bool
+`static` Cake\\Cache\\Cache::**delete**(string $key, string $config = 'default'): bool
 
 `Cache::delete()` will allow you to completely remove a cached
 object from the store:
@@ -458,7 +458,7 @@ Cache::pool('redis')->deleteAsync('my_key');
 
 ### Cache::deleteMany()
 
-`static` Cake\\Cache\\Cache::**deleteMany**($keys, $config = 'default'): bool
+`static` Cake\\Cache\\Cache::**deleteMany**(iterable $keys, string $config = 'default'): bool
 
 After you've written multiple keys at once, you may want to delete them. While
 you could use multiple calls to `delete()`, `deleteMany()` allows CakePHP to use
@@ -478,7 +478,7 @@ $result = Cache::deleteMany([
 
 ### Cache::clear()
 
-`static` Cake\\Cache\\Cache::**clear**($config = 'default'): bool
+`static` Cake\\Cache\\Cache::**clear**(string $config = 'default'): bool
 
 Destroy all cached values for a cache configuration. In engines like: Apcu,
 Memcached, the cache configuration's prefix is used to remove
@@ -505,11 +505,11 @@ Cache::pool('redis')->clearBlocking();
 
 ### Cache::increment()
 
-`static` Cake\\Cache\\Cache::**increment**($key, $offset = 1, $config = 'default'): int|false
+`static` Cake\\Cache\\Cache::**increment**(string $key, int $offset = 1, string $config = 'default'): int|false
 
 ### Cache::decrement()
 
-`static` Cake\\Cache\\Cache::**decrement**($key, $offset = 1, $config = 'default'): int|false
+`static` Cake\\Cache\\Cache::**decrement**(string $key, int $offset = 1, string $config = 'default'): int|false
 
 Counters in your application are good candidates for storage in a cache. As an
 example, a simple countdown for remaining 'slots' in a contest could be stored
@@ -563,7 +563,7 @@ Cache::setConfig('site_home', [
 
 ### Cache::clearGroup()
 
-`method` Cake\\Cache\\Cache::**clearGroup**($group, $config = 'default'): bool
+`static` Cake\\Cache\\Cache::**clearGroup**(string $group, string $config = 'default'): bool
 
 Let's say you want to store the HTML generated for your homepage in cache, but
 would also want to automatically invalidate this cache every time a comment or
@@ -586,7 +586,7 @@ public function afterSave($event, $entity, $options = [])
 
 ### Cache::groupConfigs()
 
-`static` Cake\\Cache\\Cache::**groupConfigs**($group = null): array
+`static` Cake\\Cache\\Cache::**groupConfigs**(?string $group = null): array
 
 `groupConfigs()` can be used to retrieve mapping between group and
 configurations, i.e.: having the same group:
