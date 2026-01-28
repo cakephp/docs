@@ -514,6 +514,47 @@ npx markdownlint-cli --config .github/markdownlint.json --fix cs/en/**/*.md"
 The `--fix` flag can automatically correct many formatting issues, but not all. Review changes before committing.
 :::
 
+### Running Link Checker
+
+We use a custom link checker to validate internal markdown links in the documentation:
+
+::: code-group
+
+```bash [Single File]
+# Check a single file
+node bin/check-links.js docs/en/your-file.md
+```
+
+```bash [Directory]
+# Check all files in a directory
+node bin/check-links.js "docs/en/controllers/*.md"
+```
+
+```bash [All Docs]
+# Check all documentation recursively
+node bin/check-links.js "docs/**/*.md"
+```
+
+```bash [With Baseline]
+# Check while ignoring known issues in baseline
+node bin/check-links.js --baseline .github/linkchecker-baseline.json "docs/**/*.md"
+```
+
+:::
+
+The link checker validates:
+- Internal file references (relative links)
+- Anchor links to headings within pages
+- Directory index links
+
+::: info External Links
+The link checker only validates internal markdown links. External URLs (http://, https://) are not checked.
+:::
+
+::: tip Known Issues Baseline
+The repository maintains a baseline of known broken links in `.github/linkchecker-baseline.json`. When you run the checker with `--baseline`, it filters out these known issues and only reports new problems. This is useful when working on specific changes without being overwhelmed by pre-existing issues.
+:::
+
 ### GitHub Actions Validation
 
 When you submit a pull request, our CI pipeline automatically runs:
@@ -522,6 +563,7 @@ When you submit a pull request, our CI pipeline automatically runs:
 2. **JSON validation** - Validates `toc_*.json` files
 3. **Markdown linting** - Checks all markdown files
 4. **Spell checking** - Scans documentation for typos
+5. **Link checking** - Validates internal markdown links
 
 ::: tip Pre-flight Check
 ::: code-group
@@ -530,12 +572,14 @@ When you submit a pull request, our CI pipeline automatically runs:
 # Validate markdown and spelling
 npx markdownlint-cli --config .github/markdownlint.json "docs/**/*.md"
 npx cspell --config .github/cspell.json "docs/**/*.md"
+node bin/check-links.js "docs/**/*.md"
 ```
 
 ```bash [Full Validation]
 # Run all CI checks locally
 npx markdownlint-cli --config .github/markdownlint.json "docs/**/*.md"
 npx cspell --config .github/cspell.json "docs/**/*.md"
+node bin/check-links.js "docs/**/*.md"
 node --check config.js
 jq empty toc_en.json
 ```
@@ -544,6 +588,7 @@ jq empty toc_en.json
 # Check your current file before committing
 npx markdownlint-cli --config .github/markdownlint.json docs/en/your-file.md
 npx cspell --config .github/cspell.json docs/en/your-file.md
+node bin/check-links.js docs/en/your-file.md
 ```
 
 :::e --check config.js

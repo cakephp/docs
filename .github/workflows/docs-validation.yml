@@ -67,3 +67,38 @@ jobs:
           files: 'docs/**/*.md'
           config: '.github/cspell.json'
           incremental_files_only: true
+
+  link-check:
+    name: Check Internal Links
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Get changed markdown files
+        id: changed-files
+        run: |
+          if [ "${{ github.event_name }}" == "pull_request" ]; then
+            # Get files changed in PR
+            FILES=$(git diff --name-only --diff-filter=d origin/${{ github.base_ref }}...HEAD | grep '\.md$' || true)
+            if [ -z "$FILES" ]; then
+              echo "No markdown files changed"
+              echo "files=" >> $GITHUB_OUTPUT
+            else
+              # Convert to space-separated list for script
+              echo "files=$(echo $FILES | tr '\n' ' ')" >> $GITHUB_OUTPUT
+              echo "Checking files:"
+              echo "$FILES"
+            fi
+          else
+            # For push events, check all files using glob pattern
+            echo 'files="docs/**/*.md"' >> $GITHUB_OUTPUT
+            echo 'Checking all files: docs/**/*.md'
+          fi
+
+      - name: Check internal links
+        if: steps.changed-files.outputs.files != ''
+        run: node bin/check-links.js --baseline .github/linkchecker-baseline.json ${{ steps.changed-files.outputs.files }}
