@@ -1,11 +1,16 @@
+---
+title: CakePHP 5 Documentation - Build Better Web Applications Faster
+description: Official CakePHP 5 documentation. Learn how to build modern PHP web applications with convention over configuration, powerful ORM, built-in security, and rapid development tools.
+outline: 2
+---
 # Build Better Web Applications, Faster
 
 **CakePHP 5** is a modern PHP framework running on PHP |phpversion| (min. PHP |minphpversion|) that helps you write clean, maintainable code without the complexity. Whether you're building a simple blog or a complex enterprise application, CakePHP gives you the tools to get it done right.
 
 ::: tip Perfect for
-✅ Developers who value **convention over configuration**  
-✅ Teams building **secure, scalable applications**  
-✅ Projects that need to **ship quickly** without sacrificing quality  
+✅ Developers who value **convention over configuration**<br>
+✅ Teams building **secure, scalable applications**<br>
+✅ Projects that need to **ship quickly** without sacrificing quality<br>
 ✅ Applications requiring **modern PHP standards** (PSR-7, PSR-15, PSR-17)
 :::
 
@@ -13,16 +18,16 @@
 
 <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin: 2rem 0;">
 
-🚀 **Rapid Development**  
+🚀 **Rapid Development**<br>
 Scaffold applications in minutes with powerful code generation tools.
 
-🔒 **Security First**  
+🔒 **Security First**<br>
 Built-in protection against SQL injection, XSS, CSRF, and more.
 
-📦 **Batteries Included**  
+📦 **Batteries Included**<br>
 ORM, validation, caching, authentication — everything you need out of the box.
 
-🎯 **Convention over Configuration**  
+🎯 **Convention over Configuration**<br>
 Sensible defaults mean less setup, more coding.
 
 </div>
@@ -117,7 +122,7 @@ return [
 Choose your preferred approach for creating the database schema:
 
 > [!NOTE]
-> **Migrations** are recommended for team projects and production - they're version-controlled and database-agnostic.  
+> **Migrations** are recommended for team projects and production - they're version-controlled and database-agnostic.
 > **Raw SQL** is fine for quick prototyping or if you prefer direct database control.
 
 #### Option A: Using Migrations
@@ -289,11 +294,11 @@ class ArticlesTable extends Table
     public function initialize(array $config): void
     {
         parent::initialize($config);
-        
+
         $this->setTable('articles');
         $this->setDisplayField('title');
         $this->setPrimaryKey('id');
-        
+
         $this->addBehavior('Timestamp');
     }
 }
@@ -343,37 +348,37 @@ class ArticlesController extends AppController
         $articles = $this->Articles->find('all')
             ->where(['published' => true])
             ->orderBy(['created' => 'DESC']);
-        
+
         $this->set(compact('articles'));
     }
-    
+
     public function view(?string $slug = null): void
     {
         $article = $this->Articles
             ->findBySlug($slug)
             ->firstOrFail();
-        
+
         $this->set(compact('article'));
     }
-    
+
     public function add(): void
     {
         $article = $this->Articles->newEmptyEntity();
-        
+
         if ($this->request->is('post')) {
             $article = $this->Articles->patchEntity(
                 $article,
                 $this->request->getData()
             );
-            
+
             if ($this->Articles->save($article)) {
                 $this->Flash->success('Article saved!');
                 return $this->redirect(['action' => 'index']);
             }
-            
+
             $this->Flash->error('Unable to save article.');
         }
-        
+
         $this->set(compact('article'));
     }
 }

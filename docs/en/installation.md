@@ -122,7 +122,7 @@ If you want to configure a new project, you just need:
 
 If you have an existing project:
 
-``` text
+``` shell
 git clone <your-cakephp-repo>
 cd <your-cakephp-project>
 ddev config --project-type=cakephp --docroot=webroot

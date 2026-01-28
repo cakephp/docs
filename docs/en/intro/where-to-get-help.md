@@ -38,10 +38,8 @@ framework. It's a straight forward code reference, so bring your propeller hat.
 ## The Test Cases
 
 If you ever feel the information provided in the API is not sufficient, check
-out the code of the test cases provided with CakePHP. They can serve as
-practical examples for function and data member usage for a class. :
-
-    tests/TestCase/
+out the code of the test cases provided with CakePHP in `tests/TestCase/`.
+They can serve as practical examples for function and data member usage for a class.
 
 ## Slack
 

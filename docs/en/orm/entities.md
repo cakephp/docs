@@ -95,7 +95,11 @@ echo $article->title;
 
 You can also use the `get()` and `set()` methods.
 
+### set()
+
 `method` Cake\\ORM\\Entity::**set**($field, $value = null, array $options = [])
+
+### get()
 
 `method` Cake\\ORM\\Entity::**get**($field)
 
@@ -105,6 +109,8 @@ For example:
 $article->set('title', 'This is my first post');
 echo $article->get('title');
 ```
+
+### patch()
 
 `method` Cake\\ORM\\Entity::**patch**(array $fields, array $options = [])
 

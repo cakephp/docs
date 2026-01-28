@@ -47,7 +47,7 @@ are the plugin's src, tests and any other directories.
 If you install your plugins via `composer` or `bake` you shouldn't need to
 configure class autoloading for your plugins.
 
-If you create a plugin manually under the `plugins` folder then will need to
+If you create a plugin manually under the `plugins/` folder then you will need to
 tell `composer` to refresh its autoloading cache:
 
 ``` bash
@@ -655,7 +655,7 @@ plugin implemented an 'Admin' prefix the overriding path would be:
 ## Plugin Assets
 
 A plugin's web assets (but not PHP files) can be served through the plugin's
-`webroot` directory, just like the main application's assets:
+`webroot/` directory, just like the main application's assets:
 
     /plugins/ContactManager/webroot/
                                    css/

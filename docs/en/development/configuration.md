@@ -97,11 +97,11 @@ will be used if no environment variable exists for the given key.
 Below is a description of the variables and how they affect your CakePHP
 application.
 
-debug  
+debug
 Changes CakePHP debugging output. `false` = Production mode. No error
 messages, errors, or warnings shown. `true` = Errors and warnings shown.
 
-App.namespace  
+App.namespace
 The namespace to find app classes under.
 
 > [!NOTE]
@@ -112,29 +112,29 @@ The namespace to find app classes under.
 
 <div id="core-configuration-baseurl">
 
-App.baseUrl  
+App.baseUrl
 Un-comment this definition if you **don’t** plan to use Apache’s
 mod_rewrite with CakePHP. Don’t forget to remove your .htaccess
 files too.
 
-App.base  
+App.base
 The base directory the app resides in. If `false` this
 will be auto detected. If not `false`, ensure your string starts
 with a <span class="title-ref">/</span> and does NOT end with a <span class="title-ref">/</span>. For example, <span class="title-ref">/basedir</span> is a valid
 App.base.
 
-App.encoding  
+App.encoding
 Define what encoding your application uses. This encoding
 is used to generate the charset in the layout, and encode entities.
 It should match the encoding values specified for your database.
 
-App.webroot  
+App.webroot
 The webroot directory.
 
-App.wwwRoot  
+App.wwwRoot
 The file path to webroot.
 
-App.fullBaseUrl  
+App.fullBaseUrl
 The fully qualified domain name (including protocol) to your application's
 root. This is used when generating absolute URLs. By default this value
 is generated using the `$_SERVER` environment. However, you should define it
@@ -144,34 +144,34 @@ In a CLI context (from command) the <span class="title-ref">fullBaseUrl</span> c
 as there is no webserver involved. You do need to specify it yourself if
 you do need to generate URLs from a shell (for example, when sending emails).
 
-App.imageBaseUrl  
+App.imageBaseUrl
 Web path to the public images directory under webroot. If you are using
 a `CDN` you should set this value to the CDN's location.
 
-App.cssBaseUrl  
+App.cssBaseUrl
 Web path to the public css directory under webroot. If you are using
 a `CDN` you should set this value to the CDN's location.
 
-App.jsBaseUrl  
+App.jsBaseUrl
 Web path to the public js directory under webroot. If you are using
 a `CDN` you should set this value to the CDN's location.
 
-App.paths  
+App.paths
 Configure paths for non class based resources. Supports the
 `plugins`, `templates`, `locales` subkeys, which allow the definition
 of paths for plugins, view templates and locale files respectively.
 
-App.uploadedFilesAsObjects  
+App.uploadedFilesAsObjects
 Defines whether uploaded files are being represented as objects (`true`),
 or arrays (`false`). This option is being treated as enabled by default.
 See the [File Uploads section](../controllers/request-response#request-file-uploads) in the Request &
 Response Objects chapter for more information.
 
-Security.salt  
+Security.salt
 A random string used in hashing. This value is also used as the
 HMAC salt when doing symmetric encryption.
 
-Asset.timestamp  
+Asset.timestamp
 Appends a timestamp which is last modified time of the particular
 file at the end of asset files URLs (CSS, JavaScript, Image) when
 using proper helpers. Valid values:
@@ -180,7 +180,7 @@ using proper helpers. Valid values:
 - (bool) `true` - Appends the timestamp when debug is `true`
 - (string) 'force' - Always appends the timestamp.
 
-Asset.cacheTime  
+Asset.cacheTime
 Sets the asset cache time. This determines the http header `Cache-Control`'s
 `max-age`, and the http header's `Expire`'s time for assets.
 This can take anything that you version of PHP's [strtotime function](https://php.net/manual/en/function.strtotime.php) can take.
