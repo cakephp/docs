@@ -28,7 +28,7 @@ methods of the HtmlHelper and how to use them.
 
 ### Creating Charset Tags
 
-`method` Cake\\View\\Helper\\HtmlHelper::**charset**($charset=null): string
+`method` Cake\\View\\Helper\\HtmlHelper::**charset**(?string $charset = null): string
 
 Used to create a meta tag specifying the document's character. The default value
 is UTF-8. An example use:
@@ -308,7 +308,7 @@ Will output:
 
 ### Creating Links
 
-`method` Cake\\View\\Helper\\HtmlHelper::**link**($title, $url = null, array $options = []): string
+`method` Cake\\View\\Helper\\HtmlHelper::**link**(array|string $title, array|string|null $url = null, array $options = []): string
 
 General purpose method for creating HTML links. Use `$options` to
 specify attributes for the element and whether or not the
@@ -895,7 +895,7 @@ Output:
 
 ## Changing the Tags Output by HtmlHelper
 
-`method` Cake\\View\\Helper\\HtmlHelper::**setTemplates**(array $templates)
+`method` Cake\\View\\Helper\\HtmlHelper::**setTemplates**(array $templates): $this
 
 Load an array of templates to add/replace templates:
 

@@ -9,7 +9,7 @@ overriding the core helper with an application one. See the
 
 ## Generating URLs
 
-`method` Cake\\View\\Helper\\UrlHelper::**build**($url = null, array $options = []): string
+`method` Cake\\View\\Helper\\UrlHelper::**build**(array|string|null $url = null, array $options = []): string
 
 Returns a URL pointing to a combination of controller and action.
 If `$url` is empty, it returns the `REQUEST_URI`, otherwise it

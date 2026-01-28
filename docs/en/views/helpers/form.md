@@ -824,7 +824,7 @@ however, this parameter is used primarily to specify HTML tag attributes
 
 ### Creating Text Inputs
 
-`method` Cake\\View\\Helper\\FormHelper::**text**(string $name, array $options)
+`method` Cake\\View\\Helper\\FormHelper::**text**(string $fieldName, array $options = []): string
 
 - `$name` - A field name in the form `'Modelname.fieldname'`.
 - `$options` - An optional array including any of the
@@ -846,7 +846,7 @@ Will output:
 
 ### Creating Password Inputs
 
-`method` Cake\\View\\Helper\\FormHelper::**password**(string $fieldName, array $options)
+`method` Cake\\View\\Helper\\FormHelper::**password**(string $fieldName, array $options = []): string
 
 - `$fieldName` - A field name in the form `'Modelname.fieldname'`.
 - `$options` - An optional array including any of the
@@ -2136,7 +2136,7 @@ echo $this->Form->button('<em>Submit Form</em>', [
 
 ## Closing the Form
 
-`method` Cake\\View\\Helper\\FormHelper::**end**($secureAttributes = []): string
+`method` Cake\\View\\Helper\\FormHelper::**end**(array $secureAttributes = []): string
 
 - `$secureAttributes` - Optional. Allows you to provide secure attributes
   which will be passed as HTML attributes into the hidden input elements
@@ -2771,7 +2771,7 @@ As mentioned previously when using FormProtectionComponent, you should always cl
 your forms using `Cake\View\Helper\FormHelper::end()`. This will
 ensure that the special `_Token` inputs are generated.
 
-`method` Cake\\View\\Helper\\FormHelper::**unlockField**($name)
+`method` Cake\\View\\Helper\\FormHelper::**unlockField**(string $name): $this
 
 - `$name` - Optional. The dot-separated name for the field.
 
