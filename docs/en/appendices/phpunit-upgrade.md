@@ -1,6 +1,17 @@
 # PHPUnit Upgrade
 
-CakePHP 5 supports PHPUnit 11 and 12. This guide covers migrating from older PHPUnit versions.
+This guide covers the PHPUnit version requirements and migration steps for CakePHP 5.x applications.
+
+## Current Requirements
+
+CakePHP 5.x requires **PHPUnit ^11.5.3 or ^12.1.3**. This means:
+
+- PHPUnit 11.5.3+ requires **PHP 8.2** or later
+- PHPUnit 12.1.3+ requires **PHP 8.3** or later
+
+> [!NOTE]
+> PHPUnit 10 is no longer supported in CakePHP 5.x. If you are still on PHPUnit 10,
+> you must upgrade to PHPUnit 11 or 12.
 
 ## phpunit.xml Adjustments
 
@@ -99,6 +110,8 @@ Common attribute replacements:
 | `@covers` | `#[CoversClass(ClassName::class)]` |
 | `@test` | `#[Test]` |
 
+Remember to import the attribute classes from `PHPUnit\Framework\Attributes`.
+
 ### Test Doubles for Abstract Classes Deprecated
 
 Methods for creating mock objects for abstract classes and traits are hard-deprecated. Testing traits in isolation from the classes that use them is discouraged.
@@ -152,3 +165,13 @@ vendor/bin/rector process tests/
 ```
 
 Configure Rector with PHPUnit rulesets to handle data provider static conversion, annotation to attribute migration, and other changes automatically.
+
+## Upgrade Checklist
+
+Before upgrading PHPUnit versions, ensure:
+
+1. Your test suite runs without deprecation warnings on your current PHPUnit version
+2. All data providers are `public static` methods
+3. You are using attributes instead of annotations (required for PHPUnit 12)
+4. Mock expectations only use `createMock()`, not `createStub()`
+5. Run `vendor/bin/phpunit --migrate-configuration` after upgrading

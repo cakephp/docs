@@ -1,6 +1,17 @@
 # PHPUnit アップグレード
 
-CakePHP 5 は PHPUnit 11 および 12 をサポートしています。このガイドでは、古いバージョンの PHPUnit からの移行について説明します。
+このガイドでは、CakePHP 5.x アプリケーションの PHPUnit バージョン要件と移行手順について説明します。
+
+## 現在の要件
+
+CakePHP 5.x は **PHPUnit ^11.5.3 または ^12.1.3** が必要です:
+
+- PHPUnit 11.5.3+ は **PHP 8.2** 以降が必要です
+- PHPUnit 12.1.3+ は **PHP 8.3** 以降が必要です
+
+> [!NOTE]
+> CakePHP 5.x では PHPUnit 10 はサポートされなくなりました。まだ PHPUnit 10 を使用している場合は、
+> PHPUnit 11 または 12 にアップグレードする必要があります。
 
 ## phpunit.xml の調整
 
@@ -96,6 +107,8 @@ public function testSomething(): void
 | `@covers` | `#[CoversClass(ClassName::class)]` |
 | `@test` | `#[Test]` |
 
+アトリビュートクラスは `PHPUnit\Framework\Attributes` からインポートして下さい。
+
 ### 抽象クラスのテストダブルが非推奨に
 
 抽象クラスおよびトレイトのモックオブジェクトを作成するメソッドが非推奨になりました。トレイトを使用するクラスから分離してテストすることは推奨されません。
@@ -149,3 +162,13 @@ vendor/bin/rector process tests/
 ```
 
 Rector の PHPUnit ルールセットを設定することで、data provider の static 変換、アノテーションからアトリビュートへの移行などの変更を自動的に処理できます。
+
+## アップグレードチェックリスト
+
+PHPUnit のバージョンをアップグレードする前に、以下を確認して下さい:
+
+1. 現在の PHPUnit バージョンでテストスイートが非推奨の警告なしに実行できること
+2. すべての data provider が `public static` メソッドであること
+3. アノテーションではなくアトリビュートを使用していること（PHPUnit 12 で必須）
+4. モックのエクスペクテーションが `createStub()` ではなく `createMock()` のみを使用していること
+5. アップグレード後に `vendor/bin/phpunit --migrate-configuration` を実行すること
