@@ -88,7 +88,7 @@ collection immediately applying the callback to each value in the collection.
 
 ### map()
 
-`method` Cake\\Collection\\Collection::**map**($callback)
+`method` Cake\\Collection\\Collection::**map**($callback): CollectionInterface
 
 The `map()` method will create a new collection based on the output of the
 callback being applied to each object in the original collection:
@@ -113,7 +113,7 @@ the resulting items when iterated.
 
 ### extract()
 
-`method` Cake\\Collection\\Collection::**extract**($path)
+`method` Cake\\Collection\\Collection::**extract**($path): CollectionInterface
 
 One of the most common uses for a `map()` function is to extract a single
 column from a collection. If you are looking to build a list of elements
@@ -188,7 +188,7 @@ Unlike `Cake\Utility\Hash::extract()` this method only supports the
 
 ### combine()
 
-`method` Cake\\Collection\\Collection::**combine**($keyPath, $valuePath, $groupPath = null)
+`method` Cake\\Collection\\Collection::**combine**($keyPath, $valuePath, $groupPath = null): CollectionInterface
 
 Collections allow you to create a new collection made from keys and values in
 an existing collection. Both the key and value paths can be specified with
@@ -245,7 +245,7 @@ $combined = (new Collection($entities))->combine(
 
 ### stopWhen()
 
-`method` Cake\\Collection\\Collection::**stopWhen**(callable $c)
+`method` Cake\\Collection\\Collection::**stopWhen**(callable $c): CollectionInterface
 
 You can stop the iteration at any point using the `stopWhen()` method. Calling
 it in a collection will create a new one that will stop yielding results if the
@@ -266,7 +266,7 @@ $result = $new->toList();
 
 ### unfold()
 
-`method` Cake\\Collection\\Collection::**unfold**(callable $callback)
+`method` Cake\\Collection\\Collection::**unfold**(callable $callback): CollectionInterface
 
 Sometimes the internal items of a collection will contain arrays or iterators
 with more items. If you wish to flatten the internal structure to iterate once
@@ -314,7 +314,7 @@ $result = $new->toList();
 
 ### chunk()
 
-`method` Cake\\Collection\\Collection::**chunk**($chunkSize)
+`method` Cake\\Collection\\Collection::**chunk**($chunkSize): CollectionInterface
 
 When dealing with large amounts of items in a collection, it may make sense to
 process the elements in batches instead of one by one. For splitting
@@ -345,7 +345,7 @@ $collection->map(function ($article) {
 
 ### chunkWithKeys()
 
-`method` Cake\\Collection\\Collection::**chunkWithKeys**($chunkSize)
+`method` Cake\\Collection\\Collection::**chunkWithKeys**($chunkSize): CollectionInterface
 
 Much like `chunk()`, `chunkWithKeys()` allows you to slice up
 a collection into smaller batches but with keys preserved. This is useful when
@@ -372,7 +372,7 @@ $result = $chunked->toList();
 
 ### filter()
 
-`method` Cake\\Collection\\Collection::**filter**($callback)
+`method` Cake\\Collection\\Collection::**filter**($callback): CollectionInterface
 
 Collections allow you to filter and create new collections based on
 the result of callback functions. You can use `filter()` to create a new
@@ -390,7 +390,7 @@ $guys = $collection->filter(function ($person, $key) {
 
 ### reject()
 
-`method` Cake\\Collection\\Collection::**reject**(callable $c)
+`method` Cake\\Collection\\Collection::**reject**(callable $c): CollectionInterface
 
 The inverse of `filter()` is `reject()`. This method does a negative filter,
 removing elements that match the filter function:
@@ -439,7 +439,7 @@ $hasYoungPeople = $collection->any(function ($person) {
 
 ### match()
 
-`method` Cake\\Collection\\Collection::**match**($conditions)
+`method` Cake\\Collection\\Collection::**match**($conditions): CollectionInterface
 
 If you need to extract a new collection containing only the elements that
 contain a given set of properties, you should use the `match()` method:
@@ -602,7 +602,7 @@ $median = (new Collection($items))->median('invoice.total');
 
 ### groupBy()
 
-`method` Cake\\Collection\\Collection::**groupBy**($callback)
+`method` Cake\\Collection\\Collection::**groupBy**($callback): CollectionInterface
 
 Collection values can be grouped by different keys in a new collection when they
 share the same value for a property:
@@ -644,7 +644,7 @@ $classResults = $students->groupBy(function ($student) {
 
 ### countBy()
 
-`method` Cake\\Collection\\Collection::**countBy**($callback)
+`method` Cake\\Collection\\Collection::**countBy**($callback): CollectionInterface
 
 If you only wish to know the number of occurrences per group, you can do so by
 using the `countBy()` method. It takes the same arguments as `groupBy` so it
@@ -661,7 +661,7 @@ $classResults = $students->countBy(function ($student) {
 
 ### indexBy()
 
-`method` Cake\\Collection\\Collection::**indexBy**($callback)
+`method` Cake\\Collection\\Collection::**indexBy**($callback): CollectionInterface
 
 There will be certain cases where you know an element is unique for the property
 you want to group by. If you wish a single result per group, you can use the
@@ -691,7 +691,7 @@ $filesByHash = $files->indexBy(function ($file) {
 
 ### zip()
 
-`method` Cake\\Collection\\Collection::**zip**($items)
+`method` Cake\\Collection\\Collection::**zip**($items): CollectionInterface
 
 The elements of different collections can be grouped together using the
 `zip()` method. It will return a new collection containing an array grouping
@@ -750,7 +750,7 @@ $result = $firstYear->zip($data[0], $data[1])->toList();
 
 ### sortBy()
 
-`method` Cake\\Collection\\Collection::**sortBy**($callback, $order = SORT_DESC, $sort = SORT_NUMERIC)
+`method` Cake\\Collection\\Collection::**sortBy**($callback, $order = SORT_DESC, $sort = SORT_NUMERIC): CollectionInterface
 
 Collection values can be sorted in ascending or descending order based on
 a column or custom function. To create a new sorted collection out of the values
@@ -818,7 +818,7 @@ $sorted = $collection->sortBy('title', SORT_ASC, SORT_NATURAL);
 
 ### nest()
 
-`method` Cake\\Collection\\Collection::**nest**($idPath, $parentPath, $nestingKey = 'children')
+`method` Cake\\Collection\\Collection::**nest**($idPath, $parentPath, $nestingKey = 'children'): CollectionInterface
 
 Not all data is meant to be represented in a linear way. Collections make it
 easier to construct and flatten hierarchical or nested structures. Creating
@@ -870,7 +870,7 @@ rendering menus or traversing elements up to certain level in the tree.
 
 ### listNested()
 
-`method` Cake\\Collection\\Collection::**listNested**($order = 'desc', $nestingKey = 'children')
+`method` Cake\\Collection\\Collection::**listNested**($order = 'desc', $nestingKey = 'children'): CollectionInterface
 
 The inverse of `nest()` is `listNested()`. This method allows you to flatten
 a tree structure back into a linear structure. It takes two parameters; the
@@ -977,7 +977,7 @@ comparison types you can use the `some()` method.
 
 ### shuffle()
 
-`method` Cake\\Collection\\Collection::**shuffle**()
+`method` Cake\\Collection\\Collection::**shuffle**(): CollectionInterface
 
 Sometimes you may wish to show a collection of values in a random order. In
 order to create a new collection that will return each value in a randomized
@@ -992,7 +992,7 @@ $collection->shuffle()->toList();
 
 ### transpose()
 
-`method` Cake\\Collection\\Collection::**transpose**()
+`method` Cake\\Collection\\Collection::**transpose**(): CollectionInterface
 
 When you transpose a collection, you get a new collection containing a row made
 of the each of the original columns:
@@ -1020,7 +1020,7 @@ $result = $transpose->toList();
 
 ### sample()
 
-`method` Cake\\Collection\\Collection::**sample**($length = 10)
+`method` Cake\\Collection\\Collection::**sample**($length = 10): CollectionInterface
 
 Shuffling a collection is often useful when doing quick statistical analysis.
 Another common operation when doing this sort of task is withdrawing a few
@@ -1041,7 +1041,7 @@ sample, the full collection in a random order is returned.
 
 ### take()
 
-`method` Cake\\Collection\\Collection::**take**($length, $offset)
+`method` Cake\\Collection\\Collection::**take**($length, $offset): CollectionInterface
 
 Whenever you want to take a slice of a collection use the `take()` function,
 it will create a new collection with at most the number of values you specify in
@@ -1058,7 +1058,7 @@ Positions are zero-based, therefore the first position number is `0`.
 
 ### skip()
 
-`method` Cake\\Collection\\Collection::**skip**($length)
+`method` Cake\\Collection\\Collection::**skip**($length): CollectionInterface
 
 While the second argument of `take()` can help you skip some elements before
 getting them from the collection, you can also use `skip()` for the same
@@ -1098,7 +1098,7 @@ $collection->last(); // Returns 2
 
 ### append()
 
-`method` Cake\\Collection\\Collection::**append**(array|Traversable $items)
+`method` Cake\\Collection\\Collection::**append**(array|Traversable $items): CollectionInterface
 
 You can compose multiple collections into a single one. This enables you to
 gather data from various sources, concatenate it, and apply other collection
@@ -1117,7 +1117,7 @@ $myTimeline->filter(function ($tweet) {
 
 ### appendItem()
 
-`method` Cake\\Collection\\Collection::**appendItem**($value, $key)
+`method` Cake\\Collection\\Collection::**appendItem**($value, $key): CollectionInterface
 
 Allows you to append an item with an optional key to the collection. If you
 specify a key that already exists in the collection, the value will not be
@@ -1130,7 +1130,7 @@ $myTimeline = $cakephpTweets->appendItem($newTweet, 99);
 
 ### prepend()
 
-`method` Cake\\Collection\\Collection::**prepend**($items)
+`method` Cake\\Collection\\Collection::**prepend**($items): CollectionInterface
 
 The `prepend()` method will return a new collection containing the values from
 both sources:
@@ -1142,7 +1142,7 @@ $myTimeline = $cakephpTweets->prepend($phpTweets);
 
 ### prependItem()
 
-`method` Cake\\Collection\\Collection::**prependItem**($value, $key)
+`method` Cake\\Collection\\Collection::**prependItem**($value, $key): CollectionInterface
 
 Allows you to prepend an item with an optional key to the collection. If you
 specify a key that already exists in the collection, the value will not be
@@ -1165,7 +1165,7 @@ $myTimeline = $cakephpTweets->prependItem($newTweet, 99);
 
 ### insert()
 
-`method` Cake\\Collection\\Collection::**insert**($path, $items)
+`method` Cake\\Collection\\Collection::**insert**($path, $items): CollectionInterface
 
 At times, you may have two separate sets of data that you would like to insert
 the elements of one set into each of the elements of the other set. This is
@@ -1287,7 +1287,7 @@ $collection->map(new TotalOrderCalculator)
 
 ### through()
 
-`method` Cake\\Collection\\Collection::**through**($callback)
+`method` Cake\\Collection\\Collection::**through**($callback): CollectionInterface
 
 Sometimes a chain of collection method calls can become reusable in other parts
 of your application, but only if they are called in that specific order. In
@@ -1328,7 +1328,7 @@ $collection->through(new FinalCheckOutRowProcessor);
 
 ### buffered()
 
-`method` Cake\\Collection\\Collection::**buffered**()
+`method` Cake\\Collection\\Collection::**buffered**(): CollectionInterface
 
 Collections often perform most operations that you create using its functions in
 a lazy way. This means that even though you can call a function, it does not
@@ -1410,7 +1410,7 @@ $rewindable = (new Collection(results()))->buffered();
 
 ### compile()
 
-`method` Cake\\Collection\\Collection::**compile**($preserveKeys = true)
+`method` Cake\\Collection\\Collection::**compile**($preserveKeys = true): CollectionInterface
 
 Sometimes you need to get a clone of the elements from another
 collection. This is useful when you need to iterate the same set from different

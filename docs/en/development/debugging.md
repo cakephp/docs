@@ -176,7 +176,7 @@ Although this method is used internally, it can be handy if you're
 creating your own error messages or log entries for custom
 situations.
 
-`static` Debugger::**getType**($var)
+`static` Debugger::**getType**($var): string
 
 Get the type of a variable. Objects will return their class name
 

@@ -392,7 +392,7 @@ In components, use `$this->getController()->getRequest()`.
 
 ## Reading & Writing Session Data
 
-`method` Session::**read**($key, $default = null)
+`method` Session::**read**($key, $default = null): mixed
 
 You can read values from the session using `Hash::extract()`
 compatible syntax:
@@ -401,7 +401,7 @@ compatible syntax:
 $session->read('Config.language', 'en');
 ```
 
-`method` Session::**readOrFail**($key)
+`method` Session::**readOrFail**($key): mixed
 
 The same as convenience wrapper around non-nullable return value:
 
@@ -412,7 +412,7 @@ $session->readOrFail('Config.language');
 This is useful, when you know this key has to be set and you don't want to have to check
 for the existence in code itself.
 
-`method` Session::**write**($key, $value)
+`method` Session::**write**($key, $value): void
 
 `$key` should be the dot separated path you wish to write `$value` to:
 
@@ -429,7 +429,7 @@ $session->write([
 ]);
 ```
 
-`method` Session::**delete**($key)
+`method` Session::**delete**($key): void
 
 When you need to delete data from the session, you can use `delete()`:
 
@@ -450,7 +450,7 @@ When you need to read and delete data from the session, you can use
 $session->consume('Some.value');
 ```
 
-`method` Session::**check**($key)
+`method` Session::**check**($key): bool
 
 If you want to see if data exists in the session, you can use `check()`:
 
@@ -462,7 +462,7 @@ if ($session->check('Config.language')) {
 
 ## Destroying the Session
 
-`method` Session::**destroy**()
+`method` Session::**destroy**(): void
 
 Destroying the session is useful when users log out. To destroy a session, use
 the `destroy()` method:
@@ -476,7 +476,7 @@ Destroying a session will remove all serverside data in the session, but will
 
 ## Rotating Session Identifiers
 
-`method` Session::**renew**()
+`method` Session::**renew**(): void
 
 While the `Authentication Plugin` automatically renews the session id when users login and
 logout, you may need to rotate the session id's manually. To do this use the

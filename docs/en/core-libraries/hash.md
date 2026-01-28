@@ -79,7 +79,7 @@ $results = Hash::extract($users, '{n}.id');
 // [1,2,3,4];
 ```
 
-`static` Hash::**insert**(array $data, $path, $values = null)
+`static` Hash::**insert**(array $data, $path, $values = null): ArrayAccess|array
 
 Inserts `$values` into an array as defined by `$path`:
 
