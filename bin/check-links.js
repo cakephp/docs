@@ -133,8 +133,7 @@ class LinkChecker {
   isInBaseline(error) {
     return this.baseline.some(baselineError =>
       baselineError.file === error.file &&
-      baselineError.link === error.link &&
-      baselineError.message === error.message
+      baselineError.link === error.link
     );
   }
 
@@ -202,7 +201,7 @@ class LinkChecker {
 
       // Check file exists
       if (!fs.existsSync(targetPath)) {
-        this.addError(filePath, link, `File not found: ${targetPath}`);
+        this.addError(filePath, link, `File not found: ${path.relative(process.cwd(), targetPath)}`);
         continue;
       }
 
