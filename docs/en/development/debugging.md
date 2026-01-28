@@ -188,7 +188,7 @@ additional editor formats if required during application bootstrap:
 
 ``` php
 // Generate links for vscode.
-Debugger::setEditor('vscode')
+Debugger::setEditor('vscode');
 
 // Add a custom format
 // Format strings will have the {file} and {line}

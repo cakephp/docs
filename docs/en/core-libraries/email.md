@@ -484,7 +484,7 @@ TransportFactory::setConfig('gmail', [
     'port' => 465,
     'username' => 'my@gmail.com',
     'password' => 'secret',
-    'className' => 'Smtp'
+    'className' => 'Smtp',
 ]);
 ```
 

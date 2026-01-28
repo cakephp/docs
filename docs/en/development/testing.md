@@ -475,36 +475,36 @@ An example table would be:
 
 ``` php
 return [
-  'articles' => [
-     'columns' => [
-         'id' => [
-             'type' => 'integer',
-         ],
-         'author_id' => [
-             'type' => 'integer',
-             'null' => true,
-         ],
-         'title' => [
-             'type' => 'string',
-             'null' => true,
-         ],
-         'body' => 'text',
-         'published' => [
-             'type' => 'string',
-             'length' => 1,
-             'default' => 'N',
-         ],
-     ],
-     'constraints' => [
-         'primary' => [
-             'type' => 'primary',
-             'columns' => [
-                 'id',
-             ],
-         ],
-     ],
-  ],
-  // More tables
+    'articles' => [
+        'columns' => [
+            'id' => [
+                'type' => 'integer',
+            ],
+            'author_id' => [
+                'type' => 'integer',
+                'null' => true,
+            ],
+            'title' => [
+                'type' => 'string',
+                'null' => true,
+            ],
+            'body' => 'text',
+            'published' => [
+                'type' => 'string',
+                'length' => 1,
+                'default' => 'N',
+            ],
+        ],
+        'constraints' => [
+            'primary' => [
+                'type' => 'primary',
+                'columns' => [
+                    'id',
+                ],
+            ],
+        ],
+    ],
+    // More tables
 ];
 ```
 

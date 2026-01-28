@@ -322,7 +322,7 @@ for both:
     ],
     'write' => [
         'host' => 'write-db.example.com',
-    ]
+    ],
 ];
 ```
 
@@ -1207,7 +1207,7 @@ datasource configuration:
 
         // Use the 'orm_metadata' cache config for metadata.
         'cacheMetadata' => 'orm_metadata',
-    ]
+    ],
 ],
 ```
 

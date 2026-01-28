@@ -462,7 +462,7 @@ because we don't have a Contact model defined yet.
 If your application includes the default routing CakePHP provides you will be
 able to access your plugin controllers using URLs like:
 
-``` php
+``` text
 // Access the index route of a plugin controller.
 /contact-manager/contacts
 

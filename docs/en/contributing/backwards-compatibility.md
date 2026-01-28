@@ -277,7 +277,7 @@ value:
 // ...
 'Error' => [
     'errorLevel' => E_ALL ^ E_USER_DEPRECATED,
-]
+],
 // ...
 ```
 

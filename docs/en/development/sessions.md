@@ -168,7 +168,7 @@ If you need to use a database to store your session data, configure as follows:
 
 ``` php
 'Session' => [
-    'defaults' => 'database'
+    'defaults' => 'database',
 ]
 ```
 
@@ -354,7 +354,7 @@ In **config/app.php** make the session block look like:
 ],
 // Make sure to add a apc cache config
 'Cache' => [
-    'apc' => ['engine' => 'Apc']
+    'apc' => ['engine' => 'Apc'],
 ]
 ```
 

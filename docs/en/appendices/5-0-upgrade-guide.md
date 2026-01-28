@@ -9,7 +9,7 @@ Once your application is running on latest CakePHP 4.x, enable deprecation warni
 ``` php
 'Error' => [
     'errorLevel' => E_ALL,
-]
+],
 ```
 
 Now that you can see all the warnings, make sure these are fixed before proceeding with the upgrade.

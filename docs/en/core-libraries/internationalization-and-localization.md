@@ -122,7 +122,7 @@ The default locale can be set in your **config/app.php** file by setting
     ...
     'defaultLocale' => env('APP_DEFAULT_LOCALE', 'en_US'),
     ...
-]
+],
 ```
 
 This will control several aspects of the application, including the default

@@ -113,7 +113,7 @@ Examples of invalid arrays:
 // Multiple keys in top level
 [
     'key1' => 'first value',
-    'key2' => 'other value'
+    'key2' => 'other value',
 ];
 ```
 

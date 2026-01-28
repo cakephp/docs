@@ -146,8 +146,8 @@ First, you need to add the `through` and `cascadeCallbacks` options to the
 `belongsToMany` association:
 
 ``` php
-'through'          => 'CommentsArticles',
-'cascadeCallbacks' => true
+'through' => 'CommentsArticles',
+'cascadeCallbacks' => true,
 ```
 
 Also see [Using The Through Option](../../orm/associations#using-the-through-option) how to configure a custom join table.

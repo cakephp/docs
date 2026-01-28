@@ -202,7 +202,7 @@ syntax:
 
 Some example string targets are:
 
-``` php
+``` text
 // Application controller
 'Articles::view'
 
