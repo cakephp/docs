@@ -168,7 +168,7 @@ Finally clear all caches with `bin/cake cache clear_all` and try it out.
 
 ## Manually updating counter caches
 
-`method` Cake\\ORM\\Behavior\\CounterCacheBehavior::**updateCounterCache(?string $assocName = null, int $limit = 100, ?int $page = null): void**()
+`method` Cake\\ORM\\Behavior\\CounterCacheBehavior::**updateCounterCache**(?string $assocName = null, int $limit = 100, ?int $page = null): void
 
 The `updateCounterCache()` method allows you to update the counter cache values
 for all records of one or all configured associations in batches. This can be useful,

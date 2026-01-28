@@ -38,7 +38,7 @@ public function getOptionParser()
 
 ## Using Arguments
 
-`method` Cake\\Console\\ConsoleOptionParser::**addArgument**($name, $params = [])
+`method` Cake\\Console\\ConsoleOptionParser::**addArgument**(string $name, array $params = []): static
 
 Positional arguments are frequently used in command line tools,
 and `ConsoleOptionParser` allows you to define positional
@@ -73,7 +73,7 @@ The `separator` option was added.
 
 ### Adding Multiple Arguments
 
-`method` Cake\\Console\\ConsoleOptionParser::**addArguments**(array $args)
+`method` Cake\\Console\\ConsoleOptionParser::**addArguments**(array $args): static
 
 If you have an array with multiple arguments you can use
 `$parser->addArguments()` to add multiple arguments at once. :
@@ -109,7 +109,7 @@ will be raised and the shell will be stopped.
 
 ## Using Options
 
-`method` Cake\\Console\\ConsoleOptionParser::**addOption**($name, array $options = [])
+`method` Cake\\Console\\ConsoleOptionParser::**addOption**(string $name, array $options = []): static
 
 Options or flags are used in command line tools to provide unordered key/value
 arguments for your commands. Options can define both verbose and short aliases.
@@ -164,7 +164,7 @@ The `separator` option was added.
 
 ### Adding Multiple Options
 
-`method` Cake\\Console\\ConsoleOptionParser::**addOptions**(array $options)
+`method` Cake\\Console\\ConsoleOptionParser::**addOptions**(array $options): static
 
 If you have an array with multiple options you can use `$parser->addOptions()`
 to add multiple options at once. :
@@ -241,7 +241,7 @@ public function getOptionParser()
 
 ### Merging Option Parsers
 
-`method` Cake\\Console\\ConsoleOptionParser::**merge**($spec)
+`method` Cake\\Console\\ConsoleOptionParser::**merge**(ConsoleOptionParser $spec): static
 
 When building a group command, you maybe want to combine several parsers for
 this:
@@ -348,7 +348,7 @@ epilog.
 
 ### Set the Description
 
-`method` Cake\\Console\\ConsoleOptionParser::**setDescription**($text)
+`method` Cake\\Console\\ConsoleOptionParser::**setDescription**(array|string $text): static
 
 The description displays above the argument and option information. By passing
 in either an array or a string, you can set the value of the description:
@@ -363,7 +363,7 @@ $parser->getDescription();
 
 ### Set the Epilog
 
-`method` Cake\\Console\\ConsoleOptionParser::**setEpilog**($text)
+`method` Cake\\Console\\ConsoleOptionParser::**setEpilog**(array|string $text): static
 
 Gets or sets the epilog for the option parser. The epilog is displayed after the
 argument and option information. By passing in either an array or a string, you

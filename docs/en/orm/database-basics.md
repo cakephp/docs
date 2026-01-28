@@ -339,7 +339,7 @@ references to existing connections.
 
 ### Accessing Connections
 
-`static` Cake\\Datasource\\ConnectionManager::**get**($name): ConnectionInterface
+`static` Cake\\Datasource\\ConnectionManager::**get**(string $name): ConnectionInterface
 
 Once configured connections can be fetched using
 `Cake\Datasource\ConnectionManager::get()`. This method will
@@ -518,7 +518,7 @@ Maps to a native `DATETIME` column type. In PostgreSQL and SQL Server this
 turns into a `TIMESTAMP` type. The default return value of this column type is
 `Cake\I18n\DateTime` which extends [Chronos](https://github.com/cakephp/chronos) and the native `DateTimeImmutable`.
 
-`method` Cake\\Database\\DateTimeType::**setTimezone**(string|\\DateTimeZone|null $timezone)
+`method` Cake\\Database\\DateTimeType::**setTimezone**(string|DateTimeZone|null $timezone): static
 
 If your database server's timezone does not match your application's PHP timezone
 then you can use this method to specify your database's timezone. This timezone
@@ -646,7 +646,7 @@ Geospatial schema types were added.
 
 `class` Cake\\Database\\**TypeFactory**
 
-`static` Cake\\Database\\TypeFactory::**map**($name, $class): void
+`static` Cake\\Database\\TypeFactory::**map**(string $name, string $class): void
 
 If you need to use vendor specific types that are not built into CakePHP you can
 add additional new types to CakePHP's type system. Type classes are expected to

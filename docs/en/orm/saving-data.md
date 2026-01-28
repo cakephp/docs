@@ -795,7 +795,7 @@ The `strictFields` option was added in 5.3.0.
 
 ## Saving Entities
 
-`method` Cake\\ORM\\Table::**save**(Entity $entity, array $options = []): EntityInterface|false
+`method` Cake\\ORM\\Table::**save**(EntityInterface $entity, array $options = []): EntityInterface|false
 
 When saving request data to your database you need to first hydrate a new entity
 using `newEntity()` for passing into `save()`. For example:
@@ -1285,7 +1285,7 @@ corresponding save events will be triggered.
 
 ## Find or Create an Entity
 
-`method` Cake\\ORM\\Table::**findOrCreate**($search, $callback = null, $options = []): EntityInterface
+`method` Cake\\ORM\\Table::**findOrCreate**(SelectQuery|callable|array $search, callable|array|null $callback = null, array $options = []): EntityInterface
 
 Find an existing record based on `$search` or create a new record using the
 properties in `$search` and calling the optional `$callback`. This method is
@@ -1371,7 +1371,7 @@ The result will be updated entities on success or `false` on failure.
 
 ## Bulk Updates
 
-`method` Cake\\ORM\\Table::**updateAll**($fields, $conditions): int
+`method` Cake\\ORM\\Table::**updateAll**(QueryExpression|Closure|array|string $fields, QueryExpression|Closure|array|string|null $conditions): int
 
 There may be times when updating rows individually is not efficient or
 necessary. In these cases it is more efficient to use a bulk-update to modify

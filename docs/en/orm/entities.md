@@ -97,11 +97,11 @@ You can also use the `get()` and `set()` methods.
 
 ### set()
 
-`method` Cake\\ORM\\Entity::**set**($field, $value = null, array $options = [])
+`method` Cake\\ORM\\Entity::**set**(array|string $field, mixed $value = null, array $options = []): static
 
 ### get()
 
-`method` Cake\\ORM\\Entity::**get**($field)
+`method` Cake\\ORM\\Entity::**get**(string $field): mixed
 
 For example:
 
@@ -112,7 +112,7 @@ echo $article->get('title');
 
 ### patch()
 
-`method` Cake\\ORM\\Entity::**patch**(array $fields, array $options = [])
+`method` Cake\\ORM\\Entity::**patch**(array $fields, array $options = []): static
 
 Using `patch()` you can mass assign multiple fields at once:
 

@@ -84,7 +84,7 @@ records with these method **will** trigger events.
 
 ### deleteAll()
 
-`method` Cake\\ORM\\Table::**deleteAll**($conditions): int
+`method` Cake\\ORM\\Table::**deleteAll**(QueryExpression|Closure|array|string|null $conditions): int
 
 There may be times when deleting rows one by one is not efficient or useful.
 In these cases it is more performant to use a bulk-delete to remove many rows at

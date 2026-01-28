@@ -273,14 +273,14 @@ Behaviors, can use this hook to add in validation methods.
 
 ### buildRules
 
-`method` Cake\\ORM\\Table::**buildRules(RulesChecker $rules): RulesChecker**()
+`method` Cake\\ORM\\Table::**buildRules**(RulesChecker $rules): RulesChecker
 
 The `Model.buildRules` event is fired after a rules instance has been
 created and after the `Table::buildRules()` method has been called.
 
 ### beforeRules
 
-`method` Cake\\ORM\\Table::**beforeRules**(EventInterface $event, EntityInterface $entity, ArrayObject $options, $operation): void
+`method` Cake\\ORM\\Table::**beforeRules**(EventInterface $event, EntityInterface $entity, ArrayObject $options, string $operation): void
 
 The `Model.beforeRules` event is fired before an entity has had rules applied. By
 stopping this event, you can halt the rules checking and set the result
@@ -288,7 +288,7 @@ of applying rules.
 
 ### afterRules
 
-`method` Cake\\ORM\\Table::**afterRules**(EventInterface $event, EntityInterface $entity, ArrayObject $options, $result, $operation): void
+`method` Cake\\ORM\\Table::**afterRules**(EventInterface $event, EntityInterface $entity, ArrayObject $options, bool $result, string $operation): void
 
 The `Model.afterRules` event is fired after an entity has rules applied. By
 stopping this event, you can return the final value of the rules checking
@@ -499,7 +499,7 @@ few other useful features as well.
 
 ### Configuring Table Objects
 
-`method` Cake\\ORM\\TableLocator::**get**($alias, $config)
+`method` Cake\\ORM\\TableLocator::**get**(string $alias, array $options = []): Table
 
 When loading tables from the registry you can customize their dependencies, or
 use mock objects by providing an `$options` array:

@@ -147,7 +147,7 @@ rendered from the controller.
 
 ### Setting View Variables
 
-`method` Cake\\Controller\\Controller::**set**(string $var, mixed $value)
+`method` Cake\\Controller\\Controller::**set**(string $var, mixed $value): void
 
 The `Controller::set()` method is the main way to send data from your
 controller to your view. Once you've used `Controller::set()`, the variable
@@ -290,7 +290,7 @@ This would render **plugins/Users/templates/UserDetails/custom_file.php**
 
 ## Content Type Negotiation
 
-`method` Cake\\Controller\\Controller::**addViewClasses**(array $viewClasses)
+`method` Cake\\Controller\\Controller::**addViewClasses**(array $viewClasses): static
 
 Controllers can define a list of view classes they support. After the
 controller's action is complete CakePHP will use the view list to perform
@@ -462,7 +462,7 @@ a life-cycle handler.
 
 ## Loading Additional Tables/Models
 
-`method` Cake\\Controller\\Controller::**fetchTable**(string $alias, array $config = [])
+`method` Cake\\Controller\\Controller::**fetchTable**(?string $alias = null, array $options = []): Table
 
 The `fetchTable()` method comes handy when you need to use an ORM table that is not
 the controller's default one:
@@ -478,7 +478,7 @@ $recentArticles = $this->fetchTable('Articles')->find('all',
 
 ### fetchModel()
 
-`method` Cake\\Controller\\Controller::**fetchModel**(string|null $modelClass = null, string|null $modelType = null)
+`method` Cake\\Controller\\Controller::**fetchModel**(?string $modelClass = null, ?string $modelType = null): object
 
 The `fetchModel()` method is useful to load non ORM models or ORM tables that
 are not the controller's default:

@@ -823,7 +823,7 @@ public function sendIcs()
 
 ### Setting Headers
 
-`method` Cake\\Http\\Response::**withHeader**($header, $value)
+`method` Cake\\Http\\Response::**withHeader**(string $header, string $value): static
 
 Setting headers is done with the `Cake\Http\Response::withHeader()`
 method. Like all of the PSR-7 interface methods, this method returns a *new*
@@ -863,7 +863,7 @@ $response = $response->withType('application/json')
     ->withStringBody(json_encode(['Foo' => 'bar']));
 ```
 
-`method` Cake\\Http\\Response::**withBody**($body)
+`method` Cake\\Http\\Response::**withBody**(StreamInterface $body): static
 
 To set the response body, use the `withBody()` method, which is provided by the
 `Laminas\Diactoros\MessageTrait`:
@@ -1193,17 +1193,17 @@ criteria are met:
 
 The `CorsBuilder` provides the following methods for configuring CORS:
 
-`method` Cake\\Http\\CorsBuilder::**allowOrigin**(array|string $domains)
+`method` Cake\\Http\\CorsBuilder::**allowOrigin**(array|string $domains): static
 
-`method` Cake\\Http\\CorsBuilder::**allowMethods**(array $methods)
+`method` Cake\\Http\\CorsBuilder::**allowMethods**(array $methods): static
 
-`method` Cake\\Http\\CorsBuilder::**allowHeaders**(array $headers)
+`method` Cake\\Http\\CorsBuilder::**allowHeaders**(array $headers): static
 
-`method` Cake\\Http\\CorsBuilder::**allowCredentials**()
+`method` Cake\\Http\\CorsBuilder::**allowCredentials**(): static
 
-`method` Cake\\Http\\CorsBuilder::**exposeHeaders**(array $headers)
+`method` Cake\\Http\\CorsBuilder::**exposeHeaders**(array $headers): static
 
-`method` Cake\\Http\\CorsBuilder::**maxAge**(string|int $age)
+`method` Cake\\Http\\CorsBuilder::**maxAge**(string|int $age): static
 
 `method` Cake\\Http\\CorsBuilder::**build**(): ResponseInterface
 

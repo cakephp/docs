@@ -189,9 +189,9 @@ echo $this->Paginator->sort('user_id', null, ['direction' => 'asc', 'lock' => tr
 
 ### Getting Sort Direction and Key
 
-`method` Cake\\View\\Helper\\PaginatorHelper::**sortDir**(string $model = null, mixed $options = []): string
+`method` Cake\\View\\Helper\\PaginatorHelper::**sortDir**(?string $model = null, array $options = []): string
 
-`method` Cake\\View\\Helper\\PaginatorHelper::**sortKey**(string $model = null, mixed $options = [])
+`method` Cake\\View\\Helper\\PaginatorHelper::**sortKey**(?string $model = null, array $options = []): ?string
 
 ### Creating Page Number Links
 
