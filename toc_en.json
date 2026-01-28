@@ -413,7 +413,7 @@
               "link": "/appendices/cakephp-development-process"
             },
             { "text": "Glossary", "link": "/appendices/glossary" },
-            { "text": "PHPUnit 10", "link": "/appendices/phpunit10" }
+            { "text": "PHPUnit Upgrade", "link": "/appendices/phpunit-upgrade" }
           ]
         }
       ]

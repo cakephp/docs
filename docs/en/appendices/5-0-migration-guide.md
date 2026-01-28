@@ -247,7 +247,7 @@ The above will disable creation of entity objects and return rows as arrays inst
 - `TestSuite` was removed. Users should use environment variables to customize
   unit test settings instead.
 - `TestListenerTrait` was removed. PHPUnit dropped support for these listeners.
-  See [PHPUnit 10 Upgrade](../appendices/phpunit10)
+  See [PHPUnit Upgrade](../appendices/phpunit-upgrade)
 - `IntegrationTestTrait::configRequest()` now merges config when called multiple times
   instead of replacing the currently present config.
 
