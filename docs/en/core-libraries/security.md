@@ -57,7 +57,7 @@ If the value cannot be decrypted due to changes in the key or HMAC salt
 
 ### Security::hash()
 
-`static` Cake\\Utility\\Security::**hash**( $string, $type = NULL, $salt = false ): string
+`static` Cake\\Utility\\Security::**hash**($string, $algorithm = null, $salt = false): string
 
 Create a hash from string using given method. Fallback on next
 available method. If `$salt` is set to `true`, the application's salt

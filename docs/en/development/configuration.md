@@ -319,7 +319,7 @@ won't end up breaking the MVC structure CakePHP provides.
 
 ### Writing Configuration data
 
-`static` Cake\\Core\\Configure::**write**($key, $value): void
+`static` Cake\\Core\\Configure::**write**($config, $value = null): void
 
 Use `write()` to store data in the application's configuration:
 
@@ -350,7 +350,7 @@ production modes on the fly.
 
 ### Reading Configuration Data
 
-`static` Cake\\Core\\Configure::**read**($key = null, $default = null): mixed
+`static` Cake\\Core\\Configure::**read**($var = null, $default = null): mixed
 
 Used to read configuration data from the application. If a key is supplied, the
 data is returned. Using our examples from write() above, we can read that data
@@ -373,7 +373,7 @@ Configure::read('Company.nope', 'fallback');
 
 If `$key` is left null, all values in Configure will be returned.
 
-`static` Cake\\Core\\Configure::**readOrFail**($key): mixed
+`static` Cake\\Core\\Configure::**readOrFail**($var): mixed
 
 Reads configuration data just like `Cake\Core\Configure::read()`
 but expects to find a key/value pair. In case the requested pair does not
@@ -391,7 +391,7 @@ Configure::readOrFail('Company');
 
 ### Checking to see if Configuration Data is Defined
 
-`static` Cake\\Core\\Configure::**check**($key): bool
+`static` Cake\\Core\\Configure::**check**($var): bool
 
 Used to check if a key/path exists and has non-null value:
 
@@ -401,7 +401,7 @@ $exists = Configure::check('Company.name');
 
 ### Deleting Configuration Data
 
-`static` Cake\\Core\\Configure::**delete**($key): void
+`static` Cake\\Core\\Configure::**delete**($var): void
 
 Used to delete information from the application's configuration:
 
@@ -411,12 +411,12 @@ Configure::delete('Company.name');
 
 ### Reading & Deleting Configuration Data
 
-`static` Cake\\Core\\Configure::**consume**($key): mixed
+`static` Cake\\Core\\Configure::**consume**($var): mixed
 
 Read and delete a key from Configure. This is useful when you want to
 combine reading and deleting values in a single operation.
 
-`static` Cake\\Core\\Configure::**consumeOrFail**($key): mixed
+`static` Cake\\Core\\Configure::**consumeOrFail**($var): mixed
 
 Consumes configuration data just like `Cake\Core\Configure::consume()`
 but expects to find a key/value pair. In case the requested pair does not

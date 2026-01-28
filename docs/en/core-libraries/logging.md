@@ -482,12 +482,12 @@ messages.
 
 ### Log::write()
 
-`static` Cake\\Log\\Log::**write**($level, $message, $scope = []): bool
+`static` Cake\\Log\\Log::**write**($level, $message, $context = []): bool
 
 Write a message into all the configured loggers.
 `$level` indicates the level of log message being created.
 `$message` is the message of the log entry being written to.
-`$scope` is the scope(s) a log message is being created in.
+`$context` is the scope(s) a log message is being created in.
 
 ### Log::levels()
 
@@ -503,35 +503,35 @@ appropriate log level.
 
 #### Log::emergency()
 
-`static` Cake\\Log\\Log::**emergency**($message, $scope = []): bool
+`static` Cake\\Log\\Log::**emergency**($message, $context = []): bool
 
 #### Log::alert()
 
-`static` Cake\\Log\\Log::**alert**($message, $scope = []): bool
+`static` Cake\\Log\\Log::**alert**($message, $context = []): bool
 
 #### Log::critical()
 
-`static` Cake\\Log\\Log::**critical**($message, $scope = []): bool
+`static` Cake\\Log\\Log::**critical**($message, $context = []): bool
 
 #### Log::error()
 
-`static` Cake\\Log\\Log::**error**($message, $scope = []): bool
+`static` Cake\\Log\\Log::**error**($message, $context = []): bool
 
 #### Log::warning()
 
-`static` Cake\\Log\\Log::**warning**($message, $scope = []): bool
+`static` Cake\\Log\\Log::**warning**($message, $context = []): bool
 
 #### Log::notice()
 
-`static` Cake\\Log\\Log::**notice**($message, $scope = []): bool
+`static` Cake\\Log\\Log::**notice**($message, $context = []): bool
 
 #### Log::info()
 
-`static` Cake\\Log\\Log::**info**($message, $scope = []): bool
+`static` Cake\\Log\\Log::**info**($message, $context = []): bool
 
 #### Log::debug()
 
-`static` Cake\\Log\\Log::**debug**($message, $scope = []): bool
+`static` Cake\\Log\\Log::**debug**($message, $context = []): bool
 
 ## Logging Trait
 

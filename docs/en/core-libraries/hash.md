@@ -406,7 +406,7 @@ $result = Hash::contains($b, $a);
 
 ### Hash::check()
 
-`static` Cake\\Utility\\Hash::**check**(array $data, string $path = null): bool
+`static` Cake\\Utility\\Hash::**check**(array $data, string $path): bool
 
 Checks if a particular path is set in an array:
 
@@ -446,7 +446,7 @@ $result = Hash::check($set, 'My Index 1.First.Seconds.Third.Fourth');
 
 ### Hash::filter()
 
-`static` Cake\\Utility\\Hash::**filter**(array $data, $callback = ['Hash', 'filter']): array
+`static` Cake\\Utility\\Hash::**filter**(array $data, $callback = null): array
 
 Filters empty elements out of array, excluding '0'. You can also supply a
 custom `$callback` to filter the array elements. The callback should
