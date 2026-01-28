@@ -1,0 +1,69 @@
+name: Documentation Validation
+
+on:
+  pull_request:
+    paths:
+      - 'docs/**'
+      - '.github/**'
+      - 'toc_*.json'
+      - 'config.js'
+
+jobs:
+  js-lint:
+    name: Validate JavaScript Files
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+
+      - name: Validate config.js syntax
+        run: node --check config.js
+
+  json-lint:
+    name: Validate JSON Files
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+
+      - name: Validate JSON syntax
+        run: |
+          for file in toc_*.json; do
+            if ! jq empty "$file" 2>/dev/null; then
+              echo "Invalid JSON: $file"
+              exit 1
+            fi
+            echo "✅ Valid: $file"
+          done
+
+  markdown-lint:
+    name: Lint Markdown
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+
+      - name: Lint markdown files
+        uses: articulate/actions-markdownlint@v1
+        with:
+          config: .github/markdownlint.json
+          files: 'docs/**/*.md'
+          ignore: 'node_modules'
+
+  spell-check:
+    name: Spell Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+
+      - name: Check spelling
+        uses: streetsidesoftware/cspell-action@v5
+        with:
+          files: 'docs/**/*.md'
+          config: '.github/cspell.json'
+          incremental_files_only: true

@@ -44,7 +44,7 @@ The method returns paths set using `App.paths` app config:
 App::path('templates');
 ```
 
-The same way you can retrieve paths for `locales`, `plugins`.
+The same way you can retrieve paths for `locales` and `plugins`.
 
 ## Finding Paths to Namespaces
 

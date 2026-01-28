@@ -243,6 +243,10 @@ Point your web server's DocumentRoot to `/path/to/my_app/webroot/`
 
 ## Web Server Configuration
 
+::: info Configuration Examples
+The following examples are illustrative starting points. You should fine-tune these configurations to match your application's specific requirements, security policies, and performance needs.
+:::
+
 Choose your web server and follow the appropriate configuration:
 
 ### Apache
@@ -338,11 +342,13 @@ Modern PHP-FPM uses Unix sockets instead of TCP. Update `fastcgi_pass` to match 
 - TCP: `127.0.0.1:9000`
 :::
 
-### Caddy
+### Caddy / FrankenPHP
 
-Modern web server with automatic HTTPS:
+Modern web server with automatic HTTPS. FrankenPHP extends Caddy with a built-in PHP runtime:
 
-```caddyfile
+::: code-group
+
+```caddyfile [Caddy + PHP-FPM]
 myapp.local {
     root * /var/www/myapp/webroot
     php_fastcgi unix//var/run/php/php8.2-fpm.sock
@@ -352,6 +358,53 @@ myapp.local {
     try_files {path} {path}/ /index.php?{query}
 }
 ```
+
+```dockerfile [FrankenPHP Docker]
+# Dockerfile in your project root
+FROM dunglas/frankenphp
+
+# Copy your CakePHP application
+COPY . /app
+
+# Set working directory
+WORKDIR /app/webroot
+
+# Install dependencies if needed
+RUN composer install --no-dev --optimize-autoloader
+
+# Build and run:
+# docker build -t myapp .
+# docker run -p 80:80 -p 443:443 myapp
+```
+
+```bash [FrankenPHP Binary]
+# Download FrankenPHP
+curl -L https://github.com/dunglas/frankenphp/releases/latest/download/frankenphp-linux-x86_64 -o frankenphp
+chmod +x frankenphp
+
+# Run with your CakePHP app
+./frankenphp php-server --root /var/www/myapp/webroot
+```
+
+```caddyfile [FrankenPHP Caddyfile]
+# Caddyfile in your project root
+{
+    frankenphp
+}
+
+myapp.local {
+    root * /var/www/myapp/webroot
+    php_server
+    encode zstd gzip
+    file_server
+}
+```
+
+:::
+
+::: info Why FrankenPHP?
+FrankenPHP combines PHP with Caddy, providing automatic HTTPS, HTTP/3, and modern compression without needing PHP-FPM. Particularly efficient for containerized deployments.
+:::
 
 ### IIS (Windows)
 

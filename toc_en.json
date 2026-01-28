@@ -4,8 +4,8 @@
       "text": "Getting Started",
       "collapsed": false,
       "items": [
-        { "text": "Installation", "link": "/installation" },
         { "text": "Quickstart", "link": "/quickstart" },
+        { "text": "Installation", "link": "/installation" },
         { "text": "Introduction", "link": "/intro" },
         { "text": "Conventions", "link": "/intro/conventions" },
         {
@@ -407,7 +407,7 @@
             {
               "text": "5.3 Migration Guide",
               "link": "/appendices/5-3-migration-guide"
-            },        
+            },
             {
               "text": "CakePHP Development Process",
               "link": "/appendices/cakephp-development-process"

@@ -111,6 +111,8 @@ $this->Url->build('/posts', [
 ]);
 ```
 
+### Building URLs from Route Paths
+
 `method` Cake\\View\\Helper\\UrlHelper::**buildFromPath**(string $path, array $params = [], array $options = [])
 
 If you want to use route path strings, you can do that using this method:

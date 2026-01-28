@@ -71,7 +71,7 @@ sure it doesn't have any obvious leaks:
   of mass-assignment issues.
 - Ensure your models have the correct [Validation](core-libraries/validation) rules
   enabled.
-- Check that only your `webroot` directory is publicly visible, and that your
+- Check that only your `webroot/` directory is publicly visible, and that your
   secrets (such as your app salt, and any security keys) are private and unique
   as well.
 
@@ -106,8 +106,8 @@ the `plugin` command:
 
     bin/cake plugin assets symlink
 
-The above command will symlink the `webroot` directory of all loaded plugins
-to appropriate path in the app's `webroot` directory.
+The above command will symlink the `webroot/` directory of all loaded plugins
+to appropriate path in the app's `webroot/` directory.
 
 If your filesystem doesn't allow creating symlinks the directories will be
 copied instead of being symlinked. You can also explicitly copy the directories

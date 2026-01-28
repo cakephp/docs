@@ -152,7 +152,7 @@ Emails are often much more than just a simple text message. In order
 to facilitate that, CakePHP provides a way to send emails using CakePHP's
 [view layer](../views).
 
-The templates for emails reside in a special folder `templates/email` of your
+The templates for emails reside in a special folder `templates/email/` of your
 application. Mailer views can also use layouts and elements just like normal views:
 
 ``` php

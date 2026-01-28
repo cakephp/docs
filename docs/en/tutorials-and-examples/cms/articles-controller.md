@@ -6,9 +6,10 @@ methods, to prepare the response. We'll place this new controller in a file
 called **ArticlesController.php** inside the **src/Controller** directory.
 Here's what the basic controller should look like:
 
-``` php
+``` php {3}
 <?php
 // src/Controller/ArticlesController.php
+declare(strict_types=1);
 
 namespace App\Controller;
 
@@ -25,15 +26,16 @@ have routes connected to them. For example, when a user requests
 a response by rendering a Template in the View. The code for that action would
 look like this:
 
-``` php
+``` php {3,9}
 <?php
 // src/Controller/ArticlesController.php
+declare(strict_types=1);
 
 namespace App\Controller;
 
 class ArticlesController extends AppController
 {
-    public function index()
+    public function index(): void
     {
         $articles = $this->paginate($this->Articles);
         $this->set(compact('articles'));
@@ -126,10 +128,10 @@ correctly formatted with the title and table listing of the articles.
 If you were to click one of the 'view' links in our Articles list page, you'd
 see an error page saying that action hasn't been implemented. Lets fix that now:
 
-``` php
+``` php {3}
 // Add to existing src/Controller/ArticlesController.php file
 
-public function view($slug = null)
+public function view(?string $slug): void
 {
     $article = $this->Articles->findBySlug($slug)->firstOrFail();
     $this->set(compact('article'));
@@ -153,7 +155,7 @@ page telling us we're missing a view template; let's fix that.
 Let's create the view for our new 'view' action and place it in
 **templates/Articles/view.php**
 
-``` php
+``` php {3-4}
 <!-- File: templates/Articles/view.php -->
 
 <h1><?= h($article->title) ?></h1>
@@ -161,6 +163,10 @@ Let's create the view for our new 'view' action and place it in
 <p><small>Created: <?= $article->created->format(DATE_RFC850) ?></small></p>
 <p><?= $this->Html->link('Edit', ['action' => 'edit', $article->slug]) ?></p>
 ```
+
+::: tip Security: XSS Protection
+The `h()` helper function escapes output to prevent XSS (Cross-Site Scripting) attacks. Always use it when outputting user-generated content.
+:::
 
 You can verify that this is working by trying the links at `/articles/index` or
 manually requesting an article by accessing URLs like
@@ -172,28 +178,30 @@ With the basic read views created, we need to make it possible for new articles
 to be created. Start by creating an `add()` action in the
 `ArticlesController`. Our controller should now look like:
 
-``` php
+``` php {3,11,17,23}
 <?php
 // src/Controller/ArticlesController.php
+declare(strict_types=1);
+
 namespace App\Controller;
 
 use App\Controller\AppController;
 
 class ArticlesController extends AppController
 {
-    public function index()
+    public function index(): void
     {
         $articles = $this->paginate($this->Articles);
         $this->set(compact('articles'));
     }
 
-    public function view($slug)
+    public function view(?string $slug): void
     {
         $article = $this->Articles->findBySlug($slug)->firstOrFail();
         $this->set(compact('article'));
     }
 
-    public function add()
+    public function add(): void
     {
         $article = $this->Articles->newEmptyEntity();
         if ($this->request->is('post')) {
@@ -215,10 +223,11 @@ class ArticlesController extends AppController
 }
 ```
 
-> [!NOTE]
-> You need to include the [Flash](../../controllers/components/flash) component in
-> any controller where you will use it. Often it makes sense to include it in
-> your `AppController`, which is there already for this tutorial.
+::: info Flash Component
+You need to include the [Flash](../../controllers/components/flash) component in
+any controller where you will use it. Often it makes sense to include it in
+your `AppController`, which is there already for this tutorial.
+:::
 
 Here's what the `add()` action does:
 
@@ -304,15 +313,15 @@ creating a slug attribute, and the column is `NOT NULL`. Slug values are
 typically a URL-safe version of an article's title. We can use the
 [beforeSave() callback](../../orm/table-objects#table-callbacks) of the ORM to populate our slug:
 
-``` php
+``` php {3,7-9,13}
 <?php
 // in src/Model/Table/ArticlesTable.php
+declare(strict_types=1);
+
 namespace App\Model\Table;
 
 use Cake\ORM\Table;
-// the Text class
 use Cake\Utility\Text;
-// the EventInterface class
 use Cake\Event\EventInterface;
 
 // Add the following method.
@@ -335,12 +344,10 @@ fix that later on.
 Our application can now save articles, but we can't edit them. Lets rectify that
 now. Add the following action to your `ArticlesController`:
 
-``` php
+``` php {3}
 // in src/Controller/ArticlesController.php
 
-// Add the following method.
-
-public function edit($slug)
+public function edit(?string $slug): void
 {
     $article = $this->Articles
         ->findBySlug($slug)
@@ -430,11 +437,11 @@ articles:
 Up until this point our Articles had no input validation done. Lets fix that by
 using [a validator](../../orm/validation#validating-request-data):
 
-``` php
+``` php {5,8}
 // src/Model/Table/ArticlesTable.php
 
-// add this use statement right below the namespace declaration to import
-// the Validator class
+// add this use statement right below the namespace declaration
+// to import the Validator class
 use Cake\Validation\Validator;
 
 // Add the following method.
@@ -472,12 +479,10 @@ automatically.
 Next, let's make a way for users to delete articles. Start with a
 `delete()` action in the `ArticlesController`:
 
-``` php
+``` php {3}
 // src/Controller/ArticlesController.php
 
-// Add the following method.
-
-public function delete($slug)
+public function delete(?string $slug): void
 {
     $this->request->allowMethod(['post', 'delete']);
 
@@ -499,10 +504,11 @@ error page is displayed. There are many built-in
 [Exceptions](../../development/errors) that can be used to indicate the various
 HTTP errors your application might need to generate.
 
-> [!WARNING]
-> Allowing content to be deleted using GET requests is *very* dangerous, as web
-> crawlers could accidentally delete all your content. That is why we used
-> `allowMethod()` in our controller.
+::: danger Security Warning
+Allowing content to be deleted using GET requests is *very* dangerous, as web
+crawlers could accidentally delete all your content. That is why we used
+`allowMethod()` in our controller.
+:::
 
 Because we're only executing logic and redirecting to another action, this
 action has no template. You might want to update your index template with links
@@ -548,19 +554,21 @@ Using `Cake\View\Helper\FormHelper::deleteLink()` will create a link
 that uses JavaScript to do a DELETE request deleting our article.
 Prior to CakePHP 5.2 you need to use `postLink()` instead.
 
-> [!NOTE]
-> This view code also uses the `FormHelper` to prompt the user with a
-> JavaScript confirmation dialog before they attempt to delete an
-> article.
+::: info FormHelper Confirmation
+This view code also uses the `FormHelper` to prompt the user with a
+JavaScript confirmation dialog before they attempt to delete an
+article.
+:::
 
-> [!TIP]
-> The `ArticlesController` can also be built with `bake`:
->
-> ``` bash
-> /bin/cake bake controller articles
-> ```
->
-> However, this does not build the **templates/Articles/\*.php** files.
+::: tip Use Bake to Generate Controllers
+The `ArticlesController` can also be built with `bake`:
+
+``` bash
+bin/cake bake controller articles
+```
+
+However, this does not build the **templates/Articles/\*.php** files.
+:::
 
 With a basic articles management setup, we'll create the [basic actions
 for our Tags and Users tables](../../tutorials-and-examples/cms/tags-and-users).

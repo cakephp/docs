@@ -425,6 +425,8 @@ Will output:
 Also check `Cake\View\Helper\UrlHelper::build()` method
 for more examples of different types of URLs.
 
+### Creating Links from Route Paths
+
 `method` Cake\\View\\Helper\\HtmlHelper::**linkFromPath**(string $title, string $path, array $params = [], array $options = [])
 
 If you want to use route path strings, you can do that using this method:
@@ -591,6 +593,8 @@ $this->Html->scriptBlock('alert("hi")', ['defer' => true]);
 // Buffer a script block to be output later.
 $this->Html->scriptBlock('alert("hi")', ['block' => true]);
 ```
+
+### Starting and Ending Script Blocks
 
 `method` Cake\\View\\Helper\\HtmlHelper::**scriptStart**(array $options = [])
 

@@ -187,6 +187,8 @@ The lock option can be used to lock sorting into the specified direction:
 echo $this->Paginator->sort('user_id', null, ['direction' => 'asc', 'lock' => true]);
 ```
 
+### Getting Sort Direction and Key
+
 `method` Cake\\View\\Helper\\PaginatorHelper::**sortDir**(string $model = null, mixed $options = [])
 
 `method` Cake\\View\\Helper\\PaginatorHelper::**sortKey**(string $model = null, mixed $options = [])
@@ -247,11 +249,19 @@ In addition to generating links that go directly to specific page numbers,
 you'll often want links that go to the previous and next links, first and last
 pages in the paged data set.
 
+### prev()
+
 `method` Cake\\View\\Helper\\PaginatorHelper::**prev**($title = '<< Previous', $options = [])
+
+### next()
 
 `method` Cake\\View\\Helper\\PaginatorHelper::**next**($title = 'Next >>', $options = [])
 
+### first()
+
 `method` Cake\\View\\Helper\\PaginatorHelper::**first**($first = '<< first', $options = [])
+
+### last()
 
 `method` Cake\\View\\Helper\\PaginatorHelper::**last**($last = 'last >>', $options = [])
 
@@ -270,13 +280,23 @@ echo $this->Paginator->meta(['first' => true, 'last' => true]);
 
 ### Checking the Pagination State
 
+#### current()
+
 `method` Cake\\View\\Helper\\PaginatorHelper::**current**()
+
+#### hasNext()
 
 `method` Cake\\View\\Helper\\PaginatorHelper::**hasNext**(string $model = null)
 
+#### hasPrev()
+
 `method` Cake\\View\\Helper\\PaginatorHelper::**hasPrev**()
 
+#### hasPage()
+
 `method` Cake\\View\\Helper\\PaginatorHelper::**hasPage**(int $page = 1)
+
+#### total()
 
 `method` Cake\\View\\Helper\\PaginatorHelper::**total**()
 
