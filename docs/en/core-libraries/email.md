@@ -257,7 +257,7 @@ following path:
 
 ### Mailer::setAttachments()
 
-`method` Cake\\Mailer\\Mailer::**setAttachments**($attachments)
+`method` Cake\\Mailer\\Mailer::**setAttachments**(array $attachments): static
 
 You can attach files to email messages as well. There are a few
 different formats depending on what kind of files you have, and how
@@ -310,7 +310,7 @@ You can also add attachments using the `addAttachment()` method.
 
 ### Mailer::setEmailPattern()
 
-`method` Cake\\Mailer\\Mailer::**setEmailPattern**($pattern)
+`method` Cake\\Mailer\\Mailer::**setEmailPattern**(?string $regex): static
 
 If you are having validation issues when sending to non-compliant addresses, you
 can relax the pattern used to validate email addresses. This is sometimes

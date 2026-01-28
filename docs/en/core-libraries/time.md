@@ -149,7 +149,7 @@ echo $time->timezoneName; // America/New_York
 
 ### DateTime::setJsonEncodeFormat()
 
-`static` Cake\\I18n\\DateTime::**setJsonEncodeFormat**($format): void
+`static` Cake\\I18n\\DateTime::**setJsonEncodeFormat**(Closure|array|string|int $format): void
 
 This method sets the default format used when converting an object to json:
 
@@ -179,7 +179,7 @@ The `callable` parameter type was added.
 
 ### DateTime::i18nFormat()
 
-`method` Cake\\I18n\\DateTime::**i18nFormat**($format = null, $timezone = null, $locale = null): string|int
+`method` Cake\\I18n\\DateTime::**i18nFormat**(array|string|int|null $format = null, DateTimeZone|string|null $timezone = null, ?string $locale = null): string|int
 
 A very common thing to do with `Time` instances is to print out formatted
 dates. CakePHP makes this a snap:
@@ -415,19 +415,19 @@ $range = $time->toQuarterRange();
 
 ### DateTime::isYesterday()
 
-`method` Cake\\I18n\\DateTime::**isYesterday**()
+`method` Cake\\I18n\\DateTime::**isYesterday**(): bool
 
 ### DateTime::isThisWeek()
 
-`method` Cake\\I18n\\DateTime::**isThisWeek**()
+`method` Cake\\I18n\\DateTime::**isThisWeek**(): bool
 
 ### DateTime::isThisMonth()
 
-`method` Cake\\I18n\\DateTime::**isThisMonth**()
+`method` Cake\\I18n\\DateTime::**isThisMonth**(): bool
 
 ### DateTime::isThisYear()
 
-`method` Cake\\I18n\\DateTime::**isThisYear**()
+`method` Cake\\I18n\\DateTime::**isThisYear**(): bool
 
 You can compare a `DateTime` instance with the present in a variety of ways:
 
@@ -447,7 +447,7 @@ not the `DateTime` instance matches the present.
 
 ### DateTime::isWithinNext()
 
-`method` Cake\\I18n\\DateTime::**isWithinNext**($interval)
+`method` Cake\\I18n\\DateTime::**isWithinNext**(string|int $timeInterval): bool
 
 You can see if a `DateTime` instance falls within a given range using
 `wasWithinLast()` and `isWithinNext()`:
@@ -464,7 +464,7 @@ debug($time->isWithinNext('2 weeks'));
 
 ### DateTime::wasWithinLast()
 
-`method` Cake\\I18n\\DateTime::**wasWithinLast**($interval)
+`method` Cake\\I18n\\DateTime::**wasWithinLast**(string|int $timeInterval): bool
 
 You can also compare a `DateTime` instance within a range in the past:
 

@@ -8,7 +8,7 @@ The App class is responsible for resource location and path management.
 
 ### App::className()
 
-`static` Cake\\Core\\App::**className**($name, $type = '', $suffix = ''): string|null
+`static` Cake\\Core\\App::**className**(string $class, string $type = '', string $suffix = ''): ?string
 
 This method is used to resolve class names throughout CakePHP. It resolves
 the short form names CakePHP uses and returns the fully resolved class name:

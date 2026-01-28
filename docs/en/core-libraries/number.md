@@ -91,7 +91,7 @@ Number::setDefaultCurrencyFormat(Number::FORMAT_CURRENCY_ACCOUNTING);
 
 ### Number::setDefaultCurrency()
 
-`method` Cake\\I18n\\Number::**setDefaultCurrency**($currency): void
+`static` Cake\\I18n\\Number::**setDefaultCurrency**(?string $currency = null): void
 
 Setter for the default currency. This removes the need to always pass the
 currency to `Cake\I18n\Number::currency()` and change all

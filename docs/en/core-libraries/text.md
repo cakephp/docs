@@ -40,7 +40,7 @@ class UsersController extends AppController
 
 ### Text::transliterate()
 
-`static` Cake\\Utility\\Text::**transliterate**($string, $transliteratorId = null): string
+`static` Cake\\Utility\\Text::**transliterate**(string $string, Transliterator|string|null $transliterator = null): string
 
 Transliterate by default converts all characters in provided string into
 equivalent ASCII characters. The method expects UTF-8 encoding. The character
@@ -428,7 +428,7 @@ Output:
 
 ### Text::toList()
 
-`method` Cake\\Utility\\Text::**toList**(array $list, ?string $and = null, $separator = ', '): string
+`method` Cake\\Utility\\Text::**toList**(array $list, ?string $and = null, string $separator = ', '): string
 
 Creates a comma-separated list where the last two items are joined with 'and':
 
