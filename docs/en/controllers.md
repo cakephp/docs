@@ -612,7 +612,7 @@ As of 4.1.0 you can also raise a `RedirectException` to signal a redirect.
 
 ## Controller Middleware
 
-`method` Cake\\Controller\\Controller::**middleware**($middleware, array $options = [])
+`method` Cake\\Controller\\Controller::**middleware**($middleware, array $options = []): void
 
 [Middleware](controllers/middleware) can be defined globally, in
 a routing scope or within a controller. To define middleware for a specific

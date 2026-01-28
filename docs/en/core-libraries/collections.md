@@ -404,7 +404,7 @@ $ladies = $collection->reject(function ($person, $key) {
 
 ### every()
 
-`method` Cake\\Collection\\Collection::**every**($callback)
+`method` Cake\\Collection\\Collection::**every**($callback): bool
 
 You can do truth tests with filter functions. To see if every element in
 a collection matches a test you can use `every()`:
@@ -418,11 +418,11 @@ $allYoungPeople = $collection->every(function ($person) {
 
 ### any()
 
-`method` Cake\\Collection\\Collection::**any**($callback)
+`method` Cake\\Collection\\Collection::**any**($callback): bool
 
 ### some()
 
-`method` Cake\\Collection\\Collection::**some**($callback)
+`method` Cake\\Collection\\Collection::**some**($callback): bool
 
 You can see if the collection contains at least one element matching a filter
 function using the `any()` method:
@@ -451,7 +451,7 @@ $commentsFromMark = $collection->match(['user.name' => 'Mark']);
 
 ### firstMatch()
 
-`method` Cake\\Collection\\Collection::**firstMatch**($conditions)
+`method` Cake\\Collection\\Collection::**firstMatch**($conditions): mixed
 
 The property name can be a dot-separated path. You can traverse into nested
 entities and match the values they contain. When you only need the first
@@ -474,7 +474,7 @@ against.
 
 ### reduce()
 
-`method` Cake\\Collection\\Collection::**reduce**($callback, $initial)
+`method` Cake\\Collection\\Collection::**reduce**($callback, $initial): mixed
 
 The counterpart of a `map()` operation is usually a `reduce`. This
 function will help you build a single result out of all the elements in a
@@ -499,7 +499,7 @@ $allTags = $collection->reduce(function ($accumulated, $article) {
 
 ### min()
 
-`method` Cake\\Collection\\Collection::**min**(string|callable $callback, $type = SORT_NUMERIC)
+`method` Cake\\Collection\\Collection::**min**(string|callable $callback, $type = SORT_NUMERIC): mixed
 
 To extract the minimum value for a collection based on a property, just use the
 `min()` function. This will return the full element from the collection and
@@ -526,7 +526,7 @@ $personWithYoungestDad = $collection->min('dad.age');
 
 ### max()
 
-`method` Cake\\Collection\\Collection::**max**(string|callable $callback, $type = SORT_NUMERIC)
+`method` Cake\\Collection\\Collection::**max**(string|callable $callback, $type = SORT_NUMERIC): mixed
 
 The same can be applied to the `max()` function, which will return a single
 element from the collection having the highest property value:
@@ -544,7 +544,7 @@ $personWithOldestDad = $collection->max('dad.age');
 
 ### sumOf()
 
-`method` Cake\\Collection\\Collection::**sumOf**($path = null)
+`method` Cake\\Collection\\Collection::**sumOf**($path = null): float|int
 
 Finally, the `sumOf()` method will return the sum of a property of all
 elements:
@@ -562,7 +562,7 @@ $sumOfDadAges = $collection->sumOf('dad.age');
 
 ### avg()
 
-`method` Cake\\Collection\\Collection::**avg**($path = null)
+`method` Cake\\Collection\\Collection::**avg**($path = null): float|int|null
 
 Calculate the average value of the elements in the collection. Optionally
 provide a matcher path, or function to extract values to generate the average
@@ -580,7 +580,7 @@ $average = (new Collection($items))->avg('invoice.total');
 
 ### median()
 
-`method` Cake\\Collection\\Collection::**median**($path = null)
+`method` Cake\\Collection\\Collection::**median**($path = null): float|int|null
 
 Calculate the median value of a set of elements. Optionally provide a matcher
 path, or function to extract values to generate the median for:
@@ -945,7 +945,7 @@ $nested->listNested()->printer(
 
 ### isEmpty()
 
-`method` Cake\\Collection\\Collection::**isEmpty**()
+`method` Cake\\Collection\\Collection::**isEmpty**(): bool
 
 Allows you to see if a collection contains any elements:
 
@@ -961,7 +961,7 @@ $collection->isEmpty();
 
 ### contains()
 
-`method` Cake\\Collection\\Collection::**contains**($value)
+`method` Cake\\Collection\\Collection::**contains**($value): bool
 
 Collections allow you to quickly check if they contain one particular
 value: by using the `contains()` method:
@@ -1071,7 +1071,7 @@ $allExceptFirstTwo = $collection->skip(2)->toList(); // [3, 4]
 
 ### first()
 
-`method` Cake\\Collection\\Collection::**first**()
+`method` Cake\\Collection\\Collection::**first**(): mixed
 
 One of the most common uses of `take()` is getting the first element in the
 collection. A shortcut method for achieving the same goal is using the
@@ -1084,7 +1084,7 @@ $collection->first(); // Returns 5
 
 ### last()
 
-`method` Cake\\Collection\\Collection::**last**()
+`method` Cake\\Collection\\Collection::**last**(): mixed
 
 Similarly, you can get the last element of a collection using the `last()`
 method:

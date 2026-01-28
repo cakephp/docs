@@ -8,7 +8,7 @@ The App class is responsible for resource location and path management.
 
 ### App::className()
 
-`static` Cake\\Core\\App::**className**($name, $type = '', $suffix = '')
+`static` Cake\\Core\\App::**className**($name, $type = '', $suffix = ''): string|null
 
 This method is used to resolve class names throughout CakePHP. It resolves
 the short form names CakePHP uses and returns the fully resolved class name:
@@ -35,7 +35,7 @@ class names do not exist, `false` will be returned.
 
 ### App::path()
 
-`static` Cake\\Core\\App::**path**(string $package, ?string $plugin = null)
+`static` Cake\\Core\\App::**path**(string $package, ?string $plugin = null): array
 
 The method returns paths set using `App.paths` app config:
 
@@ -50,7 +50,7 @@ The same way you can retrieve paths for `locales` and `plugins`.
 
 ### App::classPath()
 
-`static` Cake\\Core\\App::**classPath**(string $package, ?string $plugin = null)
+`static` Cake\\Core\\App::**classPath**(string $package, ?string $plugin = null): array
 
 Used to get locations for paths based on conventions:
 
@@ -67,7 +67,7 @@ for.
 
 ### App::core()
 
-`static` Cake\\Core\\App::**core**(string $package)
+`static` Cake\\Core\\App::**core**(string $package): array
 
 Used for finding the path to a package inside CakePHP:
 

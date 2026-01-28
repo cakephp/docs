@@ -539,7 +539,7 @@ FactoryLocator::get('Table')->setConfig('Users', ['table' => 'my_users']);
 
 ### Flushing the Registry
 
-`method` Cake\\ORM\\TableLocator::**clear**()
+`method` Cake\\ORM\\TableLocator::**clear**(): void
 
 During test cases you may want to flush the registry. Doing so is often useful
 when you are using mock objects, or modifying a table's dependencies:

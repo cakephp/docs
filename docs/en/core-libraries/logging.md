@@ -450,7 +450,7 @@ configured.
 
 ### Log::setConfig()
 
-`static` Cake\\Log\\Log::**setConfig**($key, $config)
+`static` Cake\\Log\\Log::**setConfig**($key, $config): void
 
 param string \$name
 Name for the logger being connected, used
@@ -465,7 +465,7 @@ more information.
 
 ### Log::configured()
 
-`static` Cake\\Log\\Log::**configured**()
+`static` Cake\\Log\\Log::**configured**(): array
 
 returns
 An array of configured loggers.
@@ -474,7 +474,7 @@ Get the names of the configured loggers.
 
 ### Log::drop()
 
-`static` Cake\\Log\\Log::**drop**($name)
+`static` Cake\\Log\\Log::**drop**($name): bool
 
 param string \$name
 Name of the logger you wish to no longer receive
@@ -482,7 +482,7 @@ messages.
 
 ### Log::write()
 
-`static` Cake\\Log\\Log::**write**($level, $message, $scope = [])
+`static` Cake\\Log\\Log::**write**($level, $message, $scope = []): bool
 
 Write a message into all the configured loggers.
 `$level` indicates the level of log message being created.
@@ -491,7 +491,7 @@ Write a message into all the configured loggers.
 
 ### Log::levels()
 
-`static` Cake\\Log\\Log::**levels**()
+`static` Cake\\Log\\Log::**levels**(): array
 
 Call this method without arguments, eg: <span class="title-ref">Log::levels()</span> to obtain current
 level configuration.
@@ -503,35 +503,35 @@ appropriate log level.
 
 #### Log::emergency()
 
-`static` Cake\\Log\\Log::**emergency**($message, $scope = [])
+`static` Cake\\Log\\Log::**emergency**($message, $scope = []): bool
 
 #### Log::alert()
 
-`static` Cake\\Log\\Log::**alert**($message, $scope = [])
+`static` Cake\\Log\\Log::**alert**($message, $scope = []): bool
 
 #### Log::critical()
 
-`static` Cake\\Log\\Log::**critical**($message, $scope = [])
+`static` Cake\\Log\\Log::**critical**($message, $scope = []): bool
 
 #### Log::error()
 
-`static` Cake\\Log\\Log::**error**($message, $scope = [])
+`static` Cake\\Log\\Log::**error**($message, $scope = []): bool
 
 #### Log::warning()
 
-`static` Cake\\Log\\Log::**warning**($message, $scope = [])
+`static` Cake\\Log\\Log::**warning**($message, $scope = []): bool
 
 #### Log::notice()
 
-`static` Cake\\Log\\Log::**notice**($message, $scope = [])
+`static` Cake\\Log\\Log::**notice**($message, $scope = []): bool
 
 #### Log::info()
 
-`static` Cake\\Log\\Log::**info**($message, $scope = [])
+`static` Cake\\Log\\Log::**info**($message, $scope = []): bool
 
 #### Log::debug()
 
-`static` Cake\\Log\\Log::**debug**($message, $scope = [])
+`static` Cake\\Log\\Log::**debug**($message, $scope = []): bool
 
 ## Logging Trait
 

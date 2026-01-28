@@ -646,7 +646,7 @@ Geospatial schema types were added.
 
 `class` Cake\\Database\\**TypeFactory**
 
-`static` Cake\\Database\\TypeFactory::**map**($name, $class)
+`static` Cake\\Database\\TypeFactory::**map**($name, $class): void
 
 If you need to use vendor specific types that are not built into CakePHP you can
 add additional new types to CakePHP's type system. Type classes are expected to
@@ -1062,7 +1062,7 @@ $connection->execute('UPDATE articles SET published = ? WHERE id = ?', [false, 4
 $connection->commit();
 ```
 
-`method` Cake\\Database\\Connection::**transactional**(callable $callback)
+`method` Cake\\Database\\Connection::**transactional**(callable $callback): mixed
 
 In addition to this interface connection instances also provide the
 `transactional()` method which makes handling the begin/commit/rollback calls

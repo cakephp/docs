@@ -149,7 +149,7 @@ echo $time->timezoneName; // America/New_York
 
 ### DateTime::setJsonEncodeFormat()
 
-`static` Cake\\I18n\\DateTime::**setJsonEncodeFormat**($format)
+`static` Cake\\I18n\\DateTime::**setJsonEncodeFormat**($format): void
 
 This method sets the default format used when converting an object to json:
 
@@ -179,7 +179,7 @@ The `callable` parameter type was added.
 
 ### DateTime::i18nFormat()
 
-`method` Cake\\I18n\\DateTime::**i18nFormat**($format = null, $timezone = null, $locale = null)
+`method` Cake\\I18n\\DateTime::**i18nFormat**($format = null, $timezone = null, $locale = null): string|int
 
 A very common thing to do with `Time` instances is to print out formatted
 dates. CakePHP makes this a snap:
@@ -247,7 +247,7 @@ The following calendar types are supported:
 
 ### DateTime::nice()
 
-`method` Cake\\I18n\\DateTime::**nice**()
+`method` Cake\\I18n\\DateTime::**nice**(): string
 
 Print out a predefined 'nice' format:
 
@@ -341,7 +341,7 @@ format string.
 
 ### DateTime::timeAgoInWords()
 
-`method` Cake\\I18n\\DateTime::**timeAgoInWords**(array $options = [])
+`method` Cake\\I18n\\DateTime::**timeAgoInWords**(array $options = []): string
 
 Often it is useful to print times relative to the present:
 
@@ -380,11 +380,11 @@ echo $time->timeAgoInWords([
 
 ### DateTime::toQuarter()
 
-`method` Cake\\I18n\\DateTime::**toQuarter**()
+`method` Cake\\I18n\\DateTime::**toQuarter**(): int|array
 
 ### DateTime::toQuarterRange()
 
-`method` Cake\\I18n\\DateTime::**toQuarterRange**()
+`method` Cake\\I18n\\DateTime::**toQuarterRange**(): array
 
 Once created, you can convert `DateTime` instances into timestamps or quarter
 values:

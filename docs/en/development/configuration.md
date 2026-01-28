@@ -319,7 +319,7 @@ won't end up breaking the MVC structure CakePHP provides.
 
 ### Writing Configuration data
 
-`static` Cake\\Core\\Configure::**write**($key, $value)
+`static` Cake\\Core\\Configure::**write**($key, $value): void
 
 Use `write()` to store data in the application's configuration:
 
@@ -350,7 +350,7 @@ production modes on the fly.
 
 ### Reading Configuration Data
 
-`static` Cake\\Core\\Configure::**read**($key = null, $default = null)
+`static` Cake\\Core\\Configure::**read**($key = null, $default = null): mixed
 
 Used to read configuration data from the application. If a key is supplied, the
 data is returned. Using our examples from write() above, we can read that data
@@ -373,7 +373,7 @@ Configure::read('Company.nope', 'fallback');
 
 If `$key` is left null, all values in Configure will be returned.
 
-`static` Cake\\Core\\Configure::**readOrFail**($key)
+`static` Cake\\Core\\Configure::**readOrFail**($key): mixed
 
 Reads configuration data just like `Cake\Core\Configure::read()`
 but expects to find a key/value pair. In case the requested pair does not
@@ -391,7 +391,7 @@ Configure::readOrFail('Company');
 
 ### Checking to see if Configuration Data is Defined
 
-`static` Cake\\Core\\Configure::**check**($key)
+`static` Cake\\Core\\Configure::**check**($key): bool
 
 Used to check if a key/path exists and has non-null value:
 
@@ -401,7 +401,7 @@ $exists = Configure::check('Company.name');
 
 ### Deleting Configuration Data
 
-`static` Cake\\Core\\Configure::**delete**($key)
+`static` Cake\\Core\\Configure::**delete**($key): void
 
 Used to delete information from the application's configuration:
 
@@ -411,12 +411,12 @@ Configure::delete('Company.name');
 
 ### Reading & Deleting Configuration Data
 
-`static` Cake\\Core\\Configure::**consume**($key)
+`static` Cake\\Core\\Configure::**consume**($key): mixed
 
 Read and delete a key from Configure. This is useful when you want to
 combine reading and deleting values in a single operation.
 
-`static` Cake\\Core\\Configure::**consumeOrFail**($key)
+`static` Cake\\Core\\Configure::**consumeOrFail**($key): mixed
 
 Consumes configuration data just like `Cake\Core\Configure::consume()`
 but expects to find a key/value pair. In case the requested pair does not
@@ -467,7 +467,7 @@ Configure::configured();
 Configure::configured('default');
 ```
 
-`static` Cake\\Core\\Configure::**drop**($name)
+`static` Cake\\Core\\Configure::**drop**($name): bool
 
 You can also remove attached engines. `Configure::drop('default')`
 would remove the default engine alias. Any future attempts to load configuration
@@ -481,7 +481,7 @@ Configure::drop('default');
 
 ### Loading Configuration Files
 
-`static` Cake\\Core\\Configure::**load**($key, $config = 'default', $merge = true)
+`static` Cake\\Core\\Configure::**load**($key, $config = 'default', $merge = true): bool
 
 Once you've attached a config engine to Configure you can load configuration
 files:
@@ -522,7 +522,7 @@ will not ever overwrite the existing configuration.
 
 ### Creating or Modifying Configuration Files
 
-`static` Cake\\Core\\Configure::**dump**($key, $config = 'default', $keys = [])
+`static` Cake\\Core\\Configure::**dump**($key, $config = 'default', $keys = []): bool
 
 Dumps all or some of the data in Configure into a file or storage system
 supported by a config engine. The serialization format is decided by the config
@@ -549,7 +549,7 @@ configuration files that are readable with `Configure::load()`
 
 ### Storing Runtime Configuration
 
-`static` Cake\\Core\\Configure::**store**($name, $cacheConfig = 'default', $data = null)
+`static` Cake\\Core\\Configure::**store**($name, $cacheConfig = 'default', $data = null): bool
 
 You can also store runtime configuration values for use in a future request.
 Since configure only remembers values for the current request, you will
@@ -566,7 +566,7 @@ Stored configuration data is persisted in the named cache configuration. See the
 
 ### Restoring Runtime Configuration
 
-`static` Cake\\Core\\Configure::**restore**($name, $cacheConfig = 'default')
+`static` Cake\\Core\\Configure::**restore**($name, $cacheConfig = 'default'): bool
 
 Once you've stored runtime configuration, you'll probably need to restore it
 so you can access it again. `Configure::restore()` does exactly that:

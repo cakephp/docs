@@ -79,7 +79,7 @@ can be enabled with the `loadEntities` and `parseHuge` options respectively.
 
 ### Xml::toArray()
 
-`static` Cake\\Utility\\Xml::**toArray**($obj)
+`static` Cake\\Utility\\Xml::**toArray**($obj): array
 
 Converting XML strings into arrays is simple with the Xml class as well. By
 default you'll get a SimpleXml object back:

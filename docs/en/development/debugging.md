@@ -69,7 +69,7 @@ The `Debugger.editorBasePath` configure option was added.
 
 ## Outputting Values
 
-`static` Cake\\Error\\Debugger::**dump**($var, $depth = 3)
+`static` Cake\\Error\\Debugger::**dump**($var, $depth = 3): void
 
 Dump prints out the contents of a variable. It will print out all
 properties and methods (if any) of the supplied variable:
@@ -118,7 +118,7 @@ output masks.
 
 ## Logging With Stack Traces
 
-`static` Cake\\Error\\Debugger::**log**($var, $level = 7, $depth = 3)
+`static` Cake\\Error\\Debugger::**log**($var, $level = 7, $depth = 3): void
 
 Creates a detailed stack trace log at the time of invocation. The
 `log()` method prints out data similar to that done by
@@ -128,7 +128,7 @@ writable by the web server for `log()` to work correctly.
 
 ## Generating Stack Traces
 
-`static` Cake\\Error\\Debugger::**trace**($options)
+`static` Cake\\Error\\Debugger::**trace**($options): array|string
 
 Returns the current stack trace. Each line of the trace includes
 the calling method, including which file and line the call
@@ -151,7 +151,7 @@ the order of currently running functions (stack frames).
 
 ## Getting an Excerpt From a File
 
-`static` Cake\\Error\\Debugger::**excerpt**($file, $line, $context)
+`static` Cake\\Error\\Debugger::**excerpt**($file, $line, $context): array
 
 Grab an excerpt from the file at \$path (which is an absolute
 filepath), highlights line number \$line with \$context number of

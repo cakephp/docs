@@ -9,7 +9,7 @@ overriding the core helper with an application one. See the
 
 ## Generating URLs
 
-`method` Cake\\View\\Helper\\UrlHelper::**build**($url = null, array $options = [])
+`method` Cake\\View\\Helper\\UrlHelper::**build**($url = null, array $options = []): string
 
 Returns a URL pointing to a combination of controller and action.
 If `$url` is empty, it returns the `REQUEST_URI`, otherwise it
@@ -113,7 +113,7 @@ $this->Url->build('/posts', [
 
 ### Building URLs from Route Paths
 
-`method` Cake\\View\\Helper\\UrlHelper::**buildFromPath**(string $path, array $params = [], array $options = [])
+`method` Cake\\View\\Helper\\UrlHelper::**buildFromPath**(string $path, array $params = [], array $options = []): string
 
 If you want to use route path strings, you can do that using this method:
 

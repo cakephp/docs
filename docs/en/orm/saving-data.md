@@ -1371,7 +1371,7 @@ The result will be updated entities on success or `false` on failure.
 
 ## Bulk Updates
 
-`method` Cake\\ORM\\Table::**updateAll**($fields, $conditions)
+`method` Cake\\ORM\\Table::**updateAll**($fields, $conditions): int
 
 There may be times when updating rows individually is not efficient or
 necessary. In these cases it is more efficient to use a bulk-update to modify
