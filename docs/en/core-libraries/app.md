@@ -6,7 +6,9 @@ The App class is responsible for resource location and path management.
 
 ## Finding Classes
 
-`static` Cake\\Core\\App::**className**($name, $type = '', $suffix = '')
+### App::className()
+
+`static` Cake\\Core\\App::**className**($name, $type = '', $suffix = ''): string|null
 
 This method is used to resolve class names throughout CakePHP. It resolves
 the short form names CakePHP uses and returns the fully resolved class name:
@@ -31,7 +33,9 @@ class names do not exist, `false` will be returned.
 
 ## Finding Paths to Resources
 
-`static` Cake\\Core\\App::**path**(string $package, ?string $plugin = null)
+### App::path()
+
+`static` Cake\\Core\\App::**path**(string $package, ?string $plugin = null): array
 
 The method returns paths set using `App.paths` app config:
 
@@ -40,11 +44,13 @@ The method returns paths set using `App.paths` app config:
 App::path('templates');
 ```
 
-The same way you can retrieve paths for `locales`, `plugins`.
+The same way you can retrieve paths for `locales` and `plugins`.
 
 ## Finding Paths to Namespaces
 
-`static` Cake\\Core\\App::**classPath**(string $package, ?string $plugin = null)
+### App::classPath()
+
+`static` Cake\\Core\\App::**classPath**(string $package, ?string $plugin = null): array
 
 Used to get locations for paths based on conventions:
 
@@ -59,7 +65,9 @@ This can be done for all namespaces that are part of your application.
 provide any information about additional paths the autoloader is configured
 for.
 
-`static` Cake\\Core\\App::**core**(string $package)
+### App::core()
+
+`static` Cake\\Core\\App::**core**(string $package): array
 
 Used for finding the path to a package inside CakePHP:
 

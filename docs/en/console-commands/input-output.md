@@ -181,7 +181,7 @@ The `BannerHelper` was added in 5.1
 
 ## Getting User Input
 
-`method` Cake\\Console\\ConsoleIo::**ask**($question, $choices = null, $default = null)
+`method` Cake\\Console\\ConsoleIo::**ask**($question, $choices = null, $default = null): string
 
 When building interactive console applications you'll need to get user input.
 CakePHP provides a way to do this:
@@ -198,7 +198,7 @@ Selection validation is case-insensitive.
 
 ## Creating Files
 
-`method` Cake\\Console\\ConsoleIo::**createFile**($path, $contents)
+`method` Cake\\Console\\ConsoleIo::**createFile**($path, $contents): bool
 
 Creating files is often important part of many console commands that help
 automate development and deployment. The `createFile()` method gives you
@@ -214,12 +214,20 @@ $io->createFile('bower.json', $stuff, true);
 
 ## Creating Output
 
-Writing to `stdout` and `stderr` is another common operation in CakePHP:
+### ConsoleIo::out()
+
+Writing to `stdout` is done using the `out()` method:
 
 ``` php
 // Write to stdout
 $io->out('Normal message');
+```
 
+### ConsoleIo::err()
+
+Writing to `stderr` is done using the `err()` method:
+
+``` php
 // Write to stderr
 $io->err('Error message');
 ```

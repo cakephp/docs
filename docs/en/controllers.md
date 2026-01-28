@@ -204,7 +204,7 @@ view class.
 
 ### Rendering a View
 
-`method` Cake\\Controller\\Controller::**render**(string $view, string $layout)
+`method` Cake\\Controller\\Controller::**render**(string $view, string $layout): Response
 
 The `Controller::render()` method is automatically called at the end of each requested
 controller action. This method performs all the view logic (using the data
@@ -290,7 +290,7 @@ This would render **plugins/Users/templates/UserDetails/custom_file.php**
 
 ## Content Type Negotiation
 
-`method` Cake\\Controller\\Controller::**addViewClasses**()
+`method` Cake\\Controller\\Controller::**addViewClasses**(array $viewClasses)
 
 Controllers can define a list of view classes they support. After the
 controller's action is complete CakePHP will use the view list to perform
@@ -411,7 +411,7 @@ replaces usage of `RequestHandlerComponent` automatically using the
 
 ## Redirecting to Other Pages
 
-`method` Cake\\Controller\\Controller::**redirect**(string|array $url, integer $status)
+`method` Cake\\Controller\\Controller::**redirect**(string|array $url, integer $status): Response|null
 
 The `redirect()` method adds a `Location` header and sets the status code of
 a response and returns it. You should return the response created by
@@ -476,6 +476,8 @@ $recentArticles = $this->fetchTable('Articles')->find('all',
     ->all();
 ```
 
+### fetchModel()
+
 `method` Cake\\Controller\\Controller::**fetchModel**(string|null $modelClass = null, string|null $modelType = null)
 
 The `fetchModel()` method is useful to load non ORM models or ORM tables that
@@ -500,7 +502,7 @@ $authors = $this->fetchModel('Authors');
 
 ## Paginating a Model
 
-`method` Cake\\Controller\\Controller::**paginate**()
+`method` Cake\\Controller\\Controller::**paginate**(): PaginatedInterface
 
 This method is used for paginating results fetched by your models.
 You can specify page sizes, model find conditions and more. See the
@@ -523,7 +525,7 @@ class ArticlesController extends AppController
 
 ## Configuring Components to Load
 
-`method` Cake\\Controller\\Controller::**loadComponent**($name, $config = [])
+`method` Cake\\Controller\\Controller::**loadComponent**(string $name, array $config = []): Component
 
 In your Controller's `initialize()` method you can define any components you
 want loaded, and any configuration data for them:
@@ -557,11 +559,17 @@ logic around the request life-cycle:
 By default the following callback methods are connected to related events if the
 methods are implemented by your controllers
 
-`method` Cake\\Controller\\Controller::**beforeFilter**(EventInterface $event)
+#### beforeFilter()
 
-`method` Cake\\Controller\\Controller::**beforeRender**(EventInterface $event)
+`method` Cake\\Controller\\Controller::**beforeFilter**(EventInterface $event): void
 
-`method` Cake\\Controller\\Controller::**afterFilter**(EventInterface $event)
+#### beforeRender()
+
+`method` Cake\\Controller\\Controller::**beforeRender**(EventInterface $event): void
+
+#### afterFilter()
+
+`method` Cake\\Controller\\Controller::**afterFilter**(EventInterface $event): void
 
 In addition to controller life-cycle callbacks, [Components](controllers/components)
 also provide a similar set of callbacks.
@@ -604,7 +612,7 @@ As of 4.1.0 you can also raise a `RedirectException` to signal a redirect.
 
 ## Controller Middleware
 
-`method` Cake\\Controller\\Controller::**middleware**($middleware, array $options = [])
+`method` Cake\\Controller\\Controller::**middleware**(MiddlewareInterface|Closure|string $middleware, array $options = []): void
 
 [Middleware](controllers/middleware) can be defined globally, in
 a routing scope or within a controller. To define middleware for a specific

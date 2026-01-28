@@ -37,7 +37,9 @@ automatically echo the output into the view.
 
 ## Formatting Currency Values
 
-`method` Cake\\I18n\\Number::**currency**(mixed $value, string $currency = null, array $options = [])
+### Number::currency()
+
+`method` Cake\\I18n\\Number::**currency**(mixed $value, string $currency = null, array $options = []): string
 
 This method is used to display a number in common currency formats
 (EUR, GBP, USD), based on the 3-letter ISO 4217 currency code. Usage in a view looks like:
@@ -87,7 +89,9 @@ Number::setDefaultCurrencyFormat(Number::FORMAT_CURRENCY_ACCOUNTING);
 
 ## Setting the Default Currency
 
-`method` Cake\\I18n\\Number::**setDefaultCurrency**($currency)
+### Number::setDefaultCurrency()
+
+`method` Cake\\I18n\\Number::**setDefaultCurrency**($currency): void
 
 Setter for the default currency. This removes the need to always pass the
 currency to `Cake\I18n\Number::currency()` and change all
@@ -96,7 +100,9 @@ it will clear the currently stored value.
 
 ## Getting the Default Currency
 
-`method` Cake\\I18n\\Number::**getDefaultCurrency**()
+### Number::getDefaultCurrency()
+
+`method` Cake\\I18n\\Number::**getDefaultCurrency**(): string
 
 Getter for the default currency. If default currency was set earlier using
 `setDefaultCurrency()`, then that value will be returned. By default, it will
@@ -104,7 +110,9 @@ retrieve the `intl.default_locale` ini value if set and `'en_US'` if not.
 
 ## Formatting Floating Point Numbers
 
-`method` Cake\\I18n\\Number::**precision**(float $value, int $precision = 3, array $options = [])
+### Number::precision()
+
+`method` Cake\\I18n\\Number::**precision**(float $value, int $precision = 3, array $options = []): string
 
 This method displays a number with the specified amount of
 precision (decimal places). It will round in order to maintain the
@@ -123,7 +131,9 @@ echo Number::precision(456.91873645, 2);
 
 ## Formatting Percentages
 
-`method` Cake\\I18n\\Number::**toPercentage**(mixed $value, int $precision = 2, array $options = [])
+### Number::toPercentage()
+
+`method` Cake\\I18n\\Number::**toPercentage**(mixed $value, int $precision = 2, array $options = []): string
 
 | Option | Description |
 |----|----|
@@ -149,7 +159,9 @@ echo Number::toPercentage(0.45691, 1, [
 
 ## Interacting with Human Readable Values
 
-`method` Cake\\I18n\\Number::**toReadableSize**(string $size)
+### Number::toReadableSize()
+
+`method` Cake\\I18n\\Number::**toReadableSize**(string $size): string
 
 This method formats data sizes in human readable forms. It provides
 a shortcut way to convert bytes to KB, MB, GB, and TB. The size is
@@ -173,7 +185,9 @@ echo Number::toReadableSize(5368709120); // 5 GB
 
 ## Formatting Numbers
 
-`method` Cake\\I18n\\Number::**format**(mixed $value, array $options = [])
+### Number::format()
+
+`method` Cake\\I18n\\Number::**format**(mixed $value, array $options = []): string
 
 This method gives you much more control over the formatting of
 numbers for use in your views (and is used as the main method by
@@ -239,7 +253,9 @@ echo Number::format('123456.7890', [
 // Output '123 456,79 !'
 ```
 
-`method` Cake\\I18n\\Number::**ordinal**(mixed $value, array $options = [])
+### Number::ordinal()
+
+`method` Cake\\I18n\\Number::**ordinal**(mixed $value, array $options = []): string
 
 This method will output an ordinal number.
 
@@ -263,7 +279,9 @@ echo Number::ordinal(410);
 
 ## Format Differences
 
-`method` Cake\\I18n\\Number::**formatDelta**(mixed $value, array $options = [])
+### Number::formatDelta()
+
+`method` Cake\\I18n\\Number::**formatDelta**(mixed $value, array $options = []): string
 
 This method displays differences in value as a signed number:
 
@@ -314,7 +332,9 @@ echo Number::formatDelta('123456.7890', [
 
 ## Configure formatters
 
-`method` Cake\\I18n\\Number::**config**(string $locale, int $type = NumberFormatter::DECIMAL, array $options = [])
+### Number::config()
+
+`method` Cake\\I18n\\Number::**config**(string $locale, int $type = NumberFormatter::DECIMAL, array $options = []): void
 
 This method allows you to configure formatter defaults which persist across calls
 to various methods.

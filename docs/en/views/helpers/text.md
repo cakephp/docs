@@ -10,7 +10,7 @@ truncating long stretches of text.
 
 ## Linking Email addresses
 
-`method` Cake\\View\\Helper\\TextHelper::**autoLinkEmails**(string $text, array $options = [])
+`method` Cake\\View\\Helper\\TextHelper::**autoLinkEmails**(string $text, array $options = []): string
 
 Adds links to the well-formed email addresses in \$text, according
 to any options defined in `$options` (see
@@ -34,7 +34,7 @@ option to disable this if necessary.
 
 ## Linking URLs
 
-`method` Cake\\View\\Helper\\TextHelper::**autoLinkUrls**(string $text, array $options = [])
+`method` Cake\\View\\Helper\\TextHelper::**autoLinkUrls**(string $text, array $options = []): string
 
 Same as `autoLinkEmails()`, only this method searches for
 strings that start with https, http, ftp, or nntp and links them
@@ -45,7 +45,7 @@ option to disable this if necessary.
 
 ## Linking Both URLs and Email Addresses
 
-`method` Cake\\View\\Helper\\TextHelper::**autoLink**(string $text, array $options = [])
+`method` Cake\\View\\Helper\\TextHelper::**autoLink**(string $text, array $options = []): string
 
 Performs the functionality in both `autoLinkUrls()` and
 `autoLinkEmails()` on the supplied `$text`. All URLs and emails
@@ -64,7 +64,7 @@ Further options:
 
 ## Converting Text into Paragraphs
 
-`method` Cake\\View\\Helper\\TextHelper::**autoParagraph**(string $text)
+`method` Cake\\View\\Helper\\TextHelper::**autoParagraph**(string $text): string
 
 Adds proper \<p\> around text where double-line returns are found, and \<br\> where
 single-line returns are found. :

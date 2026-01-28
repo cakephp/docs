@@ -24,6 +24,8 @@ CakePHPは、2つの形式のCSRFプロテクションを提供します。:
 > ひとつだけを選択する必要があります。両方のアプローチを同時に使用すると、
 > すべての <span class="title-ref">PUT</span> および <span class="title-ref">POST</span> リクエストでCSRFトークンの不一致エラーが発生します。
 
+<a id="csrf-middleware"></a>
+
 ## CSRFミドルウェア（クロスサイトリクエストフォージェリミドルウェア）
 
 CSRFプロテクションは、アプリケーション全体、または特定のルーティングスコープに
