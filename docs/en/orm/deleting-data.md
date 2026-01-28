@@ -2,6 +2,8 @@
 
 `class` Cake\\ORM\\**Table**
 
+## Deleting a Single Entity
+
 `method` Cake\\ORM\\Table::**delete**(EntityInterface $entity, array $options = [])
 
 Once you've loaded an entity you can delete it by calling the originating
@@ -79,6 +81,8 @@ $this->Articles->deleteManyOrFail($entities);
 
 The `$options` for these methods are the same as `delete()`. Deleting
 records with these method **will** trigger events.
+
+### deleteAll()
 
 `method` Cake\\ORM\\Table::**deleteAll**($conditions)
 

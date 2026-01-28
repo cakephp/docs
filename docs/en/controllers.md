@@ -476,6 +476,8 @@ $recentArticles = $this->fetchTable('Articles')->find('all',
     ->all();
 ```
 
+### fetchModel()
+
 `method` Cake\\Controller\\Controller::**fetchModel**(string|null $modelClass = null, string|null $modelType = null)
 
 The `fetchModel()` method is useful to load non ORM models or ORM tables that
@@ -557,9 +559,15 @@ logic around the request life-cycle:
 By default the following callback methods are connected to related events if the
 methods are implemented by your controllers
 
+#### beforeFilter()
+
 `method` Cake\\Controller\\Controller::**beforeFilter**(EventInterface $event)
 
+#### beforeRender()
+
 `method` Cake\\Controller\\Controller::**beforeRender**(EventInterface $event)
+
+#### afterFilter()
 
 `method` Cake\\Controller\\Controller::**afterFilter**(EventInterface $event)
 
