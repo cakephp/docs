@@ -42,9 +42,10 @@ export default {
       { ...versions },
     ],
   },
-  phpVersions: {
-    phpversion: '8.5',
-    minphpversion: '8.2'
+  substitutions: {
+    '|phpversion|': { value: '8.5', format: 'bold' },
+    '|minphpversion|': { value: '8.2', format: 'italic' },
+    '|cakeversion|': '5.4.0',
   },
   locales: {
     root: {
