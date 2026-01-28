@@ -1,0 +1,109 @@
+{
+  "version": "0.2",
+  "language": "en",
+  "caseSensitive": false,
+  "words": [
+    "CakePHP",
+    "VitePress",
+    "php",
+    "datetime",
+    "varchar",
+    "postgresql",
+    "mysql",
+    "sqlite",
+    "webroot",
+    "csrf",
+    "xss",
+    "cakephp",
+    "bake",
+    "phinx",
+    "hasher",
+    "middlewares",
+    "namespaced",
+    "phpunit",
+    "composable",
+    "autowiring",
+    "stringable",
+    "arrayable",
+    "timestampable",
+    "paginator",
+    "Enqueue",
+    "dequeue",
+    "nullable",
+    "accessor",
+    "mutator",
+    "minphpversion",
+    "phpversion",
+    "XAMPP",
+    "WAMP",
+    "MAMP",
+    "controllername",
+    "actionname",
+    "Datamapper",
+    "webservices",
+    "nginx",
+    "apache",
+    "httpd",
+    "lighttpd",
+    "mbstring",
+    "simplexml",
+    "Laragon",
+    "composer",
+    "phar",
+    "paginate",
+    "startup",
+    "endfor",
+    "endwhile",
+    "sidebar",
+    "blocks",
+    "rewrite",
+    "before",
+    "called",
+    "sites",
+    "example",
+    "Classes",
+    "Redirect",
+    "Layout"
+  ],
+  "ignoreRegExpList": [
+    "\\$[a-zA-Z_][a-zA-Z0-9_]*",
+    "[a-zA-Z]+::[a-zA-Z]+",
+    "<[^>]+>",
+    "`[^`]+`",
+    "```[\\s\\S]*?```",
+    "\\b[A-Z][a-z]+(?:[A-Z][a-z]+)+\\b",
+    "\\b[a-z]+_[a-z_]+\\b",
+    "\\bhttps?:\\/\\/[^\\s]+",
+    "\\[[a-z]\\][a-z]+",
+    "\\b[A-Z][a-z]+\\b",
+    "\\b(true|false|null|while|for|if|else)\\b"
+  ],
+  "languageSettings": [
+    {
+      "languageId": "*",
+      "locale": "en",
+      "dictionaries": ["en", "softwareTerms", "php"]
+    },
+    {
+      "languageId": "*",
+      "locale": "ja",
+      "allowCompoundWords": true
+    }
+  ],
+  "overrides": [
+    {
+      "filename": "**/docs/ja/**/*.md",
+      "language": "ja",
+      "ignoreRegExpList": [
+        "[\\p{Script=Hiragana}\\p{Script=Katakana}\\p{Script=Han}]+"
+      ]
+    }
+  ],
+  "ignorePaths": [
+    "node_modules/**",
+    ".temp/**",
+    "dist/**",
+    "**/*.min.js",
+    "**/*.lock"
+  ]
+}

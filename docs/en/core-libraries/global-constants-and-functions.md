@@ -24,6 +24,8 @@ require CAKE . 'functions.php';
 To your application's `config/bootstrap.php`. Doing this will load global
 aliases for *all* functions listed below.
 
+### __()
+
 `function` **__(string $string_id, [$formatArgs])**
 
 This function handles localization in CakePHP applications. The
@@ -45,6 +47,8 @@ __('You have {unread} unread messages', ['unread' => $number]);
 > [Internationalization & Localization](../core-libraries/internationalization-and-localization) section for
 > more information.
 
+### __d()
+
 `function` **__d(string $domain, string $msg, mixed $args = null)**
 
 Allows you to override the current domain for a single message lookup.
@@ -55,11 +59,15 @@ Useful when internationalizing a plugin:
 > [!NOTE]
 > Make sure to use the underscored version of the plugin name here as domain.
 
+### __dn()
+
 `function` **__dn(string $domain, string $singular, string $plural, integer $count, mixed $args = null)**
 
 Allows you to override the current domain for a single plural message
 lookup. Returns correct plural form of message identified by `$singular`
 and `$plural` for count `$count` from domain `$domain`.
+
+### __dx()
 
 `function` **__dx(string $domain, string $context, string $msg, mixed $args = null)**
 
@@ -68,6 +76,8 @@ also allows you to specify a context.
 
 The context is a unique identifier for the translations string that makes it
 unique within the same domain.
+
+### __dxn()
 
 `function` **__dxn(string $domain, string $context, string $singular, string $plural, integer $count, mixed $args = null)**
 
@@ -80,16 +90,22 @@ for plural messages dependent on the count.
 The context is a unique identifier for the translations string that makes it
 unique within the same domain.
 
+### __n()
+
 `function` **__n(string $singular, string $plural, integer $count, mixed $args = null)**
 
 Returns correct plural form of message identified by `$singular` and
 `$plural` for count `$count`. Some languages have more than one form for
 plural messages dependent on the count.
 
+### __x()
+
 `function` **__x(string $context, string $msg, mixed $args = null)**
 
 The context is a unique identifier for the translations string that makes it
 unique within the same domain.
+
+### __xn()
 
 `function` **__xn(string $context, string $singular, string $plural, integer $count, mixed $args = null)**
 
@@ -101,11 +117,15 @@ messages dependent on the count.
 The context is a unique identifier for the translations string that makes it
 unique within the same domain.
 
+### collection()
+
 `function` **collection(mixed $items)**
 
 Convenience wrapper for instantiating a new `Cake\Collection\Collection`
 object, wrapping the passed argument. The `$items` parameter takes either
 a `Traversable` object or an array.
+
+### debug()
 
 `function` **debug(mixed $var, boolean $showHtml = null, $showFrom = true)**
 
@@ -115,6 +135,8 @@ browser-friendly. If `$showFrom` is not set to `false`, the debug output
 will start with the line from which it was called. Also see
 [Debugging](../development/debugging)
 
+### dd()
+
 `function` **dd(mixed $var, boolean $showHtml = null)**
 
 It behaves like `debug()`, but execution is also halted.
@@ -122,10 +144,14 @@ If the core `$debug` variable is `true`, `$var` is printed.
 If `$showHTML` is `true` or left as `null`, the data is rendered to be
 browser-friendly. Also see [Debugging](../development/debugging)
 
+### pr()
+
 `function` **pr(mixed $var)**
 
 Convenience wrapper for `print_r()`, with the addition of
 wrapping `<pre>` tags around the output.
+
+### pj()
 
 `function` **pj(mixed $var)**
 
@@ -133,6 +159,8 @@ JSON pretty print convenience function, with the addition of
 wrapping `<pre>` tags around the output.
 
 It is meant for debugging the JSON representation of objects and arrays.
+
+### env()
 
 `function` **env(string $key, string $default = null)**
 
@@ -144,9 +172,13 @@ unsupporting servers. In fact, it's a good idea to always use `env()`
 instead of `$_SERVER` or `getenv()` (especially if you plan to
 distribute the code), since it's a full emulation wrapper.
 
+### h()
+
 `function` **h(string $text, boolean $double = true, string $charset = null)**
 
 Convenience wrapper for `htmlspecialchars()`.
+
+### pluginSplit()
 
 `function` **pluginSplit(string $name, boolean $dotAppend = false, string $plugin = null)**
 
@@ -154,6 +186,8 @@ Splits a dot syntax plugin name into its plugin and class name. If `$name`
 does not have a dot, then index 0 will be `null`.
 
 Commonly used like `list($plugin, $name) = pluginSplit('Users.User');`
+
+### namespaceSplit()
 
 `function` **namespaceSplit(string $class)**
 

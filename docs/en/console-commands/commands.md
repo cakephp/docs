@@ -619,7 +619,7 @@ The `beforeExecute()` and `afterExecute()` hook methods were added.
 
 ### beforeExecute()
 
-`method` Cake\\Console\\Command::**beforeExecute**(EventInterface $event, Arguments $args, ConsoleIo $io)
+`method` Cake\\Console\\Command::**beforeExecute**(EventInterface $event, Arguments $args, ConsoleIo $io): void
 
 Called before the `execute()` method runs. Useful for initialization and
 validation:
@@ -644,7 +644,7 @@ class MyCommand extends Command
 
 ### afterExecute()
 
-`method` Cake\\Console\\Command::**afterExecute**(EventInterface $event, Arguments $args, ConsoleIo $io)
+`method` Cake\\Console\\Command::**afterExecute**(EventInterface $event, Arguments $args, ConsoleIo $io): void
 
 Called after the `execute()` method completes. Useful for cleanup and
 logging:

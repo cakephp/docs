@@ -74,7 +74,7 @@ Instead of writing the SQL manually, you can use the query builder:
 $results = $connection
     ->selectQuery('*', 'articles')
     ->where(['created >' => new DateTime('1 day ago')], ['created' => 'datetime'])
-    ->order(['title' => 'DESC'])
+    ->orderBy(['title' => 'DESC'])
     ->execute()
     ->fetchAll('assoc');
 ```
@@ -185,98 +185,98 @@ use a non-default connection, see [Configuring Table Connections](../orm/table-o
 There are a number of keys supported in database configuration. A full list is
 as follows:
 
-className  
+className
 The fully namespaced class name of the class that represents the connection to a database server.
 This class is responsible for loading the database driver, providing SQL
 transaction mechanisms and preparing SQL statements among other things.
 
-driver  
+driver
 The class name of the driver used to implement all specificities for
 a database engine. This can either be a short classname using `plugin syntax`,
 a fully namespaced name, or a constructed driver instance.
 Examples of short classnames are Mysql, Sqlite, Postgres, and Sqlserver.
 
-persistent  
+persistent
 Whether or not to use a persistent connection to the database. This option
 is not supported by SqlServer. An exception is thrown if you attempt to set
 `persistent` to `true` with SqlServer.
 
-host  
+host
 The database server's hostname (or IP address).
 
-username  
+username
 The username for the account.
 
-password  
+password
 The password for the account.
 
-database  
+database
 The name of the database for this connection to use. Avoid using `.` in
 your database name. Because of how it complicates identifier quoting CakePHP
 does not support `.` in database names. The path to your SQLite database
 should be an absolute path (for example, `ROOT . DS . 'my_app.db'`) to avoid
 incorrect paths caused by relative paths.
 
-port (*optional*)  
+port (*optional*)
 The TCP port or Unix socket used to connect to the server.
 
-encoding  
+encoding
 Indicates the character set to use when sending SQL statements to
 the server. This defaults to the database's default encoding for
 all databases other than DB2.
 
-timezone  
+timezone
 Server timezone to set.
 
-schema  
+schema
 Used in PostgreSQL database setups to specify which schema to use.
 
-unix_socket  
+unix_socket
 Used by drivers that support it to connect via Unix socket files. If you are
 using PostgreSQL and want to use Unix sockets, leave the host key blank.
 
-ssl_key  
+ssl_key
 The file path to the SSL key file. (Only supported by MySQL).
 
-ssl_cert  
+ssl_cert
 The file path to the SSL certificate file. (Only supported by MySQL).
 
-ssl_ca  
+ssl_ca
 The file path to the SSL certificate authority. (Only supported by MySQL).
 
-init  
+init
 A list of queries that should be sent to the database server as
 when the connection is created.
 
-log  
+log
 Set to `true` to enable query logging. When enabled queries will be logged
 at a `debug` level with the `queriesLog` scope.
 
-quoteIdentifiers  
+quoteIdentifiers
 Set to `true` if you are using reserved words or special characters in
 your table or column names. Enabling this setting will result in queries
 built using the [Query Builder](../orm/query-builder) having identifiers quoted when
 creating SQL. It should be noted that this decreases performance because
 each query needs to be traversed and manipulated before being executed.
 
-flags  
+flags
 An associative array of PDO constants that should be passed to the
 underlying PDO instance. See the PDO documentation for the flags supported
 by the driver you are using.
 
-cacheMetadata  
+cacheMetadata
 Either boolean `true`, or a string containing the cache configuration to
 store meta data in. Having metadata caching disabled by setting it to `false`
 is not advised and can result in very poor performance. See the
 [Database Metadata Cache](#database-metadata-cache) section for more information.
 
-mask  
+mask
 Set the permissions on the generated database file. (Only supported by SQLite)
 
-cache  
+cache
 The `cache` flag to send to SQLite.
 
-mode  
+mode
 The `mode` flag value to send to SQLite.
 
 At this point, you might want to take a look at the
@@ -339,7 +339,7 @@ references to existing connections.
 
 ### Accessing Connections
 
-`static` Cake\\Datasource\\ConnectionManager::**get**($name)
+`static` Cake\\Datasource\\ConnectionManager::**get**($name): ConnectionInterface
 
 Once configured connections can be fetched using
 `Cake\Datasource\ConnectionManager::get()`. This method will
@@ -375,49 +375,49 @@ Since not every database vendor includes the same set of data types, or
 the same names for similar data types, CakePHP provides a set of abstracted
 data types for use with the database layer. The types CakePHP supports are:
 
-string  
+string
 Maps to `VARCHAR` type. In SQL Server the `NVARCHAR` types are used.
 
-char  
+char
 Maps to `CHAR` type. In SQL Server the `NCHAR` type is used.
 
-text  
+text
 Maps to `TEXT` types.
 
-uuid  
+uuid
 Maps to the UUID type if a database provides one, otherwise this will
 generate a `CHAR(36)` field.
 
-binaryuuid  
+binaryuuid
 Maps to the UUID type if the database provides one, otherwise this will
 generate a `BINARY(16)` column. Binary UUIDs provide more efficient storage
 compared to string UUIDs by storing the UUID as 16 bytes of binary data rather
 than a 36-character string. This type automatically handles conversion between
 string UUID format (with dashes) and binary format.
 
-nativeuuid  
+nativeuuid
 Maps to the UUID type in MySQL with MariaDb. In all other databases,
 `nativeuuid` is an alias for `uuid`.
 
-integer  
+integer
 Maps to the `INTEGER` type provided by the database. BIT is not yet supported
 at this moment.
 
-smallinteger  
+smallinteger
 Maps to the `SMALLINT` type provided by the database.
 
-tinyinteger  
+tinyinteger
 Maps to the `TINYINT` or `SMALLINT` type provided by the database. In MySQL
 `TINYINT(1)` is treated as a boolean.
 
-biginteger  
+biginteger
 Maps to the `BIGINT` type provided by the database.
 
-float  
+float
 Maps to either `DOUBLE` or `FLOAT` depending on the database. The `precision`
 option can be used to define the precision used.
 
-decimal  
+decimal
 Maps to the `DECIMAL` type. Supports the `length` and `precision`
 options. Values for decimal type ares be represented as strings (not as float
 as some might expect). This is because decimal types are used to represent
@@ -429,61 +429,61 @@ If you want the values to be <span class="title-ref">float</span> in your PHP co
 case you can explicitly map your decimal columns to <span class="title-ref">float</span> type in your table
 schema.
 
-boolean  
+boolean
 Maps to `BOOLEAN` except in MySQL, where `TINYINT(1)` is used to represent
 booleans. `BIT(1)` is not yet supported at this moment.
 
-binary  
+binary
 Maps to the `BLOB` or `BYTEA` type provided by the database.
 
-date  
+date
 Maps to a native `DATE` column type. The return value of this column
 type is `Cake\I18n\Date` which emulates the date related
 methods of PHP's `DateTime` class.
 
-datetime  
+datetime
 See [Datetime Type](#datetime-type).
 
-datetimefractional  
+datetimefractional
 See [Datetime Type](#datetime-type).
 
-timestamp  
+timestamp
 Maps to the `TIMESTAMP` type.
 
-timestampfractional  
+timestampfractional
 Maps to the `TIMESTAMP(N)` type.
 
-time  
+time
 Maps to a `TIME` type in all databases.
 
-year  
+year
 Maps to the `YEAR` type. Only supported in MySQL.
 
-json  
+json
 Maps to a `JSON` type if it's available, otherwise it maps to `TEXT`.
 
-enum  
+enum
 See [Enum Type](#enum-type).
 
-geometry  
+geometry
 Maps to a generic geometry storage type.
 
-point  
+point
 Maps to a single point in geospatial storage.
 
-linestring  
+linestring
 Maps to a single line in geospatial storage.
 
-polygon  
+polygon
 Maps to a single polygon in geospatial storage.
 
-inet  
+inet
 Maps to the `INET` type. Only implemented in postgres.
 
-cidr  
+cidr
 Maps to the `CIDR` type. Only implemented in postgres.
 
-macaddr  
+macaddr
 Maps to the `MACADDR` type. Only implemented in postgres.
 
 These types are used in both the schema reflection features that CakePHP
@@ -611,7 +611,7 @@ enum ArticleStatus: string implements EnumLabelInterface
 ```
 
 This can be useful if you want to use your enums in `FormHelper` select
-inputs. You can use [bake](/bake) to generate an enum class:
+inputs. You can use [bake](../bake) to generate an enum class:
 
 ``` text
 # generate an enum class with two cases and stored as an integer
@@ -646,7 +646,7 @@ Geospatial schema types were added.
 
 `class` Cake\\Database\\**TypeFactory**
 
-`static` Cake\\Database\\TypeFactory::**map**($name, $class)
+`static` Cake\\Database\\TypeFactory::**map**($name, $class): void
 
 If you need to use vendor specific types that are not built into CakePHP you can
 add additional new types to CakePHP's type system. Type classes are expected to
@@ -956,7 +956,7 @@ transactional operations.
 
 ### Executing Queries
 
-`method` Cake\\Database\\Connection::**execute(string $sql, array $params = [], array $types = []): \\Cake\\Database\\StatementInterface**()
+`method` Cake\\Database\\Connection::**execute**(string $sql, array $params = [], array $types = []): StatementInterface
 
 Once you've gotten a connection object, you'll probably want to issue some
 queries with it. CakePHP's database abstraction layer provides wrapper features
@@ -990,7 +990,7 @@ $statement = $connection->execute(
 );
 ```
 
-`method` Cake\\Database\\Connection::**selectQuery**()
+`method` Cake\\Database\\Connection::**selectQuery**(): SelectQuery
 
 These methods allow you to use rich data types in your applications and properly convert
 them into SQL statements. The last and most flexible way of creating queries is
@@ -1015,7 +1015,7 @@ foreach ($query as $row) {
 > Instead of iterating the `$query` you can also call it's `all()` method
 > to get the results.
 
-`method` Cake\\Database\\Connection::**updateQuery**()
+`method` Cake\\Database\\Connection::**updateQuery**(): UpdateQuery
 
 This method provides you a builder for `UPDATE` queries:
 
@@ -1026,7 +1026,7 @@ $query = $connection->updateQuery('articles')
 $statement = $query->execute();
 ```
 
-`method` Cake\\Database\\Connection::**insertQuery**()
+`method` Cake\\Database\\Connection::**insertQuery**(): InsertQuery
 
 This method provides you a builder for `INSERT` queries:
 
@@ -1038,7 +1038,7 @@ $query->into('articles')
 $statement = $query->execute();
 ```
 
-`method` Cake\\Database\\Connection::**deleteQuery**()
+`method` Cake\\Database\\Connection::**deleteQuery**(): DeleteQuery
 
 This method provides you a builder for `DELETE` queries:
 
@@ -1062,7 +1062,7 @@ $connection->execute('UPDATE articles SET published = ? WHERE id = ?', [false, 4
 $connection->commit();
 ```
 
-`method` Cake\\Database\\Connection::**transactional**(callable $callback)
+`method` Cake\\Database\\Connection::**transactional**(callable $callback): mixed
 
 In addition to this interface connection instances also provide the
 `transactional()` method which makes handling the begin/commit/rollback calls

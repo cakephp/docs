@@ -339,60 +339,60 @@ For details, see the documentation for `Cake\Database\FunctionsBuilder`.
 
 You can access existing wrappers for several SQL functions through `SelectQuery::func()`:
 
-`rand()`  
+`rand()`
 Generate a random value between 0 and 1 via SQL.
 
-`sum()`  
+`sum()`
 Calculate a sum. <span class="title-ref">Assumes arguments are literal values.</span>
 
-`avg()`  
+`avg()`
 Calculate an average. <span class="title-ref">Assumes arguments are literal values.</span>
 
-`min()`  
+`min()`
 Calculate the min of a column. <span class="title-ref">Assumes arguments are literal values.</span>
 
-`max()`  
+`max()`
 Calculate the max of a column. <span class="title-ref">Assumes arguments are literal values.</span>
 
-`count()`  
+`count()`
 Calculate the count. <span class="title-ref">Assumes arguments are literal values.</span>
 
-`cast()`  
+`cast()`
 Convert a field or expression from one data type to another.
 
-`concat()`  
+`concat()`
 Concatenate two values together. <span class="title-ref">Assumes arguments are bound parameters.</span>
 
-`coalesce()`  
+`coalesce()`
 Coalesce values. <span class="title-ref">Assumes arguments are bound parameters.</span>
 
-`dateDiff()`  
+`dateDiff()`
 Get the difference between two dates/times. <span class="title-ref">Assumes arguments are bound parameters.</span>
 
-`now()`  
+`now()`
 Defaults to returning date and time, but accepts 'time' or 'date' to return only
 those values.
 
-`extract()`  
+`extract()`
 Returns the specified data part from the SQL expression.
 
-`dateAdd()`  
+`dateAdd()`
 Add the time unit to the date expression.
 
-`dayOfWeek()`  
+`dayOfWeek()`
 Returns a FunctionExpression representing a call to SQL WEEKDAY function.
 
 #### Window-Only Functions
 
 These window-only functions contain a window expression by default:
 
-`rowNumber()`  
+`rowNumber()`
 Returns an Aggregate expression for the `ROW_NUMBER()` SQL function.
 
-`lag()`  
+`lag()`
 Returns an Aggregate expression for the `LAG()` SQL function.
 
-`lead()`  
+`lead()`
 Returns an Aggregate expression for the `LEAD()` SQL function.
 
 When providing arguments for SQL functions, there are two kinds of parameters
@@ -470,7 +470,7 @@ FROM articles;
 
 ### Ordering Results
 
-To apply ordering, you can use the `order` method:
+To apply ordering, you can use the `orderBy()` method:
 
 ``` php
 $query = $articles->find()
@@ -638,7 +638,7 @@ You can create `if ... then ... else` conditions by using `else()`:
 $published = $query->expr()
     ->case()
     ->when(['published' => true])
-    ->then('Y');
+    ->then('Y')
     ->else('N');
 
 # CASE WHEN published = true THEN 'Y' ELSE 'N' END;
@@ -650,7 +650,7 @@ Also, it's possible to create the simple variant by passing a value to `case()`:
 $published = $query->expr()
     ->case($query->identifier('published'))
     ->when(true)
-    ->then('Y');
+    ->then('Y')
     ->else('N');
 
 # CASE published WHEN true THEN 'Y' ELSE 'N' END;
@@ -1047,14 +1047,14 @@ WHERE (
 The `QueryExpression` passed to the callback allows you to use both
 **combinators** and **conditions** to build the full expression.
 
-Combinators  
+Combinators
 These create new `QueryExpression` objects and set how the conditions added
 to that expression are joined together.
 
 - `and()` creates new expression objects that joins all conditions with `AND`.
 - `or()` creates new expression objects that joins all conditions with `OR`.
 
-Conditions  
+Conditions
 These are added to the expression and automatically joined together
 depending on which combinator was used.
 
@@ -1445,7 +1445,7 @@ can be useful when you do not know whether you will get a scalar or array of
 parameters. The `[]` suffix on any data type name indicates to the query
 builder that you want the data handled as an array. If the data is not an array,
 it will first be cast to an array. After that, each value in the array will
-be cast using the [type system](../orm/database-basics#database-data-types). This works with
+be cast using the [type system](../orm/database-basics#data-types). This works with
 complex types as well. For example, you could take a list of DateTime objects
 using:
 

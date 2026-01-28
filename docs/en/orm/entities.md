@@ -95,7 +95,11 @@ echo $article->title;
 
 You can also use the `get()` and `set()` methods.
 
+### set()
+
 `method` Cake\\ORM\\Entity::**set**($field, $value = null, array $options = [])
+
+### get()
 
 `method` Cake\\ORM\\Entity::**get**($field)
 
@@ -105,6 +109,8 @@ For example:
 $article->set('title', 'This is my first post');
 echo $article->get('title');
 ```
+
+### patch()
 
 `method` Cake\\ORM\\Entity::**patch**(array $fields, array $options = [])
 
@@ -298,7 +304,7 @@ see [Exposing Virtual Fields](#exposing-virtual-fields).
 
 ## Checking if an Entity Has Been Modified
 
-`method` Cake\\ORM\\Entity::**dirty**($field = null, $dirty = null)
+`method` Cake\\ORM\\Entity::**isDirty**(?string $field = null)
 
 You may want to make code conditional based on whether or not fields have
 changed in an entity. For example, you may only want to validate fields when

@@ -1,4 +1,4 @@
-orphan  
+orphan
 
 # Contents
 
@@ -25,7 +25,7 @@ orphan
 - [国際化と地域化](core-libraries/internationalization-and-localization)
 - [ロギング](core-libraries/logging)
 - [モデルのないフォーム](core-libraries/form)
-- [Pagination](controllers/components/pagination)
+- [Pagination](controllers/pagination)
 - [プラグイン](plugins)
 - [REST](development/rest)
 - [セキュリティ](security)

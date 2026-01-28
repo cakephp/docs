@@ -655,6 +655,8 @@ public function initialize(): void
 
 同じテクニックはヘルパーとビヘイビアーにも使えます。
 
+<a id="plugin-commands"></a>
+
 ## コマンド
 
 プラグインは、 `console()` フックの中で、コマンドを登録することができます。

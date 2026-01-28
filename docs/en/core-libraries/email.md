@@ -152,7 +152,7 @@ Emails are often much more than just a simple text message. In order
 to facilitate that, CakePHP provides a way to send emails using CakePHP's
 [view layer](../views).
 
-The templates for emails reside in a special folder `templates/email` of your
+The templates for emails reside in a special folder `templates/email/` of your
 application. Mailer views can also use layouts and elements just like normal views:
 
 ``` php
@@ -255,6 +255,8 @@ following path:
 
 ## Sending Attachments
 
+### Mailer::setAttachments()
+
 `method` Cake\\Mailer\\Mailer::**setAttachments**($attachments)
 
 You can attach files to email messages as well. There are a few
@@ -296,6 +298,8 @@ you want the filenames to appear in the recipient's mail client:
     a string using the `data` option. This allows you to attach files without
     needing file paths to them.
 
+### Mailer::addAttachment()
+
 `method` Cake\\Mailer\\Mailer::**addAttachment**(\\Psr\\Http\\Message\\UploadedFileInterface|string $path, ?string $name, ?string $mimetype, ?string $contentId, ?bool $contentDisposition)
 
 You can also add attachments using the `addAttachment()` method.
@@ -303,6 +307,8 @@ You can also add attachments using the `addAttachment()` method.
 > \$mailer-\>addAttachment('/full/file/path/file.png');
 
 ### Relaxing Address Validation Rules
+
+### Mailer::setEmailPattern()
 
 `method` Cake\\Mailer\\Mailer::**setEmailPattern**($pattern)
 
@@ -538,6 +544,8 @@ TransportFactory::setConfig('default', [
 When using a DSN string you can define any additional parameters/options as
 query string arguments.
 
+### Mailer::drop()
+
 `static` Cake\\Mailer\\Mailer::**drop**($key)
 
 Once configured, transports cannot be modified. In order to modify a transport
@@ -601,7 +609,7 @@ using `Message::setBodyText()` and `Message::setBodyHtml()` methods.
 ## Testing Mailers
 
 To test mailers, add `Cake\TestSuite\EmailTrait` to your test case.
-The `MailerTrait` uses PHPUnit hooks to replace your application's email transports
+The `EmailTrait` uses PHPUnit hooks to replace your application's email transports
 with a proxy that intercepts email messages and allows you to do assertions
 on the mail that would be delivered.
 

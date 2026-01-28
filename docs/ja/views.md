@@ -51,6 +51,8 @@ class AppView extends View
 }
 ```
 
+<a id="view-templates"></a>
+
 ## ビューテンプレート
 
 CakePHP のビューレイヤーは、どのようにユーザーに伝えるかです。ほとんどの場合、ビューは
@@ -500,6 +502,8 @@ class UsersController extends AppController
     }
 }
 ```
+
+<a id="view-elements"></a>
 
 ## エレメント
 

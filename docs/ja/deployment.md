@@ -83,7 +83,7 @@ CakePHP のアプリケーションは、アプリケーションの `webroot` �
 ドキュメントルートを指定する必要があります。これによってアプリケーション、
 設定のファイルが URL を通してアクセスすることができなくなります。
 ドキュメントルートの指定の仕方はウェブサーバーごとに異なります。
-ウェブサーバー特有の情報については [Url Rewriting](installation#url-rewriting) ドキュメントを見てください。
+ウェブサーバー特有の情報については [Url Rewriting](installation#without-url-rewriting) ドキュメントを見てください。
 
 どの場合においても `webroot/` をバーチャルホスト（バーチャルドメイン）の
 ドキュメントルートに設定すべきでしょう。これは webroot ディレクトリーの外側のファイルを
@@ -96,6 +96,8 @@ CakePHP のアプリケーションは、アプリケーションの `webroot` �
 本番サーバーにて走らせることを推奨します。 :
 
     php composer.phar dumpautoload -o
+
+<a id="symlink-assets"></a>
 
 プラグインの画像や JavaScript、CSS ファイルなどの静的なアセットを扱う場合、
 `Dispatcher` を通すことはかなり非効率です。本番環境においては、次のように
@@ -120,6 +122,6 @@ CakePHP のアプリケーションは、アプリケーションの `webroot` �
 
 1.  `composer install` を使用して依存関係をインストールします。
     予期しないバージョンのパッケージを取得する可能性があるため、デプロイを行うときに `composer update` は使用しないでください。
-2.  Migrations プラグインまたは別のツールを使用して、データベースの [マイグレーション](/migrations/) を実行します。
+2.  Migrations プラグインまたは別のツールを使用して、データベースの [マイグレーション](migrations) を実行します。
 3.  `bin/cake schema_cache clear` を実行してモデルスキーマキャッシュをクリアします。
     [スキーマキャッシュツール](console-commands/schema-cache) には、このコマンドに関する詳細情報があります。

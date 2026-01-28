@@ -375,14 +375,26 @@ subscribe your helper to the relevant event. Unlike previous versions of CakePHP
 you should *not* call `parent` in your callbacks, as the base Helper class
 does not implement any of the callback methods.
 
-`method` Helper::**beforeRenderFile**(EventInterface $event, $viewFile)
+#### beforeRenderFile()
 
-`method` Helper::**afterRenderFile**(EventInterface $event, $viewFile, $content)
+`method` Helper::**beforeRenderFile**(EventInterface $event, $viewFile): void
 
-`method` Helper::**beforeRender**(EventInterface $event, $viewFile)
+#### afterRenderFile()
 
-`method` Helper::**afterRender**(EventInterface $event, $viewFile)
+`method` Helper::**afterRenderFile**(EventInterface $event, $viewFile, $content): void
 
-`method` Helper::**beforeLayout**(EventInterface $event, $layoutFile)
+#### beforeRender()
 
-`method` Helper::**afterLayout**(EventInterface $event, $layoutFile)
+`method` Helper::**beforeRender**(EventInterface $event, $viewFile): void
+
+#### afterRender()
+
+`method` Helper::**afterRender**(EventInterface $event, $viewFile): void
+
+#### beforeLayout()
+
+`method` Helper::**beforeLayout**(EventInterface $event, $layoutFile): void
+
+#### afterLayout()
+
+`method` Helper::**afterLayout**(EventInterface $event, $layoutFile): void

@@ -10,6 +10,8 @@ CakePHP のリクエストオブジェクトは、入ってきたリクエスト
 
 </div>
 
+<a id="cake-request"></a>
+
 ## リクエスト
 
 `class` Cake\\Http\\**ServerRequest**
@@ -708,6 +710,8 @@ $this->response = $this->response->withType('vcf');
 コールバックの中で設定したいと思うので、 `RequestHandlerComponent` が提供する
 ビューの自動切り替え機能を活用できます。
 
+<a id="cake-response-file"></a>
+
 ### ファイルの送信
 
 `method` Cake\\Http\\Response::**withFile**($path, $options = [])
@@ -742,10 +746,10 @@ $response = $this->response->withFile(
 
 サポートされているオプションは次のとおりです。
 
-name  
+name
 name は、ユーザーに送信される代替ファイル名を指定することができます。
 
-download  
+download
 ヘッダーでダウンロードを強制するように設定する必要があるかどうかを示すブール値。
 
 ### 文字列をファイルとして送信

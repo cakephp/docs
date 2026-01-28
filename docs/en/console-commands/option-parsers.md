@@ -212,7 +212,7 @@ included its default value would be `false`, and when defined it will be
 
 ### Building a ConsoleOptionParser from an Array
 
-`method` Cake\\Console\\ConsoleOptionParser::**buildFromArray**($spec)
+`method` Cake\\Console\\ConsoleOptionParser::**buildFromArray**($spec): static
 
 Option parsers can also be defined as arrays. Within the array, you can define
 keys for `arguments`, `options`, `description` and `epilog`. The values
