@@ -25,7 +25,7 @@ ways to inspect the data returned by the ORM.
 
 ## Getting a Single Entity by Primary Key
 
-`method` Cake\\ORM\\Table::**get**($id, $options = [])
+`method` Cake\\ORM\\Table::**get**(mixed $primaryKey, array|string $finder = 'all', CacheInterface|string|null $cache = null, Closure|string|null $cacheKey = null, mixed ...$args)
 
 It is often convenient to load a single entity from the database when editing or
 viewing entities and their related data. You can do this by using `get()`:
@@ -69,26 +69,17 @@ by using the `finder` option:
 $article = $articles->get($id, 'translations');
 ```
 
-The list of options supported by get() are:
+The parameters supported by `get()` are:
 
-- `cache` cache config.
-- `key` cache key.
-- `finder` custom finder function.
-- `conditions` provide conditions for the WHERE clause of your query.
-- `limit` Set the number of rows you want.
-- `offset` Set the page offset you want. You can also use `page` to make
-  the calculation simpler.
-- `contain` define the associations to eager load.
-- `fields` limit the fields loaded into the entity. Only loading some fields
-  can cause entities to behave incorrectly.
-- `group` add a GROUP BY clause to your query. This is useful when using
-  aggregating functions.
-- `having` add a HAVING clause to your query.
-- `join` define additional custom joins.
+- `$primaryKey` The primary key value to look up.
+- `$finder` The finder to use. Can be a string finder name or an array of finder name and options.
+- `$cache` A cache config name or `CacheInterface` instance to use for read-through caching.
+- `$cacheKey` A custom cache key or `Closure` to generate one.
+- `...$args` Additional arguments passed to the finder.
 
 ## Using Finders to Load Data
 
-`method` Cake\\ORM\\Table::**find**($type, mixed ...$args)
+`method` Cake\\ORM\\Table::**find**(string $type = 'all', mixed ...$args)
 
 Before you can work with entities, you'll need to load them. The easiest way to
 do this is using the `find()` method. The find method provides a short and

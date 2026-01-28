@@ -326,7 +326,7 @@ $result = Cache::writeMany([
 
 ### Cache::add()
 
-`static` Cake\\Cache\\Cache::**add**($key, $value $config = 'default')
+`static` Cake\\Cache\\Cache::**add**(string $key, mixed $value, string $config = 'default')
 
 Using `Cache::add()` will let you atomically set a key to a value if the key
 does not already exist in the cache. If the key already exists in the cache

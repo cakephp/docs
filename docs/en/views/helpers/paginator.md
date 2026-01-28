@@ -286,7 +286,7 @@ echo $this->Paginator->meta(['first' => true, 'last' => true]);
 
 #### hasNext()
 
-`method` Cake\\View\\Helper\\PaginatorHelper::**hasNext**(string $model = null)
+`method` Cake\\View\\Helper\\PaginatorHelper::**hasNext**()
 
 #### hasPrev()
 
@@ -302,7 +302,7 @@ echo $this->Paginator->meta(['first' => true, 'last' => true]);
 
 ### Creating a Page Counter
 
-`method` Cake\\View\\Helper\\PaginatorHelper::**counter**(string $format = 'pages', array $options = [])
+`method` Cake\\View\\Helper\\PaginatorHelper::**counter**(string $format = 'pages')
 
 Returns a counter string for the paged result set. Using a provided format
 string and a number of options you can create localized and application
@@ -340,7 +340,7 @@ echo $this->Paginator->counter('range');
 
 ### Generating Pagination URLs
 
-`method` Cake\\View\\Helper\\PaginatorHelper::**generateUrl**(array $options = [], ?string $model = null, array $url = [], array $urlOptions = [])
+`method` Cake\\View\\Helper\\PaginatorHelper::**generateUrl**(array $options = [], array $url = [], array $urlOptions = [])
 
 By default returns a full pagination URL string for use in non-standard contexts
 (i.e. JavaScript). :

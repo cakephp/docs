@@ -1025,7 +1025,7 @@ file extensions
 
 ### Routing File Extensions
 
-`static` Cake\\Routing\\RouteBuilder::**extensions**(stringnull $extensions, $merge = true)
+`method` Cake\\Routing\\RouteBuilder::**setExtensions**(array|string $extensions)
 
 To handle different file extensions in your URLs, you can define the extensions
 using the `Cake\Routing\RouteBuilder::setExtensions()` method:

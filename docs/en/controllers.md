@@ -290,7 +290,7 @@ This would render **plugins/Users/templates/UserDetails/custom_file.php**
 
 ## Content Type Negotiation
 
-`method` Cake\\Controller\\Controller::**addViewClasses**()
+`method` Cake\\Controller\\Controller::**addViewClasses**(array $viewClasses)
 
 Controllers can define a list of view classes they support. After the
 controller's action is complete CakePHP will use the view list to perform
