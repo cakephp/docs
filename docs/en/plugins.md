@@ -47,7 +47,7 @@ are the plugin's src, tests and any other directories.
 If you install your plugins via `composer` or `bake` you shouldn't need to
 configure class autoloading for your plugins.
 
-If you create a plugin manually under the `plugins/` folder then will need to
+If you create a plugin manually under the `plugins/` folder then you will need to
 tell `composer` to refresh its autoloading cache:
 
 ``` bash
