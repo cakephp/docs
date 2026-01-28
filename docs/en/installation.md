@@ -46,17 +46,6 @@ The standard way to install CakePHP:
 
 ::: code-group
 
-```bash [Create Project]
-# Create a new CakePHP 5 application
-composer create-project --prefer-dist cakephp/app:~5.0 my_app_name
-
-# Navigate to your app
-cd my_app_name
-
-# Start development server
-bin/cake server
-```
-
 ```bash [Install Composer]
 # Linux/macOS
 curl -sS https://getcomposer.org/installer | php
@@ -72,6 +61,20 @@ composer --version
 
 # Verify installation
 composer --version
+```
+
+```bash [Create Project]
+# Create a new CakePHP 5 application
+composer create-project --prefer-dist cakephp/app:~5.0 my_app_name
+
+# Navigate to your app
+cd my_app_name
+
+# Start development server
+bin/cake server
+
+# Or if you have frankenphp available
+bin/cake server --frankenphp
 ```
 
 :::
