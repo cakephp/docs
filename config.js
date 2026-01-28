@@ -27,10 +27,6 @@ export default {
     hostname: "https://book.cakephp.org/5.x/",
   },
   themeConfig: {
-    vars: {
-      phpversion: '8.5',
-      minphpversion: '8.2'
-    },
     socialLinks: [
       { icon: "github", link: "https://github.com/cakephp/cakephp" },
     ],
