@@ -129,6 +129,8 @@ CakePHP の規約に従うと、手動でビューを描画したり生成した
 `Controller::set()` を使って、ビューにデータを渡すことができます。
 コントローラーからどのビュークラスを使うか、どのビューを描画すべきか、を決めることもできます。
 
+<a id="setting-view_variables"></a>
+
 ### ビュー変数の設定
 
 `method` Cake\\Controller\\Controller::**set**(string $var, mixed $value)

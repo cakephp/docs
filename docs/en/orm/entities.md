@@ -95,7 +95,11 @@ echo $article->title;
 
 You can also use the `get()` and `set()` methods.
 
+### set()
+
 `method` Cake\\ORM\\Entity::**set**($field, $value = null, array $options = [])
+
+### get()
 
 `method` Cake\\ORM\\Entity::**get**($field)
 
@@ -105,6 +109,8 @@ For example:
 $article->set('title', 'This is my first post');
 echo $article->get('title');
 ```
+
+### patch()
 
 `method` Cake\\ORM\\Entity::**patch**(array $fields, array $options = [])
 
@@ -298,7 +304,7 @@ see [Exposing Virtual Fields](#exposing-virtual-fields).
 
 ## Checking if an Entity Has Been Modified
 
-`method` Cake\\ORM\\Entity::**dirty**($field = null, $dirty = null)
+`method` Cake\\ORM\\Entity::**isDirty**(?string $field = null)
 
 You may want to make code conditional based on whether or not fields have
 changed in an entity. For example, you may only want to validate fields when
@@ -391,7 +397,7 @@ into an entity allows the user to modify any and all columns. When using
 anonymous entity classes or creating the entity class with the [Bake Console](../bake)
 CakePHP does not protect against mass-assignment.
 
-The `patchable` property allows you to provide a map of fields and
+The `_accessible` property allows you to provide a map of fields and
 whether or not they can be mass-assigned. The values `true` and `false`
 indicate whether a field can or cannot be mass-assigned:
 
@@ -402,7 +408,7 @@ use Cake\ORM\Entity;
 
 class Article extends Entity
 {
-    protected array $patchable = [
+    protected array $_accessible = [
         'title' => true,
         'body' => true
     ];
@@ -419,7 +425,7 @@ use Cake\ORM\Entity;
 
 class Article extends Entity
 {
-    protected array $patchable = [
+    protected array $_accessible = [
         'title' => true,
         'body' => true,
         '*' => false,
@@ -443,15 +449,15 @@ $article = new Article(['id' => 1, 'title' => 'Foo'], ['guard' => false]);
 
 ### Modifying the Guarded Fields at Runtime
 
-You can modify the list of guarded fields at runtime using the `setPatchable()`
+You can modify the list of guarded fields at runtime using the `setAccess()`
 method:
 
 ``` php
 // Make user_id accessible.
-$article->setPatchable('user_id', true);
+$article->setAccess('user_id', true);
 
 // Make title guarded.
-$article->setPatchable('title', false);
+$article->setAccess('title', false);
 ```
 
 > [!NOTE]

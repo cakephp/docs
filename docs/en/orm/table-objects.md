@@ -174,7 +174,7 @@ public function afterSaveCommit(Event $event, EntityInterface $entity, ArrayObje
 
 ### initialize
 
-`method` Cake\\ORM\\Table::**initialize**(EventInterface $event, ArrayObject $data, ArrayObject $options)
+`method` Cake\\ORM\\Table::**initialize**(EventInterface $event, ArrayObject $data, ArrayObject $options): void
 
 The `Model.initialize` event is fired after the constructor and initialize
 methods are called. The `Table` classes do not listen to this event by
@@ -214,14 +214,14 @@ This will call the `initializeEvent` when any `Table` class is constructed.
 
 ### beforeMarshal
 
-`method` Cake\\ORM\\Table::**beforeMarshal**(EventInterface $event, ArrayObject $data, ArrayObject $options)
+`method` Cake\\ORM\\Table::**beforeMarshal**(EventInterface $event, ArrayObject $data, ArrayObject $options): void
 
 The `Model.beforeMarshal` event is fired before request data is converted
 into entities. See the [Before Marshal](../orm/saving-data#before-marshal) documentation for more information.
 
 ### afterMarshal
 
-`method` Cake\\ORM\\Table::**afterMarshal**(EventInterface $event, EntityInterface $entity, ArrayObject $data, ArrayObject $options)
+`method` Cake\\ORM\\Table::**afterMarshal**(EventInterface $event, EntityInterface $entity, ArrayObject $data, ArrayObject $options): void
 
 The `Model.afterMarshal` event is fired after request data is converted
 into entities. Event handlers will get the converted entities, original request
@@ -229,7 +229,7 @@ data and the options provided to the `patchEntity()` or `newEntity()` call.
 
 ### beforeFind
 
-`method` Cake\\ORM\\Table::**beforeFind**(EventInterface $event, SelectQuery $query, ArrayObject $options, boolean $primary)
+`method` Cake\\ORM\\Table::**beforeFind**(EventInterface $event, SelectQuery $query, ArrayObject $options, boolean $primary): void
 
 The `Model.beforeFind` event is fired before each find operation. By stopping
 the event, and feeding the query with a custom result set, you can bypass the find
@@ -266,7 +266,7 @@ been replaced with the [Map Reduce](../orm/retrieving-data-and-resultsets#map-re
 
 ### buildValidator
 
-`method` Cake\\ORM\\Table::**buildValidator**(EventInterface $event, Validator $validator, $name)
+`method` Cake\\ORM\\Table::**buildValidator**(EventInterface $event, Validator $validator, $name): void
 
 The `Model.buildValidator` event is fired when `$name` validator is created.
 Behaviors, can use this hook to add in validation methods.
@@ -280,7 +280,7 @@ created and after the `Table::buildRules()` method has been called.
 
 ### beforeRules
 
-`method` Cake\\ORM\\Table::**beforeRules**(EventInterface $event, EntityInterface $entity, ArrayObject $options, $operation)
+`method` Cake\\ORM\\Table::**beforeRules**(EventInterface $event, EntityInterface $entity, ArrayObject $options, $operation): void
 
 The `Model.beforeRules` event is fired before an entity has had rules applied. By
 stopping this event, you can halt the rules checking and set the result
@@ -288,7 +288,7 @@ of applying rules.
 
 ### afterRules
 
-`method` Cake\\ORM\\Table::**afterRules**(EventInterface $event, EntityInterface $entity, ArrayObject $options, $result, $operation)
+`method` Cake\\ORM\\Table::**afterRules**(EventInterface $event, EntityInterface $entity, ArrayObject $options, $result, $operation): void
 
 The `Model.afterRules` event is fired after an entity has rules applied. By
 stopping this event, you can return the final value of the rules checking
@@ -296,7 +296,7 @@ operation.
 
 ### beforeSave
 
-`method` Cake\\ORM\\Table::**beforeSave**(EventInterface $event, EntityInterface $entity, ArrayObject $options)
+`method` Cake\\ORM\\Table::**beforeSave**(EventInterface $event, EntityInterface $entity, ArrayObject $options): void
 
 The `Model.beforeSave` event is fired before each entity is saved. Stopping
 this event will abort the save operation. When the event is stopped the result
@@ -304,13 +304,13 @@ of the event will be returned.
 
 ### afterSave
 
-`method` Cake\\ORM\\Table::**afterSave**(EventInterface $event, EntityInterface $entity, ArrayObject $options)
+`method` Cake\\ORM\\Table::**afterSave**(EventInterface $event, EntityInterface $entity, ArrayObject $options): void
 
 The `Model.afterSave` event is fired after an entity is saved.
 
 ### afterSaveCommit
 
-`method` Cake\\ORM\\Table::**afterSaveCommit**(EventInterface $event, EntityInterface $entity, ArrayObject $options)
+`method` Cake\\ORM\\Table::**afterSaveCommit**(EventInterface $event, EntityInterface $entity, ArrayObject $options): void
 
 The `Model.afterSaveCommit` event is fired after the transaction in which the
 save operation is wrapped has been committed. It's also triggered for non atomic
@@ -320,7 +320,7 @@ not triggered if a transaction is started before calling save.
 
 ### beforeDelete
 
-`method` Cake\\ORM\\Table::**beforeDelete**(EventInterface $event, EntityInterface $entity, ArrayObject $options)
+`method` Cake\\ORM\\Table::**beforeDelete**(EventInterface $event, EntityInterface $entity, ArrayObject $options): void
 
 The `Model.beforeDelete` event is fired before an entity is deleted. By
 stopping this event you will abort the delete operation. When the event is stopped the result
@@ -328,13 +328,13 @@ of the event will be returned.
 
 ### afterDelete
 
-`method` Cake\\ORM\\Table::**afterDelete**(EventInterface $event, EntityInterface $entity, ArrayObject $options)
+`method` Cake\\ORM\\Table::**afterDelete**(EventInterface $event, EntityInterface $entity, ArrayObject $options): void
 
 The `Model.afterDelete` event is fired after an entity has been deleted.
 
 ### afterDeleteCommit
 
-`method` Cake\\ORM\\Table::**afterDeleteCommit**(EventInterface $event, EntityInterface $entity, ArrayObject $options)
+`method` Cake\\ORM\\Table::**afterDeleteCommit**(EventInterface $event, EntityInterface $entity, ArrayObject $options): void
 
 The `Model.afterDeleteCommit` event is fired after the transaction in which the
 delete operation is wrapped has been is committed. It's also triggered for non
@@ -539,7 +539,7 @@ FactoryLocator::get('Table')->setConfig('Users', ['table' => 'my_users']);
 
 ### Flushing the Registry
 
-`method` Cake\\ORM\\TableLocator::**clear**()
+`method` Cake\\ORM\\TableLocator::**clear**(): void
 
 During test cases you may want to flush the registry. Doing so is often useful
 when you are using mock objects, or modifying a table's dependencies:

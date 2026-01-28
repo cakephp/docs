@@ -154,7 +154,7 @@ use Cake\ORM\Entity;
 
 class Article extends Entity
 {
-    protected array $patchable = [
+    protected array $_accessible = [
         'title' => true,
         'body' => true,
         'published' => true,
@@ -166,7 +166,7 @@ class Article extends Entity
 ```
 
 エンティティーは、今はとてもスリムです。そして、 [Entities Mass Assignment](../../orm/entities#entities-mass-assignment) によって
-どのようにプロパティーを変更できるかを制御するプロパティー `patchable` をセットアップしました。
+どのようにプロパティーを変更できるかを制御するプロパティー `_accessible` をセットアップしました。
 
 このモデルは、今は動きませんが、次は最初の
 [コントローラーとテンプレート](../../tutorials-and-examples/cms/articles-controller)

@@ -339,13 +339,13 @@ protected function _getTagString()
 
 計算済みのプロパティー `$bookmark->tag_string` にアクセスできるようになります。
 このプロパティーはあとで入力時に使用します。 あとで保存するので `tag_string` プロパティーを
-エンティティーの `patchable` リストに追加することを忘れないでください。
+エンティティーの `_accessible` リストに追加することを忘れないでください。
 
-**src/Model/Entity/Bookmark.php** で `$patchable` に `tag_string` を
+**src/Model/Entity/Bookmark.php** で `$_accessible` に `tag_string` を
 このように追加してください。 :
 
 ``` php
-protected array $patchable = [
+protected array $_accessible = [
     'user_id' => true,
     'title' => true,
     'description' => true,

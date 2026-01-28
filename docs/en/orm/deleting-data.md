@@ -2,7 +2,9 @@
 
 `class` Cake\\ORM\\**Table**
 
-`method` Cake\\ORM\\Table::**delete**(EntityInterface $entity, array $options = [])
+## Deleting a Single Entity
+
+`method` Cake\\ORM\\Table::**delete**(EntityInterface $entity, array $options = []): bool
 
 Once you've loaded an entity you can delete it by calling the originating
 table's delete method:
@@ -64,7 +66,7 @@ $this->hasMany('Comments', [
 
 ## Bulk Deletes
 
-`method` Cake\\ORM\\Table::**deleteMany**(iterable $entities, array $options = [])
+`method` Cake\\ORM\\Table::**deleteMany**(iterable $entities, array $options = []): iterable|false
 
 If you have an array of entities you want to delete you can use `deleteMany()`
 to delete them in a single transaction:
@@ -80,7 +82,9 @@ $this->Articles->deleteManyOrFail($entities);
 The `$options` for these methods are the same as `delete()`. Deleting
 records with these method **will** trigger events.
 
-`method` Cake\\ORM\\Table::**deleteAll**($conditions)
+### deleteAll()
+
+`method` Cake\\ORM\\Table::**deleteAll**($conditions): int
 
 There may be times when deleting rows one by one is not efficient or useful.
 In these cases it is more performant to use a bulk-delete to remove many rows at
@@ -104,7 +108,7 @@ function returns the number of deleted records as an integer.
 
 ## Strict Deletes
 
-`method` Cake\\ORM\\Table::**deleteOrFail**(EntityInterface $entity, array $options = [])
+`method` Cake\\ORM\\Table::**deleteOrFail**(EntityInterface $entity, array $options = []): bool
 
 Using this method will throw an
 `Cake\ORM\Exception\PersistenceFailedException` if:

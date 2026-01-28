@@ -333,7 +333,7 @@ public function findTagged(Query $query, array $options)
 use Cake\Collection\Collection;
 
 // アクセス可能なプロパティに `tag_string` を含めるよう更新します
-protected array $patchable = [
+protected array $_accessible = [
     // その他のフィールドも追加可能
     'tag_string' => true
 ];

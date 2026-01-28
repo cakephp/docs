@@ -8,9 +8,13 @@ hashing and encrypting data.
 
 ## Encrypting and Decrypting Data
 
-`static` Cake\\Utility\\Security::**encrypt**($text, $key, $hmacSalt = null)
+### Security::encrypt()
 
-`static` Cake\\Utility\\Security::**decrypt**($cipher, $key, $hmacSalt = null)
+`static` Cake\\Utility\\Security::**encrypt**(string $plain, string $key, ?string $hmacSalt = null): string
+
+### Security::decrypt()
+
+`static` Cake\\Utility\\Security::**decrypt**(string $cipher, string $key, ?string $hmacSalt = null): ?string
 
 Encrypt `$text` using AES-256. The `$key` should be a value with a
 lots of variance in the data much like a good password. The returned result
@@ -51,7 +55,9 @@ If the value cannot be decrypted due to changes in the key or HMAC salt
 
 ## Hashing Data
 
-`static` Cake\\Utility\\Security::**hash**( $string, $type = NULL, $salt = false )
+### Security::hash()
+
+`static` Cake\\Utility\\Security::**hash**(string $string, ?string $algorithm = null, string|bool $salt = false): string
 
 Create a hash from string using given method. Fallback on next
 available method. If `$salt` is set to `true`, the application's salt
@@ -83,7 +89,9 @@ And any other hash algorithm that PHP's `hash()` function supports.
 
 ## Getting Secure Random Data
 
-`static` Cake\\Utility\\Security::**randomBytes**($length)
+### Security::randomBytes()
+
+`static` Cake\\Utility\\Security::**randomBytes**(int $length): string
 
 Get `$length` number of bytes from a secure random source. This function draws
 data from one of the following sources:
@@ -94,7 +102,9 @@ data from one of the following sources:
 If neither source is available a warning will be emitted and an unsafe value
 will be used for backwards compatibility reasons.
 
-`static` Cake\\Utility\\Security::**randomString**($length)
+### Security::randomString()
+
+`static` Cake\\Utility\\Security::**randomString**(int $length = 64): string
 
 Get a random string `$length` long from a secure random source. This method
 draws from the same random source as `randomBytes()` and will encode the data

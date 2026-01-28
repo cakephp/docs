@@ -147,7 +147,9 @@ echo $time->timezoneName; // America/New_York
 
 ## Formatting
 
-`static` Cake\\I18n\\DateTime::**setJsonEncodeFormat**($format)
+### DateTime::setJsonEncodeFormat()
+
+`static` Cake\\I18n\\DateTime::**setJsonEncodeFormat**($format): void
 
 This method sets the default format used when converting an object to json:
 
@@ -175,7 +177,9 @@ Date::setJsonEncodeFormat(static function($time) {
 The `callable` parameter type was added.
 :::
 
-`method` Cake\\I18n\\DateTime::**i18nFormat**($format = null, $timezone = null, $locale = null)
+### DateTime::i18nFormat()
+
+`method` Cake\\I18n\\DateTime::**i18nFormat**($format = null, $timezone = null, $locale = null): string|int
 
 A very common thing to do with `Time` instances is to print out formatted
 dates. CakePHP makes this a snap:
@@ -241,7 +245,9 @@ The following calendar types are supported:
 > that feeds its data from CLDR (<https://cldr.unicode.org/>) which version
 > may vary depending on PHP installation and give different results.
 
-`method` Cake\\I18n\\DateTime::**nice**()
+### DateTime::nice()
+
+`method` Cake\\I18n\\DateTime::**nice**(): string
 
 Print out a predefined 'nice' format:
 
@@ -333,7 +339,9 @@ format string.
 
 ### Formatting Relative Times
 
-`method` Cake\\I18n\\DateTime::**timeAgoInWords**(array $options = [])
+### DateTime::timeAgoInWords()
+
+`method` Cake\\I18n\\DateTime::**timeAgoInWords**(array $options = []): string
 
 Often it is useful to print times relative to the present:
 
@@ -370,9 +378,13 @@ echo $time->timeAgoInWords([
 
 ## Conversion
 
-`method` Cake\\I18n\\DateTime::**toQuarter**()
+### DateTime::toQuarter()
 
-`method` Cake\\I18n\\DateTime::**toQuarterRange**()
+`method` Cake\\I18n\\DateTime::**toQuarter**(): int|array
+
+### DateTime::toQuarterRange()
+
+`method` Cake\\I18n\\DateTime::**toQuarterRange**(): array
 
 Once created, you can convert `DateTime` instances into timestamps or quarter
 values:
@@ -401,11 +413,19 @@ $range = $time->toQuarterRange();
 
 ## Comparing With the Present
 
+### DateTime::isYesterday()
+
 `method` Cake\\I18n\\DateTime::**isYesterday**()
+
+### DateTime::isThisWeek()
 
 `method` Cake\\I18n\\DateTime::**isThisWeek**()
 
+### DateTime::isThisMonth()
+
 `method` Cake\\I18n\\DateTime::**isThisMonth**()
+
+### DateTime::isThisYear()
 
 `method` Cake\\I18n\\DateTime::**isThisYear**()
 
@@ -425,6 +445,8 @@ not the `DateTime` instance matches the present.
 
 ## Comparing With Intervals
 
+### DateTime::isWithinNext()
+
 `method` Cake\\I18n\\DateTime::**isWithinNext**($interval)
 
 You can see if a `DateTime` instance falls within a given range using
@@ -439,6 +461,8 @@ debug($time->isWithinNext('2 days'));
 // Within 2 next weeks. Outputs 'true'
 debug($time->isWithinNext('2 weeks'));
 ```
+
+### DateTime::wasWithinLast()
 
 `method` Cake\\I18n\\DateTime::**wasWithinLast**($interval)
 

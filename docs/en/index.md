@@ -1,11 +1,11 @@
 ---
-title: CakePHP 6 Documentation - Build Better Web Applications Faster
-description: Official CakePHP 6 documentation. Learn how to build modern PHP web applications with convention over configuration, powerful ORM, built-in security, and rapid development tools.
+title: CakePHP 5 Documentation - Build Better Web Applications Faster
+description: Official CakePHP 5 documentation. Learn how to build modern PHP web applications with convention over configuration, powerful ORM, built-in security, and rapid development tools.
 outline: 2
 ---
 # Build Better Web Applications, Faster
 
-**CakePHP 6** is a modern PHP framework running on PHP |phpversion| (min. PHP |minphpversion|) that helps you write clean, maintainable code without the complexity. Whether you're building a simple blog or a complex enterprise application, CakePHP gives you the tools to get it done right.
+**CakePHP 5** is a modern PHP framework running on PHP |phpversion| (min. PHP |minphpversion|) that helps you write clean, maintainable code without the complexity. Whether you're building a simple blog or a complex enterprise application, CakePHP gives you the tools to get it done right.
 
 ::: tip Perfect for
 ✅ Developers who value **convention over configuration**<br>

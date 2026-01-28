@@ -120,8 +120,8 @@ we prepared with `set()`.
 Now that you are familiar with the different layers in CakePHP, lets review how
 a request cycle works in CakePHP:
 
-<figure class="align-center">
-<img src="/typical-cake-request.png" alt="Flow diagram showing a typical CakePHP request" />
+<figure>
+<img src="/typical-cake-request.png" alt="Flow diagram showing a typical CakePHP request" style="margin: 0 auto" />
 </figure>
 
 The typical CakePHP request cycle starts with a user requesting a page or

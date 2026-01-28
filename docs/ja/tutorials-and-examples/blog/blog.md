@@ -181,7 +181,7 @@ return [
 新しいユーザーは mod_rewrite でつまずくことがよくあります。例えば CakePHP の
 ウェルカムページが少しおかしくなったりします (画像が表示されない、CSS が効いていない)。
 これはおそらく、システム上の mod_rewrite が機能していないということです。
-[Url Rewriting](../../installation#url-rewriting) セクションを参照して、URL リライティングが有効になるように設定してください。
+[Url Rewriting](../../installation#without-url-rewriting) セクションを参照して、URL リライティングが有効になるように設定してください。
 
 はじめての CakePHP アプリケーションを構築しはじめるには、続けて
 [ブログチュートリアル - パート2](../../tutorials-and-examples/blog/part-two)

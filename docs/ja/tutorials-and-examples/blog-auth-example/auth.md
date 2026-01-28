@@ -141,7 +141,7 @@ use Cake\ORM\Entity;
 class User extends Entity
 {
     // 主キーフィールドである「id」以外のすべてのフィールドを一括代入可能にします。
-    protected array $patchable = [
+    protected array $_accessible = [
         '*' => true,
         'id' => false
     ];

@@ -141,7 +141,7 @@ $entity = $articles->newEntity($this->request->getData());
 > [!NOTE]
 > If you are using newEntity() and the resulting entities are missing some or
 > all of the data they were passed, double check that the columns you want to
-> set are listed in the `$patchable` property of your entity. See [Entities Mass Assignment](../orm/entities#entities-mass-assignment).
+> set are listed in the `$_accessible` property of your entity. See [Entities Mass Assignment](../orm/entities#entities-mass-assignment).
 
 The request data should follow the structure of your entities. For example if
 you have an article, which belonged to a user, and had many comments, your
@@ -395,8 +395,8 @@ $articles->saveManyOrFail($entities);
 ### Changing Accessible Fields
 
 It's also possible to allow `newEntity()` to write into non accessible fields.
-For example, `id` is usually absent from the `patchable` property. In
-such case, you can use the `patchableFields` option. It could be useful to
+For example, `id` is usually absent from the `_accessible` property. In
+such case, you can use the `accessibleFields` option. It could be useful to
 keep ids of associated entities:
 
 ``` php
@@ -408,7 +408,7 @@ $entity = $articles->newEntity($this->request->getData(), [
         'Tags', 'Comments' => [
             'associated' => [
                 'Users' => [
-                    'patchableFields' => ['id' => true],
+                    'accessibleFields' => ['id' => true],
                 ],
             ],
         ],
@@ -422,7 +422,7 @@ concerned entity.
 > [!NOTE]
 > If you are using newEntity() and the resulting entities are missing some or
 > all of the data they were passed, double check that the columns you want to
-> set are listed in the `$patchable` property of your entity. See
+> set are listed in the `$_accessible` property of your entity. See
 > [Entities Mass Assignment](../orm/entities#entities-mass-assignment).
 
 ### Merging Request Data Into Entities
@@ -522,7 +522,7 @@ If a Product belongsToMany Tag:
 
 ``` php
 // in the Product Entity
-protected array $patchable = [
+protected array $_accessible = [
     // .. other properties
    'tags' => true,
 ];
@@ -795,7 +795,7 @@ The `strictFields` option was added in 5.3.0.
 
 ## Saving Entities
 
-`method` Cake\\ORM\\Table::**save**(Entity $entity, array $options = [])
+`method` Cake\\ORM\\Table::**save**(Entity $entity, array $options = []): EntityInterface|false
 
 When saving request data to your database you need to first hydrate a new entity
 using `newEntity()` for passing into `save()`. For example:
@@ -1253,7 +1253,7 @@ would not normally be able to.
 
 ## Strict Saving
 
-`method` Cake\\ORM\\Table::**saveOrFail**(EntityInterface $entity, array $options = [])
+`method` Cake\\ORM\\Table::**saveOrFail**(EntityInterface $entity, array $options = []): EntityInterface
 
 Using this method will throw an
 `Cake\ORM\Exception\PersistenceFailedException` if:
@@ -1285,7 +1285,7 @@ corresponding save events will be triggered.
 
 ## Find or Create an Entity
 
-`method` Cake\\ORM\\Table::**findOrCreate**($search, $callback = null, $options = [])
+`method` Cake\\ORM\\Table::**findOrCreate**($search, $callback = null, $options = []): EntityInterface
 
 Find an existing record based on `$search` or create a new record using the
 properties in `$search` and calling the optional `$callback`. This method is
@@ -1344,7 +1344,7 @@ $table->saveOrFail($record);
 
 ## Saving Multiple Entities
 
-`method` Cake\\ORM\\Table::**saveMany**(iterable $entities, array $options = [])
+`method` Cake\\ORM\\Table::**saveMany**(iterable $entities, array $options = []): iterable|false
 
 Using this method you can save multiple entities atomically. `$entities` can
 be an array of entities created using `newEntities()` / `patchEntities()`.
@@ -1371,7 +1371,7 @@ The result will be updated entities on success or `false` on failure.
 
 ## Bulk Updates
 
-`method` Cake\\ORM\\Table::**updateAll**($fields, $conditions)
+`method` Cake\\ORM\\Table::**updateAll**($fields, $conditions): int
 
 There may be times when updating rows individually is not efficient or
 necessary. In these cases it is more efficient to use a bulk-update to modify

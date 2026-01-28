@@ -120,6 +120,8 @@ greedy star, trailing star
 
 </div>
 
+<a id="routes-configuration"></a>
+
 ## ルートを接続<span id="connecting-routes"></span>
 
 コードを `DRY` に保つために 'ルーティングスコープ' を使用してください。

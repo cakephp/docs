@@ -143,7 +143,7 @@ $entity = $articles->newEntity($this->request->getData());
 > [!NOTE]
 > もし newEntity() を使っていて、返されてきたエンティティーが渡したデータのいくつか
 > またはすべてを失っている場合は、設定したいカラムがそのエンティティーの
-> `$patchable` プロパティーに列挙されているかをもう一度確認してみてください。
+> `$_accessible` プロパティーに列挙されているかをもう一度確認してみてください。
 > [Entities Mass Assignment](../orm/entities#entities-mass-assignment) をご覧ください。
 
 リクエストデータはあなたのエンティティーの構造に従っていなければなりません。
@@ -394,8 +394,8 @@ $articles->getConnection()->transactional(function () use ($articles, $entities)
 ### アクセス可能なフィールドの変更
 
 `newEntity()` に、アクセス不可能なフィールドに書き込ませることもできます。
-例えば `id` は通常は `patchable` プロパティーから外れます。
-そうした場合には、 `patchableFields` オプションを使うことができます。
+例えば `id` は通常は `_accessible` プロパティーから外れます。
+そうした場合には、 `accessibleFields` オプションを使うことができます。
 これは関連付けられたエンティティーの ID を維持するために便利かもしれません。 :
 
 ``` php
@@ -407,7 +407,7 @@ $entity = $articles->newEntity($this->request->getData(), [
         'Tags', 'Comments' => [
             'associated' => [
                 'Users' => [
-                    'patchableFields' => ['id' => true],
+                    'accessibleFields' => ['id' => true],
                 ],
             ],
         ],
@@ -421,7 +421,7 @@ $entity = $articles->newEntity($this->request->getData(), [
 > [!NOTE]
 > もし newEntity() を使っていて、返されてきたエンティティーが渡したデータのいくつか
 > またはすべてを失っている場合は、設定したいカラムがそのエンティティーの
-> `$patchable` プロパティーに列挙されているかをもう一度確認してみてください。
+> `$_accessible` プロパティーに列挙されているかをもう一度確認してみてください。
 > [Entities Mass Assignment](../orm/entities#entities-mass-assignment) をご覧ください。
 
 ### リクエストデータをエンティティーにマージ
@@ -518,7 +518,7 @@ hasMany の belongsToMany アソシエーションについても同じことが
 
 ``` php
 // Product エンティティーの中で
-protected array $patchable = [
+protected array $_accessible = [
     // .. 他のプロパティー
    'tags' => true,
 ];

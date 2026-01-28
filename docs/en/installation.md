@@ -1,463 +1,348 @@
+---
+title: Installation Guide
+description: Learn how to install CakePHP using Composer, Docker, or DDEV. Complete setup guide for PHP 8.2+ with all system requirements and web server configurations.
+---
+
 # Installation
 
-CakePHP has a few system requirements:
+CakePHP is designed to be easy to install and configure. This guide will walk you through getting CakePHP up and running in just a few minutes.
 
-- HTTP Server. For example: Apache. Having mod_rewrite is preferred, but
-  by no means required. You can also use nginx, or Microsoft IIS if you prefer.
-- Minimum PHP |minphpversion| (|phpversion| supported). - mbstring PHP extension - intl PHP extension - SimpleXML PHP extension - PDO PHP extension
+## System Requirements
 
-> [!NOTE]
-> In XAMPP, intl extension is included but you have to uncomment
-> `extension=php_intl.dll` (or `extension=intl`) in **php.ini** and restart the server through
-> the XAMPP Control Panel.
->
-> In WAMP, the intl extension is "activated" by default but not working.
-> To make it work you have to go to php folder (by default)
-> **C:\wamp\bin\php\php{version}**, copy all the files that looks like
-> **icu\*.dll** and paste them into the apache bin directory
-> **C:\wamp\bin\apache\apache{version}\bin**. Then restart all services
-> and it should be OK.
-
-While a database engine isn't required, we imagine that most applications will
-utilize one. CakePHP supports a variety of database storage engines:
-
-- MySQL (5.7 or higher)
-- MariaDB (10.1 or higher)
-- PostgreSQL (9.6 or higher)
-- Microsoft SQL Server (2012 or higher)
-- SQLite 3
-
-The Oracle database is supported through the
-[Driver for Oracle Database](https://github.com/CakeDC/cakephp-oracle-driver)
-community plugin.
-
-> [!NOTE]
-> All built-in drivers require PDO. You should make sure you have the correct
-> PDO extensions installed.
-
-## Installing CakePHP
-
-Before starting you should make sure that your PHP version is up to date:
-
-``` bash
+::: tip Quick Check
+Verify your PHP version meets the requirements:
+```bash
 php -v
 ```
+:::
 
-You should have PHP |minphpversion| (CLI) or higher. Your webserver's PHP version must also be of |minphpversion| or higher, and should be the same version your command line interface (CLI) uses.
+**Minimum Requirements:**
 
-### Installing Composer
+| Component | Version |
+|-----------|---------|
+| PHP | |minphpversion| (|phpversion| supported) |
+| Extensions | `mbstring`, `intl`, `pdo`, `simplexml` |
+| Composer | Latest stable |
 
-CakePHP uses [Composer](https://getcomposer.org), a dependency management tool,
-as the officially supported method for installation.
+**Supported Databases:**
 
-- Installing Composer on Linux and macOS
+- MySQL 5.7+
+- MariaDB 10.1+
+- PostgreSQL 9.6+
+- Microsoft SQL Server 2012+
+- SQLite 3.8.9+
 
-  1.  Run the installer script as described in the
-      [official Composer documentation](https://getcomposer.org/download/)
-      and follow the instructions to install Composer.
+::: warning Web Server Requirements
+Your web server's PHP version must match your CLI PHP version (|minphpversion|+). All database drivers require the appropriate PDO extension.
+:::
 
-  2.  Execute the following command to move the composer.phar to a directory
-      that is in your path:
+## Installation Methods
 
-          mv composer.phar /usr/local/bin/composer
+Choose the method that best fits your workflow:
 
-- Installing Composer on Windows
+### Method 1: Composer (Recommended)
 
-  For Windows systems, you can download Composer's Windows installer
-  [here](https://github.com/composer/windows-setup/releases/). Further
-  instructions for Composer's Windows installer can be found within the
-  README [here](https://github.com/composer/windows-setup).
+The standard way to install CakePHP:
 
-### Create a CakePHP Project
+::: code-group
 
-You can create a new CakePHP application using composer's `create-project`
-command:
+```bash [Install Composer]
+# Linux/macOS
+curl -sS https://getcomposer.org/installer | php
+sudo mv composer.phar /usr/local/bin/composer
 
-``` bash
-composer create-project --prefer-dist cakephp/app:~5.0 my_app_name
+# Verify installation
+composer --version
 ```
 
-Once Composer finishes downloading the application skeleton and the core CakePHP
-library, you should have a functioning CakePHP application installed via
-Composer. Be sure to keep the composer.json and composer.lock files with the
-rest of your source code.
+```powershell [Windows]
+# Download and run the Windows installer
+# https://getcomposer.org/Composer-Setup.exe
 
-You can now visit the path to where you installed your CakePHP application and
-see the default home page. To change the content of this page, edit
-**templates/Pages/home.php**.
-
-Although composer is the recommended installation method, there are
-pre-installed downloads available on
-[Github](https://github.com/cakephp/cakephp/tags).
-Those downloads contain the app skeleton with all vendor packages installed.
-Also it includes the `composer.phar` so you have everything you need for
-further use.
-
-### Keeping Up To Date with the Latest CakePHP Changes
-
-By default this is what your application **composer.json** looks like:
-
-``` json
-"require": {
-    "cakephp/cakephp": "5.0.*"
-}
+# Verify installation
+composer --version
 ```
 
-Each time you run `php composer.phar update` you will receive patch
-releases for this minor version. You can instead change this to `^5.0` to
-also receive the latest stable minor releases of the `5.x` branch.
+```bash [Create Project]
+# Create a new CakePHP 5 application
+composer create-project --prefer-dist cakephp/app:~|cakeversion| my_app_name
 
-### Installation using DDEV
+# Navigate to your app
+cd my_app_name
 
-Another quick way to install CakePHP is via [DDEV](https://ddev.com/).
-It is an open source tool for launching local web development environments.
+# Start development server
+bin/cake server
 
-If you want to configure a new project, you just need:
+# Or if you have frankenphp available
+bin/cake server --frankenphp
+```
 
-    mkdir my-cakephp-app
-    cd my-cakephp-app
-    ddev config --project-type=cakephp --docroot=webroot
-    ddev composer create --prefer-dist cakephp/app:~5.0
-    ddev launch
+:::
 
-If you have an existing project:
+::: tip Version Constraints
+Your `composer.json` version constraint controls updates:
+- `"cakephp/cakephp": "|cakeversion|.*"` - Patch releases only (recommended)
+- `"cakephp/cakephp": "^|cakeversion|"` - Minor + patch releases (may require config changes)
+:::
 
-``` text
-git clone <your-cakephp-repo>
-cd <your-cakephp-project>
+### Method 2: DDEV (Fast Setup)
+
+Perfect for local development environments:
+
+::: code-group
+
+```bash [New Project]
+# Create and configure project
+mkdir my-cakephp-app && cd my-cakephp-app
 ddev config --project-type=cakephp --docroot=webroot
-ddev composer install
+ddev composer create --prefer-dist cakephp/app:~|cakeversion|
+
+# Launch in browser
 ddev launch
 ```
 
-Please check [DDEV Docs](https://ddev.readthedocs.io/) for details on how to install / update DDEV.
+```bash [Existing Project]
+# Clone your repository
+git clone <your-cakephp-repo>
+cd <your-cakephp-project>
 
-> [!NOTE]
-> IMPORTANT: This is not a deployment script. It is aimed to help developers
-> to set up a development environment quickly. It is not intended for
-> production environments.
+# Configure DDEV
+ddev config --project-type=cakephp --docroot=webroot
+ddev composer install
 
-## Permissions
-
-CakePHP uses the **tmp** directory for a number of different operations.
-Model descriptions, cached views, and session information are a few
-examples. The **logs** directory is used to write log files by the default
-`FileLog` engine.
-
-As such, make sure the directories **logs**, **tmp** and all its subdirectories
-in your CakePHP installation are writable by the web server user. Composer's
-installation process makes **tmp** and its subfolders globally writeable to get
-things up and running quickly but you can update the permissions for better
-security and keep them writable only for the web server user.
-
-One common issue is that **logs** and **tmp** directories and subdirectories
-must be writable both by the web server and the command line user. On a UNIX
-system, if your web server user is different from your command line user, you
-can run the following commands from your application directory just once in your
-project to ensure that permissions will be setup properly:
-
-``` bash
-HTTPDUSER=`ps aux | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1`
-setfacl -R -m u:${HTTPDUSER}:rwx tmp
-setfacl -R -d -m u:${HTTPDUSER}:rwx tmp
-setfacl -R -m u:${HTTPDUSER}:rwx logs
-setfacl -R -d -m u:${HTTPDUSER}:rwx logs
+# Launch in browser
+ddev launch
 ```
 
-In order to use the CakePHP console tools, you need to ensure that
-`bin/cake` file is executable. On \*nix or macOS, you can
-execute:
+:::
 
-``` bash
+::: info Learn More
+Check [DDEV Documentation](https://ddev.readthedocs.io/) for installation and advanced configuration.
+:::
+
+### Method 3: Docker
+
+For containerized development:
+
+```bash
+# Create project using Composer in Docker
+docker run --rm -v $(pwd):/app composer create-project \
+  --prefer-dist cakephp/app:~|cakeversion| my_app
+
+# Start PHP development server (install required extensions first)
+cd my_app
+docker run -it --rm -p 8765:8765 -v $(pwd):/app \
+  -w /app php:8.2-cli bash -c "apt-get update && apt-get install -y libicu-dev && docker-php-ext-install intl mbstring && php bin/cake server -H 0.0.0.0"
+```
+
+::: warning Development Only
+The built-in server is for development only. Never use it in production environments.
+:::
+
+## File Permissions
+
+CakePHP uses the **tmp** and **logs** directories for various operations like caching, sessions, and logging.
+
+::: warning Permission Setup Required
+Ensure **logs** and **tmp** (including all subdirectories) are writable by your web server user.
+:::
+
+### Quick Setup (Unix/Linux/macOS)
+
+If your web server and CLI users differ, set permissions for the directories:
+
+::: code-group
+
+```bash [Linux with ACL]
+# Auto-detect web server user and set permissions using ACL
+HTTPDUSER=`ps aux | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1`
+setfacl -R -m u:${HTTPDUSER}:rwx tmp logs
+setfacl -R -d -m u:${HTTPDUSER}:rwx tmp logs
+```
+
+```bash [macOS / Without ACL]
+# Auto-detect web server user and set permissions using chmod
+HTTPDUSER=`ps aux | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1`
+sudo chown -R $(whoami):${HTTPDUSER} tmp logs
+sudo chmod -R 775 tmp logs
+```
+
+```bash [Simple Alternative]
+# If auto-detection doesn't work, use broader permissions
+chmod -R 777 tmp logs
+```
+
+:::
+
+::: warning macOS Note
+macOS does not include `setfacl` by default. Use the chmod method or install ACL tools via Homebrew: `brew install acl`
+:::
+
+### Make Console Executable
+
+::: code-group
+
+```bash [Unix/Linux/macOS]
 chmod +x bin/cake
 ```
 
-On Windows, the **.bat** file should be executable already. If you are using
-a Vagrant, or any other virtualized environment, any shared directories need to
-be shared with execute permissions (Please refer to your virtualized
-environment's documentation on how to do this).
+```bash [Windows]
+# .bat file is already executable
+# For WSL or shared directories, ensure execute permissions are shared
+```
 
-If, for whatever reason, you cannot change the permissions of the `bin/cake`
-file, you can run the CakePHP console with:
-
-``` bash
+```bash [Alternative]
+# If you cannot change permissions
 php bin/cake.php
 ```
 
+:::
+
 ## Development Server
 
-A development installation is the fastest way to setup CakePHP. In this
-example, we use CakePHP's console to run PHP's built-in web server which
-will make your application available at **http://host:port**. From the app
-directory, execute:
+The fastest way to get started. CakePHP includes a development server built on PHP's built-in web server:
 
-``` bash
+::: code-group
+
+```bash [Default]
+# Starts at http://localhost:8765
 bin/cake server
 ```
 
-By default, without any arguments provided, this will serve your application at
-**http://localhost:8765/**.
-
-If there is conflict with **localhost** or port 8765, you can tell
-the CakePHP console to run the web server on a specific host and/or port
-utilizing the following arguments:
-
-``` bash
-bin/cake server -H 192.168.13.37 -p 5673
+```bash [Custom Host/Port]
+# Useful for network access or port conflicts
+bin/cake server -H 192.168.1.100 -p 5000
 ```
 
-This will serve your application at **http://192.168.13.37:5673/**.
-
-That's it! Your CakePHP application is up and running without having to
-configure a web server.
-
-> [!NOTE]
-> Try `bin/cake server -H 0.0.0.0` if the server is unreachable from other hosts.
-
-> [!WARNING]
-> The development server should *never* be used in a production environment.
-> It is only intended as a basic development server.
-
-If you'd prefer to use a real web server, you should be able to move your CakePHP
-install (including the hidden files) inside your web server's document root. You
-should then be able to point your web-browser at the directory you moved the
-files into and see your application in action.
-
-## Production
-
-A production installation is a more flexible way to setup CakePHP. Using this
-method allows an entire domain to act as a single CakePHP application. This
-example will help you install CakePHP anywhere on your filesystem and make it
-available at <http://www.example.com>. Note that this installation may require the
-rights to change the `DocumentRoot` on Apache webservers.
-
-After installing your application using one of the methods above into the
-directory of your choosing - we'll assume you chose /cake_install - your
-production setup will look like this on the file system:
-
-``` text
-cake_install/
-    bin/
-    config/
-    logs/
-    plugins/
-    resources/
-    src/
-    templates/
-    tests/
-    tmp/
-    vendor/
-    webroot/ (this directory is set as DocumentRoot)
-    .gitignore
-    .htaccess
-    composer.json
-    index.php
-    phpunit.xml.dist
-    README.md
+```bash [Network Access]
+# Allow access from other devices on your network
+bin/cake server -H 0.0.0.0
 ```
 
-Developers using Apache should set the `DocumentRoot` directive for the domain
-to:
+:::
 
-``` apache
-DocumentRoot /cake_install/webroot
+::: tip Success!
+Visit **http://localhost:8765** and you should see the CakePHP welcome page with green checkmarks.
+:::
+
+::: danger Production Warning
+**Never** use the development server in production. It's designed only for local development and lacks security hardening, performance optimizations, and proper process management.
+:::
+
+## Production Deployment
+
+For production environments, configure your web server to serve from the **webroot** directory.
+
+### Directory Structure
+
+After installation, your structure should look like this:
+
+```text
+my_app/
+├── bin/
+├── config/
+├── logs/
+├── plugins/
+├── src/
+├── templates/
+├── tests/
+├── tmp/
+├── vendor/
+├── webroot/          # ← Web server document root
+│   ├── css/
+│   ├── img/
+│   ├── js/
+│   ├── .htaccess
+│   └── index.php
+├── .gitignore
+├── .htaccess
+├── composer.json
+└── README.md
 ```
 
-If your web server is configured correctly, you should now find your CakePHP
-application accessible at <http://www.example.com>.
+::: tip Configuration Required
+Point your web server's DocumentRoot to `/path/to/my_app/webroot/`
+:::
 
-## Fire It Up
+## Web Server Configuration
 
-Alright, let's see CakePHP in action. Depending on which setup you used, you
-should point your browser to <http://example.com/> or <http://localhost:8765/>. At
-this point, you'll be presented with CakePHP's default home, and a message that
-tells you the status of your current database connection.
+::: info Configuration Examples
+The following examples are illustrative starting points. You should fine-tune these configurations to match your application's specific requirements, security policies, and performance needs.
+:::
 
-Congratulations! You are ready to [create your first CakePHP application](quickstart).
-
-<a id="url-rewriting"></a>
-
-## URL Rewriting
+Choose your web server and follow the appropriate configuration:
 
 ### Apache
 
-While CakePHP is built to work with mod_rewrite out of the box–and usually
-does–we've noticed that a few users struggle with getting everything to play
-nicely on their systems.
+Apache works out of the box with CakePHP's included `.htaccess` files.
 
-Here are a few things you might try to get it running correctly. First look at
-your httpd.conf. (Make sure you are editing the system httpd.conf rather than a
-user- or site-specific httpd.conf.)
+::: code-group
 
-These files can vary between different distributions and Apache versions. You
-may also take a look at <https://cwiki.apache.org/confluence/display/httpd/DistrosDefaultLayout> for
-further information.
+```apache [Virtual Host]
+<VirtualHost *:80>
+    ServerName myapp.local
+    DocumentRoot /var/www/myapp/webroot
 
-1.  Make sure that an .htaccess override is allowed and that AllowOverride is set
-    to All for the correct DocumentRoot. You should see something similar to:
-
-    ``` apache
-    # Each directory to which Apache has access can be configured with respect
-    # to which services and features are allowed and/or disabled in that
-    # directory (and its subdirectories).
-    #
-    # First, we configure the "default" to be a very restrictive set of
-    # features.
-    <Directory />
+    <Directory /var/www/myapp/webroot>
         Options FollowSymLinks
         AllowOverride All
-    #    Order deny,allow
-    #    Deny from all
+        Require all granted
     </Directory>
-    ```
 
-2.  Make sure you are loading mod_rewrite correctly. You should see something
-    like:
+    ErrorLog ${APACHE_LOG_DIR}/myapp_error.log
+    CustomLog ${APACHE_LOG_DIR}/myapp_access.log combined
+</VirtualHost>
+```
 
-    ``` apache
-    LoadModule rewrite_module libexec/apache2/mod_rewrite.so
-    ```
+```apache [Enable mod_rewrite]
+# Ensure mod_rewrite is enabled
+LoadModule rewrite_module modules/mod_rewrite.so
 
-    In many systems these will be commented out by default, so you may just need
-    to remove the leading \# symbols.
+# Verify with:
+apache2ctl -M | grep rewrite
+```
 
-    After you make changes, restart Apache to make sure the settings are active.
+```apache [Subdirectory Install]
+# If installing in a subdirectory like /~username/myapp/
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /~username/myapp
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [L]
+</IfModule>
+```
 
-    Verify that your .htaccess files are actually in the right directories. Some
-    operating systems treat files that start with '.' as hidden and therefore
-    won't copy them.
+:::
 
-3.  Make sure your copy of CakePHP comes from the downloads section of the site
-    or our Git repository, and has been unpacked correctly, by checking for
-    .htaccess files.
+::: details Troubleshooting Apache
+**If rewrites aren't working:**
 
-    CakePHP app directory (will be copied to the top directory of your
-    application by bake):
+1. Verify `AllowOverride All` is set in your DocumentRoot directive
+2. Check that `.htaccess` files exist in root and webroot directories
+3. Ensure `mod_rewrite` is loaded
+4. Restart Apache after configuration changes
 
-    ``` apache
-    <IfModule mod_rewrite.c>
-       RewriteEngine on
-       RewriteRule    ^$    webroot/    [L]
-       RewriteRule    (.*) webroot/$1    [L]
-    </IfModule>
-    ```
-
-    CakePHP webroot directory (will be copied to your application's web root by
-    bake):
-
-    ``` apache
-    <IfModule mod_rewrite.c>
-        RewriteEngine On
-        RewriteCond %{REQUEST_FILENAME} !-f
-        RewriteRule ^ index.php [L]
-    </IfModule>
-    ```
-
-    If your CakePHP site still has problems with mod_rewrite, you might want to
-    try modifying settings for Virtual Hosts. On Ubuntu, edit the file
-    **/etc/apache2/sites-available/default** (location is
-    distribution-dependent). In this file, ensure that `AllowOverride None` is
-    changed to `AllowOverride All`, so you have:
-
-    ``` apache
-    <Directory />
-        Options FollowSymLinks
-        AllowOverride All
-    </Directory>
-    <Directory /var/www>
-        Options FollowSymLinks
-        AllowOverride All
-        Order Allow,Deny
-        Allow from all
-    </Directory>
-    ```
-
-    On macOS, another solution is to use the tool
-    [virtualhostx](https://clickontyler.com/virtualhostx/) to make a Virtual
-    Host to point to your folder.
-
-    For many hosting services (GoDaddy, 1and1), your web server is being
-    served from a user directory that already uses mod_rewrite. If you are
-    installing CakePHP into a user directory
-    (<http://example.com/~username/cakephp/>), or any other URL structure that
-    already utilizes mod_rewrite, you'll need to add RewriteBase statements to
-    the .htaccess files CakePHP uses (.htaccess, webroot/.htaccess).
-
-    This can be added to the same section with the RewriteEngine directive, so
-    for example, your webroot .htaccess file would look like:
-
-    ``` apache
-    <IfModule mod_rewrite.c>
-        RewriteEngine On
-        RewriteBase /path/to/app
-        RewriteCond %{REQUEST_FILENAME} !-f
-        RewriteRule ^ index.php [L]
-    </IfModule>
-    ```
-
-    The details of those changes will depend on your setup, and can include
-    additional things that are not related to CakePHP. Please refer to Apache's
-    online documentation for more information.
-
-4.  (Optional) To improve production setup, you should prevent invalid assets
-    from being parsed by CakePHP. Modify your webroot .htaccess to something
-    like:
-
-    ``` apache
-    <IfModule mod_rewrite.c>
-        RewriteEngine On
-        RewriteBase /path/to/app/
-        RewriteCond %{REQUEST_FILENAME} !-f
-        RewriteCond %{REQUEST_URI} !^/(webroot/)?(img|css|js)/(.*)$
-        RewriteRule ^ index.php [L]
-    </IfModule>
-    ```
-
-    The above will prevent incorrect assets from being sent to index.php
-    and instead display your web server's 404 page.
-
-    Additionally you can create a matching HTML 404 page, or use the default
-    built-in CakePHP 404 by adding an `ErrorDocument` directive:
-
-    ``` apache
-    ErrorDocument 404 /404-not-found
-    ```
+**Performance optimization:**
+```apache
+# Add to webroot/.htaccess to prevent CakePHP from handling static assets
+RewriteCond %{REQUEST_URI} !^/(webroot/)?(img|css|js)/(.*)$
+```
+:::
 
 ### nginx
 
-nginx does not make use of .htaccess files like Apache, so it is necessary to
-create those rewritten URLs in the site-available configuration. This is usually
-found in `/etc/nginx/sites-available/your_virtual_host_conf_file`. Depending
-on your setup, you will have to modify this, but at the very least, you will
-need PHP running as a FastCGI instance.
-The following configuration redirects the request to `webroot/index.php`:
+nginx requires manual rewrite configuration:
 
-``` nginx
-location / {
-    try_files $uri $uri/ /index.php?$args;
-}
-```
-
-A sample of the server directive is as follows:
-
-``` nginx
+```nginx
 server {
-    listen   80;
-    listen   [::]:80;
-    server_name www.example.com;
-    return 301 http://example.com$request_uri;
-}
+    listen 80;
+    server_name myapp.local;
 
-server {
-    listen   80;
-    listen   [::]:80;
-    server_name example.com;
+    root /var/www/myapp/webroot;
+    index index.php;
 
-    root   /var/www/example.com/public/webroot;
-    index  index.php;
-
-    access_log /var/www/example.com/log/access.log;
-    error_log /var/www/example.com/log/error.log;
+    access_log /var/log/nginx/myapp_access.log;
+    error_log /var/log/nginx/myapp_error.log;
 
     location / {
         try_files $uri $uri/ /index.php?$args;
@@ -466,7 +351,7 @@ server {
     location ~ \.php$ {
         try_files $uri =404;
         include fastcgi_params;
-        fastcgi_pass 127.0.0.1:9000;
+        fastcgi_pass unix:/var/run/php/php8.2-fpm.sock;
         fastcgi_index index.php;
         fastcgi_intercept_errors on;
         fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
@@ -474,113 +359,107 @@ server {
 }
 ```
 
-> [!NOTE]
-> Recent configurations of PHP-FPM are set to listen to the unix php-fpm
-> socket instead of TCP port 9000 on address 127.0.0.1. If you get 502 bad
-> gateway errors from the above configuration, try update `fastcgi_pass` to
-> use the unix socket path (eg: fastcgi_pass
-> unix:/var/run/php/php7.1-fpm.sock;) instead of the TCP port.
+::: warning PHP-FPM Socket
+Modern PHP-FPM uses Unix sockets instead of TCP. Update `fastcgi_pass` to match your setup:
+- Unix socket: `unix:/var/run/php/php8.2-fpm.sock`
+- TCP: `127.0.0.1:9000`
+:::
 
-### NGINX Unit
+### Caddy / FrankenPHP
 
-[NGINX Unit](https://unit.nginx.org) is dynamically configurable in runtime;
-the following configuration relies on `webroot/index.php`, also serving other
-`.php` scripts if present via `cakephp_direct`:
+Modern web server with automatic HTTPS. FrankenPHP extends Caddy with a built-in PHP runtime:
 
-``` json
-{
-    "listeners": {
-        "*:80": {
-            "pass": "routes/cakephp"
-        }
-    },
+::: code-group
 
-    "routes": {
-        "cakephp": [
-            {
-                "match": {
-                    "uri": [
-                        "*.php",
-                        "*.php/*"
-                    ]
-                },
+```text [Caddy + PHP-FPM]
+myapp.local {
+    root * /var/www/myapp/webroot
+    php_fastcgi unix//var/run/php/php8.2-fpm.sock
+    encode gzip
+    file_server
 
-                "action": {
-                    "pass": "applications/cakephp_direct"
-                }
-            },
-            {
-                "action": {
-                    "share": "/path/to/cakephp/webroot/",
-                    "fallback": {
-                        "pass": "applications/cakephp_index"
-                    }
-                }
-            }
-        ]
-    },
-
-    "applications": {
-        "cakephp_direct": {
-            "type": "php",
-            "root": "/path/to/cakephp/webroot/",
-            "user": "www-data"
-        },
-
-        "cakephp_index": {
-            "type": "php",
-            "root": "/path/to/cakephp/webroot/",
-            "user": "www-data",
-            "script": "index.php"
-        }
-    }
+    try_files {path} {path}/ /index.php?{query}
 }
 ```
 
-To enable this config (assuming it's saved as `cakephp.json`):
+```dockerfile [FrankenPHP Docker]
+# Dockerfile in your project root
+FROM dunglas/frankenphp
 
-``` bash
-# curl -X PUT --data-binary @cakephp.json --unix-socket \
-       /path/to/control.unit.sock http://localhost/config
+# Copy your CakePHP application
+COPY . /app
+
+# FrankenPHP defaults to /app/public as document root.
+# CakePHP uses webroot/ instead, so override it:
+ENV SERVER_ROOT=/app/webroot
+
+# Install dependencies (composer.json lives in /app)
+RUN composer install --no-dev --optimize-autoloader
+
+# Build and run:
+# docker build -t myapp .
+# docker run -p 80:80 -p 443:443 myapp
 ```
 
-### IIS7 (Windows hosts)
+```bash [FrankenPHP Binary]
+# Download FrankenPHP
+curl -L https://github.com/dunglas/frankenphp/releases/latest/download/frankenphp-linux-x86_64 -o frankenphp
+chmod +x frankenphp
 
-IIS7 does not natively support .htaccess files. While there are
-add-ons that can add this support, you can also import htaccess
-rules into IIS to use CakePHP's native rewrites. To do this, follow
-these steps:
+# Run with your CakePHP app
+./frankenphp php-server --root /var/www/myapp/webroot
+```
 
-1.  Use [Microsoft's Web Platform Installer](https://www.microsoft.com/web/downloads/platform.aspx)
-    to install the URL [Rewrite Module 2.0](https://www.iis.net/downloads/microsoft/url-rewrite)
-    or download it directly ([32-bit](https://download.microsoft.com/download/D/8/1/D81E5DD6-1ABB-46B0-9B4B-21894E18B77F/rewrite_x86_en-US.msi) /
-    [64-bit](https://download.microsoft.com/download/1/2/8/128E2E22-C1B9-44A4-BE2A-5859ED1D4592/rewrite_amd64_en-US.msi)).
-2.  Create a new file called web.config in your CakePHP root folder.
-3.  Using Notepad or any XML-safe editor, copy the following
-    code into your new web.config file:
+```text [FrankenPHP Caddyfile]
+# Caddyfile in your project root
+{
+    frankenphp
+}
 
-``` xml
+myapp.local {
+    root * /var/www/myapp/webroot
+    php_server
+    encode zstd gzip
+    file_server
+}
+```
+
+:::
+
+::: tip Local Development
+For local development, you can use the built-in CakePHP development server with FrankenPHP support:
+```bash
+bin/cake server --frankenphp
+```
+This requires the `frankenphp` binary to be available in your `PATH`.
+:::
+
+::: info Why FrankenPHP?
+FrankenPHP combines PHP with Caddy, providing automatic HTTPS, HTTP/3, and modern compression without needing PHP-FPM. Particularly efficient for containerized deployments.
+:::
+
+### IIS (Windows)
+
+1. Install [URL Rewrite Module 2.0](https://www.iis.net/downloads/microsoft/url-rewrite)
+2. Create `web.config` in your application root:
+
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
     <system.webServer>
         <rewrite>
             <rules>
-                <rule name="Exclude direct access to webroot/*"
-                  stopProcessing="true">
+                <rule name="Exclude webroot" stopProcessing="true">
                     <match url="^webroot/(.*)$" ignoreCase="false" />
                     <action type="None" />
                 </rule>
-                <rule name="Rewrite routed access to assets(img, css, files, js, favicon)"
-                  stopProcessing="true">
+                <rule name="Rewrite assets" stopProcessing="true">
                     <match url="^(font|img|css|files|js|favicon.ico)(.*)$" />
-                    <action type="Rewrite" url="webroot/{R:1}{R:2}"
-                      appendQueryString="false" />
+                    <action type="Rewrite" url="webroot/{R:1}{R:2}" />
                 </rule>
-                <rule name="Rewrite requested file/folder to index.php"
-                  stopProcessing="true">
+                <rule name="Rewrite to index.php" stopProcessing="true">
                     <match url="^(.*)$" ignoreCase="false" />
-                    <action type="Rewrite" url="index.php"
-                      appendQueryString="true" />
+                    <action type="Rewrite" url="index.php" />
                 </rule>
             </rules>
         </rewrite>
@@ -588,56 +467,36 @@ these steps:
 </configuration>
 ```
 
-Once the web.config file is created with the correct IIS-friendly rewrite rules,
-CakePHP's links, CSS, JavaScript, and rerouting should work correctly.
+## Without URL Rewriting
 
-### Lighttpd
+If you cannot enable URL rewriting, you can use CakePHP's built-in non-rewritten `index.php` URLs.
 
-Lighttpd does not make use of **.htaccess** files like Apache, so it is
-necessary to add a `url.rewrite-once` configuration in **conf/lighttpd.conf**.
-Ensure the following is present in your lighthttpd configuration:
+In **config/app.php**, uncomment:
 
-``` php
-server.modules += (
-    "mod_alias",
-    "mod_cgi",
-    "mod_rewrite"
-)
-
-# Directory Alias
-alias.url       = ( "/TestCake" => "C:/Users/Nicola/Documents/TestCake" )
-
-# CGI Php
-cgi.assign      = ( ".php" => "c:/php/php-cgi.exe" )
-
-# Rewrite Cake Php (on /TestCake path)
-url.rewrite-once = (
-    "^/TestCake/(css|files|img|js|stats)/(.*)$" => "/TestCake/webroot/$1/$2",
-    "^/TestCake/(.*)$" => "/TestCake/webroot/index.php/$1"
-)
-```
-
-The above lines include PHP CGI configuration and example application
-configuration for an application on the `/TestCake` path.
-
-### I Can't Use URL Rewriting
-
-If you don't want or can't get mod_rewrite (or some other compatible module)
-running on your server, you will need to use CakePHP's built in pretty URLs.
-In **config/app.php**, uncomment the line that looks like:
-
-``` text
+```php
 'App' => [
     // ...
-    // 'baseUrl' => env('SCRIPT_NAME'),
+    'baseUrl' => env('SCRIPT_NAME'),
 ]
 ```
 
-Also remove these .htaccess files:
+Remove these `.htaccess` files:
+- `/.htaccess`
+- `/webroot/.htaccess`
 
-    /.htaccess
-    webroot/.htaccess
+Your URLs will include `index.php`:
+- **With rewriting:** `https://myapp.com/articles/view/1`
+- **Without rewriting:** `https://myapp.com/index.php/articles/view/1`
 
-This will make your URLs look like
-www.example.com/index.php/controllername/actionname/param rather than
-www.example.com/controllername/actionname/param.
+## Next Steps
+
+Your CakePHP installation is complete! Here's what to do next:
+
+::: tip Ready to Build?
+Follow the [Quick Start Guide](quickstart) to create your first CakePHP application in minutes.
+:::
+
+**Learn More:**
+- [Configuration](development/configuration) - Customize your application
+- [Database Setup](orm/database-basics) - Connect to your database
+- [Tutorials](tutorials-and-examples) - Step-by-step guides

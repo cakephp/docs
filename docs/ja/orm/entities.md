@@ -333,7 +333,7 @@ $user->setErrors([
 匿名のエンティティークラスを使ったり、 [Bake コンソール](../bake) でエンティティーを生成すると、
 CakePHP は一括代入から保護しません。
 
-`patchable` プロパティーにより、プロパティーと一括代入できるかどうかのマップを提供できるようになります。
+`_accessible` プロパティーにより、プロパティーと一括代入できるかどうかのマップを提供できるようになります。
 `true` と `false` の値はそれぞれ、その列が一括代入できるか、できないかを示しています。 :
 
 ``` php
@@ -343,7 +343,7 @@ use Cake\ORM\Entity;
 
 class Article extends Entity
 {
-    protected array $patchable = [
+    protected array $_accessible = [
         'title' => true,
         'body' => true
     ];
@@ -360,7 +360,7 @@ use Cake\ORM\Entity;
 
 class Article extends Entity
 {
-    protected array $patchable = [
+    protected array $_accessible = [
         'title' => true,
         'body' => true,
         '*' => false,
@@ -383,14 +383,14 @@ $article = new Article(['id' => 1, 'title' => 'Foo'], ['guard' => false]);
 
 ### 保護されたフィールドを実行時に変更する
 
-`setPatchable()` メソッドを使うことで保護されたフィールドのリストを実行時に変更できます。 :
+`setAccess()` メソッドを使うことで保護されたフィールドのリストを実行時に変更できます。 :
 
 ``` php
 // user_id にアクセスできるようにする
-$article->setPatchable('user_id', true);
+$article->setAccess('user_id', true);
 
 // title を保護する。
-$article->setPatchable('title', false);
+$article->setAccess('title', false);
 ```
 
 > [!NOTE]

@@ -38,7 +38,9 @@ class UsersController extends AppController
 
 ## Convert Strings into ASCII
 
-`static` Cake\\Utility\\Text::**transliterate**($string, $transliteratorId = null)
+### Text::transliterate()
+
+`static` Cake\\Utility\\Text::**transliterate**($string, $transliteratorId = null): string
 
 Transliterate by default converts all characters in provided string into
 equivalent ASCII characters. The method expects UTF-8 encoding. The character
@@ -60,7 +62,9 @@ Text::transliterate('Übérmensch', 'Latin-ASCII;');
 
 ## Creating URL Safe Strings
 
-`static` Cake\\Utility\\Text::**slug**(string $string, array|string $options = [])
+### Text::slug()
+
+`static` Cake\\Utility\\Text::**slug**(string $string, array|string $options = []): string
 
 Slug transliterates all characters into ASCII versions and converting unmatched
 characters and spaces to dashes. The slug method expects UTF-8 encoding.
@@ -91,7 +95,9 @@ options are:
 
 ## Generating UUIDs
 
-`static` Cake\\Utility\\Text::**uuid**()
+### Text::uuid()
+
+`static` Cake\\Utility\\Text::**uuid**(): string
 
 The UUID method is used to generate unique identifiers as per `4122`. The
 UUID is a 128-bit string in the format of
@@ -124,7 +130,9 @@ be used instead of the default UUID generation method.
 
 ## Simple String Parsing
 
-`static` Cake\\Utility\\Text::**tokenize**(string $data, string $separator = ',', string $leftBound = '(', string $rightBound = ')')
+### Text::tokenize()
+
+`static` Cake\\Utility\\Text::**tokenize**(string $data, string $separator = ',', string $leftBound = '(', string $rightBound = ')'): array
 
 Tokenizes a string using `$separator`, ignoring any instance of `$separator`
 that appears between `$leftBound` and `$rightBound`.
@@ -139,7 +147,9 @@ $result = Text::tokenize($data, ' ', "'", "'");
 ['cakephp', "'great framework'", 'php'];
 ```
 
-`method` Cake\\Utility\\Text::**parseFileSize**(string $size, mixed $default = false)
+### Text::parseFileSize()
+
+`method` Cake\\Utility\\Text::**parseFileSize**(string $size, mixed $default = false): mixed
 
 This method unformats a number from a human-readable byte size to an integer
 number of bytes:
@@ -150,26 +160,30 @@ $int = Text::parseFileSize('2GB');
 
 ## Formatting Strings
 
-`static` Cake\\Utility\\Text::**insert**(string $str, array $data, array $options = [])
+### Text::insert()
+
+`static` Cake\\Utility\\Text::**insert**(string $str, array $data, array $options = []): string
 
 The insert method is used to create string templates and to allow for key/value
 replacements:
 
 ``` php
 Text::insert(
-    'My name is {name} and I am {age} years old.',
+    'My name is :name and I am :age years old.',
     ['name' => 'Bob', 'age' => '65']
 );
 // Returns: "My name is Bob and I am 65 years old."
 ```
 
-`static` Cake\\Utility\\Text::**cleanInsert**(string $str, array $options)
+### Text::cleanInsert()
 
-Cleans up a `Text::insert()` formatted string with given `$options` depending
+`static` Cake\\Utility\\Text::**cleanInsert**(string $str, array $options): string
+
+Cleans up a `Text::insert` formatted string with given `$options` depending
 on the 'clean' key in `$options`. The default method used is text but html is
 also available. The goal of this function is to replace all whitespace and
 unneeded markup around placeholders that did not get replaced by
-`Text::insert()`.
+`Text::insert`.
 
 You can use the following options in the options array:
 
@@ -185,7 +199,9 @@ $options = [
 
 ## Wrapping Text
 
-`static` Cake\\Utility\\Text::**wrap**(string $text, array|int $options = [])
+### Text::wrap()
+
+`static` Cake\\Utility\\Text::**wrap**(string $text, array|int $options = []): string
 
 Wraps a block of text to a set width and indents blocks as well.
 Can intelligently wrap text so words are not sliced across lines:
@@ -207,7 +223,9 @@ supported options are:
 - `indent` The character to indent lines with. Defaults to ''.
 - `indentAt` The line number to start indenting text. Defaults to 0.
 
-`static` Cake\\Utility\\Text::**wrapBlock**(string $text, array|int $options = [])
+### Text::wrapBlock()
+
+`static` Cake\\Utility\\Text::**wrapBlock**(string $text, array|int $options = []): string
 
 If you need to ensure that the total width of the generated block won't
 exceed a certain length even with internal indentation, you need to use
@@ -233,7 +251,9 @@ This is the song that
 
 ## Highlighting Substrings
 
-`method` Cake\\Utility\\Text::**highlight**(string $text, array|string $phrase, array $options = [])
+### Text::highlight()
+
+`method` Cake\\Utility\\Text::**highlight**(string $text, array|string $phrase, array $options = []): string
 
 Highlights `$phrase` in `$text` using the `$options['format']` string
 specified or a default string.
@@ -272,7 +292,9 @@ Output:
 
 ## Truncating Text
 
-`method` Cake\\Utility\\Text::**truncate**(string $text, int $length = 100, array $options = [])
+### Text::truncate()
+
+`method` Cake\\Utility\\Text::**truncate**(string $text, int $length = 100, array $options = []): string
 
 If `$text` is longer than `$length`, this method truncates it at `$length`
 and adds a suffix consisting of `'ellipsis'`, if defined. If `'exact'` is
@@ -323,7 +345,9 @@ Output:
 
 ## Truncating the Tail of a String
 
-`method` Cake\\Utility\\Text::**tail**(string $text, int $length = 100, array $options = [])
+### Text::tail()
+
+`method` Cake\\Utility\\Text::**tail**(string $text, int $length = 100, array $options = []): string
 
 If `$text` is longer than `$length`, this method removes an initial
 substring with length consisting of the difference and prepends a prefix
@@ -376,7 +400,9 @@ Output:
 
 ## Extracting an Excerpt
 
-`method` Cake\\Utility\\Text::**excerpt**(string $text, string $phrase, int $radius = 100, string $ellipsis = '…')
+### Text::excerpt()
+
+`method` Cake\\Utility\\Text::**excerpt**(string $text, string $phrase, int $radius = 100, string $ellipsis = '…'): string
 
 Extracts an excerpt from `$text` surrounding the `$phrase` with a number
 of characters on each side determined by `$radius`, and prefix/suffix with
@@ -400,7 +426,9 @@ Output:
 
 ## Converting an Array to Sentence Form
 
-`method` Cake\\Utility\\Text::**toList**(array $list, ?string $and = null, $separator = ', ')
+### Text::toList()
+
+`method` Cake\\Utility\\Text::**toList**(array $list, ?string $and = null, $separator = ', '): string
 
 Creates a comma-separated list where the last two items are joined with 'and':
 

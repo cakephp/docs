@@ -539,7 +539,7 @@ class UsersController extends AppController
 
 ## Elements
 
-`method` Cake\\View\\View::**element**(string $elementPath, array $data, array $options = [])
+`method` Cake\\View\\View::**element**(string $elementPath, array $data, array $options = []): string
 
 Many applications have small blocks of presentation code that need to be
 repeated from page to page, sometimes in different places in the layout. CakePHP
@@ -699,7 +699,7 @@ file does not exist, it will be looked for in the default location.
 
 ### Caching Sections of Your View
 
-`method` Cake\\View\\View::**cache**(callable $block, array $options = [])
+`method` Cake\\View\\View::**cache**(callable $block, array $options = []): string
 
 Sometimes generating a section of your view output can be expensive because of
 rendered [View Cells](views/cells) or expensive helper operations. To help make your

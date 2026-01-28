@@ -19,6 +19,8 @@ CakePHP のヘルパーに関する詳細については、各ヘルパーの章
 - [Time](../views/helpers/time)
 - [Url](../views/helpers/url)
 
+<a id="configuring-helpers"></a>
+
 ## ヘルパーの設定
 
 CakePHP でヘルパーを読み込むには、ビュークラスでヘルパーを宣言します。
@@ -343,6 +345,8 @@ class AwesomeHelper extends Helper
     }
 }
 ```
+
+<a id="helper-api"></a>
 
 ## Helper クラス
 

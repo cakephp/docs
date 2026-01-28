@@ -71,7 +71,7 @@ sure it doesn't have any obvious leaks:
   of mass-assignment issues.
 - Ensure your models have the correct [Validation](core-libraries/validation) rules
   enabled.
-- Check that only your `webroot` directory is publicly visible, and that your
+- Check that only your `webroot/` directory is publicly visible, and that your
   secrets (such as your app salt, and any security keys) are private and unique
   as well.
 
@@ -82,7 +82,7 @@ keeping your code secure and your application safer. CakePHP applications
 should have the document root set to the application's `webroot`. This
 makes the application and configuration files inaccessible through a URL.
 Setting the document root is different for different webservers. See the
-[Url Rewriting](installation#url-rewriting) documentation for webserver specific
+[Url Rewriting](installation#without-url-rewriting) documentation for webserver specific
 information.
 
 In all cases you will want to set the virtual host/domain's document to be
@@ -106,8 +106,8 @@ the `plugin` command:
 
     bin/cake plugin assets symlink
 
-The above command will symlink the `webroot` directory of all loaded plugins
-to appropriate path in the app's `webroot` directory.
+The above command will symlink the `webroot/` directory of all loaded plugins
+to appropriate path in the app's `webroot/` directory.
 
 If your filesystem doesn't allow creating symlinks the directories will be
 copied instead of being symlinked. You can also explicitly copy the directories
@@ -134,7 +134,7 @@ On each deploy you'll likely have a few tasks to co-ordinate on your web server.
 are:
 
 1.  Install dependencies with `composer install`. Avoid using `composer update` when doing deploys as you could get unexpected versions of packages.
-2.  Run database [migrations](/migrations/) with either the Migrations plugin
+2.  Run database [migrations](migrations) with either the Migrations plugin
     or another tool.
 3.  Clear model schema cache with `bin/cake schema_cache clear`. The [Schema Cache Tool](console-commands/schema-cache)
     has more information on this command.

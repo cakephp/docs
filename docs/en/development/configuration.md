@@ -97,11 +97,11 @@ will be used if no environment variable exists for the given key.
 Below is a description of the variables and how they affect your CakePHP
 application.
 
-debug  
+debug
 Changes CakePHP debugging output. `false` = Production mode. No error
 messages, errors, or warnings shown. `true` = Errors and warnings shown.
 
-App.namespace  
+App.namespace
 The namespace to find app classes under.
 
 > [!NOTE]
@@ -112,29 +112,29 @@ The namespace to find app classes under.
 
 <div id="core-configuration-baseurl">
 
-App.baseUrl  
+App.baseUrl
 Un-comment this definition if you **don’t** plan to use Apache’s
 mod_rewrite with CakePHP. Don’t forget to remove your .htaccess
 files too.
 
-App.base  
+App.base
 The base directory the app resides in. If `false` this
 will be auto detected. If not `false`, ensure your string starts
 with a <span class="title-ref">/</span> and does NOT end with a <span class="title-ref">/</span>. For example, <span class="title-ref">/basedir</span> is a valid
 App.base.
 
-App.encoding  
+App.encoding
 Define what encoding your application uses. This encoding
 is used to generate the charset in the layout, and encode entities.
 It should match the encoding values specified for your database.
 
-App.webroot  
+App.webroot
 The webroot directory.
 
-App.wwwRoot  
+App.wwwRoot
 The file path to webroot.
 
-App.fullBaseUrl  
+App.fullBaseUrl
 The fully qualified domain name (including protocol) to your application's
 root. This is used when generating absolute URLs. By default this value
 is generated using the `$_SERVER` environment. However, you should define it
@@ -144,34 +144,34 @@ In a CLI context (from command) the <span class="title-ref">fullBaseUrl</span> c
 as there is no webserver involved. You do need to specify it yourself if
 you do need to generate URLs from a shell (for example, when sending emails).
 
-App.imageBaseUrl  
+App.imageBaseUrl
 Web path to the public images directory under webroot. If you are using
 a `CDN` you should set this value to the CDN's location.
 
-App.cssBaseUrl  
+App.cssBaseUrl
 Web path to the public css directory under webroot. If you are using
 a `CDN` you should set this value to the CDN's location.
 
-App.jsBaseUrl  
+App.jsBaseUrl
 Web path to the public js directory under webroot. If you are using
 a `CDN` you should set this value to the CDN's location.
 
-App.paths  
+App.paths
 Configure paths for non class based resources. Supports the
 `plugins`, `templates`, `locales` subkeys, which allow the definition
 of paths for plugins, view templates and locale files respectively.
 
-App.uploadedFilesAsObjects  
+App.uploadedFilesAsObjects
 Defines whether uploaded files are being represented as objects (`true`),
 or arrays (`false`). This option is being treated as enabled by default.
 See the [File Uploads section](../controllers/request-response#request-file-uploads) in the Request &
 Response Objects chapter for more information.
 
-Security.salt  
+Security.salt
 A random string used in hashing. This value is also used as the
 HMAC salt when doing symmetric encryption.
 
-Asset.timestamp  
+Asset.timestamp
 Appends a timestamp which is last modified time of the particular
 file at the end of asset files URLs (CSS, JavaScript, Image) when
 using proper helpers. Valid values:
@@ -180,7 +180,7 @@ using proper helpers. Valid values:
 - (bool) `true` - Appends the timestamp when debug is `true`
 - (string) 'force' - Always appends the timestamp.
 
-Asset.cacheTime  
+Asset.cacheTime
 Sets the asset cache time. This determines the http header `Cache-Control`'s
 `max-age`, and the http header's `Expire`'s time for assets.
 This can take anything that you version of PHP's [strtotime function](https://php.net/manual/en/function.strtotime.php) can take.
@@ -319,7 +319,7 @@ won't end up breaking the MVC structure CakePHP provides.
 
 ### Writing Configuration data
 
-`static` Cake\\Core\\Configure::**write**($key, $value)
+`static` Cake\\Core\\Configure::**write**(array|string $config, mixed $value = null): void
 
 Use `write()` to store data in the application's configuration:
 
@@ -350,7 +350,7 @@ production modes on the fly.
 
 ### Reading Configuration Data
 
-`static` Cake\\Core\\Configure::**read**($key = null, $default = null)
+`static` Cake\\Core\\Configure::**read**(?string $var = null, mixed $default = null): mixed
 
 Used to read configuration data from the application. If a key is supplied, the
 data is returned. Using our examples from write() above, we can read that data
@@ -373,7 +373,7 @@ Configure::read('Company.nope', 'fallback');
 
 If `$key` is left null, all values in Configure will be returned.
 
-`static` Cake\\Core\\Configure::**readOrFail**($key)
+`static` Cake\\Core\\Configure::**readOrFail**(string $var): mixed
 
 Reads configuration data just like `Cake\Core\Configure::read()`
 but expects to find a key/value pair. In case the requested pair does not
@@ -391,7 +391,7 @@ Configure::readOrFail('Company');
 
 ### Checking to see if Configuration Data is Defined
 
-`static` Cake\\Core\\Configure::**check**($key)
+`static` Cake\\Core\\Configure::**check**(string $var): bool
 
 Used to check if a key/path exists and has non-null value:
 
@@ -401,7 +401,7 @@ $exists = Configure::check('Company.name');
 
 ### Deleting Configuration Data
 
-`static` Cake\\Core\\Configure::**delete**($key)
+`static` Cake\\Core\\Configure::**delete**(string $var): void
 
 Used to delete information from the application's configuration:
 
@@ -411,12 +411,12 @@ Configure::delete('Company.name');
 
 ### Reading & Deleting Configuration Data
 
-`static` Cake\\Core\\Configure::**consume**($key)
+`static` Cake\\Core\\Configure::**consume**(string $var): mixed
 
 Read and delete a key from Configure. This is useful when you want to
 combine reading and deleting values in a single operation.
 
-`static` Cake\\Core\\Configure::**consumeOrFail**($key)
+`static` Cake\\Core\\Configure::**consumeOrFail**(string $var): mixed
 
 Consumes configuration data just like `Cake\Core\Configure::consume()`
 but expects to find a key/value pair. In case the requested pair does not
@@ -434,7 +434,7 @@ Configure::consumeOrFail('Company');
 
 ## Reading and writing configuration files
 
-`static` Cake\\Core\\Configure::**setConfig**($name, $engine)
+`static` Cake\\Core\\Configure::**config**(string $name, ConfigEngineInterface $engine): void
 
 CakePHP comes with two built-in configuration file engines.
 `Cake\Core\Configure\Engine\PhpConfig` is able to read PHP config
@@ -467,7 +467,7 @@ Configure::configured();
 Configure::configured('default');
 ```
 
-`static` Cake\\Core\\Configure::**drop**($name)
+`static` Cake\\Core\\Configure::**drop**(string $name): bool
 
 You can also remove attached engines. `Configure::drop('default')`
 would remove the default engine alias. Any future attempts to load configuration
@@ -481,7 +481,7 @@ Configure::drop('default');
 
 ### Loading Configuration Files
 
-`static` Cake\\Core\\Configure::**load**($key, $config = 'default', $merge = true)
+`static` Cake\\Core\\Configure::**load**(string $key, string $config = 'default', bool $merge = true): bool
 
 Once you've attached a config engine to Configure you can load configuration
 files:
@@ -522,7 +522,7 @@ will not ever overwrite the existing configuration.
 
 ### Creating or Modifying Configuration Files
 
-`static` Cake\\Core\\Configure::**dump**($key, $config = 'default', $keys = [])
+`static` Cake\\Core\\Configure::**dump**(string $key, string $config = 'default', array $keys = []): bool
 
 Dumps all or some of the data in Configure into a file or storage system
 supported by a config engine. The serialization format is decided by the config
@@ -549,7 +549,7 @@ configuration files that are readable with `Configure::load()`
 
 ### Storing Runtime Configuration
 
-`static` Cake\\Core\\Configure::**store**($name, $cacheConfig = 'default', $data = null)
+`static` Cake\\Core\\Configure::**store**(string $name, string $cacheConfig = 'default', ?array $data = null): bool
 
 You can also store runtime configuration values for use in a future request.
 Since configure only remembers values for the current request, you will
@@ -566,7 +566,7 @@ Stored configuration data is persisted in the named cache configuration. See the
 
 ### Restoring Runtime Configuration
 
-`static` Cake\\Core\\Configure::**restore**($name, $cacheConfig = 'default')
+`static` Cake\\Core\\Configure::**restore**(string $name, string $cacheConfig = 'default'): bool
 
 Once you've stored runtime configuration, you'll probably need to restore it
 so you can access it again. `Configure::restore()` does exactly that:

@@ -15,6 +15,8 @@ CakePHP の中に含まれるコンポーネントの詳細については、各
 - [フォームの保護](../controllers/components/form-protection)
 - [HTTPキャッシュの確認](../controllers/components/check-http-cache)
 
+<a id="configuring-components"></a>
+
 ## コンポーネントの設定
 
 コアコンポーネントの多くは設定を必要としています。コンポーネントが設定を

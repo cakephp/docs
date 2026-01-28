@@ -116,9 +116,13 @@ when provided a multi-word argument:
 
 ## Creating Plural & Singular Forms
 
-`static` Cake\\Utility\\Inflector::**singularize**($singular)
+### Inflector::singularize()
 
-`static` Cake\\Utility\\Inflector::**pluralize**($singular)
+`static` Cake\\Utility\\Inflector::**singularize**($singular): string
+
+### Inflector::pluralize()
+
+`static` Cake\\Utility\\Inflector::**pluralize**($singular): string
 
 Both `pluralize` and `singularize()` work on most English nouns. If you need
 to support other languages, you can use [Inflection Configuration](#inflection-configuration) to
@@ -142,9 +146,13 @@ echo Inflector::singularize('People');
 
 ## Creating CamelCase and under_scored Forms
 
-`static` Cake\\Utility\\Inflector::**camelize**($underscored)
+### Inflector::camelize()
 
-`static` Cake\\Utility\\Inflector::**underscore**($camelCase)
+`static` Cake\\Utility\\Inflector::**camelize**($underscored): string
+
+### Inflector::underscore()
+
+`static` Cake\\Utility\\Inflector::**underscore**($camelCase): string
 
 These methods are useful when creating class names, or property names:
 
@@ -162,7 +170,9 @@ underscore.
 
 ## Creating Human Readable Forms
 
-`static` Cake\\Utility\\Inflector::**humanize**($underscored)
+### Inflector::humanize()
+
+`static` Cake\\Utility\\Inflector::**humanize**($underscored): string
 
 This method is useful when converting underscored forms into "Title Case" forms
 for human readable values:
@@ -174,11 +184,17 @@ Inflector::humanize('apple_pie');
 
 ## Creating Table and Class Name Forms
 
-`static` Cake\\Utility\\Inflector::**classify**($underscored)
+### Inflector::classify()
 
-`static` Cake\\Utility\\Inflector::**dasherize**($dashed)
+`static` Cake\\Utility\\Inflector::**classify**($underscored): string
 
-`static` Cake\\Utility\\Inflector::**tableize**($camelCase)
+### Inflector::dasherize()
+
+`static` Cake\\Utility\\Inflector::**dasherize**($dashed): string
+
+### Inflector::tableize()
+
+`static` Cake\\Utility\\Inflector::**tableize**($camelCase): string
 
 When generating code, or using CakePHP's conventions you may need to inflect
 table names or class names:
@@ -196,7 +212,9 @@ Inflector::tableize('UserProfileSetting');
 
 ## Creating Variable Names
 
-`static` Cake\\Utility\\Inflector::**variable**($underscored)
+### Inflector::variable()
+
+`static` Cake\\Utility\\Inflector::**variable**($underscored): string
 
 Variable names are often useful when doing meta-programming tasks that involve
 generating code or doing work based on conventions:
@@ -224,7 +242,9 @@ special cases.
 
 ### Loading Custom Inflections
 
-`static` Cake\\Utility\\Inflector::**rules**($type, $rules, $reset = false)
+### Inflector::rules()
+
+`static` Cake\\Utility\\Inflector::**rules**($type, $rules, $reset = false): void
 
 Define new inflection and transliteration rules for Inflector to use. Often,
 this method is used in your **config/bootstrap.php**:

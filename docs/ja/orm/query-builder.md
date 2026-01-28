@@ -358,43 +358,43 @@ $query->select(['count' => $query->func()->count('*')]);
 
 多くのおなじみの関数が `func()` メソッドとともに作成できます:
 
-`rand()`  
+`rand()`
 0から1の間の乱数をSQLで生成します。
 
-`sum()`  
+`sum()`
 合計を算出します。 <span class="title-ref">引数はリテラル値として扱われます。</span>
 
-`avg()`  
+`avg()`
 平均値を算出します。 <span class="title-ref">引数はリテラル値として扱われます。</span>
 
-`min()`  
+`min()`
 カラムの最小値を算出します。 <span class="title-ref">引数はリテラル値として扱われます。</span>
 
-`max()`  
+`max()`
 カラムの最大値を算出します。 <span class="title-ref">引数はリテラル値として扱われます。</span>
 
-`count()`  
+`count()`
 件数を算出します。 <span class="title-ref">引数はリテラル値として扱われます。</span>
 
-`concat()`  
+`concat()`
 ２つの値を結合します。 <span class="title-ref">引数はバインドパラメーターとして扱われます。</span>
 
-`coalesce()`  
+`coalesce()`
 Coalesce を算出します。 <span class="title-ref">引数はバインドパラメーターとして扱われます。</span>
 
-`dateDiff()`  
+`dateDiff()`
 ２つの日にち/時間の差を取得します。 <span class="title-ref">引数はバインドパラメーターとして扱われます。</span>
 
-`now()`  
+`now()`
 デフォルトでは日付と時刻を返しますが、 'time' または 'date' を指定してこれらの値のみを返すこともできます。
 
-`extract()`  
+`extract()`
 SQL 式から特定の日付部分(年など)を返します。
 
-`dateAdd()`  
+`dateAdd()`
 日付式に単位時間を加算します。
 
-`dayOfWeek()`  
+`dayOfWeek()`
 SQL の WEEKDAY 関数を呼ぶ FunctionExpression を返します。
 
 SQL 関数に渡す引数には、リテラルの引数と、バインドパラメーターの２種類がありえます。
@@ -699,14 +699,14 @@ WHERE (
 コールバックに渡される `QueryExpression` は完全な式を構築するために、
 **combinators** と **conditions** を使用します。
 
-Combinators  
+Combinators
 これらは新しい `QueryExpression` オブジェクトを作成し、
 その式に追加された条件をどのように結合するかを設定します。
 
 - `and()` は、すべての条件を `AND` で結合する新しい式オブジェクトを作成します。
 - `or()` は、すべての条件を `OR` で結合する新しい式オブジェクトを作成します。
 
-Conditions  
+Conditions
 これらは式に追加され、どの組み合わせが使用されたかに応じて自動的に結合されます。
 
 コールバック関数に渡される QueryExpression のデフォルトは `and()` です。 :
@@ -1060,7 +1060,7 @@ $query = $articles->find()
 これは、パラメーターが単数か配列か判らない場合に便利です。データ型名の末尾に付く `[]` という接尾辞は、
 扱いたいデータが配列であることをクエリービルダーに知らせます。
 もしもデータが配列でなかったなら、まず、配列へとキャストされることになります。
-その後、配列の各値は [type system](../orm/database-basics#database-data-types) を使ってキャストされることになります。
+その後、配列の各値は [type system](../orm/database-basics#data-types) を使ってキャストされることになります。
 これは複合型であっても同様に動きます。たとえば、DateTime オブジェクトのリストも使うことができます。 :
 
 ``` php

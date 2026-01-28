@@ -594,6 +594,8 @@ $this->mockClientPut(/* ... */);
 $this->mockClientDelete(/* ... */);
 ```
 
+### Response::newClientResponse()
+
 `method` Cake\\Http\\TestSuite\\Response::**newClientResponse**(int $code = 200, array $headers = [], string $body = '')
 
 As seen above you can use the `newClientResponse()` method to create responses
