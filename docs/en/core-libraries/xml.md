@@ -104,7 +104,7 @@ Your array must have only one element in the "top level" and it can not be
 numeric. If the array is not in this format, Xml will throw an exception.
 Examples of invalid arrays:
 
-``` text
+``` php
 // Top level with numeric key
 [
     ['key' => 'value']

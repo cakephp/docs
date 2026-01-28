@@ -1032,7 +1032,7 @@ If you are creating a new entity, and want to add existing records to a has
 many/belongs to many association you need to initialize the association property
 first:
 
-``` text
+``` php
 $article->comments = [];
 ```
 

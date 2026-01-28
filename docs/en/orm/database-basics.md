@@ -311,7 +311,7 @@ Role configurations override the values in the shared connection config. If the 
 and write role configurations are the same, a single connection to the database is used
 for both:
 
-``` text
+``` php
 'default' => [
     'driver' => 'mysql',
     'username' => '...',
@@ -613,7 +613,7 @@ enum ArticleStatus: string implements EnumLabelInterface
 This can be useful if you want to use your enums in `FormHelper` select
 inputs. You can use [bake](../bake) to generate an enum class:
 
-``` text
+``` bash
 # generate an enum class with two cases and stored as an integer
 bin/cake bake enum UserStatus inactive:0,active:1 -i
 
@@ -1200,7 +1200,7 @@ metadata is stored in the `_cake_model_` cache configuration. You can define
 a custom cache configuration using the `cacheMetatdata` option in your
 datasource configuration:
 
-``` text
+``` php
 'Datasources' => [
     'default' => [
         // Other keys go here.

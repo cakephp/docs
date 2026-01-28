@@ -1281,7 +1281,7 @@ $mapper = function ($rel, $key, $mr) {
 
 The intermediate array will be like the following:
 
-``` text
+``` php
 [
     1 => [2, 3, 4, 5, -3, -5],
     2 => [-1],
@@ -1327,7 +1327,7 @@ $fakeFriends = $friends->find()
 
 This would return an array similar to this:
 
-``` text
+``` php
 [
     1 => [2, 4],
     3 => [6]

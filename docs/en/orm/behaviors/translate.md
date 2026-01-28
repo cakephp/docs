@@ -267,7 +267,7 @@ In the example above you will get a list of entities back that have a
 `_translations` property set. This property will contain a list of translation
 data entities. For example the following properties would be accessible:
 
-``` text
+``` php
 // Outputs 'en'
 echo $article->_translations['en']->locale;
 
@@ -451,7 +451,7 @@ After the entity has been saved, the translated field will be persisted as well,
 one thing to note is that values from the default language that were not
 overridden will be preserved:
 
-``` text
+``` php
 // Outputs 'This is the content'
 echo $article->body;
 

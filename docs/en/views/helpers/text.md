@@ -24,7 +24,7 @@ $linkedText = $this->Text->autoLinkEmails($myText);
 
 Output:
 
-``` text
+``` html
 For more information regarding our world-famous pastries and desserts,
 contact <a href="mailto:info@example.com">info@example.com</a>
 ```

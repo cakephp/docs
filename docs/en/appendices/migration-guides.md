@@ -12,7 +12,7 @@ method renames and signature updates.
 
 To use the upgrade tool:
 
-``` text
+``` bash
 # Install the upgrade tool
 git clone https://github.com/cakephp/upgrade
 cd upgrade

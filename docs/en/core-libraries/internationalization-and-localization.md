@@ -117,7 +117,7 @@ learn more.
 The default locale can be set in your **config/app.php** file by setting
 `App.defaultLocale`:
 
-``` text
+``` php
 'App' => [
     ...
     'defaultLocale' => env('APP_DEFAULT_LOCALE', 'en_US'),
@@ -149,7 +149,7 @@ application. The most frequently used one is `__()`. This function
 is used to retrieve a single translation message or return the same string if no
 translation was found:
 
-``` text
+``` php
 echo __('Popular Articles');
 ```
 
@@ -157,7 +157,7 @@ If you need to group your messages, for example, translations inside a plugin,
 you can use the `__d()` function to fetch messages from another
 domain:
 
-``` text
+``` php
 echo __d('my_plugin', 'Trending right now');
 ```
 
@@ -172,7 +172,7 @@ This can happen if two strings are identical but refer to different things. For
 example, 'letter' has multiple meanings in English. To solve that problem, you
 can use the `__x()` function:
 
-``` text
+``` php
 echo __x('written communication', 'He read the first letter');
 
 echo __x('alphabet learning', 'He read the first letter');
@@ -192,20 +192,20 @@ msgstr "Er las den ersten Brief"
 Translation functions allow you to interpolate variables into the messages using
 special markers defined in the message itself or in the translated string:
 
-``` text
+``` php
 echo __("Hello, my name is {0}, I'm {1} years old", ['Sara', 12]);
 ```
 
 Markers are numeric, and correspond to the keys in the passed array. You can
 also pass variables as independent arguments to the function:
 
-``` text
+``` php
 echo __("Small step for {0}, Big leap for {1}", 'Man', 'Humanity');
 ```
 
 All translation functions support placeholder replacements:
 
-``` text
+``` php
 __d('validation', 'The field {0} cannot be left empty', 'Name');
 
 __x('alphabet', 'He read the letter {0}', 'Z');
@@ -215,13 +215,13 @@ The `'` (single quote) character acts as an escape code in translation
 messages. Any variables between single quotes will not be replaced and is
 treated as literal text. For example:
 
-``` text
+``` php
 __("This variable '{0}' be replaced.", 'will not');
 ```
 
 By using two adjacent quotes your variables will be replaced properly:
 
-``` text
+``` php
 __("This variable ''{0}'' be replaced.", 'will');
 ```
 
@@ -230,7 +230,7 @@ These functions take advantage of the
 so you can translate messages and localize dates, numbers and currency at the
 same time:
 
-``` text
+``` php
 echo __(
     'Hi {0}, your balance on the {1,date} is {2,number,currency}',
     ['Charles', new DateTime('2014-01-13 11:12:00'), 1354.37]
@@ -243,7 +243,7 @@ Hi Charles, your balance on the Jan 13, 2014, 11:12 AM is $ 1,354.37
 Numbers in placeholders can be formatted as well with fine grain control of the
 output:
 
-``` text
+``` php
 echo __(
     'You have traveled {0,number} kilometers in {1,number,integer} weeks',
     [5423.344, 5.1]
@@ -279,7 +279,7 @@ You can also use named placeholders like `{name}` in the message strings.
 When using named placeholders, pass the placeholder and replacement in an array using key/value pairs,
 for example:
 
-``` text
+``` php
 // echos:  Hi. My name is Sara. I'm 12 years old.
 echo __("Hi. My name is {name}. I'm {age} years old.", ['name' => 'Sara', 'age' => 12]);
 ```
@@ -307,7 +307,7 @@ msgstr "{placeholder,plural,=0{Ningún resultado} =1{1 resultado} other{{1} resu
 And in the application use the following code to output either of the
 translations for such string:
 
-``` text
+``` php
 __('{0,plural,=0{No records found }=1{Found 1 record} other{Found # records}}', [0]);
 
 // Returns "Ningún resultado" as the argument {0} is 0
@@ -346,7 +346,7 @@ msgstr "{0,plural,=0{Ningún resultado} =1{1 resultado} other{{1} resultados}}"
 
 Then use the new string in your code:
 
-``` text
+``` php
 __('search.results', [2, 2]);
 
 // Returns: "2 resultados"
@@ -598,14 +598,14 @@ variables in translation messages and selecting the correct plural form.
 If you're dealing with a legacy application, or you don't need the power offered
 by the ICU message formatting, CakePHP also provides the `sprintf` formatter:
 
-``` text
+``` php
 return Package('sprintf', 'fallback_domain', $messages);
 ```
 
 The messages to be translated will be passed to the `sprintf()` function for
 interpolating the variables:
 
-``` text
+``` php
 __('Hello, my name is %s and I am %d years old', 'José', 29);
 ```
 

@@ -462,7 +462,7 @@ because we don't have a Contact model defined yet.
 If your application includes the default routing CakePHP provides you will be
 able to access your plugin controllers using URLs like:
 
-``` text
+``` php
 // Access the index route of a plugin controller.
 /contact-manager/contacts
 
@@ -565,7 +565,7 @@ right folder inside of the `plugins/[PluginName]/templates/` folder. For our
 ContactManager plugin, we'll need a view for our `ContactsController::index()`
 action, so let's include that as well:
 
-``` text
+``` php
 // plugins/ContactManager/templates/Contacts/index.php:
 <h1>Contacts</h1>
 <p>Following is a sortable list of your contacts</p>

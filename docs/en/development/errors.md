@@ -59,7 +59,7 @@ deprecated. We also recommend this system for use in your plugins and
 application code when useful. You can trigger deprecation warnings with
 `deprecationWarning()`:
 
-``` text
+``` php
 deprecationWarning('5.0', 'The example() method is deprecated. Use getExample() instead.');
 ```
 
@@ -72,7 +72,7 @@ You can temporarily disable deprecation warnings in one of a few ways:
 2.  Using the `Error.ignoredDeprecationPaths` configuration option to ignore
     deprecations with glob compatible expressions. For example:
 
-    ``` text
+    ``` php
     'Error' => [
         'ignoredDeprecationPaths' => [
             'vendors/company/contacts/*',

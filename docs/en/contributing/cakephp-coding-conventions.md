@@ -32,7 +32,7 @@ Four spaces will be used for indentation.
 
 So, indentation should look like this:
 
-``` text
+``` php
 // base level
     // level 1
         // level 2
@@ -98,7 +98,7 @@ In short:
 Control structures are for example "`if`", "`for`", "`foreach`",
 "`while`", "`switch`" etc. Below, an example with "`if`":
 
-``` text
+``` php
 if ((expr_1) || (expr_2)) {
     // action_1;
 } elseif (!(expr_3) && (expr_4)) {
@@ -368,7 +368,7 @@ tags:
 PhpDoc tags are very much like JavaDoc tags in Java. Tags are only processed if
 they are the first thing in a DocBlock line, for example:
 
-``` text
+``` php
 /**
  * Tag example.
  *
@@ -377,7 +377,7 @@ they are the first thing in a DocBlock line, for example:
  */
 ```
 
-``` text
+``` php
 /**
  * Example of inline phpDoc tags.
  *
@@ -467,7 +467,7 @@ public function foo()
 `include`, `require`, `include_once` and `require_once` do not have
 parentheses:
 
-``` text
+``` php
 // wrong = parentheses
 require_once('ClassFileName.php');
 require_once ($class);
@@ -491,7 +491,7 @@ The short echo should be used in template files in place of `<?php echo`. It
 should be immediately followed by a single space, the variable or function value
 to `echo`, a single space, and the php closing tag:
 
-``` text
+``` php
 // wrong = semicolon, no spaces
 <td><?=$name;?></td>
 
@@ -593,14 +593,14 @@ of `floatval($var)` when applicable.
 
 Constants should be defined in capital letters:
 
-``` text
+``` php
 define('CONSTANT', 1);
 ```
 
 If a constant name consists of multiple words, they should be separated by an
 underscore character, for example:
 
-``` text
+``` php
 define('LONG_NAMED_CONSTANT', 2);
 ```
 
@@ -608,7 +608,7 @@ define('LONG_NAMED_CONSTANT', 2);
 
 Enum cases are defined in `CamelCase` style:
 
-``` text
+``` php
 enum ArticleStatus: string
 {
     case Published = 'Y';

@@ -34,7 +34,7 @@ If you have [Psysh](https://psysh.org/) installed you can use this
 function in CLI environments to open an interactive console with the current
 local scope:
 
-``` text
+``` php
 // Some code
 eval(breakpoint());
 ```
@@ -134,7 +134,7 @@ Returns the current stack trace. Each line of the trace includes
 the calling method, including which file and line the call
 originated from:
 
-``` text
+``` php
 // In PostsController::index()
 pr(Debugger::trace());
 
@@ -186,7 +186,7 @@ Exception and error pages can contain URLs that directly open in your editor or
 IDE. CakePHP ships with URL formats for several popular editors, and you can add
 additional editor formats if required during application bootstrap:
 
-``` text
+``` php
 // Generate links for vscode.
 Debugger::setEditor('vscode')
 

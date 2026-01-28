@@ -373,7 +373,7 @@ methods of FormHelper.
 
 By default the `control()` method will employ the following widget templates:
 
-``` text
+``` html
 'inputContainer' => '<div class="{{constainerClass}} {{type}}{{required}}">{{content}}</div>'
 'input' => '<input type="{{type}}" name="{{name}}"{{attrs}}>'
 'requiredClass' => 'required'
@@ -382,7 +382,7 @@ By default the `control()` method will employ the following widget templates:
 
 In case of validation errors it will also use:
 
-``` text
+``` html
 'inputContainerError' => '<div class="{{containerClass}} {{type}}{{required}} error">{{content}}{{error}}</div>'
 ```
 
@@ -899,7 +899,7 @@ Will output:
 
 Creates a textarea control field. The default widget template used is:
 
-``` text
+``` html
 'textarea' => '<textarea name="{{name}}"{{attrs}}>{{value}}</textarea>'
 ```
 
@@ -1158,7 +1158,7 @@ $options = $examples->map(function ($value, $key) {
 
 Creates a `checkbox` form element. The widget template used is:
 
-``` text
+``` html
 'checkbox' => '<input type="checkbox" name="{{name}}" value="{{value}}"{{attrs}}>'
 ```
 
@@ -1235,7 +1235,7 @@ Will output:
 
 Creates a set of radio button inputs. The default widget templates used are:
 
-``` text
+``` html
 'radio' => '<input type="radio" name="{{name}}" value="{{value}}"{{attrs}}>'
 'radioWrapper' => '{{label}}'
 ```
@@ -1366,14 +1366,14 @@ rendering the select picker.
 
 By default `select` uses the following widget templates:
 
-``` text
+``` html
 'select' => '<select name="{{name}}"{{attrs}}>{{content}}</select>'
 'option' => '<option value="{{value}}"{{attrs}}>{{text}}</option>'
 ```
 
 May also use:
 
-``` text
+``` html
 'optgroup' => '<optgroup label="{{label}}"{{attrs}}>{{content}}</optgroup>'
 'selectMultiple' => '<select name="{{name}}[]" multiple="multiple"{{attrs}}>{{content}}</select>'
 ```
@@ -1638,7 +1638,7 @@ certain behaviors of the `select()` method.
 Creates a file upload field in the form.
 The widget template used by default is:
 
-``` text
+``` html
 'file' => '<input type="file" name="{{name}}"{{attrs}}>'
 ```
 
@@ -1922,7 +1922,7 @@ provided then the default validation error message for that field will be used.
 
 Uses the following template widgets:
 
-``` text
+``` html
 'error' => '<div class="error-message">{{content}}</div>'
 'errorList' => '<ul>{{content}}</ul>'
 'errorItem' => '<li>{{text}}</li>'
@@ -2003,7 +2003,7 @@ If you want to manually set those events with custom JavaScript, you can set the
 option to `false` and use the special `customValidityMessage` template variable instead. This
 template variable is added when a field is required:
 
-``` text
+``` php
 // example template
 [
     'input' => '<input type="{{type}}" name="{{name}}" data-error-message="{{customValidityMessage}}" {{attrs}}/>',
@@ -2037,7 +2037,7 @@ relative to *webroot/img*.
 
 By default it will use the following widget templates:
 
-``` text
+``` html
 'inputSubmit' => '<input type="{{type}}"{{attrs}}>'
 'submitContainer' => '<div class="submit">{{content}}</div>'
 ```
@@ -2333,7 +2333,7 @@ $this->loadHelper('Form', [
 This would load the tags found in **config/app_form.php**. This file should
 contain an array of templates *indexed by name*:
 
-``` text
+``` php
 // in config/app_form.php
 return [
     'inputContainer' => '<div class="form-control">{{content}}</div>',

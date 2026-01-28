@@ -145,7 +145,7 @@ Cache and Database session handlers use this method for saving sessions.
 Additional settings for the handler should be placed inside the handler array.
 You can then read those values out from inside your handler:
 
-``` text
+``` php
 'Session' => [
     'handler' => [
         'engine' => 'DatabaseSession',
@@ -166,7 +166,7 @@ from inside plugins. By setting the engine to `MyPlugin.PluginSessionHandler`.
 
 If you need to use a database to store your session data, configure as follows:
 
-``` text
+``` php
 'Session' => [
     'defaults' => 'database'
 ]
@@ -189,7 +189,7 @@ You can find a copy of the schema for the sessions table in the [application ske
 
 You can also use your own `Table` class to handle the saving of the sessions:
 
-``` text
+``` php
 'Session' => [
     'defaults' => 'database',
     'handler' => [
@@ -231,7 +231,7 @@ configuration to use. The default cache configuration is `'default'`.
 
 The app skeleton comes preconfigured with a session config like this:
 
-``` text
+``` php
 'Session' => [
     'defaults' => 'php',
 ],
@@ -343,7 +343,7 @@ a `Cake\Cache\Cache` operation. This lets us fetch sessions from
 the fast cache, and not have to worry about what happens when we fill the cache.
 In **config/app.php** make the session block look like:
 
-``` text
+``` php
 'Session' => [
     'defaults' => 'database',
     'handler' => [

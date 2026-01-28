@@ -277,7 +277,7 @@ Since plugins, view templates and locales are not classes, they cannot have an
 autoloader configured. CakePHP provides three Configure variables to setup additional
 paths for these resources. In your **config/app.php** you can set these variables:
 
-``` text
+``` php
 return [
     // More configuration
     'App' => [

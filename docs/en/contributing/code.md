@@ -52,7 +52,7 @@ is for. For example if you are fixing a bug in `3.x` you would want to use the
 `master` branch as the base for your branch. If your change is a bug fix for
 the 2.x release series, you should use the `2.x` branch:
 
-``` text
+``` bash
 # fixing a bug on 3.x
 git fetch upstream
 git checkout -b ticket-1234 upstream/master
@@ -80,7 +80,7 @@ following:
 Once your changes are done and you're ready for them to be merged into CakePHP,
 you'll want to update your branch:
 
-``` text
+``` bash
 # Rebase fix on top of master
 git checkout master
 git fetch upstream
@@ -95,20 +95,20 @@ code. You might encounter a conflict during the `rebase`. If the rebase quits
 early you can see which files are conflicted/un-merged with `git status`.
 Resolve each conflict, and then continue the rebase:
 
-``` text
+``` bash
 git add <filename> # do this for each conflicted file.
 git rebase --continue
 ```
 
 Check that all your tests continue to pass. Then push your branch to your fork:
 
-``` text
+``` bash
 git push origin <branch-name>
 ```
 
 If you've rebased after pushing your branch, you'll need to use force push:
 
-``` text
+``` bash
 git push --force origin <branch-name>
 ```
 

@@ -60,7 +60,7 @@ public function initialize(): void
 Whether your templates are in the primary application or a plugin, your
 templates file should look something like:
 
-``` text
+``` php
 return [
     'number' => '<a href="{{url}}">{{text}}</a>',
 ];

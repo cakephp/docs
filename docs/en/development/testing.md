@@ -473,7 +473,7 @@ time-consuming to maintain.
 Each table can define `columns`, `constraints`, and `indexes`.
 An example table would be:
 
-``` text
+``` php
 return [
   'articles' => [
      'columns' => [

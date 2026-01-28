@@ -56,7 +56,7 @@ columns. Often used in conjunction with the FormHelper.
 HTML attributes
 An array of key =\> values that are composed into HTML attributes. For example:
 
-``` text
+``` php
 // Given
 ['class' => 'my-class', 'target' => '_blank']
 
@@ -67,7 +67,7 @@ class="my-class" target="_blank"
 If an option can be minimized or accepts its name as the value, then `true`
 can be used:
 
-``` text
+``` php
 // Given
 ['checked' => true]
 
@@ -87,7 +87,7 @@ plugin syntax
 Plugin syntax refers to the dot separated class name indicating classes
 are part of a plugin:
 
-``` text
+``` php
 // The plugin is "DebugKit", and the class name is "Toolbar".
 'DebugKit.Toolbar'
 

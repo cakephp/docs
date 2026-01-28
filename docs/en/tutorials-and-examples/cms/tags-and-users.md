@@ -385,7 +385,7 @@ echo $this->Form->control('tag_string', ['type' => 'text']);
 We'll also need to update the article view template. In
 **templates/Articles/view.php** add the line as shown:
 
-``` text
+``` php
 <!-- File: templates/Articles/view.php -->
 
 <h1><?= h($article->title) ?></h1>

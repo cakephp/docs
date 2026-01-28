@@ -145,7 +145,7 @@ It is possible to use the CounterCache behavior in a `belongsToMany` association
 First, you need to add the `through` and `cascadeCallbacks` options to the
 `belongsToMany` association:
 
-``` text
+``` php
 'through'          => 'CommentsArticles',
 'cascadeCallbacks' => true
 ```
