@@ -1,5 +1,9 @@
 # Welcome
 
+::: warning Unsupported Version
+You are viewing documentation for an **unsupported version** of CakePHP. For the most recent stable version, please visit the [official documentation](https://book.cakephp.org/).
+:::
+
 CakePHP 3 is a web development framework running on PHP |phpversion| (min. PHP |minphpversion|). Read [CakePHP at a Glance](intro) to get an introduction to the fundamentals of CakePHP 3.
 
 The CakePHP cookbook is an openly developed and community editable documentation
