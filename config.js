@@ -46,6 +46,7 @@ export default {
     '|phpversion|': { value: '8.5', format: 'bold' },
     '|minphpversion|': { value: '8.2', format: 'italic' },
     '|cakeversion|': '5.4.0',
+    '|cakefullversion|': 'CakePHP 5.next',
   },
   locales: {
     root: {
