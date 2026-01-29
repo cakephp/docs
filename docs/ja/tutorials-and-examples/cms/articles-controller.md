@@ -18,8 +18,8 @@ class ArticlesController extends AppController
 ```
 
 それでは、コントローラーにアクションを追加しましょう。アクションは、ルートに接続させる
-コントローラーのメソッドです。例えば、ユーザーが **www.example.com/articles/index**
-(**www.example.com/articles** と同じ) をリクエストした場合、CakePHP は、
+コントローラーのメソッドです。例えば、ユーザーが **<www.example.com/articles/index>**
+(**<www.example.com/articles>** と同じ) をリクエストした場合、CakePHP は、
 `ArticlesController` の `index` メソッドを呼びます。このメソッドは、モデル層に問い合わせ、
 ビューでテンプレートを描画してレスポンスを準備する必要があります。そのアクションのコードは、
 次のようになります。 :
@@ -41,9 +41,9 @@ class ArticlesController extends AppController
 ```
 
 `ArticlesController` の `index()` メソッドを定義することで、ユーザーは、
-**www.example.com/articles/index** をリクエストすることで、そこにあるロジックに
+**<<www.example.com/articles>/index>** をリクエストすることで、そこにあるロジックに
 アクセスできるようになります。同様に、 `foobar()` というメソッドを定義した場合、
-ユーザーはそのメソッドに **www.example.com/articles/foobar** で、アクセスできます。
+ユーザーはそのメソッドに **<www.example.com/articles>/foobar** で、アクセスできます。
 特定の URL を取得できるように、コントローラーとアクションの名前を付けたいという
 誘惑に駆られるかもしれません。その誘惑に抗ってください。代わりに、 [CakePHP の規約](../../intro/conventions)
 にしたがって、読みやすく意味のあるアクション名を作成してください。そうすれば
@@ -115,7 +115,7 @@ CakePHP で URL を指定する際、配列や [名前付きルート](../../dev
 推奨されます。これらの構文で、CakePHP が提供するリバースルーティング機能を
 活用することができます。
 
-この時点で、ブラウザーで **http://localhost:8765/articles/index** を
+この時点で、ブラウザーで **<http://localhost:8765/articles/index>** を
 見ることができるはずです。記事のタイトルとテーブルのリストで正しくフォーマットされた
 リストビューが表示されます。
 

@@ -848,21 +848,21 @@ INSERT INTO articles (title) VALUES ('My new title');
 
 When an entity is saved a few things happen:
 
-1.  Rule checking will be started if not disabled.
-2.  Rule checking will trigger the `Model.beforeRules` event. If this event is
+1. Rule checking will be started if not disabled.
+2. Rule checking will trigger the `Model.beforeRules` event. If this event is
     stopped, the save operation will fail and return `false`.
-3.  Rules will be checked. If the entity is being created, the `create` rules
+3. Rules will be checked. If the entity is being created, the `create` rules
     will be used. If the entity is being updated, the `update` rules will be
     used.
-4.  The `Model.afterRules` event will be triggered.
-5.  The `Model.beforeSave` event is dispatched. If it is stopped, the save will
+4. The `Model.afterRules` event will be triggered.
+5. The `Model.beforeSave` event is dispatched. If it is stopped, the save will
     be aborted, and save() will return `false`.
-6.  Parent associations are saved. For example, any listed belongsTo
+6. Parent associations are saved. For example, any listed belongsTo
     associations will be saved.
-7.  The modified fields on the entity will be saved.
-8.  Child associations are saved. For example, any listed hasMany, hasOne, or
+7. The modified fields on the entity will be saved.
+8. Child associations are saved. For example, any listed hasMany, hasOne, or
     belongsToMany associations will be saved.
-9.  The `Model.afterSave` event will be dispatched.
+9. The `Model.afterSave` event will be dispatched.
 10. The `Model.afterSaveCommit` event will be dispatched.
 
 The following diagram illustrates the above process:

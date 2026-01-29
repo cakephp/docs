@@ -240,14 +240,14 @@ $mailer->viewBuilder()
 メールにファイルを添付することができます。添付するファイルの種類や、
 宛先のメールクライアントにどのようなファイル名で送りたいのかによって幾つかの異なる書式があります。
 
-1.  配列: `$email->attachments(['/full/file/path/file.png'])` は、 文字列の場合と同じ振る舞いをします。
+1. 配列: `$email->attachments(['/full/file/path/file.png'])` は、 文字列の場合と同じ振る舞いをします。
 
-2.  キー付き配列:　
+2. キー付き配列:
     `$mailer->setAttachments(['photo.png' => '/full/some_hash.png'])` は、
     photo.png というファイル名で some_hash.png ファイルを添付します。
     受信者からは、some_hash.png ではなく photo.png として見えます。
 
-3.  ネストした配列:
+3. ネストした配列:
 
     ``` php
     $mailer->setAttachments([
@@ -303,7 +303,7 @@ $mailer->setEmailPattern($newPattern);
 Email::deliver('you@example.com', 'Subject', 'Message', ['from' => 'me@example.com']);
 ```
 
-このメソッドは、 「you@example.com」宛に、「me@example.com」から、件名「Subject」、
+このメソッドは、 「<you@example.com>」宛に、「<me@example.com>」から、件名「Subject」、
 本文「Message」でメールを送信します。
 
 `deliver()` の戻り値は、 すべての設定を持つ `Cake\Mailer\Email` インスタンスです。

@@ -67,7 +67,7 @@ The third parameter is an array of options for further defining the
 output. The following options are available:
 
 | Option | Description |
-|----|----|
+| ---- | ---- |
 | before | Text to display before the rendered number. |
 | after | Text to display after the rendered number. |
 | zero | The text to use for zero values; can be a string or a number. ie. 0, 'Free!'. |
@@ -136,7 +136,7 @@ echo Number::precision(456.91873645, 2);
 `method` Cake\\I18n\\Number::**toPercentage**(mixed $value, int $precision = 2, array $options = []): string
 
 | Option | Description |
-|----|----|
+| ---- | ---- |
 | multiply | Boolean to indicate whether the value has to be multiplied by 100. Useful for decimal percentages. |
 
 Like `Cake\I18n\Number::precision()`, this method formats a number
@@ -215,7 +215,7 @@ resides.
 - If you pass an associated array, you can use the following keys:
 
 | Option | Description |
-|----|----|
+| ---- | ---- |
 | places | Number of decimal places to use, ie. 2 |
 | precision | Maximum number of decimal places to use, ie. 2 |
 | pattern | An ICU number pattern to use for formatting the number ie. \#,###.00 |

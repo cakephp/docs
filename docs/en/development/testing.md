@@ -19,7 +19,7 @@ through using either a [PHAR package](https://phpunit.de/#download) or
 To install PHPUnit with Composer:
 
 ``` bash
-$ php composer.phar require --dev phpunit/phpunit:"^11.5.3"
+php composer.phar require --dev phpunit/phpunit:"^11.5.3"
 ```
 
 This will add the dependency to the `require-dev` section of your
@@ -28,7 +28,7 @@ This will add the dependency to the `require-dev` section of your
 You can now run PHPUnit using:
 
 ``` bash
-$ vendor/bin/phpunit
+vendor/bin/phpunit
 ```
 
 ### Using the PHAR File
@@ -85,10 +85,10 @@ application's tests:
 
 ``` bash
 # For phpunit.phar
-$ php phpunit.phar
+php phpunit.phar
 
 # For Composer installed phpunit
-$ vendor/bin/phpunit
+vendor/bin/phpunit
 ```
 
 The above should run any tests you have, or let you know that no tests were run.
@@ -97,7 +97,7 @@ PHPUnit. For example, if you had a test case for ArticlesTable class you could
 run it with:
 
 ``` bash
-$ vendor/bin/phpunit tests/TestCase/Model/Table/ArticlesTableTest
+vendor/bin/phpunit tests/TestCase/Model/Table/ArticlesTableTest
 ```
 
 You should see a green bar with some additional information about the tests run,
@@ -111,15 +111,15 @@ and number passed.
 Like most things in CakePHP, test cases have some conventions. Concerning
 tests:
 
-1.  PHP files containing tests should be in your
+1. PHP files containing tests should be in your
     `tests/TestCase/[Type]` directories.
-2.  The filenames of these files should end in **Test.php** instead
+2. The filenames of these files should end in **Test.php** instead
     of just .php.
-3.  The classes containing tests should extend `Cake\TestSuite\TestCase`
+3. The classes containing tests should extend `Cake\TestSuite\TestCase`
     or `\PHPUnit\Framework\TestCase`.
-4.  Like other classnames, the test case classnames should match the filename.
+4. Like other classnames, the test case classnames should match the filename.
     **RouterTest.php** should contain `class RouterTest extends TestCase`.
-5.  The name of any method containing a test (i.e. containing an
+5. The name of any method containing a test (i.e. containing an
     assertion) should begin with `test`, as in `testPublished()`.
     You can also use the `#[Test]` attribute to mark methods as test methods.
 
@@ -279,7 +279,7 @@ methods when you are trying to work on a single failing case. With the
 CLI runner you can use an option to filter test methods:
 
 ``` bash
-$ phpunit --filter testSave tests/TestCase/Model/Table/ArticlesTableTest
+phpunit --filter testSave tests/TestCase/Model/Table/ArticlesTableTest
 ```
 
 The filter parameter is used as a case-sensitive regular expression for
@@ -293,7 +293,7 @@ containing the coverage results. You can generate coverage for a test case by
 doing the following:
 
 ``` bash
-$ phpunit --coverage-html webroot/coverage tests/TestCase/Model/Table/ArticlesTableTest
+phpunit --coverage-html webroot/coverage tests/TestCase/Model/Table/ArticlesTableTest
 ```
 
 This will put the coverage results in your application's webroot directory. You
@@ -304,7 +304,7 @@ You can also use `phpdbg` to generate coverage instead of xdebug.
 `phpdbg` is generally faster at generating coverage:
 
 ``` bash
-$ phpdbg -qrr phpunit --coverage-html webroot/coverage tests/TestCase/Model/Table/ArticlesTableTest
+phpdbg -qrr phpunit --coverage-html webroot/coverage tests/TestCase/Model/Table/ArticlesTableTest
 ```
 
 ### Combining Test Suites for Plugins
@@ -374,10 +374,10 @@ raised and you will not be able to use database fixtures.
 
 CakePHP performs the following during the course of a test run:
 
-1.  Creates tables for each of the fixtures needed.
-2.  Populates tables with data.
-3.  Runs test methods.
-4.  Empties the fixture tables.
+1. Creates tables for each of the fixtures needed.
+2. Populates tables with data.
+3. Runs test methods.
+4. Empties the fixture tables.
 
 The schema for fixtures is created at the beginning of a test run via migrations
 or a SQL dump file.
@@ -2110,15 +2110,15 @@ bin/cake bake test <type> <name>
 
 `<type>` should be one of:
 
-1.  Entity
-2.  Table
-3.  Controller
-4.  Component
-5.  Behavior
-6.  Helper
-7.  Shell
-8.  Task
-9.  ShellHelper
+1. Entity
+2. Table
+3. Controller
+4. Component
+5. Behavior
+6. Helper
+7. Shell
+8. Task
+9. ShellHelper
 10. Cell
 11. Form
 12. Mailer

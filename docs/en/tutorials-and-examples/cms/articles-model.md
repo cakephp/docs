@@ -85,6 +85,7 @@ terminal:
 ``` bash
 bin/cake bake model articles
 ```
+
 :::
 
 We can't do much with this model yet. Next, we'll create our first

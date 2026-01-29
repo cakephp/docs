@@ -22,8 +22,8 @@ CakePHPアプリケーションには、シェルとタスクを含む **src/Com
 また、binディレクトリには実行ファイルが付属しています。
 
 ``` bash
-$ cd /path/to/app
-$ bin/cake
+cd /path/to/app
+bin/cake
 ```
 
 > [!NOTE]

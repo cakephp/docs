@@ -375,7 +375,7 @@ of the record being deleted in your Table's method.
 
 You can manage event priorities in one of a few ways:
 
-1.  Change the `priority` of a Behavior's listeners using the `priority`
+1. Change the `priority` of a Behavior's listeners using the `priority`
     option. This will modify the priority of **all** callback methods in the
     Behavior:
 
@@ -388,7 +388,7 @@ You can manage event priorities in one of a few ways:
     ]);
     ```
 
-2.  Modify the `priority` in your `Table` class by using the
+2. Modify the `priority` in your `Table` class by using the
     `Model.implementedEvents()` method. This allows you to assign a different
     priority per callback-function:
 

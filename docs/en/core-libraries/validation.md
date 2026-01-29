@@ -99,16 +99,16 @@ which empty values are accepted and not forwarded to other validation rules for
 the named field. CakePHP provides empty value support for different shapes
 of data:
 
-1.  `allowEmptyString()` Should be used when you want to only accept
+1. `allowEmptyString()` Should be used when you want to only accept
     an empty string.
-2.  `allowEmptyArray()` Should be used when you want to accept an array.
-3.  `allowEmptyDate()` Should be used when you want to accept an empty string,
+2. `allowEmptyArray()` Should be used when you want to accept an array.
+3. `allowEmptyDate()` Should be used when you want to accept an empty string,
     or an array that is marshalled into a date field.
-4.  `allowEmptyTime()` Should be used when you want to accept an empty string,
+4. `allowEmptyTime()` Should be used when you want to accept an empty string,
     or an array that is marshalled into a time field.
-5.  `allowEmptyDateTime()` Should be used when you want to accept an empty
+5. `allowEmptyDateTime()` Should be used when you want to accept an empty
     string or an array that is marshalled into a datetime or timestamp field.
-6.  `allowEmptyFile()` Should be used when you want to accept an array that
+6. `allowEmptyFile()` Should be used when you want to accept an array that
     contains an empty uploaded file.
 
 You also can use following specific validators: `notEmptyString()`, `notEmptyArray()`, `notEmptyFile()`, `notEmptyDate()`, `notEmptyTime()`, `notEmptyDateTime()`.

@@ -41,7 +41,7 @@ bin/cake bake all tags
 ```
 
 Once you have the scaffold code created, create a few sample tags by going to
-**http://localhost:8765/tags/add**.
+**<http://localhost:8765/tags/add>**.
 
 Now that we have a Tags table, we can create an association between Articles and
 Tags. We can do so by adding the following to the `initialize` method on the
@@ -156,7 +156,7 @@ by the tags they used. For this feature we'll implement a route, controller
 action, and finder method to search through articles by tag.
 
 Ideally, we'd have a URL that looks like
-**http://localhost:8765/articles/tagged/funny/cat/gifs**. This would let us
+**<http://localhost:8765/articles/tagged/funny/cat/gifs>**. This would let us
 find all the articles that have the 'funny', 'cat' or 'gifs' tags. Before we
 can implement this, we'll add a new route. Your **config/routes.php** (with
 the baked comments removed) should look like:
@@ -187,7 +187,7 @@ $routes->scope('/', function (RouteBuilder $builder) {
 The above defines a new 'route' which connects the **/articles/tagged/** path,
 to `ArticlesController::tags()`. By defining routes, you can isolate how your
 URLs look, from how they are implemented. If we were to visit
-**http://localhost:8765/articles/tagged**, we would see a helpful error page
+**<http://localhost:8765/articles/tagged>**, we would see a helpful error page
 from CakePHP informing you that the controller action does not exist. Let's
 implement that missing method now. In **src/Controller/ArticlesController.php**
 add the following:
