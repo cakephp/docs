@@ -97,8 +97,14 @@ class user extends AppController
 - **Actions:** camelBacked public methods - `viewMe()`, `editProfile()`
 - **URLs:** Lowercase with dashes - `/users/view-me` maps to `viewMe()`
 
+> [!WARNING]
+> Only **public** methods are accessible through routing. Protected and private methods cannot be accessed via URLs, providing automatic security for internal helper methods.
+
 > [!TIP]
 > **Acronyms:** Treat them as words. `CMS` becomes `CmsController`, not `CMSController`
+
+> [!NOTE]
+> CakePHP uses the `DashedRoute` class by convention to automatically convert camelCase action names to dashed URLs. See [Routes Configuration](../development/routing#routes-configuration) for details.
 
 **URL Arrays:**
 
@@ -258,6 +264,9 @@ your-name/blog        // Missing cakephp- prefix
 
 See [awesome list recommendations](https://github.com/FriendsOfCake/awesome-cakephp/blob/master/CONTRIBUTING.md#tips-for-creating-cakephp-plugins) for details.
 
+<a id="file-and-classname-conventions"></a>
+<a id="model-and-database-conventions"></a>
+
 ## File and Class Name Conventions
 
 All files follow **PSR-4 autoloading** - filenames must match class names exactly:
@@ -272,9 +281,6 @@ All files follow **PSR-4 autoloading** - filenames must match class names exactl
 | View | `SuperSimpleView` | `SuperSimpleView.php` | `src/View/` |
 | Helper | `BestEverHelper` | `BestEverHelper.php` | `src/View/Helper/` |
 | Command | `UpdateCacheCommand` | `UpdateCacheCommand.php` | `src/Command/` |
-
-<a id="file-and-classname-conventions"></a>
-<a id="model-and-database-conventions"></a>
 
 ## Complete Example: Articles Feature
 

@@ -160,5 +160,4 @@ The next obvious steps are to [download CakePHP](installation), read the
 ## Additional Reading
 
 - [Where to Get Help](intro/where-to-get-help)
-- [CakePHP Conventions](intro/conventions)
-- [CakePHP Folder Structure](intro/cakephp-folder-structure)
+- [Structure & Conventions](intro/conventions)
