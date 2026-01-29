@@ -45,6 +45,7 @@ CakePHP's `src/` folder is where you will do most of your application
 development. Let's look a little closer at the folders inside.
 
 ### Command
+
 Contains your application's console commands. See
 [Command Objects](../console-commands/commands) to learn more.
 
@@ -53,17 +54,21 @@ Contains your application's console commands. See
 > It will be auto generated when you create your first command using bake.
 
 ### Console
+
 Contains the installation script executed by Composer.
 
 ### Controller
+
 Contains your application's [Controllers](../controllers) and their components.
 
 ### Middleware
+
 Stores any [Middleware](../controllers/middleware) for your application.
 
 ### Model
+
 Contains your application's [Tables](../orm/table-objects.md), [Entities](../orm/entities.md) and [Behaviors](../orm/behaviors.md).
 
 ### View
-Presentational classes are placed here: [Views](../views.md), [Cells](../views/cells.md), [Helpers](../views/helpers.md).
 
+Presentational classes are placed here: [Views](../views.md), [Cells](../views/cells.md), [Helpers](../views/helpers.md).

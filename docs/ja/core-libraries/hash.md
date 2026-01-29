@@ -577,7 +577,7 @@ $res = Hash::numeric($data);
 // $res は false
 ```
 
-`static` Cake\\Utility\\Hash::**dimensions **(array $data)
+`static` Cake\\Utility\\Hash::**dimensions**(array $data)
 
 配列の次元数を数えます。このメソッドは配列の１つ目の要素だけを見て次元を判定します。 :
 

@@ -1184,8 +1184,8 @@ $this->response = $this->response->cors($this->request)
 CORS related headers will only be applied to the response if the following
 criteria are met:
 
-1.  The request has an `Origin` header.
-2.  The request's `Origin` value matches one of the allowed Origin values.
+1. The request has an `Origin` header.
+2. The request's `Origin` value matches one of the allowed Origin values.
 
 #### CorsBuilder Methods
 

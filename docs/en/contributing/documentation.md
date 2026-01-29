@@ -29,7 +29,7 @@ Github and we will consider creating a skeleton folder for it. The following
 sections are the first one you should consider translating as these
 files don't change often:
 
-```
+```text
 - index.md
 - intro.md
 - quickstart.md
@@ -127,6 +127,7 @@ Headings should not be nested more than 4 levels deep for readability.
 Always add a blank line before and after headings.
 
 Example:
+
 ```markdown
 ## Major Section
 
@@ -157,6 +158,7 @@ indentation. Paragraphs should be separated by one blank line.
   - Example: `cascadeCallbacks`, `PagesController`, `config()`, `true`
 
 **Tips:**
+
 - Ensure proper spacing around inline markup for it to render correctly
 - Inline code doesn't require escaping special characters
 - You can escape special characters with backslash if needed: `\*not italic\*`
@@ -220,6 +222,7 @@ Link to other pages in the documentation using relative paths:
 ```
 
 Examples:
+
 - Same directory: `[Installation](./installation.md)`
 - Parent directory: `[Controllers](../controllers.md)`
 - Subdirectory: `[Components](./controllers/components.md)`
@@ -239,6 +242,7 @@ VitePress automatically generates anchor IDs from headings in kebab-case.
 For example, `## My Section Title` becomes `#my-section-title`.
 
 Link to a section in another page:
+
 ```markdown
 [Link text](./other-page.md#section-anchor)
 ```
@@ -255,12 +259,14 @@ description: A brief description of the page content
 ```
 
 Optional frontmatter fields:
+
 - `title`: Page title (used in browser tab and navigation)
 - `description`: Page description for SEO
 - `head`: Additional head tags
 - `layout`: Custom layout (default is 'doc')
 
 Example:
+
 ```markdown
 ---
 title: Controllers
@@ -289,6 +295,7 @@ class MyController extends Controller
 ````
 
 Common language identifiers:
+
 - `php` - PHP code
 - `bash` or `shell` - Shell commands
 - `javascript` or `js` - JavaScript
@@ -543,6 +550,7 @@ node bin/check-links.js --baseline .github/linkchecker-baseline.json "docs/**/*.
 :::
 
 The link checker validates:
+
 - Internal file references (relative links)
 - Anchor links to headings within pages
 - Directory index links
@@ -593,7 +601,9 @@ node bin/check-links.js docs/en/your-file.md
 
 :::e --check config.js
 jq empty toc_en.json
-```
+
+```shell
 :::
+```
 
 If the CI checks fail, review the error messages and fix the issues before requesting a review.

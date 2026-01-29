@@ -1760,10 +1760,10 @@ through event listeners.
 
 When the results for a cached query are fetched the following happens:
 
-1.  If the query has results set, those will be returned.
-2.  The cache key will be resolved and cache data will be read. If the cache data
+1. If the query has results set, those will be returned.
+2. The cache key will be resolved and cache data will be read. If the cache data
     is not empty, those results will be returned.
-3.  If the cache misses, the query will be executed, the `Model.beforeFind` event
+3. If the cache misses, the query will be executed, the `Model.beforeFind` event
     will be triggered, and a new `ResultSet` will be created. This
     `ResultSet` will be written to the cache and returned.
 
@@ -2257,9 +2257,9 @@ of several smaller query results together. They can serve a similar purpose
 to database views or subquery results. Common Table Expressions differ from
 derived tables and views in a couple ways:
 
-1.  Unlike views, you don't have to maintain schema for common table expressions.
+1. Unlike views, you don't have to maintain schema for common table expressions.
     The schema is implicitly based on the result set of the table expression.
-2.  You can reference the results of a common table expression multiple times
+2. You can reference the results of a common table expression multiple times
     without incurring performance penalties unlike subquery joins.
 
 As an example lets fetch a list of customers and the number of orders each of

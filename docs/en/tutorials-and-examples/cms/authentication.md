@@ -63,7 +63,7 @@ class User extends Entity
 }
 ```
 
-Now, point your browser to **http://localhost:8765/users** to see a list of users.
+Now, point your browser to **<http://localhost:8765/users>** to see a list of users.
 Remember you'll need to have your local server running. Start a standalone PHP
 server using `bin/cake server`.
 

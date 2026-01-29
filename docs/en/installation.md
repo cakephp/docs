@@ -11,18 +11,20 @@ CakePHP is designed to be easy to install and configure. This guide will walk yo
 
 ::: tip Quick Check
 Verify your PHP version meets the requirements:
+
 ```bash
 php -v
 ```
+
 :::
 
 **Minimum Requirements:**
 
-| Component | Version |
-|-----------|---------|
-| PHP | |minphpversion| (|phpversion| supported) |
+| Component  | Version |
+| ---------- | ------- |
+| PHP        | |minphpversion| (|phpversion| supported) |
 | Extensions | `mbstring`, `intl`, `pdo`, `simplexml` |
-| Composer | Latest stable |
+| Composer   | Latest stable |
 
 **Supported Databases:**
 
@@ -81,6 +83,7 @@ bin/cake server --frankenphp
 
 ::: tip Version Constraints
 Your `composer.json` version constraint controls updates:
+
 - `"cakephp/cakephp": "|cakeversion|.*"` - Patch releases only (recommended)
 - `"cakephp/cakephp": "^|cakeversion|"` - Minor + patch releases (may require config changes)
 :::
@@ -222,7 +225,7 @@ bin/cake server -H 0.0.0.0
 :::
 
 ::: tip Success!
-Visit **http://localhost:8765** and you should see the CakePHP welcome page with green checkmarks.
+Visit **<http://localhost:8765>** and you should see the CakePHP welcome page with green checkmarks.
 :::
 
 ::: danger Production Warning
@@ -323,10 +326,12 @@ apache2ctl -M | grep rewrite
 4. Restart Apache after configuration changes
 
 **Performance optimization:**
+
 ```apache
 # Add to webroot/.htaccess to prevent CakePHP from handling static assets
 RewriteCond %{REQUEST_URI} !^/(webroot/)?(img|css|js)/(.*)$
 ```
+
 :::
 
 ### nginx
@@ -361,6 +366,7 @@ server {
 
 ::: warning PHP-FPM Socket
 Modern PHP-FPM uses Unix sockets instead of TCP. Update `fastcgi_pass` to match your setup:
+
 - Unix socket: `unix:/var/run/php/php8.2-fpm.sock`
 - TCP: `127.0.0.1:9000`
 :::
@@ -428,9 +434,11 @@ myapp.local {
 
 ::: tip Local Development
 For local development, you can use the built-in CakePHP development server with FrankenPHP support:
+
 ```bash
 bin/cake server --frankenphp
 ```
+
 This requires the `frankenphp` binary to be available in your `PATH`.
 :::
 
@@ -481,10 +489,12 @@ In **config/app.php**, uncomment:
 ```
 
 Remove these `.htaccess` files:
+
 - `/.htaccess`
 - `/webroot/.htaccess`
 
 Your URLs will include `index.php`:
+
 - **With rewriting:** `https://myapp.com/articles/view/1`
 - **Without rewriting:** `https://myapp.com/index.php/articles/view/1`
 
@@ -497,6 +507,7 @@ Follow the [Quick Start Guide](quickstart) to create your first CakePHP applicat
 :::
 
 **Learn More:**
+
 - [Configuration](development/configuration) - Customize your application
 - [Database Setup](orm/database-basics) - Connect to your database
 - [Tutorials](tutorials-and-examples) - Step-by-step guides

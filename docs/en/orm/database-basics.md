@@ -734,8 +734,8 @@ TypeFactory::map('point_mutation', \App\Database\Type\PointMutationType:class);
 
 We then have two ways to use our datatype in our models.
 
-1.  The first path is to overwrite the reflected schema data to use our new type.
-2.  The second is to implement `Cake\Database\Type\ColumnSchemaAwareInterface`
+1. The first path is to overwrite the reflected schema data to use our new type.
+2. The second is to implement `Cake\Database\Type\ColumnSchemaAwareInterface`
     and define the SQL column type and reflection logic.
 
 Overwriting the reflected schema with our custom type will enable CakePHP's

@@ -1063,9 +1063,9 @@ $routes->scope('/', function (RouteBuilder $routes) {
 使用されている HTTP メソッドは、いくつかの異なるソースから検出されます。
 優先順位の順のソースは次のとおりです。
 
-1.  `_method` POST 変数
-2.  `X_HTTP_METHOD_OVERRIDE` ヘッダー
-3.  `REQUEST_METHOD` ヘッダー
+1. `_method` POST 変数
+2. `X_HTTP_METHOD_OVERRIDE` ヘッダー
+3. `REQUEST_METHOD` ヘッダー
 
 `_method` POST 変数の値を使う方法は、ブラウザーを使った REST クライアントの場合
 (または POST でできる何か)に便利です。エミュレートしたい HTTP リクエストの名前を
