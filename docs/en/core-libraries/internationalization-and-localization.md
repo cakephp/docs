@@ -233,7 +233,7 @@ same time:
 ``` php
 echo __(
     'Hi {0}, your balance on the {1,date} is {2,number,currency}',
-    ['Charles', new DateTime('2014-01-13 11:12:00'), 1354.37]
+    ['Charles', new DateTime('2014-01-13 11:12:00'), 1354.37],
 );
 
 // Returns
@@ -246,7 +246,7 @@ output:
 ``` php
 echo __(
     'You have traveled {0,number} kilometers in {1,number,integer} weeks',
-    [5423.344, 5.1]
+    [5423.344, 5.1],
 );
 
 // Returns
@@ -434,7 +434,7 @@ use Cake\I18n\Package;
 I18n::setTranslator('animals', function () {
     $package = new Package(
         'default', // The formatting strategy (ICU)
-        'default'  // The fallback domain
+        'default',  // The fallback domain
     );
     $package->setMessages([
         'Dog' => 'Chien',
@@ -471,7 +471,7 @@ use Cake\I18n\MessagesFileLoader as Loader;
 I18n::setTranslator(
     'animals',
     new Loader('filename', 'folder/sub_folder', 'po'),
-    'fr_FR'
+    'fr_FR',
 );
 ```
 
@@ -512,7 +512,7 @@ use Cake\I18n\MessagesFileLoader as Loader;
 I18n::setTranslator(
     'animals',
     new Loader('animals', 'fr_FR', 'yaml'),
-    'fr_FR'
+    'fr_FR',
 );
 ```
 
@@ -540,7 +540,7 @@ I18n::config('default', function ($domain, $locale) {
     return new Package(
         'default', // Formatter
         null, // Fallback (none for default domain)
-        json_decode($messages, true)
+        json_decode($messages, true),
     )
 });
 ```
@@ -707,7 +707,7 @@ class DatetimeMiddleware implements MiddlewareInterface
 {
     public function process(
         ServerRequestInterface $request,
-        RequestHandlerInterface $handler
+        RequestHandlerInterface $handler,
     ): ResponseInterface {
         // Get the user from the request.
         // This example assumes your user entity has a timezone attribute.

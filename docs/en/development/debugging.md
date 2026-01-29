@@ -83,7 +83,7 @@ Debugger::dump($foo);
 array(
     1,
     2,
-    3
+    3,
 )
 
 // Simple object

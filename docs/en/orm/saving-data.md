@@ -463,7 +463,7 @@ associations:
 ``` php
 $articles->patchEntity($article, $this->request->getData(), [
     'validate' => 'custom',
-    'associated' => ['Tags', 'Comments.Users' => ['validate' => 'signup']]
+    'associated' => ['Tags', 'Comments.Users' => ['validate' => 'signup']],
 ]);
 ```
 
@@ -524,7 +524,7 @@ If a Product belongsToMany Tag:
 // in the Product Entity
 protected array $_accessible = [
     // .. other properties
-   'tags' => true,
+    'tags' => true,
 ];
 ```
 
@@ -627,7 +627,7 @@ array:
 $patched = $articles->patchEntities(
     $list,
     $this->request->getData(),
-    ['associated' => ['Tags', 'Comments.Users']]
+    ['associated' => ['Tags', 'Comments.Users']],
 );
 ```
 
@@ -708,7 +708,7 @@ public function afterMarshal(
     EventInterface $event,
     EntityInterface $entity,
     ArrayObject $data,
-    ArrayObject $options
+    ArrayObject $options,
 ): void {
     // Don't accept people who have a name starting with J on the 20th
     // of each month.
@@ -750,7 +750,7 @@ $data = $this->request->getData();
 
 // Only allow title to be changed
 $entity = $this->patchEntity($entity, $data, [
-    'fields' => ['title']
+    'fields' => ['title'],
 ]);
 $this->save($entity);
 ```
@@ -762,7 +762,7 @@ You can also control which properties can be assigned for associations:
 // and the tag name is the only column that can be set
 $entity = $this->patchEntity($entity, $data, [
     'fields' => ['title', 'tags'],
-    'associated' => ['Tags' => ['fields' => ['name']]]
+    'associated' => ['Tags' => ['fields' => ['name']]],
 ]);
 $this->save($entity);
 ```
@@ -916,10 +916,10 @@ array:
 
 ``` php
 $companies->save($entity, [
-  'associated' => [
+    'associated' => [
     'Employees',
-    'Employees.Addresses'
-  ]
+    'Employees.Addresses',
+    ]
 ]);
 ```
 
@@ -952,7 +952,7 @@ $data = [
 
 $articles = $this->fetchTable('Articles');
 $article = $articles->newEntity($data, [
-    'associated' => ['Users']
+    'associated' => ['Users'],
 ]);
 
 $articles->save($article);
@@ -975,7 +975,7 @@ $data = [
 
 $users = $this->fetchTable('Users');
 $user = $users->newEntity($data, [
-    'associated' => ['Profiles']
+    'associated' => ['Profiles'],
 ]);
 $users->save($user);
 ```
@@ -991,13 +991,13 @@ $data = [
     'title' => 'First Post',
     'comments' => [
         ['body' => 'Best post ever'],
-        ['body' => 'I really like this.']
+        ['body' => 'I really like this.'],
     ]
 ];
 
 $articles = $this->fetchTable('Articles');
 $article = $articles->newEntity($data, [
-    'associated' => ['Comments']
+    'associated' => ['Comments'],
 ]);
 $articles->save($article);
 ```
@@ -1049,13 +1049,13 @@ $data = [
     'title' => 'First Post',
     'tags' => [
         ['tag' => 'CakePHP'],
-        ['tag' => 'Framework']
+        ['tag' => 'Framework'],
     ]
 ];
 
 $articles = $this->fetchTable('Articles');
 $article = $articles->newEntity($data, [
-    'associated' => ['Tags']
+    'associated' => ['Tags'],
 ]);
 $articles->save($article);
 ```
@@ -1151,7 +1151,7 @@ entity, you can create one using `newEntity()`:
 $coursesMembershipsTable = $this->fetchTable('CoursesMemberships');
 $student->courses[0]->_joinData = $coursesMembershipsTable->newEntity([
     'grade' => 80.12,
-    'days_attended' => 30
+    'days_attended' => 30,
 ]);
 
 $studentsTable->save($student);
@@ -1170,14 +1170,14 @@ $data = [
             'id' => 10,
             '_joinData' => [
                 'grade' => 80.12,
-                'days_attended' => 30
+                'days_attended' => 30,
             ]
         ],
         // Other courses.
     ]
 ];
 $student = $this->Students->newEntity($data, [
-    'associated' => ['Courses._joinData']
+    'associated' => ['Courses._joinData'],
 ]);
 ```
 
@@ -1240,7 +1240,7 @@ representation:
 $user = new User([
     'preferences' => [
         'sports' => ['football', 'baseball'],
-        'books' => ['Mastering PHP', 'Hamlet']
+        'books' => ['Mastering PHP', 'Hamlet'],
     ]
 ]);
 $usersTable->save($user);
@@ -1354,11 +1354,11 @@ be an array of entities created using `newEntities()` / `patchEntities()`.
 $data = [
     [
         'title' => 'First post',
-        'published' => 1
+        'published' => 1,
     ],
     [
         'title' => 'Second post',
-        'published' => 1
+        'published' => 1,
     ],
 ];
 
@@ -1384,10 +1384,10 @@ function publishAllUnpublished()
     $this->updateAll(
         [  // fields
             'published' => true,
-            'publish_date' => DateTime::now()
+            'publish_date' => DateTime::now(),
         ],
         [  // conditions
-            'published' => false
+            'published' => false,
         ]
     );
 }

@@ -153,7 +153,7 @@ echo Number::toPercentage(45.691873645);
 
 // Called with multiply. Output: 45.7%
 echo Number::toPercentage(0.45691, 1, [
-    'multiply' => true
+    'multiply' => true,
 ]);
 ```
 
@@ -230,12 +230,12 @@ Example:
 echo $this->Number->format('123456.7890', [
     'places' => 2,
     'before' => '¥ ',
-    'after' => ' !'
+    'after' => ' !',
 ]);
 // Output '¥ 123,456.79 !'
 
 echo $this->Number->format('123456.7890', [
-    'locale' => 'fr_FR'
+    'locale' => 'fr_FR',
 ]);
 // Output '123 456,79 !'
 
@@ -243,12 +243,12 @@ echo $this->Number->format('123456.7890', [
 echo Number::format('123456.7890', [
     'places' => 2,
     'before' => '¥ ',
-    'after' => ' !'
+    'after' => ' !',
 ]);
 // Output '¥ 123,456.79 !'
 
 echo Number::format('123456.7890', [
-    'locale' => 'fr_FR'
+    'locale' => 'fr_FR',
 ]);
 // Output '123 456,79 !'
 ```
@@ -269,7 +269,7 @@ echo Number::ordinal(2);
 // Output '2nd'
 
 echo Number::ordinal(2, [
-    'locale' => 'fr_FR'
+    'locale' => 'fr_FR',
 ]);
 // Output '2e'
 
@@ -315,7 +315,7 @@ Example:
 echo $this->Number->formatDelta('123456.7890', [
     'places' => 2,
     'before' => '[',
-    'after' => ']'
+    'after' => ']',
 ]);
 // Output '[+123,456.79]'
 
@@ -323,7 +323,7 @@ echo $this->Number->formatDelta('123456.7890', [
 echo Number::formatDelta('123456.7890', [
     'places' => 2,
     'before' => '[',
-    'after' => ']'
+    'after' => ']',
 ]);
 // Output '[+123,456.79]'
 ```
@@ -343,6 +343,6 @@ Example:
 
 ``` php
 Number::config('en_IN', \NumberFormatter::CURRENCY, [
-    'pattern' => '#,##,##0'
+    'pattern' => '#,##,##0',
 ]);
 ```

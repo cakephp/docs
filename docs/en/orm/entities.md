@@ -54,7 +54,7 @@ use App\Model\Entity\Article;
 $article = new Article([
     'id' => 1,
     'title' => 'New Article',
-    'created' => new DateTime('now')
+    'created' => new DateTime('now'),
 ]);
 ```
 
@@ -69,7 +69,7 @@ $article = $this->fetchTable('Articles')->newEmptyEntity();
 $article = $this->fetchTable('Articles')->newEntity([
     'id' => 1,
     'title' => 'New Article',
-    'created' => new DateTime('now')
+    'created' => new DateTime('now'),
 ]);
 ```
 
@@ -119,7 +119,7 @@ Using `patch()` you can mass assign multiple fields at once:
 ``` php
 $article->patch([
     'title' => 'My first post',
-    'body' => 'It is the best ever!'
+    'body' => 'It is the best ever!',
 ]);
 ```
 
@@ -136,7 +136,7 @@ You can check if fields are defined in your entities with `has()`:
 ``` php
 $article = new Article([
     'title' => 'First post',
-    'user_id' => null
+    'user_id' => null,
 ]);
 $article->has('title'); // true
 $article->has('user_id'); // true
@@ -383,7 +383,7 @@ on an entity, making it easier to test code that works with error messages:
 $user->setError('password', ['Password is required']);
 $user->setErrors([
     'password' => ['Password is required'],
-    'username' => ['Username is required']
+    'username' => ['Username is required'],
 ]);
 ```
 
@@ -410,7 +410,7 @@ class Article extends Entity
 {
     protected array $_accessible = [
         'title' => true,
-        'body' => true
+        'body' => true,
     ];
 }
 ```

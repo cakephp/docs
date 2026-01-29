@@ -399,7 +399,7 @@ You can manage event priorities in one of a few ways:
         $events = parent::implementedEvents();
         $events['Model.beforeDelete'] = [
             'callable' => 'beforeDelete',
-            'priority' => 3
+            'priority' => 3,
         ];
 
         return $events;
@@ -450,7 +450,7 @@ class ArticlesTable extends Table
             'events' => [
                 'Model.beforeSave' => [
                     'created_at' => 'new',
-                    'modified_at' => 'always'
+                    'modified_at' => 'always',
                 ]
             ]
         ]);
@@ -512,7 +512,7 @@ $articles = FactoryLocator::get('Table')->get('Articles', [
     'schema' => $schemaObject,
     'entityClass' => 'Custom\EntityClass',
     'eventManager' => $eventManager,
-    'behaviors' => $behaviorRegistry
+    'behaviors' => $behaviorRegistry,
 ]);
 ```
 

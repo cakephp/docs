@@ -620,7 +620,7 @@ as well as HTML attributes. This subsection will cover the options specific to
 
   ``` php
   echo $this->Form->control('name', [
-      'label' => 'The User Alias'
+      'label' => 'The User Alias',
   ]);
   ```
 
@@ -663,7 +663,7 @@ as well as HTML attributes. This subsection will cover the options specific to
   echo $this->Form->control('name', [
       'label' => [
           'class' => 'thingy',
-          'text' => 'The User Alias'
+          'text' => 'The User Alias',
       ]
   ]);
   ```
@@ -701,7 +701,7 @@ as well as HTML attributes. This subsection will cover the options specific to
 
   ``` php
   $this->Form->control('name', [
-      'error' => ['Not long enough' => __('This is not long enough')]
+      'error' => ['Not long enough' => __('This is not long enough')],
   ]);
   ```
 
@@ -1005,7 +1005,7 @@ methods are described in each method's own section.)
       [1, 2, 3, 4, 5],
       [
           'multiple' => true,
-          'value' => [1, 3]
+          'value' => [1, 3],
       ]
   );
   ```
@@ -1026,7 +1026,7 @@ methods are described in each method's own section.)
     echo $this->Form->select(
         'field',
         [1, 2, 3, 4, 5],
-        ['empty' => '(choose one)']
+        ['empty' => '(choose one)'],
     );
     ```
 
@@ -1141,7 +1141,7 @@ $options = $examples->map(function ($value, $key) {
     return [
         'value' => $value->id,
         'text' => $value->name,
-        'data-created' => $value->created
+        'data-created' => $value->created,
     ];
 });
 ```
@@ -1420,7 +1420,7 @@ For example:
 echo $this->Form->select('field', [
     'Value 1' => 'Label 1',
     'Value 2' => 'Label 2',
-    'Value 3' => 'Label 3'
+    'Value 3' => 'Label 3',
 ]);
 ```
 
@@ -1543,10 +1543,10 @@ certain behaviors of the `select()` method.
   ``` php
   $options = [
       'Value 1' => 'Label 1',
-      'Value 2' => 'Label 2'
+      'Value 2' => 'Label 2',
   ];
   echo $this->Form->select('field', $options, [
-      'multiple' => 'checkbox'
+      'multiple' => 'checkbox',
   ]);
   ```
 
@@ -1579,10 +1579,10 @@ certain behaviors of the `select()` method.
   $options = [
       'M' => 'Masculine',
       'F' => 'Feminine',
-      'N' => 'Neuter'
+      'N' => 'Neuter',
   ];
   echo $this->Form->select('gender', $options, [
-      'disabled' => ['M', 'N']
+      'disabled' => ['M', 'N'],
   ]);
   ```
 
@@ -1601,11 +1601,11 @@ certain behaviors of the `select()` method.
   ``` php
   $options = [
       'Value 1' => 'Label 1',
-      'Value 2' => 'Label 2'
+      'Value 2' => 'Label 2',
   ];
   echo $this->Form->select('field', $options, [
       'multiple' => 'checkbox',
-      'disabled' => ['Value 1']
+      'disabled' => ['Value 1'],
   ]);
   ```
 
@@ -1658,7 +1658,7 @@ to your form's view template file:
 
 ``` php
 echo $this->Form->control('submittedfile', [
-    'type' => 'file'
+    'type' => 'file',
 ]);
 
 // OR
@@ -1677,9 +1677,9 @@ from `$_accessible`. Alternatively, you can unset the index by using
 ``` php
 public function beforeMarshal(\Cake\Event\EventInterface $event, \ArrayObject $data, \ArrayObject $options): void
 {
-   if ($data['submittedfile'] === '') {
-      unset($data['submittedfile']);
-   }
+    if ($data['submittedfile'] === '') {
+        unset($data['submittedfile']);
+    }
 }
 ```
 
@@ -1834,7 +1834,7 @@ would do the following:
 ``` php
 echo $this->Form->year('purchased', [
     'min' => 2000,
-    'max' => date('Y')
+    'max' => date('Y'),
 ]);
 ```
 
@@ -2376,13 +2376,13 @@ For example:
 ``` php
 // Add custom radio wrapping HTML
 $this->Form->setTemplates([
-    'radioContainer' => '<div class="form-radio">{{content}}</div>'
+    'radioContainer' => '<div class="form-radio">{{content}}</div>',
 ]);
 
 // Create a radio set with our custom wrapping div.
 echo $this->Form->control('email_notifications', [
     'options' => ['y', 'n'],
-    'type' => 'radio'
+    'type' => 'radio',
 ]);
 ```
 
@@ -2399,7 +2399,7 @@ For example:
 ``` php
 // Add custom radio form group
 $this->Form->setTemplates([
-    'radioFormGroup' => '<div class="radio">{{label}}{{input}}</div>'
+    'radioFormGroup' => '<div class="radio">{{label}}{{input}}</div>',
 ]);
 ```
 
@@ -2414,7 +2414,7 @@ For example:
 // Add a template with the help placeholder.
 $this->Form->setTemplates([
     'inputContainer' => '<div class="input {{type}}{{required}}">
-        {{content}} <span class="help">{{help}}</span></div>'
+        {{content}} <span class="help">{{help}}</span></div>',
 ]);
 
 // Generate an input and populate the help variable
@@ -2473,7 +2473,7 @@ Generates a set of controls for the given context wrapped in a
 ``` php
 echo $this->Form->controls([
     'name',
-    'email'
+    'email',
 ]);
 ```
 
@@ -2671,7 +2671,7 @@ class AutocompleteWidget implements WidgetInterface
 
         return $this->_templates->format('autocomplete', [
             'name' => $data['name'],
-            'attrs' => $this->_templates->formatAttributes($data, ['name'])
+            'attrs' => $this->_templates->formatAttributes($data, ['name']),
         ]);
     }
 
@@ -2688,7 +2688,7 @@ template, such as:
 
 ``` php
 $this->Form->setTemplates([
-    'autocomplete' => '<input type="autocomplete" name="{{name}}" {{attrs}} />'
+    'autocomplete' => '<input type="autocomplete" name="{{name}}" {{attrs}} />',
 ]);
 ```
 
@@ -2734,7 +2734,7 @@ widgets using the `addWidget()` method would look like:
 // Using a classname.
 $this->Form->addWidget(
     'autocomplete',
-    ['Autocomplete', 'text', 'label']
+    ['Autocomplete', 'text', 'label'],
 );
 
 // Using an instance - requires you to resolve dependencies.

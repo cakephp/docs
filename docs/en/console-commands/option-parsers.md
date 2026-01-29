@@ -202,7 +202,7 @@ are set to `true`, when they are absent they are set to `false`:
 ``` php
 $parser->addOption('verbose', [
     'help' => 'Enable verbose output.',
-    'boolean' => true
+    'boolean' => true,
 ]);
 ```
 
@@ -228,7 +228,7 @@ public function getOptionParser()
         'description' => [
             __("Use this command to grant ACL permissions. Once executed, the "),
             __("ARO specified (and its children, if any) will have ALLOW access "),
-            __("to the specified ACO action (and the ACO's children, if any).")
+            __("to the specified ACO action (and the ACO's children, if any)."),
         ],
         'arguments' => [
             'aro' => ['help' => __('ARO to check.'), 'required' => true],

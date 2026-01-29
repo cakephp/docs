@@ -107,7 +107,7 @@ Examples of invalid arrays:
 ``` php
 // Top level with numeric key
 [
-    ['key' => 'value']
+    ['key' => 'value'],
 ];
 
 // Multiple keys in top level
@@ -161,7 +161,7 @@ $xmlArray(
             'xmlns:pref' => 'https://cakephp.org',
             'pref:item' => [
                 'item 1',
-                'item 2'
+                'item 2',
             ]
         ]
     ]

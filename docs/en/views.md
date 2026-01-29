@@ -96,7 +96,7 @@ The following is an example using `foreach`:
 ``` php
 <ul>
 <?php foreach ($todo as $item): ?>
-  <li><?= $item ?></li>
+    <li><?= $item ?></li>
 <?php endforeach; ?>
 </ul>
 ```
@@ -105,11 +105,11 @@ Another example, using if/elseif/else. Notice the colons:
 
 ``` php
 <?php if ($username === 'sally'): ?>
-   <h3>Hi Sally</h3>
+    <h3>Hi Sally</h3>
 <?php elseif ($username === 'joe'): ?>
-   <h3>Hi Joe</h3>
+    <h3>Hi Joe</h3>
 <?php else: ?>
-   <h3>Hi unknown user</h3>
+    <h3>Hi unknown user</h3>
 <?php endif; ?>
 ```
 
@@ -637,13 +637,13 @@ cached result. For example:
 echo $this->element(
     'helpbox',
     ['var' => $var],
-    ['cache' => ['key' => 'first_use', 'config' => 'view_long']]
+    ['cache' => ['key' => 'first_use', 'config' => 'view_long']],
 );
 
 echo $this->element(
     'helpbox',
     ['var' => $differenVar],
-    ['cache' => ['key' => 'second_use', 'config' => 'view_long']]
+    ['cache' => ['key' => 'second_use', 'config' => 'view_long']],
 );
 ```
 

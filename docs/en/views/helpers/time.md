@@ -24,10 +24,10 @@ posts using the TimeHelper:
 
 ``` php
 echo $this->Time->format(
-  $post->created,
-  \IntlDateFormatter::FULL,
-  false,
-  $user->time_zone
+    $post->created,
+    \IntlDateFormatter::FULL,
+    false,
+    $user->time_zone,
 );
 // Will display 'Saturday, August 22, 2011 at 11:53:00 PM GMT'
 // for a user in GMT+0. While displaying,

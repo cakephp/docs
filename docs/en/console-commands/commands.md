@@ -173,7 +173,7 @@ class UserCommand extends Command
     {
         $parser
             ->addArgument('name', [
-                'help' => 'What is your name'
+                'help' => 'What is your name',
             ]);
 
         return $parser;
@@ -392,7 +392,7 @@ class UpdateTableCommand extends Command
             ->setDescription('My cool console app')
             ->addArgument('table', [
                 'help' => 'Table to update',
-                'required' => true
+                'required' => true,
             ]);
 
         return $parser;
@@ -403,7 +403,7 @@ class UpdateTableCommand extends Command
         $table = $args->getArgument('table');
         $this->fetchTable($table)->updateQuery()
             ->set([
-                'modified' => new DateTime()
+                'modified' => new DateTime(),
             ])
             ->execute();
 
@@ -492,7 +492,7 @@ class UpdateTableCommand extends Command
             ->setDescription('My cool console app')
             ->addArgument('table', [
                 'help' => 'Table to update',
-                'required' => true
+                'required' => true,
             ]);
 
         return $parser;
@@ -507,7 +507,7 @@ class UpdateTableCommand extends Command
         }
         $this->fetchTable($table)->updateQuery()
             ->set([
-                'modified' => new DateTime()
+                'modified' => new DateTime(),
             ])
             ->execute();
 

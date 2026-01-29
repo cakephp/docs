@@ -16,14 +16,14 @@ use Cake\Http\Client;
 $http = new Client();
 
 // Simple get
-$response = $http->get('http://example.com/test.html');
+$response = $http->get('https://example.com/test.html');
 
 // Simple get with querystring
-$response = $http->get('http://example.com/search', ['q' => 'widget']);
+$response = $http->get('https://example.com/search', ['q' => 'widget']);
 
 // Simple get with querystring & additional headers
-$response = $http->get('http://example.com/search', ['q' => 'widget'], [
-  'headers' => ['X-Requested-With' => 'XMLHttpRequest'],
+$response = $http->get('https://example.com/search', ['q' => 'widget'], [
+    'headers' => ['X-Requested-With' => 'XMLHttpRequest'],
 ]);
 ```
 
@@ -32,15 +32,15 @@ Doing POST and PUT requests is equally simple:
 ``` php
 // Send a POST request with application/x-www-form-urlencoded encoded data
 $http = new Client();
-$response = $http->post('http://example.com/posts/add', [
-  'title' => 'testing',
-  'body' => 'content in the post',
+$response = $http->post('https://example.com/posts/add', [
+    'title' => 'testing',
+    'body' => 'content in the post',
 ]);
 
 // Send a PUT request with application/x-www-form-urlencoded encoded data
-$response = $http->put('http://example.com/posts/add', [
-  'title' => 'testing',
-  'body' => 'content in the post',
+$response = $http->put('https://example.com/posts/add', [
+    'title' => 'testing',
+    'body' => 'content in the post',
 ]);
 
 // Other methods as well.
@@ -57,8 +57,8 @@ use Cake\Http\Client;
 use Cake\Http\Client\Request as ClientRequest;
 
 $request = new ClientRequest(
-    'http://example.com/search',
-    ClientRequest::METHOD_GET
+    'https://example.com/search',
+    ClientRequest::METHOD_GET,
 );
 $http = new Client();
 $response = $http->sendRequest($request);
@@ -71,7 +71,7 @@ You can include files in request bodies by including a filehandle in the array:
 ``` php
 $http = new Client();
 $response = $http->post('http://example.com/api', [
-  'image' => fopen('/path/to/a/file', 'r'),
+    'image' => fopen('/path/to/a/file', 'r'),
 ]);
 ```
 
@@ -104,7 +104,7 @@ $file->disposition('attachment');
 $response = $http->post(
     'http://example.com/api',
     (string)$data,
-    ['headers' => ['Content-Type' => $data->contentType()]]
+    ['headers' => ['Content-Type' => $data->contentType()]],
 );
 ```
 
@@ -117,9 +117,9 @@ form encoded. Http\Client exposes this through the type option:
 // Send a JSON request body.
 $http = new Client();
 $response = $http->post(
-  'http://example.com/tasks',
-  json_encode($data),
-  ['type' => 'json']
+    'http://example.com/tasks',
+    json_encode($data),
+    ['type' => 'json'],
 );
 ```
 
@@ -132,9 +132,9 @@ you can do the following:
 // Send a JSON body in a GET request with query string parameters.
 $http = new Client();
 $response = $http->get(
-  'http://example.com/tasks',
-  ['q' => 'test', '_content' => json_encode($data)],
-  ['type' => 'json']
+    'http://example.com/tasks',
+    ['q' => 'test', '_content' => json_encode($data)],
+    ['type' => 'json'],
 );
 ```
 
@@ -183,7 +183,7 @@ An example of basic authentication:
 ``` php
 $http = new Client();
 $response = $http->get('http://example.com/profile/1', [], [
-  'auth' => ['username' => 'mark', 'password' => 'secret'],
+    'auth' => ['username' => 'mark', 'password' => 'secret'],
 ]);
 ```
 
@@ -344,7 +344,7 @@ match:
 
 ``` php
 $http = new Client([
-    'host' => 'cakephp.org'
+    'host' => 'cakephp.org',
 ]);
 
 // Do a request that sets some cookies
@@ -372,7 +372,7 @@ method:
 use Cake\Http\Cookie\Cookie;
 
 $http = new Client([
-    'host' => 'cakephp.org'
+    'host' => 'cakephp.org',
 ]);
 $http->addCookie(new Cookie('session', 'abc123'));
 ```
@@ -517,7 +517,7 @@ $http->getEventManager()->on(
         \Cake\Http\Client\ClientEvent $event,
         \Cake\Http\Client\Request $request,
         array $adapterOptions,
-        int $redirects
+        int $redirects,
     ) {
         // Modify the request
         $event->setRequest(....);
@@ -543,7 +543,7 @@ $http->getEventManager()->on(
         array $adapterOptions,
         int $redirects,
         bool $requestSent // Indicates whether the request was actually sent
-                          // or response returned from ``beforeSend`` event
+                            // or response returned from ``beforeSend`` event
     ) {
         // Get the response
         $response = $event->getResponse();
@@ -576,7 +576,7 @@ class CartControllerTests extends TestCase
         // Mock a POST request that will be made.
         $this->mockClientPost(
             'https://example.com/process-payment',
-            $this->newClientResponse(200, [], json_encode(['ok' => true]))
+            $this->newClientResponse(200, [], json_encode(['ok' => true])),
         );
         $this->post("/cart/checkout");
         // Do assertions.

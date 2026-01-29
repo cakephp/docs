@@ -206,7 +206,7 @@ public function tags()
     // Pass variables into the view template context.
     $this->set([
         'articles' => $articles,
-        'tags' => $tags
+        'tags' => $tags,
     ]);
 }
 ```
@@ -227,7 +227,7 @@ public function tags(...$tags)
     // Pass variables into the view template context.
     $this->set([
         'articles' => $articles,
-        'tags' => $tags
+        'tags' => $tags,
     ]);
 }
 ```
@@ -302,7 +302,7 @@ view file for our `tags()` action:
         <!-- Use the HtmlHelper to create a link -->
         <h4><?= $this->Html->link(
             $article->title,
-            ['controller' => 'Articles', 'action' => 'view', $article->slug]
+            ['controller' => 'Articles', 'action' => 'view', $article->slug],
         ) ?></h4>
         <span><?= h($article->created) ?></span>
     </article>
@@ -349,7 +349,7 @@ use Cake\Collection\Collection;
 // Update the accessible property to contain `tag_string`
 protected array $_accessible = [
     //other fields...
-    'tag_string' => true
+    'tag_string' => true,
 ];
 
 protected function _getTagString()
@@ -401,8 +401,8 @@ You should also update the view method to allow retrieving existing tags:
 
 public function view($slug = null)
 {
-   // Update retrieving tags with contain()
-   $article = $this->Articles
+    // Update retrieving tags with contain()
+    $article = $this->Articles
         ->findBySlug($slug)
         ->contain('Tags')
         ->firstOrFail();
@@ -485,7 +485,7 @@ public function initialize(array $config): void
     // Change this line
     $this->belongsToMany('Tags', [
         'joinTable' => 'articles_tags',
-        'dependent' => true
+        'dependent' => true,
     ]);
 }
 ```

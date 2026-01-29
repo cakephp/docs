@@ -80,7 +80,7 @@ $result = $this->Paginator->getTemplates('number');
 
 // Change a template
 $this->Paginator->setTemplates([
-    'number' => '<em><a href="{{url}}">{{text}}</a></em>'
+    'number' => '<em><a href="{{url}}">{{text}}</a></em>',
 ]);
 ```
 
@@ -156,9 +156,9 @@ If you are using HTML like images in your links remember to set escaping off:
 
 ``` php
 echo $this->Paginator->sort(
-  'user_id',
-  '<em>User account</em>',
-  ['escape' => false]
+    'user_id',
+    '<em>User account</em>',
+    ['escape' => false],
 );
 ```
 
@@ -328,7 +328,7 @@ available. For example:
 ``` php
 echo $this->Paginator->counter(
     'Page {{page}} of {{pages}}, showing {{current}} records out of
-     {{count}} total, starting on record {{start}}, ending on {{end}}'
+     {{count}} total, starting on record {{start}}, ending on {{end}}',
 );
 ```
 
@@ -356,7 +356,7 @@ echo $this->Paginator->generateUrl(['sort' => 'title'], 'Comments');
 echo $this->Paginator->generateUrl(
     ['sort' => 'title'],
     null,
-    ['controller' => 'Comments']
+    ['controller' => 'Comments'],
 );
 ```
 
@@ -537,7 +537,7 @@ markers:
 ``` php
 <?= $this->Paginator->counter(
     'Page {{page}} of {{pages}}, showing {{current}} records out of
-    {{count}} total, starting on record {{start}}, ending on {{end}}'
+    {{count}} total, starting on record {{start}}, ending on {{end}}',
 ) ?>
 ```
 
@@ -558,7 +558,7 @@ $this->Paginator->options([
     'url' => [
         // Additional URL parameters for the 'articles' scope
         'articles' => [
-            '?' => ['articles' => 'yes']
+            '?' => ['articles' => 'yes'],
         ],
         // Additional URL parameters for the 'comments' scope
         'comments' => [

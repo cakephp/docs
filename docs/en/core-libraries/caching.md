@@ -97,7 +97,7 @@ Cache::setConfig('short', [
     'className' => 'File',
     'duration' => '+1 hours',
     'path' => CACHE,
-    'prefix' => 'cake_short_'
+    'prefix' => 'cake_short_',
 ]);
 
 // Using a fully namespaced name.
@@ -261,7 +261,7 @@ Cache::setConfig('redis', [
     'prefix' => 'cake_redis_',
     'host' => '127.0.0.1',
     'port' => 6379,
-    'fallback' => false
+    'fallback' => false,
 ]);
 ```
 
@@ -317,7 +317,7 @@ save multiple network connections when using Memcached:
 ``` php
 $result = Cache::writeMany([
     'article-' . $slug => $article,
-    'article-' . $slug . '-comments' => $comments
+    'article-' . $slug . '-comments' => $comments,
 ]);
 
 // $result will contain
@@ -429,7 +429,7 @@ CakePHP to use more efficient storage APIs where available. For example using
 ``` php
 $result = Cache::readMany([
     'article-' . $slug,
-    'article-' . $slug . '-comments'
+    'article-' . $slug . '-comments',
 ]);
 // $result will contain
 ['article-first-post' => '...', 'article-first-post-comments' => '...']
@@ -468,7 +468,7 @@ save multiple network connections when using Memcached:
 ``` php
 $result = Cache::deleteMany([
     'article-' . $slug,
-    'article-' . $slug . '-comments'
+    'article-' . $slug . '-comments',
 ]);
 // $result will contain
 ['article-first-post' => true, 'article-first-post-comments' => true]

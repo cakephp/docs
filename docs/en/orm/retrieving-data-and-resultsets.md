@@ -136,7 +136,7 @@ You can also provide many commonly used options to `find()`:
 $query = $articles->find('all',
     conditions: ['Articles.created >' => new DateTime('-10 days')],
     contain: ['Authors', 'Comments'],
-    limit: 10
+    limit: 10,
 );
 ```
 
@@ -309,7 +309,7 @@ list finds. :
 protected function _getLabel()
 {
     return $this->_fields['first_name'] . ' ' . $this->_fields['last_name']
-      . ' / ' . __('User ID %s', $this->_fields['user_id']);
+        . ' / ' . __('User ID %s', $this->_fields['user_id']);
 }
 ```
 
@@ -353,7 +353,7 @@ $query = $comments->find('threaded');
 // Expanded default values
 $query = $comments->find('threaded',
     keyField: $comments->primaryKey(),
-    parentField: 'parent_id'
+    parentField: 'parent_id',
 );
 $results = $query->toArray();
 
@@ -518,7 +518,7 @@ associations to be loaded:
 
 ``` php
 $query = $articles->find()->contain([
-    'Authors' => ['Addresses'], 'Comments' => ['Authors']
+    'Authors' => ['Addresses'], 'Comments' => ['Authors'],
 ]);
 ```
 
@@ -527,7 +527,7 @@ Alternatively, you can express nested associations using the dot notation:
 ``` php
 $query = $articles->find()->contain([
     'Authors.Addresses',
-    'Comments.Authors'
+    'Comments.Authors',
 ]);
 ```
 
@@ -536,7 +536,7 @@ You can eager load associations as deep as you like:
 ``` php
 $query = $products->find()->contain([
     'Shops.Cities.Countries',
-    'Shops.Managers'
+    'Shops.Managers',
 ]);
 ```
 
@@ -544,7 +544,7 @@ Which is equivalent to calling:
 
 ``` php
 $query = $products->find()->contain([
-    'Shops' => ['Cities.Countries', 'Managers']
+    'Shops' => ['Cities.Countries', 'Managers'],
 ]);
 ```
 
@@ -555,7 +555,7 @@ statements:
 $query = $this->find()->select([
     'Realestates.id',
     'Realestates.title',
-    'Realestates.description'
+    'Realestates.description',
 ])
 ->contain([
     'RealestateAttributes' => [
@@ -703,7 +703,7 @@ option to sort the data in those associations:
 ``` php
 $query->contain([
     'Comments' => [
-        'sort' => ['Comments.created' => 'DESC']
+        'sort' => ['Comments.created' => 'DESC'],
     ]
 ]);
 ```
@@ -1263,7 +1263,7 @@ look something like this:
     'awesome' => 39,
     'impressive' => 57,
     'outstanding' => 10,
-    'mind-blowing' => 83
+    'mind-blowing' => 83,
 ]
 ```
 

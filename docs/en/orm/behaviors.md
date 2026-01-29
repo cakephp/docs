@@ -342,7 +342,7 @@ class UsersTable extends AppTable
             $this->behaviors()->get('Timestamp')->setConfig([
                 'events' => [
                     'Users.login' => [
-                        'last_login' => 'always'
+                        'last_login' => 'always',
                     ],
                 ],
             ]);

@@ -198,7 +198,7 @@ class SsoComponent extends Component
     public function __construct(
         ComponentRegistry $registry,
         array $config = [],
-        UserService $users
+        UserService $users,
     ) {
         parent::__construct($registry, $config);
         $this->users = $users;

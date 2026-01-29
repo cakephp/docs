@@ -22,13 +22,13 @@ In addition to adding to the end of the trail, you can do a variety of operation
 // Add at the end of the trail
 $this->Breadcrumbs->add(
     'Products',
-    ['controller' => 'products', 'action' => 'index']
+    ['controller' => 'products', 'action' => 'index'],
 );
 
 // Prepended crumbs will be put at the top of the list
 $this->Breadcrumbs->prepend(
     'Products',
-    ['controller' => 'products', 'action' => 'index']
+    ['controller' => 'products', 'action' => 'index'],
 );
 
 // Insert in a specific slot. If the slot is out of
@@ -36,7 +36,7 @@ $this->Breadcrumbs->prepend(
 $this->Breadcrumbs->insertAt(
     2,
     'Products',
-    ['controller' => 'products', 'action' => 'index']
+    ['controller' => 'products', 'action' => 'index'],
 );
 
 // Insert before another crumb, based on the title.
@@ -45,7 +45,7 @@ $this->Breadcrumbs->insertAt(
 $this->Breadcrumbs->insertBefore(
     'Products',
     'A product name 1', // the title of the crumb to insert before        
-    ['controller' => 'products', 'action' => 'index']
+    ['controller' => 'products', 'action' => 'index'],
 );
 
 // Insert after another crumb, based on the title.
@@ -54,7 +54,7 @@ $this->Breadcrumbs->insertBefore(
 $this->Breadcrumbs->insertAfter(
     'Products',
     'A product name 2', // the title of the crumb to insert after        
-    ['controller' => 'products', 'action' => 'index']
+    ['controller' => 'products', 'action' => 'index'],
 );
 ```
 
@@ -124,7 +124,7 @@ Here is an example of how to render a trail:
 ``` php
 echo $this->Breadcrumbs->render(
     ['class' => 'breadcrumbs-trail'],
-    ['separator' => '<i class="fa fa-angle-right"></i>']
+    ['separator' => '<i class="fa fa-angle-right"></i>'],
 );
 ```
 
@@ -139,7 +139,7 @@ It includes four templates, with the following default declaration:
     'wrapper' => '<ul{{attrs}}>{{content}}</ul>',
     'item' => '<li{{attrs}}><a href="{{url}}"{{innerAttrs}}>{{title}}</a></li>{{separator}}',
     'itemWithoutLink' => '<li{{attrs}}><span{{innerAttrs}}>{{title}}</span></li>{{separator}}',
-    'separator' => '<li{{attrs}}><span{{innerAttrs}}>{{separator}}</span></li>'
+    'separator' => '<li{{attrs}}><span{{innerAttrs}}>{{separator}}</span></li>',
 ]
 ```
 
@@ -157,7 +157,7 @@ allows you to add your own template variables in the various templates:
 
 ``` php
 $this->Breadcrumbs->setTemplates([
-    'item' => '<li{{attrs}}>{{icon}}<a href="{{url}}"{{innerAttrs}}>{{title}}</a></li>{{separator}}'
+    'item' => '<li{{attrs}}>{{icon}}<a href="{{url}}"{{innerAttrs}}>{{title}}</a></li>{{separator}}',
 ]);
 ```
 

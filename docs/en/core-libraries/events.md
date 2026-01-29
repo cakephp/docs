@@ -61,7 +61,7 @@ class OrdersTable extends Table
         if ($this->save($order)) {
             $this->Cart->remove($order);
             $event = new Event('Order.afterPlace', $this, [
-                'order' => $order
+                'order' => $order,
             ]);
             $this->getEventManager()->dispatch($event);
 
@@ -107,7 +107,7 @@ use Cake\Event\EventManager;
 
 EventManager::instance()->on(
     'Order.afterPlace',
-    $aCallback
+    $aCallback,
 );
 ```
 
@@ -331,7 +331,7 @@ use Cake\Log\Log;
 $this->Orders->getEventManager()->on('Order.afterPlace', function ($event) {
     Log::write(
         'info',
-        'A new order was placed with id: ' . $event->getSubject()->id
+        'A new order was placed with id: ' . $event->getSubject()->id,
     );
 });
 ```
@@ -432,7 +432,7 @@ $callback = [$this, 'doSomething'];
 $this->getEventManager()->on(
     'Order.afterPlace',
     ['priority' => 2],
-    $callback
+    $callback,
 );
 
 // Setting priority for a listener
@@ -443,7 +443,7 @@ class UserStatistic implements EventListenerInterface
         return [
             'Order.afterPlace' => [
                 'callable' => 'updateBuyStatistic',
-                'priority' => 100
+                'priority' => 100,
             ],
         ];
     }
@@ -493,7 +493,7 @@ an event:
 // An event listener has to be instantiated before dispatching an event.
 // Create a new event and dispatch it.
 $event = new Event('Order.afterPlace', $this, [
-    'order' => $order
+    'order' => $order,
 ]);
 $this->getEventManager()->dispatch($event);
 ```

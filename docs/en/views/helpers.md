@@ -338,7 +338,7 @@ class AwesomeHelper extends Helper
     {
         // set meta description
         return $this->Html->meta(
-            'description', $this->getView()->get('metaDescription'), ['block' => 'meta']
+            'description', $this->getView()->get('metaDescription'), ['block' => 'meta'],
         );
     }
 }
@@ -356,7 +356,7 @@ class AwesomeHelper extends Helper
     {
         return $this->getView()->element(
             '/path/to/element',
-            ['foo'=>'bar','bar'=>'foo']
+            ['foo'=>'bar','bar'=>'foo'],
         );
     }
 }

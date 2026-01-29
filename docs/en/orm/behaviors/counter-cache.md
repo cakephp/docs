@@ -23,7 +23,7 @@ class CommentsTable extends Table
     public function initialize(array $config): void
     {
         $this->addBehavior('CounterCache', [
-            'Articles' => ['comment_count']
+            'Articles' => ['comment_count'],
         ]);
     }
 }

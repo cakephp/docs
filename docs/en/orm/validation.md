@@ -44,7 +44,7 @@ If you'd like to disable validation when converting request data, set the
 ``` php
 $article = $articles->newEntity(
     $this->request->getData(),
-    ['validate' => false]
+    ['validate' => false],
 );
 ```
 
@@ -52,7 +52,7 @@ The same can be said about the `patchEntity()` method:
 
 ``` php
 $article = $articles->patchEntity($article, $newData, [
-    'validate' => false
+    'validate' => false,
 ]);
 ```
 
@@ -102,7 +102,7 @@ want applied:
 ``` php
 $article = $articles->newEntity(
     $this->request->getData(),
-    ['validate' => 'update']
+    ['validate' => 'update'],
 );
 ```
 
@@ -138,25 +138,25 @@ of the associations to be converted:
 
 ``` php
 $data = [
-     'title' => 'My title',
-     'body' => 'The text',
-     'user_id' => 1,
-     'user' => [
-         'username' => 'mark',
-     ],
-     'comments' => [
-         ['body' => 'First comment'],
-         ['body' => 'Second comment'],
-     ],
- ];
+    'title' => 'My title',
+    'body' => 'The text',
+    'user_id' => 1,
+    'user' => [
+        'username' => 'mark',
+    ],
+    'comments' => [
+        ['body' => 'First comment'],
+        ['body' => 'Second comment'],
+    ],
+];
 
- $article = $articles->patchEntity($article, $data, [
-     'validate' => 'update',
-     'associated' => [
-         'Users' => ['validate' => 'signup'],
-         'Comments' => ['validate' => 'custom'],
-     ],
- ]);
+$article = $articles->patchEntity($article, $data, [
+    'validate' => 'update',
+    'associated' => [
+        'Users' => ['validate' => 'signup'],
+        'Comments' => ['validate' => 'custom'],
+    ],
+]);
 ```
 
 ## Combining Validators
@@ -356,7 +356,7 @@ message as options:
 ``` php
 $rules->add([$this, 'isValidState'], 'validState', [
     'errorField' => 'status',
-    'message' => 'This invoice cannot be moved to that status.'
+    'message' => 'This invoice cannot be moved to that status.',
 ]);
 ```
 
@@ -380,7 +380,7 @@ $rules->add($rules->isUnique(['email']));
 // A list of fields
 $rules->add($rules->isUnique(
     ['username', 'account_id'],
-    'This username & account_id combination has already been used.'
+    'This username & account_id combination has already been used.',
 ));
 ```
 
@@ -395,7 +395,7 @@ To simulate this, set the `allowMultipleNulls` options to true:
 ``` php
 $rules->add($rules->isUnique(
     ['username', 'account_id'],
-    ['allowMultipleNulls' => true]
+    ['allowMultipleNulls' => true],
 ));
 ```
 
@@ -426,7 +426,7 @@ are null:
 $rules->add($rules->existsIn(
     ['parent_id', 'site_id'], // Schema: parent_id NULL, site_id NOT NULL
     'ParentNodes',
-    ['allowNullableNulls' => true]
+    ['allowNullableNulls' => true],
 ));
 
 // A Node however should in addition also always reference a Site.
@@ -443,7 +443,7 @@ unique checks using `allowMultipleNulls`:
 $rules->add($rules->existsIn(
     ['parent_id', 'site_id'],
     'ParentNodes',
-    ['allowMultipleNulls' => false]
+    ['allowMultipleNulls' => false],
 ));
 ```
 
@@ -489,14 +489,14 @@ have related records depending on the mode used:
 $rules->addUpdate($rules->isLinkedTo(
     'Articles',
     'article',
-    'Requires an article'
+    'Requires an article',
 ));
 
 // Ensure that an article has no linked comments during delete.
 $rules->addDelete($rules->isNotLinkedTo(
     'Comments',
     'comments',
-    'Must have zero comments before deletion.'
+    'Must have zero comments before deletion.',
 ));
 ```
 
@@ -563,7 +563,7 @@ $rules->add(
         'errorField' => 'length',
         'message' => 'Generic error message used when `false` is returned',
     ]
- );
+);
 ```
 
 As of 5.2.0, you can also provide a `Closure` for the `message` key. When
@@ -578,7 +578,7 @@ $rules->add(
         'message' => function ($entity, $options) {
             return sprintf(
                 'Article with ID %s does not exist',
-                $entity->article_id
+                $entity->article_id,
             );
         }
     ]
@@ -669,12 +669,12 @@ objects when calling `newEntity()` or `patchEntity()`:
 ``` php
 $validatedEntity = $articlesTable->newEntity(
     $unsafeData,
-    ['validate' => 'customName']
+    ['validate' => 'customName'],
 );
 $validatedEntity = $articlesTable->patchEntity(
     $entity,
     $unsafeData,
-    ['validate' => 'customName']
+    ['validate' => 'customName'],
 );
 ```
 

@@ -198,7 +198,7 @@ $cell = $this->cell('Inbox', [], ['cache' => ['config' => 'cell_cache']]);
 
 // Specify the key and config to use.
 $cell = $this->cell('Inbox', [], [
-    'cache' => ['config' => 'cell_cache', 'key' => 'inbox_' . $user->id]
+    'cache' => ['config' => 'cell_cache', 'key' => 'inbox_' . $user->id],
 ]);
 ```
 

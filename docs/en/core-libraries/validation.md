@@ -163,13 +163,13 @@ can also use any callable, including anonymous functions, as validation rules:
 // Use a global function
 $validator->add('title', 'custom', [
     'rule' => 'validate_title',
-    'message' => 'The title is not valid'
+    'message' => 'The title is not valid',
 ]);
 
 // Use an array callable that is not in a provider
 $validator->add('title', 'custom', [
     'rule' => [$this, 'method'],
-    'message' => 'The title is not valid'
+    'message' => 'The title is not valid',
 ]);
 
 // Use a closure
@@ -178,14 +178,14 @@ $validator->add('title', 'custom', [
     'rule' => function ($value, $context) use ($extra) {
         // Custom logic that returns true/false
     },
-    'message' => 'The title is not valid'
+    'message' => 'The title is not valid',
 ]);
 
 // Use a rule from a custom provider
 $validator->add('title', 'custom', [
     'rule' => 'customRule',
     'provider' => 'custom',
-    'message' => 'The title is not unique enough'
+    'message' => 'The title is not unique enough',
 ]);
 ```
 
@@ -240,7 +240,7 @@ $validator->add('length', 'custom', [
 
         return true;
     },
-    'message' => 'Generic error message used when `false` is returned'
+    'message' => 'Generic error message used when `false` is returned',
 ]);
 ```
 
@@ -406,7 +406,7 @@ the `provider` key in your rule:
 // Use a rule from the table provider
 $validator->add('title', 'custom', [
     'rule' => 'customTableMethod',
-    'provider' => 'table'
+    'provider' => 'table',
 ]);
 ```
 
@@ -447,7 +447,7 @@ class PostsTable extends Table
         // use the provider in a field validation rule
         $validator->add('phoneField', 'myCustomRuleNameForPhone', [
             'rule' => 'phone',
-            'provider' => 'fr'
+            'provider' => 'fr',
         ]);
 
         return $validator;
@@ -511,7 +511,7 @@ $validator->addNestedMany(
     'comments',
     $commentValidator,
     'Invalid comment',
-    'create'
+    'create',
 );
 ```
 

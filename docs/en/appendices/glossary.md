@@ -37,7 +37,7 @@ Would point to the following value:
 [
     'Cache' => [
         'default' => [
-            'engine' => 'File'
+            'engine' => 'File',
         ]
     ]
 ]

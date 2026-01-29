@@ -45,7 +45,7 @@ class OrdersTable extends Table
                     'updated_at' => 'always',
                 ],
                 'Orders.completed' => [
-                    'completed_at' => 'always'
+                    'completed_at' => 'always',
                 ]
             ]
         ]);

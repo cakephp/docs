@@ -118,7 +118,7 @@ $middlewareQueue->insertAt(2, $layer);
 // an exception will be raised.
 $middlewareQueue->insertBefore(
     'Cake\Error\Middleware\ErrorHandlerMiddleware',
-    $layer
+    $layer,
 );
 
 // Insert after another middleware.
@@ -126,7 +126,7 @@ $middlewareQueue->insertBefore(
 // middleware will added to the end.
 $middlewareQueue->insertAfter(
     'Cake\Error\Middleware\ErrorHandlerMiddleware',
-    $layer
+    $layer,
 );
 ```
 
@@ -189,7 +189,7 @@ class TrackingCookieMiddleware implements MiddlewareInterface
 {
     public function process(
         ServerRequestInterface $request,
-        RequestHandlerInterface $handler
+        RequestHandlerInterface $handler,
     ): ResponseInterface
     {
         // Calling $handler->handle() delegates control to the *next* middleware
@@ -201,7 +201,7 @@ class TrackingCookieMiddleware implements MiddlewareInterface
             $response = $response->withCookie(new Cookie(
                 'landing_page',
                 $request->getRequestTarget(),
-                $expiry
+                $expiry,
             ));
         }
 
@@ -265,7 +265,7 @@ use Cake\Http\Middleware\EncryptedCookieMiddleware;
 $cookies = new EncryptedCookieMiddleware(
     // Names of cookies to protect
     ['secrets', 'protected'],
-    Configure::read('Security.cookieKey')
+    Configure::read('Security.cookieKey'),
 );
 
 $middlewareQueue->add($cookies);

@@ -251,7 +251,7 @@ custom paths to be used:
 ``` php
 Log::setConfig('custom_path', [
     'className' => 'File',
-    'path' => '/path/to/custom/place/'
+    'path' => '/path/to/custom/place/',
 ]);
 ```
 
@@ -287,7 +287,7 @@ be done in the **config/bootstrap.php** file:
 
 ``` php
 Log::setConfig('default', [
-    'engine' => 'Syslog'
+    'engine' => 'Syslog',
 ]);
 ```
 
@@ -419,7 +419,7 @@ class UsersControllerTest extends TestCase
     {
         parent::setUp();
         $this->setupLog([
-            'error' => ['scopes' => ['app.security']]
+            'error' => ['scopes' => ['app.security']],
         ]);
     }
 

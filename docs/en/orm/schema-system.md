@@ -25,18 +25,18 @@ use Cake\Database\Schema\TableSchema;
 // Create a table one column at a time.
 $schema = new TableSchema('posts');
 $schema->addColumn('id', [
-  'type' => 'integer',
-  'length' => 11,
-  'null' => false,
-  'default' => null,
+    'type' => 'integer',
+    'length' => 11,
+    'null' => false,
+    'default' => null,
 ])->addColumn('title', [
-  'type' => 'string',
-  'length' => 255,
-  // Create a fixed length (char field)
-  'fixed' => true
+    'type' => 'string',
+    'length' => 255,
+    // Create a fixed length (char field)
+    'fixed' => true,
 ])->addConstraint('primary', [
-  'type' => 'primary',
-  'columns' => ['id']
+    'type' => 'primary',
+    'columns' => ['id'],
 ]);
 
 // Schema\TableSchema classes could also be created with array data
@@ -51,7 +51,7 @@ following two forms are equivalent:
 $schema->addColumn('title', 'string');
 // and
 $schema->addColumn('title', [
-  'type' => 'string'
+    'type' => 'string',
 ]);
 ```
 
@@ -82,32 +82,32 @@ methods. An example of both methods is:
 ``` php
 $schema = new TableSchema('posts');
 $schema->addColumn('id', 'integer')
-  ->addColumn('author_id', 'integer')
-  ->addColumn('title', 'string')
-  ->addColumn('slug', 'string');
+    ->addColumn('author_id', 'integer')
+    ->addColumn('title', 'string')
+    ->addColumn('slug', 'string');
 
 // Add a primary key.
 $schema->addConstraint('primary', [
-  'type' => 'primary',
-  'columns' => ['id']
+    'type' => 'primary',
+    'columns' => ['id'],
 ]);
 // Add a unique key
 $schema->addConstraint('slug_idx', [
-  'columns' => ['slug'],
-  'type' => 'unique',
+    'columns' => ['slug'],
+    'type' => 'unique',
 ]);
 // Add index
 $schema->addIndex('slug_title', [
-  'columns' => ['slug', 'title'],
-  'type' => 'index'
+    'columns' => ['slug', 'title'],
+    'type' => 'index',
 ]);
 // Add a foreign key
 $schema->addConstraint('author_id_idx', [
-  'columns' => ['author_id'],
-  'type' => 'foreign',
-  'references' => ['authors', 'id'],
-  'update' => 'cascade',
-  'delete' => 'cascade'
+    'columns' => ['author_id'],
+    'type' => 'foreign',
+    'references' => ['authors', 'id'],
+    'update' => 'cascade',
+    'delete' => 'cascade',
 ]);
 ```
 
@@ -120,7 +120,7 @@ $schema = new TableSchema('posts');
 $schema->addColumn('id', 'integer')
 ->addConstraint('primary', [
     'type' => 'primary',
-    'columns' => ['id']
+    'columns' => ['id'],
 ]);
 ```
 
@@ -148,7 +148,7 @@ $schema->addColumn('id', [
 ->addColumn('account_id', 'integer')
 ->addConstraint('primary', [
     'type' => 'primary',
-    'columns' => ['id', 'account_id']
+    'columns' => ['id', 'account_id'],
 ]);
 ```
 
@@ -186,8 +186,8 @@ used to add table options:
 
 ``` php
 $schema->options([
-  'engine' => 'InnoDB',
-  'collate' => 'utf8_unicode_ci',
+    'engine' => 'InnoDB',
+    'collate' => 'utf8_unicode_ci',
 ]);
 ```
 
@@ -206,7 +206,7 @@ $schema = new TableSchema('posts', $fields, $indexes);
 // Create a table
 $queries = $schema->createSql($db);
 foreach ($queries as $sql) {
-  $db->execute($sql);
+    $db->execute($sql);
 }
 
 // Drop a table

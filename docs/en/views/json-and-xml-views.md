@@ -224,8 +224,8 @@ class VideosController extends AppController
 
         // Format to view mapping
         $formats = [
-          'xml' => 'Xml',
-          'json' => 'Json',
+            'xml' => 'Xml',
+            'json' => 'Json',
         ];
 
         // Error on unknown type

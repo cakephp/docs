@@ -330,7 +330,7 @@ class ArticlesTable extends Table
     {
         $this->addBehavior('Translate', [
             'fields' => ['title', 'body'],
-            'allowEmptyTranslations' => false
+            'allowEmptyTranslations' => false,
         ]);
     }
 }
@@ -399,7 +399,7 @@ TranslateBehavior does not substitute find conditions by default. You need to us
 ``` php
 $this->Articles->getBehavior('Translate')->setLocale('es');
 $query = $this->Articles->find()->where([
-    $this->Articles->getBehavior('Translate')->translationField('title') => 'Otro Título'
+    $this->Articles->getBehavior('Translate')->translationField('title') => 'Otro Título',
 ]);
 ```
 
@@ -430,7 +430,7 @@ class Article extends Entity
 $article = new Article([
     'title' => 'My First Article',
     'body' => 'This is the content',
-    'footnote' => 'Some afterwords'
+    'footnote' => 'Some afterwords',
 ]);
 
 $this->Articles->save($article);

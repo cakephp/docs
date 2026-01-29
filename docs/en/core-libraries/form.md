@@ -145,7 +145,7 @@ class ContactController extends AppController
         if ($this->request->is('get')) {
             $contact->setData([
                 'name' => 'John Doe',
-                'email' => 'john.doe@example.com'
+                'email' => 'john.doe@example.com',
             ]);
         }
 

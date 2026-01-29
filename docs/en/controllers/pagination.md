@@ -79,7 +79,7 @@ class ArticlesController extends AppController
         $tags = $this->request->getParam('pass');
 
         $customFinderOptions = [
-            'tags' => $tags
+            'tags' => $tags,
         ];
         // We're using the $settings argument to paginate() here.
         // But the same structure could be used in $this->paginate
@@ -90,7 +90,7 @@ class ArticlesController extends AppController
         // public function findTagged(Query $query, array $tagged = [])
         $settings = [
             'finder' => [
-                'tagged' => $customFinderOptions
+                'tagged' => $customFinderOptions,
             ]
         ];
         $articles = $this->paginate($this->Articles, $settings);
@@ -153,7 +153,7 @@ call to the `paginate()` method:
 // Paginate property
 protected array $paginate = [
     'Articles' => ['scope' => 'article'],
-    'Tags' => ['scope' => 'tag']
+    'Tags' => ['scope' => 'tag'],
 ];
 
 // In a controller action
@@ -197,7 +197,7 @@ $this->paginate = [
 
 $publishedArticles = $this->paginate(
     $this->Articles->find('all', scope: 'published_articles')
-        ->where(['published' => true])
+        ->where(['published' => true]),
 );
 
 // Load an additional table object to allow differentiating in the paginator
@@ -209,7 +209,7 @@ $unpublishedArticlesTable = $this->fetchTable('UnpublishedArticles', [
 
 $unpublishedArticles = $this->paginate(
     $unpublishedArticlesTable->find('all', scope: 'unpublished_articles')
-        ->where(['published' => false])
+        ->where(['published' => false]),
 );
 ```
 
@@ -355,7 +355,7 @@ example reducing it to `10`:
 ``` php
 protected array $paginate = [
     // Other keys here.
-    'maxLimit' => 10
+    'maxLimit' => 10,
 ];
 ```
 

@@ -58,7 +58,7 @@ should be converted to:
 
 ``` php
 ->with(
-    ...self::withConsecutive(['firstCallArg'], ['secondCallArg'])
+    ...self::withConsecutive(['firstCallArg'], ['secondCallArg']),
 )
 ```
 

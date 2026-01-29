@@ -123,7 +123,7 @@ dynamic. :
 echo $this->Html->style([
     'background' => '#633',
     'border-bottom' => '1px solid #000',
-    'padding' => '10px'
+    'padding' => '10px',
 ]);
 ```
 
@@ -157,7 +157,7 @@ CakePHP contains a few shortcuts:
 echo $this->Html->meta(
     'favicon.ico',
     '/favicon.ico',
-    ['type' => 'icon']
+    ['type' => 'icon'],
 );
 // Output (line breaks added)
 // Note: The helper code makes two meta tags to  ensure the
@@ -177,7 +177,7 @@ echo $this->Html->meta(
 echo $this->Html->meta(
     'Comments',
     '/comments/index.rss',
-    ['type' => 'rss']
+    ['type' => 'rss'],
 );
 // Output (line breaks added)
 <link
@@ -194,14 +194,14 @@ descriptions. Example:
 ``` php
 echo $this->Html->meta(
     'keywords',
-    'enter any meta keyword here'
+    'enter any meta keyword here',
 );
 // Output
 <meta name="keywords" content="enter any meta keyword here" />
 
 echo $this->Html->meta(
     'description',
-    'enter any meta description here'
+    'enter any meta description here',
 );
 // Output
 <meta name="description" content="enter any meta description here" />
@@ -216,7 +216,7 @@ In addition to making predefined meta tags, you can create link elements:
 ``` php
 <?= $this->Html->meta([
     'link' => 'http://example.com/manifest',
-    'rel' => 'manifest'
+    'rel' => 'manifest',
 ]);
 ?>
 // Output
@@ -253,7 +253,7 @@ To create an image link specify the link destination using the
 ``` php
 echo $this->Html->image("recipes/6.jpg", [
     "alt" => "Brownies",
-    'url' => ['controller' => 'Recipes', 'action' => 'view', 6]
+    'url' => ['controller' => 'Recipes', 'action' => 'view', 6],
 ]);
 ```
 
@@ -318,7 +318,7 @@ specify attributes for the element and whether or not the
 echo $this->Html->link(
     'Enter',
     '/pages/home',
-    ['class' => 'button', 'target' => '_blank']
+    ['class' => 'button', 'target' => '_blank'],
 );
 ```
 
@@ -333,7 +333,7 @@ Use `'_full'=>true` option for absolute URLs:
 ``` php
 echo $this->Html->link(
     'Dashboard',
-    ['controller' => 'Dashboards', 'action' => 'index', '_full' => true]
+    ['controller' => 'Dashboards', 'action' => 'index', '_full' => true],
 );
 ```
 
@@ -350,7 +350,7 @@ dialog:
 echo $this->Html->link(
     'Delete',
     ['controller' => 'Recipes', 'action' => 'delete', 6],
-    ['confirm' => 'Are you sure you wish to delete this recipe?']
+    ['confirm' => 'Are you sure you wish to delete this recipe?'],
 );
 ```
 
@@ -372,7 +372,7 @@ echo $this->Html->link('View image', [
     'controller' => 'Images',
     'action' => 'view',
     1,
-    '?' => ['height' => 400, 'width' => 500]
+    '?' => ['height' => 400, 'width' => 500],
 ]);
 ```
 
@@ -390,7 +390,7 @@ entities. To disable this conversion, set the escape option to
 echo $this->Html->link(
     $this->Html->image("recipes/6.jpg", ["alt" => "Brownies"]),
     "recipes/view/6",
-    ['escape' => false]
+    ['escape' => false],
 );
 ```
 
@@ -410,7 +410,7 @@ escaping of title and not the attributes. :
 echo $this->Html->link(
     $this->Html->image('recipes/6.jpg', ['alt' => 'Brownies']),
     'recipes/view/6',
-    ['escapeTitle' => false, 'title' => 'hi "howdy"']
+    ['escapeTitle' => false, 'title' => 'hi "howdy"'],
 );
 ```
 
@@ -464,7 +464,7 @@ Returns a formatted audio/video tag:
 
 <?= $this->Html->media('video.mp4', [
     'fullBase' => true,
-    'text' => 'Fallback text'
+    'text' => 'Fallback text',
 ]) ?>
 
 // Output
@@ -472,7 +472,7 @@ Returns a formatted audio/video tag:
 
 <?= $this->Html->media(
     ['video.mp4', ['src' => 'video.ogg', 'type' => "video/ogg; codecs='theora, vorbis'"]],
-    ['autoplay']
+    ['autoplay'],
 ) ?>
 
 // Output
@@ -649,7 +649,7 @@ Creates an <span class="title-ref">importmap</span> script tag for your JavaScri
 // In the head tag of your layout
 echo $this->Html->importmap([
     'jquery' => 'jquery.js',
-    'wysiwyg' => '/editor/wysiwyg.js'
+    'wysiwyg' => '/editor/wysiwyg.js',
 ]);
 ```
 
@@ -670,7 +670,7 @@ Generating maps with imports, scopes and integrity:
 echo $this->Html->importmap([
     'imports' => [
         'jquery' => 'jquery-3.7.1.min.js',
-        'wysiwyg' => '/editor/wysiwyg.js'
+        'wysiwyg' => '/editor/wysiwyg.js',
     ],
     'scopes' => [
         'scoped/' => [
@@ -769,7 +769,7 @@ Output:
 echo $this->Html->tableHeaders(
     ['Date', 'Title','Active'],
     ['class' => 'status'],
-    ['class' => 'product_table']
+    ['class' => 'product_table'],
 );
 ```
 
@@ -790,7 +790,7 @@ defaults provided in the `$thOptions`:
 echo $this->Html->tableHeaders([
     'id',
     ['Name' => ['class' => 'highlight']],
-    ['Date' => ['class' => 'sortable']]
+    ['Date' => ['class' => 'sortable']],
 ]);
 ```
 
@@ -881,7 +881,7 @@ echo $this->Html->tableCells(
         ['Orange', 'Orange'],
         ['Yellow', 'Banana'],
     ],
-    ['class' => 'darker']
+    ['class' => 'darker'],
 );
 ```
 
@@ -902,7 +902,7 @@ Load an array of templates to add/replace templates:
 ``` php
 // Load specific templates.
 $this->Html->setTemplates([
-    'javascriptlink' => '<script src="{{url}}" type="text/javascript"{{attrs}}></script>'
+    'javascriptlink' => '<script src="{{url}}" type="text/javascript"{{attrs}}></script>',
 ]);
 ```
 
@@ -919,7 +919,7 @@ When loading files of templates, your file should look like:
 ``` php
 <?php
 return [
-    'javascriptlink' => '<script src="{{url}}" type="text/javascript"{{attrs}}></script>'
+    'javascriptlink' => '<script src="{{url}}" type="text/javascript"{{attrs}}></script>',
 ];
 ```
 

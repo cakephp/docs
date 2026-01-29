@@ -501,7 +501,7 @@ TransportFactory::setConfig('gmail', [
     'username' => 'my@gmail.com',
     'password' => 'secret',
     'className' => 'Smtp',
-    'tls' => true
+    'tls' => true,
 ]);
 ```
 

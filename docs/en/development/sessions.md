@@ -41,7 +41,7 @@ this:
 Configure::write('Session', [
     'defaults' => 'php',
     'ini' => [
-        'session.cookie_secure' => false
+        'session.cookie_secure' => false,
     ]
 ]);
 ```
@@ -83,7 +83,7 @@ Configure::write('Session', [
     'defaults' => 'php',
     'ini' => [
         // Invalidate the cookie after 30 minutes
-        'session.cookie_lifetime' => 1800
+        'session.cookie_lifetime' => 1800,
     ]
 ]);
 ```
@@ -108,7 +108,7 @@ it in your Session config:
 
 ``` php
 Configure::write('Session', [
-    'defaults' => 'php'
+    'defaults' => 'php',
 ]);
 ```
 
@@ -119,7 +119,7 @@ part or all of it by doing the following:
 Configure::write('Session', [
     'defaults' => 'php',
     'cookie' => 'my_app',
-    'timeout' => 4320 // 3 days
+    'timeout' => 4320, // 3 days
 ]);
 ```
 
@@ -269,7 +269,7 @@ Configure::write('Session', [
         'session.cookie_name' => 'MyCookie',
         'session.cookie_lifetime' => 1800, // Valid for 30 minutes
         'session.gc_divisor' => 1000,
-        'session.cookie_httponly' => true
+        'session.cookie_httponly' => true,
     ]
 ]);
 ```
@@ -424,8 +424,8 @@ You may also specify one or multiple hashes like so:
 
 ``` php
 $session->write([
-  'Config.theme' => 'blue',
-  'Config.language' => 'en',
+    'Config.theme' => 'blue',
+    'Config.language' => 'en',
 ]);
 ```
 

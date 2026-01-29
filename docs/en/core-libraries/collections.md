@@ -220,7 +220,7 @@ $result = $combined->toArray();
 // $result contains
 [
     'a' => [1 => 'foo', 3 => 'baz'],
-    'b' => [2 => 'bar']
+    'b' => [2 => 'bar'],
 ];
 ```
 
@@ -232,14 +232,14 @@ instances by the ORM) you may want to group results by date:
 $combined = (new Collection($entities))->combine(
     'id',
     function ($entity) { return $entity; },
-    function ($entity) { return $entity->date->toDateString(); }
+    function ($entity) { return $entity->date->toDateString(); },
 );
- $result = $combined->toArray();
+$result = $combined->toArray();
 
 // $result contains
 [
     'date string like 2015-05-01' => ['entity1->id' => entity1, 'entity2->id' => entity2, ..., 'entityN->id' => entityN]
-    'date string like 2015-06-01' => ['entity1->id' => entity1, 'entity2->id' => entity2, ..., 'entityN->id' => entityN]
+    'date string like 2015-06-01' => ['entity1->id' => entity1, 'entity2->id' => entity2, ..., 'entityN->id' => entityN],
 ]
 ```
 
@@ -356,7 +356,7 @@ $collection = new Collection([
     'a' => 1,
     'b' => 2,
     'c' => 3,
-    'd' => [4, 5]
+    'd' => [4, 5],
 ]);
 $chunked = $collection->chunkWithKeys(2);
 $result = $chunked->toList();
@@ -364,7 +364,7 @@ $result = $chunked->toList();
 // $result contains
 [
     ['a' => 1, 'b' => 2],
-    ['c' => 3, 'd' => [4, 5]]
+    ['c' => 3, 'd' => [4, 5]],
 ]
 ```
 
@@ -461,7 +461,7 @@ matching element from a collection, you can use `firstMatch()`:
 $collection = new Collection($comments);
 $comment = $collection->firstMatch([
     'user.name' => 'Mark',
-    'active' => true
+    'active' => true,
 ]);
 ```
 
@@ -570,8 +570,8 @@ for:
 
 ``` php
 $items = [
-   ['invoice' => ['total' => 100]],
-   ['invoice' => ['total' => 200]],
+    ['invoice' => ['total' => 100]],
+    ['invoice' => ['total' => 200]],
 ];
 
 // $average contains 150
@@ -587,11 +587,11 @@ path, or function to extract values to generate the median for:
 
 ``` php
 $items = [
-  ['invoice' => ['total' => 400]],
-  ['invoice' => ['total' => 500]],
-  ['invoice' => ['total' => 100]],
-  ['invoice' => ['total' => 333]],
-  ['invoice' => ['total' => 200]],
+    ['invoice' => ['total' => 400]],
+    ['invoice' => ['total' => 500]],
+    ['invoice' => ['total' => 100]],
+    ['invoice' => ['total' => 333]],
+    ['invoice' => ['total' => 200]],
 ];
 
 // $median contains 333
@@ -612,7 +612,7 @@ $students = [
     ['name' => 'Mark', 'grade' => 9],
     ['name' => 'Andrew', 'grade' => 10],
     ['name' => 'Stacy', 'grade' => 10],
-    ['name' => 'Barbara', 'grade' => 9]
+    ['name' => 'Barbara', 'grade' => 9],
 ];
 $collection = new Collection($students);
 $studentsByGrade = $collection->groupBy('grade');
@@ -620,14 +620,14 @@ $result = $studentsByGrade->toArray();
 
 // $result contains
 [
-  10 => [
+    10 => [
     ['name' => 'Andrew', 'grade' => 10],
-    ['name' => 'Stacy', 'grade' => 10]
-  ],
-  9 => [
+    ['name' => 'Stacy', 'grade' => 10],
+    ],
+    9 => [
     ['name' => 'Mark', 'grade' => 9],
-    ['name' => 'Barbara', 'grade' => 9]
-  ]
+    ['name' => 'Barbara', 'grade' => 9],
+    ]
 ]
 ```
 
@@ -674,7 +674,7 @@ $usersById = $users->indexBy('id');
 [
     1 => 'markstory',
     3 => 'jose_zap',
-    4 => 'jrbasso'
+    4 => 'jrbasso',
 ]
 ```
 
@@ -718,7 +718,7 @@ $result = $rows->toList();
     [2013, 1000, 0],
     [2014, 1500, 500],
     [2015, 2000, 500],
-    [2016, 2300, 300]
+    [2016, 2300, 300],
 ]
 ```
 
@@ -742,7 +742,7 @@ $result = $firstYear->zip($data[0], $data[1])->toList();
 // $result contains
 [
     [100, 300, 400],
-    [200, 500, 600]
+    [200, 500, 600],
 ]
 ```
 
@@ -891,7 +891,7 @@ $result = $nested->listNested()->toList();
     ['id' => 3, 'parent_id' => 1, 'name' => 'Eagle'],
     ['id' => 4, 'parent_id' => 1, 'name' => 'Seagull'],
     ['id' => 6, 'parent_id' => null, 'name' => 'Fish', 'children' => [...]],
-    ['id' => 5, 'parent_id' => 6, 'name' => 'Clown Fish']
+    ['id' => 5, 'parent_id' => 6, 'name' => 'Clown Fish'],
 ]
 ```
 
@@ -1180,13 +1180,13 @@ another collection:
 $users = [
     ['username' => 'mark'],
     ['username' => 'juan'],
-    ['username' => 'jose']
+    ['username' => 'jose'],
 ];
 
 $languages = [
     ['PHP', 'Python', 'Ruby'],
     ['Bash', 'PHP', 'Javascript'],
-    ['Javascript', 'Prolog']
+    ['Javascript', 'Prolog'],
 ];
 
 $merged = (new Collection($users))->insert('skills', $languages);
@@ -1196,7 +1196,7 @@ $result = $merged->toArray();
 [
     ['username' => 'mark', 'skills' => ['PHP', 'Python', 'Ruby']],
     ['username' => 'juan', 'skills' => ['Bash', 'PHP', 'Javascript']],
-    ['username' => 'jose', 'skills' => ['Javascript', 'Prolog']]
+    ['username' => 'jose', 'skills' => ['Javascript', 'Prolog']],
 ];
 ```
 
@@ -1214,7 +1214,7 @@ first one, then the target property will not be present:
 ``` php
 $languages = [
     ['PHP', 'Python', 'Ruby'],
-    ['Bash', 'PHP', 'Javascript']
+    ['Bash', 'PHP', 'Javascript'],
 ];
 
 $merged = (new Collection($users))->insert('skills', $languages);
@@ -1224,7 +1224,7 @@ $result = $merged->toArray();
 [
     ['username' => 'mark', 'skills' => ['PHP', 'Python', 'Ruby']],
     ['username' => 'juan', 'skills' => ['Bash', 'PHP', 'Javascript']],
-    ['username' => 'jose']
+    ['username' => 'jose'],
 ];
 ```
 
@@ -1296,11 +1296,11 @@ those cases you can use `through()` in combination with a class implementing
 
 ``` php
 $collection
-        ->map(new ShippingCostCalculator)
-        ->map(new TotalOrderCalculator)
-        ->map(new GiftCardPriceReducer)
-        ->buffered()
-       ...
+    ->map(new ShippingCostCalculator)
+    ->map(new TotalOrderCalculator)
+    ->map(new GiftCardPriceReducer)
+    ->buffered()
+    ...
 ```
 
 The above method calls can be extracted into a new class so they don't need to
@@ -1309,15 +1309,15 @@ be repeated every time:
 ``` php
 class FinalCheckOutRowProcessor
 {
-        public function __invoke($collection)
-        {
-                return $collection
-                        ->map(new ShippingCostCalculator)
-                        ->map(new TotalOrderCalculator)
-                        ->map(new GiftCardPriceReducer)
-                        ->buffered()
-                       ...
-        }
+    public function __invoke($collection)
+    {
+        return $collection
+            ->map(new ShippingCostCalculator)
+            ->map(new TotalOrderCalculator)
+            ->map(new GiftCardPriceReducer)
+            ->buffered()
+            ...
+    }
 }
 
 // Now you can use the through() method to call all methods at once

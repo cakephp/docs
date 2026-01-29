@@ -337,7 +337,7 @@ The above example could also be written in a single call:
 ``` php
 Configure::write('Company', [
     'name' => 'Pizza, Inc.',
-    'slogan' => 'Pizza for your body and soul'
+    'slogan' => 'Pizza for your body and soul',
 ]);
 ```
 

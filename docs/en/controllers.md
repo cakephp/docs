@@ -427,9 +427,9 @@ return $this->redirect([
     $order->id,
     '?' => [
         'product' => 'pizza',
-        'quantity' => 5
+        'quantity' => 5,
     ],
-    '#' => 'top'
+    '#' => 'top',
 ]);
 ```
 
@@ -438,7 +438,7 @@ Or using a relative or absolute URL:
 ``` php
 return $this->redirect('/orders/confirm');
 
-return $this->redirect('http://www.example.com');
+return $this->redirect('https://www.example.com');
 ```
 
 Or to the referer page:
@@ -471,7 +471,7 @@ the controller's default one:
 // In a controller method.
 $recentArticles = $this->fetchTable('Articles')->find('all',
         limit: 5,
-        order: 'Articles.created DESC'
+        order: 'Articles.created DESC',
     )
     ->all();
 ```

@@ -640,7 +640,7 @@ class ErrorLogger implements ErrorLoggerInterface
     public function logError(
         PhpError $error,
         ?ServerRequestInterface $request,
-        bool $includeTrace = false
+        bool $includeTrace = false,
     ): void {
         // Log PHP Errors
     }
@@ -650,7 +650,7 @@ class ErrorLogger implements ErrorLoggerInterface
      */
     public function logException(
         ?ServerRequestInterface $request,
-        bool $includeTrace = false
+        bool $includeTrace = false,
     ): void {
         // Log exceptions.
     }

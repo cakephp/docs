@@ -75,7 +75,7 @@ Use this instead:
 $matches = array_intersect_key(
     $this->_listeners,
     array_flip(
-        preg_grep($matchPattern, array_keys($this->_listeners), 0)
+        preg_grep($matchPattern, array_keys($this->_listeners), 0),
     )
 );
 ```

@@ -29,7 +29,7 @@ class UsersController extends AppController
             // Notify user of new message
             $this->Flash->success(__(
                 'You have a new message: {0}',
-                Text::truncate($message['Message']['body'], 255, ['html' => true])
+                Text::truncate($message['Message']['body'], 255, ['html' => true]),
             ));
         }
     }
@@ -170,7 +170,7 @@ replacements:
 ``` php
 Text::insert(
     'My name is :name and I am :age years old.',
-    ['name' => 'Bob', 'age' => '65']
+    ['name' => 'Bob', 'age' => '65'],
 );
 // Returns: "My name is Bob and I am 65 years old."
 ```
@@ -193,7 +193,7 @@ $options = [
         'method' => 'text', // or html
     ],
     'before' => '',
-    'after' => ''
+    'after' => '',
 ];
 ```
 
@@ -237,7 +237,7 @@ $text = 'This is the song that never ends. This is the song that never ends.';
 $result = Text::wrapBlock($text, [
     'width' => 22,
     'indent' => ' → ',
-    'indentAt' => 1
+    'indentAt' => 1,
 ]);
 
 // Returns
@@ -272,7 +272,7 @@ Example:
 echo $this->Text->highlight(
     $lastSentence,
     'using',
-    ['format' => '<span class="highlight">\1</span>']
+    ['format' => '<span class="highlight">\1</span>'],
 );
 
 // Called as Text
@@ -281,7 +281,7 @@ use Cake\Utility\Text;
 echo Text::highlight(
     $lastSentence,
     'using',
-    ['format' => '<span class="highlight">\1</span>']
+    ['format' => '<span class="highlight">\1</span>'],
 );
 ```
 
@@ -309,7 +309,7 @@ possible keys by default, all of which are optional:
 [
     'ellipsis' => '...',
     'exact' => true,
-    'html' => false
+    'html' => false,
 ]
 ```
 
@@ -322,7 +322,7 @@ echo $this->Text->truncate(
     22,
     [
         'ellipsis' => '...',
-        'exact' => false
+        'exact' => false,
     ]
 );
 
@@ -334,7 +334,7 @@ echo Text::truncate(
     22,
     [
         'ellipsis' => '...',
-        'exact' => false
+        'exact' => false,
     ]
 );
 ```
@@ -361,7 +361,7 @@ possible keys by default, all of which are optional:
 ``` php
 [
     'ellipsis' => '...',
-    'exact' => true
+    'exact' => true,
 ]
 ```
 
@@ -377,7 +377,7 @@ echo $this->Text->tail(
     70,
     [
         'ellipsis' => '...',
-        'exact' => false
+        'exact' => false,
     ]
 );
 
@@ -389,7 +389,7 @@ echo Text::tail(
     70,
     [
         'ellipsis' => '...',
-        'exact' => false
+        'exact' => false,
     ]
 );
 ```

@@ -93,7 +93,7 @@ class SearchComponent extends Component
     public function __construct(
         ComponentRegistry $registry,
         private UserService $users,
-        array $config = []
+        array $config = [],
     ) {
         parent::__construct($registry, $config);
     }
@@ -379,7 +379,7 @@ Auto Wiring is turned off by default. To enable it:
 public function services(ContainerInterface $container): void
 {
     $container->delegate(
-        new \League\Container\ReflectionContainer()
+        new \League\Container\ReflectionContainer(),
     );
 }
 ```
@@ -391,7 +391,7 @@ caching:
 ``` php
 $container->delegate(
      // or consider using the value of Configure::read('debug')
-    new \League\Container\ReflectionContainer(true)
+    new \League\Container\ReflectionContainer(true),
 );
 ```
 

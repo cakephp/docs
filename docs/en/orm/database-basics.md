@@ -62,7 +62,7 @@ $results = $connection
     ->execute(
         'SELECT * FROM articles WHERE created >= :created',
         ['created' => new DateTime('1 day ago')],
-        ['created' => 'datetime']
+        ['created' => 'datetime'],
     )
     ->fetchAll('assoc');
 ```
@@ -90,7 +90,7 @@ use DateTime;
 $connection = ConnectionManager::get('default');
 $connection->insert('articles', [
     'title' => 'A New Article',
-    'created' => new DateTime('now')
+    'created' => new DateTime('now'),
 ], ['created' => 'datetime']);
 ```
 
@@ -709,7 +709,7 @@ class PointMutationType extends BaseType
             return [
                 'position' => (int) $matches[1],
                 'from' => $matches[2],
-                'to' => $matches[3]
+                'to' => $matches[3],
             ];
         }
 
@@ -786,7 +786,7 @@ class PointMutationType extends BaseType
     public function getColumnSql(
         TableSchemaInterface $schema,
         string $column,
-        Driver $driver
+        Driver $driver,
     ): ?string {
         $data = $schema->getColumn($column);
         $sql = $driver->quoteIdentifier($column);
@@ -806,7 +806,7 @@ class PointMutationType extends BaseType
      */
     public function convertColumnDefinition(
         array $definition,
-        Driver $driver
+        Driver $driver,
     ): ?array {
         return [
             'type' => $this->_name,
@@ -913,7 +913,7 @@ class PointType extends BaseType implements ExpressionTypeInterface
                 'POINT',
                 [
                     $value->lat(),
-                    $value->long()
+                    $value->long(),
                 ]
             );
         }
@@ -974,7 +974,7 @@ For parameterized queries use the 2nd argument:
 ``` php
 $statement = $connection->execute(
     'UPDATE articles SET published = ? WHERE id = ?',
-    [1, 2]
+    [1, 2],
 );
 ```
 
@@ -986,7 +986,7 @@ abstract type names when creating a query:
 $statement = $connection->execute(
     'UPDATE articles SET published_date = ? WHERE id = ?',
     [new DateTime('now'), 2],
-    ['date', 'integer']
+    ['date', 'integer'],
 );
 ```
 
@@ -1147,7 +1147,7 @@ use Cake\Log\Log;
 Log::setConfig('queries', [
     'className' => 'Console',
     'stream' => 'php://stderr',
-    'scopes' => ['queriesLog']
+    'scopes' => ['queriesLog'],
 ]);
 
 // File logging
@@ -1155,7 +1155,7 @@ Log::setConfig('queries', [
     'className' => 'File',
     'path' => LOGS,
     'file' => 'queries.log',
-    'scopes' => ['queriesLog']
+    'scopes' => ['queriesLog'],
 ]);
 ```
 

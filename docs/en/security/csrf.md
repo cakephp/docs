@@ -181,7 +181,7 @@ defining a script block like this:
 ``` php
 echo $this->Html->scriptBlock(sprintf(
     'var csrfToken = %s;',
-    json_encode($this->request->getAttribute('csrfToken'))
+    json_encode($this->request->getAttribute('csrfToken')),
 ));
 ```
 

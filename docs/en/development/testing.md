@@ -450,7 +450,7 @@ $migrator->runMany([
     // Run Contacts migrations on test connection.
     ['plugin' => 'Contacts'],
     // Run Documents migrations on test_docs connection.
-    ['plugin' => 'Documents', 'connection' => 'test_docs']
+    ['plugin' => 'Documents', 'connection' => 'test_docs'],
 ]);
 ```
 
@@ -548,44 +548,44 @@ use Cake\TestSuite\Fixture\TestFixture;
 
 class ArticlesFixture extends TestFixture
 {
-      // Optional. Set this property to load fixtures
-      // to a different test datasource
-      public $connection = 'test';
+        // Optional. Set this property to load fixtures
+        // to a different test datasource
+        public $connection = 'test';
 
-      // Optional. Lets you define which table alias is used when
-      // reflecting schema and inserting rows. Inferred from the
-      // class name by default. Added in 5.3.0
-      public $tableAlias = 'Articles';
+        // Optional. Lets you define which table alias is used when
+        // reflecting schema and inserting rows. Inferred from the
+        // class name by default. Added in 5.3.0
+        public $tableAlias = 'Articles';
 
-      // Optional. Lets you define the table name for a fixture.
-      // If defined, this table name will be camelized to create
-      // $tableAlias.
-      public $table = 'articles';
+        // Optional. Lets you define the table name for a fixture.
+        // If defined, this table name will be camelized to create
+        // $tableAlias.
+        public $table = 'articles';
 
-      public $records = [
-          [
-              'title' => 'First Article',
-              'body' => 'First Article Body',
-              'published' => '1',
-              'created' => '2007-03-18 10:39:23',
-              'modified' => '2007-03-18 10:41:31'
-          ],
-          [
-              'title' => 'Second Article',
-              'body' => 'Second Article Body',
-              'published' => '1',
-              'created' => '2007-03-18 10:41:23',
-              'modified' => '2007-03-18 10:43:31'
-          ],
-          [
-              'title' => 'Third Article',
-              'body' => 'Third Article Body',
-              'published' => '1',
-              'created' => '2007-03-18 10:43:23',
-              'modified' => '2007-03-18 10:45:31'
-          ]
-      ];
- }
+        public $records = [
+            [
+                'title' => 'First Article',
+                'body' => 'First Article Body',
+                'published' => '1',
+                'created' => '2007-03-18 10:39:23',
+                'modified' => '2007-03-18 10:41:31',
+            ],
+            [
+                'title' => 'Second Article',
+                'body' => 'Second Article Body',
+                'published' => '1',
+                'created' => '2007-03-18 10:41:23',
+                'modified' => '2007-03-18 10:43:31',
+            ],
+            [
+                'title' => 'Third Article',
+                'body' => 'Third Article Body',
+                'published' => '1',
+                'created' => '2007-03-18 10:43:23',
+                'modified' => '2007-03-18 10:45:31',
+            ],
+        ];
+}
 ```
 
 > [!NOTE]
@@ -865,7 +865,7 @@ class PluginHelperTest extends TestCase
             $routes->setRouteClass(DashedRoute::class);
             $routes->get(
                 '/test/view/{id}',
-                ['controller' => 'Tests', 'action' => 'view']
+                ['controller' => 'Tests', 'action' => 'view'],
             );
             // ...
         });
@@ -908,7 +908,7 @@ class ArticlesTable extends Table
     public function findPublished(SelectQuery $query): SelectQuery
     {
         $query->where([
-            $this->getAlias() . '.published' => 1
+            $this->getAlias() . '.published' => 1,
         ]);
 
         return $query;
@@ -966,7 +966,7 @@ class ArticlesTableTest extends TestCase
         $expected = [
             ['id' => 1, 'title' => 'First Article'],
             ['id' => 2, 'title' => 'Second Article'],
-            ['id' => 3, 'title' => 'Third Article']
+            ['id' => 3, 'title' => 'Third Article'],
         ];
 
         $this->assertEquals($expected, $result);
@@ -1083,7 +1083,7 @@ class ArticlesController extends AppController
 
         $this->set([
             'title' => 'Articles',
-            'articles' => $result
+            'articles' => $result,
         ]);
     }
 }
@@ -1136,7 +1136,7 @@ class ArticlesControllerTest extends TestCase
             'published' => 1,
             'slug' => 'new-article',
             'title' => 'New Article',
-            'body' => 'New Body'
+            'body' => 'New Body',
         ];
         $this->post('/articles', $data);
 
@@ -1180,12 +1180,12 @@ $this->session(['Auth.User.id' => 1]);
 
 // Configure headers and merge with the existing request
 $this->configRequest([
-    'headers' => ['Accept' => 'application/json']
+    'headers' => ['Accept' => 'application/json'],
 ]);
 
 // Replace the existing request. Added in 5.1.0
 $this->replaceRequest([
-    'headers' => ['Accept' => 'application/json']
+    'headers' => ['Accept' => 'application/json'],
 ]);
 ```
 
@@ -1218,7 +1218,7 @@ can use `configRequest()` to set the correct environment variables:
 ``` php
 // Fake out SSL connections.
 $this->configRequest([
-    'environment' => ['HTTPS' => 'on']
+    'environment' => ['HTTPS' => 'on'],
 ]);
 ```
 
@@ -1342,7 +1342,7 @@ class MarkersControllerTest extends TestCase
     public function testGet(): void
     {
         $this->configRequest([
-            'headers' => ['Accept' => 'application/json']
+            'headers' => ['Accept' => 'application/json'],
         ]);
         $this->get('/markers/view/1.json');
 
@@ -1406,7 +1406,7 @@ public function testAddWithUploads(): void
         12345,                    // the filesize in bytes
         \UPLOAD_ERR_OK,           // the upload/error status
         'teaser.jpg',             // the filename as sent by the client
-        'image/jpeg'              // the mimetype as sent by the client
+        'image/jpeg',              // the mimetype as sent by the client
     );
 
     $textAttachment = new \Laminas\Diactoros\UploadedFile(
@@ -1414,7 +1414,7 @@ public function testAddWithUploads(): void
         12345,
         \UPLOAD_ERR_OK,
         'attachment.txt',
-        'text/plain'
+        'text/plain',
     );
 
     $pdfAttachment = new \Laminas\Diactoros\UploadedFile(
@@ -1422,7 +1422,7 @@ public function testAddWithUploads(): void
         12345,
         \UPLOAD_ERR_OK,
         'attachment.pdf',
-        'application/pdf'
+        'application/pdf',
     );
 
     // This is the data accessible via `$this->request->getUploadedFile()`
@@ -1481,7 +1481,7 @@ public function testAddWithInvalidUploads(): void
         0,
         \UPLOAD_ERR_NO_FILE,
         '',
-        ''
+        '',
     );
 
     $uploadFailureAttachment = new \Laminas\Diactoros\UploadedFile(
@@ -1489,7 +1489,7 @@ public function testAddWithInvalidUploads(): void
         1234567890,
         \UPLOAD_ERR_INI_SIZE,
         'attachment.txt',
-        'text/plain'
+        'text/plain',
     );
 
     $invalidTypeAttachment = new \Laminas\Diactoros\UploadedFile(
@@ -1497,7 +1497,7 @@ public function testAddWithInvalidUploads(): void
         12345,
         \UPLOAD_ERR_OK,
         'attachment.exe',
-        'application/vnd.microsoft.portable-executable'
+        'application/vnd.microsoft.portable-executable',
     );
 
     $this->configRequest([
@@ -1895,8 +1895,8 @@ class CurrencyRendererHelperTest extends TestCase
 
         // Testing the thousands separator
         $this->assertEquals(
-          'USD 12,000.70',
-          $this->helper->usd(12000.70)
+            'USD 12,000.70',
+            $this->helper->usd(12000.70),
         );
     }
 }
@@ -1931,7 +1931,7 @@ class OrdersTable extends Table
         if ($this->save($order)) {
             // moved cart removal to CartsTable
             $event = new Event('Model.Order.afterPlace', $this, [
-                'order' => $order
+                'order' => $order,
             ]);
             $this->getEventManager()->dispatch($event);
 
@@ -1951,7 +1951,7 @@ class CartsTable extends Table
         // events from other models
         \Cake\Event\EventManager::instance()->on(
             'Model.Order.afterPlace',
-            callable: [$this, 'removeFromCart']
+            callable: [$this, 'removeFromCart'],
         );
     }
 

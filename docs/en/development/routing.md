@@ -55,7 +55,7 @@ $routes->connect(
 $routes->connect(
     '/articles/{id}',
     ['controller' => 'Articles', 'action' => 'view'],
-    ['id' => '\d+', 'pass' => ['id']]
+    ['id' => '\d+', 'pass' => ['id']],
 );
 ```
 
@@ -86,7 +86,7 @@ parameters:
 $routes->connect(
     '/upgrade',
     ['controller' => 'Subscriptions', 'action' => 'create'],
-    ['_name' => 'upgrade']
+    ['_name' => 'upgrade'],
 );
 
 use Cake\Routing\Router;
@@ -156,7 +156,7 @@ The basic format for a route definition is:
 $routes->connect(
     '/url/template',
     ['targetKey' => 'targetValue'],
-    ['option' => 'matchingRegex']
+    ['option' => 'matchingRegex'],
 );
 ```
 
@@ -237,7 +237,7 @@ compose the default route parameters:
 ``` php
 $routes->connect(
     '/government',
-    ['controller' => 'Pages', 'action' => 'display', 5]
+    ['controller' => 'Pages', 'action' => 'display', 5],
 );
 ```
 
@@ -280,14 +280,14 @@ specific HTTP verbs simpler:
 $routes->get(
     '/cooks/{id}',
     ['controller' => 'Users', 'action' => 'view'],
-    'users:view'
+    'users:view',
 );
 
 // Create a route that only responds to PUT requests
 $routes->put(
     '/cooks/{id}',
     ['controller' => 'Users', 'action' => 'update'],
-    'users:update'
+    'users:update',
 );
 ```
 
@@ -322,13 +322,13 @@ will be treated as part of the parameter:
 ``` php
 $routes->connect(
     '/{controller}/{id}',
-    ['action' => 'view']
+    ['action' => 'view'],
 )->setPatterns(['id' => '[0-9]+']);
 
 $routes->connect(
     '/{controller}/{id}',
     ['action' => 'view'],
-    ['id' => '[0-9]+']
+    ['id' => '[0-9]+'],
 );
 ```
 
@@ -357,7 +357,7 @@ $routes->scope('/', function (RouteBuilder $routes) {
     $routes->connect(
         '/{controller}/{id}',
         ['action' => 'view'],
-        ['id' => '[0-9]+']
+        ['id' => '[0-9]+'],
     );
 });
 ```
@@ -398,11 +398,11 @@ One more example, and you'll be a routing pro:
 ``` php
 $routes->connect(
     '/{controller}/{year}/{month}/{day}',
-    ['action' => 'index']
+    ['action' => 'index'],
 )->setPatterns([
     'year' => '[12][0-9]{3}',
     'month' => '0[1-9]|1[012]',
-    'day' => '0[1-9]|[12][0-9]|3[01]'
+    'day' => '0[1-9]|[12][0-9]|3[01]',
 ]);
 ```
 
@@ -498,7 +498,7 @@ $routes->scope('/api', function (RouteBuilder $routes) {
     // Set default options for all routes in this scope
     $routes->setOptions([
         '_host' => 'api.example.com',
-        '_https' => true
+        '_https' => true,
     ]);
 
     // These routes will automatically have _host and _https set
@@ -526,7 +526,7 @@ $routes->scope('/api', function (RouteBuilder $routes) {
     $routes->get('/internal', [
         'controller' => 'Internal',
         'action' => 'index',
-        '_host' => 'internal.example.com'
+        '_host' => 'internal.example.com',
     ]);
 
     // Nested scope inherits the default host
@@ -561,7 +561,7 @@ public function view($articleId = null, $slug = null)
 $routes->scope('/', function (RouteBuilder $routes) {
     $routes->connect(
         '/blog/{id}-{slug}', // For example, /blog/3-CakePHP_Rocks
-        ['controller' => 'Blogs', 'action' => 'view']
+        ['controller' => 'Blogs', 'action' => 'view'],
     )
     // Define the route elements in the route template
     // to prepend as function arguments. Order matters as this
@@ -586,7 +586,7 @@ echo $this->Html->link('CakePHP Rocks', [
     'controller' => 'Blog',
     'action' => 'view',
     'id' => 3,
-    'slug' => 'CakePHP_Rocks'
+    'slug' => 'CakePHP_Rocks',
 ]);
 
 // You can also used numerically indexed parameters.
@@ -594,7 +594,7 @@ echo $this->Html->link('CakePHP Rocks', [
     'controller' => 'Blog',
     'action' => 'view',
     3,
-    'CakePHP_Rocks'
+    'CakePHP_Rocks',
 ]);
 ```
 
@@ -630,14 +630,14 @@ option can be used in reverse routing to identify the route you want to use:
 $routes->connect(
     '/login',
     ['controller' => 'Users', 'action' => 'login'],
-    ['_name' => 'login']
+    ['_name' => 'login'],
 );
 
 // Name a verb specific route
 $routes->post(
     '/logout',
     ['controller' => 'Users', 'action' => 'logout'],
-    'logout'
+    'logout',
 );
 
 // Generate a URL using a named route.
@@ -810,13 +810,13 @@ how to build this link using the HTML helper:
 // Go into a prefixed route.
 echo $this->Html->link(
     'Manage articles',
-    ['prefix' => 'Manager/Admin', 'controller' => 'Articles', 'action' => 'add']
+    ['prefix' => 'Manager/Admin', 'controller' => 'Articles', 'action' => 'add'],
 );
 
 // Leave a prefix
 echo $this->Html->link(
     'View Post',
-    ['prefix' => false, 'controller' => 'Articles', 'action' => 'view', 5]
+    ['prefix' => false, 'controller' => 'Articles', 'action' => 'view', 5],
 );
 ```
 
@@ -834,7 +834,7 @@ URL array:
 ``` php
 echo $this->Html->link(
     'New admin todo',
-    ['prefix' => 'Admin', 'controller' => 'TodoItems', 'action' => 'create']
+    ['prefix' => 'Admin', 'controller' => 'TodoItems', 'action' => 'create'],
 );
 ```
 
@@ -843,7 +843,7 @@ When using nesting, you need to chain them together:
 ``` php
 echo $this->Html->link(
     'New todo',
-    ['prefix' => 'Admin/MyPrefix', 'controller' => 'TodoItems', 'action' => 'create']
+    ['prefix' => 'Admin/MyPrefix', 'controller' => 'TodoItems', 'action' => 'create'],
 );
 ```
 
@@ -902,7 +902,7 @@ URL array:
 ``` php
 echo $this->Html->link(
     'New todo',
-    ['plugin' => 'Todo', 'controller' => 'TodoItems', 'action' => 'create']
+    ['plugin' => 'Todo', 'controller' => 'TodoItems', 'action' => 'create'],
 );
 ```
 
@@ -912,7 +912,7 @@ a link that has no plugin you can do the following:
 ``` php
 echo $this->Html->link(
     'New todo',
-    ['plugin' => null, 'controller' => 'Users', 'action' => 'profile']
+    ['plugin' => null, 'controller' => 'Users', 'action' => 'profile'],
 );
 ```
 
@@ -947,7 +947,7 @@ $routes->scope('/', function (RouteBuilder $routes) {
     // This route only matches on POST requests.
     $routes->post(
         '/reviews/start',
-        ['controller' => 'Reviews', 'action' => 'start']
+        ['controller' => 'Reviews', 'action' => 'start'],
     );
 
     // Match multiple verbs
@@ -984,7 +984,7 @@ $routes->scope('/', function (RouteBuilder $routes) {
     // This route only matches on http://images.example.com
     $routes->connect(
         '/images/default-logo.png',
-        ['controller' => 'Images', 'action' => 'default']
+        ['controller' => 'Images', 'action' => 'default'],
     )->setHost('images.example.com');
 
     // This route only matches on http://*.example.com
@@ -1004,7 +1004,7 @@ parameter when generating URLs:
 // If you have this route
 $routes->connect(
     '/images/old-logo.png',
-    ['controller' => 'Images', 'action' => 'oldLogo']
+    ['controller' => 'Images', 'action' => 'oldLogo'],
 )->setHost('images.example.com');
 
 // You need this to generate a url
@@ -1057,7 +1057,7 @@ $routes->scope('/page', function (RouteBuilder $routes) {
     $routes->setExtensions(['json', 'xml', 'html']);
     $routes->connect(
         '/{title}',
-        ['controller' => 'Pages', 'action' => 'view']
+        ['controller' => 'Pages', 'action' => 'view'],
     )->setPass(['title']);
 });
 ```
@@ -1067,7 +1067,7 @@ Then to create links which map back to the routes simply use:
 ``` php
 $this->Html->link(
     'Link title',
-    ['controller' => 'Pages', 'action' => 'view', 'title' => 'super-article', '_ext' => 'html']
+    ['controller' => 'Pages', 'action' => 'view', 'title' => 'super-article', '_ext' => 'html'],
 );
 ```
 
@@ -1257,7 +1257,7 @@ only connect specific resource routes you can use the `only` option:
 
 ``` php
 $routes->resources('Articles', [
-    'only' => ['index', 'view']
+    'only' => ['index', 'view'],
 ]);
 ```
 
@@ -1282,7 +1282,7 @@ use the `actions` key to rename the actions used:
 
 ``` php
 $routes->resources('Articles', [
-    'actions' => ['update' => 'put', 'create' => 'add']
+    'actions' => ['update' => 'put', 'create' => 'add'],
 ]);
 ```
 
@@ -1295,12 +1295,12 @@ You can map additional resource methods using the `map` option:
 
 ``` php
 $routes->resources('Articles', [
-   'map' => [
-       'deleteAll' => [
-           'action' => 'deleteAll',
-           'method' => 'DELETE'
-       ]
-   ]
+    'map' => [
+        'deleteAll' => [
+            'action' => 'deleteAll',
+            'method' => 'DELETE',
+        ],
+    ],
 ]);
 // This would connect /articles/deleteAll
 ```
@@ -1365,7 +1365,7 @@ You can specify an alternative inflection type using the `inflect` option:
 ``` php
 $routes->scope('/', function (RouteBuilder $routes) {
     $routes->resources('BlogPosts', [
-        'inflect' => 'underscore' // Will use ``Inflector::underscore()``
+        'inflect' => 'underscore', // Will use ``Inflector::underscore()``
     ]);
 });
 ```
@@ -1480,7 +1480,7 @@ application renaming URLs. However, if you defined your link like:
 
 $this->Html->link(
     'View',
-    ['controller' => 'Articles', 'action' => 'view', $id]
+    ['controller' => 'Articles', 'action' => 'view', $id],
 );
 ```
 
@@ -1511,7 +1511,7 @@ It will provide reverse routing when the destination url is well defined:
 ``` php
 $this->Html->link(
     'View',
-    ['controller' => 'Articles', 'action' => 'view', $id]
+    ['controller' => 'Articles', 'action' => 'view', $id],
 );
 ```
 
@@ -1521,7 +1521,7 @@ defined pattern:
 ``` php
 $this->Html->link(
     'View',
-    ['controller' => $controller, 'action' => 'view', $id]
+    ['controller' => $controller, 'action' => 'view', $id],
 );
 ```
 
@@ -1535,7 +1535,7 @@ $routes->url([
     'controller' => 'Articles',
     'action' => 'index',
     '?' => ['page' => 1],
-    '#' => 'top'
+    '#' => 'top',
 ]);
 
 // Will generate a URL like.
@@ -1739,7 +1739,7 @@ off with a route that looks like:
 $routes->get(
     '/view/{id}',
     ['controller' => 'Articles', 'action' => 'view'],
-    'articles:view'
+    'articles:view',
 );
 ```
 
@@ -1766,7 +1766,7 @@ $routes->setRouteClass(EntityRoute::class);
 $routes->get(
     '/view/{id}/{slug}',
     ['controller' => 'Articles', 'action' => 'view'],
-    'articles:view'
+    'articles:view',
 );
 ```
 
@@ -1806,7 +1806,7 @@ option:
 $routes->connect(
     '/{slug}',
     ['controller' => 'Articles', 'action' => 'view'],
-    ['routeClass' => 'SlugRoute']
+    ['routeClass' => 'SlugRoute'],
 );
 
 // Or by setting the routeClass in your scope.
@@ -1814,7 +1814,7 @@ $routes->scope('/', function (RouteBuilder $routes) {
     $routes->setRouteClass('SlugRoute');
     $routes->connect(
         '/{slug}',
-        ['controller' => 'Articles', 'action' => 'view']
+        ['controller' => 'Articles', 'action' => 'view'],
     );
 });
 ```

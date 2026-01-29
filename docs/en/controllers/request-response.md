@@ -238,9 +238,9 @@ Returns all uploaded files in a normalized array structure. For the above exampl
 
 ``` php
 [
-      'attachment' => object(Laminas\Diactoros\UploadedFile) {
-          // ...
-      }
+        'attachment' => object(Laminas\Diactoros\UploadedFile) {
+            // ...
+        }
 ]
 ```
 
@@ -258,14 +258,14 @@ $files = [
             $size,
             $errorStatus,
             $clientFilename,
-            $clientMediaType
+            $clientMediaType,
         ),
         'anotherAttachment' => new \Laminas\Diactoros\UploadedFile(
             '/tmp/hfz6dbn.tmp',
             123,
             \UPLOAD_ERR_OK,
             'attachment.txt',
-            'text/plain'
+            'text/plain',
         ),
     ],
 ];
@@ -411,26 +411,26 @@ Some examples would be:
 // Add an environment detector.
 $this->request->addDetector(
     'post',
-    ['env' => 'REQUEST_METHOD', 'value' => 'POST']
+    ['env' => 'REQUEST_METHOD', 'value' => 'POST'],
 );
 
 // Add a pattern value detector.
 $this->request->addDetector(
     'iphone',
-    ['env' => 'HTTP_USER_AGENT', 'pattern' => '/iPhone/i']
+    ['env' => 'HTTP_USER_AGENT', 'pattern' => '/iPhone/i'],
 );
 
 // Add an option detector
 $this->request->addDetector('internalIp', [
     'env' => 'CLIENT_IP',
-    'options' => ['192.168.0.101', '192.168.0.100']
+    'options' => ['192.168.0.101', '192.168.0.100'],
 ]);
 
 
 // Add a header detector with value comparison
 $this->request->addDetector('fancy', [
     'env' => 'CLIENT_IP',
-    'header' => ['X-Fancy' => 1]
+    'header' => ['X-Fancy' => 1],
 ]);
 
 // Add a header detector with callable comparison
@@ -438,7 +438,7 @@ $this->request->addDetector('fancy', [
     'env' => 'CLIENT_IP',
     'header' => ['X-Fancy' => function ($value, $header) {
         return in_array($value, ['1', '0', 'yes', 'no'], true);
-    }]
+    }],
 ]);
 
 // Add a callback detector. Must be a valid callable.
@@ -782,7 +782,7 @@ the browser by specifying the options:
 ``` php
 $response = $this->response->withFile(
     $file['path'],
-    ['download' => true, 'name' => 'foo']
+    ['download' => true, 'name' => 'foo'],
 );
 ```
 
@@ -1149,7 +1149,7 @@ $this->response = $this->response->withCookie(Cookie::create(
         'domain' => '',
         'secure' => false,
         'httponly' => false,
-        'samesite' => null // Or one of CookieInterface::SAMESITE_* constants
+        'samesite' => null, // Or one of CookieInterface::SAMESITE_* constants
     ]
 ));
 ```
@@ -1273,7 +1273,7 @@ class CorsMiddleware implements MiddlewareInterface
 {
     public function process(
         ServerRequestInterface $request,
-        RequestHandlerInterface $handler
+        RequestHandlerInterface $handler,
     ): ResponseInterface {
         // Handle preflight requests
         if ($request->getMethod() === 'OPTIONS') {
@@ -1385,7 +1385,7 @@ $cookie = new Cookie(
     '/', // path, if applicable
     'example.com', // domain, if applicable
     false, // secure only?
-    true // http only ?
+    true, // http only ?
 );
 
 // Using the builder methods

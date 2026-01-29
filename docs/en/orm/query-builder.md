@@ -410,7 +410,7 @@ $concat = $query->func()->concat([
     $query->func()->dateDiff([
         'NOW()' => 'literal',
         'Articles.created' => 'identifier',
-    ])
+    ]),
 ]);
 $query->select(['link_title' => $concat]);
 ```
@@ -445,15 +445,15 @@ functions or they will be treated as bound parameters:
 ``` php
 $query = $articles->find();
 $year = $query->func()->year([
-    'created' => 'identifier'
+    'created' => 'identifier',
 ]);
 $time = $query->func()->date_format([
     'created' => 'identifier',
-    "'%H:%i'" => 'literal'
+    "'%H:%i'" => 'literal',
 ]);
 $query->select([
     'yearCreated' => $year,
-    'timeCreated' => $time
+    'timeCreated' => $time,
 ]);
 ```
 
@@ -497,7 +497,7 @@ complex expressions:
 $query = $articles->find();
 $concat = $query->func()->concat([
     'title' => 'identifier',
-    'synopsis' => 'identifier'
+    'synopsis' => 'identifier',
 ]);
 $query->orderByAsc($concat);
 ```
@@ -535,7 +535,7 @@ When using aggregate functions like `count` and `sum` you may want to use
 $query = $articles->find();
 $query->select([
     'count' => $query->func()->count('view_count'),
-    'published_date' => 'DATE(created)'
+    'published_date' => 'DATE(created)',
 ])
 ->groupBy('published_date')
 ->having(['count >' => 3]);
@@ -572,7 +572,7 @@ $unpublishedCase = $query->expr()
 
 $query->select([
     'number_published' => $query->func()->count($publishedCase),
-    'number_unpublished' => $query->func()->count($unpublishedCase)
+    'number_unpublished' => $query->func()->count($unpublishedCase),
 ]);
 ```
 
@@ -672,7 +672,7 @@ $query = $cities->find()
                 $q->expr()->gte('population', 999001),
             ],
             ['SMALL',  'MEDIUM', 'LARGE'], # values matching conditions
-            ['string', 'string', 'string'] # type of each value
+            ['string', 'string', 'string'], # type of each value
         );
     });
 # WHERE CASE
@@ -693,7 +693,7 @@ $query = $cities->find()
                 $q->expr()->eq('population', 0),
             ],
             ['DESERTED', 'INHABITED'], # values matching conditions
-            ['string', 'string'] # type of each value
+            ['string', 'string'], # type of each value
         );
     });
 # WHERE CASE
@@ -793,7 +793,7 @@ class ArticleDto
 
     public static function createFromArray(
         array $data,
-        bool $ignoreMissing = false
+        bool $ignoreMissing = false,
     ): self {
         $dto = new self();
         $dto->id = $data['id'];
@@ -873,7 +873,7 @@ readonly class ArticleApiResponse
 
     public static function createFromArray(
         array $data,
-        bool $ignoreMissing = false
+        bool $ignoreMissing = false,
     ): self {
         return new self(
             id: $data['id'],
@@ -1024,7 +1024,7 @@ $query = $articles->find()->where(function (QueryExpression $exp, SelectQuery $q
 
     return $exp->or([
         'promoted' => true,
-        $query->expr()->and([$author, $published])
+        $query->expr()->and([$author, $published]),
     ]);
 });
 ```
@@ -1162,7 +1162,7 @@ It is also possible to build expressions using SQL functions:
 $query = $articles->find()
     ->where(function (QueryExpression $exp, SelectQuery $q) {
         $year = $q->func()->year([
-            'created' => 'identifier'
+            'created' => 'identifier',
         ]);
 
         return $exp
@@ -1385,7 +1385,7 @@ use the `identifier()` method:
 ``` php
 $query = $countries->find();
 $query->select([
-        'year' => $query->func()->year([$query->identifier('created')])
+        'year' => $query->func()->year([$query->identifier('created')]),
     ])
     ->where(function ($exp, $query) {
         return $exp->gt('population', 100000);
@@ -1535,14 +1535,14 @@ $query->select(function ($query) {
         $stockQuantity = $query->func()->sum('Stocks.quantity');
         $totalStockValue = $query->func()->sum(
                 $query->expr(['Stocks.quantity', 'Products.unit_price'])
-                    ->setConjunction('*')
+                    ->setConjunction('*'),
         );
 
         return [
             'Products.name',
             'stock_quantity' => $stockQuantity,
             'Products.unit_price',
-            'total_stock_value' => $totalStockValue
+            'total_stock_value' => $totalStockValue,
         ];
     })
     ->innerJoinWith('Stocks')
@@ -1577,7 +1577,7 @@ $products->find()
             ['unit_price', 'tax_percentage'],
             [20, 5],
             ['integer', 'integer'], # type of each value
-            '<='
+            '<=',
         )
     );
 
@@ -1594,7 +1594,7 @@ $articles->find()
                 ['articles.id', 'articles.author_id'],
                 [[10, 10], [30, 10]],
                 ['integer', 'integer'],
-                'IN'
+                'IN',
             ),
         );
 
@@ -1832,7 +1832,7 @@ $query = $articles->find()
             'conditions' => [
                 'c.created >' => new DateTime('-5 days'),
                 'c.moderated' => true,
-                'c.article_id = articles.id'
+                'c.article_id = articles.id',
             ]
         ],
     ], ['c.created' => 'datetime', 'c.moderated' => 'boolean']);
@@ -1993,7 +1993,7 @@ $query->where([
     // safe to use with user data in any form
     $userData,
     "MATCH (comment) AGAINST ($userData)",
-    'created < NOW() - ' . $userData
+    'created < NOW() - ' . $userData,
 ]);
 ```
 
@@ -2134,7 +2134,7 @@ $query = $articles->find();
 $query->from(['matches' => $matchingComment])
     ->innerJoin(
         ['Articles' =>  'articles'],
-        ['Articles.id' => $query->identifier('matches.id') ]
+        ['Articles.id' => $query->identifier('matches.id') ],
     );
 ```
 

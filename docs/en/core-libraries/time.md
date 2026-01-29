@@ -50,7 +50,7 @@ use Cake\I18n\DateTime;
 $time = DateTime::createFromFormat(
     'Y-m-d H:i:s',
     '2021-01-31 22:11:30',
-    'America/New_York'
+    'America/New_York',
 );
 
 // Create from a timestamp and set timezone
@@ -318,7 +318,7 @@ Date::setToStringFormat(\IntlDateFormatter::SHORT); // For any Date
 // The same method exists on Date, and DateTime
 DateTime::setToStringFormat([
     \IntlDateFormatter::FULL,
-    \IntlDateFormatter::SHORT
+    \IntlDateFormatter::SHORT,
 ]);
 // Outputs 'Sunday, January 31, 2021 at 10:11 PM'
 echo $time;
@@ -349,7 +349,7 @@ Often it is useful to print times relative to the present:
 $time = new DateTime('Jan 31, 2021');
 // On June 12, 2021, this would output '4 months, 1 week, 6 days ago'
 echo $time->timeAgoInWords(
-    ['format' => 'MMM d, YYY', 'end' => '+1 year']
+    ['format' => 'MMM d, YYY', 'end' => '+1 year'],
 );
 ```
 
@@ -361,7 +361,7 @@ us control what level of detail should be used for each interval range:
 // Outputs '4 months ago'
 echo $time->timeAgoInWords([
     'accuracy' => ['month' => 'month'],
-    'end' => '1 year'
+    'end' => '1 year',
 ]);
 ```
 
@@ -372,7 +372,7 @@ of detail you want output:
 $time = new DateTime('+23 hours');
 // Outputs 'in about a day'
 echo $time->timeAgoInWords([
-    'accuracy' => 'day'
+    'accuracy' => 'day',
 ]);
 ```
 

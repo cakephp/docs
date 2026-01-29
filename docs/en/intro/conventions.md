@@ -38,7 +38,7 @@ $this->Html->link('link-title', [
     'prefix' => 'MyPrefix' // CamelCased
     'plugin' => 'MyPlugin', // CamelCased
     'controller' => 'ControllerName', // CamelCased
-    'action' => 'actionName' // camelBacked
+    'action' => 'actionName', // camelBacked
 ]
 ```
 
