@@ -749,8 +749,7 @@ class WidgetsTable extends Table
 {
     public function initialize(array $config): void
     {
-        return parent::getSchema()->setColumnType('mutation', 'point_mutation');
-
+        parent::getSchema()->setColumnType('mutation', 'point_mutation');
     }
 }
 ```
@@ -844,11 +843,11 @@ namespace App\Database;
 // Our value object is immutable.
 class Point
 {
-    protected $_lat;
-    protected $_long;
+    protected float|int $_lat;
+    protected float|int $_long;
 
     // Factory method.
-    public static function parse($value)
+    public static function parse(mixed $value): static
     {
         // Parse the WKB data from MySQL.
         $unpacked = unpack('x4/corder/Ltype/dlat/dlong', $value);
@@ -856,18 +855,18 @@ class Point
         return new static($unpacked['lat'], $unpacked['long']);
     }
 
-    public function __construct($lat, $long)
+    public function __construct(float|int $lat, float|int $long)
     {
         $this->_lat = $lat;
         $this->_long = $long;
     }
 
-    public function lat()
+    public function lat(): float|int
     {
         return $this->_lat;
     }
 
-    public function long()
+    public function long(): float|int
     {
         return $this->_long;
     }
@@ -889,12 +888,12 @@ use Cake\Database\Type\ExpressionTypeInterface;
 
 class PointType extends BaseType implements ExpressionTypeInterface
 {
-    public function toPHP($value, Driver $d): mixed
+    public function toPHP(mixed $value, Driver $driver): mixed
     {
         return $value === null ? null : Point::parse($value);
     }
 
-    public function marshal($value): mixed
+    public function marshal(mixed $value): mixed
     {
         if (is_string($value)) {
             $value = explode(',', $value);
@@ -906,7 +905,7 @@ class PointType extends BaseType implements ExpressionTypeInterface
         return null;
     }
 
-    public function toExpression($value): ExpressionInterface
+    public function toExpression(mixed $value): ExpressionInterface
     {
         if ($value instanceof Point) {
             return new FunctionExpression(
@@ -920,7 +919,8 @@ class PointType extends BaseType implements ExpressionTypeInterface
         if (is_array($value)) {
             return new FunctionExpression('POINT', [$value[0], $value[1]]);
         }
-        // Handle other cases.
+
+        throw new \InvalidArgumentException('Cannot convert value to expression.');
     }
 
     public function toDatabase($value, Driver $driver): mixed

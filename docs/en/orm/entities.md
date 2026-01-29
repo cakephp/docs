@@ -200,7 +200,7 @@ use Cake\ORM\Entity;
 
 class Article extends Entity
 {
-    protected function _getTitle($title)
+    protected function _getTitle(string $title): string
     {
         return strtoupper($title);
     }
@@ -244,7 +244,7 @@ use Cake\Utility\Text;
 
 class Article extends Entity
 {
-    protected function _setTitle($title)
+    protected function _setTitle(string $title): string
     {
         $this->slug = Text::slug($title);
 
@@ -283,7 +283,7 @@ use Cake\ORM\Entity;
 
 class User extends Entity
 {
-    protected function _getFullName()
+    protected function _getFullName(): string
     {
         return $this->first_name . '  ' . $this->last_name;
     }

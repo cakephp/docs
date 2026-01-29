@@ -113,7 +113,7 @@ used. An example validator for our articles table would be:
 ``` php
 class ArticlesTable extends Table
 {
-    public function validationUpdate($validator)
+    public function validationUpdate(Validator $validator): Validator
     {
         $validator
             ->notEmptyString('title', __('You need to provide a title'))
@@ -682,7 +682,7 @@ In the above example, we'll use a 'custom' validator, which is defined using the
 `validationCustomName()` method:
 
 ``` php
-public function validationCustomName($validator)
+public function validationCustomName(Validator $validator): Validator
 {
     $validator->add(
         // ...
@@ -697,7 +697,7 @@ from any request:
 
 ``` php
 // In src/Model/Table/UsersTable.php
-public function validatePasswords($validator)
+public function validatePasswords(Validator $validator): Validator
 {
     $validator->add('confirm_password', 'no-misspelling', [
         'rule' => ['compareWith', 'password'],
