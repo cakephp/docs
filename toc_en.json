@@ -7,11 +7,7 @@
         { "text": "Quickstart", "link": "/quickstart" },
         { "text": "Installation", "link": "/installation" },
         { "text": "Introduction", "link": "/intro" },
-        { "text": "Conventions", "link": "/intro/conventions" },
-        {
-          "text": "CakePHP Folder Structure",
-          "link": "/intro/cakephp-folder-structure"
-        },
+        { "text": "Structure & Conventions", "link": "/intro/conventions" },
         {
           "text": "Where to Get Help",
           "link": "/intro/where-to-get-help"
