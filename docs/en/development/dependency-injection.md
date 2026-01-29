@@ -126,8 +126,9 @@ class EmailService
             ->setSubject('Welcome to our platform!')
             ->setViewVars(['name' => $user->name])
             ->viewBuilder()
-                ->setTemplate('welcome')
-            ->deliver();
+                ->setTemplate('welcome');
+
+        $this->mailer->deliver();
     }
 
     public function sendPasswordReset(User $user, string $token): void
@@ -139,8 +140,9 @@ class EmailService
             ->setSubject('Password Reset Request')
             ->setViewVars(['resetUrl' => $resetUrl, 'name' => $user->name])
             ->viewBuilder()
-                ->setTemplate('password_reset')
-            ->deliver();
+                ->setTemplate('password_reset');
+
+        $this->mailer->deliver();
     }
 }
 
@@ -231,6 +233,7 @@ class PaymentService
             return [
                 'success' => true,
                 'client_secret' => $intent->client_secret,
+                'intent_id' => $intent->id,
             ];
         } catch (\Exception $e) {
             $this->logger->error('Payment failed', [
@@ -257,7 +260,7 @@ class OrdersController extends AppController
 {
     public function checkout(PaymentService $payments)
     {
-        $order = $this->Orders->getOrFail($this->request->getQuery('order_id'));
+        $order = $this->Orders->get($this->request->getQuery('order_id'));
 
         $result = $payments->processOrder($order);
 
@@ -278,7 +281,7 @@ public function services(ContainerInterface $container): void
 
     // Configure Stripe with API key from config
     $container->add(StripeClient::class, function () {
-        return new StripeClient(Configure::read('Stripe.secretKey'));
+        return new StripeClient(Configure::readOrFail('Stripe.secretKey'));
     });
 }
 ```
@@ -311,6 +314,8 @@ class LocalStorageService implements StorageServiceInterface
 
     public function put(string $path, $contents): bool
     {
+        // Normalize path to prevent directory traversal
+        $path = str_replace(['..', '\\'], ['', '/'], $path);
         $fullPath = $this->basePath . DS . $path;
         $dir = dirname($fullPath);
 
@@ -567,7 +572,7 @@ $container->addShared(BillingService::class);
 ### Using ORM Tables as Services
 
 If you want to have ORM Tables injected as a dependency to a service, you can
-add `TableContainer` to your applications's service container:
+add `TableContainer` to your application's service container:
 
 ``` php
 use Cake\ORM\Locator\TableContainer;
@@ -1222,10 +1227,12 @@ Auto Wiring is turned off by default. To enable it:
 
 ``` php
 // In src/Application.php
+use League\Container\ReflectionContainer;
+
 public function services(ContainerInterface $container): void
 {
     $container->delegate(
-        new League\Container\ReflectionContainer(),
+        new ReflectionContainer(),
     );
 }
 ```
@@ -1235,9 +1242,11 @@ not cache resolutions which can be detrimental to performance. To enable
 caching:
 
 ``` php
+use League\Container\ReflectionContainer;
+
 $container->delegate(
      // or consider using the value of Configure::read('debug')
-    new League\Container\ReflectionContainer(true),
+    new ReflectionContainer(true),
 );
 ```
 
