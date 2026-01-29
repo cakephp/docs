@@ -44,7 +44,7 @@ $this->Breadcrumbs->insertAt(
 // an exception will be raised.
 $this->Breadcrumbs->insertBefore(
     'Products',
-    'A product name 1', // the title of the crumb to insert before        
+    'A product name 1', // the title of the crumb to insert before
     ['controller' => 'products', 'action' => 'index'],
 );
 
@@ -53,7 +53,7 @@ $this->Breadcrumbs->insertBefore(
 // an exception will be raised.
 $this->Breadcrumbs->insertAfter(
     'Products',
-    'A product name 2', // the title of the crumb to insert after        
+    'A product name 2', // the title of the crumb to insert after
     ['controller' => 'products', 'action' => 'index'],
 );
 ```
