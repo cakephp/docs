@@ -531,7 +531,7 @@ table consists of `article_id` and `tag_id` and a multi-column
 names.
 
 | Relationship | Join Table Fields |
-|----|----|
+| ---- | ---- |
 | Articles belongsToMany Tags | articles_tags.id, articles_tags.tag_id, articles_tags.article_id |
 | Patients belongsToMany Doctors | doctors_patients.id, doctors_patients.doctor_id, doctors_patients.patient_id. |
 

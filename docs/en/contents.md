@@ -1,6 +1,6 @@
 # Contents
 
-### Preface
+## Preface
 
 - [CakePHP at a Glance](intro)
 - [Quick Start Guide](quickstart)

@@ -126,7 +126,7 @@ After configuring the vendor libraries you will need to regenerate your
 application's autoloader using:
 
 ``` bash
-$ php composer.phar dump-autoload
+php composer.phar dump-autoload
 ```
 
 If you happen to not be using Composer in your application, you will need to

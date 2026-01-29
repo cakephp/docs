@@ -5,8 +5,8 @@
 The TimeHelper allows for the quick processing of time related information.
 The TimeHelper has two main tasks that it can perform:
 
-1.  It can format time strings.
-2.  It can test time.
+1. It can format time strings.
+2. It can test time.
 
 ## Using the Helper
 

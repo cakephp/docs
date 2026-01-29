@@ -54,10 +54,10 @@ CakePHP の公式のインストール方法として、依存性管理ツール
 
 - Linux や macOS に Composer をインストール
 
-  1.  [公式の Composer ドキュメント](https://getcomposer.org/download/) に書かれた
+  1. [公式の Composer ドキュメント](https://getcomposer.org/download/) に書かれた
       インストーラースクリプトを実行し、Composer をインストールするために指示に従ってください。
 
-  2.  composer.phar を指定したパスのディレクトリーに移すために以下のコマンドを実行してください。 :
+  2. composer.phar を指定したパスのディレクトリーに移すために以下のコマンドを実行してください。 :
 
           mv composer.phar /usr/local/bin/composer
 
@@ -175,14 +175,14 @@ php bin/cake.php
 
 開発用インストールは、CakePHP を最も速くインストールする方法です。
 この例では、CakePHP のコンソールを使って PHP の組み込みウェブサーバーを起動して、
-あなたのアプリケーションに **http://host:port** という形式でアクセスできるように
+あなたのアプリケーションに **<http://host:port>** という形式でアクセスできるように
 します。app ディレクトリーで下記のコマンドを実行しましょう。
 
 ``` bash
 bin/cake server
 ```
 
-引数のないデフォルト状態では、 **http://localhost:8765/** であなたのアプリケーションに
+引数のないデフォルト状態では、 **<http://localhost:8765/>** であなたのアプリケーションに
 アクセスできます。
 
 もしあなたの環境で **localhost** や 8765番ポートが使用済みなら、CakePHP のコンソールから
@@ -192,7 +192,7 @@ bin/cake server
 bin/cake server -H 192.168.13.37 -p 5673
 ```
 
-こうすればあなたのアプリケーションには **http://192.168.13.37:5673/** でアクセスできます。
+こうすればあなたのアプリケーションには **<http://192.168.13.37:5673/>** でアクセスできます。
 
 これだけです！
 あなたの CakePHP アプリケーションは ウェブサーバーを設定することなく動きます。
@@ -257,7 +257,7 @@ DocumentRoot /cake_install/webroot
 ## 始動
 
 さぁ、CakePHP の動作を見てみましょう。あなたが選んだ方法に応じて、ブラウザーから
-<http://example.com/> あるいは <http://localhost:8765/> にアクセスしてください。
+<http://example.com/> あるいは <<http://localhost:8765/>> にアクセスしてください。
 これで CakePHP のデフォルトのホーム画面と、データベースへの接続状態を表すメッセージが
 表示されるでしょう。
 
@@ -281,7 +281,7 @@ CakePHP は、展開した状態では mod_rewrite を使用するようにな�
 詳細については <https://cwiki.apache.org/confluence/display/httpd/DistrosDefaultLayout> を見てもよいかも
 しれません。
 
-1.  適切な DocumentRoot に対して .htaccess による設定の上書きを許可するよう、
+1. 適切な DocumentRoot に対して .htaccess による設定の上書きを許可するよう、
     AllowOverride に All が設定されている事を確認します。
     これは下記のように書かれているでしょう。
 
@@ -300,7 +300,7 @@ CakePHP は、展開した状態では mod_rewrite を使用するようにな�
     </Directory>
     ```
 
-2.  下記のように mod_rewrite が正しくロードされている事を確認します。
+2. 下記のように mod_rewrite が正しくロードされている事を確認します。
 
     ``` apache
     LoadModule rewrite_module libexec/apache2/mod_rewrite.so
@@ -315,7 +315,7 @@ CakePHP は、展開した状態では mod_rewrite を使用するようにな�
     一部のOSでは、ファイル名が「.」から始まるファイルは隠しファイルとみなされ、
     コピーされないでしょう。
 
-3.  サイトのダウンロードページや Git リポジトリーからコピーした CakePHP が正しく
+3. サイトのダウンロードページや Git リポジトリーからコピーした CakePHP が正しく
     解凍できているか、 .htaccess ファイルをチェックします。
 
     CakePHP のアプリケーションディレクトリー（あなたが Bake でコピーした一番上の
@@ -386,7 +386,7 @@ CakePHP は、展開した状態では mod_rewrite を使用するようにな�
     含まれることがあります。
     詳しくは Apache のオンラインドキュメントを参照するようにしてください。
 
-4.  (オプション) 公開環境の設定では、必要ないリクエストは CakePHP で処理されないようにしましょう。
+4. (オプション) 公開環境の設定では、必要ないリクエストは CakePHP で処理されないようにしましょう。
     webroot の .htaccess ファイルを次のように修正してください。
 
     ``` apache
@@ -535,12 +535,12 @@ IIS7 はネイティブで .htaccess ファイルをサポートしていませ�
 IIS に htaccess のルールをインポートすることもできます。
 これをするには、以下のステップを踏んでください:
 
-1.  URL [Rewrite Module 2.0](https://www.iis.net/downloads/microsoft/url-rewrite)
-    をインストールするために、\`Microsoftの Web Platform Installer \<https://www.microsoft.com/web/downloads/platform.aspx\>\`\_
+1. URL [Rewrite Module 2.0](https://www.iis.net/downloads/microsoft/url-rewrite)
+    をインストールするために、\`Microsoftの Web Platform Installer \<<https://www.microsoft.com/web/downloads/platform.aspx>\>\`\_
     を使うか、直接ダウンロードします。([32ビット](https://download.microsoft.com/download/D/8/1/D81E5DD6-1ABB-46B0-9B4B-21894E18B77F/rewrite_x86_en-US.msi) /
     [64ビット](https://download.microsoft.com/download/1/2/8/128E2E22-C1B9-44A4-BE2A-5859ED1D4592/rewrite_amd64_en-US.msi))
-2.  CakePHP のルートフォルダーに web.config という名前の新しいファイルを作成してください。
-3.  メモ帳か XML が編集可能なエディターを使って、以下のコードを今作った web.config ファイルに
+2. CakePHP のルートフォルダーに web.config という名前の新しいファイルを作成してください。
+3. メモ帳か XML が編集可能なエディターを使って、以下のコードを今作った web.config ファイルに
     コピーしてください。
 
 ``` xml
@@ -622,5 +622,5 @@ configuration for an application on the `/TestCake` path.
     /.htaccess
     webroot/.htaccess
 
-これで URL は www.example.com/controllername/actionname/param ではなく
-www.example.com/index.php/controllername/actionname/param という書式になるでしょう。
+これで URL は <www.example.com/controllername/actionname/param> ではなく
+<www.example.com/index.php/controllername/actionname/param> という書式になるでしょう。

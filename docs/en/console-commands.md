@@ -19,8 +19,8 @@ A CakePHP application contains **src/Command** directory that contain its comman
 It also comes with an executable in the **bin** directory:
 
 ``` bash
-$ cd /path/to/app
-$ bin/cake
+cd /path/to/app
+bin/cake
 ```
 
 > [!NOTE]

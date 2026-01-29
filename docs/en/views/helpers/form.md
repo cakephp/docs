@@ -73,7 +73,7 @@ uses the `Entity` object to automatically detect whether to
 create an *add* or *edit* form. If the provided entity is not 'new', the form
 will be created as an *edit* form.
 
-For example, if we browse to **https://example.com/articles/edit/5**, we could
+For example, if we browse to **<https://example.com/articles/edit/5>**, we could
 do the following:
 
 ``` php
@@ -2094,11 +2094,11 @@ of `'button'`.
 
 - `'type'` - You can set this to one of the following three
   possible values:
-  1.  `'submit'` - Similarly to the `$this->Form->submit()` method it will
+  1. `'submit'` - Similarly to the `$this->Form->submit()` method it will
       create a submit button. However this won't generate a wrapping `div`
       as `submit()` does. This is the default type.
-  2.  `'reset'` - Creates a form reset button.
-  3.  `'button'` - Creates a standard push button.
+  2. `'reset'` - Creates a form reset button.
+  3. `'button'` - Creates a standard push button.
 - `'escapeTitle'` - Boolean. If set to `true` it will HTML encode
   the value provided inside `$title`. Defaults to `true`.
 - `'escape'` - Boolean. If set to `true` it will HTML encode
@@ -2461,10 +2461,10 @@ This will make radio buttons and checkboxes render outside of their labels.
 - `$fields` - An array of fields to generate. Allows setting
   custom types, labels and other options for each specified field.
 - `$options` - Optional. An array of options. Valid keys are:
-  1.  `'fieldset'` - Set this to `false` to disable the fieldset.
+  1. `'fieldset'` - Set this to `false` to disable the fieldset.
       If empty, the fieldset will be enabled. Can also be an array of parameters
       to be applied as HTML attributes to the `fieldset` tag.
-  2.  `legend` - String used to customize the `legend` text. Set this to
+  2. `legend` - String used to customize the `legend` text. Set this to
       `false` to disable the legend for the generated input set.
 
 Generates a set of controls for the given context wrapped in a
@@ -2517,10 +2517,10 @@ If you disable the `fieldset`, the `legend` will not print.
 - `$fields` - Optional. An array of customizations for the fields that will
   be generated. Allows setting custom types, labels and other options.
 - `$options` - Optional. An array of options. Valid keys are:
-  1.  `'fieldset'` - Set this to `false` to disable the fieldset.
+  1. `'fieldset'` - Set this to `false` to disable the fieldset.
       If empty, the fieldset will be enabled. Can also be an array of
       parameters to be applied as HTMl attributes to the `fieldset` tag.
-  2.  `legend` - String used to customize the `legend` text. Set this to
+  2. `legend` - String used to customize the `legend` text. Set this to
       `false` to disable the legend for the generated control set.
 
 This method is closely related to `controls()`, however the `$fields` argument

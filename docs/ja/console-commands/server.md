@@ -6,7 +6,7 @@
 手軽に行うことができます。以下のように、サーバーのシェルを起動することができます。 :
 
 ``` bash
-$ bin/cake server
+bin/cake server
 ```
 
 サーバーの起動とポート 8765 へのアタッチを確認してください。
@@ -21,5 +21,5 @@ $ bin/cake server
 オプションを使用してポートおよびドキュメントルートをカスタマイズすることができます。 :
 
 ``` bash
-$ bin/cake server --port 8080 --document_root path/to/app
+bin/cake server --port 8080 --document_root path/to/app
 ```

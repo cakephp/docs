@@ -1192,9 +1192,9 @@ json and rss. These routes are HTTP Request Method sensitive.
 The HTTP method being used is detected from a few different sources.
 The sources in order of preference are:
 
-1.  The `_method` POST variable
-2.  The `X_HTTP_METHOD_OVERRIDE` header.
-3.  The `REQUEST_METHOD` header
+1. The `_method` POST variable
+2. The `X_HTTP_METHOD_OVERRIDE` header.
+3. The `REQUEST_METHOD` header
 
 The `_method` POST variable is helpful in using a browser as a
 REST client (or anything else that can do POST). Just set

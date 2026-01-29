@@ -58,7 +58,7 @@ class User extends Entity
 }
 ```
 
-次に、ブラウザで **http://localhost:8765/users** にアクセスし、ユーザー一覧を表示します。
+次に、ブラウザで **<http://localhost:8765/users>** にアクセスし、ユーザー一覧を表示します。
 ローカルサーバーを実行する必要があることに注意してください。
 `bin/cake server` を使用して standalone PHP server を起動します。
 

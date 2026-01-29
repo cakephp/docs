@@ -128,19 +128,19 @@ The typical CakePHP request cycle starts with a user requesting a page or
 resource in your application. At a high level each request goes through the
 following steps:
 
-1.  The webserver rewrite rules direct the request to **webroot/index.php**.
-2.  Your Application is loaded and bound to an `HttpServer`.
-3.  Your application's middleware is initialized.
-4.  A request and response is dispatched through the PSR-7 Middleware that your
+1. The webserver rewrite rules direct the request to **webroot/index.php**.
+2. Your Application is loaded and bound to an `HttpServer`.
+3. Your application's middleware is initialized.
+4. A request and response is dispatched through the PSR-7 Middleware that your
     application uses. Typically this includes error trapping and routing.
-5.  If no response is returned from the middleware and the request contains
+5. If no response is returned from the middleware and the request contains
     routing information, a controller & action are selected.
-6.  The controller's action is called and the controller interacts with the
+6. The controller's action is called and the controller interacts with the
     required Models and Components.
-7.  The controller delegates response creation to the View to generate the output
+7. The controller delegates response creation to the View to generate the output
     resulting from the model data.
-8.  The view uses Helpers and Cells to generate the response body and headers.
-9.  The response is sent back out through the [Middleware](controllers/middleware).
+8. The view uses Helpers and Cells to generate the response body and headers.
+9. The response is sent back out through the [Middleware](controllers/middleware).
 10. The `HttpServer` emits the response to the webserver.
 
 ## Just the Start

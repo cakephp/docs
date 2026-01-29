@@ -13,10 +13,10 @@ of your entities in multiple languages.
 
 The behavior offers two strategies for how the translations are stored.
 
-1.  Shadow table Strategy: This strategy uses a separate "shadow table" for each
+1. Shadow table Strategy: This strategy uses a separate "shadow table" for each
     Table object to store translation of all translated fields of that table.
     This is the default strategy.
-2.  Eav Strategy: This strategy uses a `i18n` table where it stores the
+2. Eav Strategy: This strategy uses a `i18n` table where it stores the
     translation for each of the fields of any given Table object that it's bound to.
 
 ## Shadow Table Strategy

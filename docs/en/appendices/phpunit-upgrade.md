@@ -103,7 +103,7 @@ public function testSomething(): void
 Common attribute replacements:
 
 | Annotation | Attribute |
-|------------|-----------|
+| ---------- | --------- |
 | `@dataProvider` | `#[DataProvider('methodName')]` |
 | `@depends` | `#[Depends('methodName')]` |
 | `@group` | `#[Group('name')]` |

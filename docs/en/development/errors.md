@@ -66,10 +66,10 @@ deprecationWarning('5.0', 'The example() method is deprecated. Use getExample() 
 When upgrading CakePHP or plugins you may encounter new deprecation warnings.
 You can temporarily disable deprecation warnings in one of a few ways:
 
-1.  Using the `Error.errorLevel` setting to `E_ALL ^ E_USER_DEPRECATED` to
+1. Using the `Error.errorLevel` setting to `E_ALL ^ E_USER_DEPRECATED` to
     ignore *all* deprecation warnings.
 
-2.  Using the `Error.ignoredDeprecationPaths` configuration option to ignore
+2. Using the `Error.ignoredDeprecationPaths` configuration option to ignore
     deprecations with glob compatible expressions. For example:
 
     ``` php
@@ -90,15 +90,15 @@ Exception handling in CakePHP offers several ways to tailor how exceptions are
 handled. Each approach gives you different amounts of control over the
 exception handling process.
 
-1.  *Listen to events* This allows you to be notified through CakePHP events when
+1. *Listen to events* This allows you to be notified through CakePHP events when
     errors and exceptions have been handled.
-2.  *Custom templates* This allows you to change the rendered view
+2. *Custom templates* This allows you to change the rendered view
     templates as you would any other template in your application.
-3.  *Custom Controller* This allows you to control how exception
+3. *Custom Controller* This allows you to control how exception
     pages are rendered.
-4.  *Custom ExceptionRenderer* This allows you to control how exception
+4. *Custom ExceptionRenderer* This allows you to control how exception
     pages and logging are performed.
-5.  *Create & register your own traps* This gives you complete
+5. *Create & register your own traps* This gives you complete
     control over how errors & exceptions are handled, logged and rendered. Use
     `Cake\Error\ExceptionTrap` and `Cake\Error\ErrorTrap` as reference when
     implementing your traps.

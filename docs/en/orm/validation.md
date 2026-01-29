@@ -4,9 +4,9 @@ Before you [save your data](../orm/saving-data) you
 will probably want to ensure the data is correct and consistent. In CakePHP we
 have two stages of validation:
 
-1.  Before request data is converted into entities, validation rules around
+1. Before request data is converted into entities, validation rules around
     data types and formatting can be applied.
-2.  Before data is saved, domain or application rules can be applied. These rules
+2. Before data is saved, domain or application rules can be applied. These rules
     help ensure that your application's data remains consistent.
 
 <a id="validating-request-data"></a>
@@ -28,14 +28,14 @@ if ($article->getErrors()) {
 
 When building an entity with validation enabled the following occurs:
 
-1.  The validator object is created.
-2.  The `table` and `default` validation provider are attached.
-3.  The named validation method is invoked. For example `validationDefault`.
-4.  The `Model.buildValidator` event will be triggered.
-5.  Request data will be validated.
-6.  Request data will be type-cast into types that match the column types.
-7.  Errors will be set into the entity.
-8.  Valid data will be set into the entity, while fields that failed validation
+1. The validator object is created.
+2. The `table` and `default` validation provider are attached.
+3. The named validation method is invoked. For example `validationDefault`.
+4. The `Model.buildValidator` event will be triggered.
+5. Request data will be validated.
+6. Request data will be type-cast into types that match the column types.
+7. Errors will be set into the entity.
+8. Valid data will be set into the entity, while fields that failed validation
     will be excluded.
 
 If you'd like to disable validation when converting request data, set the
@@ -195,9 +195,9 @@ contain the validation rules declared in the `default` set.
 Validation rules can use functions defined on any known providers. By default
 CakePHP sets up a few providers:
 
-1.  Methods on the table class or its behaviors are available on the `table`
+1. Methods on the table class or its behaviors are available on the `table`
     provider.
-2.  The core `Cake\Validation\Validation` class is setup as the
+2. The core `Cake\Validation\Validation` class is setup as the
     `default` provider.
 
 When a validation rule is created you can name the provider of that rule. For
