@@ -253,7 +253,7 @@ class User extends Entity
 次は、タグでのブックマークを検索するため、ルート、コントローラーのアクション、finder
 メソッドを実装します。
 
-理想的には、 **<http://localhost:8765/bookmarks>/tagged/funny/cat/gifs**
+理想的には、 **<http://localhost:8765/bookmarks/tagged/funny/cat/gifs>**
 のような URL にしたいと思います。この URL は、 'funny', 'cat', もしくは 'gifs'
 タグが付いたブックマークすべてを検索することを意図しています。これを実装する前に、
 新しいルートを追加します。 **config/routes.php** を以下のようにしてください。 :
@@ -295,7 +295,7 @@ Router::scope('/', function ($routes) {
 上記は、 **/bookmarks/tagged/** パスを `BookmarksController::tags()` に接続する
 新しい「ルート」を定義します。ルートを定義することによて、 URL の見た目と、
 それらどのように実装されたかを分離することができます。
-**<http://localhost:8765/bookmarks>/tagged** にアクセスした場合、CakePHP から
+**<http://localhost:8765/bookmarks/tagged>** にアクセスした場合、CakePHP から
 コントローラーのアクションがないことを伝える役に立つエラーページが表示されます。
 今から存在しないメソッドを実装してみましょう。 **src/Controller/BookmarksController.php**
 に以下を追加してください。 :

@@ -18,7 +18,7 @@ class ArticlesController extends AppController
 ```
 
 それでは、コントローラーにアクションを追加しましょう。アクションは、ルートに接続させる
-コントローラーのメソッドです。例えば、ユーザーが **<<www.example.com/articles>/index>**
+コントローラーのメソッドです。例えば、ユーザーが **<www.example.com/articles/index>**
 (**<www.example.com/articles>** と同じ) をリクエストした場合、CakePHP は、
 `ArticlesController` の `index` メソッドを呼びます。このメソッドは、モデル層に問い合わせ、
 ビューでテンプレートを描画してレスポンスを準備する必要があります。そのアクションのコードは、

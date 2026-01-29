@@ -73,7 +73,7 @@ class ArticlesController extends AppController
 
 では、コントローラーにひとつのアクションを追加してみましょう。アクションは、
 アプリケーションの中のひとつの関数か、インターフェイスをあらわしています。
-例えば、ユーザーが <<www.example.com/articles/>index> (<www.example.com/articles/> と同じです)
+例えば、ユーザーが <www.example.com/articles/index> (<www.example.com/articles/> と同じです)
 をリクエストした場合、投稿記事の一覧が表示されると期待するでしょう。
 このアクションのコードは次のようになります。 :
 

@@ -536,7 +536,7 @@ IIS に htaccess のルールをインポートすることもできます。
 これをするには、以下のステップを踏んでください:
 
 1. URL [Rewrite Module 2.0](https://www.iis.net/downloads/microsoft/url-rewrite)
-    をインストールするために、\`Microsoftの Web Platform Installer \<<https://www.microsoft.com/web/downloads/platform.aspx>\>\`\_
+    をインストールするために、[Microsoft の Web Platform Installer](https://www.microsoft.com/web/downloads/platform.aspx)
     を使うか、直接ダウンロードします。([32ビット](https://download.microsoft.com/download/D/8/1/D81E5DD6-1ABB-46B0-9B4B-21894E18B77F/rewrite_x86_en-US.msi) /
     [64ビット](https://download.microsoft.com/download/1/2/8/128E2E22-C1B9-44A4-BE2A-5859ED1D4592/rewrite_amd64_en-US.msi))
 2. CakePHP のルートフォルダーに web.config という名前の新しいファイルを作成してください。

@@ -29,7 +29,7 @@ Github and we will consider creating a skeleton folder for it. The following
 sections are the first one you should consider translating as these
 files don't change often:
 
-```markdown
+```text
 - index.md
 - intro.md
 - quickstart.md
@@ -604,5 +604,6 @@ jq empty toc_en.json
 
 ```shell
 :::
+```
 
 If the CI checks fail, review the error messages and fix the issues before requesting a review.
