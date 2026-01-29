@@ -26,7 +26,7 @@ public function viewClasses(): array
 You can optionally enable the json and/or xml extensions with
 [File Extensions](../development/routing#file-extensions). This will allow you to access the `JSON`, `XML` or
 any other special format views by using a custom URL ending with the name of the
-response type as a file extension such as `http://example.com/articles.json`.
+response type as a file extension such as `https://example.com/articles.json`.
 
 By default, when not enabling [File Extensions](../development/routing#file-extensions), the `Accept`
 header in the request is used for selecting which type of format should be rendered to the

@@ -181,7 +181,7 @@ echo $this->Html->meta(
 );
 // Output (line breaks added)
 <link
-    href="http://example.com/comments/index.rss"
+    href="https://example.com/comments/index.rss"
     title="Comments"
     type="application/rss+xml"
     rel="alternate"
@@ -215,12 +215,12 @@ In addition to making predefined meta tags, you can create link elements:
 
 ``` php
 <?= $this->Html->meta([
-    'link' => 'http://example.com/manifest',
+    'link' => 'https://example.com/manifest',
     'rel' => 'manifest',
 ]);
 ?>
 // Output
-<link href="http://example.com/manifest" rel="manifest"/>
+<link href="https://example.com/manifest" rel="manifest"/>
 ```
 
 Any attributes provided to meta() when called this way will be added to the
@@ -275,7 +275,7 @@ echo $this->Html->image("logo.png", ['fullBase' => true]);
 Will output:
 
 ``` html
-<img src="http://example.com/img/logo.jpg" alt="" />
+<img src="https://example.com/img/logo.jpg" alt="" />
 ```
 
 You can include image files from any loaded plugin using

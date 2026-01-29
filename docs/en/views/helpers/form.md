@@ -73,7 +73,7 @@ uses the `Entity` object to automatically detect whether to
 create an *add* or *edit* form. If the provided entity is not 'new', the form
 will be created as an *edit* form.
 
-For example, if we browse to **http://example.org/articles/edit/5**, we could
+For example, if we browse to **https://example.com/articles/edit/5**, we could
 do the following:
 
 ``` php
@@ -390,55 +390,55 @@ The type of control created (when we provide no additional options to specify th
 generated element type) is inferred via model introspection and
 depends on the column datatype:
 
-Column Type  
+Column Type
 Resulting Form Field
 
-string, uuid (char, varchar, etc.)  
+string, uuid (char, varchar, etc.)
 text
 
-boolean, tinyint(1)  
+boolean, tinyint(1)
 checkbox
 
-decimal  
+decimal
 number
 
-float  
+float
 number
 
-integer  
+integer
 number
 
-text  
+text
 textarea
 
-text, with name of password, passwd  
+text, with name of password, passwd
 password
 
-text, with name of email  
+text, with name of email
 email
 
-text, with name of tel, telephone, or phone  
+text, with name of tel, telephone, or phone
 tel
 
-date  
+date
 date
 
-datetime, timestamp  
+datetime, timestamp
 datetime-local
 
-datetimefractional, timestampfractional  
+datetimefractional, timestampfractional
 datetime-local
 
-time  
+time
 time
 
-month  
+month
 month
 
-year  
+year
 select with years
 
-binary  
+binary
 file
 
 The `$options` parameter allows you to choose a specific control type if

@@ -70,7 +70,7 @@ You can include files in request bodies by including a filehandle in the array:
 
 ``` php
 $http = new Client();
-$response = $http->post('http://example.com/api', [
+$response = $http->post('https://example.com/api', [
     'image' => fopen('/path/to/a/file', 'r'),
 ]);
 ```
@@ -102,7 +102,7 @@ $file->disposition('attachment');
 
 // Send the request.
 $response = $http->post(
-    'http://example.com/api',
+    'https://example.com/api',
     (string)$data,
     ['headers' => ['Content-Type' => $data->contentType()]],
 );
@@ -117,7 +117,7 @@ form encoded. Http\Client exposes this through the type option:
 // Send a JSON request body.
 $http = new Client();
 $response = $http->post(
-    'http://example.com/tasks',
+    'https://example.com/tasks',
     json_encode($data),
     ['type' => 'json'],
 );
@@ -132,7 +132,7 @@ you can do the following:
 // Send a JSON body in a GET request with query string parameters.
 $http = new Client();
 $response = $http->get(
-    'http://example.com/tasks',
+    'https://example.com/tasks',
     ['q' => 'test', '_content' => json_encode($data)],
     ['type' => 'json'],
 );
@@ -182,7 +182,7 @@ An example of basic authentication:
 
 ``` php
 $http = new Client();
-$response = $http->get('http://example.com/profile/1', [], [
+$response = $http->get('https://example.com/profile/1', [], [
     'auth' => ['username' => 'mark', 'password' => 'secret'],
 ]);
 ```
@@ -196,7 +196,7 @@ An example of basic authentication:
 
 ``` php
 $http = new Client();
-$response = $http->get('http://example.com/profile/1', [], [
+$response = $http->get('https://example.com/profile/1', [], [
     'auth' => [
         'type' => 'digest',
         'username' => 'mark',
@@ -230,7 +230,7 @@ key and consumer secret:
 
 ``` php
 $http = new Client();
-$response = $http->get('http://example.com/profile/1', [], [
+$response = $http->get('https://example.com/profile/1', [], [
     'auth' => [
         'type' => 'oauth',
         'consumerKey' => 'bigkey',
@@ -262,7 +262,7 @@ Http\Client will assume Basic authentication, unless the type key is set:
 
 ``` php
 $http = new Client();
-$response = $http->get('http://example.com/test.php', [], [
+$response = $http->get('https://example.com/test.php', [], [
     'proxy' => [
         'username' => 'mark',
         'password' => 'testing',
@@ -426,12 +426,12 @@ XML data is decoded into a `SimpleXMLElement` tree:
 ``` php
 // Get some XML
 $http = new Client();
-$response = $http->get('http://example.com/test.xml');
+$response = $http->get('https://example.com/test.xml');
 $xml = $response->getXml();
 
 // Get some JSON
 $http = new Client();
-$response = $http->get('http://example.com/test.json');
+$response = $http->get('https://example.com/test.json');
 $json = $response->getJson();
 ```
 

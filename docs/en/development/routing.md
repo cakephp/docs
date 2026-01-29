@@ -1671,7 +1671,7 @@ The above methods also accept an array of options as their second parameter:
   regardless of debug value.
 
 ``` php
-// Generates http://example.org/img/logo.png
+// Generates https://example.com/img/logo.png
 $img = Asset::url('logo.png', ['fullBase' => true]);
 
 // Generates /img/logo.png?1568563625

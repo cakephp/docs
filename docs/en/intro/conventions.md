@@ -23,7 +23,7 @@ For inflection of acronyms it is useful to treat them as words, so `CMS` would b
 
 As you've just seen, single word controllers map to a simple lower case URL
 path. For example, `UsersController` (which would be defined in the file name
-**UsersController.php**) is accessed from `http://example.com/users`.
+**UsersController.php**) is accessed from `https://example.com/users`.
 
 While you can route multiple word controllers in any way you like, the
 convention is that your URLs are lowercase and dashed using the `DashedRoute`
@@ -166,7 +166,7 @@ Here's a final example that ties the conventions together:
 - View template, found at **templates/Articles/index.php**
 
 Using these conventions, CakePHP knows that a request to
-`http://example.com/articles` maps to a call on the `index()` method of the
+`https://example.com/articles` maps to a call on the `index()` method of the
 `ArticlesController`, where the `Articles` model is automatically available.
 None of these relationships have been configured by any means other than by
 creating classes and files that you'd need to create anyway.

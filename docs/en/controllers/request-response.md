@@ -788,11 +788,11 @@ $response = $this->response->withFile(
 
 The supported options are:
 
-name  
+name
 The name allows you to specify an alternate file name to be sent to
 the user.
 
-download  
+download
 A boolean value indicating whether headers should be set to force
 download.
 
@@ -835,7 +835,7 @@ $response = $response->withHeader('X-Extra', 'My header');
 
 // Set multiple headers
 $response = $response->withHeader('X-Extra', 'My header')
-    ->withHeader('Location', 'http://example.com');
+    ->withHeader('Location', 'https://example.com');
 
 // Append a value to an existing header
 $response = $response->withAddedHeader('Set-Cookie', 'remember_me=1');

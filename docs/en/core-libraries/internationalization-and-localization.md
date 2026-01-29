@@ -535,7 +535,7 @@ use Cake\I18n\Package;
 I18n::config('default', function ($domain, $locale) {
     $locale = Locale::parseLocale($locale);
     $lang = $locale['language'];
-    $messages = file_get_contents("http://example.com/translations/$lang.json");
+    $messages = file_get_contents("https://example.com/translations/$lang.json");
 
     return new Package(
         'default', // Formatter
