@@ -703,7 +703,8 @@ class PointMutationType extends BaseType
             return null;
         }
 
-        return $this->pmDecode($valu
+        return $this->pmDecode($value);
+    }
 
     public function marshal(mixed $value): mixed
     {
