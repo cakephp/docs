@@ -225,7 +225,7 @@ use Cake\Event\EventInterface;
 
 class ErrorController extends AppController
 {
-    protected function missingWidget(MissingWidgetException $exception)
+    protected function missingWidget(MissingWidgetException $exception): void
     {
         // You can prepare additional template context or trap errors.
     }
@@ -259,7 +259,7 @@ use Cake\Error\Renderer\WebExceptionRenderer;
 
 class AppExceptionRenderer extends WebExceptionRenderer
 {
-    public function missingWidget($error)
+    public function missingWidget(\Throwable $error): \Cake\Http\Response
     {
         $response = $this->controller->getResponse();
 

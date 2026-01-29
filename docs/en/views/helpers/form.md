@@ -80,7 +80,7 @@ do the following:
 // src/Controller/ArticlesController.php:
 public function edit($id = null)
 {
-    if (empty($id)) {
+    if (!$id) {
         throw new NotFoundException;
     }
     $article = $this->Articles->get($id);
