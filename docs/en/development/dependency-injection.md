@@ -156,6 +156,7 @@ class UsersController extends AppController
                 // Service handles all email complexity
                 $emails->sendWelcome($user);
                 $this->Flash->success('Registration successful!');
+
                 return $this->redirect(['action' => 'login']);
             }
         }
@@ -171,6 +172,9 @@ class UsersController extends AppController
             if ($user) {
                 $token = $this->Users->generateResetToken($user);
                 $emails->sendPasswordReset($user, $token);
+            } else {
+                // Generate dummy token to prevent timing attacks
+                hash('sha256', $email . Security::randomBytes(32));
             }
 
             // Always show success to prevent email enumeration
@@ -253,7 +257,7 @@ class OrdersController extends AppController
 {
     public function checkout(PaymentService $payments)
     {
-        $order = $this->Orders->get($this->request->getQuery('order_id'));
+        $order = $this->Orders->getOrFail($this->request->getQuery('order_id'));
 
         $result = $payments->processOrder($order);
 
@@ -353,7 +357,7 @@ class DocumentsController extends AppController
                     'url' => $storage->url($path),
                 ]);
 
-                $this->Documents->save($document);
+                $this->Documents->saveOrFail($document);
                 $this->Flash->success('Document uploaded successfully');
             }
         }
