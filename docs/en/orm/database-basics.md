@@ -279,6 +279,16 @@ The `cache` flag to send to SQLite.
 mode
 The `mode` flag value to send to SQLite.
 
+### SqlServer Entra Authentication
+
+The SqlServer driver supports Entra authentication (formerly Azure Active
+Directory authentication). This allows you to authenticate using Azure-managed
+identities instead of traditional username/password credentials.
+
+::: info Added in version 5.3.0
+Entra authentication support was added to the SqlServer driver.
+:::
+
 At this point, you might want to take a look at the
 [CakePHP Conventions](../intro/conventions). The correct naming for your tables (and the addition
 of some columns) can score you some free functionality and help you avoid
@@ -647,6 +657,21 @@ Geospatial schema types were added.
 `class` Cake\\Database\\**TypeFactory**
 
 `static` Cake\\Database\\TypeFactory::**map**(string $name, string $class): void
+
+`static` Cake\\Database\\TypeFactory::**getMapped**(string $type): ?string
+
+You can retrieve the mapped class name for a specific type using `getMapped()`:
+
+``` php
+use Cake\Database\TypeFactory;
+
+// Returns the class name mapped to the 'datetime' type
+$className = TypeFactory::getMapped('datetime');
+```
+
+::: info Added in version 5.3.0
+`TypeFactory::getMapped()` was added.
+:::
 
 If you need to use vendor specific types that are not built into CakePHP you can
 add additional new types to CakePHP's type system. Type classes are expected to

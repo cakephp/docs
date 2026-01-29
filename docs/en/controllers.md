@@ -202,6 +202,31 @@ $this->viewBuilder()
 The above shows how you can load custom helpers, set the theme and use a custom
 view class.
 
+#### Config Merge Strategy
+
+By default, view options set via `ViewBuilder` are deep-merged with the View
+class's default configuration. You can control this behavior using
+`setConfigMergeStrategy()`:
+
+``` php
+use Cake\View\ViewBuilder;
+
+$this->viewBuilder()
+    ->setConfigMergeStrategy(ViewBuilder::MERGE_SHALLOW)
+    ->setOption('customArray', ['a', 'b', 'c']);
+```
+
+Available strategies are:
+
+- `ViewBuilder::MERGE_DEEP` - Recursive merge (default). Nested arrays are merged together.
+- `ViewBuilder::MERGE_SHALLOW` - Simple array merge. Array values are replaced rather than deep-merged.
+
+You can retrieve the current strategy using `getConfigMergeStrategy()`.
+
+::: info Added in version 5.3.0
+`ViewBuilder::setConfigMergeStrategy()` and `ViewBuilder::getConfigMergeStrategy()` were added.
+:::
+
 ### Rendering a View
 
 `method` Cake\\Controller\\Controller::**render**(string $view, string $layout): Response

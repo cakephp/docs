@@ -1779,6 +1779,28 @@ Router::url(['_name' => 'articles:view', '_entity' => $article]);
 This will extract both the `id` property and the `slug` property out of the
 provided entity.
 
+### Redirect Trait
+
+CakePHP provides a `RedirectTrait` that can be used to create custom redirect
+route classes. If you need redirect behavior with custom logic, you can create
+a route class that uses this trait:
+
+``` php
+namespace App\Routing\Route;
+
+use Cake\Routing\Route\RedirectTrait;
+use Cake\Routing\Route\Route;
+
+class MyRedirectRoute extends Route
+{
+    use RedirectTrait;
+}
+```
+
+::: info Added in version 5.3.0
+`RedirectTrait` was added.
+:::
+
 <a id="custom-route-classes"></a>
 
 ## Custom Route Classes

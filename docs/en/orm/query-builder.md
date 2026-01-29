@@ -1620,6 +1620,20 @@ extension).
 `Query::optimizerHint()` was added.
 :::
 
+### Getting the Driver
+
+`method` Cake\\Database\\Query::**getDriver**(): Driver
+
+You can get the `Driver` instance for the current connection role from a query:
+
+``` php
+$driver = $query->getDriver();
+```
+
+::: info Added in version 5.3.0
+`Query::getDriver()` was added.
+:::
+
 ## Getting Results
 
 Once you've made your query, you'll want to retrieve rows from it. There are

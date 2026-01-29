@@ -495,6 +495,50 @@ time and timezones. The `Date` class wraps the `Cake\Chronos\ChronosDate` class.
 > So you cannot cannot directly compare a `Date` instance with a `DateTime` instance.
 > But you can do comparisons like `$dateTime->toNative() > $date->toNative()`.
 
+### Date::getTimestamp()
+
+`method` Cake\\I18n\\Date::**getTimestamp**(): int
+
+Returns an integer timestamp for the date:
+
+``` php
+$date = new Date('2021-01-31');
+echo $date->getTimestamp();
+```
+
+::: info Added in version 5.3.0
+`Date::getTimestamp()` was added.
+:::
+
+## DateTimePeriod and DatePeriod
+
+`class` Cake\\I18n\\**DateTimePeriod**
+
+`class` Cake\\I18n\\**DatePeriod**
+
+CakePHP provides `DateTimePeriod` and `DatePeriod` classes that wrap PHP's
+`DatePeriod`. When iterating, `DateTimePeriod` returns `DateTime` instances
+and `DatePeriod` returns `Date` instances:
+
+``` php
+use Cake\I18n\DateTime;
+use Cake\I18n\DateTimePeriod;
+
+$start = new DateTime('2021-01-01');
+$end = new DateTime('2021-01-05');
+$interval = new \DateInterval('P1D');
+
+$period = new DateTimePeriod($start, $interval, $end);
+foreach ($period as $date) {
+    // $date is a Cake\I18n\DateTime instance
+    echo $date->i18nFormat('yyyy-MM-dd');
+}
+```
+
+::: info Added in version 5.3.0
+`DateTimePeriod` and `DatePeriod` were added.
+:::
+
 ## Time
 
 `class` Cake\\I18n\\**Time**

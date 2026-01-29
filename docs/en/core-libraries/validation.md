@@ -675,3 +675,19 @@ $validator
 Core rules that take additional parameters should have an array for the
 `rule` key that contains the rule as the first element, and the additional
 parameters as the remaining parameters.
+
+### IP and Range Validation
+
+You can validate that a value is a valid IP address or an IP range (subnet)
+using the `ipOrRange()` rule:
+
+``` php
+$validator->add('ip_address', 'validRange', [
+    'rule' => 'ipOrRange',
+    'message' => 'Please provide a valid IP or IP range.',
+]);
+```
+
+::: info Added in version 5.3.0
+The `ipOrRange()` validation rule was added.
+:::

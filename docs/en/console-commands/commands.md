@@ -313,6 +313,56 @@ class CleanupCommand extends Command
 Custom grouping support was added.
 :::
 
+## Replacing Commands
+
+`CommandCollection::replace()` allows you to replace an existing command in the
+collection without needing to remove and re-add it. This is particularly useful
+when using `autoDiscover` and you want to replace a command with a customized
+version:
+
+``` php
+// In your Application::console() method
+public function console(CommandCollection $commands): CommandCollection
+{
+    $commands = parent::console($commands);
+    $commands->replace('some_plugin_command', MyCustomCommand::class);
+
+    return $commands;
+}
+```
+
+::: info Added in version 5.3.0
+`CommandCollection::replace()` was added.
+:::
+
+## Tree Output Helper
+
+The `TreeHelper` outputs an array as a tree structure. This is useful for
+displaying filesystem directories or any hierarchical data:
+
+``` php
+public function execute(Arguments $args, ConsoleIo $io): int
+{
+    $helper = $io->helper('Tree');
+    $helper->output([
+        'src' => [
+            'Controller',
+            'Model',
+            'View',
+        ],
+        'tests' => [
+            'TestCase',
+        ],
+    ]);
+
+    return static::CODE_SUCCESS;
+}
+```
+
+::: info Added in version 5.3.0
+The `TreeHelper` was added.
+:::
+
 <a id="console-integration-testing"></a>
 
 ## Testing Commands

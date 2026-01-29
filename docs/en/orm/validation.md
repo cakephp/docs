@@ -433,6 +433,25 @@ $rules->add($rules->existsIn(
 $rules->add($rules->existsIn(['site_id'], 'Sites'));
 ```
 
+You can also use `existsInNullable()` for nullable composite foreign keys.
+This rule allows `null` values in nullable foreign key columns, which is
+semantically correct for optional relationships:
+
+``` php
+// Allow null values in nullable composite foreign keys.
+$rules->add($rules->existsInNullable(
+    ['author_id', 'site_id'],
+    'SiteAuthors',
+));
+```
+
+Use `existsInNullable()` instead of `existsIn()` when you want to permit null
+values in foreign keys without requiring the `allowNullableNulls` option.
+
+::: info Added in version 5.3.0
+The `existsInNullable()` rule was added.
+:::
+
 In most SQL databases multi-column `UNIQUE` indexes allow multiple null values
 to exist as `NULL` is not equal to itself. While, allowing multiple null
 values is the default behavior of CakePHP, you can include null values in your
