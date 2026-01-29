@@ -231,7 +231,7 @@ class AppExceptionRenderer extends ExceptionRenderer
 
 例外レンダラーは、例外の描画に使用されるコントローラーを指定します。
 例外を描画するコントローラーを変更したい場合は、例外レンダラーの
-`_getController()` メソッドをオーバーライドしてください。 :
+`_getController()` メソッドをオーバーライドしてください:
 
 ``` php
 // src/Error/AppExceptionRenderer の中で
