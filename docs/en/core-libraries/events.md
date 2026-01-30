@@ -165,9 +165,10 @@ response has been sent, such as logging or sending emails.
 You can listen to this event using an event manager instance:
 
 ``` php
+use Cake\Event\EventInterface;
 use Cake\Event\EventManager;
 
-EventManager::instance()->on('Server.terminate', function ($event) {
+EventManager::instance()->on('Server.terminate', function (EventInterface $event) {
     // Perform tasks that should be done after the response has been
     // sent to the client.
 });
@@ -176,11 +177,12 @@ EventManager::instance()->on('Server.terminate', function ($event) {
 Or using the `events` hook in your Application/Plugin class:
 
 ``` php
+use Cake\Event\EventInterface;
 use Cake\Event\EventManagerInterface;
 
 public function events(EventManagerInterface $eventManager): EventManagerInterface
 {
-    $eventManager->on('Server.terminate', function ($event) {
+    $eventManager->on('Server.terminate', function (EventInterface $event) {
         // Perform tasks that should be done after the response has been
         // sent to the client.
     });
@@ -209,14 +211,15 @@ and the `afterExecute` event also contains the `exitCode` which is returned by t
 You can listen to this event using an event manager instance:
 
 ``` php
+use Cake\Event\EventInterface;
 use Cake\Event\EventManager;
 
-EventManager::instance()->on('Command.beforeExecute', function ($event, $args) {
+EventManager::instance()->on('Command.beforeExecute', function (EventInterface $event, $args) {
     $command = $event->getSubject();
     // Do stuff here
 });
 
-EventManager::instance()->on('Command.afterExecute', function ($event, $args, $result) {
+EventManager::instance()->on('Command.afterExecute', function (EventInterface $event, $args, $result) {
     $command = $event->getSubject();
     // Do stuff here
 });
@@ -225,16 +228,17 @@ EventManager::instance()->on('Command.afterExecute', function ($event, $args, $r
 Or using the `events` hook in your Application/Plugin class:
 
 ``` php
+use Cake\Event\EventInterface;
 use Cake\Event\EventManagerInterface;
 
 public function events(EventManagerInterface $eventManager): EventManagerInterface
 {
-    $eventManager->on('Command.beforeExecute', function ($event, $args) {
+    $eventManager->on('Command.beforeExecute', function (EventInterface $event, $args) {
         $command = $event->getSubject();
         // Do stuff here
     });
 
-    $eventManager->on('Command.afterExecute', function ($event, $args, $result) {
+    $eventManager->on('Command.afterExecute', function (EventInterface $event, $args, $result) {
         $command = $event->getSubject();
         // Do stuff here
     });
@@ -262,6 +266,7 @@ as necessary. Our `UserStatistics` listener might start out like:
 ``` php
 namespace App\Event;
 
+use Cake\Event\EventInterface;
 use Cake\Event\EventListenerInterface;
 
 class UserStatistic implements EventListenerInterface
@@ -275,7 +280,7 @@ class UserStatistic implements EventListenerInterface
         ];
     }
 
-    public function updateBuyStatistic($event)
+    public function updateBuyStatistic(EventInterface $event): void
     {
         // Code to update statistics
     }
@@ -325,10 +330,11 @@ wanted to put any orders into the log files, we could use a simple anonymous
 function to do so:
 
 ``` php
+use Cake\Event\EventInterface;
 use Cake\Log\Log;
 
 // From within a controller, or during application bootstrap.
-$this->Orders->getEventManager()->on('Order.afterPlace', function ($event) {
+$this->Orders->getEventManager()->on('Order.afterPlace', function (EventInterface $event) {
     Log::write(
         'info',
         'A new order was placed with id: ' . $event->getSubject()->id,
@@ -360,12 +366,13 @@ a more direct approach and only listen to the event you really need:
 // You can create the following before the
 // save operation, ie. config/bootstrap.php
 use Cake\Datasource\FactoryLocator;
+use Cake\Event\EventInterface;
 // If sending emails
 use Cake\Mailer\Email;
 
 FactoryLocator::get('Table')->get('ThirdPartyPlugin.Feedbacks')
     ->getEventManager()
-    ->on('Model.afterSave', function($event, $entity)
+    ->on('Model.afterSave', function(EventInterface $event, $entity)
     {
         // For example we can send an email to the admin
         $email = new Email('default');
@@ -533,13 +540,13 @@ In order to stop events you can either return `false` in your callbacks or
 call the `stopPropagation()` method on the event object:
 
 ``` php
-public function doSomething($event)
+public function doSomething(EventInterface $event)
 {
     // ...
     return false; // Stops the event
 }
 
-public function updateBuyStatistic($event)
+public function updateBuyStatistic(EventInterface $event): void
 {
     // ...
     $event->stopPropagation();
@@ -585,7 +592,7 @@ directly or returning the value in the callback itself:
 
 ``` php
 // A listener callback
-public function doSomething($event)
+public function doSomething(EventInterface $event)
 {
     // ...
     $alteredData = $event->getData('order') + $moreData;
@@ -594,7 +601,7 @@ public function doSomething($event)
 }
 
 // Another listener callback
-public function doSomethingElse($event)
+public function doSomethingElse(EventInterface $event): void
 {
     // ...
     $event->setResult(['order' => $alteredData] + $this->result());
@@ -634,7 +641,7 @@ $this->getEventManager()->on('My.event', [$this, 'doSomething']);
 $this->getEventManager()->off('My.event', [$this, 'doSomething']);
 
 // Attaching an anonymous function.
-$myFunction = function ($event) { ... };
+$myFunction = function (EventInterface $event) { ... };
 $this->getEventManager()->on('My.event', $myFunction);
 
 // Detaching the anonymous function

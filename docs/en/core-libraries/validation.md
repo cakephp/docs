@@ -175,7 +175,7 @@ $validator->add('title', 'custom', [
 // Use a closure
 $extra = 'Some additional value needed inside the closure';
 $validator->add('title', 'custom', [
-    'rule' => function ($value, $context) use ($extra) {
+    'rule' => function (mixed $value, array $context) use ($extra) {
         // Custom logic that returns true/false
     },
     'message' => 'The title is not valid',
@@ -225,7 +225,7 @@ overwritten by the ones returned from the validation rule method:
 
 ``` php
 $validator->add('length', 'custom', [
-    'rule' => function ($value, $context) {
+    'rule' => function (mixed $value, array $context) {
         if (!$value) {
             return false;
         }
@@ -259,7 +259,7 @@ not a particular rule should be applied:
 ``` php
 $validator->add('picture', 'file', [
     'rule' => ['mimeType', ['image/jpeg', 'image/png']],
-    'on' => function ($context) {
+    'on' => function (array $context): bool {
         return !empty($context['data']['show_profile_picture']);
     }
 ]);
@@ -282,7 +282,7 @@ determines whether or not the rule should be applied. For example, a field is
 sometimes allowed to be empty:
 
 ``` php
-$validator->allowEmptyString('tax', 'This field is required', function ($context) {
+$validator->allowEmptyString('tax', 'This field is required', function (array $context): bool {
     return !$context['data']['is_taxable'];
 });
 ```
@@ -291,7 +291,7 @@ Likewise, a field can be required to be populated when certain conditions are
 met:
 
 ``` php
-$validator->notEmptyString('email_frequency', 'This field is required', function ($context) {
+$validator->notEmptyString('email_frequency', 'This field is required', function (array $context): bool {
     return !empty($context['data']['wants_newsletter']);
 });
 ```
@@ -303,7 +303,7 @@ Further it's also possible to require a field to be present under certain
 conditions only:
 
 ``` php
-$validator->requirePresence('full_name', function ($context) {
+$validator->requirePresence('full_name', function (array $context): bool {
     if (isset($context['data']['action'])) {
         return $context['data']['action'] === 'subscribe';
     }
