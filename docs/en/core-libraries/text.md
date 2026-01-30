@@ -287,8 +287,8 @@ echo Text::highlight(
 
 Output:
 
-> Highlights \$phrase in \$text \<span class="highlight"\>using\</span\> the
-> \$options\['format'\] string specified or a default string.
+> Highlights `$phrase` in `$text` `<span class="highlight">using</span>` the
+> `$options['format']` string specified or a default string.
 
 ## Truncating Text
 

@@ -512,7 +512,7 @@ npx markdownlint-cli --config .github/markdownlint.json "docs/en/**/*.md"
 
 ```bash [Auto-fix]
 # Automatically fix formatting issues
-npx markdownlint-cli --config .github/markdownlint.json --fix cs/en/**/*.md"
+npx markdownlint-cli --config .github/markdownlint.json --fix "docs/en/**/*.md"
 ```
 
 :::
@@ -599,11 +599,7 @@ npx cspell --config .github/cspell.json docs/en/your-file.md
 node bin/check-links.js docs/en/your-file.md
 ```
 
-:::e --check config.js
-jq empty toc_en.json
-
-```shell
 :::
-```
+:::
 
 If the CI checks fail, review the error messages and fix the issues before requesting a review.

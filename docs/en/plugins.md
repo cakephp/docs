@@ -13,7 +13,7 @@ reused with little effort in other applications. The application and the plugin
 operate in their own respective spaces, but share the application's
 configuration data (for example, database connections, email transports)
 
-Plugin should define their own top-level namespace. For example:
+Plugins should define their own top-level namespace. For example:
 `DebugKit`. By convention, plugins use their package name as their namespace.
 If you'd like to use a different namespace, you can configure the plugin
 namespace, when plugins are loaded.
@@ -110,7 +110,7 @@ appropriate parts of your application. The hooks are:
   queue.
 - `console` Used to add console commands to an application's command
   collection.
-- `services` Used to register application container service. This is a good
+- `services` Used to register application container services. This is a good
   opportunity to setup additional objects that need access to the container.
 
 By default all plugins hooks are enabled. You can disable hooks by using the
@@ -634,7 +634,7 @@ To override plugin elements, create an element with the same name in:
     templates/plugin/ContactManager/element/helpbox.php
 
 This file would override
-**plugins/ContactManager/tempaltes/element/helpbox.ctp**.
+**plugins/ContactManager/templates/element/helpbox.ctp**.
 
 If your plugin is in a composer dependency (i.e. 'Company/ContactManager'), the
 path to the 'index' view of the Contacts controller will be:

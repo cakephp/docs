@@ -45,7 +45,7 @@ bin/cake upgrade rector --rules cakephp52 <path/to/app/src>
 ### Event
 
 - Returning values from event listeners / callbacks is deprecated. Use `$event->setResult()`
-  instead or `$event->stopPropogation()` to just stop the event propogation.
+  instead or `$event->stopPropagation()` to just stop the event propagation.
 
 ### View
 

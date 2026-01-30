@@ -642,7 +642,7 @@ echo $this->element(
 
 echo $this->element(
     'helpbox',
-    ['var' => $differenVar],
+    ['var' => $differentVar],
     ['cache' => ['key' => 'second_use', 'config' => 'view_long']],
 );
 ```

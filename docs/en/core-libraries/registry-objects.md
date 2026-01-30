@@ -9,7 +9,7 @@ for Helpers, Behaviors, and Tasks in addition to Components.
 
 ## Loading Objects
 
-Objects can be loaded on-the-fly using add\<registry-object\>()
+Objects can be loaded on-the-fly using `add<registry-object>()`
 Example:
 
 ``` php

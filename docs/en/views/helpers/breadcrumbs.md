@@ -10,7 +10,7 @@ of a breadcrumbs trail for your app.
 You can add a crumb to the list using the `add()` method. It takes three
 arguments:
 
-- **title** The string to be displayed as a the title of the crumb
+- **title** The string to be displayed as the title of the crumb
 - **url** A string or an array of parameters that will be given to the
   [Url](../../views/helpers/url)
 - **options** An array of attributes for the `item` and `itemWithoutLink`
@@ -101,7 +101,7 @@ precisely where you want to add a breadcrumb.
 After adding crumbs to the trail, you can easily render it using the
 `render()` method. This method accepts two array arguments:
 
-- `$attributes` : An array of attributes that will applied to the `wrapper`
+- `$attributes` : An array of attributes that will be applied to the `wrapper`
   template. This gives you the ability to add attributes to the HTML tag. It
   accepts the special `templateVars` key to allow the insertion of custom
   template variables in the template.

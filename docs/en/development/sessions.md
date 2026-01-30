@@ -352,7 +352,7 @@ In **config/app.php** make the session block look like:
         'cache' => 'apc',
     ],
 ],
-// Make sure to add a apc cache config
+// Make sure to add an apc cache config
 'Cache' => [
     'apc' => ['engine' => 'Apc'],
 ]

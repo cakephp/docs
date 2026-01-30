@@ -304,7 +304,7 @@ you want the filenames to appear in the recipient's mail client:
 
 You can also add attachments using the `addAttachment()` method.
 
-> \$mailer-\>addAttachment('/full/file/path/file.png');
+> `$mailer->addAttachment('/full/file/path/file.png');`
 
 ### Relaxing Address Validation Rules
 
@@ -398,7 +398,7 @@ class UsersController extends AppController
     {
         $user = $this->Users->newEmptyEntity();
         if ($this->request->is('post')) {
-            $user = $this->Users->patchEntity($user, $this->request->getData())
+            $user = $this->Users->patchEntity($user, $this->request->getData());
             if ($this->Users->save($user)) {
                 $this->getMailer('User')->send('welcome', [$user]);
             }

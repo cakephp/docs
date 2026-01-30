@@ -111,8 +111,8 @@ response. Clients could also make a request to `/recipes` with the
 In the above controller, we're defining a `viewClasses()` method. This method
 defines which views your controller has available for content-negotiation.
 We're including CakePHP's `JsonView` which enables JSON based responses. To
-learn more about it and Xml based views see [JSON and XML views](../views/json-and-xml-views). is
-used by CakePHP to select a view class to render a REST response with.
+learn more about it and XML based views see [JSON and XML views](../views/json-and-xml-views).
+Content negotiation is used by CakePHP to select a view class to render a REST response with.
 
 Next, we have several methods that expose basic logic to create, edit, view and
 delete recipes. In each of our actions we're using the `serialize` option to
@@ -124,7 +124,7 @@ define the `serialize` option, and instead use template files. We would place
 the REST templates for our RecipesController inside **templates/Recipes/json**.
 
 See the [Controller Viewclasses](../controllers#controller-viewclasses) for more information on how CakePHP's
-response negotiation functionality.
+response negotiation functionality works.
 
 ## Parsing Request Bodies
 

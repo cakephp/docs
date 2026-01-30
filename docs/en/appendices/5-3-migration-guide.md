@@ -41,7 +41,7 @@ If you are not running on **PHP 8.2 or higher**, you will need to upgrade PHP be
 
 ### Validation
 
-- The signature of `Validator::validate(array $data, bool $newRecord = true, array $context = [])` has now a additional third parameter `$context`.
+- The signature of `Validator::validate(array $data, bool $newRecord = true, array $context = [])` now has an additional third parameter `$context`.
   It can be used to pass necessary context into the validation when marshalling.
 
 ### View

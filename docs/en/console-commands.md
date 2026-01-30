@@ -141,7 +141,7 @@ command. Then learn more about commands:
 ## Routing in the Console Environment
 
 In command-line interface (CLI), specifically your console commands,
-`env('HTTP_HOST')` and other webbrowser specific environment variables are not
+`env('HTTP_HOST')` and other web browser specific environment variables are not
 set.
 
 If you generate reports or send emails that make use of `Router::url()` those

@@ -135,7 +135,7 @@ class PostsController extends AppController
 
     public function delete()
     {
-        if ($this->Post->delete($this->request->getData('Post.id')) {
+        if ($this->Post->delete($this->request->getData('Post.id'))) {
             $this->Flash->success('Post deleted.');
 
             return $this->redirect(['action' => 'index']);
@@ -346,7 +346,7 @@ use Cake\Routing\Router;
 
 public function beforeFilter(EventInterface $event): void
 {
-    throw new RedirectException(Router::url('/'))
+    throw new RedirectException(Router::url('/'));
 }
 ```
 

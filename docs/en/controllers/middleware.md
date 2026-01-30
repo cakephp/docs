@@ -257,7 +257,7 @@ public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue
 If your application has cookies that contain data you want to obfuscate and
 protect against user tampering, you can use CakePHP's encrypted cookie
 middleware to transparently encrypt and decrypt cookie data via middleware.
-Cookie data is encrypted with via OpenSSL using AES:
+Cookie data is encrypted via OpenSSL using AES:
 
 ``` php
 use Cake\Http\Middleware\EncryptedCookieMiddleware;
