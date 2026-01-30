@@ -158,12 +158,12 @@ application. Mailer views can also use layouts and elements just like normal vie
 ``` php
 $mailer = new Mailer();
 $mailer
-            ->setEmailFormat('html')
-            ->setTo('bob@example.com')
-            ->setFrom('app@domain.com')
-            ->viewBuilder()
-                ->setTemplate('welcome')
-                ->setLayout('fancy');
+    ->setEmailFormat('html')
+    ->setTo('bob@example.com')
+    ->setFrom('app@domain.com')
+    ->viewBuilder()
+        ->setTemplate('welcome')
+        ->setLayout('fancy');
 
 $mailer->deliver();
 ```
@@ -175,12 +175,12 @@ send multipart templated email messages as well:
 ``` php
 $mailer = new Mailer();
 $mailer
-            ->setEmailFormat('both')
-            ->setTo('bob@example.com')
-            ->setFrom('app@domain.com')
-            ->viewBuilder()
-                ->setTemplate('welcome')
-                ->setLayout('fancy');
+    ->setEmailFormat('both')
+    ->setTo('bob@example.com')
+    ->setFrom('app@domain.com')
+    ->viewBuilder()
+        ->setTemplate('welcome')
+        ->setLayout('fancy');
 
 $mailer->deliver();
 ```

@@ -495,10 +495,9 @@ the controller's default one:
 ``` php
 // In a controller method.
 $recentArticles = $this->fetchTable('Articles')->find('all',
-        limit: 5,
-        order: 'Articles.created DESC',
-    )
-    ->all();
+    limit: 5,
+    order: 'Articles.created DESC',
+)->all();
 ```
 
 ### fetchModel()

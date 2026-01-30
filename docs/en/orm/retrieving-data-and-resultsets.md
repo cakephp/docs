@@ -319,11 +319,11 @@ the Author entity.
 ``` php
 // In your finders/controller:
 $query = $articles->find('list',
-        keyField: 'id',
-        valueField: function ($article) {
-            return $article->author->get('label');
-        }
-    )
+    keyField: 'id',
+    valueField: function ($article) {
+        return $article->author->get('label');
+    },
+)
     ->contain('Authors');
 ```
 

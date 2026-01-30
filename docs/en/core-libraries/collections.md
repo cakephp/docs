@@ -1245,19 +1245,19 @@ imagine a lengthy closure like this one:
 
 ``` php
 $collection
-        ->map(function ($row, $key) {
-            if (!empty($row['items'])) {
-                $row['total'] = collection($row['items'])->sumOf('price');
-            }
+    ->map(function ($row, $key) {
+        if (!empty($row['items'])) {
+            $row['total'] = collection($row['items'])->sumOf('price');
+        }
 
-            if (!empty($row['total'])) {
-                $row['tax_amount'] = $row['total'] * 0.25;
-            }
+        if (!empty($row['total'])) {
+            $row['tax_amount'] = $row['total'] * 0.25;
+        }
 
-            // More code here...
+        // More code here...
 
-            return $modifiedRow;
-        });
+        return $modifiedRow;
+    });
 ```
 
 This can be refactored by creating another class:
@@ -1265,20 +1265,20 @@ This can be refactored by creating another class:
 ``` php
 class TotalOrderCalculator
 {
-        public function __invoke($row, $key)
-        {
-            if (!empty($row['items'])) {
-                $row['total'] = collection($row['items'])->sumOf('price');
-            }
-
-            if (!empty($row['total'])) {
-                $row['tax_amount'] = $row['total'] * 0.25;
-            }
-
-            // More code here...
-
-            return $modifiedRow;
+    public function __invoke($row, $key)
+    {
+        if (!empty($row['items'])) {
+            $row['total'] = collection($row['items'])->sumOf('price');
         }
+
+        if (!empty($row['total'])) {
+            $row['tax_amount'] = $row['total'] * 0.25;
+        }
+
+        // More code here...
+
+        return $modifiedRow;
+    }
 }
 
 // Use the logic in your map() call

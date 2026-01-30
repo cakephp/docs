@@ -42,8 +42,8 @@ class ArticlesTable extends Table
     public function initialize(array $config): void
     {
         $this->belongsTo('Authors', [
-                'className' => 'Publishing.Authors',
-            ])
+            'className' => 'Publishing.Authors',
+        ])
             ->setForeignKey('author_id')
             ->setProperty('author');
     }
@@ -81,8 +81,8 @@ class ArticlesTable extends Table
             ->setFinder('approved');
 
         $this->hasMany('UnapprovedComments', [
-                'className' => 'Comments',
-            ])
+            'className' => 'Comments',
+        ])
             ->setFinder('unapproved')
             ->setProperty('unapproved_comments');
     }
@@ -195,15 +195,15 @@ class UsersTable extends Table
     public function initialize(array $config): void
     {
         $this->hasOne('HomeAddresses', [
-                'className' => 'Addresses',
-            ])
+            'className' => 'Addresses',
+        ])
             ->setProperty('home_address')
             ->setConditions(['HomeAddresses.label' => 'Home'])
             ->setDependent(true);
 
         $this->hasOne('WorkAddresses', [
-                'className' => 'Addresses',
-            ])
+            'className' => 'Addresses',
+        ])
             ->setProperty('work_address')
             ->setConditions(['WorkAddresses.label' => 'Work'])
             ->setDependent(true);
