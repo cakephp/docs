@@ -111,7 +111,7 @@ appropriate parts of your application. The hooks are:
 - `console` Used to add console commands to an application's command
   collection.
 - `services` Used to register application container service. This is a good
-  opportunity to setup additional objects that need acccess to the container.
+  opportunity to setup additional objects that need access to the container.
 
 By default all plugins hooks are enabled. You can disable hooks by using the
 related options of the `plugin load` command:

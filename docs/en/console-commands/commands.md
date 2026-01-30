@@ -143,7 +143,7 @@ Commands are provided a `ConsoleIo` instance when executed. This object allows
 you to interact with `Cake\Console\ConsoleIo::out()` and
 `Cake\Console\ConsoleIo::err()` to emit on `stdout`, and
 `stderr`. Files can be created with overwrite confirmation with
-`Cake\Console\ConsoleIo::createFile()`<span class="title-ref">. :ref:\`command-helpers</span>
+`Cake\Console\ConsoleIo::createFile()`. [Command Helpers](../console-commands/input-output#command-helpers)
 provide 'macros' for output generation. See the
 [Command Input/Output](../console-commands/input-output) section for more information.
 

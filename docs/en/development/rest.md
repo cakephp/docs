@@ -109,7 +109,7 @@ response. Clients could also make a request to `/recipes` with the
 ## Encoding Response Data
 
 In the above controller, we're defining a `viewClasses()` method. This method
-defines which views your controller has available for content-negotitation.
+defines which views your controller has available for content-negotiation.
 We're including CakePHP's `JsonView` which enables JSON based responses. To
 learn more about it and Xml based views see [JSON and XML views](../views/json-and-xml-views). is
 used by CakePHP to select a view class to render a REST response with.

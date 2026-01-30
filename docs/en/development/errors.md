@@ -358,7 +358,7 @@ error code used as an HTTP status code if the error code is between `400` and
 `506`.
 
 The constructor for `Cake\Core\Exception\CakeException` allows you to
-pass in additional data. This additional data is interpolated into the the
+pass in additional data. This additional data is interpolated into the
 `_messageTemplate`. This allows you to create data rich exceptions, that
 provide more context around your errors:
 
@@ -472,7 +472,7 @@ You can throw any of the HTTP related exceptions from your controller actions
 to indicate failure states. For example:
 
 ``` php
-use Cake\Network\Exception\NotFoundException;
+use Cake\Http\Exception\NotFoundException;
 
 public function view($id = null)
 {

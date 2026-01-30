@@ -325,7 +325,7 @@ $io->verbose('Verbose output');
 
 You can control the output level of commands, by using the `--quiet` and
 `--verbose` options. These options are added by default, and allow you to
-consistently control output levels inside your CakePHP comands.
+consistently control output levels inside your CakePHP commands.
 
 The `--quiet` and `--verbose` options also control how logging data is
 output to stdout/stderr. Normally info and higher log messages are output to

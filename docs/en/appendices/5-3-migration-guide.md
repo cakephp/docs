@@ -1,6 +1,6 @@
 # 5.3 Migration Guide
 
-The 5.3.0 release is a backwards compatible with 5.0. It adds new functionality
+The 5.3.0 release is backwards compatible with 5.0. It adds new functionality
 and introduces new deprecations. Any functionality deprecated in 5.x will be
 removed in 6.0.0.
 
@@ -224,7 +224,7 @@ If you are not running on **PHP 8.2 or higher**, you will need to upgrade PHP be
 
 ### Validation
 
-- `ipOrRange()` validation has has been added to check for an IP or a range (subnet).
+- `ipOrRange()` validation has been added to check for an IP or a range (subnet).
 - When validating within CakePHP marshalling context, the entity will be passed
   into the `context` argument for use inside custom validation rules. This can
   be useful when patching partially and then needing to get that data from the

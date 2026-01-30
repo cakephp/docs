@@ -3,7 +3,7 @@
 CakePHP follows Semantic Versioning for all releases. This follows the versioning
 convention of **major.minor.patch**.
 
-The development team tries to guarantee each release follow the restrictions and
+The development team tries to guarantee each release follows the restrictions
 and guarantees below.
 
 ## Major Releases
@@ -21,7 +21,7 @@ code upgrades using rector.
 
 ## Minor Releases
 
-Minor release are generally backwards compatible with the previous minor and patch
+Minor releases are generally backwards compatible with the previous minor and patch
 release.
 
 Features might be deprecated, but they are never removed in a minor release.

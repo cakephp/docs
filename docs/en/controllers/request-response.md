@@ -1455,7 +1455,7 @@ $cookie = $cookies->remember_me;
 $exists = isset($cookies->remember_me)
 ```
 
-Once you have a `Cookie` object you can interact with it's state and modify
+Once you have a `Cookie` object you can interact with its state and modify
 it. Keep in mind that cookies are immutable, so you'll need to update the
 collection if you modify a cookie:
 

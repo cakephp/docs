@@ -432,7 +432,7 @@ CakePHP, and should not be used unless you want the special meaning
 - `action` Used to name the controller action for a route.
 - `plugin` Used to name the plugin a controller is located in.
 - `prefix` Used for [Prefix Routing](#prefix-routing)
-- `_ext` Used for [File extentions routing](#file-extensions).
+- `_ext` Used for [File extensions routing](#file-extensions).
 - `_base` Set to `false` to remove the base path from the generated URL. If
   your application is not in the root directory, this can be used to generate
   URLs that are 'cake relative'.

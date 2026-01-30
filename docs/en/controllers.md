@@ -509,7 +509,7 @@ The `fetchModel()` method is useful to load non ORM models or ORM tables that
 are not the controller's default:
 
 ``` php
-// ModelAwareTrait need to be explicity added to your controler first for fetchModel() to work.
+// ModelAwareTrait need to be explicitly added to your controller first for fetchModel() to work.
 use ModelAwareTrait;
 
 // Get an ElasticSearch model

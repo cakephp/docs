@@ -840,7 +840,7 @@ constructor parameters you can provide those to `loadRoutes($constructorArgs)`.
 
 ### Creating Routes in Tests
 
-Sometimes it may be be necessary to dynamically add routes in tests, for example
+Sometimes it may be necessary to dynamically add routes in tests, for example
 when developing plugins, or applications that are extensible.
 
 Just like loading existing application routes, this can be done during `setup()`

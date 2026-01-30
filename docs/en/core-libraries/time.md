@@ -492,7 +492,7 @@ time and timezones. The `Date` class wraps the `Cake\Chronos\ChronosDate` class.
 
 > [!NOTE]
 > Unlike the `DateTime` class, `Date` does not extends the `DateTimeInterface`.
-> So you cannot cannot directly compare a `Date` instance with a `DateTime` instance.
+> So you cannot directly compare a `Date` instance with a `DateTime` instance.
 > But you can do comparisons like `$dateTime->toNative() > $date->toNative()`.
 
 ### Date::getTimestamp()
