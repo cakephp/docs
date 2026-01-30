@@ -405,55 +405,43 @@ dealt with by ErrorTrap by setting the `log` option to `true` in your
 Besides the internal framework exceptions, CakePHP provides several
 built-in exceptions for HTTP methods
 
-> nocontentsentry
->
-> > Used for doing 400 Bad Request error.
->
-> nocontentsentry
->
-> > Used for doing a 401 Unauthorized error.
->
-> nocontentsentry
->
-> > Used for doing a 403 Forbidden error.
->
-> nocontentsentry
->
-> > Used for doing a 403 error caused by an invalid CSRF token.
->
-> nocontentsentry
->
-> > Used for doing a 404 Not found error.
->
-> nocontentsentry
->
-> > Used for doing a 405 Method Not Allowed error.
->
-> nocontentsentry
->
-> > Used for doing a 406 Not Acceptable error.
->
-> nocontentsentry
->
-> > Used for doing a 409 Conflict error.
->
-> nocontentsentry
->
-> > Used for doing a 410 Gone error.
+`Cake\Http\Exception\BadRequestException`
+: Used for doing 400 Bad Request error.
+
+`Cake\Http\Exception\UnauthorizedException`
+: Used for doing a 401 Unauthorized error.
+
+`Cake\Http\Exception\ForbiddenException`
+: Used for doing a 403 Forbidden error.
+
+`Cake\Http\Exception\InvalidCsrfTokenException`
+: Used for doing a 403 error caused by an invalid CSRF token.
+
+`Cake\Http\Exception\NotFoundException`
+: Used for doing a 404 Not found error.
+
+`Cake\Http\Exception\MethodNotAllowedException`
+: Used for doing a 405 Method Not Allowed error.
+
+`Cake\Http\Exception\NotAcceptableException`
+: Used for doing a 406 Not Acceptable error.
+
+`Cake\Http\Exception\ConflictException`
+: Used for doing a 409 Conflict error.
+
+`Cake\Http\Exception\GoneException`
+: Used for doing a 410 Gone error.
 
 For more details on HTTP 4xx error status codes see `2616#section-10.4`.
 
-> nocontentsentry
->
-> > Used for doing a 500 Internal Server Error.
->
-> nocontentsentry
->
-> > Used for doing a 501 Not Implemented Errors.
->
-> nocontentsentry
->
-> > Used for doing a 503 Service Unavailable error.
+`Cake\Http\Exception\InternalErrorException`
+: Used for doing a 500 Internal Server Error.
+
+`Cake\Http\Exception\NotImplementedException`
+: Used for doing a 501 Not Implemented Errors.
+
+`Cake\Http\Exception\ServiceUnavailableException`
+: Used for doing a 503 Service Unavailable error.
 
 For more details on HTTP 5xx error status codes see `2616#section-10.5`.
 
@@ -505,96 +493,74 @@ page, and log the exception.
 
 In addition, CakePHP uses the following exceptions:
 
-> nocontentsentry
->
-> > The chosen view class could not be found.
->
-> nocontentsentry
->
-> > The chosen template file could not be found.
->
-> nocontentsentry
->
-> > The chosen layout could not be found.
->
-> nocontentsentry
->
-> > The chosen helper could not be found.
->
-> nocontentsentry
->
-> > The chosen element file could not be found.
->
-> nocontentsentry
->
-> > The chosen cell class could not be found.
->
-> nocontentsentry
->
-> > The chosen cell view file could not be found.
->
-> nocontentsentry
->
-> > A configured component could not be found.
->
-> nocontentsentry
->
-> > The requested controller action could not be found.
->
-> nocontentsentry
->
-> > Accessing private/protected/\_ prefixed actions.
->
-> nocontentsentry
->
-> > A console library class encounter an error.
->
-> nocontentsentry
->
-> > A model's connection is missing.
->
-> nocontentsentry
->
-> > A database driver could not be found.
->
-> nocontentsentry
->
-> > A PHP extension is missing for the database driver.
->
-> nocontentsentry
->
-> > A model's table could not be found.
->
-> nocontentsentry
->
-> > A model's entity could not be found.
->
-> nocontentsentry
->
-> > A model's behavior could not be found.
->
-> nocontentsentry
->
-> > An entity couldn't be saved/deleted while using `Cake\ORM\Table::saveOrFail()` or
-> > `Cake\ORM\Table::deleteOrFail()`.
->
-> nocontentsentry
->
-> The requested record could not be found. This will also set HTTP response
-> headers to 404.
->
-> nocontentsentry
->
-> > The requested controller could not be found.
->
-> nocontentsentry
->
-> > The requested URL cannot be reverse routed or cannot be parsed.
->
-> nocontentsentry
->
-> > Base exception class in CakePHP. All framework layer exceptions thrown by
-> > CakePHP will extend this class.
+`Cake\View\Exception\MissingViewException`
+: The chosen view class could not be found.
+
+`Cake\View\Exception\MissingTemplateException`
+: The chosen template file could not be found.
+
+`Cake\View\Exception\MissingLayoutException`
+: The chosen layout could not be found.
+
+`Cake\View\Exception\MissingHelperException`
+: The chosen helper could not be found.
+
+`Cake\View\Exception\MissingElementException`
+: The chosen element file could not be found.
+
+`Cake\View\Exception\MissingCellException`
+: The chosen cell class could not be found.
+
+`Cake\View\Exception\MissingCellViewException`
+: The chosen cell view file could not be found.
+
+`Cake\Controller\Exception\MissingComponentException`
+: A configured component could not be found.
+
+`Cake\Controller\Exception\MissingActionException`
+: The requested controller action could not be found.
+
+`Cake\Controller\Exception\PrivateActionException`
+: Accessing private/protected/\_ prefixed actions.
+
+`Cake\Console\Exception\ConsoleException`
+: A console library class encounter an error.
+
+`Cake\Database\Exception\MissingConnectionException`
+: A model's connection is missing.
+
+`Cake\Database\Exception\MissingDriverException`
+: A database driver could not be found.
+
+`Cake\Database\Exception\MissingExtensionException`
+: A PHP extension is missing for the database driver.
+
+`Cake\ORM\Exception\MissingTableException`
+: A model's table could not be found.
+
+`Cake\ORM\Exception\MissingEntityException`
+: A model's entity could not be found.
+
+`Cake\ORM\Exception\MissingBehaviorException`
+: A model's behavior could not be found.
+
+`Cake\ORM\Exception\PersistenceFailedException`
+: An entity couldn't be saved/deleted while using `Cake\ORM\Table::saveOrFail()` or
+  `Cake\ORM\Table::deleteOrFail()`.
+
+`Cake\Datasource\Exception\RecordNotFoundException`
+: The requested record could not be found. This will also set HTTP response
+  headers to 404.
+
+`Cake\Routing\Exception\MissingControllerException`
+: The requested controller could not be found.
+
+`Cake\Routing\Exception\MissingRouteException`
+: The requested URL cannot be reverse routed or cannot be parsed.
+
+`Cake\Core\Exception\CakeException`
+: Base exception class in CakePHP. All framework layer exceptions thrown by
+  CakePHP will extend this class.
 
 These exception classes all extend `Exception`.
 By extending Exception, you can create your own 'framework' errors.
