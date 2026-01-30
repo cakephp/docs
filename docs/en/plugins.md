@@ -621,7 +621,7 @@ echo $this->element('Contacts.sidebar/helpbox');
 You can override any plugin views from inside your app using special paths. If
 you have a plugin called 'ContactManager' you can override the template files of the
 plugin with application specific view logic by creating files using the
-following template **templates/plugin/\[Plugin\]/\[Controller\]/\[view\].php**. For the
+following template **templates/plugin/`[Plugin]/[Controller]/[view]`.php**. For the
 Contacts controller you could make the following file:
 
     templates/plugin/ContactManager/Contacts/index.php

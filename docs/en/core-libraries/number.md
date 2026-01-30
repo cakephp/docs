@@ -57,7 +57,7 @@ that represents the amount of money you are expressing. The second
 parameter is a string used to choose a predefined currency formatting
 scheme:
 
-| \$currency | 1234.56, formatted by currency type |
+| `$currency` | 1234.56, formatted by currency type |
 |------------|-------------------------------------|
 | EUR        | €1.234,56                           |
 | GBP        | £1,234.56                           |

@@ -32,7 +32,7 @@ class HelloCommand extends Command
 ```
 
 Command classes must implement an `execute()` method that does the bulk of
-their work. This method is called when a command is invoked. Lets call our first
+their work. This method is called when a command is invoked. Let's call our first
 command application directory, run:
 
 ``` bash

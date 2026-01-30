@@ -135,7 +135,7 @@ complete -F _cake cake bin/cake
 
 ## Using autocompletion
 
-Once enabled, the autocompletion can be used the same way than for other
+Once enabled, the autocompletion can be used the same way as for other
 built-in commands, using the **TAB** key.
 Three type of autocompletion are provided. The following output are from a fresh CakePHP install.
 

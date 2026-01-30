@@ -12,7 +12,7 @@ truncating long stretches of text.
 
 `method` Cake\\View\\Helper\\TextHelper::**autoLinkEmails**(string $text, array $options = []): string
 
-Adds links to the well-formed email addresses in \$text, according
+Adds links to the well-formed email addresses in `$text`, according
 to any options defined in `$options` (see
 `HtmlHelper::link()`).
 
@@ -66,7 +66,7 @@ Further options:
 
 `method` Cake\\View\\Helper\\TextHelper::**autoParagraph**(string $text): string
 
-Adds proper \<p\> around text where double-line returns are found, and \<br\> where
+Adds proper `<p>` around text where double-line returns are found, and `<br>` where
 single-line returns are found.
 
 ``` php

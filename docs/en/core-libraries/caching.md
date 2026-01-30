@@ -219,7 +219,7 @@ automatically handle key distribution and failover across the cluster nodes.
   them as a pool.
 - `duration` Be aware that any duration greater than 30 days will be treated as real
   Unix time value rather than an offset from current time.
-- `options` Additional options for the memcached client. Should be an array of option =\> value.
+- `options` Additional options for the memcached client. Should be an array of option => value.
   Use the `\Memcached::OPT_*` constants as keys.
 
 <a id="cache-configuration-fallback"></a>
@@ -282,7 +282,7 @@ the config and destroy the adapter if it was constructed.
 
 `static` Cake\\Cache\\Cache::**write**(string $key, mixed $value, string $config = 'default'): bool
 
-`Cache::write()` will write a \$value to the Cache. You can read or
+`Cache::write()` will write a `$value` to the Cache. You can read or
 delete this value later by referring to it by `$key`. You may
 specify an optional configuration to store the cache in as well. If
 no `$config` is specified, default will be used. `Cache::write()`

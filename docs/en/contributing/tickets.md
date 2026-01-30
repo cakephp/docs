@@ -27,7 +27,7 @@ the best bug report possible:
 
 If you've found a security issue in CakePHP, please use the following procedure
 instead of the normal bug reporting system. Instead of using the bug tracker,
-mailing list or IRC please send an email to **security \[at\] cakephp.org**.
+mailing list or IRC please send an email to **security [at] cakephp.org**.
 Emails sent to this address go to the CakePHP core team on a private mailing
 list.
 

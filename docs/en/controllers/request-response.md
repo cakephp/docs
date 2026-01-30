@@ -296,7 +296,7 @@ If your requests contain XML or JSON request content, you should consider using
 types making the parsed data available in `$request->getData()` and
 `$request->getParsedBody()`.
 
-### Environment Variables (from \$\_SERVER and \$\_ENV)
+### Environment Variables (from $_SERVER and $_ENV)
 
 `method` Cake\\Http\\ServerRequest::**getEnv**($key, $default = null): string|null
 

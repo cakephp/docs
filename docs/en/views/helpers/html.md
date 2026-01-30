@@ -140,9 +140,9 @@ background:#633; border-bottom:1px solid #000; padding:10px;
 This method is handy for linking to external resources like RSS/Atom feeds
 and favicons. Like css(), you can specify whether or not you'd like this tag
 to appear inline or appended to the `meta` block by setting the 'block'
-key in the \$attributes parameter to `true`, ie - `['block' => true]`.
+key in the `$attributes` parameter to `true`, ie - `['block' => true]`.
 
-If you set the "type" attribute using the \$attributes parameter,
+If you set the "type" attribute using the `$attributes` parameter,
 CakePHP contains a few shortcuts:
 
 | type      | translated value       |
@@ -499,7 +499,7 @@ If you wish to override which block name is used, you can do so by setting
 not you want to include this script once per request or more than
 once. This defaults to `true`.
 
-You can use \$options to set additional properties to the
+You can use `$options` to set additional properties to the
 generated script tag. If an array of script tags is used, the
 attributes will be applied to all of the generated script tags.
 
@@ -748,7 +748,7 @@ Output:
 
 `method` Cake\\View\\Helper\\HtmlHelper::**tableHeaders**(array $names, array $trOptions = null, array $thOptions = null): string
 
-Creates a row of table header cells to be placed inside of \<table\>
+Creates a row of table header cells to be placed inside of `<table>`
 tags.
 
 ``` php
@@ -808,9 +808,9 @@ Output:
 
 `method` Cake\\View\\Helper\\HtmlHelper::**tableCells**(array $data, array $oddTrOptions = null, array $evenTrOptions = null, $useCount = false, $continueOddEven = true): string
 
-Creates table cells, in rows, assigning \<tr\> attributes differently
+Creates table cells, in rows, assigning `<tr>` attributes differently
 for odd- and even-numbered rows. Wrap a single table cell within an
-\[\] for specific \<td\>-attributes.
+`[]` for specific `<td>`-attributes.
 
 ``` php
 echo $this->Html->tableCells([

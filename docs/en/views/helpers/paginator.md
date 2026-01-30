@@ -89,7 +89,7 @@ $this->Paginator->setTemplates([
 > attention, you should prefix this character with another percentage so it
 > looks like `%%`. The reason is that internally templates are compiled to
 > be used with `sprintf()`.
-> Example: '\<div style="width:{{size}}%%"\>{{content}}\</div\>'
+> Example: `'<div style="width:{{size}}%%">{{content}}</div>'`
 
 ## Template Names
 

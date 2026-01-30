@@ -231,7 +231,7 @@ Log::warning('This is a warning', 'payments');
 As its name implies `FileLog` writes log messages to files. The level of log
 message being written determines the name of the file the message is stored in.
 If a level is not supplied, `LOG_ERR` is used which writes to the
-error log. The default log location is **logs/\$level.log**:
+error log. The default log location is **logs/`$level.log`**:
 
 ``` php
 // Executing this inside a CakePHP class
@@ -452,11 +452,11 @@ configured.
 
 `static` Cake\\Log\\Log::**setConfig**(array|string $key, $config = null): void
 
-param string \$name
+param string `$name`
 Name for the logger being connected, used
 to drop a logger later on.
 
-param array \$config
+param array `$config`
 Array of configuration information and
 constructor arguments for the logger.
 
@@ -476,7 +476,7 @@ Get the names of the configured loggers.
 
 `static` Cake\\Log\\Log::**drop**(string $name): bool
 
-param string \$name
+param string `$name`
 Name of the logger you wish to no longer receive
 messages.
 

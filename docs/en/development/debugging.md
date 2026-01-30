@@ -153,8 +153,8 @@ the order of currently running functions (stack frames).
 
 `static` Cake\\Error\\Debugger::**excerpt**($file, $line, $context): array
 
-Grab an excerpt from the file at \$path (which is an absolute
-filepath), highlights line number \$line with \$context number of
+Grab an excerpt from the file at `$path` (which is an absolute
+filepath), highlights line number `$line` with `$context` number of
 lines around it.
 
 ``` php
