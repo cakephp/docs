@@ -72,8 +72,6 @@ Save the file, then restart your console.
 > The target directory for the **cake** file will be
 > **/usr/local/etc/bash_completion.d/**.
 
-<a id="bash-completion-file-content"></a>
-
 ### Bash Completion file content
 
 This is the code you need to put inside the **cake** file in the correct location

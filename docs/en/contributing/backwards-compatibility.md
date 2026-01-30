@@ -283,8 +283,6 @@ value:
 
 Will disable runtime deprecation warnings.
 
-<a id="experimental-features"></a>
-
 ## Experimental Features
 
 Experimental features are **not included** in the above backwards compatibility

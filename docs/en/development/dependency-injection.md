@@ -725,8 +725,6 @@ class BillingServiceProvider extends ServiceProvider
 }
 ```
 
-<a id="mocking-services-in-tests"></a>
-
 ## Mocking Services in Tests
 
 In tests that use `ConsoleIntegrationTestTrait` or `IntegrationTestTrait`

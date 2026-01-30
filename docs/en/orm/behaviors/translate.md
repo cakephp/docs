@@ -481,8 +481,6 @@ Setting the language directly in the table is useful when you need to both
 retrieve and save entities for the same language or when you need to save
 multiple entities at once.
 
-<a id="saving-multiple-translations"></a>
-
 ## Saving Multiple Translations
 
 It is a common requirement to be able to add or edit multiple translations to

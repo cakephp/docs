@@ -21,8 +21,6 @@ helpers included in CakePHP, check out the chapter for each helper:
 - [Time](../views/helpers/time)
 - [Url](../views/helpers/url)
 
-<a id="configuring-helpers"></a>
-
 ## Configuring Helpers
 
 You configure helpers in CakePHP by declaring them in a view class. An `AppView`
@@ -163,8 +161,6 @@ class PostsController extends AppController
     }
 }
 ```
-
-<a id="aliasing-helpers"></a>
 
 ### Aliasing Helpers
 

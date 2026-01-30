@@ -94,8 +94,6 @@ values in your **config/app.php** file. Errors will be displayed when debug is
 `log` option to `true`. See [Configuration](../development/configuration) for more
 information.
 
-<a id="writing-to-logs"></a>
-
 ## Writing to Logs
 
 Writing to the log files can be done in two different ways. The first
@@ -170,8 +168,6 @@ exception.
 > [!NOTE]
 > When `levels` is set to an empty value in a logger's configuration, it
 > will take messages of any level.
-
-<a id="logging-scopes"></a>
 
 ### Logging Scopes
 
@@ -360,8 +356,6 @@ class DatabaseLog extends BaseLog
 CakePHP requires that all logging engine implement `Psr\Log\LoggerInterface`.
 The class `Cake\Log\Engine\BaseLog` is an easy way to satisfy the
 interface as it only requires you to implement the `log()` method.
-
-<a id="logging-formatters"></a>
 
 ## Logging Formatters
 

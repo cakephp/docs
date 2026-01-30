@@ -32,7 +32,7 @@ class ArticlesTable extends Table
 ```
 
 The simplest form of any association setup takes the table alias you want to
-associate with. By default all of the details of an association will use the
+associate with. By default, all of the details of an association will use the
 CakePHP conventions. If you want to customize how your associations are handled
 you can modify them with setters:
 
@@ -655,8 +655,6 @@ INNER JOIN articles_tags ON (
   AND article_id IN (SELECT id FROM articles)
 );
 ```
-
-<a id="using-the-through-option"></a>
 
 ### Using the 'through' Option
 

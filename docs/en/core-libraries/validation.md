@@ -4,8 +4,6 @@ The validation package in CakePHP provides features to build validators that can
 validate arbitrary arrays of data with ease. You can find a [list of available
 Validation rules in the API](https://api.cakephp.org/5.x/class-Cake.Validation.Validation.html).
 
-<a id="creating-validators"></a>
-
 ## Creating Validators
 
 `class` Cake\\Validation\\**Validator**
@@ -244,8 +242,6 @@ $validator->add('length', 'custom', [
 ]);
 ```
 
-<a id="conditional-validation"></a>
-
 ### Conditional Validation
 
 When defining validation rules, you can use the `on` key to define when
@@ -373,8 +369,6 @@ public function validationDefault(Validator $validator): Validator
 When enabled all fields will stop validation on the first failing rule instead
 of checking all possible rules. In this case only a single error message will
 appear under the form field.
-
-<a id="adding-validation-providers"></a>
 
 ### Adding Validation Providers
 

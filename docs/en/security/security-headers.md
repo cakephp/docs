@@ -1,5 +1,3 @@
-<a id="security-header-middleware"></a>
-
 # Security Header Middleware
 
 The `SecurityHeaderMiddleware` layer allows you to apply security related

@@ -30,8 +30,6 @@ $connection = ConnectionManager::get('default');
 > [!NOTE]
 > For supported databases, see [installation notes](../installation).
 
-<a id="running-select-statements"></a>
-
 ### Running Select Statements
 
 Running raw SQL queries is a breeze:
@@ -306,8 +304,6 @@ pastry_stores, and savory_cakes.
 > 'flags' => [\PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8']
 > ```
 
-<a id="read-and-write-connections"></a>
-
 ## Read and Write Connections
 
 Connections can have separate read and write roles. Read
@@ -518,8 +514,6 @@ The `nativeuuid` type was added.
 The `inet`, `cidr`, `macaddr`, and `year` types were added.
 :::
 
-<a id="datetime-type"></a>
-
 ### DateTime Type
 
 `class` Cake\\Database\\**DateTimeType**
@@ -562,8 +556,6 @@ use Cake\Database\Type\DateTimeTimezoneType;
 // Overwrite the default datetime type with a more precise one.
 TypeFactory::map('datetime', DateTimeTimezoneType::class);
 ```
-
-<a id="enum-type"></a>
 
 ### Enum Type
 
@@ -847,8 +839,6 @@ no value for the current database driver:
 - `length` The length of a column if available..
 - `precision` The precision of the column if available.
 - `scale` Can be included for SQLServer connections.
-
-<a id="mapping-custom-datatypes-to-sql-expressions"></a>
 
 ### Mapping Custom Datatypes to SQL Expressions
 
@@ -1189,8 +1179,6 @@ Log::setConfig('queries', [
 > Query logging is only intended for debugging/development uses. You should
 > never leave query logging on in production as it will negatively impact the
 > performance of your application.
-
-<a id="identifier-quoting"></a>
 
 ## Identifier Quoting
 

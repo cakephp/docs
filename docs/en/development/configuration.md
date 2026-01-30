@@ -38,8 +38,6 @@ Configure::load('app', 'default', false);
 Configure::load('other_config', 'default');
 ```
 
-<a id="environment-variables"></a>
-
 ## Environment Variables
 
 Many modern cloud providers, like Heroku, let you define environment
@@ -77,8 +75,6 @@ $debug = env('APP_DEBUG', false);
 
 The second value passed to the env function is the default value. This value
 will be used if no environment variable exists for the given key.
-
-<a id="general-configuration"></a>
 
 ### General Configuration
 
@@ -228,8 +224,6 @@ handling in CakePHP.
 
 See the [Routes Configuration](../development/routing#routes-configuration) for more information
 on configuring routing and creating routes for your application.
-
-<a id="additional-class-paths"></a>
 
 ## Additional Class Paths
 
@@ -464,8 +458,6 @@ files with that engine would fail:
 ``` php
 Configure::drop('default');
 ```
-
-<a id="loading-configuration-files"></a>
 
 ### Loading Configuration Files
 

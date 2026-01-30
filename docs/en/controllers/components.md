@@ -15,8 +15,6 @@ chapter for each component:
 - [Form Protection Component](../controllers/components/form-protection)
 - [Checking HTTP Cache](../controllers/components/check-http-cache)
 
-<a id="configuring-components"></a>
-
 ## Configuring Components
 
 Many of the core components require configuration. One example would be
@@ -151,8 +149,6 @@ class PostsController extends AppController
 ::: info Changed in version 5.1.0
 Components are able to use [Dependency Injection](../development/dependency-injection) to receive services.
 :::
-
-<a id="creating-a-component"></a>
 
 ## Creating a Component
 

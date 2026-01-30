@@ -10,8 +10,6 @@ to do just that.
 CakePHP's Hash class can be called from any model or controller in
 the same way Inflector is called. Example: `Hash::combine()`.
 
-<a id="hash-path-syntax"></a>
-
 ## Hash Path Syntax
 
 The path syntax described below is used by all the methods in `Hash`. Not all
