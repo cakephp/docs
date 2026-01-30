@@ -46,7 +46,7 @@ changes made:
 
 ### Auth
 
-- <span class="title-ref">Auth</span> has been removed. Use the [cakephp/authentication](https://book.cakephp.org/authentication/3/en/index.html) and
+- `Auth` has been removed. Use the [cakephp/authentication](https://book.cakephp.org/authentication/3/en/index.html) and
   [cakephp/authorization](https://book.cakephp.org/authorization/3/en/index.html) plugins instead.
 
 ### Cache
@@ -166,7 +166,7 @@ changes made:
 
 ### I18n
 
-- `FrozenDate` was renamed to <span class="title-ref">Date</span> and `FrozenTime` was renamed to <span class="title-ref">DateTime</span>.
+- `FrozenDate` was renamed to `Date` and `FrozenTime` was renamed to `DateTime`.
 - `Time` now extends `Cake\Chronos\ChronosTime` and is therefore immutable.
 - `Date` objects do not extend `DateTimeInterface` anymore - therefore you can't compare them with `DateTime` objects.
   See the [cakephp/chronos release documentation](https://github.com/cakephp/chronos/releases/tag/3.0.2) for more information.

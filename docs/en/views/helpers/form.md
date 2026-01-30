@@ -1127,14 +1127,14 @@ methods are described in each method's own section.)
 It's possible to use the Collection class to build your options array. This approach is ideal if you already have a
 collection of entities and would like to build a select element from them.
 
-You can use the `combine` method to build a basic options array.:
+You can use the `combine` method to build a basic options array.
 
 ``` php
 $options = $examples->combine('id', 'name');
 ```
 
 It's also possible to add extra attributes by expanding the array. The following will create a data attribute on the
-option element, using the `map` collection method.:
+option element, using the `map` collection method.
 
 ``` php
 $options = $examples->map(function ($value, $key) {
@@ -1713,7 +1713,7 @@ $fileobject->moveTo($destination);
 
 This method will generate an input tag with type "datetime-local".
 
-For example :
+For example:
 
 ``` php
 <?= $this->form->dateTime('registered') ?>
@@ -1727,7 +1727,7 @@ Output:
 
 The value for the input can be any valid datetime string or `DateTime` instance.
 
-For example :
+For example:
 
 ``` php
 <?= $this->form->dateTime('registered', ['value' => new DateTime()]) ?>
@@ -1750,7 +1750,7 @@ Output:
 
 This method will generate an input tag with type "date".
 
-For example :
+For example:
 
 ``` php
 <?= $this->form->date('registered') ?>
@@ -1773,7 +1773,7 @@ Output:
 
 This method will generate an input tag with type "time".
 
-For example :
+For example:
 
 ``` php
 echo $this->Form->time('released');
@@ -1910,7 +1910,7 @@ field errors and when necessary display customized error messages.
 
 - `$fieldName` - A field name in the form `'Modelname.fieldname'`.
 - `$text` - Optional. A string or array providing the error message(s). If an
-  array, then it should be a hash of key names =\> messages. Defaults to
+  array, then it should be a hash of key names => messages. Defaults to
   `null`.
 - `$options` - An optional array that can only contain a boolean with the key
   `'escape'`, which will define whether to HTML escape the

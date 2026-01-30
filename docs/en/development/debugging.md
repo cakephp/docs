@@ -106,7 +106,7 @@ When dumping data with `Debugger` or rendering error pages, you may want to
 hide sensitive keys like passwords or API keys. In your **config/bootstrap.php**
 you can mask specific keys:
 
-``` css
+``` php
 Debugger::setOutputMask([
     'password' => 'xxxxx',
     'awsKey' => 'yyyyy',
@@ -155,7 +155,7 @@ the order of currently running functions (stack frames).
 
 Grab an excerpt from the file at \$path (which is an absolute
 filepath), highlights line number \$line with \$context number of
-lines around it. :
+lines around it.
 
 ``` php
 pr(Debugger::excerpt(ROOT . DS . LIBS . 'debugger.php', 321, 2));

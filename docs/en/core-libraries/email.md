@@ -535,7 +535,7 @@ $mailer->setTransport(new \Cake\Mailer\Transport\DebugTransport());
 Configuration options can also be provided as a `DSN` string. This is
 useful when working with environment variables or `PaaS` providers:
 
-``` css
+``` php
 TransportFactory::setConfig('default', [
     'url' => 'smtp://my@gmail.com:secret@smtp.gmail.com:587?tls=true',
 ]);

@@ -101,7 +101,7 @@ options are:
 
 The UUID method is used to generate unique identifiers as per `4122`. The
 UUID is a 128-bit string in the format of
-`485fc381-e790-47a3-9794-1337c0a8fe68`. :
+`485fc381-e790-47a3-9794-1337c0a8fe68`.
 
 ``` php
 Text::uuid(); // 485fc381-e790-47a3-9794-1337c0a8fe68
@@ -407,7 +407,7 @@ Output:
 Extracts an excerpt from `$text` surrounding the `$phrase` with a number
 of characters on each side determined by `$radius`, and prefix/suffix with
 `$ellipsis`. This method is especially handy for search results. The query
-string or keywords can be shown within the resulting document. :
+string or keywords can be shown within the resulting document.
 
 ``` php
 // Called as TextHelper

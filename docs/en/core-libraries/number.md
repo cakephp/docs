@@ -116,7 +116,7 @@ retrieve the `intl.default_locale` ini value if set and `'en_US'` if not.
 
 This method displays a number with the specified amount of
 precision (decimal places). It will round in order to maintain the
-level of precision defined. :
+level of precision defined.
 
 ``` php
 // Called as NumberHelper
@@ -142,7 +142,7 @@ echo Number::precision(456.91873645, 2);
 Like `Cake\I18n\Number::precision()`, this method formats a number
 according to the supplied precision (where numbers are rounded to meet the
 given precision). This method also expresses the number as a percentage
-and appends the output with a percent sign. :
+and appends the output with a percent sign.
 
 ``` php
 // Called as NumberHelper. Output: 45.69%

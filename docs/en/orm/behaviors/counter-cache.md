@@ -156,7 +156,7 @@ The `CommentsArticles` is the name of the junction table classname.
 If you don't have it you should create it with the bake CLI tool.
 
 In this `src/Model/Table/CommentsArticlesTable.php` you then need to add the behavior
-with the same code as described above.:
+with the same code as described above.
 
 ``` php
 $this->addBehavior('CounterCache', [
@@ -172,7 +172,7 @@ Finally clear all caches with `bin/cake cache clear_all` and try it out.
 
 The `updateCounterCache()` method allows you to update the counter cache values
 for all records of one or all configured associations in batches. This can be useful,
-for example, to update the counter cache after importing data directly into the database.:
+for example, to update the counter cache after importing data directly into the database.
 
 ``` php
 // Update the counter cache for all configured associations

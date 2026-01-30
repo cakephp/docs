@@ -343,31 +343,31 @@ You can access existing wrappers for several SQL functions through `SelectQuery:
 Generate a random value between 0 and 1 via SQL.
 
 `sum()`
-Calculate a sum. <span class="title-ref">Assumes arguments are literal values.</span>
+Calculate a sum. `Assumes arguments are literal values.`
 
 `avg()`
-Calculate an average. <span class="title-ref">Assumes arguments are literal values.</span>
+Calculate an average. `Assumes arguments are literal values.`
 
 `min()`
-Calculate the min of a column. <span class="title-ref">Assumes arguments are literal values.</span>
+Calculate the min of a column. `Assumes arguments are literal values.`
 
 `max()`
-Calculate the max of a column. <span class="title-ref">Assumes arguments are literal values.</span>
+Calculate the max of a column. `Assumes arguments are literal values.`
 
 `count()`
-Calculate the count. <span class="title-ref">Assumes arguments are literal values.</span>
+Calculate the count. `Assumes arguments are literal values.`
 
 `cast()`
 Convert a field or expression from one data type to another.
 
 `concat()`
-Concatenate two values together. <span class="title-ref">Assumes arguments are bound parameters.</span>
+Concatenate two values together. `Assumes arguments are bound parameters.`
 
 `coalesce()`
-Coalesce values. <span class="title-ref">Assumes arguments are bound parameters.</span>
+Coalesce values. `Assumes arguments are bound parameters.`
 
 `dateDiff()`
-Get the difference between two dates/times. <span class="title-ref">Assumes arguments are bound parameters.</span>
+Get the difference between two dates/times. `Assumes arguments are bound parameters.`
 
 `now()`
 Defaults to returning date and time, but accepts 'time' or 'date' to return only

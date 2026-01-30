@@ -20,7 +20,7 @@ trivial to setup, for example:
 You can see more info here: <https://en.wikipedia.org/wiki/Cron>
 
 > [!TIP]
-> Use `-q` (or <span class="title-ref">--quiet</span>) to silence any output for cronjobs.
+> Use `-q` (or `--quiet`) to silence any output for cronjobs.
 
 ## Cron Jobs on Shared Hosting
 

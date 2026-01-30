@@ -14,7 +14,7 @@ truncating long stretches of text.
 
 Adds links to the well-formed email addresses in \$text, according
 to any options defined in `$options` (see
-`HtmlHelper::link()`). :
+`HtmlHelper::link()`).
 
 ``` php
 $myText = 'For more information regarding our world-famous ' .
@@ -67,7 +67,7 @@ Further options:
 `method` Cake\\View\\Helper\\TextHelper::**autoParagraph**(string $text): string
 
 Adds proper \<p\> around text where double-line returns are found, and \<br\> where
-single-line returns are found. :
+single-line returns are found.
 
 ``` php
 $myText = 'For more information

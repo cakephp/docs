@@ -325,8 +325,8 @@ public function foo($array)
 ### Anonymous Functions (Closures)
 
 Defining anonymous functions follows the [PSR-12](https://www.php-fig.org/psr/psr-12/) coding style guide, where they are
-declared with a space after the <span class="title-ref">function</span> keyword, and a space before and after
-the <span class="title-ref">use</span> keyword:
+declared with a space after the `function` keyword, and a space before and after
+the `use` keyword:
 
 ``` php
 $closure = function ($arg1, $arg2) use ($var1, $var2) {
@@ -507,7 +507,7 @@ The short echo tag (`<?=`) is always available regardless of the `short_open_tag
 
 Write all functions in camelBack:
 
-``` javascript
+``` php
 function longFunctionName()
 {
 }

@@ -76,7 +76,7 @@ The `separator` option was added.
 `method` Cake\\Console\\ConsoleOptionParser::**addArguments**(array $args): static
 
 If you have an array with multiple arguments you can use
-`$parser->addArguments()` to add multiple arguments at once. :
+`$parser->addArguments()` to add multiple arguments at once.
 
 ``` php
 $parser->addArguments([
@@ -167,7 +167,7 @@ The `separator` option was added.
 `method` Cake\\Console\\ConsoleOptionParser::**addOptions**(array $options): static
 
 If you have an array with multiple options you can use `$parser->addOptions()`
-to add multiple options at once. :
+to add multiple options at once.
 
 ``` php
 $parser->addOptions([

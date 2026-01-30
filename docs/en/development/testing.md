@@ -2042,7 +2042,7 @@ would be:
 ## Creating Tests for Plugins
 
 Tests for plugins are created in their own directory inside the plugins
-folder. :
+folder.
 
     /src
     /plugins

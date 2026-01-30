@@ -381,7 +381,7 @@ You can use this same approach to bind listener objects.
 ### Interacting with Existing Listeners
 
 Assuming several event listeners have been registered the presence or absence
-of a particular event pattern can be used as the basis of some action.:
+of a particular event pattern can be used as the basis of some action.
 
 ``` php
 // Attach listeners to EventManager.
@@ -469,8 +469,8 @@ $this->getEventManager()
 The listeners of the `View.afterRender` callback should have the following
 signature:
 
-``` javascript
-function (EventInterface $event, $viewFileName)
+``` php
+function (EventInterface $event, string $fileName)
 ```
 
 Each value provided to the Event constructor will be converted into function

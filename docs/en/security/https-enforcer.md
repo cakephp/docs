@@ -24,7 +24,7 @@ $https = new HttpsEnforcerMiddleware([
     'headers' => ['X-Https-Upgrade' => 1],
 ]);
 
-// Disable HTTPs enforcement when ``debug`` is on.
+// Disable HTTPs enforcement when `debug` is on.
 $https = new HttpsEnforcerMiddleware([
     'disableOnDebug' => true,
 ]);

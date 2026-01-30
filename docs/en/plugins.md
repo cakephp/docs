@@ -253,7 +253,7 @@ basic directory structure. It should look like this:
                 /Fixture
             /webroot
 
-Note the name of the plugin folder, '\*\*ContactManager\*\*'. It is important
+Note the name of the plugin folder, '**ContactManager**'. It is important
 that this folder has the same name as the plugin.
 
 Inside the plugin folder, you'll notice it looks a lot like a CakePHP
@@ -773,15 +773,9 @@ Do **not** use the CakePHP namespace (cakephp) as this is reserved to CakePHP
 owned plugins. The convention is to use lowercase letters and dashes as separator.
 
 So if you created a plugin "Logging" with your GitHub account "FooBar", a good
-name would be <span class="title-ref">foo-bar/cakephp-logging</span>.
-And the CakePHP owned "Localized" plugin can be found under <span class="title-ref">cakephp/localized</span>
+name would be `foo-bar/cakephp-logging`.
+And the CakePHP owned "Localized" plugin can be found under `cakephp/localized`
 respectively.
-
-<div class="index">
-
-vendor/cakephp-plugins.php
-
-</div>
 
 ## Plugin Map File
 

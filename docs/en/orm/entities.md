@@ -219,7 +219,7 @@ echo $article->get('title'); // returns FOO instead of foo
 > [!NOTE]
 > Code in your accessors is executed each time you reference the field. You can
 > use a local variable to cache it if you are performing a resource-intensive
-> operation in your accessor like this: <span class="title-ref">\$myEntityProp = \$entity-\>my_property</span>.
+> operation in your accessor like this: `$myEntityProp = $entity->my_property`.
 
 > [!WARNING]
 > Accessors will be used when saving entities, so be careful when defining methods
@@ -317,7 +317,7 @@ $article->isDirty('title');
 
 You can also flag fields as being modified. This is handy when appending into
 array fields as this wouldn't automatically mark the field as dirty, only
-exchanging completely would.:
+exchanging completely would.
 
 ``` php
 // Add a comment and mark the field as changed.

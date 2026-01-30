@@ -94,7 +94,7 @@ The Plugin will handle the authentication process using 3 different classes:
   this is before your Controllers are processed by the framework, and will pick the
   credentials and process them to check if the user is authenticated.
 
-If you remember, we used <span class="title-ref">AuthComponent</span>
+If you remember, we used `AuthComponent`
 before to handle all these steps. Now the logic is divided into specific classes and
 the authentication process happens before your controller layer. First it checks if the user
 is authenticated (based on the configuration you provided) and injects the user and

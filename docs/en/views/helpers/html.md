@@ -43,7 +43,7 @@ Will output:
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 ```
 
-Alternatively, :
+Alternatively:
 
 ``` php
 echo $this->Html->charset('ISO-8859-1');
@@ -69,7 +69,7 @@ will be appended to. By default it will append to the `css` block.
 If key 'rel' in `$options` array is set to 'import' the stylesheet will be imported.
 
 This method of CSS inclusion assumes that the CSS file specified
-resides inside the **webroot/css** directory if path doesn't start with a '/'. :
+resides inside the **webroot/css** directory if path doesn't start with a '/'.
 
 ``` php
 echo $this->Html->css('forms');
@@ -81,7 +81,7 @@ Will output:
 <link rel="stylesheet" href="/css/forms.css" />
 ```
 
-The first parameter can be an array to include multiple files. :
+The first parameter can be an array to include multiple files.
 
 ``` php
 echo $this->Html->css(['forms', 'tables', 'menu']);
@@ -117,7 +117,7 @@ echo $this->Html->css('Blog.common.css', ['plugin' => false]);
 
 Builds CSS style definitions based on the keys and values of the
 array passed to the method. Especially handy if your CSS file is
-dynamic. :
+dynamic.
 
 ``` php
 echo $this->Html->style([
@@ -235,7 +235,7 @@ The `csrfToken` type was added.
 `method` Cake\\View\\Helper\\HtmlHelper::**image**(string $path, array $options = []): string
 
 Creates a formatted image tag. The path supplied should be relative
-to **webroot/img/**. :
+to **webroot/img/**.
 
 ``` php
 echo $this->Html->image('cake_logo.png', ['alt' => 'CakePHP']);
@@ -248,7 +248,7 @@ Will output:
 ```
 
 To create an image link specify the link destination using the
-`url` option in `$attributes`. :
+`url` option in `$attributes`.
 
 ``` php
 echo $this->Html->image("recipes/6.jpg", [
@@ -294,7 +294,7 @@ and also wanted to include **webroot/img/Blog.icon.png**, you would:
 echo $this->Html->image('Blog.icon.png', ['plugin' => false]);
 ```
 
-If you would like the prefix of the URL to not be `/img`, you can override this setting by specifying the prefix in the `$options` array :
+If you would like the prefix of the URL to not be `/img`, you can override this setting by specifying the prefix in the `$options` array:
 
 ``` php
 echo $this->Html->image("logo.png", ['pathPrefix' => '']);
@@ -312,7 +312,7 @@ Will output:
 
 General purpose method for creating HTML links. Use `$options` to
 specify attributes for the element and whether or not the
-`$title` should be escaped. :
+`$title` should be escaped.
 
 ``` php
 echo $this->Html->link(
@@ -365,7 +365,7 @@ Will output:
 </a>
 ```
 
-Query strings can also be created with `link()`. :
+Query strings can also be created with `link()`.
 
 ``` php
 echo $this->Html->link('View image', [
@@ -384,7 +384,7 @@ Will output:
 
 HTML special characters in `$title` will be converted to HTML
 entities. To disable this conversion, set the escape option to
-`false` in the `$options` array. :
+`false` in the `$options` array.
 
 ``` php
 echo $this->Html->link(
@@ -404,7 +404,7 @@ Will output:
 
 Setting `escape` to `false` will also disable escaping of attributes of the
 link. You can use the option `escapeTitle` to disable just
-escaping of title and not the attributes. :
+escaping of title and not the attributes.
 
 ``` php
 echo $this->Html->link(
@@ -536,7 +536,7 @@ Will output:
 <script src="https://code.jquery.com/jquery.min.js"></script>
 ```
 
-The first parameter can be an array to include multiple files. :
+The first parameter can be an array to include multiple files.
 
 ``` php
 echo $this->Html->script(['jquery', 'wysiwyg', 'scripts']);
@@ -643,7 +643,7 @@ Support for `script` tags inside `scriptStart()`/`scriptEnd()` was added.
 
 `method` Cake\\View\\Helper\\HtmlHelper::**importmap(array $map, array $options = []): string**()
 
-Creates an <span class="title-ref">importmap</span> script tag for your JavaScript files:
+Creates an `importmap` script tag for your JavaScript files:
 
 ``` php
 // In the head tag of your layout
@@ -749,7 +749,7 @@ Output:
 `method` Cake\\View\\Helper\\HtmlHelper::**tableHeaders**(array $names, array $trOptions = null, array $thOptions = null): string
 
 Creates a row of table header cells to be placed inside of \<table\>
-tags. :
+tags.
 
 ``` php
 echo $this->Html->tableHeaders(['Date', 'Title', 'Active']);
@@ -810,7 +810,7 @@ Output:
 
 Creates table cells, in rows, assigning \<tr\> attributes differently
 for odd- and even-numbered rows. Wrap a single table cell within an
-\[\] for specific \<td\>-attributes. :
+\[\] for specific \<td\>-attributes.
 
 ``` php
 echo $this->Html->tableCells([

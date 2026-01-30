@@ -1,5 +1,3 @@
-orphan  
-
 # Contents
 
 - [CakePHP at a Glance](intro)
@@ -48,7 +46,3 @@ orphan
 - [Migrations](migrations)
 - [ElasticSearch](elasticsearch)
 - [Appendices](appendices)
-
-<div class="todolist">
-
-</div>

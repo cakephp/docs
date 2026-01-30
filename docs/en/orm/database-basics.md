@@ -170,7 +170,7 @@ ConnectionManager::setConfig('default', [
 Configuration options can also be provided as a `DSN` string. This is
 useful when working with environment variables or `PaaS` providers:
 
-``` css
+``` php
 ConnectionManager::setConfig('default', [
     'url' => 'mysql://my_app:sekret@localhost/my_app?encoding=utf8&timezone=UTC&cacheMetadata=true',
 ]);
@@ -434,9 +434,9 @@ as some might expect). This is because decimal types are used to represent
 exact numeric values in databases and using float type for them in PHP can
 potentially lead to precision loss.
 
-If you want the values to be <span class="title-ref">float</span> in your PHP code then consider using
-<span class="title-ref">FLOAT</span> or <span class="title-ref">DOUBLE</span> type columns in your database. Also, depending on your use
-case you can explicitly map your decimal columns to <span class="title-ref">float</span> type in your table
+If you want the values to be `float` in your PHP code then consider using
+`FLOAT` or `DOUBLE` type columns in your database. Also, depending on your use
+case you can explicitly map your decimal columns to `float` type in your table
 schema.
 
 boolean

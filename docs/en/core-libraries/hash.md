@@ -64,7 +64,7 @@ a matching path is not found the default value will be returned.
 [Hash Path Syntax](#hash-path-syntax). You can use extract to retrieve data from arrays
 or object implementing `ArrayAccess` interface, along arbitrary paths
 quickly without having to loop through the data structures. Instead you
-use path expressions to qualify which elements you want returned :
+use path expressions to qualify which elements you want returned:
 
 ``` php
 // Common Usage:
@@ -777,8 +777,7 @@ $result = Hash::diff($a, $b);
 This function merges two arrays and pushes the differences in
 data to the bottom of the resultant array.
 
-**Example 1**
-:
+**Example 1:**
 
 ``` php
 $array1 = ['ModelOne' => ['id' => 1001, 'field_one' => 'a1.m1.f1', 'field_two' => 'a1.m1.f2']];
@@ -797,8 +796,7 @@ $res = Hash::mergeDiff($array1, $array2);
 */
 ```
 
-**Example 2**
-:
+**Example 2:**
 
 ``` php
 $array1 = ["a" => "b", 1 => 20938, "c" => "string"];

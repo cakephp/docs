@@ -5,12 +5,6 @@ responses. The request object in CakePHP allows you to introspect an incoming
 request, while the response object allows you to effortlessly create HTTP
 responses from your controllers.
 
-<div class="index">
-
-\$this-\>request
-
-</div>
-
 <a id="cake-request"></a>
 
 ## Request
@@ -474,8 +468,8 @@ There are several built-in detectors that you can use:
 - `is('ssl')` Check to see whether the request is via SSL.
 - `is('flash')` Check to see whether the request has a User-Agent of Flash.
 - `is('json')` Check to see whether the request URL has 'json' extension or the
-  <span class="title-ref">Accept</span> header is set to 'application/json'.
-- `is('xml')` Check to see whether the request URL has 'xml' extension or the <span class="title-ref">Accept</span> header is set to
+  `Accept` header is set to 'application/json'.
+- `is('xml')` Check to see whether the request URL has 'xml' extension or the `Accept` header is set to
   'application/xml' or 'text/xml'.
 
 `ServerRequest` also includes methods like
@@ -706,12 +700,6 @@ $query = $uri->getQuery();
 $host = $uri->getHost();
 ```
 
-<div class="index">
-
-\$this-\>response
-
-</div>
-
 ## Response
 
 `class` Cake\\Http\\**Response**
@@ -772,7 +760,7 @@ public function sendFile($id)
 
 As shown in the above example, you must pass the file path to the method.
 CakePHP will send a proper content type header if it's a known file type listed
-in <span class="title-ref">CakeHttpResponse::\$\_mimeTypes</span>. You can add new types prior to calling
+in `Cake\Http\Response::$_mimeTypes`. You can add new types prior to calling
 `Cake\Http\Response::withFile()` by using the
 `Cake\Http\Response::withType()` method.
 
@@ -1118,7 +1106,7 @@ $response = $this->response->withVary('Accept-Language');
 
 Compares the cache headers for the request object with the cache header from the
 response and determines whether it can still be considered fresh. If so, deletes
-the response content, and sends the <span class="title-ref">304 Not Modified</span> header:
+the response content, and sends the `304 Not Modified` header:
 
 ``` php
 // In a controller action.

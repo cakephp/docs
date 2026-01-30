@@ -260,7 +260,7 @@ public function findTagged(SelectQuery $query, array $tags = []): SelectQuery
         ->select($columns)
         ->distinct($columns);
 
-    if (empty($tags)) {
+    if (!$tags) {
         // If there are no tags provided, find articles that have no tags.
         $query->leftJoinWith('Tags')
             ->where(['Tags.title IS' => null]);
@@ -357,7 +357,7 @@ protected function _getTagString()
     if (isset($this->_fields['tag_string'])) {
         return $this->_fields['tag_string'];
     }
-    if (empty($this->tags)) {
+    if (!$this->tags) {
         return '';
     }
     $tags = new Collection($this->tags);

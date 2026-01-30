@@ -1,5 +1,3 @@
-orphan  
-
 # Contents
 
 - [CakePHP at a Glance](intro)

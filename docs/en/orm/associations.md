@@ -767,7 +767,7 @@ This enables property chains to related tables in the following way:
 $this->MyTableOne->MyTableTwo->find()->...;
 ```
 
-Association properties on entities do not use CamelCase conventions though. Instead for a hasOne/belongsTo relation like "User belongsTo Roles", you would get a <span class="title-ref">role</span> property instead of <span class="title-ref">Role</span> or \`Roles\`:
+Association properties on entities do not use CamelCase conventions though. Instead for a hasOne/belongsTo relation like "User belongsTo Roles", you would get a `role` property instead of `Role` or `Roles`:
 
 ``` php
 // A single entity (or null if not available)

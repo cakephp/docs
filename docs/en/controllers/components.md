@@ -249,7 +249,7 @@ The above would pass the array containing precision and randomGenerator to
 ### Using Other Components in your Component
 
 Sometimes one of your components may need to use another component.
-You can load other components by adding them to the <span class="title-ref">\$components</span> property:
+You can load other components by adding them to the `$components` property:
 
 ``` php
 // src/Controller/Component/CustomComponent.php

@@ -174,7 +174,7 @@ elements and URLs for pagination.
 ### Paginating the Same Model multiple Times
 
 To paginate the same model multiple times within a single controller action you
-need to define an alias for the model.:
+need to define an alias for the model.
 
 ``` php
 // In a controller action
@@ -387,7 +387,7 @@ public function index()
 
 ## Using a paginator class directly
 
-You can also use a paginator directly.:
+You can also use a paginator directly.
 
 ``` php
 // Create a paginator

@@ -33,7 +33,7 @@ if ($articlesTable->save($article)) {
 
 ### Updating Data
 
-Updating your data is achieved by using the `save()` method :
+Updating your data is achieved by using the `save()` method:
 
 ``` php
 use Cake\ORM\Locator\LocatorAwareTrait;

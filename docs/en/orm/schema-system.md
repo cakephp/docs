@@ -60,8 +60,8 @@ the existing features available in Schema files + the fixture schema in 2.x.
 
 ### Accessing Column Data
 
-Columns are either added as constructor arguments, or via <span class="title-ref">addColumn()</span>. Once
-fields are added information can be fetched using <span class="title-ref">column()</span> or \`columns()\`:
+Columns are either added as constructor arguments, or via `addColumn()`. Once
+fields are added information can be fetched using `column()` or `columns()`:
 
 ``` php
 // Get the array of data about a column

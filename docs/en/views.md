@@ -308,7 +308,7 @@ $this->append('sidebar', $this->element('sidebar/popular_topics'));
 If you need to clear or overwrite a block there are a couple of alternatives.
 The `reset()` method will clear or overwrite a block at any time. The
 `assign()` method with an empty content string can also be used to clear the
-specified block.:
+specified block.
 
 ``` php
 // Clear the previous content from the sidebar block.

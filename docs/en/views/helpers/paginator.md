@@ -225,11 +225,11 @@ Supported options are:
 - `last` Whether you want last links generated, set to an integer to define
   the number of 'last' links to generate. Defaults to `false`. Follows the same
   logic as the `first` option. There is a
-  `~PaginatorHelper::last()` method to be used separately as well if
+  `PaginatorHelper::last()` method to be used separately as well if
   you wish.
 
 While this method allows a lot of customization for its output. It is
-also ok to just call the method without any parameters. :
+also ok to just call the method without any parameters.
 
 ``` php
 echo $this->Paginator->numbers();
@@ -343,7 +343,7 @@ echo $this->Paginator->counter('range');
 `method` Cake\\View\\Helper\\PaginatorHelper::**generateUrl**(array $options = [], ?string $model = null, array $url = [], array $urlOptions = []): string
 
 By default returns a full pagination URL string for use in non-standard contexts
-(i.e. JavaScript). :
+(i.e. JavaScript).
 
 ``` php
 // Generates a URL similar to: /articles?sort=title&page=2

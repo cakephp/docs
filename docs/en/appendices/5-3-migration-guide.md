@@ -119,7 +119,7 @@ If you are not running on **PHP 8.2 or higher**, you will need to upgrade PHP be
 ### Core
 
 - Added `Configure` attribute to support injecting `Configure` values into
-  constructor arguments. See ref:\`configure-dependency-injection\`.
+  constructor arguments. See [Configure Dependency Injection](../development/dependency-injection#configure-dependency-injection).
 
 ### Database
 

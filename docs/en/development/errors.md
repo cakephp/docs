@@ -328,12 +328,6 @@ $middlewareQueue->add(new ErrorHandlerMiddleware(
 // ...
 ```
 
-<div class="index">
-
-application exceptions
-
-</div>
-
 ## Creating your own Application Exceptions
 
 You can create your own application exceptions using any of the built in [SPL
@@ -455,7 +449,7 @@ use Cake\Http\Exception\NotFoundException;
 public function view($id = null)
 {
     $article = $this->Articles->findById($id)->first();
-    if (empty($article)) {
+    if (!$article) {
         throw new NotFoundException(__('Article not found'));
     }
     $this->set('article', $article);
@@ -477,7 +471,7 @@ use Cake\Network\Exception\NotFoundException;
 public function view($id = null)
 {
     $article = $this->Articles->findById($id)->first();
-    if (empty($article)) {
+    if (!$article) {
         throw new NotFoundException(__('Article not found'));
     }
     $this->set('article', 'article');

@@ -336,7 +336,7 @@ Log::setConfig('otherFile', [
 
 When configuring a log engine the `className` parameter is used to
 locate and load the log handler. All of the other configuration
-properties are passed to the log engine's constructor as an array. :
+properties are passed to the log engine's constructor as an array.
 
 ``` php
 namespace App\Log\Engine;
@@ -493,12 +493,12 @@ Write a message into all the configured loggers.
 
 `static` Cake\\Log\\Log::**levels**(): array
 
-Call this method without arguments, eg: <span class="title-ref">Log::levels()</span> to obtain current
+Call this method without arguments, eg: `Log::levels()` to obtain current
 level configuration.
 
 ### Convenience Methods
 
-The following convenience methods were added to log <span class="title-ref">\$message</span> with the
+The following convenience methods were added to log `$message` with the
 appropriate log level.
 
 #### Log::emergency()

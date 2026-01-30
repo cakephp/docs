@@ -54,7 +54,7 @@ A generic term used to describe both entity properties, or database
 columns. Often used in conjunction with the FormHelper.
 
 HTML attributes
-An array of key =\> values that are composed into HTML attributes. For example:
+An array of key => values that are composed into HTML attributes. For example:
 
 ``` php
 // Given

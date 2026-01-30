@@ -107,7 +107,7 @@ msgstr "J'ai {0,number} ans"
 
 ### Extract Pot Files with I18n Shell
 
-To create the pot files from <span class="title-ref">\_\_()</span> and other internationalized types of
+To create the pot files from `__()` and other internationalized types of
 messages that can be found in the application code, you can use the i18n command.
 Please read the [following chapter](../console-commands/i18n) to
 learn more.
@@ -368,7 +368,7 @@ use the ICU matching aliases. Instead of writing:
 
 You can do:
 
-``` css
+``` text
 zero{No Results} one{One result} few{...} many{...} other{...}
 ```
 

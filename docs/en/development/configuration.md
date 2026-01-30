@@ -6,18 +6,6 @@ to configure a few things like your database credentials.
 Additionally, there are optional configuration options that allow you to swap
 out default values & implementations with ones tailored to your application.
 
-<div class="index">
-
-app.php, app_local.example.php
-
-</div>
-
-<div class="index">
-
-configuration
-
-</div>
-
 ## Configuring your Application
 
 Configuration is generally stored in either PHP or INI files, and loaded during
@@ -120,7 +108,7 @@ files too.
 App.base
 The base directory the app resides in. If `false` this
 will be auto detected. If not `false`, ensure your string starts
-with a <span class="title-ref">/</span> and does NOT end with a <span class="title-ref">/</span>. For example, <span class="title-ref">/basedir</span> is a valid
+with a `/` and does NOT end with a `/`. For example, `/basedir` is a valid
 App.base.
 
 App.encoding
@@ -140,7 +128,7 @@ root. This is used when generating absolute URLs. By default this value
 is generated using the `$_SERVER` environment. However, you should define it
 manually to optimize performance or if you are concerned about people
 manipulating the `Host` header.
-In a CLI context (from command) the <span class="title-ref">fullBaseUrl</span> cannot be read from \$\_SERVER,
+In a CLI context (from command) the `fullBaseUrl` cannot be read from $_SERVER,
 as there is no webserver involved. You do need to specify it yourself if
 you do need to generate URLs from a shell (for example, when sending emails).
 
@@ -497,7 +485,7 @@ the existing runtime configuration. By setting `$merge` to `true`, values
 will not ever overwrite the existing configuration.
 
 > [!WARNING]
-> When merging configuration files with <span class="title-ref">\$merge = true</span>, dot notation in keys is
+> When merging configuration files with `$merge = true`, dot notation in keys is
 > not expanded:
 >
 > ``` php

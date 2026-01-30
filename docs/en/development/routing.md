@@ -11,12 +11,6 @@ of parameters can be transformed into a URL string. By using reverse routing,
 you can re-factor your application's URL structure without having to update all
 your code.
 
-<div class="index">
-
-routes.php
-
-</div>
-
 ## Quick Tour
 
 This section will teach you by example the most common uses of the CakePHP
@@ -112,18 +106,6 @@ The above route would match `/blog/` and send it to
 
 The application skeleton comes with a few routes to get you started. Once you've
 added your own routes, you can remove the default routes if you don't need them.
-
-<div class="index">
-
-{controller}, {action}, {plugin}
-
-</div>
-
-<div class="index">
-
-greedy star, trailing star
-
-</div>
 
 <a id="routes-configuration"></a>
 
@@ -436,7 +418,7 @@ CakePHP, and should not be used unless you want the special meaning
 - `_base` Set to `false` to remove the base path from the generated URL. If
   your application is not in the root directory, this can be used to generate
   URLs that are 'cake relative'.
-- `_scheme` Set to create links on different schemes like <span class="title-ref">webcal</span> or <span class="title-ref">ftp</span>.
+- `_scheme` Set to create links on different schemes like `webcal` or `ftp`.
   Defaults to the current scheme.
 - `_host` Set the host to use for the link. Defaults to the current host.
 - `_port` Set the port if you need to create links on non-standard ports.
@@ -697,12 +679,6 @@ Router::url(['_name' => 'contacts:api:ping']);
 Routes connected in named scopes will only have names added if the route is also
 named. Nameless routes will not have the `_namePrefix` applied to them.
 
-<div class="index">
-
-admin routing, prefix routing
-
-</div>
-
 <a id="prefix-routing"></a>
 
 ### Prefix Routing
@@ -819,12 +795,6 @@ echo $this->Html->link(
     ['prefix' => false, 'controller' => 'Articles', 'action' => 'view', 5],
 );
 ```
-
-<div class="index">
-
-plugin routing
-
-</div>
 
 ### Creating Links to Prefix Routes
 
@@ -1014,12 +984,6 @@ echo Router::url([
     '_host' => 'images.example.com',
 ]);
 ```
-
-<div class="index">
-
-file extensions
-
-</div>
 
 <a id="file-extensions"></a>
 
@@ -1306,7 +1270,7 @@ $routes->resources('Articles', [
 ```
 
 In addition to the default routes, this would also connect a route for
-<span class="title-ref">/articles/delete-all</span>. By default the path segment will match the key name. You
+`/articles/delete-all`. By default the path segment will match the key name. You
 can use the 'path' key inside the resource definition to customize the path
 name:
 
@@ -1383,19 +1347,13 @@ $routes->scope('/', function (RouteBuilder $routes) {
 });
 ```
 
-<div class="index">
-
-passed arguments
-
-</div>
-
 <a id="passed-arguments"></a>
 
 ## Passed Arguments
 
 Passed arguments are additional arguments or path segments that are
 used when making a request. They are often used to pass parameters
-to your controller methods. :
+to your controller methods.
 
     http://localhost/calendars/view/recent/mark
 

@@ -302,7 +302,7 @@ virtual fields in the results of `find(list)`.
 ### Customize Key-Value Output
 
 Lastly it is possible to use closures to access entity accessor methods in your
-list finds. :
+list finds.
 
 ``` php
 // In your Authors Entity create a virtual field to be used as the displayField:
@@ -314,7 +314,7 @@ protected function _getLabel()
 ```
 
 This example shows using the `_getLabel()` accessor method from
-the Author entity. :
+the Author entity.
 
 ``` php
 // In your finders/controller:
@@ -327,7 +327,7 @@ $query = $articles->find('list',
     ->contain('Authors');
 ```
 
-You can also fetch the label in the list directly using. :
+You can also fetch the label in the list directly using.
 
 ``` php
 // In AuthorsTable::initialize():
@@ -1108,7 +1108,7 @@ $row = $result->skip(4)->first();
 ### Checking if a ResultSet is Empty
 
 You can use the `isEmpty()` method on a ResultSet object to see if it
-has any rows in it.:
+has any rows in it.
 
 ``` php
 // Check results
