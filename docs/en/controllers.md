@@ -283,7 +283,7 @@ namespace App\Controller;
 
 class PostsController extends AppController
 {
-    public function my_action()
+    public function myAction()
     {
         return $this->render('custom_file');
     }
