@@ -727,10 +727,12 @@ such as a where condition by designating the through table name before the field
 you are filtering on:
 
 ``` php
-$query = $this->find(
-        'list',
-        valueField: 'studentFirstName', order: 'students.id',
-    )
+// In a StudentsTable method or controller action.
+$query = $this->Students->find(
+    'list',
+    valueField: 'first_name',
+    order: 'Students.id',
+)
     ->contain(['Courses'])
     ->matching('Courses')
     ->where(['CoursesMemberships.grade' => 'B']);
