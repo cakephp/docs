@@ -506,7 +506,7 @@ will not ever overwrite the existing configuration.
 
 Dumps all or some of the data in Configure into a file or storage system
 supported by a config engine. The serialization format is decided by the config
-engine attached as \$config. For example, if the 'default' engine is
+engine attached as `$config`. For example, if the 'default' engine is
 a `Cake\Core\Configure\Engine\PhpConfig`, the generated file will be
 a PHP configuration file loadable by the
 `Cake\Core\Configure\Engine\PhpConfig`

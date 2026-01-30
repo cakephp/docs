@@ -61,7 +61,7 @@ scheme:
 |------------|-------------------------------------|
 | EUR        | €1.234,56                           |
 | GBP        | £1,234.56                           |
-| USD        | \$1,234.56                          |
+| USD        | $1,234.56                           |
 
 The third parameter is an array of options for further defining the
 output. The following options are available:

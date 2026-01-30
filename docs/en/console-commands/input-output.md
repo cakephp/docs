@@ -405,6 +405,6 @@ no styling is done at all. There are three modes you can use.
   This is a good mode to use if you are outputting XML or, want to debug why
   your styling isn't working.
 
-By default, on \*nix systems ConsoleOutput objects default to color output.
+By default, on *nix systems ConsoleOutput objects default to color output.
 On Windows systems, plain output is the default unless the `ANSICON`
 environment variable is present.

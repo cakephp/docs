@@ -58,7 +58,7 @@ grouping of translation messages. When no group is used, then the default group
 is selected.
 
 The core strings messages extracted from the CakePHP library can be stored
-separately in a file named **cake.po** in **resources/locales/**.
+separately in a file named **cake.po** in `resources/locales/`.
 The [CakePHP localized library](https://github.com/cakephp/localized) houses
 translations for the client-facing translated strings in the core (the cake
 domain). To use these files, link or copy them into their expected location:

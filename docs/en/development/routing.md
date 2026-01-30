@@ -109,7 +109,9 @@ added your own routes, you can remove the default routes if you don't need them.
 
 <a id="routes-configuration"></a>
 
-## Connecting Routes<span id="connecting-routes"></span>
+<a id="connecting-routes"></a>
+
+## Connecting Routes
 
 To keep your code `DRY` you should use 'routing scopes'. Routing
 scopes not only let you keep your code DRY, they also help Router optimize its
@@ -144,9 +146,9 @@ $routes->connect(
 
 The first parameter is used to tell the router what sort of URL you're trying to
 control. The URL is a normal slash delimited string, but can also contain
-a wildcard (\*) or [Route Elements](#route-elements). Using a wildcard tells the router
+a wildcard (*) or [Route Elements](#route-elements). Using a wildcard tells the router
 that you are willing to accept any additional arguments supplied. Routes without
-a \* only match the exact template pattern supplied.
+a * only match the exact template pattern supplied.
 
 Once you've specified a URL, you use the last two parameters of `connect()` to
 tell CakePHP what to do with a request once it has been matched. The second
@@ -1453,7 +1455,7 @@ array elements.
 
 ### Using `Router::url()`
 
-`Router::url()` allows you to use `routing arrays <routing array>` in
+`Router::url()` allows you to use routing arrays in
 situations where the array elements required are fixed or easily deduced.
 
 It will provide reverse routing when the destination url is well defined:

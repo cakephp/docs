@@ -567,7 +567,7 @@ The `ArticlesController` can also be built with `bake`:
 bin/cake bake controller articles
 ```
 
-However, this does not build the **templates/Articles/\*.php** files.
+However, this does not build the **templates/Articles/*.php** files.
 :::
 
 With a basic articles management setup, we'll create the [basic actions

@@ -13,7 +13,7 @@ generate related files.
 
 The CakePHP Console uses a dispatcher-type system to load commands, parse
 their arguments and invoke the correct command. While the examples below use
-bash the CakePHP console is compatible with any \*nix shell and windows.
+bash the CakePHP console is compatible with any *nix shell and windows.
 
 A CakePHP application contains **src/Command** directory that contain its commands.
 It also comes with an executable in the **bin** directory:

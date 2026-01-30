@@ -80,8 +80,11 @@ After saving this file, you should be able to run the following command:
 
 ``` bash
 bin/cake hello jillian
+```
 
-# Outputs
+This outputs:
+
+```
 Hello jillian
 ```
 
@@ -277,7 +280,9 @@ This will show your description in the Cake CLI:
 
 ``` bash
 bin/cake
+```
 
+```
 App:
   - user
   └─── My custom description
@@ -287,6 +292,9 @@ As well as in the help section of your command:
 
 ``` bash
 cake user --help
+```
+
+```
 My custom description
 
 Usage:

@@ -489,7 +489,9 @@ class ArticlesTable extends Table
 
 <a id="table-locator-usage"></a>
 
-## Using the TableLocator<span id="table-registry-usage"></span>
+<a id="table-registry-usage"></a>
+
+## Using the TableLocator
 
 `class` Cake\\ORM\\**TableLocator**
 

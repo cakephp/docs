@@ -526,7 +526,7 @@ $mailer->setTransport(new \Cake\Mailer\Transport\DebugTransport());
 > account](https://support.google.com/accounts/answer/6010255).
 
 > [!NOTE]
->   [Gmail SMTP settings](https://support.google.com/a/answer/176600?hl=en).
+> [Gmail SMTP settings](https://support.google.com/a/answer/176600?hl=en).
 
 > [!NOTE]
 > To use SSL + SMTP, you will need to have the SSL configured in your PHP

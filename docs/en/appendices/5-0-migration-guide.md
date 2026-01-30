@@ -259,7 +259,7 @@ The above will disable creation of entity objects and return rows as arrays inst
   tests.
 - Previously, most data validation error messages were simply `The provided value is invalid`.
   Now, the data validation error messages are worded more precisely.
-  For example, `` The provided value must be greater than or equal to \`5\ ``\`.
+  For example, ``The provided value must be greater than or equal to `5`.``
 
 ### View
 
