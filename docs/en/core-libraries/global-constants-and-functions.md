@@ -14,7 +14,7 @@ ways to point to certain files or directories in your CakePHP application.
 
 Here are CakePHP's globally available functions. Most of them are just
 convenience wrappers for other CakePHP functionality, such as debugging and
-translating content. By default only namespaced functions are autoloaded,
+translating content. By default, only namespaced functions are autoloaded,
 however you can optionally load global aliases by adding:
 
 ``` php

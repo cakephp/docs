@@ -384,7 +384,7 @@ or a SQL dump file.
 
 ### Test Connections
 
-By default CakePHP will alias each connection in your application. Each
+By default, CakePHP will alias each connection in your application. Each
 connection defined in your application's bootstrap that does not start with
 `test_` will have a `test_` prefixed alias created. Aliasing connections
 ensures, you don't accidentally use the wrong connection in test cases.
@@ -738,7 +738,7 @@ public function getFixtures(): array
 
 ### Fixture State Managers
 
-By default CakePHP resets fixture state at the end of each test by truncating
+By default, CakePHP resets fixture state at the end of each test by truncating
 all the tables in the database. This operation can become expensive as your
 application grows. By using `TransactionStrategy` each test method will be run
 inside a transaction that is rolled back at the end of the test. This can yield
@@ -1232,7 +1232,7 @@ $this->setUnlockedFields(['dynamic_field']);
 ### Integration Testing PSR-7 Middleware
 
 Integration testing can also be used to test your entire PSR-7 application and
-[Middleware](../controllers/middleware). By default `IntegrationTestTrait` will
+[Middleware](../controllers/middleware). By default, `IntegrationTestTrait` will
 auto-detect the presence of an `App\Application` class and automatically
 enable integration testing of your Application.
 
@@ -1650,7 +1650,7 @@ $this->assertCookieNotSet('remember_me');
 $this->assertContentType('application/json');
 ```
 
-In addition to the above assertion methods, you can also use all of the
+In addition to the above assertion methods, you can also use all the
 assertions in [TestSuite](https://api.cakephp.org/5.x/class-Cake.TestSuite.TestCase.html) and those
 found in [PHPUnit](https://phpunit.de/manual/current/en/appendixes.assertions.html).
 

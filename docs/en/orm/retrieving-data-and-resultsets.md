@@ -174,7 +174,7 @@ you can pass query objects to your controllers, we recommend that you package
 your queries up as [Custom Find Methods](#custom-find-methods) instead. Using custom finder
 methods will let you re-use your queries and make testing easier.
 
-By default queries and result sets will return [Entities](../orm/entities) objects. You
+By default, queries and result sets will return [Entities](../orm/entities) objects. You
 can retrieve basic arrays by disabling hydration:
 
 ``` php
@@ -341,7 +341,7 @@ $query = $authors->find('list'); // Will utilize AuthorsTable::getDisplayField()
 ## Finding Threaded Data
 
 The `find('threaded')` finder returns nested entities that are threaded
-together through a key field. By default this field is `parent_id`. This
+together through a key field. By default, this field is `parent_id`. This
 finder allows you to access data stored in an 'adjacency list' style table. All
 entities matching a given `parent_id` are placed under the `children`
 attribute:
@@ -490,7 +490,7 @@ If you prefer to use join functions, you can look at
 
 ## Eager Loading Associations Via Contain
 
-By default CakePHP does not load **any** associated data when using `find()`.
+By default, CakePHP does not load **any** associated data when using `find()`.
 You need to 'contain' or eager-load each association you want loaded in your
 results.
 
@@ -996,7 +996,7 @@ the resulting data from your queries. ResultSets are a [Collection](../core-libr
 and you can use any collection method on ResultSet objects.
 
 Result set objects will lazily load rows from the underlying prepared statement.
-By default results will be buffered in memory allowing you to iterate a result
+By default, results will be buffered in memory allowing you to iterate a result
 set multiple times, or cache and iterate the results.
 
 Result sets allow you to cache/serialize or JSON encode results for API

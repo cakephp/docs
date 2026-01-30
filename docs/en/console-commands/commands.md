@@ -295,7 +295,7 @@ cake user [-h] [-q] [-v]
 
 ## Grouping Commands
 
-By default in the help output CakePHP will group commands into core, app, and
+By default, in the help output CakePHP will group commands into core, app, and
 plugin groups. You can customize the grouping of commands by implementing
 `getGroup()`:
 

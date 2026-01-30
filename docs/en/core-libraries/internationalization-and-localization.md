@@ -643,7 +643,7 @@ echo Number::format(524.23); // Displays 524,23
 Make sure you read the [Date & Time](../core-libraries/time) and [Number](../core-libraries/number)
 sections to learn more about formatting options.
 
-By default dates returned for the ORM results use the `Cake\I18n\DateTime` class,
+By default, dates returned for the ORM results use the `Cake\I18n\DateTime` class,
 so displaying them directly in you application will be affected by changing the
 current locale.
 

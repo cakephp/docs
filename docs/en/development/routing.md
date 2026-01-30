@@ -1193,7 +1193,7 @@ You can get the `article_id` in `CommentsController` by:
 $this->request->getParam('article_id');
 ```
 
-By default resource routes map to the same prefix as the containing scope. If
+By default, resource routes map to the same prefix as the containing scope. If
 you have both nested and non-nested resource controllers you can use a different
 controller in each context by using prefixes:
 
@@ -1216,7 +1216,7 @@ compatible with [Prefix Routing](#prefix-routing).
 
 ### Limiting the Routes Created
 
-By default CakePHP will connect 6 routes for each resource. If you'd like to
+By default, CakePHP will connect 6 routes for each resource. If you'd like to
 only connect specific resource routes you can use the `only` option:
 
 ``` php
@@ -1270,7 +1270,7 @@ $routes->resources('Articles', [
 ```
 
 In addition to the default routes, this would also connect a route for
-`/articles/delete-all`. By default the path segment will match the key name. You
+`/articles/delete-all`. By default, the path segment will match the key name. You
 can use the 'path' key inside the resource definition to customize the path
 name:
 
@@ -1338,7 +1338,7 @@ The above will generate URLs styled like: **/blog_posts**.
 
 ### Changing the Path Element
 
-By default resource routes use an inflected form of the resource name for the
+By default, resource routes use an inflected form of the resource name for the
 URL segment. You can set a custom URL segment with the `path` option:
 
 ``` php

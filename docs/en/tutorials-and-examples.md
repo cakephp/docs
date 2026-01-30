@@ -1,7 +1,7 @@
 # Tutorials & Examples
 
 In this section, you can walk through typical CakePHP applications
-to see how all of the pieces come together.
+to see how all the pieces come together.
 
 - [Content Management Tutorial](tutorials-and-examples/cms/installation)
 - [CMS Tutorial - Creating the Database](tutorials-and-examples/cms/database)

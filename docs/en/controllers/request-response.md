@@ -14,7 +14,7 @@ responses from your controllers.
 `ServerRequest` is the default request object used in CakePHP. It centralizes a
 number of features for interrogating and interacting with request data.
 On each request one Request is created and then passed by reference to the
-various layers of an application that use request data. By default the request
+various layers of an application that use request data. By default, the request
 is assigned to `$this->request`, and is available in Controllers, Cells, Views
 and Helpers. You can also access it in Components using the controller
 reference.
@@ -182,7 +182,7 @@ be accessed like this:
 $attachment = $this->request->getData('attachment');
 ```
 
-By default file uploads are represented in the request data as objects that implement
+By default, file uploads are represented in the request data as objects that implement
 [\Psr\Http\Message\UploadedFileInterface](https://www.php-fig.org/psr/psr-7/#16-uploaded-files). In the current
 implementation, the `$attachment` variable in the above example would by default hold an instance of
 `\Laminas\Diactoros\UploadedFile`.
@@ -814,7 +814,7 @@ public function sendIcs()
 `method` Cake\\Http\\Response::**withHeader**(string $header, string $value): static
 
 Setting headers is done with the `Cake\Http\Response::withHeader()`
-method. Like all of the PSR-7 interface methods, this method returns a *new*
+method. Like all the PSR-7 interface methods, this method returns a *new*
 instance with the new header:
 
 ``` php

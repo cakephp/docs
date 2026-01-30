@@ -183,7 +183,7 @@ public function initialize(): void
 Now, on every request, the `AuthenticationMiddleware` will inspect
 the request session to look for an authenticated user. If we are loading the `/users/login`
 page, it will also inspect the posted form data (if any) to extract the credentials.
-By default the credentials will be extracted from the `username` and `password`
+By default, the credentials will be extracted from the `username` and `password`
 fields in the request data.
 The authentication result will be injected in a request attribute named
 `authentication`. You can inspect the result at any time using

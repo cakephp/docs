@@ -64,7 +64,7 @@ Creates a link(s) to a CSS style-sheet. If the `block` option is set to
 inside the head tag of the document.
 
 You can use the `block` option to control which block the link element
-will be appended to. By default it will append to the `css` block.
+will be appended to. By default, it will append to the `css` block.
 
 If key 'rel' in `$options` array is set to 'import' the stylesheet will be imported.
 
@@ -501,7 +501,7 @@ once. This defaults to `true`.
 
 You can use `$options` to set additional properties to the
 generated script tag. If an array of script tags is used, the
-attributes will be applied to all of the generated script tags.
+attributes will be applied to all the generated script tags.
 
 This method of JavaScript file inclusion assumes that the
 JavaScript file specified resides inside the **webroot/js**

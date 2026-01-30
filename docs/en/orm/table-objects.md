@@ -70,7 +70,7 @@ class ArticlesTable extends Table
 
 ### Customizing the Entity Class a Table Uses
 
-By default table objects use an entity class based on naming conventions. For
+By default, table objects use an entity class based on naming conventions. For
 example if your table class is called `ArticlesTable` the entity would be
 `Article`. If the table class was `PurchaseOrdersTable` the entity would be
 `PurchaseOrder`. If however, you want to use an entity that doesn't follow the
@@ -467,7 +467,7 @@ CakePHP in the chapter on [Behaviors](../orm/behaviors).
 
 ## Configuring Connections
 
-By default all table instances use the `default` database connection. If your
+By default, all table instances use the `default` database connection. If your
 application uses multiple database connections you will want to configure which
 tables use which connections. This is the `defaultConnectionName()` method:
 

@@ -579,7 +579,7 @@ $errors = [
 ```
 
 If you have multiple errors on a single field, an array of error messages will
-be returned per field. By default the `getErrors()` method applies rules for
+be returned per field. By default, the `getErrors()` method applies rules for
 the 'create' mode. If you'd like to apply 'update' rules you can do the
 following:
 

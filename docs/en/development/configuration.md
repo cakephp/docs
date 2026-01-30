@@ -124,7 +124,7 @@ The file path to webroot.
 
 App.fullBaseUrl
 The fully qualified domain name (including protocol) to your application's
-root. This is used when generating absolute URLs. By default this value
+root. This is used when generating absolute URLs. By default, this value
 is generated using the `$_SERVER` environment. However, you should define it
 manually to optimize performance or if you are concerned about people
 manipulating the `Host` header.
@@ -579,4 +579,4 @@ The built in configuration engines are:
 - [IniConfig](https://api.cakephp.org/5.x/class-Cake.Core.Configure.Engine.IniConfig.html)
 - [PhpConfig](https://api.cakephp.org/5.x/class-Cake.Core.Configure.Engine.PhpConfig.html)
 
-By default your application will use `PhpConfig`.
+By default, your application will use `PhpConfig`.

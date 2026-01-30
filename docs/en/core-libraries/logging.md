@@ -305,7 +305,7 @@ following keys:
 - `flag`: An integer flag to be used for opening the connection to the
   logger, by default `LOG_ODELAY` will be used. See `openlog` documentation
   for more options
-- `facility`: The logging slot to use in syslog. By default `LOG_USER` is
+- `facility`: The logging slot to use in syslog. By default, `LOG_USER` is
   used. See `syslog` documentation for more options
 
 ## Creating Log Engines

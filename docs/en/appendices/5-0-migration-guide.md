@@ -27,7 +27,7 @@ changes made:
 
 - The `SECOND`, `MINUTE`, `HOUR`, `DAY`, `WEEK`, `MONTH`, `YEAR` constants were removed.
 
-- Use of `#[\AllowDynamicProperties]` removed everywhere. It was used for the following classes:  
+- Use of `#[\AllowDynamicProperties]` removed everywhere. It was used for the following classes:
   - `Command/Command`
   - `Console/Shell`
   - `Controller/Component`
@@ -37,7 +37,7 @@ changes made:
   - `View/Helper`
   - `View/View`
 
-- The supported database engine versions were updated:  
+- The supported database engine versions were updated:
   - MySQL (5.7 or higher)
   - MariaDB (10.1 or higher)
   - PostgreSQL (9.6 or higher)
@@ -114,7 +114,7 @@ changes made:
 
 - The `DateTimeType` and `DateType` now always return immutable objects.
   Additionally the interface for `Date` objects reflects the `ChronosDate`
-  interface which lacks all of the time related methods that were present in
+  interface which lacks all the time related methods that were present in
   CakePHP 4.x.
 - `DateType::setLocaleFormat()` no longer accepts an array.
 - `Query` now accepts only `\Closure` parameters instead of `callable`. Callables can be converted

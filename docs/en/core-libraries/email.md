@@ -215,7 +215,7 @@ In your email templates you can use these with:
 ```
 
 You can use helpers in emails as well, much like you can in normal template files.
-By default only the `HtmlHelper` is loaded. You can load additional
+By default, only the `HtmlHelper` is loaded. You can load additional
 helpers using the `ViewBuilder::addHelpers()` method:
 
 ``` php
@@ -364,7 +364,7 @@ class UserMailer extends Mailer
             ->setTo($user->email)
             ->setSubject(sprintf('Welcome %s', $user->name))
             ->viewBuilder()
-                ->setTemplate('welcome_mail'); // By default template with same name as method name is used.
+                ->setTemplate('welcome_mail'); // By default, template with same name as method name is used.
     }
 
     public function resetPassword($user)

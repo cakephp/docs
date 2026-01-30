@@ -149,7 +149,7 @@ addition request information. The following keys can be used in `$options`:
 - `cookie` - Array of cookies to use.
 - `proxy` - Array of proxy information.
 - `auth` - Array of authentication data, the `type` key is used to delegate to
-  an authentication strategy. By default Basic auth is used.
+  an authentication strategy. By default, Basic auth is used.
 - `ssl_verify_peer` - defaults to `true`. Set to `false` to disable SSL certification
   verification (not recommended).
 - `ssl_verify_peer_name` - defaults to `true`. Set to `false` to disable
@@ -187,7 +187,7 @@ $response = $http->get('https://example.com/profile/1', [], [
 ]);
 ```
 
-By default `Cake\Http\Client` will use basic authentication if there is no
+By default, `Cake\Http\Client` will use basic authentication if there is no
 `'type'` key in the auth option.
 
 ### Using Digest Authentication
@@ -491,7 +491,7 @@ $response->getStatusCode();
 
 ## Changing Transport Adapters
 
-By default `Http\Client` will prefer using a `curl` based transport adapter.
+By default, `Http\Client` will prefer using a `curl` based transport adapter.
 If the curl extension is not available a stream based adapter will be used
 instead. You can force select a transport adapter using a constructor option:
 

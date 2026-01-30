@@ -25,7 +25,7 @@ in your `initialize()` method.
 
 ## Form tampering prevention
 
-By default the `FormProtectionComponent` prevents users from tampering with
+By default, the `FormProtectionComponent` prevents users from tampering with
 forms in specific ways. It will prevent the following things:
 
 - Form's action (URL) cannot be modified.

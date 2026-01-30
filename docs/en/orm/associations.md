@@ -32,7 +32,7 @@ class ArticlesTable extends Table
 ```
 
 The simplest form of any association setup takes the table alias you want to
-associate with. By default all of the details of an association will use the
+associate with. By default, all the details of an association will use the
 CakePHP conventions. If you want to customize how your associations are handled
 you can modify them with setters:
 
@@ -239,7 +239,7 @@ Possible keys for hasOne association arrays include:
   triggered. When `false`, `deleteAll()` is used to remove associated data
   and no callbacks are triggered.
 - **propertyName**: The property name that should be filled with data from the
-  associated table into the source table results. By default this is the
+  associated table into the source table results. By default, this is the
   underscored & singular name of the association so `address` in our example.
 - **strategy**: The query strategy used to load matching record from the other table.
   Accepted values are `'join'` and `'select'`. Using `'select'` will generate a separate query
@@ -329,7 +329,7 @@ Possible keys for belongsTo association arrays include:
   'LEFT' and 'INNER'. You can use 'INNER' to get results only where the
   association is set. The default value is 'LEFT'.
 - **propertyName**: The property name that should be filled with data from the
-  associated table into the source table results. By default this is the
+  associated table into the source table results. By default, this is the
   underscored & singular name of the association so `user` in our example.
 - **strategy**: The query strategy used to load matching record from the other table.
   Accepted values are `'join'` and `'select'`. Using `'select'` will generate a separate query
@@ -410,7 +410,7 @@ $this->hasMany('Comments')
 ```
 
 Relying on the example above, we have passed an array containing the desired
-composite keys to `setForeignKey()`. By default the `bindingKey` would be
+composite keys to `setForeignKey()`. By default, the `bindingKey` would be
 automatically defined as `id` and `hash` respectively, but let's assume that
 you need to specify different binding fields than the defaults. You can setup it
 manually with `setBindingKey()`:
@@ -455,7 +455,7 @@ Possible keys for hasMany association arrays include:
   triggered. When `false`, `deleteAll()` is used to remove associated data
   and no callbacks are triggered.
 - **propertyName**: The property name that should be filled with data from the
-  associated table into the source table results. By default this is the
+  associated table into the source table results. By default, this is the
   underscored & plural name of the association so `comments` in our example.
 - **strategy**: Defines the query strategy to use. Defaults to 'select'. The
   other valid value is 'subquery', which replaces the `IN` list with an
@@ -579,7 +579,7 @@ Possible keys for belongsToMany association arrays include:
   example, it should be 'Tags'. The default value is the name of the association.
 - **joinTable**: The name of the join table used in this
   association (if the current table doesn't adhere to the naming
-  convention for belongsToMany join tables). By default this table
+  convention for belongsToMany join tables). By default, this table
   name will be used to load the Table instance for the join table.
 - **foreignKey**: The name of the foreign key that references the current model
   found on the join table, or list in case of composite foreign keys.
@@ -609,7 +609,7 @@ Possible keys for belongsToMany association arrays include:
   no callbacks are triggered. This defaults to `false` to help reduce
   overhead.
 - **propertyName**: The property name that should be filled with data from the
-  associated table into the source table results. By default this is the
+  associated table into the source table results. By default, this is the
   underscored & plural name of the association, so `tags` in our example.
 - **strategy**: Defines the query strategy to use. Defaults to 'select'. The
   other valid value is 'subquery', which replaces the `IN` list with an
@@ -742,7 +742,7 @@ $query = $this->Students->find(
 
 ### Using Association Finders
 
-By default associations will load records based on the foreign key columns. If
+By default, associations will load records based on the foreign key columns. If
 you want to define additional conditions for associations, you can use
 a `finder`. When an association is loaded the ORM will use your [custom
 finder](../orm/retrieving-data-and-resultsets#custom-find-methods) to load, update, or delete associated records.

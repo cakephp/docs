@@ -27,7 +27,7 @@ When deleting entities a few things happen:
 5. Any junction table records for BelongsToMany associations will be removed.
 6. The `Model.afterDelete` event will be triggered.
 
-By default all deletes happen within a transaction. You can disable the
+By default, all deletes happen within a transaction. You can disable the
 transaction with the atomic option:
 
 ``` php
@@ -45,7 +45,7 @@ The `$options` parameter supports the following options:
 
 When deleting entities, associated data can also be deleted. If your HasOne and
 HasMany associations are configured as `dependent`, delete operations will
-'cascade' to those entities as well. By default entities in associated tables
+'cascade' to those entities as well. By default, entities in associated tables
 are removed using `Cake\ORM\Table::deleteAll()`. You can elect to
 have the ORM load related entities, and delete them individually by setting the
 `cascadeCallbacks` option to `true`. A sample HasMany association with both

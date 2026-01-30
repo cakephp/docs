@@ -79,7 +79,7 @@ When a request is made to a CakePHP application, CakePHP's
 `Cake\Routing\Router` and `Cake\Routing\Dispatcher`
 classes use [Routes Configuration](development/routing#routes-configuration) to find and create the correct
 controller instance. The request data is encapsulated in a request object.
-CakePHP puts all of the important request information into the `$this->request`
+CakePHP puts all the important request information into the `$this->request`
 property. See the section on [Cake Request](controllers/request-response#cake-request) for more information on the
 CakePHP request object.
 
@@ -580,7 +580,7 @@ logic around the request life-cycle:
 
 ### Controller Callback Methods
 
-By default the following callback methods are connected to related events if the
+By default, the following callback methods are connected to related events if the
 methods are implemented by your controllers
 
 #### beforeFilter()

@@ -270,7 +270,7 @@ more complex `WHERE` conditions.
 
 ### Selecting Specific Fields
 
-By default a query will select all fields from a table, the exception is when you
+By default, a query will select all fields from a table, the exception is when you
 call the `select()` function yourself and pass certain fields:
 
 ``` php

@@ -11,7 +11,7 @@ There are two ways you can generate data views. The first is by using the
 ## Defining View Classes to Negotiate With
 
 In your `AppController` or in an individual controller you can implement the
-`viewClasses()` method and provide all of the views you want to support:
+`viewClasses()` method and provide all the views you want to support:
 
 ``` php
 use Cake\View\JsonView;
@@ -132,7 +132,7 @@ output the serialized content.
 
 `class` **XmlView**
 
-By default when using `serialize` the XmlView will wrap your serialized
+By default, when using `serialize` the XmlView will wrap your serialized
 view variables with a `<response>` node. You can set a custom name for
 this node using the `rootNode` option.
 

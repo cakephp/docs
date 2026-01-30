@@ -12,7 +12,7 @@ create paginated datasets and do paginated queries.
 
 `method` Cake\\View\\Helper\\PaginatorHelper::**setPaginated**(PaginatedInterface $paginated, array $options = []): void
 
-By default the helper uses the first instance of `Cake\Datasource\Paging\PaginatedInterface`
+By default, the helper uses the first instance of `Cake\Datasource\Paging\PaginatedInterface`
 it finds in the view variables. (Generally the result of `Controller::paginate()`).
 
 You can use `PaginatorHelper::setPaginated()` to explicitly set the paginated
@@ -342,7 +342,7 @@ echo $this->Paginator->counter('range');
 
 `method` Cake\\View\\Helper\\PaginatorHelper::**generateUrl**(array $options = [], ?string $model = null, array $url = [], array $urlOptions = []): string
 
-By default returns a full pagination URL string for use in non-standard contexts
+By default, returns a full pagination URL string for use in non-standard contexts
 (i.e. JavaScript).
 
 ``` php
@@ -443,7 +443,7 @@ Sets all the options for the PaginatorHelper. Supported options are:
 
   The example above adds the `en` route parameter to all links the helper will
   generate. It will also create links with specific sort, direction and page
-  values. By default `PaginatorHelper` will merge in all of the current passed
+  values. By default, `PaginatorHelper` will merge in all the current passed
   arguments and query string parameters.
 
 - `escape` Defines if the title field for links should be HTML escaped.

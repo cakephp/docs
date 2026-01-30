@@ -111,7 +111,7 @@ class AwesomeHelper extends Helper
 }
 ```
 
-By default all configuration options will be merged with the `$_defaultConfig`
+By default, all configuration options will be merged with the `$_defaultConfig`
 property. This property should define the default values of any configuration
 your helper requires. For example:
 

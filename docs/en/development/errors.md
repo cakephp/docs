@@ -160,7 +160,7 @@ data returned by `getAttributes()` will be exposed as view variables as well.
 
 ### Custom Error Page Layout
 
-By default error templates use **templates/layout/error.php** for a layout.
+By default, error templates use **templates/layout/error.php** for a layout.
 You can use the `layout` property to pick a different layout:
 
 ``` php
@@ -480,7 +480,7 @@ public function view($id = null)
 ```
 
 The above would cause the configured exception handler to catch and
-process the `NotFoundException`. By default this will create an error
+process the `NotFoundException`. By default, this will create an error
 page, and log the exception.
 
 ### Other Built In Exceptions
@@ -570,7 +570,7 @@ MethodNotAllowedException the rfc2616 says:
 
 ## Customizing PHP Error Handling
 
-By default PHP errors are rendered to console or HTML output, and also logged.
+By default, PHP errors are rendered to console or HTML output, and also logged.
 If necessary, you can swap out CakePHP's error handling logic with your own.
 
 ### Custom Error Logging

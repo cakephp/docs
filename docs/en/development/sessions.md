@@ -73,7 +73,7 @@ Configure::write('Session', [
 ]);
 ```
 
-By default PHP sets the session cookie to expire as soon as the browser is
+By default, PHP sets the session cookie to expire as soon as the browser is
 closed, regardless of the configured `Session.timeout` value. The cookie
 timeout is controlled by the `session.cookie_lifetime` ini value and can be
 configured using:

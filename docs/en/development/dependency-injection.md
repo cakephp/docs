@@ -537,7 +537,7 @@ $container->add(AuditLogServiceInterface::class, function (...$args) {
 });
 ```
 
-Factory functions will receive all of the resolved dependencies for the class
+Factory functions will receive all the resolved dependencies for the class
 as arguments.
 
 Once you've defined a class, you also need to define the dependencies it
@@ -559,7 +559,7 @@ be added automatically.
 > [!IMPORTANT]
 > Services are **not shared by default** - each request creates a new instance. Use `addShared()` to create singleton services that persist across requests.
 
-By default services are not shared. Every object (and dependencies) is created
+By default, services are not shared. Every object (and dependencies) is created
 each time it is fetched from the container. If you want to re-use a single
 instance, often referred to as a singleton, you can mark a service as 'shared':
 

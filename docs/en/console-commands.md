@@ -48,7 +48,7 @@ unambiguously reference a command.
 
 ## Console Applications
 
-By default CakePHP will automatically discover all the commands in your
+By default, CakePHP will automatically discover all the commands in your
 application and its plugins. You may want to reduce the number of exposed
 commands, when building standalone console applications. You can use your
 `Application`'s `console()` hook to limit which commands are exposed and

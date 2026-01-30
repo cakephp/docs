@@ -14,7 +14,7 @@ have two stages of validation:
 ## Validating Data Before Building Entities
 
 When marshalling data into entities, you can validate data. Validating data
-allows you to check the type, shape and size of data. By default request data
+allows you to check the type, shape and size of data. By default, request data
 will be validated before it is converted into entities.
 If any validation rules fail, the returned entity will contain errors. The
 fields with errors will not be present in the returned entity:
@@ -107,7 +107,7 @@ $article = $articles->newEntity(
 ```
 
 The above would call the `validationUpdate()` method on the table instance to
-build the required rules. By default the `validationDefault()` method will be
+build the required rules. By default, the `validationDefault()` method will be
 used. An example validator for our articles table would be:
 
 ``` php

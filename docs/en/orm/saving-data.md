@@ -51,7 +51,7 @@ value of the `isNew()` method. Entities that were retrieved with `get()` or
 
 ### Saving With Associations
 
-By default the `save()` method will also save one level of associations:
+By default, the `save()` method will also save one level of associations:
 
 ``` php
 $articlesTable = $this->fetchTable('Articles');
@@ -140,7 +140,7 @@ $entity = $articles->newEntity($this->request->getData());
 
 > [!NOTE]
 > If you are using newEntity() and the resulting entities are missing some or
-> all of the data they were passed, double check that the columns you want to
+> all the data they were passed, double check that the columns you want to
 > set are listed in the `$_accessible` property of your entity. See [Entities Mass Assignment](../orm/entities#entities-mass-assignment).
 
 The request data should follow the structure of your entities. For example if
@@ -421,7 +421,7 @@ concerned entity.
 
 > [!NOTE]
 > If you are using newEntity() and the resulting entities are missing some or
-> all of the data they were passed, double check that the columns you want to
+> all the data they were passed, double check that the columns you want to
 > set are listed in the `$_accessible` property of your entity. See
 > [Entities Mass Assignment](../orm/entities#entities-mass-assignment).
 
@@ -889,8 +889,8 @@ $articles->save($article, ['checkRules' => false, 'atomic' => false]);
 
 ### Saving Associations
 
-When you are saving an entity, you can also choose to save some or all of the
-associated entities. By default all first level entities will be saved. For
+When you are saving an entity, you can also choose to save some or all the
+associated entities. By default, all first level entities will be saved. For
 example saving an Article, will also automatically update any dirty entities
 that are directly related to articles table.
 
@@ -1006,15 +1006,15 @@ When saving hasMany associations, associated records will either be updated, or
 inserted. For the case that the record already has associated records in the
 database, you have the choice between two saving strategies:
 
-append  
+append
 Associated records are updated in the database or, if not matching any
 existing record, inserted.
 
-replace  
+replace
 Any existing records that do not match the records provided will be deleted
 from the database. Only provided records will remain (or be inserted).
 
-By default the `append` saving strategy is used.
+By default, the `append` saving strategy is used.
 See [Has Many Associations](../orm/associations#has-many-associations) for details on defining the `saveStrategy`.
 
 Whenever you add new records to an existing association you should always mark
@@ -1069,12 +1069,12 @@ the [Converting Request Data](#converting-request-data) section for more informa
 When saving belongsToMany associations, you have the choice between two saving
 strategies:
 
-append  
+append
 Only new links will be created between each side of this association. This
 strategy will not destroy existing links even though they may not be present
 in the array of entities to be saved.
 
-replace  
+replace
 When saving, existing links will be removed and new links will be created in
 the junction table. If there are existing link in the database to some of
 the entities intended to be saved, those links will be updated, not deleted
@@ -1082,7 +1082,7 @@ and then re-saved.
 
 See [Belongs To Many Associations](../orm/associations#belongs-to-many-associations) for details on defining the `saveStrategy`.
 
-By default the `replace` strategy is used. Whenever you add new records into
+By default, the `replace` strategy is used. Whenever you add new records into
 an existing association you should always mark the association property as
 'dirty'. This lets the ORM know that the association property has to be
 persisted:

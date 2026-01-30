@@ -744,7 +744,7 @@ class PointMutationType extends BaseType
 }
 ```
 
-By default the `toStatement()` method will treat values as strings which will
+By default, the `toStatement()` method will treat values as strings which will
 work for our new type.
 
 ### Connecting Custom Datatypes to Schema Reflection and Generation
@@ -1194,7 +1194,7 @@ Log::setConfig('queries', [
 
 ## Identifier Quoting
 
-By default CakePHP does **not** quote identifiers in generated SQL queries. The
+By default, CakePHP does **not** quote identifiers in generated SQL queries. The
 reason for this is identifier quoting has a few drawbacks:
 
 - Performance overhead - Quoting identifiers is much slower and complex than not doing it.

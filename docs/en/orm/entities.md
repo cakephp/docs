@@ -603,7 +603,7 @@ converting the associated data into the correct format.
 
 ### Exposing Virtual Fields
 
-By default virtual fields are not exported when converting entities to
+By default, virtual fields are not exported when converting entities to
 arrays or JSON. In order to expose virtual fields you need to make them
 visible. When defining your entity class you can provide a list of virtual
 field that should be exposed:

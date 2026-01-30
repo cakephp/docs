@@ -55,7 +55,7 @@ The following configuration options can be set in **config/app.php** to change h
 `Debugger` behaves:
 
 - `Debugger.editor` Choose the which editor URL format you want to use.
-  By default atom, emacs, macvim, phpstorm, sublime, textmate, and vscode are
+  By default, atom, emacs, macvim, phpstorm, sublime, textmate, and vscode are
   available. You can add additional editor link formats using
   `Debugger::addEditor()` during your application bootstrap.
 - `Debugger.editorBasePath` The path that replaces `ROOT` when generating

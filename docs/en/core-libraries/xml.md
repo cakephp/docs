@@ -72,7 +72,7 @@ objects with `loadHtml()`:
 $html = Xml::loadHtml($htmlString, ['return' => 'domdocument']);
 ```
 
-By default entity loading and huge document parsing are disabled. These modes
+By default, entity loading and huge document parsing are disabled. These modes
 can be enabled with the `loadEntities` and `parseHuge` options respectively.
 
 ## Transforming a XML String in Array
@@ -117,7 +117,7 @@ Examples of invalid arrays:
 ];
 ```
 
-By default array values will be output as XML tags. If you want to define
+By default, array values will be output as XML tags. If you want to define
 attributes or text values you can prefix the keys that are supposed to be
 attributes with `@`. For value text, use `@` as the key:
 

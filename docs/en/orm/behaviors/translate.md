@@ -86,7 +86,7 @@ class ArticlesTable extends Table
 {
     public function initialize(array $config): void
     {
-        // By default ShadowTable will be used.
+        // By default, ShadowTable will be used.
         $this->addBehavior('Translate', ['fields' => ['title', 'body']]);
     }
 }
@@ -115,7 +115,7 @@ For `EavStrategy` you are required to pass the `fields` key in the
 configuration array. This list of fields is needed to tell the behavior what
 columns will be able to store translations.
 
-By default the locale specified in `App.defaultLocale` config is used as default
+By default, the locale specified in `App.defaultLocale` config is used as default
 locale for the `TranslateBehavior`. You can override that by setting `defaultLocale`
 config of the behavior:
 

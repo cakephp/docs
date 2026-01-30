@@ -10,13 +10,13 @@ it will be pretty slim and only define a few default
 methods:
 
 - `bootstrap` Used to load [configuration files](../development/configuration), define constants and other global functions.
-  By default this will include **config/bootstrap.php**. This is the ideal place
+  By default, this will include **config/bootstrap.php**. This is the ideal place
   to load [Plugins](../plugins) and global [event listeners](../core-libraries/events).
-- `routes` Used to load [routes](../development/routing). By default this
+- `routes` Used to load [routes](../development/routing). By default, this
   will include **config/routes.php**.
 - `middleware` Used to add [middleware](../controllers/middleware) to your application.
 - `console` Used to add [console commands](../console-commands) to your
-  application. By default this will automatically discover console commands in
+  application. By default, this will automatically discover console commands in
   your application and all plugins.
 
 ## Bootstrapping your Application

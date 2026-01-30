@@ -50,7 +50,7 @@ The counter **will not** be updated when you
 
 ## Advanced Usage
 
-If you need to keep a cached counter for less than all of the related records,
+If you need to keep a cached counter for less than all the related records,
 you can supply additional conditions or finder methods to generate a
 counter value:
 

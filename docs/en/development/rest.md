@@ -139,7 +139,7 @@ $middlewareQueue->add(new BodyParserMiddleware());
 ```
 
 This middleware will use the `content-type` header to detect the format of
-request data and parse enabled formats. By default only `JSON` parsing is
+request data and parse enabled formats. By default, only `JSON` parsing is
 enabled by default. You can enable XML support by enabling the `xml`
 constructor option. When a request is made with a `Content-Type` of
 `application/json`, CakePHP will decode the request data and update the

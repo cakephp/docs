@@ -713,7 +713,7 @@ echo $this->cache(function () use ($user, $article) {
 }, ['key' => 'my_view_key']);
 ```
 
-By default cached view content will go into the `View::$elementCache` cache
+By default, cached view content will go into the `View::$elementCache` cache
 config, but you can use the `config` option to change this.
 
 <a id="view-events"></a>

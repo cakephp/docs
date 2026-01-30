@@ -113,7 +113,7 @@ appropriate parts of your application. The hooks are:
 - `services` Used to register application container services. This is a good
   opportunity to setup additional objects that need access to the container.
 
-By default all plugins hooks are enabled. You can disable hooks by using the
+By default, all plugins hooks are enabled. You can disable hooks by using the
 related options of the `plugin load` command:
 
 ``` bash
