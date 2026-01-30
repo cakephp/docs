@@ -1281,7 +1281,7 @@ $this->assertSession('That article does not exist', 'Flash.flash.0.message');
 // Assert a flash message in the 'flash' key.
 $this->assertFlashMessage('Article deleted', 'flash');
 
-// Assert the second flash message, also  in the 'flash' key.
+// Assert the second flash message, also in the 'flash' key.
 $this->assertFlashMessageAt(1, 'Article really deleted');
 
 // Assert a flash message in the 'auth' key at the first position

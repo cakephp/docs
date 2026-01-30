@@ -62,7 +62,7 @@ separately in a file named **cake.po** in **resources/locales/**.
 The [CakePHP localized library](https://github.com/cakephp/localized) houses
 translations for the client-facing translated strings in the core (the cake
 domain). To use these files, link or copy them into their expected location:
-**resources/locales/\<locale\>/cake.po**. If your locale is incomplete or incorrect,
+`resources/locales/<locale>/cake.po`. If your locale is incomplete or incorrect,
 please submit a PR in this repository to fix it.
 
 Plugins can also contain translation files, the convention is to use the

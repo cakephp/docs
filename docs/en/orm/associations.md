@@ -222,7 +222,7 @@ Possible keys for hasOne association arrays include:
   it should be 'Addresses'. The default value is the name of the association.
 - **foreignKey**: The name of the foreign key column in the other table. The
   default value is the underscored, singular name of the current model,
-  suffixed with '\_id' such as 'user_id' in the above example.
+  suffixed with `_id` such as 'user_id' in the above example.
 - **bindingKey**: The name of the column in the current table used to match the
   `foreignKey`. The default value is the primary key of the current table
   such as 'id' of Users in the above example.
@@ -319,7 +319,7 @@ Possible keys for belongsTo association arrays include:
   it should be 'Users'. The default value is the name of the association.
 - **foreignKey**: The name of the foreign key column in the current table. The
   default value is the underscored, singular name of the other model,
-  suffixed with '\_id' such as 'user_id' in the above example.
+  suffixed with `_id` such as 'user_id' in the above example.
 - **bindingKey**: The name of the column in the other table used to match the
   `foreignKey`. The default value is the primary key of the other table
   such as 'id' of Users in the above example.
@@ -438,7 +438,7 @@ Possible keys for hasMany association arrays include:
   it should be 'Comments'. The default value is the name of the association.
 - **foreignKey**: The name of the foreign key column in the other table. The
   default value is the underscored, singular name of the current model,
-  suffixed with '\_id' such as 'article_id' in the above example.
+  suffixed with `_id` such as 'article_id' in the above example.
 - **bindingKey**: The name of the column in the current table used to match the
   `foreignKey`. The default value is the primary key of the current table
   such as 'id' of Articles in the above example.
@@ -585,13 +585,13 @@ Possible keys for belongsToMany association arrays include:
   found on the join table, or list in case of composite foreign keys.
   This is especially handy if you need to define multiple
   belongsToMany relationships. The default value for this key is the
-  underscored, singular name of the current model, suffixed with '\_id'.
+  underscored, singular name of the current model, suffixed with `_id`.
 - **bindingKey**: The name of the column in the current table, that will be used
   for matching the `foreignKey`. Defaults to the primary key.
 - **targetForeignKey**: The name of the foreign key that references the target
   model found on the join model, or list in case of composite foreign keys.
   The default value for this key is the underscored, singular name of
-  the target model, suffixed with '\_id'.
+  the target model, suffixed with `_id`.
 - **conditions**: An array of `find()` compatible conditions. If you have
   conditions on an associated table, you should use a 'through' model, and
   define the necessary belongsTo associations on it. It is recommended to

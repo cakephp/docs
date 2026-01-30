@@ -160,7 +160,7 @@ echo $this->Html->meta(
     ['type' => 'icon'],
 );
 // Output (line breaks added)
-// Note: The helper code makes two meta tags to  ensure the
+// Note: The helper code makes two meta tags to ensure the
 // icon is downloaded by both newer and older browsers
 // which require different rel attribute values.
 <link

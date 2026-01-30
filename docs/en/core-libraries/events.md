@@ -362,7 +362,7 @@ a more direct approach and only listen to the event you really need:
 
 ``` php
 // You can create the following before the
-// save operation, ie. config/bootstrap.php
+// save operation, i.e. config/bootstrap.php
 use Cake\Datasource\FactoryLocator;
 use Cake\Event\EventInterface;
 // If sending emails

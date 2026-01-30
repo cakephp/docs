@@ -512,7 +512,7 @@ a PHP configuration file loadable by the
 `Cake\Core\Configure\Engine\PhpConfig`
 
 Given that the 'default' engine is an instance of PhpConfig.
-Save all data in Configure to the file \`my_config.php\`:
+Save all data in Configure to the file `my_config.php`:
 
 ``` php
 Configure::dump('my_config', 'default');

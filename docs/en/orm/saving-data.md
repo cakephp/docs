@@ -1091,7 +1091,7 @@ $article->setDirty('tags', true);
 Without the call to `setDirty()` the updated tags will not be saved.
 
 Often you'll find yourself wanting to make an association between two existing
-entities, eg. a user coauthoring an article. This is done by using the method
+entities, e.g. a user coauthoring an article. This is done by using the method
 `link()`, like this:
 
 ``` php

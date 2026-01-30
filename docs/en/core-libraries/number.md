@@ -70,13 +70,13 @@ output. The following options are available:
 | ---- | ---- |
 | before | Text to display before the rendered number. |
 | after | Text to display after the rendered number. |
-| zero | The text to use for zero values; can be a string or a number. ie. 0, 'Free!'. |
-| places | Number of decimal places to use, ie. 2 |
-| precision | Maximal number of decimal places to use, ie. 2 |
-| locale | The locale name to use for formatting number, ie. "fr_FR". |
-| fractionSymbol | String to use for fraction numbers, ie. ' cents'. |
+| zero | The text to use for zero values; can be a string or a number. i.e. 0, 'Free!'. |
+| places | Number of decimal places to use, i.e. 2 |
+| precision | Maximal number of decimal places to use, i.e. 2 |
+| locale | The locale name to use for formatting number, i.e. "fr_FR". |
+| fractionSymbol | String to use for fraction numbers, i.e. ' cents'. |
 | fractionPosition | Either 'before' or 'after' to place the fraction symbol. |
-| pattern | An ICU number pattern to use for formatting the number ie. \#,###.00 |
+| pattern | An ICU number pattern to use for formatting the number i.e. `#,###.00` |
 | useIntlCode | Set to `true` to replace the currency symbol with the international currency code. |
 
 If `$currency` value is `null`, the default currency will be retrieved from
@@ -216,10 +216,10 @@ resides.
 
 | Option | Description |
 | ---- | ---- |
-| places | Number of decimal places to use, ie. 2 |
-| precision | Maximum number of decimal places to use, ie. 2 |
-| pattern | An ICU number pattern to use for formatting the number ie. \#,###.00 |
-| locale | The locale name to use for formatting number, ie. "fr_FR". |
+| places | Number of decimal places to use, i.e. 2 |
+| precision | Maximum number of decimal places to use, i.e. 2 |
+| pattern | An ICU number pattern to use for formatting the number i.e. `#,###.00` |
+| locale | The locale name to use for formatting number, i.e. "fr_FR". |
 | before | Text to display before the rendered number. |
 | after | Text to display after the rendered number. |
 
@@ -302,9 +302,9 @@ The `$options` parameter takes the same keys as `Number::format()` itself:
 
 | Option    | Description                                                |
 |-----------|------------------------------------------------------------|
-| places    | Number of decimal places to use, ie. 2                     |
-| precision | Maximum number of decimal places to use, ie. 2             |
-| locale    | The locale name to use for formatting number, ie. "fr_FR". |
+| places    | Number of decimal places to use, i.e. 2                     |
+| precision | Maximum number of decimal places to use, i.e. 2             |
+| locale    | The locale name to use for formatting number, i.e. "fr_FR". |
 | before    | Text to display before the rendered number.                |
 | after     | Text to display after the rendered number.                 |
 
