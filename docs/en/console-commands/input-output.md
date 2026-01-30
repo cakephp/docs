@@ -5,8 +5,6 @@
 CakePHP provides the `ConsoleIo` object to commands so that they can
 interactively read user input and output information to the user.
 
-<a id="command-helpers"></a>
-
 ## Command Helpers
 
 Formatting console output can be tedious and lead to maintenance issues. To

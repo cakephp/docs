@@ -686,8 +686,6 @@ The required API for a CacheEngine is
 
 `method` Cake\\Cache\\CacheEngine::**increment**($key, $offset = 1): int|false
 
-<a id="cache-events"></a>
-
 ## Cache Events
 
 ::: info Added in version 5.3.0

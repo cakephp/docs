@@ -73,8 +73,6 @@ before running the above composer command:
 }
 ```
 
-<a id="loading-a-plugin"></a>
-
 ## Loading a Plugin
 
 If you want to use a plugin's routes, console commands, middlewares, event
@@ -369,8 +367,6 @@ class ContactManagerPlugin extends BasePlugin
 }
 ```
 
-<a id="plugin-routes"></a>
-
 ## Plugin Routes
 
 Plugins can provide routes files containing their routes. Each plugin can
@@ -480,8 +476,6 @@ also connect routes that use the following pattern:
 
 See the section on [Plugin Configuration](#plugin-configuration) for information on how to load
 plugin specific route files.
-
-<a id="plugin-models"></a>
 
 ## Plugin Models
 
@@ -649,8 +643,6 @@ in your application template overrides. For example, if the 'ContactManager'
 plugin implemented an 'Admin' prefix the overriding path would be:
 
     templates/plugin/ContactManager/Admin/ContactManager/index.php
-
-<a id="plugin-assets"></a>
 
 ## Plugin Assets
 

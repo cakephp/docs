@@ -37,8 +37,6 @@ CakePHP's request object implements the [PSR-7
 ServerRequestInterface](https://www.php-fig.org/psr/psr-7/) making it easier to
 use libraries from outside of CakePHP.
 
-<a id="request-parameters"></a>
-
 ### Request Parameters
 
 The request exposes routing parameters through the `getParam()` method:
@@ -1352,8 +1350,6 @@ $this->response = $this->response->withHeader('X-CakePHP', 'yes!');
 `CookieCollection` objects are accessible from the request and response objects.
 They let you interact with groups of cookies using immutable patterns, which
 allow the immutability of the request and response to be preserved.
-
-<a id="creating-cookies"></a>
 
 ### Creating Cookies
 

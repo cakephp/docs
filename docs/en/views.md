@@ -54,8 +54,6 @@ class AppView extends View
 }
 ```
 
-<a id="view-templates"></a>
-
 ## View Templates
 
 The view layer of CakePHP is how you speak to your users. Most of the time your
@@ -171,8 +169,6 @@ $this->set('activeMenuButton', 'posts');
 
 Then, in your layout, the `$activeMenuButton` variable will be available and
 contain the value 'posts'.
-
-<a id="extending-views"></a>
 
 ### Extending Views
 
@@ -715,8 +711,6 @@ echo $this->cache(function () use ($user, $article) {
 
 By default, cached view content will go into the `View::$elementCache` cache
 config, but you can use the `config` option to change this.
-
-<a id="view-events"></a>
 
 ## View Events
 

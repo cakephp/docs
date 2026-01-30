@@ -288,8 +288,6 @@ will go to the 'update' action. There are HTTP helper methods for:
 All of these methods return the route instance allowing you to leverage the
 [fluent setters](#route-fluent-methods) to further configure your route.
 
-<a id="route-elements"></a>
-
 ### Route Elements
 
 You can specify your own route elements and doing so gives you the
@@ -679,8 +677,6 @@ Router::url(['_name' => 'contacts:api:ping']);
 Routes connected in named scopes will only have names added if the route is also
 named. Nameless routes will not have the `_namePrefix` applied to them.
 
-<a id="prefix-routing"></a>
-
 ### Prefix Routing
 
 `static` Cake\\Routing\\RouteBuilder::**prefix**($name, $callback)
@@ -1035,8 +1031,6 @@ $this->Html->link(
 );
 ```
 
-<a id="route-scoped-middleware"></a>
-
 ## Route Scoped Middleware
 
 While Middleware can be applied to your entire application, applying middleware
@@ -1347,8 +1341,6 @@ $routes->scope('/', function (RouteBuilder $routes) {
 });
 ```
 
-<a id="passed-arguments"></a>
-
 ## Passed Arguments
 
 Passed arguments are additional arguments or path segments that are
@@ -1644,8 +1636,6 @@ To generate asset URLs for files in plugins use `plugin syntax`:
 $img = Asset::imageUrl('DebugKit.cake.png');
 ```
 
-<a id="redirect-routing"></a>
-
 ## Redirect Routing
 
 Redirect routing allows you to issue HTTP status 30x redirects for
@@ -1683,8 +1673,6 @@ $routes->scope('/', function (RouteBuilder $routes) {
 
 This would redirect `/articles/*` to `http://google.com` with a
 HTTP status of 302.
-
-<a id="entity-routing"></a>
 
 ## Entity Routing
 
@@ -1758,8 +1746,6 @@ class MyRedirectRoute extends Route
 ::: info Added in version 5.3.0
 `RedirectTrait` was added.
 :::
-
-<a id="custom-route-classes"></a>
 
 ## Custom Route Classes
 

@@ -516,8 +516,6 @@ I18n::setTranslator(
 );
 ```
 
-<a id="creating-generic-translators"></a>
-
 ### Creating Generic Translators
 
 Configuring translators by calling `I18n::setTranslator()` for each domain and

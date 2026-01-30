@@ -312,8 +312,6 @@ $query->selectAllExcept($articlesTable, ['published']);
 You can also pass an `Association` object when working with contained
 associations.
 
-<a id="using-sql-functions"></a>
-
 ### Using SQL Functions
 
 CakePHP's ORM offers abstraction for some commonly used SQL functions. Using the
@@ -1797,8 +1795,6 @@ to fetch associated data from other tables is called **eager loading**.
 ### Filtering by Associated Data
 
 <!--@include: ./retrieving-data-and-resultsets.md{727,938}-->
-
-<a id="adding-joins"></a>
 
 ### Adding Joins
 

@@ -390,8 +390,6 @@ $articles->saveMany($entities);
 $articles->saveManyOrFail($entities);
 ```
 
-<a id="changing-accessible-fields"></a>
-
 ### Changing Accessible Fields
 
 It's also possible to allow `newEntity()` to write into non accessible fields.
@@ -790,8 +788,6 @@ $this->save($entity);
 ::: info Added in version 5.3.0
 The `strictFields` option was added in 5.3.0.
 :::
-
-<a id="saving-entities"></a>
 
 ## Saving Entities
 
@@ -1197,8 +1193,6 @@ manipulate entities, marshall request data, and create form fields.
 ::: info Added in version 5.2.0
 Custom junction property names were added.
 :::
-
-<a id="saving-complex-types"></a>
 
 ### Saving Complex Types
 

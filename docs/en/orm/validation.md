@@ -295,8 +295,6 @@ before entities are persisted. Some example application rules are:
 
 Application rules are checked when calling the Table `save()` and `delete()` methods.
 
-<a id="creating-a-rules-checker"></a>
-
 ### Creating a Rules Checker
 
 Rules checker classes are generally defined by the `buildRules()` method in your
@@ -629,8 +627,6 @@ public function buildRules(RulesChecker $rules): RulesChecker
 ```
 
 See the core rules for examples on how to create such rules.
-
-<a id="creating-custom-rule-objects"></a>
 
 ### Creating Custom Rule Objects
 

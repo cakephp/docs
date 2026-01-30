@@ -656,8 +656,6 @@ INNER JOIN articles_tags ON (
 );
 ```
 
-<a id="using-the-through-option"></a>
-
 ### Using the 'through' Option
 
 If you plan on adding extra information to the join/pivot table, or if you need

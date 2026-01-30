@@ -509,13 +509,13 @@ your associations, there may be times when you need to lazily load associated
 data. Before we get into how to lazy load associations, we should discuss the
 differences between eager loading and lazy loading associations:
 
-Eager loading  
+Eager loading
 Eager loading uses joins (where possible) to fetch data from the
 database in as *few* queries as possible. When a separate query is required,
 like in the case of a HasMany association, a single query is emitted to
 fetch *all* the associated data for the current set of objects.
 
-Lazy loading  
+Lazy loading
 Lazy loading defers loading association data until it is absolutely
 required. While this can save CPU time because possibly unused data is not
 hydrated into objects, it can result in many more queries being emitted to
@@ -598,8 +598,6 @@ When converting an entity to an JSON, the virtual & hidden field lists are
 applied. Entities are recursively converted to JSON as well. This means that if you
 eager loaded entities and their associations CakePHP will correctly handle
 converting the associated data into the correct format.
-
-<a id="exposing-virtual-fields"></a>
 
 ### Exposing Virtual Fields
 

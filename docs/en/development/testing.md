@@ -225,8 +225,6 @@ the creation of new bugs.
 > multiple tests at once, you will lose your event listeners that were
 > registered in config/bootstrap.php as the bootstrap is only executed once.
 
-<a id="running-tests"></a>
-
 ## Running Tests
 
 Once you have PHPUnit installed and some test cases written, you'll want to run
@@ -1910,8 +1908,6 @@ indicating 1 pass and 4 assertions.
 
 When you are testing a Helper which uses other helpers, be sure to mock the
 View clases `loadHelpers` method.
-
-<a id="testing-events"></a>
 
 ## Testing Events
 

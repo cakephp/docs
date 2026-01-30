@@ -50,8 +50,6 @@ message, file and line (`debug` enabled).
 > If you use a custom error handler, the supported options will
 > depend on your handler.
 
-<a id="deprecation-warnings"></a>
-
 ## Deprecation Warnings
 
 CakePHP uses deprecation warnings to indicate when features have been
@@ -235,8 +233,6 @@ class ErrorController extends AppController
 ::: info Added in version 5.2.0
 Exception specific controller methods and templates were added.
 :::
-
-<a id="custom-exceptionrenderer"></a>
 
 ## Custom ExceptionRenderer
 

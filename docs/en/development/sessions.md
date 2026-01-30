@@ -6,8 +6,6 @@ requests and store persistent data for specific users. Unlike Cookies, session
 data is not available on the client side. Usage of `$_SESSION` is generally
 avoided in CakePHP, and instead usage of the Session classes is preferred.
 
-<a id="session-configuration"></a>
-
 ## Session Configuration
 
 Session configuration is generally defined in **/config/app.php**. The available

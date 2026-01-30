@@ -336,8 +336,6 @@ $this->setDisplayField('label'); // Will utilize Author::_getLabel()
 $query = $authors->find('list'); // Will utilize AuthorsTable::getDisplayField()
 ```
 
-<a id="finding-threaded-data"></a>
-
 ## Finding Threaded Data
 
 The `find('threaded')` finder returns nested entities that are threaded
@@ -412,8 +410,6 @@ methods can also be defined on [Behaviors](../orm/behaviors).
 If you need to modify the results after they have been fetched you should use
 a [Map Reduce](#map-reduce) function to modify the results. The map reduce features
 replace the 'afterFind' callback found in previous versions of CakePHP.
-
-<a id="dynamic-finders"></a>
 
 ## Dynamic Finders
 
@@ -552,7 +548,7 @@ You can select fields from all associations with multiple `contain()`
 statements:
 
 ``` php
-$query = $this->find()->select([
+$query = $products->find()->select([
     'Realestates.id',
     'Realestates.title',
     'Realestates.description',
@@ -1115,8 +1111,6 @@ has any rows in it.
 $results = $query->all();
 $results->isEmpty();
 ```
-
-<a id="loading-additional-associations"></a>
 
 ### Loading Additional Associations
 

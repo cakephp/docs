@@ -224,8 +224,6 @@ generating code or doing work based on conventions:
 Inflector::variable('apple_pie');
 ```
 
-<a id="inflection-configuration"></a>
-
 ## Inflection Configuration
 
 CakePHP's naming conventions can be really nice - you can name your database
