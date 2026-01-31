@@ -40,7 +40,7 @@ customize multiple templates and keep your code DRY:
 public function initialize(): void
 {
     ...
-    $this->loadHelper('Paginator', ['templates' => 'paginator-templates']);
+    $this->addHelper('Paginator', ['templates' => 'paginator-templates']);
 }
 ```
 
@@ -53,7 +53,7 @@ from a plugin using `plugin syntax`:
 public function initialize(): void
 {
     ...
-    $this->loadHelper('Paginator', ['templates' => 'MyPlugin.paginator-templates']);
+    $this->addHelper('Paginator', ['templates' => 'MyPlugin.paginator-templates']);
 }
 ```
 

@@ -224,7 +224,7 @@ As you can see above there should be one space on both sides of equals sign (=).
 Example of a method definition:
 
 ``` php
-public function someFunction($arg1, $arg2 = '')
+public function someFunction(string $arg1, string $arg2 = ''): mixed
 {
     if (expr) {
         statement;
@@ -239,7 +239,7 @@ Try to make your functions return something, at least `true` or `false`, so
 it can be determined whether the function call was successful:
 
 ``` php
-public function connection($dns, $persistent = false)
+public function connection(string|array $dns, bool $persistent = false): bool
 {
     if (is_array($dns)) {
         $dnsInfo = $dns;
@@ -262,7 +262,7 @@ There are spaces on both side of the equals sign.
 Try to avoid unnecessary nesting by bailing early:
 
 ``` php
-public function run(array $data)
+public function run(array $data): bool
 {
     ...
     if (!$success) {
@@ -272,7 +272,7 @@ public function run(array $data)
     ...
 }
 
-public function check(array $data)
+public function check(array $data): void
 {
     ...
     if (!$success) {
@@ -299,7 +299,7 @@ We only typehint public methods, though, as typehinting is not cost-free:
  * @param callable $callback Some callback.
  * @param bool $boolean Some boolean value.
  */
-public function foo(Table $table, array $array, callable $callback, $boolean)
+public function foo(Table $table, array $array, callable $callback, bool $boolean): void
 {
 }
 ```
@@ -317,7 +317,7 @@ type:
  *
  * @param array|\ArrayObject $array Some array value.
  */
-public function foo($array)
+public function foo(array|\ArrayObject $array): void
 {
 }
 ```
@@ -456,7 +456,7 @@ instead:
  *
  * @return $this
  */
-public function foo()
+public function foo(): static
 {
     return $this;
 }
@@ -650,7 +650,7 @@ class Thing
 {
     private $property; // Defined
 
-    public function readProperty()
+    public function readProperty(): void
     {
         // Not recommended as the property is defined in the class
         if (!isset($this->property)) {

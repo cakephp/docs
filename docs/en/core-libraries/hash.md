@@ -666,7 +666,7 @@ this method:
 // Call the noop function $this->noop() on every element of $data
 $result = Hash::map($data, "{n}", [$this, 'noop']);
 
-public function noop(array $array)
+public function noop(array $array): array
 {
     // Do stuff to array and return the result
     return $array;

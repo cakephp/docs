@@ -24,7 +24,7 @@ use Cake\View\Cell;
 
 class InboxCell extends Cell
 {
-    public function display()
+    public function display(): void
     {
     }
 }
@@ -63,7 +63,7 @@ use Cake\View\Cell;
 
 class InboxCell extends Cell
 {
-    public function display()
+    public function display(): void
     {
         $unread = $this->fetchTable('Messages')->find('unread');
         $this->set('unread_count', $unread->count());
@@ -140,7 +140,7 @@ $cell = $this->cell('Inbox::recent', ['-3 days']);
 The above would match the following function signature:
 
 ``` php
-public function recent($since)
+public function recent(string $since): void
 {
 }
 ```
@@ -225,7 +225,7 @@ use Cake\Datasource\Paging\NumericPaginator;
 
 class FavoritesCell extends Cell
 {
-    public function display($user)
+    public function display(User $user): void
     {
         // Create a paginator
         $paginator = new NumericPaginator();
@@ -263,11 +263,11 @@ use Cake\View\Cell;
 
 class FavoritesCell extends Cell
 {
-    protected $_validCellOptions = ['limit'];
+    protected array $_validCellOptions = ['limit'];
 
-    protected $limit = 3;
+    protected int $limit = 3;
 
-    public function display($userId)
+    public function display(int $userId): void
     {
         $result = $this->fetchTable('Users')->find('friends', ['for' => $userId])
             ->limit($this->limit)

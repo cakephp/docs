@@ -2325,7 +2325,7 @@ option when including the helper in your controller:
 
 ``` php
 // In a View class
-$this->loadHelper('Form', [
+$this->addHelper('Form', [
     'templates' => 'app_form',
 ]);
 ```
@@ -2643,7 +2643,7 @@ class AutocompleteWidget implements WidgetInterface
      *
      * @var \Cake\View\StringTemplate
      */
-    protected $_templates;
+    protected StringTemplate $_templates;
 
     /**
      * Constructor.
@@ -2702,7 +2702,7 @@ a setting:
 
 ``` php
 // In View class
-$this->loadHelper('Form', [
+$this->addHelper('Form', [
     'widgets' => [
         'autocomplete' => ['Autocomplete'],
     ],
@@ -2713,7 +2713,7 @@ If your widget requires other widgets, you can have FormHelper populate those
 dependencies by declaring them:
 
 ``` php
-$this->loadHelper('Form', [
+$this->addHelper('Form', [
     'widgets' => [
         'autocomplete' => [
             'App\View\Widget\AutocompleteWidget',

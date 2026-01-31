@@ -136,7 +136,7 @@ use Cake\View\Helper;
 
 class ProgressHelper extends Helper
 {
-    public function bar($value)
+    public function bar(int|float $value): string
     {
         $width = round($value / 100, 2) * 100;
 
@@ -1742,9 +1742,9 @@ controllers that use it. Here is our example component located in
 ``` php
 class PagematronComponent extends Component
 {
-    public $controller = null;
+    public ?Controller $controller = null;
 
-    public function setController($controller)
+    public function setController(Controller $controller): void
     {
         $this->controller = $controller;
         // Make sure the controller is using pagination
@@ -1792,8 +1792,8 @@ use Cake\TestSuite\TestCase;
 
 class PagematronComponentTest extends TestCase
 {
-    protected $component;
-    protected $controller;
+    protected PagematronComponent $component;
+    protected Controller $controller;
 
     public function setUp(): void
     {
@@ -1872,7 +1872,7 @@ use Cake\View\View;
 
 class CurrencyRendererHelperTest extends TestCase
 {
-    public $helper = null;
+    public ?CurrencyRendererHelper $helper = null;
 
     // Here we instantiate our helper
     public function setUp(): void
@@ -1940,7 +1940,7 @@ class OrdersTable extends Table
 
 class CartsTable extends Table
 {
-    public function initialize()
+    public function initialize(): void
     {
         // Models don't share the same event manager instance,
         // so we need to use the global instance to listen to

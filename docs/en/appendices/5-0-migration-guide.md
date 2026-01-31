@@ -364,7 +364,7 @@ Table finders can now have typed arguments as required instead of an options arr
 For e.g. a finder for fetching posts by category or user:
 
 ``` php
-public function findByCategoryOrUser(SelectQuery $query, array $options)
+public function findByCategoryOrUser(SelectQuery $query, array $options): SelectQuery
 {
     if (isset($options['categoryId'])) {
         $query->where(['category_id' => $options['categoryId']]);
@@ -380,7 +380,7 @@ public function findByCategoryOrUser(SelectQuery $query, array $options)
 can now be written as:
 
 ``` php
-public function findByCategoryOrUser(SelectQuery $query, ?int $categoryId = null, ?int $userId = null)
+public function findByCategoryOrUser(SelectQuery $query, ?int $categoryId = null, ?int $userId = null): SelectQuery
 {
     if ($categoryId) {
         $query->where(['category_id' => $categoryId]);

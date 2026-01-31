@@ -138,7 +138,7 @@ background:#633; border-bottom:1px solid #000; padding:10px;
 `method` Cake\\View\\Helper\\HtmlHelper::**meta**(string|array $type, string $url = null, array $options = []): string|null
 
 This method is handy for linking to external resources like RSS/Atom feeds
-and favicons. Like css(), you can specify whether or not you'd like this tag
+and favicons. Like css(), you can specify whether you'd like this tag
 to appear inline or appended to the `meta` block by setting the 'block'
 key in the `$attributes` parameter to `true`, ie - `['block' => true]`.
 

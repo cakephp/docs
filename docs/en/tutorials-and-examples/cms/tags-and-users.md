@@ -352,7 +352,7 @@ protected array $_accessible = [
     'tag_string' => true,
 ];
 
-protected function _getTagString()
+protected function _getTagString(): string
 {
     if (isset($this->_fields['tag_string'])) {
         return $this->_fields['tag_string'];
@@ -428,7 +428,7 @@ public function beforeSave(EventInterface $event, $entity, $options): void
     // Other code
 }
 
-protected function _buildTags($tagString)
+protected function _buildTags(string $tagString): array
 {
     // Trim tags
     $newTags = array_map('trim', explode(',', $tagString));

@@ -487,7 +487,7 @@ namespace App\I18n\Parser;
 
 class YamlFileParser
 {
-    public function parse($file)
+    public function parse(string $file): array
     {
         return yaml_parse_file($file);
     }

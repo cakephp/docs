@@ -166,7 +166,7 @@ asset cache busting parameters you can use the `assetUrlClassName` option:
 
 ``` php
 // In view initialize
-$this->loadHelper('Url', ['assetUrlClassName' => AppAsset::class]);
+$this->addHelper('Url', ['assetUrlClassName' => AppAsset::class]);
 ```
 
 When using the `assetUrlClassName` you must implement the same methods as

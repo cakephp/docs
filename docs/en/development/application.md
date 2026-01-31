@@ -55,7 +55,7 @@ use Cake\Http\BaseApplication;
 
 class Application extends BaseApplication
 {
-    public function bootstrap()
+    public function bootstrap(): void
     {
         // Call the parent to `require_once` config/bootstrap.php
         parent::bootstrap();

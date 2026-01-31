@@ -346,7 +346,7 @@ class DatabaseLog extends BaseLog
         // ...
     }
 
-    public function log($level, string $message, array $context = [])
+    public function log($level, string $message, array $context = []): void
     {
         // Write to the database.
     }

@@ -292,7 +292,7 @@ use Cake\Http\Session\DatabaseSession;
 
 class ComboSession extends DatabaseSession
 {
-    protected $cacheKey;
+    protected string $cacheKey;
 
     public function __construct()
     {

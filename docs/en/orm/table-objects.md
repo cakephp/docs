@@ -142,13 +142,13 @@ more detail on how to use the events subsystem:
 $articles->save($article, ['customVariable1' => 'yourValue1']);
 
 // In ArticlesTable.php
-public function afterSave(Event $event, EntityInterface $entity, ArrayObject $options)
+public function afterSave(Event $event, EntityInterface $entity, ArrayObject $options): void
 {
     $customVariable = $options['customVariable1'];  // 'yourValue1'
     $options['customVariable2'] = 'yourValue2';
 }
 
-public function afterSaveCommit(Event $event, EntityInterface $entity, ArrayObject $options)
+public function afterSaveCommit(Event $event, EntityInterface $entity, ArrayObject $options): void
 {
     $customVariable = $options['customVariable1'];  // 'yourValue1'
     $customVariable = $options['customVariable2'];  // 'yourValue2'

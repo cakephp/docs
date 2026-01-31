@@ -287,7 +287,7 @@ use Cake\Error\Renderer\WebExceptionRenderer;
 
 class AppExceptionRenderer extends WebExceptionRenderer
 {
-    public function notFound($error)
+    public function notFound(NotFoundException $error): void
     {
         // Do something with NotFoundException objects.
     }
@@ -358,10 +358,10 @@ use Cake\Core\Exception\CakeException;
 class MissingWidgetException extends CakeException
 {
     // Context data is interpolated into this format string.
-    protected $_messageTemplate = 'Seems that %s is missing.';
+    protected string $_messageTemplate = 'Seems that %s is missing.';
 
     // You can set a default exception code as well.
-    protected $_defaultCode = 404;
+    protected int $_defaultCode = 404;
 }
 
 throw new MissingWidgetException(['widget' => 'Pointy']);

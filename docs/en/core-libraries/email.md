@@ -358,7 +358,7 @@ use Cake\Mailer\Mailer;
 
 class UserMailer extends Mailer
 {
-    public function welcome($user)
+    public function welcome(User $user): void
     {
         $this
             ->setTo($user->email)
@@ -367,7 +367,7 @@ class UserMailer extends Mailer
                 ->setTemplate('welcome_mail'); // By default, template with same name as method name is used.
     }
 
-    public function resetPassword($user)
+    public function resetPassword(User $user): void
     {
         $this
             ->setTo($user->email)

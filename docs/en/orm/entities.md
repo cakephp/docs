@@ -557,7 +557,7 @@ namespace SoftDelete\Model\Entity;
 
 trait SoftDeleteTrait
 {
-    public function softDelete()
+    public function softDelete(): void
     {
         $this->set('deleted', true);
     }
@@ -637,7 +637,7 @@ use Cake\ORM\Entity;
 
 class User extends Entity
 {
-    protected $_hidden = ['password'];
+    protected array $_hidden = ['password'];
 }
 ```
 

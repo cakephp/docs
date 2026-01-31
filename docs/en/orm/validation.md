@@ -641,7 +641,7 @@ use Cake\Datasource\EntityInterface;
 
 class CustomRule
 {
-    public function __invoke(EntityInterface $entity, array $options)
+    public function __invoke(EntityInterface $entity, array $options): bool
     {
         // Do work
         return false;

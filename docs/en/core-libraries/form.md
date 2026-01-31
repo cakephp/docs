@@ -200,7 +200,7 @@ invalidate the fields accordingly to the feedback from the remote server:
 
 ``` php
 // in src/Form/ContactForm.php
-public function setErrors($errors)
+public function setErrors(array $errors): void
 {
     $this->_errors = $errors;
 }

@@ -386,7 +386,7 @@ use Cake\ORM\Table;
 
 class ArticlesTable extends Table
 {
-    public function findOwnedBy(SelectQuery $query, User $user)
+    public function findOwnedBy(SelectQuery $query, User $user): SelectQuery
     {
         return $query->where(['author_id' => $user->id]);
     }
@@ -1352,17 +1352,17 @@ This is particularly useful for building custom finder methods as described in t
 [Custom Find Methods](#custom-find-methods) section:
 
 ``` php
-public function findPublished(SelectQuery $query)
+public function findPublished(SelectQuery $query): SelectQuery
 {
     return $query->where(['published' => true]);
 }
 
-public function findRecent(SelectQuery $query)
+public function findRecent(SelectQuery $query): SelectQuery
 {
     return $query->where(['created >=' => new DateTime('1 day ago')]);
 }
 
-public function findCommonWords(SelectQuery $query)
+public function findCommonWords(SelectQuery $query): SelectQuery
 {
     // Same as in the common words example in the previous section
     $mapper = ...;

@@ -100,7 +100,7 @@ to the table. For example, if our SluggableBehavior defined the following
 method:
 
 ``` php
-public function slug($value)
+public function slug(string $value): string
 {
     return Text::slug($value, $this->_config['replacement']);
 }
@@ -124,7 +124,7 @@ public methods as mixin methods. In these cases you can use the
 example if we wanted to prefix our slug() method we could do the following:
 
 ``` php
-protected $_defaultConfig = [
+protected array $_defaultConfig = [
     'implementedMethods' => [
         'superSlug' => 'slug',
     ]
@@ -174,7 +174,7 @@ class SluggableBehavior extends Behavior
         'replacement' => '-',
     ];
 
-    public function slug(EntityInterface $entity)
+    public function slug(EntityInterface $entity): void
     {
         $config = $this->getConfig();
         $value = $entity->get($config['field']);
@@ -273,7 +273,7 @@ marshalled by implementing the `Cake\ORM\PropertyMarshalInterface`. This
 interface requires a single method to be implemented:
 
 ``` php
-public function buildMarshalMap($marshaller, $map, $options)
+public function buildMarshalMap(Marshaller $marshaller, array $map, array $options): array
 {
     return [
         'custom_behavior_field' => function ($value, $entity) {

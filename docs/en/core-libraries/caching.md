@@ -361,7 +361,7 @@ For example, you often want to cache remote service call results. You could use
 ``` php
 class IssueService
 {
-    public function allIssues($repo)
+    public function allIssues(string $repo): mixed
     {
         return Cache::remember($repo . '-issues', function () use ($repo) {
             return $this->fetchAll($repo);
@@ -576,7 +576,7 @@ remove all entries associated to the `article` group:
 
 ``` php
 // src/Model/Table/ArticlesTable.php
-public function afterSave($event, $entity, $options = [])
+public function afterSave(EventInterface $event, EntityInterface $entity, ArrayObject $options): void
 {
     if ($entity->isNew()) {
         Cache::clearGroup('article', 'site_home');
@@ -598,7 +598,7 @@ configurations, i.e.: having the same group:
  * A variation of previous example that clears all Cache configurations
  * having the same group
  */
-public function afterSave($event, $entity, $options = [])
+public function afterSave(EventInterface $event, EntityInterface $entity, ArrayObject $options): void
 {
     if ($entity->isNew()) {
         $configs = Cache::groupConfigs('article');

@@ -142,7 +142,7 @@ use ContactManager\ContactManagerPlugin;
 
 class Application extends BaseApplication
 {
-    public function bootstrap()
+    public function bootstrap(): void
     {
         parent::bootstrap();
 

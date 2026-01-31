@@ -254,7 +254,7 @@ use Cake\View\Helper;
 
 class LinkHelper extends Helper
 {
-    public function makeEdit($title, $url)
+    public function makeEdit(string $title, string|array $url): string
     {
         // Logic to create specially formatted link goes here...
     }
@@ -278,7 +278,7 @@ class LinkHelper extends Helper
 {
     protected array $helpers = ['Html'];
 
-    public function makeEdit($title, $url)
+    public function makeEdit(string $title, string|array $url): string
     {
         // Use the HTML helper to output
         // Formatted data:
@@ -330,7 +330,7 @@ class AwesomeHelper extends Helper
 {
     public array $helpers = ['Html'];
 
-    public function someMethod()
+    public function someMethod(): string
     {
         // set meta description
         return $this->Html->meta(
@@ -348,7 +348,7 @@ If you would like to render an Element inside your Helper you can use
 ``` php
 class AwesomeHelper extends Helper
 {
-    public function someFunction()
+    public function someFunction(): string
     {
         return $this->getView()->element(
             '/path/to/element',

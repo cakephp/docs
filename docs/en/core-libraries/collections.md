@@ -1265,7 +1265,7 @@ This can be refactored by creating another class:
 ``` php
 class TotalOrderCalculator
 {
-    public function __invoke($row, $key)
+    public function __invoke(array $row, string $key): array
     {
         if (!empty($row['items'])) {
             $row['total'] = collection($row['items'])->sumOf('price');
@@ -1309,7 +1309,7 @@ be repeated every time:
 ``` php
 class FinalCheckOutRowProcessor
 {
-    public function __invoke($collection)
+    public function __invoke(CollectionInterface $collection): CollectionInterface
     {
         return $collection
             ->map(new ShippingCostCalculator)
@@ -1396,7 +1396,7 @@ The `buffered()` method is also useful for converting non-rewindable iterators
 into collections that can be iterated more than once:
 
 ``` php
-public function results()
+public function results(): Generator
 {
     ...
     foreach ($transientElements as $e) {
