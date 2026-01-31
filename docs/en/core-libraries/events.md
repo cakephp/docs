@@ -550,7 +550,7 @@ public function updateBuyStatistic(EventInterface $event): void
 ```
 
 Stopping an event will prevent any additional callbacks from being called.
-Additionally the code triggering the event may behave differently based on the
+Additionally, the code triggering the event may behave differently based on the
 event being stopped or not. Generally it does not make sense to stop 'after'
 events, but stopping 'before' events is often used to prevent the entire
 operation from occurring.

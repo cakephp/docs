@@ -92,7 +92,7 @@ can be used as part of a fluent method chain.
 
 When creating positional arguments, you can use the `required` flag, to
 indicate that an argument must be present when a shell is called.
-Additionally you can use `choices` to force an argument to be from a list of
+Additionally, you can use `choices` to force an argument to be from a list of
 valid choices:
 
 ``` php

@@ -55,7 +55,7 @@ class User extends Entity
     // Add this method
     protected function _setPassword(string $password) : ?string
     {
-        if (strlen($password) > 0) {
+        if (mb_strlen($password) > 0) {
             return (new DefaultPasswordHasher())->hash($password);
         }
         return null;

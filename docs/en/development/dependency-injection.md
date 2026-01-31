@@ -687,7 +687,7 @@ class BillingServiceProvider extends ServiceProvider
 ```
 
 Service providers use their `services()` method to define all the services they
-will provide. Additionally those services **must be** defined in the `$provides`
+will provide. Additionally, those services **must be** defined in the `$provides`
 property. Failing to include a service in the `$provides` property will result
 in it not be loadable from the container.
 
