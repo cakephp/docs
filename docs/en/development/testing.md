@@ -216,7 +216,7 @@ incorrect.
 By using test cases you can describe the relationship between a set of
 known inputs and their expected output. This helps you be more confident of the
 code you're writing as you can ensure that the code you wrote fulfills the
-expectations and assertions your tests make. Additionally because tests are
+expectations and assertions your tests make. Additionally, because tests are
 code, they can be re-run whenever you make a change. This helps prevent
 the creation of new bugs.
 
@@ -548,19 +548,19 @@ class ArticlesFixture extends TestFixture
 {
         // Optional. Set this property to load fixtures
         // to a different test datasource
-        public $connection = 'test';
+        public string $connection = 'test';
 
         // Optional. Lets you define which table alias is used when
         // reflecting schema and inserting rows. Inferred from the
         // class name by default. Added in 5.3.0
-        public $tableAlias = 'Articles';
+        public string $tableAlias = 'Articles';
 
         // Optional. Lets you define the table name for a fixture.
         // If defined, this table name will be camelized to create
         // $tableAlias.
-        public $table = 'articles';
+        public string $table = 'articles';
 
-        public $records = [
+        public array $records = [
             [
                 'title' => 'First Article',
                 'body' => 'First Article Body',
@@ -617,7 +617,7 @@ use Cake\TestSuite\Fixture\TestFixture;
 
 class ArticlesFixture extends TestFixture
 {
-    protected $strictFields = true;
+    protected bool $strictFields = true;
 
     // rest of fixture
 }
@@ -671,7 +671,7 @@ you define the `$fixtures` property in your model:
 ``` php
 class ArticlesTest extends TestCase
 {
-    protected $fixtures = ['app.Articles', 'app.Comments'];
+    protected array $fixtures =['app.Articles', 'app.Comments'];
 }
 ```
 
@@ -694,7 +694,7 @@ Fixture directory. You can also load fixtures from CakePHP core, or plugins:
 ``` php
 class ArticlesTest extends TestCase
 {
-    protected $fixtures = [
+    protected array $fixtures =[
         'plugin.DebugKit.Articles',
         'plugin.MyVendorName/MyPlugin.Messages',
         'core.Comments',
@@ -713,7 +713,7 @@ name:
 ``` php
 class ArticlesTest extends CakeTestCase
 {
-    protected $fixtures = ['app.Blog/Articles', 'app.Blog/Comments'];
+    protected array $fixtures =['app.Blog/Articles', 'app.Blog/Comments'];
 }
 ```
 
@@ -926,7 +926,7 @@ use Cake\TestSuite\TestCase;
 
 class ArticlesTableTest extends TestCase
 {
-    protected $fixtures = ['app.Articles'];
+    protected array $fixtures =['app.Articles'];
 }
 ```
 
@@ -948,7 +948,7 @@ use Cake\TestSuite\TestCase;
 
 class ArticlesTableTest extends TestCase
 {
-    protected $fixtures = ['app.Articles'];
+    protected array $fixtures =['app.Articles'];
 
     public function setUp(): void
     {
@@ -1100,7 +1100,7 @@ class ArticlesControllerTest extends TestCase
 {
     use IntegrationTestTrait;
 
-    protected $fixtures = ['app.Articles'];
+    protected array $fixtures =['app.Articles'];
 
     public function testIndex(): void
     {
@@ -1976,7 +1976,7 @@ use Cake\TestSuite\TestCase;
 
 class OrdersTableTest extends TestCase
 {
-    protected $fixtures = ['app.Orders'];
+    protected array $fixtures =['app.Orders'];
 
     public function setUp(): void
     {
@@ -2062,7 +2062,7 @@ use Cake\TestSuite\TestCase;
 class BlogPostsTableTest extends TestCase
 {
     // Plugin fixtures located in /plugins/Blog/tests/Fixture/
-    protected $fixtures = ['plugin.Blog.BlogPosts'];
+    protected array $fixtures =['plugin.Blog.BlogPosts'];
 
     public function testSomething(): void
     {
@@ -2073,7 +2073,7 @@ class BlogPostsTableTest extends TestCase
 
 If you want to use plugin fixtures in the app tests you can
 reference them using `plugin.pluginName.fixtureName` syntax in the
-`$fixtures` array. Additionally if you use vendor plugin name or fixture
+`$fixtures` array. Additionally, if you use vendor plugin name or fixture
 directories you can use the following: `plugin.vendorName/pluginName.folderName/fixtureName`.
 
 Before you can use fixtures you should ensure you have the [fixture

@@ -113,7 +113,7 @@ changes made:
 ### Database
 
 - The `DateTimeType` and `DateType` now always return immutable objects.
-  Additionally the interface for `Date` objects reflects the `ChronosDate`
+  Additionally, the interface for `Date` objects reflects the `ChronosDate`
   interface which lacks all the time related methods that were present in
   CakePHP 4.x.
 - `DateType::setLocaleFormat()` no longer accepts an array.

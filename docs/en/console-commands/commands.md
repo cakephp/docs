@@ -170,7 +170,7 @@ use Cake\Console\ConsoleOptionParser;
 class UserCommand extends Command
 {
     // Define the default table. This allows you to use `fetchTable()` without any argument.
-    protected $defaultTable = 'Users';
+    protected string $defaultTable = 'Users';
 
     protected function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
     {
@@ -485,7 +485,7 @@ class UpdateTableCommandTest extends TestCase
 {
     use ConsoleIntegrationTestTrait;
 
-    protected $fixtures = [
+    protected array $fixtures = [
         // assumes you have a UsersFixture
         'app.Users',
     ];
