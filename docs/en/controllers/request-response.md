@@ -75,7 +75,7 @@ are also all found in the routing parameters:
 
 ### Query String Parameters
 
-`method` Cake\\Http\\ServerRequest::**getQuery**($name, $default = null): mixed
+`method` Cake\\Http\\ServerRequest::**getQuery**(?string $name = null, mixed $default = null): mixed
 
 Query string parameters can be read using the `getQuery()` method:
 
@@ -135,7 +135,7 @@ Casting functions were added.
 
 ### Request Body Data
 
-`method` Cake\\Http\\ServerRequest::**getData**($name, $default = null): mixed
+`method` Cake\\Http\\ServerRequest::**getData**(?string $name = null, mixed $default = null): mixed
 
 All POST data normally available through PHP's `$_POST` global variable can be
 accessed using `Cake\Http\ServerRequest::getData()`. For example:
@@ -210,7 +210,7 @@ necessary. In an CLI environment, where the concept of uploading files doesn't
 exist, it will allow to move the file that you've referenced irrespective of its
 origins, which makes testing file uploads possible.
 
-`method` Cake\\Http\\ServerRequest::**getUploadedFile**($path): UploadedFileInterface|null
+`method` Cake\\Http\\ServerRequest::**getUploadedFile**(string $path): UploadedFileInterface|null
 
 Returns the uploaded file at a specific path. The path uses the same dot syntax as the
 `Cake\Http\ServerRequest::getData()` method:
@@ -296,7 +296,7 @@ types making the parsed data available in `$request->getData()` and
 
 ### Environment Variables (from $_SERVER and $_ENV)
 
-`method` Cake\\Http\\ServerRequest::**getEnv**($key, $default = null): string|null
+`method` Cake\\Http\\ServerRequest::**getEnv**(string $key, ?string $default = null): string|null
 
 `ServerRequest::getEnv()` is a wrapper for `getenv()` global function and acts as
 a getter for environment variables without possible undefined keys:
@@ -311,7 +311,7 @@ To access all the environment variables in a request use `getServerParams()`:
 $env = $this->request->getServerParams();
 ```
 
-`method` Cake\\Http\\ServerRequest::**withEnv**($key, $value): static
+`method` Cake\\Http\\ServerRequest::**withEnv**(string $key, string $value): static
 
 `ServerRequest::withEnv()` is a wrapper for `putenv()` global function and acts as
 a setter for environment variables without having to modify globals
@@ -368,7 +368,7 @@ $base = $request->getAttribute('webroot');
 
 ### Checking Request Conditions
 
-`method` Cake\\Http\\ServerRequest::**is**($type, $args...): bool
+`method` Cake\\Http\\ServerRequest::**is**(array|string $type, mixed ...$args): bool
 
 The request object provides a way to inspect certain conditions in a given
 request. By using the `is()` method you can check a number of common
@@ -395,7 +395,7 @@ detectors. There are different types of detectors that you can create:
   to handle the check. The callback will receive the request object as its only
   parameter.
 
-`method` Cake\\Http\\ServerRequest::**addDetector**($name, $options): void
+`method` Cake\\Http\\ServerRequest::**addDetector**(string $name, Closure|array $options): void
 
 Some examples would be:
 
@@ -492,7 +492,7 @@ to use the session object.
 
 ### Host and Domain Name
 
-`method` Cake\\Http\\ServerRequest::**domain**($tldLength = 1): string
+`method` Cake\\Http\\ServerRequest::**domain**(int $tldLength = 1): string
 
 Returns the domain name your application is running on:
 
@@ -501,7 +501,7 @@ Returns the domain name your application is running on:
 echo $request->domain();
 ```
 
-`method` Cake\\Http\\ServerRequest::**subdomains**($tldLength = 1): array
+`method` Cake\\Http\\ServerRequest::**subdomains**(int $tldLength = 1): array
 
 Returns the subdomains your application is running on as an array:
 
@@ -532,7 +532,7 @@ echo $request->getMethod();
 
 ### Restricting Which HTTP method an Action Accepts
 
-`method` Cake\\Http\\ServerRequest::**allowMethod**($methods): bool
+`method` Cake\\Http\\ServerRequest::**allowMethod**(array|string $methods): bool
 
 Set allowed HTTP methods. If not matched, will throw
 `MethodNotAllowedException`. The 405 response will include the required
@@ -566,7 +566,7 @@ $hasAcceptHeader = $this->request->hasHeader('Accept');
 While some apache installs don't make the `Authorization` header accessible,
 CakePHP will make it available through apache specific methods as required.
 
-`method` Cake\\Http\\ServerRequest::**referer**($local = true): string|null
+`method` Cake\\Http\\ServerRequest::**referer**(bool $local = true): string|null
 
 Returns the referring address for the request.
 
@@ -608,7 +608,7 @@ proxy.
 
 ### Checking Accept Headers
 
-`method` Cake\\Http\\ServerRequest::**accepts**($type = null): array|bool
+`method` Cake\\Http\\ServerRequest::**accepts**(?string $type = null): array|bool
 
 Find out which content types the client accepts, or check whether it accepts a
 particular type of content.
@@ -625,7 +625,7 @@ Check for a single type:
 $acceptsJson = $this->request->accepts('application/json');
 ```
 
-`method` Cake\\Http\\ServerRequest::**acceptLanguage**($language = null): array|bool
+`method` Cake\\Http\\ServerRequest::**acceptLanguage**(?string $language = null): array|bool
 
 Get all the languages accepted by the client,
 or check whether a specific language is accepted.
@@ -717,7 +717,7 @@ tasks such as:
 
 ### Dealing with Content Types
 
-`method` Cake\\Http\\Response::**withType**($contentType = null): static
+`method` Cake\\Http\\Response::**withType**(string $contentType): static
 
 You can control the Content-Type of your application's responses with
 `Cake\Http\Response::withType()`. If your application needs to deal
@@ -836,7 +836,7 @@ redirect location header.
 
 ### Setting the Body
 
-`method` Cake\\Http\\Response::**withStringBody**($string): static
+`method` Cake\\Http\\Response::**withStringBody**(string $string): static
 
 To set a string as the response body, do the following:
 
@@ -891,7 +891,7 @@ $response = $response->withBody($stream);
 
 ### Setting the Character Set
 
-`method` Cake\\Http\\Response::**withCharset**($charset): static
+`method` Cake\\Http\\Response::**withCharset**(string $charset): static
 
 Sets the charset that will be used in the response:
 
@@ -919,7 +919,7 @@ public function index()
 > Disabling caching from SSL domains while trying to send
 > files to Internet Explorer can result in errors.
 
-`method` Cake\\Http\\Response::**withCache**($since, $time = '+1 day'): static
+`method` Cake\\Http\\Response::**withCache**(string $since, string $time = '+1 day'): static
 
 You can also tell clients that you want them to cache responses. By using
 `Cake\Http\Response::withCache()`:
@@ -957,7 +957,7 @@ or reverse proxy caching.
 
 #### The Cache Control Header
 
-`method` Cake\\Http\\Response::**withSharable**($public, $time = null): static
+`method` Cake\\Http\\Response::**withSharable**(bool $public, ?int $time = null): static
 
 Used under the expiration model, this header contains multiple indicators that
 can change the way browsers or proxies use the cached content. A
@@ -998,7 +998,7 @@ the `Cache-Control` header.
 
 #### The Expiration Header
 
-`method` Cake\\Http\\Response::**withExpires**($time): static
+`method` Cake\\Http\\Response::**withExpires**(DateTimeInterface|string $time): static
 
 You can set the `Expires` header to a date and time after which the response
 is no longer considered fresh. This header can be set using the
@@ -1016,7 +1016,7 @@ be parsed by the `DateTime` class.
 
 #### The Etag Header
 
-`method` Cake\\Http\\Response::**withEtag**($tag, $weak = false): static
+`method` Cake\\Http\\Response::**withEtag**(string $tag, bool $weak = false): static
 
 Cache validation in HTTP is often used when content is constantly changing, and
 asks the application to only generate the response contents if the cache is no
@@ -1059,7 +1059,7 @@ public function index()
 
 #### The Last Modified Header
 
-`method` Cake\\Http\\Response::**withModified**($time): static
+`method` Cake\\Http\\Response::**withModified**(DateTimeInterface|string $time): static
 
 Also, under the HTTP cache validation model, you can set the `Last-Modified`
 header to indicate the date and time at which the resource was modified for the
@@ -1085,7 +1085,7 @@ public function view()
 
 #### The Vary Header
 
-`method` Cake\\Http\\Response::**withVary**($header): static
+`method` Cake\\Http\\Response::**withVary**(string $header): static
 
 In some cases, you might want to serve different content using the same URL.
 This is often the case if you have a multilingual page or respond with different
@@ -1100,7 +1100,7 @@ $response = $this->response->withVary('Accept-Language');
 
 #### Sending Not-Modified Responses
 
-`method` Cake\\Http\\Response::**isNotModified**(Request $request): bool
+`method` Cake\\Http\\Response::**isNotModified**(ServerRequest $request): bool
 
 Compares the cache headers for the request object with the cache header from the
 response and determines whether it can still be considered fresh. If so, deletes

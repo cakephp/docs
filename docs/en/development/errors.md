@@ -555,7 +555,7 @@ In addition, CakePHP uses the following exceptions:
 These exception classes all extend `Exception`.
 By extending Exception, you can create your own 'framework' errors.
 
-`method` Class::**responseHeader**($header = null, $value = null)
+`method` Cake\\Http\\Exception\\HttpException::**setHeader**(string $header, array|string|null $value = null): void
 
 All Http and Cake exceptions extend the Exception class, which has a method
 to add headers to the response. For instance when throwing a 405

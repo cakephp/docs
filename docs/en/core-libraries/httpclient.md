@@ -596,7 +596,7 @@ $this->mockClientDelete(/* ... */);
 
 ### Response::newClientResponse()
 
-`method` Cake\\Http\\TestSuite\\Response::**newClientResponse**(int $code = 200, array $headers = [], string $body = '')
+`method` Cake\\Http\\TestSuite\\Response::**newClientResponse**(int $code = 200, array $headers = [], string $body = ''): Cake\\Http\\Client\\Response
 
 As seen above you can use the `newClientResponse()` method to create responses
 for the requests your application will make. The headers need to be a list of

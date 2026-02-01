@@ -681,7 +681,7 @@ named. Nameless routes will not have the `_namePrefix` applied to them.
 
 ### Prefix Routing
 
-`static` Cake\\Routing\\RouteBuilder::**prefix**($name, $callback)
+`static` Cake\\Routing\\RouteBuilder::**prefix**(string $name, Closure|array $params = [], ?Closure $callback = null): static
 
 Many applications require an administration section where
 privileged users can make changes. This is often done through a
@@ -824,7 +824,7 @@ This would link to a controller with the namespace `App\Controller\Admin\MyPrefi
 
 ### Plugin Routing
 
-`static` Cake\\Routing\\RouteBuilder::**plugin**($name, $options = [], $callback)
+`static` Cake\\Routing\\RouteBuilder::**plugin**(string $name, Closure|array $options = [], ?Closure $callback = null): static
 
 Routes for [Plugins](../plugins) should be created using the `plugin()`
 method. This method creates a new routing scope for the plugin's routes:
@@ -987,7 +987,7 @@ echo Router::url([
 
 ### Routing File Extensions
 
-`method` Cake\\Routing\\RouteBuilder::**setExtensions**(array|string $extensions)
+`method` Cake\\Routing\\RouteBuilder::**setExtensions**(array|string $extensions): static
 
 To handle different file extensions in your URLs, you can define the extensions
 using the `Cake\Routing\RouteBuilder::setExtensions()` method:
@@ -1410,9 +1410,9 @@ Since `5` has a numeric key, it is treated as a passed argument.
 
 ## Generating URLs
 
-`static` Cake\\Routing\\RouteBuilder::**url**($url = null, $full = false)
+`static` Cake\\Routing\\Router::**url**(Psr\\Http\\Message\\UriInterface|array|string|null $url = null, bool $full = false): string
 
-`static` Cake\\Routing\\RouteBuilder::**reverse**($params, $full = false)
+`static` Cake\\Routing\\Router::**reverse**(Cake\\Http\\ServerRequest|array $params, bool $full = false): string
 
 Generating URLs or Reverse routing is a feature in CakePHP that is used to
 allow you to change your URL structure without having to modify all your code.
@@ -1793,7 +1793,7 @@ standard `plugin syntax`.
 
 ### Default Route Class
 
-`static` Cake\\Routing\\RouteBuilder::**setRouteClass**($routeClass = null)
+`method` Cake\\Routing\\RouteBuilder::**setRouteClass**(string $routeClass): static
 
 If you want to use an alternate route class for your routes besides the
 default `Route`, you can do so by calling `RouteBuilder::setRouteClass()`
@@ -1811,7 +1811,7 @@ Calling the method without an argument will return current default route class.
 
 ### Fallbacks Method
 
-`method` Cake\\Routing\\RouteBuilder::**fallbacks**($routeClass = null)
+`method` Cake\\Routing\\RouteBuilder::**fallbacks**(?string $routeClass = null): static
 
 The fallbacks method is a simple shortcut for defining default routes. The
 method uses the passed routing class for the defined rules or if no class is

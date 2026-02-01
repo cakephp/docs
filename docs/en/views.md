@@ -154,7 +154,7 @@ the `h()` function:
 
 ### Setting View Variables
 
-`method` Cake\\View\\View::**set**(string $var, mixed $value)
+`method` Cake\\View\\View::**set**(array|string $name, mixed $value = null): static
 
 Views have a `set()` method that is analogous to the `set()` found in
 Controller objects. Using set() from your view file will add the variables to

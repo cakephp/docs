@@ -672,19 +672,19 @@ The required API for a CacheEngine is
 
 `class` Cake\\Cache\\**CacheEngine**
 
-`method` Cake\\Cache\\CacheEngine::**write**($key, $value)
+`method` Cake\\Cache\\CacheEngine::**write**(string $key, mixed $value, DateInterval|int|null $ttl = null): bool
 
-`method` Cake\\Cache\\CacheEngine::**read**($key)
+`method` Cake\\Cache\\CacheEngine::**read**(string $key, mixed $default = null): mixed
 
-`method` Cake\\Cache\\CacheEngine::**delete**($key): bool
+`method` Cake\\Cache\\CacheEngine::**delete**(string $key): bool
 
-`method` Cake\\Cache\\CacheEngine::**clear**($check): bool
+`method` Cake\\Cache\\CacheEngine::**clear**(): bool
 
-`method` Cake\\Cache\\CacheEngine::**clearGroup**($group): bool
+`method` Cake\\Cache\\CacheEngine::**clearGroup**(string $group): bool
 
-`method` Cake\\Cache\\CacheEngine::**decrement**($key, $offset = 1): int|false
+`method` Cake\\Cache\\CacheEngine::**decrement**(string $key, int $offset = 1): int|false
 
-`method` Cake\\Cache\\CacheEngine::**increment**($key, $offset = 1): int|false
+`method` Cake\\Cache\\CacheEngine::**increment**(string $key, int $offset = 1): int|false
 
 ## Cache Events
 

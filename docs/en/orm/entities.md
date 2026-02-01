@@ -304,7 +304,7 @@ see [Exposing Virtual Fields](#exposing-virtual-fields).
 
 ## Checking if an Entity Has Been Modified
 
-`method` Cake\\ORM\\Entity::**isDirty**(?string $field = null)
+`method` Cake\\ORM\\Entity::**isDirty**(?string $field = null): bool
 
 You may want to make code conditional based on whether or not fields have
 changed in an entity. For example, you may only want to validate fields when

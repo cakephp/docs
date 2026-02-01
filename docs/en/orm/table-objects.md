@@ -408,7 +408,7 @@ You can manage event priorities in one of a few ways:
 
 ## Behaviors
 
-`method` Cake\\ORM\\Table::**addBehavior**($name, array $options = [])
+`method` Cake\\ORM\\Table::**addBehavior**(string $name, array $options = []): static
 
 <!-- start-behaviors -->
 

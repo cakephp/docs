@@ -300,7 +300,7 @@ you want the filenames to appear in the recipient's mail client:
 
 ### Mailer::addAttachment()
 
-`method` Cake\\Mailer\\Mailer::**addAttachment**(\\Psr\\Http\\Message\\UploadedFileInterface|string $path, ?string $name, ?string $mimetype, ?string $contentId, ?bool $contentDisposition)
+`method` Cake\\Mailer\\Mailer::**addAttachment**(\\Psr\\Http\\Message\\UploadedFileInterface|string $path, ?string $name = null, ?string $mimetype = null, ?string $contentId = null, ?bool $contentDisposition = null): static
 
 You can also add attachments using the `addAttachment()` method.
 
@@ -546,7 +546,7 @@ query string arguments.
 
 ### Mailer::drop()
 
-`static` Cake\\Mailer\\Mailer::**drop**($key)
+`static` Cake\\Mailer\\Mailer::**drop**(string $config): bool
 
 Once configured, transports cannot be modified. In order to modify a transport
 you must first drop it and then reconfigure it.
