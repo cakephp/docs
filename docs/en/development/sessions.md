@@ -390,7 +390,7 @@ In components, use `$this->getController()->getRequest()`.
 
 ## Reading & Writing Session Data
 
-`method` Session::**read**(?string $key = null, mixed $default = null): mixed
+`method` Session::**read**(?string $name = null, mixed $default = null): mixed
 
 You can read values from the session using `Hash::extract()`
 compatible syntax:
@@ -399,7 +399,7 @@ compatible syntax:
 $session->read('Config.language', 'en');
 ```
 
-`method` Session::**readOrFail**(string $key): mixed
+`method` Session::**readOrFail**(string $name): mixed
 
 The same as convenience wrapper around non-nullable return value:
 
@@ -410,7 +410,7 @@ $session->readOrFail('Config.language');
 This is useful, when you know this key has to be set and you don't want to have to check
 for the existence in code itself.
 
-`method` Session::**write**(array|string $key, mixed $value = null): void
+`method` Session::**write**(array|string $name, mixed $value = null): void
 
 `$key` should be the dot separated path you wish to write `$value` to:
 
@@ -427,7 +427,7 @@ $session->write([
 ]);
 ```
 
-`method` Session::**delete**(string $key): void
+`method` Session::**delete**(string $name): void
 
 When you need to delete data from the session, you can use `delete()`:
 
@@ -448,7 +448,7 @@ When you need to read and delete data from the session, you can use
 $session->consume('Some.value');
 ```
 
-`method` Session::**check**(?string $key = null): bool
+`method` Session::**check**(?string $name = null): bool
 
 If you want to see if data exists in the session, you can use `check()`:
 

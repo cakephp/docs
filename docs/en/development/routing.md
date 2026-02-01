@@ -681,7 +681,7 @@ named. Nameless routes will not have the `_namePrefix` applied to them.
 
 ### Prefix Routing
 
-`static` Cake\\Routing\\RouteBuilder::**prefix**(string $name, Closure|array $params = [], ?Closure $callback = null): static
+`method` Cake\\Routing\\RouteBuilder::**prefix**(string $name, Closure|array $params = [], ?Closure $callback = null): static
 
 Many applications require an administration section where
 privileged users can make changes. This is often done through a
@@ -824,7 +824,7 @@ This would link to a controller with the namespace `App\Controller\Admin\MyPrefi
 
 ### Plugin Routing
 
-`static` Cake\\Routing\\RouteBuilder::**plugin**(string $name, Closure|array $options = [], ?Closure $callback = null): static
+`method` Cake\\Routing\\RouteBuilder::**plugin**(string $name, Closure|array $options = [], ?Closure $callback = null): static
 
 Routes for [Plugins](../plugins) should be created using the `plugin()`
 method. This method creates a new routing scope for the plugin's routes:
