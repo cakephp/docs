@@ -148,7 +148,7 @@ of paths for plugins, view templates and locale files respectively.
 App.uploadedFilesAsObjects
 Defines whether uploaded files are being represented as objects (`true`),
 or arrays (`false`). This option is being treated as enabled by default.
-See the [File Uploads section](../controllers/request-response#request-file-uploads) in the Request &
+See the [File Uploads section](../controllers/request-response#file-uploads) in the Request &
 Response Objects chapter for more information.
 
 Security.salt
@@ -192,27 +192,27 @@ If you set `App.imageBaseUrl` to `https://mycdn.example.com/`:
 
 ### Database Configuration
 
-See the [Database Configuration](../orm/database-basics#database-configuration) for information
+See the [Database Configuration](../orm/database-basics#configuration) for information
 on configuring your database connections.
 
 ### Caching Configuration
 
-See the [Caching Configuration](../core-libraries/caching#cache-configuration) for information on
+See the [Caching Configuration](../core-libraries/caching#configuring-cache-engines) for information on
 configuring caching in CakePHP.
 
 ### Error and Exception Handling Configuration
 
-See the [Error and Exception Configuration](../development/errors#error-configuration) for
+See the [Error and Exception Configuration](../development/errors#configuration) for
 information on configuring error and exception handlers.
 
 ### Logging Configuration
 
-See the [Log Configuration](../core-libraries/logging#log-configuration) for information on configuring logging in
+See the [Log Configuration](../core-libraries/logging#logging-configuration) for information on configuring logging in
 CakePHP.
 
 ### Email Configuration
 
-See the [Email Configuration](../core-libraries/email#email-configuration) for information on
+See the [Email Configuration](../core-libraries/email#configuration) for information on
 configuring email presets in CakePHP.
 
 ### Session Configuration
@@ -222,7 +222,7 @@ handling in CakePHP.
 
 ### Routing configuration
 
-See the [Routes Configuration](../development/routing#routes-configuration) for more information
+See the [Routes Configuration](../development/routing#connecting-routes) for more information
 on configuring routing and creating routes for your application.
 
 ## Additional Class Paths

@@ -150,8 +150,8 @@ There are a number of core events within the framework which your application
 can listen to. Each layer of CakePHP emits events that you can use in your
 application.
 
-- [ORM/Model events](../orm/table-objects#table-callbacks)
-- [Controller events](../controllers#controller-life-cycle)
+- [ORM/Model events](../orm/table-objects#lifecycle-callbacks)
+- [Controller events](../controllers#request-life-cycle-callbacks)
 - [View events](../views#view-events)
 
 ### `Server.terminate`

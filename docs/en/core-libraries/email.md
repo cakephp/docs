@@ -126,9 +126,9 @@ following configuration keys are used:
   variables to be used in the view. See `Mailer::setViewVars()`.
 - `'attachments'`: List of files to attach. See `Mailer::setAttachments()`.
 - `'emailFormat'`: Format of email (html, text or both). See `Mailer::setEmailFormat()`.
-- `'transport'`: Transport configuration name. See [Email Transport](#email-transport).
+- `'transport'`: Transport configuration name. See [Email Transport](#configuring-transports).
 - `'log'`: Log level to log the email headers and message. `true` will use
-  LOG_DEBUG. See [Logging Levels](../core-libraries/logging#logging-levels). Note that logs will be emitted under the scope named `email`.
+  LOG_DEBUG. See [Logging Levels](../core-libraries/logging#using-levels). Note that logs will be emitted under the scope named `email`.
   See also [Logging Scopes](../core-libraries/logging#logging-scopes).
 - `'helpers'`: Array of helpers used in the email template.
   `ViewBuilder::setHelpers()`/`ViewBuilder::addHelpers()`.
@@ -441,7 +441,7 @@ $this->Users->getEventManager()->on($this->getMailer('User'));
 
 > [!NOTE]
 > For information on how to register event listener objects,
-> please refer to the [Registering Event Listeners](../core-libraries/events#registering-event-listeners) documentation.
+> please refer to the [Registering Event Listeners](../core-libraries/events#registering-listeners) documentation.
 
 <a id="email-transport"></a>
 

@@ -20,12 +20,12 @@ patterns. It aims to create a hybrid implementation that combines aspects of
 both patterns to create a fast, simple to use ORM.
 
 Before we get started exploring the ORM, make sure you [configure your
-database connections](orm/database-basics#database-configuration).
+database connections](orm/database-basics#configuration).
 
 ## Quick Example
 
 To get started you don't have to write any code. If you've followed the
-[CakePHP conventions for your database tables](intro/conventions#model-and-database-conventions) you can just start using the ORM. For example
+[CakePHP conventions for your database tables](intro/conventions#database-tables) you can just start using the ORM. For example
 if we wanted to load some data from our `articles` table we would start off
 creating our `Articles` table class. Create
 **src/Model/Table/ArticlesTable.php** with the following code:

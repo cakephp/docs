@@ -79,7 +79,7 @@ class Application extends BaseApplication
 ```
 
 In the above example, the only commands available would be `help`, `version`
-and `user`. See the [Plugin Commands](plugins#plugin-commands) section for how to add commands in
+and `user`. See the [Plugin Commands](plugins#commands) section for how to add commands in
 your plugins.
 
 > [!NOTE]

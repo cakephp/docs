@@ -1244,7 +1244,7 @@ public function setUp(): void
 }
 ```
 
-You should also take care to try and use [Application Bootstrap](../development/application#application-bootstrap) to load
+You should also take care to try and use [Application Bootstrap](../development/application#applicationbootstrap) to load
 any plugins containing events/routes. Doing so will ensure that your
 events/routes are connected for each test case. Alternatively if you wish to
 load plugins manually in a test you can use the `loadPlugins()` method.
@@ -1362,7 +1362,7 @@ that option when `debug` is enabled.
 ### Testing with file uploads
 
 Simulating file uploads is straightforward when you use the default
-"[uploaded files as objects](../controllers/request-response#request-file-uploads)" mode. You can simply
+"[uploaded files as objects](../controllers/request-response#file-uploads)" mode. You can simply
 create instances that implement
 [\Psr\Http\Message\UploadedFileInterface](https://www.php-fig.org/psr/psr-7/#16-uploaded-files)
 (the default implementation currently used by CakePHP is
@@ -1711,7 +1711,7 @@ git status
 
 ## Console Integration Testing
 
-See [Console Integration Testing](../console-commands/commands#console-integration-testing) for how to test console commands.
+See [Console Integration Testing](../console-commands/commands#testing-commands) for how to test console commands.
 
 ## Mocking Injected Dependencies
 
@@ -1720,7 +1720,7 @@ the dependency injection container in your integration tests.
 
 ## Mocking HTTP Client Responses
 
-See [Httpclient Testing](../core-libraries/httpclient#httpclient-testing) to know how to create mock responses to external APIs.
+See [Httpclient Testing](../core-libraries/httpclient#testing) to know how to create mock responses to external APIs.
 
 ## Testing Views
 
@@ -2012,11 +2012,11 @@ $this->assertEventFiredWith('My.Global.Event', 'user', 1);
 
 ## Testing Email
 
-See [Email Testing](../core-libraries/email#email-testing) for information on testing email.
+See [Email Testing](../core-libraries/email#testing-mailers) for information on testing email.
 
 ## Testing Logging
 
-See [Log Testing](../core-libraries/logging#log-testing) for information on testing log messages.
+See [Log Testing](../core-libraries/logging#testing-logs) for information on testing log messages.
 
 ## Creating Test Suites
 

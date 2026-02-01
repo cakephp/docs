@@ -92,7 +92,7 @@ In our `RecipesController`, we have several actions that define the logic
 to create, edit, view and delete recipes. In each of our actions we're using
 the `serialize` option to tell CakePHP which view variables should be
 serialized when making API responses. We'll connect our controller to the
-application URLs with [Resource Routes](../development/routing#resource-routes):
+application URLs with [Resource Routes](../development/routing#restful-routing):
 
 ``` php
 // in config/routes.php
@@ -123,7 +123,7 @@ If we wanted to modify the data before it is converted into JSON we should not
 define the `serialize` option, and instead use template files. We would place
 the REST templates for our RecipesController inside **templates/Recipes/json**.
 
-See the [Controller Viewclasses](../controllers#controller-viewclasses) for more information on how CakePHP's
+See the [Controller Viewclasses](../controllers#content-type-negotiation) for more information on how CakePHP's
 response negotiation functionality works.
 
 ## Parsing Request Bodies

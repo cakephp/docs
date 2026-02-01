@@ -141,7 +141,7 @@ $entity = $articles->newEntity($this->request->getData());
 > [!NOTE]
 > If you are using newEntity() and the resulting entities are missing some or
 > all the data they were passed, double check that the columns you want to
-> set are listed in the `$_accessible` property of your entity. See [Entities Mass Assignment](../orm/entities#entities-mass-assignment).
+> set are listed in the `$_accessible` property of your entity. See [Entities Mass Assignment](../orm/entities#mass-assignment).
 
 The request data should follow the structure of your entities. For example if
 you have an article, which belonged to a user, and had many comments, your
@@ -163,7 +163,7 @@ $data = [
 ```
 
 By default, the `newEntity()` method validates the data that gets passed to
-it, as explained in the [Validating Request Data](../orm/validation#validating-request-data) section. If you wish to
+it, as explained in the [Validating Request Data](../orm/validation#validating-data) section. If you wish to
 bypass data validation pass the `'validate' => false` option:
 
 ``` php
@@ -226,7 +226,7 @@ $entity = $articles->newEntity($this->request->getData(), [
 ]);
 ```
 
-The [Using Different Validators Per Association](../orm/validation#using-different-validators-per-association) chapter has more
+The [Using Different Validators Per Association](../orm/validation#using-a-different-validation-set-for-associations) chapter has more
 information on how to use different validators for associated marshalling.
 
 The following diagram gives an overview of what happens inside the
@@ -421,7 +421,7 @@ concerned entity.
 > If you are using newEntity() and the resulting entities are missing some or
 > all the data they were passed, double check that the columns you want to
 > set are listed in the `$_accessible` property of your entity. See
-> [Entities Mass Assignment](../orm/entities#entities-mass-assignment).
+> [Entities Mass Assignment](../orm/entities#mass-assignment).
 
 ### Merging Request Data Into Entities
 
@@ -444,7 +444,7 @@ $articles->save($article);
 
 Similar to `newEntity()`, the `patchEntity` method will validate the data
 before it is copied to the entity. The mechanism is explained in the
-[Validating Request Data](../orm/validation#validating-request-data) section. If you wish to disable validation while
+[Validating Request Data](../orm/validation#validating-data) section. If you wish to disable validation while
 patching an entity, pass the `validate` option as follows:
 
 ``` php
@@ -737,7 +737,7 @@ $this->save($entity);
 
 There are two ways of protecting you against this problem. The first one is by
 setting the default columns that can be safely set from a request using the
-[Entities Mass Assignment](../orm/entities#entities-mass-assignment) feature in the entities.
+[Entities Mass Assignment](../orm/entities#mass-assignment) feature in the entities.
 
 The second way is by using the `fields` option when creating or merging
 data into an entity:
@@ -827,7 +827,7 @@ $article->title = 'My new title';
 $articles->save($article);
 ```
 
-When saving, CakePHP will [apply your rules](../orm/validation#application-rules), and wrap
+When saving, CakePHP will [apply your rules](../orm/validation#applying-application-rules), and wrap
 the save operation in a database transaction. It will also only update
 properties that have changed. The above `save()` call would generate SQL
 like:
@@ -867,7 +867,7 @@ The following diagram illustrates the above process:
 <img src="/save-cycle.png" alt="Flow diagram showing the save process." />
 </figure>
 
-See the [Application Rules](../orm/validation#application-rules) section for more information on creating and
+See the [Application Rules](../orm/validation#applying-application-rules) section for more information on creating and
 using rules.
 
 > [!WARNING]
@@ -1011,7 +1011,7 @@ Any existing records that do not match the records provided will be deleted
 from the database. Only provided records will remain (or be inserted).
 
 By default, the `append` saving strategy is used.
-See [Has Many Associations](../orm/associations#has-many-associations) for details on defining the `saveStrategy`.
+See [Has Many Associations](../orm/associations#hasmany-associations) for details on defining the `saveStrategy`.
 
 Whenever you add new records to an existing association you should always mark
 the association property as 'dirty'. This lets the ORM know that the association
@@ -1060,7 +1060,7 @@ When converting request data into entities, the `newEntity()` and
 `newEntities()` methods will handle both arrays of properties, as well as a
 list of ids at the `_ids` key. Using the `_ids` key makes it possible to building a
 select box or checkbox based form controls for belongs to many associations. See
-the [Converting Request Data](#converting-request-data) section for more information.
+the [Converting Request Data](#converting-request-data-into-entities) section for more information.
 
 When saving belongsToMany associations, you have the choice between two saving
 strategies:
@@ -1076,7 +1076,7 @@ the junction table. If there are existing link in the database to some of
 the entities intended to be saved, those links will be updated, not deleted
 and then re-saved.
 
-See [Belongs To Many Associations](../orm/associations#belongs-to-many-associations) for details on defining the `saveStrategy`.
+See [Belongs To Many Associations](../orm/associations#belongstomany-associations) for details on defining the `saveStrategy`.
 
 By default, the `replace` strategy is used. Whenever you add new records into
 an existing association you should always mark the association property as
@@ -1177,7 +1177,7 @@ $student = $this->Students->newEntity($data, [
 ]);
 ```
 
-See the [Associated Form Inputs](../views/helpers/form#associated-form-inputs) documentation for how to build inputs with
+See the [Associated Form Inputs](../views/helpers/form#creating-inputs-for-associated-data) documentation for how to build inputs with
 `FormHelper` correctly. As of 5.2.0, the `_joinData` property can be renamed
 with `setJunctionProperty()`:
 
@@ -1202,7 +1202,7 @@ complex types such as arrays or objects and serialize this data into simpler
 types that can be saved in the database.
 
 This functionality is achieved by using the custom types system. See the
-[Adding Custom Database Types](../orm/database-basics#adding-custom-database-types) section to find out how to build custom
+[Adding Custom Database Types](../orm/database-basics#adding-custom-types) section to find out how to build custom
 column Types:
 
 ``` php
@@ -1422,4 +1422,4 @@ function publishAllUnpublished()
 }
 ```
 
-Also see: [Query Builder Updating Data](../orm/query-builder#query-builder-updating-data).
+Also see: [Query Builder Updating Data](../orm/query-builder#updating-data).

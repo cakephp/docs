@@ -104,7 +104,7 @@ class user extends AppController
 > **Acronyms:** Treat them as words. `CMS` becomes `CmsController`, not `CMSController`
 
 > [!NOTE]
-> CakePHP uses the `DashedRoute` class by convention to automatically convert camelCase action names to dashed URLs. See [Routes Configuration](../development/routing#routes-configuration) for details.
+> CakePHP uses the `DashedRoute` class by convention to automatically convert camelCase action names to dashed URLs. See [Routes Configuration](../development/routing#connecting-routes) for details.
 
 **URL Arrays:**
 
@@ -371,4 +371,4 @@ URL: `https://example.com/articles/view/5`
 
 Now that you understand CakePHP's structure and conventions, try the [Content Management Tutorial](../tutorials-and-examples/cms/installation) to see how everything fits together in a real application.
 
-For routing and URL handling, see [Routes Configuration](../development/routing#routes-configuration).
+For routing and URL handling, see [Routes Configuration](../development/routing#connecting-routes).

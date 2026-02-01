@@ -311,7 +311,7 @@ the following line:
 If we were to save an Article right now, saving would fail as we are not
 creating a slug attribute, and the column is `NOT NULL`. Slug values are
 typically a URL-safe version of an article's title. We can use the
-[beforeSave() callback](../../orm/table-objects#table-callbacks) of the ORM to populate our slug:
+[beforeSave() callback](../../orm/table-objects#lifecycle-callbacks) of the ORM to populate our slug:
 
 ``` php {3,7-9,13}
 <?php
@@ -435,7 +435,7 @@ articles:
 ## Update Validation Rules for Articles
 
 Up until this point our Articles had no input validation done. Lets fix that by
-using [a validator](../../orm/validation#validating-request-data):
+using [a validator](../../orm/validation#validating-data):
 
 ``` php {5,8}
 // src/Model/Table/ArticlesTable.php

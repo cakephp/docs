@@ -65,7 +65,7 @@ variables.
 If you're throwing your application out into the wild, it's a good idea to make
 sure it doesn't have any obvious leaks:
 
-- Ensure you are using the [Csrf Middleware](security/csrf#csrf-middleware) component or middleware.
+- Ensure you are using the [Csrf Middleware](security/csrf#cross-site-request-forgery-csrf-middleware) component or middleware.
 - You may want to enable the [Form Protection Component](controllers/components/form-protection) component.
   It can help prevent several types of form tampering and reduce the possibility
   of mass-assignment issues.

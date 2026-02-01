@@ -15,7 +15,7 @@ The easiest way to create a `SelectQuery` object is to use `find()` from a
 `Table` object. This method will return an incomplete query ready to be
 modified. You can also use a table's connection object to access the lower level
 query builder that does not include ORM features, if necessary. See the
-[Database Queries](../orm/database-basics#database-queries) section for more information:
+[Database Queries](../orm/database-basics#executing-queries) section for more information:
 
 ``` php
 use Cake\ORM\Locator\LocatorAwareTrait;
@@ -156,7 +156,7 @@ foreach ($list as $id => $title) {
 ```
 
 For more information on how to customize the fields used for populating the list
-refer to [Table Find List](../orm/retrieving-data-and-resultsets#table-find-list) section.
+refer to [Table Find List](../orm/retrieving-data-and-resultsets#finding-keyvalue-pairs) section.
 
 ### ResultSet Is A Collection Object
 
@@ -208,7 +208,7 @@ evaluated, no SQL is ever sent to the database. Once executed, modifying and
 re-evaluating a query will result in additional SQL being run. Calling the same query without modification multiple times will return same reference.
 
 If you want to take a look at what SQL CakePHP is generating, you can turn
-database [query logging](../orm/database-basics#database-query-logging) on.
+database [query logging](../orm/database-basics#query-logging) on.
 
 ## Selecting Data
 
@@ -265,7 +265,7 @@ $query->where(function (QueryExpression $exp, SelectQuery $q) {
 });
 ```
 
-See the [Advanced Query Conditions](#advanced-query-conditions) section to find out how to construct
+See the [Advanced Query Conditions](#advanced-conditions) section to find out how to construct
 more complex `WHERE` conditions.
 
 ### Selecting Specific Fields
@@ -914,7 +914,7 @@ After your queries, you may need to do some post-processing. If you need to add
 a few calculated fields or derived data, you can use the `formatResults()`
 method. This is a lightweight way to map over the result sets. If you need more
 control over the process, or want to reduce results you should use
-the [Map/Reduce](../orm/retrieving-data-and-resultsets#map-reduce) feature instead. If you were querying a list
+the [Map/Reduce](../orm/retrieving-data-and-resultsets#modifying-results-with-mapreduce) feature instead. If you were querying a list
 of people, you could calculate their age with a result formatter:
 
 ``` php

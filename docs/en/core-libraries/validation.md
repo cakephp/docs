@@ -201,7 +201,7 @@ containing data related to the validation process:
 
 Closures should return boolean true if the validation passes. If it fails,
 return boolean false or for a custom error message return a string, see the
-[Conditional/Dynamic Error Messages](#dynamic_validation_error_messages)
+[Conditional/Dynamic Error Messages](#conditionaldynamic-error-messages)
 section for further details.
 
 ::: info Changed in version 5.3.0
@@ -212,7 +212,7 @@ The `entity` key was added to validation context.
 
 ### Conditional/Dynamic Error Messages
 
-Validation rule methods, being it [custom callables](#custom-validation-rules),
+Validation rule methods, being it [custom callables](#using-custom-validation-rules),
 or [methods supplied by providers](#adding-validation-providers), can either
 return a boolean, indicating whether the validation succeeded, or they can return
 a string, which means that the validation failed, and that the returned string
@@ -639,7 +639,7 @@ $valid = $this->Articles->newEntity($article, [
 Apart from validating user provided data maintaining integrity of data regardless
 where it came from is important. To solve this problem CakePHP offers a second
 level of validation which is called "application rules". You can read more about
-them in the [Applying Application Rules](../orm/validation#application-rules) section.
+them in the [Applying Application Rules](../orm/validation#applying-application-rules) section.
 
 ## Core Validation Rules
 

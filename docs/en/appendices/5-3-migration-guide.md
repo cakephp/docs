@@ -119,7 +119,7 @@ If you are not running on **PHP 8.2 or higher**, you will need to upgrade PHP be
 ### Core
 
 - Added `Configure` attribute to support injecting `Configure` values into
-  constructor arguments. See [Configure Dependency Injection](../development/dependency-injection#configure-dependency-injection).
+  constructor arguments. See [Configure Dependency Injection](../development/dependency-injection#using-configuration-data).
 
 ### Database
 
@@ -174,7 +174,7 @@ If you are not running on **PHP 8.2 or higher**, you will need to upgrade PHP be
 - Added `SelectQuery::projectAs()` for projecting query results into Data
   Transfer Objects (DTOs) instead of Entity objects. DTOs provide a
   memory-efficient alternative (approximately 3x less memory than entities) for
-  read-only data access. See [Dto Projection](../orm/query-builder#dto-projection).
+  read-only data access. See [Dto Projection](../orm/query-builder#projecting-results-into-dtos).
 - Added the `#[CollectionOf]` attribute for declaring the element type of
   array properties in DTOs. This enables proper hydration of nested
   associations into DTOs.

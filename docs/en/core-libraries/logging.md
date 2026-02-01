@@ -57,7 +57,7 @@ Log::setConfig('error', [
 The above creates three loggers, named `info`, `debug` and `error`.
 Each is configured to handle different levels of messages. They also store their
 log messages in separate files, so we can separate debug/notice/info logs
-from more serious errors. See the section on [Logging Levels](#logging-levels) for more
+from more serious errors. See the section on [Logging Levels](#using-levels) for more
 information on the different levels and what they mean.
 
 Once a configuration is created you cannot change it. Instead you should drop
@@ -454,7 +454,7 @@ param array `$config`
 Array of configuration information and
 constructor arguments for the logger.
 
-Get or set the configuration for a Logger. See [Log Configuration](#log-configuration) for
+Get or set the configuration for a Logger. See [Log Configuration](#logging-configuration) for
 more information.
 
 ### Log::configured()

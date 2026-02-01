@@ -51,7 +51,7 @@ bin/cake upgrade rector --rules cakephp52 <path/to/app/src>
 
 - The `errorClass` option of `FormHelper` has been deprecated in favour of
   using a template string. To upgrade move your `errorClass` definition to
-  a template set. See [Customizing Templates](../views/helpers/form#customizing-templates).
+  a template set. See [Customizing Templates](../views/helpers/form#customizing-the-templates-formhelper-uses).
 
 ## New Features
 

@@ -39,7 +39,7 @@ to date with CakePHP:
     git remote add upstream git://github.com/cakephp/cakephp.git
 
 Now that you have CakePHP setup you should be able to define a `$test`
-[database connection](../orm/database-basics#database-configuration), and
+[database connection](../orm/database-basics#configuration), and
 [run all the tests](../development/testing#running-tests).
 
 ## Working on a Patch

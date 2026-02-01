@@ -1,7 +1,7 @@
 # Themes
 
 Themes in CakePHP are simply plugins that focus on providing template files.
-See the section on [Plugin Create Your Own](../plugins#plugin-create-your-own).
+See the section on [Plugin Create Your Own](../plugins#creating-your-own-plugins).
 You can take advantage of themes, allowing you to switch the look and feel of
 your page quickly. In addition to template files, they can also provide helpers
 and cells if your theming requires that. When using cells and helpers from your
@@ -53,7 +53,7 @@ assets in their webroot directory. This allows for packaging and
 distribution of themes. Whilst in development, requests for theme assets will be
 handled by `Cake\Routing\Middleware\AssetMiddleware` (which is loaded
 by default in cakephp/app `Application::middleware()`). To improve
-performance for production environments, it's recommended that you [Symlink Assets](../deployment#symlink-assets).
+performance for production environments, it's recommended that you [Symlink Assets](../deployment#moving-files).
 
 All of CakePHP's built-in helpers are aware of themes and will create the
 correct paths automatically. Like template files, if a file isn't in the theme

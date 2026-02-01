@@ -77,10 +77,10 @@ class AppController extends Controller
 
 When a request is made to a CakePHP application, CakePHP's
 `Cake\Routing\Router` and `Cake\Routing\Dispatcher`
-classes use [Routes Configuration](development/routing#routes-configuration) to find and create the correct
+classes use [Routes Configuration](development/routing#connecting-routes) to find and create the correct
 controller instance. The request data is encapsulated in a request object.
 CakePHP puts all the important request information into the `$this->request`
-property. See the section on [Cake Request](controllers/request-response#cake-request) for more information on the
+property. See the section on [Cake Request](controllers/request-response#request) for more information on the
 CakePHP request object.
 
 ## Controller Actions
@@ -319,7 +319,7 @@ This would render **plugins/Users/templates/UserDetails/custom_file.php**
 
 Controllers can define a list of view classes they support. After the
 controller's action is complete CakePHP will use the view list to perform
-content-type negotiation with either [File Extensions](development/routing#file-extensions) or `Accept`
+content-type negotiation with either [File Extensions](development/routing#routing-file-extensions) or `Accept`
 headers. This enables your application to re-use the same controller action to
 render an HTML view or render a JSON or XML response. To define the list of
 supported view classes for a controller is done with the `addViewClasses()`
@@ -359,7 +359,7 @@ public function export(): void
 
 If within your controller actions you need to process the request or load data
 differently based on the content type you can use
-[Check The Request](controllers/request-response#check-the-request):
+[Check The Request](controllers/request-response#checking-request-conditions):
 
 ``` php
 // In a controller action
@@ -482,7 +482,7 @@ return $this->redirect('/order/confirm', 301);
 return $this->redirect('/order/confirm', 303);
 ```
 
-See the [Redirect Component Events](controllers/components#redirect-component-events) section for how to redirect out of
+See the [Redirect Component Events](controllers/components#using-redirects-in-component-events) section for how to redirect out of
 a life-cycle handler.
 
 ## Loading Additional Tables/Models

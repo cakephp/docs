@@ -288,7 +288,7 @@ will go to the 'update' action. There are HTTP helper methods for:
 - HEAD
 
 All of these methods return the route instance allowing you to leverage the
-[fluent setters](#route-fluent-methods) to further configure your route.
+[fluent setters](#configuring-route-options) to further configure your route.
 
 ### Route Elements
 
@@ -414,7 +414,7 @@ CakePHP, and should not be used unless you want the special meaning
 - `action` Used to name the controller action for a route.
 - `plugin` Used to name the plugin a controller is located in.
 - `prefix` Used for [Prefix Routing](#prefix-routing)
-- `_ext` Used for [File extensions routing](#file-extensions).
+- `_ext` Used for [File extensions routing](#routing-file-extensions).
 - `_base` Set to `false` to remove the base path from the generated URL. If
   your application is not in the root directory, this can be used to generate
   URLs that are 'cake relative'.
@@ -428,7 +428,7 @@ CakePHP, and should not be used unless you want the special meaning
 - `_https` Set to `true` to convert the generated URL to https or `false`
   to force http. Prior to 4.5.0 use `_ssl`.
 - `_method` Define the HTTP verb/method to use. Useful when working with
-  [Resource Routes](#resource-routes).
+  [Resource Routes](#restful-routing).
 - `_name` Name of route. If you have setup named routes, you can use this key
   to specify it.
 
@@ -1496,7 +1496,7 @@ $routes->url([
 
 You can also use any of the special route elements when generating URLs:
 
-- `_ext` Used for [File Extensions](#file-extensions) routing.
+- `_ext` Used for [File Extensions](#routing-file-extensions) routing.
 - `_base` Set to `false` to remove the base path from the generated URL. If
   your application is not in the root directory, this can be used to generate
   URLs that are 'cake relative'.

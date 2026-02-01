@@ -12,7 +12,7 @@ rendering scenarios:
 
 - To create XML or JSON webservices you can use the [JSON and XML views](views/json-and-xml-views).
 - To serve protected files, or dynamically generated files, you can use
-  [Cake Response File](controllers/request-response#cake-response-file).
+  [Cake Response File](controllers/request-response#sending-files).
 - To create multiple themed views, you can use [Themes](views/themes).
 
 <a id="app-view"></a>
@@ -142,7 +142,7 @@ Any variables you set in your controller with `set()` will be available in
 both the view and the layout your action renders. In addition, any set variables
 will also be available in any element. If you need to pass additional variables
 from the view to the layout you can either call `set()` in the view template,
-or use [View Blocks](#view-blocks).
+or use [View Blocks](#using-view-blocks).
 
 You should remember to **always** escape any user data before outputting it as
 CakePHP does not automatically escape output. You can escape user content with
@@ -159,7 +159,7 @@ the `h()` function:
 Views have a `set()` method that is analogous to the `set()` found in
 Controller objects. Using set() from your view file will add the variables to
 the layout and elements that will be rendered later. See
-[Setting View Variables](controllers#setting-view_variables) for more information on using `set()`.
+[Setting View Variables](controllers#setting-view-variables) for more information on using `set()`.
 
 In your view file you can do:
 
@@ -173,7 +173,7 @@ contain the value 'posts'.
 ### Extending Views
 
 View extending allows you to wrap one view in another. Combining this with
-[view blocks](#view-blocks) gives you a powerful way to keep your views
+[view blocks](#using-view-blocks) gives you a powerful way to keep your views
 `DRY`. For example, your application has a sidebar that needs to change
 depending on the specific view being rendered. By extending a common view file,
 you can avoid repeating the common markup for your sidebar, and only define the
@@ -727,7 +727,7 @@ insert logic around the rendering life-cycle:
 - `View.afterLayout`
 
 You can attach application [event listeners](core-libraries/events) to
-these events or use [Helper Callbacks](views/helpers#helper-api).
+these events or use [Helper Callbacks](views/helpers#helper-class).
 
 ## Creating Your Own View Classes
 

@@ -303,7 +303,7 @@ of trips made to the database to fetch posts.
 > [!NOTE]
 > If you plan to cache the result of queries made with the CakePHP ORM,
 > it is better to use the built-in cache capabilities of the Query object
-> as described in the [Caching Query Results](../orm/query-builder#caching-query-results) section
+> as described in the [Caching Query Results](../orm/query-builder#caching-loaded-results) section
 
 ### Cache::writeMany()
 
@@ -541,7 +541,7 @@ You can greatly improve the performance of your application by putting results
 that infrequently change, or that are subject to heavy reads into the cache.
 A perfect example of this are the results from
 `Cake\ORM\Table::find()`. The Query object allows you to cache
-results using the `cache()` method. See the [Caching Query Results](../orm/query-builder#caching-query-results) section
+results using the `cache()` method. See the [Caching Query Results](../orm/query-builder#caching-loaded-results) section
 for more information.
 
 <a id="cache-groups"></a>

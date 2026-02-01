@@ -734,7 +734,7 @@ $this->response = $this->response->withType('vcf');
 
 Usually, you'll want to map additional content types in your controller's
 `~Controller::beforeFilter()` callback, so you can benefit from
-automatic view switching provided by [Controller Viewclasses](../controllers#controller-viewclasses).
+automatic view switching provided by [Controller Viewclasses](../controllers#content-type-negotiation).
 
 <a id="cake-response-file"></a>
 
