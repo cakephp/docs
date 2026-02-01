@@ -533,7 +533,7 @@ appropriate log level.
 
 ### Log::log()
 
-`method` Cake\\Log\\Log::**log**(string $msg, string|int $level = LOG_ERR): bool
+`method` Cake\\Log\\LogTrait::**log**(Stringable|string $message, string|int $level = LogLevel::ERROR, array|string $context = []): bool
 
 ## Using Monolog
 

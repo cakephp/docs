@@ -672,9 +672,9 @@ The required API for a CacheEngine is
 
 `class` Cake\\Cache\\**CacheEngine**
 
-`method` Cake\\Cache\\CacheEngine::**write**(string $key, mixed $value, DateInterval|int|null $ttl = null): bool
+`method` Cake\\Cache\\CacheEngine::**set**(string $key, mixed $value, DateInterval|int|null $ttl = null): bool
 
-`method` Cake\\Cache\\CacheEngine::**read**(string $key, mixed $default = null): mixed
+`method` Cake\\Cache\\CacheEngine::**get**(string $key, mixed $default = null): mixed
 
 `method` Cake\\Cache\\CacheEngine::**delete**(string $key): bool
 

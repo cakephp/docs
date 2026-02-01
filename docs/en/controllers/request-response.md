@@ -395,7 +395,7 @@ detectors. There are different types of detectors that you can create:
   to handle the check. The callback will receive the request object as its only
   parameter.
 
-`method` Cake\\Http\\ServerRequest::**addDetector**(string $name, Closure|array $options): void
+`method` Cake\\Http\\ServerRequest::**addDetector**(string $name, Closure|array $detector): void
 
 Some examples would be:
 
@@ -809,7 +809,7 @@ public function sendIcs()
 
 ### Setting Headers
 
-`method` Cake\\Http\\Response::**withHeader**(string $header, string $value): static
+`method` Cake\\Http\\Response::**withHeader**(string $name, string|array $value): static
 
 Setting headers is done with the `Cake\Http\Response::withHeader()`
 method. Like all the PSR-7 interface methods, this method returns a *new*
@@ -836,7 +836,7 @@ redirect location header.
 
 ### Setting the Body
 
-`method` Cake\\Http\\Response::**withStringBody**(string $string): static
+`method` Cake\\Http\\Response::**withStringBody**(?string $string): static
 
 To set a string as the response body, do the following:
 
@@ -919,7 +919,7 @@ public function index()
 > Disabling caching from SSL domains while trying to send
 > files to Internet Explorer can result in errors.
 
-`method` Cake\\Http\\Response::**withCache**(string $since, string $time = '+1 day'): static
+`method` Cake\\Http\\Response::**withCache**(string|int $since, string|int $time = '+1 day'): static
 
 You can also tell clients that you want them to cache responses. By using
 `Cake\Http\Response::withCache()`:
@@ -998,7 +998,7 @@ the `Cache-Control` header.
 
 #### The Expiration Header
 
-`method` Cake\\Http\\Response::**withExpires**(DateTimeInterface|string $time): static
+`method` Cake\\Http\\Response::**withExpires**(DateTimeInterface|string|int|null $time): static
 
 You can set the `Expires` header to a date and time after which the response
 is no longer considered fresh. This header can be set using the
@@ -1016,7 +1016,7 @@ be parsed by the `DateTime` class.
 
 #### The Etag Header
 
-`method` Cake\\Http\\Response::**withEtag**(string $tag, bool $weak = false): static
+`method` Cake\\Http\\Response::**withEtag**(string $hash, bool $weak = false): static
 
 Cache validation in HTTP is often used when content is constantly changing, and
 asks the application to only generate the response contents if the cache is no
@@ -1059,7 +1059,7 @@ public function index()
 
 #### The Last Modified Header
 
-`method` Cake\\Http\\Response::**withModified**(DateTimeInterface|string $time): static
+`method` Cake\\Http\\Response::**withModified**(DateTimeInterface|string|int $time): static
 
 Also, under the HTTP cache validation model, you can set the `Last-Modified`
 header to indicate the date and time at which the resource was modified for the
@@ -1085,7 +1085,7 @@ public function view()
 
 #### The Vary Header
 
-`method` Cake\\Http\\Response::**withVary**(string $header): static
+`method` Cake\\Http\\Response::**withVary**(array|string $cacheVariances): static
 
 In some cases, you might want to serve different content using the same URL.
 This is often the case if you have a multilingual page or respond with different
