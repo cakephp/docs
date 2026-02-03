@@ -1,3 +1,8 @@
+---
+title: "PHPUnit Upgrade"
+description: "This guide covers the PHPUnit version requirements and migration steps for CakePHP 5.x applications. CakePHP 5.x requires PHPUnit ^11.5.3 or ^12.1.3."
+---
+
 # PHPUnit Upgrade
 
 This guide covers the PHPUnit version requirements and migration steps for CakePHP 5.x applications.

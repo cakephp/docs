@@ -1,3 +1,8 @@
+---
+title: "CakePHP Development Process"
+description: "CakePHP projects broadly follow semver. Minor releases are easier, major releases require some work."
+---
+
 # CakePHP Development Process
 
 CakePHP projects broadly follow [semver](https://semver.org/). This means that:

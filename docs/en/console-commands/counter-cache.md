@@ -1,3 +1,8 @@
+---
+title: "CounterCache Tool"
+description: "The CounterCacheCommand provides a CLI tool for rebuilding the counter caches in your application and plugin models."
+---
+
 # CounterCache Tool
 
 The CounterCacheCommand provides a CLI tool for rebuilding the counter caches

@@ -1,3 +1,8 @@
+---
+title: "Plugins"
+description: "CakePHP offers a great plugin ecosystem as well as private plugin functionality."
+---
+
 # Plugins
 
 CakePHP allows you to set up a combination of controllers, models,

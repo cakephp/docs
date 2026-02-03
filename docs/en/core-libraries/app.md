@@ -1,3 +1,8 @@
+---
+title: "App Class"
+description: "The App class is responsible for resource location and path management."
+---
+
 # App Class
 
 `class` Cake\\Core\\**App**

@@ -1,3 +1,8 @@
+---
+title: "Form"
+description: "The FormHelper does most of the heavy lifting in form creation."
+---
+
 # Form
 
 `class` Cake\\View\\Helper\\**FormHelper**(View $view, array $config = [])

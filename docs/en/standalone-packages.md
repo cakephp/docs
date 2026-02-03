@@ -1,3 +1,8 @@
+---
+title: "Standalone Packages"
+description: "The CakePHP core is split into various standalone packages which can used independently."
+---
+
 # Standalone Packages
 
 The CakePHP core is split into various standalone packages which can

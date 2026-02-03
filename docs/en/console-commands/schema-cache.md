@@ -1,3 +1,8 @@
+---
+title: "Schema Cache Tool"
+description: "The SchemaCacheCommand provides a simple CLI tool for managing your application's metadata caches."
+---
+
 # Schema Cache Tool
 
 The SchemaCacheCommand provides a simple CLI tool for managing your application's

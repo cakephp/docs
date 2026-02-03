@@ -1,3 +1,8 @@
+---
+title: "Command Input/Output"
+description: "Formatting console output can be tedious and lead to maintenance issues."
+---
+
 # Command Input/Output
 
 `class` Cake\\Console\\**ConsoleIo**

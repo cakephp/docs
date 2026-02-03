@@ -1,3 +1,8 @@
+---
+title: "Server Tool"
+description: "The ServerCommand lets you stand up a simple webserver using the built in PHP webserver."
+---
+
 # Server Tool
 
 The `ServerCommand` lets you stand up a simple webserver using the built in PHP

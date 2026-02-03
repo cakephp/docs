@@ -1,3 +1,8 @@
+---
+title: "Time"
+description: "The TimeHelper allows for the quick processing of time related information."
+---
+
 # Time
 
 `class` Cake\\View\\Helper\\**TimeHelper**(View $view, array $config = [])

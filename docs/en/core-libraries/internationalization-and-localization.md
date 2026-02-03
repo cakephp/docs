@@ -1,3 +1,8 @@
+---
+title: "Internationalization & Localization"
+description: "One of the best ways for an application to reach a larger audience is to cater to multiple languages."
+---
+
 # Internationalization & Localization
 
 One of the best ways for an application to reach a larger audience is to cater

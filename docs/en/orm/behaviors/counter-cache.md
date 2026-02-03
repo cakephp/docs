@@ -1,3 +1,8 @@
+---
+title: "CounterCache"
+description: "Often times web applications need to display counts of related objects."
+---
+
 # CounterCache
 
 `class` Cake\\ORM\\Behavior\\**CounterCacheBehavior**

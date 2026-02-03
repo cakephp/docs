@@ -1,3 +1,8 @@
+---
+title: "Backwards Compatibility Guide"
+description: "Ensuring that you can upgrade your applications easily and smoothly is important to us. That's why we only break compatibility at major release milestones."
+---
+
 # Backwards Compatibility Guide
 
 Ensuring that you can upgrade your applications easily and smoothly is important

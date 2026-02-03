@@ -1,3 +1,8 @@
+---
+title: "Retrieving Data & Results Sets"
+description: "Since the ORM now returns Collections and Entities, debugging these objects can be more complicated than in previous CakePHP versions."
+---
+
 # Retrieving Data & Results Sets
 
 `class` Cake\\ORM\\**Table**

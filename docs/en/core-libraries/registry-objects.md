@@ -1,3 +1,8 @@
+---
+title: "Registry Objects"
+description: "The registry classes provide a simple way to create and retrieve loaded instances of a given object type. Configuration can also be set on-the-fly."
+---
+
 # Registry Objects
 
 The registry classes provide a simple way to create and retrieve loaded

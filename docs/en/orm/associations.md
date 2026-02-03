@@ -1,3 +1,8 @@
+---
+title: "Associations - Linking Tables Together"
+description: "Defining relations between different objects in your application should be a natural process. Authors may have many articles and comments."
+---
+
 # Associations - Linking Tables Together
 
 Defining relations between different objects in your application should be

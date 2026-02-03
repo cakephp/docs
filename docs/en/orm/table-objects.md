@@ -1,3 +1,8 @@
+---
+title: "Table Objects"
+description: "Table objects are the main actors to interact with your database."
+---
+
 # Table Objects
 
 `class` Cake\\ORM\\**Table**

@@ -1,3 +1,8 @@
+---
+title: "Collections"
+description: "The collection classes provide a set of tools to manipulate arrays or Traversable objects."
+---
+
 # Collections
 
 `class` Cake\\Collection\\**Collection**

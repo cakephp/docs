@@ -1,3 +1,8 @@
+---
+title: "Helpers"
+description: "Helpers are the component-like classes for the presentation layer of your application."
+---
+
 # Helpers
 
 Helpers are the component-like classes for the presentation layer of your

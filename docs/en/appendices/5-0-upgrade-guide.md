@@ -1,3 +1,8 @@
+---
+title: "5.0 Upgrade Guide"
+description: "First, check that your application is running on latest CakePHP 4.x version."
+---
+
 # 5.0 Upgrade Guide
 
 First, check that your application is running on latest CakePHP 4.x version.

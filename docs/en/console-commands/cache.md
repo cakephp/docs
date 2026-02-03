@@ -1,3 +1,8 @@
+---
+title: "Cache Tool"
+description: "To help you better manage cached data from a CLI environment, a console command is available for clearing cached data your application has."
+---
+
 # Cache Tool
 
 To help you better manage cached data from a CLI environment, a console command

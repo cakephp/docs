@@ -1,3 +1,8 @@
+---
+title: "CMS Tutorial - Authentication"
+description: ""
+---
+
 # CMS Tutorial - Authentication
 
 Now that our CMS has users, we can enable them to login using the

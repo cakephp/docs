@@ -1,3 +1,8 @@
+---
+title: "Tree"
+description: "It's fairly common to want to store hierarchical data in a database table."
+---
+
 # Tree
 
 `class` Cake\\ORM\\Behavior\\**TreeBehavior**

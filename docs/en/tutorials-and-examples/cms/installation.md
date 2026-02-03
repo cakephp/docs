@@ -1,3 +1,8 @@
+---
+title: "Content Management Tutorial"
+description: "This tutorial will walk you through the creation of a simple CMS (Content Management System) application."
+---
+
 # Content Management Tutorial
 
 This tutorial will walk you through the creation of a simple `CMS (Content

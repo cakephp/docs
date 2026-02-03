@@ -1,3 +1,8 @@
+---
+title: "CMS Tutorial - Tags and Users"
+description: ""
+---
+
 # CMS Tutorial - Tags and Users
 
 With the basic article creation functionality built, we need to enable multiple

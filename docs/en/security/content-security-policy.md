@@ -1,3 +1,8 @@
+---
+title: "Content Security Policy Middleware"
+description: "The CspMiddleware makes it simpler to add Content-Security-Policy headers in your application."
+---
+
 # Content Security Policy Middleware
 
 The `CspMiddleware` makes it simpler to add Content-Security-Policy headers in

@@ -1,3 +1,8 @@
+---
+title: "Html"
+description: "The role of the HtmlHelper in CakePHP is to make HTML-related options easier, faster, and more resilient to change."
+---
+
 # Html
 
 `class` Cake\\View\\Helper\\**HtmlHelper**(View $view, array $config = [])

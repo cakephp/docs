@@ -1,3 +1,8 @@
+---
+title: "Debugging"
+description: "Debugging is an inevitable and necessary part of any development cycle."
+---
+
 # Debugging
 
 Debugging is an inevitable and necessary part of any development

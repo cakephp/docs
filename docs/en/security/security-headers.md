@@ -1,3 +1,8 @@
+---
+title: "Security Header Middleware"
+description: "The SecurityHeaderMiddleware layer allows you to apply security related headers to your application."
+---
+
 # Security Header Middleware
 
 The `SecurityHeaderMiddleware` layer allows you to apply security related

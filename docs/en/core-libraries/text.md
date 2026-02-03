@@ -1,3 +1,8 @@
+---
+title: "Text"
+description: "The Text class includes convenience methods for creating and manipulating strings."
+---
+
 # Text
 
 `class` Cake\\Utility\\**Text**

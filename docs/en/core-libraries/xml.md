@@ -1,3 +1,8 @@
+---
+title: "Xml"
+description: "The Xml class allows you to transform arrays into SimpleXMLElement or DOMDocument objects, and back into arrays again."
+---
+
 # Xml
 
 `class` Cake\\Utility\\**Xml**

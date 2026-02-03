@@ -1,3 +1,8 @@
+---
+title: "Number"
+description: "Format numbers properly in e.g. your desired currency or a readable size like 20MB"
+---
+
 # Number
 
 `class` Cake\\I18n\\**Number**

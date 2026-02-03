@@ -1,3 +1,8 @@
+---
+title: "CMS Tutorial - Creating our First Model"
+description: ""
+---
+
 # CMS Tutorial - Creating our First Model
 
 Models are the heart of CakePHP applications. They enable us to read and

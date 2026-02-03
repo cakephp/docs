@@ -1,3 +1,8 @@
+---
+title: "Number"
+description: "he NumberHelper contains convenient methods that enable display numbers in common formats in your views."
+---
+
 # Number
 
 `class` Cake\\View\\Helper\\**NumberHelper**(View $view, array $config = [])

@@ -1,3 +1,8 @@
+---
+title: "Routes Tool"
+description: "The routes tool provides a simple to use CLI interface for testing and debugging routes. You can quickly see how a URL will be parsed using the check method:"
+---
+
 # Routes Tool
 
 The routes tool provides a simple to use CLI interface for testing and debugging

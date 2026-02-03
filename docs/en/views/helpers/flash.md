@@ -1,3 +1,8 @@
+---
+title: "Flash"
+description: "FlashComponent and FlashHelper primarily use elements to render flash messages."
+---
+
 # Flash
 
 `class` Cake\\View\\Helper\\**FlashHelper**(View $view, array $config = [])

@@ -1,3 +1,8 @@
+---
+title: "Deployment"
+description: "Once your app is ready to be deployed there are a few things you should do. Then, run composer install."
+---
+
 # Deployment
 
 Once your app is ready to be deployed there are a few things you should do.

@@ -1,3 +1,8 @@
+---
+title: "Flash"
+description: "FlashComponent provides a way to set one-time notification messages to be displayed after processing a form or acknowledging data"
+---
+
 # Flash
 
 `class` Cake\\Controller\\Component\\**FlashComponent**(ComponentCollection $collection, array $config = [])

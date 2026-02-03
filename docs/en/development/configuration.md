@@ -1,3 +1,8 @@
+---
+title: "Configuration"
+description: "While conventions remove the need to configure all of CakePHP, you'll still need to configure a few things like your database credentials."
+---
+
 # Configuration
 
 While conventions remove the need to configure all of CakePHP, you'll still need

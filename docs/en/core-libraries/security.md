@@ -1,3 +1,8 @@
+---
+title: "Security Utility"
+description: "The security library handles basic security measures such as providing methods for hashing and encrypting data."
+---
+
 # Security Utility
 
 `class` Cake\\Utility\\**Security**

@@ -1,3 +1,8 @@
+---
+title: "5.2 Migration Guide"
+description: "The 5.2.0 release is backwards compatible with 5.0. It adds new functionality and introduces new deprecations."
+---
+
 # 5.2 Migration Guide
 
 The 5.2.0 release is backwards compatible with 5.0. It adds new functionality

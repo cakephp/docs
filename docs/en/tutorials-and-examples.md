@@ -1,3 +1,8 @@
+---
+title: "Tutorials & Examples"
+description: "Follow step-by-step CakePHP tutorials that build a CMS app, covering setup, database design, models, controllers, tags/users, authentication, and authorization."
+---
+
 # Tutorials & Examples
 
 In this section, you can walk through typical CakePHP applications

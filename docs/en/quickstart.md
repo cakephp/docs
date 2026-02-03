@@ -1,3 +1,8 @@
+---
+title: "Quick Start Guide"
+description: "The best way to experience and learn CakePHP is to sit down and build something. By the end of this tutorial, you'll have a fully functional CMS"
+---
+
 # Quick Start Guide
 
 The best way to experience and learn CakePHP is to sit down and build something.

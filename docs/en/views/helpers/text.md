@@ -1,3 +1,8 @@
+---
+title: "Text"
+description: "The TextHelper contains methods to make text more usable and friendly in your views."
+---
+
 # Text
 
 `class` Cake\\View\\Helper\\**TextHelper**(View $view, array $config = [])

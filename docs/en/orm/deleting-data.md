@@ -1,3 +1,8 @@
+---
+title: "Deleting Data"
+description: ""
+---
+
 # Deleting Data
 
 `class` Cake\\ORM\\**Table**

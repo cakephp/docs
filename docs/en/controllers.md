@@ -1,3 +1,8 @@
+---
+title: "Controllers"
+description: "Controllers are the 'C' in MVC. Controllers can be thought of as middle layer between the Model and View."
+---
+
 # Controllers
 
 `class` Cake\\Controller\\**Controller**

@@ -1,3 +1,8 @@
+---
+title: "Console Commands"
+description: "In addition to a web framework, CakePHP also provides a console framework for creating command line tools & applications."
+---
+
 # Console Commands
 
 In addition to a web framework, CakePHP also provides a console framework for

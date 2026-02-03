@@ -1,3 +1,8 @@
+---
+title: "5.1 Migration Guide"
+description: "The 5.1.0 release is backwards compatible with 5.0. It adds new functionality and introduces new deprecations."
+---
+
 # 5.1 Migration Guide
 
 The 5.1.0 release is backwards compatible with 5.0. It adds new functionality

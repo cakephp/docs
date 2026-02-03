@@ -1,3 +1,8 @@
+---
+title: "Release Policy"
+description: "CakePHP follows Semantic Versioning for all releases. This follows the versioning convention of major.minor.patch."
+---
+
 # Release Policy
 
 CakePHP follows Semantic Versioning for all releases. This follows the versioning

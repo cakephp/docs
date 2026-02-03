@@ -1,3 +1,8 @@
+---
+title: "Where to Get Help"
+description: "The Official CakePHP website is always a great place to visit."
+---
+
 # Where to Get Help
 
 ## The Official CakePHP website

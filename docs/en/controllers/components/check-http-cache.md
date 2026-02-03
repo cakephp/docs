@@ -1,3 +1,8 @@
+---
+title: "Checking HTTP Cache"
+description: "Skip rendering controller actions if the response has not yet changed"
+---
+
 # Checking HTTP Cache
 
 `class` **CheckHttpCacheComponent**(ComponentCollection $collection, array $config = [])

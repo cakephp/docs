@@ -1,3 +1,8 @@
+---
+title: "5.3 Migration Guide"
+description: "The 5.3.0 release is backwards compatible with 5.0. It adds new functionality and introduces new deprecations."
+---
+
 # 5.3 Migration Guide
 
 The 5.3.0 release is backwards compatible with 5.0. It adds new functionality

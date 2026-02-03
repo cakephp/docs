@@ -1,3 +1,8 @@
+---
+title: "Caching"
+description: "Caching can be used to make reading from expensive or slow resources faster, by maintaining a second copy of the required data in a faster or closer storage system."
+---
+
 # Caching
 
 `class` Cake\\Cache\\**Cache**

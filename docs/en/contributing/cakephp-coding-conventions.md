@@ -1,3 +1,8 @@
+---
+title: "Coding Standards"
+description: "CakePHP developers will use the PSR-12 coding style guide in addition to the following rules as coding standards."
+---
+
 # Coding Standards
 
 CakePHP developers will use the [PSR-12 coding style guide](https://www.php-fig.org/psr/psr-12/) in addition to the following rules as
@@ -406,39 +411,39 @@ be preceded by a newline.
 
 Variable types for use in DocBlocks:
 
-Type  
+Type
 Description
 
-mixed  
+mixed
 A variable with undefined (or multiple) type.
 
-int  
+int
 Integer type variable (whole number).
 
-float  
+float
 Float type (point number).
 
-bool  
+bool
 Logical type (true or false).
 
-string  
+string
 String type (any value in " " or ' ').
 
-null  
+null
 Null type. Usually used in conjunction with another type.
 
-array  
+array
 Array type.
 
-object  
+object
 Object type. A specific class name should be used if possible.
 
-resource  
+resource
 Resource type (returned by for example mysql_connect()).
 Remember that when you specify the type as mixed, you should indicate
 whether it is unknown, or what the possible types are.
 
-callable  
+callable
 Callable function.
 
 You can also combine types using the pipe char:
@@ -565,25 +570,25 @@ for example:
 
 For casting we use:
 
-Type  
+Type
 Description
 
-(bool)  
+(bool)
 Cast to boolean.
 
-(int)  
+(int)
 Cast to integer.
 
-(float)  
+(float)
 Cast to float.
 
-(string)  
+(string)
 Cast to string.
 
-(array)  
+(array)
 Cast to array.
 
-(object)  
+(object)
 Cast to object.
 
 Please use `(int)$var` instead of `intval($var)` and `(float)$var` instead

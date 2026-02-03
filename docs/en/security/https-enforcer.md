@@ -1,3 +1,8 @@
+---
+title: "HTTPS Enforcer Middleware"
+description: "If you want your application to only be available via HTTPS connections you can use the HttpsEnforcerMiddleware"
+---
+
 # HTTPS Enforcer Middleware
 
 If you want your application to only be available via HTTPS connections you can

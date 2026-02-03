@@ -1,3 +1,8 @@
+---
+title: "Date & Time"
+description: "CakePHP offers a powerful set of Date and Time manipulation methods"
+---
+
 # Date & Time
 
 `class` Cake\\I18n\\**DateTime**

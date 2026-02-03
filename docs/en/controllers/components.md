@@ -1,3 +1,8 @@
+---
+title: "Components"
+description: "Components are packages of logic that are shared between controllers."
+---
+
 # Components
 
 Components are packages of logic that are shared between controllers.

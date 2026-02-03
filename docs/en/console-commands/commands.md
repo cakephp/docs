@@ -1,3 +1,8 @@
+---
+title: "Command Objects"
+description: "The command class comes with a number of built-in commands for speeding up your development, and automating routine tasks."
+---
+
 # Command Objects
 
 `class` Cake\\Console\\**Command**

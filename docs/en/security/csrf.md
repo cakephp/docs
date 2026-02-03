@@ -1,3 +1,8 @@
+---
+title: "CSRF Protection"
+description: "Cross-Site Request Forgeries (CSRF) are a class of exploit where unauthorized commands are performed on behalf of an authenticated user without their knowledge or consent."
+---
+
 # CSRF Protection
 
 Cross-Site Request Forgeries (CSRF) are a class of exploit where unauthorized

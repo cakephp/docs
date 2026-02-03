@@ -1,3 +1,8 @@
+---
+title: "Option Parsers"
+description: "Command classes use the getOptionParser() hook method to define their option parser."
+---
+
 # Option Parsers
 
 `class` Cake\\Console\\**ConsoleOptionParser**

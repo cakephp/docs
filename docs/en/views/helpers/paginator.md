@@ -1,3 +1,8 @@
+---
+title: "Paginator"
+description: "The PaginatorHelper is used to output pagination controls such as page numbers and next/previous links."
+---
+
 # Paginator
 
 `class` Cake\\View\\Helper\\**PaginatorHelper**(View $view, array $config = [])

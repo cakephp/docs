@@ -1,3 +1,8 @@
+---
+title: "Sessions"
+description: "CakePHP provides a wrapper and suite of utility features on top of PHP's native session extension."
+---
+
 # Sessions
 
 CakePHP provides a wrapper and suite of utility features on top of PHP's native

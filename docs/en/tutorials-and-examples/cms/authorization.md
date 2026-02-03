@@ -1,3 +1,8 @@
+---
+title: "CMS Tutorial - Authorization"
+description: ""
+---
+
 # CMS Tutorial - Authorization
 
 With users now able to login to our CMS, we want to apply authorization rules

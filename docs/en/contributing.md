@@ -1,3 +1,8 @@
+---
+title: "Contributing"
+description: "There are a number of ways you can contribute to CakePHP. The following sections cover the various ways you can contribute to CakePHP:"
+---
+
 # Contributing
 
 There are a number of ways you can contribute to CakePHP. The following sections

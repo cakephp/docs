@@ -1,3 +1,8 @@
+---
+title: "Code"
+description: "Patches and pull requests are a great way to contribute code back to CakePHP."
+---
+
 # Code
 
 Patches and pull requests are a great way to contribute code back to CakePHP.

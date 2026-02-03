@@ -1,3 +1,8 @@
+---
+title: "CMS Tutorial - Creating the Database"
+description: ""
+---
+
 # CMS Tutorial - Creating the Database
 
 Now that we have CakePHP installed, let's set up the database for our `CMS

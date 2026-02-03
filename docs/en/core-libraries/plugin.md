@@ -1,3 +1,8 @@
+---
+title: "Plugin Class"
+description: "The Plugin class is responsible for resource location and path management of plugins."
+---
+
 # Plugin Class
 
 `class` Cake\\Core\\**Plugin**

@@ -1,3 +1,8 @@
+---
+title: "Mailer"
+description: "Mailer is a convenience class for sending easily reusable emails."
+---
+
 # Mailer
 
 `class` Cake\\Mailer\\**Mailer**(string|array|null $profile = null)

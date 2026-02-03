@@ -1,6 +1,6 @@
 ---
 title: Installation Guide
-description: Learn how to install CakePHP using Composer, Docker, or DDEV. Complete setup guide for PHP 8.2+ with all system requirements and web server configurations.
+description: "CakePHP is designed to be easy to install and configure. This guide will walk you through getting CakePHP up and running in just a few minutes."
 ---
 
 # Installation

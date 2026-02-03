@@ -1,3 +1,8 @@
+---
+title: "The Pages Controller"
+description: "This is a simple and optional controller for serving up static content."
+---
+
 # The Pages Controller
 
 CakePHP's official skeleton app ships with a default controller **PagesController.php**.

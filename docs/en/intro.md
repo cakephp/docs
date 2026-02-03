@@ -1,3 +1,8 @@
+---
+title: "CakePHP at a Glance"
+description: "CakePHP is designed to make common web-development tasks simple, and easy. The conventions chapter covers the various conventions that CakePHP uses."
+---
+
 # CakePHP at a Glance
 
 CakePHP is designed to make common web-development tasks simple, and easy. By

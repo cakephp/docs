@@ -1,3 +1,8 @@
+---
+title: "Logging"
+description: "With technologies like SOAP, AJAX, and REST APIs, debugging can be rather difficult. What search terms are being used? You can also use Log::write() directly."
+---
+
 # Logging
 
 While CakePHP core Configure Class settings can really help you see

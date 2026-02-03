@@ -1,3 +1,8 @@
+---
+title: "Constants & Functions"
+description: "CakePHP features a number of global convenience functions that may come in handy."
+---
+
 # Constants & Functions
 
 While most of your day-to-day work in CakePHP will be utilizing core classes and

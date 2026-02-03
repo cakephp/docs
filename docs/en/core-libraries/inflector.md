@@ -1,3 +1,8 @@
+---
+title: "Inflector"
+description: "Automatically transform english words to single, plural, camel-cased and other variants."
+---
+
 # Inflector
 
 `class` Cake\\Utility\\**Inflector**

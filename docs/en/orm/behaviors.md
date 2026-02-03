@@ -1,3 +1,8 @@
+---
+title: "Behaviors"
+description: "Behaviors are a way to organize and enable horizontal re-use of Model layer logic. Conceptually they are similar to traits."
+---
+
 # Behaviors
 
 Behaviors are a way to organize and enable horizontal re-use of Model layer

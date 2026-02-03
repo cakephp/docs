@@ -1,3 +1,8 @@
+---
+title: "Completion Tool"
+description: "Working with the console gives the developer a lot of possibilities but having to completely know and write those commands can be tedious."
+---
+
 # Completion Tool
 
 Working with the console gives the developer a lot of possibilities but having

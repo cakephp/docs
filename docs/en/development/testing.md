@@ -1,3 +1,8 @@
+---
+title: "Testing"
+description: "CakePHP comes with comprehensive testing support built-in. CakePHP comes with integration for PHPUnit."
+---
+
 # Testing
 
 CakePHP comes with comprehensive testing support built-in. CakePHP comes with

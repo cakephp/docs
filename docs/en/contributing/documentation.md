@@ -1,3 +1,8 @@
+---
+title: "Documentation"
+description: "Contributing to the documentation is simple. Feel free to fork the repo, add your changes/improvements/translations and give back by issuing a pull request."
+---
+
 # Documentation
 
 Contributing to the documentation is simple. The files are hosted on

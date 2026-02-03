@@ -1,3 +1,8 @@
+---
+title: "Query Builder"
+description: "The ORM's query builder provides a simple to use fluent interface for creating and running queries."
+---
+
 # Query Builder
 
 `class` Cake\\ORM\\Query\\SelectQuery\\**SelectQuery**

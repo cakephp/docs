@@ -1,3 +1,8 @@
+---
+title: "Application"
+description: "The Application class is the heart of your application."
+---
+
 # Application
 
 The `Application` is the heart of your application. It controls

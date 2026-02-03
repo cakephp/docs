@@ -1,3 +1,8 @@
+---
+title: "Dependency Injection"
+description: "The CakePHP service container enables you to manage class dependencies for your application services through dependency injection."
+---
+
 # Dependency Injection
 
 The CakePHP service container enables you to manage class dependencies for your

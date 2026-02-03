@@ -1,3 +1,8 @@
+---
+title: "Tickets"
+description: "Getting feedback and help from the community in the form of tickets is an extremely important part of the CakePHP development process."
+---
+
 # Tickets
 
 Getting feedback and help from the community in the form of tickets is an

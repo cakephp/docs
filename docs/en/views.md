@@ -1,3 +1,8 @@
+---
+title: "Views"
+description: "Views are the V in MVC. Views are responsible for generating the specific output required for the request."
+---
+
 # Views
 
 `class` Cake\\View\\**View**

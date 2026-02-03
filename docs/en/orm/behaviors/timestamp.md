@@ -1,3 +1,8 @@
+---
+title: "Timestamp"
+description: "The timestamp behavior allows your table objects to update one or more timestamps on each model event."
+---
+
 # Timestamp
 
 `class` Cake\\ORM\\Behavior\\**TimestampBehavior**

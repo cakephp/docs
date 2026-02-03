@@ -1,3 +1,8 @@
+---
+title: "Middleware"
+description: "Middleware objects give you the ability to 'wrap' your application in re-usable, composable layers of Request handling, or response building logic."
+---
+
 # Middleware
 
 Middleware objects give you the ability to 'wrap' your application in re-usable,

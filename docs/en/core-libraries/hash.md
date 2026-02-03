@@ -1,4 +1,9 @@
-# Hash
+---
+title: "Hash Utility"
+description: "Array management, if done right, can be a very powerful and useful tool for building smarter, more optimized code."
+---
+
+# Hash Utility
 
 `class` Cake\\Utility\\**Hash**
 

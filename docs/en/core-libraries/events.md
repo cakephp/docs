@@ -1,3 +1,8 @@
+---
+title: "Events System"
+description: "Creating maintainable applications is both a science and an art. In the CakePHP implementation, an event object is dispatched to all listeners."
+---
+
 # Events System
 
 Creating maintainable applications is both a science and an art. It is

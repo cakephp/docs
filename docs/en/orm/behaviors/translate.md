@@ -1,3 +1,8 @@
+---
+title: "Translate"
+description: "The Translate behavior allows you to create and retrieve translated copies of your entities in multiple languages."
+---
+
 # Translate
 
 `class` Cake\\ORM\\Behavior\\**TranslateBehavior**

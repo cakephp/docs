@@ -1,3 +1,8 @@
+---
+title: "Error & Exception Handling"
+description: "CakePHP applications come with error and exception handling setup for you. PHP errors are trapped and displayed or logged."
+---
+
 # Error & Exception Handling
 
 CakePHP applications come with error and exception handling setup for you. PHP

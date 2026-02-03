@@ -1,3 +1,8 @@
+---
+title: "REST"
+description: "REST is a foundational concept to the open web. It maps certain HTTP methods to certain Controller actions for a given route."
+---
+
 # REST
 
 REST is a foundational concept to the open web. CakePHP provides functionality

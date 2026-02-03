@@ -1,3 +1,8 @@
+---
+title: "Plugin Tool"
+description: "The plugin tool allows you to load and unload plugins via the command prompt."
+---
+
 <a id="plugin-shell"></a>
 
 # Plugin Tool

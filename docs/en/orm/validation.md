@@ -1,3 +1,8 @@
+---
+title: "Validating Data"
+description: "Before you save your data you will probably want to ensure the data is correct and consistent."
+---
+
 # Validating Data
 
 Before you [save your data](../orm/saving-data) you

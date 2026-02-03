@@ -1,3 +1,8 @@
+---
+title: "Schema System"
+description: "CakePHP features a schema system that is capable of reflecting and generating schema information for tables in SQL datastores."
+---
+
 # Schema System
 
 CakePHP features a schema system that is capable of reflecting and generating

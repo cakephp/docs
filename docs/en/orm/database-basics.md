@@ -1,3 +1,8 @@
+---
+title: "Database Basics"
+description: "The functions described in this chapter illustrate what is possible to do with the lower-level database access API."
+---
+
 # Database Basics
 
 The CakePHP database access layer abstracts and provides help with most aspects

@@ -1,3 +1,8 @@
+---
+title: "Pagination"
+description: "One of the main obstacles of creating flexible and user-friendly web applications is designing an intuitive user interface."
+---
+
 # Pagination
 
 One of the main obstacles of creating flexible and user-friendly web

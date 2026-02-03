@@ -1,3 +1,8 @@
+---
+title: "Entities"
+description: "Entities contain methods to manipulate and access the data they contain. Fields can also be accessed as properties on the object."
+---
+
 # Entities
 
 `class` Cake\\ORM\\**Entity**

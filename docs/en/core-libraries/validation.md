@@ -1,3 +1,8 @@
+---
+title: "Validation"
+description: "The validation package in CakePHP provides features to build validators that can validate arbitrary arrays of data with ease."
+---
+
 # Validation
 
 The validation package in CakePHP provides features to build validators that can

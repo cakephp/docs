@@ -1,3 +1,8 @@
+---
+title: "CMS Tutorial - Creating the Articles Controller"
+description: ""
+---
+
 # CMS Tutorial - Creating the Articles Controller
 
 With our model created, we need a controller for our articles. Controllers in

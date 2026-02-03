@@ -1,3 +1,8 @@
+---
+title: "Appendices"
+description: "Appendices contain information regarding the new features introduced in each version and the migration path between versions."
+---
+
 # Appendices
 
 Appendices contain information regarding the new features

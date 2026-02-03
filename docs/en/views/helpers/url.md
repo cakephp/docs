@@ -1,3 +1,8 @@
+---
+title: "Url"
+description: "The UrlHelper helps you to generate URLs from your other helpers."
+---
+
 # Url
 
 `class` Cake\\View\\Helper\\**UrlHelper**(View $view, array $config = [])
