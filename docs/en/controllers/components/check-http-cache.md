@@ -1,3 +1,8 @@
+---
+title: "Checking HTTP Cache"
+description: "Optimize with HTTP cache in CakePHP: skip rendering when response unchanged, use ETags, Last-Modified headers for better performance."
+---
+
 # Checking HTTP Cache
 
 `class` **CheckHttpCacheComponent**(ComponentCollection $collection, array $config = [])

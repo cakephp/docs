@@ -1,3 +1,8 @@
+---
+title: "Controllers"
+description: "Learn CakePHP controllers: handle requests, render views, manage components, use middleware, and implement request lifecycle callbacks in MVC architecture."
+---
+
 # Controllers
 
 `class` Cake\\Controller\\**Controller**
@@ -79,7 +84,7 @@ When a request is made to a CakePHP application, CakePHP's
 `Cake\Routing\Router` and `Cake\Routing\Dispatcher`
 classes use [Routes Configuration](development/routing#routes-configuration) to find and create the correct
 controller instance. The request data is encapsulated in a request object.
-CakePHP puts all of the important request information into the `$this->request`
+CakePHP puts all the important request information into the `$this->request`
 property. See the section on [Cake Request](controllers/request-response#cake-request) for more information on the
 CakePHP request object.
 
@@ -147,7 +152,7 @@ rendered from the controller.
 
 ### Setting View Variables
 
-`method` Cake\\Controller\\Controller::**set**(string $var, mixed $value)
+`method` Cake\\Controller\\Controller::**set**(string $var, mixed $value): void
 
 The `Controller::set()` method is the main way to send data from your
 controller to your view. Once you've used `Controller::set()`, the variable
@@ -201,6 +206,31 @@ $this->viewBuilder()
 
 The above shows how you can load custom helpers, set the theme and use a custom
 view class.
+
+#### Config Merge Strategy
+
+By default, view options set via `ViewBuilder` are deep-merged with the View
+class's default configuration. You can control this behavior using
+`setConfigMergeStrategy()`:
+
+``` php
+use Cake\View\ViewBuilder;
+
+$this->viewBuilder()
+    ->setConfigMergeStrategy(ViewBuilder::MERGE_SHALLOW)
+    ->setOption('customArray', ['a', 'b', 'c']);
+```
+
+Available strategies are:
+
+- `ViewBuilder::MERGE_DEEP` - Recursive merge (default). Nested arrays are merged together.
+- `ViewBuilder::MERGE_SHALLOW` - Simple array merge. Array values are replaced rather than deep-merged.
+
+You can retrieve the current strategy using `getConfigMergeStrategy()`.
+
+::: info Added in version 5.3.0
+`ViewBuilder::setConfigMergeStrategy()` and `ViewBuilder::getConfigMergeStrategy()` were added.
+:::
 
 ### Rendering a View
 
@@ -258,7 +288,7 @@ namespace App\Controller;
 
 class PostsController extends AppController
 {
-    public function my_action()
+    public function myAction()
     {
         return $this->render('custom_file');
     }
@@ -290,7 +320,7 @@ This would render **plugins/Users/templates/UserDetails/custom_file.php**
 
 ## Content Type Negotiation
 
-`method` Cake\\Controller\\Controller::**addViewClasses**(array $viewClasses)
+`method` Cake\\Controller\\Controller::**addViewClasses**(array $viewClasses): static
 
 Controllers can define a list of view classes they support. After the
 controller's action is complete CakePHP will use the view list to perform
@@ -427,9 +457,9 @@ return $this->redirect([
     $order->id,
     '?' => [
         'product' => 'pizza',
-        'quantity' => 5
+        'quantity' => 5,
     ],
-    '#' => 'top'
+    '#' => 'top',
 ]);
 ```
 
@@ -438,7 +468,7 @@ Or using a relative or absolute URL:
 ``` php
 return $this->redirect('/orders/confirm');
 
-return $this->redirect('http://www.example.com');
+return $this->redirect('https://www.example.com');
 ```
 
 Or to the referer page:
@@ -462,7 +492,7 @@ a life-cycle handler.
 
 ## Loading Additional Tables/Models
 
-`method` Cake\\Controller\\Controller::**fetchTable**(string $alias, array $config = [])
+`method` Cake\\Controller\\Controller::**fetchTable**(?string $alias = null, array $options = []): Table
 
 The `fetchTable()` method comes handy when you need to use an ORM table that is not
 the controller's default one:
@@ -470,21 +500,20 @@ the controller's default one:
 ``` php
 // In a controller method.
 $recentArticles = $this->fetchTable('Articles')->find('all',
-        limit: 5,
-        order: 'Articles.created DESC'
-    )
-    ->all();
+    limit: 5,
+    order: 'Articles.created DESC',
+)->all();
 ```
 
 ### fetchModel()
 
-`method` Cake\\Controller\\Controller::**fetchModel**(string|null $modelClass = null, string|null $modelType = null)
+`method` Cake\\Controller\\Controller::**fetchModel**(?string $modelClass = null, ?string $modelType = null): object
 
 The `fetchModel()` method is useful to load non ORM models or ORM tables that
 are not the controller's default:
 
 ``` php
-// ModelAwareTrait need to be explicity added to your controler first for fetchModel() to work.
+// ModelAwareTrait need to be explicitly added to your controller first for fetchModel() to work.
 use ModelAwareTrait;
 
 // Get an ElasticSearch model
@@ -556,7 +585,7 @@ logic around the request life-cycle:
 
 ### Controller Callback Methods
 
-By default the following callback methods are connected to related events if the
+By default, the following callback methods are connected to related events if the
 methods are implemented by your controllers
 
 #### beforeFilter()

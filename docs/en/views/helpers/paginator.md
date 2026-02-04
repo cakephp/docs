@@ -1,3 +1,8 @@
+---
+title: "Paginator"
+description: "Render pagination in CakePHP: use PaginatorHelper for page numbers, next/previous links, sort controls, and customize pagination display."
+---
+
 # Paginator
 
 `class` Cake\\View\\Helper\\**PaginatorHelper**(View $view, array $config = [])
@@ -12,7 +17,7 @@ create paginated datasets and do paginated queries.
 
 `method` Cake\\View\\Helper\\PaginatorHelper::**setPaginated**(PaginatedInterface $paginated, array $options = []): void
 
-By default the helper uses the first instance of `Cake\Datasource\Paging\PaginatedInterface`
+By default, the helper uses the first instance of `Cake\Datasource\Paging\PaginatedInterface`
 it finds in the view variables. (Generally the result of `Controller::paginate()`).
 
 You can use `PaginatorHelper::setPaginated()` to explicitly set the paginated
@@ -40,7 +45,7 @@ customize multiple templates and keep your code DRY:
 public function initialize(): void
 {
     ...
-    $this->loadHelper('Paginator', ['templates' => 'paginator-templates']);
+    $this->addHelper('Paginator', ['templates' => 'paginator-templates']);
 }
 ```
 
@@ -53,14 +58,14 @@ from a plugin using `plugin syntax`:
 public function initialize(): void
 {
     ...
-    $this->loadHelper('Paginator', ['templates' => 'MyPlugin.paginator-templates']);
+    $this->addHelper('Paginator', ['templates' => 'MyPlugin.paginator-templates']);
 }
 ```
 
 Whether your templates are in the primary application or a plugin, your
 templates file should look something like:
 
-``` text
+``` php
 return [
     'number' => '<a href="{{url}}">{{text}}</a>',
 ];
@@ -80,7 +85,7 @@ $result = $this->Paginator->getTemplates('number');
 
 // Change a template
 $this->Paginator->setTemplates([
-    'number' => '<em><a href="{{url}}">{{text}}</a></em>'
+    'number' => '<em><a href="{{url}}">{{text}}</a></em>',
 ]);
 ```
 
@@ -89,7 +94,7 @@ $this->Paginator->setTemplates([
 > attention, you should prefix this character with another percentage so it
 > looks like `%%`. The reason is that internally templates are compiled to
 > be used with `sprintf()`.
-> Example: '\<div style="width:{{size}}%%"\>{{content}}\</div\>'
+> Example: `'<div style="width:{{size}}%%">{{content}}</div>'`
 
 ## Template Names
 
@@ -156,9 +161,9 @@ If you are using HTML like images in your links remember to set escaping off:
 
 ``` php
 echo $this->Paginator->sort(
-  'user_id',
-  '<em>User account</em>',
-  ['escape' => false]
+    'user_id',
+    '<em>User account</em>',
+    ['escape' => false],
 );
 ```
 
@@ -189,9 +194,9 @@ echo $this->Paginator->sort('user_id', null, ['direction' => 'asc', 'lock' => tr
 
 ### Getting Sort Direction and Key
 
-`method` Cake\\View\\Helper\\PaginatorHelper::**sortDir**(string $model = null, mixed $options = []): string
+`method` Cake\\View\\Helper\\PaginatorHelper::**sortDir**(?string $model = null, array $options = []): string
 
-`method` Cake\\View\\Helper\\PaginatorHelper::**sortKey**(string $model = null, mixed $options = [])
+`method` Cake\\View\\Helper\\PaginatorHelper::**sortKey**(?string $model = null, array $options = []): ?string
 
 ### Creating Page Number Links
 
@@ -225,11 +230,11 @@ Supported options are:
 - `last` Whether you want last links generated, set to an integer to define
   the number of 'last' links to generate. Defaults to `false`. Follows the same
   logic as the `first` option. There is a
-  `~PaginatorHelper::last()` method to be used separately as well if
+  `PaginatorHelper::last()` method to be used separately as well if
   you wish.
 
 While this method allows a lot of customization for its output. It is
-also ok to just call the method without any parameters. :
+also ok to just call the method without any parameters.
 
 ``` php
 echo $this->Paginator->numbers();
@@ -328,7 +333,7 @@ available. For example:
 ``` php
 echo $this->Paginator->counter(
     'Page {{page}} of {{pages}}, showing {{current}} records out of
-     {{count}} total, starting on record {{start}}, ending on {{end}}'
+     {{count}} total, starting on record {{start}}, ending on {{end}}',
 );
 ```
 
@@ -342,8 +347,8 @@ echo $this->Paginator->counter('range');
 
 `method` Cake\\View\\Helper\\PaginatorHelper::**generateUrl**(array $options = [], ?string $model = null, array $url = [], array $urlOptions = []): string
 
-By default returns a full pagination URL string for use in non-standard contexts
-(i.e. JavaScript). :
+By default, returns a full pagination URL string for use in non-standard contexts
+(i.e. JavaScript).
 
 ``` php
 // Generates a URL similar to: /articles?sort=title&page=2
@@ -356,7 +361,7 @@ echo $this->Paginator->generateUrl(['sort' => 'title'], 'Comments');
 echo $this->Paginator->generateUrl(
     ['sort' => 'title'],
     null,
-    ['controller' => 'Comments']
+    ['controller' => 'Comments'],
 );
 ```
 
@@ -443,7 +448,7 @@ Sets all the options for the PaginatorHelper. Supported options are:
 
   The example above adds the `en` route parameter to all links the helper will
   generate. It will also create links with specific sort, direction and page
-  values. By default `PaginatorHelper` will merge in all of the current passed
+  values. By default, `PaginatorHelper` will merge in all the current passed
   arguments and query string parameters.
 
 - `escape` Defines if the title field for links should be HTML escaped.
@@ -537,7 +542,7 @@ markers:
 ``` php
 <?= $this->Paginator->counter(
     'Page {{page}} of {{pages}}, showing {{current}} records out of
-    {{count}} total, starting on record {{start}}, ending on {{end}}'
+    {{count}} total, starting on record {{start}}, ending on {{end}}',
 ) ?>
 ```
 
@@ -558,7 +563,7 @@ $this->Paginator->options([
     'url' => [
         // Additional URL parameters for the 'articles' scope
         'articles' => [
-            '?' => ['articles' => 'yes']
+            '?' => ['articles' => 'yes'],
         ],
         // Additional URL parameters for the 'comments' scope
         'comments' => [

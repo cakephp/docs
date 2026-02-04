@@ -1,3 +1,8 @@
+---
+title: "Interactive Console (REPL)"
+description: "Explore CakePHP interactively: use REPL console to test code, inspect objects, debug queries, and experiment with application logic."
+---
+
 # Interactive Console (REPL)
 
 CakePHP offers

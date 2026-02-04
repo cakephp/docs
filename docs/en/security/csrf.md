@@ -1,3 +1,8 @@
+---
+title: "CSRF Protection"
+description: "Protect your CakePHP app from Cross-Site Request Forgery attacks using session-based or cookie-based CSRF protection middleware strategies."
+---
+
 # CSRF Protection
 
 Cross-Site Request Forgeries (CSRF) are a class of exploit where unauthorized
@@ -18,7 +23,7 @@ CakePHP offers two forms of CSRF protection:
 > [!NOTE]
 > You cannot use both of the following approaches together, you must choose
 > only one. If you use both approaches together, a CSRF token mismatch error
-> will occur on every <span class="title-ref">PUT</span> and <span class="title-ref">POST</span> request
+> will occur on every `PUT` and `POST` request
 
 <a id="csrf-middleware"></a>
 
@@ -95,7 +100,7 @@ The available configuration options are:
 
 The available configuration options are:
 
-- `key` The session key to use. Defaults to <span class="title-ref">csrfToken</span>
+- `key` The session key to use. Defaults to `csrfToken`
 - `field` The form field to check. Changing this will also require configuring
   FormHelper.
 
@@ -181,7 +186,7 @@ defining a script block like this:
 ``` php
 echo $this->Html->scriptBlock(sprintf(
     'var csrfToken = %s;',
-    json_encode($this->request->getAttribute('csrfToken'))
+    json_encode($this->request->getAttribute('csrfToken')),
 ));
 ```
 

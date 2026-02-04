@@ -1,3 +1,8 @@
+---
+title: "Mailer"
+description: "Send emails in CakePHP: configure SMTP, use Mailer classes, attach files, send HTML emails, and manage email templates efficiently."
+---
+
 # Mailer
 
 `class` Cake\\Mailer\\**Mailer**(string|array|null $profile = null)
@@ -158,12 +163,12 @@ application. Mailer views can also use layouts and elements just like normal vie
 ``` php
 $mailer = new Mailer();
 $mailer
-            ->setEmailFormat('html')
-            ->setTo('bob@example.com')
-            ->setFrom('app@domain.com')
-            ->viewBuilder()
-                ->setTemplate('welcome')
-                ->setLayout('fancy');
+    ->setEmailFormat('html')
+    ->setTo('bob@example.com')
+    ->setFrom('app@domain.com')
+    ->viewBuilder()
+        ->setTemplate('welcome')
+        ->setLayout('fancy');
 
 $mailer->deliver();
 ```
@@ -175,12 +180,12 @@ send multipart templated email messages as well:
 ``` php
 $mailer = new Mailer();
 $mailer
-            ->setEmailFormat('both')
-            ->setTo('bob@example.com')
-            ->setFrom('app@domain.com')
-            ->viewBuilder()
-                ->setTemplate('welcome')
-                ->setLayout('fancy');
+    ->setEmailFormat('both')
+    ->setTo('bob@example.com')
+    ->setFrom('app@domain.com')
+    ->viewBuilder()
+        ->setTemplate('welcome')
+        ->setLayout('fancy');
 
 $mailer->deliver();
 ```
@@ -215,7 +220,7 @@ In your email templates you can use these with:
 ```
 
 You can use helpers in emails as well, much like you can in normal template files.
-By default only the `HtmlHelper` is loaded. You can load additional
+By default, only the `HtmlHelper` is loaded. You can load additional
 helpers using the `ViewBuilder::addHelpers()` method:
 
 ``` php
@@ -257,21 +262,21 @@ following path:
 
 ### Mailer::setAttachments()
 
-`method` Cake\\Mailer\\Mailer::**setAttachments**($attachments)
+`method` Cake\\Mailer\\Mailer::**setAttachments**(array $attachments): static
 
 You can attach files to email messages as well. There are a few
 different formats depending on what kind of files you have, and how
 you want the filenames to appear in the recipient's mail client:
 
-1.  Array: `$mailer->setAttachments(['/full/file/path/file.png'])` will
+1. Array: `$mailer->setAttachments(['/full/file/path/file.png'])` will
     attach this file with the name file.png..
 
-2.  Array with key:
+2. Array with key:
     `$mailer->setAttachments(['photo.png' => '/full/some_hash.png'])` will
     attach some_hash.png with the name photo.png. The recipient will see
     photo.png, not some_hash.png.
 
-3.  Nested arrays:
+3. Nested arrays:
 
     ``` php
     $mailer->setAttachments([
@@ -300,17 +305,17 @@ you want the filenames to appear in the recipient's mail client:
 
 ### Mailer::addAttachment()
 
-`method` Cake\\Mailer\\Mailer::**addAttachment**(\\Psr\\Http\\Message\\UploadedFileInterface|string $path, ?string $name, ?string $mimetype, ?string $contentId, ?bool $contentDisposition)
+`method` Cake\\Mailer\\Mailer::**addAttachment**(\\Psr\\Http\\Message\\UploadedFileInterface|string $path, ?string $name = null, ?string $mimetype = null, ?string $contentId = null, ?bool $contentDisposition = null): static
 
 You can also add attachments using the `addAttachment()` method.
 
-> \$mailer-\>addAttachment('/full/file/path/file.png');
+> `$mailer->addAttachment('/full/file/path/file.png');`
 
 ### Relaxing Address Validation Rules
 
 ### Mailer::setEmailPattern()
 
-`method` Cake\\Mailer\\Mailer::**setEmailPattern**($pattern)
+`method` Cake\\Mailer\\Mailer::**setEmailPattern**(?string $regex): static
 
 If you are having validation issues when sending to non-compliant addresses, you
 can relax the pattern used to validate email addresses. This is sometimes
@@ -340,7 +345,7 @@ A valid message id can help to prevent emails ending up in spam folders.
 
 ## Creating Reusable Emails
 
-Until now we have seen how to directly use the the `Mailer` class to create and
+Until now we have seen how to directly use the `Mailer` class to create and
 send one emails. But main feature of mailer is to allow creating reusable emails
 throughout your application. They can also be used to contain multiple email
 configurations in one location. This helps keep your code DRYer and keeps email
@@ -358,16 +363,16 @@ use Cake\Mailer\Mailer;
 
 class UserMailer extends Mailer
 {
-    public function welcome($user)
+    public function welcome(User $user): void
     {
         $this
             ->setTo($user->email)
             ->setSubject(sprintf('Welcome %s', $user->name))
             ->viewBuilder()
-                ->setTemplate('welcome_mail'); // By default template with same name as method name is used.
+                ->setTemplate('welcome_mail'); // By default, template with same name as method name is used.
     }
 
-    public function resetPassword($user)
+    public function resetPassword(User $user): void
     {
         $this
             ->setTo($user->email)
@@ -398,7 +403,7 @@ class UsersController extends AppController
     {
         $user = $this->Users->newEmptyEntity();
         if ($this->request->is('post')) {
-            $user = $this->Users->patchEntity($user, $this->request->getData())
+            $user = $this->Users->patchEntity($user, $this->request->getData());
             if ($this->Users->save($user)) {
                 $this->getMailer('User')->send('welcome', [$user]);
             }
@@ -453,7 +458,7 @@ is useful for debugging. Configuring transports allows you to keep configuration
 data out of your application code and makes deployment simpler as you can simply
 change the configuration data. An example transport configuration looks like:
 
-``` text
+``` php
 // In config/app.php
 'EmailTransport' => [
     // Sample Mail configuration
@@ -484,7 +489,7 @@ TransportFactory::setConfig('gmail', [
     'port' => 465,
     'username' => 'my@gmail.com',
     'password' => 'secret',
-    'className' => 'Smtp'
+    'className' => 'Smtp',
 ]);
 ```
 
@@ -501,7 +506,7 @@ TransportFactory::setConfig('gmail', [
     'username' => 'my@gmail.com',
     'password' => 'secret',
     'className' => 'Smtp',
-    'tls' => true
+    'tls' => true,
 ]);
 ```
 
@@ -526,7 +531,7 @@ $mailer->setTransport(new \Cake\Mailer\Transport\DebugTransport());
 > account](https://support.google.com/accounts/answer/6010255).
 
 > [!NOTE]
->   [Gmail SMTP settings](https://support.google.com/a/answer/176600?hl=en).
+> [Gmail SMTP settings](https://support.google.com/a/answer/176600?hl=en).
 
 > [!NOTE]
 > To use SSL + SMTP, you will need to have the SSL configured in your PHP
@@ -535,7 +540,7 @@ $mailer->setTransport(new \Cake\Mailer\Transport\DebugTransport());
 Configuration options can also be provided as a `DSN` string. This is
 useful when working with environment variables or `PaaS` providers:
 
-``` css
+``` php
 TransportFactory::setConfig('default', [
     'url' => 'smtp://my@gmail.com:secret@smtp.gmail.com:587?tls=true',
 ]);
@@ -546,7 +551,7 @@ query string arguments.
 
 ### Mailer::drop()
 
-`static` Cake\\Mailer\\Mailer::**drop**($key)
+`static` Cake\\Mailer\\Mailer::**drop**(string $config): bool
 
 Once configured, transports cannot be modified. In order to modify a transport
 you must first drop it and then reconfigure it.

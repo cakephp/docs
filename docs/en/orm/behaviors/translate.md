@@ -1,3 +1,8 @@
+---
+title: "Translate"
+description: "Translate entities in CakePHP: store multi-language content, retrieve translations, configure TranslateBehavior for internationalization."
+---
+
 # Translate
 
 `class` Cake\\ORM\\Behavior\\**TranslateBehavior**
@@ -13,10 +18,10 @@ of your entities in multiple languages.
 
 The behavior offers two strategies for how the translations are stored.
 
-1.  Shadow table Strategy: This strategy uses a separate "shadow table" for each
+1. Shadow table Strategy: This strategy uses a separate "shadow table" for each
     Table object to store translation of all translated fields of that table.
     This is the default strategy.
-2.  Eav Strategy: This strategy uses a `i18n` table where it stores the
+2. Eav Strategy: This strategy uses a `i18n` table where it stores the
     translation for each of the fields of any given Table object that it's bound to.
 
 ## Shadow Table Strategy
@@ -86,7 +91,7 @@ class ArticlesTable extends Table
 {
     public function initialize(array $config): void
     {
-        // By default ShadowTable will be used.
+        // By default, ShadowTable will be used.
         $this->addBehavior('Translate', ['fields' => ['title', 'body']]);
     }
 }
@@ -115,7 +120,7 @@ For `EavStrategy` you are required to pass the `fields` key in the
 configuration array. This list of fields is needed to tell the behavior what
 columns will be able to store translations.
 
-By default the locale specified in `App.defaultLocale` config is used as default
+By default, the locale specified in `App.defaultLocale` config is used as default
 locale for the `TranslateBehavior`. You can override that by setting `defaultLocale`
 config of the behavior:
 
@@ -267,7 +272,7 @@ In the example above you will get a list of entities back that have a
 `_translations` property set. This property will contain a list of translation
 data entities. For example the following properties would be accessible:
 
-``` text
+``` php
 // Outputs 'en'
 echo $article->_translations['en']->locale;
 
@@ -330,7 +335,7 @@ class ArticlesTable extends Table
     {
         $this->addBehavior('Translate', [
             'fields' => ['title', 'body'],
-            'allowEmptyTranslations' => false
+            'allowEmptyTranslations' => false,
         ]);
     }
 }
@@ -399,7 +404,7 @@ TranslateBehavior does not substitute find conditions by default. You need to us
 ``` php
 $this->Articles->getBehavior('Translate')->setLocale('es');
 $query = $this->Articles->find()->where([
-    $this->Articles->getBehavior('Translate')->translationField('title') => 'Otro Título'
+    $this->Articles->getBehavior('Translate')->translationField('title') => 'Otro Título',
 ]);
 ```
 
@@ -430,7 +435,7 @@ class Article extends Entity
 $article = new Article([
     'title' => 'My First Article',
     'body' => 'This is the content',
-    'footnote' => 'Some afterwords'
+    'footnote' => 'Some afterwords',
 ]);
 
 $this->Articles->save($article);
@@ -451,7 +456,7 @@ After the entity has been saved, the translated field will be persisted as well,
 one thing to note is that values from the default language that were not
 overridden will be preserved:
 
-``` text
+``` php
 // Outputs 'This is the content'
 echo $article->body;
 
@@ -480,8 +485,6 @@ $this->Articles->save($article);
 Setting the language directly in the table is useful when you need to both
 retrieve and save entities for the same language or when you need to save
 multiple entities at once.
-
-<a id="saving-multiple-translations"></a>
 
 ## Saving Multiple Translations
 

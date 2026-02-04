@@ -1,3 +1,8 @@
+---
+title: "Http Client"
+description: "Make HTTP requests in CakePHP: use PSR-18 client, send GET/POST requests, handle responses, configure authentication, and test APIs."
+---
+
 # Http Client
 
 `class` Cake\\Http\\**Client**(mixed $config = [])
@@ -16,14 +21,14 @@ use Cake\Http\Client;
 $http = new Client();
 
 // Simple get
-$response = $http->get('http://example.com/test.html');
+$response = $http->get('https://example.com/test.html');
 
 // Simple get with querystring
-$response = $http->get('http://example.com/search', ['q' => 'widget']);
+$response = $http->get('https://example.com/search', ['q' => 'widget']);
 
 // Simple get with querystring & additional headers
-$response = $http->get('http://example.com/search', ['q' => 'widget'], [
-  'headers' => ['X-Requested-With' => 'XMLHttpRequest'],
+$response = $http->get('https://example.com/search', ['q' => 'widget'], [
+    'headers' => ['X-Requested-With' => 'XMLHttpRequest'],
 ]);
 ```
 
@@ -32,15 +37,15 @@ Doing POST and PUT requests is equally simple:
 ``` php
 // Send a POST request with application/x-www-form-urlencoded encoded data
 $http = new Client();
-$response = $http->post('http://example.com/posts/add', [
-  'title' => 'testing',
-  'body' => 'content in the post',
+$response = $http->post('https://example.com/posts/add', [
+    'title' => 'testing',
+    'body' => 'content in the post',
 ]);
 
 // Send a PUT request with application/x-www-form-urlencoded encoded data
-$response = $http->put('http://example.com/posts/add', [
-  'title' => 'testing',
-  'body' => 'content in the post',
+$response = $http->put('https://example.com/posts/add', [
+    'title' => 'testing',
+    'body' => 'content in the post',
 ]);
 
 // Other methods as well.
@@ -57,8 +62,8 @@ use Cake\Http\Client;
 use Cake\Http\Client\Request as ClientRequest;
 
 $request = new ClientRequest(
-    'http://example.com/search',
-    ClientRequest::METHOD_GET
+    'https://example.com/search',
+    ClientRequest::METHOD_GET,
 );
 $http = new Client();
 $response = $http->sendRequest($request);
@@ -70,8 +75,8 @@ You can include files in request bodies by including a filehandle in the array:
 
 ``` php
 $http = new Client();
-$response = $http->post('http://example.com/api', [
-  'image' => fopen('/path/to/a/file', 'r'),
+$response = $http->post('https://example.com/api', [
+    'image' => fopen('/path/to/a/file', 'r'),
 ]);
 ```
 
@@ -102,9 +107,9 @@ $file->disposition('attachment');
 
 // Send the request.
 $response = $http->post(
-    'http://example.com/api',
+    'https://example.com/api',
     (string)$data,
-    ['headers' => ['Content-Type' => $data->contentType()]]
+    ['headers' => ['Content-Type' => $data->contentType()]],
 );
 ```
 
@@ -117,9 +122,9 @@ form encoded. Http\Client exposes this through the type option:
 // Send a JSON request body.
 $http = new Client();
 $response = $http->post(
-  'http://example.com/tasks',
-  json_encode($data),
-  ['type' => 'json']
+    'https://example.com/tasks',
+    json_encode($data),
+    ['type' => 'json'],
 );
 ```
 
@@ -132,9 +137,9 @@ you can do the following:
 // Send a JSON body in a GET request with query string parameters.
 $http = new Client();
 $response = $http->get(
-  'http://example.com/tasks',
-  ['q' => 'test', '_content' => json_encode($data)],
-  ['type' => 'json']
+    'https://example.com/tasks',
+    ['q' => 'test', '_content' => json_encode($data)],
+    ['type' => 'json'],
 );
 ```
 
@@ -149,7 +154,7 @@ addition request information. The following keys can be used in `$options`:
 - `cookie` - Array of cookies to use.
 - `proxy` - Array of proxy information.
 - `auth` - Array of authentication data, the `type` key is used to delegate to
-  an authentication strategy. By default Basic auth is used.
+  an authentication strategy. By default, Basic auth is used.
 - `ssl_verify_peer` - defaults to `true`. Set to `false` to disable SSL certification
   verification (not recommended).
 - `ssl_verify_peer_name` - defaults to `true`. Set to `false` to disable
@@ -182,12 +187,12 @@ An example of basic authentication:
 
 ``` php
 $http = new Client();
-$response = $http->get('http://example.com/profile/1', [], [
-  'auth' => ['username' => 'mark', 'password' => 'secret'],
+$response = $http->get('https://example.com/profile/1', [], [
+    'auth' => ['username' => 'mark', 'password' => 'secret'],
 ]);
 ```
 
-By default `Cake\Http\Client` will use basic authentication if there is no
+By default, `Cake\Http\Client` will use basic authentication if there is no
 `'type'` key in the auth option.
 
 ### Using Digest Authentication
@@ -196,7 +201,7 @@ An example of basic authentication:
 
 ``` php
 $http = new Client();
-$response = $http->get('http://example.com/profile/1', [], [
+$response = $http->get('https://example.com/profile/1', [], [
     'auth' => [
         'type' => 'digest',
         'username' => 'mark',
@@ -230,7 +235,7 @@ key and consumer secret:
 
 ``` php
 $http = new Client();
-$response = $http->get('http://example.com/profile/1', [], [
+$response = $http->get('https://example.com/profile/1', [], [
     'auth' => [
         'type' => 'oauth',
         'consumerKey' => 'bigkey',
@@ -262,7 +267,7 @@ Http\Client will assume Basic authentication, unless the type key is set:
 
 ``` php
 $http = new Client();
-$response = $http->get('http://example.com/test.php', [], [
+$response = $http->get('https://example.com/test.php', [], [
     'proxy' => [
         'username' => 'mark',
         'password' => 'testing',
@@ -344,7 +349,7 @@ match:
 
 ``` php
 $http = new Client([
-    'host' => 'cakephp.org'
+    'host' => 'cakephp.org',
 ]);
 
 // Do a request that sets some cookies
@@ -372,7 +377,7 @@ method:
 use Cake\Http\Cookie\Cookie;
 
 $http = new Client([
-    'host' => 'cakephp.org'
+    'host' => 'cakephp.org',
 ]);
 $http->addCookie(new Cookie('session', 'abc123'));
 ```
@@ -426,12 +431,12 @@ XML data is decoded into a `SimpleXMLElement` tree:
 ``` php
 // Get some XML
 $http = new Client();
-$response = $http->get('http://example.com/test.xml');
+$response = $http->get('https://example.com/test.xml');
 $xml = $response->getXml();
 
 // Get some JSON
 $http = new Client();
-$response = $http->get('http://example.com/test.json');
+$response = $http->get('https://example.com/test.json');
 $json = $response->getJson();
 ```
 
@@ -491,7 +496,7 @@ $response->getStatusCode();
 
 ## Changing Transport Adapters
 
-By default `Http\Client` will prefer using a `curl` based transport adapter.
+By default, `Http\Client` will prefer using a `curl` based transport adapter.
 If the curl extension is not available a stream based adapter will be used
 instead. You can force select a transport adapter using a constructor option:
 
@@ -517,7 +522,7 @@ $http->getEventManager()->on(
         \Cake\Http\Client\ClientEvent $event,
         \Cake\Http\Client\Request $request,
         array $adapterOptions,
-        int $redirects
+        int $redirects,
     ) {
         // Modify the request
         $event->setRequest(....);
@@ -543,7 +548,7 @@ $http->getEventManager()->on(
         array $adapterOptions,
         int $redirects,
         bool $requestSent // Indicates whether the request was actually sent
-                          // or response returned from ``beforeSend`` event
+                            // or response returned from ``beforeSend`` event
     ) {
         // Get the response
         $response = $event->getResponse();
@@ -576,7 +581,7 @@ class CartControllerTests extends TestCase
         // Mock a POST request that will be made.
         $this->mockClientPost(
             'https://example.com/process-payment',
-            $this->newClientResponse(200, [], json_encode(['ok' => true]))
+            $this->newClientResponse(200, [], json_encode(['ok' => true])),
         );
         $this->post("/cart/checkout");
         // Do assertions.
@@ -596,7 +601,7 @@ $this->mockClientDelete(/* ... */);
 
 ### Response::newClientResponse()
 
-`method` Cake\\Http\\TestSuite\\Response::**newClientResponse**(int $code = 200, array $headers = [], string $body = '')
+`method` Cake\\Http\\TestSuite\\HttpClientTrait::**newClientResponse**(int $code = 200, array $headers = [], string $body = ''): Cake\\Http\\Client\\Response
 
 As seen above you can use the `newClientResponse()` method to create responses
 for the requests your application will make. The headers need to be a list of

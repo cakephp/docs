@@ -1,3 +1,8 @@
+---
+title: "Where to Get Help"
+description: "Get CakePHP support: access documentation, join forums, Slack, Stack Overflow, GitHub issues, and connect with the community."
+---
+
 # Where to Get Help
 
 ## The Official CakePHP website

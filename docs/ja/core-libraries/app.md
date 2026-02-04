@@ -114,7 +114,7 @@ App::core('Cache/Engine');
 ベンダーライブラリーの設定をした後はあなたのアプリケーションのオートローダーを再生成する必要があります。 :
 
 ``` bash
-$ php composer.phar dump-autoload
+php composer.phar dump-autoload
 ```
 
 もしもあなたのアプリケーションで Composer を使っていないとしたら、

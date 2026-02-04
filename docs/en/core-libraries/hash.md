@@ -1,4 +1,9 @@
-# Hash
+---
+title: "Hash Utility"
+description: "Work with arrays in CakePHP: extract, combine, sort, filter data using Hash utility for powerful array manipulation and path syntax."
+---
+
+# Hash Utility
 
 `class` Cake\\Utility\\**Hash**
 
@@ -9,8 +14,6 @@ to do just that.
 
 CakePHP's Hash class can be called from any model or controller in
 the same way Inflector is called. Example: `Hash::combine()`.
-
-<a id="hash-path-syntax"></a>
 
 ## Hash Path Syntax
 
@@ -23,7 +26,7 @@ elements. You apply matchers to expression elements.
 ### Expression Types
 
 | Expression | Definition |
-|----|----|
+| ---- | ---- |
 | `{n}` | Represents a numeric key. Will match any string or numeric key. |
 | `{s}` | Represents a string. Will match any string value including numeric string values. |
 | `{*}` | Matches any value. |
@@ -37,7 +40,7 @@ elements, you can use attribute matching with certain methods. They are `extract
 ### Attribute Matching Types
 
 | Matcher | Definition |
-|----|----|
+| ---- | ---- |
 | `[id]` | Match elements with a given array key. |
 | `[id=2]` | Match elements with id equal to 2. |
 | `[id!=2]` | Match elements with id not equal to 2. |
@@ -64,7 +67,7 @@ a matching path is not found the default value will be returned.
 [Hash Path Syntax](#hash-path-syntax). You can use extract to retrieve data from arrays
 or object implementing `ArrayAccess` interface, along arbitrary paths
 quickly without having to loop through the data structures. Instead you
-use path expressions to qualify which elements you want returned :
+use path expressions to qualify which elements you want returned:
 
 ``` php
 // Common Usage:
@@ -79,13 +82,15 @@ $results = Hash::extract($users, '{n}.id');
 // [1,2,3,4];
 ```
 
+### Hash::insert()
+
 `static` Cake\\Utility\\Hash::**insert**(ArrayAccess|array $data, string $path, mixed $values = null): ArrayAccess|array
 
 Inserts `$values` into an array as defined by `$path`:
 
 ``` php
 $a = [
-    'pages' => ['name' => 'page']
+    'pages' => ['name' => 'page'],
 ];
 $result = Hash::insert($a, 'files', ['name' => 'files']);
 // $result now looks like:
@@ -137,7 +142,7 @@ Removes all elements from an array that match `$path`:
 ``` php
 $a = [
     'pages' => ['name' => 'page'],
-    'files' => ['name' => 'files']
+    'files' => ['name' => 'files'],
 ];
 $result = Hash::remove($a, 'files');
 /* $result now looks like:
@@ -191,7 +196,7 @@ $a = [
             'group_id' => 1,
             'Data' => [
                 'user' => 'mariano.iglesias',
-                'name' => 'Mariano Iglesias'
+                'name' => 'Mariano Iglesias',
             ]
         ]
     ],
@@ -201,7 +206,7 @@ $a = [
             'group_id' => 2,
             'Data' => [
                 'user' => 'phpnut',
-                'name' => 'Larry E. Masters'
+                'name' => 'Larry E. Masters',
             ]
         ]
     ],
@@ -294,7 +299,7 @@ $result = Hash::combine(
     $a,
     '{n}.User.id',
     ['%s: %s', '{n}.User.Data.user', '{n}.User.Data.name'],
-    '{n}.User.group_id'
+    '{n}.User.group_id',
 );
 /* $result now looks like:
     [
@@ -310,7 +315,7 @@ $result = Hash::combine(
 $result = Hash::combine(
     $a,
     ['%s: %s', '{n}.User.Data.user', '{n}.User.Data.name'],
-    '{n}.User.id'
+    '{n}.User.id',
 );
 /* $result now looks like:
     [
@@ -335,7 +340,7 @@ $data = [
             'last_name' => 'Abele',
             'city' => 'Boston',
             'state' => 'MA',
-            'something' => '42'
+            'something' => '42',
         ]
     ],
     [
@@ -344,7 +349,7 @@ $data = [
             'last_name' => 'Masters',
             'city' => 'Boondock',
             'state' => 'TN',
-            'something' => '{0}'
+            'something' => '{0}',
         ]
     ],
     [
@@ -353,7 +358,7 @@ $data = [
             'last_name' => 'Woodworth',
             'city' => 'Venice Beach',
             'state' => 'CA',
-            'something' => '{1}'
+            'something' => '{1}',
         ]
     ]
 ];
@@ -387,7 +392,7 @@ of another:
 ``` php
 $a = [
     0 => ['name' => 'main'],
-    1 => ['name' => 'about']
+    1 => ['name' => 'about'],
 ];
 $b = [
     0 => ['name' => 'main'],
@@ -412,7 +417,7 @@ Checks if a particular path is set in an array:
 
 ``` php
 $set = [
-    'My Index 1' => ['First' => 'The first item']
+    'My Index 1' => ['First' => 'The first item'],
 ];
 $result = Hash::check($set, 'My Index 1.First');
 // $result == true
@@ -425,7 +430,7 @@ $set = [
         'First' => [
             'Second' => [
                 'Third' => [
-                    'Fourth' => 'Heavy. Nesting.'
+                    'Fourth' => 'Heavy. Nesting.',
                 ]
             ]
         ]
@@ -458,7 +463,7 @@ $data = [
     false,
     true,
     0,
-    ['one thing', 'I can tell you', 'is you got to be', false]
+    ['one thing', 'I can tell you', 'is you got to be', false],
 ];
 $res = Hash::filter($data);
 
@@ -668,7 +673,7 @@ this method:
 // Call the noop function $this->noop() on every element of $data
 $result = Hash::map($data, "{n}", [$this, 'noop']);
 
-public function noop(array $array)
+public function noop(array $array): array
 {
     // Do stuff to array and return the result
     return $array;
@@ -694,7 +699,7 @@ will get the extracted values as the first argument:
 $data = [
     ['date' => '01-01-2016', 'booked' => true],
     ['date' => '01-01-2016', 'booked' => false],
-    ['date' => '02-01-2016', 'booked' => true]
+    ['date' => '02-01-2016', 'booked' => true],
 ];
 $result = Hash::apply($data, '{n}[booked=true].date', 'array_count_values');
 /* $result now looks like:
@@ -715,7 +720,7 @@ Only expression elements are supported by this method:
 ``` php
 $a = [
     0 => ['Person' => ['name' => 'Jeff']],
-    1 => ['Shirt' => ['color' => 'black']]
+    1 => ['Shirt' => ['color' => 'black']],
 ];
 $result = Hash::sort($a, '{n}.Person.name', 'asc');
 /* $result now looks like:
@@ -752,12 +757,12 @@ Computes the difference between two arrays:
 ``` php
 $a = [
     0 => ['name' => 'main'],
-    1 => ['name' => 'about']
+    1 => ['name' => 'about'],
 ];
 $b = [
     0 => ['name' => 'main'],
     1 => ['name' => 'about'],
-    2 => ['name' => 'contact']
+    2 => ['name' => 'contact'],
 ];
 
 $result = Hash::diff($a, $b);
@@ -777,8 +782,7 @@ $result = Hash::diff($a, $b);
 This function merges two arrays and pushes the differences in
 data to the bottom of the resultant array.
 
-**Example 1**
-:
+**Example 1:**
 
 ``` php
 $array1 = ['ModelOne' => ['id' => 1001, 'field_one' => 'a1.m1.f1', 'field_two' => 'a1.m1.f2']];
@@ -797,8 +801,7 @@ $res = Hash::mergeDiff($array1, $array2);
 */
 ```
 
-**Example 2**
-:
+**Example 2:**
 
 ``` php
 $array1 = ["a" => "b", 1 => 20938, "c" => "string"];
@@ -831,7 +834,7 @@ makes using the results with `Hash::merge()` easier:
 $a = ['Tree', 'CounterCache',
     'Upload' => [
         'folder' => 'products',
-        'fields' => ['image_1_id', 'image_2_id']
+        'fields' => ['image_1_id', 'image_2_id'],
     ]
 ];
 $result = Hash::normalize($a);
@@ -904,7 +907,7 @@ $data = [
     ['ThreadPost' => ['id' => 7, 'parent_id' => 6]],
     ['ThreadPost' => ['id' => 8, 'parent_id' => 6]],
     ['ThreadPost' => ['id' => 9, 'parent_id' => 6]],
-    ['ThreadPost' => ['id' => 10, 'parent_id' => 6]]
+    ['ThreadPost' => ['id' => 10, 'parent_id' => 6]],
 ];
 
 $result = Hash::nest($data, ['root' => 6]);

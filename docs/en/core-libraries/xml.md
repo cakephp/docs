@@ -1,3 +1,8 @@
+---
+title: "Xml"
+description: "Work with XML in CakePHP: convert arrays to XML, parse XML to arrays, use SimpleXML/DOMDocument with Xml utility class."
+---
+
 # Xml
 
 `class` Cake\\Utility\\**Xml**
@@ -9,7 +14,7 @@ DOMDocument objects, and back into arrays again.
 
 ### Xml::build()
 
-`static` Cake\\Utility\\Xml::**build**($input, array $options = []): SimpleXMLElement|DOMDocument
+`static` Cake\\Utility\\Xml::**build**(object|array|string $input, array $options = []): SimpleXMLElement|DOMDocument
 
 You can load XML-ish data using `Xml::build()`. Depending on your
 `$options` parameter, this method will return a SimpleXMLElement (default)
@@ -72,14 +77,14 @@ objects with `loadHtml()`:
 $html = Xml::loadHtml($htmlString, ['return' => 'domdocument']);
 ```
 
-By default entity loading and huge document parsing are disabled. These modes
+By default, entity loading and huge document parsing are disabled. These modes
 can be enabled with the `loadEntities` and `parseHuge` options respectively.
 
 ## Transforming a XML String in Array
 
 ### Xml::toArray()
 
-`static` Cake\\Utility\\Xml::**toArray**($obj): array
+`static` Cake\\Utility\\Xml::**toArray**(SimpleXMLElement|DOMNode $obj): array
 
 Converting XML strings into arrays is simple with the Xml class as well. By
 default you'll get a SimpleXml object back:
@@ -104,20 +109,20 @@ Your array must have only one element in the "top level" and it can not be
 numeric. If the array is not in this format, Xml will throw an exception.
 Examples of invalid arrays:
 
-``` text
+``` php
 // Top level with numeric key
 [
-    ['key' => 'value']
+    ['key' => 'value'],
 ];
 
 // Multiple keys in top level
 [
     'key1' => 'first value',
-    'key2' => 'other value'
+    'key2' => 'other value',
 ];
 ```
 
-By default array values will be output as XML tags. If you want to define
+By default, array values will be output as XML tags. If you want to define
 attributes or text values you can prefix the keys that are supposed to be
 attributes with `@`. For value text, use `@` as the key:
 
@@ -161,7 +166,7 @@ $xmlArray(
             'xmlns:pref' => 'https://cakephp.org',
             'pref:item' => [
                 'item 1',
-                'item 2'
+                'item 2',
             ]
         ]
     ]

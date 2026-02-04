@@ -1,3 +1,8 @@
+---
+title: "Plugins"
+description: "Extend CakePHP with plugins: create reusable packages, load plugins, configure routes, override templates, and share functionality across apps."
+---
+
 # Plugins
 
 CakePHP allows you to set up a combination of controllers, models,
@@ -13,7 +18,7 @@ reused with little effort in other applications. The application and the plugin
 operate in their own respective spaces, but share the application's
 configuration data (for example, database connections, email transports)
 
-Plugin should define their own top-level namespace. For example:
+Plugins should define their own top-level namespace. For example:
 `DebugKit`. By convention, plugins use their package name as their namespace.
 If you'd like to use a different namespace, you can configure the plugin
 namespace, when plugins are loaded.
@@ -73,8 +78,6 @@ before running the above composer command:
 }
 ```
 
-<a id="loading-a-plugin"></a>
-
 ## Loading a Plugin
 
 If you want to use a plugin's routes, console commands, middlewares, event
@@ -110,10 +113,10 @@ appropriate parts of your application. The hooks are:
   queue.
 - `console` Used to add console commands to an application's command
   collection.
-- `services` Used to register application container service. This is a good
-  opportunity to setup additional objects that need acccess to the container.
+- `services` Used to register application container services. This is a good
+  opportunity to setup additional objects that need access to the container.
 
-By default all plugins hooks are enabled. You can disable hooks by using the
+By default, all plugins hooks are enabled. You can disable hooks by using the
 related options of the `plugin load` command:
 
 ``` bash
@@ -144,7 +147,7 @@ use ContactManager\ContactManagerPlugin;
 
 class Application extends BaseApplication
 {
-    public function bootstrap()
+    public function bootstrap(): void
     {
         parent::bootstrap();
 
@@ -253,7 +256,7 @@ basic directory structure. It should look like this:
                 /Fixture
             /webroot
 
-Note the name of the plugin folder, '\*\*ContactManager\*\*'. It is important
+Note the name of the plugin folder, '**ContactManager**'. It is important
 that this folder has the same name as the plugin.
 
 Inside the plugin folder, you'll notice it looks a lot like a CakePHP
@@ -341,7 +344,7 @@ class ContactManagerPlugin extends BasePlugin
     public function bootstrap(PluginApplicationInterface $app): void
     {
         // Add constants, load configuration defaults.
-        // By default will load `config/bootstrap.php` in the plugin.
+        // By default, will load `config/bootstrap.php` in the plugin.
         parent::bootstrap($app);
     }
 
@@ -351,7 +354,7 @@ class ContactManagerPlugin extends BasePlugin
     public function routes(RouteBuilder $routes): void
     {
         // Add routes.
-        // By default will load `config/routes.php` in the plugin.
+        // By default, will load `config/routes.php` in the plugin.
         parent::routes($routes);
     }
 
@@ -368,8 +371,6 @@ class ContactManagerPlugin extends BasePlugin
     }
 }
 ```
-
-<a id="plugin-routes"></a>
 
 ## Plugin Routes
 
@@ -481,8 +482,6 @@ also connect routes that use the following pattern:
 See the section on [Plugin Configuration](#plugin-configuration) for information on how to load
 plugin specific route files.
 
-<a id="plugin-models"></a>
-
 ## Plugin Models
 
 Models for the plugin are stored in **plugins/ContactManager/src/Model**.
@@ -565,7 +564,7 @@ right folder inside of the `plugins/[PluginName]/templates/` folder. For our
 ContactManager plugin, we'll need a view for our `ContactsController::index()`
 action, so let's include that as well:
 
-``` text
+``` php
 // plugins/ContactManager/templates/Contacts/index.php:
 <h1>Contacts</h1>
 <p>Following is a sortable list of your contacts</p>
@@ -621,7 +620,7 @@ echo $this->element('Contacts.sidebar/helpbox');
 You can override any plugin views from inside your app using special paths. If
 you have a plugin called 'ContactManager' you can override the template files of the
 plugin with application specific view logic by creating files using the
-following template **templates/plugin/\[Plugin\]/\[Controller\]/\[view\].php**. For the
+following template **templates/plugin/`[Plugin]/[Controller]/[view]`.php**. For the
 Contacts controller you could make the following file:
 
     templates/plugin/ContactManager/Contacts/index.php
@@ -634,7 +633,7 @@ To override plugin elements, create an element with the same name in:
     templates/plugin/ContactManager/element/helpbox.php
 
 This file would override
-**plugins/ContactManager/tempaltes/element/helpbox.ctp**.
+**plugins/ContactManager/templates/element/helpbox.ctp**.
 
 If your plugin is in a composer dependency (i.e. 'Company/ContactManager'), the
 path to the 'index' view of the Contacts controller will be:
@@ -649,8 +648,6 @@ in your application template overrides. For example, if the 'ContactManager'
 plugin implemented an 'Admin' prefix the overriding path would be:
 
     templates/plugin/ContactManager/Admin/ContactManager/index.php
-
-<a id="plugin-assets"></a>
 
 ## Plugin Assets
 
@@ -773,15 +770,9 @@ Do **not** use the CakePHP namespace (cakephp) as this is reserved to CakePHP
 owned plugins. The convention is to use lowercase letters and dashes as separator.
 
 So if you created a plugin "Logging" with your GitHub account "FooBar", a good
-name would be <span class="title-ref">foo-bar/cakephp-logging</span>.
-And the CakePHP owned "Localized" plugin can be found under <span class="title-ref">cakephp/localized</span>
+name would be `foo-bar/cakephp-logging`.
+And the CakePHP owned "Localized" plugin can be found under `cakephp/localized`
 respectively.
-
-<div class="index">
-
-vendor/cakephp-plugins.php
-
-</div>
 
 ## Plugin Map File
 

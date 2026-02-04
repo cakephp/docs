@@ -1,3 +1,8 @@
+---
+title: "Sessions"
+description: "Manage sessions in CakePHP: configure session handlers, use database/cache storage, handle session data, and implement secure sessions."
+---
+
 # Sessions
 
 CakePHP provides a wrapper and suite of utility features on top of PHP's native
@@ -5,8 +10,6 @@ CakePHP provides a wrapper and suite of utility features on top of PHP's native
 requests and store persistent data for specific users. Unlike Cookies, session
 data is not available on the client side. Usage of `$_SESSION` is generally
 avoided in CakePHP, and instead usage of the Session classes is preferred.
-
-<a id="session-configuration"></a>
 
 ## Session Configuration
 
@@ -41,7 +44,7 @@ this:
 Configure::write('Session', [
     'defaults' => 'php',
     'ini' => [
-        'session.cookie_secure' => false
+        'session.cookie_secure' => false,
     ]
 ]);
 ```
@@ -73,7 +76,7 @@ Configure::write('Session', [
 ]);
 ```
 
-By default PHP sets the session cookie to expire as soon as the browser is
+By default, PHP sets the session cookie to expire as soon as the browser is
 closed, regardless of the configured `Session.timeout` value. The cookie
 timeout is controlled by the `session.cookie_lifetime` ini value and can be
 configured using:
@@ -83,7 +86,7 @@ Configure::write('Session', [
     'defaults' => 'php',
     'ini' => [
         // Invalidate the cookie after 30 minutes
-        'session.cookie_lifetime' => 1800
+        'session.cookie_lifetime' => 1800,
     ]
 ]);
 ```
@@ -108,7 +111,7 @@ it in your Session config:
 
 ``` php
 Configure::write('Session', [
-    'defaults' => 'php'
+    'defaults' => 'php',
 ]);
 ```
 
@@ -119,7 +122,7 @@ part or all of it by doing the following:
 Configure::write('Session', [
     'defaults' => 'php',
     'cookie' => 'my_app',
-    'timeout' => 4320 // 3 days
+    'timeout' => 4320, // 3 days
 ]);
 ```
 
@@ -145,7 +148,7 @@ Cache and Database session handlers use this method for saving sessions.
 Additional settings for the handler should be placed inside the handler array.
 You can then read those values out from inside your handler:
 
-``` text
+``` php
 'Session' => [
     'handler' => [
         'engine' => 'DatabaseSession',
@@ -166,9 +169,9 @@ from inside plugins. By setting the engine to `MyPlugin.PluginSessionHandler`.
 
 If you need to use a database to store your session data, configure as follows:
 
-``` text
+``` php
 'Session' => [
-    'defaults' => 'database'
+    'defaults' => 'database',
 ]
 ```
 
@@ -189,7 +192,7 @@ You can find a copy of the schema for the sessions table in the [application ske
 
 You can also use your own `Table` class to handle the saving of the sessions:
 
-``` text
+``` php
 'Session' => [
     'defaults' => 'database',
     'handler' => [
@@ -231,7 +234,7 @@ configuration to use. The default cache configuration is `'default'`.
 
 The app skeleton comes preconfigured with a session config like this:
 
-``` text
+``` php
 'Session' => [
     'defaults' => 'php',
 ],
@@ -269,7 +272,7 @@ Configure::write('Session', [
         'session.cookie_name' => 'MyCookie',
         'session.cookie_lifetime' => 1800, // Valid for 30 minutes
         'session.gc_divisor' => 1000,
-        'session.cookie_httponly' => true
+        'session.cookie_httponly' => true,
     ]
 ]);
 ```
@@ -294,7 +297,7 @@ use Cake\Http\Session\DatabaseSession;
 
 class ComboSession extends DatabaseSession
 {
-    protected $cacheKey;
+    protected string $cacheKey;
 
     public function __construct()
     {
@@ -343,7 +346,7 @@ a `Cake\Cache\Cache` operation. This lets us fetch sessions from
 the fast cache, and not have to worry about what happens when we fill the cache.
 In **config/app.php** make the session block look like:
 
-``` text
+``` php
 'Session' => [
     'defaults' => 'database',
     'handler' => [
@@ -352,9 +355,9 @@ In **config/app.php** make the session block look like:
         'cache' => 'apc',
     ],
 ],
-// Make sure to add a apc cache config
+// Make sure to add an apc cache config
 'Cache' => [
-    'apc' => ['engine' => 'Apc']
+    'apc' => ['engine' => 'Apc'],
 ]
 ```
 
@@ -392,7 +395,7 @@ In components, use `$this->getController()->getRequest()`.
 
 ## Reading & Writing Session Data
 
-`method` Session::**read**($key, $default = null): mixed
+`method` Session::**read**(?string $name = null, mixed $default = null): mixed
 
 You can read values from the session using `Hash::extract()`
 compatible syntax:
@@ -401,7 +404,7 @@ compatible syntax:
 $session->read('Config.language', 'en');
 ```
 
-`method` Session::**readOrFail**($key): mixed
+`method` Session::**readOrFail**(string $name): mixed
 
 The same as convenience wrapper around non-nullable return value:
 
@@ -412,7 +415,7 @@ $session->readOrFail('Config.language');
 This is useful, when you know this key has to be set and you don't want to have to check
 for the existence in code itself.
 
-`method` Session::**write**($key, $value): void
+`method` Session::**write**(array|string $name, mixed $value = null): void
 
 `$key` should be the dot separated path you wish to write `$value` to:
 
@@ -424,12 +427,12 @@ You may also specify one or multiple hashes like so:
 
 ``` php
 $session->write([
-  'Config.theme' => 'blue',
-  'Config.language' => 'en',
+    'Config.theme' => 'blue',
+    'Config.language' => 'en',
 ]);
 ```
 
-`method` Session::**delete**($key): void
+`method` Session::**delete**(string $name): void
 
 When you need to delete data from the session, you can use `delete()`:
 
@@ -450,7 +453,7 @@ When you need to read and delete data from the session, you can use
 $session->consume('Some.value');
 ```
 
-`method` Session::**check**($key): bool
+`method` Session::**check**(?string $name = null): bool
 
 If you want to see if data exists in the session, you can use `check()`:
 

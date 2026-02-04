@@ -1,3 +1,8 @@
+---
+title: "Constants & Functions"
+description: "Use CakePHP global functions: h(), debug(), pr(), env(), config(), and essential helpers available throughout your application."
+---
+
 # Constants & Functions
 
 While most of your day-to-day work in CakePHP will be utilizing core classes and
@@ -14,10 +19,10 @@ ways to point to certain files or directories in your CakePHP application.
 
 Here are CakePHP's globally available functions. Most of them are just
 convenience wrappers for other CakePHP functionality, such as debugging and
-translating content. By default only namespaced functions are autoloaded,
+translating content. By default, only namespaced functions are autoloaded,
 however you can optionally load global aliases by adding:
 
-``` text
+``` php
 require CAKE . 'functions.php';
 ```
 
@@ -32,13 +37,13 @@ This function handles localization in CakePHP applications. The
 `$string_id` identifies the ID for a translation. You can supply
 additional arguments to replace placeholders in your string:
 
-``` text
+``` php
 __('You have {0} unread messages', $number);
 ```
 
 You can also provide a name-indexed array of replacements:
 
-``` text
+``` php
 __('You have {unread} unread messages', ['unread' => $number]);
 ```
 

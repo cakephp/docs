@@ -1,3 +1,8 @@
+---
+title: "Completion Tool"
+description: "Enable CakePHP CLI autocompletion: install shell completion, configure for bash/zsh, and improve developer experience with command suggestions."
+---
+
 # Completion Tool
 
 Working with the console gives the developer a lot of possibilities but having
@@ -72,8 +77,6 @@ Save the file, then restart your console.
 > The target directory for the **cake** file will be
 > **/usr/local/etc/bash_completion.d/**.
 
-<a id="bash-completion-file-content"></a>
-
 ### Bash Completion file content
 
 This is the code you need to put inside the **cake** file in the correct location
@@ -135,7 +138,7 @@ complete -F _cake cake bin/cake
 
 ## Using autocompletion
 
-Once enabled, the autocompletion can be used the same way than for other
+Once enabled, the autocompletion can be used the same way as for other
 built-in commands, using the **TAB** key.
 Three type of autocompletion are provided. The following output are from a fresh CakePHP install.
 

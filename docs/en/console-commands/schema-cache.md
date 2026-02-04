@@ -1,3 +1,8 @@
+---
+title: "Schema Cache Tool"
+description: "Manage schema caches in CakePHP: clear, build, warm up metadata caches via CLI to improve ORM performance and reduce queries."
+---
+
 # Schema Cache Tool
 
 The SchemaCacheCommand provides a simple CLI tool for managing your application's

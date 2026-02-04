@@ -1,3 +1,8 @@
+---
+title: "Events System"
+description: "Implement event system in CakePHP: dispatch events, create listeners, use event manager, and decouple application components effectively."
+---
+
 # Events System
 
 Creating maintainable applications is both a science and an art. It is
@@ -56,12 +61,12 @@ use Cake\ORM\Table;
 
 class OrdersTable extends Table
 {
-    public function place($order)
+    public function place(Order $order): bool
     {
         if ($this->save($order)) {
             $this->Cart->remove($order);
             $event = new Event('Order.afterPlace', $this, [
-                'order' => $order
+                'order' => $order,
             ]);
             $this->getEventManager()->dispatch($event);
 
@@ -107,7 +112,7 @@ use Cake\Event\EventManager;
 
 EventManager::instance()->on(
     'Order.afterPlace',
-    $aCallback
+    $aCallback,
 );
 ```
 
@@ -123,8 +128,6 @@ object along. The listeners will handle all the extra logic around the
 `afterPlace` event, you can log the time, send emails, update user statistics
 possibly in separate objects and even delegating it to offline tasks if you have
 the need.
-
-<a id="tracking-events"></a>
 
 ### Tracking Events
 
@@ -165,9 +168,10 @@ response has been sent, such as logging or sending emails.
 You can listen to this event using an event manager instance:
 
 ``` php
+use Cake\Event\EventInterface;
 use Cake\Event\EventManager;
 
-EventManager::instance()->on('Server.terminate', function ($event) {
+EventManager::instance()->on('Server.terminate', function (EventInterface $event) {
     // Perform tasks that should be done after the response has been
     // sent to the client.
 });
@@ -176,11 +180,12 @@ EventManager::instance()->on('Server.terminate', function ($event) {
 Or using the `events` hook in your Application/Plugin class:
 
 ``` php
+use Cake\Event\EventInterface;
 use Cake\Event\EventManagerInterface;
 
 public function events(EventManagerInterface $eventManager): EventManagerInterface
 {
-    $eventManager->on('Server.terminate', function ($event) {
+    $eventManager->on('Server.terminate', function (EventInterface $event) {
         // Perform tasks that should be done after the response has been
         // sent to the client.
     });
@@ -209,14 +214,15 @@ and the `afterExecute` event also contains the `exitCode` which is returned by t
 You can listen to this event using an event manager instance:
 
 ``` php
+use Cake\Event\EventInterface;
 use Cake\Event\EventManager;
 
-EventManager::instance()->on('Command.beforeExecute', function ($event, $args) {
+EventManager::instance()->on('Command.beforeExecute', function (EventInterface $event, $args) {
     $command = $event->getSubject();
     // Do stuff here
 });
 
-EventManager::instance()->on('Command.afterExecute', function ($event, $args, $result) {
+EventManager::instance()->on('Command.afterExecute', function (EventInterface $event, $args, $result) {
     $command = $event->getSubject();
     // Do stuff here
 });
@@ -225,16 +231,17 @@ EventManager::instance()->on('Command.afterExecute', function ($event, $args, $r
 Or using the `events` hook in your Application/Plugin class:
 
 ``` php
+use Cake\Event\EventInterface;
 use Cake\Event\EventManagerInterface;
 
 public function events(EventManagerInterface $eventManager): EventManagerInterface
 {
-    $eventManager->on('Command.beforeExecute', function ($event, $args) {
+    $eventManager->on('Command.beforeExecute', function (EventInterface $event, $args) {
         $command = $event->getSubject();
         // Do stuff here
     });
 
-    $eventManager->on('Command.afterExecute', function ($event, $args, $result) {
+    $eventManager->on('Command.afterExecute', function (EventInterface $event, $args, $result) {
         $command = $event->getSubject();
         // Do stuff here
     });
@@ -262,6 +269,7 @@ as necessary. Our `UserStatistics` listener might start out like:
 ``` php
 namespace App\Event;
 
+use Cake\Event\EventInterface;
 use Cake\Event\EventListenerInterface;
 
 class UserStatistic implements EventListenerInterface
@@ -275,7 +283,7 @@ class UserStatistic implements EventListenerInterface
         ];
     }
 
-    public function updateBuyStatistic($event)
+    public function updateBuyStatistic(EventInterface $event): void
     {
         // Code to update statistics
     }
@@ -325,13 +333,14 @@ wanted to put any orders into the log files, we could use a simple anonymous
 function to do so:
 
 ``` php
+use Cake\Event\EventInterface;
 use Cake\Log\Log;
 
 // From within a controller, or during application bootstrap.
-$this->Orders->getEventManager()->on('Order.afterPlace', function ($event) {
+$this->Orders->getEventManager()->on('Order.afterPlace', function (EventInterface $event) {
     Log::write(
         'info',
-        'A new order was placed with id: ' . $event->getSubject()->id
+        'A new order was placed with id: ' . $event->getSubject()->id,
     );
 });
 ```
@@ -358,14 +367,15 @@ a more direct approach and only listen to the event you really need:
 
 ``` php
 // You can create the following before the
-// save operation, ie. config/bootstrap.php
+// save operation, i.e. config/bootstrap.php
 use Cake\Datasource\FactoryLocator;
+use Cake\Event\EventInterface;
 // If sending emails
 use Cake\Mailer\Email;
 
 FactoryLocator::get('Table')->get('ThirdPartyPlugin.Feedbacks')
     ->getEventManager()
-    ->on('Model.afterSave', function($event, $entity)
+    ->on('Model.afterSave', function(EventInterface $event, $entity)
     {
         // For example we can send an email to the admin
         $email = new Email('default');
@@ -381,7 +391,7 @@ You can use this same approach to bind listener objects.
 ### Interacting with Existing Listeners
 
 Assuming several event listeners have been registered the presence or absence
-of a particular event pattern can be used as the basis of some action.:
+of a particular event pattern can be used as the basis of some action.
 
 ``` php
 // Attach listeners to EventManager.
@@ -432,7 +442,7 @@ $callback = [$this, 'doSomething'];
 $this->getEventManager()->on(
     'Order.afterPlace',
     ['priority' => 2],
-    $callback
+    $callback,
 );
 
 // Setting priority for a listener
@@ -443,7 +453,7 @@ class UserStatistic implements EventListenerInterface
         return [
             'Order.afterPlace' => [
                 'callable' => 'updateBuyStatistic',
-                'priority' => 100
+                'priority' => 100,
             ],
         ];
     }
@@ -469,8 +479,8 @@ $this->getEventManager()
 The listeners of the `View.afterRender` callback should have the following
 signature:
 
-``` javascript
-function (EventInterface $event, $viewFileName)
+``` php
+function (EventInterface $event, string $fileName)
 ```
 
 Each value provided to the Event constructor will be converted into function
@@ -493,7 +503,7 @@ an event:
 // An event listener has to be instantiated before dispatching an event.
 // Create a new event and dispatch it.
 $event = new Event('Order.afterPlace', $this, [
-    'order' => $order
+    'order' => $order,
 ]);
 $this->getEventManager()->dispatch($event);
 ```
@@ -520,8 +530,6 @@ be an argument of any type, we recommend passing an associative array.
 The `Cake\Event\EventManager::dispatch()` method accepts an event
 object as an argument and notifies all subscribed listeners.
 
-<a id="stopping-events"></a>
-
 ### Stopping Events
 
 Much like DOM events, you may want to stop an event to prevent additional
@@ -533,13 +541,13 @@ In order to stop events you can either return `false` in your callbacks or
 call the `stopPropagation()` method on the event object:
 
 ``` php
-public function doSomething($event)
+public function doSomething(EventInterface $event): bool
 {
     // ...
     return false; // Stops the event
 }
 
-public function updateBuyStatistic($event)
+public function updateBuyStatistic(EventInterface $event): void
 {
     // ...
     $event->stopPropagation();
@@ -547,7 +555,7 @@ public function updateBuyStatistic($event)
 ```
 
 Stopping an event will prevent any additional callbacks from being called.
-Additionally the code triggering the event may behave differently based on the
+Additionally, the code triggering the event may behave differently based on the
 event being stopped or not. Generally it does not make sense to stop 'after'
 events, but stopping 'before' events is often used to prevent the entire
 operation from occurring.
@@ -556,7 +564,7 @@ To check if an event was stopped, you call the `isStopped()` method in the
 event object:
 
 ``` php
-public function place($order)
+public function place(Order $order): bool
 {
     $event = new Event('Order.beforePlace', $this, ['order' => $order]);
     $this->getEventManager()->dispatch($event);
@@ -585,7 +593,7 @@ directly or returning the value in the callback itself:
 
 ``` php
 // A listener callback
-public function doSomething($event)
+public function doSomething(EventInterface $event): mixed
 {
     // ...
     $alteredData = $event->getData('order') + $moreData;
@@ -594,14 +602,14 @@ public function doSomething($event)
 }
 
 // Another listener callback
-public function doSomethingElse($event)
+public function doSomethingElse(EventInterface $event): void
 {
     // ...
     $event->setResult(['order' => $alteredData] + $this->result());
 }
 
 // Using the event result
-public function place($order)
+public function place(Order $order): bool
 {
     $event = new Event('Order.beforePlace', $this, ['order' => $order]);
     $this->getEventManager()->dispatch($event);
@@ -634,7 +642,7 @@ $this->getEventManager()->on('My.event', [$this, 'doSomething']);
 $this->getEventManager()->off('My.event', [$this, 'doSomething']);
 
 // Attaching an anonymous function.
-$myFunction = function ($event) { ... };
+$myFunction = function (EventInterface $event) { ... };
 $this->getEventManager()->on('My.event', $myFunction);
 
 // Detaching the anonymous function

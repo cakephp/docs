@@ -1,12 +1,17 @@
+---
+title: "Validating Data"
+description: "Validate data in CakePHP: create validation rules, use validator objects, validate before save, and implement custom validation methods."
+---
+
 # Validating Data
 
 Before you [save your data](../orm/saving-data) you
 will probably want to ensure the data is correct and consistent. In CakePHP we
 have two stages of validation:
 
-1.  Before request data is converted into entities, validation rules around
+1. Before request data is converted into entities, validation rules around
     data types and formatting can be applied.
-2.  Before data is saved, domain or application rules can be applied. These rules
+2. Before data is saved, domain or application rules can be applied. These rules
     help ensure that your application's data remains consistent.
 
 <a id="validating-request-data"></a>
@@ -14,7 +19,7 @@ have two stages of validation:
 ## Validating Data Before Building Entities
 
 When marshalling data into entities, you can validate data. Validating data
-allows you to check the type, shape and size of data. By default request data
+allows you to check the type, shape and size of data. By default, request data
 will be validated before it is converted into entities.
 If any validation rules fail, the returned entity will contain errors. The
 fields with errors will not be present in the returned entity:
@@ -28,14 +33,14 @@ if ($article->getErrors()) {
 
 When building an entity with validation enabled the following occurs:
 
-1.  The validator object is created.
-2.  The `table` and `default` validation provider are attached.
-3.  The named validation method is invoked. For example `validationDefault`.
-4.  The `Model.buildValidator` event will be triggered.
-5.  Request data will be validated.
-6.  Request data will be type-cast into types that match the column types.
-7.  Errors will be set into the entity.
-8.  Valid data will be set into the entity, while fields that failed validation
+1. The validator object is created.
+2. The `table` and `default` validation provider are attached.
+3. The named validation method is invoked. For example `validationDefault`.
+4. The `Model.buildValidator` event will be triggered.
+5. Request data will be validated.
+6. Request data will be type-cast into types that match the column types.
+7. Errors will be set into the entity.
+8. Valid data will be set into the entity, while fields that failed validation
     will be excluded.
 
 If you'd like to disable validation when converting request data, set the
@@ -44,7 +49,7 @@ If you'd like to disable validation when converting request data, set the
 ``` php
 $article = $articles->newEntity(
     $this->request->getData(),
-    ['validate' => false]
+    ['validate' => false],
 );
 ```
 
@@ -52,7 +57,7 @@ The same can be said about the `patchEntity()` method:
 
 ``` php
 $article = $articles->patchEntity($article, $newData, [
-    'validate' => false
+    'validate' => false,
 ]);
 ```
 
@@ -102,18 +107,18 @@ want applied:
 ``` php
 $article = $articles->newEntity(
     $this->request->getData(),
-    ['validate' => 'update']
+    ['validate' => 'update'],
 );
 ```
 
 The above would call the `validationUpdate()` method on the table instance to
-build the required rules. By default the `validationDefault()` method will be
+build the required rules. By default, the `validationDefault()` method will be
 used. An example validator for our articles table would be:
 
 ``` php
 class ArticlesTable extends Table
 {
-    public function validationUpdate($validator)
+    public function validationUpdate(Validator $validator): Validator
     {
         $validator
             ->notEmptyString('title', __('You need to provide a title'))
@@ -138,25 +143,25 @@ of the associations to be converted:
 
 ``` php
 $data = [
-     'title' => 'My title',
-     'body' => 'The text',
-     'user_id' => 1,
-     'user' => [
-         'username' => 'mark',
-     ],
-     'comments' => [
-         ['body' => 'First comment'],
-         ['body' => 'Second comment'],
-     ],
- ];
+    'title' => 'My title',
+    'body' => 'The text',
+    'user_id' => 1,
+    'user' => [
+        'username' => 'mark',
+    ],
+    'comments' => [
+        ['body' => 'First comment'],
+        ['body' => 'Second comment'],
+    ],
+];
 
- $article = $articles->patchEntity($article, $data, [
-     'validate' => 'update',
-     'associated' => [
-         'Users' => ['validate' => 'signup'],
-         'Comments' => ['validate' => 'custom'],
-     ],
- ]);
+$article = $articles->patchEntity($article, $data, [
+    'validate' => 'update',
+    'associated' => [
+        'Users' => ['validate' => 'signup'],
+        'Comments' => ['validate' => 'custom'],
+    ],
+]);
 ```
 
 ## Combining Validators
@@ -195,9 +200,9 @@ contain the validation rules declared in the `default` set.
 Validation rules can use functions defined on any known providers. By default
 CakePHP sets up a few providers:
 
-1.  Methods on the table class or its behaviors are available on the `table`
+1. Methods on the table class or its behaviors are available on the `table`
     provider.
-2.  The core `Cake\Validation\Validation` class is setup as the
+2. The core `Cake\Validation\Validation` class is setup as the
     `default` provider.
 
 When a validation rule is created you can name the provider of that rule. For
@@ -295,8 +300,6 @@ before entities are persisted. Some example application rules are:
 
 Application rules are checked when calling the Table `save()` and `delete()` methods.
 
-<a id="creating-a-rules-checker"></a>
-
 ### Creating a Rules Checker
 
 Rules checker classes are generally defined by the `buildRules()` method in your
@@ -356,7 +359,7 @@ message as options:
 ``` php
 $rules->add([$this, 'isValidState'], 'validState', [
     'errorField' => 'status',
-    'message' => 'This invoice cannot be moved to that status.'
+    'message' => 'This invoice cannot be moved to that status.',
 ]);
 ```
 
@@ -380,7 +383,7 @@ $rules->add($rules->isUnique(['email']));
 // A list of fields
 $rules->add($rules->isUnique(
     ['username', 'account_id'],
-    'This username & account_id combination has already been used.'
+    'This username & account_id combination has already been used.',
 ));
 ```
 
@@ -395,7 +398,7 @@ To simulate this, set the `allowMultipleNulls` options to true:
 ``` php
 $rules->add($rules->isUnique(
     ['username', 'account_id'],
-    ['allowMultipleNulls' => true]
+    ['allowMultipleNulls' => true],
 ));
 ```
 
@@ -426,12 +429,31 @@ are null:
 $rules->add($rules->existsIn(
     ['parent_id', 'site_id'], // Schema: parent_id NULL, site_id NOT NULL
     'ParentNodes',
-    ['allowNullableNulls' => true]
+    ['allowNullableNulls' => true],
 ));
 
 // A Node however should in addition also always reference a Site.
 $rules->add($rules->existsIn(['site_id'], 'Sites'));
 ```
+
+You can also use `existsInNullable()` for nullable composite foreign keys.
+This rule allows `null` values in nullable foreign key columns, which is
+semantically correct for optional relationships:
+
+``` php
+// Allow null values in nullable composite foreign keys.
+$rules->add($rules->existsInNullable(
+    ['author_id', 'site_id'],
+    'SiteAuthors',
+));
+```
+
+Use `existsInNullable()` instead of `existsIn()` when you want to permit null
+values in foreign keys without requiring the `allowNullableNulls` option.
+
+::: info Added in version 5.3.0
+The `existsInNullable()` rule was added.
+:::
 
 In most SQL databases multi-column `UNIQUE` indexes allow multiple null values
 to exist as `NULL` is not equal to itself. While, allowing multiple null
@@ -443,7 +465,7 @@ unique checks using `allowMultipleNulls`:
 $rules->add($rules->existsIn(
     ['parent_id', 'site_id'],
     'ParentNodes',
-    ['allowMultipleNulls' => false]
+    ['allowMultipleNulls' => false],
 ));
 ```
 
@@ -489,14 +511,14 @@ have related records depending on the mode used:
 $rules->addUpdate($rules->isLinkedTo(
     'Articles',
     'article',
-    'Requires an article'
+    'Requires an article',
 ));
 
 // Ensure that an article has no linked comments during delete.
 $rules->addDelete($rules->isNotLinkedTo(
     'Comments',
     'comments',
-    'Must have zero comments before deletion.'
+    'Must have zero comments before deletion.',
 ));
 ```
 
@@ -563,7 +585,7 @@ $rules->add(
         'errorField' => 'length',
         'message' => 'Generic error message used when `false` is returned',
     ]
- );
+);
 ```
 
 As of 5.2.0, you can also provide a `Closure` for the `message` key. When
@@ -578,7 +600,7 @@ $rules->add(
         'message' => function ($entity, $options) {
             return sprintf(
                 'Article with ID %s does not exist',
-                $entity->article_id
+                $entity->article_id,
             );
         }
     ]
@@ -611,8 +633,6 @@ public function buildRules(RulesChecker $rules): RulesChecker
 
 See the core rules for examples on how to create such rules.
 
-<a id="creating-custom-rule-objects"></a>
-
 ### Creating Custom Rule Objects
 
 If your application has rules that are commonly reused, it is helpful to package
@@ -626,7 +646,7 @@ use Cake\Datasource\EntityInterface;
 
 class CustomRule
 {
-    public function __invoke(EntityInterface $entity, array $options)
+    public function __invoke(EntityInterface $entity, array $options): bool
     {
         // Do work
         return false;
@@ -669,12 +689,12 @@ objects when calling `newEntity()` or `patchEntity()`:
 ``` php
 $validatedEntity = $articlesTable->newEntity(
     $unsafeData,
-    ['validate' => 'customName']
+    ['validate' => 'customName'],
 );
 $validatedEntity = $articlesTable->patchEntity(
     $entity,
     $unsafeData,
-    ['validate' => 'customName']
+    ['validate' => 'customName'],
 );
 ```
 
@@ -682,7 +702,7 @@ In the above example, we'll use a 'custom' validator, which is defined using the
 `validationCustomName()` method:
 
 ``` php
-public function validationCustomName($validator)
+public function validationCustomName(Validator $validator): Validator
 {
     $validator->add(
         // ...
@@ -697,7 +717,7 @@ from any request:
 
 ``` php
 // In src/Model/Table/UsersTable.php
-public function validatePasswords($validator)
+public function validatePasswords(Validator $validator): Validator
 {
     $validator->add('confirm_password', 'no-misspelling', [
         'rule' => ['compareWith', 'password'],

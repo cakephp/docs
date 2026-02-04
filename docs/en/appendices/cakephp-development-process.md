@@ -1,3 +1,8 @@
+---
+title: "CakePHP Development Process"
+description: "Understand CakePHP development: release cycles, semantic versioning, contribution workflow, and how the framework evolves over time."
+---
+
 # CakePHP Development Process
 
 CakePHP projects broadly follow [semver](https://semver.org/). This means that:

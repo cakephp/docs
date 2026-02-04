@@ -12,10 +12,10 @@
  *   node bin/check-links.js --generate-baseline "docs/subfolder/*.md"
  */
 
-const fs = require('fs');
-const path = require('path');
+const fs = require("fs");
+const path = require("path");
 
-const BASELINE_FILE = '.github/linkchecker-baseline.json';
+const BASELINE_FILE = ".github/linkchecker-baseline.json";
 
 /**
  * Simple glob implementation using Node.js built-ins
@@ -24,10 +24,10 @@ function globSync(pattern, options = {}) {
   const results = [];
 
   // Handle simple patterns like "docs/en/**/*.md"
-  if (pattern.includes('**')) {
-    const [basePath, ...rest] = pattern.split('**');
-    const suffix = rest.join('**').replace(/^\//, ''); // Remove leading slash
-    const baseDir = basePath.replace(/\/$/, '') || '.';
+  if (pattern.includes("**")) {
+    const [basePath, ...rest] = pattern.split("**");
+    const suffix = rest.join("**").replace(/^\//, ""); // Remove leading slash
+    const baseDir = basePath.replace(/\/$/, "") || ".";
 
     function traverse(dir) {
       try {
@@ -57,7 +57,10 @@ function globSync(pattern, options = {}) {
       const entries = fs.readdirSync(dir);
       for (const entry of entries) {
         const fullPath = path.join(dir, entry);
-        if (fs.statSync(fullPath).isFile() && matchPattern(entry, filePattern)) {
+        if (
+          fs.statSync(fullPath).isFile() &&
+          matchPattern(entry, filePattern)
+        ) {
           results.push(options.absolute ? path.resolve(fullPath) : fullPath);
         }
       }
@@ -69,11 +72,12 @@ function globSync(pattern, options = {}) {
 
 function matchPattern(filename, pattern) {
   const regex = pattern
-    .replace(/\./g, '\\.')
-    .replace(/\*/g, '.*')
-    .replace(/\?/g, '.');
-  return new RegExp(`^${regex}$`).test(filename) ||
-         new RegExp(regex).test(filename);
+    .replace(/\./g, "\\.")
+    .replace(/\*/g, ".*")
+    .replace(/\?/g, ".");
+  return (
+    new RegExp(`^${regex}$`).test(filename) || new RegExp(regex).test(filename)
+  );
 }
 
 class LinkChecker {
@@ -96,7 +100,7 @@ class LinkChecker {
     }
 
     try {
-      const content = fs.readFileSync(this.baselinePath, 'utf8');
+      const content = fs.readFileSync(this.baselinePath, "utf8");
       return JSON.parse(content);
     } catch (err) {
       console.warn(`Warning: Could not load baseline file: ${err.message}`);
@@ -108,10 +112,10 @@ class LinkChecker {
    * Save baseline configuration
    */
   saveBaseline() {
-    const baselineData = this.errors.map(error => ({
+    const baselineData = this.errors.map((error) => ({
       file: error.file,
       link: error.link,
-      message: error.message
+      message: error.message,
     }));
 
     const outputPath = this.baselinePath || BASELINE_FILE;
@@ -122,8 +126,8 @@ class LinkChecker {
 
     fs.writeFileSync(
       outputPath,
-      JSON.stringify(baselineData, null, 2) + '\n',
-      'utf8'
+      JSON.stringify(baselineData, null, 2) + "\n",
+      "utf8",
     );
   }
 
@@ -131,9 +135,9 @@ class LinkChecker {
    * Check if an error matches baseline
    */
   isInBaseline(error) {
-    return this.baseline.some(baselineError =>
-      baselineError.file === error.file &&
-      baselineError.link === error.link
+    return this.baseline.some(
+      (baselineError) =>
+        baselineError.file === error.file && baselineError.link === error.link,
     );
   }
 
@@ -144,7 +148,7 @@ class LinkChecker {
     const files = await this.resolveFiles(patterns);
 
     if (files.length === 0) {
-      console.error('No files found matching patterns');
+      console.error("No files found matching patterns");
       return false;
     }
 
@@ -170,9 +174,9 @@ class LinkChecker {
       } else {
         // Treat as glob pattern
         const matches = globSync(pattern, {
-          absolute: true
+          absolute: true,
         });
-        matches.forEach(f => fileSet.add(f));
+        matches.forEach((f) => fileSet.add(f));
       }
     }
 
@@ -188,7 +192,7 @@ class LinkChecker {
     }
     this.checked.add(filePath);
 
-    const content = fs.readFileSync(filePath, 'utf8');
+    const content = fs.readFileSync(filePath, "utf8");
     const links = this.extractLinks(content);
     const sourceDir = path.dirname(filePath);
 
@@ -201,7 +205,11 @@ class LinkChecker {
 
       // Check file exists
       if (!fs.existsSync(targetPath)) {
-        this.addError(filePath, link, `File not found: ${path.relative(process.cwd(), targetPath)}`);
+        this.addError(
+          filePath,
+          link,
+          `File not found: ${path.relative(process.cwd(), targetPath)}`,
+        );
         continue;
       }
 
@@ -214,7 +222,7 @@ class LinkChecker {
           this.addError(
             filePath,
             link,
-            `Anchor '#${anchor}' not found in ${path.relative(process.cwd(), targetPath)}`
+            `Anchor '#${anchor}' not found in ${path.relative(process.cwd(), targetPath)}`,
           );
         }
       }
@@ -228,19 +236,29 @@ class LinkChecker {
     const links = [];
 
     // Remove code blocks first (fenced with ```), then inline code (single backticks)
-    let contentWithoutCodeBlocks = content.replace(/```[\s\S]*?```/g, '');
+    let contentWithoutCodeBlocks = content.replace(/```[\s\S]*?```/g, "");
     // For inline code, only match within a single line (no newlines)
-    contentWithoutCodeBlocks = contentWithoutCodeBlocks.replace(/`[^`\n]+`/g, '');
+    contentWithoutCodeBlocks = contentWithoutCodeBlocks.replace(
+      /`[^`\n]+`/g,
+      "",
+    );
 
     // Match [text](url) or [text](url "title")
     const linkRegex = /\[([^\]]+)\]\(([^)\s]+)(?:\s+"[^"]*")?\)/g;
     let match;
 
     while ((match = linkRegex.exec(contentWithoutCodeBlocks)) !== null) {
+      const url = match[2];
+
+      // Skip bare URLs wrapped in angle brackets (e.g., <https://example.com>)
+      if (url.startsWith("<") && url.endsWith(">")) {
+        continue;
+      }
+
       links.push({
         text: match[1],
-        url: match[2],
-        raw: match[0]
+        url: url,
+        raw: match[0],
       });
     }
 
@@ -259,13 +277,13 @@ class LinkChecker {
    * Parse link URL into target path and anchor
    */
   parseLink(url, sourceDir) {
-    const [pathPart, anchor] = url.split('#');
+    const [pathPart, anchor] = url.split("#");
 
     // Handle anchor-only links (same file)
     if (!pathPart) {
       return {
-        targetPath: path.join(sourceDir, path.basename(sourceDir) + '.md'),
-        anchor
+        targetPath: path.join(sourceDir, path.basename(sourceDir) + ".md"),
+        anchor,
       };
     }
 
@@ -274,19 +292,25 @@ class LinkChecker {
     // VitePress automatically adds .md extension if not present
     // Match this behavior by always trying .md first for extensionless links
     if (!path.extname(targetPath)) {
-      const mdPath = targetPath + '.md';
+      const mdPath = targetPath + ".md";
       if (fs.existsSync(mdPath)) {
         targetPath = mdPath;
-      } else if (fs.existsSync(targetPath) && fs.statSync(targetPath).isDirectory()) {
+      } else if (
+        fs.existsSync(targetPath) &&
+        fs.statSync(targetPath).isDirectory()
+      ) {
         // If it's a directory, look for index.md
-        targetPath = path.join(targetPath, 'index.md');
+        targetPath = path.join(targetPath, "index.md");
       } else {
         // Default to .md extension (VitePress behavior)
         targetPath = mdPath;
       }
-    } else if (fs.existsSync(targetPath) && fs.statSync(targetPath).isDirectory()) {
+    } else if (
+      fs.existsSync(targetPath) &&
+      fs.statSync(targetPath).isDirectory()
+    ) {
       // If path is directory, look for index.md
-      targetPath = path.join(targetPath, 'index.md');
+      targetPath = path.join(targetPath, "index.md");
     }
 
     return { targetPath, anchor };
@@ -300,7 +324,7 @@ class LinkChecker {
       return this.headingCache.get(filePath);
     }
 
-    const content = fs.readFileSync(filePath, 'utf8');
+    const content = fs.readFileSync(filePath, "utf8");
     const headings = [];
 
     // Match ATX headings: # Heading
@@ -309,9 +333,9 @@ class LinkChecker {
 
     while ((match = headingRegex.exec(content)) !== null) {
       const heading = match[1]
-        .replace(/\{#([^}]+)\}$/g, '') // Remove {#custom-id} but keep the ID
-        .replace(/\[[^\]]+\]\([^)]+\)/g, '') // Remove links
-        .replace(/`([^`]+)`/g, '$1') // Remove code formatting
+        .replace(/\{#([^}]+)\}$/g, "") // Remove {#custom-id} but keep the ID
+        .replace(/\[[^\]]+\]\([^)]+\)/g, "") // Remove links
+        .replace(/`([^`]+)`/g, "$1") // Remove code formatting
         .trim();
 
       // Check if there's a custom ID in the original match
@@ -340,10 +364,10 @@ class LinkChecker {
     return text
       .toLowerCase()
       .trim()
-      .replace(/[^\w\s-]/g, '') // Remove special chars
-      .replace(/\s+/g, '-') // Spaces to hyphens
-      .replace(/-+/g, '-') // Multiple hyphens to single
-      .replace(/^-|-$/g, ''); // Trim hyphens
+      .replace(/[^\w\s-]/g, "") // Remove special chars
+      .replace(/\s+/g, "-") // Spaces to hyphens
+      .replace(/-+/g, "-") // Multiple hyphens to single
+      .replace(/^-|-$/g, ""); // Trim hyphens
   }
 
   /**
@@ -354,7 +378,7 @@ class LinkChecker {
       file: path.relative(process.cwd(), filePath),
       link: link.url,
       text: link.text,
-      message
+      message,
     });
   }
 
@@ -365,21 +389,25 @@ class LinkChecker {
     if (this.generateBaseline) {
       this.saveBaseline();
       const outputPath = this.baselinePath || BASELINE_FILE;
-      console.log(`✓ Baseline generated with ${this.errors.length} known issue(s)`);
+      console.log(
+        `✓ Baseline generated with ${this.errors.length} known issue(s)`,
+      );
       console.log(`  Saved to: ${outputPath}\n`);
       return true;
     }
 
     // Filter out baseline errors
-    const newErrors = this.errors.filter(error => !this.isInBaseline(error));
+    const newErrors = this.errors.filter((error) => !this.isInBaseline(error));
 
     if (newErrors.length === 0 && this.errors.length === 0) {
-      console.log('✓ All internal links are valid!\n');
+      console.log("✓ All internal links are valid!\n");
       return true;
     }
 
     if (newErrors.length === 0 && this.errors.length > 0) {
-      console.log(`✓ No new broken links (${this.errors.length} known issue(s) in baseline)\n`);
+      console.log(
+        `✓ No new broken links (${this.errors.length} known issue(s) in baseline)\n`,
+      );
       return true;
     }
 
@@ -389,12 +417,14 @@ class LinkChecker {
       console.error(`  ${error.file}`);
       console.error(`    Link: [${error.text}](${error.link})`);
       console.error(`    Error: ${error.message}`);
-      console.error('');
+      console.error("");
     }
 
     if (this.errors.length > newErrors.length) {
       const baselineCount = this.errors.length - newErrors.length;
-      console.error(`  (${baselineCount} known issue(s) ignored from baseline)\n`);
+      console.error(
+        `  (${baselineCount} known issue(s) ignored from baseline)\n`,
+      );
     }
 
     return false;
@@ -411,13 +441,13 @@ async function main() {
   const patterns = [];
 
   for (let i = 0; i < args.length; i++) {
-    if (args[i] === '--generate-baseline') {
+    if (args[i] === "--generate-baseline") {
       generateBaseline = true;
-    } else if (args[i] === '--baseline') {
+    } else if (args[i] === "--baseline") {
       if (i + 1 < args.length) {
         baselinePath = args[++i];
       } else {
-        console.error('Error: --baseline requires a path argument');
+        console.error("Error: --baseline requires a path argument");
         process.exit(1);
       }
     } else {
@@ -426,19 +456,27 @@ async function main() {
   }
 
   if (patterns.length === 0) {
-    console.error('Usage: node bin/check-links.js [--baseline <path>] [--generate-baseline] <file-or-pattern>...');
-    console.error('');
-    console.error('Examples:');
-    console.error('  node bin/check-links.js docs/en/installation.md');
+    console.error(
+      "Usage: node bin/check-links.js [--baseline <path>] [--generate-baseline] <file-or-pattern>...",
+    );
+    console.error("");
+    console.error("Examples:");
+    console.error("  node bin/check-links.js docs/en/installation.md");
     console.error('  node bin/check-links.js "docs/**/*.md"');
-    console.error('  node bin/check-links.js docs/en/*.md docs/ja/*.md');
-    console.error('');
-    console.error('With baseline:');
-    console.error('  node bin/check-links.js --baseline .github/linkchecker-baseline.json "docs/**/*.md"');
-    console.error('');
-    console.error('Generate baseline:');
-    console.error('  node bin/check-links.js --generate-baseline "docs/**/*.md"');
-    console.error('  node bin/check-links.js --generate-baseline --baseline custom-baseline.json "docs/**/*.md"');
+    console.error("  node bin/check-links.js docs/en/*.md docs/ja/*.md");
+    console.error("");
+    console.error("With baseline:");
+    console.error(
+      '  node bin/check-links.js --baseline .github/linkchecker-baseline.json "docs/**/*.md"',
+    );
+    console.error("");
+    console.error("Generate baseline:");
+    console.error(
+      '  node bin/check-links.js --generate-baseline "docs/**/*.md"',
+    );
+    console.error(
+      '  node bin/check-links.js --generate-baseline --baseline custom-baseline.json "docs/**/*.md"',
+    );
     process.exit(1);
   }
 
@@ -450,8 +488,8 @@ async function main() {
 
 // Run if executed directly
 if (require.main === module) {
-  main().catch(error => {
-    console.error('Error:', error.message);
+  main().catch((error) => {
+    console.error("Error:", error.message);
     process.exit(1);
   });
 }

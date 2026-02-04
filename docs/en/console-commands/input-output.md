@@ -1,11 +1,14 @@
+---
+title: "Command Input/Output"
+description: "Handle CLI I/O in CakePHP: format console output, create progress bars, prompt users, display tables, and style terminal text."
+---
+
 # Command Input/Output
 
 `class` Cake\\Console\\**ConsoleIo**
 
 CakePHP provides the `ConsoleIo` object to commands so that they can
 interactively read user input and output information to the user.
-
-<a id="command-helpers"></a>
 
 ## Command Helpers
 
@@ -181,7 +184,7 @@ The `BannerHelper` was added in 5.1
 
 ## Getting User Input
 
-`method` Cake\\Console\\ConsoleIo::**ask**($question, $choices = null, $default = null): string
+`method` Cake\\Console\\ConsoleIo::**ask**(string $prompt, ?string $default = null): string
 
 When building interactive console applications you'll need to get user input.
 CakePHP provides a way to do this:
@@ -198,7 +201,7 @@ Selection validation is case-insensitive.
 
 ## Creating Files
 
-`method` Cake\\Console\\ConsoleIo::**createFile**($path, $contents): bool
+`method` Cake\\Console\\ConsoleIo::**createFile**(string $path, string $contents, bool $forceOverwrite = false): bool
 
 Creating files is often important part of many console commands that help
 automate development and deployment. The `createFile()` method gives you
@@ -325,7 +328,7 @@ $io->verbose('Verbose output');
 
 You can control the output level of commands, by using the `--quiet` and
 `--verbose` options. These options are added by default, and allow you to
-consistently control output levels inside your CakePHP comands.
+consistently control output levels inside your CakePHP commands.
 
 The `--quiet` and `--verbose` options also control how logging data is
 output to stdout/stderr. Normally info and higher log messages are output to
@@ -407,6 +410,6 @@ no styling is done at all. There are three modes you can use.
   This is a good mode to use if you are outputting XML or, want to debug why
   your styling isn't working.
 
-By default on \*nix systems ConsoleOutput objects default to color output.
+By default, on *nix systems ConsoleOutput objects default to color output.
 On Windows systems, plain output is the default unless the `ANSICON`
 environment variable is present.

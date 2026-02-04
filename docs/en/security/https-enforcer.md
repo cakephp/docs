@@ -1,4 +1,7 @@
-<a id="https-enforcer-middleware"></a>
+---
+title: "HTTPS Enforcer Middleware"
+description: "Force HTTPS connections in your CakePHP application with HttpsEnforcerMiddleware to ensure secure data transmission and user privacy."
+---
 
 # HTTPS Enforcer Middleware
 
@@ -24,7 +27,7 @@ $https = new HttpsEnforcerMiddleware([
     'headers' => ['X-Https-Upgrade' => 1],
 ]);
 
-// Disable HTTPs enforcement when ``debug`` is on.
+// Disable HTTPs enforcement when `debug` is on.
 $https = new HttpsEnforcerMiddleware([
     'disableOnDebug' => true,
 ]);

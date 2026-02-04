@@ -32,7 +32,6 @@ Sensible defaults mean less setup, more coding.
 
 </div>
 
-
 ## Quick Start
 
 Get a CakePHP application running in under 5 minutes:
@@ -71,17 +70,18 @@ docker run -it --rm -p 8765:8765 -v $(pwd):/app \
 :::
 
 > [!TIP]
-> You should see a welcome page with green checkmarks at **http://localhost:8765**
+> You should see a welcome page with green checkmarks at **<http://localhost:8765>**
 
 ::: details System Requirements
 Make sure your system meets these requirements before getting started:
 
-| Component | Version |
-|-----------|------|
-| PHP | 8.2 - 8.5 |
-| Database | MySQL 5.7+, PostgreSQL 9.6+, SQLite 3, SQL Server 2012+ |
+| Component  | Version |
+| ---------- | ------- |
+| PHP        | 8.2 - 8.5 |
+| Database   | MySQL 5.7+, PostgreSQL 9.6+, SQLite 3, SQL Server 2012+ |
 | Extensions | `mbstring`, `intl`, `pdo`, `simplexml` |
-| Composer | Latest |
+| Composer   | Latest |
+
 :::
 
 ## Your First Application
@@ -113,6 +113,7 @@ return [
 ```
 
 ::: tip Configuration Files
+
 - **config/app.php** - Default configuration (committed to git)
 - **config/app_local.php** - Local overrides (gitignored)
 :::
@@ -410,22 +411,25 @@ Create a simple list view in **templates/Articles/index.php**:
 ```
 
 > [!TIP]
-> Visit **http://localhost:8765/articles** to see your blog in action!
+> Visit **<http://localhost:8765/articles>** to see your blog in action!
 
 ## Next Steps
 
 Now that you've built your first CakePHP application, here are some great places to continue your journey:
 
 **Learn the Fundamentals:**
+
 - [CakePHP Conventions](intro/conventions) - Understanding the naming conventions that power CakePHP
 - [MVC Pattern](intro) - How CakePHP structures applications
 - [Configuration](development/configuration) - Customizing your application
 
 **Build Real Applications:**
+
 - [Tutorials & Examples](tutorials-and-examples) - Step-by-step guides
 - [CMS Tutorial](tutorials-and-examples/cms/installation) - Build a complete content management system
 
 **Master Core Features:**
+
 - [Database & ORM](orm) - Advanced queries, associations, and data modeling
 - [Controllers](controllers) - Request handling, components, and middleware
 - [Views](views) - Templates, helpers, and rendering
@@ -451,6 +455,7 @@ Join our community and get the support you need:
 </div>
 
 **Additional Resources:**
+
 - [API Documentation](https://api.cakephp.org/5.0/) - Complete API reference
 - [Stack Overflow](https://stackoverflow.com/questions/tagged/cakephp) - Find answers to common questions
 
@@ -484,10 +489,12 @@ CakePHP comes with powerful features that save you time and help you build bette
 
 ::: details 🚀 Code Generation (Bake)
 Generate complete CRUD applications in seconds:
+
 ```bash
 bin/cake bake all Articles
 # Creates: Model, Controller, Views, Tests
 ```
+
 Bake can scaffold entire features, saving hours of repetitive coding. Perfect for prototyping or generating boilerplate.
 
 [Learn more about Bake →](https://book.cakephp.org/bake/2/en/)
@@ -495,12 +502,14 @@ Bake can scaffold entire features, saving hours of repetitive coding. Perfect fo
 
 ::: details 💾 Caching Framework
 Integrated caching with multiple backends:
+
 ```php
 // Cache expensive operations
 $results = Cache::remember('expensive_query', function () {
     return $this->Articles->find('complex')->toArray();
 });
 ```
+
 **Supported backends:** Redis, Memcached, APCu, File, Database
 
 [Learn more about Caching →](core-libraries/caching)
@@ -508,6 +517,7 @@ $results = Cache::remember('expensive_query', function () {
 
 ::: details 🧪 Built-in Testing
 Write tests with confidence using the integrated testing framework:
+
 ```php
 public function testAddArticle(): void
 {
@@ -516,6 +526,7 @@ public function testAddArticle(): void
     $this->assertFlashMessage('Article saved!');
 }
 ```
+
 Supports unit tests, integration tests, and browser tests out of the box.
 
 [Learn more about Testing →](development/testing)
@@ -523,9 +534,11 @@ Supports unit tests, integration tests, and browser tests out of the box.
 
 ::: details 🔐 Authentication & Authorization
 Drop-in user management with flexible policies:
+
 ```bash
 composer require cakephp/authentication cakephp/authorization
 ```
+
 Handle login, permissions, and access control with minimal configuration.
 
 [Authentication Guide →](https://book.cakephp.org/authentication/) • [Authorization Guide →](https://book.cakephp.org/authorization/)
@@ -533,6 +546,7 @@ Handle login, permissions, and access control with minimal configuration.
 
 ::: details 🌐 REST API Support
 Build APIs with automatic content type negotiation:
+
 ```php
 // Automatically serves JSON/XML based on Accept header
 public function index()
@@ -542,6 +556,7 @@ public function index()
     $this->viewBuilder()->setOption('serialize', ['articles']);
 }
 ```
+
 Supports JSON, XML, and custom formats with minimal code.
 
 [Learn more about REST →](development/rest)
@@ -549,10 +564,12 @@ Supports JSON, XML, and custom formats with minimal code.
 
 ::: details 📦 Database Migrations
 Version control your database schema:
+
 ```bash
 bin/cake bake migration CreateArticles
 bin/cake migrations migrate
 ```
+
 Keep your database changes in sync across development, staging, and production.
 
 [Learn more about Migrations →](https://book.cakephp.org/migrations/)
@@ -625,7 +642,6 @@ bin/cake bake all Articles
 ```
 
 :::
-
 
 <div style="text-align: center; margin: 1rem 0 2rem 0; padding: 2rem; background: linear-gradient(135deg, #D33C44 0%, #FF6B6B 100%); border-radius: 8px; color: white;">
 

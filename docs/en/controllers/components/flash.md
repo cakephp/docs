@@ -1,3 +1,8 @@
+---
+title: "Flash"
+description: "Display flash messages in CakePHP: show notifications, success/error messages, customize flash element rendering for user feedback."
+---
+
 # Flash
 
 `class` Cake\\Controller\\Component\\**FlashComponent**(ComponentCollection $collection, array $config = [])

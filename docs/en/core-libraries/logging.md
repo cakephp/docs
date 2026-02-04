@@ -1,3 +1,8 @@
+---
+title: "Logging"
+description: "Log in CakePHP: configure log streams, write messages, use PSR-3 interface, debug AJAX/REST APIs, and monitor application behavior."
+---
+
 # Logging
 
 While CakePHP core Configure Class settings can really help you see
@@ -94,8 +99,6 @@ values in your **config/app.php** file. Errors will be displayed when debug is
 `log` option to `true`. See [Configuration](../development/configuration) for more
 information.
 
-<a id="writing-to-logs"></a>
-
 ## Writing to Logs
 
 Writing to the log files can be done in two different ways. The first
@@ -171,8 +174,6 @@ exception.
 > When `levels` is set to an empty value in a logger's configuration, it
 > will take messages of any level.
 
-<a id="logging-scopes"></a>
-
 ### Logging Scopes
 
 Often times you'll want to configure different logging behavior for different
@@ -231,7 +232,7 @@ Log::warning('This is a warning', 'payments');
 As its name implies `FileLog` writes log messages to files. The level of log
 message being written determines the name of the file the message is stored in.
 If a level is not supplied, `LOG_ERR` is used which writes to the
-error log. The default log location is **logs/\$level.log**:
+error log. The default log location is **logs/`$level.log`**:
 
 ``` php
 // Executing this inside a CakePHP class
@@ -251,7 +252,7 @@ custom paths to be used:
 ``` php
 Log::setConfig('custom_path', [
     'className' => 'File',
-    'path' => '/path/to/custom/place/'
+    'path' => '/path/to/custom/place/',
 ]);
 ```
 
@@ -287,7 +288,7 @@ be done in the **config/bootstrap.php** file:
 
 ``` php
 Log::setConfig('default', [
-    'engine' => 'Syslog'
+    'engine' => 'Syslog',
 ]);
 ```
 
@@ -305,7 +306,7 @@ following keys:
 - `flag`: An integer flag to be used for opening the connection to the
   logger, by default `LOG_ODELAY` will be used. See `openlog` documentation
   for more options
-- `facility`: The logging slot to use in syslog. By default `LOG_USER` is
+- `facility`: The logging slot to use in syslog. By default, `LOG_USER` is
   used. See `syslog` documentation for more options
 
 ## Creating Log Engines
@@ -336,7 +337,7 @@ Log::setConfig('otherFile', [
 
 When configuring a log engine the `className` parameter is used to
 locate and load the log handler. All of the other configuration
-properties are passed to the log engine's constructor as an array. :
+properties are passed to the log engine's constructor as an array.
 
 ``` php
 namespace App\Log\Engine;
@@ -350,7 +351,7 @@ class DatabaseLog extends BaseLog
         // ...
     }
 
-    public function log($level, string $message, array $context = [])
+    public function log($level, string $message, array $context = []): void
     {
         // Write to the database.
     }
@@ -360,8 +361,6 @@ class DatabaseLog extends BaseLog
 CakePHP requires that all logging engine implement `Psr\Log\LoggerInterface`.
 The class `Cake\Log\Engine\BaseLog` is an easy way to satisfy the
 interface as it only requires you to implement the `log()` method.
-
-<a id="logging-formatters"></a>
 
 ## Logging Formatters
 
@@ -419,7 +418,7 @@ class UsersControllerTest extends TestCase
     {
         parent::setUp();
         $this->setupLog([
-            'error' => ['scopes' => ['app.security']]
+            'error' => ['scopes' => ['app.security']],
         ]);
     }
 
@@ -452,11 +451,11 @@ configured.
 
 `static` Cake\\Log\\Log::**setConfig**(array|string $key, $config = null): void
 
-param string \$name
+param string `$name`
 Name for the logger being connected, used
 to drop a logger later on.
 
-param array \$config
+param array `$config`
 Array of configuration information and
 constructor arguments for the logger.
 
@@ -476,7 +475,7 @@ Get the names of the configured loggers.
 
 `static` Cake\\Log\\Log::**drop**(string $name): bool
 
-param string \$name
+param string `$name`
 Name of the logger you wish to no longer receive
 messages.
 
@@ -493,12 +492,12 @@ Write a message into all the configured loggers.
 
 `static` Cake\\Log\\Log::**levels**(): array
 
-Call this method without arguments, eg: <span class="title-ref">Log::levels()</span> to obtain current
+Call this method without arguments, eg: `Log::levels()` to obtain current
 level configuration.
 
 ### Convenience Methods
 
-The following convenience methods were added to log <span class="title-ref">\$message</span> with the
+The following convenience methods were added to log `$message` with the
 appropriate log level.
 
 #### Log::emergency()
@@ -539,7 +538,7 @@ appropriate log level.
 
 ### Log::log()
 
-`method` Cake\\Log\\Log::**log**($msg, $level = LOG_ERR): bool
+`method` Cake\\Log\\LogTrait::**log**(Stringable|string $message, string|int $level = LogLevel::ERROR, array|string $context = []): bool
 
 ## Using Monolog
 

@@ -1,3 +1,8 @@
+---
+title: "Plugin Tool"
+description: "Manage plugins via CLI in CakePHP: load/unload plugins, configure hooks, enable features, and manage plugin dependencies from terminal."
+---
+
 <a id="plugin-shell"></a>
 
 # Plugin Tool

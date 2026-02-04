@@ -1,3 +1,8 @@
+---
+title: "Database Basics"
+description: "Use low-level database API in CakePHP: execute raw queries, manage connections, use query expressions, and work with database drivers."
+---
+
 # Database Basics
 
 The CakePHP database access layer abstracts and provides help with most aspects
@@ -30,8 +35,6 @@ $connection = ConnectionManager::get('default');
 > [!NOTE]
 > For supported databases, see [installation notes](../installation).
 
-<a id="running-select-statements"></a>
-
 ### Running Select Statements
 
 Running raw SQL queries is a breeze:
@@ -62,7 +65,7 @@ $results = $connection
     ->execute(
         'SELECT * FROM articles WHERE created >= :created',
         ['created' => new DateTime('1 day ago')],
-        ['created' => 'datetime']
+        ['created' => 'datetime'],
     )
     ->fetchAll('assoc');
 ```
@@ -90,7 +93,7 @@ use DateTime;
 $connection = ConnectionManager::get('default');
 $connection->insert('articles', [
     'title' => 'A New Article',
-    'created' => new DateTime('now')
+    'created' => new DateTime('now'),
 ], ['created' => 'datetime']);
 ```
 
@@ -170,7 +173,7 @@ ConnectionManager::setConfig('default', [
 Configuration options can also be provided as a `DSN` string. This is
 useful when working with environment variables or `PaaS` providers:
 
-``` css
+``` php
 ConnectionManager::setConfig('default', [
     'url' => 'mysql://my_app:sekret@localhost/my_app?encoding=utf8&timezone=UTC&cacheMetadata=true',
 ]);
@@ -279,6 +282,16 @@ The `cache` flag to send to SQLite.
 mode
 The `mode` flag value to send to SQLite.
 
+### SqlServer Entra Authentication
+
+The SqlServer driver supports Entra authentication (formerly Azure Active
+Directory authentication). This allows you to authenticate using Azure-managed
+identities instead of traditional username/password credentials.
+
+::: info Added in version 5.3.0
+Entra authentication support was added to the SqlServer driver.
+:::
+
 At this point, you might want to take a look at the
 [CakePHP Conventions](../intro/conventions). The correct naming for your tables (and the addition
 of some columns) can score you some free functionality and help you avoid
@@ -296,8 +309,6 @@ pastry_stores, and savory_cakes.
 > 'flags' => [\PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8']
 > ```
 
-<a id="read-and-write-connections"></a>
-
 ## Read and Write Connections
 
 Connections can have separate read and write roles. Read
@@ -311,7 +322,7 @@ Role configurations override the values in the shared connection config. If the 
 and write role configurations are the same, a single connection to the database is used
 for both:
 
-``` text
+``` php
 'default' => [
     'driver' => 'mysql',
     'username' => '...',
@@ -322,7 +333,7 @@ for both:
     ],
     'write' => [
         'host' => 'write-db.example.com',
-    ]
+    ],
 ];
 ```
 
@@ -339,7 +350,7 @@ references to existing connections.
 
 ### Accessing Connections
 
-`static` Cake\\Datasource\\ConnectionManager::**get**($name): ConnectionInterface
+`static` Cake\\Datasource\\ConnectionManager::**get**(string $name): ConnectionInterface
 
 Once configured connections can be fetched using
 `Cake\Datasource\ConnectionManager::get()`. This method will
@@ -424,9 +435,9 @@ as some might expect). This is because decimal types are used to represent
 exact numeric values in databases and using float type for them in PHP can
 potentially lead to precision loss.
 
-If you want the values to be <span class="title-ref">float</span> in your PHP code then consider using
-<span class="title-ref">FLOAT</span> or <span class="title-ref">DOUBLE</span> type columns in your database. Also, depending on your use
-case you can explicitly map your decimal columns to <span class="title-ref">float</span> type in your table
+If you want the values to be `float` in your PHP code then consider using
+`FLOAT` or `DOUBLE` type columns in your database. Also, depending on your use
+case you can explicitly map your decimal columns to `float` type in your table
 schema.
 
 boolean
@@ -508,8 +519,6 @@ The `nativeuuid` type was added.
 The `inet`, `cidr`, `macaddr`, and `year` types were added.
 :::
 
-<a id="datetime-type"></a>
-
 ### DateTime Type
 
 `class` Cake\\Database\\**DateTimeType**
@@ -518,7 +527,7 @@ Maps to a native `DATETIME` column type. In PostgreSQL and SQL Server this
 turns into a `TIMESTAMP` type. The default return value of this column type is
 `Cake\I18n\DateTime` which extends [Chronos](https://github.com/cakephp/chronos) and the native `DateTimeImmutable`.
 
-`method` Cake\\Database\\DateTimeType::**setTimezone**(string|\\DateTimeZone|null $timezone)
+`method` Cake\\Database\\DateTimeType::**setTimezone**(string|DateTimeZone|null $timezone): static
 
 If your database server's timezone does not match your application's PHP timezone
 then you can use this method to specify your database's timezone. This timezone
@@ -552,8 +561,6 @@ use Cake\Database\Type\DateTimeTimezoneType;
 // Overwrite the default datetime type with a more precise one.
 TypeFactory::map('datetime', DateTimeTimezoneType::class);
 ```
-
-<a id="enum-type"></a>
 
 ### Enum Type
 
@@ -613,7 +620,7 @@ enum ArticleStatus: string implements EnumLabelInterface
 This can be useful if you want to use your enums in `FormHelper` select
 inputs. You can use [bake](../bake) to generate an enum class:
 
-``` text
+``` bash
 # generate an enum class with two cases and stored as an integer
 bin/cake bake enum UserStatus inactive:0,active:1 -i
 
@@ -646,7 +653,22 @@ Geospatial schema types were added.
 
 `class` Cake\\Database\\**TypeFactory**
 
-`static` Cake\\Database\\TypeFactory::**map**($name, $class): void
+`static` Cake\\Database\\TypeFactory::**map**(string $name, string $class): void
+
+`static` Cake\\Database\\TypeFactory::**getMapped**(string $type): ?string
+
+You can retrieve the mapped class name for a specific type using `getMapped()`:
+
+``` php
+use Cake\Database\TypeFactory;
+
+// Returns the class name mapped to the 'datetime' type
+$className = TypeFactory::getMapped('datetime');
+```
+
+::: info Added in version 5.3.0
+`TypeFactory::getMapped()` was added.
+:::
 
 If you need to use vendor specific types that are not built into CakePHP you can
 add additional new types to CakePHP's type system. Type classes are expected to
@@ -678,7 +700,8 @@ class PointMutationType extends BaseType
             return null;
         }
 
-        return $this->pmDecode($valu
+        return $this->pmDecode($value);
+    }
 
     public function marshal(mixed $value): mixed
     {
@@ -709,7 +732,7 @@ class PointMutationType extends BaseType
             return [
                 'position' => (int) $matches[1],
                 'from' => $matches[2],
-                'to' => $matches[3]
+                'to' => $matches[3],
             ];
         }
 
@@ -718,7 +741,7 @@ class PointMutationType extends BaseType
 }
 ```
 
-By default the `toStatement()` method will treat values as strings which will
+By default, the `toStatement()` method will treat values as strings which will
 work for our new type.
 
 ### Connecting Custom Datatypes to Schema Reflection and Generation
@@ -734,8 +757,8 @@ TypeFactory::map('point_mutation', \App\Database\Type\PointMutationType:class);
 
 We then have two ways to use our datatype in our models.
 
-1.  The first path is to overwrite the reflected schema data to use our new type.
-2.  The second is to implement `Cake\Database\Type\ColumnSchemaAwareInterface`
+1. The first path is to overwrite the reflected schema data to use our new type.
+2. The second is to implement `Cake\Database\Type\ColumnSchemaAwareInterface`
     and define the SQL column type and reflection logic.
 
 Overwriting the reflected schema with our custom type will enable CakePHP's
@@ -749,8 +772,7 @@ class WidgetsTable extends Table
 {
     public function initialize(array $config): void
     {
-        return parent::getSchema()->setColumnType('mutation', 'point_mutation');
-
+        parent::getSchema()->setColumnType('mutation', 'point_mutation');
     }
 }
 ```
@@ -786,7 +808,7 @@ class PointMutationType extends BaseType
     public function getColumnSql(
         TableSchemaInterface $schema,
         string $column,
-        Driver $driver
+        Driver $driver,
     ): ?string {
         $data = $schema->getColumn($column);
         $sql = $driver->quoteIdentifier($column);
@@ -806,7 +828,7 @@ class PointMutationType extends BaseType
      */
     public function convertColumnDefinition(
         array $definition,
-        Driver $driver
+        Driver $driver,
     ): ?array {
         return [
             'type' => $this->_name,
@@ -822,8 +844,6 @@ no value for the current database driver:
 - `length` The length of a column if available..
 - `precision` The precision of the column if available.
 - `scale` Can be included for SQLServer connections.
-
-<a id="mapping-custom-datatypes-to-sql-expressions"></a>
 
 ### Mapping Custom Datatypes to SQL Expressions
 
@@ -844,11 +864,11 @@ namespace App\Database;
 // Our value object is immutable.
 class Point
 {
-    protected $_lat;
-    protected $_long;
+    protected float|int $_lat;
+    protected float|int $_long;
 
     // Factory method.
-    public static function parse($value)
+    public static function parse(mixed $value): static
     {
         // Parse the WKB data from MySQL.
         $unpacked = unpack('x4/corder/Ltype/dlat/dlong', $value);
@@ -856,18 +876,18 @@ class Point
         return new static($unpacked['lat'], $unpacked['long']);
     }
 
-    public function __construct($lat, $long)
+    public function __construct(float|int $lat, float|int $long)
     {
         $this->_lat = $lat;
         $this->_long = $long;
     }
 
-    public function lat()
+    public function lat(): float|int
     {
         return $this->_lat;
     }
 
-    public function long()
+    public function long(): float|int
     {
         return $this->_long;
     }
@@ -889,12 +909,12 @@ use Cake\Database\Type\ExpressionTypeInterface;
 
 class PointType extends BaseType implements ExpressionTypeInterface
 {
-    public function toPHP($value, Driver $d): mixed
+    public function toPHP(mixed $value, Driver $driver): mixed
     {
         return $value === null ? null : Point::parse($value);
     }
 
-    public function marshal($value): mixed
+    public function marshal(mixed $value): mixed
     {
         if (is_string($value)) {
             $value = explode(',', $value);
@@ -906,21 +926,22 @@ class PointType extends BaseType implements ExpressionTypeInterface
         return null;
     }
 
-    public function toExpression($value): ExpressionInterface
+    public function toExpression(mixed $value): ExpressionInterface
     {
         if ($value instanceof Point) {
             return new FunctionExpression(
                 'POINT',
                 [
                     $value->lat(),
-                    $value->long()
+                    $value->long(),
                 ]
             );
         }
         if (is_array($value)) {
             return new FunctionExpression('POINT', [$value[0], $value[1]]);
         }
-        // Handle other cases.
+
+        throw new \InvalidArgumentException('Cannot convert value to expression.');
     }
 
     public function toDatabase($value, Driver $driver): mixed
@@ -974,7 +995,7 @@ For parameterized queries use the 2nd argument:
 ``` php
 $statement = $connection->execute(
     'UPDATE articles SET published = ? WHERE id = ?',
-    [1, 2]
+    [1, 2],
 );
 ```
 
@@ -986,7 +1007,7 @@ abstract type names when creating a query:
 $statement = $connection->execute(
     'UPDATE articles SET published_date = ? WHERE id = ?',
     [new DateTime('now'), 2],
-    ['date', 'integer']
+    ['date', 'integer'],
 );
 ```
 
@@ -1147,7 +1168,7 @@ use Cake\Log\Log;
 Log::setConfig('queries', [
     'className' => 'Console',
     'stream' => 'php://stderr',
-    'scopes' => ['queriesLog']
+    'scopes' => ['queriesLog'],
 ]);
 
 // File logging
@@ -1155,7 +1176,7 @@ Log::setConfig('queries', [
     'className' => 'File',
     'path' => LOGS,
     'file' => 'queries.log',
-    'scopes' => ['queriesLog']
+    'scopes' => ['queriesLog'],
 ]);
 ```
 
@@ -1164,11 +1185,9 @@ Log::setConfig('queries', [
 > never leave query logging on in production as it will negatively impact the
 > performance of your application.
 
-<a id="identifier-quoting"></a>
-
 ## Identifier Quoting
 
-By default CakePHP does **not** quote identifiers in generated SQL queries. The
+By default, CakePHP does **not** quote identifiers in generated SQL queries. The
 reason for this is identifier quoting has a few drawbacks:
 
 - Performance overhead - Quoting identifiers is much slower and complex than not doing it.
@@ -1200,14 +1219,14 @@ metadata is stored in the `_cake_model_` cache configuration. You can define
 a custom cache configuration using the `cacheMetatdata` option in your
 datasource configuration:
 
-``` text
+``` php
 'Datasources' => [
     'default' => [
         // Other keys go here.
 
         // Use the 'orm_metadata' cache config for metadata.
         'cacheMetadata' => 'orm_metadata',
-    ]
+    ],
 ],
 ```
 

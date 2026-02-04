@@ -1,3 +1,8 @@
+---
+title: "View Cells"
+description: "Build view cells in CakePHP: create mini-controllers for reusable UI components, encapsulate logic, and render self-contained views."
+---
+
 # View Cells
 
 View cells are small mini-controllers that can invoke view logic and render out
@@ -24,7 +29,7 @@ use Cake\View\Cell;
 
 class InboxCell extends Cell
 {
-    public function display()
+    public function display(): void
     {
     }
 }
@@ -63,7 +68,7 @@ use Cake\View\Cell;
 
 class InboxCell extends Cell
 {
-    public function display()
+    public function display(): void
     {
         $unread = $this->fetchTable('Messages')->find('unread');
         $this->set('unread_count', $unread->count());
@@ -76,7 +81,7 @@ very much like a controller would. We can use the `fetchTable()` and `set()`
 methods just like we would in a controller. In our template file, add the
 following:
 
-``` text
+``` php
 <!-- templates/cell/Inbox/display.php -->
 <div class="notification-icon">
     You have <?= $unread_count ?> unread messages.
@@ -140,7 +145,7 @@ $cell = $this->cell('Inbox::recent', ['-3 days']);
 The above would match the following function signature:
 
 ``` php
-public function recent($since)
+public function recent(string $since): void
 {
 }
 ```
@@ -198,7 +203,7 @@ $cell = $this->cell('Inbox', [], ['cache' => ['config' => 'cell_cache']]);
 
 // Specify the key and config to use.
 $cell = $this->cell('Inbox', [], [
-    'cache' => ['config' => 'cell_cache', 'key' => 'inbox_' . $user->id]
+    'cache' => ['config' => 'cell_cache', 'key' => 'inbox_' . $user->id],
 ]);
 ```
 
@@ -225,7 +230,7 @@ use Cake\Datasource\Paging\NumericPaginator;
 
 class FavoritesCell extends Cell
 {
-    public function display($user)
+    public function display(User $user): void
     {
         // Create a paginator
         $paginator = new NumericPaginator();
@@ -263,11 +268,11 @@ use Cake\View\Cell;
 
 class FavoritesCell extends Cell
 {
-    protected $_validCellOptions = ['limit'];
+    protected array $_validCellOptions = ['limit'];
 
-    protected $limit = 3;
+    protected int $limit = 3;
 
-    public function display($userId)
+    public function display(int $userId): void
     {
         $result = $this->fetchTable('Users')->find('friends', ['for' => $userId])
             ->limit($this->limit)

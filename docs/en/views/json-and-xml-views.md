@@ -1,3 +1,8 @@
+---
+title: "JSON and XML views"
+description: "Render JSON/XML in CakePHP: serialize data, configure views, use content negotiation, build APIs with JsonView and XmlView classes."
+---
+
 # JSON and XML views
 
 The `JsonView` and `XmlView` integration with CakePHP's
@@ -11,7 +16,7 @@ There are two ways you can generate data views. The first is by using the
 ## Defining View Classes to Negotiate With
 
 In your `AppController` or in an individual controller you can implement the
-`viewClasses()` method and provide all of the views you want to support:
+`viewClasses()` method and provide all the views you want to support:
 
 ``` php
 use Cake\View\JsonView;
@@ -26,7 +31,7 @@ public function viewClasses(): array
 You can optionally enable the json and/or xml extensions with
 [File Extensions](../development/routing#file-extensions). This will allow you to access the `JSON`, `XML` or
 any other special format views by using a custom URL ending with the name of the
-response type as a file extension such as `http://example.com/articles.json`.
+response type as a file extension such as `https://example.com/articles.json`.
 
 By default, when not enabling [File Extensions](../development/routing#file-extensions), the `Accept`
 header in the request is used for selecting which type of format should be rendered to the
@@ -132,7 +137,7 @@ output the serialized content.
 
 `class` **XmlView**
 
-By default when using `serialize` the XmlView will wrap your serialized
+By default, when using `serialize` the XmlView will wrap your serialized
 view variables with a `<response>` node. You can set a custom name for
 this node using the `rootNode` option.
 
@@ -224,8 +229,8 @@ class VideosController extends AppController
 
         // Format to view mapping
         $formats = [
-          'xml' => 'Xml',
-          'json' => 'Json',
+            'xml' => 'Xml',
+            'json' => 'Json',
         ];
 
         // Error on unknown type

@@ -1,3 +1,8 @@
+---
+title: "Components"
+description: "Use CakePHP components: share controller logic, configure components, load on-the-fly, create custom components, and implement callbacks."
+---
+
 # Components
 
 Components are packages of logic that are shared between controllers.
@@ -14,8 +19,6 @@ chapter for each component:
 - [Flash](../controllers/components/flash)
 - [Form Protection Component](../controllers/components/form-protection)
 - [Checking HTTP Cache](../controllers/components/check-http-cache)
-
-<a id="configuring-components"></a>
 
 ## Configuring Components
 
@@ -135,7 +138,7 @@ class PostsController extends AppController
 
     public function delete()
     {
-        if ($this->Post->delete($this->request->getData('Post.id')) {
+        if ($this->Post->delete($this->request->getData('Post.id'))) {
             $this->Flash->success('Post deleted.');
 
             return $this->redirect(['action' => 'index']);
@@ -151,8 +154,6 @@ class PostsController extends AppController
 ::: info Changed in version 5.1.0
 Components are able to use [Dependency Injection](../development/dependency-injection) to receive services.
 :::
-
-<a id="creating-a-component"></a>
 
 ## Creating a Component
 
@@ -198,7 +199,7 @@ class SsoComponent extends Component
     public function __construct(
         ComponentRegistry $registry,
         array $config = [],
-        UserService $users
+        UserService $users,
     ) {
         parent::__construct($registry, $config);
         $this->users = $users;
@@ -249,7 +250,7 @@ The above would pass the array containing precision and randomGenerator to
 ### Using Other Components in your Component
 
 Sometimes one of your components may need to use another component.
-You can load other components by adding them to the <span class="title-ref">\$components</span> property:
+You can load other components by adding them to the `$components` property:
 
 ``` php
 // src/Controller/Component/CustomComponent.php
@@ -346,7 +347,7 @@ use Cake\Routing\Router;
 
 public function beforeFilter(EventInterface $event): void
 {
-    throw new RedirectException(Router::url('/'))
+    throw new RedirectException(Router::url('/'));
 }
 ```
 
