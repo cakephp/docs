@@ -1,6 +1,6 @@
 ---
 title: "Structure & Conventions"
-description: "CakePHP embraces convention over configuration. This guide covers both where files go and how to name them."
+description: "Follow CakePHP's convention over configuration approach. Learn file structure, naming conventions, and how conventions enable automatic wiring."
 ---
 
 # Structure & Conventions

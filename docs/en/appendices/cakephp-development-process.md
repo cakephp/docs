@@ -1,6 +1,6 @@
 ---
 title: "CakePHP Development Process"
-description: "CakePHP projects broadly follow semver. Minor releases are easier, major releases require some work."
+description: "Understand CakePHP development: release cycles, semantic versioning, contribution workflow, and how the framework evolves over time."
 ---
 
 # CakePHP Development Process

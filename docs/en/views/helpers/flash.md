@@ -1,6 +1,6 @@
 ---
 title: "Flash"
-description: "FlashComponent and FlashHelper primarily use elements to render flash messages."
+description: "Display flash messages in CakePHP templates using FlashHelper. Render session-based notifications with custom elements and routing prefix support."
 ---
 
 # Flash

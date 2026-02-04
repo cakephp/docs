@@ -1,6 +1,6 @@
 ---
 title: "Url"
-description: "The UrlHelper helps you to generate URLs from your other helpers."
+description: "Generate URLs in CakePHP: use UrlHelper to create links, reverse routing, build URLs with parameters, and maintain URL consistency."
 ---
 
 # Url

@@ -1,6 +1,6 @@
 ---
 title: "View Cells"
-description: "View cells are small mini-controllers that can invoke view logic and render out templates."
+description: "Build view cells in CakePHP: create mini-controllers for reusable UI components, encapsulate logic, and render self-contained views."
 ---
 
 # View Cells

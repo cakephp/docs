@@ -1,6 +1,6 @@
 ---
 title: "Form Protection Component"
-description: "The FormProtection Component provides protection against form data tampering."
+description: "Prevent form tampering in CakePHP: use FormProtection to validate form integrity, prevent mass assignment, and secure POST data."
 ---
 
 # Form Protection Component

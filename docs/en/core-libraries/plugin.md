@@ -1,6 +1,6 @@
 ---
 title: "Plugin Class"
-description: "The Plugin class is responsible for resource location and path management of plugins."
+description: "Manage CakePHP plugins: locate plugin resources, resolve paths, configure plugin namespaces, and access plugin class files dynamically."
 ---
 
 # Plugin Class

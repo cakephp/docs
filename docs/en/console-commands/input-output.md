@@ -1,6 +1,6 @@
 ---
 title: "Command Input/Output"
-description: "Formatting console output can be tedious and lead to maintenance issues."
+description: "Handle CLI I/O in CakePHP: format console output, create progress bars, prompt users, display tables, and style terminal text."
 ---
 
 # Command Input/Output

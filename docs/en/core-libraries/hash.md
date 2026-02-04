@@ -1,6 +1,6 @@
 ---
 title: "Hash Utility"
-description: "Array management, if done right, can be a very powerful and useful tool for building smarter, more optimized code."
+description: "Work with arrays in CakePHP: extract, combine, sort, filter data using Hash utility for powerful array manipulation and path syntax."
 ---
 
 # Hash Utility

@@ -1,6 +1,6 @@
 ---
 title: "Xml"
-description: "The Xml class allows you to transform arrays into SimpleXMLElement or DOMDocument objects, and back into arrays again."
+description: "Work with XML in CakePHP: convert arrays to XML, parse XML to arrays, use SimpleXML/DOMDocument with Xml utility class."
 ---
 
 # Xml

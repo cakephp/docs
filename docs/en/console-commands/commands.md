@@ -1,6 +1,6 @@
 ---
 title: "Command Objects"
-description: "The command class comes with a number of built-in commands for speeding up your development, and automating routine tasks."
+description: "Create CakePHP commands: build custom CLI tools, handle arguments, implement execute logic, and automate development tasks efficiently."
 ---
 
 # Command Objects

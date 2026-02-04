@@ -1,6 +1,6 @@
 ---
 title: "Text"
-description: "The Text class includes convenience methods for creating and manipulating strings."
+description: "Manipulate strings in CakePHP: generate slugs, truncate text, create excerpts, highlight keywords with Text class convenience methods."
 ---
 
 # Text

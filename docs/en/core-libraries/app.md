@@ -1,6 +1,6 @@
 ---
 title: "App Class"
-description: "The App class is responsible for resource location and path management."
+description: "Locate resources in CakePHP: find paths to plugins, themes, vendors, configure namespace resolution with the App class utility."
 ---
 
 # App Class

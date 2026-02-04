@@ -1,6 +1,6 @@
 ---
 title: "Behaviors"
-description: "Behaviors are a way to organize and enable horizontal re-use of Model layer logic. Conceptually they are similar to traits."
+description: "Implement CakePHP behaviors: reuse model logic, create custom behaviors, use built-in behaviors like Timestamp and Tree across tables."
 ---
 
 # Behaviors

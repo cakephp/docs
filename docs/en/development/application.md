@@ -1,6 +1,6 @@
 ---
 title: "Application"
-description: "The Application class is the heart of your application."
+description: "Configure CakePHP Application: bootstrap, load plugins, configure middleware, services, console commands, and manage application lifecycle."
 ---
 
 # Application

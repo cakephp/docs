@@ -1,6 +1,6 @@
 ---
 title: "Plugin Tool"
-description: "The plugin tool allows you to load and unload plugins via the command prompt."
+description: "Manage plugins via CLI in CakePHP: load/unload plugins, configure hooks, enable features, and manage plugin dependencies from terminal."
 ---
 
 <a id="plugin-shell"></a>

@@ -1,6 +1,6 @@
 ---
 title: "JSON and XML views"
-description: "Depending on the Accept header you can render serialized data like json or xml."
+description: "Render JSON/XML in CakePHP: serialize data, configure views, use content negotiation, build APIs with JsonView and XmlView classes."
 ---
 
 # JSON and XML views

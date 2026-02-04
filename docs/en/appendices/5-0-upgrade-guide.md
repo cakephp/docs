@@ -1,6 +1,6 @@
 ---
 title: "5.0 Upgrade Guide"
-description: "First, check that your application is running on latest CakePHP 4.x version."
+description: "Upgrade to CakePHP 5.0 from 4.x. Fix deprecations, update to PHP 8.1+, run rector tool, and update dependencies following this step-by-step guide."
 ---
 
 # 5.0 Upgrade Guide

@@ -1,6 +1,6 @@
 ---
 title: "Themes"
-description: "Themes in CakePHP are simply plugins that focus on providing template files."
+description: "Create CakePHP themes: organize templates, override views, customize layouts, and build reusable presentation layers as plugins."
 ---
 
 # Themes

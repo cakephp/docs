@@ -1,6 +1,6 @@
 ---
 title: "Running Shells as Cron Jobs"
-description: "A common thing to do with a shell is making it run as a cronjob to clean up the database once in a while or send newsletters."
+description: "Schedule CakePHP commands: run console commands as cron jobs, automate tasks, configure scheduling, and manage periodic operations."
 ---
 
 # Running Shells as Cron Jobs

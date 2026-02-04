@@ -1,6 +1,6 @@
 ---
 title: "Text"
-description: "The TextHelper contains methods to make text more usable and friendly in your views."
+description: "Transform text in CakePHP views with TextHelper. Auto-link URLs and emails, create paragraphs, truncate strings, and highlight keywords easily."
 ---
 
 # Text

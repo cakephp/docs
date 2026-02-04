@@ -1,6 +1,6 @@
 ---
 title: "Debugging"
-description: "Debugging is an inevitable and necessary part of any development cycle."
+description: "Debug CakePHP applications: use DebugKit, configure error handling, inspect queries, variables, and troubleshoot issues effectively."
 ---
 
 # Debugging

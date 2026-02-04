@@ -1,6 +1,6 @@
 ---
 title: "Breadcrumbs"
-description: "BreadcrumbsHelper provides a way to easily deal with the creation and rendering of a breadcrumbs trail for your app."
+description: "Create breadcrumbs in CakePHP: use BreadcrumbsHelper to build navigation trails, customize rendering, and improve user navigation."
 ---
 
 # Breadcrumbs

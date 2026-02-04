@@ -1,6 +1,6 @@
 ---
 title: "Deleting Data"
-description: ""
+description: "Delete data in CakePHP ORM. Remove single entities, cascade deletes, bulk operations with deleteAll, and handle strict deletes with transactions."
 ---
 
 # Deleting Data

@@ -1,6 +1,6 @@
 ---
 title: "Completion Tool"
-description: "Working with the console gives the developer a lot of possibilities but having to completely know and write those commands can be tedious."
+description: "Enable CakePHP CLI autocompletion: install shell completion, configure for bash/zsh, and improve developer experience with command suggestions."
 ---
 
 # Completion Tool

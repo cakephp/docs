@@ -1,6 +1,6 @@
 ---
 title: "CounterCache Tool"
-description: "The CounterCacheCommand provides a CLI tool for rebuilding the counter caches in your application and plugin models."
+description: "Rebuild counter caches in CakePHP: use CLI tool to recalculate cached counts, fix data inconsistencies, and maintain counter cache integrity."
 ---
 
 # CounterCache Tool

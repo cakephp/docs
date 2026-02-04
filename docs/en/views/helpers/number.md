@@ -1,6 +1,6 @@
 ---
 title: "Number"
-description: "he NumberHelper contains convenient methods that enable display numbers in common formats in your views."
+description: "Format numbers, currency, percentages, and data sizes in CakePHP views. NumberHelper provides convenient methods for common display formats."
 ---
 
 # Number

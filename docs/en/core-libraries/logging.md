@@ -1,6 +1,6 @@
 ---
 title: "Logging"
-description: "With technologies like SOAP, AJAX, and REST APIs, debugging can be rather difficult. What search terms are being used? You can also use Log::write() directly."
+description: "Log in CakePHP: configure log streams, write messages, use PSR-3 interface, debug AJAX/REST APIs, and monitor application behavior."
 ---
 
 # Logging

@@ -1,6 +1,6 @@
 ---
 title: "Testing"
-description: "CakePHP comes with comprehensive testing support built-in. CakePHP comes with integration for PHPUnit."
+description: "Test CakePHP apps: write unit tests, integration tests, use fixtures, mock dependencies, run PHPUnit, and maintain code quality."
 ---
 
 # Testing

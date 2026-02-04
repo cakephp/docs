@@ -1,6 +1,6 @@
 ---
 title: "Request & Response Objects"
-description: "The request and response objects provide an abstraction around HTTP requests and responses."
+description: "Handle HTTP in CakePHP: work with Request/Response objects, parse data, set headers, handle uploads, and manage cookies efficiently."
 ---
 
 # Request & Response Objects

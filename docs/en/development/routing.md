@@ -1,6 +1,6 @@
 ---
 title: "Routing"
-description: "Routing provides you tools that map URLs to controller actions."
+description: "Configure CakePHP routing: map URLs to controllers, use route parameters, scopes, prefixes, custom routes, and RESTful routing patterns."
 ---
 
 # Routing

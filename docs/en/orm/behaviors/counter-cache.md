@@ -1,6 +1,6 @@
 ---
 title: "CounterCache"
-description: "Often times web applications need to display counts of related objects."
+description: "Maintain count caches in CakePHP: use CounterCacheBehavior to automatically update related record counts for better performance."
 ---
 
 # CounterCache

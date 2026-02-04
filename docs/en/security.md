@@ -1,6 +1,6 @@
 ---
 title: "Security"
-description: "Overview of CakePHP security features and where to configure them, including the Security utility, CSRF protection, CSP, security headers, and HTTPS."
+description: "Secure your CakePHP app: implement CSRF protection, CSP headers, HTTPS enforcement, form protection, and security utilities best practices."
 ---
 
 # Security

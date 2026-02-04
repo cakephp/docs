@@ -1,6 +1,6 @@
 ---
 title: "Date & Time"
-description: "CakePHP offers a powerful set of Date and Time manipulation methods"
+description: "Manipulate dates and times in CakePHP: parse, format, compare, modify timestamps using powerful ChronosTime methods and utilities."
 ---
 
 # Date & Time

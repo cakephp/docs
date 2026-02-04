@@ -1,6 +1,6 @@
 ---
 title: "Where to Get Help"
-description: "The Official CakePHP website is always a great place to visit."
+description: "Get CakePHP support: access documentation, join forums, Slack, Stack Overflow, GitHub issues, and connect with the community."
 ---
 
 # Where to Get Help

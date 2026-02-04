@@ -1,6 +1,6 @@
 ---
 title: "Validating Data"
-description: "Before you save your data you will probably want to ensure the data is correct and consistent."
+description: "Validate data in CakePHP: create validation rules, use validator objects, validate before save, and implement custom validation methods."
 ---
 
 # Validating Data

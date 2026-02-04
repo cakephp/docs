@@ -1,6 +1,6 @@
 ---
 title: "Associations - Linking Tables Together"
-description: "Defining relations between different objects in your application should be a natural process. Authors may have many articles and comments."
+description: "Define CakePHP associations: configure belongsTo, hasMany, hasOne, belongsToMany relationships, eager loading, and manage related data."
 ---
 
 # Associations - Linking Tables Together

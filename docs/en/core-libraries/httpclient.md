@@ -1,6 +1,6 @@
 ---
 title: "Http Client"
-description: "CakePHP includes a PSR-18 compliant HTTP client which can be used for making requests and retrieving responses."
+description: "Make HTTP requests in CakePHP: use PSR-18 client, send GET/POST requests, handle responses, configure authentication, and test APIs."
 ---
 
 # Http Client

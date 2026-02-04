@@ -1,6 +1,6 @@
 ---
 title: "Form"
-description: "The FormHelper does most of the heavy lifting in form creation."
+description: "Learn to create forms in CakePHP with FormHelper. Build secure, validated forms with automatic data population, context handling, and HTML generation."
 ---
 
 # Form

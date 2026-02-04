@@ -1,6 +1,6 @@
 ---
 title: "Modelless Forms"
-description: "The most common example of this is a contact form. Generally when using the Form class you'll want to use a subclass to define your form."
+description: "Create model-less forms in CakePHP: build contact forms, search forms, validate data without ORM using standalone Form classes."
 ---
 
 # Modelless Forms

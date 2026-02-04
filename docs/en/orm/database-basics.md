@@ -1,6 +1,6 @@
 ---
 title: "Database Basics"
-description: "The functions described in this chapter illustrate what is possible to do with the lower-level database access API."
+description: "Use low-level database API in CakePHP: execute raw queries, manage connections, use query expressions, and work with database drivers."
 ---
 
 # Database Basics

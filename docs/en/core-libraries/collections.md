@@ -1,6 +1,6 @@
 ---
 title: "Collections"
-description: "The collection classes provide a set of tools to manipulate arrays or Traversable objects."
+description: "Manipulate collections in CakePHP: map, filter, reduce, sort arrays and result sets using powerful collection methods and chains."
 ---
 
 # Collections

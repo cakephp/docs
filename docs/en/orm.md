@@ -1,6 +1,6 @@
 ---
 title: "Database Access & ORM"
-description: "In CakePHP, working with data through the database is done with two primary object types: table objects and entities."
+description: "Master CakePHP ORM: work with table objects, entities, associations, query builder, validation, and database operations using conventions."
 ---
 
 # Database Access & ORM

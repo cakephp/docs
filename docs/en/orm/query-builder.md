@@ -1,6 +1,6 @@
 ---
 title: "Query Builder"
-description: "The ORM's query builder provides a simple to use fluent interface for creating and running queries."
+description: "Build database queries in CakePHP: use fluent interface, select data, apply conditions, joins, unions, subqueries, and optimize performance."
 ---
 
 # Query Builder

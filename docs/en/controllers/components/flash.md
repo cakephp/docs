@@ -1,6 +1,6 @@
 ---
 title: "Flash"
-description: "FlashComponent provides a way to set one-time notification messages to be displayed after processing a form or acknowledging data"
+description: "Display flash messages in CakePHP: show notifications, success/error messages, customize flash element rendering for user feedback."
 ---
 
 # Flash

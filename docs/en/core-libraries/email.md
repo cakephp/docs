@@ -1,6 +1,6 @@
 ---
 title: "Mailer"
-description: "Mailer is a convenience class for sending easily reusable emails."
+description: "Send emails in CakePHP: configure SMTP, use Mailer classes, attach files, send HTML emails, and manage email templates efficiently."
 ---
 
 # Mailer

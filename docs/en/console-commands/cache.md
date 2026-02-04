@@ -1,6 +1,6 @@
 ---
 title: "Cache Tool"
-description: "To help you better manage cached data from a CLI environment, a console command is available for clearing cached data your application has."
+description: "Manage cache from CLI in CakePHP: clear all caches, specific cache configs, and maintain cached data via console commands."
 ---
 
 # Cache Tool

@@ -1,6 +1,6 @@
 ---
 title: "Registry Objects"
-description: "The registry classes provide a simple way to create and retrieve loaded instances of a given object type. Configuration can also be set on-the-fly."
+description: "Use CakePHP registries: manage object instances, configure on-the-fly, locate tables, helpers, components with the registry pattern."
 ---
 
 # Registry Objects

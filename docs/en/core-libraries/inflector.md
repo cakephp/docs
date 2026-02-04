@@ -1,6 +1,6 @@
 ---
 title: "Inflector"
-description: "Automatically transform english words to single, plural, camel-cased and other variants."
+description: "Transform words in CakePHP: pluralize, singularize, camelize, underscore, humanize English words with Inflector for consistent naming."
 ---
 
 # Inflector

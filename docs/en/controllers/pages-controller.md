@@ -1,6 +1,6 @@
 ---
 title: "The Pages Controller"
-description: "This is a simple and optional controller for serving up static content."
+description: "Serve static content in CakePHP: use PagesController to render simple pages, documentation, and content without database interactions."
 ---
 
 # The Pages Controller

@@ -1,6 +1,6 @@
 ---
 title: "Option Parsers"
-description: "Command classes use the getOptionParser() hook method to define their option parser."
+description: "Parse CLI options in CakePHP: define command arguments, options, subcommands, help text, and validate console input effectively."
 ---
 
 # Option Parsers

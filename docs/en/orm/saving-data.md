@@ -1,6 +1,6 @@
 ---
 title: "Saving Data"
-description: "After you have loaded your data you will probably want to update and save the changes."
+description: "Save data with CakePHP ORM: insert/update records, handle associations, validate entities, use transactions, and manage form data efficiently."
 ---
 
 # Saving Data

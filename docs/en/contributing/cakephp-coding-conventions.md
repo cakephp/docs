@@ -1,6 +1,6 @@
 ---
 title: "Coding Standards"
-description: "CakePHP developers will use the PSR-12 coding style guide in addition to the following rules as coding standards."
+description: "Follow CakePHP coding standards: PSR-12 guidelines, indentation rules, line length, control structures, and best practices for contributions."
 ---
 
 # Coding Standards

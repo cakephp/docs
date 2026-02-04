@@ -1,6 +1,6 @@
 ---
 title: "Contributing"
-description: "There are a number of ways you can contribute to CakePHP. The following sections cover the various ways you can contribute to CakePHP:"
+description: "Join CakePHP development: contribute code, documentation, report bugs, follow coding standards, submit pull requests, and help build the framework."
 ---
 
 # Contributing

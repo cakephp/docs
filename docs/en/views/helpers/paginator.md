@@ -1,6 +1,6 @@
 ---
 title: "Paginator"
-description: "The PaginatorHelper is used to output pagination controls such as page numbers and next/previous links."
+description: "Render pagination in CakePHP: use PaginatorHelper for page numbers, next/previous links, sort controls, and customize pagination display."
 ---
 
 # Paginator

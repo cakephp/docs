@@ -1,6 +1,6 @@
 ---
 title: "Plugins"
-description: "CakePHP offers a great plugin ecosystem as well as private plugin functionality."
+description: "Extend CakePHP with plugins: create reusable packages, load plugins, configure routes, override templates, and share functionality across apps."
 ---
 
 # Plugins

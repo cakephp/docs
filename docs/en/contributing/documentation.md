@@ -1,6 +1,6 @@
 ---
 title: "Documentation"
-description: "Contributing to the documentation is simple. Feel free to fork the repo, add your changes/improvements/translations and give back by issuing a pull request."
+description: "Contribute to CakePHP docs: write clear documentation, follow formatting guidelines, translate content, and submit improvements via pull requests."
 ---
 
 # Documentation

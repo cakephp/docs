@@ -1,6 +1,6 @@
 ---
 title: "Events System"
-description: "Creating maintainable applications is both a science and an art. In the CakePHP implementation, an event object is dispatched to all listeners."
+description: "Implement event system in CakePHP: dispatch events, create listeners, use event manager, and decouple application components effectively."
 ---
 
 # Events System

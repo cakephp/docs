@@ -1,6 +1,6 @@
 ---
 title: "Table Objects"
-description: "Table objects are the main actors to interact with your database."
+description: "Work with CakePHP Table objects: define models, configure associations, implement finders, use behaviors, and handle lifecycle callbacks."
 ---
 
 # Table Objects

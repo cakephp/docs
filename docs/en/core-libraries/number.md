@@ -1,6 +1,6 @@
 ---
 title: "Number"
-description: "Format numbers properly in e.g. your desired currency or a readable size like 20MB"
+description: "Format numbers in CakePHP: display currency, percentages, file sizes, and localized number formats with Number helper utility methods."
 ---
 
 # Number

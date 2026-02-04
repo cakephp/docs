@@ -1,6 +1,6 @@
 ---
 title: "Translate"
-description: "The Translate behavior allows you to create and retrieve translated copies of your entities in multiple languages."
+description: "Translate entities in CakePHP: store multi-language content, retrieve translations, configure TranslateBehavior for internationalization."
 ---
 
 # Translate

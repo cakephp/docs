@@ -1,6 +1,6 @@
 ---
 title: "Retrieving Data & Results Sets"
-description: "Since the ORM now returns Collections and Entities, debugging these objects can be more complicated than in previous CakePHP versions."
+description: "Retrieve data with CakePHP: find entities, use finders, work with result sets, debug queries, and implement custom finder methods efficiently."
 ---
 
 # Retrieving Data & Results Sets

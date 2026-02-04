@@ -1,6 +1,6 @@
 ---
 title: "CMS Tutorial - Creating the Database"
-description: ""
+description: "Create the database for CakePHP CMS tutorial. Configure connections, build schema with migrations or SQL, add seed data, and set up relationships."
 ---
 
 # CMS Tutorial - Creating the Database

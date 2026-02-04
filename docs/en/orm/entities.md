@@ -1,6 +1,6 @@
 ---
 title: "Entities"
-description: "Entities contain methods to manipulate and access the data they contain. Fields can also be accessed as properties on the object."
+description: "Manage CakePHP entities: access data, implement accessors/mutators, handle mass assignment, virtual fields, and custom entity logic."
 ---
 
 # Entities

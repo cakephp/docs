@@ -1,6 +1,6 @@
 ---
 title: "Html"
-description: "The role of the HtmlHelper in CakePHP is to make HTML-related options easier, faster, and more resilient to change."
+description: "Generate HTML in CakePHP: use HtmlHelper for links, images, CSS, JavaScript, meta tags, and create semantic markup easily."
 ---
 
 # Html

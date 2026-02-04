@@ -1,6 +1,6 @@
 ---
 title: "CMS Tutorial - Tags and Users"
-description: ""
+description: "Build tags and users in CakePHP CMS tutorial. Use Bake to generate code, create BelongsToMany associations, and implement tag filtering for articles."
 ---
 
 # CMS Tutorial - Tags and Users

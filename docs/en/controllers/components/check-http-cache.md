@@ -1,6 +1,6 @@
 ---
 title: "Checking HTTP Cache"
-description: "Skip rendering controller actions if the response has not yet changed"
+description: "Optimize with HTTP cache in CakePHP: skip rendering when response unchanged, use ETags, Last-Modified headers for better performance."
 ---
 
 # Checking HTTP Cache

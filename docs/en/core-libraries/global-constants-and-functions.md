@@ -1,6 +1,6 @@
 ---
 title: "Constants & Functions"
-description: "CakePHP features a number of global convenience functions that may come in handy."
+description: "Use CakePHP global functions: h(), debug(), pr(), env(), config(), and essential helpers available throughout your application."
 ---
 
 # Constants & Functions

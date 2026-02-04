@@ -1,6 +1,6 @@
 ---
 title: "CMS Tutorial - Creating the Articles Controller"
-description: ""
+description: "Build your first CakePHP controller for articles. Create index, view, add, edit actions with pagination, dynamic finders, and template rendering."
 ---
 
 # CMS Tutorial - Creating the Articles Controller

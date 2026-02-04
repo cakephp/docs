@@ -1,6 +1,6 @@
 ---
 title: "Timestamp"
-description: "The timestamp behavior allows your table objects to update one or more timestamps on each model event."
+description: "Auto-update timestamps in CakePHP: use TimestampBehavior to manage created/modified fields automatically on save operations."
 ---
 
 # Timestamp

@@ -1,6 +1,6 @@
 ---
 title: "Controllers"
-description: "Controllers are the 'C' in MVC. Controllers can be thought of as middle layer between the Model and View."
+description: "Learn CakePHP controllers: handle requests, render views, manage components, use middleware, and implement request lifecycle callbacks in MVC architecture."
 ---
 
 # Controllers

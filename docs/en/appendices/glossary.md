@@ -1,6 +1,6 @@
 ---
 title: "Glossary"
-description: "A list of commonly used abbreviations and names."
+description: "CakePHP terminology reference: understand common abbreviations, technical terms, and framework-specific vocabulary used in documentation."
 ---
 
 # Glossary

@@ -1,6 +1,6 @@
 ---
 title: "Tree"
-description: "It's fairly common to want to store hierarchical data in a database table."
+description: "Store hierarchical data in CakePHP: use TreeBehavior to manage nested sets, move nodes, and query tree structures efficiently."
 ---
 
 # Tree

@@ -1,6 +1,6 @@
 ---
 title: "Interactive Console (REPL)"
-description: "CakePHP offers REPL(Read Eval Print Loop) plugin to let you explore some CakePHP and your application in an interactive console."
+description: "Explore CakePHP interactively: use REPL console to test code, inspect objects, debug queries, and experiment with application logic."
 ---
 
 # Interactive Console (REPL)

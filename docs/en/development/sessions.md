@@ -1,6 +1,6 @@
 ---
 title: "Sessions"
-description: "CakePHP provides a wrapper and suite of utility features on top of PHP's native session extension."
+description: "Manage sessions in CakePHP: configure session handlers, use database/cache storage, handle session data, and implement secure sessions."
 ---
 
 # Sessions

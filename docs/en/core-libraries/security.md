@@ -1,6 +1,6 @@
 ---
 title: "Security Utility"
-description: "The security library handles basic security measures such as providing methods for hashing and encrypting data."
+description: "Encrypt and hash data in CakePHP: use Security library for password hashing, data encryption, HMAC generation, and secure random values."
 ---
 
 # Security Utility

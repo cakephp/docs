@@ -1,6 +1,6 @@
 ---
 title: "Pagination"
-description: "One of the main obstacles of creating flexible and user-friendly web applications is designing an intuitive user interface."
+description: "Paginate data in CakePHP: configure pagination, customize queries, sort results, display page numbers, and create user-friendly interfaces."
 ---
 
 # Pagination

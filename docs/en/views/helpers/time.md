@@ -1,6 +1,6 @@
 ---
 title: "Time"
-description: "The TimeHelper allows for the quick processing of time related information."
+description: "Format dates and times in views: use TimeHelper to display localized timestamps, relative times, and date formatting in templates."
 ---
 
 # Time

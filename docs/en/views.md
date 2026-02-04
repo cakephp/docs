@@ -1,6 +1,6 @@
 ---
 title: "Views"
-description: "Views are the V in MVC. Views are responsible for generating the specific output required for the request."
+description: "Create dynamic templates with CakePHP views: render HTML, manage layouts, use helpers, implement blocks, cells, and build reusable UI components."
 ---
 
 # Views
