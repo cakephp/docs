@@ -1,3 +1,8 @@
+---
+title: "Debugging"
+description: "Debug CakePHP applications: use DebugKit, configure error handling, inspect queries, variables, and troubleshoot issues effectively."
+---
+
 # Debugging
 
 Debugging is an inevitable and necessary part of any development
@@ -34,7 +39,7 @@ If you have [Psysh](https://psysh.org/) installed you can use this
 function in CLI environments to open an interactive console with the current
 local scope:
 
-``` text
+``` php
 // Some code
 eval(breakpoint());
 ```
@@ -55,7 +60,7 @@ The following configuration options can be set in **config/app.php** to change h
 `Debugger` behaves:
 
 - `Debugger.editor` Choose the which editor URL format you want to use.
-  By default atom, emacs, macvim, phpstorm, sublime, textmate, and vscode are
+  By default, atom, emacs, macvim, phpstorm, sublime, textmate, and vscode are
   available. You can add additional editor link formats using
   `Debugger::addEditor()` during your application bootstrap.
 - `Debugger.editorBasePath` The path that replaces `ROOT` when generating
@@ -69,7 +74,7 @@ The `Debugger.editorBasePath` configure option was added.
 
 ## Outputting Values
 
-`static` Cake\\Error\\Debugger::**dump**($var, $depth = 3): void
+`static` Cake\\Error\\Debugger::**dump**(mixed $var, int $maxDepth = 3): void
 
 Dump prints out the contents of a variable. It will print out all
 properties and methods (if any) of the supplied variable:
@@ -83,7 +88,7 @@ Debugger::dump($foo);
 array(
     1,
     2,
-    3
+    3,
 )
 
 // Simple object
@@ -106,7 +111,7 @@ When dumping data with `Debugger` or rendering error pages, you may want to
 hide sensitive keys like passwords or API keys. In your **config/bootstrap.php**
 you can mask specific keys:
 
-``` css
+``` php
 Debugger::setOutputMask([
     'password' => 'xxxxx',
     'awsKey' => 'yyyyy',
@@ -118,7 +123,7 @@ output masks.
 
 ## Logging With Stack Traces
 
-`static` Cake\\Error\\Debugger::**log**($var, $level = 7, $depth = 3): void
+`static` Cake\\Error\\Debugger::**log**(mixed $var, string|int $level = 'debug', int $maxDepth = 3): void
 
 Creates a detailed stack trace log at the time of invocation. The
 `log()` method prints out data similar to that done by
@@ -128,13 +133,13 @@ writable by the web server for `log()` to work correctly.
 
 ## Generating Stack Traces
 
-`static` Cake\\Error\\Debugger::**trace**($options): array|string
+`static` Cake\\Error\\Debugger::**trace**(array $options = []): array|string
 
 Returns the current stack trace. Each line of the trace includes
 the calling method, including which file and line the call
 originated from:
 
-``` text
+``` php
 // In PostsController::index()
 pr(Debugger::trace());
 
@@ -151,11 +156,11 @@ the order of currently running functions (stack frames).
 
 ## Getting an Excerpt From a File
 
-`static` Cake\\Error\\Debugger::**excerpt**($file, $line, $context): array
+`static` Cake\\Error\\Debugger::**excerpt**(string $file, int $line, int $context = 2): array
 
-Grab an excerpt from the file at \$path (which is an absolute
-filepath), highlights line number \$line with \$context number of
-lines around it. :
+Grab an excerpt from the file at `$path` (which is an absolute
+filepath), highlights line number `$line` with `$context` number of
+lines around it.
 
 ``` php
 pr(Debugger::excerpt(ROOT . DS . LIBS . 'debugger.php', 321, 2));
@@ -176,7 +181,7 @@ Although this method is used internally, it can be handy if you're
 creating your own error messages or log entries for custom
 situations.
 
-`static` Debugger::**getType**($var): string
+`static` Cake\\Error\\Debugger::**getType**(mixed $var): string
 
 Get the type of a variable. Objects will return their class name
 
@@ -186,9 +191,9 @@ Exception and error pages can contain URLs that directly open in your editor or
 IDE. CakePHP ships with URL formats for several popular editors, and you can add
 additional editor formats if required during application bootstrap:
 
-``` text
+``` php
 // Generate links for vscode.
-Debugger::setEditor('vscode')
+Debugger::setEditor('vscode');
 
 // Add a custom format
 // Format strings will have the {file} and {line}

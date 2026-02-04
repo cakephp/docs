@@ -1,3 +1,8 @@
+---
+title: "Standalone Packages"
+description: "Use CakePHP packages independently: install core components separately, integrate collections, validation, i18n in any PHP project."
+---
+
 # Standalone Packages
 
 The CakePHP core is split into various standalone packages which can

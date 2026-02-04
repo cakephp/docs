@@ -1,3 +1,8 @@
+---
+title: "App Class"
+description: "Locate resources in CakePHP: find paths to plugins, themes, vendors, configure namespace resolution with the App class utility."
+---
+
 # App Class
 
 `class` Cake\\Core\\**App**
@@ -8,7 +13,7 @@ The App class is responsible for resource location and path management.
 
 ### App::className()
 
-`static` Cake\\Core\\App::**className**($name, $type = '', $suffix = ''): string|null
+`static` Cake\\Core\\App::**className**(string $class, string $type = '', string $suffix = ''): ?string
 
 This method is used to resolve class names throughout CakePHP. It resolves
 the short form names CakePHP uses and returns the fully resolved class name:
@@ -126,7 +131,7 @@ After configuring the vendor libraries you will need to regenerate your
 application's autoloader using:
 
 ``` bash
-$ php composer.phar dump-autoload
+php composer.phar dump-autoload
 ```
 
 If you happen to not be using Composer in your application, you will need to

@@ -500,7 +500,7 @@
               "link": "/ja/appendices/cakephp-development-process"
             },
             { "text": "用語集", "link": "/ja/appendices/glossary" },
-            { "text": "PHPUnit 10", "link": "/ja/appendices/phpunit10" }
+            { "text": "PHPUnit アップグレード", "link": "/ja/appendices/phpunit-upgrade" }
           ]
         }
       ]

@@ -1,15 +1,14 @@
+---
+title: "Request & Response Objects"
+description: "Handle HTTP in CakePHP: work with Request/Response objects, parse data, set headers, handle uploads, and manage cookies efficiently."
+---
+
 # Request & Response Objects
 
 The request and response objects provide an abstraction around HTTP requests and
 responses. The request object in CakePHP allows you to introspect an incoming
 request, while the response object allows you to effortlessly create HTTP
 responses from your controllers.
-
-<div class="index">
-
-\$this-\>request
-
-</div>
 
 <a id="cake-request"></a>
 
@@ -20,7 +19,7 @@ responses from your controllers.
 `ServerRequest` is the default request object used in CakePHP. It centralizes a
 number of features for interrogating and interacting with request data.
 On each request one Request is created and then passed by reference to the
-various layers of an application that use request data. By default the request
+various layers of an application that use request data. By default, the request
 is assigned to `$this->request`, and is available in Controllers, Cells, Views
 and Helpers. You can also access it in Components using the controller
 reference.
@@ -42,8 +41,6 @@ Some of the duties `ServerRequest` performs include:
 CakePHP's request object implements the [PSR-7
 ServerRequestInterface](https://www.php-fig.org/psr/psr-7/) making it easier to
 use libraries from outside of CakePHP.
-
-<a id="request-parameters"></a>
 
 ### Request Parameters
 
@@ -83,7 +80,7 @@ are also all found in the routing parameters:
 
 ### Query String Parameters
 
-`method` Cake\\Http\\ServerRequest::**getQuery**($name, $default = null): mixed
+`method` Cake\\Http\\ServerRequest::**getQuery**(?string $name = null, mixed $default = null): mixed
 
 Query string parameters can be read using the `getQuery()` method:
 
@@ -143,7 +140,7 @@ Casting functions were added.
 
 ### Request Body Data
 
-`method` Cake\\Http\\ServerRequest::**getData**($name, $default = null): mixed
+`method` Cake\\Http\\ServerRequest::**getData**(?string $name = null, mixed $default = null): mixed
 
 All POST data normally available through PHP's `$_POST` global variable can be
 accessed using `Cake\Http\ServerRequest::getData()`. For example:
@@ -188,7 +185,7 @@ be accessed like this:
 $attachment = $this->request->getData('attachment');
 ```
 
-By default file uploads are represented in the request data as objects that implement
+By default, file uploads are represented in the request data as objects that implement
 [\Psr\Http\Message\UploadedFileInterface](https://www.php-fig.org/psr/psr-7/#16-uploaded-files). In the current
 implementation, the `$attachment` variable in the above example would by default hold an instance of
 `\Laminas\Diactoros\UploadedFile`.
@@ -218,7 +215,7 @@ necessary. In an CLI environment, where the concept of uploading files doesn't
 exist, it will allow to move the file that you've referenced irrespective of its
 origins, which makes testing file uploads possible.
 
-`method` Cake\\Http\\ServerRequest::**getUploadedFile**($path): UploadedFileInterface|null
+`method` Cake\\Http\\ServerRequest::**getUploadedFile**(string $path): UploadedFileInterface|null
 
 Returns the uploaded file at a specific path. The path uses the same dot syntax as the
 `Cake\Http\ServerRequest::getData()` method:
@@ -238,9 +235,9 @@ Returns all uploaded files in a normalized array structure. For the above exampl
 
 ``` php
 [
-      'attachment' => object(Laminas\Diactoros\UploadedFile) {
-          // ...
-      }
+        'attachment' => object(Laminas\Diactoros\UploadedFile) {
+            // ...
+        }
 ]
 ```
 
@@ -258,14 +255,14 @@ $files = [
             $size,
             $errorStatus,
             $clientFilename,
-            $clientMediaType
+            $clientMediaType,
         ),
         'anotherAttachment' => new \Laminas\Diactoros\UploadedFile(
             '/tmp/hfz6dbn.tmp',
             123,
             \UPLOAD_ERR_OK,
             'attachment.txt',
-            'text/plain'
+            'text/plain',
         ),
     ],
 ];
@@ -302,9 +299,9 @@ If your requests contain XML or JSON request content, you should consider using
 types making the parsed data available in `$request->getData()` and
 `$request->getParsedBody()`.
 
-### Environment Variables (from \$\_SERVER and \$\_ENV)
+### Environment Variables (from $_SERVER and $_ENV)
 
-`method` Cake\\Http\\ServerRequest::**getEnv**($key, $default = null): string|null
+`method` Cake\\Http\\ServerRequest::**getEnv**(string $key, ?string $default = null): string|null
 
 `ServerRequest::getEnv()` is a wrapper for `getenv()` global function and acts as
 a getter for environment variables without possible undefined keys:
@@ -319,7 +316,7 @@ To access all the environment variables in a request use `getServerParams()`:
 $env = $this->request->getServerParams();
 ```
 
-`method` Cake\\Http\\ServerRequest::**withEnv**($key, $value): static
+`method` Cake\\Http\\ServerRequest::**withEnv**(string $key, string $value): static
 
 `ServerRequest::withEnv()` is a wrapper for `putenv()` global function and acts as
 a setter for environment variables without having to modify globals
@@ -376,7 +373,7 @@ $base = $request->getAttribute('webroot');
 
 ### Checking Request Conditions
 
-`method` Cake\\Http\\ServerRequest::**is**($type, $args...): bool
+`method` Cake\\Http\\ServerRequest::**is**(array|string $type, mixed ...$args): bool
 
 The request object provides a way to inspect certain conditions in a given
 request. By using the `is()` method you can check a number of common
@@ -403,7 +400,7 @@ detectors. There are different types of detectors that you can create:
   to handle the check. The callback will receive the request object as its only
   parameter.
 
-`method` Cake\\Http\\ServerRequest::**addDetector**($name, $options): void
+`method` Cake\\Http\\ServerRequest::**addDetector**(string $name, Closure|array $detector): void
 
 Some examples would be:
 
@@ -411,26 +408,26 @@ Some examples would be:
 // Add an environment detector.
 $this->request->addDetector(
     'post',
-    ['env' => 'REQUEST_METHOD', 'value' => 'POST']
+    ['env' => 'REQUEST_METHOD', 'value' => 'POST'],
 );
 
 // Add a pattern value detector.
 $this->request->addDetector(
     'iphone',
-    ['env' => 'HTTP_USER_AGENT', 'pattern' => '/iPhone/i']
+    ['env' => 'HTTP_USER_AGENT', 'pattern' => '/iPhone/i'],
 );
 
 // Add an option detector
 $this->request->addDetector('internalIp', [
     'env' => 'CLIENT_IP',
-    'options' => ['192.168.0.101', '192.168.0.100']
+    'options' => ['192.168.0.101', '192.168.0.100'],
 ]);
 
 
 // Add a header detector with value comparison
 $this->request->addDetector('fancy', [
     'env' => 'CLIENT_IP',
-    'header' => ['X-Fancy' => 1]
+    'header' => ['X-Fancy' => 1],
 ]);
 
 // Add a header detector with callable comparison
@@ -438,7 +435,7 @@ $this->request->addDetector('fancy', [
     'env' => 'CLIENT_IP',
     'header' => ['X-Fancy' => function ($value, $header) {
         return in_array($value, ['1', '0', 'yes', 'no'], true);
-    }]
+    }],
 ]);
 
 // Add a callback detector. Must be a valid callable.
@@ -474,8 +471,8 @@ There are several built-in detectors that you can use:
 - `is('ssl')` Check to see whether the request is via SSL.
 - `is('flash')` Check to see whether the request has a User-Agent of Flash.
 - `is('json')` Check to see whether the request URL has 'json' extension or the
-  <span class="title-ref">Accept</span> header is set to 'application/json'.
-- `is('xml')` Check to see whether the request URL has 'xml' extension or the <span class="title-ref">Accept</span> header is set to
+  `Accept` header is set to 'application/json'.
+- `is('xml')` Check to see whether the request URL has 'xml' extension or the `Accept` header is set to
   'application/xml' or 'text/xml'.
 
 `ServerRequest` also includes methods like
@@ -500,7 +497,7 @@ to use the session object.
 
 ### Host and Domain Name
 
-`method` Cake\\Http\\ServerRequest::**domain**($tldLength = 1): string
+`method` Cake\\Http\\ServerRequest::**domain**(int $tldLength = 1): string
 
 Returns the domain name your application is running on:
 
@@ -509,7 +506,7 @@ Returns the domain name your application is running on:
 echo $request->domain();
 ```
 
-`method` Cake\\Http\\ServerRequest::**subdomains**($tldLength = 1): array
+`method` Cake\\Http\\ServerRequest::**subdomains**(int $tldLength = 1): array
 
 Returns the subdomains your application is running on as an array:
 
@@ -540,7 +537,7 @@ echo $request->getMethod();
 
 ### Restricting Which HTTP method an Action Accepts
 
-`method` Cake\\Http\\ServerRequest::**allowMethod**($methods): bool
+`method` Cake\\Http\\ServerRequest::**allowMethod**(array|string $methods): bool
 
 Set allowed HTTP methods. If not matched, will throw
 `MethodNotAllowedException`. The 405 response will include the required
@@ -574,7 +571,7 @@ $hasAcceptHeader = $this->request->hasHeader('Accept');
 While some apache installs don't make the `Authorization` header accessible,
 CakePHP will make it available through apache specific methods as required.
 
-`method` Cake\\Http\\ServerRequest::**referer**($local = true): string|null
+`method` Cake\\Http\\ServerRequest::**referer**(bool $local = true): string|null
 
 Returns the referring address for the request.
 
@@ -616,7 +613,7 @@ proxy.
 
 ### Checking Accept Headers
 
-`method` Cake\\Http\\ServerRequest::**accepts**($type = null): array|bool
+`method` Cake\\Http\\ServerRequest::**accepts**(?string $type = null): array|bool
 
 Find out which content types the client accepts, or check whether it accepts a
 particular type of content.
@@ -633,7 +630,7 @@ Check for a single type:
 $acceptsJson = $this->request->accepts('application/json');
 ```
 
-`method` Cake\\Http\\ServerRequest::**acceptLanguage**($language = null): array|bool
+`method` Cake\\Http\\ServerRequest::**acceptLanguage**(?string $language = null): array|bool
 
 Get all the languages accepted by the client,
 or check whether a specific language is accepted.
@@ -706,12 +703,6 @@ $query = $uri->getQuery();
 $host = $uri->getHost();
 ```
 
-<div class="index">
-
-\$this-\>response
-
-</div>
-
 ## Response
 
 `class` Cake\\Http\\**Response**
@@ -731,7 +722,7 @@ tasks such as:
 
 ### Dealing with Content Types
 
-`method` Cake\\Http\\Response::**withType**($contentType = null): static
+`method` Cake\\Http\\Response::**withType**(string $contentType): static
 
 You can control the Content-Type of your application's responses with
 `Cake\Http\Response::withType()`. If your application needs to deal
@@ -772,7 +763,7 @@ public function sendFile($id)
 
 As shown in the above example, you must pass the file path to the method.
 CakePHP will send a proper content type header if it's a known file type listed
-in <span class="title-ref">CakeHttpResponse::\$\_mimeTypes</span>. You can add new types prior to calling
+in `Cake\Http\Response::$_mimeTypes`. You can add new types prior to calling
 `Cake\Http\Response::withFile()` by using the
 `Cake\Http\Response::withType()` method.
 
@@ -782,17 +773,17 @@ the browser by specifying the options:
 ``` php
 $response = $this->response->withFile(
     $file['path'],
-    ['download' => true, 'name' => 'foo']
+    ['download' => true, 'name' => 'foo'],
 );
 ```
 
 The supported options are:
 
-name  
+name
 The name allows you to specify an alternate file name to be sent to
 the user.
 
-download  
+download
 A boolean value indicating whether headers should be set to force
 download.
 
@@ -823,10 +814,10 @@ public function sendIcs()
 
 ### Setting Headers
 
-`method` Cake\\Http\\Response::**withHeader**($header, $value)
+`method` Cake\\Http\\Response::**withHeader**(string $name, string|array $value): static
 
 Setting headers is done with the `Cake\Http\Response::withHeader()`
-method. Like all of the PSR-7 interface methods, this method returns a *new*
+method. Like all the PSR-7 interface methods, this method returns a *new*
 instance with the new header:
 
 ``` php
@@ -835,7 +826,7 @@ $response = $response->withHeader('X-Extra', 'My header');
 
 // Set multiple headers
 $response = $response->withHeader('X-Extra', 'My header')
-    ->withHeader('Location', 'http://example.com');
+    ->withHeader('Location', 'https://example.com');
 
 // Append a value to an existing header
 $response = $response->withAddedHeader('Set-Cookie', 'remember_me=1');
@@ -850,7 +841,7 @@ redirect location header.
 
 ### Setting the Body
 
-`method` Cake\\Http\\Response::**withStringBody**($string): static
+`method` Cake\\Http\\Response::**withStringBody**(?string $string): static
 
 To set a string as the response body, do the following:
 
@@ -863,7 +854,7 @@ $response = $response->withType('application/json')
     ->withStringBody(json_encode(['Foo' => 'bar']));
 ```
 
-`method` Cake\\Http\\Response::**withBody**($body)
+`method` Cake\\Http\\Response::**withBody**(StreamInterface $body): static
 
 To set the response body, use the `withBody()` method, which is provided by the
 `Laminas\Diactoros\MessageTrait`:
@@ -905,7 +896,7 @@ $response = $response->withBody($stream);
 
 ### Setting the Character Set
 
-`method` Cake\\Http\\Response::**withCharset**($charset): static
+`method` Cake\\Http\\Response::**withCharset**(string $charset): static
 
 Sets the charset that will be used in the response:
 
@@ -933,7 +924,7 @@ public function index()
 > Disabling caching from SSL domains while trying to send
 > files to Internet Explorer can result in errors.
 
-`method` Cake\\Http\\Response::**withCache**($since, $time = '+1 day'): static
+`method` Cake\\Http\\Response::**withCache**(string|int $since, string|int $time = '+1 day'): static
 
 You can also tell clients that you want them to cache responses. By using
 `Cake\Http\Response::withCache()`:
@@ -971,7 +962,7 @@ or reverse proxy caching.
 
 #### The Cache Control Header
 
-`method` Cake\\Http\\Response::**withSharable**($public, $time = null): static
+`method` Cake\\Http\\Response::**withSharable**(bool $public, ?int $time = null): static
 
 Used under the expiration model, this header contains multiple indicators that
 can change the way browsers or proxies use the cached content. A
@@ -1012,7 +1003,7 @@ the `Cache-Control` header.
 
 #### The Expiration Header
 
-`method` Cake\\Http\\Response::**withExpires**($time): static
+`method` Cake\\Http\\Response::**withExpires**(DateTimeInterface|string|int|null $time): static
 
 You can set the `Expires` header to a date and time after which the response
 is no longer considered fresh. This header can be set using the
@@ -1030,7 +1021,7 @@ be parsed by the `DateTime` class.
 
 #### The Etag Header
 
-`method` Cake\\Http\\Response::**withEtag**($tag, $weak = false): static
+`method` Cake\\Http\\Response::**withEtag**(string $hash, bool $weak = false): static
 
 Cache validation in HTTP is often used when content is constantly changing, and
 asks the application to only generate the response contents if the cache is no
@@ -1073,7 +1064,7 @@ public function index()
 
 #### The Last Modified Header
 
-`method` Cake\\Http\\Response::**withModified**($time): static
+`method` Cake\\Http\\Response::**withModified**(DateTimeInterface|string|int $time): static
 
 Also, under the HTTP cache validation model, you can set the `Last-Modified`
 header to indicate the date and time at which the resource was modified for the
@@ -1092,14 +1083,14 @@ public function view()
     if ($response->isNotModified($this->request)) {
         return $response;
     }
-    $this->response;
+    $this->response = $response;
     // ...
 }
 ```
 
 #### The Vary Header
 
-`method` Cake\\Http\\Response::**withVary**($header): static
+`method` Cake\\Http\\Response::**withVary**(array|string $cacheVariances): static
 
 In some cases, you might want to serve different content using the same URL.
 This is often the case if you have a multilingual page or respond with different
@@ -1114,11 +1105,11 @@ $response = $this->response->withVary('Accept-Language');
 
 #### Sending Not-Modified Responses
 
-`method` Cake\\Http\\Response::**isNotModified**(Request $request): bool
+`method` Cake\\Http\\Response::**isNotModified**(ServerRequest $request): bool
 
 Compares the cache headers for the request object with the cache header from the
 response and determines whether it can still be considered fresh. If so, deletes
-the response content, and sends the <span class="title-ref">304 Not Modified</span> header:
+the response content, and sends the `304 Not Modified` header:
 
 ``` php
 // In a controller action.
@@ -1149,7 +1140,7 @@ $this->response = $this->response->withCookie(Cookie::create(
         'domain' => '',
         'secure' => false,
         'httponly' => false,
-        'samesite' => null // Or one of CookieInterface::SAMESITE_* constants
+        'samesite' => null, // Or one of CookieInterface::SAMESITE_* constants
     ]
 ));
 ```
@@ -1184,8 +1175,8 @@ $this->response = $this->response->cors($this->request)
 CORS related headers will only be applied to the response if the following
 criteria are met:
 
-1.  The request has an `Origin` header.
-2.  The request's `Origin` value matches one of the allowed Origin values.
+1. The request has an `Origin` header.
+2. The request's `Origin` value matches one of the allowed Origin values.
 
 #### CorsBuilder Methods
 
@@ -1193,17 +1184,17 @@ criteria are met:
 
 The `CorsBuilder` provides the following methods for configuring CORS:
 
-`method` Cake\\Http\\CorsBuilder::**allowOrigin**(array|string $domains)
+`method` Cake\\Http\\CorsBuilder::**allowOrigin**(array|string $domains): static
 
-`method` Cake\\Http\\CorsBuilder::**allowMethods**(array $methods)
+`method` Cake\\Http\\CorsBuilder::**allowMethods**(array $methods): static
 
-`method` Cake\\Http\\CorsBuilder::**allowHeaders**(array $headers)
+`method` Cake\\Http\\CorsBuilder::**allowHeaders**(array $headers): static
 
-`method` Cake\\Http\\CorsBuilder::**allowCredentials**()
+`method` Cake\\Http\\CorsBuilder::**allowCredentials**(): static
 
-`method` Cake\\Http\\CorsBuilder::**exposeHeaders**(array $headers)
+`method` Cake\\Http\\CorsBuilder::**exposeHeaders**(array $headers): static
 
-`method` Cake\\Http\\CorsBuilder::**maxAge**(string|int $age)
+`method` Cake\\Http\\CorsBuilder::**maxAge**(string|int $age): static
 
 `method` Cake\\Http\\CorsBuilder::**build**(): ResponseInterface
 
@@ -1273,7 +1264,7 @@ class CorsMiddleware implements MiddlewareInterface
 {
     public function process(
         ServerRequestInterface $request,
-        RequestHandlerInterface $handler
+        RequestHandlerInterface $handler,
     ): ResponseInterface {
         // Handle preflight requests
         if ($request->getMethod() === 'OPTIONS') {
@@ -1365,8 +1356,6 @@ $this->response = $this->response->withHeader('X-CakePHP', 'yes!');
 They let you interact with groups of cookies using immutable patterns, which
 allow the immutability of the request and response to be preserved.
 
-<a id="creating-cookies"></a>
-
 ### Creating Cookies
 
 `class` Cake\\Http\\Cookie\\**Cookie**
@@ -1385,7 +1374,7 @@ $cookie = new Cookie(
     '/', // path, if applicable
     'example.com', // domain, if applicable
     false, // secure only?
-    true // http only ?
+    true, // http only ?
 );
 
 // Using the builder methods
@@ -1455,7 +1444,7 @@ $cookie = $cookies->remember_me;
 $exists = isset($cookies->remember_me)
 ```
 
-Once you have a `Cookie` object you can interact with it's state and modify
+Once you have a `Cookie` object you can interact with its state and modify
 it. Keep in mind that cookies are immutable, so you'll need to update the
 collection if you modify a cookie:
 

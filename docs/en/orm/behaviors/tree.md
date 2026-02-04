@@ -1,3 +1,8 @@
+---
+title: "Tree"
+description: "Store hierarchical data in CakePHP: use TreeBehavior to manage nested sets, move nodes, and query tree structures efficiently."
+---
+
 # Tree
 
 `class` Cake\\ORM\\Behavior\\**TreeBehavior**
@@ -162,7 +167,7 @@ An example of all options in use is:
 $query = $categories->find('treeList',
     keyPath: 'url',
     valuePath: 'id',
-    spacer: ' '
+    spacer: ' ',
 );
 ```
 
@@ -220,7 +225,7 @@ public function initialize(array $config): void
     $this->addBehavior('Tree', [
         'parent' => 'ancestor_id', // Use this instead of parent_id
         'left' => 'tree_left', // Use this instead of lft
-        'right' => 'tree_right' // Use this instead of rght
+        'right' => 'tree_right', // Use this instead of rght
     ]);
 }
 ```
@@ -252,7 +257,7 @@ class LocationsTable extends Table
     public function initialize(array $config): void
     {
         $this->addBehavior('Tree', [
-            'scope' => ['country_name' => 'Brazil']
+            'scope' => ['country_name' => 'Brazil'],
         ]);
     }
 }

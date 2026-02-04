@@ -1,3 +1,8 @@
+---
+title: "Tickets"
+description: "Report CakePHP bugs: create effective tickets, provide reproduction steps, follow guidelines, and contribute to issue tracking."
+---
+
 # Tickets
 
 Getting feedback and help from the community in the form of tickets is an
@@ -27,7 +32,7 @@ the best bug report possible:
 
 If you've found a security issue in CakePHP, please use the following procedure
 instead of the normal bug reporting system. Instead of using the bug tracker,
-mailing list or IRC please send an email to **security \[at\] cakephp.org**.
+mailing list or IRC please send an email to **security [at] cakephp.org**.
 Emails sent to this address go to the CakePHP core team on a private mailing
 list.
 

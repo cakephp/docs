@@ -1,3 +1,8 @@
+---
+title: "Number"
+description: "Format numbers in CakePHP: display currency, percentages, file sizes, and localized number formats with Number helper utility methods."
+---
+
 # Number
 
 `class` Cake\\I18n\\**Number**
@@ -57,26 +62,26 @@ that represents the amount of money you are expressing. The second
 parameter is a string used to choose a predefined currency formatting
 scheme:
 
-| \$currency | 1234.56, formatted by currency type |
+| `$currency` | 1234.56, formatted by currency type |
 |------------|-------------------------------------|
 | EUR        | €1.234,56                           |
 | GBP        | £1,234.56                           |
-| USD        | \$1,234.56                          |
+| USD        | $1,234.56                           |
 
 The third parameter is an array of options for further defining the
 output. The following options are available:
 
 | Option | Description |
-|----|----|
+| ---- | ---- |
 | before | Text to display before the rendered number. |
 | after | Text to display after the rendered number. |
-| zero | The text to use for zero values; can be a string or a number. ie. 0, 'Free!'. |
-| places | Number of decimal places to use, ie. 2 |
-| precision | Maximal number of decimal places to use, ie. 2 |
-| locale | The locale name to use for formatting number, ie. "fr_FR". |
-| fractionSymbol | String to use for fraction numbers, ie. ' cents'. |
+| zero | The text to use for zero values; can be a string or a number. i.e. 0, 'Free!'. |
+| places | Number of decimal places to use, i.e. 2 |
+| precision | Maximal number of decimal places to use, i.e. 2 |
+| locale | The locale name to use for formatting number, i.e. "fr_FR". |
+| fractionSymbol | String to use for fraction numbers, i.e. ' cents'. |
 | fractionPosition | Either 'before' or 'after' to place the fraction symbol. |
-| pattern | An ICU number pattern to use for formatting the number ie. \#,###.00 |
+| pattern | An ICU number pattern to use for formatting the number i.e. `#,###.00` |
 | useIntlCode | Set to `true` to replace the currency symbol with the international currency code. |
 
 If `$currency` value is `null`, the default currency will be retrieved from
@@ -91,7 +96,7 @@ Number::setDefaultCurrencyFormat(Number::FORMAT_CURRENCY_ACCOUNTING);
 
 ### Number::setDefaultCurrency()
 
-`method` Cake\\I18n\\Number::**setDefaultCurrency**($currency): void
+`static` Cake\\I18n\\Number::**setDefaultCurrency**(?string $currency = null): void
 
 Setter for the default currency. This removes the need to always pass the
 currency to `Cake\I18n\Number::currency()` and change all
@@ -116,7 +121,7 @@ retrieve the `intl.default_locale` ini value if set and `'en_US'` if not.
 
 This method displays a number with the specified amount of
 precision (decimal places). It will round in order to maintain the
-level of precision defined. :
+level of precision defined.
 
 ``` php
 // Called as NumberHelper
@@ -136,13 +141,13 @@ echo Number::precision(456.91873645, 2);
 `method` Cake\\I18n\\Number::**toPercentage**(mixed $value, int $precision = 2, array $options = []): string
 
 | Option | Description |
-|----|----|
+| ---- | ---- |
 | multiply | Boolean to indicate whether the value has to be multiplied by 100. Useful for decimal percentages. |
 
 Like `Cake\I18n\Number::precision()`, this method formats a number
 according to the supplied precision (where numbers are rounded to meet the
 given precision). This method also expresses the number as a percentage
-and appends the output with a percent sign. :
+and appends the output with a percent sign.
 
 ``` php
 // Called as NumberHelper. Output: 45.69%
@@ -153,7 +158,7 @@ echo Number::toPercentage(45.691873645);
 
 // Called with multiply. Output: 45.7%
 echo Number::toPercentage(0.45691, 1, [
-    'multiply' => true
+    'multiply' => true,
 ]);
 ```
 
@@ -215,11 +220,11 @@ resides.
 - If you pass an associated array, you can use the following keys:
 
 | Option | Description |
-|----|----|
-| places | Number of decimal places to use, ie. 2 |
-| precision | Maximum number of decimal places to use, ie. 2 |
-| pattern | An ICU number pattern to use for formatting the number ie. \#,###.00 |
-| locale | The locale name to use for formatting number, ie. "fr_FR". |
+| ---- | ---- |
+| places | Number of decimal places to use, i.e. 2 |
+| precision | Maximum number of decimal places to use, i.e. 2 |
+| pattern | An ICU number pattern to use for formatting the number i.e. `#,###.00` |
+| locale | The locale name to use for formatting number, i.e. "fr_FR". |
 | before | Text to display before the rendered number. |
 | after | Text to display after the rendered number. |
 
@@ -230,12 +235,12 @@ Example:
 echo $this->Number->format('123456.7890', [
     'places' => 2,
     'before' => '¥ ',
-    'after' => ' !'
+    'after' => ' !',
 ]);
 // Output '¥ 123,456.79 !'
 
 echo $this->Number->format('123456.7890', [
-    'locale' => 'fr_FR'
+    'locale' => 'fr_FR',
 ]);
 // Output '123 456,79 !'
 
@@ -243,12 +248,12 @@ echo $this->Number->format('123456.7890', [
 echo Number::format('123456.7890', [
     'places' => 2,
     'before' => '¥ ',
-    'after' => ' !'
+    'after' => ' !',
 ]);
 // Output '¥ 123,456.79 !'
 
 echo Number::format('123456.7890', [
-    'locale' => 'fr_FR'
+    'locale' => 'fr_FR',
 ]);
 // Output '123 456,79 !'
 ```
@@ -269,7 +274,7 @@ echo Number::ordinal(2);
 // Output '2nd'
 
 echo Number::ordinal(2, [
-    'locale' => 'fr_FR'
+    'locale' => 'fr_FR',
 ]);
 // Output '2e'
 
@@ -302,9 +307,9 @@ The `$options` parameter takes the same keys as `Number::format()` itself:
 
 | Option    | Description                                                |
 |-----------|------------------------------------------------------------|
-| places    | Number of decimal places to use, ie. 2                     |
-| precision | Maximum number of decimal places to use, ie. 2             |
-| locale    | The locale name to use for formatting number, ie. "fr_FR". |
+| places    | Number of decimal places to use, i.e. 2                     |
+| precision | Maximum number of decimal places to use, i.e. 2             |
+| locale    | The locale name to use for formatting number, i.e. "fr_FR". |
 | before    | Text to display before the rendered number.                |
 | after     | Text to display after the rendered number.                 |
 
@@ -315,7 +320,7 @@ Example:
 echo $this->Number->formatDelta('123456.7890', [
     'places' => 2,
     'before' => '[',
-    'after' => ']'
+    'after' => ']',
 ]);
 // Output '[+123,456.79]'
 
@@ -323,7 +328,7 @@ echo $this->Number->formatDelta('123456.7890', [
 echo Number::formatDelta('123456.7890', [
     'places' => 2,
     'before' => '[',
-    'after' => ']'
+    'after' => ']',
 ]);
 // Output '[+123,456.79]'
 ```
@@ -343,6 +348,6 @@ Example:
 
 ``` php
 Number::config('en_IN', \NumberFormatter::CURRENCY, [
-    'pattern' => '#,##,##0'
+    'pattern' => '#,##,##0',
 ]);
 ```

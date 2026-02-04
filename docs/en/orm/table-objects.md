@@ -1,3 +1,8 @@
+---
+title: "Table Objects"
+description: "Work with CakePHP Table objects: define models, configure associations, implement finders, use behaviors, and handle lifecycle callbacks."
+---
+
 # Table Objects
 
 `class` Cake\\ORM\\**Table**
@@ -70,7 +75,7 @@ class ArticlesTable extends Table
 
 ### Customizing the Entity Class a Table Uses
 
-By default table objects use an entity class based on naming conventions. For
+By default, table objects use an entity class based on naming conventions. For
 example if your table class is called `ArticlesTable` the entity would be
 `Article`. If the table class was `PurchaseOrdersTable` the entity would be
 `PurchaseOrder`. If however, you want to use an entity that doesn't follow the
@@ -142,13 +147,13 @@ more detail on how to use the events subsystem:
 $articles->save($article, ['customVariable1' => 'yourValue1']);
 
 // In ArticlesTable.php
-public function afterSave(Event $event, EntityInterface $entity, ArrayObject $options)
+public function afterSave(Event $event, EntityInterface $entity, ArrayObject $options): void
 {
     $customVariable = $options['customVariable1'];  // 'yourValue1'
     $options['customVariable2'] = 'yourValue2';
 }
 
-public function afterSaveCommit(Event $event, EntityInterface $entity, ArrayObject $options)
+public function afterSaveCommit(Event $event, EntityInterface $entity, ArrayObject $options): void
 {
     $customVariable = $options['customVariable1'];  // 'yourValue1'
     $customVariable = $options['customVariable2'];  // 'yourValue2'
@@ -273,14 +278,14 @@ Behaviors, can use this hook to add in validation methods.
 
 ### buildRules
 
-`method` Cake\\ORM\\Table::**buildRules(RulesChecker $rules): RulesChecker**()
+`method` Cake\\ORM\\Table::**buildRules**(RulesChecker $rules): RulesChecker
 
 The `Model.buildRules` event is fired after a rules instance has been
 created and after the `Table::buildRules()` method has been called.
 
 ### beforeRules
 
-`method` Cake\\ORM\\Table::**beforeRules**(EventInterface $event, EntityInterface $entity, ArrayObject $options, $operation): void
+`method` Cake\\ORM\\Table::**beforeRules**(EventInterface $event, EntityInterface $entity, ArrayObject $options, string $operation): void
 
 The `Model.beforeRules` event is fired before an entity has had rules applied. By
 stopping this event, you can halt the rules checking and set the result
@@ -288,7 +293,7 @@ of applying rules.
 
 ### afterRules
 
-`method` Cake\\ORM\\Table::**afterRules**(EventInterface $event, EntityInterface $entity, ArrayObject $options, $result, $operation): void
+`method` Cake\\ORM\\Table::**afterRules**(EventInterface $event, EntityInterface $entity, ArrayObject $options, bool $result, string $operation): void
 
 The `Model.afterRules` event is fired after an entity has rules applied. By
 stopping this event, you can return the final value of the rules checking
@@ -375,7 +380,7 @@ of the record being deleted in your Table's method.
 
 You can manage event priorities in one of a few ways:
 
-1.  Change the `priority` of a Behavior's listeners using the `priority`
+1. Change the `priority` of a Behavior's listeners using the `priority`
     option. This will modify the priority of **all** callback methods in the
     Behavior:
 
@@ -388,7 +393,7 @@ You can manage event priorities in one of a few ways:
     ]);
     ```
 
-2.  Modify the `priority` in your `Table` class by using the
+2. Modify the `priority` in your `Table` class by using the
     `Model.implementedEvents()` method. This allows you to assign a different
     priority per callback-function:
 
@@ -399,7 +404,7 @@ You can manage event priorities in one of a few ways:
         $events = parent::implementedEvents();
         $events['Model.beforeDelete'] = [
             'callable' => 'beforeDelete',
-            'priority' => 3
+            'priority' => 3,
         ];
 
         return $events;
@@ -408,7 +413,7 @@ You can manage event priorities in one of a few ways:
 
 ## Behaviors
 
-`method` Cake\\ORM\\Table::**addBehavior**($name, array $options = [])
+`method` Cake\\ORM\\Table::**addBehavior**(string $name, array $options = []): static
 
 <!-- start-behaviors -->
 
@@ -450,7 +455,7 @@ class ArticlesTable extends Table
             'events' => [
                 'Model.beforeSave' => [
                     'created_at' => 'new',
-                    'modified_at' => 'always'
+                    'modified_at' => 'always',
                 ]
             ]
         ]);
@@ -467,7 +472,7 @@ CakePHP in the chapter on [Behaviors](../orm/behaviors).
 
 ## Configuring Connections
 
-By default all table instances use the `default` database connection. If your
+By default, all table instances use the `default` database connection. If your
 application uses multiple database connections you will want to configure which
 tables use which connections. This is the `defaultConnectionName()` method:
 
@@ -489,7 +494,9 @@ class ArticlesTable extends Table
 
 <a id="table-locator-usage"></a>
 
-## Using the TableLocator<span id="table-registry-usage"></span>
+<a id="table-registry-usage"></a>
+
+## Using the TableLocator
 
 `class` Cake\\ORM\\**TableLocator**
 
@@ -499,7 +506,7 @@ few other useful features as well.
 
 ### Configuring Table Objects
 
-`method` Cake\\ORM\\TableLocator::**get**($alias, $config)
+`method` Cake\\ORM\\TableLocator::**get**(string $alias, array $options = []): Table
 
 When loading tables from the registry you can customize their dependencies, or
 use mock objects by providing an `$options` array:
@@ -512,7 +519,7 @@ $articles = FactoryLocator::get('Table')->get('Articles', [
     'schema' => $schemaObject,
     'entityClass' => 'Custom\EntityClass',
     'eventManager' => $eventManager,
-    'behaviors' => $behaviorRegistry
+    'behaviors' => $behaviorRegistry,
 ]);
 ```
 

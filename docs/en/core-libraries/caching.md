@@ -1,3 +1,8 @@
+---
+title: "Caching"
+description: "Implement caching in CakePHP: configure cache engines, use Redis/Memcached, cache queries, views, and optimize application performance."
+---
+
 # Caching
 
 `class` Cake\\Cache\\**Cache**
@@ -97,7 +102,7 @@ Cache::setConfig('short', [
     'className' => 'File',
     'duration' => '+1 hours',
     'path' => CACHE,
-    'prefix' => 'cake_short_'
+    'prefix' => 'cake_short_',
 ]);
 
 // Using a fully namespaced name.
@@ -219,7 +224,7 @@ automatically handle key distribution and failover across the cluster nodes.
   them as a pool.
 - `duration` Be aware that any duration greater than 30 days will be treated as real
   Unix time value rather than an offset from current time.
-- `options` Additional options for the memcached client. Should be an array of option =\> value.
+- `options` Additional options for the memcached client. Should be an array of option => value.
   Use the `\Memcached::OPT_*` constants as keys.
 
 <a id="cache-configuration-fallback"></a>
@@ -261,7 +266,7 @@ Cache::setConfig('redis', [
     'prefix' => 'cake_redis_',
     'host' => '127.0.0.1',
     'port' => 6379,
-    'fallback' => false
+    'fallback' => false,
 ]);
 ```
 
@@ -282,7 +287,7 @@ the config and destroy the adapter if it was constructed.
 
 `static` Cake\\Cache\\Cache::**write**(string $key, mixed $value, string $config = 'default'): bool
 
-`Cache::write()` will write a \$value to the Cache. You can read or
+`Cache::write()` will write a `$value` to the Cache. You can read or
 delete this value later by referring to it by `$key`. You may
 specify an optional configuration to store the cache in as well. If
 no `$config` is specified, default will be used. `Cache::write()`
@@ -317,7 +322,7 @@ save multiple network connections when using Memcached:
 ``` php
 $result = Cache::writeMany([
     'article-' . $slug => $article,
-    'article-' . $slug . '-comments' => $comments
+    'article-' . $slug . '-comments' => $comments,
 ]);
 
 // $result will contain
@@ -361,7 +366,7 @@ For example, you often want to cache remote service call results. You could use
 ``` php
 class IssueService
 {
-    public function allIssues($repo)
+    public function allIssues(string $repo): mixed
     {
         return Cache::remember($repo . '-issues', function () use ($repo) {
             return $this->fetchAll($repo);
@@ -429,7 +434,7 @@ CakePHP to use more efficient storage APIs where available. For example using
 ``` php
 $result = Cache::readMany([
     'article-' . $slug,
-    'article-' . $slug . '-comments'
+    'article-' . $slug . '-comments',
 ]);
 // $result will contain
 ['article-first-post' => '...', 'article-first-post-comments' => '...']
@@ -468,7 +473,7 @@ save multiple network connections when using Memcached:
 ``` php
 $result = Cache::deleteMany([
     'article-' . $slug,
-    'article-' . $slug . '-comments'
+    'article-' . $slug . '-comments',
 ]);
 // $result will contain
 ['article-first-post' => true, 'article-first-post-comments' => true]
@@ -576,7 +581,7 @@ remove all entries associated to the `article` group:
 
 ``` php
 // src/Model/Table/ArticlesTable.php
-public function afterSave($event, $entity, $options = [])
+public function afterSave(EventInterface $event, EntityInterface $entity, ArrayObject $options): void
 {
     if ($entity->isNew()) {
         Cache::clearGroup('article', 'site_home');
@@ -598,7 +603,7 @@ configurations, i.e.: having the same group:
  * A variation of previous example that clears all Cache configurations
  * having the same group
  */
-public function afterSave($event, $entity, $options = [])
+public function afterSave(EventInterface $event, EntityInterface $entity, ArrayObject $options): void
 {
     if ($entity->isNew()) {
         $configs = Cache::groupConfigs('article');
@@ -672,21 +677,19 @@ The required API for a CacheEngine is
 
 `class` Cake\\Cache\\**CacheEngine**
 
-`method` Cake\\Cache\\CacheEngine::**write**($key, $value)
+`method` Cake\\Cache\\CacheEngine::**set**(string $key, mixed $value, DateInterval|int|null $ttl = null): bool
 
-`method` Cake\\Cache\\CacheEngine::**read**($key)
+`method` Cake\\Cache\\CacheEngine::**get**(string $key, mixed $default = null): mixed
 
-`method` Cake\\Cache\\CacheEngine::**delete**($key): bool
+`method` Cake\\Cache\\CacheEngine::**delete**(string $key): bool
 
-`method` Cake\\Cache\\CacheEngine::**clear**($check): bool
+`method` Cake\\Cache\\CacheEngine::**clear**(): bool
 
-`method` Cake\\Cache\\CacheEngine::**clearGroup**($group): bool
+`method` Cake\\Cache\\CacheEngine::**clearGroup**(string $group): bool
 
-`method` Cake\\Cache\\CacheEngine::**decrement**($key, $offset = 1): int|false
+`method` Cake\\Cache\\CacheEngine::**decrement**(string $key, int $offset = 1): int|false
 
-`method` Cake\\Cache\\CacheEngine::**increment**($key, $offset = 1): int|false
-
-<a id="cache-events"></a>
+`method` Cake\\Cache\\CacheEngine::**increment**(string $key, int $offset = 1): int|false
 
 ## Cache Events
 

@@ -1,10 +1,13 @@
+---
+title: "Validation"
+description: "Validate data in CakePHP: build validators, define rules, create custom validators, validate forms, and ensure data integrity easily."
+---
+
 # Validation
 
 The validation package in CakePHP provides features to build validators that can
 validate arbitrary arrays of data with ease. You can find a [list of available
 Validation rules in the API](https://api.cakephp.org/5.x/class-Cake.Validation.Validation.html).
-
-<a id="creating-validators"></a>
 
 ## Creating Validators
 
@@ -99,16 +102,16 @@ which empty values are accepted and not forwarded to other validation rules for
 the named field. CakePHP provides empty value support for different shapes
 of data:
 
-1.  `allowEmptyString()` Should be used when you want to only accept
+1. `allowEmptyString()` Should be used when you want to only accept
     an empty string.
-2.  `allowEmptyArray()` Should be used when you want to accept an array.
-3.  `allowEmptyDate()` Should be used when you want to accept an empty string,
+2. `allowEmptyArray()` Should be used when you want to accept an array.
+3. `allowEmptyDate()` Should be used when you want to accept an empty string,
     or an array that is marshalled into a date field.
-4.  `allowEmptyTime()` Should be used when you want to accept an empty string,
+4. `allowEmptyTime()` Should be used when you want to accept an empty string,
     or an array that is marshalled into a time field.
-5.  `allowEmptyDateTime()` Should be used when you want to accept an empty
+5. `allowEmptyDateTime()` Should be used when you want to accept an empty
     string or an array that is marshalled into a datetime or timestamp field.
-6.  `allowEmptyFile()` Should be used when you want to accept an array that
+6. `allowEmptyFile()` Should be used when you want to accept an array that
     contains an empty uploaded file.
 
 You also can use following specific validators: `notEmptyString()`, `notEmptyArray()`, `notEmptyFile()`, `notEmptyDate()`, `notEmptyTime()`, `notEmptyDateTime()`.
@@ -163,29 +166,29 @@ can also use any callable, including anonymous functions, as validation rules:
 // Use a global function
 $validator->add('title', 'custom', [
     'rule' => 'validate_title',
-    'message' => 'The title is not valid'
+    'message' => 'The title is not valid',
 ]);
 
 // Use an array callable that is not in a provider
 $validator->add('title', 'custom', [
     'rule' => [$this, 'method'],
-    'message' => 'The title is not valid'
+    'message' => 'The title is not valid',
 ]);
 
 // Use a closure
 $extra = 'Some additional value needed inside the closure';
 $validator->add('title', 'custom', [
-    'rule' => function ($value, $context) use ($extra) {
+    'rule' => function (mixed $value, array $context) use ($extra) {
         // Custom logic that returns true/false
     },
-    'message' => 'The title is not valid'
+    'message' => 'The title is not valid',
 ]);
 
 // Use a rule from a custom provider
 $validator->add('title', 'custom', [
     'rule' => 'customRule',
     'provider' => 'custom',
-    'message' => 'The title is not unique enough'
+    'message' => 'The title is not unique enough',
 ]);
 ```
 
@@ -225,7 +228,7 @@ overwritten by the ones returned from the validation rule method:
 
 ``` php
 $validator->add('length', 'custom', [
-    'rule' => function ($value, $context) {
+    'rule' => function (mixed $value, array $context) {
         if (!$value) {
             return false;
         }
@@ -240,11 +243,9 @@ $validator->add('length', 'custom', [
 
         return true;
     },
-    'message' => 'Generic error message used when `false` is returned'
+    'message' => 'Generic error message used when `false` is returned',
 ]);
 ```
-
-<a id="conditional-validation"></a>
 
 ### Conditional Validation
 
@@ -259,7 +260,7 @@ not a particular rule should be applied:
 ``` php
 $validator->add('picture', 'file', [
     'rule' => ['mimeType', ['image/jpeg', 'image/png']],
-    'on' => function ($context) {
+    'on' => function (array $context): bool {
         return !empty($context['data']['show_profile_picture']);
     }
 ]);
@@ -282,7 +283,7 @@ determines whether or not the rule should be applied. For example, a field is
 sometimes allowed to be empty:
 
 ``` php
-$validator->allowEmptyString('tax', 'This field is required', function ($context) {
+$validator->allowEmptyString('tax', 'This field is required', function (array $context): bool {
     return !$context['data']['is_taxable'];
 });
 ```
@@ -291,7 +292,7 @@ Likewise, a field can be required to be populated when certain conditions are
 met:
 
 ``` php
-$validator->notEmptyString('email_frequency', 'This field is required', function ($context) {
+$validator->notEmptyString('email_frequency', 'This field is required', function (array $context): bool {
     return !empty($context['data']['wants_newsletter']);
 });
 ```
@@ -303,7 +304,7 @@ Further it's also possible to require a field to be present under certain
 conditions only:
 
 ``` php
-$validator->requirePresence('full_name', function ($context) {
+$validator->requirePresence('full_name', function (array $context): bool {
     if (isset($context['data']['action'])) {
         return $context['data']['action'] === 'subscribe';
     }
@@ -374,8 +375,6 @@ When enabled all fields will stop validation on the first failing rule instead
 of checking all possible rules. In this case only a single error message will
 appear under the form field.
 
-<a id="adding-validation-providers"></a>
-
 ### Adding Validation Providers
 
 The `Validator`, `ValidationSet` and `ValidationRule` classes do not
@@ -406,7 +405,7 @@ the `provider` key in your rule:
 // Use a rule from the table provider
 $validator->add('title', 'custom', [
     'rule' => 'customTableMethod',
-    'provider' => 'table'
+    'provider' => 'table',
 ]);
 ```
 
@@ -447,7 +446,7 @@ class PostsTable extends Table
         // use the provider in a field validation rule
         $validator->add('phoneField', 'myCustomRuleNameForPhone', [
             'rule' => 'phone',
-            'provider' => 'fr'
+            'provider' => 'fr',
         ]);
 
         return $validator;
@@ -511,7 +510,7 @@ $validator->addNestedMany(
     'comments',
     $commentValidator,
     'Invalid comment',
-    'create'
+    'create',
 );
 ```
 
@@ -564,7 +563,7 @@ $validator
     ->notEmptyString('comment', 'You need to give a comment.');
 
 $errors = $validator->validate($this->request->getData());
-if (empty($errors)) {
+if (!$errors) {
     // Send an email.
 }
 ```
@@ -579,7 +578,7 @@ $errors = [
 ```
 
 If you have multiple errors on a single field, an array of error messages will
-be returned per field. By default the `getErrors()` method applies rules for
+be returned per field. By default, the `getErrors()` method applies rules for
 the 'create' mode. If you'd like to apply 'update' rules you can do the
 following:
 
@@ -675,3 +674,19 @@ $validator
 Core rules that take additional parameters should have an array for the
 `rule` key that contains the rule as the first element, and the additional
 parameters as the remaining parameters.
+
+### IP and Range Validation
+
+You can validate that a value is a valid IP address or an IP range (subnet)
+using the `ipOrRange()` rule:
+
+``` php
+$validator->add('ip_address', 'validRange', [
+    'rule' => 'ipOrRange',
+    'message' => 'Please provide a valid IP or IP range.',
+]);
+```
+
+::: info Added in version 5.3.0
+The `ipOrRange()` validation rule was added.
+:::

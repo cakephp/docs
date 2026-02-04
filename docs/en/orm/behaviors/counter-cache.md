@@ -1,3 +1,8 @@
+---
+title: "CounterCache"
+description: "Maintain count caches in CakePHP: use CounterCacheBehavior to automatically update related record counts for better performance."
+---
+
 # CounterCache
 
 `class` Cake\\ORM\\Behavior\\**CounterCacheBehavior**
@@ -23,7 +28,7 @@ class CommentsTable extends Table
     public function initialize(array $config): void
     {
         $this->addBehavior('CounterCache', [
-            'Articles' => ['comment_count']
+            'Articles' => ['comment_count'],
         ]);
     }
 }
@@ -50,7 +55,7 @@ The counter **will not** be updated when you
 
 ## Advanced Usage
 
-If you need to keep a cached counter for less than all of the related records,
+If you need to keep a cached counter for less than all the related records,
 you can supply additional conditions or finder methods to generate a
 counter value:
 
@@ -145,9 +150,9 @@ It is possible to use the CounterCache behavior in a `belongsToMany` association
 First, you need to add the `through` and `cascadeCallbacks` options to the
 `belongsToMany` association:
 
-``` text
-'through'          => 'CommentsArticles',
-'cascadeCallbacks' => true
+``` php
+'through' => 'CommentsArticles',
+'cascadeCallbacks' => true,
 ```
 
 Also see [Using The Through Option](../../orm/associations#using-the-through-option) how to configure a custom join table.
@@ -156,7 +161,7 @@ The `CommentsArticles` is the name of the junction table classname.
 If you don't have it you should create it with the bake CLI tool.
 
 In this `src/Model/Table/CommentsArticlesTable.php` you then need to add the behavior
-with the same code as described above.:
+with the same code as described above.
 
 ``` php
 $this->addBehavior('CounterCache', [
@@ -168,11 +173,11 @@ Finally clear all caches with `bin/cake cache clear_all` and try it out.
 
 ## Manually updating counter caches
 
-`method` Cake\\ORM\\Behavior\\CounterCacheBehavior::**updateCounterCache(?string $assocName = null, int $limit = 100, ?int $page = null): void**()
+`method` Cake\\ORM\\Behavior\\CounterCacheBehavior::**updateCounterCache**(?string $assocName = null, int $limit = 100, ?int $page = null): void
 
 The `updateCounterCache()` method allows you to update the counter cache values
 for all records of one or all configured associations in batches. This can be useful,
-for example, to update the counter cache after importing data directly into the database.:
+for example, to update the counter cache after importing data directly into the database.
 
 ``` php
 // Update the counter cache for all configured associations

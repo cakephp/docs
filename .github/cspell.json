@@ -64,7 +64,9 @@
     "Classes",
     "Redirect",
     "Layout",
-    "full"
+    "full",
+    "olde",
+    "olle"
   ],
   "ignoreRegExpList": [
     "\\$[a-zA-Z_][a-zA-Z0-9_]*",

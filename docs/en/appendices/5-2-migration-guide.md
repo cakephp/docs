@@ -1,6 +1,11 @@
+---
+title: "5.2 Migration Guide"
+description: "Migrate to CakePHP 5.2: understand new features, deprecations, breaking changes, and upgrade your application from 5.0/5.1 smoothly."
+---
+
 # 5.2 Migration Guide
 
-The 5.2.0 release is a backwards compatible with 5.0. It adds new functionality
+The 5.2.0 release is backwards compatible with 5.0. It adds new functionality
 and introduces new deprecations. Any functionality deprecated in 5.x will be
 removed in 6.0.0.
 
@@ -10,7 +15,7 @@ The [upgrade tool](../appendices/migration-guides) provides rector rules for
 automating some of the migration work. Run rector before updating your
 `composer.json` dependencies:
 
-``` text
+``` bash
 bin/cake upgrade rector --rules cakephp52 <path/to/app/src>
 ```
 
@@ -45,7 +50,7 @@ bin/cake upgrade rector --rules cakephp52 <path/to/app/src>
 ### Event
 
 - Returning values from event listeners / callbacks is deprecated. Use `$event->setResult()`
-  instead or `$event->stopPropogation()` to just stop the event propogation.
+  instead or `$event->stopPropagation()` to just stop the event propagation.
 
 ### View
 

@@ -1,3 +1,8 @@
+---
+title: "Plugin Class"
+description: "Manage CakePHP plugins: locate plugin resources, resolve paths, configure plugin namespaces, and access plugin class files dynamically."
+---
+
 # Plugin Class
 
 `class` Cake\\Core\\**Plugin**

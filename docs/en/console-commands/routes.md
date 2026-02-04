@@ -1,3 +1,8 @@
+---
+title: "Routes Tool"
+description: "Debug CakePHP routes: test URL parsing, check route matches, inspect routing configuration, and troubleshoot request routing issues via CLI."
+---
+
 # Routes Tool
 
 The routes tool provides a simple to use CLI interface for testing and debugging

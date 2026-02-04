@@ -1,3 +1,8 @@
+---
+title: "Using CakePHP"
+description: "Index to key CakePHP topics, linking to installation, configuration, routing, controllers, views, ORM, security, testing, deployment, and contributing guides."
+---
+
 # Using CakePHP
 
 Introduction to all the key parts of CakePHP:

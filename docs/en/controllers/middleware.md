@@ -1,3 +1,8 @@
+---
+title: "Middleware"
+description: "Implement CakePHP middleware: wrap requests in reusable layers, handle PSR-15 middleware, configure error handling, and build HTTP pipelines."
+---
+
 # Middleware
 
 Middleware objects give you the ability to 'wrap' your application in re-usable,
@@ -59,8 +64,6 @@ CakePHP provides several middleware to handle common tasks in web applications:
   provides configurable rate limiting to protect against abuse and ensure fair
   usage of resources.
 
-<a id="using-middleware"></a>
-
 ## Using Middleware
 
 Middleware can be applied to your application globally, to individual
@@ -118,7 +121,7 @@ $middlewareQueue->insertAt(2, $layer);
 // an exception will be raised.
 $middlewareQueue->insertBefore(
     'Cake\Error\Middleware\ErrorHandlerMiddleware',
-    $layer
+    $layer,
 );
 
 // Insert after another middleware.
@@ -126,7 +129,7 @@ $middlewareQueue->insertBefore(
 // middleware will added to the end.
 $middlewareQueue->insertAfter(
     'Cake\Error\Middleware\ErrorHandlerMiddleware',
-    $layer
+    $layer,
 );
 ```
 
@@ -189,7 +192,7 @@ class TrackingCookieMiddleware implements MiddlewareInterface
 {
     public function process(
         ServerRequestInterface $request,
-        RequestHandlerInterface $handler
+        RequestHandlerInterface $handler,
     ): ResponseInterface
     {
         // Calling $handler->handle() delegates control to the *next* middleware
@@ -201,7 +204,7 @@ class TrackingCookieMiddleware implements MiddlewareInterface
             $response = $response->withCookie(new Cookie(
                 'landing_page',
                 $request->getRequestTarget(),
-                $expiry
+                $expiry,
             ));
         }
 
@@ -234,8 +237,6 @@ class Application
 }
 ```
 
-<a id="routing-middleware"></a>
-
 ## Routing Middleware
 
 Routing middleware is responsible for applying your application's routes and
@@ -250,14 +251,12 @@ public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue
 }
 ```
 
-<a id="encrypted-cookie-middleware"></a>
-
 ## Encrypted Cookie Middleware
 
 If your application has cookies that contain data you want to obfuscate and
 protect against user tampering, you can use CakePHP's encrypted cookie
 middleware to transparently encrypt and decrypt cookie data via middleware.
-Cookie data is encrypted with via OpenSSL using AES:
+Cookie data is encrypted via OpenSSL using AES:
 
 ``` php
 use Cake\Http\Middleware\EncryptedCookieMiddleware;
@@ -265,7 +264,7 @@ use Cake\Http\Middleware\EncryptedCookieMiddleware;
 $cookies = new EncryptedCookieMiddleware(
     // Names of cookies to protect
     ['secrets', 'protected'],
-    Configure::read('Security.cookieKey')
+    Configure::read('Security.cookieKey'),
 );
 
 $middlewareQueue->add($cookies);
@@ -277,8 +276,6 @@ $middlewareQueue->add($cookies);
 
 The encryption algorithms and padding style used by the cookie middleware are
 backwards compatible with `CookieComponent` from earlier versions of CakePHP.
-
-<a id="body-parser-middleware"></a>
 
 ## Body Parser Middleware
 

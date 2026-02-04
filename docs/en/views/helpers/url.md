@@ -1,3 +1,8 @@
+---
+title: "Url"
+description: "Generate URLs in CakePHP: use UrlHelper to create links, reverse routing, build URLs with parameters, and maintain URL consistency."
+---
+
 # Url
 
 `class` Cake\\View\\Helper\\**UrlHelper**(View $view, array $config = [])
@@ -133,7 +138,7 @@ must return `true` or `'force'` for the timestamp to be appended:
 echo $this->Html->meta([
     'rel' => 'preload',
     'href' => $this->Url->assetUrl(
-        '/assets/fonts/your-font-pack/your-font-name.woff2'
+        '/assets/fonts/your-font-pack/your-font-name.woff2',
     ),
     'as' => 'font',
 ]);
@@ -166,7 +171,7 @@ asset cache busting parameters you can use the `assetUrlClassName` option:
 
 ``` php
 // In view initialize
-$this->loadHelper('Url', ['assetUrlClassName' => AppAsset::class]);
+$this->addHelper('Url', ['assetUrlClassName' => AppAsset::class]);
 ```
 
 When using the `assetUrlClassName` you must implement the same methods as

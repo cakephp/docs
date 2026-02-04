@@ -1,3 +1,8 @@
+---
+title: "Deleting Data"
+description: "Delete data in CakePHP ORM. Remove single entities, cascade deletes, bulk operations with deleteAll, and handle strict deletes with transactions."
+---
+
 # Deleting Data
 
 `class` Cake\\ORM\\**Table**
@@ -17,17 +22,17 @@ $result = $this->Articles->delete($entity);
 
 When deleting entities a few things happen:
 
-1.  The [delete rules](../orm/validation#application-rules) will be applied. If the rules
+1. The [delete rules](../orm/validation#application-rules) will be applied. If the rules
     fail, deletion will be prevented.
-2.  The `Model.beforeDelete` event is triggered. If this event is stopped, the
+2. The `Model.beforeDelete` event is triggered. If this event is stopped, the
     delete will be aborted and the event's result will be returned.
-3.  The entity will be deleted.
-4.  All dependent associations will be deleted. If associations are being deleted
+3. The entity will be deleted.
+4. All dependent associations will be deleted. If associations are being deleted
     as entities, additional events will be dispatched.
-5.  Any junction table records for BelongsToMany associations will be removed.
-6.  The `Model.afterDelete` event will be triggered.
+5. Any junction table records for BelongsToMany associations will be removed.
+6. The `Model.afterDelete` event will be triggered.
 
-By default all deletes happen within a transaction. You can disable the
+By default, all deletes happen within a transaction. You can disable the
 transaction with the atomic option:
 
 ``` php
@@ -45,7 +50,7 @@ The `$options` parameter supports the following options:
 
 When deleting entities, associated data can also be deleted. If your HasOne and
 HasMany associations are configured as `dependent`, delete operations will
-'cascade' to those entities as well. By default entities in associated tables
+'cascade' to those entities as well. By default, entities in associated tables
 are removed using `Cake\ORM\Table::deleteAll()`. You can elect to
 have the ORM load related entities, and delete them individually by setting the
 `cascadeCallbacks` option to `true`. A sample HasMany association with both
@@ -84,7 +89,7 @@ records with these method **will** trigger events.
 
 ### deleteAll()
 
-`method` Cake\\ORM\\Table::**deleteAll**($conditions): int
+`method` Cake\\ORM\\Table::**deleteAll**(QueryExpression|Closure|array|string|null $conditions): int
 
 There may be times when deleting rows one by one is not efficient or useful.
 In these cases it is more performant to use a bulk-delete to remove many rows at

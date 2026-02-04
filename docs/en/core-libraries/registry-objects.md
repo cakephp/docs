@@ -1,3 +1,8 @@
+---
+title: "Registry Objects"
+description: "Use CakePHP registries: manage object instances, configure on-the-fly, locate tables, helpers, components with the registry pattern."
+---
+
 # Registry Objects
 
 The registry classes provide a simple way to create and retrieve loaded
@@ -9,7 +14,7 @@ for Helpers, Behaviors, and Tasks in addition to Components.
 
 ## Loading Objects
 
-Objects can be loaded on-the-fly using add\<registry-object\>()
+Objects can be loaded on-the-fly using `add<registry-object>()`
 Example:
 
 ``` php

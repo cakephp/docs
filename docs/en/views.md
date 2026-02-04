@@ -1,3 +1,8 @@
+---
+title: "Views"
+description: "Create dynamic templates with CakePHP views: render HTML, manage layouts, use helpers, implement blocks, cells, and build reusable UI components."
+---
+
 # Views
 
 `class` Cake\\View\\**View**
@@ -54,8 +59,6 @@ class AppView extends View
 }
 ```
 
-<a id="view-templates"></a>
-
 ## View Templates
 
 The view layer of CakePHP is how you speak to your users. Most of the time your
@@ -96,7 +99,7 @@ The following is an example using `foreach`:
 ``` php
 <ul>
 <?php foreach ($todo as $item): ?>
-  <li><?= $item ?></li>
+    <li><?= $item ?></li>
 <?php endforeach; ?>
 </ul>
 ```
@@ -105,11 +108,11 @@ Another example, using if/elseif/else. Notice the colons:
 
 ``` php
 <?php if ($username === 'sally'): ?>
-   <h3>Hi Sally</h3>
+    <h3>Hi Sally</h3>
 <?php elseif ($username === 'joe'): ?>
-   <h3>Hi Joe</h3>
+    <h3>Hi Joe</h3>
 <?php else: ?>
-   <h3>Hi unknown user</h3>
+    <h3>Hi unknown user</h3>
 <?php endif; ?>
 ```
 
@@ -156,7 +159,7 @@ the `h()` function:
 
 ### Setting View Variables
 
-`method` Cake\\View\\View::**set**(string $var, mixed $value)
+`method` Cake\\View\\View::**set**(array|string $name, mixed $value = null): static
 
 Views have a `set()` method that is analogous to the `set()` found in
 Controller objects. Using set() from your view file will add the variables to
@@ -171,8 +174,6 @@ $this->set('activeMenuButton', 'posts');
 
 Then, in your layout, the `$activeMenuButton` variable will be available and
 contain the value 'posts'.
-
-<a id="extending-views"></a>
 
 ### Extending Views
 
@@ -308,7 +309,7 @@ $this->append('sidebar', $this->element('sidebar/popular_topics'));
 If you need to clear or overwrite a block there are a couple of alternatives.
 The `reset()` method will clear or overwrite a block at any time. The
 `assign()` method with an empty content string can also be used to clear the
-specified block.:
+specified block.
 
 ``` php
 // Clear the previous content from the sidebar block.
@@ -573,7 +574,7 @@ the parameter array (in the same way that `Controller::set()` in the
 controller works with template files). In the above example, the
 **templates/element/helpbox.php** file can use the `$helptext` variable:
 
-``` text
+``` php
 // Inside templates/element/helpbox.php
 echo $helptext; // Outputs `Oh, this text is very helpful.`
 ```
@@ -637,13 +638,13 @@ cached result. For example:
 echo $this->element(
     'helpbox',
     ['var' => $var],
-    ['cache' => ['key' => 'first_use', 'config' => 'view_long']]
+    ['cache' => ['key' => 'first_use', 'config' => 'view_long']],
 );
 
 echo $this->element(
     'helpbox',
-    ['var' => $differenVar],
-    ['cache' => ['key' => 'second_use', 'config' => 'view_long']]
+    ['var' => $differentVar],
+    ['cache' => ['key' => 'second_use', 'config' => 'view_long']],
 );
 ```
 
@@ -713,10 +714,8 @@ echo $this->cache(function () use ($user, $article) {
 }, ['key' => 'my_view_key']);
 ```
 
-By default cached view content will go into the `View::$elementCache` cache
+By default, cached view content will go into the `View::$elementCache` cache
 config, but you can use the `config` option to change this.
-
-<a id="view-events"></a>
 
 ## View Events
 
@@ -757,7 +756,7 @@ use Cake\View\View;
 
 class PdfView extends View
 {
-    public function render($view = null, $layout = null)
+    public function render(?string $view = null, ?string $layout = null): string
     {
         // Custom logic here.
     }

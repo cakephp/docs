@@ -1,3 +1,8 @@
+---
+title: "CMS Tutorial - Authorization"
+description: "Implement authorization in CakePHP CMS with policy classes. Control user permissions, check resource access, and secure articles with the Authorization plugin."
+---
+
 # CMS Tutorial - Authorization
 
 With users now able to login to our CMS, we want to apply authorization rules
@@ -109,25 +114,25 @@ use Authorization\IdentityInterface;
 
 class ArticlePolicy
 {
-    public function canAdd(IdentityInterface $user, Article $article)
+    public function canAdd(IdentityInterface $user, Article $article): bool
     {
         // All logged in users can create articles.
         return true;
     }
 
-    public function canEdit(IdentityInterface $user, Article $article)
+    public function canEdit(IdentityInterface $user, Article $article): bool
     {
         // logged in users can edit their own articles.
         return $this->isAuthor($user, $article);
     }
 
-    public function canDelete(IdentityInterface $user, Article $article)
+    public function canDelete(IdentityInterface $user, Article $article): bool
     {
         // logged in users can delete their own articles.
         return $this->isAuthor($user, $article);
     }
 
-    protected function isAuthor(IdentityInterface $user, Article $article)
+    protected function isAuthor(IdentityInterface $user, Article $article): bool
     {
         return $article->user_id === $user->getIdentifier();
     }
@@ -242,7 +247,7 @@ public function edit($slug)
     if ($this->request->is(['post', 'put'])) {
         $this->Articles->patchEntity($article, $this->request->getData(), [
             // Added: Disable modification of user_id.
-            'accessibleFields' => ['user_id' => false]
+            'accessibleFields' => ['user_id' => false],
         ]);
         if ($this->Articles->save($article)) {
             $this->Flash->success(__('Your article has been updated.'));

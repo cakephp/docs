@@ -1,6 +1,11 @@
+---
+title: "5.1 Migration Guide"
+description: "Migrate to CakePHP 5.1: explore new features, deprecations, improvements, and upgrade your 5.0 application with this comprehensive guide."
+---
+
 # 5.1 Migration Guide
 
-The 5.1.0 release is a backwards compatible with 5.0. It adds new functionality
+The 5.1.0 release is backwards compatible with 5.0. It adds new functionality
 and introduces new deprecations. Any functionality deprecated in 5.x will be
 removed in 6.0.0.
 
@@ -10,7 +15,7 @@ The [upgrade tool](../appendices/migration-guides) provides rector rules for
 automating some of the migration work. Run rector before updating your
 `composer.json` dependencies:
 
-``` text
+``` bash
 bin/cake upgrade rector --rules cakephp51 <path/to/app/src>
 ```
 

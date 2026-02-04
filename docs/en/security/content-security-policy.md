@@ -1,3 +1,8 @@
+---
+title: "Content Security Policy Middleware"
+description: "Implement CSP in CakePHP: configure Content-Security-Policy headers, manage nonces, directives with CspMiddleware for XSS protection."
+---
+
 # Content Security Policy Middleware
 
 The `CspMiddleware` makes it simpler to add Content-Security-Policy headers in
@@ -38,7 +43,7 @@ and `strict-dynamic` for increased security and easier maintenance:
 
 ``` php
 $policy = [
-    // Must exist even if empty to set nonce for for script-src
+    // Must exist even if empty to set nonce for script-src
     'script-src' => [],
     'style-src' => [],
 ];

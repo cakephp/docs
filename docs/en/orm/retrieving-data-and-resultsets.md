@@ -1,3 +1,8 @@
+---
+title: "Retrieving Data & Results Sets"
+description: "Retrieve data with CakePHP: find entities, use finders, work with result sets, debug queries, and implement custom finder methods efficiently."
+---
+
 # Retrieving Data & Results Sets
 
 `class` Cake\\ORM\\**Table**
@@ -136,7 +141,7 @@ You can also provide many commonly used options to `find()`:
 $query = $articles->find('all',
     conditions: ['Articles.created >' => new DateTime('-10 days')],
     contain: ['Authors', 'Comments'],
-    limit: 10
+    limit: 10,
 );
 ```
 
@@ -174,7 +179,7 @@ you can pass query objects to your controllers, we recommend that you package
 your queries up as [Custom Find Methods](#custom-find-methods) instead. Using custom finder
 methods will let you re-use your queries and make testing easier.
 
-By default queries and result sets will return [Entities](../orm/entities) objects. You
+By default, queries and result sets will return [Entities](../orm/entities) objects. You
 can retrieve basic arrays by disabling hydration:
 
 ``` php
@@ -302,32 +307,32 @@ virtual fields in the results of `find(list)`.
 ### Customize Key-Value Output
 
 Lastly it is possible to use closures to access entity accessor methods in your
-list finds. :
+list finds.
 
 ``` php
 // In your Authors Entity create a virtual field to be used as the displayField:
 protected function _getLabel()
 {
     return $this->_fields['first_name'] . ' ' . $this->_fields['last_name']
-      . ' / ' . __('User ID %s', $this->_fields['user_id']);
+        . ' / ' . __('User ID %s', $this->_fields['user_id']);
 }
 ```
 
 This example shows using the `_getLabel()` accessor method from
-the Author entity. :
+the Author entity.
 
 ``` php
 // In your finders/controller:
 $query = $articles->find('list',
-        keyField: 'id',
-        valueField: function ($article) {
-            return $article->author->get('label');
-        }
-    )
+    keyField: 'id',
+    valueField: function ($article) {
+        return $article->author->get('label');
+    },
+)
     ->contain('Authors');
 ```
 
-You can also fetch the label in the list directly using. :
+You can also fetch the label in the list directly using.
 
 ``` php
 // In AuthorsTable::initialize():
@@ -336,12 +341,10 @@ $this->setDisplayField('label'); // Will utilize Author::_getLabel()
 $query = $authors->find('list'); // Will utilize AuthorsTable::getDisplayField()
 ```
 
-<a id="finding-threaded-data"></a>
-
 ## Finding Threaded Data
 
 The `find('threaded')` finder returns nested entities that are threaded
-together through a key field. By default this field is `parent_id`. This
+together through a key field. By default, this field is `parent_id`. This
 finder allows you to access data stored in an 'adjacency list' style table. All
 entities matching a given `parent_id` are placed under the `children`
 attribute:
@@ -353,7 +356,7 @@ $query = $comments->find('threaded');
 // Expanded default values
 $query = $comments->find('threaded',
     keyField: $comments->primaryKey(),
-    parentField: 'parent_id'
+    parentField: 'parent_id',
 );
 $results = $query->toArray();
 
@@ -388,7 +391,7 @@ use Cake\ORM\Table;
 
 class ArticlesTable extends Table
 {
-    public function findOwnedBy(SelectQuery $query, User $user)
+    public function findOwnedBy(SelectQuery $query, User $user): SelectQuery
     {
         return $query->where(['author_id' => $user->id]);
     }
@@ -412,8 +415,6 @@ methods can also be defined on [Behaviors](../orm/behaviors).
 If you need to modify the results after they have been fetched you should use
 a [Map Reduce](#map-reduce) function to modify the results. The map reduce features
 replace the 'afterFind' callback found in previous versions of CakePHP.
-
-<a id="dynamic-finders"></a>
 
 ## Dynamic Finders
 
@@ -490,7 +491,7 @@ If you prefer to use join functions, you can look at
 
 ## Eager Loading Associations Via Contain
 
-By default CakePHP does not load **any** associated data when using `find()`.
+By default, CakePHP does not load **any** associated data when using `find()`.
 You need to 'contain' or eager-load each association you want loaded in your
 results.
 
@@ -518,7 +519,7 @@ associations to be loaded:
 
 ``` php
 $query = $articles->find()->contain([
-    'Authors' => ['Addresses'], 'Comments' => ['Authors']
+    'Authors' => ['Addresses'], 'Comments' => ['Authors'],
 ]);
 ```
 
@@ -527,7 +528,7 @@ Alternatively, you can express nested associations using the dot notation:
 ``` php
 $query = $articles->find()->contain([
     'Authors.Addresses',
-    'Comments.Authors'
+    'Comments.Authors',
 ]);
 ```
 
@@ -536,7 +537,7 @@ You can eager load associations as deep as you like:
 ``` php
 $query = $products->find()->contain([
     'Shops.Cities.Countries',
-    'Shops.Managers'
+    'Shops.Managers',
 ]);
 ```
 
@@ -544,7 +545,7 @@ Which is equivalent to calling:
 
 ``` php
 $query = $products->find()->contain([
-    'Shops' => ['Cities.Countries', 'Managers']
+    'Shops' => ['Cities.Countries', 'Managers'],
 ]);
 ```
 
@@ -552,10 +553,10 @@ You can select fields from all associations with multiple `contain()`
 statements:
 
 ``` php
-$query = $this->find()->select([
+$query = $products->find()->select([
     'Realestates.id',
     'Realestates.title',
-    'Realestates.description'
+    'Realestates.description',
 ])
 ->contain([
     'RealestateAttributes' => [
@@ -703,7 +704,7 @@ option to sort the data in those associations:
 ``` php
 $query->contain([
     'Comments' => [
-        'sort' => ['Comments.created' => 'DESC']
+        'sort' => ['Comments.created' => 'DESC'],
     ]
 ]);
 ```
@@ -996,7 +997,7 @@ the resulting data from your queries. ResultSets are a [Collection](../core-libr
 and you can use any collection method on ResultSet objects.
 
 Result set objects will lazily load rows from the underlying prepared statement.
-By default results will be buffered in memory allowing you to iterate a result
+By default, results will be buffered in memory allowing you to iterate a result
 set multiple times, or cache and iterate the results.
 
 Result sets allow you to cache/serialize or JSON encode results for API
@@ -1108,15 +1109,13 @@ $row = $result->skip(4)->first();
 ### Checking if a ResultSet is Empty
 
 You can use the `isEmpty()` method on a ResultSet object to see if it
-has any rows in it.:
+has any rows in it.
 
 ``` php
 // Check results
 $results = $query->all();
 $results->isEmpty();
 ```
-
-<a id="loading-additional-associations"></a>
 
 ### Loading Additional Associations
 
@@ -1263,7 +1262,7 @@ look something like this:
     'awesome' => 39,
     'impressive' => 57,
     'outstanding' => 10,
-    'mind-blowing' => 83
+    'mind-blowing' => 83,
 ]
 ```
 
@@ -1281,7 +1280,7 @@ $mapper = function ($rel, $key, $mr) {
 
 The intermediate array will be like the following:
 
-``` text
+``` php
 [
     1 => [2, 3, 4, 5, -3, -5],
     2 => [-1],
@@ -1327,7 +1326,7 @@ $fakeFriends = $friends->find()
 
 This would return an array similar to this:
 
-``` text
+``` php
 [
     1 => [2, 4],
     3 => [6]
@@ -1358,17 +1357,17 @@ This is particularly useful for building custom finder methods as described in t
 [Custom Find Methods](#custom-find-methods) section:
 
 ``` php
-public function findPublished(SelectQuery $query)
+public function findPublished(SelectQuery $query): SelectQuery
 {
     return $query->where(['published' => true]);
 }
 
-public function findRecent(SelectQuery $query)
+public function findRecent(SelectQuery $query): SelectQuery
 {
     return $query->where(['created >=' => new DateTime('1 day ago')]);
 }
 
-public function findCommonWords(SelectQuery $query)
+public function findCommonWords(SelectQuery $query): SelectQuery
 {
     // Same as in the common words example in the previous section
     $mapper = ...;

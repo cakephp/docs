@@ -1,3 +1,8 @@
+---
+title: "Migration Guides"
+description: "Upgrade CakePHP versions: follow migration guides for each release, understand breaking changes, and smoothly transition between versions."
+---
+
 # Migration Guides
 
 Migration guides contain information regarding the new features introduced in
@@ -12,7 +17,7 @@ method renames and signature updates.
 
 To use the upgrade tool:
 
-``` text
+``` bash
 # Install the upgrade tool
 git clone https://github.com/cakephp/upgrade
 cd upgrade
@@ -32,4 +37,3 @@ to ensure the tool can resolve class names correctly.
 - [5 2 Migration Guide](5-2-migration-guide)
 - [5 3 Migration Guide](5-3-migration-guide)
 - [5 4 Migration Guide](5-4-migration-guide)
-- [Phpunit10](phpunit10)

@@ -1,3 +1,8 @@
+---
+title: "Security"
+description: "Secure your CakePHP app: implement CSRF protection, CSP headers, HTTPS enforcement, form protection, and security utilities best practices."
+---
+
 # Security
 
 CakePHP provides you some tools to secure your application. In addition to the

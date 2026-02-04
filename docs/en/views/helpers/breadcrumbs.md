@@ -1,3 +1,8 @@
+---
+title: "Breadcrumbs"
+description: "Create breadcrumbs in CakePHP: use BreadcrumbsHelper to build navigation trails, customize rendering, and improve user navigation."
+---
+
 # Breadcrumbs
 
 `class` Cake\\View\\Helper\\**BreadcrumbsHelper**(View $view, array $config = [])
@@ -10,7 +15,7 @@ of a breadcrumbs trail for your app.
 You can add a crumb to the list using the `add()` method. It takes three
 arguments:
 
-- **title** The string to be displayed as a the title of the crumb
+- **title** The string to be displayed as the title of the crumb
 - **url** A string or an array of parameters that will be given to the
   [Url](../../views/helpers/url)
 - **options** An array of attributes for the `item` and `itemWithoutLink`
@@ -22,13 +27,13 @@ In addition to adding to the end of the trail, you can do a variety of operation
 // Add at the end of the trail
 $this->Breadcrumbs->add(
     'Products',
-    ['controller' => 'products', 'action' => 'index']
+    ['controller' => 'products', 'action' => 'index'],
 );
 
 // Prepended crumbs will be put at the top of the list
 $this->Breadcrumbs->prepend(
     'Products',
-    ['controller' => 'products', 'action' => 'index']
+    ['controller' => 'products', 'action' => 'index'],
 );
 
 // Insert in a specific slot. If the slot is out of
@@ -36,7 +41,7 @@ $this->Breadcrumbs->prepend(
 $this->Breadcrumbs->insertAt(
     2,
     'Products',
-    ['controller' => 'products', 'action' => 'index']
+    ['controller' => 'products', 'action' => 'index'],
 );
 
 // Insert before another crumb, based on the title.
@@ -44,8 +49,8 @@ $this->Breadcrumbs->insertAt(
 // an exception will be raised.
 $this->Breadcrumbs->insertBefore(
     'Products',
-    'A product name 1', // the title of the crumb to insert before        
-    ['controller' => 'products', 'action' => 'index']
+    'A product name 1', // the title of the crumb to insert before
+    ['controller' => 'products', 'action' => 'index'],
 );
 
 // Insert after another crumb, based on the title.
@@ -53,8 +58,8 @@ $this->Breadcrumbs->insertBefore(
 // an exception will be raised.
 $this->Breadcrumbs->insertAfter(
     'Products',
-    'A product name 2', // the title of the crumb to insert after        
-    ['controller' => 'products', 'action' => 'index']
+    'A product name 2', // the title of the crumb to insert after
+    ['controller' => 'products', 'action' => 'index'],
 );
 ```
 
@@ -101,7 +106,7 @@ precisely where you want to add a breadcrumb.
 After adding crumbs to the trail, you can easily render it using the
 `render()` method. This method accepts two array arguments:
 
-- `$attributes` : An array of attributes that will applied to the `wrapper`
+- `$attributes` : An array of attributes that will be applied to the `wrapper`
   template. This gives you the ability to add attributes to the HTML tag. It
   accepts the special `templateVars` key to allow the insertion of custom
   template variables in the template.
@@ -124,7 +129,7 @@ Here is an example of how to render a trail:
 ``` php
 echo $this->Breadcrumbs->render(
     ['class' => 'breadcrumbs-trail'],
-    ['separator' => '<i class="fa fa-angle-right"></i>']
+    ['separator' => '<i class="fa fa-angle-right"></i>'],
 );
 ```
 
@@ -139,7 +144,7 @@ It includes four templates, with the following default declaration:
     'wrapper' => '<ul{{attrs}}>{{content}}</ul>',
     'item' => '<li{{attrs}}><a href="{{url}}"{{innerAttrs}}>{{title}}</a></li>{{separator}}',
     'itemWithoutLink' => '<li{{attrs}}><span{{innerAttrs}}>{{title}}</span></li>{{separator}}',
-    'separator' => '<li{{attrs}}><span{{innerAttrs}}>{{separator}}</span></li>'
+    'separator' => '<li{{attrs}}><span{{innerAttrs}}>{{separator}}</span></li>',
 ]
 ```
 
@@ -157,7 +162,7 @@ allows you to add your own template variables in the various templates:
 
 ``` php
 $this->Breadcrumbs->setTemplates([
-    'item' => '<li{{attrs}}>{{icon}}<a href="{{url}}"{{innerAttrs}}>{{title}}</a></li>{{separator}}'
+    'item' => '<li{{attrs}}>{{icon}}<a href="{{url}}"{{innerAttrs}}>{{title}}</a></li>{{separator}}',
 ]);
 ```
 

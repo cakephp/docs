@@ -1,3 +1,8 @@
+---
+title: "Time"
+description: "Format dates and times in views: use TimeHelper to display localized timestamps, relative times, and date formatting in templates."
+---
+
 # Time
 
 `class` Cake\\View\\Helper\\**TimeHelper**(View $view, array $config = [])
@@ -5,8 +10,8 @@
 The TimeHelper allows for the quick processing of time related information.
 The TimeHelper has two main tasks that it can perform:
 
-1.  It can format time strings.
-2.  It can test time.
+1. It can format time strings.
+2. It can test time.
 
 ## Using the Helper
 
@@ -24,10 +29,10 @@ posts using the TimeHelper:
 
 ``` php
 echo $this->Time->format(
-  $post->created,
-  \IntlDateFormatter::FULL,
-  false,
-  $user->time_zone
+    $post->created,
+    \IntlDateFormatter::FULL,
+    false,
+    $user->time_zone,
 );
 // Will display 'Saturday, August 22, 2011 at 11:53:00 PM GMT'
 // for a user in GMT+0. While displaying,

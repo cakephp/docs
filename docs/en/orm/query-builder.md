@@ -1,3 +1,8 @@
+---
+title: "Query Builder"
+description: "Build database queries in CakePHP: use fluent interface, select data, apply conditions, joins, unions, subqueries, and optimize performance."
+---
+
 # Query Builder
 
 `class` Cake\\ORM\\Query\\SelectQuery\\**SelectQuery**
@@ -270,7 +275,7 @@ more complex `WHERE` conditions.
 
 ### Selecting Specific Fields
 
-By default a query will select all fields from a table, the exception is when you
+By default, a query will select all fields from a table, the exception is when you
 call the `select()` function yourself and pass certain fields:
 
 ``` php
@@ -312,8 +317,6 @@ $query->selectAllExcept($articlesTable, ['published']);
 You can also pass an `Association` object when working with contained
 associations.
 
-<a id="using-sql-functions"></a>
-
 ### Using SQL Functions
 
 CakePHP's ORM offers abstraction for some commonly used SQL functions. Using the
@@ -343,31 +346,31 @@ You can access existing wrappers for several SQL functions through `SelectQuery:
 Generate a random value between 0 and 1 via SQL.
 
 `sum()`
-Calculate a sum. <span class="title-ref">Assumes arguments are literal values.</span>
+Calculate a sum. `Assumes arguments are literal values.`
 
 `avg()`
-Calculate an average. <span class="title-ref">Assumes arguments are literal values.</span>
+Calculate an average. `Assumes arguments are literal values.`
 
 `min()`
-Calculate the min of a column. <span class="title-ref">Assumes arguments are literal values.</span>
+Calculate the min of a column. `Assumes arguments are literal values.`
 
 `max()`
-Calculate the max of a column. <span class="title-ref">Assumes arguments are literal values.</span>
+Calculate the max of a column. `Assumes arguments are literal values.`
 
 `count()`
-Calculate the count. <span class="title-ref">Assumes arguments are literal values.</span>
+Calculate the count. `Assumes arguments are literal values.`
 
 `cast()`
 Convert a field or expression from one data type to another.
 
 `concat()`
-Concatenate two values together. <span class="title-ref">Assumes arguments are bound parameters.</span>
+Concatenate two values together. `Assumes arguments are bound parameters.`
 
 `coalesce()`
-Coalesce values. <span class="title-ref">Assumes arguments are bound parameters.</span>
+Coalesce values. `Assumes arguments are bound parameters.`
 
 `dateDiff()`
-Get the difference between two dates/times. <span class="title-ref">Assumes arguments are bound parameters.</span>
+Get the difference between two dates/times. `Assumes arguments are bound parameters.`
 
 `now()`
 Defaults to returning date and time, but accepts 'time' or 'date' to return only
@@ -410,7 +413,7 @@ $concat = $query->func()->concat([
     $query->func()->dateDiff([
         'NOW()' => 'literal',
         'Articles.created' => 'identifier',
-    ])
+    ]),
 ]);
 $query->select(['link_title' => $concat]);
 ```
@@ -445,15 +448,15 @@ functions or they will be treated as bound parameters:
 ``` php
 $query = $articles->find();
 $year = $query->func()->year([
-    'created' => 'identifier'
+    'created' => 'identifier',
 ]);
 $time = $query->func()->date_format([
     'created' => 'identifier',
-    "'%H:%i'" => 'literal'
+    "'%H:%i'" => 'literal',
 ]);
 $query->select([
     'yearCreated' => $year,
-    'timeCreated' => $time
+    'timeCreated' => $time,
 ]);
 ```
 
@@ -497,7 +500,7 @@ complex expressions:
 $query = $articles->find();
 $concat = $query->func()->concat([
     'title' => 'identifier',
-    'synopsis' => 'identifier'
+    'synopsis' => 'identifier',
 ]);
 $query->orderByAsc($concat);
 ```
@@ -535,7 +538,7 @@ When using aggregate functions like `count` and `sum` you may want to use
 $query = $articles->find();
 $query->select([
     'count' => $query->func()->count('view_count'),
-    'published_date' => 'DATE(created)'
+    'published_date' => 'DATE(created)',
 ])
 ->groupBy('published_date')
 ->having(['count >' => 3]);
@@ -572,7 +575,7 @@ $unpublishedCase = $query->expr()
 
 $query->select([
     'number_published' => $query->func()->count($publishedCase),
-    'number_unpublished' => $query->func()->count($unpublishedCase)
+    'number_unpublished' => $query->func()->count($unpublishedCase),
 ]);
 ```
 
@@ -672,7 +675,7 @@ $query = $cities->find()
                 $q->expr()->gte('population', 999001),
             ],
             ['SMALL',  'MEDIUM', 'LARGE'], # values matching conditions
-            ['string', 'string', 'string'] # type of each value
+            ['string', 'string', 'string'], # type of each value
         );
     });
 # WHERE CASE
@@ -693,7 +696,7 @@ $query = $cities->find()
                 $q->expr()->eq('population', 0),
             ],
             ['DESERTED', 'INHABITED'], # values matching conditions
-            ['string', 'string'] # type of each value
+            ['string', 'string'], # type of each value
         );
     });
 # WHERE CASE
@@ -793,7 +796,7 @@ class ArticleDto
 
     public static function createFromArray(
         array $data,
-        bool $ignoreMissing = false
+        bool $ignoreMissing = false,
     ): self {
         $dto = new self();
         $dto->id = $data['id'];
@@ -873,7 +876,7 @@ readonly class ArticleApiResponse
 
     public static function createFromArray(
         array $data,
-        bool $ignoreMissing = false
+        bool $ignoreMissing = false,
     ): self {
         return new self(
             id: $data['id'],
@@ -1024,7 +1027,7 @@ $query = $articles->find()->where(function (QueryExpression $exp, SelectQuery $q
 
     return $exp->or([
         'promoted' => true,
-        $query->expr()->and([$author, $published])
+        $query->expr()->and([$author, $published]),
     ]);
 });
 ```
@@ -1162,7 +1165,7 @@ It is also possible to build expressions using SQL functions:
 $query = $articles->find()
     ->where(function (QueryExpression $exp, SelectQuery $q) {
         $year = $q->func()->year([
-            'created' => 'identifier'
+            'created' => 'identifier',
         ]);
 
         return $exp
@@ -1385,7 +1388,7 @@ use the `identifier()` method:
 ``` php
 $query = $countries->find();
 $query->select([
-        'year' => $query->func()->year([$query->identifier('created')])
+        'year' => $query->func()->year([$query->identifier('created')]),
     ])
     ->where(function ($exp, $query) {
         return $exp->gt('population', 100000);
@@ -1535,14 +1538,14 @@ $query->select(function ($query) {
         $stockQuantity = $query->func()->sum('Stocks.quantity');
         $totalStockValue = $query->func()->sum(
                 $query->expr(['Stocks.quantity', 'Products.unit_price'])
-                    ->setConjunction('*')
+                    ->setConjunction('*'),
         );
 
         return [
             'Products.name',
             'stock_quantity' => $stockQuantity,
             'Products.unit_price',
-            'total_stock_value' => $totalStockValue
+            'total_stock_value' => $totalStockValue,
         ];
     })
     ->innerJoinWith('Stocks')
@@ -1577,7 +1580,7 @@ $products->find()
             ['unit_price', 'tax_percentage'],
             [20, 5],
             ['integer', 'integer'], # type of each value
-            '<='
+            '<=',
         )
     );
 
@@ -1594,7 +1597,7 @@ $articles->find()
                 ['articles.id', 'articles.author_id'],
                 [[10, 10], [30, 10]],
                 ['integer', 'integer'],
-                'IN'
+                'IN',
             ),
         );
 
@@ -1618,6 +1621,20 @@ extension).
 
 ::: info Added in version 5.3.0
 `Query::optimizerHint()` was added.
+:::
+
+### Getting the Driver
+
+`method` Cake\\Database\\Query::**getDriver**(): Driver
+
+You can get the `Driver` instance for the current connection role from a query:
+
+``` php
+$driver = $query->getDriver();
+```
+
+::: info Added in version 5.3.0
+`Query::getDriver()` was added.
 :::
 
 ## Getting Results
@@ -1760,10 +1777,10 @@ through event listeners.
 
 When the results for a cached query are fetched the following happens:
 
-1.  If the query has results set, those will be returned.
-2.  The cache key will be resolved and cache data will be read. If the cache data
+1. If the query has results set, those will be returned.
+2. The cache key will be resolved and cache data will be read. If the cache data
     is not empty, those results will be returned.
-3.  If the cache misses, the query will be executed, the `Model.beforeFind` event
+3. If the cache misses, the query will be executed, the `Model.beforeFind` event
     will be triggered, and a new `ResultSet` will be created. This
     `ResultSet` will be written to the cache and returned.
 
@@ -1783,8 +1800,6 @@ to fetch associated data from other tables is called **eager loading**.
 ### Filtering by Associated Data
 
 <!--@include: ./retrieving-data-and-resultsets.md{727,938}-->
-
-<a id="adding-joins"></a>
 
 ### Adding Joins
 
@@ -1832,7 +1847,7 @@ $query = $articles->find()
             'conditions' => [
                 'c.created >' => new DateTime('-5 days'),
                 'c.moderated' => true,
-                'c.article_id = articles.id'
+                'c.article_id = articles.id',
             ]
         ],
     ], ['c.created' => 'datetime', 'c.moderated' => 'boolean']);
@@ -1993,7 +2008,7 @@ $query->where([
     // safe to use with user data in any form
     $userData,
     "MATCH (comment) AGAINST ($userData)",
-    'created < NOW() - ' . $userData
+    'created < NOW() - ' . $userData,
 ]);
 ```
 
@@ -2134,7 +2149,7 @@ $query = $articles->find();
 $query->from(['matches' => $matchingComment])
     ->innerJoin(
         ['Articles' =>  'articles'],
-        ['Articles.id' => $query->identifier('matches.id') ]
+        ['Articles.id' => $query->identifier('matches.id') ],
     );
 ```
 
@@ -2257,9 +2272,9 @@ of several smaller query results together. They can serve a similar purpose
 to database views or subquery results. Common Table Expressions differ from
 derived tables and views in a couple ways:
 
-1.  Unlike views, you don't have to maintain schema for common table expressions.
+1. Unlike views, you don't have to maintain schema for common table expressions.
     The schema is implicitly based on the result set of the table expression.
-2.  You can reference the results of a common table expression multiple times
+2. You can reference the results of a common table expression multiple times
     without incurring performance penalties unlike subquery joins.
 
 As an example lets fetch a list of customers and the number of orders each of

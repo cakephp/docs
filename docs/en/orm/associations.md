@@ -1,3 +1,8 @@
+---
+title: "Associations - Linking Tables Together"
+description: "Define CakePHP associations: configure belongsTo, hasMany, hasOne, belongsToMany relationships, eager loading, and manage related data."
+---
+
 # Associations - Linking Tables Together
 
 Defining relations between different objects in your application should be
@@ -32,7 +37,7 @@ class ArticlesTable extends Table
 ```
 
 The simplest form of any association setup takes the table alias you want to
-associate with. By default all of the details of an association will use the
+associate with. By default, all the details of an association will use the
 CakePHP conventions. If you want to customize how your associations are handled
 you can modify them with setters:
 
@@ -42,8 +47,8 @@ class ArticlesTable extends Table
     public function initialize(array $config): void
     {
         $this->belongsTo('Authors', [
-                'className' => 'Publishing.Authors'
-            ])
+            'className' => 'Publishing.Authors',
+        ])
             ->setForeignKey('author_id')
             ->setProperty('author');
     }
@@ -62,7 +67,7 @@ You can also use arrays to customize your associations:
 $this->belongsTo('Authors', [
     'className' => 'Publishing.Authors',
     'foreignKey' => 'author_id',
-    'propertyName' => 'author'
+    'propertyName' => 'author',
 ]);
 ```
 
@@ -81,8 +86,8 @@ class ArticlesTable extends Table
             ->setFinder('approved');
 
         $this->hasMany('UnapprovedComments', [
-                'className' => 'Comments'
-            ])
+            'className' => 'Comments',
+        ])
             ->setFinder('unapproved')
             ->setProperty('unapproved_comments');
     }
@@ -118,13 +123,13 @@ class PostsTable extends Table
 {
     public function initialize(array $config): void
     {
-       $this->addAssociations([
-           'belongsTo' => [
-               'Users' => ['className' => 'App\Model\Table\UsersTable'],
-           ],
-           'hasMany' => ['Comments'],
-           'belongsToMany' => ['Tags'],
-       ]);
+        $this->addAssociations([
+            'belongsTo' => [
+                'Users' => ['className' => 'App\Model\Table\UsersTable'],
+            ],
+            'hasMany' => ['Comments'],
+            'belongsToMany' => ['Tags'],
+        ]);
     }
 }
 ```
@@ -195,15 +200,15 @@ class UsersTable extends Table
     public function initialize(array $config): void
     {
         $this->hasOne('HomeAddresses', [
-                'className' => 'Addresses'
-            ])
+            'className' => 'Addresses',
+        ])
             ->setProperty('home_address')
             ->setConditions(['HomeAddresses.label' => 'Home'])
             ->setDependent(true);
 
         $this->hasOne('WorkAddresses', [
-                'className' => 'Addresses'
-            ])
+            'className' => 'Addresses',
+        ])
             ->setProperty('work_address')
             ->setConditions(['WorkAddresses.label' => 'Work'])
             ->setDependent(true);
@@ -222,7 +227,7 @@ Possible keys for hasOne association arrays include:
   it should be 'Addresses'. The default value is the name of the association.
 - **foreignKey**: The name of the foreign key column in the other table. The
   default value is the underscored, singular name of the current model,
-  suffixed with '\_id' such as 'user_id' in the above example.
+  suffixed with `_id` such as 'user_id' in the above example.
 - **bindingKey**: The name of the column in the current table used to match the
   `foreignKey`. The default value is the primary key of the current table
   such as 'id' of Users in the above example.
@@ -239,7 +244,7 @@ Possible keys for hasOne association arrays include:
   triggered. When `false`, `deleteAll()` is used to remove associated data
   and no callbacks are triggered.
 - **propertyName**: The property name that should be filled with data from the
-  associated table into the source table results. By default this is the
+  associated table into the source table results. By default, this is the
   underscored & singular name of the association so `address` in our example.
 - **strategy**: The query strategy used to load matching record from the other table.
   Accepted values are `'join'` and `'select'`. Using `'select'` will generate a separate query
@@ -319,7 +324,7 @@ Possible keys for belongsTo association arrays include:
   it should be 'Users'. The default value is the name of the association.
 - **foreignKey**: The name of the foreign key column in the current table. The
   default value is the underscored, singular name of the other model,
-  suffixed with '\_id' such as 'user_id' in the above example.
+  suffixed with `_id` such as 'user_id' in the above example.
 - **bindingKey**: The name of the column in the other table used to match the
   `foreignKey`. The default value is the primary key of the other table
   such as 'id' of Users in the above example.
@@ -329,7 +334,7 @@ Possible keys for belongsTo association arrays include:
   'LEFT' and 'INNER'. You can use 'INNER' to get results only where the
   association is set. The default value is 'LEFT'.
 - **propertyName**: The property name that should be filled with data from the
-  associated table into the source table results. By default this is the
+  associated table into the source table results. By default, this is the
   underscored & singular name of the association so `user` in our example.
 - **strategy**: The query strategy used to load matching record from the other table.
   Accepted values are `'join'` and `'select'`. Using `'select'` will generate a separate query
@@ -410,7 +415,7 @@ $this->hasMany('Comments')
 ```
 
 Relying on the example above, we have passed an array containing the desired
-composite keys to `setForeignKey()`. By default the `bindingKey` would be
+composite keys to `setForeignKey()`. By default, the `bindingKey` would be
 automatically defined as `id` and `hash` respectively, but let's assume that
 you need to specify different binding fields than the defaults. You can setup it
 manually with `setBindingKey()`:
@@ -438,7 +443,7 @@ Possible keys for hasMany association arrays include:
   it should be 'Comments'. The default value is the name of the association.
 - **foreignKey**: The name of the foreign key column in the other table. The
   default value is the underscored, singular name of the current model,
-  suffixed with '\_id' such as 'article_id' in the above example.
+  suffixed with `_id` such as 'article_id' in the above example.
 - **bindingKey**: The name of the column in the current table used to match the
   `foreignKey`. The default value is the primary key of the current table
   such as 'id' of Articles in the above example.
@@ -455,7 +460,7 @@ Possible keys for hasMany association arrays include:
   triggered. When `false`, `deleteAll()` is used to remove associated data
   and no callbacks are triggered.
 - **propertyName**: The property name that should be filled with data from the
-  associated table into the source table results. By default this is the
+  associated table into the source table results. By default, this is the
   underscored & plural name of the association so `comments` in our example.
 - **strategy**: Defines the query strategy to use. Defaults to 'select'. The
   other valid value is 'subquery', which replaces the `IN` list with an
@@ -531,7 +536,7 @@ table consists of `article_id` and `tag_id` and a multi-column
 names.
 
 | Relationship | Join Table Fields |
-|----|----|
+| ---- | ---- |
 | Articles belongsToMany Tags | articles_tags.id, articles_tags.tag_id, articles_tags.article_id |
 | Patients belongsToMany Doctors | doctors_patients.id, doctors_patients.doctor_id, doctors_patients.patient_id. |
 
@@ -579,19 +584,19 @@ Possible keys for belongsToMany association arrays include:
   example, it should be 'Tags'. The default value is the name of the association.
 - **joinTable**: The name of the join table used in this
   association (if the current table doesn't adhere to the naming
-  convention for belongsToMany join tables). By default this table
+  convention for belongsToMany join tables). By default, this table
   name will be used to load the Table instance for the join table.
 - **foreignKey**: The name of the foreign key that references the current model
   found on the join table, or list in case of composite foreign keys.
   This is especially handy if you need to define multiple
   belongsToMany relationships. The default value for this key is the
-  underscored, singular name of the current model, suffixed with '\_id'.
+  underscored, singular name of the current model, suffixed with `_id`.
 - **bindingKey**: The name of the column in the current table, that will be used
   for matching the `foreignKey`. Defaults to the primary key.
 - **targetForeignKey**: The name of the foreign key that references the target
   model found on the join model, or list in case of composite foreign keys.
   The default value for this key is the underscored, singular name of
-  the target model, suffixed with '\_id'.
+  the target model, suffixed with `_id`.
 - **conditions**: An array of `find()` compatible conditions. If you have
   conditions on an associated table, you should use a 'through' model, and
   define the necessary belongsTo associations on it. It is recommended to
@@ -609,7 +614,7 @@ Possible keys for belongsToMany association arrays include:
   no callbacks are triggered. This defaults to `false` to help reduce
   overhead.
 - **propertyName**: The property name that should be filled with data from the
-  associated table into the source table results. By default this is the
+  associated table into the source table results. By default, this is the
   underscored & plural name of the association, so `tags` in our example.
 - **strategy**: Defines the query strategy to use. Defaults to 'select'. The
   other valid value is 'subquery', which replaces the `IN` list with an
@@ -655,8 +660,6 @@ INNER JOIN articles_tags ON (
   AND article_id IN (SELECT id FROM articles)
 );
 ```
-
-<a id="using-the-through-option"></a>
 
 ### Using the 'through' Option
 
@@ -727,10 +730,12 @@ such as a where condition by designating the through table name before the field
 you are filtering on:
 
 ``` php
-$query = $this->find(
-        'list',
-        valueField: 'studentFirstName', order: 'students.id'
-    )
+// In a StudentsTable method or controller action.
+$query = $this->Students->find(
+    'list',
+    valueField: 'first_name',
+    order: 'Students.id',
+)
     ->contain(['Courses'])
     ->matching('Courses')
     ->where(['CoursesMemberships.grade' => 'B']);
@@ -740,7 +745,7 @@ $query = $this->find(
 
 ### Using Association Finders
 
-By default associations will load records based on the foreign key columns. If
+By default, associations will load records based on the foreign key columns. If
 you want to define additional conditions for associations, you can use
 a `finder`. When an association is loaded the ORM will use your [custom
 finder](../orm/retrieving-data-and-resultsets#custom-find-methods) to load, update, or delete associated records.
@@ -767,7 +772,7 @@ This enables property chains to related tables in the following way:
 $this->MyTableOne->MyTableTwo->find()->...;
 ```
 
-Association properties on entities do not use CamelCase conventions though. Instead for a hasOne/belongsTo relation like "User belongsTo Roles", you would get a <span class="title-ref">role</span> property instead of <span class="title-ref">Role</span> or \`Roles\`:
+Association properties on entities do not use CamelCase conventions though. Instead for a hasOne/belongsTo relation like "User belongsTo Roles", you would get a `role` property instead of `Role` or `Roles`:
 
 ``` php
 // A single entity (or null if not available)

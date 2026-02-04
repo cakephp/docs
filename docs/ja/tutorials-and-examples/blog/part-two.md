@@ -73,7 +73,7 @@ class ArticlesController extends AppController
 
 では、コントローラーにひとつのアクションを追加してみましょう。アクションは、
 アプリケーションの中のひとつの関数か、インターフェイスをあらわしています。
-例えば、ユーザーが www.example.com/articles/index (www.example.com/articles/ と同じです)
+例えば、ユーザーが <www.example.com/articles/index> (<www.example.com/articles/> と同じです)
 をリクエストした場合、投稿記事の一覧が表示されると期待するでしょう。
 このアクションのコードは次のようになります。 :
 
@@ -93,8 +93,8 @@ class ArticlesController extends AppController
 ```
 
 `ArticlesController` の中に `index()` という関数を定義することによって、ユーザーは、
-www.example.com/articles/index というリクエストで、そのロジックにアクセスできるようになります。
-同様に、 `foobar()` という関数を定義すると、ユーザーは、www.example.com/articles/foobar
+<<www.example.com/articles/>index> というリクエストで、そのロジックにアクセスできるようになります。
+同様に、 `foobar()` という関数を定義すると、ユーザーは、<www.example.com/articles/>foobar
 でアクセスできるようになります。
 
 > [!WARNING]
@@ -185,7 +185,7 @@ CakePHP のリバースルーティング機能を活用することができま
 という形のアプリケーションの基本パスに対する相対パスを単に書くこともできます。
 [named routes](../../development/routing#named-routes) もご参照ください。
 
-この時点で、ブラウザーから <http://www.example.com/articles/index> を開いてみてください。
+この時点で、ブラウザーから <http://<<www.example.com/articles/>index>> を開いてみてください。
 タイトルと投稿内容のテーブル一覧がまとめられているビューが表示されるはずです。
 
 ビューの中のリンク (投稿記事のタイトル) は `/articles/view/どれかのID番号` というリンクを表示します。
@@ -367,6 +367,7 @@ POST で送るフォームを構築している、と解釈されます。
 `$this->Form->control()` メソッドは、同名のフォーム要素を作成するのに使われています。
 最初のパラメーターは、どのフィールドに対応しているのかを CakePHP に教えます。
 ２番目のパラメーターは、様々なオプションの配列を指定することができます。
+
 - この例では、textarea の列の数を指定しています。
 ここではちょっとした内観的で自動的な手法が使われています。
 `control()` は、指定されたモデルのフィールドに基づいて、異なるフォーム要素を出力します。
@@ -656,7 +657,7 @@ CakePHP にようこそ！
 
 CakePHP を学習する人が次に学びたいと思う共通のタスクがいくつかあります。
 
-1.  [View Layouts](../../views#view-layouts): ウェブサイトのレイアウトをカスタマイズする
-2.  [View Elements](../../views#view-elements): ビューのスニペットを読み込んで再利用する
-3.  [Bake でコード生成](../../bake/usage): 基本的な CRUD コードの生成
-4.  [シンプルな認証と認可のアプリケーション](../../tutorials-and-examples/blog-auth-example/auth): ユーザーの認証と承認のチュートリアル
+1. [View Layouts](../../views#view-layouts): ウェブサイトのレイアウトをカスタマイズする
+2. [View Elements](../../views#view-elements): ビューのスニペットを読み込んで再利用する
+3. [Bake でコード生成](../../bake/usage): 基本的な CRUD コードの生成
+4. [シンプルな認証と認可のアプリケーション](../../tutorials-and-examples/blog-auth-example/auth): ユーザーの認証と承認のチュートリアル

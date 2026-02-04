@@ -134,7 +134,7 @@ class SeaShell extends Shell
 また、コマンドラインからタスクに直接アクセスすることができます。 :
 
 ``` bash
-$ cake sea sound
+cake sea sound
 ```
 
 > [!NOTE]
@@ -374,11 +374,11 @@ class ErroneousShell extends Shell
 上記の例では、コマンドライン上で実行された際、次の終了コードを返します。 :
 
 ``` bash
-$ bin/cake erroneousshell ; echo $?
+bin/cake erroneousshell ; echo $?
 0
-$ bin/cake erroneousshell itFails ; echo $?
+bin/cake erroneousshell itFails ; echo $?
 1
-$ bin/cake erroneousshell itFailsSpecifically ; echo $?
+bin/cake erroneousshell itFailsSpecifically ; echo $?
 2
 ```
 

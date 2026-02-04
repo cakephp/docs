@@ -1,6 +1,11 @@
+---
+title: "5.3 Migration Guide"
+description: "Upgrade to CakePHP 5.3: discover new features, deprecations, improvements, and migrate from 5.0-5.2 with this detailed guide."
+---
+
 # 5.3 Migration Guide
 
-The 5.3.0 release is a backwards compatible with 5.0. It adds new functionality
+The 5.3.0 release is backwards compatible with 5.0. It adds new functionality
 and introduces new deprecations. Any functionality deprecated in 5.x will be
 removed in 6.0.0.
 
@@ -10,7 +15,7 @@ The [upgrade tool](../appendices/migration-guides) provides rector rules for
 automating some of the migration work. Run rector before updating your
 `composer.json` dependencies:
 
-``` text
+``` bash
 bin/cake upgrade rector --rules cakephp53 <path/to/app/src>
 ```
 
@@ -41,7 +46,7 @@ If you are not running on **PHP 8.2 or higher**, you will need to upgrade PHP be
 
 ### Validation
 
-- The signature of `Validator::validate(array $data, bool $newRecord = true, array $context = [])` has now a additional third parameter `$context`.
+- The signature of `Validator::validate(array $data, bool $newRecord = true, array $context = [])` now has an additional third parameter `$context`.
   It can be used to pass necessary context into the validation when marshalling.
 
 ### View
@@ -119,7 +124,7 @@ If you are not running on **PHP 8.2 or higher**, you will need to upgrade PHP be
 ### Core
 
 - Added `Configure` attribute to support injecting `Configure` values into
-  constructor arguments. See ref:\`configure-dependency-injection\`.
+  constructor arguments. See [Configure Dependency Injection](../development/dependency-injection#configure-dependency-injection).
 
 ### Database
 
@@ -224,7 +229,7 @@ If you are not running on **PHP 8.2 or higher**, you will need to upgrade PHP be
 
 ### Validation
 
-- `ipOrRange()` validation has has been added to check for an IP or a range (subnet).
+- `ipOrRange()` validation has been added to check for an IP or a range (subnet).
 - When validating within CakePHP marshalling context, the entity will be passed
   into the `context` argument for use inside custom validation rules. This can
   be useful when patching partially and then needing to get that data from the

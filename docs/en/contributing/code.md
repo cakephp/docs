@@ -1,3 +1,8 @@
+---
+title: "Code"
+description: "Contribute code to CakePHP: submit patches, create pull requests, follow coding standards, write tests, and join the development team."
+---
+
 # Code
 
 Patches and pull requests are a great way to contribute code back to CakePHP.
@@ -52,7 +57,7 @@ is for. For example if you are fixing a bug in `3.x` you would want to use the
 `master` branch as the base for your branch. If your change is a bug fix for
 the 2.x release series, you should use the `2.x` branch:
 
-``` text
+``` bash
 # fixing a bug on 3.x
 git fetch upstream
 git checkout -b ticket-1234 upstream/master
@@ -80,7 +85,7 @@ following:
 Once your changes are done and you're ready for them to be merged into CakePHP,
 you'll want to update your branch:
 
-``` text
+``` bash
 # Rebase fix on top of master
 git checkout master
 git fetch upstream
@@ -95,20 +100,20 @@ code. You might encounter a conflict during the `rebase`. If the rebase quits
 early you can see which files are conflicted/un-merged with `git status`.
 Resolve each conflict, and then continue the rebase:
 
-``` text
+``` bash
 git add <filename> # do this for each conflicted file.
 git rebase --continue
 ```
 
 Check that all your tests continue to pass. Then push your branch to your fork:
 
-``` text
+``` bash
 git push origin <branch-name>
 ```
 
 If you've rebased after pushing your branch, you'll need to use force push:
 
-``` text
+``` bash
 git push --force origin <branch-name>
 ```
 
@@ -126,8 +131,8 @@ branch, as you cannot edit it once the pull request is created.
   should choose the branch with the next version number. For example if the
   current stable release is `4.0.0`, the branch accepting new features will
   be `4.next`.
-- If your change is a breaks existing functionality, or APIs then you'll have
-  to choose then next major release. For example, if the current release is
+- If your change breaks existing functionality, or APIs then you'll have
+  to choose the next major release. For example, if the current release is
   `4.0.0` then the next time existing behavior can be broken will be in
   `5.x` so you should target that branch.
 

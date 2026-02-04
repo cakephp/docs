@@ -1,3 +1,8 @@
+---
+title: "Number"
+description: "Format numbers, currency, percentages, and data sizes in CakePHP views. NumberHelper provides convenient methods for common display formats."
+---
+
 # Number
 
 `class` Cake\\View\\Helper\\**NumberHelper**(View $view, array $config = [])

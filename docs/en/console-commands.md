@@ -1,3 +1,8 @@
+---
+title: "Console Commands"
+description: "Build CLI tools with CakePHP console framework: create commands, handle I/O, use option parsers, schedule cron jobs, and manage application tasks."
+---
+
 # Console Commands
 
 In addition to a web framework, CakePHP also provides a console framework for
@@ -13,14 +18,14 @@ generate related files.
 
 The CakePHP Console uses a dispatcher-type system to load commands, parse
 their arguments and invoke the correct command. While the examples below use
-bash the CakePHP console is compatible with any \*nix shell and windows.
+bash the CakePHP console is compatible with any *nix shell and windows.
 
 A CakePHP application contains **src/Command** directory that contain its commands.
 It also comes with an executable in the **bin** directory:
 
 ``` bash
-$ cd /path/to/app
-$ bin/cake
+cd /path/to/app
+bin/cake
 ```
 
 > [!NOTE]
@@ -40,7 +45,7 @@ bin/cake migrations -h
 bin/cake bake.bake -h
 ```
 
-Plugin commands can be invoked without a plugin prefix if the commands's name
+Plugin commands can be invoked without a plugin prefix if the command's name
 does not overlap with an application or framework command. In the case that two
 plugins provide a command with the same name, the first loaded plugin will get
 the short alias. You can always use the `plugin.command` format to
@@ -48,7 +53,7 @@ unambiguously reference a command.
 
 ## Console Applications
 
-By default CakePHP will automatically discover all the commands in your
+By default, CakePHP will automatically discover all the commands in your
 application and its plugins. You may want to reduce the number of exposed
 commands, when building standalone console applications. You can use your
 `Application`'s `console()` hook to limit which commands are exposed and
@@ -141,7 +146,7 @@ command. Then learn more about commands:
 ## Routing in the Console Environment
 
 In command-line interface (CLI), specifically your console commands,
-`env('HTTP_HOST')` and other webbrowser specific environment variables are not
+`env('HTTP_HOST')` and other web browser specific environment variables are not
 set.
 
 If you generate reports or send emails that make use of `Router::url()` those

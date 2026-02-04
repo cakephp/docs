@@ -1,18 +1,19 @@
 {
   "default": true,
-  "heading-increment": false,
-  "no-hard-tabs": false,
-  "no-multiple-blanks": false,
+  "heading-increment": true,
+  "no-hard-tabs": true,
+  "no-multiple-blanks": true,
   "line-length": false,
-  "commands-show-output": false,
-  "blanks-around-headings": false,
+  "commands-show-output": true,
+  "blanks-around-headings": true,
+  "heading-start-left": true,
   "no-duplicate-heading": false,
   "single-h1": false,
   "no-trailing-punctuation": false,
   "no-blanks-blockquote": false,
-  "list-marker-space": false,
-  "blanks-around-fences": false,
-  "blanks-around-lists": false,
+  "list-marker-space": true,
+  "blanks-around-fences": true,
+  "blanks-around-lists": true,
   "no-inline-html": {
     "allowed_elements": [
       "Badge",
@@ -33,18 +34,42 @@
       "svg",
       "path",
       "figure",
-      "p"
+      "p",
+      "colgroup",
+      "col",
+      "strong",
+      "sup",
+      "section",
+      "hr",
+      "ol",
+      "ul",
+      "li",
+      "em",
+      "code"
     ]
   },
-  "no-bare-urls": false,
-  "fenced-code-language": false,
+  "no-bare-urls": true,
+  "fenced-code-language": true,
   "first-line-heading": false,
   "code-block-style": false,
-  "single-trailing-newline": false,
+  "code-fence-style": {
+    "style": "backtick"
+  },
+  "emphasis-style": {
+    "style": "asterisk"
+  },
+  "strong-style": {
+    "style": "asterisk"
+  },
+  "spaces-after-emphasis-marker": true,
+  "spaces-after-code-fence-info": true,
+  "spaces-inside-emphasis-markers": true,
+  "spaces-inside-code-span-elements": true,
+  "single-trailing-newline": true,
   "link-fragments": false,
-  "table-pipe-style": false,
+  "table-pipe-style": "leading_and_trailing",
   "table-column-count": false,
-  "emphasis-style": false,
   "table-column-style": false,
-  "descriptive-link-text": false
+  "descriptive-link-text": false,
+  "no-emphasis-as-heading": false
 }

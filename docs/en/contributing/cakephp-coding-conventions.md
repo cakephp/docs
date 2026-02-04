@@ -1,3 +1,8 @@
+---
+title: "Coding Standards"
+description: "Follow CakePHP coding standards: PSR-12 guidelines, indentation rules, line length, control structures, and best practices for contributions."
+---
+
 # Coding Standards
 
 CakePHP developers will use the [PSR-12 coding style guide](https://www.php-fig.org/psr/psr-12/) in addition to the following rules as
@@ -32,7 +37,7 @@ Four spaces will be used for indentation.
 
 So, indentation should look like this:
 
-``` text
+``` php
 // base level
     // level 1
         // level 2
@@ -75,7 +80,7 @@ Use this instead:
 $matches = array_intersect_key(
     $this->_listeners,
     array_flip(
-        preg_grep($matchPattern, array_keys($this->_listeners), 0)
+        preg_grep($matchPattern, array_keys($this->_listeners), 0),
     )
 );
 ```
@@ -98,7 +103,7 @@ In short:
 Control structures are for example "`if`", "`for`", "`foreach`",
 "`while`", "`switch`" etc. Below, an example with "`if`":
 
-``` text
+``` php
 if ((expr_1) || (expr_2)) {
     // action_1;
 } elseif (!(expr_3) && (expr_4)) {
@@ -224,7 +229,7 @@ As you can see above there should be one space on both sides of equals sign (=).
 Example of a method definition:
 
 ``` php
-public function someFunction($arg1, $arg2 = '')
+public function someFunction(string $arg1, string $arg2 = ''): mixed
 {
     if (expr) {
         statement;
@@ -239,7 +244,7 @@ Try to make your functions return something, at least `true` or `false`, so
 it can be determined whether the function call was successful:
 
 ``` php
-public function connection($dns, $persistent = false)
+public function connection(string|array $dns, bool $persistent = false): bool
 {
     if (is_array($dns)) {
         $dnsInfo = $dns;
@@ -262,7 +267,7 @@ There are spaces on both side of the equals sign.
 Try to avoid unnecessary nesting by bailing early:
 
 ``` php
-public function run(array $data)
+public function run(array $data): bool
 {
     ...
     if (!$success) {
@@ -272,7 +277,7 @@ public function run(array $data)
     ...
 }
 
-public function check(array $data)
+public function check(array $data): void
 {
     ...
     if (!$success) {
@@ -299,7 +304,7 @@ We only typehint public methods, though, as typehinting is not cost-free:
  * @param callable $callback Some callback.
  * @param bool $boolean Some boolean value.
  */
-public function foo(Table $table, array $array, callable $callback, $boolean)
+public function foo(Table $table, array $array, callable $callback, bool $boolean): void
 {
 }
 ```
@@ -317,7 +322,7 @@ type:
  *
  * @param array|\ArrayObject $array Some array value.
  */
-public function foo($array)
+public function foo(array|\ArrayObject $array): void
 {
 }
 ```
@@ -325,8 +330,8 @@ public function foo($array)
 ### Anonymous Functions (Closures)
 
 Defining anonymous functions follows the [PSR-12](https://www.php-fig.org/psr/psr-12/) coding style guide, where they are
-declared with a space after the <span class="title-ref">function</span> keyword, and a space before and after
-the <span class="title-ref">use</span> keyword:
+declared with a space after the `function` keyword, and a space before and after
+the `use` keyword:
 
 ``` php
 $closure = function ($arg1, $arg2) use ($var1, $var2) {
@@ -368,7 +373,7 @@ tags:
 PhpDoc tags are very much like JavaDoc tags in Java. Tags are only processed if
 they are the first thing in a DocBlock line, for example:
 
-``` text
+``` php
 /**
  * Tag example.
  *
@@ -377,7 +382,7 @@ they are the first thing in a DocBlock line, for example:
  */
 ```
 
-``` text
+``` php
 /**
  * Example of inline phpDoc tags.
  *
@@ -406,39 +411,39 @@ be preceded by a newline.
 
 Variable types for use in DocBlocks:
 
-Type  
+Type
 Description
 
-mixed  
+mixed
 A variable with undefined (or multiple) type.
 
-int  
+int
 Integer type variable (whole number).
 
-float  
+float
 Float type (point number).
 
-bool  
+bool
 Logical type (true or false).
 
-string  
+string
 String type (any value in " " or ' ').
 
-null  
+null
 Null type. Usually used in conjunction with another type.
 
-array  
+array
 Array type.
 
-object  
+object
 Object type. A specific class name should be used if possible.
 
-resource  
+resource
 Resource type (returned by for example mysql_connect()).
 Remember that when you specify the type as mixed, you should indicate
 whether it is unknown, or what the possible types are.
 
-callable  
+callable
 Callable function.
 
 You can also combine types using the pipe char:
@@ -456,7 +461,7 @@ instead:
  *
  * @return $this
  */
-public function foo()
+public function foo(): static
 {
     return $this;
 }
@@ -467,7 +472,7 @@ public function foo()
 `include`, `require`, `include_once` and `require_once` do not have
 parentheses:
 
-``` text
+``` php
 // wrong = parentheses
 require_once('ClassFileName.php');
 require_once ($class);
@@ -491,7 +496,7 @@ The short echo should be used in template files in place of `<?php echo`. It
 should be immediately followed by a single space, the variable or function value
 to `echo`, a single space, and the php closing tag:
 
-``` text
+``` php
 // wrong = semicolon, no spaces
 <td><?=$name;?></td>
 
@@ -499,8 +504,7 @@ to `echo`, a single space, and the php closing tag:
 <td><?= $name ?></td>
 ```
 
-As of PHP 5.4 the short echo tag (`<?=`) is no longer to be consider a 'short
-tag' is always available regardless of the `short_open_tag` ini directive.
+The short echo tag (`<?=`) is always available regardless of the `short_open_tag` ini directive.
 
 ## Naming Convention
 
@@ -508,7 +512,7 @@ tag' is always available regardless of the `short_open_tag` ini directive.
 
 Write all functions in camelBack:
 
-``` javascript
+``` php
 function longFunctionName()
 {
 }
@@ -566,25 +570,25 @@ for example:
 
 For casting we use:
 
-Type  
+Type
 Description
 
-(bool)  
+(bool)
 Cast to boolean.
 
-(int)  
+(int)
 Cast to integer.
 
-(float)  
+(float)
 Cast to float.
 
-(string)  
+(string)
 Cast to string.
 
-(array)  
+(array)
 Cast to array.
 
-(object)  
+(object)
 Cast to object.
 
 Please use `(int)$var` instead of `intval($var)` and `(float)$var` instead
@@ -594,14 +598,14 @@ of `floatval($var)` when applicable.
 
 Constants should be defined in capital letters:
 
-``` text
+``` php
 define('CONSTANT', 1);
 ```
 
 If a constant name consists of multiple words, they should be separated by an
 underscore character, for example:
 
-``` text
+``` php
 define('LONG_NAMED_CONSTANT', 2);
 ```
 
@@ -609,7 +613,7 @@ define('LONG_NAMED_CONSTANT', 2);
 
 Enum cases are defined in `CamelCase` style:
 
-``` text
+``` php
 enum ArticleStatus: string
 {
     case Published = 'Y';
@@ -651,7 +655,7 @@ class Thing
 {
     private $property; // Defined
 
-    public function readProperty()
+    public function readProperty(): void
     {
         // Not recommended as the property is defined in the class
         if (!isset($this->property)) {
