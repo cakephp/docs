@@ -1,3 +1,8 @@
+---
+title: "Backwards Compatibility Guide"
+description: "Understand CakePHP backwards compatibility: semantic versioning promises, interface stability, class changes, and upgrade guidelines per release."
+---
+
 # Backwards Compatibility Guide
 
 Ensuring that you can upgrade your applications easily and smoothly is important
@@ -272,18 +277,16 @@ locate code that needs to be updated before it breaks. If you wish to disable
 runtime warnings you can do so using the `Error.errorLevel` configuration
 value:
 
-``` text
+``` php
 // in config/app.php
 // ...
 'Error' => [
     'errorLevel' => E_ALL ^ E_USER_DEPRECATED,
-]
+],
 // ...
 ```
 
 Will disable runtime deprecation warnings.
-
-<a id="experimental-features"></a>
 
 ## Experimental Features
 

@@ -1,3 +1,8 @@
+---
+title: "CMS Tutorial - Creating the Articles Controller"
+description: "Build your first CakePHP controller for articles. Create index, view, add, edit actions with pagination, dynamic finders, and template rendering."
+---
+
 # CMS Tutorial - Creating the Articles Controller
 
 With our model created, we need a controller for our articles. Controllers in
@@ -20,8 +25,8 @@ class ArticlesController extends AppController
 
 Now, let's add an action to our controller. Actions are controller methods that
 have routes connected to them. For example, when a user requests
-**www.example.com/articles/index** (which is also the same as
-**www.example.com/articles**), CakePHP will call the `index` method of your
+**<www.example.com/articles/index>** (which is also the same as
+**<www.example.com/articles>**), CakePHP will call the `index` method of your
 `ArticlesController`. This method should query the model layer, and prepare
 a response by rendering a Template in the View. The code for that action would
 look like this:
@@ -44,9 +49,9 @@ class ArticlesController extends AppController
 ```
 
 By defining function `index()` in our `ArticlesController`, users can now
-access the logic there by requesting **www.example.com/articles/index**.
+access the logic there by requesting **<www.example.com/articles/index>**.
 Similarly, if we were to define a function called `foobar()`, users would be
-able to access that at **www.example.com/articles/foobar**. You may be tempted
+able to access that at **<www.example.com/articles/foobar>**. You may be tempted
 to name your controllers and actions in a way that allows you to obtain specific
 URLs. Resist that temptation. Instead, follow the [CakePHP Conventions](../../intro/conventions)
 creating readable, meaningful action names. You can then use
@@ -120,7 +125,7 @@ When specifying URLs in CakePHP, it is recommended that you use arrays or
 leverage the reverse routing features CakePHP offers.
 
 At this point, you should be able to point your browser to
-**http://localhost:8765/articles/index**. You should see your list view,
+**<http://localhost:8765/articles/index>**. You should see your list view,
 correctly formatted with the title and table listing of the articles.
 
 ## Create the View Action
@@ -567,7 +572,7 @@ The `ArticlesController` can also be built with `bake`:
 bin/cake bake controller articles
 ```
 
-However, this does not build the **templates/Articles/\*.php** files.
+However, this does not build the **templates/Articles/*.php** files.
 :::
 
 With a basic articles management setup, we'll create the [basic actions

@@ -1,3 +1,8 @@
+---
+title: "Modelless Forms"
+description: "Create model-less forms in CakePHP: build contact forms, search forms, validate data without ORM using standalone Form classes."
+---
+
 # Modelless Forms
 
 `class` Cake\\Form\\**Form**
@@ -145,7 +150,7 @@ class ContactController extends AppController
         if ($this->request->is('get')) {
             $contact->setData([
                 'name' => 'John Doe',
-                'email' => 'john.doe@example.com'
+                'email' => 'john.doe@example.com',
             ]);
         }
 
@@ -200,7 +205,7 @@ invalidate the fields accordingly to the feedback from the remote server:
 
 ``` php
 // in src/Form/ContactForm.php
-public function setErrors($errors)
+public function setErrors(array $errors): void
 {
     $this->_errors = $errors;
 }

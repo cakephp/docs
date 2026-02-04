@@ -1,3 +1,8 @@
+---
+title: "Server Tool"
+description: "Run development server in CakePHP: use built-in PHP webserver, configure host/port, and quickly test applications locally via CLI."
+---
+
 # Server Tool
 
 The `ServerCommand` lets you stand up a simple webserver using the built in PHP

@@ -1,31 +1,34 @@
+---
+title: "Glossary"
+description: "CakePHP terminology reference: understand common abbreviations, technical terms, and framework-specific vocabulary used in documentation."
+---
+
 # Glossary
 
-<div class="glossary">
-
-CDN
+## CDN
 Content Delivery Network. A 3rd party vendor you can pay to help
 distribute your content to data centers around the world. This helps
 put your static assets closer to geographically distributed users.
 
-columns
+## columns
 Used in the ORM when referring to the table columns in an database
 table.
 
-CSRF
+## CSRF
 Cross Site Request Forgery. Prevents replay attacks, double
 submissions and forged requests from other domains.
 
-DI Container
+## DI Container
 In `Application::services()` you can configure application services
 and their dependencies. Application services are automatically injected
 into Controller actions, and Command Constructors. See
 [Dependency Injection](../development/dependency-injection).
 
-DSN
+## DSN
 Data Source Name. A connection string format that is formed like a URI.
 CakePHP supports DSNs for Cache, Database, Log and Email connections.
 
-dot notation
+## dot notation
 Dot notation defines an array path, by separating nested levels with `.`
 For example:
 
@@ -37,26 +40,26 @@ Would point to the following value:
 [
     'Cache' => [
         'default' => [
-            'engine' => 'File'
+            'engine' => 'File',
         ]
     ]
 ]
 ```
 
-DRY
+## DRY
 Don't repeat yourself. Is a principle of software development aimed at
 reducing repetition of information of all kinds. In CakePHP DRY is used
 to allow you to code things once and re-use them across your
 application.
 
-fields
+## fields
 A generic term used to describe both entity properties, or database
 columns. Often used in conjunction with the FormHelper.
 
-HTML attributes
-An array of key =\> values that are composed into HTML attributes. For example:
+## HTML attributes
+An array of key => values that are composed into HTML attributes. For example:
 
-``` text
+``` php
 // Given
 ['class' => 'my-class', 'target' => '_blank']
 
@@ -67,7 +70,7 @@ class="my-class" target="_blank"
 If an option can be minimized or accepts its name as the value, then `true`
 can be used:
 
-``` text
+``` php
 // Given
 ['checked' => true]
 
@@ -75,19 +78,19 @@ can be used:
 checked="checked"
 ```
 
-PaaS
+## PaaS
 Platform as a Service. Platform as a Service providers will provide
 cloud based hosting, database and caching resources. Some popular
 providers include Heroku, EngineYard and PagodaBox
 
-properties
+## properties
 Used when referencing columns mapped onto an ORM entity.
 
-plugin syntax
+## plugin syntax
 Plugin syntax refers to the dot separated class name indicating classes
 are part of a plugin:
 
-``` text
+``` php
 // The plugin is "DebugKit", and the class name is "Toolbar".
 'DebugKit.Toolbar'
 
@@ -95,18 +98,16 @@ are part of a plugin:
 'AcmeCorp/Tools.Toolbar'
 ```
 
-routes.php
+## routes.php
 A file in the `config/` directory that contains routing configuration.
 This file is included before each request is processed.
 It should connect all the routes your application needs so
 requests can be routed to the correct controller + action.
 
-routing array
+## routing array
 An array of attributes that are passed to `Router::url()`.
 They typically look like:
 
 ``` php
 ['controller' => 'Posts', 'action' => 'view', 5]
 ```
-
-</div>

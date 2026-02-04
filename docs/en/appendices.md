@@ -1,3 +1,8 @@
+---
+title: "Appendices"
+description: "CakePHP appendices: access migration guides, glossary, upgrade paths, development process info, and version-specific documentation."
+---
+
 # Appendices
 
 Appendices contain information regarding the new features

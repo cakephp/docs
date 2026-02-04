@@ -1,3 +1,8 @@
+---
+title: "Deployment"
+description: "Deploy CakePHP applications to production. Configure security, optimize performance, set document root, manage dependencies, and run migrations."
+---
+
 # Deployment
 
 Once your app is ready to be deployed there are a few things you should do.
@@ -133,8 +138,8 @@ using a static analyzer.
 On each deploy you'll likely have a few tasks to co-ordinate on your web server. Some typical ones
 are:
 
-1.  Install dependencies with `composer install`. Avoid using `composer update` when doing deploys as you could get unexpected versions of packages.
-2.  Run database [migrations](migrations) with either the Migrations plugin
+1. Install dependencies with `composer install`. Avoid using `composer update` when doing deploys as you could get unexpected versions of packages.
+2. Run database [migrations](migrations) with either the Migrations plugin
     or another tool.
-3.  Clear model schema cache with `bin/cake schema_cache clear`. The [Schema Cache Tool](console-commands/schema-cache)
+3. Clear model schema cache with `bin/cake schema_cache clear`. The [Schema Cache Tool](console-commands/schema-cache)
     has more information on this command.

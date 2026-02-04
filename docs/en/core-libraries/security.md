@@ -1,3 +1,8 @@
+---
+title: "Security Utility"
+description: "Encrypt and hash data in CakePHP: use Security library for password hashing, data encryption, HMAC generation, and secure random values."
+---
+
 # Security Utility
 
 `class` Cake\\Utility\\**Security**

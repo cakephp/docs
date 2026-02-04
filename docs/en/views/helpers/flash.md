@@ -1,3 +1,8 @@
+---
+title: "Flash"
+description: "Display flash messages in CakePHP templates using FlashHelper. Render session-based notifications with custom elements and routing prefix support."
+---
+
 # Flash
 
 `class` Cake\\View\\Helper\\**FlashHelper**(View $view, array $config = [])
@@ -33,17 +38,17 @@ You can also override any of the options that were set in FlashComponent:
 ``` php
 // In your Controller
 $this->Flash->set('The user has been saved.', [
-    'element' => 'success'
+    'element' => 'success',
 ]);
 
 // In your template file: Will use great_success.php instead of success.php
 <?= $this->Flash->render('flash', [
-    'element' => 'great_success'
+    'element' => 'great_success',
 ]);
 
 // In your template file: the flashy element file from the Company Plugin
 <?= $this->Flash->render('flash', [
-    'element' => 'Company.flashy'
+    'element' => 'Company.flashy',
 ]);
 ```
 

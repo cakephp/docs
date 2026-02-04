@@ -1,3 +1,8 @@
+---
+title: "Text"
+description: "Transform text in CakePHP views with TextHelper. Auto-link URLs and emails, create paragraphs, truncate strings, and highlight keywords easily."
+---
+
 # Text
 
 `class` Cake\\View\\Helper\\**TextHelper**(View $view, array $config = [])
@@ -12,9 +17,9 @@ truncating long stretches of text.
 
 `method` Cake\\View\\Helper\\TextHelper::**autoLinkEmails**(string $text, array $options = []): string
 
-Adds links to the well-formed email addresses in \$text, according
+Adds links to the well-formed email addresses in `$text`, according
 to any options defined in `$options` (see
-`HtmlHelper::link()`). :
+`HtmlHelper::link()`).
 
 ``` php
 $myText = 'For more information regarding our world-famous ' .
@@ -24,7 +29,7 @@ $linkedText = $this->Text->autoLinkEmails($myText);
 
 Output:
 
-``` text
+``` html
 For more information regarding our world-famous pastries and desserts,
 contact <a href="mailto:info@example.com">info@example.com</a>
 ```
@@ -66,8 +71,8 @@ Further options:
 
 `method` Cake\\View\\Helper\\TextHelper::**autoParagraph**(string $text): string
 
-Adds proper \<p\> around text where double-line returns are found, and \<br\> where
-single-line returns are found. :
+Adds proper `<p>` around text where double-line returns are found, and `<br>` where
+single-line returns are found.
 
 ``` php
 $myText = 'For more information

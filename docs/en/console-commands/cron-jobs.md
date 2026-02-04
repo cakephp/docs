@@ -1,3 +1,8 @@
+---
+title: "Running Shells as Cron Jobs"
+description: "Schedule CakePHP commands: run console commands as cron jobs, automate tasks, configure scheduling, and manage periodic operations."
+---
+
 # Running Shells as Cron Jobs
 
 A common thing to do with a shell is making it run as a cronjob to
@@ -20,7 +25,7 @@ trivial to setup, for example:
 You can see more info here: <https://en.wikipedia.org/wiki/Cron>
 
 > [!TIP]
-> Use `-q` (or <span class="title-ref">--quiet</span>) to silence any output for cronjobs.
+> Use `-q` (or `--quiet`) to silence any output for cronjobs.
 
 ## Cron Jobs on Shared Hosting
 

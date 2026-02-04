@@ -1,3 +1,8 @@
+---
+title: "Quick Start Guide"
+description: "Build your first CakePHP app: follow step-by-step tutorial to create a CMS, learn MVC basics, database, authentication, and deployment."
+---
+
 # Quick Start Guide
 
 The best way to experience and learn CakePHP is to sit down and build something.

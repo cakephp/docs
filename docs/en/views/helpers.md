@@ -1,3 +1,8 @@
+---
+title: "Helpers"
+description: "Use CakePHP view helpers: render forms, HTML, URLs, create custom helpers, and organize presentation logic across templates."
+---
+
 # Helpers
 
 Helpers are the component-like classes for the presentation layer of your
@@ -20,8 +25,6 @@ helpers included in CakePHP, check out the chapter for each helper:
 - [Text](../views/helpers/text)
 - [Time](../views/helpers/time)
 - [Url](../views/helpers/url)
-
-<a id="configuring-helpers"></a>
 
 ## Configuring Helpers
 
@@ -111,7 +114,7 @@ class AwesomeHelper extends Helper
 }
 ```
 
-By default all configuration options will be merged with the `$_defaultConfig`
+By default, all configuration options will be merged with the `$_defaultConfig`
 property. This property should define the default values of any configuration
 your helper requires. For example:
 
@@ -163,8 +166,6 @@ class PostsController extends AppController
     }
 }
 ```
-
-<a id="aliasing-helpers"></a>
 
 ### Aliasing Helpers
 
@@ -258,7 +259,7 @@ use Cake\View\Helper;
 
 class LinkHelper extends Helper
 {
-    public function makeEdit($title, $url)
+    public function makeEdit(string $title, string|array $url): string
     {
         // Logic to create specially formatted link goes here...
     }
@@ -282,7 +283,7 @@ class LinkHelper extends Helper
 {
     protected array $helpers = ['Html'];
 
-    public function makeEdit($title, $url)
+    public function makeEdit(string $title, string|array $url): string
     {
         // Use the HTML helper to output
         // Formatted data:
@@ -334,11 +335,11 @@ class AwesomeHelper extends Helper
 {
     public array $helpers = ['Html'];
 
-    public function someMethod()
+    public function someMethod(): string
     {
         // set meta description
         return $this->Html->meta(
-            'description', $this->getView()->get('metaDescription'), ['block' => 'meta']
+            'description', $this->getView()->get('metaDescription'), ['block' => 'meta'],
         );
     }
 }
@@ -352,11 +353,11 @@ If you would like to render an Element inside your Helper you can use
 ``` php
 class AwesomeHelper extends Helper
 {
-    public function someFunction()
+    public function someFunction(): string
     {
         return $this->getView()->element(
             '/path/to/element',
-            ['foo'=>'bar','bar'=>'foo']
+            ['foo'=>'bar','bar'=>'foo'],
         );
     }
 }
@@ -377,24 +378,24 @@ does not implement any of the callback methods.
 
 #### beforeRenderFile()
 
-`method` Helper::**beforeRenderFile**(EventInterface $event, $viewFile): void
+`method` Helper::**beforeRenderFile**(EventInterface $event, string $viewFile): void
 
 #### afterRenderFile()
 
-`method` Helper::**afterRenderFile**(EventInterface $event, $viewFile, $content): void
+`method` Helper::**afterRenderFile**(EventInterface $event, string $viewFile, string $content): void
 
 #### beforeRender()
 
-`method` Helper::**beforeRender**(EventInterface $event, $viewFile): void
+`method` Helper::**beforeRender**(EventInterface $event, string $viewFile): void
 
 #### afterRender()
 
-`method` Helper::**afterRender**(EventInterface $event, $viewFile): void
+`method` Helper::**afterRender**(EventInterface $event, string $viewFile): void
 
 #### beforeLayout()
 
-`method` Helper::**beforeLayout**(EventInterface $event, $layoutFile): void
+`method` Helper::**beforeLayout**(EventInterface $event, string $layoutFile): void
 
 #### afterLayout()
 
-`method` Helper::**afterLayout**(EventInterface $event, $layoutFile): void
+`method` Helper::**afterLayout**(EventInterface $event, string $layoutFile): void

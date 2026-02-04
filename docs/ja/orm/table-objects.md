@@ -362,7 +362,7 @@ public function beforeSave(EventInterface $event, EntityInterface $entity, Array
 
 イベントの優先順位を管理するには、いくつかの方法があります:
 
-1.  `priority` オプションを使って、ビヘイビアのリスナーの **優先度** を変更します。
+1. `priority` オプションを使って、ビヘイビアのリスナーの **優先度** を変更します。
     これは、ビヘイビアの **すべての** コールバックメソッドの優先度を変更します。
 
     Behavior:
@@ -376,7 +376,7 @@ public function beforeSave(EventInterface $event, EntityInterface $entity, Array
     ]);
     ```
 
-2.  `Model.implementedEvents()` メソッドを使用し、 `Table` クラスの `priority` を変更します。
+2. `Model.implementedEvents()` メソッドを使用し、 `Table` クラスの `priority` を変更します。
     これにより、コールバック関数ごとに異なる優先度を割り当てることができます:
 
     ``` php

@@ -1,3 +1,8 @@
+---
+title: "Text"
+description: "Manipulate strings in CakePHP: generate slugs, truncate text, create excerpts, highlight keywords with Text class convenience methods."
+---
+
 # Text
 
 `class` Cake\\Utility\\**Text**
@@ -29,7 +34,7 @@ class UsersController extends AppController
             // Notify user of new message
             $this->Flash->success(__(
                 'You have a new message: {0}',
-                Text::truncate($message['Message']['body'], 255, ['html' => true])
+                Text::truncate($message['Message']['body'], 255, ['html' => true]),
             ));
         }
     }
@@ -40,7 +45,7 @@ class UsersController extends AppController
 
 ### Text::transliterate()
 
-`static` Cake\\Utility\\Text::**transliterate**($string, $transliteratorId = null): string
+`static` Cake\\Utility\\Text::**transliterate**(string $string, Transliterator|string|null $transliterator = null): string
 
 Transliterate by default converts all characters in provided string into
 equivalent ASCII characters. The method expects UTF-8 encoding. The character
@@ -56,8 +61,8 @@ transliterator identifiers
 // apple puree
 Text::transliterate('apple purée');
 
-// Ubermensch (only latin characters are transliterated)
-Text::transliterate('Übérmensch', 'Latin-ASCII;');
+//  grosseren Apfelkuchen (only latin characters are transliterated)
+Text::transliterate('größeren Apfelkuchen', 'Latin-ASCII;');
 ```
 
 ## Creating URL Safe Strings
@@ -101,7 +106,7 @@ options are:
 
 The UUID method is used to generate unique identifiers as per `4122`. The
 UUID is a 128-bit string in the format of
-`485fc381-e790-47a3-9794-1337c0a8fe68`. :
+`485fc381-e790-47a3-9794-1337c0a8fe68`.
 
 ``` php
 Text::uuid(); // 485fc381-e790-47a3-9794-1337c0a8fe68
@@ -170,7 +175,7 @@ replacements:
 ``` php
 Text::insert(
     'My name is :name and I am :age years old.',
-    ['name' => 'Bob', 'age' => '65']
+    ['name' => 'Bob', 'age' => '65'],
 );
 // Returns: "My name is Bob and I am 65 years old."
 ```
@@ -193,7 +198,7 @@ $options = [
         'method' => 'text', // or html
     ],
     'before' => '',
-    'after' => ''
+    'after' => '',
 ];
 ```
 
@@ -237,7 +242,7 @@ $text = 'This is the song that never ends. This is the song that never ends.';
 $result = Text::wrapBlock($text, [
     'width' => 22,
     'indent' => ' → ',
-    'indentAt' => 1
+    'indentAt' => 1,
 ]);
 
 // Returns
@@ -272,7 +277,7 @@ Example:
 echo $this->Text->highlight(
     $lastSentence,
     'using',
-    ['format' => '<span class="highlight">\1</span>']
+    ['format' => '<span class="highlight">\1</span>'],
 );
 
 // Called as Text
@@ -281,14 +286,14 @@ use Cake\Utility\Text;
 echo Text::highlight(
     $lastSentence,
     'using',
-    ['format' => '<span class="highlight">\1</span>']
+    ['format' => '<span class="highlight">\1</span>'],
 );
 ```
 
 Output:
 
-> Highlights \$phrase in \$text \<span class="highlight"\>using\</span\> the
-> \$options\['format'\] string specified or a default string.
+> Highlights `$phrase` in `$text` `<span class="highlight">using</span>` the
+> `$options['format']` string specified or a default string.
 
 ## Truncating Text
 
@@ -309,7 +314,7 @@ possible keys by default, all of which are optional:
 [
     'ellipsis' => '...',
     'exact' => true,
-    'html' => false
+    'html' => false,
 ]
 ```
 
@@ -322,7 +327,7 @@ echo $this->Text->truncate(
     22,
     [
         'ellipsis' => '...',
-        'exact' => false
+        'exact' => false,
     ]
 );
 
@@ -334,7 +339,7 @@ echo Text::truncate(
     22,
     [
         'ellipsis' => '...',
-        'exact' => false
+        'exact' => false,
     ]
 );
 ```
@@ -361,7 +366,7 @@ possible keys by default, all of which are optional:
 ``` php
 [
     'ellipsis' => '...',
-    'exact' => true
+    'exact' => true,
 ]
 ```
 
@@ -377,7 +382,7 @@ echo $this->Text->tail(
     70,
     [
         'ellipsis' => '...',
-        'exact' => false
+        'exact' => false,
     ]
 );
 
@@ -389,7 +394,7 @@ echo Text::tail(
     70,
     [
         'ellipsis' => '...',
-        'exact' => false
+        'exact' => false,
     ]
 );
 ```
@@ -407,7 +412,7 @@ Output:
 Extracts an excerpt from `$text` surrounding the `$phrase` with a number
 of characters on each side determined by `$radius`, and prefix/suffix with
 `$ellipsis`. This method is especially handy for search results. The query
-string or keywords can be shown within the resulting document. :
+string or keywords can be shown within the resulting document.
 
 ``` php
 // Called as TextHelper
@@ -428,7 +433,7 @@ Output:
 
 ### Text::toList()
 
-`method` Cake\\Utility\\Text::**toList**(array $list, ?string $and = null, $separator = ', '): string
+`method` Cake\\Utility\\Text::**toList**(array $list, ?string $and = null, string $separator = ', '): string
 
 Creates a comma-separated list where the last two items are joined with 'and':
 

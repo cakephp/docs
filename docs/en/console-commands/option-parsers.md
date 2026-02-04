@@ -1,3 +1,8 @@
+---
+title: "Option Parsers"
+description: "Parse CLI options in CakePHP: define command arguments, options, subcommands, help text, and validate console input effectively."
+---
+
 # Option Parsers
 
 `class` Cake\\Console\\**ConsoleOptionParser**
@@ -38,7 +43,7 @@ public function getOptionParser()
 
 ## Using Arguments
 
-`method` Cake\\Console\\ConsoleOptionParser::**addArgument**($name, $params = [])
+`method` Cake\\Console\\ConsoleOptionParser::**addArgument**(string $name, array $params = []): static
 
 Positional arguments are frequently used in command line tools,
 and `ConsoleOptionParser` allows you to define positional
@@ -73,10 +78,10 @@ The `separator` option was added.
 
 ### Adding Multiple Arguments
 
-`method` Cake\\Console\\ConsoleOptionParser::**addArguments**(array $args)
+`method` Cake\\Console\\ConsoleOptionParser::**addArguments**(array $args): static
 
 If you have an array with multiple arguments you can use
-`$parser->addArguments()` to add multiple arguments at once. :
+`$parser->addArguments()` to add multiple arguments at once.
 
 ``` php
 $parser->addArguments([
@@ -92,7 +97,7 @@ can be used as part of a fluent method chain.
 
 When creating positional arguments, you can use the `required` flag, to
 indicate that an argument must be present when a shell is called.
-Additionally you can use `choices` to force an argument to be from a list of
+Additionally, you can use `choices` to force an argument to be from a list of
 valid choices:
 
 ``` php
@@ -109,7 +114,7 @@ will be raised and the shell will be stopped.
 
 ## Using Options
 
-`method` Cake\\Console\\ConsoleOptionParser::**addOption**($name, array $options = [])
+`method` Cake\\Console\\ConsoleOptionParser::**addOption**(string $name, array $options = []): static
 
 Options or flags are used in command line tools to provide unordered key/value
 arguments for your commands. Options can define both verbose and short aliases.
@@ -164,10 +169,10 @@ The `separator` option was added.
 
 ### Adding Multiple Options
 
-`method` Cake\\Console\\ConsoleOptionParser::**addOptions**(array $options)
+`method` Cake\\Console\\ConsoleOptionParser::**addOptions**(array $options): static
 
 If you have an array with multiple options you can use `$parser->addOptions()`
-to add multiple options at once. :
+to add multiple options at once.
 
 ``` php
 $parser->addOptions([
@@ -202,7 +207,7 @@ are set to `true`, when they are absent they are set to `false`:
 ``` php
 $parser->addOption('verbose', [
     'help' => 'Enable verbose output.',
-    'boolean' => true
+    'boolean' => true,
 ]);
 ```
 
@@ -228,7 +233,7 @@ public function getOptionParser()
         'description' => [
             __("Use this command to grant ACL permissions. Once executed, the "),
             __("ARO specified (and its children, if any) will have ALLOW access "),
-            __("to the specified ACO action (and the ACO's children, if any).")
+            __("to the specified ACO action (and the ACO's children, if any)."),
         ],
         'arguments' => [
             'aro' => ['help' => __('ARO to check.'), 'required' => true],
@@ -241,7 +246,7 @@ public function getOptionParser()
 
 ### Merging Option Parsers
 
-`method` Cake\\Console\\ConsoleOptionParser::**merge**($spec)
+`method` Cake\\Console\\ConsoleOptionParser::**merge**(ConsoleOptionParser $spec): static
 
 When building a group command, you maybe want to combine several parsers for
 this:
@@ -348,7 +353,7 @@ epilog.
 
 ### Set the Description
 
-`method` Cake\\Console\\ConsoleOptionParser::**setDescription**($text)
+`method` Cake\\Console\\ConsoleOptionParser::**setDescription**(array|string $text): static
 
 The description displays above the argument and option information. By passing
 in either an array or a string, you can set the value of the description:
@@ -363,7 +368,7 @@ $parser->getDescription();
 
 ### Set the Epilog
 
-`method` Cake\\Console\\ConsoleOptionParser::**setEpilog**($text)
+`method` Cake\\Console\\ConsoleOptionParser::**setEpilog**(array|string $text): static
 
 Gets or sets the epilog for the option parser. The epilog is displayed after the
 argument and option information. By passing in either an array or a string, you

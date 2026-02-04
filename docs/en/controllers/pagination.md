@@ -1,3 +1,8 @@
+---
+title: "Pagination"
+description: "Paginate data in CakePHP: configure pagination, customize queries, sort results, display page numbers, and create user-friendly interfaces."
+---
+
 # Pagination
 
 One of the main obstacles of creating flexible and user-friendly web
@@ -79,7 +84,7 @@ class ArticlesController extends AppController
         $tags = $this->request->getParam('pass');
 
         $customFinderOptions = [
-            'tags' => $tags
+            'tags' => $tags,
         ];
         // We're using the $settings argument to paginate() here.
         // But the same structure could be used in $this->paginate
@@ -90,7 +95,7 @@ class ArticlesController extends AppController
         // public function findTagged(Query $query, array $tagged = [])
         $settings = [
             'finder' => [
-                'tagged' => $customFinderOptions
+                'tagged' => $customFinderOptions,
             ]
         ];
         $articles = $this->paginate($this->Articles, $settings);
@@ -123,7 +128,7 @@ This object contains the paginated records and the paging params.
 
 ## Simple Pagination
 
-By default `Controller::paginate()` uses the `Cake\Datasource\Paging\NumericPaginator`
+By default, `Controller::paginate()` uses the `Cake\Datasource\Paging\NumericPaginator`
 class which does a `COUNT()` query to calculate the size of the result set so
 that page number links can be rendered. On very large datasets this count query
 can be very expensive. In situations where you only want to show 'Next' and 'Previous'
@@ -141,8 +146,6 @@ class ArticlesController extends AppController
 When using the `SimplePaginator` you will not be able to generate page
 numbers, counter data, links to the last page, or total record count controls.
 
-<a id="paginating-multiple-queries"></a>
-
 ## Paginating Multiple Queries
 
 You can paginate multiple models in a single controller action, using the
@@ -153,7 +156,7 @@ call to the `paginate()` method:
 // Paginate property
 protected array $paginate = [
     'Articles' => ['scope' => 'article'],
-    'Tags' => ['scope' => 'tag']
+    'Tags' => ['scope' => 'tag'],
 ];
 
 // In a controller action
@@ -174,7 +177,7 @@ elements and URLs for pagination.
 ### Paginating the Same Model multiple Times
 
 To paginate the same model multiple times within a single controller action you
-need to define an alias for the model.:
+need to define an alias for the model.
 
 ``` php
 // In a controller action
@@ -197,7 +200,7 @@ $this->paginate = [
 
 $publishedArticles = $this->paginate(
     $this->Articles->find('all', scope: 'published_articles')
-        ->where(['published' => true])
+        ->where(['published' => true]),
 );
 
 // Load an additional table object to allow differentiating in the paginator
@@ -209,15 +212,13 @@ $unpublishedArticlesTable = $this->fetchTable('UnpublishedArticles', [
 
 $unpublishedArticles = $this->paginate(
     $unpublishedArticlesTable->find('all', scope: 'unpublished_articles')
-        ->where(['published' => false])
+        ->where(['published' => false]),
 );
 ```
 
-<a id="control-which-fields-used-for-ordering"></a>
-
 ## Control which Fields Used for Ordering
 
-By default sorting can be done on any non-virtual column a table has. This is
+By default, sorting can be done on any non-virtual column a table has. This is
 sometimes undesirable as it allows users to sort on un-indexed columns that can
 be expensive to order by. You can set the allowed list of fields that can be sorted
 using the `sortableFields` option. This option is required when you want to
@@ -347,7 +348,7 @@ protected array $paginate = [
 The number of results that are fetched per page is exposed to the user as the
 `limit` parameter. It is generally undesirable to allow users to fetch all
 rows in a paginated set. The `maxLimit` option asserts that no one can set
-this limit too high from the outside. By default CakePHP limits the maximum
+this limit too high from the outside. By default, CakePHP limits the maximum
 number of rows that can be fetched to 100. If this default is not appropriate
 for your application, you can adjust it as part of the pagination options, for
 example reducing it to `10`:
@@ -355,7 +356,7 @@ example reducing it to `10`:
 ``` php
 protected array $paginate = [
     // Other keys here.
-    'maxLimit' => 10
+    'maxLimit' => 10,
 ];
 ```
 
@@ -387,7 +388,7 @@ public function index()
 
 ## Using a paginator class directly
 
-You can also use a paginator directly.:
+You can also use a paginator directly.
 
 ``` php
 // Create a paginator

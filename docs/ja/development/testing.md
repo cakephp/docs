@@ -20,7 +20,7 @@ PHPUnit は [Composer](https://getcomposer.org) または [PHAR パッケージ]
 Composer で PHPUnit をインストールする場合:
 
 ``` bash
-$ php composer.phar require --dev phpunit/phpunit:"^8.5"
+php composer.phar require --dev phpunit/phpunit:"^11.5.3"
 ```
 
 コマンドラインで上記のように実行すると、 `composer.json` の `require-dev` セクションに
@@ -29,7 +29,7 @@ $ php composer.phar require --dev phpunit/phpunit:"^8.5"
 これで、PHPUnit を以下のように実行することができます。
 
 ``` bash
-$ vendor/bin/phpunit
+vendor/bin/phpunit
 ```
 
 ### PHAR ファイルを使用する場合
@@ -81,10 +81,10 @@ PHPUnit をインストールして `test` データソースを設定した後�
 
 ``` bash
 # phpunit.phar について
-$ php phpunit.phar
+php phpunit.phar
 
 # Composer でインストールされた phpunit
-$ vendor/bin/phpunit
+vendor/bin/phpunit
 ```
 
 上記を実行するとテストが実行されます(テストが作成されている場合)。
@@ -93,7 +93,7 @@ $ vendor/bin/phpunit
 例えば、ArticlesTable クラスのテストケースがある場合、次のように実行します。
 
 ``` bash
-$ vendor/bin/phpunit tests/TestCase/Model/Table/ArticlesTableTest
+vendor/bin/phpunit tests/TestCase/Model/Table/ArticlesTableTest
 ```
 
 実行したテストや成功したテスト・失敗したテストの数など、 各種情報がカラーで表示されます。
@@ -106,12 +106,12 @@ $ vendor/bin/phpunit tests/TestCase/Model/Table/ArticlesTableTest
 CakePHP が全般的にそうであるように、テストケースにもいくつか規約があります。
 以下のとおりです。
 
-1.  テストを含むPHPファイルは、 `tests/TestCase/[Type]` ディレクトリーに置きます。
-2.  ファイル名のサフィックスは .php ではなく **Test.php** とします。
-3.  テストを含むクラスは `Cake\TestSuite\TestCase` 、 `Cake\TestSuite\IntegrationTestCase` または `\PHPUnit\Framework\TestCase` を継承する必要があります。
-4.  他のクラス名と同様に、テストケースのクラス名はファイル名と一致する必要があります。
+1. テストを含むPHPファイルは、 `tests/TestCase/[Type]` ディレクトリーに置きます。
+2. ファイル名のサフィックスは .php ではなく **Test.php** とします。
+3. テストを含むクラスは `Cake\TestSuite\TestCase` 、 `Cake\TestSuite\IntegrationTestCase` または `\PHPUnit\Framework\TestCase` を継承する必要があります。
+4. 他のクラス名と同様に、テストケースのクラス名はファイル名と一致する必要があります。
     **RouterTest.php** は、 `class RouterTest extends TestCase` が含まれている必要があります。
-5.  テストを含むメソッド (つまり、アサーションを含むメソッド) の名前は `testPublished()` のように `test` で始める必要があります。 `@test` というアノテーションをメソッドにマークすることでテストメソッドとすることもできます。
+5. テストを含むメソッド (つまり、アサーションを含むメソッド) の名前は `testPublished()` のように `test` で始める必要があります。 `@test` というアノテーションをメソッドにマークすることでテストメソッドとすることもできます。
 
 ## 最初のテストケースを作成
 
@@ -261,7 +261,7 @@ vendor/bin/phpunit
 使用します。
 
 ``` bash
-$ phpunit --filter testSave tests/TestCase/Model/Table/ArticlesTableTest
+phpunit --filter testSave tests/TestCase/Model/Table/ArticlesTableTest
 ```
 
 テストメソッドを実行するためフィルタリングとして、filter パラメーターは大文字と小文字を区別する
@@ -274,7 +274,7 @@ HTML ファイル形式で生成することができます。
 テストケースのカバレッジを生成するには以下のようにします。
 
 ``` bash
-$ phpunit --coverage-html webroot/coverage tests/TestCase/Model/Table/ArticlesTableTest
+phpunit --coverage-html webroot/coverage tests/TestCase/Model/Table/ArticlesTableTest
 ```
 
 カバレッジ結果のHTMLファイルは、アプリケーションの webroot ディレクトリー内に生成されます。
@@ -284,7 +284,7 @@ $ phpunit --coverage-html webroot/coverage tests/TestCase/Model/Table/ArticlesTa
 `phpdbg` を使用できます。カバレッジの生成は `phpdbg` の方が高速です。
 
 ``` bash
-$ phpdbg -qrr phpunit --coverage-html webroot/coverage tests/TestCase/Model/Table/ArticlesTableTest
+phpdbg -qrr phpunit --coverage-html webroot/coverage tests/TestCase/Model/Table/ArticlesTableTest
 ```
 
 ### プラグインテストのためのテストスイート
@@ -351,10 +351,10 @@ $ phpdbg -qrr phpunit --coverage-html webroot/coverage tests/TestCase/Model/Tabl
 
 CakePHP はフィクスチャーに基づいたテストケースを実行するにあたり、以下の動作をします。
 
-1.  各フィクスチャーで必要なテーブルを作成します。
-2.  フィクスチャーにデータが存在すれば、それをテーブルに投入します。
-3.  テストメソッドを実行します。
-4.  フィクスチャーのテーブルを空にします。
+1. 各フィクスチャーで必要なテーブルを作成します。
+2. フィクスチャーにデータが存在すれば、それをテーブルに投入します。
+3. テストメソッドを実行します。
+4. フィクスチャーのテーブルを空にします。
 
 ### テスト接続
 
@@ -631,9 +631,9 @@ class ArticlesTest extends CakeTestCase
 
 ### フィクスチャファクトリー
 
-アプリケーションが大規模になると、テストフィクスチャの量も肥大化し、システム全体の管理が困難になりがちです。\`フィクスチャファクトリープラグイン \<https://github.com/vierge-noire/cakephp-fixture-factories\>\`\_ は、大規模システム管理のための有効な解決手段です。
+アプリケーションが大規模になると、テストフィクスチャの量も肥大化し、システム全体の管理が困難になりがちです。\`フィクスチャファクトリープラグイン \<<https://github.com/vierge-noire/cakephp-fixture-factories>\>\`\_ は、大規模システム管理のための有効な解決手段です。
 
-このプラグインは、各テストの前にすべてのダーティテーブルを切り捨てるために、 [テストスイートライトプラグイン](https://github.com/vierge-noire/cakephp-test-suite-light) を使用します。
+このプラグインは、各テストの前にすべてのダーティテーブルを切り捨てるために、 [テストスイートライトプラグイン](<https://github.com/vierge-noire/cakephp-test-suite-light>) を使用します。
 
 下記のcakeコマンドでフィクスチャファクトリーをbakeできます。:
 
@@ -1935,15 +1935,15 @@ bin/cake bake test <type> <name>
 
 `<type>` は以下のいずれかである必要があります。
 
-1.  Entity
-2.  Table
-3.  Controller
-4.  Component
-5.  Behavior
-6.  Helper
-7.  Shell
-8.  Task
-9.  ShellHelper
+1. Entity
+2. Table
+3. Controller
+4. Component
+5. Behavior
+6. Helper
+7. Shell
+8. Task
+9. ShellHelper
 10. Cell
 11. Form
 12. Mailer

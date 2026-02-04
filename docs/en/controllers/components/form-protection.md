@@ -1,3 +1,8 @@
+---
+title: "Form Protection Component"
+description: "Prevent form tampering in CakePHP: use FormProtection to validate form integrity, prevent mass assignment, and secure POST data."
+---
+
 # Form Protection Component
 
 `class` **FormProtection**(ComponentCollection $collection, array $config = [])
@@ -25,7 +30,7 @@ in your `initialize()` method.
 
 ## Form tampering prevention
 
-By default the `FormProtectionComponent` prevents users from tampering with
+By default, the `FormProtectionComponent` prevents users from tampering with
 forms in specific ways. It will prevent the following things:
 
 - Form's action (URL) cannot be modified.
@@ -51,21 +56,21 @@ Configuring the form protection component is generally done in the controller's
 
 Available options are:
 
-validate  
+### validate
 Set to `false` to completely skip the validation of POST
 requests, essentially turning off form validation.
 
-unlockedFields  
+### unlockedFields
 Set to a list of form fields to exclude from POST validation. Fields can be
 unlocked either in the Component, or with
 `FormHelper::unlockField()`. Fields that have been unlocked are
 not required to be part of the POST and hidden unlocked fields do not have
 their values checked.
 
-unlockedActions  
+### unlockedActions
 Actions to exclude from POST validation checks.
 
-validationFailureCallback  
+### validationFailureCallback
 Callback to call in case of validation failure. Must be a valid Closure.
 Unset by default in which case exception is thrown on validation failure.
 

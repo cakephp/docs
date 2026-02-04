@@ -1,3 +1,8 @@
+---
+title: "Entities"
+description: "Manage CakePHP entities: access data, implement accessors/mutators, handle mass assignment, virtual fields, and custom entity logic."
+---
+
 # Entities
 
 `class` Cake\\ORM\\**Entity**
@@ -54,7 +59,7 @@ use App\Model\Entity\Article;
 $article = new Article([
     'id' => 1,
     'title' => 'New Article',
-    'created' => new DateTime('now')
+    'created' => new DateTime('now'),
 ]);
 ```
 
@@ -69,7 +74,7 @@ $article = $this->fetchTable('Articles')->newEmptyEntity();
 $article = $this->fetchTable('Articles')->newEntity([
     'id' => 1,
     'title' => 'New Article',
-    'created' => new DateTime('now')
+    'created' => new DateTime('now'),
 ]);
 ```
 
@@ -97,11 +102,11 @@ You can also use the `get()` and `set()` methods.
 
 ### set()
 
-`method` Cake\\ORM\\Entity::**set**($field, $value = null, array $options = [])
+`method` Cake\\ORM\\Entity::**set**(array|string $field, mixed $value = null, array $options = []): static
 
 ### get()
 
-`method` Cake\\ORM\\Entity::**get**($field)
+`method` Cake\\ORM\\Entity::**get**(string $field): mixed
 
 For example:
 
@@ -112,14 +117,14 @@ echo $article->get('title');
 
 ### patch()
 
-`method` Cake\\ORM\\Entity::**patch**(array $fields, array $options = [])
+`method` Cake\\ORM\\Entity::**patch**(array $fields, array $options = []): static
 
 Using `patch()` you can mass assign multiple fields at once:
 
 ``` php
 $article->patch([
     'title' => 'My first post',
-    'body' => 'It is the best ever!'
+    'body' => 'It is the best ever!',
 ]);
 ```
 
@@ -136,7 +141,7 @@ You can check if fields are defined in your entities with `has()`:
 ``` php
 $article = new Article([
     'title' => 'First post',
-    'user_id' => null
+    'user_id' => null,
 ]);
 $article->has('title'); // true
 $article->has('user_id'); // true
@@ -200,7 +205,7 @@ use Cake\ORM\Entity;
 
 class Article extends Entity
 {
-    protected function _getTitle($title)
+    protected function _getTitle(string $title): string
     {
         return strtoupper($title);
     }
@@ -219,7 +224,7 @@ echo $article->get('title'); // returns FOO instead of foo
 > [!NOTE]
 > Code in your accessors is executed each time you reference the field. You can
 > use a local variable to cache it if you are performing a resource-intensive
-> operation in your accessor like this: <span class="title-ref">\$myEntityProp = \$entity-\>my_property</span>.
+> operation in your accessor like this: `$myEntityProp = $entity->my_property`.
 
 > [!WARNING]
 > Accessors will be used when saving entities, so be careful when defining methods
@@ -244,7 +249,7 @@ use Cake\Utility\Text;
 
 class Article extends Entity
 {
-    protected function _setTitle($title)
+    protected function _setTitle(string $title): string
     {
         $this->slug = Text::slug($title);
 
@@ -283,7 +288,7 @@ use Cake\ORM\Entity;
 
 class User extends Entity
 {
-    protected function _getFullName()
+    protected function _getFullName(): string
     {
         return $this->first_name . '  ' . $this->last_name;
     }
@@ -304,7 +309,7 @@ see [Exposing Virtual Fields](#exposing-virtual-fields).
 
 ## Checking if an Entity Has Been Modified
 
-`method` Cake\\ORM\\Entity::**isDirty**(?string $field = null)
+`method` Cake\\ORM\\Entity::**isDirty**(?string $field = null): bool
 
 You may want to make code conditional based on whether or not fields have
 changed in an entity. For example, you may only want to validate fields when
@@ -317,7 +322,7 @@ $article->isDirty('title');
 
 You can also flag fields as being modified. This is handy when appending into
 array fields as this wouldn't automatically mark the field as dirty, only
-exchanging completely would.:
+exchanging completely would.
 
 ``` php
 // Add a comment and mark the field as changed.
@@ -383,7 +388,7 @@ on an entity, making it easier to test code that works with error messages:
 $user->setError('password', ['Password is required']);
 $user->setErrors([
     'password' => ['Password is required'],
-    'username' => ['Username is required']
+    'username' => ['Username is required'],
 ]);
 ```
 
@@ -410,7 +415,7 @@ class Article extends Entity
 {
     protected array $_accessible = [
         'title' => true,
-        'body' => true
+        'body' => true,
     ];
 }
 ```
@@ -509,13 +514,13 @@ your associations, there may be times when you need to lazily load associated
 data. Before we get into how to lazy load associations, we should discuss the
 differences between eager loading and lazy loading associations:
 
-Eager loading  
+Eager loading
 Eager loading uses joins (where possible) to fetch data from the
 database in as *few* queries as possible. When a separate query is required,
 like in the case of a HasMany association, a single query is emitted to
 fetch *all* the associated data for the current set of objects.
 
-Lazy loading  
+Lazy loading
 Lazy loading defers loading association data until it is absolutely
 required. While this can save CPU time because possibly unused data is not
 hydrated into objects, it can result in many more queries being emitted to
@@ -557,7 +562,7 @@ namespace SoftDelete\Model\Entity;
 
 trait SoftDeleteTrait
 {
-    public function softDelete()
+    public function softDelete(): void
     {
         $this->set('deleted', true);
     }
@@ -599,11 +604,9 @@ applied. Entities are recursively converted to JSON as well. This means that if 
 eager loaded entities and their associations CakePHP will correctly handle
 converting the associated data into the correct format.
 
-<a id="exposing-virtual-fields"></a>
-
 ### Exposing Virtual Fields
 
-By default virtual fields are not exported when converting entities to
+By default, virtual fields are not exported when converting entities to
 arrays or JSON. In order to expose virtual fields you need to make them
 visible. When defining your entity class you can provide a list of virtual
 field that should be exposed:
@@ -639,7 +642,7 @@ use Cake\ORM\Entity;
 
 class User extends Entity
 {
-    protected $_hidden = ['password'];
+    protected array $_hidden = ['password'];
 }
 ```
 

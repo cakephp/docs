@@ -1,3 +1,8 @@
+---
+title: "Application"
+description: "Configure CakePHP Application: bootstrap, load plugins, configure middleware, services, console commands, and manage application lifecycle."
+---
+
 # Application
 
 The `Application` is the heart of your application. It controls
@@ -10,13 +15,13 @@ it will be pretty slim and only define a few default
 methods:
 
 - `bootstrap` Used to load [configuration files](../development/configuration), define constants and other global functions.
-  By default this will include **config/bootstrap.php**. This is the ideal place
+  By default, this will include **config/bootstrap.php**. This is the ideal place
   to load [Plugins](../plugins) and global [event listeners](../core-libraries/events).
-- `routes` Used to load [routes](../development/routing). By default this
+- `routes` Used to load [routes](../development/routing). By default, this
   will include **config/routes.php**.
 - `middleware` Used to add [middleware](../controllers/middleware) to your application.
 - `console` Used to add [console commands](../console-commands) to your
-  application. By default this will automatically discover console commands in
+  application. By default, this will automatically discover console commands in
   your application and all plugins.
 
 ## Bootstrapping your Application
@@ -55,7 +60,7 @@ use Cake\Http\BaseApplication;
 
 class Application extends BaseApplication
 {
-    public function bootstrap()
+    public function bootstrap(): void
     {
         // Call the parent to `require_once` config/bootstrap.php
         parent::bootstrap();
@@ -69,7 +74,7 @@ class Application extends BaseApplication
         if (PHP_SAPI !== 'cli') {
             FactoryLocator::add(
                 'Table',
-                (new TableLocator())->allowFallbackClass(false)
+                (new TableLocator())->allowFallbackClass(false),
             );
         }
 

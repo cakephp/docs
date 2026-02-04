@@ -1,3 +1,8 @@
+---
+title: "5.0 Migration Guide"
+description: "Upgrade to CakePHP 5.0: migrate from 4.x, handle breaking changes, update code, understand new requirements and deprecation removals."
+---
+
 # 5.0 Migration Guide
 
 CakePHP 5.0 contains breaking changes, and is not backwards compatible with 4.x
@@ -27,7 +32,7 @@ changes made:
 
 - The `SECOND`, `MINUTE`, `HOUR`, `DAY`, `WEEK`, `MONTH`, `YEAR` constants were removed.
 
-- Use of `#[\AllowDynamicProperties]` removed everywhere. It was used for the following classes:  
+- Use of `#[\AllowDynamicProperties]` removed everywhere. It was used for the following classes:
   - `Command/Command`
   - `Console/Shell`
   - `Controller/Component`
@@ -37,7 +42,7 @@ changes made:
   - `View/Helper`
   - `View/View`
 
-- The supported database engine versions were updated:  
+- The supported database engine versions were updated:
   - MySQL (5.7 or higher)
   - MariaDB (10.1 or higher)
   - PostgreSQL (9.6 or higher)
@@ -46,7 +51,7 @@ changes made:
 
 ### Auth
 
-- <span class="title-ref">Auth</span> has been removed. Use the [cakephp/authentication](https://book.cakephp.org/authentication/3/en/index.html) and
+- `Auth` has been removed. Use the [cakephp/authentication](https://book.cakephp.org/authentication/3/en/index.html) and
   [cakephp/authorization](https://book.cakephp.org/authorization/3/en/index.html) plugins instead.
 
 ### Cache
@@ -113,8 +118,8 @@ changes made:
 ### Database
 
 - The `DateTimeType` and `DateType` now always return immutable objects.
-  Additionally the interface for `Date` objects reflects the `ChronosDate`
-  interface which lacks all of the time related methods that were present in
+  Additionally, the interface for `Date` objects reflects the `ChronosDate`
+  interface which lacks all the time related methods that were present in
   CakePHP 4.x.
 - `DateType::setLocaleFormat()` no longer accepts an array.
 - `Query` now accepts only `\Closure` parameters instead of `callable`. Callables can be converted
@@ -166,7 +171,7 @@ changes made:
 
 ### I18n
 
-- `FrozenDate` was renamed to <span class="title-ref">Date</span> and `FrozenTime` was renamed to <span class="title-ref">DateTime</span>.
+- `FrozenDate` was renamed to `Date` and `FrozenTime` was renamed to `DateTime`.
 - `Time` now extends `Cake\Chronos\ChronosTime` and is therefore immutable.
 - `Date` objects do not extend `DateTimeInterface` anymore - therefore you can't compare them with `DateTime` objects.
   See the [cakephp/chronos release documentation](https://github.com/cakephp/chronos/releases/tag/3.0.2) for more information.
@@ -247,7 +252,7 @@ The above will disable creation of entity objects and return rows as arrays inst
 - `TestSuite` was removed. Users should use environment variables to customize
   unit test settings instead.
 - `TestListenerTrait` was removed. PHPUnit dropped support for these listeners.
-  See [PHPUnit 10 Upgrade](../appendices/phpunit10)
+  See [PHPUnit Upgrade](../appendices/phpunit-upgrade)
 - `IntegrationTestTrait::configRequest()` now merges config when called multiple times
   instead of replacing the currently present config.
 
@@ -259,7 +264,7 @@ The above will disable creation of entity objects and return rows as arrays inst
   tests.
 - Previously, most data validation error messages were simply `The provided value is invalid`.
   Now, the data validation error messages are worded more precisely.
-  For example, `` The provided value must be greater than or equal to \`5\ ``\`.
+  For example, ``The provided value must be greater than or equal to `5`.``
 
 ### View
 
@@ -364,7 +369,7 @@ Table finders can now have typed arguments as required instead of an options arr
 For e.g. a finder for fetching posts by category or user:
 
 ``` php
-public function findByCategoryOrUser(SelectQuery $query, array $options)
+public function findByCategoryOrUser(SelectQuery $query, array $options): SelectQuery
 {
     if (isset($options['categoryId'])) {
         $query->where(['category_id' => $options['categoryId']]);
@@ -380,7 +385,7 @@ public function findByCategoryOrUser(SelectQuery $query, array $options)
 can now be written as:
 
 ``` php
-public function findByCategoryOrUser(SelectQuery $query, ?int $categoryId = null, ?int $userId = null)
+public function findByCategoryOrUser(SelectQuery $query, ?int $categoryId = null, ?int $userId = null): SelectQuery
 {
     if ($categoryId) {
         $query->where(['category_id' => $categoryId]);

@@ -1,3 +1,8 @@
+---
+title: "5.0 Upgrade Guide"
+description: "Upgrade to CakePHP 5.0 from 4.x. Fix deprecations, update to PHP 8.1+, run rector tool, and update dependencies following this step-by-step guide."
+---
+
 # 5.0 Upgrade Guide
 
 First, check that your application is running on latest CakePHP 4.x version.
@@ -6,10 +11,10 @@ First, check that your application is running on latest CakePHP 4.x version.
 
 Once your application is running on latest CakePHP 4.x, enable deprecation warnings in **config/app.php**:
 
-``` text
+``` php
 'Error' => [
     'errorLevel' => E_ALL,
-]
+],
 ```
 
 Now that you can see all the warnings, make sure these are fixed before proceeding with the upgrade.
@@ -49,7 +54,7 @@ composer install --no-dev
 With the upgrade tool installed you can now run it on your application or
 plugin:
 
-``` text
+``` bash
 bin/cake upgrade rector --rules cakephp50 <path/to/app/src>
 bin/cake upgrade rector --rules chronos3 <path/to/app/src>
 ```

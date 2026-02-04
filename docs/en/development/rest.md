@@ -1,3 +1,8 @@
+---
+title: "REST"
+description: "Build REST APIs in CakePHP with JSON/XML views, content negotiation, and resource routes. Serialize data automatically for modern web services."
+---
+
 # REST
 
 REST is a foundational concept to the open web. CakePHP provides functionality
@@ -109,10 +114,10 @@ response. Clients could also make a request to `/recipes` with the
 ## Encoding Response Data
 
 In the above controller, we're defining a `viewClasses()` method. This method
-defines which views your controller has available for content-negotitation.
+defines which views your controller has available for content-negotiation.
 We're including CakePHP's `JsonView` which enables JSON based responses. To
-learn more about it and Xml based views see [JSON and XML views](../views/json-and-xml-views). is
-used by CakePHP to select a view class to render a REST response with.
+learn more about it and XML based views see [JSON and XML views](../views/json-and-xml-views).
+Content negotiation is used by CakePHP to select a view class to render a REST response with.
 
 Next, we have several methods that expose basic logic to create, edit, view and
 delete recipes. In each of our actions we're using the `serialize` option to
@@ -124,7 +129,7 @@ define the `serialize` option, and instead use template files. We would place
 the REST templates for our RecipesController inside **templates/Recipes/json**.
 
 See the [Controller Viewclasses](../controllers#controller-viewclasses) for more information on how CakePHP's
-response negotiation functionality.
+response negotiation functionality works.
 
 ## Parsing Request Bodies
 
@@ -139,7 +144,7 @@ $middlewareQueue->add(new BodyParserMiddleware());
 ```
 
 This middleware will use the `content-type` header to detect the format of
-request data and parse enabled formats. By default only `JSON` parsing is
+request data and parse enabled formats. By default, only `JSON` parsing is
 enabled by default. You can enable XML support by enabling the `xml`
 constructor option. When a request is made with a `Content-Type` of
 `application/json`, CakePHP will decode the request data and update the

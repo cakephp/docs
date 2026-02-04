@@ -1,3 +1,8 @@
+---
+title: "CMS Tutorial - Authentication"
+description: "Add authentication to CakePHP CMS tutorial. Hash passwords securely, configure login/logout, use Authentication plugin with bcrypt password hashing."
+---
+
 # CMS Tutorial - Authentication
 
 Now that our CMS has users, we can enable them to login using the
@@ -55,7 +60,7 @@ class User extends Entity
     // Add this method
     protected function _setPassword(string $password) : ?string
     {
-        if (strlen($password) > 0) {
+        if (mb_strlen($password) > 0) {
             return (new DefaultPasswordHasher())->hash($password);
         }
         return null;
@@ -63,7 +68,7 @@ class User extends Entity
 }
 ```
 
-Now, point your browser to **http://localhost:8765/users** to see a list of users.
+Now, point your browser to **<http://localhost:8765/users>** to see a list of users.
 Remember you'll need to have your local server running. Start a standalone PHP
 server using `bin/cake server`.
 
@@ -94,7 +99,7 @@ The Plugin will handle the authentication process using 3 different classes:
   this is before your Controllers are processed by the framework, and will pick the
   credentials and process them to check if the user is authenticated.
 
-If you remember, we used <span class="title-ref">AuthComponent</span>
+If you remember, we used `AuthComponent`
 before to handle all these steps. Now the logic is divided into specific classes and
 the authentication process happens before your controller layer. First it checks if the user
 is authenticated (based on the configuration you provided) and injects the user and
@@ -183,7 +188,7 @@ public function initialize(): void
 Now, on every request, the `AuthenticationMiddleware` will inspect
 the request session to look for an authenticated user. If we are loading the `/users/login`
 page, it will also inspect the posted form data (if any) to extract the credentials.
-By default the credentials will be extracted from the `username` and `password`
+By default, the credentials will be extracted from the `username` and `password`
 fields in the request data.
 The authentication result will be injected in a request attribute named
 `authentication`. You can inspect the result at any time using
@@ -197,7 +202,7 @@ If you visit your site, you'll get an "infinite redirect loop" so let's fix that
 > [!NOTE]
 > If your application serves from both SSL and non-SSL protocols, then you might have problems
 > with sessions being lost, in case your application is on non-SSL protocol. You need to enable
-> access by setting session.cookie_secure to false in your config config/app.php or config/app_local.php.
+> access by setting session.cookie_secure to false in your config/app.php or config/app_local.php.
 > (See [CakePHP’s defaults on session.cookie_secure](../../development/sessions))
 
 In your `UsersController`, add the following code:

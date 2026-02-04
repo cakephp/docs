@@ -1,3 +1,8 @@
+---
+title: "Command Objects"
+description: "Create CakePHP commands: build custom CLI tools, handle arguments, implement execute logic, and automate development tasks efficiently."
+---
+
 # Command Objects
 
 `class` Cake\\Console\\**Command**
@@ -32,7 +37,7 @@ class HelloCommand extends Command
 ```
 
 Command classes must implement an `execute()` method that does the bulk of
-their work. This method is called when a command is invoked. Lets call our first
+their work. This method is called when a command is invoked. Let's call our first
 command application directory, run:
 
 ``` bash
@@ -80,8 +85,11 @@ After saving this file, you should be able to run the following command:
 
 ``` bash
 bin/cake hello jillian
+```
 
-# Outputs
+This outputs:
+
+```
 Hello jillian
 ```
 
@@ -91,7 +99,7 @@ CakePHP will use conventions to generate the name your commands use on the
 command line. If you want to overwrite the generated name implement the
 `defaultName()` method in your command:
 
-``` text
+``` php
 public static function defaultName(): string
 {
     return 'oh_hi';
@@ -143,7 +151,7 @@ Commands are provided a `ConsoleIo` instance when executed. This object allows
 you to interact with `Cake\Console\ConsoleIo::out()` and
 `Cake\Console\ConsoleIo::err()` to emit on `stdout`, and
 `stderr`. Files can be created with overwrite confirmation with
-`Cake\Console\ConsoleIo::createFile()`<span class="title-ref">. :ref:\`command-helpers</span>
+`Cake\Console\ConsoleIo::createFile()`. [Command Helpers](../console-commands/input-output#command-helpers)
 provide 'macros' for output generation. See the
 [Command Input/Output](../console-commands/input-output) section for more information.
 
@@ -167,13 +175,13 @@ use Cake\Console\ConsoleOptionParser;
 class UserCommand extends Command
 {
     // Define the default table. This allows you to use `fetchTable()` without any argument.
-    protected $defaultTable = 'Users';
+    protected ?string $defaultTable = 'Users';
 
     protected function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
     {
         $parser
             ->addArgument('name', [
-                'help' => 'What is your name'
+                'help' => 'What is your name',
             ]);
 
         return $parser;
@@ -204,7 +212,7 @@ to terminate execution:
 public function execute(Arguments $args, ConsoleIo $io): int
 {
     $name = $args->getArgument('name');
-    if (strlen($name) < 5) {
+    if (mb_strlen($name) < 5) {
         // Halt execution, output to stderr, and set exit code to 1
         $io->error('Name must be at least 4 characters long.');
         $this->abort();
@@ -220,7 +228,7 @@ You can also use `abort()` on the `$io` object to emit a message and code:
 public function execute(Arguments $args, ConsoleIo $io): int
 {
     $name = $args->getArgument('name');
-    if (strlen($name) < 5) {
+    if (mb_strlen($name) < 5) {
         // Halt execution, output to stderr, and set exit code to 99
         $io->abort('Name must be at least 4 characters long.', 99);
     }
@@ -277,7 +285,9 @@ This will show your description in the Cake CLI:
 
 ``` bash
 bin/cake
+```
 
+```
 App:
   - user
   └─── My custom description
@@ -287,6 +297,9 @@ As well as in the help section of your command:
 
 ``` bash
 cake user --help
+```
+
+```
 My custom description
 
 Usage:
@@ -295,7 +308,7 @@ cake user [-h] [-q] [-v]
 
 ## Grouping Commands
 
-By default in the help output CakePHP will group commands into core, app, and
+By default, in the help output CakePHP will group commands into core, app, and
 plugin groups. You can customize the grouping of commands by implementing
 `getGroup()`:
 
@@ -311,6 +324,56 @@ class CleanupCommand extends Command
 
 ::: info Added in version 5.3.0
 Custom grouping support was added.
+:::
+
+## Replacing Commands
+
+`CommandCollection::replace()` allows you to replace an existing command in the
+collection without needing to remove and re-add it. This is particularly useful
+when using `autoDiscover` and you want to replace a command with a customized
+version:
+
+``` php
+// In your Application::console() method
+public function console(CommandCollection $commands): CommandCollection
+{
+    $commands = parent::console($commands);
+    $commands->replace('some_plugin_command', MyCustomCommand::class);
+
+    return $commands;
+}
+```
+
+::: info Added in version 5.3.0
+`CommandCollection::replace()` was added.
+:::
+
+## Tree Output Helper
+
+The `TreeHelper` outputs an array as a tree structure. This is useful for
+displaying filesystem directories or any hierarchical data:
+
+``` php
+public function execute(Arguments $args, ConsoleIo $io): int
+{
+    $helper = $io->helper('Tree');
+    $helper->output([
+        'src' => [
+            'Controller',
+            'Model',
+            'View',
+        ],
+        'tests' => [
+            'TestCase',
+        ],
+    ]);
+
+    return static::CODE_SUCCESS;
+}
+```
+
+::: info Added in version 5.3.0
+The `TreeHelper` was added.
 :::
 
 <a id="console-integration-testing"></a>
@@ -392,7 +455,7 @@ class UpdateTableCommand extends Command
             ->setDescription('My cool console app')
             ->addArgument('table', [
                 'help' => 'Table to update',
-                'required' => true
+                'required' => true,
             ]);
 
         return $parser;
@@ -403,7 +466,7 @@ class UpdateTableCommand extends Command
         $table = $args->getArgument('table');
         $this->fetchTable($table)->updateQuery()
             ->set([
-                'modified' => new DateTime()
+                'modified' => new DateTime(),
             ])
             ->execute();
 
@@ -427,7 +490,7 @@ class UpdateTableCommandTest extends TestCase
 {
     use ConsoleIntegrationTestTrait;
 
-    protected $fixtures = [
+    protected array $fixtures = [
         // assumes you have a UsersFixture
         'app.Users',
     ];
@@ -492,7 +555,7 @@ class UpdateTableCommand extends Command
             ->setDescription('My cool console app')
             ->addArgument('table', [
                 'help' => 'Table to update',
-                'required' => true
+                'required' => true,
             ]);
 
         return $parser;
@@ -507,7 +570,7 @@ class UpdateTableCommand extends Command
         }
         $this->fetchTable($table)->updateQuery()
             ->set([
-                'modified' => new DateTime()
+                'modified' => new DateTime(),
             ])
             ->execute();
 

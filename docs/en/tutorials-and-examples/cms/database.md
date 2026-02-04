@@ -1,3 +1,8 @@
+---
+title: "CMS Tutorial - Creating the Database"
+description: "Create the database for CakePHP CMS tutorial. Configure connections, build schema with migrations or SQL, add seed data, and set up relationships."
+---
+
 # CMS Tutorial - Creating the Database
 
 Now that we have CakePHP installed, let's set up the database for our `CMS

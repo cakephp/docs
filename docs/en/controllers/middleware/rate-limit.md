@@ -92,7 +92,7 @@ new RateLimitMiddleware([
 The middleware automatically handles proxy headers. You can configure
 which headers to check using the `ipHeader` option:
 
-``` text
+``` php
 new RateLimitMiddleware([
     'identifier' => RateLimitMiddleware::IDENTIFIER_IP,
     'ipHeader' => ['CF-Connecting-IP', 'X-Forwarded-For'],
@@ -103,7 +103,7 @@ new RateLimitMiddleware([
 
 Track requests per authenticated user:
 
-``` text
+``` php
 new RateLimitMiddleware([
     'identifier' => RateLimitMiddleware::IDENTIFIER_USER,
     'limit' => 1000,
@@ -118,7 +118,7 @@ The middleware checks for users implementing `Authentication\IdentityInterface`.
 
 Apply different limits to different routes:
 
-``` text
+``` php
 new RateLimitMiddleware([
     'identifier' => RateLimitMiddleware::IDENTIFIER_ROUTE,
     'limit' => 10,
@@ -132,7 +132,7 @@ This creates separate limits for each controller/action combination.
 
 Track requests by API key or token:
 
-``` text
+``` php
 new RateLimitMiddleware([
     'identifier' => RateLimitMiddleware::IDENTIFIER_API_KEY,
     'limit' => 5000,
@@ -143,7 +143,7 @@ new RateLimitMiddleware([
 By default, the middleware looks for tokens in the `Authorization` and
 `X-API-Key` headers. You can customize which headers to check:
 
-``` text
+``` php
 new RateLimitMiddleware([
     'identifier' => RateLimitMiddleware::IDENTIFIER_TOKEN,
     'tokenHeaders' => ['Authorization', 'X-API-Key', 'X-Auth-Token'],
@@ -171,7 +171,7 @@ new RateLimitMiddleware([
 The default strategy that provides smooth rate limiting by continuously
 adjusting the window based on request timing:
 
-``` text
+``` php
 new RateLimitMiddleware([
     'strategy' => RateLimitMiddleware::STRATEGY_SLIDING_WINDOW,
 ])
@@ -181,7 +181,7 @@ new RateLimitMiddleware([
 
 Resets the counter at fixed intervals:
 
-``` text
+``` php
 new RateLimitMiddleware([
     'strategy' => RateLimitMiddleware::STRATEGY_FIXED_WINDOW,
 ])
@@ -191,7 +191,7 @@ new RateLimitMiddleware([
 
 Allows for burst capacity while maintaining an average rate:
 
-``` text
+``` php
 new RateLimitMiddleware([
     'strategy' => RateLimitMiddleware::STRATEGY_TOKEN_BUCKET,
     'limit' => 100,    // bucket capacity
@@ -204,7 +204,7 @@ new RateLimitMiddleware([
 You can use a custom rate limiter strategy by specifying the `strategyClass`
 option. Your class must implement `Cake\Http\RateLimiter\RateLimiterInterface`:
 
-``` text
+``` php
 new RateLimitMiddleware([
     'strategyClass' => App\RateLimiter\MyCustomRateLimiter::class,
 ])
@@ -367,7 +367,7 @@ $middlewareQueue->add(new RateLimitMiddleware([
 The rate limiter stores its data in cache. Make sure you have a persistent
 cache configured:
 
-``` text
+``` php
 // In config/app.php
 'Cache' => [
     'rate_limit' => [
@@ -380,7 +380,7 @@ cache configured:
 
 Then use it in the middleware:
 
-``` text
+``` php
 new RateLimitMiddleware([
     'cache' => 'rate_limit',
 ])

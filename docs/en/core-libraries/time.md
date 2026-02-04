@@ -1,3 +1,8 @@
+---
+title: "Date & Time"
+description: "Manipulate dates and times in CakePHP: parse, format, compare, modify timestamps using powerful ChronosTime methods and utilities."
+---
+
 # Date & Time
 
 `class` Cake\\I18n\\**DateTime**
@@ -50,7 +55,7 @@ use Cake\I18n\DateTime;
 $time = DateTime::createFromFormat(
     'Y-m-d H:i:s',
     '2021-01-31 22:11:30',
-    'America/New_York'
+    'America/New_York',
 );
 
 // Create from a timestamp and set timezone
@@ -149,7 +154,7 @@ echo $time->timezoneName; // America/New_York
 
 ### DateTime::setJsonEncodeFormat()
 
-`static` Cake\\I18n\\DateTime::**setJsonEncodeFormat**($format): void
+`static` Cake\\I18n\\DateTime::**setJsonEncodeFormat**(Closure|array|string|int $format): void
 
 This method sets the default format used when converting an object to json:
 
@@ -179,7 +184,7 @@ The `callable` parameter type was added.
 
 ### DateTime::i18nFormat()
 
-`method` Cake\\I18n\\DateTime::**i18nFormat**($format = null, $timezone = null, $locale = null): string|int
+`method` Cake\\I18n\\DateTime::**i18nFormat**(array|string|int|null $format = null, DateTimeZone|string|null $timezone = null, ?string $locale = null): string|int
 
 A very common thing to do with `Time` instances is to print out formatted
 dates. CakePHP makes this a snap:
@@ -318,7 +323,7 @@ Date::setToStringFormat(\IntlDateFormatter::SHORT); // For any Date
 // The same method exists on Date, and DateTime
 DateTime::setToStringFormat([
     \IntlDateFormatter::FULL,
-    \IntlDateFormatter::SHORT
+    \IntlDateFormatter::SHORT,
 ]);
 // Outputs 'Sunday, January 31, 2021 at 10:11 PM'
 echo $time;
@@ -349,7 +354,7 @@ Often it is useful to print times relative to the present:
 $time = new DateTime('Jan 31, 2021');
 // On June 12, 2021, this would output '4 months, 1 week, 6 days ago'
 echo $time->timeAgoInWords(
-    ['format' => 'MMM d, YYY', 'end' => '+1 year']
+    ['format' => 'MMM d, YYY', 'end' => '+1 year'],
 );
 ```
 
@@ -361,7 +366,7 @@ us control what level of detail should be used for each interval range:
 // Outputs '4 months ago'
 echo $time->timeAgoInWords([
     'accuracy' => ['month' => 'month'],
-    'end' => '1 year'
+    'end' => '1 year',
 ]);
 ```
 
@@ -372,7 +377,7 @@ of detail you want output:
 $time = new DateTime('+23 hours');
 // Outputs 'in about a day'
 echo $time->timeAgoInWords([
-    'accuracy' => 'day'
+    'accuracy' => 'day',
 ]);
 ```
 
@@ -415,19 +420,19 @@ $range = $time->toQuarterRange();
 
 ### DateTime::isYesterday()
 
-`method` Cake\\I18n\\DateTime::**isYesterday**()
+`method` Cake\\I18n\\DateTime::**isYesterday**(): bool
 
 ### DateTime::isThisWeek()
 
-`method` Cake\\I18n\\DateTime::**isThisWeek**()
+`method` Cake\\I18n\\DateTime::**isThisWeek**(): bool
 
 ### DateTime::isThisMonth()
 
-`method` Cake\\I18n\\DateTime::**isThisMonth**()
+`method` Cake\\I18n\\DateTime::**isThisMonth**(): bool
 
 ### DateTime::isThisYear()
 
-`method` Cake\\I18n\\DateTime::**isThisYear**()
+`method` Cake\\I18n\\DateTime::**isThisYear**(): bool
 
 You can compare a `DateTime` instance with the present in a variety of ways:
 
@@ -447,7 +452,7 @@ not the `DateTime` instance matches the present.
 
 ### DateTime::isWithinNext()
 
-`method` Cake\\I18n\\DateTime::**isWithinNext**($interval)
+`method` Cake\\I18n\\DateTime::**isWithinNext**(string|int $timeInterval): bool
 
 You can see if a `DateTime` instance falls within a given range using
 `wasWithinLast()` and `isWithinNext()`:
@@ -464,7 +469,7 @@ debug($time->isWithinNext('2 weeks'));
 
 ### DateTime::wasWithinLast()
 
-`method` Cake\\I18n\\DateTime::**wasWithinLast**($interval)
+`method` Cake\\I18n\\DateTime::**wasWithinLast**(string|int $timeInterval): bool
 
 You can also compare a `DateTime` instance within a range in the past:
 
@@ -492,8 +497,52 @@ time and timezones. The `Date` class wraps the `Cake\Chronos\ChronosDate` class.
 
 > [!NOTE]
 > Unlike the `DateTime` class, `Date` does not extends the `DateTimeInterface`.
-> So you cannot cannot directly compare a `Date` instance with a `DateTime` instance.
+> So you cannot directly compare a `Date` instance with a `DateTime` instance.
 > But you can do comparisons like `$dateTime->toNative() > $date->toNative()`.
+
+### Date::getTimestamp()
+
+`method` Cake\\I18n\\Date::**getTimestamp**(): int
+
+Returns an integer timestamp for the date:
+
+``` php
+$date = new Date('2021-01-31');
+echo $date->getTimestamp();
+```
+
+::: info Added in version 5.3.0
+`Date::getTimestamp()` was added.
+:::
+
+## DateTimePeriod and DatePeriod
+
+`class` Cake\\I18n\\**DateTimePeriod**
+
+`class` Cake\\I18n\\**DatePeriod**
+
+CakePHP provides `DateTimePeriod` and `DatePeriod` classes that wrap PHP's
+`DatePeriod`. When iterating, `DateTimePeriod` returns `DateTime` instances
+and `DatePeriod` returns `Date` instances:
+
+``` php
+use Cake\I18n\DateTime;
+use Cake\I18n\DateTimePeriod;
+
+$start = new DateTime('2021-01-01');
+$end = new DateTime('2021-01-05');
+$interval = new \DateInterval('P1D');
+
+$period = new DateTimePeriod($start, $interval, $end);
+foreach ($period as $date) {
+    // $date is a Cake\I18n\DateTime instance
+    echo $date->i18nFormat('yyyy-MM-dd');
+}
+```
+
+::: info Added in version 5.3.0
+`DateTimePeriod` and `DatePeriod` were added.
+:::
 
 ## Time
 

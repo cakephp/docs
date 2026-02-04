@@ -1,3 +1,8 @@
+---
+title: "Configuration"
+description: "Configure CakePHP applications with PHP files, environment variables, and 12-factor app principles. Manage database, security, and CDN settings."
+---
+
 # Configuration
 
 While conventions remove the need to configure all of CakePHP, you'll still need
@@ -5,18 +10,6 @@ to configure a few things like your database credentials.
 
 Additionally, there are optional configuration options that allow you to swap
 out default values & implementations with ones tailored to your application.
-
-<div class="index">
-
-app.php, app_local.example.php
-
-</div>
-
-<div class="index">
-
-configuration
-
-</div>
 
 ## Configuring your Application
 
@@ -49,8 +42,6 @@ Configure::setConfig('default', new PhpConfig());
 Configure::load('app', 'default', false);
 Configure::load('other_config', 'default');
 ```
-
-<a id="environment-variables"></a>
 
 ## Environment Variables
 
@@ -90,8 +81,6 @@ $debug = env('APP_DEBUG', false);
 The second value passed to the env function is the default value. This value
 will be used if no environment variable exists for the given key.
 
-<a id="general-configuration"></a>
-
 ### General Configuration
 
 Below is a description of the variables and how they affect your CakePHP
@@ -120,7 +109,7 @@ files too.
 App.base
 The base directory the app resides in. If `false` this
 will be auto detected. If not `false`, ensure your string starts
-with a <span class="title-ref">/</span> and does NOT end with a <span class="title-ref">/</span>. For example, <span class="title-ref">/basedir</span> is a valid
+with a `/` and does NOT end with a `/`. For example, `/basedir` is a valid
 App.base.
 
 App.encoding
@@ -136,11 +125,11 @@ The file path to webroot.
 
 App.fullBaseUrl
 The fully qualified domain name (including protocol) to your application's
-root. This is used when generating absolute URLs. By default this value
+root. This is used when generating absolute URLs. By default, this value
 is generated using the `$_SERVER` environment. However, you should define it
 manually to optimize performance or if you are concerned about people
 manipulating the `Host` header.
-In a CLI context (from command) the <span class="title-ref">fullBaseUrl</span> cannot be read from \$\_SERVER,
+In a CLI context (from command) the `fullBaseUrl` cannot be read from $_SERVER,
 as there is no webserver involved. You do need to specify it yourself if
 you do need to generate URLs from a shell (for example, when sending emails).
 
@@ -241,8 +230,6 @@ handling in CakePHP.
 See the [Routes Configuration](../development/routing#routes-configuration) for more information
 on configuring routing and creating routes for your application.
 
-<a id="additional-class-paths"></a>
-
 ## Additional Class Paths
 
 Additional class paths are setup through the autoloaders your application uses.
@@ -277,7 +264,7 @@ Since plugins, view templates and locales are not classes, they cannot have an
 autoloader configured. CakePHP provides three Configure variables to setup additional
 paths for these resources. In your **config/app.php** you can set these variables:
 
-``` text
+``` php
 return [
     // More configuration
     'App' => [
@@ -337,7 +324,7 @@ The above example could also be written in a single call:
 ``` php
 Configure::write('Company', [
     'name' => 'Pizza, Inc.',
-    'slogan' => 'Pizza for your body and soul'
+    'slogan' => 'Pizza for your body and soul',
 ]);
 ```
 
@@ -477,8 +464,6 @@ files with that engine would fail:
 Configure::drop('default');
 ```
 
-<a id="loading-configuration-files"></a>
-
 ### Loading Configuration Files
 
 `static` Cake\\Core\\Configure::**load**(string $key, string $config = 'default', bool $merge = true): bool
@@ -497,7 +482,7 @@ the existing runtime configuration. By setting `$merge` to `true`, values
 will not ever overwrite the existing configuration.
 
 > [!WARNING]
-> When merging configuration files with <span class="title-ref">\$merge = true</span>, dot notation in keys is
+> When merging configuration files with `$merge = true`, dot notation in keys is
 > not expanded:
 >
 > ``` php
@@ -526,13 +511,13 @@ will not ever overwrite the existing configuration.
 
 Dumps all or some of the data in Configure into a file or storage system
 supported by a config engine. The serialization format is decided by the config
-engine attached as \$config. For example, if the 'default' engine is
+engine attached as `$config`. For example, if the 'default' engine is
 a `Cake\Core\Configure\Engine\PhpConfig`, the generated file will be
 a PHP configuration file loadable by the
 `Cake\Core\Configure\Engine\PhpConfig`
 
 Given that the 'default' engine is an instance of PhpConfig.
-Save all data in Configure to the file \`my_config.php\`:
+Save all data in Configure to the file `my_config.php`:
 
 ``` php
 Configure::dump('my_config', 'default');
@@ -591,4 +576,4 @@ The built in configuration engines are:
 - [IniConfig](https://api.cakephp.org/5.x/class-Cake.Core.Configure.Engine.IniConfig.html)
 - [PhpConfig](https://api.cakephp.org/5.x/class-Cake.Core.Configure.Engine.PhpConfig.html)
 
-By default your application will use `PhpConfig`.
+By default, your application will use `PhpConfig`.

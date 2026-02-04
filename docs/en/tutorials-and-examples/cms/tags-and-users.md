@@ -1,3 +1,8 @@
+---
+title: "CMS Tutorial - Tags and Users"
+description: "Build tags and users in CakePHP CMS tutorial. Use Bake to generate code, create BelongsToMany associations, and implement tag filtering for articles."
+---
+
 # CMS Tutorial - Tags and Users
 
 With the basic article creation functionality built, we need to enable multiple
@@ -41,7 +46,7 @@ bin/cake bake all tags
 ```
 
 Once you have the scaffold code created, create a few sample tags by going to
-**http://localhost:8765/tags/add**.
+**<http://localhost:8765/tags/add>**.
 
 Now that we have a Tags table, we can create an association between Articles and
 Tags. We can do so by adding the following to the `initialize` method on the
@@ -156,7 +161,7 @@ by the tags they used. For this feature we'll implement a route, controller
 action, and finder method to search through articles by tag.
 
 Ideally, we'd have a URL that looks like
-**http://localhost:8765/articles/tagged/funny/cat/gifs**. This would let us
+**<http://localhost:8765/articles/tagged/funny/cat/gifs>**. This would let us
 find all the articles that have the 'funny', 'cat' or 'gifs' tags. Before we
 can implement this, we'll add a new route. Your **config/routes.php** (with
 the baked comments removed) should look like:
@@ -187,7 +192,7 @@ $routes->scope('/', function (RouteBuilder $builder) {
 The above defines a new 'route' which connects the **/articles/tagged/** path,
 to `ArticlesController::tags()`. By defining routes, you can isolate how your
 URLs look, from how they are implemented. If we were to visit
-**http://localhost:8765/articles/tagged**, we would see a helpful error page
+**<http://localhost:8765/articles/tagged>**, we would see a helpful error page
 from CakePHP informing you that the controller action does not exist. Let's
 implement that missing method now. In **src/Controller/ArticlesController.php**
 add the following:
@@ -206,7 +211,7 @@ public function tags()
     // Pass variables into the view template context.
     $this->set([
         'articles' => $articles,
-        'tags' => $tags
+        'tags' => $tags,
     ]);
 }
 ```
@@ -227,7 +232,7 @@ public function tags(...$tags)
     // Pass variables into the view template context.
     $this->set([
         'articles' => $articles,
-        'tags' => $tags
+        'tags' => $tags,
     ]);
 }
 ```
@@ -260,7 +265,7 @@ public function findTagged(SelectQuery $query, array $tags = []): SelectQuery
         ->select($columns)
         ->distinct($columns);
 
-    if (empty($tags)) {
+    if (!$tags) {
         // If there are no tags provided, find articles that have no tags.
         $query->leftJoinWith('Tags')
             ->where(['Tags.title IS' => null]);
@@ -302,7 +307,7 @@ view file for our `tags()` action:
         <!-- Use the HtmlHelper to create a link -->
         <h4><?= $this->Html->link(
             $article->title,
-            ['controller' => 'Articles', 'action' => 'view', $article->slug]
+            ['controller' => 'Articles', 'action' => 'view', $article->slug],
         ) ?></h4>
         <span><?= h($article->created) ?></span>
     </article>
@@ -349,15 +354,15 @@ use Cake\Collection\Collection;
 // Update the accessible property to contain `tag_string`
 protected array $_accessible = [
     //other fields...
-    'tag_string' => true
+    'tag_string' => true,
 ];
 
-protected function _getTagString()
+protected function _getTagString(): string
 {
     if (isset($this->_fields['tag_string'])) {
         return $this->_fields['tag_string'];
     }
-    if (empty($this->tags)) {
+    if (!$this->tags) {
         return '';
     }
     $tags = new Collection($this->tags);
@@ -385,7 +390,7 @@ echo $this->Form->control('tag_string', ['type' => 'text']);
 We'll also need to update the article view template. In
 **templates/Articles/view.php** add the line as shown:
 
-``` text
+``` php
 <!-- File: templates/Articles/view.php -->
 
 <h1><?= h($article->title) ?></h1>
@@ -401,8 +406,8 @@ You should also update the view method to allow retrieving existing tags:
 
 public function view($slug = null)
 {
-   // Update retrieving tags with contain()
-   $article = $this->Articles
+    // Update retrieving tags with contain()
+    $article = $this->Articles
         ->findBySlug($slug)
         ->contain('Tags')
         ->firstOrFail();
@@ -428,7 +433,7 @@ public function beforeSave(EventInterface $event, $entity, $options): void
     // Other code
 }
 
-protected function _buildTags($tagString)
+protected function _buildTags(string $tagString): array
 {
     // Trim tags
     $newTags = array_map('trim', explode(',', $tagString));
@@ -485,7 +490,7 @@ public function initialize(array $config): void
     // Change this line
     $this->belongsToMany('Tags', [
         'joinTable' => 'articles_tags',
-        'dependent' => true
+        'dependent' => true,
     ]);
 }
 ```

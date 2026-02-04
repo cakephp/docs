@@ -1,3 +1,8 @@
+---
+title: "Testing"
+description: "Test CakePHP apps: write unit tests, integration tests, use fixtures, mock dependencies, run PHPUnit, and maintain code quality."
+---
+
 # Testing
 
 CakePHP comes with comprehensive testing support built-in. CakePHP comes with
@@ -19,7 +24,7 @@ through using either a [PHAR package](https://phpunit.de/#download) or
 To install PHPUnit with Composer:
 
 ``` bash
-$ php composer.phar require --dev phpunit/phpunit:"^10.1"
+php composer.phar require --dev phpunit/phpunit:"^11.5.3"
 ```
 
 This will add the dependency to the `require-dev` section of your
@@ -28,7 +33,7 @@ This will add the dependency to the `require-dev` section of your
 You can now run PHPUnit using:
 
 ``` bash
-$ vendor/bin/phpunit
+vendor/bin/phpunit
 ```
 
 ### Using the PHAR File
@@ -85,10 +90,10 @@ application's tests:
 
 ``` bash
 # For phpunit.phar
-$ php phpunit.phar
+php phpunit.phar
 
 # For Composer installed phpunit
-$ vendor/bin/phpunit
+vendor/bin/phpunit
 ```
 
 The above should run any tests you have, or let you know that no tests were run.
@@ -97,7 +102,7 @@ PHPUnit. For example, if you had a test case for ArticlesTable class you could
 run it with:
 
 ``` bash
-$ vendor/bin/phpunit tests/TestCase/Model/Table/ArticlesTableTest
+vendor/bin/phpunit tests/TestCase/Model/Table/ArticlesTableTest
 ```
 
 You should see a green bar with some additional information about the tests run,
@@ -111,17 +116,17 @@ and number passed.
 Like most things in CakePHP, test cases have some conventions. Concerning
 tests:
 
-1.  PHP files containing tests should be in your
+1. PHP files containing tests should be in your
     `tests/TestCase/[Type]` directories.
-2.  The filenames of these files should end in **Test.php** instead
+2. The filenames of these files should end in **Test.php** instead
     of just .php.
-3.  The classes containing tests should extend `Cake\TestSuite\TestCase`,
-    `Cake\TestSuite\IntegrationTestCase` or `\PHPUnit\Framework\TestCase`.
-4.  Like other classnames, the test case classnames should match the filename.
+3. The classes containing tests should extend `Cake\TestSuite\TestCase`
+    or `\PHPUnit\Framework\TestCase`.
+4. Like other classnames, the test case classnames should match the filename.
     **RouterTest.php** should contain `class RouterTest extends TestCase`.
-5.  The name of any method containing a test (i.e. containing an
+5. The name of any method containing a test (i.e. containing an
     assertion) should begin with `test`, as in `testPublished()`.
-    You can also use the `@test` annotation to mark methods as test methods.
+    You can also use the `#[Test]` attribute to mark methods as test methods.
 
 ## Creating Your First Test Case
 
@@ -136,7 +141,7 @@ use Cake\View\Helper;
 
 class ProgressHelper extends Helper
 {
-    public function bar($value)
+    public function bar(int|float $value): string
     {
         $width = round($value / 100, 2) * 100;
 
@@ -216,7 +221,7 @@ incorrect.
 By using test cases you can describe the relationship between a set of
 known inputs and their expected output. This helps you be more confident of the
 code you're writing as you can ensure that the code you wrote fulfills the
-expectations and assertions your tests make. Additionally because tests are
+expectations and assertions your tests make. Additionally, because tests are
 code, they can be re-run whenever you make a change. This helps prevent
 the creation of new bugs.
 
@@ -224,8 +229,6 @@ the creation of new bugs.
 > EventManager is refreshed for each test method. This means that when running
 > multiple tests at once, you will lose your event listeners that were
 > registered in config/bootstrap.php as the bootstrap is only executed once.
-
-<a id="running-tests"></a>
 
 ## Running Tests
 
@@ -279,7 +282,7 @@ methods when you are trying to work on a single failing case. With the
 CLI runner you can use an option to filter test methods:
 
 ``` bash
-$ phpunit --filter testSave tests/TestCase/Model/Table/ArticlesTableTest
+phpunit --filter testSave tests/TestCase/Model/Table/ArticlesTableTest
 ```
 
 The filter parameter is used as a case-sensitive regular expression for
@@ -293,7 +296,7 @@ containing the coverage results. You can generate coverage for a test case by
 doing the following:
 
 ``` bash
-$ phpunit --coverage-html webroot/coverage tests/TestCase/Model/Table/ArticlesTableTest
+phpunit --coverage-html webroot/coverage tests/TestCase/Model/Table/ArticlesTableTest
 ```
 
 This will put the coverage results in your application's webroot directory. You
@@ -304,7 +307,7 @@ You can also use `phpdbg` to generate coverage instead of xdebug.
 `phpdbg` is generally faster at generating coverage:
 
 ``` bash
-$ phpdbg -qrr phpunit --coverage-html webroot/coverage tests/TestCase/Model/Table/ArticlesTableTest
+phpdbg -qrr phpunit --coverage-html webroot/coverage tests/TestCase/Model/Table/ArticlesTableTest
 ```
 
 ### Combining Test Suites for Plugins
@@ -374,17 +377,17 @@ raised and you will not be able to use database fixtures.
 
 CakePHP performs the following during the course of a test run:
 
-1.  Creates tables for each of the fixtures needed.
-2.  Populates tables with data.
-3.  Runs test methods.
-4.  Empties the fixture tables.
+1. Creates tables for each of the fixtures needed.
+2. Populates tables with data.
+3. Runs test methods.
+4. Empties the fixture tables.
 
 The schema for fixtures is created at the beginning of a test run via migrations
 or a SQL dump file.
 
 ### Test Connections
 
-By default CakePHP will alias each connection in your application. Each
+By default, CakePHP will alias each connection in your application. Each
 connection defined in your application's bootstrap that does not start with
 `test_` will have a `test_` prefixed alias created. Aliasing connections
 ensures, you don't accidentally use the wrong connection in test cases.
@@ -450,7 +453,7 @@ $migrator->runMany([
     // Run Contacts migrations on test connection.
     ['plugin' => 'Contacts'],
     // Run Documents migrations on test_docs connection.
-    ['plugin' => 'Documents', 'connection' => 'test_docs']
+    ['plugin' => 'Documents', 'connection' => 'test_docs'],
 ]);
 ```
 
@@ -473,38 +476,38 @@ time-consuming to maintain.
 Each table can define `columns`, `constraints`, and `indexes`.
 An example table would be:
 
-``` text
+``` php
 return [
-  'articles' => [
-     'columns' => [
-         'id' => [
-             'type' => 'integer',
-         ],
-         'author_id' => [
-             'type' => 'integer',
-             'null' => true,
-         ],
-         'title' => [
-             'type' => 'string',
-             'null' => true,
-         ],
-         'body' => 'text',
-         'published' => [
-             'type' => 'string',
-             'length' => 1,
-             'default' => 'N',
-         ],
-     ],
-     'constraints' => [
-         'primary' => [
-             'type' => 'primary',
-             'columns' => [
-                 'id',
-             ],
-         ],
-     ],
-  ],
-  // More tables
+    'articles' => [
+        'columns' => [
+            'id' => [
+                'type' => 'integer',
+            ],
+            'author_id' => [
+                'type' => 'integer',
+                'null' => true,
+            ],
+            'title' => [
+                'type' => 'string',
+                'null' => true,
+            ],
+            'body' => 'text',
+            'published' => [
+                'type' => 'string',
+                'length' => 1,
+                'default' => 'N',
+            ],
+        ],
+        'constraints' => [
+            'primary' => [
+                'type' => 'primary',
+                'columns' => [
+                    'id',
+                ],
+            ],
+        ],
+    ],
+    // More tables
 ];
 ```
 
@@ -548,44 +551,44 @@ use Cake\TestSuite\Fixture\TestFixture;
 
 class ArticlesFixture extends TestFixture
 {
-      // Optional. Set this property to load fixtures
-      // to a different test datasource
-      public $connection = 'test';
+        // Optional. Set this property to load fixtures
+        // to a different test datasource
+        public string $connection = 'test';
 
-      // Optional. Lets you define which table alias is used when
-      // reflecting schema and inserting rows. Inferred from the
-      // class name by default. Added in 5.3.0
-      public $tableAlias = 'Articles';
+        // Optional. Lets you define which table alias is used when
+        // reflecting schema and inserting rows. Inferred from the
+        // class name by default. Added in 5.3.0
+        public string $tableAlias = 'Articles';
 
-      // Optional. Lets you define the table name for a fixture.
-      // If defined, this table name will be camelized to create
-      // $tableAlias.
-      public $table = 'articles';
+        // Optional. Lets you define the table name for a fixture.
+        // If defined, this table name will be camelized to create
+        // $tableAlias.
+        public string $table = 'articles';
 
-      public $records = [
-          [
-              'title' => 'First Article',
-              'body' => 'First Article Body',
-              'published' => '1',
-              'created' => '2007-03-18 10:39:23',
-              'modified' => '2007-03-18 10:41:31'
-          ],
-          [
-              'title' => 'Second Article',
-              'body' => 'Second Article Body',
-              'published' => '1',
-              'created' => '2007-03-18 10:41:23',
-              'modified' => '2007-03-18 10:43:31'
-          ],
-          [
-              'title' => 'Third Article',
-              'body' => 'Third Article Body',
-              'published' => '1',
-              'created' => '2007-03-18 10:43:23',
-              'modified' => '2007-03-18 10:45:31'
-          ]
-      ];
- }
+        public array $records = [
+            [
+                'title' => 'First Article',
+                'body' => 'First Article Body',
+                'published' => '1',
+                'created' => '2007-03-18 10:39:23',
+                'modified' => '2007-03-18 10:41:31',
+            ],
+            [
+                'title' => 'Second Article',
+                'body' => 'Second Article Body',
+                'published' => '1',
+                'created' => '2007-03-18 10:41:23',
+                'modified' => '2007-03-18 10:43:31',
+            ],
+            [
+                'title' => 'Third Article',
+                'body' => 'Third Article Body',
+                'published' => '1',
+                'created' => '2007-03-18 10:43:23',
+                'modified' => '2007-03-18 10:45:31',
+            ],
+        ];
+}
 ```
 
 > [!NOTE]
@@ -619,7 +622,7 @@ use Cake\TestSuite\Fixture\TestFixture;
 
 class ArticlesFixture extends TestFixture
 {
-    protected $strictFields = true;
+    protected bool $strictFields = true;
 
     // rest of fixture
 }
@@ -673,7 +676,7 @@ you define the `$fixtures` property in your model:
 ``` php
 class ArticlesTest extends TestCase
 {
-    protected $fixtures = ['app.Articles', 'app.Comments'];
+    protected array $fixtures =['app.Articles', 'app.Comments'];
 }
 ```
 
@@ -696,7 +699,7 @@ Fixture directory. You can also load fixtures from CakePHP core, or plugins:
 ``` php
 class ArticlesTest extends TestCase
 {
-    protected $fixtures = [
+    protected array $fixtures =[
         'plugin.DebugKit.Articles',
         'plugin.MyVendorName/MyPlugin.Messages',
         'core.Comments',
@@ -715,7 +718,7 @@ name:
 ``` php
 class ArticlesTest extends CakeTestCase
 {
-    protected $fixtures = ['app.Blog/Articles', 'app.Blog/Comments'];
+    protected array $fixtures =['app.Blog/Articles', 'app.Blog/Comments'];
 }
 ```
 
@@ -738,7 +741,7 @@ public function getFixtures(): array
 
 ### Fixture State Managers
 
-By default CakePHP resets fixture state at the end of each test by truncating
+By default, CakePHP resets fixture state at the end of each test by truncating
 all the tables in the database. This operation can become expensive as your
 application grows. By using `TransactionStrategy` each test method will be run
 inside a transaction that is rolled back at the end of the test. This can yield
@@ -840,7 +843,7 @@ constructor parameters you can provide those to `loadRoutes($constructorArgs)`.
 
 ### Creating Routes in Tests
 
-Sometimes it may be be necessary to dynamically add routes in tests, for example
+Sometimes it may be necessary to dynamically add routes in tests, for example
 when developing plugins, or applications that are extensible.
 
 Just like loading existing application routes, this can be done during `setup()`
@@ -865,7 +868,7 @@ class PluginHelperTest extends TestCase
             $routes->setRouteClass(DashedRoute::class);
             $routes->get(
                 '/test/view/{id}',
-                ['controller' => 'Tests', 'action' => 'view']
+                ['controller' => 'Tests', 'action' => 'view'],
             );
             // ...
         });
@@ -908,7 +911,7 @@ class ArticlesTable extends Table
     public function findPublished(SelectQuery $query): SelectQuery
     {
         $query->where([
-            $this->getAlias() . '.published' => 1
+            $this->getAlias() . '.published' => 1,
         ]);
 
         return $query;
@@ -928,7 +931,7 @@ use Cake\TestSuite\TestCase;
 
 class ArticlesTableTest extends TestCase
 {
-    protected $fixtures = ['app.Articles'];
+    protected array $fixtures =['app.Articles'];
 }
 ```
 
@@ -950,7 +953,7 @@ use Cake\TestSuite\TestCase;
 
 class ArticlesTableTest extends TestCase
 {
-    protected $fixtures = ['app.Articles'];
+    protected array $fixtures =['app.Articles'];
 
     public function setUp(): void
     {
@@ -966,7 +969,7 @@ class ArticlesTableTest extends TestCase
         $expected = [
             ['id' => 1, 'title' => 'First Article'],
             ['id' => 2, 'title' => 'Second Article'],
-            ['id' => 3, 'title' => 'Third Article']
+            ['id' => 3, 'title' => 'Third Article'],
         ];
 
         $this->assertEquals($expected, $result);
@@ -1083,7 +1086,7 @@ class ArticlesController extends AppController
 
         $this->set([
             'title' => 'Articles',
-            'articles' => $result
+            'articles' => $result,
         ]);
     }
 }
@@ -1102,7 +1105,7 @@ class ArticlesControllerTest extends TestCase
 {
     use IntegrationTestTrait;
 
-    protected $fixtures = ['app.Articles'];
+    protected array $fixtures =['app.Articles'];
 
     public function testIndex(): void
     {
@@ -1136,7 +1139,7 @@ class ArticlesControllerTest extends TestCase
             'published' => 1,
             'slug' => 'new-article',
             'title' => 'New Article',
-            'body' => 'New Body'
+            'body' => 'New Body',
         ];
         $this->post('/articles', $data);
 
@@ -1180,12 +1183,12 @@ $this->session(['Auth.User.id' => 1]);
 
 // Configure headers and merge with the existing request
 $this->configRequest([
-    'headers' => ['Accept' => 'application/json']
+    'headers' => ['Accept' => 'application/json'],
 ]);
 
 // Replace the existing request. Added in 5.1.0
 $this->replaceRequest([
-    'headers' => ['Accept' => 'application/json']
+    'headers' => ['Accept' => 'application/json'],
 ]);
 ```
 
@@ -1218,7 +1221,7 @@ can use `configRequest()` to set the correct environment variables:
 ``` php
 // Fake out SSL connections.
 $this->configRequest([
-    'environment' => ['HTTPS' => 'on']
+    'environment' => ['HTTPS' => 'on'],
 ]);
 ```
 
@@ -1232,7 +1235,7 @@ $this->setUnlockedFields(['dynamic_field']);
 ### Integration Testing PSR-7 Middleware
 
 Integration testing can also be used to test your entire PSR-7 application and
-[Middleware](../controllers/middleware). By default `IntegrationTestTrait` will
+[Middleware](../controllers/middleware). By default, `IntegrationTestTrait` will
 auto-detect the presence of an `App\Application` class and automatically
 enable integration testing of your Application.
 
@@ -1283,7 +1286,7 @@ $this->assertSession('That article does not exist', 'Flash.flash.0.message');
 // Assert a flash message in the 'flash' key.
 $this->assertFlashMessage('Article deleted', 'flash');
 
-// Assert the second flash message, also  in the 'flash' key.
+// Assert the second flash message, also in the 'flash' key.
 $this->assertFlashMessageAt(1, 'Article really deleted');
 
 // Assert a flash message in the 'auth' key at the first position
@@ -1335,14 +1338,14 @@ Now we create the file **tests/TestCase/Controller/MarkersControllerTest.php**
 and make sure our web service is returning the proper response:
 
 ``` php
-class MarkersControllerTest extends IntegrationTestCase
+class MarkersControllerTest extends TestCase
 {
     use IntegrationTestTrait;
 
     public function testGet(): void
     {
         $this->configRequest([
-            'headers' => ['Accept' => 'application/json']
+            'headers' => ['Accept' => 'application/json'],
         ]);
         $this->get('/markers/view/1.json');
 
@@ -1406,7 +1409,7 @@ public function testAddWithUploads(): void
         12345,                    // the filesize in bytes
         \UPLOAD_ERR_OK,           // the upload/error status
         'teaser.jpg',             // the filename as sent by the client
-        'image/jpeg'              // the mimetype as sent by the client
+        'image/jpeg',              // the mimetype as sent by the client
     );
 
     $textAttachment = new \Laminas\Diactoros\UploadedFile(
@@ -1414,7 +1417,7 @@ public function testAddWithUploads(): void
         12345,
         \UPLOAD_ERR_OK,
         'attachment.txt',
-        'text/plain'
+        'text/plain',
     );
 
     $pdfAttachment = new \Laminas\Diactoros\UploadedFile(
@@ -1422,7 +1425,7 @@ public function testAddWithUploads(): void
         12345,
         \UPLOAD_ERR_OK,
         'attachment.pdf',
-        'application/pdf'
+        'application/pdf',
     );
 
     // This is the data accessible via `$this->request->getUploadedFile()`
@@ -1481,7 +1484,7 @@ public function testAddWithInvalidUploads(): void
         0,
         \UPLOAD_ERR_NO_FILE,
         '',
-        ''
+        '',
     );
 
     $uploadFailureAttachment = new \Laminas\Diactoros\UploadedFile(
@@ -1489,7 +1492,7 @@ public function testAddWithInvalidUploads(): void
         1234567890,
         \UPLOAD_ERR_INI_SIZE,
         'attachment.txt',
-        'text/plain'
+        'text/plain',
     );
 
     $invalidTypeAttachment = new \Laminas\Diactoros\UploadedFile(
@@ -1497,7 +1500,7 @@ public function testAddWithInvalidUploads(): void
         12345,
         \UPLOAD_ERR_OK,
         'attachment.exe',
-        'application/vnd.microsoft.portable-executable'
+        'application/vnd.microsoft.portable-executable',
     );
 
     $this->configRequest([
@@ -1650,7 +1653,7 @@ $this->assertCookieNotSet('remember_me');
 $this->assertContentType('application/json');
 ```
 
-In addition to the above assertion methods, you can also use all of the
+In addition to the above assertion methods, you can also use all the
 assertions in [TestSuite](https://api.cakephp.org/5.x/class-Cake.TestSuite.TestCase.html) and those
 found in [PHPUnit](https://phpunit.de/manual/current/en/appendixes.assertions.html).
 
@@ -1744,9 +1747,9 @@ controllers that use it. Here is our example component located in
 ``` php
 class PagematronComponent extends Component
 {
-    public $controller = null;
+    public ?Controller $controller = null;
 
-    public function setController($controller)
+    public function setController(Controller $controller): void
     {
         $this->controller = $controller;
         // Make sure the controller is using pagination
@@ -1794,8 +1797,8 @@ use Cake\TestSuite\TestCase;
 
 class PagematronComponentTest extends TestCase
 {
-    protected $component;
-    protected $controller;
+    protected PagematronComponent $component;
+    protected Controller $controller;
 
     public function setUp(): void
     {
@@ -1874,7 +1877,7 @@ use Cake\View\View;
 
 class CurrencyRendererHelperTest extends TestCase
 {
-    public $helper = null;
+    public ?CurrencyRendererHelper $helper = null;
 
     // Here we instantiate our helper
     public function setUp(): void
@@ -1895,8 +1898,8 @@ class CurrencyRendererHelperTest extends TestCase
 
         // Testing the thousands separator
         $this->assertEquals(
-          'USD 12,000.70',
-          $this->helper->usd(12000.70)
+            'USD 12,000.70',
+            $this->helper->usd(12000.70),
         );
     }
 }
@@ -1910,8 +1913,6 @@ indicating 1 pass and 4 assertions.
 
 When you are testing a Helper which uses other helpers, be sure to mock the
 View clases `loadHelpers` method.
-
-<a id="testing-events"></a>
 
 ## Testing Events
 
@@ -1931,7 +1932,7 @@ class OrdersTable extends Table
         if ($this->save($order)) {
             // moved cart removal to CartsTable
             $event = new Event('Model.Order.afterPlace', $this, [
-                'order' => $order
+                'order' => $order,
             ]);
             $this->getEventManager()->dispatch($event);
 
@@ -1944,14 +1945,14 @@ class OrdersTable extends Table
 
 class CartsTable extends Table
 {
-    public function initialize()
+    public function initialize(): void
     {
         // Models don't share the same event manager instance,
         // so we need to use the global instance to listen to
         // events from other models
         \Cake\Event\EventManager::instance()->on(
             'Model.Order.afterPlace',
-            callable: [$this, 'removeFromCart']
+            callable: [$this, 'removeFromCart'],
         );
     }
 
@@ -1980,7 +1981,7 @@ use Cake\TestSuite\TestCase;
 
 class OrdersTableTest extends TestCase
 {
-    protected $fixtures = ['app.Orders'];
+    protected array $fixtures =['app.Orders'];
 
     public function setUp(): void
     {
@@ -2042,7 +2043,7 @@ would be:
 ## Creating Tests for Plugins
 
 Tests for plugins are created in their own directory inside the plugins
-folder. :
+folder.
 
     /src
     /plugins
@@ -2066,7 +2067,7 @@ use Cake\TestSuite\TestCase;
 class BlogPostsTableTest extends TestCase
 {
     // Plugin fixtures located in /plugins/Blog/tests/Fixture/
-    protected $fixtures = ['plugin.Blog.BlogPosts'];
+    protected array $fixtures =['plugin.Blog.BlogPosts'];
 
     public function testSomething(): void
     {
@@ -2077,7 +2078,7 @@ class BlogPostsTableTest extends TestCase
 
 If you want to use plugin fixtures in the app tests you can
 reference them using `plugin.pluginName.fixtureName` syntax in the
-`$fixtures` array. Additionally if you use vendor plugin name or fixture
+`$fixtures` array. Additionally, if you use vendor plugin name or fixture
 directories you can use the following: `plugin.vendorName/pluginName.folderName/fixtureName`.
 
 Before you can use fixtures you should ensure you have the [fixture
@@ -2110,15 +2111,15 @@ bin/cake bake test <type> <name>
 
 `<type>` should be one of:
 
-1.  Entity
-2.  Table
-3.  Controller
-4.  Component
-5.  Behavior
-6.  Helper
-7.  Shell
-8.  Task
-9.  ShellHelper
+1. Entity
+2. Table
+3. Controller
+4. Component
+5. Behavior
+6. Helper
+7. Shell
+8. Task
+9. ShellHelper
 10. Cell
 11. Form
 12. Mailer

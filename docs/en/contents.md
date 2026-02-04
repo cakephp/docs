@@ -1,6 +1,6 @@
 # Contents
 
-### Preface
+## Preface
 
 - [CakePHP at a Glance](intro)
 - [Quick Start Guide](quickstart)
@@ -74,7 +74,3 @@
 
 - [Constants & Functions](core-libraries/global-constants-and-functions)
 - [Appendices](appendices)
-
-<div class="todolist">
-
-</div>
