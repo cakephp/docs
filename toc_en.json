@@ -671,6 +671,14 @@
           "link": "/topics"
         },
         {
+            "text": "Authentication",
+            "link": "https://book.cakephp.org/authentication/"
+        },
+        {
+            "text": "Authorization",
+            "link": "https://book.cakephp.org/authorization/"
+        },
+        {
           "text": "Chronos",
           "link": "/chronos"
         },
