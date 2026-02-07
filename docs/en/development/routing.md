@@ -101,9 +101,9 @@ connected inside a scope will inherit the path/defaults from their wrapping
 scopes:
 
 ```php
-$routes->scope('/blog', ['plugin' => 'Blog'], function (RouteBuilder $routes) {
+$routes->scope('/blog', function (RouteBuilder $routes) {
     $routes->connect('/', ['controller' => 'Articles']);
-});
+}, ['plugin' => 'Blog']);
 ```
 
 The above route would match `/blog/` and send it to
@@ -648,34 +648,34 @@ for the route names. CakePHP makes building up route names easier by allowing
 you to define name prefixes in each scope:
 
 ```php
-$routes->scope('/api', ['_namePrefix' => 'api:'], function (RouteBuilder $routes) {
+$routes->scope('/api', function (RouteBuilder $routes) {
     // This route's name will be `api:ping`
     $routes->get('/ping', ['controller' => 'Pings'], 'ping');
-});
+}, ['_namePrefix' => 'api:']);
 // Generate a URL for the ping route
 Router::url(['_name' => 'api:ping']);
 
 // Use namePrefix with plugin()
-$routes->plugin('Contacts', ['_namePrefix' => 'contacts:'], function (RouteBuilder $routes) {
+$routes->plugin('Contacts', function (RouteBuilder $routes) {
     // Connect routes.
-});
+}, ['_namePrefix' => 'contacts:']);
 
 // Or with prefix()
-$routes->prefix('Admin', ['_namePrefix' => 'admin:'], function (RouteBuilder $routes) {
+$routes->prefix('Admin', function (RouteBuilder $routes) {
     // Connect routes.
-});
+}, ['_namePrefix' => 'admin:']);
 ```
 
 You can also use the `_namePrefix` option inside nested scopes and it works as
 you'd expect:
 
 ```php
-$routes->plugin('Contacts', ['_namePrefix' => 'contacts:'], function (RouteBuilder $routes) {
-    $routes->scope('/api', ['_namePrefix' => 'api:'], function (RouteBuilder $routes) {
+$routes->plugin('Contacts', function (RouteBuilder $routes) {
+    $routes->scope('/api', function (RouteBuilder $routes) {
         // This route's name will be `contacts:api:ping`
         $routes->get('/ping', ['controller' => 'Pings'], 'ping');
-    });
-});
+    }, ['_namePrefix' => 'api:']);
+}, ['_namePrefix' => 'contacts:']);
 
 // Generate a URL for the ping route
 Router::url(['_name' => 'contacts:api:ping']);
@@ -729,11 +729,11 @@ When creating prefix routes, you can set additional route parameters using
 the `$options` argument:
 
 ```php
-$routes->prefix('Admin', ['param' => 'value'], function (RouteBuilder $routes) {
+$routes->prefix('Admin', function (RouteBuilder $routes) {
     // Routes connected here are prefixed with '/admin' and
     // have the 'param' routing key set.
     $routes->connect('/{controller}');
-});
+}, ['param' => 'value']);
 ```
 
 Note the additional route parameters will be added to all the connected routes defined
@@ -745,10 +745,10 @@ would be mapped to `my-prefix` in the URL. Make sure to set a path for such pref
 if you want to use a different format like for example underscoring:
 
 ```php
-$routes->prefix('MyPrefix', ['path' => '/my_prefix'], function (RouteBuilder $routes) {
+$routes->prefix('MyPrefix', function (RouteBuilder $routes) {
     // Routes connected here are prefixed with '/my_prefix'
     $routes->connect('/{controller}');
-});
+}, ['path' => '/my_prefix']);
 ```
 
 You can define prefixes inside plugin scopes as well:
@@ -1152,7 +1152,7 @@ json and rss. These routes are HTTP Request Method sensitive.
 > [!NOTE]
 > The default for pattern for resource IDs only matches integers or UUIDs.
 > If your IDs are different you will have to supply a regular expression pattern
-> via the `id` option, for example, `$builder->resources('Recipes', ['id' => '.*'])`.
+> via the `id` option, for example, `$builder->resources('Recipes', options: ['id' => '.*'])`.
 
 The HTTP method being used is detected from a few different sources.
 The sources in order of preference are:
@@ -1201,7 +1201,7 @@ controller in each context by using prefixes:
 ```php
 $routes->scope('/api', function (RouteBuilder $routes) {
     $routes->resources('Articles', function (RouteBuilder $routes) {
-        $routes->resources('Comments', ['prefix' => 'Articles']);
+        $routes->resources('Comments', options: ['prefix' => 'Articles']);
     });
 });
 ```
@@ -1221,7 +1221,7 @@ By default, CakePHP will connect 6 routes for each resource. If you'd like to
 only connect specific resource routes you can use the `only` option:
 
 ```php
-$routes->resources('Articles', [
+$routes->resources('Articles', options: [
     'only' => ['index', 'view'],
 ]);
 ```
@@ -1246,7 +1246,7 @@ routes. For example, if your `edit()` action is called `put()` you can
 use the `actions` key to rename the actions used:
 
 ```php
-$routes->resources('Articles', [
+$routes->resources('Articles', options: [
     'actions' => ['update' => 'put', 'create' => 'add'],
 ]);
 ```
@@ -1259,7 +1259,7 @@ instead of `create()`.
 You can map additional resource methods using the `map` option:
 
 ```php
-$routes->resources('Articles', [
+$routes->resources('Articles', options: [
     'map' => [
         'deleteAll' => [
             'action' => 'deleteAll',
@@ -1276,7 +1276,7 @@ can use the 'path' key inside the resource definition to customize the path
 name:
 
 ```php
-$routes->resources('Articles', [
+$routes->resources('Articles', options: [
     'map' => [
         'updateAll' => [
             'action' => 'updateAll',
@@ -1297,7 +1297,7 @@ Resource routes can be connected to controllers in routing prefixes by
 connecting routes within a prefixed scope or by using the `prefix` option:
 
 ```php
-$routes->resources('Articles', [
+$routes->resources('Articles', options: [
     'prefix' => 'Api',
 ]);
 ```
@@ -1311,7 +1311,7 @@ You can provide `connectOptions` key in the `$options` array for
 
 ```php
 $routes->scope('/', function (RouteBuilder $routes) {
-    $routes->resources('Books', [
+    $routes->resources('Books', options: [
         'connectOptions' => [
             'routeClass' => 'ApiRoute',
         ]
@@ -1329,7 +1329,7 @@ You can specify an alternative inflection type using the `inflect` option:
 
 ```php
 $routes->scope('/', function (RouteBuilder $routes) {
-    $routes->resources('BlogPosts', [
+    $routes->resources('BlogPosts', options: [
         'inflect' => 'underscore', // Will use ``Inflector::underscore()``
     ]);
 });
@@ -1344,7 +1344,7 @@ URL segment. You can set a custom URL segment with the `path` option:
 
 ```php
 $routes->scope('/', function (RouteBuilder $routes) {
-    $routes->resources('BlogPosts', ['path' => 'posts']);
+    $routes->resources('BlogPosts', options: ['path' => 'posts']);
 });
 ```
 
