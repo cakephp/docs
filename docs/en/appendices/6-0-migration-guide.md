@@ -102,7 +102,7 @@ Some properties have also been renamed to better reflect their purpose. These ar
 
 ### Router
 
-- RouteBuilder has adjusted the signature of `scope()`, `prefix()` and `resources()`
+- `RouteBuilder` has adjusted the signature of `scope()`, `prefix()` and `resources()`
   so the 2nd and 3rd parameters have been swapped.
   We recommend using named parameters to prevent confusion and make the code more readable.
 
