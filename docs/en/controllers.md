@@ -186,13 +186,19 @@ The `Controller::set()` method is the main way to send data from your
 controller to your view. Once you've used `Controller::set()`, the variable
 can be accessed in your view:
 
-```php
+::: code-group
+
+```php [Controller]
 // First you pass data from the controller:
 $this->set('color', 'pink');
+```
 
+```php [Template]
 // Then, in the view, you can utilize the data:
 You have selected <?= h($color) ?> icing for the cake.
 ```
+
+:::
 
 The `Controller::set()` method also takes an
 associative array as its first parameter. This can often be a quick way to
@@ -314,7 +320,7 @@ direct rendering of elements, very useful in AJAX calls:
 
 ```php [Element]
 // Render the element in templates/element/ajaxreturn.php
-$this->render('/element/ajaxreturn');
+return $this->render('/element/ajaxreturn');
 ```
 
 ```php [Custom Template]
