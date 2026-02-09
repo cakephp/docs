@@ -23,7 +23,7 @@ However, if you want to have custom logic in your entities you will need to
 create classes. By convention entity classes live in **src/Model/Entity/**. If
 our application had an `articles` table we could create the following entity:
 
-``` php
+```php
 // src/Model/Entity/Article.php
 namespace App\Model\Entity;
 
@@ -44,7 +44,7 @@ articles table, we'll get instances of this class.
 
 Entities can be directly instantiated:
 
-``` php
+```php
 use App\Model\Entity\Article;
 
 $article = new Article();
@@ -53,7 +53,7 @@ $article = new Article();
 When instantiating an entity you can pass the fields with the data you want
 to store in them:
 
-``` php
+```php
 use App\Model\Entity\Article;
 
 $article = new Article([
@@ -66,7 +66,7 @@ $article = new Article([
 The preferred way of getting new entities is using the `newEmptyEntity()` method from the
 `Table` objects:
 
-``` php
+```php
 use Cake\ORM\Locator\LocatorAwareTrait;
 
 $article = $this->fetchTable('Articles')->newEmptyEntity();
@@ -90,7 +90,7 @@ $article = $this->fetchTable('Articles')->newEntity([
 Entities provide a few ways to access the data they contain. Most commonly you
 will access the data in an entity using object notation:
 
-``` php
+```php
 use App\Model\Entity\Article;
 
 $article = new Article;
@@ -110,7 +110,7 @@ You can also use the `get()` and `set()` methods.
 
 For example:
 
-``` php
+```php
 $article->set('title', 'This is my first post');
 echo $article->get('title');
 ```
@@ -121,7 +121,7 @@ echo $article->get('title');
 
 Using `patch()` you can mass assign multiple fields at once:
 
-``` php
+```php
 $article->patch([
     'title' => 'My first post',
     'body' => 'It is the best ever!',
@@ -138,7 +138,7 @@ $article->patch([
 
 You can check if fields are defined in your entities with `has()`:
 
-``` php
+```php
 $article = new Article([
     'title' => 'First post',
     'user_id' => null,
@@ -151,7 +151,7 @@ $article->has('undefined'); // false
 The `has()` method will return `true` if a field is defined. You can use
 `hasValue()` to check if a field contains a 'non-empty' value:
 
-``` php
+```php
 $article = new Article([
     'title' => 'First post',
     'user_id' => null,
@@ -175,7 +175,7 @@ If you often partially load entities you should enable strict-property access
 behavior to ensure you're not using properties that haven't been loaded. On
 a per-entity basis you can enable this behavior:
 
-``` php
+```php
 $article->requireFieldPresence();
 ```
 
@@ -198,7 +198,7 @@ capitalized) of the field name.
 They receive the basic value stored in the `_fields` array as their only
 argument. For example:
 
-``` php
+```php
 namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
@@ -216,7 +216,7 @@ The example above converts the value of the `title` field to an uppercase
 version each time it is read. It would be run when getting the field through any
 of these two ways:
 
-``` php
+```php
 echo $article->title; // returns FOO instead of foo
 echo $article->get('title'); // returns FOO instead of foo
 ```
@@ -241,7 +241,7 @@ You can also use mutators to set other fields. When doing this,
 be careful to not introduce any loops, as CakePHP will not prevent infinitely
 looping mutator methods. For example:
 
-``` php
+```php
 namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
@@ -263,7 +263,7 @@ given value in the `slug` field and stores an uppercase version in the
 `title` field. It would be run when setting the field through
 any of these two ways:
 
-``` php
+```php
 $user->title = 'foo'; // sets slug field and stores FOO instead of foo
 $user->set('title', 'foo'); // sets slug field and stores FOO instead of foo
 ```
@@ -281,7 +281,7 @@ By defining accessors you can provide access to fields that do not
 actually exist. For example if your users table has `first_name` and
 `last_name` you could create a method for the full name:
 
-``` php
+```php
 namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
@@ -298,7 +298,7 @@ class User extends Entity
 You can access virtual fields as if they existed on the entity. The property
 name will be the lower case and underscored version of the method (`full_name`):
 
-``` php
+```php
 echo $user->full_name;
 echo $user->get('full_name');
 ```
@@ -315,7 +315,7 @@ You may want to make code conditional based on whether or not fields have
 changed in an entity. For example, you may only want to validate fields when
 they change:
 
-``` php
+```php
 // See if the title has been modified.
 $article->isDirty('title');
 ```
@@ -324,7 +324,7 @@ You can also flag fields as being modified. This is handy when appending into
 array fields as this wouldn't automatically mark the field as dirty, only
 exchanging completely would.
 
-``` php
+```php
 // Add a comment and mark the field as changed.
 $article->comments[] = $newComment;
 $article->setDirty('comments', true);
@@ -336,7 +336,7 @@ the original value of the field if it has been modified or its actual value.
 
 You can also check for changes to any field in the entity:
 
-``` php
+```php
 // See if the entity has changed
 $article->isDirty();
 ```
@@ -344,20 +344,20 @@ $article->isDirty();
 To remove the dirty mark from fields in an entity, you can use the `clean()`
 method:
 
-``` php
+```php
 $article->clean();
 ```
 
 When creating a new entity, you can avoid the fields from being marked as dirty
 by passing an extra option:
 
-``` php
+```php
 $article = new Article(['title' => 'New Article'], ['markClean' => true]);
 ```
 
 To get a list of all dirty fields of an `Entity` you may call:
 
-``` php
+```php
 $dirtyFields = $entity->getDirty();
 ```
 
@@ -367,7 +367,7 @@ After you [save an entity](../orm/saving-data#saving-entities) any validation er
 stored on the entity itself. You can access any validation errors using the
 `getErrors()`, `getError()` or `hasErrors()` methods:
 
-``` php
+```php
 // Get all the errors
 $errors = $user->getErrors();
 
@@ -384,7 +384,7 @@ $user->hasErrors(false);
 The `setErrors()` or `setError()` method can also be used to set the errors
 on an entity, making it easier to test code that works with error messages:
 
-``` php
+```php
 $user->setError('password', ['Password is required']);
 $user->setErrors([
     'password' => ['Password is required'],
@@ -406,7 +406,7 @@ The `_accessible` property allows you to provide a map of fields and
 whether or not they can be mass-assigned. The values `true` and `false`
 indicate whether a field can or cannot be mass-assigned:
 
-``` php
+```php
 namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
@@ -423,7 +423,7 @@ class Article extends Entity
 In addition to concrete fields there is a special `*` field which defines the
 fallback behavior if a field is not specifically named:
 
-``` php
+```php
 namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
@@ -446,7 +446,7 @@ class Article extends Entity
 When creating a new entity using the `new` keyword you can tell it to not
 protect itself against mass assignment:
 
-``` php
+```php
 use App\Model\Entity\Article;
 
 $article = new Article(['id' => 1, 'title' => 'Foo'], ['guard' => false]);
@@ -457,7 +457,7 @@ $article = new Article(['id' => 1, 'title' => 'Foo'], ['guard' => false]);
 You can modify the list of guarded fields at runtime using the `setAccess()`
 method:
 
-``` php
+```php
 // Make user_id accessible.
 $article->setAccess('user_id', true);
 
@@ -478,7 +478,7 @@ to the [Changing Accessible Fields](../orm/saving-data#changing-accessible-field
 There are some situations when you want to allow mass-assignment to guarded
 fields:
 
-``` php
+```php
 $article->patch($fields, ['guard' => false]);
 ```
 
@@ -490,7 +490,7 @@ field list for a single call to `patch()`.
 It is often necessary to know if an entity represents a row that is already
 in the database. In those situations use the `isNew()` method:
 
-``` php
+```php
 if (!$article->isNew()) {
     echo 'This article was saved already!';
 }
@@ -499,7 +499,7 @@ if (!$article->isNew()) {
 If you are certain that an entity has already been persisted, you can use
 `setNew()`:
 
-``` php
+```php
 $article->setNew(false);
 
 $article->setNew(true);
@@ -533,7 +533,7 @@ community plugins to do so. We recommend [the LazyLoad Plugin](https://github.co
 
 After adding the plugin to your entity, you will be able to do the following:
 
-``` php
+```php
 $article = $this->Articles->findById($id);
 
 // The comments property was lazy loaded
@@ -555,7 +555,7 @@ For example if we had SoftDeletable plugin, it could provide a trait. This trait
 could give methods for marking entities as 'deleted', the method `softDelete`
 could be provided by a trait:
 
-``` php
+```php
 // SoftDelete/Model/Entity/SoftDeleteTrait.php
 
 namespace SoftDelete\Model\Entity;
@@ -572,7 +572,7 @@ trait SoftDeleteTrait
 You could then use this trait in your entity class by importing it and including
 it:
 
-``` php
+```php
 namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
@@ -589,7 +589,7 @@ class Article extends Entity
 When building APIs, you may often need to convert entities into arrays or JSON
 data. CakePHP makes this simple:
 
-``` php
+```php
 // Get an array.
 // Associations will be converted with toArray() as well.
 $array = $user->toArray();
@@ -611,7 +611,7 @@ arrays or JSON. In order to expose virtual fields you need to make them
 visible. When defining your entity class you can provide a list of virtual
 field that should be exposed:
 
-``` php
+```php
 namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
@@ -624,7 +624,7 @@ class User extends Entity
 
 This list can be modified at runtime using the `setVirtual()` method:
 
-``` php
+```php
 $user->setVirtual(['full_name', 'is_admin']);
 ```
 
@@ -635,7 +635,7 @@ example it is often unwise to expose password hashes or account recovery
 questions. When defining an entity class, define which fields should be
 hidden:
 
-``` php
+```php
 namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
@@ -648,7 +648,7 @@ class User extends Entity
 
 This list can be modified at runtime using the `setHidden()` method:
 
-``` php
+```php
 $user->setHidden(['password', 'recovery_question']);
 ```
 

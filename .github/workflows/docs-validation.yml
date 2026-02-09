@@ -57,11 +57,10 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Lint markdown files
-        uses: articulate/actions-markdownlint@v1
+        uses: DavidAnson/markdownlint-cli2-action@v22
         with:
-          config: .github/markdownlint.json
-          files: 'docs/**/*.md'
-          ignore: 'node_modules'
+          config: './.github/.markdownlint-cli2.jsonc'
+          globs: 'docs/**/*.md'
 
   spell-check:
     name: Spell Check

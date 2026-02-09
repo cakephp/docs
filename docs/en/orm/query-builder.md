@@ -22,7 +22,7 @@ modified. You can also use a table's connection object to access the lower level
 query builder that does not include ORM features, if necessary. See the
 [Database Queries](../orm/database-basics#database-queries) section for more information:
 
-``` php
+```php
 use Cake\ORM\Locator\LocatorAwareTrait;
 
 $articles = $this->fetchTable('Articles');
@@ -34,7 +34,7 @@ $query = $articles->find();
 When inside a controller, you can use the automatic table variable that is
 created using the conventions system:
 
-``` php
+```php
 // Inside ArticlesController.php
 
 $query = $this->Articles->find();
@@ -42,7 +42,7 @@ $query = $this->Articles->find();
 
 ### Selecting Rows From A Table
 
-``` php
+```php
 use Cake\ORM\Locator\LocatorAwareTrait;
 
 $query = $this->fetchTable('Articles')->find();
@@ -60,14 +60,14 @@ Almost every method in a `SelectQuery` object will return the same query, this m
 that `SelectQuery` objects are lazy, and will not be executed unless you tell them
 to:
 
-``` php
+```php
 $query->where(['id' => 1]); // Return the same query object
 $query->orderBy(['title' => 'DESC']); // Still same object, no SQL executed
 ```
 
 You can of course chain the methods you call on SelectQuery objects:
 
-``` php
+```php
 $query = $articles
     ->find()
     ->select(['id', 'name'])
@@ -82,7 +82,7 @@ foreach ($query->all() as $article) {
 If you try to call `debug()` on a SelectQuery object, you will see its internal
 state and the SQL that will be executed in the database:
 
-``` php
+```php
 debug($articles->find()->where(['id' => 1]));
 
 // Outputs
@@ -94,7 +94,7 @@ debug($articles->find()->where(['id' => 1]));
 You can execute a query directly without having to use `foreach` on it.
 The easiest way is to either call the `all()` or `toList()` methods:
 
-``` php
+```php
 $resultsIteratorObject = $articles
     ->find()
     ->where(['id >' => 1])
@@ -130,7 +130,7 @@ result in the query being executed and results returned to you.
 
 You can use the `first()` method to get the first result in the query:
 
-``` php
+```php
 $article = $articles
     ->find()
     ->where(['id' => 1])
@@ -141,7 +141,7 @@ debug($article->title);
 
 ### Getting A List Of Values From A Column
 
-``` php
+```php
 // Use the extract() method from the collections library
 // This executes the query as well
 $allTitles = $articles->find()->all()->extract('title');
@@ -153,7 +153,7 @@ foreach ($allTitles as $title) {
 
 You can also get a key-value list out of a query result:
 
-``` php
+```php
 $list = $articles->find('list')->all();
 foreach ($list as $id => $title) {
     echo "$id : $title"
@@ -170,7 +170,7 @@ that you visit the [Collection](../core-libraries/collections) section to
 improve your skills in efficiently traversing the results. The ResultSet (returned
 by calling the `SelectQuery`'s `all()` method) implements the collection interface:
 
-``` php
+```php
 // Use the combine() method from the collections library
 // This is equivalent to find('list')
 $keyValueList = $articles->find()->all()->combine('id', 'title');
@@ -220,7 +220,7 @@ database [query logging](../orm/database-basics#database-query-logging) on.
 CakePHP makes building `SELECT` queries simple. To limit the fields fetched,
 you can use the `select()` method:
 
-``` php
+```php
 $query = $articles->find();
 $query->select(['id', 'title', 'body']);
 foreach ($query->all() as $row) {
@@ -230,7 +230,7 @@ foreach ($query->all() as $row) {
 
 You can set aliases for fields by providing fields as an associative array:
 
-``` php
+```php
 // Results in SELECT id AS pk, title AS aliased_title, body ...
 $query = $articles->find();
 $query->select(['pk' => 'id', 'aliased_title' => 'title', 'body']);
@@ -238,7 +238,7 @@ $query->select(['pk' => 'id', 'aliased_title' => 'title', 'body']);
 
 To select distinct fields, you can use the `distinct()` method:
 
-``` php
+```php
 // Results in SELECT DISTINCT country FROM ...
 $query = $articles->find();
 $query->select(['country'])
@@ -247,7 +247,7 @@ $query->select(['country'])
 
 To set some basic conditions you can use the `where()` method:
 
-``` php
+```php
 // Conditions are combined with AND
 $query = $articles->find();
 $query->where(['title' => 'First Post', 'published' => true]);
@@ -263,7 +263,7 @@ anonymous function will receive an instance of
 `\Cake\Database\Expression\QueryExpression` as its first argument, and
 `\Cake\ORM\Query\SelectQuery` as its second:
 
-``` php
+```php
 $query = $articles->find();
 $query->where(function (QueryExpression $exp, SelectQuery $q) {
     return $exp->eq('published', true);
@@ -278,7 +278,7 @@ more complex `WHERE` conditions.
 By default, a query will select all fields from a table, the exception is when you
 call the `select()` function yourself and pass certain fields:
 
-``` php
+```php
 // Only select id and title from the articles table
 $articles->find()->select(['id', 'title']);
 ```
@@ -287,7 +287,7 @@ If you wish to still select all fields from a table after having called
 `select($fields)`, you can pass the table instance to `select()` for this
 purpose:
 
-``` php
+```php
 // Only all fields from the articles table including
 // a calculated slug field.
 $query = $articlesTable->find();
@@ -299,7 +299,7 @@ $query
 You can use `selectAlso()` to select all fields on a table and
 *also* select some additional fields:
 
-``` php
+```php
 $query = $articlesTable->find();
 $query->selectAlso(['count' => $query->func()->count('*')]);
 ```
@@ -307,7 +307,7 @@ $query->selectAlso(['count' => $query->func()->count('*')]);
 If you want to select all but a few fields on a table, you can use
 `selectAllExcept()`:
 
-``` php
+```php
 $query = $articlesTable->find();
 
 // Get all fields except the published field.
@@ -325,7 +325,7 @@ function you want. For example, `concat` is implemented differently in MySQL,
 PostgreSQL and SQL Server. Using the abstraction allows your code to be
 portable:
 
-``` php
+```php
 // Results in SELECT COUNT(*) count FROM ...
 $query = $articles->find();
 $query->select(['count' => $query->func()->count('*')]);
@@ -334,7 +334,7 @@ $query->select(['count' => $query->func()->count('*')]);
 Note that most of the functions accept an additional argument to specify the types
 to bind to the arguments and/or the return type, for example:
 
-``` php
+```php
 $query->select(['minDate' => $query->func()->min('date', ['date']);
 ```
 
@@ -403,7 +403,7 @@ you can use, literal arguments and bound parameters. Identifier/Literal paramete
 you to reference columns or other SQL literals. Bound parameters can be used to
 safely add user data to SQL functions. For example:
 
-``` php
+```php
 $query = $articles->find()->innerJoinWith('Categories');
 $concat = $query->func()->concat([
     'Articles.title' => 'identifier',
@@ -425,7 +425,7 @@ parameters allowing you to safely pass user data to the function.
 
 The above example generates something like this in MYSQL.
 
-``` sql
+```sql
 SELECT CONCAT(
     Articles.title,
     :c0,
@@ -445,7 +445,7 @@ it directly through `func()` and still safely pass arguments and user data
 as described. Make sure you pass the appropriate argument type for custom
 functions or they will be treated as bound parameters:
 
-``` php
+```php
 $query = $articles->find();
 $year = $query->func()->year([
     'created' => 'identifier',
@@ -462,7 +462,7 @@ $query->select([
 
 These custom function would generate something like this in MYSQL:
 
-``` sql
+```sql
 SELECT YEAR(created) as yearCreated,
        DATE_FORMAT(created, '%H:%i') as timeCreated
 FROM articles;
@@ -475,7 +475,7 @@ FROM articles;
 
 To apply ordering, you can use the `orderBy()` method:
 
-``` php
+```php
 $query = $articles->find()
     ->orderBy(['title' => 'ASC', 'id' => 'ASC']);
 ```
@@ -485,7 +485,7 @@ appended. However, when using finders you may sometimes need to overwrite the
 `ORDER BY`. Set the second parameter of `orderBy()` (as well as
 `orderByAsc()` or `orderByDesc()`) to `SelectQuery::OVERWRITE` or to `true`:
 
-``` php
+```php
 $query = $articles->find()
     ->orderBy(['title' => 'ASC']);
 // Later, overwrite the ORDER BY clause instead of appending to it.
@@ -496,7 +496,7 @@ $query = $articles->find()
 The `orderByAsc` and `orderByDesc` methods can be used when you need to sort on
 complex expressions:
 
-``` php
+```php
 $query = $articles->find();
 $concat = $query->func()->concat([
     'title' => 'identifier',
@@ -507,7 +507,7 @@ $query->orderByAsc($concat);
 
 To build complex order clauses, use a Closure to build order expressions:
 
-``` php
+```php
 $query->orderByAsc(function (QueryExpression $exp, SelectQuery $query) {
     return $exp->addCase(/* ... */);
 });
@@ -518,7 +518,7 @@ $query->orderByAsc(function (QueryExpression $exp, SelectQuery $query) {
 To limit the number of rows or set the row offset you can use the `limit()`
 and `page()` methods:
 
-``` php
+```php
 // Fetch rows 50 to 100
 $query = $articles->find()
     ->limit(50)
@@ -534,7 +534,7 @@ calls.
 When using aggregate functions like `count` and `sum` you may want to use
 `group by` and `having` clauses:
 
-``` php
+```php
 $query = $articles->find();
 $query->select([
     'count' => $query->func()->count('view_count'),
@@ -553,7 +553,7 @@ need to specific data based on a condition.
 
 If we wished to know how many published articles are in our database, we could use the following SQL:
 
-``` sql
+```sql
 SELECT
 COUNT(CASE WHEN published = 'Y' THEN 1 END) AS number_published,
 COUNT(CASE WHEN published = 'N' THEN 1 END) AS number_unpublished
@@ -562,7 +562,7 @@ FROM articles
 
 To do this with the query builder, we'd use the following code:
 
-``` php
+```php
 $query = $articles->find();
 $publishedCase = $query->expr()
     ->case()
@@ -584,7 +584,7 @@ for when you need additional logic to build the cases. If we wanted to classify
 cities into SMALL, MEDIUM, or LARGE based on population size, we could do the
 following:
 
-``` php
+```php
 $query = $cities->find();
 $sizing = $query->expr()->case()
     ->when(['population <' => 100000])
@@ -604,7 +604,7 @@ $query = $query->select(['size' => $sizing]);
 You need to be careful when including user provided data into case expressions
 as it can create SQL injection vulnerabilities:
 
-``` php
+```php
 // Unsafe do *not* use
 $case->when($requestData['published']);
 
@@ -615,7 +615,7 @@ $case->when(['published' => $requestData['published']]);
 For more complex scenarios you can use `QueryExpression` objects and bound
 values:
 
-``` php
+```php
 $userValue = $query->expr()
     ->case()
     ->when($query->expr('population >= :userData'))
@@ -631,13 +631,13 @@ By using bindings you can safely embed user data into complex raw SQL snippets.
 value type based on the parameter type. If you need to bind a value as
 a different type you can declare the desired type:
 
-``` php
+```php
 $case->when(['published' => true])->then('1', 'integer');
 ```
 
 You can create `if ... then ... else` conditions by using `else()`:
 
-``` php
+```php
 $published = $query->expr()
     ->case()
     ->when(['published' => true])
@@ -649,7 +649,7 @@ $published = $query->expr()
 
 Also, it's possible to create the simple variant by passing a value to `case()`:
 
-``` php
+```php
 $published = $query->expr()
     ->case($query->identifier('published'))
     ->when(true)
@@ -665,7 +665,7 @@ The `addCase` function can also chain together multiple statements to create
 If we wanted to classify cities into SMALL, MEDIUM, or LARGE based on population
 size, we could do the following:
 
-``` php
+```php
 $query = $cities->find()
     ->where(function (QueryExpression $exp, SelectQuery $q) {
         return $exp->addCase(
@@ -688,7 +688,7 @@ $query = $cities->find()
 Any time there are fewer case conditions than values, `addCase` will
 automatically produce an `if .. then .. else` statement:
 
-``` php
+```php
 $query = $cities->find()
     ->where(function (QueryExpression $exp, SelectQuery $q) {
         return $exp->addCase(
@@ -710,7 +710,7 @@ unnecessary. For example, when accessing aggregated data, building an Entity may
 not make sense. The process of converting the database results to entities is
 called hydration. If you wish to disable this process you can do this:
 
-``` php
+```php
 $query = $articles->find();
 $query->enableHydration(false); // Results as arrays instead of entities
 $result = $query->toList(); // Execute the query and return the array
@@ -718,7 +718,7 @@ $result = $query->toList(); // Execute the query and return the array
 
 After executing those lines, your result should look similar to this:
 
-``` php
+```php
 [
     ['id' => 1, 'title' => 'First Article', 'body' => 'Article 1 body' ...],
     ['id' => 2, 'title' => 'Second Article', 'body' => 'Article 2 body' ...],
@@ -747,7 +747,7 @@ advantages:
 The `projectAs()` method allows you to specify a DTO class that results will
 be hydrated into:
 
-``` php
+```php
 // Define a DTO class
 readonly class ArticleDto
 {
@@ -773,7 +773,7 @@ CakePHP supports two approaches for creating DTOs:
 **Reflection-based constructor mapping** - CakePHP will use reflection to map
 database columns to constructor parameters:
 
-``` php
+```php
 readonly class ArticleDto
 {
     public function __construct(
@@ -788,7 +788,7 @@ readonly class ArticleDto
 **Factory method pattern** - If your DTO class has a `createFromArray()`
 static method, CakePHP will use that instead:
 
-``` php
+```php
 class ArticleDto
 {
     public int $id;
@@ -815,7 +815,7 @@ hydration.
 You can project associated data into nested DTOs. Use the `#[CollectionOf]`
 attribute to specify the type of elements in array properties:
 
-``` php
+```php
 use Cake\ORM\Attribute\CollectionOf;
 
 readonly class ArticleDto
@@ -862,7 +862,7 @@ control the output structure independently from your database schema. You can
 define a DTO that represents your API contract and include custom serialization
 logic:
 
-``` php
+```php
 readonly class ArticleApiResponse
 {
     public function __construct(
@@ -922,7 +922,7 @@ control over the process, or want to reduce results you should use
 the [Map/Reduce](../orm/retrieving-data-and-resultsets#map-reduce) feature instead. If you were querying a list
 of people, you could calculate their age with a result formatter:
 
-``` php
+```php
 // Assuming we have built the fields, conditions and containments.
 $query->formatResults(function (\Cake\Collection\CollectionInterface $results) {
     return $results->map(function ($row) {
@@ -945,7 +945,7 @@ within contained associations as well. CakePHP will ensure that your formatters
 are properly scoped. For example, doing the following would work as you may
 expect:
 
-``` php
+```php
 // In a method in the Articles table
 $query->contain(['Authors' => function ($q) {
     return $q->formatResults(function (\Cake\Collection\CollectionInterface $authors) {
@@ -973,7 +973,7 @@ If you want to replace the results of an association finder with
 `preserveKeys` to retain keys when results are mapped to the parent query. For
 example:
 
-``` php
+```php
 public function findSlugged(SelectQuery $query): SelectQuery
 {
     return $query->applyOptions(['preserveKeys' => true])
@@ -1000,7 +1000,7 @@ Grouped conditions can be expressed by providing combining `where()` and
 expression objects. For simple queries, you can build conditions using
 an array of conditions:
 
-``` php
+```php
 $query = $articles->find()
     ->where([
         'author_id' => 3,
@@ -1010,7 +1010,7 @@ $query = $articles->find()
 
 The above would generate SQL like
 
-``` sql
+```sql
 SELECT * FROM articles WHERE author_id = 3 AND (view_count = 2 OR view_count = 3)
 ```
 
@@ -1019,7 +1019,7 @@ If you'd prefer to avoid deeply nested arrays, you can use the callback form of
 you to use the expression builder interface to build more complex conditions without arrays.
 For example:
 
-``` php
+```php
 $query = $articles->find()->where(function (QueryExpression $exp, SelectQuery $query) {
     // Use add() to add multiple conditions for the same field.
     $author = $query->expr()->or(['author_id' => 3])->add(['author_id' => 2]);
@@ -1034,7 +1034,7 @@ $query = $articles->find()->where(function (QueryExpression $exp, SelectQuery $q
 
 The above generates SQL similar to:
 
-``` sql
+```sql
 SELECT *
 FROM articles
 WHERE (
@@ -1063,7 +1063,7 @@ depending on which combinator was used.
 
 The `QueryExpression` passed to the callback function defaults to `and()`:
 
-``` php
+```php
 $query = $articles->find()
     ->where(function (QueryExpression $exp) {
         return $exp
@@ -1078,7 +1078,7 @@ Since we started off using `where()`, we don't need to call `and()`, as
 that happens implicitly. The above shows a few new condition
 methods being combined with `AND`. The resulting SQL would look like:
 
-``` sql
+```sql
 SELECT *
 FROM articles
 WHERE (
@@ -1091,7 +1091,7 @@ AND view_count > 10)
 However, if we wanted to use both `AND` & `OR` conditions we could do the
 following:
 
-``` php
+```php
 $query = $articles->find()
     ->where(function (QueryExpression $exp) {
         $orConditions = $exp->or(['author_id' => 2])
@@ -1106,7 +1106,7 @@ $query = $articles->find()
 
 Which would generate the SQL similar to:
 
-``` sql
+```sql
 SELECT *
 FROM articles
 WHERE (
@@ -1120,7 +1120,7 @@ The **combinators** also allow you pass in a callback which takes
 the new expression object as a parameter if you want to separate
 the method chaining:
 
-``` php
+```php
 $query = $articles->find()
     ->where(function (QueryExpression $exp) {
         $orConditions = $exp->or(function (QueryExpression $or) {
@@ -1136,7 +1136,7 @@ $query = $articles->find()
 
 You can negate sub-expressions using `not()`:
 
-``` php
+```php
 $query = $articles->find()
     ->where(function (QueryExpression $exp) {
         $orConditions = $exp->or(['author_id' => 2])
@@ -1150,7 +1150,7 @@ $query = $articles->find()
 
 Which will generate the following SQL looking like:
 
-``` sql
+```sql
 SELECT *
 FROM articles
 WHERE (
@@ -1161,7 +1161,7 @@ WHERE (
 
 It is also possible to build expressions using SQL functions:
 
-``` php
+```php
 $query = $articles->find()
     ->where(function (QueryExpression $exp, SelectQuery $q) {
         $year = $q->func()->year([
@@ -1176,7 +1176,7 @@ $query = $articles->find()
 
 Which will generate the following SQL looking like:
 
-``` sql
+```sql
 SELECT *
 FROM articles
 WHERE (
@@ -1190,7 +1190,7 @@ conditions:
 
 - `eq()` Creates an equality condition:
 
-  ``` php
+  ```php
   $query = $cities->find()
       ->where(function (QueryExpression $exp, SelectQuery $q) {
           return $exp->eq('population', '10000');
@@ -1200,7 +1200,7 @@ conditions:
 
 - `notEq()` Creates an inequality condition:
 
-  ``` php
+  ```php
   $query = $cities->find()
       ->where(function (QueryExpression $exp, SelectQuery $q) {
           return $exp->notEq('population', '10000');
@@ -1210,7 +1210,7 @@ conditions:
 
 - `like()` Creates a condition using the `LIKE` operator:
 
-  ``` php
+  ```php
   $query = $cities->find()
       ->where(function (QueryExpression $exp, SelectQuery $q) {
           return $exp->like('name', '%A%');
@@ -1220,7 +1220,7 @@ conditions:
 
 - `notLike()` Creates a negated `LIKE` condition:
 
-  ``` php
+  ```php
   $query = $cities->find()
       ->where(function (QueryExpression $exp, SelectQuery $q) {
           return $exp->notLike('name', '%A%');
@@ -1230,7 +1230,7 @@ conditions:
 
 - `in()` Create a condition using `IN`:
 
-  ``` php
+  ```php
   $query = $cities->find()
       ->where(function (QueryExpression $exp, SelectQuery $q) {
           return $exp->in('country_id', ['AFG', 'USA', 'EST']);
@@ -1240,7 +1240,7 @@ conditions:
 
 - `notIn()` Create a negated condition using `IN`:
 
-  ``` php
+  ```php
   $query = $cities->find()
       ->where(function (QueryExpression $exp, SelectQuery $q) {
           return $exp->notIn('country_id', ['AFG', 'USA', 'EST']);
@@ -1250,7 +1250,7 @@ conditions:
 
 - `gt()` Create a `>` condition:
 
-  ``` php
+  ```php
   $query = $cities->find()
       ->where(function (QueryExpression $exp, SelectQuery $q) {
           return $exp->gt('population', '10000');
@@ -1260,7 +1260,7 @@ conditions:
 
 - `gte()` Create a `>=` condition:
 
-  ``` php
+  ```php
   $query = $cities->find()
       ->where(function (QueryExpression $exp, SelectQuery $q) {
           return $exp->gte('population', '10000');
@@ -1270,7 +1270,7 @@ conditions:
 
 - `lt()` Create a `<` condition:
 
-  ``` php
+  ```php
   $query = $cities->find()
       ->where(function (QueryExpression $exp, SelectQuery $q) {
           return $exp->lt('population', '10000');
@@ -1280,7 +1280,7 @@ conditions:
 
 - `lte()` Create a `<=` condition:
 
-  ``` php
+  ```php
   $query = $cities->find()
       ->where(function (QueryExpression $exp, SelectQuery $q) {
           return $exp->lte('population', '10000');
@@ -1290,7 +1290,7 @@ conditions:
 
 - `isNull()` Create an `IS NULL` condition:
 
-  ``` php
+  ```php
   $query = $cities->find()
       ->where(function (QueryExpression $exp, SelectQuery $q) {
           return $exp->isNull('population');
@@ -1300,7 +1300,7 @@ conditions:
 
 - `isNotNull()` Create a negated `IS NULL` condition:
 
-  ``` php
+  ```php
   $query = $cities->find()
       ->where(function (QueryExpression $exp, SelectQuery $q) {
           return $exp->isNotNull('population');
@@ -1310,7 +1310,7 @@ conditions:
 
 - `between()` Create a `BETWEEN` condition:
 
-  ``` php
+  ```php
   $query = $cities->find()
       ->where(function (QueryExpression $exp, SelectQuery $q) {
           return $exp->between('population', 999, 5000000);
@@ -1320,7 +1320,7 @@ conditions:
 
 - `exists()` Create a condition using `EXISTS`:
 
-  ``` php
+  ```php
   $subquery = $cities->find()
       ->select(['id'])
       ->where(function (QueryExpression $exp, SelectQuery $q) {
@@ -1337,7 +1337,7 @@ conditions:
 
 - `notExists()` Create a negated condition using `EXISTS`:
 
-  ``` php
+  ```php
   $subquery = $cities->find()
       ->select(['id'])
       ->where(function (QueryExpression $exp, SelectQuery $q) {
@@ -1356,7 +1356,7 @@ Expression objects should cover many commonly used functions and expressions. If
 you find yourself unable to create the required conditions with expressions you
 can may be able to use `bind()` to manually bind parameters into conditions:
 
-``` php
+```php
 $query = $cities->find()
     ->where([
         'start_date BETWEEN :start AND :end',
@@ -1369,7 +1369,7 @@ In situations when you can't get, or don't want to use the builder methods to
 create the conditions you want you can also use snippets of SQL in where
 clauses:
 
-``` php
+```php
 // Compare two fields to each other
 $query->where(['Categories.parent_id != Parents.id']);
 ```
@@ -1385,7 +1385,7 @@ $query->where(['Categories.parent_id != Parents.id']);
 When you need to reference a column or SQL identifier in your queries you can
 use the `identifier()` method:
 
-``` php
+```php
 $query = $countries->find();
 $query->select([
         'year' => $query->func()->year([$query->identifier('created')]),
@@ -1397,7 +1397,7 @@ $query->select([
 
 You can use `identifier()` in comparisons to aggregations too:
 
-``` php
+```php
 $query = $this->Orders->find();
 $query->select(['Customers.customer_name', 'total_orders' => $query->func()->count('Orders.order_id')])
     ->contain('Customers')
@@ -1415,7 +1415,7 @@ In situations that you need to deal with accented characters, multilingual data
 or case-sensitive comparisons, you can use the `$collation` parameter of `IdentifierExpression`
 or `StringExpression` to apply a character expression to a certain collation:
 
-``` php
+```php
 use Cake\Database\Expression\IdentifierExpression;
 
 $collation = 'Latin1_general_CI_AI'; //sql server example
@@ -1434,7 +1434,7 @@ types based on the schema data. If in your queries you'd like CakePHP to
 automatically convert equality to `IN` comparisons, you'll need to indicate
 the column data type:
 
-``` php
+```php
 $query = $articles->find()
     ->where(['id' => $ids], ['id' => 'integer[]']);
 
@@ -1452,7 +1452,7 @@ be cast using the [type system](../orm/database-basics#data-types). This works w
 complex types as well. For example, you could take a list of DateTime objects
 using:
 
-``` php
+```php
 $query = $articles->find()
     ->where(['post_date' => $dates], ['post_date' => 'date[]']);
 ```
@@ -1462,7 +1462,7 @@ $query = $articles->find()
 When a condition value is expected to be `null` or any other value, you can
 use the `IS` operator to automatically create the correct expression:
 
-``` php
+```php
 $query = $categories->find()
     ->where(['parent_id IS' => $parentId]);
 ```
@@ -1475,7 +1475,7 @@ the type of `$parentId`
 When a condition value is expected not to be `null` or any other value, you
 can use the `IS NOT` operator to automatically create the correct expression:
 
-``` php
+```php
 $query = $categories->find()
     ->where(['parent_id IS NOT' => $parentId]);
 ```
@@ -1488,7 +1488,7 @@ depending on the type of `$parentId`
 When you cannot construct the SQL you need using the query builder, you can use
 expression objects to add snippets of SQL to your queries:
 
-``` php
+```php
 $query = $articles->find();
 $expr = $query->expr()->add('1 + 1');
 $query->select(['two' => $expr]);
@@ -1507,7 +1507,7 @@ If you have configured [Read And Write Connections](../orm/database-basics#read-
 you can have a query run on the `read` connection using one of the role
 methods:
 
-``` php
+```php
 // Run a query on the read connection
 $query->useReadRole();
 
@@ -1524,7 +1524,7 @@ Query role methods were added in 4.5.0
 It is possible to change the conjunction used to join conditions in a query
 expression using the method `setConjunction`:
 
-``` php
+```php
 $query = $articles->find();
 $expr = $query->expr(['1','1'])->setConjunction('+');
 $query->select(['two' => $expr]);
@@ -1532,7 +1532,7 @@ $query->select(['two' => $expr]);
 
 And can be used combined with aggregations too:
 
-``` php
+```php
 $query = $products->find();
 $query->select(function ($query) {
         $stockQuantity = $query->func()->sum('Stocks.quantity');
@@ -1557,7 +1557,7 @@ $query->select(function ($query) {
 Tuple comparison involves comparing two rows of data (tuples) element by element,
 typically using comparison operators like `<, >, =`:
 
-``` php
+```php
 $products->find()
     ->where([
         'OR' => [
@@ -1571,7 +1571,7 @@ $products->find()
 
 The same result can be achieved using `TupleComparison`:
 
-``` php
+```php
 use Cake\Database\Expression\TupleComparison;
 
 $products->find()
@@ -1590,7 +1590,7 @@ $products->find()
 Tuple Comparison can also be used with `IN` and the result can be transformed
 even on DBMS that does not natively support it:
 
-``` php
+```php
 $articles->find()
         ->where(
             new TupleComparison(
@@ -1612,7 +1612,7 @@ $articles->find()
 Optimizer hints allow you to control execution plans at the individual query
 level:
 
-``` php
+```php
 $query->optimizerHint(['NO_BKA(articles)']);
 ```
 
@@ -1629,7 +1629,7 @@ extension).
 
 You can get the `Driver` instance for the current connection role from a query:
 
-``` php
+```php
 $driver = $query->getDriver();
 ```
 
@@ -1642,7 +1642,7 @@ $driver = $query->getDriver();
 Once you've made your query, you'll want to retrieve rows from it. There are
 a few ways of doing this:
 
-``` php
+```php
 // Iterate the query
 foreach ($query as $row) {
     // Do stuff.
@@ -1655,7 +1655,7 @@ $results = $query->all();
 You can use [any of the collection](../core-libraries/collections) methods
 on your query objects to pre-process or transform the results:
 
-``` php
+```php
 // Use one of the collection methods.
 $ids = $query->map(function ($row) {
     return $row->id;
@@ -1669,7 +1669,7 @@ $maxAge = $query->max(function ($max) {
 You can use `first` or `firstOrFail` to retrieve a single record. These
 methods will alter the query adding a `LIMIT 1` clause:
 
-``` php
+```php
 // Get just the first row
 $row = $query->first();
 
@@ -1684,14 +1684,14 @@ $row = $query->firstOrFail();
 Using a single query object, it is possible to obtain the total number of rows
 found for a set of conditions:
 
-``` php
+```php
 $total = $articles->find()->where(['is_active' => true])->count();
 ```
 
 The `count()` method will ignore the `limit`, `offset` and `page`
 clauses, thus the following will return the same result:
 
-``` php
+```php
 $total = $articles->find()->where(['is_active' => true])->limit(10)->count();
 ```
 
@@ -1704,7 +1704,7 @@ Moreover, it is possible to return the total count for a query containing group
 by clauses without having to rewrite the query in any way. For example, consider
 this query for retrieving article ids and their comments count:
 
-``` php
+```php
 $query = $articles->find();
 $query->select(['Articles.id', $query->func()->count('Comments.id')])
     ->matching('Comments')
@@ -1715,7 +1715,7 @@ $total = $query->count();
 After counting, the query can still be used for fetching the associated
 records:
 
-``` php
+```php
 $list = $query->all();
 ```
 
@@ -1726,7 +1726,7 @@ expensive unneeded parts such as left joins. This becomes particularly handy
 when using the CakePHP built-in pagination system which calls the `count()`
 method:
 
-``` php
+```php
 $query = $query->where(['is_active' => true])->counter(function ($query) {
     return 100000;
 });
@@ -1743,7 +1743,7 @@ will receive the estimated hard-coded number of rows.
 When fetching entities that don't change often you may want to cache the
 results. The `SelectQuery` class makes this simple:
 
-``` php
+```php
 $query->cache('recent_articles');
 ```
 
@@ -1751,7 +1751,7 @@ Will enable caching on the query's result set. If only one argument is provided
 to `cache()` then the 'default' cache configuration will be used. You can
 control which caching configuration is used with the second parameter:
 
-``` php
+```php
 // String config name.
 $query->cache('recent_articles', 'dbResults');
 
@@ -1764,7 +1764,7 @@ to generate the key. The function you give it will receive the query as an
 argument. You can then read aspects of the query to dynamically generate the
 cache key:
 
-``` php
+```php
 // Generate a key based on a simple checksum
 // of the query's where clause
 $query->cache(function ($q) {
@@ -1806,7 +1806,7 @@ to fetch associated data from other tables is called **eager loading**.
 In addition to loading related data with `contain()`, you can also add
 additional joins with the query builder:
 
-``` php
+```php
 $query = $articles->find()
     ->join([
         'table' => 'comments',
@@ -1819,7 +1819,7 @@ $query = $articles->find()
 You can append multiple joins at the same time by passing an associative array
 with multiple joins:
 
-``` php
+```php
 $query = $articles->find()
     ->join([
         'c' => [
@@ -1838,7 +1838,7 @@ $query = $articles->find()
 As seen above, when adding joins the alias can be the outer array key. Join
 conditions can also be expressed as an array of conditions:
 
-``` php
+```php
 $query = $articles->find()
     ->join([
         'c' => [
@@ -1859,7 +1859,7 @@ datatypes for the join conditions, the ORM can correctly convert data types into
 SQL. In addition to `join()` you can use `rightJoin()`, `leftJoin()` and
 `innerJoin()` to create joins:
 
-``` php
+```php
 // Join with an alias and string conditions
 $query = $articles->find();
 $query->leftJoin(
@@ -1885,7 +1885,7 @@ $query->innerJoin(
 It should be noted that if you set the `quoteIdentifiers` option to `true` when
 defining your `Connection`, join conditions between table fields should be set as follow:
 
-``` php
+```php
 $query = $articles->find()
     ->join([
         'c' => [
@@ -1906,7 +1906,7 @@ some database Drivers (PostgreSQL notably)
 Unlike earlier examples, you should can't use `find()` to create insert queries.
 Instead, create a new `InsertQuery` object using `insertQuery()`:
 
-``` php
+```php
 $query = $articles->insertQuery();
 $query->insert(['title', 'body'])
     ->values([
@@ -1919,7 +1919,7 @@ $query->insert(['title', 'body'])
 To insert multiple rows with only one query, you can chain the `values()`
 method as many times as you need:
 
-``` php
+```php
 $query = $articles->insertQuery();
 $query->insert(['title', 'body'])
     ->values([
@@ -1938,7 +1938,7 @@ Generally, it is easier to insert data using entities and
 `INSERT` query together, you can create `INSERT INTO ... SELECT` style
 queries:
 
-``` php
+```php
 $select = $articles->find()
     ->select(['title', 'body', 'published'])
     ->where(['id' => 3]);
@@ -1961,7 +1961,7 @@ $query = $articles->insertQuery()
 As with insert queries, you should not use `find()` to create update queries.
 Instead, create new a `Query` object using `updateQuery()`:
 
-``` php
+```php
 $query = $articles->updateQuery();
 $query->set(['published' => true])
     ->where(['id' => $id])
@@ -1981,7 +1981,7 @@ Generally, it is easier to update data using entities and
 As with insert queries, you can't use `find()` to create delete queries.
 Instead, create new a query object using `deleteQuery()`:
 
-``` php
+```php
 $query = $articles->deleteQuery();
 $query->where(['id' => $id])
     ->execute();
@@ -1998,7 +1998,7 @@ issues, it is still possible to leave yourself vulnerable through improper use.
 When using condition arrays, the key/left-hand side as well as single value
 entries must not contain user data:
 
-``` php
+```php
 $query->where([
     // Data on the key/left-hand side is unsafe, as it will be
     // inserted into the generated query as-is
@@ -2014,7 +2014,7 @@ $query->where([
 
 When using the expression builder, column names must not contain user data:
 
-``` php
+```php
 $query->where(function (QueryExpression $exp) use ($userData, $values) {
     // Column names in all expressions are not safe.
     return $exp->in($userData, $values);
@@ -2024,7 +2024,7 @@ $query->where(function (QueryExpression $exp) use ($userData, $values) {
 When building function expressions, function names should never contain user
 data:
 
-``` php
+```php
 // Not safe.
 $query->func()->{$userData}($arg1);
 
@@ -2035,7 +2035,7 @@ $query->func()->coalesce($userData);
 
 Raw expressions are never safe:
 
-``` php
+```php
 $expr = $query->expr()->add($userData);
 $query->select(['two' => $expr]);
 ```
@@ -2049,7 +2049,7 @@ method.
 The following example would be a safe variant of the unsafe, SQL injection prone
 example given above:
 
-``` php
+```php
 $query
     ->where([
         'MATCH (comment) AGAINST (:userData)',
@@ -2073,7 +2073,7 @@ complex queries using the ORM query builder.
 
 Unions are created by composing one or more select queries together:
 
-``` php
+```php
 $inReview = $articles->find()
     ->where(['need_review' => true]);
 
@@ -2085,7 +2085,7 @@ $unpublished->union($inReview);
 
 You can create `UNION ALL` queries using the `unionAll()` method:
 
-``` php
+```php
 $inReview = $articles->find()
     ->where(['need_review' => true]);
 
@@ -2101,7 +2101,7 @@ Intersections allow you to combine the result sets of two queries together and
 finding results with overlapping results. Intersections are created by composing
 one or more select queries together:
 
-``` php
+```php
 $inReview = $articles->find()
     ->where(['need_review' => true]);
 
@@ -2113,7 +2113,7 @@ $unpublished->intersect($inReview);
 
 You can create `INTERSECT ALL` queries using the `intersectAll()` method:
 
-``` php
+```php
 $inReview = $articles->find()
     ->where(['need_review' => true]);
 
@@ -2132,7 +2132,7 @@ $unpublished->intersectAll($inReview);
 Subqueries enable you to compose queries together and build conditions and
 results based on the results of other queries:
 
-``` php
+```php
 $matchingComment = $articles->getAssociation('Comments')->find()
     ->select(['article_id'])
     ->distinct()
@@ -2160,7 +2160,7 @@ referencing results in the outer query more complex. As of 4.2.0 you can use
 `Table::subquery()` to create a specialized query instance that will not
 generate aliases:
 
-``` php
+```php
 $comments = $articles->getAssociation('Comments')->getTarget();
 
 $matchingComment = $comments->subquery()
@@ -2177,7 +2177,7 @@ $query = $articles->find()
 Most relational database vendors support taking out locks when doing select
 operations. You can use the `epilog()` method for this:
 
-``` php
+```php
 // In MySQL
 $query->epilog('FOR UPDATE');
 ```
@@ -2192,7 +2192,7 @@ current row. They are commonly used to calculate totals or offsets on partial se
 in the query. For example if we wanted to find the date of the earliest and latest comment on
 each article we could use window functions:
 
-``` php
+```php
 $query = $articles->find();
 $query->select([
     'Articles.id',
@@ -2210,7 +2210,7 @@ $query->select([
 
 The above would generate SQL similar to:
 
-``` sql
+```sql
 SELECT
     Articles.id,
     Articles.title,
@@ -2241,7 +2241,7 @@ by `AggregateExpresion`, but make sure you follow your database documentation on
 If you need to re-use the same window expression multiple times you can create
 named windows using the `window()` method:
 
-``` php
+```php
 $query = $articles->find();
 
 // Define a named window
@@ -2280,7 +2280,7 @@ derived tables and views in a couple ways:
 As an example lets fetch a list of customers and the number of orders each of
 them has made. In SQL we would use:
 
-``` sql
+```sql
 WITH orders_per_customer AS (
     SELECT COUNT(*) AS order_count, customer_id FROM orders GROUP BY customer_id
 )
@@ -2291,7 +2291,7 @@ INNER JOIN orders_per_customer ON orders_per_customer.customer_id = customers.id
 
 To build that query with the ORM query builder we would use:
 
-``` php
+```php
 // Start the final query
 $query = $this->Customers->find();
 

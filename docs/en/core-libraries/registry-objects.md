@@ -17,7 +17,7 @@ for Helpers, Behaviors, and Tasks in addition to Components.
 Objects can be loaded on-the-fly using `add<registry-object>()`
 Example:
 
-``` php
+```php
 $this->loadComponent('Acl.Acl');
 $this->addHelper('Flash')
 ```
@@ -25,7 +25,7 @@ $this->addHelper('Flash')
 This will result in the `Acl` property and `Flash` helper being loaded.
 Configuration can also be set on-the-fly. Example:
 
-``` php
+```php
 $this->loadComponent('Cookie', ['name' => 'sweet']);
 ```
 
@@ -35,7 +35,7 @@ used to alias objects in a registry. This allows you to have component names
 that do not reflect the classnames, which can be helpful when extending core
 components:
 
-``` php
+```php
 $this->Flash = $this->loadComponent('Flash', ['className' => 'MyCustomFlash']);
 $this->Flash->error(); // Actually using MyCustomFlash::error();
 ```
@@ -53,7 +53,7 @@ objects from receiving callbacks. You should use the features in the events syst
 accomplish this now. For example, you could disable component callbacks in the
 following way:
 
-``` php
+```php
 // Remove MyComponent from callbacks.
 $this->getEventManager()->off($this->MyComponent);
 

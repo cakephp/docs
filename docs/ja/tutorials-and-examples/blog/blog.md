@@ -96,7 +96,7 @@ CakePHP のディレクトリー構造がどのように働くかを学ぶのに
 投稿記事を保存するためのテーブルをひとつ作成します。そしてテスト用に、いくつかの記事も投入します。
 次の SQL をデータベースで実行してください。
 
-``` sql
+```sql
 # まず、articles テーブルを作成します
 CREATE TABLE articles (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -134,7 +134,7 @@ CakePHP はレガシーなデータベーススキーマに対応できるくら
 ファイルの中の `Datasources.default` 配列の値を置き換えてください。
 完全な設定配列の例は、以下のようになります。 :
 
-``` php
+```php
 return [
     // More configuration above.
     'Datasources' => [
@@ -170,7 +170,7 @@ return [
 編集し、デフォルトの `Security.salt` の値を変更してください。
 この値は、ランダムで長い文字列にします。そうすることで推測がより困難になります。 :
 
-``` text
+```text
 'Security' => [
    'salt' => '長いもので、多くの異なる値を含むもの。',
 ],

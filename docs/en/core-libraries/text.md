@@ -14,7 +14,7 @@ strings and is normally accessed statically. Example:
 If you need `Cake\View\Helper\TextHelper` functionalities outside
 of a `View`, use the `Text` class:
 
-``` php
+```php
 namespace App\Controller;
 
 use Cake\Utility\Text;
@@ -57,7 +57,7 @@ multiple conversion pairs separated by `;`. You can find more info about
 transliterator identifiers
 [here](https://unicode-org.github.io/icu/userguide/transforms/general/#transliterator-identifiers):
 
-``` php
+```php
 // apple puree
 Text::transliterate('apple purée');
 
@@ -87,7 +87,7 @@ options are:
 - `preserve` Specific non-word character to preserve. Defaults to `null`.
   For example, this option can be set to '.' to generate clean file names:
 
-  ``` php
+  ```php
   // apple-puree
   Text::slug('apple purée');
 
@@ -108,7 +108,7 @@ The UUID method is used to generate unique identifiers as per `4122`. The
 UUID is a 128-bit string in the format of
 `485fc381-e790-47a3-9794-1337c0a8fe68`.
 
-``` php
+```php
 Text::uuid(); // 485fc381-e790-47a3-9794-1337c0a8fe68
 ```
 
@@ -119,7 +119,7 @@ You can now configure a custom UUID generator using dependency injection.
 Starting from CakePHP 5.3.0, you can configure a custom UUID generator by
 setting a closure in your configuration:
 
-``` php
+```php
 // In your config/app.php or config/bootstrap.php
 use Cake\Core\Configure;
 
@@ -145,7 +145,7 @@ that appears between `$leftBound` and `$rightBound`.
 This method can be useful when splitting up data that has regular formatting
 such as tag lists:
 
-``` php
+```php
 $data = "cakephp 'great framework' php";
 $result = Text::tokenize($data, ' ', "'", "'");
 // Result contains
@@ -159,7 +159,7 @@ $result = Text::tokenize($data, ' ', "'", "'");
 This method unformats a number from a human-readable byte size to an integer
 number of bytes:
 
-``` php
+```php
 $int = Text::parseFileSize('2GB');
 ```
 
@@ -172,7 +172,7 @@ $int = Text::parseFileSize('2GB');
 The insert method is used to create string templates and to allow for key/value
 replacements:
 
-``` php
+```php
 Text::insert(
     'My name is :name and I am :age years old.',
     ['name' => 'Bob', 'age' => '65'],
@@ -192,7 +192,7 @@ unneeded markup around placeholders that did not get replaced by
 
 You can use the following options in the options array:
 
-``` php
+```php
 $options = [
     'clean' => [
         'method' => 'text', // or html
@@ -211,7 +211,7 @@ $options = [
 Wraps a block of text to a set width and indents blocks as well.
 Can intelligently wrap text so words are not sliced across lines:
 
-``` php
+```php
 $text = 'This is the song that never ends.';
 $result = Text::wrap($text, 22);
 
@@ -237,7 +237,7 @@ exceed a certain length even with internal indentation, you need to use
 `wrapBlock()` instead of `wrap()`. This is particularly useful to generate
 text for the console for example. It accepts the same options as `wrap()`:
 
-``` php
+```php
 $text = 'This is the song that never ends. This is the song that never ends.';
 $result = Text::wrapBlock($text, [
     'width' => 22,
@@ -272,7 +272,7 @@ Options:
 
 Example:
 
-``` php
+```php
 // Called as TextHelper
 echo $this->Text->highlight(
     $lastSentence,
@@ -310,7 +310,7 @@ HTML tags will be respected and will not be cut off.
 `$options` is used to pass all extra parameters, and has the following
 possible keys by default, all of which are optional:
 
-``` php
+```php
 [
     'ellipsis' => '...',
     'exact' => true,
@@ -320,7 +320,7 @@ possible keys by default, all of which are optional:
 
 Example:
 
-``` php
+```php
 // Called as TextHelper
 echo $this->Text->truncate(
     'The killer crept forward and tripped on the rug.',
@@ -363,7 +363,7 @@ truncation would otherwise take place.
 `$options` is used to pass all extra parameters, and has the following
 possible keys by default, all of which are optional:
 
-``` php
+```php
 [
     'ellipsis' => '...',
     'exact' => true,
@@ -372,7 +372,7 @@ possible keys by default, all of which are optional:
 
 Example:
 
-``` php
+```php
 $sampleText = 'I packed my bag and in it I put a PSP, a PS3, a TV, ' .
     'a C# program that can divide by zero, death metal t-shirts'
 
@@ -414,7 +414,7 @@ of characters on each side determined by `$radius`, and prefix/suffix with
 `$ellipsis`. This method is especially handy for search results. The query
 string or keywords can be shown within the resulting document.
 
-``` php
+```php
 // Called as TextHelper
 echo $this->Text->excerpt($lastParagraph, 'method', 50, '...');
 
@@ -437,7 +437,7 @@ Output:
 
 Creates a comma-separated list where the last two items are joined with 'and':
 
-``` php
+```php
 $colors = ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet'];
 
 // Called as TextHelper

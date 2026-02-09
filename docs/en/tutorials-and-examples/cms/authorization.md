@@ -13,13 +13,13 @@ to ensure that each user only edits the posts they own. We'll use the
 
 Use composer to install the Authorization Plugin:
 
-``` bash
+```bash
 composer require "cakephp/authorization:^3.0"
 ```
 
 Load the plugin by adding the following statement to the `bootstrap()` method in **src/Application.php**:
 
-``` php
+```php
 $this->addPlugin('Authorization');
 ```
 
@@ -30,7 +30,7 @@ and optionally a component to make checking authorization easier. First, lets
 apply the middleware. In **src/Application.php** add the following to the class
 imports:
 
-``` php
+```php
 use Authorization\AuthorizationService;
 use Authorization\AuthorizationServiceInterface;
 use Authorization\AuthorizationServiceProviderInterface;
@@ -46,7 +46,7 @@ Add the `AuthorizationServiceProviderInterface` to the implemented interfaces on
 
 Then add the following to your `middleware()` method:
 
-``` php
+```php
 // Add authorization **after** authentication
 $middlewareQueue->add(new AuthorizationMiddleware($this));
 ```
@@ -56,7 +56,7 @@ it starts handling the request. This hook method allows your application to
 define the `AuthorizationService` it wants to use. Add the following method your
 **src/Application.php**:
 
-``` php
+```php
 public function getAuthorizationService(ServerRequestInterface $request): AuthorizationServiceInterface
 {
     $resolver = new OrmResolver();
@@ -73,7 +73,7 @@ Next, lets add the `AuthorizationComponent` to `AppController`. In
 **src/Controller/AppController.php** add the following to the `initialize()`
 method:
 
-``` php
+```php
 $this->loadComponent('Authorization.Authorization');
 ```
 
@@ -81,7 +81,7 @@ Lastly we'll mark the add, login, and logout actions as not requiring
 authorization by adding the following to
 **src/Controller/UsersController.php**:
 
-``` php
+```php
 // In the add, login, and logout methods
 $this->Authorization->skipAuthorization();
 ```
@@ -97,7 +97,7 @@ allowed to **perform an action** on a given **resource**. Our **identity** is
 going to be our logged in user, and our **resources** are our ORM entities and
 queries. Lets use bake to generate a basic policy:
 
-``` bash
+```bash
 bin/cake bake policy --type entity Article
 ```
 
@@ -105,7 +105,7 @@ This will generate an empty policy class for our `Article` entity. You can
 find the generated policy in **src/Policy/ArticlePolicy.php**. Next update the
 policy to look like the following:
 
-``` php
+```php
 <?php
 namespace App\Policy;
 
@@ -150,7 +150,7 @@ Authorization plugin will raise an exception letting us know we forgot to apply
 authorization. In **src/Controller/ArticlesController.php** add the following to
 the `add`, `edit` and `delete` methods:
 
-``` php
+```php
 public function add()
 {
     $article = $this->Articles->newEmptyEntity();
@@ -183,14 +183,14 @@ controller action name to generate the policy method to call. If you'd like to
 call a different policy method you can call `authorize` with the operation
 name:
 
-``` php
+```php
 $this->Authorization->authorize($article, 'update');
 ```
 
 Lastly add the following to the `tags`, `view`, and `index` methods on the
 `ArticlesController`:
 
-``` php
+```php
 // View, index and tags actions are public methods
 // and don't require authorization checks.
 $this->Authorization->skipAuthorization();
@@ -205,7 +205,7 @@ will solve these problems next. First up is the `add` action.
 When creating articles, we want to fix the `user_id` to be the currently
 logged in user. Replace your add action with the following:
 
-``` php
+```php
 // in src/Controller/ArticlesController.php
 
 public function add()
@@ -233,7 +233,7 @@ public function add()
 
 Next we'll update the `edit` action. Replace the edit method with the following:
 
-``` php
+```php
 // in src/Controller/ArticlesController.php
 
 public function edit($slug)

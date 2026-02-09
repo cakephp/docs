@@ -21,7 +21,7 @@ CakePHPアプリケーションには、シェルとタスクを含む **src/Com
 **src/Shell** 、および **src/Shell/Task** ディレクトリが含まれています。
 また、binディレクトリには実行ファイルが付属しています。
 
-``` bash
+```bash
 cd /path/to/app
 bin/cake
 ```
@@ -32,7 +32,7 @@ bin/cake
 引数なしでコンソールを実行すると、使用可能なコマンドが一覧表示されます。
 そのコマンド名を使用してコマンドを実行できます。
 
-``` bash
+```bash
 # server シェルを実行
 bin/cake server
 
@@ -56,7 +56,7 @@ bin/cake bake.bake -h
 公開されるコマンドの数を減らすことをお勧めします。
 `Application` の `console()` フックを使って、公開されるコマンドの制限やコマンド名の整理が可能です。:
 
-``` php
+```php
 // src/Application.php
 namespace App;
 
@@ -95,7 +95,7 @@ class Application extends BaseApplication
 
 プラグインの中で各コマンドを定義することにより、コマンド名をカスタマイズできます。:
 
-``` php
+```php
 public function console(CommandCollection $commands): CommandCollection
 {
     // ネストされた名前のコマンドを追加
@@ -152,7 +152,7 @@ public function console(CommandCollection $commands): CommandCollection
 
 メールを送信する場合は、メールを送信する際のホストを Email クラスで指定する必要があります:
 
-``` php
+```php
 use Cake\Mailer\Email;
 
 $email = new Email();

@@ -15,7 +15,7 @@ get information from the terminal into your commands.
 Commands and Shells provide a `buildOptionParser($parser)` hook method that
 you can use to define the options and arguments for your commands:
 
-``` php
+```php
 protected function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
 {
     // Define your options and arguments.
@@ -28,7 +28,7 @@ protected function buildOptionParser(ConsoleOptionParser $parser): ConsoleOption
 Shell classes use the `getOptionParser()` hook method to define their option
 parser:
 
-``` php
+```php
 public function getOptionParser()
 {
     // Get an empty parser from the framework.
@@ -51,7 +51,7 @@ arguments as well as make them required. You can add arguments
 one at a time with `$parser->addArgument();` or multiple at once
 with `$parser->addArguments();`:
 
-``` php
+```php
 $parser->addArgument('model', ['help' => 'The model to bake']);
 ```
 
@@ -83,7 +83,7 @@ The `separator` option was added.
 If you have an array with multiple arguments you can use
 `$parser->addArguments()` to add multiple arguments at once.
 
-``` php
+```php
 $parser->addArguments([
     'node' => ['help' => 'The node to create', 'required' => true],
     'parent' => ['help' => 'The parent node', 'required' => true],
@@ -100,7 +100,7 @@ indicate that an argument must be present when a shell is called.
 Additionally, you can use `choices` to force an argument to be from a list of
 valid choices:
 
-``` php
+```php
 $parser->addArgument('type', [
     'help' => 'The type of node to interact with.',
     'required' => true,
@@ -121,7 +121,7 @@ arguments for your commands. Options can define both verbose and short aliases.
 They can accept a value (e.g `--connection=default`) or be boolean options
 (e.g `--verbose`). Options are defined with the `addOption()` method:
 
-``` php
+```php
 $parser->addOption('connection', [
     'short' => 'c',
     'help' => 'connection',
@@ -136,7 +136,7 @@ when invoking the shell.
 Boolean switches do not accept or consume values, and their presence just
 enables them in the parsed parameters:
 
-``` php
+```php
 $parser->addOption('no-commit', ['boolean' => true]);
 ```
 
@@ -174,7 +174,7 @@ The `separator` option was added.
 If you have an array with multiple options you can use `$parser->addOptions()`
 to add multiple options at once.
 
-``` php
+```php
 $parser->addOptions([
     'node' => ['short' => 'n', 'help' => 'The node to create'],
     'parent' => ['short' => 'p', 'help' => 'The parent node'],
@@ -190,7 +190,7 @@ Options can be provided with a set of choices much like positional arguments
 can be. When an option has defined choices, those are the only valid choices
 for an option. All other values will raise an `InvalidArgumentException`:
 
-``` php
+```php
 $parser->addOption('accept', [
     'help' => 'What version to accept.',
     'choices' => ['working', 'theirs', 'mine'],
@@ -204,7 +204,7 @@ create some flag options. Like options with defaults, boolean options always
 include themselves into the parsed parameters. When the flags are present they
 are set to `true`, when they are absent they are set to `false`:
 
-``` php
+```php
 $parser->addOption('verbose', [
     'help' => 'Enable verbose output.',
     'boolean' => true,
@@ -226,7 +226,7 @@ for arguments, and options, should follow the format that
 `Cake\Console\ConsoleOptionParser::addOptions()` use. You can also
 use `buildFromArray` on its own, to build an option parser:
 
-``` php
+```php
 public function getOptionParser()
 {
     return ConsoleOptionParser::buildFromArray([
@@ -251,7 +251,7 @@ public function getOptionParser()
 When building a group command, you maybe want to combine several parsers for
 this:
 
-``` php
+```php
 $parser->merge($anotherParser);
 ```
 
@@ -266,7 +266,7 @@ automatically generate rudimentary help information and add a `--help` and
 `-h` to each of your commands. Using one of these options will allow you to
 see the generated help content:
 
-``` bash
+```bash
 bin/cake bake --help
 bin/cake bake -h
 ```
@@ -274,7 +274,7 @@ bin/cake bake -h
 Would both generate the help for bake. You can also get help for nested
 commands:
 
-``` bash
+```bash
 bin/cake bake model --help
 bin/cake bake model -h
 ```
@@ -288,7 +288,7 @@ CakePHP shell commands, it's nice to have help available in a machine parse-able
 By providing the `xml` option when requesting help you can have help content
 returned as XML:
 
-``` bash
+```bash
 cake bake --help xml
 cake bake -h xml
 ```
@@ -297,7 +297,7 @@ The above would return an XML document with the generated help, options, and
 arguments for the selected shell. A sample XML document would
 look like:
 
-``` xml
+```xml
 <?xml version="1.0"?>
 <shell>
     <command>bake fixture</command>
@@ -358,7 +358,7 @@ epilog.
 The description displays above the argument and option information. By passing
 in either an array or a string, you can set the value of the description:
 
-``` php
+```php
 // Set multiple lines at once
 $parser->setDescription(['line one', 'line two']);
 
@@ -374,7 +374,7 @@ Gets or sets the epilog for the option parser. The epilog is displayed after the
 argument and option information. By passing in either an array or a string, you
 can set the value of the epilog:
 
-``` php
+```php
 // Set multiple lines at once
 $parser->setEpilog(['line one', 'line two']);
 

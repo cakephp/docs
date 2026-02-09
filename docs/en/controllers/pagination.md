@@ -24,7 +24,7 @@ to generate pagination controls.
 
 You can call `paginate()` using an ORM table instance or `Query` object:
 
-``` php
+```php
 public function index()
 {
     // Paginate the ORM table.
@@ -44,7 +44,7 @@ conditions serve as the basis for you pagination queries. They are augmented
 by the `sort`, `direction`, `limit`, and `page` parameters passed in
 from the URL:
 
-``` php
+```php
 class ArticlesController extends AppController
 {
     protected array $paginate = [
@@ -61,7 +61,7 @@ class ArticlesController extends AppController
 
 You can also use [Custom Find Methods](../orm/retrieving-data-and-resultsets#custom-find-methods) in pagination by using the `finder` option:
 
-``` php
+```php
 class ArticlesController extends AppController
 {
     protected array $paginate = [
@@ -75,7 +75,7 @@ Note: This only works with Table as string input in `$this->paginate('MyTable')`
 If your finder method requires additional options you can pass those
 as values for the finder:
 
-``` php
+```php
 class ArticlesController extends AppController
 {
     // find articles by tag
@@ -108,7 +108,7 @@ In addition to defining general pagination values, you can define more than one
 set of pagination defaults in the controller. The name of each model can be used
 as a key in the `$paginate` property:
 
-``` php
+```php
 class ArticlesController extends AppController
 {
     protected array $paginate = [
@@ -134,7 +134,7 @@ that page number links can be rendered. On very large datasets this count query
 can be very expensive. In situations where you only want to show 'Next' and 'Previous'
 links you can use the 'simple' paginator which does not do a count query:
 
-``` php
+```php
 class ArticlesController extends AppController
 {
     protected array $paginate = [
@@ -152,7 +152,7 @@ You can paginate multiple models in a single controller action, using the
 `scope` option both in the controller's `$paginate` property and in the
 call to the `paginate()` method:
 
-``` php
+```php
 // Paginate property
 protected array $paginate = [
     'Articles' => ['scope' => 'article'],
@@ -179,7 +179,7 @@ elements and URLs for pagination.
 To paginate the same model multiple times within a single controller action you
 need to define an alias for the model.
 
-``` php
+```php
 // In a controller action
 $this->paginate = [
     'Articles' => [
@@ -225,7 +225,7 @@ using the `sortableFields` option. This option is required when you want to
 sort on any associated data, or computed fields that may be part of your
 pagination query:
 
-``` php
+```php
 protected array $paginate = [
     'sortableFields' => [
         'id', 'title', 'Users.username', 'created',
@@ -248,7 +248,7 @@ multi-column support and direction control.
 You can configure sortable fields using a callable that receives a
 `SortableFieldsBuilder` instance:
 
-``` php
+```php
 use Cake\Datasource\Paging\SortField;
 use Cake\Datasource\Paging\SortableFieldsBuilder;
 
@@ -271,7 +271,7 @@ The builder supports mapping a single sort key to multiple database fields with
 independent direction control. Use the `SortField` class to define complex
 sorting:
 
-``` php
+```php
 use Cake\Datasource\Paging\SortField;
 
 protected array $paginate = [
@@ -299,7 +299,7 @@ price becomes DESC.
 You can lock a sort direction to prevent users from toggling it. This is useful
 when a field should always be sorted in a specific direction:
 
-``` php
+```php
 protected array $paginate = [
     'sortableFields' => function ($builder) {
         return $builder
@@ -317,7 +317,7 @@ regardless of the `direction` parameter in the URL.
 In addition to the traditional `?sort=field&direction=asc` format, you can use
 combined sorting keys in URLs:
 
-``` text
+```text
 // These are equivalent
 ?sort=title&direction=asc
 ?sort=title-asc
@@ -335,7 +335,7 @@ For basic use cases where you just need to allow sorting on specific fields
 without mapping or multi-column support, you can still use the simple array
 format:
 
-``` php
+```php
 protected array $paginate = [
     'sortableFields' => [
         'id', 'title', 'Users.username', 'created',
@@ -353,7 +353,7 @@ number of rows that can be fetched to 100. If this default is not appropriate
 for your application, you can adjust it as part of the pagination options, for
 example reducing it to `10`:
 
-``` php
+```php
 protected array $paginate = [
     // Other keys here.
     'maxLimit' => 10,
@@ -372,7 +372,7 @@ page count.
 So you could either let the normal error page be rendered or use a try catch
 block and take appropriate action when a `NotFoundException` is caught:
 
-``` php
+```php
 use Cake\Http\Exception\NotFoundException;
 
 public function index()
@@ -390,7 +390,7 @@ public function index()
 
 You can also use a paginator directly.
 
-``` php
+```php
 // Create a paginator
 $paginator = new \Cake\Datasource\Paginator\NumericPaginator();
 

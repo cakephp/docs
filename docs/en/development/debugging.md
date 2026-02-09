@@ -39,7 +39,7 @@ If you have [Psysh](https://psysh.org/) installed you can use this
 function in CLI environments to open an interactive console with the current
 local scope:
 
-``` php
+```php
 // Some code
 eval(breakpoint());
 ```
@@ -79,7 +79,7 @@ The `Debugger.editorBasePath` configure option was added.
 Dump prints out the contents of a variable. It will print out all
 properties and methods (if any) of the supplied variable:
 
-``` php
+```php
 $foo = [1,2,3];
 
 Debugger::dump($foo);
@@ -111,7 +111,7 @@ When dumping data with `Debugger` or rendering error pages, you may want to
 hide sensitive keys like passwords or API keys. In your **config/bootstrap.php**
 you can mask specific keys:
 
-``` php
+```php
 Debugger::setOutputMask([
     'password' => 'xxxxx',
     'awsKey' => 'yyyyy',
@@ -139,7 +139,7 @@ Returns the current stack trace. Each line of the trace includes
 the calling method, including which file and line the call
 originated from:
 
-``` php
+```php
 // In PostsController::index()
 pr(Debugger::trace());
 
@@ -162,7 +162,7 @@ Grab an excerpt from the file at `$path` (which is an absolute
 filepath), highlights line number `$line` with `$context` number of
 lines around it.
 
-``` php
+```php
 pr(Debugger::excerpt(ROOT . DS . LIBS . 'debugger.php', 321, 2));
 
 // Will output the following.
@@ -191,7 +191,7 @@ Exception and error pages can contain URLs that directly open in your editor or
 IDE. CakePHP ships with URL formats for several popular editors, and you can add
 additional editor formats if required during application bootstrap:
 
-``` php
+```php
 // Generate links for vscode.
 Debugger::setEditor('vscode');
 
@@ -213,7 +213,7 @@ Logging messages is another good way to debug applications, and you can use
 use `LogTrait` have an instance method `log()` which can be used
 to log messages:
 
-``` php
+```php
 $this->log('Got here', 'debug');
 ```
 
@@ -222,7 +222,7 @@ to help debug methods that involve redirects or complicated loops. You can also
 use `Cake\Log\Log::write()` to write log messages. This method can be called
 statically anywhere in your application one Log has been loaded:
 
-``` php
+```php
 // At the top of the file you want to log in.
 use Cake\Log\Log;
 

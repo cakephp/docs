@@ -35,7 +35,7 @@ and retrieving user photos, finding suggestions for new friends, etc.
 The model objects can be thought of as "Friend", "User", "Comment", or
 "Photo". If we wanted to load some data from our `users` table we could do:
 
-``` php
+```php
 use Cake\ORM\Locator\LocatorAwareTrait;
 
 $users = $this->fetchTable('Users');
@@ -52,7 +52,7 @@ for table and entity classes that have not yet been defined.
 If we wanted to make a new user and save it (with validation) we would do
 something like:
 
-``` php
+```php
 use Cake\ORM\Locator\LocatorAwareTrait;
 
 $users = $this->fetchTable('Users');
@@ -69,7 +69,7 @@ to produce any presentational interface your application might need.
 For example, the view could use model data to render an HTML view template containing it,
 or a XML formatted result for others to consume:
 
-``` php
+```php
 // In a view template file, we'll render an 'element' for each user.
 <?php foreach ($resultset as $user): ?>
     <li class="user">
@@ -98,7 +98,7 @@ presentational data that the clients are accepting, and finally delegates the
 rendering process to the View layer. An example of a user registration
 controller would be:
 
-``` php
+```php
 public function add()
 {
     $user = $this->Users->newEmptyEntity();

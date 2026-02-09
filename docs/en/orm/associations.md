@@ -22,7 +22,7 @@ object. Methods matching the association type allow you to define the
 associations in your application. For example if we wanted to define a belongsTo
 association in our ArticlesTable:
 
-``` php
+```php
 namespace App\Model\Table;
 
 use Cake\ORM\Table;
@@ -41,7 +41,7 @@ associate with. By default, all the details of an association will use the
 CakePHP conventions. If you want to customize how your associations are handled
 you can modify them with setters:
 
-``` php
+```php
 class ArticlesTable extends Table
 {
     public function initialize(array $config): void
@@ -57,13 +57,13 @@ class ArticlesTable extends Table
 
 The property name will be the property key (of the associated entity) on the entity object, in this case:
 
-``` php
+```php
 $authorEntity = $articleEntity->author;
 ```
 
 You can also use arrays to customize your associations:
 
-``` php
+```php
 $this->belongsTo('Authors', [
     'className' => 'Publishing.Authors',
     'foreignKey' => 'author_id',
@@ -77,7 +77,7 @@ The same table can be used multiple times to define different types of
 associations. For example consider a case where you want to separate
 approved comments and those that have not been moderated yet:
 
-``` php
+```php
 class ArticlesTable extends Table
 {
     public function initialize(array $config): void
@@ -98,7 +98,7 @@ As you can see, by specifying the `className` key, it is possible to use the
 same table as different associations for the same table. You can even create
 self-associated tables to create parent-child relationships:
 
-``` php
+```php
 class CategoriesTable extends Table
 {
     public function initialize(array $config): void
@@ -118,7 +118,7 @@ You can also setup associations in mass by making a single call to
 `Table::addAssociations()` which accepts an array containing a set of
 table names indexed by association type as an argument:
 
-``` php
+```php
 class PostsTable extends Table
 {
     public function initialize(array $config): void
@@ -165,7 +165,7 @@ called 'user_id'. The basic pattern is:
 Once you create the `UsersTable` and `AddressesTable` classes, you can make
 the association with the following code:
 
-``` php
+```php
 class UsersTable extends Table
 {
     public function initialize(array $config): void
@@ -179,7 +179,7 @@ If you need more control, you can define your associations using the setters.
 For example, you might want to limit the association to include only certain
 records:
 
-``` php
+```php
 class UsersTable extends Table
 {
     public function initialize(array $config): void
@@ -194,7 +194,7 @@ class UsersTable extends Table
 
 If you want to break different addresses into multiple associations, you can do something like:
 
-``` php
+```php
 class UsersTable extends Table
 {
     public function initialize(array $config): void
@@ -254,7 +254,7 @@ Possible keys for hasOne association arrays include:
 Once this association has been defined, find operations on the Users table can
 contain the Address record if it exists:
 
-``` php
+```php
 // In a controller or table method.
 $query = $users->find('all')->contain(['Addresses'])->all();
 foreach ($query as $user) {
@@ -264,7 +264,7 @@ foreach ($query as $user) {
 
 The above would emit SQL that is similar to:
 
-``` sql
+```sql
 SELECT * FROM users INNER JOIN addresses ON addresses.user_id = users.id;
 ```
 
@@ -293,7 +293,7 @@ convention:
 
 We can define the belongsTo association in our Addresses table as follows:
 
-``` php
+```php
 class AddressesTable extends Table
 {
     public function initialize(array $config): void
@@ -305,7 +305,7 @@ class AddressesTable extends Table
 
 We can also define a more specific relationship using the setters:
 
-``` php
+```php
 class AddressesTable extends Table
 {
     public function initialize(array $config): void
@@ -344,7 +344,7 @@ Possible keys for belongsTo association arrays include:
 Once this association has been defined, find operations on the Addresses table can
 contain the User record if it exists:
 
-``` php
+```php
 // In a controller or table method.
 $query = $addresses->find('all')->contain(['Users'])->all();
 foreach ($query as $address) {
@@ -354,7 +354,7 @@ foreach ($query as $address) {
 
 The above would output SQL similar to:
 
-``` sql
+```sql
 SELECT * FROM addresses LEFT JOIN users ON addresses.user_id = users.id;
 ```
 
@@ -379,7 +379,7 @@ convention:
 
 We can define the hasMany association in our Articles model as follows:
 
-``` php
+```php
 class ArticlesTable extends Table
 {
     public function initialize(array $config): void
@@ -391,7 +391,7 @@ class ArticlesTable extends Table
 
 We can also define a more specific relationship using the setters:
 
-``` php
+```php
 class ArticlesTable extends Table
 {
     public function initialize(array $config): void
@@ -405,7 +405,7 @@ class ArticlesTable extends Table
 
 Sometimes you may want to configure composite keys in your associations:
 
-``` php
+```php
 // Within ArticlesTable::initialize() call
 $this->hasMany('Comments')
     ->setForeignKey([
@@ -420,7 +420,7 @@ automatically defined as `id` and `hash` respectively, but let's assume that
 you need to specify different binding fields than the defaults. You can setup it
 manually with `setBindingKey()`:
 
-``` php
+```php
 // Within ArticlesTable::initialize() call
 $this->hasMany('Comments')
     ->setForeignKey([
@@ -475,7 +475,7 @@ Possible keys for hasMany association arrays include:
 Once this association has been defined, find operations on the Articles table
 can contain the Comment records if they exist:
 
-``` php
+```php
 // In a controller or table method.
 $query = $articles->find('all')->contain(['Comments'])->all();
 foreach ($query as $article) {
@@ -485,7 +485,7 @@ foreach ($query as $article) {
 
 The above would output SQL similar to:
 
-``` sql
+```sql
 SELECT * FROM articles;
 SELECT * FROM comments WHERE article_id IN (1, 2, 3, 4, 5);
 ```
@@ -493,7 +493,7 @@ SELECT * FROM comments WHERE article_id IN (1, 2, 3, 4, 5);
 When the subquery strategy is used, SQL similar to the following will be
 generated:
 
-``` sql
+```sql
 SELECT * FROM articles;
 SELECT * FROM comments WHERE article_id IN (SELECT id FROM articles);
 ```
@@ -542,7 +542,7 @@ names.
 
 We can define the belongsToMany association in both our models as follows:
 
-``` php
+```php
 // In src/Model/Table/ArticlesTable.php
 class ArticlesTable extends Table
 {
@@ -564,7 +564,7 @@ class TagsTable extends Table
 
 We can also define a more specific relationship using configuration:
 
-``` php
+```php
 // In src/Model/Table/TagsTable.php
 class TagsTable extends Table
 {
@@ -630,7 +630,7 @@ Possible keys for belongsToMany association arrays include:
 Once this association has been defined, find operations on the Articles table can
 contain the Tag records if they exist:
 
-``` php
+```php
 // In a controller or table method.
 $query = $articles->find('all')->contain(['Tags'])->all();
 foreach ($query as $article) {
@@ -640,7 +640,7 @@ foreach ($query as $article) {
 
 The above would output SQL similar to:
 
-``` sql
+```sql
 SELECT * FROM articles;
 SELECT * FROM tags
 INNER JOIN articles_tags ON (
@@ -652,7 +652,7 @@ INNER JOIN articles_tags ON (
 When the subquery strategy is used, SQL similar to the following will be
 generated:
 
-``` sql
+```sql
 SELECT * FROM articles;
 SELECT * FROM tags
 INNER JOIN articles_tags ON (
@@ -689,7 +689,7 @@ as a **hasMany through** association. That is, the association is a model
 itself. So, we can create a new model CoursesMemberships. Take a look at the
 following models:
 
-``` php
+```php
 class StudentsTable extends Table
 {
     public function initialize(array $config): void
@@ -729,7 +729,7 @@ your query object. The `through` table can then be referenced in other condition
 such as a where condition by designating the through table name before the field
 you are filtering on:
 
-``` php
+```php
 // In a StudentsTable method or controller action.
 $query = $this->Students->find(
     'list',
@@ -768,20 +768,20 @@ above restrictions and can also use result formatters or map/reduce functions.
 By default, associations should be configured and referenced using the CamelCase style.
 This enables property chains to related tables in the following way:
 
-``` php
+```php
 $this->MyTableOne->MyTableTwo->find()->...;
 ```
 
 Association properties on entities do not use CamelCase conventions though. Instead for a hasOne/belongsTo relation like "User belongsTo Roles", you would get a `role` property instead of `Role` or `Roles`:
 
-``` php
+```php
 // A single entity (or null if not available)
 $role = $user->role;
 ```
 
 Whereas for the other direction "Roles hasMany Users" it would be:
 
-``` php
+```php
 // Collection of user entities (or null if not available)
 $users = $role->users;
 ```

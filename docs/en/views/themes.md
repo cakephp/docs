@@ -15,7 +15,7 @@ theme, you will need to continue using the `plugin syntax`.
 First ensure your theme plugin is loaded in your application's `bootstrap`
 method. For example:
 
-``` php
+```php
 // Load our plugin theme residing in the folder /plugins/Modern
 $this->addPlugin('Modern');
 ```
@@ -23,7 +23,7 @@ $this->addPlugin('Modern');
 To use themes, set the theme name in your controller's action or
 `beforeRender()` callback:
 
-``` php
+```php
 class ExamplesController extends AppController
 {
     public function beforeRender(\Cake\Event\EventInterface $event): void
@@ -64,7 +64,7 @@ All of CakePHP's built-in helpers are aware of themes and will create the
 correct paths automatically. Like template files, if a file isn't in the theme
 folder, it will default to the main webroot folder:
 
-``` php
+```php
 // When in a theme with the name of 'purple_cupcake'
 $this->Html->css('main.css');
 

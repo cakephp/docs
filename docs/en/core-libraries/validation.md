@@ -18,7 +18,7 @@ Validator objects contain a mapping between fields and validation sets. In
 turn, the validation sets contain a collection of rules that apply to the field
 they are attached to. Creating a validator is simple:
 
-``` php
+```php
 use Cake\Validation\Validator;
 
 $validator = new Validator();
@@ -27,7 +27,7 @@ $validator = new Validator();
 Once created, you can start defining sets of rules for the fields you want to
 validate:
 
-``` php
+```php
 $validator
     ->requirePresence('title')
     ->notEmptyString('title', 'Please fill this field')
@@ -72,13 +72,13 @@ By default, `true` is used. Key presence is checked by using
 `array_key_exists()` so that null values will count as present. You can set
 the mode using the second parameter:
 
-``` php
+```php
 $validator->requirePresence('author_id', 'create');
 ```
 
 If you have multiple fields that are required, you can define them as a list:
 
-``` php
+```php
 // Define multiple fields for create
 $validator->requirePresence(['author_id', 'title'], 'create');
 
@@ -130,7 +130,7 @@ when a field can or cannot be empty:
 
 An example of these methods in action is:
 
-``` php
+```php
 $validator->allowEmptyDateTime('published')
     ->allowEmptyString('title', 'Title cannot be empty', false)
     ->allowEmptyString('body', 'Body cannot be empty', 'update')
@@ -144,7 +144,7 @@ The `Validator` class provides methods that make building validators simple
 and expressive. For example adding validation rules to a username could look
 like:
 
-``` php
+```php
 $validator = new Validator();
 $validator
     ->email('username')
@@ -162,7 +162,7 @@ full set of validator methods.
 In addition to using methods on the `Validator`, and coming from providers, you
 can also use any callable, including anonymous functions, as validation rules:
 
-``` php
+```php
 // Use a global function
 $validator->add('title', 'custom', [
     'rule' => 'validate_title',
@@ -226,7 +226,7 @@ should be used as the error message.
 Possible existing error messages defined via the `message` option will be
 overwritten by the ones returned from the validation rule method:
 
-``` php
+```php
 $validator->add('length', 'custom', [
     'rule' => function (mixed $value, array $context) {
         if (!$value) {
@@ -257,7 +257,7 @@ values will make the rule apply to only create or update operations.
 Additionally, you can provide a callable function that will determine whether or
 not a particular rule should be applied:
 
-``` php
+```php
 $validator->add('picture', 'file', [
     'rule' => ['mimeType', ['image/jpeg', 'image/png']],
     'on' => function (array $context): bool {
@@ -271,7 +271,7 @@ array. The above example will make the rule for 'picture' optional depending on
 whether the value for `show_profile_picture` is empty. You could also use the
 `uploadedFile` validation rule to create optional file upload inputs:
 
-``` php
+```php
 $validator->add('picture', 'file', [
     'rule' => ['uploadedFile', ['optional' => true]],
 ]);
@@ -282,7 +282,7 @@ accept a callback function as their last argument. If present, the callback
 determines whether or not the rule should be applied. For example, a field is
 sometimes allowed to be empty:
 
-``` php
+```php
 $validator->allowEmptyString('tax', 'This field is required', function (array $context): bool {
     return !$context['data']['is_taxable'];
 });
@@ -291,7 +291,7 @@ $validator->allowEmptyString('tax', 'This field is required', function (array $c
 Likewise, a field can be required to be populated when certain conditions are
 met:
 
-``` php
+```php
 $validator->notEmptyString('email_frequency', 'This field is required', function (array $context): bool {
     return !empty($context['data']['wants_newsletter']);
 });
@@ -303,7 +303,7 @@ the user wants to receive the newsletter.
 Further it's also possible to require a field to be present under certain
 conditions only:
 
-``` php
+```php
 $validator->requirePresence('full_name', function (array $context): bool {
     if (isset($context['data']['action'])) {
         return $context['data']['action'] === 'subscribe';
@@ -334,7 +334,7 @@ previous one has failed. This allows you to collect as many validation errors as
 you can in a single pass. If you want to stop execution after
 a specific rule has failed, you can set the `last` option to `true`:
 
-``` php
+```php
 $validator = new Validator();
 $validator
     ->add('body', [
@@ -358,7 +358,7 @@ run.
 You can have the `last` option automatically applied to each rule you can use
 the `setStopOnFailure()` method to enable this behavior:
 
-``` php
+```php
 public function validationDefault(Validator $validator): Validator
 {
     $validator
@@ -387,7 +387,7 @@ rules. When using Validators and the ORM together, additional providers are
 configured for the table and entity objects. You can use the `setProvider()`
 method to add any additional providers your application needs:
 
-``` php
+```php
 $validator = new Validator();
 
 // Use an object instance.
@@ -401,7 +401,7 @@ Validation providers can be objects, or class names. If a class name is used the
 methods must be static. To use a provider other than 'default', be sure to set
 the `provider` key in your rule:
 
-``` php
+```php
 // Use a rule from the table provider
 $validator->add('title', 'custom', [
     'rule' => 'customTableMethod',
@@ -412,7 +412,7 @@ $validator->add('title', 'custom', [
 If you wish to add a `provider` to all `Validator` objects that are created
 in the future, you can use the `addDefaultProvider()` method as follows:
 
-``` php
+```php
 use Cake\Validation\Validator;
 
 // Use an object instance.
@@ -431,7 +431,7 @@ You can use the [Localized plugin](https://github.com/cakephp/localized) to
 get providers based on countries. With this plugin, you'll be able to validate
 model fields, depending on a country, ie:
 
-``` php
+```php
 namespace App\Model\Table;
 
 use Cake\ORM\Table;
@@ -460,7 +460,7 @@ validation, like en, fr, de.
 There are a few methods that are common to all classes, defined through the
 [ValidationInterface interface](https://github.com/cakephp/localized/blob/master/src/Validation/ValidationInterface.php):
 
-``` text
+```text
 phone() to check a phone number
 postal() to check a postal code
 personId() to check a country specific person ID
@@ -474,7 +474,7 @@ nested data you have. CakePHP makes it simple to add validators to specific
 attributes. For example, assume you are working with a non-relational database
 and need to store an article and its comments:
 
-``` php
+```php
 $data = [
     'title' => 'Best article',
     'comments' => [
@@ -485,7 +485,7 @@ $data = [
 
 To validate the comments you would use a nested validator:
 
-``` php
+```php
 $validator = new Validator();
 $validator->add('title', 'not-blank', ['rule' => 'notBlank']);
 
@@ -505,7 +505,7 @@ contribute to the parent validator's errors and influence the final result.
 Like other validator features, nested validators support error messages and
 conditional application:
 
-``` php
+```php
 $validator->addNestedMany(
     'comments',
     $commentValidator,
@@ -524,7 +524,7 @@ While defining validators inline where they are used makes for good example
 code, it doesn't lead to maintainable applications. Instead, you should
 create `Validator` sub-classes for your reusable validation logic:
 
-``` php
+```php
 // In src/Model/Validation/ContactValidator.php
 namespace App\Model\Validation;
 
@@ -547,7 +547,7 @@ start using it to validate data. Validators are able to validate array
 data. For example, if you wanted to validate a contact form before creating and
 sending an email you could do the following:
 
-``` php
+```php
 use Cake\Validation\Validator;
 
 $validator = new Validator();
@@ -571,7 +571,7 @@ if (!$errors) {
 The `getErrors()` method will return a non-empty array when there are validation
 failures. The returned array of errors will be structured like:
 
-``` php
+```php
 $errors = [
     'email' => ['E-mail must be valid'],
 ];
@@ -582,7 +582,7 @@ be returned per field. By default, the `getErrors()` method applies rules for
 the 'create' mode. If you'd like to apply 'update' rules you can do the
 following:
 
-``` php
+```php
 $errors = $validator->validate($this->request->getData(), false);
 if (!$errors) {
     // Send an email.
@@ -605,7 +605,7 @@ interfaces used to populate the entities.
 The request data is validated automatically when using the `newEntity()`,
 `newEntities()`, `patchEntity()` or `patchEntities()` methods of `Table` class:
 
-``` php
+```php
 // In the ArticlesController class
 $article = $this->Articles->newEntity($this->request->getData());
 if ($article->getErrors()) {
@@ -616,7 +616,7 @@ if ($article->getErrors()) {
 Similarly, when you need to validate multiple entities at a time, you can
 use the `newEntities()` method:
 
-``` php
+```php
 // In the ArticlesController class
 $entities = $this->Articles->newEntities($this->request->getData());
 foreach ($entities as $entity) {
@@ -630,7 +630,7 @@ The `newEntity()`, `patchEntity()`, `newEntities()` and `patchEntities()`
 methods allow you to specify which associations are validated, and which
 validation sets to apply using the `options` parameter:
 
-``` php
+```php
 $valid = $this->Articles->newEntity($article, [
     'associated' => [
         'Comments' => [
@@ -660,7 +660,7 @@ Some of the validation methods accept additional parameters to define boundary
 conditions or valid options. You can provide these boundary conditions and
 options as follows:
 
-``` php
+```php
 $validator = new Validator();
 $validator
     ->add('title', 'minLength', [
@@ -680,7 +680,7 @@ parameters as the remaining parameters.
 You can validate that a value is a valid IP address or an IP range (subnet)
 using the `ipOrRange()` rule:
 
-``` php
+```php
 $validator->add('ip_address', 'validRange', [
     'rule' => 'ipOrRange',
     'message' => 'Please provide a valid IP or IP range.',

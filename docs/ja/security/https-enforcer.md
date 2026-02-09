@@ -3,7 +3,7 @@
 アプリケーションをHTTPS接続経由でのみ使用できるようにする場合は、
 `HttpsEnforcerMiddleware` を使用できます:
 
-``` php
+```php
 use Cake\Http\Middleware\HttpsEnforcerMiddleware;
 
 // Always raise an exception and never redirect.

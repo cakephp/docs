@@ -5,7 +5,7 @@
 `TimeHelper` の機能を `View` の外で使いたい場合は、
 `FrozenTime` クラスを利用してください。 :
 
-``` php
+```php
 use Cake\I18n\FrozenTime;
 
 class UsersController extends AppController
@@ -39,7 +39,7 @@ Chronos についてより詳しく知りたい場合は [API ドキュメント
 
 `FrozenTime` インスタンスを作成するにはいくつかの方法があります。 :
 
-``` php
+```php
 use Cake\I18n\FrozenTime;
 
 // 日時文字列から作成
@@ -67,7 +67,7 @@ UNIX タイムスタンプとして解釈されます。
 
 テストケースでは、 `setTestNow()` を使うことで `now()` をモックアップできます。 :
 
-``` php
+```php
 // 時間の固定
 $time = new FrozenTime('2021-01-31 22:11:30');
 FrozenTime::setTestNow($time);
@@ -85,7 +85,7 @@ echo $now->i18nFormat('yyyy-MM-dd HH:mm:ss');
 
 `FrozenTime` インスタンスは、それ自体を変更するのではなく、常にセッターから新しいインスタンスを返すことを忘れないでください。 :
 
-``` php
+```php
 $time = FrozenTime::now();
 
 // Create and reassign a new instance
@@ -98,13 +98,13 @@ echo $newTime->i18nFormat('yyyy-MM-dd HH:mm:ss');
 
 PHP のビルトインの `DateTime` クラスで提供されているメソッドも使用できます。 :
 
-``` php
+```php
 $time = $time->setDate(2013, 10, 31);
 ```
 
 日付はコンポーネントの引き算や足し算で編集できます。 :
 
-``` php
+```php
 $time->year(2013)
     ->month(10)
     ->day(31);
@@ -114,7 +114,7 @@ echo $time->i18nFormat('yyyy-MM-dd HH:mm:ss');
 
 コンポーネントの減算と加算により、日付が変更された別のインスタンスを作成できます。 :
 
-``` php
+```php
 $time = FrozenTime::create(2021, 1, 31, 22, 11, 30);
 $newTime = $time->subDays(5)
     ->addHours(-2)
@@ -130,7 +130,7 @@ echo $newTime;
 
 プロパティにアクセスすることで、日付の内部コンポーネントを取得できます。 :
 
-``` php
+```php
 $time = FrozenTime::create(2021, 1, 31, 22, 11, 30);
 echo $time->year; // 2021
 echo $time->month; // 1
@@ -145,7 +145,7 @@ echo $time->timezoneName; // America/New_York
 このメソッドは、オブジェクトを json 形式に変換するときに使われる
 デフォルトのフォーマットをセットします。 :
 
-``` php
+```php
 Time::setJsonEncodeFormat('yyyy-MM-dd HH:mm:ss');  // 可変の DataTime 用
 FrozenTime::setJsonEncodeFormat('yyyy-MM-dd HH:mm:ss');  // 不変の DateTime 用
 Date::setJsonEncodeFormat('yyyy-MM-dd HH:mm:ss');  // 可変の Date 用
@@ -168,7 +168,7 @@ FrozenDate::setJsonEncodeFormat(static function($time) {
 `Time` インスタンスで行うごく一般的なことは、フォーマットされたデータを出力することです。
 CakePHP は snap を作成します。 :
 
-``` php
+```php
 $now = Time::parse('2014-10-31');
 
 // 地域化された日時のスタンプを出力します。
@@ -194,7 +194,7 @@ $now->i18nFormat('yyyy-MM-dd HH:mm:ss');
 
 グレゴリオ暦以外の暦で日付をフォーマットすることも可能です。 :
 
-``` php
+```php
 // 出力結果 'Friday, Aban 9, 1393 AP at 12:00:00 AM GMT'
 $result = $now->i18nFormat(\IntlDateFormatter::FULL, null, 'en-IR@calendar=persian');
 ```
@@ -220,7 +220,7 @@ $result = $now->i18nFormat(\IntlDateFormatter::FULL, null, 'en-IR@calendar=persi
 
 あらかじめ定義されている 'nice' フォーマットで出力します。 :
 
-``` php
+```php
 $time = Time::parse('2014-10-31');
 
 // en-USでは 'Oct 31, 2014 12:00 AM' と出力されます。
@@ -231,19 +231,19 @@ echo $time->nice();
 一つのタイムゾーンでデータを保存しているけれども、ユーザーのそれぞれのタイムゾーンで表示したい場合に
 便利です。 :
 
-``` php
+```php
 $time->i18nFormat(\IntlDateFormatter::FULL, 'Europe/Paris');
 ```
 
 第1引数を `null` のままにしておくと、デフォルトのフォーマット文字列を使用します。 :
 
-``` php
+```php
 $time->i18nFormat(null, 'Europe/Paris');
 ```
 
 最後に、日付を表示するのに異なるロケールを利用することができます。 :
 
-``` php
+```php
 echo $time->i18nFormat(\IntlDateFormatter::FULL, 'Europe/Paris', 'fr-FR');
 
 echo $time->nice('Europe/Paris', 'fr-FR');
@@ -255,7 +255,7 @@ echo $time->nice('Europe/Paris', 'fr-FR');
 [intl.default_locale](https://www.php.net/manual/en/intl.configuration.php#ini.intl.default-locale) の指令です。
 しかしながら、このデフォルト値は実行時にも変更できます。 :
 
-``` php
+```php
 Time::setDefaultLocale('es-ES'); // 可変の DateTime 用
 FrozenTime::setDefaultLocale('es-ES'); // 不変の DateTime 用
 Date::setDefaultLocale('es-ES'); // 可変の Date 用
@@ -267,7 +267,7 @@ FrozenDate::setDefaultLocale('es-ES'); // 不変の Date 用
 
 同様に、 `i18nFormat` を利用することでデフォルトのフォーマット文字列を変更できます。 :
 
-``` php
+```php
 Time::setToStringFormat(\IntlDateFormatter::SHORT); // 可変の DateTime 用
 FrozenTime::setToStringFormat(\IntlDateFormatter::SHORT); // 不変の DateTime 用
 Date::setToStringFormat(\IntlDateFormatter::SHORT); // 可変の Date 用
@@ -291,7 +291,7 @@ Time::setToStringFormat('yyyy-MM-dd HH:mm:ss');
 
 現在との相対的な時間を出力することが有用なときがしばしばあります。 :
 
-``` php
+```php
 $time = new FrozenTime('Jan 31, 2021');
 // On June 12, 2021, this would output '4 months, 1 week, 6 days ago'
 echo $time->timeAgoInWords(
@@ -303,7 +303,7 @@ echo $time->timeAgoInWords(
 `end` オプションによって定義されます。
 `accuracy` オプションは、それぞれの間隔幅に対してどのレベルまで詳細を出すかをコントロールします。 :
 
-``` php
+```php
 // Outputs '4 months ago'
 echo $time->timeAgoInWords([
     'accuracy' => ['month' => 'month'],
@@ -313,7 +313,7 @@ echo $time->timeAgoInWords([
 
 `accuracy` を文字列で設定すると、出力をどのレベルまで詳細を出すかの最大値を指定できます。 :
 
-``` php
+```php
 $time = new Time('+23 hours');
 // 出力結果 'in about a day'
 $result = $time->timeAgoInWords([
@@ -327,7 +327,7 @@ $result = $time->timeAgoInWords([
 
 一旦作成しても、 `Time` インスタンスを、タイムスタンプや四半期の値に変換することができます。 :
 
-``` php
+```php
 $time = new FrozenTime('2021-01-31');
 echo $time->toQuarter();  // Outputs '1'
 echo $time->toUnixString();  // Outputs '1612069200'
@@ -345,7 +345,7 @@ echo $time->toUnixString();  // Outputs '1612069200'
 
 様々な方法で `Time` インスタンスと現在とを比較することができます。 :
 
-``` php
+```php
 $time = new FrozenTime('+3 days');
 
 debug($time->isYesterday());
@@ -363,7 +363,7 @@ debug($time->isThisYear());
 
 `wasWithinLast()` および `isWithinNext()` を使用して `FrozenTime` インスタンスが特定の範囲内にあるかどうかを確認できます。 :
 
-``` php
+```php
 $time = new FrozenTime('+3 days');
 
 // Within 2 days. Outputs 'false'
@@ -377,7 +377,7 @@ debug($time->isWithinNext('2 weeks'));
 
 過去の範囲内の `FrozenTime` インスタンスと比較することもできます。 :
 
-``` php
+```php
 $time = new FrozenTime('-72 hours');
 
 // Within past 2 days. Outputs 'false'
@@ -398,7 +398,7 @@ CakePHP の不変の `FrozenDate` クラスは `Cake\I18n\FrozenTime` と同じA
 `FrozenTime` と `FrozenDate` の主な違いは、 `FrozenDate` が時間コンポーネントを追跡しないことです。
 以下のコードをご覧ください。 :
 
-``` php
+```php
 use Cake\I18n\FrozenDate;
 $date = new FrozenDate('2021-01-31');
 
@@ -417,7 +417,7 @@ echo $newDate->format('Y-m-d H:i:s');
 
 `FrozenDate` インスタンスのタイムゾーンを変更する試みも無視されます。 :
 
-``` php
+```php
 use Cake\I18n\FrozenDate;
 $date = new FrozenDate('2021-01-31', new \DateTimeZone('America/New_York'));
 $newDate = $date->setTimezone(new \DateTimeZone('Europe/Berlin'));
@@ -438,7 +438,7 @@ CakePHP は、変更可能な仲間と同じインターフェイスを実装す
 提供しています。不変なオブジェクトは、偶発的にデータが変わってしまうのを防ぎたいときや、
 順番に依存する問題を避けたいときに、便利です。以下のコードをご覧ください。 :
 
-``` php
+```php
 use Cake\I18n\Time;
 $time = new Time('2015-06-15 08:23:45');
 $time->modify('+2 hours');
@@ -454,7 +454,7 @@ echo $time->format('Y-m-d H:i:s');
 出力は予期できません。このオブジェクトの変更可能な性質によって、一時的結合が作成されます。
 不変のオブジェクトを用いれば、この問題を避けることができます。 :
 
-``` php
+```php
 use Cake\I18n\FrozenTime;
 $time = new FrozenTime('2015-06-15 08:23:45');
 $time = $time->modify('+2 hours');
@@ -470,7 +470,7 @@ echo $time->format('Y-m-d H:i:s');
 不変なオブジェクトを利用することで、ORM が変更を追跡したり、日付や日付と時刻のカラムを正しく保持する
 ことが、より簡単になります。 :
 
-``` php
+```php
 // 記事が保存されるとき、この変更は消去されます。
 $article->updated->modify('+1 hour');
 

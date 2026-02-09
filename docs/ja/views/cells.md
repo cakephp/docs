@@ -16,7 +16,7 @@
 定義します。この例では、ユーザーの通知受信トレイにいくつかのメッセージを表示するために
 セルを作ることにします。まず、クラスファイルを作ります。中身はこのようになります。 :
 
-``` php
+```php
 namespace App\View\Cell;
 
 use Cake\View\Cell;
@@ -55,7 +55,7 @@ class InboxCell extends Cell
 未読メッセージの数を表示したいとします。これはまさにセルを使用するケースです。
 先ほど作ったクラスに、以下を追加します。 :
 
-``` php
+```php
 namespace App\View\Cell;
 
 use Cake\View\Cell;
@@ -75,7 +75,7 @@ class InboxCell extends Cell
 や `set()` メソッドを使うことができます。テンプレートファイルの中に、
 以下を追加します。 :
 
-``` text
+```text
 <!-- templates/cell/Inbox/display.php -->
 <div class="notification-icon">
     未読メッセージが <?= $unread_count ?> 件あります。
@@ -93,7 +93,7 @@ class InboxCell extends Cell
 セルは `cell()` メソッドを使ってビューから呼び出すことができて、下のいずれのコンテキストでも
 同様に動きます。 :
 
-``` php
+```php
 // アプリケーションのセルの呼び出し
 $cell = $this->cell('Inbox');
 
@@ -104,7 +104,7 @@ $cell = $this->cell('Messaging.Inbox');
 上記は当該の名前のセルを呼び出して、その `display()` メソッドを実行します。
 以下のようにして、他のメソッドを実行することもできます。 :
 
-``` php
+```php
 // Inbox セル上の expanded() メソッドを実行します
 $cell = $this->cell('Inbox::expanded');
 ```
@@ -113,7 +113,7 @@ $cell = $this->cell('Inbox::expanded');
 コントローラー中で `cell()` メソッドを有効にするために `CellTrait`
 を使用することができます。 :
 
-``` php
+```php
 namespace App\Controller;
 
 use App\Controller\AppController;
@@ -133,13 +133,13 @@ class DashboardsController extends AppController
 添字付きの配列として `cell()` の第二、第三引数を使用することで、アクションのパラメーターや、
 追加のオプションをセルクラスに渡すことができます。 :
 
-``` php
+```php
 $cell = $this->cell('Inbox::recent', ['-3 days']);
 ```
 
 上記は以下のような関数の定義になるでしょう。 :
 
-``` php
+```php
 public function recent($since)
 {
 }
@@ -150,7 +150,7 @@ public function recent($since)
 セルが呼び出されて実行された後は、おそらくそれを描画したいはずです。セルを描画するための
 最も簡単な方法はそれをエコーすることです。 :
 
-``` php
+```php
 <?= $cell ?>
 ```
 
@@ -172,7 +172,7 @@ public function recent($since)
 もし、異なるビューテンプレートを描画する必要があれば、セルを描画する時に
 使用するテンプレートを指定することができます。 :
 
-``` php
+```php
 // 明示的に render() を呼び出します
 echo $this->cell('Inbox::recent', ['-3 days'])->render('messages');
 
@@ -192,7 +192,7 @@ echo $cell;
 セルを描画する際にその出力をキャッシュしたいかもしれません。キャッシュを有効にする、あるいは
 設定するために、セルを作成する時に `cache` オプションを定義することができます。 :
 
-``` php
+```php
 // 既定の設定と生成キーを使用してキャッシュします
 $cell = $this->cell('Inbox', [], ['cache' => true]);
 
@@ -218,7 +218,7 @@ $cell = $this->cell('Inbox', [], [
 ページ制御された結果セットを描画するセルを作成するには、ORM の `Paginator` クラスを利用します。
 ユーザーのお気に入りメッセージをページ制御する例は次のようになります。 :
 
-``` php
+```php
 namespace App\View\Cell;
 
 use Cake\View\Cell;
@@ -258,7 +258,7 @@ class FavoritesCell extends Cell
 
 セルは、セルオブジェクトの作成時にプロパティーに変換されるコンストラクターオプションを宣言できます。 :
 
-``` php
+```php
 namespace App\View\Cell;
 
 use Cake\View\Cell;
@@ -281,7 +281,7 @@ class FavoritesCell extends Cell
 ここでは、 `$limit` プロパティーを定義し、 `limit` をセルのオプションとして追加しました。
 これにより、セルの作成時にオプションを定義することができます。 :
 
-``` php
+```php
 $cell = $this->cell('Favorites', [$user->id], ['limit' => 10])
 ```
 

@@ -34,7 +34,7 @@ If your application has many configuration options it can be helpful to split
 configuration into multiple files. After creating each of the files in your
 **config/** directory you can load them in **bootstrap.php**:
 
-``` php
+```php
 use Cake\Core\Configure;
 use Cake\Core\Configure\Engine\PhpConfig;
 
@@ -74,7 +74,7 @@ should go in each one.
 Once your environment variables have been set, you can use `env()` to read
 data from the environment:
 
-``` php
+```php
 $debug = env('APP_DEBUG', false);
 ```
 
@@ -236,7 +236,7 @@ Additional class paths are setup through the autoloaders your application uses.
 When using `composer` to generate your autoloader, you could do the following,
 to provide fallback paths for controllers in your application:
 
-``` json
+```json
 "autoload": {
     "psr-4": {
         "App\\Controller\\": "/path/to/directory/with/controller/folders/",
@@ -250,7 +250,7 @@ namespace. The first key will be searched, and if that path does not contain the
 class/file the second key will be searched. You can also map a single namespace
 to multiple directories with the following:
 
-``` json
+```json
 "autoload": {
     "psr-4": {
         "App\\": ["src/", "/path/to/directory/"]
@@ -264,7 +264,7 @@ Since plugins, view templates and locales are not classes, they cannot have an
 autoloader configured. CakePHP provides three Configure variables to setup additional
 paths for these resources. In your **config/app.php** you can set these variables:
 
-``` php
+```php
 return [
     // More configuration
     'App' => [
@@ -310,7 +310,7 @@ won't end up breaking the MVC structure CakePHP provides.
 
 Use `write()` to store data in the application's configuration:
 
-``` php
+```php
 Configure::write('Company.name', 'Pizza, Inc.');
 Configure::write('Company.slogan', 'Pizza for your body and soul');
 ```
@@ -321,7 +321,7 @@ Configure::write('Company.slogan', 'Pizza for your body and soul');
 
 The above example could also be written in a single call:
 
-``` php
+```php
 Configure::write('Company', [
     'name' => 'Pizza, Inc.',
     'slogan' => 'Pizza for your body and soul',
@@ -343,7 +343,7 @@ Used to read configuration data from the application. If a key is supplied, the
 data is returned. Using our examples from write() above, we can read that data
 back:
 
-``` php
+```php
 // Returns 'Pizza Inc.'
 Configure::read('Company.name');
 
@@ -366,7 +366,7 @@ Reads configuration data just like `Cake\Core\Configure::read()`
 but expects to find a key/value pair. In case the requested pair does not
 exist, a `RuntimeException` will be thrown:
 
-``` php
+```php
 Configure::readOrFail('Company.name');    // Yields: 'Pizza, Inc.'
 Configure::readOrFail('Company.geolocation');  // Will throw an exception
 
@@ -382,7 +382,7 @@ Configure::readOrFail('Company');
 
 Used to check if a key/path exists and has non-null value:
 
-``` php
+```php
 $exists = Configure::check('Company.name');
 ```
 
@@ -392,7 +392,7 @@ $exists = Configure::check('Company.name');
 
 Used to delete information from the application's configuration:
 
-``` php
+```php
 Configure::delete('Company.name');
 ```
 
@@ -409,7 +409,7 @@ Consumes configuration data just like `Cake\Core\Configure::consume()`
 but expects to find a key/value pair. In case the requested pair does not
 exist, a `RuntimeException` will be thrown:
 
-``` php
+```php
 Configure::consumeOrFail('Company.name');    // Yields: 'Pizza, Inc.'
 Configure::consumeOrFail('Company.geolocation');  // Will throw an exception
 
@@ -431,7 +431,7 @@ files. See the [PHP documentation](https://php.net/parse_ini_file) for more
 information on the specifics of ini files. To use a core config engine, you'll
 need to attach it to Configure using `Configure::config()`:
 
-``` php
+```php
 use Cake\Core\Configure\Engine\PhpConfig;
 
 // Read config files from config
@@ -446,7 +446,7 @@ kinds or sources of configuration files. You can interact with attached engines
 using a few other methods on Configure. To check which engine aliases are
 attached you can use `Configure::configured()`:
 
-``` php
+```php
 // Get the array of aliases for attached engines.
 Configure::configured();
 
@@ -460,7 +460,7 @@ You can also remove attached engines. `Configure::drop('default')`
 would remove the default engine alias. Any future attempts to load configuration
 files with that engine would fail:
 
-``` php
+```php
 Configure::drop('default');
 ```
 
@@ -471,7 +471,7 @@ Configure::drop('default');
 Once you've attached a config engine to Configure you can load configuration
 files:
 
-``` php
+```php
 // Load my_file.php using the 'default' engine object.
 Configure::load('my_file', 'default');
 ```
@@ -519,13 +519,13 @@ a PHP configuration file loadable by the
 Given that the 'default' engine is an instance of PhpConfig.
 Save all data in Configure to the file `my_config.php`:
 
-``` php
+```php
 Configure::dump('my_config', 'default');
 ```
 
 Save only the error handling configuration:
 
-``` php
+```php
 Configure::dump('error', 'default', ['Error', 'Exception']);
 ```
 
@@ -541,7 +541,7 @@ Since configure only remembers values for the current request, you will
 need to store any modified configuration information if you want to
 use it in subsequent requests:
 
-``` php
+```php
 // Store the current configuration in the 'user_1234' key in the 'default' cache.
 Configure::store('user_1234', 'default');
 ```
@@ -556,7 +556,7 @@ Stored configuration data is persisted in the named cache configuration. See the
 Once you've stored runtime configuration, you'll probably need to restore it
 so you can access it again. `Configure::restore()` does exactly that:
 
-``` php
+```php
 // Restore runtime configuration from the cache.
 Configure::restore('user_1234', 'default');
 ```

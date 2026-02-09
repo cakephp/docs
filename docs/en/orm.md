@@ -35,7 +35,7 @@ if we wanted to load some data from our `articles` table we would start off
 creating our `Articles` table class. Create
 **src/Model/Table/ArticlesTable.php** with the following code:
 
-``` php
+```php
 <?php
 namespace App\Model\Table;
 
@@ -48,7 +48,7 @@ class ArticlesTable extends Table
 
 Then in a controller or command we can have CakePHP create an instance for us:
 
-``` php
+```php
 public function someMethod()
 {
     $resultset = $this->fetchTable('Articles')->find()->all();
@@ -61,7 +61,7 @@ public function someMethod()
 
 In other contexts, you can use the `LocatorAwareTrait` which add accessor methods for ORM tables:
 
-``` php
+```php
 use Cake\ORM\Locator\LocatorAwareTrait;
 
 public function someMethod()
@@ -74,7 +74,7 @@ public function someMethod()
 Within a static method you can use the `Cake\Datasource\FactoryLocator`
 to get the table locator:
 
-``` php
+```php
 $articles = TableRegistry::getTableLocator()->get('Articles');
 ```
 
@@ -84,7 +84,7 @@ mutator methods, define custom logic for individual records and much more. We'll
 start off by adding the following to **src/Model/Entity/Article.php** after the
 `<?php` opening tag:
 
-``` php
+```php
 namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
@@ -98,7 +98,7 @@ Entities use the singular CamelCase version of the table name as their class
 name by default. Now that we have created our entity class, when we
 load entities from the database we'll get instances of our new Article class:
 
-``` php
+```php
 use Cake\ORM\Locator\LocatorAwareTrait;
 
 $articles = $this->fetchTable('Articles');

@@ -20,7 +20,7 @@ template comes with three flash elements: **success.php**, **default.php**, and
 To render a flash message, you can simply use FlashHelper's `render()`
 method in your template file:
 
-``` php
+```php
 <?= $this->Flash->render() ?>
 ```
 
@@ -29,13 +29,13 @@ you've specified a key when setting the flash message in
 [FlashComponent](../../controllers/components/flash), you can specify which
 flash key to render:
 
-``` php
+```php
 <?= $this->Flash->render('other') ?>
 ```
 
 You can also override any of the options that were set in FlashComponent:
 
-``` php
+```php
 // In your Controller
 $this->Flash->set('The user has been saved.', [
     'element' => 'success',

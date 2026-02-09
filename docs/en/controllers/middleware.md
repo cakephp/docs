@@ -74,7 +74,7 @@ To apply middleware to all requests, use the `middleware` method of your
 called at the beginning of the request process, you can use the
 `MiddlewareQueue` object to attach middleware:
 
-``` php
+```php
 namespace App;
 
 use Cake\Core\Configure;
@@ -103,7 +103,7 @@ class Application extends BaseApplication
 In addition to adding to the end of the `MiddlewareQueue` you can do
 a variety of operations:
 
-``` php
+```php
 $layer = new \App\Middleware\CustomMiddleware;
 
 // Added middleware will be last in line.
@@ -142,7 +142,7 @@ or [Controller middleware](../controllers#controller-middleware).
 Plugins can use their `middleware` hook method to apply any middleware they
 have to the application's middleware queue:
 
-``` php
+```php
 // in plugins/ContactManager/src/Plugin.php
 namespace ContactManager;
 
@@ -177,7 +177,7 @@ for smaller tasks they make testing harder, and can create a complicated
 Middleware can return a response either by calling `$handler->handle()` or by
 creating their own response. We can see both options in our simple middleware:
 
-``` php
+```php
 // In src/Middleware/TrackingCookieMiddleware.php
 namespace App\Middleware;
 
@@ -216,7 +216,7 @@ class TrackingCookieMiddleware implements MiddlewareInterface
 Now that we've made a very simple middleware, let's attach it to our
 application:
 
-``` php
+```php
 // In src/Application.php
 namespace App;
 
@@ -242,7 +242,7 @@ class Application
 Routing middleware is responsible for applying your application's routes and
 resolving the plugin, controller, and action a request is going to:
 
-``` php
+```php
 // In Application.php
 public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue
 {
@@ -258,7 +258,7 @@ protect against user tampering, you can use CakePHP's encrypted cookie
 middleware to transparently encrypt and decrypt cookie data via middleware.
 Cookie data is encrypted via OpenSSL using AES:
 
-``` php
+```php
 use Cake\Http\Middleware\EncryptedCookieMiddleware;
 
 $cookies = new EncryptedCookieMiddleware(
@@ -285,7 +285,7 @@ is available via `$request->getParsedData()` and `$request->getData()`. By
 default only `json` bodies will be parsed, but XML parsing can be enabled with
 an option. You can also define your own parsers:
 
-``` php
+```php
 use Cake\Http\Middleware\BodyParserMiddleware;
 
 // only JSON will be parsed.

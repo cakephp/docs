@@ -51,7 +51,7 @@ For example, you can set an environment variable in your Apache configuration:
 
 And then you can set the debug level dynamically in **app_local.php**:
 
-``` php
+```php
 $debug = (bool)getenv('CAKEPHP_DEBUG');
 
 return [
@@ -124,7 +124,7 @@ CakePHP uses `assert()` internally to provide runtime type checking and
 provide better error messages during development. You can have PHP skip these
 assertions by updating your `php.ini` to include:
 
-``` ini
+```ini
 ; Turn off assert() code generation.
 zend.assertions = -1
 ```

@@ -10,7 +10,7 @@ webserver. While this server is *not* intended for production use it can
 be handy in development when you want to quickly try an idea out and don't want
 to spend time configuring Apache or Nginx. You can start the server command with:
 
-``` bash
+```bash
 bin/cake server
 ```
 
@@ -26,6 +26,6 @@ terminal.
 
 You can customize the port and document root using options:
 
-``` bash
+```bash
 bin/cake server --port 8080 --document_root path/to/app
 ```

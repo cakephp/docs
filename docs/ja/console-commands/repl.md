@@ -8,7 +8,7 @@
 
 以下のようにするとインタラクティブ・コンソールを使い始めることができます。
 
-``` bash
+```bash
 bin/cake console
 ```
 
@@ -16,7 +16,7 @@ bin/cake console
 この時点で、アプリケーションコードを対話的に実行したり、
 アプリケーションのモデルを利用してクエリーを実行することができます。
 
-``` bash
+```bash
 bin/cake console
 
 >>> $articles = Cake\Datasource\FactoryLocator::get('Table')->get('Articles');
@@ -28,7 +28,7 @@ bin/cake console
 
 アプリケーションが自動実行されたら、REPL を利用してルーティングを試すこともできます。 :
 
-``` php
+```php
 >>> Cake\Routing\Router::parse('/articles/view/1');
 // [
 //   'controller' => 'Articles',
@@ -42,7 +42,7 @@ bin/cake console
 
 URL 生成を試すこともできます。 :
 
-``` php
+```php
 >>> Cake\Routing\Router::url(['controller' => 'Articles', 'action' => 'edit', 99]);
 // '/articles/edit/99'
 ```

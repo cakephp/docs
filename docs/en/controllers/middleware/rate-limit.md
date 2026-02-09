@@ -11,7 +11,7 @@ application to protect against abuse and ensure fair usage of resources.
 To use rate limiting in your application, add the middleware to your
 middleware queue:
 
-``` php
+```php
 // In src/Application.php
 use Cake\Http\Middleware\RateLimitMiddleware;
 
@@ -79,7 +79,7 @@ The middleware accepts the following configuration options:
 
 The default identifier type tracks requests by IP address:
 
-``` php
+```php
 use Cake\Http\Middleware\RateLimitMiddleware;
 
 new RateLimitMiddleware([
@@ -92,7 +92,7 @@ new RateLimitMiddleware([
 The middleware automatically handles proxy headers. You can configure
 which headers to check using the `ipHeader` option:
 
-``` php
+```php
 new RateLimitMiddleware([
     'identifier' => RateLimitMiddleware::IDENTIFIER_IP,
     'ipHeader' => ['CF-Connecting-IP', 'X-Forwarded-For'],
@@ -103,7 +103,7 @@ new RateLimitMiddleware([
 
 Track requests per authenticated user:
 
-``` php
+```php
 new RateLimitMiddleware([
     'identifier' => RateLimitMiddleware::IDENTIFIER_USER,
     'limit' => 1000,
@@ -118,7 +118,7 @@ The middleware checks for users implementing `Authentication\IdentityInterface`.
 
 Apply different limits to different routes:
 
-``` php
+```php
 new RateLimitMiddleware([
     'identifier' => RateLimitMiddleware::IDENTIFIER_ROUTE,
     'limit' => 10,
@@ -132,7 +132,7 @@ This creates separate limits for each controller/action combination.
 
 Track requests by API key or token:
 
-``` php
+```php
 new RateLimitMiddleware([
     'identifier' => RateLimitMiddleware::IDENTIFIER_API_KEY,
     'limit' => 5000,
@@ -143,7 +143,7 @@ new RateLimitMiddleware([
 By default, the middleware looks for tokens in the `Authorization` and
 `X-API-Key` headers. You can customize which headers to check:
 
-``` php
+```php
 new RateLimitMiddleware([
     'identifier' => RateLimitMiddleware::IDENTIFIER_TOKEN,
     'tokenHeaders' => ['Authorization', 'X-API-Key', 'X-Auth-Token'],
@@ -154,7 +154,7 @@ new RateLimitMiddleware([
 
 You can create custom identifiers using a callback:
 
-``` php
+```php
 new RateLimitMiddleware([
     'identifierCallback' => function ($request) {
         // Custom logic to identify the client
@@ -171,7 +171,7 @@ new RateLimitMiddleware([
 The default strategy that provides smooth rate limiting by continuously
 adjusting the window based on request timing:
 
-``` php
+```php
 new RateLimitMiddleware([
     'strategy' => RateLimitMiddleware::STRATEGY_SLIDING_WINDOW,
 ])
@@ -181,7 +181,7 @@ new RateLimitMiddleware([
 
 Resets the counter at fixed intervals:
 
-``` php
+```php
 new RateLimitMiddleware([
     'strategy' => RateLimitMiddleware::STRATEGY_FIXED_WINDOW,
 ])
@@ -191,7 +191,7 @@ new RateLimitMiddleware([
 
 Allows for burst capacity while maintaining an average rate:
 
-``` php
+```php
 new RateLimitMiddleware([
     'strategy' => RateLimitMiddleware::STRATEGY_TOKEN_BUCKET,
     'limit' => 100,    // bucket capacity
@@ -204,7 +204,7 @@ new RateLimitMiddleware([
 You can use a custom rate limiter strategy by specifying the `strategyClass`
 option. Your class must implement `Cake\Http\RateLimiter\RateLimiterInterface`:
 
-``` php
+```php
 new RateLimitMiddleware([
     'strategyClass' => App\RateLimiter\MyCustomRateLimiter::class,
 ])
@@ -217,7 +217,7 @@ The `strategyClass` option takes precedence over the `strategy` option.
 For complex applications, you can define named limiter configurations
 and resolve them dynamically per request:
 
-``` php
+```php
 new RateLimitMiddleware([
     'limiters' => [
         'default' => [
@@ -252,7 +252,7 @@ new RateLimitMiddleware([
 
 Skip rate limiting for certain requests:
 
-``` php
+```php
 new RateLimitMiddleware([
     'skipCheck' => function ($request) {
         // Skip rate limiting for health checks
@@ -265,7 +265,7 @@ new RateLimitMiddleware([
 
 Assign different costs to different types of requests:
 
-``` php
+```php
 new RateLimitMiddleware([
     'costCallback' => function ($request) {
         // POST requests cost 5x more
@@ -278,7 +278,7 @@ new RateLimitMiddleware([
 
 Set different limits for different users or plans:
 
-``` php
+```php
 new RateLimitMiddleware([
     'limitCallback' => function ($request, $identifier) {
         $user = $request->getAttribute('identity');
@@ -294,7 +294,7 @@ new RateLimitMiddleware([
 
 Customize how cache keys are generated:
 
-``` php
+```php
 new RateLimitMiddleware([
     'keyGenerator' => function ($request, $identifier) {
         // Include the HTTP method in the key for per-method limits
@@ -312,7 +312,7 @@ To programmatically reset a rate limit for a specific identifier, use the
 - Resetting limits when a user upgrades their plan
 - Clearing state between tests
 
-``` php
+```php
 use Cake\Cache\Cache;
 use Cake\Http\RateLimit\SlidingWindowRateLimiter;
 
@@ -343,7 +343,7 @@ When a client exceeds the limit, a `Retry-After` header is also included
 
 You can apply multiple rate limiters with different configurations:
 
-``` php
+```php
 // Strict limit for login attempts
 $middlewareQueue->add(new RateLimitMiddleware([
     'identifier' => RateLimitMiddleware::IDENTIFIER_IP,
@@ -367,7 +367,7 @@ $middlewareQueue->add(new RateLimitMiddleware([
 The rate limiter stores its data in cache. Make sure you have a persistent
 cache configured:
 
-``` php
+```php
 // In config/app.php
 'Cache' => [
     'rate_limit' => [
@@ -380,7 +380,7 @@ cache configured:
 
 Then use it in the middleware:
 
-``` php
+```php
 new RateLimitMiddleware([
     'cache' => 'rate_limit',
 ])

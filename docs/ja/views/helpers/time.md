@@ -23,7 +23,7 @@ TimeHelper の一般的な使い道は、ユーザーのタイムゾーンに合
 これでログインしているユーザーのタイムゾーンが分かるようになり、
 TimeHelper を使って投稿日時を補正することができます。 :
 
-``` php
+```php
 echo $this->Time->format(
   $post->created,
   \IntlDateFormatter::FULL,

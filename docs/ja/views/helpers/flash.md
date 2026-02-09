@@ -15,7 +15,7 @@ CakePHP の App テンプレートには、 **success.php** 、 **default.php** 
 フラッシュメッセージを描画するためには、テンプレートファイルの中で FlashHelper の `render()`
 メソッドを使用します。 :
 
-``` php
+```php
 <?= $this->Flash->render() ?>
 ```
 
@@ -23,13 +23,13 @@ CakePHP の App テンプレートには、 **success.php** 、 **default.php** 
 しかし、 [FlashComponent](../../controllers/components/flash) の中でフラッシュメッセージを
 設定した時にキーを指定した場合、そのキーを指定して描画します。 :
 
-``` php
+```php
 <?= $this->Flash->render('other') ?>
 ```
 
 FlashComponent の中で設定したオプションを上書きすることもできます。 :
 
-``` php
+```php
 // コントローラーの中で
 $this->Flash->set('The user has been saved.', [
     'element' => 'success'

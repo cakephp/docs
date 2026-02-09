@@ -9,7 +9,7 @@ CakePHP のテーマは、テンプレートファイルを供給することに
 テーマを使うためには、コントローラーのアクションをテーマ名にするか
 `beforeRender()` をコールバックしてください。 :
 
-``` php
+```php
 class ExamplesController extends AppController
 {
     public function beforeRender(\Cake\Event\EventInterface $event)
@@ -41,7 +41,7 @@ edit テンプレートを **plugins/Modern/templates/plugin/Cms/Tags/edit.php**
 テーマがプラグインとしても機能する場合は、 Application の `bootstrap` メソッドの中で
 読み込ませることを忘れないようにしてください。例:
 
-``` php
+```php
 // /plugins/Modern フォルダーにあるプラグインテーマを読み込みます
 $this->addPlugin('Modern');
 ```
@@ -58,7 +58,7 @@ CakePHP の全ての組み込みヘルパーはテーマを認識しており、
 テンプレートファイル同様に、ファイルがテーマフォルダーの中に無かったら
 メインの webroot フォルダーをデフォルトにします。 :
 
-``` php
+```php
 // 'purple_cupcake'という名前のテーマの時
 $this->Html->css('main.css');
 

@@ -15,7 +15,7 @@ The [upgrade tool](../appendices/migration-guides) provides rector rules for
 automating some of the migration work. Run rector before updating your
 `composer.json` dependencies:
 
-``` bash
+```bash
 bin/cake upgrade rector --rules cakephp52 <path/to/app/src>
 ```
 

@@ -10,7 +10,7 @@ description: "Manage plugins via CLI in CakePHP: load/unload plugins, configure 
 The plugin tool allows you to load and unload plugins via the command prompt.
 If you need help, run:
 
-``` bash
+```bash
 bin/cake plugin --help
 ```
 
@@ -19,13 +19,13 @@ bin/cake plugin --help
 Via the `Load` task you are able to load plugins in your
 **config/bootstrap.php**. You can do this by running:
 
-``` bash
+```bash
 bin/cake plugin load MyPlugin
 ```
 
 This will add the following to your **src/Application.php**:
 
-``` php
+```php
 // In the bootstrap method add:
 $this->addPlugin('MyPlugin');
 ```
@@ -34,7 +34,7 @@ $this->addPlugin('MyPlugin');
 
 You can unload a plugin by specifying its name:
 
-``` bash
+```bash
 bin/cake plugin unload MyPlugin
 ```
 
@@ -48,7 +48,7 @@ While this is a good convenience, it is recommended to symlink / copy
 the plugin assets under app's webroot so that they can be directly served by the
 web server without invoking PHP. You can do this by running:
 
-``` bash
+```bash
 bin/cake plugin assets symlink
 ```
 
@@ -58,6 +58,6 @@ respective folders instead of being symlinked.
 
 You can symlink assets of one particular plugin by specifying its name:
 
-``` bash
+```bash
 bin/cake plugin assets symlink MyPlugin
 ```

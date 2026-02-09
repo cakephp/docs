@@ -13,7 +13,7 @@
 
 始める前に、最新の PHP バージョンであることを確認してください。
 
-``` bash
+```bash
 php -v
 ```
 
@@ -26,7 +26,7 @@ php -v
 まだ準備ができていない場合、最初に Composer のダウンロードとインストールが必要です。
 cURL がインストールされていたら、次のように実行するのが簡単です。
 
-``` bash
+```bash
 curl -s https://getcomposer.org/installer | php
 ```
 
@@ -36,7 +36,7 @@ curl -s https://getcomposer.org/installer | php
 そして、インストールディレクトリーからターミナルに次の行を入力するだけで、現在の作業ディレクトリーの
 **cms** ディレクトリーに CakePHP アプリケーションのスケルトンをインストールすることができます。
 
-``` bash
+```bash
 php composer.phar create-project cakephp/app:5 cms
 ```
 
@@ -44,7 +44,7 @@ php composer.phar create-project cakephp/app:5 cms
 をダウンロードして実行した場合、インストールディレクトリー (例えば、 C:\wamp\www\dev\cakephp3)
 からターミナルに次の行を入力してください。
 
-``` bash
+```bash
 composer self-update && composer create-project cakephp/app:5.* cms
 ```
 
@@ -87,7 +87,7 @@ CakePHP のディレクトリー構造がどのように働くかを学ぶのに
 デフォルトホームページを確認することで、インストールが正しいことをざっと確かめることができます。
 その前に、開発用サーバーを起動する必要があります。
 
-``` bash
+```bash
 cd /path/to/our/app
 
 bin/cake server

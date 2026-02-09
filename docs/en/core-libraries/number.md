@@ -10,7 +10,7 @@ description: "Format numbers in CakePHP: display currency, percentages, file siz
 If you need `NumberHelper` functionalities outside of a `View`,
 use the `Number` class:
 
-``` php
+```php
 namespace App\Controller;
 
 use Cake\I18n\Number;
@@ -49,7 +49,7 @@ automatically echo the output into the view.
 This method is used to display a number in common currency formats
 (EUR, GBP, USD), based on the 3-letter ISO 4217 currency code. Usage in a view looks like:
 
-``` php
+```php
 // Called as NumberHelper
 echo $this->Number->currency($value, $currency);
 
@@ -88,7 +88,7 @@ If `$currency` value is `null`, the default currency will be retrieved from
 `Cake\I18n\Number::defaultCurrency()`. To format currencies in an
 accounting format you should set the currency format:
 
-``` php
+```php
 Number::setDefaultCurrencyFormat(Number::FORMAT_CURRENCY_ACCOUNTING);
 ```
 
@@ -123,7 +123,7 @@ This method displays a number with the specified amount of
 precision (decimal places). It will round in order to maintain the
 level of precision defined.
 
-``` php
+```php
 // Called as NumberHelper
 echo $this->Number->precision(456.91873645, 2);
 
@@ -149,7 +149,7 @@ according to the supplied precision (where numbers are rounded to meet the
 given precision). This method also expresses the number as a percentage
 and appends the output with a percent sign.
 
-``` php
+```php
 // Called as NumberHelper. Output: 45.69%
 echo $this->Number->toPercentage(45.691873645);
 
@@ -174,7 +174,7 @@ displayed with a two-digit precision level, according to the size
 of data supplied (i.e. higher sizes are expressed in larger
 terms):
 
-``` php
+```php
 // Called as NumberHelper
 echo $this->Number->toReadableSize(0); // 0 Byte
 echo $this->Number->toReadableSize(1024); // 1 KB
@@ -199,7 +199,7 @@ numbers for use in your views (and is used as the main method by
 most of the other NumberHelper methods). Using this method might
 looks like:
 
-``` php
+```php
 // Called as NumberHelper
 $this->Number->format($value, $options);
 
@@ -230,7 +230,7 @@ resides.
 
 Example:
 
-``` php
+```php
 // Called as NumberHelper
 echo $this->Number->format('123456.7890', [
     'places' => 2,
@@ -266,7 +266,7 @@ This method will output an ordinal number.
 
 Examples:
 
-``` php
+```php
 echo Number::ordinal(1);
 // Output '1st'
 
@@ -290,7 +290,7 @@ echo Number::ordinal(410);
 
 This method displays differences in value as a signed number:
 
-``` php
+```php
 // Called as NumberHelper
 $this->Number->formatDelta($value, $options);
 
@@ -315,7 +315,7 @@ The `$options` parameter takes the same keys as `Number::format()` itself:
 
 Example:
 
-``` php
+```php
 // Called as NumberHelper
 echo $this->Number->formatDelta('123456.7890', [
     'places' => 2,
@@ -346,7 +346,7 @@ to various methods.
 
 Example:
 
-``` php
+```php
 Number::config('en_IN', \NumberFormatter::CURRENCY, [
     'pattern' => '#,##,##0',
 ]);

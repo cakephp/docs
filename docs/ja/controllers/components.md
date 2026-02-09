@@ -25,7 +25,7 @@ CakePHP の中に含まれるコンポーネントの詳細については、各
 一般的なコンポーネントの設定は、通常、お使いのコントローラーの `initialize()`
 メソッド内で `loadComponent()` を使用するか、 `$components` 配列を介して行われます。 :
 
-``` php
+```php
 class PostsController extends AppController
 {
     public function initialize(): void
@@ -44,7 +44,7 @@ class PostsController extends AppController
 しばしば、コントローラーの `beforeFilter()` メソッドで行われます。
 上記は、次のように表現することもできます。 :
 
-``` php
+```php
 public function beforeFilter(EventInterface $event)
 {
     $this->RequestHandler->setConfig('viewClassMap', ['rss' => 'MyRssView']);
@@ -54,7 +54,7 @@ public function beforeFilter(EventInterface $event)
 コンポーネントは、ヘルパーと同じように、設定データを取得および設定するために使用されている
 `getConfig()` と `setConfig()` メソッドを実装しています。 :
 
-``` php
+```php
 // 設定データの読み込み
 $this->RequestHandler->getConfig('viewClassMap');
 
@@ -72,7 +72,7 @@ $this->Csrf->setConfig('cookieName', 'token');
 コンポーネントに別名をつけられます。この機能は `$this->Auth` や
 他のコンポーネントの参照を独自実装に置き換えたい時に便利です。 :
 
-``` php
+```php
 // src/Controller/PostsController.php
 class PostsController extends AppController
 {
@@ -107,7 +107,7 @@ class MyFlashComponent extends FlashComponent
 `loadComponent()` メソッドを使用して、実行時にコンポーネントを
 ロードすることができます。 :
 
-``` php
+```php
 // コントローラーのアクションの中で
 $this->loadComponent('OneTimer');
 $time = $this->OneTimer->getTime();
@@ -125,7 +125,7 @@ $time = $this->OneTimer->getTime();
 もし、 `Cake\Controller\Component\FlashComponent` を
 コントローラーに読込んだ場合、以下のようにアクセスすることができます。 :
 
-``` php
+```php
 class PostsController extends AppController
 {
     public function initialize(): void
@@ -160,7 +160,7 @@ class PostsController extends AppController
 **src/Controller/Component/MathComponent.php** にファイルを作成します 。
 コンポーネントのための基本的な構造は次のようになります。 :
 
-``` php
+```php
 namespace App\Controller\Component;
 
 use Cake\Controller\Component;
@@ -185,7 +185,7 @@ class MathComponent extends Component
 ロードされた後、コントローラーはそのコンポーネントに由来する名前の新しいプロパティーを与えられ、
 そのプロパティーを通してコンポーネントのインスタンスにアクセスできます。 :
 
-``` php
+```php
 // コントローラーの中で
 // 標準の $this->Csrf と同様に
 // 新しいコンポーネントを $this->Math として利用可能にします。
@@ -201,7 +201,7 @@ public function initialize(): void
 バラメータを宣言することもできます。
 このパラメーターはコンポーネントによって処理することができます。 :
 
-``` php
+```php
 // コントローラーの中で
 public function initialize(): void
 {
@@ -223,7 +223,7 @@ public function initialize(): void
 その場合、作成中のコンポーネントから他のコンポーネントを読み込むことができ、
 その方法はコントローラーから `$components` 変数を使って読み込む場合と同じです。 :
 
-``` php
+```php
 // src/Controller/Component/CustomComponent.php
 namespace App\Controller\Component;
 
@@ -269,7 +269,7 @@ class ExistingComponent extends Component
 コンポーネント内から、\_registry を介して現在のコントローラーに
 アクセスすることができます。 :
 
-``` php
+```php
 $controller = $this->getController();
 ```
 
@@ -292,7 +292,7 @@ $controller = $this->getController();
 
 コンポーネントのコールバックメソッド内からリダイレクトするには、次のようにします。 :
 
-``` php
+```php
 public function beforeFilter(EventInterface $event)
 {
     $event->stopPropagation();
@@ -306,7 +306,7 @@ public function beforeFilter(EventInterface $event)
 As of 4.1.0 you can raise a `RedirectException` to signal
 a redirect:
 
-``` php
+```php
 use Cake\Http\Exception\RedirectException;
 use Cake\Routing\Router;
 
@@ -320,7 +320,7 @@ Raising an exception will halt all other event listeners and create a new
 response that doesn't retain or inherit any of the current response's headers.
 When raising a `RedirectException` you can include additional headers:
 
-``` php
+```php
 throw new RedirectException(Router::url('/'), 302, [
     'Header-Key' => 'value',
 ]);

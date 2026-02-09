@@ -15,7 +15,7 @@
 このミドルウェアは、ミドルウェアスタックに適用される前に、
 スマートなインターフェイスを使用して構成されます。:
 
-``` php
+```php
 use Cake\Http\Middleware\SecurityHeadersMiddleware;
 
 $securityHeaders = new SecurityHeadersMiddleware();

@@ -17,7 +17,7 @@ enable better re-use and testability of console formatting code, CakePHP command
 helpers provide 'macros' for console formatting logic. Command Helpers can be
 accessed and used from any command:
 
-``` php
+```php
 // Output some data as a table.
 $io->helper('Table')->output($data);
 
@@ -28,7 +28,7 @@ $io->helper('Plugin.HelperName')->output($data);
 You can also get instances of helpers and call any public methods, to manipulate
 state and generate updated output:
 
-``` php
+```php
 // Get and use the Progress Helper.
 $progress = $io->helper('Progress');
 $progress->increment(10);
@@ -42,7 +42,7 @@ application or plugins. As an example, we'll create a simple helper to generate
 fancy headings. First create the **src/Command/Helper/HeadingHelper.php** and put
 the following in it:
 
-``` php
+```php
 <?php
 namespace App\Command\Helper;
 
@@ -61,7 +61,7 @@ class HeadingHelper extends Helper
 
 We can then use this new helper in one of our shell commands by calling it:
 
-``` php
+```php
 // With ### on either side
 $this->helper('Heading')->output(['It works!']);
 
@@ -83,7 +83,7 @@ implement additional methods that take any form of arguments.
 The TableHelper assists in making well formatted ASCII art tables. Using it is
 pretty simple:
 
-``` php
+```php
 $data = [
     ['Header 1', 'Header', 'Long Header'],
     ['short', 'Longish thing', 'short'],
@@ -103,7 +103,7 @@ $io->helper('Table')->output($data);
 You can use the `<text-right>` formatting tag in tables to right align
 content:
 
-``` php
+```php
 $data = [
     ['Name', 'Total Price'],
     ['Cake Mix', '<text-right>1.50</text-right>'],
@@ -123,7 +123,7 @@ $io->helper('Table')->output($data);
 The ProgressHelper can be used in two different ways. The simple mode lets you
 provide a callback that is invoked until the progress is complete:
 
-``` php
+```php
 $io->helper('Progress')->output(['callback' => function ($progress) {
     // Do work here.
     $progress->increment(20);
@@ -141,7 +141,7 @@ You can control the progress bar more by providing additional options:
 
 An example of all the options in use would be:
 
-``` php
+```php
 $io->helper('Progress')->output([
     'total' => 10,
     'width' => 20,
@@ -155,7 +155,7 @@ $io->helper('Progress')->output([
 The progress helper can also be used manually to increment and re-render the
 progress bar as necessary:
 
-``` php
+```php
 $progress = $io->helper('Progress');
 $progress->init([
     'total' => 10,
@@ -171,7 +171,7 @@ $progress->draw();
 The `BannerHelper` can be used to format one or more lines of text into
 a banner with a background and horizontal padding:
 
-``` php
+```php
 $io->helper('Banner')
     ->withPadding(5)
     ->withStyle('success.bg')
@@ -189,7 +189,7 @@ The `BannerHelper` was added in 5.1
 When building interactive console applications you'll need to get user input.
 CakePHP provides a way to do this:
 
-``` php
+```php
 // Get arbitrary text from the user.
 $color = $io->ask('What color do you like?');
 
@@ -207,7 +207,7 @@ Creating files is often important part of many console commands that help
 automate development and deployment. The `createFile()` method gives you
 a simple interface for creating files with interactive confirmation:
 
-``` php
+```php
 // Create a file with confirmation on overwrite
 $io->createFile('bower.json', $stuff);
 
@@ -221,7 +221,7 @@ $io->createFile('bower.json', $stuff, true);
 
 Writing to `stdout` is done using the `out()` method:
 
-``` php
+```php
 // Write to stdout
 $io->out('Normal message');
 ```
@@ -230,7 +230,7 @@ $io->out('Normal message');
 
 Writing to `stderr` is done using the `err()` method:
 
-``` php
+```php
 // Write to stderr
 $io->err('Error message');
 ```
@@ -238,7 +238,7 @@ $io->err('Error message');
 In addition to vanilla output methods, CakePHP provides wrapper methods that
 style output with appropriate ANSI colors:
 
-``` php
+```php
 // Green text on stdout
 $io->success('Success message');
 
@@ -260,7 +260,7 @@ true, or if the `NO_COLOR` environment variable is set.
 
 `ConsoleIo` provides two convenience methods regarding the output level:
 
-``` php
+```php
 // Would only appear when verbose output is enabled (-v)
 $io->verbose('Verbose message');
 
@@ -270,7 +270,7 @@ $io->quiet('Quiet message');
 
 You can also create blank lines or draw lines of dashes:
 
-``` php
+```php
 // Output 2 newlines
 $io->out($io->nl(2));
 
@@ -280,7 +280,7 @@ $io->hr();
 
 Lastly, you can update the current line of text on the screen:
 
-``` php
+```php
 $io->out('Counting down');
 $io->out('10', 0);
 for ($i = 9; $i > 0; $i--) {
@@ -311,7 +311,7 @@ command. There are 3 levels:
 
 You can mark output as follows:
 
-``` php
+```php
 // Would appear at all levels.
 $io->out('Quiet message', 1, ConsoleIo::QUIET);
 $io->quiet('Quiet message');
@@ -357,7 +357,7 @@ are several built-in styles, and you can create more. The built-in ones are
 You can create additional styles using `$io->setStyle()`. To declare a
 new output style you could do:
 
-``` php
+```php
 $io->setStyle('flashy', ['text' => 'magenta', 'blink' => true]);
 ```
 
@@ -396,7 +396,7 @@ The `info.bg`, `warning.bg`, `error.bg`, and `success.bg` were added.
 Although coloring is pretty, there may be times when you want to turn it off,
 or force it on:
 
-``` php
+```php
 $io->outputAs(ConsoleOutput::RAW);
 ```
 

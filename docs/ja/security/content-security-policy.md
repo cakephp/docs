@@ -2,13 +2,13 @@
 
 `CspMiddleware` を使用すると、Content-Security-Policyヘッダーをアプリケーションに簡単に追加できます。使用する前に `paragonie/csp-builder` をインストールしておく必要があります
 
-``` bash
+```bash
 composer require paragonie/csp-builder
 ```
 
 次に、配列を使用するか、ビルドされた `CSPBuilder` オブジェクトを渡すことで、ミドルウェアを構成できます。:
 
-``` php
+```php
 use Cake\Http\Middleware\CspMiddleware;
 
 $csp = new CspMiddleware([
@@ -33,7 +33,7 @@ $middlewareQueue->add($csp);
 これにより [nonce-base64](https://developer.mozilla.org/ja/docs/Web/HTTP/Headers/Content-Security-Policy/script-src) と
 `strict-dynamic` を使用するポリシーの採用が簡素化され、セキュリティが強化され、メンテナンスが容易になります。:
 
-``` php
+```php
 $policy = [
     // script-srcにノンスを設定するには、内容が空の場合でも作成する必要があります
     'script-src' => [],

@@ -25,7 +25,7 @@ ORM の調査を始める前に [あなたのデータベース接続の設定](
 の規約](intro/conventions#model-and-database-conventions) に準拠している場合、すぐに ORM の利用を開始できます。
 例えば `articles` からいくつかデータをロードしたい場合、 **src/Model/Table/ArticlesTable.php** を作成し、下記のように記述できます。 :
 
-``` php
+```php
 <?php
 namespace App\Model\Table;
 
@@ -38,7 +38,7 @@ class ArticlesTable extends Table
 
 Then in a controller or command we can have CakePHP create an instance for us:
 
-``` php
+```php
 public function someMethod()
 {
     $resultset = $this->fetchTable('Articles')->find()->all();
@@ -51,7 +51,7 @@ public function someMethod()
 
 In other contexts, you can use the `LocatorAwareTrait` which add accessor methods for ORM tables:
 
-``` php
+```php
 use Cake\ORM\Locator\LocatorAwareTrait;
 
 public function someMethod()
@@ -64,7 +64,7 @@ public function someMethod()
 Within a static method you can use the `Cake\Datasource\FactoryLocator`
 to get the table locator:
 
-``` php
+```php
 // $articles は、 ArticlesTable クラスのインスタンスです。
 $articles = TableRegistry::getTableLocator()->get('Articles');
 ```
@@ -74,7 +74,7 @@ $articles = TableRegistry::getTableLocator()->get('Articles');
 個別や複数レコードにカスタムロジックを定義できます。
 下記を **src/Model/Entity/Article.php** 内、 `<?php` の開始タグの後に追加します。 :
 
-``` php
+```php
 namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
@@ -88,7 +88,7 @@ class Article extends Entity
 前の手順でエンティティークラスはすでに作ったので、データベースからエンティティーをロードした時に、
 新しい Article クラスのインスタンスが生成されます。 :
 
-``` php
+```php
 use Cake\ORM\Locator\LocatorAwareTrait;
 
 // ArticlesTable のインスタンス取得

@@ -18,7 +18,7 @@ The Plugin class is responsible for resource location and path management of plu
 Plugins can be located with Plugin. Using `Plugin::path('DebugKit');`
 for example, will give you the full path to the DebugKit plugin:
 
-``` php
+```php
 $path = Plugin::path('DebugKit');
 ```
 
@@ -26,7 +26,7 @@ $path = Plugin::path('DebugKit');
 
 You can check dynamically inside your code if a specific plugin has been loaded:
 
-``` php
+```php
 $isLoaded = Plugin::isLoaded('DebugKit');
 ```
 
@@ -40,7 +40,7 @@ Use `Plugin::loaded()` if you want to get a list of all currently loaded plugins
 
 Used to get the location of the plugin's class files:
 
-``` php
+```php
 $path = App::classPath('DebugKit');
 ```
 
@@ -52,12 +52,12 @@ $path = App::classPath('DebugKit');
 
 The method returns the path to the plugins' templates:
 
-``` php
+```php
 $path = Plugin::templatePath('DebugKit');
 ```
 
 The same goes for the config path:
 
-``` php
+```php
 $path = Plugin::configPath('DebugKit');
 ```

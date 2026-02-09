@@ -18,7 +18,7 @@ There are two ways you can generate data views. The first is by using the
 In your `AppController` or in an individual controller you can implement the
 `viewClasses()` method and provide all the views you want to support:
 
-``` php
+```php
 use Cake\View\JsonView;
 use Cake\View\XmlView;
 
@@ -50,7 +50,7 @@ generating the response, you should use template files. The value of
 `serialize` can be either a string or an array of view variables to
 serialize:
 
-``` php
+```php
 namespace App\Controller;
 
 use Cake\View\JsonView;
@@ -74,7 +74,7 @@ class ArticlesController extends AppController
 
 You can also define `serialize` as an array of view variables to combine:
 
-``` php
+```php
 namespace App\Controller;
 
 use Cake\View\JsonView;
@@ -111,7 +111,7 @@ You should use template files if you need to manipulate your view
 content before creating the final output. For example, if we had articles with a field containing generated HTML, we would probably want to omit that from a
 JSON response. This is a situation where a view file would be useful:
 
-``` php
+```php
 // Controller code
 class ArticlesController extends AppController
 {
@@ -148,7 +148,7 @@ An example of using `XmlView` would be to generate a [sitemap.xml](https://www.s
 change `rootNode` and set attributes. Attributes are defined using the `@`
 prefix:
 
-``` php
+```php
 use Cake\View\XmlView;
 
 public function viewClasses(): array
@@ -192,7 +192,7 @@ values of this option.
 
 For example, to serialize validation error output of CakePHP entities in a consistent form of JSON do:
 
-``` php
+```php
 // In your controller's action when saving failed
 $this->set('errors', $articles->errors());
 $this->viewBuilder()
@@ -214,7 +214,7 @@ parameter name instead of "callback" set `jsonp` to required name instead of
 While you can use the `viewClasses` hook method most of the time, if you want
 total control over view class selection you can directly choose the view class:
 
-``` php
+```php
 // src/Controller/VideosController.php
 namespace App\Controller;
 

@@ -6,7 +6,7 @@
 
 読み込んだエンティティーは、テーブル本来の削除メソッドを呼びだすことによって削除することが出来ます。 :
 
-``` php
+```php
 // コントローラーの中
 $entity = $this->Articles->get(2);
 $result = $this->Articles->delete($entity);
@@ -27,7 +27,7 @@ $result = $this->Articles->delete($entity);
 デフォルトでは、一回のトランザクションの中で全ての削除が行われますが、
 atomic オプションで無効化することも出来ます。 :
 
-``` php
+```php
 $result = $this->Articles->delete($entity, ['atomic' => false]);
 ```
 
@@ -40,7 +40,7 @@ $result = $this->Articles->delete($entity, ['atomic' => false]);
 関連するエンティティーを ORM に読み出させ、それらを個別に削除させるように選択できます。
 上記２つのオプションを有効にした HasMany のサンプルは、このようになります。 :
 
-``` php
+```php
 // テーブル内の初期化メソッド
 $this->hasMany('Comments', [
     'dependent' => true,
@@ -60,7 +60,7 @@ $this->hasMany('Comments', [
 一行ずつ削除することが効率的でなかったり有用ではない時があります。そういったケースでは、
 一回で複数行を削除するために、一括削除を使うことが効率的です。 :
 
-``` php
+```php
 // 全てのスパムを削除する
 public function destroySpam()
 {
@@ -90,7 +90,7 @@ public function destroySpam()
 `Cake\ORM\Exception\PersistenceFailedException::getEntity()` メソッドを
 使用できます。 :
 
-``` php
+```php
 try {
     $table->deleteOrFail($entity);
 } catch (\Cake\ORM\Exception\PersistenceFailedException $e) {

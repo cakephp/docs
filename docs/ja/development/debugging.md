@@ -28,7 +28,7 @@ CakePHP はデバッグ作業やあなたのアプリケーション内部で何
 もし [Psysh](https://psysh.org/) をインストールしている場合、この関数を
 CLI 環境で使用することで現在のローカルスコープで対話型コンソールを開くことができます。 :
 
-``` text
+```text
 // 実行したいコード
 eval(breakpoint());
 ```
@@ -50,7 +50,7 @@ Debugger を使用する際にはまず、 `Configure::read('debug')` に
 dump は変数の内容を出力します。渡された変数のすべてのプロパティーと
 （可能なら）メソッドを出力します。 :
 
-``` php
+```php
 $foo = [1,2,3];
 
 Debugger::dump($foo);
@@ -82,7 +82,7 @@ object(Car) {
 機密キーを隠したくなるでしょう。 `config/bootstrap.php` の中で、指定したキーを
 マスクすることができます。 :
 
-``` css
+```css
 Debugger::setOutputMask([
     'password' => 'xxxxx',
     'awsKey' => 'yyyyy',
@@ -106,7 +106,7 @@ Debugger::setOutputMask([
 現在のスタックトレースを返します。トレースの各行には、呼び出しているメソッド、
 どこから呼ばれたかというファイルと行番号が含まれています。 :
 
-``` text
+```text
 // PostsController::index() の中で
 pr(Debugger::trace());
 
@@ -128,7 +128,7 @@ Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 237
 \$path（絶対パス）にあるファイルからの抜粋を取得します。\$line 行目をハイライトし、
 \$line 行目の前後 \$context 行もあわせて取得します。 :
 
-``` php
+```php
 pr(Debugger::excerpt(ROOT . DS . LIBS . 'debugger.php', 321, 2));
 
 // 下記のように出力されます
@@ -157,7 +157,7 @@ Array
 させることができます。 `LogTrait` を利用するすべてのオブジェクトは、
 インスタンスメソッド `log()` を持っており、ログメッセージを出力するのに使えます。 :
 
-``` php
+```php
 $this->log('通ったよ', 'debug');
 ```
 
@@ -167,7 +167,7 @@ $this->log('通ったよ', 'debug');
 このメソッドは Log がロードされているなら static にあなたのアプリケーション内の
 どこからでも呼び出すことができるのです。 :
 
-``` php
+```php
 // ログを使用したいファイルの一番最初で
 use Cake\Log\Log;
 

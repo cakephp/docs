@@ -18,7 +18,7 @@ headers to responses:
 This middleware is configured using a fluent interface before it is applied to
 your application's middleware stack:
 
-``` php
+```php
 use Cake\Http\Middleware\SecurityHeadersMiddleware;
 
 $securityHeaders = new SecurityHeadersMiddleware();

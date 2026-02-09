@@ -12,7 +12,7 @@
 オブジェクトはその場で add\<レジストリーオブジェクト\>() でロードすることができます。
 例:
 
-``` php
+```php
 $this->loadComponent('Acl.Acl');
 $this->addHelper('Flash')
 ```
@@ -20,7 +20,7 @@ $this->addHelper('Flash')
 これは、 `Acl` プロパティーと `Flash` ヘルパーをロードしています。
 設定も同様に、その場で行なうことができます。例:
 
-``` php
+```php
 $this->loadComponent('Cookie', ['name' => 'sweet']);
 ```
 
@@ -29,7 +29,7 @@ $this->loadComponent('Cookie', ['name' => 'sweet']);
 これは、クラス名を反映していないコンポーネント名を持つことができ、コアコンポーネントを拡張する際に
 役立ちます。 :
 
-``` php
+```php
 $this->Auth = $this->loadComponent('Auth', ['className' => 'MyCustomAuth']);
 $this->Auth->user(); // 実態は MyCustomAuth::user();
 ```
@@ -47,7 +47,7 @@ $this->Auth->user(); // 実態は MyCustomAuth::user();
 現在、これを実現するためには、イベントシステムの機能を使用する必要があります。
 たとえば、次のようにコンポーネントのコールバックを無効にすることができます。 :
 
-``` php
+```php
 // Auth コールバックを無効化
 $this->getEventManager()->off($this->Auth);
 

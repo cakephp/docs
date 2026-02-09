@@ -24,7 +24,7 @@ The schema subsystem provides a simple TableSchema object to hold data about a
 table in a database. This object is returned by the schema reflection
 features:
 
-``` php
+```php
 use Cake\Database\Schema\TableSchema;
 
 // Create a table one column at a time.
@@ -52,7 +52,7 @@ $schema = new TableSchema('posts', $columns);
 normalize and validate the data used to describe a table. For example, the
 following two forms are equivalent:
 
-``` php
+```php
 $schema->addColumn('title', 'string');
 // and
 $schema->addColumn('title', [
@@ -68,7 +68,7 @@ the existing features available in Schema files + the fixture schema in 2.x.
 Columns are either added as constructor arguments, or via `addColumn()`. Once
 fields are added information can be fetched using `column()` or `columns()`:
 
-``` php
+```php
 // Get the array of data about a column
 $c = $schema->column('title');
 
@@ -84,7 +84,7 @@ not exist, as it would result in an invalid state. Indexes are different from
 constraints, and exceptions will be raised if you try to mix types between the
 methods. An example of both methods is:
 
-``` php
+```php
 $schema = new TableSchema('posts');
 $schema->addColumn('id', 'integer')
     ->addColumn('author_id', 'integer')
@@ -120,7 +120,7 @@ If you add a primary key constraint to a single integer column it will automatic
 be converted into an auto-increment/serial column depending on the database
 platform:
 
-``` php
+```php
 $schema = new TableSchema('posts');
 $schema->addColumn('id', 'integer')
 ->addConstraint('primary', [
@@ -132,7 +132,7 @@ $schema->addColumn('id', 'integer')
 In the above example the `id` column would generate the following SQL in
 MySQL:
 
-``` sql
+```sql
 CREATE TABLE `posts` (
     `id` INTEGER AUTO_INCREMENT,
     PRIMARY KEY (`id`)
@@ -144,7 +144,7 @@ automatically be converted to an auto-increment value. Instead you will need to
 tell the table object which column in the composite key you want to
 auto-increment:
 
-``` php
+```php
 $schema = new TableSchema('posts');
 $schema->addColumn('id', [
     'type' => 'integer',
@@ -166,7 +166,7 @@ Indexes and constraints can be read out of a table object using accessor
 methods. Assuming that `$schema` is a populated TableSchema instance you could do the
 following:
 
-``` php
+```php
 // Get constraints. Will return the
 // names of all constraints.
 $constraints = $schema->constraints()
@@ -189,7 +189,7 @@ the case of MySQL the `CHARSET`, `COLLATE` and `ENGINE` properties are
 required for maintaining a table's structure in MySQL. The following could be
 used to add table options:
 
-``` php
+```php
 $schema->options([
     'engine' => 'InnoDB',
     'collate' => 'utf8_unicode_ci',
@@ -204,7 +204,7 @@ and ignore the rest. Not all options are supported on all platforms.
 Using the `createSql()` or `dropSql()` you can get
 platform specific SQL for creating or dropping a specific table:
 
-``` php
+```php
 $db = ConnectionManager::get('default');
 $schema = new TableSchema('posts', $fields, $indexes);
 
@@ -233,7 +233,7 @@ array of queries is always returned.
 You can use it to get the list of tables or reflect tables into
 `TableSchema` objects. Basic usage of the class looks like:
 
-``` php
+```php
 $db = ConnectionManager::get('default');
 
 // Create a schema collection.

@@ -27,7 +27,7 @@
 アプリケーションの低レベルな関心事を設定するために使用する **config/bootstrap.php** ファイルに加えて、
 プラグインのロードや初期化、グローバルイベントリスナーの追加のために `Application::bootstrap()` フックメソッドが利用できます:
 
-``` php
+```php
 // in src/Application.php
 namespace App;
 

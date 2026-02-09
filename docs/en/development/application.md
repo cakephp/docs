@@ -52,7 +52,7 @@ configure low-level concerns of your application, you can also use the
 `Application::bootstrap()` hook method to load/initialize plugins, and attach
 global event listeners:
 
-``` php
+```php
 // in src/Application.php
 namespace App;
 

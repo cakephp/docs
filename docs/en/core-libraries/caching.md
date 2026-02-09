@@ -62,7 +62,7 @@ Using multiple engine configurations also lets you incrementally change the
 storage as needed. For example in your **config/app.php** you could put the
 following:
 
-``` php
+```php
 // ...
 'Cache' => [
     'short' => [
@@ -85,7 +85,7 @@ following:
 Configuration options can also be provided as a `DSN` string. This is
 useful when working with environment variables or `PaaS` providers:
 
-``` php
+```php
 Cache::setConfig('short', [
     'url' => 'memcached://user:password@cache-host/?timeout=3600&prefix=myapp_',
 ]);
@@ -96,7 +96,7 @@ query string arguments.
 
 You can also configure Cache engines at runtime:
 
-``` php
+```php
 // Using a short name
 Cache::setConfig('short', [
     'className' => 'File',
@@ -123,7 +123,7 @@ parameter for `Cake\Cache\Cache::write()` and
 `Cake\Cache\Cache::read()`. When configuring cache engines you can
 refer to the class name using the following syntaxes:
 
-``` php
+```php
 // Short name (in App\ or Cake namespaces)
 Cache::setConfig('long', ['className' => 'File']);
 
@@ -194,7 +194,7 @@ Redis Cluster support was added in 5.3
 
 To use Redis Cluster, configure the `cluster` option with an array of server addresses:
 
-``` php
+```php
 Cache::setConfig('redis_cluster', [
     'className' => 'Redis',
     'duration' => '+1 hours',
@@ -240,7 +240,7 @@ cache failure.
 You can configure Cache configurations to fall back to a specified config using
 the `fallback` configuration key:
 
-``` php
+```php
 Cache::setConfig('redis', [
     'className' => 'Redis',
     'duration' => '+1 hours',
@@ -259,7 +259,7 @@ from throwing an uncaught exception.
 
 You can turn off cache fallbacks with `false`:
 
-``` php
+```php
 Cache::setConfig('redis', [
     'className' => 'Redis',
     'duration' => '+1 hours',
@@ -294,7 +294,7 @@ no `$config` is specified, default will be used. `Cache::write()`
 can store any type of object and is ideal for storing results of
 model finds:
 
-``` php
+```php
 $posts = Cache::read('posts');
 if ($posts === null) {
     $posts = $someService->getAllPosts();
@@ -319,7 +319,7 @@ can use multiple calls to `write()`, `writeMany()` allows CakePHP to use
 more efficient storage APIs where available. For example using `writeMany()`
 save multiple network connections when using Memcached:
 
-``` php
+```php
 $result = Cache::writeMany([
     'article-' . $slug => $article,
     'article-' . $slug . '-comments' => $comments,
@@ -337,7 +337,7 @@ Using `Cache::add()` will let you atomically set a key to a value if the key
 does not already exist in the cache. If the key already exists in the cache
 backend or the write fails, `add()` will return `false`:
 
-``` php
+```php
 // Set a key to act as a lock
 $result = Cache::add($lockKey, true);
 if (!$result) {
@@ -363,7 +363,7 @@ and the results stored in the cache at the provided key.
 For example, you often want to cache remote service call results. You could use
 `remember()` to make this simple:
 
-``` php
+```php
 class IssueService
 {
     public function allIssues(string $repo): mixed
@@ -390,7 +390,7 @@ to check the success of the `Cache::read()` operation.
 
 For example:
 
-``` php
+```php
 $cloud = Cache::read('cloud');
 if ($cloud !== null) {
     return $cloud;
@@ -408,7 +408,7 @@ return $cloud;
 Or if you are using another cache configuration called `short`, you can
 specify it in `Cache::read()` and `Cache::write()` calls as below:
 
-``` php
+```php
 // Read key "cloud", but from short configuration instead of default
 $cloud = Cache::read('cloud', 'short');
 if ($cloud === null) {
@@ -431,7 +431,7 @@ well. While you could use multiple calls to `read()`, `readMany()` allows
 CakePHP to use more efficient storage APIs where available. For example using
 `readMany()` save multiple network connections when using Memcached:
 
-``` php
+```php
 $result = Cache::readMany([
     'article-' . $slug,
     'article-' . $slug . '-comments',
@@ -449,7 +449,7 @@ $result = Cache::readMany([
 `Cache::delete()` will allow you to completely remove a cached
 object from the store:
 
-``` php
+```php
 // Remove a key
 Cache::delete('my_key');
 ```
@@ -457,7 +457,7 @@ Cache::delete('my_key');
 As of 4.4.0, the `RedisEngine` also provides a `deleteAsync()` method
 which uses the `UNLINK` operation to remove cache keys:
 
-``` php
+```php
 Cache::pool('redis')->deleteAsync('my_key');
 ```
 
@@ -470,7 +470,7 @@ you could use multiple calls to `delete()`, `deleteMany()` allows CakePHP to use
 more efficient storage APIs where available. For example using `deleteMany()`
 save multiple network connections when using Memcached:
 
-``` php
+```php
 $result = Cache::deleteMany([
     'article-' . $slug,
     'article-' . $slug . '-comments',
@@ -490,7 +490,7 @@ Memcached, the cache configuration's prefix is used to remove
 cache entries. Make sure that different cache configurations have different
 prefixes:
 
-``` php
+```php
 // Will clear all keys.
 Cache::clear();
 ```
@@ -498,7 +498,7 @@ Cache::clear();
 As of 4.4.0, the `RedisEngine` also provides a `clearBlocking()` method
 which uses the `UNLINK` operation to remove cache keys:
 
-``` php
+```php
 Cache::pool('redis')->clearBlocking();
 ```
 
@@ -526,7 +526,7 @@ lower the value by one, resulting in an incorrect value.
 After setting an integer value you can manipulate it using `increment()` and
 `decrement()`:
 
-``` php
+```php
 Cache::write('initial_count', 10);
 
 // Later on
@@ -558,7 +558,7 @@ group or namespace. This is a common requirement for mass-invalidating keys
 whenever some information changes that is shared among all entries in the same
 group. This is possible by declaring the groups in cache configuration:
 
-``` php
+```php
 Cache::setConfig('site_home', [
     'className' => 'Redis',
     'duration' => '+999 days',
@@ -579,7 +579,7 @@ both group names.
 For instance, whenever a new post is added, we could tell the Cache engine to
 remove all entries associated to the `article` group:
 
-``` php
+```php
 // src/Model/Table/ArticlesTable.php
 public function afterSave(EventInterface $event, EntityInterface $entity, ArrayObject $options): void
 {
@@ -596,7 +596,7 @@ public function afterSave(EventInterface $event, EntityInterface $entity, ArrayO
 `groupConfigs()` can be used to retrieve mapping between group and
 configurations, i.e.: having the same group:
 
-``` php
+```php
 // src/Model/Table/ArticlesTable.php
 
 /**
@@ -628,7 +628,7 @@ You may need to disable all Cache read & writes when trying to figure out cache
 expiration related issues. You can do this using `enable()` and
 `disable()`:
 
-``` php
+```php
 // Disable all cache reads, and cache writes.
 Cache::disable();
 ```
@@ -641,7 +641,7 @@ Once disabled, all reads and writes will return `null`.
 
 Once disabled, you can use `enable()` to re-enable caching:
 
-``` php
+```php
 // Re-enable all cache reads, and cache writes.
 Cache::enable();
 ```
@@ -662,7 +662,7 @@ Or in **plugins/MyPlugin/src/Cache/Engine/MyCustomCacheEngine.php** as
 part of a plugin. Cache configs from plugins need to use the plugin
 dot syntax:
 
-``` php
+```php
 Cache::setConfig('custom', [
     'className' => 'MyPlugin.MyCustomCache',
     // ...
@@ -715,7 +715,7 @@ You can add event listeners to the following events:
 
 an example listener in your `src/Application.php` or plugin class would be:
 
-``` php
+```php
 public function events(EventManagerInterface $eventManager): EventManagerInterface
 {
     $eventManager->on(CacheAfterGetEvent::NAME, function (CacheAfterGetEvent $event): void {

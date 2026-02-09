@@ -23,14 +23,14 @@ multilingual application, the first of which is to make use of the
 `__()` function in your code. Below is an example of some code for a
 single-language application:
 
-``` html
+```html
 <h2>Popular Articles</h2>
 ```
 
 To internationalize your code, all you need to do is to wrap strings in
 `__()` like so:
 
-``` html
+```html
 <h2><?= __('Popular Articles') ?></h2>
 ```
 
@@ -95,7 +95,7 @@ As of 4.5.0 plugins can contain multiple translation domains. Use `MyPlugin.addi
 
 An example translation file could look like this:
 
-``` pot
+```pot
 msgid "My name is {0}"
 msgstr "Je m'appelle {0}"
 
@@ -122,7 +122,7 @@ learn more.
 The default locale can be set in your **config/app.php** file by setting
 `App.defaultLocale`:
 
-``` php
+```php
 'App' => [
     ...
     'defaultLocale' => env('APP_DEFAULT_LOCALE', 'en_US'),
@@ -138,7 +138,7 @@ of those is displayed using the localization libraries that CakePHP provides.
 
 To change the language for translated strings you can call this method:
 
-``` php
+```php
 use Cake\I18n\I18n;
 
 I18n::setLocale('de_DE');
@@ -154,7 +154,7 @@ application. The most frequently used one is `__()`. This function
 is used to retrieve a single translation message or return the same string if no
 translation was found:
 
-``` php
+```php
 echo __('Popular Articles');
 ```
 
@@ -162,7 +162,7 @@ If you need to group your messages, for example, translations inside a plugin,
 you can use the `__d()` function to fetch messages from another
 domain:
 
-``` php
+```php
 echo __d('my_plugin', 'Trending right now');
 ```
 
@@ -177,7 +177,7 @@ This can happen if two strings are identical but refer to different things. For
 example, 'letter' has multiple meanings in English. To solve that problem, you
 can use the `__x()` function:
 
-``` php
+```php
 echo __x('written communication', 'He read the first letter');
 
 echo __x('alphabet learning', 'He read the first letter');
@@ -186,7 +186,7 @@ echo __x('alphabet learning', 'He read the first letter');
 The first argument is the context of the message and the second is the message
 to be translated.
 
-``` pot
+```pot
 msgctxt "written communication"
 msgid "He read the first letter"
 msgstr "Er las den ersten Brief"
@@ -197,20 +197,20 @@ msgstr "Er las den ersten Brief"
 Translation functions allow you to interpolate variables into the messages using
 special markers defined in the message itself or in the translated string:
 
-``` php
+```php
 echo __("Hello, my name is {0}, I'm {1} years old", ['Sara', 12]);
 ```
 
 Markers are numeric, and correspond to the keys in the passed array. You can
 also pass variables as independent arguments to the function:
 
-``` php
+```php
 echo __("Small step for {0}, Big leap for {1}", 'Man', 'Humanity');
 ```
 
 All translation functions support placeholder replacements:
 
-``` php
+```php
 __d('validation', 'The field {0} cannot be left empty', 'Name');
 
 __x('alphabet', 'He read the letter {0}', 'Z');
@@ -220,13 +220,13 @@ The `'` (single quote) character acts as an escape code in translation
 messages. Any variables between single quotes will not be replaced and is
 treated as literal text. For example:
 
-``` php
+```php
 __("This variable '{0}' be replaced.", 'will not');
 ```
 
 By using two adjacent quotes your variables will be replaced properly:
 
-``` php
+```php
 __("This variable ''{0}'' be replaced.", 'will');
 ```
 
@@ -235,7 +235,7 @@ These functions take advantage of the
 so you can translate messages and localize dates, numbers and currency at the
 same time:
 
-``` php
+```php
 echo __(
     'Hi {0}, your balance on the {1,date} is {2,number,currency}',
     ['Charles', new DateTime('2014-01-13 11:12:00'), 1354.37],
@@ -248,7 +248,7 @@ Hi Charles, your balance on the Jan 13, 2014, 11:12 AM is $ 1,354.37
 Numbers in placeholders can be formatted as well with fine grain control of the
 output:
 
-``` php
+```php
 echo __(
     'You have traveled {0,number} kilometers in {1,number,integer} weeks',
     [5423.344, 5.1],
@@ -284,7 +284,7 @@ You can also use named placeholders like `{name}` in the message strings.
 When using named placeholders, pass the placeholder and replacement in an array using key/value pairs,
 for example:
 
-``` php
+```php
 // echos:  Hi. My name is Sara. I'm 12 years old.
 echo __("Hi. My name is {name}. I'm {age} years old.", ['name' => 'Sara', 'age' => 12]);
 ```
@@ -301,7 +301,7 @@ The first one is taking advantage of the `ICU` message format that comes by
 default in the translation functions. In the translations file you could have
 the following strings
 
-``` pot
+```pot
 msgid "{0,plural,=0{No records found} =1{Found 1 record} other{Found # records}}"
 msgstr "{0,plural,=0{Ningún resultado} =1{1 resultado} other{# resultados}}"
 
@@ -312,7 +312,7 @@ msgstr "{placeholder,plural,=0{Ningún resultado} =1{1 resultado} other{{1} resu
 And in the application use the following code to output either of the
 translations for such string:
 
-``` php
+```php
 __('{0,plural,=0{No records found }=1{Found 1 record} other{Found # records}}', [0]);
 
 // Returns "Ningún resultado" as the argument {0} is 0
@@ -330,7 +330,7 @@ __('{placeholder,plural,=0{No records found} =1{Found 1 record} other{Found {1} 
 A closer look to the format we just used will make it evident how messages are
 built:
 
-``` text
+```text
 { [count placeholder],plural, case1{message} case2{message} case3{...} ... }
 ```
 
@@ -344,14 +344,14 @@ use `#`.
 You can of course use simpler message ids if you don't want to type the full
 plural selection sequence in your code
 
-``` pot
+```pot
 msgid "search.results"
 msgstr "{0,plural,=0{Ningún resultado} =1{1 resultado} other{{1} resultados}}"
 ```
 
 Then use the new string in your code:
 
-``` php
+```php
 __('search.results', [2, 2]);
 
 // Returns: "2 resultados"
@@ -367,13 +367,13 @@ languages like Arabic require a different plural when you refer
 to few things and other plural form for many things. In those cases you can
 use the ICU matching aliases. Instead of writing:
 
-``` text
+```text
 =0{No results} =1{...} other{...}
 ```
 
 You can do:
 
-``` text
+```text
 zero{No Results} one{One result} few{...} many{...} other{...}
 ```
 
@@ -387,7 +387,7 @@ The second plural selection format accepted is using the built-in capabilities
 of Gettext. In this case, plurals will be stored in the `.po`
 file by creating a separate message translation line per plural form:
 
-``` pot
+```pot
 # One message identifier for singular
 msgid "One file removed"
 # Another one for plural
@@ -401,7 +401,7 @@ msgstr[1] "{0} ficheros eliminados"
 When using this other format, you are required to use another translation
 function:
 
-``` php
+```php
 // Returns: "10 ficheros eliminados"
 $count = 10;
 __n('One file removed', '{0} files removed', $count, $count);
@@ -414,7 +414,7 @@ The number inside `msgstr[]` is the number assigned by Gettext for the plural
 form of the language. Some languages have more than two plural forms, for
 example Croatian:
 
-``` pot
+```pot
 msgid "One file removed"
 msgid_plural "{0} files removed"
 msgstr[0] "{0} datoteka je uklonjena"
@@ -432,7 +432,7 @@ translation messages are stored, you can create your own translation message
 loader. The easiest way to create your own translator is by defining a loader
 for a single domain and locale:
 
-``` php
+```php
 use Cake\I18n\Package;
 // Prior to 4.2 you need to use Aura\Intl\Package
 
@@ -458,7 +458,7 @@ minimum that is required for creating a translator is that the loader function
 should return a `Cake\I18n\Package` object (prior to 4.2 it should be an `Aura\Intl\Package` object).
 Once the code is in place you can use the translation functions as usual:
 
-``` php
+```php
 I18n::setLocale('fr_FR');
 __d('animals', 'Dog'); // Returns "Chien"
 ```
@@ -469,7 +469,7 @@ another file, calling another function, etc. CakePHP provides a few loader
 functions you can reuse if you just need to change where messages are loaded.
 For example, you can still use **.po** files, but loaded from another location:
 
-``` php
+```php
 use Cake\I18n\MessagesFileLoader as Loader;
 
 // Load messages from resources/locales/folder/sub_folder/filename.po
@@ -487,7 +487,7 @@ a message parser other than `PoFileParser`. For example, if you wanted to load
 translation messages using `YAML`, you will first need to create the parser
 class:
 
-``` php
+```php
 namespace App\I18n\Parser;
 
 class YamlFileParser
@@ -503,7 +503,7 @@ The file should be created in the **src/I18n/Parser** directory of your
 application. Next, create the translations file under
 **resources/locales/fr_FR/animals.yaml**
 
-``` yaml
+```yaml
 Dog: Chien
 Cat: Chat
 Bird: Oiseau
@@ -511,7 +511,7 @@ Bird: Oiseau
 
 And finally, configure the translation loader for the domain and locale:
 
-``` php
+```php
 use Cake\I18n\MessagesFileLoader as Loader;
 
 I18n::setTranslator(
@@ -531,7 +531,7 @@ generic translator loaders for each domain.
 Imagine that you wanted to load all translations for the default domain and for
 any language from an external service:
 
-``` php
+```php
 use Cake\I18n\Package;
 // Prior to 4.2 you need to use Aura\Intl\Package
 
@@ -556,7 +556,7 @@ If you'd like to change how packages are loaded for all packages, that don't
 have specific loaders set you can replace the fallback package loader by using
 the `_fallback` package:
 
-``` php
+```php
 I18n::config('_fallback', function ($domain, $locale) {
     // Custom code that yields a package here.
 });
@@ -569,7 +569,7 @@ to store messages under different domains or to trigger Gettext-style plural
 selection. The following is an example of storing translations for the same key
 in different contexts:
 
-``` php
+```php
 [
     'He reads the letter {0}' => [
         'alphabet' => 'Él lee la letra {0}',
@@ -581,7 +581,7 @@ in different contexts:
 Similarly, you can express Gettext-style plurals using the messages array by
 having a nested array key per plural form:
 
-``` php
+```php
 [
     'I have read one book' => 'He leído un libro',
     'I have read {0} books' => [
@@ -601,14 +601,14 @@ variables in translation messages and selecting the correct plural form.
 If you're dealing with a legacy application, or you don't need the power offered
 by the ICU message formatting, CakePHP also provides the `sprintf` formatter:
 
-``` php
+```php
 return Package('sprintf', 'fallback_domain', $messages);
 ```
 
 The messages to be translated will be passed to the `sprintf()` function for
 interpolating the variables:
 
-``` php
+```php
 __('Hello, my name is %s and I am %d years old', 'José', 29);
 ```
 
@@ -616,7 +616,7 @@ It is possible to set the default formatter for all translators created by
 CakePHP before they are used for the first time. This does not include manually
 created translators using the `setTranslator()` and `config()` methods:
 
-``` php
+```php
 I18n::setDefaultFormatter('sprintf');
 ```
 
@@ -629,7 +629,7 @@ that you wish your page to be displayed.
 In order to change how dates and numbers are displayed you just need to change
 the current locale setting and use the right classes:
 
-``` php
+```php
 use Cake\I18n\I18n;
 use Cake\I18n\DateTime;
 use Cake\I18n\Number;
@@ -659,7 +659,7 @@ information in a user's localized format. In a controller, or
 [Middleware](../controllers/middleware) you can configure the Date, Time, and
 DateTime types to parse localized formats:
 
-``` php
+```php
 use Cake\Database\TypeFactory;
 
 // Enable default locale format parsing.
@@ -684,7 +684,7 @@ the datetimes in request data into your application's timezone. You can use
 `setUserTimezone()` from a controller or [Middleware](../controllers/middleware) to
 make this process simpler:
 
-``` php
+```php
 // Set the user's timezone
 TypeFactory::build('datetime')->setUserTimezone($user->timezone);
 ```
@@ -697,7 +697,7 @@ working in the timezone defined in `App.defaultTimezone`.
 If your application handles datetime information in a number of actions you can
 use a middleware to define both timezone conversion and locale parsing:
 
-``` php
+```php
 namespace App\Middleware;
 
 use Cake\Database\TypeFactory;
@@ -731,7 +731,7 @@ class DatetimeMiddleware implements MiddlewareInterface
 By using the `LocaleSelectorMiddleware` in your application, CakePHP will
 automatically set the locale based on the current user:
 
-``` php
+```php
 // in src/Application.php
 use Cake\I18n\Middleware\LocaleSelectorMiddleware;
 

@@ -225,7 +225,7 @@ high memory usage due to the entire result set being buffered in memory.
 
 You can work around this issue by disabling results buffering for the query:
 
-``` php
+```php
 $results = $articles->find()
     ->disableBufferedResults()
     ->all();
@@ -233,7 +233,7 @@ $results = $articles->find()
 
 Depending on your use case, you may also consider using disabling hydration:
 
-``` php
+```php
 $results = $articles->find()
     ->disableHydration()
     ->all();
@@ -350,7 +350,7 @@ properties more strictly. The new behavior is called 'required fields'. When
 enabled, accessing properties that are not defined in the entity will raise
 exceptions. This impacts the following usage:
 
-``` php
+```php
 $entity->get();
 $entity->has();
 $entity->getOriginal();
@@ -368,7 +368,7 @@ this the default behavior in the future.
 Table finders can now have typed arguments as required instead of an options array.
 For e.g. a finder for fetching posts by category or user:
 
-``` php
+```php
 public function findByCategoryOrUser(SelectQuery $query, array $options): SelectQuery
 {
     if (isset($options['categoryId'])) {
@@ -384,7 +384,7 @@ public function findByCategoryOrUser(SelectQuery $query, array $options): Select
 
 can now be written as:
 
-``` php
+```php
 public function findByCategoryOrUser(SelectQuery $query, ?int $categoryId = null, ?int $userId = null): SelectQuery
 {
     if ($categoryId) {
@@ -404,7 +404,7 @@ You can even include the special named arguments for setting query clauses.
 
 A similar change has been applied to the `RepositoryInterface::get()` method:
 
-``` php
+```php
 public function view(int $id)
 {
     $author = $this->Authors->get($id, [
@@ -416,7 +416,7 @@ public function view(int $id)
 
 can now be written as:
 
-``` php
+```php
 public function view(int $id)
 {
     $author = $this->Authors->get($id, contain: ['Books'], finder: 'latest');

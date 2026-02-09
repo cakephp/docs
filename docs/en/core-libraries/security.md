@@ -29,7 +29,7 @@ The [openssl](https://php.net/openssl) extension is required for encrypting/decr
 
 An example use would be:
 
-``` php
+```php
 // Assuming key is stored somewhere it can be re-used for
 // decryption later.
 $key = 'wt1U5MACWJFTXGenFoZoiLwQGrLgdbHA';
@@ -46,7 +46,7 @@ Decrypt a previously encrypted value. The `$key` and `$hmacSalt`
 parameters must match the values used to encrypt or decryption will fail. An
 example use would be:
 
-``` php
+```php
 // Assuming the key is stored somewhere it can be re-used for
 // Decryption later.
 $key = 'wt1U5MACWJFTXGenFoZoiLwQGrLgdbHA';
@@ -68,7 +68,7 @@ Create a hash from string using given method. Fallback on next
 available method. If `$salt` is set to `true`, the application's salt
 value will be used:
 
-``` php
+```php
 // Using the application's salt value
 $sha1 = Security::hash('CakePHP Framework', 'sha1', true);
 
