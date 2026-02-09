@@ -679,7 +679,7 @@ To redirect from within a controller callback method you can use the following:
 ```php
 public function beforeFilter(EventInterface $event): void
 {
-    if ($this->request->getParam('prefix') === 'Admin') {
+    if ($this->request->getParam('prefix') !== 'Admin') {
         $event->setResult($this->redirect('/'));
 
         return;
