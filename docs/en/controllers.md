@@ -361,7 +361,7 @@ the view.
 
 This renders **templates/Posts/custom_file.php** instead of
 **templates/Posts/my_action.php**. Rendering plugin templates uses the syntax
-`$this->render('PluginName.PluginController/custom_file')` and renders
+`$this->render('Users.UserDetails/custom_file')` and renders
 **plugins/Users/templates/UserDetails/custom_file.php**.
 
 <a id="controller-viewclasses"></a>
