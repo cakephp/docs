@@ -151,9 +151,9 @@ $routes->connect(
 
 The first parameter is used to tell the router what sort of URL you're trying to
 control. The URL is a normal slash delimited string, but can also contain
-a wildcard (*) or [Route Elements](#route-elements). Using a wildcard tells the router
+a wildcard `*` or [Route Elements](#route-elements). Using a wildcard tells the router
 that you are willing to accept any additional arguments supplied. Routes without
-a * only match the exact template pattern supplied.
+a `*` only match the exact template pattern supplied.
 
 Once you've specified a URL, you use the last two parameters of `connect()` to
 tell CakePHP what to do with a request once it has been matched. The second
@@ -185,13 +185,13 @@ The above example also illustrates string targets. String targets provide
 a compact way to define a route's destination. String targets have the following
 syntax:
 
-``` text
+```text
 [Plugin].[Prefix]/[Controller]::[action]
 ```
 
 Some example string targets are:
 
-``` text
+```text
 // Application controller
 'Articles::view'
 
@@ -1184,7 +1184,7 @@ $routes->scope(path: '/api', callback: function (RouteBuilder $routes) {
 Will generate resource routes for both `articles` and `comments`. The
 comments routes will look like:
 
-``` text
+```text
 /api/articles/{article_id}/comments
 /api/articles/{article_id}/comments/{id}
 ```
@@ -1379,7 +1379,7 @@ class CalendarsController extends AppController
 
 You would get the following output:
 
-``` text
+```text
 Array
 (
     [0] => recent
@@ -1397,7 +1397,7 @@ debug($this->request->getParam('pass'));
 
 Either of the above would output:
 
-``` text
+```text
 Array
 (
     [0] => recent

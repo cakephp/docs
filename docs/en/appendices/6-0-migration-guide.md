@@ -46,7 +46,6 @@ Some methods have also been renamed to better reflect their purpose. These are:
 | `Cake\View\View`                      | `_render()`                                         | `renderFile()`                                         |
 | `Cake\View\Helper\PaginatorHelper`    | `_numbers()`                                        | `buildNumbers()`                                       |
 
-
 ### Renamed Properties
 
 Properties starting with a `_` have been renamed to **remove the leading underscore**.
