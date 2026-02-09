@@ -201,6 +201,7 @@ echo $this->Number->toReadableSize(5368709120); // 5 GiB
 
 It should be noted that IEC units are exponents of two and decimal units of ten.
 This mean that:
+
 - 1000 Bytes = 1 KB
 - 1024 Bytes = 1 KiB
 
