@@ -10,7 +10,7 @@ The [upgrade tool](../appendices/migration-guides) provides rector rules for
 automating some of the migration work. Run rector before updating your
 `composer.json` dependencies:
 
-``` text
+```text
 bin/cake upgrade rector --rules cakephp54 <path/to/app/src>
 ```
 

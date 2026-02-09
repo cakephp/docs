@@ -60,7 +60,7 @@ across different operating systems.
 
 Find all PHP files in a directory:
 
-``` php
+```php
 use Cake\Utility\Fs\Finder;
 
 $finder = (new Finder())
@@ -75,7 +75,7 @@ foreach ($files as $file) {
 
 Find directories while excluding certain ones:
 
-``` php
+```php
 $directories = (new Finder())
     ->in('src')
     ->exclude('vendor')
@@ -85,7 +85,7 @@ $directories = (new Finder())
 
 By default, the Finder searches recursively. Use `recursive(false)` for top-level only:
 
-``` php
+```php
 $finder = (new Finder())
     ->in('src')
     ->recursive(false)
@@ -98,7 +98,7 @@ $finder = (new Finder())
 
 Include and exclude specific filename patterns:
 
-``` php
+```php
 $finder = (new Finder())
     ->in('src')
     ->name('*.php')              // Include all PHP files
@@ -111,7 +111,7 @@ $finder = (new Finder())
 
 Filter by path containing specific strings or regex patterns:
 
-``` php
+```php
 $finder = (new Finder())
     ->in('src')
     ->path('Controller')                    // Include paths containing "Controller"
@@ -124,7 +124,7 @@ $finder = (new Finder())
 
 Control traversal depth using type-safe operators:
 
-``` php
+```php
 use Cake\Utility\Fs\Enum\DepthOperator;
 
 // Maximum depth of 3
@@ -148,7 +148,7 @@ Available depth operators: `EQUAL`, `NOT_EQUAL`, `LESS_THAN`, `GREATER_THAN`,
 
 Use glob patterns with `**` for recursive matching:
 
-``` php
+```php
 $finder = (new Finder())
     ->in('.')
     ->pattern('src/**/*Controller.php')
@@ -163,7 +163,7 @@ Glob syntax: `*` matches any characters except `/`, `**` matches including `/`,
 
 For complex filtering, use custom callbacks:
 
-``` php
+```php
 use SplFileInfo;
 
 $finder = (new Finder())
@@ -175,7 +175,7 @@ $finder = (new Finder())
 
 The callback receives `SplFileInfo` and the relative path:
 
-``` php
+```php
 $finder = (new Finder())
     ->in('.')
     ->filter(function (SplFileInfo $file, string $relativePath) {
@@ -189,7 +189,7 @@ $finder = (new Finder())
 
 Combining multiple filters:
 
-``` php
+```php
 use Cake\Utility\Fs\Finder;
 use Cake\Utility\Fs\Enum\DepthOperator;
 
@@ -236,7 +236,7 @@ Test if a path matches a glob pattern. Supports `*`, `**`, `?`, and `[abc]` synt
 
 ### Examples
 
-``` php
+```php
 use Cake\Utility\Fs\Path;
 
 // Normalize path separators
