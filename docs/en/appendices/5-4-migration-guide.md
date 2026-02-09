@@ -14,6 +14,15 @@ automating some of the migration work. Run rector before updating your
 bin/cake upgrade rector --rules cakephp54 <path/to/app/src>
 ```
 
+## Breaking Changes
+
+- `Number::toReadableSize()` now calculates decimal units (KB, MB, GB and TB)
+using an exponent of ten, meaning that 1 KB is 1000 Bytes. The units from the
+previous calculation method, where 1024 Bytes equaled 1 KB, have been changed
+to KiB, MiB, GiB, and TiB as defined in ISO/IEC 80000-13. It is possible to
+switch between the two units using a new optional boolean parameter in
+`Number::toReadableSize()`, as well as the new global setter `Number::setUseIecUnits()`.
+
 ## Behavior Changes
 
 - WIP
