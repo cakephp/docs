@@ -62,7 +62,7 @@ deprecated. We also recommend this system for use in your plugins and
 application code when useful. You can trigger deprecation warnings with
 `deprecationWarning()`:
 
-``` php
+```php
 deprecationWarning('5.0', 'The example() method is deprecated. Use getExample() instead.');
 ```
 
@@ -75,7 +75,7 @@ You can temporarily disable deprecation warnings in one of a few ways:
 2. Using the `Error.ignoredDeprecationPaths` configuration option to ignore
     deprecations with glob compatible expressions. For example:
 
-    ``` php
+    ```php
     'Error' => [
         'ignoredDeprecationPaths' => [
             'vendors/company/contacts/*',
@@ -113,7 +113,7 @@ when they handle errors. You can listen to the `Error.beforeRender` event to be
 notified of PHP errors. The `Exception.beforeRender` event is dispatched when an
 exception is handled:
 
-``` php
+```php
 $errorTrap = new ErrorTrap(Configure::read('Error'));
 $errorTrap->getEventManager()->on(
     'Error.beforeRender',
@@ -166,7 +166,7 @@ data returned by `getAttributes()` will be exposed as view variables as well.
 By default, error templates use **templates/layout/error.php** for a layout.
 You can use the `layout` property to pick a different layout:
 
-``` php
+```php
 // inside templates/Error/error400.php
 $this->layout = 'my_error';
 ```
@@ -189,7 +189,7 @@ If your application uses [Prefix Routing](../development/routing#prefix-routing)
 controllers for each routing prefix. For example, if you had an `Admin`
 prefix. You could create the following class:
 
-``` php
+```php
 namespace App\Controller\Admin;
 
 use App\Controller\AppController;
@@ -220,7 +220,7 @@ application errors. For example a `MissingWidgetException` would be handled by
 a `missingWidget()` controller method, and CakePHP would use
 `templates/Error/missing_widget.php` as the template. For example:
 
-``` php
+```php
 namespace App\Controller\Admin;
 
 use App\Controller\AppController;
@@ -252,7 +252,7 @@ assume our application uses `App\Exception\MissingWidgetException` to indicate
 a missing widget. We could create an exception renderer that renders specific
 error pages when this error is handled:
 
-``` php
+```php
 // In src/Error/AppExceptionRenderer.php
 namespace App\Error;
 
@@ -284,7 +284,7 @@ Exception rendering methods receive the handled exception as an argument, and
 should return a `Response` object. You can also implement methods to add
 additional logic when handling CakePHP errors:
 
-``` php
+```php
 // In src/Error/AppExceptionRenderer.php
 namespace App\Error;
 
@@ -305,7 +305,7 @@ The exception renderer dictates which controller is used for exception
 rendering. If you want to change which controller is used to render exceptions,
 override the `_getController()` method in your exception renderer:
 
-``` php
+```php
 // in src/Error/AppExceptionRenderer
 namespace App\Error;
 
@@ -336,7 +336,7 @@ exceptions](https://php.net/manual/en/spl.exceptions.php), `Exception`
 itself, or `Cake\Core\Exception\Exception`.
 If your application contained the following exception:
 
-``` php
+```php
 use Cake\Core\Exception\CakeException;
 
 class MissingWidgetException extends CakeException
@@ -357,7 +357,7 @@ pass in additional data. This additional data is interpolated into the
 `_messageTemplate`. This allows you to create data rich exceptions, that
 provide more context around your errors:
 
-``` php
+```php
 use Cake\Core\Exception\CakeException;
 
 class MissingWidgetException extends CakeException
@@ -444,7 +444,7 @@ You can throw these exceptions from your controllers to indicate failure states,
 or HTTP errors. An example use of the HTTP exceptions could be rendering 404
 pages for items that have not been found:
 
-``` php
+```php
 use Cake\Http\Exception\NotFoundException;
 
 public function view($id = null)
@@ -466,7 +466,7 @@ RESTful responses to client applications and users.
 You can throw any of the HTTP related exceptions from your controller actions
 to indicate failure states. For example:
 
-``` php
+```php
 use Cake\Http\Exception\NotFoundException;
 
 public function view($id = null)
@@ -581,7 +581,7 @@ log messages and log them to the appropriate place. You can replace the error
 logger using the `Error.logger` configure value. An example error
 logger:
 
-``` php
+```php
 namespace App\Error;
 
 use Cake\Error\ErrorLoggerInterface;
@@ -623,7 +623,7 @@ CakePHP includes error renderers for both web and console environments. If
 however, you would like to replace the logic that renders errors you can create
 a class:
 
-``` php
+```php
 // src/Error/CustomErrorRenderer.php
 namespace App\Error;
 

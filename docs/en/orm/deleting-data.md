@@ -14,7 +14,7 @@ description: "Delete data in CakePHP ORM. Remove single entities, cascade delete
 Once you've loaded an entity you can delete it by calling the originating
 table's delete method:
 
-``` php
+```php
 // In a controller.
 $entity = $this->Articles->get(2);
 $result = $this->Articles->delete($entity);
@@ -35,7 +35,7 @@ When deleting entities a few things happen:
 By default, all deletes happen within a transaction. You can disable the
 transaction with the atomic option:
 
-``` php
+```php
 $result = $this->Articles->delete($entity, ['atomic' => false]);
 ```
 
@@ -56,7 +56,7 @@ have the ORM load related entities, and delete them individually by setting the
 `cascadeCallbacks` option to `true`. A sample HasMany association with both
 these options enabled would be:
 
-``` php
+```php
 // In a Table's initialize method.
 $this->hasMany('Comments', [
     'dependent' => true,
@@ -76,7 +76,7 @@ $this->hasMany('Comments', [
 If you have an array of entities you want to delete you can use `deleteMany()`
 to delete them in a single transaction:
 
-``` php
+```php
 // Get a boolean indicating success
 $success = $this->Articles->deleteMany($entities);
 
@@ -95,7 +95,7 @@ There may be times when deleting rows one by one is not efficient or useful.
 In these cases it is more performant to use a bulk-delete to remove many rows at
 once:
 
-``` php
+```php
 // Delete all the spam
 public function destroySpam()
 {
@@ -126,7 +126,7 @@ Using this method will throw an
 If you want to track down the entity that failed to delete, you can use the
 `Cake\ORM\Exception\PersistenceFailedException::getEntity()` method:
 
-``` php
+```php
 try {
     $table->deleteOrFail($entity);
 } catch (\Cake\ORM\Exception\PersistenceFailedException $e) {

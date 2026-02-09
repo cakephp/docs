@@ -7,32 +7,47 @@ description: "Learn CakePHP controllers: handle requests, render views, manage c
 
 `class` Cake\\Controller\\**Controller**
 
-Controllers are the 'C' in MVC. After routing has been applied and the correct
-controller has been found, your controller's action is called. Your controller
-should handle interpreting the request data, making sure the correct models
-are called, and the right response or view is rendered. Controllers can be
-thought of as middle layer between the Model and View. You want to keep your
-controllers thin, and your models fat. This will help you reuse
-your code and makes your code easier to test.
+Controllers are the 'C' in MVC. After routing is applied and the correct
+controller is found, your controller's action is called. Your controller
+should interpret the request, ensure the right models are called, and return
+the appropriate response or view. Controllers sit between Model and View.
 
-Commonly, a controller is used to manage the logic around a single model. For
-example, if you were building a site for an online bakery, you might have a
-RecipesController managing your recipes and an IngredientsController managing your
-ingredients. However, it's also possible to have controllers work with more than
-one model. In CakePHP, a controller is named after the primary model it
-handles.
+::: tip Keep Controllers Thin
+Move heavy business logic into models and services. Thin controllers are easier
+to test and reuse.
+:::
 
-Your application's controllers extend the `AppController` class, which in turn
-extends the core `Controller` class. The `AppController`
-class can be defined in **src/Controller/AppController.php** and it should
-contain methods that are shared between all of your application's controllers.
+Commonly, a controller manages logic around a single model. For example, for
+an online bakery you might have a RecipesController managing recipes and an
+IngredientsController managing ingredients. However, it's also possible to have
+controllers work with more than one model. In CakePHP, a controller is named
+after the primary model it handles.
 
-Controllers provide a number of methods that handle requests. These are called
-*actions*. By default, each public method in
-a controller is an action, and is accessible from a URL. An action is responsible
-for interpreting the request and creating the response. Usually responses are
-in the form of a rendered view, but there are other ways to create responses as
-well.
+::: info At a Glance
+
+- Controllers coordinate request handling, model calls, and responses.
+- Each public method is an action by default.
+- Shared logic goes into `AppController`.
+
+:::
+
+Your application's controllers extend the `AppController` class, which extends
+the core `Controller` class. The `AppController` class can be defined in
+**src/Controller/AppController.php** and should contain methods shared between
+all of your application's controllers.
+
+Controllers provide methods that handle requests. These are called *actions*.
+By default, each public method in a controller is an action and is accessible
+from a URL. An action interprets the request and creates the response. Usually
+responses are rendered views, but there are other response types as well.
+
+::: details Naming and Conventions
+
+- Controller names are plural, e.g. `RecipesController`.
+- Action names map to view templates by convention.
+- Use `AppController` for shared behavior.
+
+:::
 
 <a id="app-controller"></a>
 
@@ -44,7 +59,7 @@ to all of your application's controllers. `AppController` itself extends the
 `AppController` is defined in **src/Controller/AppController.php** as
 follows:
 
-``` php
+```php
 namespace App\Controller;
 
 use Cake\Controller\Controller;
@@ -63,7 +78,7 @@ You can use your `AppController` to load components that will be used in every
 controller in your application. CakePHP provides a `initialize()` method that
 is invoked at the end of a Controller's constructor for this kind of use:
 
-``` php
+```php
 namespace App\Controller;
 
 use Cake\Controller\Controller;
@@ -88,6 +103,14 @@ CakePHP puts all the important request information into the `$this->request`
 property. See the section on [Cake Request](controllers/request-response#cake-request) for more information on the
 CakePHP request object.
 
+::: info Request Flow Summary
+
+- Routes map URLs to a controller/action.
+- The request data is available via `$this->request`.
+- The action returns a response (often a rendered view).
+
+:::
+
 ## Controller Actions
 
 Controller actions are responsible for converting the request parameters into a
@@ -100,7 +123,7 @@ name. Returning to our online bakery example, our RecipesController might contai
 `view()`, `share()`, and `search()` actions. The controller would be found
 in **src/Controller/RecipesController.php** and contain:
 
-``` php
+```php
 // src/Controller/RecipesController.php
 
 class RecipesController extends AppController
@@ -138,6 +161,11 @@ If for some reason you'd like to skip the default behavior, you can return a
 `Cake\Http\Response` object from the action with the fully
 created response.
 
+::: tip Explicit Responses
+Return a `Response` when you need full control (JSON, file downloads, or
+custom status codes).
+:::
+
 In order for you to use a controller effectively in your own application, we'll
 cover some of the core attributes and methods provided by CakePHP's controllers.
 
@@ -158,22 +186,25 @@ The `Controller::set()` method is the main way to send data from your
 controller to your view. Once you've used `Controller::set()`, the variable
 can be accessed in your view:
 
-``` php
+::: code-group
+
+```php [Controller]
 // First you pass data from the controller:
-
 $this->set('color', 'pink');
+```
 
+```php [Template]
 // Then, in the view, you can utilize the data:
-?>
-
 You have selected <?= h($color) ?> icing for the cake.
 ```
+
+:::
 
 The `Controller::set()` method also takes an
 associative array as its first parameter. This can often be a quick way to
 assign a set of information to the view:
 
-``` php
+```php
 $data = [
     'color' => 'pink',
     'type' => 'sugar',
@@ -190,6 +221,11 @@ Keep in mind that view vars are shared among all parts rendered by your view.
 They will be available in all parts of the view: the template, the layout and
 all elements inside the former two.
 
+::: tip View Data Scope
+View variables are shared with the layout and elements. Prefer specific keys
+to avoid accidental collisions.
+:::
+
 ### Setting View Options
 
 If you want to customize the view class, layout/template paths, helpers or the
@@ -197,7 +233,7 @@ theme that will be used when rendering the view, you can use the
 `viewBuilder()` method to get a builder. This builder can be used to define
 properties of the view before it is created:
 
-``` php
+```php
 $this->viewBuilder()
     ->addHelper('MyCustom')
     ->setTheme('Modern')
@@ -213,7 +249,7 @@ By default, view options set via `ViewBuilder` are deep-merged with the View
 class's default configuration. You can control this behavior using
 `setConfigMergeStrategy()`:
 
-``` php
+```php
 use Cake\View\ViewBuilder;
 
 $this->viewBuilder()
@@ -227,6 +263,13 @@ Available strategies are:
 - `ViewBuilder::MERGE_SHALLOW` - Simple array merge. Array values are replaced rather than deep-merged.
 
 You can retrieve the current strategy using `getConfigMergeStrategy()`.
+
+::: details When to Change Merge Strategy
+
+- Use shallow merges for small, explicit overrides.
+- Use deep merges when you want to extend nested defaults.
+
+:::
 
 ::: info Added in version 5.3.0
 `ViewBuilder::setConfigMergeStrategy()` and `ViewBuilder::getConfigMergeStrategy()` were added.
@@ -245,7 +288,7 @@ The default view file used by render is determined by convention.
 If the `search()` action of the RecipesController is requested,
 the view file in **templates/Recipes/search.php** will be rendered:
 
-``` php
+```php
 namespace App\Controller;
 
 class RecipesController extends AppController
@@ -265,25 +308,22 @@ Although CakePHP will automatically call it after every action's logic
 an alternate view file by specifying a view file name as first argument of
 `Controller::render()` method.
 
+::: tip Skipping Auto-Render
+Call `$this->disableAutoRender()` when the action fully handles the response.
+:::
+
 If `$view` starts with '/', it is assumed to be a view or
 element file relative to the **templates** folder. This allows
 direct rendering of elements, very useful in AJAX calls:
 
-``` php
+::: code-group
+
+```php [Element]
 // Render the element in templates/element/ajaxreturn.php
-$this->render('/element/ajaxreturn');
+return $this->render('/element/ajaxreturn');
 ```
 
-The second parameter `$layout` of `Controller::render()` allows you to specify the layout
-with which the view is rendered.
-
-#### Rendering a Specific Template
-
-In your controller, you may want to render a different view than the
-conventional one. You can do this by calling `Controller::render()` directly. Once you
-have called `Controller::render()`, CakePHP will not try to re-render the view:
-
-``` php
+```php [Custom Template]
 namespace App\Controller;
 
 class PostsController extends AppController
@@ -295,14 +335,7 @@ class PostsController extends AppController
 }
 ```
 
-This would render **templates/Posts/custom_file.php** instead of
-**templates/Posts/my_action.php**.
-
-You can also render views inside plugins using the following syntax:
-`$this->render('PluginName.PluginController/custom_file')`.
-For example:
-
-``` php
+```php [Plugin Template]
 namespace App\Controller;
 
 class PostsController extends AppController
@@ -314,7 +347,22 @@ class PostsController extends AppController
 }
 ```
 
-This would render **plugins/Users/templates/UserDetails/custom_file.php**
+:::
+
+The second parameter `$layout` of `Controller::render()` allows you to specify the layout
+with which the view is rendered.
+
+#### Rendering a Specific Template
+
+In your controller, you may want to render a different view than the
+conventional one. You can do this by calling `Controller::render()` directly.
+Once you have called `Controller::render()`, CakePHP will not try to re-render
+the view.
+
+This renders **templates/Posts/custom_file.php** instead of
+**templates/Posts/my_action.php**. Rendering plugin templates uses the syntax
+`$this->render('Users.UserDetails/custom_file')` and renders
+**plugins/Users/templates/UserDetails/custom_file.php**.
 
 <a id="controller-viewclasses"></a>
 
@@ -330,7 +378,11 @@ render an HTML view or render a JSON or XML response. To define the list of
 supported view classes for a controller is done with the `addViewClasses()`
 method:
 
-``` php
+::: info Content Negotiation
+Use `addViewClasses()` to serve multiple formats from the same action.
+:::
+
+```php
 namespace App\Controller;
 
 use Cake\View\JsonView;
@@ -352,7 +404,7 @@ other view can be selected based on the request's `Accept` header or routing
 extension. If your application only supports content types for a specific
 actions, you can call `addClasses()` within your action too:
 
-``` php
+```php
 public function export(): void
 {
     // Use a custom CSV view for data exports.
@@ -366,7 +418,7 @@ If within your controller actions you need to process the request or load data
 differently based on the content type you can use
 [Check The Request](controllers/request-response#check-the-request):
 
-``` php
+```php
 // In a controller action
 
 // Load additional data when preparing JSON responses
@@ -390,7 +442,7 @@ will use the base `View` class. If you want to require content-type
 negotiation, you can use the `NegotiationRequiredView` which sets a `406` status
 code:
 
-``` php
+```php
 public function initialize(): void
 {
     parent::initialize();
@@ -403,7 +455,7 @@ public function initialize(): void
 You can use the `TYPE_MATCH_ALL` content type value to build your own fallback
 view logic:
 
-``` php
+```php
 namespace App\View;
 
 use Cake\View\View;
@@ -427,7 +479,7 @@ In applications that use hypermedia or AJAX clients, you often need to render
 view contents without the wrapping layout. You can use the `AjaxView` that
 is bundled with the application skeleton:
 
-``` php
+```php
 // In a controller action, or in beforeRender.
 if ($this->request->is('ajax')) {
     $this->viewBuilder()->setClassName('Ajax');
@@ -450,7 +502,9 @@ controller action and rendering a view.
 
 You can redirect using `routing array` values:
 
-``` php
+::: code-group
+
+```php [Array URL]
 return $this->redirect([
     'controller' => 'Orders',
     'action' => 'confirm',
@@ -463,23 +517,23 @@ return $this->redirect([
 ]);
 ```
 
-Or using a relative or absolute URL:
-
-``` php
+```php [Relative URL]
 return $this->redirect('/orders/confirm');
+```
 
+```php [Absolute URL]
 return $this->redirect('https://www.example.com');
 ```
 
-Or to the referer page:
-
-``` php
+```php [Referer]
 return $this->redirect($this->referer());
 ```
 
+:::
+
 By using the second parameter you can define a status code for your redirect:
 
-``` php
+```php
 // Do a 301 (moved permanently)
 return $this->redirect('/order/confirm', 301);
 
@@ -497,7 +551,7 @@ a life-cycle handler.
 The `fetchTable()` method comes handy when you need to use an ORM table that is not
 the controller's default one:
 
-``` php
+```php
 // In a controller method.
 $recentArticles = $this->fetchTable('Articles')->find('all',
     limit: 5,
@@ -512,7 +566,7 @@ $recentArticles = $this->fetchTable('Articles')->find('all',
 The `fetchModel()` method is useful to load non ORM models or ORM tables that
 are not the controller's default:
 
-``` php
+```php
 // ModelAwareTrait need to be explicitly added to your controller first for fetchModel() to work.
 use ModelAwareTrait;
 
@@ -541,7 +595,7 @@ how to use `paginate()`.
 The `$paginate` attribute gives you a way to customize how `paginate()`
 behaves:
 
-``` php
+```php
 class ArticlesController extends AppController
 {
     protected array $paginate = [
@@ -559,7 +613,7 @@ class ArticlesController extends AppController
 In your Controller's `initialize()` method you can define any components you
 want loaded, and any configuration data for them:
 
-``` php
+```php
 public function initialize(): void
 {
     parent::initialize();
@@ -573,9 +627,9 @@ public function initialize(): void
 ## Request Life-cycle Callbacks
 
 CakePHP controllers trigger several events/callbacks that you can use to insert
-logic around the request life-cycle:
+logic around the request life-cycle.
 
-### Event List
+::: details Event List
 
 - `Controller.initialize`
 - `Controller.startup`
@@ -583,10 +637,12 @@ logic around the request life-cycle:
 - `Controller.beforeRender`
 - `Controller.shutdown`
 
+:::
+
 ### Controller Callback Methods
 
-By default, the following callback methods are connected to related events if the
-methods are implemented by your controllers
+By default, the following callback methods are connected to related events if
+the methods are implemented by your controllers.
 
 #### beforeFilter()
 
@@ -606,7 +662,7 @@ also provide a similar set of callbacks.
 Remember to call `AppController`'s callbacks within child controller callbacks
 for best results:
 
-``` php
+```php
 //use Cake\Event\EventInterface;
 public function beforeFilter(EventInterface $event): void
 {
@@ -620,16 +676,15 @@ public function beforeFilter(EventInterface $event): void
 
 To redirect from within a controller callback method you can use the following:
 
-``` php
+```php
 public function beforeFilter(EventInterface $event): void
 {
-    if (...) {
+    if ($this->request->getParam('prefix') !== 'Admin') {
         $event->setResult($this->redirect('/'));
 
         return;
     }
-
-    ...
+    // Normal request handling continues.
 }
 ```
 
@@ -648,7 +703,7 @@ a routing scope or within a controller. To define middleware for a specific
 controller use the `middleware()` method from your controller's
 `initialize()` method:
 
-``` php
+```php
 public function initialize(): void
 {
     parent::initialize();

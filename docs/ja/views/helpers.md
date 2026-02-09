@@ -27,7 +27,7 @@ CakePHP でヘルパーを読み込むには、ビュークラスでヘルパー
 `AppView` クラスは、すべての CakePHP アプリケーションが付属し、
 ヘルパーを読み込むための理想的な場所です。 :
 
-``` php
+```php
 class AppView extends View
 {
     public function initialize(): void
@@ -43,7 +43,7 @@ class AppView extends View
 プラグインのヘルパーを読み込むには、CakePHP の他の場所でも使われている
 `プラグイン記法` を使います。 :
 
-``` php
+```php
 $this->loadHelper('Blog.Comment');
 ```
 
@@ -51,7 +51,7 @@ CakePHP やアプリケーションにあるヘルパーを明示的に読み込
 これらのヘルパーは、初回の使用時に遅延ロードされます。
 例えば:
 
-``` php
+```php
 // まだ読み込まれていなければ FormHelper を読み込みます。
 $this->Form->create($article);
 ```
@@ -64,7 +64,7 @@ $this->Form->create($article);
 
 現在のアクション名を使用して、条件付きでヘルパーを読み込むことができます。 :
 
-``` php
+```php
 class AppView extends View
 {
     public function initialize(): void
@@ -79,7 +79,7 @@ class AppView extends View
 
 また、コントローラーの `beforeRender` メソッドを使用して、ヘルパーを読み込むことができます。 :
 
-``` php
+```php
 class ArticlesController extends AppController
 {
     public function beforeRender(EventInterface $event)
@@ -95,7 +95,7 @@ class ArticlesController extends AppController
 ヘルパーに設定オプションを渡すことができます。これらのオプションは、属性値を設定したり、
 ヘルパーの振る舞いを変更するために使用することができます。 :
 
-``` php
+```php
 namespace App\View\Helper;
 
 use Cake\View\Helper;
@@ -113,7 +113,7 @@ class AwesomeHelper extends Helper
 デフォルトでは、すべての設定オプションは、 `$_defaultConfig` プロパティーとマージされます。
 このプロパティーは、ヘルパーが必要とする設定のデフォルト値を定義する必要があります。例えば:
 
-``` php
+```php
 namespace App\View\Helper;
 
 use Cake\View\Helper;
@@ -135,7 +135,7 @@ class AwesomeHelper extends Helper
 マージされたデータは、 `_config` に設定されます。
 実行時設定を読み取るために `config()` メソッドを使用することができます。 :
 
-``` php
+```php
 // autoSetCustomValidity  設定オプションを読み込み
 $class = $this->Awesome->config('autoSetCustomValidity ');
 ```
@@ -144,7 +144,7 @@ $class = $this->Awesome->config('autoSetCustomValidity ');
 削除することができます。クラス宣言の一部として組み込むことができない設定オプションがある場合は、
 コントローラーの beforeRender コールバックで設定します。 :
 
-``` php
+```php
 class PostsController extends AppController
 {
     public function beforeRender(EventInterface $event)
@@ -164,7 +164,7 @@ class PostsController extends AppController
 このオプションを使うとビュー内に別名のヘルパーを作成することができます。
 この機能は `$this->Html` や他のヘルパーの参照を独自実装に置き換えたい時に便利です。 :
 
-``` php
+```php
 // src/View/AppView.php
 class AppView extends View
 {
@@ -199,7 +199,7 @@ class MyHtmlHelper extends HtmlHelper
 例えば、 `HtmlHelper` を使用していた場合、次を実行することによってアクセスすることが
 できます。 :
 
-``` php
+```php
 echo $this->Html->css('styles');
 ```
 
@@ -211,7 +211,7 @@ echo $this->Html->css('styles');
 ビュー内から動的にヘルパーを読み込む必要がある状況があるかもしれません。
 これを行うには、 ビューの `Cake\View\HelperRegistry` を使用することができます。 :
 
-``` php
+```php
 // どちらか１つが動作
 $mediaHelper = $this->loadHelper('Media', $mediaConfig);
 $mediaHelper = $this->helpers()->load('Media', $mediaConfig);
@@ -238,7 +238,7 @@ CakePHP のコンポーネントと同様に、ヘルパークラスは、いく
 
 また、正しく動作させるために `Helper` を継承します。 :
 
-``` php
+```php
 /* src/View/Helper/LinkHelper.php */
 namespace App\View\Helper;
 
@@ -259,7 +259,7 @@ class LinkHelper extends Helper
 その場合、 `$helpers` 配列に使いたいヘルパーを明示することで実現出来ます。
 フォーマットは、コントローラーで指定する場合と同じようにして下さい。 :
 
-``` php
+```php
 /* src/View/Helper/LinkHelper.php (他のヘルパーを使用) */
 
 namespace App\View\Helper;
@@ -286,7 +286,7 @@ class LinkHelper extends Helper
 
 ヘルパーを作成して **src/View/Helper/** に配置すると、ビューに読み込めます。 :
 
-``` php
+```php
 class AppView extends View
 {
     public function initialize(): void
@@ -299,7 +299,7 @@ class AppView extends View
 
 ヘルパーが読み込まれたら、一致するビュープロパティーにアクセスしてビュー内で使用できます。 :
 
-``` php
+```php
 <!-- 新しいヘルパーを使用してリンクを作成 -->
 <?= $this->Link->makeEdit('レシピの変更', '/recipes/edit/5') ?>
 ```
@@ -313,7 +313,7 @@ class AppView extends View
 ヘルパー内部でビュー変数にアクセスしたい場合は、次のように `$this->getView()->get()`
 を使用することができます。 :
 
-``` php
+```php
 class AwesomeHelper extends Helper
 {
     public $helpers = ['Html'];
@@ -333,7 +333,7 @@ class AwesomeHelper extends Helper
 ヘルパー内部でエレメントを描画したい場合は、次のように `$this->getView()->element()`
 を使用することができます。 :
 
-``` php
+```php
 class AwesomeHelper extends Helper
 {
     public function someFunction()

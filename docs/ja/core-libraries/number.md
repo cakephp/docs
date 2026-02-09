@@ -5,7 +5,7 @@
 あなたが `View` の外で `NumberHelper` 機能が必要な場合、
 `Number` クラスを次のように使います。 :
 
-``` php
+```php
 namespace App\Controller;
 
 use Cake\I18n\Number;
@@ -40,7 +40,7 @@ class UsersController extends AppController
 このメソッドは、共通通貨フォーマット（ユーロ、英ポンド、米ドル）で数値を表示するために使用されます。
 ビュー内で次のように使います。 :
 
-``` php
+```php
 // NumberHelper としてコール
 echo $this->Number->currency($value, $currency);
 
@@ -91,7 +91,7 @@ echo Number::currency($value, $currency);
 このメソッドは指定された精度(小数点以下)で数値を表示します。
 定義された精度のレベルを維持するために丸めます。 :
 
-``` php
+```php
 // NumberHelper としてコール
 echo $this->Number->precision(456.91873645, 2);
 
@@ -114,7 +114,7 @@ echo Number::precision(456.91873645, 2);
 与えられた精度に応じて(精度を満たすように丸めて)数値をフォーマットします。
 このメソッドはパーセンテージとして数値を表現し、パーセント記号を追加して出力します。 :
 
-``` php
+```php
 // NumberHelper としてコール。 出力: 45.69%
 echo $this->Number->toPercentage(45.691873645);
 
@@ -135,7 +135,7 @@ echo Number::toPercentage(0.45691, 1, [
 これは、バイト数を KB、MB、GB、および TB へ変換するための近道を提供します。
 サイズは、データのサイズに応じて小数点以下二桁の精度で表示されます。(例 大きいサイズの表現):
 
-``` php
+```php
 // NumberHelper としてコール
 echo $this->Number->toReadableSize(0); // 0 Byte
 echo $this->Number->toReadableSize(1024); // 1 KB
@@ -157,7 +157,7 @@ echo Number::toReadableSize(5368709120); // 5 GB
 (および、メインのメソッドとして、NumberHelper のその他のほとんどのメソッドから使用されます。)
 このメソッドは以下のように使用します。 :
 
-``` php
+```php
 // NumberHelper としてコール
 $this->Number->format($value, $options);
 
@@ -185,7 +185,7 @@ Number::format($value, $options);
 
 例:
 
-``` php
+```php
 // NumberHelper としてコール
 echo $this->Number->format('123456.7890', [
     'places' => 2,
@@ -219,7 +219,7 @@ echo Number::format('123456.7890', [
 
 例:
 
-``` php
+```php
 echo Number::ordinal(1);
 // 出力 '1st'
 
@@ -241,7 +241,7 @@ echo Number::ordinal(410);
 
 このメソッドは、符号付きの数として値の差分を表示します。 :
 
-``` php
+```php
 // NumberHelper としてコール
 $this->Number->formatDelta($value, $options);
 
@@ -265,7 +265,7 @@ Number::formatDelta($value, $options);
 
 例:
 
-``` php
+```php
 // NumberHelper としてコール
 echo $this->Number->formatDelta('123456.7890', [
     'places' => 2,
@@ -293,7 +293,7 @@ echo Number::formatDelta('123456.7890', [
 
 例:
 
-``` php
+```php
 Number::config('en_IN', \NumberFormatter::CURRENCY, [
     'pattern' => '#,##,##0'
 ]);

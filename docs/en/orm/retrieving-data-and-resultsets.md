@@ -35,7 +35,7 @@ ways to inspect the data returned by the ORM.
 It is often convenient to load a single entity from the database when editing or
 viewing entities and their related data. You can do this by using `get()`:
 
-``` php
+```php
 // In a controller or table method.
 
 // Get a single article
@@ -53,7 +53,7 @@ error.
 Like `find()`, `get()` also has caching integrated. You can use the
 `cache` option when calling `get()` to perform read-through caching:
 
-``` php
+```php
 // In a controller or table method.
 
 // Use any cache config or CacheEngine instance & a generated key
@@ -70,7 +70,7 @@ Optionally you can `get()` an entity using [Custom Find Methods](#custom-find-me
 example you may want to get all translations for an entity. You can achieve that
 by using the `finder` option:
 
-``` php
+```php
 $article = $articles->get($id, 'translations');
 ```
 
@@ -90,7 +90,7 @@ Before you can work with entities, you'll need to load them. The easiest way to
 do this is using the `find()` method. The find method provides a short and
 extensible way to find the data you are interested in:
 
-``` php
+```php
 // In a controller or table method.
 
 // Find all the articles
@@ -103,7 +103,7 @@ refine a query after creating it. SelectQuery objects are evaluated lazily, and 
 execute until you start fetching rows, convert it to an array, or when the
 `all()` method is called:
 
-``` php
+```php
 // In a controller or table method.
 
 // Find all the articles.
@@ -126,7 +126,7 @@ $data = $query->toArray();
 > interface to build more complex queries, adding additional conditions,
 > limits, or include associations using the fluent interface.
 
-``` php
+```php
 // In a controller or table method.
 $query = $articles->find('all')
     ->where(['Articles.created >' => new DateTime('-10 days')])
@@ -136,7 +136,7 @@ $query = $articles->find('all')
 
 You can also provide many commonly used options to `find()`:
 
-``` php
+```php
 // In a controller or table method.
 $query = $articles->find('all',
     conditions: ['Articles.created >' => new DateTime('-10 days')],
@@ -148,7 +148,7 @@ $query = $articles->find('all',
 If your finder options are in an array, you can use the [splat operator](https://www.php.net/manual/en/functions.arguments.php#functions.variable-arg-list) (`...`)
 to pass them into `find()`:
 
-``` php
+```php
 $options = [
     'conditions' => ['Articles.created >' => new DateTime('-10 days')],
     'contain' => ['Authors', 'Comments'],
@@ -182,7 +182,7 @@ methods will let you re-use your queries and make testing easier.
 By default, queries and result sets will return [Entities](../orm/entities) objects. You
 can retrieve basic arrays by disabling hydration:
 
-``` php
+```php
 $query->disableHydration();
 
 // $data is ResultSet that contains array data.
@@ -196,7 +196,7 @@ $data = $query->all();
 The `first()` method allows you to fetch only the first row from a query. If
 the query has not been executed, a `LIMIT 1` clause will be applied:
 
-``` php
+```php
 // In a controller or table method.
 $query = $articles->find('all', order: ['Articles.created' => 'DESC']);
 $row = $query->first();
@@ -214,7 +214,7 @@ key.
 Once you have created a query object, you can use the `count()` method to get
 a result count of that query:
 
-``` php
+```php
 // In a controller or table method.
 $query = $articles->find('all', conditions: ['Articles.title LIKE' => '%Ovens%']);
 $number = $query->count();
@@ -231,7 +231,7 @@ application's data. For example, this is very useful when creating `<select>`
 elements. CakePHP provides a simple to use method for generating 'lists' of
 data:
 
-``` php
+```php
 // In a controller or table method.
 $query = $articles->find('list');
 $data = $query->toArray();
@@ -248,7 +248,7 @@ table, while the values will be the 'displayField' of the table. The default ‘
 `setDisplayField()` method on a table object to configure the display field of
 a table:
 
-``` php
+```php
 class ArticlesTable extends Table
 {
     public function initialize(array $config): void
@@ -261,7 +261,7 @@ class ArticlesTable extends Table
 When calling `list` you can configure the fields used for the key and value
 with the `keyField` and `valueField` options respectively:
 
-``` php
+```php
 // In a controller or table method.
 $query = $articles->find('list', keyField: 'slug', valueField: 'label');
 $data = $query->toArray();
@@ -276,7 +276,7 @@ $data = [
 Results can be grouped into nested sets. This is useful when you want
 bucketed sets, or want to build `<optgroup>` elements with `FormHelper`:
 
-``` php
+```php
 // In a controller or table method.
 $query = $articles->find('list', keyField: 'slug', valueField: 'label', groupField: 'author_id');
 $data = $query->toArray();
@@ -295,7 +295,7 @@ $data = [
 
 You can also create list data from associations that can be reached with joins:
 
-``` php
+```php
 $query = $articles->find('list', keyField: 'id', valueField: 'author.name')
     ->contain(['Authors']);
 ```
@@ -309,7 +309,7 @@ virtual fields in the results of `find(list)`.
 Lastly it is possible to use closures to access entity accessor methods in your
 list finds.
 
-``` php
+```php
 // In your Authors Entity create a virtual field to be used as the displayField:
 protected function _getLabel()
 {
@@ -321,7 +321,7 @@ protected function _getLabel()
 This example shows using the `_getLabel()` accessor method from
 the Author entity.
 
-``` php
+```php
 // In your finders/controller:
 $query = $articles->find('list',
     keyField: 'id',
@@ -334,7 +334,7 @@ $query = $articles->find('list',
 
 You can also fetch the label in the list directly using.
 
-``` php
+```php
 // In AuthorsTable::initialize():
 $this->setDisplayField('label'); // Will utilize Author::_getLabel()
 // In your finders/controller:
@@ -349,7 +349,7 @@ finder allows you to access data stored in an 'adjacency list' style table. All
 entities matching a given `parent_id` are placed under the `children`
 attribute:
 
-``` php
+```php
 // In a controller or table method.
 $query = $comments->find('threaded');
 
@@ -384,7 +384,7 @@ where `Foo` is the name of the finder you want to create. For example if we
 wanted to add a finder to our articles table for finding articles written by a
 given user, we would do the following:
 
-``` php
+```php
 use App\Model\Entity\User;
 use Cake\ORM\Query\SelectQuery;
 use Cake\ORM\Table;
@@ -405,7 +405,7 @@ customize the finder operation with relevant application logic. You can also
 'stack' finders, allowing you to express complex queries effortlessly. Assuming
 you have both the 'published' and 'recent' finders, you could do the following:
 
-``` php
+```php
 $query = $articles->find('published')->find('recent');
 ```
 
@@ -422,7 +422,7 @@ CakePHP's ORM provides dynamically constructed finder methods which allow you to
 express simple queries with no additional code. For example if you wanted to
 find a user by username you could do:
 
-``` php
+```php
 // In a controller
 // The following two calls are equal.
 $query = $this->Users->findByUsername('joebob');
@@ -431,13 +431,13 @@ $query = $this->Users->findAllByUsername('joebob');
 
 When using dynamic finders you can constrain on multiple fields:
 
-``` php
+```php
 $query = $users->findAllByUsernameAndApproved('joebob', 1);
 ```
 
 You can also create `OR` conditions:
 
-``` php
+```php
 $query = $users->findAllByUsernameOrEmail('joebob', 'joe@example.com');
 ```
 
@@ -447,13 +447,13 @@ not supported with dynamic finders. You should use [Custom Find Methods](#custom
 encapsulate more complex queries. Lastly, you can also combine dynamic finders
 with custom finders:
 
-``` php
+```php
 $query = $users->findTrollsByUsername('bro');
 ```
 
 The above would translate into the following:
 
-``` php
+```php
 $users->find('trolls', conditions: ['username' => 'bro']);
 ```
 
@@ -502,7 +502,7 @@ surrounding lazy-loading in an ORM. The queries generated by eager loading can
 better leverage joins, allowing more efficient queries to be made. In CakePHP
 you state which associations should be eager loaded using the 'contain' method:
 
-``` php
+```php
 // In a controller or table method.
 
 // As an option to find()
@@ -517,7 +517,7 @@ The above will load the related author and comments for each article in the
 result set. You can load nested associations using nested arrays to define the
 associations to be loaded:
 
-``` php
+```php
 $query = $articles->find()->contain([
     'Authors' => ['Addresses'], 'Comments' => ['Authors'],
 ]);
@@ -525,7 +525,7 @@ $query = $articles->find()->contain([
 
 Alternatively, you can express nested associations using the dot notation:
 
-``` php
+```php
 $query = $articles->find()->contain([
     'Authors.Addresses',
     'Comments.Authors',
@@ -534,7 +534,7 @@ $query = $articles->find()->contain([
 
 You can eager load associations as deep as you like:
 
-``` php
+```php
 $query = $products->find()->contain([
     'Shops.Cities.Countries',
     'Shops.Managers',
@@ -543,7 +543,7 @@ $query = $products->find()->contain([
 
 Which is equivalent to calling:
 
-``` php
+```php
 $query = $products->find()->contain([
     'Shops' => ['Cities.Countries', 'Managers'],
 ]);
@@ -552,7 +552,7 @@ $query = $products->find()->contain([
 You can select fields from all associations with multiple `contain()`
 statements:
 
-``` php
+```php
 $query = $products->find()->select([
     'Realestates.id',
     'Realestates.title',
@@ -583,7 +583,7 @@ $query = $products->find()->select([
 If you need to reset the containments on a query you can set the second argument
 to `true`:
 
-``` php
+```php
 $query = $articles->find();
 $query->contain(['Authors', 'Comments'], true);
 ```
@@ -600,7 +600,7 @@ When using `contain()` you are able to restrict the data returned by the
 associations and filter them by conditions. To specify conditions, pass an anonymous
 function that receives as the first argument a query object, `\Cake\ORM\Query\SelectQuery`:
 
-``` php
+```php
 // In a controller or table method.
 $query = $articles->find()->contain('Comments', function (SelectQuery $q) {
     return $q
@@ -611,7 +611,7 @@ $query = $articles->find()->contain('Comments', function (SelectQuery $q) {
 
 This also works for pagination at the Controller level:
 
-``` php
+```php
 $this->paginate['contain'] = [
     'Comments' => function (SelectQuery $query) {
         return $query->select(['body', 'author_id'])
@@ -627,7 +627,7 @@ $this->paginate['contain'] = [
 It is also possible to restrict deeply-nested associations using the dot
 notation:
 
-``` php
+```php
 $query = $articles->find()->contain([
     'Comments',
     'Authors.Profiles' => function (SelectQuery $q) {
@@ -641,7 +641,7 @@ a published profile. To only get authors with a published profile use
 [matching()](#filtering-by-associated-data). If you have defined custom
 finders in your associations, you can use them inside `contain()`:
 
-``` php
+```php
 // Bring all articles, but only bring the comments that are approved and
 // popular.
 $query = $articles->find()->contain('Comments', function (SelectQuery $q) {
@@ -662,7 +662,7 @@ type.
 You can pass `false` as the new `foreignKey` to disable foreign key constraints entirely.
 Use the `queryBuilder` option to customize the query when using an array:
 
-``` php
+```php
 $query = $articles->find()->contain([
     'Authors' => [
         'foreignKey' => false,
@@ -677,7 +677,7 @@ If you have limited the fields you are loading with `select()` but also want to
 load fields off of contained associations, you can pass the association object
 to `select()`:
 
-``` php
+```php
 // Select id & title from articles, but all fields off of Users.
 $query = $articles->find()
     ->select(['id', 'title'])
@@ -687,7 +687,7 @@ $query = $articles->find()
 
 Alternatively, you can use `enableAutoFields()` in an anonymous function:
 
-``` php
+```php
 // Select id & title from articles, but all fields off of Users.
 $query = $articles->find()
     ->select(['id', 'title'])
@@ -701,7 +701,7 @@ $query = $articles->find()
 When loading HasMany and BelongsToMany associations, you can use the `sort`
 option to sort the data in those associations:
 
-``` php
+```php
 $query->contain([
     'Comments' => [
         'sort' => ['Comments.created' => 'DESC'],
@@ -722,7 +722,7 @@ specific associated data. For example if you have 'Articles belongsToMany Tags'
 you will probably want to find Articles that have the CakePHP tag. This is
 extremely simple to do with the ORM in CakePHP:
 
-``` php
+```php
 // In a controller or table method.
 
 $query = $articles->find();
@@ -735,7 +735,7 @@ You can apply this strategy to HasMany associations as well. For example if
 'Authors HasMany Articles', you could find all the authors with recently
 published articles using the following:
 
-``` php
+```php
 $query = $authors->find();
 $query->matching('Articles', function ($q) {
     return $q->where(['Articles.created >=' => new DateTime('-10 days')]);
@@ -744,7 +744,7 @@ $query->matching('Articles', function ($q) {
 
 Filtering by deep associations uses the same predictable syntax from `contain()`:
 
-``` php
+```php
 // In a controller or table method.
 $query = $products->find()->matching(
     'Shops.Cities.Countries', function ($q) {
@@ -777,7 +777,7 @@ Sometimes you need to match specific associated data but without actually
 loading the matching records like `matching()`. You can create just the
 `INNER JOIN` that `matching()` uses with `innerJoinWith()`:
 
-``` php
+```php
 $query = $articles->find();
 $query->innerJoinWith('Tags', function ($q) {
     return $q->where(['Tags.name' => 'CakePHP']);
@@ -786,7 +786,7 @@ $query->innerJoinWith('Tags', function ($q) {
 
 `innerJoinWith()` allows you to the same parameters and dot notation:
 
-``` php
+```php
 $query = $products->find()->innerJoinWith(
     'Shops.Cities.Countries', function ($q) {
         return $q->where(['Countries.name' => 'Japan']);
@@ -798,7 +798,7 @@ You can combine `innerJoinWith()` and `contain()` with the same association
 when you want to match specific records and load the associated data together.
 The example below matches Articles that have specific Tags and loads the same Tags:
 
-``` php
+```php
 $filter = ['Tags.name' => 'CakePHP'];
 $query = $articles->find()
     ->distinct($articles->getPrimaryKey())
@@ -835,7 +835,7 @@ The opposite of `matching()` is `notMatching()`. This function will change
 the query so that it filters results that have no relation to the specified
 association:
 
-``` php
+```php
 // In a controller or table method.
 
 $query = $articlesTable
@@ -850,7 +850,7 @@ The above example will find all articles that were not tagged with the word
 for example, find all the authors with no published articles in the last 10
 days:
 
-``` php
+```php
 $query = $authorsTable
     ->find()
     ->notMatching('Articles', function ($q) {
@@ -862,7 +862,7 @@ It is also possible to use this method for filtering out records not matching
 deep associations. For example, you could find articles that have not been
 commented on by a certain user:
 
-``` php
+```php
 $query = $articlesTable
     ->find()
     ->notMatching('Comments.Users', function ($q) {
@@ -875,7 +875,7 @@ want to combine `matching()` and `notMatching()` in the same query. The
 following example will find articles having at least one comment, but not
 commented by a certain user:
 
-``` php
+```php
 $query = $articlesTable
     ->find()
     ->notMatching('Comments.Users', function ($q) {
@@ -899,7 +899,7 @@ without having to load all the records for it. For example, if you wanted to
 load the total number of comments an article has along with all the article
 data, you can use the `leftJoinWith()` function:
 
-``` php
+```php
 $query = $articlesTable->find();
 $query->select(['total_comments' => $query->func()->count('Comments.id')])
     ->leftJoinWith('Comments')
@@ -914,7 +914,7 @@ The results for the above query will contain the article data and the
 useful, for example, for bringing the count of articles tagged with a certain
 word, per author:
 
-``` php
+```php
 $query = $authorsTable
     ->find()
     ->select(['total_articles' => $query->func()->count('Articles.id')])
@@ -939,7 +939,7 @@ If you look at `BelongsTo` and `HasOne` [association](../orm/associations)
 options, the default 'join' strategy and 'INNER' `joinType` can be changed to
 'select':
 
-``` php
+```php
 $query = $articles->find()->contain([
     'Comments' => [
         'strategy' => 'select',
@@ -954,7 +954,7 @@ that are not allowed in joins such as separate databases.
 Usually, you set the strategy for an association when defining it
 in `Table::initialize()`, but you can permanently change the strategy manually:
 
-``` php
+```php
 $articles->Comments->setStrategy('select');
 ```
 
@@ -965,7 +965,7 @@ slower, especially if you are querying big batches at once. A good way of
 optimizing association loading for `hasMany` and `belongsToMany`
 associations is by using the `subquery` strategy:
 
-``` php
+```php
 $query = $articles->find()->contain([
     'Comments' => [
             'strategy' => 'subquery',
@@ -1003,7 +1003,7 @@ set multiple times, or cache and iterate the results.
 Result sets allow you to cache/serialize or JSON encode results for API
 results:
 
-``` php
+```php
 // In a controller or table method.
 $results = $query->all();
 
@@ -1023,7 +1023,7 @@ Result sets are a 'Collection' object and support the same methods that
 [collection objects](../core-libraries/collections) do. For example, you can
 extract a list of unique tags on a collection of articles by running:
 
-``` php
+```php
 // In a controller or table method.
 $query = $articles->find()->contain(['Tags']);
 
@@ -1042,7 +1042,7 @@ $uniqueTags = $query->all()
 
 Some other examples of the collection methods being used with result sets are:
 
-``` php
+```php
 // Filter the rows by a calculated property
 $filtered = $results->filter(function ($row) {
     return $row->is_recent;
@@ -1086,7 +1086,7 @@ section show how you can add calculated fields, or replace the result set.
 You can use the `first()` and `last()` methods to get the respective records
 from a result set:
 
-``` php
+```php
 $result = $articles->find('all')->all();
 
 // Get the first and/or last result.
@@ -1099,7 +1099,7 @@ $row = $result->last();
 You can use `skip()` and `first()` to get an arbitrary record from
 a ResultSet:
 
-``` php
+```php
 $result = $articles->find('all')->all();
 
 // Get the 5th record
@@ -1111,7 +1111,7 @@ $row = $result->skip(4)->first();
 You can use the `isEmpty()` method on a ResultSet object to see if it
 has any rows in it.
 
-``` php
+```php
 // Check results
 $results = $query->all();
 $results->isEmpty();
@@ -1123,7 +1123,7 @@ Once you've created a result set, you may need to load
 additional associations. This is the perfect time to lazily eager load data. You
 can load additional associations using `loadInto()`:
 
-``` php
+```php
 $articles = $this->Articles->find()->all();
 $withMore = $this->Articles->loadInto($articles, ['Comments', 'Users']);
 ```
@@ -1132,7 +1132,7 @@ It is possible to restrict the data returned by the associations and filter them
 by conditions. To specify conditions, pass an anonymous function that receives
 as the first argument a query object, `\Cake\ORM\Query`:
 
-``` php
+```php
 $user = $this->Users->get($id);
 $withMore = $this->Users->loadInto($user, ['Posts' => function (Query $query) {
     return $query->where(['Posts.status' => 'published']);
@@ -1161,7 +1161,7 @@ The `$mapper` callable receives the current result from the database as first
 argument, the iteration key as second argument and finally it receives an
 instance of the `MapReduce` routine it is running:
 
-``` php
+```php
 $mapper = function ($article, $key, $mapReduce) {
     $status = 'published';
     if ($article->isDraft() || $article->isInReview()) {
@@ -1185,7 +1185,7 @@ function, the instance of the `MapReduce` routine as the third parameter. In
 our example, we did not have to do any extra processing, so we just `emit()`
 the final results:
 
-``` php
+```php
 $reducer = function ($articles, $status, $mapReduce) {
     $mapReduce->emit($articles, $status);
 };
@@ -1193,7 +1193,7 @@ $reducer = function ($articles, $status, $mapReduce) {
 
 Finally, we can put these two functions together to do the grouping:
 
-``` php
+```php
 $articlesByStatus = $articles->find()
     ->where(['author_id' => 1])
     ->mapReduce($mapper, $reducer)
@@ -1217,7 +1217,7 @@ just emitting the results.
 Calculating the most commonly mentioned words, where the articles contain
 information about CakePHP, as usual we need a mapper function:
 
-``` php
+```php
 $mapper = function ($article, $key, $mapReduce) {
     if (stripos($article['body'], 'cakephp') === false) {
         return;
@@ -1235,7 +1235,7 @@ then breaks the body into individual words. Each word will create its own
 `bucket` where each article id will be stored. Now let's reduce our results to
 only extract the count:
 
-``` php
+```php
 $reducer = function ($occurrences, $word, $mapReduce) {
     $mapReduce->emit(count($occurrences), $word);
 }
@@ -1243,7 +1243,7 @@ $reducer = function ($occurrences, $word, $mapReduce) {
 
 Finally, we put everything together:
 
-``` php
+```php
 $wordCount = $articles->find()
     ->where(['published' => true])
     ->andWhere(['published_date >=' => new DateTime('2014-01-01')])
@@ -1256,7 +1256,7 @@ $wordCount = $articles->find()
 This could return a very large array if we don't clean stop words, but it could
 look something like this:
 
-``` php
+```php
 [
     'cakephp' => 100,
     'awesome' => 39,
@@ -1271,7 +1271,7 @@ a `friends` table and you want to find "fake friends" in our database, or
 better said, people who do not follow each other. Let's start with our
 `mapper()` function:
 
-``` php
+```php
 $mapper = function ($rel, $key, $mr) {
     $mr->emitIntermediate($rel['target_user_id'], $rel['source_user_id']);
     $mr->emitIntermediate(-$rel['source_user_id'], $rel['target_user_id']);
@@ -1280,7 +1280,7 @@ $mapper = function ($rel, $key, $mr) {
 
 The intermediate array will be like the following:
 
-``` php
+```php
 [
     1 => [2, 3, 4, 5, -3, -5],
     2 => [-1],
@@ -1298,7 +1298,7 @@ following them, and negative numbers mean that the user is followed by them.
 Now it's time to reduce it. For each call to the reducer, it will receive a list
 of followers per user:
 
-``` php
+```php
 $reducer = function ($friends, $user, $mr) {
     $fakeFriends = [];
 
@@ -1316,7 +1316,7 @@ $reducer = function ($friends, $user, $mr) {
 
 And we supply our functions to a query:
 
-``` php
+```php
 $fakeFriends = $friends->find()
     ->disableHydration()
     ->mapReduce($mapper, $reducer)
@@ -1326,7 +1326,7 @@ $fakeFriends = $friends->find()
 
 This would return an array similar to this:
 
-``` php
+```php
 [
     1 => [2, 4],
     3 => [6]
@@ -1344,7 +1344,7 @@ be registered to be run as soon as the first result is attempted to be fetched.
 This allows you to keep chaining additional methods and filters to the query
 even after adding a map-reduce routine:
 
-``` php
+```php
 $query = $articles->find()
     ->where(['published' => true])
     ->mapReduce($mapper, $reducer);
@@ -1356,7 +1356,7 @@ $query->where(['created >=' => new DateTime('1 day ago')]);
 This is particularly useful for building custom finder methods as described in the
 [Custom Find Methods](#custom-find-methods) section:
 
-``` php
+```php
 public function findPublished(SelectQuery $query): SelectQuery
 {
     return $query->where(['published' => true]);
@@ -1387,7 +1387,7 @@ a single query. For example, if we wanted to have the most commonly used words
 for articles, but then filter it to only return words that were mentioned more
 than 20 times across all articles:
 
-``` php
+```php
 $mapper = function ($count, $word, $mr) {
     if ($count > 20) {
         $mr->emit($count, $word);
@@ -1404,6 +1404,6 @@ Under some circumstances you may want to modify a `SelectQuery` object so that n
 calling the method with both parameters as null and the third parameter
 (overwrite) as `true`:
 
-``` php
+```php
 $query->mapReduce(null, null, true);
 ```

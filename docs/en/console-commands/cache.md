@@ -8,7 +8,7 @@ description: "Manage cache from CLI in CakePHP: clear all caches, specific cache
 To help you better manage cached data from a CLI environment, a console command
 is available for clearing cached data your application has:
 
-``` bash
+```bash
 // Clear one cache config
 bin/cake cache clear <configname>
 

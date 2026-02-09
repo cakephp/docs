@@ -40,7 +40,7 @@ protocols, then you might have problems with sessions being lost. If you need
 access to the session on both SSL and non-SSL domains you will want to disable
 this:
 
-``` php
+```php
 Configure::write('Session', [
     'defaults' => 'php',
     'ini' => [
@@ -53,7 +53,7 @@ CakePHP also sets the [SameSite](https://owasp.org/www-community/SameSite) attri
 by default for session cookies, which helps protect against CSRF attacks.
 You can change the default value by setting `session.cookie_samesite` php.ini config:
 
-``` php
+```php
 Configure::write('Session', [
     'defaults' => 'php',
     'ini' => [
@@ -66,7 +66,7 @@ The session cookie path defaults to app's base path. To change this you can use
 the `session.cookie_path` ini value. For example if you want your session to
 persist across all subdomains you can do:
 
-``` php
+```php
 Configure::write('Session', [
     'defaults' => 'php',
     'ini' => [
@@ -81,7 +81,7 @@ closed, regardless of the configured `Session.timeout` value. The cookie
 timeout is controlled by the `session.cookie_lifetime` ini value and can be
 configured using:
 
-``` php
+```php
 Configure::write('Session', [
     'defaults' => 'php',
     'ini' => [
@@ -109,7 +109,7 @@ custom solution. To use defaults, simply set the 'defaults' key to the name of
 the default you want to use. You can then override any sub setting by declaring
 it in your Session config:
 
-``` php
+```php
 Configure::write('Session', [
     'defaults' => 'php',
 ]);
@@ -118,7 +118,7 @@ Configure::write('Session', [
 The above will use the built-in 'php' session configuration. You could augment
 part or all of it by doing the following:
 
-``` php
+```php
 Configure::write('Session', [
     'defaults' => 'php',
     'cookie' => 'my_app',
@@ -148,7 +148,7 @@ Cache and Database session handlers use this method for saving sessions.
 Additional settings for the handler should be placed inside the handler array.
 You can then read those values out from inside your handler:
 
-``` php
+```php
 'Session' => [
     'handler' => [
         'engine' => 'DatabaseSession',
@@ -169,7 +169,7 @@ from inside plugins. By setting the engine to `MyPlugin.PluginSessionHandler`.
 
 If you need to use a database to store your session data, configure as follows:
 
-``` php
+```php
 'Session' => [
     'defaults' => 'database',
 ]
@@ -177,7 +177,7 @@ If you need to use a database to store your session data, configure as follows:
 
 This configuration requires a database table, having this schema:
 
-``` sql
+```sql
 CREATE TABLE `sessions` (
   `id` char(40) CHARACTER SET ascii COLLATE ascii_bin NOT NULL,
   `created` datetime DEFAULT CURRENT_TIMESTAMP, -- Optional
@@ -192,7 +192,7 @@ You can find a copy of the schema for the sessions table in the [application ske
 
 You can also use your own `Table` class to handle the saving of the sessions:
 
-``` php
+```php
 'Session' => [
     'defaults' => 'database',
     'handler' => [
@@ -217,7 +217,7 @@ start to expire as records are evicted.
 
 To use Cache based sessions you can configure you Session config like:
 
-``` php
+```php
 Configure::write('Session', [
     'defaults' => 'cache',
     'handler' => [
@@ -234,7 +234,7 @@ configuration to use. The default cache configuration is `'default'`.
 
 The app skeleton comes preconfigured with a session config like this:
 
-``` php
+```php
 'Session' => [
     'defaults' => 'php',
 ],
@@ -265,7 +265,7 @@ configurations, as well as custom ones. The `ini` key in the session settings,
 allows you to specify individual configuration values. For example you can use
 it to control settings like `session.gc_divisor`:
 
-``` php
+```php
 Configure::write('Session', [
     'defaults' => 'php',
     'ini' => [
@@ -288,7 +288,7 @@ First we'll need to create our custom class and put it in
 **src/Http/Session/ComboSession.php**. The class should look
 something like:
 
-``` php
+```php
 namespace App\Http\Session;
 
 use Cake\Cache\Cache;
@@ -346,7 +346,7 @@ a `Cake\Cache\Cache` operation. This lets us fetch sessions from
 the fast cache, and not have to worry about what happens when we fill the cache.
 In **config/app.php** make the session block look like:
 
-``` php
+```php
 'Session' => [
     'defaults' => 'database',
     'handler' => [
@@ -381,7 +381,7 @@ This means the session is accessible from:
 
 A basic example of session usage in controllers, views and cells would be:
 
-``` php
+```php
 $name = $this->request->getSession()->read('User.name');
 
 // If you are accessing the session multiple times,
@@ -400,7 +400,7 @@ In components, use `$this->getController()->getRequest()`.
 You can read values from the session using `Hash::extract()`
 compatible syntax:
 
-``` php
+```php
 $session->read('Config.language', 'en');
 ```
 
@@ -408,7 +408,7 @@ $session->read('Config.language', 'en');
 
 The same as convenience wrapper around non-nullable return value:
 
-``` php
+```php
 $session->readOrFail('Config.language');
 ```
 
@@ -419,13 +419,13 @@ for the existence in code itself.
 
 `$key` should be the dot separated path you wish to write `$value` to:
 
-``` php
+```php
 $session->write('Config.language', 'en');
 ```
 
 You may also specify one or multiple hashes like so:
 
-``` php
+```php
 $session->write([
     'Config.theme' => 'blue',
     'Config.language' => 'en',
@@ -436,7 +436,7 @@ $session->write([
 
 When you need to delete data from the session, you can use `delete()`:
 
-``` php
+```php
 $session->delete('Some.value');
 ```
 
@@ -449,7 +449,7 @@ $session->delete('Some.value');
 When you need to read and delete data from the session, you can use
 `consume()`:
 
-``` php
+```php
 $session->consume('Some.value');
 ```
 
@@ -457,7 +457,7 @@ $session->consume('Some.value');
 
 If you want to see if data exists in the session, you can use `check()`:
 
-``` php
+```php
 if ($session->check('Config.language')) {
     // Config.language exists and is not null.
 }
@@ -470,7 +470,7 @@ if ($session->check('Config.language')) {
 Destroying the session is useful when users log out. To destroy a session, use
 the `destroy()` method:
 
-``` php
+```php
 $session->destroy();
 ```
 
@@ -485,7 +485,7 @@ While the `Authentication Plugin` automatically renews the session id when users
 logout, you may need to rotate the session id's manually. To do this use the
 `renew()` method:
 
-``` php
+```php
 $session->renew();
 ```
 

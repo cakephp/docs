@@ -40,7 +40,7 @@ When adding the PaginatorHelper in your controller, you can define the
 'templates' setting to define a template file to load. This allows you to
 customize multiple templates and keep your code DRY:
 
-``` php
+```php
 // In your AppView.php
 public function initialize(): void
 {
@@ -53,7 +53,7 @@ This will load the file located at **config/paginator-templates.php**. See the
 example below for how the file should look like. You can also load templates
 from a plugin using `plugin syntax`:
 
-``` php
+```php
 // In your AppView.php
 public function initialize(): void
 {
@@ -65,7 +65,7 @@ public function initialize(): void
 Whether your templates are in the primary application or a plugin, your
 templates file should look something like:
 
-``` php
+```php
 return [
     'number' => '<a href="{{url}}">{{text}}</a>',
 ];
@@ -79,7 +79,7 @@ This method allows you to change the templates used by PaginatorHelper at
 runtime. This can be useful when you want to customize templates for a
 particular method call:
 
-``` php
+```php
 // Read the current template value.
 $result = $this->Paginator->getTemplates('number');
 
@@ -135,31 +135,31 @@ Accepted keys for `$options`:
 
 Assuming you are paginating some posts, and are on page one:
 
-``` php
+```php
 echo $this->Paginator->sort('user_id');
 ```
 
 Output:
 
-``` html
+```html
 <a href="/posts/index?page=1&amp;sort=user_id&amp;direction=asc">User Id</a>
 ```
 
 You can use the title parameter to create custom text for your link:
 
-``` php
+```php
 echo $this->Paginator->sort('user_id', 'User account');
 ```
 
 Output:
 
-``` html
+```html
 <a href="/posts/index?page=1&amp;sort=user_id&amp;direction=asc">User account</a>
 ```
 
 If you are using HTML like images in your links remember to set escaping off:
 
-``` php
+```php
 echo $this->Paginator->sort(
     'user_id',
     '<em>User account</em>',
@@ -169,26 +169,26 @@ echo $this->Paginator->sort(
 
 Output:
 
-``` html
+```html
 <a href="/posts/index?page=1&amp;sort=user_id&amp;direction=asc"><em>User account</em></a>
 ```
 
 The direction option can be used to set the default direction for a link. Once a
 link is active, it will automatically switch directions like normal:
 
-``` php
+```php
 echo $this->Paginator->sort('user_id', null, ['direction' => 'desc']);
 ```
 
 Output:
 
-``` html
+```html
 <a href="/posts/index?page=1&amp;sort=user_id&amp;direction=desc">User Id</a>
 ```
 
 The lock option can be used to lock sorting into the specified direction:
 
-``` php
+```php
 echo $this->Paginator->sort('user_id', null, ['direction' => 'asc', 'lock' => true]);
 ```
 
@@ -223,7 +223,7 @@ Supported options are:
   string is set a link to the first page will be generated with the value as the
   title:
 
-  ``` php
+  ```php
   echo $this->Paginator->numbers(['first' => 'First page']);
   ```
 
@@ -236,7 +236,7 @@ Supported options are:
 While this method allows a lot of customization for its output. It is
 also ok to just call the method without any parameters.
 
-``` php
+```php
 echo $this->Paginator->numbers();
 ```
 
@@ -244,7 +244,7 @@ Using the first and last options you can create links to the beginning
 and end of the page set. The following would create a set of page links that
 include links to the first 2 and last 2 pages in the paged results:
 
-``` php
+```php
 echo $this->Paginator->numbers(['first' => 2, 'last' => 2]);
 ```
 
@@ -275,7 +275,7 @@ pages in the paged data set.
 PaginatorHelper can be used to create pagination link tags in your page
 `<head>` elements:
 
-``` php
+```php
 // Create next/prev links for the current model.
 echo $this->Paginator->meta();
 
@@ -330,7 +330,7 @@ tokens are replaced with actual values. The available tokens are:
 You could also supply only a string to the counter method using the tokens
 available. For example:
 
-``` php
+```php
 echo $this->Paginator->counter(
     'Page {{page}} of {{pages}}, showing {{current}} records out of
      {{count}} total, starting on record {{start}}, ending on {{end}}',
@@ -339,7 +339,7 @@ echo $this->Paginator->counter(
 
 Setting 'format' to range would output like '1 - 3 of 13':
 
-``` php
+```php
 echo $this->Paginator->counter('range');
 ```
 
@@ -350,7 +350,7 @@ echo $this->Paginator->counter('range');
 By default, returns a full pagination URL string for use in non-standard contexts
 (i.e. JavaScript).
 
-``` php
+```php
 // Generates a URL similar to: /articles?sort=title&page=2
 echo $this->Paginator->generateUrl(['sort' => 'title']);
 
@@ -371,7 +371,7 @@ echo $this->Paginator->generateUrl(
 
 Create a dropdown control that changes the `limit` query parameter:
 
-``` php
+```php
 // Use the defaults.
 echo $this->Paginator->limitControl();
 
@@ -389,7 +389,7 @@ The generated form and control will automatically submit on change.
 Instead of manually defining limit options, you can use the `steps` option to
 automatically generate limits in multiples of a specific value:
 
-``` php
+```php
 // Generate limits in steps of 10 up to maxLimit
 echo $this->Paginator->limitControl([], null, ['steps' => 10]);
 // With maxLimit of 50, this generates: 10, 20, 30, 40, 50
@@ -407,7 +407,7 @@ The `limitControl()` method automatically respects the `maxLimit` configuration
 from your paginator settings. Any limit options that exceed the `maxLimit` will
 be automatically filtered out:
 
-``` php
+```php
 // In your controller with maxLimit of 50
 $this->paginate = [
     'limit' => 20,
@@ -433,7 +433,7 @@ Sets all the options for the PaginatorHelper. Supported options are:
   The option allows your to set/override any element for URLs generated by
   the helper:
 
-  ``` php
+  ```php
   $this->Paginator->options([
       'url' => [
           'lang' => 'en',
@@ -466,7 +466,7 @@ See the details on
 the API. As mentioned, the PaginatorHelper also offers sorting features which
 can be integrated into your table column headers:
 
-``` php
+```php
 <!-- templates/Posts/index.php -->
 <table>
     <tr>
@@ -488,7 +488,7 @@ field.
 
 It is also possible to sort a column based on associations:
 
-``` php
+```php
 <table>
     <tr>
         <th><?= $this->Paginator->sort('title', 'Title') ?></th>
@@ -524,7 +524,7 @@ It is also possible to sort a column based on associations:
 The final ingredient to pagination display in views is the addition of page
 navigation, also supplied by the PaginationHelper:
 
-``` php
+```php
 // Shows the page numbers
 <?= $this->Paginator->numbers() ?>
 
@@ -539,7 +539,7 @@ navigation, also supplied by the PaginationHelper:
 The wording output by the counter() method can also be customized using special
 markers:
 
-``` php
+```php
 <?= $this->Paginator->counter(
     'Page {{page}} of {{pages}}, showing {{current}} records out of
     {{count}} total, starting on record {{start}}, ending on {{end}}',
@@ -558,7 +558,7 @@ other methods of the helper, so that they generate expected output.
 query was paginated. To set additional URL parameters for multiple pagination
 you can include the scope names in `options()`:
 
-``` php
+```php
 $this->Paginator->options([
     'url' => [
         // Additional URL parameters for the 'articles' scope

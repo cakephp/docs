@@ -22,7 +22,7 @@ To create a cell, define a class in **src/View/Cell** and a template in
 number of messages in a user's notification inbox. First, create the class file.
 Its contents should look like:
 
-``` php
+```php
 namespace App\View\Cell;
 
 use Cake\View\Cell;
@@ -61,7 +61,7 @@ to each other. We have a `Messages` model, and we want to show the count of
 unread messages without having to pollute AppController. This is a perfect use
 case for a cell. In the class we just made, add the following:
 
-``` php
+```php
 namespace App\View\Cell;
 
 use Cake\View\Cell;
@@ -81,7 +81,7 @@ very much like a controller would. We can use the `fetchTable()` and `set()`
 methods just like we would in a controller. In our template file, add the
 following:
 
-``` php
+```php
 <!-- templates/cell/Inbox/display.php -->
 <div class="notification-icon">
     You have <?= $unread_count ?> unread messages.
@@ -99,7 +99,7 @@ following:
 Cells can be loaded from views using the `cell()` method and works the same in
 both contexts:
 
-``` php
+```php
 // Load an application cell
 $cell = $this->cell('Inbox');
 
@@ -110,7 +110,7 @@ $cell = $this->cell('Messaging.Inbox');
 The above will load the named cell class and execute the `display()` method.
 You can execute other methods using the following:
 
-``` php
+```php
 // Run the expanded() method on the Inbox cell
 $cell = $this->cell('Inbox::expanded');
 ```
@@ -118,7 +118,7 @@ $cell = $this->cell('Inbox::expanded');
 If you need controller logic to decide which cells to load in a request, you can
 use the `CellTrait` in your controller to enable the `cell()` method there:
 
-``` php
+```php
 namespace App\Controller;
 
 use App\Controller\AppController;
@@ -138,13 +138,13 @@ You will often want to parameterize cell methods to make cells more flexible.
 By using the second and third arguments of `cell()`, you can pass action
 parameters and additional options to your cell classes, as an indexed array:
 
-``` php
+```php
 $cell = $this->cell('Inbox::recent', ['-3 days']);
 ```
 
 The above would match the following function signature:
 
-``` php
+```php
 public function recent(string $since): void
 {
 }
@@ -155,7 +155,7 @@ public function recent(string $since): void
 Once a cell has been loaded and executed, you'll probably want to render it. The
 easiest way to render a cell is to echo it:
 
-``` php
+```php
 <?= $cell ?>
 ```
 
@@ -177,7 +177,7 @@ By convention cells render templates that match the action they are executing.
 If you need to render a different view template, you can specify the template
 to use when rendering the cell:
 
-``` php
+```php
 // Calling render() explicitly
 echo $this->cell('Inbox::recent', ['-3 days'])->render('messages');
 
@@ -194,7 +194,7 @@ When rendering a cell you may want to cache the rendered output if the contents
 don't change often or to help improve performance of your application. You can
 define the `cache` option when creating a cell to enable & configure caching:
 
-``` php
+```php
 // Cache using the default config and a generated key
 $cell = $this->cell('Inbox', [], ['cache' => true]);
 
@@ -222,7 +222,7 @@ Creating a cell that renders a paginated result set can be done by leveraging
 a paginator class of the ORM. An example of paginating a user's favorite
 messages could look like:
 
-``` php
+```php
 namespace App\View\Cell;
 
 use Cake\View\Cell;
@@ -261,7 +261,7 @@ pagination parameters](../controllers/pagination#paginating-multiple-queries).
 Cells can declare constructor options that are converted into properties when
 creating a cell object:
 
-``` php
+```php
 namespace App\View\Cell;
 
 use Cake\View\Cell;
@@ -285,7 +285,7 @@ class FavoritesCell extends Cell
 Here we have defined a `$limit` property and add `limit` as a cell option.
 This will allow us to define the option when creating the cell:
 
-``` php
+```php
 $cell = $this->cell('Favorites', [$user->id], ['limit' => 10])
 ```
 
@@ -299,7 +299,7 @@ Cells have their own context and their own View instance but Helpers loaded insi
 
 Loading a specific Helper just for a specific cell can be done via the following example:
 
-``` php
+```php
 namespace App\View\Cell;
 
 use Cake\View\Cell;

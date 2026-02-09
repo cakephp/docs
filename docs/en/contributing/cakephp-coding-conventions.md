@@ -37,7 +37,7 @@ Four spaces will be used for indentation.
 
 So, indentation should look like this:
 
-``` php
+```php
 // base level
     // level 1
         // level 2
@@ -47,7 +47,7 @@ So, indentation should look like this:
 
 Or:
 
-``` php
+```php
 $booleanVariable = true;
 $stringVariable = 'moose';
 if ($booleanVariable) {
@@ -68,7 +68,7 @@ guidelines:
 
 As an example, instead of using the following formatting:
 
-``` php
+```php
 $matches = array_intersect_key($this->_listeners,
                 array_flip(preg_grep($matchPattern,
                     array_keys($this->_listeners), 0)));
@@ -76,7 +76,7 @@ $matches = array_intersect_key($this->_listeners,
 
 Use this instead:
 
-``` php
+```php
 $matches = array_intersect_key(
     $this->_listeners,
     array_flip(
@@ -103,7 +103,7 @@ In short:
 Control structures are for example "`if`", "`for`", "`foreach`",
 "`while`", "`switch`" etc. Below, an example with "`if`":
 
-``` php
+```php
 if ((expr_1) || (expr_2)) {
     // action_1;
 } elseif (!(expr_3) && (expr_4)) {
@@ -126,7 +126,7 @@ if ((expr_1) || (expr_2)) {
   within it should gain a new level of indentation.
 - Inline assignments should not be used inside of the control structures.
 
-``` php
+```php
 // wrong = no brackets, badly placed statement
 if (expr) statement;
 
@@ -158,7 +158,7 @@ line. Longer ternaries should be split into `if else` statements. Ternary
 operators should not ever be nested. Optionally parentheses can be used around
 the condition check of the ternary for clarity:
 
-``` php
+```php
 // Good, simple and readable
 $variable = isset($options['variable']) ? $options['variable'] : true;
 
@@ -173,7 +173,7 @@ Keyword control structures are easier to read in complex template files. Control
 structures can either be contained in a larger PHP block, or in separate PHP
 tags:
 
-``` php
+```php
 <?php
 if ($isAdmin):
     echo '<p>You are the admin user.</p>';
@@ -192,7 +192,7 @@ might be wise to comment it as such to avoid confusing it for a mistake.
 
 For testing if a variable is null, it is recommended to use a strict check:
 
-``` php
+```php
 if ($value === null) {
     // ...
 }
@@ -200,7 +200,7 @@ if ($value === null) {
 
 The value to check against should be placed on the right side:
 
-``` php
+```php
 // not recommended
 if (null === $this->foo()) {
     // ...
@@ -218,7 +218,7 @@ Functions should be called without space between function's name and starting
 parenthesis. There should be one space between every parameter of a function
 call:
 
-``` php
+```php
 $var = foo($bar, $bar2, $bar3);
 ```
 
@@ -228,7 +228,7 @@ As you can see above there should be one space on both sides of equals sign (=).
 
 Example of a method definition:
 
-``` php
+```php
 public function someFunction(string $arg1, string $arg2 = ''): mixed
 {
     if (expr) {
@@ -243,7 +243,7 @@ Parameters with a default value, should be placed last in function definition.
 Try to make your functions return something, at least `true` or `false`, so
 it can be determined whether the function call was successful:
 
-``` php
+```php
 public function connection(string|array $dns, bool $persistent = false): bool
 {
     if (is_array($dns)) {
@@ -266,7 +266,7 @@ There are spaces on both side of the equals sign.
 
 Try to avoid unnecessary nesting by bailing early:
 
-``` php
+```php
 public function run(array $data): bool
 {
     ...
@@ -295,7 +295,7 @@ This helps to keep the logic sequential which improves readability.
 Arguments that expect objects, arrays or callbacks (callable) can be typehinted.
 We only typehint public methods, though, as typehinting is not cost-free:
 
-``` php
+```php
 /**
  * Some method description.
  *
@@ -316,7 +316,7 @@ Note that if you want to allow `$array` to be also an instance of
 `\ArrayObject` you should not typehint as `array` accepts only the primitive
 type:
 
-``` php
+```php
 /**
  * Some method description.
  *
@@ -333,7 +333,7 @@ Defining anonymous functions follows the [PSR-12](https://www.php-fig.org/psr/ps
 declared with a space after the `function` keyword, and a space before and after
 the `use` keyword:
 
-``` php
+```php
 $closure = function ($arg1, $arg2) use ($var1, $var2) {
     // code
 };
@@ -344,7 +344,7 @@ $closure = function ($arg1, $arg2) use ($var1, $var2) {
 Method chaining should have multiple methods spread across separate lines, and
 indented with four spaces:
 
-``` php
+```php
 $email->from('foo@example.com')
     ->to('bar@example.com')
     ->subject('A great message')
@@ -373,7 +373,7 @@ tags:
 PhpDoc tags are very much like JavaDoc tags in Java. Tags are only processed if
 they are the first thing in a DocBlock line, for example:
 
-``` php
+```php
 /**
  * Tag example.
  *
@@ -382,7 +382,7 @@ they are the first thing in a DocBlock line, for example:
  */
 ```
 
-``` php
+```php
 /**
  * Example of inline phpDoc tags.
  *
@@ -455,7 +455,7 @@ For more than two types it is usually best to just use `mixed`.
 When returning the object itself (for example, for chaining), one should use `$this`
 instead:
 
-``` php
+```php
 /**
  * Foo function.
  *
@@ -472,7 +472,7 @@ public function foo(): static
 `include`, `require`, `include_once` and `require_once` do not have
 parentheses:
 
-``` php
+```php
 // wrong = parentheses
 require_once('ClassFileName.php');
 require_once ($class);
@@ -496,7 +496,7 @@ The short echo should be used in template files in place of `<?php echo`. It
 should be immediately followed by a single space, the variable or function value
 to `echo`, a single space, and the php closing tag:
 
-``` php
+```php
 // wrong = semicolon, no spaces
 <td><?=$name;?></td>
 
@@ -512,7 +512,7 @@ The short echo tag (`<?=`) is always available regardless of the `short_open_tag
 
 Write all functions in camelBack:
 
-``` php
+```php
 function longFunctionName()
 {
 }
@@ -522,7 +522,7 @@ function longFunctionName()
 
 Class names should be written in CamelCase, for example:
 
-``` php
+```php
 class ExampleClass
 {
 }
@@ -536,7 +536,7 @@ written in camelBack in case of multiple words. Variables referencing objects
 should in some way associate to the class the variable is an object of.
 Example:
 
-``` php
+```php
 $user = 'John';
 $users = ['John', 'Hans', 'Arne'];
 
@@ -598,14 +598,14 @@ of `floatval($var)` when applicable.
 
 Constants should be defined in capital letters:
 
-``` php
+```php
 define('CONSTANT', 1);
 ```
 
 If a constant name consists of multiple words, they should be separated by an
 underscore character, for example:
 
-``` php
+```php
 define('LONG_NAMED_CONSTANT', 2);
 ```
 
@@ -613,7 +613,7 @@ define('LONG_NAMED_CONSTANT', 2);
 
 Enum cases are defined in `CamelCase` style:
 
-``` php
+```php
 enum ArticleStatus: string
 {
     case Published = 'Y';
@@ -629,7 +629,7 @@ properties are already defined, the usage of `empty()` is not recommended.
 When working with variables, it is better to rely on type-coercion to boolean
 instead of `empty()`:
 
-``` php
+```php
 function manipulate($var)
 {
     // Not recommended, $var is already defined in the scope
@@ -650,7 +650,7 @@ function manipulate($var)
 When dealing with defined properties you should favour `null` checks over
 `empty()`/`isset()` checks:
 
-``` php
+```php
 class Thing
 {
     private $property; // Defined
@@ -673,7 +673,7 @@ When working with arrays, it is better to merge in defaults over using
 `empty()` checks. By merging in defaults, you can ensure that required keys
 are defined:
 
-``` php
+```php
 function doWork(array $array)
 {
     // Merge defaults to remove need for empty checks.

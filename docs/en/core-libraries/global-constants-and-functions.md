@@ -22,7 +22,7 @@ convenience wrappers for other CakePHP functionality, such as debugging and
 translating content. By default, only namespaced functions are autoloaded,
 however you can optionally load global aliases by adding:
 
-``` php
+```php
 require CAKE . 'functions.php';
 ```
 
@@ -37,13 +37,13 @@ This function handles localization in CakePHP applications. The
 `$string_id` identifies the ID for a translation. You can supply
 additional arguments to replace placeholders in your string:
 
-``` php
+```php
 __('You have {0} unread messages', $number);
 ```
 
 You can also provide a name-indexed array of replacements:
 
-``` php
+```php
 __('You have {unread} unread messages', ['unread' => $number]);
 ```
 

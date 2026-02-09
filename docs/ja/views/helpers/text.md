@@ -13,7 +13,7 @@ TextHelper には、ビュー内のテキストをより使いやすく見やす
 `$options` で定義されたオプションに従い、 `$text` に整形されたメールアドレスのリンクを追加します。(
 `HtmlHelper::link()` を参照) :
 
-``` php
+```php
 $myText = 'For more information regarding our world-famous ' .
     'pastries and desserts, contact info@example.com';
 $linkedText = $this->Text->autoLinkEmails($myText);
@@ -21,7 +21,7 @@ $linkedText = $this->Text->autoLinkEmails($myText);
 
 出力:
 
-``` text
+```text
 For more information regarding our world-famous pastries and desserts,
 contact <a href="mailto:info@example.com">info@example.com</a>
 ```
@@ -52,7 +52,7 @@ contact <a href="mailto:info@example.com">info@example.com</a>
 2行改行されている場合は適切にテキストを\<p\>で囲み、
 1行改行には\<br\>を追加します。:
 
-``` php
+```php
 $myText = 'For more information
 regarding our world-famous pastries and desserts.
 
@@ -62,7 +62,7 @@ $formattedText = $this->Text->autoParagraph($myText);
 
 出力:
 
-``` html
+```html
 <p>For more information<br />
 regarding our world-famous pastries and desserts.</p>
 <p>contact info@example.com</p>

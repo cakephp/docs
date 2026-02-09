@@ -27,7 +27,7 @@
 ハッシュ化メソッド `Cake\Utility\Security::hash()` を利用すべきです。
 以下に一例を挙げます。 :
 
-``` php
+```php
 // キーがどこかに保存されたと仮定すれば、あとで復号のために再利用されることが可能
 $key = 'wt1U5MACWJFTXGenFoZoiLwQGrLgdbHA';
 $result = Security::encrypt($value, $key);
@@ -40,7 +40,7 @@ $result = Security::encrypt($value, $key);
 暗号化時に利用された各々の値と一致する必要があり、さもなければ復号は失敗します。
 以下に一例を挙げます。 :
 
-``` php
+```php
 // キーがどこかに保存されたと仮定すれば、あとで復号のために再利用されることが可能
 $key = 'wt1U5MACWJFTXGenFoZoiLwQGrLgdbHA';
 
@@ -57,7 +57,7 @@ openssl では互換性がありません。これは、暗号化されたデー
 です。もしデータを再度暗号化するときにトラブルを避けたければ、 `engine()` メソッドを使用して
 `mcrypt` の利用を CakePHP に強制できます。 :
 
-``` php
+```php
 // config/bootstrap.php の中で
 use Cake\Utility\Crypto\Mcrypt;
 
@@ -75,7 +75,7 @@ Security::engine(new Mcrypt());
 もし `$salt` が `true` にセットされていた場合、アプリケーションのソルト値が
 利用されます。 :
 
-``` php
+```php
 // アプリケーションのソルト値を利用
 $sha1 = Security::hash('CakePHP Framework', 'sha1', true);
 

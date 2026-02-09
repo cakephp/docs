@@ -18,7 +18,7 @@ The App class is responsible for resource location and path management.
 This method is used to resolve class names throughout CakePHP. It resolves
 the short form names CakePHP uses and returns the fully resolved class name:
 
-``` php
+```php
 // Resolve a short class name with the namespace + suffix.
 App::className('Flash', 'Controller/Component', 'Component');
 // Returns Cake\Controller\Component\FlashComponent
@@ -44,7 +44,7 @@ class names do not exist, `false` will be returned.
 
 The method returns paths set using `App.paths` app config:
 
-``` php
+```php
 // Get the templates path set using ``App.paths.templates`` app config.
 App::path('templates');
 ```
@@ -59,7 +59,7 @@ The same way you can retrieve paths for `locales` and `plugins`.
 
 Used to get locations for paths based on conventions:
 
-``` php
+```php
 // Get the path to Controller/ in your application
 App::classPath('Controller');
 ```
@@ -76,7 +76,7 @@ for.
 
 Used for finding the path to a package inside CakePHP:
 
-``` php
+```php
 // Get the path to Cache engines.
 App::core('Cache/Engine');
 ```
@@ -99,7 +99,7 @@ If you had a library called AcmeLib, you could install it into
 you could autoload the classes within it using `classmap` in your
 application's `composer.json`:
 
-``` json
+```json
 "autoload": {
     "psr-4": {
         "App\\": "src/",
@@ -115,7 +115,7 @@ If your vendor library does not use classes, and instead provides functions, you
 can configure Composer to load these files at the beginning of each request
 using the `files` autoloading strategy:
 
-``` json
+```json
 "autoload": {
     "psr-4": {
         "App\\": "src/",
@@ -130,7 +130,7 @@ using the `files` autoloading strategy:
 After configuring the vendor libraries you will need to regenerate your
 application's autoloader using:
 
-``` bash
+```bash
 php composer.phar dump-autoload
 ```
 

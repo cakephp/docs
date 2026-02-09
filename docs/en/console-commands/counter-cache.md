@@ -10,7 +10,7 @@ in your application and plugin models. It can be used in maintenance and
 recovery operations, or to populate new counter caches added to your
 application.
 
-``` bash
+```bash
 bin/cake counter_cache Comments --assoc Articles
 ```
 
@@ -18,7 +18,7 @@ This would rebuild the `Comments` related counters on the `Articles` table.
 For very large tables you may need to rebuild counters in batches. You can use
 the `--limit` and `--page` options to incrementally rebuild counter state.
 
-``` bash
+```bash
 bin/cake counter_cache Comments --assoc Articles --limit 100 --page 2
 ```
 

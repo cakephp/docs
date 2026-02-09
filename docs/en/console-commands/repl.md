@@ -14,7 +14,7 @@ you explore some CakePHP and your application in an interactive console.
 
 You can start the interactive console using:
 
-``` bash
+```bash
 bin/cake console
 ```
 
@@ -22,7 +22,7 @@ This will bootstrap your application and start an interactive console. At this
 point you can interact with your application code and execute queries using your
 application's models:
 
-``` bash
+```bash
 bin/cake console
 
 >>> $articles = Cake\Datasource\FactoryLocator::get('Table')->get('Articles');
@@ -35,7 +35,7 @@ bin/cake console
 Since your application has been bootstrapped you can also test routing using the
 REPL:
 
-``` php
+```php
 >>> Cake\Routing\Router::parse('/articles/view/1');
 // [
 //   'controller' => 'Articles',
@@ -49,7 +49,7 @@ REPL:
 
 You can also test generating URLs:
 
-``` php
+```php
 >>> Cake\Routing\Router::url(['controller' => 'Articles', 'action' => 'edit', 99]);
 // '/articles/edit/99'
 ```

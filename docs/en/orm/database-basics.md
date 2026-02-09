@@ -19,7 +19,7 @@ complete ORM, you can read the [Query Builder](../orm/query-builder) and
 
 The easiest way to create a database connection is using a `DSN` string:
 
-``` php
+```php
 use Cake\Datasource\ConnectionManager;
 
 $dsn = 'mysql://root:password@localhost/my_database';
@@ -28,7 +28,7 @@ ConnectionManager::setConfig('default', ['url' => $dsn]);
 
 Once created, you can access the connection object to start using it:
 
-``` php
+```php
 $connection = ConnectionManager::get('default');
 ```
 
@@ -39,7 +39,7 @@ $connection = ConnectionManager::get('default');
 
 Running raw SQL queries is a breeze:
 
-``` php
+```php
 use Cake\Datasource\ConnectionManager;
 
 $connection = ConnectionManager::get('default');
@@ -48,7 +48,7 @@ $results = $connection->execute('SELECT * FROM articles')->fetchAll('assoc');
 
 You can use prepared statements to insert parameters:
 
-``` php
+```php
 $results = $connection
     ->execute('SELECT * FROM articles WHERE id = :id', ['id' => 1])
     ->fetchAll('assoc');
@@ -56,7 +56,7 @@ $results = $connection
 
 It is also possible to use complex data types as arguments:
 
-``` php
+```php
 use Cake\Datasource\ConnectionManager;
 use DateTime;
 
@@ -72,7 +72,7 @@ $results = $connection
 
 Instead of writing the SQL manually, you can use the query builder:
 
-``` php
+```php
 // Prior to 4.5 use $connection->query() instead.
 $results = $connection
     ->selectQuery('*', 'articles')
@@ -86,7 +86,7 @@ $results = $connection
 
 Inserting rows in the database is usually a matter of a couple lines:
 
-``` php
+```php
 use Cake\Datasource\ConnectionManager;
 use DateTime;
 
@@ -102,7 +102,7 @@ $connection->insert('articles', [
 Updating rows in the database is equally intuitive, the following example will
 update the article with **id** 10:
 
-``` php
+```php
 use Cake\Datasource\ConnectionManager;
 $connection = ConnectionManager::get('default');
 $connection->update('articles', ['title' => 'New title'], ['id' => 10]);
@@ -113,7 +113,7 @@ $connection->update('articles', ['title' => 'New title'], ['id' => 10]);
 Similarly, the `delete()` method is used to delete rows from the database, the
 following example deletes the article with **id** 10:
 
-``` php
+```php
 use Cake\Datasource\ConnectionManager;
 $connection = ConnectionManager::get('default');
 $connection->delete('articles', ['id' => 10]);
@@ -130,7 +130,7 @@ your application will be using. Sample connection information can be found in
 **config/app.default.php**. A sample connection configuration would look
 like:
 
-``` php
+```php
 'Datasources' => [
     'default' => [
         'className' => 'Cake\Database\Connection',
@@ -153,7 +153,7 @@ also define additional connections at runtime using
 `Cake\Datasource\ConnectionManager::setConfig()`. An example of that
 would be:
 
-``` php
+```php
 use Cake\Datasource\ConnectionManager;
 
 ConnectionManager::setConfig('default', [
@@ -173,7 +173,7 @@ ConnectionManager::setConfig('default', [
 Configuration options can also be provided as a `DSN` string. This is
 useful when working with environment variables or `PaaS` providers:
 
-``` php
+```php
 ConnectionManager::setConfig('default', [
     'url' => 'mysql://my_app:sekret@localhost/my_app?encoding=utf8&timezone=UTC&cacheMetadata=true',
 ]);
@@ -322,7 +322,7 @@ Role configurations override the values in the shared connection config. If the 
 and write role configurations are the same, a single connection to the database is used
 for both:
 
-``` php
+```php
 'default' => [
     'driver' => 'mysql',
     'username' => '...',
@@ -357,7 +357,7 @@ Once configured connections can be fetched using
 construct and load a connection if it has not been built before, or return the
 existing known connection:
 
-``` php
+```php
 use Cake\Datasource\ConnectionManager;
 
 $connection = ConnectionManager::get('default');
@@ -370,7 +370,7 @@ Attempting to load connections that do not exist will throw an exception.
 Using `setConfig()` and `get()` you can create new connections that are not
 defined in your configuration files at runtime:
 
-``` php
+```php
 ConnectionManager::setConfig('my_connection', $config);
 $connection = ConnectionManager::get('my_connection');
 ```
@@ -539,7 +539,7 @@ vice versa.
 Can be used to map datetime columns that contain microseconds such as
 `DATETIME(6)` in MySQL. To use this type you need to add it as a mapped type:
 
-``` php
+```php
 // in config/bootstrap.php
 use Cake\Database\TypeFactory;
 use Cake\Database\Type\DateTimeFractionalType;
@@ -553,7 +553,7 @@ TypeFactory::map('datetime', DateTimeFractionalType::class);
 Can be used to map datetime columns that contain time zones such as
 `TIMESTAMPTZ` in PostgreSQL. To use this type you need to add it as a mapped type:
 
-``` php
+```php
 // in config/bootstrap.php
 use Cake\Database\TypeFactory;
 use Cake\Database\Type\DateTimeTimezoneType;
@@ -569,7 +569,7 @@ TypeFactory::map('datetime', DateTimeTimezoneType::class);
 Maps a [BackedEnum](https://www.php.net/manual/en/language.enumerations.backed.php) to a string or integer column.
 To use this type you need to specify which column is associated to which BackedEnum inside the table class:
 
-``` php
+```php
 use App\Model\Enum\ArticleStatus;
 use Cake\Database\Type\EnumType;
 
@@ -584,7 +584,7 @@ public function initialize(array $config): void
 
 A simple `ArticleStatus` could look like:
 
-``` php
+```php
 namespace App\Model\Enum;
 
 enum ArticleStatus: string
@@ -597,7 +597,7 @@ enum ArticleStatus: string
 CakePHP also provides the `EnumLabelInterface` which can be implemented by
 Enums that want to provide a map of human-readable labels:
 
-``` php
+```php
 namespace App\Model\Enum;
 
 use Cake\Database\Type\EnumLabelInterface;
@@ -620,7 +620,7 @@ enum ArticleStatus: string implements EnumLabelInterface
 This can be useful if you want to use your enums in `FormHelper` select
 inputs. You can use [bake](../bake) to generate an enum class:
 
-``` bash
+```bash
 # generate an enum class with two cases and stored as an integer
 bin/cake bake enum UserStatus inactive:0,active:1 -i
 
@@ -659,7 +659,7 @@ Geospatial schema types were added.
 
 You can retrieve the mapped class name for a specific type using `getMapped()`:
 
-``` php
+```php
 use Cake\Database\TypeFactory;
 
 // Returns the class name mapped to the 'datetime' type
@@ -683,7 +683,7 @@ To fulfill the basic interface, extend `Cake\Database\Type`.
 For example if we wanted to add a PointMutation type, we could make the following type
 class:
 
-``` php
+```php
 // in src/Database/Type/PointMutationType.php
 
 namespace App\Database\Type;
@@ -749,7 +749,7 @@ work for our new type.
 Once we've created our new type, we need to add it into
 the type mapping. During our application bootstrap we should do the following:
 
-``` php
+```php
 use Cake\Database\TypeFactory;
 
 TypeFactory::map('point_mutation', \App\Database\Type\PointMutationType:class);
@@ -767,7 +767,7 @@ Table's [getSchema() method](../orm/saving-data#saving-complex-types) add the
 
 following:
 
-``` php
+```php
 class WidgetsTable extends Table
 {
     public function initialize(array $config): void
@@ -783,7 +783,7 @@ datatype has an unambiguous SQL column definition. For example, we could have
 our PointMutation type be used anytime a `TEXT` column with a specific comment is
 used:
 
-``` php
+```php
 // in src/Database/Type/PointMutationType.php
 
 namespace App\Database\Type;
@@ -857,7 +857,7 @@ build a simple Type class for handling `POINT` type data out of MySQL. First
 we'll define a 'value' object that we can use to represent `POINT` data in
 PHP:
 
-``` php
+```php
 // in src/Database/Point.php
 namespace App\Database;
 
@@ -897,7 +897,7 @@ class Point
 With our value object created, we'll need a Type class to map data into this
 value object and into SQL expressions:
 
-``` php
+```php
 namespace App\Database\Type;
 
 use App\Database\Point;
@@ -986,13 +986,13 @@ PDO. There are a few different ways you can run queries depending on the type of
 query you need to run and what kind of results you need back. The most basic
 method is `execute()` which allows you to run complet SQL queries:
 
-``` php
+```php
 $statement = $connection->execute('UPDATE articles SET published = 1 WHERE id = 2');
 ```
 
 For parameterized queries use the 2nd argument:
 
-``` php
+```php
 $statement = $connection->execute(
     'UPDATE articles SET published = ? WHERE id = ?',
     [1, 2],
@@ -1003,7 +1003,7 @@ Without any type hinting information, `execute` will assume all placeholders
 are string values. If you need to bind specific types of data, you can use their
 abstract type names when creating a query:
 
-``` php
+```php
 $statement = $connection->execute(
     'UPDATE articles SET published_date = ? WHERE id = ?',
     [new DateTime('now'), 2],
@@ -1021,7 +1021,7 @@ query builder, no SQL will be sent to the database server until the `execute()`
 method is called, or the query is iterated. Iterating a query will first execute
 it and then start iterating over the result set:
 
-``` php
+```php
 $query = $connection->selectQuery();
 $query->select('*')
     ->from('articles')
@@ -1040,7 +1040,7 @@ foreach ($query as $row) {
 
 This method provides you a builder for `UPDATE` queries:
 
-``` php
+```php
 $query = $connection->updateQuery('articles')
     ->set(['published' => true])
     ->where(['id' => 2]);
@@ -1051,7 +1051,7 @@ $statement = $query->execute();
 
 This method provides you a builder for `INSERT` queries:
 
-``` php
+```php
 $query = $connection->insertQuery();
 $query->into('articles')
     ->columns(['title'])
@@ -1063,7 +1063,7 @@ $statement = $query->execute();
 
 This method provides you a builder for `DELETE` queries:
 
-``` php
+```php
 $query = $connection->deleteQuery();
 $query->delete('articles')
     ->where(['id' => 2]);
@@ -1076,7 +1076,7 @@ The connection objects provide you a few simple ways you do database
 transactions. The most basic way of doing transactions is through the `begin()`,
 `commit()` and `rollback()` methods, which map to their SQL equivalents:
 
-``` php
+```php
 $connection->begin();
 $connection->execute('UPDATE articles SET published = ? WHERE id = ?', [true, 2]);
 $connection->execute('UPDATE articles SET published = ? WHERE id = ?', [false, 4]);
@@ -1089,7 +1089,7 @@ In addition to this interface connection instances also provide the
 `transactional()` method which makes handling the begin/commit/rollback calls
 much simpler:
 
-``` php
+```php
 $connection->transactional(function ($connection) {
     $connection->execute('UPDATE articles SET published = ? WHERE id = ?', [true, 2]);
     $connection->execute('UPDATE articles SET published = ? WHERE id = ?', [false, 4]);
@@ -1119,7 +1119,7 @@ from the driver. After creating and executing a query object, or using
 Once a query is executed using `execute()`, results can be fetched using
 `fetch()`, `fetchAll()`:
 
-``` php
+```php
 $statement->execute();
 
 // Read one row.
@@ -1133,7 +1133,7 @@ $rows = $statement->fetchAll('assoc');
 
 After executing a statement, you can fetch the number of affected rows:
 
-``` php
+```php
 $rowCount = $statement->rowCount();
 ```
 
@@ -1143,7 +1143,7 @@ If your query was not successful, you can get related error information
 using the `errorCode()` and `errorInfo()` methods. These methods work the
 same way as the ones provided by PDO:
 
-``` php
+```php
 $code = $statement->errorCode();
 $info = $statement->errorInfo();
 ```
@@ -1161,7 +1161,7 @@ You will need to have a logger configured to capture this level & scope. Logging
 to `stderr` can be useful when working on unit tests, and logging to
 files/syslog can be useful when working with web requests:
 
-``` php
+```php
 use Cake\Log\Log;
 
 // Console logging
@@ -1198,7 +1198,7 @@ If you are using a legacy schema that requires identifier quoting you can enable
 it using the `quoteIdentifiers` setting in your
 [Database Configuration](#database-configuration). You can also enable this feature at runtime:
 
-``` php
+```php
 $connection->getDriver()->enableAutoQuoting();
 ```
 
@@ -1219,7 +1219,7 @@ metadata is stored in the `_cake_model_` cache configuration. You can define
 a custom cache configuration using the `cacheMetatdata` option in your
 datasource configuration:
 
-``` php
+```php
 'Datasources' => [
     'default' => [
         // Other keys go here.
@@ -1233,7 +1233,7 @@ datasource configuration:
 You can also configure the metadata caching at runtime with the
 `cacheMetadata()` method:
 
-``` php
+```php
 // Disable the cache
 $connection->cacheMetadata(false);
 
@@ -1252,7 +1252,7 @@ CakePHP also includes a CLI tool for managing metadata caches. See the
 If you want to create a connection without selecting a database you can omit
 the database name:
 
-``` php
+```php
 $dsn = 'mysql://root:password@localhost/';
 ConnectionManager::setConfig('setup', ['url' => $dsn]);
 ```
@@ -1260,7 +1260,7 @@ ConnectionManager::setConfig('setup', ['url' => $dsn]);
 You can now use your connection object to execute queries that create/modify
 databases. For example to create a database:
 
-``` php
+```php
 $connection = ConnectionManager::get('setup');
 $connection->execute("CREATE DATABASE IF NOT EXISTS my_database");
 ```

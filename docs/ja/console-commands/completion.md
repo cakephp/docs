@@ -77,7 +77,7 @@ Completion シェルは、開発者が補完スクリプトの作成を支援す
 これは、CakePHP コンソールを使用しているときに自動補完を得るために正しい位置の
 **cake** ファイルの内側に配置する必要があるコードです。 :
 
-``` php
+```php
 #
 # Bash completion file for CakePHP console
 #
@@ -141,7 +141,7 @@ complete -F _cake cake bin/cake
 
 コマンドの自動補完のためのサンプル出力:
 
-``` bash
+```bash
 $ bin/cake <tab>
 bake        i18n        orm_cache   routes
 console     migrations  plugin      server
@@ -151,7 +151,7 @@ console     migrations  plugin      server
 
 サブコマンドの自動補完のためのサンプル出力:
 
-``` bash
+```bash
 $ bin/cake bake <tab>
 behavior            helper              shell
 cell                mailer              shell_helper
@@ -165,7 +165,7 @@ form                plugin
 
 サブコマンドのオプションの自動補完のためのサンプル出力:
 
-``` bash
+```bash
 $ bin/cake bake -<tab>
 -c            --everything  --force       --help        --plugin      -q            -t            -v
 --connection  -f            -h            -p            --prefix      --quiet       --theme       --verbose

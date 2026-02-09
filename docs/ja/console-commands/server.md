@@ -5,7 +5,7 @@
 すぐにアイデアを試してみたくて Apache や nginx を設定する時間を費やしたくない開発中に、
 手軽に行うことができます。以下のように、サーバーのシェルを起動することができます。 :
 
-``` bash
+```bash
 bin/cake server
 ```
 
@@ -20,6 +20,6 @@ bin/cake server
 
 オプションを使用してポートおよびドキュメントルートをカスタマイズすることができます。 :
 
-``` bash
+```bash
 bin/cake server --port 8080 --document_root path/to/app
 ```

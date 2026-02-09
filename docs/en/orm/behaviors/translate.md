@@ -29,7 +29,7 @@ The behavior offers two strategies for how the translations are stored.
 Let's assume we have an `articles` table and we want it's `title` and `body`
 fields to be translated. For that we create a shadow table `articles_translations`:
 
-``` sql
+```sql
 CREATE TABLE `articles_translations` (
     `id` int(11) NOT NULL,
     `locale` varchar(5) NOT NULL,
@@ -65,7 +65,7 @@ In order to use the Eav strategy, you need to create a `i18n` table with the
 correct schema. Currently the only way of loading the `i18n` table is by
 manually running the following SQL script in your database:
 
-``` sql
+```sql
 CREATE TABLE i18n (
     id int NOT NULL auto_increment,
     locale varchar(6) NOT NULL,
@@ -86,7 +86,7 @@ The schema is also available as sql file in **/config/schema/i18n.sql**.
 Attaching the behavior can be done in the `initialize()` method in your Table
 class:
 
-``` php
+```php
 class ArticlesTable extends Table
 {
     public function initialize(array $config): void
@@ -103,7 +103,7 @@ behavior can infer the fields from the shadow table columns.
 If you want to use the `EavStrategy` then you can configure the behavior
 as:
 
-``` php
+```php
 class ArticlesTable extends Table
 {
     public function initialize(array $config): void
@@ -124,7 +124,7 @@ By default, the locale specified in `App.defaultLocale` config is used as defaul
 locale for the `TranslateBehavior`. You can override that by setting `defaultLocale`
 config of the behavior:
 
-``` php
+```php
 class ArticlesTable extends Table
 {
     public function initialize(array $config): void
@@ -144,28 +144,28 @@ same API to manage translations.
 Now, select a language to be used for retrieving entities by changing
 the application language, which will affect all translations:
 
-``` php
+```php
 // In the Articles controller. Change the locale to Spanish, for example
 I18n::setLocale('es');
 ```
 
 Then, get an existing entity:
 
-``` php
+```php
 $article = $this->Articles->get(12);
 echo $article->title; // Echoes 'A title', not translated yet
 ```
 
 Next, translate your entity:
 
-``` php
+```php
 $article->title = 'Un Artículo';
 $this->Articles->save($article);
 ```
 
 You can try now getting your entity again:
 
-``` php
+```php
 $article = $this->Articles->get(12);
 echo $article->title; // Echoes 'Un Artículo', yay piece of cake!
 ```
@@ -173,7 +173,7 @@ echo $article->title; // Echoes 'Un Artículo', yay piece of cake!
 Working with multiple translations can be done by using a special trait
 in your Entity class:
 
-``` php
+```php
 use Cake\ORM\Behavior\Translate\TranslateTrait;
 use Cake\ORM\Entity;
 
@@ -185,7 +185,7 @@ class Article extends Entity
 
 Now you can find all translations for a single entity:
 
-``` php
+```php
 $article = $this->Articles->find('translations')->first();
 echo $article->translation('es')->title; // 'Un Artículo'
 
@@ -194,7 +194,7 @@ echo $article->translation('en')->title; // 'An Article';
 
 And save multiple translations at once:
 
-``` php
+```php
 $article->translation('es')->title = 'Otro Título';
 $article->translation('fr')->title = 'Un autre Titre';
 $this->Articles->save($article);
@@ -211,7 +211,7 @@ table in the behavior's configuration. This is common when you have multiple
 tables to translate and you want a cleaner separation of the data that is stored
 for each different table:
 
-``` php
+```php
 class ArticlesTable extends Table
 {
     public function initialize(array $config): void
@@ -232,7 +232,7 @@ You need to make sure that any custom table you use has the columns `field`,
 As shown above you can use the `setLocale()` method to choose the active
 translation for entities that are loaded:
 
-``` php
+```php
 // Load I18n core functions at the beginning of your Articles Controller:
 use Cake\I18n\I18n;
 
@@ -246,7 +246,7 @@ $results = $this->Articles->find()->all();
 This method works with any finder in your tables. For example, you can
 use TranslateBehavior with `find('list')`:
 
-``` php
+```php
 I18n::setLocale('es');
 $data = $this->Articles->find('list')->toArray();
 
@@ -263,7 +263,7 @@ When building interfaces for updating translated content, it is often helpful to
 show one or more translation(s) at the same time. You can use the
 `translations` finder for this:
 
-``` php
+```php
 // Find the first article with all corresponding translations
 $article = $this->Articles->find('translations')->first();
 ```
@@ -272,7 +272,7 @@ In the example above you will get a list of entities back that have a
 `_translations` property set. This property will contain a list of translation
 data entities. For example the following properties would be accessible:
 
-``` php
+```php
 // Outputs 'en'
 echo $article->_translations['en']->locale;
 
@@ -286,7 +286,7 @@ echo $article->_translations['en']->body;
 A more elegant way for dealing with this data is by adding a trait to the entity
 class that is used for your table:
 
-``` php
+```php
 use Cake\ORM\Behavior\Translate\TranslateTrait;
 use Cake\ORM\Entity;
 
@@ -299,7 +299,7 @@ class Article extends Entity
 This trait contains a single method called `translation`, which lets you
 access or create new translation entities on the fly:
 
-``` php
+```php
 // Outputs 'title'
 echo $article->translation('en')->title;
 
@@ -312,7 +312,7 @@ $article->translation('de')->title = 'Wunderbar';
 You can limit the languages that are fetched from the database for a particular
 set of records:
 
-``` php
+```php
 $results = $this->Articles->find('translations', locales: ['en', 'es']);
 $article = $results->first();
 $spanishTranslation = $article->translation('es');
@@ -328,7 +328,7 @@ this to overwrite the original field value.
 If this is undesired, you can ignore translations which are empty using the
 `allowEmptyTranslations` config key:
 
-``` php
+```php
 class ArticlesTable extends Table
 {
     public function initialize(array $config): void
@@ -348,7 +348,7 @@ The above would only load translated data that had content.
 It is also possible to find translations for any association in a single find
 operation:
 
-``` php
+```php
 $article = $this->Articles->find('translations')->contain([
     'Categories' => function ($query) {
         return $query->find('translations');
@@ -384,7 +384,7 @@ Note that this only changes the locale of the Articles table, it would not
 affect the language of associated data. To affect associated data it's necessary
 to call the method on each table, for example:
 
-``` php
+```php
 I18n::setLocale('en'); // reset for illustration
 
 $this->Articles->getBehavior('Translate')->setLocale('es');
@@ -401,7 +401,7 @@ to it.
 TranslateBehavior does not substitute find conditions by default. You need to use
 `translationField()` method to compose find conditions on translated fields:
 
-``` php
+```php
 $this->Articles->getBehavior('Translate')->setLocale('es');
 $query = $this->Articles->find()->where([
     $this->Articles->getBehavior('Translate')->translationField('title') => 'Otro Título',
@@ -415,7 +415,7 @@ representing the default language, and multiple translations that can override
 certain fields in such entity. Keeping this in mind, you can intuitively save
 translations for any given entity. For example, given the following setup:
 
-``` php
+```php
 // in src/Model/Table/ArticlesTable.php
 class ArticlesTable extends Table
 {
@@ -445,7 +445,7 @@ So, after you save your first article, you can now save a translation for it,
 there are a couple ways to do it. The first one is setting the language directly
 into the entity:
 
-``` php
+```php
 $article->_locale = 'es';
 $article->title = 'Mi primer Artículo';
 
@@ -456,7 +456,7 @@ After the entity has been saved, the translated field will be persisted as well,
 one thing to note is that values from the default language that were not
 overridden will be preserved:
 
-``` php
+```php
 // Outputs 'This is the content'
 echo $article->body;
 
@@ -467,7 +467,7 @@ echo $article->title;
 Once you override the value, the translation for that field will be saved and
 can be retrieved as usual:
 
-``` php
+```php
 $article->body = 'El contendio';
 $this->Articles->save($article);
 ```
@@ -475,7 +475,7 @@ $this->Articles->save($article);
 The second way to use for saving entities in another language is to set the
 default language directly to the table:
 
-``` php
+```php
 $article->title = 'Mi Primer Artículo';
 
 $this->Articles->getBehavior('Translate')->setLocale('es');
@@ -492,7 +492,7 @@ It is a common requirement to be able to add or edit multiple translations to
 any database record at the same time. This can be done using the
 `TranslateTrait`:
 
-``` php
+```php
 use Cake\ORM\Behavior\Translate\TranslateTrait;
 use Cake\ORM\Entity;
 
@@ -504,7 +504,7 @@ class Article extends Entity
 
 Now, You can populate translations before saving them:
 
-``` php
+```php
 $translations = [
     'fr' => ['title' => "Un article"],
     'es' => ['title' => 'Un artículo'],
@@ -519,7 +519,7 @@ $this->Articles->save($article);
 
 And create form controls for your translated fields:
 
-``` php
+```php
 // In a view template.
 <?= $this->Form->create($article); ?>
 <fieldset>
@@ -536,7 +536,7 @@ And create form controls for your translated fields:
 
 In your controller, you can marshal the data as normal:
 
-``` php
+```php
 $article = $this->Articles->newEntity($this->request->getData());
 $this->Articles->save($article);
 ```
@@ -551,7 +551,7 @@ When attaching `TranslateBehavior` to a model, you can define the validator
 that should be used when translation records are created/modified by the
 behavior during `newEntity()` or `patchEntity()`:
 
-``` php
+```php
 class ArticlesTable extends Table
 {
     public function initialize(array $config): void

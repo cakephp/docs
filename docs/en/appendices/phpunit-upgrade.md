@@ -34,7 +34,7 @@ With this command out of the way your `phpunit.xml` already has most of the reco
 PHPUnit 10 removed the old hook system and introduced a new [Event system](https://docs.phpunit.de/en/10.5/extending-phpunit.html#extending-the-test-runner)
 which requires the following code in your `phpunit.xml` to be adjusted from:
 
-``` xml
+```xml
 <extensions>
   <extension class="Cake\TestSuite\Fixture\PHPUnitExtension"/>
 </extensions>
@@ -42,7 +42,7 @@ which requires the following code in your `phpunit.xml` to be adjusted from:
 
 to:
 
-``` xml
+```xml
 <extensions>
   <bootstrap class="Cake\TestSuite\Fixture\Extension\PHPUnitExtension"/>
 </extensions>
@@ -55,13 +55,13 @@ to:
 You can convert the removed `->withConsecutive()` method to a
 working interim solution like you can see here:
 
-``` php
+```php
 ->withConsecutive(['firstCallArg'], ['secondCallArg'])
 ```
 
 should be converted to:
 
-``` php
+```php
 ->with(
     ...self::withConsecutive(['firstCallArg'], ['secondCallArg']),
 )
@@ -75,13 +75,13 @@ to the base `Cake\TestSuite\TestCase` class so you don't have to manually add th
 If your test cases leverage the data provider feature of PHPUnit then
 you have to adjust your data providers to be static:
 
-``` php
+```php
 public function myProvider(): array
 ```
 
 should be converted to:
 
-``` php
+```php
 public static function myProvider(): array
 ```
 
@@ -93,7 +93,7 @@ PHPUnit 11 requires PHP 8.2 or later.
 
 PHPUnit 11 deprecates annotations in docblocks. You should migrate to PHP 8 attributes:
 
-``` php
+```php
 // Before (deprecated)
 /**
  * @dataProvider myProvider
@@ -125,7 +125,7 @@ Methods for creating mock objects for abstract classes and traits are hard-depre
 
 Configuring expectations on an object created with `createStub()` triggers a deprecation warning:
 
-``` php
+```php
 // Avoid - will warn in PHPUnit 11
 $stub = $this->createStub(SomeClass::class);
 $stub->expects($this->once())->method('foo');
@@ -159,7 +159,7 @@ Configuring expectations on objects created with `createStub()` no longer works.
 
 [Rector](https://getrector.com/) can automate many of these changes:
 
-``` bash
+```bash
 composer require --dev rector/rector rector/rector-phpunit
 
 # Create rector.php config

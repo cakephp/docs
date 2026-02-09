@@ -33,7 +33,7 @@ CSRF protection can be applied to your entire application, or to specific
 routing scopes. By applying a CSRF middleware to your Application middleware
 stack you protect all the actions in application:
 
-``` php
+```php
 // in src/Application.php
 // For Cookie based CSRF tokens.
 use Cake\Http\Middleware\CsrfProtectionMiddleware;
@@ -59,7 +59,7 @@ public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue
 By applying CSRF protection to routing scopes, you can conditionally
 apply CSRF to specific groups of routes:
 
-``` php
+```php
 // in src/Application.php
 use Cake\Http\Middleware\CsrfProtectionMiddleware;
 use Cake\Routing\RouteBuilder;
@@ -106,13 +106,13 @@ The available configuration options are:
 
 When enabled, you can access the current CSRF token on the request object:
 
-``` php
+```php
 $token = $this->request->getAttribute('csrfToken');
 ```
 
 Should you need to rotate or replace the session CSRF token you can do so with:
 
-``` php
+```php
 $this->request = SessionCsrfProtectionMiddleware::replaceToken($this->request);
 ```
 
@@ -126,7 +126,7 @@ Both CSRF middleware implementations allow you to the skip check callback
 feature for more fine grained control over URLs for which CSRF token check
 should be done:
 
-``` php
+```php
 // in src/Application.php
 use Cake\Http\Middleware\CsrfProtectionMiddleware;
 
@@ -183,7 +183,7 @@ If you have separate JavaScript files but don't want to deal with handling cooki
 you could for example set the token in a global JavaScript variable in your layout, by
 defining a script block like this:
 
-``` php
+```php
 echo $this->Html->scriptBlock(sprintf(
     'var csrfToken = %s;',
     json_encode($this->request->getAttribute('csrfToken')),
@@ -195,13 +195,13 @@ file that is loaded after this script block.
 
 Another alternative would be to put the token in a custom meta tag like this:
 
-``` php
+```php
 echo $this->Html->meta('csrfToken', $this->request->getAttribute('csrfToken'));
 ```
 
 which could then be accessed in your scripts by looking for the `meta` element with
 the name `csrfToken`, which could be as simple as this when using jQuery:
 
-``` javascript
+```javascript
 var csrfToken = $('meta[name="csrfToken"]').attr('content');
 ```

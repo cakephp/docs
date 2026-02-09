@@ -15,7 +15,7 @@ remote APIs.
 
 Doing requests is simple and straight forward. Doing a GET request looks like:
 
-``` php
+```php
 use Cake\Http\Client;
 
 $http = new Client();
@@ -34,7 +34,7 @@ $response = $http->get('https://example.com/search', ['q' => 'widget'], [
 
 Doing POST and PUT requests is equally simple:
 
-``` php
+```php
 // Send a POST request with application/x-www-form-urlencoded encoded data
 $http = new Client();
 $response = $http->post('https://example.com/posts/add', [
@@ -57,7 +57,7 @@ $http->patch(/* ... */);
 If you have created a PSR-7 request object you can send it using
 `sendRequest()`:
 
-``` php
+```php
 use Cake\Http\Client;
 use Cake\Http\Client\Request as ClientRequest;
 
@@ -73,7 +73,7 @@ $response = $http->sendRequest($request);
 
 You can include files in request bodies by including a filehandle in the array:
 
-``` php
+```php
 $http = new Client();
 $response = $http->post('https://example.com/api', [
     'image' => fopen('/path/to/a/file', 'r'),
@@ -88,7 +88,7 @@ There may be times when you need to build a request body in a very specific way.
 In these situations you can often use `Cake\Http\Client\FormData` to craft
 the specific multipart HTTP request you want:
 
-``` php
+```php
 use Cake\Http\Client\FormData;
 
 $data = new FormData();
@@ -118,7 +118,7 @@ $response = $http->post(
 When dealing with REST APIs you often need to send request bodies that are not
 form encoded. Http\Client exposes this through the type option:
 
-``` php
+```php
 // Send a JSON request body.
 $http = new Client();
 $response = $http->post(
@@ -133,7 +133,7 @@ When using the `type` option, you should provide the data as a string. If you're
 doing a GET request that needs both querystring parameters and a request body
 you can do the following:
 
-``` php
+```php
 // Send a JSON body in a GET request with query string parameters.
 $http = new Client();
 $response = $http->get(
@@ -185,7 +185,7 @@ context.
 
 An example of basic authentication:
 
-``` php
+```php
 $http = new Client();
 $response = $http->get('https://example.com/profile/1', [], [
     'auth' => ['username' => 'mark', 'password' => 'secret'],
@@ -199,7 +199,7 @@ By default, `Cake\Http\Client` will use basic authentication if there is no
 
 An example of basic authentication:
 
-``` php
+```php
 $http = new Client();
 $response = $http->get('https://example.com/profile/1', [], [
     'auth' => [
@@ -233,7 +233,7 @@ Many modern web-services require OAuth authentication to access their APIs.
 The included OAuth authentication assumes that you already have your consumer
 key and consumer secret:
 
-``` php
+```php
 $http = new Client();
 $response = $http->get('https://example.com/profile/1', [], [
     'auth' => [
@@ -252,7 +252,7 @@ $response = $http->get('https://example.com/profile/1', [], [
 Because OAuth2 is often a single header, there is not a specialized
 authentication adapter. Instead you can create a client with the access token:
 
-``` php
+```php
 $http = new Client([
     'headers' => ['Authorization' => 'Bearer ' . $accessToken],
 ]);
@@ -265,7 +265,7 @@ Some proxies require authentication to use them. Generally this authentication
 is Basic, but it can be implemented by any authentication adapter. By default
 Http\Client will assume Basic authentication, unless the type key is set:
 
-``` php
+```php
 $http = new Client();
 $response = $http->get('https://example.com/test.php', [], [
     'proxy' => [
@@ -289,7 +289,7 @@ Having to re-type the domain name, authentication and proxy settings can become
 tedious & error prone. To reduce the chance for mistake and relieve some of the
 tedium, you can create scoped clients:
 
-``` php
+```php
 // Create a scoped client.
 $http = new Client([
     'host' => 'api.example.com',
@@ -304,7 +304,7 @@ $response = $http->get('/test.php');
 If your scoped client only needs information from the URL you can use
 `createFromUrl()`:
 
-``` php
+```php
 $http = Client::createFromUrl('https://api.example.com/v1/test');
 ```
 
@@ -328,7 +328,7 @@ The following information can be used when creating a scoped client:
 Any of these options can be overridden by specifying them when doing requests.
 host, scheme, proxy, port are overridden in the request URL:
 
-``` php
+```php
 // Using the scoped client we created earlier.
 $response = $http->get('http://foo.com/test.php');
 ```
@@ -347,7 +347,7 @@ instance of Http\Client. The cookies stored in a Client instance are
 automatically included in future requests to domain + path combinations that
 match:
 
-``` php
+```php
 $http = new Client([
     'host' => 'cakephp.org',
 ]);
@@ -363,7 +363,7 @@ $response2 = $http->get('/changelogs');
 You can always override the auto-included cookies by setting them in the
 request's `$options` parameters:
 
-``` php
+```php
 // Replace a stored cookie with a custom value.
 $response = $http->get('/changelogs', [], [
     'cookies' => ['sessionid' => '123abc'],
@@ -373,7 +373,7 @@ $response = $http->get('/changelogs', [], [
 You can add cookie objects to the client after creating it using the `addCookie()`
 method:
 
-``` php
+```php
 use Cake\Http\Cookie\Cookie;
 
 $http = new Client([
@@ -403,14 +403,14 @@ Response objects have a number of methods for inspecting the response data.
 
 You read the entire response body as a string:
 
-``` php
+```php
 // Read the entire response as a string.
 $response->getStringBody();
 ```
 
 You can also access the stream object for the response and use its methods:
 
-``` php
+```php
 // Get a Psr\Http\Message\StreamInterface containing the response body
 $stream = $response->getBody();
 
@@ -428,7 +428,7 @@ Since JSON and XML responses are commonly used, response objects provide a way
 to use accessors to read decoded data. JSON data is decoded into an array, while
 XML data is decoded into a `SimpleXMLElement` tree:
 
-``` php
+```php
 // Get some XML
 $http = new Client();
 $response = $http->get('https://example.com/test.xml');
@@ -448,7 +448,7 @@ multiple times has no additional cost.
 You can access headers through a few different methods. Header names are always
 treated as case-insensitive values when accessing them through methods:
 
-``` php
+```php
 // Get all the headers as an associative array.
 $response->getHeaders();
 
@@ -467,7 +467,7 @@ $response->getEncoding();
 You can read cookies with a few different methods depending on how much
 data you need about the cookies:
 
-``` php
+```php
 // Get all cookies (full data)
 $response->getCookies();
 
@@ -483,7 +483,7 @@ $response->getCookieData('session_id');
 
 Response objects provide a few methods for checking status codes:
 
-``` php
+```php
 // Was the response a 20x
 $response->isOk();
 
@@ -500,7 +500,7 @@ By default, `Http\Client` will prefer using a `curl` based transport adapter.
 If the curl extension is not available a stream based adapter will be used
 instead. You can force select a transport adapter using a constructor option:
 
-``` php
+```php
 use Cake\Http\Client\Adapter\Stream;
 
 $http = new Client(['adapter' => Stream::class]);
@@ -514,7 +514,7 @@ caching, logging etc.
 
 ### HttpClient.beforeSend
 
-``` php
+```php
 // Somewhere before calling one of the HTTP client's methods which makes a request
 $http->getEventManager()->on(
     'HttpClient.beforeSend',
@@ -538,7 +538,7 @@ $http->getEventManager()->on(
 
 ### HttpClient.afterSend
 
-``` php
+```php
 // Somewhere before calling one of the HTTP client's methods which makes a request
 $http->getEventManager()->on(
     'HttpClient.afterSend',
@@ -568,7 +568,7 @@ In tests you will often want to create mock responses to external APIs. You can
 use the `HttpClientTrait` to define responses to the requests your application
 is making:
 
-``` php
+```php
 use Cake\Http\TestSuite\HttpClientTrait;
 use Cake\TestSuite\TestCase;
 
@@ -591,7 +591,7 @@ class CartControllerTests extends TestCase
 
 There are methods to mock the most commonly used HTTP methods:
 
-``` php
+```php
 $this->mockClientGet(/* ... */);
 $this->mockClientPatch(/* ... */);
 $this->mockClientPost(/* ... */);
@@ -607,7 +607,7 @@ As seen above you can use the `newClientResponse()` method to create responses
 for the requests your application will make. The headers need to be a list of
 strings:
 
-``` php
+```php
 $headers = [
     'Content-Type: application/json',
     'Connection: close',

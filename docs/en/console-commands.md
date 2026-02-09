@@ -23,7 +23,7 @@ bash the CakePHP console is compatible with any *nix shell and windows.
 A CakePHP application contains **src/Command** directory that contain its commands.
 It also comes with an executable in the **bin** directory:
 
-``` bash
+```bash
 cd /path/to/app
 bin/cake
 ```
@@ -34,7 +34,7 @@ bin/cake
 Running the Console with no arguments will list out available commands. You
 could then run the any of the listed commands by using its name:
 
-``` bash
+```bash
 # run server command
 bin/cake server
 
@@ -59,7 +59,7 @@ commands, when building standalone console applications. You can use your
 `Application`'s `console()` hook to limit which commands are exposed and
 rename commands that are exposed:
 
-``` php
+```php
 // in src/Application.php
 namespace App;
 
@@ -99,7 +99,7 @@ do this, you can register your commands to create any desired naming.
 
 You can customize the command names by defining each command in your plugin:
 
-``` php
+```php
 public function console(CommandCollection $commands): CommandCollection
 {
     // Add commands with nested naming
@@ -158,7 +158,7 @@ bootstrap or config, for example.
 For sending emails, you should provide Email class with the host you want to
 send the email with:
 
-``` php
+```php
 use Cake\Mailer\Email;
 
 $email = new Email();

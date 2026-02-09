@@ -22,7 +22,7 @@ maps to an element located under the **templates/element/flash** directory.
 By convention, camelcased methods will map to the lowercased and underscored
 element name:
 
-``` php
+```php
 // Uses templates/element/flash/success.php
 $this->Flash->success('This was successful');
 
@@ -33,7 +33,7 @@ $this->Flash->greatSuccess('This was greatly successful');
 Alternatively, to set a plain-text message without rendering an element, you can
 use the `set()` method:
 
-``` php
+```php
 $this->Flash->set('This is a message');
 ```
 
@@ -56,7 +56,7 @@ parameter, an array of options:
 
 An example of using these options:
 
-``` php
+```php
 // In your Controller
 $this->Flash->success('The user has been saved', [
     'key' => 'positive',
@@ -80,7 +80,7 @@ Note that the parameter `element` will be always overridden while using
 `__call()`. In order to retrieve a specific element from a plugin, you should
 set the `plugin` parameter. For example:
 
-``` php
+```php
 // In your Controller
 $this->Flash->warning('My message', ['plugin' => 'PluginName']);
 ```
@@ -101,7 +101,7 @@ message.
 It is possible to output HTML in flash messages by using the `'escape'` option
 key:
 
-``` php
+```php
 $this->Flash->info(sprintf('<b>%s</b> %s', h($highlight), h($message)), ['escape' => false]);
 ```
 

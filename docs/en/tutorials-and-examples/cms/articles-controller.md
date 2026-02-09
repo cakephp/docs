@@ -11,7 +11,7 @@ methods, to prepare the response. We'll place this new controller in a file
 called **ArticlesController.php** inside the **src/Controller** directory.
 Here's what the basic controller should look like:
 
-``` php {3}
+```php {3}
 <?php
 // src/Controller/ArticlesController.php
 declare(strict_types=1);
@@ -31,7 +31,7 @@ have routes connected to them. For example, when a user requests
 a response by rendering a Template in the View. The code for that action would
 look like this:
 
-``` php {3,9}
+```php {3,9}
 <?php
 // src/Controller/ArticlesController.php
 declare(strict_types=1);
@@ -83,7 +83,7 @@ named after the controller they correspond to. So we'll have to create
 a folder named 'Articles' in this case. Add the following code to your
 application:
 
-``` php
+```php
 <!-- File: templates/Articles/index.php -->
 
 <h1>Articles</h1>
@@ -133,7 +133,7 @@ correctly formatted with the title and table listing of the articles.
 If you were to click one of the 'view' links in our Articles list page, you'd
 see an error page saying that action hasn't been implemented. Lets fix that now:
 
-``` php {3}
+```php {3}
 // Add to existing src/Controller/ArticlesController.php file
 
 public function view(?string $slug): void
@@ -160,7 +160,7 @@ page telling us we're missing a view template; let's fix that.
 Let's create the view for our new 'view' action and place it in
 **templates/Articles/view.php**
 
-``` php {3-4}
+```php {3-4}
 <!-- File: templates/Articles/view.php -->
 
 <h1><?= h($article->title) ?></h1>
@@ -183,7 +183,7 @@ With the basic read views created, we need to make it possible for new articles
 to be created. Start by creating an `add()` action in the
 `ArticlesController`. Our controller should now look like:
 
-``` php {3,11,17,23}
+```php {3,11,17,23}
 <?php
 // src/Controller/ArticlesController.php
 declare(strict_types=1);
@@ -268,7 +268,7 @@ for various CakePHP functions.
 
 Here's our add view template:
 
-``` php
+```php
 <!-- File: templates/Articles/add.php -->
 
 <h1>Add Article</h1>
@@ -286,7 +286,7 @@ Here's our add view template:
 We use the FormHelper to generate the opening tag for an HTML
 form. Here's the HTML that `$this->Form->create()` generates:
 
-``` html
+```html
 <form method="post" action="/articles/add">
 ```
 
@@ -307,7 +307,7 @@ Now let's go back and update our **templates/Articles/index.php**
 view to include a new "Add Article" link. Before the `<table>`, add
 the following line:
 
-``` php
+```php
 <?= $this->Html->link('Add Article', ['action' => 'add']) ?>
 ```
 
@@ -318,7 +318,7 @@ creating a slug attribute, and the column is `NOT NULL`. Slug values are
 typically a URL-safe version of an article's title. We can use the
 [beforeSave() callback](../../orm/table-objects#table-callbacks) of the ORM to populate our slug:
 
-``` php {3,7-9,13}
+```php {3,7-9,13}
 <?php
 // in src/Model/Table/ArticlesTable.php
 declare(strict_types=1);
@@ -349,7 +349,7 @@ fix that later on.
 Our application can now save articles, but we can't edit them. Lets rectify that
 now. Add the following action to your `ArticlesController`:
 
-``` php {3}
+```php {3}
 // in src/Controller/ArticlesController.php
 
 public function edit(?string $slug): void
@@ -386,7 +386,7 @@ message, and either redirect or display validation errors.
 
 The edit template should look like this:
 
-``` php
+```php
 <!-- File: templates/Articles/edit.php -->
 
 <h1>Edit Article</h1>
@@ -406,7 +406,7 @@ with any necessary validation error messages.
 You can now update your index view with links to edit specific
 articles:
 
-``` php
+```php
 <!-- File: templates/Articles/index.php  (edit links added) -->
 
 <h1>Articles</h1>
@@ -442,7 +442,7 @@ articles:
 Up until this point our Articles had no input validation done. Lets fix that by
 using [a validator](../../orm/validation#validating-request-data):
 
-``` php {5,8}
+```php {5,8}
 // src/Model/Table/ArticlesTable.php
 
 // add this use statement right below the namespace declaration
@@ -484,7 +484,7 @@ automatically.
 Next, let's make a way for users to delete articles. Start with a
 `delete()` action in the `ArticlesController`:
 
-``` php {3}
+```php {3}
 // src/Controller/ArticlesController.php
 
 public function delete(?string $slug): void
@@ -519,7 +519,7 @@ Because we're only executing logic and redirecting to another action, this
 action has no template. You might want to update your index template with links
 that allow users to delete articles:
 
-``` php
+```php
 <!-- File: templates/Articles/index.php  (delete links added) -->
 
 <h1>Articles</h1>
@@ -568,7 +568,7 @@ article.
 ::: tip Use Bake to Generate Controllers
 The `ArticlesController` can also be built with `bake`:
 
-``` bash
+```bash
 bin/cake bake controller articles
 ```
 

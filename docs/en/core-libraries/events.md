@@ -52,7 +52,7 @@ For example, in your Cart plugin you have an Orders model that deals with
 creating orders. You'd like to notify the rest of the application that an order
 has been created. To keep your Orders model clean you could use events:
 
-``` php
+```php
 // Cart/Model/Table/OrdersTable.php
 namespace Cart\Model\Table;
 
@@ -88,7 +88,7 @@ objects that focus on those concerns.
 In CakePHP events are triggered against event managers. Event managers are
 available in every Table, View and Controller using `getEventManager()`:
 
-``` php
+```php
 $events = $this->getEventManager();
 ```
 
@@ -106,7 +106,7 @@ difficult. The global manager is a singleton instance of
 dispatcher will be fired before instance listeners at the same priority. You can
 access the global manager using a static method:
 
-``` php
+```php
 // In any configuration file or piece of code that executes before the event
 use Cake\Event\EventManager;
 
@@ -135,13 +135,13 @@ To keep a list of events that are fired on a particular `EventManager`, you
 can enable event tracking. To do so, simply attach an
 `Cake\Event\EventList` to the manager:
 
-``` php
+```php
 EventManager::instance()->setEventList(new EventList());
 ```
 
 After firing an event on the manager, you can retrieve it from the event list:
 
-``` php
+```php
 $eventsFired = EventManager::instance()->getEventList();
 $firstEvent = $eventsFired[0];
 ```
@@ -167,7 +167,7 @@ response has been sent, such as logging or sending emails.
 
 You can listen to this event using an event manager instance:
 
-``` php
+```php
 use Cake\Event\EventInterface;
 use Cake\Event\EventManager;
 
@@ -179,7 +179,7 @@ EventManager::instance()->on('Server.terminate', function (EventInterface $event
 
 Or using the `events` hook in your Application/Plugin class:
 
-``` php
+```php
 use Cake\Event\EventInterface;
 use Cake\Event\EventManagerInterface;
 
@@ -213,7 +213,7 @@ and the `afterExecute` event also contains the `exitCode` which is returned by t
 
 You can listen to this event using an event manager instance:
 
-``` php
+```php
 use Cake\Event\EventInterface;
 use Cake\Event\EventManager;
 
@@ -230,7 +230,7 @@ EventManager::instance()->on('Command.afterExecute', function (EventInterface $e
 
 Or using the `events` hook in your Application/Plugin class:
 
-``` php
+```php
 use Cake\Event\EventInterface;
 use Cake\Event\EventManagerInterface;
 
@@ -266,7 +266,7 @@ global site statistics. This is a great place to use a listener class. Doing so
 allows you to concentrate the statistics logic in one place and react to events
 as necessary. Our `UserStatistics` listener might start out like:
 
-``` php
+```php
 namespace App\Event;
 
 use Cake\Event\EventInterface;
@@ -304,7 +304,7 @@ The `events` hook was added to the `BaseApplication` as well as the `BasePlugin`
 
 As of CakePHP 5.1 it is recommended to register event listeners by adding them via the `events` hook in your application or plugin class:
 
-``` php
+```php
 namespace App;
 
 use App\Event\UserStatistic;
@@ -332,7 +332,7 @@ you can also bind any `callable` as an event listener. For example if we
 wanted to put any orders into the log files, we could use a simple anonymous
 function to do so:
 
-``` php
+```php
 use Cake\Event\EventInterface;
 use Cake\Log\Log;
 
@@ -348,7 +348,7 @@ $this->Orders->getEventManager()->on('Order.afterPlace', function (EventInterfac
 In addition to anonymous functions you can use any other callable type that PHP
 supports:
 
-``` php
+```php
 $events = [
     'email-sending' => 'EmailSender::sendBuyEmail',
     'inventory' => [$this->InventoryManager, 'decrement'],
@@ -365,7 +365,7 @@ like to know when a Feedback record has been saved and ultimately act on it. You
 can listen to the global `Model.afterSave` event. However, you can take
 a more direct approach and only listen to the event you really need:
 
-``` php
+```php
 // You can create the following before the
 // save operation, i.e. config/bootstrap.php
 use Cake\Datasource\FactoryLocator;
@@ -393,7 +393,7 @@ You can use this same approach to bind listener objects.
 Assuming several event listeners have been registered the presence or absence
 of a particular event pattern can be used as the basis of some action.
 
-``` php
+```php
 // Attach listeners to EventManager.
 $this->getEventManager()->on('User.Registration', [$this, 'userRegistration']);
 $this->getEventManager()->on('User.Verification', [$this, 'userVerification']);
@@ -436,7 +436,7 @@ with a the order they were attached. You set priorities using the `on()`
 method for callbacks, and declaring it in the `implementedEvents()` function
 for event listeners:
 
-``` php
+```php
 // Setting priority for a callback
 $callback = [$this, 'doSomething'];
 $this->getEventManager()->on(
@@ -471,7 +471,7 @@ When events have data provided in their constructor, the provided data is
 converted into arguments for the listeners. An example from the View layer is
 the afterRender callback:
 
-``` php
+```php
 $this->getEventManager()
     ->dispatch(new Event('View.afterRender', $this, ['view' => $viewFileName]));
 ```
@@ -479,7 +479,7 @@ $this->getEventManager()
 The listeners of the `View.afterRender` callback should have the following
 signature:
 
-``` php
+```php
 function (EventInterface $event, string $fileName)
 ```
 
@@ -499,7 +499,7 @@ using `Cake\Event\EventManager::dispatch()`. This method takes an
 instance of the `Cake\Event\Event` class. Let's look at dispatching
 an event:
 
-``` php
+```php
 // An event listener has to be instantiated before dispatching an event.
 // Create a new event and dispatch it.
 $event = new Event('Order.afterPlace', $this, [
@@ -540,7 +540,7 @@ the code detects it cannot proceed any further.
 In order to stop events you can either return `false` in your callbacks or
 call the `stopPropagation()` method on the event object:
 
-``` php
+```php
 public function doSomething(EventInterface $event): bool
 {
     // ...
@@ -563,7 +563,7 @@ operation from occurring.
 To check if an event was stopped, you call the `isStopped()` method in the
 event object:
 
-``` php
+```php
 public function place(Order $order): bool
 {
     $event = new Event('Order.beforePlace', $this, ['order' => $order]);
@@ -591,7 +591,7 @@ example and let callbacks modify the `$order` data.
 Event results can be altered either using the event object result property
 directly or returning the value in the callback itself:
 
-``` php
+```php
 // A listener callback
 public function doSomething(EventInterface $event): mixed
 {
@@ -634,7 +634,7 @@ If for any reason you want to remove any callback from the event manager just
 call the `Cake\Event\EventManager::off()` method using as
 arguments the first two parameters you used for attaching it:
 
-``` php
+```php
 // Attaching a function
 $this->getEventManager()->on('My.event', [$this, 'doSomething']);
 

@@ -32,7 +32,7 @@ You configure helpers in CakePHP by declaring them in a view class. An `AppView`
 class comes with every CakePHP application and is the ideal place to add
 helpers for global use:
 
-``` php
+```php
 class AppView extends View
 {
     public function initialize(): void
@@ -48,14 +48,14 @@ class AppView extends View
 To add helpers from plugins use the `plugin syntax` used elsewhere in
 CakePHP:
 
-``` php
+```php
 $this->addHelper('Blog.Comment');
 ```
 
 You don't have to explicitly add Helpers that come from CakePHP or your
 application. These helpers can be lazily loaded upon first use. For example:
 
-``` php
+```php
 // Loads the FormHelper if it has not already been explicitly added/loaded.
 $this->Form->create($article);
 ```
@@ -68,7 +68,7 @@ same plugin.
 
 You can use the current action name to conditionally add helpers:
 
-``` php
+```php
 class AppView extends View
 {
     public function initialize(): void
@@ -83,7 +83,7 @@ class AppView extends View
 
 You can also use your controller's `beforeRender` method to add helpers:
 
-``` php
+```php
 class ArticlesController extends AppController
 {
     public function beforeRender(EventInterface $event): void
@@ -99,7 +99,7 @@ class ArticlesController extends AppController
 You can pass configuration options to helpers. These options can be used to set
 attribute values or modify the behavior of a helper:
 
-``` php
+```php
 namespace App\View\Helper;
 
 use Cake\View\Helper;
@@ -118,7 +118,7 @@ By default, all configuration options will be merged with the `$_defaultConfig`
 property. This property should define the default values of any configuration
 your helper requires. For example:
 
-``` php
+```php
 namespace App\View\Helper;
 
 use Cake\View\Helper;
@@ -143,7 +143,7 @@ Any configuration provided to your helper's constructor will be merged with the
 default values during construction and the merged data will be set to
 `_config`. You can use the `getConfig()` method to read runtime configuration:
 
-``` php
+```php
 // Read the autoSetCustomValidity config option.
 $class = $this->Awesome->getConfig('autoSetCustomValidity');
 ```
@@ -153,7 +153,7 @@ keep configuration logic out of your controller actions. If you have
 configuration options that cannot be included as part of a class declaration,
 you can set those in your controller's beforeRender callback:
 
-``` php
+```php
 class PostsController extends AppController
 {
     public function beforeRender(EventInterface $event): void
@@ -174,7 +174,7 @@ create aliased helpers in your views. This feature is useful when you want to
 replace `$this->Html` or another common Helper reference with a custom
 implementation:
 
-``` php
+```php
 // src/View/AppView.php
 class AppView extends View
 {
@@ -210,7 +210,7 @@ each helper is exposed as a public property in the view. For example, if you
 were using the `HtmlHelper` you would be able to access it by
 doing the following:
 
-``` php
+```php
 echo $this->Html->css('styles');
 ```
 
@@ -223,7 +223,7 @@ There may be situations where you need to dynamically load a helper from inside
 a view. You can use the view's `Cake\View\HelperRegistry` to
 do this:
 
-``` php
+```php
 // Either one works.
 $mediaHelper = $this->loadHelper('Media', $mediaConfig);
 $mediaHelper = $this->helpers()->load('Media', $mediaConfig);
@@ -251,7 +251,7 @@ Like most components of CakePHP, helper classes have a few conventions:
 
 You'll also want to extend `Helper` to ensure things work correctly:
 
-``` php
+```php
 /* src/View/Helper/LinkHelper.php */
 namespace App\View\Helper;
 
@@ -272,7 +272,7 @@ You may wish to use some functionality already existing in another helper. To do
 so, you can specify helpers you wish to use with a `$helpers` array, formatted
 just as you would in a controller:
 
-``` php
+```php
 /* src/View/Helper/LinkHelper.php (using other helpers) */
 
 namespace App\View\Helper;
@@ -302,7 +302,7 @@ class LinkHelper extends Helper
 Once you've created your helper and placed it in **src/View/Helper/**, you can
 load it in your views:
 
-``` php
+```php
 class AppView extends View
 {
     public function initialize(): void
@@ -316,7 +316,7 @@ class AppView extends View
 Once your helper has been loaded, you can use it in your views by accessing the
 matching view property:
 
-``` php
+```php
 <!-- make a link using the new helper -->
 <?= $this->Link->makeEdit('Change this Recipe', '/recipes/edit/5') ?>
 ```
@@ -330,7 +330,7 @@ matching view property:
 If you would like to access a View variable inside a helper, you can use
 `$this->getView()->get()` like:
 
-``` php
+```php
 class AwesomeHelper extends Helper
 {
     public array $helpers = ['Html'];
@@ -350,7 +350,7 @@ class AwesomeHelper extends Helper
 If you would like to render an Element inside your Helper you can use
 `$this->getView()->element()` like:
 
-``` php
+```php
 class AwesomeHelper extends Helper
 {
     public function someFunction(): string

@@ -20,7 +20,7 @@ Here's what you'll need:
 
 Before starting you should make sure that you're using a supported PHP version:
 
-``` bash
+```bash
 php -v
 ```
 
@@ -35,11 +35,11 @@ have cURL installed, run the following:
 
 ::: code-group
 
-``` bash [Linux/macOS]
+```bash [Linux/macOS]
 curl -s https://getcomposer.org/installer | php
 ```
 
-``` bash [Windows]
+```bash [Windows]
 # Download and run the Composer Windows Installer
 # https://getcomposer.org/Composer-Setup.exe
 ```
@@ -55,11 +55,11 @@ in the **cms** directory of the current working directory:
 
 ::: code-group
 
-``` bash [Linux/macOS]
+```bash [Linux/macOS]
 php composer.phar create-project --prefer-dist cakephp/app:5.* cms
 ```
 
-``` bash [Windows]
+```bash [Windows]
 composer create-project --prefer-dist cakephp/app:5.* cms
 ```
 
@@ -114,13 +114,13 @@ home page. Before you can do that, you'll need to start the development server:
 
 ::: code-group
 
-``` bash [Linux/macOS]
+```bash [Linux/macOS]
 cd /path/to/our/app
 
 bin/cake server
 ```
 
-``` bash [Windows]
+```bash [Windows]
 cd C:\path\to\our\app
 
 bin\cake server

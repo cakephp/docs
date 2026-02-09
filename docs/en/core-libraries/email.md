@@ -14,13 +14,13 @@ email from any place inside of your application.
 
 First of all, you should ensure the class is loaded:
 
-``` php
+```php
 use Cake\Mailer\Mailer;
 ```
 
 After you've loaded `Mailer`, you can send an email with the following:
 
-``` php
+```php
 $mailer = new Mailer('default');
 $mailer->setFrom(['me@example.com' => 'My Site'])
     ->setTo('you@example.com')
@@ -36,7 +36,7 @@ to set its properties with method chaining.
 that the first three will overwrite what was already set and the latter will just
 add more recipients to their respective field:
 
-``` php
+```php
 $mailer = new Mailer();
 $mailer->setTo('to@example.com', 'To Example');
 $mailer->addTo('to2@example.com', 'To2 Example');
@@ -50,7 +50,7 @@ $mailer->setTo('test@example.com', 'ToTest Example');
 When sending email on behalf of other people, it's often a good idea to define the
 original sender using the Sender header. You can do so using `setSender()`:
 
-``` php
+```php
 $mailer = new Mailer();
 $mailer->setSender('app@example.com', 'MyApp emailer');
 ```
@@ -76,7 +76,7 @@ more difficult.
 To load a predefined configuration, you can use the `setProfile()` method or
 pass it to the constructor of `Mailer`:
 
-``` php
+```php
 $mailer = new Mailer();
 $mailer->setProfile('default');
 
@@ -87,7 +87,7 @@ $mailer = new Mailer('default');
 Instead of passing a string which matches a preset configuration name, you can
 also just load an array of options:
 
-``` php
+```php
 $mailer = new Mailer();
 $mailer->setProfile(['from' => 'me@example.org', 'transport' => 'my_custom']);
 
@@ -160,7 +160,7 @@ to facilitate that, CakePHP provides a way to send emails using CakePHP's
 The templates for emails reside in a special folder `templates/email/` of your
 application. Mailer views can also use layouts and elements just like normal views:
 
-``` php
+```php
 $mailer = new Mailer();
 $mailer
     ->setEmailFormat('html')
@@ -177,7 +177,7 @@ The above would use **templates/email/html/welcome.php** for the view
 and **templates/layout/email/html/fancy.php** for the layout. You can
 send multipart templated email messages as well:
 
-``` php
+```php
 $mailer = new Mailer();
 $mailer
     ->setEmailFormat('both')
@@ -205,7 +205,7 @@ You can set all view related config using the view builder instance got by
 
 You can set view variables with `Mailer::setViewVars()`:
 
-``` php
+```php
 $mailer = new Mailer('templated');
 $mailer->setViewVars(['value' => 12345]);
 ```
@@ -215,7 +215,7 @@ Or you can use the view builder methods `ViewBuilder::setVar()` and
 
 In your email templates you can use these with:
 
-``` html
+```html
 <p>Here is your value: <b><?= $value ?></b></p>
 ```
 
@@ -223,7 +223,7 @@ You can use helpers in emails as well, much like you can in normal template file
 By default, only the `HtmlHelper` is loaded. You can load additional
 helpers using the `ViewBuilder::addHelpers()` method:
 
-``` php
+```php
 $mailer->viewBuilder()->addHelpers(['Html', 'Custom', 'Text']);
 ```
 
@@ -236,7 +236,7 @@ helpers loaded in your email template.
 If you want to send email using templates in a plugin you can use the familiar
 `plugin syntax` to do so:
 
-``` php
+```php
 $mailer = new Mailer();
 $mailer->viewBuilder()->setTemplate('Blog.new_comment');
 ```
@@ -246,7 +246,7 @@ The above would use template and layout from the Blog plugin as an example.
 In some cases, you might need to override the default template provided by plugins.
 You can do this using themes:
 
-``` php
+```php
 $mailer->viewBuilder()
     ->setTemplate('Blog.new_comment')
     ->setLayout('Blog.auto_message')
@@ -278,7 +278,7 @@ you want the filenames to appear in the recipient's mail client:
 
 3. Nested arrays:
 
-    ``` php
+    ```php
     $mailer->setAttachments([
         'photo.png' => [
             'file' => '/full/some_hash.png',
@@ -321,7 +321,7 @@ If you are having validation issues when sending to non-compliant addresses, you
 can relax the pattern used to validate email addresses. This is sometimes
 necessary when dealing with some ISPs:
 
-``` php
+```php
 $mailer = new Mailer('default');
 
 // Relax the email pattern, so you can send
@@ -335,7 +335,7 @@ When sending emails within a CLI script (Shells, Tasks, ...) you should manually
 set the domain name for Mailer to use. It will serve as the host name for the
 message id (since there is no host name in a CLI environment):
 
-``` php
+```php
 $mailer->setDomain('www.example.org');
 // Results in message ids like ``<UUID@www.example.org>`` (valid)
 // Instead of `<UUID@>`` (invalid)
@@ -356,7 +356,7 @@ emails. To create our `UserMailer`, create the file
 **src/Mailer/UserMailer.php**. The contents of the file should look like the
 following:
 
-``` php
+```php
 namespace App\Mailer;
 
 use Cake\Mailer\Mailer;
@@ -390,7 +390,7 @@ We are now able to use our `UserMailer` to send out our user-related emails
 from anywhere in our application. For example, if we wanted to send our welcome
 email we could do the following:
 
-``` php
+```php
 namespace App\Controller;
 
 use Cake\Mailer\MailerAwareTrait;
@@ -419,7 +419,7 @@ application's code, we can have our `UserMailer` subscribe to the
 application's user-related classes completely free of email-related logic and
 instructions. For example, we could add the following to our `UserMailer`:
 
-``` php
+```php
 public function implementedEvents(): array
 {
     return [
@@ -439,7 +439,7 @@ You can now register the mailer as an event listener and the
 `onRegistration()` method will be invoked every time the `Model.afterSave`
 event is fired:
 
-``` php
+```php
 // attach to Users event manager
 $this->Users->getEventManager()->on($this->getMailer('User'));
 ```
@@ -458,7 +458,7 @@ is useful for debugging. Configuring transports allows you to keep configuration
 data out of your application code and makes deployment simpler as you can simply
 change the configuration data. An example transport configuration looks like:
 
-``` php
+```php
 // In config/app.php
 'EmailTransport' => [
     // Sample Mail configuration
@@ -480,7 +480,7 @@ change the configuration data. An example transport configuration looks like:
 Transports can also be configured at runtime using
 `TransportFactory::setConfig()`:
 
-``` php
+```php
 use Cake\Mailer\TransportFactory;
 
 // Define an SMTP transport
@@ -497,7 +497,7 @@ You can configure SSL SMTP servers, like Gmail. To do so, put the `ssl://`
 prefix in the host and configure the port value accordingly. You can also
 enable TLS SMTP using the `tls` option:
 
-``` php
+```php
 use Cake\Mailer\TransportFactory;
 
 TransportFactory::setConfig('gmail', [
@@ -516,7 +516,7 @@ To configure your mailer to use a specific transport you can use
 `Cake\Mailer\Mailer::setTransport()` method or have the transport
 in your configuration:
 
-``` php
+```php
 // Use a named transport already configured using TransportFactory::setConfig()
 $mailer->setTransport('gmail');
 
@@ -540,7 +540,7 @@ $mailer->setTransport(new \Cake\Mailer\Transport\DebugTransport());
 Configuration options can also be provided as a `DSN` string. This is
 useful when working with environment variables or `PaaS` providers:
 
-``` php
+```php
 TransportFactory::setConfig('default', [
     'url' => 'smtp://my@gmail.com:secret@smtp.gmail.com:587?tls=true',
 ]);
@@ -563,7 +563,7 @@ like SendGrid, MailGun or Postmark. To create your transport, first create the f
 **src/Mailer/Transport/ExampleTransport.php** (where Example is the name of your
 transport). To start, your file should look like:
 
-``` php
+```php
 namespace App\Mailer\Transport;
 
 use Cake\Mailer\AbstractTransport;
@@ -590,7 +590,7 @@ If you want you can use these classes directly with the `Mailer` too.
 
 For example:
 
-``` php
+```php
 $render = new \Cake\Mailer\Renderer();
 $render->viewBuilder()
     ->setTemplate('custom')
@@ -621,7 +621,7 @@ on the mail that would be delivered.
 Add the trait to your test case to start testing emails, and load routes if your
 emails need to generate URLs:
 
-``` php
+```php
 namespace App\Test\TestCase\Mailer;
 
 use App\Mailer\WelcomeMailer;
@@ -645,7 +645,7 @@ class WelcomeMailerTestCase extends TestCase
 Let's assume we have a mailer that delivers welcome emails when a new user
 registers. We want to check that the subject and body contain the user's name:
 
-``` php
+```php
 // in our WelcomeMailerTestCase class.
 public function testName()
 {
@@ -666,7 +666,7 @@ public function testName()
 
 The `Cake\TestSuite\EmailTrait` trait provides the following assertions:
 
-``` php
+```php
 // Asserts an expected number of emails were sent
 $this->assertMailCount($count);
 

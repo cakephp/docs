@@ -19,7 +19,7 @@ CakePHP におけるページネーションは、コントローラーにおけ
 
 一度ロードされれば、ORMテーブルクラスや `Query` オブジェクトをページ分割することができます。 :
 
-``` php
+```php
 public function index()
 {
     // ORM テーブルのページ分割
@@ -39,7 +39,7 @@ public function index()
 これらの条件は URLから渡される `sort`, `direction`, `limit`, `page`
 のパラメータによって拡張されます。　:
 
-``` php
+```php
 class ArticlesController extends AppController
 {
     protected array $paginate = [
@@ -58,7 +58,7 @@ class ArticlesController extends AppController
 すっきりしていてシンプルです。
 `finder` オプションを使用することで、ページ分割の際にファインダーを使用することができます。 :
 
-``` php
+```php
 class ArticlesController extends AppController
 {
     protected array $paginate = [
@@ -69,7 +69,7 @@ class ArticlesController extends AppController
 
 ファインダーメソッドに追加のオプションが必要な場合は、これらの値を finder: に渡すことができます。 :
 
-``` php
+```php
 class ArticlesController extends AppController
 {
     // タグごとに記事を検索する
@@ -100,7 +100,7 @@ class ArticlesController extends AppController
 ページネーションに関するデフォルト設定を定義することができます。そのためには、
 設定を加えたいモデルの後に、配列におけるキー名称を加えるだけです。 :
 
-``` php
+```php
 class ArticlesController extends AppController
 {
     protected array $paginate = [
@@ -125,7 +125,7 @@ class ArticlesController extends AppController
 'Next' と 'Previous' リンクだけを表示したい場合は、カウントクエリを行わない
 'simple' paginator を使うことができます。 :
 
-``` php
+```php
 class ArticlesController extends AppController
 {
     protected array $paginate = [
@@ -143,7 +143,7 @@ class ArticlesController extends AppController
 `scope` オプションを使うことで、1つのコントローラのアクションの中で複数のモデルを
 ページ分割することができます。 :
 
-``` php
+```php
 // ページ分割するプロパティ
 protected array $paginate = [
     'Articles' => ['scope' => 'article'],
@@ -171,7 +171,7 @@ $this->set(compact('articles', 'tags'));
 モデルのエイリアスを定義する必要があります。
 テーブルレジストリの使用方法の詳細については、 [Table Registry Usage](../orm/table-objects#table-registry-usage) を参照してください。 :
 
-``` php
+```php
 // コントローラーアクションにおいて
 $this->paginate = [
     'Articles' => [
@@ -216,7 +216,7 @@ $unpublishedArticles = $this->paginate(
 ソートできるフィールドのホワイトリストを `sortableFields` オプションを使って設定することができます。
 このオプションは関連するデータやページ分割クエリの一部である計算フィールドをソートしたい場合に必要です。 :
 
-``` php
+```php
 protected array $paginate = [
     'sortableFields' => [
         'id', 'title', 'Users.username', 'created',
@@ -235,7 +235,7 @@ protected array $paginate = [
 もしこのデフォルト値がアプリケーションにとって適切でない場合は、
 ページ分割オプションの一部として調整することができます。 :
 
-``` php
+```php
 protected array $paginate = [
     // Other keys here.
     'maxLimit' => 10
@@ -251,7 +251,7 @@ protected array $paginate = [
 そのため、通常のエラーページをレンダリングさせるか、 try catch ブロックを使用して
 `NotFoundException` が発生した場合に適切な処理を行うことができます。 :
 
-``` php
+```php
 use Cake\Http\Exception\NotFoundException;
 
 public function index()
@@ -269,7 +269,7 @@ public function index()
 
 paginatorクラスを直接利用することも可能です。 :
 
-``` php
+```php
 // paginatorのインスタンスを生成する
 $paginator = new \Cake\Datasource\Paginator\NumericPaginator();
 

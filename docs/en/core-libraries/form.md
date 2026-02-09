@@ -19,7 +19,7 @@ form. This makes testing easier, and lets you re-use your form. Forms are put
 into **src/Form** and usually have `Form` as a class suffix. For example,
 a simple contact form would look like:
 
-``` php
+```php
 // in src/Form/ContactForm.php
 namespace App\Form;
 
@@ -74,7 +74,7 @@ The `_execute` method was deprecated, and replaced by `process`.
 Once you've defined your form, you can use it in your controller to process
 and validate request data:
 
-``` php
+```php
 // In a controller
 namespace App\Controller;
 
@@ -103,7 +103,7 @@ In the above example, we use the `execute()` method to run our form's
 accordingly. If we want to use a non-default validation set we can use the
 `validate` option:
 
-``` php
+```php
 if ($contact->execute($this->request->getData(), 'update')) {
     // Handle form success.
 }
@@ -114,7 +114,7 @@ This option can also be set to `false` to disable validation.
 We could have also used the `validate()` method to only validate
 the request data:
 
-``` php
+```php
 $isValid = $form->validate($this->request->getData());
 
 // You can also use other validation sets. The following
@@ -127,7 +127,7 @@ $isValid = $form->validate($this->request->getData(), 'update');
 You can set default values for modelless forms using the `setData()` method.
 Values set with this method will overwrite existing data in the form object:
 
-``` php
+```php
 // In a controller
 namespace App\Controller;
 
@@ -164,7 +164,7 @@ you will overwrite your previous POST Data which might have validation errors
 that need corrections. You can use `set()` to add or replace individual fields
 or a subset of fields:
 
-``` php
+```php
 // Set one field.
 $contact->set('name', 'John Doe');
 
@@ -179,7 +179,7 @@ $contact->set([
 
 Once a form has been validated you can retrieve the errors from it:
 
-``` php
+```php
 $errors = $form->getErrors();
 /* $errors contains
 [
@@ -203,7 +203,7 @@ use of the Validator class. The most common use case for this is when the
 validation is done on a remote server. In such case, you must manually
 invalidate the fields accordingly to the feedback from the remote server:
 
-``` php
+```php
 // in src/Form/ContactForm.php
 public function setErrors(array $errors): void
 {
@@ -214,14 +214,14 @@ public function setErrors(array $errors): void
 According to how the validator class would have returned the errors, `$errors`
 must be in this format:
 
-``` php
+```php
 ['fieldName' => ['validatorName' => 'The error message to display']]
 ```
 
 Now you will be able to invalidate form fields by setting the fieldName, then
 set the error messages:
 
-``` php
+```php
 // In a controller
 $contact = new ContactForm();
 $contact->setErrors(['email' => ['_required' => 'Your email is required']]);
@@ -234,7 +234,7 @@ Proceed to Creating HTML with FormHelper to see the results.
 Once you've created a Form class, you'll likely want to create an HTML form for
 it. FormHelper understands Form objects just like ORM entities:
 
-``` php
+```php
 echo $this->Form->create($contact);
 echo $this->Form->control('name');
 echo $this->Form->control('email');

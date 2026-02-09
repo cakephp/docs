@@ -9,7 +9,7 @@ CMS にはユーザーがいますので、
 
 composer を使用して認証プラグインをインストール
 
-``` bash
+```bash
 composer require "cakephp/authentication:^2.0"
 ```
 
@@ -18,7 +18,7 @@ composer require "cakephp/authentication:^2.0"
 データベースの `users` テーブル用に `Controller`, `Table`, `Entity` および テンプレートを作成する必要があります。
 ArticlesController と同様に、手動、もしくは bake シェルを使用してこれらのクラスを生成することができます。
 
-``` bash
+```bash
 bin/cake bake all users
 ```
 
@@ -36,7 +36,7 @@ bin/cake bake all users
 エンティティーの1つにプロパティーが設定されているときはいつでも、規約に基づいたセッターメソッドを呼び出します。
 パスワードのセッターを追加しましょう。 **src/Model/Entity/User.php** の中に次を追加してください。 :
 
-``` php
+```php
 <?php
 namespace App\Model\Entity;
 
@@ -95,7 +95,7 @@ bcrypt は [PHPの推奨パスワードハッシュアルゴリズム](https://w
 
 **src/Application.php** に次の imports を追加します:
 
-``` php
+```php
 // src/Application.php に次の imports を追加します
 use Authentication\AuthenticationService;
 use Authentication\AuthenticationServiceInterface;
@@ -107,7 +107,7 @@ use Psr\Http\Message\ServerRequestInterface;
 
 次に `Application` クラスに認証インターフェースを実装します:
 
-``` php
+```php
 // in src/Application.php
 class Application extends BaseApplication
     implements AuthenticationServiceProviderInterface
@@ -116,7 +116,7 @@ class Application extends BaseApplication
 
 次に以下を追加します:
 
-``` php
+```php
 // src/Application.php
 public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue
 {
@@ -161,7 +161,7 @@ public function getAuthenticationService(ServerRequestInterface $request): Authe
 
 `AppController` クラスに次のコードを追加します:
 
-``` php
+```php
 // src/Controller/AppController.php
 public function initialize(): void
 {
@@ -186,7 +186,7 @@ POSTされたフォームデータ(存在する場合)も検査し、credentials
 
 `UsersController` に次のコードを追加します:
 
-``` php
+```php
 public function beforeFilter(\Cake\Event\EventInterface $event)
 {
     parent::beforeFilter($event);
@@ -218,7 +218,7 @@ public function login()
 
 ログインアクション用のテンプレートロジックを追加します:
 
-``` php
+```php
 <!-- in /templates/Users/login.php -->
 <div class="users form">
     <?= $this->Flash->render() ?>
@@ -244,7 +244,7 @@ public function login()
 さらにいくつかの詳細をアプリケーションに追加する必要があります。
 ログインせずにすべての `view` 及び `index` ページにアクセスできるようにするため、特定の設定を AppController に追加します。:
 
-``` php
+```php
 // in src/Controller/AppController.php
 public function beforeFilter(\Cake\Event\EventInterface $event)
 {
@@ -268,7 +268,7 @@ public function beforeFilter(\Cake\Event\EventInterface $event)
 
 logout アクションを `UsersController` に追加します。:
 
-``` php
+```php
 // in src/Controller/UsersController.php
 public function logout()
 {
@@ -291,7 +291,7 @@ public function logout()
 ユーザーがアプリケーションにサインアップできるようにしたいので、これを修正する必要があります。
 `UsersController` の次の行を修正します:
 
-``` php
+```php
 // UsersController の beforeFilter メソッドに追加します
 $this->Authentication->addUnauthenticatedActions(['login', 'add']);
 ```

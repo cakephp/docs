@@ -17,7 +17,7 @@ Let's create our first Command. For this example, we'll create a
 simple Hello world command. In your application's **src/Command** directory create
 **HelloCommand.php**. Put the following code inside it:
 
-``` php
+```php
 <?php
 namespace App\Command;
 
@@ -40,7 +40,7 @@ Command classes must implement an `execute()` method that does the bulk of
 their work. This method is called when a command is invoked. Let's call our first
 command application directory, run:
 
-``` bash
+```bash
 bin/cake hello
 ```
 
@@ -51,7 +51,7 @@ You should see the following output:
 Our `execute()` method isn't very interesting let's read some input from the
 command line:
 
-``` php
+```php
 <?php
 namespace App\Command;
 
@@ -83,13 +83,13 @@ class HelloCommand extends Command
 
 After saving this file, you should be able to run the following command:
 
-``` bash
+```bash
 bin/cake hello jillian
 ```
 
 This outputs:
 
-```
+```text
 Hello jillian
 ```
 
@@ -99,7 +99,7 @@ CakePHP will use conventions to generate the name your commands use on the
 command line. If you want to overwrite the generated name implement the
 `defaultName()` method in your command:
 
-``` php
+```php
 public static function defaultName(): string
 {
     return 'oh_hi';
@@ -115,7 +115,7 @@ As we saw in the last example, we can use the `buildOptionParser()` hook
 method to define arguments. We can also define options. For example, we could
 add a `yell` option to our `HelloCommand`:
 
-``` php
+```php
 // ...
 protected function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
 {
@@ -161,7 +161,7 @@ You'll often need access to your application's business logic in console
 commands. You can load models in commands, just as you would in a controller
 using `$this->fetchTable()` since command use the `LocatorAwareTrait`:
 
-``` php
+```php
 <?php
 declare(strict_types=1);
 
@@ -207,7 +207,7 @@ stored in the database.
 When your commands hit an unrecoverable error you can use the `abort()` method
 to terminate execution:
 
-``` php
+```php
 // ...
 public function execute(Arguments $args, ConsoleIo $io): int
 {
@@ -224,7 +224,7 @@ public function execute(Arguments $args, ConsoleIo $io): int
 
 You can also use `abort()` on the `$io` object to emit a message and code:
 
-``` php
+```php
 public function execute(Arguments $args, ConsoleIo $io): int
 {
     $name = $args->getArgument('name');
@@ -253,7 +253,7 @@ You can pass any desired exit code into `abort()`.
 You may need to call other commands from your command. You can use
 `executeCommand` to do that:
 
-``` php
+```php
 // You can pass an array of CLI options and arguments.
 $this->executeCommand(OtherCommand::class, ['--verbose', 'deploy']);
 
@@ -271,7 +271,7 @@ $this->executeCommand($command, ['--verbose', 'deploy']);
 
 You may want to set a command description via:
 
-``` php
+```php
 class UserCommand extends Command
 {
     public static function getDescription(): string
@@ -283,11 +283,11 @@ class UserCommand extends Command
 
 This will show your description in the Cake CLI:
 
-``` bash
+```bash
 bin/cake
 ```
 
-```
+```text
 App:
   - user
   └─── My custom description
@@ -295,11 +295,11 @@ App:
 
 As well as in the help section of your command:
 
-``` bash
+```bash
 cake user --help
 ```
 
-```
+```text
 My custom description
 
 Usage:
@@ -312,7 +312,7 @@ By default, in the help output CakePHP will group commands into core, app, and
 plugin groups. You can customize the grouping of commands by implementing
 `getGroup()`:
 
-``` php
+```php
 class CleanupCommand extends Command
 {
     public static function getGroup(): string
@@ -333,7 +333,7 @@ collection without needing to remove and re-add it. This is particularly useful
 when using `autoDiscover` and you want to replace a command with a customized
 version:
 
-``` php
+```php
 // In your Application::console() method
 public function console(CommandCollection $commands): CommandCollection
 {
@@ -353,7 +353,7 @@ public function console(CommandCollection $commands): CommandCollection
 The `TreeHelper` outputs an array as a tree structure. This is useful for
 displaying filesystem directories or any hierarchical data:
 
-``` php
+```php
 public function execute(Arguments $args, ConsoleIo $io): int
 {
     $helper = $io->helper('Tree');
@@ -392,7 +392,7 @@ you would use in the CLI to this method.
 Let's start with a very simple command, located in
 **src/Command/UpdateTableCommand.php**:
 
-``` php
+```php
 namespace App\Command;
 
 use Cake\Command\Command;
@@ -416,7 +416,7 @@ To write an integration test for this command, we would create a test case in
 `Cake\TestSuite\ConsoleIntegrationTestTrait` trait. This command doesn't do much at the
 moment, but let's just test that our command's description is displayed in `stdout`:
 
-``` php
+```php
 namespace App\Test\TestCase\Command;
 
 use Cake\TestSuite\ConsoleIntegrationTestTrait;
@@ -438,7 +438,7 @@ Our test passes! While this is very trivial example, it shows that creating an
 integration test case for console applications can follow command line
 conventions. Let's continue by adding more logic to our command:
 
-``` php
+```php
 namespace App\Command;
 
 use Cake\Command\Command;
@@ -478,7 +478,7 @@ class UpdateTableCommand extends Command
 This is a more complete command that has required options and relevant logic.
 Modify your test case to the following snippet of code:
 
-``` php
+```php
 namespace Cake\Test\TestCase\Command;
 
 use Cake\Command\Command;
@@ -538,7 +538,7 @@ included as an array in the order that you expect them.
 Continuing with our example command, let's add an interactive confirmation.
 Update the command class to the following:
 
-``` php
+```php
 namespace App\Command;
 
 use Cake\Command\Command;
@@ -584,7 +584,7 @@ that we receive the proper response, and one that tests that we receive an
 incorrect response. Remove the `testUpdateModified` method and, add the following methods to
 **tests/TestCase/Command/UpdateTableCommandTest.php**:
 
-``` php
+```php
 public function testUpdateModifiedSure()
 {
     $now = new DateTime('2017-01-01 00:00:00');
@@ -624,7 +624,7 @@ our error message was written to `stderr`.
 The `Cake\TestSuite\ConsoleIntegrationTestTrait` trait provides a number of
 assertion methods that make help assert against console output:
 
-``` php
+```php
 // assert that the command exited as success
 $this->assertExitSuccess();
 
@@ -652,7 +652,7 @@ $this->assertErrorRegExp($expected);
 You can use `debugOutput()` to output the exit code, stdout and stderr of the
 last run command:
 
-``` php
+```php
 $this->exec('update_table Users');
 $this->assertExitCode(Command::CODE_SUCCESS);
 $this->debugOutput();
@@ -687,7 +687,7 @@ The `beforeExecute()` and `afterExecute()` hook methods were added.
 Called before the `execute()` method runs. Useful for initialization and
 validation:
 
-``` php
+```php
 use Cake\Event\EventInterface;
 
 class MyCommand extends Command
@@ -712,7 +712,7 @@ class MyCommand extends Command
 Called after the `execute()` method completes. Useful for cleanup and
 logging:
 
-``` php
+```php
 public function afterExecute(EventInterface $event, Arguments $args, ConsoleIo $io, mixed $result): void
 {
     parent::afterExecute($event);

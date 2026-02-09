@@ -11,7 +11,7 @@ App クラスはリソースの位置とパスの管理を担当します。
 この方法は CakePHP 全体でクラス名を解決するために使われます。
 CakePHP が使用する短い形式の名前を解決し、完全解決されたクラス名を返します。 :
 
-``` php
+```php
 // 短いクラス名を名前空間とサフィックスで解決します。
 App::className('Flash', 'Controller/Component', 'Component');
 // Cake\Controller\Component\FlashComponent を返します
@@ -35,7 +35,7 @@ App::className('App\Cache\ComboCache');
 
 The method returns paths set using `App.paths` app config:
 
-``` php
+```php
 // Get the templates path set using ``App.paths.templates`` app config.
 App::path('templates');
 ```
@@ -48,7 +48,7 @@ The same way you can retrieve paths for `locales`, `plugins`.
 
 規約上のパスについて位置を得るために使われます。 :
 
-``` php
+```php
 // アプリケーション中の Controller/ までのパスを得ます
 App::classPath('Controller');
 ```
@@ -62,7 +62,7 @@ App::classPath('Controller');
 
 CakePHP 内部のパッケージのパスを検索するために使われます。 :
 
-``` php
+```php
 // Cache エンジンのパスを得ます
 App::core('Cache/Engine');
 ```
@@ -83,7 +83,7 @@ App::core('Cache/Engine');
 仮に PSR-0 互換のクラス名を使ってないとしたら、
 あなたのアプリケーションの `composer.json` 中で次のようにオートロードできます。 :
 
-``` json
+```json
 "autoload": {
     "psr-4": {
         "App\\": "src/",
@@ -99,7 +99,7 @@ App::core('Cache/Engine');
 代わりに関数を提供する場合、 `files` オートロードの手法を使って
 各リクエストの最初にそれらのファイルを読み込むように Composer を設定することができます。 :
 
-``` json
+```json
 "autoload": {
     "psr-4": {
         "App\\": "src/",
@@ -113,7 +113,7 @@ App::core('Cache/Engine');
 
 ベンダーライブラリーの設定をした後はあなたのアプリケーションのオートローダーを再生成する必要があります。 :
 
-``` bash
+```bash
 php composer.phar dump-autoload
 ```
 

@@ -13,7 +13,7 @@ a response to the client. Under this model, you mostly save bandwidth, but when
 used correctly you can also save some CPU processing, reducing response
 times:
 
-``` php
+```php
 // in a Controller
 public function initialize(): void
 {

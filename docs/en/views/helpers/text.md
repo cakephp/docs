@@ -21,7 +21,7 @@ Adds links to the well-formed email addresses in `$text`, according
 to any options defined in `$options` (see
 `HtmlHelper::link()`).
 
-``` php
+```php
 $myText = 'For more information regarding our world-famous ' .
     'pastries and desserts, contact info@example.com';
 $linkedText = $this->Text->autoLinkEmails($myText);
@@ -29,7 +29,7 @@ $linkedText = $this->Text->autoLinkEmails($myText);
 
 Output:
 
-``` html
+```html
 For more information regarding our world-famous pastries and desserts,
 contact <a href="mailto:info@example.com">info@example.com</a>
 ```
@@ -74,7 +74,7 @@ Further options:
 Adds proper `<p>` around text where double-line returns are found, and `<br>` where
 single-line returns are found.
 
-``` php
+```php
 $myText = 'For more information
 regarding our world-famous pastries and desserts.
 
@@ -84,7 +84,7 @@ $formattedText = $this->Text->autoParagraph($myText);
 
 Output:
 
-``` html
+```html
 <p>For more information<br />
 regarding our world-famous pastries and desserts.</p>
 <p>contact info@example.com</p>

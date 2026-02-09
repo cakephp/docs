@@ -46,7 +46,7 @@ behaviors:
 To create our sluggable behavior. Put the following into
 **src/Model/Behavior/SluggableBehavior.php**:
 
-``` php
+```php
 namespace App\Model\Behavior;
 
 use Cake\ORM\Behavior;
@@ -59,7 +59,7 @@ class SluggableBehavior extends Behavior
 Similar to tables, behaviors also have an `initialize()` hook where you can
 put your behavior's initialization code, if required:
 
-``` php
+```php
 public function initialize(array $config): void
 {
     // Some initialization code here
@@ -70,7 +70,7 @@ We can now add this behavior to one of our table classes. In this example we'll
 use an `ArticlesTable`, as articles often have slug properties for creating
 friendly URLs:
 
-``` php
+```php
 namespace App\Model\Table;
 
 use Cake\ORM\Table;
@@ -92,7 +92,7 @@ slug a field.
 
 Public methods on behaviors can be called as normal methods:
 
-``` php
+```php
 $articles->getBehavior('Sluggable')->slug($value);
 ```
 
@@ -104,7 +104,7 @@ Behavior mixin methods will receive the exact same arguments that are provided
 to the table. For example, if our SluggableBehavior defined the following
 method:
 
-``` php
+```php
 public function slug(string $value): string
 {
     return Text::slug($value, $this->_config['replacement']);
@@ -113,7 +113,7 @@ public function slug(string $value): string
 
 It could be invoked using:
 
-``` php
+```php
 $slug = $articles->slug('My article');
 ```
 
@@ -128,7 +128,7 @@ public methods as mixin methods. In these cases you can use the
 `implementedMethods` configuration key to rename or exclude mixin methods. For
 example if we wanted to prefix our slug() method we could do the following:
 
-``` php
+```php
 protected array $_defaultConfig = [
     'implementedMethods' => [
         'superSlug' => 'slug',
@@ -144,7 +144,7 @@ methods with the above configuration.
 Since the exposed methods are decided by configuration you can also
 rename/remove mixin methods when adding a behavior to a table. For example:
 
-``` php
+```php
 // In a table's initialize() method.
 $this->addBehavior('Sluggable', [
     'implementedMethods' => [
@@ -160,7 +160,7 @@ a callback listener to automatically slug a field when entities are saved. We'll
 also modify our slug method to accept an entity instead of just a plain value. Our
 behavior should now look like:
 
-``` php
+```php
 namespace App\Model\Behavior;
 
 use ArrayObject;
@@ -203,7 +203,7 @@ The above code shows a few interesting features of behaviors:
 
 To prevent the save from continuing, simply stop event propagation in your callback:
 
-``` php
+```php
 public function beforeSave(EventInterface $event, EntityInterface $entity, ArrayObject $options): void
 {
     if (...) {
@@ -225,7 +225,7 @@ a finder method so we can fetch articles by their slug. Behavior finder
 methods, use the same conventions as [Custom Find Methods](../orm/retrieving-data-and-resultsets#custom-find-methods) do. Our
 `find('slug')` method would look like:
 
-``` php
+```php
 public function findSlug(SelectQuery $query, string $slug): SelectQuery
 {
     return $query->where(['slug' => $slug]);
@@ -234,7 +234,7 @@ public function findSlug(SelectQuery $query, string $slug): SelectQuery
 
 Once our behavior has the above method we can call it:
 
-``` php
+```php
 $article = $articles->find('slug', slug: $value)->first();
 ```
 
@@ -246,7 +246,7 @@ these cases you can use the `implementedFinders` configuration key to rename
 or exclude finder methods. For example if we wanted to rename our `find(slug)`
 method we could do the following:
 
-``` php
+```php
 protected array $_defaultConfig = [
     'implementedFinders' => [
         'slugged' => 'findSlug',
@@ -262,7 +262,7 @@ in the configuration.
 Since the exposed methods are decided by configuration you can also
 rename/remove finder methods when adding a behavior to a table. For example:
 
-``` php
+```php
 // In a table's initialize() method.
 $this->addBehavior('Sluggable', [
     'implementedFinders' => [
@@ -277,7 +277,7 @@ Behaviors can define logic for how the custom fields they provide are
 marshalled by implementing the `Cake\ORM\PropertyMarshalInterface`. This
 interface requires a single method to be implemented:
 
-``` php
+```php
 public function buildMarshalMap(Marshaller $marshaller, array $map, array $options): array
 {
     return [
@@ -296,7 +296,7 @@ that you might want to refer to.
 
 To remove a behavior from your table you can call the `removeBehavior()` method:
 
-``` php
+```php
 // Remove the loaded behavior
 $this->removeBehavior('Sluggable');
 ```
@@ -306,7 +306,7 @@ $this->removeBehavior('Sluggable');
 Once you've attached behaviors to your Table instance you can introspect the
 loaded behaviors, or access specific behaviors using the `BehaviorRegistry`:
 
-``` php
+```php
 // See which behaviors are loaded
 $table->behaviors()->loaded();
 
@@ -330,7 +330,7 @@ behavior you could do the following to add, modify or remove the configurations
 for the behavior. In this case, we will add an event we want Timestamp to
 respond to:
 
-``` php
+```php
 namespace App\Model\Table;
 
 use App\Model\Table\AppTable; // similar to AppController

@@ -22,7 +22,7 @@ or DOMDocument object. You can use `Xml::build()` to build XML
 objects from a variety of sources. For example, you can load XML from
 strings:
 
-``` php
+```php
 $text = '<?xml version="1.0" encoding="utf-8"?>
 <post>
     <id>1</id>
@@ -34,14 +34,14 @@ $xml = Xml::build($text);
 
 You can also build Xml objects from local files by overriding the default option:
 
-``` php
+```php
 // Local file
 $xml = Xml::build('/home/awesome/unicorns.xml', ['readFile' => true]);
 ```
 
 You can also build Xml objects using an array:
 
-``` php
+```php
 $data = [
     'post' => [
         'id' => 1,
@@ -54,7 +54,7 @@ $xml = Xml::build($data);
 
 If your input is invalid, the Xml class will throw an exception:
 
-``` php
+```php
 $xmlString = 'What is XML?';
 try {
     $xmlObject = Xml::build($xmlString); // Here will throw an exception
@@ -73,7 +73,7 @@ try {
 HTML documents can be parsed into `SimpleXmlElement` or `DOMDocument`
 objects with `loadHtml()`:
 
-``` php
+```php
 $html = Xml::loadHtml($htmlString, ['return' => 'domdocument']);
 ```
 
@@ -89,7 +89,7 @@ can be enabled with the `loadEntities` and `parseHuge` options respectively.
 Converting XML strings into arrays is simple with the Xml class as well. By
 default you'll get a SimpleXml object back:
 
-``` php
+```php
 $xmlString = '<?xml version="1.0"?><root><child>value</child></root>';
 $xmlArray = Xml::toArray(Xml::build($xmlString));
 ```
@@ -98,7 +98,7 @@ If your XML is invalid a `Cake\Utility\Exception\XmlException` will be raised.
 
 ## Transforming an Array into a String of XML
 
-``` php
+```php
 $xmlArray = ['root' => ['child' => 'value']];
 // You can use Xml::build() too.
 $xmlObject = Xml::fromArray($xmlArray, ['format' => 'tags']);
@@ -109,7 +109,7 @@ Your array must have only one element in the "top level" and it can not be
 numeric. If the array is not in this format, Xml will throw an exception.
 Examples of invalid arrays:
 
-``` php
+```php
 // Top level with numeric key
 [
     ['key' => 'value'],
@@ -126,7 +126,7 @@ By default, array values will be output as XML tags. If you want to define
 attributes or text values you can prefix the keys that are supposed to be
 attributes with `@`. For value text, use `@` as the key:
 
-``` php
+```php
 $xmlArray = [
     'project' => [
         '@id' => 1,
@@ -140,7 +140,7 @@ $xmlString = $xmlObject->asXML();
 
 The content of `$xmlString` will be:
 
-``` php
+```php
 <?xml version="1.0"?>
 <project id="1">Value of project<name>Name of project, as tag</name></project>
 ```
@@ -151,7 +151,7 @@ To use XML Namespaces, create a key in your array with the name `xmlns:`
 in a generic namespace or input the prefix `xmlns:` in a custom namespace. See
 the samples:
 
-``` php
+```php
 $xmlArray = [
     'root' => [
         'xmlns:' => 'https://cakephp.org',
@@ -176,7 +176,7 @@ $xml2 = Xml::fromArray($xmlArray);
 
 The value of `$xml1` and `$xml2` will be, respectively:
 
-``` php
+```php
 <?xml version="1.0"?>
 <root xmlns="https://cakephp.org"><child>value</child>
 
@@ -189,7 +189,7 @@ The value of `$xml1` and `$xml2` will be, respectively:
 After you have created your XML document, you just use the native interfaces for
 your document type to add, remove, or manipulate child nodes:
 
-``` php
+```php
 // Using SimpleXML
 $myXmlOriginal = '<?xml version="1.0"?><root><child>value</child></root>';
 $xml = Xml::build($myXmlOriginal);

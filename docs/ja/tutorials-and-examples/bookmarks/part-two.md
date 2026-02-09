@@ -13,7 +13,7 @@ CakePHP では、認証は [コンポーネント](../../controllers/components)
 すべてのメソッドに認証を必須にすることをおすすめします。では AuthComponent を
 AppController に追加しましょう。 :
 
-``` php
+```php
 // src/Controller/AppController.php の中で
 namespace App\Controller;
 
@@ -53,7 +53,7 @@ class AppController extends Controller
 まだそのコードが存在しないというエラーページが表示されるでしょう。
 それでは、ログインアクションを作成しましょう。 :
 
-``` php
+```php
 // src/Controller/UsersController.php の中で
 public function login()
 {
@@ -71,7 +71,7 @@ public function login()
 
 さらに **templates/Users/login.php** に以下のように追記します。 :
 
-``` php
+```php
 <h1>Login</h1>
 <?= $this->Form->create() ?>
 <?= $this->Form->control('email') ?>
@@ -96,7 +96,7 @@ public function login()
 これで人々はログインできますので、ログアウトする方法も同じように提供したいでしょう。
 ここでも `UsersController` に以下のコードを追加します。 :
 
-``` php
+```php
 public function initialize()
 {
     parent::initialize();
@@ -121,7 +121,7 @@ public function logout()
 人々がアプリケーションにサインアップできるように修正しましょう。 `UsersController` に以下を
 追記します。 :
 
-``` php
+```php
 public function initialize()
 {
     parent::initialize();
@@ -143,7 +143,7 @@ public function initialize()
 しかし、これをやる前にアプリケーションがどのようにアクションを許可するかを AuthComponent
 に示しましょう。 `AppController` に以下を追加します。 :
 
-``` php
+```php
 public function isAuthorized($user)
 {
     return false;
@@ -152,13 +152,13 @@ public function isAuthorized($user)
 
 また、 `AppController` の `Auth` の設定を以下のように追加します。 :
 
-``` text
+```text
 'authorize' => 'Controller',
 ```
 
 `initialize()` メソッドはこのようになります。 :
 
-``` php
+```php
 public function initialize()
 {
     $this->loadComponent('Flash');
@@ -189,7 +189,7 @@ public function initialize()
 はじめに、ブックマークに許可ロジックを追加します。
 `BookmarksController` に以下を追加します。 :
 
-``` php
+```php
 public function isAuthorized($user)
 {
     $action = $this->request->getParam('action');
@@ -218,7 +218,7 @@ public function isAuthorized($user)
 元のページにリダイレクトされるはずです。もし、エラーメッセージが表示されないなら、
 レイアウトに以下を追加してください。 :
 
-``` php
+```php
 // templates/layout/default.php の中で
 <?= $this->Flash->render() ?>
 ```
@@ -237,7 +237,7 @@ public function isAuthorized($user)
 `control('user_id')` を削除します。 削除したら、 **src/Controller/BookmarksController.php**
 の `add()` アクションを以下のように修正します。 :
 
-``` php
+```php
 public function add()
 {
     $bookmark = $this->Bookmarks->newEntity();
@@ -261,7 +261,7 @@ public function add()
 可能性を排除しています。編集フォームとアクションも同様にします。
 **src/Controller/BookmarksController.php** の `edit()` アクションを以下のようにします。 :
 
-``` php
+```php
 public function edit($id = null)
 {
     $bookmark = $this->Bookmarks->get($id, [
@@ -290,7 +290,7 @@ public function edit($id = null)
 **src/Controller/BookmarksController.php** の `index()`
 アクションを以下のようにします。 :
 
-``` php
+```php
 public function index()
 {
     $this->paginate = [
@@ -317,7 +317,7 @@ public function index()
 エンティティーの整形済みのタグを取得する簡単な方法が必要なので、バーチャル/計算済みのフィールドを
 エンティティーに追加しましょう。 **src/Model/Entity/Bookmark.php** に以下を追加します。 :
 
-``` php
+```php
 use Cake\Collection\Collection;
 
 protected function _getTagString()
@@ -344,7 +344,7 @@ protected function _getTagString()
 **src/Model/Entity/Bookmark.php** で `$_accessible` に `tag_string` を
 このように追加してください。 :
 
-``` php
+```php
 protected array $_accessible = [
     'user_id' => true,
     'title' => true,
@@ -362,7 +362,7 @@ protected array $_accessible = [
 **templates/Bookmarks/add.php** と **templates/Bookmarks/edit.php** の
 すでにある `tags._ids` のインプットを以下と置き換えます。 :
 
-``` php
+```php
 echo $this->Form->control('tag_string', ['type' => 'text']);
 ```
 
@@ -373,7 +373,7 @@ echo $this->Form->control('tag_string', ['type' => 'text']);
 `beforeSave()` フックメソッドを使用して、タグ文字列を解析し、関連するエンティティーを検索/構築します。
 **src/Model/Table/BookmarksTable.php** に以下を追加します。 :
 
-``` php
+```php
 public function beforeSave($event, $entity, $options)
 {
     if ($entity->tag_string) {

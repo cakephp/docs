@@ -25,7 +25,7 @@ CakePHP は基礎的な構造をクラス名、ファイル名、DB のテーブ
 「写真 (*Photo*)」と考えることができます。もし `users` テーブルからデータを読み出したいのであれば
 次のようにできます。 :
 
-``` php
+```php
 use Cake\ORM\Locator\LocatorAwareTrait;
 
 $users = $this->getTableLocator()->get('Users');
@@ -41,7 +41,7 @@ foreach ($resultset as $row) {
 
 新しいユーザーを作成し、それを (検証して) 保存したい場合には次のようにします。 :
 
-``` php
+```php
 use Cake\ORM\Locator\LocatorAwareTrait;
 
 $users = $this->getTableLocator()->get('Users');
@@ -58,7 +58,7 @@ $users->save($user);
 例えば、このビューはモデルのデータを利用して HTML ビューテンプレートや他で利用するための
 XML 形式の結果をレンダリングできます。 :
 
-``` php
+```php
 // ビューテンプレートファイルで 'element' をそれぞれのユーザーに対してレンダリングする
 <?php foreach ($users as $user): ?>
     <li class="user">
@@ -84,7 +84,7 @@ XML 形式の結果をレンダリングできます。 :
 クライアントが受け入れる適切な表示上のデータの種類を採択し、最終的にその描画処理をビュー層に委譲します。
 例えば、ユーザー登録ではこのようになります。 :
 
-``` php
+```php
 public function add()
 {
     $user = $this->Users->newEmptyEntity();

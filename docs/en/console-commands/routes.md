@@ -11,7 +11,7 @@ parameters will generate.
 
 ## Getting a List of all Routes
 
-``` bash
+```bash
 bin/cake routes
 ```
 
@@ -19,14 +19,14 @@ bin/cake routes
 
 You can quickly see how a URL will be parsed using the `check` method:
 
-``` bash
+```bash
 bin/cake routes check /articles/edit/1
 ```
 
 If your route contains any query string parameters remember to surround the URL
 in quotes:
 
-``` bash
+```bash
 bin/cake routes check "/articles/?page=1&sort=title&direction=desc"
 ```
 
@@ -35,6 +35,6 @@ bin/cake routes check "/articles/?page=1&sort=title&direction=desc"
 You can see the URL a `routing array` will generate using the
 `generate` method:
 
-``` bash
+```bash
 bin/cake routes generate controller:Articles action:edit 1
 ```

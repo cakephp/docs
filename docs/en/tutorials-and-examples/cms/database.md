@@ -17,7 +17,7 @@ the values in the `Datasources.default` array in your **config/app_local.php** f
 with those that apply to your setup. A sample completed configuration array
 might look something like the following:
 
-``` php {2}
+```php {2}
 <?php
 declare(strict_types=1);
 
@@ -207,7 +207,7 @@ If you prefer to use direct SQL statements, you can execute these in your databa
 
 ::: code-group
 
-``` sql [MySQL/MariaDB]
+```sql [MySQL/MariaDB]
 CREATE DATABASE cake_cms;
 
 USE cake_cms;
@@ -258,7 +258,7 @@ VALUES
 (1, 'First Post', 'first-post', 'This is the first post.', 1, NOW(), NOW());
 ```
 
-``` sql [PostgreSQL]
+```sql [PostgreSQL]
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     email VARCHAR(255) NOT NULL,

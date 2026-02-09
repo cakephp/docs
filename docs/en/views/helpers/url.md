@@ -21,7 +21,7 @@ If `$url` is empty, it returns the `REQUEST_URI`, otherwise it
 generates the URL for the controller and action combo. If `fullBase` is
 `true`, the full base URL will be prepended to the result:
 
-``` php
+```php
 echo $this->Url->build([
     'controller' => 'Posts',
     'action' => 'view',
@@ -36,7 +36,7 @@ Here are a few more usage examples:
 
 URL with extension:
 
-``` php
+```php
 echo $this->Url->build([
     'controller' => 'Posts',
     'action' => 'list',
@@ -49,7 +49,7 @@ echo $this->Url->build([
 
 URL with prefix:
 
-``` php
+```php
 echo $this->Url->build([
     'controller' => 'Posts',
     'action' => 'list',
@@ -62,7 +62,7 @@ echo $this->Url->build([
 
 URL (starting with '/') with the full base URL prepended:
 
-``` php
+```php
 echo $this->Url->build('/posts', ['fullBase' => true]);
 
 // Output
@@ -71,7 +71,7 @@ http://somedomain.com/posts
 
 URL with GET parameters and fragment anchor:
 
-``` php
+```php
 echo $this->Url->build([
     'controller' => 'Posts',
     'action' => 'search',
@@ -88,7 +88,7 @@ parameters and `#` key for URL fragment.
 
 URL for named route:
 
-``` php
+```php
 // Assuming a route is setup as a named route:
 // $router->connect(
 //     '/products/{slug}',
@@ -109,7 +109,7 @@ echo $this->Url->build(['_name' => 'product-page', 'slug' => 'i-m-slug']);
 The 2nd parameter allows you to define options controlling HTML escaping, and
 whether or not the base path should be added:
 
-``` php
+```php
 $this->Url->build('/posts', [
     'escape' => false,
     'fullBase' => true,
@@ -122,7 +122,7 @@ $this->Url->build('/posts', [
 
 If you want to use route path strings, you can do that using this method:
 
-``` php
+```php
 echo $this->Url->buildFromPath('Articles::index');
 // outputs: /articles
 
@@ -134,7 +134,7 @@ URL with asset timestamp wrapped by a `<link rel="preload"/>`, here pre-loading
 a font. Note: The file must exist and `Configure::read('Asset.timestamp')`
 must return `true` or `'force'` for the timestamp to be appended:
 
-``` php
+```php
 echo $this->Html->meta([
     'rel' => 'preload',
     'href' => $this->Url->assetUrl(
@@ -147,7 +147,7 @@ echo $this->Html->meta([
 If you are generating URLs for CSS, Javascript or image files there are helper
 methods for each of these asset types:
 
-``` php
+```php
 // Outputs /img/icon.png
 $this->Url->image('icon.png');
 
@@ -169,7 +169,7 @@ $this->Url->css('app.css', ['timestamp' => false]);
 If you need to customize how asset URLs are generated, or want to use custom
 asset cache busting parameters you can use the `assetUrlClassName` option:
 
-``` php
+```php
 // In view initialize
 $this->addHelper('Url', ['assetUrlClassName' => AppAsset::class]);
 ```

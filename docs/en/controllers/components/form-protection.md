@@ -57,10 +57,12 @@ Configuring the form protection component is generally done in the controller's
 Available options are:
 
 ### validate
+
 Set to `false` to completely skip the validation of POST
 requests, essentially turning off form validation.
 
 ### unlockedFields
+
 Set to a list of form fields to exclude from POST validation. Fields can be
 unlocked either in the Component, or with
 `FormHelper::unlockField()`. Fields that have been unlocked are
@@ -68,15 +70,17 @@ not required to be part of the POST and hidden unlocked fields do not have
 their values checked.
 
 ### unlockedActions
+
 Actions to exclude from POST validation checks.
 
 ### validationFailureCallback
+
 Callback to call in case of validation failure. Must be a valid Closure.
 Unset by default in which case exception is thrown on validation failure.
 
 ## Disabling form tampering checks
 
-``` php
+```php
 namespace App\Controller;
 
 use App\Controller\AppController;
@@ -111,7 +115,7 @@ There may be cases where you want to disable form tampering prevention for an
 action (ex. AJAX requests). You may "unlock" these actions by listing them in
 `$this->FormProtection->setConfig('unlockedActions', ['edit']);` in your `beforeFilter()`:
 
-``` php
+```php
 namespace App\Controller;
 
 use App\Controller\AppController;
@@ -145,7 +149,7 @@ configuration option to a callback function in the controller.
 By configuring a callback method you can customize how the failure handling process
 works:
 
-``` php
+```php
 use Cake\Controller\Exception\FormProtectionException;
 
 public function beforeFilter(EventInterface $event): void

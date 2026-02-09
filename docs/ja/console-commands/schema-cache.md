@@ -14,7 +14,7 @@ SchemaCacheShell は単純なアプリケーションのメタデータキャッ
 加えて、キャッシュデータを作るために、SchemaCacheShell をキャッシュされた
 メタデータを削除するために使えます。:
 
-``` text
+```text
 # 全メタデータの消去
 bin/cake schema_cache clear
 

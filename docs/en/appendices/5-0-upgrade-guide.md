@@ -11,7 +11,7 @@ First, check that your application is running on latest CakePHP 4.x version.
 
 Once your application is running on latest CakePHP 4.x, enable deprecation warnings in **config/app.php**:
 
-``` php
+```php
 'Error' => [
     'errorLevel' => E_ALL,
 ],
@@ -43,7 +43,7 @@ Because CakePHP 5 leverages union types and `mixed`, there are many
 backwards incompatible changes concerning method signatures and file renames.
 To help expedite fixing these tedious changes there is an upgrade CLI tool:
 
-``` bash
+```bash
 # Install the upgrade tool
 git clone https://github.com/cakephp/upgrade
 cd upgrade
@@ -54,7 +54,7 @@ composer install --no-dev
 With the upgrade tool installed you can now run it on your application or
 plugin:
 
-``` bash
+```bash
 bin/cake upgrade rector --rules cakephp50 <path/to/app/src>
 bin/cake upgrade rector --rules chronos3 <path/to/app/src>
 ```

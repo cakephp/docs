@@ -23,7 +23,7 @@ To get started, create a Table class. These classes live in
 databases, and the main interface to your database in CakePHP's ORM. The most
 basic table class would look like:
 
-``` php
+```php
 // src/Model/Table/ArticlesTable.php
 namespace App\Model\Table;
 
@@ -41,7 +41,7 @@ table will be used. If our table class was named `BlogPosts` your table should
 be named `blog_posts`. You can specify the table to use by using the `setTable()`
 method:
 
-``` php
+```php
 namespace App\Model\Table;
 
 use Cake\ORM\Table;
@@ -59,7 +59,7 @@ No inflection conventions will be applied when specifying a table. By convention
 the ORM also expects each table to have a primary key with the name of `id`.
 If you need to modify this you can use the `setPrimaryKey()` method:
 
-``` php
+```php
 namespace App\Model\Table;
 
 use Cake\ORM\Table;
@@ -81,7 +81,7 @@ example if your table class is called `ArticlesTable` the entity would be
 `PurchaseOrder`. If however, you want to use an entity that doesn't follow the
 conventions you can use the `setEntityClass()` method to change things up:
 
-``` php
+```php
 class PurchaseOrdersTable extends Table
 {
     public function initialize(array $config): void
@@ -100,7 +100,7 @@ this method to do initialization logic instead of overriding the constructor.
 Before you can query a table, you'll need to get an instance of the table. You
 can do this by using the `TableLocator` class:
 
-``` php
+```php
 // In a controller
 
 $articles = $this->fetchTable('Articles');
@@ -116,7 +116,7 @@ table class. Failing to do so can result in validation rules, or callbacks not
 being triggered as a default class is used instead of your actual class. To
 correctly load plugin table classes use the following:
 
-``` php
+```php
 // Plugin table
 $articlesTable = $this->fetchTable('PluginName.Articles');
 
@@ -142,7 +142,7 @@ To add an event listener to a Table class or Behavior simply implement the
 method signatures as described below. See the [Events System](../core-libraries/events) for
 more detail on how to use the events subsystem:
 
-``` php
+```php
 // In a controller
 $articles->save($article, ['customVariable1' => 'yourValue1']);
 
@@ -188,7 +188,7 @@ default, and instead use the `initialize` hook method.
 To respond to the `Model.initialize` event you can create a listener class
 which implements `EventListenerInterface`:
 
-``` php
+```php
 use Cake\Event\EventListenerInterface;
 class ModelInitializeListener implements EventListenerInterface
 {
@@ -209,7 +209,7 @@ class ModelInitializeListener implements EventListenerInterface
 
 and attach the listener to the `EventManager` as below:
 
-``` php
+```php
 use Cake\Event\EventManager;
 $listener = new ModelInitializeListener();
 EventManager::instance()->attach($listener);
@@ -240,7 +240,7 @@ The `Model.beforeFind` event is fired before each find operation. By stopping
 the event, and feeding the query with a custom result set, you can bypass the find
 operation entirely:
 
-``` php
+```php
 public function beforeFind(EventInterface $event, SelectQuery $query, ArrayObject $options, $primary): void
 {
     if (/* ... */) {
@@ -351,7 +351,7 @@ The event is not triggered if a transaction is started before calling delete.
 
 To prevent the save from continuing, simply stop event propagation in your callback:
 
-``` php
+```php
 public function beforeSave(EventInterface $event, EntityInterface $entity, ArrayObject $options): void
 {
     if (...) {
@@ -384,7 +384,7 @@ You can manage event priorities in one of a few ways:
     option. This will modify the priority of **all** callback methods in the
     Behavior:
 
-    ``` php
+    ```php
     // In a Table initialize() method
     $this->addBehavior('Tree', [
         // Default value is 10 and listeners are dispatched from the
@@ -397,7 +397,7 @@ You can manage event priorities in one of a few ways:
     `Model.implementedEvents()` method. This allows you to assign a different
     priority per callback-function:
 
-    ``` php
+    ```php
     // In a Table class.
     public function implementedEvents(): array
     {
@@ -425,7 +425,7 @@ would allow for re-usable pieces of logic, they would complicate binding events.
 To add a behavior to your table you can call the `addBehavior()` method.
 Generally the best place to do this is in the `initialize()` method:
 
-``` php
+```php
 namespace App\Model\Table;
 
 use Cake\ORM\Table;
@@ -442,7 +442,7 @@ class ArticlesTable extends Table
 As with associations, you can use `plugin syntax` and provide additional
 configuration options:
 
-``` php
+```php
 namespace App\Model\Table;
 
 use Cake\ORM\Table;
@@ -476,7 +476,7 @@ By default, all table instances use the `default` database connection. If your
 application uses multiple database connections you will want to configure which
 tables use which connections. This is the `defaultConnectionName()` method:
 
-``` php
+```php
 namespace App\Model\Table;
 
 use Cake\ORM\Table;
@@ -511,7 +511,7 @@ few other useful features as well.
 When loading tables from the registry you can customize their dependencies, or
 use mock objects by providing an `$options` array:
 
-``` php
+```php
 $articles = FactoryLocator::get('Table')->get('Articles', [
     'className' => 'App\Custom\ArticlesTable',
     'table' => 'my_articles',
@@ -535,7 +535,7 @@ You can also pre-configure the registry using the `setConfig()` method.
 Configuration data is stored *per alias*, and can be overridden by an object's
 `initialize()` method:
 
-``` php
+```php
 FactoryLocator::get('Table')->setConfig('Users', ['table' => 'my_users']);
 ```
 
@@ -551,7 +551,7 @@ FactoryLocator::get('Table')->setConfig('Users', ['table' => 'my_users']);
 During test cases you may want to flush the registry. Doing so is often useful
 when you are using mock objects, or modifying a table's dependencies:
 
-``` php
+```php
 FactoryLocator::get('Table')->clear();
 ```
 
@@ -571,6 +571,6 @@ set a namespace with the `Cake\Core\Configure::write` method. As an example:
 
 Would be configured with:
 
-``` php
+```php
 Cake\Core\Configure::write('App.namespace', 'App\My\Namespace');
 ```

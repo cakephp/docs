@@ -8,7 +8,7 @@ description: "Force HTTPS connections in your CakePHP application with HttpsEnfo
 If you want your application to only be available via HTTPS connections you can
 use the `HttpsEnforcerMiddleware`:
 
-``` php
+```php
 use Cake\Http\Middleware\HttpsEnforcerMiddleware;
 
 // Always raise an exception and never redirect.
@@ -51,7 +51,7 @@ When your application requires SSL it is a good idea to set the
 browser, and informs browsers that they should always connect with HTTPS connections.
 You can configure this header with the `hsts` option:
 
-``` php
+```php
 $https = new HttpsEnforcerMiddleware([
     'hsts' => [
         // How long the header value should be cached for.

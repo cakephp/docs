@@ -21,7 +21,7 @@ To get started with adding a REST API to your application, we'll first need
 a controller containing actions that we want to expose as an API. A basic
 controller might look something like this:
 
-``` php
+```php
 // src/Controller/RecipesController.php
 use Cake\View\JsonView;
 
@@ -99,7 +99,7 @@ the `serialize` option to tell CakePHP which view variables should be
 serialized when making API responses. We'll connect our controller to the
 application URLs with [Resource Routes](../development/routing#resource-routes):
 
-``` php
+```php
 // in config/routes.php
 $routes->scope('/', function (RouteBuilder $routes): void {
     $routes->setExtensions(['json']);
@@ -139,7 +139,7 @@ contained the JSON representation.
 
 In our `Application` class ensure the following is present:
 
-``` php
+```php
 $middlewareQueue->add(new BodyParserMiddleware());
 ```
 

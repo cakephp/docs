@@ -397,7 +397,7 @@ public function services(ContainerInterface $container): void
 
 ## Controller Example
 
-``` php
+```php
 // In src/Controller/UsersController.php
 class UsersController extends AppController
 {
@@ -427,7 +427,7 @@ testing.
 
 ## Command Example
 
-``` php
+```php
 // In src/Command/CheckUsersCommand.php
 use Cake\Console\CommandFactoryInterface;
 
@@ -464,7 +464,7 @@ of the command.
 
 ## Component Example
 
-``` php
+```php
 // In src/Controller/Component/SearchComponent.php
 class SearchComponent extends Component
 {
@@ -501,7 +501,7 @@ In order to have services created by the container, you need to tell it which
 classes it can create and how to build those classes. The
 simplest definition is via a class name:
 
-``` php
+```php
 // Add a class by its name.
 $container->add(BillingService::class);
 ```
@@ -509,7 +509,7 @@ $container->add(BillingService::class);
 Your application and plugins define the services they have in the
 `services()` hook method:
 
-``` php
+```php
 // in src/Application.php
 namespace App;
 
@@ -528,7 +528,7 @@ class Application extends BaseApplication
 
 You can define implementations for interfaces that your application uses:
 
-``` php
+```php
 use App\Service\AuditLogServiceInterface;
 use App\Service\AuditLogService;
 
@@ -540,7 +540,7 @@ $container->add(AuditLogServiceInterface::class, AuditLogService::class);
 
 The container can leverage factory functions to create objects if necessary:
 
-``` php
+```php
 $container->add(AuditLogServiceInterface::class, function (...$args) {
     return new AuditLogService(...$args);
 });
@@ -552,7 +552,7 @@ as arguments.
 Once you've defined a class, you also need to define the dependencies it
 requires. Those dependencies can be either objects or primitive values:
 
-``` php
+```php
 // Add a primitive value like a string, array or number.
 $container->add('apiKey', 'abc123');
 
@@ -572,7 +572,7 @@ By default, services are not shared. Every object (and dependencies) is created
 each time it is fetched from the container. If you want to re-use a single
 instance, often referred to as a singleton, you can mark a service as 'shared':
 
-``` php
+```php
 // in your Application::services() method.
 
 $container->addShared(BillingService::class);
@@ -583,7 +583,7 @@ $container->addShared(BillingService::class);
 If you want to have ORM Tables injected as a dependency to a service, you can
 add `TableContainer` to your application's service container:
 
-``` php
+```php
 use Cake\ORM\Locator\TableContainer;
 
 // In your Application::services() method.
@@ -601,7 +601,7 @@ Once a service is defined you can modify or update the service definition by
 extending them. This allows you to add additional arguments to services defined
 elsewhere:
 
-``` php
+```php
 // Add an argument to a partially defined service elsewhere.
 $container->extend(BillingService::class)
     ->addArgument('logLevel');
@@ -613,7 +613,7 @@ By tagging services you can get all of those services resolved at the same
 time. This can be used to build services that combine collections of other
 services like in a reporting system:
 
-``` php
+```php
 $container->add(BillingReport::class)->addTag('reports');
 $container->add(UsageReport::class)->addTag('reports');
 
@@ -630,7 +630,7 @@ Often you'll need configuration data in your services. If you need a specific va
 you can inject it as a constructor argument using the `Cake\Core\Attribute\Configure`
 attribute:
 
-``` php
+```php
 use Cake\Core\Attribute\Configure;
 
 class InjectedService
@@ -647,7 +647,7 @@ class InjectedService
 If you want to inject a copy of all configuration data, CakePHP includes
 an injectable configuration reader:
 
-``` php
+```php
 use Cake\Core\ServiceConfig;
 
 // Use a shared instance
@@ -669,7 +669,7 @@ their first use.
 
 An example ServiceProvider would look like:
 
-``` php
+```php
 namespace App\ServiceProvider;
 
 use Cake\Core\ContainerInterface;
@@ -701,7 +701,7 @@ in it not be loadable from the container.
 To load a service provider add it into the container using the
 `addServiceProvider()` method:
 
-``` php
+```php
 // in your Application::services() method.
 $container->addServiceProvider(new BillingServiceProvider());
 ```
@@ -714,7 +714,7 @@ service provider needs to load additional configuration files, load additional
 service providers or modify a service defined elsewhere in your application. An
 example of a bootable service would be:
 
-``` php
+```php
 namespace App\ServiceProvider;
 
 use Cake\Core\ServiceProvider;
@@ -1234,7 +1234,7 @@ class ArticlesController extends AppController
 
 Auto Wiring is turned off by default. To enable it:
 
-``` php
+```php
 // In src/Application.php
 use League\Container\ReflectionContainer;
 
@@ -1250,7 +1250,7 @@ While your dependencies will now be resolved automatically, this approach will
 not cache resolutions which can be detrimental to performance. To enable
 caching:
 
-``` php
+```php
 use League\Container\ReflectionContainer;
 
 $container->delegate(

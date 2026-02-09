@@ -51,7 +51,7 @@ Fork できたら、Fork したものを自分のローカルマシンへと clo
 もし、 2.x 系のバグ修正なら、 `2.x` ブランチを使用してください。これで、GitHub は、
 あなたに対象のブランチを編集させないので、後で変更をマージする際にとても簡単になります。 :
 
-``` text
+```text
 # 3.x のバグを修正
 git fetch upstream
 git checkout -b ticket-1234 upstream/master
@@ -77,7 +77,7 @@ git checkout -b ticket-1234 upstream/2.x
 変更し終え、 CakePHP へとマージされる準備が整ったら、あなたのブランチを
 更新したくなることでしょう。 :
 
-``` text
+```text
 # master のトップに修正をリベース
 git checkout master
 git fetch upstream
@@ -92,7 +92,7 @@ git rebase master
 `git status` で、どのファイルがコンフリクト/マージ失敗したのかを見ることができます。
 各コンフリクトを解決させてください。その後、 rebase を continue してください。 :
 
-``` text
+```text
 git add <filename> # コンフリクトしたファイルごとにこれを行ってください。
 git rebase --continue
 ```
@@ -100,13 +100,13 @@ git rebase --continue
 あなたのテストがすべて通過し続けているか確認してください。
 その後、あなたのブランチをあなたの Fork へと push します。 :
 
-``` text
+```text
 git push origin <branch-name>
 ```
 
 ブランチを push した後 rebase した場合、force push を使用する必要があります。 :
 
-``` text
+```text
 git push --force origin <branch-name>
 ```
 

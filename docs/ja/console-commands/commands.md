@@ -12,7 +12,7 @@ CakePHP には、開発のスピードアップと日常的なタスクの自動
 アプリケーションの **src/Command** ディレクトリの中で、 **HelloCommand.php** を作成してください。
 その中に次のコードを書いてください。 :
 
-``` php
+```php
 <?php
 namespace App\Command;
 
@@ -34,7 +34,7 @@ class HelloCommand extends Command
 コマンドが呼び出されたときに、このメソッドが呼び出されます。
 それでは、このコマンド実行してみましょう。
 
-``` bash
+```bash
 bin/cake hello
 ```
 
@@ -46,7 +46,7 @@ bin/cake hello
 次に、パラメータを与えられるようにしてみます。
 `buildOptionParser()` を使用します。 :
 
-``` php
+```php
 <?php
 namespace App\Command;
 
@@ -76,7 +76,7 @@ class HelloCommand extends Command
 
 このファイルを保存した後、次のようにコマンドを実行できます。
 
-``` bash
+```bash
 bin/cake hello jillian
 
 # 出力結果
@@ -89,7 +89,7 @@ Hello jillian
 このコマンド名を上書きする場合は、
 コマンドの `defaultName()` メソッドを用います。:
 
-``` text
+```text
 public static function defaultName(): string
 {
     return 'oh_hi';
@@ -106,7 +106,7 @@ public static function defaultName(): string
 また、オプションも定義できます。 たとえば、 `HelloCommand` に `yell` オプションを
 追加することができます。 :
 
-``` php
+```php
 // ...
 protected function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
 {
@@ -147,7 +147,7 @@ public function execute(Arguments $args, ConsoleIo $io)
 通じてモデルをロードできます。
 そのために、 `$this->fetchTable()` を使用します。:
 
-``` php
+```php
 <?php
 declare(strict_types=1);
 
@@ -191,7 +191,7 @@ class UserCommand extends Command
 
 コマンドが回復不能なエラーに遭遇したら、 `abort()` メソッドを使って実行を終了することができます。 :
 
-``` php
+```php
 // ...
 public function execute(Arguments $args, ConsoleIo $io)
 {
@@ -206,7 +206,7 @@ public function execute(Arguments $args, ConsoleIo $io)
 
 `$io->abort()` の引数を使用して、任意のメッセージと終了コードを渡すこともできます:
 
-``` php
+```php
 public function execute(Arguments $args, ConsoleIo $io)
 {
     $name = $args->getArgument('name');
@@ -231,7 +231,7 @@ public function execute(Arguments $args, ConsoleIo $io)
 コマンド内から他のコマンドを呼び出す必要がある場合があります。
 そのために `executeCommand()` を用いることができます。:
 
-``` php
+```php
 // コマンドのオプションと引数は配列で渡します。
 $this->executeCommand(OtherCommand::class, ['--verbose', 'deploy']);
 
@@ -244,7 +244,7 @@ $this->executeCommand($command, ['--verbose', 'deploy']);
 
 以下のようにコマンドの説明文を設定することができます。:
 
-``` php
+```php
 class UserCommand extends Command
 {
     public static function getDescription(): string
@@ -256,7 +256,7 @@ class UserCommand extends Command
 
 これにより、Cake CLIに説明文が表示されます。:
 
-``` bash
+```bash
 bin/cake
 
 App:
@@ -266,7 +266,7 @@ App:
 
 コマンドのヘルプセクションと同様です。:
 
-``` bash
+```bash
 cake user --help
 カスタムの説明文
 
@@ -285,7 +285,7 @@ CLI で使用するのと同じ文字列を渡すことができます。
 
 **src/Command/UpdateTableCommand.php** に置かれた、とてもシンプルなシェルで始めましょう。 :
 
-``` php
+```php
 namespace App\Command;
 
 use Cake\Command\Command;
@@ -308,7 +308,7 @@ class UpdateTableCommand extends Command
 に `Cake\TestSuite\ConsoleIntegrationTestTrait` を使用したテストケースを作成します。
 このシェルの説明が `stdout` に出力されることをテストしましょう。 :
 
-``` php
+```php
 namespace App\Test\TestCase\Command;
 
 use Cake\TestSuite\ConsoleIntegrationTestTrait;
@@ -330,7 +330,7 @@ class UpdateTableCommandTest extends TestCase
 統合テストケースを作成することは基本的に簡単です。
 このコマンドにさらに多くのロジックを追加してみましょう。 :
 
-``` php
+```php
 namespace App\Command;
 
 use Cake\Command\Command;
@@ -370,7 +370,7 @@ class UpdateTableCommand extends Command
 より完成度が高いシェルです。
 テストケースを次のコードスニペットに変更してみましょう。 :
 
-``` php
+```php
 namespace Cake\Test\TestCase\Command;
 
 use Cake\Command\Command;
@@ -434,7 +434,7 @@ class UpdateTableCommandTest extends TestCase
 引き続き、対話的な確認フローを追加してみましょう。
 テスト元のコマンドクラスを次のように更新します。 :
 
-``` php
+```php
 namespace App\Command;
 
 use Cake\Command\Command;
@@ -480,7 +480,7 @@ class UpdateTableCommand extends Command
 メソッドを削除し、 **tests/TestCase/Command/UpdateTableCommandTest.php**
 に以下のメソッドを追加してください。 :
 
-``` php
+```php
 public function testUpdateModifiedSure()
 {
     $now = new FrozenTime('2017-01-01 00:00:00');
@@ -520,7 +520,7 @@ public function testUpdateModifiedUnsure()
 `Cake\TestSuite\ConsoleIntegrationTestTrait` トレイトは、コンソールの出力に対して
 容易にアサートできるようにするいくつかのアサーションメソッドを提供します。 :
 
-``` php
+```php
 // シェルがsuccessステータスで終了したことをアサート
 $this->assertExitSuccess();
 

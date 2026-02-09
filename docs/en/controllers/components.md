@@ -27,7 +27,7 @@ the [Form Protection Component](../controllers/components/form-protection). Conf
 and for components in general, is usually done via `loadComponent()` in your
 Controller's `initialize()` method or via the `$components` array:
 
-``` php
+```php
 class PostsController extends AppController
 {
     public function initialize(): void
@@ -45,7 +45,7 @@ You can configure components at runtime using the `setConfig()` method. Often,
 this is done in your controller's `beforeFilter()` method. The above could
 also be expressed as:
 
-``` php
+```php
 public function beforeFilter(EventInterface $event): void
 {
     $this->FormProtection->setConfig('unlockedActions', ['index']);
@@ -55,7 +55,7 @@ public function beforeFilter(EventInterface $event): void
 Like helpers, components implement `getConfig()` and `setConfig()` methods
 to read and write configuration data:
 
-``` php
+```php
 // Read config data.
 $this->FormProtection->getConfig('unlockedActions');
 
@@ -74,7 +74,7 @@ alias components. This feature is useful when you want to
 replace `$this->Flash` or another common Component reference with a custom
 implementation:
 
-``` php
+```php
 // src/Controller/PostsController.php
 class PostsController extends AppController
 {
@@ -108,7 +108,7 @@ You might not need all of your components available on every controller
 action. In situations like this you can load a component at runtime using the
 `loadComponent()` method in your controller:
 
-``` php
+```php
 // In a controller action
 $this->loadComponent('OneTimer');
 $time = $this->OneTimer->getTime();
@@ -127,7 +127,7 @@ simple. Each component you use is exposed as a property on your controller. If
 you had loaded up the `Cake\Controller\Component\FlashComponent`
 in your controller, you could access it like so:
 
-``` php
+```php
 class PostsController extends AppController
 {
     public function initialize(): void
@@ -165,7 +165,7 @@ The first step is to create a new component file and class. Create the file in
 **src/Controller/Component/MathComponent.php**. The basic structure for the
 component would look something like this:
 
-``` php
+```php
 namespace App\Controller\Component;
 
 use Cake\Controller\Component;
@@ -186,7 +186,7 @@ class MathComponent extends Component
 Components can use [Dependency Injection](../development/dependency-injection) to receive services
 as constructor parameters:
 
-``` php
+```php
 namespace App\Controller\Component;
 
 use Cake\Controller\Component;
@@ -214,7 +214,7 @@ controllers by loading it during the controller's `initialize()` method.
 Once loaded, the controller will be given a new attribute named after the
 component, through which we can access an instance of it:
 
-``` php
+```php
 // In a controller
 // Make the new component available at $this->Math,
 // as well as the standard $this->Flash
@@ -231,7 +231,7 @@ set of parameters that will be passed on to the Component's
 constructor. These parameters can then be handled by
 the Component:
 
-``` php
+```php
 // In your controller.
 public function initialize(): void
 {
@@ -252,7 +252,7 @@ The above would pass the array containing precision and randomGenerator to
 Sometimes one of your components may need to use another component.
 You can load other components by adding them to the `$components` property:
 
-``` php
+```php
 // src/Controller/Component/CustomComponent.php
 namespace App\Controller\Component;
 
@@ -298,7 +298,7 @@ class ExistingComponent extends Component
 From within a Component you can access the current controller through the
 registry:
 
-``` php
+```php
 $controller = $this->getController();
 ```
 
@@ -323,7 +323,7 @@ augment the request cycle.
 
 To redirect from within a component callback method you can use the following:
 
-``` php
+```php
 public function beforeFilter(EventInterface $event): void
 {
     if (...) {
@@ -341,7 +341,7 @@ component callbacks to run, and that the controller should not handle the action
 any further. As of 4.1.0 you can raise a `RedirectException` to signal
 a redirect:
 
-``` php
+```php
 use Cake\Http\Exception\RedirectException;
 use Cake\Routing\Router;
 
@@ -355,7 +355,7 @@ Raising an exception will halt all other event listeners and create a new
 response that doesn't retain or inherit any of the current response's headers.
 When raising a `RedirectException` you can include additional headers:
 
-``` php
+```php
 throw new RedirectException(Router::url('/'), 302, [
     'Header-Key' => 'value',
 ]);

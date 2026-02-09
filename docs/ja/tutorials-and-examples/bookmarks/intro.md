@@ -13,7 +13,7 @@
 
 始める前に、最新の PHP バージョンであることを確認してください。
 
-``` bash
+```bash
 php -v
 ```
 
@@ -95,7 +95,7 @@ CakePHP のディレクトリー構造がどのように働くかを学ぶのに
 このチュートリアルで使用する空のデータベースを作成してください。必要なテーブルを作成するために、
 以下の SQL を実行することができます。 :
 
-``` sql
+```sql
 CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     email VARCHAR(255) NOT NULL,
@@ -150,7 +150,7 @@ CREATE TABLE bookmarks_tags (
 ファイルの中の `Datasources.default` 配列の値を置き換えてください。
 完全な設定配列の例は、以下のようになります。 :
 
-``` php
+```php
 return [
     // More configuration above.
     'Datasources' => [
@@ -183,7 +183,7 @@ return [
 素早く生成するために [bake コンソール](../../bake/usage) アプリケーションが使用できます。
 コマンドライン上で、以下のコマンドを実行してください。 :
 
-``` text
+```text
 // Windows 上では、代わりに bin\cake を使用する必要があります。
 bin/cake bake all users
 bin/cake bake all bookmarks
@@ -216,7 +216,7 @@ bin/cake bake all tags
 では、パスワードのためのセッターを追加してみましょう。 **src/Model/Entity/User.php** に
 以下を追加してください。 :
 
-``` php
+```php
 namespace App\Model\Entity;
 
 use Cake\Auth\DefaultPasswordHasher; // この行を追加してください
@@ -258,7 +258,7 @@ class User extends Entity
 タグが付いたブックマークすべてを検索することを意図しています。これを実装する前に、
 新しいルートを追加します。 **config/routes.php** を以下のようにしてください。 :
 
-``` php
+```php
 <?php
 use Cake\Routing\Route\DashedRoute;
 use Cake\Routing\Router;
@@ -300,7 +300,7 @@ Router::scope('/', function ($routes) {
 今から存在しないメソッドを実装してみましょう。 **src/Controller/BookmarksController.php**
 に以下を追加してください。 :
 
-``` php
+```php
 public function tags()
 {
     // CakePHP によって提供された 'pass' キーは全ての
@@ -330,7 +330,7 @@ CakePHP では、コントローラーのアクションをスリムに保ち、
 `findTagged()` メソッドがまだ実装されていないエラーが表示されます。
 **src/Model/Table/BookmarksTable.php** に以下を追加してください。 :
 
-``` php
+```php
 // $query 引数は、クエリービルダーのインスタンスです。
 // $options 配列には、コントローラーのアクション中で find('tagged') に渡した
 // 'tag' オプションが含まれます。
@@ -369,7 +369,7 @@ Finder メソッドは、常に [クエリービルダー](../../orm/query-build
 知らせるエラーを表示します。次に、ビューファイルを `tags()` アクションのために作りましょう。
 **templates/Bookmarks/tags.php** に以下の内容を追加します。 :
 
-``` php
+```php
 <h1>
     Bookmarks tagged with
     <?= $this->Text->toList(h($tags)) ?>

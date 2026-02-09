@@ -10,7 +10,7 @@ description: "Manipulate dates and times in CakePHP: parse, format, compare, mod
 If you need `TimeHelper` functionalities outside of a `View`,
 use the `DateTime` class:
 
-``` php
+```php
 use Cake\I18n\DateTime;
 
 class UsersController extends AppController
@@ -48,7 +48,7 @@ to data, and avoids order based dependency issues.
 
 There are a few ways to create `DateTime` instances:
 
-``` php
+```php
 use Cake\I18n\DateTime;
 
 // Create from a string datetime.
@@ -76,7 +76,7 @@ as a UNIX timestamp.
 
 In test cases, you can mock out `now()` using `setTestNow()`:
 
-``` php
+```php
 // Fixate time.
 $time = new DateTime('2021-01-31 22:11:30');
 DateTime::setTestNow($time);
@@ -95,7 +95,7 @@ echo $now->i18nFormat('yyyy-MM-dd HH:mm:ss');
 Remember, `DateTime` instance always return a new instance from setters
 instead of modifying itself:
 
-``` php
+```php
 $time = DateTime::now();
 
 // Create and reassign a new instance
@@ -108,14 +108,14 @@ echo $newTime->i18nFormat('yyyy-MM-dd HH:mm:ss');
 
 You can also use the methods provided by PHP's built-in `DateTime` class:
 
-``` php
+```php
 $time = $time->setDate(2013, 10, 31);
 ```
 
 Failing to reassign the new `DateTime` instances will result in the
 original, unmodified instance being used:
 
-``` php
+```php
 $time->year(2013)
     ->month(10)
     ->day(31);
@@ -126,7 +126,7 @@ echo $time->i18nFormat('yyyy-MM-dd HH:mm:ss');
 You can create another instance with modified dates, through subtraction and
 addition of their components:
 
-``` php
+```php
 $time = DateTime::create(2021, 1, 31, 22, 11, 30);
 $newTime = $time->subDays(5)
     ->addHours(-2)
@@ -142,7 +142,7 @@ echo $newTime;
 
 You can get the internal components of a date by accessing its properties:
 
-``` php
+```php
 $time = DateTime::create(2021, 1, 31, 22, 11, 30);
 echo $time->year; // 2021
 echo $time->month; // 1
@@ -158,7 +158,7 @@ echo $time->timezoneName; // America/New_York
 
 This method sets the default format used when converting an object to json:
 
-``` php
+```php
 DateTime::setJsonEncodeFormat('yyyy-MM-dd HH:mm:ss');  // For any immutable DateTime
 Date::setJsonEncodeFormat('yyyy-MM-dd HH:mm:ss');  // For any mutable Date
 
@@ -189,7 +189,7 @@ The `callable` parameter type was added.
 A very common thing to do with `Time` instances is to print out formatted
 dates. CakePHP makes this a snap:
 
-``` php
+```php
 $time = DateTime::parse('2021-01-31 22:11:30');
 
 // Prints a localized datetime stamp. Outputs '1/31/21, 10:11 PM'
@@ -216,7 +216,7 @@ specified in the following resource:
 
 You can also format dates with non-gregorian calendars:
 
-``` php
+```php
 // On ICU version 66.1
 $time = DateTime::create(2021, 1, 31, 22, 11, 30);
 
@@ -256,7 +256,7 @@ The following calendar types are supported:
 
 Print out a predefined 'nice' format:
 
-``` php
+```php
 $time = DateTime::parse('2021-01-31 22:11:30', new \DateTimeZone('America/New_York'));
 
 // Outputs 'Jan 31, 2021, 10:11 PM' in en-US
@@ -267,7 +267,7 @@ You can alter the timezone in which the date is displayed without altering the
 `DateTime` object itself. This is useful when you store dates in one timezone, but
 want to display them in a user's own timezone:
 
-``` php
+```php
 // Outputs 'Monday, February 1, 2021 at 4:11:30 AM Central European Standard Time'
 echo $time->i18nFormat(\IntlDateFormatter::FULL, 'Europe/Paris');
 
@@ -280,14 +280,14 @@ echo $time->timezoneName;
 
 Leaving the first parameter as `null` will use the default formatting string:
 
-``` php
+```php
 // Outputs '2/1/21, 4:11 AM'
 echo $time->i18nFormat(null, 'Europe/Paris');
 ```
 
 Finally, it is possible to use a different locale for displaying a date:
 
-``` php
+```php
 // Outputs 'lundi 1 février 2021 à 04:11:30 heure normale d’Europe centrale'
 echo $time->i18nFormat(\IntlDateFormatter::FULL, 'Europe/Paris', 'fr-FR');
 
@@ -302,7 +302,7 @@ The default locale in which dates are displayed when using `nice`
 [intl.default_locale](https://www.php.net/manual/en/intl.configuration.php#ini.intl.default-locale).
 You can, however, modify this default at runtime:
 
-``` php
+```php
 DateTime::setDefaultLocale('es-ES');
 Date::setDefaultLocale('es-ES');
 
@@ -316,7 +316,7 @@ a different locale is specified directly in the formatting method.
 Likewise, it is possible to alter the default formatting string to be used for
 `i18nFormat`:
 
-``` php
+```php
 DateTime::setToStringFormat(\IntlDateFormatter::SHORT); // For any DateTime
 Date::setToStringFormat(\IntlDateFormatter::SHORT); // For any Date
 
@@ -350,7 +350,7 @@ format string.
 
 Often it is useful to print times relative to the present:
 
-``` php
+```php
 $time = new DateTime('Jan 31, 2021');
 // On June 12, 2021, this would output '4 months, 1 week, 6 days ago'
 echo $time->timeAgoInWords(
@@ -362,7 +362,7 @@ The `end` option lets you define at which point after which relative times
 should be formatted using the `format` option. The `accuracy` option lets
 us control what level of detail should be used for each interval range:
 
-``` php
+```php
 // Outputs '4 months ago'
 echo $time->timeAgoInWords([
     'accuracy' => ['month' => 'month'],
@@ -373,7 +373,7 @@ echo $time->timeAgoInWords([
 By setting `accuracy` to a string, you can specify what is the maximum level
 of detail you want output:
 
-``` php
+```php
 $time = new DateTime('+23 hours');
 // Outputs 'in about a day'
 echo $time->timeAgoInWords([
@@ -394,7 +394,7 @@ echo $time->timeAgoInWords([
 Once created, you can convert `DateTime` instances into timestamps or quarter
 values:
 
-``` php
+```php
 $time = new DateTime('2021-01-31');
 echo $time->toQuarter();  // Outputs '1'
 echo $time->toUnixString();  // Outputs '1612069200'
@@ -406,7 +406,7 @@ The `toQuarterRange()` method was added.
 
 You can also get the date range for a quarter:
 
-``` php
+```php
 $time = new DateTime('2021-01-31');
 $range = $time->toQuarterRange();
 // Outputs ['2021-01-01', '2021-03-31']
@@ -436,7 +436,7 @@ $range = $time->toQuarterRange();
 
 You can compare a `DateTime` instance with the present in a variety of ways:
 
-``` php
+```php
 $time = new DateTime('+3 days');
 
 debug($time->isYesterday());
@@ -457,7 +457,7 @@ not the `DateTime` instance matches the present.
 You can see if a `DateTime` instance falls within a given range using
 `wasWithinLast()` and `isWithinNext()`:
 
-``` php
+```php
 $time = new DateTime('+3 days');
 
 // Within 2 days. Outputs 'false'
@@ -473,7 +473,7 @@ debug($time->isWithinNext('2 weeks'));
 
 You can also compare a `DateTime` instance within a range in the past:
 
-``` php
+```php
 $time = new DateTime('-72 hours');
 
 // Within past 2 days. Outputs 'false'
@@ -506,7 +506,7 @@ time and timezones. The `Date` class wraps the `Cake\Chronos\ChronosDate` class.
 
 Returns an integer timestamp for the date:
 
-``` php
+```php
 $date = new Date('2021-01-31');
 echo $date->getTimestamp();
 ```
@@ -525,7 +525,7 @@ CakePHP provides `DateTimePeriod` and `DatePeriod` classes that wrap PHP's
 `DatePeriod`. When iterating, `DateTimePeriod` returns `DateTime` instances
 and `DatePeriod` returns `Date` instances:
 
-``` php
+```php
 use Cake\I18n\DateTime;
 use Cake\I18n\DateTimePeriod;
 

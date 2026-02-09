@@ -82,7 +82,7 @@ Save the file, then restart your console.
 This is the code you need to put inside the **cake** file in the correct location
 in order to get autocompletion when using the CakePHP console:
 
-``` bash
+```bash
 #
 # Bash completion file for CakePHP console
 #
@@ -146,7 +146,7 @@ Three type of autocompletion are provided. The following output are from a fresh
 
 Sample output for commands autocompletion:
 
-``` bash
+```bash
 $ bin/cake <tab>
 bake        i18n        schema_cache   routes
 console     migrations  plugin         server
@@ -156,7 +156,7 @@ console     migrations  plugin         server
 
 Sample output for subcommands autocompletion:
 
-``` bash
+```bash
 $ bin/cake bake <tab>
 behavior            helper              command
 cell                mailer              command_helper
@@ -170,7 +170,7 @@ form                plugin
 
 Sample output for subcommands options autocompletion:
 
-``` bash
+```bash
 $ bin/cake bake -<tab>
 -c            --everything  --force       --help        --plugin      -q            -t            -v
 --connection  -f            -h            -p            --prefix      --quiet       --theme       --verbose

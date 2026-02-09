@@ -72,7 +72,7 @@ validationFailureCallback
 
 ## フォームの改ざんチェックを無効にする
 
-``` php
+```php
 namespace App\Controller;
 
 use App\Controller\AppController;
@@ -107,7 +107,7 @@ class WidgetsController extends AppController
 これらのアクションを `beforeFilter()` 内の `$this->Security->unlockedActions`
 にリストアップすることで「ロックを解除」することができます。 :
 
-``` php
+```php
 namespace App\Controller;
 
 use App\Controller\AppController;
@@ -140,7 +140,7 @@ class WidgetController extends AppController
 
 コールバックメソッドを設定することで、失敗処理の動作をカスタマイズすることができます。 :
 
-``` php
+```php
 public function beforeFilter(EventInterface $event)
 {
     parent::beforeFilter($event);
