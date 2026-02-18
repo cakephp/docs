@@ -205,6 +205,11 @@ This mean that:
 - 1000 Bytes = 1 KB
 - 1024 Bytes = 1 KiB
 
+::: info Added in version 5.4.0
+It is now possible to use the byte units defined by the ISO/IEC 80000-13
+standard alongside more natural decimal units.
+:::
+
 ## Setting the Default Byte Units
 
 ### Number::setUseIecUnits()
