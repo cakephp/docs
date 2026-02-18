@@ -144,7 +144,7 @@ bin/cake migrations migrate
 
 # Step 4: (Optional) Generate and run seed data
 bin/cake bake seed Articles
-bin/cake migrations seed
+bin/cake seeds run Articles
 ```
 
 ```php [Migration File]

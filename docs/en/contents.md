@@ -63,7 +63,7 @@
 - [Authorization](https://book.cakephp.org/authorization/3/)
 - [Bake](https://book.cakephp.org/bake/3/)
 - [Debug Kit](https://book.cakephp.org/debugkit/5/)
-- [Migrations](https://book.cakephp.org/migrations/4/)
+- [Migrations](https://book.cakephp.org/migrations/5/)
 - [Elasticsearch](https://book.cakephp.org/elasticsearch/4/)
 - [Phinx](https://book.cakephp.org/phinx/0/en/)
 - [Chronos](https://book.cakephp.org/chronos/3/)

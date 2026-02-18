@@ -198,7 +198,7 @@ The seed data above stores passwords in **plain text** for initial setup purpose
 Run the seeders:
 
 ```bash
-bin/cake migrations seed
+bin/cake seeds run
 ```
 
 ### Option B: Using Raw SQL
@@ -321,7 +321,7 @@ conventions will save you time as you can leverage the convention-based defaults
 CakePHP provides.
 
 ::: tip Learn More
-Read more about database migrations and seeding in the [Migrations documentation](https://book.cakephp.org/migrations/4/).
+Read more about database migrations and seeding in the [Migrations documentation](https://book.cakephp.org/migrations/5/).
 :::
 
 With the database built, we can now build our [Models](../../tutorials-and-examples/cms/articles-model).
