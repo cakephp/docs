@@ -205,7 +205,7 @@ This mean that:
 - 1000 Bytes = 1 KB
 - 1024 Bytes = 1 KiB
 
-::: info Added in version 5.4.0
+::: info Modified in version 5.4.0
 It is now possible to use the byte units defined by the ISO/IEC 80000-13
 standard alongside more natural decimal units.
 :::
@@ -220,6 +220,11 @@ This method acts as a setter for the default byte units. It eliminates the
 need to pass the boolean parameter to `Cake\I18n\Number::toReadableSize()` when
 switching between decimal units and IEC units. If `$useIec` is defined as true,
 IEC units will be employed; otherwise, decimal units will be used.
+
+::: info Added in version 5.4.0
+This method has been added to remove the need to pass the optionnal boolean argument
+each time IEC units are needed.
+:::
 
 ## Formatting Numbers
 
