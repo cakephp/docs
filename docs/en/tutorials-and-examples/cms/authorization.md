@@ -7,7 +7,7 @@ description: "Implement authorization in CakePHP CMS with policy classes. Contro
 
 With users now able to login to our CMS, we want to apply authorization rules
 to ensure that each user only edits the posts they own. We'll use the
-[authorization plugin](https://book.cakephp.org/authorization/2) to do this.
+[authorization plugin](https://book.cakephp.org/authorization/3) to do this.
 
 ## Installing Authorization Plugin
 
@@ -40,9 +40,11 @@ use Authorization\Policy\OrmResolver;
 
 Add the `AuthorizationServiceProviderInterface` to the implemented interfaces on your application:
 
-    class Application extends BaseApplication
-        implements AuthenticationServiceProviderInterface,
-        AuthorizationServiceProviderInterface
+```php {2-3}
+class Application extends BaseApplication
+    implements AuthenticationServiceProviderInterface,
+    AuthorizationServiceProviderInterface
+```
 
 Then add the following to your `middleware()` method:
 

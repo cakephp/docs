@@ -16,7 +16,7 @@ enable new users to register.
 Use composer to install the Authentication Plugin:
 
 ```bash
-composer require "cakephp/authentication:~4.0"
+composer require "cakephp/authentication:^4.0"
 ```
 
 ## Adding Password Hashing
@@ -45,7 +45,7 @@ Because we want to hash the password each time it is set, we'll use a mutator/se
 CakePHP will call a convention based setter method any time a property is set in one of your
 entities. Let's add a setter for the password in **src/Model/Entity/User.php**:
 
-```php {3,12-18}
+```php {4,12-18}
 <?php
 namespace App\Model\Entity;
 
@@ -109,7 +109,7 @@ In **src/Application.php**, add the following imports:
 use Authentication\AuthenticationService;
 use Authentication\AuthenticationServiceInterface;
 use Authentication\AuthenticationServiceProviderInterface;
-use Authentication\Identifier\AbstractIdentifier;
+use Authentication\Identifier\PasswordIdentifier;
 use Authentication\Middleware\AuthenticationMiddleware;
 use Psr\Http\Message\ServerRequestInterface;
 ```
@@ -123,11 +123,9 @@ class Application extends BaseApplication
 {
 ```
 
-Then add the following methods:
+Then add the following to your `middleware()` method:
 
-::: code-group
-
-```php [middleware()]
+```php
 // src/Application.php
 public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue
 {
@@ -142,7 +140,9 @@ public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue
 }
 ```
 
-```php [getAuthenticationService()]
+Next, add the `getAuthenticationService()` method:
+
+```php
 // src/Application.php
 public function getAuthenticationService(ServerRequestInterface $request): AuthenticationServiceInterface
 {
@@ -160,8 +160,8 @@ public function getAuthenticationService(ServerRequestInterface $request): Authe
     ]);
 
     $fields = [
-        AbstractIdentifier::CREDENTIAL_USERNAME => 'email',
-        AbstractIdentifier::CREDENTIAL_PASSWORD => 'password',
+        PasswordIdentifier::CREDENTIAL_USERNAME => 'email',
+        PasswordIdentifier::CREDENTIAL_PASSWORD => 'password',
     ];
 
     // Load the authenticators. Session should be first.
@@ -175,9 +175,8 @@ public function getAuthenticationService(ServerRequestInterface $request): Authe
             'action' => 'login',
         ],
         'identifier' => [
-            'Authentication.Password' => [
-                'fields' => $fields,
-            ],
+            'className' => 'Authentication.Password',
+            'fields' => $fields,
         ],
     ]);
 
@@ -185,13 +184,11 @@ public function getAuthenticationService(ServerRequestInterface $request): Authe
 }
 ```
 
-:::
-
 ### Configuring the AppController
 
 In your `AppController` class add the following code:
 
-```php {7}
+```php {8}
 // src/Controller/AppController.php
 public function initialize(): void
 {
@@ -232,9 +229,8 @@ If you visit your site, you'll get an "infinite redirect loop" so let's fix that
 
 In your `UsersController`, add the following code:
 
-::: code-group
-
-```php [UsersController.php]
+```php
+// src/Controller/UsersController.php
 public function beforeFilter(\Cake\Event\EventInterface $event): void
 {
     parent::beforeFilter($event);
@@ -260,7 +256,10 @@ public function login()
 }
 ```
 
-```php [templates/Users/login.php]
+Next, add the template for your login action:
+
+```php
+<!-- templates/Users/login.php -->
 <div class="users form content">
     <?= $this->Flash->render() ?>
     <h3>Login</h3>
@@ -277,8 +276,6 @@ public function login()
 </div>
 ```
 
-:::
-
 Now the login page will allow us to correctly login into the application.
 Test it by requesting any page of your site. After being redirected
 to the `/users/login` page, enter the email and password you
@@ -291,7 +288,7 @@ We need to add a couple more details to configure our application.
 We want all `view` and `index` pages accessible without logging in so we'll add this specific
 configuration in AppController:
 
-```php {6}
+```php {7}
 // in src/Controller/AppController.php
 public function beforeFilter(\Cake\Event\EventInterface $event): void
 {
@@ -336,7 +333,7 @@ If you try to visit **/users/add** without being logged in, you will be
 redirected to the login page. We should fix that as we want to allow people to
 sign up for our application. In the `UsersController` update the `beforeFilter`:
 
-```php {3}
+```php {2}
 // In UsersController::beforeFilter()
 $this->Authentication->allowUnauthenticated(['login', 'add']);
 ```
