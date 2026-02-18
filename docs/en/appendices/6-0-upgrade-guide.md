@@ -6,7 +6,7 @@ First, check that your application is running on latest CakePHP 5.x version.
 
 Once your application is running on latest CakePHP 5.x, enable deprecation warnings in **config/app.php**:
 
-``` text
+```text
 'Error' => [
     'errorLevel' => E_ALL,
 ]
@@ -35,7 +35,7 @@ If you are not running on **PHP 8.4 or higher**, you will need to upgrade PHP be
 
 To help expedite fixing tedious changes there is an upgrade CLI tool:
 
-``` bash
+```bash
 # Install the upgrade tool
 git clone https://github.com/cakephp/upgrade
 cd upgrade
@@ -46,7 +46,7 @@ composer install --no-dev
 With the upgrade tool installed you can now run it on your application or
 plugin:
 
-``` text
+```text
 bin/cake upgrade rector --rules cakephp60 <path/to/app/src>
 ```
 
