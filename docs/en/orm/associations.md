@@ -465,8 +465,8 @@ Possible keys for hasMany association arrays include:
 - **strategy**: Defines the query strategy to use. Defaults to 'select'. The
   other valid value is 'subquery', which replaces the `IN` list with an
   equivalent subquery.
-- **saveStrategy**: Either 'append' or 'replace'. Defaults to 'append'. When 'append' the current
-  records are appended to any records in the database. When 'replace' associated
+- **saveStrategy**: Either `append` or `replace`. Defaults to `append`. When `append` the current
+  records are appended to any records in the database. When `replace` associated
   records not in the current set will be removed. If the foreign key is a nullable
   column or if `dependent` is true records will be orphaned.
 - **finder**: The finder method to use when loading associated records. See the
@@ -619,7 +619,7 @@ Possible keys for belongsToMany association arrays include:
 - **strategy**: Defines the query strategy to use. Defaults to 'select'. The
   other valid value is 'subquery', which replaces the `IN` list with an
   equivalent subquery.
-- **saveStrategy**: Either 'append' or 'replace'. Defaults to 'replace'.
+- **saveStrategy**: Either `append` or `replace`. Defaults to `replace`.
   Indicates the mode to be used for saving associated entities. The former will
   only create new links between both side of the relation and the latter will
   do a wipe and replace to create the links between the passed entities when

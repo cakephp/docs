@@ -453,16 +453,16 @@ You can use `npx` to run the tools without installing them globally, or install 
 ```bash [Using npx (Recommended)]
 # No installation needed - npx downloads and runs the tools
 npx cspell --config .github/cspell.json "docs/en/**/*.md"
-npx markdownlint-cli --config .github/markdownlint.json "docs/en/**/*.md"
+npx markdownlint-cli2 --config .github/.markdownlint-cli2.jsonc "docs/en/**/*.md"
 ```
 
 ```bash [Global Installation]
 # Install globally for faster execution
-npm install -g cspell markdownlint-cli
+npm install -g cspell markdownlint-cli2
 
 # Then run without npx
 cspell --config .github/cspell.json "docs/en/**/*.md"
-markdownlint-cli --config .github/markdownlint.json "docs/en/**/*.md"
+markdownlint-cli2 --config .github/.markdownlint-cli2.jsonc "docs/en/**/*.md"
 ```
 
 :::
@@ -496,28 +496,30 @@ If cspell flags legitimate technical terms (class names, CakePHP-specific terms)
 
 ### Running Markdown Lint
 
-We use [markdownlint](https://github.com/DavidAnson/markdownlint) to maintain consistent markdown formatting:
+We use [markdownlint](https://github.com/DavidAnson/markdownlint) via
+[markdownlint-cli2](https://github.com/DavidAnson/markdownlint-cli2) to maintain
+consistent markdown formatting:
 
 ::: code-group
 
 ```bash [Single File]
 # Check a single file
-npx markdownlint-cli --config .github/markdownlint.json docs/en/your-file.md
+npx markdownlint-cli2 --config .github/.markdownlint-cli2.jsonc docs/en/your-file.md
 ```
 
 ```bash [Directory]
 # Check all files in a directory
-npx markdownlint-cli --config .github/markdownlint.json "docs/en/controllers/*.md"
+npx markdownlint-cli2 --config .github/.markdownlint-cli2.jsonc "docs/en/controllers/*.md"
 ```
 
 ```bash [All Docs]
 # Check all English documentation
-npx markdownlint-cli --config .github/markdownlint.json "docs/en/**/*.md"
+npx markdownlint-cli2 --config .github/.markdownlint-cli2.jsonc "docs/en/**/*.md"
 ```
 
 ```bash [Auto-fix]
 # Automatically fix formatting issues
-npx markdownlint-cli --config .github/markdownlint.json --fix "docs/en/**/*.md"
+npx markdownlint-cli2 --config .github/.markdownlint-cli2.jsonc --fix "docs/en/**/*.md"
 ```
 
 :::
@@ -583,14 +585,14 @@ When you submit a pull request, our CI pipeline automatically runs:
 
 ```bash [Quick Check]
 # Validate markdown and spelling
-npx markdownlint-cli --config .github/markdownlint.json "docs/**/*.md"
+npx markdownlint-cli2 --config .github/.markdownlint-cli2.jsonc "docs/**/*.md"
 npx cspell --config .github/cspell.json "docs/**/*.md"
 node bin/check-links.js "docs/**/*.md"
 ```
 
 ```bash [Full Validation]
 # Run all CI checks locally
-npx markdownlint-cli --config .github/markdownlint.json "docs/**/*.md"
+npx markdownlint-cli2 --config .github/.markdownlint-cli2.jsonc "docs/**/*.md"
 npx cspell --config .github/cspell.json "docs/**/*.md"
 node bin/check-links.js "docs/**/*.md"
 node --check config.js
@@ -599,7 +601,7 @@ jq empty toc_en.json
 
 ```bash [Single File]
 # Check your current file before committing
-npx markdownlint-cli --config .github/markdownlint.json docs/en/your-file.md
+npx markdownlint-cli2 --config .github/.markdownlint-cli2.jsonc docs/en/your-file.md
 npx cspell --config .github/cspell.json docs/en/your-file.md
 node bin/check-links.js docs/en/your-file.md
 ```
