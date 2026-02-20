@@ -48,15 +48,15 @@ You should see the following output:
 
     Hello world.
 
-> [!NOTE]
-> The `Arguments` and `ConsoleIo` instances passed to `execute()` are also
-> available as `$this->args` and `$this->io` on the command instance. This
-> lets any method in your command access them without needing them as
-> parameters. In 6.x, the `execute()` method signature will change to
-> `execute(): int` and `$this->args` / `$this->io` will be the only way to
-> access these objects. See the
-> [6.x command refactor](https://github.com/cakephp/cakephp/pull/18983) for
-> details.
+::: info
+The `Arguments` and `ConsoleIo` instances passed to `execute()` are also
+available on the command instance as `$this->args` and `$this->io`.
+In 6.x, the `execute()` method signature will drop these arguments
+and `$this->args` / `$this->io` will be the only way to access
+these objects. See the
+[6.x command refactor](https://github.com/cakephp/cakephp/pull/18983) for
+details.
+:::
 
 Our `execute()` method isn't very interesting let's read some input from the
 command line:
