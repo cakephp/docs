@@ -37,8 +37,8 @@ class HelloCommand extends Command
 ```
 
 Command classes must implement an `execute()` method that does the bulk of
-their work. This method is called when a command is invoked. Let's call our first
-command application directory, run:
+their work. This method is called when a command is invoked. Let's call our
+first command. From your application directory, run:
 
 ```bash
 bin/cake hello
@@ -47,6 +47,16 @@ bin/cake hello
 You should see the following output:
 
     Hello world.
+
+> [!NOTE]
+> The `Arguments` and `ConsoleIo` instances passed to `execute()` are also
+> available as `$this->args` and `$this->io` on the command instance. This
+> lets any method in your command access them without needing them as
+> parameters. In 6.x, the `execute()` method signature will change to
+> `execute(): int` and `$this->args` / `$this->io` will be the only way to
+> access these objects. See the
+> [6.x command refactor](https://github.com/cakephp/cakephp/pull/18983) for
+> details.
 
 Our `execute()` method isn't very interesting let's read some input from the
 command line:
