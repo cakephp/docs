@@ -24,6 +24,15 @@ bin/cake upgrade rector --rules cakephp54 <path/to/app/src>
 
 ## New Features
 
+### I18n
+
+- `Number::toReadableSize()` now calculates decimal units (KB, MB, GB and TB)
+using an exponent of ten, meaning that 1 KB is 1000 Bytes. The units from the
+previous calculation method, where 1024 Bytes equaled 1 KB, have been changed
+to KiB, MiB, GiB, and TiB as defined in ISO/IEC 80000-13. It is possible to
+switch between the two units using a new optional boolean parameter in
+`Number::toReadableSize()`, as well as the new global setter `Number::setUseIecUnits()`.
+
 ### Utility
 
 - New `Cake\Utility\Fs\Finder` class provides a fluent, iterator-based API for

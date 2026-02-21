@@ -166,27 +166,65 @@ echo Number::toPercentage(0.45691, 1, [
 
 ### Number::toReadableSize()
 
-`method` Cake\\I18n\\Number::**toReadableSize**(string $size): string
+`method` Cake\\I18n\\Number::**toReadableSize**(mixed $size, ?bool $useIecUnits = null): string
 
-This method formats data sizes in human readable forms. It provides
-a shortcut way to convert bytes to KB, MB, GB, and TB. The size is
-displayed with a two-digit precision level, according to the size
-of data supplied (i.e. higher sizes are expressed in larger
-terms):
+This method formats data sizes in human-readable forms. By default, it
+converts bytes to KB, MB, GB, and TB. The parameter `$useIecUnits` and
+the global setter `setUseIecUnits()` can be used to switch to ISO/IEC 80000-13
+units, which are KiB, MiB, GiB, and TiB. The size is displayed with a two-digit
+precision level, according to the amount of data supplied (i.e., higher sizes
+are expressed in larger terms):
 
 ```php
+// By default, decimal units are used
 // Called as NumberHelper
-echo $this->Number->toReadableSize(0); // 0 Byte
-echo $this->Number->toReadableSize(1024); // 1 KB
-echo $this->Number->toReadableSize(1321205.76); // 1.26 MB
-echo $this->Number->toReadableSize(5368709120); // 5 GB
+echo $this->Number->toReadableSize(0); // 0 Bytes
+echo $this->Number->toReadableSize(1024); // 1.02 KB
+echo $this->Number->toReadableSize(1321205.76); // 1.32 MB
+echo $this->Number->toReadableSize(5368709120); // 5.37 GB
 
 // Called as Number
-echo Number::toReadableSize(0); // 0 Byte
-echo Number::toReadableSize(1024); // 1 KB
-echo Number::toReadableSize(1321205.76); // 1.26 MB
-echo Number::toReadableSize(5368709120); // 5 GB
+echo Number::toReadableSize(0); // 0 Bytes
+echo Number::toReadableSize(1024); // 1.02 KB
+echo Number::toReadableSize(1321205.76); // 1.32 MB
+echo Number::toReadableSize(5368709120); // 5.37 GB
+
+// Change default units to IEC units
+$this->Number->setUseIecUnits(true);
+
+// Bytes are now calculated with exponents of two using IEC units
+echo $this->Number->toReadableSize(0); // 0 Bytes
+echo $this->Number->toReadableSize(1024); // 1 KiB
+echo $this->Number->toReadableSize(1321205.76); // 1.26 MiB
+echo $this->Number->toReadableSize(5368709120); // 5 GiB
 ```
+
+It should be noted that IEC units are exponents of two and decimal units of ten.
+This mean that:
+
+- 1000 Bytes = 1 KB
+- 1024 Bytes = 1 KiB
+
+::: info Modified in version 5.4.0
+It is now possible to use the byte units defined by the ISO/IEC 80000-13
+standard alongside more natural decimal units.
+:::
+
+## Setting the Default Byte Units
+
+### Number::setUseIecUnits()
+
+`static` Cake\\I18n\\Number::**setUseIecUnits**(bool $useIec): void
+
+This method acts as a setter for the default byte units. It eliminates the
+need to pass the boolean parameter to `Cake\I18n\Number::toReadableSize()` when
+switching between decimal units and IEC units. If `$useIec` is defined as true,
+IEC units will be employed; otherwise, decimal units will be used.
+
+::: info Added in version 5.4.0
+This method has been added to remove the need to pass the optionnal boolean argument
+each time IEC units are needed.
+:::
 
 ## Formatting Numbers
 
