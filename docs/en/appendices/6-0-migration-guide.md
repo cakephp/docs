@@ -1,7 +1,7 @@
 # 6.0 Migration Guide
 
 CakePHP 6.0 contains breaking changes, and is not backwards compatible with 5.x.
-Before attempting to upgrade to 6.0 first upgrade to 5.2+ and resolve all
+Before attempting to upgrade to 6.0 first upgrade to 5.3+ and resolve all
 deprecation warnings.
 
 ## Behavior Changes
@@ -27,60 +27,47 @@ You can find a full list of adjusted methods in the [cakephp/upgrade tool](https
 
 Some methods have also been renamed to better reflect their purpose. These are:
 
-- `Cake\Console\ConsoleOutput`  
-  - `_write()` has been renamed to `writeStream()`
+| Class                                 | Old Method(s)                                       | New Method(s)                                          |
+|---------------------------------------|-----------------------------------------------------|--------------------------------------------------------|
+| `Cake\Console\ConsoleOutput`          | `_write()`                                          | `writeStream()`                                        |
+| `Cake\Form\Form`                      | `_execute()`                                        | `process()`                                            |
+| `Cake\Http\Client`                    | `_sendRequest()`                                    | `processRequest()`                                     |
+| `Cake\Http\ServerRequest`             | `_is()`                                             | `isType()`                                             |
+| `Cake\Http\Client\Adapter\Stream`     | `_send()`                                           | `processRequest()`                                     |
+| `Cake\I18n\DateFormatTrait`           | `_parseDateTime()`                                  | `processDateTime()`                                    |
+| `Cake\Mailer\Transport\SmtpTransport` | `_connect()`<br>`_disconnect()`                     | `connectSmtp()`<br>`disconnectSmtp()`                  |
+| `Cake\ORM\Table`                      | `_saveMany()`<br>`_deleteMany()`                    | `doSaveMany()`<br>`doDeleteMany()`                     |
+| `Cake\ORM\Behavior\TreeBehavior`      | `_moveUp()`<br>`_moveDown()`<br>`_removeFromTree()` | `doMoveUp()`<br>`doMoveDown()`<br>`doRemoveFromTree()` |
+| `Cake\ORM\Association\HasMany`        | `_unlink()`                                         | `doUnlink()`                                           |
+| `Cake\ORM\Query\SelectQuery`          | `_decorateResults()`<br>`_execute()`                | `ormDecorateResults()`<br>`ormExecute()`               |
+| `Cake\Utility\Hash`                   | `_filter()`<br>`_merge()`                           | `doFilter()`<br>`doMerge()`                            |
+| `Cake\Utility\Text`                   | `_wordWrap()`                                       | `doWordWrap()`                                         |
+| `Cake\Utility\Xml`                    | `_fromArray()`<br>`_toArray()`                      | `doFromArray()`<br>`doToArray()`                       |
+| `Cake\View\View`                      | `_render()`                                         | `renderFile()`                                         |
+| `Cake\View\Helper\PaginatorHelper`    | `_numbers()`                                        | `buildNumbers()`                                       |
 
-- `Cake\Form\Form`  
-  - `_execute()` has been renamed to `process()`
+### Renamed Properties
 
-- `Cake\Http\Client`  
-  - `_sendRequest()` has been renamed to `processRequest()`
+Properties starting with a `_` have been renamed to **remove the leading underscore**.
+You can find a full list of adjusted properties in the
+[cakephp/upgrade tool](https://github.com/cakephp/upgrade/blob/6.x/config/rector/sets/cakephp60.php).
 
-- `Cake\Http\ServerRequest`  
-  - `_is()` has been renamed to `isType()`
+Some properties have also been renamed to better reflect their purpose. These are:
 
-- `Cake\Http\Client\Adapter\Stream`  
-  - `_send()` has been renamed to `processRequest()`
+- `Cake\ORM\Entity`
+  - `$_accessible` has been renamed to `patchable`
+- `Cake\View\View`
+  - `$_helpers` has been renamed to `helperRegistry` as `$helpers` already exists to hold the configuration
 
-- `Cake\I18n\DateFormatTrait`  
-  - `_parseDateTime()` has been renamed to `processDateTime()`
+### Console
 
-- `Cake\Mailer\Transport\SmtpTransport`  
-  - `_connect()` has been renamed to `connectSmtp()`
-  - `_disconnect()` has been renamed to `disconnectSmtp()`
+- The `validChoice` method on `ConsoleInputArgument` and `ConsoleInputOption` has been renamed to `validateChoice`.
 
-- `Cake\ORM\Table`  
-  - `_saveMany()` has been renamed to `doSaveMany()`
-  - `_deleteMany()` has been renamed to `doDeleteMany()`
+### Command
 
-- `Cake\ORM\Behavior\TreeBehavior`  
-  - `_moveUp()` has been renamed to `doMoveUp()`
-  - `_moveDown()` has been renamed to `doMoveDown()`
-  - `_removeFromTree()` has been renamed to `doRemoveFromTree()`
-
-- `Cake\ORM\Association\HasMany`  
-  - `_unlink()` has been renamed to `doUnlink()`
-
-- `Cake\ORM\Query\SelectQuery`  
-  - `_decorateResults()` has been renamed to `ormDecorateResults()`
-  - `_execute()` has been renamed to `ormExecute()`
-
-- `Cake\Utility\Hash`  
-  - `_filter()` has been renamed to `doFilter()`
-  - `_merge()` has been renamed to `doMerge()`
-
-- `Cake\Utility\Text`  
-  - `_wordWrap()` has been renamed to `doWordWrap()`
-
-- `Cake\Utility\Xml`  
-  - `_fromArray()` has been renamed to `doFromArray()`
-  - `_toArray()` has been renamed to `doToArray()`
-
-- `Cake\View\View`  
-  - `_render()` has been renamed to `renderFile()`
-
-- `Cake\View\Helper\PaginatorHelper`  
-  - `_numbers()` has been renamed to `buildNumbers()`
+- Command args and io are now available as properties instead of them being
+  passed down to the execute method. See the current state of
+  [Commands](../console-commands/commands.md) for examples.
 
 ### Event
 
@@ -111,6 +98,12 @@ Some methods have also been renamed to better reflect their purpose. These are:
 - `isAccessible` method has been renamed to `isPatchable`.
 - The `accessibleFields` option used in e.g. ORM Queries has been
   renamed to `patchableFields`.
+
+### Router
+
+- `RouteBuilder` has adjusted the signature of `scope()`, `prefix()` and `resources()`
+  so the 2nd and 3rd parameters have been swapped.
+  We recommend using named parameters to prevent confusion and make the code more readable.
 
 ### Utility
 

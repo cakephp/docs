@@ -27,9 +27,9 @@ use Cake\Console\ConsoleIo;
 
 class HelloCommand extends Command
 {
-    public function execute(Arguments $args, ConsoleIo $io): int
+    public function execute(): int
     {
-        $io->out('Hello world.');
+        $this->io->out('Hello world.');
 
         return static::CODE_SUCCESS;
     }
@@ -71,10 +71,10 @@ class HelloCommand extends Command
         return $parser;
     }
 
-    public function execute(Arguments $args, ConsoleIo $io): int
+    public function execute(): int
     {
-        $name = $args->getArgument('name');
-        $io->out("Hello {$name}.");
+        $name = $this->args->getArgument('name');
+        $this->io->out("Hello {$name}.");
 
         return static::CODE_SUCCESS;
     }
@@ -131,13 +131,13 @@ protected function buildOptionParser(ConsoleOptionParser $parser): ConsoleOption
     return $parser;
 }
 
-public function execute(Arguments $args, ConsoleIo $io): int
+public function execute(): int
 {
-    $name = $args->getArgument('name');
-    if ($args->getOption('yell')) {
+    $name = $this->args->getArgument('name');
+    if ($this->args->getOption('yell')) {
         $name = mb_strtoupper($name);
     }
-    $io->out("Hello {$name}.");
+    $this->io->out("Hello {$name}.");
 
     return static::CODE_SUCCESS;
 }
@@ -187,12 +187,12 @@ class UserCommand extends Command
         return $parser;
     }
 
-    public function execute(Arguments $args, ConsoleIo $io): int
+    public function execute(): int
     {
-        $name = $args->getArgument('name');
+        $name = $this->args->getArgument('name');
         $user = $this->fetchTable()->findByUsername($name)->first();
 
-        $io->out(print_r($user, true));
+        $this->io->out(print_r($user, true));
 
         return static::CODE_SUCCESS;
     }
@@ -209,12 +209,12 @@ to terminate execution:
 
 ```php
 // ...
-public function execute(Arguments $args, ConsoleIo $io): int
+public function execute(): int
 {
-    $name = $args->getArgument('name');
+    $name = $this->args->getArgument('name');
     if (mb_strlen($name) < 5) {
         // Halt execution, output to stderr, and set exit code to 1
-        $io->error('Name must be at least 4 characters long.');
+        $this->io->error('Name must be at least 4 characters long.');
         $this->abort();
     }
 
@@ -222,15 +222,15 @@ public function execute(Arguments $args, ConsoleIo $io): int
 }
 ```
 
-You can also use `abort()` on the `$io` object to emit a message and code:
+You can also use `abort()` on the `$this->io` object to emit a message and code:
 
 ```php
-public function execute(Arguments $args, ConsoleIo $io): int
+public function execute(): int
 {
-    $name = $args->getArgument('name');
+    $name = $this->args->getArgument('name');
     if (mb_strlen($name) < 5) {
         // Halt execution, output to stderr, and set exit code to 99
-        $io->abort('Name must be at least 4 characters long.', 99);
+        $this->io->abort('Name must be at least 4 characters long.', 99);
     }
 
     return static::CODE_SUCCESS;
@@ -354,9 +354,9 @@ The `TreeHelper` outputs an array as a tree structure. This is useful for
 displaying filesystem directories or any hierarchical data:
 
 ```php
-public function execute(Arguments $args, ConsoleIo $io): int
+public function execute(): int
 {
-    $helper = $io->helper('Tree');
+    $helper = $this->io->helper('Tree');
     $helper->output([
         'src' => [
             'Controller',
@@ -461,9 +461,9 @@ class UpdateTableCommand extends Command
         return $parser;
     }
 
-    public function execute(Arguments $args, ConsoleIo $io): int
+    public function execute(): int
     {
-        $table = $args->getArgument('table');
+        $table = $this->args->getArgument('table');
         $this->fetchTable($table)->updateQuery()
             ->set([
                 'modified' => new DateTime(),
@@ -561,11 +561,11 @@ class UpdateTableCommand extends Command
         return $parser;
     }
 
-    public function execute(Arguments $args, ConsoleIo $io): int
+    public function execute(): int
     {
-        $table = $args->getArgument('table');
-        if ($io->ask('Are you sure?', 'n', ['y', 'n']) !== 'y') {
-            $io->error('You need to be sure.');
+        $table = $this->args->getArgument('table');
+        if ($this->io->ask('Are you sure?', 'n', ['y', 'n']) !== 'y') {
+            $this->io->error('You need to be sure.');
             $this->abort();
         }
         $this->fetchTable($table)->updateQuery()

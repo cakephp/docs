@@ -46,7 +46,7 @@ composer install --no-dev
 With the upgrade tool installed you can now run it on your application or
 plugin:
 
-```text
+```bash
 bin/cake upgrade rector --rules cakephp60 <path/to/app/src>
 ```
 
