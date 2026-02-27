@@ -30,12 +30,16 @@
                   "link": "/tutorials-and-examples/cms/database"
                 },
                 {
+                  "text": "Articles Model",
+                  "link": "/tutorials-and-examples/cms/articles-model"
+                },
+                {
                   "text": "Articles Controller",
                   "link": "/tutorials-and-examples/cms/articles-controller"
                 },
                 {
-                  "text": "Articles Model",
-                  "link": "/tutorials-and-examples/cms/articles-model"
+                  "text": "Tags and Users",
+                  "link": "/tutorials-and-examples/cms/tags-and-users"
                 },
                 {
                   "text": "Authentication",
@@ -44,10 +48,6 @@
                 {
                   "text": "Authorization",
                   "link": "/tutorials-and-examples/cms/authorization"
-                },
-                {
-                  "text": "Tags and Users",
-                  "link": "/tutorials-and-examples/cms/tags-and-users"
                 }
               ]
             }
