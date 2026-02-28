@@ -756,9 +756,9 @@ use Cake\View\View;
 
 class PdfView extends View
 {
-    protected $layoutPath = 'pdf';
+    protected string $layoutPath = 'pdf';
 
-    protected $subDir = 'pdf';
+    protected string $subDir = 'pdf';
 
     public static function contentType(): string
     {
