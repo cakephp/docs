@@ -9,6 +9,10 @@
         { "text": "Introduction", "link": "/intro" },
         { "text": "Structure & Conventions", "link": "/intro/conventions" },
         {
+          "text": "Supported Versions",
+          "link": "/intro/supported-versions"
+        },
+        {
           "text": "Where to Get Help",
           "link": "/intro/where-to-get-help"
         },
