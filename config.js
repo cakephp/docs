@@ -41,6 +41,11 @@ export default {
       { text: "Documentation", link: "/" },
       { ...versions },
     ],
+    versionBanner: {
+      message: 'This version of the documentation is for CakePHP 4.x.',
+      link: '/latest/',
+      linkText: 'Go to latest docs.'
+    }
   },
   substitutions: {
     '|phpversion|': { value: '8.2', format: 'bold' },
