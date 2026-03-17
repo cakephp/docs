@@ -16,7 +16,16 @@ bin/cake upgrade rector --rules cakephp54 <path/to/app/src>
 
 ## Behavior Changes
 
-- WIP
+### I18n
+
+``Number::parseFloat()`` now returns ``null`` instead of ``0.0`` when parsing
+fails. Previously, when ``NumberFormatter::parse()`` failed it returned ``false``,
+which was cast to ``0.0``. This silently converted invalid input like ``"abc"``
+to ``0.0``, making it impossible to distinguish from valid ``"0"`` input.
+
+This also affects ``FloatType`` and ``DecimalType`` database types which use
+``Number::parseFloat()`` internally. Invalid locale-formatted form input will
+now result in ``null`` entity values instead of ``0``.
 
 ## Deprecations
 
