@@ -16,7 +16,21 @@ bin/cake upgrade rector --rules cakephp54 <path/to/app/src>
 
 ## Behavior Changes
 
-- WIP
+### ORM
+
+The default eager loading strategy for `HasMany` and `BelongsToMany` associations
+has changed from ``select`` to ``subquery``. The ``subquery`` strategy performs
+better for larger datasets as it avoids packet size limits from large ``WHERE IN``
+clauses and reduces PHP memory usage by keeping IDs in the database.
+
+If you need the previous behavior, you can explicitly set the strategy when
+defining associations:
+
+```php
+$this->hasMany('Comments', [
+    'strategy' => 'select',
+]);
+```
 
 ## Deprecations
 
