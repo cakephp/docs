@@ -27,6 +27,22 @@ This also affects ``FloatType`` and ``DecimalType`` database types which use
 ``Number::parseFloat()`` internally. Invalid locale-formatted form input will
 now result in ``null`` entity values instead of ``0``.
 
+### ORM
+
+The default eager loading strategy for `HasMany` and `BelongsToMany` associations
+has changed from ``select`` to ``subquery``. The ``subquery`` strategy performs
+better for larger datasets as it avoids packet size limits from large ``WHERE IN``
+clauses and reduces PHP memory usage by keeping IDs in the database.
+
+If you need the previous behavior, you can explicitly set the strategy when
+defining associations:
+
+```php
+$this->hasMany('Comments', [
+    'strategy' => 'select',
+]);
+```
+
 ## Deprecations
 
 - WIP
