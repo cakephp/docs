@@ -222,6 +222,7 @@ $entity = $articles->newEntity($data, [
 ```
 
 CakePHP distinguishes associations from options using naming conventions:
+
 - Association names use PascalCase (e.g., ``Users``, ``Comments``)
 - Option keys use camelCase (e.g., ``onlyIds``, ``validate``)
 
