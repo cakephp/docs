@@ -425,6 +425,106 @@ database. Because this service is injected into our controller, we can easily
 swap the implementation out with a mock object or a dummy sub-class when
 testing.
 
+## Request to DTO Mapping
+
+CakePHP supports automatic mapping of request data to Data Transfer Objects (DTOs)
+using the `#[RequestToDto]` attribute. This provides a clean, type-safe way to
+handle form data in controller actions:
+
+```php
+use Cake\Controller\Attribute\RequestToDto;
+
+class UsersController extends AppController
+{
+    public function create(#[RequestToDto] UserCreateDto $dto): void
+    {
+        // $dto is automatically populated from request data
+        $user = $this->Users->newEntity([
+            'email' => $dto->email,
+            'name' => $dto->name,
+        ]);
+
+        if ($this->Users->save($user)) {
+            $this->Flash->success('User created');
+            return $this->redirect(['action' => 'index']);
+        }
+    }
+}
+```
+
+Your DTO class must implement a static `createFromArray()` method:
+
+```php
+namespace App\Dto;
+
+class UserCreateDto
+{
+    public function __construct(
+        public string $email,
+        public string $name,
+        public ?string $phone = null,
+    ) {
+    }
+
+    public static function createFromArray(array $data): self
+    {
+        return new self(
+            email: $data['email'] ?? '',
+            name: $data['name'] ?? '',
+            phone: $data['phone'] ?? null,
+        );
+    }
+}
+```
+
+### Configuring the Data Source
+
+By default, the attribute auto-detects the data source based on the request method
+(query params for GET, body data for POST/PUT/PATCH). You can explicitly configure
+the source using the `RequestToDtoSource` enum:
+
+```php
+use Cake\Controller\Attribute\RequestToDto;
+use Cake\Controller\Attribute\Enum\RequestToDtoSource;
+
+class ArticlesController extends AppController
+{
+    // Use query string parameters
+    public function search(
+        #[RequestToDto(source: RequestToDtoSource::Query)] SearchCriteriaDto $criteria
+    ): void {
+        $articles = $this->Articles->find()
+            ->where(['title LIKE' => "%{$criteria->query}%"])
+            ->limit($criteria->limit);
+    }
+
+    // Use POST body data explicitly
+    public function create(
+        #[RequestToDto(source: RequestToDtoSource::Body)] ArticleCreateDto $dto
+    ): void {
+        // ...
+    }
+
+    // Merge query params and body data (body takes precedence)
+    public function update(
+        int $id,
+        #[RequestToDto(source: RequestToDtoSource::Request)] ArticleUpdateDto $dto
+    ): void {
+        // ...
+    }
+}
+```
+
+The available source options are:
+
+- `RequestToDtoSource::Auto` - Auto-detect based on request method (default)
+- `RequestToDtoSource::Query` - Use query string parameters
+- `RequestToDtoSource::Body` - Use POST/PUT body data
+- `RequestToDtoSource::Request` - Merge query params and body data
+
+::: info Added in version 5.4.0
+:::
+
 ## Command Example
 
 ```php
