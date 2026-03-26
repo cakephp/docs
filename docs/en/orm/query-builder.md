@@ -1248,6 +1248,29 @@ conditions:
   # WHERE country_id NOT IN ('AFG', 'USA', 'EST')
   ```
 
+- `inOrNull()` Create a condition for `IN` combined with `IS NULL`:
+
+  ```php
+  $query = $cities->find()
+      ->where(function (QueryExpression $exp, SelectQuery $q) {
+          return $exp->inOrNull('country_id', ['AFG', 'USA', 'EST']);
+      });
+  # WHERE (country_id IN ('AFG', 'USA', 'EST') OR country_id IS NULL)
+  ```
+
+  ::: info Added in version 5.4.0
+  :::
+
+- `notInOrNull()` Create a condition for `NOT IN` combined with `IS NULL`:
+
+  ```php
+  $query = $cities->find()
+      ->where(function (QueryExpression $exp, SelectQuery $q) {
+          return $exp->notInOrNull('country_id', ['AFG', 'USA', 'EST']);
+      });
+  # WHERE (country_id NOT IN ('AFG', 'USA', 'EST') OR country_id IS NULL)
+  ```
+
 - `gt()` Create a `>` condition:
 
   ```php
@@ -1318,6 +1341,19 @@ conditions:
   # WHERE population BETWEEN 999 AND 5000000,
   ```
 
+- `notBetween()` Create a `NOT BETWEEN` condition:
+
+  ```php
+  $query = $cities->find()
+      ->where(function (QueryExpression $exp, SelectQuery $q) {
+          return $exp->notBetween('population', 999, 5000000);
+      });
+  # WHERE population NOT BETWEEN 999 AND 5000000
+  ```
+
+  ::: info Added in version 5.4.0
+  :::
+
 - `exists()` Create a condition using `EXISTS`:
 
   ```php
@@ -1351,6 +1387,43 @@ conditions:
       });
   # WHERE NOT EXISTS (SELECT id FROM cities WHERE countries.id = cities.country_id AND population > 5000000)
   ```
+
+- `isDistinctFrom()` Create a null-safe inequality comparison using `IS DISTINCT FROM`:
+
+  ```php
+  $query = $cities->find()
+      ->where(function (QueryExpression $exp, SelectQuery $q) {
+          return $exp->isDistinctFrom('status', 'active');
+      });
+  # WHERE status IS DISTINCT FROM 'active'
+  # MySQL uses: NOT (status <=> 'active')
+  ```
+
+  This is useful when you need to compare values where `NULL` should be treated
+  as a distinct value. Unlike regular `!=` comparisons, `IS DISTINCT FROM`
+  returns `TRUE` when comparing `NULL` to a non-NULL value, and `FALSE` when
+  comparing `NULL` to `NULL`.
+
+  ::: info Added in version 5.4.0
+  :::
+
+- `isNotDistinctFrom()` Create a null-safe equality comparison using `IS NOT DISTINCT FROM`:
+
+  ```php
+  $query = $cities->find()
+      ->where(function (QueryExpression $exp, SelectQuery $q) {
+          return $exp->isNotDistinctFrom('category_id', null);
+      });
+  # WHERE category_id IS NOT DISTINCT FROM NULL
+  # MySQL uses: category_id <=> NULL
+  ```
+
+  This is the null-safe equivalent of `=`. It returns `TRUE` when both values
+  are `NULL` (unlike regular `=` which returns `NULL`), making it useful for
+  comparing nullable columns.
+
+  ::: info Added in version 5.4.0
+  :::
 
 Expression objects should cover many commonly used functions and expressions. If
 you find yourself unable to create the required conditions with expressions you

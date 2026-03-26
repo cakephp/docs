@@ -187,12 +187,47 @@ $articles = $this->fetchTable('Articles');
 $entity = $articles->newEntity($this->request->getData(), [
     'associated' => [
         'Tags', 'Comments' => ['associated' => ['Users']],
-    ]
+    ],
 ]);
 ```
 
 The above indicates that the 'Tags', 'Comments' and 'Users' for the Comments
-should be marshalled. Alternatively, you can use dot notation for brevity:
+should be marshalled.
+
+You can also use a nested array format similar to ``contain()``:
+
+```php
+// Nested arrays (same format as contain())
+$entity = $articles->newEntity($this->request->getData(), [
+    'associated' => [
+        'Tags',
+        'Comments' => [
+            'Users',
+            'Attachments',
+        ],
+    ],
+]);
+
+// Mixed with options
+$entity = $articles->newEntity($this->request->getData(), [
+    'associated' => [
+        'Tags' => ['onlyIds' => true],
+        'Comments' => [
+            'Users',
+            'validate' => 'special',
+        ],
+    ],
+]);
+```
+
+CakePHP distinguishes associations from options using naming conventions:
+association names use PascalCase (e.g., ``Users``), while option keys use
+camelCase (e.g., ``onlyIds``).
+
+::: info Added in version 5.4.0
+:::
+
+Alternatively, you can use dot notation for brevity:
 
 ```php
 // In a controller

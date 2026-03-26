@@ -18,30 +18,14 @@ bin/cake upgrade rector --rules cakephp54 <path/to/app/src>
 
 ### I18n
 
-``Number::parseFloat()`` now returns ``null`` instead of ``0.0`` when parsing
-fails. Previously, when ``NumberFormatter::parse()`` failed it returned ``false``,
-which was cast to ``0.0``. This silently converted invalid input like ``"abc"``
-to ``0.0``, making it impossible to distinguish from valid ``"0"`` input.
-
-This also affects ``FloatType`` and ``DecimalType`` database types which use
-``Number::parseFloat()`` internally. Invalid locale-formatted form input will
-now result in ``null`` entity values instead of ``0``.
+`Number::parseFloat()` now returns `null` instead of `0.0` when parsing
+fails. This also affects `FloatType` and `DecimalType` database types.
 
 ### ORM
 
 The default eager loading strategy for `HasMany` and `BelongsToMany` associations
-has changed from ``select`` to ``subquery``. The ``subquery`` strategy performs
-better for larger datasets as it avoids packet size limits from large ``WHERE IN``
-clauses and reduces PHP memory usage by keeping IDs in the database.
-
-If you need the previous behavior, you can explicitly set the strategy when
-defining associations:
-
-```php
-$this->hasMany('Comments', [
-    'strategy' => 'select',
-]);
-```
+has changed from `select` to `subquery`. If you need the previous behavior,
+explicitly set `'strategy' => 'select'` when defining associations.
 
 ## Deprecations
 
@@ -49,18 +33,40 @@ $this->hasMany('Comments', [
 
 ## New Features
 
+### Controller
+
+- Added `#[RequestToDto]` attribute for automatic mapping of request data to
+  Data Transfer Objects in controller actions.
+  See [Request to DTO Mapping](../development/dependency-injection#request-to-dto-mapping).
+- Added `unlockActions()` and `unlockFields()` convenience methods to
+  `FormProtectionComponent`.
+  See [Form Protection Component](../controllers/components/form-protection).
+
+### Database
+
+- Added `notBetween()` method for `NOT BETWEEN` expressions.
+  See [Query Builder](../orm/query-builder#advanced-conditions).
+- Added `inOrNull()` and `notInOrNull()` methods for combining `IN` conditions with `IS NULL`.
+- Added `isDistinctFrom()` and `isNotDistinctFrom()` methods for null-safe comparisons.
+
 ### I18n
 
-- `Number::toReadableSize()` now calculates decimal units (KB, MB, GB and TB)
-using an exponent of ten, meaning that 1 KB is 1000 Bytes. The units from the
-previous calculation method, where 1024 Bytes equaled 1 KB, have been changed
-to KiB, MiB, GiB, and TiB as defined in ISO/IEC 80000-13. It is possible to
-switch between the two units using a new optional boolean parameter in
-`Number::toReadableSize()`, as well as the new global setter `Number::setUseIecUnits()`.
+- `Number::toReadableSize()` now uses decimal units (KB = 1000 bytes) by default.
+  Binary units (KiB = 1024 bytes) can be enabled via parameter or `Number::setUseIecUnits()`.
+
+### ORM
+
+- The `associated` option in `newEntity()` and `patchEntity()` now supports
+  nested array format matching `contain()` syntax.
+  See [Converting Request Data into Entities](../orm/saving-data#converting-request-data-into-entities).
 
 ### Utility
 
-- New `Cake\Utility\Fs\Finder` class provides a fluent, iterator-based API for
-  discovering files and directories with support for pattern matching, depth
-  control, and custom filters. The `Cake\Utility\Fs\Path` class offers
-  cross-platform utilities for path manipulation.
+- Added `Cake\Utility\Fs\Finder` class for fluent file discovery with pattern matching,
+  depth control, and custom filters. Added `Cake\Utility\Fs\Path` for cross-platform
+  path manipulation.
+
+### View
+
+- Added `{{inputId}}` template variable to `inputContainer` and `error` templates
+  in FormHelper. See [Built-in Template Variables](../views/helpers/form#built-in-template-variables).
