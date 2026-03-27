@@ -924,6 +924,7 @@ $newResponse = $response->withStreamOptions(['root' => 'articles']);
 
 2. **Mid-stream error marker**: If item N (where N > 1) fails to encode, an error
    marker is output to maintain valid JSON structure:
+
    ```json
    [{"id":1},{"__streamError":{"message":"Type is not supported","index":1}}]
    ```
