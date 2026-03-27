@@ -42,6 +42,13 @@ explicitly set `'strategy' => 'select'` when defining associations.
   `FormProtectionComponent`.
   See [Form Protection Component](../controllers/components/form-protection).
 
+### Http
+
+- Added `JsonStreamResponse` class for memory-efficient streaming of large JSON
+  datasets using generators. Supports standard JSON arrays and NDJSON formats,
+  envelope structures with metadata, transform callbacks, and graceful mid-stream
+  error handling. See [Streaming JSON Responses](../controllers/request-response#streaming-json-responses).
+
 ### Database
 
 - Added `notBetween()` method for `NOT BETWEEN` expressions.
