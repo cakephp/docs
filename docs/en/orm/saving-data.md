@@ -1043,12 +1043,12 @@ inserted. For the case that the record already has associated records in the
 database, you have the choice between two saving strategies:
 
 append
-Associated records are updated in the database or, if not matching any
-existing record, inserted.
+: Associated records are updated in the database or, if not matching any
+  existing record, inserted.
 
 replace
-Any existing records that do not match the records provided will be deleted
-from the database. Only provided records will remain (or be inserted).
+: Any existing records that do not match the records provided will be deleted
+  from the database. Only provided records will remain (or be inserted).
 
 By default, the `append` saving strategy is used.
 See [Has Many Associations](../orm/associations#has-many-associations) for details on defining the `saveStrategy`.
@@ -1106,15 +1106,15 @@ When saving belongsToMany associations, you have the choice between two saving
 strategies:
 
 append
-Only new links will be created between each side of this association. This
-strategy will not destroy existing links even though they may not be present
-in the array of entities to be saved.
+: Only new links will be created between each side of this association. This
+  strategy will not destroy existing links even though they may not be present
+  in the array of entities to be saved.
 
 replace
-When saving, existing links will be removed and new links will be created in
-the junction table. If there are existing link in the database to some of
-the entities intended to be saved, those links will be updated, not deleted
-and then re-saved.
+: When saving, existing links will be removed and new links will be created in
+  the junction table. If there are existing link in the database to some of
+  the entities intended to be saved, those links will be updated, not deleted
+  and then re-saved.
 
 See [Belongs To Many Associations](../orm/associations#belongs-to-many-associations) for details on defining the `saveStrategy`.
 

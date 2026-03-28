@@ -372,13 +372,15 @@ finds, there may be times you wish to retrieve translated content without
 modifying the application's state. For these scenarios use the behavior's
 `setLocale()` method:
 
-    I18n::setLocale('en'); // reset for illustration
+```php
+I18n::setLocale('en'); // reset for illustration
 
-    // specific locale.
-    $this->Articles->getBehavior('Translate')->setLocale('es');
+// specific locale.
+$this->Articles->getBehavior('Translate')->setLocale('es');
 
-    $article = $this->Articles->get(12);
-    echo $article->title; // Echoes 'Un Artículo', yay piece of cake!
+$article = $this->Articles->get(12);
+echo $article->title; // Echo 'Un Artículo', yay piece of cake!
+```
 
 Note that this only changes the locale of the Articles table, it would not
 affect the language of associated data. To affect associated data it's necessary

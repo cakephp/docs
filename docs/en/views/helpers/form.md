@@ -395,56 +395,24 @@ The type of control created (when we provide no additional options to specify th
 generated element type) is inferred via model introspection and
 depends on the column datatype:
 
-Column Type
-Resulting Form Field
-
-string, uuid (char, varchar, etc.)
-text
-
-boolean, tinyint(1)
-checkbox
-
-decimal
-number
-
-float
-number
-
-integer
-number
-
-text
-textarea
-
-text, with name of password, passwd
-password
-
-text, with name of email
-email
-
-text, with name of tel, telephone, or phone
-tel
-
-date
-date
-
-datetime, timestamp
-datetime-local
-
-datetimefractional, timestampfractional
-datetime-local
-
-time
-time
-
-month
-month
-
-year
-select with years
-
-binary
-file
+| Column Type | Resulting Form Field |
+|-------------|----------------------|
+| string, uuid (char, varchar, etc.) | text |
+| boolean, tinyint(1) | checkbox |
+| decimal | number |
+| float | number |
+| integer | number |
+| text | textarea |
+| text, with name of password, passwd | password |
+| text, with name of email | email |
+| text, with name of tel, telephone, or phone | tel |
+| date | date |
+| datetime, timestamp | datetime-local |
+| datetimefractional, timestampfractional | datetime-local |
+| time | time |
+| month | month |
+| year | select with years |
+| binary | file |
 
 The `$options` parameter allows you to choose a specific control type if
 you need to:

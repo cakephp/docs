@@ -756,6 +756,15 @@ use Cake\View\View;
 
 class PdfView extends View
 {
+    protected string $layoutPath = 'pdf';
+
+    protected string $subDir = 'pdf';
+
+    public static function contentType(): string
+    {
+        return 'application/pdf';
+    }
+
     public function render(?string $view = null, ?string $layout = null): string
     {
         // Custom logic here.

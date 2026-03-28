@@ -80,16 +80,16 @@
               "link": "/ja/tutorials-and-examples/cms/articles-controller"
             },
             {
+              "text": "タグとユーザー",
+              "link": "/ja/tutorials-and-examples/cms/tags-and-users"
+            },
+            {
               "text": "認証",
               "link": "/ja/tutorials-and-examples/cms/authentication"
             },
             {
               "text": "認可",
               "link": "/ja/tutorials-and-examples/cms/authorization"
-            },
-            {
-              "text": "タグとユーザー",
-              "link": "/ja/tutorials-and-examples/cms/tags-and-users"
             }
           ]
         }

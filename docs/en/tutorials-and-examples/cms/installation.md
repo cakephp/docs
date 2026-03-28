@@ -56,11 +56,11 @@ in the **cms** directory of the current working directory:
 ::: code-group
 
 ```bash [Linux/macOS]
-php composer.phar create-project --prefer-dist cakephp/app:5.* cms
+php composer.phar create-project --prefer-dist cakephp/app:|cakeversion| cms
 ```
 
 ```bash [Windows]
-composer create-project --prefer-dist cakephp/app:5.* cms
+composer create-project --prefer-dist cakephp/app:|cakeversion| cms
 ```
 
 :::

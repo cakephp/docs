@@ -48,6 +48,17 @@ jobs:
             echo "✅ Valid: $file"
           done
 
+  toc-link-check:
+    name: Validate TOC Links
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Check TOC links exist
+        run: node bin/check-toc-links.js
+
   markdown-lint:
     name: Lint Markdown
     runs-on: ubuntu-latest
