@@ -395,56 +395,24 @@ The type of control created (when we provide no additional options to specify th
 generated element type) is inferred via model introspection and
 depends on the column datatype:
 
-Column Type
-Resulting Form Field
-
-string, uuid (char, varchar, etc.)
-text
-
-boolean, tinyint(1)
-checkbox
-
-decimal
-number
-
-float
-number
-
-integer
-number
-
-text
-textarea
-
-text, with name of password, passwd
-password
-
-text, with name of email
-email
-
-text, with name of tel, telephone, or phone
-tel
-
-date
-date
-
-datetime, timestamp
-datetime-local
-
-datetimefractional, timestampfractional
-datetime-local
-
-time
-time
-
-month
-month
-
-year
-select with years
-
-binary
-file
+| Column Type | Resulting Form Field |
+|-------------|----------------------|
+| string, uuid (char, varchar, etc.) | text |
+| boolean, tinyint(1) | checkbox |
+| decimal | number |
+| float | number |
+| integer | number |
+| text | textarea |
+| text, with name of password, passwd | password |
+| text, with name of email | email |
+| text, with name of tel, telephone, or phone | tel |
+| date | date |
+| datetime, timestamp | datetime-local |
+| datetimefractional, timestampfractional | datetime-local |
+| time | time |
+| month | month |
+| year | select with years |
+| binary | file |
 
 The `$options` parameter allows you to choose a specific control type if
 you need to:
@@ -2439,6 +2407,36 @@ Output:
     <span class="help">At least 8 characters long.</span>
 </div>
 ```
+
+### Built-in Template Variables
+
+The `inputContainer` and `error` templates have access to a built-in `{{inputId}}`
+variable containing the input element's HTML id attribute. This is useful for
+generating related element IDs for ARIA attributes or custom JavaScript:
+
+```php
+$this->Form->setTemplates([
+    'inputContainer' => '<div class="input {{type}}{{required}}" id="{{inputId}}-container">{{content}}</div>',
+    'error' => '<div class="error" id="{{inputId}}-error" role="alert">{{content}}</div>',
+]);
+
+// When rendering a 'username' field:
+echo $this->Form->control('username');
+```
+
+Output:
+
+```html
+<div class="input text" id="username-container">
+    <label for="username">Username</label>
+    <input type="text" name="username" id="username">
+</div>
+```
+
+This enables use cases like field-specific error containers for AJAX form validation.
+
+::: info Added in version 5.4.0
+:::
 
 ### Moving Checkboxes & Radios Outside of a Label
 

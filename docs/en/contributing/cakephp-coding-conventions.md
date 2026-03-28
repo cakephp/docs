@@ -411,40 +411,18 @@ be preceded by a newline.
 
 Variable types for use in DocBlocks:
 
-Type
-Description
-
-mixed
-A variable with undefined (or multiple) type.
-
-int
-Integer type variable (whole number).
-
-float
-Float type (point number).
-
-bool
-Logical type (true or false).
-
-string
-String type (any value in " " or ' ').
-
-null
-Null type. Usually used in conjunction with another type.
-
-array
-Array type.
-
-object
-Object type. A specific class name should be used if possible.
-
-resource
-Resource type (returned by for example mysql_connect()).
-Remember that when you specify the type as mixed, you should indicate
-whether it is unknown, or what the possible types are.
-
-callable
-Callable function.
+| Type | Description |
+|------|-------------|
+| mixed | A variable with undefined (or multiple) type. |
+| int | Integer type variable (whole number). |
+| float | Float type (point number). |
+| bool | Logical type (true or false). |
+| string | String type (any value in " " or ' '). |
+| null | Null type. Usually used in conjunction with another type. |
+| array | Array type. |
+| object | Object type. A specific class name should be used if possible. |
+| resource | Resource type (returned by for example mysql_connect()). Remember that when you specify the type as mixed, you should indicate whether it is unknown, or what the possible types are. |
+| callable | Callable function. |
 
 You can also combine types using the pipe char:
 

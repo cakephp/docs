@@ -467,7 +467,7 @@ more information.
 `static` Cake\\Log\\Log::**configured**(): array
 
 returns
-An array of configured loggers.
+: An array of configured loggers.
 
 Get the names of the configured loggers.
 

@@ -235,6 +235,29 @@ class UsersTable extends Table
 }
 ```
 
+### Using Provider Methods Directly
+
+In some cases, you may want to call provider methods directly within a custom
+validation rule. You can access a provider class using `getProvider()` and then
+call its methods statically. However, for the default `Validation` class, you
+can simply call its methods directly:
+
+```php
+use Cake\Validation\Validation;
+
+$validator->add('start_on', 'dateOrDatetime', [
+    'rule' => function ($value): bool {
+        return Validation::datetime($value) || Validation::date($value);
+    },
+    'message' => __('Must be a date or datetime'),
+]);
+```
+
+This approach is useful when you need to combine multiple validation rules with
+OR logic, which is not directly supported by the validator's fluent interface.
+
+## Using Closures as Validation Rules
+
 You can also use closures for validation rules:
 
 ```php
@@ -245,7 +268,7 @@ $validator->add('name', 'myRule', [
         }
 
         return 'Not a good value.';
-    }
+    },
 ]);
 ```
 

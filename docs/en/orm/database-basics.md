@@ -189,98 +189,98 @@ There are a number of keys supported in database configuration. A full list is
 as follows:
 
 className
-The fully namespaced class name of the class that represents the connection to a database server.
-This class is responsible for loading the database driver, providing SQL
-transaction mechanisms and preparing SQL statements among other things.
+: The fully namespaced class name of the class that represents the connection to a database server.
+  This class is responsible for loading the database driver, providing SQL
+  transaction mechanisms and preparing SQL statements among other things.
 
 driver
-The class name of the driver used to implement all specificities for
-a database engine. This can either be a short classname using `plugin syntax`,
-a fully namespaced name, or a constructed driver instance.
-Examples of short classnames are Mysql, Sqlite, Postgres, and Sqlserver.
+: The class name of the driver used to implement all specificities for
+  a database engine. This can either be a short classname using `plugin syntax`,
+  a fully namespaced name, or a constructed driver instance.
+  Examples of short classnames are Mysql, Sqlite, Postgres, and Sqlserver.
 
 persistent
-Whether or not to use a persistent connection to the database. This option
-is not supported by SqlServer. An exception is thrown if you attempt to set
-`persistent` to `true` with SqlServer.
+: Whether or not to use a persistent connection to the database. This option
+  is not supported by SqlServer. An exception is thrown if you attempt to set
+  `persistent` to `true` with SqlServer.
 
 host
-The database server's hostname (or IP address).
+: The database server's hostname (or IP address).
 
 username
-The username for the account.
+: The username for the account.
 
 password
-The password for the account.
+: The password for the account.
 
 database
-The name of the database for this connection to use. Avoid using `.` in
-your database name. Because of how it complicates identifier quoting CakePHP
-does not support `.` in database names. The path to your SQLite database
-should be an absolute path (for example, `ROOT . DS . 'my_app.db'`) to avoid
-incorrect paths caused by relative paths.
+: The name of the database for this connection to use. Avoid using `.` in
+  your database name. Because of how it complicates identifier quoting CakePHP
+  does not support `.` in database names. The path to your SQLite database
+  should be an absolute path (for example, `ROOT . DS . 'my_app.db'`) to avoid
+  incorrect paths caused by relative paths.
 
 port (*optional*)
-The TCP port or Unix socket used to connect to the server.
+: The TCP port or Unix socket used to connect to the server.
 
 encoding
-Indicates the character set to use when sending SQL statements to
-the server. This defaults to the database's default encoding for
-all databases other than DB2.
+: Indicates the character set to use when sending SQL statements to
+  the server. This defaults to the database's default encoding for
+  all databases other than DB2.
 
 timezone
-Server timezone to set.
+: Server timezone to set.
 
 schema
-Used in PostgreSQL database setups to specify which schema to use.
+: Used in PostgreSQL database setups to specify which schema to use.
 
 unix_socket
-Used by drivers that support it to connect via Unix socket files. If you are
-using PostgreSQL and want to use Unix sockets, leave the host key blank.
+: Used by drivers that support it to connect via Unix socket files. If you are
+  using PostgreSQL and want to use Unix sockets, leave the host key blank.
 
 ssl_key
-The file path to the SSL key file. (Only supported by MySQL).
+: The file path to the SSL key file. (Only supported by MySQL).
 
 ssl_cert
-The file path to the SSL certificate file. (Only supported by MySQL).
+: The file path to the SSL certificate file. (Only supported by MySQL).
 
 ssl_ca
-The file path to the SSL certificate authority. (Only supported by MySQL).
+: The file path to the SSL certificate authority. (Only supported by MySQL).
 
 init
-A list of queries that should be sent to the database server as
-when the connection is created.
+: A list of queries that should be sent to the database server as
+  when the connection is created.
 
 log
-Set to `true` to enable query logging. When enabled queries will be logged
-at a `debug` level with the `queriesLog` scope.
+: Set to `true` to enable query logging. When enabled queries will be logged
+  at a `debug` level with the `queriesLog` scope.
 
 quoteIdentifiers
-Set to `true` if you are using reserved words or special characters in
-your table or column names. Enabling this setting will result in queries
-built using the [Query Builder](../orm/query-builder) having identifiers quoted when
-creating SQL. It should be noted that this decreases performance because
-each query needs to be traversed and manipulated before being executed.
+: Set to `true` if you are using reserved words or special characters in
+  your table or column names. Enabling this setting will result in queries
+  built using the [Query Builder](../orm/query-builder) having identifiers quoted when
+  creating SQL. It should be noted that this decreases performance because
+  each query needs to be traversed and manipulated before being executed.
 
 flags
-An associative array of PDO constants that should be passed to the
-underlying PDO instance. See the PDO documentation for the flags supported
-by the driver you are using.
+: An associative array of PDO constants that should be passed to the
+  underlying PDO instance. See the PDO documentation for the flags supported
+  by the driver you are using.
 
 cacheMetadata
-Either boolean `true`, or a string containing the cache configuration to
-store meta data in. Having metadata caching disabled by setting it to `false`
-is not advised and can result in very poor performance. See the
-[Database Metadata Cache](#database-metadata-cache) section for more information.
+: Either boolean `true`, or a string containing the cache configuration to
+  store meta data in. Having metadata caching disabled by setting it to `false`
+  is not advised and can result in very poor performance. See the
+  [Database Metadata Cache](#database-metadata-cache) section for more information.
 
 mask
-Set the permissions on the generated database file. (Only supported by SQLite)
+: Set the permissions on the generated database file. (Only supported by SQLite)
 
 cache
-The `cache` flag to send to SQLite.
+: The `cache` flag to send to SQLite.
 
 mode
-The `mode` flag value to send to SQLite.
+: The `mode` flag value to send to SQLite.
 
 ### SqlServer Entra Authentication
 
@@ -387,115 +387,115 @@ the same names for similar data types, CakePHP provides a set of abstracted
 data types for use with the database layer. The types CakePHP supports are:
 
 string
-Maps to `VARCHAR` type. In SQL Server the `NVARCHAR` types are used.
+: Maps to `VARCHAR` type. In SQL Server the `NVARCHAR` types are used.
 
 char
-Maps to `CHAR` type. In SQL Server the `NCHAR` type is used.
+: Maps to `CHAR` type. In SQL Server the `NCHAR` type is used.
 
 text
-Maps to `TEXT` types.
+: Maps to `TEXT` types.
 
 uuid
-Maps to the UUID type if a database provides one, otherwise this will
-generate a `CHAR(36)` field.
+: Maps to the UUID type if a database provides one, otherwise this will
+  generate a `CHAR(36)` field.
 
 binaryuuid
-Maps to the UUID type if the database provides one, otherwise this will
-generate a `BINARY(16)` column. Binary UUIDs provide more efficient storage
-compared to string UUIDs by storing the UUID as 16 bytes of binary data rather
-than a 36-character string. This type automatically handles conversion between
-string UUID format (with dashes) and binary format.
+: Maps to the UUID type if the database provides one, otherwise this will
+  generate a `BINARY(16)` column. Binary UUIDs provide more efficient storage
+  compared to string UUIDs by storing the UUID as 16 bytes of binary data rather
+  than a 36-character string. This type automatically handles conversion between
+  string UUID format (with dashes) and binary format.
 
 nativeuuid
-Maps to the UUID type in MySQL with MariaDb. In all other databases,
-`nativeuuid` is an alias for `uuid`.
+: Maps to the UUID type in MySQL with MariaDb. In all other databases,
+  `nativeuuid` is an alias for `uuid`.
 
 integer
-Maps to the `INTEGER` type provided by the database. BIT is not yet supported
-at this moment.
+: Maps to the `INTEGER` type provided by the database. BIT is not yet supported
+  at this moment.
 
 smallinteger
-Maps to the `SMALLINT` type provided by the database.
+: Maps to the `SMALLINT` type provided by the database.
 
 tinyinteger
-Maps to the `TINYINT` or `SMALLINT` type provided by the database. In MySQL
-`TINYINT(1)` is treated as a boolean.
+: Maps to the `TINYINT` or `SMALLINT` type provided by the database. In MySQL
+  `TINYINT(1)` is treated as a boolean.
 
 biginteger
-Maps to the `BIGINT` type provided by the database.
+: Maps to the `BIGINT` type provided by the database.
 
 float
-Maps to either `DOUBLE` or `FLOAT` depending on the database. The `precision`
-option can be used to define the precision used.
+: Maps to either `DOUBLE` or `FLOAT` depending on the database. The `precision`
+  option can be used to define the precision used.
 
 decimal
-Maps to the `DECIMAL` type. Supports the `length` and `precision`
-options. Values for decimal type ares be represented as strings (not as float
-as some might expect). This is because decimal types are used to represent
-exact numeric values in databases and using float type for them in PHP can
-potentially lead to precision loss.
+: Maps to the `DECIMAL` type. Supports the `length` and `precision`
+  options. Values for decimal type ares be represented as strings (not as float
+  as some might expect). This is because decimal types are used to represent
+  exact numeric values in databases and using float type for them in PHP can
+  potentially lead to precision loss.
 
-If you want the values to be `float` in your PHP code then consider using
-`FLOAT` or `DOUBLE` type columns in your database. Also, depending on your use
-case you can explicitly map your decimal columns to `float` type in your table
-schema.
+  If you want the values to be `float` in your PHP code then consider using
+  `FLOAT` or `DOUBLE` type columns in your database. Also, depending on your use
+  case you can explicitly map your decimal columns to `float` type in your table
+  schema.
 
 boolean
-Maps to `BOOLEAN` except in MySQL, where `TINYINT(1)` is used to represent
-booleans. `BIT(1)` is not yet supported at this moment.
+: Maps to `BOOLEAN` except in MySQL, where `TINYINT(1)` is used to represent
+  booleans. `BIT(1)` is not yet supported at this moment.
 
 binary
-Maps to the `BLOB` or `BYTEA` type provided by the database.
+: Maps to the `BLOB` or `BYTEA` type provided by the database.
 
 date
-Maps to a native `DATE` column type. The return value of this column
-type is `Cake\I18n\Date` which emulates the date related
-methods of PHP's `DateTime` class.
+: Maps to a native `DATE` column type. The return value of this column
+  type is `Cake\I18n\Date` which emulates the date related
+  methods of PHP's `DateTime` class.
 
 datetime
-See [Datetime Type](#datetime-type).
+: See [Datetime Type](#datetime-type).
 
 datetimefractional
-See [Datetime Type](#datetime-type).
+: See [Datetime Type](#datetime-type).
 
 timestamp
-Maps to the `TIMESTAMP` type.
+: Maps to the `TIMESTAMP` type.
 
 timestampfractional
-Maps to the `TIMESTAMP(N)` type.
+: Maps to the `TIMESTAMP(N)` type.
 
 time
-Maps to a `TIME` type in all databases.
+: Maps to a `TIME` type in all databases.
 
 year
-Maps to the `YEAR` type. Only supported in MySQL.
+: Maps to the `YEAR` type. Only supported in MySQL.
 
 json
-Maps to a `JSON` type if it's available, otherwise it maps to `TEXT`.
+: Maps to a `JSON` type if it's available, otherwise it maps to `TEXT`.
 
 enum
-See [Enum Type](#enum-type).
+: See [Enum Type](#enum-type).
 
 geometry
-Maps to a generic geometry storage type.
+: Maps to a generic geometry storage type.
 
 point
-Maps to a single point in geospatial storage.
+: Maps to a single point in geospatial storage.
 
 linestring
-Maps to a single line in geospatial storage.
+: Maps to a single line in geospatial storage.
 
 polygon
-Maps to a single polygon in geospatial storage.
+: Maps to a single polygon in geospatial storage.
 
 inet
-Maps to the `INET` type. Only implemented in postgres.
+: Maps to the `INET` type. Only implemented in postgres.
 
 cidr
-Maps to the `CIDR` type. Only implemented in postgres.
+: Maps to the `CIDR` type. Only implemented in postgres.
 
 macaddr
-Maps to the `MACADDR` type. Only implemented in postgres.
+: Maps to the `MACADDR` type. Only implemented in postgres.
 
 These types are used in both the schema reflection features that CakePHP
 provides, and schema generation features CakePHP uses when using test fixtures.

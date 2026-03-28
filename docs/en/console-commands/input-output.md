@@ -182,6 +182,84 @@ $io->helper('Banner')
 The `BannerHelper` was added in 5.1
 :::
 
+### Tree Helper
+
+The `TreeHelper` formats nested arrays into a tree structure with visual
+connectors, similar to the output of the Unix `tree` command. This is useful
+for displaying hierarchical data such as directory structures, menu trees,
+or nested categories:
+
+```php
+$data = [
+    'src' => [
+        'Controller' => [
+            'AppController.php',
+            'UsersController.php',
+        ],
+        'Model' => [
+            'Entity' => [
+                'User.php',
+            ],
+            'Table' => [
+                'UsersTable.php',
+            ],
+        ],
+    ],
+    'config' => [
+        'app.php',
+        'routes.php',
+    ],
+];
+$io->helper('Tree')->output($data);
+
+// Outputs:
+// ├── src
+// │   ├── Controller
+// │   │   ├── AppController.php
+// │   │   └── UsersController.php
+// │   └── Model
+// │       ├── Entity
+// │       │   └── User.php
+// │       └── Table
+// │           └── UsersTable.php
+// └── config
+//     ├── app.php
+//     └── routes.php
+```
+
+The helper supports various value types including strings, booleans, enums,
+and closures for lazy evaluation:
+
+```php
+$data = [
+    'debug' => true,
+    'cache' => false,
+    'status' => fn () => 'computed value',
+];
+$io->helper('Tree')->output($data);
+
+// Outputs:
+// ├── debug
+// │   └── true
+// ├── cache
+// │   └── false
+// └── status
+//     └── computed value
+```
+
+You can customize the indentation using the `baseIndent` and `elementIndent`
+configuration options:
+
+```php
+$io->helper('Tree')
+    ->setConfig('baseIndent', 4)
+    ->output($data);
+```
+
+::: info Added in version 5.3.0
+The `TreeHelper` was added in 5.3
+:::
+
 ## Getting User Input
 
 `method` Cake\\Console\\ConsoleIo::**ask**(string $prompt, ?string $default = null): string

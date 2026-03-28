@@ -559,6 +559,36 @@ $recentArticles = $this->fetchTable('Articles')->find('all',
 )->all();
 ```
 
+### The defaultTable Property
+
+By convention, controllers are associated with a primary model table. For
+example, `PostsController` will have `Posts` as its default table. You can
+customize this by setting the `$defaultTable` property:
+
+```php
+class PostsController extends AppController
+{
+    // Use Comments as the default table instead of Posts.
+    protected ?string $defaultTable = 'Comments';
+}
+```
+
+When `$defaultTable` is set, calling `fetchTable()` without arguments will
+return that table. If your controller doesn't use a table, you can set
+`$defaultTable` to an empty string:
+
+```php
+class DashboardController extends AppController
+{
+    // This controller doesn't use a table.
+    protected ?string $defaultTable = '';
+}
+```
+
+Setting `$defaultTable` to an empty string also prevents potential naming
+conflicts when loading components that share the same alias as the default
+table name.
+
 ### fetchModel()
 
 `method` Cake\\Controller\\Controller::**fetchModel**(?string $modelClass = null, ?string $modelType = null): object

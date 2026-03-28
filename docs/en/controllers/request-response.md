@@ -67,9 +67,9 @@ well:
 $passedArgs = $this->request->getParam('pass');
 ```
 
-Will all provide you access to the passed arguments. There
-are several important/useful parameters that CakePHP uses internally, these
-are also all found in the routing parameters:
+This gives you access to passed arguments. There are several important
+parameters that CakePHP uses internally, and these are also all found in the
+routing parameters:
 
 - `plugin` The plugin handling the request. Will be null when there is no
   plugin.
@@ -202,18 +202,18 @@ $error = $attachment->getError();
 ```
 
 Moving the uploaded file from its temporary location to the desired target
-location, doesn't require manually accessing the temporary file, instead it can
-be easily done by using the objects `moveTo()` method:
+location doesn't require manually accessing the temporary file. Instead, use the
+object's `moveTo()` method:
 
 ```php
 $attachment->moveTo($targetPath);
 ```
 
-In an HTTP environment, the `moveTo()` method will automatically validate
-whether the file is an actual uploaded file, and throw an exception in case
-necessary. In an CLI environment, where the concept of uploading files doesn't
-exist, it will allow to move the file that you've referenced irrespective of its
-origins, which makes testing file uploads possible.
+In an HTTP environment, the `moveTo()` method automatically validates
+whether the file is an actual uploaded file, and throws an exception when
+necessary. In a CLI environment, where the concept of uploading files doesn't
+exist, it allows moving the referenced file regardless of its origin, which
+makes testing file uploads possible.
 
 `method` Cake\\Http\\ServerRequest::**getUploadedFile**(string $path): UploadedFileInterface|null
 
@@ -276,7 +276,7 @@ $this->request = $this->request->withUploadedFiles($files);
 > request data (too), then you have to set them via `Cake\Http\ServerRequest::withData()` or
 > `Cake\Http\ServerRequest::withParsedBody()`.
 
-### PUT, PATCH or DELETE Data
+### POST, PUT, PATCH, and DELETE
 
 `method` Cake\\Http\\ServerRequest::**getBody**(): StreamInterface
 
@@ -327,27 +327,7 @@ a setter for environment variables without having to modify globals
 $this->request->withEnv('REQUEST_METHOD', 'POST');
 ```
 
-### XML or JSON Data
-
-Applications employing [REST](../development/rest) often exchange data in
-non-URL-encoded post bodies. You can read input data in any format using
-`Cake\Http\ServerRequest::input()`. By providing a decoding function,
-you can receive the content in a deserialized format:
-
-```php
-// Get JSON encoded data submitted to a PUT/POST action
-$jsonData = $this->request->input('json_decode');
-```
-
-Some deserializing methods require additional parameters when called, such as
-the 'as array' parameter on `json_decode`. If you want XML converted into a
-DOMDocument object, `Cake\Http\ServerRequest::input()` supports
-passing in additional parameters as well:
-
-```php
-// Get XML encoded data submitted to a PUT/POST action
-$data = $this->request->input('Cake\Utility\Xml::build', ['return' => 'domdocument']);
-```
+:::
 
 ### Path Information
 
@@ -371,7 +351,7 @@ $base = $request->getAttribute('webroot');
 
 <a id="check-the-request"></a>
 
-### Checking Request Conditions
+### Checking Request Conditions with `is()`
 
 `method` Cake\\Http\\ServerRequest::**is**(array|string $type, mixed ...$args): bool
 
@@ -535,7 +515,7 @@ Returns the HTTP method the request was made with:
 echo $request->getMethod();
 ```
 
-### Restricting Which HTTP method an Action Accepts
+### Restricting HTTP Methods per Action
 
 `method` Cake\\Http\\ServerRequest::**allowMethod**(array|string $methods): bool
 
@@ -547,7 +527,7 @@ Set allowed HTTP methods. If not matched, will throw
 public function delete()
 {
     // Only accept POST and DELETE requests
-    $this->request->allowMethod(['post', 'delete']);
+    $this->request->allowMethod(['post', 'delete']); // [!code focus]
     ...
 }
 ```
@@ -647,9 +627,7 @@ Check whether a specific language is accepted:
 $acceptsSpanish = $this->request->acceptLanguage('es-es');
 ```
 
-<a id="request-cookies"></a>
-
-### Reading Cookies
+### Reading Request Cookies
 
 Request cookies can be read through a number of methods:
 
@@ -660,7 +638,7 @@ $rememberMe = $this->request->getCookie('remember_me');
 // Read the value, or get the default of 0
 $rememberMe = $this->request->getCookie('remember_me', 0);
 
-// Get all cookies as an hash
+// Get all cookies as a hash
 $cookies = $this->request->getCookieParams();
 
 // Get a CookieCollection instance
@@ -668,9 +646,9 @@ $cookies = $this->request->getCookieCollection()
 ```
 
 See the `Cake\Http\Cookie\CookieCollection` documentation for how
-to work with cookie collection.
+to work with a cookie collection.
 
-### Uploaded Files
+### Uploaded Files Quick Reference
 
 Requests expose the uploaded file data in `getData()` or
 `getUploadedFiles()` as `UploadedFileInterface` objects:
@@ -682,13 +660,13 @@ $files = $request->getUploadedFiles();
 // Read the file data.
 $files[0]->getStream();
 $files[0]->getSize();
-$files[0]->getClientFileName();
+$files[0]->getClientFilename();
 
 // Move the file.
 $files[0]->moveTo($targetPath);
 ```
 
-### Manipulating URIs
+### Working with the Request URI
 
 Requests contain a URI object, which contains methods for interacting with the
 requested URI:
@@ -720,7 +698,7 @@ tasks such as:
 - Sending any header.
 - Sending the response body.
 
-### Dealing with Content Types
+### Setting Content Types
 
 `method` Cake\\Http\\Response::**withType**(string $contentType): static
 
@@ -780,14 +758,14 @@ $response = $this->response->withFile(
 The supported options are:
 
 name
-The name allows you to specify an alternate file name to be sent to
-the user.
+: The name allows you to specify an alternate file name to be sent to
+  the user.
 
 download
-A boolean value indicating whether headers should be set to force
-download.
+: A boolean value indicating whether headers should be set to force
+  download.
 
-### Sending a String as File
+### Sending a String as a File
 
 You can respond with a file that does not exist on the disk, such as a pdf or an
 ics generated on the fly from a string:
@@ -943,9 +921,7 @@ The `withCache()` method sets the `Last-Modified` value to the first
 argument. `Expires` header and the `max-age` directive are set based on the
 second parameter. Cache-Control's `public` directive is set as well.
 
-<a id="cake-response-caching"></a>
-
-### Fine Tuning HTTP Cache
+### Fine-Tuning HTTP Cache
 
 One of the best and easiest ways of speeding up your application is to use HTTP
 cache. Under this caching model, you are only required to help clients decide if
@@ -1118,8 +1094,6 @@ if ($this->response->isNotModified($this->request)) {
 }
 ```
 
-<a id="response-cookies"></a>
-
 ### Setting Cookies
 
 Cookies can be added to response using either an array or a `Cake\Http\Cookie\Cookie`
@@ -1153,9 +1127,7 @@ will make the browser remove its local cookie:
 $this->response = $this->response->withExpiredCookie(new Cookie('remember_me'));
 ```
 
-<a id="cors-headers"></a>
-
-### Setting Cross Origin Request Headers (CORS)
+### Setting Cross-Origin Request Headers (CORS)
 
 The `cors()` method returns a `CorsBuilder` instance which provides a fluent
 interface for defining [HTTP Access Control](https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS)
@@ -1184,19 +1156,15 @@ criteria are met:
 
 The `CorsBuilder` provides the following methods for configuring CORS:
 
-`method` Cake\\Http\\CorsBuilder::**allowOrigin**(array|string $domains): static
-
-`method` Cake\\Http\\CorsBuilder::**allowMethods**(array $methods): static
-
-`method` Cake\\Http\\CorsBuilder::**allowHeaders**(array $headers): static
-
-`method` Cake\\Http\\CorsBuilder::**allowCredentials**(): static
-
-`method` Cake\\Http\\CorsBuilder::**exposeHeaders**(array $headers): static
-
-`method` Cake\\Http\\CorsBuilder::**maxAge**(string|int $age): static
-
-`method` Cake\\Http\\CorsBuilder::**build**(): ResponseInterface
+| Method | Signature |
+| --- | --- |
+| `allowOrigin` | `Cake\\Http\\CorsBuilder::allowOrigin(array\|string $domains): static` |
+| `allowMethods` | `Cake\\Http\\CorsBuilder::allowMethods(array $methods): static` |
+| `allowHeaders` | `Cake\\Http\\CorsBuilder::allowHeaders(array $headers): static` |
+| `allowCredentials` | `Cake\\Http\\CorsBuilder::allowCredentials(): static` |
+| `exposeHeaders` | `Cake\\Http\\CorsBuilder::exposeHeaders(array $headers): static` |
+| `maxAge` | `Cake\\Http\\CorsBuilder::maxAge(string\|int $age): static` |
+| `build` | `Cake\\Http\\CorsBuilder::build(): ResponseInterface` |
 
 #### Practical CORS Examples
 
@@ -1310,16 +1278,16 @@ public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue
 }
 ```
 
-### Running logic after the Response has been sent
+### Running Logic After the Response Is Sent
 
-In fastcgi based environments you can listen to the `Server.terminate` event
+In FastCGI-based environments you can listen to the `Server.terminate` event
 to run logic **after** the response has been sent to the client. The
 `terminate` event will be passed a `request` and `response`. The
-`request` is fetched from the applications' DI container, or from
+`request` is fetched from the application's DI container, or from
 `Router::getRequest()` if the DI container does not have a request registered.
 
 > [!WARNING]
-> In non fastcgi environments the `Server.terminate` event is fired before
+> In non-FastCGI environments the `Server.terminate` event is fired before
 > the response is sent.
 
 ::: info Added in version 5.1.0
@@ -1328,16 +1296,17 @@ to run logic **after** the response has been sent to the client. The
 ## Common Mistakes with Immutable Responses
 
 Response objects offer a number of methods that treat
-responses as immutable objects. Immutable objects help prevent difficult to
-track accidental side-effects, and reduce mistakes caused by method calls caused
-by refactoring that change ordering. While they offer a number of benefits,
-immutable objects can take some getting used to. Any method that starts with
+responses as immutable objects. Immutable objects help prevent difficult-to-
+track accidental side effects, and reduce mistakes introduced during
+refactoring. While they offer a number of benefits, immutable objects can take
+some getting used to. Any method that starts with
 `with` operates on the response in an immutable fashion, and will **always**
 return a **new** instance. Forgetting to retain the modified instance is the most
 frequent mistake people make when working with immutable objects:
 
 ```php
-$this->response->withHeader('X-CakePHP', 'yes!');
+$this->response->withHeader('X-CakePHP', 'yes!'); // [!code --]
+$this->response = $this->response->withHeader('X-CakePHP', 'yes!'); // [!code ++]
 ```
 
 In the above code, the response will be lacking the `X-CakePHP` header, as the
@@ -1420,9 +1389,7 @@ $response = $this->response->withCookieCollection($cookies);
 Cookies set to responses can be encrypted using the
 [Encrypted Cookie Middleware](../controllers/middleware#encrypted-cookie-middleware).
 
-<a id="request-cookies"></a>
-
-### Reading Cookies
+### Reading Cookies from a CookieCollection
 
 Once you have a `CookieCollection` instance, you can access the cookies it
 contains:
@@ -1450,7 +1417,7 @@ collection if you modify a cookie:
 
 ```php
 // Get the value
-$value = $cookie->getValue()
+$value = $cookie->getValue();
 
 // Access data inside a JSON value
 $id = $cookie->read('User.id');
