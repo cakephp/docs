@@ -25,6 +25,8 @@ your controller classes. Enable it in your **config/routes.php**:
 
 ```php
 // config/routes.php
+use Cake\Routing\Route\DashedRoute;
+use Cake\Routing\RouteBuilder;
 
 /** @var \Cake\Routing\RouteBuilder $routes */
 $routes->connectAttributes();
@@ -399,7 +401,7 @@ Both produce the same routes:
 | HTTP Method | URL | Action |
 |---|---|---|
 | GET | `/articles` | `index` |
-| GET | `/articles/:id` | `view` |
+| GET | `/articles/{id}` | `view` |
 
 `#[Resource]` parameters:
 
