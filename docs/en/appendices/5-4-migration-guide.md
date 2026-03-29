@@ -34,9 +34,26 @@ triggers a warning. See [Component Alias Conflicts](../controllers/components#co
 
 ## Deprecations
 
-- WIP
+### Mailer
+
+- The `Mailer::$name` property has been deprecated.
 
 ## New Features
+
+### Core
+
+- `PluginConfig::getInstalledPlugins()` was added to retrieve a list of all installed plugins
+  including flags to indicate about their scope and state.
+- A BC compatible Container implementation has been added to the core. You can opt-in to use it instead of the current
+  `league/container` implementation by setting `App.container` to `cake` inside your `config/app.php`.
+  See [Dependency Injection Container](../development/dependency-injection) for more details.
+
+### Commands
+
+- `BaseCommand::initialize()` is now being triggered **AFTER** arguments and options have been parsed.
+- You can use `$this->io` and `$this->args` inside your commands to access input/output and argument objects
+  without needing to pass them down from the `execute()` method. **This will be the default in CakePHP 6.0**
+  as those arguments will be removed from the `execute()` method signature.
 
 ### Controller
 
@@ -75,7 +92,9 @@ triggers a warning. See [Component Alias Conflicts](../controllers/components#co
 
 - Added `Cake\Utility\Fs\Finder` class for fluent file discovery with pattern matching,
   depth control, and custom filters. Added `Cake\Utility\Fs\Path` for cross-platform
-  path manipulation.
+  path manipulation. See [Filesystem Utilities](../core-libraries/filesystem.md).
+- `Security::encrypt` can now be configured to use a separate key par for encryption and authentication tokens.
+  You can set `Security.encryptWithRawKey` to enable this behavior. See [here](https://github.com/cakephp/cakephp/pull/19325) for more details.
 
 ### Collection
 

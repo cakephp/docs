@@ -48,14 +48,16 @@ You should see the following output:
 
     Hello world.
 
-::: info
-The `Arguments` and `ConsoleIo` instances passed to `execute()` are also
-available on the command instance as `$this->args` and `$this->io`.
-In 6.x, the `execute()` method signature will drop these arguments
-and `$this->args` / `$this->io` will be the only way to access
-these objects. See the
-[6.x command refactor](https://github.com/cakephp/cakephp/pull/18983) for
-details.
+::: info Added in version 5.4.0
+In CakePHP 5.4 and newer, the `Arguments` and `ConsoleIo` instances are also
+available on the command instance as `$this->args` and `$this->io` properties.
+This lets you access input, output, and arguments inside your command methods
+without passing these objects down from `execute()`.
+
+This will become the default in CakePHP 6.0, where the `execute()` method
+signature will no longer include `Arguments $args` and `ConsoleIo $io`.
+Updating your commands to use `$this->args` and `$this->io` now is
+recommended.
 :::
 
 Our `execute()` method isn't very interesting let's read some input from the
