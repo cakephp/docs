@@ -27,6 +27,11 @@ The default eager loading strategy for `HasMany` and `BelongsToMany` association
 has changed from `select` to `subquery`. If you need the previous behavior,
 explicitly set `'strategy' => 'select'` when defining associations.
 
+### Controller
+
+Loading a component with the same alias as the controller's default table now
+triggers a warning. See [Component Alias Conflicts](../controllers/components#component-alias-conflicts).
+
 ## Deprecations
 
 - WIP
@@ -60,11 +65,23 @@ explicitly set `'strategy' => 'select'` when defining associations.
   nested array format matching `contain()` syntax.
   See [Converting Request Data into Entities](../orm/saving-data#converting-request-data-into-entities).
 
+### Http
+
+- Added PSR-13 Link implementation with `Cake\Http\Link\Link` and `Cake\Http\Link\LinkProvider`
+  classes for hypermedia link support. Links added to responses are automatically emitted
+  as HTTP `Link` headers. See [Hypermedia Links](../controllers/request-response#hypermedia-links).
+
 ### Utility
 
 - Added `Cake\Utility\Fs\Finder` class for fluent file discovery with pattern matching,
   depth control, and custom filters. Added `Cake\Utility\Fs\Path` for cross-platform
   path manipulation.
+
+### Collection
+
+- Added [`keys()`](../core-libraries/collections#keys) and [`values()`](../core-libraries/collections#values) methods for extracting keys or re-indexing values.
+- Added [`implode()`](../core-libraries/collections#implode) method to concatenate elements into a string.
+- Added [`when()`](../core-libraries/collections#when) and [`unless()`](../core-libraries/collections#unless) methods for conditional method chaining.
 
 ### View
 
