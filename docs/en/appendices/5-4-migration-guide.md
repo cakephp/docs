@@ -36,7 +36,7 @@ triggers a warning. See [Component Alias Conflicts](../controllers/components#co
 
 ### Mailer
 
-- The `Mailer::$name` property is unused has been deprecated.
+- The `Mailer::$name` property is unused and has been deprecated.
 
 ## New Features
 
@@ -93,7 +93,7 @@ triggers a warning. See [Component Alias Conflicts](../controllers/components#co
 - Added `Cake\Utility\Fs\Finder` class for fluent file discovery with pattern matching,
   depth control, and custom filters. Added `Cake\Utility\Fs\Path` for cross-platform
   path manipulation. See [Filesystem Utilities](../core-libraries/filesystem.md).
-- `Security::encrypt` can now be configured to use a separate key par for encryption and authentication tokens.
+- `Security::encrypt` can now be configured to use a separate key pair for encryption and authentication tokens.
   You can set `Security.encryptWithRawKey` to enable this behavior. See [here](https://github.com/cakephp/cakephp/pull/19325) for more details.
 
 ### Collection
