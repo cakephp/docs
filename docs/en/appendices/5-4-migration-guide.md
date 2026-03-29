@@ -36,7 +36,7 @@ triggers a warning. See [Component Alias Conflicts](../controllers/components#co
 
 ### Mailer
 
-- The `Mailer::$name` property has been deprecated.
+- The `Mailer::$name` property is unused has been deprecated.
 
 ## New Features
 
@@ -44,7 +44,7 @@ triggers a warning. See [Component Alias Conflicts](../controllers/components#co
 
 - `PluginConfig::getInstalledPlugins()` was added to retrieve a list of all installed plugins
   including flags to indicate about their scope and state.
-- A BC compatible Container implementation has been added to the core. You can opt-in to use it instead of the current
+- A backwards compatible Container implementation has been added to the core. You can opt-in to use it instead of the current
   `league/container` implementation by setting `App.container` to `cake` inside your `config/app.php`.
   See [Dependency Injection Container](../development/dependency-injection) for more details.
 
