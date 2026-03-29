@@ -16,21 +16,25 @@ bin/cake upgrade rector --rules cakephp54 <path/to/app/src>
 
 ## Behavior Changes
 
+### Commands
+
+- `BaseCommand::initialize()` is now being triggered **AFTER** arguments and options have been parsed.
+
 ### I18n
 
-`Number::parseFloat()` now returns `null` instead of `0.0` when parsing
-fails. This also affects `FloatType` and `DecimalType` database types.
+- `Number::parseFloat()` now returns `null` instead of `0.0` when parsing
+  fails. This also affects `FloatType` and `DecimalType` database types.
 
 ### ORM
 
-The default eager loading strategy for `HasMany` and `BelongsToMany` associations
-has changed from `select` to `subquery`. If you need the previous behavior,
-explicitly set `'strategy' => 'select'` when defining associations.
+- The default eager loading strategy for `HasMany` and `BelongsToMany` associations
+  has changed from `select` to `subquery`. If you need the previous behavior,
+  explicitly set `'strategy' => 'select'` when defining associations.
 
 ### Controller
 
-Loading a component with the same alias as the controller's default table now
-triggers a warning. See [Component Alias Conflicts](../controllers/components#component-alias-conflicts).
+- Loading a component with the same alias as the controller's default table now
+  triggers a warning. See [Component Alias Conflicts](../controllers/components#component-alias-conflicts).
 
 ## Deprecations
 
@@ -50,7 +54,6 @@ triggers a warning. See [Component Alias Conflicts](../controllers/components#co
 
 ### Commands
 
-- `BaseCommand::initialize()` is now being triggered **AFTER** arguments and options have been parsed.
 - You can use `$this->io` and `$this->args` inside your commands to access input/output and argument objects
   without needing to pass them down from the `execute()` method. **This will be the default in CakePHP 6.0**
   as those arguments will be removed from the `execute()` method signature.
