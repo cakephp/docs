@@ -37,8 +37,9 @@ npm run docs:preview
 
 ### Prerequisites
 
-- `node` - JavaScript runtime
-- `npm` - Package manager
+- `node` (version 18 or newer) - JavaScript runtime required by Vite/VitePress
+- `npm` - Package manager (included with most Node.js installations)
+- `git` - Required to install `@cakephp/docs-skeleton` from GitHub
 
 ## Build the Documentation with Docker
 
