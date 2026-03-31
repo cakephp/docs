@@ -40,7 +40,7 @@ jobs:
 
       - name: Validate JSON syntax
         run: |
-          for file in toc_*.json; do
+          for file in .vitepress/toc_*.json; do
             if ! jq empty "$file" 2>/dev/null; then
               echo "Invalid JSON: $file"
               exit 1
@@ -57,7 +57,7 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Check TOC links exist
-        run: node bin/check-toc-links.js
+        run: node .github/check-toc-links.cjs
 
   markdown-lint:
     name: Lint Markdown
@@ -121,4 +121,4 @@ jobs:
 
       - name: Check internal links
         if: steps.changed-files.outputs.files != ''
-        run: node bin/check-links.js --baseline .github/linkchecker-baseline.json ${{ steps.changed-files.outputs.files }}
+        run: node .github/check-links.cjs --baseline .github/linkchecker-baseline.json ${{ steps.changed-files.outputs.files }}

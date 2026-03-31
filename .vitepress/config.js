@@ -1,7 +1,9 @@
+import baseConfig from '@cakephp/docs-skeleton/config'
+
 import { createRequire } from "module";
 const require = createRequire(import.meta.url);
-const toc_en = require("./.vitepress/toc_en.json");
-const toc_ja = require("./.vitepress/toc_ja.json");
+const toc_en = require("./toc_en.json");
+const toc_ja = require("./toc_ja.json");
 
 const versions = {
   text: "5.x",
@@ -19,6 +21,7 @@ const versions = {
 
 // This file contains overrides for .vitepress/config.js
 export default {
+  extends: baseConfig,
   base: "/5.x/",
   rewrites: {
     "en/:slug*": ":slug*",

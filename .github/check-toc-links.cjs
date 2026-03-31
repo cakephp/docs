@@ -51,7 +51,7 @@ function checkLink(link, docsDir, lang) {
  * e.g., "toc_en.json" -> "en"
  */
 function getLangFromTocFile(tocFile) {
-  const match = tocFile.match(/^toc_(\w+)\.json$/);
+  const match = tocFile.match(/toc_(\w+)\.json$/);
   return match ? match[1] : null;
 }
 
@@ -59,7 +59,7 @@ function getLangFromTocFile(tocFile) {
  * Main validation function
  */
 function validateTocFiles() {
-  const tocFiles = fs.readdirSync(".").filter((f) => f.match(/^toc_.*\.json$/));
+  const tocFiles = fs.readdirSync(".vitepress").filter((f) => f.match(/^toc_.*\.json$/)).map((f) => `.vitepress/${f}`);
 
   if (tocFiles.length === 0) {
     console.error("No toc_*.json files found");
