@@ -96,7 +96,7 @@ bin/cake upgrade rector --rules cakephp54 <path/to/app/src>
 - Added `Cake\Utility\Fs\Finder` class for fluent file discovery with pattern matching,
   depth control, and custom filters. Added `Cake\Utility\Fs\Path` for cross-platform
   path manipulation. See [Filesystem Utilities](../core-libraries/filesystem.md).
-- `Security::encrypt` can now be configured to use a separate key pair for encryption and authentication tokens.
+- `Security::encrypt()` can now be configured to use longer keys with separate encryption and authentication keys that are derived from the provided key.
   You can set `Security.encryptWithRawKey` to enable this behavior. See [here](https://github.com/cakephp/cakephp/pull/19325) for more details.
 
 ### Collection
