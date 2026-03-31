@@ -8,24 +8,9 @@ RUN apk add --no-cache git rsync
 
 WORKDIR /app
 
-# Bust cache by fetching latest commit info
-ADD https://api.github.com/repos/cakephp/docs-skeleton/git/refs/heads/main /tmp/cache-bust.json
-
-# Clone cakephp-docs-skeleton into vitepress directory
-RUN git clone --depth 1 https://github.com/cakephp/docs-skeleton.git vitepress
-
-# Copy documentation and config files into the skeleton
-# Use rsync to merge docs instead of replacing to preserve shared public assets
-RUN --mount=type=bind,source=docs,target=/tmp/docs \
-    rsync -av /tmp/docs/ vitepress/docs/
-
-COPY config.js vitepress/config.js
-COPY toc_en.json vitepress/toc_en.json
-COPY toc_ja.json vitepress/toc_ja.json
-
-# Install vitepress deps
-WORKDIR /app/vitepress
-RUN npm install
+# Copy everything to the container
+COPY . .
+RUN npm ci
 
 # Increase max-old-space-size to avoid memory issues during build
 ENV NODE_OPTIONS="--max-old-space-size=8192"
@@ -39,7 +24,7 @@ RUN npm run docs:build
 FROM nginx:1.27-alpine AS runner
 
 # Copy built files
-COPY --from=builder /app/vitepress/.vitepress/dist /usr/share/nginx/html
+COPY --from=builder /app/.vitepress/dist /usr/share/nginx/html
 
 # Expose port
 EXPOSE 80
