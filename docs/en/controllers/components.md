@@ -98,6 +98,47 @@ class MyFlashComponent extends FlashComponent
 The above would *alias* `MyFlashComponent` to `$this->Flash` in your
 controllers.
 
+### Component Alias Conflicts
+
+When a component alias matches the controller's default table name, accessing
+that property will return the table instead of the component. CakePHP triggers
+a warning when this conflict is detected:
+
+```php
+class PaymentsController extends AppController
+{
+    public function initialize(): void
+    {
+        parent::initialize();
+        // Warning: Component alias `Payments` clashes with the default table name
+        $this->loadComponent('Payments');
+    }
+
+    public function index()
+    {
+        // This returns PaymentsTable, not PaymentsComponent!
+        $this->Payments;
+    }
+}
+```
+
+To resolve this conflict, either use a different component alias:
+
+```php
+$this->loadComponent('Payments', ['className' => 'Payments', 'alias' => 'PaymentService']);
+// Access via $this->PaymentService
+```
+
+Or set `Controller::$defaultTable` to an empty string if the controller doesn't
+need a default table:
+
+```php
+class PaymentsController extends AppController
+{
+    protected ?string $defaultTable = '';
+}
+```
+
 > [!NOTE]
 > Aliasing a component replaces that instance anywhere that component is used,
 > including inside other Components.

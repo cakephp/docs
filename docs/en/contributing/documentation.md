@@ -536,22 +536,22 @@ We use a custom link checker to validate internal markdown links in the document
 
 ```bash [Single File]
 # Check a single file
-node bin/check-links.js docs/en/your-file.md
+node .github/check-links.cjs docs/en/your-file.md
 ```
 
 ```bash [Directory]
 # Check all files in a directory
-node bin/check-links.js "docs/en/controllers/*.md"
+node .github/check-links.cjs "docs/en/controllers/*.md"
 ```
 
 ```bash [All Docs]
 # Check all documentation recursively
-node bin/check-links.js "docs/**/*.md"
+node .github/check-links.cjs "docs/**/*.md"
 ```
 
 ```bash [With Baseline]
 # Check while ignoring known issues in baseline
-node bin/check-links.js --baseline .github/linkchecker-baseline.json "docs/**/*.md"
+node .github/check-links.cjs --baseline .github/linkchecker-baseline.json "docs/**/*.md"
 ```
 
 :::
@@ -587,23 +587,23 @@ When you submit a pull request, our CI pipeline automatically runs:
 # Validate markdown and spelling
 npx markdownlint-cli2 --config .github/.markdownlint-cli2.jsonc "docs/**/*.md"
 npx cspell --config .github/cspell.json "docs/**/*.md"
-node bin/check-links.js "docs/**/*.md"
+node .github/check-links.cjs "docs/**/*.md"
 ```
 
 ```bash [Full Validation]
 # Run all CI checks locally
 npx markdownlint-cli2 --config .github/.markdownlint-cli2.jsonc "docs/**/*.md"
 npx cspell --config .github/cspell.json "docs/**/*.md"
-node bin/check-links.js "docs/**/*.md"
+node .github/check-links.cjs "docs/**/*.md"
 node --check config.js
-jq empty toc_en.json
+jq empty .vitepress/toc_en.json
 ```
 
 ```bash [Single File]
 # Check your current file before committing
 npx markdownlint-cli2 --config .github/.markdownlint-cli2.jsonc docs/en/your-file.md
 npx cspell --config .github/cspell.json docs/en/your-file.md
-node bin/check-links.js docs/en/your-file.md
+node .github/check-links.cjs docs/en/your-file.md
 ```
 
 :::

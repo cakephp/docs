@@ -75,7 +75,7 @@
     "no-emphasis-as-heading": false
   },
   "customRules": [
-    "./markdownlint-rules/no-space-after-fence.js"
+    "./markdownlint-rules/no-space-after-fence.cjs"
   ],
   "ignores": [
     "node_modules/**"
