@@ -28,7 +28,7 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Validate config.js syntax
-        run: node --check config.js
+        run: node --check .vitepress/config.js
 
   json-lint:
     name: Validate JSON Files
