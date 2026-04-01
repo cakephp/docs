@@ -211,7 +211,7 @@ class BillingServiceProvider extends ServiceProvider
 
     public function services(ContainerInterface $container): void
     {
-        $container->add(StripService::class);
+        $container->add(StripeService::class);
         $container->add('configKey', 'some value');
     }
 }

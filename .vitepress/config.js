@@ -1,4 +1,4 @@
-import baseConfig from '@cakephp/docs-skeleton/config'
+import baseConfig, { substitutionsReplacer } from '@cakephp/docs-skeleton/config'
 
 import { createRequire } from "module";
 const require = createRequire(import.meta.url);
@@ -19,9 +19,21 @@ const versions = {
   ],
 };
 
+const substitutions = {
+  '|phpversion|': { value: '8.5', format: 'bold' },
+  '|minphpversion|': { value: '8.2', format: 'italic' },
+  '|cakeversion|': '5.4.0',
+  '|cakefullversion|': 'CakePHP 5.next',
+};
+
 // This file contains overrides for .vitepress/config.js
 export default {
   extends: baseConfig,
+  markdown: {
+    config(md) {
+      md.use(substitutionsReplacer, { substitutions });
+    }
+  },
   base: "/5.next/",
   rewrites: {
     "en/:slug*": ":slug*",
@@ -49,12 +61,6 @@ export default {
       link: '/latest/',
       linkText: 'Go to latest docs.'
     }
-  },
-  substitutions: {
-    '|phpversion|': { value: '8.5', format: 'bold' },
-    '|minphpversion|': { value: '8.2', format: 'italic' },
-    '|cakeversion|': '5.4.0',
-    '|cakefullversion|': 'CakePHP 5.next',
   },
   locales: {
     root: {
