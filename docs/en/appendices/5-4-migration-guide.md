@@ -16,27 +16,47 @@ bin/cake upgrade rector --rules cakephp54 <path/to/app/src>
 
 ## Behavior Changes
 
+### Commands
+
+- `BaseCommand::initialize()` is now being triggered **AFTER** arguments and options have been parsed.
+
 ### I18n
 
-`Number::parseFloat()` now returns `null` instead of `0.0` when parsing
-fails. This also affects `FloatType` and `DecimalType` database types.
+- `Number::parseFloat()` now returns `null` instead of `0.0` when parsing
+  fails. This also affects `FloatType` and `DecimalType` database types.
 
 ### ORM
 
-The default eager loading strategy for `HasMany` and `BelongsToMany` associations
-has changed from `select` to `subquery`. If you need the previous behavior,
-explicitly set `'strategy' => 'select'` when defining associations.
+- The default eager loading strategy for `HasMany` and `BelongsToMany` associations
+  has changed from `select` to `subquery`. If you need the previous behavior,
+  explicitly set `'strategy' => 'select'` when defining associations.
 
 ### Controller
 
-Loading a component with the same alias as the controller's default table now
-triggers a warning. See [Component Alias Conflicts](../controllers/components#component-alias-conflicts).
+- Loading a component with the same alias as the controller's default table now
+  triggers a warning. See [Component Alias Conflicts](../controllers/components#component-alias-conflicts).
 
 ## Deprecations
 
-- WIP
+### Mailer
+
+- The `Mailer::$name` property is unused and has been deprecated.
 
 ## New Features
+
+### Core
+
+- `PluginConfig::getInstalledPlugins()` was added to retrieve a list of all installed plugins
+  including flags to indicate about their scope and state.
+- A backwards compatible Container implementation has been added to the core. You can opt-in to use it instead of the current
+  `league/container` implementation by setting `App.container` to `cake` inside your `config/app.php`.
+  See [Dependency Injection Container](../development/dependency-injection) for more details.
+
+### Commands
+
+- You can use `$this->io` and `$this->args` inside your commands to access input/output and argument objects
+  without needing to pass them down from the `execute()` method. **This will be the default in CakePHP 6.0**
+  as those arguments will be removed from the `execute()` method signature.
 
 ### Controller
 
@@ -75,7 +95,9 @@ triggers a warning. See [Component Alias Conflicts](../controllers/components#co
 
 - Added `Cake\Utility\Fs\Finder` class for fluent file discovery with pattern matching,
   depth control, and custom filters. Added `Cake\Utility\Fs\Path` for cross-platform
-  path manipulation.
+  path manipulation. See [Filesystem Utilities](../core-libraries/filesystem.md).
+- `Security::encrypt()` can now be configured to use longer keys with separate encryption and authentication keys that are derived from the provided key.
+  You can set `Security.encryptWithRawKey` to enable this behavior. See [here](https://github.com/cakephp/cakephp/pull/19325) for more details.
 
 ### Collection
 
