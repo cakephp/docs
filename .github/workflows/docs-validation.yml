@@ -30,3 +30,4 @@ jobs:
       enable-markdown-lint: true
       enable-link-check: true
       linkchecker-baseline: '.github/linkchecker-baseline.json'
+      tools-ref: 'doc-workflows'
