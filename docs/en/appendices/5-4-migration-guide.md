@@ -38,6 +38,11 @@ bin/cake upgrade rector --rules cakephp54 <path/to/app/src>
 
 ## Deprecations
 
+### Command Helpers
+
+- Command helpers under the `Cake\Command\Helper` namespace have been deprecated.
+  Instead they have been moved under the `Cake\Console\Helper` namespace.
+
 ### Mailer
 
 - The `Mailer::$name` property is unused and has been deprecated.
