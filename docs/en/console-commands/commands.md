@@ -212,7 +212,7 @@ to terminate execution:
 public function execute(Arguments $args, ConsoleIo $io): int
 {
     $name = $args->getArgument('name');
-    if (mb_strlen($name) < 5) {
+    if (mb_strlen($name) < 4) {
         // Halt execution, output to stderr, and set exit code to 1
         $io->error('Name must be at least 4 characters long.');
         $this->abort();
@@ -228,7 +228,7 @@ You can also use `abort()` on the `$io` object to emit a message and code:
 public function execute(Arguments $args, ConsoleIo $io): int
 {
     $name = $args->getArgument('name');
-    if (mb_strlen($name) < 5) {
+    if (mb_strlen($name) < 4) {
         // Halt execution, output to stderr, and set exit code to 99
         $io->abort('Name must be at least 4 characters long.', 99);
     }
