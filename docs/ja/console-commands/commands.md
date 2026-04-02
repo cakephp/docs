@@ -196,7 +196,7 @@ class UserCommand extends Command
 public function execute(Arguments $args, ConsoleIo $io)
 {
     $name = $args->getArgument('name');
-    if (strlen($name) < 5) {
+    if (strlen($name) < 4) {
         // 実行を停止し、標準エラーに出力し、終了コードを 1 に設定
         $io->error('Name must be at least 4 characters long.');
         $this->abort();
@@ -210,7 +210,7 @@ public function execute(Arguments $args, ConsoleIo $io)
 public function execute(Arguments $args, ConsoleIo $io)
 {
     $name = $args->getArgument('name');
-    if (strlen($name) < 5) {
+    if (strlen($name) < 4) {
         // 実行を停止しstderrに出力し、終了コードを99に設定します
         $io->abort('名前は4文字以上にする必要があります。', 99);
     }
