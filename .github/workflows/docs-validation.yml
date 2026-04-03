@@ -20,7 +20,7 @@ on:
 
 jobs:
   validate:
-    uses: cakephp/.github/.github/workflows/docs-validation.yml@doc-workflows
+    uses: cakephp/.github/.github/workflows/docs-validation.yml@5.x
     with:
       docs-path: 'docs'
       enable-config-js-check: true
@@ -30,4 +30,4 @@ jobs:
       enable-markdown-lint: true
       enable-link-check: true
       linkchecker-baseline: '.github/linkchecker-baseline.json'
-      tools-ref: 'doc-workflows'
+      tools-ref: '5.x'
