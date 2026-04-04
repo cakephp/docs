@@ -360,6 +360,44 @@ public function console(CommandCollection $commands): CommandCollection
 `CommandCollection::replace()` was added.
 :::
 
+## Customizing the Help Header
+
+By default, `bin/cake help` displays a CakePHP version header at the top of
+command listings. When the CakePHP version cannot be determined (e.g. when the
+console package is used outside a CakePHP application), the header is omitted
+automatically.
+
+You can replace the default header with your own by implementing
+`Cake\Core\ConsoleHelpHeaderProviderInterface` on the application class passed
+to `CommandRunner`:
+
+```php
+<?php
+declare(strict_types=1);
+
+namespace App;
+
+use Cake\Core\ConsoleHelpHeaderProviderInterface;
+use Cake\Http\BaseApplication;
+
+class Application extends BaseApplication implements ConsoleHelpHeaderProviderInterface
+{
+    public function getConsoleHelpHeader(): string
+    {
+        return '<info>MyApp:</info> 1.4.0 (env: prod)';
+    }
+}
+```
+
+When this interface is implemented, `CommandRunner` passes the return value of
+`getConsoleHelpHeader()` to `HelpCommand`, replacing the default CakePHP header.
+Console markup tags such as `<info>` and `<comment>` are supported in the
+returned string.
+
+::: info Added in version 5.4.0
+`ConsoleHelpHeaderProviderInterface` was added.
+:::
+
 ## Tree Output Helper
 
 The `TreeHelper` outputs an array as a tree structure. This is useful for

@@ -20,6 +20,20 @@ bin/cake upgrade rector --rules cakephp54 <path/to/app/src>
 
 - `BaseCommand::initialize()` is now being triggered **AFTER** arguments and options have been parsed.
 
+### Console
+
+Running `bin/cake` without providing a command name no longer displays the
+"No command provided" error message. Instead, the `help` command is shown
+directly.
+
+The `help` command is now hidden from command listings (via
+`CommandHiddenInterface`). It remains accessible by running `bin/cake help` or
+`bin/cake help <command>`.
+
+The CakePHP version header in help output is now only shown when the CakePHP
+version can be determined. When used outside a CakePHP application (where the
+version is reported as `unknown`), the header is omitted.
+
 ### I18n
 
 - `Number::parseFloat()` now returns `null` instead of `0.0` when parsing
@@ -62,6 +76,12 @@ bin/cake upgrade rector --rules cakephp54 <path/to/app/src>
 - You can use `$this->io` and `$this->args` inside your commands to access input/output and argument objects
   without needing to pass them down from the `execute()` method. **This will be the default in CakePHP 6.0**
   as those arguments will be removed from the `execute()` method signature.
+
+### Console
+
+- Added `ConsoleHelpHeaderProviderInterface` to allow host applications to
+  provide a custom header in console help output.
+  See [Customizing the Help Header](../console-commands/commands#customizing-the-help-header).
 
 ### Controller
 
