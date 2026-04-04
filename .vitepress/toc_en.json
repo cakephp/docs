@@ -306,29 +306,10 @@
           "text": "Dependency Injection",
           "link": "/development/dependency-injection"
         },
+        { "text": "plugins", "link": "/plugins" },
         { "text": "Errors", "link": "/development/errors" },
         { "text": "REST", "link": "/development/rest" },
         { "text": "Testing", "link": "/development/testing" }
-      ]
-    },
-    {
-      "text": "Plugins",
-      "collapsed": true,
-      "items": [
-        { "text": "Creating Plugins", "link": "/plugins" },
-        {
-          "text": "Core Plugins",
-          "items": [
-            { "text": "Authentication", "link": "https://book.cakephp.org/authentication/" },
-            { "text": "Authorization", "link": "https://book.cakephp.org/authorization/" },
-            { "text": "Bake", "link": "https://book.cakephp.org/bake/" },
-            { "text": "Chronos", "link": "https://book.cakephp.org/chronos/" },
-            { "text": "Debug Kit", "link": "https://book.cakephp.org/debugkit/" },
-            { "text": "Elasticsearch", "link": "https://book.cakephp.org/elasticsearch/" },
-            { "text": "Migrations", "link": "https://book.cakephp.org/migrations/" },
-            { "text": "Phinx", "link": "https://book.cakephp.org/phinx/" }
-          ]
-        }
       ]
     },
     {

@@ -19,6 +19,31 @@ const versions = {
   ],
 };
 
+const plugins = {
+  text: "Plugins",
+  items: [
+    {
+      text: "Core Plugins",
+      items: [
+        { text: "Authentication", link: "https://book.cakephp.org/authentication/", target: "_self" },
+        { text: "Authorization", link: "https://book.cakephp.org/authorization/", target: "_self" },
+        { text: "Bake", link: "https://book.cakephp.org/bake/", target: "_self" },
+        { text: "Chronos", link: "https://book.cakephp.org/chronos/", target: "_self" },
+        { text: "Debug Kit", link: "https://book.cakephp.org/debugkit/", target: "_self" },
+        { text: "Elasticsearch", link: "https://book.cakephp.org/elasticsearch/", target: "_self" },
+        { text: "Migrations", link: "https://book.cakephp.org/migrations/", target: "_self" },
+        { text: "Phinx", link: "https://book.cakephp.org/phinx/", target: "_self" },
+      ],
+    },
+    {
+      text: "Community",
+      items: [
+        { text: "Community Plugins", link: "https://plugins.cakephp.org/", target: "_self" },
+      ],
+    },
+  ],
+};
+
 const substitutions = {
   '|phpversion|': { value: '8.5', format: 'bold' },
   '|minphpversion|': { value: '8.2', format: 'italic' },
@@ -53,7 +78,7 @@ export default {
     nav: [
       { text: "Guide", link: "/intro" },
       { text: "API", link: "https://api.cakephp.org/" },
-      { text: "Documentation", link: "/" },
+      { ...plugins },
       { ...versions },
     ],
   },
@@ -70,6 +95,7 @@ export default {
           { text: "ガイド", link: "/ja/intro" },
           { text: "API", link: "https://api.cakephp.org/" },
           { text: "ドキュメント", link: "/ja/" },
+          { ...plugins },
           { ...versions },
         ],
         sidebar: toc_ja,
