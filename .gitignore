@@ -5,6 +5,10 @@
 .vitepress/.temp
 /node_modules/
 .temp/
+docs/public/favicon/
+docs/public/fonts/
+docs/public/icons/
+docs/public/logo.svg
 
 # IDE and editor specific files #
 #################################
