@@ -16,7 +16,6 @@ bin/cake upgrade rector --rules cakephp54 <path/to/app/src>
 
 ## Behavior Changes
 
-
 ### Commands
 
 - `BaseCommand::initialize()` is now being triggered **AFTER** arguments and options have been parsed.
@@ -63,7 +62,6 @@ version is reported as `unknown`), the header is omitted.
 - The `Mailer::$name` property is unused and has been deprecated.
 
 ## New Features
-
 
 ### Core
 
