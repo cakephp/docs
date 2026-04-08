@@ -927,6 +927,65 @@ $stream = new CallbackStream(function () use ($img) {
 $response = $response->withBody($stream);
 ```
 
+### Streaming Large JSON Responses
+
+`class` **Cake\\Http\\Response\\JsonStreamResponse**
+
+When you need to send a large JSON response, `JsonStreamResponse` lets you
+stream each item instead of building the entire payload in memory first. This
+is useful for large exports, APIs backed by database cursors, or any response
+where buffering the full result would be wasteful.
+
+```php
+use Cake\Http\Response\JsonStreamResponse;
+
+public function index()
+{
+    $articles = $this->fetchTable('Articles')
+        ->find()
+        ->select(['id', 'title', 'created'])
+        ->enableHydration(false)
+        ->bufferResults(false);
+
+    return new JsonStreamResponse($articles);
+}
+```
+
+`JsonStreamResponse` sets the `Content-Type` header to `application/json` by
+default and disables proxy buffering with the `X-Accel-Buffering: no` header.
+
+If you need newline-delimited JSON instead of a JSON array, use the
+`JsonStreamResponse::FORMAT_NDJSON` format:
+
+```php
+use Cake\Http\Response\JsonStreamResponse;
+
+public function stream()
+{
+    $query = $this->fetchTable('Articles')
+        ->find()
+        ->select(['id', 'title'])
+        ->enableHydration(false)
+        ->bufferResults(false);
+
+    return new JsonStreamResponse($query, [
+        'format' => JsonStreamResponse::FORMAT_NDJSON,
+    ]);
+}
+```
+
+You can customize the output with these options:
+
+- `root`: Wraps the payload in a top-level object.
+- `envelope`: Adds additional top-level keys alongside the streamed data.
+- `dataKey`: Renames the streamed collection key when using `root`.
+- `transform`: Applies a callback to each item before encoding it.
+- `flags`: Sets the `json_encode()` flags.
+- `flushEvery`: Flushes the output buffer after a given number of items.
+
+For best results, disable buffered ORM results and avoid collection operations
+that materialize the entire dataset before streaming.
+
 ### Setting the Character Set
 
 `method` Cake\\Http\\Response::**withCharset**(string $charset): static
