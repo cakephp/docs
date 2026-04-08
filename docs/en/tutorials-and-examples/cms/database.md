@@ -198,7 +198,7 @@ The seed data above stores passwords in **plain text** for initial setup purpose
 Run the seeders:
 
 ```bash
-bin/cake seeds run
+bin/cake migrations seed
 ```
 
 ### Option B: Using Raw SQL
