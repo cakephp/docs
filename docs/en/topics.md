@@ -24,6 +24,7 @@ Introduction to all the key parts of CakePHP:
 - [Entities](orm/entities)
 - [Error & Exception Handling](development/errors)
 - [Caching](core-libraries/caching)
+- [Locking](core-libraries/locking)
 - [Logging](core-libraries/logging)
 - [Modelless Forms](core-libraries/form)
 - [Sessions](development/sessions)

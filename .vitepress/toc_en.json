@@ -185,6 +185,7 @@
       "items": [
         { "text": "Events", "link": "/core-libraries/events" },
         { "text": "Caching", "link": "/core-libraries/caching" },
+        { "text": "Locking", "link": "/core-libraries/locking" },
         { "text": "Email", "link": "/core-libraries/email" },
         { "text": "Logging", "link": "/core-libraries/logging" },
         { "text": "Security", "link": "/core-libraries/security" },
