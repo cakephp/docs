@@ -98,6 +98,10 @@ version is reported as `unknown`), the header is omitted.
   See [Query Builder](../orm/query-builder#advanced-conditions).
 - Added `inOrNull()` and `notInOrNull()` methods for combining `IN` conditions with `IS NULL`.
 - Added `isDistinctFrom()` and `isNotDistinctFrom()` methods for null-safe comparisons.
+- Added `except()` and `exceptAll()` methods on `SelectQuery` for `EXCEPT`
+  and `EXCEPT ALL` set operations. `EXCEPT ALL` is supported on PostgreSQL
+  and recent MySQL/MariaDB versions; it is not supported on SQLite or SQL Server.
+  See [Query Builder](../orm/query-builder#except).
 - Added PostgreSQL index access method reflection. Non-btree indexes (`gin`,
   `gist`, `spgist`, `brin`, `hash`) are now reflected with an `accessMethod`
   field and regenerated with the correct `USING` clause. The `Index` class

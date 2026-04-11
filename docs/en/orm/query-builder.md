@@ -2200,6 +2200,39 @@ $unpublished->intersectAll($inReview);
 `intersect()` and `intersectAll()` were added.
 :::
 
+### Except
+
+Except operations allow you to return rows from one query that do not appear
+in another query. Except queries are created by composing one or more select
+queries together:
+
+```php
+$allArticles = $articles->find();
+
+$published = $articles->find()
+    ->where(['published' => true]);
+
+$allArticles->except($published);
+```
+
+You can create `EXCEPT ALL` queries using the `exceptAll()` method:
+
+```php
+$allArticles = $articles->find();
+
+$published = $articles->find()
+    ->where(['published' => true]);
+
+$allArticles->exceptAll($published);
+```
+
+`EXCEPT ALL` is supported on PostgreSQL and recent MySQL/MariaDB versions.
+It is not supported on SQLite or SQL Server.
+
+::: info Added in version 5.4.0
+`except()` and `exceptAll()` were added.
+:::
+
 ### Subqueries
 
 Subqueries enable you to compose queries together and build conditions and
