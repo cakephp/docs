@@ -98,6 +98,9 @@ version is reported as `unknown`), the header is omitted.
   See [Query Builder](../orm/query-builder#advanced-conditions).
 - Added `inOrNull()` and `notInOrNull()` methods for combining `IN` conditions with `IS NULL`.
 - Added `isDistinctFrom()` and `isNotDistinctFrom()` methods for null-safe comparisons.
+- Added `FunctionsBuilder::stringAgg()` for portable string aggregation.
+  Translates to `STRING_AGG` or `GROUP_CONCAT` per driver.
+  See [Query Builder](../orm/query-builder#string-aggregation).
 - Added PostgreSQL index access method reflection. Non-btree indexes (`gin`,
   `gist`, `spgist`, `brin`, `hash`) are now reflected with an `accessMethod`
   field and regenerated with the correct `USING` clause. The `Index` class

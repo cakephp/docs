@@ -360,6 +360,11 @@ Calculate the max of a column. `Assumes arguments are literal values.`
 `count()`
 Calculate the count. `Assumes arguments are literal values.`
 
+`stringAgg()`
+Aggregate string values using a separator. Translates to `STRING_AGG()`,
+`GROUP_CONCAT()`, or `LISTAGG()` depending on the database driver.
+`Assumes the first argument is a literal value.`
+
 `cast()`
 Convert a field or expression from one data type to another.
 
@@ -470,6 +475,38 @@ FROM articles;
 
 > [!NOTE]
 > Use `func()` to pass untrusted user data to any SQL function.
+
+#### String Aggregation
+
+The `stringAgg()` method provides a portable way to aggregate string values
+using a separator. It translates to the appropriate native SQL function for
+each driver (`STRING_AGG()` on PostgreSQL and SQL Server, `GROUP_CONCAT()` on
+MySQL, and `STRING_AGG()` or `GROUP_CONCAT()` on MariaDB/SQLite depending on
+version):
+
+```php
+$query = $articles->find();
+$query->select([
+    'category_id',
+    'titles' => $query->func()->stringAgg('title', ', '),
+])
+->groupBy('category_id');
+```
+
+You can optionally specify an ordering for the aggregated values via the
+third argument:
+
+```php
+$query->func()->stringAgg('title', ', ', ['title' => 'ASC']);
+```
+
+`STRING_AGG` with aggregate-local ordering is supported on PostgreSQL,
+SQL Server, MariaDB 10.5+ and SQLite 3.44+. MySQL translates the call to
+`GROUP_CONCAT` in all cases.
+
+::: info Added in version 5.4.0
+`FunctionsBuilder::stringAgg()` was added.
+:::
 
 ### Ordering Results
 
