@@ -98,6 +98,12 @@ version is reported as `unknown`), the header is omitted.
   See [Query Builder](../orm/query-builder#advanced-conditions).
 - Added `inOrNull()` and `notInOrNull()` methods for combining `IN` conditions with `IS NULL`.
 - Added `isDistinctFrom()` and `isNotDistinctFrom()` methods for null-safe comparisons.
+- Added PostgreSQL index access method reflection. Non-btree indexes (`gin`,
+  `gist`, `spgist`, `brin`, `hash`) are now reflected with an `accessMethod`
+  field and regenerated with the correct `USING` clause. The `Index` class
+  provides constants (`Index::GIN`, `Index::GIST`, `Index::SPGIST`,
+  `Index::BRIN`, `Index::HASH`) for these access methods.
+  See [Reading Indexes and Constraints](../orm/schema-system#reading-indexes-and-constraints).
 
 ### I18n
 
