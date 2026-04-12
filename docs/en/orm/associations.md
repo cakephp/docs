@@ -462,9 +462,12 @@ Possible keys for hasMany association arrays include:
 - **propertyName**: The property name that should be filled with data from the
   associated table into the source table results. By default, this is the
   underscored & plural name of the association so `comments` in our example.
-- **strategy**: Defines the query strategy to use. Defaults to 'subquery'. The
-  other valid value is 'select', which uses the `IN` list of parent keys
+- **strategy**: Defines the query strategy to use. Defaults to `subquery`. The
+  other valid value is `select`, which uses the `IN` list of parent keys
   directly instead of a subquery.
+::: tip New default strategy in version 5.4+
+The default strategy has changed from `select` to `subquery` in order to improve performance when the number of parent keys is large.
+:::
 - **saveStrategy**: Either `append` or `replace`. Defaults to `append`. When `append` the current
   records are appended to any records in the database. When `replace` associated
   records not in the current set will be removed. If the foreign key is a nullable
@@ -616,9 +619,12 @@ Possible keys for belongsToMany association arrays include:
 - **propertyName**: The property name that should be filled with data from the
   associated table into the source table results. By default, this is the
   underscored & plural name of the association, so `tags` in our example.
-- **strategy**: Defines the query strategy to use. Defaults to 'subquery'. The
-  other valid value is 'select', which uses the `IN` list of parent keys
+- **strategy**: Defines the query strategy to use. Defaults to `subquery`. The
+  other valid value is `select`, which uses the `IN` list of parent keys
   directly instead of a subquery.
+::: tip New default strategy in version 5.4+
+The default strategy has changed from `select` to `subquery` in order to improve performance when the number of parent keys is large.
+:::
 - **saveStrategy**: Either `append` or `replace`. Defaults to `replace`.
   Indicates the mode to be used for saving associated entities. The former will
   only create new links between both side of the relation and the latter will

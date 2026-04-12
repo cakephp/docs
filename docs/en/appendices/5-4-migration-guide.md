@@ -44,6 +44,7 @@ version is reported as `unknown`), the header is omitted.
 - The default eager loading strategy for `HasMany` and `BelongsToMany` associations
   has changed from `select` to `subquery`. If you need the previous behavior,
   explicitly set `'strategy' => 'select'` when defining associations.
+  See [Associations](../orm/associations#has-many-associations) for more details.
 
 ### Controller
 
