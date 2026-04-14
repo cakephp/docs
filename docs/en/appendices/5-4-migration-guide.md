@@ -45,6 +45,11 @@ version is reported as `unknown`), the header is omitted.
   has changed from `select` to `subquery`. If you need the previous behavior,
   explicitly set `'strategy' => 'select'` when defining associations.
   See [Associations](../orm/associations#has-many-associations) for more details.
+- `Model.afterSaveCommit` and `Model.afterDeleteCommit` events are now fired
+  when `save()` or `delete()` is called inside an outer transaction. Previously,
+  these events were silently suppressed. They are now deferred until the
+  outermost transaction commits, and discarded on rollback.
+  See [Table Objects](../orm/table-objects#aftersavecommit) for more details.
 
 ### Controller
 
@@ -99,6 +104,9 @@ version is reported as `unknown`), the header is omitted.
   See [Query Builder](../orm/query-builder#advanced-conditions).
 - Added `inOrNull()` and `notInOrNull()` methods for combining `IN` conditions with `IS NULL`.
 - Added `isDistinctFrom()` and `isNotDistinctFrom()` methods for null-safe comparisons.
+- Added `Connection::afterCommit()` to register callbacks that run after the
+  outermost transaction commits. Callbacks are discarded on rollback.
+  See [Database Basics](../orm/database-basics#aftercommit) for more details.
 - Added `except()` and `exceptAll()` methods on `SelectQuery` for `EXCEPT`
   and `EXCEPT ALL` set operations. `EXCEPT ALL` is supported on PostgreSQL
   and recent MySQL/MariaDB versions; it is not supported on SQLite or SQL Server.
