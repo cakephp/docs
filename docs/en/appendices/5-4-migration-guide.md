@@ -44,6 +44,7 @@ version is reported as `unknown`), the header is omitted.
 - The default eager loading strategy for `HasMany` and `BelongsToMany` associations
   has changed from `select` to `subquery`. If you need the previous behavior,
   explicitly set `'strategy' => 'select'` when defining associations.
+  See [Associations](../orm/associations#has-many-associations) for more details.
 
 ### Controller
 
@@ -101,6 +102,10 @@ version is reported as `unknown`), the header is omitted.
 - Added `FunctionsBuilder::stringAgg()` for portable string aggregation.
   Translates to `STRING_AGG` or `GROUP_CONCAT` per driver.
   See [Query Builder](../orm/query-builder#string-aggregation).
+- Added `except()` and `exceptAll()` methods on `SelectQuery` for `EXCEPT`
+  and `EXCEPT ALL` set operations. `EXCEPT ALL` is supported on PostgreSQL
+  and recent MySQL/MariaDB versions; it is not supported on SQLite or SQL Server.
+  See [Query Builder](../orm/query-builder#except).
 - Added PostgreSQL index access method reflection. Non-btree indexes (`gin`,
   `gist`, `spgist`, `brin`, `hash`) are now reflected with an `accessMethod`
   field and regenerated with the correct `USING` clause. The `Index` class
