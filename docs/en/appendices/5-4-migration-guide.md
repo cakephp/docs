@@ -71,6 +71,7 @@ version is reported as `unknown`), the header is omitted.
 - A backwards compatible Container implementation has been added to the core. You can opt-in to use it instead of the current
   `league/container` implementation by setting `App.container` to `cake` inside your `config/app.php`.
   See [Dependency Injection Container](../development/dependency-injection) for more details.
+- `Text::mask()` was added to mask a portion of a string with a repeated character. See [Text Masking](../core-libraries/text.md#text-masking) for more details.
 
 ### Commands
 
