@@ -71,7 +71,6 @@ version is reported as `unknown`), the header is omitted.
 - A backwards compatible Container implementation has been added to the core. You can opt-in to use it instead of the current
   `league/container` implementation by setting `App.container` to `cake` inside your `config/app.php`.
   See [Dependency Injection Container](../development/dependency-injection) for more details.
-- `Text::mask()` was added to mask a portion of a string with a repeated character. See [Text Masking](../core-libraries/text.md#text-masking) for more details.
 
 ### Commands
 
@@ -135,6 +134,7 @@ version is reported as `unknown`), the header is omitted.
   path manipulation. See [Filesystem Utilities](../core-libraries/filesystem.md).
 - `Security::encrypt()` can now be configured to use longer keys with separate encryption and authentication keys that are derived from the provided key.
   You can set `Security.encryptWithRawKey` to enable this behavior. See [here](https://github.com/cakephp/cakephp/pull/19325) for more details.
+- Added `Text::mask()` method which masks a portion of a string with a repeated character. See [Text Masking](../core-libraries/text.md#text-masking) for more details.
 
 ### Collection
 
