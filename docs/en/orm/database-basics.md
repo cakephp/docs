@@ -1107,6 +1107,53 @@ do the following:
 - If the closure returns `false`, a rollback will be issued.
 - If the closure executes successfully, the transaction will be committed.
 
+### afterCommit
+
+`method` Cake\\Database\\Connection::**afterCommit**(callable $callback): void
+
+You can register callbacks to run after the outermost transaction commits using
+``afterCommit()``. This is useful for deferring side effects like sending
+emails, dispatching jobs, or invalidating caches until you know the data has
+been persisted:
+
+```php
+$connection->begin();
+$connection->execute('UPDATE articles SET published = ? WHERE id = ?', [true, 2]);
+$connection->afterCommit(function () {
+    // Send notification email — only runs if the transaction commits.
+    $this->mailer->send('article-published');
+});
+$connection->commit(); // Callback fires here.
+```
+
+Callbacks are discarded if the transaction is rolled back. When nested
+transactions are in use, callbacks registered at any depth are deferred until
+the outermost transaction commits:
+
+```php
+$connection->begin();
+$connection->afterCommit(function () {
+    // This fires after the outermost commit.
+});
+
+$connection->begin(); // Nested (savepoint)
+$connection->afterCommit(function () {
+    // Also deferred to outermost commit.
+});
+$connection->commit(); // Releases savepoint — callbacks don't fire yet.
+
+$connection->commit(); // Outermost commit — both callbacks fire now.
+```
+
+If ``afterCommit()`` is called when no transaction is active, the callback
+executes immediately. This matches the semantics of the ORM's
+``Model.afterSaveCommit`` event, which also fires immediately for non-atomic
+saves.
+
+::: info Added in version 5.4.0
+`Connection::afterCommit()` was added.
+:::
+
 ## Interacting with Statements
 
 When using the lower level database API, you will often encounter statement
