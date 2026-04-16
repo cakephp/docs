@@ -346,31 +346,31 @@ You can access existing wrappers for several SQL functions through `SelectQuery:
 Generate a random value between 0 and 1 via SQL.
 
 `sum()`
-Calculate a sum. `Assumes arguments are literal values.`
+Calculate a sum. *Assumes arguments are literal values.*
 
 `avg()`
-Calculate an average. `Assumes arguments are literal values.`
+Calculate an average. *Assumes arguments are literal values.*
 
 `min()`
-Calculate the min of a column. `Assumes arguments are literal values.`
+Calculate the min of a column. *Assumes arguments are literal values.*
 
 `max()`
-Calculate the max of a column. `Assumes arguments are literal values.`
+Calculate the max of a column. *Assumes arguments are literal values.*
 
 `count()`
-Calculate the count. `Assumes arguments are literal values.`
+Calculate the count. *Assumes arguments are literal values.*
 
 `cast()`
 Convert a field or expression from one data type to another.
 
 `concat()`
-Concatenate two values together. `Assumes arguments are bound parameters.`
+Concatenate two values together. *Assumes arguments are bound parameters.*
 
 `coalesce()`
-Coalesce values. `Assumes arguments are bound parameters.`
+Coalesce values. *Assumes arguments are bound parameters.*
 
 `dateDiff()`
-Get the difference between two dates/times. `Assumes arguments are bound parameters.`
+Get the difference between two dates/times. *Assumes arguments are bound parameters.*
 
 `now()`
 Defaults to returning date and time, but accepts 'time' or 'date' to return only
