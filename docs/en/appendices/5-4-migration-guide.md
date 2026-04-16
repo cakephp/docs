@@ -77,6 +77,12 @@ version is reported as `unknown`), the header is omitted.
   `league/container` implementation by setting `App.container` to `cake` inside your `config/app.php`.
   See [Dependency Injection Container](../development/dependency-injection) for more details.
 
+### Collection
+
+- Added [`keys()`](../core-libraries/collections#keys) and [`values()`](../core-libraries/collections#values) methods for extracting keys or re-indexing values.
+- Added [`implode()`](../core-libraries/collections#implode) method to concatenate elements into a string.
+- Added [`when()`](../core-libraries/collections#when) and [`unless()`](../core-libraries/collections#unless) methods for conditional method chaining.
+
 ### Commands
 
 - You can use `$this->io` and `$this->args` inside your commands to access input/output and argument objects
@@ -118,6 +124,12 @@ version is reported as `unknown`), the header is omitted.
   `Index::BRIN`, `Index::HASH`) for these access methods.
   See [Reading Indexes and Constraints](../orm/schema-system#reading-indexes-and-constraints).
 
+### Http
+
+- Added PSR-13 Link implementation with `Cake\Http\Link\Link` and `Cake\Http\Link\LinkProvider`
+  classes for hypermedia link support. Links added to responses are automatically emitted
+  as HTTP `Link` headers. See [Hypermedia Links](../controllers/request-response#hypermedia-links).
+
 ### I18n
 
 - `Number::toReadableSize()` now uses decimal units (KB = 1000 bytes) by default.
@@ -129,11 +141,9 @@ version is reported as `unknown`), the header is omitted.
   nested array format matching `contain()` syntax.
   See [Converting Request Data into Entities](../orm/saving-data#converting-request-data-into-entities).
 
-### Http
+### Testsuite
 
-- Added PSR-13 Link implementation with `Cake\Http\Link\Link` and `Cake\Http\Link\LinkProvider`
-  classes for hypermedia link support. Links added to responses are automatically emitted
-  as HTTP `Link` headers. See [Hypermedia Links](../controllers/request-response#hypermedia-links).
+- `TestCase::mockModel()` has been added to allow mocking of model classes in tests using Mockery mocks.
 
 ### Utility
 
@@ -143,12 +153,6 @@ version is reported as `unknown`), the header is omitted.
 - `Security::encrypt()` can now be configured to use longer keys with separate encryption and authentication keys that are derived from the provided key.
   You can set `Security.encryptWithRawKey` to enable this behavior. See [here](https://github.com/cakephp/cakephp/pull/19325) for more details.
 - Added `Text::mask()` method which masks a portion of a string with a repeated character. See [Text Masking](../core-libraries/text.md#text-masking) for more details.
-
-### Collection
-
-- Added [`keys()`](../core-libraries/collections#keys) and [`values()`](../core-libraries/collections#values) methods for extracting keys or re-indexing values.
-- Added [`implode()`](../core-libraries/collections#implode) method to concatenate elements into a string.
-- Added [`when()`](../core-libraries/collections#when) and [`unless()`](../core-libraries/collections#unless) methods for conditional method chaining.
 
 ### View
 
