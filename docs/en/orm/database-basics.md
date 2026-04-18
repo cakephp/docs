@@ -188,99 +188,77 @@ use a non-default connection, see [Configuring Table Connections](../orm/table-o
 There are a number of keys supported in database configuration. A full list is
 as follows:
 
-className
-: The fully namespaced class name of the class that represents the connection to a database server.
+- `className`: The fully namespaced class name of the class that represents the connection to a database server.
   This class is responsible for loading the database driver, providing SQL
   transaction mechanisms and preparing SQL statements among other things.
 
-driver
-: The class name of the driver used to implement all specificities for
+- `driver`: The class name of the driver used to implement all specificities for
   a database engine. This can either be a short classname using `plugin syntax`,
   a fully namespaced name, or a constructed driver instance.
   Examples of short classnames are Mysql, Sqlite, Postgres, and Sqlserver.
 
-persistent
-: Whether or not to use a persistent connection to the database. This option
+- `persistent`: Whether or not to use a persistent connection to the database. This option
   is not supported by SqlServer. An exception is thrown if you attempt to set
   `persistent` to `true` with SqlServer.
 
-host
-: The database server's hostname (or IP address).
+- `host`: The database server's hostname (or IP address).
 
-username
-: The username for the account.
+- `username`: The username for the account.
 
-password
-: The password for the account.
+- `password`: The password for the account.
 
-database
-: The name of the database for this connection to use. Avoid using `.` in
+- `database`: The name of the database for this connection to use. Avoid using `.` in
   your database name. Because of how it complicates identifier quoting CakePHP
   does not support `.` in database names. The path to your SQLite database
   should be an absolute path (for example, `ROOT . DS . 'my_app.db'`) to avoid
   incorrect paths caused by relative paths.
 
-port (*optional*)
-: The TCP port or Unix socket used to connect to the server.
+- `port`: The TCP port or Unix socket used to connect to the server
+  (*optional*).
 
-encoding
-: Indicates the character set to use when sending SQL statements to
+- `encoding`: Indicates the character set to use when sending SQL statements to
   the server. This defaults to the database's default encoding for
   all databases other than DB2.
 
-timezone
-: Server timezone to set.
+- `timezone`: Server timezone to set.
 
-schema
-: Used in PostgreSQL database setups to specify which schema to use.
+- `schema`: Used in PostgreSQL database setups to specify which schema to use.
 
-unix_socket
-: Used by drivers that support it to connect via Unix socket files. If you are
+- `unix_socket`: Used by drivers that support it to connect via Unix socket files. If you are
   using PostgreSQL and want to use Unix sockets, leave the host key blank.
 
-ssl_key
-: The file path to the SSL key file. (Only supported by MySQL).
+- `ssl_key`: The file path to the SSL key file. (Only supported by MySQL).
 
-ssl_cert
-: The file path to the SSL certificate file. (Only supported by MySQL).
+- `ssl_cert`: The file path to the SSL certificate file. (Only supported by MySQL).
 
-ssl_ca
-: The file path to the SSL certificate authority. (Only supported by MySQL).
+- `ssl_ca`: The file path to the SSL certificate authority. (Only supported by MySQL).
 
-init
-: A list of queries that should be sent to the database server as
+- `init`: A list of queries that should be sent to the database server as
   when the connection is created.
 
-log
-: Set to `true` to enable query logging. When enabled queries will be logged
+- `log`: Set to `true` to enable query logging. When enabled queries will be logged
   at a `debug` level with the `queriesLog` scope.
 
-quoteIdentifiers
-: Set to `true` if you are using reserved words or special characters in
+- `quoteIdentifiers`: Set to `true` if you are using reserved words or special characters in
   your table or column names. Enabling this setting will result in queries
   built using the [Query Builder](../orm/query-builder) having identifiers quoted when
   creating SQL. It should be noted that this decreases performance because
   each query needs to be traversed and manipulated before being executed.
 
-flags
-: An associative array of PDO constants that should be passed to the
+- `flags`: An associative array of PDO constants that should be passed to the
   underlying PDO instance. See the PDO documentation for the flags supported
   by the driver you are using.
 
-cacheMetadata
-: Either boolean `true`, or a string containing the cache configuration to
+- `cacheMetadata`: Either boolean `true`, or a string containing the cache configuration to
   store meta data in. Having metadata caching disabled by setting it to `false`
   is not advised and can result in very poor performance. See the
   [Database Metadata Cache](#database-metadata-cache) section for more information.
 
-mask
-: Set the permissions on the generated database file. (Only supported by SQLite)
+- `mask`: Set the permissions on the generated database file. (Only supported by SQLite)
 
-cache
-: The `cache` flag to send to SQLite.
+- `cache`: The `cache` flag to send to SQLite.
 
-mode
-: The `mode` flag value to send to SQLite.
+- `mode`: The `mode` flag value to send to SQLite.
 
 ### SqlServer Entra Authentication
 
