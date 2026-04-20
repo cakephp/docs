@@ -320,8 +320,18 @@ The `Model.afterSave` event is fired after an entity is saved.
 The `Model.afterSaveCommit` event is fired after the transaction in which the
 save operation is wrapped has been committed. It's also triggered for non atomic
 saves where database operations are implicitly committed. The event is triggered
-only for the primary table on which `save()` is directly called. The event is
-not triggered if a transaction is started before calling save.
+only for the primary table on which `save()` is directly called.
+
+When `save()` is called inside an outer transaction (e.g. one started with
+`Connection::begin()`), the event is deferred until the outermost transaction
+commits. If the outer transaction is rolled back, the event is discarded. This
+ensures the event only fires after data has been persisted to the database.
+
+::: info Changed in version 5.4.0
+Previously, this event was not triggered if a transaction was started before
+calling `save()`. It is now deferred and fires after the outermost
+transaction commits.
+:::
 
 ### beforeDelete
 
@@ -342,10 +352,19 @@ The `Model.afterDelete` event is fired after an entity has been deleted.
 `method` Cake\\ORM\\Table::**afterDeleteCommit**(EventInterface $event, EntityInterface $entity, ArrayObject $options): void
 
 The `Model.afterDeleteCommit` event is fired after the transaction in which the
-delete operation is wrapped has been is committed. It's also triggered for non
+delete operation is wrapped has been committed. It's also triggered for non
 atomic deletes where database operations are implicitly committed. The event is
 triggered only for the primary table on which `delete()` is directly called.
-The event is not triggered if a transaction is started before calling delete.
+
+When `delete()` is called inside an outer transaction, the event is deferred
+until the outermost transaction commits. If the outer transaction is rolled
+back, the event is discarded.
+
+::: info Changed in version 5.4.0
+Previously, this event was not triggered if a transaction was started before
+calling `delete()`. It is now deferred and fires after the outermost
+transaction commits.
+:::
 
 ### Stopping Table Events
 

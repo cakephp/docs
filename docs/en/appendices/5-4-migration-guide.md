@@ -45,6 +45,11 @@ version is reported as `unknown`), the header is omitted.
   has changed from `select` to `subquery`. If you need the previous behavior,
   explicitly set `'strategy' => 'select'` when defining associations.
   See [Associations](../orm/associations#has-many-associations) for more details.
+- `Model.afterSaveCommit` and `Model.afterDeleteCommit` events are now fired
+  when `save()` or `delete()` is called inside an outer transaction. Previously,
+  these events were silently suppressed. They are now deferred until the
+  outermost transaction commits, and discarded on rollback.
+  See [Table Objects](../orm/table-objects#aftersavecommit) for more details.
 
 ### Controller
 
@@ -71,6 +76,12 @@ version is reported as `unknown`), the header is omitted.
 - A backwards compatible Container implementation has been added to the core. You can opt-in to use it instead of the current
   `league/container` implementation by setting `App.container` to `cake` inside your `config/app.php`.
   See [Dependency Injection Container](../development/dependency-injection) for more details.
+
+### Collection
+
+- Added [`keys()`](../core-libraries/collections#keys) and [`values()`](../core-libraries/collections#values) methods for extracting keys or re-indexing values.
+- Added [`implode()`](../core-libraries/collections#implode) method to concatenate elements into a string.
+- Added [`when()`](../core-libraries/collections#when) and [`unless()`](../core-libraries/collections#unless) methods for conditional method chaining.
 
 ### Commands
 
@@ -102,6 +113,9 @@ version is reported as `unknown`), the header is omitted.
 - Added `FunctionsBuilder::stringAgg()` for portable string aggregation.
   Translates to `STRING_AGG` or `GROUP_CONCAT` per driver.
   See [Query Builder](../orm/query-builder#string-aggregation).
+- Added `Connection::afterCommit()` to register callbacks that run after the
+  outermost transaction commits. Callbacks are discarded on rollback.
+  See [Database Basics](../orm/database-basics#aftercommit) for more details.
 - Added `except()` and `exceptAll()` methods on `SelectQuery` for `EXCEPT`
   and `EXCEPT ALL` set operations. `EXCEPT ALL` is supported on PostgreSQL
   and recent MySQL/MariaDB versions; it is not supported on SQLite or SQL Server.
@@ -112,6 +126,12 @@ version is reported as `unknown`), the header is omitted.
   provides constants (`Index::GIN`, `Index::GIST`, `Index::SPGIST`,
   `Index::BRIN`, `Index::HASH`) for these access methods.
   See [Reading Indexes and Constraints](../orm/schema-system#reading-indexes-and-constraints).
+
+### Http
+
+- Added PSR-13 Link implementation with `Cake\Http\Link\Link` and `Cake\Http\Link\LinkProvider`
+  classes for hypermedia link support. Links added to responses are automatically emitted
+  as HTTP `Link` headers. See [Hypermedia Links](../controllers/request-response#hypermedia-links).
 
 ### I18n
 
@@ -124,11 +144,9 @@ version is reported as `unknown`), the header is omitted.
   nested array format matching `contain()` syntax.
   See [Converting Request Data into Entities](../orm/saving-data#converting-request-data-into-entities).
 
-### Http
+### Testsuite
 
-- Added PSR-13 Link implementation with `Cake\Http\Link\Link` and `Cake\Http\Link\LinkProvider`
-  classes for hypermedia link support. Links added to responses are automatically emitted
-  as HTTP `Link` headers. See [Hypermedia Links](../controllers/request-response#hypermedia-links).
+- `TestCase::mockModel()` has been added to allow mocking of model classes in tests using Mockery mocks.
 
 ### Utility
 
@@ -137,12 +155,7 @@ version is reported as `unknown`), the header is omitted.
   path manipulation. See [Filesystem Utilities](../core-libraries/filesystem.md).
 - `Security::encrypt()` can now be configured to use longer keys with separate encryption and authentication keys that are derived from the provided key.
   You can set `Security.encryptWithRawKey` to enable this behavior. See [here](https://github.com/cakephp/cakephp/pull/19325) for more details.
-
-### Collection
-
-- Added [`keys()`](../core-libraries/collections#keys) and [`values()`](../core-libraries/collections#values) methods for extracting keys or re-indexing values.
-- Added [`implode()`](../core-libraries/collections#implode) method to concatenate elements into a string.
-- Added [`when()`](../core-libraries/collections#when) and [`unless()`](../core-libraries/collections#unless) methods for conditional method chaining.
+- Added `Text::mask()` method which masks a portion of a string with a repeated character. See [Text Masking](../core-libraries/text.md#text-masking) for more details.
 
 ### View
 
