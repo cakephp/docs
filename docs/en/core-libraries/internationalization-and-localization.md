@@ -562,6 +562,100 @@ I18n::config('_fallback', function ($domain, $locale) {
 });
 ```
 
+### Isolating Translations Per Tenant
+
+::: info Added in version 5.4.0
+The cache key prefix and configurable cache config APIs were added in 5.4.0.
+:::
+
+When a single application serves multiple tenants and a custom loader produces
+different messages for the same domain and locale per tenant, the default
+translator cache will mix tenants together — the persistent cache key
+(`translations.{domain}.{locale}`) and the in-memory registry don't know about
+tenants.
+
+Two small APIs solve this without introducing global tenant state.
+
+#### Cache Key Prefix
+
+`TranslatorRegistry::setCacheKeyPrefix()` adds a segment to both the persistent
+cache key and the in-memory lookup bucket. It accepts either a static string or
+a `Closure` that returns one. When given a `Closure`, it is evaluated on every
+`get()` call, so the current tenant identifier is pulled *from* user-land
+instead of being *pushed into* the registry:
+
+```php
+use Cake\I18n\I18n;
+
+I18n::translators()->setCacheKeyPrefix(
+    fn (): string => TenantContext::current()?->id ?? ''
+);
+```
+
+With a non-empty prefix the cache key becomes
+`translations.{prefix}.{domain}.{locale}`. An empty resolved value disables
+prefixing and keeps the legacy key format, so the API is fully backwards
+compatible for non-multi-tenant applications.
+
+The `Closure` receives the requested package name and resolved locale
+(`function (string $name, string $locale): string`), which lets you skip
+prefixing for shared packages or vary the prefix per locale:
+
+```php
+I18n::translators()->setCacheKeyPrefix(
+    function (string $name, string $locale): string {
+        // Shared packages (e.g. validation messages) stay un-prefixed.
+        if ($name === 'cake' || str_starts_with($name, 'shared/')) {
+            return '';
+        }
+
+        return TenantContext::current()?->id ?? '';
+    }
+);
+```
+
+Prefix values must match `[A-Za-z0-9._-]+` to stay safe across every built-in
+cache engine.
+
+> [!NOTE]
+> `setCacheKeyPrefix()` is unrelated to the gettext message context used by
+> [`__x()`](#using-translation-functions). The "context" in `__x()` disambiguates
+> two messages with the same source text; the cache key prefix isolates the
+> *cache* of resolved messages.
+
+#### Resetting the In-Memory Registry
+
+Long-running workers (e.g. queue runners) that switch tenants between jobs
+should drop the in-memory translator map between batches to bound memory
+growth and ensure freshly-resolved tenants don't read another tenant's
+in-memory translator. The persistent cacher and configured prefix/cacher
+are left untouched:
+
+```php
+foreach ($jobsByTenant as $tenantId => $jobs) {
+    TenantContext::set($tenantId);
+    // ... process jobs ...
+    I18n::translators()->clearInMemoryRegistry();
+}
+```
+
+#### Choosing a Different Cache Config
+
+By default, translators are persisted to the `_cake_translations_` Cache
+config. If you want a separate config — for example, to give translations
+their own TTL or storage engine — call `I18n::setCacheConfig()` before any
+translator is resolved:
+
+```php
+// in config/bootstrap.php, before any __() / I18n call
+I18n::setCacheConfig('_my_translations_');
+```
+
+`setCacheConfig()` throws a `RuntimeException` if it is called after the
+translators registry has been built, to surface ordering bugs loudly instead
+of silently ignoring the setting. To swap the cacher *after* translators
+have been built, use `I18n::translators()->setCacher()` directly.
+
 ### Plurals and Context in Custom Translators
 
 The arrays used for `setMessages()` can be crafted to instruct the translator
