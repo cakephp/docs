@@ -489,7 +489,6 @@ Masks all occurrences of given substring(s) within a string using a repeated cha
 Each occurrence of the provided substring(s) will be replaced by a sequence of the masking character.
 
 ```php
-
 // Called as TextHelper
 echo $this->Text->maskValue('4111111111111234', ['411', '112'], '*');
 
