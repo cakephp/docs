@@ -635,7 +635,7 @@ are left untouched:
 foreach ($jobsByTenant as $tenantId => $jobs) {
     TenantContext::set($tenantId);
     // ... process jobs ...
-    I18n::translators()->clearInMemoryRegistry();
+    I18n::translators()->clear();
 }
 ```
 

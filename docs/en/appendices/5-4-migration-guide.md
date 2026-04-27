@@ -141,9 +141,9 @@ version is reported as `unknown`), the header is omitted.
   per tenant when a custom loader produces different messages for the same
   domain and locale. Accepts a static string or a `Closure` resolved on every
   lookup. See [Isolating Translations Per Tenant](../core-libraries/internationalization-and-localization#isolating-translations-per-tenant).
-- Added `TranslatorRegistry::clearInMemoryRegistry()` to drop the in-memory
-  translator map without touching the persistent cacher. Intended for
-  long-running workers that switch tenants between jobs.
+- Added `TranslatorRegistry::clear()` to drop the in-memory translator map
+  without touching the persistent cacher. Intended for long-running workers
+  that switch tenants between jobs.
 - Added `I18n::setCacheConfig()` to route translator persistence to a Cache
   config other than the default `_cake_translations_`.
 
