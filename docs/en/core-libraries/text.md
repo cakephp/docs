@@ -465,20 +465,26 @@ Replaces characters starting at `$offset` for `$length` characters with `$maskCh
 If `$length` is `null`, masking continues to the end of the string.
 Negative offsets are supported and are calculated from the end of the string.
 
+### Text::maskValue()
+
+`method` Cake\\Utility\\Text::**maskValue**(string $string, array $needles, string $maskCharacter = '*'): string
+
+Masks all occurrences of given substring(s) within a string using a repeated character.
+Each occurrence of the provided substring(s) will be replaced by a sequence of the masking character.
+
 ```php
-$creditCardNumber = '4909090909091234';
 
 // Called as TextHelper
-echo $this->Text->mask($creditCardNumber, 0, 12, '*');
+echo $this->Text->maskValue('4111111111111234', ['411', '112'], '*');
 
 // Called as Text
 use Cake\Utility\Text;
 
-echo Text::mask($creditCardNumber, 0, 12, '*');
+echo Text::maskValue('4111111111111234', ['411', '112'], '*');
 ```
 
 Output:
 
-    ************1234
+    ***11111111***34
 
 <!-- end-text -->
