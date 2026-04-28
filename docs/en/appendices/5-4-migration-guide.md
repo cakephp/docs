@@ -156,6 +156,7 @@ version is reported as `unknown`), the header is omitted.
 - `Security::encrypt()` can now be configured to use longer keys with separate encryption and authentication keys that are derived from the provided key.
   You can set `Security.encryptWithRawKey` to enable this behavior. See [here](https://github.com/cakephp/cakephp/pull/19325) for more details.
 - Added `Text::mask()` method which masks a portion of a string with a repeated character. See [Text Masking](../core-libraries/text.md#text-masking) for more details.
+- Added `Text::maskValue()` method which masks all occurrences of given substrings within a string using a repeated character. See [Text Masking](../core-libraries/text.md#text-masking) for more details.
 
 ### View
 

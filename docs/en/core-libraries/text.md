@@ -481,4 +481,24 @@ Output:
 
     ************1234
 
+### Text::maskValue()
+
+`method` Cake\\Utility\\Text::**maskValue**(string $string, array $needles, string $maskCharacter = '*'): string
+
+Masks all occurrences of given substring(s) within a string using a repeated character.
+Each occurrence of the provided substring(s) will be replaced by a sequence of the masking character.
+
+```php
+// Called as TextHelper
+echo $this->Text->maskValue('4111111111111234', ['411', '112'], '*');
+
+// Called as Text
+use Cake\Utility\Text;
+
+echo Text::maskValue('4111111111111234', ['411', '112'], '*');
+```
+
+Output:
+
+    ***11111111***34
 <!-- end-text -->
