@@ -568,13 +568,7 @@ I18n::config('_fallback', function ($domain, $locale) {
 The cache key prefix and configurable cache config APIs were added in 5.4.0.
 :::
 
-When a single application serves multiple tenants and a custom loader produces
-different messages for the same domain and locale per tenant, the default
-translator cache will mix tenants together — the persistent cache key
-(`translations.{domain}.{locale}`) and the in-memory registry don't know about
-tenants.
-
-Two small APIs solve this without introducing global tenant state.
+If your application needs to serve tenant specific translated content for a given domain & locale, you need to use a cache key prefix to scope both translator cache data to the tenant.
 
 #### Cache Key Prefix
 
