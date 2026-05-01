@@ -171,6 +171,11 @@ See [Application and Plugin Events](../core-libraries/events#registering-event-l
   `label()` implementation backed by the translator and the attribute lets
   individual cases override the derived label. See
   [EnumLabelTrait and the Label Attribute](../orm/database-basics#enumlabeltrait-and-the-label-attribute).
+- Added `LoggedQuery::setRedactor()` to scrub sensitive values from query
+  logs. Applies to `__toString()`, `getContext()`, and `jsonSerialize()`,
+  so file logs, structured loggers, and anything that JSON-encodes a
+  `LoggedQuery` all see the redacted shape.
+  See [Redacting Sensitive Values from Query Logs](../orm/database-basics#redacting-sensitive-values-from-query-logs).
 
 ### Http
 
