@@ -34,6 +34,14 @@ The CakePHP version header in help output is now only shown when the CakePHP
 version can be determined. When used outside a CakePHP application (where the
 version is reported as `unknown`), the header is omitted.
 
+### Events
+
+Events being registered in either `Application::events()` or `Plugin::events()`
+now work in both web and CLI contexts. It is therefore highly recommended to
+move your event listeners from the `config/bootstrap.php` file to the
+`events()` method in your `Application` or `Plugin` class.
+See [Application and Plugin Events](../core-libraries/events#registering-event-listeners) for more details.
+
 ### I18n
 
 - `Number::parseFloat()` now returns `null` instead of `0.0` when parsing
