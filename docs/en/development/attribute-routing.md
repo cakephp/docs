@@ -1,6 +1,6 @@
 ---
 title: "Attribute Routing"
-description: "Define CakePHP routes directly on controllers using PHP attributes: route actions with #[Get], #[Post], and more, configure scopes, prefixes, middleware, REST resources, and combine with file-based routing."
+description: "Define CakePHP routes directly on controllers using PHP attributes: route actions with #[Get], #[Post], and more, configure scopes, prefixes, middleware, REST resources, and combine with config-based routing."
 ---
 
 # Attribute Routing
@@ -10,8 +10,8 @@ using PHP attributes. This keeps your route definitions co-located with the code
 they map to, reducing the need to switch between controllers and
 **config/routes.php**.
 
-Attribute routing is **fully optional**. You can use file-based routing,
-attribute routing, or a mix of both. Existing file-based routes continue to work
+Attribute routing is **fully optional**. You can use config-based routing,
+attribute routing, or a mix of both. Existing config-based routes continue to work
 unchanged.
 
 ::: info Added in version 6.0.0
@@ -32,7 +32,7 @@ use Cake\Routing\RouteBuilder;
 $routes->connectAttributes();
 
 $routes->scope('/', callback: function (RouteBuilder $routes) {
-    // File-based routes continue to work alongside attribute routes.
+    // Config-based routes continue to work alongside attribute routes.
     $routes->fallbacks(DashedRoute::class);
 });
 ```
@@ -76,7 +76,7 @@ You have three options for defining routes in CakePHP:
 
 | Approach | Where routes live | Best for |
 |---|---|---|
-| **File-based only** | `config/routes.php` | Full control over route order, complex routing logic |
+| **Config-based only** | `config/routes.php` | Full control over route order, complex routing logic |
 | **Attribute-based only** | Controller classes | Convention-driven apps, co-located route definitions |
 | **Mixed** | Both | Gradual migration, or general routes in files with specific routes as attributes |
 
@@ -97,7 +97,7 @@ class ArticlesController extends AppController
 }
 ```
 
-```php [File-based]
+```php [Config-based]
 // config/routes.php
 $routes->scope('/articles', callback: function (RouteBuilder $routes) {
     $routes->get('/', target: 'Articles::index', name: 'articles:index');
@@ -387,7 +387,7 @@ class ArticlesController extends AppController
 }
 ```
 
-```php [File-based]
+```php [Config-based]
 // config/routes.php
 $routes->scope('/', callback: function (RouteBuilder $routes) {
     $routes->resources('Articles', ['only' => ['index', 'view']]);
@@ -447,7 +447,7 @@ public function view(int $id, string $slug): void
 }
 ```
 
-This is different from file-based routing where passed parameters are matched
+This is different from config-based routing where passed parameters are matched
 positionally. Named argument binding is automatic for attribute routes.
 
 ### Explicit Pass Parameters
@@ -530,9 +530,9 @@ public function index(): void
 }
 ```
 
-## Combining with File-Based Routes {#combining}
+## Combining with Config-Based Routes {#combining}
 
-Attribute routes and file-based routes coexist. The `connectAttributes()` call
+Attribute routes and config-based routes coexist. The `connectAttributes()` call
 connects attribute routes at the position it appears in your routes file:
 
 ```php
@@ -541,7 +541,7 @@ connects attribute routes at the position it appears in your routes file:
 // Attribute routes are connected first
 $routes->connectAttributes();
 
-// File-based routes follow
+// Config-based routes follow
 $routes->scope('/', callback: function (RouteBuilder $routes) {
     $routes->connect('/pages/*', defaults: ['controller' => 'Pages', 'action' => 'display']);
     $routes->fallbacks(DashedRoute::class);
@@ -550,7 +550,7 @@ $routes->scope('/', callback: function (RouteBuilder $routes) {
 
 ::: warning
 Route order matters. Routes connected first are matched first. Place
-`connectAttributes()` before or after your file-based routes depending on which
+`connectAttributes()` before or after your config-based routes depending on which
 should take priority.
 :::
 
@@ -563,7 +563,7 @@ When route priority is important, it helps to separate two concepts:
 
 `connectAttributes()` discovers attribute routes and connects them immediately.
 Those connected routes then participate in normal first-match routing, just like
-file-based routes.
+config-based routes.
 
 Within inheritance, parent and child controller attributes are merged according
 to the inheritance rules described in [Inheritance](#inheritance).
@@ -574,7 +574,7 @@ implicit discovery details alone. Prefer one of these approaches:
 - Define the conflicting routes explicitly in **config/routes.php** where order is
     obvious.
 - Use stricter `patterns` so only one route can match a given URL.
-- Place `connectAttributes()` before or after file-based routes to set global
+- Place `connectAttributes()` before or after config-based routes to set global
     precedence.
 
 Use `bin/cake routes` to inspect the final connected routes and verify match
