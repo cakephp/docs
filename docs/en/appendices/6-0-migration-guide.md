@@ -119,3 +119,13 @@ Some properties have also been renamed to better reflect their purpose. These ar
 - `title` has been renamed to `content` in scopes where this is not an attribute, but content or label element, specifically:
   `'item'`/`itemWithoutLink` breadcrumb templates.
 - `multicheckboxTitle` template of FormHelper is now `multicheckboxLabel`.
+
+## New Features
+
+### Router
+
+- Attribute routing is now available via `RouteBuilder::connectAttributes()` and the
+  new `Cake\Routing\Attribute` namespace. Routes can be defined directly on controller
+  classes and actions using PHP attributes such as `#[Get]`, `#[Post]`, `#[Scope]`,
+  `#[Resource]`, and more. See [Attribute Routing](../development/attribute-routing)
+  for full documentation.

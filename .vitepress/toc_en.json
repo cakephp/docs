@@ -304,6 +304,10 @@
           "link": "/development/configuration"
         },
         { "text": "Routing", "link": "/development/routing" },
+        {
+          "text": "Attribute Routing",
+          "link": "/development/attribute-routing"
+        },
         { "text": "Sessions", "link": "/development/sessions" },
         { "text": "Debugging", "link": "/development/debugging" },
         {

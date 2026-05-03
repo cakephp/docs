@@ -16,6 +16,11 @@ of parameters can be transformed into a URL string. By using reverse routing,
 you can re-factor your application's URL structure without having to update all
 your code.
 
+::: tip
+Routes can also be defined directly on controller classes using PHP attributes.
+See [Attribute Routing](../development/attribute-routing) for details.
+:::
+
 ## Quick Tour
 
 This section will teach you by example the most common uses of the CakePHP
@@ -663,6 +668,11 @@ named. Nameless routes will not have the `_namePrefix` applied to them.
 
 `method` Cake\\Routing\\RouteBuilder::**prefix**(string $name, Closure|array $params = [], ?Closure $callback = null): static
 
+::: tip
+Prefixes can also be configured using the `#[Prefix]` attribute. See
+[Attribute Routing - Prefix](../development/attribute-routing#prefix).
+:::
+
 Many applications require an administration section where
 privileged users can make changes. This is often done through a
 special URL such as `/admin/users/edit/5`. In CakePHP, prefix routing
@@ -1002,6 +1012,12 @@ $this->Html->link('Link title',
 
 ## Route Scoped Middleware
 
+::: tip
+Middleware can also be applied to attribute routes using the `#[Middleware]`
+attribute. See
+[Attribute Routing - Middleware](../development/attribute-routing#middleware).
+:::
+
 While Middleware can be applied to your entire application, applying middleware
 to specific routing scopes offers more flexibility, as you can apply middleware
 only where it is needed allowing your middleware to not concern itself with
@@ -1084,6 +1100,11 @@ $routes->applyMiddleware('web');
 <a id="resource-routes"></a>
 
 ## RESTful Routing
+
+::: tip
+RESTful routes can also be defined using the `#[Resource]` attribute. See
+[Attribute Routing - Resource Routes](../development/attribute-routing#resource-routes).
+:::
 
 Router helps generate RESTful routes for your controllers. RESTful routes are
 helpful when you are creating API endpoints for your application. If we wanted
