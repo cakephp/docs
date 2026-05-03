@@ -554,6 +554,32 @@ Route order matters. Routes connected first are matched first. Place
 should take priority.
 :::
 
+### Attribute Collection Order
+
+When route priority is important, it helps to separate two concepts:
+
+- **Collection order**: how attributes are discovered on controllers/actions.
+- **Match order**: the order routes are connected in the route collection.
+
+`connectAttributes()` discovers attribute routes and connects them immediately.
+Those connected routes then participate in normal first-match routing, just like
+file-based routes.
+
+Within inheritance, parent and child controller attributes are merged according
+to the inheritance rules described in [Inheritance](#inheritance).
+
+If you have overlapping route patterns where precedence matters, do not rely on
+implicit discovery details alone. Prefer one of these approaches:
+
+- Define the conflicting routes explicitly in **config/routes.php** where order is
+    obvious.
+- Use stricter `patterns` so only one route can match a given URL.
+- Place `connectAttributes()` before or after file-based routes to set global
+    precedence.
+
+Use `bin/cake routes` to inspect the final connected routes and verify match
+priority.
+
 ### Using connectAttributes() Inside a Scope
 
 When `connectAttributes()` is called inside a scope, all discovered attribute
