@@ -817,6 +817,61 @@ You can now use the convenience method
 `Cake\Http\Response::withLocation()` to directly set or get the
 redirect location header.
 
+### Hypermedia Links
+
+`method` Cake\\Http\\Response::**withLink**(LinkInterface $link): static
+
+CakePHP implements [PSR-13](https://www.php-fig.org/psr/psr-13/) for hypermedia
+link support. You can add links to responses, and they will be automatically
+emitted as HTTP `Link` headers when the response is sent:
+
+```php
+use Cake\Http\Link\Link;
+
+// Add a simple link
+$response = $response->withLink(new Link('/api/users/1', 'self'));
+
+// Add a link with multiple relations and attributes
+$response = $response->withLink(
+    (new Link('/api/users?page=2'))
+        ->withRel('next')
+        ->withAttribute('type', 'application/json'),
+);
+
+// Preload resources for performance
+$response = $response->withLink(
+    (new Link('/css/app.css'))
+        ->withRel('preload')
+        ->withAttribute('as', 'style'),
+);
+```
+
+The `Link` class implements `EvolvableLinkInterface` and provides these methods:
+
+- `withHref(string $href)` - Set the link URI
+- `withRel(string $rel)` - Add a link relation
+- `withoutRel(string $rel)` - Remove a link relation
+- `withAttribute(string $name, $value)` - Add an attribute
+- `withoutAttribute(string $name)` - Remove an attribute
+
+You can also work with multiple links using `LinkProvider`:
+
+```php
+use Cake\Http\Link\Link;
+use Cake\Http\Link\LinkProvider;
+
+$provider = new LinkProvider([
+    new Link('/api/users/1', 'self'),
+    new Link('/api/users?page=2', 'next'),
+]);
+
+// Get the link provider from a response
+$links = $response->getLinks();
+
+// Set a new link provider
+$response = $response->withLinkProvider($provider);
+```
+
 ### Setting the Body
 
 `method` Cake\\Http\\Response::**withStringBody**(?string $string): static

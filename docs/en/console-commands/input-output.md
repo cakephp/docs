@@ -39,12 +39,12 @@ $progress->draw();
 
 While CakePHP comes with a few command helpers you can create more in your
 application or plugins. As an example, we'll create a simple helper to generate
-fancy headings. First create the **src/Command/Helper/HeadingHelper.php** and put
+fancy headings. First create the **src/Console/Helper/HeadingHelper.php** and put
 the following in it:
 
 ```php
 <?php
-namespace App\Command\Helper;
+namespace App\Console\Helper;
 
 use Cake\Console\Helper;
 
@@ -74,7 +74,8 @@ parameters. However, because Console Helpers are vanilla classes they can
 implement additional methods that take any form of arguments.
 
 > [!NOTE]
-> Helpers can also live in `src/Shell/Helper` for backwards compatibility.
+> Helpers can also live in `src/Command/Helper` for backwards compatibility with
+> CakePHP 5.3 and below.
 
 ## Built-In Helpers
 

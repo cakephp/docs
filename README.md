@@ -16,40 +16,30 @@ files, marked up with Markdown formatting.
 
 ## Local Development
 
-For working with the documentation markdown files locally, use the provided development server script:
+Install dependencies, then start the VitePress development server:
 
 ```bash
-./bin/dev-server.sh
+npm install
+npm run docs:dev
 ```
 
-This script will:
-- Set up a clean `.temp` working directory
-- Clone the VitePress skeleton repository
-- Sync your documentation files
-- Install dependencies
-- Start a local development server with hot-reload
+The documentation will be available at `http://localhost:5173` with hot-reload enabled.
 
-The documentation will be available at `http://localhost:5173`
-
-### Development Server Options
+### Other Commands
 
 ```bash
-# Start on a custom port
-./bin/dev-server.sh --port 3000
+# Build the static site
+npm run docs:build
 
-# Adjust docs sync interval (default: 1 second)
-./bin/dev-server.sh --sync-interval 2
+# Preview the production build locally
+npm run docs:preview
 ```
 
 ### Prerequisites
 
-The development server requires:
-- `git` - Version control
-- `node` - JavaScript runtime
-- `npm` - Package manager
-- `rsync` - File synchronization
-
-Press `Ctrl+C` to stop the development server.
+- `node` (version 18 or newer) - JavaScript runtime required by Vite/VitePress
+- `npm` - Package manager (included with most Node.js installations)
+- `git` - Required to install `@cakephp/docs-skeleton` from GitHub
 
 ## Build the Documentation with Docker
 
