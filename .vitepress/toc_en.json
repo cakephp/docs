@@ -194,6 +194,10 @@
             { "text": "App", "link": "/core-libraries/app" },
             { "text": "Plugin", "link": "/core-libraries/plugin" },
             {
+              "text": "Attribute Resolver",
+              "link": "/core-libraries/attribute-resolver"
+            },
+            {
               "text": "Registry Objects",
               "link": "/core-libraries/registry-objects"
             },
