@@ -437,10 +437,10 @@ automatically whenever a package (including plugins) is installed or updated:
 {
     "scripts": {
         "post-install-cmd": [
-            "bin/cake attributes warm"
+            "@php bin/cake attributes warm"
         ],
         "post-update-cmd": [
-            "bin/cake attributes warm"
+            "@php bin/cake attributes warm"
         ]
     }
 }
