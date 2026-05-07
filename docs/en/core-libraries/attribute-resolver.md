@@ -327,7 +327,7 @@ the following properties:
 | `fileTime` | `int` | Unix timestamp of the file's last modification |
 | `pluginName` | `?string` | Plugin name, or `null` for application code |
 
-#### `getInstance(?string $expectedClass = null): object`
+### `getInstance(?string $expectedClass = null): object`
 
 Instantiates the actual attribute object using its stored arguments. Optionally
 pass the expected class name to validate the type:
