@@ -636,7 +636,7 @@ public function noop(array $array)
 
 `static` Cake\\Utility\\Hash::**reduce**(array $data, $path, $function)
 
-`$path` で抽出し、抽出結果を `$function` で縮小（reduce）することでを単一の値を作ります。
+`$path` で抽出し、抽出結果を `$function` で縮小（reduce）することで単一の値を作ります。
 このメソッドでは式とマッチャーの両方を使うことができます。
 
 `static` Cake\\Utility\\Hash::**apply**(array $data, $path, $function)

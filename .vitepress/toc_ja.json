@@ -394,27 +394,10 @@
           "text": "依存性注入",
           "link": "/ja/development/dependency-injection"
         },
+        { "text": "プラグイン", "link": "/ja/plugins" },
         { "text": "エラー", "link": "/ja/development/errors" },
         { "text": "REST", "link": "/ja/development/rest" },
         { "text": "テスト", "link": "/ja/development/testing" }
-      ]
-    },
-    {
-      "text": "プラグイン",
-      "collapsed": true,
-      "items": [
-        { "text": "プラグインの作成", "link": "/ja/plugins" },
-        {
-          "text": "コアプラグイン",
-          "items": [
-            { "text": "Bake", "link": "https://book.cakephp.org/bake/2/en/index.html" },
-            { "text": "Chronos", "link": "https://book.cakephp.org/chronos/" },
-            { "text": "Debug Kit", "link": "https://book.cakephp.org/debugkit/" },
-            { "text": "Elasticsearch", "link": "https://book.cakephp.org/elasticsearch/" },
-            { "text": "マイグレーション", "link": "https://book.cakephp.org/migrations/" },
-            { "text": "Phinx", "link": "https://book.cakephp.org/phinx/" }
-          ]
-        }
       ]
     },
     {

@@ -448,8 +448,7 @@ There are several built-in detectors that you can use:
 - `is('options')` Check to see whether the current request is OPTIONS.
 - `is('ajax')` Check to see whether the current request came with
   X-Requested-With = XMLHttpRequest.
-- `is('ssl')` Check to see whether the request is via SSL.
-- `is('flash')` Check to see whether the request has a User-Agent of Flash.
+- `is('https')` Check to see whether the request is via HTTPS.
 - `is('json')` Check to see whether the request URL has 'json' extension or the
   `Accept` header is set to 'application/json'.
 - `is('xml')` Check to see whether the request URL has 'xml' extension or the `Accept` header is set to

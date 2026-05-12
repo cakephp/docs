@@ -790,7 +790,9 @@ in order to truncate all dirty tables before each test.
 
 The following command will help you bake your factories:
 
-    bin/cake bake fixture_factory -h
+```bash
+bin/cake bake fixture_factory -h
+```
 
 Once your factories are
 [tuned](https://github.com/vierge-noire/cakephp-fixture-factories/blob/main/docs/factories.md),

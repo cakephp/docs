@@ -71,7 +71,7 @@ Now you can create a new CakePHP project:
 
 ```bash [Create Project]
 # Create a new CakePHP 5 application
-composer create-project --prefer-dist cakephp/app:|cakeversion| my_app_name
+composer create-project --prefer-dist cakephp/app:~|cakeversion| my_app_name
 
 # Navigate to your app
 cd my_app_name
@@ -100,7 +100,7 @@ Perfect for local development environments:
 # Create and configure project
 mkdir my-cakephp-app && cd my-cakephp-app
 ddev config --project-type=cakephp --docroot=webroot
-ddev composer create --prefer-dist cakephp/app:|cakeversion|
+ddev composer create --prefer-dist cakephp/app:~|cakeversion|
 
 # Launch in browser
 ddev launch
@@ -132,7 +132,7 @@ For containerized development:
 ```bash
 # Create project using Composer in Docker
 docker run --rm -v $(pwd):/app composer create-project \
-  --prefer-dist cakephp/app:|cakeversion| my_app
+  --prefer-dist cakephp/app:~|cakeversion| my_app
 
 # Start PHP development server (install required extensions first)
 cd my_app
