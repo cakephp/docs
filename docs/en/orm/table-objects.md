@@ -95,6 +95,15 @@ As seen in the examples above Table objects have an `initialize()` method
 which is called at the end of the constructor. It is recommended that you use
 this method to do initialization logic instead of overriding the constructor.
 
+::: tip Added in version 5.4.0
+Table methods `save()`, `delete()`, `patchEntity()`, `patchEntities()` and `loadInto()`
+will throw an exception if the entity being passed down does not belong to the table instance.
+This will prevent accidental data corruption or deleted records.
+
+If you don't want this new behavior you can disable it by calling
+`$this->disableEntityClassAssertion();` in your `initialize()` method.
+:::
+
 ### Getting Instances of a Table Class
 
 Before you can query a table, you'll need to get an instance of the table. You
