@@ -100,7 +100,7 @@ Table methods `save()`, `delete()`, `patchEntity()`, `patchEntities()` and `load
 will throw an exception if the entity being passed down does not belong to the table instance.
 This will prevent accidental data corruption or deleted records.
 
-If you don't want this new behavior you can disable it by calling
+If you don't want this new behavior, you can disable it by calling
 `$this->disableEntityClassAssertion();` in your `initialize()` method.
 :::
 

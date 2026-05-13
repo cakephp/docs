@@ -60,7 +60,7 @@ See [Application and Plugin Events](../core-libraries/events#registering-event-l
   See [Table Objects](../orm/table-objects#aftersavecommit) for more details.
 - Table methods `save()`, `delete()`, `patchEntity()`, `patchEntities()` and `loadInto()`
   will now throw an exception if the entity being passed down does not belong to the table instance.
-  This will prevent accidental data corruption or deleted records. If you don't want this new behavior
+  This will prevent accidental data corruption or deleted records. If you don't want this new behavior,
   you can disable it by calling `$this->disableEntityClassAssertion();` in your `initialize()` method.
 
 ### Controller
