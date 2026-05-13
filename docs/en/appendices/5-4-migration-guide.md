@@ -161,6 +161,7 @@ See [Application and Plugin Events](../core-libraries/events#registering-event-l
   that switch tenants between jobs.
 - Added `I18n::setCacheConfig()` to route translator persistence to a Cache
   config other than the default `_cake_translations_`.
+- The `cake i18n extract` command now also extracts enum labels using the #[Label] attribute.
 
 ### ORM
 
