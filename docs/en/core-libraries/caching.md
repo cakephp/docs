@@ -32,6 +32,12 @@ build your own backend. The built-in caching engines are:
 - `Apcu` APCu cache uses the PHP [APCu](https://php.net/apcu) extension.
   This extension uses shared memory on the webserver to store objects.
   This makes it very fast, and able to provide atomic read/write features.
+- `Php` Stores cache data as executable PHP files using
+  [brick/varexporter](https://github.com/brick/varexporter). Because PHP's
+  OPcache compiles these files into shared memory, reads are extremely fast
+  with no deserialization overhead. Best suited for infrequently written,
+  static data such as attribute metadata, route caches, and schema
+  information. Does not support atomic increment or decrement.
 - `Array` Stores all data in an array. This engine does not provide
   persistent storage and is intended for use in application test suites.
 - `Null` The null engine doesn't actually store anything and fails all read
@@ -162,6 +168,50 @@ FileEngine uses the following engine specific options:
 - `lock` Should files be locked before writing to them?
 - `mask` The mask used for created files
 - `path` Path to where cachefiles should be saved. Defaults to system's temp dir.
+
+<a id="caching-phpengine"></a>
+
+### PhpEngine Options
+
+::: info Added in version 6.0.0
+:::
+
+`PhpEngine` serializes cache values as executable PHP files using
+[brick/varexporter](https://github.com/brick/varexporter) and relies on
+PHP's OPcache to compile them into shared memory. After the first read,
+OPcache serves subsequent reads directly from memory without touching the
+disk or deserializing any data.
+
+PhpEngine uses the following engine-specific options:
+
+- `path` Path to where cache files should be saved. Defaults to
+  `sys_get_temp_dir()/cake_php_cache/`.
+- `mask` The mask used for created files. Defaults to `0664`.
+- `dirMask` The mask used for created directories. Defaults to `0777`.
+
+A typical configuration for static, deploy-time caches:
+
+```php
+use Cake\Cache\Engine\PhpEngine;
+
+// config/app.php
+'Cache' => [
+    '_cake_attributes_' => [
+        'className' => PhpEngine::class,
+        'prefix' => 'myapp_attributes_',
+        'path' => CACHE . 'attributes' . DS,
+        'duration' => 0, // 0 = never expires; clear at deploy time
+    ],
+],
+```
+
+OPcache invalidation is handled automatically: `opcache_invalidate()` is
+called whenever a cache file is written or deleted, so stale compiled
+bytecode is never served.
+
+> [!NOTE]
+> PhpEngine does not support `increment()` or `decrement()`. Use APCu,
+> Redis, or Memcached for counter-based caching.
 
 <a id="caching-redisengine"></a>
 
@@ -537,8 +587,8 @@ Cache::increment('initial_count');
 ```
 
 > [!NOTE]
-> Incrementing and decrementing do not work with FileEngine. You should use
-> APCu, Redis or Memcached instead.
+> Incrementing and decrementing do not work with FileEngine or PhpEngine.
+> You should use APCu, Redis, or Memcached instead.
 
 ## Using Cache to Store Common Query Results
 

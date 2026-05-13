@@ -21,7 +21,11 @@ Attribute routing was added.
 ## Getting Started
 
 Attribute routing relies on the `AttributeResolver` to discover attributes on
-your controller classes. Enable it in your **config/routes.php**:
+your controller classes. See the [Attribute Resolver](../core-libraries/attribute-resolver)
+documentation for advanced configuration, caching, and querying attributes from
+your own code.
+
+Enable it in your **config/routes.php**:
 
 ```php
 // config/routes.php
