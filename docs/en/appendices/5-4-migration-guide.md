@@ -79,6 +79,13 @@ See [Application and Plugin Events](../core-libraries/events#registering-event-l
 
 - The `Mailer::$name` property is unused and has been deprecated.
 
+### ORM
+
+- `SelectQuery::disableHydration()` has been deprecated. Use
+  [`Table::findUnhydrated()`](../orm/retrieving-data-and-resultsets#getting-arrays-instead-of-entities)
+  instead, which returns a `SelectUnhydratedQuery` whose static type matches the
+  array result shape. `disableHydration()` will be removed in 6.0.
+
 ## New Features
 
 ### Core
@@ -172,6 +179,11 @@ See [Application and Plugin Events](../core-libraries/events#registering-event-l
 - The `associated` option in `newEntity()` and `patchEntity()` now supports
   nested array format matching `contain()` syntax.
   See [Converting Request Data into Entities](../orm/saving-data#converting-request-data-into-entities).
+- Added `Table::findUnhydrated()` and the `SelectUnhydratedQuery` class for
+  type-safe non-hydrated reads. Unlike `find()->disableHydration()`, the
+  returned query's static type matches its array result shape, so static
+  analyzers no longer see `entity|array` on `first()`, `all()`, `toArray()`
+  and iteration. See [Getting Arrays Instead of Entities](../orm/retrieving-data-and-resultsets#getting-arrays-instead-of-entities).
 
 ### Testsuite
 
