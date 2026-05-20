@@ -596,7 +596,54 @@ enum ArticleStatus: string implements EnumLabelInterface
 ```
 
 This can be useful if you want to use your enums in `FormHelper` select
-inputs. You can use [bake](../bake) to generate an enum class:
+inputs.
+
+#### EnumLabelTrait and the Label Attribute
+
+::: info Added in version 5.4.0
+`Cake\Database\Type\EnumLabelTrait` and the
+`Cake\Database\Type\Attribute\Label` attribute were added in 5.4.0.
+:::
+
+Writing the `label()` `match` block by hand becomes repetitive once an enum
+grows past a few cases. `EnumLabelTrait` provides a default `label()`
+implementation that derives the label from the case name and resolves it
+through the translator. Cases can override the derived label with the
+`#[Label]` attribute:
+
+```php
+namespace App\Model\Enum;
+
+use Cake\Database\Type\Attribute\Label;
+use Cake\Database\Type\EnumLabelInterface;
+use Cake\Database\Type\EnumLabelTrait;
+
+enum ArticleStatus: string implements EnumLabelInterface
+{
+    use EnumLabelTrait;
+
+    case Published = 'Y';
+
+    #[Label('Not yet published')]
+    case Unpublished = 'N';
+
+    #[Label('Archived', domain: 'articles', context: 'status')]
+    case Archived = 'A';
+}
+```
+
+For a case **without** a `#[Label]` attribute, the trait humanizes the case
+name (`Unpublished` → `Unpublished`, `InReview` → `In review`) and runs it
+through the translator. For cases **with** a `#[Label]`, the explicit label
+string is used and is translated using the optional `domain` and `context`
+constructor arguments. Labels are extracted by `cake i18n extract`, which
+detects the `#[Label]` attribute and emits one msgid per case.
+
+> [!TIP]
+> Pair `EnumLabelTrait` with `EnumLabelInterface` so type-aware consumers
+> (e.g. `FormHelper`'s automatic enum support) keep working.
+
+You can use [bake](../bake) to generate an enum class:
 
 ```bash
 # generate an enum class with two cases and stored as an integer

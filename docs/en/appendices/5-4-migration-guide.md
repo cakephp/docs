@@ -26,6 +26,14 @@ Running `bin/cake` without providing a command name no longer displays the
 "No command provided" error message. Instead, the `help` command is shown
 directly.
 
+Unknown positional tokens following a parent command that has sibling
+subcommands are now rejected with a clear error listing the available
+subcommands. For example, `bin/cake i18n nonsense` previously silently
+invoked the parent `I18nCommand` and discarded the trailing token; it now
+errors out. Commands that intentionally accept arbitrary positional arguments
+(e.g. `routes generate`) are unaffected.
+See [Subcommand Validation](../console-commands/commands#subcommand-validation).
+
 The `help` command is now hidden from command listings (via
 `CommandHiddenInterface`). It remains accessible by running `bin/cake help` or
 `bin/cake help <command>`.
@@ -67,6 +75,16 @@ See [Application and Plugin Events](../core-libraries/events#registering-event-l
 
 - Loading a component with the same alias as the controller's default table now
   triggers a warning. See [Component Alias Conflicts](../controllers/components#component-alias-conflicts).
+
+### View
+
+- `FormHelper` now wraps hidden form blocks (CSRF, FormProtection,
+  `postLink()` / `postButton()`) with the HTML5 boolean `hidden` attribute
+  instead of an inline `style="display:none;"`. This makes the default markup
+  compatible with a strict Content-Security-Policy (no need for
+  `style-src 'unsafe-inline'`). If you previously selected those wrappers via
+  CSS (e.g. `div[style="display:none;"]`), switch to `[hidden]` or set the
+  `hiddenClass` template option to opt out and emit a class instead.
 
 ## Deprecations
 
@@ -145,6 +163,11 @@ See [Application and Plugin Events](../core-libraries/events#registering-event-l
   provides constants (`Index::GIN`, `Index::GIST`, `Index::SPGIST`,
   `Index::BRIN`, `Index::HASH`) for these access methods.
   See [Reading Indexes and Constraints](../orm/schema-system#reading-indexes-and-constraints).
+- Added `Cake\Database\Type\EnumLabelTrait` and the
+  `Cake\Database\Type\Attribute\Label` attribute. The trait provides a default
+  `label()` implementation backed by the translator and the attribute lets
+  individual cases override the derived label. See
+  [EnumLabelTrait and the Label Attribute](../orm/database-basics#enumlabeltrait-and-the-label-attribute).
 
 ### Http
 
@@ -166,6 +189,10 @@ See [Application and Plugin Events](../core-libraries/events#registering-event-l
 - Added `I18n::setCacheConfig()` to route translator persistence to a Cache
   config other than the default `_cake_translations_`.
 - The `cake i18n extract` command now also extracts enum labels using the #[Label] attribute.
+- Added `PluralRules::setRule()` to register a custom Gettext plural rule for
+  a locale whose built-in form is missing or differs from the layout used by
+  your .po/.mo files. See
+  [Customizing Plural Rules](../core-libraries/internationalization-and-localization#customizing-plural-rules).
 
 ### ORM
 
@@ -191,3 +218,6 @@ See [Application and Plugin Events](../core-libraries/events#registering-event-l
 
 - Added `{{inputId}}` template variable to `inputContainer` and `error` templates
   in FormHelper. See [Built-in Template Variables](../views/helpers/form#built-in-template-variables).
+- `FormHelper::enumOptions()` is now public. This lets you build `select`
+  options from a backed enum class even when the form was created without
+  an entity context. See [Creating Select Pickers](../views/helpers/form#creating-select-pickers).
