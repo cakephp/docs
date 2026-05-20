@@ -26,12 +26,8 @@ Running `bin/cake` without providing a command name no longer displays the
 "No command provided" error message. Instead, the `help` command is shown
 directly.
 
-Unknown positional tokens following a parent command that has sibling
-subcommands are now rejected with a clear error listing the available
-subcommands. For example, `bin/cake i18n nonsense` previously silently
-invoked the parent `I18nCommand` and discarded the trailing token; it now
-errors out. Commands that intentionally accept arbitrary positional arguments
-(e.g. `routes generate`) are unaffected.
+Unknown tokens after a parent command with subcommands are now rejected
+(e.g. `bin/cake i18n nonsense`) instead of silently invoking the parent.
 See [Subcommand Validation](../console-commands/commands#subcommand-validation).
 
 The `help` command is now hidden from command listings (via
