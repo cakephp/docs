@@ -318,6 +318,30 @@ Usage:
 cake user [-h] [-q] [-v]
 ```
 
+## Subcommand Validation
+
+::: info Added in version 5.4.0
+Strict validation for unknown subcommands was added in 5.4.0.
+:::
+
+When a parent command has registered subcommands (e.g. `i18n extract`,
+`i18n init`), CakePHP rejects unknown positional tokens that follow the
+parent name. Previously, typos such as `bin/cake i18n nonsense` silently
+invoked the parent command and discarded the trailing token; now you get a
+clear error listing the available subcommands:
+
+```text
+$ bin/cake i18n nonsense
+Error: Unknown command `cake i18n nonsense`.
+Available subcommands: `i18n extract`, `i18n init`.
+Run `cake i18n --help` to see usage.
+```
+
+This only kicks in when the parent command has sibling subcommands. Commands
+that accept arbitrary positional arguments (e.g. `routes generate`) are
+unaffected, and option-like tokens (`--help`, `-v`) following the command
+name continue to be forwarded to the parser.
+
 ## Grouping Commands
 
 By default, in the help output CakePHP will group commands into core, app, and

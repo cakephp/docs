@@ -1462,6 +1462,24 @@ Output:
 </select>
 ```
 
+To build `$options` from a backed enum, you can use `enumOptions()`:
+
+```php
+use App\Model\Enum\ArticleStatus;
+
+echo $this->Form->select('status', $this->Form->enumOptions(ArticleStatus::class));
+```
+
+When `ArticleStatus` implements `EnumLabelInterface` (or uses
+`EnumLabelTrait`), the option text is taken from `label()`; otherwise the
+case name is used. This is useful when the form was created without an
+entity context, where the automatic enum detection on `control()` does not
+apply.
+
+::: info Added in version 5.4.0
+`FormHelper::enumOptions()` was made public in 5.4.0.
+:::
+
 **Controlling Select Pickers via Attributes**
 
 By using specific options in the `$attributes` parameter you can control
@@ -2140,13 +2158,21 @@ echo $this->Form->end(['data-type' => 'hidden']);
 Will output:
 
 ```html
-<div style="display:none;">
+<div hidden="hidden">
     <input type="hidden" name="_Token[fields]" data-type="hidden"
         value="2981c38990f3f6ba935e6561dc77277966fabd6d%3AAddresses.id">
     <input type="hidden" name="_Token[unlocked]" data-type="hidden"
         value="address%7Cfirst_name">
 </div>
 ```
+
+::: info Added in version 5.4.0
+The wrapper around hidden security tokens now defaults to the HTML5
+`hidden` boolean attribute instead of `style="display:none;"`. This avoids
+needing `style-src 'unsafe-inline'` under a strict Content-Security-Policy.
+You can still opt for a CSS class instead by setting the `hiddenClass`
+template option on `FormHelper`.
+:::
 
 > [!NOTE]
 > If you are using
@@ -2190,11 +2216,11 @@ Will output HTML similar to:
 
 ```html
 <form method="post" accept-charset="utf-8" action="/Rtools/tickets/delete/5">
-    <div style="display:none;">
+    <div hidden="hidden">
         <input name="_method" value="POST" type="hidden">
     </div>
     <button type="submit">Delete Record</button>
-    <div style="display:none;">
+    <div hidden="hidden">
         <input name="_Token[fields]" value="186cfbfc6f519622e19d1e688633c4028229081f%3A" type="hidden">
         <input name="_Token[unlocked]" value="" type="hidden">
         <input name="_Token[debug]" value="%5B%22%5C%2FRtools%5C%2Ftickets%5C%2Fdelete%5C%2F1%22%2C%5B%5D%2C%5B%5D%5D" type="hidden">

@@ -425,6 +425,65 @@ msgstr[2] "{0} datoteka je uklonjeno"
 Please visit the [Launchpad languages page](https://translations.launchpad.net/+languages)
 for a detailed explanation of the plural form numbers for each language.
 
+#### Customizing Plural Rules
+
+::: info Added in version 5.4.0
+`PluralRules::setRule()` and `PluralRules::resetRules()` were added in 5.4.0.
+:::
+
+When `__n()` / `__dn()` and the other Gettext-style plural functions resolve a
+message, CakePHP picks the plural form via `Cake\I18n\PluralRules::calculate()`.
+The built-in rules cover most CLDR locales, but they can lag behind upstream
+CLDR releases and they do not cover every minority language. If you hit a
+locale whose plural form is missing or wrong, you can register a custom rule
+without patching CakePHP:
+
+```php
+use Cake\I18n\PluralRules;
+
+// Breton: 5 plural forms (CLDR)
+PluralRules::setRule('br', function (int $n): int {
+    if ($n % 10 === 1 && $n % 100 !== 11 && $n % 100 !== 71 && $n % 100 !== 91) {
+        return 0;
+    }
+    if ($n % 10 === 2 && $n % 100 !== 12 && $n % 100 !== 72 && $n % 100 !== 92) {
+        return 1;
+    }
+    if (in_array($n % 10, [3, 4, 9], true)
+        && !in_array($n % 100, [13, 14, 19, 73, 74, 79, 93, 94, 99], true)
+    ) {
+        return 2;
+    }
+    if ($n !== 0 && $n % 1_000_000 === 0) {
+        return 3;
+    }
+
+    return 4;
+});
+```
+
+The closure receives the integer count and must return the zero-based plural
+form index that matches the `msgstr[N]` entries in your **.po** / **.mo**
+files. Custom rules take precedence over the built-in map, so they can also
+be used to override a built-in rule that does not match the form layout used
+by your translation files.
+
+Register rules in **config/bootstrap.php** so they are available before any
+translation is requested. The locale string is normalized via
+`Locale::canonicalize()` and an invalid locale throws an
+`InvalidArgumentException`. To drop all registered custom rules (typically
+between tests), call:
+
+```php
+PluralRules::resetRules();
+```
+
+> [!NOTE]
+> `PluralRules` is only consulted for Gettext-style messages
+> (`__n()`, `__dn()`, `msgstr[0]` / `msgstr[1]` / …). The ICU plural selector
+> shown above resolves its own forms via `MessageFormatter` and is unaffected
+> by `setRule()`.
+
 ## Creating Your Own Translators
 
 If you need to diverge from CakePHP conventions regarding where and how
