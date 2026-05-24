@@ -203,7 +203,7 @@ your existing [custom finders](#custom-find-methods) are reused unchanged:
 $rows = $articles->findUnhydrated('published')->all();
 ```
 
-It returns a `Cake\ORM\Query\SelectUnhydratedQuery`. This behaves exactly like
+It returns a `Cake\ORM\Query\UnhydratedSelectQuery`. This behaves exactly like
 `find()->disableHydration()` at runtime, but its static type matches the array
 result shape, so static analyzers no longer see `entity|array` on `first()`,
 `firstOrFail()`, `all()`, `toArray()` and iteration — including after the query
