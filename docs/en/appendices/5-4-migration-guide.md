@@ -70,6 +70,8 @@ version is reported as `unknown`), the header is omitted.
 - A backwards compatible Container implementation has been added to the core. You can opt-in to use it instead of the current
   `league/container` implementation by setting `App.container` to `cake` inside your `config/app.php`.
   See [Dependency Injection Container](../development/dependency-injection) for more details.
+- Added the `Cake\Lock\Lock` facade with pluggable lock engines for Redis,
+  Memcached, local files, and testing/no-op usage. See [Locking](../core-libraries/locking).
 
 ### Commands
 
