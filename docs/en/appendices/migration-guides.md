@@ -31,7 +31,6 @@ bin/cake upgrade rector --rules cakephp52 <path/to/app/src>
 Run rector before updating your `composer.json` dependencies
 to ensure the tool can resolve class names correctly.
 
-<<<<<<< HEAD
 - [5.0 Upgrade Guide](5-0-upgrade-guide)
 - [5.0 Migration Guide](5-0-migration-guide)
 - [5.1 Migration Guide](5-1-migration-guide)
