@@ -1257,6 +1257,43 @@ Log::setConfig('queries', [
 > never leave query logging on in production as it will negatively impact the
 > performance of your application.
 
+### Redacting Sensitive Values from Query Logs
+
+Query log lines render the executed SQL with bound parameters spliced
+back in, so any secret bound as a parameter (encryption keys,
+passwords, OAuth tokens) ends up in every surface that consumes a
+`LoggedQuery` — file logs via `__toString()`, structured loggers via
+`getContext()`, and anything that re-serialises the LoggedQuery as JSON
+via `jsonSerialize()`.
+
+`Cake\Database\Log\LoggedQuery::setRedactor()` registers a global
+`Closure` invoked before any of those exit points are exposed. The
+closure receives the raw query string and bound params and must return
+a 2-element array `[string $query, array $params]` with sensitive
+values replaced:
+
+```php
+use Cake\Database\Log\LoggedQuery;
+
+// In Application::bootstrap() or equivalent.
+LoggedQuery::setRedactor(function (string $query, array $params): array {
+    foreach ($params as $key => $value) {
+        if (in_array($key, ['password', 'token', 'apiKey'], true)) {
+            $params[$key] = '«REDACTED»';
+        }
+    }
+    return [$query, $params];
+});
+```
+
+The hook fires in `interpolate()`, `getContext()`, and `jsonSerialize()`,
+so every public exit path is covered. Pass `null` to clear a previously
+registered redactor.
+
+A redactor that throws or returns a malformed value is silently ignored
+for that call — the raw query and params are used as a safe fallback so
+a faulty redactor cannot break logging.
+
 ## Identifier Quoting
 
 By default, CakePHP does **not** quote identifiers in generated SQL queries. The
