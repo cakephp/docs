@@ -56,6 +56,40 @@
               ]
             }
           ]
+        },
+        {
+          "text": "Migration Guides",
+          "collapsed": true,
+          "items": [
+            {
+              "text": "Upgrading CakePHP",
+              "link": "/appendices/migration-guides"
+            },
+            {
+              "text": "5.0 Migration Guide",
+              "link": "/appendices/5-0-migration-guide"
+            },
+            {
+              "text": "5.0 Upgrade Guide",
+              "link": "/appendices/5-0-upgrade-guide"
+            },
+            {
+              "text": "5.1 Migration Guide",
+              "link": "/appendices/5-1-migration-guide"
+            },
+            {
+              "text": "5.2 Migration Guide",
+              "link": "/appendices/5-2-migration-guide"
+            },
+            {
+              "text": "5.3 Migration Guide",
+              "link": "/appendices/5-3-migration-guide"
+            },
+            {
+              "text": "5.4 Migration Guide",
+              "link": "/appendices/5-4-migration-guide"
+            }
+          ]
         }
       ]
     },
@@ -372,34 +406,6 @@
           "text": "Appendices",
           "items": [
             { "text": "Appendices", "link": "/appendices" },
-            {
-              "text": "Migration Guides",
-              "link": "/appendices/migration-guides"
-            },
-            {
-              "text": "5.0 Migration Guide",
-              "link": "/appendices/5-0-migration-guide"
-            },
-            {
-              "text": "5.0 Upgrade Guide",
-              "link": "/appendices/5-0-upgrade-guide"
-            },
-            {
-              "text": "5.1 Migration Guide",
-              "link": "/appendices/5-1-migration-guide"
-            },
-            {
-              "text": "5.2 Migration Guide",
-              "link": "/appendices/5-2-migration-guide"
-            },
-            {
-              "text": "5.3 Migration Guide",
-              "link": "/appendices/5-3-migration-guide"
-            },
-            {
-              "text": "5.4 Migration Guide",
-              "link": "/appendices/5-4-migration-guide"
-            },
             {
               "text": "CakePHP Development Process",
               "link": "/appendices/cakephp-development-process"

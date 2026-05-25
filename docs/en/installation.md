@@ -394,6 +394,9 @@ myapp.local {
 # Dockerfile in your project root
 FROM dunglas/frankenphp
 
+# Install required php extension
+RUN install-php-extensions intl
+
 # Copy your CakePHP application
 COPY . /app
 
