@@ -155,6 +155,8 @@ features in CakePHP are:
 
 - A [caching](core-libraries/caching) framework that integrates with
   Memcached, Redis and other backends.
+- A [locking](core-libraries/locking) API for coordinating critical sections
+  across concurrent requests, workers, and commands.
 - Powerful [code generation tools](bake/usage) so you can start immediately.
 - [Integrated testing framework](development/testing) so you can ensure
   your code works perfectly.

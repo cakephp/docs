@@ -13,6 +13,7 @@
 - [Views](views)
 - [Database Access & ORM](orm)
 - [Caching](core-libraries/caching)
+- [Locking](core-libraries/locking)
 - [Bake Console](bake)
 - [Console Commands](console-commands)
 - [Debugging](development/debugging)
