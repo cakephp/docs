@@ -790,7 +790,9 @@ in order to truncate all dirty tables before each test.
 
 The following command will help you bake your factories:
 
-    bin/cake bake fixture_factory -h
+```bash
+bin/cake bake fixture_factory -h
+```
 
 Once your factories are
 [tuned](https://github.com/vierge-noire/cakephp-fixture-factories/blob/main/docs/factories.md),
@@ -1041,6 +1043,23 @@ In your `tearDown()` method be sure to remove the mock with:
 
 ```php
 $this->getTableLocator()->clear();
+```
+
+::: info Added in version 5.4
+:::
+
+If you prefer Mockery mocks you can use `mockModel()` instead of `getMockForModel()`.
+
+```php
+public function testSendingEmails(): void
+{
+    $model = $this->mockModel('EmailVerification');
+    $mock->shouldReceive('send')
+        ->once()
+        ->andReturn(true);
+
+    $model->verifyEmail('test@example.com');
+}
 ```
 
 <a id="integration-testing"></a>

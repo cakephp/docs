@@ -26,6 +26,10 @@ Running `bin/cake` without providing a command name no longer displays the
 "No command provided" error message. Instead, the `help` command is shown
 directly.
 
+Unknown tokens after a parent command with subcommands are now rejected
+(e.g. `bin/cake i18n nonsense`) instead of silently invoking the parent.
+See [Subcommand Validation](../console-commands/commands#subcommand-validation).
+
 The `help` command is now hidden from command listings (via
 `CommandHiddenInterface`). It remains accessible by running `bin/cake help` or
 `bin/cake help <command>`.
@@ -33,6 +37,14 @@ The `help` command is now hidden from command listings (via
 The CakePHP version header in help output is now only shown when the CakePHP
 version can be determined. When used outside a CakePHP application (where the
 version is reported as `unknown`), the header is omitted.
+
+### Events
+
+Events being registered in either `Application::events()` or `Plugin::events()`
+now work in both web and CLI contexts. It is therefore highly recommended to
+move your event listeners from the `config/bootstrap.php` file to the
+`events()` method in your `Application` or `Plugin` class.
+See [Application and Plugin Events](../core-libraries/events#registering-event-listeners) for more details.
 
 ### I18n
 
@@ -44,11 +56,31 @@ version is reported as `unknown`), the header is omitted.
 - The default eager loading strategy for `HasMany` and `BelongsToMany` associations
   has changed from `select` to `subquery`. If you need the previous behavior,
   explicitly set `'strategy' => 'select'` when defining associations.
+  See [Associations](../orm/associations#has-many-associations) for more details.
+- `Model.afterSaveCommit` and `Model.afterDeleteCommit` events are now fired
+  when `save()` or `delete()` is called inside an outer transaction. Previously,
+  these events were silently suppressed. They are now deferred until the
+  outermost transaction commits, and discarded on rollback.
+  See [Table Objects](../orm/table-objects#aftersavecommit) for more details.
+- Table methods `save()`, `delete()`, `patchEntity()`, `patchEntities()` and `loadInto()`
+  will now throw an exception if the entity being passed down does not belong to the table instance.
+  This will prevent accidental data corruption or deleted records. If you don't want this new behavior,
+  you can disable it by calling `$this->disableEntityClassAssertion();` in your `initialize()` method.
 
 ### Controller
 
 - Loading a component with the same alias as the controller's default table now
   triggers a warning. See [Component Alias Conflicts](../controllers/components#component-alias-conflicts).
+
+### View
+
+- `FormHelper` now wraps hidden form blocks (CSRF, FormProtection,
+  `postLink()` / `postButton()`) with the HTML5 boolean `hidden` attribute
+  instead of an inline `style="display:none;"`. This makes the default markup
+  compatible with a strict Content-Security-Policy (no need for
+  `style-src 'unsafe-inline'`). If you previously selected those wrappers via
+  CSS (e.g. `div[style="display:none;"]`), switch to `[hidden]` or set the
+  `hiddenClass` template option to opt out and emit a class instead.
 
 ## Deprecations
 
@@ -61,6 +93,13 @@ version is reported as `unknown`), the header is omitted.
 
 - The `Mailer::$name` property is unused and has been deprecated.
 
+### ORM
+
+- `SelectQuery::disableHydration()` has been deprecated. Use
+  [`Table::findUnhydrated()`](../orm/retrieving-data-and-resultsets#getting-arrays-instead-of-entities)
+  instead, which returns an `UnhydratedSelectQuery` whose static type matches the
+  array result shape. `disableHydration()` will be removed in 6.0.
+
 ## New Features
 
 ### Core
@@ -72,6 +111,12 @@ version is reported as `unknown`), the header is omitted.
   See [Dependency Injection Container](../development/dependency-injection) for more details.
 - Added the `Cake\Lock\Lock` facade with pluggable lock engines for Redis,
   Memcached, local files, and testing/no-op usage. See [Locking](../core-libraries/locking).
+
+### Collection
+
+- Added [`keys()`](../core-libraries/collections#keys) and [`values()`](../core-libraries/collections#values) methods for extracting keys or re-indexing values.
+- Added [`implode()`](../core-libraries/collections#implode) method to concatenate elements into a string.
+- Added [`when()`](../core-libraries/collections#when) and [`unless()`](../core-libraries/collections#unless) methods for conditional method chaining.
 
 ### Commands
 
@@ -94,29 +139,80 @@ version is reported as `unknown`), the header is omitted.
   `FormProtectionComponent`.
   See [Form Protection Component](../controllers/components/form-protection).
 
+### Http
+
+- Added `JsonStreamResponse` class for memory-efficient streaming of large JSON
+  datasets using generators. Supports standard JSON arrays and NDJSON formats,
+  envelope structures with metadata, transform callbacks, and graceful mid-stream
+  error handling. See [Streaming JSON Responses](../controllers/request-response#streaming-json-responses).
+
 ### Database
 
 - Added `notBetween()` method for `NOT BETWEEN` expressions.
   See [Query Builder](../orm/query-builder#advanced-conditions).
 - Added `inOrNull()` and `notInOrNull()` methods for combining `IN` conditions with `IS NULL`.
 - Added `isDistinctFrom()` and `isNotDistinctFrom()` methods for null-safe comparisons.
-
-### I18n
-
-- `Number::toReadableSize()` now uses decimal units (KB = 1000 bytes) by default.
-  Binary units (KiB = 1024 bytes) can be enabled via parameter or `Number::setUseIecUnits()`.
-
-### ORM
-
-- The `associated` option in `newEntity()` and `patchEntity()` now supports
-  nested array format matching `contain()` syntax.
-  See [Converting Request Data into Entities](../orm/saving-data#converting-request-data-into-entities).
+- Added `FunctionsBuilder::stringAgg()` for portable string aggregation.
+  Translates to `STRING_AGG` or `GROUP_CONCAT` per driver.
+  See [Query Builder](../orm/query-builder#string-aggregation).
+- Added `Connection::afterCommit()` to register callbacks that run after the
+  outermost transaction commits. Callbacks are discarded on rollback.
+  See [Database Basics](../orm/database-basics#aftercommit) for more details.
+- Added `except()` and `exceptAll()` methods on `SelectQuery` for `EXCEPT`
+  and `EXCEPT ALL` set operations. `EXCEPT ALL` is supported on PostgreSQL
+  and recent MySQL/MariaDB versions; it is not supported on SQLite or SQL Server.
+  See [Query Builder](../orm/query-builder#except).
+- Added PostgreSQL index access method reflection. Non-btree indexes (`gin`,
+  `gist`, `spgist`, `brin`, `hash`) are now reflected with an `accessMethod`
+  field and regenerated with the correct `USING` clause. The `Index` class
+  provides constants (`Index::GIN`, `Index::GIST`, `Index::SPGIST`,
+  `Index::BRIN`, `Index::HASH`) for these access methods.
+  See [Reading Indexes and Constraints](../orm/schema-system#reading-indexes-and-constraints).
+- Added `Cake\Database\Type\EnumLabelTrait` and the
+  `Cake\Database\Type\Attribute\Label` attribute. The trait provides a default
+  `label()` implementation backed by the translator and the attribute lets
+  individual cases override the derived label. See
+  [EnumLabelTrait and the Label Attribute](../orm/database-basics#enumlabeltrait-and-the-label-attribute).
 
 ### Http
 
 - Added PSR-13 Link implementation with `Cake\Http\Link\Link` and `Cake\Http\Link\LinkProvider`
   classes for hypermedia link support. Links added to responses are automatically emitted
   as HTTP `Link` headers. See [Hypermedia Links](../controllers/request-response#hypermedia-links).
+
+### I18n
+
+- `Number::toReadableSize()` now uses decimal units (KB = 1000 bytes) by default.
+  Binary units (KiB = 1024 bytes) can be enabled via parameter or `Number::setUseIecUnits()`.
+- Added `TranslatorRegistry::setCacheKeyPrefix()` to isolate translator caches
+  per tenant when a custom loader produces different messages for the same
+  domain and locale. Accepts a static string or a `Closure` resolved on every
+  lookup. See [Isolating Translations Per Tenant](../core-libraries/internationalization-and-localization#isolating-translations-per-tenant).
+- Added `TranslatorRegistry::clear()` to drop the in-memory translator map
+  without touching the persistent cacher. Intended for long-running workers
+  that switch tenants between jobs.
+- Added `I18n::setCacheConfig()` to route translator persistence to a Cache
+  config other than the default `_cake_translations_`.
+- The `cake i18n extract` command now also extracts enum labels using the #[Label] attribute.
+- Added `PluralRules::setRule()` to register a custom Gettext plural rule for
+  a locale whose built-in form is missing or differs from the layout used by
+  your .po/.mo files. See
+  [Customizing Plural Rules](../core-libraries/internationalization-and-localization#customizing-plural-rules).
+
+### ORM
+
+- The `associated` option in `newEntity()` and `patchEntity()` now supports
+  nested array format matching `contain()` syntax.
+  See [Converting Request Data into Entities](../orm/saving-data#converting-request-data-into-entities).
+- Added `Table::findUnhydrated()` and the `UnhydratedSelectQuery` class for
+  type-safe non-hydrated reads. Unlike `find()->disableHydration()`, the
+  returned query's static type matches its array result shape, so static
+  analyzers no longer see `entity|array` on `first()`, `all()`, `toArray()`
+  and iteration. See [Getting Arrays Instead of Entities](../orm/retrieving-data-and-resultsets#getting-arrays-instead-of-entities).
+
+### Testsuite
+
+- `TestCase::mockModel()` has been added to allow mocking of model classes in tests using Mockery mocks.
 
 ### Utility
 
@@ -125,14 +221,13 @@ version is reported as `unknown`), the header is omitted.
   path manipulation. See [Filesystem Utilities](../core-libraries/filesystem.md).
 - `Security::encrypt()` can now be configured to use longer keys with separate encryption and authentication keys that are derived from the provided key.
   You can set `Security.encryptWithRawKey` to enable this behavior. See [here](https://github.com/cakephp/cakephp/pull/19325) for more details.
-
-### Collection
-
-- Added [`keys()`](../core-libraries/collections#keys) and [`values()`](../core-libraries/collections#values) methods for extracting keys or re-indexing values.
-- Added [`implode()`](../core-libraries/collections#implode) method to concatenate elements into a string.
-- Added [`when()`](../core-libraries/collections#when) and [`unless()`](../core-libraries/collections#unless) methods for conditional method chaining.
+- Added `Text::mask()` method which masks a portion of a string with a repeated character. See [Text Masking](../core-libraries/text.md#text-masking) for more details.
+- Added `Text::maskValue()` method which masks all occurrences of given substrings within a string using a repeated character. See [Text Masking](../core-libraries/text.md#text-masking) for more details.
 
 ### View
 
 - Added `{{inputId}}` template variable to `inputContainer` and `error` templates
   in FormHelper. See [Built-in Template Variables](../views/helpers/form#built-in-template-variables).
+- `FormHelper::enumOptions()` is now public. This lets you build `select`
+  options from a backed enum class even when the form was created without
+  an entity context. See [Creating Select Pickers](../views/helpers/form#creating-select-pickers).

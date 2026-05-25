@@ -200,6 +200,29 @@ $this->viewBuilder()
     ->setOption('jsonOptions', JSON_FORCE_OBJECT);
 ```
 
+### Streaming Large JSON Payloads
+
+`JsonView` is a good fit when your action can serialize the complete payload in
+memory. For large result sets, use `Cake\Http\Response\JsonStreamResponse`
+instead and return it directly from the controller:
+
+```php
+use Cake\Http\Response\JsonStreamResponse;
+
+public function export()
+{
+    $query = $this->Articles->find()
+        ->enableHydration(false)
+        ->bufferResults(false);
+
+    return new JsonStreamResponse($query);
+}
+```
+
+See [Streaming JSON Responses](../controllers/request-response#streaming-json-responses)
+for the available options, including NDJSON output, item transforms, and
+graceful mid-stream error handling.
+
 ### JSONP Responses
 
 When using `JsonView` you can use the special view variable `jsonp` to

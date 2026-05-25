@@ -53,7 +53,7 @@ process. Cache engine configurations are defined in **config/app.php**.
 
 For optimal performance CakePHP requires two cache engines to be defined.
 
-- `_cake_core_` is used for storing file maps, and parsed results of
+- `_cake_translations_` is used for storing file maps, and parsed results of
   [Internationalization & Localization](../core-libraries/internationalization-and-localization) files.
 - `_cake_model_`, is used to store schema descriptions for your applications
   models.
@@ -162,6 +162,17 @@ FileEngine uses the following engine specific options:
 - `lock` Should files be locked before writing to them?
 - `mask` The mask used for created files
 - `path` Path to where cachefiles should be saved. Defaults to system's temp dir.
+
+### ApcuEngine Options
+
+ApcuEngine does not have any engine specific options. It requires the
+[APCu](https://php.net/apcu) extension to be installed and enabled.
+
+Because APCu stores values in the local webserver process shared memory, it is
+best suited for data that can be regenerated and does not need to be shared
+between servers. When clearing cache data, ApcuEngine removes entries matching
+the cache configuration's `prefix`, so use unique prefixes for each cache
+configuration that uses APCu.
 
 <a id="caching-redisengine"></a>
 

@@ -158,7 +158,7 @@ of the option:
 - `multiple` - The option can be provided multiple times. The parsed option
   will be an array of values when this option is enabled.
 - `separator` - A character sequence that the option value is split into an
-  array with.
+  array with. Requires `multiple` set to `true`.
 - `choices` - An array of valid choices for this option. If left empty all
   values are valid. An exception will be raised when parse() encounters an
   invalid value.
