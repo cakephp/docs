@@ -43,8 +43,18 @@ version is reported as `unknown`), the header is omitted.
 Events being registered in either `Application::events()` or `Plugin::events()`
 now work in both web and CLI contexts. It is therefore highly recommended to
 move your event listeners from the `config/bootstrap.php` file to the
-`events()` method in your `Application` or `Plugin` class.
+`eventListeners()` method in your `Application` or `Plugin` class. Use the
+`events()` method when you need custom registration logic or anonymous
+listeners.
 See [Application and Plugin Events](../core-libraries/events#registering-event-listeners) for more details.
+
+`Application::eventListeners()` and `Plugin::eventListeners()` were added to
+register event listener classes declaratively. These listeners are resolved
+through the application's dependency injection container, so they can use
+constructor-injected dependencies.
+
+`EventAwareApplicationInterface::pluginEvents()` has been deprecated. Plugin
+events are now registered while each plugin is bootstrapped.
 
 ### I18n
 
