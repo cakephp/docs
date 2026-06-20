@@ -321,6 +321,8 @@ $this->Form->addContextProvider('myprovider', function ($request, $data) {
 ロジックを追加できます。一致する入力データが見つかった場合は、オブジェクトを返すことができます。
 一致するものがない場合は null を返します。
 
+<a id="automagic-form-elements"></a>
+
 ## フォームコントロールの作成
 
 `method` Cake\\View\\Helper\\FormHelper::**control**(string $fieldName, array $options = [])
@@ -529,6 +531,8 @@ datetime に関連するコントロールを作成する場合、FormHelper は
 というフィールドが追加されていることがあります。エンティティーがマーシャリングされると、
 これらのフィールドは自動的に `DateTime` オブジェクトに変換されます。
 
+<a id="control-specific-options"></a>
+
 ### コントロールのオプション
 
 `FormHelper::control()` は、その `$options` 引数を通して、多数のオプションをサポートしています。
@@ -687,6 +691,8 @@ HTML 属性を受け付けます。以下は `FormHelper::control()` で特有�
 `Cake\View\Helper\FormHelper::label()` や
 `Cake\View\Helper\FormHelper::error()` といった
 他のメソッドを組み合わせることができます。
+
+<a id="general-control-options"></a>
 
 ### 特定のコントロールのための共通オプション
 
@@ -881,6 +887,8 @@ echo $this->Form->textarea('notes');
 
 これらのコントロールは、いくつかの共通点といくつかのオプションを共有し、
 それらは簡単に参照するために、このサブセクションで全てグループ化します。
+
+<a id="checkbox-radio-select-options"></a>
 
 #### セレクト、チェックボックス、ラジオに関するオプション
 
@@ -1119,6 +1127,8 @@ echo $this->Form->checkbox('done', ['hiddenField' => false]);
 <input type="checkbox" name="done" value="1">
 ```
 
+<a id="create-radio-button"></a>
+
 #### ラジオボタンの作成
 
 `method` Cake\\View\\Helper\\FormHelper::**radio**(string $fieldName, array $options, array $attributes)
@@ -1208,6 +1218,8 @@ echo $this->Form->radio(
     Green
 </label>
 ```
+
+<a id="create-select-picker"></a>
 
 #### 選択ピッカーの作成
 
@@ -1565,6 +1577,8 @@ $this->request->data['submittedfile']
   その文字列は空の要素として表示されます。デフォルトは `true` です。
 - `default` \| `value` - 2つのいずれかを使用して、 フィールドに表示されるデフォルト値を設定します。 フィールド名と一致する `$this->request->getData()` の値は、この値を上書きします。 デフォルトが指定されていない場合、 `time()` が使用されます。 - `'year', 'month', 'day', 'hour', 'minute', 'second', 'meridian'` -これらのオプションを使用すると、コントロール要素が生成されるかどうか制御できます。 これらのオプションを `false` にセットすることにより、特定の選択ピッカーの生成を 無効にすることができます (デフォルトでは、使用されたメソッドの中で描画されます) 。 さらに、各オプションでは、HTML 属性を指定した `select` 要素に渡すことができます。
 
+<a id="datetime-options"></a>
+
 #### 日付関連コントロールのオプション
 
 これらのオプションは、日付関連のメソッド、つまり `year()` 、 `month()` 、
@@ -1581,6 +1595,8 @@ $this->request->data['submittedfile']
   これらのオプションを `false` にセットすることにより、特定の選択ピッカーの生成を
   無効にすることができます (デフォルトでは、使用されたメソッドの中で描画されます) 。
   さらに、各オプションでは、HTML 属性を指定した `select` 要素に渡すことができます。
+
+<a id="time-options"></a>
 
 #### 時刻関連コントロールのオプション
 
@@ -1867,6 +1883,8 @@ echo $this->Form->minute('arrival', [
     <option value="2000">2000</option>
 </select>
 ```
+
+<a id="create-label"></a>
 
 ## ラベルの作成
 
@@ -2490,6 +2508,8 @@ echo $this->Form->allControls(['password' => false]);
 // 3.4.0 より前の場合:
 echo $this->Form->allInputs(['password' => false]);
 ```
+
+<a id="associated-form-inputs"></a>
 
 ## 関連データの入力を作成
 
