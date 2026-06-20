@@ -89,36 +89,36 @@ $mailer = new Mailer(['from' => 'me@example.org', 'transport' => 'my_custom']);
 配信プロファイルを定義すると、再利用可能なプロファイルに共通のメール設定を統合することができます。
 アプリケーションは、必要な数のプロファイルを持つことができます。次の設定キーが使用されます。
 
-- `'from'`: 送信者のメールアドレスまたは配列。 `Mailer::setFrom()` を参照。
-- `'sender'`: 実際の送信者のメールアドレスまたは配列。 `Mailer::setSender()` を参照。
-- `'to'`: 宛先のメールアドレスまたは配列。 `Mailer::setTo()` を参照。
-- `'cc'`: CC のメールアドレスまたは配列。 `Mailer::setCc()` を参照。
-- `'bcc'`: BCC のメールアドレスまたは配列。 `Mailer::setCcc()` を参照。
-- `'replyTo'`: メールの返信先のメールアドレスまたは配列。 `Mailer::setReplyTo()` を参照。
-- `'readReceipt'`: 開封通知先メールアドレスまたはアドレスの配列。 `Mailer::setReadReceipt()` を参照。
-- `'returnPath'`: エラーの返信先メールアドレスまたはアドレスの配列。 `Mailer::setReturnPath()` を参照。
-- `'messageId'`: メールのメッセージID。 `Mailer::setMessageId()` を参照。
-- `'subject'`: メッセージのサブジェクト。 `Mailer::setSubject()` を参照。
-- `'message'`: メッセージ本文。レンダリングされた本文を使用する場合は、 この項目を設定しないでください。
-- `'priority'`: メールの優先度 (数値。通常は 1 から 5 で、1 が最高)。
-- `'headers'`: ヘッダー情報。 `Mailer::setHeaders()` を参照。
-- `'viewRender'`: レンダリングされた本文を使用する場合は、ビュークラス名をセット。
+- `from`: 送信者のメールアドレスまたは配列。 `Mailer::setFrom()` を参照。
+- `sender`: 実際の送信者のメールアドレスまたは配列。 `Mailer::setSender()` を参照。
+- `to`: 宛先のメールアドレスまたは配列。 `Mailer::setTo()` を参照。
+- `cc`: CC のメールアドレスまたは配列。 `Mailer::setCc()` を参照。
+- `bcc`: BCC のメールアドレスまたは配列。 `Mailer::setCcc()` を参照。
+- `replyTo`: メールの返信先のメールアドレスまたは配列。 `Mailer::setReplyTo()` を参照。
+- `readReceipt`: 開封通知先メールアドレスまたはアドレスの配列。 `Mailer::setReadReceipt()` を参照。
+- `returnPath`: エラーの返信先メールアドレスまたはアドレスの配列。 `Mailer::setReturnPath()` を参照。
+- `messageId`: メールのメッセージID。 `Mailer::setMessageId()` を参照。
+- `subject`: メッセージのサブジェクト。 `Mailer::setSubject()` を参照。
+- `message`: メッセージ本文。レンダリングされた本文を使用する場合は、 この項目を設定しないでください。
+- `priority`: メールの優先度 (数値。通常は 1 から 5 で、1 が最高)。
+- `headers`: ヘッダー情報。 `Mailer::setHeaders()` を参照。
+- `viewRender`: レンダリングされた本文を使用する場合は、ビュークラス名をセット。
   `Mailer::viewRender()` を参照。
-- `'template'`: レンダリングされた本文を使用する場合は、テンプレート名をセット。
+- `template`: レンダリングされた本文を使用する場合は、テンプレート名をセット。
   `ViewBuilder::setTemplate()` を参照。
-- `'theme'`: テンプレートをレンダリングする際のテーマ。 `ViewBuilder::setTheme()` を参照。
-- `'layout'`: レンダリングされた本文を使用する場合、描画するレイアウトをセット。
+- `theme`: テンプレートをレンダリングする際のテーマ。 `ViewBuilder::setTheme()` を参照。
+- `layout`: レンダリングされた本文を使用する場合、描画するレイアウトをセット。
   レイアウトなしでテンプレートをレンダリングしたい場合は、このフィールドに null をセット。
   `ViewBuilder::setTemplate()` を参照。
-- `'viewVars'`: レンダリングされた本文を使用する場合は、ビューで使用する変数の配列をセット。
+- `viewVars`: レンダリングされた本文を使用する場合は、ビューで使用する変数の配列をセット。
   `Mailer::setViewVars()` を参照。
-- `'attachments'`: 添付ファイルの一覧。 `Mailer::setAttachments()` を参照。
-- `'emailFormat'`: メールの書式 (html, text または both) `Mailer::setEmailFormat()` を参照。
-- `'transport'`: トランスポート名。 トランスポート設定を参照。
-- `'log'`: メールヘッダーとメッセージをログに記録するログレベル。
+- `attachments`: 添付ファイルの一覧。 `Mailer::setAttachments()` を参照。
+- `emailFormat`: メールの書式 (html, text または both) `Mailer::setEmailFormat()` を参照。
+- `transport`: トランスポート名。 トランスポート設定を参照。
+- `log`: メールヘッダーとメッセージをログに記録するログレベル。
   `true` なら LOG_DEBUG を使用します。 [Logging Levels](../core-libraries/logging#logging-levels) を参照。
   ログはスコープ名 `email` で出力されることに注意してください。 [Logging Scopes](../core-libraries/logging#logging-scopes) を参照。
-- `'helpers'`: メールテンプレート内で使用するヘルパーの配列。 `ViewBuilder::setHelpers()` 。
+- `helpers`: メールテンプレート内で使用するヘルパーの配列。 `ViewBuilder::setHelpers()` 。
 
 > [!NOTE]
 > メールアドレスや配列で使用する上記のキーの値 (from, to, cc 他）は、関連するメソッドの第一引数として
