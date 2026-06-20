@@ -53,6 +53,8 @@ $mailer->setSender('app@example.com', 'MyApp emailer');
 > 別の人の代わりにメール送信するときに送り主 (envelope sender) をセットするのは良い考えです。
 > これは、配信失敗に関するメッセージの受信を防ぐことができます。
 
+<a id="email-configuration"></a>
+
 ## 設定
 
 メーラーのプロファイルとメールのトランスポートは、アプリケーションの
@@ -83,6 +85,8 @@ $mailer->setProfile(['from' => 'me@example.org', 'transport' => 'my_custom']);
 // または、コンストラクター内で
 $mailer = new Mailer(['from' => 'me@example.org', 'transport' => 'my_custom']);
 ```
+
+<a id="email-configurations"></a>
 
 ### 設定プロファイル
 
