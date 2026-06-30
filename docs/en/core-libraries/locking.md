@@ -1,6 +1,6 @@
 # Locking
 
-`class` Cake\Lock\Lock
+`class` Cake\\Lock\\**Lock**
 
 Locking helps you coordinate access to shared resources across concurrent
 requests, CLI commands, queue workers, or background jobs. Use locks when you
