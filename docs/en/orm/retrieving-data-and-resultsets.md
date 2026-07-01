@@ -184,23 +184,23 @@ methods will let you re-use your queries and make testing easier.
 ### Getting Arrays Instead of Entities
 
 By default, queries and result sets return [Entities](../orm/entities) objects.
-When you only need plain arrays, use `findUnhydrated()` instead of `find()`:
+When you only need plain arrays, use `unhydratedFind()` instead of `find()`:
 
 ```php
-$query = $articles->findUnhydrated();
+$query = $articles->unhydratedFind();
 
 // $data is a ResultSet that contains array data.
 $data = $query->all();
 
 // Terminal methods are typed as arrays too.
-$row = $articles->findUnhydrated()->where(['id' => 1])->first(); // array<string, mixed>|null
+$row = $articles->unhydratedFind()->where(['id' => 1])->first(); // array<string, mixed>|null
 ```
 
-`findUnhydrated()` accepts the same finder type and arguments as `find()`, so
+`unhydratedFind()` accepts the same finder type and arguments as `find()`, so
 your existing [custom finders](#custom-find-methods) are reused unchanged:
 
 ```php
-$rows = $articles->findUnhydrated('published')->all();
+$rows = $articles->unhydratedFind('published')->all();
 ```
 
 It returns a `Cake\ORM\Query\UnhydratedSelectQuery`. This behaves exactly like
@@ -210,14 +210,14 @@ result shape, so static analyzers no longer see `entity|array` on `first()`,
 flows through a custom finder.
 
 > [!NOTE]
-> `findUnhydrated()` only changes the result shape for row-returning finders.
+> `unhydratedFind()` only changes the result shape for row-returning finders.
 > `findList()` and `findThreaded()` produce a key/value map or nested tree
 > regardless of hydration, so there is nothing to type differently for them.
 
 > [!WARNING]
 > `SelectQuery::disableHydration()` is deprecated as of 5.4.0 and will be
 > removed in 6.0. The fluent toggle returns a query whose static type still
-> claims to produce entities; prefer `findUnhydrated()` instead.
+> claims to produce entities; prefer `unhydratedFind()` instead.
 
 <a id="table-find-first"></a>
 
@@ -1104,7 +1104,7 @@ section show how you can add calculated fields, or replace the result set.
 > Depending on your use case, you may also consider skipping hydration:
 >
 > ``` bash
-> $results = $articles->findUnhydrated()
+> $results = $articles->unhydratedFind()
 >     ->all();
 > ```
 >
@@ -1274,7 +1274,7 @@ $reducer = function ($occurrences, $word, $mapReduce) {
 Finally, we put everything together:
 
 ```php
-$wordCount = $articles->findUnhydrated()
+$wordCount = $articles->unhydratedFind()
     ->where(['published' => true])
     ->andWhere(['published_date >=' => new DateTime('2014-01-01')])
     ->mapReduce($mapper, $reducer)
@@ -1346,7 +1346,7 @@ $reducer = function ($friends, $user, $mr) {
 And we supply our functions to a query:
 
 ```php
-$fakeFriends = $friends->findUnhydrated()
+$fakeFriends = $friends->unhydratedFind()
     ->mapReduce($mapper, $reducer)
     ->all()
     ->toArray();
