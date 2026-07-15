@@ -43,6 +43,8 @@ php composer.phar require cakephp/debug_kit
 'ContactManager' という名前のフォルダーを作り、この下にプラグインの src, tests といった
 フォルダーを作ります。
 
+<a id="autoloading-plugin-classes"></a>
+
 ### プラグインクラスを手動で自動読み込み
 
 `composer` や `bake` を使ってプラグインをインストールするなら、
@@ -124,6 +126,8 @@ bin/cake plugin load ContactManager
 
 これは、アプリケーションの bootstrap メソッドを更新、
 または `$this->addPlugin('ContactManager');` を bootstrap に書き込みます。
+
+<a id="plugin-configuration"></a>
 
 ## プラグインフックの設定
 
@@ -278,6 +282,8 @@ bin/cake bake controller --plugin ContactManager Contacts
 ```bash
 php composer.phar dumpautoload
 ```
+
+<a id="plugin-objects"></a>
 
 ## Plugin オブジェクト
 

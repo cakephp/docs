@@ -346,31 +346,36 @@ You can access existing wrappers for several SQL functions through `SelectQuery:
 Generate a random value between 0 and 1 via SQL.
 
 `sum()`
-Calculate a sum. `Assumes arguments are literal values.`
+Calculate a sum. *Assumes arguments are literal values.*
 
 `avg()`
-Calculate an average. `Assumes arguments are literal values.`
+Calculate an average. *Assumes arguments are literal values.*
 
 `min()`
-Calculate the min of a column. `Assumes arguments are literal values.`
+Calculate the min of a column. *Assumes arguments are literal values.*
 
 `max()`
-Calculate the max of a column. `Assumes arguments are literal values.`
+Calculate the max of a column. *Assumes arguments are literal values.*
 
 `count()`
-Calculate the count. `Assumes arguments are literal values.`
+Calculate the count. *Assumes arguments are literal values.*
+
+`stringAgg()`
+Aggregate string values using a separator. Translates to `STRING_AGG()`,
+`GROUP_CONCAT()`, or `LISTAGG()` depending on the database driver.
+*Assumes the first argument is a literal value.*
 
 `cast()`
 Convert a field or expression from one data type to another.
 
 `concat()`
-Concatenate two values together. `Assumes arguments are bound parameters.`
+Concatenate two values together. *Assumes arguments are bound parameters.*
 
 `coalesce()`
-Coalesce values. `Assumes arguments are bound parameters.`
+Coalesce values. *Assumes arguments are bound parameters.*
 
 `dateDiff()`
-Get the difference between two dates/times. `Assumes arguments are bound parameters.`
+Get the difference between two dates/times. *Assumes arguments are bound parameters.*
 
 `now()`
 Defaults to returning date and time, but accepts 'time' or 'date' to return only
@@ -470,6 +475,38 @@ FROM articles;
 
 > [!NOTE]
 > Use `func()` to pass untrusted user data to any SQL function.
+
+#### String Aggregation
+
+The `stringAgg()` method provides a portable way to aggregate string values
+using a separator. It translates to the appropriate native SQL function for
+each driver (`STRING_AGG()` on PostgreSQL and SQL Server, `GROUP_CONCAT()` on
+MySQL, and `STRING_AGG()` or `GROUP_CONCAT()` on MariaDB/SQLite depending on
+version):
+
+```php
+$query = $articles->find();
+$query->select([
+    'category_id',
+    'titles' => $query->func()->stringAgg('title', ', '),
+])
+->groupBy('category_id');
+```
+
+You can optionally specify an ordering for the aggregated values via the
+third argument:
+
+```php
+$query->func()->stringAgg('title', ', ', ['title' => 'ASC']);
+```
+
+`STRING_AGG` with aggregate-local ordering is supported on PostgreSQL,
+SQL Server, MariaDB 10.5+ and SQLite 3.44+. MySQL translates the call to
+`GROUP_CONCAT` in all cases.
+
+::: info Added in version 5.4.0
+`FunctionsBuilder::stringAgg()` was added.
+:::
 
 ### Ordering Results
 
@@ -2198,6 +2235,39 @@ $unpublished->intersectAll($inReview);
 
 ::: info Added in version 5.1.0
 `intersect()` and `intersectAll()` were added.
+:::
+
+### Except
+
+Except operations allow you to return rows from one query that do not appear
+in another query. Except queries are created by composing one or more select
+queries together:
+
+```php
+$allArticles = $articles->find();
+
+$published = $articles->find()
+    ->where(['published' => true]);
+
+$allArticles->except($published);
+```
+
+You can create `EXCEPT ALL` queries using the `exceptAll()` method:
+
+```php
+$allArticles = $articles->find();
+
+$published = $articles->find()
+    ->where(['published' => true]);
+
+$allArticles->exceptAll($published);
+```
+
+`EXCEPT ALL` is supported on PostgreSQL and recent MySQL/MariaDB versions.
+It is not supported on SQLite or SQL Server.
+
+::: info Added in version 5.4.0
+`except()` and `exceptAll()` were added.
 :::
 
 ### Subqueries

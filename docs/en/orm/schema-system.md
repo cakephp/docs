@@ -182,6 +182,28 @@ $indexes = $schema->indexes()
 $index = $schema->index('author_id_idx')
 ```
 
+#### PostgreSQL Index Access Methods
+
+::: info Added in version 5.4.0
+:::
+
+When reflecting indexes on PostgreSQL, non-btree indexes include an
+`accessMethod` field identifying the underlying index type (`gin`, `gist`,
+`spgist`, `brin`, `hash`). Schemas generated from these reflections will emit
+the appropriate `USING` clause when recreating the index.
+
+```php
+$schema->addIndex('articles_tags_idx', [
+    'columns' => ['tags'],
+    'type' => 'index',
+    'accessMethod' => 'gin',
+]);
+```
+
+The `Cake\Database\Schema\Index` class exposes constants for the supported
+access methods: `Index::GIN`, `Index::GIST`, `Index::SPGIST`, `Index::BRIN`,
+and `Index::HASH`. Btree indexes (the default) omit the `accessMethod` field.
+
 ### Adding Table Options
 
 Some drivers (primarily MySQL) support and require additional table metadata. In

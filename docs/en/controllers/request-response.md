@@ -448,8 +448,7 @@ There are several built-in detectors that you can use:
 - `is('options')` Check to see whether the current request is OPTIONS.
 - `is('ajax')` Check to see whether the current request came with
   X-Requested-With = XMLHttpRequest.
-- `is('ssl')` Check to see whether the request is via SSL.
-- `is('flash')` Check to see whether the request has a User-Agent of Flash.
+- `is('https')` Check to see whether the request is via HTTPS.
 - `is('json')` Check to see whether the request URL has 'json' extension or the
   `Accept` header is set to 'application/json'.
 - `is('xml')` Check to see whether the request URL has 'xml' extension or the `Accept` header is set to
@@ -790,6 +789,143 @@ public function sendIcs()
 }
 ```
 
+<a id="streaming-json-responses"></a>
+
+### Streaming JSON Responses
+
+`class` Cake\\Http\\Response\\**JsonStreamResponse**
+
+When working with large datasets, loading everything into memory before encoding
+to JSON can exhaust available memory. `JsonStreamResponse` provides memory-efficient
+streaming of JSON data using generators, keeping only one item in memory at a time.
+
+::: info Added in version 5.4.0
+:::
+
+#### Basic Usage
+
+```php
+use Cake\Http\Response\JsonStreamResponse;
+
+public function index()
+{
+    $query = $this->Articles->find();
+
+    // Simple array streaming
+    return new JsonStreamResponse($query);
+    // Output: [{"id":1,"title":"First"},{"id":2,"title":"Second"},...]
+}
+```
+
+#### Constructor Options
+
+The `JsonStreamResponse` constructor accepts an iterable and an options array:
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `root` | `string\|null` | `null` | Wrap data in `{"root": [...]}` |
+| `envelope` | `array` | `[]` | Static metadata merged with streaming data |
+| `dataKey` | `string` | `'data'` | Key for streaming data when envelope is used |
+| `format` | `string` | `'json'` | Output format: `'json'` or `'ndjson'` |
+| `transform` | `callable\|null` | `null` | Transform each item before encoding |
+| `flags` | `int` | `DEFAULT_JSON_FLAGS` | JSON encode flags |
+
+#### With Root Wrapper
+
+Wrap the array in an object with a named key:
+
+```php
+return new JsonStreamResponse($query, ['root' => 'articles']);
+// Output: {"articles":[{"id":1,"title":"First"},{"id":2,"title":"Second"}]}
+```
+
+#### With Envelope (Metadata)
+
+Include static metadata alongside the streaming data:
+
+```php
+$total = $this->Articles->find()->count();
+
+return new JsonStreamResponse($query, [
+    'envelope' => ['meta' => ['total' => $total, 'page' => 1]],
+    'dataKey' => 'articles',
+]);
+// Output: {"meta":{"total":100,"page":1},"articles":[{"id":1,"title":"First"},...]}
+```
+
+#### NDJSON Format
+
+[NDJSON](http://ndjson.org/) (Newline Delimited JSON) outputs one JSON object per
+line, useful for streaming to clients that process data incrementally:
+
+```php
+return new JsonStreamResponse($query, ['format' => 'ndjson']);
+// Output:
+// {"id":1,"title":"First"}
+// {"id":2,"title":"Second"}
+```
+
+The content type is automatically set to `application/x-ndjson; charset=UTF-8`.
+
+#### Transform Callback
+
+Transform each item before JSON encoding. Useful for selecting specific fields
+or formatting data:
+
+```php
+return new JsonStreamResponse($query, [
+    'transform' => fn($article) => [
+        'id' => $article->id,
+        'title' => $article->title,
+        'url' => Router::url(['action' => 'view', $article->id]),
+    ],
+]);
+```
+
+#### Immutability
+
+`JsonStreamResponse` follows PSR-7 immutability patterns. Use `withStreamOptions()`
+to create a modified copy:
+
+```php
+$response = new JsonStreamResponse($query);
+$newResponse = $response->withStreamOptions(['root' => 'articles']);
+```
+
+#### Error Handling
+
+`JsonStreamResponse` uses a three-layer error handling strategy:
+
+1. **Pre-validation**: The first item is encoded before output starts. If encoding
+   fails, an exception is thrown and a proper error response can be returned.
+
+2. **Mid-stream error marker**: If item N (where N > 1) fails to encode, an error
+   marker is output to maintain valid JSON structure:
+
+   ```json
+   [{"id":1},{"__streamError":{"message":"Type is not supported","index":1}}]
+   ```
+
+3. **Server-side logging**: All encoding failures are logged via `Log::error()`.
+
+#### ORM Integration
+
+For true memory-efficient streaming, use unbuffered queries and avoid result
+formatters:
+
+```php
+// Good - streams one row at a time
+$query = $this->Articles->find()->bufferResults(false);
+return new JsonStreamResponse($query);
+
+// Avoid - formatters like map(), combine() buffer results internally
+$query = $this->Articles->find()->map(fn($row) => $row); // Breaks streaming
+```
+
+> [!NOTE]
+> Result formatters (`map()`, `combine()`, etc.) buffer results internally,
+> which defeats the memory-efficient streaming purpose.
+
 ### Setting Headers
 
 `method` Cake\\Http\\Response::**withHeader**(string $name, string|array $value): static
@@ -886,6 +1022,31 @@ $response = $response->withStringBody('My Body');
 $response = $response->withType('application/json')
     ->withStringBody(json_encode(['Foo' => 'bar']));
 ```
+
+::: warning
+Setting a string body alone is not enough to send it. If your action neither
+returns the response nor disables view rendering, the controller still calls
+`render()` and overwrites the body you set. To make the string body take effect,
+either return the response from the action:
+
+```php
+public function export()
+{
+    return $this->response->withStringBody('My Body');
+}
+```
+
+or set it and disable auto-render:
+
+```php
+public function export()
+{
+    $this->setResponse($this->response->withStringBody('My Body'));
+    $this->disableAutoRender();
+}
+```
+
+:::
 
 `method` Cake\\Http\\Response::**withBody**(StreamInterface $body): static
 

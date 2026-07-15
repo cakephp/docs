@@ -425,6 +425,65 @@ msgstr[2] "{0} datoteka je uklonjeno"
 Please visit the [Launchpad languages page](https://translations.launchpad.net/+languages)
 for a detailed explanation of the plural form numbers for each language.
 
+#### Customizing Plural Rules
+
+::: info Added in version 5.4.0
+`PluralRules::setRule()` and `PluralRules::resetRules()` were added in 5.4.0.
+:::
+
+When `__n()` / `__dn()` and the other Gettext-style plural functions resolve a
+message, CakePHP picks the plural form via `Cake\I18n\PluralRules::calculate()`.
+The built-in rules cover most CLDR locales, but they can lag behind upstream
+CLDR releases and they do not cover every minority language. If you hit a
+locale whose plural form is missing or wrong, you can register a custom rule
+without patching CakePHP:
+
+```php
+use Cake\I18n\PluralRules;
+
+// Breton: 5 plural forms (CLDR)
+PluralRules::setRule('br', function (int $n): int {
+    if ($n % 10 === 1 && $n % 100 !== 11 && $n % 100 !== 71 && $n % 100 !== 91) {
+        return 0;
+    }
+    if ($n % 10 === 2 && $n % 100 !== 12 && $n % 100 !== 72 && $n % 100 !== 92) {
+        return 1;
+    }
+    if (in_array($n % 10, [3, 4, 9], true)
+        && !in_array($n % 100, [13, 14, 19, 73, 74, 79, 93, 94, 99], true)
+    ) {
+        return 2;
+    }
+    if ($n !== 0 && $n % 1_000_000 === 0) {
+        return 3;
+    }
+
+    return 4;
+});
+```
+
+The closure receives the integer count and must return the zero-based plural
+form index that matches the `msgstr[N]` entries in your **.po** / **.mo**
+files. Custom rules take precedence over the built-in map, so they can also
+be used to override a built-in rule that does not match the form layout used
+by your translation files.
+
+Register rules in **config/bootstrap.php** so they are available before any
+translation is requested. The locale string is normalized via
+`Locale::canonicalize()` and an invalid locale throws an
+`InvalidArgumentException`. To drop all registered custom rules (typically
+between tests), call:
+
+```php
+PluralRules::resetRules();
+```
+
+> [!NOTE]
+> `PluralRules` is only consulted for Gettext-style messages
+> (`__n()`, `__dn()`, `msgstr[0]` / `msgstr[1]` / …). The ICU plural selector
+> shown above resolves its own forms via `MessageFormatter` and is unaffected
+> by `setRule()`.
+
 ## Creating Your Own Translators
 
 If you need to diverge from CakePHP conventions regarding where and how
@@ -561,6 +620,94 @@ I18n::config('_fallback', function ($domain, $locale) {
     // Custom code that yields a package here.
 });
 ```
+
+### Isolating Translations Per Tenant
+
+::: info Added in version 5.4.0
+The cache key prefix and configurable cache config APIs were added in 5.4.0.
+:::
+
+If your application needs to serve tenant specific translated content for a given domain & locale, you need to use a cache key prefix to scope both translator cache data to the tenant.
+
+#### Cache Key Prefix
+
+`TranslatorRegistry::setCacheKeyPrefix()` adds a segment to both the persistent
+cache key and the in-memory lookup bucket. It accepts either a static string or
+a `Closure` that returns one. When given a `Closure`, it is evaluated on every
+`get()` call, so the current tenant identifier is pulled *from* user-land
+instead of being *pushed into* the registry:
+
+```php
+use Cake\I18n\I18n;
+
+I18n::translators()->setCacheKeyPrefix(
+    fn (): string => TenantContext::current()?->id ?? ''
+);
+```
+
+With a non-empty prefix the cache key becomes
+`translations.{prefix}.{domain}.{locale}`. An empty resolved value disables
+prefixing and keeps the legacy key format, so the API is fully backwards
+compatible for non-multi-tenant applications.
+
+The `Closure` receives the requested package name and resolved locale
+(`function (string $name, string $locale): string`), which lets you skip
+prefixing for shared packages or vary the prefix per locale:
+
+```php
+I18n::translators()->setCacheKeyPrefix(
+    function (string $name, string $locale): string {
+        // Shared packages (e.g. validation messages) stay un-prefixed.
+        if ($name === 'cake' || str_starts_with($name, 'shared/')) {
+            return '';
+        }
+
+        return TenantContext::current()?->id ?? '';
+    }
+);
+```
+
+Prefix values must match `[A-Za-z0-9._-]+` to stay safe across every built-in
+cache engine.
+
+> [!NOTE]
+> `setCacheKeyPrefix()` is unrelated to the gettext message context used by
+> [`__x()`](#using-translation-functions). The "context" in `__x()` disambiguates
+> two messages with the same source text; the cache key prefix isolates the
+> *cache* of resolved messages.
+
+#### Resetting the In-Memory Registry
+
+Long-running workers (e.g. queue runners) that switch tenants between jobs
+should drop the in-memory translator map between batches to bound memory
+growth and ensure freshly-resolved tenants don't read another tenant's
+in-memory translator. The persistent cacher and configured prefix/cacher
+are left untouched:
+
+```php
+foreach ($jobsByTenant as $tenantId => $jobs) {
+    TenantContext::set($tenantId);
+    // ... process jobs ...
+    I18n::translators()->clear();
+}
+```
+
+#### Choosing a Different Cache Config
+
+By default, translators are persisted to the `_cake_translations_` Cache
+config. If you want a separate config — for example, to give translations
+their own TTL or storage engine — call `I18n::setCacheConfig()` before any
+translator is resolved:
+
+```php
+// in config/bootstrap.php, before any __() / I18n call
+I18n::setCacheConfig('_my_translations_');
+```
+
+`setCacheConfig()` throws a `RuntimeException` if it is called after the
+translators registry has been built, to surface ordering bugs loudly instead
+of silently ignoring the setting. To swap the cacher *after* translators
+have been built, use `I18n::translators()->setCacher()` directly.
 
 ### Plurals and Context in Custom Translators
 

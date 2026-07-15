@@ -115,6 +115,10 @@ appropriate parts of your application. The hooks are:
   collection.
 - `services` Used to register application container services. This is a good
   opportunity to setup additional objects that need access to the container.
+- `eventListeners` Used to register global event listener classes with the
+  application's event manager.
+- `events` Used to register global events that require custom registration
+  logic.
 
 By default, all plugins hooks are enabled. You can disable hooks by using the
 related options of the `plugin load` command:
@@ -311,6 +315,7 @@ use Cake\Core\BasePlugin;
 use Cake\Core\ContainerInterface;
 use Cake\Core\PluginApplicationInterface;
 use Cake\Console\CommandCollection;
+use Cake\Event\EventManagerInterface;
 use Cake\Http\MiddlewareQueue;
 use Cake\Routing\RouteBuilder;
 
@@ -368,6 +373,26 @@ class ContactManagerPlugin extends BasePlugin
     public function services(ContainerInterface $container): void
     {
         // Add your services here
+    }
+
+    /**
+     * @return list<class-string<\Cake\Event\EventListenerInterface>>
+     */
+    public function eventListeners(): array
+    {
+        return [
+            // Add your event listeners here.
+        ];
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function events(EventManagerInterface $eventManager): EventManagerInterface
+    {
+        // Add custom event registration logic here.
+
+        return $eventManager;
     }
 }
 ```

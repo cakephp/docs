@@ -244,6 +244,8 @@ $this->extend('/Common/index');
 $list = $this->blocks();
 ```
 
+<a id="view-blocks"></a>
+
 ## ビューブロックの使用
 
 ビューブロックはビュー/レイアウトの中のどこかで定義されるであろう、スロットやブロックを
