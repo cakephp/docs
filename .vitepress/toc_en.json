@@ -56,6 +56,24 @@
               ]
             }
           ]
+        },
+        {
+          "text": "Migration Guides",
+          "collapsed": true,
+          "items": [
+            {
+              "text": "Upgrading CakePHP",
+              "link": "/appendices/migration-guides"
+            },
+            {
+              "text": "6.0 Upgrade Guide",
+              "link": "/appendices/6-0-upgrade-guide"
+            },
+            {
+              "text": "6.0 Migration Guide",
+              "link": "/appendices/6-0-migration-guide"
+            }
+          ]
         }
       ]
     },
@@ -399,23 +417,10 @@
           "items": [
             { "text": "Appendices", "link": "/appendices" },
             {
-              "text": "Migration Guides",
-              "link": "/appendices/migration-guides"
-            },
-            {
-              "text": "6.0 Migration Guide",
-              "link": "/appendices/6-0-migration-guide"
-            },
-            {
-              "text": "6.0 Upgrade Guide",
-              "link": "/appendices/6-0-upgrade-guide"
-            },
-            {
               "text": "CakePHP Development Process",
               "link": "/appendices/cakephp-development-process"
             },
-            { "text": "Glossary", "link": "/appendices/glossary" },
-            { "text": "PHPUnit Upgrade", "link": "/appendices/phpunit-upgrade" }
+            { "text": "Glossary", "link": "/appendices/glossary" }
           ]
         }
       ]
