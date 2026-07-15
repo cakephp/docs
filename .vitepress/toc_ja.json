@@ -463,12 +463,12 @@
               "link": "/ja/appendices/migration-guides"
             },
             {
-              "text": "5.0 移行ガイド",
-              "link": "/ja/appendices/5-0-migration-guide"
-            },
-            {
               "text": "5.0 アップグレードガイド",
               "link": "/ja/appendices/5-0-upgrade-guide"
+            },
+            {
+              "text": "5.0 移行ガイド",
+              "link": "/ja/appendices/5-0-migration-guide"
             },
             {
               "text": "5.1 移行ガイド",
