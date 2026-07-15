@@ -118,7 +118,7 @@ happens. This special array can contain a number of different
 key-value pairs that affect the way the form tag is generated.
 Valid values:
 
-- `'type'` - Allows you to choose the type of form to create. If no type is
+- `type` - Allows you to choose the type of form to create. If no type is
   provided then it will be autodetected based on the form context.
   Valid values:
   - `'get'` - Will set the form method to HTTP GET.
@@ -127,21 +127,21 @@ Valid values:
   - `'post'` - Will set the method to POST.
   - `'put', 'delete', 'patch'` - Will override the HTTP method with PUT,
     DELETE or PATCH respectively, when the form is submitted.
-- `'method'` - Valid values are the same as above. Allows you to explicitly
+- `method` - Valid values are the same as above. Allows you to explicitly
   override the form's method.
-- `'url'` - Specify the URL the form will submit to. Can be a string or a URL
+- `url` - Specify the URL the form will submit to. Can be a string or a URL
   array.
-- `'encoding'` - Sets the `accept-charset` encoding for the form. Defaults
+- `encoding` - Sets the `accept-charset` encoding for the form. Defaults
   to `Configure::read('App.encoding')`.
-- `'enctype'` - Allows you to set the form encoding explicitly.
-- `'templates'` - The templates you want to use for this form. Any templates
+- `enctype` - Allows you to set the form encoding explicitly.
+- `templates` - The templates you want to use for this form. Any templates
   provided will be merged on top of the already loaded templates. Can be either
   a filename (without extension) from `/config` or an array of templates to use.
-- `'context'` - Additional options for the form context class. (For example
+- `context` - Additional options for the form context class. (For example
   the `EntityContext` accepts a `'table'` option that allows you to set the
   specific Table class the form should be based on.)
-- `'idPrefix'` - Prefix for generated ID attributes.
-- `'templateVars'` - Allows you to provide template variables for the
+- `idPrefix` - Prefix for generated ID attributes.
+- `templateVars` - Allows you to provide template variables for the
   `formStart` template.
 - `autoSetCustomValidity` - Set to `true` to use custom required and notBlank
   validation messages in the control's HTML5 validity message. Default is `true`.
@@ -743,10 +743,10 @@ by the `control()` method.
 To reduce repetition, the common options shared by all control methods are
 as follows:
 
-- `'id'` - Set this key to force the value of the DOM id for the control.
+- `id` - Set this key to force the value of the DOM id for the control.
   This will override the `'idPrefix'` that may be set.
 
-- `'default'` - Used to set a default value for the control field. The
+- `default` - Used to set a default value for the control field. The
   value is used if the data passed to the form does not contain a value for the
   field (or if no data is passed at all). If no default value is provided, the
   column's default value will be used.
@@ -774,7 +774,7 @@ as follows:
   > used to disable/exclude options of a control field, so `'default' => false`
   > would not set any value at all. Instead use `'default' => 0`.
 
-- `'value'` - Used to set a specific value for the control field. This
+- `value` - Used to set a specific value for the control field. This
   will override any value that may else be injected from the context, such as
   Form, Entity or `request->getData()` etc.
 
@@ -906,7 +906,7 @@ Example:
 In addition to the [General Control Options](#general-control-options), `textarea()` supports a
 couple of specific options:
 
-- `'escape'` - Determines whether or not the contents of the textarea should
+- `escape` - Determines whether or not the contents of the textarea should
   be escaped. Defaults to `true`.
 
   For example:
@@ -917,7 +917,7 @@ couple of specific options:
   echo $this->Form->control('notes', ['type' => 'textarea', 'escape' => false]);
   ```
 
-- `'rows', 'cols'` - You can use these two keys to set the HTML attributes
+- `rows, cols` - You can use these two keys to set the HTML attributes
   which specify the number of rows and columns for the `textarea` field.
 
   For example:
@@ -946,7 +946,7 @@ You can find below the options which are shared by `select()`,
 `checkbox()` and `radio()` (the options particular only to one of the
 methods are described in each method's own section.)
 
-- `'value'` - Sets or selects the value of the affected element(s):
+- `value` - Sets or selects the value of the affected element(s):
 
   - For checkboxes, it sets the HTML `'value'` attribute assigned
     to the `input` element to whatever you provide as value.
@@ -983,7 +983,7 @@ methods are described in each method's own section.)
   );
   ```
 
-- `'empty'` - Applies to `radio()` and `select()`. Defaults to `false`.
+- `empty` - Applies to `radio()` and `select()`. Defaults to `false`.
 
   - When passed to `radio()` and set to `true` it will create an extra
     input element as the first radio button, with a value of `''` and a
@@ -1016,7 +1016,7 @@ methods are described in each method's own section.)
     </select>
     ```
 
-- `'hiddenField'` - For checkboxes and radio buttons, by default,
+- `hiddenField` - For checkboxes and radio buttons, by default,
   a hidden `input` element is also created, along with the main
   element, so that the key in `$this->request->getData()`
   will exist even without a value specified. For checkboxes its value
@@ -1137,9 +1137,9 @@ Creates a `checkbox` form element. The widget template used is:
 
 **Options for Checkboxes**
 
-- `'checked'` - Boolean to indicate whether this checkbox will be checked.
+- `checked` - Boolean to indicate whether this checkbox will be checked.
   Defaults to `false`.
-- `'disabled'` - Create a disabled checkbox input.
+- `disabled` - Create a disabled checkbox input.
 
 This method also generates an associated hidden
 form `input` element to force the submission of data for
@@ -1215,14 +1215,14 @@ Creates a set of radio button inputs. The default widget templates used are:
 
 **Attributes for Radio Buttons**
 
-- `'label'` - Boolean to indicate whether or not labels for widgets should be
+- `label` - Boolean to indicate whether or not labels for widgets should be
   displayed, or an array of attributes to apply to all labels. In case a `class`
   attribute is defined, `selected` will be added to the `class` attribute of
   checked buttons. Defaults to `true`.
-- `'hiddenField'` - If set to `true` a hidden input with a value of `''`
+- `hiddenField` - If set to `true` a hidden input with a value of `''`
   will be included. This is useful for creating radio sets that are
   non-continuous. Defaults to `true`.
-- `'disabled'` - Set to `true` or `'disabled'` to disable all the radio
+- `disabled` - Set to `true` or `'disabled'` to disable all the radio
   buttons. Defaults to `false`.
 
 You must provide the label captions for the radio buttons via the `$options`
@@ -1353,13 +1353,13 @@ May also use:
 
 **Attributes for Select Pickers**
 
-- `'multiple'` - If set to `true` allows multiple selections in the select
+- `multiple` - If set to `true` allows multiple selections in the select
   picker. If set to `'checkbox'`, multiple checkboxes will be created instead.
   Defaults to `null`.
-- `'escape'` - Boolean. If `true` the contents of the `option` elements
+- `escape` - Boolean. If `true` the contents of the `option` elements
   inside the select picker will be HTML entity encoded. Defaults to `true`.
-- `'val'` - Allows preselecting a value in the select picker.
-- `'disabled'` - Controls the `disabled` attribute. If set to `true`
+- `val` - Allows preselecting a value in the select picker.
+- `disabled` - Controls the `disabled` attribute. If set to `true`
   disables the whole select picker. If set to an array it will disable
   only those specific `option` elements whose values are provided in
   the array.
@@ -1485,7 +1485,7 @@ apply.
 By using specific options in the `$attributes` parameter you can control
 certain behaviors of the `select()` method.
 
-- `'empty'` - Set the `'empty'` key in the `$attributes` argument
+- `empty` - Set the `'empty'` key in the `$attributes` argument
   to `true` (the default value is `false`) to add a blank option with an
   empty value at the top of your dropdown list.
 
@@ -1506,7 +1506,7 @@ certain behaviors of the `select()` method.
   </select>
   ```
 
-- `'escape'` - The `select()` method allows for an attribute
+- `escape` - The `select()` method allows for an attribute
   called `'escape'` which accepts a boolean value and determines
   whether to HTML entity encode the contents of the `select`'s `option`
   elements.
@@ -1519,7 +1519,7 @@ certain behaviors of the `select()` method.
   echo $this->Form->select('gender', $options, ['escape' => false]);
   ```
 
-- `'multiple'` - If set to `true`, the select picker will allow
+- `multiple` - If set to `true`, the select picker will allow
   multiple selections.
 
   For example:
@@ -1559,7 +1559,7 @@ certain behaviors of the `select()` method.
   </div>
   ```
 
-- `'disabled'` - This option can be set in order to disable all or some
+- `disabled` - This option can be set in order to disable all or some
   of the `select`'s `option` items. To disable all items set `'disabled'`
   to `true`. To disable only certain items, assign to `'disabled'`
   an array containing the keys of the items to be disabled.
@@ -2035,9 +2035,9 @@ By default, it will use the following widget templates:
 
 **Options for Submit**
 
-- `'type'` - Set this option to `'reset'` in order to generate reset buttons.
+- `type` - Set this option to `'reset'` in order to generate reset buttons.
   It defaults to `'submit'`.
-- `'templateVars'` - Set this array to provide additional template variables
+- `templateVars` - Set this array to provide additional template variables
   for the input element and its container.
 - Any other provided attributes will be assigned to the `input` element.
 
@@ -2083,18 +2083,18 @@ of `'button'`.
 
 **Options for Button**
 
-- `'type'` - You can set this to one of the following three
+- `type` - You can set this to one of the following three
   possible values:
   1. `'submit'` - Similarly to the `$this->Form->submit()` method it will
       create a submit button. However this won't generate a wrapping `div`
       as `submit()` does. This is the default type.
   2. `'reset'` - Creates a form reset button.
   3. `'button'` - Creates a standard push button.
-- `'escapeTitle'` - Boolean. If set to `true` it will HTML encode
+- `escapeTitle` - Boolean. If set to `true` it will HTML encode
   the value provided inside `$title`. Defaults to `true`.
-- `'escape'` - Boolean. If set to `true` it will HTML encode
+- `escape` - Boolean. If set to `true` it will HTML encode
   all the HTML attributes generated for the button. Defaults to `true`.
-- `'confirm'` - The confirmation message to display on click. Defaults to
+- `confirm` - The confirmation message to display on click. Defaults to
   `null`.
 
 For example:
@@ -2198,10 +2198,10 @@ FormProtectionComponent.
 
 **Options for POST Button**
 
-- `'data'` - Array with key/value to pass in hidden input.
-- `'method'` - Request method to use. E.g. set to `'delete'` to
+- `data` - Array with key/value to pass in hidden input.
+- `method` - Request method to use. E.g. set to `'delete'` to
   simulate a HTTP/1.1 DELETE request. Defaults to `'post'`.
-- `'form'` - Array with any option that `FormHelper::create()` can take.
+- `form` - Array with any option that `FormHelper::create()` can take.
 - Also, the `postButton()` method will accept the options which are valid for
   the `button()` method.
 
@@ -2260,12 +2260,12 @@ Creates an HTML link, but accesses the URL using the method you specify
 
 **Options for POST Link**
 
-- `'data'` - Array with key/value to pass in hidden input.
-- `'method'` - Request method to use. For example, setting it to `'delete'`
+- `data` - Array with key/value to pass in hidden input.
+- `method` - Request method to use. For example, setting it to `'delete'`
   will simulate a HTTP/1.1 DELETE request. Defaults to `'post'`.
-- `'confirm'` - The confirmation message to display on click. Defaults to
+- `confirm` - The confirmation message to display on click. Defaults to
   `null`.
-- `'block'` - Set this option to `true` to append the form to view block
+- `block` - Set this option to `true` to append the form to view block
   `'postLink'` or provide a custom block name. Defaults to `null`.
 - Also, the `postLink` method will accept the options which are valid for
   the `link()` method.

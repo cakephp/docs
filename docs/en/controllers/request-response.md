@@ -1023,6 +1023,31 @@ $response = $response->withType('application/json')
     ->withStringBody(json_encode(['Foo' => 'bar']));
 ```
 
+::: warning
+Setting a string body alone is not enough to send it. If your action neither
+returns the response nor disables view rendering, the controller still calls
+`render()` and overwrites the body you set. To make the string body take effect,
+either return the response from the action:
+
+```php
+public function export()
+{
+    return $this->response->withStringBody('My Body');
+}
+```
+
+or set it and disable auto-render:
+
+```php
+public function export()
+{
+    $this->setResponse($this->response->withStringBody('My Body'));
+    $this->disableAutoRender();
+}
+```
+
+:::
+
 `method` Cake\\Http\\Response::**withBody**(StreamInterface $body): static
 
 To set the response body, use the `withBody()` method, which is provided by the

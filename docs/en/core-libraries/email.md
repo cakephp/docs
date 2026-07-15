@@ -103,39 +103,39 @@ Defining delivery profiles allows you to consolidate common email settings into
 re-usable profiles. Your application can have as many profiles as necessary. The
 following configuration keys are used:
 
-- `'from'`: Mailer or array of sender. See `Mailer::setFrom()`.
-- `'sender'`: Mailer or array of real sender. See `Mailer::setSender()`.
-- `'to'`: Mailer or array of destination. See `Mailer::setTo()`.
-- `'cc'`: Mailer or array of carbon copy. See `Mailer::setCc()`.
-- `'bcc'`: Mailer or array of blind carbon copy. See `Mailer::setBcc()`.
-- `'replyTo'`: Mailer or array to reply the e-mail. See `Mailer::setReplyTo()`.
-- `'readReceipt'`: Mailer address or an array of addresses to receive the
+- `from`: Mailer or array of sender. See `Mailer::setFrom()`.
+- `sender`: Mailer or array of real sender. See `Mailer::setSender()`.
+- `to`: Mailer or array of destination. See `Mailer::setTo()`.
+- `cc`: Mailer or array of carbon copy. See `Mailer::setCc()`.
+- `bcc`: Mailer or array of blind carbon copy. See `Mailer::setBcc()`.
+- `replyTo`: Mailer or array to reply the e-mail. See `Mailer::setReplyTo()`.
+- `readReceipt`: Mailer address or an array of addresses to receive the
   receipt of read. See `Mailer::setReadReceipt()`.
-- `'returnPath'`: Mailer address or an array of addresses to return if have
+- `returnPath`: Mailer address or an array of addresses to return if have
   some error. See `Mailer::setReturnPath()`.
-- `'messageId'`: Message ID of e-mail. See `Mailer::setMessageId()`.
-- `'subject'`: Subject of the message. See `Mailer::setSubject()`.
-- `'message'`: Content of message. Do not set this field if you are using rendered content.
-- `'priority'`: Priority of the email as numeric value (usually from 1 to 5 with 1 being the highest).
-- `'headers'`: Headers to be included. See `Mailer::setHeaders()`.
-- `'viewRenderer'`: If you are using rendered content, set the view classname.
+- `messageId`: Message ID of e-mail. See `Mailer::setMessageId()`.
+- `subject`: Subject of the message. See `Mailer::setSubject()`.
+- `message`: Content of message. Do not set this field if you are using rendered content.
+- `priority`: Priority of the email as numeric value (usually from 1 to 5 with 1 being the highest).
+- `headers`: Headers to be included. See `Mailer::setHeaders()`.
+- `viewRenderer`: If you are using rendered content, set the view classname.
   See `ViewBuilder::setClassName()`.
-- `'template'`: If you are using rendered content, set the template name. See
+- `template`: If you are using rendered content, set the template name. See
   `ViewBuilder::setTemplate()`.
-- `'theme'`: Theme used when rendering template. See `ViewBuilder::setTheme()`.
-- `'layout'`: If you are using rendered content, set the layout to render. See
+- `theme`: Theme used when rendering template. See `ViewBuilder::setTheme()`.
+- `layout`: If you are using rendered content, set the layout to render. See
   `ViewBuilder::setTemplate()`.
-- `'autoLayout'`: If you want to render a template without layout, set this field to
+- `autoLayout`: If you want to render a template without layout, set this field to
   `false`. See `ViewBuilder::disableAutoLayout()`.
-- `'viewVars'`: If you are using rendered content, set the array with
+- `viewVars`: If you are using rendered content, set the array with
   variables to be used in the view. See `Mailer::setViewVars()`.
-- `'attachments'`: List of files to attach. See `Mailer::setAttachments()`.
-- `'emailFormat'`: Format of email (html, text or both). See `Mailer::setEmailFormat()`.
-- `'transport'`: Transport configuration name. See [Email Transport](#email-transport).
-- `'log'`: Log level to log the email headers and message. `true` will use
+- `attachments`: List of files to attach. See `Mailer::setAttachments()`.
+- `emailFormat`: Format of email (html, text or both). See `Mailer::setEmailFormat()`.
+- `transport`: Transport configuration name. See [Email Transport](#email-transport).
+- `log`: Log level to log the email headers and message. `true` will use
   LOG_DEBUG. See [Logging Levels](../core-libraries/logging#logging-levels). Note that logs will be emitted under the scope named `email`.
   See also [Logging Scopes](../core-libraries/logging#logging-scopes).
-- `'helpers'`: Array of helpers used in the email template.
+- `helpers`: Array of helpers used in the email template.
   `ViewBuilder::setHelpers()`/`ViewBuilder::addHelpers()`.
 
 > [!NOTE]

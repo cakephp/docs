@@ -66,12 +66,12 @@
               "link": "/appendices/migration-guides"
             },
             {
-              "text": "5.0 Migration Guide",
-              "link": "/appendices/5-0-migration-guide"
-            },
-            {
               "text": "5.0 Upgrade Guide",
               "link": "/appendices/5-0-upgrade-guide"
+            },
+            {
+              "text": "5.0 Migration Guide",
+              "link": "/appendices/5-0-migration-guide"
             },
             {
               "text": "5.1 Migration Guide",
