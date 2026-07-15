@@ -179,15 +179,45 @@ you can pass query objects to your controllers, we recommend that you package
 your queries up as [Custom Find Methods](#custom-find-methods) instead. Using custom finder
 methods will let you re-use your queries and make testing easier.
 
-By default, queries and result sets will return [Entities](../orm/entities) objects. You
-can retrieve basic arrays by disabling hydration:
+<a id="getting-arrays-instead-of-entities"></a>
+
+### Getting Arrays Instead of Entities
+
+By default, queries and result sets return [Entities](../orm/entities) objects.
+When you only need plain arrays, use `unhydratedFind()` instead of `find()`:
 
 ```php
-$query->disableHydration();
+$query = $articles->unhydratedFind();
 
-// $data is ResultSet that contains array data.
+// $data is a ResultSet that contains array data.
 $data = $query->all();
+
+// Terminal methods are typed as arrays too.
+$row = $articles->unhydratedFind()->where(['id' => 1])->first(); // array<string, mixed>|null
 ```
+
+`unhydratedFind()` accepts the same finder type and arguments as `find()`, so
+your existing [custom finders](#custom-find-methods) are reused unchanged:
+
+```php
+$rows = $articles->unhydratedFind('published')->all();
+```
+
+It returns a `Cake\ORM\Query\UnhydratedSelectQuery`. This behaves exactly like
+`find()->disableHydration()` at runtime, but its static type matches the array
+result shape, so static analyzers no longer see `entity|array` on `first()`,
+`firstOrFail()`, `all()`, `toArray()` and iteration — including after the query
+flows through a custom finder.
+
+> [!NOTE]
+> `unhydratedFind()` only changes the result shape for row-returning finders.
+> `findList()` and `findThreaded()` produce a key/value map or nested tree
+> regardless of hydration, so there is nothing to type differently for them.
+
+> [!WARNING]
+> `SelectQuery::disableHydration()` is deprecated as of 5.4.0 and will be
+> removed in 6.0. The fluent toggle returns a query whose static type still
+> claims to produce entities; prefer `unhydratedFind()` instead.
 
 <a id="table-find-first"></a>
 
@@ -1071,15 +1101,15 @@ section show how you can add calculated fields, or replace the result set.
 >     ->all();
 > ```
 >
-> Depending on your use case, you may also consider using disabling hydration:
+> Depending on your use case, you may also consider skipping hydration:
 >
 > ``` bash
-> $results = $articles->find()
->     ->disableHydration()
+> $results = $articles->unhydratedFind()
 >     ->all();
 > ```
 >
-> The above will disable creation of entity objects and return rows as arrays instead.
+> The above will skip creation of entity objects and return rows as arrays instead.
+> See [Getting Arrays Instead of Entities](#getting-arrays-instead-of-entities).
 
 ### Getting the First & Last Record From a ResultSet
 
@@ -1244,10 +1274,9 @@ $reducer = function ($occurrences, $word, $mapReduce) {
 Finally, we put everything together:
 
 ```php
-$wordCount = $articles->find()
+$wordCount = $articles->unhydratedFind()
     ->where(['published' => true])
     ->andWhere(['published_date >=' => new DateTime('2014-01-01')])
-    ->disableHydration()
     ->mapReduce($mapper, $reducer)
     ->all()
     ->toArray();
@@ -1317,8 +1346,7 @@ $reducer = function ($friends, $user, $mr) {
 And we supply our functions to a query:
 
 ```php
-$fakeFriends = $friends->find()
-    ->disableHydration()
+$fakeFriends = $friends->unhydratedFind()
     ->mapReduce($mapper, $reducer)
     ->all()
     ->toArray();

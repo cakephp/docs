@@ -32,6 +32,7 @@
 - [Error & Exception Handling](development/errors)
 - [Events System](core-libraries/events)
 - [Internationalization & Localization](core-libraries/internationalization-and-localization)
+- [Locking](core-libraries/locking)
 - [Logging](core-libraries/logging)
 - [Modelless Forms](core-libraries/form)
 - [Pagination](controllers/pagination)

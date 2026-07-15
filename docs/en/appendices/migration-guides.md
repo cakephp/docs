@@ -1,5 +1,5 @@
 ---
-title: "Migration Guides"
+title: "Upgrading CakePHP"
 description: "Upgrade CakePHP versions: follow migration guides for each release, understand breaking changes, and smoothly transition between versions."
 ---
 
@@ -31,5 +31,5 @@ bin/cake upgrade rector --rules cakephp60 <path/to/app/src>
 Run rector before updating your `composer.json` dependencies
 to ensure the tool can resolve class names correctly.
 
-- [6 0 Upgrade Guide](6-0-upgrade-guide)
-- [6 0 Migration Guide](6-0-migration-guide)
+- [6.0 Upgrade Guide](6-0-upgrade-guide)
+- [6.0 Migration Guide](6-0-migration-guide)

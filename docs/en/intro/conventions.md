@@ -53,8 +53,10 @@ The `src/` folder is where you'll do most development. Here's what goes in each 
 | **Command** | Console commands | `*Command.php` - See [Command Objects](../console-commands/commands) |
 | **Console** | Installation scripts | Executed by Composer |
 | **Controller** | HTTP request handlers | [Controllers](../controllers), [Components](../controllers/components) |
+| **Form** | Non-ORM form objects | `*Form.php` - See [Form](../core-libraries/form) |
+| **Mailer** | Email sending classes | `*Mailer.php` - See [Email](../core-libraries/email) |
 | **Middleware** | Request/response filters | `*Middleware.php` - See [Middleware](../controllers/middleware) |
-| **Model** | Data layer | [Tables](../orm/table-objects), [Entities](../orm/entities), [Behaviors](../orm/behaviors) |
+| **Model** | Data layer | [Tables](../orm/table-objects), [Entities](../orm/entities), [Behaviors](../orm/behaviors), [Enums](../orm/database-basics#enum-type) |
 | **View** | Presentation logic | [Views](../views), [Cells](../views/cells), [Helpers](../views/helpers) |
 
 > [!NOTE]
@@ -146,6 +148,18 @@ class User extends Entity
 }
 ```
 
+```php [✅ Enum Class]
+// File: src/Model/Enum/ArticleStatus.php
+namespace App\Model\Enum;
+
+enum ArticleStatus: string
+{
+    case Draft = 'draft';
+    case Published = 'published';
+    case Archived = 'archived';
+}
+```
+
 :::
 
 **Rules:**
@@ -154,7 +168,7 @@ class User extends Entity
   - `UsersTable`, `MenuLinksTable`, `UserFavoritePagesTable`
 - **Entity class:** Singular, CamelCased, no suffix
   - `User`, `MenuLink`, `UserFavoritePage`
-- **Enum class:** `{Entity}{Column}` - e.g., `UserStatus`, `OrderState`
+- **Enum class:** `{Entity}{Column}` in `src/Model/Enum/` - e.g., `ArticleStatus`, `UserRole`
 - **Behavior class:** Ends in `Behavior` - `TimestampBehavior`
 
 ### Views & Templates
@@ -227,7 +241,7 @@ CREATE TABLE tags_articles;
 
 - **Table names:** Plural, underscored - `users`, `menu_links`
 - **Multiple words:** Only pluralize the last word - `user_favorite_pages` (not `users_favorites_pages`)
-- **Columns:** Underscored - `first_name`, `created_at`
+- **Columns:** Underscored - `first_name`, `is_processed`
 - **Foreign keys:** `{singular_table}_id` - `user_id`, `menu_link_id`
 - **Junction tables:** Alphabetically sorted plurals - `articles_tags` (not `tags_articles`)
 
@@ -282,10 +296,13 @@ All files follow **PSR-4 autoloading** - filenames must match class names exactl
 | Component | `MyHandyComponent` | `MyHandyComponent.php` | `src/Controller/Component/` |
 | Table | `OptionValuesTable` | `OptionValuesTable.php` | `src/Model/Table/` |
 | Entity | `OptionValue` | `OptionValue.php` | `src/Model/Entity/` |
+| Enum | `ArticleStatus` | `ArticleStatus.php` | `src/Model/Enum/` |
 | Behavior | `EspeciallyFunkableBehavior` | `EspeciallyFunkableBehavior.php` | `src/Model/Behavior/` |
 | View | `SuperSimpleView` | `SuperSimpleView.php` | `src/View/` |
 | Helper | `BestEverHelper` | `BestEverHelper.php` | `src/View/Helper/` |
 | Command | `UpdateCacheCommand` | `UpdateCacheCommand.php` | `src/Command/` |
+| Mailer | `UserMailer` | `UserMailer.php` | `src/Mailer/` |
+| Form | `ContactForm` | `ContactForm.php` | `src/Form/` |
 
 ## Complete Example: Articles Feature
 
@@ -299,6 +316,7 @@ CREATE TABLE articles (
     user_id INT,
     title VARCHAR(255),
     body TEXT,
+    status VARCHAR(20),  -- backed by App\Model\Enum\ArticleStatus
     created DATETIME,
     modified DATETIME
 );
@@ -319,8 +337,10 @@ src/
 ├── Model/
 │   ├── Table/
 │   │   └── ArticlesTable.php     → class ArticlesTable
-│   └── Entity/
-│       └── Article.php           → class Article
+│   ├── Entity/
+│   │   └── Article.php           → class Article
+│   └── Enum/
+│       └── ArticleStatus.php     → enum ArticleStatus
 templates/
 └── Articles/
     ├── index.php                 → ArticlesController::index()
@@ -346,6 +366,7 @@ URL: `https://example.com/articles/view/5`
 | **Database Table** | `articles` | `menu_links` | Plural, underscored |
 | **Table Class** | `ArticlesTable` | `MenuLinksTable` | Plural, CamelCased, ends in `Table` |
 | **Entity Class** | `Article` | `MenuLink` | Singular, CamelCased |
+| **Enum Class** | `ArticleStatus` | `MenuLinkType` | `{Entity}{Column}` in `src/Model/Enum/` |
 | **Controller Class** | `ArticlesController` | `MenuLinksController` | Plural, CamelCased, ends in `Controller` |
 | **Template Path** | `templates/Articles/` | `templates/MenuLinks/` | Matches controller name |
 | **Template File** | `index.php`, `add.php` | `index.php`, `add.php` | Underscored action name |
@@ -359,13 +380,13 @@ URL: `https://example.com/articles/view/5`
 
 ::: details Database Convention Summary
 
-| Convention | Description | Example |
-|------------|-------------|---------|
+| Convention | Description | Example                                     |
+|------------|-------------|---------------------------------------------|
 | **Foreign Keys** | `{singular_table}_id` for hasMany/belongsTo/hasOne | Users hasMany Articles → `articles.user_id` |
-| **Multi-word FKs** | Use singular of full table name | `menu_links` table → `menu_link_id` |
-| **Junction Tables** | Alphabetically sorted plurals | `articles_tags` (not `tags_articles`) |
-| **Primary Keys** | Auto-increment INT or UUID | UUID auto-generated via `Text::uuid()` |
-| **Column Names** | Underscored for multiple words | `first_name`, `created_at` |
+| **Multi-word FKs** | Use singular of full table name | `menu_links` table → `menu_link_id`         |
+| **Junction Tables** | Alphabetically sorted plurals | `articles_tags` (not `tags_articles`)       |
+| **Primary Keys** | Auto-increment INT or UUID | UUID auto-generated via `Text::uuid()`      |
+| **Column Names** | Underscored for multiple words | `first_name`, `is_processed`                |
 
 > [!WARNING]
 > If junction tables have additional data columns, create a dedicated Table and Entity class for them.

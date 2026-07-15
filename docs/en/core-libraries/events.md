@@ -298,16 +298,86 @@ As you can see in the above code, the `on()` function will accept instances
 of the `EventListener` interface. Internally, the event manager will use
 `implementedEvents()` to attach the correct callbacks.
 
-::: info Added in version 5.1.0
-The `events` hook was added to the `BaseApplication` as well as the `BasePlugin` class
+::: info Added in version 5.4.0
+The `eventListeners` hook was added to `BaseApplication` and `BasePlugin`.
 :::
 
-As of CakePHP 5.1 it is recommended to register event listeners by adding them via the `events` hook in your application or plugin class:
+As of CakePHP 5.4, applications and plugins can register listener classes with
+the `eventListeners()` hook. Listener classes are resolved through the
+application's dependency injection container before they are attached to the
+global event manager. This lets listeners declare constructor dependencies:
 
 ```php
 namespace App;
 
 use App\Event\UserStatistic;
+use Cake\Http\BaseApplication;
+
+class Application extends BaseApplication
+{
+    // The rest of your Application class
+
+    /**
+     * @return list<class-string<\Cake\Event\EventListenerInterface>>
+     */
+    public function eventListeners(): array
+    {
+        return [
+            UserStatistic::class,
+        ];
+    }
+}
+```
+
+Plugins can define event listeners the same way in their plugin class:
+
+```php
+namespace ContactManager;
+
+use Cake\Core\BasePlugin;
+use ContactManager\Event\UserStatistic;
+
+class ContactManagerPlugin extends BasePlugin
+{
+    /**
+     * @return list<class-string<\Cake\Event\EventListenerInterface>>
+     */
+    public function eventListeners(): array
+    {
+        return [
+            UserStatistic::class,
+        ];
+    }
+}
+```
+
+If your listener has constructor dependencies, register the listener and its
+dependencies in `Application::services()` or `Plugin::services()`:
+
+```php
+use App\Event\UserStatistic;
+use App\Service\StatisticsClient;
+use Cake\Core\ContainerInterface;
+
+public function services(ContainerInterface $container): void
+{
+    $container->addShared(StatisticsClient::class);
+    $container->addShared(UserStatistic::class)
+        ->addArgument(StatisticsClient::class);
+}
+```
+
+::: info Added in version 5.1.0
+The `events` hook was added to the `BaseApplication` as well as the `BasePlugin` class.
+:::
+
+Use the `events()` hook in your application or plugin class when you need
+imperative registration logic, or want to register anonymous functions:
+
+```php
+namespace App;
+
+use Cake\Event\EventInterface;
 use Cake\Event\EventManagerInterface;
 use Cake\Http\BaseApplication;
 
@@ -317,8 +387,9 @@ class Application extends BaseApplication
 
     public function events(EventManagerInterface $eventManager): EventManagerInterface
     {
-        $statistics = new UserStatistic();
-        $eventManager->on($statistics);
+        $eventManager->on('Order.afterPlace', function (EventInterface $event): void {
+            // Code to update statistics
+        });
 
         return $eventManager;
     }

@@ -66,9 +66,6 @@ bin/cake bake migration CreateUsers email:string password:string created modifie
 bin/cake bake migration CreateArticles user_id:integer title:string slug:string[191]:unique body:text published:boolean created modified
 bin/cake bake migration CreateTags title:string[191]:unique created modified
 bin/cake bake migration CreateArticlesTags article_id:integer:primary tag_id:integer:primary created modified
-
-# Run migrations to create tables
-bin/cake migrations migrate
 ```
 
 ```php [Migration Example]
@@ -119,6 +116,12 @@ $table->addColumn('tag_id', 'integer', [
 
 Remove the `autoIncrement` lines before running the migration to prevent foreign key problems.
 :::
+
+Once the `articles_tags` migration is corrected, run the migrations to create the tables:
+
+```bash
+bin/cake migrations migrate
+```
 
 #### Adding Seed Data
 

@@ -453,4 +453,52 @@ Output:
 
     red, orange, yellow, green, blue, indigo and violet
 
+## Text Masking
+
+### Text::mask()
+
+`method` Cake\\Utility\\Text::**mask**(string $string, int $offset, ?int $length = null, string $maskCharacter = '*'): string
+
+Masks a portion of a string with a repeated character.
+
+Replaces characters starting at `$offset` for `$length` characters with `$maskCharacter`.
+If `$length` is `null`, masking continues to the end of the string.
+Negative offsets are supported and are calculated from the end of the string.
+
+```php
+$creditCardNumber = '4909090909091234';
+
+// Called as TextHelper
+echo $this->Text->mask($creditCardNumber, 0, 12, '*');
+
+// Called as Text
+use Cake\Utility\Text;
+
+echo Text::mask($creditCardNumber, 0, 12, '*');
+```
+
+Output:
+
+    ************1234
+
+### Text::maskValue()
+
+`method` Cake\\Utility\\Text::**maskValue**(string $string, array $needles, string $maskCharacter = '*'): string
+
+Masks all occurrences of given substring(s) within a string using a repeated character.
+Each occurrence of the provided substring(s) will be replaced by a sequence of the masking character.
+
+```php
+// Called as TextHelper
+echo $this->Text->maskValue('4111111111111234', ['411', '112'], '*');
+
+// Called as Text
+use Cake\Utility\Text;
+
+echo Text::maskValue('4111111111111234', ['411', '112'], '*');
+```
+
+Output:
+
+    ***11111111***34
 <!-- end-text -->

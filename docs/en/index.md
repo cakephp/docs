@@ -40,7 +40,7 @@ Get a CakePHP application running in under 5 minutes:
 
 ```bash [Composer]
 # Create new project
-composer create-project --prefer-dist cakephp/app:|cakeversion| my_app
+composer create-project --prefer-dist cakephp/app:~|cakeversion| my_app
 
 # Start development server
 cd my_app
@@ -53,14 +53,14 @@ bin/cake server
 # Setup with DDEV
 mkdir my-cakephp-app && cd my-cakephp-app
 ddev config --project-type=cakephp --docroot=webroot
-ddev composer create --prefer-dist cakephp/app:|cakeversion|
+ddev composer create --prefer-dist cakephp/app:~|cakeversion|
 ddev launch
 ```
 
 ```bash [Docker]
 # Using official PHP image
 docker run -it --rm -v $(pwd):/app composer create-project \
-  --prefer-dist cakephp/app:|cakeversion| my_app
+  --prefer-dist cakephp/app:~|cakeversion| my_app
 
 cd my_app
 docker run -it --rm -p 8765:8765 -v $(pwd):/app \
