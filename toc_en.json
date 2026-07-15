@@ -31,6 +31,48 @@
         {
           "text": "Where to Get Help",
           "link": "/intro/where-to-get-help"
+        },
+        {
+          "text": "Migration Guides",
+          "collapsed": true,
+          "items": [
+            {
+              "text": "Upgrading CakePHP",
+              "link": "/appendices/migration-guides"
+            },
+            {
+              "text": "4.0 Upgrade Guide",
+              "link": "/appendices/4-0-upgrade-guide"
+            },
+            {
+              "text": "4.0 Migration Guide",
+              "link": "/appendices/4-0-migration-guide"
+            },
+            {
+              "text": "4.1 Migration Guide",
+              "link": "/appendices/4-1-migration-guide"
+            },
+            {
+              "text": "4.2 Migration Guide",
+              "link": "/appendices/4-2-migration-guide"
+            },
+            {
+              "text": "4.3 Migration Guide",
+              "link": "/appendices/4-3-migration-guide"
+            },
+            {
+              "text": "4.4 Migration Guide",
+              "link": "/appendices/4-4-migration-guide"
+            },
+            {
+              "text": "4.5 Migration Guide",
+              "link": "/appendices/4-5-migration-guide"
+            },
+            {
+              "text": "4.6 Migration Guide",
+              "link": "/appendices/4-6-migration-guide"
+            }
+          ]
         }
       ]
     },
@@ -599,42 +641,6 @@
         {
           "text": "Appendices",
           "link": "/appendices"
-        },
-        {
-          "text": "Migration Guides",
-          "link": "/appendices/migration-guides"
-        },
-        {
-          "text": "4.0 Migration Guide",
-          "link": "/appendices/4-0-migration-guide"
-        },
-        {
-          "text": "4.0 Upgrade Guide",
-          "link": "/appendices/4-0-upgrade-guide"
-        },
-        {
-          "text": "4.1 Migration Guide",
-          "link": "/appendices/4-1-migration-guide"
-        },
-        {
-          "text": "4.2 Migration Guide",
-          "link": "/appendices/4-2-migration-guide"
-        },
-        {
-          "text": "4.3 Migration Guide",
-          "link": "/appendices/4-3-migration-guide"
-        },
-        {
-          "text": "4.4 Migration Guide",
-          "link": "/appendices/4-4-migration-guide"
-        },
-        {
-          "text": "4.5 Migration Guide",
-          "link": "/appendices/4-5-migration-guide"
-        },
-        {
-          "text": "4.6 Migration Guide",
-          "link": "/appendices/4-6-migration-guide"
         },
         {
           "text": "Fixture Upgrade",
