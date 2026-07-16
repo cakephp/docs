@@ -98,6 +98,8 @@
           "text": "Request & Response",
           "link": "/controllers/request-response"
         },
+        { "text": "Routing", "link": "/development/routing" },
+        { "text": "Sessions", "link": "/development/sessions" },
         { "text": "Middleware", "link": "/controllers/middleware" },
         {
           "text": "Pages Controller",
@@ -329,8 +331,6 @@
           "text": "Configuration",
           "link": "/development/configuration"
         },
-        { "text": "Routing", "link": "/development/routing" },
-        { "text": "Sessions", "link": "/development/sessions" },
         { "text": "Debugging", "link": "/development/debugging" },
         {
           "text": "Dependency Injection",
