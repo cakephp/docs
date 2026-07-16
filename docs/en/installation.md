@@ -130,9 +130,14 @@ Check [DDEV Documentation](https://ddev.readthedocs.io/) for installation and ad
 For containerized development:
 
 ```bash
-# Create project using Composer in Docker
-docker run --rm -v $(pwd):/app composer create-project \
-  --prefer-dist cakephp/app:~|cakeversion| my_app
+# Create project using Composer in Docker.
+# CakePHP requires the intl extension, which the base composer image does not
+# provide, so run Composer inside a PHP image with intl installed.
+docker run --rm -v $(pwd):/app -w /app php:8.2-cli bash -c \
+  "apt-get update && apt-get install -y libicu-dev git unzip curl \
+  && docker-php-ext-install intl \
+  && curl -sS https://getcomposer.org/installer | php \
+  && php composer.phar create-project --prefer-dist cakephp/app:~|cakeversion| my_app"
 
 # Start PHP development server (install required extensions first)
 cd my_app
