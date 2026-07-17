@@ -19,6 +19,8 @@ bin/cake upgrade rector --rules cakephp54 <path/to/app/src>
 ### Commands
 
 - `BaseCommand::initialize()` is now being triggered **AFTER** arguments and options have been parsed.
+- Command instances are now added to the event manager by default. This means, that event hook methods
+like `beforeExecute` and `afterExecute` are always triggered.
 
 ### Console
 
