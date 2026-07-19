@@ -32,6 +32,7 @@
 - [Error & Exception Handling](development/errors)
 - [Events System](core-libraries/events)
 - [Internationalization & Localization](core-libraries/internationalization-and-localization)
+- [Locking](core-libraries/locking)
 - [Logging](core-libraries/logging)
 - [Modelless Forms](core-libraries/form)
 - [Pagination](controllers/pagination)
@@ -46,6 +47,7 @@
 
 - [App Class](core-libraries/app)
 - [Collections](core-libraries/collections)
+- [Filesystem](core-libraries/filesystem)
 - [Hash](core-libraries/hash)
 - [Http Client](core-libraries/httpclient)
 - [Inflector](core-libraries/inflector)

@@ -596,7 +596,54 @@ enum ArticleStatus: string implements EnumLabelInterface
 ```
 
 This can be useful if you want to use your enums in `FormHelper` select
-inputs. You can use [bake](../bake) to generate an enum class:
+inputs.
+
+#### EnumLabelTrait and the Label Attribute
+
+::: info Added in version 5.4.0
+`Cake\Database\Type\EnumLabelTrait` and the
+`Cake\Database\Type\Attribute\Label` attribute were added in 5.4.0.
+:::
+
+Writing the `label()` `match` block by hand becomes repetitive once an enum
+grows past a few cases. `EnumLabelTrait` provides a default `label()`
+implementation that derives the label from the case name and resolves it
+through the translator. Cases can override the derived label with the
+`#[Label]` attribute:
+
+```php
+namespace App\Model\Enum;
+
+use Cake\Database\Type\Attribute\Label;
+use Cake\Database\Type\EnumLabelInterface;
+use Cake\Database\Type\EnumLabelTrait;
+
+enum ArticleStatus: string implements EnumLabelInterface
+{
+    use EnumLabelTrait;
+
+    case Published = 'Y';
+
+    #[Label('Not yet published')]
+    case Unpublished = 'N';
+
+    #[Label('Archived', domain: 'articles', context: 'status')]
+    case Archived = 'A';
+}
+```
+
+For a case **without** a `#[Label]` attribute, the trait humanizes the case
+name (`Unpublished` → `Unpublished`, `InReview` → `In review`) and runs it
+through the translator. For cases **with** a `#[Label]`, the explicit label
+string is used and is translated using the optional `domain` and `context`
+constructor arguments. Labels are extracted by `cake i18n extract`, which
+detects the `#[Label]` attribute and emits one msgid per case.
+
+> [!TIP]
+> Pair `EnumLabelTrait` with `EnumLabelInterface` so type-aware consumers
+> (e.g. `FormHelper`'s automatic enum support) keep working.
+
+You can use [bake](../bake) to generate an enum class:
 
 ```bash
 # generate an enum class with two cases and stored as an integer
@@ -1085,6 +1132,53 @@ do the following:
 - If the closure returns `false`, a rollback will be issued.
 - If the closure executes successfully, the transaction will be committed.
 
+### afterCommit
+
+`method` Cake\\Database\\Connection::**afterCommit**(callable $callback): void
+
+You can register callbacks to run after the outermost transaction commits using
+``afterCommit()``. This is useful for deferring side effects like sending
+emails, dispatching jobs, or invalidating caches until you know the data has
+been persisted:
+
+```php
+$connection->begin();
+$connection->execute('UPDATE articles SET published = ? WHERE id = ?', [true, 2]);
+$connection->afterCommit(function () {
+    // Send notification email — only runs if the transaction commits.
+    $this->mailer->send('article-published');
+});
+$connection->commit(); // Callback fires here.
+```
+
+Callbacks are discarded if the transaction is rolled back. When nested
+transactions are in use, callbacks registered at any depth are deferred until
+the outermost transaction commits:
+
+```php
+$connection->begin();
+$connection->afterCommit(function () {
+    // This fires after the outermost commit.
+});
+
+$connection->begin(); // Nested (savepoint)
+$connection->afterCommit(function () {
+    // Also deferred to outermost commit.
+});
+$connection->commit(); // Releases savepoint — callbacks don't fire yet.
+
+$connection->commit(); // Outermost commit — both callbacks fire now.
+```
+
+If ``afterCommit()`` is called when no transaction is active, the callback
+executes immediately. This matches the semantics of the ORM's
+``Model.afterSaveCommit`` event, which also fires immediately for non-atomic
+saves.
+
+::: info Added in version 5.4.0
+`Connection::afterCommit()` was added.
+:::
+
 ## Interacting with Statements
 
 When using the lower level database API, you will often encounter statement
@@ -1162,6 +1256,43 @@ Log::setConfig('queries', [
 > Query logging is only intended for debugging/development uses. You should
 > never leave query logging on in production as it will negatively impact the
 > performance of your application.
+
+### Redacting Sensitive Values from Query Logs
+
+Query log lines render the executed SQL with bound parameters spliced
+back in, so any secret bound as a parameter (encryption keys,
+passwords, OAuth tokens) ends up in every surface that consumes a
+`LoggedQuery` — file logs via `__toString()`, structured loggers via
+`getContext()`, and anything that re-serialises the LoggedQuery as JSON
+via `jsonSerialize()`.
+
+`Cake\Database\Log\LoggedQuery::setRedactor()` registers a global
+`Closure` invoked before any of those exit points are exposed. The
+closure receives the raw query string and bound params and must return
+a 2-element array `[string $query, array $params]` with sensitive
+values replaced:
+
+```php
+use Cake\Database\Log\LoggedQuery;
+
+// In Application::bootstrap() or equivalent.
+LoggedQuery::setRedactor(function (string $query, array $params): array {
+    foreach ($params as $key => $value) {
+        if (in_array($key, ['password', 'token', 'apiKey'], true)) {
+            $params[$key] = '«REDACTED»';
+        }
+    }
+    return [$query, $params];
+});
+```
+
+The hook fires in `interpolate()`, `getContext()`, and `jsonSerialize()`,
+so every public exit path is covered. Pass `null` to clear a previously
+registered redactor.
+
+A redactor that throws or returns a malformed value is silently ignored
+for that call — the raw query and params are used as a safe fallback so
+a faulty redactor cannot break logging.
 
 ## Identifier Quoting
 

@@ -140,6 +140,51 @@ class WidgetController extends AppController
 
 This example would disable all security checks for the edit action.
 
+You can also use the convenience method ``unlockActions()``:
+
+```php
+public function beforeFilter(EventInterface $event): void
+{
+    parent::beforeFilter($event);
+
+    // Unlock a single action
+    $this->FormProtection->unlockActions('edit');
+
+    // Unlock multiple actions
+    $this->FormProtection->unlockActions(['edit', 'api', 'webhook']);
+
+    // Replace existing unlocked actions instead of merging
+    $this->FormProtection->unlockActions(['newAction'], merge: false);
+}
+```
+
+::: info Added in version 5.4.0
+:::
+
+## Unlocking fields
+
+To unlock specific fields from validation, you can use the ``unlockFields()``
+convenience method:
+
+```php
+public function beforeFilter(EventInterface $event): void
+{
+    parent::beforeFilter($event);
+
+    // Unlock a single field
+    $this->FormProtection->unlockFields('dynamic_field');
+
+    // Unlock multiple fields
+    $this->FormProtection->unlockFields(['optional_field', 'ajax_field']);
+
+    // Dot notation for nested fields
+    $this->FormProtection->unlockFields('user.preferences');
+}
+```
+
+::: info Added in version 5.4.0
+:::
+
 ## Handling validation failure through callbacks
 
 If form protection validation fails it will result in a 400 error by default.

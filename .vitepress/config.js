@@ -6,7 +6,7 @@ const toc_en = require("./toc_en.json");
 const toc_ja = require("./toc_ja.json");
 
 const versions = {
-  text: "5.x",
+  text: "5.next",
   items: [
     { text: "5.x (latest)", link: "https://book.cakephp.org/5.x/", target: '_self' },
     { text: "4.x", link: "https://book.cakephp.org/4.x/", target: '_self' },
@@ -48,8 +48,8 @@ const plugins = {
 const substitutions = {
   '|phpversion|': { value: '8.5', format: 'bold' },
   '|minphpversion|': { value: '8.2', format: 'italic' },
-  '|cakeversion|': '5.3',
-  '|cakefullversion|': 'CakePHP 5',
+  '|cakeversion|': '5.4.0',
+  '|cakefullversion|': 'CakePHP 5.next',
 };
 
 // This file contains overrides for .vitepress/config.js
@@ -60,19 +60,19 @@ export default {
       md.use(substitutionsReplacer, { substitutions });
     }
   },
-  base: "/5.x/",
+  base: "/5.next/",
   rewrites: {
     "en/:slug*": ":slug*",
   },
   sitemap: {
-    hostname: "https://book.cakephp.org/5.x/",
+    hostname: "https://book.cakephp.org/5.next/",
   },
   themeConfig: {
     socialLinks: [
       { icon: "github", link: "https://github.com/cakephp/cakephp" },
     ],
     editLink: {
-      pattern: "https://github.com/cakephp/docs/edit/5.x/docs/:path",
+      pattern: "https://github.com/cakephp/docs/edit/5.next/docs/:path",
       text: "Edit this page on GitHub",
     },
     sidebar: toc_en,
@@ -82,6 +82,11 @@ export default {
       { ...plugins },
       { ...versions },
     ],
+    versionBanner: {
+      message: 'This is a development version of documentation for CakePHP 5.4.',
+      link: '/latest/',
+      linkText: 'Go to latest docs.'
+    }
   },
   locales: {
     root: {

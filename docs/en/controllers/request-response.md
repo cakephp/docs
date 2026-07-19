@@ -789,6 +789,143 @@ public function sendIcs()
 }
 ```
 
+<a id="streaming-json-responses"></a>
+
+### Streaming JSON Responses
+
+`class` Cake\\Http\\Response\\**JsonStreamResponse**
+
+When working with large datasets, loading everything into memory before encoding
+to JSON can exhaust available memory. `JsonStreamResponse` provides memory-efficient
+streaming of JSON data using generators, keeping only one item in memory at a time.
+
+::: info Added in version 5.4.0
+:::
+
+#### Basic Usage
+
+```php
+use Cake\Http\Response\JsonStreamResponse;
+
+public function index()
+{
+    $query = $this->Articles->find();
+
+    // Simple array streaming
+    return new JsonStreamResponse($query);
+    // Output: [{"id":1,"title":"First"},{"id":2,"title":"Second"},...]
+}
+```
+
+#### Constructor Options
+
+The `JsonStreamResponse` constructor accepts an iterable and an options array:
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `root` | `string\|null` | `null` | Wrap data in `{"root": [...]}` |
+| `envelope` | `array` | `[]` | Static metadata merged with streaming data |
+| `dataKey` | `string` | `'data'` | Key for streaming data when envelope is used |
+| `format` | `string` | `'json'` | Output format: `'json'` or `'ndjson'` |
+| `transform` | `callable\|null` | `null` | Transform each item before encoding |
+| `flags` | `int` | `DEFAULT_JSON_FLAGS` | JSON encode flags |
+
+#### With Root Wrapper
+
+Wrap the array in an object with a named key:
+
+```php
+return new JsonStreamResponse($query, ['root' => 'articles']);
+// Output: {"articles":[{"id":1,"title":"First"},{"id":2,"title":"Second"}]}
+```
+
+#### With Envelope (Metadata)
+
+Include static metadata alongside the streaming data:
+
+```php
+$total = $this->Articles->find()->count();
+
+return new JsonStreamResponse($query, [
+    'envelope' => ['meta' => ['total' => $total, 'page' => 1]],
+    'dataKey' => 'articles',
+]);
+// Output: {"meta":{"total":100,"page":1},"articles":[{"id":1,"title":"First"},...]}
+```
+
+#### NDJSON Format
+
+[NDJSON](http://ndjson.org/) (Newline Delimited JSON) outputs one JSON object per
+line, useful for streaming to clients that process data incrementally:
+
+```php
+return new JsonStreamResponse($query, ['format' => 'ndjson']);
+// Output:
+// {"id":1,"title":"First"}
+// {"id":2,"title":"Second"}
+```
+
+The content type is automatically set to `application/x-ndjson; charset=UTF-8`.
+
+#### Transform Callback
+
+Transform each item before JSON encoding. Useful for selecting specific fields
+or formatting data:
+
+```php
+return new JsonStreamResponse($query, [
+    'transform' => fn($article) => [
+        'id' => $article->id,
+        'title' => $article->title,
+        'url' => Router::url(['action' => 'view', $article->id]),
+    ],
+]);
+```
+
+#### Immutability
+
+`JsonStreamResponse` follows PSR-7 immutability patterns. Use `withStreamOptions()`
+to create a modified copy:
+
+```php
+$response = new JsonStreamResponse($query);
+$newResponse = $response->withStreamOptions(['root' => 'articles']);
+```
+
+#### Error Handling
+
+`JsonStreamResponse` uses a three-layer error handling strategy:
+
+1. **Pre-validation**: The first item is encoded before output starts. If encoding
+   fails, an exception is thrown and a proper error response can be returned.
+
+2. **Mid-stream error marker**: If item N (where N > 1) fails to encode, an error
+   marker is output to maintain valid JSON structure:
+
+   ```json
+   [{"id":1},{"__streamError":{"message":"Type is not supported","index":1}}]
+   ```
+
+3. **Server-side logging**: All encoding failures are logged via `Log::error()`.
+
+#### ORM Integration
+
+For true memory-efficient streaming, use unbuffered queries and avoid result
+formatters:
+
+```php
+// Good - streams one row at a time
+$query = $this->Articles->find()->bufferResults(false);
+return new JsonStreamResponse($query);
+
+// Avoid - formatters like map(), combine() buffer results internally
+$query = $this->Articles->find()->map(fn($row) => $row); // Breaks streaming
+```
+
+> [!NOTE]
+> Result formatters (`map()`, `combine()`, etc.) buffer results internally,
+> which defeats the memory-efficient streaming purpose.
+
 ### Setting Headers
 
 `method` Cake\\Http\\Response::**withHeader**(string $name, string|array $value): static
@@ -815,6 +952,61 @@ emitted by `Cake\Http\Server`.
 You can now use the convenience method
 `Cake\Http\Response::withLocation()` to directly set or get the
 redirect location header.
+
+### Hypermedia Links
+
+`method` Cake\\Http\\Response::**withLink**(LinkInterface $link): static
+
+CakePHP implements [PSR-13](https://www.php-fig.org/psr/psr-13/) for hypermedia
+link support. You can add links to responses, and they will be automatically
+emitted as HTTP `Link` headers when the response is sent:
+
+```php
+use Cake\Http\Link\Link;
+
+// Add a simple link
+$response = $response->withLink(new Link('/api/users/1', 'self'));
+
+// Add a link with multiple relations and attributes
+$response = $response->withLink(
+    (new Link('/api/users?page=2'))
+        ->withRel('next')
+        ->withAttribute('type', 'application/json'),
+);
+
+// Preload resources for performance
+$response = $response->withLink(
+    (new Link('/css/app.css'))
+        ->withRel('preload')
+        ->withAttribute('as', 'style'),
+);
+```
+
+The `Link` class implements `EvolvableLinkInterface` and provides these methods:
+
+- `withHref(string $href)` - Set the link URI
+- `withRel(string $rel)` - Add a link relation
+- `withoutRel(string $rel)` - Remove a link relation
+- `withAttribute(string $name, $value)` - Add an attribute
+- `withoutAttribute(string $name)` - Remove an attribute
+
+You can also work with multiple links using `LinkProvider`:
+
+```php
+use Cake\Http\Link\Link;
+use Cake\Http\Link\LinkProvider;
+
+$provider = new LinkProvider([
+    new Link('/api/users/1', 'self'),
+    new Link('/api/users?page=2', 'next'),
+]);
+
+// Get the link provider from a response
+$links = $response->getLinks();
+
+// Set a new link provider
+$response = $response->withLinkProvider($provider);
+```
 
 ### Setting the Body
 

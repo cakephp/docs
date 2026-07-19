@@ -360,6 +360,11 @@ Calculate the max of a column. *Assumes arguments are literal values.*
 `count()`
 Calculate the count. *Assumes arguments are literal values.*
 
+`stringAgg()`
+Aggregate string values using a separator. Translates to `STRING_AGG()`,
+`GROUP_CONCAT()`, or `LISTAGG()` depending on the database driver.
+*Assumes the first argument is a literal value.*
+
 `cast()`
 Convert a field or expression from one data type to another.
 
@@ -470,6 +475,38 @@ FROM articles;
 
 > [!NOTE]
 > Use `func()` to pass untrusted user data to any SQL function.
+
+#### String Aggregation
+
+The `stringAgg()` method provides a portable way to aggregate string values
+using a separator. It translates to the appropriate native SQL function for
+each driver (`STRING_AGG()` on PostgreSQL and SQL Server, `GROUP_CONCAT()` on
+MySQL, and `STRING_AGG()` or `GROUP_CONCAT()` on MariaDB/SQLite depending on
+version):
+
+```php
+$query = $articles->find();
+$query->select([
+    'category_id',
+    'titles' => $query->func()->stringAgg('title', ', '),
+])
+->groupBy('category_id');
+```
+
+You can optionally specify an ordering for the aggregated values via the
+third argument:
+
+```php
+$query->func()->stringAgg('title', ', ', ['title' => 'ASC']);
+```
+
+`STRING_AGG` with aggregate-local ordering is supported on PostgreSQL,
+SQL Server, MariaDB 10.5+ and SQLite 3.44+. MySQL translates the call to
+`GROUP_CONCAT` in all cases.
+
+::: info Added in version 5.4.0
+`FunctionsBuilder::stringAgg()` was added.
+:::
 
 ### Ordering Results
 
@@ -1248,6 +1285,29 @@ conditions:
   # WHERE country_id NOT IN ('AFG', 'USA', 'EST')
   ```
 
+- `inOrNull()` Create a condition for `IN` combined with `IS NULL`:
+
+  ```php
+  $query = $cities->find()
+      ->where(function (QueryExpression $exp, SelectQuery $q) {
+          return $exp->inOrNull('country_id', ['AFG', 'USA', 'EST']);
+      });
+  # WHERE (country_id IN ('AFG', 'USA', 'EST') OR country_id IS NULL)
+  ```
+
+  ::: info Added in version 5.4.0
+  :::
+
+- `notInOrNull()` Create a condition for `NOT IN` combined with `IS NULL`:
+
+  ```php
+  $query = $cities->find()
+      ->where(function (QueryExpression $exp, SelectQuery $q) {
+          return $exp->notInOrNull('country_id', ['AFG', 'USA', 'EST']);
+      });
+  # WHERE (country_id NOT IN ('AFG', 'USA', 'EST') OR country_id IS NULL)
+  ```
+
 - `gt()` Create a `>` condition:
 
   ```php
@@ -1318,6 +1378,19 @@ conditions:
   # WHERE population BETWEEN 999 AND 5000000,
   ```
 
+- `notBetween()` Create a `NOT BETWEEN` condition:
+
+  ```php
+  $query = $cities->find()
+      ->where(function (QueryExpression $exp, SelectQuery $q) {
+          return $exp->notBetween('population', 999, 5000000);
+      });
+  # WHERE population NOT BETWEEN 999 AND 5000000
+  ```
+
+  ::: info Added in version 5.4.0
+  :::
+
 - `exists()` Create a condition using `EXISTS`:
 
   ```php
@@ -1351,6 +1424,43 @@ conditions:
       });
   # WHERE NOT EXISTS (SELECT id FROM cities WHERE countries.id = cities.country_id AND population > 5000000)
   ```
+
+- `isDistinctFrom()` Create a null-safe inequality comparison using `IS DISTINCT FROM`:
+
+  ```php
+  $query = $cities->find()
+      ->where(function (QueryExpression $exp, SelectQuery $q) {
+          return $exp->isDistinctFrom('status', 'active');
+      });
+  # WHERE status IS DISTINCT FROM 'active'
+  # MySQL uses: NOT (status <=> 'active')
+  ```
+
+  This is useful when you need to compare values where `NULL` should be treated
+  as a distinct value. Unlike regular `!=` comparisons, `IS DISTINCT FROM`
+  returns `TRUE` when comparing `NULL` to a non-NULL value, and `FALSE` when
+  comparing `NULL` to `NULL`.
+
+  ::: info Added in version 5.4.0
+  :::
+
+- `isNotDistinctFrom()` Create a null-safe equality comparison using `IS NOT DISTINCT FROM`:
+
+  ```php
+  $query = $cities->find()
+      ->where(function (QueryExpression $exp, SelectQuery $q) {
+          return $exp->isNotDistinctFrom('category_id', null);
+      });
+  # WHERE category_id IS NOT DISTINCT FROM NULL
+  # MySQL uses: category_id <=> NULL
+  ```
+
+  This is the null-safe equivalent of `=`. It returns `TRUE` when both values
+  are `NULL` (unlike regular `=` which returns `NULL`), making it useful for
+  comparing nullable columns.
+
+  ::: info Added in version 5.4.0
+  :::
 
 Expression objects should cover many commonly used functions and expressions. If
 you find yourself unable to create the required conditions with expressions you
@@ -2125,6 +2235,39 @@ $unpublished->intersectAll($inReview);
 
 ::: info Added in version 5.1.0
 `intersect()` and `intersectAll()` were added.
+:::
+
+### Except
+
+Except operations allow you to return rows from one query that do not appear
+in another query. Except queries are created by composing one or more select
+queries together:
+
+```php
+$allArticles = $articles->find();
+
+$published = $articles->find()
+    ->where(['published' => true]);
+
+$allArticles->except($published);
+```
+
+You can create `EXCEPT ALL` queries using the `exceptAll()` method:
+
+```php
+$allArticles = $articles->find();
+
+$published = $articles->find()
+    ->where(['published' => true]);
+
+$allArticles->exceptAll($published);
+```
+
+`EXCEPT ALL` is supported on PostgreSQL and recent MySQL/MariaDB versions.
+It is not supported on SQLite or SQL Server.
+
+::: info Added in version 5.4.0
+`except()` and `exceptAll()` were added.
 :::
 
 ### Subqueries

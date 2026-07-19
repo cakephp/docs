@@ -4,7 +4,7 @@ name: 'deploy_5'
 on:
   push:
     branches:
-      - 5.x
+      - 5.next
   workflow_dispatch:
 
 concurrency:
@@ -22,7 +22,7 @@ jobs:
       - name: Push to dokku
         uses: dokku/github-action@master
         with:
-          branch: '5.x'
-          git_remote_url: 'ssh://dokku@apps.cakephp.org:22/newbook-5'
+          branch: '5.next'
+          git_remote_url: 'ssh://dokku@apps.cakephp.org:22/newbook-5next'
           git_push_flags: '-f'
           ssh_private_key: ${{ secrets.DOKKU_SSH_PRIVATE_KEY }}

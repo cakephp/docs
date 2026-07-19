@@ -37,8 +37,8 @@ class HelloCommand extends Command
 ```
 
 Command classes must implement an `execute()` method that does the bulk of
-their work. This method is called when a command is invoked. Let's call our first
-command application directory, run:
+their work. This method is called when a command is invoked. Let's call our
+first command. From your application directory, run:
 
 ```bash
 bin/cake hello
@@ -47,6 +47,18 @@ bin/cake hello
 You should see the following output:
 
     Hello world.
+
+::: info Added in version 5.4.0
+In CakePHP 5.4 and newer, the `Arguments` and `ConsoleIo` instances are also
+available on the command instance as `$this->args` and `$this->io` properties.
+This lets you access input, output, and arguments inside your command methods
+without passing these objects down from `execute()`.
+
+This will become the default in CakePHP 6.0, where the `execute()` method
+signature will no longer include `Arguments $args` and `ConsoleIo $io`.
+Updating your commands to use `$this->args` and `$this->io` now is
+recommended.
+:::
 
 Our `execute()` method isn't very interesting let's read some input from the
 command line:
@@ -306,6 +318,30 @@ Usage:
 cake user [-h] [-q] [-v]
 ```
 
+## Subcommand Validation
+
+::: info Added in version 5.4.0
+Strict validation for unknown subcommands was added in 5.4.0.
+:::
+
+When a parent command has registered subcommands (e.g. `i18n extract`,
+`i18n init`), CakePHP rejects unknown positional tokens that follow the
+parent name. Previously, typos such as `bin/cake i18n nonsense` silently
+invoked the parent command and discarded the trailing token; now you get a
+clear error listing the available subcommands:
+
+```text
+$ bin/cake i18n nonsense
+Error: Unknown command `cake i18n nonsense`.
+Available subcommands: `i18n extract`, `i18n init`.
+Run `cake i18n --help` to see usage.
+```
+
+This only kicks in when the parent command has sibling subcommands. Commands
+that accept arbitrary positional arguments (e.g. `routes generate`) are
+unaffected, and option-like tokens (`--help`, `-v`) following the command
+name continue to be forwarded to the parser.
+
 ## Grouping Commands
 
 By default, in the help output CakePHP will group commands into core, app, and
@@ -346,6 +382,44 @@ public function console(CommandCollection $commands): CommandCollection
 
 ::: info Added in version 5.3.0
 `CommandCollection::replace()` was added.
+:::
+
+## Customizing the Help Header
+
+By default, `bin/cake help` displays a CakePHP version header at the top of
+command listings. When the CakePHP version cannot be determined (e.g. when the
+console package is used outside a CakePHP application), the header is omitted
+automatically.
+
+You can replace the default header with your own by implementing
+`Cake\Core\ConsoleHelpHeaderProviderInterface` on the application class passed
+to `CommandRunner`:
+
+```php
+<?php
+declare(strict_types=1);
+
+namespace App;
+
+use Cake\Core\ConsoleHelpHeaderProviderInterface;
+use Cake\Http\BaseApplication;
+
+class Application extends BaseApplication implements ConsoleHelpHeaderProviderInterface
+{
+    public function getConsoleHelpHeader(): string
+    {
+        return '<info>MyApp:</info> 1.4.0 (env: prod)';
+    }
+}
+```
+
+When this interface is implemented, `CommandRunner` passes the return value of
+`getConsoleHelpHeader()` to `HelpCommand`, replacing the default CakePHP header.
+Console markup tags such as `<info>` and `<comment>` are supported in the
+returned string.
+
+::: info Added in version 5.4.0
+`ConsoleHelpHeaderProviderInterface` was added.
 :::
 
 ## Tree Output Helper

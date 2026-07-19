@@ -16,13 +16,17 @@ methods:
 
 - `bootstrap` Used to load [configuration files](../development/configuration), define constants and other global functions.
   By default, this will include **config/bootstrap.php**. This is the ideal place
-  to load [Plugins](../plugins) and global [event listeners](../core-libraries/events).
+  to load [Plugins](../plugins) and application configuration.
 - `routes` Used to load [routes](../development/routing). By default, this
   will include **config/routes.php**.
 - `middleware` Used to add [middleware](../controllers/middleware) to your application.
 - `console` Used to add [console commands](../console-commands) to your
   application. By default, this will automatically discover console commands in
   your application and all plugins.
+- `eventListeners` Used to register global [event listener](../core-libraries/events)
+  classes with the application's event manager.
+- `events` Used to register global [events](../core-libraries/events) that
+  require custom registration logic.
 
 ## Bootstrapping your Application
 
@@ -49,8 +53,7 @@ sections there are better ways you add custom logic to your application.
 
 In addition to the **config/bootstrap.php** file which should be used to
 configure low-level concerns of your application, you can also use the
-`Application::bootstrap()` hook method to load/initialize plugins, and attach
-global event listeners:
+`Application::bootstrap()` hook method to load/initialize plugins:
 
 ```php
 // in src/Application.php
@@ -84,6 +87,6 @@ class Application extends BaseApplication
 }
 ```
 
-Loading plugins and events in `Application::bootstrap()` makes
-[Integration Testing](../development/testing#integration-testing) easier as events and routes will be re-processed on
+Loading plugins in `Application::bootstrap()` makes
+[Integration Testing](../development/testing#integration-testing) easier as routes will be re-processed on
 each test method.

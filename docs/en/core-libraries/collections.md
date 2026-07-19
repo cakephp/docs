@@ -61,15 +61,17 @@ application as well.
 | `contains`      | `countBy`    | `each`       |
 | `every`         | `extract`    | `filter`     |
 | `first`         | `firstMatch` | `groupBy`    |
-| `indexBy`       | `insert`     | `isEmpty`    |
-| `last`          | `listNested` | `map`        |
-| `match`         | `max`        | `median`     |
-| `min`           | `nest`       | `prepend`    |
-| `prependItem`   | `reduce`     | `reject`     |
-| `sample`        | `shuffle`    | `skip`       |
-| `some`          | `sortBy`     | `stopWhen`   |
-| `sumOf`         | `take`       | `through`    |
-| `transpose`     | `unfold`     | `zip`        |
+| `implode`       | `indexBy`    | `insert`     |
+| `isEmpty`       | `keys`       | `last`       |
+| `listNested`    | `map`        | `match`      |
+| `max`           | `median`     | `min`        |
+| `nest`          | `prepend`    | `prependItem`|
+| `reduce`        | `reject`     | `sample`     |
+| `shuffle`       | `skip`       | `some`       |
+| `sortBy`        | `stopWhen`   | `sumOf`      |
+| `take`          | `through`    | `transpose`  |
+| `unfold`        | `unless`     | `values`     |
+| `when`          | `zip`        |              |
 
 ## Iterating
 
@@ -1431,3 +1433,91 @@ foreach ($ages as $age) {
     }
 }
 ```
+
+## Transforming Keys and Values
+
+### keys()
+
+`method` Cake\\Collection\\Collection::**keys**(): CollectionInterface
+
+Returns a new collection containing only the keys from the original collection:
+
+```php
+$collection = new Collection(['a' => 1, 'b' => 2, 'c' => 3]);
+$keys = $collection->keys()->toList(); // ['a', 'b', 'c']
+```
+
+### values()
+
+`method` Cake\\Collection\\Collection::**values**(): CollectionInterface
+
+Returns a new collection of values re-indexed with consecutive integers,
+discarding the original keys:
+
+```php
+$collection = new Collection(['a' => 1, 'b' => 2, 'c' => 3]);
+$values = $collection->values()->toList(); // [1, 2, 3]
+```
+
+## String Operations
+
+### implode()
+
+`method` Cake\\Collection\\Collection::**implode**(string $glue, callable|string|null $path = null): string
+
+Concatenates all elements in the collection into a string, separated by
+the given glue string. Optionally extract values using a path before joining:
+
+```php
+$collection = new Collection(['a', 'b', 'c']);
+echo $collection->implode(', '); // 'a, b, c'
+
+// With path extraction
+$collection = new Collection([
+    ['name' => 'Alice'],
+    ['name' => 'Bob'],
+    ['name' => 'Charlie'],
+]);
+echo $collection->implode(', ', 'name'); // 'Alice, Bob, Charlie'
+
+// With a callback
+$collection = new Collection([1, 2, 3]);
+echo $collection->implode(' + ', fn($n) => $n * 2); // '2 + 4 + 6'
+```
+
+## Conditional Operations
+
+### when()
+
+`method` Cake\\Collection\\Collection::**when**(mixed $condition, callable $callback): CollectionInterface
+
+Conditionally applies a callback to the collection when the condition is truthy.
+This enables fluent conditional chaining without breaking the method chain:
+
+```php
+$collection = new Collection($items)
+    ->when($shouldFilter, function ($collection) {
+        return $collection->filter(fn($item) => $item['active']);
+    })
+    ->when($sortByName, function ($collection) {
+        return $collection->sortBy('name');
+    });
+```
+
+If the condition is falsy, the collection is returned unchanged.
+
+### unless()
+
+`method` Cake\\Collection\\Collection::**unless**(mixed $condition, callable $callback): CollectionInterface
+
+The inverse of `when()`. Conditionally applies a callback to the collection
+when the condition is falsy:
+
+```php
+$collection = new Collection($items)
+    ->unless($hasDefaults, function ($collection) use ($defaults) {
+        return $collection->append($defaults);
+    });
+```
+
+If the condition is truthy, the collection is returned unchanged.
