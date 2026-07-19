@@ -48,7 +48,7 @@ const plugins = {
 const substitutions = {
   '|phpversion|': { value: '8.5', format: 'bold' },
   '|minphpversion|': { value: '8.2', format: 'italic' },
-  '|cakeversion|': '5.4.0',
+  '|cakeversion|': '5.4',
   '|cakefullversion|': 'CakePHP 5',
 };
 
@@ -60,19 +60,19 @@ export default {
       md.use(substitutionsReplacer, { substitutions });
     }
   },
-  base: "/5/",
+  base: "/5.x/",
   rewrites: {
     "en/:slug*": ":slug*",
   },
   sitemap: {
-    hostname: "https://book.cakephp.org/5/",
+    hostname: "https://book.cakephp.org/5.x/",
   },
   themeConfig: {
     socialLinks: [
       { icon: "github", link: "https://github.com/cakephp/cakephp" },
     ],
     editLink: {
-      pattern: "https://github.com/cakephp/docs/edit/5.next/docs/:path",
+      pattern: "https://github.com/cakephp/docs/edit/5.x/docs/:path",
       text: "Edit this page on GitHub",
     },
     sidebar: toc_en,
@@ -83,7 +83,7 @@ export default {
       { ...versions },
     ],
     versionBanner: {
-      message: 'This is a documentation for CakePHP 5',
+      message: 'This is documentation for CakePHP 5',
       link: '/latest/',
       linkText: 'Go to latest docs.'
     }
