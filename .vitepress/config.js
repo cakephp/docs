@@ -6,7 +6,7 @@ const toc_en = require("./toc_en.json");
 const toc_ja = require("./toc_ja.json");
 
 const versions = {
-  text: "5.next",
+  text: "5.x",
   items: [
     { text: "5.x (latest)", link: "https://book.cakephp.org/5.x/", target: '_self' },
     { text: "4.x", link: "https://book.cakephp.org/4.x/", target: '_self' },
@@ -81,12 +81,7 @@ export default {
       { text: "API", link: "https://api.cakephp.org/" },
       { ...plugins },
       { ...versions },
-    ],
-    versionBanner: {
-      message: 'This is documentation for CakePHP 5',
-      link: '/latest/',
-      linkText: 'Go to latest docs.'
-    }
+    ]
   },
   locales: {
     root: {
