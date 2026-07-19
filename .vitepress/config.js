@@ -49,7 +49,7 @@ const substitutions = {
   '|phpversion|': { value: '8.5', format: 'bold' },
   '|minphpversion|': { value: '8.2', format: 'italic' },
   '|cakeversion|': '5.4.0',
-  '|cakefullversion|': 'CakePHP 5.next',
+  '|cakefullversion|': 'CakePHP 5',
 };
 
 // This file contains overrides for .vitepress/config.js
@@ -60,12 +60,12 @@ export default {
       md.use(substitutionsReplacer, { substitutions });
     }
   },
-  base: "/5.next/",
+  base: "/5/",
   rewrites: {
     "en/:slug*": ":slug*",
   },
   sitemap: {
-    hostname: "https://book.cakephp.org/5.next/",
+    hostname: "https://book.cakephp.org/5/",
   },
   themeConfig: {
     socialLinks: [
@@ -83,7 +83,7 @@ export default {
       { ...versions },
     ],
     versionBanner: {
-      message: 'This is a development version of documentation for CakePHP 5.4.',
+      message: 'This is a documentation for CakePHP 5',
       link: '/latest/',
       linkText: 'Go to latest docs.'
     }
