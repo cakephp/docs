@@ -1327,12 +1327,13 @@ class ArticlesController extends AppController
 > - **Clarity**: Controller focuses on HTTP concerns, service handles business logic
 > - **Maintainability**: Complex workflows are organized into focused classes
 
-## Auto Wiring
+## Auto-wiring with league/container
 
 > [!WARNING]
 > Auto-wiring is convenient but can impact performance. Enable caching in production environments.
 
-Auto Wiring is turned off by default. To enable it:
+When using the default `league/container` implementation, auto-wiring is turned
+off by default. To enable it:
 
 ```php
 // In src/Application.php
@@ -1360,3 +1361,55 @@ $container->delegate(
 ```
 
 Read more about auto wiring in the [PHP League Container documentation](https://container.thephpleague.com/4.x/auto-wiring/).
+
+## Built-in Container
+
+::: info Added in version 5.4.0
+:::
+
+CakePHP includes its own PSR-11-compatible dependency injection container in
+the `Cake\Container` namespace. The `league/container` implementation remains
+the default so that existing applications continue to work unchanged. To use
+the built-in container, set `App.container` to `cake` in `config/app.php`:
+
+```php
+return [
+    'App' => [
+        'container' => 'cake',
+    ],
+];
+```
+
+CakePHP exposes the built-in container through a compatibility bridge. Continue
+to type-hint `Cake\Core\ContainerInterface` in your application's `services()`
+method; service definitions using `add()`, `addShared()`, `extend()`, tags, and
+delegates work with either implementation.
+
+### Auto-wiring
+
+Unlike the default `league/container` implementation, the built-in container
+enables auto-wiring and caches auto-wired resolutions by default. It can create
+concrete classes and resolve their class-typed constructor dependencies without
+an explicit service definition:
+
+```php
+class OrderService
+{
+    public function __construct(private PaymentGateway $gateway)
+    {
+    }
+}
+
+// Only the interface needs an explicit mapping. OrderService is auto-wired.
+$container->add(PaymentGateway::class, StripePaymentGateway::class);
+```
+
+Define services explicitly when a constructor needs an interface, a scalar or
+array value, or another value that cannot be determined from its type. Explicit
+definitions also let you configure constructor arguments and control whether a
+service is shared.
+
+When using the built-in container, do not add
+`League\Container\ReflectionContainer`; auto-wiring is already enabled. The
+following [auto-wiring instructions](#auto-wiring-with-leaguecontainer) apply
+only when using the default `league/container` implementation.
