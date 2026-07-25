@@ -501,4 +501,58 @@ echo Text::maskValue('4111111111111234', ['411', '112'], '*');
 Output:
 
     ***11111111***34
+
+### Text::maskRegex()
+
+`method` Cake\\Utility\\Text::**maskRegex**(string $string, array|string $patterns, string $maskCharacter = '*'): string
+
+Masks all occurrences of given regular expression pattern(s) within a string
+using a repeated character. Each match is replaced by a sequence of the masking
+character with the same length as the match.
+
+The `$patterns` argument accepts a single regular expression or an array of
+regular expressions. Empty patterns are ignored. `$maskCharacter` must be a
+single character.
+
+```php
+// Called as TextHelper
+echo $this->Text->maskRegex('my pin is 1234', '/\d+/', '*');
+
+// Called as Text
+use Cake\Utility\Text;
+
+echo Text::maskRegex('token: abc123', '/[a-z0-9]+/', 'x');
+```
+
+Output:
+
+    my pin is ****
+    xxxxx: xxxxxx
+
+### Text::maskPartialRegex()
+
+`method` Cake\\Utility\\Text::**maskPartialRegex**(string $string, array|string $patterns, int $showLeading = 0, int $showTrailing = 0, string $maskCharacter = '*'): string
+
+Masks all occurrences of given regular expression pattern(s) within a string,
+while preserving a number of leading and trailing characters from each match.
+
+The `$showLeading` and `$showTrailing` arguments control how many characters at
+the start and end of each match are left unmasked. If their combined value is
+greater than or equal to the match length, the match is left unchanged. These
+values must be non-negative, and `$maskCharacter` must be a single character.
+
+```php
+// Called as TextHelper
+echo $this->Text->maskPartialRegex('card: 4242424242424242', '/\d{16}/', 0, 4);
+
+// Called as Text
+use Cake\Utility\Text;
+
+echo Text::maskPartialRegex('Secret Codeword', '/\b\w+\b/', 1, 1);
+```
+
+Output:
+
+    card: ************4242
+    S****t C******d
 <!-- end-text -->
