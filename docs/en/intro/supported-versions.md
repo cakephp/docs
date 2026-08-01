@@ -4,11 +4,11 @@ See [CakePHP Development Process](../appendices/cakephp-development-process.md) 
 
 ## CakePHP Supported Versions
 
-This table was last updated in February 2026.
+This table was last updated in August 2026.
 
 | Major Version | Supported Version | PHP-Version    | Active Support | Security Support     |
 |---------------|-------------------|----------------|----------------|----------------------|
-| `5.x`         | `5.1` to `5.3`    | `8.1` to `8.5` | `5.3+`         | ✅                    |
+| `5.x`         | `5.2` to `5.4`    | `8.1` to `8.5` | `5.4+`         | ✅                    |
 | `4.x`         | `4.4` to `4.6`    | `7.2` to `8.3` | ❌              | September 10th, 2026 |
 | `3.x`         | None              | `5.6` to `7.4` | ❌              | ❌                    |
 | `2.x`         | None              | `5.4` to `7.4` | ❌              | ❌                    |
