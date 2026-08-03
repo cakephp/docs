@@ -1905,11 +1905,11 @@ data, you first need to setup associations between the tables as described in
 the [Associations - Linking Tables Together](../orm/associations) section. This technique of combining queries
 to fetch associated data from other tables is called **eager loading**.
 
-<!--@include: ./retrieving-data-and-resultsets.md{507,719}-->
+<!--@include: ./retrieving-data-and-resultsets.md#contain-->
 
 ### Filtering by Associated Data
 
-<!--@include: ./retrieving-data-and-resultsets.md{727,938}-->
+<!--@include: ./retrieving-data-and-resultsets.md#filtering-->
 
 ### Adding Joins
 

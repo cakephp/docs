@@ -443,7 +443,7 @@ You can manage event priorities in one of a few ways:
 
 `method` Cake\\ORM\\Table::**addBehavior**(string $name, array $options = []): static
 
-<!-- start-behaviors -->
+<!-- #region behaviors -->
 
 Behaviors provide a way to create horizontally re-usable pieces of logic
 related to table classes. You may be wondering why behaviors are regular classes
@@ -491,7 +491,7 @@ class ArticlesTable extends Table
 }
 ```
 
-<!-- end-behaviors -->
+<!-- #endregion behaviors -->
 
 You can find out more about behaviors, including the behaviors provided by
 CakePHP in the chapter on [Behaviors](../orm/behaviors).

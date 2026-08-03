@@ -18,7 +18,7 @@ a perfect fit for.
 
 ## Using Behaviors
 
-<!--@include: ./table-objects.md{414,460}-->
+<!--@include: ./table-objects.md#behaviors-->
 
 ## Core Behaviors
 

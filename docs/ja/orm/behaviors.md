@@ -12,7 +12,7 @@
 
 ## ビヘイビアーの利用
 
-<!--@include: ./table-objects.md{401,446}-->
+<!--@include: ./table-objects.md#behaviors-->
 
 ## コアビヘイビアー
 
