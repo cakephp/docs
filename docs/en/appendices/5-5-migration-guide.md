@@ -18,8 +18,7 @@ bin/cake upgrade rector --rules cakephp55 <path/to/app/src>
 
 ### Database
 
-- Expressions created with `FunctionsBuilder::concat()` now use `CONCAT()` with
-  postgres instead of the `||` operator.
+- `Postgres` driver does not replace `FunctionsBuilder::concat()` expressions with `||` operations.
 
 ## Deprecations
 
