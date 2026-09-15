@@ -1258,11 +1258,11 @@ $query->cache(function ($q) {
 あるようにテーブル間の関連をセットアップしてください。他のテーブルから関連するデータを
 フェッチするためにクエリーを合成する技術を **イーガーロード** (eager load) といいます。
 
-<!--@include: ./retrieving-data-and-resultsets.md{488,680}-->
+<!--@include: ./retrieving-data-and-resultsets.md#contain-->
 
 ### 関連付くデータでフィルターする
 
-<!--@include: ./retrieving-data-and-resultsets.md{686,858}-->
+<!--@include: ./retrieving-data-and-resultsets.md#filtering-->
 
 ### Join を追加する
 
