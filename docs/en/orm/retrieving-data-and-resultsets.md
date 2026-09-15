@@ -341,10 +341,10 @@ list finds.
 
 ```php
 // In your Authors Entity create a virtual field to be used as the displayField:
-protected function _getLabel()
+protected function _getLabel(): string
 {
-    return $this->_fields['first_name'] . ' ' . $this->_fields['last_name']
-        . ' / ' . __('User ID %s', $this->_fields['user_id']);
+    return $this->first_name . ' ' . $this->last_name
+        . ' / ' . __('User ID %s', $this->user_id);
 }
 ```
 

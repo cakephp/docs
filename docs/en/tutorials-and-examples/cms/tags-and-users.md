@@ -351,16 +351,16 @@ can add a virtual/computed field to the entity. In
 // the Collection class
 use Cake\Collection\Collection;
 
-// Update the accessible property to contain `tag_string`
-protected array $_accessible = [
+// Update the patchable property to contain `tag_string`
+protected array $patchable = [
     //other fields...
     'tag_string' => true,
 ];
 
-protected function _getTagString(): string
+protected function _getTagString(?string $tagString): string
 {
-    if (isset($this->_fields['tag_string'])) {
-        return $this->_fields['tag_string'];
+    if ($tagString !== null) {
+        return $tagString;
     }
     if (!$this->tags) {
         return '';
@@ -418,10 +418,10 @@ public function view($slug = null)
 ### Persisting the Tag String
 
 Now that we can view existing tags as a string, we'll want to save that data as
-well. Because we marked the `tag_string` as accessible, the ORM will copy that
-data from the request into our entity. We can use a `beforeSave()` hook method
-to parse the tag string and find/build the related entities. Add the following
-to **src/Model/Table/ArticlesTable.php**:
+well. Because we marked `tag_string` as patchable, the ORM will copy that data
+from the request into our entity. We can use a `beforeSave()` hook method to
+parse the tag string and find/build the related entities. Add the following to
+**src/Model/Table/ArticlesTable.php**:
 
 ```php
 public function beforeSave(EventInterface $event, $entity, $options): void
