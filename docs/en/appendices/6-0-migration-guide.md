@@ -122,6 +122,13 @@ Some properties have also been renamed to better reflect their purpose. These ar
 
 ## New Features
 
+### ORM
+
+- Entities can now map fields to real class properties, including typed
+  properties and PHP 8.4 asymmetric visibility/property hooks. When changing
+  declared fields inside entity methods, continue to use `set()`/`patch()` if
+  you need dirty tracking and related entity bookkeeping.
+
 ### Router
 
 - Attribute routing is now available via `RouteBuilder::connectAttributes()` and the

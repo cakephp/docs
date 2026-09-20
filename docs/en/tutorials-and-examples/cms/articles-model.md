@@ -65,7 +65,7 @@ use Cake\ORM\Entity;
 
 class Article extends Entity
 {
-    protected array $_accessible = [
+    protected array $patchable = [
         'user_id' => true,
         'title' => true,
         'slug' => true,
@@ -79,7 +79,7 @@ class Article extends Entity
 }
 ```
 
-Right now, our entity is quite slim; we've only set up the `_accessible`
+Right now, our entity is quite slim; we've only set up the `patchable`
 property, which controls how properties can be modified by
 [Entities Mass Assignment](../../orm/entities#entities-mass-assignment).
 

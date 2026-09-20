@@ -1,6 +1,6 @@
 ---
 title: "Entities"
-description: "Manage CakePHP entities: access data, implement accessors/mutators, handle mass assignment, virtual fields, and custom entity logic."
+description: "Manage CakePHP entities: access data, use typed properties and property hooks, handle mass assignment, virtual fields, and custom entity logic."
 ---
 
 # Entities
@@ -11,6 +11,8 @@ While [Table Objects](../orm/table-objects) represent and provide access to a co
 objects, entities represent individual rows or domain objects in your
 application. Entities contain methods to manipulate and
 access the data they contain. Fields can also be accessed as properties on the object.
+In CakePHP 6.0 those fields can be stored as dynamic fields or mapped onto
+real class properties in your entity class.
 
 Entities are created for you each time you iterate the query instance returned
 by `find()` of a table object or when you call `all()` or `first()` method
@@ -171,6 +173,87 @@ $article->has('links'); // true
 $article->hasValue('links'); // false
 ```
 
+### Declaring Concrete Properties
+
+In CakePHP 6.0 entity fields can be mapped onto real class properties instead
+of being stored only as dynamic fields. This lets you use native PHP types in
+your entities while continuing to use CakePHP's entity features such as
+`get()`, `set()`, `patch()`, dirty tracking, original values, and mass
+assignment.
+
+```php
+namespace App\Model\Entity;
+
+use Cake\ORM\Entity;
+
+class User extends Entity
+{
+    public protected(set) int $id;
+    public protected(set) string $email;
+    public protected(set) ?string $first_name;
+    public protected(set) ?string $last_name;
+    public protected(set) bool $is_active;
+}
+```
+
+Using `public protected(set)` lets outside code read the property directly
+while writes still go through the entity API. If you use `protected`
+properties instead, both reads and writes from outside the entity continue to
+use CakePHP's magic property handling.
+
+Properties can also use PHP property hooks:
+
+```php
+namespace App\Model\Entity;
+
+use Cake\ORM\Entity;
+
+class User extends Entity
+{
+    public protected(set) ?string $password {
+        set (?string $value) {
+            $this->password = $value === null
+                ? null
+                : password_hash($value, PASSWORD_DEFAULT);
+        }
+    }
+}
+```
+
+Property `set` hooks are bypassed when the ORM hydrates database rows with
+setters disabled, so persisted values are assigned without being transformed a
+second time.
+
+You can also use `get` hooks to define virtual computed properties without
+backing storage:
+
+```php
+namespace App\Model\Entity;
+
+use Cake\ORM\Entity;
+
+class User extends Entity
+{
+    public protected(set) string $first_name;
+    public protected(set) string $last_name;
+
+    public string $full_name {
+        get => trim($this->first_name . ' ' . $this->last_name);
+    }
+}
+```
+
+> [!WARNING]
+> When changing declared fields from inside entity methods, use `$this->set()`
+> or `$this->patch()` instead of assigning `$this->field` directly. Direct
+> assignment inside the entity bypasses CakePHP's dirty tracking and original
+> value bookkeeping.
+
+> [!NOTE]
+> If a database column name conflicts with a built-in `Entity` property such as
+> `patchable`, `dirty`, or `errors`, keep that column as a dynamic field instead
+> of declaring it as a concrete property.
+
 If you often partially load entities you should enable strict-property access
 behavior to ensure you're not using properties that haven't been loaded. On
 a per-entity basis you can enable this behavior:
@@ -195,8 +278,9 @@ Accessors let you customize how fields are read. They use the convention of
 words are joined together to a single word with the first letter of each word
 capitalized) of the field name.
 
-They receive the basic value stored in the `_fields` array as their only
-argument. For example:
+They receive the basic value stored for the field as their only argument,
+whether that value comes from a concrete property or a dynamic field. For
+example:
 
 ```php
 namespace App\Model\Entity;
@@ -402,9 +486,9 @@ into an entity allows the user to modify any and all columns. When using
 anonymous entity classes or creating the entity class with the [Bake Console](../bake)
 CakePHP does not protect against mass-assignment.
 
-The `_accessible` property allows you to provide a map of fields and
-whether or not they can be mass-assigned. The values `true` and `false`
-indicate whether a field can or cannot be mass-assigned:
+The `patchable` property allows you to provide a map of fields and whether or
+not they can be mass-assigned. The values `true` and `false` indicate whether
+a field can or cannot be mass-assigned:
 
 ```php
 namespace App\Model\Entity;
@@ -413,7 +497,7 @@ use Cake\ORM\Entity;
 
 class Article extends Entity
 {
-    protected array $_accessible = [
+    protected array $patchable = [
         'title' => true,
         'body' => true,
     ];
@@ -430,7 +514,7 @@ use Cake\ORM\Entity;
 
 class Article extends Entity
 {
-    protected array $_accessible = [
+    protected array $patchable = [
         'title' => true,
         'body' => true,
         '*' => false,
@@ -452,26 +536,25 @@ use App\Model\Entity\Article;
 $article = new Article(['id' => 1, 'title' => 'Foo'], ['guard' => false]);
 ```
 
-### Modifying the Guarded Fields at Runtime
+### Modifying the Patchable Fields at Runtime
 
-You can modify the list of guarded fields at runtime using the `setAccess()`
-method:
+You can modify the list of patchable fields at runtime using the
+`setPatchable()` method:
 
 ```php
-// Make user_id accessible.
-$article->setAccess('user_id', true);
+// Make user_id patchable.
+$article->setPatchable('user_id', true);
 
 // Make title guarded.
-$article->setAccess('title', false);
+$article->setPatchable('title', false);
 ```
 
 > [!NOTE]
-> Modifying accessible fields affects only the instance the method is called
-> on.
+> Modifying patchable fields affects only the instance the method is called on.
 
 When using the `newEntity()` and `patchEntity()` methods in the `Table`
 objects you can customize mass assignment protection with options. Please refer
-to the [Changing Accessible Fields](../orm/saving-data#changing-accessible-fields) section for more information.
+to the [Changing Patchable Fields](../orm/saving-data#changing-patchable-fields) section for more information.
 
 ### Bypassing Field Guarding
 
@@ -482,8 +565,8 @@ fields:
 $article->patch($fields, ['guard' => false]);
 ```
 
-By setting the `guard` option to `false`, you can ignore the accessible
-field list for a single call to `patch()`.
+By setting the `guard` option to `false`, you can ignore the patchable field
+list for a single call to `patch()`.
 
 ### Checking if an Entity was Persisted
 
@@ -618,7 +701,7 @@ use Cake\ORM\Entity;
 
 class User extends Entity
 {
-    protected array $_virtual = ['full_name'];
+    protected array $virtual = ['full_name'];
 }
 ```
 
@@ -642,7 +725,7 @@ use Cake\ORM\Entity;
 
 class User extends Entity
 {
-    protected array $_hidden = ['password'];
+    protected array $hidden = ['password'];
 }
 ```
 

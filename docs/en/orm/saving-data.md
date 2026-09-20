@@ -144,9 +144,9 @@ $entity = $articles->newEntity($this->request->getData());
 ```
 
 > [!NOTE]
-> If you are using newEntity() and the resulting entities are missing some or
-> all the data they were passed, double check that the columns you want to
-> set are listed in the `$_accessible` property of your entity. See [Entities Mass Assignment](../orm/entities#entities-mass-assignment).
+> If you are using `newEntity()` and the resulting entities are missing some or
+> all the data they were passed, double check that the columns you want to set
+> are listed in the `patchable` property of your entity. See [Entities Mass Assignment](../orm/entities#entities-mass-assignment).
 
 The request data should follow the structure of your entities. For example if
 you have an article, which belonged to a user, and had many comments, your
@@ -430,12 +430,12 @@ $articles->saveMany($entities);
 $articles->saveManyOrFail($entities);
 ```
 
-### Changing Accessible Fields
+### Changing Patchable Fields
 
-It's also possible to allow `newEntity()` to write into non accessible fields.
-For example, `id` is usually absent from the `_accessible` property. In
-such case, you can use the `accessibleFields` option. It could be useful to
-keep ids of associated entities:
+It's also possible to allow `newEntity()` to write into non-patchable fields.
+For example, `id` is usually absent from the `patchable` property. In that
+case, you can use the `patchableFields` option. It can be useful to keep ids
+of associated entities:
 
 ```php
 // In a controller
@@ -446,7 +446,7 @@ $entity = $articles->newEntity($this->request->getData(), [
         'Tags', 'Comments' => [
             'associated' => [
                 'Users' => [
-                    'accessibleFields' => ['id' => true],
+                    'patchableFields' => ['id' => true],
                 ],
             ],
         ],
@@ -458,9 +458,9 @@ The above will keep the association unchanged between Comments and Users for the
 concerned entity.
 
 > [!NOTE]
-> If you are using newEntity() and the resulting entities are missing some or
-> all the data they were passed, double check that the columns you want to
-> set are listed in the `$_accessible` property of your entity. See
+> If you are using `newEntity()` and the resulting entities are missing some or
+> all the data they were passed, double check that the columns you want to set
+> are listed in the `patchable` property of your entity. See
 > [Entities Mass Assignment](../orm/entities#entities-mass-assignment).
 
 ### Merging Request Data Into Entities
@@ -553,14 +553,14 @@ The same can be said about hasMany and belongsToMany associations, with
 an important caveat:
 
 > [!NOTE]
-> For belongsToMany associations, ensure the relevant entity has
-> a property accessible for the associated entity.
+> For belongsToMany associations, ensure the relevant entity has a patchable
+> property for the associated entity.
 
 If a Product belongsToMany Tag:
 
 ```php
 // in the Product Entity
-protected array $_accessible = [
+protected array $patchable = [
     // .. other properties
     'tags' => true,
 ];

@@ -315,7 +315,7 @@ use Cake\ORM\Entity;
 
 class Article extends Entity
 {
-    protected array $_accessible = [
+    protected array $patchable = [
         'title' => true,
         'slug' => true,
         'body' => true,
@@ -627,7 +627,7 @@ declare(strict_types=1);
 // ✓ Mass assignment (protected fields)
 
 $article = $this->Articles->newEntity($data);
-// Only $_accessible fields can be set
+// Only patchable fields can be set
 ```
 
 ```bash [Code Generation]
