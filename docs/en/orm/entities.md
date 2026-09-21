@@ -176,8 +176,8 @@ $article->hasValue('links'); // false
 ### Declaring Concrete Properties
 
 In CakePHP 6.0 entity fields can be mapped onto real class properties instead
-of being stored only as dynamic fields. This lets you use native PHP types in
-your entities while continuing to use CakePHP's entity features such as
+of being stored only as dynamic fields. This gives you type safety for
+your entity fields while continuing to use CakePHP's entity features such as
 `get()`, `set()`, `patch()`, dirty tracking, original values, and mass
 assignment.
 
