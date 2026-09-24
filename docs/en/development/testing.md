@@ -743,10 +743,16 @@ public function getFixtures(): array
 
 By default, CakePHP resets fixture state at the end of each test by truncating
 all the tables in the database. This operation can become expensive as your
-application grows. By using `TransactionStrategy` each test method will be run
-inside a transaction that is rolled back at the end of the test. This can yield
-improved performance but requires your tests not heavily rely on static fixture
-data, as auto-increment values are not reset before each test.
+application grows. CakePHP also provides two other fixture management strategies:
+
+- `TransactionStrategy` - each test method will be run inside a transaction that
+  is rolled back at the end of the test. This can yield improved performance but
+  requires your tests not heavily rely on static fixture data, as auto-increment
+  values are not reset before each test.
+- `DeleteStrategy` - after each test, foreign keys are disabled and records are
+  removed with `DELETE` queries. This can yield improved performance but
+  requires your tests not heavily rely on static fixture data, as auto-increment
+  values are not reset before each test.
 
 The fixture state management strategy can be defined within the test case:
 
@@ -777,6 +783,9 @@ To switch out the general default strategy, use Configure key `TestSuite.fixture
 ```
 
 The recommended strategy for medium and large applications is the `TransactionStrategy`, as using rollbacks to undo changes from tests is simpler to maintain, and reduces the chances of cross-contamination and side-effects between tests.
+
+::: info DeleteStategy was added in version 5.5.0
+:::
 
 ### Fixture Factories
 

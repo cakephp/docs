@@ -26,4 +26,9 @@ Coming soon
 
 ## New Features
 
-Coming soon
+### TestSuite
+
+- `Cake\TestSuite\Fixture\DeleteStrategy` was added. This fixture strategy
+  cleans fixtures with `DELETE` instead of `TRUNCATE` which can be more
+  performant on MySQL, with the trade off of auto increment values not being
+  reset between tests.
