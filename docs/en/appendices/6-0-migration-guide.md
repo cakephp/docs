@@ -71,7 +71,7 @@ Some properties have also been renamed to better reflect their purpose. These ar
 
 ### Method Signatures
 
-- Many fluent methods now declare a `static` return type. Update return types
+- All fluent methods now declare a `static` return type. Update return types
   in overridden methods and interface implementations accordingly. This affects
   methods on classes and interfaces such as `Controller`, `Table`, `EntityInterface`,
   `EventInterface`, `Mailer`, and `ViewBuilder`. The
