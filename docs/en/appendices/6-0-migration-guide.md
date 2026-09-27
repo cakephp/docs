@@ -29,11 +29,13 @@ Some methods have also been renamed to better reflect their purpose. These are:
 
 | Class                                 | Old Method(s)                                       | New Method(s)                                          |
 |---------------------------------------|-----------------------------------------------------|--------------------------------------------------------|
+| `Cake\Collection\ExtractTrait`        | `_extract()`                                        | `extractColumn()`                                      |
 | `Cake\Console\ConsoleOutput`          | `_write()`                                          | `writeStream()`                                        |
 | `Cake\Form\Form`                      | `_execute()`                                        | `process()`                                            |
 | `Cake\Http\Client`                    | `_sendRequest()`                                    | `processRequest()`                                     |
 | `Cake\Http\ServerRequest`             | `_is()`                                             | `isType()`                                             |
 | `Cake\Http\Client\Adapter\Stream`     | `_send()`                                           | `processRequest()`                                     |
+| `Cake\Http\Cookie\Cookie`             | `resolveSameSiteEnum()`                             | `resolveSameSite()`                                    |
 | `Cake\I18n\DateFormatTrait`           | `_parseDateTime()`                                  | `processDateTime()`                                    |
 | `Cake\Mailer\Transport\SmtpTransport` | `_connect()`<br>`_disconnect()`                     | `connectSmtp()`<br>`disconnectSmtp()`                  |
 | `Cake\ORM\Table`                      | `_saveMany()`<br>`_deleteMany()`                    | `doSaveMany()`<br>`doDeleteMany()`                     |
@@ -59,6 +61,34 @@ Some properties have also been renamed to better reflect their purpose. These ar
 - `Cake\View\View`
   - `$_helpers` has been renamed to `helperRegistry` as `$helpers` already exists to hold the configuration
 
+### Renamed Classes
+
+- `Cake\Database\DriverFeatureEnum` has moved to `Cake\Database\Enum\DriverFeature`.
+- `Cake\Http\Cookie\SameSiteEnum` has moved to `Cake\Http\Cookie\Enum\SameSite`.
+- The `Cake\Command\Helper` namespace has been removed. Use the
+  `Cake\Console\Helper` namespace for `BannerHelper`, `ProgressHelper`,
+  `TableHelper`, and `TreeHelper`.
+
+### Method Signatures
+
+- All fluent methods now declare a `static` return type. Update return types
+  in overridden methods and interface implementations accordingly. This affects
+  methods on classes and interfaces such as `Controller`, `Table`, `EntityInterface`,
+  `EventInterface`, `Mailer`, and `ViewBuilder`. The
+  [upgrade tool](https://github.com/cakephp/upgrade/blob/6.x/config/rector/sets/cakephp60.php)
+  contains the full list.
+- The following methods now return `void`: `ServerRequest::allowMethod()`,
+  `Configure::load()`, `ResponseEmitter::emit()`, `Session::close()`,
+  `Table::deleteOrFail()`, `FixtureInterface::insert()` and `truncate()`,
+  and `ConsoleInputArgument::validateChoice()` and
+  `ConsoleInputOption::validateChoice()`. Remove assignments and conditions
+  that depend on their former return values. Handle exceptions where applicable.
+- The callback parameters of `CsrfProtectionMiddleware::skipCheckCallback()`,
+  `SessionCsrfProtectionMiddleware::skipCheckCallback()`, `View::cache()`,
+  `TestCase::withErrorReporting()`, `Table::executeTransaction()`, and
+  `AttributeCollection::filter()` now require a `Closure` instead of a general
+  `callable`. `ResultSetFactory::getDtoHydrator()` now returns a `Closure`.
+
 ### Console
 
 - The `validChoice` method on `ConsoleInputArgument` and `ConsoleInputOption` has been renamed to `validateChoice`.
@@ -82,6 +112,14 @@ Some properties have also been renamed to better reflect their purpose. These ar
   instead of `Traversable`.
 - `EntityTrait::isEmpty()` has been dropped in favor of `hasValue()`.
 
+### Database
+
+- Binary columns now use `binary` for fixed-length data and `varbinary` for
+  variable-length data. In migration `addColumn()` calls, remove
+  `'fixed' => true` from fixed-length `binary` columns, and change variable-length
+  `binary` columns to `varbinary`. The `fixed` option is no longer used;
+  `TableSchemaInterface::TYPE_VARBINARY` is available for the new type.
+
 ### Http
 
 - Using `$request->getParam('?')` to get the query params is no longer possible.
@@ -98,6 +136,9 @@ Some properties have also been renamed to better reflect their purpose. These ar
 - `isAccessible` method has been renamed to `isPatchable`.
 - The `accessibleFields` option used in e.g. ORM Queries has been
   renamed to `patchableFields`.
+- `TranslateTrait::translation()` now only retrieves an existing translation
+  and returns `null` when none exists. Use `getOrCreateTranslation()` if the
+  previous create-on-access behavior is needed.
 
 ### Router
 
