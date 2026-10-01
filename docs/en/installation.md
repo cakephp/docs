@@ -133,14 +133,14 @@ For containerized development:
 # Create project using CakePHP's official image (ghcr.io/cakephp/cakephp),
 # which bundles the extensions CakePHP needs (intl, pdo_mysql, etc.) so only
 # Composer itself needs installing.
-docker run --rm -v $(pwd):/app -w /app ghcr.io/cakephp/cakephp:8.5 sh -c \
+docker run --rm -v $(pwd):/app -w /app ghcr.io/cakephp/cakephp:|phpdockerversion| sh -c \
   "curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
   && composer create-project --prefer-dist cakephp/app:~|cakeversion| my_app"
 
 # Start PHP development server
 cd my_app
 docker run -it --rm -p 8765:8765 -v $(pwd):/app \
-  -w /app ghcr.io/cakephp/cakephp:8.5 php bin/cake.php server -H 0.0.0.0
+  -w /app ghcr.io/cakephp/cakephp:|phpdockerversion| php bin/cake.php server -H 0.0.0.0
 ```
 
 ::: warning Development Only
