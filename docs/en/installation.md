@@ -130,19 +130,17 @@ Check [DDEV Documentation](https://ddev.readthedocs.io/) for installation and ad
 For containerized development:
 
 ```bash
-# Create project using Composer in Docker.
-# CakePHP requires the intl extension, which the base composer image does not
-# provide, so run Composer inside a PHP image with intl installed.
-docker run --rm -v $(pwd):/app -w /app php:8.2-cli bash -c \
-  "apt-get update && apt-get install -y libicu-dev git unzip curl \
-  && docker-php-ext-install intl \
-  && curl -sS https://getcomposer.org/installer | php \
-  && php composer.phar create-project --prefer-dist cakephp/app:~|cakeversion| my_app"
+# Create project using CakePHP's official image (ghcr.io/cakephp/cakephp),
+# which bundles the extensions CakePHP needs (intl, pdo_mysql, etc.) so only
+# Composer itself needs installing.
+docker run --rm -v $(pwd):/app -w /app ghcr.io/cakephp/cakephp:8.5 sh -c \
+  "curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
+  && composer create-project --prefer-dist cakephp/app:~|cakeversion| my_app"
 
-# Start PHP development server (install required extensions first)
+# Start PHP development server
 cd my_app
 docker run -it --rm -p 8765:8765 -v $(pwd):/app \
-  -w /app php:8.2-cli bash -c "apt-get update && apt-get install -y libicu-dev && docker-php-ext-install intl mbstring && php bin/cake server -H 0.0.0.0"
+  -w /app ghcr.io/cakephp/cakephp:8.5 php bin/cake.php server -H 0.0.0.0
 ```
 
 ::: warning Development Only
