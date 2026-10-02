@@ -47,6 +47,7 @@ const plugins = {
 
 const substitutions = {
   '|phpversion|': { value: '8.5', format: 'bold' },
+  '|phpdockerversion|': '8.5',
   '|minphpversion|': { value: '8.2', format: 'italic' },
   '|cakeversion|': '5.4',
   '|cakefullversion|': 'CakePHP 5',
