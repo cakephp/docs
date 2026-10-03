@@ -4,23 +4,38 @@
       "text": "はじめに",
       "collapsed": false,
       "items": [
-        { "text": "インストール", "link": "/ja/installation" },
-        { "text": "クイックスタート", "link": "/ja/quickstart" },
-        { "text": "イントロダクション", "link": "/ja/intro" },
-        { "text": "規約", "link": "/ja/intro/conventions" },
+        {
+          "text": "イントロダクション",
+          "link": "/ja/intro"
+        },
+        {
+          "text": "クイックスタート",
+          "link": "/ja/quickstart"
+        },
+        {
+          "text": "インストール",
+          "link": "/ja/installation"
+        },
+        {
+          "text": "規約",
+          "link": "/ja/intro/conventions"
+        },
         {
           "text": "CakePHP フォルダ構造",
           "link": "/ja/intro/cakephp-folder-structure"
         },
         {
-          "text": "ヘルプの取得",
-          "link": "/ja/intro/where-to-get-help"
+          "text": "設定",
+          "link": "/ja/development/configuration"
+        },
+        {
+          "text": "ガイドの概要",
+          "link": "/ja/topics"
         },
         {
           "text": "チュートリアル & 例",
-          "collapsed": true,
-          "items": [
-        { "text": "概要", "link": "/ja/tutorials-and-examples" },
+          "link": "/ja/tutorials-and-examples"
+        },
         {
           "text": "ブログチュートリアル",
           "collapsed": true,
@@ -94,14 +109,41 @@
           ]
         }
       ]
+    },
+    {
+      "text": "アプリケーション",
+      "collapsed": true,
+      "items": [
+        {
+          "text": "アプリケーションのライフサイクル",
+          "link": "/ja/development/application"
+        },
+        {
+          "text": "依存性注入",
+          "link": "/ja/development/dependency-injection"
+        },
+        {
+          "text": "イベント",
+          "link": "/ja/core-libraries/events"
+        },
+        {
+          "text": "プラグインの読み込み",
+          "link": "/ja/core-libraries/plugin"
+        },
+        {
+          "text": "プラグインの作成",
+          "link": "/ja/plugins"
         }
       ]
     },
     {
-      "text": "コントローラー",
+      "text": "HTTP",
       "collapsed": true,
       "items": [
-        { "text": "コントローラー", "link": "/ja/controllers" },
+        {
+          "text": "ルーティング",
+          "link": "/ja/development/routing"
+        },
         {
           "text": "リクエスト & レスポンス",
           "link": "/ja/controllers/request-response"
@@ -111,19 +153,31 @@
           "link": "/ja/controllers/middleware"
         },
         {
-          "text": "ページコントローラー",
-          "link": "/ja/controllers/pages-controller"
+          "text": "コントローラー",
+          "link": "/ja/controllers"
+        },
+        {
+          "text": "セッション",
+          "link": "/ja/development/sessions"
         },
         {
           "text": "ページネーション",
           "link": "/ja/controllers/pagination"
         },
         {
+          "text": "REST API",
+          "link": "/ja/development/rest"
+        },
+        {
+          "text": "ページコントローラー",
+          "link": "/ja/controllers/pages-controller"
+        },
+        {
           "text": "コンポーネント",
           "collapsed": true,
           "items": [
             {
-              "text": "コンポーネント",
+              "text": "概要",
               "link": "/ja/controllers/components"
             },
             {
@@ -133,12 +187,88 @@
             {
               "text": "フラッシュ",
               "link": "/ja/controllers/components/flash"
-            },
-            {
-              "text": "フォーム保護",
-              "link": "/ja/controllers/components/form-protection"
             }
           ]
+        }
+      ]
+    },
+    {
+      "text": "データベース",
+      "collapsed": true,
+      "items": [
+        {
+          "text": "概要",
+          "link": "/ja/orm"
+        },
+        {
+          "text": "データベース基礎",
+          "link": "/ja/orm/database-basics"
+        },
+        {
+          "text": "テーブルオブジェクト",
+          "link": "/ja/orm/table-objects"
+        },
+        {
+          "text": "エンティティ",
+          "link": "/ja/orm/entities"
+        },
+        {
+          "text": "アソシエーション",
+          "link": "/ja/orm/associations"
+        },
+        {
+          "text": "クエリビルダー",
+          "link": "/ja/orm/query-builder"
+        },
+        {
+          "text": "データの取得と結果セット",
+          "link": "/ja/orm/retrieving-data-and-resultsets"
+        },
+        {
+          "text": "データの保存",
+          "link": "/ja/orm/saving-data"
+        },
+        {
+          "text": "データの削除",
+          "link": "/ja/orm/deleting-data"
+        },
+        {
+          "text": "バリデーションとアプリケーションルール",
+          "link": "/ja/orm/validation"
+        },
+        {
+          "text": "ビヘイビア",
+          "collapsed": true,
+          "items": [
+            {
+              "text": "概要",
+              "link": "/ja/orm/behaviors"
+            },
+            {
+              "text": "カウンターキャッシュ",
+              "link": "/ja/orm/behaviors/counter-cache"
+            },
+            {
+              "text": "タイムスタンプ",
+              "link": "/ja/orm/behaviors/timestamp"
+            },
+            {
+              "text": "翻訳",
+              "link": "/ja/orm/behaviors/translate"
+            },
+            {
+              "text": "ツリー",
+              "link": "/ja/orm/behaviors/tree"
+            }
+          ]
+        },
+        {
+          "text": "スキーマシステム",
+          "link": "/ja/orm/schema-system"
+        },
+        {
+          "text": "Migrations ↗",
+          "link": "https://book.cakephp.org/migrations/"
         }
       ]
     },
@@ -146,18 +276,26 @@
       "text": "ビュー",
       "collapsed": true,
       "items": [
-        { "text": "ビュー", "link": "/ja/views" },
-        { "text": "セル", "link": "/ja/views/cells" },
         {
-          "text": "JSON と XML ビュー",
-          "link": "/ja/views/json-and-xml-views"
+          "text": "テンプレートとレイアウト",
+          "link": "/ja/views"
         },
-        { "text": "テーマ", "link": "/ja/views/themes" },
+        {
+          "text": "フォームヘルパー",
+          "link": "/ja/views/helpers/form"
+        },
+        {
+          "text": "モデルなしのフォーム",
+          "link": "/ja/core-libraries/form"
+        },
         {
           "text": "ヘルパー",
           "collapsed": true,
           "items": [
-            { "text": "ヘルパー", "link": "/ja/views/helpers" },
+            {
+              "text": "概要",
+              "link": "/ja/views/helpers"
+            },
             {
               "text": "パンくずリスト",
               "link": "/ja/views/helpers/breadcrumbs"
@@ -165,10 +303,6 @@
             {
               "text": "フラッシュ",
               "link": "/ja/views/helpers/flash"
-            },
-            {
-              "text": "フォーム",
-              "link": "/ja/views/helpers/form"
             },
             {
               "text": "HTML",
@@ -190,226 +324,54 @@
               "text": "時間",
               "link": "/ja/views/helpers/time"
             },
-            { "text": "URL", "link": "/ja/views/helpers/url" }
-          ]
-        }
-      ]
-    },
-    {
-      "text": "ORM",
-      "collapsed": true,
-      "items": [
-        { "text": "ORM", "link": "/ja/orm" },
-        {
-          "text": "データベース基礎",
-          "link": "/ja/orm/database-basics"
-        },
-        {
-          "text": "クエリビルダー",
-          "link": "/ja/orm/query-builder"
-        },
-        {
-          "text": "テーブルオブジェクト",
-          "link": "/ja/orm/table-objects"
-        },
-        { "text": "エンティティ", "link": "/ja/orm/entities" },
-        {
-          "text": "アソシエーション",
-          "link": "/ja/orm/associations"
-        },
-        {
-          "text": "データの取得と結果セット",
-          "link": "/ja/orm/retrieving-data-and-resultsets"
-        },
-        { "text": "データの保存", "link": "/ja/orm/saving-data" },
-        { "text": "データの削除", "link": "/ja/orm/deleting-data" },
-        { "text": "バリデーション", "link": "/ja/orm/validation" },
-        {
-          "text": "スキーマシステム",
-          "link": "/ja/orm/schema-system"
-        },
-        {
-          "text": "ビヘイビア",
-          "collapsed": true,
-          "items": [
             {
-              "text": "ビヘイビア",
-              "link": "/ja/orm/behaviors"
-            },
-            {
-              "text": "カウンターキャッシュ",
-              "link": "/ja/orm/behaviors/counter-cache"
-            },
-            {
-              "text": "タイムスタンプ",
-              "link": "/ja/orm/behaviors/timestamp"
-            },
-            {
-              "text": "翻訳",
-              "link": "/ja/orm/behaviors/translate"
-            },
-            {
-              "text": "ツリー",
-              "link": "/ja/orm/behaviors/tree"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "text": "コアライブラリ",
-      "collapsed": true,
-      "items": [
-        { "text": "イベント", "link": "/ja/core-libraries/events" },
-        { "text": "キャッシュ", "link": "/ja/core-libraries/caching" },
-        { "text": "メール", "link": "/ja/core-libraries/email" },
-        { "text": "ログ", "link": "/ja/core-libraries/logging" },
-        { "text": "セキュリティ", "link": "/ja/core-libraries/security" },
-        {
-          "text": "アプリケーションコア",
-          "items": [
-            { "text": "アプリ", "link": "/ja/core-libraries/app" },
-            { "text": "プラグイン", "link": "/ja/core-libraries/plugin" },
-            {
-              "text": "レジストリオブジェクト",
-              "link": "/ja/core-libraries/registry-objects"
-            },
-            {
-              "text": "グローバル定数と関数",
-              "link": "/ja/core-libraries/global-constants-and-functions"
-            },
-            {
-              "text": "HTTP クライアント",
-              "link": "/ja/core-libraries/httpclient"
+              "text": "URL",
+              "link": "/ja/views/helpers/url"
             }
           ]
         },
         {
-          "text": "データ処理",
-          "items": [
-            {
-              "text": "コレクション",
-              "link": "/ja/core-libraries/collections"
-            },
-            { "text": "ハッシュ", "link": "/ja/core-libraries/hash" },
-            { "text": "XML", "link": "/ja/core-libraries/xml" }
-          ]
+          "text": "ビューセル",
+          "link": "/ja/views/cells"
         },
         {
-          "text": "テキストと書式設定",
-          "items": [
-            {
-              "text": "インフレクター",
-              "link": "/ja/core-libraries/inflector"
-            },
-            { "text": "数値", "link": "/ja/core-libraries/number" },
-            { "text": "テキスト", "link": "/ja/core-libraries/text" },
-            { "text": "時間", "link": "/ja/core-libraries/time" },
-            {
-              "text": "国際化とローカライゼーション",
-              "link": "/ja/core-libraries/internationalization-and-localization"
-            }
-          ]
+          "text": "JSON と XML ビュー",
+          "link": "/ja/views/json-and-xml-views"
         },
         {
-          "text": "フォームとバリデーション",
-          "items": [
-            { "text": "フォーム", "link": "/ja/core-libraries/form" },
-            {
-              "text": "バリデーション",
-              "link": "/ja/core-libraries/validation"
-            }
-          ]
+          "text": "テーマ",
+          "link": "/ja/views/themes"
         }
-      ]
-    },
-    {
-      "text": "コンソールコマンド",
-      "collapsed": true,
-      "items": [
-        {
-          "text": "コンソールコマンド",
-          "link": "/ja/console-commands"
-        },
-        {
-          "text": "コマンド",
-          "link": "/ja/console-commands/commands"
-        },
-        {
-          "text": "入力出力",
-          "link": "/ja/console-commands/input-output"
-        },
-        {
-          "text": "オプションパーサー",
-          "link": "/ja/console-commands/option-parsers"
-        },
-        {
-          "text": "キャッシュ",
-          "link": "/ja/console-commands/cache"
-        },
-        {
-          "text": "補完",
-          "link": "/ja/console-commands/completion"
-        },
-        {
-          "text": "クロンジョブ",
-          "link": "/ja/console-commands/cron-jobs"
-        },
-        { "text": "i18n", "link": "/ja/console-commands/i18n" },
-        {
-          "text": "プラグイン",
-          "link": "/ja/console-commands/plugin"
-        },
-        { "text": "REPL", "link": "/ja/console-commands/repl" },
-        { "text": "ルート", "link": "/ja/console-commands/routes" },
-        {
-          "text": "スキーマキャッシュ",
-          "link": "/ja/console-commands/schema-cache"
-        },
-        {
-          "text": "サーバー",
-          "link": "/ja/console-commands/server"
-        }
-      ]
-    },
-    {
-      "text": "開発",
-      "collapsed": true,
-      "items": [
-        {
-          "text": "アプリケーション",
-          "link": "/ja/development/application"
-        },
-        { "text": "設定", "link": "/ja/development/configuration" },
-        {
-          "text": "ルーティング",
-          "link": "/ja/development/routing"
-        },
-        {
-          "text": "セッション",
-          "link": "/ja/development/sessions"
-        },
-        { "text": "デバッグ", "link": "/ja/development/debugging" },
-        {
-          "text": "依存性注入",
-          "link": "/ja/development/dependency-injection"
-        },
-        { "text": "プラグイン", "link": "/ja/plugins" },
-        { "text": "エラー", "link": "/ja/development/errors" },
-        { "text": "REST", "link": "/ja/development/rest" },
-        { "text": "テスト", "link": "/ja/development/testing" }
       ]
     },
     {
       "text": "セキュリティ",
       "collapsed": true,
       "items": [
-        { "text": "セキュリティ", "link": "/ja/security" },
+        {
+          "text": "セキュリティの概要",
+          "link": "/ja/security"
+        },
+        {
+          "text": "Authentication ↗",
+          "link": "https://book.cakephp.org/authentication/"
+        },
+        {
+          "text": "Authorization ↗",
+          "link": "https://book.cakephp.org/authorization/"
+        },
+        {
+          "text": "CSRF 保護",
+          "link": "/ja/security/csrf"
+        },
+        {
+          "text": "フォーム保護",
+          "link": "/ja/controllers/components/form-protection"
+        },
         {
           "text": "コンテンツセキュリティポリシー",
           "link": "/ja/security/content-security-policy"
         },
-        { "text": "CSRF", "link": "/ja/security/csrf" },
         {
           "text": "HTTPS エンフォーサー",
           "link": "/ja/security/https-enforcer"
@@ -417,27 +379,261 @@
         {
           "text": "セキュリティヘッダー",
           "link": "/ja/security/security-headers"
+        },
+        {
+          "text": "暗号化とハッシュ",
+          "link": "/ja/core-libraries/security"
         }
       ]
     },
     {
-      "text": "追加トピック",
+      "text": "テストとデプロイ",
       "collapsed": true,
       "items": [
-        { "text": "デプロイメント", "link": "/ja/deployment" },
+        {
+          "text": "テスト",
+          "link": "/ja/development/testing"
+        },
+        {
+          "text": "デバッグ",
+          "link": "/ja/development/debugging"
+        },
+        {
+          "text": "エラーと例外処理",
+          "link": "/ja/development/errors"
+        },
+        {
+          "text": "ログ",
+          "link": "/ja/core-libraries/logging"
+        },
+        {
+          "text": "キャッシュ",
+          "link": "/ja/core-libraries/caching"
+        },
+        {
+          "text": "デプロイメント",
+          "link": "/ja/deployment"
+        },
+        {
+          "text": "クロンジョブ",
+          "link": "/ja/console-commands/cron-jobs"
+        },
+        {
+          "text": "Debug Kit ↗",
+          "link": "https://book.cakephp.org/debugkit/"
+        }
+      ]
+    },
+    {
+      "text": "コンソール",
+      "collapsed": true,
+      "items": [
+        {
+          "text": "コンソールの概要",
+          "link": "/ja/console-commands"
+        },
+        {
+          "text": "コマンドの作成",
+          "link": "/ja/console-commands/commands"
+        },
+        {
+          "text": "コンソールの入出力",
+          "link": "/ja/console-commands/input-output"
+        },
+        {
+          "text": "オプションパーサー",
+          "link": "/ja/console-commands/option-parsers"
+        },
+        {
+          "text": "組み込みコマンド",
+          "collapsed": true,
+          "items": [
+            {
+              "text": "キャッシュ",
+              "link": "/ja/console-commands/cache"
+            },
+            {
+              "text": "補完",
+              "link": "/ja/console-commands/completion"
+            },
+            {
+              "text": "i18n",
+              "link": "/ja/console-commands/i18n"
+            },
+            {
+              "text": "プラグイン",
+              "link": "/ja/console-commands/plugin"
+            },
+            {
+              "text": "ルート",
+              "link": "/ja/console-commands/routes"
+            },
+            {
+              "text": "スキーマキャッシュ",
+              "link": "/ja/console-commands/schema-cache"
+            },
+            {
+              "text": "サーバー",
+              "link": "/ja/console-commands/server"
+            }
+          ]
+        },
+        {
+          "text": "Bake ↗",
+          "link": "https://book.cakephp.org/bake/"
+        },
+        {
+          "text": "REPL",
+          "link": "/ja/console-commands/repl"
+        }
+      ]
+    },
+    {
+      "text": "ユーティリティ",
+      "collapsed": true,
+      "items": [
+        {
+          "text": "メール",
+          "link": "/ja/core-libraries/email"
+        },
+        {
+          "text": "HTTP クライアント",
+          "link": "/ja/core-libraries/httpclient"
+        },
+        {
+          "text": "データユーティリティ",
+          "collapsed": true,
+          "items": [
+            {
+              "text": "コレクション",
+              "link": "/ja/core-libraries/collections"
+            },
+            {
+              "text": "ハッシュ",
+              "link": "/ja/core-libraries/hash"
+            },
+            {
+              "text": "XML",
+              "link": "/ja/core-libraries/xml"
+            }
+          ]
+        },
+        {
+          "text": "テキストと書式設定",
+          "collapsed": true,
+          "items": [
+            {
+              "text": "テキスト",
+              "link": "/ja/core-libraries/text"
+            },
+            {
+              "text": "インフレクター",
+              "link": "/ja/core-libraries/inflector"
+            },
+            {
+              "text": "数値",
+              "link": "/ja/core-libraries/number"
+            },
+            {
+              "text": "時間",
+              "link": "/ja/core-libraries/time"
+            },
+            {
+              "text": "国際化とローカライゼーション",
+              "link": "/ja/core-libraries/internationalization-and-localization"
+            }
+          ]
+        },
+        {
+          "text": "バリデーションライブラリ",
+          "link": "/ja/core-libraries/validation"
+        },
+        {
+          "text": "フレームワークユーティリティ",
+          "collapsed": true,
+          "items": [
+            {
+              "text": "アプリ",
+              "link": "/ja/core-libraries/app"
+            },
+            {
+              "text": "レジストリオブジェクト",
+              "link": "/ja/core-libraries/registry-objects"
+            },
+            {
+              "text": "グローバル定数と関数",
+              "link": "/ja/core-libraries/global-constants-and-functions"
+            }
+          ]
+        },
+        {
+          "text": "関連プラグイン",
+          "collapsed": true,
+          "items": [
+            {
+              "text": "Chronos ↗",
+              "link": "https://book.cakephp.org/chronos/"
+            },
+            {
+              "text": "Elasticsearch ↗",
+              "link": "https://book.cakephp.org/elasticsearch/"
+            },
+            {
+              "text": "Phinx ↗",
+              "link": "https://book.cakephp.org/phinx/"
+            }
+          ]
+        },
+        {
+          "text": "スタンドアロンパッケージ",
+          "link": "/ja/standalone-packages"
+        }
+      ]
+    },
+    {
+      "text": "アップグレードとヘルプ",
+      "collapsed": true,
+      "items": [
+        {
+          "text": "アップグレードの概要",
+          "link": "/ja/appendices/migration-guides"
+        },
+        {
+          "text": "5.0 アップグレードガイド",
+          "link": "/ja/appendices/5-0-upgrade-guide"
+        },
+        {
+          "text": "5.0 移行ガイド",
+          "link": "/ja/appendices/5-0-migration-guide"
+        },
+        {
+          "text": "5.1 移行ガイド",
+          "link": "/ja/appendices/5-1-migration-guide"
+        },
+        {
+          "text": "5.2 移行ガイド",
+          "link": "/ja/appendices/5-2-migration-guide"
+        },
+        {
+          "text": "PHPUnit アップグレード",
+          "link": "/ja/appendices/phpunit-upgrade"
+        },
         {
           "text": "リリースポリシー",
           "link": "/ja/release-policy"
         },
         {
-          "text": "スタンドアロンパッケージ",
-          "link": "/ja/standalone-packages"
+          "text": "ヘルプの取得",
+          "link": "/ja/intro/where-to-get-help"
         },
-        { "text": "トピック", "link": "/ja/topics" },
         {
           "text": "貢献",
+          "collapsed": true,
           "items": [
-            { "text": "貢献", "link": "/ja/contributing" },
+            {
+              "text": "概要",
+              "link": "/ja/contributing"
+            },
             {
               "text": "後方互換性",
               "link": "/ja/contributing/backwards-compatibility"
@@ -446,45 +642,31 @@
               "text": "CakePHP コーディング規約",
               "link": "/ja/contributing/cakephp-coding-conventions"
             },
-            { "text": "コード", "link": "/ja/contributing/code" },
+            {
+              "text": "コード",
+              "link": "/ja/contributing/code"
+            },
             {
               "text": "ドキュメント",
               "link": "/ja/contributing/documentation"
             },
-            { "text": "チケット", "link": "/ja/contributing/tickets" }
+            {
+              "text": "チケット",
+              "link": "/ja/contributing/tickets"
+            }
           ]
         },
         {
-          "text": "付録",
-          "items": [
-            { "text": "付録", "link": "/ja/appendices" },
-            {
-              "text": "移行ガイド",
-              "link": "/ja/appendices/migration-guides"
-            },
-            {
-              "text": "5.0 アップグレードガイド",
-              "link": "/ja/appendices/5-0-upgrade-guide"
-            },
-            {
-              "text": "5.0 移行ガイド",
-              "link": "/ja/appendices/5-0-migration-guide"
-            },
-            {
-              "text": "5.1 移行ガイド",
-              "link": "/ja/appendices/5-1-migration-guide"
-            },
-            {
-              "text": "5.2 移行ガイド",
-              "link": "/ja/appendices/5-2-migration-guide"
-            },
-            {
-              "text": "CakePHP 開発プロセス",
-              "link": "/ja/appendices/cakephp-development-process"
-            },
-            { "text": "用語集", "link": "/ja/appendices/glossary" },
-            { "text": "PHPUnit アップグレード", "link": "/ja/appendices/phpunit-upgrade" }
-          ]
+          "text": "用語集",
+          "link": "/ja/appendices/glossary"
+        },
+        {
+          "text": "CakePHP 開発プロセス",
+          "link": "/ja/appendices/cakephp-development-process"
+        },
+        {
+          "text": "付録の概要",
+          "link": "/ja/appendices"
         }
       ]
     }
