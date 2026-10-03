@@ -11,10 +11,11 @@ The `AttributeResolver` is a static class that scans PHP files in configured
 paths, discovers all PHP attributes applied to classes, methods, properties,
 parameters, and constants, and makes them available for efficient querying.
 
-Attribute routing uses `AttributeResolver` under the hood, but it is also a
-general-purpose tool. You can use it to build your own attribute-driven systems,
-such as event listener discovery, dependency injection metadata, or custom
-annotation processors.
+[Attribute routing](../development/attribute-routing) and
+[attribute-based event listeners](events#registering-listeners-with-attributes)
+use `AttributeResolver` under the hood, but it is also a general-purpose tool.
+You can use it to build your own attribute-driven systems, such as dependency
+injection metadata or custom annotation processors.
 
 ::: info Added in version 6.0.0
 The Attribute Resolver was added.
@@ -563,10 +564,12 @@ $pluginAttrs = AttributeResolver::collection()->withPlugin('MyPlugin');
 
 ## Building Custom Integrations
 
-`AttributeResolver` is not limited to routing. Any feature that needs to
-discover PHP attributes at runtime can use it. The example below finds all
-methods tagged with a hypothetical `#[ListensTo]` attribute and registers them
-as event listeners:
+Any feature that needs to discover PHP attributes at runtime can use
+`AttributeResolver`. For event subscriptions, use CakePHP's built-in
+[`#[EventListener]` attribute and registration APIs](events#registering-listeners-with-attributes).
+The example below illustrates how to build a custom integration instead: it
+finds methods tagged with a hypothetical `#[ListensTo]` attribute and registers
+them as event listeners:
 
 ```php
 namespace App\Event;
