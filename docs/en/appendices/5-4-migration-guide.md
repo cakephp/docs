@@ -70,11 +70,6 @@ events are now registered while each plugin is bootstrapped.
   has changed from `select` to `subquery`. If you need the previous behavior,
   explicitly set `'strategy' => 'select'` when defining associations.
   See [Associations](../orm/associations#has-many-associations) for more details.
-- `Model.afterSaveCommit` and `Model.afterDeleteCommit` events are now fired
-  when `save()` or `delete()` is called inside an outer transaction. Previously,
-  these events were silently suppressed. They are now deferred until the
-  outermost transaction commits, and discarded on rollback.
-  See [Table Objects](../orm/table-objects#aftersavecommit) for more details.
 - Table methods `save()`, `delete()`, `patchEntity()`, `patchEntities()` and `loadInto()`
   will now throw an exception if the entity being passed down does not belong to the table instance.
   This will prevent accidental data corruption or deleted records. If you don't want this new behavior,
@@ -171,6 +166,9 @@ events are now registered while each plugin is bootstrapped.
 - Added `Connection::afterCommit()` to register callbacks that run after the
   outermost transaction commits. Callbacks are discarded on rollback.
   See [Database Basics](../orm/database-basics#aftercommit) for more details.
+- Added the `Connection.afterCommit` event, which is fired once after the
+  outermost transaction commits.
+  See [Database Basics](../orm/database-basics#connection-aftercommit-event).
 - Added `except()` and `exceptAll()` methods on `SelectQuery` for `EXCEPT`
   and `EXCEPT ALL` set operations. `EXCEPT ALL` is supported on PostgreSQL
   and recent MySQL/MariaDB versions; it is not supported on SQLite or SQL Server.
