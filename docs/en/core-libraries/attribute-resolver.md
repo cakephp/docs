@@ -567,40 +567,43 @@ $pluginAttrs = AttributeResolver::collection()->withPlugin('MyPlugin');
 Any feature that needs to discover PHP attributes at runtime can use
 `AttributeResolver`. For event subscriptions, use CakePHP's built-in
 [`#[EventListener]` attribute and registration APIs](events#registering-listeners-with-attributes).
-The example below illustrates how to build a custom integration instead: it
-finds methods tagged with a hypothetical `#[ListensTo]` attribute and registers
-them as event listeners:
+The example below illustrates a tracing integration instead. It finds service
+methods tagged with a hypothetical `#[TracingSpan('orders.place')]` attribute,
+whose `name` property identifies a tracing span. Your tracing integration can use
+the resulting class and method map when instrumenting service methods:
 
 ```php
-namespace App\Event;
+namespace App\Tracing;
 
-use App\Attribute\ListensTo;
+use App\Attribute\TracingSpan;
 use Cake\AttributeResolver\AttributeResolver;
 use Cake\AttributeResolver\Enum\AttributeTargetType;
-use Cake\Event\EventManager;
 
-class AttributeListenerLoader
+class TracingMetadata
 {
-    public static function load(EventManager $manager): void
+    public static function spans(): array
     {
-        $collection = AttributeResolver::collection()
-            ->withAttribute(ListensTo::class)
+        $collection = AttributeResolver::collection('tracing')
+            ->withAttribute(TracingSpan::class)
             ->withTargetType(AttributeTargetType::METHOD);
 
+        $spans = [];
         foreach ($collection as $info) {
-            $attribute = $info->getInstance(ListensTo::class);
-            $listener = new ($info->className)();
-            $manager->on($attribute->eventName, [$listener, $info->target->name]);
+            $attribute = $info->getInstance(TracingSpan::class);
+            $spans[$info->className][$info->target->name] = $attribute->name;
         }
+
+        return $spans;
     }
 }
 ```
 
-Configure the paths to include whatever classes your integration scans:
+Configure the paths before querying to include the services your integration
+scans:
 
 ```php
-AttributeResolver::setConfig('listeners', [
-    'paths' => ['Listener/**/*.php'],
+AttributeResolver::setConfig('tracing', [
+    'paths' => ['Service/*.php', 'Service/**/*.php'],
     'basePath' => APP,
     'cache' => '_cake_attributes_',
 ]);

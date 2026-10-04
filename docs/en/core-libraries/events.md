@@ -445,7 +445,7 @@ on another `EventManager` attaches them to that instance instead.
 
 #### Multiple Events and Priorities
 
-The attribute is repeatable, so a method or class can subscribe to multiple
+The `EventListener` attribute is repeatable, so a method or class can subscribe to multiple
 events. A method-level attribute always uses the decorated method as its
 callback:
 
@@ -627,7 +627,14 @@ Missing or non-public listener methods raise
 `Cake\Event\Exception\EventAttributeException`. A named manager without a
 resolver, a resolver that throws, or a result that does not implement
 `EventManagerInterface` also raises this exception, including the attribute's
-source location. Abstract classes, interfaces, and traits are skipped.
+source location. Abstract classes, interfaces, and traits are skipped as listener
+instances. Concrete subclasses, interface implementations, and classes using
+traits are still eligible for registration when discovered.
+
+Public listener methods inherited from a base class or provided by a trait can
+be registered on the concrete class. If a method is overridden, declare its
+listener attributes on the overriding method. Class-level attributes and
+attributes on interface methods are not inherited automatically.
 
 Identical declarations for the same class, event, method, manager, and priority
 are registered once within a connection pass. Register each configuration once
