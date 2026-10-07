@@ -1179,6 +1179,32 @@ saves.
 `Connection::afterCommit()` was added.
 :::
 
+### Connection.afterCommit Event
+
+The connection also dispatches a `Connection.afterCommit` event once the
+outermost transaction has committed. Use it for listeners that should react to
+every committed transaction, instead of registering a callback per transaction:
+
+```php
+use Cake\Event\EventInterface;
+
+$connection->getEventManager()->on(
+    'Connection.afterCommit',
+    function (EventInterface $event): void {
+        // Runs once per outermost commit.
+        $connection = $event->getSubject();
+    },
+);
+```
+
+The event is fired after all callbacks registered with `afterCommit()` have
+run, and its subject is the connection. It is not fired for nested commits or
+when the transaction is rolled back.
+
+::: info Added in version 5.4.0
+The `Connection.afterCommit` event was added.
+:::
+
 ## Interacting with Statements
 
 When using the lower level database API, you will often encounter statement
