@@ -1,6 +1,6 @@
 ---
 title: "Events System"
-description: "Implement event system in CakePHP: dispatch events, create listeners, use event manager, and decouple application components effectively."
+description: "Implement event system in CakePHP: dispatch events, register listeners with PHP attributes or listener classes, use event managers, and decouple application components."
 ---
 
 # Events System
@@ -254,11 +254,16 @@ public function events(EventManagerInterface $eventManager): EventManagerInterfa
 
 ## Registering Listeners
 
-Listeners are the preferred way to register callbacks for an event. This is done
-by implementing the `Cake\Event\EventListenerInterface` interface
-in any class you wish to register some callbacks. Classes implementing it need
-to provide the `implementedEvents()` method. This method must return an
-associative array with all event names that the class will handle.
+Listener classes let you keep related event callbacks together. You can declare
+their subscriptions with `EventListenerInterface` or, as of CakePHP 6.0, with
+[PHP attributes](#registering-listeners-with-attributes). You can also register
+[anonymous listeners](#registering-anonymous-listeners) directly.
+
+### Registering Listener Classes
+
+Classes implementing `Cake\Event\EventListenerInterface` provide an
+`implementedEvents()` method. This method must return an associative array with
+all event names that the class will handle.
 
 To continue our previous example, let's imagine we have a UserStatistic class
 responsible for calculating a user's purchasing history, and compiling into
@@ -295,7 +300,7 @@ $this->Orders->getEventManager()->on($statistics);
 ```
 
 As you can see in the above code, the `on()` function will accept instances
-of the `EventListener` interface. Internally, the event manager will use
+of the `EventListenerInterface` interface. Internally, the event manager will use
 `implementedEvents()` to attach the correct callbacks.
 
 ::: info Added in version 5.4.0
@@ -357,7 +362,7 @@ dependencies in `Application::services()` or `Plugin::services()`:
 ```php
 use App\Event\UserStatistic;
 use App\Service\StatisticsClient;
-use Cake\Core\ContainerInterface;
+use Cake\Container\ContainerInterface;
 
 public function services(ContainerInterface $container): void
 {
@@ -366,6 +371,276 @@ public function services(ContainerInterface $container): void
         ->addArgument(StatisticsClient::class);
 }
 ```
+
+### Registering Listeners with Attributes
+
+::: info Added in version 6.0.0
+Attribute-based event listener registration was added.
+:::
+
+The `Cake\Event\Attribute\EventListener` attribute declares event subscriptions
+on a class or its public methods. These listeners do not need to implement
+`EventListenerInterface` or provide `implementedEvents()`.
+
+For example, create **src/Event/Listener/UserStatistic.php**:
+
+```php
+namespace App\Event\Listener;
+
+use Cake\Event\Attribute\EventListener;
+use Cake\Event\EventInterface;
+
+class UserStatistic
+{
+    #[EventListener('Order.afterPlace')]
+    public function updateBuyStatistic(EventInterface $event): void
+    {
+        // Code to update statistics
+    }
+}
+```
+
+#### Discovering and Registering Listeners
+
+Attributes are discovered through the [Attribute Resolver](attribute-resolver).
+Configure the paths to scan before registering listeners, for example in
+**config/bootstrap.php**:
+
+```php
+use Cake\AttributeResolver\AttributeResolver;
+
+AttributeResolver::setConfig('listeners', [
+    'paths' => [
+        'Event/Listener/*.php',
+        'Event/Listener/**/*.php',
+    ],
+    'basePath' => APP,
+    'cache' => false,
+]);
+```
+
+The patterns include both top-level and nested listener files. This named
+configuration keeps listener discovery separate from other resolver
+configurations, such as attribute routing. For production, configure
+[attribute caching and cache warming](attribute-resolver#caching-and-cache-warming).
+
+Then explicitly register the discovered listeners on an event manager before
+dispatching events:
+
+```php
+use Cake\Event\EventManager;
+
+EventManager::instance()->registerAttributeListeners(config: 'listeners');
+```
+
+The example attaches listeners to the global manager. Calling the same method
+on another `EventManager` attaches them to that instance instead.
+`registerAttributeListeners()` returns the manager and accepts three arguments:
+
+| Argument | Default | Description |
+|----------|---------|-------------|
+| `config` | `'default'` | The Attribute Resolver configuration to use. |
+| `listenerResolver` | `null` | A callable that receives a listener class name and returns its instance. Without one, the class is instantiated with no constructor arguments. |
+| `managerResolver` | `null` | A callable that resolves the names used in the attribute's `manager` argument to instances of `EventManagerInterface`. |
+
+#### Multiple Events and Priorities
+
+The `EventListener` attribute is repeatable, so a method or class can subscribe to multiple
+events. A method-level attribute always uses the decorated method as its
+callback:
+
+```php
+use Cake\Event\Attribute\EventListener;
+use Cake\Event\EventInterface;
+
+#[EventListener('Order.afterPlace', priority: 5)]
+#[EventListener('Order.afterCancel', priority: 20)]
+public function updateMetrics(EventInterface $event): void
+{
+    // Code to update metrics
+}
+```
+
+As with [other listeners](#establishing-priorities), lower priority values run
+first. Omitting `priority`, or setting it to `null`, uses the receiving manager's
+default priority. Attribute listeners are connected by class name, then by
+declaration line number, which determines their order at the same priority.
+
+#### Class-Level Attributes
+
+For a class-level attribute, the callback is resolved in this order:
+
+1. The method specified by the `method` argument.
+2. The class's `__invoke()` method, when present.
+3. A method inferred from the event name: `Order.afterPlace` becomes
+   `onOrderAfterPlace`.
+
+For example, these three classes each declare a listener for the same event.
+Save each class in its own matching file under **src/Event/Listener/** so that
+the resolver can discover it:
+
+```php
+namespace App\Event\Listener;
+
+use Cake\Event\Attribute\EventListener;
+use Cake\Event\EventInterface;
+
+#[EventListener('Order.afterPlace', method: 'sendReceipt')]
+class ReceiptListener
+{
+    public function sendReceipt(EventInterface $event): void
+    {
+        // Send a receipt
+    }
+}
+
+#[EventListener('Order.afterPlace')]
+class MetricsListener
+{
+    public function __invoke(EventInterface $event): void
+    {
+        // Update metrics
+    }
+}
+
+#[EventListener('Order.afterPlace')]
+class AuditListener
+{
+    public function onOrderAfterPlace(EventInterface $event): void
+    {
+        // Record the order placement
+    }
+}
+```
+
+The `method` argument defaults to `null` and is ignored on method-level
+attributes. All listener callbacks must be public.
+
+#### Dependency Injection
+
+To resolve listeners with constructor dependencies, pass the application's
+container to the listener resolver. For example, the attribute-based
+`UserStatistic` listener could declare a dependency on your `StatisticsClient`
+service:
+
+```php
+namespace App\Event\Listener;
+
+use App\Service\StatisticsClient;
+use Cake\Event\Attribute\EventListener;
+use Cake\Event\EventInterface;
+
+class UserStatistic
+{
+    public function __construct(private StatisticsClient $statistics)
+    {
+    }
+
+    #[EventListener('Order.afterPlace')]
+    public function updateBuyStatistic(EventInterface $event): void
+    {
+        // Use $this->statistics to update statistics
+    }
+}
+```
+
+Register the service and listener in `Application::services()`. Use
+`AttributeEventListenerConnector` in `Application::events()` to attach the
+discovered listeners to the supplied manager:
+
+```php
+use App\Event\Listener\UserStatistic;
+use App\Service\StatisticsClient;
+use Cake\Container\ContainerInterface;
+use Cake\Event\AttributeEventListenerConnector;
+use Cake\Event\EventManagerInterface;
+
+public function services(ContainerInterface $container): void
+{
+    $container->addShared(StatisticsClient::class);
+    $container->addShared(UserStatistic::class)
+        ->addArgument(StatisticsClient::class);
+}
+
+public function events(EventManagerInterface $eventManager): EventManagerInterface
+{
+    $connector = new AttributeEventListenerConnector(
+        $eventManager,
+        listenerResolver: $this->getContainer()->get(...),
+    );
+    $connector->connect('listeners');
+
+    return $eventManager;
+}
+```
+
+The connector works with any `EventManagerInterface` implementation, while
+`registerAttributeListeners()` is a convenience method on `EventManager`.
+`connect()` returns `void` and uses the `'default'` resolver configuration when
+no name is supplied. Unlike interface-based listeners, attribute-only listeners
+do not belong in the `eventListeners()` hook.
+
+The listener resolver is called once per discovered class during a connection
+pass. That instance handles all subscriptions declared on the class, including
+subscriptions to different managers.
+
+#### Named Event Managers
+
+Set `manager` on an attribute to target a specific event manager:
+
+```php
+use Cake\Event\Attribute\EventListener;
+use Cake\Event\EventInterface;
+
+#[EventListener('Order.afterPlace', manager: 'orders')]
+public function updateOrderMetrics(EventInterface $event): void
+{
+    // Update metrics for this Orders table instance
+}
+```
+
+Provide a `managerResolver` callable when registering listeners. For example,
+when you have an Orders table instance in `$ordersTable`:
+
+```php
+use Cake\Event\EventManager;
+use Cake\Event\EventManagerInterface;
+
+$ordersEventManager = $ordersTable->getEventManager();
+EventManager::instance()->registerAttributeListeners(
+    config: 'listeners',
+    managerResolver: static fn(string $name): EventManagerInterface => match ($name) {
+        'orders' => $ordersEventManager,
+        default => throw new \InvalidArgumentException('Unknown event manager: ' . $name),
+    },
+);
+```
+
+You can also pass `managerResolver` to the connector's constructor. Attributes
+without `manager`, or with `manager: null`, attach to the primary manager without
+calling this resolver. If listeners also need constructor dependencies, supply
+`listenerResolver` as shown above.
+
+#### Registration Errors and Duplicate Declarations
+
+Missing or non-public listener methods raise
+`Cake\Event\Exception\EventAttributeException`. A named manager without a
+resolver, a resolver that throws, or a result that does not implement
+`EventManagerInterface` also raises this exception, including the attribute's
+source location. Abstract classes, interfaces, and traits are skipped as listener
+instances. Concrete subclasses, interface implementations, and classes using
+traits are still eligible for registration when discovered.
+
+Public listener methods inherited from a base class or provided by a trait can
+be registered on the concrete class. If a method is overridden, declare its
+listener attributes on the overriding method. Class-level attributes and
+attributes on interface methods are not inherited automatically.
+
+Identical declarations for the same class, event, method, manager, and priority
+are registered once within a connection pass. Register each configuration once
+per manager setup: calling registration again can attach the listeners again.
+
+### Registering Anonymous Listeners
 
 ::: info Added in version 5.1.0
 The `events` hook was added to the `BaseApplication` as well as the `BasePlugin` class.
@@ -395,8 +670,6 @@ class Application extends BaseApplication
     }
 }
 ```
-
-### Registering Anonymous Listeners
 
 While event listener objects are generally a better way to implement listeners,
 you can also bind any `callable` as an event listener. For example if we

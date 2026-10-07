@@ -11,10 +11,11 @@ The `AttributeResolver` is a static class that scans PHP files in configured
 paths, discovers all PHP attributes applied to classes, methods, properties,
 parameters, and constants, and makes them available for efficient querying.
 
-Attribute routing uses `AttributeResolver` under the hood, but it is also a
-general-purpose tool. You can use it to build your own attribute-driven systems,
-such as event listener discovery, dependency injection metadata, or custom
-annotation processors.
+[Attribute routing](../development/attribute-routing) and
+[attribute-based event listeners](events#registering-listeners-with-attributes)
+use `AttributeResolver` under the hood, but it is also a general-purpose tool.
+You can use it to build your own attribute-driven systems, such as dependency
+injection metadata or custom annotation processors.
 
 ::: info Added in version 6.0.0
 The Attribute Resolver was added.
@@ -563,41 +564,46 @@ $pluginAttrs = AttributeResolver::collection()->withPlugin('MyPlugin');
 
 ## Building Custom Integrations
 
-`AttributeResolver` is not limited to routing. Any feature that needs to
-discover PHP attributes at runtime can use it. The example below finds all
-methods tagged with a hypothetical `#[ListensTo]` attribute and registers them
-as event listeners:
+Any feature that needs to discover PHP attributes at runtime can use
+`AttributeResolver`. For event subscriptions, use CakePHP's built-in
+[`#[EventListener]` attribute and registration APIs](events#registering-listeners-with-attributes).
+The example below illustrates a tracing integration instead. It finds service
+methods tagged with a hypothetical `#[TracingSpan('orders.place')]` attribute,
+whose `name` property identifies a tracing span. Your tracing integration can use
+the resulting class and method map when instrumenting service methods:
 
 ```php
-namespace App\Event;
+namespace App\Tracing;
 
-use App\Attribute\ListensTo;
+use App\Attribute\TracingSpan;
 use Cake\AttributeResolver\AttributeResolver;
 use Cake\AttributeResolver\Enum\AttributeTargetType;
-use Cake\Event\EventManager;
 
-class AttributeListenerLoader
+class TracingMetadata
 {
-    public static function load(EventManager $manager): void
+    public static function spans(): array
     {
-        $collection = AttributeResolver::collection()
-            ->withAttribute(ListensTo::class)
+        $collection = AttributeResolver::collection('tracing')
+            ->withAttribute(TracingSpan::class)
             ->withTargetType(AttributeTargetType::METHOD);
 
+        $spans = [];
         foreach ($collection as $info) {
-            $attribute = $info->getInstance(ListensTo::class);
-            $listener = new ($info->className)();
-            $manager->on($attribute->eventName, [$listener, $info->target->name]);
+            $attribute = $info->getInstance(TracingSpan::class);
+            $spans[$info->className][$info->target->name] = $attribute->name;
         }
+
+        return $spans;
     }
 }
 ```
 
-Configure the paths to include whatever classes your integration scans:
+Configure the paths before querying to include the services your integration
+scans:
 
 ```php
-AttributeResolver::setConfig('listeners', [
-    'paths' => ['Listener/**/*.php'],
+AttributeResolver::setConfig('tracing', [
+    'paths' => ['Service/*.php', 'Service/**/*.php'],
     'basePath' => APP,
     'cache' => '_cake_attributes_',
 ]);

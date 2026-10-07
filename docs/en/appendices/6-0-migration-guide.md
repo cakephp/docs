@@ -163,6 +163,16 @@ Some properties have also been renamed to better reflect their purpose. These ar
 
 ## New Features
 
+### Event
+
+- Event subscriptions can now be declared on listener classes and methods with
+  the repeatable `Cake\Event\Attribute\EventListener` attribute. Register them
+  through `EventManager::registerAttributeListeners()` or
+  `AttributeEventListenerConnector`, with support for constructor dependency
+  injection and named event managers. See
+  [Registering Listeners with Attributes](../core-libraries/events#registering-listeners-with-attributes)
+  for configuration and examples.
+
 ### ORM
 
 - Entities can now map fields to real class properties, including typed
