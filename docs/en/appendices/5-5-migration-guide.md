@@ -26,6 +26,14 @@ Coming soon
 
 ## New Features
 
+### Database
+
+- Schema dialects now support `CURRENT_DATE` and `CURRENT_TIME` as column
+  defaults on `date` and `time` columns. Each dialect emits its own syntax,
+  for example `DEFAULT (CURRENT_DATE)` on MySQL and
+  `DEFAULT CONVERT(DATE, GETDATE())` on SQL Server. Previously these values
+  were quoted as string literals.
+
 ### TestSuite
 
 - `Cake\TestSuite\Fixture\DeleteStrategy` was added. This fixture strategy
