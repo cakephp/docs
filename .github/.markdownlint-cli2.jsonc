@@ -18,6 +18,10 @@
     "no-inline-html": {
       "allowed_elements": [
         "Badge",
+        "HomeWelcome",
+        "HomeCard",
+        "script",
+        "h3",
         "div",
         "span",
         "br",

@@ -84,4 +84,6 @@ Dive deeper into CakePHP's powerful features:
 
 ### Get Help & Connect
 
-<!--@include: index.md#get-help-->
+- [Find help](intro/where-to-get-help) - Places to ask questions and get support
+- [Community forum](https://discourse.cakephp.org/) - Connect with other CakePHP developers
+- [Contribute to the Cookbook](contributing) - Help improve the documentation
